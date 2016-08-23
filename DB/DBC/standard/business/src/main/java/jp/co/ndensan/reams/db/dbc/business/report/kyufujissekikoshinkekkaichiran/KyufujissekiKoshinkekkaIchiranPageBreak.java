@@ -79,26 +79,6 @@ public class KyufujissekiKoshinkekkaIchiranPageBreak extends PageBreaker<Kyufuji
         if (this.breakKeysList.contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.保険者番号.get項目ID())
                 && !currentSource.get給付実績_コントロールレコード保険者番号().equals(nextSource.get給付実績_コントロールレコード保険者番号())) {
             flg = true;
-        } else if (this.breakKeysList
-                .contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.被保険者番号.get項目ID())
-                && !currentSource.get被保険者_被保険者番号().equals(nextSource.get被保険者_被保険者番号())) {
-            flg = true;
-        } else if (this.breakKeysList
-                .contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.サービス提供年月.get項目ID())
-                && !currentSource.get給付実績_サービス提供年月().equals(nextSource.get給付実績_サービス提供年月())) {
-            flg = true;
-        } else if (this.breakKeysList
-                .contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.事業者番号.get項目ID())
-                && !currentSource.get給付実績_事業所番号().equals(nextSource.get給付実績_事業所番号())) {
-            flg = true;
-        } else if (this.breakKeysList
-                .contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.入力識別番号.get項目ID())
-                && !currentSource.get給付実績_入力識別番号().equals(nextSource.get給付実績_入力識別番号())) {
-            flg = true;
-        } else if (this.breakKeysList
-                .contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.整理番号.get項目ID())
-                && !currentSource.get給付実績_整理番号().equals(nextSource.get給付実績_整理番号())) {
-            flg = true;
         }
         return flg;
     }

@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 受給者異動連絡票（追加）登録ます。
+ * 受給者異動連絡票（追加）登録です。
  *
  * @reamsid_L DBC-2100-010 jiangzongyue
  */
@@ -56,7 +56,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
     }
 
     /**
-     * 画面初期化のメソッドます。
+     * 画面初期化のメソッドです。
      *
      * @param div SearchHihokenshaDiv
      *
@@ -79,15 +79,19 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
     }
 
     /**
-     * 「保存する」ボタンクリック時のイベントメソッドます。
+     * 「保存する」ボタンクリック時のイベントメソッドです。
      *
      * @param div SearchHihokenshaDiv
      *
      * @return ResponseData<SearchHihokenshaDiv>
      */
     public ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> onClick_btnSave(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
-        div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo().validateCheck();
         JukyushaIdoRenrakuhyoManager manager = InstanceProvider.create(JukyushaIdoRenrakuhyoManager.class);
+        ValidationMessageControlPairs pair
+                = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo().validateCheck();
+        if (pair.iterator().hasNext() && !ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addValidationMessages(pair).respond();
+        }
         JukyushaIdoRenrakuhyoTorokuPanelValidationHandler validationHander = getValidationHandler(div);
         ValidationMessageControlPairs pairs = validationHander.validate();
         if (pairs.iterator().hasNext() && !ResponseHolder.isReRequest()) {
@@ -132,7 +136,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
     }
 
     /**
-     * 「処理実行の確認」.「はい」ボタンのメソッドます。
+     * 「処理実行の確認」.「はい」ボタンのメソッドです。
      *
      * @param div 画面Div
      *
@@ -144,7 +148,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
     }
 
     /**
-     * 「完了する」ボタンの処理ます。
+     * 「完了する」ボタンの処理です。
      *
      * @param div div
      * @return ResponseData
@@ -155,7 +159,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
     }
 
     /**
-     * 「検索結果一覧へ」ボタンクリック時の事件ます。
+     * 「検索結果一覧へ」ボタンクリック時の事件です。
      *
      * @param div 画面Div
      * @return ResponseData
@@ -165,13 +169,13 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
     }
 
     /**
-     * 「再検索する」ボタンクリック時の事件ます。
+     * 「再検索する」ボタンクリック時の事件です。
      *
      * @param div 画面Div
      * @return ResponseData
      */
     public ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> onClick_btnResultDg(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
-        return getCheckMessage(div, DBC0210011TransitionEventName.該当者検索へ);
+        return getCheckMessage(div, DBC0210011TransitionEventName.検索条件);
     }
 
     private ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> getCheckMessage(
@@ -199,7 +203,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
     }
 
     /**
-     * 前排他のンメソッドます。
+     * 前排他のンメソッドです。
      *
      * @param 被保険者番号 RString
      * @return boolean
@@ -210,7 +214,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
     }
 
     /**
-     * 前排他キーの解除のンメソッドます。
+     * 前排他キーの解除のンメソッドです。
      *
      * @param 被保険者番号 RString
      */
@@ -220,7 +224,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
     }
 
     /**
-     * 前排他キーのセットのンメソッドます。
+     * 前排他キーのセットのンメソッドです。
      *
      * @param 被保険者番号 RString
      */

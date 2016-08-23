@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -58,8 +59,16 @@ public class YokaigoNinteiTorikeshiTujishoHakkoHandler {
     public void onLoad(RString 被保険者番号, RString 識別コード) {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().
                 getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        LasdecCode 市町村コード;
+        RString 介護導入形態;
+        if (shichosonSecurityJoho != null) {
+            市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
+            介護導入形態 = shichosonSecurityJoho.get導入形態コード().getCode();
+        } else {
+            市町村コード = LasdecCode.EMPTY;
+            介護導入形態 = RString.EMPTY;
+        }
         div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().setShoriType(コード);
-        RString 介護導入形態 = shichosonSecurityJoho.get導入形態コード().getCode();
         if (介護導入形態.equals(コード111)) {
             介護導入形態 = 広域保険者;
         }
@@ -76,8 +85,7 @@ public class YokaigoNinteiTorikeshiTujishoHakkoHandler {
         div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY,
                 new ShikibetsuCode(識別コード));
         div.getTujishoHakkoJoken().getCcdKaigoNinteiAtenaInfo().initialize();
-        div.getTujishoHakkoJoken().getCcdKaigoninteiShikakuInfo().initialize(shichosonSecurityJoho.get市町村情報().get市町村コード().
-                value(), 被保険者番号);
+        div.getTujishoHakkoJoken().getCcdKaigoninteiShikakuInfo().initialize(市町村コード.value(), 被保険者番号);
         div.getTujishoHakkoMeisai().getTxtSakuseibi().setValue(RDate.getNowDate());
         div.getTujishoHakkoMeisai().getTxtTorikeshibi().setValue(RDate.getNowDate());
         div.getTujishoHakkoMeisai().getTxtYokaigodo().setValue(div.getCcdKaigoninteiShikakuInfo().getTxtYokaigodo().getValue());

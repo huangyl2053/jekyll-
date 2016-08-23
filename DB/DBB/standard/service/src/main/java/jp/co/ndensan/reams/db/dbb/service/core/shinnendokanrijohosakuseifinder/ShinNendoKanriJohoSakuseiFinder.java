@@ -9,11 +9,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.shinnendokanrijohosakusei.ShinNendoKanriJohoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.shinnendokanrijohosakusei.IShinNendoKanriJohoSakuseiMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
-import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
-import jp.co.ndensan.reams.ur.urc.entity.db.basic.noki.nokikanri.UrT0729NokiKanriEntity;
-import jp.co.ndensan.reams.ur.urc.persistence.db.mapper.noki.nokikanri.INokiKanriMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -24,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class ShinNendoKanriJohoSakuseiFinder {
 
     private final MapperProvider mapperProvider;
+    private static final RString 年度_KEY = new RString("effectiveDate");
 
     ShinNendoKanriJohoSakuseiFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
@@ -45,18 +47,18 @@ public class ShinNendoKanriJohoSakuseiFinder {
     /**
      * 再発行対象取得
      *
-     * @param 調定年度 HashMap<String, Object>
+     * @param paramter HashMap<String, Object>
      * @return 再発行対象リスト
      */
-    public List<Noki> getShinNendoKanriJohoSakusei(HashMap<String, Object> 調定年度) {
-        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
-        List<Noki> businessList = new ArrayList<>();
-        INokiKanriMapper mapper = mapperProvider.create(INokiKanriMapper.class);
-        List<UrT0729NokiKanriEntity> 再発行対象リスト = mapper.selectBy調定年度(調定年度);
+    public List<ShinNendoKanriJohoSakuseiEntity> getShinNendoKanriJohoSakusei(HashMap<String, Object> paramter) {
+        requireNonNull(paramter, UrSystemErrorMessages.値がnull.getReplacedMessage("paramter"));
+        List<ShinNendoKanriJohoSakuseiEntity> businessList = new ArrayList<>();
+        IShinNendoKanriJohoSakuseiMapper mapper = mapperProvider.create(IShinNendoKanriJohoSakuseiMapper.class);
+        List<ShinNendoKanriJohoSakuseiEntity> 再発行対象リスト = mapper.selectカスタムコンフィグByKey(paramter);
         if (再発行対象リスト != null && !再発行対象リスト.isEmpty()) {
-            for (UrT0729NokiKanriEntity entity : 再発行対象リスト) {
-                Noki 再発行対象 = new Noki(entity);
-                businessList.add(再発行対象);
+            for (ShinNendoKanriJohoSakuseiEntity entity : 再発行対象リスト) {
+                entity.setEffectiveDate(new RDate(paramter.get(年度_KEY.toString()).toString()).plusYear(1));
+                businessList.add(entity);
             }
         } else {
             return null;

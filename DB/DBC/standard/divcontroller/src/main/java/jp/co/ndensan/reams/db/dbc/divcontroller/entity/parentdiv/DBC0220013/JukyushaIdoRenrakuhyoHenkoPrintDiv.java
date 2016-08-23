@@ -4,16 +4,19 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220013;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * JukyushaIdoRenrakuhyoHenkoPrint のクラスファイル 
- * 
+ * JukyushaIdoRenrakuhyoHenkoPrint のクラスファイル
+ *
  * @reamsid_L DBC-2102-010 lihang
  */
 public class JukyushaIdoRenrakuhyoHenkoPrintDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]

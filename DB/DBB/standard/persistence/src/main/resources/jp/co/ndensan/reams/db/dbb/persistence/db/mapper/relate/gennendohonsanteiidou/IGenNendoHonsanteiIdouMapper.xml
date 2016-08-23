@@ -381,7 +381,7 @@
         WHERE
             B."shikakuSoshitsuYMD" IS NULL
         OR  B."shikakuSoshitsuYMD" = ''
-        OR  B."shikakuSoshitsuYMD" <![CDATA[>=]]> #{choteiNendoYMD}
+        OR  #{choteiNendoYMD} <![CDATA[<=]]> B."shikakuSoshitsuYMD"
     </select>
     
     <!-- 住基（宛名）異動の取得に本人の異動を「異動Temp」に追加する-->
@@ -425,7 +425,7 @@
             rgdb."DbV2502KaigoShotoku" AS A
         WHERE
             A."shotokuNendo" = #{調定年度}
-        AND substring(A."shoriTimeStamp",0,8) <![CDATA[>=]]> to_char(to_date(#{抽出開始日時}, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD')
+        AND to_char(to_date(#{抽出開始日時}, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD') <![CDATA[<=]]> substring(A."shoriTimeStamp",0,8)
         AND substring(A."shoriTimeStamp",0,8) <![CDATA[<=]]> to_char(to_date(#{抽出終了日時}, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD')
     </select>
     
@@ -508,7 +508,7 @@
         WHERE
            B."shikakuSoshitsuYMD" IS NULL 
         OR B."shikakuSoshitsuYMD" = ''
-        OR B."shikakuSoshitsuYMD" <![CDATA[>=]]> #{choteiNendoYMD}
+        OR #{choteiNendoYMD} <![CDATA[<=]]> B."shikakuSoshitsuYMD"
     </select>
     
     <!-- 所得異動の取得に本人の異動を「異動Temp」に追加する-->
@@ -538,7 +538,7 @@
         WHERE
             A."hihokennshaKubunCode" = '1'
         AND A."logicalDeletedFlag" = FALSE
-        AND A."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+        AND #{抽出開始日時} <![CDATA[<=]]> A."lastUpdateTimestamp"
         AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
@@ -560,9 +560,9 @@
         AND B."gyomuCode" = C."gyomuCode"
         AND B."jukyuKaishiYMD" = C."jukyuKaishiYMD"
         WHERE
-            B."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+            #{抽出開始日時} <![CDATA[<=]]> B."lastUpdateTimestamp"
         AND B."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
-        AND C."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+        AND #{抽出開始日時} <![CDATA[<=]]> C."lastUpdateTimestamp"
         AND C."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
@@ -578,7 +578,7 @@
         ON
             A."shikibetsuCode" = B."shikibetsuCode"
         WHERE
-            A."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+            #{抽出開始日時} <![CDATA[<=]]> A."lastUpdateTimestamp"
         AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
@@ -594,7 +594,7 @@
         ON
             A."hihokenshaNo" = B."hihokenshaNo"
         WHERE
-            B."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+            #{抽出開始日時} <![CDATA[<=]]> B."lastUpdateTimestamp"
         AND B."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
@@ -897,7 +897,7 @@
         ON
             口座."uaT0310Koza_shikibetsuCode" = A."shikibetsuCode"
         WHERE
-            (COALESCE(A."fuchoKibetsuGaku1",0)
+            '0' <![CDATA[<]]> (COALESCE(A."fuchoKibetsuGaku1",0)
                 +COALESCE(A."fuchoKibetsuGaku2", 0) 
                 +COALESCE(A."fuchoKibetsuGaku3", 0) 
                 +COALESCE(A."fuchoKibetsuGaku4", 0) 
@@ -911,7 +911,7 @@
                 +COALESCE(A."fuchoKibetsuGaku12", 0)
                 +COALESCE(A."fuchoKibetsuGaku13", 0) 
                 +COALESCE(A."fuchoKibetsuGaku14", 0) 
-              ) <![CDATA[>]]> '0'
+              )  
        AND A."kozaKubun" = '0'
     </select>
     
@@ -933,7 +933,7 @@
             ON
                 口座."uaT0310Koza_shikibetsuCode" = B."shikibetsuCode"
             )
-        AND (COALESCE(A."fuchoKibetsuGaku1",0)
+        AND '0' <![CDATA[<]]> (COALESCE(A."fuchoKibetsuGaku1",0)
                 +COALESCE(A."fuchoKibetsuGaku2", 0) 
                 +COALESCE(A."fuchoKibetsuGaku3", 0) 
                 +COALESCE(A."fuchoKibetsuGaku4", 0) 
@@ -947,7 +947,7 @@
                 +COALESCE(A."fuchoKibetsuGaku12", 0)
                 +COALESCE(A."fuchoKibetsuGaku13", 0) 
                 +COALESCE(A."fuchoKibetsuGaku14", 0) 
-              ) <![CDATA[>]]> '0'
+              ) 
         AND A."kozaKubun" = '1'
     </select>
     
@@ -1028,6 +1028,13 @@
                     MAX("idoYMD" || "edaNo") AS max1
                  FROM
                     rgdb."DbT1001HihokenshaDaicho"
+                 WHERE
+                    "hihokennshaKubunCode" = '1'
+                AND "logicalDeletedFlag" = FALSE
+                AND ("shikakuSoshitsuYMD" IS NULL OR "shikakuSoshitsuYMD" = ''
+                    OR #{賦課年度} || '0401') <![CDATA[<]]> "shikakuSoshitsuYMD"
+                AND #{抽出開始日時} <![CDATA[<=]]> "lastUpdateTimestamp"
+                AND "lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
                  GROUP BY
                     "hihokenshaNo",
                     "ichigoShikakuShutokuYMD",
@@ -1036,7 +1043,7 @@
                 ON
                     T."hihokenshaNo" = Q."hihokenshaNo"
                 AND T."ichigoShikakuShutokuYMD" = Q."ichigoShikakuShutokuYMD"
-                AND COALESCE(T."shikakuSoshitsuYMD",'') = COALESCE(Q."shikakuSoshitsuYMD",'')
+                AND COALESCE(T."shikakuSoshitsuYMD",'00000000') = COALESCE(Q."shikakuSoshitsuYMD",'00000000')
                 AND T."max1" = (Q."idoYMD" || Q."edaNo")
                 ) AS R
                ON
@@ -1048,13 +1055,6 @@
                 "TmpIdoTrigger" AS B
             ON
                 A."hihokenshaNo" = B."hihokenshaNo"
-        WHERE
-            A."hihokennshaKubunCode" = '1'
-        AND A."logicalDeletedFlag" = FALSE
-        AND (A."shikakuSoshitsuYMD" IS NULL OR A."shikakuSoshitsuYMD" = ''
-            OR A."shikakuSoshitsuYMD" <![CDATA[>]]> #{賦課年度} || '0401')
-        AND A."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
-        AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
     <!-- 賦課の情報として取得 -->

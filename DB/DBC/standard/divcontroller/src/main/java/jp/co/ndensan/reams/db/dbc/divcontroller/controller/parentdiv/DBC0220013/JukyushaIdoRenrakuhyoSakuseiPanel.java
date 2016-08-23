@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0220013
 
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodojukyushataishosha.KyodoJukyushaTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220013.DBC0220013TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220013.JukyushaIdoRenrakuhyoSakuseiPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0250011.DBC0250011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0220013.JukyushaIdoRenrakuhyoSakuseiPanelHandler;
 import jp.co.ndensan.reams.db.dbc.service.report.jukyushaidorenrakuhyo.JukyushaIdoRenrakuhyoPrintSevice;
 import jp.co.ndensan.reams.db.dbc.service.report.jukyushateiseirenrakuhyo.JukyushaTeiseiRenrakuhyoPrintService;
@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -27,8 +26,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -43,18 +40,12 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class JukyushaIdoRenrakuhyoSakuseiPanel {
 
-    private static final RString CODE_ミ = new RString("0003");
-    private static final RString 被保番号 = new RString("被保険者番号");
     private static final RString 処理モード = new RString("再発行モード");
     private static final RString 被保険者番号_なし = new RString("被保険者番号なし");
     private static final RString DBCHIHOKENSHANO = new RString("DBCHihokenshaNo");
     private static final RString ONE = new RString("1");
     private static final RString ZERO = new RString("0");
-
-    private PersonalData toPersonalData(ShikibetsuCode 識別コード, RString 被保険者番号) {
-        ExpandedInformation expandedInfo3 = new ExpandedInformation(new Code(CODE_ミ), 被保番号, 被保険者番号);
-        return PersonalData.of(識別コード, expandedInfo3);
-    }
+    private static final RString 選択モード = new RString("選択");
 
     /**
      * onLoadです
@@ -73,6 +64,7 @@ public class JukyushaIdoRenrakuhyoSakuseiPanel {
             throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace(
                     被保険者番号_なし.toString()));
         }
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         div.getTxtHakkoDate().setValue(RDate.getNowDate());
         FlexibleDate 作成年月日 = new FlexibleDate(div.getJukyushaIdoRenrakuhyoHenkoPrint().
                 getTxtHakkoDate().getValue().toDateString());
@@ -82,12 +74,13 @@ public class JukyushaIdoRenrakuhyoSakuseiPanel {
             氏名性別生年月日を印字する = ONE;
         }
         ViewStateHolder.put(ViewStateKeys.氏名性別生年月日を印字する, 氏名性別生年月日を印字する);
-        //TODO  QA1300
-        ShikibetsuCode 識別コード = new ShikibetsuCode("00000000000010");
         ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号);
         div.getCcdJukyushaIdoRenrakuhyo().initialize(
                 処理モード, ShikibetsuCode.EMPTY, 被保険者番号, 履歴番号, 論理削除フラグ, 異動日);
-        AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
+        //TODO  QA1300
+        AccessLogger.log(AccessLogType.照会,
+                getHandler(div).toPersonalData(new ShikibetsuCode("00000000000010"),
+                        被保険者番号.getColumnValue()));
         return ResponseData.of(div).respond();
 
     }
@@ -142,9 +135,21 @@ public class JukyushaIdoRenrakuhyoSakuseiPanel {
      */
     public ResponseData<JukyushaIdoRenrakuhyoSakuseiPanelDiv> onClick_btnResearch(
             JukyushaIdoRenrakuhyoSakuseiPanelDiv div) {
-
-        return getCheckMessage(div, DBC0250011TransitionEventName.再検索);
-
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+            前排他キーの解除(被保険者番号.getColumnValue());
+            ViewStateHolder.put(ViewStateKeys.処理モード, RString.EMPTY);
+            return ResponseData.of(div).forwardWithEventName(DBC0220013TransitionEventName.再検索).respond();
+        } else {
+            return ResponseData.of(div).respond();
+        }
     }
 
     /**
@@ -157,29 +162,6 @@ public class JukyushaIdoRenrakuhyoSakuseiPanel {
         RealInitialLocker.release(排他キー);
     }
 
-    private ResponseData<JukyushaIdoRenrakuhyoSakuseiPanelDiv> getCheckMessage(
-            JukyushaIdoRenrakuhyoSakuseiPanelDiv div,
-            DBC0250011TransitionEventName eventName) {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                前排他キーの解除(被保険者番号.getColumnValue());
-                return ResponseData.of(div).forwardWithEventName(eventName).respond();
-            } else {
-                return ResponseData.of(div).respond();
-            }
-        } else {
-            return ResponseData.of(div).forwardWithEventName(eventName).respond();
-        }
-    }
-
     /**
      * 「検索結果一覧へ」ボタンのメソッドです。
      *
@@ -188,19 +170,21 @@ public class JukyushaIdoRenrakuhyoSakuseiPanel {
      */
     public ResponseData<JukyushaIdoRenrakuhyoSakuseiPanelDiv> onClick_btnSearchResult(
             JukyushaIdoRenrakuhyoSakuseiPanelDiv div) {
-        return getCheckMessage(div, DBC0250011TransitionEventName.検索結果一覧);
-
-    }
-
-    /**
-     * 「完了する」ボタンのメソッドです。
-     *
-     * @param div KyodoIdoRenrakuhyoTorokuMainDiv
-     * @return ResponseData
-     */
-    public ResponseData<JukyushaIdoRenrakuhyoSakuseiPanelDiv> onClick_btnComplete(
-            JukyushaIdoRenrakuhyoSakuseiPanelDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBC0250011TransitionEventName.完了).respond();
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+            前排他キーの解除(被保険者番号.getColumnValue());
+            ViewStateHolder.put(ViewStateKeys.処理モード, 選択モード);
+            return ResponseData.of(div).forwardWithEventName(DBC0220013TransitionEventName.検索結果一覧).respond();
+        } else {
+            return ResponseData.of(div).respond();
+        }
     }
 
     private JukyushaIdoRenrakuhyoSakuseiPanelHandler getHandler(JukyushaIdoRenrakuhyoSakuseiPanelDiv div) {

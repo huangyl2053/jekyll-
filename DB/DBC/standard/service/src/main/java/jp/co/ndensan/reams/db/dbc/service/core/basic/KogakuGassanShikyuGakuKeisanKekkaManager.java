@@ -109,4 +109,80 @@ public class KogakuGassanShikyuGakuKeisanKekkaManager {
         }
         return 1 == dac.save(高額合算支給額計算結果.toEntity());
     }
+
+    /**
+     * 高額合算支給額計算結果を全件返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<KogakuGassanShikyuGakuKeisanKekka>
+     */
+    @Transaction
+    public List<KogakuGassanShikyuGakuKeisanKekka> get高額合算支給額計算結果一覧(HihokenshaNo 被保険者番号) {
+        List<KogakuGassanShikyuGakuKeisanKekka> businessList = new ArrayList<>();
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        for (DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity : dac.selectAll()) {
+            entity.initializeMd5();
+            businessList.add(new KogakuGassanShikyuGakuKeisanKekka(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
+     * 主キーに合致する高額合算支給額計算結果を返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年度 TaishoNendo
+     * @param 支給申請書整理番号 ShikyuShinseishoSeiriNo
+     * @return List<KogakuGassanShikyuGakuKeisanKekka>
+     */
+    @Transaction
+    public List<KogakuGassanShikyuGakuKeisanKekka> get高額合算支給額計算結果(
+            HihokenshaNo 被保険者番号,
+            FlexibleYear 対象年度,
+            RString 支給申請書整理番号) {
+        List<KogakuGassanShikyuGakuKeisanKekka> businessList = new ArrayList<>();
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+        for (DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity : dac.selectAll()) {
+            entity.initializeMd5();
+            businessList.add(new KogakuGassanShikyuGakuKeisanKekka(entity));
+        }
+
+        return businessList;
+
+    }
+
+    /**
+     * 合致する高額合算支給額計算結果を返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年度 TaishoNendo
+     * @param 証記載保険者番号 HokenshaNo
+     * @param 支給申請書整理番号 ShikyuShinseishoSeiriNo
+     * @return List<KogakuGassanShikyuGakuKeisanKekka>
+     */
+    @Transaction
+    public List<KogakuGassanShikyuGakuKeisanKekka> get高額合算支給額計算結果(
+            HihokenshaNo 被保険者番号,
+            FlexibleYear 対象年度,
+            HokenshaNo 証記載保険者番号,
+            RString 支給申請書整理番号) {
+        List<KogakuGassanShikyuGakuKeisanKekka> businessList = new ArrayList<>();
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+        for (DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity : dac.selectByKey(被保険者番号,
+                対象年度,
+                証記載保険者番号,
+                支給申請書整理番号)) {
+            entity.initializeMd5();
+            businessList.add(new KogakuGassanShikyuGakuKeisanKekka(entity));
+        }
+
+        return businessList;
+
+    }
 }

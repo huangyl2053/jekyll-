@@ -54,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -142,8 +143,14 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
     @Override
     protected void process(ShakaiFukushiHoujinnKeigenNinnteiEntity t) {
         IKojin IKojin = ShikibetsuTaishoFactory.createKojin(t.getPsmEntity());
+        RDate 認定証の交付日 = null;
+        if (null != processParamter.get認定証の交付日()) {
+            認定証の交付日 = new RDate(processParamter.get認定証の交付日().getYearValue(),
+                    processParamter.get認定証の交付日().getMonthValue(),
+                    processParamter.get認定証の交付日().getDayValue());
+        }
         ShafukuRiysFutKeigTaisKakuninshoShoNoAriReport.createReport(社会福祉法人等利用者負担軽減, IKojin, 帳票制御共通取得(),
-                帳票制御汎用取得(), 地方公共団体, processParamter.get認定証の交付日(), ninshoshaSource);
+                帳票制御汎用取得(), 地方公共団体, 認定証の交付日, ninshoshaSource);
         report.writeBy(reportSourceWriter);
     }
 

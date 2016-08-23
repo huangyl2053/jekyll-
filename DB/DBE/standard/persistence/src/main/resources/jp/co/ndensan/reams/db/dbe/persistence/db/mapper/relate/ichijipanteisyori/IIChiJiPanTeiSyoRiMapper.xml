@@ -43,7 +43,7 @@
     </resultMap>
 
     <select id="get対象者一覧" resultMap="resultMap_IChiJiPanTeiSyoRiRelateEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.processprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter" 
             resultOrdered="true" fetchSize="500">
    SELECT
      DbT7051."shichosonMeisho"
@@ -81,7 +81,7 @@ FROM
     <include refid="検索条件" />
 </select>
 <select id="get要介護認定一次判定結果情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.ResultMap_DbT5116IchijiHanteiKekkaJohoEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.processprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter" 
             resultOrdered="true" fetchSize="500">
   SELECT
     <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.allColumns_DbT5116IchijiHanteiKekkaJoho" />

@@ -190,6 +190,7 @@ public class ServiceRiyohyoInfoDivHandler {
         ViewStateHolder.put(ViewStateKeys.対象年月, 対象年月);
         ViewStateHolder.put(ViewStateKeys.選択有无, false);
         set初期化状態(表示モード);
+        div.getTxtKoshinYMD().setValue(RDate.getNowDate());
         if (利用年月 != null && !利用年月.isEmpty()) {
             RStringBuilder rst = new RStringBuilder();
             rst.append(利用年月).append(定値_01);
@@ -235,6 +236,8 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuZengaku().setDisabled(true);
         div.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCalcGokei().setDisabled(true);
         div.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnBeppyoGokeiKakutei().setDisabled(true);
+        div.getServiceRiyohyoBeppyoList().getBtnBeppyoMeisaiNew().setDisabled(false);
+        div.getServiceRiyohyoBeppyoList().getBtnBeppyoGokeiNew().setDisabled(false);
         if (追加.equals(表示モード)) {
             div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getGridSetting().setIsShowSelectButtonColumn(false);
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(true);
@@ -290,6 +293,8 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCancelGokeiInput().setDisabled(true);
             div.getServiceRiyohyoBeppyoGokei().setDisabled(true);
             div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(true);
+            div.getServiceRiyohyoBeppyoList().getBtnBeppyoMeisaiNew().setDisabled(true);
+            div.getServiceRiyohyoBeppyoList().getBtnBeppyoGokeiNew().setDisabled(true);
         }
     }
 
@@ -300,7 +305,8 @@ public class ServiceRiyohyoInfoDivHandler {
      * @param 居宅総合事業区分 RString
      * @param 利用年月 FlexibleYearMonth
      */
-    public void set区分支給限度額(HihokenshaNo 被保険者番号, RString 居宅総合事業区分, FlexibleYearMonth 利用年月) {
+    public void set区分支給限度額(HihokenshaNo 被保険者番号, RString 居宅総合事業区分,
+            FlexibleYearMonth 利用年月) {
         JigoSakuseiMeisaiTouroku jigoSakusei = JigoSakuseiMeisaiTouroku.createInstance();
         KubunGendo 区分支給限度額情報 = jigoSakusei.getKubunGendo(被保険者番号, 居宅総合事業区分, 利用年月);
         if (区分支給限度額情報 == null) {
@@ -319,7 +325,10 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getTxtGendoKanriKikan().setToValue(区分支給限度額情報.get管理期間終了日() == null
                     || 区分支給限度額情報.get管理期間終了日().isEmpty() ? null
                     : new RDate(区分支給限度額情報.get管理期間終了日().toString()));
-            div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(false);
+            RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
+            if (!照会.equals(表示モード)) {
+                div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(false);
+            }
         }
     }
 
@@ -754,7 +763,6 @@ public class ServiceRiyohyoInfoDivHandler {
         if (!選択有无) {
             row = new dgServiceRiyohyoBeppyoList_Row();
             row.setRowState(RowState.Added);
-            //TODO 利用年月 ＝ 画面.対象年月
             rowList.add(row);
             div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
         } else {
@@ -1360,7 +1368,7 @@ public class ServiceRiyohyoInfoDivHandler {
     private void 限度チェック(KyufuJikoSakuseiResult result) {
         Decimal 区分限度 = nullToZero(result.get区分限度超過単位()).add(nullToZero(result.get区分限度内単位()));
         Decimal 種類限度 = nullToZero(result.get種類限度超過単位()).add(nullToZero(result.get種類限度内単位()));
-        if (区分限度.compareTo(Decimal.ZERO) >= 0) {
+        if (区分限度.compareTo(Decimal.ZERO) <= 0) {
             return;
         }
         if (Decimal.ZERO.compareTo(種類限度) < 0) {

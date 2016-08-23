@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteike
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoiraitaishoichiran.ShinseishoKanriNoList;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.itizihanteishori.ItziHanteiShoriBatchParamter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001.DBE3010001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001.DBE3010001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001.IchijiHanteiDiv;
@@ -321,8 +321,7 @@ public class IchijiHantei {
             }
         }
         AccessLogger.log(AccessLogType.照会, personalData);
-        ValidationMessageControlPairs validation = getValidatisonHandler(div).データ空のチェック();
-        return validation;
+        return getValidatisonHandler(div).データ空のチェック();
     }
 
     private List<IChiJiPanTeiSyoRiBusiness> kenSaKu(IchijiHanteiDiv div, RString menuID, ShinseishoKanriNoList shinseishoKanriNoList) {

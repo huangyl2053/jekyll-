@@ -83,13 +83,13 @@ public class ItizihanteiIFtoriKomiBusiness {
         if (認定ｿﾌﾄ99.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaCode(new Code(entity.getIchijiHanteiKekkaCode()));
         } else if (認定ｿﾌﾄ2009_A.value().equals(entity.getKoroshoIfShikibetsuCode())
-                && 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
+                || 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaCode(new Code(entity.getIchijiHanteiKekkaCode()));
         }
         if (認定ｿﾌﾄ99.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code(entity.getIchijiHanteiKekkaCode()));
         } else if (認定ｿﾌﾄ2009_A.value().equals(entity.getKoroshoIfShikibetsuCode())
-                && 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
+                || 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code(entity.getIchijiHanteiKekkaCode()));
         }
         dbt5010Entity.setKijunJikan(Integer.parseInt(entity.getKijunJikan().toString()));
@@ -124,16 +124,17 @@ public class ItizihanteiIFtoriKomiBusiness {
         DbT5116IchijiHanteiKekkaJohoEntity dbt5010Entity = new DbT5116IchijiHanteiKekkaJohoEntity();
         dbt5010Entity.setShinseishoKanriNo(new ShinseishoKanriNo(entity.getShinseishoKanriNo().toString()));
         dbt5010Entity.setIchijiHanteiYMD(new FlexibleDate(RDate.getNowDate().toString()));
+        dbt5010Entity.setKariIchijiHanteiKubun(entity.isKariIchijiHanteiKubun());
         if (認定ｿﾌﾄ99.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaCode(new Code(entity.getIchijiHanteiKekkaCode()));
         } else if (認定ｿﾌﾄ2009_A.value().equals(entity.getKoroshoIfShikibetsuCode())
-                && 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
+                || 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaCode(new Code(entity.getIchijiHanteiKekkaCode()));
         }
         if (認定ｿﾌﾄ99.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code(entity.getIchijiHanteiKekkaCode()));
         } else if (認定ｿﾌﾄ2009_A.value().equals(entity.getKoroshoIfShikibetsuCode())
-                && 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
+                || 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code(entity.getIchijiHanteiKekkaCode()));
         }
         dbt5010Entity.setKijunJikan(Integer.parseInt(entity.getKijunJikan().toString()));
@@ -151,10 +152,36 @@ public class ItizihanteiIFtoriKomiBusiness {
         dbt5010Entity.setChukanHyokaKomoku3gun(Integer.parseInt(entity.getChukanHyokaKomoku3gun().toString()));
         dbt5010Entity.setChukanHyokaKomoku4gun(Integer.parseInt(entity.getChukanHyokaKomoku4gun().toString()));
         dbt5010Entity.setChukanHyokaKomoku5gun(Integer.parseInt(entity.getChukanHyokaKomoku5gun().toString()));
+        if (!RString.isNullOrEmpty(entity.getChukanHyokaKomoku6gun())) {
+            dbt5010Entity.setChukanHyokaKomoku6gun(Integer.parseInt(entity.getChukanHyokaKomoku6gun().toString()));
+        }
+        if (!RString.isNullOrEmpty(entity.getChukanHyokaKomoku7gun())) {
+            dbt5010Entity.setChukanHyokaKomoku7gun(Integer.parseInt(entity.getChukanHyokaKomoku7gun().toString()));
+        }
         dbt5010Entity.setIchijiHnateiKeikokuCode(entity.getIchijiHnateiKeikokuCode());
         dbt5010Entity.setJotaiAnteiseiCode(new Code(JotaiAnteiseiCode.valueOf(entity.getJotaiAnteiseiCode().toString()).getコード()));
         dbt5010Entity.setNinchishoJiritsudoIIijoNoGaizensei(new Decimal(entity.getNinchishoJiritsudoIIijoNoGaizensei().toString()));
         dbt5010Entity.setSuiteiKyufuKubunCode(new Code(SuiteiKyufuKubunCode.valueOf(entity.getSuiteiKyufuKubunCode().toString()).getコード()));
+        if (!RString.isNullOrEmpty(entity.getNinchishoKoreishaShihyoCode())) {
+            dbt5010Entity.setNinchishoKoreishaShihyoCode(new Code(entity.getNinchishoKoreishaShihyoCode().toString()));
+        }
+        dbt5010Entity.setJiritsudoKumiawase1(Integer.parseInt(entity.getJiritsudoKumiawase1().toString()));
+        dbt5010Entity.setJiritsudoKumiawase2(Integer.parseInt(entity.getJiritsudoKumiawase2().toString()));
+        dbt5010Entity.setJiritsudoKumiawase3(Integer.parseInt(entity.getJiritsudoKumiawase3().toString()));
+        dbt5010Entity.setJiritsudoKumiawase4(Integer.parseInt(entity.getJiritsudoKumiawase4().toString()));
+        dbt5010Entity.setJiritsudoKumiawase5(Integer.parseInt(entity.getJiritsudoKumiawase5().toString()));
+        if (!RString.isNullOrEmpty(entity.getJiritsudoKumiawase6())) {
+            dbt5010Entity.setJiritsudoKumiawase6(Integer.parseInt(entity.getJiritsudoKumiawase6().toString()));
+        }
+        if (!RString.isNullOrEmpty(entity.getJiritsudoKumiawase7())) {
+            dbt5010Entity.setJiritsudoKumiawase7(Integer.parseInt(entity.getJiritsudoKumiawase7().toString()));
+        }
+        if (!RString.isNullOrEmpty(entity.getChert())) {
+            dbt5010Entity.setChert(entity.getChert());
+        }
+        if (!RString.isNullOrEmpty(entity.getJotaizo())) {
+            dbt5010Entity.setJotaizo(entity.getJotaizo());
+        }
         return dbt5010Entity;
     }
 

@@ -12,10 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanFukushiYoguHanbaihi;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.FukushiYoguKonyuhiShikyuShiseiMeisaiDivEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.SokanbaraiShiharaiKekkaResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
@@ -27,6 +23,11 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600011.PnlTotalParam
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600021.YoguKonyuhiShikyuShinseiPnlTotalParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuGendogaku;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukei;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -44,7 +45,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.kijuntsukishichosonjoho.Kijuntsuk
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -76,7 +76,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
 
     private final YoguKonyuhiShikyuShinseiPnlTotalDiv div;
     private static final RString BLANK = new RString("0");
-    private static final RString コード種別 = new RString("0006");
     private static final RString NUM1 = new RString("0001");
     private static final RString NUM3 = new RString("0000000000");
     private static final RString NUM01 = new RString("01");
@@ -203,7 +202,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         KeyValueDataSource dataSourceBlank = new KeyValueDataSource(BLANK, RString.EMPTY);
         dataSourceList.add(dataSourceBlank);
         List<UzT0007CodeEntity> costlist = CodeMaster.getCode(
-                SubGyomuCode.DBC介護給付, new CodeShubetsu(コード種別), FlexibleDate.getNowDate());
+                SubGyomuCode.DBC介護給付, DBCCodeShubetsu.福祉用具購入費の種目.getコード(), FlexibleDate.getNowDate());
         for (UzT0007CodeEntity list : costlist) {
             KeyValueDataSource dataSource = new KeyValueDataSource(list.getコード().value(), list.getコード名称());
             dataSourceList.add(dataSource);

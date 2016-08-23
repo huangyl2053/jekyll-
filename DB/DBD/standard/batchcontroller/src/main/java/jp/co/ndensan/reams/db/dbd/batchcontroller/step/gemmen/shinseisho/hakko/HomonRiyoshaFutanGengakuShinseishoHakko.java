@@ -82,6 +82,7 @@ public class HomonRiyoshaFutanGengakuShinseishoHakko extends BatchProcessBase<Ri
     protected void process(RiyoshaFutangakuGemmenShinseishoHakkoEntity entity) {
         //TODO 帳票設計_DBD800005_訪問介護利用者負担額減額申請書 の実装がありません。
         //2016/08/16まで。
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

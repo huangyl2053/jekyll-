@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdhanyolist;
 
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710060.DBD710060_HanyoListShakaiFukushiHojinKeigenParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710110.DBD710110_HanyoListKokuhoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710120.DBD710120_HanyoListKokiKoreishaParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710130.DBD710130_HanyoListJigyoTaishoshaParameter;
@@ -27,6 +28,8 @@ public class DBDHanyoListParameter extends BatchParameterBase {
 
     @BatchParameter(key = "shisetsuNyutaishoBatchParameter", name = "汎用リスト出力_施設入退所")
     private HanyoListShisetsuNyutaishoBatchParameter shisetsuNyutaishoBatchParameter;
+    @BatchParameter(key = "kokuhoParameter", name = "汎用リスト出力_社会福祉法人軽減")
+    private DBD710060_HanyoListShakaiFukushiHojinKeigenParameter shakaiFukushiHojinKeigenParameter;
     @BatchParameter(key = "kokuhoParameter", name = "汎用リスト出力_国保")
     private DBD710110_HanyoListKokuhoParameter kokuhoParameter;
     @BatchParameter(key = "kokiKoreishaParameter", name = "汎用リスト出力_後期高齢者")

@@ -49,6 +49,7 @@ public class ToukeiJyohoSyokaiHandler {
     }
 
     /**
+     * サマリーを設定します。
      *
      * @param shikakuSummary 資格人数サマリー
      * @param fukaSummary 賦課人数サマリー

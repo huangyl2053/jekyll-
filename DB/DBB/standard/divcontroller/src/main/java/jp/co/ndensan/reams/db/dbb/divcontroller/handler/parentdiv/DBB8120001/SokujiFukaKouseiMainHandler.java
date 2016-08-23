@@ -513,7 +513,7 @@ public class SokujiFukaKouseiMainHandler {
         }
         if (is内容に異なる箇所がある(更正前.get過年度4(), 更正後.get過年度4())) {
             boolean is履歴番号採番 = is履歴番号採番(更正前.get過年度4(), 更正後.get過年度4());
-            FukaJoho 過年度4 = 更正後.get過年度1();
+            FukaJoho 過年度4 = 更正後.get過年度4();
             if (is履歴番号採番) {
                 過年度4 = get賦課の情報履歴番号採番(過年度4);
             }
@@ -1192,6 +1192,8 @@ public class SokujiFukaKouseiMainHandler {
         if (!更正後賦課リスト.isHas過年度賦課()) {
             div.getDgFuchoKanendo().setDisplayNone(true);
             return;
+        } else {
+            div.getDgFuchoKanendo().setDisplayNone(false);
         }
         KanendoKiUtil 月期対応取得_過年度 = new KanendoKiUtil();
         KitsukiList 期月リスト = 月期対応取得_過年度.get期月リスト();
@@ -1381,6 +1383,7 @@ public class SokujiFukaKouseiMainHandler {
     private void set過年度の徴収DateGrid(FlexibleYear 賦課年度, FlexibleYear 調定年度, FukaJoho 更正前過年度,
             FukaJoho 更正後過年度, KitsukiList 期月リスト) {
         FukaNokiResearcher researcher = FukaNokiResearcher.createInstance();
+        div.getDgFuchoKanendo().getDataSource().clear();
         for (Kitsuki kitsuki : 期月リスト.toList()) {
             dgFuchoKanendo_Row row = new dgFuchoKanendo_Row();
             row.getChoteiNendo().setValue(new FlexibleDate(賦課年度.toDateString().concat(一月一日)));
@@ -1396,7 +1399,7 @@ public class SokujiFukaKouseiMainHandler {
                     || !更正後.equals(Decimal.ZERO)) {
                 row.getKoseiMae().setValue(更正前);
                 row.getKoseiGo().setValue(更正後);
-                row.getZogen().setValue(row.getKoseiGo().getValue().multiply(row.getKoseiMae().getValue()));
+                row.getZogen().setValue(row.getKoseiGo().getValue().subtract(row.getKoseiMae().getValue()));
                 row.getNofuGaku().setValue(getFormat金額(get普通徴収の納付額(更正後過年度, kitsuki.get期(), kitsuki.get月())));
                 row.getNoKigen().setValue(researcher.get過年度納期(kitsuki.get期AsInt()).get納期限());
             }

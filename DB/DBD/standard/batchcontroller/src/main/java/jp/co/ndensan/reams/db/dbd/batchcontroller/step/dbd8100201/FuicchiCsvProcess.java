@@ -74,9 +74,6 @@ public class FuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaishoshaDou
     private static final int SEVEN = 7;
     private static final int THREE = 3;
     private static final int ZERO = 0;
-    private static final RString ONE = new RString("1");
-    private static final RString TWO = new RString("2");
-    private static final RString THREE_T = new RString("3");
     private static final RString BAR = new RString("-");
 
     private static final ReportId REPORT_DBD900003 = ReportIdDBD.DBD900003.getReportId();
@@ -201,11 +198,11 @@ public class FuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaishoshaDou
     }
 
     private RString set不一致事由(RString code) {
-        if (ONE.equals(code)) {
+        if (new RString("1").equals(code)) {
             return 同一日;
-        } else if (TWO.equals(code)) {
+        } else if (new RString("2").equals(code)) {
             return 不一致;
-        } else if (THREE_T.equals(code)) {
+        } else if (new RString("3").equals(code)) {
             return 同一人;
         } else {
             return RString.EMPTY;
@@ -217,7 +214,7 @@ public class FuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaishoshaDou
             return RString.EMPTY;
         } else {
             FlexibleDate date = new FlexibleDate(年月日);
-            return date.seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString();
+            return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
     }
 

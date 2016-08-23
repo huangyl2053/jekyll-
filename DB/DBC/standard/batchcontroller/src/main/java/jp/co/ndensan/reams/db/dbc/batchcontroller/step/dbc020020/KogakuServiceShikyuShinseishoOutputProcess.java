@@ -60,8 +60,8 @@ public class KogakuServiceShikyuShinseishoOutputProcess extends BatchProcessBase
     private BatchReportWriter<KogakuShikyuShinseishoSource> shinseishoBatchReportWriter;
     private ReportSourceWriter<KogakuShikyuShinseishoSource> shinseishoReportSourceWriter;
     @BatchWriter
-    private BatchReportWriter<KogakuShikyuShinseishoYuchoSource> shinseishoYuchoBatchReportWriter;
-    private ReportSourceWriter<KogakuShikyuShinseishoYuchoSource> shinseishoYuchoReportSourceWriter;
+    private BatchReportWriter<KogakuShikyuShinseishoYuchoSource> yuchoBatchReportWriter;
+    private ReportSourceWriter<KogakuShikyuShinseishoYuchoSource> yuchoReportSourceWriter;
 
     @Override
     protected void initialize() {
@@ -93,8 +93,8 @@ public class KogakuServiceShikyuShinseishoOutputProcess extends BatchProcessBase
         shinseishoBatchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100068.getReportId().value()).create();
         shinseishoReportSourceWriter = new ReportSourceWriter<>(shinseishoBatchReportWriter);
 
-        shinseishoYuchoBatchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100069.getReportId().value()).create();
-        shinseishoYuchoReportSourceWriter = new ReportSourceWriter<>(shinseishoYuchoBatchReportWriter);
+        yuchoBatchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100069.getReportId().value()).create();
+        yuchoReportSourceWriter = new ReportSourceWriter<>(yuchoBatchReportWriter);
     }
 
     @Override
@@ -109,7 +109,7 @@ public class KogakuServiceShikyuShinseishoOutputProcess extends BatchProcessBase
             param.set金融機関表示(parameter.isKinyuKikanHyoji());
 
             KogakuShikyuShinseishoYuchoReport report = new KogakuShikyuShinseishoYuchoReport(param);
-            report.writeBy(shinseishoYuchoReportSourceWriter);
+            report.writeBy(yuchoReportSourceWriter);
         } else {
             KogakuShikyuShinseishoEntity param = new KogakuShikyuShinseishoEntity();
             param.setシステム日付(FlexibleDate.getNowDate());

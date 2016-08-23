@@ -151,21 +151,13 @@ public class ShinseishoIkkatsuHakkoHandler {
         List<ddlKohoshaList_Row> dataSources = new ArrayList<>();
         for (KouhoushaJoho kouhoushaJoho : 候補者情報List) {
             ddlKohoshaList_Row ddlKohoshaList = new ddlKohoshaList_Row();
-            if (kouhoushaJoho.get更新認定フラグ()) {
+            if (kouhoushaJoho.is更新認定フラグ()) {
                 ddlKohoshaList.setShinkiKoshin(new RString("更新"));
             } else {
                 ddlKohoshaList.setShinkiKoshin(new RString("新規"));
             }
-            if (kouhoushaJoho.get被保険者番号() != null) {
-                ddlKohoshaList.setHihoNo(kouhoushaJoho.get被保険者番号().value());
-            } else {
-                ddlKohoshaList.setHihoNo(RString.EMPTY);
-            }
-            if (kouhoushaJoho.get識別コード() != null) {
-                ddlKohoshaList.setShikibetsuCode(kouhoushaJoho.get識別コード().value());
-            } else {
-                ddlKohoshaList.setShikibetsuCode(RString.EMPTY);
-            }
+            ddlKohoshaList.setHihoNo(kouhoushaJoho.get被保険者番号().value());
+            ddlKohoshaList.setShikibetsuCode(kouhoushaJoho.get識別コード().value());
             if (kouhoushaJoho.get宛名識別対象() != null) {
                 if (kouhoushaJoho.get宛名識別対象().get名称() != null) {
                     ddlKohoshaList.setShimei(kouhoushaJoho.get宛名識別対象().get名称().value());
@@ -203,14 +195,10 @@ public class ShinseishoIkkatsuHakkoHandler {
             } else {
                 ddlKohoshaList.setChkSetaiKazei(false);
             }
-            if (kouhoushaJoho.get市町村コード() != null) {
-                ddlKohoshaList.setShichosonCode(kouhoushaJoho.get市町村コード().value());
-            } else {
-                ddlKohoshaList.setShichosonCode(RString.EMPTY);
-            }
-            ddlKohoshaList.setChkRofuku(kouhoushaJoho.get老福());
-            ddlKohoshaList.setChkSeiho(kouhoushaJoho.get生保());
-            ddlKohoshaList.setChkKyusochi(kouhoushaJoho.get旧措置());
+            ddlKohoshaList.setShichosonCode(kouhoushaJoho.get市町村コード().value());
+            ddlKohoshaList.setChkRofuku(kouhoushaJoho.is老福());
+            ddlKohoshaList.setChkSeiho(kouhoushaJoho.is生保());
+            ddlKohoshaList.setChkKyusochi(kouhoushaJoho.is旧措置());
             if (kouhoushaJoho.get厚労省IF識別コード() != null && kouhoushaJoho.get要介護認定状態区分コード().value() != null) {
                 ddlKohoshaList.setYokaigodo(YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.
                         toValue(kouhoushaJoho.get厚労省IF識別コード().value()), kouhoushaJoho.get要介護認定状態区分コード().value()).getName());

@@ -9,6 +9,9 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.menjokaijo
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.menjokaijosaitennyu.MenjoKaijoSaiTennyu.MenjoKaijoSaiTennyuHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -67,8 +70,24 @@ public class MenjoKaijoSaiTennyu {
         if (!ResponseHolder.isReRequest() && getHandler(div).onClick_BtnTorikeshi()) {
             return ResponseData.of(div).addMessage(UrWarningMessages.未保存情報の破棄確認.getMessage().replace("処理中のデータ")).respond();
         }
-        div.getBtnTorikeshi().setDisabled(true);
-        div.getBtnKakutei().setDisabled(true);
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getTxtTorokuJokyo().setValue(RString.EMPTY);
+            div.setTxtKyufugakuGengakuKikan(null);
+            div.setTxtGengakuTekiyoKikanKaishiYMD(null);
+            div.setTxtGengakuTekiyoKikanShuryoYMD(null);
+            div.setTxtChoshukenShometsuKikan(null);
+            div.setTxtNofuzumiKikan(null);
+            div.setTxtGengakuKetteiYMD(null);
+            div.setTxtZenkaiKikanKaishiYMD(null);
+            div.setTxtZenkaiKikanShuryoYMD(null);
+            div.setTxtGengakuTsuchiHakkoYMD(null);
+            div.setTxtKonkaiKikanKaishiYMD(null);
+            div.setTxtKonkaiKikanShuryoYMD(null);
+            div.getKyufugakuGengakuToroku().getTxtTainoJokyo().setIconNameEnum(IconName.Info);
+            div.getTxtTainoJokyo().setDisabled(false);
+            div.getBtnTorikeshi().setDisabled(true);
+            div.getBtnKakutei().setDisabled(true);
+        }
         return ResponseData.of(div).respond();
     }
 

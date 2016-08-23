@@ -70,16 +70,14 @@ public class KetteijohoHandler {
             keyValue.setValue(new RString("000000 全市町村"));
             list.add(keyValue);
             for (KoikiZenShichosonJoho koikiZen : 構成市町村) {
-                if (!RString.isNullOrEmpty(koikiZen.get所得引出方法()) && !new RString("0").equals(koikiZen.get所得引出方法())) {
-                    KeyValueDataSource key = new KeyValueDataSource();
-                    RStringBuilder builder = new RStringBuilder();
-                    builder.append(koikiZen.get市町村コード().value());
-                    builder.append(RString.HALF_SPACE);
-                    builder.append(koikiZen.get市町村名称());
-                    key.setKey(koikiZen.get市町村コード().value());
-                    key.setValue(builder.toRString());
-                    list.add(key);
-                }
+                KeyValueDataSource key = new KeyValueDataSource();
+                RStringBuilder builder = new RStringBuilder();
+                builder.append(koikiZen.get市町村コード().value());
+                builder.append(RString.HALF_SPACE);
+                builder.append(koikiZen.get市町村名称());
+                key.setKey(koikiZen.get市町村コード().value());
+                key.setValue(builder.toRString());
+                list.add(key);
             }
         }
         if (DonyuKeitaiCode.事務広域.getCode().equals(市町村情報.get導入形態コード().value())
@@ -164,7 +162,7 @@ public class KetteijohoHandler {
     private void get過誤決定(RString 保険者区分) {
         div.getDdlRirekiNo1().setDataSource(new ArrayList<KeyValueDataSource>());
         div.getDgKagoKetteiDetail().setDataSource(new ArrayList<dgKagoKetteiDetail_Row>());
-        div.setKubunn(保険者区分);
+        div.getKetteiHokensha().setKubunn(保険者区分);
         if (保険者区分_2.equals(保険者区分) || 保険者区分_5.equals(保険者区分)) {
             div.getDgKagoKetteiDetail().getGridSetting().getColumn(公費受給者番号).setVisible(true);
             div.getDgKagoKetteiDetail().getGridSetting().getColumn(公費負担者番号).setVisible(true);
@@ -224,7 +222,7 @@ public class KetteijohoHandler {
             div.getDdlRirekiNo1().setSelectedKey(list.get(0).getKey());
         }
         List<dgKagoKetteiDetail_Row> rowList = new ArrayList<>();
-        div.setKubunn(保険者区分);
+        div.getKetteiHokensha().setKubunn(保険者区分);
         if (!RString.isNullOrEmpty(new RString(過誤決定情報.get(0).get作成年月日().toString()))) {
             div.getTxtKetteiHokenshaSakuseiYMD().setValue(new RDate(過誤決定情報.get(0).get作成年月日().toString()));
         }
@@ -267,23 +265,37 @@ public class KetteijohoHandler {
         div.getTxtHokenshaCell33().setValue(過誤決定情報.get(0).get高額介護サービス費保険者負担額());
         for (TaishoshaKensakuRelateBusiness 一覧明細 : 過誤決定情報) {
             dgKagoKetteiDetail_Row row = new dgKagoKetteiDetail_Row();
-            row.setTxtKohiJigyoshaNo(一覧明細.get事業所番号().getColumnValue());
+            if (一覧明細.get事業所番号() != null) {
+                row.setTxtKohiJigyoshaNo(一覧明細.get事業所番号().getColumnValue());
+            }
             row.setTxtKohiJigyoshaName(一覧明細.get事業所名());
-            row.setTxtKohiHihoNo(一覧明細.get被保険者番号().getColumnValue());
+            if (一覧明細.get被保険者番号() != null) {
+                row.setTxtKohiHihoNo(一覧明細.get被保険者番号().getColumnValue());
+            }
             row.setTxtKohiHihoName(一覧明細.get被保険者氏名());
-            row.setTxtKohiMoshitateRiyuCode(一覧明細.get過誤申立事由コード().getColumnValue());
+            if (一覧明細.get過誤申立事由コード() != null) {
+                row.setTxtKohiMoshitateRiyuCode(一覧明細.get過誤申立事由コード().getColumnValue());
+            }
             row.setTxtKohiStyle(一覧明細.getコード略称());
             row.setTxtKohiMoshitateRiyu(一覧明細.get過誤申立事由());
-            row.setTxtKohiServiceTeikyoYM(一覧明細.getサービス提供年月().wareki().toDateString());
-            row.setTxtKohiServiceTypeCode(一覧明細.getサービス種類コード().getColumnValue());
+            if (一覧明細.getサービス提供年月() != null) {
+                row.setTxtKohiServiceTeikyoYM(一覧明細.getサービス提供年月().wareki().toDateString());
+            }
+            if (一覧明細.getサービス種類コード() != null) {
+                row.setTxtKohiServiceTypeCode(一覧明細.getサービス種類コード().getColumnValue());
+            }
             row.setTxtKohiServiceType(一覧明細.getサービス種類名());
             row.getTxtKohiTanisu().setValue(一覧明細.get単位数());
             row.getTxtKohiFutangaku().setValue(一覧明細.get保険者負担額());
             row.setTxtKohiJukyushaNo(一覧明細.get公費受給者番号());
             row.setTxtKohiFutanshaNo(一覧明細.get公費負担者番号());
-            row.setTxtHokenshaShokisaiHokenshaNo(一覧明細.get証記載保険者番号().getColumnValue());
+            if (一覧明細.get証記載保険者番号() != null) {
+                row.setTxtHokenshaShokisaiHokenshaNo(一覧明細.get証記載保険者番号().getColumnValue());
+            }
             rowList.add(row);
-            アクセスログ(一覧明細.get被保険者番号().getColumnValue());
+            if (一覧明細.get被保険者番号() != null) {
+                アクセスログ(一覧明細.get被保険者番号().getColumnValue());
+            }
         }
         div.getDgKagoKetteiDetail().setDataSource(rowList);
     }

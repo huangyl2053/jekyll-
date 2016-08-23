@@ -565,8 +565,8 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 table(DbT4001JukyushaDaicho.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                leq(ninteiYukoKikanKaishiYMD, 終了利用年月),
-                                leq(開始利用年月, ninteiYukoKikanShuryoYMD),
+                                leq(ninteiYukoKikanKaishiYMD, 開始利用年月),
+                                leq(終了利用年月, ninteiYukoKikanShuryoYMD),
                                 eq(logicalDeletedFlag, false))).
                 toList(DbT4001JukyushaDaichoEntity.class);
     }
@@ -671,5 +671,39 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                         eq(shikibetsuCode, 識別コード)).
                 order(by(rirekiNo, Order.DESC)).
                 toObject(DbT4001JukyushaDaichoEntity.class);
+    }
+
+    /**
+     * 受給者台帳情報Max履歴番号を取得する。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 被保険者番号 被保険者番号
+     * @param 受給申請事由 受給申請事由
+     * @param 申請書管理番号 申請書管理番号
+     * @return Max履歴番号 RString
+     */
+    @Transaction
+    public RString get受給者台帳情報Max履歴番号(
+            LasdecCode 市町村コード,
+            HihokenshaNo 被保険者番号,
+            Code 受給申請事由,
+            ShinseishoKanriNo 申請書管理番号) throws NullPointerException {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_市町村コード.toString()));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        requireNonNull(受給申請事由, UrSystemErrorMessages.値がnull.getReplacedMessage("受給申請事由"));
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        DbT4001JukyushaDaichoEntity entity = accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(
+                                eq(shichosonCode, 市町村コード),
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(jukyuShinseiJiyu, 受給申請事由),
+                                eq(shinseishoKanriNo, 申請書管理番号)))
+                .order(by(rirekiNo, Order.DESC)).limit(1).toObject(DbT4001JukyushaDaichoEntity.class);
+
+        return null != entity ? entity.getRirekiNo() : new RString("0000");
     }
 }

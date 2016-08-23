@@ -9,8 +9,8 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001Hihoke
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3058KogakuShikyuShinsaKetteiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufukettei.KogakuKyufuKetteiChohyoDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakukyufukettei.KogakuShikyuFushikyuKetteishaIchiranSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -39,8 +39,6 @@ public class KogakuShikyuFushikyuKetteishaIchiranBodyEditor implements IKogakuSh
     private static final RString 支払方法区分コード_窓口 = new RString("1");
     private static final RString 支払方法区分_窓口 = new RString("窓口");
     private static final RString 支払方法区分_口座 = new RString("口座");
-
-    private static final CodeShubetsu 介護資格喪失事由_被保険者 = new CodeShubetsu("0010");
 
     /**
      * コンストラクタです
@@ -75,7 +73,7 @@ public class KogakuShikyuFushikyuKetteishaIchiranBodyEditor implements IKogakuSh
             source.listUpper_5 = DecimalFormatter.toコンマ区切りRString(審査決定.get利用者負担額(), 0);
         }
         if (null != 被保険者.get資格喪失事由コード()) {
-            source.listUpper_6 = CodeMaster.getCodeMeisho(介護資格喪失事由_被保険者,
+            source.listUpper_6 = CodeMaster.getCodeMeisho(DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(),
                     new Code(被保険者.get資格喪失事由コード()));
         }
         source.listUpper_7 = 被保険者.get町域コード();

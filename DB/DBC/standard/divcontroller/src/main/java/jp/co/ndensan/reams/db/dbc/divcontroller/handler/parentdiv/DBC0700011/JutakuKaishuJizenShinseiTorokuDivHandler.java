@@ -28,12 +28,13 @@ import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.dgGaisyuList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.JutakuKaishuJizenShinseiTorokuDiv;
+import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujyusyo.JutakuKaishuJyusyoChofukuHanntei;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakuKaishuShikyuGendogakuHantei;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuyaokaigojyotaisandannkaihantei.JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager;
-import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbc.service.report.jutakukaishujizenshinseitsuchisho.JutakuKaishuJizenShinseiTsuchishoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.YoKaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -47,7 +48,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -80,7 +80,6 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     private static final RString 照会モード = new RString("照会");
     private static final RString 状態_登録 = new RString("toroku");
     private static final RString 状態_参照 = new RString("sansyo");
-    private static final RString コード種別 = new RString("0028");
     private static final RString 取消事由なし = new RString("0");
     private static final RString サービス年月 = new RString("サービス年月");
     private static final RString 住宅所有者 = new RString("住宅所有者");
@@ -191,7 +190,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         KeyValueDataSource blank = new KeyValueDataSource(取消事由なし, RString.EMPTY);
         torikeshiList.add(blank);
         List<UzT0007CodeEntity> 取消事由リスト = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                new CodeShubetsu(コード種別), FlexibleDate.getNowDate());
+                DBCCodeShubetsu.住宅改修費申請取消事由コード.getコード(), FlexibleDate.getNowDate());
         for (UzT0007CodeEntity 取消事由 : 取消事由リスト) {
             KeyValueDataSource dataSource = new KeyValueDataSource(取消事由.getコード().value(), 取消事由.getコード名称());
             torikeshiList.add(dataSource);

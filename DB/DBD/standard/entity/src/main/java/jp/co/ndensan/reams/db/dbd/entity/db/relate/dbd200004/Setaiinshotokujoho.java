@@ -19,6 +19,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class Setaiinshotokujoho {
 
     private ShikibetsuCode 識別コード;

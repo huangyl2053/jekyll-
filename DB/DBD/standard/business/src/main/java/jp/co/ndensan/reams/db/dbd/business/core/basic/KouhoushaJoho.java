@@ -50,7 +50,7 @@ public class KouhoushaJoho {
      *
      * @return 更新認定フラグ
      */
-    public boolean get更新認定フラグ() {
+    public boolean is更新認定フラグ() {
         return entity.is更新認定フラグ();
     }
 
@@ -95,7 +95,7 @@ public class KouhoushaJoho {
      *
      * @return 老福
      */
-    public boolean get老福() {
+    public boolean is老福() {
         return entity.is生保();
     }
 
@@ -104,7 +104,7 @@ public class KouhoushaJoho {
      *
      * @return 生保
      */
-    public boolean get生保() {
+    public boolean is生保() {
         return entity.is生保();
     }
 
@@ -113,7 +113,7 @@ public class KouhoushaJoho {
      *
      * @return 旧措置
      */
-    public boolean get旧措置() {
+    public boolean is旧措置() {
         return entity.is旧措置();
     }
 
@@ -204,7 +204,6 @@ public class KouhoushaJoho {
      * @return 宛名識別対象
      */
     public FindShikibetsuTaisho get宛名識別対象() {
-        FindShikibetsuTaisho result = new FindShikibetsuTaisho(entity.getEntity(), ShikibetsuTaishoFactory.createKojin(entity.getEntity()));
-        return result;
+        return new FindShikibetsuTaisho(entity.getEntity(), ShikibetsuTaishoFactory.createKojin(entity.getEntity()));
     }
 }

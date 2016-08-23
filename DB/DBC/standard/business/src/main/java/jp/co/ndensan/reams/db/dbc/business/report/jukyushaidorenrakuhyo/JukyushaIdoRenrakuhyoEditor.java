@@ -23,9 +23,9 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
 
     private final JukyushaIdoRenrakuhyoTorokuEntity entity;
     private final RString 市町村名称;
-    private static final RString 旧短期入所 = new RString("旧短期入所");
+    private static final RString 旧短期入所 = new RString("(旧短期入所)");
     private static final RString 支給限度基準額 = new RString("支給限度基準額");
-    private static final RString 旧訪問通所 = new RString("旧訪問通所");
+    private static final RString 旧訪問通所 = new RString("(旧訪問通所)");
     private static final RString 区分 = new RString("区分");
     private static final RString BLANK = new RString(" ");
     private static final RString ONE = new RString("1");
