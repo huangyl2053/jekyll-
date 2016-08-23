@@ -36,6 +36,7 @@ public class HomonRiyoshaFutanGengakuShinseishoHakko extends BatchProcessBase<Ri
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmen.shinseisho.hakko."
             + "IRiyoshaFutangakuGemmenShinseishoHakkoMapper.get出力対象者情報");
     private static final int STARTINDEX = 9;
+    private static final RString COMMA = new RString(",");
     private ShinseishoHakkoProcessParameter processParamter;
 //    private Association association;
 //    private Ninshosha ninshosha;
@@ -70,7 +71,7 @@ public class HomonRiyoshaFutanGengakuShinseishoHakko extends BatchProcessBase<Ri
         if (order != null) {
             出力順 = Ddb102020MyBatisOrderByClauseCreator.create(HomonKaigoRiyoshaFutangakuGengakuShinseishoOrderKey.class, order);
             if (processParamter.is出力フラグ()) {
-                出力順 = 出力順.substring(STARTINDEX, 出力順.length());
+                出力順 = COMMA.concat(出力順.substring(STARTINDEX, 出力順.length()));
             }
         }
         return new BatchDbReader(MYBATIS_SELECT_ID,
