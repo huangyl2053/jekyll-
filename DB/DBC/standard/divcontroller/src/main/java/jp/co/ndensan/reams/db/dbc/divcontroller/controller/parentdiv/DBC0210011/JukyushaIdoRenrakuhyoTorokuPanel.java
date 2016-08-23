@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0210011.Juk
 import jp.co.ndensan.reams.db.dbc.service.core.basic.JukyushaIdoRenrakuhyoManager;
 import jp.co.ndensan.reams.db.dbc.service.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoToroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -37,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 受給者異動連絡票（追加）登録です。
+ * 受給者異動連絡票（追加）登録ます。
  *
  * @reamsid_L DBC-2100-010 jiangzongyue
  */
@@ -66,33 +65,28 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
     public ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> onLoad(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         JukyushaIdoRenrakuhyoTorokuPanelHandler handler = getHandler(div);
-        if (資格対象者 != null) {
-            if (資格対象者.get被保険者番号() == null) {
-                throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace(被保険者番号なし.toString()));
-            }
+        if (資格対象者 == null || 資格対象者.get被保険者番号() == null || 資格対象者.get被保険者番号().isEmpty()) {
+            throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace(被保険者番号なし.toString()));
         }
-//        ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("209007"));
-//        HihokenshaNo 被保険者番号 = new HihokenshaNo(new RString("1034567002"));
         RString 前排他キー = DBCHIHOKENSHANO.concat(資格対象者.get被保険者番号().getColumnValue());
         LockingKey key = new LockingKey(前排他キー);
         if (!RealInitialLocker.tryGetLock(key)) {
             throw new PessimisticLockingException();
         }
-        //div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo().initialize(new RString("訂正モード"), 識別コード, 被保険者番号, 1, false, new FlexibleDate(new RString("20160811")));
         div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo().initialize(新規モード, 資格対象者.get識別コード(), 資格対象者.get被保険者番号(), 0, false, FlexibleDate.getNowDate());
         handler.printLog識別コード照会(資格対象者.get識別コード(), 資格対象者.get被保険者番号().getColumnValue());
         return ResponseData.of(div).setState(DBC0210011StateName.登録);
     }
 
     /**
-     * 「保存する」ボタンクリック時のイベントメソッドです。
+     * 「保存する」ボタンクリック時のイベントメソッドます。
      *
      * @param div SearchHihokenshaDiv
      *
      * @return ResponseData<SearchHihokenshaDiv>
      */
     public ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> onClick_btnSave(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
-        //div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo()
+        div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo().validateCheck();
         JukyushaIdoRenrakuhyoManager manager = InstanceProvider.create(JukyushaIdoRenrakuhyoManager.class);
         JukyushaIdoRenrakuhyoTorokuPanelValidationHandler validationHander = getValidationHandler(div);
         ValidationMessageControlPairs pairs = validationHander.validate();
@@ -114,10 +108,10 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
             JukyushaIdoRenrakuhyoToroku jukyushaIdoRen = JukyushaIdoRenrakuhyoToroku.createInstance();
             RString エラー有無 = jukyushaIdoRen.regJukyushaIdoJoho(被保険者番号, new RDate(異動日.toString()), 異動区分);
             if (ZERO.equals(エラー有無)) {
-                JukyushaIdoRenrakuhyo result = getDataEdit(被保険者番号, 異動日, div);
-                result = result.createBuilderForEdit().set証記載保険者番号(new ShoKisaiHokenshaNo(new RString("000001"))).build();
+                JukyushaIdoRenrakuhyo result = getDataEdit(被保険者番号, 異動日, div, manager);
                 result.toEntity().setState(EntityDataState.Added);
                 manager.save受給者異動送付(result);
+                onClick_btnReportPublish(div);
             }
         } else {
             return ResponseData.of(div).respond();
@@ -126,9 +120,9 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
 
     }
 
-    private JukyushaIdoRenrakuhyo getDataEdit(RString 被保険者番号, RString 異動日, JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
+    private JukyushaIdoRenrakuhyo getDataEdit(RString 被保険者番号, RString 異動日,
+            JukyushaIdoRenrakuhyoTorokuPanelDiv div, JukyushaIdoRenrakuhyoManager manager) {
         JukyushaIdoRenrakuhyoTorokuPanelHandler handler = getHandler(div);
-        JukyushaIdoRenrakuhyoManager manager = InstanceProvider.create(JukyushaIdoRenrakuhyoManager.class);
         JukyushaIdoRenrakuhyo entity = manager.get受給者異動連絡票情報(被保険者番号, 異動日);
         JukyushaIdoRenrakuhyo result = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo().get受給者異動送付();
         if (entity != null) {
@@ -138,7 +132,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
     }
 
     /**
-     * 「処理実行の確認」.「はい」ボタンのメソッドです。
+     * 「処理実行の確認」.「はい」ボタンのメソッドます。
      *
      * @param div 画面Div
      *
@@ -150,7 +144,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
     }
 
     /**
-     * 「完了する」ボタンの処理です。
+     * 「完了する」ボタンの処理ます。
      *
      * @param div div
      * @return ResponseData
@@ -161,23 +155,22 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
     }
 
     /**
-     * 「再検索する」ボタンクリック時の事件です。
-     *
-     * @param div JukyushaIdoRenrakuhyoTorokuPanelDiv
-     * @return ResponseData
-     */
-    public ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> onClick_btnReSearch(
-            JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBC0210011TransitionEventName.該当者検索へ).respond();
-    }
-
-    /**
-     * 「再検索する」ボタンのメソッドです。
+     * 「検索結果一覧へ」ボタンクリック時の事件ます。
      *
      * @param div 画面Div
      * @return ResponseData
      */
-    public ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> onClick_btnResearch(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
+    public ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> onClick_btnReSearch(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
+        return getCheckMessage(div, DBC0210011TransitionEventName.該当者検索へ);
+    }
+
+    /**
+     * 「再検索する」ボタンクリック時の事件ます。
+     *
+     * @param div 画面Div
+     * @return ResponseData
+     */
+    public ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> onClick_btnResultDg(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
         return getCheckMessage(div, DBC0210011TransitionEventName.該当者検索へ);
     }
 
