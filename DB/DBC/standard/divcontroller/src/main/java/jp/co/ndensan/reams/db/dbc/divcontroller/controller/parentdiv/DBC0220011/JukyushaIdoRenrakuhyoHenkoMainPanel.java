@@ -71,6 +71,33 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanel {
         }
         if (修正モード.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))
                 || 選択モード.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+            FlexibleDate 異動日From = FlexibleDate.EMPTY;
+            FlexibleDate 異動日To = FlexibleDate.EMPTY;
+            HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
+            boolean 削除データ = false;
+            if (div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().getTxtIdoDateRange().getFromValue() != null) {
+                異動日From = new FlexibleDate(div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().
+                        getTxtIdoDateRange().getFromValue().toString());
+            }
+            if (div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().getTxtIdoDateRange().getToValue() != null) {
+                異動日To = new FlexibleDate(div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().
+                        getTxtIdoDateRange().getToValue().toString());
+            }
+            if (div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().getTxtSearchHihoNo().getValue() != null
+                    && !div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().
+                    getTxtSearchHihoNo().getValue().isEmpty()) {
+                被保険者番号 = new HihokenshaNo(div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().
+                        getTxtSearchHihoNo().getValue());
+            }
+            if (div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().getChkIsSearchDeletedData().isAllSelected()) {
+                削除データ = true;
+            }
+            List<TaishoshaKensakuResult> 異動対象者一覧情報 = TaishoshaKensaku.createInstance().
+                    selectJukyushaIdoTaishosha(異動日From, 異動日To, 被保険者番号, 削除データ);
+            if (異動対象者一覧情報 == null) {
+                throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+            }
+            getHandler(div).initialize対象者一覧(メニューID, 異動日From, 異動日To, 被保険者番号, 異動対象者一覧情報);
             return ResponseData.of(div).setState(DBC0220011StateName.対象者一覧);
         }
         return ResponseData.of(div).setState(DBC0220011StateName.対象者検索);
