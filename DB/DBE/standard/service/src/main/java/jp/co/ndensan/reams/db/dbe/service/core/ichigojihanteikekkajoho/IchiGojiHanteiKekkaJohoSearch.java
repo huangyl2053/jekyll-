@@ -68,7 +68,7 @@ public class IchiGojiHanteiKekkaJohoSearch {
         IIchiGojiHanteiKekkaJohoMapper mapper = mapperProvider.create(IIchiGojiHanteiKekkaJohoMapper.class);
         IchiGojiHanteiKekkaJohoMapperParameter parameter = IchiGojiHanteiKekkaJohoMapperParameter.createParamter(申請書管理番号);
         Code 厚労省IF識別コード = mapper.getKoroshoIfShikibetsuCode(parameter).get厚労省IF識別コード();
-        if (!(厚労省IF識別コード_09A.equals(厚労省IF識別コード.value()) || 厚労省IF識別コード_09B.equals(厚労省IF識別コード.value()))) {
+        if (!(厚労省IF識別コード_09A.equals(厚労省IF識別コード.value()) || !(厚労省IF識別コード_09B.equals(厚労省IF識別コード.value())))) {
             throw new ApplicationException(DbeErrorMessages._1_5次判定実行不可.getMessage());
         }
 
