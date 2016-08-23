@@ -24,11 +24,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -60,10 +60,10 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
     protected void initialize() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         if (new RString("0").equals(paramter.getFayirukuben())) {
-            RString 日次進捗データ送信ファイル名 = DbBusinessConfig.get(ConfigNameDBE.日次進捗データ送信ファイル名新, RDate.getNowDate());
+            RString 日次進捗データ送信ファイル名 = DbBusinessConfig.get(ConfigNameDBE.日次進捗データ送信ファイル名_新, RDate.getNowDate());
             eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), 日次進捗データ送信ファイル名);
         } else if (new RString("1").equals(paramter.getFayirukuben())) {
-            RString 連携データ送信ファイル名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定結果連携データ送信ファイル名新, RDate.getNowDate());
+            RString 連携データ送信ファイル名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定結果連携データ送信ファイル名_新, RDate.getNowDate());
             eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), 連携データ送信ファイル名);
         }
         RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate());
@@ -80,13 +80,13 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
         return new BatchDbReader(MYBATIS_SELECT_ID, paramter.toShinchokuDataOutputMybitisParamter());
     }
     @BatchWriter
-    private EucCsvWriter<ShinchokuDataOutputEucCsvEntity> eucCsvWriterJunitoJugo;
+    private CsvWriter<ShinchokuDataOutputEucCsvEntity> eucCsvWriterJunitoJugo;
 
     @Override
     protected void createWriter() {
         RString 連携文字コード = DbBusinessConfig.get(ConfigNameDBE.連携文字コード, RDate.getNowDate());
         if (new RString("1").equals(連携文字コード)) {
-            eucCsvWriterJunitoJugo = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+            eucCsvWriterJunitoJugo = new CsvWriter.InstanceBuilder(eucFilePath).
                     setDelimiter(EUC_WRITER_DELIMITER).
                     setEnclosure(EUC_WRITER_ENCLOSURE).
                     setEncode(Encode.SJIS).
@@ -94,7 +94,7 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
                     hasHeader(false).
                     build();
         } else if (new RString("2").equals(連携文字コード)) {
-            eucCsvWriterJunitoJugo = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+            eucCsvWriterJunitoJugo = new CsvWriter.InstanceBuilder(eucFilePath).
                     setDelimiter(EUC_WRITER_DELIMITER).
                     setEnclosure(EUC_WRITER_ENCLOSURE).
                     setEncode(Encode.UTF_8).
@@ -134,7 +134,7 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
     private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         if (new RString("0").equals(paramter.getFayirukuben())) {
-            RString 日次進捗データ送信ファイル名 = DbBusinessConfig.get(ConfigNameDBE.日次進捗データ送信ファイル名新, RDate.getNowDate());
+            RString 日次進捗データ送信ファイル名 = DbBusinessConfig.get(ConfigNameDBE.日次進捗データ送信ファイル名_新, RDate.getNowDate());
             EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                     EUC_ENTITY_ID.toRString(),
                     association.getLasdecCode_().value(),
@@ -146,7 +146,7 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
                     business.get出力条件(paramter));
             OutputJokenhyoFactory.createInstance(item).print();
         } else if (new RString("1").equals(paramter.getFayirukuben())) {
-            RString 連携データ送信ファイル名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定結果連携データ送信ファイル名新, RDate.getNowDate());
+            RString 連携データ送信ファイル名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定結果連携データ送信ファイル名_新, RDate.getNowDate());
             EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                     EUC_ENTITY_ID.toRString(),
                     association.getLasdecCode_().value(),
