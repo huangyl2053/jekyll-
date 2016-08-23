@@ -255,11 +255,11 @@ public final class TokutyoKariSanteiFukaHandler {
                 .createTokuchoKariSanteiParameter(fukaParameter);
         List<ShuturyokuTyoutuke> 出力帳票一覧 = new ArrayList();
         for (KarisanteiBatchEntity result : param.get出力帳票一覧()) {
-            if (result.get出力順ID() == null) {
+            if (result.get帳票ID() == null || result.get帳票分類ID() == null) {
                 continue;
             }
             ShuturyokuTyoutuke shuturyokutyoutuke = new ShuturyokuTyoutuke();
-            shuturyokutyoutuke.set出力順ID(Long.parseLong(result.get出力順ID().toString()));
+            shuturyokutyoutuke.set出力順ID(RString.isNullOrEmpty(result.get出力順ID()) ? null : Long.parseLong(result.get出力順ID().toString()));
             shuturyokutyoutuke.set帳票ID(result.get帳票ID());
             shuturyokutyoutuke.set帳票分類ID(result.get帳票分類ID());
             出力帳票一覧.add(shuturyokutyoutuke);
