@@ -64,7 +64,7 @@ public class ShikakushutokushaFuseigoIchiranhyoEditorImpl implements IShikakushu
         printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
         printTimeStampSb.append(DATE_秒);
         printTimeStampSb.append(作成);
-        source.printTimeStamp = item.getタイトル();
+        source.printTimeStamp = printTimeStampSb.toRString();
         source.title = item.getタイトル();
         source.shichosonCode = item.get市町村コード();
         source.shichosonName = item.get市町村名称();
@@ -77,13 +77,13 @@ public class ShikakushutokushaFuseigoIchiranhyoEditorImpl implements IShikakushu
         source.listHihokensha_7 = item.get不整合情報();
         source.listGenJusho_1 = item.get現住所();
         source.listMaeJusho_1 = item.get前住所();
-        source.listShimei_1 = item.getﾌﾘｶﾞﾅ();
-        source.listShimeiKana_1 = item.get氏名();
+        source.listShimei_1 = item.get氏名();
+        source.listShimeiKana_1 = item.getﾌﾘｶﾞﾅ();
         return source;
     }
 
     private RString get生年月日(FlexibleDate 生年月日) {
-        if (生年月日 != null && 生年月日.isEmpty()) {
+        if (生年月日 != null && !生年月日.isEmpty()) {
             return 生年月日.wareki().toDateString();
         }
         return RString.EMPTY;

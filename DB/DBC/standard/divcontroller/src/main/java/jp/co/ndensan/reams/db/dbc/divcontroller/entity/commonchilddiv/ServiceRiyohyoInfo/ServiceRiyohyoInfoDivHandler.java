@@ -351,7 +351,7 @@ public class ServiceRiyohyoInfoDivHandler {
 
         }
         if (居宅.equals(居宅総合事業区分)) {
-            int count = jigoSakusei.load利用年月チェック(被保険者番号, 対象年月);
+            int count = jigoSakusei.load利用年月チェック(被保険者番号, 利用年月);
             if (count == 0) {
                 List<RString> list = new ArrayList<>();
                 list.add(暫定区分_1);

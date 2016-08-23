@@ -56,7 +56,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class IraiJohoDataTorikomi {
 
-    private static final RString CSVファイル名 = new RString("依頼情報データ受取（オルカ）.csv");
+    private static final RString CSVファイル名 = new RString("依頼情報データ受取（オルカ）.CSV");
     private static final RString 奇数行 = new RString("1");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
 
@@ -86,8 +86,8 @@ public class IraiJohoDataTorikomi {
     }
 
     private boolean savaCsvファイル(FileData file) {
-        RString imagePath = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig
-                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援), CSVファイル名);
+        RString imagePath = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig.get(ConfigNameDBE.OCRアップロード用ファイル格納パス,
+                RDate.getNowDate(), SubGyomuCode.DBE認定支援), new RString("依頼情報データ受取（オルカ）"));
         File localファイル = new File(file.getFilePath().toString());
         File サーバパス = new File(imagePath.toString());
         boolean fileFlag;
@@ -117,8 +117,8 @@ public class IraiJohoDataTorikomi {
      */
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<IraiJohoDataTorikomiDiv> onClick_BtnDataTorikomi(IraiJohoDataTorikomiDiv div) {
-        RString imagePath = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig
-                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援), CSVファイル名);
+        RString imagePath = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig.get(ConfigNameDBE.OCRアップロード用ファイル格納パス,
+                RDate.getNowDate(), SubGyomuCode.DBE認定支援), new RString("依頼情報データ受取（オルカ）"));
         RString csvReaderPath = Path.combinePath(imagePath, CSVファイル名);
         List<IraiJohoDataTorikomiCsvEntity> csvEntityList;
         try {
@@ -177,10 +177,12 @@ public class IraiJohoDataTorikomi {
         List<dgTorikomiFileIchiran_Row> rowList = div.getDgTorikomiFileIchiran().getDataSource();
         List<IkenshokinyuyoshiBusiness> businessList = new ArrayList<>();
         for (dgTorikomiFileIchiran_Row row : rowList) {
-            for (IraiJohoDataTorikomiCsvEntity csvEntity : csvEntityList) {
-                if (csvEntity.get保険者番号().equals(row.getHokenshaBango()) && csvEntity.get被保険者番号().equals(row.getHihokenshaBango())
-                        && csvEntity.get申請日().equals(row.getShinseibi())) {
-                    businessList.add(getHandler(div).帳票出力用情報の編集(csvEntity));
+            if (row.getCheckBox().isAllSelected()) {
+                for (IraiJohoDataTorikomiCsvEntity csvEntity : csvEntityList) {
+                    if (csvEntity.get保険者番号().equals(row.getHokenshaBango()) && csvEntity.get被保険者番号().equals(row.getHihokenshaBango())
+                            && csvEntity.get申請日().equals(row.getShinseibi())) {
+                        businessList.add(getHandler(div).帳票出力用情報の編集(csvEntity));
+                    }
                 }
             }
         }
@@ -216,12 +218,14 @@ public class IraiJohoDataTorikomi {
             if (validationMessages.iterator().hasNext() && !ResponseHolder.isWarningIgnoredRequest()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            List<dgTorikomiFileIchiran_Row> rowlist = div.getDgTorikomiFileIchiran().getSelectedItems();
+            List<dgTorikomiFileIchiran_Row> rowlist = div.getDgTorikomiFileIchiran().getDataSource();
             for (dgTorikomiFileIchiran_Row row : rowlist) {
-                IkenshokinyuyoshiBusiness business = getBusiness(csvEntityList, row, div);
-                IraiJohoDataTorikomiManager.createInstance().各テーブルへの登録(row.getShinseishoKanriNo(),
-                        row.getIkenshoIraiRirekiNo().getValue().intValue(), row.getKoroshoIfShikibetsuCode(),
-                        row.getShujiiIryokikanCode(), row.getShujiiCode(), business);
+                if (row.getCheckBox().isAllSelected()) {
+                    IkenshokinyuyoshiBusiness business = getBusiness(csvEntityList, row, div);
+                    IraiJohoDataTorikomiManager.createInstance().各テーブルへの登録(row.getShinseishoKanriNo(),
+                            row.getIkenshoIraiRirekiNo().getValue().intValue(), row.getKoroshoIfShikibetsuCode(),
+                            row.getShujiiIryokikanCode(), row.getShujiiCode(), business);
+                }
             }
         }
         return ResponseData.of(div).respond();
