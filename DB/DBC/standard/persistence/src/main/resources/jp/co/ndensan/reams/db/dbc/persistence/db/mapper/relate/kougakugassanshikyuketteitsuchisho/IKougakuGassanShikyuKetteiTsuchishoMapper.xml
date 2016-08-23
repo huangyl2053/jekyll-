@@ -94,7 +94,7 @@
    </select>
    
    
-   <resultMap id="resultMap_HihokenshaShikibetsuTaisho" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakugassanshikyuketteitsuchisho.JigyoKogakuGassanEntity" autoMapping="true">
+   <resultMap id="resultMap_HihokenshaShikibetsuTaisho" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakugassanshikyuketteitsuchisho.HihokenshaTaishoPSMFuka" autoMapping="true">
         <result property="shichosonCode"                      column="dbT1001HihokenshaDaicho_shichosonCode"               typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="shikibetsuCode"                     column="dbT1001HihokenshaDaicho_shikibetsuCode"              typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>    
         <result property="kanjiShimei"                        column="ShikibetsuTaisho_kanjiShimei"                        typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
