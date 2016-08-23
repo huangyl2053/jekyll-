@@ -159,7 +159,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(負担割合証を印刷する, true);
         if (利用者負担割合情報.get利用者負担割合明細list() != null && !利用者負担割合情報.get利用者負担割合明細list().isEmpty()) {
             for (RiyoshaFutanWariaiMeisai result : 利用者負担割合情報.get利用者負担割合明細list()) {
-                if (!result.get論理削除フラグ()) {
+                if (!result.is論理削除フラグ()) {
                     CommonButtonHolder.setDisabledByCommonButtonFieldName(負担割合証を印刷する, false);
                     break;
                 }
@@ -351,8 +351,8 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         rowData.getNenkinShunyuGokei().setValue(利用者負担割合明細.get年金収入合計());
         rowData.getSonotaGokeiShotoku().setValue(利用者負担割合明細.getその他の合計所得金額合計());
         rowData.setBiko(利用者負担割合明細.get更正理由());
-        rowData.setLogicalDeletedFlag(利用者負担割合明細.get論理削除フラグ());
-        if ((RSTONE.equals(処理区分) || RSTTWO.equals(処理区分)) && 利用者負担割合明細.get論理削除フラグ()) {
+        rowData.setLogicalDeletedFlag(利用者負担割合明細.is論理削除フラグ());
+        if ((RSTONE.equals(処理区分) || RSTTWO.equals(処理区分)) && 利用者負担割合明細.is論理削除フラグ()) {
             rowData.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
         }
         return rowData;
@@ -724,8 +724,8 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             rowData.getNenkinShunyuGokei().setValue(明細.get年金収入合計());
             rowData.getSonotaGokeiShotoku().setValue(明細.getその他の合計所得金額合計());
             rowData.setBiko(明細.get更正理由());
-            rowData.setLogicalDeletedFlag(明細.get論理削除フラグ());
-            if (明細.get論理削除フラグ()) {
+            rowData.setLogicalDeletedFlag(明細.is論理削除フラグ());
+            if (明細.is論理削除フラグ()) {
                 rowData.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
             }
             dataGridList.add(rowData);

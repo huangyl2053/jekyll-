@@ -93,7 +93,7 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
             throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
 
-        if (利用者負担割合.get論理削除フラグ()) {
+        if (利用者負担割合.is論理削除フラグ()) {
             div.getPanelHakko().getTxtHakkobi().clearValue();
             div.getPanelHakko().getTxtHakkobi().setDisabled(true);
             div.getPanelHakko().getTxtKofubi().clearValue();
