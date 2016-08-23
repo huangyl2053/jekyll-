@@ -211,7 +211,8 @@ public class DbT3004KyodoShoriyoJukyushaIdoKogakuSofuDac implements ISaveable<Db
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public int select高額送付情報の異動区分Count(HihokenshaNo 被保険者番号, RString 異動区分, FlexibleDate 異動日) throws NullPointerException {
+    public int select高額送付情報の異動区分Count(
+            HihokenshaNo 被保険者番号, RString 異動区分, FlexibleDate 異動日) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(異動区分, UrSystemErrorMessages.値がnull.getReplacedMessage("異動区分コード"));
         requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
@@ -236,7 +237,8 @@ public class DbT3004KyodoShoriyoJukyushaIdoKogakuSofuDac implements ISaveable<Db
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity get高額送付情報の履歴番号Max(HihokenshaNo 被保険者番号, FlexibleDate 異動日) throws NullPointerException {
+    public DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity get高額送付情報の履歴番号Max(
+            HihokenshaNo 被保険者番号, FlexibleDate 異動日) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
 
