@@ -52,8 +52,8 @@ module DBA
                     
                     var gridSetting = this.controls.datagridTekiyoJogai().gridSetting;
                     gridSetting.isShowSelectButtonColumn = false;
-                    gridSetting.isShowModifyButtonColumn = false;
-                    gridSetting.isShowDeleteButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
                     gridSetting.isShowRowState = false;
                     
                     this.controls.datagridTekiyoJogai().gridSetting = gridSetting;

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuIdoTotalDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1010011.ShiKaKuSyuToKuIdouTotalHandler;
+import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureiChecker;
+import jp.co.ndensan.reams.db.dba.service.core.tekiyojogaisha.TekiyoJogaishaChecker;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
@@ -81,12 +83,16 @@ public class ShikakuShutokuIdoTotal {
         handler.load(ViewStateHolder.get(ViewStateKeys.資格取得異動_状態_被保履歴タブ, RString.class));
 
         if (handler.is資格取得中()) {
-            前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
-            RealInitialLocker.release(前排他ロックキー);
-            div.setDisabled(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_RESEARCH, true);
-            //実行不可(19, "?ため?できません。"),
-            return ResponseData.of(div).addMessage(DbzInformationMessages.資格取得済み.getMessage()).respond();
+            releaseLock(div);
+            return setNotExecutableAndReturnMessage(div, DbzInformationMessages.資格取得済み.getMessage());
+        }
+        if (TaJushochiTokureiChecker.createInstance().is他市町村住所地特例者(shikibetsuCode)) {
+            releaseLock(div);
+            return setNotExecutableAndReturnMessage(div, DbzInformationMessages.他特例者登録済み.getMessage());
+        }
+        if (TekiyoJogaishaChecker.createInstance().is適用除外者(shikibetsuCode)) {
+            releaseLock(div);
+            return setNotExecutableAndReturnMessage(div, DbzInformationMessages.適用除外者登録済み.getMessage());
         }
 
         return ResponseData.of(div).respond();
@@ -94,6 +100,17 @@ public class ShikakuShutokuIdoTotal {
 
     private boolean validateShikibetsuCode(ShikibetsuCode shikibetsuCode) {
         return (shikibetsuCode == null || shikibetsuCode.isEmpty());
+    }
+
+    private void releaseLock(ShikakuShutokuIdoTotalDiv div) {
+        前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
+        RealInitialLocker.release(前排他ロックキー);
+    }
+
+    private ResponseData<ShikakuShutokuIdoTotalDiv> setNotExecutableAndReturnMessage(ShikakuShutokuIdoTotalDiv div, Message message) {
+        div.setDisabled(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_RESEARCH, true);
+        return ResponseData.of(div).addMessage(message).respond();
     }
 
     /**

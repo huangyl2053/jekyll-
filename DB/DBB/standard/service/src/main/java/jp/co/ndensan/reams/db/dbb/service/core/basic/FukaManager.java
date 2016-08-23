@@ -283,4 +283,21 @@ public class FukaManager {
     public FukaRireki find前年度賦課履歴(FlexibleYear 賦課年度, HihokenshaNo 被保番号) {
         return find賦課履歴On(賦課年度.minusYear(1), 被保番号);
     }
+
+    /**
+     * 指定の被保険者について、最新の介護賦課を返します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT2002FukaEntity もしくは{@code null}
+     * @throws NullPointerException 引数のいずれかが{@code null}の場合
+     */
+    public Optional<Fuka> find最新賦課(HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号_メセージ.toString()));
+
+        DbT2002FukaEntity entity = _fukaDac.selectSaishinPerHihokenshaNo(被保険者番号);
+        if (entity == null) {
+            return Optional.empty();
+        }
+        return Optional.of(new Fuka(entity));
+    }
 }

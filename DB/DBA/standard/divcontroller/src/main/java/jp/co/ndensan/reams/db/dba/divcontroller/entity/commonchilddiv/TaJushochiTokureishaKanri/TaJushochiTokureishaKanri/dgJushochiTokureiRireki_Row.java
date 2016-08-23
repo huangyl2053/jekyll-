@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushoch
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jul 28 11:55:15 JST 2016 
+ * Sat Aug 20 16:26:35 JST 2016 
  */
 
 

@@ -46,7 +46,7 @@ public class IchijiHanteiKekkaSupport {
      * @param コード 一次判定結果コード
      * @return 入力のコードに対応する名称や略称
      */
-    public static IIchijiHanteiKekkaCode toValue(final RString 厚労省IF識別コード, final RString コード) {
+    public static IIchijiHanteiKekkaCode toValueOrEmpty(final RString 厚労省IF識別コード, final RString コード) {
         if (!KoroshoIfShikibetsuCode.existsCode(厚労省IF識別コード)) {
             return EMPTY;
         }
@@ -69,5 +69,31 @@ public class IchijiHanteiKekkaSupport {
 
     private static IIchijiHanteiKekkaCode ifNullThenEMPTY(IIchijiHanteiKekkaCode value) {
         return value == null ? EMPTY : value;
+    }
+
+    /**
+     * 指定の厚労省IF識別コード時点での一次判定結果コードに対する名称や略称を返却します。
+     *
+     * @param コード 一次判定結果コード
+     * @return 入力のコードに対応する名称や略称
+     */
+    public static IIchijiHanteiKekkaCode toValueOrEmpty(RString code) {
+        IIchijiHanteiKekkaCode conveterd = IchijiHanteiKekkaCode09.toValueOrNull(code);
+        if (conveterd != null) {
+            return conveterd;
+        }
+        conveterd = IchijiHanteiKekkaCode06.toValueOrNull(code);
+        if (conveterd != null) {
+            return conveterd;
+        }
+        conveterd = IchijiHanteiKekkaCode02.toValueOrNull(code);
+        if (conveterd != null) {
+            return conveterd;
+        }
+        conveterd = IchijiHanteiKekkaCode99.toValueOrNull(code);
+        if (conveterd != null) {
+            return conveterd;
+        }
+        return EMPTY;
     }
 }

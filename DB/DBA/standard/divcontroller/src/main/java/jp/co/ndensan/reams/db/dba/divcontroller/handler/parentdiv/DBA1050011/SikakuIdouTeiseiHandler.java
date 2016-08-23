@@ -14,9 +14,15 @@ import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.SikakuIdouTeise
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.SikakuIdouTeiseiDiv;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakuteisei.HihokenshaShikakuTeiseiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakutokuso.ShikakuTokusoParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.dgIryohokenIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.datagridRireki_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.IShikakuTokusoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
+import jp.co.ndensan.reams.db.dbz.service.core.shikakutokuso.ShikakuTokusoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -26,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
+import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 資格異動訂正の画面処理Handlerクラスです。
@@ -60,7 +68,9 @@ public class SikakuIdouTeiseiHandler {
     public SikakuIdouTeiseiJoho onLoad(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         kaigoShikakuKihon_onload(被保険者番号, 表示モード);
         kaigoNinteiAtenaInfo_onload(識別コード);
+
         div.getShikakuShutokuJoho().getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().initialize(被保険者番号, 識別コード);
+
         if (div.getShikakuShutokuJoho().getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().getDataGridDataSource().isEmpty()) {
             throw new ApplicationException(
                     UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("被保履歴情報"));
@@ -184,11 +194,12 @@ public class SikakuIdouTeiseiHandler {
      * @param joho 初期化時の医療保険情報
      */
     public void save(ShikibetsuCode 識別コード, SikakuIdouTeiseiJoho joho) {
-        HihokenshaShikakuTeiseiManager service = HihokenshaShikakuTeiseiManager.createInstance();
-        if (チェックNG.equals(service.checkIryoHoken(joho.getIryoHokenJohoList(), set初期化時の医療保険情報()))
-                && チェックNG.equals(service.checkRofukuNenkin(joho.getRoreiFukushiJohoList(), set初期化時の老福年金情報(識別コード)))) {
-            throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
-        }
+        //TODO 城間 ここでは資格の訂正情報が存在するかのチェックが本来必要。以下の情報はメインではない為、チェック不要で更新して良い
+//        HihokenshaShikakuTeiseiManager service = HihokenshaShikakuTeiseiManager.createInstance();
+//        if (チェックNG.equals(service.checkIryoHoken(joho.getIryoHokenJohoList(), set初期化時の医療保険情報()))
+//                && チェックNG.equals(service.checkRofukuNenkin(joho.getRoreiFukushiJohoList(), set初期化時の老福年金情報(識別コード)))) {
+//            throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
+//        }
         div.getShikakuShutokuJoho().getTplIryoHoken().getIryoHokenRirekii().getCcdIryoHokenRireki().save();
         div.getShikakuShutokuJoho().getTplRofukuNenkin().getRohukuNenkin().getCcdRohukuNenkin().click_Save();
     }

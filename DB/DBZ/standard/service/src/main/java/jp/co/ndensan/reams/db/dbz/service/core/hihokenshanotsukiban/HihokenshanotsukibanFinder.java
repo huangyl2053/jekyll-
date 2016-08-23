@@ -94,8 +94,6 @@ public class HihokenshanotsukibanFinder {
         } else {
             被保険者番号 = entityDbT1001.getHihokenshaNo();
         }
-        System.out.println("識別コード：" + shikibetsuCode.getColumnValue());
-        System.out.println("被保険者番号：" + 被保険者番号.getColumnValue());
 
         if (被保険者番号.getColumnValue().length() != 付番方法_LENGTH) {
             throw new ApplicationException(UrErrorMessages.桁数が不正.getMessage());

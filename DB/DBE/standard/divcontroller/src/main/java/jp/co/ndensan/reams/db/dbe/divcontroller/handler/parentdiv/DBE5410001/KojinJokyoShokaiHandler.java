@@ -13,10 +13,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001.Koji
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.IsExistJohoTeikyoDoui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
@@ -39,9 +35,6 @@ public class KojinJokyoShokaiHandler {
     private final List<RString> 指定医フラグ = new ArrayList<>();
     private final Code 識別コード_09A = new Code("09A");
     private final Code 識別コード_09B = new Code("09B");
-    private final Code 識別コード_99A = new Code("99A");
-    private final Code 識別コード_02A = new Code("02A");
-    private final Code 識別コード_06A = new Code("06A");
     private final RString 指定医 = new RString("指定医");
     private final KojinJokyoShokaiDiv div;
 
@@ -205,31 +198,7 @@ public class KojinJokyoShokaiHandler {
     }
 
     private void set認定結果(List<KojinJokyoShokai> kojinJokyoShokaiList) {
-        if (識別コード_09A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())
-            || 識別コード_09B.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())) {
-            if (kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード() != null
-                && !kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().isEmpty()) {
-                div.getTxtNinteiKekka().setValue(YokaigoJotaiKubun09.
-                        toValue(kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().value()).get名称());
-            }
-        } else if (識別コード_06A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())) {
-            if (kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード() != null
-                && !kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().isEmpty()) {
-                div.getTxtNinteiKekka().setValue(YokaigoJotaiKubun06.
-                        toValue(kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().value()).get名称());
-            }
-        } else if (識別コード_02A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())) {
-            if (kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード() != null
-                && !kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().isEmpty()) {
-                div.getTxtNinteiKekka().setValue(YokaigoJotaiKubun02.
-                        toValue(kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().value()).get名称());
-            }
-        } else if (識別コード_99A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())
-                   && kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード() != null
-                   && !kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().isEmpty()) {
-            div.getTxtNinteiKekka().setValue(YokaigoJotaiKubun99.
-                    toValue(kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().value()).get名称());
-        }
+        div.getTxtNinteiKekka().setValue(kojinJokyoShokaiList.get(0).get二次判定結果名称());
     }
 
     private void set一次判定結果(List<KojinJokyoShokai> kojinJokyoShokaiList) {

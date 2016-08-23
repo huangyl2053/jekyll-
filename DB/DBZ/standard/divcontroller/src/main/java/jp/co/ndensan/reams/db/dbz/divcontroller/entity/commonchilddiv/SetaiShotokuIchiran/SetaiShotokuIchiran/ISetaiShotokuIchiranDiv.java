@@ -6,7 +6,9 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -39,4 +41,12 @@ public interface ISetaiShotokuIchiranDiv extends ICommonChildDivBaseProperties {
      * @return バリデーションの結果
      */
     ValidationMessageControlPairs validate比較対象();
+
+    /**
+     * 指定の{@link IValidationMessage}を世帯員一覧データグリッドへ設定する
+     * {@link ValidationMessageControlPair}を生成します。
+     *
+     * @return 世帯一覧データグリッドに対する{@link ValidationMessageControlPair}
+     */
+    ValidationMessageControlPair createValidationMessageControlPairFor世帯員一覧(IValidationMessage message);
 }

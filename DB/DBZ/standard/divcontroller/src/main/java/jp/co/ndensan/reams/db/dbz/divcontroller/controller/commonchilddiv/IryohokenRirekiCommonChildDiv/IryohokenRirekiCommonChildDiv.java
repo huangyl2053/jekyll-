@@ -17,9 +17,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenR
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryohokenRirekiValidationHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.dgIryohokenIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.pnlIryohokenJohoDiv;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -169,7 +167,9 @@ public class IryohokenRirekiCommonChildDiv {
             ichiran_Row.setKigoNo(requestDiv.getPnlIryohokenJoho().getTxtKigoBango().getValue());
             RStringBuilder 保険者名 = new RStringBuilder();
             保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
-            保険者名.append(new RString(":"));
+            if (保険者名.toRString().isEmpty()) {
+                保険者名.append(new RString(":"));
+            }
             保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
             ichiran_Row.setHokensha(保険者名.toRString());
             ichiran_Row.setShubetsuCode(requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().getSelectedKey());
@@ -177,7 +177,7 @@ public class IryohokenRirekiCommonChildDiv {
             ichiran_Row.getRirekiNo().setValue(riReKiNo);
             ichiran_Row.setShikibetsuCode(医療保険情報_識別コード);
             ichiran_Row.setState(状態_追加);
-            ichiran_Row.setShichosonCode(RString.EMPTY);
+            ichiran_Row.setShichosonCode(requestDiv.get市町村コード());
             list.add(count, ichiran_Row);
             加入日と脱退日の有効性チェック(list, count);
 
@@ -202,6 +202,7 @@ public class IryohokenRirekiCommonChildDiv {
                 ichiran_Row.setHokenshaName(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
                 ichiran_Row.setKigoNo(requestDiv.getPnlIryohokenJoho().getTxtKigoBango().getValue());
                 ichiran_Row.setShubetsuCode(requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().getSelectedKey());
+                ichiran_Row.setShichosonCode(requestDiv.get市町村コード());
                 RStringBuilder 保険者名 = new RStringBuilder();
                 保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
                 保険者名.append(new RString(":"));
@@ -218,6 +219,8 @@ public class IryohokenRirekiCommonChildDiv {
                 加入日と脱退日の有効性チェック(list, count);
             }
         }
+
+        Collections.sort(list, new DateComparatorOrderByDesc());
     }
 
     private void setState(dgIryohokenIchiran_Row ichiran_Row, IryohokenRirekiCommonChildDivDiv requestDiv) {
@@ -285,7 +288,7 @@ public class IryohokenRirekiCommonChildDiv {
         }
         if (sortIndex == 0) {
             IryohokenRirekiCommonChildDivDate nextData = childDivDate.get(sortIndex + 1);
-            if (iryohokenRirekiDate.getKanyuDate().isBefore(nextData.getDattaiDate())) {
+            if (nextData.getKanyuDate().isBefore(iryohokenRirekiDate.getDattaiDate())) {
                 throw new ApplicationException(
                         DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace("脱退日", "次データの加入日"));
             }
@@ -301,7 +304,7 @@ public class IryohokenRirekiCommonChildDiv {
             if (ichiran_Row.getKanyuDate().getValue().isBefore(preData.getDattaiDate())) {
                 throw new ApplicationException(
                         DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace("前データの脱退日", "加入日"));
-            } else if (ichiran_Row.getDattaiDate().getValue().isBefore(childDivDate.get(sortIndex + 1).getKanyuDate())) {
+            } else if (childDivDate.get(sortIndex + 1).getKanyuDate().isBefore(ichiran_Row.getDattaiDate().getValue())) {
                 throw new ApplicationException(
                         DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace("脱退日", "次データの加入日"));
             }
@@ -316,6 +319,16 @@ public class IryohokenRirekiCommonChildDiv {
         @Override
         public int compare(IryohokenRirekiCommonChildDivDate o1, IryohokenRirekiCommonChildDivDate o2) {
             return o1.getKanyuDate().compareTo(o2.getKanyuDate());
+        }
+    }
+
+    private static class DateComparatorOrderByDesc implements Comparator<dgIryohokenIchiran_Row>, Serializable {
+
+        private static final long serialVersionUID = 3893667276202140686L;
+
+        @Override
+        public int compare(dgIryohokenIchiran_Row o1, dgIryohokenIchiran_Row o2) {
+            return o2.getKanyuDate().getValue().compareTo(o1.getKanyuDate().getValue());
         }
     }
 
@@ -361,9 +374,9 @@ public class IryohokenRirekiCommonChildDiv {
 
         requestDiv.getDgIryohokenIchiran().getGridSetting().selectedRowCount();
         dgIryohokenIchiran_Row dgIryohokenIchiranRow = requestDiv.getDgIryohokenIchiran().getSelectedItems().get(0);
-        requestDiv.getPnlIryohokenJoho().getTbdKanyubi().setValue(new RDate(dgIryohokenIchiranRow.getKanyuDate().toString()));
+        requestDiv.getPnlIryohokenJoho().getTbdKanyubi().setValue(new RDate(dgIryohokenIchiranRow.getKanyuDate().getValue().toString()));
         if (dgIryohokenIchiranRow.getDattaiDate() != null && !FlexibleDate.EMPTY.equals(dgIryohokenIchiranRow.getDattaiDate().getValue())) {
-            requestDiv.getPnlIryohokenJoho().getTbdDattabi().setValue(new RDate(dgIryohokenIchiranRow.getDattaiDate().toString()));
+            requestDiv.getPnlIryohokenJoho().getTbdDattabi().setValue(new RDate(dgIryohokenIchiranRow.getDattaiDate().getValue().toString()));
         } else {
             requestDiv.getPnlIryohokenJoho().getTbdDattabi().clearValue();
         }
@@ -437,10 +450,10 @@ public class IryohokenRirekiCommonChildDiv {
         if (pnlIryohokenJoho.getTbdDattabi().getValue() == null) {
             dattabi = FlexibleDate.EMPTY;
         } else {
-            dattabi = new FlexibleDate(pnlIryohokenJoho.getTbdDattabi().getValue().wareki().toDateString());
+            dattabi = new FlexibleDate(pnlIryohokenJoho.getTbdDattabi().getValue().toDateString());
         }
 
-        return ichiran_Row.getKanyuDate().getValue().equals(new FlexibleDate(pnlIryohokenJoho.getTbdKanyubi().getValue().wareki().toDateString()))
+        return ichiran_Row.getKanyuDate().getValue().equals(new FlexibleDate(pnlIryohokenJoho.getTbdKanyubi().getValue().toDateString()))
                 && ichiran_Row.getDattaiDate().getValue().equals(dattabi)
                 && ichiran_Row.getShubetsu().equals(pnlIryohokenJoho.getDdlSyubetsu().getSelectedValue())
                 && ichiran_Row.getHokenshaName().equals(pnlIryohokenJoho.getTxtHokensyaMeisho().getValue())

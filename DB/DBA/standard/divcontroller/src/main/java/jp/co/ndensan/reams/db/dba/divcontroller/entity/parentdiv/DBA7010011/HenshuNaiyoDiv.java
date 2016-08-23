@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010011;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.IPrintContentsSettingDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.PrintContentsSettingDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
@@ -41,12 +43,12 @@ public class HenshuNaiyoDiv extends Panel {
     private TextBox txtSam;
     @JsonProperty("chkTennyumaeJushoNoPrint")
     private CheckBoxList chkTennyumaeJushoNoPrint;
-    @JsonProperty("txtBunshoBango")
-    private TextBox txtBunshoBango;
     @JsonProperty("btnJidoFuban")
     private Button btnJidoFuban;
     @JsonProperty("ccdPrintContentsSetting")
     private PrintContentsSettingDiv ccdPrintContentsSetting;
+    @JsonProperty("ccdBunshoBangoInput")
+    private BunshoBangoInputDiv ccdBunshoBangoInput;
     @JsonProperty("異動日")
     private RString 異動日;
     @JsonProperty("枝番")
@@ -189,24 +191,6 @@ public class HenshuNaiyoDiv extends Panel {
     }
 
     /*
-     * gettxtBunshoBango
-     * @return txtBunshoBango
-     */
-    @JsonProperty("txtBunshoBango")
-    public TextBox getTxtBunshoBango() {
-        return txtBunshoBango;
-    }
-
-    /*
-     * settxtBunshoBango
-     * @param txtBunshoBango txtBunshoBango
-     */
-    @JsonProperty("txtBunshoBango")
-    public void setTxtBunshoBango(TextBox txtBunshoBango) {
-        this.txtBunshoBango = txtBunshoBango;
-    }
-
-    /*
      * getbtnJidoFuban
      * @return btnJidoFuban
      */
@@ -232,6 +216,16 @@ public class HenshuNaiyoDiv extends Panel {
     public IPrintContentsSettingDiv getCcdPrintContentsSetting() {
         return ccdPrintContentsSetting;
     }
+
+    /*
+     * getccdBunshoBangoInput
+     * @return ccdBunshoBangoInput
+     */
+    @JsonProperty("ccdBunshoBangoInput")
+    public IBunshoBangoInputDiv getCcdBunshoBangoInput() {
+        return ccdBunshoBangoInput;
+    }
+
 
     /*
      * get異動日

@@ -108,7 +108,7 @@ public class ValidationHandler {
      */
     public void 交付日がセットになっているかの入力チェック(ValidationMessageControlPairs validPairs) {
         if (shoDiv.getPanelInput().getTxtKoufuDate().getValue() == null
-                && shoDiv.getPanelInput().getTxaKoufuRiyu().getValue() != null) {
+                && !RString.EMPTY.equals(shoDiv.getPanelInput().getDdlKoufuJiyu().getSelectedValue())) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate交付日, shoDiv.getPanelInput().getTxtKoufuDate()));
         }
     }
@@ -132,7 +132,7 @@ public class ValidationHandler {
      */
     public void 回収日がセットになっているかの入力チェック(ValidationMessageControlPairs validPairs) {
         if (shoDiv.getPanelInput().getTxtKaisyuDate().getValue() == null
-                && shoDiv.getPanelInput().getTxaKaishuRiyu().getValue() != null) {
+                && !RString.EMPTY.equals(shoDiv.getPanelInput().getDdlKaisyuJiyu().getSelectedValue())) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate回収日, shoDiv.getPanelInput().getTxtKaisyuDate()));
         }
     }
@@ -158,8 +158,8 @@ public class ValidationHandler {
         Validate順番(UrWarningMessages.日付の前後関係逆転以降, "交付日", "回収日"),
         Validate交付日(UrErrorMessages.必須項目_追加メッセージあり, "交付日"),
         Validate交付事由(UrErrorMessages.必須項目_追加メッセージあり, "交付事由"),
-        Validate回収日(UrErrorMessages.必須項目_追加メッセージあり, "回収日"),
-        Validate回収事由(UrErrorMessages.必須項目_追加メッセージあり, "回収事由");
+        Validate回収日(UrErrorMessages.必須項目_追加メッセージあり, "回収事由を設定する場合、回収日は必須項目"),
+        Validate回収事由(UrErrorMessages.必須項目_追加メッセージあり, "回収日を設定する場合、回収事由は必須項目");
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {

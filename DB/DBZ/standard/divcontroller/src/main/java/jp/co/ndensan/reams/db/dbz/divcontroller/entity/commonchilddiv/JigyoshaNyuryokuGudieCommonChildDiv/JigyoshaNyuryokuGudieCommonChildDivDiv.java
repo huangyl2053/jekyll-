@@ -7,16 +7,18 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JigyoshaN
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+
+import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * JigyoshaNyuryokuGudieCommonChildDiv のクラスファイル
@@ -24,7 +26,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @reamsid_L DBA-0140-010 houtianpeng
  */
 public class JigyoshaNyuryokuGudieCommonChildDivDiv extends Panel implements IJigyoshaNyuryokuGudieCommonChildDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -123,7 +126,7 @@ public class JigyoshaNyuryokuGudieCommonChildDivDiv extends Panel implements IJi
             State[] enumArray = State.values();
 
             for (State enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -138,11 +141,11 @@ public class JigyoshaNyuryokuGudieCommonChildDivDiv extends Panel implements IJi
     }
 
     public State getMode_State() {
-        return (State) _CommonChildDivModeUtil.getMode( this.modes, State.class );
+        return (State) _CommonChildDivModeUtil.getMode(this.modes, State.class);
     }
 
-    public void setMode_State( State value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, State.class , value );
+    public void setMode_State(State value) {
+        _CommonChildDivModeUtil.setMode(this.modes, State.class, value);
     }
 
     /*
@@ -154,7 +157,7 @@ public class JigyoshaNyuryokuGudieCommonChildDivDiv extends Panel implements IJi
     }
 
     @JsonIgnore
-    public void  setKennsakuJyokenn(KennsakuJyokennDiv KennsakuJyokenn) {
+    public void setKennsakuJyokenn(KennsakuJyokennDiv KennsakuJyokenn) {
         this.getTaishoJigyoshaKensaku().setKennsakuJyokenn(KennsakuJyokenn);
     }
 
@@ -164,7 +167,7 @@ public class JigyoshaNyuryokuGudieCommonChildDivDiv extends Panel implements IJi
     }
 
     @JsonIgnore
-    public void  setOtherTokureiShisetsu(OtherTokureiShisetsuDiv OtherTokureiShisetsu) {
+    public void setOtherTokureiShisetsu(OtherTokureiShisetsuDiv OtherTokureiShisetsu) {
         this.getTaishoJigyoshaKensaku().setOtherTokureiShisetsu(OtherTokureiShisetsu);
     }
 
@@ -174,7 +177,7 @@ public class JigyoshaNyuryokuGudieCommonChildDivDiv extends Panel implements IJi
     }
 
     @JsonIgnore
-    public void  setRadKannaiKanngaiKubun(RadioButton radKannaiKanngaiKubun) {
+    public void setRadKannaiKanngaiKubun(RadioButton radKannaiKanngaiKubun) {
         this.getTaishoJigyoshaKensaku().getOtherTokureiShisetsu().setRadKannaiKanngaiKubun(radKannaiKanngaiKubun);
     }
 
@@ -184,7 +187,7 @@ public class JigyoshaNyuryokuGudieCommonChildDivDiv extends Panel implements IJi
     }
 
     @JsonIgnore
-    public void  setTxtMaxHyojiKensu(TextBoxNum txtMaxHyojiKensu) {
+    public void setTxtMaxHyojiKensu(TextBoxNum txtMaxHyojiKensu) {
         this.getTaishoJigyoshaKensaku().setTxtMaxHyojiKensu(txtMaxHyojiKensu);
     }
 
@@ -194,7 +197,7 @@ public class JigyoshaNyuryokuGudieCommonChildDivDiv extends Panel implements IJi
     }
 
     @JsonIgnore
-    public void  setBtnTaishoJigyoshaKensaku(Button btnTaishoJigyoshaKensaku) {
+    public void setBtnTaishoJigyoshaKensaku(Button btnTaishoJigyoshaKensaku) {
         this.getTaishoJigyoshaKensaku().setBtnTaishoJigyoshaKensaku(btnTaishoJigyoshaKensaku);
     }
 
@@ -204,7 +207,7 @@ public class JigyoshaNyuryokuGudieCommonChildDivDiv extends Panel implements IJi
     }
 
     @JsonIgnore
-    public void  setBtnClear(Button btnClear) {
+    public void setBtnClear(Button btnClear) {
         this.getTaishoJigyoshaKensaku().setBtnClear(btnClear);
     }
 
@@ -214,7 +217,7 @@ public class JigyoshaNyuryokuGudieCommonChildDivDiv extends Panel implements IJi
     }
 
     @JsonIgnore
-    public void  setBtnYameru(Button btnYameru) {
+    public void setBtnYameru(Button btnYameru) {
         this.getTaishoJigyoshaKensaku().setBtnYameru(btnYameru);
     }
 

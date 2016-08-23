@@ -24,6 +24,7 @@ public class HihokenshaDaichoKoshinProcessParameter implements IBatchProcessPara
 
     private FlexibleDate 開始日;
     private FlexibleDate 終了日;
+    private IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey;
 
     /**
      * 抽出条件の生成のMybatisパラメータを作成します。
@@ -35,7 +36,10 @@ public class HihokenshaDaichoKoshinProcessParameter implements IBatchProcessPara
      */
     public AtenaMybatisParameter toAtenaMybatisParameter(IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey,
             FlexibleDate 開始日, FlexibleDate 終了日) {
+        this.開始日 = 開始日;
+        this.終了日 = 終了日;
+        this.shikibetsuTaishoPSMSearchKey = shikibetsuTaishoPSMSearchKey;
 
-        return new AtenaMybatisParameter(shikibetsuTaishoPSMSearchKey, this.開始日, this.終了日);
+        return new AtenaMybatisParameter(this.shikibetsuTaishoPSMSearchKey, this.開始日, this.終了日);
     }
 }

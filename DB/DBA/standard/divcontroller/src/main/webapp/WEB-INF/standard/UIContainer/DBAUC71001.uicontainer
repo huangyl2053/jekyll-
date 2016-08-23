@@ -37,7 +37,7 @@
      "layoutName": "DBA7010011",
      "layoutTitle": "他市町村住所地特例連絡票発行",
      "eventName": "再検索",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",

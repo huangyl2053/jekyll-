@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.FukaTaishoshaSearchSearchResultV
 import jp.co.ndensan.reams.db.dbz.business.core.validation.FukaTaishoshaSearchValidationMessage;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.SearchConditionDiv;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionary;
+
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
@@ -30,7 +31,7 @@ public final class TaishoshaSearchValidationHelper {
     }
 
     /**
-     * 最大表示件数バリデーションを行います。
+     * 画面上で設定された表示件数が、最大表示件数を超えていないかのバリデーションを行います。
      *
      * @param 最大表示件数 int
      * @param 最大表示件数入力値 TextBoxNum

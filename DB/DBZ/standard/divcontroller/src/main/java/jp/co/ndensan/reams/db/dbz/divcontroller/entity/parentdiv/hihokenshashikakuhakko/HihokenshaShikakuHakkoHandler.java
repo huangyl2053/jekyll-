@@ -263,8 +263,8 @@ public class HihokenshaShikakuHakkoHandler {
         private final FlexibleDate 制限期間終了日;
 
         KyufuSeigenShutsuryoku(RString 制限内容,
-                               FlexibleDate 制限期間開始日,
-                               FlexibleDate 制限期間終了日) {
+                FlexibleDate 制限期間開始日,
+                FlexibleDate 制限期間終了日) {
             this.制限内容 = 制限内容;
             this.制限期間開始日 = 制限期間開始日 == null ? FlexibleDate.EMPTY : 制限期間開始日;
             this.制限期間終了日 = 制限期間終了日 == null ? FlexibleDate.EMPTY : 制限期間終了日;
@@ -424,9 +424,9 @@ public class HihokenshaShikakuHakkoHandler {
         private final FlexibleDate 適用終了日;
 
         ShienJigyosha(RString 名称,
-                      FlexibleDate 届出日,
-                      FlexibleDate 適用開始日,
-                      FlexibleDate 適用終了日) {
+                FlexibleDate 届出日,
+                FlexibleDate 適用開始日,
+                FlexibleDate 適用終了日) {
             this.名称 = 名称;
             this.届出日 = 届出日;
             this.適用開始日 = 適用開始日 == null ? FlexibleDate.EMPTY : 適用開始日;

@@ -38,25 +38,19 @@
         </repository>
     </repositories>
     <properties>
+        <!-- MyBatisプラグイン用 -->
         <!-- 自業務公開系 DBXのバージョンと一致させること-->
-        <jp.co.ndensan.reams.dbx.version>1.10.0</jp.co.ndensan.reams.dbx.version>
+        <jp.co.ndensan.reams.dbxVersion>1.12.0</jp.co.ndensan.reams.dbxVersion>
         <!-- UZ -->
-        <jp.co.ndensan.reams.uz.version>1.10.0</jp.co.ndensan.reams.uz.version>
+        <jp.co.ndensan.reams.uz.version>1.12.0</jp.co.ndensan.reams.uz.version>
         <!-- 公開系 -->
-        <jp.co.ndensan.reams.ur.version>1.10.0</jp.co.ndensan.reams.ur.version>
-        <jp.co.ndensan.reams.uax.version>1.10.0</jp.co.ndensan.reams.uax.version>
-        <jp.co.ndensan.reams.uex.version>1.10.0</jp.co.ndensan.reams.uex.version>
-        <jp.co.ndensan.reams.uxx.version>1.10.0</jp.co.ndensan.reams.uxx.version>
-        <jp.co.ndensan.reams.cax.version>1.10.0</jp.co.ndensan.reams.cax.version>
+        <jp.co.ndensan.reams.urVersion>1.12.0</jp.co.ndensan.reams.urVersion>
+        <jp.co.ndensan.reams.uaxVersion>1.12.0</jp.co.ndensan.reams.uaxVersion>
+        <jp.co.ndensan.reams.uexVersion>1.12.0</jp.co.ndensan.reams.uexVersion>
+        <jp.co.ndensan.reams.uxxVersion>1.12.0</jp.co.ndensan.reams.uxxVersion>
+        <jp.co.ndensan.reams.caxVersion>1.12.0</jp.co.ndensan.reams.caxVersion>
         <!-- other -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- MyBatisプラグイン用 -->
-        <jp.co.ndensan.reams.dbxVersion>${jp.co.ndensan.reams.dbx.version}</jp.co.ndensan.reams.dbxVersion>
-        <jp.co.ndensan.reams.uaxVersion>${jp.co.ndensan.reams.uax.version}</jp.co.ndensan.reams.uaxVersion>
-        <jp.co.ndensan.reams.caxVersion>${jp.co.ndensan.reams.cax.version}</jp.co.ndensan.reams.caxVersion>
-        <jp.co.ndensan.reams.uxxVersion>${jp.co.ndensan.reams.uxx.version}</jp.co.ndensan.reams.uxxVersion>
-        <jp.co.ndensan.reams.uexVersion>${jp.co.ndensan.reams.uex.version}</jp.co.ndensan.reams.uexVersion>
-        <jp.co.ndensan.reams.urVersion>${jp.co.ndensan.reams.ur.version}</jp.co.ndensan.reams.urVersion>
     </properties>
     <dependencies>
         <dependency>
@@ -84,22 +78,22 @@
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.ura</groupId>
                 <artifactId>UraBusiness</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.ura</groupId>
                 <artifactId>UraEntity</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.ura</groupId>
                 <artifactId>UraDefinition</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.ura</groupId>
                 <artifactId>UraService</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>UraPersistence</artifactId>
@@ -110,38 +104,38 @@
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.ura</groupId>
                 <artifactId>UraBatchController</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.ura</groupId>
                 <artifactId>UraDivController</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
                 <classifier>classes</classifier>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.ura</groupId>
                 <artifactId>UraPersistence</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urb</groupId>
                 <artifactId>UrbBusiness</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urb</groupId>
                 <artifactId>UrbEntity</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urb</groupId>
                 <artifactId>UrbDefinition</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urb</groupId>
                 <artifactId>UrbService</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>UrbPersistence</artifactId>
@@ -152,38 +146,38 @@
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urb</groupId>
                 <artifactId>UrbBatchController</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urb</groupId>
                 <artifactId>UrbDivController</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
                 <classifier>classes</classifier>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urb</groupId>
                 <artifactId>UrbPersistence</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urc</groupId>
                 <artifactId>UrcBusiness</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urc</groupId>
                 <artifactId>UrcEntity</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urc</groupId>
                 <artifactId>UrcDefinition</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urc</groupId>
                 <artifactId>UrcService</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>UrcPersistence</artifactId>
@@ -194,38 +188,38 @@
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urc</groupId>
                 <artifactId>UrcBatchController</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urc</groupId>
                 <artifactId>UrcDivController</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
                 <classifier>classes</classifier>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urc</groupId>
                 <artifactId>UrcPersistence</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urd</groupId>
                 <artifactId>UrdBusiness</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urd</groupId>
                 <artifactId>UrdEntity</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urd</groupId>
                 <artifactId>UrdDefinition</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urd</groupId>
                 <artifactId>UrdService</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>UrdPersistence</artifactId>
@@ -236,38 +230,38 @@
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urd</groupId>
                 <artifactId>UrdBatchController</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urd</groupId>
                 <artifactId>UrdDivController</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
                 <classifier>classes</classifier>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urd</groupId>
                 <artifactId>UrdPersistence</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urf</groupId>
                 <artifactId>UrfBusiness</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urf</groupId>
                 <artifactId>UrfEntity</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urf</groupId>
                 <artifactId>UrfDefinition</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urf</groupId>
                 <artifactId>UrfService</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>UrfPersistence</artifactId>
@@ -278,38 +272,38 @@
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urf</groupId>
                 <artifactId>UrfBatchController</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urf</groupId>
                 <artifactId>UrfDivController</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
                 <classifier>classes</classifier>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urf</groupId>
                 <artifactId>UrfPersistence</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.uri</groupId>
                 <artifactId>UriBusiness</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.uri</groupId>
                 <artifactId>UriEntity</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.uri</groupId>
                 <artifactId>UriDefinition</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.uri</groupId>
                 <artifactId>UriService</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>UriPersistence</artifactId>
@@ -320,38 +314,38 @@
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.uri</groupId>
                 <artifactId>UriBatchController</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.uri</groupId>
                 <artifactId>UriDivController</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
                 <classifier>classes</classifier>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.uri</groupId>
                 <artifactId>UriPersistence</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.uru</groupId>
                 <artifactId>UruBusiness</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.uru</groupId>
                 <artifactId>UruEntity</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.uru</groupId>
                 <artifactId>UruDefinition</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.uru</groupId>
                 <artifactId>UruService</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>UruPersistence</artifactId>
@@ -362,38 +356,38 @@
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.uru</groupId>
                 <artifactId>UruBatchController</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.uru</groupId>
                 <artifactId>UruDivController</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
                 <classifier>classes</classifier>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.uru</groupId>
                 <artifactId>UruPersistence</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urz</groupId>
                 <artifactId>UrzBusiness</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urz</groupId>
                 <artifactId>UrzEntity</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urz</groupId>
                 <artifactId>UrzDefinition</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urz</groupId>
                 <artifactId>UrzService</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>UrzPersistence</artifactId>
@@ -404,39 +398,39 @@
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urz</groupId>
                 <artifactId>UrzBatchController</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urz</groupId>
                 <artifactId>UrzDivController</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
                 <classifier>classes</classifier>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ur.urz</groupId>
                 <artifactId>UrzPersistence</artifactId>
-                <version>${jp.co.ndensan.reams.ur.version}</version>
+                <version>${jp.co.ndensan.reams.urVersion}</version>
             </dependency>
             <!-- UA -->
             <dependency>
                 <groupId>jp.co.ndensan.reams.ua.uax</groupId>
                 <artifactId>UaxDefinition</artifactId>
-                <version>${jp.co.ndensan.reams.uax.version}</version>
+                <version>${jp.co.ndensan.reams.uaxVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ua.uax</groupId>
                 <artifactId>UaxEntity</artifactId>
-                <version>${jp.co.ndensan.reams.uax.version}</version>
+                <version>${jp.co.ndensan.reams.uaxVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ua.uax</groupId>
                 <artifactId>UaxBusiness</artifactId>
-                <version>${jp.co.ndensan.reams.uax.version}</version>
+                <version>${jp.co.ndensan.reams.uaxVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ua.uax</groupId>
                 <artifactId>UaxService</artifactId>
-                <version>${jp.co.ndensan.reams.uax.version}</version>
+                <version>${jp.co.ndensan.reams.uaxVersion}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>jp.co.ndensan.reams.ua.uax</groupId>
@@ -447,34 +441,34 @@
             <dependency>
                 <groupId>jp.co.ndensan.reams.ua.uax</groupId>
                 <artifactId>UaxPersistence</artifactId>
-                <version>${jp.co.ndensan.reams.uax.version}</version>
+                <version>${jp.co.ndensan.reams.uaxVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ua.uax</groupId>
                 <artifactId>UaxDivController</artifactId>
-                <version>${jp.co.ndensan.reams.uax.version}</version>
+                <version>${jp.co.ndensan.reams.uaxVersion}</version>
                 <classifier>classes</classifier>
             </dependency>
             <!-- UEX -->
             <dependency>
                 <groupId>jp.co.ndensan.reams.ue.uex</groupId>
                 <artifactId>UexDefinition</artifactId>
-                <version>${jp.co.ndensan.reams.uex.version}</version>
+                <version>${jp.co.ndensan.reams.uexVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ue.uex</groupId>
                 <artifactId>UexEntity</artifactId>
-                <version>${jp.co.ndensan.reams.uex.version}</version>
+                <version>${jp.co.ndensan.reams.uexVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ue.uex</groupId>
                 <artifactId>UexBusiness</artifactId>
-                <version>${jp.co.ndensan.reams.uex.version}</version>
+                <version>${jp.co.ndensan.reams.uexVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ue.uex</groupId>
                 <artifactId>UexService</artifactId>
-                <version>${jp.co.ndensan.reams.uex.version}</version>
+                <version>${jp.co.ndensan.reams.uexVersion}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>jp.co.ndensan.reams.ue.uex</groupId>
@@ -485,44 +479,44 @@
             <dependency>
                 <groupId>jp.co.ndensan.reams.ue.uex</groupId>
                 <artifactId>UexPersistence</artifactId>
-                <version>${jp.co.ndensan.reams.uex.version}</version>
+                <version>${jp.co.ndensan.reams.uexVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ue.uex</groupId>
                 <artifactId>UexDivController</artifactId>
-                <version>${jp.co.ndensan.reams.uex.version}</version>
+                <version>${jp.co.ndensan.reams.uexVersion}</version>
                 <classifier>classes</classifier>
             </dependency>
             <!-- UXX -->
             <dependency>
                 <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
                 <artifactId>UxxDefinition</artifactId>
-                <version>${jp.co.ndensan.reams.uxx.version}</version>
+                <version>${jp.co.ndensan.reams.uxxVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
                 <artifactId>UxxEntity</artifactId>
-                <version>${jp.co.ndensan.reams.uxx.version}</version>
+                <version>${jp.co.ndensan.reams.uxxVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
                 <artifactId>UxxBusiness</artifactId>
-                <version>${jp.co.ndensan.reams.uxx.version}</version>
+                <version>${jp.co.ndensan.reams.uxxVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
                 <artifactId>UxxService</artifactId>
-                <version>${jp.co.ndensan.reams.uxx.version}</version>
+                <version>${jp.co.ndensan.reams.uxxVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ca.cax</groupId>
                 <artifactId>CaxBusiness</artifactId>
-                <version>${jp.co.ndensan.reams.cax.version}</version>
+                <version>${jp.co.ndensan.reams.caxVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ca.cax</groupId>
                 <artifactId>CaxService</artifactId>
-                <version>${jp.co.ndensan.reams.cax.version}</version>
+                <version>${jp.co.ndensan.reams.caxVersion}</version>
             </dependency>
             <!-- ツール -->
             <dependency>
@@ -534,7 +528,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-<!--
+
     <build>
         <pluginManagement>
             <plugins>
@@ -583,10 +577,10 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <checkmode>full</checkmode>  <!- - full:DB接続を伴う完全なチェック, skip:チェックしない, default:1.9.1と同じ、DB接続なしのチェック - ->
+                    <checkmode>full</checkmode>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-    -->
+
 </project>

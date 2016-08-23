@@ -9,15 +9,12 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.ViewStateKeyCreator;
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005.input.FukaHikakuInput;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.DBB0320001KihonJohoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.DBB0320001StateName;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukaRirekiAllPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukaShokaiMainDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.dgFukaRirekiFukaRireki_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.ConversionUtil;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
@@ -26,7 +23,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * {@link FukaShokaiMainDiv}に対する処理をハンドリングします。
@@ -51,6 +47,7 @@ public class FukaShokaiMainHandler {
      */
     public DBB0320001StateName initializeWithFirstState() {
         FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
+
         if (taishoshaKey == null
             || taishoshaKey.is識別コードNullOrEmpty()
             || taishoshaKey.is被保険者番号NullOrEmpty()) {
@@ -60,7 +57,7 @@ public class FukaShokaiMainHandler {
         initializeHeader(this.div.getDBB0320001KihonJoho(), taishoshaKey);
         if (!taishoshaKey.get賦課年度().isValid()) {
             div.getCcdFukaRirekiAll().load(taishoshaKey.get被保険者番号());
-            return DBB0320001StateName.賦課履歴;
+            return DBB0320001StateName.賦課履歴_初回;
         }
         new FukakonkyoAndKiwariPresenter(this.div.getFukaShokaiControl(), this.div.getFukakonkyoAndKiwari())
                 .set賦課(taishoshaKey);
@@ -95,6 +92,7 @@ public class FukaShokaiMainHandler {
         IItemList<Fuka> selectedRows = this.div.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All().reversed();
         new FukaRirekiPanelPresenter(this.div.getFukaRirekiPanel())
                 .set賦課履歴(selectedRows);
+
     }
 
     /**
@@ -115,18 +113,24 @@ public class FukaShokaiMainHandler {
                 .get賦課履歴(fukaNendo, choteiNendo, tsuchishoNo, rirekiNo);
     }
 
-    /**
-     * 前履歴との比較をします。
-     */
-    public void compareWith前履歴() {
-        Fuka atoFuka = clicked賦課(div).get();
-        FukaShokaiKey atoRireki = ViewStateKeyCreator.createFukaShokaiKey(atoFuka, new AtenaMeisho(div.getCcdKaigoAtenaInfo().get氏名漢字()));
-        ViewStateHolder.put(ViewStateKeys.賦課照会キー, atoRireki);
+    public Optional<FukaShokaiKey> getClicked賦課履歴Key() {
+        Optional<Fuka> atoFuka = clicked賦課(div);
+        if (atoFuka.isPresent()) {
+            return Optional.of(ViewStateKeyCreator.createFukaShokaiKey(atoFuka.get(), new AtenaMeisho(div.getCcdKaigoAtenaInfo().get氏名漢字())));
+        }
+        return Optional.empty();
+    }
 
+    public Optional<FukaShokaiKey> get前賦課履歴Key(Optional<? extends FukaShokaiKey> 後賦課) {
+        if (!後賦課.isPresent()) {
+            return Optional.empty();
+        }
         final FukaManager manager = new FukaManager();
+        FukaShokaiKey atoFuka = 後賦課.get();
         Optional<Fuka> maeFuka = manager.get介護賦課For任意対象比較(atoFuka.get調定年度(), atoFuka.get賦課年度(), atoFuka.get通知書番号(), atoFuka.get履歴番号());
-        FukaShokaiKey maeRireki = maeFuka.isPresent() ? ViewStateKeyCreator.createFukaShokaiKey(
-                maeFuka.get(), new AtenaMeisho(div.getCcdKaigoAtenaInfo().get氏名漢字())) : FukaShokaiKey.EMPTY;
-        ViewStateHolder.put(ViewStateKeys.賦課比較キー, FukaHikakuInput.createFor前履歴との比較(atoRireki, maeRireki));
+        if (maeFuka.isPresent()) {
+            return Optional.of(ViewStateKeyCreator.createFukaShokaiKey(maeFuka.get(), new AtenaMeisho(div.getCcdKaigoAtenaInfo().get氏名漢字())));
+        }
+        return Optional.empty();
     }
 }

@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -92,7 +93,9 @@ public class DbT1002TekiyoJogaishaDac implements ISaveable<DbT1002TekiyoJogaisha
                                 eq(shikibetsuCode, 識別コード),
                                 (or(
                                         and(leq(tekiyoYMD, 年齢到達日), leq(年齢到達日, kaijoYMD)),
-                                        and(leq(tekiyoYMD, 年齢到達日), leq(kaijoYMD, null)))),
+                                        (or(and(leq(tekiyoYMD, 年齢到達日), isNULL(kaijoYMD)),
+                                                and(leq(tekiyoYMD, 年齢到達日), eq(kaijoYMD, ""))))
+                                )),
                                 eq(logicalDeletedFlag, false))).
                 toList(DbT1002TekiyoJogaishaEntity.class);
     }

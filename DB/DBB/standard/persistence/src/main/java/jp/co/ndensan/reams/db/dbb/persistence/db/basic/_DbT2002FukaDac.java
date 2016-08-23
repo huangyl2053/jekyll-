@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
 import static java.util.Objects.requireNonNull;
+import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.choteiNendo;
@@ -45,9 +46,10 @@ public class _DbT2002FukaDac {
      * @return DbT2002FukaEntity もしくは{@code null}
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
+    @CheckForNull
     public DbT2002FukaEntity selectByFukanendoSaishinPerHihokenshaNo(
             FlexibleYear 賦課年度,
-            HihokenshaNo 被保険者番号) throws NullPointerException {
+            HihokenshaNo 被保険者番号) {
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度_KEY.toString()));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号_KEY.toString()));
 
@@ -60,6 +62,31 @@ public class _DbT2002FukaDac {
                                 eq(hihokenshaNo, 被保険者番号))).
                 order(
                         by(choteiNendo, Order.DESC),
+                        by(tsuchishoNo, Order.DESC),
+                        by(rirekiNo, Order.DESC))
+                .limit(1)
+                .toObject(DbT2002FukaEntity.class);
+    }
+
+    /**
+     * 指定の被保険者について、最新の介護賦課を返します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT2002FukaEntity もしくは{@code null}
+     * @throws NullPointerException 引数のいずれかが{@code null}の場合
+     */
+    @CheckForNull
+    public DbT2002FukaEntity selectSaishinPerHihokenshaNo(HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号_KEY.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT2002Fuka.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                order(
+                        by(choteiNendo, Order.DESC),
+                        by(fukaNendo, Order.DESC),
                         by(tsuchishoNo, Order.DESC),
                         by(rirekiNo, Order.DESC))
                 .limit(1)

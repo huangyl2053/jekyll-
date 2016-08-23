@@ -292,8 +292,13 @@ public class JiGyoSyaHandler {
             div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(true);
             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(DbBusinessConfig.
                     get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+
             div.getTaishoJigyoshaKensaku().getDdlKennCode().setDataSource(get県コード());
-            div.getTaishoJigyoshaKensaku().getDdlGunshiCode().setDataSource(get郡市コード(mode));
+            Association association = finder.getAssociation();
+            RString 都道府県コード = association.get地方公共団体コード().code都道府県RString();
+            div.getTaishoJigyoshaKensaku().getDdlKennCode().setSelectedKey(都道府県コード);
+            div.getTaishoJigyoshaKensaku().getDdlGunshiCode().setDataSource(get郡市コード(mode, 都道府県コード));
+
             div.getTaishoJigyoshaKensaku().getDdlServiceShurui().setDataSource(getサービス種類());
             div.getTaishoJigyoshaKensaku().getDdlJigyoshaKubun().setDataSource(get事業者区分());
             div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setDataSource(get検索条件区分());
@@ -301,7 +306,6 @@ public class JiGyoSyaHandler {
             div.getKennsakuJyokenn().setVisible(true);
             div.getKennsakuJyokenn().getServiceJigyosha().setDisplayNone(false);
             div.getOtherTokureiShisetsu().setDisplayNone(true);
-            Association association = finder.getAssociation();
             div.getTaishoJigyoshaKensaku().getDdlKennCode().setSelectedKey(association.get地方公共団体コード() == null
                     ? RString.EMPTY : association.get地方公共団体コード().value().substring(0, 2));
             search_GunshiCode(mode);
@@ -481,7 +485,7 @@ public class JiGyoSyaHandler {
         return dataSource;
     }
 
-    private List<KeyValueDataSource> get郡市コード(JigyoshaMode mode) {
+    private List<KeyValueDataSource> get郡市コード(JigyoshaMode mode, RString 都道府県コード) {
 
         JigyoshaInputGuideFinder jigyosha = new JigyoshaInputGuideFinder();
         List<KeyValueDataSource> dataSource = new ArrayList();
@@ -494,11 +498,13 @@ public class JiGyoSyaHandler {
 
             for (GunshiCodeJigyoshaInputGuide entity : gunshiCodeJigyoshaInputGuide.records()) {
 
-                KeyValueDataSource KeyValue = new KeyValueDataSource();
-                KeyValue.setKey(entity.get郡市区コード());
-                KeyValue.setValue(entity.get郡市区名称());
+                if (entity.get都道府県コード().equals(都道府県コード)) {
+                    KeyValueDataSource KeyValue = new KeyValueDataSource();
+                    KeyValue.setKey(entity.get郡市区コード());
+                    KeyValue.setValue(entity.get郡市区名称());
 
-                dataSource.add(KeyValue);
+                    dataSource.add(KeyValue);
+                }
             }
         }
 

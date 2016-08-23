@@ -9,7 +9,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
+import jp.co.ndensan.reams.db.dba.service.core.hihokenshashohakkokanribo.HihokenshashoHakkoKanriboFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.SikakuKikan;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.TokusoRireki;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
@@ -75,8 +77,8 @@ public class HihokenshashikakusoshitsuManager {
 
         DbT1001HihokenshaDaichoEntity dbT1001HihokenshaDaichoEntity = hihokenshaShutokuJyoho.get被保険者台帳管理();
         dbT1001HihokenshaDaichoEntity.setIdoYMD(資格喪失年月日);
-        dbT1001HihokenshaDaichoEntity.setIdoJiyuCode(資格喪失事由コード);
-        dbT1001HihokenshaDaichoEntity.setShikakuSoshitsuJiyuCode(資格喪失事由コード);
+        dbT1001HihokenshaDaichoEntity.setIdoJiyuCode(ShikakuSoshitsuJiyu.他特例者.getコード());
+        dbT1001HihokenshaDaichoEntity.setShikakuSoshitsuJiyuCode(ShikakuSoshitsuJiyu.他特例者.getコード());
         dbT1001HihokenshaDaichoEntity.setShikakuSoshitsuYMD(資格喪失年月日);
         dbT1001HihokenshaDaichoEntity.setShikakuSoshitsuTodokedeYMD(資格喪失届出年月日);
 
@@ -118,28 +120,44 @@ public class HihokenshashikakusoshitsuManager {
      * @param 識別コード 識別コード
      * @param 被保険者番号 被保険者番号
      */
-    public void shikakuSoshitsuCheck(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+    public boolean shikakuSoshitsuCheck(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
         HihokenshaShikakuShutokuManager manager = HihokenshaShikakuShutokuManager.createInstance();
         HihokenshaShutokuJyoho hihokenshaShutokuJyoho = manager.getSaishinDeta(識別コード, 被保険者番号);
         if (hihokenshaShutokuJyoho != null) {
             FlexibleDate 資格取得年月日 = hihokenshaShutokuJyoho.get資格取得年月日();
             FlexibleDate 資格喪失年月日 = hihokenshaShutokuJyoho.get資格喪失年月日();
-            if ((資格取得年月日 != null && !資格取得年月日.isEmpty()) && (資格喪失年月日 == null || 資格喪失年月日.isEmpty())) {
-                解除年月日の再判定(hihokenshaShutokuJyoho);
+            if ((資格喪失年月日 != null && !資格喪失年月日.isEmpty())) {
+                解除期間情報の判定(hihokenshaShutokuJyoho);
+            }
+            if ((資格喪失年月日 == null || 資格喪失年月日.isEmpty())) {
+                解除期間情報の再判定(hihokenshaShutokuJyoho);
             }
             if ((資格取得年月日 != null && !資格取得年月日.isEmpty()) && (資格喪失年月日 != null && !資格喪失年月日.isEmpty())) {
                 throw new ApplicationException(DbaErrorMessages.資格喪失登録不可.getMessage());
             }
+            return (true);
         } else {
-            throw new ApplicationException(DbaErrorMessages.資格喪失登録不可.getMessage());
+            return (false);
         }
     }
 
-    private void 解除年月日の再判定(HihokenshaShutokuJyoho hihokenshaShutokuJyoho) {
+    private void 解除期間情報の判定(HihokenshaShutokuJyoho hihokenshaShutokuJyoho) {
         FlexibleDate 適用年月日 = hihokenshaShutokuJyoho.get適用年月日();
-        FlexibleDate 解除年月日 = hihokenshaShutokuJyoho.get解除年月日();
-        if ((適用年月日 != null && !適用年月日.isEmpty()) && (解除年月日 == null || 解除年月日.isEmpty())) {
-            throw new ApplicationException(DbaErrorMessages.住所地特例として適用済.getMessage());
+        FlexibleDate 資格喪失日 = hihokenshaShutokuJyoho.get資格喪失年月日();
+        if ((適用年月日 != null && !適用年月日.isEmpty())) {
+            if ((資格喪失日.compareTo(適用年月日)) > 0) {
+                throw new ApplicationException(DbzErrorMessages.他の期間情報との期間重複.getMessage());
+            }
+        }
+    }
+
+    private void 解除期間情報の再判定(HihokenshaShutokuJyoho hihokenshaShutokuJyoho) {
+        FlexibleDate 適用年月日 = hihokenshaShutokuJyoho.get適用年月日();
+        FlexibleDate 資格取得年月日 = hihokenshaShutokuJyoho.get資格取得年月日();
+        if ((適用年月日 != null && !適用年月日.isEmpty())) {
+            if ((資格取得年月日.compareTo(適用年月日)) > 0) {
+                throw new ApplicationException(DbzErrorMessages.他の期間情報との期間重複.getMessage());
+            }
         }
     }
 

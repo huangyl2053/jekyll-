@@ -81,6 +81,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      * @return ResponseData<ShisetsuNyutaishoRirekiKanriDiv>
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoKakutei(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {
+
         ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).validateForUpdate();
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
