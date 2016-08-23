@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaJokyo.NinteiChosaJokyo;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaJokyo;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class NinteiChosaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,10 +30,10 @@ public class NinteiChosaDiv extends Panel {
     private TextBox txtNinteiChosainName;
     @JsonProperty("txtNinteiChosaItakusakiCode")
     private TextBoxCode txtNinteiChosaItakusakiCode;
-    @JsonProperty("btnItakusakiGuide")
-    private ButtonDialog btnItakusakiGuide;
     @JsonProperty("txtNinteiChosaItakusakiName")
     private TextBox txtNinteiChosaItakusakiName;
+    @JsonProperty("btnItakusakiGuide")
+    private ButtonDialog btnItakusakiGuide;
     @JsonProperty("btnChosainJohoClear")
     private Button btnChosainJohoClear;
     @JsonProperty("txtNinteiChosaYubinNo")
@@ -130,24 +130,6 @@ public class NinteiChosaDiv extends Panel {
     }
 
     /*
-     * getbtnItakusakiGuide
-     * @return btnItakusakiGuide
-     */
-    @JsonProperty("btnItakusakiGuide")
-    public ButtonDialog getBtnItakusakiGuide() {
-        return btnItakusakiGuide;
-    }
-
-    /*
-     * setbtnItakusakiGuide
-     * @param btnItakusakiGuide btnItakusakiGuide
-     */
-    @JsonProperty("btnItakusakiGuide")
-    public void setBtnItakusakiGuide(ButtonDialog btnItakusakiGuide) {
-        this.btnItakusakiGuide = btnItakusakiGuide;
-    }
-
-    /*
      * gettxtNinteiChosaItakusakiName
      * @return txtNinteiChosaItakusakiName
      */
@@ -163,6 +145,24 @@ public class NinteiChosaDiv extends Panel {
     @JsonProperty("txtNinteiChosaItakusakiName")
     public void setTxtNinteiChosaItakusakiName(TextBox txtNinteiChosaItakusakiName) {
         this.txtNinteiChosaItakusakiName = txtNinteiChosaItakusakiName;
+    }
+
+    /*
+     * getbtnItakusakiGuide
+     * @return btnItakusakiGuide
+     */
+    @JsonProperty("btnItakusakiGuide")
+    public ButtonDialog getBtnItakusakiGuide() {
+        return btnItakusakiGuide;
+    }
+
+    /*
+     * setbtnItakusakiGuide
+     * @param btnItakusakiGuide btnItakusakiGuide
+     */
+    @JsonProperty("btnItakusakiGuide")
+    public void setBtnItakusakiGuide(ButtonDialog btnItakusakiGuide) {
+        this.btnItakusakiGuide = btnItakusakiGuide;
     }
 
     /*
