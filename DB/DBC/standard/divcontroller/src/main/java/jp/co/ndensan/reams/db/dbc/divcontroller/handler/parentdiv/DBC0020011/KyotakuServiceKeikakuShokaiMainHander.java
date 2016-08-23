@@ -166,7 +166,8 @@ public class KyotakuServiceKeikakuShokaiMainHander {
             row.getRiyoYM().setValue(new RDate(result.get利用年月().toString()));
             row.setKoshinKubun(KyufukanrihyoSakuseiKubun.toValue(result.get更新区分()).get名称());
             row.getKoshinYMD().setValue(DateConverter.flexibleDateToRDate(result.get更新年月日()));
-            row.getSofuYM().setValue(result.get送付年月() == null ? null
+            row.getSofuYM().setValue(result.get送付年月() == null
+                    || RString.EMPTY.equals(result.get送付年月().toDateString()) ? null
                     : new RDate(result.get送付年月().toString()));
             rowList.add(row);
         }

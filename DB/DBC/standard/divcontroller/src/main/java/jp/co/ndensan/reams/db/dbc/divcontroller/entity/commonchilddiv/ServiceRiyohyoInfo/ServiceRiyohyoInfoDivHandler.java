@@ -1360,7 +1360,7 @@ public class ServiceRiyohyoInfoDivHandler {
     private void 限度チェック(KyufuJikoSakuseiResult result) {
         Decimal 区分限度 = nullToZero(result.get区分限度超過単位()).add(nullToZero(result.get区分限度内単位()));
         Decimal 種類限度 = nullToZero(result.get種類限度超過単位()).add(nullToZero(result.get種類限度内単位()));
-        if (区分限度.compareTo(Decimal.ZERO) >= 0) {
+        if (区分限度.compareTo(Decimal.ZERO) <= 0) {
             return;
         }
         if (Decimal.ZERO.compareTo(種類限度) < 0) {
