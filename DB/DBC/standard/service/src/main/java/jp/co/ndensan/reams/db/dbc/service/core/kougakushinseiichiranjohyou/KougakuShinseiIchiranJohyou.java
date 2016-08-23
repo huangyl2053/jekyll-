@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakushinseiichiranjoh
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakushinseiichiranjohyou.KougakuShinseiIchiranJohyouEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kougakushinseiichiranjohyou.IKougakuShinseiIchiranJohyouMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -21,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonC
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -42,8 +42,6 @@ public class KougakuShinseiIchiranJohyou {
 
     private final MapperProvider mapperProvider;
     private final DbT1001HihokenshaDaichoDac 被保険者台帳管理Dac;
-    private static final RString 介護資格喪失事由 = new RString("0010");
-    private static final RString 介護資格取得事由 = new RString("0007");
 
     /**
      * コンストラクタです。
@@ -127,7 +125,7 @@ public class KougakuShinseiIchiranJohyou {
         LasdecCode 市町村コード = LasdecCode.EMPTY;
         if (被保険者台帳管理1 != null && 被保険者台帳管理1.getIdoYMD().getYearMonth().compareTo(サービス年月) < 0) {
             List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                    new CodeShubetsu(介護資格喪失事由), FlexibleDate.getNowDate());
+                    DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(), FlexibleDate.getNowDate());
             for (UzT0007CodeEntity list : codeList) {
                 if (list.getコード().value().equals(被保険者台帳管理1.getIdoJiyuCode())) {
                     throw new ApplicationException(DbcErrorMessages.対象年月被保険者データなし.getMessage());
@@ -172,7 +170,7 @@ public class KougakuShinseiIchiranJohyou {
     private LasdecCode get市町村コード(DbT1001HihokenshaDaichoEntity 被保険者台帳管理) {
         LasdecCode 市町村コード;
         List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                new CodeShubetsu(介護資格取得事由), FlexibleDate.getNowDate());
+                DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(), FlexibleDate.getNowDate());
         for (UzT0007CodeEntity list : codeList) {
             if (list.getコード().value().equals(被保険者台帳管理.getIdoJiyuCode())) {
                 throw new ApplicationException(DbcErrorMessages.対象年月被保険者データなし.getMessage());
