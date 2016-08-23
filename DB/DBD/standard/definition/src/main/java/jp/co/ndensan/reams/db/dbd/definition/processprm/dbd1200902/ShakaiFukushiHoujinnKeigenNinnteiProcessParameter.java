@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.chohyoikkatsu.Tanpy
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.ShakaiFukushiHoujinnKeigenNinnteiMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +28,7 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcessParameter implements IBatch
     private FlexibleDate 年度終了日;
     private FlexibleDate 決定日FROM;
     private FlexibleDate 決定日TO;
-    private RDate 認定証の交付日;
+    private FlexibleDate 認定証の交付日;
     private Long 改頁出力順ID;
 
     /**
@@ -48,7 +47,7 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcessParameter implements IBatch
             FlexibleDate 年度終了日,
             FlexibleDate 決定日FROM,
             FlexibleDate 決定日TO,
-            RDate 認定証の交付日,
+            FlexibleDate 認定証の交付日,
             Long 改頁出力順ID) {
         this.単票発行区分 = 単票発行区分;
         this.年度開始日 = 年度開始日;
