@@ -54,7 +54,7 @@
         <result property="今回調査員_電話番号" column="今回調査員_電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="今回調査員_調査員資格" column="今回調査員_調査員資格" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="今回調査員_所属機関名称" column="今回調査員_所属機関名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="今回調査員_状況フラグ" column="今回調査員_状況フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回調査員_状況フラグ" column="今回調査員_状況フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="今回申請_主治医医療機関コード" column="今回申請_主治医医療機関コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="今回申請_主治医コード" column="今回申請_主治医コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="今回主治医医療機関_医療機関名称" column="今回主治医医療機関_医療機関名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
