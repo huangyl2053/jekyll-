@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7063KaigoJigyoshaShite
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
@@ -39,13 +38,17 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -66,6 +69,8 @@ public class JukyushaTeiseiRenrakuhyoToroku {
     private static final RString サービス種類コード_46 = new RString("46");
     private static final RString 基本情報準拠区分_0 = new RString("0");
     private static final RString 基本情報準拠区分_1 = new RString("1");
+    private static final RString 介護資格取得事由 = new RString("0007");
+    private static final RString 介護資格喪失事由 = new RString("0010");
 
     /**
      * コンストラクタです。
@@ -118,6 +123,9 @@ public class JukyushaTeiseiRenrakuhyoToroku {
                 証記載保険者番号 = 証記載保険者番号と広域保険者番号.get(0);
             }
             FlexibleDate システム日付 = new FlexibleDate(RDate.getNowDate().toDateString());
+            if (被保険者番号 == null) {
+                被保険者番号 = new HihokenshaNo(RString.EMPTY);
+            }
             受給者訂正 = new JukyushaIdoRenrakuhyo(
                     システム日付, RString.EMPTY, RString.EMPTY, 証記載保険者番号, 被保険者番号, 履歴番号);
             JukyushaIdoRenrakuhyoBuilder 受給者訂正Builder = 受給者訂正.createBuilderForEdit();
@@ -134,8 +142,9 @@ public class JukyushaTeiseiRenrakuhyoToroku {
             受給者訂正 = 受給者訂正Builder.build();
         } else {
             DbT3001JukyushaIdoRenrakuhyoEntity 受給者訂正Entity
-                    = dbt3001Dac.select受給者訂正情報(被保険者番号.getColumnValue(),
-                            new RString(異動日.toString()), 論理削除フラグ, 履歴番号);
+                    = dbt3001Dac.select受給者訂正情報(被保険者番号 == null ? null : 被保険者番号.getColumnValue(),
+                            異動日 == null ? null : new RString(異動日.toString()),
+                            論理削除フラグ, 履歴番号);
             if (受給者訂正Entity == null) {
                 return null;
             }
@@ -162,7 +171,7 @@ public class JukyushaTeiseiRenrakuhyoToroku {
                 || DonyuKeitaiCode.事務構成市町村.getCode().equals(導入形態コード.getKey())) {
             List<KoikiZenShichosonJoho> 市町村情報 = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records();
             証記載保険者番号 = 市町村情報.get(0).get証記載保険者番号();
-        } else {
+        } else if (被保険者番号 != null && 異動日 != null) {
             DbT1001HihokenshaDaichoEntity dbt1001Entity = get市町村コードと広住例措置元市町村コード(被保険者番号, 異動日);
             LasdecCode 市町村コード = null;
             if (dbt1001Entity.getKoikinaiTokureiSochimotoShichosonCode() != null) {
@@ -192,22 +201,34 @@ public class JukyushaTeiseiRenrakuhyoToroku {
      * @return DbT1001HihokenshaDaichoEntity
      */
     private DbT1001HihokenshaDaichoEntity get市町村コードと広住例措置元市町村コード(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
-        DbT1001HihokenshaDaichoEntity dbt1001Entity = dbt1001Dac.selectByHihokenshaNo(被保険者番号);
-        if (dbt1001Entity == null) {
-            return new DbT1001HihokenshaDaichoEntity();
-        }
-        if (dbt1001Entity.getIdoYMD().equals(異動日)) {
-            return dbt1001Entity;
-        } else if (dbt1001Entity.getIdoYMD().isBefore(異動日)) {
-            if (DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu().getColumnValue().equals(dbt1001Entity.getIdoJiyuCode())) {
-                throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(被保険者.toString()));
+        DbT1001HihokenshaDaichoEntity maxEntity
+                = dbt1001Dac.selectMax異動日(被保険者番号, 異動日.getYearMonth());
+        if (maxEntity != null && maxEntity.getIdoYMD().isBeforeOrEquals(異動日)) {
+            if (maxEntity.getIdoYMD().equals(異動日)) {
+                return maxEntity;
             }
-            return dbt1001Entity;
+            List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                    new CodeShubetsu(介護資格喪失事由), FlexibleDate.getNowDate());
+            for (UzT0007CodeEntity list : codeList) {
+                if (list.getコード().value().equals(maxEntity.getIdoJiyuCode())) {
+                    throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(被保険者.toString()));
+                }
+            }
+            return maxEntity;
         } else {
-            if (DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu().getColumnValue().equals(dbt1001Entity.getIdoJiyuCode())) {
+            DbT1001HihokenshaDaichoEntity minEntity
+                    = dbt1001Dac.selectMin異動日(被保険者番号, 異動日.getYearMonth());
+            if (minEntity == null) {
                 throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(被保険者.toString()));
             }
-            return dbt1001Entity;
+            List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                    new CodeShubetsu(介護資格取得事由), FlexibleDate.getNowDate());
+            for (UzT0007CodeEntity list : codeList) {
+                if (list.getコード().value().equals(minEntity.getIdoJiyuCode())) {
+                    throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(被保険者.toString()));
+                }
+            }
+            return minEntity;
         }
     }
 
