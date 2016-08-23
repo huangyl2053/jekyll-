@@ -1357,6 +1357,8 @@
         <id column="SetainJohoTemp_taishoTsuki"  />
         <id column="SetainJohoTemp_setaiCode"  />
         <id column="SetainJohoTemp_shikibetsuCode"  />
+        <id column="urV0508SeikatsuHogoJukyusha_shikibetsuCode"  />
+        <id column="urV0508SeikatsuHogoJukyusha_jukyuKaishiYMD"  />
         <result property="判定基準日" column="hanteiKijunYMD"
                 typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <association property="判定対象者" 
@@ -1437,8 +1439,8 @@
     </resultMap>
 
     <resultMap id="ResultMap_SetainJohoTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetainJohoTempEntity" autoMapping="true">
-        <result property="hihokenshaNo" column="SetainJohoTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="taishoNendo" column="SetainJohoTemp_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaNo" column="SetainJohoTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="taishoNendo" column="SetainJohoTemp_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
     </resultMap>
     
     <sql id="allColumns_TuikaHanteiTaishoshaTemp">
