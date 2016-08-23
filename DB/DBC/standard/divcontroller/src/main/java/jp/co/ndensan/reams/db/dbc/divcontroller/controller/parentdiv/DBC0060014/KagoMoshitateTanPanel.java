@@ -41,39 +41,27 @@ public class KagoMoshitateTanPanel {
      * @return 画面設計_DBC0060014_短期入所サービスの給付管理照会
      */
     public ResponseData<KagoMoshitateTanPanelDiv> onLoad(KagoMoshitateTanPanelDiv div) {
-
         TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
         ShikibetsuCode shikibetsuCode = key.get識別コード();
         div.getCommonKaigpAtenainfoChildDiv1().initialize(shikibetsuCode);
         KyufuKanrihyoShokaiDataModel 対象者一覧
                 = ViewStateHolder.get(ViewStateKeys.給付管理票200604Entity, KyufuKanrihyoShokaiDataModel.class);
-        if (対象者一覧.get被保険者番号() == null || 対象者一覧.get被保険者番号().isEmpty()) {
-            onClick_Check();
+        ValidationMessageControlPairs pairs = getValidationHandler().validateFor被保険者番号(対象者一覧);
+        if (pairs.iterator().hasNext()) {
             div.getCommonKaigoshikakuKihonChildDiv2().setVisible(false);
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
         } else {
             div.getCommonKaigoshikakuKihonChildDiv2().initialize(対象者一覧.get被保険者番号());
         }
         List<KyufuKanrihyoShokaiDataModel> 対象者一覧list
                 = ViewStateHolder.get(ViewStateKeys.給付管理明細一覧, ArrayList.class);
-        Boolean tanflg = ViewStateHolder.get(ViewStateKeys.訪問通所サービスフラグ, Boolean.class);
-        if (tanflg) {
-            onClick_BtnTanki(div);
+        boolean tanflg = ViewStateHolder.get(ViewStateKeys.訪問通所サービスフラグ, Boolean.class);
+        if (tanflg && 対象者一覧list != null) {
+            getHandler(div).setShohinSourcre(対象者一覧list);
         }
         アクセスログ(対象者一覧.get被保険者番号());
-        getHandler(div).initialize(対象者一覧, 対象者一覧list, tanflg);
-        return createResponse(div);
-    }
-
-    /**
-     * チェックです。
-     *
-     * @param div 画面情報
-     * @return ResponseData<KagoMoshitateTanPanelDiv>
-     */
-    private ValidationMessageControlPairs onClick_Check() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        getValidationHandler().被保険者番号チェック(validationMessages);
-        return validationMessages;
+        getHandler(div).initialize(対象者一覧, 対象者一覧list);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -83,10 +71,11 @@ public class KagoMoshitateTanPanel {
      * @return ResponseData<KagoMoshitateTanPanelDiv>
      */
     public ResponseData<KagoMoshitateTanPanelDiv> onClick_BtnTanki(KagoMoshitateTanPanelDiv div) {
-        ViewStateHolder.get(ViewStateKeys.給付管理明細一覧, ArrayList.class);
-        ViewStateHolder.get(ViewStateKeys.給付管理票200604Entity, KyufuKanrihyoShokaiDataModel.class);
-        ViewStateHolder.get(ViewStateKeys.訪問通所サービスフラグ, Boolean.class);
-        ViewStateHolder.get(ViewStateKeys.短期入所サービスフラグ, Boolean.class);
+        ViewStateHolder.put(ViewStateKeys.給付管理明細一覧, ViewStateHolder.get(ViewStateKeys.給付管理明細一覧, ArrayList.class));
+        ViewStateHolder.put(ViewStateKeys.給付管理票200604Entity,
+                ViewStateHolder.get(ViewStateKeys.給付管理票200604Entity, KyufuKanrihyoShokaiDataModel.class));
+        ViewStateHolder.put(ViewStateKeys.訪問通所サービスフラグ, ViewStateHolder.get(ViewStateKeys.訪問通所サービスフラグ, Boolean.class));
+        ViewStateHolder.put(ViewStateKeys.短期入所サービスフラグ, ViewStateHolder.get(ViewStateKeys.短期入所サービスフラグ, Boolean.class));
         return ResponseData.of(div).forwardWithEventName(DBC0060014TransitionEventName.訪問通所サービスへ).respond();
     }
 
@@ -116,10 +105,6 @@ public class KagoMoshitateTanPanel {
 
     private KagoMoshitateTanPanelHandler getHandler(KagoMoshitateTanPanelDiv div) {
         return new KagoMoshitateTanPanelHandler(div);
-    }
-
-    private ResponseData<KagoMoshitateTanPanelDiv> createResponse(KagoMoshitateTanPanelDiv div) {
-        return ResponseData.of(div).respond();
     }
 
     private KagoMoshitateTanPanelValidationHandler getValidationHandler() {
