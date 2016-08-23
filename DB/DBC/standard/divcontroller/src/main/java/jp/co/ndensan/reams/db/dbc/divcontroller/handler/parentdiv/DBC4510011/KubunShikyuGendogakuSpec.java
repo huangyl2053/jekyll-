@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4510011.Kubu
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4510011.dgServiceShurui_Row;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link KubunShikyuGendogakuDiv}の仕様クラスです。 <br> {@link KubunShikyuGendogakuDiv}における画面としての仕様を定義しています。
@@ -77,10 +78,10 @@ public enum KubunShikyuGendogakuSpec implements IPredicate<KubunShikyuGendogakuD
          * @param div DvShikyuNinteiParamDiv
          */
         public static boolean isが各必須入力項目の必須入力チェック場合(KubunShikyuGendogakuDiv div) {
-            return (div.getServiceShuruiShousai().getTxtServiceCode().getValue() != null
+            return (!RString.isNullOrEmpty(div.getServiceShuruiShousai().getTxtServiceCode().getValue())
                     && div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().getValue() != null
-                    && div.getServiceShuruiShousai().getTxtServiceMeisho().getValue() != null
-                    && div.getServiceShuruiShousai().getTxtServiceRyakusho().getValue() != null);
+                    && !RString.isNullOrEmpty(div.getServiceShuruiShousai().getTxtServiceMeisho().getValue())
+                    && !RString.isNullOrEmpty(div.getServiceShuruiShousai().getTxtServiceRyakusho().getValue()));
         }
 
         private static boolean isYMCompare(RDate startTimeRow, RDate endTimeRow, RDate startDate, RDate endDate) {

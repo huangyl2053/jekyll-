@@ -183,12 +183,10 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEditor implements IFutanG
             if (new RString("1").equals(this.帳票情報.get住所地特例フラグ())) {
                 source.listLower_5 = new RString("*");
             }
-            if (this.帳票情報.get非課税年金勘案額() != null) {
-                if (this.帳票情報.get非課税年金勘案額().compareTo(Decimal.ZERO) == 0) {
-                    source.listLower_6 = RString.EMPTY;
-                } else {
-                    source.listLower_6 = new RString("*");
-                }
+            if (this.帳票情報.get非課税年金勘案額() != null && this.帳票情報.get非課税年金勘案額().compareTo(Decimal.ZERO) == 0) {
+                source.listLower_6 = RString.EMPTY;
+            } else {
+                source.listLower_6 = new RString("*");
             }
             if (this.帳票情報.get住民となった日() != null) {
                 source.listLower_7 = this.帳票情報.get住民となった日().wareki().toDateString();

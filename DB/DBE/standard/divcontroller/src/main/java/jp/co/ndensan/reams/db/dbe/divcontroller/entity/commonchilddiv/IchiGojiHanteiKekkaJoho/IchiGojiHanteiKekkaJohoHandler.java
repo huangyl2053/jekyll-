@@ -47,7 +47,7 @@ public class IchiGojiHanteiKekkaJohoHandler {
     /**
      * 画面初期化処理です。
      *
-     * @param business
+     * @param business 要介護認定一五次判定結果情報
      */
     public void onLoad(IchiGojiHanteiKekkaJohoBusiness business) {
         if (!business.isEmpty()) {
@@ -124,7 +124,7 @@ public class IchiGojiHanteiKekkaJohoHandler {
     /**
      * 呼び出し元画面への戻り値設定。
      *
-     * @param ビジネス情報
+     * @param ビジネス情報 ビジネス情報
      */
     public void 呼び出し元画面への戻り値(IchiGojiHanteiKekkaJohoBusiness ビジネス情報) {
         IchiGojiHanteiKekkaJoho 情報 = new IchiGojiHanteiKekkaJoho(new ShinseishoKanriNo(div.getHdnShinseishoKanriNo()));

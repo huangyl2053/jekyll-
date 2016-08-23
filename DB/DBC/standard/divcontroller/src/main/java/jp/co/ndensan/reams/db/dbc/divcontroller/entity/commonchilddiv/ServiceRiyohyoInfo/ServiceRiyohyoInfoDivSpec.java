@@ -60,7 +60,7 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
                 @Override
                 public boolean apply(ServiceRiyohyoInfoDiv div) {
                     Decimal 割引適用後率 = div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().getValue();
-                    return Decimal.ONE.compareTo(割引適用後率) >= 0;
+                    return 0 <= Decimal.ONE.compareTo(割引適用後率);
                 }
             },
     /**
@@ -70,7 +70,7 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
                 @Override
                 public boolean apply(ServiceRiyohyoInfoDiv div) {
                     Decimal 回数 = div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getValue();
-                    return Decimal.ZERO.compareTo(回数) >= 0;
+                    return 0 <= Decimal.ZERO.compareTo(回数);
                 }
             },
     /**

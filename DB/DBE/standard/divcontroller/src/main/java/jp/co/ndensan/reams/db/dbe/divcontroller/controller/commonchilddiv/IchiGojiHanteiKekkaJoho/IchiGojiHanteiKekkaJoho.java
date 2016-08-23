@@ -41,7 +41,7 @@ public class IchiGojiHanteiKekkaJoho {
     }
 
     /**
-     * 戻る　ボタン押下します。
+     * 戻る ボタン押下します。
      *
      * @param div 画面の情報
      * @return ResponseData<IchiGojiHanteiKekkaJohoDiv>
@@ -51,7 +51,7 @@ public class IchiGojiHanteiKekkaJoho {
     }
 
     /**
-     * 確定　ボタン押下します。
+     * 確定 ボタン押下します。
      *
      * @param div 画面の情報
      * @return ResponseData<IchiGojiHanteiKekkaJohoDiv>

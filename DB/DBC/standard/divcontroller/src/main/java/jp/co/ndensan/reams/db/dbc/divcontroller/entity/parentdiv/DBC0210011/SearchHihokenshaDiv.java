@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * SearchHihokensha のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-2100-010 jiangzongyue
  */
 public class SearchHihokenshaDiv extends Panel {
 

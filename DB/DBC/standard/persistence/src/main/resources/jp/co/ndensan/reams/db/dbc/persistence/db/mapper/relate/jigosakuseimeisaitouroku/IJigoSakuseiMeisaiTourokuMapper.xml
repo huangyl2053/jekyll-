@@ -65,6 +65,7 @@
         <result property="合計フラグ" column="合計フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="定額利用者負担単価金額" column="定額利用者負担単価金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="限度額対象外フラグ" column="限度額対象外フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用者負担定率定額区分" column="利用者負担定率定額区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="getサービス利用票データ" resultMap="resultMap_KyufuJikoSakuseiEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KyufuJikoSakuseiParameter" fetchSize="500">
@@ -91,7 +92,8 @@
         A.事業者コード AS 事業者コード,
         A.合計フラグ AS 合計フラグ,
         A.定額利用者負担単価金額 AS 定額利用者負担単価金額,
-        DbT7131KaigoServiceNaiyou."gendogakuTaishogaiFlag" AS 限度額対象外フラグ
+        DbT7131KaigoServiceNaiyou."gendogakuTaishogaiFlag" AS 限度額対象外フラグ,
+        DbT7131KaigoServiceNaiyou."riyosyaFutanTeiritsuTeigakuKubun" AS 利用者負担定率定額区分
         FROM(
         SELECT
         B."serviceTeikyoJigyoshaNo" AS 事業者コード,

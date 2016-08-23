@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichigojihanteikekkajoho;
 
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class IchiGojiHanteiKekkaJohoMapperParameter {
+public final class IchiGojiHanteiKekkaJohoMapperParameter implements IMyBatisParameter {
 
     private final RString shinseishoKanriNo;
 

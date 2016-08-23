@@ -4,14 +4,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJiss
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
  * @reamsid_L DBC-2970-160 linghuhang
  */
 public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -56,6 +55,8 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     private TextBox txtYoshikiNo;
     @JsonProperty("txtJigyosha")
     private TextBox txtJigyosha;
+    @JsonProperty("hiddenJigyoshaCode")
+    private RString hiddenJigyoshaCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -295,6 +296,24 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     @JsonProperty("txtJigyosha")
     public void setTxtJigyosha(TextBox txtJigyosha) {
         this.txtJigyosha = txtJigyosha;
+    }
+
+    /*
+     * gethiddenJigyoshaCode
+     * @return hiddenJigyoshaCode
+     */
+    @JsonProperty("hiddenJigyoshaCode")
+    public RString getHiddenJigyoshaCode() {
+        return hiddenJigyoshaCode;
+    }
+
+    /*
+     * sethiddenJigyoshaCode
+     * @param hiddenJigyoshaCode hiddenJigyoshaCode
+     */
+    @JsonProperty("hiddenJigyoshaCode")
+    public void setHiddenJigyoshaCode(RString hiddenJigyoshaCode) {
+        this.hiddenJigyoshaCode = hiddenJigyoshaCode;
     }
 
     // </editor-fold>
