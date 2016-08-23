@@ -92,7 +92,6 @@ public class NenreiKeikyuBetsuRiyoJyokyoEditor implements INenreiKeikyuBetsuRiyo
         printTimeStampSb.append(DATE_分);
         printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
         printTimeStampSb.append(DATE_秒);
-        printTimeStampSb.append(RString.HALF_SPACE);
         return printTimeStampSb.toRString();
     }
 

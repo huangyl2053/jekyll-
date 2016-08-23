@@ -68,11 +68,10 @@ public class SeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinTaishos
     private static final RString 生年月日 = new RString("生年月日");
     private static final RString 性別 = new RString("性別");
     private static final RString カナ氏名 = new RString("カナ氏名");
+    private static final int SEVEN = 7;
     private static final int THREE = 3;
     private static final int ZERO = 0;
-    private static final RString ONE = new RString("1");
-    private static final RString TWO = new RString("2");
-    private static final RString THREE_T = new RString("3");
+    private static final RString BAR = new RString("-");
     private static final ReportId REPORT_DBD900004 = ReportIdDBD.DBD900004.getReportId();
 
     @Override
@@ -162,7 +161,7 @@ public class SeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinTaishos
             return RString.EMPTY;
         } else {
             FlexibleDate date = new FlexibleDate(年月日);
-            return date.seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString();
+            return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
     }
 
@@ -177,11 +176,11 @@ public class SeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinTaishos
     }
 
     private RString set不一致(RString code) {
-        if (ONE.equals(code)) {
+        if (new RString("1").equals(code)) {
             return 生年月日;
-        } else if (TWO.equals(code)) {
+        } else if (new RString("2").equals(code)) {
             return 性別;
-        } else if (THREE_T.equals(code)) {
+        } else if (new RString("3").equals(code)) {
             return カナ氏名;
         } else {
             return RString.EMPTY;
