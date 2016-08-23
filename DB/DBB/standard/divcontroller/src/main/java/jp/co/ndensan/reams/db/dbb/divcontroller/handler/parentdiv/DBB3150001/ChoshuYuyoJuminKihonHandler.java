@@ -24,13 +24,13 @@ import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -89,7 +89,6 @@ public class ChoshuYuyoJuminKihonHandler {
     private static final RString 保存ボタン = new RString("btnUpt");
     private static final RString 訂正をやめるボタン = new RString("btnTeiseiCansel");
     private static final RString 取消をやめるボタン = new RString("btnTorikeshiCansel");
-    private static final CodeShubetsu 保険料徴収猶予種類_コード種別 = new CodeShubetsu("0005");
 
     /**
      * ヘッダパネルの初期化メソッドです。
@@ -237,12 +236,12 @@ public class ChoshuYuyoJuminKihonHandler {
             申請情報パネル.getTxtShinseiYMD().setValue(new RDate(介護賦課徴収猶予.get徴収猶予申請年月日().toString()));
         }
         if (介護賦課徴収猶予.get徴収猶予種類コード() != null) {
-            申請情報パネル.getTxtYuyoShurui().setValue(CodeMaster.getCodeRyakusho(
-                    SubGyomuCode.DBB介護賦課, 保険料徴収猶予種類_コード種別, 介護賦課徴収猶予.get徴収猶予種類コード(), FlexibleDate.getNowDate()));
+            申請情報パネル.getTxtYuyoShurui().setValue(CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課,
+                    DBBCodeShubetsu.保険料徴収猶予種類.getコード(), 介護賦課徴収猶予.get徴収猶予種類コード(), FlexibleDate.getNowDate()));
         }
         RString 申請事由 = 介護賦課徴収猶予.get申請事由();
         if (申請事由 == null || 申請事由.isEmpty()) {
-            申請情報パネル.getTxtShinseiRiyu().clearValue();;
+            申請情報パネル.getTxtShinseiRiyu().clearValue();
         } else {
             申請情報パネル.getTxtShinseiRiyu().setValue(申請事由);
         }
@@ -760,7 +759,7 @@ public class ChoshuYuyoJuminKihonHandler {
         if (介護賦課徴収猶予List != null && !介護賦課徴収猶予List.isEmpty()) {
             ChoshuYuyo 介護賦課徴収猶予 = 介護賦課徴収猶予List.get(ゼロ_定値);
             boolean flag1 = checkDate(介護賦課徴収猶予.get徴収猶予申請年月日(), 申請情報パネル.getTxtShinseiYMD().getValue());
-            boolean flag2 = checkRString(CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, 保険料徴収猶予種類_コード種別,
+            boolean flag2 = checkRString(CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.保険料徴収猶予種類.getコード(),
                     介護賦課徴収猶予.get徴収猶予種類コード(), FlexibleDate.getNowDate()), 申請情報パネル.getTxtYuyoShurui().getValue());
             boolean flag3 = checkRString(介護賦課徴収猶予.get申請事由(), 申請情報パネル.getTxtShinseiRiyu().getValue());
             return flag1 || flag2 || flag3;

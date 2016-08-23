@@ -445,7 +445,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
                     set適用終了年月日(new FlexibleDate(div.getTxtKeikakuTekiyoEndYMD().getValue().toDateString()));
             builder.set作成区分コード(div.getRadKeikakuSakuseiKubun().getSelectedKey()).
                     set計画事業者番号(new JigyoshaNo(div.getTxtJigyoshaNo().getValue())).
-                    set委託先事業者番号(new JigyoshaNo(div.getTxtItakusakiJigyoshaNo().getValue()));
+                    set委託先事業者番号(RString.isNullOrEmpty(div.getTxtItakusakiJigyoshaNo().getValue()) ? null
+                            : new JigyoshaNo(div.getTxtItakusakiJigyoshaNo().getValue()));
             if (div.getTxtJigyoshaHenkoYMD().getValue() != null && !div.getTxtJigyoshaHenkoYMD().isReadOnly()) {
                 builder.set事業者変更年月日(new FlexibleDate(div.getTxtJigyoshaHenkoYMD().getValue().toDateString()));
             }
