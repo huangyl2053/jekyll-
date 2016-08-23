@@ -592,7 +592,8 @@ public class IchijiSashitome1GoHandler {
                     row.getTxtSashitomeTorokuYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止決定年月日());
                     row.getTxtSashitomeKaijoYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止解除年月日());
                     row.getTxtNofuKigenYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止納付期限());
-                    if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止通知書発行年月日().isEmpty()) {
+                    if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止通知書発行年月日() == null
+                            || 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止通知書発行年月日().isEmpty()) {
                         row.setSashitomeTsuchi(RString.EMPTY);
                     } else {
                         row.setSashitomeTsuchi(new RString("発行済"));
@@ -978,8 +979,10 @@ public class IchijiSashitome1GoHandler {
         entity.setSashitome_KetteiYMD(div.getTxtSashitomeTorokuYMD().getValue());
         entity.setSashitome_TsuchiSaiHakkoFlag(false);
         entity.setSashitome_NofuYMD(div.getTxtSashitomeNofuKigenYMD().getValue());
-        entity.setSashitome_ServiceTeikyoYM(div.getDgSashitomeKojoIchiran().getClickedItem().getTxtTeikyoYM().getValue().getYearMonth());
-        entity.setSashitome_ShokanSeiriNo(div.getDgSashitomeKojoIchiran().getClickedItem().getSeiriNo());
+        if (div.getDgSashitomeKojoIchiran().getClickedItem() != null) {
+            entity.setSashitome_ServiceTeikyoYM(div.getDgSashitomeKojoIchiran().getClickedItem().getTxtTeikyoYM().getValue().getYearMonth());
+            entity.setSashitome_ShokanSeiriNo(div.getDgSashitomeKojoIchiran().getClickedItem().getSeiriNo());
+        }
         entity.setLogicalDeletedFlag(false);
         return entity;
     }
