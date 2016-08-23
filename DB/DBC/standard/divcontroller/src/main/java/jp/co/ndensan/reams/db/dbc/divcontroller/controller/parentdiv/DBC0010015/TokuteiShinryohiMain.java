@@ -34,10 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class TokuteiShinryohiMain {
 
-    private final RString 年月 = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_介護給付費見直し,
-            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).substringEmptyOnError(0, 6);
-    private final FlexibleYearMonth 提供年月 = new FlexibleYearMonth(年月);
-    private final int ZERO_INT = 0;
+    private static final int ZERO_INT = 0;
 
     /**
      * 画面初期化のメソッドです。
@@ -46,6 +43,9 @@ public class TokuteiShinryohiMain {
      * @return ResponseData<TokuteiShinryohiMainDiv>
      */
     public ResponseData<TokuteiShinryohiMainDiv> onLoad(TokuteiShinryohiMainDiv div) {
+        RString 年月 = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_介護給付費見直し,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).substringEmptyOnError(0, 6);
+        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(年月);
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         NyuryokuShikibetsuNo 識別番号検索キー = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class);
@@ -55,15 +55,18 @@ public class TokuteiShinryohiMain {
         if (提供年月.isBeforeOrEquals(サービス提供年月)) {
             List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費等 = 給付実績情報照会情報.getCsData_J();
             getHandler(div).set給付実績特定診療費_特別療養費等(給付実績特定診療費_特別療養費等);
+            div.getDgTokuteiShinryohiToH1503().setDisplayNone(true);
         } else {
             List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費等 = 給付実績情報照会情報.getCsData_D();
             getHandler(div).set給付実績特定診療費等(給付実績特定診療費等);
+            div.getDgTokuteiShinryohiFromH1504().setDisplayNone(true);
         }
         ShikibetsuNoKanri 識別番号管理データ取得 = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
                 サービス提供年月, 識別番号検索キー).records().get(0);
         getHandler(div).clear制御性(識別番号管理データ取得);
         div.getTekiyoPanelPanel().setIsOpen(false);
         return createResponse(div);
+
     }
 
     /**
@@ -156,11 +159,6 @@ public class TokuteiShinryohiMain {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 摘要パネル（TekiyoPanel）が開いていた場合、閉じる。
-     *
-     * @param div TokuteiShinryohiMainDiv
-     */
     private void close摘要(TokuteiShinryohiMainDiv div) {
         if (div.getTekiyoPanelPanel().isIsOpen()) {
             div.getTekiyoPanelPanel().setIsOpen(false);
