@@ -164,6 +164,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess extends Bat
         returnEntity.set明細データ登録件数(明細_連番);
         returnEntity.set高額データ登録件数(高額_連番);
         returnEntity.set合計データ登録件数(合計_連番);
+        returnEntity.set連番数(連番);
         flowEntity = new OutputParameter<>();
         flowEntity.setValue(returnEntity);
 

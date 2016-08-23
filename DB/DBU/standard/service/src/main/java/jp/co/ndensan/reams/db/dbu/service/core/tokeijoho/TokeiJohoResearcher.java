@@ -30,6 +30,8 @@ public class TokeiJohoResearcher {
 
     private static final RString 被保険者区分コード_1 = new RString("1");
     private static final RString 被保険者区分コード_2 = new RString("2");
+    private static final RString 住所地特例フラグ_TRUE = new RString("1");
+    private static final RString 住所地特例フラグ_FALSE = new RString("0");
     private final MapperProvider mapperProvider;
 
     /**
@@ -66,13 +68,13 @@ public class TokeiJohoResearcher {
         }
 
         int 一号被保険者人数 = mapper.get資格人数(
-                TokeiJohoResearcherMybatisParameter.createParam全市町村なし(基準日, 被保険者区分コード_1, false, 市町村コード_Param));
+                TokeiJohoResearcherMybatisParameter.createParam全市町村なし(基準日, 被保険者区分コード_1, 住所地特例フラグ_FALSE, 市町村コード_Param));
         int 一号被保険者人数_内住所地特例者 = mapper.get資格人数(
-                TokeiJohoResearcherMybatisParameter.createParam全市町村なし(基準日, 被保険者区分コード_1, true, 市町村コード_Param));
+                TokeiJohoResearcherMybatisParameter.createParam全市町村なし(基準日, 被保険者区分コード_1, 住所地特例フラグ_TRUE, 市町村コード_Param));
         int 二号被保険者人数 = mapper.get資格人数(
-                TokeiJohoResearcherMybatisParameter.createParam全市町村なし(基準日, 被保険者区分コード_2, false, 市町村コード_Param));
+                TokeiJohoResearcherMybatisParameter.createParam全市町村なし(基準日, 被保険者区分コード_2, 住所地特例フラグ_FALSE, 市町村コード_Param));
         int 二号被保険者人数_内住所地特例者 = mapper.get資格人数(
-                TokeiJohoResearcherMybatisParameter.createParam全市町村なし(基準日, 被保険者区分コード_2, true, 市町村コード_Param));
+                TokeiJohoResearcherMybatisParameter.createParam全市町村なし(基準日, 被保険者区分コード_2, 住所地特例フラグ_TRUE, 市町村コード_Param));
         int 資格人数 = 一号被保険者人数 + 二号被保険者人数;
         int 資格人数_内住所地特例者 = 一号被保険者人数_内住所地特例者 + 二号被保険者人数_内住所地特例者;
         int 適用除外者 = mapper.get適用除外者人数(
@@ -109,13 +111,13 @@ public class TokeiJohoResearcher {
         }
 
         int 特別徴収人数_社保庁 = mapper.get特別徴収人数(
-                TokeiJohoResearcherMybatisParameter.createParamFor賦課人数(基準日, 被保険者区分コード_1, false,
+                TokeiJohoResearcherMybatisParameter.createParamFor賦課人数(基準日, 被保険者区分コード_1, 住所地特例フラグ_FALSE,
                         市町村コード_Param, ChoshuHoho.特別徴収_厚生労働省.getコード()));
         int 特別徴収人数_地共済 = mapper.get特別徴収人数(
-                TokeiJohoResearcherMybatisParameter.createParamFor賦課人数(基準日, 被保険者区分コード_1, false,
+                TokeiJohoResearcherMybatisParameter.createParamFor賦課人数(基準日, 被保険者区分コード_1, 住所地特例フラグ_FALSE,
                         市町村コード_Param, ChoshuHoho.特別徴収_地共済.getコード()));
         int 普通徴収人数 = mapper.get特別徴収人数(
-                TokeiJohoResearcherMybatisParameter.createParamFor賦課人数(基準日, 被保険者区分コード_1, false,
+                TokeiJohoResearcherMybatisParameter.createParamFor賦課人数(基準日, 被保険者区分コード_1, 住所地特例フラグ_FALSE,
                         市町村コード_Param, ChoshuHoho.普通徴収.getコード()));
         int 賦課人数 = 特別徴収人数_社保庁 + 特別徴収人数_地共済 + 普通徴収人数;
         fukaSummary.set普通徴収人数(普通徴収人数);

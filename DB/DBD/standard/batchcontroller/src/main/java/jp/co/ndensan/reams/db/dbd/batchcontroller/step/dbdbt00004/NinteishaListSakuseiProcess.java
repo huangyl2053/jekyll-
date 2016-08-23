@@ -333,7 +333,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
         } else {
             帳票タイトル = new RString("介護保険　社会福祉法人軽減該当者リスト");
         }
-        ShakaiFukushiHojinKeigenReport report = ShakaiFukushiHojinKeigenReport.createReport(entity, 帳票タイトル, processParameter.get帳票作成日時(),
+        ShakaiFukushiHojinKeigenReport report = new ShakaiFukushiHojinKeigenReport(entity, 帳票タイトル, processParameter.get帳票作成日時(),
                 association, outputOrder);
         report.writeBy(reportSourceWriterIchiran);
 

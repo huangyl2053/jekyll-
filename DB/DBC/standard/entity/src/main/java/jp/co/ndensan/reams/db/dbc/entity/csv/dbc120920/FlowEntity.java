@@ -24,4 +24,5 @@ public class FlowEntity {
     private int 明細データ登録件数;
     private int 高額データ登録件数;
     private int 合計データ登録件数;
+    private int 連番数;
 }

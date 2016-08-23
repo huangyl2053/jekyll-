@@ -47,5 +47,18 @@ public class ItizihanteiIFtoriKomiRelateEntity {
     private RString ninchishoJiritsudoIIijoNoGaizensei;
     private RString suiteiKyufuKubunCode;
     private RString shinseishoKanriNo3;
+    private boolean kariIchijiHanteiKubun;
+    private RString ninchishoKoreishaShihyoCode;
+    private RString chukanHyokaKomoku6gun;
+    private RString chukanHyokaKomoku7gun;
+    private RString jiritsudoKumiawase1;
+    private RString jiritsudoKumiawase2;
+    private RString jiritsudoKumiawase3;
+    private RString jiritsudoKumiawase4;
+    private RString jiritsudoKumiawase5;
+    private RString jiritsudoKumiawase6;
+    private RString jiritsudoKumiawase7;
+    private RString chert;
+    private RString jotaizo;
 
 }

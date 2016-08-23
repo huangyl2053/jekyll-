@@ -351,9 +351,9 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
             return RString.EMPTY;
         }
         if (processParamter.isCsvhitsukesurasyuhensyu()) {
-            return 年月日.seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString();
+            return 年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         } else {
-            return 年月日.seireki().separator(Separator.NONE).fillType(FillType.ZERO).getYearMonth();
+            return 年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
         }
     }
 

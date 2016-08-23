@@ -98,8 +98,7 @@ public class JigoSakuseiMeisaiTouroku {
     /**
      * {@link InstanceProvider#create}にて生成した{@link JigoSakuseiMeisaiTouroku}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link JigoSakuseiMeisaiTouroku}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link JigoSakuseiMeisaiTouroku}のインスタンス
      */
     public static JigoSakuseiMeisaiTouroku createInstance() {
         return InstanceProvider.create(JigoSakuseiMeisaiTouroku.class);
@@ -350,8 +349,8 @@ public class JigoSakuseiMeisaiTouroku {
             DbT4001JukyushaDaichoEntity entity = 受給者台帳dac.select居宅総合事業区分(被保険者番号, 開始利用年月, 終了利用年月);
             if (entity != null) {
                 gendo.set区分支給限度額(entity.getShikyuGendoTanisu());
-                gendo.set管理期間開始日(entity.getNinteiYukoKikanKaishiYMD());
-                gendo.set管理期間終了日(entity.getNinteiYukoKikanShuryoYMD());
+                gendo.set管理期間開始日(entity.getShikyuGendoKaishiYMD());
+                gendo.set管理期間終了日(entity.getShikyuGendoShuryoYMD());
             }
         }
         return gendo;

@@ -31,9 +31,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibun;
-import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunFinder;
-import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -60,7 +58,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class YokaigoNinteiTorikeshiTshuchishoPrintService {
 
     private static final int NO_3 = 3;
-    private static final int NO_4 = 4;
     private static final int NO_5 = 5;
     private static final int NO_6 = 6;
 
@@ -131,9 +128,6 @@ public class YokaigoNinteiTorikeshiTshuchishoPrintService {
     private List<RString> get通知文情報() {
         TsuchishoTeikeibunFinder finder = new TsuchishoTeikeibunFinder();
         List<TsuchishoTeikeibun> tsuchishoTeikeibun = finder.get通知書定型文パターン(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD550004.getReportId());
-        TsuchishoTeikeibunManager mag = new TsuchishoTeikeibunManager();
-        TsuchishoTeikeibunInfo 帳票タイトルInfo = mag.get通知書定型文パターン(ReportIdDBD.DBD501002.getReportId(), SubGyomuCode.DBD介護受給);
-
         Map<Integer, RString> 通知文情報Map = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD550004.getReportId(), KamokuCode.EMPTY,
                 tsuchishoTeikeibun.get(0).getパターン番号());
         List<RString> 通知文情報 = new ArrayList<>();

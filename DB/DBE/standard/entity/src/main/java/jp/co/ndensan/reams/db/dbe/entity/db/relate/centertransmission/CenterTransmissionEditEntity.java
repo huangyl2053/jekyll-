@@ -154,7 +154,7 @@ public class CenterTransmissionEditEntity {
                 new RString(entity.getServiceJokyoKoban8()), new RString(entity.getServiceJokyoKoban11())));
         csvEntity.set特定福祉用具販売(get項目By厚労省99Aと02A(entity.getKoroshoIfShikibetsuCode(),
                 new RString(entity.getServiceJokyoKoban13()), new RString(entity.getServiceJokyoKoban12())));
-//        csvEntity.set住宅改修介護給付(entity.isServiceJokyoFlag());
+        csvEntity.set住宅改修介護給付(getValue(entity.isServiceJokyoFlag()));
         csvEntity.set夜間対応型訪問介護(get項目By厚労省99Aと02A(entity.getKoroshoIfShikibetsuCode(),
                 RString.EMPTY, new RString(entity.getServiceJokyoKoban13())));
         csvEntity.set認知症対応型通所介護(get項目By厚労省99Aと02A(entity.getKoroshoIfShikibetsuCode(),
@@ -188,7 +188,7 @@ public class CenterTransmissionEditEntity {
                 new RString(entity.getServiceJokyoKoban8()), new RString(entity.getServiceJokyoKoban11())));
         csvEntity.set特定介護予防福祉用具販売(get項目By厚労省99Aと02A(entity.getKoroshoIfShikibetsuCode(),
                 new RString(entity.getServiceJokyoKoban13()), new RString(entity.getServiceJokyoKoban12())));
-//        csvEntity.set住宅改修予防給付(entity.isServiceJokyoFlag());
+        csvEntity.set住宅改修予防給付(getValue(entity.isServiceJokyoFlag()));
         csvEntity.set介護予防認知症対応型通所介護(get項目By厚労省99Aと02A(entity.getKoroshoIfShikibetsuCode(),
                 RString.EMPTY, new RString(entity.getServiceJokyoKoban14())));
         csvEntity.set介護予防小規模多機能型居宅介護(get項目By厚労省99Aと02A(entity.getKoroshoIfShikibetsuCode(),
@@ -391,7 +391,7 @@ public class CenterTransmissionEditEntity {
                 new RString(entity.getZenkaiServiceJokyoKoban8()), new RString(entity.getZenkaiServiceJokyoKoban11())));
         csvEntity.set前回結果_特定福祉用具販売(get項目By厚労省99Aと02A(entity.getZenkaiKoroshoIfShikibetsuCode(),
                 new RString(entity.getZenkaiServiceJokyoKoban13()), new RString(entity.getZenkaiServiceJokyoKoban12())));
-//        csvEntity.set前回結果_住宅改修介護給付(entity.isZenkaiServiceJokyoFlag());
+        csvEntity.set前回結果_住宅改修介護給付(getValue(entity.isZenkaiServiceJokyoFlag()));
         csvEntity.set前回結果_夜間対応型訪問介護(get項目By厚労省99Aと02A(entity.getZenkaiKoroshoIfShikibetsuCode(),
                 RString.EMPTY, new RString(entity.getZenkaiServiceJokyoKoban13())));
         csvEntity.set前回結果_認知症対応型通所介護(get項目By厚労省99Aと02A(entity.getZenkaiKoroshoIfShikibetsuCode(),
@@ -425,7 +425,7 @@ public class CenterTransmissionEditEntity {
                 new RString(entity.getZenkaiServiceJokyoKoban8()), new RString(entity.getZenkaiServiceJokyoKoban11())));
         csvEntity.set前回結果_特定介護予防福祉用具販売(get項目By厚労省99Aと02A(entity.getZenkaiKoroshoIfShikibetsuCode(),
                 new RString(entity.getZenkaiServiceJokyoKoban13()), new RString(entity.getZenkaiServiceJokyoKoban12())));
-//        csvEntity.set前回結果_住宅改修予防給付(entity.isZenkaiServiceJokyoFlag());
+        csvEntity.set前回結果_住宅改修予防給付(getValue(entity.isZenkaiServiceJokyoFlag()));
         csvEntity.set前回結果_介護予防認知症対応型通所介護(get項目By厚労省99Aと02A(entity.getZenkaiKoroshoIfShikibetsuCode(),
                 RString.EMPTY, new RString(entity.getZenkaiServiceJokyoKoban14())));
         csvEntity.set前回結果_介護予防小規模多機能型居宅介護(get項目By厚労省99Aと02A(entity.getZenkaiKoroshoIfShikibetsuCode(),
@@ -695,5 +695,12 @@ public class CenterTransmissionEditEntity {
             return 項番;
         }
         return RString.EMPTY;
+    }
+
+    private RString getValue(boolean isServiceJokyoFlag) {
+        if (isServiceJokyoFlag) {
+            return new RString("true");
+        }
+        return new RString("false");
     }
 }

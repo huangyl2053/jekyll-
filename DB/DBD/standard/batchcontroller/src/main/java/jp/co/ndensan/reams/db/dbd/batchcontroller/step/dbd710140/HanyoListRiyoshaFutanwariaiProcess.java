@@ -440,9 +440,9 @@ public class HanyoListRiyoshaFutanwariaiProcess extends BatchProcessBase<HanyoRi
             return RString.EMPTY;
         }
         if (processParamter.isCsvhitsukesurasyuhensyu()) {
-            return 年月日.seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString();
+            return 年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         } else {
-            return 年月日.seireki().separator(Separator.NONE).fillType(FillType.ZERO).getYearMonth();
+            return 年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
         }
 
     }
@@ -529,9 +529,12 @@ public class HanyoListRiyoshaFutanwariaiProcess extends BatchProcessBase<HanyoRi
         }
         if (null != processParamter.getAtenacyusyutsujyoken()
                 && null != processParamter.getAtenacyusyutsujyoken().getChiku_Kubun()) {
-            List<RString> 地区区分情報 = get地区選択区分情報().substring(0, get地区選択区分情報().length() - 1).split(COMMA.toString());
-            for (RString 情報 : 地区区分情報) {
-                出力条件.add(情報);
+            RString get地区区分情報 = get地区選択区分情報();
+            if (!get地区区分情報.isNullOrEmpty()) {
+                List<RString> 地区区分情報 = get地区区分情報.substring(0, get地区区分情報.length() - 1).split(COMMA.toString());
+                for (RString 情報 : 地区区分情報) {
+                    出力条件.add(情報);
+                }
             }
         }
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(

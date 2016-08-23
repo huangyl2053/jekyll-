@@ -14,7 +14,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 審査決定請求明細一時TBL
+ * 審査決定請求明細一時TBLクラスです。
+ *
+ * @reamsid_L DBC-2500-010 jiangxiaolong
  */
 @Getter
 @Setter

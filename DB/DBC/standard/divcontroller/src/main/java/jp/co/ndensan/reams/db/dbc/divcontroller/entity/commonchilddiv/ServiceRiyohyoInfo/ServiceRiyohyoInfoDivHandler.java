@@ -236,6 +236,8 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuZengaku().setDisabled(true);
         div.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCalcGokei().setDisabled(true);
         div.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnBeppyoGokeiKakutei().setDisabled(true);
+        div.getServiceRiyohyoBeppyoList().getBtnBeppyoMeisaiNew().setDisabled(false);
+        div.getServiceRiyohyoBeppyoList().getBtnBeppyoGokeiNew().setDisabled(false);
         if (追加.equals(表示モード)) {
             div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getGridSetting().setIsShowSelectButtonColumn(false);
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(true);
@@ -291,6 +293,8 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCancelGokeiInput().setDisabled(true);
             div.getServiceRiyohyoBeppyoGokei().setDisabled(true);
             div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(true);
+            div.getServiceRiyohyoBeppyoList().getBtnBeppyoMeisaiNew().setDisabled(true);
+            div.getServiceRiyohyoBeppyoList().getBtnBeppyoGokeiNew().setDisabled(true);
         }
     }
 
@@ -301,7 +305,8 @@ public class ServiceRiyohyoInfoDivHandler {
      * @param 居宅総合事業区分 RString
      * @param 利用年月 FlexibleYearMonth
      */
-    public void set区分支給限度額(HihokenshaNo 被保険者番号, RString 居宅総合事業区分, FlexibleYearMonth 利用年月) {
+    public void set区分支給限度額(HihokenshaNo 被保険者番号, RString 居宅総合事業区分,
+            FlexibleYearMonth 利用年月) {
         JigoSakuseiMeisaiTouroku jigoSakusei = JigoSakuseiMeisaiTouroku.createInstance();
         KubunGendo 区分支給限度額情報 = jigoSakusei.getKubunGendo(被保険者番号, 居宅総合事業区分, 利用年月);
         if (区分支給限度額情報 == null) {
@@ -320,7 +325,10 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getTxtGendoKanriKikan().setToValue(区分支給限度額情報.get管理期間終了日() == null
                     || 区分支給限度額情報.get管理期間終了日().isEmpty() ? null
                     : new RDate(区分支給限度額情報.get管理期間終了日().toString()));
-            div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(false);
+            RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
+            if (!照会.equals(表示モード)) {
+                div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(false);
+            }
         }
     }
 

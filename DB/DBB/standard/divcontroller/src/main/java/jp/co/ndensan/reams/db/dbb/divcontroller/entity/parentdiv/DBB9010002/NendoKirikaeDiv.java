@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * NendoKirikae のクラスファイル
  *
- * @reamsid_L DBB_5722_010 zhengshenlei
+ * @reamsid_L DBB-5722-010 zhengshenlei
  */
 public class NendoKirikaeDiv extends Panel {
 

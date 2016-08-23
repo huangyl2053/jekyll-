@@ -24,13 +24,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseitodokedeJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.RenrakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1008IryohokenKanyuJokyoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5120ShinseitodokedeJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
@@ -70,7 +68,6 @@ public class NinteiShinseiTorokuManager {
     private final DbT5121ShinseiRirekiJohoDac dbt5121Dac;
     private final DbT1008IryohokenKanyuJokyoDac dbt1008Dac;
     private final DbT5120ShinseitodokedeJohoDac dbt5120Dac;
-    private final DbT4001JukyushaDaichoDac dbt4001Dac;
 
     /**
      * コンストラクタです。
@@ -83,7 +80,6 @@ public class NinteiShinseiTorokuManager {
         this.dbt5121Dac = InstanceProvider.create(DbT5121ShinseiRirekiJohoDac.class);
         this.dbt1008Dac = InstanceProvider.create(DbT1008IryohokenKanyuJokyoDac.class);
         this.dbt5120Dac = InstanceProvider.create(DbT5120ShinseitodokedeJohoDac.class);
-        this.dbt4001Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
     }
 
     /**
@@ -94,7 +90,7 @@ public class NinteiShinseiTorokuManager {
     NinteiShinseiTorokuManager(MapperProvider mapperProvider, DbT5150RenrakusakiJohoDac dbt5150Dac,
             DbT5590ShinsakaiIinJogaiJohoDac dbt5590Dac, DbT5101NinteiShinseiJohoDac dbt5101Dac,
             DbT5121ShinseiRirekiJohoDac dbt5121Dac, DbT1008IryohokenKanyuJokyoDac dbt1008Dac,
-            DbT5120ShinseitodokedeJohoDac dbt5120Dac, DbT4001JukyushaDaichoDac dbt4001Dac) {
+            DbT5120ShinseitodokedeJohoDac dbt5120Dac) {
         this.mapperProvider = mapperProvider;
         this.dbt5150Dac = dbt5150Dac;
         this.dbt5590Dac = dbt5590Dac;
@@ -102,7 +98,6 @@ public class NinteiShinseiTorokuManager {
         this.dbt5121Dac = dbt5121Dac;
         this.dbt1008Dac = dbt1008Dac;
         this.dbt5120Dac = dbt5120Dac;
-        this.dbt4001Dac = dbt4001Dac;
     }
 
     /**
@@ -273,34 +268,6 @@ public class NinteiShinseiTorokuManager {
     }
 
     /**
-     * 識別コードにより、本人との関係の取得
-     *
-     * @param 識別コード 識別コード
-     * @return 本人との関係
-     */
-    public RString get本人との関係(ShikibetsuCode 識別コード) {
-        DbT4001JukyushaDaichoEntity entity = dbt4001Dac.get受給者台帳情報By識別コード(識別コード);
-        if (entity != null) {
-            return entity.getHomninKankei();
-        }
-        return null;
-    }
-
-    /**
-     * 申請書管理番号により、本人との関係の取得
-     *
-     * @param 申請書管理番号 申請書管理番号
-     * @return 本人との関係
-     */
-    public RString get本人との関係(ShinseishoKanriNo 申請書管理番号) {
-        List<DbT4001JukyushaDaichoEntity> entityList = dbt4001Dac.selectサービス(申請書管理番号);
-        if (entityList != null && !entityList.isEmpty()) {
-            return entityList.get(0).getHomninKankei();
-        }
-        return null;
-    }
-
-    /**
      * 要介護認定申請情報{@link NinteiShinseiJoho}を保存します。
      *
      * @param 要介護認定申請情報 {@link NinteiShinseiJoho}
@@ -354,6 +321,17 @@ public class NinteiShinseiTorokuManager {
             return false;
         }
         return 1 == dbt5150Dac.save(介護連絡先情報.toEntity());
+    }
+
+    /**
+     * 介護連絡先情報{@link RenrakusakiJoho}を保存します。
+     *
+     * @param 介護連絡先情報 {@link RenrakusakiJoho}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean del介護連絡先情報(RenrakusakiJoho 介護連絡先情報) {
+        return 1 == dbt5150Dac.deletePhysical(介護連絡先情報.toEntity());
     }
 
     /**

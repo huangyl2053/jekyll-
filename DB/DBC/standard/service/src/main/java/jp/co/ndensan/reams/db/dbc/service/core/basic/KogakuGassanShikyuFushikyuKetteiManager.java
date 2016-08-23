@@ -109,4 +109,23 @@ public class KogakuGassanShikyuFushikyuKetteiManager {
         }
         return 1 == dac.save(高額合算支給不支給決定.toEntity());
     }
+
+    /**
+     * 高額合算支給不支給決定を全件返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<KogakuGassanShikyuFushikyuKettei>
+     */
+    @Transaction
+    public List<KogakuGassanShikyuFushikyuKettei> get高額合算支給不支給決定一覧(HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        List<KogakuGassanShikyuFushikyuKettei> businessList = new ArrayList<>();
+
+        for (DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity : dac.selectAll(被保険者番号)) {
+            entity.initializeMd5();
+            businessList.add(new KogakuGassanShikyuFushikyuKettei(entity));
+        }
+
+        return businessList;
+    }
 }
