@@ -56,6 +56,7 @@ public class FutanGengaokuNinteiShinseishoHakkoIchiranSakusei extends BatchProce
     private static final RString JIKOSAKUSEI = new RString("自己作成");
     private static final RString SHUTSURYOKUJUN = new RString("【出力順】");
     private static final RString なし = new RString("なし");
+    private static final RString COMMA = new RString(",");
     private static final ReportId ID = new ReportId("DBD200022_FutanGendogakuNinteiShinseishoHakkoIchiran");
     private static final int STARTINDEX = 9;
     private ShinseishoHakkoProcessParameter processParamter;
@@ -82,7 +83,7 @@ public class FutanGengaokuNinteiShinseishoHakkoIchiranSakusei extends BatchProce
         if (order != null) {
             出力順 = Ddb102020MyBatisOrderByClauseCreator.create(FutangendogakuNinteiShinseishoOrderKey.class, order);
             if (processParamter.is出力フラグ()) {
-                出力順 = 出力順.substring(STARTINDEX, 出力順.length());
+                出力順 = COMMA.concat(出力順.substring(STARTINDEX, 出力順.length()));
             }
         }
     }
