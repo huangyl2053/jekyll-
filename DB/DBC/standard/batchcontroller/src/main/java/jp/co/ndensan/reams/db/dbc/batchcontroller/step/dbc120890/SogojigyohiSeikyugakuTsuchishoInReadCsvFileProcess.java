@@ -80,12 +80,14 @@ public class SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess extends BatchPro
     private SeikyugakuTsuchishoCsvFileToreraRecode3Entity toreraRecord3Entity;
     private DbWT1511SeikyugakuTsuchishoTempEntity shoTempentity;
     private int 連番;
+    private int レコード件数合計;
     boolean 合計;
     boolean 累計;
 
     @Override
     protected void initialize() {
         連番 = parameter.getレコード件数合算();
+        レコード件数合計 = parameter.get集計件数合算();
         returnEntity = new FlowEntity();
         controlCsvEntity = new KagoKetteiHokenshaInControlCsvEntity();
         shoTempentity = new DbWT1511SeikyugakuTsuchishoTempEntity();
@@ -276,6 +278,8 @@ public class SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess extends BatchPro
             一時表Mapper.処理結果リスト一時TBLに登録(errorTempentity);
         }
         returnEntity.set明細データ登録件数(連番);
+        レコード件数合計 = レコード件数合計 + Integer.parseInt(controlCsvEntity.getCodeNum().toString());
+        returnEntity.setCodeNum(レコード件数合計);
         flowEntity = new OutputParameter<>();
         flowEntity.setValue(returnEntity);
     }
