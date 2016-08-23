@@ -1,27 +1,28 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
+import java.util.UUID;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 障がい書控除テーブルのエンティティクラスです。
  */
 public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038ShogaishaKoujoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4038ShogaishaKoujo");
 
@@ -61,7 +62,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -69,8 +70,17 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
     }
 
     /**
+     * insertDantaiCdのgetメソッドです。
+     *
+     * @return insertDantaiCd
+     */
+    public RDateTime getLastUpdateTimestamp() {
+        return lastUpdateTimestamp;
+    }
+
+    /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -79,7 +89,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -88,17 +98,16 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -107,7 +116,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 申請年月日のgetメソッドです。
-     * 
+     *
      * @return 申請年月日
      */
     @CheckForNull
@@ -117,7 +126,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 申請年月日のsetメソッドです。
-     * 
+     *
      * @param shinseiYMD 申請年月日
      */
     public void setShinseiYMD(FlexibleDate shinseiYMD) {
@@ -126,7 +135,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 決定年月日のgetメソッドです。
-     * 
+     *
      * @return 決定年月日
      */
     @CheckForNull
@@ -136,7 +145,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 決定年月日のsetメソッドです。
-     * 
+     *
      * @param ketteiYMD 決定年月日
      */
     public void setKetteiYMD(FlexibleDate ketteiYMD) {
@@ -145,7 +154,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 適用開始年月日のgetメソッドです。
-     * 
+     *
      * @return 適用開始年月日
      */
     @CheckForNull
@@ -155,7 +164,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 適用開始年月日のsetメソッドです。
-     * 
+     *
      * @param tekiyoKaishiYMD 適用開始年月日
      */
     public void setTekiyoKaishiYMD(FlexibleDate tekiyoKaishiYMD) {
@@ -164,7 +173,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 適用終了年月日のgetメソッドです。
-     * 
+     *
      * @return 適用終了年月日
      */
     @CheckForNull
@@ -174,7 +183,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 適用終了年月日のsetメソッドです。
-     * 
+     *
      * @param tekiyoShuryoYMD 適用終了年月日
      */
     public void setTekiyoShuryoYMD(FlexibleDate tekiyoShuryoYMD) {
@@ -183,7 +192,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 決定区分のgetメソッドです。
-     * 
+     *
      * @return 決定区分
      */
     @CheckForNull
@@ -193,7 +202,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 決定区分のsetメソッドです。
-     * 
+     *
      * @param ketteiKubun 決定区分
      */
     public void setKetteiKubun(RString ketteiKubun) {
@@ -202,7 +211,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 非承認理由のgetメソッドです。
-     * 
+     *
      * @return 非承認理由
      */
     @CheckForNull
@@ -212,7 +221,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 非承認理由のsetメソッドです。
-     * 
+     *
      * @param hiShoninRiyu 非承認理由
      */
     public void setHiShoninRiyu(RString hiShoninRiyu) {
@@ -221,7 +230,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
     public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
@@ -230,7 +239,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
     public void setShoKisaiHokenshaNo(@Nonnull ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
@@ -239,7 +248,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -248,7 +257,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
@@ -259,7 +268,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
      * 履歴番号のgetメソッドです。
      * <br/>
      * <br/>新規履歴：0, 以降の申請・決定：最大履歴番号+1
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -270,7 +279,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
      * 履歴番号のsetメソッドです。
      * <br/>
      * <br/>新規履歴：0, 以降の申請・決定：最大履歴番号+1
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(@Nonnull int rirekiNo) {
@@ -279,7 +288,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 対象年度のgetメソッドです。
-     * 
+     *
      * @return 対象年度
      */
     @CheckForNull
@@ -289,7 +298,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 対象年度のsetメソッドです。
-     * 
+     *
      * @param taishoNendo 対象年度
      */
     public void setTaishoNendo(FlexibleYear taishoNendo) {
@@ -298,7 +307,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 基準日のgetメソッドです。
-     * 
+     *
      * @return 基準日
      */
     @CheckForNull
@@ -308,7 +317,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 基準日のsetメソッドです。
-     * 
+     *
      * @param kijunYMD 基準日
      */
     public void setKijunYMD(FlexibleDate kijunYMD) {
@@ -317,7 +326,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 把握日のgetメソッドです。
-     * 
+     *
      * @return 把握日
      */
     @CheckForNull
@@ -327,7 +336,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 把握日のsetメソッドです。
-     * 
+     *
      * @param haakuYMD 把握日
      */
     public void setHaakuYMD(FlexibleDate haakuYMD) {
@@ -336,7 +345,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 申請事由のgetメソッドです。
-     * 
+     *
      * @return 申請事由
      */
     @CheckForNull
@@ -346,7 +355,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 申請事由のsetメソッドです。
-     * 
+     *
      * @param shinseiJiyu 申請事由
      */
     public void setShinseiJiyu(RString shinseiJiyu) {
@@ -357,7 +366,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
      * 認定区分のgetメソッドです。
      * <br/>
      * <br/>DBDEnum.障がい者控除認定区分
-     * 
+     *
      * @return 認定区分
      */
     @CheckForNull
@@ -369,7 +378,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
      * 認定区分のsetメソッドです。
      * <br/>
      * <br/>DBDEnum.障がい者控除認定区分
-     * 
+     *
      * @param ninteiKubun 認定区分
      */
     public void setNinteiKubun(RString ninteiKubun) {
@@ -380,7 +389,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
      * 認定内容のgetメソッドです。
      * <br/>
      * <br/>'DBDEnum.障がい者控除認定内容
-     * 
+     *
      * @return 認定内容
      */
     @CheckForNull
@@ -392,7 +401,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
      * 認定内容のsetメソッドです。
      * <br/>
      * <br/>'DBDEnum.障がい者控除認定内容
-     * 
+     *
      * @param ninteiNaiyo 認定内容
      */
     public void setNinteiNaiyo(RString ninteiNaiyo) {
@@ -401,7 +410,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 給付率のgetメソッドです。
-     * 
+     *
      * @return 給付率
      */
     @CheckForNull
@@ -411,7 +420,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 給付率のsetメソッドです。
-     * 
+     *
      * @param kyufuritsu 給付率
      */
     public void setKyufuritsu(HokenKyufuRitsu kyufuritsu) {
@@ -422,7 +431,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
      * 認知症高齢者の日常生活自立度コードのgetメソッドです。
      * <br/>
      * <br/>DBZEnum.認知症高齢者自立度コード
-     * 
+     *
      * @return 認知症高齢者の日常生活自立度コード
      */
     @CheckForNull
@@ -434,7 +443,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
      * 認知症高齢者の日常生活自立度コードのsetメソッドです。
      * <br/>
      * <br/>DBZEnum.認知症高齢者自立度コード
-     * 
+     *
      * @param ninchishoNichijoSeikatsuJiritsudoCode 認知症高齢者の日常生活自立度コード
      */
     public void setNinchishoNichijoSeikatsuJiritsudoCode(Code ninchishoNichijoSeikatsuJiritsudoCode) {
@@ -445,7 +454,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
      * 障がい高齢者の日常生活自立度コードのgetメソッドです。
      * <br/>
      * <br/>DBZEnum.障害高齢者自立度コード
-     * 
+     *
      * @return 障がい高齢者の日常生活自立度コード
      */
     @CheckForNull
@@ -457,7 +466,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
      * 障がい高齢者の日常生活自立度コードのsetメソッドです。
      * <br/>
      * <br/>DBZEnum.障害高齢者自立度コード
-     * 
+     *
      * @param shogaiNichijoSeikatsuJiritsudoCode 障がい高齢者の日常生活自立度コード
      */
     public void setShogaiNichijoSeikatsuJiritsudoCode(Code shogaiNichijoSeikatsuJiritsudoCode) {
@@ -468,7 +477,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
      * 障がい者手帳有無のgetメソッドです。
      * <br/>
      * <br/>false：障がい者手帳なし、true：障がい者手帳あり
-     * 
+     *
      * @return 障がい者手帳有無
      */
     @CheckForNull
@@ -480,7 +489,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
      * 障がい者手帳有無のsetメソッドです。
      * <br/>
      * <br/>false：障がい者手帳なし、true：障がい者手帳あり
-     * 
+     *
      * @param shogaishaTechoUmu 障がい者手帳有無
      */
     public void setShogaishaTechoUmu(boolean shogaishaTechoUmu) {
@@ -489,7 +498,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 資格喪失事由コードのgetメソッドです。
-     * 
+     *
      * @return 資格喪失事由コード
      */
     @CheckForNull
@@ -499,7 +508,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 資格喪失事由コードのsetメソッドです。
-     * 
+     *
      * @param shikakuSoshitsuJiyuCode 資格喪失事由コード
      */
     public void setShikakuSoshitsuJiyuCode(RString shikakuSoshitsuJiyuCode) {
@@ -508,7 +517,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 資格喪失年月日のgetメソッドです。
-     * 
+     *
      * @return 資格喪失年月日
      */
     @CheckForNull
@@ -518,7 +527,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * 資格喪失年月日のsetメソッドです。
-     * 
+     *
      * @param shikakuSoshitsuYMD 資格喪失年月日
      */
     public void setShikakuSoshitsuYMD(FlexibleDate shikakuSoshitsuYMD) {
@@ -529,7 +538,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
      * 認定証発行対象外フラグのgetメソッドです。
      * <br/>
      * <br/>true：認定証一括発行対象外
-     * 
+     *
      * @return 認定証発行対象外フラグ
      */
     @CheckForNull
@@ -541,7 +550,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
      * 認定証発行対象外フラグのsetメソッドです。
      * <br/>
      * <br/>true：認定証一括発行対象外
-     * 
+     *
      * @param ninteishoHakkoTaishogai 認定証発行対象外フラグ
      */
     public void setNinteishoHakkoTaishogai(boolean ninteishoHakkoTaishogai) {
@@ -550,10 +559,9 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * このエンティティの主キーが他の{@literal DbT4038ShogaishaKoujoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT4038ShogaishaKoujoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT4038ShogaishaKoujoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT4038ShogaishaKoujoEntity other) {
@@ -603,6 +611,7 @@ public class DbT4038ShogaishaKoujoEntity extends DbTableEntityBase<DbT4038Shogai
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
