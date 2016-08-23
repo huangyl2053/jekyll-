@@ -576,7 +576,10 @@ public class RiyoshaFutanWariaiHantei {
         if (HanteiKubunType.生活保護.code().equals(現判定区分)
                 && HanteiKubunType.負担割合判定.code().equals(前判定区分)) {
             now.setKoseiJiyu(KoseiJiyuType.その他.getコード());
-            now.setYukoKaishiYMD(now.getNinteiYukoKaishiDate());
+            FlexibleDate yukoKaishiDate = now.getNinteiYukoKaishiDate();
+            if (yukoKaishiDate != null) {
+                now.setYukoKaishiYMD(new FlexibleDate(yukoKaishiDate.getYearValue(), yukoKaishiDate.getMonthValue(), 1));
+            }
         }
         if (HanteiKubunType.非課税.code().equals(現判定区分)
                 && HanteiKubunType.負担割合判定.code().equals(前判定区分)) {
