@@ -113,6 +113,7 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
     private void get給付費通知減免補正一覧表のCSV出力(KyufuTsuchiGenmenHoseiEntity entity) {
         RStringBuilder filePath = new RStringBuilder();
         if (!市町村コード.equals(entity.getShokisaiHokenshaNo())) {
+            市町村コード = entity.getShokisaiHokenshaNo();
             eucCsvWriter.close();
             filePath.append("KyufuhiTuchiGenmenhoseiIchiran_");
             filePath.append(entity.getHiHokenshaNo().value());
