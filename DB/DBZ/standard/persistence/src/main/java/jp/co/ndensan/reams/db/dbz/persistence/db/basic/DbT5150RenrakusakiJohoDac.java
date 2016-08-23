@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護連絡先情報のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 chengsanyuan
  */
 public class DbT5150RenrakusakiJohoDac implements ISaveable<DbT5150RenrakusakiJohoEntity> {
 
@@ -82,6 +84,19 @@ public class DbT5150RenrakusakiJohoDac implements ISaveable<DbT5150RenrakusakiJo
     public int save(DbT5150RenrakusakiJohoEntity entity) {
 
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * DbT5150RenrakusakiJohoEntityを物理削除
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int deletePhysical(DbT5150RenrakusakiJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護連絡先情報"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.deletePhysical(entity).execute();
     }
 
     /**

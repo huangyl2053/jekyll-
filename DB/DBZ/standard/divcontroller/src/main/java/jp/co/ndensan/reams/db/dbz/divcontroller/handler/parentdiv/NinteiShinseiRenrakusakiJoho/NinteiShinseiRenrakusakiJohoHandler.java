@@ -224,7 +224,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
                 nullTOEmpty(div.getTxtMobileNo().getDomain().getColumnValue()),
                 nullTOEmpty(div.getTxtYusenJuni().getValue()),
                 div.getDdlRenrakusakiKubun().getSelectedKey(),
-                div.getDdlShisho().getSelectedKey(),
+                div.getDdlShisho().getSelectedValue(),
                 nullTOEmpty(div.getTxtKanaShimei().getValue()),
                 div.getTxtYubinNo().getValue() == null ? RString.EMPTY : div.getTxtYubinNo().getValue().getColumnValue(),
                 RString.EMPTY);
@@ -242,7 +242,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
                 nullTOEmpty(div.getTxtMobileNo().getDomain().getColumnValue()),
                 nullTOEmpty(div.getTxtYusenJuni().getValue()),
                 div.getDdlRenrakusakiKubun().getSelectedKey(),
-                div.getDdlShisho().getSelectedKey(),
+                div.getDdlShisho().getSelectedValue(),
                 nullTOEmpty(div.getTxtKanaShimei().getValue()),
                 div.getTxtYubinNo().getValue() == null ? RString.EMPTY : div.getTxtYubinNo().getValue().getColumnValue(),
                 div.getDgRenrakusakiIchiran().getActiveRow().getShinseishoKanriNo());

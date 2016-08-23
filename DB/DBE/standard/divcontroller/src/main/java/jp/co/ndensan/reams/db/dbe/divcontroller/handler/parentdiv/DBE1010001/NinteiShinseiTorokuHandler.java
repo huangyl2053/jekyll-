@@ -69,7 +69,6 @@ public class NinteiShinseiTorokuHandler {
 
         div.getCcdShikakuInfo().initialize(RString.EMPTY, 被保険者番号);
         setCommonDiv(result, 管理番号);
-        div.setTitle(new RString("審査依頼受付"));
     }
 
     /**
@@ -104,6 +103,9 @@ public class NinteiShinseiTorokuHandler {
         div.getCcdShikakuInfo().initialize(市町村コード.value(), business.get被保険者番号().value().padZeroToLeft(ZERO_10));
 
         div.getCcdKaigoNinteiShinseiKihon().initialize();
+        if (!RString.isNullOrEmpty(business.get支所コード())) {
+            div.getCcdKaigoNinteiShinseiKihon().setShisho(new ShishoCode(business.get支所コード()));
+        }
         div.getCcdShujiiIryokikanAndShujiiInput().initialize(市町村コード,
                 ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
@@ -116,21 +118,19 @@ public class NinteiShinseiTorokuHandler {
         }
         NinteiInputDataPassModel ninteiInput = new NinteiInputDataPassModel();
         ninteiInput.setSubGyomuCode(SubGyomuCode.DBE認定支援.value());
+        ninteiInput.set申請書管理番号(ShinseishoKanriNo.EMPTY);
         div.getCcdNinteiInput().initialize(ninteiInput);
         div.getCcdShinseiSonotaJohoInput().initialize();
         div.getCcdShisetsuJoho().initialize();
-
-        div.setTitle(new RString("みなし２号審査受付"));
     }
 
     /**
      * 届出情報の氏名・カナ氏名・続柄・郵便番号・住所・電話番号を設定します
      *
      * @param 宛名情報 宛名情報
-     * @param 本人との関係 本人との関係
      * @return 介護認定申請届出者情報
      */
-    public NinteiShinseiTodokedeshaDataPassModel set届出情報(IKojin 宛名情報, RString 本人との関係) {
+    public NinteiShinseiTodokedeshaDataPassModel set届出情報(IKojin 宛名情報) {
         NinteiShinseiTodokedeshaDataPassModel datapass = new NinteiShinseiTodokedeshaDataPassModel();
         if (宛名情報 != null) {
             datapass.setカナ氏名(宛名情報.get名称().getKana().value());
@@ -139,7 +139,7 @@ public class NinteiShinseiTorokuHandler {
             datapass.set電話番号(宛名情報.get連絡先１().value());
             datapass.set住所(宛名情報.get住所().get住所());
         }
-        datapass.set続柄(本人との関係);
+        datapass.set続柄(new RString("本人"));
         return datapass;
     }
 
@@ -167,6 +167,7 @@ public class NinteiShinseiTorokuHandler {
      */
     public NinteiShinseiCodeModel set市町村連絡事項(RString 市町村連絡事項, boolean flag) {
         NinteiShinseiCodeModel mode = new NinteiShinseiCodeModel();
+        mode.set連絡事項(市町村連絡事項);
         if (flag) {
             if (!RString.isNullOrEmpty(市町村連絡事項)) {
                 div.getBtnShichosonRenrakuJiko().setIconNameEnum(IconName.Check);
@@ -245,5 +246,15 @@ public class NinteiShinseiTorokuHandler {
         div.getCcdShisetsuJoho().set施設種類(result.get入所施設種類());
 
         div.setHdnShichosonCode(result.get市町村コード().value());
+
+        NinteiInputDataPassModel ninteiInput = new NinteiInputDataPassModel();
+        ninteiInput.setSubGyomuCode(SubGyomuCode.DBE認定支援.value());
+        ninteiInput.set要介護度コード(result.get要介護認定状態区分コード().value());
+        ninteiInput.set認定年月日(result.get認定年月日());
+        ninteiInput.set有効開始年月日(result.get認定有効期間開始年月日());
+        ninteiInput.set有効終了年月日(result.get認定有効期間終了年月日());
+        ninteiInput.set審査会意見(result.get介護認定審査会意見());
+        ninteiInput.set申請書管理番号(new ShinseishoKanriNo(管理番号));
+        div.getCcdNinteiInput().initialize(ninteiInput);
     }
 }
