@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijipanteisyori.IChiJiPanTeiSyoRiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijipanteisyori.IChiJiPanTeiSyoRiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijipanteisyori.IIChiJiPanTeiSyoRiMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
