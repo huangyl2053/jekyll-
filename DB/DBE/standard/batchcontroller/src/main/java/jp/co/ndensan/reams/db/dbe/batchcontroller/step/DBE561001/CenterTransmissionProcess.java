@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.centertransmission.Cente
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTransmissionCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTransmissionEditEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTransmissionEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTransmissionOutputEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -61,7 +60,6 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
     private CenterTransmissionProcessParameter parameter;
     private CenterTransmissionMybitisParamter mybitisParamter;
     private List<RString> 申請書管理番号リスト;
-    private List<RString> 出力された申請書管理番号;
     private RString 申請書管理番号;
     private FileSpoolManager manager;
     private RString filename;
@@ -77,13 +75,15 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
     static {
         OUTPUTSHINSEISHOKANRINO = new RString("outputShinseishoKanriNo");
     }
-    private OutputParameter<CenterTransmissionOutputEntity> outData;
+    private OutputParameter<List<RString>> outputShinseishoKanriNo;
+    private List<RString> 出力された申請書管理番号;
+
     @BatchWriter
     private CsvWriter<CenterTransmissionCsvEntity> csvWriterCenterTransmission;
 
     @Override
     protected void initialize() {
-        outData = new OutputParameter<>();
+        outputShinseishoKanriNo = new OutputParameter<>();
         シーケンシャル番号 = 0;
         出力データ件数 = 0;
         申請書管理番号リスト = parameter.get申請書管理番号リスト();
@@ -130,9 +130,7 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
 
     @Override
     protected void afterExecute() {
-        CenterTransmissionOutputEntity outputEntity = new CenterTransmissionOutputEntity();
-        outputEntity.set出力された申請書管理番号(出力された申請書管理番号);
-        outData.setValue(outputEntity);
+        outputShinseishoKanriNo.setValue(出力された申請書管理番号);
         outputJokenhyoFactory();
         manager.spool(filename);
     }

@@ -36,12 +36,11 @@ public class UpdateNinteiShinseiJohoProcess extends BatchProcessBase<DbT5101Nint
     @Override
     protected void initialize() {
         出力された申請書管理番号 = parameter.get申請書管理番号リスト();
-        mybitisParamter = parameter.toCenterTransmissionUpdateMybitisParamter();
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(SELECT_NINTEISHINSEIJOHO, mybitisParamter);
+        return new BatchDbReader(SELECT_NINTEISHINSEIJOHO, parameter.toCenterTransmissionUpdateMybitisParamter());
     }
 
     @Override

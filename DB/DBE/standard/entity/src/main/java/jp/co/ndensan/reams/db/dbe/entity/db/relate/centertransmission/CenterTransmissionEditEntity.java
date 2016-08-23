@@ -432,7 +432,7 @@ public class CenterTransmissionEditEntity {
                 RString.EMPTY, new RString(entity.getZenkaiServiceJokyoKoban15())));
         csvEntity.set前回結果_介護予防認知症対応型共同生活介護グループホーム(get項目By厚労省99Aと02A(entity.getZenkaiKoroshoIfShikibetsuCode(),
                 new RString(entity.getZenkaiServiceJokyoKoban11()), new RString(entity.getZenkaiServiceJokyoKoban16())));
-        csvEntity.set前回識別コード(entity.getZenkaiKoroshoIfShikibetsuCode().value());
+        csvEntity.set前回識別コード(getValue(entity.getZenkaiKoroshoIfShikibetsuCode()));
     }
 
     private void set前回調査項目(CenterTransmissionCsvEntity csvEntity) {

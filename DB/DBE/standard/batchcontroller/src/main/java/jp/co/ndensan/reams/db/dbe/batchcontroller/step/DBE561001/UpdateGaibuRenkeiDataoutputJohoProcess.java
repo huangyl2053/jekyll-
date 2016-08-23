@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionUpdateMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.centertransmission.CenterTransmissionUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7211GaibuRenkeiDataoutputJohoEntity;
@@ -26,9 +25,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class UpdateGaibuRenkeiDataoutputJohoProcess extends BatchProcessBase<DbT7211GaibuRenkeiDataoutputJohoEntity> {
 
     private static final RString SELECT_NINTEISHINSEIJOHO = new RString("jp.co.ndensan.reams.db.dbe"
-            + ".persistence.db.mapper.relate.centertransmission.ICenterTransmissionMapper.getNinteiShinseiJoho");
+            + ".persistence.db.mapper.relate.centertransmission.ICenterTransmissionMapper.getGaibuRenkeiDataoutputJoho");
     private CenterTransmissionUpdateProcessParameter parameter;
-    private CenterTransmissionUpdateMybitisParamter mybitisParamter;
     private List<RString> 出力された申請書管理番号;
 
     @BatchWriter
@@ -37,12 +35,11 @@ public class UpdateGaibuRenkeiDataoutputJohoProcess extends BatchProcessBase<DbT
     @Override
     protected void initialize() {
         出力された申請書管理番号 = parameter.get申請書管理番号リスト();
-        mybitisParamter = parameter.toCenterTransmissionUpdateMybitisParamter();
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(SELECT_NINTEISHINSEIJOHO, mybitisParamter);
+        return new BatchDbReader(SELECT_NINTEISHINSEIJOHO, parameter.toCenterTransmissionUpdateMybitisParamter());
     }
 
     @Override
