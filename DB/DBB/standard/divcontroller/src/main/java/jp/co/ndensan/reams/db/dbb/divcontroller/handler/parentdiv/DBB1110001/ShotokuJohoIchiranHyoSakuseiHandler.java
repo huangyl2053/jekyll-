@@ -138,6 +138,20 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
                         row.getTxtShoriEdTime().setValue(new RTime(システム日付.getRDateTime().getTime()
                                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)));
                         dgShichosonIchiran.add(row);
+                    } else {
+                        dgShichosonIchiran_Row row = new dgShichosonIchiran_Row();
+                        row.getTxtShichosonCode().setValue(joho.get市町村コード().getColumnValue());
+                        row.getTxtShichosonName().setValue(joho.get市町村名称());
+                        row.getTxtShichosonShikibetsuID().setValue(joho.get市町村識別ID());
+                        row.getTxtShoriStYMD().setValue(new RDate(new FlexibleDate(処理年度.getYearValue(),
+                                INDEX_4, INDEX_1).wareki().toDateString().toString()));
+                        row.getTxtShoriStTime().setValue(new RTime(new RTime(ゼロ時ゼロ分ゼロ秒)
+                                .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)));
+                        row.getTxtShoriEdYMD().setValue(new RDate(new FlexibleDate(システム日付.getDate().toString())
+                                .wareki().toDateString().toString()));
+                        row.getTxtShoriEdTime().setValue(new RTime(システム日付.getRDateTime().getTime()
+                                .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)));
+                        dgShichosonIchiran.add(row);
                     }
                 }
             }

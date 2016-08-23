@@ -32,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 減免減額申請書一括発行のDivControllerです。
@@ -109,17 +108,8 @@ public class ShinseishoIkkatsuHakko {
         validationHander.出力チェックボックスを選択しない(pairs, div);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
-        } else {
-            ShinseishoIkkatsuHakkoService shinseisho = new ShinseishoIkkatsuHakkoService();
-            List<ddlKohoshaList_Row> selectedItem = div.getGenmenShinseiHaakuList().getDdlKohoshaList().getSelectedItems();
-            for (ddlKohoshaList_Row row : selectedItem) {
-                UUID 発行処理ID = UUID.randomUUID();
-                ViewStateHolder.put(Keys.発行処理ID, 発行処理ID);
-                shinseisho.insertDbT4032(UUID.fromString(row.getHaakuShoriID().toString()), 発行処理ID);
-                shinseisho.insertDbT4033(new HihokenshaNo(row.getHihoNo()), 発行処理ID);
-            }
-            return ResponseData.of(div).respond();
         }
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -129,7 +119,13 @@ public class ShinseishoIkkatsuHakko {
      * @return ResponseData<DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter>
      */
     public ResponseData<DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter> onClick_btnprint(ShinseishoIkkatsuHakkoDiv div) {
-        UUID 発行処理ID = ViewStateHolder.get(Keys.発行処理ID, UUID.class);
+        ShinseishoIkkatsuHakkoService shinseisho = new ShinseishoIkkatsuHakkoService();
+        List<ddlKohoshaList_Row> selectedItem = div.getGenmenShinseiHaakuList().getDdlKohoshaList().getSelectedItems();
+        UUID 発行処理ID = UUID.randomUUID();
+        for (ddlKohoshaList_Row row : selectedItem) {
+            shinseisho.insertDbT4032(UUID.fromString(row.getHaakuShoriID().toString()), 発行処理ID);
+            shinseisho.insertDbT4033(new HihokenshaNo(row.getHihoNo()), 発行処理ID);
+        }
         DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter parameter = getHandler(div).getParameter(発行処理ID);
         return ResponseData.of(parameter).respond();
     }
@@ -179,18 +175,4 @@ public class ShinseishoIkkatsuHakko {
     private ShinseishoIkkatsuHakkoHandler getHandler(ShinseishoIkkatsuHakkoDiv div) {
         return new ShinseishoIkkatsuHakkoHandler(div);
     }
-
-    private enum Keys {
-
-        /**
-         * 発行処理ID
-         */
-        発行処理ID;
-
-        @Override
-        public String toString() {
-            return this.getDeclaringClass().getName().concat(name()).toString();
-        }
-    }
-
 }

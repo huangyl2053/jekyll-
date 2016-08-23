@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * KyufuJissekiKoshinReadCsvFileProcessパラメータです。
  *
- * @reamsid_L L DBC-2470-010 liuhui
+ * @reamsid_L DBC-2470-010 liuhui
  */
 @lombok.Getter
 @lombok.Setter
