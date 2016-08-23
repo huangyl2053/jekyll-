@@ -196,7 +196,7 @@
                                         A."hakkoShoriID" =#{発行処理ID}
                               <if test="出力フラグ" >
                               ORDER BY 
-                                   E."willBeRenewed",
+                                   E."willBeRenewed"
                               </if>
                                    ${出力順}                 
   </select>
