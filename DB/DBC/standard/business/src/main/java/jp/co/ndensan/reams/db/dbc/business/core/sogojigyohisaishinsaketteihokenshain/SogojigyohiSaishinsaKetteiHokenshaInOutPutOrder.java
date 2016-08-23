@@ -18,7 +18,7 @@ public enum SogojigyohiSaishinsaKetteiHokenshaInOutPutOrder implements IReportIt
     /**
      * 証記載保険者番号
      */
-    証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("DbWT3063.\"hdrShoHokenshaNo\"")),
+    証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("DbWT3063.\"shoKisaiHokenshaNo\"")),
     /**
      * 郵便番号
      */
@@ -42,7 +42,7 @@ public enum SogojigyohiSaishinsaKetteiHokenshaInOutPutOrder implements IReportIt
     /**
      * サービス提供年月
      */
-    サービス提供年月(new RString("0361"), new RString("serviceTeikyoYM"), new RString("DbWT3064.\"serviceTeikyoYm\"")),
+    サービス提供年月(new RString("0361"), new RString("serviceTeikyoYM"), new RString("DbWT3064.\"serviceTeikyoYM\"")),
     /**
      * 事業所番号
      */
@@ -50,7 +50,7 @@ public enum SogojigyohiSaishinsaKetteiHokenshaInOutPutOrder implements IReportIt
     /**
      * 取り扱い年月
      */
-    取り扱い年月(new RString("0363"), new RString("toriatsukaiYM"), new RString("DbWT3064.\"toriatsukaiYm\""));
+    取り扱い年月(new RString("0363"), new RString("toriatsukaiYM"), new RString("DbWT3064.\"toriatsukaiYM\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

@@ -298,12 +298,12 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
         div.getKetteiJoho().setDisabled(false);
         div.getBtnBackToShinseiList().setDisabled(false);
         div.getTxtDetermineShinsei().setDisabled(false);
-        div.getTxtKettaiYMD().setDisabled(false);
-        div.getTxtTaishoNendo().setDisabled(false);
-        div.getTxtKijunYMD().setDisabled(false);
-        div.getTxtHaakuYMD().setDisabled(false);
         boolean is申請メニュー = 申請メニュー.equals(ResponseHolder.getMenuID());
         div.getRadKettaiKubun().setDisabled(is申請メニュー);
+        div.getTxtKettaiYMD().setDisabled(is申請メニュー);
+        div.getTxtTaishoNendo().setDisabled(is申請メニュー);
+        div.getTxtKijunYMD().setDisabled(is申請メニュー);
+        div.getTxtHaakuYMD().setDisabled(is申請メニュー);
         div.getChkHasShogaishaTecho().setDisabled(is申請メニュー);
         div.getChkIsNinteishoHakkoTaishoGai().setDisabled(is申請メニュー);
         if (!is承認する) {
