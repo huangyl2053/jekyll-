@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JissiJyokyohyoHandler {
 
     private static final RString 帳票キー0 = new RString("key0");
+    private static final RString 帳票キー1 = new RString("key1");
     private static final RString 年齢キー0 = new RString("0");
     private static final RString 年齢キー1 = new RString("1");
     private static final RString 地区キー0 = new RString("key0");
@@ -33,8 +34,8 @@ public class JissiJyokyohyoHandler {
     private static final RString 要介護認定実施状況表 = new RString("要介護認定実施状況表（その月に申請・認定を受けた受給者の統計）");
     private static final RString 要介護認定月別受給者認定者数状況表
             = new RString("要介護認定月別受給者認定者数状況表（その月に基準日時点の受給者の統計）");
-    private static final RString 基準キー0 = new RString("0");
-    private static final RString 基準キー1 = new RString("1");
+    private static final RString 基準キー0 = new RString("key0");
+    private static final RString 基準キー1 = new RString("key1");
     private static final RString 集計単位キー0 = new RString("0");
     private static final RString 集計単位キー1 = new RString("1");
     private static final RString 集計単位キー2 = new RString("2");
@@ -132,11 +133,11 @@ public class JissiJyokyohyoHandler {
             parameter.set出力帳票(要介護認定月別受給者認定者数状況表);
         }
         parameter.set対象年度(new FlexibleYear(div.getJyoukenPanel().getTxtnendo().getText().substring(0, 4)));
-        if (div.getCyouhyouPanel().getRdoCyouhyou().getSelectedKey().equals(帳票キー0)
+        if (div.getCyouhyouPanel().getRdoCyouhyou().getSelectedKey().equals(帳票キー1)
                 && div.getJyoukenPanel().getRdoKijyun().getSelectedKey().equals(基準キー0)) {
             parameter.set基準フラグ(基準フラグ0);
-            parameter.set基準日(div.getJyoukenPanel().getDdlKijyunhi().getLabelLText());
-        } else if (div.getCyouhyouPanel().getRdoCyouhyou().getSelectedKey().equals(帳票キー0)
+            parameter.set基準日(div.getJyoukenPanel().getDdlKijyunhi().getSelectedValue());
+        } else if (div.getCyouhyouPanel().getRdoCyouhyou().getSelectedKey().equals(帳票キー1)
                 && div.getJyoukenPanel().getRdoKijyun().getSelectedKey().equals(基準キー1)) {
             parameter.set基準フラグ(基準フラグ1);
         }

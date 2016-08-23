@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Aug 19 15:24:01 CST 2016
+ * Mon Aug 22 18:02:29 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -44,6 +44,7 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
     private RString hdnMeisaiNo;
     private RString hdnGokeiFlag;
     private RString hdnGokeiGyoFlag;
+    private RString hdnRiyoshaFutanTeiritsuTeigakuKbn;
 
     public dgServiceRiyohyoBeppyoList_Row() {
         super();
@@ -73,6 +74,7 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
         this.hdnMeisaiNo = RString.EMPTY;
         this.hdnGokeiFlag = RString.EMPTY;
         this.hdnGokeiGyoFlag = RString.EMPTY;
+        this.hdnRiyoshaFutanTeiritsuTeigakuKbn = RString.EMPTY;
         this.setOriginalData("jigyosha", jigyosha);
         this.setOriginalData("service", service);
         this.setOriginalData("meisaiGokeiKubun", meisaiGokeiKubun);
@@ -99,9 +101,10 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
         this.setOriginalData("hdnMeisaiNo", hdnMeisaiNo);
         this.setOriginalData("hdnGokeiFlag", hdnGokeiFlag);
         this.setOriginalData("hdnGokeiGyoFlag", hdnGokeiGyoFlag);
+        this.setOriginalData("hdnRiyoshaFutanTeiritsuTeigakuKbn", hdnRiyoshaFutanTeiritsuTeigakuKbn);
     }
 
-    public dgServiceRiyohyoBeppyoList_Row(RString jigyosha, RString service, RString meisaiGokeiKubun, TextBoxNum tani, TextBoxNum waribikigoRitsu, TextBoxNum waribikigoTani, TextBoxNum kaisu, TextBoxNum serviceTani, TextBoxNum shuruiGendoChokaTani, TextBoxNum shuruiGendonaiTani, TextBoxNum kubunGendoChokaTani, TextBoxNum kubunGendonaiTani, TextBoxNum tanisuTanka, TextBoxNum hiyoSogaku, TextBoxNum kyufuritsu, TextBoxNum hokenKyufugaku, TextBoxNum riyoshaFutangakuTeigaku, TextBoxNum riyoshaFutangakuHoken, TextBoxNum riyoshaFutangakuZengaku, RString hdnJigyoshaCode, RString hdnServiceShuruiCode, RString hdnGendogakuTaishogaiFlag, RString hdnServiceKomokuCode, RString hdnMeisaiNo, RString hdnGokeiFlag, RString hdnGokeiGyoFlag) {
+    public dgServiceRiyohyoBeppyoList_Row(RString jigyosha, RString service, RString meisaiGokeiKubun, TextBoxNum tani, TextBoxNum waribikigoRitsu, TextBoxNum waribikigoTani, TextBoxNum kaisu, TextBoxNum serviceTani, TextBoxNum shuruiGendoChokaTani, TextBoxNum shuruiGendonaiTani, TextBoxNum kubunGendoChokaTani, TextBoxNum kubunGendonaiTani, TextBoxNum tanisuTanka, TextBoxNum hiyoSogaku, TextBoxNum kyufuritsu, TextBoxNum hokenKyufugaku, TextBoxNum riyoshaFutangakuTeigaku, TextBoxNum riyoshaFutangakuHoken, TextBoxNum riyoshaFutangakuZengaku, RString hdnJigyoshaCode, RString hdnServiceShuruiCode, RString hdnGendogakuTaishogaiFlag, RString hdnServiceKomokuCode, RString hdnMeisaiNo, RString hdnGokeiFlag, RString hdnGokeiGyoFlag, RString hdnRiyoshaFutanTeiritsuTeigakuKbn) {
         super();
         this.setOriginalData("jigyosha", jigyosha);
         this.setOriginalData("service", service);
@@ -129,6 +132,7 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
         this.setOriginalData("hdnMeisaiNo", hdnMeisaiNo);
         this.setOriginalData("hdnGokeiFlag", hdnGokeiFlag);
         this.setOriginalData("hdnGokeiGyoFlag", hdnGokeiGyoFlag);
+        this.setOriginalData("hdnRiyoshaFutanTeiritsuTeigakuKbn", hdnRiyoshaFutanTeiritsuTeigakuKbn);
         this.jigyosha = jigyosha;
         this.service = service;
         this.meisaiGokeiKubun = meisaiGokeiKubun;
@@ -155,6 +159,7 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
         this.hdnMeisaiNo = hdnMeisaiNo;
         this.hdnGokeiFlag = hdnGokeiFlag;
         this.hdnGokeiGyoFlag = hdnGokeiGyoFlag;
+        this.hdnRiyoshaFutanTeiritsuTeigakuKbn = hdnRiyoshaFutanTeiritsuTeigakuKbn;
     }
 
     public RString getJigyosha() {
@@ -259,6 +264,10 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
 
     public RString getHdnGokeiGyoFlag() {
         return hdnGokeiGyoFlag;
+    }
+
+    public RString getHdnRiyoshaFutanTeiritsuTeigakuKbn() {
+        return hdnRiyoshaFutanTeiritsuTeigakuKbn;
     }
 
     public void setJigyosha(RString jigyosha) {
@@ -389,6 +398,11 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
     public void setHdnGokeiGyoFlag(RString hdnGokeiGyoFlag) {
         this.setOriginalData("hdnGokeiGyoFlag", hdnGokeiGyoFlag);
         this.hdnGokeiGyoFlag = hdnGokeiGyoFlag;
+    }
+
+    public void setHdnRiyoshaFutanTeiritsuTeigakuKbn(RString hdnRiyoshaFutanTeiritsuTeigakuKbn) {
+        this.setOriginalData("hdnRiyoshaFutanTeiritsuTeigakuKbn", hdnRiyoshaFutanTeiritsuTeigakuKbn);
+        this.hdnRiyoshaFutanTeiritsuTeigakuKbn = hdnRiyoshaFutanTeiritsuTeigakuKbn;
     }
 
     // </editor-fold>

@@ -23,6 +23,7 @@
             DbT3017."seiriNo",
             DbT3017."kyufuSakuseiKubunCode",
             DbT3017."jigyoshoNo",
+            shikibetsuNoA."shikibetsuNo",
             shikibetsuNoA."shikibetsuNo" || ' ' || shikibetsuNoA."ryakusho" AS shikibetsuMeisho
         FROM rgdb."DbT3017KyufujissekiKihon" AS DbT3017
         LEFT JOIN 

@@ -158,7 +158,8 @@ public class PanelAtenaHandler {
 
     private RString flexToRstr(FlexibleDate date) {
         if (date != null && !date.isEmpty()) {
-            return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
+            return date.wareki().eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
         }
         return RString.EMPTY;
     }

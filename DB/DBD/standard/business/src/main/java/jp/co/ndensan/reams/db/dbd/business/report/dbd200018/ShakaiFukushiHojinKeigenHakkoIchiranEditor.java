@@ -118,14 +118,12 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
                 source.list_10 = new RString("却下");
             }
             if (決定.equals(決定区分承認)) {
-                source.list_11 = this.帳票情報.get軽減().get略称();
+                source.list_11 = this.帳票情報.get軽減().get名称();
             } else if (決定.equals(決定区分承認しない)) {
                 source.list_11 = RString.EMPTY;
             }
             if (this.帳票情報.get軽減率_分子() != null
-                    && !this.帳票情報.get軽減率_分子().isEmpty()
                     && this.帳票情報.get軽減率_分母() != null
-                    && !this.帳票情報.get軽減率_分母().isEmpty()
                     && !this.帳票情報.get軽減率_分母().equals(new RString("0"))) {
                 Decimal 軽減率_分子 = new Decimal(this.帳票情報.get軽減率_分子().toString());
                 Decimal 軽減率_分母 = new Decimal(this.帳票情報.get軽減率_分母().toString());

@@ -55,9 +55,9 @@ public class ShinsaTaishoDataOutPutFlow extends BatchFlowBase<ShinsaTaishoDataOu
     }
 
     /**
-     * 認定調査データ出力（モバイル）のCSV出力Processです。
+     * DB出力(介護認定審査会開催予定情報)Processです。
      *
-     * @return 認定調査データ出力（モバイル）
+     * @return DB出力(介護認定審査会開催予定情報)
      */
     @Step(DBT5501UPDATEPROCESS)
     protected IBatchFlowCommand callDbT5501Update() {

@@ -44,7 +44,7 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
     /**
      * インスタンスを生成します。
      *
-     * @param 帳票情報 FutangakuNinteiHakkoIchiranEntity
+     * @param 帳票情報 FutanGenndoGakuNinnteiListRecordEntity
      * @param association Association
      * @param iOutputOrder IOutputOrder
      * @param 個人情報 IKojin
@@ -135,7 +135,7 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
             if (this.帳票情報.is通知書発行フラグ()) {
                 source.list_12 = new RString("○");
             }
-            source.list_13 = this.帳票情報.get入所施設CD();
+            source.list_13 = this.帳票情報.get入所施設CD().getColumnValue();
         }
     }
 

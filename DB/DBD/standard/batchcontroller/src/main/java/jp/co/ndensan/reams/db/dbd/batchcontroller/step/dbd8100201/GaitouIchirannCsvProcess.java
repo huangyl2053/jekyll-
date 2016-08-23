@@ -175,7 +175,7 @@ public class GaitouIchirannCsvProcess extends BatchProcessBase<HikazeNenkinTaish
             return RString.EMPTY;
         } else {
             FlexibleDate date = new FlexibleDate(年月日);
-            return date.seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString();
+            return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
     }
 

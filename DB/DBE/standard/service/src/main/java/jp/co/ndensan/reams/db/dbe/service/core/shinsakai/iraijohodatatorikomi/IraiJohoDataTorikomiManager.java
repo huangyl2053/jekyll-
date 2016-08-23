@@ -215,7 +215,7 @@ public class IraiJohoDataTorikomiManager {
         entity.setIkenshoDoiFlag(business.is同意の有無());
         entity.setSaishuShinryoYMD(business.get最終診察日());
         entity.setExistTakaJushinFlag(business.is他科受診有無());
-        if (RString.isNullOrEmpty(business.get他科名())) {
+        if (!RString.isNullOrEmpty(business.get他科名())) {
             entity.setExistNaikaJushinFlag(選択項目.equals(business.get他科名().substring(0, 1)));
             entity.setExistSeishinkaJushinFlag(選択項目.equals(business.get他科名().substring(1, 2)));
             entity.setExistGekaJushinFlag(選択項目.equals(business.get他科名().substring(2, INT_3)));
@@ -260,7 +260,7 @@ public class IraiJohoDataTorikomiManager {
         entity.setIkenshoDoiFlag(business.is同意の有無());
         entity.setSaishuShinryoYMD(business.get最終診察日());
         entity.setExistTakaJushinFlag(business.is他科受診有無());
-        if (RString.isNullOrEmpty(business.get他科名())) {
+        if (!RString.isNullOrEmpty(business.get他科名())) {
             entity.setExistNaikaJushinFlag(選択項目.equals(business.get他科名().substring(0, 1)));
             entity.setExistSeishinkaJushinFlag(選択項目.equals(business.get他科名().substring(1, 2)));
             entity.setExistGekaJushinFlag(選択項目.equals(business.get他科名().substring(2, INT_3)));
@@ -460,6 +460,8 @@ public class IraiJohoDataTorikomiManager {
             return get周辺症状詳細の意見項目(INT_11, INT_12, business);
         } else if (IkenshoKinyuMapping09B.その他の精神_神経症状.getコード().equals(new RString(連番))) {
             return business.get精神神経症状有無();
+        } else if (IkenshoKinyuMapping09B.専門医受診の有無.getコード().equals(new RString(連番))) {
+            return business.get専門医受診有無();
         } else if (IkenshoKinyuMapping09B.身長.getコード().equals(new RString(連番))) {
             return business.get身長();
         } else if (IkenshoKinyuMapping09B.体重.getコード().equals(new RString(連番))) {
@@ -785,6 +787,8 @@ public class IraiJohoDataTorikomiManager {
             return get周辺症状詳細の意見項目(INT_11, INT_12, business);
         } else if (IkenshoKinyuMapping09A.その他の精神_神経症状.getコード().equals(new RString(連番))) {
             return business.get精神神経症状有無();
+        } else if (IkenshoKinyuMapping09A.専門医受診の有無.getコード().equals(new RString(連番))) {
+            return business.get専門医受診有無();
         } else if (IkenshoKinyuMapping09A.身長.getコード().equals(new RString(連番))) {
             return business.get身長();
         } else if (IkenshoKinyuMapping09A.体重.getコード().equals(new RString(連番))) {
@@ -841,6 +845,8 @@ public class IraiJohoDataTorikomiManager {
             return get周辺症状詳細の意見項目(INT_11, INT_12, business);
         } else if (IkenshoKinyuMapping06A.その他の精神_神経症状.getコード().equals(new RString(連番))) {
             return business.get精神神経症状有無();
+        } else if (IkenshoKinyuMapping06A.専門医受診の有無.getコード().equals(new RString(連番))) {
+            return business.get専門医受診有無();
         } else if (IkenshoKinyuMapping06A.身長.getコード().equals(new RString(連番))) {
             return business.get身長();
         } else if (IkenshoKinyuMapping06A.体重.getコード().equals(new RString(連番))) {
@@ -897,6 +903,8 @@ public class IraiJohoDataTorikomiManager {
             return get周辺症状詳細の意見項目(INT_11, INT_12, business);
         } else if (IkenshoKinyuMapping02A.その他の精神_神経症状.getコード().equals(new RString(連番))) {
             return business.get精神神経症状有無();
+        } else if (IkenshoKinyuMapping02A.専門医受診の有無.getコード().equals(new RString(連番))) {
+            return business.get専門医受診有無();
         } else if (IkenshoKinyuMapping02A.身長.getコード().equals(new RString(連番))) {
             return business.get身長();
         } else if (IkenshoKinyuMapping02A.体重.getコード().equals(new RString(連番))) {
@@ -943,6 +951,8 @@ public class IraiJohoDataTorikomiManager {
             return get周辺症状詳細の意見項目(INT_11, INT_12, business);
         } else if (IkenshoKinyuMapping99A.その他の精神_神経症状.getコード().equals(new RString(連番))) {
             return business.get精神神経症状有無();
+        } else if (IkenshoKinyuMapping99A.専門医受診の有無.getコード().equals(new RString(連番))) {
+            return business.get専門医受診有無();
         } else if (IkenshoKinyuMapping99A.身長.getコード().equals(new RString(連番))) {
             return business.get身長();
         } else if (IkenshoKinyuMapping99A.体重.getコード().equals(new RString(連番))) {

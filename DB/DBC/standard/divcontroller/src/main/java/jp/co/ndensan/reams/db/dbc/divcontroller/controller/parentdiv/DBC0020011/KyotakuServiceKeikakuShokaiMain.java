@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0020011;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0020011.DBC0020011StateName;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0020011.DBC0020011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0020011.KyotakuServiceKeikakuShokaiMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0020011.dgKyotakuServiceRirekiIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0020011.dgRiyoNentstsuIchiran_Row;
@@ -80,6 +79,7 @@ public class KyotakuServiceKeikakuShokaiMain {
         div.getCcdServiceRiyohyoInfo().initialize(
                 照会, new FlexibleYearMonth(riyoRow.getRiyoYM().getValue().getYearMonth().toString()),
                 対象年月, 被保険者番号, 総合事業区分, 履歴番号);
+        init公開コントロール(div);
         return ResponseData.of(div).setState(DBC0020011StateName.明細表示);
     }
 
@@ -96,17 +96,6 @@ public class KyotakuServiceKeikakuShokaiMain {
     }
 
     /**
-     * 「履歴一覧戻る」ボタン
-     *
-     * @param div KyotakuServiceKeikakuShokaiMainDiv
-     * @return ResponseData
-     */
-    public ResponseData<KyotakuServiceKeikakuShokaiMainDiv> onClick_Over(KyotakuServiceKeikakuShokaiMainDiv div) {
-        return ResponseData.of(div).forwardWithEventName(
-                DBC0020011TransitionEventName.完了).respond();
-    }
-
-    /**
      * 「利用月一覧に戻る」ボタンクリック時の事件です。
      *
      * @param div JikoFutangakuHoseiDiv
@@ -115,6 +104,12 @@ public class KyotakuServiceKeikakuShokaiMain {
     public ResponseData<KyotakuServiceKeikakuShokaiMainDiv> onClick_btnBackRiyoNengetsuIchiran(
             KyotakuServiceKeikakuShokaiMainDiv div) {
         return ResponseData.of(div).setState(DBC0020011StateName.届出表示);
+    }
+
+    private void init公開コントロール(KyotakuServiceKeikakuShokaiMainDiv div) {
+        div.getCcdServiceRiyohyoInfo().setTodokedeYMD(div.getTxtTodokedeYmd().getValue());
+        div.getCcdServiceRiyohyoInfo().setTekiyoKikanFrom(div.getTxtTekiyoKikan().getFromValue());
+        div.getCcdServiceRiyohyoInfo().setTekiyoKikanTo(div.getTxtTekiyoKikan().getToValue());
     }
 
     private KyotakuServiceKeikakuShokaiMainHander getHander(KyotakuServiceKeikakuShokaiMainDiv div) {

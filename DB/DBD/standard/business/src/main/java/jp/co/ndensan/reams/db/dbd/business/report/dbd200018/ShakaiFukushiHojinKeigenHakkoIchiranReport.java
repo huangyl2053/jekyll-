@@ -29,7 +29,7 @@ public final class ShakaiFukushiHojinKeigenHakkoIchiranReport extends Report<Sha
     /**
      * インスタンスを生成します。
      *
-     * @param 帳票情報 ShakaiFukushiHojinKeigenHakkoIchiranEntity
+     * @param 帳票情報 ShakaiFukushiHoujinnKeigenListRecordEntity
      * @param association Association
      * @param iOutputOrder IOutputOrder
      * @param 個人情報 IKojin

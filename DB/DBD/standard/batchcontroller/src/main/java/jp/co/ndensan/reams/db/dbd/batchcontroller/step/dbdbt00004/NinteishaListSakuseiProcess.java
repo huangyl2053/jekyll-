@@ -662,7 +662,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
             eucCsvEntity.set世帯員課税区分(RString.EMPTY);
         }
 
-        if (joho.get課税所得額().intValue() > 0) {
+        if (joho.get課税所得額() != null && joho.get課税所得額().intValue() > 0) {
             eucCsvEntity.set世帯員所得税課税区分(課);
         } else {
             eucCsvEntity.set世帯員所得税課税区分(RString.EMPTY);

@@ -62,6 +62,50 @@
         <association property="事業高額合算支給額計算結果" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaMapper.resultMap_DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity"/>
         <association property="事業高額合算支給不支給決定" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3174JigyoKogakuGassanShikyuFushikyuKetteiMapper.ResultMap_DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity"/>    
     </resultMap>
+    
+    
+    <select id="select被保険者宛名情報" resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakugassanshikyuketteitsuchisho.KougakuGassanShikyuKetteiTsuchishoParameter"
+            resultMap="resultMap_HihokenshaShikibetsuTaisho" fetchSize="500">
+        SELECT 
+            "DbT1001HihokenshaDaicho"."shichosonCode" AS  "dbT1001HihokenshaDaicho_shichosonCode",
+            "DbT1001HihokenshaDaicho"."shikibetsuCode" AS  "dbT1001HihokenshaDaicho_shikibetsuCode",
+            "ShikibetsuTaisho"."kanaShimei"         AS   "ShikibetsuTaisho_kanaShimei",
+            "ShikibetsuTaisho"."kanjiShimei"        AS   "ShikibetsuTaisho_kanjiShimei",
+            "ShikibetsuTaisho"."seinengappiYMD"     AS   "ShikibetsuTaisho_seinengappiYMD",
+            "ShikibetsuTaisho"."seibetsuCode"       AS   "ShikibetsuTaisho_seibetsuCode",
+            "ShikibetsuTaisho"."yubinNo"            AS   "ShikibetsuTaisho_yubinNo",
+            "ShikibetsuTaisho"."zenkokuJushoCode"   AS   "ShikibetsuTaisho_zenkokuJushoCode",
+            "ShikibetsuTaisho"."gyoseikuCode"       AS   "ShikibetsuTaisho_gyoseikuCode",
+            "ShikibetsuTaisho"."juminShubetsuCode"  AS   "ShikibetsuTaisho_juminShubetsuCode",
+            "ShikibetsuTaisho"."jusho"              AS   "ShikibetsuTaisho_jusho"
+        FROM
+            rgdb."DbV1001HihokenshaDaicho"  AS "DbT1001HihokenshaDaicho"
+        LEFT JOIN    
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
+        ON
+            "DbT1001HihokenshaDaicho"."shikibetsuCode"= "ShikibetsuTaisho"."shikibetsuCode"
+        WHERE
+            "DbT1001HihokenshaDaicho"."logicalDeletedFlag" = false
+            AND "DbT1001HihokenshaDaicho"."hihokenshaNo" = #{被保険者番号}
+        ORDER BY
+            "DbT1001HihokenshaDaicho"."idoYMD" DESC, "DbT1001HihokenshaDaicho"."edaNo" DESC 
+        LIMIT 1
+   </select>
    
+   
+   <resultMap id="resultMap_HihokenshaShikibetsuTaisho" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakugassanshikyuketteitsuchisho.HihokenshaTaishoPSMFuka" autoMapping="true">
+        <result property="shichosonCode"                      column="dbT1001HihokenshaDaicho_shichosonCode"               typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="shikibetsuCode"                     column="dbT1001HihokenshaDaicho_shikibetsuCode"              typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>    
+        <result property="kanjiShimei"                        column="ShikibetsuTaisho_kanjiShimei"                        typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="kanaShimei"                         column="ShikibetsuTaisho_kanaShimei"                         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <result property="seinengappiYMD"                     column="ShikibetsuTaisho_seinengappiYMD"                     typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="seibetsuCode"                       column="ShikibetsuTaisho_seibetsuCode"                       typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="yubinNo"                            column="ShikibetsuTaisho_yubinNo"                            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="zenkokuJushoCode"                   column="ShikibetsuTaisho_zenkokuJushoCode"                   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler" />
+        <result property="gyoseikuCode"                       column="ShikibetsuTaisho_gyoseikuCode"                       typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler" />
+        <result property="juminShubetsuCode"                  column="ShikibetsuTaisho_juminShubetsuCode"                  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jusho"                              column="ShikibetsuTaisho_jusho"                              typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
+   </resultMap>
    
 </mapper>

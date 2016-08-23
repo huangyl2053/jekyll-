@@ -154,9 +154,9 @@
                ,T."kohiJukyushaNo" AS 公費受給者番号
                ,T."shokisaiHokenshaNo" AS 証記載保険者番号
                ,宛名."meisho" AS 宛名名称 FROM T
-            LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',TRUE,
-            '','','','','','','',FALSE,'','','','','','','','','','','',FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,
-            FALSE,'','','','','','','','',FALSE,'','',FALSE,FALSE,FALSE,'','','','','','','','','','','','','','','','','','','{}')
+            LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+           '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
             AS 宛名 ON 宛名."shikibetsuCode" = T."shikibetsuCode"
     </select>
     

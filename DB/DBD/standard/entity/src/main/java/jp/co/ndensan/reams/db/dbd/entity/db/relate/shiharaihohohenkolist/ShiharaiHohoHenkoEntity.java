@@ -86,8 +86,6 @@ public class ShiharaiHohoHenkoEntity {
     private List<ShunoNendoEntity> 収納情報List;
     private RString 収納情報なし;
 
-    private RYear 日付関連_調定年度;
-
-    // TODO 臨時追加
     private RYear 賦課年度;
+    private RYear 日付関連_調定年度;
 }

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshioruka.Ikensho
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.IraiJohoDataTorikomiCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.IraiJohoDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.dgTorikomiFileIchiran_Row;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
  */
 public class IraiJohoDataTorikomiHandler {
 
+    private static final int INT_10 = 10;
     private static final RString 同意する = new RString("1");
     private static final RString 有 = new RString("1");
     private final IraiJohoDataTorikomiDiv div;
@@ -49,11 +51,12 @@ public class IraiJohoDataTorikomiHandler {
         for (IraiJohoDataTorikomiCsvEntity csvEntity : csvEntityList) {
             dgTorikomiFileIchiran_Row row1 = new dgTorikomiFileIchiran_Row();
             row1.setHokenshaBango(csvEntity.get保険者番号());
-            row1.setHihokenshaBango(csvEntity.get被保険者番号());
+            row1.setHihokenshaBango(!RString.isNullOrEmpty(csvEntity.get被保険者番号())
+                    ? csvEntity.get被保険者番号().padZeroToLeft(INT_10) : RString.EMPTY);
             row1.setShinseibi(csvEntity.get申請日());
             row1.setHihokenshaShimei(csvEntity.get患者名());
             row1.setSeninengapi(csvEntity.get生年月日());
-            row1.setSeibetu(csvEntity.get性別());
+            row1.setSeibetu(Seibetsu.toValue(csvEntity.get性別()).get名称());
             row1.setYubinBangou(csvEntity.get郵便番号());
             row1.setJyusyo(csvEntity.get住所());
             row1.setIryouKikanMei(csvEntity.get医療機関名());
@@ -93,7 +96,8 @@ public class IraiJohoDataTorikomiHandler {
                 rowlist.add(row1);
                 dgTorikomiFileIchiran_Row row2 = rowList.get(i + 1);
                 row2.setHokenshaBango(nullToEmpty(ninteiShinseiJohoList.get(i).get保険者番号()));
-                row2.setHihokenshaBango(nullToEmpty(ninteiShinseiJohoList.get(i).get被保険者番号()));
+                row2.setHihokenshaBango(nullToEmpty(!RString.isNullOrEmpty(ninteiShinseiJohoList.get(i).get被保険者番号())
+                        ? ninteiShinseiJohoList.get(i).get被保険者番号().padZeroToLeft(INT_10) : RString.EMPTY));
                 row2.setShinseibi(nullToEmpty(ninteiShinseiJohoList.get(i).get認定申請年月日()));
                 row2.setHihokenshaShimei(nullToEmpty(ninteiShinseiJohoList.get(i).get被保険者氏名()));
                 row2.setSeninengapi(nullToEmpty(ninteiShinseiJohoList.get(i).get生年月日()));
@@ -118,7 +122,8 @@ public class IraiJohoDataTorikomiHandler {
                 rowlist.add(row1);
                 dgTorikomiFileIchiran_Row row2 = rowList.get(2 * i + 1);
                 row2.setHokenshaBango(nullToEmpty(ninteiShinseiJohoList.get(i).get保険者番号()));
-                row2.setHihokenshaBango(nullToEmpty(ninteiShinseiJohoList.get(i).get被保険者番号()));
+                row2.setHihokenshaBango(nullToEmpty(!RString.isNullOrEmpty(ninteiShinseiJohoList.get(i).get被保険者番号())
+                        ? ninteiShinseiJohoList.get(i).get被保険者番号().padZeroToLeft(INT_10) : RString.EMPTY));
                 row2.setShinseibi(nullToEmpty(ninteiShinseiJohoList.get(i).get認定申請年月日()));
                 row2.setHihokenshaShimei(nullToEmpty(ninteiShinseiJohoList.get(i).get被保険者氏名()));
                 row2.setSeninengapi(nullToEmpty(ninteiShinseiJohoList.get(i).get生年月日()));

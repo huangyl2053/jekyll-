@@ -74,9 +74,9 @@ public class KyufuJissekiGaitosha {
                         給付管理票.getサービス提供年月().toDateString(),
                         給付管理票.get被保険者番号().value());
         ArrayList<KyufuKanrihyoShokaiDataModel> 給付管理明細一覧Model = new ArrayList<>();
-        Boolean 居宅サービスフラグ = false;
-        Boolean 訪問通所サービスフラグ = false;
-        Boolean 短期入所サービスフラグ = false;
+        boolean 居宅サービスフラグ = false;
+        boolean 訪問通所サービスフラグ = false;
+        boolean 短期入所サービスフラグ = false;
         for (KyufuKanrihyoShokaiBusiness 給付管理明細 : 給付管理明細一覧) {
             給付管理明細一覧Model.add(KyufuKanrihyoShokaiDataModel.createDataModel(給付管理明細));
             if (!居宅サービスフラグ && KyotakuServiceKubun.居宅サービス.getコード().equals(

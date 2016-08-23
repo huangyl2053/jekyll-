@@ -147,9 +147,9 @@ public class NennkinnBanngouCsvProcess extends BatchProcessBase<HikazeNenkinTais
         eucCsvEntity.set性別コード(t.getDtSeibetsu());
         eucCsvEntity.set性別(set性別コード(t.getDtSeibetsu()));
         eucCsvEntity.setカナ氏名(t.getDtKanaShimei());
-        eucCsvEntity.set漢字氏名(t.getAtenaKanaShimei());
+        eucCsvEntity.set漢字氏名(t.getDtKanjiShimei());
         eucCsvEntity.set郵便番号(setフォ(t.getDtYubinNo()));
-        eucCsvEntity.set住所(t.getDtKanajusyo());
+        eucCsvEntity.set住所(t.getDtKanjijusyo());
     }
 
     private RString set年月日(RString 年月日) {
@@ -157,7 +157,7 @@ public class NennkinnBanngouCsvProcess extends BatchProcessBase<HikazeNenkinTais
             return RString.EMPTY;
         } else {
             FlexibleDate date = new FlexibleDate(年月日);
-            return date.seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString();
+            return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
     }
 

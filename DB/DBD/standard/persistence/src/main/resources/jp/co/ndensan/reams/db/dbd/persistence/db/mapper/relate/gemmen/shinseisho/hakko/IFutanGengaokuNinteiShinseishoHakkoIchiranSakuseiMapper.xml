@@ -150,7 +150,7 @@
                                             I1."hihokenshaNo",
                                             I2."keikakuJigyoshaNo" AS "jigyoshaNo",
                                             I3."jigyoshaName", 
-                                            (CASE WHEN I3."jigyoshaName"  IS NULL THEN TRUE ELSE FALSE END )AS is自己作成
+                                            (CASE WHEN I3."jigyoshaName" = '' THEN TRUE ELSE FALSE END )AS is自己作成
                                      FROM 
                                             rgdb."DbT3005KyotakuKeikakuTodokede" AS I1
                                     
@@ -196,7 +196,7 @@
                                         A."hakkoShoriID" =#{発行処理ID}
                               <if test="出力フラグ" >
                               ORDER BY 
-                                   E."willBeRenewed",
+                                   E."willBeRenewed"
                               </if>
                                    ${出力順}                 
   </select>

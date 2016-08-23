@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.saishinsaketteihokenshaincsvfile
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
@@ -65,7 +66,6 @@ public class SaishinsaKetteiHokenshaInCsvFileRead {
     private static final RString カンマ = new RString(",");
     private static final Integer INDEX_0 = 0;
     private static final Integer INDEX_3 = 3;
-    private static final RString NUM = new RString("99");
 
     /**
      * コンストラクタです。
@@ -120,7 +120,7 @@ public class SaishinsaKetteiHokenshaInCsvFileRead {
         int レコード件数合算 = getEntity.getCodeNum();
         int 集計データ登録件数 = INDEX_0;
         int 明細データ登録件数 = INDEX_0;
-        errorTempentity.setエラー区分(NUM);
+        errorTempentity.setエラー区分(KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード());
         if (レコード件数合算 != INDEX_0) {
             集計データ登録件数 = 再審査決定集計一時TBLに登録(処理年月, csvlist);
             明細データ登録件数 = 再審査決定明細一時TBLに登録(処理年月, csvlist);

@@ -475,7 +475,7 @@
         , V."chukanHyokaKomoku3gun" AS zenkaiChukanHyokaKomoku3gun
         , V."chukanHyokaKomoku4gun" AS zenkaiChukanHyokaKomoku4gun
         , V."chukanHyokaKomoku5gun" AS zenkaiChukanHyokaKomoku5gun
-        , V."ichijiHnateiKeikokuCode" AS zenkaiIchijiHnateiKeikokuCode
+        , V."ichijiHnateiKeikokuCode" AS zenkaiChijiHnateiKeikokuCode
         , V."jotaiAnteiseiCode" AS zenkaiJotaiAnteiseiCode
         , V."ninchishoJiritsudoIIijoNoGaizensei" AS zenkaiNinchishoJiritsudoIIijoNoGaizensei
         , V."suiteiKyufuKubunCode" AS zenkaiSuiteiKyufuKubunCode
@@ -672,8 +672,6 @@
         WHERE A."logicalDeletedFlag" = FALSE
         AND A."shinseishoKanriNo" IN
         <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")">#{code}</foreach>
-        ORDER BY
-        A."shinseishoKanriNo" ASC
         <if test="isTennyuShiboSyuturyoku">
             UNION
             SELECT A."shinseishoKanriNo"
@@ -962,7 +960,7 @@
             , V."chukanHyokaKomoku3gun" AS zenkaiChukanHyokaKomoku3gun
             , V."chukanHyokaKomoku4gun" AS zenkaiChukanHyokaKomoku4gun
             , V."chukanHyokaKomoku5gun" AS zenkaiChukanHyokaKomoku5gun
-            , V."ichijiHnateiKeikokuCode" AS zenkaiIchijiHnateiKeikokuCode
+            , V."ichijiHnateiKeikokuCode" AS zenkaiChijiHnateiKeikokuCode
             , V."jotaiAnteiseiCode" AS zenkaiJotaiAnteiseiCode
             , V."ninchishoJiritsudoIIijoNoGaizensei" AS zenkaiNinchishoJiritsudoIIijoNoGaizensei
             , V."suiteiKyufuKubunCode" AS zenkaiSuiteiKyufuKubunCode
@@ -1169,7 +1167,7 @@
                 AND N."nijiHanteiYMD" <![CDATA[<=]]> #{nijiHanteiShuryoYMD}
             </if>
             ORDER BY
-            N."shinseishoKanriNo" ASC
+            "shinseishoKanriNo" ASC
         </if>
     </select>
 
@@ -1208,5 +1206,31 @@
         , "nijiHanteiKekkaInputYMD"
         FROM rgdb."DbT5130Shibo"
     </sql>
+
+    <select id="getNinteiShinseiJoho"
+            resultOrdered="true"
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionUpdateMybitisParamter"
+            fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho"
+        ORDER BY
+        "shinseishoKanriNo"
+    </select>
+
+    <select id="getGaibuRenkeiDataoutputJoho"
+            resultOrdered="true"
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7211GaibuRenkeiDataoutputJohoMapper.ResultMap_DbT7211GaibuRenkeiDataoutputJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionMybitisParamter"
+            fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7211GaibuRenkeiDataoutputJohoMapper.allColumns_DbT7211GaibuRenkeiDataoutputJoho" />
+        FROM
+        rgdb."DbT7211GaibuRenkeiDataoutputJoho"
+        ORDER BY
+        "shinseishoKanriNo"
+    </select>
 
 </mapper>

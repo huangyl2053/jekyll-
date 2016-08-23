@@ -5,17 +5,25 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902;
 
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4010GemmenGengakuShinseiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  * 社会福祉法人等軽減の認定証発行のSQL結果クラスです。
  *
- * @reamsid_L DBD-3981-030 x_lilh
+ * @reamsid_L DBD-3981-030 jinge
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
 public class ShakaiFukushiHoujinnKeigenNinnteiEntity {
- // SQL発行結果
+
+    private DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity 社会福祉法人等利用者負担軽減Entity;
+    private DbT4010GemmenGengakuShinseiEntity 減免減額申請Entity;
+    private UaFt200FindShikibetsuTaishoEntity psmEntity;
+    private UaFt250FindAtesakiEntity atesakiEntity;
 }

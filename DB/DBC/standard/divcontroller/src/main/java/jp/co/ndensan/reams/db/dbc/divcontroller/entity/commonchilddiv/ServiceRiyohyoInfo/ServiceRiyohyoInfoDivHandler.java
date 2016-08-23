@@ -65,13 +65,13 @@ public class ServiceRiyohyoInfoDivHandler {
     private static final RString 照会 = new RString("照会");
     private static final RString 合計有り = new RString("1");
     private static final RString 合計なし = new RString("0");
-    private static final RString COLUMN_保険給付額 = new RString("hokenKyufugaku");
-    private static final RString COLUMN_定額利用者負担 = new RString("riyoshaFutangakuTeigaku");
-    private static final RString 事業者請求額 = new RString("事業者請求額");
+//    private static final RString COLUMN_保険給付額 = new RString("hokenKyufugaku");
+//    private static final RString COLUMN_定額利用者負担 = new RString("riyoshaFutangakuTeigaku");
+//    private static final RString 事業者請求額 = new RString("事業者請求額");
     private static final RString 暫定区分_0 = new RString("0");
     private static final RString 暫定区分_1 = new RString("1");
-    private static final RString 総合事業費請求額 = new RString("総合事業費請求額");
-    private static final RString 事業対象利用者負担額 = new RString("事業対象利用者負担額");
+//    private static final RString 総合事業費請求額 = new RString("総合事業費請求額");
+//    private static final RString 事業対象利用者負担額 = new RString("事業対象利用者負担額");
     private static final Decimal 給付率_100 = new Decimal(100);
     private static final Decimal 給付率_90 = new Decimal(90);
     private static final Decimal 一割 = new Decimal(10);
@@ -145,6 +145,33 @@ public class ServiceRiyohyoInfoDivHandler {
     }
 
     /**
+     * 届出日をセットします。
+     *
+     * @param 届出日 RDate
+     */
+    public void setTodokedeYMD(RDate 届出日) {
+        div.getTxtTodokedeYMD().setValue(届出日);
+    }
+
+    /**
+     * 適用期間開始日をセットします。
+     *
+     * @param 適用期間開始日 RDate
+     */
+    public void setTekiyoKikanFrom(RDate 適用期間開始日) {
+        div.getTxtTekiyoKikan().setFromValue(適用期間開始日);
+    }
+
+    /**
+     * 適用期間終日をセットします。
+     *
+     * @param 適用期間終日 RDate
+     */
+    public void setTekiyoKikanTo(RDate 適用期間終日) {
+        div.getTxtTekiyoKikan().setToValue(適用期間終日);
+    }
+
+    /**
      * サービス利用票情報初期化のメソッドです。
      *
      * @param 表示モード RString
@@ -176,19 +203,20 @@ public class ServiceRiyohyoInfoDivHandler {
         }
         if (居宅.equals(居宅総合事業区分)) {
             div.getChkZanteiKubun().setVisible(true);
-        } else if (総合事業.equals(居宅総合事業区分)) {
-            div.getChkZanteiKubun().setVisible(false);
-            div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getGridSetting()
-                    .getColumn(COLUMN_保険給付額).setColumnName(事業者請求額);
-            div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getGridSetting()
-                    .getColumn(COLUMN_定額利用者負担).setVisible(false);
-            div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().setVisible(true);
-            div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().setVisible(true);
-
-            div.getServiceRiyohyoBeppyoGokei().getTxtHokenKyufugaku().setLabelLText(総合事業費請求額);
-            div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuHoken().setLabelLText(事業対象利用者負担額);
-            // TODO QAのNo.1214 (Redmine#96061)「chraml」文件に「利用者負担定率・定額区分」を設定されない。
         }
+//        if (総合事業.equals(居宅総合事業区分)) {
+//            div.getChkZanteiKubun().setVisible(false);
+//            div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getGridSetting()
+//                    .getColumn(COLUMN_保険給付額).setColumnName(事業者請求額);
+//            div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getGridSetting()
+//                    .getColumn(COLUMN_定額利用者負担).setVisible(false);
+//            div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().setVisible(true);
+//            div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().setVisible(true);
+//
+//            div.getServiceRiyohyoBeppyoGokei().getTxtHokenKyufugaku().setLabelLText(総合事業費請求額);
+//            div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuHoken().setLabelLText(事業対象利用者負担額);
+//            // TODO QAのNo.1214 (Redmine#96061)「chraml」文件に「利用者負担定率・定額区分」を設定されない。
+//        }
     }
 
     private void set初期化状態(RString 表示モード) {
@@ -420,6 +448,7 @@ public class ServiceRiyohyoInfoDivHandler {
         row.setHdnServiceShuruiCode(result.getサービス種類コード() == null ? null
                 : result.getサービス種類コード().getColumnValue());
         row.setHdnGendogakuTaishogaiFlag(result.get限度額対象外フラグ());
+        row.setHdnRiyoshaFutanTeiritsuTeigakuKbn(result.get利用者負担定率定額区分());
         row.setHdnServiceKomokuCode(result.getサービス項目コード() == null ? null
                 : result.getサービス項目コード().getColumnValue());
         row.setHdnGokeiFlag(result.is合計フラグ() ? 合計有り : 合計なし);
@@ -469,11 +498,13 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().setValue(row.getWaribikigoTani().getValue());
         div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setValue(row.getKaisu().getValue());
         div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setValue(row.getServiceTani().getValue());
-        // TODO QAのNo.1214 (Redmine#96061)「利用者負担額」の設定値がない。
-//        div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().setValue(null);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().clearValue();
         div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().setValue(row.getRiyoshaFutangakuTeigaku().getValue());
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setVisible(true);
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnBeppyoMeisaiKakutei().setVisible(true);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtHdnGendogakuTaishogaiFlg().setValue(row.getHdnGendogakuTaishogaiFlag());
+        div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn()
+                .setValue(row.getHdnRiyoshaFutanTeiritsuTeigakuKbn());
 
         div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendoChokaTani().setValue(row.getShuruiGendoChokaTani().getValue());
@@ -504,7 +535,7 @@ public class ServiceRiyohyoInfoDivHandler {
     }
 
     private RString 入力不可判定(List<KaigoServiceNaiyou> 利用サービスリスト, Decimal 単位) {
-        boolean 単位判定フラグ = 単位.compareTo(Decimal.ZERO) >= 0;
+        boolean 単位判定フラグ = Decimal.ZERO.compareTo(単位) <= 0;
         RString 判定フラグ = RSTRING_ZERO;
         for (KaigoServiceNaiyou item : 利用サービスリスト) {
             boolean 単位数判定フラグ = item.get単位数() - 0 < 0;
@@ -539,12 +570,14 @@ public class ServiceRiyohyoInfoDivHandler {
         Decimal 割引適用後単位 = 単位.multiply(割引適用後率.divide(DECIMAL_100)).roundHalfUpTo(INT_0);
         div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().setValue(割引適用後単位);
         div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setValue(割引適用後単位.multiply(回数));
-        //TODO 利用者負担定率・定額区分見なく
-        if (RSTRING_88.equals(サービス)) {
-            div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().setValue(定額利用者負担額);
-        } else {
-            div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().setValue(
-                    定額利用者負担額.multiply(回数));
+        RString 利用者負担定率定額区分 = div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn().getValue();
+        if (RSTRING_TWO.equals(利用者負担定率定額区分)) {
+            if (RSTRING_88.equals(サービス)) {
+                div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().setValue(定額利用者負担額);
+            } else {
+                div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().setValue(
+                        定額利用者負担額.multiply(回数));
+            }
         }
         div.getServiceRiyohyoBeppyoMeisai().getBtnBeppyoMeisaiKakutei().setDisabled(false);
     }
@@ -566,7 +599,6 @@ public class ServiceRiyohyoInfoDivHandler {
             KaigoServiceNaiyouManager manager = new KaigoServiceNaiyouManager();
             KaigoServiceNaiyou 利用サービスリスト = manager.getServiceList(
                     サービス種類コード, サービス項目コード, 利用年月);
-            //TODO 8.1.2 searchResult many records
             利用サービス = 利用サービスリスト;
         } else {
             サービス種類Tmp = 種類コード;
@@ -589,7 +621,6 @@ public class ServiceRiyohyoInfoDivHandler {
         if (RSTRING_17.equals(サービス種類Tmp)
                 || RSTRING_67.equals(サービス種類Tmp)
                 || RSTRING_88.equals(サービス種類Tmp)) {
-            //TODO 没有danweishu控件
             div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setReadOnly(true);
             div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setReadOnly(true);
             div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setReadOnly(true);
@@ -601,12 +632,12 @@ public class ServiceRiyohyoInfoDivHandler {
         }
         if (サービスフラグTmp && 利用サービス
                 != null) {
-            ////TODO
             div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setValue(
                     new Decimal(利用サービス.get単位数()));
-            //TODO
-//            div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setValue();
-            //TODO
+            div.getServiceRiyohyoBeppyoMeisai().getTxtHdnGendogakuTaishogaiFlg()
+                    .setValue(利用サービス.get限度額対象外フラグ());
+            div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn()
+                    .setValue(利用サービス.get利用者負担定率定額区分());
         }
     }
 
@@ -830,7 +861,7 @@ public class ServiceRiyohyoInfoDivHandler {
     }
 
     private void 種類支給額チェック(Decimal 種類限度内単位, Decimal 種類限度超過単位) {
-        if (種類限度内単位.add(種類限度超過単位).compareTo(Decimal.ZERO) > 0
+        if (Decimal.ZERO.compareTo(種類限度内単位.add(種類限度超過単位)) < 0
                 && 種類限度内単位.add(種類限度超過単位).equals(
                         div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getValue())) {
             throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
@@ -842,7 +873,7 @@ public class ServiceRiyohyoInfoDivHandler {
     }
 
     private void 区分支給額チェック(Decimal 区分限度内単位, Decimal 区分限度超過単位, Decimal 種類限度超過単位, Decimal サービス単位) {
-        if (区分限度内単位.add(区分限度超過単位).compareTo(Decimal.ZERO) > 0) {
+        if (Decimal.ZERO.compareTo(区分限度内単位.add(区分限度超過単位)) < 0) {
             Decimal ワークサービス単位;
             RString ワークメッセージ編集;
             if (Decimal.ZERO.compareTo(区分限度内単位) < 0) {
@@ -856,8 +887,8 @@ public class ServiceRiyohyoInfoDivHandler {
                 throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
                         .replace(ワークメッセージ編集.toString()));
             }
-            //TODO 没有「限度額対象外フラグ」控件。
-        } else if (!サービス単位.equals(区分限度内単位.add(種類限度超過単位).add(区分限度超過単位))) {
+        } else if (!サービス単位.equals(区分限度内単位.add(種類限度超過単位).add(区分限度超過単位))
+                && !RSTRING_ONE.equals(div.getServiceRiyohyoBeppyoMeisai().getTxtHdnGendogakuTaishogaiFlg().getValue())) {
             throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
                     .replace(種類区分限度単位指定エラー.toString()));
         }
@@ -929,7 +960,7 @@ public class ServiceRiyohyoInfoDivHandler {
             サービス項目コードTmp = div.getCcdServiceCodeInput().getサービスコード2();
             サービスTmp = div.getCcdServiceCodeInput().getサービス名称();
         } else {
-            サービス種類コードTmp = div.getCcdServiceCodeInput().getサービスコード1();
+            サービス種類コードTmp = div.getCcdServiceTypeInput().getサービス種類コード();
             サービス項目コードTmp = RString.EMPTY;
             サービスTmp = div.getCcdServiceTypeInput().getサービス種類名称();
         }
@@ -953,8 +984,9 @@ public class ServiceRiyohyoInfoDivHandler {
         row.getRiyoshaFutangakuTeigaku().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuZengaku().getValue());
         row.setHdnJigyoshaCode(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo());
         row.setHdnServiceShuruiCode(サービス種類コードTmp);
-        //TODO 最新変更未対応
-//        row.setHdnGendogakuTaishogaiFlag(result.get限度額対象外フラグ());
+        row.setHdnGendogakuTaishogaiFlag(div.getServiceRiyohyoBeppyoMeisai().getTxtHdnGendogakuTaishogaiFlg().getValue());
+        row.setHdnRiyoshaFutanTeiritsuTeigakuKbn(
+                div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn().getValue());
         row.setHdnServiceKomokuCode(サービス項目コードTmp);
         row.setHdnGokeiFlag(合計有り);
         row.setHdnGokeiGyoFlag(RSTRING_ZERO);
@@ -985,7 +1017,6 @@ public class ServiceRiyohyoInfoDivHandler {
             result.set給付率(row.getKyufuritsu().getValue() == null ? null
                     : new HokenKyufuRitsu(row.getKyufuritsu().getValue()));
             result.set保険給付額(row.getHokenKyufugaku().getValue());
-            //TODO
             result.set定額利用者負担単価金額(row.getRiyoshaFutangakuTeigaku().getValue());
             result.set保険対象利用者負担額(row.getRiyoshaFutangakuHoken().getValue());
             result.set全額利用者負担額(row.getRiyoshaFutangakuZengaku().getValue());
@@ -994,6 +1025,7 @@ public class ServiceRiyohyoInfoDivHandler {
             result.setサービス種類コード(row.getHdnServiceShuruiCode() == null ? null
                     : new ServiceShuruiCode(row.getHdnServiceShuruiCode()));
             result.set限度額対象外フラグ(row.getHdnGendogakuTaishogaiFlag());
+            result.set利用者負担定率定額区分(row.getHdnRiyoshaFutanTeiritsuTeigakuKbn());
             result.setサービス項目コード(row.getHdnServiceKomokuCode() == null ? null
                     : new ServiceKomokuCode(row.getHdnServiceKomokuCode()));
             if (合計有り.equals(row.getHdnGokeiFlag())) {
@@ -1017,7 +1049,6 @@ public class ServiceRiyohyoInfoDivHandler {
         RiyoshaFutanWariaiMeisai 合計情報 = jigoSakusei.get給付率(被保険者番号, 利用年月);
         Decimal 給付率 = 給付率_90;
         if (合計情報 != null) {
-            // TODO QAのNo.1217 (Redmine#96071)
             if (負担割合区分_1割.equals(合計情報.get負担割合区分())) {
                 給付率 = 給付率_100.subtract(一割);
             } else if (負担割合区分_2割.equals(合計情報.get負担割合区分())) {
@@ -1064,8 +1095,7 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().setValue(row.getWaribikigoTani().getValue());
         div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setValue(row.getKaisu().getValue());
         div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setValue(row.getServiceTani().getValue());
-        // TODO QAのNo.1214 (Redmine#96061)「利用者負担額」の設定値がない。
-//        div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().setValue(null);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().setValue(null);
         div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().setValue(row.getRiyoshaFutangakuTeigaku().getValue());
 
         if (合計有り.equals(row.getHdnGokeiFlag())) {
@@ -1110,8 +1140,7 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().setValue(row.getWaribikigoTani().getValue());
         div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setValue(row.getKaisu().getValue());
         div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setValue(row.getServiceTani().getValue());
-        // TODO QAのNo.1214 (Redmine#96061)「利用者負担額」の設定値がない。
-//        div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().setValue(null);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().clearValue();
         div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().setValue(row.getRiyoshaFutangakuTeigaku().getValue());
 
         div.getServiceRiyohyoBeppyoGokei().setDisabled(true);
@@ -1331,7 +1360,7 @@ public class ServiceRiyohyoInfoDivHandler {
     private void 限度チェック(KyufuJikoSakuseiResult result) {
         Decimal 区分限度 = nullToZero(result.get区分限度超過単位()).add(nullToZero(result.get区分限度内単位()));
         Decimal 種類限度 = nullToZero(result.get種類限度超過単位()).add(nullToZero(result.get種類限度内単位()));
-        if (Decimal.ZERO.compareTo(区分限度) >= 0) {
+        if (区分限度.compareTo(Decimal.ZERO) <= 0) {
             return;
         }
         if (Decimal.ZERO.compareTo(種類限度) < 0) {

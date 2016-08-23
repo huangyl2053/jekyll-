@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaJokyo.NinteiChosaJokyo;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaJokyo;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @author 自動生成
  */
 public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -52,6 +52,14 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     private RString hdnSerializedBusiness_Konkai;
     @JsonProperty("hdnSerializedBusiness_Zenkai")
     private RString hdnSerializedBusiness_Zenkai;
+    @JsonProperty("hdnChosaDataPass")
+    private RString hdnChosaDataPass;
+    @JsonProperty("hdnShujiiDataPass")
+    private RString hdnShujiiDataPass;
+    @JsonProperty("hdnSubGyomuCd")
+    private RString hdnSubGyomuCd;
+    @JsonProperty("hdnInput")
+    private RString hdnInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -276,6 +284,78 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     /*
+     * gethdnChosaDataPass
+     * @return hdnChosaDataPass
+     */
+    @JsonProperty("hdnChosaDataPass")
+    public RString getHdnChosaDataPass() {
+        return hdnChosaDataPass;
+    }
+
+    /*
+     * sethdnChosaDataPass
+     * @param hdnChosaDataPass hdnChosaDataPass
+     */
+    @JsonProperty("hdnChosaDataPass")
+    public void setHdnChosaDataPass(RString hdnChosaDataPass) {
+        this.hdnChosaDataPass = hdnChosaDataPass;
+    }
+
+    /*
+     * gethdnShujiiDataPass
+     * @return hdnShujiiDataPass
+     */
+    @JsonProperty("hdnShujiiDataPass")
+    public RString getHdnShujiiDataPass() {
+        return hdnShujiiDataPass;
+    }
+
+    /*
+     * sethdnShujiiDataPass
+     * @param hdnShujiiDataPass hdnShujiiDataPass
+     */
+    @JsonProperty("hdnShujiiDataPass")
+    public void setHdnShujiiDataPass(RString hdnShujiiDataPass) {
+        this.hdnShujiiDataPass = hdnShujiiDataPass;
+    }
+
+    /*
+     * gethdnSubGyomuCd
+     * @return hdnSubGyomuCd
+     */
+    @JsonProperty("hdnSubGyomuCd")
+    public RString getHdnSubGyomuCd() {
+        return hdnSubGyomuCd;
+    }
+
+    /*
+     * sethdnSubGyomuCd
+     * @param hdnSubGyomuCd hdnSubGyomuCd
+     */
+    @JsonProperty("hdnSubGyomuCd")
+    public void setHdnSubGyomuCd(RString hdnSubGyomuCd) {
+        this.hdnSubGyomuCd = hdnSubGyomuCd;
+    }
+
+    /*
+     * gethdnInput
+     * @return hdnInput
+     */
+    @JsonProperty("hdnInput")
+    public RString getHdnInput() {
+        return hdnInput;
+    }
+
+    /*
+     * sethdnInput
+     * @param hdnInput hdnInput
+     */
+    @JsonProperty("hdnInput")
+    public void setHdnInput(RString hdnInput) {
+        this.hdnInput = hdnInput;
+    }
+
+    /*
      * [共有子DIVモード]
      */
     @JsonProperty("modes")
@@ -362,16 +442,6 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnItakusakiGuide() {
-        return this.getNinteiChosa().getBtnItakusakiGuide();
-    }
-
-    @JsonIgnore
-    public void  setBtnItakusakiGuide(ButtonDialog btnItakusakiGuide) {
-        this.getNinteiChosa().setBtnItakusakiGuide(btnItakusakiGuide);
-    }
-
-    @JsonIgnore
     public TextBox getTxtNinteiChosaItakusakiName() {
         return this.getNinteiChosa().getTxtNinteiChosaItakusakiName();
     }
@@ -379,6 +449,16 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     @JsonIgnore
     public void  setTxtNinteiChosaItakusakiName(TextBox txtNinteiChosaItakusakiName) {
         this.getNinteiChosa().setTxtNinteiChosaItakusakiName(txtNinteiChosaItakusakiName);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnItakusakiGuide() {
+        return this.getNinteiChosa().getBtnItakusakiGuide();
+    }
+
+    @JsonIgnore
+    public void  setBtnItakusakiGuide(ButtonDialog btnItakusakiGuide) {
+        this.getNinteiChosa().setBtnItakusakiGuide(btnItakusakiGuide);
     }
 
     @JsonIgnore

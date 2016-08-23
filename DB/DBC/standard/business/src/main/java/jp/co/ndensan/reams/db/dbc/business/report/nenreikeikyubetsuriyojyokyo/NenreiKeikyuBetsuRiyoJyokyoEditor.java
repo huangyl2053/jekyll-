@@ -65,8 +65,6 @@ public class NenreiKeikyuBetsuRiyoJyokyoEditor implements INenreiKeikyuBetsuRiyo
         source.list1_9 = kinngakuFormat(data.get要介護４_1());
         source.list1_10 = kinngakuFormat(data.get要介護５_1());
         source.list1_11 = kinngakuFormat(data.get合計_1());
-        // TODO QA
-//        source.list1_12 = data.get備考_1();
         source.serviceMei2 = data.getサービス種類名称2();
         source.list2_1 = data.get区分_2();
         source.list2_2 = kinngakuFormat(data.get非該当_2());
@@ -79,8 +77,6 @@ public class NenreiKeikyuBetsuRiyoJyokyoEditor implements INenreiKeikyuBetsuRiyo
         source.list2_9 = kinngakuFormat(data.get要介護４_2());
         source.list2_10 = kinngakuFormat(data.get要介護５_2());
         source.list2_11 = kinngakuFormat(data.get合計_2());
-//        source.list2_12 = data.get備考_2();
-
         return source;
     }
 
@@ -96,7 +92,6 @@ public class NenreiKeikyuBetsuRiyoJyokyoEditor implements INenreiKeikyuBetsuRiyo
         printTimeStampSb.append(DATE_分);
         printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
         printTimeStampSb.append(DATE_秒);
-        printTimeStampSb.append(RString.HALF_SPACE);
         return printTimeStampSb.toRString();
     }
 

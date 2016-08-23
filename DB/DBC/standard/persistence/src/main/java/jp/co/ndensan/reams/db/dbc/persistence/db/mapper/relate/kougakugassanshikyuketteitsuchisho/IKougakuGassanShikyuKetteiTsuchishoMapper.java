@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kougakugassanshi
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakugassanshikyuketteitsuchisho.KougakuGassanShikyuKetteiTsuchishoParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakugassanshikyuketteitsuchisho.HihokenshaTaishoPSMFuka;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakugassanshikyuketteitsuchisho.JigyoKogakuGassanEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakugassanshikyuketteitsuchisho.KozaJyohoEntity;
 
@@ -32,4 +33,12 @@ public interface IKougakuGassanShikyuKetteiTsuchishoMapper {
      * @return {@link JigyoKogakuGassanEntity}
      */
     JigyoKogakuGassanEntity select事業高額合算(KougakuGassanShikyuKetteiTsuchishoParameter param);
+
+    /**
+     * 被保険者宛名情報取得です。
+     *
+     * @param param param
+     * @return {@link HihokenshaTaishoPSMFuka}
+     */
+    HihokenshaTaishoPSMFuka select被保険者宛名情報(KougakuGassanShikyuKetteiTsuchishoParameter param);
 }

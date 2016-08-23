@@ -59,6 +59,7 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
     private static final RString HAKKONICHI = new RString("【発行日】");
     private static final RString SHUTSURYOKUJUN = new RString("【出力順】");
     private static final RString なし = new RString("なし");
+    private static final RString COMMA = new RString(",");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmen.shinseisho.hakko."
             + "IFutanGendogakuNinteiShinseishoHakkoMapper.get出力対象者情報");
@@ -110,7 +111,7 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
         if (order != null) {
             出力順 = Ddb102020MyBatisOrderByClauseCreator.create(FutangendogakuNinteiShinseishoOrderKey.class, order);
             if (processParamter.is出力フラグ()) {
-                出力順 = 出力順.substring(STARTINDEX, 出力順.length());
+                出力順 = COMMA.concat(出力順.substring(STARTINDEX, 出力順.length()));
             }
         }
         return new BatchDbReader(MYBATIS_SELECT_ID,

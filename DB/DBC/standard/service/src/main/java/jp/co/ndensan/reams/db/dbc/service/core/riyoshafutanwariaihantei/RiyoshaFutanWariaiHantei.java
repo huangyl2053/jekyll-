@@ -536,7 +536,7 @@ public class RiyoshaFutanWariaiHantei {
         int edaNo = 1;
         for (RiyoshaFutanWariaiMeisaiTempEntity now : result) {
             if (before == null) {
-                before = now.clone();
+                before = now;
                 before.setEdaNo(edaNo);
                 前負担割合区分 = before.getFutanWariaiKubun();
                 前判定区分 = before.getHanteiKubun();
@@ -545,7 +545,7 @@ public class RiyoshaFutanWariaiHantei {
             if (!nonullRStr(before.getHihokenshaNo()).equals(nonullRStr(now.getHihokenshaNo()))) {
                 before.setYukoShuryoYMD(new FlexibleDate(対象年度.getYearValue() + 1, NUM七月, NUM三十一日));
                 edaNo = 1;
-                before = now.clone();
+                before = now;
                 before.setEdaNo(edaNo);
                 continue;
             }
@@ -783,7 +783,7 @@ public class RiyoshaFutanWariaiHantei {
             if (beforeKubun != null && beforeKubun.equals(nowKubun)) {
                 beforeEntity = 入力明細;
             } else if (beforeKubun != null && !beforeKubun.equals(nowKubun)) {
-                result = beforeEntity.clone();
+                result = beforeEntity;
                 result.setYukoKaishiYMD(有効開始日);
                 resultList.add(result);
                 有効開始日 = 入力明細.getYukoKaishiYMD();
@@ -793,7 +793,7 @@ public class RiyoshaFutanWariaiHantei {
         if (singleFlag) {
             resultList.add(beforeEntity);
         } else if (!singleFlag && beforeEntity != null) {
-            result = beforeEntity.clone();
+            result = beforeEntity;
             result.setYukoKaishiYMD(有効開始日);
             resultList.add(result);
         }
@@ -823,26 +823,26 @@ public class RiyoshaFutanWariaiHantei {
             DbT3114RiyoshaFutanWariaiMeisaiEntity nowEntity = 入力明細.toEntity();
             nowKubun = nowEntity.getFutanWariaiKubun();
             if (beforeEntity == null) {
-                beforeEntity = 入力明細.toEntity().clone();
+                beforeEntity = 入力明細.toEntity();
                 beforeKubun = nowKubun;
                 有効開始日 = nowEntity.getYukoKaishiYMD();
                 continue;
             }
             singleFlag = false;
             if (beforeKubun != null && beforeKubun.equals(nowKubun)) {
-                beforeEntity = 入力明細.toEntity().clone();
+                beforeEntity = 入力明細.toEntity();
             } else if (beforeKubun != null && !beforeKubun.equals(nowKubun)) {
-                result = new RiyoshaFutanWariaiMeisai(beforeEntity.clone());
+                result = new RiyoshaFutanWariaiMeisai(beforeEntity);
                 result.createBuilderForEdit().set有効開始日(有効開始日);
                 resultList.add(result);
-                beforeEntity = 入力明細.toEntity().clone();
+                beforeEntity = 入力明細.toEntity();
                 有効開始日 = beforeEntity.getYukoKaishiYMD();
             }
         }
         if (singleFlag && beforeEntity != null) {
-            resultList.add(new RiyoshaFutanWariaiMeisai(beforeEntity.clone()));
+            resultList.add(new RiyoshaFutanWariaiMeisai(beforeEntity));
         } else if (!singleFlag && beforeEntity != null) {
-            result = new RiyoshaFutanWariaiMeisai(beforeEntity.clone());
+            result = new RiyoshaFutanWariaiMeisai(beforeEntity);
             result.createBuilderForEdit().set有効開始日(有効開始日);
             resultList.add(result);
         }
