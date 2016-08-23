@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0071011;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -40,6 +41,12 @@ public class KetteiHokenshaDiv extends Panel {
     private Label lblHokenshaHosoku;
     @JsonProperty("dgKagoKetteiDetail")
     private DataGrid<dgKagoKetteiDetail_Row> dgKagoKetteiDetail;
+    @JsonProperty("shichosonCode")
+    private RString shichosonCode;
+    @JsonProperty("toriatsukaiYM")
+    private RString toriatsukaiYM;
+    @JsonProperty("kubunn")
+    private RString kubunn;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -207,6 +214,60 @@ public class KetteiHokenshaDiv extends Panel {
     @JsonProperty("dgKagoKetteiDetail")
     public void setDgKagoKetteiDetail(DataGrid<dgKagoKetteiDetail_Row> dgKagoKetteiDetail) {
         this.dgKagoKetteiDetail = dgKagoKetteiDetail;
+    }
+
+    /*
+     * getshichosonCode
+     * @return shichosonCode
+     */
+    @JsonProperty("shichosonCode")
+    public RString getShichosonCode() {
+        return shichosonCode;
+    }
+
+    /*
+     * setshichosonCode
+     * @param shichosonCode shichosonCode
+     */
+    @JsonProperty("shichosonCode")
+    public void setShichosonCode(RString shichosonCode) {
+        this.shichosonCode = shichosonCode;
+    }
+
+    /*
+     * gettoriatsukaiYM
+     * @return toriatsukaiYM
+     */
+    @JsonProperty("toriatsukaiYM")
+    public RString getToriatsukaiYM() {
+        return toriatsukaiYM;
+    }
+
+    /*
+     * settoriatsukaiYM
+     * @param toriatsukaiYM toriatsukaiYM
+     */
+    @JsonProperty("toriatsukaiYM")
+    public void setToriatsukaiYM(RString toriatsukaiYM) {
+        this.toriatsukaiYM = toriatsukaiYM;
+    }
+
+    /*
+     * getkubunn
+     * @return kubunn
+     */
+    @JsonProperty("kubunn")
+    public RString getKubunn() {
+        return kubunn;
+    }
+
+    /*
+     * setkubunn
+     * @param kubunn kubunn
+     */
+    @JsonProperty("kubunn")
+    public void setKubunn(RString kubunn) {
+        this.kubunn = kubunn;
     }
 
     /*

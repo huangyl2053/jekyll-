@@ -41,7 +41,7 @@ public class SofujohoValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getTxtSofuYM().getValue() == null) {
             validationMessages.add(new ValidationMessageControlPair(new SofujohoValidationHandler.RRVMessages(
-                    UrErrorMessages.必須, "取扱年月")));
+                    UrErrorMessages.必須, "取扱年月"), div.getTxtSofuYM()));
         }
         return validationMessages;
     }
