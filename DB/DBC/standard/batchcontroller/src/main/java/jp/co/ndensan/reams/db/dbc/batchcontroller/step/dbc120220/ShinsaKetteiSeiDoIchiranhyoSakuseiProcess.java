@@ -12,8 +12,8 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.report.kyufuhishinsaketteiseikyumeisaihyo.KyufuhiShinsaKetteiSeikyuMeisaihyoOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.kyufuhishinsaketteiseikyumeisaihyo.KyufuhiShinsaKetteiSeikyuMeisaihyoPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.kyufuhishinsaketteiseikyumeisaihyo.KyufuhiShinsaKetteiSeikyuMeisaihyoReport;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.shinsaketteiseikyumeisaiin.ShinsaKetteiSeiDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.shinsaketteiseikyumeisaiin.ShinsaKetteiSeiDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.shinsaketteiseidoichiranhyosakusei.KyufuhiShinsaKetteiCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhishinsaketteiseikyumeisaihyo.KyufuhiShinsaKetteiSeikyuMeisaihyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kyufuhishinsaketteiseikyumeisaihyo.KyufuhiShinsaKetteiSeikyuMeisaihyoSource;
@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -117,7 +118,7 @@ public class ShinsaKetteiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase
         } else {
             List<RString> 出力順BODY = 出力順.split(コンマ.toString());
             出力順 = デフォルト出力順;
-            if (出力順BODY.size() > 1) {
+            if (1 < 出力順BODY.size()) {
                 for (int i = 1; i < 出力順BODY.size(); i++) {
                     出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
                 }
@@ -185,18 +186,18 @@ public class ShinsaKetteiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase
         KyufuhiShinsaKetteiSeikyuMeisaihyoReport kyufuhiShinsaKetteiInReport;
         KyufuhiShinsaKetteiCsvEntity output;
         if (null != beforeEntity) {
+            output = get帳票のCSVファイル作成(beforeEntity, false, false);
+            kyufuhiShinsaCsvEntityWriter.writeLine(output);
             if (is改頁(beforeEntity, entity)) {
                 kyufuhiShinsaKetteiInReport = new KyufuhiShinsaKetteiSeikyuMeisaihyoReport(beforeEntity,
-                        出力順Map, parameter.getシステム日付(), true);
+                        出力順Map, RDateTime.now(), true, 改頁リスト);
                 output = get帳票のCSVファイル作成(beforeEntity, true, false);
                 kyufuhiShinsaCsvEntityWriter.writeLine(output);
                 output = get帳票のCSVファイル作成(beforeEntity, true, true);
                 kyufuhiShinsaCsvEntityWriter.writeLine(output);
             } else {
                 kyufuhiShinsaKetteiInReport = new KyufuhiShinsaKetteiSeikyuMeisaihyoReport(beforeEntity,
-                        出力順Map, parameter.getシステム日付(), false);
-                output = get帳票のCSVファイル作成(beforeEntity, false, false);
-                kyufuhiShinsaCsvEntityWriter.writeLine(output);
+                        出力順Map, RDateTime.now(), false, 改頁リスト);
             }
             kyufuhiShinsaKetteiInReport.writeBy(reportSourceWriter);
         }
@@ -212,7 +213,7 @@ public class ShinsaKetteiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase
             output = get帳票のCSVファイル作成(currentRecord, true, true);
             kyufuhiShinsaCsvEntityWriter.writeLine(output);
             KyufuhiShinsaKetteiSeikyuMeisaihyoReport kyufuhiShinsaKettei合計InReport = new KyufuhiShinsaKetteiSeikyuMeisaihyoReport(currentRecord,
-                    出力順Map, parameter.getシステム日付(), true);
+                    出力順Map, RDateTime.now(), true, 改頁リスト);
             kyufuhiShinsaKettei合計InReport.writeBy(reportSourceWriter);
         }
         kyufuhiShinsaCsvEntityWriter.close();
@@ -241,10 +242,10 @@ public class ShinsaKetteiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase
             }
         } else {
             output.set審査年月(パターン56(entity.get合計テータ().get審査年月()));
-            RString 作成日 = parameter.getシステム日付().getDate().wareki().eraType(EraType.KANJI)
+            RString 作成日 = RDateTime.now().getDate().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
-            RString 作成時 = parameter.getシステム日付().getTime()
+            RString 作成時 = RDateTime.now().getTime()
                     .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
             output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
             output.set国保連合会名(entity.get合計テータ().get国保連合会名());

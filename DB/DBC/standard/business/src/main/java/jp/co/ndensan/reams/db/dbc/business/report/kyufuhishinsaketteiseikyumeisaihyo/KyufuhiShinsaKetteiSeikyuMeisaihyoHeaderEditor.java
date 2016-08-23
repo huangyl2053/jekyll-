@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kyufuhishinsaketteiseikyumeisaihyo;
 
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhishinsaketteiseikyumeisaihyo.KyufuhiShinsaKetteiSeikyuMeisaihyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kyufuhishinsaketteiseikyumeisaihyo.KyufuhiShinsaKetteiSeikyuMeisaihyoSource;
@@ -29,6 +30,12 @@ public class KyufuhiShinsaKetteiSeikyuMeisaihyoHeaderEditor implements IKyufuhiS
     private final Map<RString, RString> 出力順Map;
     private final RDateTime 作成日時;
     private static final RString SAKUSEI = new RString("作成");
+    private final List<RString> 改頁リスト;
+    private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
+    private static final int INT_3 = 3;
+    private static final int INT_4 = 4;
+    private static final int INT_5 = 5;
     private static final RString KEY_並び順の２件目 = new RString("KEY_並び順の２件目");
     private static final RString KEY_並び順の３件目 = new RString("KEY_並び順の３件目");
     private static final RString KEY_並び順の４件目 = new RString("KEY_並び順の４件目");
@@ -41,14 +48,17 @@ public class KyufuhiShinsaKetteiSeikyuMeisaihyoHeaderEditor implements IKyufuhiS
      * @param 帳票出力対象 KyufuhiShinsaKetteiSeikyuMeisaihyoEntity
      * @param 出力順Map Map<RString, RString>
      * @param 作成日時 RDateTime
+     * @param 改頁リスト List<RString>
      */
     public KyufuhiShinsaKetteiSeikyuMeisaihyoHeaderEditor(
             KyufuhiShinsaKetteiSeikyuMeisaihyoEntity 帳票出力対象,
             Map<RString, RString> 出力順Map,
-            RDateTime 作成日時) {
+            RDateTime 作成日時,
+            List<RString> 改頁リスト) {
         this.帳票出力対象 = 帳票出力対象;
         this.出力順Map = 出力順Map;
         this.作成日時 = 作成日時;
+        this.改頁リスト = 改頁リスト;
     }
 
     @Override
@@ -65,24 +75,26 @@ public class KyufuhiShinsaKetteiSeikyuMeisaihyoHeaderEditor implements IKyufuhiS
         if (出力順Map != null) {
             if (!RString.isNullOrEmpty(出力順Map.get(KEY_並び順の２件目))) {
                 source.shutsuryokujun1 = 出力順Map.get(KEY_並び順の２件目);
-                source.kaipage1 = 出力順Map.get(KEY_並び順の２件目);
             }
             if (!RString.isNullOrEmpty(出力順Map.get(KEY_並び順の３件目))) {
                 source.shutsuryokujun2 = 出力順Map.get(KEY_並び順の３件目);
-                source.kaipage2 = 出力順Map.get(KEY_並び順の３件目);
             }
             if (!RString.isNullOrEmpty(出力順Map.get(KEY_並び順の４件目))) {
                 source.shutsuryokujun3 = 出力順Map.get(KEY_並び順の４件目);
-                source.kaipage3 = 出力順Map.get(KEY_並び順の４件目);
             }
             if (!RString.isNullOrEmpty(出力順Map.get(KEY_並び順の５件目))) {
                 source.shutsuryokujun4 = 出力順Map.get(KEY_並び順の５件目);
-                source.kaipage4 = 出力順Map.get(KEY_並び順の５件目);
             }
             if (!RString.isNullOrEmpty(出力順Map.get(KEY_並び順の６件目))) {
                 source.shutsuryokujun5 = 出力順Map.get(KEY_並び順の６件目);
-                source.kaipage5 = 出力順Map.get(KEY_並び順の６件目);
             }
+        }
+        if (改頁リスト != null) {
+            source.kaipage1 = get改頁(INT_1);
+            source.kaipage2 = get改頁(INT_2);
+            source.kaipage3 = get改頁(INT_3);
+            source.kaipage4 = get改頁(INT_4);
+            source.kaipage5 = get改頁(INT_5);
         }
         source.kokuhorenName = 帳票出力対象.get合計テータ().get国保連合会名();
         source.shoKisaiHokenshaNo = getColumnValue(帳票出力対象.get合計テータ().get証記載保険者番号());
@@ -103,5 +115,9 @@ public class KyufuhiShinsaKetteiSeikyuMeisaihyoHeaderEditor implements IKyufuhiS
         }
         return 年月.wareki().eraType(EraType.KANJI_RYAKU)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString get改頁(int index) {
+        return index < 改頁リスト.size() ? 改頁リスト.get(index) : RString.EMPTY;
     }
 }

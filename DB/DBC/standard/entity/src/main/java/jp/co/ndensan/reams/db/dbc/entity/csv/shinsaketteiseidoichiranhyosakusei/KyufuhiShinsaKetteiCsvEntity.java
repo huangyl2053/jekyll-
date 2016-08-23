@@ -44,9 +44,9 @@ public class KyufuhiShinsaKetteiCsvEntity {
     private RString 日数_回数;
     @CsvField(order = 130, name = "単位")
     private RString 単位;
-    @CsvField(order = 140, name = "金額")
+    @CsvField(order = 140, name = "金額（特定入所者介護費等）")
     private RString 金額;
-    @CsvField(order = 150, name = "介護給付費")
+    @CsvField(order = 150, name = "介護給付費（特定入所者介護費等）")
     private RString 介護給付費;
     @CsvField(order = 160, name = "利用者負担額")
     private RString 利用者負担額;
