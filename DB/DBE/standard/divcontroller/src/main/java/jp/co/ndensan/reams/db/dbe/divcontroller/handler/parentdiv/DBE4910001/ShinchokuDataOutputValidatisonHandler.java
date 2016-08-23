@@ -43,17 +43,6 @@ public class ShinchokuDataOutputValidatisonHandler {
     }
 
     /**
-     * 対象者一覧データの件数が空の場合、エラーとする。
-     *
-     * @return バリデーション結果
-     */
-    public ValidationMessageControlPairs 必須入力チェック() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        validateForMaxCount(validPairs);
-        return validPairs;
-    }
-
-    /**
      * データ空チェック
      *
      * @param validPairs ValidationMessageControlPairs
@@ -64,20 +53,6 @@ public class ShinchokuDataOutputValidatisonHandler {
                 || div.getDgShinchokuIchiran().getDataSource().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(ShinchokuDataOutputValidatisonHandler.RRVMessages.Validate対象者一覧未表示,
                     div.getDgShinchokuIchiran()));
-        }
-        return validPairs;
-    }
-
-    /**
-     * 最大表示件数の必須入力チェックを実施します。
-     *
-     * @param validPairs ValidationMessageControlPairs
-     * @return ValidationMessageControlPairs(バリデーション結果)
-     */
-    public ValidationMessageControlPairs validateForMaxCount(ValidationMessageControlPairs validPairs) {
-        if (div.getTxtMaxKensu().getValue() == null) {
-            validPairs.add(new ValidationMessageControlPair(ShinchokuDataOutputValidatisonHandler.RRVMessages.Validate最大表示件数の必須入力チェック,
-                    div.getTxtMaxKensu()));
         }
         return validPairs;
     }
@@ -100,8 +75,7 @@ public class ShinchokuDataOutputValidatisonHandler {
     private static enum RRVMessages implements IValidationMessage {
 
         Validate対象者一覧未表示(UrErrorMessages.該当データなし),
-        対象者一覧データの行選択チェック(UrErrorMessages.対象行を選択),
-        Validate最大表示件数の必須入力チェック(UrErrorMessages.必須, "最大表示件数");
+        対象者一覧データの行選択チェック(UrErrorMessages.対象行を選択);
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {

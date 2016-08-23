@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiH
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekikubun.KyufuJissekiKubun;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
@@ -59,6 +60,15 @@ public class KyufuJissekiHeaderHandler {
     }
 
     /**
+     * サービス提供年月を取得します。
+     *
+     * @return サービス提供年月 サービス提供年月
+     */
+    public RDate getサービス提供年月() {
+        return div.getTxtTeikyoNengetsu().getValue();
+    }
+
+    /**
      * サービス提供年月を設定します。
      *
      * @param サービス提供年月 サービス提供年月
@@ -74,6 +84,16 @@ public class KyufuJissekiHeaderHandler {
      */
     public void set実績区分(RString 実績区分) {
         div.getTxtJissekiKubun().setValue(get実績区分(実績区分));
+        div.setHiddenJissekiKubun(実績区分);
+    }
+
+    /**
+     * 実績区分コードを取得します。
+     *
+     * @return 実績区分コード 実績区分コード
+     */
+    public RString get実績区分コード() {
+        return div.getHiddenJissekiKubun();
     }
 
     /**
@@ -86,12 +106,39 @@ public class KyufuJissekiHeaderHandler {
     }
 
     /**
+     * 事業者番号を設定します。
+     *
+     * @param 事業者番号 事業者番号
+     */
+    public void set事業者番号(RString 事業者番号) {
+        div.setHiddenJigyoshaCode(事業者番号);
+    }
+
+    /**
+     * 事業者番号を取得します。
+     *
+     * @return 事業者番号 事業者番号
+     */
+    public RString get事業者番号() {
+        return div.getHiddenJigyoshaCode();
+    }
+
+    /**
      * 整理番号を設定します。
      *
      * @param 整理番号 整理番号
      */
     public void set整理番号(RString 整理番号) {
         div.getTxtSeiriNo().setValue(整理番号);
+    }
+
+    /**
+     * 整理番号を取得します。
+     *
+     * @return 整理番号 整理番号
+     */
+    public RString get整理番号() {
+        return div.getTxtSeiriNo().getValue();
     }
 
     /**
@@ -104,12 +151,21 @@ public class KyufuJissekiHeaderHandler {
     }
 
     /**
-     * 保険者を設定します。
+     * 様式番号を取得します。
      *
-     * @param 保険者名称 保険者名称
+     * @return 様式番号 様式番号
      */
-    public void set保険者(RString 保険者名称) {
-        div.getTxtHokensha().setValue(保険者名称);
+    public RString get様式番号() {
+        return div.getHiddenYoshikiNo();
+    }
+
+    /**
+     * 様式番号を設定します。
+     *
+     * @param 様式番号 様式番号
+     */
+    public void set様式番号(RString 様式番号) {
+        div.setHiddenYoshikiNo(様式番号);
     }
 
     private void set給付実績ヘッダ情報1(KyufuJissekiHedajyoho1 給付実績ヘッダ情報1) {
@@ -135,9 +191,12 @@ public class KyufuJissekiHeaderHandler {
         if (給付実績ヘッダ情報2.getサービス提供年月() != null && !給付実績ヘッダ情報2.getサービス提供年月().isEmpty()) {
             div.getTxtTeikyoNengetsu().setValue(new RDate(給付実績ヘッダ情報2.getサービス提供年月().toString()));
         }
+        div.setHiddenJissekiKubun(給付実績ヘッダ情報2.get給付実績区分コード());
         div.getTxtJissekiKubun().setValue(get実績区分(給付実績ヘッダ情報2.get給付実績区分コード()));
         div.getTxtSeiriNo().setValue(給付実績ヘッダ情報2.get整理番号());
         div.getTxtYoshikiNo().setValue(給付実績ヘッダ情報2.get識別番号名称());
+        div.setHiddenYoshikiNo(給付実績ヘッダ情報2.get識別番号());
+        div.setHiddenJigyoshaCode(get事業所番号(給付実績ヘッダ情報2.get事業所番号()));
         div.getTxtJigyosha().setValue(給付実績ヘッダ情報2.get事業者名称());
     }
 
@@ -165,6 +224,13 @@ public class KyufuJissekiHeaderHandler {
     private RString get被保険者番号(HihokenshaNo 被保険者番号) {
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
             return 被保険者番号.value();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get事業所番号(JigyoshaNo 事業所番号) {
+        if (事業所番号 != null && !事業所番号.isEmpty()) {
+            return 事業所番号.value();
         }
         return RString.EMPTY;
     }
