@@ -1204,10 +1204,10 @@ public class JukyushaIdoRenrakuhyoHandler {
         entity.set軽減率適用開始年月日(new FlexibleDate(div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtFutanGendogakuTekiyoYMD().getFromValue().toDateString()));
         entity.set軽減率適用終了年月日(new FlexibleDate(div.getGemmenGengakuPanel().
-                getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtFutanGendogakuTekiyoYMD().getFromValue().toDateString()));
-        if (div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().getSelectedKey().isEmpty()) {
+                getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtFutanGendogakuTekiyoYMD().getToValue().toDateString()));
+        if (div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().getSelectedKey().equals(ONE)) {
             entity.set小規模居宅ｻｰﾋﾞｽ利用(Boolean.FALSE);
-        } else {
+        } else if (div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().getSelectedKey().equals(TWO)) {
             entity.set小規模居宅ｻｰﾋﾞｽ利用(Boolean.TRUE);
         }
         entity.set二次予防事業区分(div.getNijiyoboJigyoPanel().getRadNijiyoboJigyoKubun().getSelectedKey());
@@ -1222,9 +1222,9 @@ public class JukyushaIdoRenrakuhyoHandler {
         entity.set国保被保険者証番号(div.getKokiKoureiIryoHokenshaPanel().getKokuhoPanel().getTxtKokuhoHiHokenshaNo().getValue());
         entity.set国保個人番号(div.getKokiKoureiIryoHokenshaPanel().getKokuhoPanel().getTxtKokuhoKojinNo().getValue());
         entity.set後期高齢保険者番号(div.getKokiKoureiIryoHokenshaPanel().getKokiKoureiPanel().
-                getTxtKokikoureiIryoHiHokenshaNo().getValue());
-        entity.set後期高齢被保険者番号(div.getKokiKoureiIryoHokenshaPanel().getKokiKoureiPanel().
                 getTxtKokiKoureiIryoHokenshaNo().getValue());
+        entity.set後期高齢被保険者番号(div.getKokiKoureiIryoHokenshaPanel().getKokiKoureiPanel().
+                getTxtKokikoureiIryoHiHokenshaNo().getValue());
         entity.set住特対象者区分(div.getJushochiTokureiPanel().getRadJushochiTokureiTaishoshaKubun().getSelectedKey());
         entity.set住特施設所在保険者番号(div.getJushochiTokureiPanel().getHokenshaJohoPanel().
                 getTxtShisetsuShozaiHokenjaNo().getValue());
@@ -1355,10 +1355,10 @@ public class JukyushaIdoRenrakuhyoHandler {
                 getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtFutanGendogakuTekiyoYMD().getFromValue().toDateString()));
         entity.set軽減率適用終了年月日(new FlexibleDate(div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
-                getTxtFutanGendogakuTekiyoYMD().getFromValue().toDateString()));
-        if (div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().getSelectedKey().isEmpty()) {
+                getTxtFutanGendogakuTekiyoYMD().getToValue().toDateString()));
+        if (div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().getSelectedKey().equals(ONE)) {
             entity.set小規模居宅ｻｰﾋﾞｽ利用(Boolean.FALSE);
-        } else {
+        } else if (div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().getSelectedKey().equals(TWO)) {
             entity.set小規模居宅ｻｰﾋﾞｽ利用(Boolean.TRUE);
         }
         entity.set二次予防事業区分(div.getNijiyoboJigyoPanel().getRadNijiyoboJigyoKubun().getSelectedKey());
@@ -1373,9 +1373,9 @@ public class JukyushaIdoRenrakuhyoHandler {
         entity.set国保被保険者証番号(div.getKokiKoureiIryoHokenshaPanel().getKokuhoPanel().getTxtKokuhoHiHokenshaNo().getValue());
         entity.set国保個人番号(div.getKokiKoureiIryoHokenshaPanel().getKokuhoPanel().getTxtKokuhoKojinNo().getValue());
         entity.set後期高齢保険者番号(div.getKokiKoureiIryoHokenshaPanel().getKokiKoureiPanel().
-                getTxtKokikoureiIryoHiHokenshaNo().getValue());
-        entity.set後期高齢被保険者番号(div.getKokiKoureiIryoHokenshaPanel().getKokiKoureiPanel().
                 getTxtKokiKoureiIryoHokenshaNo().getValue());
+        entity.set後期高齢被保険者番号(div.getKokiKoureiIryoHokenshaPanel().getKokiKoureiPanel().
+                getTxtKokikoureiIryoHiHokenshaNo().getValue());
         entity.set住特対象者区分(div.getJushochiTokureiPanel().getRadJushochiTokureiTaishoshaKubun().getSelectedKey());
         entity.set住特施設所在保険者番号(div.getJushochiTokureiPanel().getHokenshaJohoPanel().
                 getTxtShisetsuShozaiHokenjaNo().getValue());
