@@ -72,8 +72,12 @@ public class NinteiShinseiTodokedeshaHandler {
             div.getTxtHonninKankeisei().setValue(model.get続柄());
             div.getTxtShimei().setValue(model.get氏名());
             div.getTxtKanaShimei().setValue(model.getカナ氏名());
-            div.getTxtTelNo().setDomain(new TelNo(model.get電話番号()));
-            div.getTxtYubinNo().setValue(new YubinNo(model.get郵便番号()));
+            if (!RString.isNullOrEmpty(model.get電話番号())) {
+                div.getTxtTelNo().setDomain(new TelNo(model.get電話番号()));
+            }
+            if (!RString.isNullOrEmpty(model.get郵便番号())) {
+                div.getTxtYubinNo().setValue(new YubinNo(model.get郵便番号()));
+            }
             div.getCcdChoikiInput().load(ChoikiCode.EMPTY, model.get住所());
             div.getDdlTodokledeDaikoKubun().setSelectedKey(model.get申請届出代行区分コード());
             div.getDdlShinseiKankeisha().setSelectedKey(model.get事業者区分());
