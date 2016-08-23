@@ -194,6 +194,7 @@ public class ServiceRiyohyoInfo {
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onChange_txtJigyosha(ServiceRiyohyoInfoDiv div) {
         div.getCcdJigyoshaInput().get入所施設名称(new JigyoshaNo(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo()));
+        div.getBtnBeppyoMeisaiKakutei().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -205,6 +206,7 @@ public class ServiceRiyohyoInfo {
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onChange_txtServiceEvent(ServiceRiyohyoInfoDiv div) {
         getHandler(div).onChange_txtServiceEvent();
+        div.getBtnBeppyoMeisaiKakutei().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -412,35 +414,38 @@ public class ServiceRiyohyoInfo {
         for (KyufuJikoSakuseiResult result : サービス利用票情報) {
             if (result.is合計フラグ() && 限度額対象外フラグ_0.equals(result.get限度額対象外フラグ())) {
                 Decimal 限度額 = Decimal.ZERO;
-                for (ServiceTypeTotal total : サービス種類限度額統計) {
-                    if (result.getサービス種類コード().getColumnValue().equals(total.getサービス種類コード().getColumnValue())) {
-                        限度額 = total.get限度額();
-                        break;
-                    }
-                }
-                if (nullToZero(result.get種類限度内単位()).compareTo(限度額) > 0) {
-                    throw new ApplicationException(DbcErrorMessages.種類支給限度額不正.getMessage()
-                            .replace(ServiceCategoryShurui.toValue(result.getサービス種類コード().getColumnValue())
-                                    .get名称().toString()).evaluate());
-                }
+                サービス種類限度額統計(サービス種類限度額統計, result, 限度額);
             }
         }
         for (ServiceTypeTotal total : サービス種類限度額統計) {
-            if (total.get限度額().compareTo(total.get合計単位数()) > 0) {
-                if (!ResponseHolder.isReRequest()) {
-                    WarningMessage message = new WarningMessage(DbcQuestionMessages.限度余裕確認.getMessage().getCode(),
-                            DbcQuestionMessages.限度余裕確認.getMessage().evaluate());
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-                if (new RString(DbcQuestionMessages.限度余裕確認.getMessage().getCode())
-                        .equals(ResponseHolder.getMessageCode())
-                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                    return ResponseData.of(div).respond();
-                }
+            if (total.get合計単位数().compareTo(total.get限度額()) < 0 && !ResponseHolder.isReRequest()) {
+                WarningMessage message = new WarningMessage(DbcQuestionMessages.限度余裕確認.getMessage().getCode(),
+                        DbcQuestionMessages.限度余裕確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (total.get合計単位数().compareTo(total.get限度額()) < 0
+                    && new RString(DbcQuestionMessages.限度余裕確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
             }
         }
         getHandler(div).init保存処理(居宅総合事業区分, サービス利用票情報);
         return ResponseData.of(div).respond();
+    }
+
+    private void サービス種類限度額統計(List<ServiceTypeTotal> サービス種類限度額統計, KyufuJikoSakuseiResult result, Decimal 限度額) throws ApplicationException {
+        for (ServiceTypeTotal total : サービス種類限度額統計) {
+            if (result.getサービス種類コード().getColumnValue().equals(total.getサービス種類コード().getColumnValue())) {
+                限度額 = total.get限度額();
+                break;
+            }
+        }
+        if (限度額.compareTo(nullToZero(result.get種類限度内単位())) < 0) {
+            throw new ApplicationException(DbcErrorMessages.種類支給限度額不正.getMessage()
+                    .replace(ServiceCategoryShurui.toValue(result.getサービス種類コード().getColumnValue())
+                            .get名称().toString()).evaluate());
+        }
     }
 
     private Decimal nullToZero(Decimal decimal) {
@@ -562,20 +567,6 @@ public class ServiceRiyohyoInfo {
             利用年月 = new FlexibleYearMonth(利用年月日.getYearMonth().toDateString());
         }
         getHandler(div).set区分支給限度額(被保険者番号, 居宅総合事業区分, 利用年月);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 「明細+合計情報を追加する」ボタンonClickのイベントです。
-     *
-     * @param div ServiceRiyohyoInfoDiv
-     * @return ResponseData<ServiceRiyohyoInfoDiv>
-     */
-    public ResponseData<ServiceRiyohyoInfoDiv> onClick_txtKyufuritsu(ServiceRiyohyoInfoDiv div) {
-        // TODO QAのNo.1221 (Redmine#96083) このボタンがない。
-        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setVisible(false);
-        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnBeppyoMeisaiKakutei().setDisabled(true);
-        div.getServiceRiyohyoBeppyoGokei().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 

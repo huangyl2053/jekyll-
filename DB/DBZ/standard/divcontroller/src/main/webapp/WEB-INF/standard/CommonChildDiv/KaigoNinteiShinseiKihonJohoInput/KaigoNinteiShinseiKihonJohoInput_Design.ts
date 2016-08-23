@@ -8,6 +8,10 @@ module DBZ {
 
         export class Events {
 
+            public static onChange_ddlTokuteiShippei(): string {
+                return "onChange_ddlTokuteiShippei";
+            }
+
             public static onOkClose_btnServiceSakujoTeikeibun(): string {
                 return "onOkClose_btnServiceSakujoTeikeibun";
             }

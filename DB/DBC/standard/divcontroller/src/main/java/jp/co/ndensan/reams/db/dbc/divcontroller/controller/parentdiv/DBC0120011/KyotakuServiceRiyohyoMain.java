@@ -90,6 +90,7 @@ public class KyotakuServiceRiyohyoMain {
         FlexibleYearMonth 対象年月 = 居宅給付計画届出.get対象年月();
         int 履歴番号 = 居宅給付計画届出.get履歴番号();
         div.getCcdServiceRiyohyoInfo().initialize(追加, null, 対象年月, 被保険者番号, 総合事業区分, 履歴番号);
+        init公開コントロール(div);
         return ResponseData.of(div).setState(DBC0120011StateName.明細表示);
     }
 
@@ -111,6 +112,7 @@ public class KyotakuServiceRiyohyoMain {
         div.getCcdServiceRiyohyoInfo().initialize(
                 修正, new FlexibleYearMonth(riyoRow.getRiyoYM().getValue().getYearMonth().toString()),
                 対象年月, 被保険者番号, 総合事業区分, 履歴番号);
+        init公開コントロール(div);
         return ResponseData.of(div).setState(DBC0120011StateName.明細表示);
     }
 
@@ -132,6 +134,7 @@ public class KyotakuServiceRiyohyoMain {
         div.getCcdServiceRiyohyoInfo().initialize(
                 削除, new FlexibleYearMonth(riyoRow.getRiyoYM().getValue().getYearMonth().toString()),
                 対象年月, 被保険者番号, 総合事業区分, 履歴番号);
+        init公開コントロール(div);
         return ResponseData.of(div).setState(DBC0120011StateName.明細表示);
     }
 
@@ -182,6 +185,12 @@ public class KyotakuServiceRiyohyoMain {
     public ResponseData<KyotakuServiceRiyohyoMainDiv> onClick_btnBackRiyoNengetsuIchiran(
             KyotakuServiceRiyohyoMainDiv div) {
         return ResponseData.of(div).setState(DBC0120011StateName.届出表示);
+    }
+
+    private void init公開コントロール(KyotakuServiceRiyohyoMainDiv div) {
+        div.getCcdServiceRiyohyoInfo().setTodokedeYMD(div.getTxtTodokedeYmd().getValue());
+        div.getCcdServiceRiyohyoInfo().setTekiyoKikanFrom(div.getTxtTekiyoKikan().getFromValue());
+        div.getCcdServiceRiyohyoInfo().setTekiyoKikanTo(div.getTxtTekiyoKikan().getToValue());
     }
 
     private KyotakuServiceRiyohyoMainHandler getHandler(KyotakuServiceRiyohyoMainDiv div) {

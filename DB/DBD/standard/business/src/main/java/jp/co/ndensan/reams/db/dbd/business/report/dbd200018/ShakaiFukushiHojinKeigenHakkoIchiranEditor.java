@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd200018;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.shakaifukushihojinkeigenhakkoichiran.ShakaiFukushiHojinKeigenHakkoIchiranEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.record.ShakaiFukushiHoujinnKeigenListRecordEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200018.ShakaiFukushiHojinKeigenHakkoIchiranReportSource;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -39,7 +39,7 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
     private static final int LISTINDEX_3 = 3;
     private static final int LISTINDEX_4 = 4;
 
-    private final ShakaiFukushiHojinKeigenHakkoIchiranEntity 帳票情報;
+    private final ShakaiFukushiHoujinnKeigenListRecordEntity 帳票情報;
     private final Association association;
     private final IOutputOrder iOutputOrder;
     private final IKojin 個人情報;
@@ -54,7 +54,7 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
      * @param 個人情報 IKojin
      * @param index int
      */
-    public ShakaiFukushiHojinKeigenHakkoIchiranEditor(ShakaiFukushiHojinKeigenHakkoIchiranEntity 帳票情報,
+    public ShakaiFukushiHojinKeigenHakkoIchiranEditor(ShakaiFukushiHoujinnKeigenListRecordEntity 帳票情報,
             Association association, IOutputOrder iOutputOrder, IKojin 個人情報, int index) {
         this.帳票情報 = 帳票情報;
         this.association = association;
@@ -118,14 +118,12 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
                 source.list_10 = new RString("却下");
             }
             if (決定.equals(決定区分承認)) {
-                source.list_11 = this.帳票情報.get軽減().get略称();
+                source.list_11 = this.帳票情報.get軽減().get名称();
             } else if (決定.equals(決定区分承認しない)) {
                 source.list_11 = RString.EMPTY;
             }
             if (this.帳票情報.get軽減率_分子() != null
-                    && !this.帳票情報.get軽減率_分子().isEmpty()
                     && this.帳票情報.get軽減率_分母() != null
-                    && !this.帳票情報.get軽減率_分母().isEmpty()
                     && !this.帳票情報.get軽減率_分母().equals(new RString("0"))) {
                 Decimal 軽減率_分子 = new Decimal(this.帳票情報.get軽減率_分子().toString());
                 Decimal 軽減率_分母 = new Decimal(this.帳票情報.get軽減率_分母().toString());
@@ -148,7 +146,7 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
             } else if (決定.equals(決定区分承認) && !居宅サービス限定) {
                 source.list_13 = RString.EMPTY.substring(0, NOCOUNT_1);
             }
-            boolean 居住費食費のみ = this.帳票情報.is居住費食費のみ();
+            boolean 居住費食費のみ = this.帳票情報.is居住費_食費のみ();
             if (決定.equals(決定区分承認) && 居住費食費のみ) {
                 source.list_13 = new RString("住").substring(NOCOUNT_1, NOCOUNT_2);
             } else if (決定.equals(決定区分承認) && !居住費食費のみ) {

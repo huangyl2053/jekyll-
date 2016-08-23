@@ -878,7 +878,7 @@ public class KyufuJissekiKoshinReadCsvFileService {
             doD1件数が0件チェック();
             doDD件数が1件以上チェック();
             doD2件数が1件以上チェック();
-            doDC件数が1件以上チェック();
+            doD4件数が1件以上チェック();
             doD5件数が1件以上チェック();
             doD6件数が1件以上チェック();
             doD7件数が1件以上チェック();

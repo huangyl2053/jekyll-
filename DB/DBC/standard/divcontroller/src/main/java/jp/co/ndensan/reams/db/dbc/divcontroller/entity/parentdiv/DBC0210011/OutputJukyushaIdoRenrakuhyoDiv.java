@@ -4,18 +4,21 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0210011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.printcontentssetting.IPrintContentsSettingDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.printcontentssetting.PrintContentsSettingDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * OutputJukyushaIdoRenrakuhyo のクラスファイル 
- * 
- * @author 自動生成
+ * OutputJukyushaIdoRenrakuhyo のクラスファイル
+ *
+ * @reamsid_L DBC-2100-010 jiangzongyue
  */
 public class OutputJukyushaIdoRenrakuhyoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
