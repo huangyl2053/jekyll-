@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -109,15 +110,17 @@ public class TaishoShoriPanel {
      * 「アップロード」ボタンの処理です。
      *
      * @param div TaishoShoriPanelDiv
-     * @return ResponseData
+     * @param files FileData[]
+     * @return 引数のDivを持つResponseData型
      */
-    public ResponseData<TaishoShoriPanelDiv> onClick_btnUpload(TaishoShoriPanelDiv div) {
+    @SuppressWarnings("checkstyle:illegaltoken")
+    public ResponseData<TaishoShoriPanelDiv> onClick_btnUpload(TaishoShoriPanelDiv div, FileData[] files) {
         ValidationMessageControlPairs pairs = getValidationHandler(div).validateファイル値();
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
 
-        getHandler(div).readFile();
+        getHandler(div).readFile(files[0]);
 
         pairs = getValidationHandler(div).validateファイル内容();
         if (pairs.iterator().hasNext()) {
@@ -129,7 +132,25 @@ public class TaishoShoriPanel {
             return ResponseData.of(div).addMessage(message).respond();
         }
 
-        getHandler(div).upload();
+        List<ShoriDateKanri> 画面更新用情報 = ViewStateHolder.get(画面キー.画面更新用情報, List.class);
+        getHandler(div).upload(files[0], 画面更新用情報);
+
+        List<ShoriDateKanri> 画面情報 = getHandler(div).onLoad();
+        ViewStateHolder.put(画面キー.画面更新用情報, (Serializable) 画面情報);
+        div.getFuairuAppurodo().setDisplayNone(true);
+
+        div.getCcdKaigoKanryoMessage().setSuccessMessage(
+                new RString(UrInformationMessages.正常終了.getMessage().replace("アップロード処理").evaluate()));
+        return ResponseData.of(div).setState(DBD8010001StateName.処理完了);
+    }
+
+    /**
+     * 「アップロード」ボタンの処理です。
+     *
+     * @param div TaishoShoriPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<TaishoShoriPanelDiv> onClick_afterUpload(TaishoShoriPanelDiv div) {
 
         div.getCcdKaigoKanryoMessage().setSuccessMessage(
                 new RString(UrInformationMessages.正常終了.getMessage().replace("アップロード処理").evaluate()));
@@ -144,10 +165,6 @@ public class TaishoShoriPanel {
      */
     public ResponseData<TaishoShoriPanelDiv> onClick_btnBack(TaishoShoriPanelDiv div) {
 
-        List<ShoriDateKanri> 画面情報 = getHandler(div).onLoad();
-
-        ViewStateHolder.put(画面キー.画面更新用情報, (Serializable) 画面情報);
-        div.getFuairuAppurodo().setDisplayNone(true);
         return ResponseData.of(div).setState(DBD8010001StateName.アップロード画面);
     }
 

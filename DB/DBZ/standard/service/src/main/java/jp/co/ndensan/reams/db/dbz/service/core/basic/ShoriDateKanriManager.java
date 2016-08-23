@@ -57,6 +57,15 @@ public class ShoriDateKanriManager {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link ShoriDateKanriManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link ShoriDateKanriManager}のインスタンス
+     */
+    public static ShoriDateKanriManager createInstance() {
+        return InstanceProvider.create(ShoriDateKanriManager.class);
+    }
+
+    /**
      * 主キーに合致する処理日付管理マスタを返します。
      *
      * @param サブ業務コード SubGyomuCode
@@ -262,6 +271,48 @@ public class ShoriDateKanriManager {
     /**
      * 処理日付管理リスト{@link List<ShoriDateKanri>}を保存します。
      *
+     * @param 処理日付管理削除リスト {@link List<ShoriDateKanri>}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean delete処理日付管理リスト(
+            List<ShoriDateKanri> 処理日付管理削除リスト) {
+        requireNonNull(処理日付管理削除リスト, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日付管理削除リスト"));
+
+        for (ShoriDateKanri 処理日付管理マスタ : 処理日付管理削除リスト) {
+            DbT7022ShoriDateKanriEntity entity = 処理日付管理マスタ.toEntity();
+            entity.setState(EntityDataState.Deleted);
+            if (1 != dac.saveOrDeletePhysicalBy(entity)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * 処理日付管理リスト{@link List<ShoriDateKanri>}を保存します。
+     *
+     * @param 処理日付管理登録リスト {@link List<ShoriDateKanri>}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean save処理日付管理リスト(List<ShoriDateKanri> 処理日付管理登録リスト) {
+        requireNonNull(処理日付管理登録リスト, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日付管理登録リスト"));
+
+        for (ShoriDateKanri 処理日付管理マスタ : 処理日付管理登録リスト) {
+            DbT7022ShoriDateKanriEntity entity = 処理日付管理マスタ.toEntity();
+            entity.setState(EntityDataState.Added);
+            if (1 != dac.save(処理日付管理マスタ.toEntity())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 処理日付管理リスト{@link List<ShoriDateKanri>}を保存します。
+     *
      * @param 処理日付管理登録リスト {@link List<ShoriDateKanri>}
      * @param 処理日付管理削除リスト {@link List<ShoriDateKanri>}
      * @return 更新件数 更新結果の件数を返します。
@@ -273,6 +324,7 @@ public class ShoriDateKanriManager {
 
         for (ShoriDateKanri 処理日付管理マスタ : 処理日付管理削除リスト) {
             DbT7022ShoriDateKanriEntity entity = 処理日付管理マスタ.toEntity();
+            entity.initializeMd5();
             entity.setState(EntityDataState.Deleted);
             if (1 != dac.saveOrDeletePhysicalBy(entity)) {
                 return false;
@@ -673,7 +725,6 @@ public class ShoriDateKanriManager {
         List<ShoriDateKanri> result = new ArrayList<>();
         List<DbT7022ShoriDateKanriEntity> entityList = dac.selectBySomeColumns(サブ業務コード, 処理名, 年度, 市町村コード);
         for (DbT7022ShoriDateKanriEntity entity : entityList) {
-            entity.initializeMd5();
             result.add(new ShoriDateKanri(entity));
         }
 
