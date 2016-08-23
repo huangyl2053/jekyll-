@@ -1119,6 +1119,14 @@
     </select>
 
     <!--selectAll-->
+    <select resultOrdered="true" id="select判定対象者Temp" 
+        resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.IHanteiTaishoshaTempMapper.ResultMap_HanteiTaishoshaTempEntity"
+        fetchSize="500">
+        SELECT
+            <include refid="allColumns_HanteiTaishoshaTemp" />
+        FROM
+            "HanteiTaishoshaTemp"
+    </select>
     <select resultOrdered="true" id="select世帯員情報Temp" 
         resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ISetainJohoTempMapper.ResultMap_SetainJohoTempEntity"
         fetchSize="500">
