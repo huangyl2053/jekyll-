@@ -1396,7 +1396,7 @@ public class SokujiFukaKouseiMainHandler {
                     || !更正後.equals(Decimal.ZERO)) {
                 row.getKoseiMae().setValue(更正前);
                 row.getKoseiGo().setValue(更正後);
-                row.getZogen().setValue(row.getKoseiGo().getValue().multiply(row.getKoseiMae().getValue()));
+                row.getZogen().setValue(row.getKoseiGo().getValue().subtract(row.getKoseiMae().getValue()));
                 row.getNofuGaku().setValue(getFormat金額(get普通徴収の納付額(更正後過年度, kitsuki.get期(), kitsuki.get月())));
                 row.getNoKigen().setValue(researcher.get過年度納期(kitsuki.get期AsInt()).get納期限());
             }

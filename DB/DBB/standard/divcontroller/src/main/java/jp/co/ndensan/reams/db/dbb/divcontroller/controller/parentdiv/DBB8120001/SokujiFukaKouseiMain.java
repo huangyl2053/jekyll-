@@ -146,6 +146,9 @@ public class SokujiFukaKouseiMain {
                 更正後賦課リスト = 更正前後賦課.get更正後();
                 div.setDisabled(true);
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
+            } else {
+                更正前賦課リスト = new NendobunFukaList();
+                更正後賦課リスト = new NendobunFukaList();
             }
         }
         handler.initializeヘッダエリア(is特殊処理(), 賦課年度, 更正前後賦課のリスト, 通知書番号選択, 更正前後徴収方法);
@@ -408,7 +411,7 @@ public class SokujiFukaKouseiMain {
                 return getResponseData(div);
             }
         }
-        List<KoseiZengoFuka> 更正前後賦課のリスト = new ArrayList<>();
+        List<KoseiZengoFuka> 更正前後賦課のリスト;
         KoseiZengoChoshuHoho 更正前後徴収方法 = null;
         NendobunFukaList 更正前賦課リスト = null;
         NendobunFukaList 更正後賦課リスト = null;
