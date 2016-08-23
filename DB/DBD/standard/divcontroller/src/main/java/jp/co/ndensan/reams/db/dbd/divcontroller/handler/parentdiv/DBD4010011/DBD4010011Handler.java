@@ -46,7 +46,7 @@ public class DBD4010011Handler {
         boolean 基準日より後に資格喪失した者 = dBD4010011Div.getShogaishaKojoTaishoshaHaakuJoken().getChkJogaiJoken().getSelectedKeys().contains(new RString("removeSoshitsusha"));
         boolean 前回把握時の非該当者 = dBD4010011Div.getShogaishaKojoTaishoshaHaakuJoken().getChkJogaiJoken().getSelectedKeys().contains(new RString("includeHigaishosha"));
         parameter.set基準日(new FlexibleDate(基準日.toDateString()));
-        parameter.set対象年度(new FlexibleYear(対象年度.toDateString()));
+        parameter.set対象年度(new FlexibleYear(対象年度.getYear().toString()));
         parameter.set申請年月日(new FlexibleDate(申請年月日.toDateString()));
         parameter.set決定年月日(new FlexibleDate(決定年月日.toDateString()));
         parameter.set基準日より後に資格喪失した者(基準日より後に資格喪失した者);
