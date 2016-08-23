@@ -46,6 +46,9 @@ public class KyufuhiShinsaKetteiSeikyuMeisaihyoPageBreak extends PageBreaker<Kyu
         } else if (this.breakKeysList.contains(KyufuhiShinsaKetteiSeikyuMeisaihyoOutPutOrder.サービス提供年月.get項目ID())
                 && !currentSource.getSource().listMeisai_3.equals(nextSource.getSource().listMeisai_3)) {
             flag = true;
+        } else if (this.breakKeysList.contains(KyufuhiShinsaKetteiSeikyuMeisaihyoOutPutOrder.サービス種類コード.get項目ID())
+                && !currentSource.getSource().listMeisai_12.equals(nextSource.getSource().listMeisai_12)) {
+            flag = true;
         }
         return flag;
     }
@@ -67,6 +70,9 @@ public class KyufuhiShinsaKetteiSeikyuMeisaihyoPageBreak extends PageBreaker<Kyu
             flag = true;
         } else if (this.breakKeysList.contains(KyufuhiShinsaKetteiSeikyuMeisaihyoOutPutOrder.サービス提供年月.get項目ID())
                 && !currentSource.listMeisai_3.equals(nextSource.listMeisai_3)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KyufuhiShinsaKetteiSeikyuMeisaihyoOutPutOrder.サービス種類コード.get項目ID())
+                && !currentSource.listMeisai_12.equals(nextSource.listMeisai_12)) {
             flag = true;
         }
         return flag;
