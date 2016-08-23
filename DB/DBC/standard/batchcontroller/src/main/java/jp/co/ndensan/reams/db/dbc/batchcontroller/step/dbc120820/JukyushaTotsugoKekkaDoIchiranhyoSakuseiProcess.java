@@ -276,7 +276,6 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
         output.set異動区分(異動区分コード);
         output.set異動区分名称(JukyushaIF_IdoKubunCode.toValue(異動区分コード).get名称());
         output.set異動事由(受給者情報.get異動事由区分());
-        output.set異動事由(受給者情報.get異動事由区分());
         output.set異動事由名称(JukyushaIF_JukyushaIdoJiyu.toValue(受給者情報.get異動事由区分()).get名称());
         output.set被保険者番号(被保険者.get登録被保険者番号().getColumnValue());
         output.set被保険者氏名カナ(被保険者.get宛名カナ名称());
