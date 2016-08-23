@@ -30,36 +30,6 @@ public interface IJukyushaIdoRenrakuhyoDiv extends ICommonChildDivBaseProperties
             int 履歴番号, boolean 論理削除フラグ, FlexibleDate 異動日);
 
     /**
-     * 「事業区分」操作制御のメソッドです。
-     *
-     */
-    public void onClick_radNijiyoboJigyoKubun();
-
-    /**
-     * 「計画作成区分」操作制御のメソッドです。
-     *
-     */
-    public void onClick_radKyotakuServiceSakuseiKubun();
-
-    /**
-     * 異動日focus outのメソッドです。
-     *
-     */
-    public void onBlur_txtIdoYMD();
-
-    /**
-     * 支援事業者番号focus outのメソッドです。
-     *
-     */
-    public void onBlur_txtKyotakuKaigoShienJigyoshoNo();
-
-    /**
-     * 住所地特例の保険者番号focus outのメソッドです。
-     *
-     */
-    public void onBlur_txtShisetsuShozaiHokenjaNo();
-
-    /**
      * (共有子Div)受給者異動連絡票バリデーションチェックを行う。
      *
      * @return ValidationMessageControlPairs
@@ -85,7 +55,7 @@ public interface IJukyushaIdoRenrakuhyoDiv extends ICommonChildDivBaseProperties
     /**
      * 出力用受給者異動連絡票Entityをを取得のメソッドです。
      *
-     * @return JukyushaIdoRenrakuhyoSakuseiRelateEntity
+     * @return JukyushaIdoRenrakuhyoTorokuEntity
      */
     public JukyushaIdoRenrakuhyoTorokuEntity get受給者異動連絡票Entity();
 
