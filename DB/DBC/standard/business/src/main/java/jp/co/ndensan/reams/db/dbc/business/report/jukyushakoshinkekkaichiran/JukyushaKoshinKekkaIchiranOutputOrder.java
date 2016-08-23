@@ -22,7 +22,7 @@ public enum JukyushaKoshinKekkaIchiranOutputOrder implements IReportItems {
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0164"), new RString("hihokenshaNo"), new RString("HIHOKENSHATEMP.\"hihokenshaNo\"")),
+    被保険者番号(new RString("0104"), new RString("hihokenshaNo"), new RString("HIHOKENSHATEMP.\"hihokenshaNo\"")),
     /**
      * 郵便番号
      */
