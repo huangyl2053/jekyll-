@@ -40,6 +40,18 @@ public class JyukyushaDaichoHandler {
     private static final int NOCOUNT_10 = 10;
     private static final int NOCOUNT_11 = 11;
 
+    private static final RString 抽出条件_1 = new RString("1");
+    private static final RString 抽出条件_2 = new RString("2");
+    private static final RString 抽出条件_3 = new RString("3");
+    private static final RString 抽出条件_4 = new RString("4");
+    private static final RString 抽出条件_5 = new RString("5");
+    private static final RString 抽出条件_6 = new RString("6");
+    private static final RString 抽出条件_7 = new RString("7");
+    private static final RString 抽出条件_8 = new RString("8");
+    private static final RString 抽出条件_9 = new RString("9");
+    private static final RString 抽出条件_10 = new RString("10");
+    private static final RString 抽出条件_11 = new RString("11");
+
     private final JyukyushaDaichoDiv div;
     private static final RString 対象者 = new RString("0");
     private static final RString 対象期間 = new RString("NOCOUNT_1");
@@ -83,38 +95,38 @@ public class JyukyushaDaichoHandler {
         }
         List<RString> chkIdouChushutsuTaishou = new ArrayList();
         RString value = DbBusinessConfig.get(ConfigNameDBD.受給者台帳初期値_抽出条件, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
-        if (value.substring(0, NOCOUNT_1).equals(new RString("NOCOUNT_1"))) {
-            chkIdouChushutsuTaishou.add(new RString("NOCOUNT_1"));
+        if (value.substring(0, NOCOUNT_1).equals(抽出条件_1)) {
+            chkIdouChushutsuTaishou.add(抽出条件_1);
         }
-        if (value.substring(NOCOUNT_1, NOCOUNT_2).equals(new RString("NOCOUNT_1"))) {
-            chkIdouChushutsuTaishou.add(new RString("NOCOUNT_2"));
+        if (value.substring(NOCOUNT_1, NOCOUNT_2).equals(抽出条件_1)) {
+            chkIdouChushutsuTaishou.add(抽出条件_2);
         }
-        if (value.substring(NOCOUNT_2, NOCOUNT_3).equals(new RString("NOCOUNT_1"))) {
-            chkIdouChushutsuTaishou.add(new RString("NOCOUNT_3"));
+        if (value.substring(NOCOUNT_2, NOCOUNT_3).equals(抽出条件_1)) {
+            chkIdouChushutsuTaishou.add(抽出条件_3);
         }
-        if (value.substring(NOCOUNT_3, NOCOUNT_4).equals(new RString("NOCOUNT_1"))) {
-            chkIdouChushutsuTaishou.add(new RString("NOCOUNT_4"));
+        if (value.substring(NOCOUNT_3, NOCOUNT_4).equals(抽出条件_1)) {
+            chkIdouChushutsuTaishou.add(抽出条件_4);
         }
-        if (value.substring(NOCOUNT_4, NOCOUNT_5).equals(new RString("NOCOUNT_1"))) {
-            chkIdouChushutsuTaishou.add(new RString("NOCOUNT_5"));
+        if (value.substring(NOCOUNT_4, NOCOUNT_5).equals(抽出条件_1)) {
+            chkIdouChushutsuTaishou.add(抽出条件_5);
         }
-        if (value.substring(NOCOUNT_5, NOCOUNT_6).equals(new RString("NOCOUNT_1"))) {
-            chkIdouChushutsuTaishou.add(new RString("NOCOUNT_6"));
+        if (value.substring(NOCOUNT_5, NOCOUNT_6).equals(抽出条件_1)) {
+            chkIdouChushutsuTaishou.add(抽出条件_6);
         }
-        if (value.substring(NOCOUNT_6, NOCOUNT_7).equals(new RString("NOCOUNT_1"))) {
-            chkIdouChushutsuTaishou.add(new RString("NOCOUNT_7"));
+        if (value.substring(NOCOUNT_6, NOCOUNT_7).equals(抽出条件_1)) {
+            chkIdouChushutsuTaishou.add(抽出条件_7);
         }
-        if (value.substring(NOCOUNT_7, NOCOUNT_8).equals(new RString("NOCOUNT_1"))) {
-            chkIdouChushutsuTaishou.add(new RString("NOCOUNT_8"));
+        if (value.substring(NOCOUNT_7, NOCOUNT_8).equals(抽出条件_1)) {
+            chkIdouChushutsuTaishou.add(抽出条件_8);
         }
-        if (value.substring(NOCOUNT_8, NOCOUNT_9).equals(new RString("NOCOUNT_1"))) {
-            chkIdouChushutsuTaishou.add(new RString("NOCOUNT_9"));
+        if (value.substring(NOCOUNT_8, NOCOUNT_9).equals(抽出条件_1)) {
+            chkIdouChushutsuTaishou.add(抽出条件_9);
         }
-        if (value.substring(NOCOUNT_9, NOCOUNT_10).equals(new RString("NOCOUNT_1"))) {
-            chkIdouChushutsuTaishou.add(new RString("NOCOUNT_10"));
+        if (value.substring(NOCOUNT_9, NOCOUNT_10).equals(抽出条件_1)) {
+            chkIdouChushutsuTaishou.add(抽出条件_10);
         }
-        if (value.substring(NOCOUNT_10, NOCOUNT_11).equals(new RString("NOCOUNT_1"))) {
-            chkIdouChushutsuTaishou.add(new RString("NOCOUNT_11"));
+        if (value.substring(NOCOUNT_10, NOCOUNT_11).equals(抽出条件_1)) {
+            chkIdouChushutsuTaishou.add(抽出条件_11);
         }
         div.getTaishouKikan().getChkIdouChushutsuTaishou().setSelectedItemsByKey(chkIdouChushutsuTaishou);
 
