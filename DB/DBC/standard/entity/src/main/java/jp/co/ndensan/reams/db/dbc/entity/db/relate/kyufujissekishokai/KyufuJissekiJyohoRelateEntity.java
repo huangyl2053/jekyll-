@@ -25,5 +25,6 @@ public class KyufuJissekiJyohoRelateEntity {
     private RString seiriNo;
     private RString kyufuSakuseiKubunCode;
     private JigyoshaNo jigyoshoNo;
+    private RString shikibetsuNo;
     private RString shikibetsuMeisho;
 }
