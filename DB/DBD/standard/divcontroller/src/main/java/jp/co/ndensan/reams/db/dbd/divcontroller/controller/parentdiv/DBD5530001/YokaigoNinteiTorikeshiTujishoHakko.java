@@ -125,8 +125,19 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
      * @return ResponseData<YokaigoNinteiTorikeshiTujishoHakkoDiv>
      */
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(YokaigoNinteiTorikeshiTujishoHakkoDiv div) {
-        RString hihokenshaNo = div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue();
-        RString hihokenshaName = div.getCcdKaigoNinteiAtenaInfo().get被保険者氏名();
+        SourceDataCollection collection;
+        RString hihokenshaNo;
+        if (div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo() != null) {
+            hihokenshaNo = div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue();
+        } else {
+            hihokenshaNo = RString.EMPTY;
+        }
+        RString hihokenshaName;
+        if (div.getCcdKaigoNinteiAtenaInfo().get被保険者氏名().isNullOrEmpty()) {
+            hihokenshaName = RString.EMPTY;
+        } else {
+            hihokenshaName = div.getCcdKaigoNinteiAtenaInfo().get被保険者氏名();
+        }
         RString teishutsuKigenYMD;
         if (div.getTujishoHakkoMeisai().getTxtHihokenshashoTeishutuKigen().getValue() == null) {
             teishutsuKigenYMD = RString.EMPTY;
@@ -140,10 +151,9 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
                     getValue(), teishutsuKigenYMD);
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(GyomuKoyuJoho.被保番号.getコード()), div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
-            SourceDataCollection collection = reportManager.publish();
-
-            return ResponseData.of(collection).respond();
+            collection = reportManager.publish();
         }
+        return ResponseData.of(collection).respond();
     }
 
     /**
@@ -156,7 +166,12 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
         creatYokaigoNinteiTorikeshiTujishoHakkoHandler(div).排他の設定(div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().
                 getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        LasdecCode 市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
+        LasdecCode 市町村コード;
+        if (shichosonSecurityJoho != null) {
+            市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
+        } else {
+            市町村コード = LasdecCode.EMPTY;
+        }
         JukyushaDaichoParameter parameter = new JukyushaDaichoParameter(市町村コード, div.getTujishoHakkoJoken().
                 getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue(), shichosonSecurityJoho.
                 get市町村情報().get証記載保険者番号().value());

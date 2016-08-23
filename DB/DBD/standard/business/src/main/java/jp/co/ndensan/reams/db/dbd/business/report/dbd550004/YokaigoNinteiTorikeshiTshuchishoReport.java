@@ -45,7 +45,7 @@ public final class YokaigoNinteiTorikeshiTshuchishoReport extends Report<Yokaigo
      * @param hihokenshaNo RString
      * @param hihokenshaName RString
      * @param riyu RString
-     * @param teishutsuKigenYMD
+     * @param teishutsuKigenYMD RString
      *
      */
     public YokaigoNinteiTorikeshiTshuchishoReport(IAtesaki 宛先, Association 地方公共団体, ChohyoSeigyoKyotsu 帳票制御共通,
