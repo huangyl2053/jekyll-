@@ -56,7 +56,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 public class SokyuuGaitouIchirannCsvProcess extends BatchProcessBase<HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity> {
 
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate."
-            + "sokyuhikazeinenkintaishousyadoutei.ISokyuuCsvMapper.get年金番号情報");
+            + "sokyuhikazeinenkintaishousyadoutei.ISokyuuCsvMapper.get遡及該当一覧情報");
     private SokyuuGaitouIchirannCsvProcessParameter parameter;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBD900006"));
     private FileSpoolManager manager;

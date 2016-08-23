@@ -125,8 +125,7 @@ public class NinteiShinseiToroku {
                 ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
 
                 getHandler(div).loadUpdate(result, 管理番号, 被保険者番号, 介護導入形態);
-                NinteiShinseiTodokedeshaDataPassModel dataPass = getHandler(div).set届出情報(
-                        manager.get宛名情報(result.get識別コード()), manager.get本人との関係(new ShinseishoKanriNo(管理番号)));
+                NinteiShinseiTodokedeshaDataPassModel dataPass = getHandler(div).set届出情報(manager.get宛名情報(result.get識別コード()));
                 dataPass.set申請書管理番号(管理番号);
                 div.getCcdShinseiTodokedesha().initialize(dataPass);
 
@@ -148,6 +147,7 @@ public class NinteiShinseiToroku {
 //                }
                 div.setHdnShinseishoKanriNo(RString.EMPTY);
             }
+            return ResponseData.of(div).rootTitle(new RString("審査依頼受付")).respond();
         }
         if (MENUID_DBEMN21003.equals(menuID)) {
             Minashi2shisaiJoho business = ViewStateHolder.get(ViewStateKeys.みなし2号登録情報, Minashi2shisaiJoho.class);
@@ -155,8 +155,7 @@ public class NinteiShinseiToroku {
                 ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
                 getHandler(div).loadInsert(business, business.get保険者().get市町村コード(), 介護導入形態);
 
-                div.getCcdShinseiTodokedesha().initialize(
-                        getHandler(div).set届出情報(manager.get宛名情報(business.get識別コード()), manager.get本人との関係(business.get識別コード())));
+                div.getCcdShinseiTodokedesha().initialize(getHandler(div).set届出情報(manager.get宛名情報(business.get識別コード())));
 
                 getHandler(div).set医療保険(manager.get医療保険履歴(business.get識別コード()));
 
@@ -165,6 +164,23 @@ public class NinteiShinseiToroku {
                 div.setHdnShinseishoKanriNo(RString.EMPTY);
                 ViewStateHolder.put(ViewStateKeys.モード, getHandler(div).set市町村連絡事項(RString.EMPTY, false));
             }
+            return ResponseData.of(div).rootTitle(new RString("みなし２号審査受付")).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 医療保険ダイアログを表示の前の場合、データを設定します。
+     *
+     * @param div 審査依頼受付／みなし２号審査受付Div
+     * @return ResponseData<NinteiShinseiTorokuDiv>
+     */
+    public ResponseData<NinteiShinseiTorokuDiv> onChange_ddlHihokenshaKubun(NinteiShinseiTorokuDiv div) {
+        KaigoNinteiShinseiKihonJohoInputDiv kihonJohoInputDiv = div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv();
+        if (HihokenshaKubunCode.第２号被保険者.getコード().equals(kihonJohoInputDiv.getDdlHihokenshaKubun().getSelectedKey())) {
+            div.getCcdKaigoNinteiShinseiKihon().setRequiredForDdlTokuteiShippei(true);
+        } else {
+            div.getCcdKaigoNinteiShinseiKihon().setRequiredForDdlTokuteiShippei(false);
         }
         return ResponseData.of(div).respond();
     }
@@ -292,7 +308,7 @@ public class NinteiShinseiToroku {
             manager.save申請届出情報(get認定申請届出者情報(div, true, 申請書管理番号));
             manager.save申請履歴情報(get申請履歴情報(申請書管理番号));
             for (RenrakusakiJoho renrakusakiJoho : zenkaiJoho.getDbdBusiness()) {
-                manager.save介護連絡先情報(set介護連絡先情報(renrakusakiJoho, true));
+                manager.save介護連絡先情報(set介護連絡先情報(renrakusakiJoho, true, 申請書管理番号));
             }
             return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("みなし２号審査受付")).respond();
         } else {
@@ -336,28 +352,32 @@ public class NinteiShinseiToroku {
         if (!RString.isNullOrEmpty(ViewStateHolder.get(ViewStateKeys.一覧データ, RString.class))) {
             for (RenrakusakiJoho renrakusakiJoho : 介護連絡先情報リスト) {
                 if (renrakusakiJoho.toEntity().getState() == EntityDataState.Added) {
-                    manager.save介護連絡先情報(set介護連絡先情報(renrakusakiJoho, false));
+                    manager.save介護連絡先情報(set介護連絡先情報(renrakusakiJoho, false, ShinseishoKanriNo.EMPTY));
+                } else if (renrakusakiJoho.toEntity().getState() == EntityDataState.Deleted) {
+                    manager.del介護連絡先情報(renrakusakiJoho);
                 } else {
                     manager.save介護連絡先情報(renrakusakiJoho);
                 }
             }
         } else {
             for (RenrakusakiJoho renrakusakiJoho : 介護連絡先情報リスト) {
-                manager.save介護連絡先情報(set介護連絡先情報(renrakusakiJoho, false));
+                manager.save介護連絡先情報(set介護連絡先情報(renrakusakiJoho, false, ShinseishoKanriNo.EMPTY));
             }
         }
     }
 
-    private RenrakusakiJoho set介護連絡先情報(RenrakusakiJoho renrakusakiJoho, boolean flag) {
+    private RenrakusakiJoho set介護連絡先情報(RenrakusakiJoho renrakusakiJoho, boolean flag, ShinseishoKanriNo 申請書管理番号) {
         RenrakusakiJoho renrakusaki = null;
         if (flag) {
-            renrakusaki = new RenrakusakiJoho(get申請書管理番号(), renrakusakiJoho.get連番());
+            renrakusaki = new RenrakusakiJoho(申請書管理番号, renrakusakiJoho.get連番());
         } else {
             renrakusaki = new RenrakusakiJoho(new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class)), renrakusakiJoho.get連番());
         }
         RenrakusakiJohoBuilder renrakusakiBuilder = renrakusaki.createBuilderForEdit();
         renrakusakiBuilder.set連絡先区分番号(renrakusakiJoho.get連絡先区分番号());
-        renrakusakiBuilder.set支所コード(renrakusakiJoho.get支所コード());
+        if (renrakusakiJoho.get支所コード() != null) {
+            renrakusakiBuilder.set支所コード(renrakusakiJoho.get支所コード());
+        }
         renrakusakiBuilder.set連絡先氏名(renrakusakiJoho.get連絡先氏名());
         renrakusakiBuilder.set連絡先氏名カナ(renrakusakiJoho.get連絡先氏名カナ());
         renrakusakiBuilder.set連絡先続柄(renrakusakiJoho.get連絡先続柄());

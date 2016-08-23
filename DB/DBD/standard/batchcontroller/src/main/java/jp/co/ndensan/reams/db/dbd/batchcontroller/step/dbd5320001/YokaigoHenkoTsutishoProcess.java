@@ -141,7 +141,7 @@ public class YokaigoHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
     private DbT4001JukyushaDaichoEntity createJukyushaDaichoEntity() {
         DbT4001JukyushaDaichoEntity result = 最新Entity.get受給者台帳Entity();
         result.setRirekiNo(new RString(String.format("%04d", Integer.parseInt(result.getRirekiNo().toString()) + 1)));
-        result.setNinteiKekkaTsuchishoHakkoYMD(parameter.get発行日());
+        result.setKubunHenkoTsuchishoHakkoYMD(parameter.get発行日());
         return result;
     }
 

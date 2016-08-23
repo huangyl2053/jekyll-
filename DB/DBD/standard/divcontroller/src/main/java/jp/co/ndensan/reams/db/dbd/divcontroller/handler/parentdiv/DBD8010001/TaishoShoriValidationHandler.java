@@ -119,8 +119,8 @@ public class TaishoShoriValidationHandler {
             }
 
         } else if (処理コード.equals(処理コード_月次)) {
-            RString 年度終了月 = new RString(String.format("%02d", DbBusinessConfig.get(ConfigNameDBD.非課税年金対象者情報_月次処理年度終了月,
-                    RDate.getNowDate(), SubGyomuCode.DBD介護受給)));
+            RString 年度終了月 = DbBusinessConfig.get(ConfigNameDBD.非課税年金対象者情報_月次処理年度終了月,
+                    RDate.getNowDate(), SubGyomuCode.DBD介護受給);
             RString 選択月 = div.getDgTaishoShoriItchiran().getSelectedItems().get(0).getHdnTukiCode().substring(1, 3);
             RString 処理年月;
             if (年度終了月.compareTo(選択月) < 0) {
@@ -144,6 +144,7 @@ public class TaishoShoriValidationHandler {
 
     private ValidationDictionary createDictionary() {
         return new ValidationDictionaryBuilder()
+                .add(TaishoShoriValidationMessage.調定年度チェック, new ArrayList<ViewControl>())
                 .add(TaishoShoriValidationMessage.処理状態チェック_処理済, get対象一覧())
                 .add(TaishoShoriValidationMessage.処理状態チェック_処理なし, get対象一覧())
                 .add(TaishoShoriValidationMessage.アップロードファイル未指定チェック, getアップロードファイル())
