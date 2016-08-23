@@ -177,12 +177,10 @@ public class IraiJohoDataTorikomi {
         List<dgTorikomiFileIchiran_Row> rowList = div.getDgTorikomiFileIchiran().getDataSource();
         List<IkenshokinyuyoshiBusiness> businessList = new ArrayList<>();
         for (dgTorikomiFileIchiran_Row row : rowList) {
-            if (row.getCheckBox()) {
-                for (IraiJohoDataTorikomiCsvEntity csvEntity : csvEntityList) {
-                    if (csvEntity.get保険者番号().equals(row.getHokenshaBango()) && csvEntity.get被保険者番号().equals(row.getHihokenshaBango())
-                            && csvEntity.get申請日().equals(row.getShinseibi())) {
-                        businessList.add(getHandler(div).帳票出力用情報の編集(csvEntity));
-                    }
+            for (IraiJohoDataTorikomiCsvEntity csvEntity : csvEntityList) {
+                if (csvEntity.get保険者番号().equals(row.getHokenshaBango()) && csvEntity.get被保険者番号().equals(row.getHihokenshaBango())
+                        && csvEntity.get申請日().equals(row.getShinseibi())) {
+                    businessList.add(getHandler(div).帳票出力用情報の編集(csvEntity));
                 }
             }
         }
@@ -220,12 +218,10 @@ public class IraiJohoDataTorikomi {
             }
             List<dgTorikomiFileIchiran_Row> rowlist = div.getDgTorikomiFileIchiran().getSelectedItems();
             for (dgTorikomiFileIchiran_Row row : rowlist) {
-                if (row.getCheckBox()) {
-                    IkenshokinyuyoshiBusiness business = getBusiness(csvEntityList, row, div);
-                    IraiJohoDataTorikomiManager.createInstance().各テーブルへの登録(row.getShinseishoKanriNo(),
-                            row.getIkenshoIraiRirekiNo().getValue().intValue(), row.getKoroshoIfShikibetsuCode(),
-                            row.getShujiiIryokikanCode(), row.getShujiiCode(), business);
-                }
+                IkenshokinyuyoshiBusiness business = getBusiness(csvEntityList, row, div);
+                IraiJohoDataTorikomiManager.createInstance().各テーブルへの登録(row.getShinseishoKanriNo(),
+                        row.getIkenshoIraiRirekiNo().getValue().intValue(), row.getKoroshoIfShikibetsuCode(),
+                        row.getShujiiIryokikanCode(), row.getShujiiCode(), business);
             }
         }
         return ResponseData.of(div).respond();
@@ -247,7 +243,7 @@ public class IraiJohoDataTorikomi {
         RString filePath = Path.combinePath(ファイルの場所);
         CsvReader csvReader = new CsvReader.InstanceBuilder(filePath, IraiJohoDataTorikomiCsvEntity.class)
                 .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS)
-                .hasHeader(false).setNewLine(NewLine.CRLF).build();
+                .hasHeader(false).setNewLine(NewLine.LF).build();
         return readCsvFile(csvReader);
     }
 

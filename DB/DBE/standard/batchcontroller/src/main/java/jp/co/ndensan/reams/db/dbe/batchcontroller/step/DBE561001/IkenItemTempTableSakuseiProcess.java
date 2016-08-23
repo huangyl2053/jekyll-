@@ -33,7 +33,6 @@ public class IkenItemTempTableSakuseiProcess extends BatchKeyBreakBase<DbT5304Sh
     private CenterTransmissionMybitisParamter mybitisParamter;
     private ICenterTransmissionMapper mapper;
     private ShujiiIkenshoIkenItemTempEntity tempEntity;
-    private IkenItemTempTableEditorEntity editorEntity;
     private List<RString> 申請書管理番号リスト;
     private boolean isデータあり;
 
@@ -77,8 +76,7 @@ public class IkenItemTempTableSakuseiProcess extends BatchKeyBreakBase<DbT5304Sh
         isデータあり = true;
         tempEntity.setShinseishoKanriNo(entity.getShinseishoKanriNo());
         tempEntity.setKoroshoIfShikibetsuCode(entity.getKoroshoIfShikibetsuCode());
-        editorEntity = new IkenItemTempTableEditorEntity(tempEntity);
-        editorEntity.set調査項目(entity);
+        new IkenItemTempTableEditorEntity(tempEntity).set調査項目(entity);
     }
 
     @Override

@@ -256,6 +256,18 @@ public class HikazeiNenkinKenJohoHandler {
         div.getTbNameKanji().setDisabled(false);
         div.getTbAddressKana().setDisabled(false);
         div.getTbAddressKanji().setDisabled(false);
+
+        div.getTbGenkisoNenkinNo().setReadOnly(false);
+        div.getDdlTsuki().setReadOnly(false);
+        div.getTbKingaku().setReadOnly(false);
+        div.getTbCreateDate().setReadOnly(false);
+        div.getTbTaishoNen().setReadOnly(false);
+        div.getTbNameKana().setReadOnly(false);
+        div.getDdlSex().setReadOnly(false);
+        div.getTbBirthday().setReadOnly(false);
+        div.getTbNameKanji().setReadOnly(false);
+        div.getTbAddressKana().setReadOnly(false);
+        div.getTbAddressKanji().setReadOnly(false);
     }
 
     /**
@@ -345,7 +357,7 @@ public class HikazeiNenkinKenJohoHandler {
             div.getTbBirthday().setDisabled(false);
             div.getTbNameKanji().setDisabled(false);
             div.getTbAddressKana().setDisabled(false);
-            div.getTbAddressKanji().setReadOnly(false);
+            div.getTbAddressKanji().setDisabled(false);
             div.getDdlTsuki().setReadOnly(false);
             div.getTbKingaku().setReadOnly(false);
             div.getTbCreateDate().setReadOnly(false);

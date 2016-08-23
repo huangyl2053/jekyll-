@@ -1305,7 +1305,7 @@ public class HonnSanteiFuka {
                 } else if (RString.isNullOrEmpty(当初賦課情報.get調定事由4())) {
                     調定事由４ = 徴収方法情報.get特別徴収停止事由コード();
                 }
-            } else if (!設定前賦課情報.get資格喪失事由().isNullOrEmpty()) {
+            } else if (!RString.isNullOrEmpty(設定前賦課情報.get資格喪失事由())) {
                 if (RString.isNullOrEmpty(当初賦課情報.get調定事由2())) {
                     調定事由２ = 設定前賦課情報.get資格喪失事由();
                 } else if (RString.isNullOrEmpty(当初賦課情報.get調定事由3())) {

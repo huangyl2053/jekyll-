@@ -53,14 +53,15 @@ public class KogakuGassanShikyuKetteiTsuchishoPanel {
      * @return ResponseData
      */
     public ResponseData<KogakuGassanShikyuKetteiTsuchishoPanelDiv> onLoad(KogakuGassanShikyuKetteiTsuchishoPanelDiv div) {
-        if (ResponseHolder.isReRequest()) {
+        if (ResponseHolder.isReRequest()
+                && new RString(DbcInformationMessages.被保険者でないデータ
+                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).respond();
         }
         TaishoshaKey 引き継ぎEntity = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        if (引き継ぎEntity.get被保険者番号() == null || 引き継ぎEntity.get被保険者番号().isEmpty()) {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(DbcInformationMessages.被保険者でないデータ.getMessage()).respond();
-            }
+        if ((引き継ぎEntity.get被保険者番号() == null || RString.EMPTY.equals(
+                引き継ぎEntity.get被保険者番号().getColumnValue())) && !ResponseHolder.isReRequest()) {
+            ResponseData.of(div).addMessage(DbcInformationMessages.被保険者でないデータ.getMessage());
         }
         ShikibetsuCode 識別コード = 引き継ぎEntity.get識別コード();
         HihokenshaNo 被保険者番号 = 引き継ぎEntity.get被保険者番号();
@@ -272,6 +273,16 @@ public class KogakuGassanShikyuKetteiTsuchishoPanel {
                 .get事業高額合算支給不支給決定(事業高額合算支給不支給決定List1);
         ViewStateHolder.put(ViewStateKeys.事業高額合算支給不支給決定, 事業高額合算支給不支給決定);
         getHandler(div).set前回発行日(事業高額合算支給不支給決定);
+    }
+
+    /**
+     * 「完了する」ボタンのメソッドです。
+     *
+     * @param div KogakuGassanShikyuKetteiTsuchishoPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuGassanShikyuKetteiTsuchishoPanelDiv> onClick_btnComplete(KogakuGassanShikyuKetteiTsuchishoPanelDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC8140011TransitionEventName.完了).respond();
     }
 
     private KogakuGassanShikyuKetteiTsuchishoPanelHandler getHandler(KogakuGassanShikyuKetteiTsuchishoPanelDiv div) {

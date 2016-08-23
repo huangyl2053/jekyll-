@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5610001
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishiencentersoshin.NinteiShienCenterSoshinData;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE561001.DBE561001_CenterTransmissionParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteishiencentersoshin.NinteiShienCenterSoshinParameter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.DBE0220001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5610001.DBE5610001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5610001.NinteiShienCenterSoshinDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5610001.dgTaishoshaIchiran_Row;
@@ -167,12 +169,22 @@ public class NinteiShienCenterSoshin {
     }
 
     /**
+     * 送信データの作成を実行するボタンの押下処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<DBE561001_CenterTransmissionParameter> onClick_BtnDataoutput(NinteiShienCenterSoshinDiv div) {
+        return ResponseData.of(getHandler(div).setParameter()).forwardWithEventName(DBE0220001TransitionEventName.センター送信).respond();
+    }
+
+    /**
      * 送信データの作成を実行するボタンの押下チェック処理です。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    public ResponseData<NinteiShienCenterSoshinDiv> onClick_BtnDataoutput(NinteiShienCenterSoshinDiv div) {
+    public ResponseData<NinteiShienCenterSoshinDiv> onClick_BtnDataoutputCheck(NinteiShienCenterSoshinDiv div) {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -184,16 +196,6 @@ public class NinteiShienCenterSoshin {
             if (validationMessages.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            //TODO バッチ設計_DBE561001_センター送信データ作成時装待ち。
-//            List<dgTaishoshaIchiran_Row> rowList = div.getDgTaishoshaIchiran().getSelectedItems();
-//            List<RString> 申請書管理番号リスト = new ArrayList<>();
-//            for (dgTaishoshaIchiran_Row row : rowList) {
-//                申請書管理番号リスト.add(row.getShinseishokanrino());
-//            }
-//            RDate 二次判定日_開始 = div.getTxtNijiHanteibi().getFromValue();
-//            RDate 二次判定日_終了 = div.getTxtNijiHanteibi().getToValue();
-//            RString 転入_死亡情報出力区分 = div.getRadTennyuShiboJoho().getSelectedKey();
-//            return ResponseData.of(div).forwardWithEventName(DBE0220001TransitionEventName.センター送信).respond();
         }
         return ResponseData.of(div).respond();
     }

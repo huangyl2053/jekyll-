@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * JukyushaIdoRenrakuhyoSakuseiPanel のクラスファイル
  *
- * @reamsid_L DBC-2102-010 quxiaodong
+ * @reamsid_L DBC-2102-010 lihang
  */
 public class JukyushaIdoRenrakuhyoSakuseiPanelDiv extends Panel {
 

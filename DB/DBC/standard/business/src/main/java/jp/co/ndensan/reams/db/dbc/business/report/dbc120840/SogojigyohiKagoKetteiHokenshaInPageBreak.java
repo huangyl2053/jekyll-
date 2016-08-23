@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 /**
  * 帳票設計_DBC200085_総合事業費過誤決定通知書情報取込一覧表帳票のPageBreakクラスです。
  *
- * @reamsid_L DBC-2550-031　jiangxiaolong
+ * @reamsid_L DBC-2550-031 jiangxiaolong
  */
 public class SogojigyohiKagoKetteiHokenshaInPageBreak extends PageBreaker<SogojigyohiKagoKetteiTorikomiIchiranSource> {
 

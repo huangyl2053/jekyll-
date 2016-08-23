@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 総合事業費過誤決定通知書情報取込一覧表帳票IEditor
  *
- * @reamsid_L  DBC-2550-011 jiangxiaolong
+ * @reamsid_L DBC-2550-031 jiangxiaolong
  */
 public interface ISogojigyohiKagoKetteiHokenshaBunEditor extends
         IReportEditor<SogojigyohiKagoKetteiTorikomiIchiranSource> {

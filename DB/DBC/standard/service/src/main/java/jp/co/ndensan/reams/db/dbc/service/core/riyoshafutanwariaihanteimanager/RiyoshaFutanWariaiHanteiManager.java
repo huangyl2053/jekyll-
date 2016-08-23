@@ -77,8 +77,7 @@ public class RiyoshaFutanWariaiHanteiManager {
     /**
      * 初期化メソッドです。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link RiyoshaFutanWariaiHanteiManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link RiyoshaFutanWariaiHanteiManager}のインスタンス
      */
     public static RiyoshaFutanWariaiHanteiManager createInstance() {
         return InstanceProvider.create(RiyoshaFutanWariaiHanteiManager.class);
@@ -465,8 +464,9 @@ public class RiyoshaFutanWariaiHanteiManager {
         利用者負担割合明細Temp.setKoseiJiyu(RString.EMPTY);
         利用者負担割合明細Temp.setHanteiKubun(負担割合判定の結果.get判定区分());
         利用者負担割合明細Temp.setNinteiYukoKaishiDate(判定対象者Temp.getNinteiYukoKaishiDate());
-        利用者負担割合明細Temp.setJukyuKaishiYMD(new FlexibleDate(生活保護該当情報Temp.getJukyuKaishiYMD()));
-
+        if (生活保護該当情報Temp.getJukyuKaishiYMD() != null && !生活保護該当情報Temp.getJukyuKaishiYMD().isEmpty()) {
+            利用者負担割合明細Temp.setJukyuKaishiYMD(new FlexibleDate(生活保護該当情報Temp.getJukyuKaishiYMD()));
+        }
     }
 
     private void get判定対象者Temp(
