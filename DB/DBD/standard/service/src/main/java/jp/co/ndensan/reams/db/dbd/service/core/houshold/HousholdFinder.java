@@ -130,10 +130,12 @@ public class HousholdFinder {
     public int 重複チェック(RString 被保番号, RString 年金保険者コード,
             RString 年金コードの先頭３桁, RString 現基礎年金番号, RString 対象年, RString 作成年月日) {
         DbT4037HikazeNenkinTaishoshaDac dac = InstanceProvider.create(DbT4037HikazeNenkinTaishoshaDac.class);
-        if (dac.select重複チェックデータ(被保番号, 年金保険者コード, 年金コードの先頭３桁, 現基礎年金番号, 対象年, 作成年月日).isEmpty()) {
+        List<DbT4037HikazeNenkinTaishoshaEntity> entityList
+                = dac.select重複チェックデータ(被保番号, 年金保険者コード, 年金コードの先頭３桁, 現基礎年金番号, 対象年, 作成年月日);
+        if (entityList.isEmpty()) {
             return 0;
         }
-        return 1;
+        return entityList.size();
     }
 
     private boolean 後排他処理(RString 被保番号, RString 基礎年金番号, RString 年金コード,
