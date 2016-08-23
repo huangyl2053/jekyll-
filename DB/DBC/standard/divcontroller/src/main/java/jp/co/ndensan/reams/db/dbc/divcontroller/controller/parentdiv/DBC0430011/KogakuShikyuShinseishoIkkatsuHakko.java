@@ -95,7 +95,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> btnOnClick_radHakushiInsatsu(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
         div.getShinseishoHakkoParameters().getTxtShinsaYM().setReadOnly(true);
-        div.getShinseishoHakkoParameters().getBtnHihokenshaSearch().setDisabled(false);
+        div.getShinseishoHakkoParameters().getBtnHihokenshaSearch().setDisabled(true);
         div.getShinseishoHakkoParameters().getDdlServiceYM().setReadOnly(true);
         div.getShinseishoHakkoParameters().getRadShinsaYM().clearSelectedItem();
         div.getShinseishoHakkoParameters().getRadHihokenshaNo().clearSelectedItem();
