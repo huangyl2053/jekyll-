@@ -74,7 +74,12 @@ public class KoshinTaishoshaKanriHandler {
         }
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().
                 getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        LasdecCode 市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
+        LasdecCode 市町村コード;
+        if (shichosonSecurityJoho != null) {
+            市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
+        } else {
+            市町村コード = LasdecCode.EMPTY;
+        }
         ShoriDateKanriService shoriDateKanriService = ShoriDateKanriService.createInstance();
         ShoriDateKanri shoriDateKanri = shoriDateKanriService.getDbT7022ShoriDateKanriEntity(市町村コード);
         parameter.set市町村コード(市町村コード);

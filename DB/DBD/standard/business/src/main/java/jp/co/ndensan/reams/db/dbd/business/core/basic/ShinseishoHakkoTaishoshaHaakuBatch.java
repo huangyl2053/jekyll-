@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShinseishoHakkoTaishoshaHaakuBatch {
 
     private final DbT4030ShinseishoHakkoTaishoshaHaakuBatchEntity entity;
-    private final ShinseishoHakkoTaishoshaHaakuBatchIdentifier id;
 
     /**
      * コンストラクタです。
@@ -32,7 +31,6 @@ public class ShinseishoHakkoTaishoshaHaakuBatch {
     public ShinseishoHakkoTaishoshaHaakuBatch(UUID 把握処理ID) {
         this.entity = new DbT4030ShinseishoHakkoTaishoshaHaakuBatchEntity();
         this.entity.setHaakuShoriID(把握処理ID);
-        this.id = new ShinseishoHakkoTaishoshaHaakuBatchIdentifier(把握処理ID);
     }
 
     /**
@@ -42,19 +40,6 @@ public class ShinseishoHakkoTaishoshaHaakuBatch {
      */
     public ShinseishoHakkoTaishoshaHaakuBatch(DbT4030ShinseishoHakkoTaishoshaHaakuBatchEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払支給判定結果"));
-        this.id = new ShinseishoHakkoTaishoshaHaakuBatchIdentifier(entity.getHaakuShoriID());
-    }
-
-    /**
-     * コンストラクタです。
-     *
-     * @param id ShinseishoHakkoTaishoshaHaakuBatchIdentifier
-     * @param entity DbT4030ShinseishoHakkoTaishoshaHaakuBatchEntity
-     */
-    ShinseishoHakkoTaishoshaHaakuBatch(ShinseishoHakkoTaishoshaHaakuBatchIdentifier id,
-            DbT4030ShinseishoHakkoTaishoshaHaakuBatchEntity entity) {
-        this.entity = entity;
-        this.id = id;
     }
 
     /**
