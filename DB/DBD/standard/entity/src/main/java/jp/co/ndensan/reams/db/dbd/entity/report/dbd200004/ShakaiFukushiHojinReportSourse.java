@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 社会福祉法人軽減認定者リストReportSourceです。
  *
- * @@reamsid_L DBD-3830-060 tianyh
+ * @reamsid_L DBD-3830-060 tianyh
  */
 public class ShakaiFukushiHojinReportSourse implements IReportSource {
 

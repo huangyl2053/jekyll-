@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBD200004_ShakaiFukushiHojinKeigenNinteishaListFlow extends BatchFlowBase<DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter> {
 
     private static final String 対象者一次特定 = "TaishoshaIchijiTokuteiProcess";
-    private static final String 減免減額対象者判定用根拠作成 = "GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei";
+    private static final String 減免減額対象者判定用根拠作成 = "YoKonkyoSakusei";
     private static final RString バッチID_DBDBZZ0001 = new RString("GemmenGengakuTaishoShaHanteiYoukonSakuseiFlow");
     private static final String 社会福祉法人軽減認定者リスト作成 = "社会福祉法人軽減認定者リスト作成";
     private YMDHMS systemTime;

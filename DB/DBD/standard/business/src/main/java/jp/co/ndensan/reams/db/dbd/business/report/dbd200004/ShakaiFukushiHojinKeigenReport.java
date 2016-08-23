@@ -37,14 +37,8 @@ public class ShakaiFukushiHojinKeigenReport extends Report<ShakaiFukushiHojinRep
      * @param 帳票作成日時 YMDHMS
      * @param association Association
      * @param iOutputOrder IOutputOrder
-     * @return 社会福祉法人軽減認定者発行一覧表
      */
-    public static ShakaiFukushiHojinKeigenReport createReport(ShakaiFukushiHojinKeigenGaitoshaIchiranEntity 帳票情報, RString 帳票タイトル,
-            YMDHMS 帳票作成日時, Association association, IOutputOrder iOutputOrder) {
-        return new ShakaiFukushiHojinKeigenReport(帳票情報, 帳票タイトル, 帳票作成日時, association, iOutputOrder);
-    }
-
-    private ShakaiFukushiHojinKeigenReport(ShakaiFukushiHojinKeigenGaitoshaIchiranEntity 帳票情報, RString 帳票タイトル,
+    public ShakaiFukushiHojinKeigenReport(ShakaiFukushiHojinKeigenGaitoshaIchiranEntity 帳票情報, RString 帳票タイトル,
             YMDHMS 帳票作成日時, Association association, IOutputOrder iOutputOrder) {
         this.帳票情報 = 帳票情報;
         this.association = association;
