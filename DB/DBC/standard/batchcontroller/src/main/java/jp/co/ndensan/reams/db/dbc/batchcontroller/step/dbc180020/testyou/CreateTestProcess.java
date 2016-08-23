@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -34,7 +33,7 @@ public class CreateTestProcess extends BatchProcessBase<SetainJohoTempEntity> {
     private static final Decimal 金額2 = new Decimal(200000);
     private static final RString TABLENAME = new RString("HanteiTaishoshaTemp");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select追加判定対象者Temp");
+            + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select判定対象者Temp");
     private DBC180020ProcessParameter parameter;
     @BatchWriter
     private BatchEntityCreatedTempTableWriter 判定対象者Temp;
@@ -55,10 +54,10 @@ public class CreateTestProcess extends BatchProcessBase<SetainJohoTempEntity> {
     }
 
     @Override
-    protected void afterProcess() {
+    protected void afterExecute() {
         HanteiTaishoshaTempEntity 判定対象者 = new HanteiTaishoshaTempEntity();
         判定対象者.setTaishoNendo(new FlexibleYear("2016"));
-        判定対象者.setTaishoTsuki(new FlexibleYearMonth("201608"));
+        判定対象者.setTaishoTsuki(new RString("08"));
         判定対象者.setHihokenshaNo(new HihokenshaNo("6777777771"));
         判定対象者.setShikibetsuCode(new ShikibetsuCode("000000001007004"));
         判定対象者.setNinteiYukoKaishiDate(new FlexibleDate("20160802"));
@@ -67,7 +66,7 @@ public class CreateTestProcess extends BatchProcessBase<SetainJohoTempEntity> {
         判定対象者.setGokeiShotokuGaku(金額1);
         判定対象者Temp.insert(判定対象者);
         判定対象者.setTaishoNendo(new FlexibleYear("2016"));
-        判定対象者.setTaishoTsuki(new FlexibleYearMonth("201609"));
+        判定対象者.setTaishoTsuki(new RString("09"));
         判定対象者.setHihokenshaNo(new HihokenshaNo("6777777772"));
         判定対象者.setShikibetsuCode(new ShikibetsuCode("000000001007004"));
         判定対象者.setNinteiYukoKaishiDate(new FlexibleDate("20160802"));
