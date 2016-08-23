@@ -48,5 +48,7 @@ public interface IKaigoNinteiShinseiKihonJohoInputDiv extends ICommonChildDivBas
 
     void setNinteiShinseRiyuTeikeibun(RString teikeibun);
 
+    void setRequiredForDdlTokuteiShippei(boolean isRequired);
+
     KaigoNinteiShinseiKihonJohoInputDiv getKaigoNinteiShinseiKihonJohoInputDiv();
 }
