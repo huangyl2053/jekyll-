@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -34,6 +36,10 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
@@ -150,6 +156,10 @@ public class IraiJohoDataTorikomi {
                 parameter.set処理状態区分_3(ShoriJotaiKubun.延期.getコード());
                 ninteiShinseiJohoList.add(IraiJohoDataTorikomiManager.createInstance().get要介護認定申請情報(parameter, row.getHokenshaBango()));
             }
+        }
+        for (NinteiShinseiJohoIraiJohoData data : ninteiShinseiJohoList) {
+            AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY,
+                    new ExpandedInformation(new Code("001"), new RString("申請書管理番号"), data.get申請書管理番号())));
         }
         getHandler(div).set一覧エリア_入力チェック(ninteiShinseiJohoList);
         return ResponseData.of(div).respond();

@@ -215,7 +215,7 @@ public class IraiJohoDataTorikomiManager {
         entity.setIkenshoDoiFlag(business.is同意の有無());
         entity.setSaishuShinryoYMD(business.get最終診察日());
         entity.setExistTakaJushinFlag(business.is他科受診有無());
-        if (RString.isNullOrEmpty(business.get他科名())) {
+        if (!RString.isNullOrEmpty(business.get他科名())) {
             entity.setExistNaikaJushinFlag(選択項目.equals(business.get他科名().substring(0, 1)));
             entity.setExistSeishinkaJushinFlag(選択項目.equals(business.get他科名().substring(1, 2)));
             entity.setExistGekaJushinFlag(選択項目.equals(business.get他科名().substring(2, INT_3)));
@@ -260,7 +260,7 @@ public class IraiJohoDataTorikomiManager {
         entity.setIkenshoDoiFlag(business.is同意の有無());
         entity.setSaishuShinryoYMD(business.get最終診察日());
         entity.setExistTakaJushinFlag(business.is他科受診有無());
-        if (RString.isNullOrEmpty(business.get他科名())) {
+        if (!RString.isNullOrEmpty(business.get他科名())) {
             entity.setExistNaikaJushinFlag(選択項目.equals(business.get他科名().substring(0, 1)));
             entity.setExistSeishinkaJushinFlag(選択項目.equals(business.get他科名().substring(1, 2)));
             entity.setExistGekaJushinFlag(選択項目.equals(business.get他科名().substring(2, INT_3)));

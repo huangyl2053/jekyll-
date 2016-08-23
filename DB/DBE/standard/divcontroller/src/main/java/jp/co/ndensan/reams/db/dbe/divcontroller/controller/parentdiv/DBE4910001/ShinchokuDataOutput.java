@@ -14,14 +14,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4910001.Shin
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4910001.ShinchokuDataOutputHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4910001.ShinchokuDataOutputValidatisonHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.youkaigoninteishinchokujouhou.YouKaigoNinteiShinchokuJohouFinder;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -33,6 +27,8 @@ public class ShinchokuDataOutput {
 
     private final YouKaigoNinteiShinchokuJohouFinder finder;
     private List<YouKaigoNinteiShinchokuJohouBusiness> 調査員情報Lis;
+    private static final RString 結果情報 = new RString("0");
+    private static final RString 進捗情報 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -48,7 +44,7 @@ public class ShinchokuDataOutput {
      * @return ResponseData<HomonChosaItakuNyuryokuDiv>
      */
     public ResponseData<ShinchokuDataOutputDiv> onLoad(ShinchokuDataOutputDiv div) {
-        getHandler(div).intialize();
+        getHandler(div).onLoad();
         return ResponseData.of(div).setState(DBE4910001StateName.初期表示);
     }
 
@@ -86,14 +82,12 @@ public class ShinchokuDataOutput {
 
             return ResponseData.of(div).addValidationMessages(validationmsg).respond();
         }
-        if (new RString("0").equals(div.getRadKubun().getSelectedKey())) {
+        if (結果情報.equals(div.getRadKubun().getSelectedKey())) {
             調査員情報Lis = finder.get結果情報検索(getHandler(div).createParam(div)).records();
-        } else if (new RString("1").equals(div.getRadKubun().getSelectedKey())) {
+        } else if (進捗情報.equals(div.getRadKubun().getSelectedKey())) {
             調査員情報Lis = finder.get進捗情報検索(getHandler(div).createParam(div)).records();
         }
-        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
-        getHandler(div).setdgShinchokuIchiran(調査員情報Lis, personalData);
-        AccessLogger.log(AccessLogType.照会, personalData);
+        getHandler(div).setdgShinchokuIchiran(調査員情報Lis);
         ValidationMessageControlPairs validation = getValidatisonHandler(div).データ空のチェック();
         if (validation.iterator().hasNext()) {
 

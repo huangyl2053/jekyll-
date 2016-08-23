@@ -43,7 +43,7 @@ public class KagoMoshitatePanelHandler {
     public void set給付管理明細一覧(List<KyufuKanrihyoShokaiDataModel> 給付管理明細一覧) {
         List<dgServive_Row> rowList = new ArrayList<>();
         for (KyufuKanrihyoShokaiDataModel 給付管理明細 : 給付管理明細一覧) {
-            if (給付管理明細.get給付管理票種別区分コード().equals(KyotakuServiceKubun.居宅サービス.getコード())) {
+            if (KyotakuServiceKubun.居宅サービス.getコード().equals(給付管理明細.get給付管理票種別区分コード())) {
                 dgServive_Row servive_Row = new dgServive_Row();
                 servive_Row.setDefaultDataName0(給付管理明細.get給付管理票明細行番号());
                 if (給付管理明細.getサービス事業所番号() != null) {

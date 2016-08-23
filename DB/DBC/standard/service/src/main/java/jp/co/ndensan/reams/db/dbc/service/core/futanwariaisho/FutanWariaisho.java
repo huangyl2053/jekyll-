@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.futanwariaisho.FutanWariaiShoSource;
 import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -200,7 +201,8 @@ public class FutanWariaisho {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         RString 導入形態コード = 市町村セキュリティ情報.get導入形態コード().value();
         KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
-        if (定数_事務広域.equals(導入形態コード) || 定数_認定広域.equals(導入形態コード)) {
+        if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード)
+                || DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード)) {
             DbV1001HihokenshaDaichoEntity entity = dac.get被保険者台帳(被保険者番号);
             SearchResult<ShichosonCodeYoriShichoson> shichoson = null;
             if (entity.getKoikinaiTokureiSochimotoShichosonCode() == null) {

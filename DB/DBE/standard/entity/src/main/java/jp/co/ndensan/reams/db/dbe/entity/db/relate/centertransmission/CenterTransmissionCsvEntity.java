@@ -561,7 +561,7 @@ public class CenterTransmissionCsvEntity {
     @CsvField(order = 271, name = "前回結果要介護認定等基準時間間接ケア")
     private RString 前回結果_要介護認定等基準時間間接ケア;
     @CsvField(order = 272, name = "前回結果要介護認定等基準時間BPSD関連")
-    private RString 前回結果_要介護認定等基準時間BPSD_関連;
+    private RString 前回結果_要介護認定等基準時間BPSD関連;
     @CsvField(order = 273, name = "前回結果要介護認定等基準時間機能訓練")
     private RString 前回結果_要介護認定等基準時間機能訓練;
     @CsvField(order = 274, name = "前回結果要介護認定等基準時間医療関連")
@@ -569,15 +569,15 @@ public class CenterTransmissionCsvEntity {
     @CsvField(order = 275, name = "前回結果要介護認定等基準時間認知症加算")
     private RString 前回結果_要介護認定等基準時間認知症加算;
     @CsvField(order = 276, name = "前回結果中間評価項目得点第１群")
-    private RString 前回結果_中間評価項目得点_第１群;
+    private RString 前回結果_中間評価項目得点第１群;
     @CsvField(order = 277, name = "前回結果中間評価項目得点第２群")
-    private RString 前回結果_中間評価項目得点_第２群;
+    private RString 前回結果_中間評価項目得点第２群;
     @CsvField(order = 278, name = "前回結果中間評価項目得点第３群")
-    private RString 前回結果_中間評価項目得点_第３群;
+    private RString 前回結果_中間評価項目得点第３群;
     @CsvField(order = 279, name = "前回結果中間評価項目得点第４群")
-    private RString 前回結果_中間評価項目得点_第４群;
+    private RString 前回結果_中間評価項目得点第４群;
     @CsvField(order = 280, name = "前回結果中間評価項目得点第５群")
-    private RString 前回結果_中間評価項目得点_第５群;
+    private RString 前回結果_中間評価項目得点第５群;
     @CsvField(order = 281, name = "前回結果一次判定警告コード")
     private RString 前回結果_一次判定警告コード;
     @CsvField(order = 282, name = "前回結果状態の安定性")

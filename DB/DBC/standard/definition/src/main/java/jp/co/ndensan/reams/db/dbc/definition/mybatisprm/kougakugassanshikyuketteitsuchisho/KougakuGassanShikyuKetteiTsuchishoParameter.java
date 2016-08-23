@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakugassanshikyuketteitsuchisho;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -18,11 +20,20 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KougakuGassanShikyuKetteiTsuchishoParameter implements IMyBatisParameter {
+public class KougakuGassanShikyuKetteiTsuchishoParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
     private long 口座ID;
     private HihokenshaNo 被保険者番号;
     private FlexibleYear 対象年度;
     private RString 連絡票整理番号;
     private int 履歴番号;
+
+    /**
+     * コンストラクタです。
+     *
+     * @param searchKey searchKey
+     */
+    public KougakuGassanShikyuKetteiTsuchishoParameter(IShikibetsuTaishoPSMSearchKey searchKey) {
+        super(searchKey);
+    }
 }

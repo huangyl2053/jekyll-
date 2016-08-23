@@ -1011,9 +1011,7 @@
                 DbT1001.*
              FROM
                 rgdb."DbT1001HihokenshaDaicho" AS DbT1001
-             WHERE
-             (DbT1001."hihokenshaNo", DbT1001."ichigoShikakuShutokuYMD", DbT1001."shikakuSoshitsuYMD", DbT1001."idoYMD", DbT1001."edaNo")
-             IN
+             INNER JOIN
              (SELECT
                 Q."hihokenshaNo",
                 Q."ichigoShikakuShutokuYMD",
@@ -1040,7 +1038,11 @@
                 AND T."ichigoShikakuShutokuYMD" = Q."ichigoShikakuShutokuYMD"
                 AND COALESCE(T."shikakuSoshitsuYMD",'') = COALESCE(Q."shikakuSoshitsuYMD",'')
                 AND T."max1" = (Q."idoYMD" || Q."edaNo")
-                )
+                ) AS R
+               ON
+                  R."hihokenshaNo" = DbT1001."hihokenshaNo"
+                AND R."idoYMD" = DbT1001."idoYMD"
+                AND R."edaNo" = DbT1001."edaNo"
             ) AS A
             INNER JOIN
                 "TmpIdoTrigger" AS B
@@ -1624,38 +1626,38 @@
         ON "TmpHonsantei"."shikibetsuCode" = "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"
         LEFT JOIN rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS "DbT7006RoreiFukushiNenkinJukyusha"
         ON "TmpHonsantei"."shikibetsuCode" = "DbT7006RoreiFukushiNenkinJukyusha"."shikibetsuCode"
-        INNER JOIN 
-            (SELECT B.*
-            FROM 
-                (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.noDeleted_DbT1006KyokaisoGaitosha" />) AS B
-            INNER JOIN
-                (SELECT C."hihokenshaNo",
-                        C."linkNo",
-                        MAX(C."rirekiNo") as "rirekiNo"
-                 FROM 
-                        rgdb."DbT1006KyokaisoGaitosha" AS C
-                GROUP BY
-                    C."hihokenshaNo",
-                    C."linkNo"
-                ) AS A
+        LEFT JOIN 
+                (SELECT B.*
+                FROM 
+                    (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.noDeleted_DbT1006KyokaisoGaitosha" />) AS B
+                INNER JOIN
+                    (SELECT C."hihokenshaNo",
+                            C."linkNo",
+                            MAX(C."rirekiNo") as "rirekiNo"
+                     FROM 
+                            rgdb."DbT1006KyokaisoGaitosha" AS C
+                    GROUP BY
+                        C."hihokenshaNo",
+                        C."linkNo"
+                    ) AS A
+                ON
+                  A."hihokenshaNo" = B."dbT1006KyokaisoGaitosha_hihokenshaNo"
+                  AND A."linkNo" = B."dbT1006KyokaisoGaitosha_linkNo"
+                  AND A."rirekiNo" = B."dbT1006KyokaisoGaitosha_rirekiNo"
+                ) AS DbT1006KyokaisoGaitosha
+            LEFT JOIN
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1013KyokaisoSochiShinseiMapper.noDeleted_DbT1013KyokaisoSochiShinsei" />) AS DbT1013KyokaisoSochiShinsei
             ON
-              A."hihokenshaNo" = B."dbT1006KyokaisoGaitosha_hihokenshaNo"
-              AND A."linkNo" = B."dbT1006KyokaisoGaitosha_linkNo"
-              AND A."rirekiNo" = B."dbT1006KyokaisoGaitosha_rirekiNo"
-            ) AS DbT1006KyokaisoGaitosha
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_hihokenshaNo" and
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_rirekiNo" and
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_linkNo"
+            LEFT JOIN
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1007KyokaisoHokenryoDankaiMapper.noDeleted_DbT1007KyokaisoHokenryoDankai" />) AS DbT1007KyokaisoHokenryoDankai
+            ON
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_hihokenshaNo" and
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_rirekiNo" and
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_linkNo"
         ON "TmpHonsantei"."hihokenshaNo"  =  DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo"
-        LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1013KyokaisoSochiShinseiMapper.noDeleted_DbT1013KyokaisoSochiShinsei" />) AS DbT1013KyokaisoSochiShinsei
-        ON
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_hihokenshaNo" and
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_rirekiNo" and
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_linkNo"
-        LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1007KyokaisoHokenryoDankaiMapper.noDeleted_DbT1007KyokaisoHokenryoDankai" />) AS DbT1007KyokaisoHokenryoDankai
-        ON
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_hihokenshaNo" and
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_rirekiNo" and
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_linkNo"
         LEFT JOIN 
         (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
         ON "TmpHonsantei"."shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"

@@ -39,6 +39,8 @@ public class SoufuJouhouHandler {
     private final SoufuJouhouDiv div;
     private static final RString 市町村識別ID_00 = new RString("00");
     private static final RString キー = new RString("000000");
+    private static final RString 申立者区分_1 = new RString("1");
+    private static final RString 申立者区分_2 = new RString("2");
     private static final int 連番_4 = 4;
 
     /**
@@ -115,13 +117,24 @@ public class SoufuJouhouHandler {
             row.setTxtServiceName(business.getサービス略称());
             row.setTxtShokisaiHokenshaNo(business.get証記載保険者番号());
             row.setTxtMoshitateYMD(new FlexibleDate(business.get申立年月日()).wareki().toDateString());
-            row.setTxtMoshitateshaKubun(business.get申立者区分コード());
+            // TODO DBCEnum．申立者区分が存在しません
+            if (申立者区分_1.equals(business.get申立者区分コード())) {
+                row.setTxtMoshitateshaKubun(new RString("サービス事業者等申立"));
+            }
+            if (申立者区分_2.equals(business.get申立者区分コード())) {
+                row.setTxtMoshitateshaKubun(new RString("保険者申立"));
+            }
             row.setTxtMoshitateTani(business.get申立単位数());
-            row.setTxtMoshitateRiyu1(business.get申立事由コード().substring(0, 2).concat(CodeMaster.getCodeRyakusho(SubGyomuCode.DBC介護給付,
-                    DBCCodeShubetsu.再審査決定申立事由コード_上２桁_申立対象項目コード.getコード(), new Code("0021"), FlexibleDate.getNowDate())));
-            row.setTxtMoshitateRiyu2(business.get申立事由コード().substring(2, 連番_4).concat(CodeMaster.getCodeRyakusho(SubGyomuCode.DBC介護給付,
-                    DBCCodeShubetsu.再審査決定申立事由コード_下２桁_申立理由番号.getコード(),
-                    new Code("0022"), FlexibleDate.getNowDate())));
+            RString 申立事由コード = business.get申立事由コード();
+            if (申立事由コード.length() < 連番_4) {
+                申立事由コード = 申立事由コード.padZeroToLeft(連番_4);
+            }
+            row.setTxtMoshitateRiyu1(申立事由コード.substring(0, 2).concat(CodeMaster.getCodeRyakusho(SubGyomuCode.DBC介護給付,
+                    DBCCodeShubetsu.再審査申立事由コード_上２桁_申立対象項目コード.getコード(),
+                    new Code(申立事由コード.substring(0, 2)), FlexibleDate.getNowDate())));
+            row.setTxtMoshitateRiyu2(申立事由コード.substring(2, 連番_4).concat(CodeMaster.getCodeRyakusho(SubGyomuCode.DBC介護給付,
+                    DBCCodeShubetsu.再審査申立事由コード_下２桁_申立理由番号.getコード(),
+                    new Code(申立事由コード.substring(2, 連番_4)), FlexibleDate.getNowDate())));
             list.add(row);
             アクセスログ(business.get被保険者番号());
         }
