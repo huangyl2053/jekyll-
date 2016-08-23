@@ -29,7 +29,7 @@ public class DBC1120011PanelHandler {
     /**
      * コンストラクタです。
      *
-     * @param div JikoFutangakuKeisanIkkatsuPanelDiv
+     * @param div DBC1120011PanelDiv
      */
     public DBC1120011PanelHandler(DBC1120011PanelDiv div) {
         this.div = div;
@@ -63,28 +63,5 @@ public class DBC1120011PanelHandler {
             div.getTxtShinseiTaishoYMD().setToValue(null);
         }
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200029.getReportId());
-    }
-
-     //TODO QA.1044
-    /**
-     * 出力CHKのonOpen事件です。
-     */
-    public void onOpen出力CHK() {
-        if (div.getJikoFutangakuKeisanKekkaIchiranhyoPanelPublish().isIsPublish()) {
-            div.getCcdChohyoShutsuryokujun().setDisabled(false);
-        } else {
-            div.getCcdChohyoShutsuryokujun().setDisabled(true);
-        }
-    }
-
-    /**
-     * 出力CHKのonClose事件です。
-     */
-    public void onClose出力CHK() {
-        if (div.getJikoFutangakuKeisanKekkaIchiranhyoPanelPublish().isIsPublish()) {
-            div.getCcdChohyoShutsuryokujun().setDisabled(false);
-        } else {
-            div.getCcdChohyoShutsuryokujun().setDisabled(true);
-        }
     }
 }

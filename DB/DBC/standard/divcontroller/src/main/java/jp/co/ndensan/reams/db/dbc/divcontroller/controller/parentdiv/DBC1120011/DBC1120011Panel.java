@@ -98,28 +98,6 @@ public class DBC1120011Panel {
         parameter.setDantaiCd(市町村コード_Temp.get地方公共団体コード());
         return parameter;
     }
-     //TODO QA.1044
-    /**
-     * 出力CHKのonOpen事件です。
-     *
-     * @param div DBC1120011PanelDiv
-     * @return ResponseData
-     */
-    public ResponseData<DBC1120011PanelDiv> onOpen_ccdChohyoShutsuryokujun(DBC1120011PanelDiv div) {
-        getHandler(div).onOpen出力CHK();
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 出力CHKのonClose事件です。
-     *
-     * @param div DBC1120011PanelDiv
-     * @return ResponseData
-     */
-    public ResponseData<DBC1120011PanelDiv> onClose_ccdChohyoShutsuryokujun(DBC1120011PanelDiv div) {
-        getHandler(div).onClose出力CHK();
-        return ResponseData.of(div).respond();
-    }
 
     private DBC1120011PanelHandler getHandler(DBC1120011PanelDiv div) {
         return new DBC1120011PanelHandler(div);
