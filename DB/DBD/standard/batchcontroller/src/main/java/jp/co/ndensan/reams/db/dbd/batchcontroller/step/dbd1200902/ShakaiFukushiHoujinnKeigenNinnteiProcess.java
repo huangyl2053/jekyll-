@@ -143,7 +143,7 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
     protected void process(ShakaiFukushiHoujinnKeigenNinnteiEntity t) {
         IKojin IKojin = ShikibetsuTaishoFactory.createKojin(t.getPsmEntity());
         ShafukuRiysFutKeigTaisKakuninshoShoNoAriReport.createReport(社会福祉法人等利用者負担軽減, IKojin, 帳票制御共通取得(),
-                帳票制御汎用取得(), 地方公共団体, processParamter.get認定証の交付日(), ninshoshaSource);
+                帳票制御汎用取得(), 地方公共団体, processParamter.get認定証の交付日().toRDate(), ninshoshaSource);
         report.writeBy(reportSourceWriter);
     }
 
