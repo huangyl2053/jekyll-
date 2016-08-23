@@ -176,9 +176,9 @@
                                      ORDER BY "DbT7063KaigoJigyoshaShiteiService"."yukoKaishiYMD" DESC, "DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" ASC) AS rrkno
            FROM "DbWT1121KyufuKanrihyo"
            INNER JOIN "DbT7063KaigoJigyoshaShiteiService" ON "DbWT1121KyufuKanrihyo"."kyotakushienJigyoshoNo" = "DbT7063KaigoJigyoshaShiteiService" ."jigyoshaNo"
-           WHERE "DbWT1121KyufuKanrihyo"."kyotakuServicePlanSakuseiKubunCode" = '1'
+           WHERE "DbWT1121KyufuKanrihyo"."kyotakuServicePlanSakuseiKubunCode" = '3'
              AND "DbWT1121KyufuKanrihyo"."kyufuMeisaiLineNo" = '99'
-             AND "DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" IN ('43', '73')
+             AND "DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" IN ('46', '75', 'AF')
              AND "DbT7063KaigoJigyoshaShiteiService"."yukoKaishiYMD" <![CDATA[<=]]> ("DbWT1121KyufuKanrihyo"."serviceTeikyoYM"||'31')) AS temp
         WHERE rrkno = 1
     </select>

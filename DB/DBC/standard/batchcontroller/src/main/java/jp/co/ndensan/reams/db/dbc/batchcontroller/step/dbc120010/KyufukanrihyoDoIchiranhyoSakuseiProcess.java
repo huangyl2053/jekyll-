@@ -379,9 +379,11 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
             csvEntity.set作成種別区分名(作成種別区分名);
         }
         csvEntity.set要介護状態区分(給付管理票.get要介護状態区分コード());
-        IYokaigoJotaiKubun 要介護状態区分 = YokaigoJotaiKubunSupport.toValue(給付管理票.getサービス提供年月(),
-                給付管理票.get要介護状態区分コード());
-        csvEntity.set要介護度((null != 要介護状態区分) ? 要介護状態区分.getName() : RString.EMPTY);
+        if (null != 給付管理票.getサービス提供年月() && !RString.isNullOrEmpty(給付管理票.get要介護状態区分コード())) {
+            IYokaigoJotaiKubun 要介護状態区分 = YokaigoJotaiKubunSupport.toValue(給付管理票.getサービス提供年月(),
+                    給付管理票.get要介護状態区分コード());
+            csvEntity.set要介護度((null != 要介護状態区分) ? 要介護状態区分.getName() : RString.EMPTY);
+        }
         csvEntity.set限度額管理期間_開始(doパターン54(給付管理票.get限度額適用開始年月()));
         csvEntity.set限度額管理期間_終了(doパターン54(給付管理票.get限度額適用終了年月()));
         csvEntity.set区分支給限度基準額(doカンマ編集(給付管理票.get居宅_介護予防支給限度額()));
