@@ -113,7 +113,7 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
 
     @Override
     protected void initialize() {
-        連番 = 1;
+        連番 = 0;
         pageBreakKeys = new ArrayList<>();
         証記載保険者番号 = null;
         帳票データの取得Parameter = new KokuhorenIchiranhyoMybatisParameter();
@@ -175,7 +175,7 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
                 .setEnclosure(ダブル引用符)
                 .setEncode(Encode.SJIS)
                 .setNewLine(NewLine.CRLF)
-                .hasHeader(false)
+                .hasHeader(true)
                 .build();
 
     }
@@ -201,22 +201,15 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
             集計Flag = true;
         }
         証記載保険者番号 = this証記載保険者番号;
-        if (集計Flag) {
+        if (lastEntity != null) {
             SogojigyohiKagoKetteiInReport report = new SogojigyohiKagoKetteiInReport(lastEntity,
                     出力順Map,
                     parameter.get処理年月(),
                     parameter.getシステム日付(),
                     連番,
-                    true);
+                    集計Flag);
             report.writeBy(reportSourceWriter);
         }
-        SogojigyohiKagoKetteiInReport report = new SogojigyohiKagoKetteiInReport(entity,
-                出力順Map,
-                parameter.get処理年月(),
-                parameter.getシステム日付(),
-                連番,
-                false);
-        report.writeBy(reportSourceWriter);
         SogojigyohiKagoKetteiInCsvEntity output = do帳票のCSVファイル作成(entity,
                 parameter.get処理年月(),
                 parameter.getシステム日付(),
@@ -250,7 +243,7 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
     private SogojigyohiKagoKetteiInCsvEntity do帳票のCSVファイル作成(SogojigyohiKagoKetteiInEntity entity,
             FlexibleYearMonth 処理年月, RDateTime 作成日時, boolean 集計Flag) {
         SogojigyohiKagoKetteiInCsvEntity output = new SogojigyohiKagoKetteiInCsvEntity();
-        if (連番 == 1) {
+        if (連番 == 0) {
             output.set処理年月(処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)

@@ -108,11 +108,11 @@ public class SokujiFukaKouseiMain {
         if (!RealInitialLocker.tryGetLock(前排他キー)) {
             throw new PessimisticLockingException();
         }
-        TsuchishoNo 通知書番号選択 = 通知書番号;
         List<KoseiZengoFuka> 更正前後賦課のリスト = new ArrayList<>();
         KoseiZengoChoshuHoho 更正前後徴収方法 = null;
         NendobunFukaList 更正前賦課リスト = null;
         NendobunFukaList 更正後賦課リスト = null;
+        TsuchishoNo 通知書番号選択 = 通知書番号;
         boolean is本算定処理済フラグ;
         if (is特殊処理()) {
             NendobunFukaList 年度分賦課リスト = get年度分賦課リスト(賦課年度, 通知書番号);

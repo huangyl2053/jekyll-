@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  *
  * @reamsid_L DBD-3530-080 mawy
  */
-public class Ddb102020MyBatisOrderByClauseCreator {
+public final class Ddb102020MyBatisOrderByClauseCreator {
 
     private static RStringBuilder orderByClause;
     private static RString space;

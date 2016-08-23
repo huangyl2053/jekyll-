@@ -23,6 +23,9 @@ public class DBDHanyoList extends BatchFlowBase<DBDHanyoListParameter> {
         if ("汎用リスト_施設入退所".equals(getParameter().getBatchKind().toString())) {
             executeStep("汎用リスト出力_施設入退所");
         }
+        if ("汎用リスト_社会福祉法人軽減".equals(getParameter().getBatchKind().toString())) {
+            executeStep("汎用リスト出力_社会福祉法人軽減");
+        }
         if ("汎用リスト_国保".equals(getParameter().getBatchKind().toString())) {
             executeStep("汎用リスト出力_国保");
         }
@@ -40,6 +43,11 @@ public class DBDHanyoList extends BatchFlowBase<DBDHanyoListParameter> {
     @Step("汎用リスト出力_施設入退所")
     protected IBatchFlowCommand callHanyoListShisetsuNyutaishoFlow() {
         return otherBatchFlow(new RString("DBD710150_HanyoListShisetsuNyutaisho"), SubGyomuCode.DBD介護受給, getParameter().getShisetsuNyutaishoBatchParameter()).define();
+    }
+
+    @Step("汎用リスト出力_社会福祉法人軽減")
+    protected IBatchFlowCommand callHanyoListShakaiFukushiHojinKeigenFlow() {
+        return otherBatchFlow(new RString("DBD710060_HanyoListShakaiFukushiHojinKeigen"), SubGyomuCode.DBD介護受給, getParameter().getShakaiFukushiHojinKeigenParameter()).define();
     }
 
     @Step("汎用リスト出力_国保")

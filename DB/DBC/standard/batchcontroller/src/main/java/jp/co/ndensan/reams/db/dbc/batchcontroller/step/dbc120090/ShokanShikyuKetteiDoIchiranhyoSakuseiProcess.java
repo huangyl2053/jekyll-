@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT3036
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.ShokanShikyuKetteiChohyoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanshikyuketteiin.ShokanShikyuKetteiJohoManager;
 import jp.co.ndensan.reams.db.dbc.service.report.shokanbaraishikyuketteishaichiran.ShokanbaraiShikyuKetteishaIchiranPrintService;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.service.core.chohyojushoeditor.ChohyoJushoEditor;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -31,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -75,7 +75,6 @@ public class ShokanShikyuKetteiDoIchiranhyoSakuseiProcess extends SimpleBatchPro
     @BatchWriter
     private EucCsvWriter eucCsvWriter;
 
-    private static final CodeShubetsu 介護資格喪失事由_被保険者 = new CodeShubetsu("0010");
     private static final RString 出力ファイル名
             = new RString("DBC200021_ShokanbaraiShikyuKetteishaIchiran.csv");
     private static final RString 帳票分類ID = new RString("DBC200021_ShokanbaraiShikyuKetteishaIchiran");
@@ -223,7 +222,7 @@ public class ShokanShikyuKetteiDoIchiranhyoSakuseiProcess extends SimpleBatchPro
         }
         if (null != 被保険者.get資格喪失事由コード()) {
             csvEntity.set資格喪失事由コード(被保険者.get資格喪失事由コード());
-            csvEntity.set資格喪失事由(CodeMaster.getCodeMeisho(介護資格喪失事由_被保険者,
+            csvEntity.set資格喪失事由(CodeMaster.getCodeMeisho(DBCCodeShubetsu.退所_院_後の状態コード.getコード(),
                     new Code(被保険者.get資格喪失事由コード())));
         }
         if (null != 被保険者.get資格喪失日()) {

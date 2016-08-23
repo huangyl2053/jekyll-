@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFush
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810024.ServiceKeikakuHiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810024.dgdYichiran_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -37,7 +37,6 @@ public class ServiceKeikakuHiHandler {
     private static final int 桁目から = 3;
     private static final RString 設定可_任意 = new RString("2");
     private static final RString 設定不可 = new RString("0");
-    private static final RString コード種別 = new RString("0002");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
 
     /**
@@ -199,7 +198,7 @@ public class ServiceKeikakuHiHandler {
     }
 
     private void setサービス計画費_パネル_共通エリア(ShokanServicePlan200904Result entity200904) {
-        RString 指定_基準該当事業者区分 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, new CodeShubetsu(コード種別),
+        RString 指定_基準該当事業者区分 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.指定_基準該当等事業所区分.getコード(),
                 new Code(entity200904.getEntity().get指定_基準該当事業者区分コード()), FlexibleDate.getNowDate());
         div.getPanelServiceKeikakuhiUp1().getTxtJigyoshaKubun().setValue(指定_基準該当事業者区分);
         div.getPanelServiceKeikakuhiUp1().getRdoShinsahouhou().setSelectedValue(
@@ -258,7 +257,7 @@ public class ServiceKeikakuHiHandler {
     }
 
     private void setサービス計画費パネル_詳細エリア200604(ShokanServicePlan200604Result entity200604) {
-        RString 指定_基準該当事業者区分 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, new CodeShubetsu(コード種別),
+        RString 指定_基準該当事業者区分 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.指定_基準該当等事業所区分.getコード(),
                 new Code(entity200604.getEntity().get指定_基準該当事業者区分コード()), FlexibleDate.getNowDate());
         div.getPanelServiceKeikakuhiDown().getTxtShiteiJigyoshaKubunCode().setValue(指定_基準該当事業者区分);
         FlexibleDate 届出日 = entity200604.getEntity().get居宅サービス計画作成依頼届出年月日();
@@ -294,7 +293,7 @@ public class ServiceKeikakuHiHandler {
     }
 
     private void setサービス計画費パネル_詳細エリア200004(ShokanServicePlan200004Result entity200004) {
-        RString 指定_基準該当事業者区分 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, new CodeShubetsu(コード種別),
+        RString 指定_基準該当事業者区分 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.指定_基準該当等事業所区分.getコード(),
                 new Code(entity200004.getEntity().get指定_基準該当事業者区分コード()), FlexibleDate.getNowDate());
         div.getPanelServiceKeikakuhiDown().getTxtShiteiJigyoshaKubunCode().setValue(指定_基準該当事業者区分);
         FlexibleDate 届出日 = entity200004.getEntity().get居宅サービス計画作成依頼届出年月日();

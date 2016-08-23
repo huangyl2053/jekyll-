@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TainoHanteiK
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TaishoHanteiKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4022ShiharaiHohoHenkoTainoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenko.ShiharaiHohoHenkoEntity;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -56,10 +57,11 @@ public class ShokanBaraiKa1GoManager {
             FlexibleDate 弁明書提出期限,
             RString 最大履歴番号) {
         ShiharaiHohoHenkoEntity 支払方法変更Entity = new ShiharaiHohoHenkoEntity();
-        ShoKisaiHokenshaNo 証記載保険者番号 = ShichosonSecurityJohoFinder.createInstance()
-                .getShichosonSecurityJoho(GyomuBunrui.介護事務)
-                .get市町村情報()
-                .get証記載保険者番号();
+        ShoKisaiHokenshaNo 証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
+        ShichosonSecurityJoho 市町村情報 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (市町村情報 != null) {
+            証記載保険者番号 = 市町村情報.get市町村情報().get証記載保険者番号();
+        }
         支払方法変更Entity.set支払方法変更Entity(get1号予告者登録の登録Entity(
                 被保険者番号,
                 予告登録日,
@@ -94,10 +96,11 @@ public class ShokanBaraiKa1GoManager {
             FlexibleDate 保険者証提出期限,
             RString 最大履歴番号) {
         ShiharaiHohoHenkoEntity 支払方法変更Entity = new ShiharaiHohoHenkoEntity();
-        ShoKisaiHokenshaNo 証記載保険者番号 = ShichosonSecurityJohoFinder.createInstance()
-                .getShichosonSecurityJoho(GyomuBunrui.介護事務)
-                .get市町村情報()
-                .get証記載保険者番号();
+        ShoKisaiHokenshaNo 証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
+        ShichosonSecurityJoho 市町村情報 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (市町村情報 != null) {
+            証記載保険者番号 = 市町村情報.get市町村情報().get証記載保険者番号();
+        }
         支払方法変更Entity.set支払方法変更Entity(get償還払い化登録の登録Entity(
                 被保険者番号,
                 提出期限_開始,

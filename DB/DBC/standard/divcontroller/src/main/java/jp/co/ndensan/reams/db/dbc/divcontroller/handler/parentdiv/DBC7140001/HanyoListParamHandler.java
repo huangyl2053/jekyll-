@@ -78,10 +78,9 @@ public class HanyoListParamHandler {
                 && 市町村セキュリティ情報.get導入形態コード().is広域()) {
             市町村判定 = 広域;
             panel.getCcdHokenshaList().setDisplayNone(true);
-            panel.getCcdHokenshaList().loadHokenshaList();
         } else {
             // TODO QA1263
-            panel.getCcdHokenshaList().setDisplayNone(true);
+            panel.getCcdHokenshaList().loadHokenshaList();
         }
         panel.getDdlSinseiJokyoKubun().setDataSource(get申請状況区分リスト());
         panel.getDdlSinseiJokyoKubun().setSelectedIndex(INDEX_ゼロ);
@@ -152,6 +151,12 @@ public class HanyoListParamHandler {
                 日付編集 = true;
             }
         }
+        RString 市町村コード;
+        if (null != div.getCcdHokenshaList().getSelectedItem().get市町村コード()) {
+            市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue();
+        } else {
+            市町村コード = RString.EMPTY;
+        }
         return new DBC710140_HanyoListKogakuGassanShinseishoJohoParameter(
                 div.getRadChushutsuKubun().getSelectedKey(),
                 div.getDdlSinseiJokyoKubun().getSelectedKey(),
@@ -165,7 +170,7 @@ public class HanyoListParamHandler {
                 項目名,
                 連番,
                 日付編集,
-                div.getCcdHokenshaList().getSelectedItem().get保険者区分().get名称(),
+                市町村コード,
                 div.getCcdShutsuryokujun().getSelected出力順().get出力順ID(),
                 div.getCcdShutsuryokuKoumoku().get出力項目ID()
         );
@@ -209,8 +214,8 @@ public class HanyoListParamHandler {
             編集方法.add(new RString("3"));
         }
         div.getChkCsvHenshuHoho().setSelectedItemsByKey(編集方法);
-        RString 保険者コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hokenshaNo"));
-//        div.getCcdHokenshaList().setSelectedKey(保険者コード);
+//        RString 保険者コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hokenshaNo"));
+//        div.getCcdHokenshaList().getSelectedItem();
 
         RString 出力順 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("shutsuryokuju"));
         div.getRadChushutsuKubun().setSelectedKey(出力順);
@@ -230,7 +235,7 @@ public class HanyoListParamHandler {
         if (すべて.equals(div.getRadChushutsuKubun().getSelectedValue())) {
             batchparam.setChushutsuKubun(RString.EMPTY);
         } else {
-            batchparam.setChushutsuKubun(div.getRadChushutsuKubun().getSelectedKey());
+            batchparam.setChushutsuKubun(div.getRadChushutsuKubun().getSelectedValue());
         }
         if (すべて.equals(div.getDdlSinseiJokyoKubun().getSelectedValue())) {
             batchparam.setKaigoGassanShinseiJokyoKubun(RString.EMPTY);
@@ -272,7 +277,7 @@ public class HanyoListParamHandler {
         } else {
             batchparam.setSlashDate(false);
         }
-//        batchparam.setHokenshaNo(div.getCcdHokenshaList().);
+        batchparam.setHokenshaNo(div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue());
         if (null != div.getCcdShutsuryokujun().getSelected出力順()) {
             batchparam.setShutsuryokuju(div.getCcdShutsuryokujun().getSelected出力順().get出力順ID());
         }

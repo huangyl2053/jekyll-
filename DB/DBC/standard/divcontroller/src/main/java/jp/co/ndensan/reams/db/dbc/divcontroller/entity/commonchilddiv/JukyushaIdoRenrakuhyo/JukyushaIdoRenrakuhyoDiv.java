@@ -407,56 +407,6 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     /**
-     * 「事業区分」操作制御のメソッドです。
-     *
-     */
-    @JsonIgnore
-    @Override
-    public void onClick_radNijiyoboJigyoKubun() {
-        JukyushaIdoRenrakuhyoHandler.of(this).onClick_事業区分();
-    }
-
-    /**
-     * 「計画作成区分」操作制御のメソッドです。
-     *
-     */
-    @JsonIgnore
-    @Override
-    public void onClick_radKyotakuServiceSakuseiKubun() {
-        JukyushaIdoRenrakuhyoHandler.of(this).onClick_計画作成区分();
-    }
-
-    /**
-     * 異動日focus outのメソッドです。
-     *
-     */
-    @JsonIgnore
-    @Override
-    public void onBlur_txtIdoYMD() {
-        JukyushaIdoRenrakuhyoHandler.of(this).onBlur_異動日();
-    }
-
-    /**
-     * 支援事業者番号focus outのメソッドです。
-     *
-     */
-    @JsonIgnore
-    @Override
-    public void onBlur_txtKyotakuKaigoShienJigyoshoNo() {
-        JukyushaIdoRenrakuhyoHandler.of(this).onBlur_支援事業者番号();
-    }
-
-    /**
-     * 住所地特例の保険者番号focus outのメソッドです。
-     *
-     */
-    @JsonIgnore
-    @Override
-    public void onBlur_txtShisetsuShozaiHokenjaNo() {
-        JukyushaIdoRenrakuhyoHandler.of(this).onBlur_保険者番号();
-    }
-
-    /**
      * (共有子Div)受給者異動連絡票バリデーションチェックを行う。
      *
      * @return ValidationMessageControlPairs
@@ -486,7 +436,7 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     /**
      * 出力用受給者訂正情報Entity取得のメソッドです。
      *
-     * @return JukyushaIdoRenrakuhyoSakuseiRelateEntity
+     * @return JukyushaIdoRenrakuhyoTorokuEntity
      */
     @JsonIgnore
     @Override

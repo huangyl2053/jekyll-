@@ -91,6 +91,7 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
         if (特徴納期情報リスト != null && !特徴納期情報リスト.isEmpty()) {
             行 = 特徴納期情報リスト.size();
         }
+        行 = 行 > 3 ? 3 : 行;
         if (普徴納期情報リスト != null && 普徴納期情報リスト.size() > 行) {
             行 = 普徴納期情報リスト.size();
         }
