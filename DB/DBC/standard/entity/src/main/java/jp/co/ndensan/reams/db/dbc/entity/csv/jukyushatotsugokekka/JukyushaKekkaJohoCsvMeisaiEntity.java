@@ -13,9 +13,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 受給者情報明細レコードのCsvEntity
+ * 受給者情報明細レコードのCsvEntity。
  *
- * @reamsid_L DBC-2760-010 jianglaisheng。
+ * @reamsid_L DBC-2760-010 jianglaisheng
  */
 @Getter
 @Setter
