@@ -4,43 +4,43 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ITsukibetsuHanteiTaishoshaTempMapper">
 <!--月別判定対象者Temp-->
     <sql id="allColumns_TsukibetsuHanteiTaishoshaTemp">
-        "TsukibetsuHanteiTaishoshaTemp"."taishoNendo"as "TsukibetsuHanteiTaishoshaTemp_taishoNendo",
-        "TsukibetsuHanteiTaishoshaTemp"."taishoGetsu"as "TsukibetsuHanteiTaishoshaTemp_taishoGetsu",
-        "TsukibetsuHanteiTaishoshaTemp"."taishoKubun"as "TsukibetsuHanteiTaishoshaTemp_taishoKubun",
-        "TsukibetsuHanteiTaishoshaTemp"."hihokenshaNo"as "TsukibetsuHanteiTaishoshaTemp_hihokenshaNo",
-        "TsukibetsuHanteiTaishoshaTemp"."shikibetsuCode"as "TsukibetsuHanteiTaishoshaTemp_shikibetsuCode",
-        "TsukibetsuHanteiTaishoshaTemp"."setaiCode"as "TsukibetsuHanteiTaishoshaTemp_setaiCode",
-        "TsukibetsuHanteiTaishoshaTemp"."idoShubetsu"as "TsukibetsuHanteiTaishoshaTemp_idoShubetsu",
-        "TsukibetsuHanteiTaishoshaTemp"."atenaIdobi"as "TsukibetsuHanteiTaishoshaTemp_atenaIdobi",
-        "TsukibetsuHanteiTaishoshaTemp"."atenaIdoJiyu"as "TsukibetsuHanteiTaishoshaTemp_atenaIdoJiyu",
-        "TsukibetsuHanteiTaishoshaTemp"."idobi"as "TsukibetsuHanteiTaishoshaTemp_idobi",
-        "TsukibetsuHanteiTaishoshaTemp"."idoJiyuCode"as "TsukibetsuHanteiTaishoshaTemp_idoJiyuCode",
-        "TsukibetsuHanteiTaishoshaTemp"."shikakuShiyutokiDate"as "TsukibetsuHanteiTaishoshaTemp_shikakuShiyutokiDate",
-        "TsukibetsuHanteiTaishoshaTemp"."firstShikakuShiyutokiDate"as "TsukibetsuHanteiTaishoshaTemp_firstShikakuShiyutokiDate",
-        "TsukibetsuHanteiTaishoshaTemp"."hihokenshaKubunCode"as "TsukibetsuHanteiTaishoshaTemp_hihokenshaKubunCode",
-        "TsukibetsuHanteiTaishoshaTemp"."cityCode"as "TsukibetsuHanteiTaishoshaTemp_cityCode",
-        "TsukibetsuHanteiTaishoshaTemp"."rirekiNo"as "TsukibetsuHanteiTaishoshaTemp_rirekiNo",
-        "TsukibetsuHanteiTaishoshaTemp"."edaNo"as "TsukibetsuHanteiTaishoshaTemp_edaNo",
-        "TsukibetsuHanteiTaishoshaTemp"."jukyuShinseiJiyu"as "TsukibetsuHanteiTaishoshaTemp_jukyuShinseiJiyu",
-        "TsukibetsuHanteiTaishoshaTemp"."ninteiYukoKaishiDate"as "TsukibetsuHanteiTaishoshaTemp_ninteiYukoKaishiDate",
-        "TsukibetsuHanteiTaishoshaTemp"."ninteiYukoShuryoDate"as "TsukibetsuHanteiTaishoshaTemp_ninteiYukoShuryoDate",
-        "TsukibetsuHanteiTaishoshaTemp"."ninteiDate"as "TsukibetsuHanteiTaishoshaTemp_ninteiDate",
-        "TsukibetsuHanteiTaishoshaTemp"."yoKaigoninteiJoutaiKubunCode"as "TsukibetsuHanteiTaishoshaTemp_yoKaigoninteiJoutaiKubunCode",
-        "TsukibetsuHanteiTaishoshaTemp"."kyuSochishaFlag"as "TsukibetsuHanteiTaishoshaTemp_kyuSochishaFlag",
-        "TsukibetsuHanteiTaishoshaTemp"."shotokuNendo"as "TsukibetsuHanteiTaishoshaTemp_shotokuNendo",
-        "TsukibetsuHanteiTaishoshaTemp"."shotokuRirekiNo"as "TsukibetsuHanteiTaishoshaTemp_shotokuRirekiNo",
-        "TsukibetsuHanteiTaishoshaTemp"."kazeiKubun"as "TsukibetsuHanteiTaishoshaTemp_kazeiKubun",
-        "TsukibetsuHanteiTaishoshaTemp"."kazeiKubunGemmenGo"as "TsukibetsuHanteiTaishoshaTemp_kazeiKubunGemmenGo",
-        "TsukibetsuHanteiTaishoshaTemp"."gokeiShotokuGaku"as "TsukibetsuHanteiTaishoshaTemp_gokeiShotokuGaku",
-        "TsukibetsuHanteiTaishoshaTemp"."nenkiniShunyuGaku"as "TsukibetsuHanteiTaishoshaTemp_nenkiniShunyuGaku",
-        "TsukibetsuHanteiTaishoshaTemp"."nenkiniShotokuGaku"as "TsukibetsuHanteiTaishoshaTemp_nenkiniShotokuGaku",
-        "TsukibetsuHanteiTaishoshaTemp"."kazeiShotokuGaku"as "TsukibetsuHanteiTaishoshaTemp_kazeiShotokuGaku",
-        "TsukibetsuHanteiTaishoshaTemp"."gekihenKanwaKubun"as "TsukibetsuHanteiTaishoshaTemp_gekihenKanwaKubun"
+        "TsukibetsuHanteiTaishoshaTemp"."taishoNendo" as "TsukibetsuHanteiTaishoshaTemp_taishoNendo",
+        "TsukibetsuHanteiTaishoshaTemp"."taishoTsuki" as "TsukibetsuHanteiTaishoshaTemp_taishoTsuki",
+        "TsukibetsuHanteiTaishoshaTemp"."taishoKubun" as "TsukibetsuHanteiTaishoshaTemp_taishoKubun",
+        "TsukibetsuHanteiTaishoshaTemp"."hihokenshaNo" as "TsukibetsuHanteiTaishoshaTemp_hihokenshaNo",
+        "TsukibetsuHanteiTaishoshaTemp"."shikibetsuCode" as "TsukibetsuHanteiTaishoshaTemp_shikibetsuCode",
+        "TsukibetsuHanteiTaishoshaTemp"."setaiCode" as "TsukibetsuHanteiTaishoshaTemp_setaiCode",
+        "TsukibetsuHanteiTaishoshaTemp"."idoShubetsu" as "TsukibetsuHanteiTaishoshaTemp_idoShubetsu",
+        "TsukibetsuHanteiTaishoshaTemp"."atenaIdobi" as "TsukibetsuHanteiTaishoshaTemp_atenaIdobi",
+        "TsukibetsuHanteiTaishoshaTemp"."atenaIdoJiyu" as "TsukibetsuHanteiTaishoshaTemp_atenaIdoJiyu",
+        "TsukibetsuHanteiTaishoshaTemp"."idobi" as "TsukibetsuHanteiTaishoshaTemp_idobi",
+        "TsukibetsuHanteiTaishoshaTemp"."idoJiyuCode" as "TsukibetsuHanteiTaishoshaTemp_idoJiyuCode",
+        "TsukibetsuHanteiTaishoshaTemp"."shikakuShiyutokiDate" as "TsukibetsuHanteiTaishoshaTemp_shikakuShiyutokiDate",
+        "TsukibetsuHanteiTaishoshaTemp"."firstShikakuShiyutokiDate" as "TsukibetsuHanteiTaishoshaTemp_firstShikakuShiyutokiDate",
+        "TsukibetsuHanteiTaishoshaTemp"."hihokenshaKubunCode" as "TsukibetsuHanteiTaishoshaTemp_hihokenshaKubunCode",
+        "TsukibetsuHanteiTaishoshaTemp"."cityCode" as "TsukibetsuHanteiTaishoshaTemp_cityCode",
+        "TsukibetsuHanteiTaishoshaTemp"."rirekiNo" as "TsukibetsuHanteiTaishoshaTemp_rirekiNo",
+        "TsukibetsuHanteiTaishoshaTemp"."edaNo" as "TsukibetsuHanteiTaishoshaTemp_edaNo",
+        "TsukibetsuHanteiTaishoshaTemp"."jukyuShinseiJiyu" as "TsukibetsuHanteiTaishoshaTemp_jukyuShinseiJiyu",
+        "TsukibetsuHanteiTaishoshaTemp"."ninteiYukoKaishiDate" as "TsukibetsuHanteiTaishoshaTemp_ninteiYukoKaishiDate",
+        "TsukibetsuHanteiTaishoshaTemp"."ninteiYukoShuryoDate" as "TsukibetsuHanteiTaishoshaTemp_ninteiYukoShuryoDate",
+        "TsukibetsuHanteiTaishoshaTemp"."ninteiDate" as "TsukibetsuHanteiTaishoshaTemp_ninteiDate",
+        "TsukibetsuHanteiTaishoshaTemp"."yoKaigoninteiJoutaiKubunCode" as "TsukibetsuHanteiTaishoshaTemp_yoKaigoninteiJoutaiKubunCode",
+        "TsukibetsuHanteiTaishoshaTemp"."kyuSochishaFlag" as "TsukibetsuHanteiTaishoshaTemp_kyuSochishaFlag",
+        "TsukibetsuHanteiTaishoshaTemp"."shotokuNendo" as "TsukibetsuHanteiTaishoshaTemp_shotokuNendo",
+        "TsukibetsuHanteiTaishoshaTemp"."shotokuRirekiNo" as "TsukibetsuHanteiTaishoshaTemp_shotokuRirekiNo",
+        "TsukibetsuHanteiTaishoshaTemp"."kazeiKubun" as "TsukibetsuHanteiTaishoshaTemp_kazeiKubun",
+        "TsukibetsuHanteiTaishoshaTemp"."kazeiKubunGemmenGo" as "TsukibetsuHanteiTaishoshaTemp_kazeiKubunGemmenGo",
+        "TsukibetsuHanteiTaishoshaTemp"."gokeiShotokuGaku" as "TsukibetsuHanteiTaishoshaTemp_gokeiShotokuGaku",
+        "TsukibetsuHanteiTaishoshaTemp"."nenkiniShunyuGaku" as "TsukibetsuHanteiTaishoshaTemp_nenkiniShunyuGaku",
+        "TsukibetsuHanteiTaishoshaTemp"."nenkiniShotokuGaku" as "TsukibetsuHanteiTaishoshaTemp_nenkiniShotokuGaku",
+        "TsukibetsuHanteiTaishoshaTemp"."kazeiShotokuGaku" as "TsukibetsuHanteiTaishoshaTemp_kazeiShotokuGaku",
+        "TsukibetsuHanteiTaishoshaTemp"."gekihenKanwaKubun" as "TsukibetsuHanteiTaishoshaTemp_gekihenKanwaKubun"
     </sql>
 
     <resultMap id="ResultMap_TsukibetsuHanteiTaishoshaTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity" autoMapping="true">
         <result property="taishoNendo" column="TsukibetsuHanteiTaishoshaTemp_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <result property="taishoGetsu" column="TsukibetsuHanteiTaishoshaTemp_taishoGetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="taishoTsuki" column="TsukibetsuHanteiTaishoshaTemp_taishoTsuki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="taishoKubun" column="TsukibetsuHanteiTaishoshaTemp_taishoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hihokenshaNo" column="TsukibetsuHanteiTaishoshaTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shikibetsuCode" column="TsukibetsuHanteiTaishoshaTemp_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
