@@ -75,13 +75,17 @@ public class FutanGenndoGakuNinnteiShouProcessParameter implements IBatchProcess
      * @param psmAtesaki psmAtesaki
      * @param 出力順 出力順
      * @param 帳票ID 帳票ID
+     * @param 発行履歴固有情報_減免適用開始日 発行履歴固有情報_減免適用開始日
+     * @param 発行履歴固有情報_被保番号 発行履歴固有情報_被保番号
      * @return SQL使用されたパラメター
      */
     public FutanGenndoGakuNinnteiShouMybatisParameter toFutanGenndoGakuNinnteiShouMybatisParameter(
             RString psmShikibetsuTaisho,
             RString psmAtesaki,
             RString 出力順,
-            RString 帳票ID) {
+            RString 帳票ID,
+            RString 発行履歴固有情報_減免適用開始日,
+            RString 発行履歴固有情報_被保番号) {
         return new FutanGenndoGakuNinnteiShouMybatisParameter(
                 単票発行区分,
                 旧措置者区分,
@@ -93,6 +97,9 @@ public class FutanGenndoGakuNinnteiShouProcessParameter implements IBatchProcess
                 psmShikibetsuTaisho,
                 psmAtesaki,
                 出力順,
-                帳票ID);
+                帳票ID,
+                発行履歴固有情報_被保番号,
+                発行履歴固有情報_減免適用開始日
+        );
     }
 }

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  * 負担限度額認定証・通知書一括発行フロークラスです．
  *
- * @reamsid_L DBD-3981-030 x_lilh
+ * @reamsid_L DBD-3981-040 x_lilh
  */
 public class FutanGenndoGakuTsuuchishoIkkatsuPublishFlow extends BatchFlowBase<FutanGenndoGakuTsuuchishoIkkatsuBatchParameter> {
 
