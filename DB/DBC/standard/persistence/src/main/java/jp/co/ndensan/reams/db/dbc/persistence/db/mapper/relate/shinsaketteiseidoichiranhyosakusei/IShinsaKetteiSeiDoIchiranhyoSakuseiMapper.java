@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shinsaketteiseidoichiranhyosakusei;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.report.kyufuhishinsaketteiseikyumeisaihyo.KyufuhiShinsaKetteiSeikyuMeisaihyoEntity;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhishinsaketteiseikyumeisaihyo.KyufuhiShinsaKetteiSeikyuMeisaihyoEntity;
 
 /**
  * 介護給付費等審査決定請求明細表情報取込の一覧表作成を実行のDB操作インターフェースです。。
