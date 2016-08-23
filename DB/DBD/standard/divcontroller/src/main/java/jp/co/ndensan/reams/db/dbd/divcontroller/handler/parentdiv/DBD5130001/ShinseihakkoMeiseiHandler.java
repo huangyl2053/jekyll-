@@ -126,7 +126,7 @@ public class ShinseihakkoMeiseiHandler {
     public ShinseiShoEntity getShinseiShoEntity() {
         NinteiKanryoNinteiShinseiJohoManager manager = NinteiKanryoNinteiShinseiJohoManager.createInstance();
         ShinseiShoEntity shinseiShoEntity = new ShinseiShoEntity();
-        int radShinseishaKubunSelectIndex = div.getShinseihakkoMeisei2().getPrintSelect().getRadShinseishaKubun().getSelectedIndex();
+        //int radShinseishaKubunSelectIndex = div.getShinseihakkoMeisei2().getPrintSelect().getRadShinseishaKubun().getSelectedIndex();
         int radShinseiKubunSelectIndex = div.getShinseihakkoMeisei2().getPrintSelect().getRadShinseiKubun().getSelectedIndex();
         int radPrintMeeisaiSelectIndex = div.getShinseihakkoMeisei2().getPrintSelect().getRadPrintMeeisaiInfo().getSelectedIndex();
         KaigoninteiShikakuInfoDiv kaigoninteiShikakuInfoDiv = (KaigoninteiShikakuInfoDiv) div.getNinteishinseihakko().getCcdKaigoninteiShikakuInfo();
@@ -167,7 +167,7 @@ public class ShinseihakkoMeiseiHandler {
                     = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD501002.getReportId(), KamokuCode.EMPTY, 通知文_項目番号_1);
             shinseiShoEntity.set通知文(通知文.get(通知文_項目番号_1));
             if (radShinseiKubunSelectIndex != 0) {
-                shinseiShoEntity = set状態区分(radShinseishaKubunSelectIndex, shinseiShoEntity);
+                shinseiShoEntity = set状態区分(shinseiShoEntity);
             }
         } else {
             shinseiShoEntity.set市町村名称(kaigoninteiShikakuInfoDiv.getTxtHokensha().getText());
@@ -236,7 +236,7 @@ public class ShinseihakkoMeiseiHandler {
         return shinseiShoEntity;
     }
 
-    private ShinseiShoEntity set状態区分(int radPrintMeeisaiSelectIndex, ShinseiShoEntity shinseiShoEntity) {
+    private ShinseiShoEntity set状態区分(ShinseiShoEntity shinseiShoEntity) {
         shinseiShoEntity.set有効期間開始年月日(getパターン9(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue()));
         shinseiShoEntity.set有効開始年YYYY(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue().getYear().toDateString());
         shinseiShoEntity.set有効開始月MM(new RString(String.valueOf(
