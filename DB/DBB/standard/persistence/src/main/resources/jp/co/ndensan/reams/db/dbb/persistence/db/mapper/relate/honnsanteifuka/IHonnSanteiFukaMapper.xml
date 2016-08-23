@@ -287,7 +287,7 @@
         LEFT JOIN 
             rgur."UrT0508SeikatsuHogoJukyusha" AS "UrT0508SeikatsuHogoJukyusha"
         ON "HonSanJonTyuShutuTemp"."shikibetsuCode" = "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"
-        INNER JOIN
+        LEFT JOIN
             rgur."UrT0526SeikatsuHogoFujoShurui" AS "UrT0526SeikatsuHogoFujoShurui"
         ON "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode"
         AND "UrT0508SeikatsuHogoJukyusha"."gyomuCode" = "UrT0526SeikatsuHogoFujoShurui"."gyomuCode"
@@ -300,7 +300,7 @@
         LEFT JOIN
             rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS "DbT7006RoreiFukushiNenkinJukyusha"
         ON "HonSanJonTyuShutuTemp"."shikibetsuCode" = "DbT7006RoreiFukushiNenkinJukyusha"."shikibetsuCode"
-        INNER JOIN
+        LEFT JOIN
             (SELECT B.*
             FROM 
                 (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.noDeleted_DbT1006KyokaisoGaitosha" />) AS B
