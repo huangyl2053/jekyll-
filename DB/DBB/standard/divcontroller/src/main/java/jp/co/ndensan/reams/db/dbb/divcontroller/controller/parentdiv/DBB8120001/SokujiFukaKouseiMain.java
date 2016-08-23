@@ -112,6 +112,7 @@ public class SokujiFukaKouseiMain {
         KoseiZengoChoshuHoho 更正前後徴収方法 = null;
         NendobunFukaList 更正前賦課リスト = null;
         NendobunFukaList 更正後賦課リスト = null;
+        TsuchishoNo 通知書番号選択 = 通知書番号;
         boolean is本算定処理済フラグ;
         if (is特殊処理()) {
             NendobunFukaList 年度分賦課リスト = get年度分賦課リスト(賦課年度, 通知書番号);
@@ -139,6 +140,7 @@ public class SokujiFukaKouseiMain {
             if (!is更正前と状態変更なし && !更正前後賦課のリスト.isEmpty()) {
                 更正前賦課リスト = 更正前後賦課のリスト.get(0).get更正前();
                 更正後賦課リスト = 更正前後賦課のリスト.get(0).get更正後();
+                通知書番号選択 = 更正後賦課リスト.get通知書番号();
             } else if (is更正前と状態変更なし && 更正前後賦課 != null) {
                 更正前賦課リスト = 更正前後賦課.get更正前();
                 更正後賦課リスト = 更正前後賦課.get更正後();
@@ -149,7 +151,7 @@ public class SokujiFukaKouseiMain {
                 更正後賦課リスト = new NendobunFukaList();
             }
         }
-        handler.initializeヘッダエリア(is特殊処理(), 賦課年度, 更正前後賦課のリスト, 通知書番号, 更正前後徴収方法);
+        handler.initializeヘッダエリア(is特殊処理(), 賦課年度, 更正前後賦課のリスト, 通知書番号選択, 更正前後徴収方法);
         handler.initialize更正前後データ(is特殊処理(), 更正前賦課リスト, 更正後賦課リスト, 更正前後徴収方法, is本算定処理済フラグ);
         ViewStateHolder.put(ViewStateKeys.更正前, 更正前賦課リスト);
         ViewStateHolder.put(ViewStateKeys.更正後, 更正後賦課リスト);
