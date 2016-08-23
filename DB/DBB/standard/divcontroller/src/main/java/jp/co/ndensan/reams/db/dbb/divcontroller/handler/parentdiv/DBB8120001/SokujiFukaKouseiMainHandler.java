@@ -1192,6 +1192,8 @@ public class SokujiFukaKouseiMainHandler {
         if (!更正後賦課リスト.isHas過年度賦課()) {
             div.getDgFuchoKanendo().setDisplayNone(true);
             return;
+        } else {
+            div.getDgFuchoKanendo().setDisplayNone(false);
         }
         KanendoKiUtil 月期対応取得_過年度 = new KanendoKiUtil();
         KitsukiList 期月リスト = 月期対応取得_過年度.get期月リスト();
@@ -1381,6 +1383,7 @@ public class SokujiFukaKouseiMainHandler {
     private void set過年度の徴収DateGrid(FlexibleYear 賦課年度, FlexibleYear 調定年度, FukaJoho 更正前過年度,
             FukaJoho 更正後過年度, KitsukiList 期月リスト) {
         FukaNokiResearcher researcher = FukaNokiResearcher.createInstance();
+        div.getDgFuchoKanendo().getDataSource().clear();
         for (Kitsuki kitsuki : 期月リスト.toList()) {
             dgFuchoKanendo_Row row = new dgFuchoKanendo_Row();
             row.getChoteiNendo().setValue(new FlexibleDate(賦課年度.toDateString().concat(一月一日)));
