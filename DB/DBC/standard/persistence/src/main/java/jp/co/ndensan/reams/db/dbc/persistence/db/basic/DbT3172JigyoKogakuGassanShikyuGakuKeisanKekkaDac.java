@@ -130,7 +130,8 @@ public class DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaDac {
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(taishoNendo, 対象年度),
                                 eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                                eq(shikyuShinseishoSeiriNo, 支給申請書整理番号))).
+                                eq(shikyuShinseishoSeiriNo, 支給申請書整理番号),
+                                eq(isDeleted, false))).
                 order(by(taishoNendo, Order.DESC), by(shikyuShinseishoSeiriNo, Order.DESC), by(rirekiNo, Order.DESC)).
                 toList(DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity.class);
     }
