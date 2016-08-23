@@ -33,7 +33,6 @@ public class ServiceJokyoTempTableSakuseiProcess extends BatchKeyBreakBase<DbT52
     private CenterTransmissionMybitisParamter mybitisParamter;
     private ICenterTransmissionMapper mapper;
     private NinteichosahyoServiceJokyoTempEntity tempEntity;
-    private ServiceJokyoTempTableEditorEntity editorEntity;
     private List<RString> 申請書管理番号リスト;
     private boolean isデータあり;
 
