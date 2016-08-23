@@ -119,18 +119,23 @@ public class HihokenshashikakusoshitsuManager {
      *
      * @param 識別コード 識別コード
      * @param 被保険者番号 被保険者番号
+     * @param 適用年月日 適用年月日
+     * @return 
      */
-    public boolean shikakuSoshitsuCheck(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+    public boolean shikakuSoshitsuCheck(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 適用年月日) {
         HihokenshaShikakuShutokuManager manager = HihokenshaShikakuShutokuManager.createInstance();
         HihokenshaShutokuJyoho hihokenshaShutokuJyoho = manager.getSaishinDeta(識別コード, 被保険者番号);
         if (hihokenshaShutokuJyoho != null) {
             FlexibleDate 資格取得年月日 = hihokenshaShutokuJyoho.get資格取得年月日();
             FlexibleDate 資格喪失年月日 = hihokenshaShutokuJyoho.get資格喪失年月日();
             if ((資格喪失年月日 != null && !資格喪失年月日.isEmpty())) {
-                解除期間情報の判定(hihokenshaShutokuJyoho);
+                boolean kekaCheck = 解除期間情報の判定(hihokenshaShutokuJyoho, 適用年月日);
+               if (!kekaCheck) {
+                   return(false);
+               }
             }
             if ((資格喪失年月日 == null || 資格喪失年月日.isEmpty())) {
-                解除期間情報の再判定(hihokenshaShutokuJyoho);
+                解除期間情報の再判定(hihokenshaShutokuJyoho, 適用年月日);
             }
             if ((資格取得年月日 != null && !資格取得年月日.isEmpty()) && (資格喪失年月日 != null && !資格喪失年月日.isEmpty())) {
                 throw new ApplicationException(DbaErrorMessages.資格喪失登録不可.getMessage());
@@ -142,24 +147,23 @@ public class HihokenshashikakusoshitsuManager {
         }
     }
 
-    private void 解除期間情報の判定(HihokenshaShutokuJyoho hihokenshaShutokuJyoho) {
-        FlexibleDate 適用年月日 = hihokenshaShutokuJyoho.get適用年月日();
-        FlexibleDate 資格喪失日 = hihokenshaShutokuJyoho.get資格喪失年月日();
-        if ((適用年月日 != null && !適用年月日.isEmpty())) {
-            if ((資格喪失日.compareTo(適用年月日))>0) {
-            throw new ApplicationException(DbzErrorMessages.他の期間情報との期間重複.getMessage());
-            }
-        }
+        private boolean 解除期間情報の判定(HihokenshaShutokuJyoho hihokenshaShutokuJyoho, FlexibleDate 適用年月日) {
+            FlexibleDate 資格喪失日 = hihokenshaShutokuJyoho.get資格喪失年月日();
+            boolean 結果 = true;
+                if ((資格喪失日.compareTo(適用年月日))>0) {
+                throw new ApplicationException(DbzErrorMessages.他の期間情報との期間重複.getMessage());
+                }
+                 if ((資格喪失日.compareTo(適用年月日))<=0) {
+                     結果 = false;
+                 }
+           return(結果);
     }
   
-    private void 解除期間情報の再判定(HihokenshaShutokuJyoho hihokenshaShutokuJyoho) {
-        FlexibleDate 適用年月日 = hihokenshaShutokuJyoho.get適用年月日();
+    private void 解除期間情報の再判定(HihokenshaShutokuJyoho hihokenshaShutokuJyoho, FlexibleDate 適用年月日) {
             FlexibleDate 資格取得年月日 = hihokenshaShutokuJyoho.get資格取得年月日();
-        if ((適用年月日 != null && !適用年月日.isEmpty())) {
             if ((資格取得年月日.compareTo(適用年月日))>0) {
             throw new ApplicationException(DbzErrorMessages.他の期間情報との期間重複.getMessage());
             }
-        }
     }
 
     private void 年齢到達取得異動未登録Check(ShikibetsuCode 識別コード, FlexibleDate 喪失年月日, IDateOfBirth 当該識別対象の生年月日,
@@ -181,5 +185,11 @@ public class HihokenshashikakusoshitsuManager {
         SikakuIdoCheckManager sikakuIdoCheckManager = SikakuIdoCheckManager.createInstance();
         sikakuIdoCheckManager.sikakuKikanRirekiChofukuCheck(sikakuKikanList);
         sikakuIdoCheckManager.tokusouTanoKikanChofukuCheck(tokusoRirekiList, 識別コード);
+    }
+
+    private static class TekiyoYMD {
+
+        public TekiyoYMD() {
+        }
     }
 }

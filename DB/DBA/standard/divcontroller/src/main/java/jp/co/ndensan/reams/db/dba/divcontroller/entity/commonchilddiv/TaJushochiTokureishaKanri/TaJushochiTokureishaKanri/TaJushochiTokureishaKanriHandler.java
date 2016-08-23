@@ -545,8 +545,10 @@ public class TaJushochiTokureishaKanriHandler {
      * 他住所地特例者の共有子DIVの画面内容から、他市町村住所地特例情報をDBに反映します。
      *
      * @param 識別コード 識別コード
+     * @return 
      */
-    public void saveTaJushochiTokurei(ShikibetsuCode 識別コード) {
+    public boolean saveTaJushochiTokurei(ShikibetsuCode 識別コード) {
+        boolean 登録結果 = true;
         List<dgJushochiTokureiRireki_Row> rowList = div.getDgJushochiTokureiRireki().getDataSource();
         Models<TashichosonJushochiTokureiIdentifier, TashichosonJushochiTokurei> 他住所地特例Model
                 = ViewStateHolder.get(ViewStateKeys.他住所地特例, Models.class);
@@ -578,8 +580,10 @@ public class TaJushochiTokureishaKanriHandler {
                             createBuilderForEdit().set論理削除フラグ(true).build().toEntity());
                 }
             } else if (適用モード.equals(new RString(div.getMode_DisplayMode().toString()))) {
-                boolean shikakuSoshitsuCheck = HihokenshashikakusoshitsuManager.createInstance().shikakuSoshitsuCheck(識別コード, HihokenshaNo.EMPTY);
+                FlexibleDate 適用年月日 = new FlexibleDate(rowList.get(0).getTekiyoYMD().getValue().toString());
+                boolean shikakuSoshitsuCheck = HihokenshashikakusoshitsuManager.createInstance().shikakuSoshitsuCheck(識別コード, HihokenshaNo.EMPTY, 適用年月日);
                 if (!shikakuSoshitsuCheck) {
+                    登録結果 = false;
                     break;
                 } 
                 FlexibleDate 適用届出年月日 = FlexibleDate.EMPTY;
@@ -639,6 +643,7 @@ public class TaJushochiTokureishaKanriHandler {
                 }
             }
         }
+        return(登録結果);
     }
 
     /**
