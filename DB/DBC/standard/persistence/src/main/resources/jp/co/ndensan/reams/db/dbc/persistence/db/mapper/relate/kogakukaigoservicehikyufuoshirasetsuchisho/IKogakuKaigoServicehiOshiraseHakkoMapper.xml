@@ -363,6 +363,15 @@
         (<include refid="newest_DbT4001JukyushaDaicho" />) as jukyushaDaicho
         ON "ShinseiJohoTemp"."shichosonCodeJoho" = jukyushaDaicho."shichosonCode"
         AND "ShinseiJohoTemp"."hihokenshaNoJoho" = jukyushaDaicho."hihokenshaNo"
+        ORDER BY 
+        "ShinseiJohoTemp"."hihokenshaNoJoho",
+        "ShinseiJohoTemp"."serviceTeikyoYMJoho",
+        "ShinseiJohoTemp"."shoKisaiHokenshaNoJoho",
+        "ShinseiJohoTemp"."rirekiNoJoho",
+        jukyushaDaicho."shichosonCode",
+        jukyushaDaicho."hihokenshaNo",
+        jukyushaDaicho."rirekiNo",
+        jukyushaDaicho."edaban"
     </select>
     <resultMap id="result_高額介護申請管理マスタ" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.KogakuKaigoServiceHiRelateEntity" autoMapping="true">
         <id column="dbT3056KogakuShikyuShinsei_hihokenshaNo" />
