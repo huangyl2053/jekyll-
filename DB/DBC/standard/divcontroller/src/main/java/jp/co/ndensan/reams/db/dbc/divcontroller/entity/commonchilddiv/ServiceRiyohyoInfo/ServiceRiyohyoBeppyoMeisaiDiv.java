@@ -4,13 +4,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * ServiceRiyohyoBeppyoMeisai のクラスファイル
@@ -18,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @reamsid_L DBC-1930-050 cuilin
  */
 public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -44,6 +40,10 @@ public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
     private TextBoxNum txtRiyoushaFutangaku;
     @JsonProperty("txtTeigakuRiyoushaFutangaku")
     private TextBoxNum txtTeigakuRiyoushaFutangaku;
+    @JsonProperty("txtHdnGendogakuTaishogaiFlg")
+    private TextBox txtHdnGendogakuTaishogaiFlg;
+    @JsonProperty("txtHdnRiyoshaFutanTeiritsuTeigakuKbn")
+    private TextBox txtHdnRiyoshaFutanTeiritsuTeigakuKbn;
     @JsonProperty("ServiceRiyohyoBeppyoMeisaiFooter")
     private ServiceRiyohyoBeppyoMeisaiFooterDiv ServiceRiyohyoBeppyoMeisaiFooter;
 
@@ -216,6 +216,42 @@ public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
     }
 
     /*
+     * gettxtHdnGendogakuTaishogaiFlg
+     * @return txtHdnGendogakuTaishogaiFlg
+     */
+    @JsonProperty("txtHdnGendogakuTaishogaiFlg")
+    public TextBox getTxtHdnGendogakuTaishogaiFlg() {
+        return txtHdnGendogakuTaishogaiFlg;
+    }
+
+    /*
+     * settxtHdnGendogakuTaishogaiFlg
+     * @param txtHdnGendogakuTaishogaiFlg txtHdnGendogakuTaishogaiFlg
+     */
+    @JsonProperty("txtHdnGendogakuTaishogaiFlg")
+    public void setTxtHdnGendogakuTaishogaiFlg(TextBox txtHdnGendogakuTaishogaiFlg) {
+        this.txtHdnGendogakuTaishogaiFlg = txtHdnGendogakuTaishogaiFlg;
+    }
+
+    /*
+     * gettxtHdnRiyoshaFutanTeiritsuTeigakuKbn
+     * @return txtHdnRiyoshaFutanTeiritsuTeigakuKbn
+     */
+    @JsonProperty("txtHdnRiyoshaFutanTeiritsuTeigakuKbn")
+    public TextBox getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn() {
+        return txtHdnRiyoshaFutanTeiritsuTeigakuKbn;
+    }
+
+    /*
+     * settxtHdnRiyoshaFutanTeiritsuTeigakuKbn
+     * @param txtHdnRiyoshaFutanTeiritsuTeigakuKbn txtHdnRiyoshaFutanTeiritsuTeigakuKbn
+     */
+    @JsonProperty("txtHdnRiyoshaFutanTeiritsuTeigakuKbn")
+    public void setTxtHdnRiyoshaFutanTeiritsuTeigakuKbn(TextBox txtHdnRiyoshaFutanTeiritsuTeigakuKbn) {
+        this.txtHdnRiyoshaFutanTeiritsuTeigakuKbn = txtHdnRiyoshaFutanTeiritsuTeigakuKbn;
+    }
+
+    /*
      * getServiceRiyohyoBeppyoMeisaiFooter
      * @return ServiceRiyohyoBeppyoMeisaiFooter
      */
@@ -242,7 +278,7 @@ public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnBeppyoMeisaiKakutei(Button btnBeppyoMeisaiKakutei) {
+    public void  setBtnBeppyoMeisaiKakutei(Button btnBeppyoMeisaiKakutei) {
         this.getServiceRiyohyoBeppyoMeisaiFooter().setBtnBeppyoMeisaiKakutei(btnBeppyoMeisaiKakutei);
     }
 
@@ -252,7 +288,7 @@ public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnCalcMeisaiGokei(Button btnCalcMeisaiGokei) {
+    public void  setBtnCalcMeisaiGokei(Button btnCalcMeisaiGokei) {
         this.getServiceRiyohyoBeppyoMeisaiFooter().setBtnCalcMeisaiGokei(btnCalcMeisaiGokei);
     }
 
@@ -262,7 +298,7 @@ public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnCancelMeisaiInput(Button btnCancelMeisaiInput) {
+    public void  setBtnCancelMeisaiInput(Button btnCancelMeisaiInput) {
         this.getServiceRiyohyoBeppyoMeisaiFooter().setBtnCancelMeisaiInput(btnCancelMeisaiInput);
     }
 
@@ -272,7 +308,7 @@ public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnCalcMeisai(Button btnCalcMeisai) {
+    public void  setBtnCalcMeisai(Button btnCalcMeisai) {
         this.getServiceRiyohyoBeppyoMeisaiFooter().setBtnCalcMeisai(btnCalcMeisai);
     }
 
