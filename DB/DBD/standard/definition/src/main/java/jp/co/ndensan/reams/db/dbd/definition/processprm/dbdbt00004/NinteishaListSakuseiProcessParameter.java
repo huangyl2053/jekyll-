@@ -44,22 +44,22 @@ public class NinteishaListSakuseiProcessParameter implements IBatchProcessParame
     /**
      * パラメターを返却します．
      *
-     * @param 対象リスト
-     * @param 対象期間指定
-     * @param 対象年度の開始年月日
-     * @param 対象年度の終了年月日
-     * @param 旧措置者区分
-     * @param 世帯表示
-     * @param 所得年度
-     * @param 基準日
-     * @param 課税判定等基準日
-     * @param 受給者区分
-     * @param 世帯非課税等
-     * @param 抽出対象
-     * @param CSV出力設定
-     * @param 改頁出力順ID
-     * @param 帳票ID
-     * @param 帳票作成日時
+     * @param 対象リスト 対象リスト
+     * @param 対象期間指定 対象期間指定
+     * @param 対象年度の開始年月日 対象年度の開始年月日
+     * @param 対象年度の終了年月日 対象年度の終了年月日
+     * @param 旧措置者区分 旧措置者区分
+     * @param 世帯表示 世帯表示
+     * @param 所得年度 所得年度
+     * @param 基準日 基準日
+     * @param 課税判定等基準日 課税判定等基準日
+     * @param 受給者区分 受給者区分
+     * @param 世帯非課税等 世帯非課税等
+     * @param 抽出対象 抽出対象
+     * @param CSV出力設定 CSV出力設定
+     * @param 改頁出力順ID 改頁出力順ID
+     * @param 帳票ID 帳票ID
+     * @param 帳票作成日時 帳票作成日時
      */
     public NinteishaListSakuseiProcessParameter(
             RString 対象リスト,

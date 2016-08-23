@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
+import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.ur.urc.service.core.noki.nokikanri.NokiManager;
@@ -86,9 +87,21 @@ public class ShinNendoKanriJohoSakuseiManager {
             requireNonNull(resultList, UrSystemErrorMessages.値がnull.getReplacedMessage("resultList"));
         }
         NokiManager 納期管理 = new NokiManager();
-        納期管理.create翌年度納期(ShunoKamokuShubetsu.介護保険料_特別徴収, new RYear(本年度.toString()), GennenKanen.現年度);
-        納期管理.create翌年度納期(ShunoKamokuShubetsu.介護保険料_普通徴収, new RYear(本年度.toString()), GennenKanen.現年度);
-        納期管理.create翌年度納期(ShunoKamokuShubetsu.介護保険料_普通徴収, new RYear(本年度.toString()), GennenKanen.過年度);
+        List<Noki> list = 納期管理.create翌年度納期(ShunoKamokuShubetsu.介護保険料_特別徴収,
+                new RYear(本年度.toString()), GennenKanen.現年度);
+        List<Noki> list現年度 = 納期管理.create翌年度納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
+                new RYear(本年度.toString()), GennenKanen.現年度);
+        List<Noki> list過年度 = 納期管理.create翌年度納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
+                new RYear(本年度.toString()), GennenKanen.過年度);
+        for (Noki item : list) {
+            納期管理.save納期(item);
+        }
+        for (Noki item : list現年度) {
+            納期管理.save納期(item);
+        }
+        for (Noki item : list過年度) {
+            納期管理.save納期(item);
+        }
     }
 
 }
