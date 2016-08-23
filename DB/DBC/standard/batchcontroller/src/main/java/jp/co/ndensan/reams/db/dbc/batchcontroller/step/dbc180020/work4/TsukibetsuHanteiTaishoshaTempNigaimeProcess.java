@@ -23,7 +23,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 
 /**
  * TsukibetsuHanteiTaishoshaTempNigaimeProcessのクラスです。
@@ -65,6 +67,10 @@ public class TsukibetsuHanteiTaishoshaTempNigaimeProcess extends BatchProcessBas
         SetaiCode setaiCode = 宛名 == null ? null : 宛名.getSetaiCode();
         HanteiTaishoshaTempEntity insertEntity = new HanteiTaishoshaTempEntity();
         insertEntity.setHihokenshaNo(entity.get被保険者番号());
+        RYear taishoNendo = parameter.getTaishoNendo();
+        insertEntity.setTaishoNendo(taishoNendo == null ? null : new FlexibleYear(taishoNendo.toDateString()));
+        RString taishoTsuki = parameter.getTaishoGetsu().get(parameter.getIndex());
+        insertEntity.setTaishoTsuki(taishoTsuki);
         if (被保険者台帳 != null) {
             insertEntity.setShikibetsuCode(被保険者台帳.getShikibetsuCode());
             insertEntity.setIdobi(被保険者台帳.getIdoYMD());
