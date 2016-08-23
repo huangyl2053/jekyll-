@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010015.dgTo
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -47,10 +48,8 @@ public class TokuteiShinryohiInfoPanelHandler {
     private final RString 公費３ = new RString("公費３");
     private static final RString ZERO = new RString("0");
     private static final RString NI = new RString("2");
-    private static final int ZERO_INT = 0;
     private static final FlexibleYearMonth 平成24年4月 = new FlexibleYearMonth("201204");
     private static final int INT_1 = 1;
-    private static final int INT_12 = 12;
     private final RString 前月 = new RString("前月");
     private final RString 前事業者 = new RString("前事業者");
 
@@ -423,22 +422,18 @@ public class TokuteiShinryohiInfoPanelHandler {
     }
 
     /**
-     *
      * change事業者です
      *
      * @param 事業者 事業者
+     * @param 事業者番号リスト 事業者番号リスト
+     * @param 事業所番号 事業所番号
      */
-    public void change事業者(RString 事業者) {
-        List<KyufuJissekiHedajyoho2> 事業者番号リスト
-                = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
-                .getCommonHeader().get給付実績ヘッダ情報2();
-        RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
-                .getCommonHeader().get給付実績ヘッダ情報2().get(ZERO_INT).get事業者名称();
+    public void change事業者(RString 事業者, List<KyufuJissekiHedajyoho2> 事業者番号リスト, JigyoshaNo 事業所番号) {
         RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
         RDate サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
-        RString 样式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
+        RString 識別番号 = div.getCcdKyufuJissekiHeader().get様式番号();
         RString 実績区分 = div.getCcdKyufuJissekiHeader().get実績区分コード();
-        int index = get事業者番号index(事業者番号リスト, サービス提供年月, 整理番号, 事業者番号, 样式番号, 実績区分);
+        int index = get事業者番号index(事業者番号リスト, サービス提供年月, 整理番号, 事業所番号, 識別番号, 実績区分);
         int i;
         if (前事業者.equals(事業者)) {
             i = -1;
@@ -470,25 +465,32 @@ public class TokuteiShinryohiInfoPanelHandler {
      * @param 事業者番号リスト 事業者番号リスト
      * @param サービス提供年月 サービス提供年月
      * @param 整理番号 整理番号
-     * @param 事業者番号 事業者番号
-     * @param 样式番号 样式番号
+     * @param 事業所番号 事業所番号
+     * @param 識別番号 識別番号
      * @param 実績区分 実績区分
      * @return int
      */
-    public int get事業者番号index(List<KyufuJissekiHedajyoho2> 事業者番号リスト, RDate サービス提供年月, RString 整理番号, RString 事業者番号, RString 样式番号, RString 実績区分) {
+    public int get事業者番号index(List<KyufuJissekiHedajyoho2> 事業者番号リスト, RDate サービス提供年月, RString 整理番号, JigyoshaNo 事業所番号, RString 識別番号, RString 実績区分) {
+        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString());
         for (int index = 0; index < 事業者番号リスト.size(); index++) {
-            if (事業者番号リスト.get(index).get事業者名称().compareTo(事業者番号) == 0 && 整理番号.equals(事業者番号リスト.get(index).get整理番号())
-                    && 事業者番号.equals(事業者番号リスト.get(index).get事業者名称()) && 样式番号.equals(事業者番号リスト.get(index).get識別番号名称())
+            if (サービス年月.equals(事業者番号リスト.get(index).getサービス提供年月())
+                    && 整理番号.equals(事業者番号リスト.get(index).get整理番号())
+                    && 事業所番号.equals(事業者番号リスト.get(index).get事業所番号())
+                    && 識別番号.equals(事業者番号リスト.get(index).get識別番号())
                     && 実績区分.equals(事業者番号リスト.get(index).get給付実績区分コード())) {
                 return index;
             }
-            if (事業者番号リスト.get(index + 1).get事業者名称().compareTo(事業者番号) == 0 && 整理番号.equals(事業者番号リスト.get(index + 1).get整理番号())
-                    && 事業者番号.equals(事業者番号リスト.get(index + 1).get事業者名称()) && 样式番号.equals(事業者番号リスト.get(index + 1).get識別番号名称())
+            if (サービス年月.equals(事業者番号リスト.get(index + 1).getサービス提供年月())
+                    && 整理番号.equals(事業者番号リスト.get(index + 1).get整理番号())
+                    && 事業所番号.equals(事業者番号リスト.get(index + 1).get事業所番号())
+                    && 識別番号.equals(事業者番号リスト.get(index + 1).get識別番号())
                     && 実績区分.equals(事業者番号リスト.get(index + 1).get給付実績区分コード())) {
                 div.getKyufuJisseki().getBtnAtoJigyosha().setDisabled(false);
             }
-            if (事業者番号リスト.get(index - 1).get事業者名称().compareTo(事業者番号) == 0 && 整理番号.equals(事業者番号リスト.get(index - 1).get整理番号())
-                    && 事業者番号.equals(事業者番号リスト.get(index - 1).get事業者名称()) && 样式番号.equals(事業者番号リスト.get(index).get識別番号名称())
+            if (サービス年月.equals(事業者番号リスト.get(index + 1).getサービス提供年月())
+                    && 整理番号.equals(事業者番号リスト.get(index - 1).get整理番号())
+                    && 事業所番号.equals(事業者番号リスト.get(index - 1).get事業所番号())
+                    && 識別番号.equals(事業者番号リスト.get(index).get識別番号())
                     && 実績区分.equals(事業者番号リスト.get(index - 1).get給付実績区分コード())) {
                 div.getKyufuJisseki().getBtnMaeJigyosha().setDisabled(false);
             }
