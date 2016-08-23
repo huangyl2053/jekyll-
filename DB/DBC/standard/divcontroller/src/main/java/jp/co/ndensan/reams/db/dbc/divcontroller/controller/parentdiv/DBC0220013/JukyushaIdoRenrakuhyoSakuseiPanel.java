@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 画面設計_DBCMN83001_受給者異動連絡票作成です
  *
- * @reamsid_L DBC-2102-010 quxiaodong
+ * @reamsid_L DBC-2102-010 lihang
  */
 public class JukyushaIdoRenrakuhyoSakuseiPanel {
 

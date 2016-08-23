@@ -33,7 +33,6 @@ public class ZenkaiServiceJokyoTempTableSakuseiProcess extends BatchKeyBreakBase
     private CenterTransmissionMybitisParamter mybitisParamter;
     private ICenterTransmissionMapper mapper;
     private ZenkaiChosahyoServiceJokyoTempEntity tempEntity;
-    private ZenkaiServiceJokyoTempTableEditorEntity editorEntity;
     private List<RString> 申請書管理番号リスト;
     private boolean isデータあり;
 
@@ -78,8 +77,7 @@ public class ZenkaiServiceJokyoTempTableSakuseiProcess extends BatchKeyBreakBase
         tempEntity.setShinseishoKanriNo(entity.getShinseishoKanriNo());
         tempEntity.setKoroshoIfShikibetsuCode(entity.getKoroshoIfShikibetsuCode());
         tempEntity.setZenkaiShinseishoKanriNo(entity.getZenkaiShinseishoKanriNo());
-        editorEntity = new ZenkaiServiceJokyoTempTableEditorEntity(tempEntity);
-        editorEntity.set前回サービスの状況(entity);
+        new ZenkaiServiceJokyoTempTableEditorEntity(tempEntity).set前回サービスの状況(entity);
     }
 
     @Override

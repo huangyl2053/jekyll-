@@ -364,6 +364,7 @@
     </resultMap>
     
     <resultMap id="ResultMap_KyufukanrihyoJigyoshaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoin.KyufukanrihyoJigyoshaEntity" autoMapping="true">
+        <id column="DbWT1121_renban" />
         <result property="事業者名称" column="DbT7063_jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="給付管理票" resultMap="ResultMap_DbWT1121KyufuKanrihyoTempEntity"/>
     </resultMap>
