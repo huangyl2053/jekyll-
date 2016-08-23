@@ -38,7 +38,7 @@ public class KagoMoshitatePanelHandler {
     /**
      * 給付管理明細一覧を設置します。
      *
-     * @param 居宅サービスフラグ
+     * @param 居宅サービスフラグ 居宅サービスフラグ
      * @param 給付管理明細一覧 給付管理明細一覧
      */
     public void set給付管理明細一覧(boolean 居宅サービスフラグ, List<KyufuKanrihyoShokaiDataModel> 給付管理明細一覧) {

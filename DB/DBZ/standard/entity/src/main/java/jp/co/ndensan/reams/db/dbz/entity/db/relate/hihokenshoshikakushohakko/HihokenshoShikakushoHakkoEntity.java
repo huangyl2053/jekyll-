@@ -71,5 +71,6 @@ public class HihokenshoShikakushoHakkoEntity implements IDbAccessable {
     private RString 入所施設種類３;
     private FlexibleDate 入所年月日３;
     private FlexibleDate 退所年月日３;
+    private FlexibleDate チェックリスト実施日;
 
 }

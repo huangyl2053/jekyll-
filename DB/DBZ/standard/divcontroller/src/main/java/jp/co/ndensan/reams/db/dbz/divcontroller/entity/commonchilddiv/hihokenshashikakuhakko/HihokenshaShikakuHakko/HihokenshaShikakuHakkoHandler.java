@@ -7,12 +7,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokensh
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokenshoshikakushohakko.ServiceTypeListEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.hihokenshashoshikakushohakko.HihokenshashoShikakushoHakkoFinder;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -33,8 +33,6 @@ public class HihokenshaShikakuHakkoHandler {
     private final HihokenshaShikakuHakkoDiv div;
     private static final RString MENUID_DBUMN12001 = new RString("DBUMN12001");
     private static final RString MENUID_DBUMN12002 = new RString("DBUMN12002");
-    private static final RString CODESHUBETSU_被保険者証交付事由 = new RString("0002");
-    private static final RString CODESHUBETSU_資格者証交付事由 = new RString("0004");
 
     /**
      * コンストラクタです。
@@ -49,13 +47,14 @@ public class HihokenshaShikakuHakkoHandler {
      * 共有子Divの状態を初期化します。
      *
      * @param 被保険者番号 被保険者番号
-     * @param メニューID
+     * @param メニューID RString
      * @param 識別コード ShikibetsuCode
+     * @param 履歴区分 RString
      */
-    public void initialize(HihokenshaNo 被保険者番号, RString メニューID, ShikibetsuCode 識別コード) {
+    public void initialize(HihokenshaNo 被保険者番号, RString メニューID, ShikibetsuCode 識別コード, RString 履歴区分) {
 
         HihokenshashoShikakushoHakkoFinder finder = HihokenshashoShikakushoHakkoFinder.createInstance();
-        HihokenshoShikakushoHakkoEntity entity = finder.被保険者証資格証発行情報取得(被保険者番号, メニューID, 識別コード);
+        HihokenshoShikakushoHakkoEntity entity = finder.被保険者証資格証発行情報取得(被保険者番号, メニューID, 識別コード, 履歴区分);
 
         if (null == entity) {
             entity = new HihokenshoShikakushoHakkoEntity();
@@ -78,12 +77,12 @@ public class HihokenshaShikakuHakkoHandler {
         if (MENUID_DBUMN12001.equals(メニューID)) {
             交付事由List = CodeMaster.getCode(
                     SubGyomuCode.DBA介護資格,
-                    new CodeShubetsu(CODESHUBETSU_被保険者証交付事由.toString()),
+                    DBACodeShubetsu.被保険者証交付事由.getコード(),
                     new FlexibleDate(RDate.getNowDate().toDateString()));
         } else if (MENUID_DBUMN12002.equals(メニューID)) {
             交付事由List = CodeMaster.getCode(
                     SubGyomuCode.DBA介護資格,
-                    new CodeShubetsu(CODESHUBETSU_資格者証交付事由.toString()),
+                    DBACodeShubetsu.資格者証交付事由.getコード(),
                     new FlexibleDate(RDate.getNowDate().toDateString()));
         }
 

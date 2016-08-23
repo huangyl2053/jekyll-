@@ -87,7 +87,7 @@ public enum TaishoShoriSpec implements IPredicate<TaishoShoriPanelDiv> {
                         return false;
                     }
                     RString 提出元ID = line.substring(0, 5);
-                    return div.getDdlShichosonshitei().getSelectedKey().equals(提出元ID);
+                    return div.getDdlShichosonshitei().getSelectedKey().substring(0, 5).equals(提出元ID);
                 }
             },
     /**

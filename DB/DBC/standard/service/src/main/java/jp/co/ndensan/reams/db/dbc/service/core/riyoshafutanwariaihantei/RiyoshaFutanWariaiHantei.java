@@ -529,17 +529,15 @@ public class RiyoshaFutanWariaiHantei {
             }
         }
         RiyoshaFutanWariaiMeisaiTempEntity before = null;
-        RString 前負担割合区分 = null;
+        RString 前負担割合区分;
         RString 現負担割合区分;
         RString 現判定区分;
-        RString 前判定区分 = null;
+        RString 前判定区分;
         int edaNo = 1;
         for (RiyoshaFutanWariaiMeisaiTempEntity now : result) {
             if (before == null) {
                 before = now;
                 before.setEdaNo(edaNo);
-                前負担割合区分 = before.getFutanWariaiKubun();
-                前判定区分 = before.getHanteiKubun();
                 continue;
             }
             if (!nonullRStr(before.getHihokenshaNo()).equals(nonullRStr(now.getHihokenshaNo()))) {
@@ -552,7 +550,9 @@ public class RiyoshaFutanWariaiHantei {
             edaNo++;
             now.setEdaNo(edaNo);
             before.setYukoShuryoYMD(now.getYukoKaishiYMD().minusDay(1));
+            前負担割合区分 = before.getFutanWariaiKubun();
             現負担割合区分 = now.getFutanWariaiKubun();
+            前判定区分 = before.getHanteiKubun();
             現判定区分 = now.getHanteiKubun();
             if (!equalsRString(現負担割合区分, 前負担割合区分)) {
                 負担割合判定マージ処理(前判定区分, 現判定区分, now, 対象年度, before);
@@ -560,6 +560,7 @@ public class RiyoshaFutanWariaiHantei {
                 now.setKoseiJiyu(before.getKoseiJiyu());
                 now.setYukoKaishiYMD(before.getYukoKaishiYMD());
             }
+            before = now;
         }
         result.get(result.size() - 1).setYukoShuryoYMD(new FlexibleDate(対象年度.getYearValue() + 1, NUM七月, NUM三十一日));
         return result;
@@ -576,9 +577,9 @@ public class RiyoshaFutanWariaiHantei {
         if (HanteiKubunType.生活保護.code().equals(現判定区分)
                 && HanteiKubunType.負担割合判定.code().equals(前判定区分)) {
             now.setKoseiJiyu(KoseiJiyuType.その他.getコード());
-            FlexibleDate yukoKaishiDate = now.getNinteiYukoKaishiDate();
-            if (yukoKaishiDate != null) {
-                now.setYukoKaishiYMD(new FlexibleDate(yukoKaishiDate.getYearValue(), yukoKaishiDate.getMonthValue(), 1));
+            FlexibleDate jukyuKaishiYMD = now.getJukyuKaishiYMD();
+            if (jukyuKaishiYMD != null) {
+                now.setYukoKaishiYMD(new FlexibleDate(jukyuKaishiYMD.getYearValue(), jukyuKaishiYMD.getMonthValue(), 1));
             }
         }
         if (HanteiKubunType.非課税.code().equals(現判定区分)

@@ -11,7 +11,7 @@ import lombok.Setter;
 /**
  * 介護給付費等審査決定請求明細表のパラメータクラスです。
  *
- * @reamsid_L DBC-2500-030 jiangxiaolong
+ * @reamsid_L DBC-2500-010 jiangxiaolong
  */
 @Getter
 @Setter

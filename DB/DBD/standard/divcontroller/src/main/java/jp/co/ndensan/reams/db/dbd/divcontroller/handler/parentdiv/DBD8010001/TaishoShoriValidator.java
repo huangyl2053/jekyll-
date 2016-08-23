@@ -35,11 +35,7 @@ public class TaishoShoriValidator implements IValidatable {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div)
                 .ifNot(TaishoShoriSpec.編集なしチェック)
-                .thenAdd(TaishoShoriValidationMessage.市町村コードチェック)
-                .ifNot(TaishoShoriSpec.処理状態チェック_処理済)
-                .thenAdd(TaishoShoriValidationMessage.市町村コードチェック)
-                .ifNot(TaishoShoriSpec.処理状態チェック_処理なし)
-                .thenAdd(TaishoShoriValidationMessage.市町村コードチェック)
+                .thenAdd(TaishoShoriValidationMessage.編集なしチェック)
                 .messages());
         return messages;
     }
@@ -72,6 +68,10 @@ public class TaishoShoriValidator implements IValidatable {
         messages.add(ValidateChain.validateStart(div)
                 .ifNot(TaishoShoriSpec.アップロードファイル未指定チェック)
                 .thenAdd(TaishoShoriValidationMessage.アップロードファイル未指定チェック)
+                .ifNot(TaishoShoriSpec.処理状態チェック_処理済)
+                .thenAdd(TaishoShoriValidationMessage.処理状態チェック_処理済)
+                .ifNot(TaishoShoriSpec.処理状態チェック_処理なし)
+                .thenAdd(TaishoShoriValidationMessage.処理状態チェック_処理なし)
                 .messages());
         return messages;
     }

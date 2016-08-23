@@ -98,7 +98,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
             List<KeyValueDataSource> datasource = new ArrayList<>();
             datasource.add(new KeyValueDataSource(SHINSEIKEY, 高額介護サービス費支給申請書を発行する));
             datasource.add(new KeyValueDataSource(OSHIRASEKEY, 高額介護サービス費給付お知らせ通知を発行する));
-            div.getShutsuryokuTaisho().getChkShutsuryokuTaisho().setSelectedItems(datasource);
+            div.getShutsuryokuTaisho().getChkShutsuryokuTaisho().setDataSource(datasource);
             div.getShutsuryokuTaisho().getCcdBunshoNo().initialize(ReportIdDBC.DBC100011.getReportId());
         } else if (メニューID_DBCMNL3001.equals(menuID)) {
             RString 区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額, nowdate,
@@ -118,7 +118,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
             List<KeyValueDataSource> datasource = new ArrayList<>();
             datasource.add(new KeyValueDataSource(SHINSEIKEY, 事業高額介護サービス費支給申請書を発行する));
             datasource.add(new KeyValueDataSource(OSHIRASEKEY, 事業高額介護サービス費給付お知らせ通知を発行する));
-            div.getShutsuryokuTaisho().getChkShutsuryokuTaisho().setSelectedItems(datasource);
+            div.getShutsuryokuTaisho().getChkShutsuryokuTaisho().setDataSource(datasource);
             div.getShutsuryokuTaisho().getCcdBunshoNo().initialize(ReportIdDBC.DBC100072.getReportId());
         }
 

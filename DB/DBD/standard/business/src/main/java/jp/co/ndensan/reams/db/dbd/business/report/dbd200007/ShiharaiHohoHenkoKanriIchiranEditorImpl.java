@@ -71,6 +71,7 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
     private static final int 行数15 = 15;
     private static final int 行数16 = 16;
     private static final int 行数17 = 17;
+    private static final int NUM15 = 15;
     private static final int NUM19 = 19;
     private static final int NUM20 = 20;
 
@@ -363,34 +364,32 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
     }
 
     private ShiharaiHohoHenkoKanriIchiranReportSource edit上部の収納情報(ShiharaiHohoHenkoKanriIchiranReportSource source) {
-        if (count == 1) {
-            if (支払方法変更リストEntity_上.get日付関連_調定年度() != null) {
-                source.nendoUpper1 = new RStringBuilder()
-                        .append(左括弧)
-                        .append(支払方法変更リストEntity_上.get日付関連_調定年度().minusYear(2).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
-                        .append(右括弧).toRString();
-                source.nendoUpper2 = new RStringBuilder()
-                        .append(左括弧)
-                        .append(支払方法変更リストEntity_上.get日付関連_調定年度().minusYear(1).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
-                        .append(右括弧).toRString();
-                source.nendoUpper3 = new RStringBuilder()
-                        .append(左括弧)
-                        .append(支払方法変更リストEntity_上.get日付関連_調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
-                        .append(右括弧).toRString();
-            }
+        if (count == 1 && 支払方法変更リストEntity_上.get日付関連_調定年度() != null) {
+            source.nendoUpper1 = new RStringBuilder()
+                    .append(左括弧)
+                    .append(支払方法変更リストEntity_上.get日付関連_調定年度().minusYear(2).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                            .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
+                    .append(右括弧).toRString();
+            source.nendoUpper2 = new RStringBuilder()
+                    .append(左括弧)
+                    .append(支払方法変更リストEntity_上.get日付関連_調定年度().minusYear(1).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                            .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
+                    .append(右括弧).toRString();
+            source.nendoUpper3 = new RStringBuilder()
+                    .append(左括弧)
+                    .append(支払方法変更リストEntity_上.get日付関連_調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                            .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
+                    .append(右括弧).toRString();
         }
 
         edit上部_年度１の期(source);
         edit上部_年度２の期(source);
         edit上部_年度３の期(source);
-        if (count == 15 && 支払方法変更リストEntity_上.get日付関連_調定年度().plusYear(2).equals(支払方法変更リストEntity_上.get賦課年度())) {
+        if (count == NUM15 && 支払方法変更リストEntity_上.get日付関連_調定年度().plusYear(2).equals(支払方法変更リストEntity_上.get賦課年度())) {
             edit上部_年度１の過年度(source);
-        } else if (count == 15 && 支払方法変更リストEntity_上.get日付関連_調定年度().plusYear(1).equals(支払方法変更リストEntity_上.get賦課年度())) {
+        } else if (count == NUM15 && 支払方法変更リストEntity_上.get日付関連_調定年度().plusYear(1).equals(支払方法変更リストEntity_上.get賦課年度())) {
             edit上部_年度２の過年度(source);
-        } else if (count == 15 && 支払方法変更リストEntity_上.get日付関連_調定年度().equals(支払方法変更リストEntity_上.get賦課年度())) {
+        } else if (count == NUM15 && 支払方法変更リストEntity_上.get日付関連_調定年度().equals(支払方法変更リストEntity_上.get賦課年度())) {
             edit上部_年度３の過年度(source);
         }
         return source;
@@ -797,33 +796,31 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
     }
 
     private ShiharaiHohoHenkoKanriIchiranReportSource edit下部の収納情報(ShiharaiHohoHenkoKanriIchiranReportSource source) {
-        if (count == 1) {
-            if (支払方法変更リストEntity_下.get日付関連_調定年度() != null) {
-                source.nendoLower1 = new RStringBuilder()
-                        .append(左括弧)
-                        .append(支払方法変更リストEntity_下.get日付関連_調定年度().minusYear(2).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
-                        .append(右括弧).toRString();
-                source.nendoLower2 = new RStringBuilder()
-                        .append(左括弧)
-                        .append(支払方法変更リストEntity_下.get日付関連_調定年度().minusYear(1).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
-                        .append(右括弧).toRString();
-                source.nendoLower3 = new RStringBuilder()
-                        .append(左括弧)
-                        .append(支払方法変更リストEntity_下.get日付関連_調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
-                        .append(右括弧).toRString();
-            }
+        if (count == 1 && 支払方法変更リストEntity_下.get日付関連_調定年度() != null) {
+            source.nendoLower1 = new RStringBuilder()
+                    .append(左括弧)
+                    .append(支払方法変更リストEntity_下.get日付関連_調定年度().minusYear(2).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                            .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
+                    .append(右括弧).toRString();
+            source.nendoLower2 = new RStringBuilder()
+                    .append(左括弧)
+                    .append(支払方法変更リストEntity_下.get日付関連_調定年度().minusYear(1).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                            .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
+                    .append(右括弧).toRString();
+            source.nendoLower3 = new RStringBuilder()
+                    .append(左括弧)
+                    .append(支払方法変更リストEntity_下.get日付関連_調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                            .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
+                    .append(右括弧).toRString();
         }
         edit下部_年度１の期(source);
         edit下部_年度２の期(source);
         edit下部_年度３の期(source);
-        if (count == 15 && 支払方法変更リストEntity_下.get日付関連_調定年度().plusYear(2).equals(支払方法変更リストEntity_下.get賦課年度())) {
+        if (count == NUM15 && 支払方法変更リストEntity_下.get日付関連_調定年度().plusYear(2).equals(支払方法変更リストEntity_下.get賦課年度())) {
             edit下部_年度１の過年度(source);
-        } else if (count == 15 && 支払方法変更リストEntity_下.get日付関連_調定年度().plusYear(1).equals(支払方法変更リストEntity_下.get賦課年度())) {
+        } else if (count == NUM15 && 支払方法変更リストEntity_下.get日付関連_調定年度().plusYear(1).equals(支払方法変更リストEntity_下.get賦課年度())) {
             edit下部_年度２の過年度(source);
-        } else if (count == 15 && 支払方法変更リストEntity_下.get日付関連_調定年度().equals(支払方法変更リストEntity_下.get賦課年度())) {
+        } else if (count == NUM15 && 支払方法変更リストEntity_下.get日付関連_調定年度().equals(支払方法変更リストEntity_下.get賦課年度())) {
             edit下部_年度３の過年度(source);
         }
         return source;
