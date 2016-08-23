@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMas
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
@@ -337,15 +336,15 @@ public class KijunShunyugakuTekiyo {
         return eucEntity;
     }
 
-    private ShoKisaiHokenshaNo get証記載保険者番号(HanyoListParamRelateEntity entity, Map<RString, KoseiShichosonMaster> 市町村名MasterMap) {
-        ShoKisaiHokenshaNo 証記載保険者番号 = null;
+    private RString get証記載保険者番号(HanyoListParamRelateEntity entity, Map<RString, KoseiShichosonMaster> 市町村名MasterMap) {
+        RString 証記載保険者番号 = null;
         if (文字1.equals(entity.get広域内住所地特例フラグ()) && 市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
             if (!isNullCheck(entity.get広住特措置元市町村コード())) {
-                証記載保険者番号 = 市町村名MasterMap.get(entity.get広住特措置元市町村コード()).get証記載保険者番号();
+                証記載保険者番号 = 市町村名MasterMap.get(entity.get広住特措置元市町村コード()).get証記載保険者番号().value();
             }
         } else {
             if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
-                証記載保険者番号 = 市町村名MasterMap.get(entity.get市町村コード()).get証記載保険者番号();
+                証記載保険者番号 = 市町村名MasterMap.get(entity.get市町村コード()).get証記載保険者番号().value();
             }
         }
         return 証記載保険者番号;
@@ -416,10 +415,13 @@ public class KijunShunyugakuTekiyo {
 
     private RString set日付編集(FlexibleDate value) {
         RString 日付 = RString.EMPTY;
-        if (processParameter.is日付編集() && value != null && !value.isEmpty()) {
-            日付 = value.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+        if (value != null && !value.isEmpty()) {
+            if (processParameter.is日付編集()) {
+                日付 = value.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+            } else {
+                日付 = new RString(value.toString());
+            }
         }
-
         return 日付;
     }
 
@@ -472,6 +474,9 @@ public class KijunShunyugakuTekiyo {
     public List<RString> set出力条件(RString 市町村名) {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
+        jokenBuilder.append(new RString("【抽出条件】"));
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
         if (RString.isNullOrEmpty(processParameter.get保険者コード())) {
             jokenBuilder.append(RString.EMPTY);
         } else if (new RString("000000").equals(processParameter.get保険者コード())) {
