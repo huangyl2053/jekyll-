@@ -63,7 +63,7 @@ public class JigyoShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase
     private static final RString UNDER_LINE = new RString("_");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final RString 一覧EUCエンティティID = new RString("JigyoShinseishoHakkoIchiranhyoCsvEntity");
+    private static final RString 一覧EUCエンティティID = new RString("DBC200091");
 
     private KogakuKaigoServicehiOshiraseHakkoProcessParameter parameter;
 
@@ -89,7 +89,7 @@ public class JigyoShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase
         市町村名 = 導入団体クラス.get市町村名();
 
         csvFileName = CSV_FILE_NAME.concat(UNDER_LINE).
-                concat(導入団体クラス.getLasdecCode_().value()).concat(UNDER_LINE).
+                concat(導入団体クラス.get地方公共団体コード().value()).concat(UNDER_LINE).
                 concat(RDate.getNowDate().toDateString()).concat(CSV);
         breakItemIds = new ArrayList<>();
         出力順 = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBC介護給付,
