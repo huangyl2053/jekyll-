@@ -10,6 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.FutanWariaiSokujiKouseiHolder;
 import jp.co.ndensan.reams.db.dbc.business.core.futanwariai.FutanWariaiSokujiKouseiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihanteimanager.RiyoshaFutanWariaiHanteiManagerResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.futanwariai.FutanWariaiShikakuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariai.FutanWariaiMybatisParameter;
@@ -36,8 +38,11 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -279,9 +284,10 @@ public class DBC2000022PanelAll {
         RiyoshaFutanWariai 利用者負担割合 = ViewStateHolder.get(ViewStateKeys.利用者負担割合, RiyoshaFutanWariai.class);
         FutanWariaiSokujiKouseiHolder holder
                 = ViewStateHolder.get(ViewStateKeys.利用者負担割合明細, FutanWariaiSokujiKouseiHolder.class);
-        getHandler(div).onClick_btnKakutei(利用者負担割合);
+        getHandler(div).onClick_btnKakutei();
         ValidationMessageControlPairs validPairs2 = getCheckHandler(div).開始終了チェック();
         if (validPairs2.iterator().hasNext()) {
+            reset(holder, div);
             return ResponseData.of(div).addValidationMessages(validPairs2).respond();
         }
         getHandler(div).kakuteiShori(利用者負担割合, holder);
@@ -431,6 +437,10 @@ public class DBC2000022PanelAll {
                 return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.再検索).respond();
             }
         }
+        if (DBC2000022StateName.照会.getName().equals(処理モード)) {
+            前排他キーの解除();
+            return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.再検索).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -470,6 +480,10 @@ public class DBC2000022PanelAll {
                 前排他キーの解除();
                 return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.検索結果一覧).respond();
             }
+        }
+        if (DBC2000022StateName.照会.getName().equals(処理モード)) {
+            前排他キーの解除();
+            return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.検索結果一覧).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -543,7 +557,7 @@ public class DBC2000022PanelAll {
             return true;
         }
         if (holder != null && holder.get利用者負担割合明細().size() != div.getDgFutanWariai().getTotalRecords()) {
-
+            return true;
         }
         if (holder != null && holder.get利用者負担割合明細() != null) {
             for (RiyoshaFutanWariaiMeisai result : holder.get利用者負担割合明細()) {
@@ -553,6 +567,39 @@ public class DBC2000022PanelAll {
             }
         }
         return false;
+    }
+
+    private void reset(FutanWariaiSokujiKouseiHolder holder, DBC2000022PanelAllDiv div) {
+        List<dgFutanWariai_Row> dataGridList = new ArrayList<>();
+        for (RiyoshaFutanWariaiMeisai 明細 : holder.get利用者負担割合明細()) {
+            dgFutanWariai_Row rowData = new dgFutanWariai_Row();
+            rowData.setNendo(明細.get年度().toDateString());
+            rowData.setRirekiNo(new RString(明細.get履歴番号()));
+            rowData.setEdaNo(new RString(明細.get枝番号()));
+            rowData.setShikakuCode(明細.get資格区分());
+            rowData.setFutanWariaiCode(明細.get負担割合区分());
+            rowData.setShikaku(FutanWariaiShikakuKubun.toValue(明細.get資格区分()).get名称());
+            rowData.setFutanWariai(FutanwariaiKubun.toValue(明細.get負担割合区分()).get名称());
+            FlexibleDate 適用開始日 = 明細.get有効開始日();
+            FlexibleDate 適用終了日 = 明細.get有効終了日();
+            if (適用開始日 != null) {
+                rowData.getTekiyoKaishibi().setValue(new RDate(適用開始日.toString()));
+            }
+            if (適用終了日 != null) {
+                rowData.getTekiyoShuryobi().setValue(new RDate(適用終了日.toString()));
+            }
+            rowData.getGokeiShotoku().setValue(明細.get本人合計所得金額());
+            rowData.getSetaiinsu().setValue(Decimal.valueOf(明細.get世帯１号被保険者数()));
+            rowData.getNenkinShunyuGokei().setValue(明細.get年金収入合計());
+            rowData.getSonotaGokeiShotoku().setValue(明細.getその他の合計所得金額合計());
+            rowData.setBiko(明細.get更正理由());
+            rowData.setLogicalDeletedFlag(明細.get論理削除フラグ());
+            if (明細.get論理削除フラグ()) {
+                rowData.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
+            }
+            dataGridList.add(rowData);
+        }
+        div.getDgFutanWariai().setDataSource(dataGridList);
     }
 
     private RiyoshaFutanWariaiSokujiKouseiPanelValidationHandler getCheckHandler(DBC2000022PanelAllDiv div) {
