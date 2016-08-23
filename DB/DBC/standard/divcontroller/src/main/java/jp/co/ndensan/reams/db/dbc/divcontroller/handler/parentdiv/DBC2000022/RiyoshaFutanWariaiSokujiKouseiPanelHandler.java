@@ -534,10 +534,8 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
 
     /**
      * 「取消する」ボタンの処理です。
-     *
-     * @param 利用者負担割合 RiyoshaFutanWariai
      */
-    public void onClick_btnKakutei(RiyoshaFutanWariai 利用者負担割合) {
+    public void onClick_btnKakutei() {
         div.getDgFutanWariai().getClickedItem().setShikakuCode(div.getDdlShikaku().getSelectedKey());
         div.getDgFutanWariai().getClickedItem().setFutanWariaiCode(div.getDdlFutanWariai().getSelectedKey());
         div.getDgFutanWariai().getClickedItem().setShikaku(div.getDdlShikaku().getSelectedValue());

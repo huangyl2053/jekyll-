@@ -159,7 +159,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelValidationHandler {
         RDate 年度終了月日2 = new RDate(new RString(Integer.parseInt(div.getDdlNendo().getSelectedKey().toString()) + 1)
                 .concat(業務コンフィグ_年度終了月日).toString());
         if (最小適用開始日 != null && 最大適用終了日 != null
-                && (最小適用開始日.isBefore(年度終了月日1) || 最大適用終了日.isBefore(年度終了月日2))) {
+                && (最小適用開始日.isBefore(年度終了月日1) || 年度終了月日2.isBefore(最大適用終了日))) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                     DbcErrorMessages.適用期間_年度エラー)));
         }
