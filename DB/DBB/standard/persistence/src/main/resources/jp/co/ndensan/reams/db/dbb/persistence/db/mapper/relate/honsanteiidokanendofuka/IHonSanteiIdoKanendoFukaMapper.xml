@@ -1368,7 +1368,7 @@
                 )AS T
                 ON
                     T."hihokenshaNo" = Q."hihokenshaNo"
-                AND COALESCE(T."ichigoShikakuShutokuYMD",'00000000')= COALESCE(Q."ichigoShikakuShutokuYMD",'00000000')
+                AND T."ichigoShikakuShutokuYMD"= Q."ichigoShikakuShutokuYMD"
                 AND COALESCE(T."shikakuSoshitsuYMD",'00000000') = COALESCE(Q."shikakuSoshitsuYMD",'00000000')
                 AND T."max1" = (Q."idoYMD" || Q."edaNo")
                 ) AS R
