@@ -159,6 +159,13 @@ public interface IRiyoshaFutanwariaiMapper {
     /**
      * selectAllのメソッドです。<br/ >
      *
+     * @return List<HanteiTaishoshaTempEntity>
+     */
+    List<HanteiTaishoshaTempEntity> select判定対象者Temp();
+
+    /**
+     * selectAllのメソッドです。<br/ >
+     *
      * @return List<SetaiinJohoTempEntity>
      */
     List<SetainJohoTempEntity> select世帯員情報Temp();
