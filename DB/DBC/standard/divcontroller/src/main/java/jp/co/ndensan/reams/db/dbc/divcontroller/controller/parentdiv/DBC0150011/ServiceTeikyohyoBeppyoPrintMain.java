@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -43,7 +44,7 @@ public class ServiceTeikyohyoBeppyoPrintMain {
      * 画面初期化のメソッドます。
      *
      * @param div ServiceTeikyohyoBeppyoPrintMainDiv
-     * @return ResponseData
+     * @return ResponseData<ServiceTeikyohyoBeppyoPrintMainDiv>
      */
     public ResponseData<ServiceTeikyohyoBeppyoPrintMainDiv> onLoad(ServiceTeikyohyoBeppyoPrintMainDiv div) {
 
@@ -66,9 +67,9 @@ public class ServiceTeikyohyoBeppyoPrintMain {
      * 「発行する」ボタン押下時のイベントです。
      *
      * @param div ServiceTeikyohyoBeppyoPrintMainDiv
-     * @return ResponseData
+     * @return ResponseData<SourceDataCollection>
      */
-    public ResponseData onClick_btnReportPublish(ServiceTeikyohyoBeppyoPrintMainDiv div) {
+    public ResponseData<SourceDataCollection> onClick_btnReportPublish(ServiceTeikyohyoBeppyoPrintMainDiv div) {
 
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         TeikyohyoBeppyoManager manager = TeikyohyoBeppyoManager.createInstance();
@@ -79,9 +80,10 @@ public class ServiceTeikyohyoBeppyoPrintMain {
      * 「発行する」ボタン押下時の入力チェックです。
      *
      * @param div ServiceTeikyohyoBeppyoPrintMainDiv
-     * @return ResponseData
+     * @return ResponseData<ServiceTeikyohyoBeppyoPrintMainDiv>
      */
-    public ResponseData onClick_btnReportPublishCheck(ServiceTeikyohyoBeppyoPrintMainDiv div) {
+    public ResponseData<ServiceTeikyohyoBeppyoPrintMainDiv> onClick_btnReportPublishCheck(
+            ServiceTeikyohyoBeppyoPrintMainDiv div) {
 
         ValidationMessageControlPairs valid = getValidationHandler(div).validate();
         if (valid.iterator().hasNext()) {
