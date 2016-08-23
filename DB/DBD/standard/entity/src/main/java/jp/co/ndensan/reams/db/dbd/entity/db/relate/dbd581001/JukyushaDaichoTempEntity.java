@@ -212,7 +212,7 @@ public class JukyushaDaichoTempEntity extends DbTableEntityBase<JukyushaDaichoTe
     @TempTableColumnOrder(91)
     private FlexibleDate 審査会資料作成年月日;
     @TempTableColumnOrder(92)
-    private RString 審査会予定年月日;
+    private FlexibleDate 審査会予定年月日;
     @TempTableColumnOrder(93)
     private FlexibleDate 資格喪失年月日;
 
