@@ -225,4 +225,25 @@ public interface IKyodoJukyushaIdoRenrakuhyoDiv extends ICommonChildDivBasePrope
      * @return boolean
      */
     public boolean get高額送付情報を追加活性();
+
+    /**
+     * 基本送付情報の異動日。
+     *
+     * @return 異動日 RDate
+     */
+    public RDate get基本送付_異動日();
+
+    /**
+     * 償還送付情報の異動日。
+     *
+     * @return 異動日 RDate
+     */
+    public RDate get償還送付_異動日();
+
+    /**
+     * 高額送付情報の異動日。
+     *
+     * @return 異動日 RDate
+     */
+    public RDate get高額送付_異動日();
 }
