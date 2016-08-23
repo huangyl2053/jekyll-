@@ -98,7 +98,8 @@ public class JigoSakuseiMeisaiTouroku {
     /**
      * {@link InstanceProvider#create}にて生成した{@link JigoSakuseiMeisaiTouroku}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link JigoSakuseiMeisaiTouroku}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link JigoSakuseiMeisaiTouroku}のインスタンス
      */
     public static JigoSakuseiMeisaiTouroku createInstance() {
         return InstanceProvider.create(JigoSakuseiMeisaiTouroku.class);
@@ -331,7 +332,7 @@ public class JigoSakuseiMeisaiTouroku {
      * @return KubunGendo
      */
     public KubunGendo getKubunGendo(HihokenshaNo 被保険者番号, RString 居宅総合事業区分, FlexibleYearMonth 利用年月) {
-        KubunGendo gendo = new KubunGendo();
+        KubunGendo gendo = null;
         FlexibleDate 開始利用年月 = (利用年月 == null) ? null
                 : new FlexibleDate(利用年月.toString().concat(new RString(利用年月.getLastDay()).toString()));
         FlexibleDate 終了利用年月 = (利用年月 == null) ? null
@@ -341,6 +342,7 @@ public class JigoSakuseiMeisaiTouroku {
             KubunGendoParameter param = KubunGendoParameter.createParam(被保険者番号, 利用年月, 開始利用年月, 終了利用年月);
             KubunGendoEntity entity = mapper.get区分限度額統計処理(param);
             if (entity != null) {
+                gendo = new KubunGendo();
                 gendo.set区分支給限度額(entity.get支給限度単位数());
                 gendo.set管理期間開始日(entity.get適用開始年月日());
                 gendo.set管理期間終了日(entity.get適用終了年月日());
@@ -348,6 +350,7 @@ public class JigoSakuseiMeisaiTouroku {
         } else if (区分_居宅.equals(居宅総合事業区分)) {
             DbT4001JukyushaDaichoEntity entity = 受給者台帳dac.select居宅総合事業区分(被保険者番号, 開始利用年月, 終了利用年月);
             if (entity != null) {
+                gendo = new KubunGendo();
                 gendo.set区分支給限度額(entity.getShikyuGendoTanisu());
                 gendo.set管理期間開始日(entity.getShikyuGendoKaishiYMD());
                 gendo.set管理期間終了日(entity.getShikyuGendoShuryoYMD());
