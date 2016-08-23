@@ -187,6 +187,13 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
      * @return ShiryoShinsakaiBatchParameter
      */
     public ShiryoShinsakaiBatchParameter toShiryoShinsakaiBatchParameter() {
+        int bangoStart = Integer.MIN_VALUE;
+        int bangoEnd = Integer.MIN_VALUE;
+        RString 作成条件 = new RString("範囲指定");
+        if (作成条件.equals(sakuseiJyoken)) {
+            bangoStart = Integer.valueOf(kaishisiyoBangou.toString());
+            bangoEnd = Integer.valueOf(shuryosiyoBangou.toString());
+        }
         return new ShiryoShinsakaiBatchParameter(shinsakaiKaisaiNo,
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
@@ -196,8 +203,8 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
                 syuturyokuStyle,
                 insatuHouhou,
                 sakuseiJyoken,
-                Integer.valueOf(kaishisiyoBangou.toString()),
-                Integer.valueOf(shuryosiyoBangou.toString()),
+                bangoStart,
+                bangoEnd,
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
