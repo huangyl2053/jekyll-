@@ -61,8 +61,8 @@ public class JigyoKogakuServiceShikyuShinseishoOutputProcess extends BatchProces
     private BatchReportWriter<KogakuJigyoShikyuShinseishoSource> shinseishoBatchReportWriter;
     private ReportSourceWriter<KogakuJigyoShikyuShinseishoSource> shinseishoReportSourceWriter;
     @BatchWriter
-    private BatchReportWriter<KogakuJigyoShikyuShinseishoYuchoSource> shinseishoYuchoBatchReportWriter;
-    private ReportSourceWriter<KogakuJigyoShikyuShinseishoYuchoSource> shinseishoYuchoReportSourceWriter;
+    private BatchReportWriter<KogakuJigyoShikyuShinseishoYuchoSource> yuchoBatchReportWriter;
+    private ReportSourceWriter<KogakuJigyoShikyuShinseishoYuchoSource> yuchoReportSourceWriter;
 
     @Override
     protected void initialize() {
@@ -94,8 +94,8 @@ public class JigyoKogakuServiceShikyuShinseishoOutputProcess extends BatchProces
         shinseishoBatchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100070.getReportId().value()).create();
         shinseishoReportSourceWriter = new ReportSourceWriter<>(shinseishoBatchReportWriter);
 
-        shinseishoYuchoBatchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100071.getReportId().value()).create();
-        shinseishoYuchoReportSourceWriter = new ReportSourceWriter<>(shinseishoYuchoBatchReportWriter);
+        yuchoBatchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100071.getReportId().value()).create();
+        yuchoReportSourceWriter = new ReportSourceWriter<>(yuchoBatchReportWriter);
     }
 
     @Override
@@ -110,7 +110,7 @@ public class JigyoKogakuServiceShikyuShinseishoOutputProcess extends BatchProces
             param.setIs金融機関表示(parameter.isKinyuKikanHyoji());
 
             KogakuJigyoShikyuShinseishoYuchoReport report = new KogakuJigyoShikyuShinseishoYuchoReport(param);
-            report.writeBy(shinseishoYuchoReportSourceWriter);
+            report.writeBy(yuchoReportSourceWriter);
         } else {
             KogakuJigyoShikyuShinseishoEntity param = new KogakuJigyoShikyuShinseishoEntity();
             param.setシステム日付(RDate.getNowDate());
