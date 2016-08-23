@@ -210,8 +210,9 @@ public class NinteiChosaJokyoHandler {
         rsb.append(div.getTxtNinteiYukoKikanFrom().getValue());
         rsb.append(div.getTxtNinteiYukoKikanTo().getValue());
         rsb.append(div.getTxtEnkiTsuchiHakkoDay().getValue());
-        rsb.append(div.getTxtEnkiTsuchiHakkoCount().getValue());
-
+        if (div.getTxtEnkiTsuchiHakkoCount().getValue() != null) {
+            rsb.append(div.getTxtEnkiTsuchiHakkoCount().getValue());
+        }
         return rsb.toRString();
     }
 
