@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB8120001;
 
+import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.NendobunFukaList;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001.SokujiFukaKouseiKanryoDiv;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -27,10 +27,10 @@ public class SokujiFukaKouseiKanryo {
      * @return 画面のResponseData
      */
     public ResponseData<SokujiFukaKouseiKanryoDiv> onLoad_SokujiFukaKouseiKanryo(SokujiFukaKouseiKanryoDiv div) {
-        TsuchishoNo 通知書番号 = ViewStateHolder.get(ViewStateKeys.通知書番号, TsuchishoNo.class);
+        NendobunFukaList 更正後 = ViewStateHolder.get(ViewStateKeys.更正後, NendobunFukaList.class);
         RString 氏名 = ViewStateHolder.get(ViewStateKeys.氏名, RString.class);
         div.getSokujiFukaKouseiKanryoMsg().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
-                通知書番号.getColumnValue(), 氏名, true);
+                更正後.get通知書番号().getColumnValue(), 氏名, true);
         return ResponseData.of(div).respond();
     }
 }
