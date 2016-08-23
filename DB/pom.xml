@@ -131,12 +131,17 @@
                 <groupId>jp.co.ndensan.reams.ue.uex</groupId>
                 <artifactId>UexPersistence</artifactId>
                 <version>${jp.co.ndensan.reams.uexVersion}</version>
-            </dependency>            
+            </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ue.uex</groupId>
                 <artifactId>UexDivController</artifactId>
                 <version>${jp.co.ndensan.reams.uexVersion}</version>
                 <classifier>classes</classifier>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+                <artifactId>UexBatchController</artifactId>
+                <version>${jp.co.ndensan.reams.uexVersion}</version>
             </dependency>
             <!-- UXX -->
             <dependency>

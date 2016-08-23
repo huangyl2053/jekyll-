@@ -1,6 +1,6 @@
-/// <reference path="../../d.ts/jquery.d.ts" />
-/// <reference path="../../d.ts/UzViewControls.d.ts" />
-/// <reference path="../../d.ts/UzaConverter.d.ts" />
+/// <reference path="../d.ts/jquery.d.ts" />
+/// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
 
 module DBZ {
 
@@ -8,24 +8,68 @@ module DBZ {
 
         export class Events {
 
+            public static onOkClose_btnChosainGuide(): string {
+                return "onOkClose_btnChosainGuide";
+            }
+
+            public static onBeforeOpenDialog_btnChosainGuide(): string {
+                return "onBeforeOpenDialog_btnChosainGuide";
+            }
+
+            public static onOKClose_btnItakusakiGuide(): string {
+                return "onOKClose_btnItakusakiGuide";
+            }
+
+            public static onBeforeOpenDialog_btnItakusakiGuide(): string {
+                return "onBeforeOpenDialog_btnItakusakiGuide";
+            }
+
             public static onClick_btnChosainJohoClear(): string {
                 return "onClick_btnChosainJohoClear";
+            }
+
+            public static onClick_btnZenKaiFukusha(): string {
+                return "onClick_btnZenKaiFukusha";
+            }
+
+            public static onClick_btnHonninJushoFukusha(): string {
+                return "onClick_btnHonninJushoFukusha";
+            }
+
+            public static onClick_btnNyushoShisetsuFukusha(): string {
+                return "onClick_btnNyushoShisetsuFukusha";
             }
 
             public static onClick_btnHomonChosaClear(): string {
                 return "onClick_btnHomonChosaClear";
             }
 
+            public static onOKClose_btnShujiiGuide(): string {
+                return "onOKClose_btnShujiiGuide";
+            }
+
+            public static onBeforeOpenDialog_btnShujiiGuide(): string {
+                return "onBeforeOpenDialog_btnShujiiGuide";
+            }
+
+            public static onOKClose_btnIryoKikanGuide(): string {
+                return "onOKClose_btnIryoKikanGuide";
+            }
+
+            public static onBeforeOpenDialog_btnIryoKikanGuide(): string {
+                return "onBeforeOpenDialog_btnIryoKikanGuide";
+            }
+
             public static onClick_btnShujiiJohoClear(): string {
                 return "onClick_btnShujiiJohoClear";
             }
 
-            public static onOkClose(): string {
-                return "onOkClose";
+            public static onClick_btnKakutei(): string {
+                return "onClick_btnKakutei";
             }
 
-            public static onCancelClose(): string {
-                return "onCancelClose";
+            public static onClick_btnTorikeshi(): string {
+                return "onClick_btnTorikeshi";
             }
 
             public static onClick_btnAllClear(): string {
@@ -77,12 +121,12 @@ module DBZ {
                 return new UZA.TextBoxCode(this.convFiledName("txtNinteiChosaItakusakiCode"));
             }
 
-            public btnItakusakiGuide(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnItakusakiGuide"));
-            }
-
             public txtNinteiChosaItakusakiName(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtNinteiChosaItakusakiName"));
+            }
+
+            public btnItakusakiGuide(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnItakusakiGuide"));
             }
 
             public btnChosainJohoClear(): UZA.Button {

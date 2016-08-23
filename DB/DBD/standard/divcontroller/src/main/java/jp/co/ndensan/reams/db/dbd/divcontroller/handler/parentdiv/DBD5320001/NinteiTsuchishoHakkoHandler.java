@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.yokaigoninteijoho
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5320001.NinteiTsuchishoHakkoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5320001.dgTaishoshaIchiran_Row;
+import jp.co.ndensan.reams.db.dbd.service.core.yokaigoninteijoho.YokaigoNinteiJohoManager;
 import jp.co.ndensan.reams.db.dbd.service.core.yokaigoninteijoho.YokaigoNinteiTsutishoManager;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd532001.YokaigoNinteiKekkaTshuchishoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd550001.YokaigoNinteiKyakkaTshuchishoPrintService;
@@ -1230,6 +1231,7 @@ public class NinteiTsuchishoHakkoHandler {
 
     private YokaigoNinteiTsutisho edit個別発行受給者台帳(YokaigoNinteiTsutisho データ, PanelType パネル) {
         YokaigoNinteiTsutishoBuilder builder = データ.createBuilderForNyukyushaAddEdit();
+
         if (PanelType.個別発行認定結果通知書パネル.equals(パネル)) {
             builder.set認定結果通知書発行年月日(div.getTxtNinteiKekkaSakuseiDay().getValue());
         } else if (PanelType.個別発行サービス変更通知書パネル.equals(パネル)) {
@@ -1240,8 +1242,17 @@ public class NinteiTsuchishoHakkoHandler {
             builder.set認定却下通知書発行年月日(div.getTxtNinteiKyakkaTsuchi().getValue());
         }
 
-        builder.set受給者台帳履歴番号(new RString(String.format("%04d", Integer.parseInt(データ.get履歴番号().toString()) + 1)));
+        builder.set受給者台帳履歴番号(new RString(String.format("%04d", Integer.parseInt(getMax履歴番号(データ).toString()) + 1)));
         return builder.build();
+    }
+
+    private RString getMax履歴番号(YokaigoNinteiTsutisho データ) {
+        if (null == データ) {
+            return new RString("0000");
+        }
+        return YokaigoNinteiJohoManager.createInstance()
+                .getMax履歴番号ByKey(データ.get市町村コード(), データ.get被保険者番号受給者台帳(),
+                        データ.get受給申請事由受給者台帳(), データ.get申請書管理番号受給者台帳());
     }
 
     private RString getサービス種類(YokaigoNinteiTsutisho 受給者台帳情報) {

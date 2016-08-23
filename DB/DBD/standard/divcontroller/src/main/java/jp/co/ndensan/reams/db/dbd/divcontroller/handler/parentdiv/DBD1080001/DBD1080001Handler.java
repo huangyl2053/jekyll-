@@ -70,13 +70,13 @@ public class DBD1080001Handler {
         div.getParameters().getRadShisetsuNyushoKubun1().setSelectedKey(new RString("key0"));
 
         setDataSource(div.getParameters().getDdlRiyoshaFutanDankai().getDataSource(),
-                new RString("key1"), new RString("利用者負担１段階"));
+                new RString("key1"), new RString("利用者負担1段階"));
         setDataSource(div.getParameters().getDdlRiyoshaFutanDankai().getDataSource(),
-                new RString("key2"), new RString("利用者負担２段階"));
+                new RString("key2"), new RString("利用者負担2段階"));
         setDataSource(div.getParameters().getDdlRiyoshaFutanDankai().getDataSource(),
-                new RString("key3"), new RString("利用者負担３段階"));
+                new RString("key3"), new RString("利用者負担3段階"));
         setDataSource(div.getParameters().getDdlRiyoshaFutanDankai().getDataSource(),
-                new RString("key4"), new RString("利用者負担４段階（高齢者複数世帯）"));
+                new RString("key4"), new RString("利用者負担4段階（高齢者複数世帯）"));
         responseData.data = div;
         return responseData;
     }

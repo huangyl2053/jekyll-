@@ -108,7 +108,6 @@ public class SokujiFukaKouseiMain {
         if (!RealInitialLocker.tryGetLock(前排他キー)) {
             throw new PessimisticLockingException();
         }
-        TsuchishoNo 通知書番号選択 = 通知書番号;
         List<KoseiZengoFuka> 更正前後賦課のリスト = new ArrayList<>();
         KoseiZengoChoshuHoho 更正前後徴収方法 = null;
         NendobunFukaList 更正前賦課リスト = null;
@@ -138,7 +137,6 @@ public class SokujiFukaKouseiMain {
             handler.set更正前後賦課のリスト降順(更正前後賦課のリスト);
             KoseiZengoFuka 更正前後賦課 = get更正前後賦課By通知書番号(更正前後賦課のリスト, 通知書番号);
             if (!is更正前と状態変更なし && !更正前後賦課のリスト.isEmpty()) {
-                通知書番号選択 = 更正前後賦課のリスト.get(0).get通知書番号();
                 更正前賦課リスト = 更正前後賦課のリスト.get(0).get更正前();
                 更正後賦課リスト = 更正前後賦課のリスト.get(0).get更正後();
             } else if (is更正前と状態変更なし && 更正前後賦課 != null) {
@@ -146,9 +144,12 @@ public class SokujiFukaKouseiMain {
                 更正後賦課リスト = 更正前後賦課.get更正後();
                 div.setDisabled(true);
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
+            } else {
+                更正前賦課リスト = new NendobunFukaList();
+                更正後賦課リスト = new NendobunFukaList();
             }
         }
-        handler.initializeヘッダエリア(is特殊処理(), 賦課年度, 更正前後賦課のリスト, 通知書番号選択, 更正前後徴収方法);
+        handler.initializeヘッダエリア(is特殊処理(), 賦課年度, 更正前後賦課のリスト, 通知書番号, 更正前後徴収方法);
         handler.initialize更正前後データ(is特殊処理(), 更正前賦課リスト, 更正後賦課リスト, 更正前後徴収方法, is本算定処理済フラグ);
         ViewStateHolder.put(ViewStateKeys.更正前, 更正前賦課リスト);
         ViewStateHolder.put(ViewStateKeys.更正後, 更正後賦課リスト);
@@ -317,7 +318,6 @@ public class SokujiFukaKouseiMain {
                 更正前後徴収方法, is本算定処理済フラグ);
         ViewStateHolder.put(ViewStateKeys.更正前, koseiZengoFuka.get更正前());
         ViewStateHolder.put(ViewStateKeys.更正後, koseiZengoFuka.get更正後());
-        ViewStateHolder.put(ViewStateKeys.通知書番号, 通知書番号);
         return getResponseData(div);
     }
 
@@ -409,7 +409,7 @@ public class SokujiFukaKouseiMain {
                 return getResponseData(div);
             }
         }
-        List<KoseiZengoFuka> 更正前後賦課のリスト = new ArrayList<>();
+        List<KoseiZengoFuka> 更正前後賦課のリスト;
         KoseiZengoChoshuHoho 更正前後徴収方法 = null;
         NendobunFukaList 更正前賦課リスト = null;
         NendobunFukaList 更正後賦課リスト = null;

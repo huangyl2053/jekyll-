@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0070011;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbc.business.core.sofujoho.SofujohoBusiness;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
@@ -14,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenSh
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -33,7 +37,7 @@ public class SofujohoHandler {
     private final SofujohoDiv div;
     private static final RString 市町村識別ID_00 = new RString("00");
     private static final RString キー = new RString("000000");
-    // private static final int 連番_4 = 4;
+    private static final int 連番_4 = 4;
     private static final RString 申立書区分_1 = new RString("1");
     private static final RString 申立書区分_2 = new RString("2");
     private static final RString 申立書区分_3 = new RString("3");
@@ -151,14 +155,15 @@ public class SofujohoHandler {
                 row.setTxtJigyoshaName(送付情報.get事業所名());
                 row.setTxtHihoNo(送付情報.get被保険者番号());
                 row.setTxtHihoName(送付情報.get宛名名称());
+                // TODO codeがありません
+
                 row.setTxtMoshitateshaKubun(送付情報.get申立者区分コード());
-                //TODO enumとコードマスタのcodeが有りません
-//                row.setTxtStyle(送付情報.get申立事由コード().substring(0, 2).concat(CodeMaster.getCodeRyakusho(SubGyomuCode.DBC介護給付,
-//                        DBCCodeShubetsu.過誤申立事由_上２桁_様式番号.getコード(), new Code("0016"), FlexibleDate.getNowDate())));
-//                row.setTxtMoshitateRiyu(送付情報.get申立事由コード().substring(2, 連番_4).concat(CodeMaster.getCodeRyakusho(SubGyomuCode.DBC介護給付,
-//                        DBCCodeShubetsu.過誤申立事由コード_下２桁_申立理由.getコード(),
-//                        new Code("0022"), FlexibleDate.getNowDate())));
-                row.setTxtServiceTeikyoYM(送付情報.getサービス提供年月().toDateString());
+                row.setTxtStyle(送付情報.get申立事由コード().substring(0, 2).concat(CodeMaster.getCodeRyakusho(SubGyomuCode.DBC介護給付,
+                        DBCCodeShubetsu.過誤申立事由_上２桁_様式番号.getコード(), new Code("0016"), FlexibleDate.getNowDate())));
+                row.setTxtMoshitateRiyu(送付情報.get申立事由コード().substring(2, 連番_4).concat(CodeMaster.getCodeRyakusho(SubGyomuCode.DBC介護給付,
+                        DBCCodeShubetsu.過誤申立事由コード_下２桁_申立理由.getコード(),
+                        new Code("0019"), FlexibleDate.getNowDate())));
+                row.setTxtServiceTeikyoYM(送付情報.getサービス提供年月().wareki().toDateString());
                 row.setTxtMoshitateYMD(送付情報.get申立年月日().wareki().toDateString());
                 row.setTxtShokisaiHokenshaNo(送付情報.get証記載保険者番号());
                 rowList.add(row);
@@ -172,14 +177,14 @@ public class SofujohoHandler {
                 row.setTxtJigyoshaName(送付情報.get事業所名());
                 row.setTxtHihoNo(送付情報.get被保険者番号());
                 row.setTxtHihoName(送付情報.get宛名名称());
+                // TODO codeがありません
                 row.setTxtMoshitateshaKubun(送付情報.get申立者区分コード());
-                //TODO enumとコードマスタのcodeが有りません
-//                row.setTxtStyle(送付情報.get申立事由コード().substring(0, 2).concat(CodeMaster.getCodeRyakusho(SubGyomuCode.DBC介護給付,
-//                        DBCCodeShubetsu.総合事業過誤申立事由.getコード(), new Code("0049"), FlexibleDate.getNowDate())));
-//                row.setTxtMoshitateRiyu(送付情報.get申立事由コード().substring(2, 連番_4).concat(CodeMaster.getCodeRyakusho(SubGyomuCode.DBC介護給付,
-//                        DBCCodeShubetsu.再審査決定申立事由コード_下２桁_申立理由番号.getコード(),
-//                        new Code("0022"), FlexibleDate.getNowDate())));
-                row.setTxtServiceTeikyoYM(送付情報.getサービス提供年月().toDateString());
+                row.setTxtStyle(送付情報.get申立事由コード().substring(0, 2).concat(CodeMaster.getCodeRyakusho(SubGyomuCode.DBC介護給付,
+                        DBCCodeShubetsu.総合事業_経過措置_過誤申立事由_様式_.getコード(), new Code("0049"), FlexibleDate.getNowDate())));
+                row.setTxtMoshitateRiyu(送付情報.get申立事由コード().substring(2, 連番_4).concat(CodeMaster.getCodeRyakusho(SubGyomuCode.DBC介護給付,
+                        DBCCodeShubetsu.総合事業_経過措置_過誤申立理由_理由.getコード(),
+                        new Code("0050"), FlexibleDate.getNowDate())));
+                row.setTxtServiceTeikyoYM(送付情報.getサービス提供年月().wareki().toDateString());
                 row.setTxtMoshitateYMD(送付情報.get申立年月日().wareki().toDateString());
                 row.setTxtShokisaiHokenshaNo(送付情報.get証記載保険者番号());
                 rowList.add(row);
@@ -193,14 +198,14 @@ public class SofujohoHandler {
                 row.setTxtJigyoshaName(送付情報.get事業所名());
                 row.setTxtHihoNo(送付情報.get被保険者番号());
                 row.setTxtHihoName(送付情報.get宛名名称());
+                // TODO codeがありません
                 row.setTxtMoshitateshaKubun(送付情報.get申立者区分コード());
-                //TODO enumとコードマスタのcodeが有りません
-//                row.setTxtStyle(送付情報.get申立事由コード().substring(0, 2).concat(CodeMaster.getCodeRyakusho(SubGyomuCode.DBC介護給付,
-//                        DBCCodeShubetsu.再審査決定申立事由コード_上２桁_申立対象項目コード.getコード(), new Code("0021"), FlexibleDate.getNowDate())));
-//                row.setTxtMoshitateRiyu(送付情報.get申立事由コード().substring(2, 連番_4).concat(CodeMaster.getCodeRyakusho(SubGyomuCode.DBC介護給付,
-//                        DBCCodeShubetsu.再審査決定申立事由コード_下２桁_申立理由番号.getコード(),
-//                        new Code("0022"), FlexibleDate.getNowDate())));
-                row.setTxtServiceTeikyoYM(送付情報.getサービス提供年月().toDateString());
+                row.setTxtStyle(送付情報.get申立事由コード().substring(0, 2).concat(CodeMaster.getCodeRyakusho(SubGyomuCode.DBC介護給付,
+                        DBCCodeShubetsu.総合事業過誤申立事由_様式.getコード(), new Code("0053"), FlexibleDate.getNowDate())));
+                row.setTxtMoshitateRiyu(送付情報.get申立事由コード().substring(2, 連番_4).concat(CodeMaster.getCodeRyakusho(SubGyomuCode.DBC介護給付,
+                        DBCCodeShubetsu.総合事業過誤申立事由_理由.getコード(),
+                        new Code("0054"), FlexibleDate.getNowDate())));
+                row.setTxtServiceTeikyoYM(送付情報.getサービス提供年月().wareki().toDateString());
                 row.setTxtMoshitateYMD(送付情報.get申立年月日().wareki().toDateString());
                 row.setTxtShokisaiHokenshaNo(送付情報.get証記載保険者番号());
                 rowList.add(row);

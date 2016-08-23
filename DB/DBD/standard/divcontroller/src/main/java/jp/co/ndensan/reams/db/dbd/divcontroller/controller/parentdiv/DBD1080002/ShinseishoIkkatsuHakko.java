@@ -109,17 +109,16 @@ public class ShinseishoIkkatsuHakko {
         validationHander.出力チェックボックスを選択しない(pairs, div);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
-        } else {
-            ShinseishoIkkatsuHakkoService shinseisho = new ShinseishoIkkatsuHakkoService();
-            List<ddlKohoshaList_Row> selectedItem = div.getGenmenShinseiHaakuList().getDdlKohoshaList().getSelectedItems();
-            for (ddlKohoshaList_Row row : selectedItem) {
-                UUID 発行処理ID = UUID.randomUUID();
-                ViewStateHolder.put(Keys.発行処理ID, 発行処理ID);
-                shinseisho.insertDbT4032(UUID.fromString(row.getHaakuShoriID().toString()), 発行処理ID);
-                shinseisho.insertDbT4033(new HihokenshaNo(row.getHihoNo()), 発行処理ID);
-            }
-            return ResponseData.of(div).respond();
         }
+        UUID 発行処理ID = UUID.randomUUID();
+        ViewStateHolder.put(Keys.発行処理ID, 発行処理ID);
+        ShinseishoIkkatsuHakkoService shinseisho = new ShinseishoIkkatsuHakkoService();
+        List<ddlKohoshaList_Row> selectedItem = div.getGenmenShinseiHaakuList().getDdlKohoshaList().getSelectedItems();
+        for (ddlKohoshaList_Row row : selectedItem) {
+            shinseisho.insertDbT4032(UUID.fromString(row.getHaakuShoriID().toString()), 発行処理ID);
+            shinseisho.insertDbT4033(new HihokenshaNo(row.getHihoNo()), 発行処理ID);
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -189,7 +188,7 @@ public class ShinseishoIkkatsuHakko {
 
         @Override
         public String toString() {
-            return this.getDeclaringClass().getName().concat(name()).toString();
+            return this.getDeclaringClass().getName().concat(name());
         }
     }
 

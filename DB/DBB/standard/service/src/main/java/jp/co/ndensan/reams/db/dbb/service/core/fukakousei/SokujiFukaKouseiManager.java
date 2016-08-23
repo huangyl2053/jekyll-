@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.SokujiFukaKousei;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2004GemmenDac;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
-import jp.co.ndensan.reams.db.dbb.service.core.fukajoho.fukajoho.FukaJohoManager;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2003KibetsuDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.UrT0705ChoteiKyotsuDac;
@@ -56,12 +55,13 @@ public class SokujiFukaKouseiManager {
     /**
      * テスト用コンストラクタです。
      *
-     * @param 賦課の減免manager {@link DbT2004GemmenDac}
-     * @param 賦課の情報manager {@link FukaJohoManager}
      * @param 介護徴収方法manager {@link ChoshuHohoManager}
+     * @param 介護賦課Dac {@link DbT2002FukaDac}
+     * @param 介護期別Dac {@link DbT2003KibetsuDac}
+     * @param 賦課の減免Dac {@link DbT2004GemmenDac}
+     * @param 調定共通Dac {@link UrT0705ChoteiKyotsuDac}
      */
     SokujiFukaKouseiManager(
-            FukaJohoManager 賦課の情報manager,
             ChoshuHohoManager 介護徴収方法manager,
             DbT2002FukaDac 介護賦課Dac,
             DbT2003KibetsuDac 介護期別Dac,

@@ -105,7 +105,8 @@ public class Sofujoho {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        List<SofujohoBusiness> 過誤申立書情報 = this.get申立書情報(div, div.getTxtSofuYM().getText(), 申立書区分_1, true);
+        List<SofujohoBusiness> 過誤申立書情報 = this.get申立書情報(div, div.getTxtSofuYM().getValue().getYearMonth().toDateString(),
+                申立書区分_1, true);
         List<SofujohoBusiness> 情報Business = getHandler(div).onClick_btnSearch再(過誤申立書情報, 申立書区分_1);
         ValidationMessageControlPairs validPairs1 = getValidationHandler(div).過誤申立送付情報照会(情報Business);
         if (validPairs1.iterator().hasNext()) {
@@ -125,7 +126,8 @@ public class Sofujoho {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        List<SofujohoBusiness> 経過措置 = this.get申立書情報(div, div.getTxtSofuYM().getText(), 申立書区分_2, true);
+        List<SofujohoBusiness> 経過措置 = this.get申立書情報(div, div.getTxtSofuYM().getValue().getYearMonth().toDateString(),
+                申立書区分_2, true);
         List<SofujohoBusiness> 情報Business = getHandler(div).onClick_btnSearch再(経過措置, 申立書区分_2);
         ValidationMessageControlPairs validPairs1 = getValidationHandler(div).過誤申立送付情報照会(情報Business);
         if (validPairs1.iterator().hasNext()) {
@@ -145,7 +147,8 @@ public class Sofujoho {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        List<SofujohoBusiness> 総合事業費過誤申立書情報 = this.get申立書情報(div, div.getTxtSofuYM().getText(), 申立書区分_3, true);
+        List<SofujohoBusiness> 総合事業費過誤申立書情報 = this.get申立書情報(div, div.getTxtSofuYM().getValue().getYearMonth().toDateString(),
+                申立書区分_3, true);
         List<SofujohoBusiness> 情報Business = getHandler(div).onClick_btnSearch再(総合事業費過誤申立書情報, 申立書区分_3);
         ValidationMessageControlPairs validPairs1 = getValidationHandler(div).過誤申立送付情報照会(情報Business);
         if (validPairs1.iterator().hasNext()) {
@@ -162,7 +165,7 @@ public class Sofujoho {
             保険者番号フラグ = true;
         }
         SofujohoMybatisParameter parameter = SofujohoMybatisParameter
-                .creatParameter(送付年月, 申立書区分コード, 証記載保険者番号, 送付年月フラグ, 保険者番号フラグ, 証記載保険者番号);
+                .creatParameter(送付年月, 申立書区分コード, 送付年月フラグ, 保険者番号フラグ, 証記載保険者番号);
         return KagoMousitatesyoSouhuJyohouFinder.createInstance().get過誤申立送付情報照会(parameter).records();
     }
 

@@ -434,7 +434,6 @@ public class IchijiHanteizumIfOutputBusiness {
         eucEntity.set要介護１の場合の状態像(RString.EMPTY);
         eucEntity.set現在のサービス区分コード(nullToEmpty(entity.getServiceKubunCode()));
         eucEntity.set現在の状況(nullToEmpty(entity.getRemban()));
-        eucEntity.set住宅改修介護給付(nullToEmpty(entity.getServiceJokyoFlag()));
         if (ServiceKubunCode.介護給付サービス.getコード().equals(entity.getServiceKubunCode())) {
             介護給付サービス(entity, eucEntity);
         }
@@ -561,9 +560,9 @@ public class IchijiHanteizumIfOutputBusiness {
             eucEntity.set座位保持(nullToEmpty(entity.get認定調査remban14()));
             eucEntity.set立ち上がり(nullToEmpty(entity.get認定調査remban19()));
             eucEntity.set片足での立位(nullToEmpty(entity.get認定調査remban20()));
-            eucEntity.set独り言独り笑い(nullToEmpty(entity.get認定調査remban54()));
-            eucEntity.set自分勝手に行動する(nullToEmpty(entity.get認定調査remban55()));
-            eucEntity.set話がまとまらない(nullToEmpty(entity.get認定調査remban56()));
+            eucEntity.set独り言独り笑い(RString.EMPTY);
+            eucEntity.set自分勝手に行動する(RString.EMPTY);
+            eucEntity.set話がまとまらない(RString.EMPTY);
             eucEntity.set集団への不適応(RString.EMPTY);
             eucEntity.set買い物(RString.EMPTY);
             eucEntity.set簡単な調理(RString.EMPTY);
@@ -576,9 +575,9 @@ public class IchijiHanteizumIfOutputBusiness {
             eucEntity.set座位保持(nullToEmpty(entity.get認定調査remban12()));
             eucEntity.set立ち上がり(nullToEmpty(entity.get認定調査remban15()));
             eucEntity.set片足での立位(nullToEmpty(entity.get認定調査remban16()));
-            eucEntity.set独り言独り笑い(RString.EMPTY);
-            eucEntity.set自分勝手に行動する(RString.EMPTY);
-            eucEntity.set話がまとまらない(RString.EMPTY);
+            eucEntity.set独り言独り笑い(nullToEmpty(entity.get認定調査remban54()));
+            eucEntity.set自分勝手に行動する(nullToEmpty(entity.get認定調査remban55()));
+            eucEntity.set話がまとまらない(nullToEmpty(entity.get認定調査remban56()));
             eucEntity.set集団への不適応(nullToEmpty(entity.get認定調査remban60()));
             eucEntity.set買い物(nullToEmpty(entity.get認定調査remban61()));
             eucEntity.set簡単な調理(nullToEmpty(entity.get認定調査remban62()));
@@ -989,6 +988,7 @@ public class IchijiHanteizumIfOutputBusiness {
         eucEntity.set介護予防居宅療養管理指導(entity.getサービスremban5());
         eucEntity.set介護予防通所介護デイサービス(entity.getサービスremban6());
         eucEntity.set介護予防通所リハビリテーション(entity.getサービスremban7());
+        eucEntity.set住宅改修予防給付(entity.getServiceJokyoFlag());
         eucEntity.set前回結果_介護予防訪問介護ホームヘルプサービス(entity.get前回サービスremban1());
         eucEntity.set前回結果_介護予防訪問入浴介護(entity.get前回サービスremban2());
         eucEntity.set前回結果_介護予防訪問看護(entity.get前回サービスremban3());
@@ -1000,30 +1000,30 @@ public class IchijiHanteizumIfOutputBusiness {
         if (entity.getKoroshoIfShikibetsuCode() != null
                 && (厚労省IF識別コード_99A.equals(entity.getKoroshoIfShikibetsuCode())
                 || (厚労省IF識別コード_02A.equals(entity.getKoroshoIfShikibetsuCode())))) {
-            eucEntity.set短期入所生活介護ショートステイ(nullToEmpty(entity.getサービスremban9()));
-            eucEntity.set短期入所療養介護(nullToEmpty(entity.getサービスremban10()));
-            eucEntity.set特定施設入居者生活介護(nullToEmpty(entity.getサービスremban12()));
-            eucEntity.set福祉用具貸与(nullToEmpty(entity.getサービスremban8()));
-            eucEntity.set特定福祉用具販売(nullToEmpty(entity.getサービスremban13()));
-            eucEntity.set前回結果_短期入所生活介護ショートステイ(nullToEmpty(entity.get前回サービスremban9()));
-            eucEntity.set前回結果_短期入所療養介護(nullToEmpty(entity.get前回サービスremban10()));
-            eucEntity.set前回結果_特定施設入居者生活介護(nullToEmpty(entity.get前回サービスremban12()));
-            eucEntity.set前回結果_福祉用具貸与(nullToEmpty(entity.get前回サービスremban8()));
-            eucEntity.set前回結果_特定福祉用具販売(nullToEmpty(entity.get前回サービスremban13()));
+            eucEntity.set介護予防短期入所生活介護ショートステイ(nullToEmpty(entity.getサービスremban9()));
+            eucEntity.set介護予防短期入所療養介護(nullToEmpty(entity.getサービスremban10()));
+            eucEntity.set介護予防特定施設入居者生活介護(nullToEmpty(entity.getサービスremban12()));
+            eucEntity.set介護予防福祉用具貸与(nullToEmpty(entity.getサービスremban8()));
+            eucEntity.set特定介護予防福祉用具販売(nullToEmpty(entity.getサービスremban13()));
+            eucEntity.set前回結果_介護予防短期入所生活介護ショートステイ(nullToEmpty(entity.get前回サービスremban9()));
+            eucEntity.set前回結果_介護予防短期入所療養介護(nullToEmpty(entity.get前回サービスremban10()));
+            eucEntity.set前回結果_介護予防特定施設入居者生活介護(nullToEmpty(entity.get前回サービスremban12()));
+            eucEntity.set前回結果_介護予防福祉用具貸与(nullToEmpty(entity.get前回サービスremban8()));
+            eucEntity.set前回結果_特定介護予防福祉用具販売(nullToEmpty(entity.get前回サービスremban13()));
         } else {
-            eucEntity.set短期入所生活介護ショートステイ(nullToEmpty(entity.getサービスremban8()));
-            eucEntity.set短期入所療養介護(nullToEmpty(entity.getサービスremban9()));
-            eucEntity.set特定施設入居者生活介護(nullToEmpty(entity.getサービスremban10()));
-            eucEntity.set福祉用具貸与(nullToEmpty(entity.getサービスremban11()));
-            eucEntity.set特定福祉用具販売(nullToEmpty(entity.getサービスremban12()));
+            eucEntity.set介護予防短期入所生活介護ショートステイ(nullToEmpty(entity.getサービスremban8()));
+            eucEntity.set介護予防短期入所療養介護(nullToEmpty(entity.getサービスremban9()));
+            eucEntity.set介護予防特定施設入居者生活介護(nullToEmpty(entity.getサービスremban10()));
+            eucEntity.set介護予防福祉用具貸与(nullToEmpty(entity.getサービスremban11()));
+            eucEntity.set特定介護予防福祉用具販売(nullToEmpty(entity.getサービスremban12()));
             eucEntity.set介護予防認知症対応型通所介護(entity.getサービスremban14());
             eucEntity.set介護予防小規模多機能型居宅介護(entity.getサービスremban15());
             eucEntity.set介護予防認知症対応型共同生活介護グループホーム(entity.getサービスremban16());
-            eucEntity.set前回結果_短期入所生活介護ショートステイ(nullToEmpty(entity.get前回サービスremban8()));
-            eucEntity.set前回結果_短期入所療養介護(nullToEmpty(entity.get前回サービスremban9()));
-            eucEntity.set前回結果_特定施設入居者生活介護(nullToEmpty(entity.get前回サービスremban10()));
-            eucEntity.set前回結果_福祉用具貸与(nullToEmpty(entity.get前回サービスremban11()));
-            eucEntity.set前回結果_特定福祉用具販売(nullToEmpty(entity.get前回サービスremban12()));
+            eucEntity.set前回結果_介護予防短期入所生活介護ショートステイ(nullToEmpty(entity.get前回サービスremban8()));
+            eucEntity.set前回結果_介護予防短期入所療養介護(nullToEmpty(entity.get前回サービスremban9()));
+            eucEntity.set前回結果_介護予防特定施設入居者生活介護(nullToEmpty(entity.get前回サービスremban10()));
+            eucEntity.set前回結果_介護予防福祉用具貸与(nullToEmpty(entity.get前回サービスremban11()));
+            eucEntity.set前回結果_特定介護予防福祉用具販売(nullToEmpty(entity.get前回サービスremban12()));
             eucEntity.set前回結果_介護予防認知症対応型通所介護(entity.get前回サービスremban14());
             eucEntity.set前回結果_介護予防小規模多機能型居宅介護(entity.get前回サービスremban15());
             eucEntity.set前回結果_介護予防認知症対応型共同生活介護グループホーム(entity.get前回サービスremban16());
@@ -1047,7 +1047,6 @@ public class IchijiHanteizumIfOutputBusiness {
         eucEntity.set前回結果_通所介護デイサービス(nullToEmpty(entity.get前回サービスremban6()));
         eucEntity.set前回結果_通所リハビリテーション(entity.get前回サービスremban7());
         eucEntity.set前回結果_住宅改修介護給付(entity.get前回serviceJokyoFlag());
-
         if (entity.getKoroshoIfShikibetsuCode() != null
                 && (厚労省IF識別コード_99A.equals(entity.getKoroshoIfShikibetsuCode())
                 || (厚労省IF識別コード_02A.equals(entity.getKoroshoIfShikibetsuCode())))) {

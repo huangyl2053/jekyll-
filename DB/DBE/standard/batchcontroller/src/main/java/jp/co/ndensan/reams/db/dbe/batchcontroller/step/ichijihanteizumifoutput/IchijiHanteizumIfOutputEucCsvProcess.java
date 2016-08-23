@@ -95,15 +95,12 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
         getファイル名(entity);
         eucCsvWriterJunitoJugo.writeLine(business.setEucCsvEntity(entity));
         new NinteiChosaDataOutputResult().getアクセスログ(entity.getShinseishoKanriNo());
-        if (!entity.getKoroshoIfShikibetsuCode().equals(koroshoIfShikibetsuCode)) {
-            manager.spool(eucFilePath);
-            koroshoIfShikibetsuCode = entity.getKoroshoIfShikibetsuCode();
-            eucCsvWriterJunitoJugo.close();
-        }
     }
 
     @Override
     protected void afterExecute() {
+        eucCsvWriterJunitoJugo.close();
+        manager.spool(eucFilePath);
         outputJokenhyoFactory();
     }
 
@@ -137,11 +134,24 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
 
     private void getファイル名(IchijiHanteizumIfOutputRelateEntity entity) {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RStringBuilder jokenBuilder = new RStringBuilder();
-        RString ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト一次判定用データ送信ファイル名09B, RDate.getNowDate());
-        jokenBuilder.append(ファイル名.replace(".CSV", "_"));
-        jokenBuilder.append(entity.getKoroshoIfShikibetsuCode().concat(new RString(".csv")));
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), jokenBuilder.toRString());
+        if (RString.isNullOrEmpty(koroshoIfShikibetsuCode)) {
+            koroshoIfShikibetsuCode = entity.getKoroshoIfShikibetsuCode();
+            RStringBuilder jokenBuilder = new RStringBuilder();
+            RString ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト一次判定用データ送信ファイル名09B, RDate.getNowDate());
+            jokenBuilder.append(ファイル名.replace(".CSV", "_"));
+            jokenBuilder.append(entity.getKoroshoIfShikibetsuCode().concat(new RString(".csv")));
+            eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), jokenBuilder.toRString());
+        }
+        if (!koroshoIfShikibetsuCode.equals(entity.getKoroshoIfShikibetsuCode())) {
+            eucCsvWriterJunitoJugo.close();
+            koroshoIfShikibetsuCode = entity.getKoroshoIfShikibetsuCode();
+            RStringBuilder jokenBuilder = new RStringBuilder();
+            RString ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト一次判定用データ送信ファイル名09B, RDate.getNowDate());
+            jokenBuilder.append(ファイル名.replace(".CSV", "_"));
+            jokenBuilder.append(entity.getKoroshoIfShikibetsuCode().concat(new RString(".csv")));
+            eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), jokenBuilder.toRString());
+        }
+
         RString 一次判定IF文字コード = DbBusinessConfig.get(ConfigNameDBE.一次判定IF文字コード, RDate.getNowDate());
         if (new RString("1").equals(一次判定IF文字コード)) {
             eucCsvWriterJunitoJugo = new CsvWriter.InstanceBuilder(eucFilePath).

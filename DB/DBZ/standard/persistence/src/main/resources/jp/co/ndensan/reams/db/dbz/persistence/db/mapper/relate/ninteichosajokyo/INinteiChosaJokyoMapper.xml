@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 認定調査情報取得のマッピング用XMLです。 -->
+
+<!-- @reamsid_L DBZ-1330-020 chengsanyuan -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ninteichosajokyo.INinteiChosaJokyoMapper">
+
+    <resultMap id="result_KaigoJigyoshaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity" autoMapping="true">
+        <result property="jigyoshaName" column="jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="jigyoshaAddress" column="jigyoshaAddress" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="telNo" column="telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+    </resultMap>
+
+    <select resultOrdered="true" id="get介護事業者情報By介護受給" resultMap="result_KaigoJigyoshaEntity" 
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RDate" fetchSize="500">
+      SELECT
+        T7060."jigyoshaName"
+        , T7060."yubinNo"
+        , T7060."jigyoshaAddress"
+        , T7060."telNo" 
+      FROM
+        rgdb."DbT4101NinteiShinseiJoho" T4101 
+        LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" T1004 
+          ON T1004."nyushoShisetsuCode" = T4101."nyushoShisetsuCode" 
+          AND T1004."shikibetsuCode" = T4101."shikibetsuCode" 
+          AND ( 
+            T1004."nyushoYMD" <![CDATA[<=]]> #{システム日付} 
+            AND #{システム日付} <![CDATA[<=]]> T1004."taishoYMD"
+          ) 
+        LEFT JOIN rgdb."DbT7060KaigoJigyosha" T7060 
+          ON T1004."nyushoShisetsuCode" = T7060.事業者番号 
+          AND ( 
+            T7060."yukoKaishiYMD" <![CDATA[<=]]> #{システム日付} 
+            AND #{システム日付} <![CDATA[<=]]> T7060."yukoShuryoYMD"
+          ) 
+      ORDER BY
+        T1004."rirekiNo" DESC 
+      LIMIT
+        1
+    </select>
+    
+    <select resultOrdered="true" id="get介護事業者情報By介護認定" resultMap="result_KaigoJigyoshaEntity" 
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RDate" fetchSize="500">
+      SELECT
+        T7060."jigyoshaName"
+        , T7060."yubinNo"
+        , T7060."jigyoshaAddress"
+        , T7060."telNo" 
+      FROM
+        rgdb."DbT5101NinteiShinseiJoho" T5101 
+        LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" T1004 
+          ON T1004."nyushoShisetsuCode" = T5101."nyushoShisetsuCode" 
+          AND T1004."shikibetsuCode" = T5101."shikibetsuCode" 
+          AND ( 
+            T1004."nyushoYMD" <![CDATA[<=]]> #{システム日付} 
+            AND #{システム日付} <![CDATA[<=]]> T1004."taishoYMD"
+          ) 
+        LEFT JOIN rgdb."DbT7060KaigoJigyosha" T7060 
+          ON T1004."nyushoShisetsuCode" = T7060.事業者番号 
+          AND ( 
+            T7060."yukoKaishiYMD" <![CDATA[<=]]> #{システム日付} 
+            AND #{システム日付} <![CDATA[<=]]> T7060."yukoShuryoYMD"
+          ) 
+      ORDER BY
+        T1004."rirekiNo" DESC 
+      LIMIT
+        1
+    </select>
+</mapper>
