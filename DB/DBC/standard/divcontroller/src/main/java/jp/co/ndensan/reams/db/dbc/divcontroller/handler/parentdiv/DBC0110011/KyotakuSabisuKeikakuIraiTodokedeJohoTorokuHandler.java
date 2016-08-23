@@ -322,7 +322,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
      *
      * @return Boolean
      */
-    public boolean get小規模多機能チェック() {
+    public boolean is小規模多機能チェック() {
         if (!計画修正モード.equals(div.getMode()) || !is事業者作成の場合()) {
             return Boolean.FALSE;
         }
@@ -340,7 +340,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
      * @param 被保険者番号 被保険者番号
      * @return Boolean
      */
-    public boolean get介護度サービス種類チェック(HihokenshaNo 被保険者番号) {
+    public boolean is介護度サービス種類チェック(HihokenshaNo 被保険者番号) {
         JukyushaDaichoManager manager = new JukyushaDaichoManager();
         JukyushaDaicho jukyushaDaicho = manager.get受給申請事由認定完了(被保険者番号);
         if (jukyushaDaicho != null
@@ -358,7 +358,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
      *
      * @return Boolean
      */
-    public boolean get地域包括支援センターチェック() {
+    public boolean is地域包括支援センターチェック() {
         if (!is事業者作成の場合()) {
             return Boolean.FALSE;
         }
@@ -376,7 +376,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
      * @param 被保険者番号 被保険者番号
      * @return Boolean
      */
-    public boolean get計画適用開始日での認定状態をチェック(HihokenshaNo 被保険者番号) {
+    public boolean is計画適用開始日での認定状態をチェック(HihokenshaNo 被保険者番号) {
         FlexibleDate 計画適用開始日 = new FlexibleDate(div.getTxtKeikakuTekiyoStartYMD().getValue().toDateString());
         JukyushaDaichoManager manager = new JukyushaDaichoManager();
         List<JukyushaDaicho> list = manager.select受給者台帳情報(被保険者番号, 計画適用開始日);
@@ -389,7 +389,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
      * @param 被保険者番号 被保険者番号
      * @return Boolean
      */
-    public boolean get受給申請中をチェック(HihokenshaNo 被保険者番号) {
+    public boolean is受給申請中をチェック(HihokenshaNo 被保険者番号) {
         JukyushaDaichoManager manager = new JukyushaDaichoManager();
         JukyushaDaicho jukyushaDaicho = manager.get受給申請事由(被保険者番号);
         return jukyushaDaicho == null;
@@ -445,7 +445,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
                     set適用終了年月日(new FlexibleDate(div.getTxtKeikakuTekiyoEndYMD().getValue().toDateString()));
             builder.set作成区分コード(div.getRadKeikakuSakuseiKubun().getSelectedKey()).
                     set計画事業者番号(new JigyoshaNo(div.getTxtJigyoshaNo().getValue())).
-                    set委託先事業者番号(new JigyoshaNo(div.getTxtItakusakiJigyoshaNo().getValue()));
+                    set委託先事業者番号(RString.isNullOrEmpty(div.getTxtItakusakiJigyoshaNo().getValue()) ? null
+                            : new JigyoshaNo(div.getTxtItakusakiJigyoshaNo().getValue()));
             if (div.getTxtJigyoshaHenkoYMD().getValue() != null && !div.getTxtJigyoshaHenkoYMD().isReadOnly()) {
                 builder.set事業者変更年月日(new FlexibleDate(div.getTxtJigyoshaHenkoYMD().getValue().toDateString()));
             }
@@ -727,7 +728,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
      * @param 被保険者番号 被保険者番号
      * @return boolean
      */
-    public boolean get前排他(RString 被保険者番号) {
+    public boolean can前排他(RString 被保険者番号) {
         LockingKey 排他キー = new LockingKey(DBCHIHOKENSHANO.concat(被保険者番号));
         return RealInitialLocker.tryGetLock(排他キー);
     }

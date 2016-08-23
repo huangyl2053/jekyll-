@@ -96,6 +96,10 @@ public enum ReportIdDBC {
      */
     DBC100067(new ReportId("DBC100067_FutanWariaiShoRenchoYoko"), new RString("負担割合証（連帳　横）")),
     /**
+     * 総合事業費再審査決定通知書情報取込一覧表（公費）帳票ＩＤです。
+     */
+    DBC200081(new ReportId("DBC200081_SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohi"), new RString("総合事業費再審査決定通知書情報取込一覧表（公費）")),
+    /**
      * 高額介護（予防）サービス費支給申請書
      */
     DBC100068(new ReportId("DBC100068_KogakuShikyuShinseisho"), new RString("高額介護（予防）サービス費支給申請書")),

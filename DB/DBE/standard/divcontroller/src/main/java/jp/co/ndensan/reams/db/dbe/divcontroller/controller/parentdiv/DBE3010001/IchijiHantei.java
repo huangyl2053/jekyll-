@@ -321,8 +321,7 @@ public class IchijiHantei {
             }
         }
         AccessLogger.log(AccessLogType.照会, personalData);
-        ValidationMessageControlPairs validation = getValidatisonHandler(div).データ空のチェック();
-        return validation;
+        return getValidatisonHandler(div).データ空のチェック();
     }
 
     private List<IChiJiPanTeiSyoRiBusiness> kenSaKu(IchijiHanteiDiv div, RString menuID, ShinseishoKanriNoList shinseishoKanriNoList) {

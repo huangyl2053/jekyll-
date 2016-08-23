@@ -883,6 +883,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
     }
 
     private void set賦課の情報(DbT2002FukaJohoTempTableEntity entity, FukaJoho 更新後, boolean has口座) {
+        entity.setShikibetsuCode(更新後.get識別コード());
         entity.setChoteiJiyu1(更新後.get調定事由1());
         entity.setChoteiJiyu2(更新後.get調定事由2());
         entity.setChoteiJiyu3(更新後.get調定事由3());

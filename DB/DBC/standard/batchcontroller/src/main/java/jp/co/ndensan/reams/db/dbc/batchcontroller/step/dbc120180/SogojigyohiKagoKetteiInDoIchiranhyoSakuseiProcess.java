@@ -113,14 +113,13 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
 
     @Override
     protected void initialize() {
-        連番 = 1;
+        連番 = 0;
         pageBreakKeys = new ArrayList<>();
         証記載保険者番号 = null;
         帳票データの取得Parameter = new KokuhorenIchiranhyoMybatisParameter();
         識別コードset = new HashSet<>();
         出力順Map = new HashMap<>();
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        lastEntity = new SogojigyohiKagoKetteiInEntity();
         並び順 = finder.get出力順(parameter.getサブ業務コード(), parameter.get帳票ID(),
                 parameter.get出力順ID());
         if (null == 並び順) {
@@ -175,7 +174,7 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
                 .setEnclosure(ダブル引用符)
                 .setEncode(Encode.SJIS)
                 .setNewLine(NewLine.CRLF)
-                .hasHeader(false)
+                .hasHeader(true)
                 .build();
 
     }
@@ -201,27 +200,25 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
             集計Flag = true;
         }
         証記載保険者番号 = this証記載保険者番号;
-        if (集計Flag) {
+        if (lastEntity != null) {
             SogojigyohiKagoKetteiInReport report = new SogojigyohiKagoKetteiInReport(lastEntity,
                     出力順Map,
                     parameter.get処理年月(),
                     parameter.getシステム日付(),
                     連番,
-                    true);
+                    集計Flag);
             report.writeBy(reportSourceWriter);
+            do帳票のCSVファイル作成(lastEntity,
+                    parameter.get処理年月(),
+                    parameter.getシステム日付(),
+                    集計Flag);
         }
-        SogojigyohiKagoKetteiInReport report = new SogojigyohiKagoKetteiInReport(entity,
-                出力順Map,
-                parameter.get処理年月(),
-                parameter.getシステム日付(),
-                連番,
-                false);
-        report.writeBy(reportSourceWriter);
-        SogojigyohiKagoKetteiInCsvEntity output = do帳票のCSVファイル作成(entity,
-                parameter.get処理年月(),
-                parameter.getシステム日付(),
-                集計Flag);
-        sogojigyohiKagoKetteiInCsvWriter.writeLine(output);
+        if (null != entity.get識別コード() && !entity.get識別コード().isEmpty()
+                && !識別コードset.contains(entity.get識別コード())) {
+            PersonalData personalData = getPersonalData(entity);
+            personalDataList.add(personalData);
+            識別コードset.add(entity.get識別コード());
+        }
         連番++;
         lastEntity = entity;
     }
@@ -235,11 +232,10 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
                 連番,
                 true);
         report.writeBy(reportSourceWriter);
-        SogojigyohiKagoKetteiInCsvEntity output = do帳票のCSVファイル作成(lastEntity,
+        do帳票のCSVファイル作成(lastEntity,
                 parameter.get処理年月(),
                 parameter.getシステム日付(),
                 true);
-        sogojigyohiKagoKetteiInCsvWriter.writeLine(output);
         sogojigyohiKagoKetteiInCsvWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
@@ -247,8 +243,24 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
         }
     }
 
-    private SogojigyohiKagoKetteiInCsvEntity do帳票のCSVファイル作成(SogojigyohiKagoKetteiInEntity entity,
+    private void do帳票のCSVファイル作成(SogojigyohiKagoKetteiInEntity entity,
             FlexibleYearMonth 処理年月, RDateTime 作成日時, boolean 集計Flag) {
+        if (集計Flag) {
+            CSV明細作成(entity, 処理年月, 作成日時);
+            CSV集計作成(entity);
+        } else {
+            CSV明細作成(entity, 処理年月, 作成日時);
+        }
+
+        if (null != entity.get識別コード() && !entity.get識別コード().isEmpty()
+                && !識別コードset.contains(entity.get識別コード())) {
+            PersonalData personalData = getPersonalData(entity);
+            personalDataList.add(personalData);
+            識別コードset.add(entity.get識別コード());
+        }
+    }
+
+    private void CSV明細作成(SogojigyohiKagoKetteiInEntity entity, FlexibleYearMonth 処理年月, RDateTime 作成日時) {
         SogojigyohiKagoKetteiInCsvEntity output = new SogojigyohiKagoKetteiInCsvEntity();
         if (連番 == 1) {
             output.set処理年月(処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
@@ -263,37 +275,46 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
             output.set処理年月(RString.EMPTY);
             output.set作成日時(RString.EMPTY);
         }
-
         output.set証記載保険者番号(getColumnValue(entity.get証記載保険者番号()));
         output.set証記載保険者名(entity.get証記載保険者名());
+        output.set取扱年月(doパターン54(entity.get取扱年月()));
+        output.set事業者番号(getColumnValue(entity.get事業者番号()));
+        output.set事業者名(entity.get事業者名());
+        output.set被保険者番号(getColumnValue(entity.get被保険者番号()));
+        output.set被保険者名(entity.get被保険者名());
+        output.setサービス提供年月(doパターン54(entity.getサービ提供年月()));
+        output.setサービス種類コード(getColumnValue(entity.getサービス種類コード()));
+        output.setサービス種類名(entity.getサービス種類名());
+        output.set過誤申立事由コード(getColumnValue(entity.get過誤申立事由コード()));
+        output.set過誤申立事由(entity.get過誤申立事由());
+        output.set単位数(doカンマ編集(entity.get単位数()));
+        output.set負担額(doカンマ編集(entity.get保険者負担額()));
+        output.set総合事業費_件数(RString.EMPTY);
+        output.set総合事業費_単位数(RString.EMPTY);
+        output.set総合事業費_負担額(RString.EMPTY);
+        sogojigyohiKagoKetteiInCsvWriter.writeLine(output);
+    }
 
-        if (集計Flag) {
-            output.set総合事業費_件数(new RString(entity.get介護給付費件数()));
-            output.set総合事業費_単位数(doカンマ編集(entity.get介護給付費単位数()));
-            output.set総合事業費_負担額(doカンマ編集(entity.get介護給付費保険者負担額()));
-        } else {
-            output.set取扱年月(doパターン54(entity.get取扱年月()));
-            output.set事業者番号(getColumnValue(entity.get事業者番号()));
-            output.set事業者名(entity.get事業者名());
-            output.set被保険者番号(getColumnValue(entity.get被保険者番号()));
-            output.set被保険者名(entity.get被保険者名());
-            output.setサービス提供年月(doパターン54(entity.getサービ提供年月()));
-            output.setサービス種類コード(getColumnValue(entity.getサービス種類コード()));
-            output.setサービス種類名(entity.getサービス種類名());
-            output.set過誤申立事由コード(getColumnValue(entity.get過誤申立事由コード()));
-            output.set過誤申立事由(entity.get過誤申立事由());
-            output.set単位数(doカンマ編集(entity.get単位数()));
-            output.set負担額(doカンマ編集(entity.get保険者負担額()));
-
-        }
-
-        if (null != entity.get識別コード() && !entity.get識別コード().isEmpty()
-                && !識別コードset.contains(entity.get識別コード())) {
-            PersonalData personalData = getPersonalData(entity);
-            personalDataList.add(personalData);
-            識別コードset.add(entity.get識別コード());
-        }
-        return output;
+    private void CSV集計作成(SogojigyohiKagoKetteiInEntity entity) {
+        SogojigyohiKagoKetteiInCsvEntity output = new SogojigyohiKagoKetteiInCsvEntity();
+        output.set証記載保険者番号(getColumnValue(entity.get証記載保険者番号()));
+        output.set証記載保険者名(entity.get証記載保険者名());
+        output.set取扱年月(RString.EMPTY);
+        output.set事業者番号(RString.EMPTY);
+        output.set事業者名(RString.EMPTY);
+        output.set被保険者番号(RString.EMPTY);
+        output.set被保険者名(RString.EMPTY);
+        output.setサービス提供年月(RString.EMPTY);
+        output.setサービス種類コード(RString.EMPTY);
+        output.setサービス種類名(RString.EMPTY);
+        output.set過誤申立事由コード(RString.EMPTY);
+        output.set過誤申立事由(RString.EMPTY);
+        output.set単位数(RString.EMPTY);
+        output.set負担額(RString.EMPTY);
+        output.set総合事業費_件数(new RString(entity.get介護給付費件数()));
+        output.set総合事業費_単位数(doカンマ編集(entity.get介護給付費単位数()));
+        output.set総合事業費_負担額(doカンマ編集(entity.get介護給付費保険者負担額()));
+        sogojigyohiKagoKetteiInCsvWriter.writeLine(output);
     }
 
     private PersonalData getPersonalData(SogojigyohiKagoKetteiInEntity entity) {

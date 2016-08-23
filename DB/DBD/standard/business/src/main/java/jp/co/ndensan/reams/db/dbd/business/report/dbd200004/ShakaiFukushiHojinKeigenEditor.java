@@ -118,6 +118,11 @@ public class ShakaiFukushiHojinKeigenEditor implements IShakaiFukushiHojinKeigen
             source.list1_13 = 帳票情報.get認定年月日().wareki().toDateString();
         }
         source.list2_7 = 帳票情報.get入所施設コード();
+        setsource_line_up(source);
+    }
+
+    private void setsource_line_up(ShakaiFukushiHojinReportSourse source) {
+
         if (帳票情報.is旧措置者フラグ()) {
             source.list2_9 = new RString("該当");
         } else {
@@ -189,23 +194,40 @@ public class ShakaiFukushiHojinKeigenEditor implements IShakaiFukushiHojinKeigen
 
     private void set社会福祉法人等利用者負担軽減の情報(ShakaiFukushiHojinReportSourse source) {
         ShakaifukuRiyoshaFutanKeigen shakaifukuriyoshafutankeigen = new ShakaifukuRiyoshaFutanKeigen(帳票情報.get社会福祉法人等利用者負担軽減の情報());
-        source.list1_5 = shakaifukuriyoshafutankeigen.get申請年月日().wareki().toDateString();
-        source.list1_6 = shakaifukuriyoshafutankeigen.get決定年月日().wareki().toDateString();
-        source.list2_1 = shakaifukuriyoshafutankeigen.get証記載保険者番号().value();
-        source.list2_5 = shakaifukuriyoshafutankeigen.get適用開始年月日().wareki().toDateString();
-        source.list2_6 = shakaifukuriyoshafutankeigen.get適用終了年月日().wareki().toDateString();
+        if (shakaifukuriyoshafutankeigen.get申請年月日() != null && !shakaifukuriyoshafutankeigen.get申請年月日().isEmpty()) {
+            source.list1_5 = shakaifukuriyoshafutankeigen.get申請年月日().wareki().toDateString();
+        }
+        if (shakaifukuriyoshafutankeigen.get決定年月日() != null && !shakaifukuriyoshafutankeigen.get決定年月日().isEmpty()) {
+            source.list1_6 = shakaifukuriyoshafutankeigen.get決定年月日().wareki().toDateString();
+        }
+        if (shakaifukuriyoshafutankeigen.get証記載保険者番号() != null && !shakaifukuriyoshafutankeigen.get証記載保険者番号().isEmpty()) {
+            source.list2_1 = shakaifukuriyoshafutankeigen.get証記載保険者番号().value();
+        }
+        if (shakaifukuriyoshafutankeigen.get適用開始年月日() != null && !shakaifukuriyoshafutankeigen.get適用開始年月日().isEmpty()) {
+            source.list2_5 = shakaifukuriyoshafutankeigen.get適用開始年月日().wareki().toDateString();
+        }
+        if (shakaifukuriyoshafutankeigen.get適用終了年月日() != null && !shakaifukuriyoshafutankeigen.get適用終了年月日().isEmpty()) {
+            source.list2_6 = shakaifukuriyoshafutankeigen.get適用終了年月日().wareki().toDateString();
+        }
         source.list3_1 = shakaifukuriyoshafutankeigen.get確認番号();
-        if (shakaifukuriyoshafutankeigen.get決定区分().equals(承認する)) {
+        if (shakaifukuriyoshafutankeigen.get決定区分() != null && shakaifukuriyoshafutankeigen.get決定区分().equals(承認する)) {
             source.list3_4 = new RString("*");
         }
         if (shakaifukuriyoshafutankeigen.get軽減率_分母() != null && shakaifukuriyoshafutankeigen.get軽減率_分子() != null) {
             RString 軽減率 = new RString("");
-            軽減率.concat(shakaifukuriyoshafutankeigen.get軽減率_分子().toString());
-            軽減率.concat("/");
-            軽減率.concat(shakaifukuriyoshafutankeigen.get軽減率_分母().toString());
+            軽減率.concat(new RString(shakaifukuriyoshafutankeigen.get軽減率_分子().toString()));
+            軽減率.concat(new RString("/"));
+            軽減率.concat(new RString(shakaifukuriyoshafutankeigen.get軽減率_分母().toString()));
             source.list3_5 = 軽減率;
         }
-        source.list4_3 = GemmenKubun.toValue(shakaifukuriyoshafutankeigen.get減免区分()).get名称();
+        set社会福祉法人等利用者負担軽減の情報_line_up(shakaifukuriyoshafutankeigen, source);
+    }
+
+    private void set社会福祉法人等利用者負担軽減の情報_line_up(
+            ShakaifukuRiyoshaFutanKeigen shakaifukuriyoshafutankeigen, ShakaiFukushiHojinReportSourse source) {
+        if (shakaifukuriyoshafutankeigen.get減免区分() != null) {
+            source.list4_3 = GemmenKubun.toValue(shakaifukuriyoshafutankeigen.get減免区分()).get名称();
+        }
         RString 居宅サービス限定 = new RString("");
         if (shakaifukuriyoshafutankeigen.is居宅サービス限定()) {
             居宅サービス限定 = 居宅サービスのみ.concat(POINT);

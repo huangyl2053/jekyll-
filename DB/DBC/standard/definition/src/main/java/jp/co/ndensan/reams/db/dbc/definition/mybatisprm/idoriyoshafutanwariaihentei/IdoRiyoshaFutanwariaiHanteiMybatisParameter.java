@@ -25,7 +25,6 @@ public class IdoRiyoshaFutanwariaiHanteiMybatisParameter implements IMyBatisPara
     /**
      * コンストラクタです。
      *
-     * @param 市町村コード 市町村コード
      * @param 対象年度 対象年度
      * @param 処理名 処理名
      */

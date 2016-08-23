@@ -31,6 +31,19 @@
         <result property="ninchishoJiritsudoIIijoNoGaizensei" column="TMP_ninchishoJiritsudoIIijoNoGaizensei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="suiteiKyufuKubunCode" column="TMP_suiteiKyufuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinseishoKanriNo3" column="DbT5116_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kariIchijiHanteiKubun" column="DbT5116_kariIchijiHanteiKubun"/>
+        <result property="ninchishoKoreishaShihyoCode" column="DbT5116_ninchishoKoreishaShihyoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chukanHyokaKomoku6gun" column="DbT5116_chukanHyokaKomoku6gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chukanHyokaKomoku7gun" column="DbT5116_chukanHyokaKomoku7gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jiritsudoKumiawase1" column="DbT5116_jiritsudoKumiawase1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jiritsudoKumiawase2" column="DbT5116_jiritsudoKumiawase2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jiritsudoKumiawase3" column="DbT5116_jiritsudoKumiawase3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jiritsudoKumiawase4" column="DbT5116_jiritsudoKumiawase4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jiritsudoKumiawase5" column="DbT5116_jiritsudoKumiawase5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jiritsudoKumiawase6" column="DbT5116_jiritsudoKumiawase6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jiritsudoKumiawase7" column="DbT5116_jiritsudoKumiawase7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"  />
+        <result property="chert" column="DbT5116_chert" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jotaizo" column="DbT5116_jotaizo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
      <select resultOrdered="true" id="gethihokenshaNo" resultMap="haishameigihenkouirai" 
            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itizihanteishori.ItziHanteiShoriMybitisParamter"  fetchSize="500">
@@ -62,7 +75,20 @@
             TMP."jotaiAnteiseiCode" AS "TMP_jotaiAnteiseiCode",
             TMP."ninchishoJiritsudoIIijoNoGaizensei" AS "TMP_ninchishoJiritsudoIIijoNoGaizensei",
             TMP."suiteiKyufuKubunCode" AS "TMP_suiteiKyufuKubunCode",
-            DbT5116."shinseishoKanriNo" AS "DbT5116_shinseishoKanriNo"  
+            DbT5116."shinseishoKanriNo" AS "DbT5116_shinseishoKanriNo",
+            DbT5116."ninchishoKoreishaShihyoCode" AS "DbT5116_ninchishoKoreishaShihyoCode",
+            DbT5116."kariIchijiHanteiKubun" as "DbT5116_kariIchijiHanteiKubun",
+            DbT5116."chukanHyokaKomoku6gun"  as "DbT5116_chukanHyokaKomoku6gun",
+            DbT5116."chukanHyokaKomoku7gun" as "DbT5116_chukanHyokaKomoku7gun",
+            DbT5116."jiritsudoKumiawase1" as "DbT5116_jiritsudoKumiawase1",
+            DbT5116."jiritsudoKumiawase2" as "DbT5116_jiritsudoKumiawase2",
+            DbT5116."jiritsudoKumiawase3" as "DbT5116_jiritsudoKumiawase3",
+            DbT5116."jiritsudoKumiawase4" as "DbT5116_jiritsudoKumiawase4",
+            DbT5116."jiritsudoKumiawase5" as "DbT5116_jiritsudoKumiawase5",
+            DbT5116."jiritsudoKumiawase6" as "DbT5116_jiritsudoKumiawase6",
+            DbT5116."jiritsudoKumiawase7" as "DbT5116_jiritsudoKumiawase7",
+            DbT5116.chert as "DbT5116_chert",
+            DbT5116.jotaizo as "DbT5116_jotaizo"
         FROM
            "IchijiHanteiKekkaJohoTemp" as TMP
         INNER JOIN

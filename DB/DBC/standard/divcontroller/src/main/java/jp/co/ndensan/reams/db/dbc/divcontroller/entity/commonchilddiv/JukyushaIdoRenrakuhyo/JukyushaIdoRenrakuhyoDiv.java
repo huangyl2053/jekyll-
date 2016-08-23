@@ -4,26 +4,27 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.JukyushaI
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * JukyushaIdoRenrakuhyo のクラスファイル
@@ -31,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @reamsid_L DBC-4350-060 chenhui
  */
 public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenrakuhyoDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -63,8 +63,8 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     private NijiyoboJigyoPanelDiv NijiyoboJigyoPanel;
     @JsonProperty("RojinHokenPanel")
     private RojinHokenPanelDiv RojinHokenPanel;
-    @JsonProperty("hihokenshaNo")
-    private RString hihokenshaNo;
+    @JsonProperty("HihokenshaNo")
+    private RString HihokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -289,21 +289,21 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     /*
-     * gethihokenshaNo
-     * @return hihokenshaNo
+     * getHihokenshaNo
+     * @return HihokenshaNo
      */
-    @JsonProperty("hihokenshaNo")
+    @JsonProperty("HihokenshaNo")
     public RString getHihokenshaNo() {
-        return hihokenshaNo;
+        return HihokenshaNo;
     }
 
     /*
-     * sethihokenshaNo
-     * @param hihokenshaNo hihokenshaNo
+     * setHihokenshaNo
+     * @param HihokenshaNo HihokenshaNo
      */
-    @JsonProperty("hihokenshaNo")
-    public void setHihokenshaNo(RString hihokenshaNo) {
-        this.hihokenshaNo = hihokenshaNo;
+    @JsonProperty("HihokenshaNo")
+    public void setHihokenshaNo(RString HihokenshaNo) {
+        this.HihokenshaNo = HihokenshaNo;
     }
 
     /*
@@ -329,7 +329,7 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
             DisplayMode[] enumArray = DisplayMode.values();
 
             for (DisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -344,11 +344,11 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     public DisplayMode getMode_DisplayMode() {
-        return (DisplayMode) _CommonChildDivModeUtil.getMode(this.modes, DisplayMode.class);
+        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
     }
 
-    public void setMode_DisplayMode(DisplayMode value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DisplayMode.class, value);
+    public void setMode_DisplayMode( DisplayMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
     }
 
     /*
@@ -360,7 +360,7 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     @JsonIgnore
-    public void setTxtTeiseiYMD(TextBoxDate txtTeiseiYMD) {
+    public void  setTxtTeiseiYMD(TextBoxDate txtTeiseiYMD) {
         this.getJukyushaIdoRenrakuhyoTeisei().setTxtTeiseiYMD(txtTeiseiYMD);
     }
 
@@ -370,7 +370,7 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     @JsonIgnore
-    public void setRadTeiseiKubunCode(RadioButton radTeiseiKubunCode) {
+    public void  setRadTeiseiKubunCode(RadioButton radTeiseiKubunCode) {
         this.getJukyushaIdoRenrakuhyoTeisei().setRadTeiseiKubunCode(radTeiseiKubunCode);
     }
 
@@ -380,7 +380,7 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     @JsonIgnore
-    public void setLin3(HorizontalLine lin3) {
+    public void  setLin3(HorizontalLine lin3) {
         this.getJukyushaIdoRenrakuhyoTeisei().setLin3(lin3);
     }
 
@@ -404,56 +404,6 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
                 = JukyushaIdoRenrakuhyoHandler.of(this).initialize(処理モード, 識別コード, 被保険者番号, 履歴番号, 論理削除フラグ, 異動日);
         ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号);
         ViewStateHolder.put(ViewStateKeys.受給者異動送付, 受給者異動送付);
-    }
-
-    /**
-     * 「事業区分」操作制御のメソッドです。
-     *
-     */
-    @JsonIgnore
-    @Override
-    public void onClick_radNijiyoboJigyoKubun() {
-        JukyushaIdoRenrakuhyoHandler.of(this).onClick_事業区分();
-    }
-
-    /**
-     * 「計画作成区分」操作制御のメソッドです。
-     *
-     */
-    @JsonIgnore
-    @Override
-    public void onClick_radKyotakuServiceSakuseiKubun() {
-        JukyushaIdoRenrakuhyoHandler.of(this).onClick_計画作成区分();
-    }
-
-    /**
-     * 異動日focus outのメソッドです。
-     *
-     */
-    @JsonIgnore
-    @Override
-    public void onBlur_txtIdoYMD() {
-        JukyushaIdoRenrakuhyoHandler.of(this).onBlur_異動日();
-    }
-
-    /**
-     * 支援事業者番号focus outのメソッドです。
-     *
-     */
-    @JsonIgnore
-    @Override
-    public void onBlur_txtKyotakuKaigoShienJigyoshoNo() {
-        JukyushaIdoRenrakuhyoHandler.of(this).onBlur_支援事業者番号();
-    }
-
-    /**
-     * 住所地特例の保険者番号focus outのメソッドです。
-     *
-     */
-    @JsonIgnore
-    @Override
-    public void onBlur_txtShisetsuShozaiHokenjaNo() {
-        JukyushaIdoRenrakuhyoHandler.of(this).onBlur_保険者番号();
     }
 
     /**
@@ -486,7 +436,7 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     /**
      * 出力用受給者訂正情報Entity取得のメソッドです。
      *
-     * @return JukyushaIdoRenrakuhyoSakuseiRelateEntity
+     * @return JukyushaIdoRenrakuhyoTorokuEntity
      */
     @JsonIgnore
     @Override

@@ -70,20 +70,40 @@ public class JissiJyokyohyoReportProcess extends BatchProcessBase<JukyushaDaicho
     @Override
     protected void process(JukyushaDaichoTempEntity entity) {
         if (parameter.get出力帳票().equals(出力帳票)) {
-            entity.set認定年月(entity.get認定年月日().getYearMonth().seireki().toDateString());
-            entity.set受給申請年月(entity.get受給申請年月日().getYearMonth().seireki().toDateString());
-            entity.set調査委託年月(entity.get調査委託年月日().getYearMonth().seireki().toDateString());
-            entity.set調査終了年月(entity.get調査終了年月日().getYearMonth().seireki().toDateString());
-            entity.set意見書依頼年月(entity.get意見書依頼年月日().getYearMonth().seireki().toDateString());
-            entity.set意見書取寄せ年月(entity.get意見書取寄せ年月日().getYearMonth().seireki().toDateString());
-            entity.set審査会依頼年月(entity.get審査会依頼年月日().getYearMonth().seireki().toDateString());
-            entity.set認定審査会割当予定年月(entity.get認定審査会割当予定年月日().getYearMonth().seireki().toDateString());
-            entity.set審査会資料作成年月(entity.get審査会資料作成年月日().getYearMonth().seireki().toDateString());
-            entity.set認定調査予定年月(entity.get認定調査予定年月日().getYearMonth().seireki().toDateString());
-            entity.set主治医意見書作成依頼予定年月(entity.get主治医意見書作成依頼予定年月日().getYearMonth().seireki().toDateString());
+            if (entity.get認定年月日() != null && !entity.get認定年月日().isEmpty()) {
+                entity.set認定年月(entity.get認定年月日().getYearMonth().seireki().toDateString());
+            }
+            if (entity.get受給申請年月日() != null && !entity.get受給申請年月日().isEmpty()) {
+                entity.set受給申請年月(entity.get受給申請年月日().getYearMonth().seireki().toDateString());
+            }
+            if (entity.get調査委託年月日() != null && !entity.get調査委託年月日().isEmpty()) {
+                entity.set調査委託年月(entity.get調査委託年月日().getYearMonth().seireki().toDateString());
+            }
+            if (entity.get調査終了年月日() != null && !entity.get調査終了年月日().isEmpty()) {
+                entity.set調査終了年月(entity.get調査終了年月日().getYearMonth().seireki().toDateString());
+            }
+            if (entity.get意見書依頼年月日() != null && !entity.get意見書依頼年月日().isEmpty()) {
+                entity.set意見書依頼年月(entity.get意見書依頼年月日().getYearMonth().seireki().toDateString());
+            }
+            if (entity.get意見書取寄せ年月日() != null && !entity.get意見書取寄せ年月日().isEmpty()) {
+                entity.set意見書取寄せ年月(entity.get意見書取寄せ年月日().getYearMonth().seireki().toDateString());
+            }
+            if (entity.get審査会依頼年月日() != null && !entity.get審査会依頼年月日().isEmpty()) {
+                entity.set審査会依頼年月(entity.get審査会依頼年月日().getYearMonth().seireki().toDateString());
+            }
+            if (entity.get認定審査会割当予定年月日() != null && !entity.get認定審査会割当予定年月日().isEmpty()) {
+                entity.set認定審査会割当予定年月(entity.get認定審査会割当予定年月日().getYearMonth().seireki().toDateString());
+            }
+            if (entity.get審査会資料作成年月日() != null && !entity.get審査会資料作成年月日().isEmpty()) {
+                entity.set審査会資料作成年月(entity.get審査会資料作成年月日().getYearMonth().seireki().toDateString());
+            }
+            if (entity.get認定調査予定年月日() != null && !entity.get認定調査予定年月日().isEmpty()) {
+                entity.set認定調査予定年月(entity.get認定調査予定年月日().getYearMonth().seireki().toDateString());
+            }
+            if (entity.get主治医意見書作成依頼予定年月日() != null && !entity.get主治医意見書作成依頼予定年月日().isEmpty()) {
+                entity.set主治医意見書作成依頼予定年月(entity.get主治医意見書作成依頼予定年月日().getYearMonth().seireki().toDateString());
+            }
             tempWriter.insert(entity);
         }
-
     }
-
 }

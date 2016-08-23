@@ -1553,15 +1553,17 @@ public class DbT2002FukaTempTableEntity extends DbTableEntityBase<DbT2002FukaTem
     private RString nenkinTokuchoKaifuJoho_dtYobi4Juminzei;
     @TempTableColumnOrder(739)
     private RString nenkinTokuchoKaifuJoho_dtKojinNo;
+    @TempTableColumnOrder(740)
+    private RString nenkinTokuchoKaifuJoho_kokuhoYoteiSoshitsuKubun;
 
     // 更正前情報有無区分
-    @TempTableColumnOrder(740)
+    @TempTableColumnOrder(741)
     private RString koseimaeJohoUmuKubun;
     // 前年度・特徴期別金額06
-    @TempTableColumnOrder(741)
+    @TempTableColumnOrder(742)
     private RString zennendoTokuchoKibetsuKingaku06;
     // 被保険者区分
-    @TempTableColumnOrder(742)
+    @TempTableColumnOrder(743)
     private RString hihokenshaKubun;
 
 }

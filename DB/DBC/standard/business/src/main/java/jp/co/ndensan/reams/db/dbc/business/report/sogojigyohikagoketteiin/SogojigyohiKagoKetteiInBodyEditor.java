@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin;
+    package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagoketteiin.SogojigyohiKagoKetteiInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohikagoketteiin.SogojigyohiKagoKetteiInSource;
@@ -48,9 +48,8 @@ public class SogojigyohiKagoKetteiInBodyEditor implements ISogojigyohiKagoKettei
     public SogojigyohiKagoKetteiInSource edit(SogojigyohiKagoKetteiInSource source) {
         if (集計Flag) {
             edit集計(source);
-        } else {
-            edit明細(source);
         }
+        edit明細(source);
         return source;
     }
 

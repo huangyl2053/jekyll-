@@ -71,17 +71,17 @@
                     MAX("idoYMD"||"edaNo") AS max
                  FROM
                     rgdb."DbT1001HihokenshaDaicho" 
+                 WHERE
+                    "hihokennshaKubunCode" = '1'
+                    AND "logicalDeletedFlag" = FALSE
+                    AND ("shikakuSoshitsuYMD" IS NULL OR "shikakuSoshitsuYMD" = ''
+                        OR #{賦課年度_修正後} <![CDATA[<]]> "shikakuSoshitsuYMD")
+                    AND "ichigoShikakuShutokuYMD" <![CDATA[<=]]> #{資格基準日}
                     GROUP BY "hihokenshaNo", "ichigoShikakuShutokuYMD", "shikakuSoshitsuYMD") AS B
         ON "DbT1001HihokenshaDaicho". "hihokenshaNo" = B. "hihokenshaNo"
-        AND "DbT1001HihokenshaDaicho". "ichigoShikakuShutokuYMD" = B. "ichigoShikakuShutokuYMD"
-        AND "DbT1001HihokenshaDaicho". "shikakuSoshitsuYMD" = B. "shikakuSoshitsuYMD"
+        AND COALESCE("DbT1001HihokenshaDaicho" . "ichigoShikakuShutokuYMD",'00000000') = COALESCE(B. "ichigoShikakuShutokuYMD",'00000000')
+        AND COALESCE("DbT1001HihokenshaDaicho" . "shikakuSoshitsuYMD",'00000000') = COALESCE(B. "shikakuSoshitsuYMD",'00000000')
         AND ("DbT1001HihokenshaDaicho". "idoYMD" || "DbT1001HihokenshaDaicho". "edaNo") = B.max
-        WHERE
-        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode" = '1'
-        AND "DbT1001HihokenshaDaicho"."logicalDeletedFlag" = FALSE
-        AND ("DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD" IS NULL OR "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD" = ''
-        OR #{賦課年度_修正後}<![CDATA[<]]>"DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD")
-        AND "DbT1001HihokenshaDaicho"."ichigoShikakuShutokuYMD" <![CDATA[<=]]> #{資格基準日}
     </select>
     
     <!--データに本算定抽出一時テーブルを登録します。-->

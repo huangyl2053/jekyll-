@@ -126,8 +126,8 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
             source.jusho1 = 送付物宛先.jusho1;
             source.jusho2 = 送付物宛先.jusho2;
             source.jusho3 = 送付物宛先.jusho3;
-            source.katagakiText = 送付物宛先.katagaki1;
-            source.katagaki1 = 送付物宛先.katagaki2;
+            source.katagakiText = 送付物宛先.katagakiText;
+            source.katagaki1 = 送付物宛先.katagaki1;
             source.katagaki2 = 送付物宛先.katagaki2;
             source.katagakiSmall1 = 送付物宛先.katagakiSmall1;
             source.katagakiSmall2 = 送付物宛先.katagakiSmall2;

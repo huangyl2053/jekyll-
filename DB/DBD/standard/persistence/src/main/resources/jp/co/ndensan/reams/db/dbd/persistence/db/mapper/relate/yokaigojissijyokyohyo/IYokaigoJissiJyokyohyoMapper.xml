@@ -90,20 +90,13 @@
         <result property="認定審査会割当予定年月日" column="T5123_ninteiShinsakaiWariateYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="認定調査予定年月日" column="T5123_ninteichosaYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="主治医意見書作成依頼予定年月日" column="T5123_ikenshoSakuseiIraiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="市町村番号" column="T7051_kokuhorenKoikiShichosonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="市町村名" column="T7051_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="調査委託年月日" column="T4003_chosaItakuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="調査終了年月日" column="T4003_chosaShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="意見書依頼年月日" column="T4003_ikenshoIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="意見書取寄せ年月日" column="T4003_ikenshoToriyoseYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="審査会資料作成年月日" column="T4003_shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="審査会予定年月日" column="T4003_shinsakaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="調査委託年月日" column="X4102_ninteichosaIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="調査終了年月日" column="X4102_ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="意見書依頼年月日" column="X4102_ikenshoSakuseiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="審査会予定年月日" column="shinsakaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="意見書取寄せ年月日" column="X4102_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="審査会資料作成年月日" column="X4102_shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="審査会予定年月日" column="T4123_ninteiShinsakaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="資格喪失年月日" column="T1001_shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
      </resultMap>
     
@@ -118,12 +111,12 @@
             T7051."kokuhorenKoikiShichosonNo" AS T7051_kokuhorenKoikiShichosonNo,
             T7051."shichosonMeisho" AS T7051_shichosonMeisho,
             <if test="is導入形態コード111 || is導入形態コード112">
-                T4003."chosaItakuYMD" AS T4003_chosaItakuYMD,
-                T4003."chosaShuryoYMD" AS T4003_chosaShuryoYMD,
-                T4003."ikenshoIraiYMD" AS T4003_ikenshoIraiYMD,
-                T4003."ikenshoToriyoseYMD" AS T4003_ikenshoToriyoseYMD,
-                T4003."shinsakaiShiryoSakuseiYMD" AS T4003_shinsakaiShiryoSakuseiYMD,
-                T4003."shinsakaiYoteiYMD" AS T4003_shinsakaiYoteiYMD,
+                T4003."chosaItakuYMD" AS X4102_ninteichosaIraiYMD,
+                T4003."chosaShuryoYMD" AS X4102_ninteichosaJisshiYMD,
+                T4003."ikenshoIraiYMD" AS X4102_ikenshoSakuseiIraiYMD,
+                T4003."ikenshoToriyoseYMD" AS X4102_ikenshoJuryoYMD,
+                T4003."shinsakaiShiryoSakuseiYMD" AS X4102_shinsakaiShiryoSakuseiYMD,
+                T4003."shinsakaiYoteiYMD" AS shinsakaiYoteiYMD,
             </if>
             <if test="is導入形態コード120">
                 X4102_ninteichosaIraiYMD,
@@ -131,7 +124,7 @@
                 X4102_ikenshoSakuseiIraiYMD,
                 X4102_ikenshoJuryoYMD,
                 X4102_shinsakaiShiryoSakuseiYMD,
-                T4123."ninteiShinsakaiYoteiYMD" AS T4123_ninteiShinsakaiYoteiYMD,
+                T4123."ninteiShinsakaiYoteiYMD" AS shinsakaiYoteiYMD,
             </if>
             T1001."shikakuSoshitsuYMD" AS T1001_shikakuSoshitsuYMD
         FROM
@@ -149,7 +142,7 @@
             AS B
             ON B."shikibetsuCode"  = "DbT4001JukyushaDaicho"."shikibetsuCode" 
               
-            LEFT JOIN   rgdb."DbT5123NinteiKeikakuJoho" AS T5123
+            INNER JOIN   rgdb."DbT5123NinteiKeikakuJoho" AS T5123
                 ON      "DbT4001JukyushaDaicho"."shinseishoKanriNo" = T5123."shinseishoKanriNo"  
             <if test="is導入形態コード111 || is導入形態コード112">
                 INNER JOIN  rgdb."DbT4003YokaigoNinteiInterface" AS T4003

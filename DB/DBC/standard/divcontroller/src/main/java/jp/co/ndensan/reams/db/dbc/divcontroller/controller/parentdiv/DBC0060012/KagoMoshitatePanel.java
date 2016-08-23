@@ -57,9 +57,7 @@ public class KagoMoshitatePanel {
         List<KyufuKanrihyoShokaiDataModel> 給付管理表示用明細一覧
                 = ViewStateHolder.get(ViewStateKeys.給付管理明細一覧, ArrayList.class);
         boolean 居宅サービスフラグ = ViewStateHolder.get(ViewStateKeys.居宅サービスフラグ, Boolean.class);
-        if (居宅サービスフラグ && 給付管理表示用明細一覧 != null) {
-            getHandler(div).set給付管理明細一覧(給付管理表示用明細一覧);
-        }
+        getHandler(div).set給付管理明細一覧(居宅サービスフラグ, 給付管理表示用明細一覧);
         アクセスログ(給付管理票.get被保険者番号());
         getHandler(div).onLoad(給付管理票);
         return ResponseData.of(div).respond();

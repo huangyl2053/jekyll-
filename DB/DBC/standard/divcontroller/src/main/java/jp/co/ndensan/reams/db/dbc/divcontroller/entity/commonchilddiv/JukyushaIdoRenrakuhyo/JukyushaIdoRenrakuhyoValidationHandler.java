@@ -88,7 +88,7 @@ public class JukyushaIdoRenrakuhyoValidationHandler {
                         getRadTokuteiNyushoshaKaigoServiceKubun())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.特例減額措置対象の必須項目,
                         div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
-                        getRadTokuteiNyushoshaKaigoServiceKubun())
+                        getRadKaizeisoTokureiGengakuSochiTaishoFlag())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.公費負担上限額減額_生活保護等の必須項目,
                         div.getKyufuSeigenPanel().getRadKohiFutanJogenGengakuAriFlag())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.二次予防事業区分の必須項目,

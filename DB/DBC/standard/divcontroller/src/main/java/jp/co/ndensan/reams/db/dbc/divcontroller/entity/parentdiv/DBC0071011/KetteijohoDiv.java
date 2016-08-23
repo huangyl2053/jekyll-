@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0071011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -32,8 +31,6 @@ public class KetteijohoDiv extends Panel {
     private Button btnSearch;
     @JsonProperty("KetteiHokensha")
     private KetteiHokenshaDiv KetteiHokensha;
-    @JsonProperty("kubunn")
-    private RString kubunn;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -111,24 +108,6 @@ public class KetteijohoDiv extends Panel {
     @JsonProperty("KetteiHokensha")
     public void setKetteiHokensha(KetteiHokenshaDiv KetteiHokensha) {
         this.KetteiHokensha = KetteiHokensha;
-    }
-
-    /*
-     * getkubunn
-     * @return kubunn
-     */
-    @JsonProperty("kubunn")
-    public RString getKubunn() {
-        return kubunn;
-    }
-
-    /*
-     * setkubunn
-     * @param kubunn kubunn
-     */
-    @JsonProperty("kubunn")
-    public void setKubunn(RString kubunn) {
-        this.kubunn = kubunn;
     }
 
     /*

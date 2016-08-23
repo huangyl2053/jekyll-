@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbd.business.report.dbd200018.ShakaiFukushiHojinKe
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.ShakaiFukushiHoujinnKeigenListProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.ShakaiFukushiHoujinnKeigenListEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.record.ShakaiFukushiHoujinnKeigenListRecordEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.shakaifukushihojinkeigenhakkoichiran.ShakaiFukushiHojinKeigenHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200018.ShakaiFukushiHojinKeigenHakkoIchiranReportSource;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -56,7 +56,7 @@ public class ShakaiFukushiHoujinnKeigenListProcess extends BatchProcessBase<Shak
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futanngenndogakuninntei."
                     + "IShakaiFukushiHoujinnKeigenListMapper.get社会福祉法人軽減確認証_決定通知書発行一覧表発行情報");
-    private List<ShakaiFukushiHoujinnKeigenListRecordEntity> shakaiFukushiHoujinnKeigenList;
+    private List<ShakaiFukushiHojinKeigenHakkoIchiranEntity> shakaiFukushiHoujinnKeigenList;
     private static final ReportId ID = new ReportId("DBD200018_ShakaiFukushiHojinKeigenHakkoIchiran");
     private static final RString なし = new RString("なし");
     private static final RString 単票発行区分 = new RString("【単票発行区分】");
@@ -74,6 +74,7 @@ public class ShakaiFukushiHoujinnKeigenListProcess extends BatchProcessBase<Shak
     private static IOutputOrder order;
     private static IKojin kojin;
     private static Association association;
+    private int i = 0;
     @BatchWriter
     private BatchReportWriter<ShakaiFukushiHojinKeigenHakkoIchiranReportSource> batchReportWrite;
     private ReportSourceWriter<ShakaiFukushiHojinKeigenHakkoIchiranReportSource> reportSourceWriter;
@@ -103,12 +104,11 @@ public class ShakaiFukushiHoujinnKeigenListProcess extends BatchProcessBase<Shak
     @Override
     protected void process(ShakaiFukushiHoujinnKeigenListEntity t) {
         shakaiFukushiHoujinnKeigenList.add(create(t));
-        for (ShakaiFukushiHoujinnKeigenListRecordEntity shakai : shakaiFukushiHoujinnKeigenList) {
+        for (ShakaiFukushiHojinKeigenHakkoIchiranEntity shakai : shakaiFukushiHoujinnKeigenList) {
             ShakaiFukushiHojinKeigenHakkoIchiranReport find = ShakaiFukushiHojinKeigenHakkoIchiranReport.createReport(
-                    shakai, association, order, kojin, 0);
+                    shakai, association, order, kojin, i++);
             find.writeBy(reportSourceWriter);
         }
-
     }
 
     @Override
@@ -127,13 +127,12 @@ public class ShakaiFukushiHoujinnKeigenListProcess extends BatchProcessBase<Shak
         return 出力順;
     }
 
-    private ShakaiFukushiHoujinnKeigenListRecordEntity create(ShakaiFukushiHoujinnKeigenListEntity shakai) {
-        ShakaiFukushiHoujinnKeigenListRecordEntity data = new ShakaiFukushiHoujinnKeigenListRecordEntity();
+    private ShakaiFukushiHojinKeigenHakkoIchiranEntity create(ShakaiFukushiHoujinnKeigenListEntity shakai) {
+        ShakaiFukushiHojinKeigenHakkoIchiranEntity data = new ShakaiFukushiHojinKeigenHakkoIchiranEntity();
         //TODO
         //data.set確認番号();
         data.set被保険者番号(shakai.getHihokenshaNo());
         kojin = ShikibetsuTaishoFactory.createKojin(shakai.getPsmEntity());
-        data.setIKojin(kojin);
         data.set申請日(shakai.getShinseiYMD());
         data.set決定日(shakai.getKetteiYMD());
         data.set適用日(shakai.getTekiyoYMD());
@@ -143,7 +142,7 @@ public class ShakaiFukushiHoujinnKeigenListProcess extends BatchProcessBase<Shak
         data.set軽減率_分子(shakai.getKeigenritsu_Bunshi());
         data.set軽減率_分母(shakai.getKeigenritsu_Bumbo());
         data.set居宅サービス限定(shakai.isKyotakuServiceGentei());
-        data.set居住費_食費のみ(shakai.isKyojuhiShokuhiNomi());
+        data.set居住費食費のみ(shakai.isKyojuhiShokuhiNomi());
         data.set旧措置者ユニット型個室のみ(shakai.isKyusochishaUnitTypeKoshitsuNomi());
         data.set認定証発行済み(shakai.isNinteishoHakkoZumi());
         data.set通知書発行済み(shakai.isTsuchiHakkoZumi());
