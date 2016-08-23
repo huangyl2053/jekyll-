@@ -7,10 +7,16 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJusho;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJusho.banchiCode1;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJusho.banchiCode2;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJusho.banchiCode3;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJusho.jushoCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJusho.kanriNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJusho.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJushoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.BanchiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -101,5 +107,29 @@ public class DbT7023RendoHoryuTokuteiJushoDac implements ISaveable<DbT7023RendoH
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 連動保留特定住所マスタを抽出します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 町域コード 住所コード
+     * @param 番地コード1 番地コード1
+     * @param 番地コード2 番地コード2
+     * @param 番地コード3 番地コード3
+     * @return List<DbT7023RendoHoryuTokuteiJushoEntity>
+     */
+    @Transaction
+    public List<DbT7023RendoHoryuTokuteiJushoEntity> select連動保留特定住所マスタ(LasdecCode 市町村コード, ChoikiCode 町域コード,
+            BanchiCode 番地コード1, BanchiCode 番地コード2, BanchiCode 番地コード3) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7023RendoHoryuTokuteiJusho.class).
+                where(and(eq(shichosonCode, 市町村コード),
+                                eq(jushoCode, 町域コード),
+                                eq(banchiCode1, 番地コード1),
+                                eq(banchiCode2, 番地コード2),
+                                eq(banchiCode3, 番地コード3))).
+                toList(DbT7023RendoHoryuTokuteiJushoEntity.class);
     }
 }
