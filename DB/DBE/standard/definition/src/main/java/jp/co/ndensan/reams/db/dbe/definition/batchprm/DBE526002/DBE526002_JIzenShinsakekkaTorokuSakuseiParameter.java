@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE526002;
 
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.shiryoshinsakai.ShiryoShinsakaiBatchParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.jizenshinsakekka.JizenShinsakekkaProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -176,6 +177,42 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
                 tokkiJikouFlag,
                 itiHenteiKekkaFlag,
                 tokkiPlusItiFlag,
+                ikensyoFlag,
+                yobiHenteiFlag);
+    }
+
+    /**
+     * 審査会資料一括作成（委員）のパラメータを生成します。
+     *
+     * @return ShiryoShinsakaiBatchParameter
+     */
+    public ShiryoShinsakaiBatchParameter toShiryoShinsakaiBatchParameter() {
+        return new ShiryoShinsakaiBatchParameter(shinsakaiKaisaiNo,
+                shinsakaiKaisaiYoteiYMD,
+                shinsakaiKaishiYoteiTime,
+                gogitaiNo,
+                gogitaiMei,
+                syuturyokuJun,
+                syuturyokuStyle,
+                insatuHouhou,
+                sakuseiJyoken,
+                Integer.valueOf(kaishisiyoBangou.toString()),
+                Integer.valueOf(shuryosiyoBangou.toString()),
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                tuutiFlag,
+                tokkiJikouFlag,
+                itiHenteiKekkaFlag,
+                tokkiPlusItiFlag,
+                RString.EMPTY,
                 ikensyoFlag,
                 yobiHenteiFlag);
     }

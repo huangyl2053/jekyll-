@@ -49,7 +49,7 @@ public class DBE526002_JIzenShinsakekkaTorokuSakusei extends BatchFlowBase<DBE52
      */
     @Step(CALL_SHINSAKAI_FLOW)
     protected IBatchFlowCommand callShinsakaiFlow() {
-        return otherBatchFlow(BATCH_ID, SubGyomuCode.DBE認定支援, getParameter()).define();
+        return otherBatchFlow(BATCH_ID, SubGyomuCode.DBE認定支援, getParameter().toShiryoShinsakaiBatchParameter()).define();
     }
 
 }
