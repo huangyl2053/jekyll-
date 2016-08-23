@@ -5,59 +5,6 @@
  "steps": [
   {
    "id": 1,
-   "name": "居宅サービス自己作成届出情報登録",
-   "transitionList": [
-    {
-     "id": "1",
-     "type": "start",
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZ0200001",
-     "toLayoutTitle": "対象者検索",
-     "toState": "検索条件"
-    },
-    {
-     "id": "2",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBZ",
-     "layoutName": "DBZ0200001",
-     "layoutTitle": "対象者検索",
-     "eventName": "対象者特定",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC0110000",
-     "toLayoutTitle": "居宅サービス自己作成届出情報登録",
-     "toState": "届出一覧"
-    },
-    {
-     "id": "3",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0110000",
-     "layoutTitle": "居宅サービス自己作成届出情報登録",
-     "eventName": "対象者検索",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZ0200001",
-     "toLayoutTitle": "対象者検索",
-     "toState": "該当者一覧"
-    },
-    {
-     "id": "4",
-     "type": "end",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0110000",
-     "layoutTitle": "居宅サービス自己作成届出情報登録",
-     "eventName": "完了",
-     "destroy": false,
-     "condition": ""
-    }
-   ]
-  },
-  {
-   "id": 2,
    "name": "居宅サービス計画作成依頼届出情報登録",
    "transitionList": [
     {
@@ -81,7 +28,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0110011",
      "toLayoutTitle": "居宅サービス計画作成依頼届出情報登録",
-     "toState": ""
+     "toState": "履歴一覧"
     },
     {
      "id": "3",
@@ -89,8 +36,22 @@
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0110011",
      "layoutTitle": "居宅サービス計画作成依頼届出情報登録",
-     "eventName": "対象者検索",
-     "destroy": false,
+     "eventName": "再検索",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0110011",
+     "layoutTitle": "居宅サービス計画作成依頼届出情報登録",
+     "eventName": "検索結果一覧",
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
@@ -98,12 +59,50 @@
      "toState": "該当者一覧"
     },
     {
-     "id": "4",
+     "id": "5",
      "type": "end",
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0110011",
      "layoutTitle": "居宅サービス計画作成依頼届出情報登録",
      "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0110011",
+     "layoutTitle": "居宅サービス計画作成依頼届出情報登録",
+     "eventName": "資格者証発行",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0420011",
+     "toLayoutTitle": "資格者証発行",
+     "toState": "資格者証"
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0110011",
+     "layoutTitle": "居宅サービス計画作成依頼届出情報登録",
+     "eventName": "被保険者証発行",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0420011",
+     "toLayoutTitle": "資格者証発行",
+     "toState": "被保険者証"
+    },
+    {
+     "id": "8",
+     "type": "end",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0420011",
+     "layoutTitle": "資格者証発行",
+     "eventName": "処理完了",
      "destroy": false,
      "condition": ""
     }
