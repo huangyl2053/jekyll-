@@ -1207,4 +1207,30 @@
         FROM rgdb."DbT5130Shibo"
     </sql>
 
+    <select id="getNinteiShinseiJoho"
+            resultOrdered="true"
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionUpdateMybitisParamter"
+            fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho"
+        ORDER BY
+        "shinseishoKanriNo"
+    </select>
+
+    <select id="getGaibuRenkeiDataoutputJoho"
+            resultOrdered="true"
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7211GaibuRenkeiDataoutputJohoMapper.ResultMap_DbT7211GaibuRenkeiDataoutputJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionMybitisParamter"
+            fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7211GaibuRenkeiDataoutputJohoMapper.allColumns_DbT7211GaibuRenkeiDataoutputJoho" />
+        FROM
+        rgdb."DbT7211GaibuRenkeiDataoutputJoho"
+        ORDER BY
+        "shinseishoKanriNo"
+    </select>
+
 </mapper>
