@@ -68,15 +68,15 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         }
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
         TaishoshaKey 引き継ぎ情報 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        if (引き継ぎ情報 == null || 引き継ぎ情報.get被保険者番号() == null
-                || 引き継ぎ情報.get被保険者番号().isEmpty()) {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(
-                        DbcInformationMessages.被保険者でないデータ.getMessage()).respond();
-            }
+        if ((引き継ぎ情報 == null
+                || 引き継ぎ情報.get被保険者番号() == null
+                || 引き継ぎ情報.get被保険者番号().isEmpty())
+                && !ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(
+                    DbcInformationMessages.被保険者でないデータ.getMessage()).respond();
         }
         HihokenshaNo 被保険者番号 = 引き継ぎ情報.get被保険者番号();
-        if (!handler.get前排他(被保険者番号.getColumnValue())) {
+        if (!handler.can前排他(被保険者番号.getColumnValue())) {
             throw new PessimisticLockingException();
         }
         ShikibetsuCode 識別コード = 引き継ぎ情報.get識別コード();
@@ -383,7 +383,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
             KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler,
             boolean isReRequest) {
         if (!isReRequest
-                && handler.get小規模多機能チェック()) {
+                && handler.is小規模多機能チェック()) {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.居宅サービス小規模多機能.getMessage()).respond();
         }
         return null;
@@ -396,7 +396,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
             boolean isBefore居宅サービス小規模多機能確認,
             HihokenshaNo 被保険者番号) {
         if ((!isReRequest || isBefore居宅サービス小規模多機能確認)
-                && handler.get介護度サービス種類チェック(被保険者番号)) {
+                && handler.is介護度サービス種類チェック(被保険者番号)) {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.計画作成区分.getMessage()).respond();
         }
         return null;
@@ -411,7 +411,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         if ((!isReRequest
                 || isBefore居宅サービス小規模多機能確認
                 || isBefore計画作成区分確認)
-                && handler.get地域包括支援センターチェック()) {
+                && handler.is地域包括支援センターチェック()) {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.地域包括支援センター.getMessage()).respond();
         }
         return null;
@@ -428,9 +428,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         if ((!isReRequest
                 || isBefore居宅サービス小規模多機能確認
                 || isBefore計画作成区分確認
-                || isBefore計画作成区分確認
                 || isBefore地域包括支援センター確認)
-                && handler.get計画適用開始日での認定状態をチェック(被保険者番号)) {
+                && handler.is計画適用開始日での認定状態をチェック(被保険者番号)) {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.居宅サービス受給者.getMessage()).respond();
         }
         return null;
@@ -448,10 +447,9 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         if ((!isReRequest
                 || isBefore居宅サービス小規模多機能確認
                 || isBefore計画作成区分確認
-                || isBefore計画作成区分確認
                 || isBefore地域包括支援センター確認
                 || isBefore居宅サービス受給者確認)
-                && handler.get受給申請中をチェック(被保険者番号)) {
+                && handler.is受給申請中をチェック(被保険者番号)) {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.居宅サービス受給者申請.getMessage()).respond();
         }
         return null;

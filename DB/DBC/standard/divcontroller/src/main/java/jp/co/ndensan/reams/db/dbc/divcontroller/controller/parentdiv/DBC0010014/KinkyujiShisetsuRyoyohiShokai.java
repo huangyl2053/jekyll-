@@ -67,7 +67,9 @@ public class KinkyujiShisetsuRyoyohiShokai {
         if (div.getKyufuJissekiTekiyoPanel().isIsOpen()) {
             div.getKyufuJissekiTekiyoPanel().setIsOpen(false);
         }
-        getHandler(div).change事業者(new RString("前事業者"));
+        getHandler(div).change事業者(new RString("前事業者"),
+                ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2(),
+                ViewStateHolder.get(ViewStateKeys.所定疾患施設療養費等データ, KyufuJissekiPrmBusiness.class).getCsData_P());
         return ResponseData.of(div).respond();
     }
 
@@ -81,7 +83,9 @@ public class KinkyujiShisetsuRyoyohiShokai {
         if (div.getKyufuJissekiTekiyoPanel().isIsOpen()) {
             div.getKyufuJissekiTekiyoPanel().setIsOpen(false);
         }
-        getHandler(div).change事業者(new RString("後事業者"));
+        getHandler(div).change事業者(new RString("後事業者"),
+                ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2(),
+                ViewStateHolder.get(ViewStateKeys.所定疾患施設療養費等データ, KyufuJissekiPrmBusiness.class).getCsData_P());
         return ResponseData.of(div).respond();
     }
 
@@ -95,7 +99,11 @@ public class KinkyujiShisetsuRyoyohiShokai {
         if (div.getKyufuJissekiTekiyoPanel().isIsOpen()) {
             div.getKyufuJissekiTekiyoPanel().setIsOpen(false);
         }
-        getHandler(div).change年月(new RString("前月"));
+        getHandler(div).change年月(new RString("前月"), ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
+                ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getKojinKakuteiKey().get被保険者番号(),
+                ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class),
+                ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class),
+                ViewStateHolder.get(ViewStateKeys.資格対象者, KyufuJissekiPrmBusiness.class).getCsData_P());
         return ResponseData.of(div).respond();
     }
 
@@ -109,7 +117,11 @@ public class KinkyujiShisetsuRyoyohiShokai {
         if (div.getKyufuJissekiTekiyoPanel().isIsOpen()) {
             div.getKyufuJissekiTekiyoPanel().setIsOpen(false);
         }
-        getHandler(div).change年月(new RString("次月"));
+        getHandler(div).change年月(new RString("次月"), ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
+                ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getKojinKakuteiKey().get被保険者番号(),
+                ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class),
+                ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class),
+                ViewStateHolder.get(ViewStateKeys.資格対象者, KyufuJissekiPrmBusiness.class).getCsData_P());
         return ResponseData.of(div).respond();
     }
 
@@ -141,7 +153,7 @@ public class KinkyujiShisetsuRyoyohiShokai {
      * @return ResponseData
      */
     public ResponseData onClick_btnMeisaiShukei(KinkyujiShisetsuRyoyohiShokaiDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBC0010014TransitionEventName.明細集計).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0010014TransitionEventName.明細_集計).respond();
     }
 
     /**

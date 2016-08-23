@@ -27,6 +27,8 @@ public final class TokeiJohoResearcherMybatisParameter {
     private final int 徴収方法月;
     private final RString 徴収方法;
     private final RString 要介護認定状態区分コード;
+    private final RString 受給申請事由;
+    private final RString 有効無効区分;
 
     private TokeiJohoResearcherMybatisParameter(FlexibleDate 基準日,
             RString 被保険者区分コード,
@@ -36,7 +38,7 @@ public final class TokeiJohoResearcherMybatisParameter {
             FlexibleYear 賦課年度,
             int 徴収方法月,
             RString 徴収方法,
-            RString 要介護認定状態区分コード) {
+            RString 要介護認定状態区分コード, RString 受給申請事由, RString 有効無効区分) {
         this.基準日 = 基準日;
         this.被保険者区分コード = 被保険者区分コード;
         this.住所地特例フラグ = 住所地特例フラグ;
@@ -46,6 +48,8 @@ public final class TokeiJohoResearcherMybatisParameter {
         this.徴収方法月 = 徴収方法月;
         this.徴収方法 = 徴収方法;
         this.要介護認定状態区分コード = 要介護認定状態区分コード;
+        this.受給申請事由 = 受給申請事由;
+        this.有効無効区分 = 有効無効区分;
     }
 
     /**
@@ -66,28 +70,23 @@ public final class TokeiJohoResearcherMybatisParameter {
                 new RString(Boolean.toString(住所地特例フラグ)),
                 !RString.isNullOrEmpty(市町村コード) && !new RString("000000").equals(市町村コード),
                 市町村コード,
-                FlexibleYear.EMPTY, 0, RString.EMPTY, RString.EMPTY);
+                FlexibleYear.EMPTY, 0, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
 
     /**
      * 資格人数取得用パラメータを作成します。
      *
      * @param 基準日 FlexibleDate
-     * @param 被保険者区分コード RString
-     * @param 住所地特例フラグ boolean
      * @param 市町村コード RString
      * @return TokeiJohoResearcherMybatisParameter
      */
     public static TokeiJohoResearcherMybatisParameter createParam全市町村あり(FlexibleDate 基準日,
-            RString 被保険者区分コード,
-            boolean 住所地特例フラグ,
             RString 市町村コード) {
         return new TokeiJohoResearcherMybatisParameter(基準日,
-                被保険者区分コード,
-                new RString(Boolean.toString(住所地特例フラグ)),
+                RString.EMPTY, RString.EMPTY,
                 !RString.isNullOrEmpty(市町村コード),
                 市町村コード,
-                FlexibleYear.EMPTY, 0, RString.EMPTY, RString.EMPTY);
+                FlexibleYear.EMPTY, 0, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
 
     /**
@@ -111,7 +110,7 @@ public final class TokeiJohoResearcherMybatisParameter {
                 new RString(Boolean.toString(住所地特例フラグ)),
                 !RString.isNullOrEmpty(市町村コード) && !new RString("000000").equals(市町村コード),
                 市町村コード,
-                基準日.getNendo(), 基準日.getMonthValue(), 徴収方法, RString.EMPTY);
+                基準日.getNendo(), 基準日.getMonthValue(), 徴収方法, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
 
     /**
@@ -120,11 +119,15 @@ public final class TokeiJohoResearcherMybatisParameter {
      * @param 基準日 FlexibleDate
      * @param 要介護認定状態区分コード RString
      * @param 市町村コード RString
+     * @param 受給申請事由 RString
+     * @param 有効無効区分 RString
      * @return TokeiJohoResearcherMybatisParameter
      */
     public static TokeiJohoResearcherMybatisParameter createParamFor要介護人数(FlexibleDate 基準日,
             RString 要介護認定状態区分コード,
-            RString 市町村コード) {
+            RString 市町村コード,
+            RString 受給申請事由,
+            RString 有効無効区分) {
         return new TokeiJohoResearcherMybatisParameter(基準日,
                 RString.EMPTY,
                 new RString(Boolean.FALSE.toString()),
@@ -133,6 +136,35 @@ public final class TokeiJohoResearcherMybatisParameter {
                 FlexibleYear.EMPTY,
                 0,
                 RString.EMPTY,
+                受給申請事由,
+                有効無効区分,
+                要介護認定状態区分コード
+        );
+    }
+
+    /**
+     * 自立人数取得用パラメータを作成します。
+     *
+     * @param 基準日 FlexibleDate
+     * @param 市町村コード RString
+     * @param 要介護認定状態区分コード RString
+     * @param 受給申請事由 RString
+     * @param 有効無効区分 RString
+     * @return TokeiJohoResearcherMybatisParameter
+     */
+    public static TokeiJohoResearcherMybatisParameter createParamFor自立人数(FlexibleDate 基準日,
+            RString 市町村コード,
+            RString 要介護認定状態区分コード,
+            RString 受給申請事由,
+            RString 有効無効区分) {
+        return new TokeiJohoResearcherMybatisParameter(基準日,
+                RString.EMPTY,
+                RString.EMPTY,
+                !RString.isNullOrEmpty(市町村コード),
+                市町村コード,
+                FlexibleYear.EMPTY, 0, RString.EMPTY,
+                受給申請事由,
+                有効無効区分,
                 要介護認定状態区分コード);
     }
 }

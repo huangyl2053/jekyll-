@@ -48,6 +48,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
@@ -58,7 +59,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -142,7 +142,6 @@ public class GemmenJuminKihonHandler {
     private static final RString 発行するボタン = new RString("btnPrt");
 //    private static final RString 帳票分類ID_本算定 = new RString("DBB100045_HokenryoNonyuTsuchishoDaihyo");
 //    private static final RString 帳票分類ID_仮算定 = new RString("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
-    private static final CodeShubetsu 減免種類_コード種別 = new CodeShubetsu("0004");
 
     /**
      * ヘッダパネルの初期化メソッドです。
@@ -351,6 +350,17 @@ public class GemmenJuminKihonHandler {
         取消情報パネル.getTxtTorikeshiShurui().clearValue();
         取消情報パネル.getTxtTorikeshiRiyu().setValue(null);
         減免情報パネル.getTxtGemmengaku().clearValue();
+    }
+
+    /**
+     * 取消情報パネルのクリアメソッドです。
+     */
+    public void clear取消パネル() {
+        TorikeshiInfoDiv 取消情報パネル = div.getGemmenMain().getTorikeshiInfo();
+        取消情報パネル.getTxtTorikeshiYMD().clearValue();
+        取消情報パネル.getTxtTorikeshiShurui().clearValue();
+        取消情報パネル.getTxtTorikeshiRiyu().setValue(null);
+        取消情報パネル.getTxtTorikeshiRiyu().clearValue();
     }
 
     /**
@@ -1020,6 +1030,7 @@ public class GemmenJuminKihonHandler {
 
         // TODO test用
         年度分賦課減免リスト.hashCode();
+        賦課年度.hashCode();
         賦課年度 = new FlexibleYear("2016");
         FlexibleYear 調定年度 = new FlexibleYear("2016");
         TsuchishoNo 通知書番号 = new TsuchishoNo("0000000000005105");
@@ -1273,8 +1284,8 @@ public class GemmenJuminKihonHandler {
         }
         申請情報パネル.getTxtShinseiGemmengaku().setValue(介護賦課減免.get申請減免額());
         if (介護賦課減免.get減免取消種類コード() != null) {
-            申請情報パネル.getTxtGemmenShurui().setValue(CodeMaster.getCodeRyakusho(
-                    SubGyomuCode.DBB介護賦課, 減免種類_コード種別, 介護賦課減免.get減免取消種類コード(), FlexibleDate.getNowDate()));
+            申請情報パネル.getTxtGemmenShurui().setValue(CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課,
+                    DBBCodeShubetsu.保険料減免種類.getコード(), 介護賦課減免.get減免取消種類コード(), FlexibleDate.getNowDate()));
         }
         RString 申請事由 = 介護賦課減免.get申請事由();
         if (申請事由 == null || 申請事由.isEmpty()) {
@@ -1431,9 +1442,11 @@ public class GemmenJuminKihonHandler {
         RString 減免作成区分 = 減免の情報.get減免作成区分();
         PrintInfoDiv 発行パネル = div.getGemmenPrintinfo().getPrintInfo();
         発行パネル.getPritPublish1().setVisible(true);
+        発行パネル.getPritPublish1().getBunshoBango1().initialize(null);
         発行パネル.getPritPublish1().getComdiv1().initialize(true, null, false, true, null, false);
         発行パネル.getPritPublish1().getComdiv1().setSendDateDisable(true);
         発行パネル.getPritPublish2().setVisible(true);
+        発行パネル.getPritPublish2().getBunshoBango2().initialize(null);
         発行パネル.getPritPublish2().getComdiv2().initialize(true, null, false, true, null, false);
         発行パネル.getPritPublish2().getComdiv2().setSendDateDisable(true);
         発行パネル.getPritPublish3().setVisible(true);
@@ -1663,7 +1676,7 @@ public class GemmenJuminKihonHandler {
             Gemmen 介護賦課減免 = 介護賦課減免List.get(0);
             boolean flag1 = checkDate(介護賦課減免.get減免申請日(), 申請情報パネル.getTxtShinseiYMD().getValue());
             boolean flag2 = checkDecimal(介護賦課減免.get申請減免額(), 申請情報パネル.getTxtShinseiGemmengaku().getValue());
-            boolean flag3 = checkRString(CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, 減免種類_コード種別,
+            boolean flag3 = checkRString(CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.保険料減免種類.getコード(),
                     介護賦課減免.get減免取消種類コード(), FlexibleDate.getNowDate()), 申請情報パネル.getTxtGemmenShurui().getValue());
             boolean flag4 = checkRString(介護賦課減免.get申請事由(), 申請情報パネル.getTxtShinseiRiyu().getValue());
             return flag1 && flag2 && flag3 && flag4;

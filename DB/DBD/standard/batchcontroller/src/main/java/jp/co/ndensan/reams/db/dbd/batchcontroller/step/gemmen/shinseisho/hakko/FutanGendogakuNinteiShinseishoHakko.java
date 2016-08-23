@@ -124,6 +124,7 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
         if (entity.is旧措置者フラグ()) {
             //TODO 帳票設計_DBD800004_介護保険特定負担限度額申請書 の実装がありません。
             //2016/08/16まで。
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         } else {
             FutangendogakuNinteiShinseishoBodyItem bodyItem = new FutangendogakuNinteiShinseishoBodyItem(
                     get認証者(),
@@ -197,9 +198,9 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
         if (processParamter.get帳票ID().equals(ID)) {
             return ReportIdDBD.DBD800001.getReportName();
         } else {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             // TODO　帳票設計_DBD800004_介護保険特定負担限度額申請書 の実装がありません。
             // return ReportIdDBD.DBD800004.getReportName();
         }
-        return RString.EMPTY;
     }
 }

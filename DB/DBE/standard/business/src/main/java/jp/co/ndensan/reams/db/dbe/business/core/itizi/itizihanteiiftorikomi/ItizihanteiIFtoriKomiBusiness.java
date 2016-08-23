@@ -83,13 +83,13 @@ public class ItizihanteiIFtoriKomiBusiness {
         if (認定ｿﾌﾄ99.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaCode(new Code(entity.getIchijiHanteiKekkaCode()));
         } else if (認定ｿﾌﾄ2009_A.value().equals(entity.getKoroshoIfShikibetsuCode())
-                && 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
+                || 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaCode(new Code(entity.getIchijiHanteiKekkaCode()));
         }
         if (認定ｿﾌﾄ99.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code(entity.getIchijiHanteiKekkaCode()));
         } else if (認定ｿﾌﾄ2009_A.value().equals(entity.getKoroshoIfShikibetsuCode())
-                && 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
+                || 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code(entity.getIchijiHanteiKekkaCode()));
         }
         dbt5010Entity.setKijunJikan(Integer.parseInt(entity.getKijunJikan().toString()));
@@ -127,13 +127,13 @@ public class ItizihanteiIFtoriKomiBusiness {
         if (認定ｿﾌﾄ99.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaCode(new Code(entity.getIchijiHanteiKekkaCode()));
         } else if (認定ｿﾌﾄ2009_A.value().equals(entity.getKoroshoIfShikibetsuCode())
-                && 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
+                || 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaCode(new Code(entity.getIchijiHanteiKekkaCode()));
         }
         if (認定ｿﾌﾄ99.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code(entity.getIchijiHanteiKekkaCode()));
         } else if (認定ｿﾌﾄ2009_A.value().equals(entity.getKoroshoIfShikibetsuCode())
-                && 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
+                || 認定ｿﾌﾄ2009_B.value().equals(entity.getKoroshoIfShikibetsuCode())) {
             dbt5010Entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code(entity.getIchijiHanteiKekkaCode()));
         }
         dbt5010Entity.setKijunJikan(Integer.parseInt(entity.getKijunJikan().toString()));

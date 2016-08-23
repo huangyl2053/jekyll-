@@ -237,8 +237,8 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
                         hasHeader(false).
                         build();
             } else if (processParameter.get対象リスト().equals(該当者) && タイトル_flag) {
-                noRennbannmanager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_2, UzUDE0831EucAccesslogFileType.Csv);
-                eucFilePath = Path.combinePath(noRennbannmanager.getEucOutputDirectry(), GAITOSHAICHIRANCSV);
+                manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_2, UzUDE0831EucAccesslogFileType.Csv);
+                eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), GAITOSHAICHIRANCSV);
                 eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                         setDelimiter(EUC_WRITER_DELIMITER).
                         setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -247,8 +247,8 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
                         hasHeader(true).
                         build();
             } else if (processParameter.get対象リスト().equals(該当者) && !タイトル_flag) {
-                noRennbannmanager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_2, UzUDE0831EucAccesslogFileType.Csv);
-                eucFilePath = Path.combinePath(noRennbannmanager.getEucOutputDirectry(), GAITOSHAICHIRANCSV);
+                manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_2, UzUDE0831EucAccesslogFileType.Csv);
+                eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), GAITOSHAICHIRANCSV);
                 eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                         setDelimiter(EUC_WRITER_DELIMITER).
                         setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -269,8 +269,8 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
                     build();
 
             if (processParameter.get対象リスト().equals(認定者) && タイトル_flag) {
-                manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_1, UzUDE0831EucAccesslogFileType.Csv);
-                eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), NINTEISHAICHIRANCSV);
+                noRennbannmanager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_1, UzUDE0831EucAccesslogFileType.Csv);
+                eucFilePath = Path.combinePath(noRennbannmanager.getEucOutputDirectry(), NINTEISHAICHIRANCSV);
                 noRennbanneucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                         setDelimiter(EUC_WRITER_DELIMITER).
                         setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -279,8 +279,8 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
                         hasHeader(true).
                         build();
             } else if (processParameter.get対象リスト().equals(認定者) && !タイトル_flag) {
-                manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_1, UzUDE0831EucAccesslogFileType.Csv);
-                eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), NINTEISHAICHIRANCSV);
+                noRennbannmanager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_1, UzUDE0831EucAccesslogFileType.Csv);
+                eucFilePath = Path.combinePath(noRennbannmanager.getEucOutputDirectry(), NINTEISHAICHIRANCSV);
                 noRennbanneucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                         setDelimiter(EUC_WRITER_DELIMITER).
                         setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -662,7 +662,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
             eucCsvEntity.set世帯員課税区分(RString.EMPTY);
         }
 
-        if (joho.get課税所得額().intValue() > 0) {
+        if (joho.get課税所得額() != null && joho.get課税所得額().intValue() > 0) {
             eucCsvEntity.set世帯員所得税課税区分(課);
         } else {
             eucCsvEntity.set世帯員所得税課税区分(RString.EMPTY);

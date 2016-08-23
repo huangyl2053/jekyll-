@@ -4,8 +4,8 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onChange_ddlTokuteiShippei = function () {
-                return "onChange_ddlTokuteiShippei";
+            Events.onChange_ddlHihokenshaKubun = function () {
+                return "onChange_ddlHihokenshaKubun";
             };
 
             Events.onOkClose_btnServiceSakujoTeikeibun = function () {

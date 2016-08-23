@@ -182,7 +182,7 @@ public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoFuka
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(int 年度) {
         return new KeisangoJohoSakuseiBatchParamter(processParameter.get調定年度().toDateString(),
                 processParameter.get調定年度().minusYear(年度).toDateString(),
-                processParameter.getシステム日時().toDateString(),
+                new RString(processParameter.getシステム日時().toString()),
                 ShoriName.過年度賦課.get名称(), RString.EMPTY);
     }
 

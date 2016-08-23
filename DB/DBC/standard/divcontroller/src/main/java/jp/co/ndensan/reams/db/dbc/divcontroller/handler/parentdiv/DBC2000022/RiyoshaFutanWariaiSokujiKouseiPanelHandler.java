@@ -34,12 +34,12 @@ import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMe
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuBuilder;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoKofuKaishuManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -83,7 +83,6 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
     private static final RString RSTFORTY = new RString("40");
     private static final RString CODE = new RString("0003");
     private static final RString 交付証種類 = new RString("003");
-    private static final RString 負担割合証交付事由 = new RString("0016");
     private static final RString 職権変更 = new RString("職権変更");
     private static final RString 証発行不要 = new RString("証発行不要");
     private static final RString 被保険者番号R = new RString("被保険者番号");
@@ -797,7 +796,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
     private void set補足項目(RiyoshaFutanWariai 利用者負担割合, RDate 基準日, RString 処理区分) {
         set負担割合証発行区分();
         List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                new CodeShubetsu(負担割合証交付事由), FlexibleDate.getNowDate());
+                DBACodeShubetsu.負担割合証交付事由.getCodeShubetsu(), FlexibleDate.getNowDate());
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         if (codeList != null && !codeList.isEmpty()) {
             for (UzT0007CodeEntity code : codeList) {

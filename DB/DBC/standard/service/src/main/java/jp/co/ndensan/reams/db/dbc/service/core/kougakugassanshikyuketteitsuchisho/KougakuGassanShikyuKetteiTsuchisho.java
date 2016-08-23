@@ -194,6 +194,7 @@ public class KougakuGassanShikyuKetteiTsuchisho {
         entity.set文書番号(文書番号);
         entity.set発行日(発行日);
         entity.set被保険者番号(被保険者番号);
+        setKoza(entity, 口座情報, 識別コード);
         set通知文(entity);
         set送付物宛先(entity, 識別コード, 発行日);
         target.set事業分高額合算支給決定通知書(entity);

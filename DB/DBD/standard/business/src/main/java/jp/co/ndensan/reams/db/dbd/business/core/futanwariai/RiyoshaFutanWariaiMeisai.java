@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 利用者負担割合明細を管理するクラスです。
  *
- * @reamsid_L DBC-5010-011 zhaowei
+ * @reamsid_L DBC-9999-012 zhaowei
  */
 public class RiyoshaFutanWariaiMeisai
         extends ModelBase<RiyoshaFutanWariaiMeisaiIdentifier, DbT3114RiyoshaFutanWariaiMeisaiEntity, RiyoshaFutanWariaiMeisai>

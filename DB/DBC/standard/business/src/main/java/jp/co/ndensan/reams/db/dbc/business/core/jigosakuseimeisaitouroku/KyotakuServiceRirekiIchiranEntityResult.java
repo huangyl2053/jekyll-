@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyotakuServi
 
 /**
  *
- * @reamsid_L DBC-0020-011 xuchangyong
+ * @reamsid_L DBC-1930-010 xuchangyong
  */
 @lombok.Getter
 @lombok.Setter

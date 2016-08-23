@@ -6,10 +6,11 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.shakaifukushihojinkeigenhakkoichiran;
 
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
-import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shakaifukushihojinkeigen.GemmenKubun;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 社会福祉法人軽減確認証・決定通知書発行一覧表Entityです。
@@ -27,9 +28,9 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEntity {
     private FlexibleDate 適用日;
     private FlexibleDate 有効期限;
     private KetteiKubun 決定;
-    private GemmenKubun 軽減;
-    private RString 軽減率_分子;
-    private RString 軽減率_分母;
+    private KyuSochishaKubun 軽減;
+    private Decimal 軽減率_分子;
+    private Decimal 軽減率_分母;
     private boolean 居宅サービス限定;
     private boolean 居住費食費のみ;
     private boolean 旧措置者ユニット型個室のみ;

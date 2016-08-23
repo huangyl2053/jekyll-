@@ -190,6 +190,7 @@ public class ServiceRiyohyoInfoDivHandler {
         ViewStateHolder.put(ViewStateKeys.対象年月, 対象年月);
         ViewStateHolder.put(ViewStateKeys.選択有无, false);
         set初期化状態(表示モード);
+        div.getTxtKoshinYMD().setValue(RDate.getNowDate());
         if (利用年月 != null && !利用年月.isEmpty()) {
             RStringBuilder rst = new RStringBuilder();
             rst.append(利用年月).append(定値_01);
@@ -754,7 +755,6 @@ public class ServiceRiyohyoInfoDivHandler {
         if (!選択有无) {
             row = new dgServiceRiyohyoBeppyoList_Row();
             row.setRowState(RowState.Added);
-            //TODO 利用年月 ＝ 画面.対象年月
             rowList.add(row);
             div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
         } else {
@@ -1360,7 +1360,7 @@ public class ServiceRiyohyoInfoDivHandler {
     private void 限度チェック(KyufuJikoSakuseiResult result) {
         Decimal 区分限度 = nullToZero(result.get区分限度超過単位()).add(nullToZero(result.get区分限度内単位()));
         Decimal 種類限度 = nullToZero(result.get種類限度超過単位()).add(nullToZero(result.get種類限度内単位()));
-        if (区分限度.compareTo(Decimal.ZERO) >= 0) {
+        if (区分限度.compareTo(Decimal.ZERO) <= 0) {
             return;
         }
         if (Decimal.ZERO.compareTo(種類限度) < 0) {

@@ -33,6 +33,8 @@
             <if test="flag != null and flag == 1">
                 AND "DbT3113RiyoshaFutanWariai"."isDeleted" = FALSE
                 AND "DbT3114RiyoshaFutanWariaiMeisai"."isDeleted" = FALSE
+                AND "DbT3113RiyoshaFutanWariai"."logicalDeletedFlag" = FALSE
+                AND "DbT3114RiyoshaFutanWariaiMeisai"."logicalDeletedFlag" = FALSE
             </if>
             <if test="flag != null and flag == 2">
                 AND "DbT3113RiyoshaFutanWariai"."rirekiNo" = #{履歴番号}

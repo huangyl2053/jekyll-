@@ -43,7 +43,8 @@ public enum FutangendogakuNinteiShinseishoOrderKey implements IReportItems {
      * 項目ID:0104 フォームフィールド名:被保険者番号 MyBatis項目名:被保険者番号
      */
     被保険者番号("0104", "被保険者番号", "被保険者番号");
-//TODO:指定事業者番号と計画事業者番号と契約開始年月日は検索関連のテープルから取得できません。
+
+//TODO 指定事業者番号と計画事業者番号と契約開始年月日は検索関連のテープルから取得できません。
 //    /**
 //     * 項目ID:0303 フォームフィールド名:指定事業者番号 MyBatis項目名:定義なし
 //     */
@@ -56,7 +57,6 @@ public enum FutangendogakuNinteiShinseishoOrderKey implements IReportItems {
 //     * 項目ID:0343 フォームフィールド名:契約開始年月日 MyBatis項目名:定義なし
 //     */
 //    契約開始年月日("0343", "契約開始年月日", "契約開始年月日");
-
     private final RString 項目ID;
     private final RString フォームフィールド名;
     private final RString 項目名;

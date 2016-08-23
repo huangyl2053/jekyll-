@@ -103,11 +103,11 @@ public enum RenkeiDataSakuseiShinseiJohoDivSpec implements IPredicate<RenkeiData
                     RString radChushutsu = div.getChushutsuJoken().getRadChushutsuJoken().getSelectedValue();
                     RString 被保険者番号 = new RString("被保険者番号");
                     if (!radChushutsu.equals(被保険者番号)) {
-                        return 被保険者番号flag = true;
+                        被保険者番号flag = true;
                     }
                     if (radChushutsu.equals(被保険者番号)
                     && div.getTxtHihokenshaNo().getValue() != null && !div.getTxtHihokenshaNo().getValue().isEmpty()) {
-                        return 被保険者番号flag = true;
+                        被保険者番号flag = true;
                     }
                     return 被保険者番号flag;
 

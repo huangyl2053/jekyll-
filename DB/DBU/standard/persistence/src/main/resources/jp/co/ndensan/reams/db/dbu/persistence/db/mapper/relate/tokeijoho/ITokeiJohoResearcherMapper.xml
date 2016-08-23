@@ -162,8 +162,8 @@
                            OR A."ninteiYukoKikanShuryoYMD" = ''
                            OR A."ninteiYukoKikanShuryoYMD" IS NULL
                       )
-                      AND A."jukyuShinseiJiyu" <![CDATA[<>]]>  '5'
-                      AND A."yukoMukoKubun" = '1'
+                      AND A."jukyuShinseiJiyu" <![CDATA[<>]]>  #{受給申請事由}
+                      AND A."yukoMukoKubun" = #{有効無効区分}
                       AND A."yokaigoJotaiKubunCode" = #{要介護認定状態区分コード}
                     <if test="uses市町村コード">
                          AND A."shichosonCode" = #{市町村コード}
@@ -186,13 +186,12 @@
                     WHERE A."logicalDeletedFlag" = FALSE
                       AND A."ninteiYMD" <![CDATA[<=]]> #{基準日}
                       AND (
-                           #{基準日} <![CDATA[<=]]> A."soshitsuYMD"
-                           OR A."soshitsuYMD" = ''
+                           A."soshitsuYMD" = ''
                            OR A."soshitsuYMD" IS NULL
                       )
-                      AND A."jukyuShinseiJiyu" <![CDATA[<>]]> '5'
-                      AND A."yukoMukoKubun" = '2'
-                      AND A."yokaigoJotaiKubunCode" = '01'
+                      AND A."jukyuShinseiJiyu" <![CDATA[<>]]> #{受給申請事由}
+                      AND A."yukoMukoKubun" = #{有効無効区分}
+                      AND A."yokaigoJotaiKubunCode" = #{要介護認定状態区分コード}
                     <if test="uses市町村コード">
                          AND A."shichosonCode" = #{市町村コード}
                     </if>

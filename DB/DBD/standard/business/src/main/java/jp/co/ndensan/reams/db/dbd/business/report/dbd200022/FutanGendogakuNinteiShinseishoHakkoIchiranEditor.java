@@ -124,7 +124,7 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEditor implements IFutanG
         if (null != 帳票情報) {
             RString 負担段階 = RString.EMPTY;
             if (this.帳票情報.get利用者負担段階() != null) {
-                負担段階 = this.帳票情報.get利用者負担段階().getコード();
+                負担段階 = this.帳票情報.get利用者負担段階().get名称();
             }
             RString 負担段階名称 = RString.EMPTY;
             if (null != 負担段階 && !負担段階.isEmpty()) {
@@ -160,7 +160,8 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEditor implements IFutanG
             }
             RString 承認 = KetteiKubun.承認する.getコード();
             RString 承認しない = RiyoshaFutanDankai.課税層第三段階.getコード();
-            if (決定区分.equals(承認) && null != 負担段階 && !負担段階.isEmpty() && 負担段階.equals(承認しない)) {
+            if (決定区分.equals(承認)
+                    && null != 負担段階 && !負担段階.isEmpty() && 負担段階.equals(承認しない)) {
                 source.listCenter_10 = new RString("該当");
             } else {
                 source.listCenter_10 = new RString("非該当");
@@ -197,18 +198,13 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEditor implements IFutanG
                 世帯課税名称 = SetaiKazeiKubun.toValue(世帯課税).get名称();
             }
             source.listLower_8 = 世帯課税名称;
-            RString 決定区分 = RString.EMPTY;
-            if (this.帳票情報.get決定区分() != null) {
-                決定区分 = this.帳票情報.get決定区分().getコード();
-            }
-            RString 承認 = KetteiKubun.承認する.getコード();
-            if (決定区分.equals(承認)) {
+            if (KetteiKubun.承認する.getコード().equals(this.帳票情報.get決定区分().getコード())) {
                 source.listLower_9 = new RString("承認");
             } else {
                 source.listLower_9 = new RString("非承認");
             }
             if (this.帳票情報.get旧措置() != null) {
-                source.listLower_10 = this.帳票情報.get旧措置().getコード();
+                source.listLower_10 = this.帳票情報.get旧措置().get名称();
             }
             if (this.帳票情報.getユニット型個室() != null) {
                 source.listLower_11 = new RString(this.帳票情報.getユニット型個室().toString());

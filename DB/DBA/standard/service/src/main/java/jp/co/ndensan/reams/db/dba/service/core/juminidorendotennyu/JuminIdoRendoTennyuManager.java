@@ -210,7 +210,7 @@ public class JuminIdoRendoTennyuManager {
                     処理対象者.getKanaShimei());
             IDbT1001HihokenshaDaichoMapper mapper = mapperProvider.create(IDbT1001HihokenshaDaichoMapper.class);
             List<DbT1001HihokenshaDaichoEntity> 処理対象list = mapper.get処理対象者(paraprm);
-            if (処理対象list != null || !処理対象list.isEmpty()) {
+            if (!処理対象list.isEmpty()) {
                 転入処理後Entity.set作成事由(TennyuSakuseiJiyu.別住民コードでの再転入.getコード());
                 return 転入処理後Entity;
             }
@@ -545,7 +545,12 @@ public class JuminIdoRendoTennyuManager {
         entity.setIdoJiyuCode(取得事由);
         //TODO 市町村コードは存在しない。QA1497
         entity.setShichosonCode(LasdecCode.EMPTY);
-        entity.setShikibetsuCode(処理対象者.getShikibetsuCode());
+        if (処理対象者 != null) {
+            ShikibetsuCode 識別コード = 処理対象者.getShikibetsuCode();
+            if (識別コード != null) {
+                entity.setShikibetsuCode(識別コード);
+            }
+        }
         entity.setShikakuShutokuJiyuCode(取得事由);
         entity.setShikakuShutokuYMD(登録異動日);
         entity.setShikakuShutokuTodokedeYMD(登録届出日);
@@ -574,7 +579,12 @@ public class JuminIdoRendoTennyuManager {
         entity.setIdoJiyuCode(取得事由);
         //TODO 市町村コードは存在しない。QA1497
         entity.setShichosonCode(LasdecCode.EMPTY);
-        entity.setShikibetsuCode(処理対象者.getShikibetsuCode());
+        if (処理対象者 != null) {
+            ShikibetsuCode 識別コード = 処理対象者.getShikibetsuCode();
+            if (識別コード != null) {
+                entity.setShikibetsuCode(識別コード);
+            }
+        }
         entity.setShikakuShutokuJiyuCode(取得事由);
         entity.setShikakuShutokuYMD(登録異動日);
         entity.setShikakuShutokuTodokedeYMD(登録届出日);

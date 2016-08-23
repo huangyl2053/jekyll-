@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 /**
  * 帳票における改頁処理クラスです。
  *
- * @reamsid_L DBC-4770-030 zhujun TODO KogakuJigyoShikyuShinseishoYuchoSource 不正
+ * @reamsid_L DBC-4770-030 zhujun
  */
 public class KogakuJigyoShinseishoHakkoIchiranPageBreak extends PageBreaker<KogakuJigyoShinseishoHakkoIchiranSource> {
 

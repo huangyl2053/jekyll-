@@ -7,13 +7,16 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.centertransmissi
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionMybitisParamter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionUpdateMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTransmissionEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.ZenkaiChosaItemEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.ZenkaiServiceJokyoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5129TennyuShiboEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7211GaibuRenkeiDataoutputJohoEntity;
 
 /**
  * センター送信データ作成のMapperクラスです。
@@ -77,4 +80,20 @@ public interface ICenterTransmissionMapper {
      * @return List<CenterTransmissionEntity>
      */
     List<CenterTransmissionEntity> getCenterTransmissionData(CenterTransmissionMybitisParamter paramter);
+
+    /**
+     * 要介護認定申請情報を取得します。
+     *
+     * @param paramter CenterTransmissionUpdateMybitisParamter
+     * @return List<DbT5101NinteiShinseiJohoEntity>
+     */
+    List<DbT5101NinteiShinseiJohoEntity> getNinteiShinseiJoho(CenterTransmissionUpdateMybitisParamter paramter);
+
+    /**
+     * 外部連携データ抽出情報を取得します。
+     *
+     * @param paramter CenterTransmissionUpdateMybitisParamter
+     * @return List<DbT7211GaibuRenkeiDataoutputJohoEntity>
+     */
+    List<DbT7211GaibuRenkeiDataoutputJohoEntity> getGaibuRenkeiDataoutputJoho(CenterTransmissionUpdateMybitisParamter paramter);
 }

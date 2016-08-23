@@ -915,4 +915,37 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
         return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).修正有無チェック(初期化異動情報Entity,
                 画面項目異動情報Entity, 基本送付情報Flag, 償還送付情報変Flag, 高額送付情報Flag);
     }
+
+    /**
+     * 基本送付情報の異動日。
+     *
+     * @return 異動日 RDate
+     */
+    @JsonIgnore
+    @Override
+    public RDate get基本送付_異動日() {
+        return this.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtKihonIdoYMD().getValue();
+    }
+
+    /**
+     * 償還送付情報の異動日。
+     *
+     * @return 異動日 RDate
+     */
+    @JsonIgnore
+    @Override
+    public RDate get償還送付_異動日() {
+        return this.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtShokanIdoYMD().getValue();
+    }
+
+    /**
+     * 高額送付情報の異動日。
+     *
+     * @return 異動日 RDate
+     */
+    @JsonIgnore
+    @Override
+    public RDate get高額送付_異動日() {
+        return this.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getTxtKogakuIdoYMD().getValue();
+    }
 }

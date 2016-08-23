@@ -275,10 +275,13 @@ public class ServiceRiyohyoInfo {
                 return ResponseData.of(div).addValidationMessages(サービス単位必須以外Pairs).respond();
             }
         }
-        //TODO 没有利用者負担定率・定額区分 控件
-        ValidationMessageControlPairs 給付率必須Pairs = validationhandler.validate給付率必須();
-        if (給付率必須Pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(給付率必須Pairs).respond();
+        RString 利用者負担定率定額区分
+                = div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn().getValue();
+        if (RSTRING_TWO.equals(利用者負担定率定額区分)) {
+            ValidationMessageControlPairs 給付率必須Pairs = validationhandler.validate給付率必須();
+            if (給付率必須Pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(給付率必須Pairs).respond();
+            }
         }
         getHandler(div).onClick_btnGokeiKeisan();
         return ResponseData.of(div).respond();
@@ -558,7 +561,6 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onBlur_txtRiyoYM(ServiceRiyohyoInfoDiv div) {
-        // TODO QAのNo.1277
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         RString 居宅総合事業区分 = ViewStateHolder.get(ViewStateKeys.居宅総合事業区分, RString.class);
         RDate 利用年月日 = div.getTxtRiyoYM().getValue();
