@@ -87,10 +87,13 @@ public class Ketteijoho {
         List<TaishoshaKensakuRelateBusiness> 履歴番号Business = get履歴番号(new FlexibleYearMonth(div.getTxtToriatsukaiYM().getValue()
                 .getYearMonth().toDateString()), 市町村コード, 市町村フラグ);
         List<TaishoshaKensakuRelateBusiness> 再審査決定情報Business = getHandler(div).
-                onClick_btnSearch(保険者Business, 公費負担者Business, 経過措置Business, 総合事業費保険者Business, 総合事業費公費負担者Business, 履歴番号Business);
+                onClick_btnSearch(保険者Business, 公費負担者Business, 経過措置Business, 総合事業費保険者Business, 総合事業費公費負担者Business,
+                        履歴番号Business);
+        div.getKetteiHokensha().setToriatsukaiYM(div.getTxtToriatsukaiYM().getValue().getYearMonth().toDateString());
+        div.getKetteiHokensha().setShichosonCode(市町村コード);
         ValidationMessageControlPairs validPairs1 = getValidationHandler(div).過誤申立決定情報照会(再審査決定情報Business);
-        if (!RString.isNullOrEmpty(div.getKubunn())) {
-            getHandler(div).set過誤決定情報(再審査決定情報Business, div.getKubunn(), 履歴番号Business);
+        if (!RString.isNullOrEmpty(div.getKetteiHokensha().getKubunn())) {
+            getHandler(div).set過誤決定情報(再審査決定情報Business, div.getKetteiHokensha().getKubunn(), 履歴番号Business);
         }
         if (validPairs1.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs1).respond();
@@ -185,7 +188,7 @@ public class Ketteijoho {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         RString 履歴番号 = div.getDdlShichosonName().getSelectedKey();
-        get保険者情報(div, div.getKubunn(), true);
+        get保険者情報(div, div.getKetteiHokensha().getKubunn(), true);
         div.getDdlShichosonName().setSelectedKey(履歴番号);
         return ResponseData.of(div).respond();
     }
@@ -220,9 +223,11 @@ public class Ketteijoho {
         if (!div.getDdlRirekiNo1().getDataSource().isEmpty()) {
             履歴番号 = Integer.parseInt(div.getDdlRirekiNo1().getSelectedKey().toString());
         }
-        List<TaishoshaKensakuRelateBusiness> 保険者情報 = get明細情報(new FlexibleYearMonth(div.getTxtToriatsukaiYM().getValue().getYearMonth().toDateString()),
+        List<TaishoshaKensakuRelateBusiness> 保険者情報 = get明細情報(new FlexibleYearMonth(
+                div.getTxtToriatsukaiYM().getValue().getYearMonth().toDateString()),
                 保険者区分, new Decimal(履歴番号), 市町村コード, コード種別, 履歴番号フラグ, 市町村フラグ);
-        List<TaishoshaKensakuRelateBusiness> 履歴番号Business = get履歴番号(new FlexibleYearMonth(div.getTxtToriatsukaiYM().getValue().getYearMonth().toDateString()),
+        List<TaishoshaKensakuRelateBusiness> 履歴番号Business = get履歴番号(new FlexibleYearMonth(
+                div.getTxtToriatsukaiYM().getValue().getYearMonth().toDateString()),
                 市町村コード, 市町村フラグ);
         getHandler(div).set過誤決定情報(保険者情報, 保険者区分, 履歴番号Business);
         return ResponseData.of(div).respond();
