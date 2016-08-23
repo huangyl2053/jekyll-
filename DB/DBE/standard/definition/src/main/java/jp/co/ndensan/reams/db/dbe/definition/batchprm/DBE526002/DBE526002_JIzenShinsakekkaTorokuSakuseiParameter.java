@@ -71,17 +71,17 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
     @BatchParameter(key = IINYOFUSUU, name = "審査会委員用部数")
     private RString iinyoFusuu;
     @BatchParameter(key = TUUTIFLAG, name = "審査会開催通知書フラグ")
-    private boolean tuutiFlag;
+    private RString tuutiFlag;
     @BatchParameter(key = TOKKIJIKOUFLAG, name = "特記事項フラグ")
-    private boolean tokkiJikouFlag;
+    private RString tokkiJikouFlag;
     @BatchParameter(key = ITIHENTEIKEKKAFLAG, name = "一次判定結果票フラグ")
-    private boolean itiHenteiKekkaFlag;
+    private RString itiHenteiKekkaFlag;
     @BatchParameter(key = TOKKIPLUSITIFLAG, name = "特記事項一次判定フラグ")
-    private boolean tokkiPlusItiFlag;
+    private RString tokkiPlusItiFlag;
     @BatchParameter(key = IKENSYOFLAG, name = "主治医意見書フラグ")
-    private boolean ikensyoFlag;
+    private RString ikensyoFlag;
     @BatchParameter(key = YOBIHENTEIFLAG, name = "予備判定記入表フラグ")
-    private boolean yobiHenteiFlag;
+    private RString yobiHenteiFlag;
 
     /**
      * コンストラクタです。
@@ -126,12 +126,12 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
             RString kaishisiyoBangou,
             RString shuryosiyoBangou,
             RString iinyoFusuu,
-            boolean tuutiFlag,
-            boolean tokkiJikouFlag,
-            boolean itiHenteiKekkaFlag,
-            boolean tokkiPlusItiFlag,
-            boolean ikensyoFlag,
-            boolean yobiHenteiFlag) {
+            RString tuutiFlag,
+            RString tokkiJikouFlag,
+            RString itiHenteiKekkaFlag,
+            RString tokkiPlusItiFlag,
+            RString ikensyoFlag,
+            RString yobiHenteiFlag) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
         this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;

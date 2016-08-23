@@ -36,12 +36,12 @@ public class JizenShinsakekkaProcessParameter implements IBatchProcessParameter 
     private final RString kaishisiyoBangou;
     private final RString shuryosiyoBangou;
     private final RString iinyoFusuu;
-    private final boolean tuutiFlag;
-    private final boolean tokkiJikouFlag;
-    private final boolean itiHenteiKekkaFlag;
-    private final boolean tokkiPlusItiFlag;
-    private final boolean ikensyoFlag;
-    private final boolean yobiHenteiFlag;
+    private final RString tuutiFlag;
+    private final RString tokkiJikouFlag;
+    private final RString itiHenteiKekkaFlag;
+    private final RString tokkiPlusItiFlag;
+    private final RString ikensyoFlag;
+    private final RString yobiHenteiFlag;
 
     /**
      * コンストラクタです。
@@ -79,12 +79,12 @@ public class JizenShinsakekkaProcessParameter implements IBatchProcessParameter 
             RString kaishisiyoBangou,
             RString shuryosiyoBangou,
             RString iinyoFusuu,
-            boolean tuutiFlag,
-            boolean tokkiJikouFlag,
-            boolean itiHenteiKekkaFlag,
-            boolean tokkiPlusItiFlag,
-            boolean ikensyoFlag,
-            boolean yobiHenteiFlag) {
+            RString tuutiFlag,
+            RString tokkiJikouFlag,
+            RString itiHenteiKekkaFlag,
+            RString tokkiPlusItiFlag,
+            RString ikensyoFlag,
+            RString yobiHenteiFlag) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
         this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;
