@@ -42,8 +42,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> onLoad(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-//        RString menuID = ResponseHolder.getMenuID();
-        RString menuID = new RString("DBCMN43001");
+        RString menuID = ResponseHolder.getMenuID();
         getHandler(div).initialize(menuID);
         if (メニューID_DBCMN43001.equals(menuID)) {
             return ResponseData.of(ResponseData.of(div).setState(DBC0430011StateName.NoChange).data)
