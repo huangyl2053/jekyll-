@@ -22,17 +22,16 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4101NinteiShinseiJohoBu
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4102NinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4102NinteiKekkaJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4120ShinseitodokedeJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4121ShinseiRirekiJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4121ShinseiRirekiJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaichoBuilder;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseiRirekiJoho;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseiRirekiJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.kekkashosaijoho.KekkaShosaiJohoModel;
 import jp.co.ndensan.reams.db.dbz.business.core.kekkashosaijoho.KekkaShosaiJohoOutModel;
 import jp.co.ndensan.reams.db.dbz.business.core.kekkashosaijoho.KekkaShosaiJohoServiceShuri;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputNaiyo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaDataPassModel;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
@@ -50,7 +49,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShin
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -58,7 +56,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -76,12 +73,42 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
     private static final RString メニュID_サービス変更認定 = new RString("DBDMN52004");
     private static final RString メニュID_認定データ更新 = new RString("DBDMN52013");
     private static final RString KEY0 = new RString("key0");
-    private static final RString 符号 = new RString(";");
+    private static final RString 符号 = new RString(",");
     private static final int ZERO = 0;
     private static final int ONE = 1;
     private static final RString 認定区分_却 = new RString("却");
     private static final RString 認定区分_喪 = new RString("喪");
     private static final RString 渡された認定区分_却下 = new RString("1");
+    private static final int 指定サービス種類_1 = 1;
+    private static final int 指定サービス種類_2 = 2;
+    private static final int 指定サービス種類_3 = 3;
+    private static final int 指定サービス種類_4 = 4;
+    private static final int 指定サービス種類_5 = 5;
+    private static final int 指定サービス種類_6 = 6;
+    private static final int 指定サービス種類_7 = 7;
+    private static final int 指定サービス種類_8 = 8;
+    private static final int 指定サービス種類_9 = 9;
+    private static final int 指定サービス種類_10 = 10;
+    private static final int 指定サービス種類_11 = 11;
+    private static final int 指定サービス種類_12 = 12;
+    private static final int 指定サービス種類_13 = 13;
+    private static final int 指定サービス種類_14 = 14;
+    private static final int 指定サービス種類_15 = 15;
+    private static final int 指定サービス種類_16 = 16;
+    private static final int 指定サービス種類_17 = 17;
+    private static final int 指定サービス種類_18 = 18;
+    private static final int 指定サービス種類_19 = 19;
+    private static final int 指定サービス種類_20 = 20;
+    private static final int 指定サービス種類_21 = 21;
+    private static final int 指定サービス種類_22 = 22;
+    private static final int 指定サービス種類_23 = 23;
+    private static final int 指定サービス種類_24 = 24;
+    private static final int 指定サービス種類_25 = 25;
+    private static final int 指定サービス種類_26 = 26;
+    private static final int 指定サービス種類_27 = 27;
+    private static final int 指定サービス種類_28 = 28;
+    private static final int 指定サービス種類_29 = 29;
+    private static final int 指定サービス種類_30 = 30;
 
     /**
      * コンストラクタです。
@@ -114,7 +141,7 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
         if (メニュID_職権修正.equals(menuId)) {
             div.getCcdKaigoNinteiShinseiKihonJohoInput().setInputMode(new RString(
                     KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokkenShuseiAndTorikeshiMode.toString()));
-            div.getTxtSoshitsubi().setDisabled(false);
+            div.getTxtSoshitsubi().setDisabled(true);
         } else if (メニュID_職権取消一部喪失.equals(menuId)) {
             div.getCcdKaigoNinteiShinseiKihonJohoInput().setInputMode(new RString(
                     KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokkenShuseiAndTorikeshiMode.toString()));
@@ -132,7 +159,7 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             div.setHdnShokikomoku(get画面項目());
             return;
         }
-        div.getCcdKaigoNinteiShikakuInfo().initialize(今回情報.get受給者台帳().get市町村コード().value(), 今回情報.get受給者台帳().get被保険者番号().value());
+        div.getCcdKaigoNinteiShikakuInfo().initialize(今回情報.get市町村コード().value(), 被保険者番号.value());
         div.getCcdKaigoNinteiShinseiKihonJohoInput().initialize();
         set介護認定申請基本情報(今回情報);
         set認定情報(今回情報, 前回情報);
@@ -158,7 +185,7 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
         if (申請届出者情報.get申請届出者電話番号() != null) {
             model.set電話番号(申請届出者情報.get申請届出者電話番号().value());
         }
-        div.getCcdShinseiTodokedesha().initialize(model);
+        // div.getCcdShinseiTodokedesha().initialize(model);
         div.getCcdShujiiIryokikanAndShujiiInput().initialize(
                 今回情報.get主治医医療機関情報().get市町村コード(), 申請書管理番号, SubGyomuCode.DBD介護受給, 今回情報.get主治医医療機関情報().get主治医医療機関コード(),
                 今回情報.get主治医医療機関情報().get医療機関名称(), 今回情報.get主治医情報().get主治医コード(), 今回情報.get主治医情報().get主治医氏名());
@@ -222,7 +249,7 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             passModel.set審査会意見(認定情報.get要介護認定結果情報().get介護認定審査会意見());
             passModel.set認定年月日(受給者台帳.get認定年月日());
             model.setDataPassModel(passModel);
-            model.setIdoJiyuCode(convertCodeToRString(受給者台帳.get直近異動事由コード()));
+            model.setIdoJiyuCode(convertCodeToRString(受給者台帳.getデータ区分()));
             model.setJukyuShikakuHakkoDay1(受給者台帳.get受給資格証明書発行年月日１());
             model.setJukyuShikakuHakkoDay2(受給者台帳.get受給資格証明書発行年月日２());
             model.setRiyu(受給者台帳.get異動理由());
@@ -243,6 +270,12 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             passModel.set要介護度名称(認定内容.get要介護度名称());
             passModel.set審査会意見(認定内容.get審査会意見());
             passModel.set認定年月日(認定内容.get認定年月日());
+            List<KekkaShosaiJohoServiceShuri> サービス類リスト = outModel.getサービス類リスト();
+            List<RString> サービス一覧リスト = new ArrayList<>();
+            for (KekkaShosaiJohoServiceShuri shuri : サービス類リスト) {
+                サービス一覧リスト.add(shuri.getServiceShuriCode());
+            }
+            passModel.setサービス一覧リスト(サービス一覧リスト);
             if (認定情報 == null) {
                 passModel.set申請書管理番号(ShinseishoKanriNo.EMPTY);
                 model.setDataPassModel(passModel);
@@ -250,20 +283,19 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             }
             DbT4101NinteiShinseiJoho 要介護認定申請情報 = 認定情報.get要介護認定申請情報();
             passModel.set申請書管理番号(要介護認定申請情報.get申請書管理番号());
-            JukyushaDaicho 受給者台帳 = 認定情報.get受給者台帳();
             passModel.set厚労省IFコード(convertCodeToRString(要介護認定申請情報.get厚労省IF識別コード()));
             model.setDataPassModel(passModel);
-            model.setIdoJiyuCode(model.getIdoJiyuCode());
-            model.setJukyuShikakuHakkoDay1(受給者台帳.get受給資格証明書発行年月日１());
-            model.setJukyuShikakuHakkoDay2(受給者台帳.get受給資格証明書発行年月日２());
-            model.setRiyu(受給者台帳.get異動理由());
-            model.setSakujoJiyuCode(convertCodeToRString(受給者台帳.get削除事由コード()));
-            model.setShinseiKubunLaw(convertCodeToRString(要介護認定申請情報.get認定申請区分_法令_コード()));
-            model.setShinseiKubunShinsei(convertCodeToRString(要介護認定申請情報.get認定申請区分_申請時_コード()));
-            model.setSoshitsuDay(受給者台帳.get喪失年月日());
-            model.setTorisageDay(要介護認定申請情報.get取下年月日());
-            model.setToshoNinteiKikanFrom(受給者台帳.get当初認定有効開始年月日());
-            model.setToshoNinteiKikanTo(受給者台帳.get当初認定有効終了年月日());
+            model.setIdoJiyuCode(outModel.get異動事由コード());
+            model.setJukyuShikakuHakkoDay1(outModel.get発行日１());
+            model.setJukyuShikakuHakkoDay2(outModel.get発行日２());
+            model.setRiyu(outModel.get理由());
+            model.setSakujoJiyuCode(outModel.get除事由コード());
+            model.setShinseiKubunLaw(outModel.get申請区分法令());
+            model.setShinseiKubunShinsei(outModel.get申請区分申請時());
+            model.setSoshitsuDay(outModel.get喪失日());
+            model.setTorisageDay(outModel.get取下日());
+            model.setToshoNinteiKikanFrom(outModel.get当初認定期間開始());
+            model.setToshoNinteiKikanTo(outModel.get当初認定期間終了());
         }
         return model;
     }
@@ -400,15 +432,16 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
     /**
      * 認定結果情報を作成します。
      *
+     * @param 採番申請書管理番号 採番申請書管理番号
      * @param menuId メニューID
      * @param 今回情報 今回情報
      * @return 申請履歴情報
      */
-    public ShinseiRirekiJoho create申請履歴情報(RString menuId, ShokkenTorikeshiNinteiJohoKonkaiBusiness 今回情報) {
+    public DbT4121ShinseiRirekiJoho create申請履歴情報(ShinseishoKanriNo 採番申請書管理番号, RString menuId, ShokkenTorikeshiNinteiJohoKonkaiBusiness 今回情報) {
 
         if (メニュID_職権取消一部喪失.equals(menuId)) {
-            ShinseiRirekiJoho 申請履歴情報 = new ShinseiRirekiJoho(get申請書管理番号(今回情報.get市町村コード()));
-            ShinseiRirekiJohoBuilder build = 申請履歴情報.createBuilderForEdit();
+            DbT4121ShinseiRirekiJoho 申請履歴情報 = new DbT4121ShinseiRirekiJoho(採番申請書管理番号);
+            DbT4121ShinseiRirekiJohoBuilder build = 申請履歴情報.createBuilderForEdit();
             build.set前回申請管理番号(今回情報.get要介護認定申請情報().get申請書管理番号());
             return build.build();
         }
@@ -418,14 +451,15 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
     /**
      * 登録用要介護認定申請情報を作成します。
      *
+     * @param 採番申請書管理番号 採番申請書管理番号
      * @param menuId メニューID
      * @param 今回情報 今回情報
      * @return 登録用要介護認定申請情報
      */
-    public DbT4101NinteiShinseiJoho create登録用要介護認定申請情報(RString menuId, ShokkenTorikeshiNinteiJohoKonkaiBusiness 今回情報) {
+    public DbT4101NinteiShinseiJoho create登録用要介護認定申請情報(ShinseishoKanriNo 採番申請書管理番号, RString menuId, ShokkenTorikeshiNinteiJohoKonkaiBusiness 今回情報) {
 
         DbT4101NinteiShinseiJoho 要介護認定申請情報 = 今回情報.get要介護認定申請情報();
-        DbT4101NinteiShinseiJoho 登録用要介護認定申請情報 = new DbT4101NinteiShinseiJoho(get申請書管理番号(今回情報.get市町村コード()));
+        DbT4101NinteiShinseiJoho 登録用要介護認定申請情報 = new DbT4101NinteiShinseiJoho(採番申請書管理番号);
         DbT4101NinteiShinseiJohoBuilder 登録用情報Builder = 登録用要介護認定申請情報.createBuilderForEdit();
         RDate 申請日 = div.getCcdKaigoNinteiShinseiKihonJohoInput().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtShinseiYMD().getValue();
         登録用情報Builder.set厚労省IF識別コード(要介護認定申請情報.get厚労省IF識別コード());
@@ -434,41 +468,57 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
         登録用情報Builder.set被保険者番号(要介護認定申請情報.get被保険者番号());
         登録用情報Builder.set認定申請年月日(new FlexibleDate(申請日.toDateString()));
         登録用情報Builder.set認定申請枝番コード(要介護認定申請情報.get認定申請枝番コード());
-        登録用情報Builder.set認定申請区分_法令_コード(要介護認定申請情報.get認定申請区分_法令_コード());
-        登録用情報Builder.set認定申請区分_申請時_コード(要介護認定申請情報.get認定申請区分_申請時_コード());
-        登録用情報Builder.set取下区分コード(要介護認定申請情報.get取下区分コード());
+        登録用情報Builder.set認定申請区分_法令_コード(nullToEmpty(要介護認定申請情報.get認定申請区分_法令_コード()));
+        登録用情報Builder.set認定申請区分_申請時_コード(nullToEmpty(要介護認定申請情報.get認定申請区分_申請時_コード()));
+        登録用情報Builder.set取下区分コード(nullToEmpty(要介護認定申請情報.get取下区分コード()));
         登録用情報Builder.set被保険者区分コード(nullToEmpty(要介護認定申請情報.get被保険者区分コード()));
-        登録用情報Builder.set生年月日(要介護認定申請情報.get生年月日());
+        登録用情報Builder.set生年月日(nullToEmpty(要介護認定申請情報.get生年月日()));
         登録用情報Builder.set年齢(要介護認定申請情報.get年齢());
         登録用情報Builder.set性別(要介護認定申請情報.get性別());
-        登録用情報Builder.set被保険者氏名カナ(要介護認定申請情報.get被保険者氏名カナ());
-        登録用情報Builder.set被保険者氏名(要介護認定申請情報.get被保険者氏名());
-        登録用情報Builder.set郵便番号(要介護認定申請情報.get郵便番号());
-        登録用情報Builder.set住所(要介護認定申請情報.get住所());
-        登録用情報Builder.set電話番号(要介護認定申請情報.get電話番号());
+        if (要介護認定申請情報.get被保険者氏名カナ() != null) {
+            登録用情報Builder.set被保険者氏名カナ(要介護認定申請情報.get被保険者氏名カナ());
+        }
+        if (要介護認定申請情報.get被保険者氏名() != null) {
+            登録用情報Builder.set被保険者氏名(要介護認定申請情報.get被保険者氏名());
+        }
+        if (要介護認定申請情報.get郵便番号() != null) {
+            登録用情報Builder.set郵便番号(要介護認定申請情報.get郵便番号());
+        }
+        if (要介護認定申請情報.get住所() != null) {
+            登録用情報Builder.set住所(要介護認定申請情報.get住所());
+        }
+        if (要介護認定申請情報.get電話番号() != null) {
+            登録用情報Builder.set電話番号(要介護認定申請情報.get電話番号());
+        }
         登録用情報Builder.set支所コード(nullToEmpty(要介護認定申請情報.get支所コード()));
         登録用情報Builder.set識別コード(要介護認定申請情報.get識別コード());
-        登録用情報Builder.set地区コード(要介護認定申請情報.get地区コード());
+        if (要介護認定申請情報.get地区コード() != null) {
+            登録用情報Builder.set地区コード(要介護認定申請情報.get地区コード());
+        }
         登録用情報Builder.setみなし２号等対象フラグ(要介護認定申請情報.isみなし２号等対象フラグ());
-        登録用情報Builder.set広域内転居区分(要介護認定申請情報.get広域内転居区分());
+        登録用情報Builder.set広域内転居区分(nullToEmpty(要介護認定申請情報.get広域内転居区分()));
         登録用情報Builder.set認定申請有効区分(new Code(NinteiShinseiYukoKubunCode.無効.getコード()));
         登録用情報Builder.set要介護申請_要支援申請の区分(nullToEmpty(要介護認定申請情報.get要介護申請_要支援申請の区分()));
         登録用情報Builder.set認定申請理由(nullToEmpty(要介護認定申請情報.get認定申請理由()));
         登録用情報Builder.set申請サービス削除の理由(nullToEmpty(要介護認定申請情報.get申請サービス削除の理由()));
         if (メニュID_職権修正.equals(menuId)) {
-            登録用情報Builder.set前回要介護状態区分コード(要介護認定申請情報.get前回要介護状態区分コード());
+            登録用情報Builder.set前回要介護状態区分コード(nullToEmpty(要介護認定申請情報.get前回要介護状態区分コード()));
             登録用情報Builder.set前回認定年月日(要介護認定申請情報.get前回認定年月日());
-            登録用情報Builder.set前回認定有効期間_開始(要介護認定申請情報.get前回認定有効期間_開始());
-            登録用情報Builder.set前回認定有効期間_終了(要介護認定申請情報.get前回認定有効期間_終了());
+            登録用情報Builder.set前回認定有効期間_開始(nullToEmpty(要介護認定申請情報.get前回認定有効期間_開始()));
+            登録用情報Builder.set前回認定有効期間_終了(nullToEmpty(要介護認定申請情報.get前回認定有効期間_終了()));
             登録用情報Builder.set2号医療保険者名(nullToEmpty(要介護認定申請情報.get２号医療保険者名()));
             登録用情報Builder.set2号医療保険記号番号(nullToEmpty(要介護認定申請情報.get２号医療保険記号番号()));
-            登録用情報Builder.set2号特定疾病コード(要介護認定申請情報.get２号特定疾病コード());
+            登録用情報Builder.set2号特定疾病コード(nullToEmpty(要介護認定申請情報.get２号特定疾病コード()));
             登録用情報Builder.set自動割当除外者区分(nullToEmpty(要介護認定申請情報.get自動割当除外者区分()));
             登録用情報Builder.set情報提供への同意有無(要介護認定申請情報.is情報提供への同意有無());
-            登録用情報Builder.set情報提供資料出力年月日(要介護認定申請情報.get情報提供資料出力年月日());
-            登録用情報Builder.set調査区分(要介護認定申請情報.get調査区分());
-            登録用情報Builder.set認定調査委託先コード(要介護認定申請情報.get認定調査委託先コード());
-            登録用情報Builder.set認定調査員コード(要介護認定申請情報.get認定調査員コード());
+            登録用情報Builder.set情報提供資料出力年月日(nullToEmpty(要介護認定申請情報.get情報提供資料出力年月日()));
+            登録用情報Builder.set調査区分(nullToEmpty(要介護認定申請情報.get調査区分()));
+            if (要介護認定申請情報.get認定調査委託先コード() != null) {
+                登録用情報Builder.set認定調査委託先コード(要介護認定申請情報.get認定調査委託先コード());
+            }
+            if (要介護認定申請情報.get認定調査員コード() != null) {
+                登録用情報Builder.set認定調査員コード(要介護認定申請情報.get認定調査員コード());
+            }
             登録用情報Builder.set調査員への連絡事項(nullToEmpty(要介護認定申請情報.get調査員への連絡事項()));
             登録用情報Builder.set主治医医療機関コード(nullToEmpty(要介護認定申請情報.get主治医医療機関コード()));
             登録用情報Builder.set主治医コード(nullToEmpty(要介護認定申請情報.get主治医コード()));
@@ -477,40 +527,50 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             登録用情報Builder.set主治医への連絡事項(nullToEmpty(要介護認定申請情報.get主治医への連絡事項()));
             登録用情報Builder.set認定延期通知発行しないことに対する同意有無(要介護認定申請情報.is認定延期通知発行しないことに対する同意有無());
             登録用情報Builder.set施設入所の有無(要介護認定申請情報.is施設入所の有無());
-            登録用情報Builder.set入所施設コード(要介護認定申請情報.get入所施設コード());
+            if (要介護認定申請情報.get入所施設コード() != null) {
+                登録用情報Builder.set入所施設コード(要介護認定申請情報.get入所施設コード());
+            }
             登録用情報Builder.set家庭訪問の有無(要介護認定申請情報.is家庭訪問の有無());
-            登録用情報Builder.set訪問調査先郵便番号(要介護認定申請情報.get訪問調査先郵便番号());
-            登録用情報Builder.set訪問調査先住所(要介護認定申請情報.get訪問調査先住所());
-            登録用情報Builder.set訪問調査先名称(要介護認定申請情報.get訪問調査先名称());
-            登録用情報Builder.set訪問調査先電話番号(要介護認定申請情報.get訪問調査先電話番号());
+            if (要介護認定申請情報.get訪問調査先郵便番号() != null) {
+                登録用情報Builder.set訪問調査先郵便番号(要介護認定申請情報.get訪問調査先郵便番号());
+            }
+            if (要介護認定申請情報.get訪問調査先住所() != null) {
+                登録用情報Builder.set訪問調査先住所(要介護認定申請情報.get訪問調査先住所());
+            }
+            if (要介護認定申請情報.get訪問調査先名称() != null) {
+                登録用情報Builder.set訪問調査先名称(要介護認定申請情報.get訪問調査先名称());
+            }
+            if (要介護認定申請情報.get訪問調査先電話番号() != null) {
+                登録用情報Builder.set訪問調査先電話番号(要介護認定申請情報.get訪問調査先電話番号());
+            }
             登録用情報Builder.set市町村連絡事項(nullToEmpty(要介護認定申請情報.get市町村連絡事項()));
-            登録用情報Builder.set処理状態区分(要介護認定申請情報.get処理状態区分());
-            登録用情報Builder.set取下年月日(要介護認定申請情報.get取下年月日());
+            登録用情報Builder.set処理状態区分(nullToEmpty(要介護認定申請情報.get処理状態区分()));
+            登録用情報Builder.set取下年月日(nullToEmpty(要介護認定申請情報.get取下年月日()));
             登録用情報Builder.set取下理由(nullToEmpty(要介護認定申請情報.get取下理由()));
-            登録用情報Builder.set却下年月日(要介護認定申請情報.get却下年月日());
+            登録用情報Builder.set却下年月日(nullToEmpty(要介護認定申請情報.get却下年月日()));
             登録用情報Builder.set却下理由(nullToEmpty(要介護認定申請情報.get却下理由()));
-            登録用情報Builder.set延期決定年月日(要介護認定申請情報.get延期決定年月日());
+            登録用情報Builder.set延期決定年月日(nullToEmpty(要介護認定申請情報.get延期決定年月日()));
             登録用情報Builder.set延期理由(nullToEmpty(要介護認定申請情報.get延期理由()));
-            登録用情報Builder.set延期通知発行年月日(要介護認定申請情報.get延期通知発行年月日());
+            登録用情報Builder.set延期通知発行年月日(nullToEmpty(要介護認定申請情報.get延期通知発行年月日()));
             登録用情報Builder.set延期通知発行回数(要介護認定申請情報.get延期通知発行回数());
-            登録用情報Builder.set延期見込期間開始年月日(要介護認定申請情報.get延期見込期間開始年月日());
-            登録用情報Builder.set延期見込期間終了年月日(要介護認定申請情報.get延期見込期間終了年月日());
+            登録用情報Builder.set延期見込期間開始年月日(nullToEmpty(要介護認定申請情報.get延期見込期間開始年月日()));
+            登録用情報Builder.set延期見込期間終了年月日(nullToEmpty(要介護認定申請情報.get延期見込期間終了年月日()));
             登録用情報Builder.set審査継続区分(要介護認定申請情報.is審査継続区分());
-            登録用情報Builder.set介護認定審査会優先振分区分コード(要介護認定申請情報.get介護認定審査会優先振分区分コード());
-            登録用情報Builder.set更新通知発行年月日(要介護認定申請情報.get更新通知発行年月日());
-            登録用情報Builder.set更新通知発行完了年月日(要介護認定申請情報.get更新通知発行完了年月日());
-            登録用情報Builder.set認定申請情報登録年月日(要介護認定申請情報.get認定申請情報登録年月日());
+            登録用情報Builder.set介護認定審査会優先振分区分コード(nullToEmpty(要介護認定申請情報.get介護認定審査会優先振分区分コード()));
+            登録用情報Builder.set更新通知発行年月日(nullToEmpty(要介護認定申請情報.get更新通知発行年月日()));
+            登録用情報Builder.set更新通知発行完了年月日(nullToEmpty(要介護認定申請情報.get更新通知発行完了年月日()));
+            登録用情報Builder.set認定申請情報登録年月日(nullToEmpty(要介護認定申請情報.get認定申請情報登録年月日()));
             登録用情報Builder.set再調査依頼回数(要介護認定申請情報.get再調査依頼回数());
             登録用情報Builder.set再作成依頼回数(要介護認定申請情報.get再作成依頼回数());
-            登録用情報Builder.setＩＦ送付年月日(要介護認定申請情報.getＩＦ送付年月日());
+            登録用情報Builder.setＩＦ送付年月日(nullToEmpty(要介護認定申請情報.getＩＦ送付年月日()));
             登録用情報Builder.set論理削除フラグ(要介護認定申請情報.is論理削除フラグ());
         } else if (メニュID_職権取消一部喪失.equals(menuId)) {
             KekkaShosaiJohoOutModel outModel = DataPassingConverter.deserialize(div.getHdnKekkaShosaiJohoOutModel(), KekkaShosaiJohoOutModel.class);
             登録用情報Builder.set前回要介護状態区分コード(今回情報.get受給者台帳().get要介護認定状態区分コード());
             if (outModel != null) {
-                登録用情報Builder.set前回認定年月日(outModel.get認定内容().get認定年月日());
-                登録用情報Builder.set前回認定有効期間_開始(outModel.get認定内容().get有効開始年月日());
-                登録用情報Builder.set前回認定有効期間_終了(outModel.get認定内容().get有効終了年月日());
+                登録用情報Builder.set前回認定年月日(nullToEmpty(outModel.get認定内容().get認定年月日()));
+                登録用情報Builder.set前回認定有効期間_開始(nullToEmpty(outModel.get認定内容().get有効開始年月日()));
+                登録用情報Builder.set前回認定有効期間_終了(nullToEmpty(outModel.get認定内容().get有効終了年月日()));
             }
             登録用情報Builder.set論理削除フラグ(true);
         }
@@ -520,11 +580,12 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
     /**
      * 登録用受給者台帳を作成します。
      *
+     * @param 採番申請書管理番号 採番申請書管理番号
      * @param 今回情報 今回情報
      * @param menuId メニューID
      * @return 登録用受給者台帳
      */
-    public JukyushaDaicho create登録用受給者台帳(ShokkenTorikeshiNinteiJohoKonkaiBusiness 今回情報, RString menuId) {
+    public JukyushaDaicho create登録用受給者台帳(ShinseishoKanriNo 採番申請書管理番号, ShokkenTorikeshiNinteiJohoKonkaiBusiness 今回情報, RString menuId) {
 
         KekkaShosaiJohoOutModel outModel = DataPassingConverter.deserialize(div.getHdnKekkaShosaiJohoOutModel(), KekkaShosaiJohoOutModel.class);
         JukyushaDaicho 受給者台帳 = 今回情報.get受給者台帳();
@@ -532,120 +593,125 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
                 new RString(String.valueOf(Integer.parseInt(受給者台帳.get履歴番号().toString()) + 1)),
                 受給者台帳.get枝番(), 受給者台帳.get受給申請事由());
         JukyushaDaichoBuilder 登録用builder = 登録用受給者台帳.createBuilderForEdit();
-        if (メニュID_職権修正.equals(menuId)) {
+        if (メニュID_職権取消一部喪失.equals(menuId)) {
             登録用builder.set喪失年月日(new FlexibleDate(div.getTxtSoshitsubi().getValue().toString()));
             登録用builder.set直近異動事由コード(new Code(ChokkinIdoJiyuCode.職権取消.getコード()));
             登録用builder.set有効無効区分(new Code(YukoMukoKubun.無効.getコード()));
-            登録用builder.set指定サービス種類01(受給者台帳.get指定サービス種類01());
-            登録用builder.set指定サービス種類02(受給者台帳.get指定サービス種類02());
-            登録用builder.set指定サービス種類03(受給者台帳.get指定サービス種類03());
-            登録用builder.set指定サービス種類04(受給者台帳.get指定サービス種類04());
-            登録用builder.set指定サービス種類05(受給者台帳.get指定サービス種類05());
-            登録用builder.set指定サービス種類06(受給者台帳.get指定サービス種類06());
-            登録用builder.set指定サービス種類07(受給者台帳.get指定サービス種類07());
-            登録用builder.set指定サービス種類08(受給者台帳.get指定サービス種類08());
-            登録用builder.set指定サービス種類09(受給者台帳.get指定サービス種類09());
-            登録用builder.set指定サービス種類10(受給者台帳.get指定サービス種類10());
-            登録用builder.set指定サービス種類11(受給者台帳.get指定サービス種類11());
-            登録用builder.set指定サービス種類12(受給者台帳.get指定サービス種類12());
-            登録用builder.set指定サービス種類13(受給者台帳.get指定サービス種類13());
-            登録用builder.set指定サービス種類14(受給者台帳.get指定サービス種類14());
-            登録用builder.set指定サービス種類15(受給者台帳.get指定サービス種類15());
-            登録用builder.set指定サービス種類16(受給者台帳.get指定サービス種類16());
-            登録用builder.set指定サービス種類17(受給者台帳.get指定サービス種類17());
-            登録用builder.set指定サービス種類18(受給者台帳.get指定サービス種類18());
-            登録用builder.set指定サービス種類19(受給者台帳.get指定サービス種類19());
-            登録用builder.set指定サービス種類20(受給者台帳.get指定サービス種類20());
-            登録用builder.set指定サービス種類21(受給者台帳.get指定サービス種類21());
-            登録用builder.set指定サービス種類22(受給者台帳.get指定サービス種類22());
-            登録用builder.set指定サービス種類23(受給者台帳.get指定サービス種類23());
-            登録用builder.set指定サービス種類24(受給者台帳.get指定サービス種類24());
-            登録用builder.set指定サービス種類25(受給者台帳.get指定サービス種類25());
-            登録用builder.set指定サービス種類26(受給者台帳.get指定サービス種類26());
-            登録用builder.set指定サービス種類27(受給者台帳.get指定サービス種類27());
-            登録用builder.set指定サービス種類28(受給者台帳.get指定サービス種類28());
-            登録用builder.set指定サービス種類29(受給者台帳.get指定サービス種類29());
-            登録用builder.set指定サービス種類30(受給者台帳.get指定サービス種類30());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_1, 受給者台帳.get指定サービス種類01());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_2, 受給者台帳.get指定サービス種類02());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_3, 受給者台帳.get指定サービス種類03());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_4, 受給者台帳.get指定サービス種類04());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_5, 受給者台帳.get指定サービス種類05());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_6, 受給者台帳.get指定サービス種類06());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_7, 受給者台帳.get指定サービス種類07());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_8, 受給者台帳.get指定サービス種類08());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_9, 受給者台帳.get指定サービス種類09());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_10, 受給者台帳.get指定サービス種類10());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_11, 受給者台帳.get指定サービス種類11());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_12, 受給者台帳.get指定サービス種類12());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_13, 受給者台帳.get指定サービス種類13());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_14, 受給者台帳.get指定サービス種類14());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_15, 受給者台帳.get指定サービス種類15());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_16, 受給者台帳.get指定サービス種類16());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_17, 受給者台帳.get指定サービス種類17());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_18, 受給者台帳.get指定サービス種類18());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_19, 受給者台帳.get指定サービス種類19());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_20, 受給者台帳.get指定サービス種類20());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_21, 受給者台帳.get指定サービス種類21());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_22, 受給者台帳.get指定サービス種類22());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_23, 受給者台帳.get指定サービス種類23());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_24, 受給者台帳.get指定サービス種類24());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_25, 受給者台帳.get指定サービス種類25());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_26, 受給者台帳.get指定サービス種類26());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_27, 受給者台帳.get指定サービス種類27());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_28, 受給者台帳.get指定サービス種類28());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_29, 受給者台帳.get指定サービス種類29());
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_30, 受給者台帳.get指定サービス種類30());
         } else {
             登録用builder.set直近異動事由コード(new Code(ChokkinIdoJiyuCode.職権修正.getコード()));
             登録用builder.set有効無効区分(new Code(YukoMukoKubun.有効.getコード()));
             登録用builder.set削除事由コード(受給者台帳.get削除事由コード());
-            int index = ZERO;
             List<RString> サービス種類 = div.getTxtServiceShuruiKonkai().getValue().split(",");
-            登録用builder.set指定サービス種類01(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類02(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類03(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類04(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類05(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類06(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類07(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類08(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類09(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類10(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類11(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類12(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類13(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類14(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類15(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類16(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類17(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類18(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類18(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類19(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類20(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類21(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類22(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類23(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類24(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類25(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類26(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類27(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類28(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類29(get指定サービス種類(++index, サービス種類));
-            登録用builder.set指定サービス種類30(get指定サービス種類(++index, サービス種類));
+            List<ServiceShuruiCode> 指定サービス種類List = new ArrayList<>();
+            for (int i = 0; i < サービス種類.size(); i++) {
+                指定サービス種類List.add(new ServiceShuruiCode(サービス種類.get(i)));
+            }
+            for (int i = サービス種類.size(); i < 指定サービス種類_30; i++) {
+                指定サービス種類List.add(ServiceShuruiCode.EMPTY);
+            }
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_1, 指定サービス種類List.get(指定サービス種類_1 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_2, 指定サービス種類List.get(指定サービス種類_2 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_3, 指定サービス種類List.get(指定サービス種類_3 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_4, 指定サービス種類List.get(指定サービス種類_4 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_5, 指定サービス種類List.get(指定サービス種類_5 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_6, 指定サービス種類List.get(指定サービス種類_6 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_7, 指定サービス種類List.get(指定サービス種類_7 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_8, 指定サービス種類List.get(指定サービス種類_8 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_9, 指定サービス種類List.get(指定サービス種類_9 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_10, 指定サービス種類List.get(指定サービス種類_10 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_11, 指定サービス種類List.get(指定サービス種類_11 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_12, 指定サービス種類List.get(指定サービス種類_12 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_13, 指定サービス種類List.get(指定サービス種類_13 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_14, 指定サービス種類List.get(指定サービス種類_14 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_15, 指定サービス種類List.get(指定サービス種類_15 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_16, 指定サービス種類List.get(指定サービス種類_16 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_17, 指定サービス種類List.get(指定サービス種類_17 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_18, 指定サービス種類List.get(指定サービス種類_18 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_19, 指定サービス種類List.get(指定サービス種類_19 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_20, 指定サービス種類List.get(指定サービス種類_20 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_21, 指定サービス種類List.get(指定サービス種類_21 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_22, 指定サービス種類List.get(指定サービス種類_22 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_23, 指定サービス種類List.get(指定サービス種類_23 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_24, 指定サービス種類List.get(指定サービス種類_24 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_25, 指定サービス種類List.get(指定サービス種類_25 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_26, 指定サービス種類List.get(指定サービス種類_26 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_27, 指定サービス種類List.get(指定サービス種類_27 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_28, 指定サービス種類List.get(指定サービス種類_28 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_29, 指定サービス種類List.get(指定サービス種類_29 - 1));
+            登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_30, 指定サービス種類List.get(指定サービス種類_30 - 1));
         }
-        登録用builder.set申請書管理番号(get申請書管理番号(今回情報.get市町村コード()));
+        登録用builder.set申請書管理番号(採番申請書管理番号);
         登録用builder.set申請状況区分(nullToEmpty(受給者台帳.get申請状況区分()));
         登録用builder.set支所コード(nullToEmpty(受給者台帳.get支所コード()));
         登録用builder.set直近フラグ(受給者台帳.is直近フラグ());
         登録用builder.set識別コード(受給者台帳.get識別コード());
         登録用builder.set申請理由(nullToEmpty(受給者台帳.get申請理由()));
-        登録用builder.set届出者_申請者関係コード(受給者台帳.get届出者_申請者関係コード());
+        登録用builder.set届出者_申請者関係コード(nullToEmpty(受給者台帳.get届出者_申請者関係コード()));
         登録用builder.set届出者_本人との関係(nullToEmpty(受給者台帳.get届出者_本人との関係()));
         登録用builder.set受給申請年月日(new FlexibleDate(div.getCcdKaigoNinteiShinseiKihonJohoInput().getKaigoNinteiShinseiKihonJohoInputDiv().
                 getTxtShinseiYMD().getValue().toString()));
-        登録用builder.set２号特定疾病コード(受給者台帳.get２号特定疾病コード());
-        登録用builder.set審査会依頼年月日(受給者台帳.get審査会依頼年月日());
-        登録用builder.set要介護認定状態区分コード(受給者台帳.get要介護認定状態区分コード());
-        登録用builder.set認定有効期間開始年月日(div.getRirekiNintei().getTxtYukoKaishibiKonkai().getValue());
-        登録用builder.set認定有効期間終了年月日(div.getRirekiNintei().getTxtYukoShuryobiKonkai().getValue());
-        登録用builder.set認定年月日(div.getRirekiNintei().getTxtNinteibiKonkai().getValue());
-        登録用builder.setみなし要介護区分コード(受給者台帳.getみなし要介護区分コード());
+        登録用builder.set２号特定疾病コード(nullToEmpty(受給者台帳.get２号特定疾病コード()));
+        登録用builder.set審査会依頼年月日(nullToEmpty(受給者台帳.get審査会依頼年月日()));
+        登録用builder.set要介護認定状態区分コード(nullToEmpty(受給者台帳.get要介護認定状態区分コード()));
+        登録用builder.set認定有効期間開始年月日(nullToEmpty(div.getRirekiNintei().getTxtYukoKaishibiKonkai().getValue()));
+        登録用builder.set認定有効期間終了年月日(nullToEmpty(div.getRirekiNintei().getTxtYukoShuryobiKonkai().getValue()));
+        登録用builder.set認定年月日(nullToEmpty(div.getRirekiNintei().getTxtNinteibiKonkai().getValue()));
+        登録用builder.setみなし要介護区分コード(nullToEmpty(受給者台帳.getみなし要介護区分コード()));
         登録用builder.set直近異動年月日(FlexibleDate.getNowDate());
         if (outModel != null) {
-            登録用builder.setデータ区分(new Code(outModel.get異動事由コード()));
+            登録用builder.setデータ区分(outModel.get異動事由コード() == null ? Code.EMPTY : new Code(outModel.get異動事由コード()));
             登録用builder.set異動理由(nullToEmpty(outModel.get理由()));
         }
         登録用builder.set同一連番(new RString(String.valueOf(Integer.parseInt(受給者台帳.get履歴番号().toString()) + 1)));
-        登録用builder.set申請書区分(受給者台帳.get申請書区分());
+        登録用builder.set申請書区分(nullToEmpty(受給者台帳.get申請書区分()));
         登録用builder.set要支援者認定申請区分(受給者台帳.is要支援者認定申請区分());
         登録用builder.set支給限度単位数(受給者台帳.get支給限度単位数());
-        登録用builder.set支給限度有効開始年月日(受給者台帳.get支給限度有効開始年月日());
-        登録用builder.set支給限度有効終了年月日(受給者台帳.get支給限度有効終了年月日());
+        登録用builder.set支給限度有効開始年月日(nullToEmpty(受給者台帳.get支給限度有効開始年月日()));
+        登録用builder.set支給限度有効終了年月日(nullToEmpty(受給者台帳.get支給限度有効終了年月日()));
         登録用builder.set短期入所支給限度日数(受給者台帳.get短期入所支給限度日数());
-        登録用builder.set短期入所支給限度開始年月日(受給者台帳.get短期入所支給限度開始年月日());
-        登録用builder.set短期入所支給限度終了年月日(受給者台帳.get短期入所支給限度終了年月日());
-        登録用builder.set当初認定有効開始年月日(受給者台帳.get当初認定有効開始年月日());
-        登録用builder.set当初認定有効終了年月日(受給者台帳.get当初認定有効終了年月日());
-        登録用builder.set受給資格証明書発行年月日１(受給者台帳.get受給資格証明書発行年月日１());
-        登録用builder.set受給資格証明書発行年月日２(受給者台帳.get受給資格証明書発行年月日２());
-        登録用builder.set診断命令書発行年月日(受給者台帳.get診断命令書発行年月日());
-        登録用builder.set２号申請受理通知書発行年月日(受給者台帳.get２号申請受理通知書発行年月日());
-        登録用builder.set認定結果通知書発行年月日(受給者台帳.get認定結果通知書発行年月日());
-        登録用builder.set区分変更通知書発行年月日(受給者台帳.get区分変更通知書発行年月日());
-        登録用builder.setサービス変更通知書発行年月日(受給者台帳.getサービス変更通知書発行年月日());
-        登録用builder.set認定却下通知書発行年月日(受給者台帳.get認定却下通知書発行年月日());
-        登録用builder.set認定取消通知書発行年月日(受給者台帳.get認定取消通知書発行年月日());
+        登録用builder.set短期入所支給限度開始年月日(nullToEmpty(受給者台帳.get短期入所支給限度開始年月日()));
+        登録用builder.set短期入所支給限度終了年月日(nullToEmpty(受給者台帳.get短期入所支給限度終了年月日()));
+        登録用builder.set当初認定有効開始年月日(nullToEmpty(受給者台帳.get当初認定有効開始年月日()));
+        登録用builder.set当初認定有効終了年月日(nullToEmpty(受給者台帳.get当初認定有効終了年月日()));
+        登録用builder.set受給資格証明書発行年月日１(nullToEmpty(受給者台帳.get受給資格証明書発行年月日１()));
+        登録用builder.set受給資格証明書発行年月日２(nullToEmpty(受給者台帳.get受給資格証明書発行年月日２()));
+        登録用builder.set診断命令書発行年月日(nullToEmpty(受給者台帳.get診断命令書発行年月日()));
+        登録用builder.set２号申請受理通知書発行年月日(nullToEmpty(受給者台帳.get２号申請受理通知書発行年月日()));
+        登録用builder.set認定結果通知書発行年月日(nullToEmpty(受給者台帳.get認定結果通知書発行年月日()));
+        登録用builder.set区分変更通知書発行年月日(nullToEmpty(受給者台帳.get区分変更通知書発行年月日()));
+        登録用builder.setサービス変更通知書発行年月日(nullToEmpty(受給者台帳.getサービス変更通知書発行年月日()));
+        登録用builder.set認定却下通知書発行年月日(nullToEmpty(受給者台帳.get認定却下通知書発行年月日()));
+        登録用builder.set認定取消通知書発行年月日(nullToEmpty(受給者台帳.get認定取消通知書発行年月日()));
         登録用builder.set資格取得前申請フラグ(受給者台帳.is資格取得前申請フラグ());
         登録用builder.set旧措置者フラグ(受給者台帳.is旧措置者フラグ());
         登録用builder.set論理削除フラグ(false);
@@ -810,24 +876,6 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
 
     private RString convertCodeToRString(Code target) {
         return target == null || target.isEmpty() ? RString.EMPTY : target.value();
-    }
-
-    private ServiceShuruiCode get指定サービス種類(int サービス種類番号, List<RString> サービス種類) {
-
-        if (サービス種類 != null && サービス種類番号 < サービス種類.size() && !サービス種類.get(サービス種類番号).isEmpty()) {
-            return new ServiceShuruiCode(サービス種類.get(サービス種類番号));
-        }
-        return ServiceShuruiCode.EMPTY;
-    }
-
-    private ShinseishoKanriNo get申請書管理番号(LasdecCode 市町村コード) {
-
-        RString 連番 = Saiban.get(SubGyomuCode.DBD介護受給, SaibanHanyokeyName.市町村コード_西暦_月.getコード()).nextString();
-        RStringBuilder rsb = new RStringBuilder();
-        rsb.append(市町村コード);
-        rsb.append(RDate.getNowDate().getYearMonth().toDateString());
-        rsb.append(連番);
-        return new ShinseishoKanriNo(rsb.toRString());
     }
 
     /**
@@ -998,39 +1046,44 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             修正用builder.set認定有効期間終了年月日(div.getRirekiNintei().getTxtYukoShuryobiKonkai().getValue());
             修正用builder.set認定年月日(div.getRirekiNintei().getTxtNinteibiKonkai().getValue());
             修正用builder.setみなし要介護区分コード(受給者台帳.getみなし要介護区分コード());
-            int index = ZERO;
             List<RString> サービス種類 = div.getTxtServiceShuruiKonkai().getValue().split(",");
-            修正用builder.set指定サービス種類01(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類02(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類03(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類04(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類05(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類06(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類07(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類08(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類09(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類10(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類11(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類12(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類13(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類14(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類15(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類16(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類17(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類18(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類18(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類19(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類20(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類21(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類22(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類23(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類24(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類25(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類26(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類27(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類28(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類29(get指定サービス種類(++index, サービス種類));
-            修正用builder.set指定サービス種類30(get指定サービス種類(++index, サービス種類));
+            List<ServiceShuruiCode> 指定サービス種類List = new ArrayList<>();
+            for (int i = 0; i < サービス種類.size(); i++) {
+                指定サービス種類List.add(new ServiceShuruiCode(サービス種類.get(i)));
+            }
+            for (int i = サービス種類.size(); i < 指定サービス種類_30; i++) {
+                指定サービス種類List.add(ServiceShuruiCode.EMPTY);
+            }
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_1, 指定サービス種類List.get(指定サービス種類_1 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_2, 指定サービス種類List.get(指定サービス種類_2 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_3, 指定サービス種類List.get(指定サービス種類_3 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_4, 指定サービス種類List.get(指定サービス種類_4 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_5, 指定サービス種類List.get(指定サービス種類_5 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_6, 指定サービス種類List.get(指定サービス種類_6 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_7, 指定サービス種類List.get(指定サービス種類_7 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_8, 指定サービス種類List.get(指定サービス種類_8 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_9, 指定サービス種類List.get(指定サービス種類_9 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_10, 指定サービス種類List.get(指定サービス種類_10 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_11, 指定サービス種類List.get(指定サービス種類_11 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_12, 指定サービス種類List.get(指定サービス種類_12 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_13, 指定サービス種類List.get(指定サービス種類_13 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_14, 指定サービス種類List.get(指定サービス種類_14 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_15, 指定サービス種類List.get(指定サービス種類_15 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_16, 指定サービス種類List.get(指定サービス種類_16 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_17, 指定サービス種類List.get(指定サービス種類_17 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_18, 指定サービス種類List.get(指定サービス種類_18 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_19, 指定サービス種類List.get(指定サービス種類_19 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_20, 指定サービス種類List.get(指定サービス種類_20 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_21, 指定サービス種類List.get(指定サービス種類_21 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_22, 指定サービス種類List.get(指定サービス種類_22 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_23, 指定サービス種類List.get(指定サービス種類_23 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_24, 指定サービス種類List.get(指定サービス種類_24 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_25, 指定サービス種類List.get(指定サービス種類_25 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_26, 指定サービス種類List.get(指定サービス種類_26 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_27, 指定サービス種類List.get(指定サービス種類_27 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_28, 指定サービス種類List.get(指定サービス種類_28 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_29, 指定サービス種類List.get(指定サービス種類_29 - 1));
+            修正用builder = set指定サービス種類(修正用builder, 指定サービス種類_30, 指定サービス種類List.get(指定サービス種類_30 - 1));
             修正用builder.set直近異動事由コード(new Code(ChokkinIdoJiyuCode.サービス種類変更申請認定.getコード()));
             修正用builder.set有効無効区分(new Code(YukoMukoKubun.有効.getコード()));
             修正用builder.setデータ区分(new Code(Datakubun.通常_認定.getコード()));
@@ -1064,5 +1117,126 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
 
     private Code nullToEmpty(Code target) {
         return target == null ? Code.EMPTY : target;
+    }
+
+    private FlexibleDate nullToEmpty(FlexibleDate target) {
+        return target == null ? FlexibleDate.EMPTY : target;
+    }
+
+    private JukyushaDaichoBuilder set指定サービス種類(JukyushaDaichoBuilder builder, int 指定サービス種類Index, ServiceShuruiCode target) {
+        if (target == null || target.isEmpty()) {
+            return builder;
+        }
+        if (指定サービス種類Index <= 指定サービス種類_16) {
+            return set指定サービス種類16以下(builder, 指定サービス種類Index, target);
+        }
+        return set指定サービス種類16以上(builder, 指定サービス種類Index, target);
+    }
+
+    private JukyushaDaichoBuilder set指定サービス種類16以下(JukyushaDaichoBuilder builder, int 指定サービス種類Index, ServiceShuruiCode target) {
+        switch (指定サービス種類Index) {
+            case 指定サービス種類_1:
+                builder.set指定サービス種類01(target);
+                break;
+            case 指定サービス種類_2:
+                builder.set指定サービス種類02(target);
+                break;
+            case 指定サービス種類_3:
+                builder.set指定サービス種類03(target);
+                break;
+            case 指定サービス種類_4:
+                builder.set指定サービス種類04(target);
+                break;
+            case 指定サービス種類_5:
+                builder.set指定サービス種類05(target);
+                break;
+            case 指定サービス種類_6:
+                builder.set指定サービス種類06(target);
+                break;
+            case 指定サービス種類_7:
+                builder.set指定サービス種類07(target);
+                break;
+            case 指定サービス種類_8:
+                builder.set指定サービス種類08(target);
+                break;
+            case 指定サービス種類_9:
+                builder.set指定サービス種類09(target);
+                break;
+            case 指定サービス種類_10:
+                builder.set指定サービス種類10(target);
+                break;
+            case 指定サービス種類_11:
+                builder.set指定サービス種類11(target);
+                break;
+            case 指定サービス種類_12:
+                builder.set指定サービス種類12(target);
+                break;
+            case 指定サービス種類_13:
+                builder.set指定サービス種類13(target);
+                break;
+            case 指定サービス種類_14:
+                builder.set指定サービス種類14(target);
+                break;
+            case 指定サービス種類_15:
+                builder.set指定サービス種類15(target);
+                break;
+            case 指定サービス種類_16:
+                builder.set指定サービス種類16(target);
+                break;
+            default:
+                break;
+        }
+        return builder;
+    }
+
+    private JukyushaDaichoBuilder set指定サービス種類16以上(JukyushaDaichoBuilder builder, int 指定サービス種類Index, ServiceShuruiCode target) {
+
+        switch (指定サービス種類Index) {
+            case 指定サービス種類_17:
+                builder.set指定サービス種類17(target);
+                break;
+            case 指定サービス種類_18:
+                builder.set指定サービス種類18(target);
+                break;
+            case 指定サービス種類_19:
+                builder.set指定サービス種類19(target);
+                break;
+            case 指定サービス種類_20:
+                builder.set指定サービス種類20(target);
+                break;
+            case 指定サービス種類_21:
+                builder.set指定サービス種類21(target);
+                break;
+            case 指定サービス種類_22:
+                builder.set指定サービス種類22(target);
+                break;
+            case 指定サービス種類_23:
+                builder.set指定サービス種類23(target);
+                break;
+            case 指定サービス種類_24:
+                builder.set指定サービス種類24(target);
+                break;
+            case 指定サービス種類_25:
+                builder.set指定サービス種類25(target);
+                break;
+            case 指定サービス種類_26:
+                builder.set指定サービス種類26(target);
+                break;
+            case 指定サービス種類_27:
+                builder.set指定サービス種類27(target);
+                break;
+            case 指定サービス種類_28:
+                builder.set指定サービス種類28(target);
+                break;
+            case 指定サービス種類_29:
+                builder.set指定サービス種類29(target);
+                break;
+            case 指定サービス種類_30:
+                builder.set指定サービス種類30(target);
+                break;
+            default:
+                break;
+        }
+        return builder;
     }
 }
