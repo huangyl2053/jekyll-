@@ -246,7 +246,7 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
             eucCsvEntity.set前住所方書(kojin.get転入前().get方書().value());
         }
         eucCsvEntity.set市町村コード(entity.get被保険者台帳管理_市町村コード());
-        eucCsvEntity.set市町村名(association.get市町村名());
+        eucCsvEntity.set市町村名(get地方公共団体(new LasdecCode(entity.get被保険者台帳管理_市町村コード())).get市町村名());
         eucCsvEntity.set保険者コード(association.get地方公共団体コード().value());
         eucCsvEntity.set保険者名(association.getShichosonName_());
         eucCsvEntity.set空白(RString.EMPTY);
@@ -372,8 +372,7 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
                 && null != processParamter.getAtenacyusyutsujyoken().getShichoson_Code()
                 && !processParamter.getAtenacyusyutsujyoken().getShichoson_Code().equals(LasdecCode.EMPTY)) {
             builder.append(HOKENSHA);
-            IAssociationFinder finder = AssociationFinderFactory.createInstance();
-            Association 地方公共団体 = finder.getAssociation(processParamter.getAtenacyusyutsujyoken().getShichoson_Code());
+            Association 地方公共団体 = get地方公共団体(processParamter.getAtenacyusyutsujyoken().getShichoson_Code());
             builder.append(地方公共団体.get市町村名());
             builder.append(COMMA);
         }
@@ -666,5 +665,11 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
         }
         return builder;
+    }
+
+    private Association get地方公共団体(LasdecCode 市町村コード) {
+        IAssociationFinder finder = AssociationFinderFactory.createInstance();
+        Association 地方公共団体 = finder.getAssociation(市町村コード);
+        return 地方公共団体;
     }
 }

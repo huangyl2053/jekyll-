@@ -34,7 +34,17 @@
         <result property="委託先事業者番号" column="itakusakiJigyoshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
     </resultMap>
 
-    <select id="被保険者証資格証発行情報取得" parameterType="jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter"
+    <resultMap id="被保険者証資格証履歴情報取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokenshoshikakushohakko.HihokenshoShikakushoRirekiEntity" autoMapping="true">
+        <result property="市町村コード" column="shichosonCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="被保険者番号" column="hihokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="履歴番号" column="rirekiNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="枝番" column="edaban"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="受給申請事由" column="jukyuShinseiJiyu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="年月日" column="ymd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="区分" column="kubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+
+    <select id="被保険者証資格証発行情報取得" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokenshoshikakushohakko.HihokenshoShikakushoRirekiEntity"
             resultMap="被保険者証資格証発行情報取得ResultMap" resultOrdered="true" fetchSize="500">
         SELECT
         TB1."yokaigoJotaiKubunCode" AS TB1_yokaigoJotaiKubunCode,
@@ -64,13 +74,10 @@
         rgdb."DbT4001JukyushaDaicho" AS A
         WHERE
         A."hihokenshaNo" = #{被保険者番号}
-        AND A."yukoMukoKubun" = #{有効無効区分}
-        AND A."logicalDeletedFlag" = #{論理削除フラグ}
-        ORDER BY
-        A."rirekiNo" DESC,
-        A."edaban" DESC
-        LIMIT 1
-
+        AND A."rirekiNo" = #{履歴番号}
+        AND A."edaban" = #{枝番}
+        AND A."jukyuShinseiJiyu" = #{受給申請事由}
+        AND A."shichosonCode" = #{市町村コード}
         ) AS TB1
         LEFT JOIN
         rgdb."DbT4102NinteiKekkaJoho" AS C
@@ -157,6 +164,51 @@
         KyotakuKeikakuTodokede."hihokenshaNo" = #{被保険者番号}) AS A
         ORDER BY A."tekiyoKaishiYMD"
         LIMIT 3
+    </select>
+
+    <select id="被保険者証資格証履歴情報取得" resultMap="被保険者証資格証履歴情報取得ResultMap" resultOrdered="true" fetchSize="500">
+
+        (SELECT
+        JukyushaDaicho."shichosonCode" AS "shichosonCode",
+        JukyushaDaicho."hihokenshaNo" AS "hihokenshaNo",
+        JukyushaDaicho."rirekiNo" AS "rirekiNo",
+        JukyushaDaicho."edaban" AS "edaban",
+        JukyushaDaicho."jukyuShinseiJiyu" AS "jukyuShinseiJiyu",
+        JukyushaDaicho."ninteiYMD" AS "ymd",
+        '1' AS "kubun"
+        FROM
+        rgdb."DbT4001JukyushaDaicho" AS JukyushaDaicho
+        WHERE
+        JukyushaDaicho."hihokenshaNo" = #{被保険者番号}
+        AND JukyushaDaicho."yukoMukoKubun" = '1'
+        AND JukyushaDaicho."logicalDeletedFlag" = false
+        ORDER BY JukyushaDaicho."rirekiNo" DESC,JukyushaDaicho."edaban" DESC
+        LIMIT 1
+        <if test="履歴区分='2'">
+            OFFSET 1
+        </if>
+        )
+        UNION ALL
+        (SELECT
+        '' AS "shichosonCode",
+        SogoJigyoTaishosha."hihokenshaNo" AS "hihokenshaNo",
+        SogoJigyoTaishosha."rirekiNo"::char AS "rirekiNo",
+        '' AS "edaban",
+        '' AS "jukyuShinseiJiyu",
+        SogoJigyoTaishosha."checklistJisshiYMD" AS "ymd",
+        '2' AS "kubun"
+        FROM
+        rgdb."DbT3105SogoJigyoTaishosha" AS SogoJigyoTaishosha
+        WHERE
+        SogoJigyoTaishosha."hihokenshaNo" = #{被保険者番号}
+        ORDER BY SogoJigyoTaishosha."rirekiNo" DESC
+        LIMIT 1
+        <if test="履歴区分='2'">
+            OFFSET 1
+        </if>
+        )
+        ORDER BY ymd DESC,kubun
+        LIMIT 1
     </select>
 
 </mapper>

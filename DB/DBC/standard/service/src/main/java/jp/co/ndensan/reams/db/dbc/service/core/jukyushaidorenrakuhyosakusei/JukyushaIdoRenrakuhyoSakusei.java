@@ -187,7 +187,7 @@ public class JukyushaIdoRenrakuhyoSakusei {
                 get標準適用開始年月日(), 変更後entity.get標準適用開始年月日()));
         relateEntity.get出力用受給者訂正情報Entity().set標準適用終了年月日(compareFlexibleDate(変更前entity.
                 get標準適用終了年月日(), 変更後entity.get標準適用終了年月日()));
-        relateEntity.get変更後受給者訂正情報Entity().set償還払化適用開始年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set償還払化適用開始年月日(compareFlexibleDate(変更前entity.
                 get償還払化適用開始年月日(), 変更後entity.get償還払化適用開始年月日()));
         relateEntity.get出力用受給者訂正情報Entity().set償還払化適用終了年月日(compareFlexibleDate(変更前entity.
                 get償還払化適用終了年月日(), 変更後entity.get償還払化適用終了年月日()));

@@ -1,6 +1,5 @@
 package jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistparam;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.idojiyu.IIdoJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -133,7 +132,7 @@ public class HanyoListParamRenbannashiEUCEntity {
     @CsvField(order = 52, name = "住所地特例状態")
     private RString 住所地特例状態;
     @CsvField(order = 53, name = "（資格）証記載保険者番号")
-    private ShoKisaiHokenshaNo 資格_証記載保険者番号;
+    private RString 資格_証記載保険者番号;
     @CsvField(order = 54, name = "受給申請事由")
     private RString 受給申請事由;
     @CsvField(order = 55, name = "受給申請日")

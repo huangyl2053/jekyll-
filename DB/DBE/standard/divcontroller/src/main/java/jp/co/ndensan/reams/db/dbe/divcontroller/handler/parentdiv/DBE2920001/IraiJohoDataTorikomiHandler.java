@@ -49,7 +49,7 @@ public class IraiJohoDataTorikomiHandler {
     public void set一覧エリア(List<IraiJohoDataTorikomiCsvEntity> csvEntityList) {
         List<dgTorikomiFileIchiran_Row> rowlist = new ArrayList<>();
         List<KeyValueDataSource> selectedKeyItems = new ArrayList<>();
-        selectedKeyItems.add(new KeyValueDataSource(new RString(0), new RString(0)));
+        selectedKeyItems.add(new KeyValueDataSource(new RString(0), RString.EMPTY));
         for (IraiJohoDataTorikomiCsvEntity csvEntity : csvEntityList) {
             dgTorikomiFileIchiran_Row row1 = new dgTorikomiFileIchiran_Row();
             row1.setHokenshaBango(csvEntity.get保険者番号());

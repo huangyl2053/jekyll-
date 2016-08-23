@@ -108,7 +108,6 @@ public class YokaigoHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
 
         DbT7022ShoriDateKanriEntity shoriDateKanriEntity = createShoriDateKanriEntity();
         dbT7022tableWriter.insert(shoriDateKanriEntity);
-
         バッチ出力条件リストの出力();
     }
 
@@ -271,13 +270,13 @@ public class YokaigoHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
         RString 日時 = TsutishoHakkoCommonProcess.get日付日時(parameter.get開始日(), parameter.get開始日時());
         if (!日時.isEmpty()) {
             builder.append(new RString("今回の開始日時:"));
-            builder.append(parameter.get開始日時());
+            builder.append(日時);
             出力条件.add(builder.toRString());
         }
         日時 = TsutishoHakkoCommonProcess.get日付日時(parameter.get終了日(), parameter.get終了日時());
         if (!日時.isEmpty()) {
             builder.append(new RString("今回の終了日時:"));
-            builder.append(parameter.get終了日時());
+            builder.append(日時);
             出力条件.add(builder.toRString());
         }
         if (null != parameter.get文書番号() && !parameter.get文書番号().isEmpty()) {
