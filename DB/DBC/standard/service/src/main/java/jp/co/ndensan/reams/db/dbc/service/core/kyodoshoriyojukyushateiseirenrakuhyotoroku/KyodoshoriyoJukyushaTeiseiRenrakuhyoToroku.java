@@ -303,9 +303,21 @@ public class KyodoshoriyoJukyushaTeiseiRenrakuhyoToroku {
             } else {
                 出力用共同処理受給者訂正情報Entity.set所得区分(RString.EMPTY);
             }
-            出力用共同処理受給者訂正情報Entity.set利用者負担第２段階(div高額情報Entity.is利用者負担第２段階有フラグ());
-            出力用共同処理受給者訂正情報Entity.set老齢福祉年金受給の有無(div高額情報Entity.is老齢福祉年金受給有フラグ());
-            出力用共同処理受給者訂正情報Entity.set支給申請書出力の有無(div高額情報Entity.is支給申請書出力有フラグ());
+            if (初期高額情報Entity.is利用者負担第２段階有フラグ() != div高額情報Entity.is利用者負担第２段階有フラグ()) {
+                出力用共同処理受給者訂正情報Entity.set利用者負担第２段階(div高額情報Entity.is利用者負担第２段階有フラグ());
+            } else {
+                出力用共同処理受給者訂正情報Entity.set利用者負担第２段階(false);
+            }
+            if (初期高額情報Entity.is老齢福祉年金受給有フラグ() != div高額情報Entity.is老齢福祉年金受給有フラグ()) {
+                出力用共同処理受給者訂正情報Entity.set老齢福祉年金受給の有無(div高額情報Entity.is老齢福祉年金受給有フラグ());
+            } else {
+                出力用共同処理受給者訂正情報Entity.set老齢福祉年金受給の有無(false);
+            }
+            if (初期高額情報Entity.is支給申請書出力有フラグ() != div高額情報Entity.is支給申請書出力有フラグ()) {
+                出力用共同処理受給者訂正情報Entity.set支給申請書出力の有無(div高額情報Entity.is支給申請書出力有フラグ());
+            } else {
+                出力用共同処理受給者訂正情報Entity.set支給申請書出力の有無(true);
+            }
         }
 
         return 出力用共同処理受給者訂正情報Entity;
