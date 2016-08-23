@@ -282,7 +282,7 @@ public class JukyushaTotsugoKekkaReadCsvFileProcess extends BatchProcessBase<RSt
     }
 
     private FlexibleDate set年月日(FlexibleDate date) {
-        if (date.isEmpty()) {
+        if (null == date || date.isEmpty()) {
             return FlexibleDate.EMPTY;
         } else {
             return date;
