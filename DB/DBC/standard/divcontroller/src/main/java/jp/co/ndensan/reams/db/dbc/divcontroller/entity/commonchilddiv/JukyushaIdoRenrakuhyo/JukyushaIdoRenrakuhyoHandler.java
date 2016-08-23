@@ -208,7 +208,7 @@ public class JukyushaIdoRenrakuhyoHandler {
             div.setMode_DisplayMode(JukyushaIdoRenrakuhyoDiv.DisplayMode.shokai);
         }
         if (新規モード.equals(処理モード) || 訂正モード.equals(処理モード)) {
-            if (異動日.isBefore(制度改正施行日)) {
+            if (制度改正施行日.isBefore(異動日)) {
                 div.getShikyuGendoKijungakuPanel().getTxtTankiNyushoServiceShikyuGendoKijungaku().setDisabled(true);
                 div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().setDisabled(true);
             } else {
