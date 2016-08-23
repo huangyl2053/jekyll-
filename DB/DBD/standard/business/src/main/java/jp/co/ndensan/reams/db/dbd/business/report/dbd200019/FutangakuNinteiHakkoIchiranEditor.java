@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd200019;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.record.FutanGenndoGakuNinnteiListRecordEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangakuninteihakkoichiran.FutangakuNinteiHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200019.FutangakuNinteiHakkoIchiranReportSource;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -35,7 +35,7 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
     private static final int LISTINDEX_3 = 3;
     private static final int LISTINDEX_4 = 4;
 
-    private final FutanGenndoGakuNinnteiListRecordEntity 帳票情報;
+    private final FutangakuNinteiHakkoIchiranEntity 帳票情報;
     private final Association association;
     private final IOutputOrder iOutputOrder;
     private final IKojin 個人情報;
@@ -50,7 +50,7 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
      * @param 個人情報 IKojin
      * @param index int
      */
-    public FutangakuNinteiHakkoIchiranEditor(FutanGenndoGakuNinnteiListRecordEntity 帳票情報,
+    public FutangakuNinteiHakkoIchiranEditor(FutangakuNinteiHakkoIchiranEntity 帳票情報,
             Association association, IOutputOrder iOutputOrder, IKojin 個人情報, int index) {
         this.帳票情報 = 帳票情報;
         this.association = association;

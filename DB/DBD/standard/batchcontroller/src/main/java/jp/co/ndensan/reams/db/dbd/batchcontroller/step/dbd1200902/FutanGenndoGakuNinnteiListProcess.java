@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbd.business.report.dbd200019.FutangakuNinteiHakko
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.FutanGenndoGakuNinnteiListProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.FutanGenndoGakuNinnteiListEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.record.FutanGenndoGakuNinnteiListRecordEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangakuninteihakkoichiran.FutangakuNinteiHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200019.FutangakuNinteiHakkoIchiranReportSource;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -57,7 +57,7 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
             = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futanngenndogakuninntei."
                     + "IFutanGenndoGakuNinnteiListMapper.get負担額認定証_決定通知書発行一覧表発行情報");
 
-    private List<FutanGenndoGakuNinnteiListRecordEntity> futanGenndoGakuNinnteiListRecordList;
+    private List<FutangakuNinteiHakkoIchiranEntity> futanGenndoGakuNinnteiListRecordList;
     private static final ReportId ID = new ReportId("DBD200019_FutangakuNinteiHakkoIchiran");
     private static final RString なし = new RString("なし");
     private static final RString 単票発行区分 = new RString("単票発行区分");
@@ -100,7 +100,7 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
     @Override
     protected void process(FutanGenndoGakuNinnteiListEntity t) {
         futanGenndoGakuNinnteiListRecordList.add(create(t));
-        for (FutanGenndoGakuNinnteiListRecordEntity futan : futanGenndoGakuNinnteiListRecordList) {
+        for (FutangakuNinteiHakkoIchiranEntity futan : futanGenndoGakuNinnteiListRecordList) {
             FutangakuNinteiHakkoIchiranReport find = FutangakuNinteiHakkoIchiranReport.createReport(futan, association, order, kojin, 0);
             find.writeBy(reportSourceWriter);
         }
@@ -123,11 +123,10 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
         return 出力順;
     }
 
-    private FutanGenndoGakuNinnteiListRecordEntity create(FutanGenndoGakuNinnteiListEntity futan) {
-        FutanGenndoGakuNinnteiListRecordEntity data = new FutanGenndoGakuNinnteiListRecordEntity();
+    private FutangakuNinteiHakkoIchiranEntity create(FutanGenndoGakuNinnteiListEntity futan) {
+        FutangakuNinteiHakkoIchiranEntity data = new FutangakuNinteiHakkoIchiranEntity();
         data.set被保険者番号(futan.getHihokenshaNo());
         kojin = ShikibetsuTaishoFactory.createKojin(futan.getPsmEntity());
-        data.setIKojin(kojin);
         data.set申請日(futan.getShinseiYMD());
         data.set決定日(futan.getKetteiYMD());
         data.set適用日(futan.getTekiyoYMD());
