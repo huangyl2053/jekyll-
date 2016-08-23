@@ -518,7 +518,6 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
     }
 
     private void set届出内容エリア照会(KyotakuKeikakuTodokede 居宅給付計画届出) {
-        div.getServiceAddAndServicePlanCreate().getRadTodokedeKubun().setSelectedKey(KEY_1);
         if (届出区分_新規.equals(居宅給付計画届出.get届出区分())) {
             div.getRadTodokedeKubun().setSelectedKey(KEY_0);
         } else if (届出区分_変更.equals(居宅給付計画届出.get届出区分())) {
@@ -598,10 +597,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
             div.getTxtJigyoshaHenkoYMD().clearValue();
         }
         if (KEY_0.equals(div.getRadTodokedeKubun().getSelectedKey())) {
-            div.getTxtItakusakiJigyoshaName().setReadOnly(true);
+            div.getTxtJigyoshaHenkoJiyu().setReadOnly(true);
             div.getTxtJigyoshaHenkoYMD().setReadOnly(true);
         } else {
-            div.getTxtItakusakiJigyoshaName().setReadOnly(false);
+            div.getTxtJigyoshaHenkoJiyu().setReadOnly(false);
             div.getTxtJigyoshaHenkoYMD().setReadOnly(false);
         }
         div.getTxtJigyoshaHenkoJiyu().setValue(居宅給付計画事業者.get事業者変更事由());
@@ -613,6 +612,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         if (jukyushaDaicho == null) {
             return;
         }
+        div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiShinki().setReadOnly(true);
+        div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiSaishinsei().setReadOnly(true);
+        div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiHenkoShinsei().setReadOnly(true);
+        div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiServiceHenko().setReadOnly(true);
         if (JukyuShinseiJiyu.初回申請.getコード().equals(jukyushaDaicho.get受給申請事由().getColumnValue())) {
             div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiShinki().setReadOnly(false);
         } else if (JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(
