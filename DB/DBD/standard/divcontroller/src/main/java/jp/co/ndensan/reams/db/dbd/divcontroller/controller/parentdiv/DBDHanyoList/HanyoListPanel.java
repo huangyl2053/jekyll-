@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBDHanyoList;
 
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710060.DBD710060_HanyoListShakaiFukushiHojinKeigenParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710110.DBD710110_HanyoListKokuhoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710120.DBD710120_HanyoListKokiKoreishaParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710130.DBD710130_HanyoListJigyoTaishoshaParameter;
@@ -33,6 +34,19 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
  */
 public class HanyoListPanel {
 
+    public ResponseData<HanyoListPanelDiv> onLoad(HanyoListPanelDiv div) {
+
+        RString batchKind = ResponseHolder.getState();
+
+        if (DBDHanyoListStateName.汎用リスト_社会福祉法人軽減.getName().equals(batchKind)) {
+            div.getBtnShutsuryokujun().setDisplayNone(true);
+        } else {
+            div.getBtnShutsuryokujun().setDisplayNone(false);
+        }
+
+        return ResponseData.of(div).respond();
+    }
+
     public ResponseData<DBDHanyoListParameter> onClick_btnBatchRegister(HanyoListPanelDiv div) {
 
         RString batchKind = ResponseHolder.getState();
@@ -56,6 +70,51 @@ public class HanyoListPanel {
             shisetsuNyutaishoBatchParameter.set出力順(getSyutsuryokujun(div));
             shisetsuNyutaishoBatchParameter.set出力項目(div.getTxtSyutsuryokukomoku1().getValue());
             parameter.setShisetsuNyutaishoBatchParameter(shisetsuNyutaishoBatchParameter);
+        }
+
+        if (DBDHanyoListStateName.汎用リスト_社会福祉法人軽減.getName().equals(batchKind)) {
+            DBD710060_HanyoListShakaiFukushiHojinKeigenParameter shakaiFukushiHojinKeigenParameter = new DBD710060_HanyoListShakaiFukushiHojinKeigenParameter();
+            shakaiFukushiHojinKeigenParameter.setHyoudai(div.getTxtHyoudai4().getValue());
+            shakaiFukushiHojinKeigenParameter.setCyusyutsuhohokubun(div.getDdlCyusyutsuhohokubun4().getSelectedKey());
+            shakaiFukushiHojinKeigenParameter.setCyusyutsukomokukubun(div.getTxtCyusyutsukomokukubun4().getValue());
+            shakaiFukushiHojinKeigenParameter.setNendo(div.getTxtNendo4().getDomain());
+            shakaiFukushiHojinKeigenParameter.setKizyunnichi(div.getTxtKizyunnichi4().getValue());
+            shakaiFukushiHojinKeigenParameter.setHitsukehanifrom(div.getTxtHitsukehanifrom4().getValue());
+            shakaiFukushiHojinKeigenParameter.setHitsukehanito(div.getTxtHitsukehanito4().getValue());
+            shakaiFukushiHojinKeigenParameter.setNendochokindatacyusyutsu(Boolean.parseBoolean(div.getDdlIsNendochokindatacyusyutsu4().getSelectedKey().toString()));
+            shakaiFukushiHojinKeigenParameter.setChokindatacyusyutsu(Boolean.parseBoolean(div.getDdlChokindatacyusyutsu4().getSelectedKey().toString()));
+            shakaiFukushiHojinKeigenParameter.setShinseishadatacyushutsu(Boolean.parseBoolean(div.getDdlIsShinseishadatacyushutsu4().getSelectedKey().toString()));
+            shakaiFukushiHojinKeigenParameter.setJigyotaisyoshadatacyushutsu(Boolean.parseBoolean(div.getDdlIsJigyotaishoshacyusyutsu4().getSelectedKey().toString()));
+            shakaiFukushiHojinKeigenParameter.setKyusochisha(div.getTxtKyusochisha4().getValue());
+            shakaiFukushiHojinKeigenParameter.setHobetsukubun(div.getTxtHobetsukubun4().getValue());
+            shakaiFukushiHojinKeigenParameter.setKyakasha(div.getTxtKyakasha4().getValue());
+            shakaiFukushiHojinKeigenParameter.setSoshitsukubun(div.getDdlSoshitsukubun4().getSelectedKey());
+            shakaiFukushiHojinKeigenParameter.setShiteinyushoshakyusochisha(Boolean.parseBoolean(div.getDdlShiteinyushoshakyusochisha4().getSelectedKey().toString()));
+            shakaiFukushiHojinKeigenParameter.setShiteinyushoshafutankeigensha(Boolean.parseBoolean(div.getDdlShiteinyushoshafutankeigensha4().getSelectedKey().toString()));
+            shakaiFukushiHojinKeigenParameter.setShiteinyushoshasonota(Boolean.parseBoolean(div.getDdlShiteinyushoshasonota4().getSelectedKey().toString()));
+            shakaiFukushiHojinKeigenParameter.setShiteinyushoshadaiichidankai(Boolean.parseBoolean(div.getDdlShiteinyushoshadaiichidankai4().getSelectedKey().toString()));
+            shakaiFukushiHojinKeigenParameter.setShiteinyushoshadainidankai(Boolean.parseBoolean(div.getDdlShiteinyushoshadainidankai4().getSelectedKey().toString()));
+            shakaiFukushiHojinKeigenParameter.setShiteinyushoshadaisandankai(Boolean.parseBoolean(div.getDdlShiteinyushoshadaisandankai4().getSelectedKey().toString()));
+            shakaiFukushiHojinKeigenParameter.setShiteinyushoshakazeisou(Boolean.parseBoolean(div.getDdlShiteinyushoshakazeisou4().getSelectedKey().toString()));
+            shakaiFukushiHojinKeigenParameter.setJigyotaishoshafutanichiwari(Boolean.parseBoolean(div.getDdlIsJigyotaishoshafutanichiwari4().getSelectedKey().toString()));
+            shakaiFukushiHojinKeigenParameter.setJigyotaishoshafutanniwari(Boolean.parseBoolean(div.getDdlIsJigyotaishoshafutanniwari4().getSelectedKey().toString()));
+            shakaiFukushiHojinKeigenParameter.setCsvkomokumeifuka(Boolean.parseBoolean(div.getDdlIsCsvkomokumeifuka4().getSelectedKey().toString()));
+            shakaiFukushiHojinKeigenParameter.setCsvrenbanfuka(Boolean.parseBoolean(div.getDdlIsCsvrenbanfuka4().getSelectedKey().toString()));
+            shakaiFukushiHojinKeigenParameter.setCsvhitsukesurasyuhensyu(Boolean.parseBoolean(div.getDdlIsCsvhitsukesurasyuhensyu4().getSelectedKey().toString()));
+            shakaiFukushiHojinKeigenParameter.setChizubunpuzusakusei(Boolean.parseBoolean(div.getDdlIsChizubunpuzusakusei4().getSelectedKey().toString()));
+            shakaiFukushiHojinKeigenParameter.setAtenacyusyutsujyoken(toAtenaSelectBatchParameter(div));
+            shakaiFukushiHojinKeigenParameter.setCyohyoid(div.getTxtCyohyoid4().getValue());
+            shakaiFukushiHojinKeigenParameter.setCyohyomei(div.getTxtCyohyomei4().getValue());
+            shakaiFukushiHojinKeigenParameter.setSyutsuryokujunparameter(div.getTxtSyutsuryokujunparameter4().getValue());
+            shakaiFukushiHojinKeigenParameter.setSyutsuryokukomoku(div.getTxtSyutsuryokukomoku4().getValue());
+            shakaiFukushiHojinKeigenParameter.setDounyudantaicode(div.getTxtDounyudantaicode4().getValue());
+            shakaiFukushiHojinKeigenParameter.setShichosonmei(div.getTxtShichosonmei4().getValue());
+            shakaiFukushiHojinKeigenParameter.setJobno(div.getTxtJobno4().getValue());
+            shakaiFukushiHojinKeigenParameter.setSyutsuryokupagesu(div.getTxtSyutsuryokupagesu4().getValue());
+            shakaiFukushiHojinKeigenParameter.setCsvsyutsuryokuumu(div.getTxtCsvsyutsuryokuumu4().getValue());
+            shakaiFukushiHojinKeigenParameter.setCsvfilename(div.getTxtCsvfilename4().getValue());
+            shakaiFukushiHojinKeigenParameter.setSyutsuryokujyoken(div.getTxtSyutsuryokujyoken4().getValue());
+            parameter.setShakaiFukushiHojinKeigenParameter(shakaiFukushiHojinKeigenParameter);
         }
 
         if (DBDHanyoListStateName.汎用リスト_国保.getName().equals(batchKind)) {
