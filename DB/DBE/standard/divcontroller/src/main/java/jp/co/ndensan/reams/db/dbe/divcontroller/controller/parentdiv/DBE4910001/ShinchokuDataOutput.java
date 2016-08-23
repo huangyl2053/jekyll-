@@ -77,11 +77,6 @@ public class ShinchokuDataOutput {
      * @return ResponseData<ShinchokuDataOutputDiv>
      */
     public ResponseData<ShinchokuDataOutputDiv> onClick_btnKensaku(ShinchokuDataOutputDiv div) {
-        ValidationMessageControlPairs validationmsg = getValidatisonHandler(div).必須入力チェック();
-        if (validationmsg.iterator().hasNext()) {
-
-            return ResponseData.of(div).addValidationMessages(validationmsg).respond();
-        }
         if (結果情報.equals(div.getRadKubun().getSelectedKey())) {
             調査員情報Lis = finder.get結果情報検索(getHandler(div).createParam(div)).records();
         } else if (進捗情報.equals(div.getRadKubun().getSelectedKey())) {

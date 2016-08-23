@@ -32,11 +32,25 @@ public interface IKyufuJissekiHeaderDiv extends ICommonChildDivBaseProperties {
     void setサービス提供年月(RDate サービス提供年月);
 
     /**
+     * サービス提供年月を取得します。
+     *
+     * @return サービス提供年月 サービス提供年月
+     */
+    RDate getサービス提供年月();
+
+    /**
      * 実績区分コードを設定します。
      *
      * @param 実績区分コード 実績区分コード
      */
     void set実績区分(RString 実績区分コード);
+
+    /**
+     * 実績区分コードを取得します。
+     *
+     * @return 実績区分コード 実績区分コード
+     */
+    RString get実績区分コード();
 
     /**
      * 事業者名称を設定します。
@@ -46,11 +60,32 @@ public interface IKyufuJissekiHeaderDiv extends ICommonChildDivBaseProperties {
     void set事業者名称(RString 事業者名称);
 
     /**
+     * 事業者番号を設定します。
+     *
+     * @param 事業者番号 事業者番号
+     */
+    void set事業者番号(RString 事業者番号);
+
+    /**
+     * 事業者番号を取得します。
+     *
+     * @return 事業者番号 事業者番号
+     */
+    RString get事業者番号();
+
+    /**
      * 整理番号を設定します。
      *
      * @param 整理番号 整理番号
      */
     void set整理番号(RString 整理番号);
+
+    /**
+     * 整理番号を取得します。
+     *
+     * @return 整理番号 整理番号
+     */
+    RString get整理番号();
 
     /**
      * 識別番号名称を設定します。
@@ -60,9 +95,17 @@ public interface IKyufuJissekiHeaderDiv extends ICommonChildDivBaseProperties {
     void set識別番号名称(RString 識別番号名称);
 
     /**
-     * 保険者名称を設定します。
+     * 様式番号を取得します。
      *
-     * @param 保険者名称 保険者名称
+     * @return 様式番号 様式番号
      */
-    void set保険者(RString 保険者名称);
+    RString get様式番号();
+
+    /**
+     * 様式番号を設定します。
+     *
+     * @param 様式番号 様式番号
+     */
+    void set様式番号(RString 様式番号);
+
 }

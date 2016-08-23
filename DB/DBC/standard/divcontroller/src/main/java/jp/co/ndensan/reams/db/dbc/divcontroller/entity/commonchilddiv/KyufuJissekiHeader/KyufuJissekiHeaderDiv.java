@@ -4,14 +4,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJiss
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
  * @reamsid_L DBC-2970-160 linghuhang
  */
 public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -57,6 +58,10 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     private TextBox txtJigyosha;
     @JsonProperty("hiddenJigyoshaCode")
     private RString hiddenJigyoshaCode;
+    @JsonProperty("hiddenYoshikiNo")
+    private RString hiddenYoshikiNo;
+    @JsonProperty("hiddenJissekiKubun")
+    private RString hiddenJissekiKubun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -316,6 +321,42 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
         this.hiddenJigyoshaCode = hiddenJigyoshaCode;
     }
 
+    /*
+     * gethiddenYoshikiNo
+     * @return hiddenYoshikiNo
+     */
+    @JsonProperty("hiddenYoshikiNo")
+    public RString getHiddenYoshikiNo() {
+        return hiddenYoshikiNo;
+    }
+
+    /*
+     * sethiddenYoshikiNo
+     * @param hiddenYoshikiNo hiddenYoshikiNo
+     */
+    @JsonProperty("hiddenYoshikiNo")
+    public void setHiddenYoshikiNo(RString hiddenYoshikiNo) {
+        this.hiddenYoshikiNo = hiddenYoshikiNo;
+    }
+
+    /*
+     * gethiddenJissekiKubun
+     * @return hiddenJissekiKubun
+     */
+    @JsonProperty("hiddenJissekiKubun")
+    public RString getHiddenJissekiKubun() {
+        return hiddenJissekiKubun;
+    }
+
+    /*
+     * sethiddenJissekiKubun
+     * @param hiddenJissekiKubun hiddenJissekiKubun
+     */
+    @JsonProperty("hiddenJissekiKubun")
+    public void setHiddenJissekiKubun(RString hiddenJissekiKubun) {
+        this.hiddenJissekiKubun = hiddenJissekiKubun;
+    }
+
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     private KyufuJissekiHeaderHandler getHandler() {
@@ -386,12 +427,72 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     }
 
     /**
-     * 保険者名称を設定します。
+     * 事業者番号を取得します。
      *
-     * @param 保険者名称 保険者名称
+     * @return 事業者番号 事業者番号
      */
     @Override
-    public void set保険者(RString 保険者名称) {
-        getHandler().set保険者(保険者名称);
+    public RString get事業者番号() {
+        return getHandler().get事業者番号();
+    }
+
+    /**
+     * 整理番号を取得します。
+     *
+     * @return 整理番号 整理番号
+     */
+    @Override
+    public RString get整理番号() {
+        return getHandler().get整理番号();
+    }
+
+    /**
+     * サービス提供年月を取得します。
+     *
+     * @return サービス提供年月 サービス提供年月
+     */
+    @Override
+    public RDate getサービス提供年月() {
+        return getHandler().getサービス提供年月();
+    }
+
+    /**
+     * 様式番号を取得します。
+     *
+     * @return 様式番号 様式番号
+     */
+    @Override
+    public RString get様式番号() {
+        return getHandler().get様式番号();
+    }
+
+    /**
+     * 実績区分コードを取得します。
+     *
+     * @return 実績区分コード 実績区分コード
+     */
+    @Override
+    public RString get実績区分コード() {
+        return getHandler().get実績区分コード();
+    }
+
+    /**
+     * 事業者番号を設定します。
+     *
+     * @param 事業者番号 事業者番号
+     */
+    @Override
+    public void set事業者番号(RString 事業者番号) {
+        getHandler().set事業者番号(事業者番号);
+    }
+
+    /**
+     * 様式番号を設定します。
+     *
+     * @param 様式番号 様式番号
+     */
+    @Override
+    public void set様式番号(RString 様式番号) {
+        getHandler().set様式番号(様式番号);
     }
 }
