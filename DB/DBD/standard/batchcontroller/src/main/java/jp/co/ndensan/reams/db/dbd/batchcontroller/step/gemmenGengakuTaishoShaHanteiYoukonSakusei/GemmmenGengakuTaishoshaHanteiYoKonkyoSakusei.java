@@ -80,19 +80,18 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
             tempTable.set利用者負担段階(RiyoshaFutanDankai.第三段階.getコード());
         }
 
+        isetai = get世帯(list.get識別コード(), list.get基準日());
+        iKojin = get世帯(list.get識別コード(), list.get基準日()).get世帯員(list.get識別コード());
+        if (isetai.get配偶者(isetai.get世帯員(list.get識別コード())) == null) {
+            tempTable.set配偶者課税区分(RString.EMPTY);
+            tempTable.set配偶者識別コード(ShikibetsuCode.EMPTY);
+        } else {
+            set識別コードValue(tempTable, list);
+        }
+        setis高齢者複数世帯(tempTable, list.get識別コード(), list.get基準日());
+
         if (list.get本人区分().equals(HonninKubun.本人.getCode())) {
-
             set減免減額対象者判定用根拠作成_本人(list, tempTable);
-            isetai = get世帯(list.get識別コード(), list.get基準日());
-            iKojin = get世帯(list.get識別コード(), list.get基準日()).get世帯員(list.get識別コード());
-            if (isetai.get配偶者(isetai.get世帯員(list.get識別コード())) == null) {
-                tempTable.set配偶者課税区分(RString.EMPTY);
-                tempTable.set配偶者識別コード(ShikibetsuCode.EMPTY);
-            } else {
-                set識別コードValue(tempTable, list);
-            }
-            setis高齢者複数世帯(tempTable, list.get識別コード(), list.get基準日());
-
         } else {
             set減免減額対象者判定用根拠作成_非私(tempTable);
         }
@@ -119,23 +118,17 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
         tempTable.set被保険者番号(list.get被保険者番号());
         tempTable.set本人識別コード(list.get識別コード());
         tempTable.set本人課税区分(list.get課税区分_住民税減免前());
-        if (list.get識別コード_生活保護受給者() != null) {
+        if (list.get識別コード_生活保護受給者() != null || !list.get識別コード_生活保護受給者().isEmpty()) {
             tempTable.setIs生活保護受給者(Boolean.TRUE);
-        } else {
-            tempTable.setIs生活保護受給者(Boolean.FALSE);
         }
-        if (list.get識別コード_老齢福祉年金受給者() != null) {
+        if (list.get識別コード_老齢福祉年金受給者() != null || !list.get識別コード_老齢福祉年金受給者().isEmpty()) {
             tempTable.setIs老齢福祉年金受給者(Boolean.TRUE);
-        } else {
-            tempTable.setIs老齢福祉年金受給者(Boolean.FALSE);
         }
         tempTable.set合計所得金額(list.get合計所得金額());
         tempTable.set年金収入額(list.get年金収入額());
         tempTable.set非課税年金勘案額(list.get非課税年金勘案額());
         if (0 < list.get課税所得額().longValue()) {
             tempTable.setIs所得税課税者(Boolean.TRUE);
-        } else {
-            tempTable.setIs所得税課税者(Boolean.FALSE);
         }
     }
 
@@ -143,15 +136,15 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
         tempTable.set被保険者番号(HihokenshaNo.EMPTY);
         tempTable.set本人識別コード(ShikibetsuCode.EMPTY);
         tempTable.set本人課税区分(RString.EMPTY);
-        tempTable.setIs生活保護受給者(Boolean.TRUE);
-        tempTable.setIs老齢福祉年金受給者(Boolean.TRUE);
+        tempTable.setIs生活保護受給者(Boolean.FALSE);
+        tempTable.setIs老齢福祉年金受給者(Boolean.FALSE);
         tempTable.set合計所得金額(Decimal.ZERO);
         tempTable.set年金収入額(Decimal.ZERO);
         tempTable.set非課税年金勘案額(Decimal.ZERO);
-        tempTable.setIs所得税課税者(Boolean.TRUE);
+        tempTable.setIs所得税課税者(Boolean.FALSE);
         tempTable.set配偶者課税区分(RString.EMPTY);
         tempTable.set配偶者識別コード(ShikibetsuCode.EMPTY);
-        tempTable.setIs高齢者複数世帯(Boolean.TRUE);
+        tempTable.setIs高齢者複数世帯(Boolean.FALSE);
     }
 
     private ISetai get世帯(ShikibetsuCode shikibetsuCode, FlexibleDate date) {
