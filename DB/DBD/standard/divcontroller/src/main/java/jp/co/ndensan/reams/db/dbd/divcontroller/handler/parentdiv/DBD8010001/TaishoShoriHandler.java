@@ -54,7 +54,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 
 /**
  * 非課税年金対象者情報アップロード画面のHandlerです。
@@ -217,12 +216,11 @@ public class TaishoShoriHandler {
     /**
      * ファイルの読込処理
      *
-     * @param filedata FileData
      */
-    public void readFile(FileData filedata) {
+    public void readFile() {
         RString line = RString.EMPTY;
         try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(filedata.getFilePath().toString()), "SJIS"));
+            BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(div.getHdnFilePath().toString()), "SJIS"));
             line = new RString(in.readLine());
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TaishoShoriHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -236,16 +234,15 @@ public class TaishoShoriHandler {
     /**
      * ファイルupload処理
      *
-     * @param filedata FileData
      * @param 画面更新用情報 List<ShoriDateKanri>
      */
-    public void upload(FileData filedata, List<ShoriDateKanri> 画面更新用情報) {
+    public void upload(List<ShoriDateKanri> 画面更新用情報) {
         SharedFileDescriptor sharedFileDescriptor
                 = new SharedFileDescriptor(GyomuCode.DB介護保険, new FilesystemName(getFileName()));
 
         SharedFile.deleteOldestEntry(sharedFileDescriptor);
         SharedFile.defineSharedFile(sharedFileDescriptor, 1, Arrays.asList(HOSHI), null, true, null);
-        SharedFile.copyToSharedFile(sharedFileDescriptor, new FilesystemPath(filedata.getFilePath()), new CopyToSharedFileOpts());
+        SharedFile.copyToSharedFile(sharedFileDescriptor, new FilesystemPath(div.getHdnFilePath()), new CopyToSharedFileOpts());
 
         List<ShoriDateKanri> 編集後用登録情報 = new ArrayList<>();
         List<ShoriDateKanri> 編集後用削除情報 = new ArrayList<>();

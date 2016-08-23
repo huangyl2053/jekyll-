@@ -115,16 +115,20 @@ public class TaishoShoriPanel {
      */
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<TaishoShoriPanelDiv> onClick_btnUpload(TaishoShoriPanelDiv div, FileData[] files) {
-        ValidationMessageControlPairs pairs = getValidationHandler(div).validateファイル値();
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        }
+        if (files.length > 0) {
+            ValidationMessageControlPairs pairs = getValidationHandler(div).validateファイル値();
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
 
-        getHandler(div).readFile(files[0]);
+            div.setHdnFilePath(files[0].getFilePath());
 
-        pairs = getValidationHandler(div).validateファイル内容();
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+            getHandler(div).readFile();
+
+            pairs = getValidationHandler(div).validateファイル内容();
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
         }
 
         Message message = getValidationHandler(div).validate作成年月日();
@@ -133,7 +137,7 @@ public class TaishoShoriPanel {
         }
 
         List<ShoriDateKanri> 画面更新用情報 = ViewStateHolder.get(画面キー.画面更新用情報, List.class);
-        getHandler(div).upload(files[0], 画面更新用情報);
+        getHandler(div).upload(画面更新用情報);
 
         List<ShoriDateKanri> 画面情報 = getHandler(div).onLoad();
         ViewStateHolder.put(画面キー.画面更新用情報, (Serializable) 画面情報);
