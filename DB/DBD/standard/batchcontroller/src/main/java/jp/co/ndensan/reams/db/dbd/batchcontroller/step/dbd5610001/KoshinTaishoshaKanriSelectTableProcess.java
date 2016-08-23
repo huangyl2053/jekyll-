@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5610001.KoshinTaishos
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5610001.KoshinTaishoshaKanriEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT7202KaigoNinteiHokaiseiKanriMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
@@ -59,7 +60,6 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
     private static final Code 認定申請有効区分 = new Code(new RString("1"));
     private static final RString 認定年度内連番 = new RString("0012");
     private static final RString 新年度内連番 = new RString("0001");
-    private static final RString 更新申請対象者管理 = new RString("更新申請対象者管理");
     private static final RString 処理枝番 = new RString("0001");
     private static final Code 処理状態区分 = new Code(new RString("0"));
     private static final Code 取下区分コード = new Code(new RString("1"));
@@ -292,7 +292,7 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
             DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
             entity.setSubGyomuCode(SubGyomuCode.DBD介護受給);
             entity.setShichosonCode(AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_());
-            entity.setShoriName(更新申請対象者管理);
+            entity.setShoriName(ShoriName.更新申請者管理.get名称());
             entity.setShoriEdaban(処理枝番);
             entity.setNendo(get年度(parameter.get年度()));
             entity.setNendoNaiRenban(get年度内連番(parameter.get年度内連番()));
@@ -307,7 +307,7 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
             DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
             entity.setSubGyomuCode(SubGyomuCode.DBD介護受給);
             entity.setShichosonCode(AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_());
-            entity.setShoriName(更新申請対象者管理);
+            entity.setShoriName(ShoriName.更新申請者管理.get名称());
             entity.setShoriEdaban(処理枝番);
             entity.setNendo(get年度(parameter.get年度()));
             entity.setNendoNaiRenban(get年度内連番(parameter.get年度内連番()));
