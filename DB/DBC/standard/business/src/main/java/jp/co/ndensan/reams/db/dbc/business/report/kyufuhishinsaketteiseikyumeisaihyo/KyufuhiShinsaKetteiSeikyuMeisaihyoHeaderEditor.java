@@ -31,11 +31,11 @@ public class KyufuhiShinsaKetteiSeikyuMeisaihyoHeaderEditor implements IKyufuhiS
     private final RDateTime 作成日時;
     private static final RString SAKUSEI = new RString("作成");
     private final List<RString> 改頁リスト;
-    private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
+    private static final int INT_5 = 5;
     private static final RString KEY_並び順の２件目 = new RString("KEY_並び順の２件目");
     private static final RString KEY_並び順の３件目 = new RString("KEY_並び順の３件目");
     private static final RString KEY_並び順の４件目 = new RString("KEY_並び順の４件目");
@@ -90,11 +90,11 @@ public class KyufuhiShinsaKetteiSeikyuMeisaihyoHeaderEditor implements IKyufuhiS
             }
         }
         if (改頁リスト != null) {
-            source.kaipage1 = get改頁(INT_0);
-            source.kaipage2 = get改頁(INT_1);
-            source.kaipage3 = get改頁(INT_2);
-            source.kaipage4 = get改頁(INT_3);
-            source.kaipage5 = get改頁(INT_4);
+            source.kaipage1 = get改頁(INT_1);
+            source.kaipage2 = get改頁(INT_2);
+            source.kaipage3 = get改頁(INT_3);
+            source.kaipage4 = get改頁(INT_4);
+            source.kaipage5 = get改頁(INT_5);
         }
         source.kokuhorenName = 帳票出力対象.get合計テータ().get国保連合会名();
         source.shoKisaiHokenshaNo = getColumnValue(帳票出力対象.get合計テータ().get証記載保険者番号());
