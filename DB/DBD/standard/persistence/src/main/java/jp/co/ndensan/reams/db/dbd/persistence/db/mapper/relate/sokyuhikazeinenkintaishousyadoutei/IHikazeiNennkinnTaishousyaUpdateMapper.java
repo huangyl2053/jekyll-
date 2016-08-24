@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.sokyuhikazeinenkintaishousyadoutei;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable.HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100203.HikazeNenkinTaishoshaEntity;
 
 /**
  * 非課税年金対象者更新のマッパーインタフェースです。
@@ -20,5 +20,5 @@ public interface IHikazeiNennkinnTaishousyaUpdateMapper {
      *
      * @return 非課税年金対象者情報
      */
-    List<HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity> get非課税年金対象者情報();
+    List<HikazeNenkinTaishoshaEntity> get非課税年金対象者情報();
 }
