@@ -33,6 +33,26 @@ public class YokaigoifUpdateManager {
 
     private final DbT4003YokaigoNinteiInterfaceDac dac;
     private final MapperProvider mapperProvider;
+    private static final RString 番号_1 = new RString("1");
+    private static final RString 番号_2 = new RString("2");
+    private static final RString 番号_3 = new RString("3");
+    private static final RString 番号_4 = new RString("4");
+    private static final RString 番号_5 = new RString("5");
+    private static final RString 番号_6 = new RString("6");
+    private static final RString 番号_8 = new RString("8");
+    private static final RString 番号_9 = new RString("9");
+    private static final RString 進捗 = new RString("0");
+    private static final RString 消込済 = new RString("1");
+    private static final Code コード99 = new Code("99A");
+    private static final Code コード02 = new Code("02A");
+    private static final Code コード06 = new Code("06A");
+    private static final Code コード09 = new Code("09A");
+    private static final Code コード09_B = new Code("09B");
+    private static final RString IF識別コード_1 = new RString("001");
+    private static final RString IF識別コード_2 = new RString("101");
+    private static final RString IF識別コード_3 = new RString("201");
+    private static final RString IF識別コード_4 = new RString("301");
+    private static final RString IF識別コード_5 = new RString("401");
 
     YokaigoifUpdateManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
@@ -62,16 +82,6 @@ public class YokaigoifUpdateManager {
      */
     public void tourokuKoushin(RString フェーズ番号, YokaigoifUpdateMybitisParamter 申請書管理番号) {
 
-        RString 番号_1 = new RString("1");
-        RString 番号_2 = new RString("2");
-        RString 番号_3 = new RString("3");
-        RString 番号_4 = new RString("4");
-        RString 番号_5 = new RString("5");
-        RString 番号_6 = new RString("6");
-        RString 番号_8 = new RString("8");
-        RString 番号_9 = new RString("9");
-        RString 進捗 = new RString("0");
-        RString 消込済 = new RString("1");
         List<DbT4003YokaigoNinteiInterfaceEntity> インターフェース情報 = this.getインターフェース情報(申請書管理番号);
         List<YokaigoifUpdateRelateEntity> 情報_登録 = this.get情報_登録(申請書管理番号);
         if (番号_1.equals(フェーズ番号) && インターフェース情報 == null || 番号_2.equals(フェーズ番号) && インターフェース情報 == null
@@ -104,14 +114,6 @@ public class YokaigoifUpdateManager {
      */
     public void kuria(RString フェーズ番号, YokaigoifUpdateMybitisParamter 申請書管理番号) {
 
-        RString 番号_1 = new RString("1");
-        RString 番号_2 = new RString("2");
-        RString 番号_3 = new RString("3");
-        RString 番号_4 = new RString("4");
-        RString 番号_5 = new RString("5");
-        RString 番号_6 = new RString("6");
-        RString 番号_8 = new RString("8");
-        RString 番号_9 = new RString("9");
         List<DbT4003YokaigoNinteiInterfaceEntity> インターフェース情報 = this.getインターフェース情報(申請書管理番号);
         if (インターフェース情報 != null) {
             DbT4003YokaigoNinteiInterfaceEntity 情報entity = インターフェース情報.get(0);
@@ -175,13 +177,6 @@ public class YokaigoifUpdateManager {
     }
 
     private void tourokuKoushin_2(RString フェーズ番号, YokaigoifUpdateMybitisParamter 申請書管理番号) {
-        RString 番号_2 = new RString("2");
-        RString 番号_3 = new RString("3");
-        RString 番号_4 = new RString("4");
-        RString 番号_5 = new RString("5");
-        RString 番号_6 = new RString("6");
-        RString 番号_8 = new RString("8");
-        RString 番号_9 = new RString("9");
         List<DbT4003YokaigoNinteiInterfaceEntity> インターフェース情報 = this.getインターフェース情報(申請書管理番号);
         DbT4003YokaigoNinteiInterfaceEntity entity = インターフェース情報.get(0);
         if (番号_2.equals(フェーズ番号)) {
@@ -363,7 +358,7 @@ public class YokaigoifUpdateManager {
         主治医情報.setShinseishoKanriNo(申請書管理番号);
         主治医情報.setHihokenshaNo(new HihokenshaNo(entity.get被保険者番号()));
         if (RString.isNullOrEmpty(主治医情報.getRirekiNo())) {
-            主治医情報.setRirekiNo(new RString("1"));
+            主治医情報.setRirekiNo(消込済);
         } else {
             RString rirekiNo = new RString(Integer.parseInt(String.valueOf(主治医情報.getRirekiNo())) + 1);
             主治医情報.setRirekiNo(rirekiNo);
@@ -402,25 +397,20 @@ public class YokaigoifUpdateManager {
         主治医情報.setShogaiKoreiJiritsudo(RString.EMPTY);
         主治医情報.setNinchishoKoreiJiritsudo(RString.EMPTY);
         主治医情報.setShinsakaiIken(RString.EMPTY);
-        Code コード99 = new Code("99A");
-        Code コード02 = new Code("02A");
-        Code コード06 = new Code("06A");
-        Code コード09 = new Code("09A");
-        Code コード09_B = new Code("09B");
         if (コード99.equals(entity.get厚労省IF識別コード())) {
-            主治医情報.setVersionNo(new RString("001"));
+            主治医情報.setVersionNo(IF識別コード_1);
         } else if (コード02.equals(entity.get厚労省IF識別コード())) {
-            主治医情報.setVersionNo(new RString("101"));
+            主治医情報.setVersionNo(IF識別コード_2);
         } else if (コード06.equals(entity.get厚労省IF識別コード())) {
-            主治医情報.setVersionNo(new RString("201"));
+            主治医情報.setVersionNo(IF識別コード_3);
         } else if (コード09.equals(entity.get厚労省IF識別コード())) {
-            主治医情報.setVersionNo(new RString("301"));
+            主治医情報.setVersionNo(IF識別コード_4);
         } else if (コード09_B.equals(entity.get厚労省IF識別コード())) {
-            主治医情報.setVersionNo(new RString("401"));
+            主治医情報.setVersionNo(IF識別コード_5);
         }
         主治医情報.setIchijiHanteiNaiyo(RString.EMPTY);
         主治医情報.setIchijiHanteiNaiyo2(RString.EMPTY);
-        主治医情報.setKeshikomiFlag(new RString("0"));
+        主治医情報.setKeshikomiFlag(進捗);
         主治医情報.setYobiKomoku1(RString.EMPTY);
         主治医情報.setYobiKomoku2(RString.EMPTY);
         主治医情報.setYobiKomoku3(RString.EMPTY);
