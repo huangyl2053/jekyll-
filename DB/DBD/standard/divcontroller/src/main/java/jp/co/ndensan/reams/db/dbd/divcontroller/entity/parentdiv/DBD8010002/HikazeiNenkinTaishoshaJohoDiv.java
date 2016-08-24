@@ -32,6 +32,10 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     private ShoriSetteiDiv ShoriSettei;
     @JsonProperty("hdnState")
     private RString hdnState;
+    @JsonProperty("hdnLine")
+    private RString hdnLine;
+    @JsonProperty("hdnFilePath")
+    private RString hdnFilePath;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -91,6 +95,42 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     @JsonProperty("hdnState")
     public void setHdnState(RString hdnState) {
         this.hdnState = hdnState;
+    }
+
+    /*
+     * gethdnLine
+     * @return hdnLine
+     */
+    @JsonProperty("hdnLine")
+    public RString getHdnLine() {
+        return hdnLine;
+    }
+
+    /*
+     * sethdnLine
+     * @param hdnLine hdnLine
+     */
+    @JsonProperty("hdnLine")
+    public void setHdnLine(RString hdnLine) {
+        this.hdnLine = hdnLine;
+    }
+
+    /*
+     * gethdnFilePath
+     * @return hdnFilePath
+     */
+    @JsonProperty("hdnFilePath")
+    public RString getHdnFilePath() {
+        return hdnFilePath;
+    }
+
+    /*
+     * sethdnFilePath
+     * @param hdnFilePath hdnFilePath
+     */
+    @JsonProperty("hdnFilePath")
+    public void setHdnFilePath(RString hdnFilePath) {
+        this.hdnFilePath = hdnFilePath;
     }
 
     /*
@@ -407,8 +447,8 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun1() {
-        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun1();
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun2() {
+        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun2();
     }
 
     @JsonIgnore
@@ -422,8 +462,8 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun2() {
-        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun2();
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun1() {
+        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun1();
     }
 
     @JsonIgnore
