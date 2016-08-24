@@ -15,9 +15,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.jizenshinsakekka.JizenShinsaK
  */
 public class JizenShinsakaiShiryoPublicationChange {
 
-    private JizenShinsakaiShiryoPublicationChange() {
-    }
-
     /**
      * 介護認定審査会委員事前審査のパラメータを作成します。
      *
