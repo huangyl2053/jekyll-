@@ -117,6 +117,8 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
     private static final RString KEY_並び順の５件目 = new RString("KEY_並び順の５件目");
     private static final RString KEY_並び順の６件目 = new RString("KEY_並び順の６件目");
     private static final RString ダブル引用符 = new RString("\"");
+    private static final int HUNDRED = 100;
+    private static final RString パーセント = new RString("%");
     private static final RString 出力ファイル名
             = new RString("DBC200058_JukyushaTotsugokekkaIchiran.csv");
     private static final RString MYBATIS_SELECT_ID
@@ -323,7 +325,7 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
         output.set減免中区分名称(JukyushaIF_GemmenShinseichuKubunCode.toValue(受給者情報.get減免申請中区分コード()).get名称());
         output.set利用者負担区分(受給者情報.get利用者負担区分コード());
         output.set利用者負担区分名称(JukyushaIF_RiyoshaFutanKubunCode.toValue(受給者情報.get利用者負担区分コード()).get名称());
-        output.set給付率(decimal_to_string(受給者情報.get給付率()));
+        output.set給付率(decimal_to_percentStr(受給者情報.get給付率()));
         output.set利用者負担適用開始日(date_to_string(受給者情報.get利用者負担適用開始年月日()));
         output.set利用者負担適用終了日(date_to_string(受給者情報.get利用者負担適用終了年月日()));
         output.set公費負担上限額減額(受給者情報.get公費負担上限額減額の有無());
@@ -373,7 +375,7 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
                 decimal_to_string(受給者情報.get居住費_従来型個室_老健_療養等_負担限度額()));
         output.set二割割合適用開始日(date_to_string(受給者情報.get二割負担適用開始年月日()));
         output.set二割割合適用終了日(date_to_string(受給者情報.get二割負担適用終了年月日()));
-        output.set社会福祉法人軽減率(decimal_to_string(受給者情報.get軽減率()));
+        output.set社会福祉法人軽減率(decimal_to_percentStr(受給者情報.get軽減率()));
         output.set社会福祉法人適用開始日(date_to_string(受給者情報.get軽減率適用開始年月日()));
         output.set社会福祉法人適用終了日(date_to_string(受給者情報.get軽減率適用終了年月日()));
         output.set後期被保険者番号(受給者情報.get被保険者番号_後期_());
@@ -442,5 +444,13 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
             return entity.getColumnValue();
         }
         return RString.EMPTY;
+    }
+
+    private static RString decimal_to_percentStr(Decimal number) {
+        if (null == number) {
+            return RString.EMPTY;
+        }
+        number = number.multiply(HUNDRED);
+        return DecimalFormatter.toRString(number, 0).concat(パーセント);
     }
 }
