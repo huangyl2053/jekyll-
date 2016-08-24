@@ -89,7 +89,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler {
                         new FlexibleYear(div.getDdlTaishoNendo().getSelectedKey()), null, null);
         List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult> renrakuhyoPanelList = 対象データ取得(parameter);
         List<KeyValueDataSource> shoKisaiHokenshaNodataSource = new ArrayList();
-        List<KeyValueDataSource> shikyuShinseishoSeiriNodataSource = new ArrayList();
+        List<KeyValueDataSource> shikyuSeiriNodataSource = new ArrayList();
         if (!renrakuhyoPanelList.isEmpty()) {
             for (JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult renrakuhyoPanel : renrakuhyoPanelList) {
                 if (!(shoKisaiHokenshaNodataSource.contains(new KeyValueDataSource(
@@ -99,17 +99,17 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler {
                             renrakuhyoPanel.getEntity().getShoKisaiHokenshaNo().getColumnValue(),
                             renrakuhyoPanel.getEntity().getShoKisaiHokenshaNo().getColumnValue()));
                 }
-                if (!(shikyuShinseishoSeiriNodataSource.contains(new KeyValueDataSource(
+                if (!(shikyuSeiriNodataSource.contains(new KeyValueDataSource(
                         renrakuhyoPanel.getEntity().getShikyuShinseishoSeiriNo(),
                         renrakuhyoPanel.getEntity().getShikyuShinseishoSeiriNo())))) {
-                    shikyuShinseishoSeiriNodataSource.add(new KeyValueDataSource(
+                    shikyuSeiriNodataSource.add(new KeyValueDataSource(
                             renrakuhyoPanel.getEntity().getShikyuShinseishoSeiriNo(),
                             renrakuhyoPanel.getEntity().getShikyuShinseishoSeiriNo()));
                 }
             }
             div.getDdlShoKisaiHokenshaNo().setDataSource(shoKisaiHokenshaNodataSource);
             div.getDdlShoKisaiHokenshaNo().setSelectedIndex(0);
-            div.getDdlShikyuShinseishoSeiriNo().setDataSource(shikyuShinseishoSeiriNodataSource);
+            div.getDdlShikyuShinseishoSeiriNo().setDataSource(shikyuSeiriNodataSource);
             div.getDdlShikyuShinseishoSeiriNo().setSelectedIndex(0);
             onChange連絡票整理番号DDL(被保険者番号);
         }
