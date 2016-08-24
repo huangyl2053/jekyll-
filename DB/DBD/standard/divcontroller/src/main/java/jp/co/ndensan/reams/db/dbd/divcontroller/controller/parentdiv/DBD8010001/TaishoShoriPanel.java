@@ -129,11 +129,11 @@ public class TaishoShoriPanel {
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
-        }
 
-        Message message = getValidationHandler(div).validate作成年月日();
-        if (null != message) {
-            return ResponseData.of(div).addMessage(message).respond();
+            Message message = getValidationHandler(div).validate作成年月日();
+            if (null != message) {
+                return ResponseData.of(div).addMessage(message).respond();
+            }
         }
 
         List<ShoriDateKanri> 画面更新用情報 = ViewStateHolder.get(画面キー.画面更新用情報, List.class);

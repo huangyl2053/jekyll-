@@ -1068,7 +1068,7 @@
             "TsukibetsuFutanWariaiNewTemp"."futanwariaiKubunJul" <![CDATA[<>]]>"TsukibetsuFutanWariaiGenTemp"."futanwariaiKubunJul"
         ORDER BY "RiyoshaFutanWariaiMeisaiTemp"."hihokenshaNo" ,"RiyoshaFutanWariaiMeisaiTemp"."edaNo"
     </select>
-    
+
     <!--処理詳細12 利用者負担割合根拠の登録-->
     <select resultOrdered="true" id="select負担割合根拠" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter"
@@ -1317,7 +1317,6 @@
     <resultMap id="ResultMap_FutanWariaiRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.FutanWariaiRelateEntity" autoMapping="true">
       <id  column="RiyoshaFutanWariaiMeisaiTemp_hihokenshaNo"  />
       <id  column="RiyoshaFutanWariaiMeisaiTemp_edaNo"  />
-      <id  column="TsukibetsuFutanWariaiGenTemp_rirekiNo" />
       <association property="利用者負担割合明細" 
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.IRiyoshaFutanWariaiMeisaiTempMapper.ResultMap_RiyoshaFutanWariaiMeisaiTempEntity" />
       <collection property="月別負担割合新" 
