@@ -322,7 +322,10 @@ public class GemmenJuminKihon {
         GemmenJuminKihonHandler handler = getHandler(div);
         handler.clear取消パネル();
         NendobunFukaGemmenList 年度分賦課減免リスト = ViewStateHolder.get(ViewStateKeys.年度分賦課減免リスト, NendobunFukaGemmenList.class);
-        RString 状況 = handler.load状況情報パネル(年度分賦課減免リスト.get最新減免の情報());
+        GemmenJoho 最新減免の情報 = 年度分賦課減免リスト.get最新減免の情報();
+        RString 状況 = handler.load状況情報パネル(最新減免の情報);
+        handler.load申請情報パネル(最新減免の情報);
+        handler.load決定情報パネル(最新減免の情報);
         handler.loadパネル状態1(状況, 年度分賦課減免リスト);
         handler.setRequired();
         return createResponse(div);
