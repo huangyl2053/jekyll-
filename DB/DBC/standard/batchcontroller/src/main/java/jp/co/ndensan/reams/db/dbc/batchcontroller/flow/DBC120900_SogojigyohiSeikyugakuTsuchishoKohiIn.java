@@ -143,7 +143,7 @@ public class DBC120900_SogojigyohiSeikyugakuTsuchishoKohiIn
                 = new KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter();
         parameter.set処理年月(getParameter().getShoriYM());
         parameter.set交換情報識別番号(交換情報識別番号);
-        parameter.set処理対象年月(flowEntity.getShoriYM());
+        parameter.set処理対象年月(処理対象年月);
         parameter.setレコード件数合計(flowEntity.getCodeNum());
         parameter.setFileNameList(returnEntity.getFileNameList());
         return simpleBatch(KokuhorenkyoutsuDoInterfaceKanriKousinProcess.class).arguments(parameter).define();
@@ -191,5 +191,4 @@ public class DBC120900_SogojigyohiSeikyugakuTsuchishoKohiIn
         parameter.setエントリ情報List(returnEntity.getEntityList());
         return simpleBatch(KokuhorenkyoutsuDeleteReveicedFileProcess.class).arguments(parameter).define();
     }
-
 }

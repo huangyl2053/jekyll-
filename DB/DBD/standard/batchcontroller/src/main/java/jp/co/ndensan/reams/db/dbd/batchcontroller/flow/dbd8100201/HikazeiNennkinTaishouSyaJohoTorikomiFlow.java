@@ -30,9 +30,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class HikazeiNennkinTaishouSyaJohoTorikomiFlow extends BatchFlowBase<HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter> {
 
-    public static final RString 出力区分_0 = new RString("0");
-    public static final RString テスト処理_1 = new RString("1");
-    public static final RString HIKAIFLOW = new RString("HikazeNenkinTaishoshaDouteiFlow");
+    /**
+     * 非課税年金対象者同定フロー
+     */
+    private static final RString HIKAIFLOW = new RString("HikazeNenkinTaishoshaDouteiFlow");
 
     private static final String 取込データ一時作成 = "取込データ一時作成";
     private static final String 非課税年金対象者同定 = "非課税年金対象者同定";

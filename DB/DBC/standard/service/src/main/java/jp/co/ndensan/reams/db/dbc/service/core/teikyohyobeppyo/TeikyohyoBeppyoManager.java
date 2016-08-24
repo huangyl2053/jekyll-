@@ -159,9 +159,11 @@ public class TeikyohyoBeppyoManager {
 
         JigoSakuseiMeisaiTouroku manage = JigoSakuseiMeisaiTouroku.createInstance();
         KubunGendo 単位データ = manage.getKubunGendo(被保険者番号, 居宅総合事業区分, 利用年月);
-        合計Entity.set支給限度単位数(単位データ.get区分支給限度額());
-        合計Entity.set適用開始年月日(単位データ.get管理期間開始日());
-        合計Entity.set適用終了年月日(単位データ.get管理期間終了日());
+        if (単位データ != null) {
+            合計Entity.set支給限度単位数(単位データ.get区分支給限度額());
+            合計Entity.set適用開始年月日(単位データ.get管理期間開始日());
+            合計Entity.set適用終了年月日(単位データ.get管理期間終了日());
+        }
         return 合計Entity;
     }
 

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ShinseishoHakkoChushutsuJoken {
 
     /**
-     * コード:1 名称:異動分 略称:定義なし
+     * コード:0001 名称:異動分 略称:定義なし
      */
     異動分("0001", "異動分"),
     /**

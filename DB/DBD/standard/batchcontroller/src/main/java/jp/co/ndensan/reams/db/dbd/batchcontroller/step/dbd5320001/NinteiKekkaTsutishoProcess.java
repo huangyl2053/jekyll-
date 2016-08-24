@@ -265,12 +265,14 @@ public class NinteiKekkaTsutishoProcess extends BatchProcessBase<YokaigoNinteiIk
             builder.append(日時);
             出力条件.add(builder.toRString());
         }
+        builder = new RStringBuilder();
         日時 = TsutishoHakkoCommonProcess.get日付日時(parameter.get終了日(), parameter.get終了日時());
         if (!日時.isEmpty()) {
             builder.append(new RString("今回の終了日時:"));
             builder.append(日時);
             出力条件.add(builder.toRString());
         }
+        builder = new RStringBuilder();
         if (null != parameter.get文書番号() && !parameter.get文書番号().isEmpty()) {
             builder.append(new RString("文書番号:"));
             builder.append(parameter.get文書番号());
