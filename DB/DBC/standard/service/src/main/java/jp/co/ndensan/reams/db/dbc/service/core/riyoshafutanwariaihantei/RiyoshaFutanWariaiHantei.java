@@ -619,7 +619,7 @@ public class RiyoshaFutanWariaiHantei {
                 if (!o1.getHihokenshaNo().equals(o2.getHihokenshaNo())) {
                     return o1.getHihokenshaNo().compareTo(o2.getHihokenshaNo());
                 }
-                return new Integer(o1.getEdaNo()).compareTo(o2.getEdaNo());
+                return Integer.valueOf(o1.getEdaNo()).compareTo(o2.getEdaNo());
             }
         });
     }
