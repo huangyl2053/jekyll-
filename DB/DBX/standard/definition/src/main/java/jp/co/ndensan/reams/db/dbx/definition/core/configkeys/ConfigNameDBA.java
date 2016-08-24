@@ -121,7 +121,7 @@ public enum ConfigNameDBA {
     /**
      * コード:無し 名称:要介護認定却下通知書 略称:定義なし
      */
-    認定却下通知書("要介護認定却下通知書");
+    要介護認定却下通知書("要介護認定却下通知書");
 
     private final RString fullName;
 
