@@ -254,7 +254,7 @@ public class NinteiTsuchishoHakko {
      */
     public ResponseData<NinteiTsuchishoHakkoDiv> onClick_btnUpdateAfterPrint(NinteiTsuchishoHakkoDiv div) {
         div.getCcdKanryoMessege().setMessage(new RString("更新処理が正常に終了しました。"), RString.EMPTY, RString.EMPTY, true);
-        return ResponseData.of(div).setState(DBD5320001StateName.完了);
+        return ResponseData.of(div).respond();
     }
 
     /**
