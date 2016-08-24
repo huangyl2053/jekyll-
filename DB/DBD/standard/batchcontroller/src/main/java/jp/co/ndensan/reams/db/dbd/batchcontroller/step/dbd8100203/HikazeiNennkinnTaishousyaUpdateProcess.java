@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class HikazeiNennkinnTaishousyaUpdateProcess extends BatchProcessBase<DbT4037HikazeNenkinTaishoshaEntity> {
 
-    private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.sokyuhikazeinenkintaishousyadoutei."
-            + "IHikazeiNennkinnTaishousyaUpdateMapper.get非課税年金対象者情報");
+    private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate."
+            + "sokyuhikazeinenkintaishousyadoutei.IHikazeiNennkinnTaishousyaUpdateMapper.get非課税年金対象者情報");
 
     @BatchWriter
     private BatchPermanentTableWriter<DbT4037HikazeNenkinTaishoshaEntity> hikazeNenkinTableEntity;
