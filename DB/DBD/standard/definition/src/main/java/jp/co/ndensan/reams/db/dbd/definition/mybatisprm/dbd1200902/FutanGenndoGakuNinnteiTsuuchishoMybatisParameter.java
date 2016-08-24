@@ -123,14 +123,14 @@ public class FutanGenndoGakuNinnteiTsuuchishoMybatisParameter implements IMyBati
     }
 
     private void edit年度開始日(FlexibleDate 年度開始日) {
-        if (年度開始日 != null && FlexibleDate.EMPTY.equals(年度開始日)) {
+        if (年度開始日 != null && !年度開始日.isEmpty()) {
             is年度開始日_不空白 = true;
             this.年度開始日 = 年度開始日;
         }
     }
 
     private void edit年度終了日(FlexibleDate 年度終了日) {
-        if (年度終了日 != null && FlexibleDate.EMPTY.equals(年度終了日)) {
+        if (年度終了日 != null && !年度終了日.isEmpty()) {
             is年度終了日_不空白 = true;
             this.年度終了日 = 年度終了日;
         }

@@ -42,17 +42,17 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoMybatisParameter implements IMy
     /**
      * コンストラクタです。
      *
-     * @param 単票発行区分 単票発行区分
-     * @param 決定日FROM 決定日FROM
-     * @param 決定日TO 決定日TO
-     * @param 年度開始日 年度開始日
-     * @param 年度終了日
-     * @param psmShikibetsuTaisho
-     * @param psmAtesaki
-     * @param 出力順
-     * @param 被保番号
-     * @param 減免適用開始日
-     * @param 帳票ID
+     * @param 単票発行区分 TanpyoHakkoKubun
+     * @param 決定日FROM FlexibleDate
+     * @param 決定日TO FlexibleDate
+     * @param 年度開始日 FlexibleDate
+     * @param 年度終了日 FlexibleDate
+     * @param psmShikibetsuTaisho RString
+     * @param psmAtesaki RString
+     * @param 出力順 RString
+     * @param 被保番号 RString
+     * @param 減免適用開始日 RString
+     * @param 帳票ID ReportId
      */
     public ShakaiFukushiHoujinnKeigenTsuuchishoMybatisParameter(TanpyoHakkoKubun 単票発行区分,
             FlexibleDate 決定日FROM,
@@ -83,14 +83,14 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoMybatisParameter implements IMy
     }
 
     private void edit年度開始日(FlexibleDate 年度開始日) {
-        if (年度開始日 != null && FlexibleDate.EMPTY.equals(年度開始日)) {
+        if (年度開始日 != null && !年度開始日.isEmpty()) {
             is年度開始日_不空白 = true;
             this.年度開始日 = 年度開始日;
         }
     }
 
     private void edit年度終了日(FlexibleDate 年度終了日) {
-        if (年度終了日 != null && FlexibleDate.EMPTY.equals(年度終了日)) {
+        if (年度終了日 != null && !年度終了日.isEmpty()) {
             is年度終了日_不空白 = true;
             this.年度終了日 = 年度終了日;
         }
