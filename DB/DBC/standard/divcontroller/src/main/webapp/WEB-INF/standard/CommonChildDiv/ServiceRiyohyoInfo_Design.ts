@@ -114,8 +114,8 @@ module DBC {
                 return "onClick_btnGokeiKeisan";
             }
 
-            public static onClick_btnUpdate(): string {
-                return "onClick_btnUpdate";
+            public static onClick_btnSave(): string {
+                return "onClick_btnSave";
             }
 
             public static onClick_btnBackRiyoNengetsuIchiran(): string {

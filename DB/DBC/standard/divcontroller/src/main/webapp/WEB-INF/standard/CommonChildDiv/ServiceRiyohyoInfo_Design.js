@@ -108,8 +108,8 @@ var DBC;
                 return "onClick_btnGokeiKeisan";
             };
 
-            Events.onClick_btnUpdate = function () {
-                return "onClick_btnUpdate";
+            Events.onClick_btnSave = function () {
+                return "onClick_btnSave";
             };
 
             Events.onClick_btnBackRiyoNengetsuIchiran = function () {

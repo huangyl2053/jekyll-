@@ -4,17 +4,23 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.IServiceCodeInputCommonChildDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildDiv.IServiceTypeInputCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyufuJikoSakuseiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.TankiNyushoResult;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -34,7 +40,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @reamsid_L DBC-1930-050 cuilin
  */
 public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -410,7 +415,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
             KaigoType[] enumArray = KaigoType.values();
 
             for (KaigoType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -425,11 +430,11 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     public KaigoType getMode_KaigoType() {
-        return (KaigoType) _CommonChildDivModeUtil.getMode(this.modes, KaigoType.class);
+        return (KaigoType) _CommonChildDivModeUtil.getMode( this.modes, KaigoType.class );
     }
 
-    public void setMode_KaigoType(KaigoType value) {
-        _CommonChildDivModeUtil.setMode(this.modes, KaigoType.class, value);
+    public void setMode_KaigoType( KaigoType value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, KaigoType.class , value );
     }
 
     public static enum GamenMode implements ICommonChildDivMode {
@@ -449,7 +454,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
             GamenMode[] enumArray = GamenMode.values();
 
             for (GamenMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -464,11 +469,11 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     public GamenMode getMode_GamenMode() {
-        return (GamenMode) _CommonChildDivModeUtil.getMode(this.modes, GamenMode.class);
+        return (GamenMode) _CommonChildDivModeUtil.getMode( this.modes, GamenMode.class );
     }
 
-    public void setMode_GamenMode(GamenMode value) {
-        _CommonChildDivModeUtil.setMode(this.modes, GamenMode.class, value);
+    public void setMode_GamenMode( GamenMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, GamenMode.class , value );
     }
 
     /*
@@ -495,7 +500,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public void setBtnBeppyoMeisaiKakutei(Button btnBeppyoMeisaiKakutei) {
+    public void  setBtnBeppyoMeisaiKakutei(Button btnBeppyoMeisaiKakutei) {
         this.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().setBtnBeppyoMeisaiKakutei(btnBeppyoMeisaiKakutei);
     }
 
@@ -505,7 +510,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public void setBtnCalcMeisaiGokei(Button btnCalcMeisaiGokei) {
+    public void  setBtnCalcMeisaiGokei(Button btnCalcMeisaiGokei) {
         this.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().setBtnCalcMeisaiGokei(btnCalcMeisaiGokei);
     }
 
@@ -515,7 +520,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public void setBtnCancelMeisaiInput(Button btnCancelMeisaiInput) {
+    public void  setBtnCancelMeisaiInput(Button btnCancelMeisaiInput) {
         this.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().setBtnCancelMeisaiInput(btnCancelMeisaiInput);
     }
 
@@ -525,7 +530,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public void setBtnCalcMeisai(Button btnCalcMeisai) {
+    public void  setBtnCalcMeisai(Button btnCalcMeisai) {
         this.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().setBtnCalcMeisai(btnCalcMeisai);
     }
 
@@ -535,7 +540,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public void setBtnBeppyoGokeiKakutei(Button btnBeppyoGokeiKakutei) {
+    public void  setBtnBeppyoGokeiKakutei(Button btnBeppyoGokeiKakutei) {
         this.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().setBtnBeppyoGokeiKakutei(btnBeppyoGokeiKakutei);
     }
 
@@ -545,7 +550,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public void setBtnCancelGokeiInput(Button btnCancelGokeiInput) {
+    public void  setBtnCancelGokeiInput(Button btnCancelGokeiInput) {
         this.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().setBtnCancelGokeiInput(btnCancelGokeiInput);
     }
 
@@ -555,7 +560,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public void setBtnCalcGokei(Button btnCalcGokei) {
+    public void  setBtnCalcGokei(Button btnCalcGokei) {
         this.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().setBtnCalcGokei(btnCalcGokei);
     }
 
@@ -565,7 +570,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public void setBtnUpdate(Button btnUpdate) {
+    public void  setBtnUpdate(Button btnUpdate) {
         this.getServiceRiyohyoBeppyoFooter().setBtnUpdate(btnUpdate);
     }
 
@@ -575,7 +580,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public void setBtnBackRiyoNengetsuIchiran(Button btnBackRiyoNengetsuIchiran) {
+    public void  setBtnBackRiyoNengetsuIchiran(Button btnBackRiyoNengetsuIchiran) {
         this.getServiceRiyohyoBeppyoFooter().setBtnBackRiyoNengetsuIchiran(btnBackRiyoNengetsuIchiran);
     }
 
@@ -625,5 +630,99 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     @Override
     public void setTekiyoKikanTo(RDate 適用期間終日) {
         ServiceRiyohyoInfoDivHandler.of(this).setTekiyoKikanTo(適用期間終日);
+    }
+
+    /**
+     * 暫定区分を取得します。
+     *
+     * @return boolean
+     */
+    @Override
+    public boolean isChkZanteiKubunAllSelected() {
+        return this.getChkZanteiKubun().isAllSelected();
+    }
+
+    /**
+     * 送付年月を取得します。
+     *
+     * @return RDate
+     */
+    @Override
+    public RDate getSofuYM() {
+        return this.getTxtSofuYM().getValue();
+    }
+
+    /**
+     * 更新区分を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString getKoshinKbn() {
+        return this.getDdlKoshinKbn().getSelectedKey();
+    }
+
+    /**
+     * 利用年月を取得します。
+     *
+     * @return RDate
+     */
+    @Override
+    public RDate getRiyoYM() {
+        return this.getTxtRiyoYM().getValue();
+    }
+
+    /**
+     * DB追加処理メソッドです。
+     *
+     * @param 居宅総合事業区分 RString
+     * @param 短期入所情報 TankiNyushoResult
+     */
+    @Override
+    public void DB追加処理(RString 居宅総合事業区分, TankiNyushoResult 短期入所情報) {
+        ServiceRiyohyoInfoDivHandler.of(this).DB追加処理(居宅総合事業区分, 短期入所情報);
+    }
+
+    /**
+     * DB修正処理メソッドです。
+     *
+     * @param 居宅総合事業区分 RString
+     * @param 短期入所情報 TankiNyushoResult
+     */
+    @Override
+    public void DB修正処理(RString 居宅総合事業区分, TankiNyushoResult 短期入所情報) {
+        ServiceRiyohyoInfoDivHandler.of(this).DB修正処理(居宅総合事業区分, 短期入所情報);
+    }
+
+    /**
+     * データ整合性チェックします。
+     *
+     * @param サービス利用票情報 List<KyufuJikoSakuseiResult>
+     */
+    @Override
+    public void データ整合性チェック(List<KyufuJikoSakuseiResult> サービス利用票情報) {
+        ServiceRiyohyoInfoDivHandler.of(this).データ整合性チェック(サービス利用票情報);
+    }
+
+    /**
+     * 保存処理メソッドです。
+     *
+     * @param 居宅総合事業区分 RString
+     * @param サービス利用票情報 List<KyufuJikoSakuseiResult>
+     */
+    @Override
+    public void init保存処理(RString 居宅総合事業区分, List<KyufuJikoSakuseiResult> サービス利用票情報) {
+        ServiceRiyohyoInfoDivHandler.of(this).init保存処理(居宅総合事業区分, サービス利用票情報);
+    }
+
+    /**
+     * 削除処理メソッドです。
+     *
+     * @param 居宅総合事業区分 RString
+     * @param 短期入所情報 TankiNyushoResult
+     */
+    @Override
+    public void DB削除処理(RString 居宅総合事業区分, TankiNyushoResult 短期入所情報) {
+        ServiceRiyohyoInfoDivHandler.of(this).DB削除処理(居宅総合事業区分, 短期入所情報);
     }
 }
