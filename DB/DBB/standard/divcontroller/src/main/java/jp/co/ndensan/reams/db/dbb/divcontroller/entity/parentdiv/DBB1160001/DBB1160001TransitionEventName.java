@@ -16,7 +16,8 @@ public enum DBB1160001TransitionEventName implements IContainerEvents {
 
     検索結果一覧へ("検索結果一覧へ"),
     再検索("再検索"),
-    完了("完了");
+    完了("完了"),
+    総合照会賦課情報("総合照会賦課情報");
 
     private final RString name;
 
