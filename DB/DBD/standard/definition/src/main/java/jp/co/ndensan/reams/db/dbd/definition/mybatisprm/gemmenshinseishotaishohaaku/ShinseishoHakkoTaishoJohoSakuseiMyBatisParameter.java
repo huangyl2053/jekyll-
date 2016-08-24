@@ -27,25 +27,25 @@ public class ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter implements IMyBati
     private boolean is利用者負担段階_利用者負担3段階;
     private boolean is利用者負担段階_利用者負担4段階;
 
-    private FlexibleDate 基準日;
-    private RString 利用者負担段階;
-    private boolean 課税世帯の被保険者を含む;
-    private boolean 市町村民税非課税世帯;
-    private boolean 市町村民税本人非課税者;
-    private boolean 老齢福祉年金受給者;
-    private boolean 生活保護受給者;
-    private GemmenGengakuShurui 減免減額種類;
-    private FlexibleDate 前年度の開始日;
-    private FlexibleDate 前年度の終了日;
+    private final FlexibleDate 基準日;
+    private final RString 利用者負担段階;
+    private final boolean 課税世帯の被保険者を含む;
+    private final boolean 市町村民税非課税世帯;
+    private final boolean 市町村民税本人非課税者;
+    private final boolean 老齢福祉年金受給者;
+    private final boolean 生活保護受給者;
+    private final GemmenGengakuShurui 減免減額種類;
+    private final FlexibleDate 前年度の開始日;
+    private final FlexibleDate 前年度の終了日;
 
-    private RString CODE_利用者負担1至3段階 = RiyoshaFutanDankaiHanni.利用者負担1から3段階.getコード();
-    private RString CODE_利用者負担1段階 = RiyoshaFutanDankaiHanni.利用者負担1段階.getコード();
-    private RString CODE_利用者負担2段階 = RiyoshaFutanDankaiHanni.利用者負担2段階.getコード();
-    private RString CODE_利用者負担3段階 = RiyoshaFutanDankaiHanni.利用者負担3段階.getコード();
-    private RString CODE_利用者負担4段階 = RiyoshaFutanDankaiHanni.利用者負担4段階_高齢者複数世帯.getコード();
+    private static final RString CODE_利用者負担1至3段階 = RiyoshaFutanDankaiHanni.利用者負担1から3段階.getコード();
+    private static final RString CODE_利用者負担1段階 = RiyoshaFutanDankaiHanni.利用者負担1段階.getコード();
+    private static final RString CODE_利用者負担2段階 = RiyoshaFutanDankaiHanni.利用者負担2段階.getコード();
+    private static final RString CODE_利用者負担3段階 = RiyoshaFutanDankaiHanni.利用者負担3段階.getコード();
+    private static final RString CODE_利用者負担4段階 = RiyoshaFutanDankaiHanni.利用者負担4段階_高齢者複数世帯.getコード();
 
-    private RString CODE_世帯課税区分_課税 = SetaiKazeiKubun.課税.getコード();
-    private RString CODE_世帯課税区分_非課税 = SetaiKazeiKubun.非課税.getコード();
+    private static final RString CODE_世帯課税区分_課税 = SetaiKazeiKubun.課税.getコード();
+    private static final RString CODE_世帯課税区分_非課税 = SetaiKazeiKubun.非課税.getコード();
 
     /**
      *
@@ -69,6 +69,7 @@ public class ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter implements IMyBati
         this.老齢福祉年金受給者 = 老齢福祉年金受給者;
         this.課税世帯の被保険者を含む = 課税世帯の被保険者を含む;
         this.基準日 = 基準日;
+        this.利用者負担段階 = 利用者負担段階;
         set利用者負担段階について(利用者負担段階);
         this.減免減額種類 = 減免減額種類;
         this.前年度の開始日 = 前年度の開始日;
