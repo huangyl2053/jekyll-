@@ -58,7 +58,7 @@ public class HanyoListParamHandler {
             稼働市町村 = 単一;
             div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().setDisplayNone(true);
         }
-        if (単一 == 稼働市町村) {
+        if (単一.equals(稼働市町村)) {
             div.getChushutsuJokenPanel().getCcdHokenshaList().setDisabled(true);
             div.getChushutsuJokenPanel().getCcdHokenshaList().setVisible(false);
         }
