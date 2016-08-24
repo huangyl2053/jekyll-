@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb901002;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb901002.InsetDbT2001ChoshuHohoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb901002.InsetDbT7022ShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb901002.UpdateDbT7022ShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb901002.UpdateUzT0001StandardConfigProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.nendokirikae.DBB901002_NendoKirikaeParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB901002.DBB901002_NendoKirikaeParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.nendokirikae.NendoKirikaeProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
