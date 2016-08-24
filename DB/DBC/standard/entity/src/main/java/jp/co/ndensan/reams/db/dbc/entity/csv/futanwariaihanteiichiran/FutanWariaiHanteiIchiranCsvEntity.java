@@ -95,7 +95,7 @@ public class FutanWariaiHanteiIchiranCsvEntity {
      * @param 年度 年度
      * @param 処理名 処理名
      * @param 基準日 基準日
-     * @param No No
+     * @param no No
      * @param 被保険者番号 被保険者番号
      * @param 氏名 氏名
      * @param 資格 資格
