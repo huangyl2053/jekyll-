@@ -152,12 +152,10 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-            boolean 処理結果= set処理実行(div);
-            if (処理結果) {
+            set処理実行(div);
             RealInitialLocker.release(LOCKINGKEY);
             div.getCcdKaigoKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBA2040011StateName.完了);
-            }
         }
         return ResponseData.of(div).respond();
     }
@@ -186,8 +184,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
         return new HokaShichosonJyusyochiTokureisyaKanriHandler(requestDiv);
     }
 
-    private boolean set処理実行(HokaShichosonJyusyochiTokureisyaKanriDiv div) {
-        boolean 処理結果 = true;
+    private void set処理実行(HokaShichosonJyusyochiTokureisyaKanriDiv div) {
         TaJushochiTokureisyaKanriManager manager = TaJushochiTokureisyaKanriManager.createInstance();
         List<TaJushochiTokureisyaKanriParameter> paramaterList = new ArrayList<>();
         for (dgJushochiTokureiRireki_Row row : div.getShikakuKihonJoho().getCddTaJushochiTokureishaKanri().get適用情報一覧()) {
@@ -215,15 +212,12 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
         }
         if (メニューID_施設入所により適用.equals(menuId) || メニューID_転入転出保留対象者管理.equals(menuId)
                 || メニューID_施設退所により解除.equals(menuId)) {
-            boolean 登録結果;
-            登録結果 = div.getShikakuKihonJoho().getCddTaJushochiTokureishaKanri().saveTaJushochiTokurei(
+            div.getShikakuKihonJoho().getCddTaJushochiTokureishaKanri().saveTaJushochiTokurei(
                     ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
-            処理結果 = 登録結果;
         }
         if (メニューID_施設変更により変更.equals(menuId)) {
             div.getCddShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
         }
-        return(処理結果);
     }
 
     private void set適用(List<TaJushochiTokureisyaKanriParameter> paramaterList) {

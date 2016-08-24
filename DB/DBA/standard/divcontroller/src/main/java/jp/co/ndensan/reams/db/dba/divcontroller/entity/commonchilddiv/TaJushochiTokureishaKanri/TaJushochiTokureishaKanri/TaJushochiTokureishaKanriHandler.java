@@ -587,19 +587,17 @@ public class TaJushochiTokureishaKanriHandler {
             } else if (適用モード.equals(new RString(div.getMode_DisplayMode().toString()))) {
                 FlexibleDate 適用年月日 = new FlexibleDate(rowList.get(0).getTekiyoYMD().getValue().toString());
                 boolean shikakuSoshitsuCheck = HihokenshashikakusoshitsuManager.createInstance().shikakuSoshitsuCheck(識別コード, HihokenshaNo.EMPTY, 適用年月日);
-                if (!shikakuSoshitsuCheck) {
-                    登録結果 = false;
-                    break;
-                } 
-                FlexibleDate 適用届出年月日 = FlexibleDate.EMPTY;
-                if (rowList.get(0).getTekiyoTodokedeYMD() != null && rowList.get(0).getTekiyoTodokedeYMD().getValue() != null) {
-                    適用届出年月日 = new FlexibleDate(rowList.get(0).getTekiyoTodokedeYMD().getValue().toString());
-                }
-                TaJushochiTokureisyaKanriManager.createInstance().saveHihokenshaSositu(
+                if (shikakuSoshitsuCheck) {
+                    FlexibleDate 適用届出年月日 = FlexibleDate.EMPTY;
+                    if (rowList.get(0).getTekiyoTodokedeYMD() != null && rowList.get(0).getTekiyoTodokedeYMD().getValue() != null) {
+                        適用届出年月日 = new FlexibleDate(rowList.get(0).getTekiyoTodokedeYMD().getValue().toString());
+                    }
+                    TaJushochiTokureisyaKanriManager.createInstance().saveHihokenshaSositu(
                         new KaigoTatokuTekiyoJiyu(rowList.get(0).getTekiyoJiyu()),
                         new FlexibleDate(rowList.get(0).getTekiyoYMD().getValue().toString()),
                         適用届出年月日,
                         識別コード);
+                 } 
                 FlexibleDate 適用異動日 = new FlexibleDate(rowList.get(0).getTekiyoYMD().getValue().toString());
                 dgJushochiTokureiRireki_Row 適用情報 = rowList.get(0);
                 TashichosonJushochiTokureiIdentifier 住所地特例の識別子
