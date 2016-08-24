@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc190010;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc190010.SpoolKijunShunyugakuTekiyoKetteiProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kijunshunyugakutekiyokettei.DBC190010_kijunsyunyuKetteiTsuchisyosakuseiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC190010.DBC190010_kijunsyunyuKetteiTsuchisyosakuseiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunshunyugakutekiyokettei.SpoolKijunShunyugakuTekiyoKetteiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

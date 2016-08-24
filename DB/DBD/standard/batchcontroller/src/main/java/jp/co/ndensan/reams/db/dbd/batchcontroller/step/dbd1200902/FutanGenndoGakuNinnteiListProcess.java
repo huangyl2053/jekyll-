@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -56,7 +57,7 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futanngenndogakuninntei."
                     + "IFutanGenndoGakuNinnteiListMapper.get負担額認定証_決定通知書発行一覧表発行情報");
-    private List<FutangakuNinteiHakkoIchiranEntity> futanGenndoGakuNinnteiListRecordList;
+    private List<FutangakuNinteiHakkoIchiranEntity> 負担限度額認定List;
     private static final ReportId ID = new ReportId("DBD200019_FutangakuNinteiHakkoIchiran");
     private static final RString なし = new RString("なし");
     private static final RString 単票発行区分 = new RString("単票発行区分");
@@ -65,9 +66,10 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
     private static final RString 対象期間範囲 = new RString("対象期間範囲");
     private static final RString 年度 = new RString("年度");
     private static final RString 発行日 = new RString("発行日");
-    private static final RString 出力順 = new RString("出力順");
+    private static final RString SHUTSURYOKUJUN = new RString("出力順");
     private static final RString カラ = new RString("～");
     private static final RString より = new RString("＞");
+    private int i = 0;
     private static Association association;
     private static IKojin kojin;
     @BatchWriter
@@ -97,10 +99,10 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
     }
 
     @Override
-    protected void process(FutanGenndoGakuNinnteiListEntity t) {
-        futanGenndoGakuNinnteiListRecordList.add(create(t));
-        for (FutangakuNinteiHakkoIchiranEntity futan : futanGenndoGakuNinnteiListRecordList) {
-            FutangakuNinteiHakkoIchiranReport find = FutangakuNinteiHakkoIchiranReport.createReport(futan, association, order, kojin, 0);
+    protected void process(FutanGenndoGakuNinnteiListEntity entity) {
+        負担限度額認定List.add(create(entity));
+        for (FutangakuNinteiHakkoIchiranEntity futan : 負担限度額認定List) {
+            FutangakuNinteiHakkoIchiranReport find = FutangakuNinteiHakkoIchiranReport.createReport(futan, association, order, kojin, i++);
             find.writeBy(reportSourceWriter);
         }
     }
@@ -183,22 +185,21 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
         出力条件.add(builder.toRString());
 
         builder.append(発行日);
-        if (true == parameter.is認定証発行フラグ()) {
+        if (parameter.is認定証発行フラグ()) {
             builder.append(new RString(parameter.get認定証の交付日().toString()));
-        } else if (false == parameter.is認定証発行フラグ() || true == parameter.is通知書発行フラグ()) {
+        } else if (!parameter.is認定証発行フラグ() || parameter.is通知書発行フラグ()) {
             builder.append(new RString(parameter.get通知書の交付日().toString()));
         }
         出力条件.add(builder.toRString());
-        builder.append(出力順);
-        builder.append(order.get設定項目リスト().get(0).get項目名());
-        builder.append(より);
-        builder.append(order.get設定項目リスト().get(1).get項目名());
-        builder.append(より);
-        builder.append(order.get設定項目リスト().get(2).get項目名());
-        builder.append(より);
-        builder.append(order.get設定項目リスト().get(3).get項目名());
-        builder.append(より);
-        builder.append(order.get設定項目リスト().get(4).get項目名());
+
+        RString 設定項目 = RString.EMPTY;
+        for (ISetSortItem item : order.get設定項目リスト()) {
+            設定項目.concat(より).concat(item.get項目名());
+        }
+        if (!設定項目.isEmpty()) {
+            設定項目 = 設定項目.substringEmptyOnError(1, 設定項目.length() - 1);
+        }
+        出力条件.add(SHUTSURYOKUJUN.concat(設定項目));
         出力条件.add(builder.toRString());
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 ID.value(),

@@ -7,7 +7,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.commonchilddiv.Jukyu
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.JukyushaIdoRenrakuhyo.JukyushaIdoRenrakuhyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.JukyushaIdoRenrakuhyo.JukyushaIdoRenrakuhyoHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面設計_DBCKD00007_(共有子Div)受給者異動連絡票です。
@@ -46,7 +49,8 @@ public class JukyushaIdoRenrakuhyo {
      * @return ResponseData
      */
     public ResponseData<JukyushaIdoRenrakuhyoDiv> onBlur_txtIdoYMD(JukyushaIdoRenrakuhyoDiv div) {
-        getHandler(div).onBlur_異動日();
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        getHandler(div).onBlur_異動日(処理モード);
         return createResponse(div);
     }
 

@@ -35,7 +35,6 @@
             "2009"."shichouzonCode"
     </select>
     
-    
 <select resultOrdered="true" id="getEntityListTwo" resultMap="resultMap_getEntityList"
             fetchSize="500">
         SELECT
@@ -57,7 +56,6 @@
             "2009"."shichouzonCode"
     </select>
     
-
 <select resultOrdered="true" id="getEntityListFour" resultMap="resultMap_getEntityList"
             fetchSize="500">
         SELECT

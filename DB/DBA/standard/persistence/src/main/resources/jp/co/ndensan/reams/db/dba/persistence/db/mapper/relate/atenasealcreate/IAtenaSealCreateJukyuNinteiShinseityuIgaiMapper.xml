@@ -65,8 +65,6 @@
         ON
             "Atesaki"."shikibetsuCode" = PSM."shikibetsuCode"
         AND
-            "Atesaki"."gyomuCode" = 'DBA'
-        AND
             "Atesaki"."juminShubetsuCode" IN
       <foreach collection="shubetsu_1" item="shubetsu1" open="(" separator="," close=")"> #{shubetsu1} </foreach>
         AND

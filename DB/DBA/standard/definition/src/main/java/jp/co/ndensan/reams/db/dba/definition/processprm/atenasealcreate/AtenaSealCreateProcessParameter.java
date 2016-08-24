@@ -150,6 +150,7 @@ public class AtenaSealCreateProcessParameter implements IBatchProcessParameter {
         }
         if (!全市町村.equals(shichousonshitei)) {
             is市町村指定 = true;
+            has市町村指定 = true;
         }
         if (抽出対象者_住所地特例者のみ.equals(chuushutsutaishousha)) {
             is抽出対象者1 = true;
