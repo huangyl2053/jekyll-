@@ -29,7 +29,6 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranHandler {
 
     private final ShotokuDankaibetsuHihokenshaSuIchiranDiv div;
     private static final RString 開始年度 = new RString("2000");
-    private static final RString 年度内連番 = new RString("0001");
     private static final RString 導入形態コード_111 = new RString("111");
     private static final RString 導入形態コード_112 = new RString("112");
     private static final RString 導入形態コード_120 = new RString("120");
