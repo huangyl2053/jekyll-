@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.business.core.jizenshinsakaishiryopublication;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.jizenshinsakekka.JizenShinsaKekkaSelectEntity;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -32,7 +31,7 @@ public class JizenShinsakaiShiryoPublicationBusiness {
      *
      * @return 介護認定審査会開催予定年月日
      */
-    public FlexibleDate get介護認定審査会開催予定年月日() {
+    public RString get介護認定審査会開催予定年月日() {
         return entity.get介護認定審査会開催予定年月日();
     }
 
@@ -59,7 +58,7 @@ public class JizenShinsakaiShiryoPublicationBusiness {
      *
      * @return 介護認定審査会資料作成年月日
      */
-    public FlexibleDate get介護認定審査会資料作成年月日() {
+    public RString get介護認定審査会資料作成年月日() {
         return entity.get介護認定審査会資料作成年月日();
     }
 
@@ -68,7 +67,7 @@ public class JizenShinsakaiShiryoPublicationBusiness {
      *
      * @return 合議体番号
      */
-    public int get合議体番号() {
+    public RString get合議体番号() {
         return entity.get合議体番号();
     }
 
@@ -86,7 +85,7 @@ public class JizenShinsakaiShiryoPublicationBusiness {
      *
      * @return 介護認定審査会予定定員
      */
-    public int get介護認定審査会予定定員() {
+    public RString get介護認定審査会予定定員() {
         return entity.get介護認定審査会予定定員();
     }
 
@@ -95,7 +94,7 @@ public class JizenShinsakaiShiryoPublicationBusiness {
      *
      * @return 介護認定審査会割当済み人数
      */
-    public int get介護認定審査会割当済み人数() {
+    public RString get介護認定審査会割当済み人数() {
         return entity.get介護認定審査会割当済み人数();
     }
 }
