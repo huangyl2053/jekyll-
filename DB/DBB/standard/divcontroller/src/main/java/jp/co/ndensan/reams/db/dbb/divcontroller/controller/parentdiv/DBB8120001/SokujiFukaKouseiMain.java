@@ -414,6 +414,9 @@ public class SokujiFukaKouseiMain {
                 return getResponseData(div);
             }
         }
+        FlexibleYear 賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
+        TsuchishoNo 通知書番号 = ViewStateHolder.get(ViewStateKeys.通知書番号, TsuchishoNo.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         List<KoseiZengoFuka> 更正前後賦課のリスト;
         KoseiZengoChoshuHoho 更正前後徴収方法 = null;
         NendobunFukaList 更正前賦課リスト = null;
@@ -421,9 +424,6 @@ public class SokujiFukaKouseiMain {
         boolean is本算定処理済フラグ;
         if (翌年度の情報を表示する.equals(div.getBtnYokunendoHyoji().getText())) {
             div.getBtnYokunendoHyoji().setText(前年度の情報を表示する);
-            FlexibleYear 賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
-            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-            TsuchishoNo 通知書番号 = ViewStateHolder.get(ViewStateKeys.通知書番号, TsuchishoNo.class);
             is本算定処理済フラグ = ViewStateHolder.get(ViewStateKeys.本算定処理済フラグ, Boolean.class);
             SokujiFukaKoseiService service = SokujiFukaKoseiService.createInstance();
             賦課年度 = 賦課年度.plusYear(INT_1);
@@ -447,9 +447,6 @@ public class SokujiFukaKouseiMain {
         } else {
             div.getBtnYokunendoHyoji().setText(翌年度の情報を表示する);
             setViewStateHolder();
-            FlexibleYear 賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
-            TsuchishoNo 通知書番号 = ViewStateHolder.get(ViewStateKeys.通知書番号, TsuchishoNo.class);
-            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
             SokujiFukaKoseiParameter parameter = new SokujiFukaKoseiParameter();
             parameter.set賦課年度(賦課年度);
             parameter.set被保険者番号(被保険者番号);
