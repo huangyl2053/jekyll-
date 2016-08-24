@@ -203,12 +203,12 @@ public class JukyushaIdoRenrakuhyoSakusei {
             relateEntity.get出力用受給者訂正情報Entity().set公費負担上限額減額(変更後entity.get公費負担上限額減額());
         } else {
             //TODO
-            relateEntity.get出力用受給者訂正情報Entity().set公費負担上限額減額(false);
+            relateEntity.get出力用受給者訂正情報Entity().set公費負担上限額減額(Boolean.FALSE);
         }
         if (!変更前entity.get小規模居宅ｻｰﾋﾞｽ利用().equals(変更後entity.get小規模居宅ｻｰﾋﾞｽ利用())) {
             relateEntity.get出力用受給者訂正情報Entity().set小規模居宅ｻｰﾋﾞｽ利用(変更後entity.get小規模居宅ｻｰﾋﾞｽ利用());
         } else {
-            relateEntity.get出力用受給者訂正情報Entity().set公費負担上限額減額(false);
+            relateEntity.get出力用受給者訂正情報Entity().set小規模居宅ｻｰﾋﾞｽ利用(Boolean.FALSE);
         }
         relateEntity.get出力用受給者訂正情報Entity().set軽減率適用開始年月日(compareFlexibleDate(変更前entity.
                 get軽減率適用開始年月日(), 変更後entity.get軽減率適用開始年月日()));

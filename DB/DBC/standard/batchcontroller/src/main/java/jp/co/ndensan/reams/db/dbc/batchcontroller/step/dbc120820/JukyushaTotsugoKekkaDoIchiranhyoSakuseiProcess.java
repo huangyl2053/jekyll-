@@ -117,7 +117,6 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
     private static final RString KEY_並び順の５件目 = new RString("KEY_並び順の５件目");
     private static final RString KEY_並び順の６件目 = new RString("KEY_並び順の６件目");
     private static final RString ダブル引用符 = new RString("\"");
-    private static final int HUNDRED = 100;
     private static final RString パーセント = new RString("%");
     private static final RString 出力ファイル名
             = new RString("DBC200058_JukyushaTotsugokekkaIchiran.csv");
@@ -448,9 +447,8 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
 
     private static RString decimal_to_percentStr(Decimal number) {
         if (null == number) {
-            return RString.EMPTY;
+            number = Decimal.ZERO;
         }
-        number = number.multiply(HUNDRED);
-        return DecimalFormatter.toRString(number, 0).concat(パーセント);
+        return new RString(number.toString()).concat(パーセント);
     }
 }

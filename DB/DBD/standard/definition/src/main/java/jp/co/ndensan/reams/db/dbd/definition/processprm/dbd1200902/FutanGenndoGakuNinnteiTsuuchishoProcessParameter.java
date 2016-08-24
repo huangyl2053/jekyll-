@@ -64,12 +64,12 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcessParameter implements IBatchP
         this.単票発行区分 = 単票発行区分;
         this.旧措置者区分 = 旧措置者区分;
         this.年度開始日 = 年度開始日;
-        this.年度開始日 = 年度開始日;
         this.年度終了日 = 年度終了日;
         this.対象区分 = 対象区分;
         this.対象日FROM = 対象日FROM;
         this.対象日TO = 対象日TO;
         this.通知書の交付日 = 通知書の交付日;
+        this.通知書の文書番号 = 通知書の文書番号;
         this.改頁出力順ID = 改頁出力順ID;
     }
 

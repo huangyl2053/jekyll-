@@ -201,5 +201,7 @@ public class TaishoShoriPanel {
     private void setDisplayOrOpen(TaishoShoriPanelDiv div, boolean flg) {
         div.getFuairuAppurodo().setCanOpenAndClose(flg);
         div.getFuairuAppurodo().setIsOpen(flg);
+        div.getUplTaishoFuairu().setDisplayNone(!flg);
+        div.getBtnAppurodo().setDisplayNone(!flg);
     }
 }

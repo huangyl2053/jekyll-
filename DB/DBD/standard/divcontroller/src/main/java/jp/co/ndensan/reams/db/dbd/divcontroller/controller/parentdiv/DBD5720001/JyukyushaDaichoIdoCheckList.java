@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5720001.JyukyushaDaicho
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5720001.JyukyushaDaichoIdoCheckListDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5720001.JyukyushaDaichoIdoCheckListHandler;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -49,7 +48,7 @@ public class JyukyushaDaichoIdoCheckList {
         RTime 今回抽出終了時分秒 = div.getJhokenPancel().getTxtRangeKonkai().getToTimeValue();
 
         if (今回抽出開始年月日 != null && 今回抽出終了年月日 != null && !ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+            return ResponseData.of(div).addMessage(DbdQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         ダイアログ2(div, 今回抽出開始年月日, 今回抽出終了年月日, 今回抽出終了時分秒);
         ダイアログ3(div, 今回抽出開始年月日, 今回抽出終了年月日, 今回抽出開始時分秒);
