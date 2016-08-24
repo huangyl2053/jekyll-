@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010;
 
+import java.util.HashMap;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufukanrihyoin.KyufukanrihyoDoMasterTorokuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
@@ -37,6 +39,7 @@ public class KyufukanrihyoDoMasterTorokuProcess extends BatchProcessBase<Hihoken
 
     private static final RString 交換情報識別番号_平成18年3月以前 = new RString("1121");
     private static final RString 交換情報識別番号_平成18年4月以降 = new RString("1122");
+    private static final RString KEY_処理年月 = new RString("処理年月");
 
     private KyufukanrihyoDoMasterTorokuProcessParameter parameter;
 
@@ -64,8 +67,10 @@ public class KyufukanrihyoDoMasterTorokuProcess extends BatchProcessBase<Hihoken
     protected void beforeExecute() {
         mapper = getMapper(IKyufukanrihyoInMapper.class);
         if (SaiShoriKubun.再処理.equals(parameter.get再処理区分())) {
-            mapper.do給付管理票200004TBL処理済のデータの削除();
-            mapper.do給付管理票200604TBL処理済のデータの削除();
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put(KEY_処理年月.toString(), parameter.get処理年月());
+            mapper.do給付管理票200004TBL処理済のデータの削除(parameters);
+            mapper.do給付管理票200604TBL処理済のデータの削除(parameters);
         }
     }
 

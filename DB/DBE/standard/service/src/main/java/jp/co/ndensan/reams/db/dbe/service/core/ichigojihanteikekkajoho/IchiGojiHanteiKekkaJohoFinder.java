@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -106,7 +107,7 @@ public class IchiGojiHanteiKekkaJohoFinder {
                 getIchiGojiHanteiKekkaJoho(paramter.getShinseishoKanriNo());
 
         IchiGojiHanteiKekkaJohoEntity entity = new IchiGojiHanteiKekkaJohoEntity();
-        entity.set判定年月日(ビジネス情報.get判定年月日());
+        entity.set判定年月日(FlexibleDate.getNowDate());
         entity.set主治医意見書_件数(ビジネス情報.get主治医意見書_件数());
         entity.set認定調査結果_件数(ビジネス情報.get認定調査結果_件数());
         entity.set判定警告コード(ビジネス情報.get判定警告コード());

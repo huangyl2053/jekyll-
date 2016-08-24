@@ -142,7 +142,8 @@ public enum GemmenJuminKihonSpec implements IPredicate<GemmenJuminKihonDiv> {
 
         public static boolean 決定日の必須入力チェック(GemmenJuminKihonDiv div) {
             return !(div.getGemmenMain().getKiwarigaku().getTxtGemmengaku().getValue() != null
-                    && div.getGemmenMain().getKeteiinfo().getTxtKetteiYMD() == null);
+                    && (div.getGemmenMain().getKeteiinfo().getTxtKetteiYMD().getValue() == null
+                    || div.getGemmenMain().getKeteiinfo().getTxtKetteiYMD().getValue().isEmpty()));
         }
 
         public static boolean 減免額の必須入力チェック(GemmenJuminKihonDiv div) {

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.definition.processprm.kyufukanrihyoin;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 
 /**
  * DoMasterTorokuProcessパラメータです。
@@ -19,5 +20,6 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 public class KyufukanrihyoDoMasterTorokuProcessParameter implements IBatchProcessParameter {
 
     private SaiShoriKubun 再処理区分;
+    private FlexibleYearMonth 処理年月;
 
 }

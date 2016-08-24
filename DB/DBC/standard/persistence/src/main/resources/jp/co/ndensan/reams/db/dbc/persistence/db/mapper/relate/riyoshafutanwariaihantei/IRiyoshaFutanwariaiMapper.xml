@@ -327,7 +327,6 @@
                     ("UrV0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" <![CDATA[<]]>#{対象終了日}
            AND COALESCE(NULLIF("UrV0508SeikatsuHogoJukyusha"."jukyuHaishiYMD", ''), '99999999')<![CDATA[>=]]> #{対象開始日})
            ORDER BY "UrV0508SeikatsuHogoJukyusha"."shikibetsuCode"
-
     </select>    
     <!-- 処理詳細4(4)月別判定対象者Tempの作成 -->
     <select resultOrdered="true" id="select月別判定対象者作成" 
@@ -501,7 +500,8 @@
                 (SELECT "b".* FROM rgdb."DbV2512KaigoShotokuNewest" AS "b" WHERE "b"."shotokuNendo"=#{対象年度} )
                     AS "DbV2512KaigoShotokuNewest"
             ON  
-                    "DbV2512KaigoShotokuNewest"."shikibetsuCode"= "DbT1001HihokenshaDaicho"."shikibetsuCode"                
+                    "DbV2512KaigoShotokuNewest"."shikibetsuCode"= "DbT1001HihokenshaDaicho"."shikibetsuCode"   
+            ORDER BY "DbT1001HihokenshaDaicho"."hihokenshaNo"
     </select>
     <!-- 処理詳細4(4)月別判定対象者Tempの作成二回目-->
     <select resultOrdered="true" id="select月別判定対象者作成二回目" 
@@ -673,7 +673,8 @@
                 (SELECT "b".* FROM rgdb."DbV2512KaigoShotokuNewest" AS "b" WHERE "b"."shotokuNendo"=#{対象年度} )
                     AS "DbV2512KaigoShotokuNewest"
             ON  
-                    "DbV2512KaigoShotokuNewest"."shikibetsuCode"= "DbT1001HihokenshaDaicho"."shikibetsuCode"     
+                    "DbV2512KaigoShotokuNewest"."shikibetsuCode"= "DbT1001HihokenshaDaicho"."shikibetsuCode" 
+            ORDER BY "DbT1001HihokenshaDaicho"."hihokenshaNo"
     </select>
 
     <!--処理詳細6負担割合判定（年次）-->
@@ -702,6 +703,8 @@
                     AS "DbV2512KaigoShotokuNewest"
             ON  
                     "SetainJohoTemp"."shikibetsuCode"="DbV2512KaigoShotokuNewest"."shikibetsuCode"
+            ORDER BY 
+                "HanteiTaishoshaTemp"."hihokenshaNo"
     </select>
     <!--処理詳細7負担割合判定（月次）-->
         <select resultOrdered="true" id="select負担割合判定月次" 

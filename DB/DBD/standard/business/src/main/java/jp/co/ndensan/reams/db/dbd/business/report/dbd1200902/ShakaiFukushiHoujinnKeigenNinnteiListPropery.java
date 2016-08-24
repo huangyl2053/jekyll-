@@ -9,10 +9,12 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 出力順設定可能項目です。
  *
  * @author x_xuliang
  */
 public enum ShakaiFukushiHoujinnKeigenNinnteiListPropery implements IReportItems {
+
     /**
      * 郵便番号
      */

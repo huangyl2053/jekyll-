@@ -137,7 +137,7 @@
         WHERE
         "DbT2015KeisangoJohoTemp"."choteiNendo" = #{調定年度}
         AND  "DbT2015KeisangoJohoTemp"."fukaNendo" = #{調定年度}
-<!--        AND  "DbT2015KeisangoJohoTemp"."koseiZengoKubun" = #{更正前後区分}-->
+        AND  "DbT2015KeisangoJohoTemp"."koseiZengoKubun" = #{更正前後区分}
         AND  "DbT2015KeisangoJohoTemp"."tkKibetsuGaku01" != 0
         AND  "DbT2015KeisangoJohoTemp"."tkKibetsuGaku02" != 0
         AND  "DbT2015KeisangoJohoTemp"."tkKibetsuGaku03" != 0
@@ -155,7 +155,7 @@
         "koza".*,
         <include refid="jp.co.ndensan.reams.ue.uex.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumns_UeT0511NenkinTokuchoKaifuJoho" />
         FROM
-        "DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
+        rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
         INNER JOIN
         rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,true,
@@ -188,7 +188,7 @@
         WHERE
         "DbT2015KeisangoJoho"."choteiNendo" = #{調定年度}
         AND  "DbT2015KeisangoJoho"."fukaNendo" = #{調定年度}
-<!--        AND  "DbT2015KeisangoJoho"."koseiZengoKubun" = #{更正前後区分}-->
+        AND  "DbT2015KeisangoJoho"."koseiZengoKubun" = #{更正前後区分}
         AND  "DbT2015KeisangoJoho"."sakuseiShoriName" = #{作成処理名}
         AND  "DbT2015KeisangoJoho"."tkKibetsuGaku01" != 0
         AND  "DbT2015KeisangoJoho"."tkKibetsuGaku02" != 0

@@ -344,6 +344,10 @@ public enum ReportIdDBC {
      */
     DBC100053(new ReportId("DBC100053_GassanKetteiTsuchishoShiharaiYoteiBiYijiNashi"), new RString("高額合算支給（不支給）決定通知書（単）")),
     /**
+     * 振込明細一覧表帳票ＩＤです。
+     */
+    DBC200003(new ReportId("DBC200003_FurikomiMeisaiIchiran"), new RString("振込明細一覧表")),
+    /**
      * （高額合算支給（不支給）決定通知書）支払予定日あり帳票ＩＤです。
      */
     DBC100054(new ReportId("DBC100054_GassanKetteiTsuchishoShiharaiYoteiBiYijiAri"), new RString("高額合算支給（不支給）決定通知書（単）"));

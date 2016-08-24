@@ -8,12 +8,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7100001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710100.DBC710100_HanyoListKagoKekkaParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.kagomoshitate.KagoMoshitateKekka_HokenshaKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7100001.HanyoListParameterDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.common.CSVSettings;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -44,14 +46,20 @@ public class HanyoListParameterHandler {
      */
     public void initialize() {
         div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
-        //TODO QA1270
+
         List<RString> selectKey = new ArrayList<>();
         selectKey.add(項目名);
         selectKey.add(日付);
         div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(selectKey);
 
         ShichosonSecurityJoho 市町村情報セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        //TODO QA1292
+        if (事務広域.equals(市町村情報セキュリティ情報.get導入形態コード().value())) {
+            div.getChushutsuJokenPanel().getCcdHokenshaList().setDisplayNone(true);
+        } else {
+            //TODO QA1292
+            div.getChushutsuJokenPanel().getCcdHokenshaList().setDisabled(true);
+        }
+
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
     }
 
@@ -62,17 +70,18 @@ public class HanyoListParameterHandler {
      */
     public DBC710100_HanyoListKagoKekkaParameter setBatchParameter() {
         DBC710100_HanyoListKagoKekkaParameter parameter = new DBC710100_HanyoListKagoKekkaParameter();
-        parameter.set国保連取扱年月From(div.getChushutsuJokenPanel().getTxtKokuhorenToriatukaiNengetu().getFromValue());
-        parameter.set国保連取扱年月To(div.getChushutsuJokenPanel().getTxtKokuhorenToriatukaiNengetu().getToValue());
-        //TODO  QA1270
-//        if(.equals(div.getChushutsuJokenPanel().getRadHokenshaKubun().getSelectedKey())){
-//            parameter.set保険者区分(null);
-//        }else{
-//            parameter.set保険者区分(div.getChushutsuJokenPanel().getRadHokenshaKubun().getSelectedKey());
-//        }
 
-        parameter.setサービス提供年月From(div.getChushutsuJokenPanel().getTxtSabisuTeikyoNengetu().getFromValue());
-        parameter.setサービス提供年月To(div.getChushutsuJokenPanel().getTxtSabisuTeikyoNengetu().getToValue());
+        parameter.set国保連取扱年月From(new FlexibleDate(div.getChushutsuJokenPanel().getTxtKokuhorenToriatukaiNengetu().getFromValue().toString()));
+        parameter.set国保連取扱年月To(new FlexibleDate(div.getChushutsuJokenPanel().getTxtKokuhorenToriatukaiNengetu().getToValue().toString()));
+
+        if (div.getChushutsuJokenPanel().getRadHokenshaKubun().getSelectedKey().equals(KagoMoshitateKekka_HokenshaKubun.すべて.getコード())) {
+            parameter.set保険者区分(null);
+        } else {
+            parameter.set保険者区分(div.getChushutsuJokenPanel().getRadHokenshaKubun().getSelectedKey());
+        }
+
+        parameter.setサービス提供年月From(new FlexibleDate(div.getChushutsuJokenPanel().getTxtSabisuTeikyoNengetu().getFromValue().toString()));
+        parameter.setサービス提供年月To(new FlexibleDate(div.getChushutsuJokenPanel().getTxtSabisuTeikyoNengetu().getToValue().toString()));
         parameter.set事業者コード(div.getChushutsuJokenPanel().getCcdJigyoshaBango().getNyuryokuShisetsuKodo());
         parameter.set事業者名(div.getChushutsuJokenPanel().getCcdJigyoshaBango().getNyuryokuShisetsuMeisho());
 
@@ -92,8 +101,8 @@ public class HanyoListParameterHandler {
         parameter.set項目名付加(is項目名付加);
         parameter.set連番付加(is連番付加);
         parameter.set日付スラッシュ付加(is日付編集);
-        //TODO  QA1292
-        //parameter.set保険者コード(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード());
+        parameter.set保険者コード(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード());
+
         if (div.getCcdShutsuryokujun().get出力順ID() == null) {
             parameter.set出力順(null);
         } else {

@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbd.entity.report.dbd100019.ShafukuRiysFutKeigTais
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
@@ -77,6 +78,8 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
     private final RString より大きい = new RString("＞");
     private ShafukuRiysFutKeigTaisKakuninshoShoNoAriReport report;
     private ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減;
+    private DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通;
+    private List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用;
     @BatchWriter
     private BatchReportWriter<ShafukuRiysFutKeigTaisKakuninshoShoNoAriReportSource> batchReportWrite;
     private ReportSourceWriter<ShafukuRiysFutKeigTaisKakuninshoShoNoAriReportSource> reportSourceWriter;
@@ -93,6 +96,8 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
                 processParamter.get改頁出力順ID());
         出力順 = MyBatisOrderByClauseCreator.create(ShakaiFukushiHoujinnKeigenNinnteiListPropery.class, outputOrder);
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        帳票制御共通 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御共通(帳票ID.getReportId());
+        帳票制御汎用 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御汎用(帳票ID.getReportId());
         ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100020.getReportId(),
                 FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                 KenmeiFuyoKubunType.付与なし, reportSourceWriter);
@@ -117,15 +122,6 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
     protected void createWriter() {
         batchReportWrite = BatchReportFactory.createBatchReportWriter(帳票ID.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
-    }
-
-    private static ChohyoSeigyoKyotsu 帳票制御共通取得() {
-        return new ChohyoSeigyoKyotsu(GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().
-                load帳票制御共通(帳票ID.getReportId()));
-    }
-
-    private List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用取得() {
-        return GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御汎用(帳票ID.getReportId());
     }
 
     @Override
@@ -158,8 +154,8 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
                 .set適用開始年月日(t.get社会福祉法人等利用者負担軽減Entity().getTekiyoKaishiYMD())
                 .set非承認理由(t.get社会福祉法人等利用者負担軽減Entity().getHiShoninRiyu())
                 .build();
-        ShafukuRiysFutKeigTaisKakuninshoShoNoAriReport.createReport(社会福祉法人等利用者負担軽減, iKojin, 帳票制御共通取得(),
-                帳票制御汎用取得(), 地方公共団体, 認定証の交付日, ninshoshaSource);
+        ShafukuRiysFutKeigTaisKakuninshoShoNoAriReport.createReport(社会福祉法人等利用者負担軽減, iKojin,
+                new ChohyoSeigyoKyotsu(帳票制御共通), 帳票制御汎用, 地方公共団体, 認定証の交付日, ninshoshaSource);
         report.writeBy(reportSourceWriter);
     }
 
