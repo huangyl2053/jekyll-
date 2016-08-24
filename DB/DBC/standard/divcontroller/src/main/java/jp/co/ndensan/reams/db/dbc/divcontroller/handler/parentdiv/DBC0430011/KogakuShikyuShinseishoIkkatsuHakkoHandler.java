@@ -208,10 +208,12 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
                 = new DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter();
         FlexibleYearMonth 処理年月 = FlexibleYearMonth.EMPTY;
         if (!div.getShinseishoHakkoParameters().getRadShinsaYM().getSelectedKey().isEmpty()) {
-            処理年月 = new FlexibleYearMonth(div.getShinseishoHakkoParameters().getTxtShinsaYM().getValue().toString());
+            FlexibleDate 年月 = div.getShinseishoHakkoParameters().getTxtShinsaYM().getValue();
+            処理年月 = new FlexibleYearMonth(年月.toString());
             parameter.setChushutsuJoken(ShutsuryokuJoken.審査年月);
         } else if (!div.getShinseishoHakkoParameters().getRadHihokenshaNo().getSelectedKey().isEmpty()) {
-            処理年月 = new FlexibleYearMonth(div.getShinseishoHakkoParameters().getDdlServiceYM().getLabelRText());
+            RString 年月 = div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedValue();
+            処理年月 = new FlexibleYearMonth(年月.toString());
             parameter.setChushutsuJoken(ShutsuryokuJoken.被保険者番号);
         } else if (!div.getShinseishoHakkoParameters().getRadHakushiInsatsu().getSelectedKey().isEmpty()) {
             処理年月 = FlexibleYearMonth.EMPTY;

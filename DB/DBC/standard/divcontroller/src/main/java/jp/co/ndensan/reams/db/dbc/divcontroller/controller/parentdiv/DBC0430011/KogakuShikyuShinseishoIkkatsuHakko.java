@@ -112,9 +112,8 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> onCancelClose(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedValue().isEmpty()) {
-            validPairs = getCheckHandler(div).確定チェック();
+            ValidationMessageControlPairs validPairs = getCheckHandler(div).確定チェック();
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
