@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc120860;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120170.KohifutanshaDoIchiranhyoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120170.KohifutanshaDoMasterTorokuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120170.KohifutanshaReadCsvFileProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120860.SogojigyohiKagoKetteiKohifutanshaDoIchiranhyoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.sogojigyohikagoketteikohifutanshain.DBC120860_SogojigyohiKagoKetteiKohifutanshaInBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120860.DBC120860_SogojigyohiKagoKetteiKohifutanshaInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDeleteReveicedFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuGetFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaReadCsvFileProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -40,8 +41,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2810-010 chenjie
  */
-public class DBC120860_SogojigyohiKagoKetteiKohifutanshaInFlow
-        extends BatchFlowBase<DBC120860_SogojigyohiKagoKetteiKohifutanshaInBatchParameter> {
+public class DBC120860_SogojigyohiKagoKetteiKohifutanshaIn
+        extends BatchFlowBase<DBC120860_SogojigyohiKagoKetteiKohifutanshaInParameter> {
 
     private static final String ファイル取得 = "getFile";
     private static final String CSVファイル取込 = "readCsvFile";
@@ -51,13 +52,9 @@ public class DBC120860_SogojigyohiKagoKetteiKohifutanshaInFlow
     private static final String 一覧表作成 = "doIchiranhyoSakusei";
     private static final String 処理結果リスト作成 = "doShoriKekkaListSakusei";
     private static final String 取込済ファイル削除 = "deleteReveicedFile";
-
     private static final RString ファイル格納フォルダ名 = new RString("DBC120860");
-    private static final RString 帳票ID = new RString("DBC200086_SogojigyohiKagoKetteitsuchishoTorikomiIchiranKohi");
-
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
     private FlowEntity flowEntity;
-
     private static RString 交換情報識別番号;
 
     @Override
@@ -169,11 +166,11 @@ public class DBC120860_SogojigyohiKagoKetteiKohifutanshaInFlow
         KohifutanshaDoIchiranhyoSakuseiProcessParameter parameter
                 = new KohifutanshaDoIchiranhyoSakuseiProcessParameter();
         parameter.setサブ業務コード(SubGyomuCode.DBC介護給付);
-        parameter.set帳票ID(new ReportId(帳票ID));
+        parameter.set帳票ID(new ReportId(ReportIdDBC.DBC200086.getReportId().getColumnValue()));
         parameter.set出力順ID(getParameter().getShutsuryokujunId());
         parameter.set処理年月(getParameter().getShoriYM());
         parameter.setシステム日付(RDateTime.now());
-        return simpleBatch(KohifutanshaDoIchiranhyoSakuseiProcess.class).arguments(parameter).
+        return loopBatch(SogojigyohiKagoKetteiKohifutanshaDoIchiranhyoSakuseiProcess.class).arguments(parameter).
                 define();
     }
 
