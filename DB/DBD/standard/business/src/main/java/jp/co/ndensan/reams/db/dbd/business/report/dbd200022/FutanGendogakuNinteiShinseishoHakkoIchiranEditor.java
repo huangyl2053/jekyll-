@@ -124,7 +124,7 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEditor implements IFutanG
         if (null != 帳票情報) {
             RString 負担段階 = RString.EMPTY;
             if (this.帳票情報.get利用者負担段階() != null) {
-                負担段階 = this.帳票情報.get利用者負担段階().get名称();
+                負担段階 = this.帳票情報.get利用者負担段階().getコード();
             }
             RString 負担段階名称 = RString.EMPTY;
             if (null != 負担段階 && !負担段階.isEmpty()) {
