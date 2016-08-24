@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.jizenshinsakaishiryopublication;
 
-import jp.co.ndensan.reams.db.dbe.entity.csv.jizenshinsakekka.JizenShinsaKekkaCsvEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.jizenshinsakekka.JizenShinsaKekkaEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.jizenshinsakekka.JizenShinsaKekkaSelectEntity;
 
 /**
@@ -24,8 +24,8 @@ public class JizenShinsakaiShiryoPublicationChange {
      * @param entity 帳票出力用認定調査実績集計表情報
      * @return 帳票出力用認定調査実績集計表の帳票のパラメータ
      */
-    public JizenShinsaKekkaCsvEntity creatChange(JizenShinsaKekkaSelectEntity entity) {
-        JizenShinsaKekkaCsvEntity data = new JizenShinsaKekkaCsvEntity(entity.get介護認定審査会開催予定年月日(),
+    public JizenShinsaKekkaEntity creatChange(JizenShinsaKekkaSelectEntity entity) {
+        JizenShinsaKekkaEntity data = new JizenShinsaKekkaEntity(entity.get介護認定審査会開催予定年月日(),
                 entity.get介護認定審査会開催場所名称(),
                 entity.get介護認定審査会開始予定時刻(),
                 entity.get介護認定審査会資料作成年月日(),
