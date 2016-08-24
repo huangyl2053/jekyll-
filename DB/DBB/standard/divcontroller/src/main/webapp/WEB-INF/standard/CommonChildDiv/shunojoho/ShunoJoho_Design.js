@@ -4,6 +4,9 @@ var DBB;
         var Events = (function () {
             function Events() {
             }
+            Events.年度変更 = function () {
+                return "年度変更";
+            };
             return Events;
         })();
         ShunoJoho.Events = Events;

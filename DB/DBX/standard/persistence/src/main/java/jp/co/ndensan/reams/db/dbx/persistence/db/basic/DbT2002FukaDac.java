@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護賦課のデータアクセスクラスです。
  *
- * @reamsid_L DBB-0680-020 wangkanglei
+ * @reamsid_L DBB-9999-022 xuxin
  */
 public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
 
@@ -107,6 +107,36 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
                                 eq(fukaNendo, 賦課年度),
                                 eq(tsuchishoNo, 通知書番号))).
                 toList(DbT2002FukaEntity.class);
+    }
+
+    /**
+     * 主キーで介護賦課最新履歴の情報を取得します。
+     *
+     * @param 調定年度 ChoteiNendo
+     * @param 賦課年度 FukaNendo
+     * @param 通知書番号 TsuchishoNo
+     * @return DbT2002FukaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT2002FukaEntity selectByKey最新履歴情報(
+            FlexibleYear 調定年度,
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号) throws NullPointerException {
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(調定年度_KEY.toString()));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度_KEY.toString()));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通知書番号_KEY.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT2002Fuka.class).
+                where(and(
+                                eq(choteiNendo, 調定年度),
+                                eq(fukaNendo, 賦課年度),
+                                eq(tsuchishoNo, 通知書番号))).
+                order(by(DbT2002Fuka.rirekiNo, Order.DESC)).
+                limit(1).
+                toObject(DbT2002FukaEntity.class);
     }
 
     /**
@@ -281,4 +311,5 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
                 order(by(DbT2002Fuka.rirekiNo, Order.DESC)).
                 limit(1).toObject(DbT2002FukaEntity.class);
     }
+
 }
