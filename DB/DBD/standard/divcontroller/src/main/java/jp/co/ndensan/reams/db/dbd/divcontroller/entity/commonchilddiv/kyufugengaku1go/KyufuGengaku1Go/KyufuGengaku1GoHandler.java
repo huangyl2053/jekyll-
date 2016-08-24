@@ -576,6 +576,8 @@ public class KyufuGengaku1GoHandler {
         getValidationHandler().validateFor減額適用期間チェック(pairs, div);
         getValidationHandler().validateFor減額適用期間終了入力チェック(pairs, div);
         getValidationHandler().validateFor申請理由未選択チェック(pairs, div);
+        getValidationHandler().validateFor状況未選択チェック(pairs, div);
+        getValidationHandler().validateFor申請審査結果未選択チェック(pairs, div);
         getValidationHandler().validateFor減額適用期間2チェック(pairs, div);
         return pairs;
     }
