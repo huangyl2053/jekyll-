@@ -43,9 +43,16 @@ public class GemmenGengakuTaishoShaHanteiYoukonSakuseiFlow extends BatchFlowBase
      */
     @Step(世帯員把握入力)
     protected IBatchFlowCommand setaiinHaakuInputSakusei() {
-        return loopBatch(SetaiinHaakuInputSakusei.class)
-                .arguments(getParameter().toGemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter())
-                .define();
+        if (getParameter().get所得年度() == null || getParameter().get所得年度().isEmpty()) {
+            return loopBatch(GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei.class)
+                    .arguments(getParameter().toGemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter(new HizukeConfig().get所得年度()))
+                    .define();
+        } else {
+            return loopBatch(SetaiinHaakuInputSakusei.class)
+                    .arguments(getParameter().toGemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter())
+                    .define();
+        }
+
     }
 
     /**
