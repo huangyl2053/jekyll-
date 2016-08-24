@@ -190,9 +190,13 @@ public class FukaKeisan {
         更正前後徴収方法.set被保険者番号(null);
         更正前後徴収方法.set更正前(param.get徴収方法の情報());
         for (ChoshuHoho choshuHoho : 徴収方法の情報リスト) {
+            int 履歴番号 = choshuHoho.get履歴番号();
+            if (更正前後徴収方法.get更正前().get履歴番号() == 履歴番号) {
+                履歴番号 = 履歴番号 + INT_1;
+            }
             if (choshuHoho.hasChanged()) {
                 DbT2001ChoshuHohoEntity choshuHohoEntity = choshuHoho.toEntity();
-                choshuHohoEntity.setRirekiNo(choshuHoho.get履歴番号() + INT_1);
+                choshuHohoEntity.setRirekiNo(履歴番号);
                 choshuHohoEntity.setState(EntityDataState.Added);
                 choshuHoho = new ChoshuHoho(choshuHohoEntity);
             }
