@@ -25,7 +25,7 @@ public final class JizenShinsakaiShiryoPublicationMybitisParamter implements IMy
      *
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      */
-    protected JizenShinsakaiShiryoPublicationMybitisParamter(RString shinsakaiKaisaiNo) {
+    public JizenShinsakaiShiryoPublicationMybitisParamter(RString shinsakaiKaisaiNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
     }
 
@@ -35,7 +35,7 @@ public final class JizenShinsakaiShiryoPublicationMybitisParamter implements IMy
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      * @return IJizenShinsakaiShiryoPublicationMybitisParamter 介護認定審査会委員事前審査のMybatisパラメータクラス
      */
-    public static JizenShinsakaiShiryoPublicationMybitisParamter createParamter(RString shinsakaiKaisaiNo) {
+    public JizenShinsakaiShiryoPublicationMybitisParamter createParamter(RString shinsakaiKaisaiNo) {
         return new JizenShinsakaiShiryoPublicationMybitisParamter(shinsakaiKaisaiNo);
     }
 }
