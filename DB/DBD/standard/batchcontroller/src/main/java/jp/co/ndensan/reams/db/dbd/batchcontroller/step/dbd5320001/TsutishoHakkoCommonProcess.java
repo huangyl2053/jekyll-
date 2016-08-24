@@ -60,7 +60,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  *
  * @reamsid_L DBD-1430-020 lit
  */
-public class TsutishoHakkoCommonProcess {
+public final class TsutishoHakkoCommonProcess {
 
     /**
      * コンストラクス。
@@ -71,51 +71,66 @@ public class TsutishoHakkoCommonProcess {
     /**
      * 通知文_パターン番号_1
      */
-    public static final int 通知文_パターン番号_1 = 1;
+    public static final int 通知文_パターン番号_1;
     /**
      * 通知文_パターン番号_2
      */
-    public static final int 通知文_パターン番号_2 = 2;
+    public static final int 通知文_パターン番号_2;
     /**
      * 通知文_パターン番号_3
      */
-    public static final int 通知文_パターン番号_3 = 3;
+    public static final int 通知文_パターン番号_3;
     /**
      * 通知文_パターン番号_4
      */
-    public static final int 通知文_パターン番号_4 = 4;
+    public static final int 通知文_パターン番号_4;
     /**
      * 通知文_項目番号_1
      */
-    public static final int 通知文_項目番号_1 = 1;
+    public static final int 通知文_項目番号_1;
     /**
      * 通知文_項目番号_2
      */
-    public static final int 通知文_項目番号_2 = 2;
+    public static final int 通知文_項目番号_2;
     /**
      * 通知文_項目番号_3
      */
-    public static final int 通知文_項目番号_3 = 3;
+    public static final int 通知文_項目番号_3;
     /**
      * 通知文_項目番号_4
      */
-    public static final int 通知文_項目番号_4 = 4;
+    public static final int 通知文_項目番号_4;
     /**
      * 通知文_項目番号_5
      */
-    public static final int 通知文_項目番号_5 = 5;
+    public static final int 通知文_項目番号_5;
     /**
      * 通知文_項目番号_6
      */
-    public static final int 通知文_項目番号_6 = 6;
+    public static final int 通知文_項目番号_6;
     /**
      * DEFAULT_処理支番
      */
-    public static final RString DEFAULT_処理支番 = new RString("0001");
+    public static final RString DEFAULT_処理支番;
     /**
      * DEFAULT_年度内連番
      */
-    public static final RString DEFAULT_年度内連番 = new RString("0001");
+    public static final RString DEFAULT_年度内連番;
+
+    static {
+        通知文_パターン番号_1 = 1;
+        通知文_パターン番号_2 = 2;
+        通知文_パターン番号_3 = 3;
+        通知文_パターン番号_4 = 4;
+        通知文_項目番号_1 = 1;
+        通知文_項目番号_2 = 2;
+        通知文_項目番号_3 = 3;
+        通知文_項目番号_4 = 4;
+        通知文_項目番号_5 = 5;
+        通知文_項目番号_6 = 6;
+        DEFAULT_処理支番 = new RString("0001");
+        DEFAULT_年度内連番 = new RString("0001");
+    }
 
     private static final RString 連絡符号 = new RString(",");
 
