@@ -33,6 +33,7 @@ public class HihokenshaShikakuHakkoHandler {
     private final HihokenshaShikakuHakkoDiv div;
     private static final RString MENUID_DBUMN12001 = new RString("DBUMN12001");
     private static final RString MENUID_DBUMN12002 = new RString("DBUMN12002");
+    private final RString 事業対象者 = new RString("事業対象者");
 
     /**
      * コンストラクタです。
@@ -93,6 +94,8 @@ public class HihokenshaShikakuHakkoHandler {
 
         if (entity.get要介護認定状態区分コード() != null) {
             div.getNinteiInfo().getTxtYokaigodo().setValue(YokaigoJotaiKubun09.toValue(entity.get要介護認定状態区分コード().getKey()).get名称());
+        } else {
+            div.getNinteiInfo().getTxtYokaigodo().setValue(事業対象者);
         }
         if (entity.get認定年月日() != null) {
             div.getNinteiInfo().getTxtNinteiYMD().setValue(new RDate(entity.get認定年月日().toString()));
