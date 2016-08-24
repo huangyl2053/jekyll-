@@ -73,10 +73,14 @@ public class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor implements IYokaigo
         source.title_b2 = new RString("要介護認定月別受給者数状況表");
         source.nendo = this.年度.toDateString();
         if (null != 受給状況Entityリスト && !受給状況Entityリスト.isEmpty()) {
-            source.shichosonName = 受給状況Entityリスト.get(index).get市町村名();
-            source.hokenshaNo = 受給状況Entityリスト.get(index).get市町村番号();
-            source.hokenshaName = 受給状況Entityリスト.get(index).get市町村名();
+
             YokaigoNinteiJisshiJokyohyoReportEntity 受給状況Entity = 受給状況Entityリスト.get(index);
+            if (受給状況Entity.get市町村名() != null && !受給状況Entity.get市町村名().equals(new RString("000000"))) {
+                source.shichosonName = 受給状況Entityリスト.get(index).get市町村名();
+                source.hokenshaNo = 受給状況Entityリスト.get(index).get市町村番号();
+                source.hokenshaName = 受給状況Entityリスト.get(index).get市町村名();
+            }
+
             source.list_1 = 受給状況Entity.get集計項目();
             source.list_2 = 受給状況Entity.get四月の合計();
             source.list_3 = 受給状況Entity.get五月の合計();
