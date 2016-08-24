@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShimeiKanaTotsugoGaitousyaNasiProcess extends BatchProcessBase<ShimeiKanaTotsugoGaitousyaNasiJohoEntity> {
 
-    private static final RString 一 = new RString("1");
     private static final RString 二 = new RString("2");
     private static final RString 空 = new RString("");
     private static final RString MYBATIS_SELECT_ID = new RString(

@@ -36,7 +36,7 @@ public class TokuchoSeidokanIFSakusei {
      * @return ResponseData
      */
     public ResponseData<TokuchoSeidokanIFSakuseiDiv> onChange_DropDownList(TokuchoSeidokanIFSakuseiDiv div) {
-        getHandler(div).onChange_特別徴収開始年月();
+        getHandler(div).onChange_特別徴収開始年月(div.getTxtChoteiNendo().getValue().getYear());
         return ResponseData.of(div).respond();
     }
 

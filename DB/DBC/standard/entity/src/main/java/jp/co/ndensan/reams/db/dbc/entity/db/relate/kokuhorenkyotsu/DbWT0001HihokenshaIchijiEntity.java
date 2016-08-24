@@ -71,6 +71,8 @@ public class DbWT0001HihokenshaIchijiEntity extends DbTableEntityBase<DbWT0001Hi
     @TempTableColumnOrder(21)
     private RString shimei50onKana;
     @TempTableColumnOrder(22)
+    private ShikibetsuCode shikibetsuCode;
+    @TempTableColumnOrder(23)
     private FlexibleDate shikakuShutokuYmd;
     @TempTableColumnOrder(24)
     private RString shikakuShutokuJiyuCode;
@@ -80,6 +82,4 @@ public class DbWT0001HihokenshaIchijiEntity extends DbTableEntityBase<DbWT0001Hi
     private RString shikakuSoshitsuJiyuCode;
     @TempTableColumnOrder(27)
     private HihokenshaNo setaiShuyakuNo;
-    @TempTableColumnOrder(22)
-    private ShikibetsuCode shikibetsuCode;
 }

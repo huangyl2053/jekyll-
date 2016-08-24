@@ -75,32 +75,32 @@ public class HikazeiNennkinTaishouSyaJohoCsvCreateProcess extends BatchProcessBa
 
     private void setEucCsvEntity(HikazeiNennkinTaishouSyaJohoListCsvOutEntity eucCsvEntity,
             HikazeiNennkinTaishouSyaJohoListCsvResultEntity t) {
-        eucCsvEntity.set市町村コード(t.getDT市町村コード());
-        eucCsvEntity.set年金保険者コード(t.getDT年金保険者コード());
-        eucCsvEntity.set通知内容コード(t.getDT通知内容コード());
-        eucCsvEntity.set予備１(t.getDT予備1());
-        eucCsvEntity.set制度コード(t.getDT制度コード());
-        eucCsvEntity.set作成年月日(t.getDT作成年月日());
-        eucCsvEntity.set基礎年金番号(t.getDT基礎年金番号());
-        eucCsvEntity.set年金コード(t.getDT年金コード());
-        eucCsvEntity.set予備２(t.getDT予備2());
-        eucCsvEntity.set生年月日(t.getDT生年月日());
-        eucCsvEntity.set性別(t.getDT性別());
-        eucCsvEntity.setカナ氏名(t.getDTカナ氏名());
-        eucCsvEntity.set漢字氏名(t.getDT漢字氏名());
-        eucCsvEntity.set郵便番号(t.getDT郵便番号());
-        eucCsvEntity.setカナ住所(t.getDTカナ住所());
-        eucCsvEntity.set漢字住所(t.getDT漢字住所());
-        eucCsvEntity.set対象年(t.getDT対象年());
-        eucCsvEntity.set訂正表示(t.getDT訂正表示());
-        eucCsvEntity.set各種区分(t.getDT各種区分());
-        eucCsvEntity.set処理結果(t.getDT処理結果());
-        eucCsvEntity.set予備３(t.getDT予備3());
-        eucCsvEntity.set予備４(t.getDT予備4());
-        eucCsvEntity.set金額１(new RString(t.getDT金額1().toString()));
-        eucCsvEntity.set金額予備１(new RString(t.getDT金額予備1().toString()));
-        eucCsvEntity.set金額予備２(new RString(t.getDT金額予備2().toString()));
-        eucCsvEntity.set予備５(t.getDT予備5());
-        eucCsvEntity.set共済年金証書記号番号(t.getDT共済年金証書記号番号());
+        eucCsvEntity.set市町村コード(t.getDt市町村コード());
+        eucCsvEntity.set年金保険者コード(t.getDt年金保険者コード());
+        eucCsvEntity.set通知内容コード(t.getDt通知内容コード());
+        eucCsvEntity.set予備１(t.getDt予備1());
+        eucCsvEntity.set制度コード(t.getDt制度コード());
+        eucCsvEntity.set作成年月日(t.getDt作成年月日());
+        eucCsvEntity.set基礎年金番号(t.getDt基礎年金番号());
+        eucCsvEntity.set年金コード(t.getDt年金コード());
+        eucCsvEntity.set予備２(t.getDt予備2());
+        eucCsvEntity.set生年月日(t.getDt生年月日());
+        eucCsvEntity.set性別(t.getDt性別());
+        eucCsvEntity.setカナ氏名(t.getDtカナ氏名());
+        eucCsvEntity.set漢字氏名(t.getDt漢字氏名());
+        eucCsvEntity.set郵便番号(t.getDt郵便番号());
+        eucCsvEntity.setカナ住所(t.getDtカナ住所());
+        eucCsvEntity.set漢字住所(t.getDt漢字住所());
+        eucCsvEntity.set対象年(t.getDt対象年());
+        eucCsvEntity.set訂正表示(t.getDt訂正表示());
+        eucCsvEntity.set各種区分(t.getDt各種区分());
+        eucCsvEntity.set処理結果(t.getDt処理結果());
+        eucCsvEntity.set予備３(t.getDt予備3());
+        eucCsvEntity.set予備４(t.getDt予備4());
+        eucCsvEntity.set金額１(new RString(t.getDt金額1().toString()));
+        eucCsvEntity.set金額予備１(new RString(t.getDt金額予備1().toString()));
+        eucCsvEntity.set金額予備２(new RString(t.getDt金額予備2().toString()));
+        eucCsvEntity.set予備５(t.getDt予備5());
+        eucCsvEntity.set共済年金証書記号番号(t.getDt共済年金証書記号番号());
     }
 }

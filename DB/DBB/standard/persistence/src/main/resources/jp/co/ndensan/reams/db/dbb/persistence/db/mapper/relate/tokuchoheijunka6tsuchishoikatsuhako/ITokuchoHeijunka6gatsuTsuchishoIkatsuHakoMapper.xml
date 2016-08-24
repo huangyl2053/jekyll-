@@ -453,7 +453,7 @@
         "DbT2002FukaTemp"
         WHERE
         ("koseigo_choshuHoho4gatsu" != #{特別徴収_厚生労働省} AND "koseigo_choshuHoho4gatsu" != #{特別徴収_地共済})
-        AND ("koseigo_choshuHoho4gatsu" = #{特別徴収_厚生労働省} OR "koseigo_choshuHoho4gatsu" = #{特別徴収_地共済})
+        AND ("koseigo_choshuHoho6gatsu" = #{特別徴収_厚生労働省} OR "koseigo_choshuHoho6gatsu" = #{特別徴収_地共済})
     </select>
 
     <select resultOrdered="true" id="select出力対象情報" resultMap="resultMap_出力対象情報の取得"

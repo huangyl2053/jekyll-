@@ -12,12 +12,10 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.SeikyugakuTsuchishoCsvFil
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.SeikyugakuTsuchishoCsvFileToreraRecode1Entity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.SeikyugakuTsuchishoCsvFileToreraRecode2Entity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.SeikyugakuTsuchishoCsvFileToreraRecode3Entity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.KagoKetteiHokenshaInControlCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.seikyugakutsuchishofutanshain.DbWT1511SeikyugakuTsuchishoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
 import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
@@ -57,7 +55,6 @@ public class SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess extends BatchPro
     BatchEntityCreatedTempTableWriter 請求額通知書一時tableWriter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 処理結果リスト一時tableWriter;
-    private IKokuhorenKyoutsuuTempTableMapper 一時表Mapper;
     private static final RString 請求額通知書一時_TABLE_NAME = new RString("DbWT1511SeikyugakuTsuchisho");
     private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
 
@@ -95,7 +92,6 @@ public class SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess extends BatchPro
 
     @Override
     protected void beforeExecute() {
-        一時表Mapper = getMapper(IKokuhorenKyoutsuuTempTableMapper.class);
     }
 
     @Override
@@ -273,9 +269,9 @@ public class SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess extends BatchPro
             returnEntity.setShoriYM(処理対象年月);
         }
         if (連番 == parameter.getレコード件数合算()) {
-            DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
-            errorTempentity.setエラー区分(NUM);
-            一時表Mapper.処理結果リスト一時TBLに登録(errorTempentity);
+            DbWT0002KokuhorenTorikomiErrorEntity 処理結果 = new DbWT0002KokuhorenTorikomiErrorEntity();
+            処理結果.setErrorKubun(NUM);
+            処理結果リスト一時tableWriter.insert(処理結果);
         }
         returnEntity.set明細データ登録件数(連番);
         レコード件数合計 = レコード件数合計 + Integer.parseInt(controlCsvEntity.getCodeNum().toString());

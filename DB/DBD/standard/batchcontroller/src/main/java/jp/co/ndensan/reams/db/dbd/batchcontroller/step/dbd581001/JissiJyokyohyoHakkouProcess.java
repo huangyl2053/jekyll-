@@ -138,16 +138,19 @@ public class JissiJyokyohyoHakkouProcess extends BatchProcessBase<JissiJyokyohyo
         if (beforeJissiJyokyohyoHakkouEntity != null
                 && !jissiJyokyohyoHakkouEntity.get取得条件().equals(beforeJissiJyokyohyoHakkouEntity.get取得条件())) {
             if (beforeJissiJyokyohyoHakkouEntity.get取得条件().substring(2).equals(取得条件新規)) {
+                yokaigoNinteiJisshiJokyohyoEntity.set年度合計(yokaigoNinteiJisshiJokyohyoEntity.get年度合計() - 1);
                 実施状況Entity.get実施状況リスト2().add(yokaigoNinteiJisshiJokyohyoEntity);
             }
             if (beforeJissiJyokyohyoHakkouEntity.get取得条件().substring(2).equals(取得条件要支援)) {
+                yokaigoNinteiJisshiJokyohyoEntity.set年度合計(yokaigoNinteiJisshiJokyohyoEntity.get年度合計() - 1);
                 実施状況Entity.get実施状況リスト5().add(yokaigoNinteiJisshiJokyohyoEntity);
             }
-
             if (beforeJissiJyokyohyoHakkouEntity.get取得条件().substring(2).equals(取得条件更新)) {
+                yokaigoNinteiJisshiJokyohyoEntity.set年度合計(yokaigoNinteiJisshiJokyohyoEntity.get年度合計() - 1);
                 実施状況Entity.get実施状況リスト3().add(yokaigoNinteiJisshiJokyohyoEntity);
             }
             if (beforeJissiJyokyohyoHakkouEntity.get取得条件().substring(2).equals(取得条件区分変更)) {
+                yokaigoNinteiJisshiJokyohyoEntity.set年度合計(yokaigoNinteiJisshiJokyohyoEntity.get年度合計() - 1);
                 実施状況Entity.get実施状況リスト4().add(yokaigoNinteiJisshiJokyohyoEntity);
             }
             yokaigoNinteiJisshiJokyohyoEntity = new YokaigoNinteiJisshiJokyohyoEntity();
@@ -204,7 +207,7 @@ public class JissiJyokyohyoHakkouProcess extends BatchProcessBase<JissiJyokyohyo
         if (jissiJyokyohyoHakkouEntity.get年月().substring(SUBSTRING_4).equals(十二月)) {
             yokaigoNinteiJisshiJokyohyoEntity.set十二月の合計(jissiJyokyohyoHakkouEntity.get数量());
         }
-        yokaigoNinteiJisshiJokyohyoEntity.set年度合計(yokaigoNinteiJisshiJokyohyoEntity.get年度合計() + jissiJyokyohyoHakkouEntity.get数量() - 1);
+        yokaigoNinteiJisshiJokyohyoEntity.set年度合計(yokaigoNinteiJisshiJokyohyoEntity.get年度合計() + jissiJyokyohyoHakkouEntity.get数量());
     }
 
     @Override

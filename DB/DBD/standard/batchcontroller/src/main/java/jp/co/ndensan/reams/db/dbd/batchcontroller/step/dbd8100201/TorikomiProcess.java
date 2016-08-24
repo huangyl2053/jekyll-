@@ -83,35 +83,23 @@ public class TorikomiProcess extends BatchProcessBase<RString> {
                     ファイル名 = Z5200000.concat(parameter.get処理年度().toDateString())
                             .concat(parameter.get処理区分()).concat(parameter.get対象月())
                             .concat(アンダーライン).concat(市町村コード).concat(拡張子);
-                    List<UzT0885SharedFileEntryEntity> fileList = getFileData(ファイル名);
-                    if (!fileList.isEmpty()) {
-                        dataList.addAll(fileList);
-                    }
+                    getFileData(ファイル名);
                 } else if (年次.equals(parameter.get処理区分())) {
                     ファイル名 = Z5100000.concat(parameter.get処理年度().toDateString())
                             .concat(parameter.get処理区分()).concat(parameter.get対象月())
                             .concat(アンダーライン).concat(市町村コード).concat(拡張子);
-                    List<UzT0885SharedFileEntryEntity> fileList = getFileData(ファイル名);
-                    if (!fileList.isEmpty()) {
-                        dataList.addAll(fileList);
-                    }
+                    getFileData(ファイル名);
                 }
             }
         } else {
             if (月次.equals(parameter.get処理区分())) {
                 ファイル名 = Z5200000.concat(parameter.get処理年度().toDateString())
                         .concat(parameter.get処理区分()).concat(parameter.get対象月()).concat(拡張子);
-                List<UzT0885SharedFileEntryEntity> fileList = getFileData(ファイル名);
-                if (!fileList.isEmpty()) {
-                    dataList.addAll(fileList);
-                }
+                getFileData(ファイル名);
             } else if (年次.equals(parameter.get処理区分())) {
                 ファイル名 = Z5100000.concat(parameter.get処理年度().toDateString())
                         .concat(parameter.get処理区分()).concat(parameter.get対象月()).concat(拡張子);
-                List<UzT0885SharedFileEntryEntity> fileList = getFileData(ファイル名);
-                if (!fileList.isEmpty()) {
-                    dataList.addAll(fileList);
-                }
+                getFileData(ファイル名);
             }
         }
         if (dataList == null || dataList.size() <= 0) {
@@ -231,6 +219,9 @@ public class TorikomiProcess extends BatchProcessBase<RString> {
         } catch (Exception e) {
             Logger.getLogger(HikazeiNennkinTaishouSyaJohoTorikomiFlow.class.getName()).log(Level.SEVERE, null, e);
         }
-        return fileList;
+        if (!fileList.isEmpty()) {
+            dataList.addAll(fileList);
+        }
+        return dataList;
     }
 }

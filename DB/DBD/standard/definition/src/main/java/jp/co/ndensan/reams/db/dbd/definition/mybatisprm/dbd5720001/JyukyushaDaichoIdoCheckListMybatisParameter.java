@@ -5,10 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5720001;
 
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
  * 受給者台帳異動チェックリスト(バッチ)SQLのパラメータクラス
@@ -17,29 +19,35 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JyukyushaDaichoIdoCheckListMybatisParameter implements IMyBatisParameter {
+public class JyukyushaDaichoIdoCheckListMybatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
     private final RDate 今回抽出開始年月日;
-    private final RTime 今回抽出開始時分秒;
+    private final RDateTime 行挿入日時開始;
     private final RDate 今回抽出終了年月日;
-    private final RTime 今回抽出終了時分秒;
+    private final RDateTime 行挿入日時終了;
+    private final RString 出力対象;
     private final RString 出力順;
 
     /**
      * コンストラクタです。
      *
      * @param 今回抽出開始年月日 今回抽出開始年月日
-     * @param 今回抽出開始時分秒 今回抽出開始時分秒
+     * @param 行挿入日時開始 行挿入日時開始
      * @param 今回抽出終了年月日 今回抽出終了年月日
-     * @param 今回抽出終了時分秒 今回抽出終了時分秒
+     * @param 行挿入日時終了 行挿入日時終了
+     * @param 出力対象 出力対象
      * @param 出力順 出力順
+     * @param shikibetsuTaishoPSMSearchKey 宛名識別対象PSM検索キー
      */
-    public JyukyushaDaichoIdoCheckListMybatisParameter(RDate 今回抽出開始年月日, RTime 今回抽出開始時分秒,
-            RDate 今回抽出終了年月日, RTime 今回抽出終了時分秒, RString 出力順) {
+    public JyukyushaDaichoIdoCheckListMybatisParameter(RDate 今回抽出開始年月日, RDateTime 行挿入日時開始,
+            RDate 今回抽出終了年月日, RDateTime 行挿入日時終了, RString 出力対象, RString 出力順,
+            IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey) {
+        super(shikibetsuTaishoPSMSearchKey);
         this.今回抽出開始年月日 = 今回抽出開始年月日;
-        this.今回抽出開始時分秒 = 今回抽出開始時分秒;
+        this.行挿入日時開始 = 行挿入日時開始;
         this.今回抽出終了年月日 = 今回抽出終了年月日;
-        this.今回抽出終了時分秒 = 今回抽出終了時分秒;
+        this.行挿入日時終了 = 行挿入日時終了;
+        this.出力対象 = 出力対象;
         this.出力順 = 出力順;
 
     }

@@ -98,6 +98,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
     private static final RString 居宅 = new RString("1");
     private static final RString 総合事業 = new RString("2");
     private static final RString RSTRING_0 = new RString("0");
+    private static final int ZERO = 0;
     private static final int ONE = 1;
     private static final int TWO = 2;
     private static final int THREE = 3;
@@ -235,9 +236,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         div.setMode(計画追加モード);
         div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_新規登録);
         set認定申請中状況を活性制御(被保険者番号);
-        div.getServiceAddAndServicePlanCreate().getRadTodokedeKubun().setSelectedKey(KEY_0);
+        div.getRadTodokedeKubun().setSelectedKey(is届出区分新規() ? KEY_0 : KEY_1);
         if (is事業者作成の場合()) {
-            div.getRadTodokedeKubun().setSelectedKey(KEY_1);
             div.getRadKeikakuKubun().setDisplayNone(true);
             div.getRadServiceShurui().setDataSource(getサービス種類DataSource());
             div.getRadKeikakuSakuseiKubun().setDataSource(get事業者作成計画作成区分DataSource());
@@ -246,7 +246,6 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
             set追加計画事業者エリア();
         }
         if (is自己作成の場合()) {
-            div.getRadTodokedeKubun().setSelectedKey(KEY_0);
             div.getRadKeikakuKubun().setDisplayNone(false);
             div.getRadKeikakuKubun().setSelectedKey(KEY_0);
             div.getRadKeikakuSakuseiKubun().setDataSource(get自己作成DataSource());
@@ -811,5 +810,14 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
                 ServiceCategoryShurui.予防ケア.getコード(), ケアマネジメント);
         dataSourceList.add(dataSource);
         return dataSourceList;
+    }
+
+    private boolean is届出区分新規() {
+        int rowSize = div.getRireki().getDgKyotakuServiceIchiran().getDataSource().size();
+        if (rowSize == ZERO) {
+            return Boolean.TRUE;
+        }
+        dgKyotakuServiceIchiran_Row row = div.getRireki().getDgKyotakuServiceIchiran().getDataSource().get(rowSize - ONE);
+        return KyotakuservicekeikakuSakuseikubunCode.自己作成.get名称().equals(row.getKeikakuSakuseiKubun());
     }
 }

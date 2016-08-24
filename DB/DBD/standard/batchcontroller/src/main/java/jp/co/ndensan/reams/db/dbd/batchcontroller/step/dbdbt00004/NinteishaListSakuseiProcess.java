@@ -14,7 +14,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200004.ShakaiFukushiHojinKeigenReport;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.HihokenshaKeizaiJokyo;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TaishoKikan;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.ChushutsuTaisho;
@@ -877,7 +877,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
         RStringBuilder builder = new RStringBuilder();
         set出力条件(出力条件);
         builder.append(受給者区分);
-        builder.append(JukyushaKubun.toValue(processParameter.get受給者区分()));
+        builder.append(JukyushaKubun2.toValue(processParameter.get受給者区分()));
         出力条件.add(builder.toRString());
         builder.append(世帯非課税等);
         for (int i = 0; i < processParameter.get世帯非課税等().size(); i++) {

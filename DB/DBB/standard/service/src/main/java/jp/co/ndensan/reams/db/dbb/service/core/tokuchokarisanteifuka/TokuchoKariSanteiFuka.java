@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteitsuchisho
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteitsuchishohakko.KarisanteiBatchEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -93,13 +94,14 @@ public class TokuchoKariSanteiFuka {
      */
     public List<ShoriDateKanri> getShoriDateKanriList(RString 遷移元区分, FlexibleYear 調定年度) {
         List<DbT7022ShoriDateKanriEntity> entityList = new ArrayList<>();
+        List<RString> 処理名リスト = new ArrayList<>();
         if (STR0.equals(遷移元区分)) {
-            entityList = 処理日付管理Dac.select処理状況_特徴仮算定賦課(調定年度);
+            処理名リスト.add(ShoriName.年度切替.get名称());
+            entityList = 処理日付管理Dac.select処理状況(調定年度, 処理名リスト);
         } else if (STR1.equals(遷移元区分)) {
-            entityList = 処理日付管理Dac.select処理状況_特徴仮算定通知書一括発行(調定年度);
-        }
-        if (entityList == null || entityList.isEmpty()) {
-            return new ArrayList<>();
+            処理名リスト.add(ShoriName.特徴仮算定賦課.get名称());
+            処理名リスト.add(ShoriName.特徴平準化計算_6月分.get名称());
+            entityList = 処理日付管理Dac.select処理状況(調定年度, 処理名リスト);
         }
         List<ShoriDateKanri> kanriList = new ArrayList<>();
         for (DbT7022ShoriDateKanriEntity entity : entityList) {
@@ -140,11 +142,14 @@ public class TokuchoKariSanteiFuka {
         }
         for (TokuchoKariSanteiEntity 出力帳票entity : 出力帳票List) {
             if (new ReportId(特別徴収仮算定結果一覧).equals(出力帳票entity.get帳票分類ID())) {
+                バッチ出力帳票entity = new KarisanteiBatchEntity();
                 バッチ出力帳票entity.set帳票分類ID(出力帳票entity.get帳票分類ID());
                 バッチ出力帳票entity.set帳票ID(出力帳票entity.get帳票分類ID());
                 バッチ出力帳票entity.set出力順ID(出力帳票entity.get出力順ID());
+                resultList.add(バッチ出力帳票entity);
             } else if (new ReportId(特別徴収開始通知書仮代表)
                     .equals(出力帳票entity.get帳票分類ID())) {
+                バッチ出力帳票entity = new KarisanteiBatchEntity();
                 ChohyoSeigyoHanyo 帳票タイプ = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課,
                         出力帳票entity.get帳票分類ID(),
                         new FlexibleYear(MINYEAR), 通知書タイプ);
@@ -156,8 +161,8 @@ public class TokuchoKariSanteiFuka {
                 バッチ出力帳票entity.set帳票分類ID(出力帳票entity.get帳票分類ID());
                 バッチ出力帳票entity.set帳票ID(new ReportId(帳票ID));
                 バッチ出力帳票entity.set出力順ID(出力帳票entity.get出力順ID());
+                resultList.add(バッチ出力帳票entity);
             }
-            resultList.add(バッチ出力帳票entity);
         }
         return resultList;
     }

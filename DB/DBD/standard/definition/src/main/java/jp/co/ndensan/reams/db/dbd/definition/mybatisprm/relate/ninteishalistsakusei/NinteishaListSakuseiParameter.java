@@ -21,6 +21,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteishaListSakuseiParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
     private int 対象期間指定;

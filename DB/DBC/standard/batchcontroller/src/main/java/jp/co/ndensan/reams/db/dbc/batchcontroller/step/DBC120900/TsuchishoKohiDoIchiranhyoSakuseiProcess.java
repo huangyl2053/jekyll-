@@ -64,12 +64,6 @@ public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchProcessBase<Db
     private static final RString SAKUSEI = new RString("作成");
 
     @Override
-    protected void initialize() {
-        super.initialize();
-
-    }
-
-    @Override
     protected void createWriter() {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200082.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
@@ -110,7 +104,6 @@ public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchProcessBase<Db
     private TsuchishofutanshaIchiranCSVEntity do帳票のCSVファイル作成(DbWT1511SeikyugakuTsuchishoTempEntity csvDataEntity,
             YMDHMS 作成日時) {
         TsuchishofutanshaIchiranCSVEntity csvEntity = new TsuchishofutanshaIchiranCSVEntity();
-        FlexibleYearMonth 審査年月 = csvDataEntity.get審査年月();
         if (index == 0) {
             RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)

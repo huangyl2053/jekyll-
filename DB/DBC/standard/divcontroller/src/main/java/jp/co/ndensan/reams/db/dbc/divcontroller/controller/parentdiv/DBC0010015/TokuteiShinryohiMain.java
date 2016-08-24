@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class TokuteiShinryohiMain {
 
     private static final int ZERO_INT = 0;
+    private static final int SEX_INT = 6;
 
     /**
      * 画面初期化のメソッドです。
@@ -44,7 +45,7 @@ public class TokuteiShinryohiMain {
      */
     public ResponseData<TokuteiShinryohiMainDiv> onLoad(TokuteiShinryohiMainDiv div) {
         RString 年月 = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_介護給付費見直し,
-                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).substringEmptyOnError(0, 6);
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).substringEmptyOnError(ZERO_INT, SEX_INT);
         FlexibleYearMonth 提供年月 = new FlexibleYearMonth(年月);
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);

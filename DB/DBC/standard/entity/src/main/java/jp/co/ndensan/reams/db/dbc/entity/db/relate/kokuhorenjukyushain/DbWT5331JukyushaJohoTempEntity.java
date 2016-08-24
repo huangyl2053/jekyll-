@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
@@ -74,13 +75,13 @@ public class DbWT5331JukyushaJohoTempEntity extends DbTableEntityBase<DbWT5331Ju
     @TempTableColumnOrder(25)
     private FlexibleDate kyotakuServiceTekiyoToYmd;
     @TempTableColumnOrder(26)
-    private RString homonShikyugendoKijungaku;
+    private Decimal homonShikyugendoKijungaku;
     @TempTableColumnOrder(27)
     private FlexibleDate homonJogenKanriTekiyoKikanFromYmd;
     @TempTableColumnOrder(28)
     private FlexibleDate homonJogenKanriTekiyoKikanToYmd;
     @TempTableColumnOrder(29)
-    private RString tankiShikyugendoKijungaku;
+    private Decimal tankiShikyugendoKijungaku;
     @TempTableColumnOrder(30)
     private FlexibleDate tankiJogenKanriTekiyoKikanFromYmd;
     @TempTableColumnOrder(31)
@@ -100,7 +101,7 @@ public class DbWT5331JukyushaJohoTempEntity extends DbTableEntityBase<DbWT5331Ju
     @TempTableColumnOrder(38)
     private RString riyoshaFutanKubunCode;
     @TempTableColumnOrder(39)
-    private RString kyufuRitsu;
+    private Decimal kyufuRitsu;
     @TempTableColumnOrder(40)
     private FlexibleDate riyoshaFutanTekiyoFromYmd;
     @TempTableColumnOrder(41)
@@ -108,7 +109,7 @@ public class DbWT5331JukyushaJohoTempEntity extends DbTableEntityBase<DbWT5331Ju
     @TempTableColumnOrder(42)
     private RString hyojunFutanKubunCode;
     @TempTableColumnOrder(43)
-    private RString futanGaku;
+    private Decimal futanGaku;
     @TempTableColumnOrder(44)
     private FlexibleDate futanGakuTekiyoFromYmd;
     @TempTableColumnOrder(45)
@@ -120,23 +121,23 @@ public class DbWT5331JukyushaJohoTempEntity extends DbTableEntityBase<DbWT5331Ju
     @TempTableColumnOrder(48)
     private RString kazeisoNoTokureiGengakuSochiTaishoKubun;
     @TempTableColumnOrder(49)
-    private RString tokuteiNyushoshaShokuhiFutanGendoGaku;
+    private Decimal tokuteiNyushoshaShokuhiFutanGendoGaku;
     @TempTableColumnOrder(50)
-    private RString kyojuhiUnitKoshitsuFutanGendoGaku;
+    private Decimal kyojuhiUnitKoshitsuFutanGendoGaku;
     @TempTableColumnOrder(51)
-    private RString kyojuhiUnitJunkoshitsuFutanGendoGaku;
+    private Decimal kyojuhiUnitJunkoshitsuFutanGendoGaku;
     @TempTableColumnOrder(52)
-    private RString kyojuhiTokuyotoFutanGenndoGaku;
+    private Decimal kyojuhiTokuyotoFutanGenndoGaku;
     @TempTableColumnOrder(53)
-    private RString kyojuhiRokenRyoyotoFutanGendoGaku;
+    private Decimal kyojuhiRokenRyoyotoFutanGendoGaku;
     @TempTableColumnOrder(54)
-    private RString kyojuhiTashoShitsuFutanGendoGaku;
+    private Decimal kyojuhiTashoShitsuFutanGendoGaku;
     @TempTableColumnOrder(55)
     private FlexibleDate futanGendoGakuTekiyoFromYmd;
     @TempTableColumnOrder(56)
     private FlexibleDate futanGendoGakuTekiyoToYmd;
     @TempTableColumnOrder(57)
-    private RString keigenRitsu;
+    private Decimal keigenRitsu;
     @TempTableColumnOrder(58)
     private FlexibleDate keigenRitsuTekiyoFromYmd;
     @TempTableColumnOrder(59)
@@ -168,11 +169,11 @@ public class DbWT5331JukyushaJohoTempEntity extends DbTableEntityBase<DbWT5331Ju
     @TempTableColumnOrder(72)
     private FlexibleDate jushochiTokureiTekiyoToYmd;
     @TempTableColumnOrder(73)
-    private RString kyojuhi1FutanGendogaku;
+    private Decimal kyojuhi1FutanGendogaku;
     @TempTableColumnOrder(74)
-    private RString kyojuhi2FutanGendogaku;
+    private Decimal kyojuhi2FutanGendogaku;
     @TempTableColumnOrder(75)
-    private RString kyojuhi3FutanGendogaku;
+    private Decimal kyojuhi3FutanGendogaku;
     @TempTableColumnOrder(76)
     private FlexibleDate niwariFutanTekiyoFromYmd;
     @TempTableColumnOrder(77)
