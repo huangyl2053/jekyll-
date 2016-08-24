@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiS
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaNaiyo;
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
@@ -54,6 +55,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -114,11 +116,11 @@ public class NinteiShinseiToroku {
             介護導入形態 = new RString("1");
         }
         if (MENUID_DBEMN21001.equals(menuID)) {
-            RString 管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
-            RString 被保険者番号 = manager.get被保険者番号(new ShinseishoKanriNo(管理番号));
+            ShinseishoKanriNo 管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+            RString 被保険者番号 = manager.get被保険者番号(管理番号);
 
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, manager.get要介護認定申請情報(new ShinseishoKanriNo(管理番号)));
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請届出情報, manager.get認定申請届出情報(new ShinseishoKanriNo(管理番号)));
+            ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, manager.get要介護認定申請情報(管理番号));
+            ViewStateHolder.put(ViewStateKeys.要介護認定申請届出情報, manager.get認定申請届出情報(管理番号));
 
             NinteiShinseiTorokuResult result = manager.getDataForLoad(管理番号);
             if (result != null) {
@@ -126,22 +128,23 @@ public class NinteiShinseiToroku {
 
                 getHandler(div).loadUpdate(result, 管理番号, 被保険者番号, 介護導入形態);
                 NinteiShinseiTodokedeshaDataPassModel dataPass = getHandler(div).set届出情報(manager.get宛名情報(result.get識別コード()));
-                dataPass.set申請書管理番号(管理番号);
+                dataPass.set申請書管理番号(管理番号.value());
                 div.getCcdShinseiTodokedesha().initialize(dataPass);
 
                 getHandler(div).set医療保険(manager.get医療保険履歴(result.get識別コード()));
 
                 ViewStateHolder.put(ViewStateKeys.モード, getHandler(div).set市町村連絡事項(result.get市町村連絡事項(), true));
 
-                set連絡先(new ShinseishoKanriNo(管理番号), div, false);
+                set連絡先(管理番号, div, false);
 
-                RirekiJohoResult comResult = manager.get共有子データ(管理番号);
+                RirekiJohoResult comResult = manager.get共有子データ(被保険者番号);
                 div.setHdnKonkai(DataPassingConverter.serialize(comResult.get今回履歴情報()));
                 div.setHdnZenkai(DataPassingConverter.serialize(comResult.get前回履歴情報()));
                 div.setHdnDisplayModeKey(new RString("1"));
                 div.setHdnSubGyomuCd(SubGyomuCode.DBE認定支援.value());
 
                 div.setHdnJogaiMode(new RString("入力"));
+                // TODO 除外審査員情報の最新の変更を対応しないので、実装しない
 //                if (!manager.get介護連絡先情報(new ShinseishoKanriNo(管理番号)).records().isEmpty()) {
 //                    div.getBtnJogaiShinsakaiIinGuide().setIconNameEnum(IconName.Check);
 //                }
@@ -214,7 +217,7 @@ public class NinteiShinseiToroku {
      * @return ResponseData<NinteiShinseiTorokuDiv>
      */
     public ResponseData<NinteiShinseiTorokuDiv> onBefore_btnEnkiRiyuTeikeibun(NinteiShinseiTorokuDiv div) {
-        div.setHdnSubGyomuCd(SubGyomuCode.DBE認定支援.value());
+        div.setHdnSubGyomuCd(GyomuCode.DB介護保険.value());
         div.setHdnGroupCode(new RString("1007"));
         return ResponseData.of(div).respond();
     }
@@ -254,6 +257,7 @@ public class NinteiShinseiToroku {
      * @return ResponseData<NinteiShinseiTorokuDiv>
      */
     public ResponseData<NinteiShinseiTorokuDiv> onOkClose_btnJogaiShinsakaiIinGuide(NinteiShinseiTorokuDiv div) {
+        // TODO 除外審査員情報の最新の変更を対応しないので、実装しない
 //        ShinsakaiIinItiranData data = DataPassingConverter.deserialize(div.getHdnShinsakaiIinJogai(), ShinsakaiIinItiranData.class);
 //        if (data != null && data.getShinsakaiIinItiranList() != null && !data.getShinsakaiIinItiranList().isEmpty()) {
 //            div.getBtnJogaiShinsakaiIinGuide().setIconNameEnum(IconName.Complete);
@@ -493,7 +497,7 @@ public class NinteiShinseiToroku {
         shinseiJohoBuilder.set被保険者区分コード(HihokenshaKubunCode.生活保護.getコード());
         shinseiJohoBuilder.set生年月日(rDateTOFlexDate(div.getCcdAtenaInfo().get生年月日()));
         shinseiJohoBuilder.set年齢(Integer.parseInt(div.getCcdAtenaInfo().get年齢().toString()));
-        shinseiJohoBuilder.set性別(new Code(div.getCcdAtenaInfo().get性別()));
+        shinseiJohoBuilder.set性別(new Code(Seibetsu.valueOf(div.getCcdAtenaInfo().get性別().toString()).getコード()));
         shinseiJohoBuilder.set被保険者氏名カナ(new AtenaKanaMeisho(div.getHdnShimeiKana()));
         shinseiJohoBuilder.set被保険者氏名(new AtenaMeisho(div.getCcdAtenaInfo().get被保険者氏名()));
         shinseiJohoBuilder.set郵便番号(div.getCcdAtenaInfo().get郵便番号());

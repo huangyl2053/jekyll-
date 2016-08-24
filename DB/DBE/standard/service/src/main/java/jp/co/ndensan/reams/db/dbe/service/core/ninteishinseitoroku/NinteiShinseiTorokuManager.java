@@ -115,9 +115,9 @@ public class NinteiShinseiTorokuManager {
      * @param 申請書管理番号 申請書管理番号
      * @return 画面初期データ
      */
-    public NinteiShinseiTorokuResult getDataForLoad(RString 申請書管理番号) {
+    public NinteiShinseiTorokuResult getDataForLoad(ShinseishoKanriNo 申請書管理番号) {
         NinteiShinseiTorokuRelateEntity entity
-                = mapperProvider.create(INinteiShinseiTorokuMapper.class).getShuseiJohoForLoad(申請書管理番号);
+                = mapperProvider.create(INinteiShinseiTorokuMapper.class).getShuseiJohoForLoad(申請書管理番号.value());
         if (entity == null) {
             return null;
         }
