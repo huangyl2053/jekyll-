@@ -53,7 +53,7 @@ public class TaishoShoriPanel {
         List<ShoriDateKanri> 画面情報 = getHandler(div).onLoad();
 
         ViewStateHolder.put(画面キー.画面更新用情報, (Serializable) 画面情報);
-        div.getFuairuAppurodo().setDisplayNone(true);
+        setDisplayOrOpen(div, false);
         return ResponseData.of(div).setState(DBD8010001StateName.アップロード画面);
     }
 
@@ -80,7 +80,7 @@ public class TaishoShoriPanel {
         List<ShoriDateKanri> 画面情報 = getHandler(div).changeShichosonshitei();
 
         ViewStateHolder.put(画面キー.画面更新用情報, (Serializable) 画面情報);
-        div.getFuairuAppurodo().setDisplayNone(true);
+        setDisplayOrOpen(div, false);
         return ResponseData.of(div).setState(DBD8010001StateName.アップロード画面);
     }
 
@@ -102,7 +102,7 @@ public class TaishoShoriPanel {
      * @return ResponseData
      */
     public ResponseData<TaishoShoriPanelDiv> onSelectBySelectButton(TaishoShoriPanelDiv div) {
-        div.getFuairuAppurodo().setDisplayNone(false);
+        setDisplayOrOpen(div, true);
         return ResponseData.of(div).respond();
     }
 
@@ -139,9 +139,9 @@ public class TaishoShoriPanel {
         List<ShoriDateKanri> 画面更新用情報 = ViewStateHolder.get(画面キー.画面更新用情報, List.class);
         getHandler(div).upload(画面更新用情報);
 
-        List<ShoriDateKanri> 画面情報 = getHandler(div).onLoad();
+        List<ShoriDateKanri> 画面情報 = getHandler(div).change対象処理一覧(div.getDgTaishoShoriItchiran().getDataSource());
         ViewStateHolder.put(画面キー.画面更新用情報, (Serializable) 画面情報);
-        div.getFuairuAppurodo().setDisplayNone(true);
+        setDisplayOrOpen(div, false);
 
         div.getCcdKaigoKanryoMessage().setSuccessMessage(
                 new RString(UrInformationMessages.正常終了.getMessage().replace("アップロード処理").evaluate()));
@@ -196,5 +196,10 @@ public class TaishoShoriPanel {
 
     private TaishoShoriValidationHandler getValidationHandler(TaishoShoriPanelDiv div) {
         return new TaishoShoriValidationHandler(div);
+    }
+
+    private void setDisplayOrOpen(TaishoShoriPanelDiv div, boolean flg) {
+        div.getFuairuAppurodo().setCanOpenAndClose(flg);
+        div.getFuairuAppurodo().setIsOpen(flg);
     }
 }
