@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -40,6 +40,10 @@ public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
     private TextBoxNum txtRiyoushaFutangaku;
     @JsonProperty("txtTeigakuRiyoushaFutangaku")
     private TextBoxNum txtTeigakuRiyoushaFutangaku;
+    @JsonProperty("txtHdnGendogakuTaishogaiFlg")
+    private TextBox txtHdnGendogakuTaishogaiFlg;
+    @JsonProperty("txtHdnRiyoshaFutanTeiritsuTeigakuKbn")
+    private TextBox txtHdnRiyoshaFutanTeiritsuTeigakuKbn;
     @JsonProperty("ServiceRiyohyoBeppyoMeisaiFooter")
     private ServiceRiyohyoBeppyoMeisaiFooterDiv ServiceRiyohyoBeppyoMeisaiFooter;
 
@@ -209,6 +213,42 @@ public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
     @JsonProperty("txtTeigakuRiyoushaFutangaku")
     public void setTxtTeigakuRiyoushaFutangaku(TextBoxNum txtTeigakuRiyoushaFutangaku) {
         this.txtTeigakuRiyoushaFutangaku = txtTeigakuRiyoushaFutangaku;
+    }
+
+    /*
+     * gettxtHdnGendogakuTaishogaiFlg
+     * @return txtHdnGendogakuTaishogaiFlg
+     */
+    @JsonProperty("txtHdnGendogakuTaishogaiFlg")
+    public TextBox getTxtHdnGendogakuTaishogaiFlg() {
+        return txtHdnGendogakuTaishogaiFlg;
+    }
+
+    /*
+     * settxtHdnGendogakuTaishogaiFlg
+     * @param txtHdnGendogakuTaishogaiFlg txtHdnGendogakuTaishogaiFlg
+     */
+    @JsonProperty("txtHdnGendogakuTaishogaiFlg")
+    public void setTxtHdnGendogakuTaishogaiFlg(TextBox txtHdnGendogakuTaishogaiFlg) {
+        this.txtHdnGendogakuTaishogaiFlg = txtHdnGendogakuTaishogaiFlg;
+    }
+
+    /*
+     * gettxtHdnRiyoshaFutanTeiritsuTeigakuKbn
+     * @return txtHdnRiyoshaFutanTeiritsuTeigakuKbn
+     */
+    @JsonProperty("txtHdnRiyoshaFutanTeiritsuTeigakuKbn")
+    public TextBox getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn() {
+        return txtHdnRiyoshaFutanTeiritsuTeigakuKbn;
+    }
+
+    /*
+     * settxtHdnRiyoshaFutanTeiritsuTeigakuKbn
+     * @param txtHdnRiyoshaFutanTeiritsuTeigakuKbn txtHdnRiyoshaFutanTeiritsuTeigakuKbn
+     */
+    @JsonProperty("txtHdnRiyoshaFutanTeiritsuTeigakuKbn")
+    public void setTxtHdnRiyoshaFutanTeiritsuTeigakuKbn(TextBox txtHdnRiyoshaFutanTeiritsuTeigakuKbn) {
+        this.txtHdnRiyoshaFutanTeiritsuTeigakuKbn = txtHdnRiyoshaFutanTeiritsuTeigakuKbn;
     }
 
     /*

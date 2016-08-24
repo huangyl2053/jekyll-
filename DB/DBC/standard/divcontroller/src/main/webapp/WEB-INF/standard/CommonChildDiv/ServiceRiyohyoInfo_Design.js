@@ -175,6 +175,14 @@ var DBC;
                 return new UZA.TextBoxNum(this.convFiledName("txtTeigakuRiyoushaFutangaku"));
             };
 
+            Controls.prototype.txtHdnGendogakuTaishogaiFlg = function () {
+                return new UZA.TextBox(this.convFiledName("txtHdnGendogakuTaishogaiFlg"));
+            };
+
+            Controls.prototype.txtHdnRiyoshaFutanTeiritsuTeigakuKbn = function () {
+                return new UZA.TextBox(this.convFiledName("txtHdnRiyoshaFutanTeiritsuTeigakuKbn"));
+            };
+
             Controls.prototype.ServiceRiyohyoBeppyoMeisaiFooter = function () {
                 return new UZA.Panel(this.convFiledName("ServiceRiyohyoBeppyoMeisaiFooter"));
             };

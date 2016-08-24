@@ -14,13 +14,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
 public enum DBC0060012StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    NoChange(""),;
-
-    @Override
-    public RString getName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    NoChange(""),
+    給付管理照会居宅サービス("給付管理照会居宅サービス");
 
     private final RString name;
 
@@ -28,5 +23,14 @@ public enum DBC0060012StateName implements IStateEnumerations {
         this.name = new RString(name);
     }
 
+    /**
+     * getName
+     *
+     * @return 名前
+     */
+    @Override
+    public RString getName() {
+        return name;
+    }
 // </editor-fold>
 }

@@ -195,6 +195,14 @@ module DBC {
                 return new UZA.TextBoxNum(this.convFiledName("txtTeigakuRiyoushaFutangaku"));
             }
 
+            public txtHdnGendogakuTaishogaiFlg(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtHdnGendogakuTaishogaiFlg"));
+            }
+
+            public txtHdnRiyoshaFutanTeiritsuTeigakuKbn(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtHdnRiyoshaFutanTeiritsuTeigakuKbn"));
+            }
+
             public ServiceRiyohyoBeppyoMeisaiFooter(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("ServiceRiyohyoBeppyoMeisaiFooter"));
             }

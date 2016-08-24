@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC80301",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "振込データ媒体書き込み",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC8030001",
+     "toLayoutTitle": "振込データ媒体書き込み",
+     "toState": "標準"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC8030001",
+     "layoutTitle": "振込データ媒体書き込み",
+     "eventName": "dummy",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
