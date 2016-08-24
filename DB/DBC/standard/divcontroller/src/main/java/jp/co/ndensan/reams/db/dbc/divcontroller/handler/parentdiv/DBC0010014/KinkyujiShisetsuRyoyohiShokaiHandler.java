@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
@@ -55,7 +54,7 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
     public void setKinkyujiShisetsuRyoyohi(List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データリスト) {
         List<dgKinkyujiShisetsuRyoyohi_Row> rowList = new ArrayList<>();
         for (KyufujissekiShoteiShikkanShisetsuRyoyo 所定疾患施設療養費等データ : 所定疾患施設療養費等データリスト) {
-            if (div.getCcdKyufuJissekiHeader().getサービス提供年月().toString()
+            if (div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toString()
                     .equals(所定疾患施設療養費等データ.getサービス提供年月().toString())
                     && div.getCcdKyufuJissekiHeader().get事業者番号().toString()
                     .equals(所定疾患施設療養費等データ.get事業所番号().toString())) {
@@ -382,7 +381,7 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
         boolean flg_SetButton = true;
         for (KyufujissekiShoteiShikkanShisetsuRyoyo 所定疾患施設療養費等データ取得 : 所定疾患施設療養費等データ取得リスト) {
             if (前月.equals(changge月)) {
-                div.getCcdKyufuJissekiHeader().setサービス提供年月(new RDate(サービス提供年月.minusMonth(INT_1).toString()));
+                div.getCcdKyufuJissekiHeader().initialize(被保険者番号, サービス提供年月.minusMonth(INT_1), 整理番号, 識別番号);
                 if (サービス提供年月.minusMonth(INT_1).equals(所定疾患施設療養費等データ取得.getサービス提供年月())) {
                     rowList.add(setRow(所定疾患施設療養費等データ取得));
                     rowList.add(setRow_後(所定疾患施設療養費等データ取得));
@@ -391,7 +390,7 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
                     flg_SetButton = false;
                 }
             } else {
-                div.getCcdKyufuJissekiHeader().setサービス提供年月(new RDate(サービス提供年月.plusMonth(INT_1).toString()));
+                div.getCcdKyufuJissekiHeader().initialize(被保険者番号, サービス提供年月.plusMonth(INT_1), 整理番号, 識別番号);
                 if (サービス提供年月.plusMonth(INT_1).equals(所定疾患施設療養費等データ取得.getサービス提供年月())) {
                     rowList.add(setRow(所定疾患施設療養費等データ取得));
                     rowList.add(setRow_後(所定疾患施設療養費等データ取得));

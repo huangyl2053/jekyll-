@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -28,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbV1002TekiyoJogaishaAliveDac {
 
+    private static final int 件数_1 = 1;
     @InjectSession
     private SqlSession session;
 
@@ -101,6 +104,8 @@ public class DbV1002TekiyoJogaishaAliveDac {
         return accessor.select().
                 table(DbV1002TekiyoJogaisha.class).
                 where(eq(shikibetsuCode, 識別コード)).
+                order(by(shikibetsuCode, Order.DESC)).
+                limit(件数_1).
                 toObject(DbV1002TekiyoJogaishaEntity.class);
     }
 }

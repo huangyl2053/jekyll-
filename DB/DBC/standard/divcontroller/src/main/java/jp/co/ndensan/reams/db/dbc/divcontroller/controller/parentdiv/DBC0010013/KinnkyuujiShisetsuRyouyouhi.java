@@ -43,7 +43,6 @@ public class KinnkyuujiShisetsuRyouyouhi {
         getHandler(div).setButton(ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class),
                 ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
         List<KyufujissekiKinkyuShisetsuRyoyo> 給付実績緊急時施設療養データ取得 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getCsData_C();
-        getHandler(div).setDataGrid(給付実績緊急時施設療養データ取得);
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
@@ -55,7 +54,7 @@ public class KinnkyuujiShisetsuRyouyouhi {
                 整理番号, 事業者番号, 様式番号, サービス提供.getYearMonth().toDateString());
         getHandler(div).setDataGrid(緊急時施設療養データ);
         div.getKyufuJissekiTekiyoPanel().setIsOpen(false);
-        //ＴＯＤＯ QA1579
+        //ＴＯＤＯ QA1579が回答ない、先月ボタン、次月ボタンの状態の判定が実装ない
 
         return createResponse(div);
     }

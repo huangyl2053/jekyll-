@@ -195,8 +195,10 @@ public class ShokanBaraiKa1GoHandler {
         TainoHanteiResultKohen 滞納判定結果 = ViewStateHolder.get(ViewStateKeys.滞納判定結果, TainoHanteiResultKohen.class);
         if (滞納判定結果 != null && 滞納判定結果.get滞納情報() != null) {
             div.setTainoHanteiKekka(DataPassingConverter.serialize(滞納判定結果));
-            if (ShoriKubun._1号予告者登録.equals(押下ボタン区分) || ShoriKubun._1号弁明書受理.equals(押下ボタン区分)) {
+            if (ShoriKubun._1号予告者登録.equals(押下ボタン区分) || ShoriKubun.償還払い化登録.equals(押下ボタン区分)) {
                 div.getBtnTainoJokyo().setIconNameEnum(IconName.Check);
+            } else {
+                div.getBtnTainoJokyo().setIconNameEnum(IconName.Info);
             }
         }
     }

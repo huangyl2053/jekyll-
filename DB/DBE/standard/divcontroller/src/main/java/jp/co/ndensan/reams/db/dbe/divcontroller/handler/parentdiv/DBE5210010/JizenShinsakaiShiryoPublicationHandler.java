@@ -69,7 +69,7 @@ public class JizenShinsakaiShiryoPublicationHandler {
         div.getPublicationTargetShinsakai().getTxtShinsakaiYoteiDate().setValue(new FlexibleDate(対象審査会情報.get介護認定審査会開催予定年月日()));
         div.getPublicationTargetShinsakai().getTxtShinsakaiKaijo().setValue(対象審査会情報.get介護認定審査会開催場所名称());
         div.getPublicationTargetShinsakai().getTxtShinsakaiKaishiYoteiTime().setValue(new RTime(対象審査会情報.get介護認定審査会開始予定時刻()));
-        div.getPublicationTargetShinsakai().getTxtShiryoSakusei().setValue(new RString(対象審査会情報.get介護認定審査会資料作成年月日().toString()));
+        div.getPublicationTargetShinsakai().getTxtShiryoSakusei().setValue(dateFormat(new FlexibleDate(対象審査会情報.get介護認定審査会資料作成年月日())));
         div.getPublicationTargetShinsakai().getTxtGogitaiNo().setValue(対象審査会情報.get合議体番号());
         div.getPublicationTargetShinsakai().getTxtGogitaiName().setValue(対象審査会情報.get合議体名称());
         div.getPublicationTargetShinsakai().getTxtYoteiTeiin().setValue(new Decimal(対象審査会情報.get介護認定審査会予定定員().toString()));
@@ -232,5 +232,12 @@ public class JizenShinsakaiShiryoPublicationHandler {
         } else {
             batchParameter.setYobiHenteiFlag(new RString("0"));
         }
+    }
+
+    private RString dateFormat(FlexibleDate date) {
+        if (date == null || date.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return date.wareki().toDateString();
     }
 }

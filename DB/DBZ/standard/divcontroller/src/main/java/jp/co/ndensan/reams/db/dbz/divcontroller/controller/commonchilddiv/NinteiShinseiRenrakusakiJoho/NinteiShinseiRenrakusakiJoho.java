@@ -159,6 +159,8 @@ public class NinteiShinseiRenrakusakiJoho {
                 dgRenrakusakiIchiran_Row row = div.getDgRenrakusakiIchiran().getActiveRow();
                 if (row.getShinseishoKanriNo().equals(joho.get申請書管理番号().value())
                         && row.getRenban().equals(new RString(joho.get連番()))) {
+                    dateSoruce.remove(div.getDgRenrakusakiIchiran().getActiveRow());
+                    div.getDgRenrakusakiIchiran().setDataSource(dateSoruce);
                     johoList.set(i, joho.deleted());
                 }
             }
