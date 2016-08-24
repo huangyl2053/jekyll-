@@ -305,7 +305,6 @@ public class HonnSanteiFuka {
                 return -1;
             }
         });
-
         dbの処理(資格情報, 賦課情報, parameter);
         set賦課情報Error(賦課の情報リスト, 資格の情報リスト, parameter);
     }
@@ -345,7 +344,9 @@ public class HonnSanteiFuka {
                 daichoList.add(daicho);
             }
         }
-        editor本算定抽出一時(daichoList, 賦課情報Map.get(daichoList.get(0).get被保険者番号()), parameter);
+        if (!daichoList.isEmpty()) {
+            editor本算定抽出一時(daichoList, 賦課情報Map.get(daichoList.get(0).get被保険者番号()), parameter);
+        }
     }
 
     private void editor本算定抽出一時(List<HihokenshaDaicho> 資格の情報, FukaJoho 賦課の情報, KeisanTaishoshaParameter param) {
