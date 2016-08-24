@@ -3,14 +3,14 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushoch
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Aug 20 16:26:35 JST 2016 
+ * Wed Aug 24 09:38:25 JST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
 /**
@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class dgJushochiTokureiRireki_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
+    private RString jotai;
     private TextBoxDate tekiyoYMD;
     private TextBoxDate tekiyoTodokedeYMD;
     private RString tekiyoJiyuCode;
@@ -54,6 +55,7 @@ public class dgJushochiTokureiRireki_Row extends DataRow {
 
     public dgJushochiTokureiRireki_Row() {
         super();
+        this.jotai = RString.EMPTY;
         this.tekiyoYMD = new TextBoxDate();
         this.tekiyoTodokedeYMD = new TextBoxDate();
         this.tekiyoJiyuCode = RString.EMPTY;
@@ -83,6 +85,7 @@ public class dgJushochiTokureiRireki_Row extends DataRow {
         this.henkouzenTekiyoYMD = RString.EMPTY;
         this.henkouzenIdoYMD = RString.EMPTY;
         this.henkouzenEdaNo = RString.EMPTY;
+        this.setOriginalData("jotai", jotai);
         this.setOriginalData("tekiyoYMD", tekiyoYMD);
         this.setOriginalData("tekiyoTodokedeYMD", tekiyoTodokedeYMD);
         this.setOriginalData("tekiyoJiyuCode", tekiyoJiyuCode);
@@ -114,8 +117,9 @@ public class dgJushochiTokureiRireki_Row extends DataRow {
         this.setOriginalData("henkouzenEdaNo", henkouzenEdaNo);
     }
 
-    public dgJushochiTokureiRireki_Row(TextBoxDate tekiyoYMD, TextBoxDate tekiyoTodokedeYMD, RString tekiyoJiyuCode, TextBoxDate kaijoYMD, TextBoxDate kaijoTodokedeYMD, RString kaijoJiyuCode, TextBoxDate nyushoYMD, TextBoxDate taishoYMD, RString nyushoShisetsu, RString nyushoShisetsuCode, RString sochiHokenshaNo, RString sochiHihokenshaNo, RString shikibetsuCode, RString idoYMD, RString edaNo, RString rirekiNo, RString nyushoShisetsuShurui, RString tekiyoJiyu, RString kaijoJiyu, RString shichosonCode, RString sochiHokensha, RString tatokuRenrakuhyoHakkoYMD, RString shisetsuTaishoTsuchiHakkoYMD, RString shisetsuHenkoTsuchiHakkoYMD, RString idoJiyuCode, RString tekiyoUketsukeYMD, RString henkouzenTekiyoYMD, RString henkouzenIdoYMD, RString henkouzenEdaNo) {
+    public dgJushochiTokureiRireki_Row(RString jotai, TextBoxDate tekiyoYMD, TextBoxDate tekiyoTodokedeYMD, RString tekiyoJiyuCode, TextBoxDate kaijoYMD, TextBoxDate kaijoTodokedeYMD, RString kaijoJiyuCode, TextBoxDate nyushoYMD, TextBoxDate taishoYMD, RString nyushoShisetsu, RString nyushoShisetsuCode, RString sochiHokenshaNo, RString sochiHihokenshaNo, RString shikibetsuCode, RString idoYMD, RString edaNo, RString rirekiNo, RString nyushoShisetsuShurui, RString tekiyoJiyu, RString kaijoJiyu, RString shichosonCode, RString sochiHokensha, RString tatokuRenrakuhyoHakkoYMD, RString shisetsuTaishoTsuchiHakkoYMD, RString shisetsuHenkoTsuchiHakkoYMD, RString idoJiyuCode, RString tekiyoUketsukeYMD, RString henkouzenTekiyoYMD, RString henkouzenIdoYMD, RString henkouzenEdaNo) {
         super();
+        this.setOriginalData("jotai", jotai);
         this.setOriginalData("tekiyoYMD", tekiyoYMD);
         this.setOriginalData("tekiyoTodokedeYMD", tekiyoTodokedeYMD);
         this.setOriginalData("tekiyoJiyuCode", tekiyoJiyuCode);
@@ -145,6 +149,7 @@ public class dgJushochiTokureiRireki_Row extends DataRow {
         this.setOriginalData("henkouzenTekiyoYMD", henkouzenTekiyoYMD);
         this.setOriginalData("henkouzenIdoYMD", henkouzenIdoYMD);
         this.setOriginalData("henkouzenEdaNo", henkouzenEdaNo);
+        this.jotai = jotai;
         this.tekiyoYMD = tekiyoYMD;
         this.tekiyoTodokedeYMD = tekiyoTodokedeYMD;
         this.tekiyoJiyuCode = tekiyoJiyuCode;
@@ -174,6 +179,10 @@ public class dgJushochiTokureiRireki_Row extends DataRow {
         this.henkouzenTekiyoYMD = henkouzenTekiyoYMD;
         this.henkouzenIdoYMD = henkouzenIdoYMD;
         this.henkouzenEdaNo = henkouzenEdaNo;
+    }
+
+    public RString getJotai() {
+        return jotai;
     }
 
     public TextBoxDate getTekiyoYMD() {
@@ -290,6 +299,11 @@ public class dgJushochiTokureiRireki_Row extends DataRow {
 
     public RString getHenkouzenEdaNo() {
         return henkouzenEdaNo;
+    }
+
+    public void setJotai(RString jotai) {
+        this.setOriginalData("jotai", jotai);
+        this.jotai = jotai;
     }
 
     public void setTekiyoYMD(TextBoxDate tekiyoYMD) {

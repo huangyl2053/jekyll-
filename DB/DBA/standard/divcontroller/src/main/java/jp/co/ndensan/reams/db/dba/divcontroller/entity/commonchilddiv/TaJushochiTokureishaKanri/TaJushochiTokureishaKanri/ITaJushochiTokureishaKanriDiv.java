@@ -32,7 +32,7 @@ public interface ITaJushochiTokureishaKanriDiv extends ICommonChildDivBaseProper
      * @param 識別コード 識別コード
      * @return 
      */
-    public boolean saveTaJushochiTokurei(ShikibetsuCode 識別コード);
+    public void saveTaJushochiTokurei(ShikibetsuCode 識別コード);
 
     /**
      * 適用情報一覧を取得します。
