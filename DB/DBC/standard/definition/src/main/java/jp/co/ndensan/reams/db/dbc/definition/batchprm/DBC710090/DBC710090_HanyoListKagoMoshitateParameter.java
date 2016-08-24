@@ -7,7 +7,8 @@ package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710090;
 
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,15 +38,15 @@ public class DBC710090_HanyoListKagoMoshitateParameter extends BatchParameterBas
     private static final String KEY_出力項目 = "出力項目";
 
     @BatchParameter(key = KEY_国保連送付年月From, name = "国保連送付年月From")
-    private RDate 国保連送付年月From;
+    private FlexibleDate 国保連送付年月From;
     @BatchParameter(key = KEY_国保連送付年月To, name = "国保連送付年月To")
-    private RDate 国保連送付年月To;
+    private FlexibleDate 国保連送付年月To;
     @BatchParameter(key = KEY_過誤申立給付区分, name = "過誤申立給付区分")
     private RString 過誤申立給付区分;
     @BatchParameter(key = KEY_サービス提供年月From, name = "サービス提供年月From")
-    private RDate サービス提供年月From;
+    private FlexibleDate サービス提供年月From;
     @BatchParameter(key = KEY_サービス提供年月To, name = "サービス提供年月To")
-    private RDate サービス提供年月To;
+    private FlexibleDate サービス提供年月To;
     @BatchParameter(key = KEY_事業者コード, name = "事業者コード")
     private RString 事業者コード;
     @BatchParameter(key = KEY_事業者名, name = "事業者名")
@@ -57,7 +58,7 @@ public class DBC710090_HanyoListKagoMoshitateParameter extends BatchParameterBas
     @BatchParameter(key = KEY_日付スラッシュ付加, name = "日付スラッシュ付加")
     private boolean 日付スラッシュ付加;
     @BatchParameter(key = KEY_保険者コード, name = "保険者コード")
-    private RString 保険者コード;
+    private LasdecCode 保険者コード;
     @BatchParameter(key = KEY_出力順, name = "出力順")
     private RString 出力順;
     @BatchParameter(key = KEY_出力項目, name = "出力項目")

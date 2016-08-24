@@ -114,7 +114,7 @@ public class JizenShinsakaiShiryoPublicationHandler {
                 印刷審査会資料chk.add(印刷帳票_主治医意見書);
             }
             if (個別設定.equals(予備判定記入票)) {
-                印刷審査会資料chk.add(印刷帳票_予備判定記入表);
+                印刷帳票chk.add(印刷帳票_予備判定記入表);
             }
         }
         if (すべて選択.equals(印刷帳票)) {
@@ -124,7 +124,11 @@ public class JizenShinsakaiShiryoPublicationHandler {
             印刷審査会資料chk.add(印刷帳票_一次判定結果票);
             印刷審査会資料chk.add(印刷帳票_特記事項_一次判定結果票);
             印刷審査会資料chk.add(印刷帳票_主治医意見書);
+            印刷帳票chk.add(印刷帳票_予備判定記入表);
         }
+        div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoIin().setSelectedItemsByKey(印刷帳票chk);
+        div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin()
+                .setSelectedItemsByKey(印刷審査会資料chk);
     }
 
     /**
