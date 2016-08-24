@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kyufukanrihyoin.KyufukanrihyoInMeis
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT0001HihokenshaIchijiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT1121KyufuKanrihyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -61,7 +60,6 @@ public class KyufukanrihyoReadCsvFileProcess extends BatchProcessBase<RString> {
     private OutputParameter<KyufukanrihyoInCsvReadReturnEntity> flowEntity;
 
     private final RString 区切り文字 = new RString(",");
-    private IKokuhorenKyoutsuuTempTableMapper 一時表Mapper;
 
     private final RString レコード種別 = new RString("1");
     private final RString レコード種別_エンド = new RString("3");
@@ -108,7 +106,6 @@ public class KyufukanrihyoReadCsvFileProcess extends BatchProcessBase<RString> {
 
     @Override
     protected void beforeExecute() {
-        一時表Mapper = getMapper(IKokuhorenKyoutsuuTempTableMapper.class);
         証記載保険者番号取得の判断基準の取得();
     }
 
@@ -162,7 +159,7 @@ public class KyufukanrihyoReadCsvFileProcess extends BatchProcessBase<RString> {
         if (parameter.isLast() && 連番 == INDEX_0) {
             DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
             errorTempentity.setエラー区分(NUM);
-            一時表Mapper.処理結果リスト一時TBLに登録(errorTempentity);
+            処理結果リスト一時tableWriter.insert(errorTempentity.toEntity());
         }
         returnEntity.set明細件数合算(連番);
         returnEntity.setレコード件数合算(parameter.getレコード件数合算()
