@@ -8,6 +8,10 @@ module DBB {
 
         export class Events {
 
+            public static 年度変更(): string {
+                return "年度変更";
+            }
+
         }
 
         export class Controls {

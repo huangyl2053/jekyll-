@@ -173,7 +173,6 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
     }
 
     private RString get申請書管理番号For出力条件() {
-        RStringBuilder 条件 = new RStringBuilder();
         if (parameter.is転入死亡情報出力()) {
             ICenterTransmissionMapper mapper = getMapper(ICenterTransmissionMapper.class);
             for (DbT5129TennyuShiboEntity entity : mapper.getShinseishoKanriNoByTennyuShibo(mybitisParamter)) {
@@ -182,6 +181,7 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
                 }
             }
         }
+        RStringBuilder 条件 = new RStringBuilder();
         for (RString rString : 申請書管理番号リスト) {
             条件.append(rString);
             条件.append(", ");

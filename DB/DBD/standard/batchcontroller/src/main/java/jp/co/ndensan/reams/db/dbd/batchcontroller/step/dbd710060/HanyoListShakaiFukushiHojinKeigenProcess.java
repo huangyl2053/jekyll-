@@ -96,7 +96,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
 
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC701002");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBD701006");
     private static final RString 住所地特例 = new RString("住特");
     private static final RString 区分_0 = new RString("0");
     private static final RString 区分_1 = new RString("1");
@@ -1126,8 +1126,9 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
         if (!get対象データ().isNullOrEmpty()) {
             出力条件.add(get対象データ());
         }
-        if (!get特定対象データ(builder).isNullOrEmpty()) {
-            List<RString> builderList = get特定対象データ(builder).substring(0, get特定対象データ(builder).length() - 1).split(COMMA.toString());
+        RString get特定対象データ = get特定対象データ(builder);
+        if (!get特定対象データ.isNullOrEmpty()) {
+            List<RString> builderList = get特定対象データ.substring(0, get特定対象データ.length() - 1).split(COMMA.toString());
             for (RString build : builderList) {
                 出力条件.add(build);
             }

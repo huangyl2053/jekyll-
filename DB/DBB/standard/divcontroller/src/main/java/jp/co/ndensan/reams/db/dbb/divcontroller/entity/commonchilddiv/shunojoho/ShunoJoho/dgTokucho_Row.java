@@ -3,19 +3,19 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.shunojoho
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Aug 01 17:43:50 CST 2016
+ * Sat Aug 20 15:46:06 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 /**
- * dgTokucho_Row のクラスファイル
+ * dgTokucho_Row のクラスファイル です。
  *
  * @reamsid_L DBB-5710-010 xuxin
  */
 public class dgTokucho_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
     private RString txtKi;
     private RString txtChoteiGaku;
