@@ -638,10 +638,9 @@ public class IchijiSashitome1GoHandler {
     }
 
     private void 給付一時差止登録_Status() {
-        div.getBtnSashitomeToroku().setDisabled(false);
+        div.getBtnSashitomeToroku().setDisabled(true);
         div.getBtnKojoToroku().setDisabled(true);
-        div.getBtnKojoToroku().setDisplayNone(true);
-        div.getBtnSashitomeOrKojoJokyoShokai().setDisabled(false);
+        div.getBtnSashitomeOrKojoJokyoShokai().setDisabled(true);
         div.getDgSashitomeKojoIchiran().setDisabled(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("sashitome").getCellDetails().setReadOnly(true);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("kojo").setCellDetails(new DataGridCellDetails());
@@ -1125,7 +1124,8 @@ public class IchijiSashitome1GoHandler {
             ArrayList<ShiharaiHohoHenkoSashitome> shiharaiHohoHenkoSashitomeList, ArrayList<RString> 差止控除番号) {
         if (!shiharaiHohoHenkoSashitomeList.isEmpty()) {
             for (int i = 0; i < shiharaiHohoHenkoSashitomeList.size(); i++) {
-                if (!shiharaiHohoHenkoSashitomeList.get(i).get差止控除番号().isNullOrEmpty()) {
+                if (shiharaiHohoHenkoSashitomeList.get(i).get差止控除番号() != null
+                        && !shiharaiHohoHenkoSashitomeList.get(i).get差止控除番号().isEmpty()) {
                     if (!差止控除番号.contains(shiharaiHohoHenkoSashitomeList.get(i).get差止控除番号())) {
                         差止控除番号.add(shiharaiHohoHenkoSashitomeList.get(i).get差止控除番号());
                     }
