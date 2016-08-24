@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0600011;
 
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600011.SogoSyokaiDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600011.KaigoSikakuTokusouDiv;
 import jp.co.ndensan.reams.db.dbu.service.core.sogosyokai.SoyoSyokaiService;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.core.view.HihokenshaDaichoAlive;
@@ -41,24 +41,24 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
  *
  * @reamsid_L DBU-4100-010 wanghuafeng
  */
-public class SogoSyokaiHandler {
+public class KaigoSikakuTokusouHandler {
 
     private static final RString 施設種類_11 = new RString("11");
     private static final RString 事業者種別_01 = new RString("01");
     private static final RString 事業者種別_02 = new RString("02");
-    private final SogoSyokaiDiv div;
+    private final KaigoSikakuTokusouDiv div;
 
     /**
      * インスタンスです。
      *
-     * @param div SogoSyokaiDiv
+     * @param div KaigoSikakuTokusouDiv
      */
-    public SogoSyokaiHandler(SogoSyokaiDiv div) {
+    public KaigoSikakuTokusouHandler(KaigoSikakuTokusouDiv div) {
         this.div = div;
     }
 
     /**
-     * 画面の初期化
+     * 画面の初期化です。
      *
      * @param key TaishoshaKey
      */
@@ -66,15 +66,11 @@ public class SogoSyokaiHandler {
         div.getKaigoAtenaInfoChildDiv().initialize(key.get識別コード());
         div.getKaigoShikakuKihonChildDiv().initialize(key.get被保険者番号());
         div.getSikakuJohoButton().setDisabled(true);
-        set被保険者(SoyoSyokaiService.createInstance().get被保険者台帳(key.get被保険者番号()));
-        set施設入退所(SoyoSyokaiService.createInstance().get施設入退所(key.get識別コード()));
-        set他市町村住所地特例情報(SoyoSyokaiService.createInstance().get他市町村住所地特例情報(key.get識別コード()), key.get識別コード());
-        set適用除外者情報(SoyoSyokaiService.createInstance().get適用除外者情報(key.get識別コード()), key.get識別コード());
         AccessLogger.log(AccessLogType.照会, toPersonalData(key));
     }
 
     /**
-     * 被保険者のセート
+     * 被保険者のセートです。
      *
      * @param hihokenshadaicho HihokenshaDaicho
      */
@@ -127,7 +123,7 @@ public class SogoSyokaiHandler {
     }
 
     /**
-     * 施設入退所の取得
+     * 施設入退所の取得です。
      *
      * @param shisetsunyutaisho ShisetsuNyutaisho
      */
@@ -155,7 +151,7 @@ public class SogoSyokaiHandler {
     }
 
     /**
-     * 他市町村住所地特例情報の取得
+     * 他市町村住所地特例情報の取得です。
      *
      * @param tashichosonjushochitokurei TashichosonJushochiTokurei
      * @param 識別コード ShikibetsuCode
@@ -199,7 +195,7 @@ public class SogoSyokaiHandler {
     }
 
     /**
-     * 適用除外者情報の取得
+     * 適用除外者情報の取得です。
      *
      * @param tekiyojogaisha TekiyoJogaisha
      * @param 識別コード ShikibetsuCode
