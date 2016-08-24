@@ -1192,7 +1192,7 @@ public class NinteiTsuchishoHakkoHandler {
 
         printEntity.setHakkoYMD(発行日);
         printEntity.setBunshoNo(div.getCcdKobetsuNinteiKyakkaBunshoBango().get文書番号());
-        printEntity.setTitle1(getタイトル(ConfigNameDBA.認定却下通知書));
+        printEntity.setTitle1(getタイトル(ConfigNameDBA.要介護認定却下通知書));
         printEntity.setTsuchibun1(get通知文情報通知文(パネル, 通知文_パターン番号_1, 通知文_項目番号_1));
         printEntity.setTsuchibun2(get通知文情報通知文(パネル, 通知文_パターン番号_1, 通知文_項目番号_2));
         AtenaMeisho 被保険者氏名 = 画面選択データ.get被保険者氏名();
