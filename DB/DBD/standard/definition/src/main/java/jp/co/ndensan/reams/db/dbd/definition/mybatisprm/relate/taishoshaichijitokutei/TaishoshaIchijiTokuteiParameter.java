@@ -17,6 +17,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class TaishoshaIchijiTokuteiParameter implements IMyBatisParameter {
 
     private int 対象リスト;
