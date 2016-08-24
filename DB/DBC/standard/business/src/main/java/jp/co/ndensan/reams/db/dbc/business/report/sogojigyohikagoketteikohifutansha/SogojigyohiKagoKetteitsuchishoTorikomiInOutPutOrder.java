@@ -20,7 +20,7 @@ public enum SogojigyohiKagoKetteitsuchishoTorikomiInOutPutOrder implements IRepo
      */
     公費負担者番号(new RString("0134"), new RString("kohiFutanshaNo"), new RString("DbWT3061.\"kohiFutanshaNo\"")),
     /**
-     * 郵便番号			
+     * 郵便番号		
      */
     郵便番号(new RString("0019"), new RString("yubinNo"), new RString("DbWT0001.\"yubinNo\"")),
     /**

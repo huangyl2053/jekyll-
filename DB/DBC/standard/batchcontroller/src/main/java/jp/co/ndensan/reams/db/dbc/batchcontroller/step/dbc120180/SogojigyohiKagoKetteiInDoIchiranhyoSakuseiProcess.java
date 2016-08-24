@@ -246,10 +246,10 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
     private void do帳票のCSVファイル作成(SogojigyohiKagoKetteiInEntity entity,
             FlexibleYearMonth 処理年月, RDateTime 作成日時, boolean 集計Flag) {
         if (集計Flag) {
-            CSV明細作成(entity, 処理年月, 作成日時);
-            CSV集計作成(entity);
+            csv明細作成(entity, 処理年月, 作成日時);
+            csv集計作成(entity);
         } else {
-            CSV明細作成(entity, 処理年月, 作成日時);
+            csv明細作成(entity, 処理年月, 作成日時);
         }
 
         if (null != entity.get識別コード() && !entity.get識別コード().isEmpty()
@@ -260,7 +260,7 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
         }
     }
 
-    private void CSV明細作成(SogojigyohiKagoKetteiInEntity entity, FlexibleYearMonth 処理年月, RDateTime 作成日時) {
+    private void csv明細作成(SogojigyohiKagoKetteiInEntity entity, FlexibleYearMonth 処理年月, RDateTime 作成日時) {
         SogojigyohiKagoKetteiInCsvEntity output = new SogojigyohiKagoKetteiInCsvEntity();
         if (連番 == 1) {
             output.set処理年月(処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
@@ -295,7 +295,7 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
         sogojigyohiKagoKetteiInCsvWriter.writeLine(output);
     }
 
-    private void CSV集計作成(SogojigyohiKagoKetteiInEntity entity) {
+    private void csv集計作成(SogojigyohiKagoKetteiInEntity entity) {
         SogojigyohiKagoKetteiInCsvEntity output = new SogojigyohiKagoKetteiInCsvEntity();
         output.set証記載保険者番号(getColumnValue(entity.get証記載保険者番号()));
         output.set証記載保険者名(entity.get証記載保険者名());
