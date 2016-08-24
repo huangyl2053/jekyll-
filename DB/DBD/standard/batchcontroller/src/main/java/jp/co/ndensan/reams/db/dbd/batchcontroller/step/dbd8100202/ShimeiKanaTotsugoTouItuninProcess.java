@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShimeiKanaTotsugoTouItuninProcess extends BatchProcessBase<ShimeiKanaTotsugoTouItuninJohoEntity> {
 
-    private static final RString 一 = new RString("1");
     private static final RString 二 = new RString("2");
     private static final RString 空 = RString.EMPTY;
     private static final RString 三 = new RString("3");
