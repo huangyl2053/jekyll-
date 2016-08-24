@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.saishinsa;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsa.SaishinsaKetteiTsuchishoChohyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.saishinsa.SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -41,8 +41,6 @@ public class SaishinsaKetteiTsuchishoIchiranKohifutanshaBodyEditor
     private static final RString 調整負担額タイトル = new RString("公費負担額");
     private static final RString 介護給付費タイトル = new RString("介護給付費");
     private static final RString 高額介護サービス費タイトル = new RString("高額介護サービス費");
-
-    private static final CodeShubetsu 再審査結果コード = new CodeShubetsu("0020");
 
     /**
      * コンストラクタです
@@ -89,7 +87,8 @@ public class SaishinsaKetteiTsuchishoIchiranKohifutanshaBodyEditor
         }
         source.listLower_4 = 帳票出力対象データ.get申立事由();
         if (null != 帳票出力対象データ.get再審査結果コード()) {
-            RString 再審査結果 = CodeMaster.getCodeMeisho(再審査結果コード, 帳票出力対象データ.get再審査結果コード());
+            RString 再審査結果 = CodeMaster.getCodeMeisho(DBCCodeShubetsu.再審査結果コード.getコード(),
+                    帳票出力対象データ.get再審査結果コード());
             source.listLower_5 = 再審査結果;
         }
         source.listLower_6 = doカンマ編集(帳票出力対象データ.get原審単位数());

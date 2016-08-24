@@ -21,8 +21,6 @@
     </select>
     <resultMap id="resultMap_KyufuhiShinsaKetteiSeikyuMeisaihyoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhishinsaketteiseikyumeisaihyo.KyufuhiShinsaKetteiSeikyuMeisaihyoEntity" autoMapping="true">
         <id column="meisaiRirekiNo"/>
-        <id column="kogakuRirekiNo"/>
-        <id column="gokeiRirekiNo"/>
         <association property="明細テータ" resultMap="resultMap_DbWT1611SinsaKetteiSeikyuMeisai"/>
         <association property="高額テータ" resultMap="resultMap_DbWT1612SinsaKetteiSeikyuKogaku"/>
         <association property="合計テータ" resultMap="resultMap_DbWT1613SinsaKetteiSeikyuGokei"/>

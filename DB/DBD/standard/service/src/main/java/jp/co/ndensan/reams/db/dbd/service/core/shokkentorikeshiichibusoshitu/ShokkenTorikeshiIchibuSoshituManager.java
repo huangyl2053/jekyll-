@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbd.business.core.shokkentorikeshiichibusoshitu.ShokkenTorikeshiNinteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbd.business.core.shokkentorikeshiichibusoshitu.ShokkenTorikeshiNinteiJohoKonkaiBusiness;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shokkentorikeshiichibusoshitu.ShokkenTorikeshiNinteiJohoKonkaiEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shokkentorikeshiichibusoshitu.IShokkenTorikeshiIchibuSoshituMapper;
@@ -17,16 +16,19 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4101NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4102NinteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4121ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.RenrakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4102NinteiKekkaJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5150RenrakusakiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbV4001JukyushaDaichoAliveDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
@@ -50,6 +52,7 @@ public class ShokkenTorikeshiIchibuSoshituManager {
     private final DbT4101NinteiShinseiJohoDac 介護認定申請情報Dac;
     private final DbT4001JukyushaDaichoDac 受給者台帳Dac;
     private final DbT4102NinteiKekkaJohoDac 認定結果情報Dac;
+    private final DbT4121ShinseiRirekiJohoDac 申請履歴情報Dac;
 
     /**
      * コンストラクタです。
@@ -61,6 +64,7 @@ public class ShokkenTorikeshiIchibuSoshituManager {
         this.介護認定申請情報Dac = InstanceProvider.create(DbT4101NinteiShinseiJohoDac.class);
         this.受給者台帳Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
         this.認定結果情報Dac = InstanceProvider.create(DbT4102NinteiKekkaJohoDac.class);
+        this.申請履歴情報Dac = InstanceProvider.create(DbT4121ShinseiRirekiJohoDac.class);
     }
 
     /**
@@ -85,7 +89,7 @@ public class ShokkenTorikeshiIchibuSoshituManager {
         IShokkenTorikeshiIchibuSoshituMapper mapper = mapperProvider.create(IShokkenTorikeshiIchibuSoshituMapper.class);
         List<ShokkenTorikeshiNinteiJohoKonkaiEntity> list = mapper.select今回情報(申請書管理番号);
         if (list.isEmpty()) {
-            return SearchResult.of(Collections.<ShokkenTorikeshiNinteiJohoBusiness>emptyList(), 0, false);
+            return SearchResult.of(Collections.<ShokkenTorikeshiNinteiJohoKonkaiBusiness>emptyList(), 0, false);
         }
         List<ShokkenTorikeshiNinteiJohoKonkaiBusiness> businessList = new ArrayList<>();
         for (ShokkenTorikeshiNinteiJohoKonkaiEntity entity : list) {
@@ -189,5 +193,20 @@ public class ShokkenTorikeshiIchibuSoshituManager {
         DbT4102NinteiKekkaJohoEntity entity = 認定結果情報.toEntity();
         entity.setState(state);
         return 認定結果情報Dac.save(entity);
+    }
+
+    /**
+     * 申請履歴情報を更新します。
+     *
+     * @param 申請履歴情報 申請履歴情報
+     * @param state 更新状態
+     *
+     * @return 更新件数
+     */
+    @Transaction
+    public int save申請履歴情報(DbT4121ShinseiRirekiJoho 申請履歴情報, EntityDataState state) {
+        DbT4121ShinseiRirekiJohoEntity entity = 申請履歴情報.toEntity();
+        entity.setState(state);
+        return 申請履歴情報Dac.insert(entity);
     }
 }

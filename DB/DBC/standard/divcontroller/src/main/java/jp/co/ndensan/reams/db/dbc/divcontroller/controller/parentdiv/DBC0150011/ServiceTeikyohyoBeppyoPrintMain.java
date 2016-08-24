@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0150011
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0150011.ServiceTeikyohyoBeppyoPrintMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0150011.ServiceTeikyohyoBeppyoPrintMainHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0150011.ServiceTeikyohyoBeppyoPrintMainValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.teikyohyobeppyo.TeikyohyoBeppyoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -33,11 +35,16 @@ public class ServiceTeikyohyoBeppyoPrintMain {
         return ServiceTeikyohyoBeppyoPrintMainHandler.of(div);
     }
 
+    private ServiceTeikyohyoBeppyoPrintMainValidationHandler getValidationHandler(
+            ServiceTeikyohyoBeppyoPrintMainDiv div) {
+        return new ServiceTeikyohyoBeppyoPrintMainValidationHandler(div);
+    }
+
     /**
      * 画面初期化のメソッドます。
      *
      * @param div ServiceTeikyohyoBeppyoPrintMainDiv
-     * @return ResponseData
+     * @return ResponseData<ServiceTeikyohyoBeppyoPrintMainDiv>
      */
     public ResponseData<ServiceTeikyohyoBeppyoPrintMainDiv> onLoad(ServiceTeikyohyoBeppyoPrintMainDiv div) {
 
@@ -45,7 +52,7 @@ public class ServiceTeikyohyoBeppyoPrintMain {
         HihokenshaNo 被保険者番号 = key.get被保険者番号();
         ShikibetsuCode 識別コード = key.get識別コード();
         div.getCcdKaigoAtenaInfo().initialize(識別コード);
-        if (被保険者番号.isEmpty() || RString.isNullOrEmpty(被保険者番号.value())) {
+        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().
                     replace(引数_被保険者番号なし.toString()));
         } else {
@@ -59,14 +66,30 @@ public class ServiceTeikyohyoBeppyoPrintMain {
     /**
      * 「発行する」ボタン押下時のイベントです。
      *
-     * @param div KyodoIdoRenrakuhyoTorokuMainDiv
-     * @return ResponseData
+     * @param div ServiceTeikyohyoBeppyoPrintMainDiv
+     * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(ServiceTeikyohyoBeppyoPrintMainDiv div) {
 
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         TeikyohyoBeppyoManager manager = TeikyohyoBeppyoManager.createInstance();
         return ResponseData.of(getHandler(div).to帳票発行処理(被保険者番号, manager)).respond();
+    }
+
+    /**
+     * 「発行する」ボタン押下時の入力チェックです。
+     *
+     * @param div ServiceTeikyohyoBeppyoPrintMainDiv
+     * @return ResponseData<ServiceTeikyohyoBeppyoPrintMainDiv>
+     */
+    public ResponseData<ServiceTeikyohyoBeppyoPrintMainDiv> onClick_btnReportPublishCheck(
+            ServiceTeikyohyoBeppyoPrintMainDiv div) {
+
+        ValidationMessageControlPairs valid = getValidationHandler(div).validate();
+        if (valid.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(valid).respond();
+        }
+        return ResponseData.of(div).respond();
     }
 
 }

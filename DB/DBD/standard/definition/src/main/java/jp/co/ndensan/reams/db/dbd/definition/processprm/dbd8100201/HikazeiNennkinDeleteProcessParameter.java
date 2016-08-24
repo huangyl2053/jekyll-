@@ -36,7 +36,7 @@ public class HikazeiNennkinDeleteProcessParameter implements IBatchProcessParame
      * @param 登録区分 登録区分
      * @return HikazeiNennkinDeleteMybatisParameter
      */
-    public HikazeiNennkinDeleteMybatisParameter MybatisParameter(FlexibleYear 処理年度,
+    public HikazeiNennkinDeleteMybatisParameter mybatisParameter(FlexibleYear 処理年度,
             RString 処理区分,
             RString 対象月,
             RString 登録区分) {

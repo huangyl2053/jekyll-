@@ -27,7 +27,7 @@ public class HikazeiNennkinnTaishouSyaDeleteProcess extends BatchProcessBase<DbT
     protected IBatchReader createReader() {
 
         if (processParameter.get処理状態().equals(new RString("3"))) {
-            return new BatchDbReader(MAPPERPATH_削除, processParameter.MybatisParameter(processParameter.get処理年度(),
+            return new BatchDbReader(MAPPERPATH_削除, processParameter.mybatisParameter(processParameter.get処理年度(),
                     processParameter.get処理区分(), processParameter.get対象月(), processParameter.get登録区分()));
         }
         return null;

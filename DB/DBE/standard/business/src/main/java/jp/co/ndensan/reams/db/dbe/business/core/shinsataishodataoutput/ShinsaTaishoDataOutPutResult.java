@@ -142,7 +142,11 @@ public class ShinsaTaishoDataOutPutResult {
         eucCsvEntity.set認知機能及び状態安定性から推定される給付区分コード(entity.get認知機能及び状態安定性から推定される給付区分コード());
         eucCsvEntity.set申請書管理番号(entity.get申請書管理番号());
         eucCsvEntity.set厚労省IF識別コード(entity.get厚労省IF識別コード());
-        eucCsvEntity.set厚労省認定ソフトのバージョン(KoroshoIfShikibetsuCode.toValue(entity.get厚労省IF識別コード()).get名称());
+        if (entity.get厚労省IF識別コード() == null) {
+            eucCsvEntity.set厚労省認定ソフトのバージョン(null);
+        } else {
+            eucCsvEntity.set厚労省認定ソフトのバージョン(KoroshoIfShikibetsuCode.toValue(entity.get厚労省IF識別コード()).get名称());
+        }
         eucCsvEntity.set証記載保険者番号(entity.get証記載保険者番号());
         eucCsvEntity.set被保険者番号(entity.get被保険者番号());
         eucCsvEntity.set認定申請年月日(setDateFormat(entity.get認定申請年月日()));
@@ -166,19 +170,40 @@ public class ShinsaTaishoDataOutPutResult {
         eucCsvEntity.set認定調査員コード(entity.get認定調査員コード());
         eucCsvEntity.set調査員氏名(entity.get調査員氏名());
         eucCsvEntity.set概況特記テキストイメージ区分コード(entity.get概況特記テキストイメージ区分コード());
-        eucCsvEntity.set概況特記テキストイメージ区分(TokkijikoTextImageKubun.toValue(entity.get概況特記テキストイメージ区分コード()).get名称());
+        if (entity.get概況特記テキストイメージ区分コード() == null) {
+            eucCsvEntity.set概況特記テキストイメージ区分(null);
+        } else {
+            eucCsvEntity.set概況特記テキストイメージ区分(TokkijikoTextImageKubun.toValue(entity.get概況特記テキストイメージ区分コード()).get名称());
+        }
         eucCsvEntity.set認定調査依頼区分コード(entity.get認定調査依頼区分コード());
-        eucCsvEntity.set認定調査依頼区分(NinteiChousaIraiKubunCode.toValue(entity.get認定調査依頼区分コード()).get名称());
+        if (entity.get認定調査依頼区分コード() == null) {
+            eucCsvEntity.set認定調査依頼区分(null);
+        } else {
+            eucCsvEntity.set認定調査依頼区分(NinteiChousaIraiKubunCode.toValue(entity.get認定調査依頼区分コード()).get名称());
+        }
+
         eucCsvEntity.set認定調査回数(entity.get認定調査回数());
         eucCsvEntity.set認定調査実施年月日(setDateFormat(entity.get認定調査実施年月日()));
         eucCsvEntity.set認定調査受領年月日(setDateFormat(entity.get認定調査受領年月日()));
         eucCsvEntity.set認定調査区分コード(entity.get認定調査区分コード());
-        eucCsvEntity.set認定調査区分(ChosaKubun.toValue(entity.get認定調査区分コード()).get名称());
+        if (entity.get認定調査区分コード() == null) {
+            eucCsvEntity.set認定調査区分(null);
+        } else {
+            eucCsvEntity.set認定調査区分(ChosaKubun.toValue(entity.get認定調査区分コード()).get名称());
+        }
         eucCsvEntity.set認定調査実施場所コード(entity.get認定調査実施場所コード());
-        eucCsvEntity.set認定調査実施場所(ChosaJisshiBashoCode.toValue(entity.get認定調査実施場所コード()).get名称());
+        if (entity.get認定調査実施場所コード() == null) {
+            eucCsvEntity.set認定調査実施場所(null);
+        } else {
+            eucCsvEntity.set認定調査実施場所(ChosaJisshiBashoCode.toValue(entity.get認定調査実施場所コード()).get名称());
+        }
         eucCsvEntity.set認定調査実施場所名称(entity.get認定調査実施場所名称());
         eucCsvEntity.set認定調査サービス区分コード(entity.get認定調査サービス区分コード());
-        eucCsvEntity.set認定調査サービス区分(ServiceKubunCode.toValue(entity.get認定調査サービス区分コード()).get名称());
+        if (entity.get認定調査サービス区分コード() == null) {
+            eucCsvEntity.set認定調査サービス区分(null);
+        } else {
+            eucCsvEntity.set認定調査サービス区分(ServiceKubunCode.toValue(entity.get認定調査サービス区分コード()).get名称());
+        }
         eucCsvEntity.set利用施設名(entity.get利用施設名());
         eucCsvEntity.set利用施設住所(entity.get利用施設住所());
         eucCsvEntity.set利用施設電話番号(entity.get利用施設電話番号());

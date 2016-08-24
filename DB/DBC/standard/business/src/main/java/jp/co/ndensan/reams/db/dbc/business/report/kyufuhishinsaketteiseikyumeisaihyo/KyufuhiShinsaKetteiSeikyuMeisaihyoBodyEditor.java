@@ -62,6 +62,7 @@ public class KyufuhiShinsaKetteiSeikyuMeisaihyoBodyEditor implements IKyufuhiShi
             source.gokeiRiyoshaFutangaku = doカンマ編集(帳票出力対象.get合計テータ().get合計_利用者負担額());
             source.gokeiKohiFutangaku = doカンマ編集(帳票出力対象.get合計テータ().get合計_公費負担額());
         }
+        source.listMeisai_12 = getColumnValue(帳票出力対象.get明細テータ().getサービス種類コード());
         return source;
     }
 

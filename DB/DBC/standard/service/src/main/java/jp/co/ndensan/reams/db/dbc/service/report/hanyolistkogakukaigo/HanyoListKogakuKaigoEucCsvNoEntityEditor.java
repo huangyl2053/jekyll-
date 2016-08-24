@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
@@ -41,7 +42,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
@@ -74,8 +74,6 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
     private static final RString 入所施設種類_11 = new RString("11");
     private static final RString 入所施設種類_12 = new RString("12");
     private static final RString 入所施設種類_21 = new RString("21");
-    private static final RString 取得コード種別 = new RString("0007");
-    private static final RString 喪失事由コード種別 = new RString("0010");
     private static final RString RST_月 = new RString("月");
     private static final RString RST_生 = new RString("生");
     private static final RString RST_市 = new RString("市");
@@ -154,7 +152,7 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
         RString 資格取得事由コード = entity.get資格取得事由コード();
         if (資格取得事由コード != null && !資格取得事由コード.isEmpty()) {
             RString 略称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
-                    new CodeShubetsu(取得コード種別), new Code(資格取得事由コード),
+                    DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), new Code(資格取得事由コード),
                     FlexibleDate.getNowDate());
             csvEntity.set資格取得事由(略称 != null
                     ? 略称
@@ -167,7 +165,7 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
         RString 喪失事由コード = entity.get資格喪失事由コード();
         if (喪失事由コード != null && !喪失事由コード.isEmpty()) {
             RString 略称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
-                    new CodeShubetsu(喪失事由コード種別), new Code(喪失事由コード),
+                    DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu(), new Code(喪失事由コード),
                     FlexibleDate.getNowDate());
             csvEntity.set喪失事由(略称 != null
                     ? 略称

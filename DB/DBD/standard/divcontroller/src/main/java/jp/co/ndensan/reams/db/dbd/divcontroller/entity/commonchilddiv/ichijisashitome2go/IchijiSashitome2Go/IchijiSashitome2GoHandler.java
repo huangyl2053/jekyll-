@@ -92,7 +92,7 @@ public class IchijiSashitome2GoHandler {
         if (支払方法変更管理業務概念 != null
                 && 支払方法変更管理業務概念.get被保険者番号().value().equals(div.getKey_HihokenshaNo())
                 && 支払方法変更管理業務概念.get管理区分().equals(ShiharaiHenkoKanriKubun._２号差止.getコード())
-                && 支払方法変更管理業務概念.get登録区分().equals(get登録区分(押下ボタン))) {
+                && 登録区分(押下ボタン, 支払方法変更管理業務概念.get登録区分())) {
             if (押下ボタン.equals(_２号一時差止登録) || 押下ボタン.equals(_２号一時差止解除)) {
                 for (ShiharaiHohoHenkoSashitome shiharaiHohoHenkoSashitome : 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList()) {
                     if (shiharaiHohoHenkoSashitome.get証記載保険者番号().equals(支払方法変更管理業務概念.get証記載保険者番号())
@@ -197,21 +197,31 @@ public class IchijiSashitome2GoHandler {
         setValue(押下ボタン, shiharaiHohoHenko);
     }
 
-    private RString get登録区分(RString 押下ボタン) {
-        RString torokuKubun = new RString("");
+    private boolean 登録区分(RString 押下ボタン, RString 登録区分) {
+        boolean 区分 = false;
         switch (押下ボタン.toString()) {
             case "２号予告者登録":
             case "２号弁明書受理":
-                torokuKubun = ShiharaiHenkoTorokuKubun._２号予告登録者.getコード();
+                if (登録区分.equals(ShiharaiHenkoTorokuKubun._２号予告登録者.getコード())) {
+                    区分 = true;
+                }
                 break;
             case "２号一時差止登録":
+                if (登録区分.equals(ShiharaiHenkoTorokuKubun._２号予告登録者.getコード())
+                        || 登録区分.equals(ShiharaiHenkoTorokuKubun._２号差止登録.getコード())) {
+                    区分 = true;
+                }
+                break;
             case "２号一時差止解除":
-                torokuKubun = ShiharaiHenkoTorokuKubun._２号差止登録.getコード();
+                if (登録区分.equals(ShiharaiHenkoTorokuKubun._２号差止登録.getコード())) {
+                    区分 = true;
+                }
                 break;
             default:
                 break;
         }
-        return torokuKubun;
+        return 区分;
+
     }
 
     private void setStatus(RString 押下ボタン, List<KeyValueDataSource> shiryoJokyoSource) {
@@ -471,15 +481,16 @@ public class IchijiSashitome2GoHandler {
     }
 
     private List<DbT4024ShiharaiHohoHenkoSashitomeEntity> get２号一時差止の登録Entity() {
+        ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(IchijiSashitome2GoHandler.二号一時差止ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         List<DbT4024ShiharaiHohoHenkoSashitomeEntity> list = new ArrayList();
         DbT4024ShiharaiHohoHenkoSashitomeEntity entity = new DbT4024ShiharaiHohoHenkoSashitomeEntity();
-        int 連番 = 0;
         entity.setShoKisaiHokenshaNo(証記載保険者番号());
         entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
         entity.setKanriKubun(ShiharaiHenkoKanriKubun._２号差止.getコード());
         entity.setRirekiNo(get最大履歴番号());
         entity.setJohoBunruiKubun(ShiharaiHenkoJohoBunruiKubun.差止情報.getコード());
-        entity.setRenNo(連番);
+        entity.setRenNo(支払方法変更差止連番(entity.getShoKisaiHokenshaNo(), entity.getHihokenshaNo(), entity.getKanriKubun(),
+                entity.getRirekiNo(), entity.getJohoBunruiKubun(), 支払方法変更管理業務概念));
         entity.setSashitomeKojoJotaiKubun(ShiharaiHenkoSashitomeKojoJotaiKubun.登録.getコード());
         entity.setSashitome_KetteiYMD(div.getTxtSashitomeKetteiYMD().getValue());
         entity.setSashitome_TsuchiSaiHakkoFlag(false);
@@ -580,6 +591,21 @@ public class IchijiSashitome2GoHandler {
         } else {
             return Integer.parseInt(div.getKey_MaxRirekiNo().toString());
         }
+    }
+
+    private int 支払方法変更差止連番(ShoKisaiHokenshaNo shoKisaiHokenshaNo, HihokenshaNo hihokenshaNo, RString kanriKubun, int rirekiNo,
+            RString johoBunruiKubun, ShiharaiHohoHenko 支払方法変更管理業務概念) {
+        int 連番 = 0;
+        for (ShiharaiHohoHenkoSashitome shiharaiHohoHenkoSashitome : 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList()) {
+            if (shiharaiHohoHenkoSashitome.get証記載保険者番号().equals(shoKisaiHokenshaNo)
+                    && shiharaiHohoHenkoSashitome.get被保険者番号().equals(hihokenshaNo)
+                    && shiharaiHohoHenkoSashitome.get管理区分().equals(kanriKubun)
+                    && shiharaiHohoHenkoSashitome.get履歴番号() == rirekiNo
+                    && shiharaiHohoHenkoSashitome.get情報分類区分().equals(johoBunruiKubun)) {
+                連番 = shiharaiHohoHenkoSashitome.get連番();
+            }
+        }
+        return 連番 + 1;
     }
 
     private ShoKisaiHokenshaNo 証記載保険者番号() {

@@ -19,6 +19,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -74,10 +78,13 @@ public class NijihanteiKekkaTorokuMobileOutPutProcess extends BatchProcessBase<N
     @Override
     protected void process(NijihanteiKekkaTorokuMobileRelateEntity entity) {
         eucCsvWriter.writeLine(new ShinsaTaishoDataOutPutResult().setNijihanteiKekkaTorokuMobileEucCsvEntity(entity));
-//        ReadOnlySharedFileEntryDescriptor ro_sfed = new ReadOnlySharedFileEntryDescriptor(
-//                new FilesystemName(entity.get証記載保険者番号().concat(entity.get被保険者番号())),entity.getイメージ共有ファイルID());
-//        SharedFile.getEntryInfo(ro_sfed);
-
+        if (entity.getイメージ共有ファイルID() != null) {
+            ReadOnlySharedFileEntryDescriptor ro_sfed = new ReadOnlySharedFileEntryDescriptor(
+                    new FilesystemName(entity.get証記載保険者番号().concat(entity.get被保険者番号())), entity.getイメージ共有ファイルID());
+            RString tmpPath = Path.getTmpDirectoryPath();
+            FilesystemPath filesystemPath = new FilesystemPath(tmpPath);
+            SharedFile.copyToLocal(ro_sfed, filesystemPath);
+        }
     }
 
     @Override

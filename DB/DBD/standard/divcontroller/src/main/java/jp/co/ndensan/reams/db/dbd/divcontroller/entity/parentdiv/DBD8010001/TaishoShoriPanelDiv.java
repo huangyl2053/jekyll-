@@ -43,6 +43,8 @@ public class TaishoShoriPanelDiv extends Panel {
     private RString hdnNendo;
     @JsonProperty("hdnLine")
     private RString hdnLine;
+    @JsonProperty("hdnFilePath")
+    private RString hdnFilePath;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -147,6 +149,24 @@ public class TaishoShoriPanelDiv extends Panel {
     @JsonProperty("hdnLine")
     public void setHdnLine(RString hdnLine) {
         this.hdnLine = hdnLine;
+    }
+
+    /*
+     * gethdnFilePath
+     * @return hdnFilePath
+     */
+    @JsonProperty("hdnFilePath")
+    public RString getHdnFilePath() {
+        return hdnFilePath;
+    }
+
+    /*
+     * sethdnFilePath
+     * @param hdnFilePath hdnFilePath
+     */
+    @JsonProperty("hdnFilePath")
+    public void setHdnFilePath(RString hdnFilePath) {
+        this.hdnFilePath = hdnFilePath;
     }
 
     /*

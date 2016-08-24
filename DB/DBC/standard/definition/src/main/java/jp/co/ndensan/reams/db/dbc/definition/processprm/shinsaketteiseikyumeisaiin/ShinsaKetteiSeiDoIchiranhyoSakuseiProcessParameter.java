@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.shinsaketteiseikyumeisaiin;
+package jp.co.ndensan.reams.db.dbc.definition.processprm.shinsaketteiseikyumeisaiin;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -22,5 +21,4 @@ public class ShinsaKetteiSeiDoIchiranhyoSakuseiProcessParameter implements IBatc
 
     private ReportId 帳票ID;
     private RString 出力順ID;
-    private RDateTime システム日付;
 }

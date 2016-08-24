@@ -6,12 +6,12 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010001;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,9 +36,15 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -46,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
@@ -65,6 +72,11 @@ public class TaishoShoriHandler {
     private static final RString 固定文字_月 = new RString("月");
     private static final RString 対象ファイル_年次 = new RString("Z51*****.DTA");
     private static final RString 対象ファイル_月次 = new RString("Z52*****.DTA");
+    private static final RString HOSHI = new RString("?");
+    private static final RString 対象ファイル開始_年次 = new RString("Z5100000_");
+    private static final RString 対象ファイル開始_月次 = new RString("Z5200000_");
+    private static final RString 対象ファイル終了 = new RString(".DTA");
+    private static final RString 横 = new RString("_");
 
     /**
      * 画面タイトルのenum
@@ -186,7 +198,7 @@ public class TaishoShoriHandler {
         List<ShoriDateKanri> 編集後用削除情報 = new ArrayList<>();
         for (dgShoriSettei_Row 処理設定 : div.getDgShoriSettei().getDataSource()) {
             if (処理設定.getTxtShoriJotai().getSelectedIndex() != 0) {
-                ShoriDateKanri 更新対象 = get更新対象(画面更新用情報, 処理設定);
+                ShoriDateKanri 更新対象 = get更新対象(画面更新用情報, 処理設定.getHdnNendoNaiRenban());
                 if (null != 更新対象) {
                     編集後用削除情報.add(更新対象);
                 }
@@ -195,19 +207,20 @@ public class TaishoShoriHandler {
         }
 
         if (!編集後用登録情報.isEmpty()) {
-            return new ShoriDateKanriManager().save処理日付管理リスト(編集後用登録情報, 編集後用削除情報);
+            ShoriDateKanriManager manager = ShoriDateKanriManager.createInstance();
+            manager.save処理日付管理リスト(編集後用登録情報, 編集後用削除情報);
         }
         return true;
     }
 
     /**
      * ファイルの読込処理
+     *
      */
     public void readFile() {
-        RString filePath = div.getUplTaishoFuairu().getDefaultOpenDialogPath();
         RString line = RString.EMPTY;
         try {
-            BufferedReader in = new BufferedReader(new FileReader(filePath.toString()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(div.getHdnFilePath().toString()), "SJIS"));
             line = new RString(in.readLine());
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TaishoShoriHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -220,23 +233,44 @@ public class TaishoShoriHandler {
 
     /**
      * ファイルupload処理
+     *
+     * @param 画面更新用情報 List<ShoriDateKanri>
      */
-    public void upload() {
-        RString line = div.getHdnLine();
-        RString filePath = RString.EMPTY;
-        try (BufferedWriter out = new BufferedWriter(new FileWriter(filePath.toString()))) {
-            out.write(line.toString());
-            out.flush();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(TaishoShoriHandler.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(TaishoShoriHandler.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void upload(List<ShoriDateKanri> 画面更新用情報) {
+        SharedFileDescriptor sharedFileDescriptor
+                = new SharedFileDescriptor(GyomuCode.DB介護保険, new FilesystemName(getFileName()));
 
+        SharedFile.deleteOldestEntry(sharedFileDescriptor);
+        SharedFile.defineSharedFile(sharedFileDescriptor, 1, Arrays.asList(HOSHI), null, true, null);
+        SharedFile.copyToSharedFile(sharedFileDescriptor, new FilesystemPath(div.getHdnFilePath()), new CopyToSharedFileOpts());
+
+        List<ShoriDateKanri> 編集後用登録情報 = new ArrayList<>();
+        List<ShoriDateKanri> 編集後用削除情報 = new ArrayList<>();
+        dgTaishoShoriItchiran_Row row = div.getDgTaishoShoriItchiran().getSelectedItems().get(0);
+        ShoriDateKanri 更新対象 = get更新対象(画面更新用情報, row.getHdnNendoNaiRenban());
+        if (null != 更新対象) {
+            編集後用削除情報.add(更新対象);
+        }
+        編集後用登録情報.add(edit更新対象(更新対象, null, row));
+
+        ShoriDateKanriManager manager = ShoriDateKanriManager.createInstance();
+        manager.save処理日付管理リスト(編集後用登録情報, 編集後用削除情報);
     }
 
-    private ShoriDateKanri get更新対象(List<ShoriDateKanri> 画面更新用情報, dgShoriSettei_Row 処理設定) {
-        RString 年度内連番 = 処理設定.getHdnNendoNaiRenban();
+    private RString getFileName() {
+        dgTaishoShoriItchiran_Row 一覧対象 = div.getDgTaishoShoriItchiran().getSelectedItems().get(0);
+        RStringBuilder build = new RStringBuilder();
+        build.append(一覧対象.getHdnShoriCode().equals(処理_年次) ? 対象ファイル開始_年次 : 対象ファイル開始_月次)
+                .append(div.getDdlShoriNendo().getSelectedKey())
+                .append(一覧対象.getHdnShoriCode())
+                .append(一覧対象.getHdnTukiCode())
+                .append(横)
+                .append(div.getDdlShichosonshitei().getSelectedKey())
+                .append(対象ファイル終了);
+        return build.toRString();
+    }
+
+    private ShoriDateKanri get更新対象(List<ShoriDateKanri> 画面更新用情報, RString 年度内連番) {
         for (ShoriDateKanri 画面情報 : 画面更新用情報) {
             if (年度内連番.equals(画面情報.get年度内連番())) {
                 return 画面情報;
@@ -431,7 +465,10 @@ public class TaishoShoriHandler {
                 if (row.getHdnNendoNaiRenban().equals(target.get年度内連番())) {
                     if (!target.get処理枝番().equals(ShoriJotaiKubun.未処理.getコード())) {
                         row.setTxtShoriJotai(ShoriJotaiKubun.toValue(target.get処理枝番()).get名称());
-                        row.setTxtShoriNichiji(target.get基準日時().getRDateTime().format和暦("GYY.MM.DD HH:mm:ss"));
+                        YMDHMS 基準日時 = target.get基準日時();
+                        if (null != 基準日時 && !基準日時.isEmpty()) {
+                            row.setTxtShoriNichiji(target.get基準日時().getRDateTime().format和暦("GYY.MM.DD HH:mm:ss"));
+                        }
                     }
                     break;
                 }

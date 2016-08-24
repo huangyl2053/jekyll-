@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput;
 
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -110,6 +111,7 @@ public class NijihanteiKekkaTorokuMobileRelateEntity {
     private RString 認定調査特記事項受領年月日;
     private RString 住宅改修改修箇所;
     private RString 市町村特別給付サービス種類名;
+    private RString 市町村名称;
     private RString 介護保険給付以外の在宅サービス種類名;
     private RString 概況特記事項主訴;
     private RString 概況特記事項家族状況;
@@ -135,5 +137,5 @@ public class NijihanteiKekkaTorokuMobileRelateEntity {
     private RString 調査項目連番;
     private RString 調査項目文言;
     private RString 内容;
-    private RString イメージ共有ファイルID;
+    private RDateTime イメージ共有ファイルID;
 }

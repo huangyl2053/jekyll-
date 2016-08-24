@@ -205,7 +205,6 @@ public class NinteiShinseiTodokedesha {
 
     private void setその他(NinteiShinseiTodokedeshaDiv div) {
         div.getDdlShinseiKankeisha().setSelectedIndex(0);
-        div.getDdlTodokledeDaikoKubun().setSelectedIndex(0);
         div.getTxtHonninKankeisei().clearValue();
         div.getTxtJigyoshaCode().clearValue();
         div.getTxtJigyoshaName().clearValue();

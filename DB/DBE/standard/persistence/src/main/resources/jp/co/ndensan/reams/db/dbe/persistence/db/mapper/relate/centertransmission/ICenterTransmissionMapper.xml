@@ -21,7 +21,7 @@
             AND A."nijiHanteiYMD" <![CDATA[<=]]> #{nijiHanteiShuryoYMD}
         </if>
         UNION
-        SELECT B."shinseishoKanriNo"
+        (SELECT B."shinseishoKanriNo"
         FROM rgdb."DbT5130Shibo" B
         WHERE 1 = 1
         <if test="!isNijiHanteiKaishiYMDEmpty">
@@ -29,7 +29,7 @@
         </if>
         <if test="!isNijiHanteiShuryoYMDEmpty">
             AND B."nijiHanteiYMD" <![CDATA[<=]]> #{nijiHanteiShuryoYMD}
-        </if>
+        </if>)
         ORDER BY "shinseishoKanriNo" ASC
     </select>
 
@@ -186,7 +186,7 @@
 
     <select id="getCenterTransmissionData"
             resultOrdered="true"
-            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.ZenkaiChosaItemEntity"
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTransmissionEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionMybitisParamter"
             fetchSize="500">
         SELECT A."shinseishoKanriNo"
@@ -674,7 +674,7 @@
         <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")">#{code}</foreach>
         <if test="isTennyuShiboSyuturyoku">
             UNION
-            SELECT A."shinseishoKanriNo"
+            (SELECT A."shinseishoKanriNo"
             , A."koroshoIfShikibetsuCode"
             , A."shoKisaiHokenshaNo"
             , A."hihokenshaNo"
@@ -1165,10 +1165,10 @@
             </if>
             <if test="!isNijiHanteiShuryoYMDEmpty">
                 AND N."nijiHanteiYMD" <![CDATA[<=]]> #{nijiHanteiShuryoYMD}
-            </if>
-            ORDER BY
-            "shinseishoKanriNo" ASC
+            </if>)
         </if>
+        ORDER BY
+        "shinseishoKanriNo" ASC
     </select>
 
     <sql id="getTennyuShiboJoho">

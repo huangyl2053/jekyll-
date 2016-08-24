@@ -4,4 +4,4 @@ ninteiChosaKekkaJohoChushutsuYMD,UDD015YMD,FlexibleDate,,,,,認定調査結果�
 ninteiChosaIkenshoKekkaJohoChushutsuYMD,UDD015YMD,FlexibleDate,,,,,認定調査・意見書結果情報抽出年月日,A
 ichijihanteiChushutsuYMD,UDD015YMD,FlexibleDate,,,,,一次判定情報抽出年月日,A
 shinsakaiKekkaJohoChushutsuYMD,UDD015YMD,FlexibleDate,,,,,審査会結果情報抽出年月日,A
-CenterSoshinChushutsuYMD,UDD015YMD,FlexibleDate,,,,,センター送信情報抽出年月日,A
+centerSoshinChushutsuYMD,UDD015YMD,FlexibleDate,,,,,センター送信情報抽出年月日,A

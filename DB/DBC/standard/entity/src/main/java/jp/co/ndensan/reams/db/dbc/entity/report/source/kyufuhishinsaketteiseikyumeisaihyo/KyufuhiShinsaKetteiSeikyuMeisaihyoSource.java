@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 介護給付費等審査決定請求明細表のSourceクラスです。
  *
- * @reamsid_L DBC-2500-010 jiangxiaolong
+ * @reamsid_L DBC-2500-030 jiangxiaolong
  */
 public class KyufuhiShinsaKetteiSeikyuMeisaihyoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -84,6 +84,8 @@ public class KyufuhiShinsaKetteiSeikyuMeisaihyoSource implements IReportSource {
     public RString gokeiRiyoshaFutangaku;
     @ReportItem(name = "gokeiKohiFutangaku", length = 17, order = 36)
     public RString gokeiKohiFutangaku;
+    @ReportItem(name = "listMeisai_12", length = 18, order = 37)
+    public RString listMeisai_12;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -131,6 +133,7 @@ public class KyufuhiShinsaKetteiSeikyuMeisaihyoSource implements IReportSource {
         gokeiKingaku,
         gokeiKaigoKyufugaku,
         gokeiRiyoshaFutangaku,
-        gokeiKohiFutangaku
+        gokeiKohiFutangaku,
+        listMeisai_12
     }
 }

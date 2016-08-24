@@ -46,8 +46,12 @@ public class NinteiInputHandler {
      */
     public void initialize(NinteiInputDataPassModel model) {
         div.setHdnShinseishoKanriNo(model.get申請書管理番号() == null ? RString.EMPTY : model.get申請書管理番号().value());
-        div.getRadNinteiKubun().setSelectedKey(model.get認定区分());
-        div.getChkMinashiKoshinNintei().setSelectedItemsByKey(model.getみなし更新認定());
+        if (!RString.isNullOrEmpty(model.get認定区分())) {
+            div.getRadNinteiKubun().setSelectedKey(model.get認定区分());
+        }
+        if (model.getみなし更新認定() != null && !model.getみなし更新認定().isEmpty()) {
+            div.getChkMinashiKoshinNintei().setSelectedItemsByKey(model.getみなし更新認定());
+        }
         div.setHdnDatabaseSubGyomuCode(model.getSubGyomuCode());
         div.setHdnKoroshoIfShikibetsuCode(model.get厚労省IFコード());
         div.getTxtNinteiYMD().setValue(model.get認定年月日());

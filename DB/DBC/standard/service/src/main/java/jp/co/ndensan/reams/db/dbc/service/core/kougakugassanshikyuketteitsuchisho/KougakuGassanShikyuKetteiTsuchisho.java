@@ -247,8 +247,8 @@ public class KougakuGassanShikyuKetteiTsuchisho {
 
     private RString get通知文文章(int パターン番号, int 項目番号) {
         TsuchishoTeikeibunFinder finder = new TsuchishoTeikeibunFinder();
-        TsuchishoTeikeibun tsuchishoTeikeibun = finder.get通知書定型文(SubGyomuCode.DBC介護給付, 通知文情報帳票ID,
-                KamokuCode.EMPTY, パターン番号, 項目番号, FlexibleDate.getNowDate());
+        TsuchishoTeikeibun tsuchishoTeikeibun = finder.get通知書定型文_最新適用開始日(SubGyomuCode.DBC介護給付, 通知文情報帳票ID,
+                KamokuCode.EMPTY, パターン番号, 項目番号);
         if (tsuchishoTeikeibun != null) {
             return tsuchishoTeikeibun.get文章();
         }

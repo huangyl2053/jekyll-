@@ -20,24 +20,31 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4101NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4102NinteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4121ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.kekkashosaijoho.KekkaShosaiJohoModel;
 import jp.co.ndensan.reams.db.dbz.business.core.kekkashosaijoho.KekkaShosaiJohoOutModel;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiBusinessCollection;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.RenrakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KekkaShosaiJoho.KekkaShosaiJoho.KekkaShosaiJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IParentResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -232,9 +239,10 @@ public class ShokkenTorikeshiIchibuNintei {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ShokkenTorikeshiNinteiJohoKonkaiBusiness 今回情報 = ViewStateHolder.get(ViewStateKeys.今回認定情報, ShokkenTorikeshiNinteiJohoKonkaiBusiness.class);
             ShokkenTorikeshiIchibuSoshituManager manager = ShokkenTorikeshiIchibuSoshituManager.createInstance();
+            ShinseishoKanriNo 採番申請書管理番号 = get申請書管理番号(今回情報.get市町村コード());
             if (メニュID_職権修正.equals(menuId) || メニュID_職権取消一部喪失.equals(menuId)) {
-                manager.save介護認定申請情報(handler.create登録用要介護認定申請情報(menuId, 今回情報), EntityDataState.Added);
-                manager.save受給者台帳(handler.create登録用受給者台帳(今回情報, menuId), EntityDataState.Added);
+                manager.save介護認定申請情報(handler.create登録用要介護認定申請情報(採番申請書管理番号, menuId, 今回情報), EntityDataState.Added);
+                manager.save受給者台帳(handler.create登録用受給者台帳(採番申請書管理番号, 今回情報, menuId), EntityDataState.Added);
             }
             DbT4101NinteiShinseiJoho joho = handler.create更新用介護認定申請情報(menuId, 今回情報);
             if (joho != null) {
@@ -245,12 +253,19 @@ public class ShokkenTorikeshiIchibuNintei {
             if (認定結果情報 != null) {
                 manager.save認定結果情報(認定結果情報, EntityDataState.Modified);
             }
+            DbT4121ShinseiRirekiJoho 申請履歴情報 = createHandler(div).create申請履歴情報(採番申請書管理番号, menuId, 今回情報);
+            if (申請履歴情報 != null) {
+                manager.save申請履歴情報(申請履歴情報, EntityDataState.Added);
+            }
         } else {
             return ResponseData.of(div).respond();
         }
 
         div.getCcdKaigoKanryoMessage().setSuccessMessage(createHandler(div).get完了メッセージ(menuId));
-        return ResponseData.of(div).setState(get完了状態(menuId));
+        IParentResponse<ShokkenTorikeshiIchibuNinteiDiv> response = ResponseData.of(div);
+        response.rootTitle(getRootTitle(menuId, div));
+        response.setState(get完了状態(menuId));
+        return response.respond();
 
     }
 
@@ -308,6 +323,16 @@ public class ShokkenTorikeshiIchibuNintei {
         }
         div.setTitle(title);
         return title;
+    }
+
+    private ShinseishoKanriNo get申請書管理番号(LasdecCode 市町村コード) {
+
+        RString 連番 = Saiban.get(SubGyomuCode.DBD介護受給, SaibanHanyokeyName.市町村コード_西暦_月.getコード()).nextString();
+        RStringBuilder rsb = new RStringBuilder();
+        rsb.append(市町村コード);
+        rsb.append(RDate.getNowDate().getYearMonth().toDateString());
+        rsb.append(連番);
+        return new ShinseishoKanriNo(rsb.toRString());
     }
 
     private ShokkenTorikeshiIchibuNinteiHandler createHandler(ShokkenTorikeshiIchibuNinteiDiv div) {
