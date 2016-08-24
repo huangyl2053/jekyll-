@@ -31,6 +31,7 @@ public class FutanWariaiRelateEntity
      * FutanWariaiRelateEntityのインターフェースクラスです。
      */
     public FutanWariaiRelateEntity() {
+        利用者負担割合明細 = new RiyoshaFutanWariaiMeisaiTempEntity();
         月別負担割合新 = new ArrayList<>();
         月別負担割合現 = new ArrayList<>();
     }
