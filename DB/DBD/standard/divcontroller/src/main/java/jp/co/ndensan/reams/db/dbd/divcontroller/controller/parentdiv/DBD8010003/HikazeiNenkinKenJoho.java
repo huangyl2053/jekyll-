@@ -269,19 +269,35 @@ public class HikazeiNenkinKenJoho {
     private void 保存チェック(ValidationMessageControlPairs pairs, HikazeiNenkinKenJohoDiv div) {
         HikazeiNenkinKenJohoValidationHandler validationHandler = getValidationHandler();
 
-        if (修正モード.equals(div.getHiddenModel()) || 新規モード.equals(div.getHiddenModel())) {
+        if (!div.getTbGenkisoNenkinNo().isDisabled()) {
             validationHandler.現基礎年金番号の未入力チェック(pairs, div);
-            if (TorokuKubun.画面登録.getコード().equals(div.getTbLoadCata().getValue()) || 新規モード.equals(div.getHiddenModel())) {
-                validationHandler.月の未入力チェック(pairs, div);
-                validationHandler.金額の未入力チェック(pairs, div);
-                validationHandler.作成年月日の未入力チェック(pairs, div);
-                validationHandler.対象年の未入力チェック(pairs, div);
-                validationHandler.氏名カナの未入力チェック(pairs, div);
-                validationHandler.性別の未入力チェック(pairs, div);
-                validationHandler.生年月日の未入力チェック(pairs, div);
-                validationHandler.氏名漢字の未入力チェック(pairs, div);
-                validationHandler.住所漢字の未入力チェック(pairs, div);
-            }
+        }
+        if (!div.getDdlTsuki().isDisabled()) {
+            validationHandler.月の未入力チェック(pairs, div);
+        }
+        if (!div.getTbKingaku().isDisabled()) {
+            validationHandler.金額の未入力チェック(pairs, div);
+        }
+        if (!div.getTbCreateDate().isDisabled()) {
+            validationHandler.作成年月日の未入力チェック(pairs, div);
+        }
+        if (!div.getTbTaishoNen().isDisabled()) {
+            validationHandler.対象年の未入力チェック(pairs, div);
+        }
+        if (div.getTbNameKana().isDisabled()) {
+            validationHandler.氏名カナの未入力チェック(pairs, div);
+        }
+        if (div.getDdlSex().isDisabled()) {
+            validationHandler.性別の未入力チェック(pairs, div);
+        }
+        if (div.getTbBirthday().isDisabled()) {
+            validationHandler.生年月日の未入力チェック(pairs, div);
+        }
+        if (div.getTbNameKanji().isDisabled()) {
+            validationHandler.氏名漢字の未入力チェック(pairs, div);
+        }
+        if (div.getTbAddressKanji().isDisabled()) {
+            validationHandler.住所漢字の未入力チェック(pairs, div);
         }
     }
 
