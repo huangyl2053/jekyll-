@@ -55,7 +55,8 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
     @Override
     protected void initialize() {
         super.initialize();
-        if (!getParameter().is一括発行フラグ()) {
+        if (getParameter() == null) {
+            getParameter() = new DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter();
             FlowParameters fp = FlowParameterAccessor.get();
             getParameter().set調定年度(fp.get(new RString("調定年度"), FlexibleYear.class));
             getParameter().set賦課年度(fp.get(new RString("賦課年度"), FlexibleYear.class));
