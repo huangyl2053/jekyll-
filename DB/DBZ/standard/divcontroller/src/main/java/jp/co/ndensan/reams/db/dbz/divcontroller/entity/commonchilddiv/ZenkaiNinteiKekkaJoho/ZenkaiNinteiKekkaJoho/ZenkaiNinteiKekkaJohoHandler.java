@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.core.zenkaininteikekkajoho.ZenkaiNinteiKekkaJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -168,8 +170,8 @@ public class ZenkaiNinteiKekkaJohoHandler {
         passModel.set審査会意見(result.get介護認定審査会意見());
         model.setRiyu(result.get直近異動事由コード());
         model.setTorisageDay(result.get取下年月日());
-        model.setShinseiKubunShinsei(result.get認定申請区分_申請時_コード());
-        model.setShinseiKubunLaw(result.get認定申請区分_法令_コード());
+        model.setShinseiKubunShinsei(NinteiShinseiShinseijiKubunCode.toValue(result.get認定申請区分_申請時_コード()).get名称());
+        model.setShinseiKubunLaw(NinteiShinseiHoreiCode.toValue(result.get認定申請区分_法令_コード()).get名称());
         if (受給flag) {
             passModel.setSubGyomuCode(SubGyomuCode.DBD介護受給.value());
             model.setIdoJiyuCode(result.get直近異動事由コード());
