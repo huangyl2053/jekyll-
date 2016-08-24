@@ -341,7 +341,7 @@ public class TokuteiShinryohiMainDiv extends Panel {
 
     @JsonIgnore
     public IKyufuJissekiHeaderDiv getCcdKyufuJissekiHeader() {
-        return (IKyufuJissekiHeaderDiv) this.getKyufuJisseki().getCcdKyufuJissekiHeader();
+        return this.getKyufuJisseki().getCcdKyufuJissekiHeader();
     }
 
     @JsonIgnore

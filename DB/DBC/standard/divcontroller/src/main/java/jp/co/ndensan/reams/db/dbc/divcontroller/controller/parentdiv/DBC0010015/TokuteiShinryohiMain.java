@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010015.Tok
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -79,7 +79,17 @@ public class TokuteiShinryohiMain {
      */
     public ResponseData<TokuteiShinryohiMainDiv> onClick_Zengatsu(TokuteiShinryohiMainDiv div) {
         this.close摘要(div);
-        getHandler(div).change年月(new RString("前月"));
+        HihokenshaNo 被保険者番号
+                = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
+                .getKojinKakuteiKey().get被保険者番号();
+        NyuryokuShikibetsuNo 識別番号検索キー
+                = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class);
+        List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費等
+                = ViewStateHolder.get(ViewStateKeys.資格対象者, KyufuJissekiPrmBusiness.class).getCsData_J();
+        List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費等
+                = ViewStateHolder.get(ViewStateKeys.資格対象者, KyufuJissekiPrmBusiness.class).getCsData_D();
+        getHandler(div).change年月(new RString("前月"), 給付実績特定診療費_特別療養費等,
+                給付実績特定診療費等, 被保険者番号, 識別番号検索キー);
         return createResponse(div);
     }
 
@@ -91,7 +101,17 @@ public class TokuteiShinryohiMain {
      */
     public ResponseData<TokuteiShinryohiMainDiv> onClick_Jigetsu(TokuteiShinryohiMainDiv div) {
         this.close摘要(div);
-        getHandler(div).change年月(new RString("次月"));
+        HihokenshaNo 被保険者番号
+                = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
+                .getKojinKakuteiKey().get被保険者番号();
+        NyuryokuShikibetsuNo 識別番号検索キー
+                = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class);
+        List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費等
+                = ViewStateHolder.get(ViewStateKeys.資格対象者, KyufuJissekiPrmBusiness.class).getCsData_J();
+        List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費等
+                = ViewStateHolder.get(ViewStateKeys.資格対象者, KyufuJissekiPrmBusiness.class).getCsData_D();
+        getHandler(div).change年月(new RString("次月"), 給付実績特定診療費_特別療養費等,
+                給付実績特定診療費等, 被保険者番号, 識別番号検索キー);
         return createResponse(div);
     }
 
@@ -105,10 +125,13 @@ public class TokuteiShinryohiMain {
         List<KyufuJissekiHedajyoho2> 事業者番号リスト
                 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
                 .getCommonHeader().get給付実績ヘッダ情報2();
-        JigyoshaNo 事業所番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
-                .getCommonHeader().get給付実績ヘッダ情報2().get(ZERO_INT).get事業所番号();
+        List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費等
+                = ViewStateHolder.get(ViewStateKeys.資格対象者, KyufuJissekiPrmBusiness.class).getCsData_J();
+        List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費等
+                = ViewStateHolder.get(ViewStateKeys.資格対象者, KyufuJissekiPrmBusiness.class).getCsData_D();
         this.close摘要(div);
-        getHandler(div).change事業者(new RString("前事業者"), 事業者番号リスト, 事業所番号);
+        getHandler(div).change事業者(new RString("前事業者"), 事業者番号リスト,
+                給付実績特定診療費_特別療養費等, 給付実績特定診療費等);
         return createResponse(div);
     }
 
@@ -123,9 +146,11 @@ public class TokuteiShinryohiMain {
         List<KyufuJissekiHedajyoho2> 事業者番号リスト
                 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
                 .getCommonHeader().get給付実績ヘッダ情報2();
-        JigyoshaNo 事業所番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
-                .getCommonHeader().get給付実績ヘッダ情報2().get(ZERO_INT).get事業所番号();
-        getHandler(div).change事業者(new RString("後事業者"), 事業者番号リスト, 事業所番号);
+        List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費等
+                = ViewStateHolder.get(ViewStateKeys.資格対象者, KyufuJissekiPrmBusiness.class).getCsData_J();
+        List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費等
+                = ViewStateHolder.get(ViewStateKeys.資格対象者, KyufuJissekiPrmBusiness.class).getCsData_D();
+        getHandler(div).change事業者(new RString("後事業者"), 事業者番号リスト, 給付実績特定診療費_特別療養費等, 給付実績特定診療費等);
         return createResponse(div);
     }
 
@@ -138,6 +163,7 @@ public class TokuteiShinryohiMain {
     public ResponseData onClick_Tekiyo(TokuteiShinryohiMainDiv div) {
         RString サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, RString.class);
         getHandler(div).get摘要(new FlexibleYearMonth(サービス提供年月));
+        div.getTekiyoPanelPanel().setIsOpen(true);
         return createResponse(div);
     }
 

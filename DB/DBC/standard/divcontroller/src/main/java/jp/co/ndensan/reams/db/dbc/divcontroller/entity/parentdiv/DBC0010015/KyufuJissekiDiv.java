@@ -484,7 +484,7 @@ public class KyufuJissekiDiv extends Panel {
      */
     @JsonProperty("ccdKyufuJissekiHeader")
     public IKyufuJissekiHeaderDiv getCcdKyufuJissekiHeader() {
-        return (IKyufuJissekiHeaderDiv) ccdKyufuJissekiHeader;
+        return ccdKyufuJissekiHeader;
     }
 
     /*
