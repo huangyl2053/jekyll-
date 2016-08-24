@@ -105,26 +105,24 @@ public class ServiceRiyohyoInfo {
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnBeppyoMeisaiNew(ServiceRiyohyoInfoDiv div) {
         ViewStateHolder.put(ViewStateKeys.選択有无, false);
         div.getServiceRiyohyoBeppyoMeisai().setDisabled(false);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setDisabled(false);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtTani().clearValue();
         div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setDisabled(false);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().clearValue();
         div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().setDisabled(false);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().clearValue();
         div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setDisabled(false);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().clearValue();
         div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().clearValue();
         div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().setDisabled(false);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().clearValue();
         div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().setDisabled(false);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().clearValue();
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setVisible(true);
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnBeppyoMeisaiKakutei().setVisible(true);
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setDisabled(false);
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCancelMeisaiInput().setDisabled(false);
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisaiGokei().setDisabled(false);
+        div.getServiceRiyohyoBeppyoList().getBtnBeppyoGokeiNew().setDisabled(false);
+        ServiceRiyohyoInfoDivHandler handler = getHandler(div);
+        handler.事業者サービスクリア();
+        handler.明細情報クリア();
         return ResponseData.of(div).respond();
     }
 
@@ -135,24 +133,17 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnBeppyoGokeiNew(ServiceRiyohyoInfoDiv div) {
+        ServiceRiyohyoInfoDivHandler handler = getHandler(div);
+        handler.合計情報クリア();
+        div.getBtnCalcGokei().setDisabled(false);
         ViewStateHolder.put(ViewStateKeys.選択有无, false);
-        div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendoChokaTani().clearValue();
-        div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendonaiTani().clearValue();
-        div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().clearValue();
-        div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendoChokaTani().clearValue();
-        div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendonaiTani().clearValue();
-        div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().clearValue();
-        div.getServiceRiyohyoBeppyoGokei().getTxtHiyoSogaku().clearValue();
-        div.getServiceRiyohyoBeppyoGokei().getTxtHokenKyufugaku().clearValue();
-        div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuHoken().clearValue();
-        div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuZengaku().clearValue();
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         RDate 利用年月日 = div.getTxtRiyoYM().getValue();
         FlexibleYearMonth 利用年月 = null;
         if (利用年月日 != null) {
             利用年月 = new FlexibleYearMonth(利用年月日.getYearMonth().toDateString());
         }
-        getHandler(div).init合計情報追加(被保険者番号, 利用年月);
+        handler.init合計情報追加(被保険者番号, 利用年月);
         return ResponseData.of(div).respond();
     }
 
@@ -322,127 +313,6 @@ public class ServiceRiyohyoInfo {
         return ResponseData.of(div).respond();
     }
 
-//    /**
-//     * 「保存する」ボタンのイベントです。
-//     *
-//     * @param div ServiceRiyohyoInfoDiv
-//     * @return ResponseData<ServiceRiyohyoInfoDiv>
-//     */
-//    public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnUpdate(ServiceRiyohyoInfoDiv div) {
-//        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-//        RString 前排他キー = 排他キー.concat(被保険者番号.getColumnValue());
-//        LockingKey key = new LockingKey(前排他キー);
-//        if (!RealInitialLocker.tryGetLock(key)) {
-//            throw new PessimisticLockingException();
-//        }
-//        RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
-//        RString 居宅総合事業区分 = ViewStateHolder.get(ViewStateKeys.居宅総合事業区分, RString.class);
-//        TankiNyushoResult 短期入所情報 = ViewStateHolder.get(ViewStateKeys.短期入所情報, TankiNyushoResult.class);
-//        if (削除.equals(表示モード)) {
-//            return 削除処理(div, 居宅総合事業区分, 短期入所情報);
-//        } else if (追加.equals(表示モード)) {
-//            getHandler(div).DB追加処理(居宅総合事業区分, 短期入所情報);
-//        } else if (修正.equals(表示モード)) {
-//            getHandler(div).DB修正処理(居宅総合事業区分, 短期入所情報);
-//        }
-//        List<KyufuJikoSakuseiResult> サービス利用票情報 = ViewStateHolder.get(ViewStateKeys.給付計画自己作成EntityList, List.class);
-//        if (!div.getChkZanteiKubun().isAllSelected()) {
-//            getHandler(div).データ整合性チェック(サービス利用票情報);
-//            return 総計チェック(div, 居宅総合事業区分, サービス利用票情報);
-//        }
-//        getHandler(div).init保存処理(居宅総合事業区分, サービス利用票情報);
-//        RealInitialLocker.release(key);
-//        return ResponseData.of(div).respond();
-//    }
-//
-//    private ResponseData<ServiceRiyohyoInfoDiv> 削除処理(ServiceRiyohyoInfoDiv div, RString 居宅総合事業区分,
-//            TankiNyushoResult 短期入所情報) {
-//        if (div.getTxtSofuYM().getValue() != null
-//                && KyufukanrihyoSakuseiKubun.新規.getコード().equals(div.getDdlKoshinKbn().getSelectedKey())) {
-//            if (!ResponseHolder.isReRequest()) {
-//                QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
-//                        UrQuestionMessages.削除の確認.getMessage().evaluate());
-//                return ResponseData.of(div).addMessage(message).respond();
-//            }
-//            if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
-//                    .equals(ResponseHolder.getMessageCode())
-//                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//                getHandler(div).DB削除処理(居宅総合事業区分, 短期入所情報);
-//            }
-//        } else {
-//            if (!ResponseHolder.isReRequest()) {
-//                QuestionMessage message = new QuestionMessage(DbcQuestionMessages.自己作成_終了確認.getMessage().getCode(),
-//                        DbcQuestionMessages.自己作成_終了確認.getMessage().evaluate());
-//                return ResponseData.of(div).addMessage(message).respond();
-//            }
-//            if (new RString(DbcQuestionMessages.自己作成_終了確認.getMessage().getCode())
-//                    .equals(ResponseHolder.getMessageCode())
-//                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//                getHandler(div).DB削除処理(居宅総合事業区分, 短期入所情報);
-//            }
-//        }
-//        return ResponseData.of(div).respond();
-//    }
-//
-//    private ResponseData<ServiceRiyohyoInfoDiv> 総計チェック(ServiceRiyohyoInfoDiv div,
-//            RString 居宅総合事業区分,
-//            List<KyufuJikoSakuseiResult> サービス利用票情報) {
-//        List<ServiceTypeDetails> details = new ArrayList<>();
-//        for (KyufuJikoSakuseiResult result : サービス利用票情報) {
-//            ServiceTypeDetails detail = new ServiceTypeDetails();
-//            detail.setサービス単位(result.get給付計画単位数());
-//            detail.setサービス種類コード(result.getサービス種類コード());
-//            detail.setサービス項目コード(result.getサービス項目コード());
-//            detail.set限度額対象外フラグ(result.get限度額対象外フラグ());
-//            details.add(detail);
-//        }
-//        JigoSakuseiMeisaiTouroku jigoSakusei = JigoSakuseiMeisaiTouroku.createInstance();
-//        RDate 利用年月 = div.getTxtRiyoYM().getValue();
-//        List<ServiceTypeTotal> サービス種類限度額統計 = jigoSakusei.getServiceTypeGendo(利用年月 == null ? null
-//                : new FlexibleYearMonth(利用年月.getYearMonth().toDateString()), details);
-//        if (サービス種類限度額統計 == null || サービス種類限度額統計.isEmpty()) {
-//            return ResponseData.of(div).respond();
-//        }
-//        for (KyufuJikoSakuseiResult result : サービス利用票情報) {
-//            if (result.is合計フラグ() && 限度額対象外フラグ_0.equals(result.get限度額対象外フラグ())) {
-//                Decimal 限度額 = Decimal.ZERO;
-//                サービス種類限度額統計(サービス種類限度額統計, result, 限度額);
-//            }
-//        }
-//        for (ServiceTypeTotal total : サービス種類限度額統計) {
-//            if (total.get合計単位数().compareTo(total.get限度額()) < 0 && !ResponseHolder.isReRequest()) {
-//                WarningMessage message = new WarningMessage(DbcQuestionMessages.限度余裕確認.getMessage().getCode(),
-//                        DbcQuestionMessages.限度余裕確認.getMessage().evaluate());
-//                return ResponseData.of(div).addMessage(message).respond();
-//            }
-//            if (total.get合計単位数().compareTo(total.get限度額()) < 0
-//                    && new RString(DbcQuestionMessages.限度余裕確認.getMessage().getCode())
-//                    .equals(ResponseHolder.getMessageCode())
-//                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-//                return ResponseData.of(div).respond();
-//            }
-//        }
-//        getHandler(div).init保存処理(居宅総合事業区分, サービス利用票情報);
-//        return ResponseData.of(div).respond();
-//    }
-//
-//    private void サービス種類限度額統計(List<ServiceTypeTotal> サービス種類限度額統計, KyufuJikoSakuseiResult result, Decimal 限度額) throws ApplicationException {
-//        for (ServiceTypeTotal total : サービス種類限度額統計) {
-//            if (result.getサービス種類コード().getColumnValue().equals(total.getサービス種類コード().getColumnValue())) {
-//                限度額 = total.get限度額();
-//                break;
-//            }
-//        }
-//        if (限度額.compareTo(nullToZero(result.get種類限度内単位())) < 0) {
-//            throw new ApplicationException(DbcErrorMessages.種類支給限度額不正.getMessage()
-//                    .replace(ServiceCategoryShurui.toValue(result.getサービス種類コード().getColumnValue())
-//                            .get名称().toString()).evaluate());
-//        }
-//    }
-//
-//    private Decimal nullToZero(Decimal decimal) {
-//        return decimal == null ? Decimal.ZERO : decimal;
-//    }
     /**
      * 明細情報パネル.単位onBlurのイベントです。
      *
@@ -579,15 +449,19 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnCalcMeisaiGokei(ServiceRiyohyoInfoDiv div) {
+        ServiceRiyohyoInfoDivHandler handler = getHandler(div);
+        handler.合計情報クリア();
+        div.getServiceRiyohyoBeppyoList().getBtnBeppyoGokeiNew().setDisabled(false);
+        div.getBtnCalcGokei().setDisabled(false);
         RString 状態 = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
-        getHandler(div).onClick_btnBeppyoMeisaiKakutei(状態);
+        handler.onClick_btnBeppyoMeisaiKakutei(状態);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         RDate 利用年月日 = div.getTxtRiyoYM().getValue();
         FlexibleYearMonth 利用年月 = null;
         if (利用年月日 != null) {
             利用年月 = new FlexibleYearMonth(利用年月日.getYearMonth().toDateString());
         }
-        getHandler(div).init合計情報追加(被保険者番号, 利用年月);
+        handler.init合計情報追加(被保険者番号, 利用年月);
         return ResponseData.of(div).respond();
     }
 

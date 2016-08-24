@@ -42,9 +42,7 @@ public class ServiceRiyohyoInfoDivValidationHandler {
         return new ValidationDictionaryBuilder()
                 .add(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目)
                 .add(ServiceRiyohyoInfoDivValidationMessage.単位必須項目, div.getServiceRiyohyoBeppyoMeisai().getTxtTani())
-                .add(ServiceRiyohyoInfoDivValidationMessage.回数必須項目, div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu())
-                .add(ServiceRiyohyoInfoDivValidationMessage.サービス単位必須項目,
-                        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani()).build();
+                .add(ServiceRiyohyoInfoDivValidationMessage.回数必須項目, div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu()).build();
     }
 
     /**
