@@ -524,17 +524,11 @@ public class IchijiSashitome1GoHandler {
 
     private boolean 抽出条件(RString 登録区分, RString 押下ボタン, ShiharaiHohoHenko shiharaiHohoHenko) {
         boolean 抽出条件 = false;
-        if (登録区分.equals(ShiharaiHenkoTorokuKubun._１号給付額減額登録.getコード())) {
-            if (押下ボタン.equals(_給付一時差止登録)
-                    && (shiharaiHohoHenko.get償還払化決定年月日() != null && !shiharaiHohoHenko.get償還払化決定年月日().isEmpty())) {
-                抽出条件 = true;
-            } else if (押下ボタン.equals(_保険料控除登録) && shiharaiHohoHenko.get差止対象決定年月日() != null
-                    && !shiharaiHohoHenko.get差止対象決定年月日().isEmpty()) {
-                抽出条件 = true;
-            }
-        } else if (登録区分.equals(ShiharaiHenkoTorokuKubun._１号償還払い化登録.getコード())
-                && 押下ボタン.equals(_給付一時差止登録)
+        if (押下ボタン.equals(_給付一時差止登録)
                 && (shiharaiHohoHenko.get償還払化決定年月日() != null && !shiharaiHohoHenko.get償還払化決定年月日().isEmpty())) {
+            抽出条件 = true;
+        } else if (押下ボタン.equals(_保険料控除登録) && shiharaiHohoHenko.get差止対象決定年月日() != null
+                && !shiharaiHohoHenko.get差止対象決定年月日().isEmpty()) {
             抽出条件 = true;
         }
         return 抽出条件;
