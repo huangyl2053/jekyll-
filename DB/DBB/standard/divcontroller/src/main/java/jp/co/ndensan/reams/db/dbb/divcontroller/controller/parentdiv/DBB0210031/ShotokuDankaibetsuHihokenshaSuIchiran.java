@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ShotokuDankaibetsuHihokenshaSuIchiran {
 
     /**
-     * 画面初期化のメソッドます。
+     * 画面初期化のメソッドです。
      *
      * @param div ShinNendoKanriJohoSakuseiDiv
      * @return ResponseData
@@ -74,7 +74,6 @@ public class ShotokuDankaibetsuHihokenshaSuIchiran {
      getHandler(div).onBeforeOpenDialog();
      return ResponseData.of(div).respond();
      }*/
-
     /**
      * chkChosaJokenのonChange事件です。
      *
