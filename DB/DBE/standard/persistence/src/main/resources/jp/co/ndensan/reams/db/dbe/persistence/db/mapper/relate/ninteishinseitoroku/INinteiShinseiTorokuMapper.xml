@@ -48,6 +48,7 @@
               , T5101."enkiTsuchiHakkoKaisu"
               , T5101."shinseishoKanriNo"
               , T5101."koroshoIfShikibetsuCode"
+              , T7051."shichosonCode"
             FROM
               rgdb."DbT4001JukyushaDaicho" T4001 
               INNER JOIN rgdb."DbT5101NinteiShinseiJoho" T5101 
@@ -70,7 +71,6 @@
                 ) 
               LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202 
                 ON T5101."shinseishoKanriNo" = T5202."shinseishoKanriNo" 
-                AND T5202."logicalDeletedFlag" = False 
                 AND NOT EXISTS ( 
                   SELECT
                     'X' 
@@ -78,7 +78,6 @@
                     rgdb."DbT5202NinteichosahyoGaikyoChosa" AS A1 
                   WHERE
                     T5202."shinseishoKanriNo" = A1."shinseishoKanriNo" 
-                    AND A1."logicalDeletedFlag" = False 
                     AND T5202."ninteichosaRirekiNo" <![CDATA[<]]> A1."ninteichosaRirekiNo"
                 ) 
               LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" T5910 
@@ -86,7 +85,7 @@
                 AND T7051."shichosonCode" = T5910."shichosonCode" 
                 AND T5910."jokyoFlag" = True 
               LEFT JOIN rgdb."DbT5913ChosainJoho" T5913 
-                ON T5201."ninteichosaItakusakiCode" = T5913."ninteichosaItakusakiCode" 
+                ON T5201."ninteichosaItakusakiCode" = T5913."ninteiChosaItakusakiCode" 
                 AND T5201."ninteiChosainCode" = T5913."ninteiChosainCode" 
                 AND T7051."shichosonCode" = T5913."shichosonCode" 
                 AND T5913."jokyoFlag" = True 
@@ -105,15 +104,13 @@
                 ) 
               LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS T5302 
                 ON T5101."shinseishoKanriNo" = T5302."shinseishoKanriNo" 
-                AND T5302."logicalDeletedFlag" = False 
                 AND NOT EXISTS ( 
                   SELECT
                     'X' 
                   FROM
-                    rgdb."DbT5301ShujiiIkenshoIraiJoho" AS A2 
+                    rgdb."DbT5302ShujiiIkenshoJoho" AS A2 
                   WHERE
                     T5302."shinseishoKanriNo" = A2."shinseishoKanriNo" 
-                    AND A2."logicalDeletedFlag" = False 
                     AND T5302."ikenshoIraiRirekiNo" <![CDATA[<]]> A2."ikenshoIraiRirekiNo"
                 ) 
               LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" T5911 
@@ -180,6 +177,7 @@
         <result column = "enkiTsuchiHakkoKaisu" property="延期通知発行回数"/>
         <result column = "shinseishoKanriNo" property="申請書管理番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result column = "koroshoIfShikibetsuCode" property="厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result column = "shichosonCode" property="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
     </resultMap>
     
     <resultMap id="resultMap_NinteiShinseiTorokuRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.NinteiShinseiTorokuRelateEntity" autoMapping="true">

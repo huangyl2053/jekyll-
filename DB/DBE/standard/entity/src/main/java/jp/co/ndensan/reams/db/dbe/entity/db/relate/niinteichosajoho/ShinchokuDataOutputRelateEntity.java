@@ -333,6 +333,6 @@ public class ShinchokuDataOutputRelateEntity {
     private RString 前回サービスremban20;
     private RString 前回serviceJokyoFlag;
     private RString 前回koroshoIfShikibetsuCode;
-    private RString 前回ninteishinsakaiIkenShurui;
+    private RString 前回shinsakaiIken;
     private RString 前回shinsakaiMemo;
 }

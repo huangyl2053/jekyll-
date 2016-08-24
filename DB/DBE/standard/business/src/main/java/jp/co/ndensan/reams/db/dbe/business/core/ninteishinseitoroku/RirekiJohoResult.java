@@ -99,6 +99,7 @@ public class RirekiJohoResult {
         dataPass.set延期通知発行回数(entity.get延期通知発行回数());
         dataPass.set申請書管理番号(entity.get申請書管理番号());
         dataPass.set厚労省IF識別コード(entity.get厚労省IF識別コード());
+        dataPass.set市町村コード(entity.get市町村コード());
         return dataPass;
     }
 }
