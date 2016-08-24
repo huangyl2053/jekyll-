@@ -37,7 +37,7 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranHandler {
     private static final RString MDAY_0331 = new RString("0331");
     private static final RString MDAY_0401 = new RString("0401");
     private static final RString MDAY_1231 = new RString("1231");
-    //private static final RString KOUSEI_MODO_KOUSEI = new RString("1");
+
     /**
      * コンストラクタです。
      *
@@ -52,29 +52,29 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranHandler {
      *
      */
     public void initialize() {
-        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
+        RDate システム日付 = RDate.getNowDate();
+        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, システム日付,
                 SubGyomuCode.DBB介護賦課);
         int difference = Integer.parseInt(調定年度.toString()) - Integer.parseInt(開始年度.toString());
         List<KeyValueDataSource> datasource = insertIntoDatasource(調定年度, difference);
         div.getDdlChoteiNendo().setDataSource(datasource);
         div.getDdlChoteiNendo().setSelectedKey(調定年度);
         本算定賦課処理日の設定();
-        ShichosonSecurityJoho 市町村情報;
-        市町村情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (市町村情報.get導入形態コード().getKey().compareTo(導入形態コード_111) == 0) {
-            div.getShichoshonSelect().setVisible(true);
-            div.getShichoshonSelect().setDisplayNone(false);
-            div.getRadShichoson().setSelectedKey(KEY0);
-            div.getBtnShichosonSelect().setVisible(false);
-        } else {
-            if (市町村情報.get導入形態コード().getKey().compareTo(導入形態コード_112) == 0
-                    || 市町村情報.get導入形態コード().getKey().compareTo(導入形態コード_120) == 0) {
-                div.getShichoshonSelect().setVisible(false);
+        ShichosonSecurityJoho 市町村情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (市町村情報.get導入形態コード().getKey() != null) {
+            if (市町村情報.get導入形態コード().getKey().equals(導入形態コード_111)) {
+                div.getShichoshonSelect().setVisible(true);
+                div.getShichoshonSelect().setDisplayNone(false);
+                div.getRadShichoson().setSelectedKey(KEY0);
+                div.getBtnShichosonSelect().setVisible(false);
+            } else {
+                if (市町村情報.get導入形態コード().getKey().equals(導入形態コード_112)
+                        || 市町村情報.get導入形態コード().getKey().equals(導入形態コード_120)) {
+                    div.getShichoshonSelect().setVisible(false);
+                }
             }
         }
-        RDate システム日付 = RDate.getNowDate();
-        List<RString> key = new ArrayList();
-        div.getChkChosaJoken().setSelectedItemsByKey(key);
+
         div.getTxtShikakuKijunYMD().setValue(システム日付);
         div.getTxtChoteiKijunYMD().setValue(システム日付);
     }
@@ -88,10 +88,10 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranHandler {
      */
     public List<KeyValueDataSource> insertIntoDatasource(RString 調定年度, int difference) {
         List<KeyValueDataSource> datasourceList = new ArrayList();
-        int 年度;
+
         for (int i = 0; i <= difference; i++) {
             KeyValueDataSource data = new KeyValueDataSource();
-            年度 = Integer.parseInt(調定年度.toString()) - i;
+            int 年度 = Integer.parseInt(調定年度.toString()) - i;
             data.setKey(new RString(String.valueOf(年度)));
             data.setValue(new FlexibleYear(String.valueOf(年度)).wareki().toDateString());
             datasourceList.add(data);
@@ -101,8 +101,8 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranHandler {
 
     private void 本算定賦課処理日の設定() {
         DankaibetsuHihokenshaSuuIchiranSakusei 処理日付管理マスタ = DankaibetsuHihokenshaSuuIchiranSakusei.createInstance();
-        YMDHMS 基準日時;
-        基準日時 = 処理日付管理マスタ.getHonsanteiShoribi(new FlexibleYear(div.getDdlChoteiNendo().getSelectedKey()));
+        YMDHMS 基準日時 = 処理日付管理マスタ.getHonsanteiShoribi(
+                new FlexibleYear(div.getDdlChoteiNendo().getSelectedKey()));
         if (基準日時 == null || 基準日時.isEmpty()) {
             div.getTxtHonsanteiShoriYMD().clearValue();
             div.getTxtHonsanteiShoriYMD().setValue(null);
@@ -120,7 +120,7 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranHandler {
         div.getChkChosaJoken().setSelectedItemsByKey(key);
         RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課);
-        if (div.getDdlChoteiNendo().getSelectedKey().compareTo(調定年度) == 0) {
+        if (div.getDdlChoteiNendo().getSelectedKey().equals(調定年度)) {
             div.getTxtShikakuKijunYMD().setValue(RDate.getNowDate());
         } else {
             div.getTxtShikakuKijunYMD().setValue(new RDate(div.getDdlChoteiNendo().getSelectedKey().concat(MDAY_0331).
@@ -172,7 +172,7 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranHandler {
         } else {
             RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
                     SubGyomuCode.DBB介護賦課);
-            if (div.getDdlChoteiNendo().getSelectedKey().compareTo(調定年度) == 0) {
+            if (div.getDdlChoteiNendo().getSelectedKey().equals(調定年度)) {
                 div.getTxtShikakuKijunYMD().setValue(RDate.getNowDate());
             } else {
                 div.getTxtShikakuKijunYMD().setValue(new RDate(div.getDdlChoteiNendo().getSelectedKey().concat(MDAY_0331).
