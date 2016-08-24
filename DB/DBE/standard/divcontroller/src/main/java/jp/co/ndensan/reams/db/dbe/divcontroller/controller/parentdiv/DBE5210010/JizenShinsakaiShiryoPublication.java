@@ -12,9 +12,11 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210010.Jize
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5210010.JizenShinsakaiShiryoPublicationHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5210010.JizenShinsakaiShiryoPublicationValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.jizenshinsakaishiryopublication.JizenShinsakaiShiryoPublicationManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 介護認定審査会委員事前審査 のコントローラです。
@@ -30,8 +32,7 @@ public class JizenShinsakaiShiryoPublication {
      * @return ResponseData<JizenShinsakaiShiryoPublicationDiv>
      */
     public ResponseData<JizenShinsakaiShiryoPublicationDiv> onLoad(JizenShinsakaiShiryoPublicationDiv div) {
-        RString 審査会開催番号 = new RString("1000");
-        //RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.審査会開催番号, RString.class);
+        RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         JizenShinsakaiShiryoPublicationBusiness 対象審査会情報
                 = JizenShinsakaiShiryoPublicationManager.creatInstance().get審査会開催番号(審査会開催番号);
         getHandler(div).onLoad(対象審査会情報, 審査会開催番号);
