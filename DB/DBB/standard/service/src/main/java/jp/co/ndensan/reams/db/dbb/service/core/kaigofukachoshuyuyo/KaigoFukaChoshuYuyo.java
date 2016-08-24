@@ -291,7 +291,6 @@ public class KaigoFukaChoshuYuyo {
      * @return SourceDataCollection
      */
     public SourceDataCollection publish(KakushuTsuchishoParameter param) {
-        SourceDataCollection sourceDataCollection = KakushuTsuchishoSakusei.createInstance().publish(param);
-        return sourceDataCollection;
+        return KakushuTsuchishoSakusei.createInstance().publish(param);
     }
 }
