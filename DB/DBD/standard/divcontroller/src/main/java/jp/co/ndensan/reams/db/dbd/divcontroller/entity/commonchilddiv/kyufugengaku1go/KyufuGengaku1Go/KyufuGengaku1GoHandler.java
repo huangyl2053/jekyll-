@@ -325,14 +325,14 @@ public class KyufuGengaku1GoHandler {
             shinseiRiyuSource.add(new KeyValueDataSource(shinseRriyuCode.getコード(), shinseRriyuCode.get名称()));
         }
         div.getDdlIMenjoShinseiRiyu().setDataSource(shinseiRiyuSource);
-        div.getDdlIMenjoShinseiRiyu().setSelectedKey(ShiharaiHenkoShuryoShinseiRiyuCode._空.getコード());
+        div.getDdlIMenjoShinseiRiyu().setSelectedKey(shiharaiHohoHenko.get終了申請理由コード());
         div.getTxtMenjoNaiyoKetteiYMD().setValue(shiharaiHohoHenko.get終了申請審査決定年月日());
         List<KeyValueDataSource> shinsaKekkaSource = new ArrayList();
         for (ShiharaiHenkoBenmeiShinsaKekkaKubun shinsaKekka : ShiharaiHenkoBenmeiShinsaKekkaKubun.values()) {
             shinsaKekkaSource.add(new KeyValueDataSource(shinsaKekka.getコード(), shinsaKekka.get名称()));
         }
         div.getDdlMenjoShinseiShinsaKekka().setDataSource(shinsaKekkaSource);
-        div.getDdlMenjoShinseiShinsaKekka().setSelectedKey(ShiharaiHenkoBenmeiShinsaKekkaKubun._空.getコード());
+        div.getDdlMenjoShinseiShinsaKekka().setSelectedKey(shiharaiHohoHenko.get終了申請審査結果区分());
     }
 
     private DbT4021ShiharaiHohoHenkoEntity get給付額減額の登録Entity() {
