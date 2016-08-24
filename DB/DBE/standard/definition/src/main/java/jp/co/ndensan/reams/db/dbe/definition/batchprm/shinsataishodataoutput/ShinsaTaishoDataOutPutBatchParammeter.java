@@ -22,8 +22,8 @@ import lombok.Setter;
 @Setter
 public class ShinsaTaishoDataOutPutBatchParammeter extends BatchParameterBase {
 
+    private RString spoolWorkPath;
     private static final String KEY_KAISAIBANGOU = "kaisaiBangou";
-
     @BatchParameter(key = KEY_KAISAIBANGOU, name = "開催番号")
     private RString kaisaiBangou;
 
@@ -33,6 +33,6 @@ public class ShinsaTaishoDataOutPutBatchParammeter extends BatchParameterBase {
      * @return ShinsaTaishoDataOutProcessParammeter
      */
     public ShinsaTaishoDataOutPutProcessParammeter toShinsaTaishoDataOutProcessParammeter() {
-        return new ShinsaTaishoDataOutPutProcessParammeter(kaisaiBangou);
+        return new ShinsaTaishoDataOutPutProcessParammeter(kaisaiBangou, spoolWorkPath);
     }
 }
