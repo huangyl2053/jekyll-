@@ -17,7 +17,7 @@ public enum DBC0010011TransitionEventName implements IContainerEvents {
     照会基本情報("照会基本情報"),
     完了("完了"),
     給付実績照会検索一覧("給付実績照会検索一覧"),
-    明細集計("明細・集計"),
+    明細_集計("明細・集計"),
     緊急時施設療養費("緊急時施設療養費"),
     所定疾患施設療養費("所定疾患施設療養費"),
     特定診療費("特定診療費"),
@@ -28,13 +28,7 @@ public enum DBC0010011TransitionEventName implements IContainerEvents {
     高額介護サービス費("高額介護サービス費"),
     特定入所者費用("特定入所者費用"),
     社福軽減費("社福軽減費"),
-    ケアマネジメント費("ケアマネジメント費"),
-    総合照会給付情報("総合照会給付情報");
-
-    @Override
-    public RString getName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    ケアマネジメント費("ケアマネジメント費");
 
     private final RString name;
 
@@ -47,9 +41,9 @@ public enum DBC0010011TransitionEventName implements IContainerEvents {
      *
      * @return 名前
      */
-//    @Override
-//    public RString getName() {
-//        return name;
-//    }
+    @Override
+    public RString getName() {
+        return name;
+    }
 // </editor-fold>
 }
