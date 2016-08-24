@@ -427,6 +427,7 @@ public class IchijiSashitome1GoHandler {
         div.getTxtShokaiKojoTorokuTsuchiHakkoYMD().setDisplayNone(false);
         div.getTxtShokaiKojoNo().setDisplayNone(false);
         div.getBtnTainoJokyo().setDisabled(false);
+        div.getBtnSashitomeOrKojoJokyoShokaiClose().setDisplayNone(false);
         div.getBtnSashitomeOrKojoJokyoShokaiClose().setDisabled(false);
         div.getBtnSashitomeOrKojoTorokuTorikeshi().setDisplayNone(true);
         div.getBtnSashitomeOrKojoTorokuKakutei().setDisplayNone(true);
