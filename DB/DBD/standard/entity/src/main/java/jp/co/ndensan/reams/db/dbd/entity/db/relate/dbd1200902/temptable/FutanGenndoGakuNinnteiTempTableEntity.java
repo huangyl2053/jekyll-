@@ -11,20 +11,30 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 負担限度額認定の認定証発行一時テーブルEntity項目定義クラスです。
  *
- * @author admin
+ * @reamsid_L DBD-3981-050 jinge
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class FutanGenndoGakuNinnteiTempTableEntity extends DbTableEntityBase<FutanGenndoGakuNinnteiTempTableEntity> implements IDbAccessable {
 
-    public static final RString TABLE_NAME = new RString("FutanGenndoGakuNinnteiTempTable");
+    /**
+     * 負担限度額認定の認定証発行一時テーブル名
+     */
+    @TableName
+    public static final RString TABLE_NAME;
+
+    static {
+        TABLE_NAME = new RString("FutanGenndoGakuNinnteiTempTable");
+    }
 
     @TempTableColumnOrder(1)
     private HihokenshaNo hihokenshaNo;
