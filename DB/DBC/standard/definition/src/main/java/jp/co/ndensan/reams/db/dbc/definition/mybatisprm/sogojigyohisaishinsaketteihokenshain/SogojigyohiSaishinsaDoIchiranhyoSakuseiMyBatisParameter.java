@@ -23,7 +23,7 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiMyBatisParameter implements 
     /**
      * コンストラクタ
      *
-     * @param 出力順
+     * @param 出力順 RString
      */
     public SogojigyohiSaishinsaDoIchiranhyoSakuseiMyBatisParameter(RString 出力順) {
         this.出力順 = 出力順;
