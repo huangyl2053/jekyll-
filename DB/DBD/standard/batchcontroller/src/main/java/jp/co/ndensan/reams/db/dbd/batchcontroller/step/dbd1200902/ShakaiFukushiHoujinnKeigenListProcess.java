@@ -61,20 +61,17 @@ public class ShakaiFukushiHoujinnKeigenListProcess extends BatchProcessBase<Shak
     private static final RString なし = new RString("なし");
     private static final RString 単票発行区分 = new RString("【単票発行区分】");
     private static final RString 決定日期間 = new RString("【決定日期間】");
-    private static final RString 対象期間範囲 = new RString("【対象期間範囲】");
     private static final RString 年度 = new RString("【年度】");
     private static final RString 交付日 = new RString("【交付日】");
     private static final RString 出力順 = new RString("【出力順】");
-    private static final RString 出力しない = new RString("【出力しない】");
-    private static final RString 出力する = new RString("【出力する】");
-    private static final RString 決定日 = new RString("【決定日】");
-    private static final RString 申請日 = new RString("【申請日】");
     private static final RString カラ = new RString("～");
     private static final RString より = new RString("＞");
     private static IOutputOrder order;
     private static IKojin kojin;
     private static Association association;
     private int i = 0;
+    private static final int NO_3 = 3;
+    private static final int NO_4 = 4;
     @BatchWriter
     private BatchReportWriter<ShakaiFukushiHojinKeigenHakkoIchiranReportSource> batchReportWrite;
     private ReportSourceWriter<ShakaiFukushiHojinKeigenHakkoIchiranReportSource> reportSourceWriter;
@@ -187,9 +184,9 @@ public class ShakaiFukushiHoujinnKeigenListProcess extends BatchProcessBase<Shak
         出力条件.add(builder.toRString());
 
         builder.append(交付日);
-        if (true == parameter.is認定証発行フラグ()) {
+        if (parameter.is認定証発行フラグ()) {
             builder.append(new RString(parameter.get認定証の交付日().toString()));
-        } else if (false == parameter.is認定証発行フラグ() || true == parameter.is通知書発行フラグ()) {
+        } else {
             builder.append(new RString(parameter.get通知書の発行日().toString()));
         }
         出力条件.add(builder.toRString());
@@ -200,9 +197,9 @@ public class ShakaiFukushiHoujinnKeigenListProcess extends BatchProcessBase<Shak
         builder.append(より);
         builder.append(order.get設定項目リスト().get(2).get項目名());
         builder.append(より);
-        builder.append(order.get設定項目リスト().get(3).get項目名());
+        builder.append(order.get設定項目リスト().get(NO_3).get項目名());
         builder.append(より);
-        builder.append(order.get設定項目リスト().get(4).get項目名());
+        builder.append(order.get設定項目リスト().get(NO_4).get項目名());
         出力条件.add(builder.toRString());
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 ID.value(),
