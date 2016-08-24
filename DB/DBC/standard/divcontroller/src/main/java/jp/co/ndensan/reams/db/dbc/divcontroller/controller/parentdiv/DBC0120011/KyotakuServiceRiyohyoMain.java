@@ -242,7 +242,7 @@ public class KyotakuServiceRiyohyoMain {
         }
         div.getCcdServiceRiyohyoInfo().init保存処理(居宅総合事業区分, サービス利用票情報);
         RealInitialLocker.release(key);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBC0120011StateName.完了);
     }
 
     private ResponseData<KyotakuServiceRiyohyoMainDiv> 削除処理(KyotakuServiceRiyohyoMainDiv div, RString 居宅総合事業区分,
@@ -271,7 +271,7 @@ public class KyotakuServiceRiyohyoMain {
                 div.getCcdServiceRiyohyoInfo().DB削除処理(居宅総合事業区分, 短期入所情報);
             }
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBC0120011StateName.完了);
     }
 
     private ResponseData<KyotakuServiceRiyohyoMainDiv> 総計チェック(KyotakuServiceRiyohyoMainDiv div,
@@ -291,7 +291,7 @@ public class KyotakuServiceRiyohyoMain {
         List<ServiceTypeTotal> サービス種類限度額統計 = jigoSakusei.getServiceTypeGendo(利用年月 == null ? null
                 : new FlexibleYearMonth(利用年月.getYearMonth().toDateString()), details);
         if (サービス種類限度額統計 == null || サービス種類限度額統計.isEmpty()) {
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).setState(DBC0120011StateName.完了);
         }
         for (KyufuJikoSakuseiResult result : サービス利用票情報) {
             if (result.is合計フラグ() && 限度額対象外フラグ_0.equals(result.get限度額対象外フラグ())) {
@@ -313,7 +313,7 @@ public class KyotakuServiceRiyohyoMain {
             }
         }
         div.getCcdServiceRiyohyoInfo().init保存処理(居宅総合事業区分, サービス利用票情報);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBC0120011StateName.完了);
     }
 
     private void サービス種類限度額統計(List<ServiceTypeTotal> サービス種類限度額統計, KyufuJikoSakuseiResult result, Decimal 限度額) throws ApplicationException {
