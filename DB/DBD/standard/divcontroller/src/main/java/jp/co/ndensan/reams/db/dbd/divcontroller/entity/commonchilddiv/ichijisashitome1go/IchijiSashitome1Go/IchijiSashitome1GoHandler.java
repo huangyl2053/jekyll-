@@ -639,7 +639,8 @@ public class IchijiSashitome1GoHandler {
 
     private void 給付一時差止登録_Status() {
         div.getBtnSashitomeToroku().setDisabled(true);
-        div.getBtnKojoToroku().setDisabled(true);
+        div.getBtnKojoToroku().setVisible(false);
+        div.getBtnKojoToroku().setDisabled(false);
         div.getBtnSashitomeOrKojoJokyoShokai().setDisabled(true);
         div.getDgSashitomeKojoIchiran().setDisabled(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("sashitome").getCellDetails().setReadOnly(true);
@@ -667,8 +668,7 @@ public class IchijiSashitome1GoHandler {
 
     private void 保険料控除登録_Status() {
         div.getBtnSashitomeToroku().setDisplayNone(true);
-        div.getBtnKojoToroku().setDisabled(true);
-        div.getBtnKojoToroku().setDisabled(true);
+        div.getBtnKojoToroku().setDisabled(false);
         div.getDgSashitomeKojoIchiran().setDisabled(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().setIsShowDeleteButtonColumn(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("sashitome").setVisible(false);
