@@ -711,11 +711,4 @@ public class ShokanShikyuGendogakuMainHandler {
         }
         return new RDate(fd.getYearValue(), fd.getMonthValue());
     }
-
-//    private Decimal decimalFormatter(Decimal num) {
-//        if (num == null || num.compareTo(Decimal.ZERO) == 0) {
-//            return null;
-//        }
-//        return new Decimal(DecimalFormatter.toコンマ区切りRString(num, INDEX_0).toString());
-//    }
 }

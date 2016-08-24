@@ -20,7 +20,7 @@ public enum SogojigyohiKagoKetteitsuchishoTorikomiOutPutOrder implements IReport
      */
     公費負担者番号(new RString("0134"), new RString("kohiFutanshaNo"), new RString("DbWT3061.\"kohiFutanshaNo\"")),
     /**
-     * 郵便番号			
+     * 郵便番号
      */
     郵便番号(new RString("0019"), new RString("yubinNo"), new RString("DbWT0001.\"yubinNo\"")),
     /**
@@ -46,7 +46,7 @@ public enum SogojigyohiKagoKetteitsuchishoTorikomiOutPutOrder implements IReport
     /**
      * サービス提供年月
      */
-    サービス提供年月(new RString("0361"), new RString("serviceTeikyoYM"), new RString("DbWT3061.\"serviceTeikyoYM\"")),
+    サービス提供年月(new RString("0361"), new RString("serviceTeikyoYm"), new RString("DbWT3061.\"serviceTeikyoYm\"")),
     /**
      * 事業者番号
      */

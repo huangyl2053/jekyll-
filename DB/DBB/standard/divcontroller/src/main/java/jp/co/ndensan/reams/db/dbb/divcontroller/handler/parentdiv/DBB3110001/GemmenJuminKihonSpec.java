@@ -154,7 +154,7 @@ public enum GemmenJuminKihonSpec implements IPredicate<GemmenJuminKihonDiv> {
 
         public static boolean 決定日の必須入力チェック２(GemmenJuminKihonDiv div) {
             RString 状況 = div.getGemmenMain().getShinseiJokyo().getTxtShinseiJokyo().getValue();
-            return !(状況_決定済.equals(状況) && div.getGemmenMain().getKeteiinfo().getTxtKetteiYMD() == null);
+            return !(状況_決定済.equals(状況) && div.getGemmenMain().getKeteiinfo().getTxtKetteiYMD().getValue() == null);
         }
     }
 }

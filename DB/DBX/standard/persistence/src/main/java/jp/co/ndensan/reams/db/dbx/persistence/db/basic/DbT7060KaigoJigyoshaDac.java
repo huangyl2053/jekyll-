@@ -38,6 +38,7 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
     private static final RString TXT介護事業者エンティティ = new RString("介護事業者エンティティ");
     private static final RString TXTシステム日付 = new RString("システム日付");
     private static final RString TXT日付 = new RString("日付");
+    private static final int 件数_1 = 1;
     @InjectSession
     private SqlSession session;
 
@@ -248,7 +249,7 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
     }
 
     /**
-     * 入所施設名称_事業者番号の取得。
+     * 入所施設名称_事業者番号の取得です。
      *
      * @param 入所施設コード RString
      * @return DbT7060KaigoJigyoshaEntity
@@ -260,6 +261,8 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
         return accessor.select().
                 table(DbT7060KaigoJigyosha.class).
                 where(eq(DbT7060KaigoJigyosha.jigyoshaNo, 入所施設コード)).
+                order(by(DbT7060KaigoJigyosha.jigyoshaNo, Order.DESC)).
+                limit(件数_1).
                 toObject(DbT7060KaigoJigyoshaEntity.class);
     }
 }

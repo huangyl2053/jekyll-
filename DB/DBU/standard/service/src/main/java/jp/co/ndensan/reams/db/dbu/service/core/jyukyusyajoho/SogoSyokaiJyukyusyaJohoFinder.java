@@ -143,7 +143,7 @@ public class SogoSyokaiJyukyusyaJohoFinder {
      * 被保険者番号、受給申請情報を取得します。
      *
      * @param 被保険者番号 HihokenshaNo
-     * @return Decimal
+     * @return JukyuShinseiJohoBusiness
      */
     public JukyuShinseiJohoBusiness get受給申請情報(HihokenshaNo 被保険者番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号メッセージ.toString()));

@@ -93,7 +93,7 @@ public class SoyoSyokaiService {
     }
 
     /**
-     * 被保険者台帳の取得。
+     * 被保険者台帳の取得です。
      *
      * @param 被保険者番号 HihokenshaNo
      * @return HihokenshaDaichoAlive
@@ -108,7 +108,7 @@ public class SoyoSyokaiService {
     }
 
     /**
-     * 施設入退所の取得。
+     * 施設入退所の取得です。
      *
      * @param 識別コード ShikibetsuCode
      * @return ShisetsuNyutaishoAlive
@@ -123,7 +123,7 @@ public class SoyoSyokaiService {
     }
 
     /**
-     * 他市町村住所地特例情報の取得。
+     * 他市町村住所地特例情報の取得です。
      *
      * @param 識別コード ShikibetsuCode
      * @return TashichosonJushochiTokureiAlive
@@ -138,7 +138,7 @@ public class SoyoSyokaiService {
     }
 
     /**
-     * 施設入退所Orderの取得。
+     * 施設入退所Orderの取得です。
      *
      * @param 識別コード ShikibetsuCode
      * @param 台帳種別 DaichoType
@@ -154,7 +154,7 @@ public class SoyoSyokaiService {
     }
 
     /**
-     * 適用除外者情報の取得。
+     * 適用除外者情報の取得です。
      *
      * @param 識別コード ShikibetsuCode
      * @return TekiyoJogaishaAlive
@@ -169,7 +169,7 @@ public class SoyoSyokaiService {
     }
 
     /**
-     * 事業者名称_事業者番号の取得。
+     * 事業者名称_事業者番号の取得です。
      *
      * @param 入所施設コード RString
      * @return KaigoJigyosha
@@ -183,7 +183,7 @@ public class SoyoSyokaiService {
     }
 
     /**
-     * 事業者名称_住所地特例対象施設の取得。
+     * 事業者名称_住所地特例対象施設の取得です。
      *
      * @param 入所施設コード RString
      * @param 住所地特例対象施設 RString

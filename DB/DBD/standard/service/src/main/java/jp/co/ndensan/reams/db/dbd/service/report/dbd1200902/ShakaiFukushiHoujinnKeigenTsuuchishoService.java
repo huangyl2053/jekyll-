@@ -23,12 +23,18 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoService {
     private final MapperProvider mapperProvider;
 
     /**
-     *
+     * コンストラクタです。
      */
     public ShakaiFukushiHoujinnKeigenTsuuchishoService() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
+    /**
+     * 利用者負担割合を取得します。
+     *
+     * @param 利用者負担割合検索条件 利用者負担割合検索条件
+     * @return int 利用者負担割合件数
+     */
     @Transaction
     public int get利用者負担割合(ShakaiFukushiHoujinnKeigenTsuuchishoMybatisParameter 利用者負担割合検索条件) {
         IShakaiFukushiHoujinnKeigenTsuuchishoMapper mapper

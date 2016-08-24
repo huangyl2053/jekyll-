@@ -17,10 +17,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
-import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
-import jp.co.ndensan.reams.uz.uza.util.db.OrderBy;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -90,7 +89,7 @@ public class DbV1004ShisetsuNyutaishoAliveDac implements ISaveable<DbV1004Shiset
     }
 
     /**
-     * 介護保険施設入退所の取得
+     * 介護保険施設入退所の取得です。
      *
      * @param 識別コード ShikibetsuCode
      * @return DbT1004ShisetsuNyutaishoEntity
@@ -102,11 +101,13 @@ public class DbV1004ShisetsuNyutaishoAliveDac implements ISaveable<DbV1004Shiset
         return accessor.select().
                 table(DbV1004ShisetsuNyutaisho.class).
                 where(eq(shikibetsuCode, 識別コード)).
+                order(by(shikibetsuCode, Order.DESC)).
+                limit(件数_1).
                 toObject(DbV1004ShisetsuNyutaishoEntity.class);
     }
 
     /**
-     * 介護保険施設入退所の取得
+     * 介護保険施設入退所の取得です。
      *
      * @param 識別コード ShikibetsuCode
      * @param 台帳種別 DaichoType
@@ -121,7 +122,7 @@ public class DbV1004ShisetsuNyutaishoAliveDac implements ISaveable<DbV1004Shiset
                 where(and(
                                 eq(shikibetsuCode, 識別コード),
                                 eq(daichoShubetsu, 台帳種別))).
-                order(new OrderBy(rirekiNo, Order.DESC, NullsOrder.LAST)).
+                order(by(rirekiNo, Order.DESC)).
                 limit(件数_1).
                 toObject(DbV1004ShisetsuNyutaishoEntity.class);
     }
