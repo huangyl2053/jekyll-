@@ -91,7 +91,7 @@ public class KokuhorenJukyushaDaichoIchiranBodyEditor
         source.listList2_7 = doパターン4(対象データ.get資格喪失年月日());
         if (!RString.isNullOrEmpty(対象データ.getみなし要介護区分コード())) {
             source.listList3_1 = 対象データ.getみなし要介護区分コード().concat(コロン)
-                    .concat(MinashiCode.toValue(対象データ.getみなし要介護区分コード()).name());
+                    .concat(MinashiCode.toValue(対象データ.getみなし要介護区分コード()).get名称());
         }
         source.listList3_2 = doパターン4(対象データ.get認定有効期間開始年月日());
         if (!RString.isNullOrEmpty(対象データ.get申請種別コード())) {
