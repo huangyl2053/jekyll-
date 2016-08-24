@@ -44,6 +44,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNoHatsubanHoho;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.core.teikeibunhenkan.ITextHenkanRule;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -97,7 +98,7 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
     private static final RString 対象期間範囲 = new RString("対象期間範囲");
     private static final RString 年度 = new RString("年度");
     private static final RString 発行日 = new RString("発行日");
-    private static final RString 出力順 = new RString("出力順");
+    private static final RString SHUTSURYOKUJUN = new RString("出力順");
     private static final RString カラ = new RString("～");
     private static final RString より = new RString("＞");
     private static FutanGenndoGakuNinnteiTsuuchishoProcessParameter processParamter;
@@ -291,17 +292,15 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
         builder.append(new RString(processParamter.get通知書の交付日().toString()));
 
         出力条件.add(builder.toRString());
-        builder.append(出力順);
-        builder.append(order.get設定項目リスト().get(0).get項目名());
-        builder.append(より);
-        builder.append(order.get設定項目リスト().get(1).get項目名());
-        builder.append(より);
-        builder.append(order.get設定項目リスト().get(2).get項目名());
-        builder.append(より);
-        builder.append(order.get設定項目リスト().get(3).get項目名());
-        builder.append(より);
-        builder.append(order.get設定項目リスト().get(4).get項目名());
-        出力条件.add(builder.toRString());
+
+        RString 設定項目 = RString.EMPTY;
+        for (ISetSortItem item : order.get設定項目リスト()) {
+            設定項目.concat(より).concat(item.get項目名());
+        }
+        if (!設定項目.isEmpty()) {
+            設定項目 = 設定項目.substringEmptyOnError(1, 設定項目.length() - 1);
+        }
+        出力条件.add(SHUTSURYOKUJUN.concat(設定項目));
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 帳票ID.value(),
                 導入団体コード,

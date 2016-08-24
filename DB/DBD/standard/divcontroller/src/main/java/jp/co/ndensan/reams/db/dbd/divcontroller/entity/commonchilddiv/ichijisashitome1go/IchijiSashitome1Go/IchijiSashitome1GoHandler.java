@@ -672,6 +672,7 @@ public class IchijiSashitome1GoHandler {
         div.getDgSashitomeKojoIchiran().setDisabled(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().setIsShowDeleteButtonColumn(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("sashitome").setVisible(false);
+        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("kojo").setCellDetails(new DataGridCellDetails());
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("kojo").getCellDetails().setReadOnly(true);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("sashitome2").getCellDetails().setReadOnly(true);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("seiriNo").getCellDetails().setReadOnly(true);
@@ -680,6 +681,7 @@ public class IchijiSashitome1GoHandler {
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtSashitomeKaijoYMD").setVisible(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtNofuKigenYMD").setVisible(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("sashitomeTsuchi").setVisible(false);
+        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("kojoNo").setCellDetails(new DataGridCellDetails());
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("kojoNo").getCellDetails().setReadOnly(true);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtKojoTorokuYMD").getCellDetails().setReadOnly(true);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtShoTeishutsuKigenYMD").getCellDetails().setReadOnly(true);

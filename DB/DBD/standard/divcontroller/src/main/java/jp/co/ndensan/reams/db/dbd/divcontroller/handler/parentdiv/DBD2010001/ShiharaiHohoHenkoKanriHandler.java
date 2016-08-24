@@ -373,6 +373,16 @@ public class ShiharaiHohoHenkoKanriHandler {
     }
 
     private void 管理区分が2の時ボタン群の設定(ShiharaiHohoHenko data) {
+        dgShiharaiHohoHenkoRireki_Row row = div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow();
+        if (row != null && 変更状態_追加.equals(row.getJotai())) {
+            if (ShiharaiHenkoTorokuKubun._１号予告登録者.get名称().equals(row.getTorokuJokyo())) {
+                div.getShiharaiHohoHenkoKanriMain().getBtnIchigoYokokushaToroku1().setDisabled(false);
+            } else if (ShiharaiHenkoTorokuKubun._１号償還払い化登録.get名称().equals(row.getTorokuJokyo())) {
+                div.getShiharaiHohoHenkoKanriMain().getBtnShokanBaraikaToroku().setDisabled(false);
+            }
+            return;
+        }
+
         if (data.get終了区分() != null && !data.get終了区分().isEmpty()) {
             return;
         }
@@ -391,6 +401,14 @@ public class ShiharaiHohoHenkoKanriHandler {
     }
 
     private void 管理区分が3の時ボタン群の設定(ShiharaiHohoHenko data) {
+        dgShiharaiHohoHenkoRireki_Row row = div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow();
+        if (row != null && 変更状態_追加.equals(row.getJotai())) {
+            if (ShiharaiHenkoTorokuKubun._１号給付額減額登録.get名称().equals(row.getTorokuJokyo())) {
+                div.getShiharaiHohoHenkoKanriMain().getBtnKyufugakuGengakuToroku().setDisabled(false);
+            }
+            return;
+        }
+
         if (ShiharaiHenkoShuryoShinseiShinsaKekkaKubun._空.getコード().equals(data.get終了申請審査結果区分())) {
             div.getShiharaiHohoHenkoKanriMain().getBtnKyufugakuGengakuToroku().setDisabled(false);
             div.getShiharaiHohoHenkoKanriMain().getBtnGengakuMenjoShinsei().setDisabled(false);
@@ -404,6 +422,16 @@ public class ShiharaiHohoHenkoKanriHandler {
     }
 
     private void 管理区分が1の時ボタン群の設定(ShiharaiHohoHenko data) {
+        dgShiharaiHohoHenkoRireki_Row row = div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow();
+        if (row != null && 変更状態_追加.equals(row.getJotai())) {
+            if (ShiharaiHenkoTorokuKubun._２号予告登録者.get名称().equals(row.getTorokuJokyo())) {
+                div.getShiharaiHohoHenkoKanriMain().getBtnNigoYokokushaToroku().setDisabled(false);
+            } else if (ShiharaiHenkoTorokuKubun._２号差止登録.get名称().equals(row.getTorokuJokyo())) {
+                div.getShiharaiHohoHenkoKanriMain().getBtnNigoIchijiSashitomeToroku().setDisabled(false);
+            }
+            return;
+        }
+
         if (data.get終了区分() != null && !data.get終了区分().isEmpty()) {
             return;
         }

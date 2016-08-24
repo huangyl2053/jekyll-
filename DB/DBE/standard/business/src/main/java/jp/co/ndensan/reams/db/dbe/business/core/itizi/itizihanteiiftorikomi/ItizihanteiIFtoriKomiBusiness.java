@@ -165,11 +165,21 @@ public class ItizihanteiIFtoriKomiBusiness {
         if (!RString.isNullOrEmpty(entity.getNinchishoKoreishaShihyoCode())) {
             dbt5010Entity.setNinchishoKoreishaShihyoCode(new Code(entity.getNinchishoKoreishaShihyoCode().toString()));
         }
-        dbt5010Entity.setJiritsudoKumiawase1(Integer.parseInt(entity.getJiritsudoKumiawase1().toString()));
-        dbt5010Entity.setJiritsudoKumiawase2(Integer.parseInt(entity.getJiritsudoKumiawase2().toString()));
-        dbt5010Entity.setJiritsudoKumiawase3(Integer.parseInt(entity.getJiritsudoKumiawase3().toString()));
-        dbt5010Entity.setJiritsudoKumiawase4(Integer.parseInt(entity.getJiritsudoKumiawase4().toString()));
-        dbt5010Entity.setJiritsudoKumiawase5(Integer.parseInt(entity.getJiritsudoKumiawase5().toString()));
+        if (!RString.isNullOrEmpty(entity.getJiritsudoKumiawase1())) {
+            dbt5010Entity.setJiritsudoKumiawase1(Integer.parseInt(entity.getJiritsudoKumiawase1().toString()));
+        }
+        if (!RString.isNullOrEmpty(entity.getJiritsudoKumiawase2())) {
+            dbt5010Entity.setJiritsudoKumiawase2(Integer.parseInt(entity.getJiritsudoKumiawase2().toString()));
+        }
+        if (!RString.isNullOrEmpty(entity.getJiritsudoKumiawase3())) {
+            dbt5010Entity.setJiritsudoKumiawase3(Integer.parseInt(entity.getJiritsudoKumiawase3().toString()));
+        }
+        if (!RString.isNullOrEmpty(entity.getJiritsudoKumiawase4())) {
+            dbt5010Entity.setJiritsudoKumiawase4(Integer.parseInt(entity.getJiritsudoKumiawase4().toString()));
+        }
+        if (!RString.isNullOrEmpty(entity.getJiritsudoKumiawase5())) {
+            dbt5010Entity.setJiritsudoKumiawase5(Integer.parseInt(entity.getJiritsudoKumiawase5().toString()));
+        }
         if (!RString.isNullOrEmpty(entity.getJiritsudoKumiawase6())) {
             dbt5010Entity.setJiritsudoKumiawase6(Integer.parseInt(entity.getJiritsudoKumiawase6().toString()));
         }
