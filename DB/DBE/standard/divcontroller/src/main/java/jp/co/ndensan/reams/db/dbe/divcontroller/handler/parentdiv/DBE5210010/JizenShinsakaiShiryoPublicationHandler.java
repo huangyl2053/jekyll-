@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210010.Jize
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -65,14 +66,14 @@ public class JizenShinsakaiShiryoPublicationHandler {
 
     private void set画面を表示する(JizenShinsakaiShiryoPublicationBusiness 対象審査会情報, RString 審査会開催番号) {
         div.getPublicationTargetShinsakai().getTxtShinsakaiKaisaiNo().setValue(審査会開催番号);
-        div.getPublicationTargetShinsakai().getTxtShinsakaiYoteiDate().setValue(対象審査会情報.get介護認定審査会開催予定年月日());
+        div.getPublicationTargetShinsakai().getTxtShinsakaiYoteiDate().setValue(new FlexibleDate(対象審査会情報.get介護認定審査会開催予定年月日()));
         div.getPublicationTargetShinsakai().getTxtShinsakaiKaijo().setValue(対象審査会情報.get介護認定審査会開催場所名称());
         div.getPublicationTargetShinsakai().getTxtShinsakaiKaishiYoteiTime().setValue(new RTime(対象審査会情報.get介護認定審査会開始予定時刻()));
         div.getPublicationTargetShinsakai().getTxtShiryoSakusei().setValue(new RString(対象審査会情報.get介護認定審査会資料作成年月日().toString()));
-        div.getPublicationTargetShinsakai().getTxtGogitaiNo().setValue(new RString(対象審査会情報.get合議体番号()));
+        div.getPublicationTargetShinsakai().getTxtGogitaiNo().setValue(対象審査会情報.get合議体番号());
         div.getPublicationTargetShinsakai().getTxtGogitaiName().setValue(対象審査会情報.get合議体名称());
-        div.getPublicationTargetShinsakai().getTxtYoteiTeiin().setValue(new Decimal(対象審査会情報.get介護認定審査会予定定員()));
-        div.getPublicationTargetShinsakai().getTxtWariateNinzu().setValue(new Decimal(対象審査会情報.get介護認定審査会割当済み人数()));
+        div.getPublicationTargetShinsakai().getTxtYoteiTeiin().setValue(new Decimal(対象審査会情報.get介護認定審査会予定定員().toString()));
+        div.getPublicationTargetShinsakai().getTxtWariateNinzu().setValue(new Decimal(対象審査会情報.get介護認定審査会割当済み人数().toString()));
     }
 
     private void set出力条件の設定() {

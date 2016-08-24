@@ -52,8 +52,7 @@ public class YokaigoninteiJigyotaishoRirekiListHandler {
      */
     public void initialize() {
         NinteiRirekiIchiran ninteiRirekiIchiran = NinteiRirekiIchiran.createInstance();
-        RString hihokenshaNo = DataPassingConverter.deserialize(div.getHihokenshaNo(), RString.class);
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(hihokenshaNo);
+        HihokenshaNo 被保険者番号 = DataPassingConverter.deserialize(div.getHihokenshaNo(), HihokenshaNo.class);
         List<JyukyuuSyaDaiTyouResult> 受給者台帳情報 = ninteiRirekiIchiran.getJyukyuuSyaDaiTyouJyoho(被保険者番号);
         List<dgNinteiRirekiList_Row> 受給者認定 = new ArrayList<>();
         for (int i = 0; i < 受給者台帳情報.size(); i++) {

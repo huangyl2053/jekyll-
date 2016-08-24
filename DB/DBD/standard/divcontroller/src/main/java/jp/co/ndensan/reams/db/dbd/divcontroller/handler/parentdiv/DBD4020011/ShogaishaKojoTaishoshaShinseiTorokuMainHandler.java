@@ -82,6 +82,8 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
     private final RString 状態_追加 = new RString("追加");
     private final RString 状態_修正 = new RString("修正");
     private final RString 状態_削除 = new RString("削除");
+    private final RString 申請情報 = new RString("申請情報");
+    private final RString 承認情報 = new RString("承認情報");
     private final RString あり = new RString("あり");
     private final RString なし = new RString("なし");
     private final RString 対象外 = new RString("対象外");
@@ -251,11 +253,13 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
         if (申請メニュー.equals(ResponseHolder.getMenuID())) {
             div.getBtnAddShinsei().setText(申請情報を追加する);
             div.getTxtDetermineShinsei().setText(申請情報を確定する);
+            div.getShinseiDetail().setTitle(申請情報);
             CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(保存する, 申請情報を保存する.toString());
         } else {
             CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(保存する, 承認情報を保存する.toString());
             div.getBtnAddShinsei().setText(承認情報を追加する);
             div.getTxtDetermineShinsei().setText(承認情報を確定する);
+            div.getShinseiDetail().setTitle(承認情報);
         }
     }
 

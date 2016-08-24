@@ -1,5 +1,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyufuJikoSakuseiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.TankiNyushoResult;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -46,5 +49,72 @@ public interface IServiceRiyohyoInfoDiv extends ICommonChildDivBaseProperties {
      * @param 適用期間終日 RDate
      */
     public void setTekiyoKikanTo(RDate 適用期間終日);
+
+    /**
+     * 暫定区分を取得します。
+     *
+     * @return boolean
+     */
+    public boolean isChkZanteiKubunAllSelected();
+
+    /**
+     * 送付年月を取得します。
+     *
+     * @return RDate
+     */
+    public RDate getSofuYM();
+
+    /**
+     * 更新区分を取得します。
+     *
+     * @return RString
+     */
+    public RString getKoshinKbn();
+
+    /**
+     * 利用年月を取得します。
+     *
+     * @return RDate
+     */
+    public RDate getRiyoYM();
+
+    /**
+     * DB追加処理メソッドです。
+     *
+     * @param 居宅総合事業区分 RString
+     * @param 短期入所情報 TankiNyushoResult
+     */
+    public void DB追加処理(RString 居宅総合事業区分, TankiNyushoResult 短期入所情報);
+
+    /**
+     * DB修正処理メソッドです。
+     *
+     * @param 居宅総合事業区分 RString
+     * @param 短期入所情報 TankiNyushoResult
+     */
+    public void DB修正処理(RString 居宅総合事業区分, TankiNyushoResult 短期入所情報);
+
+    /**
+     * データ整合性チェックします。
+     *
+     * @param サービス利用票情報 List<KyufuJikoSakuseiResult>
+     */
+    public void データ整合性チェック(List<KyufuJikoSakuseiResult> サービス利用票情報);
+
+    /**
+     * 保存処理メソッドです。
+     *
+     * @param 居宅総合事業区分 RString
+     * @param サービス利用票情報 List<KyufuJikoSakuseiResult>
+     */
+    public void init保存処理(RString 居宅総合事業区分, List<KyufuJikoSakuseiResult> サービス利用票情報);
+
+    /**
+     * 削除処理メソッドです。
+     *
+     * @param 居宅総合事業区分 RString
+     * @param 短期入所情報 TankiNyushoResult
+     */
+    public void DB削除処理(RString 居宅総合事業区分, TankiNyushoResult 短期入所情報);
 
 }

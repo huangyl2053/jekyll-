@@ -97,17 +97,16 @@ public class YokaigoHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
 
     @Override
     protected void afterExecute() {
-        if (null == 最新Entity) {
-            return;
+        if (null != 最新Entity) {
+            YokaigodoHenkoTshuchishoReport report = createYokaigodoHenkoTshuchishoReport();
+            report.writeBy(reportSourceWriter);
+            DbT4001JukyushaDaichoEntity jukyushaDaichoEntity = createJukyushaDaichoEntity();
+            dbT4001tableWriter.insert(jukyushaDaichoEntity);
+
+            DbT7022ShoriDateKanriEntity shoriDateKanriEntity = createShoriDateKanriEntity();
+            dbT7022tableWriter.insert(shoriDateKanriEntity);
         }
 
-        YokaigodoHenkoTshuchishoReport report = createYokaigodoHenkoTshuchishoReport();
-        report.writeBy(reportSourceWriter);
-        DbT4001JukyushaDaichoEntity jukyushaDaichoEntity = createJukyushaDaichoEntity();
-        dbT4001tableWriter.insert(jukyushaDaichoEntity);
-
-        DbT7022ShoriDateKanriEntity shoriDateKanriEntity = createShoriDateKanriEntity();
-        dbT7022tableWriter.insert(shoriDateKanriEntity);
         バッチ出力条件リストの出力();
     }
 
@@ -273,12 +272,14 @@ public class YokaigoHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
             builder.append(日時);
             出力条件.add(builder.toRString());
         }
+        builder = new RStringBuilder();
         日時 = TsutishoHakkoCommonProcess.get日付日時(parameter.get終了日(), parameter.get終了日時());
         if (!日時.isEmpty()) {
             builder.append(new RString("今回の終了日時:"));
             builder.append(日時);
             出力条件.add(builder.toRString());
         }
+        builder = new RStringBuilder();
         if (null != parameter.get文書番号() && !parameter.get文書番号().isEmpty()) {
             builder.append(new RString("文書番号:"));
             builder.append(parameter.get文書番号());

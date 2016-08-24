@@ -37,8 +37,8 @@ public class DBD581001Parameter extends BatchParameterBase {
     private Code 終了地区コード;
     private RString 基準フラグ;
     private RString 基準日;
-    private static final RString fromValue = new RString("0401");
-    private static final RString toValue = new RString("0331");
+    private static final RString 月日FROM = new RString("0401");
+    private static final RString 月日TO = new RString("0331");
 
     /**
      * バッチProcessパラメターを取得します．
@@ -46,8 +46,8 @@ public class DBD581001Parameter extends BatchParameterBase {
      * @return YokaigoJissiJyokyohyoProcessParameter
      */
     public YokaigoJissiJyokyohyoProcessParameter toYokaigoJissiJyokyohyoProcessParameter() {
-        FlexibleDate 対象年月日From = new FlexibleDate(new RString(対象年度.getYearValue()).concat(fromValue));
-        FlexibleDate 対象年月日To = new FlexibleDate(new RString(対象年度.plusYear(1).getYearValue()).concat(toValue));
+        FlexibleDate 対象年月日From = new FlexibleDate(new RString(対象年度.getYearValue()).concat(月日FROM));
+        FlexibleDate 対象年月日To = new FlexibleDate(new RString(対象年度.plusYear(1).getYearValue()).concat(月日TO));
         return new YokaigoJissiJyokyohyoProcessParameter(
                 出力帳票,
                 対象年月日From,

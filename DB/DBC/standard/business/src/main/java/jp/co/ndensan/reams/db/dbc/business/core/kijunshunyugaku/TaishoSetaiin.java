@@ -38,6 +38,12 @@ public class TaishoSetaiin {
     private Boolean 印字文字欠け区分;
     private List<Shotai> 世帯員情報;
 
+    /**
+     * 対象者cloneメソッドです。
+     *
+     * @param 対象世帯員クラス TaishoSetaiin
+     * @return TaishoSetaiin
+     */
     public TaishoSetaiin clone(TaishoSetaiin 対象世帯員クラス) {
         TaishoSetaiin 対象世帯員クラス_1 = new TaishoSetaiin();
         対象世帯員クラス_1.set世帯コード(対象世帯員クラス.get世帯コード());

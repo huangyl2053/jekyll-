@@ -31,8 +31,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanriBuilder;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -63,7 +61,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class TaishoShoriHandler {
 
     private final TaishoShoriPanelDiv div;
-    private final Association association;
     private static final RString 処理_年次 = new RString("年次");
     private static final RString 処理_月次 = new RString("月次");
     private static final RString 処理コード_年次 = new RString("0");
@@ -142,7 +139,6 @@ public class TaishoShoriHandler {
      */
     public TaishoShoriHandler(TaishoShoriPanelDiv div) {
         this.div = div;
-        this.association = AssociationFinderFactory.createInstance().getAssociation();
     }
 
     /**
@@ -158,6 +154,38 @@ public class TaishoShoriHandler {
         create処理年度DDL(調定年度);
         create市町村指定DDL();
         return create対象処理一覧(年度終了月);
+    }
+
+    /**
+     * 対象処理一覧を再検索
+     *
+     * @param dataList dataList
+     * @return 対象処理一覧結果
+     */
+    public List<ShoriDateKanri> change対象処理一覧(List<dgTaishoShoriItchiran_Row> dataList) {
+
+        List<ShoriDateKanri> targetList = new ShoriDateKanriManager().get処理日付管理マスタ(
+                SubGyomuCode.DBD介護受給,
+                ShoriName.非課税年金対象者情報アップロード.get名称(),
+                new FlexibleYear(div.getHdnNendo()),
+                new LasdecCode(div.getHdnShichosonCode()));
+
+        for (ShoriDateKanri target : targetList) {
+            for (dgTaishoShoriItchiran_Row row : dataList) {
+                if (row.getHdnNendoNaiRenban().equals(target.get年度内連番())) {
+                    if (!target.get処理枝番().equals(ShoriJotaiKubun.未処理.getコード())) {
+                        row.setTxtShoriJotai(ShoriJotaiKubun.toValue(target.get処理枝番()).get名称());
+                        YMDHMS 基準日時 = target.get基準日時();
+                        if (null != 基準日時 && !基準日時.isEmpty()) {
+                            row.setTxtShoriNichiji(target.get基準日時().getRDateTime().format和暦("GYY.MM.DD HH:mm:ss"));
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        return targetList;
     }
 
     /**
@@ -435,10 +463,8 @@ public class TaishoShoriHandler {
         RString header = new RString("0");
         for (int i = 0; i < 処理月数; i++) {
             月コード = 月コード + 1;
-            if (月コード > 処理月数) {
-                月コード = 1;
-                header = new RString("1");
-            }
+            月コード = 月コード > 処理月数 ? 1 : 月コード;
+            header = 月コード > 処理月数 ? new RString("1") : header;
             row = new dgTaishoShoriItchiran_Row();
             row.setHdnTukiCode(header.concat(new RString(String.format("%02d", 月コード))));
             row.setHdnShoriCode(処理コード_月次);
@@ -450,32 +476,6 @@ public class TaishoShoriHandler {
             dataList.add(row);
         }
         return dataList;
-    }
-
-    private List<ShoriDateKanri> change対象処理一覧(List<dgTaishoShoriItchiran_Row> dataList) {
-
-        List<ShoriDateKanri> targetList = new ShoriDateKanriManager().get処理日付管理マスタ(
-                SubGyomuCode.DBD介護受給,
-                ShoriName.非課税年金対象者情報アップロード.get名称(),
-                new FlexibleYear(div.getHdnNendo()),
-                new LasdecCode(div.getHdnShichosonCode()));
-
-        for (ShoriDateKanri target : targetList) {
-            for (dgTaishoShoriItchiran_Row row : dataList) {
-                if (row.getHdnNendoNaiRenban().equals(target.get年度内連番())) {
-                    if (!target.get処理枝番().equals(ShoriJotaiKubun.未処理.getコード())) {
-                        row.setTxtShoriJotai(ShoriJotaiKubun.toValue(target.get処理枝番()).get名称());
-                        YMDHMS 基準日時 = target.get基準日時();
-                        if (null != 基準日時 && !基準日時.isEmpty()) {
-                            row.setTxtShoriNichiji(target.get基準日時().getRDateTime().format和暦("GYY.MM.DD HH:mm:ss"));
-                        }
-                    }
-                    break;
-                }
-            }
-        }
-
-        return targetList;
     }
 
     private RString get市町村値(LasdecCode 市町村コード, RString 市町村名) {

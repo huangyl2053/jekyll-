@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohikagoketteikoh
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+
 /**
  * 総合事業費過誤決定通知書情報取込一覧表（公費）帳票Source
  *
@@ -87,7 +88,12 @@ public class SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource implements IRep
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * SogojigyohiKagoKetteitsuchishoTorikomiIchiranSourceのENUM
+     */
     public enum ReportSourceFields {
+
         printTimeStamp,
         torikomiYM,
         kohiFutanshaNo,

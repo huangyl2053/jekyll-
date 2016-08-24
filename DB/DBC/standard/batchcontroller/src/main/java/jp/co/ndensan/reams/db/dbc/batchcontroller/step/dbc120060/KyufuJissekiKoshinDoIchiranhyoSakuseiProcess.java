@@ -87,7 +87,7 @@ public class KyufuJissekiKoshinDoIchiranhyoSakuseiProcess extends BatchKeyBreakB
     private BatchReportWriter<KyufujissekiKoshinkekkaIchiranSource> batchReportWriter;
     private ReportSourceWriter<KyufujissekiKoshinkekkaIchiranSource> reportSourceWriter;
     private int 連番 = 0;
-    private int No = 0;
+    private int 連番_NO = 0;
     private int 合計件数 = 0;
     private RString 並び順の１件目 = RString.EMPTY;
     private RString 並び順の２件目 = RString.EMPTY;
@@ -180,20 +180,20 @@ public class KyufuJissekiKoshinDoIchiranhyoSakuseiProcess extends BatchKeyBreakB
             boolean 改頁Flag = new KyufujissekiKoshinkekkaIchiranPageBreak(改頁リスト).is改頁(entity, beforeEntity);
             if (改頁Flag) {
                 csvWriter.writeLine(service.to集計項目(beforeEntity, 合計件数));
-                No = No + 1;
+                連番_NO = 連番_NO + 1;
                 KyufujissekiKoshinkekkaIchiranReport report = new KyufujissekiKoshinkekkaIchiranReport(parameter.get処理年月(),
                         beforeEntity, 並び順の１件目, 並び順の２件目,
-                        並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目リスト, new YMDHMS(parameter.getシステム日付()), No, true, 合計件数);
+                        並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目リスト, new YMDHMS(parameter.getシステム日付()), 連番_NO, true, 合計件数);
                 report.writeBy(reportSourceWriter);
                 合計件数 = 1;
                 csvWriter.writeLine(service.to明細項目(entity, 連番));
             } else {
                 合計件数 = 合計件数 + 1;
                 csvWriter.writeLine(service.to明細項目(entity, 連番));
-                No = No + 1;
+                連番_NO = 連番_NO + 1;
                 KyufujissekiKoshinkekkaIchiranReport report = new KyufujissekiKoshinkekkaIchiranReport(parameter.get処理年月(),
                         beforeEntity, 並び順の１件目, 並び順の２件目,
-                        並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目リスト, new YMDHMS(parameter.getシステム日付()), No, false, 合計件数);
+                        並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目リスト, new YMDHMS(parameter.getシステム日付()), 連番_NO, false, 合計件数);
                 report.writeBy(reportSourceWriter);
             }
         }
@@ -210,10 +210,10 @@ public class KyufuJissekiKoshinDoIchiranhyoSakuseiProcess extends BatchKeyBreakB
     @Override
     protected void afterExecute() {
         if (null != lastEntity) {
-            No = No + 1;
+            連番_NO = 連番_NO + 1;
             KyufujissekiKoshinkekkaIchiranReport report = new KyufujissekiKoshinkekkaIchiranReport(parameter.get処理年月(),
                     lastEntity, 並び順の１件目, 並び順の２件目,
-                    並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目リスト, new YMDHMS(parameter.getシステム日付()), No, true, 合計件数);
+                    並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目リスト, new YMDHMS(parameter.getシステム日付()), 連番_NO, true, 合計件数);
             report.writeBy(reportSourceWriter);
             csvWriter.writeLine(service.to集計項目(lastEntity, 合計件数));
             合計件数 = 0;

@@ -25,7 +25,7 @@ public enum JukyushaIF_NinteiShinseichuKubunCode {
     /**
      * コード:2 名称:決定済み 表示名称:決定済み
      */
-    決定済み("3", "設定済み");
+    決定済み("3", "決定済み");
 
     private final RString code;
     private final RString fullName;

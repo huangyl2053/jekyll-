@@ -51,7 +51,6 @@ public class ServiceKeikakuHiPanelHandler {
     private final ServiceKeikakuHiPanelDiv div;
     private static final int 連番LENGTH = 2;
     private static final RString 連番_1 = new RString("01");
-    private static final RString コード種別 = new RString("0002");
     private static final RString 事業者区分BLANK = new RString("0");
     private static final FlexibleYearMonth サービス年月_200904 = new FlexibleYearMonth("200904");
     private static final FlexibleYearMonth サービス年月_200903 = new FlexibleYearMonth("200903");

@@ -59,10 +59,10 @@ public class FutanWariaiSokujiKouseiHolder implements Serializable {
     /**
      * SogoJigyoKubunShikyuGendoGakuのlistを設定します。
      *
-     * @param RiyoshaFutanWariaiMeisai RiyoshaFutanWariaiMeisai
+     * @param riyoshaFutanWariaiMeisai RiyoshaFutanWariaiMeisai
      */
-    public void addRiyoshaFutanWariaiMeisai(RiyoshaFutanWariaiMeisai RiyoshaFutanWariaiMeisai) {
-        利用者負担割合明細.add(RiyoshaFutanWariaiMeisai);
+    public void addRiyoshaFutanWariaiMeisai(RiyoshaFutanWariaiMeisai riyoshaFutanWariaiMeisai) {
+        利用者負担割合明細.add(riyoshaFutanWariaiMeisai);
     }
 
     /**

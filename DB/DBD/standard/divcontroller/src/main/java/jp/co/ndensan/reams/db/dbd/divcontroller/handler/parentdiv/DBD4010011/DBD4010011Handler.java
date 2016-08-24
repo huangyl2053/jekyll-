@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * 障がい者控除対象者认定のハンドラクラスです。
@@ -25,7 +24,7 @@ public class DBD4010011Handler {
     /**
      * コンストラクタです。
      *
-     * @param div 障がい者控除対象者认定のコントロールdiv
+     * @param dBD4010011Div DBD4010011Div
      */
     public DBD4010011Handler(DBD4010011Div dBD4010011Div) {
         this.dBD4010011Div = dBD4010011Div;
@@ -55,9 +54,4 @@ public class DBD4010011Handler {
         return parameter;
     }
 
-    private TextBoxDate ToTextBoxDate(RDate rDate) {
-        TextBoxDate date = new TextBoxDate();
-        date.setValue(rDate);
-        return date;
-    }
 }

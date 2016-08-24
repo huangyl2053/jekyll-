@@ -1028,13 +1028,6 @@
                     MAX("idoYMD" || "edaNo") AS max1
                  FROM
                     rgdb."DbT1001HihokenshaDaicho"
-                 WHERE
-                    "hihokennshaKubunCode" = '1'
-                AND "logicalDeletedFlag" = FALSE
-                AND ("shikakuSoshitsuYMD" IS NULL OR "shikakuSoshitsuYMD" = ''
-                    OR #{賦課年度} || '0401') <![CDATA[<]]> "shikakuSoshitsuYMD"
-                AND #{抽出開始日時} <![CDATA[<=]]> "lastUpdateTimestamp"
-                AND "lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
                  GROUP BY
                     "hihokenshaNo",
                     "ichigoShikakuShutokuYMD",
@@ -1055,6 +1048,13 @@
                 "TmpIdoTrigger" AS B
             ON
                 A."hihokenshaNo" = B."hihokenshaNo"
+         WHERE
+            A."hihokennshaKubunCode" = '1'
+        AND A."logicalDeletedFlag" = FALSE
+        AND (A."shikakuSoshitsuYMD" IS NULL OR A."shikakuSoshitsuYMD" = ''
+            OR A."shikakuSoshitsuYMD" <![CDATA[>]]> #{賦課年度} || '0401')
+        AND A."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+        AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
     <!-- 賦課の情報として取得 -->
@@ -1569,7 +1569,7 @@
      <!--賦課計算の情報の取得します。--> 
     <select resultOrdered="true" id="get賦課計算の情報" resultMap="resultMap_CalculateFukaEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.CalculateFukaParameter" fetchSize="500" >
-        SELECT
+        SELECT 
             <include refid="allColumns_TmpHonsantei" />,
             "TmpHonsantei"."choteiNendo",
             "TmpHonsantei"."fukaNendo",

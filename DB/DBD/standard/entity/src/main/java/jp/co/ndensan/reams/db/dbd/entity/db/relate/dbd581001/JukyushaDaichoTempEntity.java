@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
@@ -28,7 +29,15 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 @lombok.Setter
 public class JukyushaDaichoTempEntity extends DbTableEntityBase<JukyushaDaichoTempEntity> implements IDbAccessable {
 
-    public static final RString TABLE_NAME = new RString("受給者台帳一時テーブル");
+    /**
+     * テーブル名です。
+     */
+    @TableName
+    public static final RString TABLE_NAME;
+
+    static {
+        TABLE_NAME = (new RString("jukyushaDaichoTempEntity"));
+    }
 
     @TempTableColumnOrder(1)
     private LasdecCode shichosonCode;

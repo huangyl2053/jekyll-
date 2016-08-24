@@ -148,7 +148,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
         出力順Map = new HashMap<>();
         pageBreakKeys.add(固定改頁項目ID);
         RString orderByStr = MyBatisOrderByClauseCreator.create(JukyushaKoshinKekkaIchiranOutputOrder.class, 出力順情報);
-        if (出力順情報 != null) {
+        if (null != 出力順情報) {
             int i = 0;
             改頁リスト = new ArrayList();
             for (ISetSortItem item : 出力順情報.get設定項目リスト()) {

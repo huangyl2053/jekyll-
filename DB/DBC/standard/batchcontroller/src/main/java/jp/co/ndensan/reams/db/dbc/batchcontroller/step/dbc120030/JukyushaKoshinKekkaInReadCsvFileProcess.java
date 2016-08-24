@@ -126,7 +126,9 @@ public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<RS
         }
         returnEntity.setCodeNum(コントロールレコードのレコード件数の合計);
         returnEntity.set明細データ登録件数(明細件数合計);
-        returnEntity.setShoriYM(処理対象年月);
+        if (null == returnEntity.getShoriYM()) {
+            returnEntity.setShoriYM(処理対象年月);
+        }
         returnEntity.set連番(連番);
     }
 
@@ -220,7 +222,7 @@ public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<RS
         if (hokensha != null) {
             受給者一時entity.setHokenshaName(hokensha.get保険者名());
         }
-        受給者一時entity.setTorikomiYM(処理対象年月);
+        受給者一時entity.setTorikomiYM(parameter.get処理年月());
         受給者情報一時tableWriter.insert(受給者一時entity);
     }
 

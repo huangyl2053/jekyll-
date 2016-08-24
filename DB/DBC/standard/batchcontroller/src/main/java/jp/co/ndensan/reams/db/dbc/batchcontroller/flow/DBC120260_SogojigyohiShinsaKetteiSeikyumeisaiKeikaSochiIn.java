@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuGetFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.sogojigyohishinsaketteiseikyumeisaikeikasochiin.SogojigyohiShinsaProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
-import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120920.FlowEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -51,6 +51,7 @@ public class DBC120260_SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiIn extends B
     private FlowEntity flowEntity;
     private RString csvFullPath;
     private int レコード件数合算;
+    private int 集計件数;
 
     private static RString 交換情報識別番号;
 
@@ -74,6 +75,8 @@ public class DBC120260_SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiIn extends B
                 flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
                         SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
                 レコード件数合算 = flowEntity.get明細データ登録件数();
+                集計件数 = flowEntity.getCodeNum();
+
             }
             if (0 == flowEntity.get明細データ登録件数()) {
                 executeStep(国保連インタフェース管理更新);
@@ -115,6 +118,7 @@ public class DBC120260_SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiIn extends B
         parameter.set処理年月(getParameter().getShoriYM());
         parameter.set保存先パース(csvFullPath);
         parameter.setレコード件数合算(レコード件数合算);
+        parameter.set集計件数合算(集計件数);
         return loopBatch(SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess.class).arguments(parameter).define();
     }
 

@@ -427,6 +427,7 @@ public class IchijiSashitome1GoHandler {
         div.getTxtShokaiKojoTorokuTsuchiHakkoYMD().setDisplayNone(false);
         div.getTxtShokaiKojoNo().setDisplayNone(false);
         div.getBtnTainoJokyo().setDisabled(false);
+        div.getBtnSashitomeOrKojoJokyoShokaiClose().setDisplayNone(false);
         div.getBtnSashitomeOrKojoJokyoShokaiClose().setDisabled(false);
         div.getBtnSashitomeOrKojoTorokuTorikeshi().setDisplayNone(true);
         div.getBtnSashitomeOrKojoTorokuKakutei().setDisplayNone(true);
@@ -523,17 +524,11 @@ public class IchijiSashitome1GoHandler {
 
     private boolean 抽出条件(RString 登録区分, RString 押下ボタン, ShiharaiHohoHenko shiharaiHohoHenko) {
         boolean 抽出条件 = false;
-        if (登録区分.equals(ShiharaiHenkoTorokuKubun._１号給付額減額登録.getコード())) {
-            if (押下ボタン.equals(_給付一時差止登録)
-                    && (shiharaiHohoHenko.get償還払化決定年月日() != null && !shiharaiHohoHenko.get償還払化決定年月日().isEmpty())) {
-                抽出条件 = true;
-            } else if (押下ボタン.equals(_保険料控除登録) && shiharaiHohoHenko.get差止対象決定年月日() != null
-                    && !shiharaiHohoHenko.get差止対象決定年月日().isEmpty()) {
-                抽出条件 = true;
-            }
-        } else if (登録区分.equals(ShiharaiHenkoTorokuKubun._１号償還払い化登録.getコード())
-                && 押下ボタン.equals(_給付一時差止登録)
+        if (押下ボタン.equals(_給付一時差止登録)
                 && (shiharaiHohoHenko.get償還払化決定年月日() != null && !shiharaiHohoHenko.get償還払化決定年月日().isEmpty())) {
+            抽出条件 = true;
+        } else if (押下ボタン.equals(_保険料控除登録) && shiharaiHohoHenko.get差止対象決定年月日() != null
+                && !shiharaiHohoHenko.get差止対象決定年月日().isEmpty()) {
             抽出条件 = true;
         }
         return 抽出条件;
@@ -643,10 +638,9 @@ public class IchijiSashitome1GoHandler {
     }
 
     private void 給付一時差止登録_Status() {
-        div.getBtnSashitomeToroku().setDisabled(false);
+        div.getBtnSashitomeToroku().setDisabled(true);
         div.getBtnKojoToroku().setDisabled(true);
-        div.getBtnKojoToroku().setDisplayNone(true);
-        div.getBtnSashitomeOrKojoJokyoShokai().setDisabled(false);
+        div.getBtnSashitomeOrKojoJokyoShokai().setDisabled(true);
         div.getDgSashitomeKojoIchiran().setDisabled(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("sashitome").getCellDetails().setReadOnly(true);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("kojo").setCellDetails(new DataGridCellDetails());
@@ -1130,7 +1124,8 @@ public class IchijiSashitome1GoHandler {
             ArrayList<ShiharaiHohoHenkoSashitome> shiharaiHohoHenkoSashitomeList, ArrayList<RString> 差止控除番号) {
         if (!shiharaiHohoHenkoSashitomeList.isEmpty()) {
             for (int i = 0; i < shiharaiHohoHenkoSashitomeList.size(); i++) {
-                if (!shiharaiHohoHenkoSashitomeList.get(i).get差止控除番号().isNullOrEmpty()) {
+                if (shiharaiHohoHenkoSashitomeList.get(i).get差止控除番号() != null
+                        && !shiharaiHohoHenkoSashitomeList.get(i).get差止控除番号().isEmpty()) {
                     if (!差止控除番号.contains(shiharaiHohoHenkoSashitomeList.get(i).get差止控除番号())) {
                         差止控除番号.add(shiharaiHohoHenkoSashitomeList.get(i).get差止控除番号());
                     }

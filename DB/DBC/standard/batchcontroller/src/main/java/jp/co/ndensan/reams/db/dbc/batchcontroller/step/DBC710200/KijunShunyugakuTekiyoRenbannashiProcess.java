@@ -118,9 +118,16 @@ public class KijunShunyugakuTekiyoRenbannashiProcess extends BatchProcessBase<Ha
     }
 
     private void get市町村名() {
-        IAssociationFinder finder = AssociationFinderFactory.createInstance();
-        Association association = finder.getAssociation(new LasdecCode(processParameter.get保険者コード()));
-        市町村名 = association.get市町村名();
+        RString 保険者コード = processParameter.get保険者コード();
+        if (new RString("000000").equals(保険者コード)) {
+            市町村名 = new RString("全市町村");
+        } else if (!RString.isNullOrEmpty(保険者コード)) {
+            IAssociationFinder finder = AssociationFinderFactory.createInstance();
+            Association association = finder.getAssociation(new LasdecCode(保険者コード));
+            市町村名 = association.get市町村名();
+        } else {
+            市町村名 = RString.EMPTY;
+        }
         市町村名MasterMap = new HashMap<>();
         List<KoseiShichosonMaster> 市町村名Master = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
         for (KoseiShichosonMaster koseiShichosonMaster : 市町村名Master) {

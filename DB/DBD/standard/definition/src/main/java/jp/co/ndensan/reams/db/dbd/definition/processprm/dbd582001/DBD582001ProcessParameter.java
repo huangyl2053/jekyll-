@@ -42,19 +42,19 @@ public class DBD582001ProcessParameter implements IBatchProcessParameter {
     /**
      * コンストラクタです。
      *
-     * @param 基準フラグ
-     * @param 年齢基準日
-     * @param 基準年月日
-     * @param 基準年月
-     * @param 生年月日From
-     * @param 生年月日To
-     * @param 地区区分
-     * @param 開始地区コード
-     * @param 終了地区コード
-     * @param 集計単位
-     * @param 年齢From
-     * @param 年齢To
-     * @param 対象年度
+     * @param 基準フラグ 基準フラグ
+     * @param 年齢基準日 年齢基準日
+     * @param 基準年月日 基準年月日
+     * @param 基準年月 基準年月
+     * @param 生年月日From 生年月日From
+     * @param 生年月日To 生年月日To
+     * @param 地区区分 地区区分
+     * @param 開始地区コード 開始地区コード
+     * @param 終了地区コード 終了地区コード
+     * @param 集計単位 集計単位
+     * @param 年齢From 年齢From
+     * @param 年齢To 年齢To
+     * @param 対象年度 対象年度
      */
     public DBD582001ProcessParameter(
             RString 基準フラグ,

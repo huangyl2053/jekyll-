@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -63,47 +64,51 @@ public class JissiJyokyohyoReportProcess extends BatchProcessBase<JukyushaDaicho
 
     @Override
     protected void createWriter() {
-        tempWriter = new BatchEntityCreatedTempTableWriter(new RString("受給者台帳一時テーブル"),
+        tempWriter = new BatchEntityCreatedTempTableWriter(JukyushaDaichoTempEntity.TABLE_NAME,
                 JukyushaDaichoTempEntity.class);
     }
 
     @Override
     protected void process(JukyushaDaichoTempEntity entity) {
         if (parameter.get出力帳票().equals(出力帳票)) {
-            if (entity.getNinteiYMD() != null && !entity.getNinteiYMD().isEmpty()) {
+            if (checkEmpty(entity.getNinteiYMD())) {
                 entity.setNinteiYM(entity.getNinteiYMD().getYearMonth().seireki().toDateString());
             }
-            if (entity.getJukyuShinseiYMD() != null && !entity.getJukyuShinseiYMD().isEmpty()) {
+            if (checkEmpty(entity.getJukyuShinseiYMD())) {
                 entity.setJukyuShinseiYM(entity.getJukyuShinseiYMD().getYearMonth().seireki().toDateString());
             }
-            if (entity.getNinteichosaIraiYMD() != null && !entity.getNinteichosaIraiYMD().isEmpty()) {
+            if (checkEmpty(entity.getNinteichosaIraiYMD())) {
                 entity.setNinteichosaIraiYM(entity.getNinteichosaIraiYMD().getYearMonth().seireki().toDateString());
             }
-            if (entity.getNinteichosaJisshiYMD() != null && !entity.getNinteichosaJisshiYMD().isEmpty()) {
+            if (checkEmpty(entity.getNinteichosaJisshiYMD())) {
                 entity.setNinteichosaJisshiYM(entity.getNinteichosaJisshiYMD().getYearMonth().seireki().toDateString());
             }
-            if (entity.getIkenshoSakuseiIraiYMD() != null && !entity.getIkenshoSakuseiIraiYMD().isEmpty()) {
+            if (checkEmpty(entity.getIkenshoSakuseiIraiYMD())) {
                 entity.setIkenshoSakuseiIraiYM(entity.getIkenshoSakuseiIraiYMD().getYearMonth().seireki().toDateString());
             }
-            if (entity.getIkenshoJuryoYMD() != null && !entity.getIkenshoJuryoYMD().isEmpty()) {
+            if (checkEmpty(entity.getIkenshoJuryoYMD())) {
                 entity.setIkenshoJuryoYM(entity.getIkenshoJuryoYMD().getYearMonth().seireki().toDateString());
             }
-            if (entity.getShinsakaiIraiYMD() != null && !entity.getShinsakaiIraiYMD().isEmpty()) {
+            if (checkEmpty(entity.getShinsakaiIraiYMD())) {
                 entity.setShinsakaiIraiYM(entity.getShinsakaiIraiYMD().getYearMonth().seireki().toDateString());
             }
-            if (entity.getNinteiShinsakaiWariateYoteiYMD() != null && !entity.getNinteiShinsakaiWariateYoteiYMD().isEmpty()) {
+            if (checkEmpty(entity.getNinteiShinsakaiWariateYoteiYMD())) {
                 entity.setNinteiShinsakaiWariateYoteiYM(entity.getNinteiShinsakaiWariateYoteiYMD().getYearMonth().seireki().toDateString());
             }
-            if (entity.getShinsakaiShiryoSakuseiYMD() != null && !entity.getShinsakaiShiryoSakuseiYMD().isEmpty()) {
+            if (checkEmpty(entity.getShinsakaiShiryoSakuseiYMD())) {
                 entity.setShinsakaiShiryoSakuseiYM(entity.getShinsakaiShiryoSakuseiYMD().getYearMonth().seireki().toDateString());
             }
-            if (entity.getNinteichosaYoteiYMD() != null && !entity.getNinteichosaYoteiYMD().isEmpty()) {
+            if (checkEmpty(entity.getNinteichosaYoteiYMD())) {
                 entity.setNinteichosaYoteiYM(entity.getNinteichosaYoteiYMD().getYearMonth().seireki().toDateString());
             }
-            if (entity.getIkenshoSakuseiIraiYoteiYMD() != null && !entity.getIkenshoSakuseiIraiYoteiYMD().isEmpty()) {
+            if (checkEmpty(entity.getIkenshoSakuseiIraiYoteiYMD())) {
                 entity.setIkenshoSakuseiIraiYoteiYM(entity.getIkenshoSakuseiIraiYoteiYMD().getYearMonth().seireki().toDateString());
             }
             tempWriter.insert(entity);
         }
+    }
+
+    private boolean checkEmpty(FlexibleDate ymd) {
+        return ymd != null && !ymd.isEmpty();
     }
 }

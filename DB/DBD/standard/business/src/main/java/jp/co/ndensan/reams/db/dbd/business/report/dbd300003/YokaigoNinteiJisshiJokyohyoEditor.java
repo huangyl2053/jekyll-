@@ -81,6 +81,11 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
 
         YokaigoNinteiJisshiJokyohyoReportEntity list1 = 実施状況Entityリストlist1.get(index);
         if (null != 実施状況Entityリストlist1 && !実施状況Entityリストlist1.isEmpty()) {
+            if (list1.get市町村名() != null && !list1.get市町村名().equals(new RString("000000"))) {
+                source.shichosonName = list1.get市町村名();
+                source.hokenshaName = list1.get市町村名();
+                source.hokenshaNo = list1.get市町村番号();
+            }
             source.list1_1 = list1.get集計項目();
             source.list1_2 = list1.get四月の合計();
             source.list1_3 = list1.get五月の合計();
@@ -99,6 +104,11 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
 
         YokaigoNinteiJisshiJokyohyoReportEntity list2 = 実施状況Entityリストlist2.get(index);
         if (null != 実施状況Entityリストlist2 && !実施状況Entityリストlist2.isEmpty()) {
+            if (list2.get市町村名() != null && !list2.get市町村名().equals(new RString("000000"))) {
+                source.shichosonName = list2.get市町村名();
+                source.hokenshaName = list2.get市町村名();
+                source.hokenshaNo = list2.get市町村番号();
+            }
             source.list2_1 = list2.get集計項目();
             source.list2_2 = list2.get四月の合計();
             source.list2_3 = list2.get五月の合計();
@@ -116,6 +126,11 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
         }
         YokaigoNinteiJisshiJokyohyoReportEntity list3 = 実施状況Entityリストlist3.get(index);
         if (null != 実施状況Entityリストlist3 && !実施状況Entityリストlist3.isEmpty()) {
+            if (list3.get市町村名() != null && !list3.get市町村名().equals(new RString("000000"))) {
+                source.shichosonName = list3.get市町村名();
+                source.hokenshaName = list3.get市町村名();
+                source.hokenshaNo = list3.get市町村番号();
+            }
             source.list3_1 = list3.get集計項目();
             source.list3_2 = list3.get四月の合計();
             source.list3_3 = list3.get五月の合計();
@@ -133,6 +148,11 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
         }
         YokaigoNinteiJisshiJokyohyoReportEntity list4 = 実施状況Entityリストlist4.get(index);
         if (null != 実施状況Entityリストlist4 && !実施状況Entityリストlist4.isEmpty()) {
+            if (list4.get市町村名() != null && !list4.get市町村名().equals(new RString("000000"))) {
+                source.shichosonName = list4.get市町村名();
+                source.hokenshaName = list4.get市町村名();
+                source.hokenshaNo = list4.get市町村番号();
+            }
             source.list4_1 = list4.get集計項目();
             source.list4_2 = list4.get四月の合計();
             source.list4_3 = list4.get五月の合計();

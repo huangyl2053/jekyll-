@@ -82,18 +82,21 @@ public class MiDouteiDataCreateProcess extends BatchProcessBase<DbT4037HikazeNen
             data.setDtshoriResult(entity.getDtshorikekka());
             data.setDtyobi3(entity.getDtyobi3());
             data.setDtyobi4(entity.getDtyobi4());
-            if (entity.getDtkingaku1() != null && !entity.getDtkingaku1().trim().isEmpty()) {
-                data.setDtkinngaku1(Decimal.valueOf(Long.valueOf(entity.getDtkingaku1().trim().toString())));
+            RString dtkingaku1 = entity.getDtkingaku1();
+            if (dtkingaku1 != null && !dtkingaku1.isEmpty()) {
+                data.setDtkinngaku1(Decimal.valueOf(Long.valueOf(dtkingaku1.toString())));
             } else {
                 data.setDtkinngaku1(Decimal.valueOf(0));
             }
-            if (entity.getDtkingakuyobi1() != null && !entity.getDtkingakuyobi1().trim().isEmpty()) {
-                data.setDtkinngakuYobi1(Decimal.valueOf(Long.valueOf(entity.getDtkingakuyobi1().trim().toString())));
+            RString dtkingakuyobi1 = entity.getDtkingakuyobi1();
+            if (dtkingakuyobi1 != null && !dtkingakuyobi1.isEmpty()) {
+                data.setDtkinngakuYobi1(Decimal.valueOf(Long.valueOf(dtkingakuyobi1.toString())));
             } else {
                 data.setDtkinngakuYobi1(Decimal.valueOf(0));
             }
-            if (entity.getDtkingakuyobi2() != null && !entity.getDtkingakuyobi2().trim().isEmpty()) {
-                data.setDtkinngakuYobi2(Decimal.valueOf(Long.valueOf(entity.getDtkingakuyobi2().trim().toString())));
+            RString dtkingakuyobi2 = entity.getDtkingakuyobi2();
+            if (dtkingakuyobi2 != null && !dtkingakuyobi2.isEmpty()) {
+                data.setDtkinngakuYobi2(Decimal.valueOf(Long.valueOf(dtkingakuyobi2.toString())));
             } else {
                 data.setDtkinngakuYobi2(Decimal.valueOf(0));
             }

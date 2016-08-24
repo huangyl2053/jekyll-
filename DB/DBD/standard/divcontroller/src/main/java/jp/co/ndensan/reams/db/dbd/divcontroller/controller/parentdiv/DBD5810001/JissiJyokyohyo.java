@@ -94,7 +94,7 @@ public class JissiJyokyohyo {
      * バッチ起動前のチェックです。
      *
      * @param div JissiJyokyohyoDiv
-     * @return
+     * @return ResponseData<JissiJyokyohyoDiv>
      */
     public ResponseData<JissiJyokyohyoDiv> onBeforeCilck_btnBatchRegister(JissiJyokyohyoDiv div) {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();

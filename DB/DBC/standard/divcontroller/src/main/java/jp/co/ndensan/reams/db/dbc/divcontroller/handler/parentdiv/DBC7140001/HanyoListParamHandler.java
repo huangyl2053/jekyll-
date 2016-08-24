@@ -281,7 +281,7 @@ public class HanyoListParamHandler {
         if (null != div.getCcdShutsuryokujun().getSelected出力順()) {
             batchparam.setShutsuryokuju(div.getCcdShutsuryokujun().getSelected出力順().get出力順ID());
         }
-        if (false != div.getCcdShutsuryokuKoumoku().getEraseBorder()) {
+        if (null != div.getCcdShutsuryokuKoumoku()) {
             batchparam.setShutsuryokuTomoku(div.getCcdShutsuryokuKoumoku().get出力項目ID());
         } else {
             batchparam.setShutsuryokuTomoku(RString.EMPTY);

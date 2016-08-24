@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -28,12 +30,18 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 基準収入額適用管理のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-022 wangkanglei
  */
 public class DbT3116KijunShunyugakuTekiyoKanriDac implements ISaveable<DbT3116KijunShunyugakuTekiyoKanriEntity> {
 
     @InjectSession
     private SqlSession session;
-    private static final int 定数_1 = 1;
+    private static final RString KEY_被保険者番号 = new RString("被保険者番号");
+    private static final RString KEY_世帯コード = new RString("世帯コード");
+    private static final RString KEY_年度 = new RString("年度");
+    private static final RString KEY_履歴番号 = new RString("履歴番号");
+    private static final RString KEY_基準収入額適用管理エンティティ = new RString("基準収入額適用管理エンティティ");
 
     /**
      * 主キーで基準収入額適用管理を取得します。
@@ -51,10 +59,10 @@ public class DbT3116KijunShunyugakuTekiyoKanriDac implements ISaveable<DbT3116Ki
             FlexibleYear 年度,
             int 履歴番号,
             HihokenshaNo 被保険者番号) throws NullPointerException {
-        requireNonNull(世帯コード, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯コード"));
-        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(世帯コード, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_世帯コード.toString()));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_年度.toString()));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_履歴番号.toString()));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_被保険者番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -91,7 +99,7 @@ public class DbT3116KijunShunyugakuTekiyoKanriDac implements ISaveable<DbT3116Ki
     @Transaction
     @Override
     public int save(DbT3116KijunShunyugakuTekiyoKanriEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("基準収入額適用管理エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_基準収入額適用管理エンティティ.toString()));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
@@ -110,8 +118,8 @@ public class DbT3116KijunShunyugakuTekiyoKanriDac implements ISaveable<DbT3116Ki
             RString 世帯コード,
             FlexibleYear 年度
     ) throws NullPointerException {
-        requireNonNull(世帯コード, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯コード"));
-        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
+        requireNonNull(世帯コード, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_世帯コード.toString()));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_年度.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -134,7 +142,7 @@ public class DbT3116KijunShunyugakuTekiyoKanriDac implements ISaveable<DbT3116Ki
     public List<DbT3116KijunShunyugakuTekiyoKanriEntity> select基準収入額適用管理マスタ(
             FlexibleYear 年度
     ) throws NullPointerException {
-        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_年度.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -144,6 +152,59 @@ public class DbT3116KijunShunyugakuTekiyoKanriDac implements ISaveable<DbT3116Ki
                         eq(nendo, 年度)
                 ).
                 toList(DbT3116KijunShunyugakuTekiyoKanriEntity.class);
+    }
+
+    /**
+     * 基準収入額適用管理情報によっての抽出。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 世帯コード SetaiCode
+     * @return list
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    public List<DbT3116KijunShunyugakuTekiyoKanriEntity> select基準収入額適用管理情報(
+            HihokenshaNo 被保険者番号,
+            SetaiCode 世帯コード) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_被保険者番号.toString()));
+        requireNonNull(世帯コード, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_世帯コード.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3116KijunShunyugakuTekiyoKanri.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(setaiCode, 世帯コード)))
+                .order(by(nendo, Order.DESC), by(setaiCode, Order.ASC), by(rirekiNo, Order.DESC))
+                .toList(DbT3116KijunShunyugakuTekiyoKanriEntity.class);
+    }
+
+    /**
+     * 基準収入額適用管理情報BY世帯コードによっての抽出。
+     *
+     * @param 世帯コード SetaiCode
+     * @param 年度 FlexibleYear
+     * @param 履歴番号 int
+     * @return list
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    public List<DbT3116KijunShunyugakuTekiyoKanriEntity> select基準収入額適用管理情報BY世帯コード(
+            SetaiCode 世帯コード,
+            FlexibleYear 年度,
+            int 履歴番号) throws NullPointerException {
+        requireNonNull(世帯コード, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_世帯コード.toString()));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_年度.toString()));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_履歴番号.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3116KijunShunyugakuTekiyoKanri.class).
+                where(and(
+                                eq(setaiCode, 世帯コード),
+                                eq(nendo, 年度),
+                                eq(rirekiNo, 履歴番号)))
+                .toList(DbT3116KijunShunyugakuTekiyoKanriEntity.class);
     }
 
 }

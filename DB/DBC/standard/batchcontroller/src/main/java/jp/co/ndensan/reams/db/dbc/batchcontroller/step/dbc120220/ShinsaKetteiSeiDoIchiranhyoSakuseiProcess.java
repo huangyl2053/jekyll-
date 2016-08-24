@@ -127,26 +127,24 @@ public class ShinsaKetteiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase
             }
         }
         帳票データの取得Parameter.set出力順(出力順);
-        if (並び順 != null) {
-            int i = 0;
-            for (ISetSortItem item : 並び順.get設定項目リスト()) {
-                if (item.is改頁項目()) {
-                    改頁リスト.add(item.get項目ID());
-                    改頁項目名リスト.add(item.get項目名());
-                }
-                if (i == INT_1) {
-                    出力順Map.put(KEY_並び順の２件目, item.get項目名());
-                } else if (i == INT_2) {
-                    出力順Map.put(KEY_並び順の３件目, item.get項目名());
-                } else if (i == INT_3) {
-                    出力順Map.put(KEY_並び順の４件目, item.get項目名());
-                } else if (i == INT_4) {
-                    出力順Map.put(KEY_並び順の５件目, item.get項目名());
-                } else if (i == INT_5) {
-                    出力順Map.put(KEY_並び順の６件目, item.get項目名());
-                }
-                i = i + 1;
+        int i = 0;
+        for (ISetSortItem item : 並び順.get設定項目リスト()) {
+            if (item.is改頁項目()) {
+                改頁リスト.add(item.get項目ID());
+                改頁項目名リスト.add(item.get項目名());
             }
+            if (i == INT_1) {
+                出力順Map.put(KEY_並び順の２件目, item.get項目名());
+            } else if (i == INT_2) {
+                出力順Map.put(KEY_並び順の３件目, item.get項目名());
+            } else if (i == INT_3) {
+                出力順Map.put(KEY_並び順の４件目, item.get項目名());
+            } else if (i == INT_4) {
+                出力順Map.put(KEY_並び順の５件目, item.get項目名());
+            } else if (i == INT_5) {
+                出力順Map.put(KEY_並び順の６件目, item.get項目名());
+            }
+            i = i + 1;
         }
     }
 

@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -163,7 +164,7 @@ public class Honsanteifuka {
         if (区分_ゼロ.equals(遷移元区分)) {
             entityList = 処理日付管理Dac.select処理状況_賦課(調定年度);
         } else if (区分_イチ.equals(遷移元区分)) {
-            entityList = 処理日付管理Dac.select処理状況_通知書作成(調定年度);
+            entityList = 処理日付管理Dac.select処理状況_通知書作成(調定年度, ShoriName.本算定賦課.get名称());
         }
         if (entityList == null || entityList.isEmpty()) {
             return new ArrayList<>();

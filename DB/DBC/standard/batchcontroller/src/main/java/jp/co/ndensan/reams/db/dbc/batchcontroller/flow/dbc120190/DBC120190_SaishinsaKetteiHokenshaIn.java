@@ -34,6 +34,7 @@ public class DBC120190_SaishinsaKetteiHokenshaIn extends BatchFlowBase<Saishinsa
     private static final String DB_UPDATE = "dbUpdateProcess";
     private static final String WRITE_REPORT = "writeReportProcess";
     private final RString sharedFileKey = new RString("172");
+    private final RString PATH = new RString("/nfshome/D209007/sharedFiles/DB/");
     private RString runFilePath;
     private List<RString> fileNameList;
 
@@ -59,7 +60,7 @@ public class DBC120190_SaishinsaKetteiHokenshaIn extends BatchFlowBase<Saishinsa
     @Step(CSV_FILE_CHECK)
     IBatchFlowCommand csvFileCheckProcess() {
         Map<RString, Object> processParameter = new HashMap<>();
-        processParameter.put(CopyToLocalProcess.PARAMETER_IN_FILEPATH, new RString("/nfshome/D209007/sharedFiles/DB/"));
+        processParameter.put(CopyToLocalProcess.PARAMETER_IN_FILEPATH, PATH);
         processParameter.put(CopyToLocalProcess.PARAMETER_IN_SHAREDNAME, sharedFileKey);
         processParameter.put(CopyToLocalProcess.PARAMETER_IN_ICCHIJOKEN, IcchiJoken.前方一致);
 

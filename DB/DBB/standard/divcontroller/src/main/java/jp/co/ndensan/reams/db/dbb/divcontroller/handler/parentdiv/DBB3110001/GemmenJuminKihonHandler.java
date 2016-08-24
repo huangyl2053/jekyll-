@@ -183,6 +183,7 @@ public class GemmenJuminKihonHandler {
      * @return 状況 RString
      */
     public RString load状況情報パネル(GemmenJoho 最新減免の情報) {
+        div.getGemmenMain().getKeteiinfo().getTxtKetteiYMD().setRequired(false);
         RString 減免作成区分;
         RString 状況;
         if (最新減免の情報 == null || 最新減免の情報.getGemmenList().isEmpty()) {
@@ -1283,9 +1284,9 @@ public class GemmenJuminKihonHandler {
             申請情報パネル.getTxtShinseiYMD().setValue(new RDate(介護賦課減免.get減免申請日().toString()));
         }
         申請情報パネル.getTxtShinseiGemmengaku().setValue(介護賦課減免.get申請減免額());
-        if (介護賦課減免.get減免取消種類コード() != null) {
+        if (介護賦課減免.get減免種類コード() != null) {
             申請情報パネル.getTxtGemmenShurui().setValue(CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課,
-                    DBBCodeShubetsu.保険料減免種類.getコード(), 介護賦課減免.get減免取消種類コード(), FlexibleDate.getNowDate()));
+                    DBBCodeShubetsu.保険料減免種類.getコード(), 介護賦課減免.get減免種類コード(), FlexibleDate.getNowDate()));
         }
         RString 申請事由 = 介護賦課減免.get申請事由();
         if (申請事由 == null || 申請事由.isEmpty()) {
@@ -1293,7 +1294,7 @@ public class GemmenJuminKihonHandler {
         } else {
             申請情報パネル.getTxtShinseiRiyu().setValue(申請事由);
         }
-        return 介護賦課減免.get減免取消種類コード();
+        return 介護賦課減免.get減免種類コード();
     }
 
     /**
@@ -1677,7 +1678,7 @@ public class GemmenJuminKihonHandler {
             boolean flag1 = checkDate(介護賦課減免.get減免申請日(), 申請情報パネル.getTxtShinseiYMD().getValue());
             boolean flag2 = checkDecimal(介護賦課減免.get申請減免額(), 申請情報パネル.getTxtShinseiGemmengaku().getValue());
             boolean flag3 = checkRString(CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.保険料減免種類.getコード(),
-                    介護賦課減免.get減免取消種類コード(), FlexibleDate.getNowDate()), 申請情報パネル.getTxtGemmenShurui().getValue());
+                    介護賦課減免.get減免種類コード(), FlexibleDate.getNowDate()), 申請情報パネル.getTxtGemmenShurui().getValue());
             boolean flag4 = checkRString(介護賦課減免.get申請事由(), 申請情報パネル.getTxtShinseiRiyu().getValue());
             return flag1 && flag2 && flag3 && flag4;
         } else {
