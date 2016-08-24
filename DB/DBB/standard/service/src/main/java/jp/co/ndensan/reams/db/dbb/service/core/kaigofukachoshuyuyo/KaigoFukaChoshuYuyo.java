@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護保険料徴収猶予
@@ -98,6 +99,7 @@ public class KaigoFukaChoshuYuyo {
      * @param 徴収猶予の情報 ChoshuYuyoJoho
      * @param 画面情報param KaigoFukaChoshuYuyoParam
      */
+    @Transaction
     public void saveDBDate(ChoshuYuyoJoho 徴収猶予の情報, KaigoFukaChoshuYuyoParam 画面情報param) {
         RString 状況 = 画面情報param.get状況();
         boolean 決定区分 = 画面情報param.is決定区分();
