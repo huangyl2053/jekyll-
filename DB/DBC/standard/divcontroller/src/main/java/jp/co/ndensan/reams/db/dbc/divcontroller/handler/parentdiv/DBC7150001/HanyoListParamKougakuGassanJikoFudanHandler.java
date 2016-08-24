@@ -153,6 +153,22 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         if (送付対象外を含める.toString().equals(div.getChkSofuTaishogaiFukumu().getSelectedKeys().toString())) {
             batchparam.setSofuTaishogaiFukumu(true);
         }
+        batchparam = setChkCsvHenshuHoho(batchparam);
+        if (null != div.getCcdHokenshaList().getSelectedItem().get市町村コード().toString()) {
+            batchparam.setHokenshaNo(div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue());
+        }
+        if (null != div.getCcdShutsuryokujun().getSelected出力順()) {
+            batchparam.setShutsuryokuju(div.getCcdShutsuryokujun().getSelected出力順().get出力順ID());
+        }
+        if (null != div.getCcdShutsuryokuKoumoku()) {
+            batchparam.setShutsuryokuTomoku(div.getCcdShutsuryokuKoumoku().get出力項目ID());
+        } else {
+            batchparam.setShutsuryokuTomoku(RString.EMPTY);
+        }
+        return batchparam;
+    }
+
+    private DBC710150_HanyoListKogakuGassanJikoFutangakuParameter setChkCsvHenshuHoho(DBC710150_HanyoListKogakuGassanJikoFutangakuParameter batchparam) {
         if (null != div.getTxtJikoFutangakuKakunin().getFromValue()) {
             batchparam.setJikoFutangakuKakuninFrom(new FlexibleDate(div.getTxtJikoFutangakuKakunin().getFromValue().toString()));
         }
@@ -186,17 +202,6 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
             batchparam.setSlashDate(true);
         } else {
             batchparam.setSlashDate(false);
-        }
-        if (null != div.getCcdHokenshaList().getSelectedItem().get市町村コード().toString()) {
-            batchparam.setHokenshaNo(div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue());
-        }
-        if (null != div.getCcdShutsuryokujun().getSelected出力順()) {
-            batchparam.setShutsuryokuju(div.getCcdShutsuryokujun().getSelected出力順().get出力順ID());
-        }
-        if (false != div.getCcdShutsuryokuKoumoku().getEraseBorder()) {
-            batchparam.setShutsuryokuTomoku(div.getCcdShutsuryokuKoumoku().get出力項目ID());
-        } else {
-            batchparam.setShutsuryokuTomoku(RString.EMPTY);
         }
         return batchparam;
     }
