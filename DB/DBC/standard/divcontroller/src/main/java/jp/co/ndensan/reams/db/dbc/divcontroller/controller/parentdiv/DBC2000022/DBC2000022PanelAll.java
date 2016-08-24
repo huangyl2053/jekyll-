@@ -326,6 +326,7 @@ public class DBC2000022PanelAll {
                 判定結果.get利用者負担割合根拠list().get(i).setState(EntityDataState.Added);
                 利用者負担割合根拠list.add(new RiyoshaFutanWariaiKonkyo(判定結果.get利用者負担割合根拠list().get(i)));
             }
+            getHandler(div).update利用者負担割合情報(利用者負担割合, 処理モード);
             利用者負担割合.toEntity().setState(EntityDataState.Added);
             for (RiyoshaFutanWariaiMeisai 明細 : holder.get利用者負担割合明細()) {
                 明細.toEntity().setState(EntityDataState.Added);
