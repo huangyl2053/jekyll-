@@ -136,7 +136,7 @@ public class TokuchoKariSanteiFuka {
      */
     private List<KarisanteiBatchEntity> get出力帳票一覧(List<TokuchoKariSanteiEntity> 出力帳票List) {
         List<KarisanteiBatchEntity> resultList = new ArrayList<>();
-        KarisanteiBatchEntity バッチ出力帳票entity = new KarisanteiBatchEntity();
+        KarisanteiBatchEntity バッチ出力帳票entity;
         if (出力帳票List == null || 出力帳票List.isEmpty()) {
             return resultList;
         }
