@@ -430,7 +430,7 @@ public class SokujiFukaKouseiMain {
             YokunenFukaKoseiResult result = service.do翌年度更正(賦課年度, 被保険者番号);
             更正前後賦課のリスト = result.get更正前後賦課のリスト();
             handler.set更正前後賦課のリスト降順(更正前後賦課のリスト);
-            KoseiZengoFuka 更正前後賦課 = get更正前後賦課By通知書番号(更正前後賦課のリスト, 通知書番号);
+            KoseiZengoFuka 更正前後賦課 = 更正前後賦課のリスト.get(0);
             更正前賦課リスト = 更正前後賦課.get更正前();
             更正後賦課リスト = 更正前後賦課.get更正後();
             更正前後徴収方法 = result.get更正前後徴収方法();
