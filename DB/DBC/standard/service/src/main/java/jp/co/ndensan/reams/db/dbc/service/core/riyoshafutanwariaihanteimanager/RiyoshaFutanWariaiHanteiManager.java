@@ -198,7 +198,7 @@ public class RiyoshaFutanWariaiHanteiManager {
             entity.setNendo(new FlexibleYear("2008"));
             entity.setRirekiNo(2);
             entity.setFutanWariaiKubun(new RString("1"));
-            entity.setShikakuKubun(new RString("2"));
+            entity.setShikakuKubun(new RString("02"));
             entity.setYukoKaishiYMD(new FlexibleDate("20060808"));
             entity.setYukoShuryoYMD(new FlexibleDate("20060808"));
             entity.setHonninGoukeiShotokuGaku(Decimal.ZERO);
