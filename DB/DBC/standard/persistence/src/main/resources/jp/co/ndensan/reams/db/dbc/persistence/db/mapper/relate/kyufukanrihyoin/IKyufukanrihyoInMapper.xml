@@ -359,6 +359,7 @@
     </resultMap>
     
     <resultMap id="ResultMap_HihokenshaKyufukanrihyoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoin.HihokenshaKyufukanrihyoEntity" autoMapping="true">
+        <id column="DbWT1121_renban" />
         <association property="被保険者" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.resultMap_DbWT0001HihokenshaTempEntity"/>
         <association property="給付管理票" resultMap="ResultMap_DbWT1121KyufuKanrihyoTempEntity"/>
     </resultMap>
