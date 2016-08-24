@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoS
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt35001.TokuchoHeinjunka6GatsuProcessParameter;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -60,9 +61,12 @@ public class TokuchoHeinjunka6GatsuFlow extends BatchFlowBase<TokuchoHeijunka6ga
         executeStep(平準化対象者と対象外データTEMP作成);
         executeStep(介護情報の登録);
         for (OutputChohyoIchiran entity : parameter.get出力帳票entity()) {
-            processParameter.set出力帳票一覧(entity);
-            executeStep(計算後情報作成);
-            executeStep(特徴平準化結果一覧表出力);
+            if (ReportIdDBB.DBB200003.getReportId().getColumnValue().equals(entity.get帳票分類ID())) {
+                processParameter.set出力帳票一覧(entity);
+                executeStep(計算後情報作成);
+                executeStep(特徴平準化結果一覧表出力);
+                break;
+            }
         }
         executeStep(処理日付管理テーブル更新);
 

@@ -55,7 +55,7 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
     public void setKinkyujiShisetsuRyoyohi(List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データリスト) {
         List<dgKinkyujiShisetsuRyoyohi_Row> rowList = new ArrayList<>();
         for (KyufujissekiShoteiShikkanShisetsuRyoyo 所定疾患施設療養費等データ : 所定疾患施設療養費等データリスト) {
-            if (div.getCcdKyufuJissekiHeader().getサービス提供年月().toString()
+            if (div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toString()
                     .equals(所定疾患施設療養費等データ.getサービス提供年月().toString())
                     && div.getCcdKyufuJissekiHeader().get事業者番号().toString()
                     .equals(所定疾患施設療養費等データ.get事業所番号().toString())) {
