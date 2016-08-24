@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.Juky
 import jp.co.ndensan.reams.db.dbc.entity.report.jukyushateiseirenrakuhyo.JukyushaTeiseiRenrakuhyoSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FillTypeFormatted;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -246,13 +247,12 @@ public class JukyushaTeiseiRenrakuhyoEditor implements IJukyushaTeiseiRenrakuhyo
 
     private RString get年月日(FlexibleDate date) {
         if (date != null) {
-            RString 年号 = date.wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).getYear();
+            FillTypeFormatted fillTypeFormatted = date.wareki().eraType(EraType.KANJI).
+                    firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO);
+            RString 年号 = fillTypeFormatted.getYear();
             RString 年 = new RString(Pattern.compile(new RString("[^0-9]").toString()).matcher(年号).replaceAll("").trim());
-            RString 月 = date.wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).getMonth();
-            RString 日 = date.wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).getDay();
+            RString 月 = fillTypeFormatted.getMonth();
+            RString 日 = fillTypeFormatted.getDay();
             RString 年月日 = new RString(new StringBuilder(年).append(月).append(日).toString());
             return 年月日;
         } else {
