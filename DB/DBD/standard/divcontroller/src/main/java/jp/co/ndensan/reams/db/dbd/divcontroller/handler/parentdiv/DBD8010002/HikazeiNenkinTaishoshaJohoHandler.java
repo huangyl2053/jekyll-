@@ -5,8 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010002;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbd.business.core.hikazeinenkintaishoshaJoho.HikazeiNenkinTaishoshaJohoBusiness;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100201.HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100203.SokyuHikazeiNenkinBatchParameter;
@@ -37,16 +45,22 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryo
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunManager;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder._ChohyoShutsuryokujunManager;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -77,6 +91,8 @@ public class HikazeiNenkinTaishoshaJohoHandler {
     private static final RString Z5200000 = new RString("Z5200000_");
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
+    private static final RString HOSHI = new RString("?");
+    private final RString 対象ファイル終了 = new RString(".DTA");
 
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
@@ -397,13 +413,72 @@ public class HikazeiNenkinTaishoshaJohoHandler {
         List<dgShoriSettei_Row> rowList = div.getDgShoriSettei().getDataSource();
         for (dgShoriSettei_Row row : rowList) {
             if (!row.getHdnSyokiShoriJotai().equals(row.getTxtShoriJotai().getSelectedKey())) {
-                for (ShoriDateKanri 処理日付管理マスタ : 更新用List) {
-                    if (処理日付管理マスタ.get年度内連番().equals(row.getHdnShori().concat(row.getHdnTuki()))) {
+                データベース登録(更新用List, row);
+            }
+        }
+    }
 
-                        ShoriDateKanriManager manager = new ShoriDateKanriManager();
-                        manager.save処理日付管理マスタForDeletePhysical(処理日付管理マスタ);
-                    }
+    /**
+     * ファイルの読込処理
+     *
+     */
+    public void readFile() {
+        RString line = RString.EMPTY;
+        try {
+            BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(div.getHdnFilePath().toString()), "SJIS"));
+            line = new RString(in.readLine());
+            in.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(HikazeiNenkinTaishoshaJohoHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(HikazeiNenkinTaishoshaJohoHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        div.setHdnLine(line);
+
+    }
+
+    /**
+     * ファイルupload処理
+     *
+     * @param fileName RString
+     */
+    public void upload(RString fileName) {
+        SharedFileDescriptor sharedFileDescriptor
+                = new SharedFileDescriptor(GyomuCode.DB介護保険, new FilesystemName(getFileName()));
+
+        SharedFile.deleteOldestEntry(sharedFileDescriptor);
+        SharedFile.defineSharedFile(sharedFileDescriptor, 1, Arrays.asList(HOSHI), null, true, null);
+        SharedFile.copyToSharedFile(sharedFileDescriptor, new FilesystemPath(div.getHdnFilePath()), new CopyToSharedFileOpts());
+
+        dgTanitsuTaishoShoriItchiran_Row 一覧対象 = div.getDgTanitsuTaishoShoriItchiran().getSelectedItems().get(0);
+        div.getTxtShoriNendo().setValue(div.getDdlShoriNendo().getSelectedValue());
+        div.getTxtTuki().setValue(一覧対象.getTxtTuki());
+        div.getTxtShori().setValue(一覧対象.getTxtShori());
+        div.getTxtFuairuMei().setValue(fileName);
+
+    }
+
+    private RString getFileName() {
+        dgTanitsuTaishoShoriItchiran_Row 一覧対象 = div.getDgTanitsuTaishoShoriItchiran().getSelectedItems().get(0);
+        RStringBuilder build = new RStringBuilder();
+        build.append(一覧対象.getTxtShori().equals(年次) ? Z5100000 : Z5200000)
+                .append(div.getDdlShoriNendo().getSelectedKey())
+                .append(一覧対象.getHdnShoriCode())
+                .append(一覧対象.getHdnTukiCode())
+                .append(対象ファイル終了);
+        return build.toRString();
+    }
+
+    private void データベース登録(List<ShoriDateKanri> 更新用List, dgShoriSettei_Row row) {
+
+        if (更新用List != null && !更新用List.isEmpty()) {
+            for (ShoriDateKanri 処理日付管理マスタ : 更新用List) {
+                if (処理日付管理マスタ.get年度内連番().equals(row.getHdnShori().concat(row.getHdnTuki()))) {
+
+                    ShoriDateKanriManager manager = new ShoriDateKanriManager();
+                    manager.save処理日付管理マスタForDeletePhysical(処理日付管理マスタ);
                 }
+
                 ShoriDateKanri insertShoriDateKanri = new ShoriDateKanri(
                         SubGyomuCode.DBD介護受給,
                         new LasdecCode(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)),
@@ -413,12 +488,35 @@ public class HikazeiNenkinTaishoshaJohoHandler {
                         row.getHdnShori().concat(row.getHdnTuki()));
 
                 ShoriDateKanriBuilder builder = insertShoriDateKanri.createBuilderForEdit();
+
+                builder.set基準年月日(処理日付管理マスタ.get基準年月日());
+                builder.set基準日時(処理日付管理マスタ.get基準日時());
+                builder.set対象終了年月日(処理日付管理マスタ.get対象終了年月日());
+                builder.set対象終了日時(処理日付管理マスタ.get対象終了日時());
+                builder.set対象開始年月日(処理日付管理マスタ.get対象開始年月日());
+                builder.set対象開始日時(処理日付管理マスタ.get対象開始日時());
+
                 ShoriDateKanri newShoriDateKanri = builder.build();
                 ShoriDateKanriManager insertManager = new ShoriDateKanriManager();
                 insertManager.save処理日付管理マスタ(newShoriDateKanri);
-
             }
+
+        } else {
+            ShoriDateKanri insertShoriDateKanri = new ShoriDateKanri(
+                    SubGyomuCode.DBD介護受給,
+                    new LasdecCode(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)),
+                    ShoriName.非課税年金対象者情報取込.get名称(),
+                    row.getTxtShoriJotai().getSelectedKey(),
+                    new FlexibleYear(div.getShoriSettei().getHdnShoriNendo()),
+                    row.getHdnShori().concat(row.getHdnTuki()));
+
+            ShoriDateKanriBuilder builder = insertShoriDateKanri.createBuilderForEdit();
+            ShoriDateKanri newShoriDateKanri = builder.build();
+            ShoriDateKanriManager insertManager = new ShoriDateKanriManager();
+            insertManager.save処理日付管理マスタ(newShoriDateKanri);
+
         }
+
     }
 
     private void 単一年度DDLの選択処理() {
@@ -478,6 +576,8 @@ public class HikazeiNenkinTaishoshaJohoHandler {
 
             dgTanitsuTaishoShoriItchiran_Row row = new dgTanitsuTaishoShoriItchiran_Row();
             row.setTxtTuki(対象処理.get月());
+            row.setHdnTukiCode(対象処理.get月コード());
+            row.setHdnShoriCode(対象処理.get処理コード());
             row.setTxtShori(対象処理.get処理());
             row.setTxtTaishoFuairu(対象処理.get対象ファイル());
             row.setTxtShoriJotai(対象処理.get処理状態());
@@ -610,7 +710,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
      *
      * @return 広域保険者または単一保険者
      */
-    private RString 広域と市町村判断() {
+    public RString 広域と市町村判断() {
         ShichosonSecurityJoho 介護導入形態 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (介護導入形態 != null) {
             DonyuKeitaiCode 導入形態コード = 介護導入形態.get導入形態コード();

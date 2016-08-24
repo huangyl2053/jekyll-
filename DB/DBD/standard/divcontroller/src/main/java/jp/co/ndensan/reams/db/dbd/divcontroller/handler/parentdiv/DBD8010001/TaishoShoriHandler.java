@@ -255,6 +255,7 @@ public class TaishoShoriHandler {
         } catch (IOException ex) {
             Logger.getLogger(TaishoShoriHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         div.setHdnLine(line);
 
     }
