@@ -25,24 +25,25 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SogoKohifutanshaEntity implements Serializable {
 
-    private ShoKisaiHokenshaNo 公費負担者番号;
-    private RString 公費負担者名;
-    private int no;
-    private FlexibleYearMonth 取扱年月;
-    private JigyoshaNo 事業者番号;
-    private RString 公費受給者番号;
-    private RString 公費受給者氏名;
     private ShoKisaiHokenshaNo 証記載保険者番号;
+    private RString 証記載保険者名;
+    private FlexibleYearMonth 取扱年月;
+    private JigyoshaNo 事業所番号;
+    private RString 事業所名;
+    private RString 公費受給者番号;
+    private RString 宛名名称;
+    private ShoKisaiHokenshaNo 公費証記載保険者番号;
+    private HihokenshaNo 登録被保険者番号;
     private FlexibleYearMonth サービ提供年月;
     private ServiceShuruiCode サービス種類コード;
     private RString サービス種類名;
-    private Decimal 単位数;
-    private RString 事業者名;
-    private HihokenshaNo 被保険者番号;
     private Code 過誤申立事由コード;
     private RString 過誤申立事由;
-    private Decimal 公費負担額;
-    private Decimal 総合事業費の件数;
-    private Decimal 総合事業費の単位数;
-    private Decimal 総合事業費の負担額;
+    private Decimal 単位数;
+    private Decimal 保険者負担額;
+    private RString 識別コード;
+    private Decimal 介護給付費件数;
+    private Decimal 介護給付費単位数;
+    private Decimal 介護給付費保険者負担額;
+
 }

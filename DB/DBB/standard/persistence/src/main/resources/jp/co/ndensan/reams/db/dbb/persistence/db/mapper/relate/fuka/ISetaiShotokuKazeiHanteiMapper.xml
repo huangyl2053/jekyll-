@@ -5,7 +5,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.ISetaiShotokuKazeiHanteiMapper">
     <!--世帯員所得情報一時テーブルを作成します -->
     <insert id="createTmpSetaiShotoku">
-        CREATE TEMP TABLE "TmpSetaiShotoku"
+        CREATE TEMP TABLE IF NOT EXISTS "TmpSetaiShotoku"
         (
         "kijunYMD" rshare."UDD015YMD",
         "jushochiTokureiFlag" character varying(1),

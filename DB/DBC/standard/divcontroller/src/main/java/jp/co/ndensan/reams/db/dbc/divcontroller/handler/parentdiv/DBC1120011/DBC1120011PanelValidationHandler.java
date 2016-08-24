@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class DBC1120011PanelValidationHandler {
 
     private final DBC1120011PanelDiv div;
-    private static final RString 出力順 = new RString("出力順");
     private static final RString 申請対象開始日 = new RString("申請対象日(開始日)");
     private static final RString 申請対象終了日 = new RString("申請対象日(終了日)");
 

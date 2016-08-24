@@ -26,7 +26,7 @@ public class SogojigyohiKagoKetteitsuchishoTorikomiIchiranReport extends Report<
     private final Map<RString, RString> 出力順Map;
     private final RDateTime 作成日時;
     private final FlexibleYearMonth 処理年月;
-    private int 連番;
+    private final int 連番;
 
     /**
      * コンストラクタです

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0080011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.soufujouhou.SoufuJouhouBusiness;
+import jp.co.ndensan.reams.db.dbc.definition.core.kagomoshitate.KagoMoshitate_MoshitateshaKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0080011.SoufuJouhouDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0080011.dgSofuIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
@@ -39,8 +40,6 @@ public class SoufuJouhouHandler {
     private final SoufuJouhouDiv div;
     private static final RString 市町村識別ID_00 = new RString("00");
     private static final RString キー = new RString("000000");
-    private static final RString 申立者区分_1 = new RString("1");
-    private static final RString 申立者区分_2 = new RString("2");
     private static final int 連番_4 = 4;
 
     /**
@@ -117,13 +116,7 @@ public class SoufuJouhouHandler {
             row.setTxtServiceName(business.getサービス略称());
             row.setTxtShokisaiHokenshaNo(business.get証記載保険者番号());
             row.setTxtMoshitateYMD(new FlexibleDate(business.get申立年月日()).wareki().toDateString());
-            // TODO DBCEnum．申立者区分が存在しません
-            if (申立者区分_1.equals(business.get申立者区分コード())) {
-                row.setTxtMoshitateshaKubun(new RString("サービス事業者等申立"));
-            }
-            if (申立者区分_2.equals(business.get申立者区分コード())) {
-                row.setTxtMoshitateshaKubun(new RString("保険者申立"));
-            }
+            row.setTxtMoshitateshaKubun(KagoMoshitate_MoshitateshaKubun.toValue(business.get申立者区分コード()).get名称());
             row.setTxtMoshitateTani(business.get申立単位数());
             RString 申立事由コード = business.get申立事由コード();
             if (申立事由コード.length() < 連番_4) {

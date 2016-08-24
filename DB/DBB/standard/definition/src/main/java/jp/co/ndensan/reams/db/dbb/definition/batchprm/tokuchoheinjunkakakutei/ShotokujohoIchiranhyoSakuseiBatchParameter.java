@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheinjunkakakutei.RegistShoriDateKanriProcessParameter;
-import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheinjunkakakutei.ShotokujohoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -67,26 +66,6 @@ public class ShotokujohoIchiranhyoSakuseiBatchParameter extends BatchParameterBa
     private List<ShichosonJouhouResult> 市町村情報リスト;
     @BatchParameter(key = KEY_出力順ID, name = NAME_出力順ID)
     private Long 出力順ID;
-
-    /**
-     * toProcessParameterメソッドです。
-     *
-     * @return ShotokujohoIchiranhyoSakuseiProcessParameter
-     */
-    public ShotokujohoIchiranhyoSakuseiProcessParameter toProcessParameter() {
-        return new ShotokujohoIchiranhyoSakuseiProcessParameter(導入形態コード,
-                市町村コード,
-                市町村名称,
-                処理年度,
-                チェックボックス,
-                ラジオボタン,
-                開始日時,
-                終了日時,
-                市町村情報リスト,
-                出力順ID,
-                null,
-                null);
-    }
 
     /**
      * toRegistShoriDateKanriProcessParameterメソッドです。

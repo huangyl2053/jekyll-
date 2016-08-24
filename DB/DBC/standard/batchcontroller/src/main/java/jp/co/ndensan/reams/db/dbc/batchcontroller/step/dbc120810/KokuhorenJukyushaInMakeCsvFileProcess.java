@@ -303,8 +303,8 @@ public class KokuhorenJukyushaInMakeCsvFileProcess extends BatchKeyBreakBase<DbW
         csvEntity.set資格喪失日(doパターン4(出力対象.get資格喪失年月日()));
         csvEntity.setみなし区分(出力対象.getみなし要介護区分コード());
         if (!RString.isNullOrEmpty(出力対象.getみなし要介護区分コード())) {
-            csvEntity.setみなし区分名称(new RString(MinashiCode
-                    .toValue(出力対象.getみなし要介護区分コード()).name()));
+            csvEntity.setみなし区分名称(MinashiCode
+                    .toValue(出力対象.getみなし要介護区分コード()).get名称());
         }
         csvEntity.set要介護区分(出力対象.get要介護状態区分コード());
         if (null != 出力対象.getサービス提供年月末日() && !RString.isNullOrEmpty(出力対象.get要介護状態区分コード())) {

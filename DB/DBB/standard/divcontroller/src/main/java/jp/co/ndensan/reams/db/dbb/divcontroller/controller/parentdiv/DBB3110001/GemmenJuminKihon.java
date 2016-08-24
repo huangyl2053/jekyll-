@@ -165,10 +165,15 @@ public class GemmenJuminKihon {
      * @return 介護保険料減免画面
      */
     public ResponseData<GemmenJuminKihonDiv> onClick_btnCalculate(GemmenJuminKihonDiv div) {
+        NendobunFukaGemmenList 年度分賦課減免リスト = ViewStateHolder.get(ViewStateKeys.年度分賦課減免リスト, NendobunFukaGemmenList.class);
+        GemmenJuminKihonValidationHandler validationHandler = new GemmenJuminKihonValidationHandler(div);
+        ValidationMessageControlPairs pairs = validationHandler.減免額の整合性チェック２(年度分賦課減免リスト.get最新減免の情報());
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
         HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
         FlexibleYear 賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
-        NendobunFukaGemmenList 年度分賦課減免リスト = ViewStateHolder.get(ViewStateKeys.年度分賦課減免リスト, NendobunFukaGemmenList.class);
         Map<RString, List> map = getHandler(div).計算する(年度分賦課減免リスト, 賦課年度, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.減免後の普徴金額LIST, (ArrayList) map.get(定値_ゼロ));
         ViewStateHolder.put(ViewStateKeys.減免後の特徴と過年度金額LIST, (ArrayList) map.get(定値_イチ));
@@ -189,7 +194,6 @@ public class GemmenJuminKihon {
         pairs.add(validationHandler.決定日の必須入力チェック());
         pairs.add(validationHandler.減免額の必須入力チェック());
         pairs.add(validationHandler.計算処理の未実行チェック(最新減免の情報));
-        pairs.add(validationHandler.減免額の整合性チェック２(最新減免の情報));
         pairs.add(validationHandler.決定日の必須入力チェック２());
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();

@@ -62,18 +62,18 @@ public class SogojigyohiKagoKetteitsuchishoTorikomiBodyEditor implements ISogoji
     private void edit明細(SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource source) {
         source.listUpper_1 = new RString(連番);
         source.listUpper_2 = doパターン54(帳票出力対象データ.get取扱年月());
-        source.listUpper_3 = getColumnValue(帳票出力対象データ.get事業者番号());
+        source.listUpper_3 = getColumnValue(帳票出力対象データ.get事業所番号());
         source.listUpper_4 = 帳票出力対象データ.get公費受給者番号();
-        source.listUpper_5 = 帳票出力対象データ.get公費受給者氏名();
+        source.listUpper_5 = 帳票出力対象データ.get宛名名称();
         source.listUpper_6 = doパターン54(帳票出力対象データ.getサービ提供年月());
         source.listUpper_7 = getColumnValue(帳票出力対象データ.getサービス種類コード());
         source.listUpper_8 = 帳票出力対象データ.getサービス種類名();
         source.listUpper_9 = decimalFormatter(帳票出力対象データ.get単位数(), 0);
-        source.listLower_1 = 帳票出力対象データ.get事業者名();
-        source.listLower_2 = getColumnValue(帳票出力対象データ.get被保険者番号());
+        source.listLower_1 = 帳票出力対象データ.get事業所名();
+        source.listLower_2 = getColumnValue(帳票出力対象データ.get登録被保険者番号());
         source.listLower_3 = getColumnValue(帳票出力対象データ.get過誤申立事由コード());
         source.listLower_4 = 帳票出力対象データ.get過誤申立事由();
-        source.listLower_5 = decimalFormatter(帳票出力対象データ.get公費負担額(), 0);
+        source.listLower_5 = decimalFormatter(帳票出力対象データ.get保険者負担額(), 0);
     }
 
     /**
@@ -86,9 +86,9 @@ public class SogojigyohiKagoKetteitsuchishoTorikomiBodyEditor implements ISogoji
         source.tanisuTitle = 単位数タイトル;
         source.futangakuTitle = 負担額タイトル;
         source.sogojigyohiTitle = 総合事業費タイトル;
-        source.sogojigyohiKensu = decimalFormatter(帳票出力対象データ.get総合事業費の件数(), 0);
-        source.sogojigyohiTanisu = decimalFormatter(帳票出力対象データ.get総合事業費の単位数(), 0);
-        source.sogojigyohiFutangaku = decimalFormatter(帳票出力対象データ.get総合事業費の負担額(), 0);
+        source.sogojigyohiKensu = decimalFormatter(帳票出力対象データ.get介護給付費件数(), 0);
+        source.sogojigyohiTanisu = decimalFormatter(帳票出力対象データ.get介護給付費単位数(), 0);
+        source.sogojigyohiFutangaku = decimalFormatter(帳票出力対象データ.get介護給付費保険者負担額(), 0);
     }
 
     /**

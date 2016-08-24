@@ -6,18 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC8120011;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.jikofutangakukeisanikkatsu.JikoFutangakuKeisanIkkatsuPanelBatchParameter;
-import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8120011.JikoFutangakuKeisanIkkatsuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8120011.JikoFutangakuKeisanIkkatsuPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8120011.JikoFutangakuKeisanIkkatsuPanelValidationHandler;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunManager;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder._ChohyoShutsuryokujunManager;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
@@ -137,18 +130,7 @@ public class JikoFutangakuKeisanIkkatsuPanel {
         parameter.setDantaiCd(市町村コード_Temp.get地方公共団体コード());
         return parameter;
     }
-    //TODO QA1080 
-    /**
-     * 出力CHKのonChange事件です。
-     *
-     * @param div JikoFutangakuKeisanIkkatsuPanelDiv
-     * @return ResponseData
-     */
-    /*  public ResponseData<JikoFutangakuKeisanIkkatsuPanelDiv> onChange_ccdChohyoShutsuryokujun(JikoFutangakuKeisanIkkatsuPanelDiv div) {
-     getHandler(div).onChange出力CHK();
-     return ResponseData.of(div).respond();
-     }
-     */
+
     private JikoFutangakuKeisanIkkatsuPanelHandler getHandler(JikoFutangakuKeisanIkkatsuPanelDiv div) {
         return new JikoFutangakuKeisanIkkatsuPanelHandler(div);
     }

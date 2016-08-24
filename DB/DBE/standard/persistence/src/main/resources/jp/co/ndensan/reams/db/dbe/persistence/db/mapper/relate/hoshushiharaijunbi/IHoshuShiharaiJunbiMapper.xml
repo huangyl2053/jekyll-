@@ -380,7 +380,7 @@
             T5603."shinsakaiIinCode" AS "shinsakaiIinCode",
             T5594."yubinNo" AS "yubinNo",
             T5594."Jusho" AS "Jusho",
-            X5595."shujiiCode" AS "x5595_shujiiCode",
+            X5595."shujiiCode" AS "shujiiCode",
             T5911."shujiiIryokikanCode" AS "shujiiIryokikanCode",
             T5911."iryoKikanMeisho" AS "iryoKikanMeisho",
             T5911."daihyoshaName" AS "T5911_daihyoshaName",

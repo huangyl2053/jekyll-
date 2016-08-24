@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei;
 
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -25,4 +26,6 @@ public class ShichosonJouhouResult {
     private RString 開始時刻;
     private FlexibleDate 終了年月日;
     private RString 終了時刻;
+    private YMDHMS 開始日時;
+    private YMDHMS 終了日時;
 }

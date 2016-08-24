@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.core.shinseishotorokuchushutsutaisho;
+package jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 申請書登録_抽出条件を表す列挙型です。
+ * 基準収入額適用申請書登録_抽出対象を表す列挙型です。
  *
  * @reamsid_L DBC-9999-022 qinzhen
  */
 public enum ShinseishoTorokuChushutsuTaisho {
 
     /**
-     * コード:1 名称:基準収入額適用申請書の該当のみ抽出 略称:満たす時に出力
+     * コード:0001 名称:基準収入額適用申請書の該当のみ抽出 略称:満たす時に出力
      */
     処理年度("0001", "基準収入額適用申請書の該当のみ抽出", "満たす時に出力"),
     /**
@@ -73,6 +73,6 @@ public enum ShinseishoTorokuChushutsuTaisho {
                 return shiharaiHohoKubun;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("申請書登録_抽出対象"));
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("基準収入額適用申請書登録_抽出対象"));
     }
 }

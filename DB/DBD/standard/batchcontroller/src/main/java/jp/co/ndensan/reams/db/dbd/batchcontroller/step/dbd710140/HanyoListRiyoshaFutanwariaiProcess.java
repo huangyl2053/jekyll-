@@ -771,7 +771,6 @@ public class HanyoListRiyoshaFutanwariaiProcess extends BatchProcessBase<HanyoRi
 
     private Association get地方公共団体(LasdecCode 市町村コード) {
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
-        Association 地方公共団体 = finder.getAssociation(市町村コード);
-        return 地方公共団体;
+        return finder.getAssociation(市町村コード);
     }
 }

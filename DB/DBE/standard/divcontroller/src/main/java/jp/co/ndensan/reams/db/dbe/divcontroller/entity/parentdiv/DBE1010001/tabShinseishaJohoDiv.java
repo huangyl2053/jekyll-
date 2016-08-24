@@ -207,11 +207,6 @@ public class tabShinseishaJohoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
-        return this.getTplShinseijoho().getCcdShinseiSonotaJohoInput();
-    }
-
-    @JsonIgnore
     public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
         return this.getTplShinseijoho().getCcdKaigoNinteiShinseiKihon();
     }
@@ -222,13 +217,18 @@ public class tabShinseishaJohoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
-        return this.getTplShinseijoho().getCcdZenkaiNinteiKekkaJoho();
+    public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
+        return this.getTplShinseijoho().getCcdShinseiSonotaJohoInput();
     }
 
     @JsonIgnore
     public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
         return this.getTplShinseijoho().getCcdShinseiTodokedesha();
+    }
+
+    @JsonIgnore
+    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
+        return this.getTplShinseijoho().getCcdZenkaiNinteiKekkaJoho();
     }
 
     @JsonIgnore

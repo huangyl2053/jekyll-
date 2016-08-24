@@ -10,16 +10,15 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 対象世帯員クラスです
  *
  * @reamsid_L DBC-4640-080 liuxiaoyu
  */
-@Getter
-@Setter
+@lombok.Getter
+@lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class TaishoSetaiin {
 
     private RString 世帯コード;
