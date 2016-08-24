@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020003.Futs
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020003.dgGenNendoKibetsuJoho_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020003.dgKaNendoKibetsuJoho_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.FukinitsuNokiKanriManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -45,7 +46,6 @@ import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -89,7 +89,6 @@ public final class FutsuChoshuTotalHandler {
     private static final RString 納期_至 = new RString("納期（至）");
     private static final RString 納期限_自 = new RString("納期限（自）");
     private static final RString 納期限_至 = new RString("納期限（至）");
-    private static final RString コード種別 = new RString("0002");
     private static final FlexibleYear 平成12年 = new FlexibleYear("2000");
     private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
@@ -385,7 +384,7 @@ public final class FutsuChoshuTotalHandler {
         div.getFutsuChoshu().getDdlFukaHoho().setDataSource(set賦課方法ddl());
         div.getFutsuChoshu().getDdlFukaHoho().setSelectedKey(DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法,
                 システム日時, SubGyomuCode.DBB介護賦課));
-        RString 賦課方法説明 = CodeMaster.getCode(SubGyomuCode.DBB介護賦課, new CodeShubetsu(コード種別),
+        RString 賦課方法説明 = CodeMaster.getCode(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.普徴暫定賦課方法.getコード(),
                 new Code(div.getFutsuChoshu().getZanteiKeisanHoho().getDdlFukaHoho().getSelectedKey()),
                 new FlexibleDate(システム日時.toDateString())).getコード名称();
         div.getFutsuChoshu().getZanteiKeisanHoho().getTxtFukaHohoHelp().setValue(賦課方法説明);
@@ -613,7 +612,7 @@ public final class FutsuChoshuTotalHandler {
      * 暫定計算方法の「賦課方法」変更時の処理
      */
     public void set賦課方法変更() {
-        RString 賦課方法説明 = CodeMaster.getCode(SubGyomuCode.DBB介護賦課, new CodeShubetsu(コード種別),
+        RString 賦課方法説明 = CodeMaster.getCode(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.普徴暫定賦課方法.getコード(),
                 new Code(div.getFutsuChoshu().getZanteiKeisanHoho().getDdlFukaHoho().getSelectedKey()),
                 new FlexibleDate(システム日時.toDateString())).getコード名称();
         div.getFutsuChoshu().getZanteiKeisanHoho().getTxtFukaHohoHelp().setValue(賦課方法説明);

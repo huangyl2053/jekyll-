@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.saishinsaketteihokenshain.Saishinsa
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsa.SaishinsaKetteiTsuchishoChohyoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.saishinsa.SaishinsaKetteiTsuchishoChohyoManager;
 import jp.co.ndensan.reams.db.dbc.service.report.saishinsa.SaishinsaTsuchishoIchiranKohifutanshaPrintService;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
@@ -27,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
@@ -77,7 +77,6 @@ public class SaishinsaKohifutanshaDoIchiranhyoSakuseiProcess extends SimpleBatch
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString 漢字_分 = new RString("分");
-    private static final CodeShubetsu 再審査結果コード = new CodeShubetsu("0020");
 
     @Override
     protected void process() {
@@ -268,7 +267,7 @@ public class SaishinsaKohifutanshaDoIchiranhyoSakuseiProcess extends SimpleBatch
         csvEntity.set申立事由(entity.get申立事由());
         if (null != entity.get再審査結果コード()) {
             csvEntity.set再審査結果コード(entity.get再審査結果コード().getColumnValue());
-            RString 再審査結果 = CodeMaster.getCodeMeisho(再審査結果コード, entity.get再審査結果コード());
+            RString 再審査結果 = CodeMaster.getCodeMeisho(DBCCodeShubetsu.再審査結果コード.getコード(), entity.get再審査結果コード());
             csvEntity.set再審査結果(再審査結果);
         }
         csvEntity.set当初請求単位数(doカンマ編集(entity.get当初請求単位数()));
