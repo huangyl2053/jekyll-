@@ -286,9 +286,10 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
             List<AuthorityItem> authorityItemList = ShichosonSecurityJoho.getShichosonShikibetsuId(ログインユーザID);
             RString 市町村識別ID = authorityItemList.get(INDEX_0).getItemId();
             KoseiShichosonJoho 構成市町村情報 = ShichosonSecurityJoho.getKouseiShichosonJoho(市町村識別ID);
-            parameter.set市町村コード(構成市町村情報.get市町村コード());
-            parameter.set市町村名称(構成市町村情報.get市町村名称());
-
+            if (構成市町村情報 != null) {
+                parameter.set市町村コード(構成市町村情報.get市町村コード());
+                parameter.set市町村名称(構成市町村情報.get市町村名称());
+            }
             List<dgShichosonIchiran_Row> dataList = div.getDgShichosonIchiran().getDataSource();
             List<ShichosonJouhouResult> 市町村情報List = new ArrayList<>();
             for (dgShichosonIchiran_Row row : dataList) {
