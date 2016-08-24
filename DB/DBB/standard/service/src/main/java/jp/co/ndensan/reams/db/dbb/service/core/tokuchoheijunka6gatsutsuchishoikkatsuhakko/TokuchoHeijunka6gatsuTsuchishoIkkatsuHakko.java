@@ -833,7 +833,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         }
     }
 
-    public UniversalPhase setUniversalPhase(int 期, Decimal 金額) {
+    private UniversalPhase setUniversalPhase(int 期, Decimal 金額) {
         UniversalPhase uni = new UniversalPhase();
         uni.set期(期);
         uni.set金額(金額);
