@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3850-030 liuwei2-->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shogaishakoujohaaku.IShogaishaKojoTaishoshaHaakuKekkaIchiranMapper">
+
+    <select id="get障がい者控除対象者出力一覧情報"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd4010011.ShogaishaKojoTaishoshaHaakuKekkaIchiranMapperParameter"
+            resultMap="ResultMap_ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity" fetchSize="500">
+
+        SELECT
+        "DbV4001JukyushaDaicho"."hihokenshaNo" as "dbV4001JukyushaDaicho_hihokenshaNo",
+        "DbV4001JukyushaDaicho"."shinseiRiyu" as "dbV4001JukyushaDaicho_shinseiRiyu",
+        "DbV4001JukyushaDaicho"."soshitsuYMD" as "dbV4001JukyushaDaicho_soshitsuYMD",
+        "T4203"."DbT4203NinteichosahyoKihonChosa_ninchishoNichijoSeikatsuJiritsudoCode" as "DbT4203NinteichosahyoKihonChosa_ninchishoNichijoSeikatsuJiritsudoCode",
+        "T4203"."DbT4203NinteichosahyoKihonChosa_shogaiNichijoSeikatsuJiritsudoCode" as "DbT4203NinteichosahyoKihonChosa_shogaiNichijoSeikatsuJiritsudoCode",
+        "DbV1001HihokenshaDaicho"."shichosonCode" as "DbV1001HihokenshaDaicho_shichosonCode",
+        "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode" as "DbV1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
+        "DbV1001HihokenshaDaicho"."shikakuSoshitsuYMD" as "DbV1001HihokenshaDaicho_shikakuSoshitsuYMD",
+        "DbV1001HihokenshaDaicho"."shikakuSoshitsuJiyuCode" as "DbV1001HihokenshaDaicho_shikakuSoshitsuJiyuCode"
+        FROM
+        rgdb."DbV4001JukyushaDaicho"
+        <if test="前回把握時の非該当者">
+            INNER JOIN
+            (
+            SELECT tmp障がい者控除."hihokenshaNo"
+            FROM(
+            SELECT
+            "DbT4038ShogaishaKoujo"."hihokenshaNo",
+            "DbT4038ShogaishaKoujo"."taishoNendo",
+            "DbT4038ShogaishaKoujo"."ketteiKubun",
+            row_number() OVER (PARTITION BY "DbT4038ShogaishaKoujo"."hihokenshaNo"
+            ORDER BY "DbT4038ShogaishaKoujo"."rirekiNo" DESC ) AS 行番
+            FROM
+            rgdb."DbT4038ShogaishaKoujo"
+            WHERE "DbT4038ShogaishaKoujo"."isDeleted"  = FALSE
+            AND "DbT4038ShogaishaKoujo"."taishoNendo" = #{last対象年度}
+            AND "DbT4038ShogaishaKoujo"."ketteiKubun" = '1'
+            ) tmp障がい者控除
+            WHERE  tmp障がい者控除.行番 = '1'
+            ) T4037
+            ON  T4037."hihokenshaNo" = "DbV4001JukyushaDaicho"."hihokenshaNo"
+        </if>
+
+        INNER JOIN
+        rgdb."DbV1001HihokenshaDaicho" AS "DbV1001HihokenshaDaicho"
+        ON  "DbV1001HihokenshaDaicho"."hihokenshaNo" = "DbV4001JukyushaDaicho"."hihokenshaNo"
+        AND "DbV1001HihokenshaDaicho"."shikakuShutokuYMD" &lt;= #{基準日}
+        AND #{基準日} &lt;= "DbV1001HihokenshaDaicho"."shikakuSoshitsuYMD"
+        OR  ("DbV1001HihokenshaDaicho"."shikakuShutokuYMD" &lt;= #{基準日}
+        AND "DbV1001HihokenshaDaicho"."shikakuSoshitsuYMD" IS NULL)
+        LEFT OUTER JOIN
+        (
+        SELECT
+        "tmp認定調査票"."shinseishoKanriNo" AS "shinseishoKanriNo",
+        "tmp認定調査票"."DbT4203NinteichosahyoKihonChosa_ninchishoNichijoSeikatsuJiritsudoCode" as "DbT4203NinteichosahyoKihonChosa_ninchishoNichijoSeikatsuJiritsudoCode",
+        "tmp認定調査票"."DbT4203NinteichosahyoKihonChosa_shogaiNichijoSeikatsuJiritsudoCode" as "DbT4203NinteichosahyoKihonChosa_shogaiNichijoSeikatsuJiritsudoCode"
+        FROM
+        (   SELECT
+        "DbT4203NinteichosahyoKihonChosa"."shinseishoKanriNo" AS "shinseishoKanriNo",
+        "DbT4203NinteichosahyoKihonChosa"."ninchishoNichijoSeikatsuJiritsudoCode" as "DbT4203NinteichosahyoKihonChosa_ninchishoNichijoSeikatsuJiritsudoCode",
+        "DbT4203NinteichosahyoKihonChosa"."shogaiNichijoSeikatsuJiritsudoCode" as "DbT4203NinteichosahyoKihonChosa_shogaiNichijoSeikatsuJiritsudoCode",
+        row_number() OVER (PARTITION BY "shinseishoKanriNo" ORDER BY "DbT4203NinteichosahyoKihonChosa"."ninteichosaRirekiNo" DESC) AS 行番
+        FROM
+        rgdb."DbT4203NinteichosahyoKihonChosa"
+        WHERE
+        rgdb."DbT4203NinteichosahyoKihonChosa"."isDeleted" = FALSE
+        )"tmp認定調査票"
+        WHERE "tmp認定調査票".行番 ='1'
+        ) "T4203"
+        ON   "DbV4001JukyushaDaicho"."shinseishoKanriNo"= "T4203"."shinseishoKanriNo"
+        WHERE  "DbV4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD" &lt;= #{基準日}
+        AND  #{基準日} &lt;=  "DbV4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD"
+        AND  "DbV4001JukyushaDaicho"."yukoMukoKubun" =  '1'
+        <if test="基準日より後に資格喪失した者">
+            AND ("DbV4001JukyushaDaicho"."soshitsuYMD" IS NULL OR  "DbV4001JukyushaDaicho"."soshitsuYMD" &lt;= #{基準日})
+        </if>
+        AND (
+        ("DbT4203NinteichosahyoKihonChosa_shogaiNichijoSeikatsuJiritsudoCode" NOT IN ('1','2','9')
+        OR  "DbT4203NinteichosahyoKihonChosa_ninchishoNichijoSeikatsuJiritsudoCode" NOT IN ('1','2','3','4','10')
+        )OR '1' = '1')
+        ORDER BY "DbV4001JukyushaDaicho"."hihokenshaNo" DESC
+    </select>
+    <select id="get障がい者控除" resultMap = "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4038ShogaishaKoujoMapper.ResultMap_DbT4038ShogaishaKoujoEntity"
+            fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4038ShogaishaKoujoMapper.allColumns_DbT4038ShogaishaKoujo" />
+        FROM
+        rgdb."DbT4038ShogaishaKoujo"
+        ORDER BY
+        "dbT4038ShogaishaKoujo_hihokenshaNo",
+        "dbT4038ShogaishaKoujo_taishoNendo" ASC
+    </select>
+    <select id="get減免減額申請" resultMap = "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"
+            fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.allColumns_DbT4010GemmenGengakuShinsei" />
+        FROM
+        rgdb."DbT4010GemmenGengakuShinsei"
+        ORDER BY
+        "dbT4010GemmenGengakuShinsei_hihokenshaNo",
+        "dbT4010GemmenGengakuShinsei_shinseiRirekiNo" ASC
+    </select>
+    <resultMap id="ResultMap_ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.shogaishakojotaishoshahaakukekkaichiran.ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity" autoMapping="true">
+        <id property="障がい者控除Entity.shoKisaiHokenshaNo" column="dbT4038ShogaishaKoujo_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="障がい者控除Entity.hihokenshaNo" column="dbT4038ShogaishaKoujo_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="障がい者控除Entity.rirekiNo" column="dbT4038ShogaishaKoujo_rirekiNo" />
+        <id property="減免減額申請Entity.shoKisaiHokenshaNo" column="減免減額申請Entity.dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
+        <id property="減免減額申請Entity.gemmenGengakuShurui" column="dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="減免減額申請Entity.hihokenshaNo" column="dbT4010GemmenGengakuShinsei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="減免減額申請Entity.shinseiRirekiNo" column="dbT4010GemmenGengakuShinsei_shinseiRirekiNo" />
+        <result property="被保険者番号" column="dbV4001JukyushaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="申請理由" column="dbV4001JukyushaDaicho_shinseiRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="喪失年月日" column="dbV4001JukyushaDaicho_soshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="認知症高齢者の日常生活自立度コード" column="DbT4203NinteichosahyoKihonChosa_ninchishoNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="障害高齢者の日常生活自立度コード" column="DbT4203NinteichosahyoKihonChosa_shogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="市町村コード" column="DbV1001HihokenshaDaicho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="広住特措置元市町村コード" column="DbV1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="資格喪失年月日" column="DbV1001HihokenshaDaicho_shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格喪失事由コード" column="DbV1001HihokenshaDaicho_shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="障がい者控除Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4038ShogaishaKoujoMapper.ResultMap_DbT4038ShogaishaKoujoEntity"/>
+        <association property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
+    </resultMap>
+</mapper>
