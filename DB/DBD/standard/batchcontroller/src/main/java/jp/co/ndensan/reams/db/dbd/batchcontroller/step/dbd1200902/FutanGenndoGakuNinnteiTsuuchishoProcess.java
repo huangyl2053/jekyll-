@@ -10,7 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100013.FutanGendogakuKetteiTsuchishoReport;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100013.HakkoRirekiKoyuJohoDBD100013;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd1200902.FutanGenndoGakuNinnteiListProperty;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.FutanGenndoGakuNinnteiTsuuchishoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.FutanGenndoGakuNinnteiTsuuchishoEntity;
@@ -20,6 +19,7 @@ import jp.co.ndensan.reams.db.dbd.entity.report.dbd100013.FutanGendogakuKetteiTs
 import jp.co.ndensan.reams.db.dbd.service.report.dbd1200902.FutanGenndoGakuNinnteiTsuuchishoService;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.report.hakkorireki.GyomuKoyuJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.TeikeibunMojiSize;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
@@ -45,7 +45,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNoHatsubanHoho;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.core.teikeibunhenkan.ITextHenkanRule;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
@@ -63,7 +62,6 @@ import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeike
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriterBuilders;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
@@ -128,6 +126,41 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
         association = AssociationFinderFactory.createInstance().getAssociation();
         帳票制御共通 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御共通(帳票ID);
         帳票制御汎用 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御汎用(帳票ID);
+        通知書定型文 = new ArrayList();
+    }
+
+    @Override
+    protected IBatchReader createReader() {
+        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        key.setデータ取得区分(DataShutokuKubun.直近レコード);
+        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+        RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
+        AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
+                KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給));
+        UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
+        RString psmAtesaki = new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString());
+
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toFutanGenndoGakuNinnteiTsuuchishoMybatisParameter(
+                psmShikibetsuTaisho, psmAtesaki, get出力順(),
+                HakkoRirekiKoyuJohoDBD100013.被保番号.get名称(), HakkoRirekiKoyuJohoDBD100013.減免適用開始日.get名称(), REPORT_DBD100020,
+                GyomuKoyuJoho.被保番号.getコード(),
+                GyomuKoyuJoho.減免適用開始日.getコード()));
+
+    }
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter tmpTableWriter;
+
+    @Override
+    protected void createWriter() {
+        batchReportWrite = BatchReportFactory.createBatchReportWriter(帳票ID.value()).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
+        tmpTableWriter = new BatchEntityCreatedTempTableWriter(FutanGenndoGakuNinnteiTempTableEntity.TABLE_NAME,
+                FutanGenndoGakuNinnteiTempTableEntity.class);
+    }
+
+    @Override
+    protected void beforeExecute() {
         int パターン番号 = 0;
         if (TeikeibunMojiSize.フォント小.getコード().equals(帳票制御共通.getTeikeibunMojiSize())) {
             パターン番号 = ONE_1;
@@ -138,7 +171,6 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
         } else if (TeikeibunMojiSize.フォント上大下小.getコード().equals(帳票制御共通.getTeikeibunMojiSize())) {
             パターン番号 = FOUR_4;
         }
-        通知書定型文 = new ArrayList();
         TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = manager.get通知書定型文項目(SubGyomuCode.DBD介護受給, 帳票ID,
                 KamokuCode.EMPTY, パターン番号);
@@ -158,40 +190,11 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給));
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
         RString psmAtesaki = new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString());
-
-        FutanGenndoGakuNinnteiTsuuchishoService a = new FutanGenndoGakuNinnteiTsuuchishoService();
-        count = a.get利用者負担割合(processParamter.toFutanGenndoGakuNinnteiTsuuchishoMybatisParameter(psmShikibetsuTaisho, psmAtesaki, get出力順(),
-                HakkoRirekiKoyuJohoDBD100013.被保番号.get名称(), HakkoRirekiKoyuJohoDBD100013.減免適用開始日.get名称(), REPORT_DBD100020));
-
-    }
-
-    @Override
-    protected IBatchReader createReader() {
-        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
-        key.setデータ取得区分(DataShutokuKubun.直近レコード);
-        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
-        AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
-                KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給));
-        UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
-        RString psmAtesaki = new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString());
-
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toFutanGenndoGakuNinnteiTsuuchishoMybatisParameter(
-                psmShikibetsuTaisho, psmAtesaki, get出力順(),
-                HakkoRirekiKoyuJohoDBD100013.被保番号.get名称(), HakkoRirekiKoyuJohoDBD100013.減免適用開始日.get名称(), REPORT_DBD100020));
-
-    }
-    @BatchWriter
-    private BatchEntityCreatedTempTableWriter tmpTableWriter;
-
-    @Override
-    protected void createWriter() {
-        batchReportWrite = BatchReportFactory.createBatchReportWriter(帳票ID.value()).create();
-        reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
-        tmpTableWriter = BatchEntityCreatedTempTableWriterBuilders.createBuilder(FutanGenndoGakuNinnteiTempTableEntity.class)
-                .tempTableName(FutanGenndoGakuNinnteiTempTableEntity.TABLE_NAME).build();
-
+        FutanGenndoGakuNinnteiTsuuchishoService service = new FutanGenndoGakuNinnteiTsuuchishoService();
+        count = service.get利用者負担割合(processParamter.toFutanGenndoGakuNinnteiTsuuchishoMybatisParameter(psmShikibetsuTaisho, psmAtesaki, get出力順(),
+                HakkoRirekiKoyuJohoDBD100013.被保番号.get名称(), HakkoRirekiKoyuJohoDBD100013.減免適用開始日.get名称(), REPORT_DBD100020,
+                GyomuKoyuJoho.被保番号.getコード(),
+                GyomuKoyuJoho.減免適用開始日.getコード()));
     }
 
     @Override
@@ -224,9 +227,9 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD100020, reamsLoginID, processParamter.get改頁出力順ID());
         RString 出力順 = RString.EMPTY;
-        if (order != null) {
-            出力順 = MyBatisOrderByClauseCreator.create(FutanGenndoGakuNinnteiListProperty.class, order);
-        }
+        //if (order != null) {
+        //  出力順 = MyBatisOrderByClauseCreator.create(FutanGenndoGakuNinnteiListProperty.class, order);
+        //  }
         return 出力順;
     }
 
@@ -235,7 +238,7 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
         if (processParamter.get通知書の文書番号().isEmpty()) {
             IBunshoNoFinder finder = BunshoNoFinderFactory.createInstance();
             BunshoNo bunshoNo = finder.get文書番号管理(帳票ID, processParamter.get通知書の交付日());
-            countedItem = Saiban.get(SubGyomuCode.DBD介護受給, GENERICKEY, new FlexibleYear(RDateTime.now().getDate().toDateString()), count);
+            countedItem = Saiban.get(SubGyomuCode.DBD介護受給, GENERICKEY, new FlexibleYear(RDateTime.now().getDate().getYear().toDateString()), count);
             if (BunshoNoHatsubanHoho.自動採番.getCode().equals(bunshoNo.get文書番号発番方法())) {
                 文書番号 = bunshoNo.edit文書番号(new RString(String.valueOf(countedItem.next())));
             } else {
