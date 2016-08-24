@@ -168,7 +168,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set資格喪失年月日(FlexibleDate 資格喪失年月日) {
-        requireNonNull(資格喪失年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("資格喪失年月日"));
         entity.setShikakuSoshitsuYMD(資格喪失年月日);
         return this;
     }
@@ -180,7 +179,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set老人保健市町村番号(RString 老人保健市町村番号) {
-        requireNonNull(老人保健市町村番号, UrSystemErrorMessages.値がnull.getReplacedMessage("老人保健市町村番号"));
         entity.setRojinHokenShichosonNo(老人保健市町村番号);
         return this;
     }
@@ -192,7 +190,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set老人保健受給者番号(RString 老人保健受給者番号) {
-        requireNonNull(老人保健受給者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("老人保健受給者番号"));
         entity.setRojinHokenJukyushaNo(老人保健受給者番号);
         return this;
     }
@@ -204,7 +201,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set公費負担者番号(RString 公費負担者番号) {
-        requireNonNull(公費負担者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("公費負担者番号"));
         entity.setKohiFutanshaNo(公費負担者番号);
         return this;
     }
@@ -216,7 +212,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set広域連合_政令市_保険者番号(ShoKisaiHokenshaNo 広域連合_政令市_保険者番号) {
-        requireNonNull(広域連合_政令市_保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("広域連合（政令市）保険者番号"));
         entity.setKoikiRengoHokenshaNo(広域連合_政令市_保険者番号);
         return this;
     }
@@ -228,7 +223,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set申請種別コード(RString 申請種別コード) {
-        requireNonNull(申請種別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("申請種別コード"));
         entity.setShinseiShubetsuCode(申請種別コード);
         return this;
     }
@@ -240,7 +234,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set変更申請中区分コード(RString 変更申請中区分コード) {
-        requireNonNull(変更申請中区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("変更申請中区分コード"));
         entity.setHenkoShinseichuKubunCode(変更申請中区分コード);
         return this;
     }
@@ -264,7 +257,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder setみなし要介護状態区分コード(RString みなし要介護状態区分コード) {
-        requireNonNull(みなし要介護状態区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("みなし要介護状態区分コード"));
         entity.setMinashiYokaigoJotaiKubunCode(みなし要介護状態区分コード);
         return this;
     }
@@ -276,7 +268,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set要介護状態区分コード(RString 要介護状態区分コード) {
-        requireNonNull(要介護状態区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護状態区分コード"));
         entity.setYokaigoJotaiKubunCode(要介護状態区分コード);
         return this;
     }
@@ -288,7 +279,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set認定有効期間開始年月日(FlexibleDate 認定有効期間開始年月日) {
-        requireNonNull(認定有効期間開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定有効期間開始年月日"));
         entity.setNinteiYukoKikankaishiYMD(認定有効期間開始年月日);
         return this;
     }
@@ -300,7 +290,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set認定有効期間終了年月日(RString 認定有効期間終了年月日) {
-        requireNonNull(認定有効期間終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定有効期間終了年月日"));
         entity.setNinteiYukoKikanShuryoYMD(認定有効期間終了年月日);
         return this;
     }
@@ -312,7 +301,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set居宅サービス計画作成区分コード(RString 居宅サービス計画作成区分コード) {
-        requireNonNull(居宅サービス計画作成区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅サービス計画作成区分コード"));
         entity.setKyotakuServiceSakuseiKubunCode(居宅サービス計画作成区分コード);
         return this;
     }
@@ -324,7 +312,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set居宅介護支援事業所番号(RString 居宅介護支援事業所番号) {
-        requireNonNull(居宅介護支援事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅介護支援事業所番号"));
         entity.setKyotakuKaigoShienJigyoshoNo(居宅介護支援事業所番号);
         return this;
     }
@@ -336,7 +323,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set居宅サービス計画適用開始年月日(RString 居宅サービス計画適用開始年月日) {
-        requireNonNull(居宅サービス計画適用開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅サービス計画適用開始年月日"));
         entity.setKyotakuServiceTekiyoKaishiYMD(居宅サービス計画適用開始年月日);
         return this;
     }
@@ -348,7 +334,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set居宅サービス計画適用終了年月日(RString 居宅サービス計画適用終了年月日) {
-        requireNonNull(居宅サービス計画適用終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅サービス計画適用終了年月日"));
         entity.setKyotakuServiceTekiyoShuryoYMD(居宅サービス計画適用終了年月日);
         return this;
     }
@@ -360,7 +345,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set訪問通所サービス支給限度基準額(int 訪問通所サービス支給限度基準額) {
-        requireNonNull(訪問通所サービス支給限度基準額, UrSystemErrorMessages.値がnull.getReplacedMessage("訪問通所サービス支給限度基準額"));
         entity.setHomonTsushoServiceShikyuGendoKijungaku(訪問通所サービス支給限度基準額);
         return this;
     }
@@ -372,7 +356,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set訪問通所サービス上限管理適用期間開始年月日(FlexibleDate 訪問通所サービス上限管理適用期間開始年月日) {
-        requireNonNull(訪問通所サービス上限管理適用期間開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("訪問通所サービス上限管理適用期間開始年月日"));
         entity.setHomonTsushoServiceJogenKanriTekiyoKaishiYMD(訪問通所サービス上限管理適用期間開始年月日);
         return this;
     }
@@ -384,7 +367,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set訪問通所サービス上限管理適用期間終了年月日(RString 訪問通所サービス上限管理適用期間終了年月日) {
-        requireNonNull(訪問通所サービス上限管理適用期間終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("訪問通所サービス上限管理適用期間終了年月日"));
         entity.setHomonTsushoServiceJogenKanriTekiyoShuryoYMD(訪問通所サービス上限管理適用期間終了年月日);
         return this;
     }
@@ -396,7 +378,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set短期入所サービス支給限度基準額(int 短期入所サービス支給限度基準額) {
-        requireNonNull(短期入所サービス支給限度基準額, UrSystemErrorMessages.値がnull.getReplacedMessage("短期入所サービス支給限度基準額"));
         entity.setTankiNyushoServiceShikyuGendoKijungaku(短期入所サービス支給限度基準額);
         return this;
     }
@@ -408,7 +389,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set短期入所サービス上限管理適用期間開始年月日(FlexibleDate 短期入所サービス上限管理適用期間開始年月日) {
-        requireNonNull(短期入所サービス上限管理適用期間開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("短期入所サービス上限管理適用期間開始年月日"));
         entity.setTankinyushoServiceJogenKanriTekiyoKaishiYMD(短期入所サービス上限管理適用期間開始年月日);
         return this;
     }
@@ -420,7 +400,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set短期入所サービス上限管理適用期間終了年月日(FlexibleDate 短期入所サービス上限管理適用期間終了年月日) {
-        requireNonNull(短期入所サービス上限管理適用期間終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("短期入所サービス上限管理適用期間終了年月日"));
         entity.setTankinyushoServiceJogenKanriTekiyoShuryoYMD(短期入所サービス上限管理適用期間終了年月日);
         return this;
     }
@@ -444,7 +423,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set償還払化開始年月日(RString 償還払化開始年月日) {
-        requireNonNull(償還払化開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払化開始年月日"));
         entity.setShokanbaraikaKaishiYMD(償還払化開始年月日);
         return this;
     }
@@ -456,7 +434,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set償還払化終了年月日(RString 償還払化終了年月日) {
-        requireNonNull(償還払化終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払化終了年月日"));
         entity.setShokanbaraikaShuryoYMD(償還払化終了年月日);
         return this;
     }
@@ -468,7 +445,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set給付率引下げ開始年月日(RString 給付率引下げ開始年月日) {
-        requireNonNull(給付率引下げ開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("給付率引下げ開始年月日"));
         entity.setKyufuritsuHikisageKaishiYMD(給付率引下げ開始年月日);
         return this;
     }
@@ -480,7 +456,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set給付率引下げ終了年月日(RString 給付率引下げ終了年月日) {
-        requireNonNull(給付率引下げ終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("給付率引下げ終了年月日"));
         entity.setKyufuritsuHikisageShuryoYMD(給付率引下げ終了年月日);
         return this;
     }
@@ -492,7 +467,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set減免申請中区分コード(RString 減免申請中区分コード) {
-        requireNonNull(減免申請中区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("減免申請中区分コード"));
         entity.setGemmenShinseichuKubunCode(減免申請中区分コード);
         return this;
     }
@@ -504,7 +478,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set利用者負担区分コード(RString 利用者負担区分コード) {
-        requireNonNull(利用者負担区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担区分コード"));
         entity.setRiyoshaFutanKubunCode(利用者負担区分コード);
         return this;
     }
@@ -516,7 +489,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set給付率(Decimal 給付率) {
-        requireNonNull(給付率, UrSystemErrorMessages.値がnull.getReplacedMessage("給付率"));
         entity.setKyufuritsu(給付率);
         return this;
     }
@@ -528,7 +500,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set適用開始年月日(RString 適用開始年月日) {
-        requireNonNull(適用開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月日"));
         entity.setTekiyoKaishiYMD(適用開始年月日);
         return this;
     }
@@ -540,7 +511,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set適用終了年月日(RString 適用終了年月日) {
-        requireNonNull(適用終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用終了年月日"));
         entity.setTekiyoShuryoYMD(適用終了年月日);
         return this;
     }
@@ -552,7 +522,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set標準負担区分コード(RString 標準負担区分コード) {
-        requireNonNull(標準負担区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("標準負担区分コード"));
         entity.setHyojunFutanKubunCode(標準負担区分コード);
         return this;
     }
@@ -564,7 +533,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set負担額(Decimal 負担額) {
-        requireNonNull(負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("負担額"));
         entity.setFutangaku(負担額);
         return this;
     }
@@ -576,7 +544,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set負担額適用開始年月日(RString 負担額適用開始年月日) {
-        requireNonNull(負担額適用開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("負担額適用開始年月日"));
         entity.setFutangakuTekiyoKaishiYMD(負担額適用開始年月日);
         return this;
     }
@@ -588,7 +555,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set負担額適用終了年月日(RString 負担額適用終了年月日) {
-        requireNonNull(負担額適用終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("負担額適用終了年月日"));
         entity.setFutangakuTekiyoShuryoYMD(負担額適用終了年月日);
         return this;
     }
@@ -600,7 +566,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set特定入所者認定申請中区分コード(RString 特定入所者認定申請中区分コード) {
-        requireNonNull(特定入所者認定申請中区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("特定入所者認定申請中区分コード"));
         entity.setTokuteiNyushoshaNinteiShinseichuKubunCode(特定入所者認定申請中区分コード);
         return this;
     }
@@ -612,7 +577,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set特定入所者介護サービス区分コード(RString 特定入所者介護サービス区分コード) {
-        requireNonNull(特定入所者介護サービス区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("特定入所者介護サービス区分コード"));
         entity.setTokuteiNyushoshaKaigoServiceKubunCode(特定入所者介護サービス区分コード);
         return this;
     }
@@ -636,7 +600,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set食費負担限度額(RString 食費負担限度額) {
-        requireNonNull(食費負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("食費負担限度額"));
         entity.setShokuhiFutanGendogaku(食費負担限度額);
         return this;
     }
@@ -648,7 +611,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set居住費ユニット型個室負担限度額(RString 居住費ユニット型個室負担限度額) {
-        requireNonNull(居住費ユニット型個室負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居住費ユニット型個室負担限度額"));
         entity.setKyojuhiUnitGataKoshitsuFutanGendogaku(居住費ユニット型個室負担限度額);
         return this;
     }
@@ -660,7 +622,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set居住費ユニット型準個室負担限度額(RString 居住費ユニット型準個室負担限度額) {
-        requireNonNull(居住費ユニット型準個室負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居住費ユニット型準個室負担限度額"));
         entity.setKyojuhiUnitGataJunKoshitsuFutanGendogaku(居住費ユニット型準個室負担限度額);
         return this;
     }
@@ -672,7 +633,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set居住費従来型個室特養等負担限度額(RString 居住費従来型個室特養等負担限度額) {
-        requireNonNull(居住費従来型個室特養等負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居住費従来型個室特養等負担限度額"));
         entity.setKyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku(居住費従来型個室特養等負担限度額);
         return this;
     }
@@ -684,7 +644,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set居住費従来型個室老健療養等負担限度額(RString 居住費従来型個室老健療養等負担限度額) {
-        requireNonNull(居住費従来型個室老健療養等負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居住費従来型個室老健療養等負担限度額"));
         entity.setKyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku(居住費従来型個室老健療養等負担限度額);
         return this;
     }
@@ -696,7 +655,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set居住費多床室負担限度額(RString 居住費多床室負担限度額) {
-        requireNonNull(居住費多床室負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居住費多床室負担限度額"));
         entity.setKyujuhiTashoshitsuFutanGendogaku(居住費多床室負担限度額);
         return this;
     }
@@ -708,7 +666,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set負担限度額適用開始年月日(RString 負担限度額適用開始年月日) {
-        requireNonNull(負担限度額適用開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("負担限度額適用開始年月日"));
         entity.setFutanGendogakuTekiyoKaishiYMD(負担限度額適用開始年月日);
         return this;
     }
@@ -720,7 +677,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set負担限度額適用終了年月日(RString 負担限度額適用終了年月日) {
-        requireNonNull(負担限度額適用終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("負担限度額適用終了年月日"));
         entity.setFutanGendogakuTekiyoShuryoYMD(負担限度額適用終了年月日);
         return this;
     }
@@ -732,7 +688,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set軽減率(RString 軽減率) {
-        requireNonNull(軽減率, UrSystemErrorMessages.値がnull.getReplacedMessage("軽減率"));
         entity.setKeigenritsu(軽減率);
         return this;
     }
@@ -744,7 +699,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set軽減率適用開始年月日(RString 軽減率適用開始年月日) {
-        requireNonNull(軽減率適用開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("軽減率適用開始年月日"));
         entity.setKeigenritsuTekiyoKaishiYMD(軽減率適用開始年月日);
         return this;
     }
@@ -756,7 +710,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set軽減率適用終了年月日(RString 軽減率適用終了年月日) {
-        requireNonNull(軽減率適用終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("軽減率適用終了年月日"));
         entity.setKeigenritsuTekiyoShuryoYMD(軽減率適用終了年月日);
         return this;
     }
@@ -768,7 +721,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set小多機能居宅介護利用開始月利用有フラグ(boolean 小多機能居宅介護利用開始月利用有フラグ) {
-        requireNonNull(小多機能居宅介護利用開始月利用有フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("小多機能居宅介護利用開始月利用有フラグ"));
         entity.setShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag(小多機能居宅介護利用開始月利用有フラグ);
         return this;
     }
@@ -780,7 +732,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set後期高齢者医療保険者番号(RString 後期高齢者医療保険者番号) {
-        requireNonNull(後期高齢者医療保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("後期高齢者医療保険者番号"));
         entity.setKokiKoureiIryoHokenshaNo(後期高齢者医療保険者番号);
         return this;
     }
@@ -792,7 +743,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set後期高齢者医療被保険者番号(RString 後期高齢者医療被保険者番号) {
-        requireNonNull(後期高齢者医療被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("後期高齢者医療被保険者番号"));
         entity.setKokikoureiIryoHiHokenshaNo(後期高齢者医療被保険者番号);
         return this;
     }
@@ -804,7 +754,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set国民健康保険保険者番号(RString 国民健康保険保険者番号) {
-        requireNonNull(国民健康保険保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("国民健康保険保険者番号"));
         entity.setKokuhoHokenshaNo(国民健康保険保険者番号);
         return this;
     }
@@ -816,7 +765,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set国民健康保険被保険者証番号(RString 国民健康保険被保険者証番号) {
-        requireNonNull(国民健康保険被保険者証番号, UrSystemErrorMessages.値がnull.getReplacedMessage("国民健康保険被保険者証番号"));
         entity.setKokuhoHiHokenshaNo(国民健康保険被保険者証番号);
         return this;
     }
@@ -828,7 +776,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set国民健康保険個人番号(RString 国民健康保険個人番号) {
-        requireNonNull(国民健康保険個人番号, UrSystemErrorMessages.値がnull.getReplacedMessage("国民健康保険個人番号"));
         entity.setKokuhoKojinNo(国民健康保険個人番号);
         return this;
     }
@@ -840,7 +787,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set二次予防事業区分コード(RString 二次予防事業区分コード) {
-        requireNonNull(二次予防事業区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("二次予防事業区分コード"));
         entity.setNijiyoboJigyoKubunCode(二次予防事業区分コード);
         return this;
     }
@@ -852,7 +798,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set二次予防事業有効期間開始年月日(FlexibleDate 二次予防事業有効期間開始年月日) {
-        requireNonNull(二次予防事業有効期間開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("二次予防事業有効期間開始年月日"));
         entity.setNijiyoboJigyoYukoKikanKaishiYMD(二次予防事業有効期間開始年月日);
         return this;
     }
@@ -864,7 +809,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set二次予防事業有効期間終了年月日(FlexibleDate 二次予防事業有効期間終了年月日) {
-        requireNonNull(二次予防事業有効期間終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("二次予防事業有効期間終了年月日"));
         entity.setNijiyoboJigyoYukoKikanShuryoYMD(二次予防事業有効期間終了年月日);
         return this;
     }
@@ -888,7 +832,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set送付年月(FlexibleYearMonth 送付年月) {
-        requireNonNull(送付年月, UrSystemErrorMessages.値がnull.getReplacedMessage("送付年月"));
         entity.setSofuYM(送付年月);
         return this;
     }
@@ -900,7 +843,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set住所地特例対象者区分コード(RString 住所地特例対象者区分コード) {
-        requireNonNull(住所地特例対象者区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例対象者区分コード"));
         entity.setJushochiTokureiTaishoshaKubunCode(住所地特例対象者区分コード);
         return this;
     }
@@ -912,7 +854,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set施設所在保険者番号(RString 施設所在保険者番号) {
-        requireNonNull(施設所在保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("施設所在保険者番号"));
         entity.setShisetsuShozaiHokenjaNo(施設所在保険者番号);
         return this;
     }
@@ -924,7 +865,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set住所地特例適用開始日(RString 住所地特例適用開始日) {
-        requireNonNull(住所地特例適用開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例適用開始日"));
         entity.setJushochiTokureiTekiyoKaishiYMD(住所地特例適用開始日);
         return this;
     }
@@ -936,7 +876,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set住所地特例適用終了日(RString 住所地特例適用終了日) {
-        requireNonNull(住所地特例適用終了日, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例適用終了日"));
         entity.setJushochiTokureiTekiyoShuryoYMD(住所地特例適用終了日);
         return this;
     }
@@ -948,7 +887,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set居宅費_新１_負担限度額(RString 居宅費_新１_負担限度額) {
-        requireNonNull(居宅費_新１_負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅費（新１）負担限度額"));
         entity.setKyotakuhiShin1FutanGendogaku(居宅費_新１_負担限度額);
         return this;
     }
@@ -960,7 +898,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set居宅費_新２_負担限度額(RString 居宅費_新２_負担限度額) {
-        requireNonNull(居宅費_新２_負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅費（新２）負担限度額"));
         entity.setKyotakuhiShin2FutanGendogaku(居宅費_新２_負担限度額);
         return this;
     }
@@ -972,7 +909,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set居宅費_新３_負担限度額(RString 居宅費_新３_負担限度額) {
-        requireNonNull(居宅費_新３_負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅費（新３）負担限度額"));
         entity.setKyotakuhiShin3FutanGendogaku(居宅費_新３_負担限度額);
         return this;
     }
@@ -984,7 +920,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set利用者負担割合有効開始日(RString 利用者負担割合有効開始日) {
-        requireNonNull(利用者負担割合有効開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担割合有効開始日"));
         entity.setRiyosyaFutanWariaiYukoKaishiYMD(利用者負担割合有効開始日);
         return this;
     }
@@ -996,7 +931,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set利用者負担割合有効終了日(RString 利用者負担割合有効終了日) {
-        requireNonNull(利用者負担割合有効終了日, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担割合有効終了日"));
         entity.setRiyosyaFutanWariaiYukoShuryoYMD(利用者負担割合有効終了日);
         return this;
     }
@@ -1008,7 +942,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set訂正年月日(FlexibleDate 訂正年月日) {
-        requireNonNull(訂正年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("訂正年月日"));
         entity.setTeiseiYMD(訂正年月日);
         return this;
     }
@@ -1020,7 +953,6 @@ public class JukyushaIdoRenrakuhyoBuilder {
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
     public JukyushaIdoRenrakuhyoBuilder set訂正区分コード(RString 訂正区分コード) {
-        requireNonNull(訂正区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("訂正区分コード"));
         entity.setTeiseiKubunCode(訂正区分コード);
         return this;
     }
