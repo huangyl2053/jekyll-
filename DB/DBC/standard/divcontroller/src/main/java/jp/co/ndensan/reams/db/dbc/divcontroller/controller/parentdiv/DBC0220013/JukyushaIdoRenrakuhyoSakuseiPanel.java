@@ -66,14 +66,6 @@ public class JukyushaIdoRenrakuhyoSakuseiPanel {
         }
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         div.getTxtHakkoDate().setValue(RDate.getNowDate());
-        FlexibleDate 作成年月日 = new FlexibleDate(div.getJukyushaIdoRenrakuhyoHenkoPrint().
-                getTxtHakkoDate().getValue().toDateString());
-        ViewStateHolder.put(ViewStateKeys.作成年月日, 作成年月日);
-        RString 氏名性別生年月日を印字する = ZERO;
-        if (div.getJukyushaIdoRenrakuhyoHenkoPrint().getChkJukyushaIdoRenrakuhyo().isAllSelected()) {
-            氏名性別生年月日を印字する = ONE;
-        }
-        ViewStateHolder.put(ViewStateKeys.氏名性別生年月日を印字する, 氏名性別生年月日を印字する);
         ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号);
         div.getCcdJukyushaIdoRenrakuhyo().initialize(
                 処理モード, ShikibetsuCode.EMPTY, 被保険者番号, 履歴番号, 論理削除フラグ, 異動日);
@@ -111,9 +103,13 @@ public class JukyushaIdoRenrakuhyoSakuseiPanel {
      */
     public ResponseData<SourceDataCollection> onClick_reportPublish(
             JukyushaIdoRenrakuhyoSakuseiPanelDiv div) {
+        FlexibleDate 作成年月日 = new FlexibleDate(div.getJukyushaIdoRenrakuhyoHenkoPrint().
+                getTxtHakkoDate().getValue().toDateString());
+        RString 氏名性別生年月日を印字する = ZERO;
+        if (div.getJukyushaIdoRenrakuhyoHenkoPrint().getChkJukyushaIdoRenrakuhyo().isAllSelected()) {
+            氏名性別生年月日を印字する = ONE;
+        }
         int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, Integer.class);
-        FlexibleDate 作成年月日 = ViewStateHolder.get(ViewStateKeys.作成年月日, FlexibleDate.class);
-        RString 氏名性別生年月日を印字する = ViewStateHolder.get(ViewStateKeys.氏名性別生年月日を印字する, RString.class);
         if (履歴番号 == 1) {
             JukyushaIdoRenrakuhyoTorokuEntity 受給者異動連絡票Entity = getHandler(div).
                     get受給者異動連絡票Entity(作成年月日, 氏名性別生年月日を印字する);
