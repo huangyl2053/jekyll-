@@ -146,11 +146,10 @@ public class DBB1110001_ShotokujohoIchiranhyoSakuseiFlow extends BatchFlowBase<S
                 throw new ApplicationException(UrErrorMessages.検索キーの誤り
                         .getMessage().evaluate());
             }
-        } else if (INDEX_111.equals(parameter.get導入形態コード())) {
-            if (parameter.get市町村情報リスト() == null || parameter.get市町村情報リスト().isEmpty()) {
-                throw new ApplicationException(UrErrorMessages.検索キーの誤り
-                        .getMessage().evaluate());
-            }
+        } else if (INDEX_111.equals(parameter.get導入形態コード())
+                && (parameter.get市町村情報リスト() == null || parameter.get市町村情報リスト().isEmpty())) {
+            throw new ApplicationException(UrErrorMessages.検索キーの誤り
+                    .getMessage().evaluate());
         }
         return loopBatch(RegistShoriDateKanriProcess.class).arguments(parameter).define();
     }
