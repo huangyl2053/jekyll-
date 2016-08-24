@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionUpdateMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.centertransmission.CenterTransmissionUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -27,7 +26,6 @@ public class UpdateNinteiShinseiJohoProcess extends BatchProcessBase<DbT5101Nint
     private static final RString SELECT_NINTEISHINSEIJOHO = new RString("jp.co.ndensan.reams.db.dbe"
             + ".persistence.db.mapper.relate.centertransmission.ICenterTransmissionMapper.getNinteiShinseiJoho");
     private CenterTransmissionUpdateProcessParameter parameter;
-    private CenterTransmissionUpdateMybitisParamter mybitisParamter;
     private List<RString> 出力された申請書管理番号;
 
     @BatchWriter
