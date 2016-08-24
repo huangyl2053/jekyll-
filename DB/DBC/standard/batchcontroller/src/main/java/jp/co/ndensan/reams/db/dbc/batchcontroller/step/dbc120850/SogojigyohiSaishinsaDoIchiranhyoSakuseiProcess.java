@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.sogojigyohisaishinsakett
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteiHokenshaInEntity;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteiHokenshaInSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohisaishinsaokenshain.SogojigyohiSaishinsaKetteiHokenshaInSource;
 import jp.co.ndensan.reams.db.dbc.service.core.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaService;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -100,11 +100,9 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(実行不可MESSAGE.toString()).toString());
         }
-        if (並び順 != null) {
-            for (ISetSortItem item : 並び順.get設定項目リスト()) {
-                if (item.is改頁項目()) {
-                    改頁項目リスト.add(item.get項目ID());
-                }
+        for (ISetSortItem item : 並び順.get設定項目リスト()) {
+            if (item.is改頁項目()) {
+                改頁項目リスト.add(item.get項目ID());
             }
         }
         出力順 = get出力順();
