@@ -36,6 +36,7 @@ public class ShoriDateKanriManager {
     private static final RString 市町村コードメッセージ = new RString("市町村コード");
     private static final RString 処理枝番メッセージ = new RString("処理枝番");
     private static final RString 年度内連番メッセージ = new RString("年度内連番");
+    private static final RString 処理年度メッセージ = new RString("処理年度");
     private static final RString サブ業務コードメッセージ = new RString("サブ業務コード");
     private static final RString 開始時分秒 = new RString("000000");
     private static final RString 終了時分秒 = new RString("235959");
@@ -589,7 +590,7 @@ public class ShoriDateKanriManager {
             FlexibleYear 処理年度) {
         requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
         requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
-        requireNonNull(処理年度, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年度"));
+        requireNonNull(処理年度, UrSystemErrorMessages.値がnull.getReplacedMessage(処理年度メッセージ.toString()));
         List<ShoriDateKanri> shoriDateKanriList = new ArrayList<>();
         List<DbT7022ShoriDateKanriEntity> entityList = dac.select処理状況_普徴仮算定賦課(
                 処理年度,
@@ -619,7 +620,7 @@ public class ShoriDateKanriManager {
             RString 処理枝番) {
         requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
         requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
-        requireNonNull(処理年度, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年度"));
+        requireNonNull(処理年度, UrSystemErrorMessages.値がnull.getReplacedMessage(処理年度メッセージ.toString()));
         List<ShoriDateKanri> shoriDateKanriList = new ArrayList<>();
         List<DbT7022ShoriDateKanriEntity> entityList = dac.select非課税年金対象者情報for広域(
                 サブ業務コード,
@@ -650,8 +651,8 @@ public class ShoriDateKanriManager {
             RString 年度内連番) {
         requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
         requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
-        requireNonNull(処理年度, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年度"));
-        requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage("年度内連番"));
+        requireNonNull(処理年度, UrSystemErrorMessages.値がnull.getReplacedMessage(処理年度メッセージ.toString()));
+        requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage(年度内連番メッセージ.toString()));
         List<ShoriDateKanri> shoriDateKanriList = new ArrayList<>();
         List<DbT7022ShoriDateKanriEntity> entityList = dac.selectFor依頼金額計算基準日取得(
                 サブ業務コード,
@@ -684,9 +685,9 @@ public class ShoriDateKanriManager {
             RString 年度内連番) {
         requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
         requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
-        requireNonNull(処理年度, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年度"));
-        requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage("年度内連番"));
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(処理年度, UrSystemErrorMessages.値がnull.getReplacedMessage(処理年度メッセージ.toString()));
+        requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage(年度内連番メッセージ.toString()));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードメッセージ.toString()));
         List<ShoriDateKanri> shoriDateKanriList = new ArrayList<>();
         List<DbT7022ShoriDateKanriEntity> entityList = dac.select非課税年金対象者情報forチェック(
                 サブ業務コード,
