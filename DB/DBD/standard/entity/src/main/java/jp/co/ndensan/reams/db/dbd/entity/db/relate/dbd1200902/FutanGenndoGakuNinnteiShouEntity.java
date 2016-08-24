@@ -5,8 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902;
 
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4010GemmenGengakuShinseiEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4018KaigoHokenFutanGendogakuNinteiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import lombok.Getter;
@@ -22,8 +21,7 @@ import lombok.Setter;
 @Setter
 public class FutanGenndoGakuNinnteiShouEntity {
 
-    private DbT4018KaigoHokenFutanGendogakuNinteiEntity 介護保険負担限度額認定Entity;
-    private DbT4010GemmenGengakuShinseiEntity 減免減額申請Entity;
+    private FutanGendogakuNinteiEntity 介護保険負担限度額認定;
     private UaFt200FindShikibetsuTaishoEntity psmEntity;
     private UaFt250FindAtesakiEntity atesakiEntity;
 }

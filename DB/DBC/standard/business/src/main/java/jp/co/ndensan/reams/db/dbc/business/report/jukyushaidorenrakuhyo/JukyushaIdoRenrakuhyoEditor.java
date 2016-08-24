@@ -201,16 +201,22 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
     }
 
     private RString commonEra(FlexibleDate 年月日) {
-        return 年月日.wareki()
-                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.PERIOD).fillType(FillType.ZERO).getEra();
+        if (年月日 != null) {
+            return 年月日.wareki()
+                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.PERIOD).fillType(FillType.ZERO).getEra();
+        }
+        return RString.EMPTY;
     }
 
     private RString commonYMD(FlexibleDate 年月日) {
-        return 年月日.wareki()
-                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.PERIOD).fillType(FillType.ZERO)
-                .toDateString().substring(2).replace(DOT, RString.EMPTY);
+        if (年月日 != null) {
+            return 年月日.wareki()
+                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.PERIOD).fillType(FillType.ZERO)
+                    .toDateString().substring(2).replace(DOT, RString.EMPTY);
+        }
+        return RString.EMPTY;
     }
 
     private RString 性別男の場合() {

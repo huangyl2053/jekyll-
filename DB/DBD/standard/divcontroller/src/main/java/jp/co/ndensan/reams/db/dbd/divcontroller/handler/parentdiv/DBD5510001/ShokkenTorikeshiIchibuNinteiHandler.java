@@ -185,7 +185,7 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
         if (申請届出者情報.get申請届出者電話番号() != null) {
             model.set電話番号(申請届出者情報.get申請届出者電話番号().value());
         }
-        // div.getCcdShinseiTodokedesha().initialize(model);
+        div.getCcdShinseiTodokedesha().initialize(model);
         div.getCcdShujiiIryokikanAndShujiiInput().initialize(
                 今回情報.get主治医医療機関情報().get市町村コード(), 申請書管理番号, SubGyomuCode.DBD介護受給, 今回情報.get主治医医療機関情報().get主治医医療機関コード(),
                 今回情報.get主治医医療機関情報().get医療機関名称(), 今回情報.get主治医情報().get主治医コード(), 今回情報.get主治医情報().get主治医氏名());
@@ -627,6 +627,11 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_28, 受給者台帳.get指定サービス種類28());
             登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_29, 受給者台帳.get指定サービス種類29());
             登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_30, 受給者台帳.get指定サービス種類30());
+            登録用builder.set要介護認定状態区分コード(nullToEmpty(受給者台帳.get要介護認定状態区分コード()));
+            登録用builder.set認定有効期間終了年月日(nullToEmpty(受給者台帳.get認定有効期間終了年月日()));
+            if (outModel != null) {
+                登録用builder.set異動理由(nullToEmpty(outModel.get理由()));
+            }
         } else {
             登録用builder.set直近異動事由コード(new Code(ChokkinIdoJiyuCode.職権修正.getコード()));
             登録用builder.set有効無効区分(new Code(YukoMukoKubun.有効.getコード()));
@@ -669,6 +674,11 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_28, 指定サービス種類List.get(指定サービス種類_28 - 1));
             登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_29, 指定サービス種類List.get(指定サービス種類_29 - 1));
             登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_30, 指定サービス種類List.get(指定サービス種類_30 - 1));
+            if (outModel != null) {
+                登録用builder.set要介護認定状態区分コード(new Code(outModel.get認定内容().get要介護度コード()));
+                登録用builder.set認定有効期間終了年月日(nullToEmpty(outModel.get認定内容().get有効終了年月日()));
+            }
+            登録用builder.set異動理由(nullToEmpty(受給者台帳.get異動理由()));
         }
         登録用builder.set申請書管理番号(採番申請書管理番号);
         登録用builder.set申請状況区分(nullToEmpty(受給者台帳.get申請状況区分()));
@@ -682,15 +692,12 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
                 getTxtShinseiYMD().getValue().toString()));
         登録用builder.set２号特定疾病コード(nullToEmpty(受給者台帳.get２号特定疾病コード()));
         登録用builder.set審査会依頼年月日(nullToEmpty(受給者台帳.get審査会依頼年月日()));
-        登録用builder.set要介護認定状態区分コード(nullToEmpty(受給者台帳.get要介護認定状態区分コード()));
         登録用builder.set認定有効期間開始年月日(nullToEmpty(div.getRirekiNintei().getTxtYukoKaishibiKonkai().getValue()));
-        登録用builder.set認定有効期間終了年月日(nullToEmpty(div.getRirekiNintei().getTxtYukoShuryobiKonkai().getValue()));
         登録用builder.set認定年月日(nullToEmpty(div.getRirekiNintei().getTxtNinteibiKonkai().getValue()));
         登録用builder.setみなし要介護区分コード(nullToEmpty(受給者台帳.getみなし要介護区分コード()));
         登録用builder.set直近異動年月日(FlexibleDate.getNowDate());
         if (outModel != null) {
             登録用builder.setデータ区分(outModel.get異動事由コード() == null ? Code.EMPTY : new Code(outModel.get異動事由コード()));
-            登録用builder.set異動理由(nullToEmpty(outModel.get理由()));
         }
         登録用builder.set同一連番(new RString(String.valueOf(Integer.parseInt(受給者台帳.get履歴番号().toString()) + 1)));
         登録用builder.set申請書区分(nullToEmpty(受給者台帳.get申請書区分()));
@@ -1016,9 +1023,11 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
 
         if (!認定区分_却.equals(div.getTxtKubunKonkai().getValue()) && 受給者台帳.is直近フラグ()) {
             修正用builder.set直近フラグ(false);
-            // TODO QA1561確認中
-            修正用builder.set有効無効区分(new Code(YukoMukoKubun.無効.getコード()));
-            修正用builder.setデータ区分(new Code(Datakubun.開始日同日の区分変更前情報.getコード()));
+            修正用builder.set認定有効期間終了年月日(div.getTxtYukoShuryobiZenkai().getValue());
+            if (outModel != null && outModel.get認定内容().get有効開始年月日().equals(div.getTxtYukoKaishibiZenkai().getValue())) {
+                修正用builder.set有効無効区分(new Code(YukoMukoKubun.無効.getコード()));
+                修正用builder.setデータ区分(new Code(Datakubun.開始日同日の区分変更前情報.getコード()));
+            }
         }
 
         if (認定区分_却.equals(div.getTxtKubunKonkai().getValue())
@@ -1095,8 +1104,11 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             }
         }
         if (!認定区分_却.equals(div.getTxtKubunKonkai().getValue()) && 受給者台帳.is直近フラグ()) {
-            修正用builder.set直近フラグ(false);
-            修正用builder.set有効無効区分(new Code(YukoMukoKubun.無効.getコード()));
+            修正用builder.set認定有効期間終了年月日(div.getTxtYukoShuryobiZenkai().getValue());
+            if (outModel != null && outModel.get認定内容().get有効開始年月日().equals(div.getTxtYukoKaishibiZenkai().getValue())) {
+                修正用builder.set有効無効区分(new Code(YukoMukoKubun.無効.getコード()));
+                修正用builder.setデータ区分(new Code(Datakubun.開始日同日の区分変更前情報.getコード()));
+            }
         }
         if (認定区分_却.equals(div.getTxtKubunKonkai().getValue())
                 && ShinseiJokyoKubun.申請中.getコード().equals(受給者台帳.get申請状況区分())) {

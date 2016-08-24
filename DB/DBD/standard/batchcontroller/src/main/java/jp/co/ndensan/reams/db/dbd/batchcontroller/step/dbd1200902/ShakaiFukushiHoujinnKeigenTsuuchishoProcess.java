@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.TeikeibunMojiSize;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
@@ -88,8 +87,6 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
     private static final RString 年度 = new RString("年度");
     private static final RString 交付日 = new RString("交付日");
     private static final RString 出力順 = new RString("出力順");
-    private static final RString 出力しない = new RString("出力しない");
-    private static final RString 出力する = new RString("出力する");
 
     private static final RString カラ = new RString("～");
     private static final RString より = new RString("＞");
@@ -117,7 +114,7 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
     protected void initialize() {
         reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         association = AssociationFinderFactory.createInstance().getAssociation();
-        帳票制御共通 = load帳票制御共通(帳票分類ID);
+        帳票制御共通 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御共通(帳票分類ID);
         int パターン番号 = 0;
         if (TeikeibunMojiSize.フォント小.getコード().equals(帳票制御共通.getTeikeibunMojiSize())) {
             パターン番号 = ONE_1;
@@ -195,7 +192,7 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
         order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD100020, reamsLoginID, processParamter.get改頁出力順ID());
         RString 出力順 = RString.EMPTY;
         if (order != null) {
-            出力順 = MyBatisOrderByClauseCreator.create(FutanGenndoGakuNinnteiListProperty.DBD100020_ResultListEnum.class, order);
+            出力順 = MyBatisOrderByClauseCreator.create(FutanGenndoGakuNinnteiListProperty.class, order);
         }
         return 出力順;
     }
@@ -303,24 +300,4 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
         return data;
     }
 
-    /**
-     * 帳票制御共通を取得します
-     *
-     * @param 帳票分類ID 帳票分類ID
-     * @return 帳票制御共通
-     */
-    public DbT7065ChohyoSeigyoKyotsuEntity load帳票制御共通(ReportId 帳票分類ID) {
-        return GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().
-                load帳票制御共通(REPORT_DBD100020);
-    }
-
-    /**
-     * 帳票制御汎用をキーから取得します。
-     *
-     * @param 帳票分類ID 帳票分類ID
-     * @return List<帳票制御汎用>
-     */
-    public List<DbT7067ChohyoSeigyoHanyoEntity> load帳票制御汎用(ReportId 帳票分類ID) {
-        return GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御汎用(REPORT_DBD100020);
-    }
 }

@@ -443,7 +443,6 @@ public class SokujiFukaKouseiMain {
                 SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
                 tablePanel.getTxtTokuchoKoseiGo04().setReadOnly(false);
             }
-            ViewStateHolder.put(ViewStateKeys.賦課年度, 賦課年度);
         } else {
             div.getBtnYokunendoHyoji().setText(翌年度の情報を表示する);
             setViewStateHolder();
