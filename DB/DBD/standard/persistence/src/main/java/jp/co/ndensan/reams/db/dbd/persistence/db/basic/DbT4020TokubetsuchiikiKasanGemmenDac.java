@@ -19,7 +19,9 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
@@ -115,5 +117,26 @@ public class DbT4020TokubetsuchiikiKasanGemmenDac implements ISaveable<DbT4020To
                                 not(isNULL(ketteiKubun)),
                                 not(eq(ketteiKubun, RString.EMPTY)))).
                 getCount();
+    }
+
+    /**
+     * 被保険者番号より、特別地域加算減免情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT4020TokubetsuchiikiKasanGemmenEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT4020TokubetsuchiikiKasanGemmenEntity get特別地域加算減免情報(HihokenshaNo 被保険者番号)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4020TokubetsuchiikiKasanGemmen.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                order(by(rirekiNo, DESC)).
+                limit(1).
+                toObject(DbT4020TokubetsuchiikiKasanGemmenEntity.class);
     }
 }
