@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護保険料減免
@@ -153,6 +154,7 @@ public class KaigoHokenryoGemmen {
      * @param 減免情報 GemmenJoho
      * @param 画面情報param KaigoHokenryoGemmenParam
      */
+    @Transaction
     public void saveDBDate(GemmenJoho 減免情報, KaigoHokenryoGemmenParam 画面情報param) {
         requireNonNull(減免情報, UrSystemErrorMessages.値がnull.getReplacedMessage(減免情報R.toString()));
         requireNonNull(画面情報param, UrSystemErrorMessages.値がnull.getReplacedMessage(画面情報PARAM.toString()));
