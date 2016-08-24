@@ -12,9 +12,11 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.centertransmission.Cente
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTransmissionCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTransmissionEditEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTransmissionEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.centertransmission.ICenterTransmissionMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5129TennyuShiboEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -172,7 +174,15 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
 
     private RString get申請書管理番号For出力条件() {
         RStringBuilder 条件 = new RStringBuilder();
-        for (RString rString : 出力された申請書管理番号) {
+        if (parameter.is転入死亡情報出力()) {
+            ICenterTransmissionMapper mapper = getMapper(ICenterTransmissionMapper.class);
+            for (DbT5129TennyuShiboEntity entity : mapper.getShinseishoKanriNoByTennyuShibo(mybitisParamter)) {
+                if (!申請書管理番号リスト.contains(entity.getShinseishoKanriNo().value())) {
+                    申請書管理番号リスト.add(entity.getShinseishoKanriNo().value());
+                }
+            }
+        }
+        for (RString rString : 申請書管理番号リスト) {
             条件.append(rString);
             条件.append(", ");
         }
