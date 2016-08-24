@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbd.definition.core.shorijotaikubun.ShoriJotaiKubu
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010001.TaishoShoriPanelDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010001.dgShoriSettei_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010001.dgTaishoShoriItchiran_Row;
-import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5020001.ShokkenTorikeshiIchibuSoshituGamenJoho;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -33,7 +32,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -250,6 +248,7 @@ public class TaishoShoriHandler {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(div.getHdnFilePath().toString()), "SJIS"));
             line = new RString(in.readLine());
+            in.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TaishoShoriHandler.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -405,7 +404,7 @@ public class TaishoShoriHandler {
             year = year.minusYear(1);
         }
         div.getDdlShoriNendo().setDataSource(dataList);
-        if (dataList.size() > 0) {
+        if (!dataList.isEmpty()) {
             div.getDdlShoriNendo().setSelectedIndex(0);
         }
 
@@ -418,7 +417,7 @@ public class TaishoShoriHandler {
         RString 市町村識別ID = RString.EMPTY;
 
         List<AuthorityItem> authorityItemList = ShichosonSecurityJoho.getShichosonShikibetsuId(ログインユーザID);
-        if (null != authorityItemList && authorityItemList.size() > 0) {
+        if (null != authorityItemList && !authorityItemList.isEmpty()) {
             市町村識別ID = authorityItemList.get(0).getItemId();
         }
 
@@ -487,25 +486,5 @@ public class TaishoShoriHandler {
             return 市町村コード.value();
         }
         return 市町村コード.value().concat(RString.HALF_SPACE).concat(市町村名);
-    }
-
-    /**
-     * 保存ボタンのイベントです。
-     *
-     * @param 画面更新用情報 ShokkenTorikeshiIchibuSoshituGamenJoho
-     */
-    public void save(ShokkenTorikeshiIchibuSoshituGamenJoho 画面更新用情報) {
-
-    }
-
-    private RDate convertFlexibleDateToRDate(FlexibleDate target) {
-        if (null == target || target.isEmpty()) {
-            return null;
-        }
-        return new RDate(target.toString());
-    }
-
-    private RString convertCodeToRString(Code target) {
-        return null == target || target.isEmpty() ? RString.EMPTY : target.value();
     }
 }

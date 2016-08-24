@@ -527,7 +527,7 @@ public class NinteiTsuchishoHakkoHandler {
             set個別発行要介護度変更通知書(パネル);
         } else if (PanelType.個別発行認定却下通知書パネル.equals(パネル)) {
             set個別発行認定却下通知書(パネル);
-        } else if (PanelType.一括発行パネル.equals(PanelType.一括発行パネル)) {
+        } else if (PanelType.一括発行パネル.equals(パネル)) {
             set一括発行();
         }
     }
@@ -972,13 +972,14 @@ public class NinteiTsuchishoHakkoHandler {
     }
 
     private SourceDataCollection print個別発行認定結果通知書(YokaigoNinteiTsutisho 画面選択データ, PanelType パネル) {
+        SourceDataCollection collection = null;
         try (ReportManager reportManager = new ReportManager()) {
             YokaigoNinteiKekkaTshuchishoPrintService printService = new YokaigoNinteiKekkaTshuchishoPrintService();
             printService.print(create個別発行認定結果通知書データ(パネル, 画面選択データ), get帳票共通情報(パネル), パネル.getChohyoId(), reportManager);
 
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(ChohyoHakkoRirekiSearchDefault.帳票ID.getCode()), パネル.getChohyoId().getColumnValue());
-            SourceDataCollection collection = reportManager.publish();
+            collection = reportManager.publish();
 
             if (div.getRadNinteiKekkaRireki().getSelectedKey().equals(RadioValue.発行済みを出力する.getKey())) {
                 List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
@@ -987,18 +988,19 @@ public class NinteiTsuchishoHakkoHandler {
                     insert発行履歴(data, div.getTxtNinteiKekkaSakuseiDay().getValue(), shikibetsuCodeList, hashMap);
                 }
             }
-            return collection;
         }
+        return collection;
     }
 
     private SourceDataCollection print個別発行サービス変更通知書(YokaigoNinteiTsutisho 画面選択データ, PanelType パネル) {
+        SourceDataCollection collection = null;
         try (ReportManager reportManager = new ReportManager()) {
             ServiceHenkoTshuchishoPrintService printService = new ServiceHenkoTshuchishoPrintService();
             printService.print(create個別発行サービス変更通知書データ(パネル, 画面選択データ), get帳票共通情報(パネル), パネル.getChohyoId(), reportManager);
 
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(ChohyoHakkoRirekiSearchDefault.帳票ID.getCode()), パネル.getChohyoId().getColumnValue());
-            SourceDataCollection collection = reportManager.publish();
+            collection = reportManager.publish();
             if (div.getRadServiceHenkoBunshoRireki().getSelectedKey().equals(RadioValue.発行済みを出力する.getKey())) {
                 List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
                 shikibetsuCodeList.add(画面選択データ.get識別コード());
@@ -1006,18 +1008,19 @@ public class NinteiTsuchishoHakkoHandler {
                     insert発行履歴(data, div.getTxtServiceHenkoBunshoSakuseiDay().getValue(), shikibetsuCodeList, hashMap);
                 }
             }
-            return collection;
         }
+        return collection;
     }
 
     private SourceDataCollection print個別発行要介護度変更通知書(YokaigoNinteiTsutisho 画面選択データ, PanelType パネル) {
+        SourceDataCollection collection = null;
         try (ReportManager reportManager = new ReportManager()) {
             YokaigodoHenkoTshuchishoPrintService printService = new YokaigodoHenkoTshuchishoPrintService();
             printService.print(create個別発行要介護度変更通知書データ(パネル, 画面選択データ), get帳票共通情報(パネル), パネル.getChohyoId(), reportManager);
 
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(ChohyoHakkoRirekiSearchDefault.帳票ID.getCode()), パネル.getChohyoId().getColumnValue());
-            SourceDataCollection collection = reportManager.publish();
+            collection = reportManager.publish();
             if (div.getRadYokaigodoHenkoRireki().getSelectedKey().equals(RadioValue.発行済みを出力する.getKey())) {
                 List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
                 shikibetsuCodeList.add(画面選択データ.get識別コード());
@@ -1025,18 +1028,19 @@ public class NinteiTsuchishoHakkoHandler {
                     insert発行履歴(data, div.getTxtYokaigodoHenkoTsuchiSakuseiDay().getValue(), shikibetsuCodeList, hashMap);
                 }
             }
-            return collection;
         }
+        return collection;
     }
 
     private SourceDataCollection print個別発行認定却下通知書(YokaigoNinteiTsutisho 画面選択データ, PanelType パネル) {
+        SourceDataCollection collection = null;
         try (ReportManager reportManager = new ReportManager()) {
             YokaigoNinteiKyakkaTshuchishoPrintService printService = new YokaigoNinteiKyakkaTshuchishoPrintService();
             printService.print(create個別発行認定却下通知書データ(パネル, 画面選択データ), get帳票共通情報(パネル), パネル.getChohyoId(), reportManager);
 
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(ChohyoHakkoRirekiSearchDefault.帳票ID.getCode()), パネル.getChohyoId().getColumnValue());
-            SourceDataCollection collection = reportManager.publish();
+            collection = reportManager.publish();
             if (div.getRadNinteiKyakkaRireki().getSelectedKey().equals(RadioValue.発行済みを出力する.getKey())) {
                 List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
                 shikibetsuCodeList.add(画面選択データ.get識別コード());
@@ -1044,8 +1048,8 @@ public class NinteiTsuchishoHakkoHandler {
                     insert発行履歴(data, div.getTxtNinteiKyakkaTsuchi().getValue(), shikibetsuCodeList, hashMap);
                 }
             }
-            return collection;
         }
+        return collection;
     }
 
     private NinteiKekkaTsuchishoJoho create個別発行認定結果通知書データ(PanelType パネル, YokaigoNinteiTsutisho 画面選択データ) {

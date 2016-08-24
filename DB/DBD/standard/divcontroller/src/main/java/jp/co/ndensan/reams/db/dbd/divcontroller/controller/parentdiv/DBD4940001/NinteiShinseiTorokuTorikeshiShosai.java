@@ -119,9 +119,8 @@ public class NinteiShinseiTorokuTorikeshiShosai {
     public ResponseData<NinteiShinseiTorokuTorikeshiShosaiDiv> onBeforeOpenDialog_btnChosaJokyo(NinteiShinseiTorokuTorikeshiShosaiDiv div) {
         // TODO. 実装しない。
 
-        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+//        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
         //List<YokaigoRirekiJoho> 今回前回履歴情報 = getHandler(div).get今回前回履歴情報(被保険者番号);
-
 //        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
 //        getHandler(div).onBeforeOpenDialog_btnDispGemmenJoho(taishoshaKey);
         return ResponseData.of(div).respond();
