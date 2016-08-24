@@ -121,4 +121,25 @@ public class DbT4018KaigoHokenFutanGendogakuNinteiDac {
                 toObject(DbT4018KaigoHokenFutanGendogakuNinteiEntity.class);
 
     }
+
+    /**
+     * 被保険者番号より、負担限度額認定情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT4018KaigoHokenFutanGendogakuNinteiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT4018KaigoHokenFutanGendogakuNinteiEntity get負担限度額認定情報(HihokenshaNo 被保険者番号)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4018KaigoHokenFutanGendogakuNintei.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                order(by(rirekiNo, DESC)).
+                limit(1).
+                toObject(DbT4018KaigoHokenFutanGendogakuNinteiEntity.class);
+    }
 }
