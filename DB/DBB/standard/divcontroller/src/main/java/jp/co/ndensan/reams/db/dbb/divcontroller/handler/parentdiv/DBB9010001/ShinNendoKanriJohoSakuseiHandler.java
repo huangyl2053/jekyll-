@@ -113,8 +113,7 @@ public class ShinNendoKanriJohoSakuseiHandler {
         RString honNendo = new RDate(div.getShinNendoKanriJohoSakuseiBatchParameter().getTxtTonendo().getValue().toString()).getYear().toDateString();
         FlexibleYear 本年度 = new FlexibleYear(honNendo);
         RDate 年度 = new RDate(本年度.toString().concat(MONTHDAY.toString()));
-        HashMap<String, Object> param = createParameter(年度);
-        return param;
+        return createParameter(年度);
     }
 
     /**
