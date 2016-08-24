@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0140001;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteifuka.TyouhyouParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.BatchFuchoKariSanteiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.FuchoKariSanteiFukaEntity;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisantei.FuchoKarisanteiBatchParameter;
@@ -278,14 +278,13 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
         }
         Map<RString, RString> 出力帳票一覧 = div.getMainPanelBatchParameter()
                 .getFuchoKarisanteiChohyoHakko2().getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
-        List<TyouhyouParameter> list = new ArrayList<>();
+        List<BatchFuchoKariSanteiResult> list = new ArrayList<>();
         for (Map.Entry<RString, RString> map : 出力帳票一覧.entrySet()) {
             RString 帳票Id = map.getKey();
             RString 出力順Id = map.getValue();
             if (帳票Id != null && !帳票Id.isEmpty() && 出力順Id != null && !出力順Id.isEmpty()) {
-                TyouhyouParameter result = new TyouhyouParameter();
-                result.set帳票分類ID(new ReportId(map.getKey()));
-                result.set出力順ID(map.getValue());
+                BatchFuchoKariSanteiResult result = new BatchFuchoKariSanteiResult(
+                        new ReportId(map.getKey()), Long.valueOf(map.getValue().toString()));
                 list.add(result);
             }
         }

@@ -19,10 +19,12 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
+import jp.co.ndensan.reams.ur.urc.entity.db.basic.noki.nokikanri.UrT0729NokiKanriEntity;
 import jp.co.ndensan.reams.ur.urc.service.core.noki.nokikanri.NokiManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -94,13 +96,19 @@ public class ShinNendoKanriJohoSakuseiManager {
         List<Noki> list過年度 = 納期管理.create翌年度納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
                 new RYear(本年度.toString()), GennenKanen.過年度);
         for (Noki item : list) {
-            納期管理.save納期(item);
+            UrT0729NokiKanriEntity entity = item.toEntity();
+            entity.setState(EntityDataState.Added);
+            納期管理.save納期(new Noki(entity));
         }
         for (Noki item : list現年度) {
-            納期管理.save納期(item);
+            UrT0729NokiKanriEntity entity = item.toEntity();
+            entity.setState(EntityDataState.Added);
+            納期管理.save納期(new Noki(entity));
         }
         for (Noki item : list過年度) {
-            納期管理.save納期(item);
+            UrT0729NokiKanriEntity entity = item.toEntity();
+            entity.setState(EntityDataState.Added);
+            納期管理.save納期(new Noki(entity));
         }
     }
 

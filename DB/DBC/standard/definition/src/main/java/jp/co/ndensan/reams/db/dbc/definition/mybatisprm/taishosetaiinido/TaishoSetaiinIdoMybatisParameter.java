@@ -7,18 +7,16 @@ package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.taishosetaiinido;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 基準収入額適用管理マスタのリスト（履歴番号＝最新）を作成です
  *
  * @reamsid_L DBC-4640-080 liuxiaoyu
  */
-@Getter
-@Setter
+@lombok.Getter
+@lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TaishoSetaiinIdoMybatisParameter {
+public final class TaishoSetaiinIdoMybatisParameter {
 
     private final RString 世帯コード;
     private final FlexibleYear 処理年度;

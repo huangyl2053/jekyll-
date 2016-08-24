@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariai.FutanWariaiSokujiKouseiRelateEntity;
-import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariai;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiIdentifier;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisaiIdentifier;
@@ -237,7 +236,7 @@ public class FutanWariaiSokujiKouseiResult
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 
@@ -265,7 +264,7 @@ public class FutanWariaiSokujiKouseiResult
      * 利用者負担割合のみを変更対象とします。<br/>
      * {@link DbT3113RiyoshaFutanWariaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
-     * @return 変更対象処理実施後の{@link ShikyuTeishiRelate}
+     * @return 変更対象処理実施後の{@link FutanWariaiSokujiKouseiResult}
      */
     @Override
     public FutanWariaiSokujiKouseiResult modifiedModel() {
@@ -281,7 +280,7 @@ public class FutanWariaiSokujiKouseiResult
      * 保持する利用者負担割合を削除対象とします。
      * <br/> {@link DbT3113RiyoshaFutanWariaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
-     * @return 削除対象処理実施後の{@link RiyoshaFutanWariai}
+     * @return 削除対象処理実施後の{@link FutanWariaiSokujiKouseiResult}
      */
     @Override
     public FutanWariaiSokujiKouseiResult deleted() {
@@ -296,9 +295,9 @@ public class FutanWariaiSokujiKouseiResult
     }
 
     /**
-     * {@link RiyoshaFutanWariai}のシリアライズ形式を提供します。
+     * {@link FutanWariaiSokujiKouseiResult}のシリアライズ形式を提供します。
      *
-     * @return {@link RiyoshaFutanWariai}のシリアライズ形式
+     * @return {@link FutanWariaiSokujiKouseiResult}のシリアライズ形式
      */
     protected Object writeReplace() {
         return new _SerializationProxy(entity, id, 利用者負担割合明細);

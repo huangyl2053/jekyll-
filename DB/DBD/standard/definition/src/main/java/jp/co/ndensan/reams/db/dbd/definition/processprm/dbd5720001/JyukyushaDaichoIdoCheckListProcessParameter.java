@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5720001;
 
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5720001.JyukyushaDaichoIdoCheckListMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,7 +28,6 @@ public class JyukyushaDaichoIdoCheckListProcessParameter implements IBatchProces
     private RTime 今回抽出終了時分秒;
     private RString 出力対象;
     private Long 出力順ID;
-    private RString 出力順;
 
     /**
      *
@@ -48,15 +46,6 @@ public class JyukyushaDaichoIdoCheckListProcessParameter implements IBatchProces
         this.今回抽出終了時分秒 = 今回抽出終了時分秒;
         this.出力対象 = 出力対象;
         this.出力順ID = 出力順ID;
-    }
-
-    /**
-     *
-     * @return JyukyushaDaichoIdoCheckListMybatisParameter
-     */
-    public JyukyushaDaichoIdoCheckListMybatisParameter toJyukyushaDaichoIdoCheckListMybatisParameter() {
-        return new JyukyushaDaichoIdoCheckListMybatisParameter(今回抽出開始年月日, 今回抽出開始時分秒,
-                今回抽出終了年月日, 今回抽出終了時分秒, 出力順);
     }
 
 }

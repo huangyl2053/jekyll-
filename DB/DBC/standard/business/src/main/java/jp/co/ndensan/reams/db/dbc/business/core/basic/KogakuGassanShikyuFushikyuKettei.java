@@ -24,8 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 高額合算支給不支給決定を管理するクラスです。
  */
 public class KogakuGassanShikyuFushikyuKettei
-       extends ModelBase<KogakuGassanShikyuFushikyuKetteiIdentifier, DbT3074KogakuGassanShikyuFushikyuKetteiEntity, KogakuGassanShikyuFushikyuKettei>
-       implements Serializable {
+        extends ModelBase<KogakuGassanShikyuFushikyuKetteiIdentifier, DbT3074KogakuGassanShikyuFushikyuKetteiEntity, KogakuGassanShikyuFushikyuKettei>
+        implements Serializable {
 
     private final DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity;
     private final KogakuGassanShikyuFushikyuKetteiIdentifier id;
@@ -346,6 +346,15 @@ public class KogakuGassanShikyuFushikyuKettei
      */
     public FlexibleYearMonth get受取年月() {
         return entity.getUketoriYM();
+    }
+
+    /**
+     * 決定通知リアル発行フラグを返します。
+     *
+     * @return 決定通知リアル発行フラグ
+     */
+    public RString get決定通知リアル発行フラグ月() {
+        return entity.getKetteiTsuchiRealHakkoFlag();
     }
 
     /**

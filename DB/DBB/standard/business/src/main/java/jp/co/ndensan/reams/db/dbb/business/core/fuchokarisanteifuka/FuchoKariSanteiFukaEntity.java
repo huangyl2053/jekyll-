@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteifuka.TyouhyouParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,7 +22,7 @@ public class FuchoKariSanteiFukaEntity {
 
     private FlexibleYear 調定年度;
     private FlexibleYear 賦課年度;
-    private List<TyouhyouParameter> 出力帳票一覧List;
+    private List<BatchFuchoKariSanteiResult> 出力帳票一覧List;
     private FlexibleDate 発行日;
     private RString 出力方法;
     private RString 出力期表示方法;

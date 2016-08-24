@@ -16,6 +16,12 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd4030011.NinteishoJohoEntit
  */
 public interface IShogaishaKoujoTaishoNinteiShoMapper {
 
+    /**
+     * 控除対象者データを取得します。
+     *
+     * @param parameter ShogaishaKojoTaishoshaListMyBatisParameter
+     * @return List<NinteishoJohoEntity>
+     */
     List<NinteishoJohoEntity> 控除対象者データの取得(ShogaishaKojoTaishoshaListMyBatisParameter parameter);
 
 }

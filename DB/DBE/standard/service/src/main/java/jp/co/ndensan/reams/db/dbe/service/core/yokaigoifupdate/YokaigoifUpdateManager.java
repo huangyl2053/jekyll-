@@ -62,12 +62,24 @@ public class YokaigoifUpdateManager {
      */
     public void tourokuKoushin(RString フェーズ番号, YokaigoifUpdateMybitisParamter 申請書管理番号) {
 
+        RString 番号_1 = new RString("1");
+        RString 番号_2 = new RString("2");
+        RString 番号_3 = new RString("3");
+        RString 番号_4 = new RString("4");
+        RString 番号_5 = new RString("5");
+        RString 番号_6 = new RString("6");
+        RString 番号_8 = new RString("8");
+        RString 番号_9 = new RString("9");
         RString 進捗 = new RString("0");
         RString 消込済 = new RString("1");
         List<DbT4003YokaigoNinteiInterfaceEntity> インターフェース情報 = this.getインターフェース情報(申請書管理番号);
         List<YokaigoifUpdateRelateEntity> 情報_登録 = this.get情報_登録(申請書管理番号);
-        if (インターフェース情報 == null) {
-            DbT4003YokaigoNinteiInterfaceEntity 主治医情報 = this.get_Entity1(情報_登録, new ShinseishoKanriNo(申請書管理番号.get申請書管理番号()));
+        if (番号_1.equals(フェーズ番号) && インターフェース情報 == null || 番号_2.equals(フェーズ番号) && インターフェース情報 == null
+                || 番号_3.equals(フェーズ番号) && インターフェース情報 == null || 番号_4.equals(フェーズ番号) && インターフェース情報 == null
+                || 番号_5.equals(フェーズ番号) && インターフェース情報 == null || 番号_6.equals(フェーズ番号) && インターフェース情報 == null
+                || 番号_8.equals(フェーズ番号) && インターフェース情報 == null || 番号_9.equals(フェーズ番号) && インターフェース情報 == null) {
+            DbT4003YokaigoNinteiInterfaceEntity 主治医情報 = this.get_Entity1(情報_登録,
+                    new ShinseishoKanriNo(申請書管理番号.get申請書管理番号()));
             if (主治医情報 != null) {
                 主治医情報.initializeMd5();
                 主治医情報.setState(EntityDataState.Added);
@@ -80,23 +92,7 @@ public class YokaigoifUpdateManager {
                 this.save主治医情報(主治医情報);
             }
         } else {
-            DbT4003YokaigoNinteiInterfaceEntity 主治医情報 = インターフェース情報.get(0);
-            RString 履歴番号 = 主治医情報.getRirekiNo();
-            RString 取込区分 = 主治医情報.getTorikomiKubun();
-            RString 消し込みフラグ = 主治医情報.getKeshikomiFlag();
-            if (消込済.equals(フェーズ番号) && !RString.EMPTY.equals(履歴番号)) {
-                主治医情報 = this.get主治医情報(消し込みフラグ, 消込済, 進捗, 取込区分, 情報_登録);
-                主治医情報.initializeMd5();
-                主治医情報.setState(EntityDataState.Modified);
-                this.save主治医情報(主治医情報);
-            } else if (消込済.equals(フェーズ番号) && インターフェース情報.isEmpty()) {
-                主治医情報 = this.get_Entity1(情報_登録, new ShinseishoKanriNo(申請書管理番号.get申請書管理番号()));
-                主治医情報.initializeMd5();
-                主治医情報.setState(EntityDataState.Added);
-                this.save主治医情報(主治医情報);
-            } else if (!消込済.equals(フェーズ番号)) {
-                this.tourokuKoushin_2(フェーズ番号, 申請書管理番号);
-            }
+            this.tourokuKoushin_3(インターフェース情報, 情報_登録, 申請書管理番号, 進捗, 消込済, フェーズ番号);
         }
     }
 
@@ -117,48 +113,50 @@ public class YokaigoifUpdateManager {
         RString 番号_8 = new RString("8");
         RString 番号_9 = new RString("9");
         List<DbT4003YokaigoNinteiInterfaceEntity> インターフェース情報 = this.getインターフェース情報(申請書管理番号);
-        DbT4003YokaigoNinteiInterfaceEntity 情報entity = インターフェース情報.get(0);
-        if (番号_1.equals(フェーズ番号)) {
-            情報entity.setShinseiShubetsuCode(RString.EMPTY);
-            情報entity.setShinseiYMD(FlexibleDate.EMPTY);
+        if (インターフェース情報 != null) {
+            DbT4003YokaigoNinteiInterfaceEntity 情報entity = インターフェース情報.get(0);
+            if (番号_1.equals(フェーズ番号)) {
+                情報entity.setShinseiShubetsuCode(RString.EMPTY);
+                情報entity.setShinseiYMD(FlexibleDate.EMPTY);
+            }
+            if (番号_2.equals(フェーズ番号)) {
+                情報entity.setChosaItakuYMD(FlexibleDate.EMPTY);
+                情報entity.setChosaItakusakiCode(JigyoshaNo.EMPTY);
+                情報entity.setChosainCode(RString.EMPTY);
+            }
+            if (番号_3.equals(フェーズ番号)) {
+                情報entity.setIryoKikanCode(RString.EMPTY);
+                情報entity.setShujiiCode(RString.EMPTY);
+                情報entity.setIkenshoIraiYMD(FlexibleDate.EMPTY);
+            }
+            if (番号_4.equals(フェーズ番号)) {
+                情報entity.setChosaShuryoYMD(FlexibleDate.EMPTY);
+            }
+            if (番号_5.equals(フェーズ番号)) {
+                情報entity.setIkenshoToriyoseYMD(FlexibleDate.EMPTY);
+            }
+            if (番号_6.equals(フェーズ番号)) {
+                情報entity.setIchijiHanteiYMD(FlexibleDate.EMPTY);
+                情報entity.setIchijiHanteiKekkaCode(RString.EMPTY);
+                情報entity.setIchijiHanteiKekkaKasanCode(RString.EMPTY);
+            }
+            if (番号_8.equals(フェーズ番号)) {
+                情報entity.setShinsakaiShiryoSakuseiYMD(FlexibleDate.EMPTY);
+                情報entity.setShinsakaiYoteiYMD(FlexibleDate.EMPTY);
+                情報entity.setGogitaiNo(0);
+            }
+            if (番号_9.equals(フェーズ番号)) {
+                情報entity.setNijiHanteiYMD(FlexibleDate.EMPTY);
+                情報entity.setNijiHanteiKekkaCode(RString.EMPTY);
+                情報entity.setNinteiYukoKikanStart(FlexibleDate.EMPTY);
+                情報entity.setNinteiYukoKikanEnd(FlexibleDate.EMPTY);
+                情報entity.setShinsakaiIken(RString.EMPTY);
+                情報entity.setYobiKubun4(RString.EMPTY);
+            }
+            情報entity.initializeMd5();
+            情報entity.setState(EntityDataState.Modified);
+            this.save主治医情報(情報entity);
         }
-        if (番号_2.equals(フェーズ番号)) {
-            情報entity.setChosaItakuYMD(FlexibleDate.EMPTY);
-            情報entity.setChosaItakusakiCode(JigyoshaNo.EMPTY);
-            情報entity.setChosainCode(RString.EMPTY);
-        }
-        if (番号_3.equals(フェーズ番号)) {
-            情報entity.setIryoKikanCode(RString.EMPTY);
-            情報entity.setShujiiCode(RString.EMPTY);
-            情報entity.setIkenshoIraiYMD(FlexibleDate.EMPTY);
-        }
-        if (番号_4.equals(フェーズ番号)) {
-            情報entity.setChosaShuryoYMD(FlexibleDate.EMPTY);
-        }
-        if (番号_5.equals(フェーズ番号)) {
-            情報entity.setIkenshoToriyoseYMD(FlexibleDate.EMPTY);
-        }
-        if (番号_6.equals(フェーズ番号)) {
-            情報entity.setIchijiHanteiYMD(FlexibleDate.EMPTY);
-            情報entity.setIchijiHanteiKekkaCode(RString.EMPTY);
-            情報entity.setIchijiHanteiKekkaKasanCode(RString.EMPTY);
-        }
-        if (番号_8.equals(フェーズ番号)) {
-            情報entity.setShinsakaiShiryoSakuseiYMD(FlexibleDate.EMPTY);
-            情報entity.setShinsakaiYoteiYMD(FlexibleDate.EMPTY);
-            情報entity.setGogitaiNo(0);
-        }
-        if (番号_9.equals(フェーズ番号)) {
-            情報entity.setNijiHanteiYMD(FlexibleDate.EMPTY);
-            情報entity.setNijiHanteiKekkaCode(RString.EMPTY);
-            情報entity.setNinteiYukoKikanStart(FlexibleDate.EMPTY);
-            情報entity.setNinteiYukoKikanEnd(FlexibleDate.EMPTY);
-            情報entity.setShinsakaiIken(RString.EMPTY);
-            情報entity.setYobiKubun4(RString.EMPTY);
-        }
-        情報entity.initializeMd5();
-        情報entity.setState(EntityDataState.Modified);
-        this.save主治医情報(情報entity);
     }
 
     private DbT4003YokaigoNinteiInterfaceEntity get主治医情報(RString 消し込みフラグ,
@@ -202,9 +200,11 @@ public class YokaigoifUpdateManager {
         }
         if (番号_4.equals(フェーズ番号)) {
             List<YokaigoifUpdateRelateEntity> 情報が4 = this.get情報_番号が4(申請書管理番号);
-            entity.setChosaShuryoYMD(情報が4.get(0).get認定調査実施年月日());
-            entity.setChosaItakusakiCode(new JigyoshaNo(情報が4.get(0).get認定調査委託先コード().getColumnValue()));
-            entity.setChosainCode(情報が4.get(0).get認定調査員コード().getColumnValue());
+            if (情報が4 != null) {
+                entity.setChosaShuryoYMD(情報が4.get(0).get認定調査実施年月日());
+                entity.setChosaItakusakiCode(new JigyoshaNo(情報が4.get(0).get認定調査委託先コード().getColumnValue()));
+                entity.setChosainCode(情報が4.get(0).get認定調査員コード().getColumnValue());
+            }
         }
         if (番号_5.equals(フェーズ番号)) {
             List<YokaigoifUpdateRelateEntity> 情報が5 = this.get情報_番号が5(申請書管理番号);
@@ -244,6 +244,27 @@ public class YokaigoifUpdateManager {
         entity.initializeMd5();
         entity.setState(EntityDataState.Modified);
         this.save主治医情報(entity);
+    }
+
+    private void tourokuKoushin_3(List<DbT4003YokaigoNinteiInterfaceEntity> インターフェース情報, List<YokaigoifUpdateRelateEntity> 情報_登録,
+            YokaigoifUpdateMybitisParamter 申請書管理番号, RString 進捗, RString 消込済, RString フェーズ番号) {
+        DbT4003YokaigoNinteiInterfaceEntity 主治医情報 = インターフェース情報.get(0);
+        RString 履歴番号 = 主治医情報.getRirekiNo();
+        RString 取込区分 = 主治医情報.getTorikomiKubun();
+        RString 消し込みフラグ = 主治医情報.getKeshikomiFlag();
+        if (消込済.equals(フェーズ番号) && !RString.EMPTY.equals(履歴番号)) {
+            主治医情報 = this.get主治医情報(消し込みフラグ, 消込済, 進捗, 取込区分, 情報_登録);
+            主治医情報.initializeMd5();
+            主治医情報.setState(EntityDataState.Modified);
+            this.save主治医情報(主治医情報);
+        } else if (消込済.equals(フェーズ番号) && インターフェース情報.isEmpty()) {
+            主治医情報 = this.get_Entity1(情報_登録, new ShinseishoKanriNo(申請書管理番号.get申請書管理番号()));
+            主治医情報.initializeMd5();
+            主治医情報.setState(EntityDataState.Added);
+            this.save主治医情報(主治医情報);
+        } else if (!消込済.equals(フェーズ番号)) {
+            this.tourokuKoushin_2(フェーズ番号, 申請書管理番号);
+        }
     }
 
     @Transaction

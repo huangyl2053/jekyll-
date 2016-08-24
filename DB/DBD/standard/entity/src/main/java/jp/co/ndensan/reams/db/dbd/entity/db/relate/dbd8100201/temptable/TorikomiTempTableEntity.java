@@ -26,7 +26,14 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TorikomiTempTableEntity extends DbTableEntityBase<TorikomiTempTableEntity> implements IDbAccessable {
 
-    public static final RString TABLE_NAME = new RString("TorikomiTempTable");
+    /**
+     * テーブル名
+     */
+    public static final RString TABLE_NAME;
+
+    static {
+        TABLE_NAME = new RString("TorikomiTempTable");
+    }
 
     @TempTableColumnOrder(1)
     private int dtno;

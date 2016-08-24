@@ -51,7 +51,7 @@ public class ShogaishaKojoTaishoshaListParameter extends BatchParameterBase {
     private FlexibleDate 決定日FROM;
     @BatchParameter(key = "決定日TO", name = "決定日TO")
     private FlexibleDate 決定日TO;
-    @BatchParameter(key = "対象年度", name = "対象年度")
+    @BatchParameter(key = "前回非該当者", name = "前回非該当者")
     private RString 前回非該当者;
     @BatchParameter(key = "交付日", name = "交付日")
     private RDate 交付日;

@@ -463,10 +463,8 @@ public class TaishoShoriHandler {
         RString header = new RString("0");
         for (int i = 0; i < 処理月数; i++) {
             月コード = 月コード + 1;
-            if (月コード > 処理月数) {
-                月コード = 1;
-                header = new RString("1");
-            }
+            月コード = 月コード > 処理月数 ? 1 : 月コード;
+            header = 月コード > 処理月数 ? new RString("1") : header;
             row = new dgTaishoShoriItchiran_Row();
             row.setHdnTukiCode(header.concat(new RString(String.format("%02d", 月コード))));
             row.setHdnShoriCode(処理コード_月次);
