@@ -39,6 +39,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.setai.SetaiinFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.setaiinshotokujoho.SetaiinShotokuJohoFinder;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -401,7 +402,7 @@ public class RiyoshaFutanWariaiHanteiManager {
         利用者負担割合entity.setShokenFlag(false);
         利用者負担割合entity.setHanteiYMD(FlexibleDate.getNowDate());
         利用者負担割合entity.setHanteiKubun(FOUR);
-        //利用者負担割合entity.setKoseiJiyu(new Code(利用者負担割合明細Temp.getKoseiJiyu()));
+        利用者負担割合entity.setKoseiJiyu(new Code(利用者負担割合明細Temp.getKoseiJiyu()));
         利用者負担割合entity.setHakoKubun(ZERO);
         利用者負担割合entity.setHakoYMD(FlexibleDate.EMPTY);
         利用者負担割合entity.setKofuYMD(FlexibleDate.EMPTY);
