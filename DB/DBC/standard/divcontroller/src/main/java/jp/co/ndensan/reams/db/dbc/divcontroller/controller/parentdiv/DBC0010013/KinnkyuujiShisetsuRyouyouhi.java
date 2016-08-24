@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShi
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -43,26 +44,19 @@ public class KinnkyuujiShisetsuRyouyouhi {
                 ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
         List<KyufujissekiKinkyuShisetsuRyoyo> 給付実績緊急時施設療養データ取得 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getCsData_C();
         getHandler(div).setDataGrid(給付実績緊急時施設療養データ取得);
+        RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
+        RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
+        RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
+        RDate サービス提供 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
+        List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
+                KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
+        getHandler(div).check事業者btn(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供.toDateString(), 実績区分コード);
+        List<KyufujissekiKinkyuShisetsuRyoyo> 緊急時施設療養データ = getHandler(div).get給付実績データ(給付実績緊急時施設療養データ取得,
+                整理番号, 事業者番号, 様式番号, サービス提供.getYearMonth().toDateString());
+        getHandler(div).setDataGrid(緊急時施設療養データ);
         div.getKyufuJissekiTekiyoPanel().setIsOpen(false);
         //ＴＯＤＯ QA1579
-//        List<KyufuJissekiHedajyoho2> header2 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
-//                KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
-//          if (!header2.isEmpty()) {
-//            RString 整理番号 = div.getCcdKyufuJissekiHeader().getTxtSeiriNo().getValue();
-//            RString 事業者 = div.getCcdKyufuJissekiHeader().getTxtJigyosha().getValue();
-//            RDate サービス提供年月 = div.getCcdKyufuJissekiHeader().getTxtTeikyoNengetsu().getValue();
-//            RString 様式番号 = div.getCcdKyufuJissekiHeader().getTxtYoshikiNo().getValue();
-//            int index = getHandler(div).get提供年月index(header2, サービス提供年月, 整理番号, 事業者, 様式番号);
-//            if ((index - 1) < 0) {
-//                div.getBtnZengetsu().setDisabled(true);
-//                div.getBtnMaeJigyosha().setDisabled(true);
-//            }
-//            if (header2.size() < (index + 1)) {
-//                div.getBtnJigetsu().setDisabled(true);
-//                div.getBtnAtoJigyosha().setDisabled(true);
-//            }
-//
-//        }
+
         return createResponse(div);
     }
 
@@ -159,8 +153,8 @@ public class KinnkyuujiShisetsuRyouyouhi {
      * @return div
      */
     public ResponseData<KinnkyuujiShisetsuRyouyouhiDiv> onClick_btnKyufuJissekiTekiyoClose(KinnkyuujiShisetsuRyouyouhiDiv div) {
-        if (!div.getKyufuJissekiTekiyoPanel().isIsOpen()) {
-            getHandler(div).changeState();
+        if (div.getKyufuJissekiTekiyoPanel().isIsOpen()) {
+            getHandler(div).checkState();
         }
 
         return createResponse(div);
@@ -273,6 +267,17 @@ public class KinnkyuujiShisetsuRyouyouhi {
     public ResponseData<KinnkyuujiShisetsuRyouyouhiDiv> onClick_btnTokuteiNyushosha(KinnkyuujiShisetsuRyouyouhiDiv div) {
 
         return ResponseData.of(div).forwardWithEventName(DBC0010013TransitionEventName.特定入所者費用).respond();
+    }
+
+    /**
+     * 「ケアマネジメント費」ボタンを押下、画面遷移する。
+     *
+     * @param div KinnkyuujiShisetsuRyouyouhiDiv
+     * @return div
+     */
+    public ResponseData<KinnkyuujiShisetsuRyouyouhiDiv> onClick_btnCareManagement(KinnkyuujiShisetsuRyouyouhiDiv div) {
+
+        return ResponseData.of(div).forwardWithEventName(DBC0010013TransitionEventName.ケアマネジメント費).respond();
     }
 
     /**
