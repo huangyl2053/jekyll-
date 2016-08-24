@@ -140,11 +140,14 @@ public class TokuchoKariSanteiFuka {
         }
         for (TokuchoKariSanteiEntity 出力帳票entity : 出力帳票List) {
             if (new ReportId(特別徴収仮算定結果一覧).equals(出力帳票entity.get帳票分類ID())) {
+                バッチ出力帳票entity = new KarisanteiBatchEntity();
                 バッチ出力帳票entity.set帳票分類ID(出力帳票entity.get帳票分類ID());
                 バッチ出力帳票entity.set帳票ID(出力帳票entity.get帳票分類ID());
                 バッチ出力帳票entity.set出力順ID(出力帳票entity.get出力順ID());
+                resultList.add(バッチ出力帳票entity);
             } else if (new ReportId(特別徴収開始通知書仮代表)
                     .equals(出力帳票entity.get帳票分類ID())) {
+                バッチ出力帳票entity = new KarisanteiBatchEntity();
                 ChohyoSeigyoHanyo 帳票タイプ = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課,
                         出力帳票entity.get帳票分類ID(),
                         new FlexibleYear(MINYEAR), 通知書タイプ);
@@ -156,8 +159,8 @@ public class TokuchoKariSanteiFuka {
                 バッチ出力帳票entity.set帳票分類ID(出力帳票entity.get帳票分類ID());
                 バッチ出力帳票entity.set帳票ID(new ReportId(帳票ID));
                 バッチ出力帳票entity.set出力順ID(出力帳票entity.get出力順ID());
+                resultList.add(バッチ出力帳票entity);
             }
-            resultList.add(バッチ出力帳票entity);
         }
         return resultList;
     }
