@@ -24,8 +24,10 @@ import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -93,6 +95,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInProcess extends Batc
     private static final RString デフォルト出力順 = new RString(" ORDER BY \"DbWT1613SinsaKetteiSeikyuGokei\".\"shoKisaiHokenshaNo\" ASC ");
     private static final RString 引用符_1 = new RString("**********");
     private static final RString 文字_合計 = new RString("合計");
+    private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
 
     @BatchWriter
     private BatchReportWriter<SogojigyohiShinsaKetteiSeikyumeisaihyoSource> batchReportWriter;
@@ -108,6 +111,10 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInProcess extends Batc
         並び順 = get並び順(parameter.get帳票ID(), parameter.get出力順ID());
         RString 出力順 = MyBatisOrderByClauseCreator
                 .create(SogojigyohiShinsaKetteiSeikyumeisaihyoOutPutOrder.class, 並び順);
+        if (null == 並び順) {
+            throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
+                    .replace(実行不可MESSAGE.toString()).toString());
+        }
         if (RString.isNullOrEmpty(出力順)) {
             出力順 = デフォルト出力順;
         } else {
@@ -120,25 +127,23 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInProcess extends Batc
             }
         }
         帳票データの取得Parameter.set出力順(出力順);
-        if (並び順 != null) {
-            int i = 0;
-            for (ISetSortItem item : 並び順.get設定項目リスト()) {
-                if (item.is改頁項目()) {
-                    改頁項目リスト.add(item.get項目ID());
-                }
-                if (i == INT_1) {
-                    出力順Map.put(KEY_並び順の２件目, item.get項目名());
-                } else if (i == INT_2) {
-                    出力順Map.put(KEY_並び順の３件目, item.get項目名());
-                } else if (i == INT_3) {
-                    出力順Map.put(KEY_並び順の４件目, item.get項目名());
-                } else if (i == INT_4) {
-                    出力順Map.put(KEY_並び順の５件目, item.get項目名());
-                } else if (i == INT_5) {
-                    出力順Map.put(KEY_並び順の６件目, item.get項目名());
-                }
-                i = i + 1;
+        int i = 0;
+        for (ISetSortItem item : 並び順.get設定項目リスト()) {
+            if (item.is改頁項目()) {
+                改頁項目リスト.add(item.get項目ID());
             }
+            if (i == INT_1) {
+                出力順Map.put(KEY_並び順の２件目, item.get項目名());
+            } else if (i == INT_2) {
+                出力順Map.put(KEY_並び順の３件目, item.get項目名());
+            } else if (i == INT_3) {
+                出力順Map.put(KEY_並び順の４件目, item.get項目名());
+            } else if (i == INT_4) {
+                出力順Map.put(KEY_並び順の５件目, item.get項目名());
+            } else if (i == INT_5) {
+                出力順Map.put(KEY_並び順の６件目, item.get項目名());
+            }
+            i = i + 1;
         }
     }
 
