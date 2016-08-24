@@ -47,6 +47,8 @@ public class TokuteiShinryohiInfoPanelHandler {
     private static final RString NI = new RString("2");
     private static final FlexibleYearMonth 平成24年4月 = new FlexibleYearMonth("201204");
     private static final int INT_1 = 1;
+    private static final int INT_ZERO = 0;
+    private static final int INT_SEX = 6;
     private final RString 前月 = new RString("前月");
     private final RString 前事業者 = new RString("前事業者");
 
@@ -57,7 +59,7 @@ public class TokuteiShinryohiInfoPanelHandler {
      */
     public TokuteiShinryohiInfoPanelHandler(TokuteiShinryohiMainDiv div) {
         RString 年月 = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_介護給付費見直し,
-                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).substringEmptyOnError(0, 6);
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).substringEmptyOnError(INT_ZERO, INT_SEX);
         this.提供年月 = new FlexibleYearMonth(年月);
         this.div = div;
     }
