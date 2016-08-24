@@ -183,6 +183,7 @@ public class GemmenJuminKihonHandler {
      * @return 状況 RString
      */
     public RString load状況情報パネル(GemmenJoho 最新減免の情報) {
+        div.getGemmenMain().getKeteiinfo().getTxtKetteiYMD().setRequired(false);
         RString 減免作成区分;
         RString 状況;
         if (最新減免の情報 == null || 最新減免の情報.getGemmenList().isEmpty()) {
@@ -196,18 +197,15 @@ public class GemmenJuminKihonHandler {
         if (状況_新規.equals(状況)) {
             状況情報パネル.getBtnTesei().setVisible(false);
             状況情報パネル.getBtnTorikeshi().setVisible(false);
-            div.getGemmenMain().getKeteiinfo().getTxtKetteiYMD().setRequired(false);
         } else if (状況_申請中.equals(状況)) {
             状況情報パネル.getBtnTesei().setVisible(false);
             状況情報パネル.getBtnTorikeshi().setVisible(true);
             状況情報パネル.getBtnTorikeshi().setDisabled(false);
-            div.getGemmenMain().getKeteiinfo().getTxtKetteiYMD().setRequired(false);
         } else if (状況_決定済.equals(状況)) {
             状況情報パネル.getBtnTesei().setVisible(true);
             状況情報パネル.getBtnTesei().setDisabled(false);
             状況情報パネル.getBtnTorikeshi().setVisible(true);
             状況情報パネル.getBtnTorikeshi().setDisabled(false);
-            div.getGemmenMain().getKeteiinfo().getTxtKetteiYMD().setRequired(true);
         }
         return 状況;
     }
