@@ -109,19 +109,19 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
     /**
      * 受給者異動送付を全件返します。
      *
-     * @param 被保番号 hiHokenshaNo
-     * @param 異動日 idoYMD
+     * @param 被保険者番号 hiHokenshaNo
+     * @param 異動年月日 idoYMD
      * @return List<DbT3001JukyushaIdoRenrakuhyoEntity>
      */
     @Transaction
-    public DbT3001JukyushaIdoRenrakuhyoEntity select登録した受給者異動情報の取得(RString 被保番号, RString 異動日) {
-        requireNonNull(被保番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保番号"));
-        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+    public DbT3001JukyushaIdoRenrakuhyoEntity select登録した受給者異動情報の取得(RString 被保険者番号, RString 異動年月日) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険番号.toString()));
+        requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage(異動日.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT3001JukyushaIdoRenrakuhyo.class).
                 where(and(
-                                eq(hiHokenshaNo, 被保番号),
+                                eq(hiHokenshaNo, 被保険者番号),
                                 eq(idoYMD, 異動日),
                                 eq(logicalDeletedFlag, 論理削除フラグ),
                                 eq(rirekiNo, ONE))).
