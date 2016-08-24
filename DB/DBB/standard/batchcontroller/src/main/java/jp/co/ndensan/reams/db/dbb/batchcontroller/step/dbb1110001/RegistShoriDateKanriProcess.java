@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
  * 処理日付管理マスタを登録です。
@@ -108,10 +110,12 @@ public class RegistShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDa
         entity.setKijunYMD(new FlexibleDate(YMDHMS.now().toString().substring(INDEX_0, INDEX_8)));
         entity.setTaishoKaishiYMD(parameter.get市町村情報().get開始年月日());
         entity.setTaishoShuryoYMD(parameter.get市町村情報().get終了年月日());
-        RString 対象開始日時 = new RString(parameter.get市町村情報().get開始年月日().toString()).concat(parameter.get市町村情報().get開始時刻());
-        RString 対象終了日時 = new RString(parameter.get市町村情報().get終了年月日().toString()).concat(parameter.get市町村情報().get終了時刻());
-        entity.setTaishoKaishiTimestamp(new YMDHMS(対象開始日時.toString()));
-        entity.setTaishoShuryoTimestamp(new YMDHMS(対象終了日時.toString()));
+        YMDHMS 対象開始日時 = new YMDHMS(new RDate(parameter.get市町村情報().get開始年月日().toString()),
+                new RTime(parameter.get市町村情報().get開始時刻()));
+        YMDHMS 対象終了日時 = new YMDHMS(new RDate(parameter.get市町村情報().get終了年月日().toString()),
+                new RTime(parameter.get市町村情報().get終了時刻()));
+        entity.setTaishoKaishiTimestamp(対象開始日時);
+        entity.setTaishoShuryoTimestamp(対象終了日時);
         return entity;
     }
 
@@ -120,8 +124,12 @@ public class RegistShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDa
         entity.setKijunYMD(new FlexibleDate(YMDHMS.now().toString().substring(INDEX_0, INDEX_8)));
         entity.setTaishoKaishiYMD(new FlexibleDate(parameter.get市町村情報().get開始年月日().toString()));
         entity.setTaishoShuryoYMD(new FlexibleDate(parameter.get市町村情報().get終了年月日().toString()));
-        RString 対象開始日時 = new RString(parameter.get市町村情報().get開始年月日().toString()).concat(parameter.get市町村情報().get開始時刻());
-        RString 対象終了日時 = new RString(parameter.get市町村情報().get終了年月日().toString()).concat(parameter.get市町村情報().get終了時刻());
+        YMDHMS 対象開始日時 = new YMDHMS(new RDate(parameter.get市町村情報().get開始年月日().toString()),
+                new RTime(parameter.get市町村情報().get開始時刻()));
+        YMDHMS 対象終了日時 = new YMDHMS(new RDate(parameter.get市町村情報().get終了年月日().toString()),
+                new RTime(parameter.get市町村情報().get終了時刻()));
+        entity.setTaishoKaishiTimestamp(対象開始日時);
+        entity.setTaishoShuryoTimestamp(対象終了日時);
         entity.setTaishoKaishiTimestamp(new YMDHMS(対象開始日時.toString()));
         entity.setTaishoShuryoTimestamp(new YMDHMS(対象終了日時.toString()));
         return entity;
