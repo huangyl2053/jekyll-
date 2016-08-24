@@ -117,6 +117,7 @@ public class FutanWariaiLoginProcess extends BatchKeyBreakBase<FutanWariaiRelate
     protected void usualProcess(FutanWariaiRelateEntity entity) {
         existingFlag = true;
         if (getBefore() == null) {
+            last = entity.get利用者負担割合明細();
             return;
         }
         List<TsukibetsuFutanWariaiTempEntity> 月別負担割合新リスト = entity.get月別負担割合新();
