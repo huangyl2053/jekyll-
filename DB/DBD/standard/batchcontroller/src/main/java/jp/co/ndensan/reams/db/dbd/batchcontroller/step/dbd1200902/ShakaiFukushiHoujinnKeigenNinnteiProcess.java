@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1200902;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
-import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100019.ShafukuRiysFutKeigTaisKakuninshoShoNoAriReport;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd1200902.ShakaiFukushiHoujinnKeigenNinnteiListPropery;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.ShakaiFukushiHoujinnKeigenNinnteiProcessParameter;
@@ -125,35 +124,15 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
     }
 
     @Override
-    protected void process(ShakaiFukushiHoujinnKeigenNinnteiEntity t) {
-        IKojin iKojin = ShikibetsuTaishoFactory.createKojin(t.getPsmEntity());
+    protected void process(ShakaiFukushiHoujinnKeigenNinnteiEntity entity) {
+        IKojin iKojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
         RDate 認定証の交付日 = null;
         if (null != processParamter.get認定証の交付日()) {
             認定証の交付日 = new RDate(processParamter.get認定証の交付日().getYearValue(),
                     processParamter.get認定証の交付日().getMonthValue(),
                     processParamter.get認定証の交付日().getDayValue());
         }
-        GemmenGengakuShinsei 減免減額申請情報 = new GemmenGengakuShinsei(t.get減免減額申請Entity());
-        社会福祉法人等利用者負担軽減.createBuilderForEdit()
-                .setGemmenGengakuShinsei(減免減額申請情報)
-                .set居住費_食費のみ(t.get社会福祉法人等利用者負担軽減Entity().getKyojuhiShokuhiNomi())
-                .set居宅サービス限定(t.get社会福祉法人等利用者負担軽減Entity().getKyotakuServiceGentei())
-                .set旧措置者ユニット型個室のみ(t.get社会福祉法人等利用者負担軽減Entity().getKyusochishaUnitTypeKoshitsuNomi())
-                .set決定区分(t.get社会福祉法人等利用者負担軽減Entity().getKetteiKubun())
-                .set決定年月日(t.get社会福祉法人等利用者負担軽減Entity().getKetteiYMD())
-                .set減免区分(t.get社会福祉法人等利用者負担軽減Entity().getGemmenKubun())
-                .set生保扶助見直し特例有無(t.get社会福祉法人等利用者負担軽減Entity().getSeihoFujoMinaoshiTokureiUmu())
-                .set生活保護受給有無(t.get社会福祉法人等利用者負担軽減Entity().getSeihoJukyuUmu())
-                .set申請事由(t.get社会福祉法人等利用者負担軽減Entity().getShinseiJiyu())
-                .set申請年月日(t.get社会福祉法人等利用者負担軽減Entity().getShinseiYMD())
-                .set確認番号(t.get社会福祉法人等利用者負担軽減Entity().getKakuninNo())
-                .set老齢福祉年金受給有無(t.get社会福祉法人等利用者負担軽減Entity().getRoreiFukushiNenkinJukyuUmu())
-                .set軽減率_分子(t.get社会福祉法人等利用者負担軽減Entity().getKeigenritsu_Bunshi())
-                .set軽減率_分母(t.get社会福祉法人等利用者負担軽減Entity().getKeigenritsu_Bumbo())
-                .set適用終了年月日(t.get社会福祉法人等利用者負担軽減Entity().getTekiyoShuryoYMD())
-                .set適用開始年月日(t.get社会福祉法人等利用者負担軽減Entity().getTekiyoKaishiYMD())
-                .set非承認理由(t.get社会福祉法人等利用者負担軽減Entity().getHiShoninRiyu())
-                .build();
+        社会福祉法人等利用者負担軽減 = new ShakaifukuRiyoshaFutanKeigen(entity.get社会福祉法人等利用者負担軽減());
         ShafukuRiysFutKeigTaisKakuninshoShoNoAriReport.createReport(社会福祉法人等利用者負担軽減, iKojin,
                 new ChohyoSeigyoKyotsu(帳票制御共通), 帳票制御汎用, 地方公共団体, 認定証の交付日, ninshoshaSource);
         report.writeBy(reportSourceWriter);

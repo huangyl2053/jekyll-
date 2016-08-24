@@ -53,6 +53,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -67,7 +68,7 @@ public class FutanGenndoGakuNinnteiShouProcess extends BatchProcessBase<FutanGen
     private static final ReportIdDBD 帳票分類ID = ReportIdDBD.DBD100020;
     private static DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通;
     private static List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用;
-    private RString ReamsLoginID;
+    private RString REAMSLOGINID;
     private RString 出力順;
     private Association 地方公共団体;
     private final RString 単票発行区分 = new RString("【単票発行区分】");
@@ -80,8 +81,6 @@ public class FutanGenndoGakuNinnteiShouProcess extends BatchProcessBase<FutanGen
     private final RString より大きい = new RString("＞");
     private FutanGenndoGakuNinnteiShouProcessParameter processParamter;
     private IOutputOrder outputOrder;
-    private GyomuCode 業務コード;
-    private RString 種別コード;
     private FutanGendogakuNinteishoReport report;
     private FutanGendogakuNintei 負担限度額認定;
 
@@ -96,15 +95,13 @@ public class FutanGenndoGakuNinnteiShouProcess extends BatchProcessBase<FutanGen
 
     @Override
     protected void initialize() {
-        ReamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
+        REAMSLOGINID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, 帳票ID.getReportId(),
-                ReamsLoginID, processParamter.get改頁出力順ID());
+                REAMSLOGINID, processParamter.get改頁出力順ID());
         出力順 = MyBatisOrderByClauseCreator.create(FutanGenndoGakuNinnteiShouListPropery.class, outputOrder);
-        帳票制御共通 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御共通(帳票ID.getReportId());
-        帳票制御汎用 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御汎用(帳票ID.getReportId());
+        帳票制御共通 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御共通(帳票分類ID.getReportId());
+        帳票制御汎用 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御汎用(帳票分類ID.getReportId());
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-        業務コード = GyomuCode.DB介護保険;
-        種別コード = new RString(帳票分類ID.name());
     }
 
     @Override
@@ -140,8 +137,14 @@ public class FutanGenndoGakuNinnteiShouProcess extends BatchProcessBase<FutanGen
     protected void process(FutanGenndoGakuNinnteiShouEntity entity) {
         IKojin iKojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
         負担限度額認定 = new FutanGendogakuNintei(entity.get介護保険負担限度額認定());
-        FutanGendogakuNinteishoReport.createReport(負担限度額認定, iKojin, new ChohyoSeigyoKyotsu(帳票制御共通), 帳票制御汎用, 地方公共団体,
-                processParamter.get認定証の交付日().toRDate(), ninshoshaSource);
+        RDate 認定証の交付日 = null;
+        if (processParamter.get認定証の交付日() != null) {
+            認定証の交付日 = new RDate(processParamter.get認定証の交付日().getYearValue(),
+                    processParamter.get認定証の交付日().getMonthValue(),
+                    processParamter.get認定証の交付日().getDayValue());
+        }
+        FutanGendogakuNinteishoReport.createReport(負担限度額認定, iKojin, new ChohyoSeigyoKyotsu(帳票制御共通), 帳票制御汎用,
+                地方公共団体, 認定証の交付日, ninshoshaSource);
 
         report.writeBy(reportSourceWriter);
     }
