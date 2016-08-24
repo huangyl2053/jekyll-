@@ -292,10 +292,10 @@ public class ShokkenTorikeshiIchibuNintei {
             return DBD5510001StateName.職権修正;
         } else if (メニュID_職権取消一部喪失.equals(menuId)) {
             return DBD5510001StateName.職権一部喪失;
-        } else if (メニュID_区分変更認定.equals(menuId)) {
-            return DBD5510001StateName.サービス変更認定;
-        } else {
+        } else if (メニュID_区分変更認定.equals(menuId) || メニュID_認定データ更新.equals(menuId)) {
             return DBD5510001StateName.区分変更認定;
+        } else {
+            return DBD5510001StateName.サービス変更認定;
         }
     }
 
@@ -303,7 +303,7 @@ public class ShokkenTorikeshiIchibuNintei {
 
         if (メニュID_職権修正.equals(menuId) || メニュID_職権取消一部喪失.equals(menuId)) {
             return DBD5510001StateName.完了;
-        } else if (メニュID_区分変更認定.equals(menuId)) {
+        } else if (メニュID_区分変更認定.equals(menuId) || メニュID_認定データ更新.equals(menuId)) {
             return DBD5510001StateName.区変認定完了;
         } else {
             return DBD5510001StateName.サ変認定完了;
