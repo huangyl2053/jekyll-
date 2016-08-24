@@ -122,17 +122,13 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> onBeforeOpenDialog(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-        if (div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().getValue().isEmpty()) {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(DbcWarningMessages.申請書提出期限未入力.getMessage()).respond();
-            }
+        if (div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().getValue().isEmpty() && !ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbcWarningMessages.申請書提出期限未入力.getMessage()).respond();
         }
 
-        if (!div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().getValue().isEmpty()) {
-            if (!ResponseHolder.isReRequest()) {
-                FlexibleDate 決定日 = div.getShinseishoHakkoParameters().getTxtKetteiDate().getValue();
-                return ResponseData.of(div).addMessage(DbcWarningMessages.自動償還確認.getMessage().replace(決定日.toString())).respond();
-            }
+        if (!div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().getValue().isEmpty() && !ResponseHolder.isReRequest()) {
+            FlexibleDate 決定日 = div.getShinseishoHakkoParameters().getTxtKetteiDate().getValue();
+            return ResponseData.of(div).addMessage(DbcWarningMessages.自動償還確認.getMessage().replace(決定日.toString())).respond();
         }
 
         if (new RString(DbcWarningMessages.申請書提出期限未入力.getMessage().getCode()).equals(
