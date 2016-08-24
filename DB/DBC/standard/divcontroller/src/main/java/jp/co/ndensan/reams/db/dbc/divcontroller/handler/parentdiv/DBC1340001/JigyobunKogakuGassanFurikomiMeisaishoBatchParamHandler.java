@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1340001;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020030.DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1340001.JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -107,6 +108,7 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
             div.getTyuusyutuHanni().getTxtZennkaiTaisyouNenngappi().setToValue(null);
             div.getTyuusyutuHanni().getTxtKonnkaiTaisyouNenngappi().setFromValue(null);
         }
+        div.getShuturyokuTyouhyou().getCcdChohyoShusuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200003.getReportId());
     }
 
     /**
