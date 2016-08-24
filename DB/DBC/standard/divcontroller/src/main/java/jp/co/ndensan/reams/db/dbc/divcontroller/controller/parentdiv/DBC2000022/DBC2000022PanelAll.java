@@ -47,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 利用者負担割合即時更正_修正です。
@@ -127,6 +128,9 @@ public class DBC2000022PanelAll {
      * @return ResponseData<DBC2000022PanelAllDiv>
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnClear(DBC2000022PanelAllDiv div) {
+        if (0 == div.getDgFutanWariai().getDataSource().size()) {
+            return ResponseData.of(div).respond();
+        }
         RString 処理モード = get処理モード();
         if (DBC2000022StateName.修正.getName().equals(処理モード) && データ項目変更判定(div)) {
             if (!ResponseHolder.isReRequest()) {
@@ -319,7 +323,12 @@ public class DBC2000022PanelAll {
                     = ViewStateHolder.get(ViewStateKeys.判定結果, RiyoshaFutanWariaiHanteiManagerResult.class);
             List<RiyoshaFutanWariaiKonkyo> 利用者負担割合根拠list = new ArrayList<>();
             for (int i = 0; i < 判定結果.get利用者負担割合根拠list().size(); i++) {
+                判定結果.get利用者負担割合根拠list().get(i).setState(EntityDataState.Added);
                 利用者負担割合根拠list.add(new RiyoshaFutanWariaiKonkyo(判定結果.get利用者負担割合根拠list().get(i)));
+            }
+            利用者負担割合.toEntity().setState(EntityDataState.Added);
+            for (RiyoshaFutanWariaiMeisai 明細 : holder.get利用者負担割合明細()) {
+                明細.toEntity().setState(EntityDataState.Added);
             }
             getHandler(div).onClick_btnUpdate(資格対象者.get識別コード(),
                     利用者負担割合,
