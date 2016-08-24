@@ -119,7 +119,7 @@ public class ShakaiFukushiHoujinnKeigenListProcess extends BatchProcessBase<Shak
 
         RString 出力順 = RString.EMPTY;
         if (order != null) {
-            出力順 = MyBatisOrderByClauseCreator.create(FutanGenndoGakuNinnteiListProperty.DBD100020_ResultListEnum.class, order);
+            出力順 = MyBatisOrderByClauseCreator.create(FutanGenndoGakuNinnteiListProperty.class, order);
         }
         return 出力順;
     }
