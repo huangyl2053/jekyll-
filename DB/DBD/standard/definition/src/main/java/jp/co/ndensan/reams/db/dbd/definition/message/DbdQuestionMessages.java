@@ -20,9 +20,9 @@ public enum DbdQuestionMessages implements IMessageGettable {
 
     負担限度額一括認定_テスト結果承認確認(1, "表示中のテスト結果を認定結果として登録します。よろしいですか？"),
     負担限度額一括認定_修正反映確認(2, "修正した内容を認定結果として登録します。よろしいですか？"),
-    受給者台帳異動チェックリスト_以前出力確認(3, "?より前のデータをすべて発行してもよろしいでしょうか？"),
-    受給者台帳異動チェックリスト_以後出力確認(4, "?より後のデータをすべて発行してもよろしいでしょうか？"),
-    受給者台帳異動チェックリスト_全件出力確認(5, "全件発行処理してもよろしいでしょうか？"),
+    受給者台帳異動チェックリスト_以前出力確認(3, "?より前のデータをすべて発行してもよろしいでしょうか？", ButtonSelectPattern.OKCancel),
+    受給者台帳異動チェックリスト_以後出力確認(4, "?より後のデータをすべて発行してもよろしいでしょうか？", ButtonSelectPattern.OKCancel),
+    受給者台帳異動チェックリスト_全件出力確認(5, "全件発行処理してもよろしいでしょうか？", ButtonSelectPattern.OKCancel),
     編集破棄確認(6, "編集されています。\\n未更新の情報は反映されませんが、よろしいですか？"),
     新規登録確認(7, "被保険者に関連付け済みの情報のため、「検索」から指定してください。"
             + "\\n他市町村からの照会結果など、同一年金について新規登録の必要がある場合登録してください。新規登録しますか？"),
@@ -32,6 +32,7 @@ public enum DbdQuestionMessages implements IMessageGettable {
     処理実行の確認(50, "処理を実行してもよろしいですか？");
     private final String message;
     private final int no;
+    private final ButtonSelectPattern buttonSelectPattern;
 
     /**
      * コンストラクタです。
@@ -42,11 +43,18 @@ public enum DbdQuestionMessages implements IMessageGettable {
     private DbdQuestionMessages(int no, String message) {
         this.no = no;
         this.message = message;
+        this.buttonSelectPattern = ButtonSelectPattern.YesNo;
+    }
+
+    private DbdQuestionMessages(int no, String message, ButtonSelectPattern buttonSelectPattern) {
+        this.no = no;
+        this.message = message;
+        this.buttonSelectPattern = buttonSelectPattern;
     }
 
     @Override
     public Message getMessage() {
-        return new QuestionMessage(toCode("DBDQ", no), message);
+        return new QuestionMessage(toCode("DBDQ", no), message, buttonSelectPattern);
     }
 
     /**

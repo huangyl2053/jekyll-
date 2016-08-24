@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd100025;
 
-import jp.co.ndensan.reams.db.dbd.business.core.dbt4030011.NinteishoJohoBusiness;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd4030011.NinteishoJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100025.NinteishoJohoReportSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -28,7 +27,7 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
     /**
      * インスタンスを生成します。
      *
-     * @param target {@link NinteishoJohoBusiness}
+     * @param target {@link NinteishoJohoEntity}
      * @param ninshoshaSource 認証者
      */
     protected ShogaishaKojoNinteishoEditorImpl(NinteishoJohoEntity target, NinshoshaSource ninshoshaSource) {
