@@ -581,7 +581,7 @@
            , A."zenkaiYukoKikanEnd"                     AS "A_zenkaiYukoKikanEnd"
            , A."shujiiIryokikanCode"                    AS "A_shujiiIryokikanCode"
            , A."shujiiCode"                             AS "A_shujiiCode"
-           , D."ikenshoSakuseiIraiYMD"                    AS "D_ikenshoIraiRirekiNo"
+           , D."ikenshoSakuseiIraiYMD"                    AS "D_ikenshoSakuseiIraiYMD"
            , E."ikenshoJuryoYMD"                        AS "E_ikenshoJuryoYMD"
            ,要介護認定主治医一時テーブル."remban14" as "要介護認定主治医一時テーブル_remban14"
            ,要介護認定主治医一時テーブル."remban15" as "要介護認定主治医一時テーブル_remban15"

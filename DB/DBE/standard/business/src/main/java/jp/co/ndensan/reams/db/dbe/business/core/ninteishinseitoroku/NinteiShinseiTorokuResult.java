@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.NinteiShinseiTorokuRelateEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -419,7 +419,7 @@ public class NinteiShinseiTorokuResult {
      *
      * @return 入所施設コード
      */
-    public KaigoJigyoshaNo get入所施設コード() {
+    public JigyoshaNo get入所施設コード() {
         return entity.get入所施設コード();
     }
 
