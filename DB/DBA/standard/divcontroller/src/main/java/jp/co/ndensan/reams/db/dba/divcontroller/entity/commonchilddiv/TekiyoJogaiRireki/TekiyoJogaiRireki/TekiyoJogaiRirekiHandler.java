@@ -1011,14 +1011,21 @@ public class TekiyoJogaiRirekiHandler {
     }
 
     private static boolean isデータ変更(TekiyoJogaiRirekiDiv div, datagridTekiyoJogai_Row 選択データ) {
-        //TODO NEED NULL CHECK 
-        if (選択データ.getTekiyoDate().getValue().equals(div.getPanelTekiyoInput().getTxtTekiyoDate().getValue())
+        if(DisplayMode.訂正履歴モード.equals(div.getMode_DisplayMode())){
+            if (選択データ.getTekiyoDate().getValue().equals(div.getPanelTekiyoInput().getTxtTekiyoDate().getValue())
             && 選択データ.getTekiyoTodokeDate().getValue().equals(div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue())
-            && 選択データ.getTekiyoJiyuCode().equals(div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedKey())
-            && 選択データ.getKayijoDate().getValue().equals(div.getPanelTekiyoInput().getTxtKayijoDate().getValue())
-            && 選択データ.getKaijoTodokeDate().getValue().equals(div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue())
-            && 選択データ.getKaijoJiyuCode().equals(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey())) {
-            return false;
+            && 選択データ.getTekiyoJiyuCode().equals(div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedKey())){
+                return false;
+             }
+        }else{
+            if (選択データ.getTekiyoDate().getValue().equals(div.getPanelTekiyoInput().getTxtTekiyoDate().getValue())
+                && 選択データ.getTekiyoTodokeDate().getValue().equals(div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue())
+                && 選択データ.getTekiyoJiyuCode().equals(div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedKey())
+                && 選択データ.getKayijoDate().getValue().equals(div.getPanelTekiyoInput().getTxtKayijoDate().getValue())
+                && 選択データ.getKaijoTodokeDate().getValue().equals(div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue())
+                && 選択データ.getKaijoJiyuCode().equals(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey())) {
+                return false;
+            }
         }
         return true;
     }
