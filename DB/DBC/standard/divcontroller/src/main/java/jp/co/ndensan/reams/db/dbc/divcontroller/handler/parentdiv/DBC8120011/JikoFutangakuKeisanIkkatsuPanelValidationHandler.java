@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8120011;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8120011.JikoFutangakuKeisanIkkatsuPanelDiv;
@@ -13,7 +12,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
@@ -26,8 +24,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBC-4790-010 chenyadong
  */
 public class JikoFutangakuKeisanIkkatsuPanelValidationHandler {
-     private final JikoFutangakuKeisanIkkatsuPanelDiv div;
-      private static final RString 出力順 = new RString("出力順");
+
+    private final JikoFutangakuKeisanIkkatsuPanelDiv div;
+
     /**
      * コンストラクタです。
      *
@@ -66,10 +65,10 @@ public class JikoFutangakuKeisanIkkatsuPanelValidationHandler {
         必須設定項目_出力順 {
                     @Override
                     public boolean apply(JikoFutangakuKeisanIkkatsuPanelDiv div) {
-                       return div.getCcdChohyoShutsuryokujun().get出力順ID() != null 
-                               && div.getCcdChohyoShutsuryokujun().get出力順ID() != 0;
+                        return div.getCcdChohyoShutsuryokujun().get出力順ID() != null
+                        && div.getCcdChohyoShutsuryokujun().get出力順ID() != 0;
                     }
-        }
+                }
     }
 
     private enum IdocheckMessages implements IValidationMessage {
