@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120900.TsuchishoKohiDoIchiranhyoSakuseiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120900.TsuchishoKohiGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc790011.DbWT0002KokuhorenTorikomiErrorTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc790011.SeikyugakuTsuchishoFutanshaInProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
@@ -69,7 +68,7 @@ public class DBC120900_SogojigyohiSeikyugakuTsuchishoKohiIn
             executeStep(ファイル取得);
             returnEntity
                     = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得),
-                            TsuchishoKohiGetFileProcess.PARAMETER_OUT_RETURNENTITY);
+                            KokuhorenkyoutsuGetFileProcess.PARAMETER_OUT_RETURNENTITY);
             for (int i = NO_NUM; i < returnEntity.getFileNameList().size(); i++) {
                 csvParameter = new SeikyugakuTsuchishoFutanshaInProcessParameter();
                 csvParameter.setPath(returnEntity.get保存先フォルダのパス().toRString());

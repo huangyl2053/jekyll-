@@ -16,13 +16,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 
 /**
- * ShunoJoho のクラスファイル
+ * ShunoJoho のクラスファイルです。
  *
  * @reamsid_L DBB-5710-010 xuxin
  */
 public class ShunoJohoDiv extends Panel implements IShunoJohoDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
