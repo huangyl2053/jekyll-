@@ -73,7 +73,7 @@ public enum FutanGenndoGakuNinnteiShouListPropery implements IReportItems {
     /**
      * 入所施設コード
      */
-    入所施設コード(new RString("0108"), new RString("入所施設コード"), new RString("")),;
+    入所施設コード(new RString("0108"), new RString("入所施設コード"), new RString(""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;
