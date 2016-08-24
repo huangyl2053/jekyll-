@@ -131,7 +131,7 @@
         FROM
           rgdb."DbT5304ShujiiIkenshoIkenItem" AS A 
         WHERE
-          A."shinseishoKanriNo"='000082'
+          A."shinseishoKanriNo"=#{shinseishoKanriNo}
           AND NOT EXISTS ( 
             SELECT
               'X' 
@@ -177,7 +177,7 @@
         FROM
           rgdb."DbT5304ShujiiIkenshoIkenItem" AS A 
         WHERE
-          A."shinseishoKanriNo"='000082'
+          A."shinseishoKanriNo"=#{shinseishoKanriNo}
           AND NOT EXISTS ( 
             SELECT
               'X' 
