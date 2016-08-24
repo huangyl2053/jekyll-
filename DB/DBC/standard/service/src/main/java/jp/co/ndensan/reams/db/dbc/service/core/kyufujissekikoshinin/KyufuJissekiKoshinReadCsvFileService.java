@@ -1249,7 +1249,7 @@ public class KyufuJissekiKoshinReadCsvFileService {
         if (件数_D7 == 0) {
             必須レコードなしフラグ = true;
             必須レコードなしの備考 = 必須レコードなしの備考.concat(読点)
-                    .concat(KyufuJissekiRecordShubetsu.福祉用具販売費情報レコード.getコード());
+                    .concat(KyufuJissekiRecordShubetsu.住宅改修費情報レコード.getコード());
         }
     }
 
