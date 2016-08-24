@@ -31,10 +31,6 @@ public final class JizenShinsakaiShiryoPublicationMybitisParamter implements IMy
      * @return IJizenShinsakaiShiryoPublicationMybitisParamter 介護認定審査会委員事前審査のMybatisパラメータクラス
      */
     public static JizenShinsakaiShiryoPublicationMybitisParamter createParamter(RString shinsakaiKaisaiNo) {
-        boolean shinsakaiKaisaiNoFlag = false;
-        if (!shinsakaiKaisaiNo.isEmpty()) {
-            shinsakaiKaisaiNoFlag = true;
-        }
         return new JizenShinsakaiShiryoPublicationMybitisParamter(shinsakaiKaisaiNo);
     }
 }
