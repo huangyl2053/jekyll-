@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufukanrihyoin;
 
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3014KyufuKanrihyo200004Entity;
@@ -93,16 +94,18 @@ public interface IKyufukanrihyoInMapper {
     /**
      * 再処理の場合、前回処理時に取り込んだデータを物理削除する。
      *
+     * @param parameters Map<String, Object>
      * @return int 削除成功データ数
      */
-    int do給付管理票200004TBL処理済のデータの削除();
+    int do給付管理票200004TBL処理済のデータの削除(Map<String, Object> parameters);
 
     /**
      * 再処理の場合、前回処理時に取り込んだデータを物理削除する。
      *
+     * @param parameters Map<String, Object>
      * @return int 削除成功データ数
      */
-    int do給付管理票200604TBL処理済のデータの削除();
+    int do給付管理票200604TBL処理済のデータの削除(Map<String, Object> parameters);
 
     /**
      * 給付管理票200004TBLに登録する。
