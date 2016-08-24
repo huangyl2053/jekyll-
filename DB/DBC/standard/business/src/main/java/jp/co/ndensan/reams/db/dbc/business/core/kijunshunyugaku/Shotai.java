@@ -13,16 +13,15 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 対象世帯員クラスの世帯員情報です
  *
  * @reamsid_L DBC-4640-080 liuxiaoyu
  */
-@Getter
-@Setter
+@lombok.Getter
+@lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class Shotai {
 
     private HihokenshaNo 被保険者番号;
