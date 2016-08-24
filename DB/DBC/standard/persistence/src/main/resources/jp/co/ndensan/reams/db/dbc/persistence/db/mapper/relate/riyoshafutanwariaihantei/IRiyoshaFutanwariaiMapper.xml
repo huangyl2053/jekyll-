@@ -717,7 +717,7 @@
                     ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ISeikatsuHogoGaitoJohoTempMapper.allColumns_SeikatsuHogoGaitoJohoTemp"/>
                     ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ISetainJohoTempMapper.allColumns_SetainJohoTemp"/>
                     ,<include refid="allColumns_DbV2512KaigoShotokuNewest"/>
-                    #{判定基準日} AS "hanteiKijunYMD"
+                    ,#{判定基準日} AS "hanteiKijunYMD"
             FROM
                     (SELECT "b".* FROM "TsukibetsuHanteiTaishoshaTemp" AS "b" WHERE "b"."taishoTsuki"=#{対象月}) AS "HanteiTaishoshaTemp"
             LEFT JOIN
