@@ -20,7 +20,12 @@ public final class JizenShinsakaiShiryoPublicationMybitisParamter implements IMy
 
     private final RString shinsakaiKaisaiNo;
 
-    public JizenShinsakaiShiryoPublicationMybitisParamter(RString shinsakaiKaisaiNo) {
+    /**
+     * コンストラクタです。
+     *
+     * @param shinsakaiKaisaiNo 介護認定審査会開催番号
+     */
+    protected JizenShinsakaiShiryoPublicationMybitisParamter(RString shinsakaiKaisaiNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
     }
 
