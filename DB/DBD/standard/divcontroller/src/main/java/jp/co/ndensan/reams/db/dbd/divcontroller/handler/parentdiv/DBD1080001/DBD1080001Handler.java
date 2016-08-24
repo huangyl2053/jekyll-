@@ -27,7 +27,7 @@ public class DBD1080001Handler {
 
     private final ShinseishoHakkoTaishoshaHaakuParameterMainDiv taishoshaHaakuMainDiv;
     private RString code;
-    private final RString KEY_TWO = new RString("key2");
+    private static final RString KEYTWO = new RString("key2");
 
     /**
      * コンストラクタです。
@@ -46,12 +46,12 @@ public class DBD1080001Handler {
      */
     public ResponseData onload(ShinseishoHakkoTaishoshaHaakuParameterMainDiv div) {
         ResponseData responseData = new ResponseData<>();
-        div.getParameters().getRadShinkiKoshiKubun().setSelectedKey(KEY_TWO);
+        div.getParameters().getRadShinkiKoshiKubun().setSelectedKey(KEYTWO);
 
         setDataSource(div.getParameters().getDdlGemmenGengakuShrui().getDataSource(),
                 new RString("key1"), new RString("利用者負担額減額"));
         setDataSource(div.getParameters().getDdlGemmenGengakuShrui().getDataSource(),
-                new RString("key2"), new RString("訪問介護利用者負担額減額"));
+                KEYTWO, new RString("訪問介護利用者負担額減額"));
         setDataSource(div.getParameters().getDdlGemmenGengakuShrui().getDataSource(),
                 new RString("key3"), new RString("社会福祉法人等利用者負担軽減"));
 
@@ -65,14 +65,14 @@ public class DBD1080001Handler {
         setDataSource(div.getParameters().getDdlKyushochishaKubun1().getDataSource(),
                 new RString("key1"), new RString("旧措置者以外"));
         setDataSource(div.getParameters().getDdlKyushochishaKubun1().getDataSource(),
-                new RString("key2"), new RString("旧措置者"));
+                KEYTWO, new RString("旧措置者"));
 
         div.getParameters().getRadShisetsuNyushoKubun1().setSelectedKey(new RString("key0"));
 
         setDataSource(div.getParameters().getDdlRiyoshaFutanDankai().getDataSource(),
                 new RString("key1"), new RString("利用者負担1段階"));
         setDataSource(div.getParameters().getDdlRiyoshaFutanDankai().getDataSource(),
-                new RString("key2"), new RString("利用者負担2段階"));
+                KEYTWO, new RString("利用者負担2段階"));
         setDataSource(div.getParameters().getDdlRiyoshaFutanDankai().getDataSource(),
                 new RString("key3"), new RString("利用者負担3段階"));
         setDataSource(div.getParameters().getDdlRiyoshaFutanDankai().getDataSource(),

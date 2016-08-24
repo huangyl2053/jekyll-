@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.ChohyoShutsur
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.ChohyoShutsuryokuJohoShutokuResultCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.ChohyoShutsuryokuJohoShutokuResultEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd00002.RiyoshaFutangakuGemmenGaitoshaIchiranReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -255,18 +256,14 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
         if (null == obj) {
             return new RString("");
         }
-        RString str = new RString(formatfix.format(obj));
-        return str;
+        return new RString(formatfix.format(obj));
     }
 
     private RString getDate(FlexibleDate obj) {
         if (null == obj) {
             return new RString("");
         }
-
-        RString str = new RString(formatDate.format(obj));
-        RString 基準日 = new RString("【基準日】" + str);
-        return 基準日;
+        return new RString("【基準日】" + new RString(formatDate.format(obj)));
     }
 
     private ChohyoShutsuryokuJohoShutokuResultCsvEntity set利用者負担額減免認定者リストCSV(ChohyoShutsuryokuJohoShutokuResultEntity t) {
@@ -346,10 +343,12 @@ public class ChohyoShutsuryokuJohoShutokuProcess extends BatchProcessBase<Chohyo
             resultEntity.set認定開始日(edit年月日_yyyymmdd(t.get認定情報Entity().get認定有効期間開始年月日()));
             resultEntity.set認定終了日(edit年月日_yyyymmdd(t.get認定情報Entity().get認定有効期間終了年月日()));
         }
+        
         if (t.get利用者負担額減額Entity() == null || t.get利用者負担額減額Entity().getKyuhuritsu() == null) {
             resultEntity.set減免給付率(空白);
         } else {
-            resultEntity.set減免給付率(new RString(t.get利用者負担額減額Entity().getKyuhuritsu().getColumnValue().toString()));
+            HokenKyufuRitsu kyuhuritsu = t.get利用者負担額減額Entity().getKyuhuritsu();
+            resultEntity.set減免給付率(new RString(kyuhuritsu.toString()));
         }
         if (t.get世帯員Entity().getPsmEntity() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.get世帯員Entity().getPsmEntity());

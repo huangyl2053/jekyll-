@@ -63,7 +63,7 @@ public class JissiJyokyohyoReportProcess extends BatchProcessBase<JukyushaDaicho
 
     @Override
     protected void createWriter() {
-        tempWriter = new BatchEntityCreatedTempTableWriter(new RString("受給者台帳一時テーブル"),
+        tempWriter = new BatchEntityCreatedTempTableWriter(JukyushaDaichoTempEntity.TABLE_NAME,
                 JukyushaDaichoTempEntity.class);
     }
 

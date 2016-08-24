@@ -55,15 +55,15 @@ public class NinteiChosaJokyoFinder {
      */
     public KaigoJigyosha get介護事業者情報(SubGyomuCode サーブ業務コード) {
         DbT7060KaigoJigyoshaEntity entity = null;
-        if (サーブ業務コード == SubGyomuCode.DBD介護受給) {
+        if (SubGyomuCode.DBD介護受給.value().equals(サーブ業務コード.value())) {
             entity = mapperProvider.create(INinteiChosaJokyoMapper.class).get介護事業者情報By介護受給(RDate.getNowDate());
         }
-        if (サーブ業務コード == SubGyomuCode.DBE認定支援) {
+        if (SubGyomuCode.DBE認定支援.value().equals(サーブ業務コード.value())) {
             entity = mapperProvider.create(INinteiChosaJokyoMapper.class).get介護事業者情報By介護認定(RDate.getNowDate());
         }
         if (entity == null) {
             return null;
         }
-        return new KaigoJigyosha(null);
+        return new KaigoJigyosha(entity);
     }
 }

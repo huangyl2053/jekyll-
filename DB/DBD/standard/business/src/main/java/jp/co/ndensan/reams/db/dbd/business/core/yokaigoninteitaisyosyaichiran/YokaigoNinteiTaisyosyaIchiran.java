@@ -116,7 +116,7 @@ public class YokaigoNinteiTaisyosyaIchiran implements Serializable {
      * @param 二次判定認定有効終了年月日 二次判定認定有効終了年月日
      * @param 要介護認定一次判定年月日 要介護認定一次判定年月日
      * @param 要介護認定一次判定結果コード認知症加算 要介護認定一次判定結果コード認知症加算
-     * @param 取込日時2
+     * @param 取込日時2 取込日時2
      */
     public YokaigoNinteiTaisyosyaIchiran(
             DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity,

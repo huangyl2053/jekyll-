@@ -15,13 +15,11 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
  */
 public enum ShogaishaKojoTaishoshaHaakuJokenDivSpec implements IPredicate<DBD4010011Div> {
 
+    /**
+     * 基準日の未入力チェック。
+     *
+     */
     基準日の未入力チェック {
-                /**
-                 * 基準日の未入力チェック。
-                 *
-                 * @param div 対象者条件Div
-                 * @return true: 基準日が非空です、false: 基準日が空です。
-                 */
                 @Override
                 public boolean apply(DBD4010011Div div) {
                     return div.getShogaishaKojoTaishoshaHaakuJoken().getTxtKijunYMD().getValue() != null && !div.getShogaishaKojoTaishoshaHaakuJoken().getTxtKijunYMD().getValue().toString().isEmpty();

@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001Hihoke
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT3036ShokanHanteiKekkaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.ShokanShikyuKetteiChohyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyuketteishaichiran.ShokanbaraiShikyuKetteishaIchiranSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -36,8 +36,6 @@ public class ShokanbaraiShikyuKetteishaIchiranBodyEditor implements IShokanbarai
     private static final RString コロン = new RString("：");
     private static final RString アスタリスク = new RString("*");
     private static final RString 更新DB有無_有 = new RString("1");
-
-    private static final CodeShubetsu 介護資格喪失事由_被保険者 = new CodeShubetsu("0010");
 
     /**
      * コンストラクタです
@@ -71,7 +69,7 @@ public class ShokanbaraiShikyuKetteishaIchiranBodyEditor implements IShokanbarai
         source.listUpper_7 = doカンマ編集(判定結果.get単位数_金額());
         source.listUpper_8 = doカンマ編集(判定結果.get支払金額());
         if (null != 被保険者.get資格喪失事由コード()) {
-            source.listUpper_9 = CodeMaster.getCodeMeisho(介護資格喪失事由_被保険者,
+            source.listUpper_9 = CodeMaster.getCodeMeisho(DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu(),
                     new Code(被保険者.get資格喪失事由コード()));
         }
         source.listUpper_10 = 判定結果.get備考1();

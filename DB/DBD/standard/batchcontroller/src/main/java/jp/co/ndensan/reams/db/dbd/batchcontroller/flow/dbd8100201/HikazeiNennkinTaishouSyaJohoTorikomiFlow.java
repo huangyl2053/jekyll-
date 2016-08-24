@@ -32,7 +32,7 @@ public class HikazeiNennkinTaishouSyaJohoTorikomiFlow extends BatchFlowBase<Hika
 
     public static final RString 出力区分_0 = new RString("0");
     public static final RString テスト処理_1 = new RString("1");
-    public static final RString HIKAZENENKINTAISHOSHADOUTEIFLOW = new RString("HikazeNenkinTaishoshaDouteiFlow");
+    public static final RString HIKAIFLOW = new RString("HikazeNenkinTaishoshaDouteiFlow");
 
     private static final String 取込データ一時作成 = "取込データ一時作成";
     private static final String 非課税年金対象者同定 = "非課税年金対象者同定";
@@ -59,6 +59,11 @@ public class HikazeiNennkinTaishouSyaJohoTorikomiFlow extends BatchFlowBase<Hika
         executeStep(処理日付管理マスタ更新);
     }
 
+    /**
+     * 取込データ一時作成
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(取込データ一時作成)
     protected IBatchFlowCommand reportProcess() {
         return loopBatch(TorikomiProcess.class)
@@ -66,47 +71,92 @@ public class HikazeiNennkinTaishouSyaJohoTorikomiFlow extends BatchFlowBase<Hika
                 .define();
     }
 
+    /**
+     * 非課税年金対象者同定
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(非課税年金対象者同定)
     protected IBatchFlowCommand callHikazeNenkinTaishoshaDouteiFlow() {
-        return otherBatchFlow(HIKAZENENKINTAISHOSHADOUTEIFLOW, SubGyomuCode.DBD介護受給,
+        return otherBatchFlow(HIKAIFLOW, SubGyomuCode.DBD介護受給,
                 createHikazeNenkinTaishoshaDouteiBatchParameter()).define();
     }
 
+    /**
+     * 非課税年金対象者情報一覧CSV作成
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(非課税年金対象者情報一覧CSV作成)
     protected IBatchFlowCommand hikazeiNennkinTaishouSyaJohoCsvCreateProcess() {
         return loopBatch(HikazeiNennkinTaishouSyaJohoCsvCreateProcess.class).define();
     }
 
+    /**
+     * 非課税年金対象者情報_該当一覧CSV
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(非課税年金対象者情報_該当一覧CSV)
     protected IBatchFlowCommand gaitouIchirannCsvProcess() {
         return loopBatch(GaitouIchirannCsvProcess.class).arguments(getParameter().toGaitouIchirannCsvProcessParameter()).define();
     }
 
+    /**
+     * 非課税年金対象者情報_不一致CSV
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(非課税年金対象者情報_不一致CSV)
     protected IBatchFlowCommand fuicchiCsvProcess() {
         return loopBatch(FuicchiCsvProcess.class).arguments(getParameter().toFuicchiCsvProcessParameter()).define();
     }
 
+    /**
+     * 非課税年金対象者情報_生年月日CSV
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(非課税年金対象者情報_生年月日CSV)
     protected IBatchFlowCommand seinenngappiCsvProcess() {
         return loopBatch(SeinenngappiCsvProcess.class).arguments(getParameter().toSeinenngappiCsvProcessParameter()).define();
     }
 
+    /**
+     * 非課税年金対象者情報_年金番号CSV
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(非課税年金対象者情報_年金番号CSV)
     protected IBatchFlowCommand nennkinnBanngouCsvProcess() {
         return loopBatch(NennkinnBanngouCsvProcess.class).arguments(getParameter().toNennkinnBanngouCsvProcessParameter()).define();
     }
 
+    /**
+     * 削除非課税年金対象者
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(削除非課税年金対象者)
     protected IBatchFlowCommand hikazeiNennkinnTaishouSyaDeleteProcess() {
         return loopBatch(HikazeiNennkinnTaishouSyaDeleteProcess.class).define();
     }
 
+    /**
+     * 更新非課税年金対象者
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(更新非課税年金対象者)
     protected IBatchFlowCommand hikazeiNennkinnTaishouSyaUpdateProcess() {
         return loopBatch(HikazeiNennkinnTaishouSyaUpdateProcess.class).define();
     }
 
+    /**
+     * 処理日付管理マスタ更新
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(処理日付管理マスタ更新)
     protected IBatchFlowCommand syoriHidukeKanriMasterUpdateProcess() {
         return loopBatch(SyoriHidukeKanriMasterUpdateProcess.class).define();

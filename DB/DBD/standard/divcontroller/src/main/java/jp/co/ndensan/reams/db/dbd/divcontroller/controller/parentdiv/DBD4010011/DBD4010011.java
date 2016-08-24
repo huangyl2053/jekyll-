@@ -20,8 +20,13 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class DBD4010011 {
 
+    /**
+     * 障がい者控除対象者认定の初期化。(オンロード)<br/>
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
     public ResponseData<DBD4010011Div> onLoad(DBD4010011Div div) {
-        DBD4010011Handler handler = getHandler(div);
         div.getShogaishaKojoNinteiJoho().getKeteiNengabi().setValue(RDate.getNowDate());
         div.getShogaishaKojoNinteiJoho().getSinseiNengabi().setValue(RDate.getNowDate());
         div.getShogaishaKojoNinteiJoho().getTaishoNendo().setValue(RDate.getNowDate());
@@ -29,6 +34,12 @@ public class DBD4010011 {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * before「実行する」ボタンをクッリク
+     *
+     * @param div コントロールdiv
+     * @return ResponseData<DBD4010011Div>
+     */
     public ResponseData<DBD4010011Div> beforeOnClick_btnJiKou(DBD4010011Div div) {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().基準日の必須入力(pairs, div);
@@ -38,10 +49,15 @@ public class DBD4010011 {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter parameter = getHandler(div).getParameter();
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「実行する」ボタンをクッリク
+     *
+     * @param div コントロールdiv
+     * @return ResponseData<ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter>
+     */
     public ResponseData<ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter> onClick_btnJiKou(DBD4010011Div div) {
         ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter parameter = getHandler(div).getParameter();
         return ResponseData.of(parameter).respond();
