@@ -7,13 +7,10 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2010013;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.ServiceItiranHyojiJohoBusiness;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.JigyoshaTourokuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.dgServiceList_Row;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
-import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyosha;
-import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -202,7 +199,7 @@ public class JigyoshaTourokuHandler {
             panelDiv.getDaihyoshaJoho().getTxtDaihyoshaYakushokuMei().setValue(RString.EMPTY);
             panelDiv.getDaihyoshaJoho().getTxtDaihyoshaYubinNo().setValue(YubinNo.EMPTY);
             panelDiv.getDaihyoshaJoho().getTxtDaihyoshaJusho().setValue(RString.EMPTY);
-            panelDiv.getDaihyoshaJoho().getTxtDaihyoshaJushoKana().setValue(RString.EMPTY);
+            panelDiv.getKaisetsushaJoho().getTxtKaisetsushaNameKana().setValue(RString.EMPTY);
             panelDiv.getKaisetsushaJoho().getTxtKaisetsushaName().setValue(RString.EMPTY);
             panelDiv.getKaisetsushaJoho().getTxtKaisetsushaYubinNo().setValue(YubinNo.EMPTY);
             panelDiv.getKaisetsushaJoho().getTxtKaisetsushaTelNo().setValue(RString.EMPTY);
@@ -244,7 +241,7 @@ public class JigyoshaTourokuHandler {
         panelDiv.getDaihyoshaJoho().getTxtDaihyoshaYakushokuMei().setValue(RString.EMPTY);
         panelDiv.getDaihyoshaJoho().getTxtDaihyoshaYubinNo().setValue(YubinNo.EMPTY);
         panelDiv.getDaihyoshaJoho().getTxtDaihyoshaJusho().setValue(RString.EMPTY);
-        panelDiv.getDaihyoshaJoho().getTxtDaihyoshaJushoKana().setValue(RString.EMPTY);
+        panelDiv.getKaisetsushaJoho().getTxtKaisetsushaNameKana().setValue(RString.EMPTY);
         panelDiv.getKaisetsushaJoho().getTxtKaisetsushaName().setValue(RString.EMPTY);
         panelDiv.getKaisetsushaJoho().getTxtKaisetsushaYubinNo().setValue(YubinNo.EMPTY);
         panelDiv.getKaisetsushaJoho().getTxtKaisetsushaTelNo().setValue(RString.EMPTY);
