@@ -81,16 +81,23 @@ public class HanteiTaishoshaTokuteiMyBatisParameter implements IMyBatisParameter
     private void set旧措置区分について(RString 旧措置区分) {
         RString 旧措置区分_旧措置者 = new RString("旧措置者");
         RString 旧措置区分_旧措置者以外 = new RString("旧措置者以外");
-        if (旧措置区分_旧措置者.equals(旧措置区分)) {
-            is旧措置区分_旧措置者 = true;
-        } else {
+        RString 旧措置区分_両方 = new RString("両方");
+        if (旧措置区分_両方.equals(旧措置区分)) {
             is旧措置区分_旧措置者 = false;
-        }
-        if (旧措置区分_旧措置者以外.equals(旧措置区分)) {
-            is旧措置区分_旧措置者以外 = true;
-        } else {
             is旧措置区分_旧措置者以外 = false;
+        } else {
+            if (旧措置区分_旧措置者.equals(旧措置区分)) {
+                is旧措置区分_旧措置者 = true;
+            } else {
+                is旧措置区分_旧措置者 = false;
+            }
+            if (旧措置区分_旧措置者以外.equals(旧措置区分)) {
+                is旧措置区分_旧措置者以外 = true;
+            } else {
+                is旧措置区分_旧措置者以外 = false;
+            }
         }
+
     }
 
     private void set新規更新区分について(RString 新規更新区分) {

@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter implements IBatchProcessParameter {
 
     private FlexibleYear 所得年度;
