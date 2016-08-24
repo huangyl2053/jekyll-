@@ -440,6 +440,12 @@ public class IchijiHanteizumIfOutputBusiness {
         if (ServiceKubunCode.予防給付サービス.getコード().equals(entity.getServiceKubunCode())) {
             予防給付サービス(entity, eucEntity);
         }
+        if (ServiceKubunCode.介護給付サービス.getコード().equals(entity.get前回serviceKubunCode())) {
+            前回結果_介護給付サービス(entity, eucEntity);
+        }
+        if (ServiceKubunCode.予防給付サービス.getコード().equals(entity.get前回serviceKubunCode())) {
+            前回結果_予防給付サービス(entity, eucEntity);
+        }
         eucEntity.set麻痺左上肢(nullToEmpty(entity.get認定調査remban1()));
         eucEntity.set麻痺右上肢(nullToEmpty(entity.get認定調査remban2()));
         eucEntity.set麻痺左下肢(nullToEmpty(entity.get認定調査remban3()));
@@ -989,14 +995,6 @@ public class IchijiHanteizumIfOutputBusiness {
         eucEntity.set介護予防通所介護デイサービス(entity.getサービスremban6());
         eucEntity.set介護予防通所リハビリテーション(entity.getサービスremban7());
         eucEntity.set住宅改修予防給付(entity.getServiceJokyoFlag());
-        eucEntity.set前回結果_介護予防訪問介護ホームヘルプサービス(entity.get前回サービスremban1());
-        eucEntity.set前回結果_介護予防訪問入浴介護(entity.get前回サービスremban2());
-        eucEntity.set前回結果_介護予防訪問看護(entity.get前回サービスremban3());
-        eucEntity.set前回結果_介護予防訪問リハビリテーション(entity.get前回サービスremban4());
-        eucEntity.set前回結果_介護予防居宅療養管理指導(entity.get前回サービスremban5());
-        eucEntity.set前回結果_介護予防通所介護デイサービス(entity.get前回サービスremban6());
-        eucEntity.set前回結果_介護予防通所リハビリテーション(entity.get前回サービスremban7());
-        eucEntity.set前回結果_住宅改修予防給付(entity.get前回serviceJokyoFlag());
         if (entity.getKoroshoIfShikibetsuCode() != null
                 && (厚労省IF識別コード_99A.equals(entity.getKoroshoIfShikibetsuCode())
                 || (厚労省IF識別コード_02A.equals(entity.getKoroshoIfShikibetsuCode())))) {
@@ -1005,11 +1003,6 @@ public class IchijiHanteizumIfOutputBusiness {
             eucEntity.set介護予防特定施設入居者生活介護(nullToEmpty(entity.getサービスremban12()));
             eucEntity.set介護予防福祉用具貸与(nullToEmpty(entity.getサービスremban8()));
             eucEntity.set特定介護予防福祉用具販売(nullToEmpty(entity.getサービスremban13()));
-            eucEntity.set前回結果_介護予防短期入所生活介護ショートステイ(nullToEmpty(entity.get前回サービスremban9()));
-            eucEntity.set前回結果_介護予防短期入所療養介護(nullToEmpty(entity.get前回サービスremban10()));
-            eucEntity.set前回結果_介護予防特定施設入居者生活介護(nullToEmpty(entity.get前回サービスremban12()));
-            eucEntity.set前回結果_介護予防福祉用具貸与(nullToEmpty(entity.get前回サービスremban8()));
-            eucEntity.set前回結果_特定介護予防福祉用具販売(nullToEmpty(entity.get前回サービスremban13()));
         } else {
             eucEntity.set介護予防短期入所生活介護ショートステイ(nullToEmpty(entity.getサービスremban8()));
             eucEntity.set介護予防短期入所療養介護(nullToEmpty(entity.getサービスremban9()));
@@ -1019,6 +1012,28 @@ public class IchijiHanteizumIfOutputBusiness {
             eucEntity.set介護予防認知症対応型通所介護(entity.getサービスremban14());
             eucEntity.set介護予防小規模多機能型居宅介護(entity.getサービスremban15());
             eucEntity.set介護予防認知症対応型共同生活介護グループホーム(entity.getサービスremban16());
+        }
+    }
+
+    private void 前回結果_予防給付サービス(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
+        eucEntity.set前回結果_介護予防訪問介護ホームヘルプサービス(entity.get前回サービスremban1());
+        eucEntity.set前回結果_介護予防訪問入浴介護(entity.get前回サービスremban2());
+        eucEntity.set前回結果_介護予防訪問看護(entity.get前回サービスremban3());
+        eucEntity.set前回結果_介護予防訪問リハビリテーション(entity.get前回サービスremban4());
+        eucEntity.set前回結果_介護予防居宅療養管理指導(entity.get前回サービスremban5());
+        eucEntity.set前回結果_介護予防通所介護デイサービス(entity.get前回サービスremban6());
+        eucEntity.set前回結果_介護予防通所リハビリテーション(entity.get前回サービスremban7());
+        eucEntity.set前回結果_住宅改修予防給付(entity.get前回serviceJokyoFlag());
+        if (entity.get前回koroshoIfShikibetsuCode() != null
+                && (厚労省IF識別コード_99A.equals(entity.get前回koroshoIfShikibetsuCode())
+                || (厚労省IF識別コード_02A.equals(entity.get前回koroshoIfShikibetsuCode())))) {
+            eucEntity.set特定介護予防福祉用具販売(nullToEmpty(entity.getサービスremban13()));
+            eucEntity.set前回結果_介護予防短期入所生活介護ショートステイ(nullToEmpty(entity.get前回サービスremban9()));
+            eucEntity.set前回結果_介護予防短期入所療養介護(nullToEmpty(entity.get前回サービスremban10()));
+            eucEntity.set前回結果_介護予防特定施設入居者生活介護(nullToEmpty(entity.get前回サービスremban12()));
+            eucEntity.set前回結果_介護予防福祉用具貸与(nullToEmpty(entity.get前回サービスremban8()));
+            eucEntity.set前回結果_特定介護予防福祉用具販売(nullToEmpty(entity.get前回サービスremban13()));
+        } else {
             eucEntity.set前回結果_介護予防短期入所生活介護ショートステイ(nullToEmpty(entity.get前回サービスremban8()));
             eucEntity.set前回結果_介護予防短期入所療養介護(nullToEmpty(entity.get前回サービスremban9()));
             eucEntity.set前回結果_介護予防特定施設入居者生活介護(nullToEmpty(entity.get前回サービスremban10()));
@@ -1039,14 +1054,6 @@ public class IchijiHanteizumIfOutputBusiness {
         eucEntity.set通所介護デイサービス(nullToEmpty(entity.getサービスremban6()));
         eucEntity.set通所リハビリテーション(entity.getサービスremban7());
         eucEntity.set住宅改修介護給付(entity.getServiceJokyoFlag());
-        eucEntity.set前回結果_訪問介護ホームヘルプサービス(nullToEmpty(entity.get前回サービスremban1()));
-        eucEntity.set前回結果_訪問入浴介護(nullToEmpty(entity.get前回サービスremban2()));
-        eucEntity.set前回結果_訪問看護(nullToEmpty(entity.get前回サービスremban3()));
-        eucEntity.set前回結果_訪問リハビリテーション(nullToEmpty(entity.get前回サービスremban4()));
-        eucEntity.set前回結果_居宅療養管理指導(nullToEmpty(entity.get前回サービスremban5()));
-        eucEntity.set前回結果_通所介護デイサービス(nullToEmpty(entity.get前回サービスremban6()));
-        eucEntity.set前回結果_通所リハビリテーション(entity.get前回サービスremban7());
-        eucEntity.set前回結果_住宅改修介護給付(entity.get前回serviceJokyoFlag());
         if (entity.getKoroshoIfShikibetsuCode() != null
                 && (厚労省IF識別コード_99A.equals(entity.getKoroshoIfShikibetsuCode())
                 || (厚労省IF識別コード_02A.equals(entity.getKoroshoIfShikibetsuCode())))) {
@@ -1056,12 +1063,6 @@ public class IchijiHanteizumIfOutputBusiness {
             eucEntity.set福祉用具貸与(nullToEmpty(entity.getサービスremban8()));
             eucEntity.set特定福祉用具販売(nullToEmpty(entity.getサービスremban13()));
             eucEntity.set認知症対応型共同生活介護グループホーム(entity.getサービスremban11());
-            eucEntity.set前回結果_短期入所生活介護ショートステイ(entity.get前回サービスremban9());
-            eucEntity.set前回結果_短期入所療養介護(nullToEmpty(entity.get前回サービスremban10()));
-            eucEntity.set前回結果_特定施設入居者生活介護(nullToEmpty(entity.get前回サービスremban12()));
-            eucEntity.set前回結果_福祉用具貸与(nullToEmpty(entity.get前回サービスremban8()));
-            eucEntity.set前回結果_特定福祉用具販売(nullToEmpty(entity.get前回サービスremban13()));
-            eucEntity.set前回結果_認知症対応型共同生活介護グループホーム(entity.get前回サービスremban11());
         } else {
             eucEntity.set短期入所生活介護ショートステイ(entity.getサービスremban8());
             eucEntity.set短期入所療養介護(nullToEmpty(entity.getサービスremban9()));
@@ -1074,16 +1075,47 @@ public class IchijiHanteizumIfOutputBusiness {
             eucEntity.set認知症対応型共同生活介護グループホーム(entity.getサービスremban16());
             eucEntity.set地域密着型特定施設入居者生活介護(entity.getサービスremban17());
             eucEntity.set地域密着型介護老人福祉施設入所者生活介護(entity.getサービスremban18());
+        }
+        if (entity.getKoroshoIfShikibetsuCode() != null
+                && 厚労省IF識別コード_09B.equals(entity.getKoroshoIfShikibetsuCode())) {
+            eucEntity.set定期巡回随時対応型訪問介護看護(nullToEmpty(entity.getサービスremban19()));
+            eucEntity.set複合型サービス(entity.getサービスremban20());
+        }
+    }
+
+    private void 前回結果_介護給付サービス(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
+        eucEntity.set前回結果_訪問介護ホームヘルプサービス(nullToEmpty(entity.get前回サービスremban1()));
+        eucEntity.set前回結果_訪問入浴介護(nullToEmpty(entity.get前回サービスremban2()));
+        eucEntity.set前回結果_訪問看護(nullToEmpty(entity.get前回サービスremban3()));
+        eucEntity.set前回結果_訪問リハビリテーション(nullToEmpty(entity.get前回サービスremban4()));
+        eucEntity.set前回結果_居宅療養管理指導(nullToEmpty(entity.get前回サービスremban5()));
+        eucEntity.set前回結果_通所介護デイサービス(nullToEmpty(entity.get前回サービスremban6()));
+        eucEntity.set前回結果_通所リハビリテーション(entity.get前回サービスremban7());
+        eucEntity.set前回結果_住宅改修介護給付(entity.get前回serviceJokyoFlag());
+        if (entity.get前回koroshoIfShikibetsuCode() != null
+                && (厚労省IF識別コード_99A.equals(entity.get前回koroshoIfShikibetsuCode())
+                || (厚労省IF識別コード_02A.equals(entity.get前回koroshoIfShikibetsuCode())))) {
+            eucEntity.set前回結果_短期入所生活介護ショートステイ(entity.get前回サービスremban9());
+            eucEntity.set前回結果_短期入所療養介護(nullToEmpty(entity.get前回サービスremban10()));
+            eucEntity.set前回結果_特定施設入居者生活介護(nullToEmpty(entity.get前回サービスremban12()));
+            eucEntity.set前回結果_福祉用具貸与(nullToEmpty(entity.get前回サービスremban8()));
+            eucEntity.set前回結果_特定福祉用具販売(nullToEmpty(entity.get前回サービスremban13()));
+            eucEntity.set前回結果_認知症対応型共同生活介護グループホーム(entity.get前回サービスremban11());
+        } else {
+            eucEntity.set前回結果_短期入所生活介護ショートステイ(entity.get前回サービスremban8());
+            eucEntity.set前回結果_短期入所療養介護(nullToEmpty(entity.get前回サービスremban9()));
+            eucEntity.set前回結果_特定施設入居者生活介護(nullToEmpty(entity.get前回サービスremban10()));
+            eucEntity.set前回結果_福祉用具貸与(nullToEmpty(entity.get前回サービスremban11()));
+            eucEntity.set前回結果_特定福祉用具販売(nullToEmpty(entity.get前回サービスremban12()));
+            eucEntity.set前回結果_夜間対応型訪問介護(entity.get前回サービスremban13());
             eucEntity.set前回結果_認知症対応型通所介護(entity.get前回サービスremban14());
             eucEntity.set前回結果_小規模多機能型居宅介護(entity.get前回サービスremban15());
             eucEntity.set前回結果_認知症対応型共同生活介護グループホーム(entity.get前回サービスremban16());
             eucEntity.set前回結果_地域密着型特定施設入居者生活介護(entity.get前回サービスremban17());
             eucEntity.set前回結果_地域密着型介護老人福祉施設入所者生活介護(entity.get前回サービスremban18());
         }
-        if (entity.getKoroshoIfShikibetsuCode() != null
-                && 厚労省IF識別コード_09B.equals(entity.getKoroshoIfShikibetsuCode())) {
-            eucEntity.set定期巡回随時対応型訪問介護看護(nullToEmpty(entity.getサービスremban19()));
-            eucEntity.set複合型サービス(entity.getサービスremban20());
+        if (entity.get前回koroshoIfShikibetsuCode() != null
+                && 厚労省IF識別コード_09B.equals(entity.get前回koroshoIfShikibetsuCode())) {
             eucEntity.set前回結果_定期巡回随時対応型訪問介護看護(nullToEmpty(entity.get前回サービスremban19()));
             eucEntity.set前回結果_複合型サービス(entity.get前回サービスremban20());
         }
