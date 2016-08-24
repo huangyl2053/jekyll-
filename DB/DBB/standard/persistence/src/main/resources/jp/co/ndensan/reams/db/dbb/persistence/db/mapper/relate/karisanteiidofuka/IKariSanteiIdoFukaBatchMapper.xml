@@ -1132,7 +1132,7 @@
             ON 介護期別."dbT2003Kibetsu_choteiId" = 調定共通."urT0705ChoteiKyotsu_choteiId"
             INNER JOIN (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.noDeleted_DbV2001ChoshuHoho"/>) AS 徴収方法
             ON 資格取得."shikakuShutoku_hihokenshaNo" = 徴収方法."dbV2001ChoshuHoho_hihokenshaNo"
-            INNER JOIN "TmpSetaiShotoku" AS 世帯員所得情報
+            LEFT JOIN "TmpSetaiShotoku" AS 世帯員所得情報
             ON 資格取得."shikakuShutoku_hihokenshaNo" = 世帯員所得情報."hihokenshaNo"
             LEFT JOIN
                     rgur."UrT0508SeikatsuHogoJukyusha" AS "UrT0508SeikatsuHogoJukyusha"
