@@ -126,6 +126,7 @@ public class DBC180020ProcessParameter implements IBatchProcessParameter {
         this.taishoGetsu = taishoGetsu;
         this.chushutuKaisu = chushutuKaisu;
         this.hanteiKijunbiIndex = hanteiKijunbiIndex;
+        this.index = hanteiKijunbiIndex;
         this.対象開始日 = 対象開始日;
         this.対象終了日 = 対象終了日;
     }
