@@ -56,7 +56,6 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futanngenndogakuninntei."
                     + "IFutanGenndoGakuNinnteiListMapper.get負担額認定証_決定通知書発行一覧表発行情報");
-
     private List<FutangakuNinteiHakkoIchiranEntity> futanGenndoGakuNinnteiListRecordList;
     private static final ReportId ID = new ReportId("DBD200019_FutangakuNinteiHakkoIchiran");
     private static final RString なし = new RString("なし");
@@ -118,7 +117,7 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
 
         RString 出力順 = RString.EMPTY;
         if (order != null) {
-            出力順 = MyBatisOrderByClauseCreator.create(FutanGenndoGakuNinnteiListProperty.DBD100020_ResultListEnum.class, order);
+            出力順 = MyBatisOrderByClauseCreator.create(FutanGenndoGakuNinnteiListProperty.class, order);
         }
         return 出力順;
     }
