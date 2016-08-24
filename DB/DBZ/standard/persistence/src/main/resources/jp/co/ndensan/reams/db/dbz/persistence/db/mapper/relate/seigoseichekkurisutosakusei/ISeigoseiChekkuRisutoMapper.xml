@@ -442,6 +442,7 @@
         <result property="住特解除届出年月日" column="住特解除届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="宛名識別コード" column="宛名識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="除外識別コード" column="除外識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="資格取得日" column="資格取得除外年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="get被保険者台帳情報" resultMap="result_DaityouCheckEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.seigoseichekkurisutosakusei.SeigoseiChekkuMybitisParamter">
@@ -512,6 +513,7 @@
         ,daityou."住特解除年月日" AS 住特解除年月日
         ,daityou."住特解除届出年月日" AS 住特解除届出年月日
         ,jyogai."shikibetsuCode" AS 除外識別コード
+        ,jyogai."資格取得除外年月日" AS 資格取得除外年月日
         ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" AS 宛名識別コード
         FROM
         (<include refid="select台帳" />
@@ -567,12 +569,12 @@
         LEFT JOIN ( 
         SELECT
         "shikibetsuCode"
-        , "shikakuShutokuJogaiYMD"
+        ,"shikakuShutokuJogaiYMD"
         , CASE 
         WHEN "shikakuShutokuJogaiKaijoYMD" IS NULL 
         THEN '99991231' 
         ELSE "shikakuShutokuJogaiKaijoYMD" 
-        END 
+        END AS 資格取得除外年月日
         FROM
         rgdb."DbT1009ShikakuShutokuJogaisha" 
         WHERE

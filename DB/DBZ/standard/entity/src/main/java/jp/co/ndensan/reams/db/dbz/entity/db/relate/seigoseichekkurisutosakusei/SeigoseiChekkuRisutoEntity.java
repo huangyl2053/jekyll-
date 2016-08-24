@@ -74,5 +74,5 @@ public class SeigoseiChekkuRisutoEntity {
     private RString 処理事由コード;
     private boolean 消除通知フラグ;
     private ShikibetsuCode 台帳識別コード;
-
+    private FlexibleDate 資格取得日;
 }
