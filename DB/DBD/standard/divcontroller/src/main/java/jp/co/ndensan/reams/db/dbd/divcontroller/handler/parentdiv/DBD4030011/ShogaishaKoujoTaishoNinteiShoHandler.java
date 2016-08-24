@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class ShogaishaKoujoTaishoNinteiShoHandler {
 
     private final ShogaishaKoujoTaishoNinteiShoDiv div;
+    private static final int INT4 = 4;
 
     /**
      * コンストラクタです。
@@ -170,8 +171,7 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
      */
     public ShogaishaKojoTaishoshaListParameter getParameter() {
         ShogaishaKojoTaishoshaListParameter parameter = new ShogaishaKojoTaishoshaListParameter();
-        int index_4 = 4;
-        parameter.set対象年度(new FlexibleYear(div.getTyusyutuJyokenPanel().getTxtTaishoNendo().getValue().toDateString().substring(0, index_4)));
+        parameter.set対象年度(new FlexibleYear(div.getTyusyutuJyokenPanel().getTxtTaishoNendo().getValue().toDateString().substring(0, INT4)));
         if (div.getTyusyutuJyokenPanel().getTxtHihokenshaNo().getValue() != null) {
             parameter.set被保険者番号(new RString(div.getTyusyutuJyokenPanel().getTxtHihokenshaNo().getValue().toString()));
         }

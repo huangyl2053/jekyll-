@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -168,10 +169,10 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
         明細Entity.setKyotakuKaigoShienJigyoshoNo(保険者X.get居宅介護支援事業所番号());
         明細Entity.setKyotakuServiceTekiyoFromYmd(new FlexibleDate(保険者X.get居宅サービス計画適用開始年月日()));
         明細Entity.setKyotakuServiceTekiyoToYmd(new FlexibleDate(保険者X.get居宅サービス計画適用終了年月日()));
-        明細Entity.setHomonShikyugendoKijungaku(保険者X.get訪問通所サービス支給限度基準額());
+        明細Entity.setHomonShikyugendoKijungaku(getDecimal(保険者X.get訪問通所サービス支給限度基準額()));
         明細Entity.setHomonJogenKanriTekiyoKikanFromYmd(new FlexibleDate(保険者X.get訪問通所サービス上限管理適用期間開始年月日()));
         明細Entity.setHomonJogenKanriTekiyoKikanToYmd(new FlexibleDate(保険者X.get訪問通所サービス上限管理適用期間終了年月日()));
-        明細Entity.setTankiShikyugendoKijungaku(保険者X.get短期入所サービス支給限度基準額());
+        明細Entity.setTankiShikyugendoKijungaku(getDecimal(保険者X.get短期入所サービス支給限度基準額()));
         明細Entity.setTankiJogenKanriTekiyoKikanFromYmd(new FlexibleDate(保険者X.get短期入所サービス上限管理適用期間開始年月日()));
         明細Entity.setTankiJogenKanriTekiyoKikanToYmd(new FlexibleDate(保険者X.get短期入所サービス上限管理適用期間終了年月日()));
         明細Entity.setKohiFutanJogengakuGengakuUmu(保険者X.get公費負担上限額減額の有無());
@@ -181,25 +182,25 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
         明細Entity.setKyufuritsuHikisageToYmd(new FlexibleDate(保険者X.get給付率引下げ終了年月日()));
         明細Entity.setGenmenShinseichuKubunCode(保険者X.get減免申請中区分コード());
         明細Entity.setRiyoshaFutanKubunCode(保険者X.get利用者負担減免旧措置入所者利用者負担区分コード());
-        明細Entity.setKyufuRitsu(保険者X.get利用者負担減免旧措置入所者給付率());
+        明細Entity.setKyufuRitsu(getDecimal(保険者X.get利用者負担減免旧措置入所者給付率()));
         明細Entity.setRiyoshaFutanTekiyoFromYmd(new FlexibleDate(保険者X.get利用者負担減免旧措置入所者適用開始年月日()));
         明細Entity.setRiyoshaFutanTekiyoToYmd(new FlexibleDate(保険者X.get利用者負担減免旧措置入所者適用終了年月日()));
         明細Entity.setHyojunFutanKubunCode(保険者X.get標準負担特定標準負担標準負担区分コード());
-        明細Entity.setFutanGaku(保険者X.get標準負担特定標準負担負担額());
+        明細Entity.setFutanGaku(getDecimal(保険者X.get標準負担特定標準負担負担額()));
         明細Entity.setFutanGakuTekiyoFromYmd(new FlexibleDate(保険者X.get標準負担特定標準負担負担額適用開始年月日()));
         明細Entity.setFutanGakuTekiyoToYmd(new FlexibleDate(保険者X.get標準負担特定標準負担負担額適用終了年月日()));
         明細Entity.setTokuteiNyushoshaNinteiShinseichuKubunCode(保険者X.get特定入所者介護サービス特定入所者認定申請中区分コード());
         明細Entity.setTokuteiNyushoshaKaigoServiceKubunCode(保険者X.get特定入所者介護サービス特定入所者介護サービス区分コード());
         明細Entity.setKazeisoNoTokureiGengakuSochiTaishoKubun(保険者X.get特定入所者介護サービス課税層の特例減額措置対象());
-        明細Entity.setTokuteiNyushoshaShokuhiFutanGendoGaku(保険者X.get特定入所者介護サービス食費負担限度額());
-        明細Entity.setKyojuhiUnitKoshitsuFutanGendoGaku(保険者X.get特定入所者介護サービス居住費ユニット型個室負担限度額());
-        明細Entity.setKyojuhiUnitJunkoshitsuFutanGendoGaku(保険者X.get特定入所者介護サービス居住費ユニット型準個室負担限度額());
-        明細Entity.setKyojuhiTokuyotoFutanGenndoGaku(保険者X.get特定入所者介護サービス居住費従来型個室特養等負担限度額());
-        明細Entity.setKyojuhiRokenRyoyotoFutanGendoGaku(保険者X.get特定入所者介護サービス居住費従来型個室老健療養等負担限度額());
-        明細Entity.setKyojuhiTashoShitsuFutanGendoGaku(保険者X.get特定入所者介護サービス居住費多床室負担限度額());
+        明細Entity.setTokuteiNyushoshaShokuhiFutanGendoGaku(getDecimal(保険者X.get特定入所者介護サービス食費負担限度額()));
+        明細Entity.setKyojuhiUnitKoshitsuFutanGendoGaku(getDecimal(保険者X.get特定入所者介護サービス居住費ユニット型個室負担限度額()));
+        明細Entity.setKyojuhiUnitJunkoshitsuFutanGendoGaku(getDecimal(保険者X.get特定入所者介護サービス居住費ユニット型準個室負担限度額()));
+        明細Entity.setKyojuhiTokuyotoFutanGenndoGaku(getDecimal(保険者X.get特定入所者介護サービス居住費従来型個室特養等負担限度額()));
+        明細Entity.setKyojuhiRokenRyoyotoFutanGendoGaku(getDecimal(保険者X.get特定入所者介護サービス居住費従来型個室老健療養等負担限度額()));
+        明細Entity.setKyojuhiTashoShitsuFutanGendoGaku(getDecimal(保険者X.get特定入所者介護サービス居住費多床室負担限度額()));
         明細Entity.setFutanGendoGakuTekiyoFromYmd(new FlexibleDate(保険者X.get特定入所者介護サービス負担限度額適用開始年月日()));
         明細Entity.setFutanGendoGakuTekiyoToYmd(new FlexibleDate(保険者X.get特定入所者介護サービス負担限度額適用終了年月日()));
-        明細Entity.setKeigenRitsu(保険者X.get社会福祉法人軽減情報軽減率());
+        明細Entity.setKeigenRitsu(getDecimal(保険者X.get社会福祉法人軽減情報軽減率()));
         明細Entity.setKeigenRitsuTekiyoFromYmd(new FlexibleDate(保険者X.get社会福祉法人軽減情報軽減率適用開始年月日()));
         明細Entity.setKeigenRitsuTekiyoToYmd(new FlexibleDate(保険者X.get社会福祉法人軽減情報軽減率適用終了年月日()));
         明細Entity.setShokiboKyotakuServiceRiyoUmu(保険者X.get小規模多機能型居宅介護の利用開始月における居宅サービス等の利用の有無());
@@ -215,9 +216,9 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
         明細Entity.setShisetsuShozaiHokenshaNo(保険者X.get住所地特例施設所在保険者番号());
         明細Entity.setJushochiTokureiTekiyoFromYmd(new FlexibleDate(保険者X.get住所地特例住所地特例適用開始年月日()));
         明細Entity.setJushochiTokureiTekiyoToYmd(new FlexibleDate(保険者X.get住所地特例住所地特例適用終了年月日()));
-        明細Entity.setKyojuhi1FutanGendogaku(保険者X.get特定入所者介護サービス居住費新１負担限度額());
-        明細Entity.setKyojuhi2FutanGendogaku(保険者X.get特定入所者介護サービス居住費新２負担限度額());
-        明細Entity.setKyojuhi3FutanGendogaku(保険者X.get特定入所者介護サービス居住費新３負担限度額());
+        明細Entity.setKyojuhi1FutanGendogaku(getDecimal(保険者X.get特定入所者介護サービス居住費新１負担限度額()));
+        明細Entity.setKyojuhi2FutanGendogaku(getDecimal(保険者X.get特定入所者介護サービス居住費新２負担限度額()));
+        明細Entity.setKyojuhi3FutanGendogaku(getDecimal(保険者X.get特定入所者介護サービス居住費新３負担限度額()));
         明細Entity.setNiwariFutanTekiyoFromYmd(new FlexibleDate(保険者X.get二割負担適用開始年月日()));
         明細Entity.setNiwariFutanTekiyoToYmd(new FlexibleDate(保険者X.get二割負担終了開始年月日()));
         明細Entity.setYuryoRojinHomeDoishoUmu(保険者X.get有料老人ホーム等同意書の有無());
@@ -250,5 +251,12 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
         明細Entity.setGyoseikuCode(RString.EMPTY);
         明細Entity.setState(EntityDataState.Added);
         被保険者一時tableWriter.insert(明細Entity);
+    }
+    
+    private Decimal getDecimal(RString decimalStr) {
+        if (RString.isNullOrEmpty(decimalStr) || !Decimal.canConvert(decimalStr)) {
+            return Decimal.ZERO;
+        }
+        return new Decimal(decimalStr.toString());
     }
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBD-1770-020 donghj-->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koseishichosonmaster.IKoseiShichosonMasterMapper">
+    
+    <resultMap id="resultMap_KoseiShichosonMasterEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5720001.KoseiShichosonMasterEntity" autoMapping="true">
+        <id property="市町村識別ID" column="shichosonShokibetsuID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <select id="get市町村識別ID" resultMap="resultMap_KoseiShichosonMasterEntity" fetchSize="500"  resultOrdered="true">
+        
+        SELECT
+            T7051."shichosonShokibetsuID"
+        FROM
+            rgdb."DbT7051KoseiShichosonMaster" AS T7051
+        WHERE
+            T7051."gappeiKyuShichosonKubun" = '0'
+        
+    </select>    
+</mapper>
