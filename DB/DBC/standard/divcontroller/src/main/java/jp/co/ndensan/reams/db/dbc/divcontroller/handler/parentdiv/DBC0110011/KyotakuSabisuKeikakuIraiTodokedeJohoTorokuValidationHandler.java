@@ -125,7 +125,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationHandler {
             validPairs.add(new ValidationMessageControlPair(
                     new KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationMessages(
                             DbcErrorMessages.適用開始日_年月_変更,
-                            div.getTxtKeikakuTekiyoStartYMD().getValue().getYearMonth().toString())));
+                            div.getTxtKeikakuTekiyoStartYMD().getValue().getYearMonth().wareki().toDateString()
+                            .toString())));
         }
     }
 

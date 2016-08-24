@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBE-0290-030 dongyabin -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.jizenshinsakaishiryopublication.IJizenShinsakaiShiryoPublicationMapper">
+    
+    <resultMap id="haishameigihenkouiraiResult" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.jizenshinsakekka.JizenShinsaKekkaSelectEntity">
+        <result property="介護認定審査会開催予定年月日" column="dbT5501_shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="介護認定審査会開始予定時刻" column="dbT5501_shinsakaiKaishiYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="介護認定審査会資料作成年月日" column="dbT5501_shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="合議体番号" column="dbT5501_gogitaiNo" />
+        <result property="介護認定審査会予定定員" column="dbT5501_shinsakaiYoteiTeiin" />
+        <result property="介護認定審査会割当済み人数" column="dbT5501_shinsakaiWariateZumiNinzu" />
+        <result property="合議体名称" column="dbT5591_gogitaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="介護認定審査会開催場所名称" column="dbT5592_shinsakaiKaisaiBashoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+     
+    <select resultOrdered="true" id="select介護認定審査会開催番号" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.jizenshinsakaishiryopublication.JizenShinsakaiShiryoPublicationMybitisParamter" 
+            resultMap="haishameigihenkouiraiResult" fetchSize="500">
+        SELECT
+        dbT5501."shinsakaiKaisaiYoteiYMD" AS dbT5501_shinsakaiKaisaiYoteiYMD,													
+        dbT5501."shinsakaiKaishiYoteiTime" AS dbT5501_shinsakaiKaishiYoteiTime,													
+        dbT5501."shinsakaiShiryoSakuseiYMD" AS dbT5501_shinsakaiShiryoSakuseiYMD,													
+        dbT5501."gogitaiNo" AS dbT5501_gogitaiNo,													
+        dbT5501."shinsakaiYoteiTeiin" AS dbT5501_shinsakaiYoteiTeiin,													
+        dbT5501."shinsakaiWariateZumiNinzu" AS dbT5501_shinsakaiWariateZumiNinzu,													
+        dbT5591."gogitaiMei" AS dbT5591_gogitaiMei,												
+        dbT5592."shinsakaiKaisaiBashoName" AS dbT5592_shinsakaiKaisaiBashoName												
+        FROM
+        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" as dbT5501													
+        INNER JOIN
+        rgdb."DbT5591GogitaiJoho" as dbT5591													
+        ON dbT5501."gogitaiNo" = dbT5591."gogitaiNo"													
+        AND dbT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> dbT5501."shinsakaiKaisaiYoteiYMD"												
+        AND dbT5501."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> dbT5591."gogitaiYukoKikanShuryoYMD"													
+        JOIN 
+        rgdb."DbT5592ShinsakaiKaisaiBashoJoho" as dbT5592													
+        ON dbT5591."shinsakaiKaisaiBashoCode" = dbT5592."shinsakaiKaisaiBashoCode"													
+        WHERE 
+        dbT5501."shinsakaiKaisaiNo" =  #{shinsakaiKaisaiNo}													
+    </select>
+</mapper>

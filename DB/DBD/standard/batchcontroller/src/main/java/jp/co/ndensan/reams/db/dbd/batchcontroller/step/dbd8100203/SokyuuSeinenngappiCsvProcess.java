@@ -141,7 +141,7 @@ public class SokyuuSeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinT
         eucCsvEntity.set年金保険者(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
                 UEXCodeShubetsu.年金保険者コード.getCodeShubetsu(), new Code(t.getDtNennkinnHokenshaCode())));
         eucCsvEntity.set基礎年金番号(t.getDtKisoNennkinnNo());
-        eucCsvEntity.set年金コード(t.getNennkinnCode());
+        eucCsvEntity.set年金コード(t.getDtNennkinnCode());
         eucCsvEntity.set年金名称(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
                 UEXCodeShubetsu.年金保険者コード.getCodeShubetsu(), new Code(set年金(t.getNennkinnCode()))));
         eucCsvEntity.set識別コード(t.getShikibetsuCode().getColumnValue());
@@ -151,11 +151,11 @@ public class SokyuuSeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinT
         eucCsvEntity.set生年月日年金保険者データ(set年月日(t.getDtSeinenngappi()));
         eucCsvEntity.set性別コード市町村データ(t.getAtenaSeibetsu());
         eucCsvEntity.set性別市町村データ(set性別コード(t.getAtenaSeibetsu()));
-        eucCsvEntity.set性別コード年金保険者データ(t.getAtenaKanaShimei());
-        eucCsvEntity.set性別年金保険者データ(set性別コード(t.getAtenaKanaShimei()));
+        eucCsvEntity.set性別コード年金保険者データ(t.getDtSeibetsu());
+        eucCsvEntity.set性別年金保険者データ(set性別コード(t.getDtSeibetsu()));
         eucCsvEntity.setカナ氏名市町村データ(t.getAtenaKanaShimei());
         eucCsvEntity.setカナ氏名年金保険者データ(t.getDtKanaShimei());
-        eucCsvEntity.set不一致項目(set不一致事由(t.getFuicchiJiyu()));
+        eucCsvEntity.set不一致項目(set不一致事由(t.getFuicchiItem()));
     }
 
     private RString set年月日(RString 年月日) {

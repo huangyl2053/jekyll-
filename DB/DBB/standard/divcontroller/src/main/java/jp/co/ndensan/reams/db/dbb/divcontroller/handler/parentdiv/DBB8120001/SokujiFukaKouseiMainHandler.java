@@ -513,7 +513,7 @@ public class SokujiFukaKouseiMainHandler {
         }
         if (is内容に異なる箇所がある(更正前.get過年度4(), 更正後.get過年度4())) {
             boolean is履歴番号採番 = is履歴番号採番(更正前.get過年度4(), 更正後.get過年度4());
-            FukaJoho 過年度4 = 更正後.get過年度1();
+            FukaJoho 過年度4 = 更正後.get過年度4();
             if (is履歴番号採番) {
                 過年度4 = get賦課の情報履歴番号採番(過年度4);
             }

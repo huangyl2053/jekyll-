@@ -58,7 +58,7 @@ public class IraiJohoDataTorikomiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         List<dgTorikomiFileIchiran_Row> rowList = div.getDgTorikomiFileIchiran().getDataSource();
         for (int i = 0; i < rowList.size(); i++) {
-            if (rowList.get(i).getCheckBox() && !rowList.get(i).getShinseibi().equals(rowList.get(i + 1).getShinseibi())) {
+            if (rowList.get(i).getCheckBox().isAllSelected() && !rowList.get(i).getShinseibi().equals(rowList.get(i + 1).getShinseibi())) {
                 validationMessages.add(new ValidationMessageControlPair(IraiJohoDataTorikomiMessages.申請日のチェック));
             }
         }

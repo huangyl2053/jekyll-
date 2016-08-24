@@ -223,7 +223,7 @@ public class RiyoshaFutanWariaiMeisai
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 

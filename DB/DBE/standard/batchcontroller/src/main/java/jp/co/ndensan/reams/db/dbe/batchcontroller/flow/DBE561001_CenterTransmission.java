@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.ZenkaiChosaItem
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.ZenkaiServiceJokyoTempTableSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE561001.DBE561001_CenterTransmissionParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.centertransmission.CenterTransmissionUpdateProcessParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTransmissionOutputEntity;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -47,8 +46,8 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
         executeStep(認定調査票基本調査調査項目一時テーブル);
         executeStep(前回調査票基本調査調査項目一時テーブル);
         executeStep(センター送信データ作成ファイル出力);
-        出力された申請書管理番号 = getResult(CenterTransmissionOutputEntity.class, new RString(センター送信データ作成ファイル出力),
-                CenterTransmissionProcess.OUTPUTSHINSEISHOKANRINO).get出力された申請書管理番号();
+        出力された申請書管理番号 = getResult(List.class, new RString(センター送信データ作成ファイル出力),
+                CenterTransmissionProcess.OUTPUTSHINSEISHOKANRINO);
         if (!出力された申請書管理番号.isEmpty()) {
             executeStep(DB出力要介護認定申請情報);
             executeStep(DB出力外部連携データ抽出情報);

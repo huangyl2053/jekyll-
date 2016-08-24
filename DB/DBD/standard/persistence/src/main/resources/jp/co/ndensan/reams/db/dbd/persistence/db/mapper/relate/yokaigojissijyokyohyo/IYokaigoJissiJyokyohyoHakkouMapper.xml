@@ -118,8 +118,8 @@
         parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd581001.YokaigoJissiJyokyohyoHakkouMybatisParameter">
         <include refid="認定件数旧措置のデータ取得" />
         UNION
-        <include refid="認定件数新規のデータ取得" /><!--
--->        UNION
+        <include refid="認定件数新規のデータ取得" />
+        UNION
         <include refid="認定件数新規旧措置のデータ取得" />
         UNION
         <include refid="認定件数新規要支援のデータ取得" />
@@ -428,12 +428,12 @@
         UNION
         SELECT
             '0101' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."受給申請年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."jukyuShinseiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請受付件数の場合" />
         <include refid="条件A" />
@@ -450,12 +450,12 @@
         UNION
         SELECT
             '0102' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."受給申請年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."jukyuShinseiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請受付件数の場合" />
         <include refid="条件A" />
@@ -472,12 +472,12 @@
         UNION
         SELECT
             '0103' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."受給申請年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."jukyuShinseiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請受付件数の場合" />
         <include refid="条件A" />
@@ -494,12 +494,12 @@
         UNION
         SELECT
             '0104' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."受給申請年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."jukyuShinseiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請受付件数の場合" />
         <include refid="条件A" />
@@ -516,12 +516,12 @@
         UNION
         SELECT
             '0201' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件B" />
@@ -538,12 +538,12 @@
         UNION
         SELECT
             '0202' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件B" />
@@ -560,12 +560,12 @@
         UNION
         SELECT
             '0203' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件B" />
@@ -582,12 +582,12 @@
         UNION
         SELECT
             '0204' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件B" />
@@ -604,12 +604,12 @@
         UNION
         SELECT
             '0301' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,         
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,         
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件C" />
@@ -626,12 +626,12 @@
         UNION
         SELECT
             '0302' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件C" />
@@ -648,12 +648,12 @@
         UNION
         SELECT
             '0303' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件C" />
@@ -670,12 +670,12 @@
         UNION
         SELECT
             '0304' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件C" />
@@ -692,12 +692,12 @@
         UNION
         SELECT
             '0401' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."調査委託年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteichosaIraiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査依頼件数の場合" />
         <include refid="条件A" />
@@ -714,12 +714,12 @@
         UNION
         SELECT
             '0402'AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."調査委託年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteichosaIraiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査依頼件数の場合" />
         <include refid="条件A" />
@@ -736,12 +736,12 @@
         UNION
         SELECT
             '0403' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."調査委託年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteichosaIraiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査依頼件数の場合" />
         <include refid="条件A" />
@@ -758,12 +758,12 @@
         UNION
         SELECT
             '0404' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."調査委託年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteichosaIraiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査依頼件数の場合" />
         <include refid="条件A" />
@@ -781,12 +781,12 @@
         UNION
         SELECT            
             '0501' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定調査予定年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteichosaYoteiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査予定件数の場合" />
         <include refid="条件A" />
@@ -803,12 +803,12 @@
         UNION
         SELECT
             '0502' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定調査予定年月" AS 年月,
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteichosaYoteiYM" AS 年月,
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査予定件数の場合" />
         <include refid="条件A" />
@@ -825,12 +825,12 @@
         UNION
         SELECT            
             '0503' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定調査予定年月" AS 年月,    
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteichosaYoteiYM" AS 年月,    
             COUNT(*) AS 数量 
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査予定件数の場合" />
         <include refid="条件A" />
@@ -847,12 +847,12 @@
         UNION
         SELECT            
             '0504' AS 取得条件, 
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定調査予定年月" AS 年月,    
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteichosaYoteiYM" AS 年月,    
             COUNT(*) AS 数量       
         FROM       
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査予定件数の場合" />
         <include refid="条件A" />
@@ -869,12 +869,12 @@
         UNION
         SELECT           
             '0601' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."調査終了年月" AS 年月,     
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteichosaJisshiYM" AS 年月,     
             COUNT(*) AS 数量      
         FROM           
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査実施件数の場合" />
         <include refid="条件A" />
@@ -891,12 +891,12 @@
         UNION
         SELECT           
             '0602' AS 取得条件, 
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."調査終了年月" AS 年月,     
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteichosaJisshiYM" AS 年月,     
             COUNT(*) AS 数量      
         FROM             
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査実施件数の場合" />
         <include refid="条件A" />
@@ -913,12 +913,12 @@
         UNION
         SELECT            
             '0603' AS 取得条件, 
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."調査終了年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteichosaJisshiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査実施件数の場合" />
         <include refid="条件A" />
@@ -935,12 +935,12 @@
         UNION
         SELECT            
             '0604' AS 取得条件,  
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."調査終了年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteichosaJisshiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査実施件数の場合" />
         <include refid="条件A" />
@@ -957,12 +957,12 @@
         UNION
         SELECT           
             '0701' AS 取得条件, 
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."意見書依頼年月" AS 年月,             
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ikenshoSakuseiIraiYM" AS 年月,             
             COUNT(*) AS 数量       
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書依頼件数の場合" />
         <include refid="条件A" />
@@ -979,12 +979,12 @@
         UNION
         SELECT            
             '0702' AS 取得条件, 
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."意見書依頼年月" AS 年月,             
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ikenshoSakuseiIraiYM" AS 年月,             
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書依頼件数の場合" />
         <include refid="条件A" />
@@ -1001,12 +1001,12 @@
         UNION
         SELECT            
             '0703' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."意見書依頼年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ikenshoSakuseiIraiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書依頼件数の場合" />
         <include refid="条件A" />
@@ -1023,12 +1023,12 @@
         UNION
         SELECT            
             '0704' AS 取得条件, 
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."意見書依頼年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ikenshoSakuseiIraiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書依頼件数の場合" />
         <include refid="条件A" />
@@ -1045,12 +1045,12 @@
         UNION
         SELECT            
             '0801' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."主治医意見書作成依頼予定年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ikenshoSakuseiIraiYoteiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ予定件数の場合" />
         <include refid="条件A" />
@@ -1067,12 +1067,12 @@
         UNION
         SELECT            
             '0802' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."主治医意見書作成依頼予定年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ikenshoSakuseiIraiYoteiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ予定件数の場合" />
         <include refid="条件A" />
@@ -1089,12 +1089,12 @@
         UNION
         SELECT            
             '0803' AS 取得条件, 
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."主治医意見書作成依頼予定年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ikenshoSakuseiIraiYoteiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ予定件数の場合" />
         <include refid="条件A" />
@@ -1111,12 +1111,12 @@
         UNION
         SELECT            
             '0804' AS 取得条件, 
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."主治医意見書作成依頼予定年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ikenshoSakuseiIraiYoteiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ予定件数の場合" />
         <include refid="条件A" />
@@ -1133,12 +1133,12 @@
         UNION
         SELECT            
             '0901' AS 取得条件, 
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."意見書取寄せ年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ikenshoJuryoYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ件数の場合" />
         <include refid="条件A" />
@@ -1155,12 +1155,12 @@
         UNION
         SELECT            
             '0902' AS 取得条件, 
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."意見書取寄せ年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ikenshoJuryoYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ件数の場合" />
         <include refid="条件A" />
@@ -1177,12 +1177,12 @@
         UNION
         SELECT            
             '0903' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."意見書取寄せ年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ikenshoJuryoYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ件数の場合" />
         <include refid="条件A" />
@@ -1199,12 +1199,12 @@
         UNION
         SELECT            
             '0904' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."意見書取寄せ年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ikenshoJuryoYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ件数の場合" />
         <include refid="条件A" />
@@ -1221,12 +1221,12 @@
         UNION
         SELECT            
             '1001' AS 取得条件, 
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."審査会依頼年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."shinsakaiIraiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会依頼件数の場合" />
         <include refid="条件A" />
@@ -1243,12 +1243,12 @@
         UNION
         SELECT            
             '1002' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."審査会依頼年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."shinsakaiIraiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会依頼件数の場合" />
         <include refid="条件A" />
@@ -1265,12 +1265,12 @@
         UNION
         SELECT            
             '1003' AS 取得条件, 
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."審査会依頼年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."shinsakaiIraiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会依頼件数の場合" />
         <include refid="条件A" />
@@ -1287,12 +1287,12 @@
         UNION
         SELECT            
             '1004' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."審査会依頼年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."shinsakaiIraiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会依頼件数の場合" />
         <include refid="条件A" />
@@ -1309,12 +1309,12 @@
         UNION
         SELECT            
             '1101' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定審査会割当予定年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiShinsakaiWariateYoteiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答予定件数の場合" />
         <include refid="条件A" />
@@ -1331,12 +1331,12 @@
         UNION
         SELECT            
             '1102' AS 取得条件, 
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定審査会割当予定年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiShinsakaiWariateYoteiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答予定件数の場合" />
         <include refid="条件A" />
@@ -1353,12 +1353,12 @@
         UNION
         SELECT            
             '1103' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定審査会割当予定年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiShinsakaiWariateYoteiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答予定件数の場合" />
         <include refid="条件A" />
@@ -1375,12 +1375,12 @@
         UNION
         SELECT            
             '1104' AS 取得条件, 
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定審査会割当予定年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiShinsakaiWariateYoteiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答予定件数の場合" />
         <include refid="条件A" />
@@ -1397,12 +1397,12 @@
         UNION
         SELECT            
             '1201' AS 取得条件, 
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."審査会資料作成年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."shinsakaiShiryoSakuseiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答件数の場合" />
         <include refid="条件A" />
@@ -1419,12 +1419,12 @@
         UNION
         SELECT            
             '1202' AS 取得条件, 
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."審査会資料作成年月" AS 年月,             
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."shinsakaiShiryoSakuseiYM" AS 年月,             
             COUNT(*) AS 数量       
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答件数の場合" />
         <include refid="条件A" />
@@ -1441,12 +1441,12 @@
         UNION
         SELECT            
             '1203' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."審査会資料作成年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."shinsakaiShiryoSakuseiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答件数の場合" />
         <include refid="条件A" />
@@ -1463,12 +1463,12 @@
         UNION
         SELECT            
             '1204' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."審査会資料作成年月" AS 年月,              
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."shinsakaiShiryoSakuseiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答件数の場合" />
         <include refid="条件A" />
@@ -1486,12 +1486,12 @@
         UNION
         SELECT
             '0101' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1508,12 +1508,12 @@
         UNION
         SELECT
             '0102' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1530,12 +1530,12 @@
         UNION
         SELECT
             '0103' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1552,12 +1552,12 @@
         UNION
         SELECT
             '0104' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1574,12 +1574,12 @@
         UNION
         SELECT
             '0105' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1596,12 +1596,12 @@
         UNION
         SELECT
             '0106' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1618,12 +1618,12 @@
         UNION
         SELECT
             '0107' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1640,12 +1640,12 @@
         UNION
         SELECT
             '0108' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1662,12 +1662,12 @@
         UNION
         SELECT
             '0109' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1684,12 +1684,12 @@
         UNION
         SELECT
             '0110' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1706,12 +1706,12 @@
         UNION
         SELECT
             '0111' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1728,12 +1728,12 @@
         UNION
         SELECT
             '0112' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1750,12 +1750,12 @@
         UNION
         SELECT
             '0113' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1772,12 +1772,12 @@
         UNION
         SELECT
             '0114' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1794,12 +1794,12 @@
         UNION
         SELECT
             '0115' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1816,12 +1816,12 @@
         UNION
         SELECT
             '0201' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1838,12 +1838,12 @@
         UNION
         SELECT
             '0202' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1860,12 +1860,12 @@
         UNION
         SELECT
             '0203' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1882,12 +1882,12 @@
         UNION
         SELECT
             '0204' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1904,12 +1904,12 @@
         UNION
         SELECT
             '0205' AS 取得条件, 
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1926,12 +1926,12 @@
         UNION
         SELECT
             '0206' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1948,12 +1948,12 @@
         UNION
         SELECT
             '0207' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1970,12 +1970,12 @@
         UNION
         SELECT
             '0208' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1992,12 +1992,12 @@
         UNION
         SELECT
             '0209' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -2014,12 +2014,12 @@
         UNION
         SELECT
             '0210' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -2036,12 +2036,12 @@
         UNION
         SELECT
             '0211' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -2058,12 +2058,12 @@
         UNION
         SELECT
             '0212' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -2080,12 +2080,12 @@
         UNION
         SELECT
             '0213' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -2102,12 +2102,12 @@
         UNION
         SELECT
             '0214' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -2124,12 +2124,12 @@
         UNION
         SELECT
             '0215' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -2146,12 +2146,12 @@
         UNION
         SELECT
             '0301' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2168,12 +2168,12 @@
         UNION
         SELECT
             '0302' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2190,12 +2190,12 @@
         UNION
         SELECT
             '0303' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2212,12 +2212,12 @@
         UNION
         SELECT
             '0304' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2234,12 +2234,12 @@
         UNION
         SELECT
             '0305' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2256,12 +2256,12 @@
         UNION
         SELECT
             '0306' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2278,12 +2278,12 @@
         UNION
         SELECT
             '0307' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2300,12 +2300,12 @@
         UNION
         SELECT
             '0308' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2322,12 +2322,12 @@
         UNION
         SELECT
             '0309' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2344,12 +2344,12 @@
         UNION
         SELECT
             '0310' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2366,12 +2366,12 @@
         UNION
         SELECT
             '0311' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2388,12 +2388,12 @@
         UNION
         SELECT
             '0312' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2410,12 +2410,12 @@
         UNION
         SELECT
             '0313' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2432,12 +2432,12 @@
         UNION
         SELECT
             '0314' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2454,12 +2454,12 @@
         UNION
         SELECT
             '0315' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2476,12 +2476,12 @@
         UNION
         SELECT
             '0401' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2498,12 +2498,12 @@
         UNION
         SELECT
             '0402' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2520,12 +2520,12 @@
         UNION
         SELECT
             '0403' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2542,12 +2542,12 @@
         UNION
         SELECT
             '0404' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2564,12 +2564,12 @@
         UNION
         SELECT
             '0405' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2586,12 +2586,12 @@
         UNION
         SELECT
             '0406' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2608,12 +2608,12 @@
         UNION
         SELECT
             '0407' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2630,12 +2630,12 @@
         UNION
         SELECT
             '0408' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2652,12 +2652,12 @@
         UNION
         SELECT
             '0409' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2674,12 +2674,12 @@
         UNION
         SELECT
             '0410' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2696,12 +2696,12 @@
         UNION
         SELECT
             '0411' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2718,12 +2718,12 @@
         UNION
         SELECT
             '0412' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2740,12 +2740,12 @@
         UNION
         SELECT
             '0413' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2762,12 +2762,12 @@
         UNION
         SELECT
             '0414' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2784,12 +2784,12 @@
         UNION
         SELECT
             '0415' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2806,12 +2806,12 @@
         UNION
         SELECT
             '0501' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2828,12 +2828,12 @@
         UNION
         SELECT
             '0502' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2850,12 +2850,12 @@
         UNION
         SELECT
             '0503' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2872,12 +2872,12 @@
         UNION
         SELECT
             '0504' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2894,12 +2894,12 @@
         UNION
         SELECT
             '0505' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2916,12 +2916,12 @@
         UNION
         SELECT
             '0506' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2938,12 +2938,12 @@
         UNION
         SELECT
             '0507' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2960,12 +2960,12 @@
         UNION
         SELECT
             '0508' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2982,12 +2982,12 @@
         UNION
         SELECT
             '0509' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -3004,12 +3004,12 @@
         UNION
         SELECT
             '0510' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -3026,12 +3026,12 @@
         UNION
         SELECT
             '0511' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -3048,12 +3048,12 @@
         UNION
         SELECT
             '0512' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -3070,12 +3070,12 @@
         UNION
         SELECT
             '0513' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -3092,12 +3092,12 @@
         UNION
         SELECT
             '0514' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -3114,12 +3114,12 @@
         UNION
         SELECT
             '0515' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -3136,12 +3136,12 @@
         UNION
         SELECT
             '0601' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3158,12 +3158,12 @@
         UNION
         SELECT
             '0602' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3180,12 +3180,12 @@
         UNION
         SELECT
             '0603' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3202,12 +3202,12 @@
         UNION
         SELECT
             '0604' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3224,12 +3224,12 @@
         UNION
         SELECT
             '0605' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3246,12 +3246,12 @@
         UNION
         SELECT
             '0606' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3268,12 +3268,12 @@
         UNION
         SELECT
             '0607' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3290,12 +3290,12 @@
         UNION
         SELECT
             '0608' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3312,12 +3312,12 @@
         UNION
         SELECT
             '0609' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3334,12 +3334,12 @@
         UNION
         SELECT
             '0610' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3356,12 +3356,12 @@
         UNION
         SELECT
             '0611' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3378,12 +3378,12 @@
         UNION
         SELECT
             '0612' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3400,12 +3400,12 @@
         UNION
         SELECT
             '0613' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3422,12 +3422,12 @@
         UNION
         SELECT
             '0614' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3444,12 +3444,12 @@
         UNION
         SELECT
             '0615' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3466,12 +3466,12 @@
         UNION
         SELECT
             '0701' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3488,12 +3488,12 @@
         UNION
         SELECT
             '0702' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3510,12 +3510,12 @@
         UNION
         SELECT
             '0703' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3532,12 +3532,12 @@
         UNION
         SELECT
             '0704' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3554,12 +3554,12 @@
         UNION
         SELECT
             '0705' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3576,12 +3576,12 @@
         UNION
         SELECT
             '0706' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3598,12 +3598,12 @@
         UNION
         SELECT
             '0707' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3620,12 +3620,12 @@
         UNION
         SELECT
             '0708' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3642,12 +3642,12 @@
         UNION
         SELECT
             '0709' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3664,12 +3664,12 @@
         UNION
         SELECT
             '0710'AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3686,12 +3686,12 @@
         UNION
         SELECT
             '0711' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3708,12 +3708,12 @@
         UNION
         SELECT
             '0712' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3730,12 +3730,12 @@
         UNION
         SELECT
             '0713' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3752,12 +3752,12 @@
         UNION
         SELECT
             '0714' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3774,12 +3774,12 @@
         UNION
         SELECT
             '0715' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3796,12 +3796,12 @@
         UNION
         SELECT
             '0801' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -3818,12 +3818,12 @@
         UNION
         SELECT
             '0802' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -3840,12 +3840,12 @@
         UNION
         SELECT
             '0803' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -3862,12 +3862,12 @@
         UNION
         SELECT
             '0804' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -3884,12 +3884,12 @@
         UNION
         SELECT
             '0805' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -3906,12 +3906,12 @@
         UNION
         SELECT
             '0806' AS 取得条件,
-            A."認定年月" AS 年月, 
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
+            A."ninteiYM" AS 年月, 
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -3928,12 +3928,12 @@
         UNION
         SELECT
             '0807' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -3950,12 +3950,12 @@
         UNION
         SELECT
             '0808' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -3972,12 +3972,12 @@
         UNION
         SELECT
             '0809' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -3994,12 +3994,12 @@
         UNION
         SELECT
             '0810' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -4016,12 +4016,12 @@
         UNION
         SELECT
             '0811' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -4038,12 +4038,12 @@
         UNION
         SELECT
             '0812' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -4060,12 +4060,12 @@
         UNION
         SELECT
             '0813' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -4082,12 +4082,12 @@
         UNION
         SELECT
             '0814' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -4104,12 +4104,12 @@
         UNION
         SELECT
             '0815' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -4126,12 +4126,12 @@
         UNION
         SELECT
             '0901' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4148,12 +4148,12 @@
         UNION
         SELECT
             '0902' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4170,12 +4170,12 @@
         UNION
         SELECT
             '0903' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4192,12 +4192,12 @@
         UNION
         SELECT
             '0904' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4214,12 +4214,12 @@
         UNION
         SELECT
             '0905' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4236,12 +4236,12 @@
         UNION
         SELECT
             '0906' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4258,12 +4258,12 @@
         UNION
         SELECT
             '0907' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4280,12 +4280,12 @@
         UNION
         SELECT
             '0908' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4302,12 +4302,12 @@
         UNION
         SELECT
             '0909' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4324,12 +4324,12 @@
         UNION
         SELECT
             '0910' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4346,12 +4346,12 @@
         UNION
         SELECT
             '0911' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4368,12 +4368,12 @@
         UNION
         SELECT
             '0912' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4390,12 +4390,12 @@
         UNION
         SELECT
             '0913' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4412,12 +4412,12 @@
         UNION
         SELECT
             '0914' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4434,12 +4434,12 @@
         UNION
         SELECT
             '0915' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4456,15 +4456,15 @@
         UNION
         SELECT
             '1001' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
-        <include refid="条件E" />
+        <include refid="条件F" />
         <include refid="旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
     </sql> 
@@ -4478,15 +4478,15 @@
         UNION
         SELECT
             '1002' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
-        <include refid="条件E" />
+        <include refid="条件F" />
         <include refid="新規のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
     </sql> 
@@ -4500,15 +4500,15 @@
         UNION
         SELECT
             '1003' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
-        <include refid="条件E" />
+        <include refid="条件F" />
         <include refid="新規旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
     </sql> 
@@ -4522,15 +4522,15 @@
         UNION
         SELECT
             '1004' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
-        <include refid="条件E" />
+        <include refid="条件F" />
         <include refid="新規要支援のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
@@ -4544,15 +4544,15 @@
         UNION
         SELECT
             '1005' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
-        <include refid="条件E" />
+        <include refid="条件F" />
         <include refid="新規要支援旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
@@ -4566,15 +4566,15 @@
         UNION
         SELECT
             '1006' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
-        <include refid="条件E" />
+        <include refid="条件F" />
         <include refid="更新のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
@@ -4588,15 +4588,15 @@
         UNION
         SELECT
             '1007' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
-        <include refid="条件E" />
+        <include refid="条件F" />
         <include refid="更新旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
@@ -4610,15 +4610,15 @@
         UNION
         SELECT
             '1008' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
-        <include refid="条件E" />
+        <include refid="条件F" />
         <include refid="区分変更のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
@@ -4632,15 +4632,15 @@
         UNION
         SELECT
             '1009' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
-        <include refid="条件E" />
+        <include refid="条件F" />
         <include refid="区分変更旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
@@ -4654,15 +4654,15 @@
         UNION
         SELECT
             '1010' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
-        <include refid="条件E" />
+        <include refid="条件F" />
         <include refid="転入のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
@@ -4676,15 +4676,15 @@
         UNION
         SELECT
             '1011' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
-        <include refid="条件E" />
+        <include refid="条件F" />
         <include refid="転入旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
@@ -4698,15 +4698,15 @@
         UNION
         SELECT
             '1012' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
-        <include refid="条件E" />
+        <include refid="条件F" />
         <include refid="職権他のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
@@ -4720,15 +4720,15 @@
         UNION
         SELECT
             '1013' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
-        <include refid="条件E" />
+        <include refid="条件F" />
         <include refid="職権他旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
@@ -4742,15 +4742,15 @@
         UNION
         SELECT
             '1014' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
-        <include refid="条件E" />
+        <include refid="条件F" />
         <include refid="資格喪失のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
@@ -4764,234 +4764,234 @@
         UNION
         SELECT
             '1015' AS 取得条件,
-            A."市町村コード" AS 市町村コード,
-            A."市町村名" AS 市町村名,
-            A."認定年月" AS 年月,  
+            A."shichosonCode" AS 市町村コード,
+            A."shichosonMeisho" AS 市町村名,
+            A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
-        <include refid="条件E" />
+        <include refid="条件F" />
         <include refid="資格喪失旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     
     <sql id="申請受付件数の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."受給申請年月日"
-        AND A."受給申請年月日" <![CDATA[<=]]> #{対象年月日To}
+        #{対象年月日From} <![CDATA[<=]]> A."jukyuShinseiYMD"
+        AND A."jukyuShinseiYMD" <![CDATA[<=]]> #{対象年月日To}
     </sql>
     <sql id="申請取下げ件数、申請却下件数、認定件数の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."認定年月日"
-        AND A."認定年月日" <![CDATA[<=]]> #{対象年月日To}
+        #{対象年月日From} <![CDATA[<=]]> A."ninteiYMD"
+        AND A."ninteiYMD" <![CDATA[<=]]> #{対象年月日To}
     </sql>
     <sql id="要介護度1の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."認定年月日"
-        AND A."認定年月日" <![CDATA[<=]]> #{対象年月日To}
-        AND A."要介護認定状態区分コード" = '21'
+        #{対象年月日From} <![CDATA[<=]]> A."ninteiYMD"
+        AND A."ninteiYMD" <![CDATA[<=]]> #{対象年月日To}
+        AND A."yokaigoJotaiKubunCode" = '21'
     </sql>
     <sql id="要介護度2の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."認定年月日"
-        AND A."認定年月日" <![CDATA[<=]]> #{対象年月日To}
-        AND A."要介護認定状態区分コード" = '22'
+        #{対象年月日From} <![CDATA[<=]]> A."ninteiYMD"
+        AND A."ninteiYMD" <![CDATA[<=]]> #{対象年月日To}
+        AND A."yokaigoJotaiKubunCode" = '22'
     </sql>
     <sql id="要介護度3の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."認定年月日"
-        AND A."認定年月日" <![CDATA[<=]]> #{対象年月日To}
-        AND A."要介護認定状態区分コード" = '23'
+        #{対象年月日From} <![CDATA[<=]]> A."ninteiYMD"
+        AND A."ninteiYMD" <![CDATA[<=]]> #{対象年月日To}
+        AND A."yokaigoJotaiKubunCode" = '23'
     </sql>
     <sql id="要介護度4の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."認定年月日"
-        AND A."認定年月日" <![CDATA[<=]]> #{対象年月日To}
-        AND A."要介護認定状態区分コード" = '24'
+        #{対象年月日From} <![CDATA[<=]]> A."ninteiYMD"
+        AND A."ninteiYMD" <![CDATA[<=]]> #{対象年月日To}
+        AND A."yokaigoJotaiKubunCode" = '24'
     </sql>
     <sql id="要介護度5の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."認定年月日"
-        AND A."認定年月日" <![CDATA[<=]]> #{対象年月日To}
-        AND A."要介護認定状態区分コード" = '25'
+        #{対象年月日From} <![CDATA[<=]]> A."ninteiYMD"
+        AND A."ninteiYMD" <![CDATA[<=]]> #{対象年月日To}
+        AND A."yokaigoJotaiKubunCode" = '25'
     </sql>
     <sql id="要支援1の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."認定年月日"
-        AND A."認定年月日" <![CDATA[<=]]> #{対象年月日To}
-        AND A."要介護認定状態区分コード" = '12'
+        #{対象年月日From} <![CDATA[<=]]> A."ninteiYMD"
+        AND A."ninteiYMD" <![CDATA[<=]]> #{対象年月日To}
+        AND A."yokaigoJotaiKubunCode" = '12'
     </sql>
     <sql id="要支援2の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."認定年月日"
-        AND A."認定年月日" <![CDATA[<=]]> #{対象年月日To}
-        AND A."要介護認定状態区分コード" = '13'
+        #{対象年月日From} <![CDATA[<=]]> A."ninteiYMD"
+        AND A."ninteiYMD" <![CDATA[<=]]> #{対象年月日To}
+        AND A."yokaigoJotaiKubunCode" = '13'
     </sql>
     <sql id="要支援の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."認定年月日"
-        AND A."認定年月日" <![CDATA[<=]]> #{対象年月日To}
-        AND A."要介護認定状態区分コード" = '11'
+        #{対象年月日From} <![CDATA[<=]]> A."ninteiYMD"
+        AND A."ninteiYMD" <![CDATA[<=]]> #{対象年月日To}
+        AND A."yokaigoJotaiKubunCode" = '11'
     </sql>
     <sql id="自立の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."認定年月日"
-        AND A."認定年月日" <![CDATA[<=]]> #{対象年月日To}
-        AND A."要介護認定状態区分コード" = '01'
+        #{対象年月日From} <![CDATA[<=]]> A."ninteiYMD"
+        AND A."ninteiYMD" <![CDATA[<=]]> #{対象年月日To}
+        AND A."yokaigoJotaiKubunCode" = '01'
     </sql>
     <sql id="調査依頼件数の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."調査委託年月日"
-        AND A."調査委託年月日" <![CDATA[<=]]> #{対象年月日To}
+        #{対象年月日From} <![CDATA[<=]]> A."ninteichosaIraiYMD"
+        AND A."ninteichosaIraiYMD" <![CDATA[<=]]> #{対象年月日To}
     </sql>
     <sql id="調査実施件数の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."調査終了年月日"
-        AND A."調査委託年月日" <![CDATA[<=]]> #{対象年月日To}
+        #{対象年月日From} <![CDATA[<=]]> A."ninteichosaJisshiYMD"
+        AND A."ninteichosaJisshiYMD" <![CDATA[<=]]> #{対象年月日To}
     </sql>
     <sql id="意見書依頼件数の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."意見書依頼年月日"
-        AND A."意見書依頼年月日" <![CDATA[<=]]> #{対象年月日To}
+        #{対象年月日From} <![CDATA[<=]]> A."ikenshoSakuseiIraiYMD"
+        AND A."ikenshoSakuseiIraiYMD" <![CDATA[<=]]> #{対象年月日To}
     </sql>
     <sql id="意見書取寄せ件数の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."意見書取寄せ年月日"
-        AND A."意見書取寄せ年月日" <![CDATA[<=]]> #{対象年月日To}
+        #{対象年月日From} <![CDATA[<=]]> A."ikenshoJuryoYMD"
+        AND A."ikenshoJuryoYMD" <![CDATA[<=]]> #{対象年月日To}
     </sql>
     <sql id="審査会依頼件数の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."審査会依頼年月日"
-        AND A."審査会依頼年月日" <![CDATA[<=]]> #{対象年月日To}
+        #{対象年月日From} <![CDATA[<=]]> A."shinsakaiIraiYMD"
+        AND A."shinsakaiIraiYMD" <![CDATA[<=]]> #{対象年月日To}
     </sql>
     <sql id="審査会回答予定件数の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."認定審査会割当予定年月日"
-        AND A."認定審査会割当予定年月日" <![CDATA[<=]]> #{対象年月日To}
+        #{対象年月日From} <![CDATA[<=]]> A."ninteiShinsakaiWariateYoteiYMD"
+        AND A."ninteiShinsakaiWariateYoteiYMD" <![CDATA[<=]]> #{対象年月日To}
     </sql>
     <sql id="審査会回答件数の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."審査会資料作成年月日"
-        AND A."審査会資料作成年月日" <![CDATA[<=]]> #{対象年月日To}
+        #{対象年月日From} <![CDATA[<=]]> A."shinsakaiShiryoSakuseiYMD"
+        AND A."shinsakaiShiryoSakuseiYMD" <![CDATA[<=]]> #{対象年月日To}
     </sql>
     <sql id="調査予定件数の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."認定調査予定年月日"
-        AND A."認定調査予定年月日" <![CDATA[<=]]> #{対象年月日To}
+        #{対象年月日From} <![CDATA[<=]]> A."ninteichosaYoteiYMD"
+        AND A."ninteichosaYoteiYMD" <![CDATA[<=]]> #{対象年月日To}
     </sql>
     <sql id="意見書取寄せ予定件数の場合">
-        #{対象年月日From} <![CDATA[<=]]> A."主治医意見書作成依頼予定年月日"
-        AND A."主治医意見書作成依頼予定年月日" <![CDATA[<=]]> #{対象年月日To}
+        #{対象年月日From} <![CDATA[<=]]> A."ikenshoSakuseiIraiYoteiYMD"
+        AND A."ikenshoSakuseiIraiYoteiYMD" <![CDATA[<=]]> #{対象年月日To}
     </sql>
     
     <sql id="条件A">
-        AND (A."データ区分" IN ('31','32','33','34','35','36','37','39')
-            OR  A."データ区分" IN ('41','42','43','44','45','49')
-            AND A."受給申請事由" != '7'
+        AND (A."dataKubun" IN ('31','32','33','34','35','36','37','39')
+            OR  A."dataKubun" IN ('41','42','43','44','45','49')
+            AND A."jukyuShinseiJiyu" != '7'
         )
     </sql>
     <sql id="条件B">
-        AND (A."データ区分" IN ('41','42','43','44','45','49')
-            AND A."受給申請事由" != '7'
+        AND (A."dataKubun" IN ('41','42','43','44','45','49')
+            AND A."jukyuShinseiJiyu" != '7'
         )
     </sql>
     <sql id="条件C">
-        AND (A."データ区分" IN ('31','32','33','34','35','36','37','39')
-            AND A."受給申請事由" != '7'
+        AND (A."dataKubun" IN ('31','32','33','34','35','36','37','39')
+            AND A."jukyuShinseiJiyu" != '7'
         )
     </sql>
     <sql id="条件D">
-        AND (A."データ区分" IN ('11','12','13','14','15','19')
-            OR(A."データ区分" IN ('21','22','23','24','25','29')
-            AND(A."有効無効区分無効"='1' 
-            OR (A."有効無効区分無効"='2'
-            AND A."要介護認定状態区分コード"='01'
-            AND A."資格喪失年月日" IS NULL)))
+        AND (A."dataKubun" IN ('11','12','13','14','15','19')
+            OR(A."dataKubun" IN ('21','22','23','24','25','29')
+            AND(A."yukoMukoKubun"='1' 
+            OR (A."yukoMukoKubun"='2'
+            AND A."yokaigoJotaiKubunCode"='01'
+            AND A."shikakuSoshitsuYMD" IS NULL)))
         )
     </sql>
     <sql id="条件E">
-        AND (A."データ区分" IN ('11','12','13','14','15','19')
-            OR(A."データ区分" IN ('21','22','23','24','25','29')
-            AND A."有効無効区分無効"='1' )
+        AND (A."dataKubun" IN ('11','12','13','14','15','19')
+            OR(A."dataKubun" IN ('21','22','23','24','25','29')
+            AND A."yukoMukoKubun"='1' )
         )
     </sql>
     <sql id="条件F">
-        AND( A."データ区分" IN ('11','12','13','14','15','19')
-            OR(A."データ区分" IN ('21','22','23','24','25','29')
-            AND A."資格喪失年月日" IS NULL)
+        AND( A."dataKubun" IN ('11','12','13','14','15','19')
+            OR(A."dataKubun" IN ('21','22','23','24','25','29')
+            AND A."shikakuSoshitsuYMD" IS NULL)
         )
     </sql>
     <sql id="新規のデータ取得">
-         AND((A."受給申請事由"='1'
-         OR A."受給申請事由"='3')
-         OR (A."受給申請事由"='4'
-         AND A."要支援者認定申請区分以外"=TRUE)
-         OR  (A."受給申請事由"='6'))
+         AND((A."jukyuShinseiJiyu"='1'
+         OR A."jukyuShinseiJiyu"='3')
+         OR (A."jukyuShinseiJiyu"='4'
+         AND A."yoshienshaNinteiShinseiFlag"=TRUE)
+         OR  (A."jukyuShinseiJiyu"='6'))
     </sql>
     <sql id="要支援のデータ取得">
-        AND A."受給申請事由"='4'
-        AND A."要支援者認定申請区分以外"=TRUE
+        AND A."jukyuShinseiJiyu"='4'
+        AND A."yoshienshaNinteiShinseiFlag"=TRUE
     </sql>
     <sql id="更新のデータ取得">
-         AND A."受給申請事由"='2'
+         AND A."jukyuShinseiJiyu"='2'
     </sql>
     <sql id="区分変更のデータ取得">
-        AND A."受給申請事由"='4'
-        AND A."要支援者認定申請区分以外" IS NULL
+        AND A."jukyuShinseiJiyu"='4'
+        AND A."yoshienshaNinteiShinseiFlag" IS NULL
     </sql>
     <sql id="旧措置のデータ取得2">
-        AND A."旧措置者フラグ" ='1'
+        AND A."kyuSochishaFlag" ='1'
     </sql>
     <sql id="新規のデータ取得2">
-        AND ((A."受給申請事由"='1'
-        OR A."受給申請事由"='3')
-        OR(A."受給申請事由"='4'
-        AND A."要支援者認定申請区分以外" = TRUE)
-        OR  (A."受給申請事由"='6'))
+        AND ((A."jukyuShinseiJiyu"='1'
+        OR A."jukyuShinseiJiyu"='3')
+        OR(A."jukyuShinseiJiyu"='4'
+        AND A."yoshienshaNinteiShinseiFlag" = TRUE)
+        OR  (A."jukyuShinseiJiyu"='6'))
     </sql>
     <sql id="新規旧措置のデータ取得2">
-        AND ((A."受給申請事由"='1'
-        OR A."受給申請事由"='3')
-        OR(A."受給申請事由"='4'
-        AND A."要支援者認定申請区分以外" = TRUE)
-        OR  (A."受給申請事由"='6'))
-        AND A."旧措置者フラグ" ='1'
+        AND ((A."jukyuShinseiJiyu"='1'
+        OR A."jukyuShinseiJiyu"='3')
+        OR(A."jukyuShinseiJiyu"='4'
+        AND A."yoshienshaNinteiShinseiFlag" = TRUE)
+        OR  (A."jukyuShinseiJiyu"='6'))
+        AND A."kyuSochishaFlag" ='1'
     </sql>
     <sql id="新規要支援のデータ取得2">
-        AND A."受給申請事由"='4'
-        AND A."要支援者認定申請区分以外"=TRUE
+        AND A."jukyuShinseiJiyu"='4'
+        AND A."yoshienshaNinteiShinseiFlag"=TRUE
     </sql>
     <sql id="新規要支援旧措置のデータ取得2">
-        AND A."受給申請事由"='4'
-        AND A."要支援者認定申請区分以外"=TRUE
-        AND A."旧措置者フラグ" ='1'
+        AND A."jukyuShinseiJiyu"='4'
+        AND A."yoshienshaNinteiShinseiFlag"=TRUE
+        AND A."kyuSochishaFlag" ='1'
     </sql>
     <sql id="更新のデータ取得2">
-        AND A."受給申請事由"='2'
+        AND A."jukyuShinseiJiyu"='2'
     </sql>
     <sql id="更新旧措置のデータ取得2">
-        AND A."受給申請事由"='2'
-        AND A."旧措置者フラグ" ='1'    
+        AND A."jukyuShinseiJiyu"='2'
+        AND A."kyuSochishaFlag" ='1'    
     </sql>
     <sql id="区分変更のデータ取得2">
-        AND A."受給申請事由"='4'
-        AND A."要支援者認定申請区分以外" IS NULL
+        AND A."jukyuShinseiJiyu"='4'
+        AND A."yoshienshaNinteiShinseiFlag" IS NULL
     </sql>
     <sql id="区分変更旧措置のデータ取得2">
-        AND A."受給申請事由"='4'
-        AND A."要支援者認定申請区分以外" IS NULL
-        AND A."旧措置者フラグ" ='1'
+        AND A."jukyuShinseiJiyu"='4'
+        AND A."yoshienshaNinteiShinseiFlag" IS NULL
+        AND A."kyuSochishaFlag" ='1'
     </sql>
     <sql id="転入のデータ取得2">
-        AND A."受給申請事由"='7'
-        AND A."データ区分"=''
+        AND A."jukyuShinseiJiyu"='7'
+        AND A."dataKubun"=''
     </sql>
     <sql id="転入旧措置のデータ取得2">
-        AND A."受給申請事由"='7'
-        AND A."データ区分"=''
-        AND A."旧措置者フラグ" ='1'
+        AND A."jukyuShinseiJiyu"='7'
+        AND A."dataKubun"=''
+        AND A."kyuSochishaFlag" ='1'
     </sql>
     <sql id="職権他のデータ取得2">
-        AND (A."受給申請事由"='7'
-        AND A."データ区分" IN ('11','12','13','14','15','19'))
-        AND A."データ区分" IN ('21','22','23','24','25','29')
+        AND (A."jukyuShinseiJiyu"='7'
+        AND A."dataKubun" IN ('11','12','13','14','15','19'))
+        AND A."dataKubun" IN ('21','22','23','24','25','29')
     </sql>
     <sql id="職権他旧措置のデータ取得2">
-        AND (A."受給申請事由"='7'
-        AND A."データ区分" IN ('11','12','13','14','15','19'))
-        AND A."データ区分" IN ('21','22','23','24','25','29')
-        AND A."旧措置者フラグ" ='1'
+        AND (A."jukyuShinseiJiyu"='7'
+        AND A."dataKubun" IN ('11','12','13','14','15','19'))
+        AND A."dataKubun" IN ('21','22','23','24','25','29')
+        AND A."kyuSochishaFlag" ='1'
     </sql>
     <sql id="資格喪失のデータ取得2">
-        AND (A."資格喪失年月日" IS NULL
-        AND substring(A."資格喪失年月日",0,7) = A."認定年月")
+        AND (A."shikakuSoshitsuYMD" IS NULL
+        AND substring(A."shikakuSoshitsuYMD",0,7) = A."ninteiYM")
     </sql>
     <sql id="資格喪失旧措置のデータ取得2">
-        AND (A."資格喪失年月日" IS NULL
-        AND substring(A."資格喪失年月日",0,7) = A."認定年月")
-        AND A."旧措置者フラグ" ='1'
+        AND (A."shikakuSoshitsuYMD" IS NULL
+        AND substring(A."shikakuSoshitsuYMD",0,7) = A."ninteiYM")
+        AND A."kyuSochishaFlag" ='1'
     </sql>    
 </mapper>

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd8100203;
 
-import static jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd8100201.HikazeiNennkinTaishouSyaJohoTorikomiFlow.HIKAZENENKINTAISHOSHADOUTEIFLOW;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100203.HikazeiNennkinnTaishousyaUpdateProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100203.MiDouteiDataCreateProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100203.SokyuuFuicchiCsvProcess;
@@ -17,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 遡及非課税年金対象者同定フロークラスです．
@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
  * @reamsid_L DBD-4910-050 x_lilh
  */
 public class SokyuHikazeiNenkinTaishousyaDouteiFlow extends BatchFlowBase<SokyuHikazeiNenkinBatchParameter> {
+
+    public static final RString HIKAIFLOW = new RString("HikazeNenkinTaishoshaDouteiFlow");
 
     private static final String 未同定データ作成 = "未同定データ作成";
     private static final String 非課税年金対象者同定 = "非課税年金対象者同定";
@@ -59,7 +61,7 @@ public class SokyuHikazeiNenkinTaishousyaDouteiFlow extends BatchFlowBase<SokyuH
      */
     @Step(非課税年金対象者同定)
     protected IBatchFlowCommand callHikazeNenkinTaishoshaDouteiFlow() {
-        return otherBatchFlow(HIKAZENENKINTAISHOSHADOUTEIFLOW, SubGyomuCode.DBD介護受給,
+        return otherBatchFlow(HIKAIFLOW, SubGyomuCode.DBD介護受給,
                 createHikazeNenkinTaishoshaDouteiBatchParameter()).define();
     }
 

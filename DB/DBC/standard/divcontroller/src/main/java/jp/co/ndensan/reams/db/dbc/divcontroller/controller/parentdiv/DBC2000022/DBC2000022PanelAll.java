@@ -128,7 +128,7 @@ public class DBC2000022PanelAll {
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnClear(DBC2000022PanelAllDiv div) {
         RString 処理モード = get処理モード();
-        if (DBC2000022StateName.修正.getName().equals(処理モード) && データ項目変更判定()) {
+        if (DBC2000022StateName.修正.getName().equals(処理モード) && データ項目変更判定(div)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.編集クリア確認.getMessage().getCode(),
@@ -272,6 +272,7 @@ public class DBC2000022PanelAll {
      * @return ResponseData<DBC2000022PanelAllDiv>
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnKakutei(DBC2000022PanelAllDiv div) {
+        dgFutanWariai_Row rowData = div.getDgFutanWariai().getClickedItem();
         ValidationMessageControlPairs validPairs = getCheckHandler(div).入力チェック();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -279,9 +280,10 @@ public class DBC2000022PanelAll {
         RiyoshaFutanWariai 利用者負担割合 = ViewStateHolder.get(ViewStateKeys.利用者負担割合, RiyoshaFutanWariai.class);
         FutanWariaiSokujiKouseiHolder holder
                 = ViewStateHolder.get(ViewStateKeys.利用者負担割合明細, FutanWariaiSokujiKouseiHolder.class);
-        getHandler(div).onClick_btnKakutei(利用者負担割合);
+        getHandler(div).onClick_btnKakutei();
         ValidationMessageControlPairs validPairs2 = getCheckHandler(div).開始終了チェック();
         if (validPairs2.iterator().hasNext()) {
+            reset(rowData, div);
             return ResponseData.of(div).addValidationMessages(validPairs2).respond();
         }
         getHandler(div).kakuteiShori(利用者負担割合, holder);
@@ -334,7 +336,7 @@ public class DBC2000022PanelAll {
             if (validPairs2.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs2).respond();
             }
-            if (データ項目変更判定()) {
+            if (データ項目変更判定(div)) {
                 getHandler(div).onClick_btnUpdate(資格対象者.get識別コード(),
                         利用者負担割合,
                         holder.get利用者負担割合明細(),
@@ -402,7 +404,7 @@ public class DBC2000022PanelAll {
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnReSearch(DBC2000022PanelAllDiv div) {
         RString 処理モード = get処理モード();
-        if (DBC2000022StateName.新規.getName().equals(処理モード) && !ResponseHolder.isReRequest()) {
+        if (DBC2000022StateName.新規.getName().equals(処理モード)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
                         UrQuestionMessages.確認_汎用.getMessage().getCode(),
@@ -416,7 +418,7 @@ public class DBC2000022PanelAll {
             }
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
-            if (!データ項目変更判定()) {
+            if (!データ項目変更判定(div)) {
                 前排他キーの解除();
                 return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.再検索).respond();
             }
@@ -430,6 +432,10 @@ public class DBC2000022PanelAll {
                 前排他キーの解除();
                 return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.再検索).respond();
             }
+        }
+        if (DBC2000022StateName.照会.getName().equals(処理モード)) {
+            前排他キーの解除();
+            return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.再検索).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -442,7 +448,7 @@ public class DBC2000022PanelAll {
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnSearchResult(DBC2000022PanelAllDiv div) {
         RString 処理モード = get処理モード();
-        if (DBC2000022StateName.新規.getName().equals(処理モード) && !ResponseHolder.isReRequest()) {
+        if (DBC2000022StateName.新規.getName().equals(処理モード)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
                         UrQuestionMessages.確認_汎用.getMessage().getCode(),
@@ -456,7 +462,7 @@ public class DBC2000022PanelAll {
             }
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
-            if (!データ項目変更判定()) {
+            if (!データ項目変更判定(div)) {
                 前排他キーの解除();
                 return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.検索結果一覧).respond();
             }
@@ -471,6 +477,10 @@ public class DBC2000022PanelAll {
                 return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.検索結果一覧).respond();
             }
         }
+        if (DBC2000022StateName.照会.getName().equals(処理モード)) {
+            前排他キーの解除();
+            return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.検索結果一覧).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -482,7 +492,7 @@ public class DBC2000022PanelAll {
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnBack(DBC2000022PanelAllDiv div) {
         RString 処理モード = get処理モード();
-        if (DBC2000022StateName.新規.getName().equals(処理モード) && !ResponseHolder.isReRequest()) {
+        if (DBC2000022StateName.新規.getName().equals(処理モード)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
                         UrQuestionMessages.確認_汎用.getMessage().getCode(),
@@ -496,7 +506,7 @@ public class DBC2000022PanelAll {
             }
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
-            if (!データ項目変更判定()) {
+            if (!データ項目変更判定(div)) {
                 前排他キーの解除();
                 return ResponseData.of(div).forwardWithEventName(DBC2000022TransitionEventName.戻る).respond();
             }
@@ -535,11 +545,14 @@ public class DBC2000022PanelAll {
         return finder.get利用者負担割合情報(mybatisParameter);
     }
 
-    private boolean データ項目変更判定() {
+    private boolean データ項目変更判定(DBC2000022PanelAllDiv div) {
         RiyoshaFutanWariai 利用者負担割合 = ViewStateHolder.get(ViewStateKeys.利用者負担割合, RiyoshaFutanWariai.class);
         FutanWariaiSokujiKouseiHolder holder
                 = ViewStateHolder.get(ViewStateKeys.利用者負担割合明細, FutanWariaiSokujiKouseiHolder.class);
         if (利用者負担割合 != null && 利用者負担割合.hasChanged()) {
+            return true;
+        }
+        if (holder != null && holder.get利用者負担割合明細().size() != div.getDgFutanWariai().getTotalRecords()) {
             return true;
         }
         if (holder != null && holder.get利用者負担割合明細() != null) {
@@ -550,6 +563,23 @@ public class DBC2000022PanelAll {
             }
         }
         return false;
+    }
+
+    private void reset(dgFutanWariai_Row rowData, DBC2000022PanelAllDiv div) {
+        div.getDgFutanWariai().getClickedItem().setShikakuCode(rowData.getShikakuCode());
+        div.getDgFutanWariai().getClickedItem().setFutanWariaiCode(rowData.getFutanWariaiCode());
+        div.getDgFutanWariai().getClickedItem().setShikaku(rowData.getShikaku());
+        div.getDgFutanWariai().getClickedItem().setFutanWariai(rowData.getFutanWariai());
+        div.getDgFutanWariai().getClickedItem().getTekiyoKaishibi().setValue(rowData.getTekiyoKaishibi().getValue());
+        div.getDgFutanWariai().getClickedItem().getTekiyoShuryobi().setValue(rowData.getTekiyoShuryobi().getValue());
+        div.getDgFutanWariai().getClickedItem().getGokeiShotoku().setValue(rowData.getGokeiShotoku().getValue());
+        div.getDgFutanWariai().getClickedItem().getSetaiinsu().setValue(rowData.getSetaiinsu().getValue());
+        div.getDgFutanWariai().getClickedItem().getNenkinShunyuGokei().setValue(rowData.getNenkinShunyuGokei().getValue());
+        div.getDgFutanWariai().getClickedItem().getSonotaGokeiShotoku().setValue(rowData.getSonotaGokeiShotoku().getValue());
+        div.getDgFutanWariai().getClickedItem().setBiko(rowData.getBiko());
+        if (!RowState.Added.equals(rowData.getRowState())) {
+            div.getDgFutanWariai().getClickedItem().setRowState(RowState.Modified);
+        }
     }
 
     private RiyoshaFutanWariaiSokujiKouseiPanelValidationHandler getCheckHandler(DBC2000022PanelAllDiv div) {

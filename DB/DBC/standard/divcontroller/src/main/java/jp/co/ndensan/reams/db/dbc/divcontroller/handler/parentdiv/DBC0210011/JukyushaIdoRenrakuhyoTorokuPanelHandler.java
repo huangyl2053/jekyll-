@@ -108,15 +108,14 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
         if (RString.isNullOrEmpty(result.get利用者負担割合有効終了日())) {
             resultEdit = resultEdit.set利用者負担割合有効終了日(半角アスタリスク);
         }
-        edit番号(result);
-        edit開始終了年月日(result);
-        edit限度額(result);
+        edit番号(result, resultEdit);
+        edit開始終了年月日(result, resultEdit);
+        edit限度額(result, resultEdit);
         result = resultEdit.build();
         return result;
     }
 
-    private void edit限度額(JukyushaIdoRenrakuhyo result) {
-        JukyushaIdoRenrakuhyoBuilder resultEdit = result.createBuilderForEdit();
+    private void edit限度額(JukyushaIdoRenrakuhyo result, JukyushaIdoRenrakuhyoBuilder resultEdit) {
         if (RString.isNullOrEmpty(result.get食費負担限度額())) {
             resultEdit = resultEdit.set食費負担限度額(半角アスタリスク);
         }
@@ -146,8 +145,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
         }
     }
 
-    private void edit番号(JukyushaIdoRenrakuhyo result) {
-        JukyushaIdoRenrakuhyoBuilder resultEdit = result.createBuilderForEdit();
+    private void edit番号(JukyushaIdoRenrakuhyo result, JukyushaIdoRenrakuhyoBuilder resultEdit) {
         if (RString.isNullOrEmpty(result.get居宅介護支援事業所番号())) {
             resultEdit = resultEdit.set居宅介護支援事業所番号(半角アスタリスク);
         }
@@ -171,8 +169,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
         }
     }
 
-    private void edit開始終了年月日(JukyushaIdoRenrakuhyo result) {
-        JukyushaIdoRenrakuhyoBuilder resultEdit = result.createBuilderForEdit();
+    private void edit開始終了年月日(JukyushaIdoRenrakuhyo result, JukyushaIdoRenrakuhyoBuilder resultEdit) {
         if (RString.isNullOrEmpty(result.get認定有効期間終了年月日())) {
             resultEdit = resultEdit.set認定有効期間終了年月日(半角アスタリスク);
         }

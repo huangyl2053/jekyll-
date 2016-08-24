@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -88,6 +89,9 @@ public class HikazeiNenkinKenJoho {
      * @return ResponseData<HikazeiNenkinKenJohoDiv>
      */
     public ResponseData<HikazeiNenkinKenJohoDiv> onClick_btnSearch(HikazeiNenkinKenJohoDiv div) {
+        if (!ResponseHolder.isReRequest() && 削除解除モード.equals(div.getHiddenModel())) {
+            return ResponseData.of(div).addMessage(DbdQuestionMessages.編集破棄確認.getMessage(ButtonSelectPattern.OKCancel)).respond();
+        }
         div.setHiddenHihokenshaNo(div.getCcdKaigoShikaku().get被保険者番号());
         div.setHiddenNendo(div.getDdlYear().getSelectedKey());
         return ResponseData.of(div).respond();
@@ -146,9 +150,12 @@ public class HikazeiNenkinKenJoho {
                         .replace(非課税年金対象情報.get被保険者番号().toString()));
             }
         }
-        if (new RString(DbdWarningMessages.既存データなし.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            handler.新規編集画面制御処理();
+        if (new RString(DbdWarningMessages.既存データなし.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            if (ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+                handler.新規編集画面制御処理();
+            } else {
+                return ResponseData.of(div).respond();
+            }
         }
         if (new RString(DbdQuestionMessages.新規登録確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {

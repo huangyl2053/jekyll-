@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010015.dgTo
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -37,9 +38,6 @@ public class TokuteiShinryohiInfoPanelHandler {
 
     private final TokuteiShinryohiMainDiv div;
     private final FlexibleYearMonth 提供年月;
-    private final RString 年月 = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_介護給付費見直し,
-            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).substringEmptyOnError(0, 6);
-    private final RString 決定１ = new RString("");
     private final RString 決定２ = new RString("後");
     private final RString 保険 = new RString("保険");
     private final RString 公費１ = new RString("公費１");
@@ -47,10 +45,10 @@ public class TokuteiShinryohiInfoPanelHandler {
     private final RString 公費３ = new RString("公費３");
     private static final RString ZERO = new RString("0");
     private static final RString NI = new RString("2");
-    private static final int ZERO_INT = 0;
     private static final FlexibleYearMonth 平成24年4月 = new FlexibleYearMonth("201204");
     private static final int INT_1 = 1;
-    private static final int INT_12 = 12;
+    private static final int INT_ZERO = 0;
+    private static final int INT_SEX = 6;
     private final RString 前月 = new RString("前月");
     private final RString 前事業者 = new RString("前事業者");
 
@@ -60,6 +58,8 @@ public class TokuteiShinryohiInfoPanelHandler {
      * @param div TokuteiShinryohiMainDiv
      */
     public TokuteiShinryohiInfoPanelHandler(TokuteiShinryohiMainDiv div) {
+        RString 年月 = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_介護給付費見直し,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).substringEmptyOnError(INT_ZERO, INT_SEX);
         this.提供年月 = new FlexibleYearMonth(年月);
         this.div = div;
     }
@@ -76,7 +76,7 @@ public class TokuteiShinryohiInfoPanelHandler {
                 dgTokuteiShinryohiFromH1504_Row row_1 = new dgTokuteiShinryohiFromH1504_Row();
                 row_1.setTxtShobyoName(給付実績特定診療費_特別療養費.get傷病名());
                 row_1.setTxtShikibetsu(給付実績特定診療費_特別療養費.get識別番号());
-                row_1.setTxtKettei(決定１);
+                row_1.setTxtKettei(RString.EMPTY);
                 row_1.setTxtTanisu(new RString(給付実績特定診療費_特別療養費.get単位数()));
                 row_1.setTxtKaisu(new RString(給付実績特定診療費_特別療養費.get保険_回数()));
                 row_1.setTxtServiceTani(new RString(給付実績特定診療費_特別療養費.get保険_ｻｰﾋﾞｽ単位数()));
@@ -134,7 +134,7 @@ public class TokuteiShinryohiInfoPanelHandler {
                 dgTokuteiShinryohiToH1503_Row row_保険 = new dgTokuteiShinryohiToH1503_Row();
                 row_保険.setTxtShobyoName(給付実績特定診療費.get傷病名());
                 row_保険.setTxtHokenKohi(this.保険);
-                row_保険.setTxtKettei(this.決定１);
+                row_保険.setTxtKettei(RString.EMPTY);
                 row_保険.setTxtShidoKanriryo(new RString(給付実績特定診療費.get保険_指導管理料等()));
                 row_保険.setTxtRehabilitation(new RString(給付実績特定診療費.get保険_リハビリテーション()));
                 row_保険.setTxtSeishinkaSenmonRyoho(new RString(給付実績特定診療費.get保険_精神科専門療法()));
@@ -164,7 +164,7 @@ public class TokuteiShinryohiInfoPanelHandler {
                 dgTokuteiShinryohiToH1503_Row row_公費１ = new dgTokuteiShinryohiToH1503_Row();
                 row_公費１.setTxtShobyoName(給付実績特定診療費.get傷病名());
                 row_公費１.setTxtHokenKohi(this.公費１);
-                row_公費１.setTxtKettei(this.決定１);
+                row_公費１.setTxtKettei(RString.EMPTY);
                 row_公費１.setTxtShidoKanriryo(new RString(給付実績特定診療費.get公費１_指導管理料等()));
                 row_公費１.setTxtRehabilitation(new RString(給付実績特定診療費.get公費１_リハビリテーション()));
                 row_公費１.setTxtSeishinkaSenmonRyoho(new RString(給付実績特定診療費.get公費１_精神科専門療法()));
@@ -194,7 +194,7 @@ public class TokuteiShinryohiInfoPanelHandler {
                 dgTokuteiShinryohiToH1503_Row row_公費２ = new dgTokuteiShinryohiToH1503_Row();
                 row_公費２.setTxtShobyoName(給付実績特定診療費.get傷病名());
                 row_公費２.setTxtHokenKohi(this.公費２);
-                row_公費２.setTxtKettei(this.決定１);
+                row_公費２.setTxtKettei(RString.EMPTY);
                 row_公費２.setTxtShidoKanriryo(new RString(給付実績特定診療費.get公費２_指導管理料等()));
                 row_公費２.setTxtRehabilitation(new RString(給付実績特定診療費.get公費２_リハビリテーション()));
                 row_公費２.setTxtSeishinkaSenmonRyoho(new RString(給付実績特定診療費.get公費２_精神科専門療法()));
@@ -224,7 +224,7 @@ public class TokuteiShinryohiInfoPanelHandler {
                 dgTokuteiShinryohiToH1503_Row row_公費３ = new dgTokuteiShinryohiToH1503_Row();
                 row_公費３.setTxtShobyoName(給付実績特定診療費.get傷病名());
                 row_公費３.setTxtHokenKohi(this.公費３);
-                row_公費３.setTxtKettei(this.決定１);
+                row_公費３.setTxtKettei(RString.EMPTY);
                 row_公費３.setTxtShidoKanriryo(new RString(給付実績特定診療費.get公費３_指導管理料等()));
                 row_公費３.setTxtRehabilitation(new RString(給付実績特定診療費.get公費３_リハビリテーション()));
                 row_公費３.setTxtSeishinkaSenmonRyoho(new RString(給付実績特定診療費.get公費３_精神科専門療法()));
@@ -266,70 +266,70 @@ public class TokuteiShinryohiInfoPanelHandler {
 
     private RString set摘要(KyufujissekiTokuteiSinryohi 給付実績特定診療費) {
         RStringBuilder 摘要 = new RStringBuilder();
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１().trim())) {
-            摘要.append(給付実績特定診療費.get摘要１().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１())) {
+            摘要.append(給付実績特定診療費.get摘要１()).append(NewLine.CRLF.getNewLineString());
         }
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要２().trim())) {
-            摘要.append(給付実績特定診療費.get摘要２().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要２())) {
+            摘要.append(給付実績特定診療費.get摘要２()).append(NewLine.CRLF.getNewLineString());
         }
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要３().trim())) {
-            摘要.append(給付実績特定診療費.get摘要３().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要３())) {
+            摘要.append(給付実績特定診療費.get摘要３()).append(NewLine.CRLF.getNewLineString());
         }
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要４().trim())) {
-            摘要.append(給付実績特定診療費.get摘要４().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要４())) {
+            摘要.append(給付実績特定診療費.get摘要４()).append(NewLine.CRLF.getNewLineString());
         }
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要５().trim())) {
-            摘要.append(給付実績特定診療費.get摘要５().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要５())) {
+            摘要.append(給付実績特定診療費.get摘要５()).append(NewLine.CRLF.getNewLineString());
         }
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要６().trim())) {
-            摘要.append(給付実績特定診療費.get摘要６().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要６())) {
+            摘要.append(給付実績特定診療費.get摘要６()).append(NewLine.CRLF.getNewLineString());
         }
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要７().trim())) {
-            摘要.append(給付実績特定診療費.get摘要７().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要７())) {
+            摘要.append(給付実績特定診療費.get摘要７()).append(NewLine.CRLF.getNewLineString());
         }
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要８().trim())) {
-            摘要.append(給付実績特定診療費.get摘要８().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要８())) {
+            摘要.append(給付実績特定診療費.get摘要８()).append(NewLine.CRLF.getNewLineString());
         }
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要９().trim())) {
-            摘要.append(給付実績特定診療費.get摘要９().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要９())) {
+            摘要.append(給付実績特定診療費.get摘要９()).append(NewLine.CRLF.getNewLineString());
         }
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１０().trim())) {
-            摘要.append(給付実績特定診療費.get摘要１０().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１０())) {
+            摘要.append(給付実績特定診療費.get摘要１０()).append(NewLine.CRLF.getNewLineString());
         }
         this.set摘要_後(給付実績特定診療費, 摘要);
         return 摘要.toRString();
     }
 
     private RString set摘要_後(KyufujissekiTokuteiSinryohi 給付実績特定診療費, RStringBuilder 摘要) {
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１１().trim())) {
-            摘要.append(給付実績特定診療費.get摘要１１().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１１())) {
+            摘要.append(給付実績特定診療費.get摘要１１()).append(NewLine.CRLF.getNewLineString());
         }
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１２().trim())) {
-            摘要.append(給付実績特定診療費.get摘要１２().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１２())) {
+            摘要.append(給付実績特定診療費.get摘要１２()).append(NewLine.CRLF.getNewLineString());
         }
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１３().trim())) {
-            摘要.append(給付実績特定診療費.get摘要１３().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１３())) {
+            摘要.append(給付実績特定診療費.get摘要１３()).append(NewLine.CRLF.getNewLineString());
         }
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１４().trim())) {
-            摘要.append(給付実績特定診療費.get摘要１４().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１４())) {
+            摘要.append(給付実績特定診療費.get摘要１４()).append(NewLine.CRLF.getNewLineString());
         }
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１５().trim())) {
-            摘要.append(給付実績特定診療費.get摘要１５().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１５())) {
+            摘要.append(給付実績特定診療費.get摘要１５()).append(NewLine.CRLF.getNewLineString());
         }
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１６().trim())) {
-            摘要.append(給付実績特定診療費.get摘要１６().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１６())) {
+            摘要.append(給付実績特定診療費.get摘要１６()).append(NewLine.CRLF.getNewLineString());
         }
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１７().trim())) {
-            摘要.append(給付実績特定診療費.get摘要１７().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１７())) {
+            摘要.append(給付実績特定診療費.get摘要１７()).append(NewLine.CRLF.getNewLineString());
         }
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１８().trim())) {
-            摘要.append(給付実績特定診療費.get摘要１８().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１８())) {
+            摘要.append(給付実績特定診療費.get摘要１８()).append(NewLine.CRLF.getNewLineString());
         }
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１９().trim())) {
-            摘要.append(給付実績特定診療費.get摘要１９().trim()).append(NewLine.CRLF.getNewLineString());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要１９())) {
+            摘要.append(給付実績特定診療費.get摘要１９()).append(NewLine.CRLF.getNewLineString());
         }
-        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要２０().trim())) {
-            摘要.append(給付実績特定診療費.get摘要２０().trim());
+        if (!RString.isNullOrEmpty(給付実績特定診療費.get摘要２０())) {
+            摘要.append(給付実績特定診療費.get摘要２０());
         }
         return 摘要.toRString();
     }
@@ -368,7 +368,7 @@ public class TokuteiShinryohiInfoPanelHandler {
             div.getBtnMeisaiShukei().setDisabled(false);
         }
         if (NI.equals(識別番号管理データ.get所定疾患施設療養設定区分())
-                && 平成24年4月.isBeforeOrEquals(new FlexibleYearMonth(年月))) {
+                && 平成24年4月.isBeforeOrEquals(提供年月)) {
             div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(false);
             div.getBtnKinkyujiShisetsuRyoyo().setDisplayNone(true);
         } else {
@@ -423,22 +423,18 @@ public class TokuteiShinryohiInfoPanelHandler {
     }
 
     /**
-     *
      * change事業者です
      *
      * @param 事業者 事業者
+     * @param 事業者番号リスト 事業者番号リスト
+     * @param 事業所番号 事業所番号
      */
-    public void change事業者(RString 事業者) {
-        List<KyufuJissekiHedajyoho2> 事業者番号リスト
-                = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
-                .getCommonHeader().get給付実績ヘッダ情報2();
-        RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
-                .getCommonHeader().get給付実績ヘッダ情報2().get(ZERO_INT).get事業者名称();
+    public void change事業者(RString 事業者, List<KyufuJissekiHedajyoho2> 事業者番号リスト, JigyoshaNo 事業所番号) {
         RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
         RDate サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
-        RString 样式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
+        RString 識別番号 = div.getCcdKyufuJissekiHeader().get様式番号();
         RString 実績区分 = div.getCcdKyufuJissekiHeader().get実績区分コード();
-        int index = get事業者番号index(事業者番号リスト, サービス提供年月, 整理番号, 事業者番号, 样式番号, 実績区分);
+        int index = get事業者番号index(事業者番号リスト, サービス提供年月, 整理番号, 事業所番号, 識別番号, 実績区分);
         int i;
         if (前事業者.equals(事業者)) {
             i = -1;
@@ -470,26 +466,36 @@ public class TokuteiShinryohiInfoPanelHandler {
      * @param 事業者番号リスト 事業者番号リスト
      * @param サービス提供年月 サービス提供年月
      * @param 整理番号 整理番号
-     * @param 事業者番号 事業者番号
-     * @param 样式番号 样式番号
+     * @param 事業所番号 事業所番号
+     * @param 識別番号 識別番号
      * @param 実績区分 実績区分
      * @return int
      */
-    public int get事業者番号index(List<KyufuJissekiHedajyoho2> 事業者番号リスト, RDate サービス提供年月, RString 整理番号, RString 事業者番号, RString 样式番号, RString 実績区分) {
+    public int get事業者番号index(List<KyufuJissekiHedajyoho2> 事業者番号リスト, RDate サービス提供年月, RString 整理番号, JigyoshaNo 事業所番号, RString 識別番号, RString 実績区分) {
+        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString());
         for (int index = 0; index < 事業者番号リスト.size(); index++) {
-            if (事業者番号リスト.get(index).get事業者名称().compareTo(事業者番号) == 0 && 整理番号.equals(事業者番号リスト.get(index).get整理番号())
-                    && 事業者番号.equals(事業者番号リスト.get(index).get事業者名称()) && 样式番号.equals(事業者番号リスト.get(index).get識別番号名称())
-                    && 実績区分.equals(事業者番号リスト.get(index).get給付実績区分コード())) {
+            KyufuJissekiHedajyoho2 当事業者番号 = 事業者番号リスト.get(index);
+            KyufuJissekiHedajyoho2 前事業者番号 = 事業者番号リスト.get(index - INT_1);
+            KyufuJissekiHedajyoho2 次事業者番号 = 事業者番号リスト.get(index + INT_1);
+            if (サービス年月.equals(当事業者番号.getサービス提供年月())
+                    && 整理番号.equals(当事業者番号.get整理番号())
+                    && 事業所番号.equals(当事業者番号.get事業所番号())
+                    && 識別番号.equals(当事業者番号.get識別番号())
+                    && 実績区分.equals(当事業者番号.get給付実績区分コード())) {
                 return index;
             }
-            if (事業者番号リスト.get(index + 1).get事業者名称().compareTo(事業者番号) == 0 && 整理番号.equals(事業者番号リスト.get(index + 1).get整理番号())
-                    && 事業者番号.equals(事業者番号リスト.get(index + 1).get事業者名称()) && 样式番号.equals(事業者番号リスト.get(index + 1).get識別番号名称())
-                    && 実績区分.equals(事業者番号リスト.get(index + 1).get給付実績区分コード())) {
+            if (サービス年月.equals(次事業者番号.getサービス提供年月())
+                    && 整理番号.equals(次事業者番号.get整理番号())
+                    && 事業所番号.equals(次事業者番号.get事業所番号())
+                    && 識別番号.equals(次事業者番号.get識別番号())
+                    && 実績区分.equals(次事業者番号.get給付実績区分コード())) {
                 div.getKyufuJisseki().getBtnAtoJigyosha().setDisabled(false);
             }
-            if (事業者番号リスト.get(index - 1).get事業者名称().compareTo(事業者番号) == 0 && 整理番号.equals(事業者番号リスト.get(index - 1).get整理番号())
-                    && 事業者番号.equals(事業者番号リスト.get(index - 1).get事業者名称()) && 样式番号.equals(事業者番号リスト.get(index).get識別番号名称())
-                    && 実績区分.equals(事業者番号リスト.get(index - 1).get給付実績区分コード())) {
+            if (サービス年月.equals(前事業者番号.getサービス提供年月())
+                    && 整理番号.equals(前事業者番号.get整理番号())
+                    && 事業所番号.equals(前事業者番号.get事業所番号())
+                    && 識別番号.equals(前事業者番号.get識別番号())
+                    && 実績区分.equals(前事業者番号.get給付実績区分コード())) {
                 div.getKyufuJisseki().getBtnMaeJigyosha().setDisabled(false);
             }
         }

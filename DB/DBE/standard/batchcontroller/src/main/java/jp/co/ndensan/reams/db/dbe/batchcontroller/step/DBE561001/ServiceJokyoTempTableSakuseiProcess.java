@@ -33,7 +33,6 @@ public class ServiceJokyoTempTableSakuseiProcess extends BatchKeyBreakBase<DbT52
     private CenterTransmissionMybitisParamter mybitisParamter;
     private ICenterTransmissionMapper mapper;
     private NinteichosahyoServiceJokyoTempEntity tempEntity;
-    private ServiceJokyoTempTableEditorEntity editorEntity;
     private List<RString> 申請書管理番号リスト;
     private boolean isデータあり;
 
@@ -77,8 +76,7 @@ public class ServiceJokyoTempTableSakuseiProcess extends BatchKeyBreakBase<DbT52
         isデータあり = true;
         tempEntity.setShinseishoKanriNo(entity.getShinseishoKanriNo());
         tempEntity.setKoroshoIfShikibetsuCode(entity.getKoroshoIfShikibetsuCode());
-        editorEntity = new ServiceJokyoTempTableEditorEntity(tempEntity);
-        editorEntity.setサービスの状況(entity);
+        new ServiceJokyoTempTableEditorEntity(tempEntity).setサービスの状況(entity);
     }
 
     @Override

@@ -11,6 +11,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.TokuchoKariKeisangoFukaEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntit
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
@@ -164,7 +166,8 @@ public class TokuchoKariSanteiFukaManager {
                 bodyList.add(get漢字氏名(entity.get宛名().getKanjiShimei()));
                 bodyList.add(get特別徴収業務者コード(entity.get特別徴収義務者コード()));
                 if (entity.get特別徴収義務者コード() != null) {
-                    bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード_0047, entity.get特別徴収義務者コード()));
+                    bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+                            entity.get特別徴収義務者コード()));
                 } else {
                     bodyList.add(RString.EMPTY);
                 }
@@ -174,7 +177,8 @@ public class TokuchoKariSanteiFukaManager {
                     特別徴収対象年金コード = entity.get仮徴収_年金コード().substring(整数_0, 整数_3);
                 }
                 if (特別徴収対象年金コード != null) {
-                    bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード_0046, new Code(特別徴収対象年金コード)));
+                    bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
+                            new Code(特別徴収対象年金コード)));
                 } else {
                     bodyList.add(RString.EMPTY);
                 }
@@ -190,7 +194,8 @@ public class TokuchoKariSanteiFukaManager {
                     bodyList.add(RString.EMPTY);
                     bodyList.add(特徴停止);
                     if (entity.get特別徴収停止事由コード() != null) {
-                        bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.DBB介護賦課, コード_0008, new Code(entity.get特別徴収停止事由コード())));
+                        bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.特別徴収停止事由.getコード(),
+                                new Code(entity.get特別徴収停止事由コード())));
                     } else {
                         bodyList.add(RString.EMPTY);
                     }

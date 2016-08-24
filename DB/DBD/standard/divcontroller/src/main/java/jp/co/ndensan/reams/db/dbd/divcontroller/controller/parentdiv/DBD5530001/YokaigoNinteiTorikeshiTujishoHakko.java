@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbd.service.core.jukyushadaicho.JukyushaDaichoServ
 import jp.co.ndensan.reams.db.dbd.service.report.dbd550004.YokaigoNinteiTorikeshiTshuchishoPrintService;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.report.hakkorireki.GyomuKoyuJoho;
@@ -125,8 +126,19 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
      * @return ResponseData<YokaigoNinteiTorikeshiTujishoHakkoDiv>
      */
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(YokaigoNinteiTorikeshiTujishoHakkoDiv div) {
-        RString hihokenshaNo = div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue();
-        RString hihokenshaName = div.getCcdKaigoNinteiAtenaInfo().get被保険者氏名();
+        SourceDataCollection collection;
+        RString hihokenshaNo;
+        if (div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo() != null) {
+            hihokenshaNo = div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue();
+        } else {
+            hihokenshaNo = RString.EMPTY;
+        }
+        RString hihokenshaName;
+        if (div.getCcdKaigoNinteiAtenaInfo().get被保険者氏名().isNullOrEmpty()) {
+            hihokenshaName = RString.EMPTY;
+        } else {
+            hihokenshaName = div.getCcdKaigoNinteiAtenaInfo().get被保険者氏名();
+        }
         RString teishutsuKigenYMD;
         if (div.getTujishoHakkoMeisai().getTxtHihokenshashoTeishutuKigen().getValue() == null) {
             teishutsuKigenYMD = RString.EMPTY;
@@ -140,10 +152,9 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
                     getValue(), teishutsuKigenYMD);
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(GyomuKoyuJoho.被保番号.getコード()), div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
-            SourceDataCollection collection = reportManager.publish();
-
-            return ResponseData.of(collection).respond();
+            collection = reportManager.publish();
         }
+        return ResponseData.of(collection).respond();
     }
 
     /**
@@ -156,10 +167,17 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
         creatYokaigoNinteiTorikeshiTujishoHakkoHandler(div).排他の設定(div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().
                 getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        LasdecCode 市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
+        LasdecCode 市町村コード;
+        ShoKisaiHokenshaNo 証記載保険者番号;
+        if (shichosonSecurityJoho != null) {
+            市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
+            証記載保険者番号 = shichosonSecurityJoho.get市町村情報().get証記載保険者番号();
+        } else {
+            市町村コード = LasdecCode.EMPTY;
+            証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
+        }
         JukyushaDaichoParameter parameter = new JukyushaDaichoParameter(市町村コード, div.getTujishoHakkoJoken().
-                getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue(), shichosonSecurityJoho.
-                get市町村情報().get証記載保険者番号().value());
+                getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue(), 証記載保険者番号.value());
         insert(parameter, div);
         creatYokaigoNinteiTorikeshiTujishoHakkoHandler(div).排他制御の解除(div.getCcdKaigoninteiShikakuInfo()
                 .getTxtHihokenshaNo().getValue());

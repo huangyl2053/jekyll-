@@ -38,9 +38,14 @@ public class KagoMoshitatePanelHandler {
     /**
      * 給付管理明細一覧を設置します。
      *
+     * @param 居宅サービスフラグ 居宅サービスフラグ
      * @param 給付管理明細一覧 給付管理明細一覧
      */
-    public void set給付管理明細一覧(List<KyufuKanrihyoShokaiDataModel> 給付管理明細一覧) {
+    public void set給付管理明細一覧(boolean 居宅サービスフラグ, List<KyufuKanrihyoShokaiDataModel> 給付管理明細一覧) {
+        if (居宅サービスフラグ && 給付管理明細一覧 == null) {
+            div.getService().getDgServive().setDataSource(new ArrayList());
+            return;
+        }
         List<dgServive_Row> rowList = new ArrayList<>();
         for (KyufuKanrihyoShokaiDataModel 給付管理明細 : 給付管理明細一覧) {
             if (KyotakuServiceKubun.居宅サービス.getコード().equals(給付管理明細.get給付管理票種別区分コード())) {
@@ -78,7 +83,7 @@ public class KagoMoshitatePanelHandler {
         div.getService().getTxt2().setValue(給付管理票.get給付管理票情報作成区分コード());
         if (給付管理票.get居宅サービス計画作成区分コード() != null) {
             div.getService().getTxt4().setValue(JukyushaIF_KeikakuSakuseiKubunCode.
-                    valueOf(給付管理票.get居宅サービス計画作成区分コード().toString()).get名称());
+                    toValue(給付管理票.get居宅サービス計画作成区分コード()).get名称());
         }
         if (給付管理票.get居宅支援事業所番号() != null) {
             div.getService().getTxt5().setValue(給付管理票.get居宅支援事業所番号().value());

@@ -565,8 +565,8 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 table(DbT4001JukyushaDaicho.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                leq(ninteiYukoKikanKaishiYMD, 終了利用年月),
-                                leq(開始利用年月, ninteiYukoKikanShuryoYMD),
+                                leq(ninteiYukoKikanKaishiYMD, 開始利用年月),
+                                leq(終了利用年月, ninteiYukoKikanShuryoYMD),
                                 eq(logicalDeletedFlag, false))).
                 toList(DbT4001JukyushaDaichoEntity.class);
     }
@@ -680,7 +680,8 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
      * @param 被保険者番号 被保険者番号
      * @param 受給申請事由 受給申請事由
      * @param 申請書管理番号 申請書管理番号
-     * @return Max履歴番号 RString
+     * @return Max履歴番号
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public RString get受給者台帳情報Max履歴番号(
@@ -705,5 +706,27 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 .order(by(rirekiNo, Order.DESC)).limit(1).toObject(DbT4001JukyushaDaichoEntity.class);
 
         return null != entity ? entity.getRirekiNo() : new RString("0000");
+    }
+
+    /**
+     * 被保険者番号をキーにして、受給者台帳．被保険者番号情報ある場合は、データ件数を取得する。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT4001JukyushaDaichoEntity 受給者台帳のデータ
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT4001JukyushaDaichoEntity> select受給者台帳Count(HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(yukoMukoKubun, YukoMukoKubun.有効.getコード()),
+                                eq(logicalDeletedFlag, false))).
+                toList(DbT4001JukyushaDaichoEntity.class);
     }
 }

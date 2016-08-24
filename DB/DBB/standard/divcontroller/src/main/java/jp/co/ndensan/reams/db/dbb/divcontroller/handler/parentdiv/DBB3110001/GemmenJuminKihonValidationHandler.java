@@ -293,7 +293,7 @@ public class GemmenJuminKihonValidationHandler {
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
             messages.add(ValidateChain.validateStart(div)
                     .ifNot(flag ? GemmenJuminKihonSpec.賦課情報の存在チェック : GemmenJuminKihonSpec.計算処理の未実行チェック)
-                    .thenAdd(GemmenJuminKihonValidationMessages.計算処理の未実行チェック)
+                    .thenAdd(GemmenJuminKihonValidationMessages.減免額の整合性チェック２)
                     .messages());
             return messages;
         }

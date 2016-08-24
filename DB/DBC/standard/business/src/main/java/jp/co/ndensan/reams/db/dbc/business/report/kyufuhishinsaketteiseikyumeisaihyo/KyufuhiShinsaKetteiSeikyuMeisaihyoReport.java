@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kyufuhishinsaketteiseikyumeisaihyo;
 
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhishinsaketteiseikyumeisaihyo.KyufuhiShinsaKetteiSeikyuMeisaihyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kyufuhishinsaketteiseikyumeisaihyo.KyufuhiShinsaKetteiSeikyuMeisaihyoSource;
@@ -22,6 +23,7 @@ public class KyufuhiShinsaKetteiSeikyuMeisaihyoReport extends Report<KyufuhiShin
 
     private final KyufuhiShinsaKetteiSeikyuMeisaihyoEntity 帳票出力対象;
     private final Map<RString, RString> 出力順Map;
+    private final List<RString> 改頁リスト;
     private final RDateTime 作成日時;
     private boolean 出力Flag = false;
 
@@ -32,23 +34,26 @@ public class KyufuhiShinsaKetteiSeikyuMeisaihyoReport extends Report<KyufuhiShin
      * @param 出力順Map Map<RString, RString>
      * @param 作成日時 RDateTime
      * @param 出力Flag boolean
+     * @param 改頁リスト List<RString>
      */
     public KyufuhiShinsaKetteiSeikyuMeisaihyoReport(
             KyufuhiShinsaKetteiSeikyuMeisaihyoEntity 帳票出力対象,
             Map<RString, RString> 出力順Map,
             RDateTime 作成日時,
-            boolean 出力Flag) {
+            boolean 出力Flag,
+            List<RString> 改頁リスト) {
         this.帳票出力対象 = 帳票出力対象;
         this.出力順Map = 出力順Map;
         this.作成日時 = 作成日時;
         this.出力Flag = 出力Flag;
+        this.改頁リスト = 改頁リスト;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KyufuhiShinsaKetteiSeikyuMeisaihyoSource> writer) {
         IKyufuhiShinsaKetteiSeikyuMeisaihyoEditor headerEditor
                 = new KyufuhiShinsaKetteiSeikyuMeisaihyoHeaderEditor(帳票出力対象,
-                        出力順Map, 作成日時);
+                        出力順Map, 作成日時, 改頁リスト);
         IKyufuhiShinsaKetteiSeikyuMeisaihyoEditor bodyEditor
                 = new KyufuhiShinsaKetteiSeikyuMeisaihyoBodyEditor(
                         帳票出力対象, 出力Flag);

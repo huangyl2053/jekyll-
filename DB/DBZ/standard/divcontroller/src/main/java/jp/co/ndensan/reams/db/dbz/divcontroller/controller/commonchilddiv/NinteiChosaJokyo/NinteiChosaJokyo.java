@@ -110,10 +110,13 @@ public class NinteiChosaJokyo {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
             }
         }
-        if (ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).dialogNGClose();
         }
-        return ResponseData.of(div).respond();
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
+        return ResponseData.of(div).dialogNGClose();
     }
 
     /**
@@ -138,8 +141,9 @@ public class NinteiChosaJokyo {
      * @return ResponseData<NinteiChosaJokyoDiv>
      */
     public ResponseData<NinteiChosaJokyoDiv> onClick_btnHonninJushoFukusha(NinteiChosaJokyoDiv div) {
+        getHandler(div).クリア訪問調査();
         getHandler(div).set画面項目By本人情報();
-        return ResponseData.of(div).dialogOKClose();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -149,8 +153,9 @@ public class NinteiChosaJokyo {
      * @return ResponseData<NinteiChosaJokyoDiv>
      */
     public ResponseData<NinteiChosaJokyoDiv> onClick_btnZenKaiFukusha(NinteiChosaJokyoDiv div) {
+        getHandler(div).クリア訪問調査();
         getHandler(div).set画面項目By前回情報();
-        return ResponseData.of(div).dialogOKClose();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -160,6 +165,7 @@ public class NinteiChosaJokyo {
      * @return ResponseData<NinteiChosaJokyoDiv>
      */
     public ResponseData<NinteiChosaJokyoDiv> onClick_btnNyushoShisetsuFukusha(NinteiChosaJokyoDiv div) {
+        getHandler(div).クリア訪問調査();
         KaigoJigyosha result = finder.get介護事業者情報(new SubGyomuCode(div.getHdnSubGyomuCd()));
         if (result != null) {
             div.getTxtChosasakiName().setValue(result.get事業者名称().value());
@@ -167,7 +173,7 @@ public class NinteiChosaJokyo {
             div.getTxtChosasakiJusho().setDomain(result.get事業者住所());
             div.getTxtChosasakiTelNo().setDomain(result.get電話番号());
         }
-        return ResponseData.of(div).dialogOKClose();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -189,7 +195,7 @@ public class NinteiChosaJokyo {
         modle.set調査員名(div.getTxtNinteiChosainName().getValue());
         modle.set対象モード(new RString(ChosaItakusakiAndChosainGuideDiv.TaishoMode.Chosain.toString()));
         div.setHdnChosaDataPass(DataPassingConverter.serialize(modle));
-        return ResponseData.of(div).dialogOKClose();
+        return ResponseData.of(div).respond();
     }
 
     /**

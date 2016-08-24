@@ -34,6 +34,7 @@ public class KyufuJissekiKoshinJohoService {
     private static final RString マルTWO = new RString("○");
     private static final RString マルTHREE = new RString("●");
     private static final RString 事業者名不明 = new RString("事業者名不明");
+    private static final RString NUM_ONE = new RString("1");
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link KyufuJissekiKoshinJohoService}のインスタンスを返します。
@@ -116,7 +117,7 @@ public class KyufuJissekiKoshinJohoService {
             resultEntity.set作成レコード種別_02明細(マルONE);
         } else if (entity.get給付実績_レコード件数D1() >= 1 && entity.get給付実績_レコード件数DD() == 0) {
             resultEntity.set作成レコード種別_02明細(マルTWO);
-        } else if (entity.get給付実績_レコード件数D1() == 0 && entity.get給付実績_レコード件数DD() >= 0) {
+        } else if (entity.get給付実績_レコード件数D1() == 0 && entity.get給付実績_レコード件数DD() >= 1) {
             resultEntity.set作成レコード種別_02明細(マルTHREE);
         } else if (entity.get給付実績_レコード件数D1() == 0 && entity.get給付実績_レコード件数DD() == 0) {
             resultEntity.set作成レコード種別_02明細(RString.EMPTY);
@@ -182,8 +183,12 @@ public class KyufuJissekiKoshinJohoService {
             resultEntity.set作成レコード種別_13所定(RString.EMPTY);
         }
         if (!RString.isNullOrEmpty(entity.get給付実績_警告区分コード())) {
-            KeikokuKubun 警告区分 = KeikokuKubun.toValue(entity.get給付実績_警告区分コード());
-            resultEntity.set備考(警告区分.get名称());
+            if (NUM_ONE.equals(entity.get給付実績_警告区分コード())) {
+                resultEntity.set備考(RString.EMPTY);
+            } else {
+                KeikokuKubun 警告区分 = KeikokuKubun.toValue(entity.get給付実績_警告区分コード());
+                resultEntity.set備考(警告区分.get名称());
+            }
         }
     }
 

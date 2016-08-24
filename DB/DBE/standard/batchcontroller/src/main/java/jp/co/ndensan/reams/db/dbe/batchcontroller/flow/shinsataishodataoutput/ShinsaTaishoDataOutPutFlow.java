@@ -44,9 +44,9 @@ public class ShinsaTaishoDataOutPutFlow extends BatchFlowBase<ShinsaTaishoDataOu
     }
 
     /**
-     * 認定調査データ出力（モバイル）のCSV出力Processです。
+     * 二次判定結果登録用データ（モバイル）のCSV出力Processです。
      *
-     * @return 認定調査データ出力（モバイル）
+     * @return 二次判定結果登録用データ（モバイル）
      */
     @Step(NIJIHANTEIKEKKATOROK)
     protected IBatchFlowCommand callNijihanteiKekkaTorokuMobileOutPut() {

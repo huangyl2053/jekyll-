@@ -141,7 +141,7 @@ public class ServiceHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
     private DbT4001JukyushaDaichoEntity createJukyushaDaichoEntity() {
         DbT4001JukyushaDaichoEntity result = 最新Entity.get受給者台帳Entity();
         result.setRirekiNo(new RString(String.format("%04d", Integer.parseInt(result.getRirekiNo().toString()) + 1)));
-        result.setNinteiKekkaTsuchishoHakkoYMD(parameter.get発行日());
+        result.setServiceHenkoTsuchishoHakkoYMD(parameter.get発行日());
         return result;
     }
 
@@ -258,13 +258,13 @@ public class ServiceHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
         RString 日時 = TsutishoHakkoCommonProcess.get日付日時(parameter.get開始日(), parameter.get開始日時());
         if (!日時.isEmpty()) {
             builder.append(new RString("今回の開始日時:"));
-            builder.append(parameter.get開始日時());
+            builder.append(日時);
             出力条件.add(builder.toRString());
         }
         日時 = TsutishoHakkoCommonProcess.get日付日時(parameter.get終了日(), parameter.get終了日時());
         if (!日時.isEmpty()) {
             builder.append(new RString("今回の終了日時:"));
-            builder.append(parameter.get終了日時());
+            builder.append(日時);
             出力条件.add(builder.toRString());
         }
         if (null != parameter.get文書番号() && !parameter.get文書番号().isEmpty()) {

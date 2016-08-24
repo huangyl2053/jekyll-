@@ -130,14 +130,15 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
         }
         List<RString> チェック状態 = getチェックボックス状態();
 
-        KyodoShoriyoJukyushaIdoKihonSofu 異動基本送付Entity = new KyodoShoriyoJukyushaIdoKihonSofu(
-                共通項目Entity.get異動年月日(),
-                共通項目Entity.get異動区分(),
-                共通項目Entity.get異動事由(),
-                共通項目Entity.get証記載保険者番号(),
-                被保険者番号,
-                履歴番号);
+        KyodoShoriyoJukyushaIdoKihonSofu 異動基本送付Entity = null;
         if (is基本送付情報) {
+            異動基本送付Entity = new KyodoShoriyoJukyushaIdoKihonSofu(
+                    new FlexibleDate(div.getKyodoIdoRenrakuhyoTorokuInfo().get基本送付_異動日().toDateString()),
+                    共通項目Entity.get異動区分(),
+                    共通項目Entity.get異動事由(),
+                    共通項目Entity.get証記載保険者番号(),
+                    被保険者番号,
+                    履歴番号);
             異動基本送付Entity = 異動基本送付Entity.createBuilderForEdit()
                     .set被保険者氏名(entity.get基本情報Entity().get被保険者氏名())
                     .set郵便番号(entity.get基本情報Entity().get郵便番号())
@@ -157,14 +158,15 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
             }
         }
 
-        KyodoShoriyoJukyushaIdoShokanSofu 異動償還送付Entity = new KyodoShoriyoJukyushaIdoShokanSofu(
-                共通項目Entity.get異動年月日(),
-                共通項目Entity.get異動区分(),
-                共通項目Entity.get異動事由(),
-                共通項目Entity.get証記載保険者番号(),
-                被保険者番号,
-                履歴番号);
+        KyodoShoriyoJukyushaIdoShokanSofu 異動償還送付Entity = null;
         if (is償還送付情報) {
+            異動償還送付Entity = new KyodoShoriyoJukyushaIdoShokanSofu(
+                    new FlexibleDate(div.getKyodoIdoRenrakuhyoTorokuInfo().get償還送付_異動日().toDateString()),
+                    共通項目Entity.get異動区分(),
+                    共通項目Entity.get異動事由(),
+                    共通項目Entity.get証記載保険者番号(),
+                    被保険者番号,
+                    履歴番号);
             異動償還送付Entity = 異動償還送付Entity.createBuilderForEdit()
                     .set保険給付支払一時差止開始年月日(entity.get償還情報Entity().get保険給付支払一時差止開始年月日())
                     .set保険給付支払一時差止終了年月日(entity.get償還情報Entity().get保険給付支払一時差止終了年月日())
@@ -182,14 +184,15 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
             }
         }
 
-        KyodoShoriyoJukyushaIdoKogakuSofu 異動高額送付 = new KyodoShoriyoJukyushaIdoKogakuSofu(
-                共通項目Entity.get異動年月日(),
-                共通項目Entity.get異動区分(),
-                共通項目Entity.get異動事由(),
-                共通項目Entity.get証記載保険者番号(),
-                被保険者番号,
-                履歴番号);
+        KyodoShoriyoJukyushaIdoKogakuSofu 異動高額送付 = null;
         if (is高額送付情報) {
+            異動高額送付 = new KyodoShoriyoJukyushaIdoKogakuSofu(
+                    new FlexibleDate(div.getKyodoIdoRenrakuhyoTorokuInfo().get高額送付_異動日().toDateString()),
+                    共通項目Entity.get異動区分(),
+                    共通項目Entity.get異動事由(),
+                    共通項目Entity.get証記載保険者番号(),
+                    被保険者番号,
+                    履歴番号);
             HihokenshaNo 世帯集約番号 = entity.get高額情報Entity().get世帯集約番号();
             if (世帯集約番号 != null && !世帯集約番号.isEmpty()) {
                 異動高額送付 = 異動高額送付.createBuilderForEdit().set世帯集約番号(世帯集約番号).build();

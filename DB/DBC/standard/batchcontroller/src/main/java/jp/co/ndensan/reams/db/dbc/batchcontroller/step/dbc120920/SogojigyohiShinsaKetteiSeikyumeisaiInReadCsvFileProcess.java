@@ -10,13 +10,13 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120920.DbWT1611SinsaKetteiSeikyuMeisaiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120920.DbWT1612SinsaKetteiSeikyuKogakuTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120920.DbWT1613SinsaKetteiSeikyuGokeiTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120920.FlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120920.SogojigyohiShinsaKetteiCsvFileHeadRecordEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120920.SogojigyohiShinsaKetteiCsvFileMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120920.SogojigyohiShinsaKetteiCsvFileToreraRecode1AEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120920.SogojigyohiShinsaKetteiCsvFileToreraRecode1BEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120920.SogojigyohiShinsaKetteiCsvFileToreraRecode2Entity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.KagoKetteiHokenshaInControlCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper;
@@ -90,14 +90,13 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess extends Bat
     private SogojigyohiShinsaKetteiCsvFileToreraRecode1AEntity toreraRecord1AEntity;
     private SogojigyohiShinsaKetteiCsvFileToreraRecode1BEntity toreraRecord1BEntity;
     private SogojigyohiShinsaKetteiCsvFileToreraRecode2Entity toreraRecord2Entity;
-    private int 明細_連番;
-    private int 高額_連番;
-    private int 合計_連番;
+    private int レコード件数合計;
     private int 連番;
 
     @Override
     protected void initialize() {
         連番 = parameter.getレコード件数合算();
+        レコード件数合計 = parameter.get集計件数合算();
         returnEntity = new FlowEntity();
     }
 
@@ -138,14 +137,12 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess extends Bat
                 meisaiEntity = new SogojigyohiShinsaKetteiCsvFileMeisaiEntity();
                 meisaiEntity = ListToObjectMappingHelper.toObject(SogojigyohiShinsaKetteiCsvFileMeisaiEntity.class, data);
                 insert審査決定請求明細一時TBL(meisaiEntity);
-                明細_連番 = 明細_連番 + 定値_1;
             } else if (帳票レコード種別_T1.equals(data.get(INDEX_3))) {
                 交換情報識別番号(data);
             } else if (帳票レコード種別_T2.equals(data.get(INDEX_3))) {
                 toreraRecord2Entity = new SogojigyohiShinsaKetteiCsvFileToreraRecode2Entity();
                 toreraRecord2Entity = ListToObjectMappingHelper.toObject(SogojigyohiShinsaKetteiCsvFileToreraRecode2Entity.class, data);
                 insert審査決定請求合計一時TBL(null, toreraRecord2Entity);
-                合計_連番 = 合計_連番 + 定値_1;
             }
         }
     }
@@ -161,9 +158,9 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess extends Bat
             errorTempentity.setエラー区分(NUM);
             一時表Mapper.処理結果リスト一時TBLに登録(errorTempentity);
         }
-        returnEntity.set明細データ登録件数(明細_連番);
-        returnEntity.set高額データ登録件数(高額_連番);
-        returnEntity.set合計データ登録件数(合計_連番);
+        returnEntity.set明細データ登録件数(連番);
+        レコード件数合計 = レコード件数合計 + Integer.parseInt(controlCsvEntity.getCodeNum().toString());
+        returnEntity.setCodeNum(レコード件数合計);
         flowEntity = new OutputParameter<>();
         flowEntity.setValue(returnEntity);
 
@@ -240,12 +237,10 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess extends Bat
             toreraRecord1AEntity = new SogojigyohiShinsaKetteiCsvFileToreraRecode1AEntity();
             toreraRecord1AEntity = ListToObjectMappingHelper.toObject(SogojigyohiShinsaKetteiCsvFileToreraRecode1AEntity.class, data);
             insert審査決定請求高額一時TBL(toreraRecord1AEntity);
-            高額_連番 = 高額_連番 + 定値_1;
         } else if (交換情報識別番号_1621.equals(data.get(INDEX_2))) {
             toreraRecord1BEntity = new SogojigyohiShinsaKetteiCsvFileToreraRecode1BEntity();
             toreraRecord1BEntity = ListToObjectMappingHelper.toObject(SogojigyohiShinsaKetteiCsvFileToreraRecode1BEntity.class, data);
             insert審査決定請求合計一時TBL(toreraRecord1BEntity, null);
-            合計_連番 = 合計_連番 + 定値_1;
         }
     }
 }

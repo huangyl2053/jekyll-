@@ -14,15 +14,15 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorenkyoutsu.KokuhorenKyoutsuBatchParameter;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.shinsaketteiseikyumeisaiin.ShinsaKetteiSeiDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuCsvFileReadProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDeleteReveicedFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuGetFileProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.shinsaketteiseikyumeisaiin.ShinsaKetteiSeiDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
-import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120920.FlowEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -49,6 +48,7 @@ public class DBC120220_ShinsaKetteiSeikyumeisaiIn extends BatchFlowBase<Kokuhore
     private static final RString ファイル格納フォルダ名 = new RString("DBC120220");
     private int レコード件数合算;
     private RString csvFullPath;
+    private int 集計件数;
 
     private FlowEntity flowEntity;
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
@@ -75,10 +75,9 @@ public class DBC120220_ShinsaKetteiSeikyumeisaiIn extends BatchFlowBase<Kokuhore
                 flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
                         SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
                 レコード件数合算 = flowEntity.get明細データ登録件数();
+                集計件数 = flowEntity.getCodeNum();
             }
-            if (0 == flowEntity.get明細データ登録件数()
-                    || 0 == flowEntity.get高額データ登録件数()
-                    || 0 == flowEntity.get合計データ登録件数()) {
+            if (0 == flowEntity.get明細データ登録件数()) {
                 executeStep(国保連インタフェース管理更新);
                 executeStep(処理結果リスト作成);
             } else {
@@ -117,6 +116,7 @@ public class DBC120220_ShinsaKetteiSeikyumeisaiIn extends BatchFlowBase<Kokuhore
         parameter.set処理年月(getParameter().getShoriYM());
         parameter.set保存先パース(csvFullPath);
         parameter.setレコード件数合算(レコード件数合算);
+        parameter.set集計件数合算(集計件数);
         return loopBatch(SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess.class).arguments(parameter).define();
     }
 
@@ -145,7 +145,6 @@ public class DBC120220_ShinsaKetteiSeikyumeisaiIn extends BatchFlowBase<Kokuhore
     @Step(一覧表作成)
     protected IBatchFlowCommand callDoIchiranhyoSakuseiProcess() {
         ShinsaKetteiSeiDoIchiranhyoSakuseiProcessParameter parameter = new ShinsaKetteiSeiDoIchiranhyoSakuseiProcessParameter();
-        parameter.setシステム日付(RDateTime.now());
         parameter.set出力順ID(getParameter().getShutsuryokujunId());
         parameter.set帳票ID(ReportIdDBC.DBC200069.getReportId());
         return loopBatch(ShinsaKetteiSeiDoIchiranhyoSakuseiProcess.class).arguments(parameter).define();

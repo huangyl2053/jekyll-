@@ -68,10 +68,8 @@ public class SeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinTaishos
     private static final RString 生年月日 = new RString("生年月日");
     private static final RString 性別 = new RString("性別");
     private static final RString カナ氏名 = new RString("カナ氏名");
-    private static final int SEVEN = 7;
     private static final int THREE = 3;
     private static final int ZERO = 0;
-    private static final RString BAR = new RString("-");
     private static final ReportId REPORT_DBD900004 = ReportIdDBD.DBD900004.getReportId();
 
     @Override

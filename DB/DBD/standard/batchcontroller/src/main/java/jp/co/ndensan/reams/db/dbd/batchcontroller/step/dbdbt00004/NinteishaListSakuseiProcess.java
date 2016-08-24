@@ -237,8 +237,8 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
                         hasHeader(false).
                         build();
             } else if (processParameter.get対象リスト().equals(該当者) && タイトル_flag) {
-                noRennbannmanager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_2, UzUDE0831EucAccesslogFileType.Csv);
-                eucFilePath = Path.combinePath(noRennbannmanager.getEucOutputDirectry(), GAITOSHAICHIRANCSV);
+                manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_2, UzUDE0831EucAccesslogFileType.Csv);
+                eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), GAITOSHAICHIRANCSV);
                 eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                         setDelimiter(EUC_WRITER_DELIMITER).
                         setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -247,8 +247,8 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
                         hasHeader(true).
                         build();
             } else if (processParameter.get対象リスト().equals(該当者) && !タイトル_flag) {
-                noRennbannmanager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_2, UzUDE0831EucAccesslogFileType.Csv);
-                eucFilePath = Path.combinePath(noRennbannmanager.getEucOutputDirectry(), GAITOSHAICHIRANCSV);
+                manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_2, UzUDE0831EucAccesslogFileType.Csv);
+                eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), GAITOSHAICHIRANCSV);
                 eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                         setDelimiter(EUC_WRITER_DELIMITER).
                         setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -269,8 +269,8 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
                     build();
 
             if (processParameter.get対象リスト().equals(認定者) && タイトル_flag) {
-                manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_1, UzUDE0831EucAccesslogFileType.Csv);
-                eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), NINTEISHAICHIRANCSV);
+                noRennbannmanager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_1, UzUDE0831EucAccesslogFileType.Csv);
+                eucFilePath = Path.combinePath(noRennbannmanager.getEucOutputDirectry(), NINTEISHAICHIRANCSV);
                 noRennbanneucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                         setDelimiter(EUC_WRITER_DELIMITER).
                         setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -279,8 +279,8 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
                         hasHeader(true).
                         build();
             } else if (processParameter.get対象リスト().equals(認定者) && !タイトル_flag) {
-                manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_1, UzUDE0831EucAccesslogFileType.Csv);
-                eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), NINTEISHAICHIRANCSV);
+                noRennbannmanager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_1, UzUDE0831EucAccesslogFileType.Csv);
+                eucFilePath = Path.combinePath(noRennbannmanager.getEucOutputDirectry(), NINTEISHAICHIRANCSV);
                 noRennbanneucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                         setDelimiter(EUC_WRITER_DELIMITER).
                         setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -333,7 +333,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
         } else {
             帳票タイトル = new RString("介護保険　社会福祉法人軽減該当者リスト");
         }
-        ShakaiFukushiHojinKeigenReport report = ShakaiFukushiHojinKeigenReport.createReport(entity, 帳票タイトル, processParameter.get帳票作成日時(),
+        ShakaiFukushiHojinKeigenReport report = new ShakaiFukushiHojinKeigenReport(entity, 帳票タイトル, processParameter.get帳票作成日時(),
                 association, outputOrder);
         report.writeBy(reportSourceWriterIchiran);
 

@@ -118,6 +118,11 @@ public class ShakaiFukushiHojinKeigenEditor implements IShakaiFukushiHojinKeigen
             source.list1_13 = 帳票情報.get認定年月日().wareki().toDateString();
         }
         source.list2_7 = 帳票情報.get入所施設コード();
+        setsource_line_up(source);
+    }
+
+    private void setsource_line_up(ShakaiFukushiHojinReportSourse source) {
+
         if (帳票情報.is旧措置者フラグ()) {
             source.list2_9 = new RString("該当");
         } else {
@@ -210,11 +215,16 @@ public class ShakaiFukushiHojinKeigenEditor implements IShakaiFukushiHojinKeigen
         }
         if (shakaifukuriyoshafutankeigen.get軽減率_分母() != null && shakaifukuriyoshafutankeigen.get軽減率_分子() != null) {
             RString 軽減率 = new RString("");
-            軽減率.concat(shakaifukuriyoshafutankeigen.get軽減率_分子().toString());
-            軽減率.concat("/");
-            軽減率.concat(shakaifukuriyoshafutankeigen.get軽減率_分母().toString());
+            軽減率.concat(new RString(shakaifukuriyoshafutankeigen.get軽減率_分子().toString()));
+            軽減率.concat(new RString("/"));
+            軽減率.concat(new RString(shakaifukuriyoshafutankeigen.get軽減率_分母().toString()));
             source.list3_5 = 軽減率;
         }
+        set社会福祉法人等利用者負担軽減の情報_line_up(shakaifukuriyoshafutankeigen, source);
+    }
+
+    private void set社会福祉法人等利用者負担軽減の情報_line_up(
+            ShakaifukuRiyoshaFutanKeigen shakaifukuriyoshafutankeigen, ShakaiFukushiHojinReportSourse source) {
         if (shakaifukuriyoshafutankeigen.get減免区分() != null) {
             source.list4_3 = GemmenKubun.toValue(shakaifukuriyoshafutankeigen.get減免区分()).get名称();
         }

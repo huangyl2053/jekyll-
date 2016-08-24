@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
@@ -93,7 +95,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> btnOnClick_radHakushiInsatsu(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
         div.getShinseishoHakkoParameters().getTxtShinsaYM().setReadOnly(true);
-        div.getShinseishoHakkoParameters().getBtnHihokenshaSearch().setDisabled(false);
+        div.getShinseishoHakkoParameters().getBtnHihokenshaSearch().setDisabled(true);
         div.getShinseishoHakkoParameters().getDdlServiceYM().setReadOnly(true);
         div.getShinseishoHakkoParameters().getRadShinsaYM().clearSelectedItem();
         div.getShinseishoHakkoParameters().getRadHihokenshaNo().clearSelectedItem();
@@ -121,10 +123,31 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> onBeforeOpenDialog(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
         if (div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().getValue().isEmpty()) {
-            return ResponseData.of(div).addMessage(DbcWarningMessages.申請書提出期限未入力.getMessage()).respond();
-        } else {
-            return ResponseData.of(div).addMessage(DbcWarningMessages.自動償還確認.getMessage()).respond();
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(DbcWarningMessages.申請書提出期限未入力.getMessage()).respond();
+            }
         }
+
+        if (!div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().getValue().isEmpty()) {
+            if (!ResponseHolder.isReRequest()) {
+                FlexibleDate 決定日 = div.getShinseishoHakkoParameters().getTxtKetteiDate().getValue();
+                return ResponseData.of(div).addMessage(DbcWarningMessages.自動償還確認.getMessage().replace(決定日.toString())).respond();
+            }
+        }
+
+        if (new RString(DbcWarningMessages.申請書提出期限未入力.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).respond();
+        }
+
+        if (new RString(DbcWarningMessages.自動償還確認.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).respond();
+        }
+
+        return ResponseData.of(div).respond();
     }
 
     /**

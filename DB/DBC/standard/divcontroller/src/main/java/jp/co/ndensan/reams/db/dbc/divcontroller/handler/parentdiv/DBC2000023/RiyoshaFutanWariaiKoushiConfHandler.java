@@ -15,10 +15,10 @@ import jp.co.ndensan.reams.db.dbc.service.core.futanwariaisho.FutanWariaisho;
 import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariai;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
-import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoKofuKaishuManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -93,7 +93,7 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
             throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
 
-        if (利用者負担割合.get論理削除フラグ()) {
+        if (利用者負担割合.is論理削除フラグ()) {
             div.getPanelHakko().getTxtHakkobi().clearValue();
             div.getPanelHakko().getTxtHakkobi().setDisabled(true);
             div.getPanelHakko().getTxtKofubi().clearValue();
@@ -158,9 +158,9 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         KeyValueDataSource dataSourceBlank = new KeyValueDataSource();
         dataSourceList.add(dataSourceBlank);
-        // TODO QA1279
+
         List<UzT0007CodeEntity> costlist = CodeMaster.getCode(
-                SubGyomuCode.DBC介護給付, DBCCodeShubetsu.過誤申立事由_上２桁_様式番号.getコード(), FlexibleDate.getNowDate());
+                SubGyomuCode.DBA介護資格, DBACodeShubetsu.負担割合証交付事由.getCodeShubetsu(), FlexibleDate.getNowDate());
         for (UzT0007CodeEntity list : costlist) {
             KeyValueDataSource dataSource = new KeyValueDataSource(list.getコード().value(), list.getコード名称());
             dataSourceList.add(dataSource);

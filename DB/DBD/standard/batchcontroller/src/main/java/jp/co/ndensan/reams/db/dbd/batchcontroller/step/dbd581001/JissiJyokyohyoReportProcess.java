@@ -63,27 +63,47 @@ public class JissiJyokyohyoReportProcess extends BatchProcessBase<JukyushaDaicho
 
     @Override
     protected void createWriter() {
-        tempWriter = new BatchEntityCreatedTempTableWriter(new RString("受給者台帳一時テーブル"),
+        tempWriter = new BatchEntityCreatedTempTableWriter(JukyushaDaichoTempEntity.TABLE_NAME,
                 JukyushaDaichoTempEntity.class);
     }
 
     @Override
     protected void process(JukyushaDaichoTempEntity entity) {
         if (parameter.get出力帳票().equals(出力帳票)) {
-            entity.set認定年月(entity.get認定年月日().getYearMonth().seireki().toDateString());
-            entity.set受給申請年月(entity.get受給申請年月日().getYearMonth().seireki().toDateString());
-            entity.set調査委託年月(entity.get調査委託年月日().getYearMonth().seireki().toDateString());
-            entity.set調査終了年月(entity.get調査終了年月日().getYearMonth().seireki().toDateString());
-            entity.set意見書依頼年月(entity.get意見書依頼年月日().getYearMonth().seireki().toDateString());
-            entity.set意見書取寄せ年月(entity.get意見書取寄せ年月日().getYearMonth().seireki().toDateString());
-            entity.set審査会依頼年月(entity.get審査会依頼年月日().getYearMonth().seireki().toDateString());
-            entity.set認定審査会割当予定年月(entity.get認定審査会割当予定年月日().getYearMonth().seireki().toDateString());
-            entity.set審査会資料作成年月(entity.get審査会資料作成年月日().getYearMonth().seireki().toDateString());
-            entity.set認定調査予定年月(entity.get認定調査予定年月日().getYearMonth().seireki().toDateString());
-            entity.set主治医意見書作成依頼予定年月(entity.get主治医意見書作成依頼予定年月日().getYearMonth().seireki().toDateString());
+            if (entity.getNinteiYMD() != null && !entity.getNinteiYMD().isEmpty()) {
+                entity.setNinteiYM(entity.getNinteiYMD().getYearMonth().seireki().toDateString());
+            }
+            if (entity.getJukyuShinseiYMD() != null && !entity.getJukyuShinseiYMD().isEmpty()) {
+                entity.setJukyuShinseiYM(entity.getJukyuShinseiYMD().getYearMonth().seireki().toDateString());
+            }
+            if (entity.getNinteichosaIraiYMD() != null && !entity.getNinteichosaIraiYMD().isEmpty()) {
+                entity.setNinteichosaIraiYM(entity.getNinteichosaIraiYMD().getYearMonth().seireki().toDateString());
+            }
+            if (entity.getNinteichosaJisshiYMD() != null && !entity.getNinteichosaJisshiYMD().isEmpty()) {
+                entity.setNinteichosaJisshiYM(entity.getNinteichosaJisshiYMD().getYearMonth().seireki().toDateString());
+            }
+            if (entity.getIkenshoSakuseiIraiYMD() != null && !entity.getIkenshoSakuseiIraiYMD().isEmpty()) {
+                entity.setIkenshoSakuseiIraiYM(entity.getIkenshoSakuseiIraiYMD().getYearMonth().seireki().toDateString());
+            }
+            if (entity.getIkenshoJuryoYMD() != null && !entity.getIkenshoJuryoYMD().isEmpty()) {
+                entity.setIkenshoJuryoYM(entity.getIkenshoJuryoYMD().getYearMonth().seireki().toDateString());
+            }
+            if (entity.getShinsakaiIraiYMD() != null && !entity.getShinsakaiIraiYMD().isEmpty()) {
+                entity.setShinsakaiIraiYM(entity.getShinsakaiIraiYMD().getYearMonth().seireki().toDateString());
+            }
+            if (entity.getNinteiShinsakaiWariateYoteiYMD() != null && !entity.getNinteiShinsakaiWariateYoteiYMD().isEmpty()) {
+                entity.setNinteiShinsakaiWariateYoteiYM(entity.getNinteiShinsakaiWariateYoteiYMD().getYearMonth().seireki().toDateString());
+            }
+            if (entity.getShinsakaiShiryoSakuseiYMD() != null && !entity.getShinsakaiShiryoSakuseiYMD().isEmpty()) {
+                entity.setShinsakaiShiryoSakuseiYM(entity.getShinsakaiShiryoSakuseiYMD().getYearMonth().seireki().toDateString());
+            }
+            if (entity.getNinteichosaYoteiYMD() != null && !entity.getNinteichosaYoteiYMD().isEmpty()) {
+                entity.setNinteichosaYoteiYM(entity.getNinteichosaYoteiYMD().getYearMonth().seireki().toDateString());
+            }
+            if (entity.getIkenshoSakuseiIraiYoteiYMD() != null && !entity.getIkenshoSakuseiIraiYoteiYMD().isEmpty()) {
+                entity.setIkenshoSakuseiIraiYoteiYM(entity.getIkenshoSakuseiIraiYoteiYMD().getYearMonth().seireki().toDateString());
+            }
             tempWriter.insert(entity);
         }
-
     }
-
 }

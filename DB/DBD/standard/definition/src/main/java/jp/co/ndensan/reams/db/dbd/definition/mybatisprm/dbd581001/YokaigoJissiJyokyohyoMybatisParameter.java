@@ -53,18 +53,18 @@ public class YokaigoJissiJyokyohyoMybatisParameter implements IMyBatisParameter 
     /**
      * コンストラクタです。
      *
-     * @param 導入形態コード
-     * @param 概況調査テキストイメージ区分
-     * @param 年齢基準日
-     * @param 年齢From
-     * @param 年齢To
-     * @param 生年月日From
-     * @param 生年月日To
-     * @param 地区区分
-     * @param 開始地区コード
-     * @param 終了地区コード
-     * @param 集計単位
-     * @param psmShikibetsuTaisho
+     * @param 導入形態コード 導入形態コード
+     * @param 概況調査テキストイメージ区分 概況調査テキストイメージ区分
+     * @param 年齢基準日 年齢基準日
+     * @param 年齢From 年齢From
+     * @param 年齢To 年齢To
+     * @param 生年月日From 生年月日From
+     * @param 生年月日To 生年月日To
+     * @param 地区区分 地区区分
+     * @param 開始地区コード 開始地区コード
+     * @param 終了地区コード 終了地区コード
+     * @param 集計単位 集計単位
+     * @param psmShikibetsuTaisho psmShikibetsuTaisho
      */
     public YokaigoJissiJyokyohyoMybatisParameter(
             RString 導入形態コード,
@@ -87,9 +87,11 @@ public class YokaigoJissiJyokyohyoMybatisParameter implements IMyBatisParameter 
             this.is導入形態コード120 = true;
         }
         this.概況調査テキストイメージ区分 = 概況調査テキストイメージ区分;
-        this.年齢基準日 = 年齢基準日;
-        this.生年月日From2 = 年齢基準日.minusYear(年齢From);
-        this.生年月日To2 = 年齢基準日.minusYear(年齢To);
+        if (!年齢基準日.isEmpty() && 年齢基準日 != null) {
+            this.年齢基準日 = 年齢基準日;
+            this.生年月日From2 = 年齢基準日.minusYear(年齢From);
+            this.生年月日To2 = 年齢基準日.minusYear(年齢To);
+        }
         this.生年月日From = 生年月日From;
         this.生年月日To = 生年月日To;
         if (地区区分.equals(地区区分住所)) {

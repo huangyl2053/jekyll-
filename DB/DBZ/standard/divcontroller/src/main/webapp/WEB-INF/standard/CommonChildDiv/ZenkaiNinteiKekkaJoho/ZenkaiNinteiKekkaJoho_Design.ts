@@ -8,16 +8,8 @@ module DBZ {
 
         export class Events {
 
-            public static onOkClose_btnZenkaiShosai(): string {
-                return "onOkClose_btnZenkaiShosai";
-            }
-
             public static onBefore_Dialog(): string {
                 return "onBefore_Dialog";
-            }
-
-            public static onCancelClose_btnZenkaiShosai(): string {
-                return "onCancelClose_btnZenkaiShosai";
             }
 
         }

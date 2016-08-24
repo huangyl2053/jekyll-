@@ -15,13 +15,15 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  *
  * @reamsid_L DBD-3530-040 liuwei2
  */
+@lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KousinSinseiTaishougaishaJohoMyBatisParameter implements IMyBatisParameter {
 
-    private FlexibleDate 基準日;
-    private FlexibleDate 前年度の開始日;
-    private FlexibleDate 前年度の終了日;
-    private GemmenGengakuShurui 減免減額種類;
-    private UUID 把握処理ID;
+    private final FlexibleDate 基準日;
+    private final FlexibleDate 前年度の開始日;
+    private final FlexibleDate 前年度の終了日;
+    private final GemmenGengakuShurui 減免減額種類;
+    private final UUID 把握処理ID;
 
     /**
      *

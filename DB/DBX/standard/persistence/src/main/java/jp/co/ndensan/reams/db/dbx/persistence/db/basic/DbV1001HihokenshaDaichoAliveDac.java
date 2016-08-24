@@ -11,8 +11,10 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.edaNo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.idoYMD;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -64,6 +66,25 @@ public class DbV1001HihokenshaDaichoAliveDac {
                                 eq(idoYMD, 異動日),
                                 eq(edaNo, 枝番))).
                 toObject(DbV1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 識別コードで被保険者台帳管理を取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return List<DbV1001HihokenshaDaichoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbV1001HihokenshaDaichoEntity> selectBy識別コード(ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV1001HihokenshaDaicho.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                toList(DbV1001HihokenshaDaichoEntity.class);
     }
 
     /**

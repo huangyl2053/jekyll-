@@ -91,6 +91,18 @@ public class JissiJyokyohyoHakkouProcess extends BatchProcessBase<JissiJyokyohyo
     private static final RString 受給申請事由 = new RString("受給申請事由");
     private static final RString 申請区分申請時 = new RString("申請区分(申請時)");
     private static final RString 申請区分法令 = new RString("申請区分(法令)");
+    private static final int SUBSTRING_4 = 5;
+    private static final int SUBSTRING_9 = 9;
+    private static final int INDEX_12 = 12;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_7 = 7;
+    private static final int INDEX_8 = 8;
+    private static final int INDEX_9 = 9;
+    private static final int INDEX_10 = 10;
+    private static final int INDEX_11 = 11;
 
     @Override
     protected void initialize() {
@@ -145,7 +157,6 @@ public class JissiJyokyohyoHakkouProcess extends BatchProcessBase<JissiJyokyohyo
     }
 
     private void 実施状況リスト作成(JissiJyokyohyoHakkouEntity jissiJyokyohyoHakkouEntity) {
-
         yokaigoNinteiJisshiJokyohyoEntity.set市町村番号(jissiJyokyohyoHakkouEntity.get市町村コード().code市町村RString());
         yokaigoNinteiJisshiJokyohyoEntity.set市町村名(jissiJyokyohyoHakkouEntity.get市町村名());
         if (jissiJyokyohyoHakkouEntity.get取得条件().substring(2).equals(取得条件新規)) {
@@ -157,41 +168,40 @@ public class JissiJyokyohyoHakkouProcess extends BatchProcessBase<JissiJyokyohyo
         } else if (jissiJyokyohyoHakkouEntity.get取得条件().substring(2).equals(取得条件区分変更)) {
             yokaigoNinteiJisshiJokyohyoEntity.set集計項目(集計項目区分変更);
         }
-
-        if (jissiJyokyohyoHakkouEntity.get年月().substring(4).equals(一月)) {
+        if (jissiJyokyohyoHakkouEntity.get年月().substring(SUBSTRING_4).equals(一月)) {
             yokaigoNinteiJisshiJokyohyoEntity.set一月の合計(jissiJyokyohyoHakkouEntity.get数量());
         }
-        if (jissiJyokyohyoHakkouEntity.get年月().substring(4).equals(二月)) {
+        if (jissiJyokyohyoHakkouEntity.get年月().substring(SUBSTRING_4).equals(二月)) {
             yokaigoNinteiJisshiJokyohyoEntity.set二月の合計(jissiJyokyohyoHakkouEntity.get数量());
         }
-        if (jissiJyokyohyoHakkouEntity.get年月().substring(4).equals(三月)) {
+        if (jissiJyokyohyoHakkouEntity.get年月().substring(SUBSTRING_4).equals(三月)) {
             yokaigoNinteiJisshiJokyohyoEntity.set三月の合計(jissiJyokyohyoHakkouEntity.get数量());
         }
-        if (jissiJyokyohyoHakkouEntity.get年月().substring(4).equals(四月)) {
+        if (jissiJyokyohyoHakkouEntity.get年月().substring(SUBSTRING_4).equals(四月)) {
             yokaigoNinteiJisshiJokyohyoEntity.set四月の合計(jissiJyokyohyoHakkouEntity.get数量());
         }
-        if (jissiJyokyohyoHakkouEntity.get年月().substring(4).equals(五月)) {
+        if (jissiJyokyohyoHakkouEntity.get年月().substring(SUBSTRING_4).equals(五月)) {
             yokaigoNinteiJisshiJokyohyoEntity.set五月の合計(jissiJyokyohyoHakkouEntity.get数量());
         }
-        if (jissiJyokyohyoHakkouEntity.get年月().substring(4).equals(六月)) {
+        if (jissiJyokyohyoHakkouEntity.get年月().substring(SUBSTRING_4).equals(六月)) {
             yokaigoNinteiJisshiJokyohyoEntity.set六月の合計(jissiJyokyohyoHakkouEntity.get数量());
         }
-        if (jissiJyokyohyoHakkouEntity.get年月().substring(4).equals(七月)) {
+        if (jissiJyokyohyoHakkouEntity.get年月().substring(SUBSTRING_4).equals(七月)) {
             yokaigoNinteiJisshiJokyohyoEntity.set七月の合計(jissiJyokyohyoHakkouEntity.get数量());
         }
-        if (jissiJyokyohyoHakkouEntity.get年月().substring(4).equals(八月)) {
+        if (jissiJyokyohyoHakkouEntity.get年月().substring(SUBSTRING_4).equals(八月)) {
             yokaigoNinteiJisshiJokyohyoEntity.set八月の合計(jissiJyokyohyoHakkouEntity.get数量());
         }
-        if (jissiJyokyohyoHakkouEntity.get年月().substring(4).equals(九月)) {
+        if (jissiJyokyohyoHakkouEntity.get年月().substring(SUBSTRING_4).equals(九月)) {
             yokaigoNinteiJisshiJokyohyoEntity.set九月の合計(jissiJyokyohyoHakkouEntity.get数量());
         }
-        if (jissiJyokyohyoHakkouEntity.get年月().substring(4).equals(十月)) {
+        if (jissiJyokyohyoHakkouEntity.get年月().substring(SUBSTRING_4).equals(十月)) {
             yokaigoNinteiJisshiJokyohyoEntity.set十月の合計(jissiJyokyohyoHakkouEntity.get数量());
         }
-        if (jissiJyokyohyoHakkouEntity.get年月().substring(4).equals(十一月)) {
+        if (jissiJyokyohyoHakkouEntity.get年月().substring(SUBSTRING_4).equals(十一月)) {
             yokaigoNinteiJisshiJokyohyoEntity.set十一月の合計(jissiJyokyohyoHakkouEntity.get数量());
         }
-        if (jissiJyokyohyoHakkouEntity.get年月().substring(4).equals(十二月)) {
+        if (jissiJyokyohyoHakkouEntity.get年月().substring(SUBSTRING_4).equals(十二月)) {
             yokaigoNinteiJisshiJokyohyoEntity.set十二月の合計(jissiJyokyohyoHakkouEntity.get数量());
         }
         yokaigoNinteiJisshiJokyohyoEntity.set年度合計(yokaigoNinteiJisshiJokyohyoEntity.get年度合計() + jissiJyokyohyoHakkouEntity.get数量() - 1);
@@ -200,8 +210,7 @@ public class JissiJyokyohyoHakkouProcess extends BatchProcessBase<JissiJyokyohyo
     @Override
     protected void afterExecute() {
         実施状況Entity.get実施状況リスト4().add(yokaigoNinteiJisshiJokyohyoEntity);
-
-        for (int index = 0; index < 12; index++) {
+        for (int index = 0; index < INDEX_12; index++) {
             yokaigoNinteiJisshiJokyohyoEntity = new YokaigoNinteiJisshiJokyohyoEntity();
             if (index == 0) {
                 yokaigoNinteiJisshiJokyohyoEntity.set集計項目(集計項目申請受付件数);
@@ -209,23 +218,23 @@ public class JissiJyokyohyoHakkouProcess extends BatchProcessBase<JissiJyokyohyo
                 yokaigoNinteiJisshiJokyohyoEntity.set集計項目(集計項目申請取下げ件数);
             } else if (index == 2) {
                 yokaigoNinteiJisshiJokyohyoEntity.set集計項目(集計項目申請却下件数);
-            } else if (index == 3) {
+            } else if (index == INDEX_3) {
                 yokaigoNinteiJisshiJokyohyoEntity.set集計項目(集計項目調査依頼件数);
-            } else if (index == 4) {
+            } else if (index == INDEX_4) {
                 yokaigoNinteiJisshiJokyohyoEntity.set集計項目(集計項目調査予定件数);
-            } else if (index == 5) {
+            } else if (index == INDEX_5) {
                 yokaigoNinteiJisshiJokyohyoEntity.set集計項目(集計項目調査実施件数);
-            } else if (index == 6) {
+            } else if (index == INDEX_6) {
                 yokaigoNinteiJisshiJokyohyoEntity.set集計項目(集計項目意見書依頼件数);
-            } else if (index == 7) {
+            } else if (index == INDEX_7) {
                 yokaigoNinteiJisshiJokyohyoEntity.set集計項目(集計項目意見書取寄せ予定件数);
-            } else if (index == 8) {
+            } else if (index == INDEX_8) {
                 yokaigoNinteiJisshiJokyohyoEntity.set集計項目(集計項目意見書取寄せ件数);
-            } else if (index == 9) {
+            } else if (index == INDEX_9) {
                 yokaigoNinteiJisshiJokyohyoEntity.set集計項目(集計項目審査会依頼件数);
-            } else if (index == 10) {
+            } else if (index == INDEX_10) {
                 yokaigoNinteiJisshiJokyohyoEntity.set集計項目(集計項目審査会回答予定件数);
-            } else if (index == 11) {
+            } else if (index == INDEX_11) {
                 yokaigoNinteiJisshiJokyohyoEntity.set集計項目(集計項目審査会回答件数);
             }
             yokaigoNinteiJisshiJokyohyoEntity.set一月の合計(
@@ -283,8 +292,8 @@ public class JissiJyokyohyoHakkouProcess extends BatchProcessBase<JissiJyokyohyo
             実施状況Entity.get実施状況リスト1().add(yokaigoNinteiJisshiJokyohyoEntity);
 
         }
-        for (int index = 0; index < 12; index++) {
-            実施状況Entity.get実施状況Entityリスト1().add(JokyohyoEntityToJokyohyoReportEntity(実施状況Entity.get実施状況リスト1().get(index)));
+        for (int index = 0; index < INDEX_12; index++) {
+            実施状況Entity.get実施状況Entityリスト1().add(jokyohyoEntityToJokyohyoReportEntity(実施状況Entity.get実施状況リスト1().get(index)));
             yokaigoNinteiJisshiJokyohyoReportEntity = new YokaigoNinteiJisshiJokyohyoReportEntity();
             yokaigoNinteiJisshiJokyohyoReportEntity.set市町村番号(実施状況Entity.get実施状況リスト2().get(index).get市町村番号());
             yokaigoNinteiJisshiJokyohyoReportEntity.set市町村名(実施状況Entity.get実施状況リスト2().get(index).get市町村名());
@@ -316,32 +325,17 @@ public class JissiJyokyohyoHakkouProcess extends BatchProcessBase<JissiJyokyohyo
             yokaigoNinteiJisshiJokyohyoReportEntity.set年度合計(new RString(実施状況Entity.get実施状況リスト2().get(index).get年度合計())
                     .concat("(").concat(new RString(実施状況Entity.get実施状況リスト5().get(index).get年度合計())).concat(")"));
             実施状況Entity.get実施状況Entityリスト2().add(yokaigoNinteiJisshiJokyohyoReportEntity);
-            実施状況Entity.get実施状況Entityリスト3().add(JokyohyoEntityToJokyohyoReportEntity(実施状況Entity.get実施状況リスト3().get(index)));
-            実施状況Entity.get実施状況Entityリスト4().add(JokyohyoEntityToJokyohyoReportEntity(実施状況Entity.get実施状況リスト4().get(index)));
+            実施状況Entity.get実施状況Entityリスト3().add(jokyohyoEntityToJokyohyoReportEntity(実施状況Entity.get実施状況リスト3().get(index)));
+            実施状況Entity.get実施状況Entityリスト4().add(jokyohyoEntityToJokyohyoReportEntity(実施状況Entity.get実施状況リスト4().get(index)));
 
         }
         FlexibleDate 基準日 = FlexibleDate.EMPTY;
-        RString 年齢 = new RString(parameter.get年齢From())
-                .concat("～")
-                .concat(new RString(parameter.get年齢To()));
-        RString 地区;
+        RString 地区 = RString.EMPTY;
         RString 集計単位 = RString.EMPTY;
-        if (parameter.get地区区分().equals(地区区分全て)) {
-            地区 = 地区全て;
-
-        } else {
-            地区 = new RString(parameter.get開始地区コード().toString())
-                    .concat("～")
-                    .concat(new RString(parameter.get終了地区コード().toString()));
-        }
-        if (parameter.get集計単位().equals(集計単位受給申請)) {
-            集計単位 = 受給申請事由;
-        } else if (parameter.get集計単位().equals(集計単位申請時)) {
-            集計単位 = 申請区分申請時;
-
-        } else if (parameter.get集計単位().equals(集計単位法令)) {
-            集計単位 = 申請区分法令;
-        }
+        RString 年齢 = new RString(parameter.get年齢From())
+                .concat("～").concat(new RString(parameter.get年齢To()));
+        地区 = set地区(地区);
+        集計単位 = set集計単位(集計単位);
         YokaigoNinteiJisshiJokyohyoReport report = YokaigoNinteiJisshiJokyohyoReport.createReport(
                 基準日,
                 年齢,
@@ -355,7 +349,8 @@ public class JissiJyokyohyoHakkouProcess extends BatchProcessBase<JissiJyokyohyo
         outputJokenhyoFactory();
     }
 
-    private YokaigoNinteiJisshiJokyohyoReportEntity JokyohyoEntityToJokyohyoReportEntity(YokaigoNinteiJisshiJokyohyoEntity yokaigoNinteiJisshiJokyohyoEntity) {
+    private YokaigoNinteiJisshiJokyohyoReportEntity jokyohyoEntityToJokyohyoReportEntity(
+            YokaigoNinteiJisshiJokyohyoEntity yokaigoNinteiJisshiJokyohyoEntity) {
         yokaigoNinteiJisshiJokyohyoReportEntity = new YokaigoNinteiJisshiJokyohyoReportEntity();
         yokaigoNinteiJisshiJokyohyoReportEntity.set市町村番号(yokaigoNinteiJisshiJokyohyoEntity.get市町村番号());
         yokaigoNinteiJisshiJokyohyoReportEntity.set市町村名(yokaigoNinteiJisshiJokyohyoEntity.get市町村名());
@@ -379,7 +374,7 @@ public class JissiJyokyohyoHakkouProcess extends BatchProcessBase<JissiJyokyohyo
     private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                ReportIdDBD.DBD300003.getReportId().getColumnValue().substring(0, 9),
+                ReportIdDBD.DBD300003.getReportId().getColumnValue().substring(0, SUBSTRING_9),
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
@@ -389,6 +384,30 @@ public class JissiJyokyohyoHakkouProcess extends BatchProcessBase<JissiJyokyohyo
                 new RString("なし"),
                 contribute());
         OutputJokenhyoFactory.createInstance(item).print();
+    }
+
+    private RString set地区(RString 地区) {
+        if (parameter.get地区区分().equals(地区区分全て)) {
+            地区 = 地区全て;
+
+        } else {
+            地区 = new RString(parameter.get開始地区コード().toString())
+                    .concat("～")
+                    .concat(new RString(parameter.get終了地区コード().toString()));
+        }
+        return 地区;
+    }
+
+    private RString set集計単位(RString 集計単位) {
+        if (parameter.get集計単位().equals(集計単位受給申請)) {
+            集計単位 = 受給申請事由;
+        } else if (parameter.get集計単位().equals(集計単位申請時)) {
+            集計単位 = 申請区分申請時;
+
+        } else if (parameter.get集計単位().equals(集計単位法令)) {
+            集計単位 = 申請区分法令;
+        }
+        return 集計単位;
     }
 
     private List<RString> contribute() {

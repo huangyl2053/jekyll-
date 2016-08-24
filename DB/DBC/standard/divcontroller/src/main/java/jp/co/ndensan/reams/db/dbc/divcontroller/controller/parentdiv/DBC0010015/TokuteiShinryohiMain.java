@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiTokuteiSinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiTokuteiSinryohi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010015.DBC0010015TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010015.TokuteiShinryohiMainDiv;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010015.Tok
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -32,9 +34,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class TokuteiShinryohiMain {
 
-    private final RString 年月 = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_介護給付費見直し,
-            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).substringEmptyOnError(0, 6);
-    private final FlexibleYearMonth 提供年月 = new FlexibleYearMonth(年月);
+    private static final int ZERO_INT = 0;
+    private static final int SEX_INT = 6;
 
     /**
      * 画面初期化のメソッドです。
@@ -43,6 +44,9 @@ public class TokuteiShinryohiMain {
      * @return ResponseData<TokuteiShinryohiMainDiv>
      */
     public ResponseData<TokuteiShinryohiMainDiv> onLoad(TokuteiShinryohiMainDiv div) {
+        RString 年月 = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_介護給付費見直し,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).substringEmptyOnError(ZERO_INT, SEX_INT);
+        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(年月);
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         NyuryokuShikibetsuNo 識別番号検索キー = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class);
@@ -52,15 +56,18 @@ public class TokuteiShinryohiMain {
         if (提供年月.isBeforeOrEquals(サービス提供年月)) {
             List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費等 = 給付実績情報照会情報.getCsData_J();
             getHandler(div).set給付実績特定診療費_特別療養費等(給付実績特定診療費_特別療養費等);
+            div.getDgTokuteiShinryohiToH1503().setDisplayNone(true);
         } else {
             List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費等 = 給付実績情報照会情報.getCsData_D();
             getHandler(div).set給付実績特定診療費等(給付実績特定診療費等);
+            div.getDgTokuteiShinryohiFromH1504().setDisplayNone(true);
         }
         ShikibetsuNoKanri 識別番号管理データ取得 = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
                 サービス提供年月, 識別番号検索キー).records().get(0);
         getHandler(div).clear制御性(識別番号管理データ取得);
         div.getTekiyoPanelPanel().setIsOpen(false);
         return createResponse(div);
+
     }
 
     /**
@@ -95,8 +102,13 @@ public class TokuteiShinryohiMain {
      * @return ResponseData<TokuteiShinryohiMainDiv>
      */
     public ResponseData<TokuteiShinryohiMainDiv> onClick_MaeJigyosha(TokuteiShinryohiMainDiv div) {
+        List<KyufuJissekiHedajyoho2> 事業者番号リスト
+                = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
+                .getCommonHeader().get給付実績ヘッダ情報2();
+        JigyoshaNo 事業所番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
+                .getCommonHeader().get給付実績ヘッダ情報2().get(ZERO_INT).get事業所番号();
         this.close摘要(div);
-        getHandler(div).change事業者(new RString("前事業者"));
+        getHandler(div).change事業者(new RString("前事業者"), 事業者番号リスト, 事業所番号);
         return createResponse(div);
     }
 
@@ -108,7 +120,12 @@ public class TokuteiShinryohiMain {
      */
     public ResponseData<TokuteiShinryohiMainDiv> onClick_AtoJigyosha(TokuteiShinryohiMainDiv div) {
         this.close摘要(div);
-        getHandler(div).change事業者(new RString("後事業者"));
+        List<KyufuJissekiHedajyoho2> 事業者番号リスト
+                = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
+                .getCommonHeader().get給付実績ヘッダ情報2();
+        JigyoshaNo 事業所番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
+                .getCommonHeader().get給付実績ヘッダ情報2().get(ZERO_INT).get事業所番号();
+        getHandler(div).change事業者(new RString("後事業者"), 事業者番号リスト, 事業所番号);
         return createResponse(div);
     }
 
@@ -143,11 +160,6 @@ public class TokuteiShinryohiMain {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 摘要パネル（TekiyoPanel）が開いていた場合、閉じる。
-     *
-     * @param div TokuteiShinryohiMainDiv
-     */
     private void close摘要(TokuteiShinryohiMainDiv div) {
         if (div.getTekiyoPanelPanel().isIsOpen()) {
             div.getTekiyoPanelPanel().setIsOpen(false);

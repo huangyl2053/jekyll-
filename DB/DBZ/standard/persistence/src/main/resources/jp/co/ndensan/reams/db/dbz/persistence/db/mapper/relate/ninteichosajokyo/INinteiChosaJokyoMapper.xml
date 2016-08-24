@@ -21,15 +21,15 @@
         , T7060."telNo" 
       FROM
         rgdb."DbT4101NinteiShinseiJoho" T4101 
-        LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" T1004 
+        INNER JOIN rgdb."DbT1004ShisetsuNyutaisho" T1004 
           ON T1004."nyushoShisetsuCode" = T4101."nyushoShisetsuCode" 
           AND T1004."shikibetsuCode" = T4101."shikibetsuCode" 
           AND ( 
             T1004."nyushoYMD" <![CDATA[<=]]> #{システム日付} 
             AND #{システム日付} <![CDATA[<=]]> T1004."taishoYMD"
           ) 
-        LEFT JOIN rgdb."DbT7060KaigoJigyosha" T7060 
-          ON T1004."nyushoShisetsuCode" = T7060.事業者番号 
+        INNER JOIN rgdb."DbT7060KaigoJigyosha" T7060 
+          ON T1004."nyushoShisetsuCode" = T7060."jigyoshaNo" 
           AND ( 
             T7060."yukoKaishiYMD" <![CDATA[<=]]> #{システム日付} 
             AND #{システム日付} <![CDATA[<=]]> T7060."yukoShuryoYMD"
@@ -49,15 +49,15 @@
         , T7060."telNo" 
       FROM
         rgdb."DbT5101NinteiShinseiJoho" T5101 
-        LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" T1004 
+        INNER JOIN rgdb."DbT1004ShisetsuNyutaisho" T1004 
           ON T1004."nyushoShisetsuCode" = T5101."nyushoShisetsuCode" 
           AND T1004."shikibetsuCode" = T5101."shikibetsuCode" 
           AND ( 
             T1004."nyushoYMD" <![CDATA[<=]]> #{システム日付} 
             AND #{システム日付} <![CDATA[<=]]> T1004."taishoYMD"
           ) 
-        LEFT JOIN rgdb."DbT7060KaigoJigyosha" T7060 
-          ON T1004."nyushoShisetsuCode" = T7060.事業者番号 
+        INNER JOIN rgdb."DbT7060KaigoJigyosha" T7060 
+          ON T1004."nyushoShisetsuCode" = T7060."jigyoshaNo"
           AND ( 
             T7060."yukoKaishiYMD" <![CDATA[<=]]> #{システム日付} 
             AND #{システム日付} <![CDATA[<=]]> T7060."yukoShuryoYMD"

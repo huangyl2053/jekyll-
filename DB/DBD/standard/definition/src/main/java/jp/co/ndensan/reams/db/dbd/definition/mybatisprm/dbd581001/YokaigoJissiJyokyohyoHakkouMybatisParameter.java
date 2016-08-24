@@ -18,14 +18,14 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class YokaigoJissiJyokyohyoHakkouMybatisParameter implements IMyBatisParameter {
 
-    FlexibleDate 対象年月日From;
-    FlexibleDate 対象年月日To;
+    private FlexibleDate 対象年月日From;
+    private FlexibleDate 対象年月日To;
 
     /**
      * コンストラクタです。
      *
-     * @param 対象年月日From
-     * @param 対象年月日To
+     * @param 対象年月日From 対象年月日From
+     * @param 対象年月日To 対象年月日To
      */
     public YokaigoJissiJyokyohyoHakkouMybatisParameter(
             FlexibleDate 対象年月日From,

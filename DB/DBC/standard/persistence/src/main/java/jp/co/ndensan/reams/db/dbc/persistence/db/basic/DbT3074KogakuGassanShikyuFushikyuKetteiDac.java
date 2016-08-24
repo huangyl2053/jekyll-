@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushikyuKettei;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushikyuKettei.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushikyuKettei.hokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushikyuKettei.isDeleted;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushikyuKettei.rirekiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushikyuKettei.shikyuSeiriNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushikyuKettei.taishoNendo;
@@ -21,7 +22,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -99,5 +102,25 @@ public class DbT3074KogakuGassanShikyuFushikyuKetteiDac implements ISaveable<DbT
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 高額合算支給不支給決定を全件返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<DbT3074KogakuGassanShikyuFushikyuKetteiEntity>
+     */
+    @Transaction
+    public List<DbT3074KogakuGassanShikyuFushikyuKetteiEntity> selectAll(HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3074KogakuGassanShikyuFushikyuKettei.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(isDeleted, false))).
+                order(by(taishoNendo, Order.DESC), by(shikyuSeiriNo, Order.DESC), by(rirekiNo, Order.DESC)).
+                toList(DbT3074KogakuGassanShikyuFushikyuKetteiEntity.class);
     }
 }

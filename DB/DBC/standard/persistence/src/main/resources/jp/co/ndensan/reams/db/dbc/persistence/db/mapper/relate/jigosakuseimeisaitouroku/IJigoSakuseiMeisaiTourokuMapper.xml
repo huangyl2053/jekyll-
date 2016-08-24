@@ -324,6 +324,8 @@
         <result property="更新日" column="更新日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="最大履歴番号" column="最大履歴番号"/>
         <result property="届出区分" column="届出区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居宅総合事業区分" column="居宅総合事業区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+
     </resultMap>
     
     <select id="get対象情報一覧"

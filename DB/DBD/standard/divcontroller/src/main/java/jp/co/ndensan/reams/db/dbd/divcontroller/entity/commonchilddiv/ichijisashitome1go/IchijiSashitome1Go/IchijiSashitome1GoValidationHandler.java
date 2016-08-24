@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.ichijisas
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.sashitome.ShiharaiHohoHenkoSashitome;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenkoJohoBunruiKubun;
+import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShoriKubun;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,8 +26,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class IchijiSashitome1GoValidationHandler {
 
-    private final RString 給付一時差止登録 = new RString("給付一時差止登録");
-    private final RString 保険料控除登録 = new RString("保険料控除登録");
     private final RString 登録PTN = new RString("登録PTN");
     private final RString 更新PTN = new RString("更新PTN");
 
@@ -40,7 +39,7 @@ public class IchijiSashitome1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor給付一時差止選択データチェック(ValidationMessageControlPairs pairs, IchijiSashitome1GoDiv div,
             ShiharaiHohoHenkoSashitome shiharaiHohoHenkoSashitome) {
-        if (div.getKey_Button().equals(給付一時差止登録)
+        if (div.getKey_Button().equals(ShoriKubun.給付一時差止登録.getコード())
                 && (!div.getDgSashitomeKojoIchiran().getClickedItem().getTxtSashitomeKaijoYMD().getValue().isEmpty()
                 || shiharaiHohoHenkoSashitome.is論理削除フラグ())) {
             pairs.add(new ValidationMessageControlPair(IchijiSashitome1GoMessages.給付一時差止選択データチェック));
@@ -58,7 +57,7 @@ public class IchijiSashitome1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor保険料控除選択データチェック(ValidationMessageControlPairs pairs, IchijiSashitome1GoDiv div,
             ShiharaiHohoHenkoSashitome shiharaiHohoHenkoSashitome) {
-        if (div.getKey_Button().equals(保険料控除登録) && shiharaiHohoHenkoSashitome.is論理削除フラグ()) {
+        if (div.getKey_Button().equals(ShoriKubun.保険料控除登録.getコード()) && shiharaiHohoHenkoSashitome.is論理削除フラグ()) {
             pairs.add(new ValidationMessageControlPair(IchijiSashitome1GoMessages.保険料控除選択データチェック));
         }
         return pairs;
@@ -72,8 +71,9 @@ public class IchijiSashitome1GoValidationHandler {
      * @param shiharaiHohoHenko shiharaiHohoHenko
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateFor滞納状況情報チェック(ValidationMessageControlPairs pairs, IchijiSashitome1GoDiv div, ShiharaiHohoHenko shiharaiHohoHenko) {
-        if ((div.getKey_Button().equals(給付一時差止登録) || div.getKey_Button().equals(保険料控除登録))
+    public ValidationMessageControlPairs validateFor滞納状況情報チェック(ValidationMessageControlPairs pairs, IchijiSashitome1GoDiv div,
+            ShiharaiHohoHenko shiharaiHohoHenko) {
+        if ((div.getKey_Button().equals(ShoriKubun.給付一時差止登録.getコード()) || div.getKey_Button().equals(ShoriKubun.保険料控除登録.getコード()))
                 && (div.getPTN().equals(登録PTN) || div.getPTN().equals(更新PTN))
                 && (shiharaiHohoHenko.getShiharaiHohoHenkoTainoList().isEmpty() || div.getTainoHanteiKekka().isEmpty())) {
             pairs.add(new ValidationMessageControlPair(IchijiSashitome1GoMessages.支払方法変更_要滞納状況確定));
@@ -91,7 +91,7 @@ public class IchijiSashitome1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor給付一時差止未解除データチェック(ValidationMessageControlPairs pairs, IchijiSashitome1GoDiv div,
             ShiharaiHohoHenko shiharaiHohoHenko) {
-        if (div.getKey_Button().equals(給付一時差止登録)) {
+        if (div.getKey_Button().equals(ShoriKubun.給付一時差止登録.getコード())) {
             for (ShiharaiHohoHenkoSashitome shiharaiHohoHenkoSashitome : shiharaiHohoHenko.getShiharaiHohoHenkoSashitomeList()) {
                 if (shiharaiHohoHenkoSashitome.get情報分類区分().equals(ShiharaiHenkoJohoBunruiKubun.差止情報.getコード())
                         && shiharaiHohoHenkoSashitome.get差止解除年月日() == null
@@ -113,7 +113,7 @@ public class IchijiSashitome1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor保険料控除未解除データチェック(ValidationMessageControlPairs pairs, IchijiSashitome1GoDiv div,
             ShiharaiHohoHenko shiharaiHohoHenko) {
-        if (div.getKey_Button().equals(保険料控除登録)) {
+        if (div.getKey_Button().equals(ShoriKubun.保険料控除登録.getコード())) {
             for (ShiharaiHohoHenkoSashitome shiharaiHohoHenkoSashitome : shiharaiHohoHenko.getShiharaiHohoHenkoSashitomeList()) {
                 if (shiharaiHohoHenkoSashitome.get情報分類区分().equals(ShiharaiHenkoJohoBunruiKubun.保険料控除情報.getコード())
                         && !shiharaiHohoHenkoSashitome.is論理削除フラグ()) {

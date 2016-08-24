@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0060013;
 
+import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai.KyufuKanrihyoShokaiDataModel;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -19,23 +21,34 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class KagoMoshitateHouPanelValidationHandler {
 
+    private static final RString 被保険者番号なし = new RString("被保険者番号なし");
+
     /**
-     * 被保険者番号チェックです。
+     * コンストラクタです。
+     */
+    public KagoMoshitateHouPanelValidationHandler() {
+    }
+
+    /**
+     * 被保険者番号の取得できますチェックを実施します。
      *
-     * @param validPairs ValidationMessageControlPairs
+     * @param 対象者一覧 対象者一覧
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 被保険者番号チェック(ValidationMessageControlPairs validPairs) {
-        validPairs.add(new ValidationMessageControlPair(KagoMoshitateHouPanelValidationHandler.HoshushiharaiJumbiMessages.被保険者番号チェック));
+    public ValidationMessageControlPairs validateFor被保険者番号(KyufuKanrihyoShokaiDataModel 対象者一覧) {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if ((対象者一覧 == null) || (対象者一覧.get被保険者番号() == null) || (対象者一覧.get被保険者番号().isEmpty())) {
+            validPairs.add(new ValidationMessageControlPair(
+                    new IdocheckMessages(DbzErrorMessages.理由付き登録不可, 被保険者番号なし.toString())));
+        }
         return validPairs;
     }
 
-    private static enum HoshushiharaiJumbiMessages implements IValidationMessage {
+    private static class IdocheckMessages implements IValidationMessage {
 
-        被保険者番号チェック(DbzErrorMessages.理由付き登録不可, "被保険者番号なし");
         private final Message message;
 
-        private HoshushiharaiJumbiMessages(IMessageGettable message, String... replacements) {
+        public IdocheckMessages(IMessageGettable message, String... replacements) {
             this.message = message.getMessage().replace(replacements);
         }
 
