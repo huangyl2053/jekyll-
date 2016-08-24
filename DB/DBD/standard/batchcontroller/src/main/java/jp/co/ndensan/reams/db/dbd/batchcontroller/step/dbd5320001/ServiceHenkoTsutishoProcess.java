@@ -97,17 +97,15 @@ public class ServiceHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
 
     @Override
     protected void afterExecute() {
-        if (null == 最新Entity) {
-            return;
+        if (null != 最新Entity) {
+            ServiceHenkoTshuchishoReport report = createServiceHenkoTshuchishoReport();
+            report.writeBy(reportSourceWriter);
+            DbT4001JukyushaDaichoEntity jukyushaDaichoEntity = createJukyushaDaichoEntity();
+            dbT4001tableWriter.insert(jukyushaDaichoEntity);
+
+            DbT7022ShoriDateKanriEntity shoriDateKanriEntity = createShoriDateKanriEntity();
+            dbT7022tableWriter.insert(shoriDateKanriEntity);
         }
-
-        ServiceHenkoTshuchishoReport report = createServiceHenkoTshuchishoReport();
-        report.writeBy(reportSourceWriter);
-        DbT4001JukyushaDaichoEntity jukyushaDaichoEntity = createJukyushaDaichoEntity();
-        dbT4001tableWriter.insert(jukyushaDaichoEntity);
-
-        DbT7022ShoriDateKanriEntity shoriDateKanriEntity = createShoriDateKanriEntity();
-        dbT7022tableWriter.insert(shoriDateKanriEntity);
 
         バッチ出力条件リストの出力();
     }
