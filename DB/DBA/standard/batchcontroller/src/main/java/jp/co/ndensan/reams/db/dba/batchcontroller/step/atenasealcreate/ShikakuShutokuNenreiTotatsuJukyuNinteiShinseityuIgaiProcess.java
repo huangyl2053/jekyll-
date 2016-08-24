@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dba.batchcontroller.step.atenasealcreate;
 
 import jp.co.ndensan.reams.db.dba.business.core.atenasealcreate.AtenaSealCreateResult;
-import jp.co.ndensan.reams.db.dba.definition.processprm.atenasealcreate.AtenaSealCreateProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.DbTAtenaSealCreateTempTableEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.JukyuNinteiShinseityuIgaiEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -27,8 +26,6 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiProcess extends
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.atenasealcreate.IJukyuNinteiShinseityuIgaiMapper.getList");
     private static final RString TABLE_宛名識別対象一時テーブル4 = new RString("DbWT2009AtenaShikibetuTaisyou4");
     private static final RString TABLE_宛名識別対象一時テーブル3 = new RString("DbWT2009AtenaShikibetuTaisyou3");
-    private static final RString 抽出対象者_資格取得者_年齢到達予定者 = new RString("3");
-    private AtenaSealCreateProcessParameter processParamter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 宛名識別対象一時テーブル3;
     @BatchWriter
@@ -41,10 +38,8 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiProcess extends
 
     @Override
     protected void createWriter() {
-        if (抽出対象者_資格取得者_年齢到達予定者.equals(processParamter.getChuushutsutaishousha())) {
-            宛名識別対象一時テーブル3 = new BatchEntityCreatedTempTableWriter(TABLE_宛名識別対象一時テーブル3,
-                    DbTAtenaSealCreateTempTableEntity.class);
-        }
+        宛名識別対象一時テーブル3 = new BatchEntityCreatedTempTableWriter(TABLE_宛名識別対象一時テーブル3,
+                DbTAtenaSealCreateTempTableEntity.class);
         宛名識別対象一時テーブル4 = new BatchEntityCreatedTempTableWriter(TABLE_宛名識別対象一時テーブル4,
                 DbTAtenaSealCreateTempTableEntity.class);
     }

@@ -567,9 +567,7 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiCyouHyouProcess
         business.setCustomerBarCode11(listDBZ100001.get(i).getバーコード住所());
         listBusiness.add(business);
         帳票枚数 = 0;
-        if (!can終了) {
-            can終了 = true;
-        }
+        can終了 = true;
     }
 
     private RString dateFormat(RString obj) {
