@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushikyuKetteiEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -375,6 +375,18 @@ public class KogakuGassanShikyuFushikyuKetteiBuilder {
     public KogakuGassanShikyuFushikyuKetteiBuilder set受取年月(FlexibleYearMonth 受取年月) {
         requireNonNull(受取年月, UrSystemErrorMessages.値がnull.getReplacedMessage("受取年月"));
         entity.setUketoriYM(受取年月);
+        return this;
+    }
+
+    /**
+     * 決定通知リアル発行フラグを設定します。
+     *
+     * @param 決定通知リアル発行フラグ 受取年月
+     * @return {@link KogakuGassanShikyuFushikyuKetteiBuilder}
+     */
+    public KogakuGassanShikyuFushikyuKetteiBuilder set決定通知リアル発行フラグ(RString 決定通知リアル発行フラグ) {
+        requireNonNull(決定通知リアル発行フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("決定通知リアル発行フラグ"));
+        entity.setKetteiTsuchiRealHakkoFlag(決定通知リアル発行フラグ);
         return this;
     }
 
