@@ -64,6 +64,7 @@ public class NinteiKekkaTsutishoProcess extends BatchProcessBase<YokaigoNinteiIk
 
     private NinteiKekkaTsutishoProcessParameter parameter;
     private int index = 0;
+    private DbT4001JukyushaDaichoEntity jukyushaDaichoEntity;
 
     @BatchWriter
     private BatchPermanentTableWriter<DbT4001JukyushaDaichoEntity> dbT4001tableWriter;
@@ -91,15 +92,16 @@ public class NinteiKekkaTsutishoProcess extends BatchProcessBase<YokaigoNinteiIk
         YokaigoNinteiKekkaTshuchishoReport report = createYokaigoNinteiKekkaTshuchishoReport(entity);
         report.writeBy(reportSourceWriter);
 
-        DbT4001JukyushaDaichoEntity jukyushaDaichoEntity = createJukyushaDaichoEntity(entity);
+        jukyushaDaichoEntity = createJukyushaDaichoEntity(entity);
         dbT4001tableWriter.insert(jukyushaDaichoEntity);
     }
 
     @Override
     protected void afterExecute() {
-        DbT7022ShoriDateKanriEntity shoriDateKanriEntity = createShoriDateKanriEntity();
-        dbT7022tableWriter.insert(shoriDateKanriEntity);
-
+        if (null != jukyushaDaichoEntity) {
+            DbT7022ShoriDateKanriEntity shoriDateKanriEntity = createShoriDateKanriEntity();
+            dbT7022tableWriter.insert(shoriDateKanriEntity);
+        }
         バッチ出力条件リストの出力();
     }
 
