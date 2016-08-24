@@ -86,8 +86,8 @@ public enum TaishoShoriSpec implements IPredicate<TaishoShoriPanelDiv> {
                     if (null == line || line.isEmpty()) {
                         return false;
                     }
-                    RString 提出元ID = line.substring(0, 5);
-                    return div.getDdlShichosonshitei().getSelectedKey().substring(0, 5).equals(提出元ID);
+                    RString 提出元ID = line.substring(提出元開始位置, 提出元終了位置);
+                    return div.getDdlShichosonshitei().getSelectedKey().substring(提出元開始位置, 提出元終了位置).equals(提出元ID);
                 }
             },
     /**
@@ -138,5 +138,7 @@ public enum TaishoShoriSpec implements IPredicate<TaishoShoriPanelDiv> {
     private static final RString 補足給付初回回付_月次 = new RString("94");
     private static final int 通知内容コード開始位置 = 105;
     private static final int 通知内容コード終了位置 = 107;
+    private static final int 提出元開始位置 = 0;
+    private static final int 提出元終了位置 = 5;
     private static final RString 調定年度_基準 = new RString("2015");
 }
