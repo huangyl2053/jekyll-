@@ -67,6 +67,11 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
 
     private final FlexibleDate システム日付;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param システム日付
+     */
     public HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor(FlexibleDate システム日付) {
         this.システム日付 = システム日付;
     }

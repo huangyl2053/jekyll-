@@ -69,8 +69,6 @@ public class FutanWariaisho {
 
     private final DbV1001HihokenshaDaichoAliveDac dac;
     private static final RString 種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
-    private static final RString 定数_事務広域 = new RString("事務広域");
-    private static final RString 定数_認定広域 = new RString("認定広域");
     private static final int ZERO_INDEX = 0;
 
     /**
@@ -173,7 +171,7 @@ public class FutanWariaisho {
             EditedKojin 編集後個人 = null;
             if (kojinList != null && !kojinList.isEmpty()) {
                 //TODO QA#1173
-                編集後個人 = new EditedKojin(kojinList.get(ZERO_INDEX), 帳票共通情報, null);
+                編集後個人 = new EditedKojin(kojinList.get(ZERO_INDEX), 帳票共通情報, 地方公共団体);
             }
             HokenshaNo 保険者コード取得 = getHokenshaCode(被保険者番号);
             RiyoshaFutanWariaiHantei riyoshaFutanWariaiHantei = RiyoshaFutanWariaiHantei.createInstance();
