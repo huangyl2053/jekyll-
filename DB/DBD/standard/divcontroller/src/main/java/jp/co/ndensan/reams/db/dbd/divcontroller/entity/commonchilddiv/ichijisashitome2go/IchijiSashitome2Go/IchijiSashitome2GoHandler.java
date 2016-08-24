@@ -93,7 +93,8 @@ public class IchijiSashitome2GoHandler {
                 && 支払方法変更管理業務概念.get被保険者番号().value().equals(div.getKey_HihokenshaNo())
                 && 支払方法変更管理業務概念.get管理区分().equals(ShiharaiHenkoKanriKubun._２号差止.getコード())
                 && 登録区分(押下ボタン, 支払方法変更管理業務概念.get登録区分())) {
-            if (押下ボタン.equals(_２号一時差止登録) || 押下ボタン.equals(_２号一時差止解除)) {
+            if (支払方法変更管理業務概念.get登録区分().equals(ShiharaiHenkoTorokuKubun._２号差止登録.getコード())
+                    && (押下ボタン.equals(_２号一時差止登録) || 押下ボタン.equals(_２号一時差止解除))) {
                 for (ShiharaiHohoHenkoSashitome shiharaiHohoHenkoSashitome : 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList()) {
                     if (shiharaiHohoHenkoSashitome.get証記載保険者番号().equals(支払方法変更管理業務概念.get証記載保険者番号())
                             && shiharaiHohoHenkoSashitome.get被保険者番号().value().equals(div.getKey_HihokenshaNo())
