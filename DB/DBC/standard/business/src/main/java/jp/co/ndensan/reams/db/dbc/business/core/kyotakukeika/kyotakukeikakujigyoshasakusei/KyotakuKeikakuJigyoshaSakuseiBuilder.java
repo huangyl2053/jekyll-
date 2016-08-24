@@ -93,7 +93,6 @@ public class KyotakuKeikakuJigyoshaSakuseiBuilder {
      * @return {@link KyotakuKeikakuJigyoshaSakuseiBuilder}
      */
     public KyotakuKeikakuJigyoshaSakuseiBuilder set委託先事業者番号(JigyoshaNo 委託先事業者番号) {
-        requireNonNull(委託先事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("委託先事業者番号"));
         entity.setItakusakiJigyoshaNo(委託先事業者番号);
         return this;
     }
@@ -105,7 +104,6 @@ public class KyotakuKeikakuJigyoshaSakuseiBuilder {
      * @return {@link KyotakuKeikakuJigyoshaSakuseiBuilder}
      */
     public KyotakuKeikakuJigyoshaSakuseiBuilder set事業者変更年月日(FlexibleDate 事業者変更年月日) {
-        requireNonNull(事業者変更年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者変更年月日"));
         entity.setJigyoshaHenkoYMD(事業者変更年月日);
         return this;
     }
@@ -117,7 +115,6 @@ public class KyotakuKeikakuJigyoshaSakuseiBuilder {
      * @return {@link KyotakuKeikakuJigyoshaSakuseiBuilder}
      */
     public KyotakuKeikakuJigyoshaSakuseiBuilder set事業者変更事由(RString 事業者変更事由) {
-        requireNonNull(事業者変更事由, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者変更事由"));
         entity.setJigyoshaHenkoJiyu(事業者変更事由);
         return this;
     }
