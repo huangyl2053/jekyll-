@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -70,7 +70,7 @@ public class NinteiShinseiTorokuRelateEntity {
     private FlexibleDate 受給資格証明書発行年月日２;
     private RString 台帳種別;
     private RString 入所施設種類;
-    private KaigoJigyoshaNo 入所施設コード;
+    private JigyoshaNo 入所施設コード;
     private Code 要介護認定状態区分コード;
     private FlexibleDate 認定有効期間開始年月日;
     private FlexibleDate 認定有効期間終了年月日;
