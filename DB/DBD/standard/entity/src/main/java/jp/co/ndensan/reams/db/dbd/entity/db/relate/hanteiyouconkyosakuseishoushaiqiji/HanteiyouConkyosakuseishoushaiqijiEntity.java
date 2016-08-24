@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
@@ -20,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  */
 @lombok.Getter
 @lombok.Setter
-@OnNextSchema("rgdb")
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class HanteiyouConkyosakuseishoushaiqijiEntity extends DbTableEntityBase<HanteiyouConkyosakuseishoushaiqijiEntity> implements IDbAccessable {
 
     @TableName
