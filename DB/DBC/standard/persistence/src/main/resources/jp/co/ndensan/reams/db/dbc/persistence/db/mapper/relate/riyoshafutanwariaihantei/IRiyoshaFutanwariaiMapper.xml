@@ -328,7 +328,7 @@
                     ("UrV0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" <![CDATA[<]]>#{対象終了日}
            AND COALESCE(NULLIF("UrV0508SeikatsuHogoJukyusha"."jukyuHaishiYMD", ''), '99999999')<![CDATA[>=]]> #{対象開始日})
            ORDER BY "UrV0508SeikatsuHogoJukyusha"."shikibetsuCode"
-    </select>    
+    </select>
     <!-- 処理詳細4(4)月別判定対象者Tempの作成 -->
     <select resultOrdered="true" id="select月別判定対象者作成" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter"
@@ -713,11 +713,11 @@
             resultMap="ResultMap_FutanWariaiHanteiJohoEntity"
             fetchSize="500">
             SELECT
-                    #{判定基準日} AS "hanteiKijunYMD"
-                    ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.IHanteiTaishoshaTempMapper.allColumns_HanteiTaishoshaTemp"/>
+                    <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.IHanteiTaishoshaTempMapper.allColumns_HanteiTaishoshaTemp"/>
                     ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ISeikatsuHogoGaitoJohoTempMapper.allColumns_SeikatsuHogoGaitoJohoTemp"/>
                     ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ISetainJohoTempMapper.allColumns_SetainJohoTemp"/>
                     ,<include refid="allColumns_DbV2512KaigoShotokuNewest"/>
+                    #{判定基準日} AS "hanteiKijunYMD"
             FROM
                     (SELECT "b".* FROM "TsukibetsuHanteiTaishoshaTemp" AS "b" WHERE "b"."taishoTsuki"=#{対象月}) AS "HanteiTaishoshaTemp"
             LEFT JOIN
@@ -737,7 +737,7 @@
             ORDER BY 
                 "HanteiTaishoshaTemp"."hihokenshaNo"
     </select>
-    
+
     <!--処理詳細8負担割合判定マージ-->
     <select resultOrdered="true" id="select負担割合判定マージ" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter"
@@ -1359,7 +1359,7 @@
         <id column="HanteiTaishoshaTemp_hihokenshaNo"  />
         <id column="SetainJohoTemp_taishoTsuki"  />
         <id column="SetainJohoTemp_setaiCode"  />
-        <id column="SetainJohoTemp_shikibetsuCode"  />
+        <id column="HanteiTaishoshaTemp_shikibetsuCode"  />
         <id column="urV0508SeikatsuHogoJukyusha_shikibetsuCode"  />
         <id column="urV0508SeikatsuHogoJukyusha_jukyuKaishiYMD"  />
         <result property="判定基準日" column="hanteiKijunYMD"
