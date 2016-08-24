@@ -211,7 +211,9 @@ public class RenkeiDataTorikomiHandler {
                         rowData.setHihokubun(HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).get名称());
                         rowData.setShimei(entity.get氏名());
                         rowData.getSeinengappi().setValue(new RDate(entity.get生年月日().toString()));
-                        rowData.getNenrei().setValue(new Decimal(entity.get年齢().toString()));
+                        if (!RString.isNullOrEmpty(entity.get年齢())) {
+                            rowData.getNenrei().setValue(new Decimal(entity.get年齢().toString()));
+                        }
                         rowData.setSeibetsu(Seibetsu.toValue(entity.get性別()).get名称());
                         list.add(rowData);
                         PersonalData personalData = PersonalData.of(new ShikibetsuCode(rowData.getKoroshoifshikibetsucode()),
@@ -248,7 +250,9 @@ public class RenkeiDataTorikomiHandler {
                         rowData.setHihokubun(HihokenshaKubunCode.toValue(csvEntity.get被保険者区分コード()).get名称());
                         rowData.setShimei(csvEntity.get氏名());
                         rowData.getSeinengappi().setValue(new RDate(csvEntity.get生年月日().toString()));
-                        rowData.getNenrei().setValue(new Decimal(csvEntity.get年齢().toString()));
+                        if (!RString.isNullOrEmpty(csvEntity.get年齢())) {
+                            rowData.getNenrei().setValue(new Decimal(csvEntity.get年齢().toString()));
+                        }
                         rowData.setSeibetsu(Seibetsu.toValue(csvEntity.get性別()).get名称());
                         list.add(rowData);
                         PersonalData personalData = PersonalData.of(new ShikibetsuCode(rowData.getKoroshoifshikibetsucode()),
@@ -283,7 +287,9 @@ public class RenkeiDataTorikomiHandler {
                         row.setHihokubun(HihokenshaKubunCode.toValue(csvEntity.get被保険者区分コード()).get名称());
                         row.setShimei(csvEntity.get氏名());
                         row.getSeinengappi().setValue(new RDate(csvEntity.get生年月日().toString()));
-                        row.getNenrei().setValue(new Decimal(csvEntity.get年齢().toString()));
+                        if (!RString.isNullOrEmpty(csvEntity.get年齢())) {
+                            row.getNenrei().setValue(new Decimal(csvEntity.get年齢().toString()));
+                        }
                         row.setSeibetsu(Seibetsu.toValue(csvEntity.get性別()).get名称());
                         list.add(row);
                         PersonalData personalData = PersonalData.of(new ShikibetsuCode(row.getKoroshoifshikibetsucode()),

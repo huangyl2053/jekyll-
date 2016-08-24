@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0430011;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020020.DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuShikyuValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0430011.DBC0430011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0430011.KogakuShikyuShinseishoIkkatsuHakkoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0430011.KogakuShikyuShinseishoIkkatsuHakkoHandler;
@@ -17,11 +17,11 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 高額サービス費給付お知らせ通知書作成です。
@@ -61,11 +61,12 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> btnOnClick_shinsaYM(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-        div.getShinseishoHakkoParameters().getTxtShinsaYM().setReadOnly(false);
+        div.getShinseishoHakkoParameters().getTxtShinsaYM().setDisabled(false);
         div.getShinseishoHakkoParameters().getBtnHihokenshaSearch().setDisabled(true);
-        div.getShinseishoHakkoParameters().getDdlServiceYM().setReadOnly(true);
+        div.getShinseishoHakkoParameters().getDdlServiceYM().setDisabled(true);
         div.getShinseishoHakkoParameters().getRadHihokenshaNo().clearSelectedItem();
         div.getShinseishoHakkoParameters().getRadHakushiInsatsu().clearSelectedItem();
+        div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setDisabled(true);
 
         return ResponseData.of(div).respond();
     }
@@ -78,11 +79,12 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> btnOnClick_radHihokenshaNo(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
         RString menuID = ResponseHolder.getMenuID();
-        div.getShinseishoHakkoParameters().getTxtShinsaYM().setReadOnly(true);
+        div.getShinseishoHakkoParameters().getTxtShinsaYM().setDisabled(true);
         div.getShinseishoHakkoParameters().getBtnHihokenshaSearch().setDisabled(false);
-        div.getShinseishoHakkoParameters().getDdlServiceYM().setReadOnly(false);
+        div.getShinseishoHakkoParameters().getDdlServiceYM().setDisabled(false);
         div.getShinseishoHakkoParameters().getRadShinsaYM().clearSelectedItem();
         div.getShinseishoHakkoParameters().getRadHakushiInsatsu().clearSelectedItem();
+        div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setDisabled(false);
         getHandler(div).setサービス年月DDL(menuID);
         return ResponseData.of(div).respond();
     }
@@ -94,11 +96,12 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> btnOnClick_radHakushiInsatsu(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-        div.getShinseishoHakkoParameters().getTxtShinsaYM().setReadOnly(true);
+        div.getShinseishoHakkoParameters().getTxtShinsaYM().setDisabled(true);
         div.getShinseishoHakkoParameters().getBtnHihokenshaSearch().setDisabled(true);
-        div.getShinseishoHakkoParameters().getDdlServiceYM().setReadOnly(true);
+        div.getShinseishoHakkoParameters().getDdlServiceYM().setDisabled(true);
         div.getShinseishoHakkoParameters().getRadShinsaYM().clearSelectedItem();
         div.getShinseishoHakkoParameters().getRadHihokenshaNo().clearSelectedItem();
+        div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -109,8 +112,12 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> onCancelClose(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-        if (div.getShinseishoHakkoParameters().getTxtHihokenshaNo().getValue().isEmpty()) {
-            throw new ApplicationException(DbcErrorMessages.被保険者の高額介護サービス支給申請情報が無い.getMessage());
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedValue().isEmpty()) {
+            validPairs = getCheckHandler(div).確定チェック();
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -167,6 +174,10 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
 
     private KogakuShikyuShinseishoIkkatsuHakkoHandler getHandler(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
         return new KogakuShikyuShinseishoIkkatsuHakkoHandler(div);
+    }
+
+    private KogakuShikyuValidationHandler getCheckHandler(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
+        return new KogakuShikyuValidationHandler(div);
     }
 
 }

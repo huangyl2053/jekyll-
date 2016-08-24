@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchoheijunka6tsuchishoikatsuhako;
 
-import java.util.List;
+import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -32,6 +32,6 @@ public class HeijunkaKeisanPageJoho {
     private FlexibleDate 発行日;
     private RString 文書番号;
     private boolean 一括発行フラグ;
-    private List<OutputChohyoIchiran> 出力帳票一覧List;
+    private ArrayList<OutputChohyoIchiran> 出力帳票一覧List;
 
 }

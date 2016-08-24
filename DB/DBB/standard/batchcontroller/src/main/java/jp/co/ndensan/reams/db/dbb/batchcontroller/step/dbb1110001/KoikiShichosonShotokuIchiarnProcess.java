@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb1110001;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.ShichosonJouhouResult;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.ShotokuJohoIchiranhyoSakuseiGParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheinjunkakakutei.ShotokujohoIchiranhyoSakuseiProcessParameter;
@@ -41,15 +39,12 @@ public class KoikiShichosonShotokuIchiarnProcess extends BatchProcessBase<KaigoH
         RString ラジオボタン = processparameter.getラジオボタン();
         FlexibleYear 処理年度 = processparameter.get処理年度();
         RString 出力順 = processparameter.get出力順();
+        ShichosonJouhouResult 市町村情報 = processparameter.get市町村情報();
+        LasdecCode 市町村コード = 市町村情報.get市町村コード();
         YMDHMS 開始日時 = processparameter.get開始日時();
         YMDHMS 終了日時 = processparameter.get終了日時();
-        List<ShichosonJouhouResult> 市町村情報リスト = processparameter.get市町村情報リスト();
-        List<LasdecCode> 市町村コードList = new ArrayList<>();
-        for (ShichosonJouhouResult result : 市町村情報リスト) {
-            市町村コードList.add(result.get市町村コード());
-        }
         parameter = new ShotokuJohoIchiranhyoSakuseiGParameter(
-                処理年度, チェックボックス, ラジオボタン, 開始日時, 終了日時, 市町村コードList, 出力順);
+                処理年度, チェックボックス, ラジオボタン, 開始日時, 終了日時, 市町村コード, 出力順);
     }
 
     @BatchWriter

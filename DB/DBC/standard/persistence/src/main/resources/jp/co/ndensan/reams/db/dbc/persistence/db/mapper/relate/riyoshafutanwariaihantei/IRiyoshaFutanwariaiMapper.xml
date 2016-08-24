@@ -35,7 +35,8 @@
                #{対象年度} AS  "SetainJohoTemp_taishoNendo",
                #{対象月}    AS "SetainJohoTemp_taishoTsuki",
                 "TmpSetaiShotoku"."setaiCode" AS "SetainJohoTemp_setaiCode",
-                "TmpSetaiShotoku"."shikibetsuCode" AS "SetainJohoTemp_shikibetsuCode"
+                "TmpSetaiShotoku"."shikibetsuCode" AS "SetainJohoTemp_shikibetsuCode",
+                "TmpSetaiShotoku"."hihokenshaNo" AS "SetainJohoTemp_hihokenshaNo"
             FROM
                     "TmpSetaiShotoku"
             LEFT JOIN

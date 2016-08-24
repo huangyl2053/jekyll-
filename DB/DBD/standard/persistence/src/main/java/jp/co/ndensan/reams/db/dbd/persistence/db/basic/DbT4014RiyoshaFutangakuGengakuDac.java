@@ -192,4 +192,25 @@ public class DbT4014RiyoshaFutangakuGengakuDac {
                 toObject(DbT4014RiyoshaFutangakuGengakuEntity.class);
 
     }
+
+    /**
+     * 被保険者番号より、利用者負担額減額情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT4014RiyoshaFutangakuGengakuEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT4014RiyoshaFutangakuGengakuEntity get利用者負担額減額情報(HihokenshaNo 被保険者番号)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4014RiyoshaFutangakuGengaku.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                order(by(rirekiNo, DESC)).
+                limit(1).
+                toObject(DbT4014RiyoshaFutangakuGengakuEntity.class);
+    }
 }

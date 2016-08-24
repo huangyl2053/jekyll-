@@ -90,12 +90,14 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess extends Bat
     private SogojigyohiShinsaKetteiCsvFileToreraRecode2Entity toreraRecord2Entity;
     private int レコード件数合計;
     private int 連番;
+    private boolean errorFlag;
 
     @Override
     protected void initialize() {
         連番 = parameter.getレコード件数合算();
         レコード件数合計 = parameter.get集計件数合算();
         returnEntity = new FlowEntity();
+        errorFlag = false;
     }
 
     @Override
@@ -134,12 +136,15 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess extends Bat
                 meisaiEntity = new SogojigyohiShinsaKetteiCsvFileMeisaiEntity();
                 meisaiEntity = ListToObjectMappingHelper.toObject(SogojigyohiShinsaKetteiCsvFileMeisaiEntity.class, data);
                 insert審査決定請求明細一時TBL(meisaiEntity);
+                errorFlag = true;
             } else if (帳票レコード種別_T1.equals(data.get(INDEX_3))) {
                 交換情報識別番号(data);
+                errorFlag = true;
             } else if (帳票レコード種別_T2.equals(data.get(INDEX_3))) {
                 toreraRecord2Entity = new SogojigyohiShinsaKetteiCsvFileToreraRecode2Entity();
                 toreraRecord2Entity = ListToObjectMappingHelper.toObject(SogojigyohiShinsaKetteiCsvFileToreraRecode2Entity.class, data);
                 insert審査決定請求合計一時TBL(null, toreraRecord2Entity);
+                errorFlag = true;
             }
         }
     }
@@ -150,7 +155,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess extends Bat
             FlexibleYearMonth 処理対象年月 = new FlexibleYearMonth(controlCsvEntity.getShoriYM());
             returnEntity.setShoriYM(処理対象年月);
         }
-        if (連番 == parameter.getレコード件数合算()) {
+        if (!errorFlag) {
             DbWT0002KokuhorenTorikomiErrorTempEntity エラー結果 = new DbWT0002KokuhorenTorikomiErrorTempEntity();
             エラー結果.setエラー区分(NUM);
             処理結果リスト一時tableWriter.insert(エラー結果.toEntity());

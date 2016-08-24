@@ -192,8 +192,6 @@ public class JukyushaIdoRenrakuhyoHandler {
     }
 
     private void setDivModel(RString 処理モード, FlexibleDate 異動日, int 履歴番号) {
-        FlexibleDate 制度改正施行日 = new FlexibleDate(DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_支給限度額一本化,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付).toString());
         if (新規モード.equals(処理モード)) {
             div.setMode_DisplayMode(JukyushaIdoRenrakuhyoDiv.DisplayMode.shinki);
         } else if (訂正モード.equals(処理モード)) {
@@ -207,12 +205,20 @@ public class JukyushaIdoRenrakuhyoHandler {
         } else if (照会モード.equals(処理モード)) {
             div.setMode_DisplayMode(JukyushaIdoRenrakuhyoDiv.DisplayMode.shokai);
         }
+        set支給限度基準額Edit(処理モード, 異動日);
+    }
+
+    private void set支給限度基準額Edit(RString 処理モード, FlexibleDate 異動日) {
+        FlexibleDate 制度改正施行日 = new FlexibleDate(DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_支給限度額一本化,
+                RDate.getNowDate(), SubGyomuCode.DBC介護給付).toString());
         if (新規モード.equals(処理モード) || 訂正モード.equals(処理モード)) {
             if (制度改正施行日.isBefore(異動日)) {
                 div.getShikyuGendoKijungakuPanel().getTxtTankiNyushoServiceShikyuGendoKijungaku().setDisabled(true);
+                div.getShikyuGendoKijungakuPanel().getTxtTankiNyushoServiceShikyuGendoKijungaku().setReadOnly(true);
                 div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().setDisabled(true);
             } else {
                 div.getShikyuGendoKijungakuPanel().getTxtTankiNyushoServiceShikyuGendoKijungaku().setDisabled(false);
+                div.getShikyuGendoKijungakuPanel().getTxtTankiNyushoServiceShikyuGendoKijungaku().setReadOnly(false);
                 div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().setDisabled(false);
             }
         }
@@ -286,7 +292,6 @@ public class JukyushaIdoRenrakuhyoHandler {
     }
 
     private void set居宅サービス計画エリア(JukyushaIdoRenrakuhyo 受給者異動情報) {
-        //QA1190
         if (!星.equals(受給者異動情報.get居宅サービス計画作成区分コード())) {
             if (RString.isNullOrEmpty(受給者異動情報.get居宅サービス計画作成区分コード())) {
                 div.getKyotakuServicePlanPanel().getRadKyotakuServiceSakuseiKubun().setSelectedKey(空KEY);
@@ -604,8 +609,10 @@ public class JukyushaIdoRenrakuhyoHandler {
     /**
      * 異動日focus outのメソッドです。
      *
+     * @param 処理モード RString
+     *
      */
-    public void onBlur_異動日() {
+    public void onBlur_異動日(RString 処理モード) {
         RString 保険者番号 = div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtHiHokenshaNo().getValue();
         FlexibleDate 異動日 = div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().getValue();
         if (異動日 != null && !異動日.toString().isEmpty()) {
@@ -614,6 +621,7 @@ public class JukyushaIdoRenrakuhyoHandler {
             if (証記載保険者番号と広域保険者番号.get(0) != null) {
                 div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtShoKisaiHokenshaNo().setValue(証記載保険者番号と広域保険者番号.get(0).value());
             }
+            set支給限度基準額Edit(処理モード, 異動日);
         }
     }
 

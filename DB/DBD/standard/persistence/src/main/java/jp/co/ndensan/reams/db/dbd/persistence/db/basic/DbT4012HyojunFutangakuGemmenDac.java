@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
+import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -130,5 +131,26 @@ public class DbT4012HyojunFutangakuGemmenDac {
                 where(eq(DbT4012HyojunFutangakuGemmen.hihokenshaNo, 被保険者番号)).
                 order(by(DbT4012HyojunFutangakuGemmen.shinseiYMD, Order.DESC)).
                 toList(DbT4012HyojunFutangakuGemmenEntity.class);
+    }
+
+    /**
+     * 被保険者番号より、標準負担額減免情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT4012HyojunFutangakuGemmenEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT4012HyojunFutangakuGemmenEntity get標準負担額減免情報(HihokenshaNo 被保険者番号)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4012HyojunFutangakuGemmen.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                order(by(rirekiNo, DESC)).
+                limit(1).
+                toObject(DbT4012HyojunFutangakuGemmenEntity.class);
     }
 }

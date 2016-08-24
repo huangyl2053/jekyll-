@@ -33,6 +33,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
@@ -215,5 +216,55 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
                                 eq(logicalDeletedFlag, false))).
                 order(by(kanriKubun, ASC), by(tekiyoKaishiYMD, DESC)).
                 toList(DbT4021ShiharaiHohoHenkoEntity.class);
+    }
+
+    /**
+     * 被保険者番号より、支払方法変更情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 管理区分List 管理区分List
+     * @return DbT4021ShiharaiHohoHenkoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT4021ShiharaiHohoHenkoEntity get支払方法変更情報(HihokenshaNo 被保険者番号, List<RString> 管理区分List)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(管理区分List, UrSystemErrorMessages.値がnull.getReplacedMessage("管理区分List"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4021ShiharaiHohoHenko.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                in(kanriKubun, 管理区分List))).
+                order(by(rirekiNo, DESC)).
+                limit(1).
+                toObject(DbT4021ShiharaiHohoHenkoEntity.class);
+    }
+
+    /**
+     * 被保険者番号より、給付額減額情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 管理区分 管理区分
+     * @return DbT4021ShiharaiHohoHenkoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT4021ShiharaiHohoHenkoEntity get給付額減額情報(HihokenshaNo 被保険者番号, RString 管理区分)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(管理区分, UrSystemErrorMessages.値がnull.getReplacedMessage("管理区分"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4021ShiharaiHohoHenko.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(kanriKubun, 管理区分))).
+                order(by(rirekiNo, DESC)).
+                limit(1).
+                toObject(DbT4021ShiharaiHohoHenkoEntity.class);
     }
 }
