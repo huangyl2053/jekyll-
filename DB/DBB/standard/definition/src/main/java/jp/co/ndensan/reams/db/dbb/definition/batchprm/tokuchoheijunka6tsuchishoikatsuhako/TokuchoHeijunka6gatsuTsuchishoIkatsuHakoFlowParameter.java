@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako;
 
-import java.util.List;
+import java.util.ArrayList;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -14,9 +14,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 特徴平準化（特徴6月分）通知書一括発行のバッチパラメータクラスです。
+ * 特徴平準化（特徴6月分）のバッチパラメータクラスです。
  *
- * @reamsid_L DBB-0820-030 xuyue
+ * @reamsid_L DBB-0810-010 yuanzhenxia
  */
 @Getter
 @Setter
@@ -29,7 +29,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter extends Batch
     private RString 増額平準化方法;
     private RString 減額平準化方法;
     private RString 帳票グループ;
-    private List<OutputChohyoIchiran> 出力帳票entity;
+    private ArrayList<OutputChohyoIchiran> 出力帳票entity;
     private RString 出力対象指示フラグ;
     private FlexibleDate 発行日;
     private RString 文書番号;
