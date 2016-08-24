@@ -170,7 +170,9 @@ public class JukyushaTeiseiRenrakuhyoToroku {
         if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード.getKey())
                 || DonyuKeitaiCode.事務構成市町村.getCode().equals(導入形態コード.getKey())) {
             List<KoikiZenShichosonJoho> 市町村情報 = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records();
-            証記載保険者番号 = 市町村情報.get(0).get証記載保険者番号();
+            if (!市町村情報.isEmpty()) {
+                証記載保険者番号 = 市町村情報.get(0).get証記載保険者番号();
+            }
         } else if (被保険者番号 != null && 異動日 != null) {
             DbT1001HihokenshaDaichoEntity dbt1001Entity = get市町村コードと広住例措置元市町村コード(被保険者番号, 異動日);
             LasdecCode 市町村コード = null;
@@ -182,14 +184,28 @@ public class JukyushaTeiseiRenrakuhyoToroku {
             if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getKey())) {
                 List<ShichosonCodeYoriShichoson> 市町村コードによる市町村情報
                         = KoikiShichosonJohoFinder.createInstance().shichosonCodeYoriShichosonJoho(市町村コード).records();
-                証記載保険者番号 = 市町村コードによる市町村情報.get(0).get証記載保険者番号();
+                証記載保険者番号 = get証記載保険者番号(市町村コードによる市町村情報);
                 List<KoikiZenShichosonJoho> 市町村情報 = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records();
-                広域保険者番号 = 市町村情報.get(0).get証記載保険者番号();
+                広域保険者番号 = get広域保険者番号(市町村情報);
             }
         }
         証記載保険者番号と広域保険者番号.add(証記載保険者番号);
         証記載保険者番号と広域保険者番号.add(広域保険者番号);
         return 証記載保険者番号と広域保険者番号;
+    }
+
+    private ShoKisaiHokenshaNo get証記載保険者番号(List<ShichosonCodeYoriShichoson> 市町村コードによる市町村情報) {
+        if (市町村コードによる市町村情報 != null && !市町村コードによる市町村情報.isEmpty()) {
+            return 市町村コードによる市町村情報.get(0).get証記載保険者番号();
+        }
+        return null;
+    }
+
+    private ShoKisaiHokenshaNo get広域保険者番号(List<KoikiZenShichosonJoho> 市町村情報) {
+        if (市町村情報 != null && !市町村情報.isEmpty()) {
+            return 市町村情報.get(0).get証記載保険者番号();
+        }
+        return null;
     }
 
     /**

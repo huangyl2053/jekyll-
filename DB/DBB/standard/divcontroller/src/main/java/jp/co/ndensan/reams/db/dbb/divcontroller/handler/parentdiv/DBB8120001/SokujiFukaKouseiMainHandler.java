@@ -1036,8 +1036,8 @@ public class SokujiFukaKouseiMainHandler {
         tablePanel.getTxtFuchoNokigenYoku04().setReadOnly(is入力不可_翌年度4月);
 
         boolean is入力不可_翌年度5月 = is更正後と納期限入力不可(賦課年度.plusYear(NUM_1), Tsuki.翌年度5月);
-        tablePanel.getTxtFuchoKoseiGoYoku04().setReadOnly(is入力不可_翌年度5月);
-        tablePanel.getTxtFuchoNokigenYoku04().setReadOnly(is入力不可_翌年度5月);
+        tablePanel.getTxtFuchoKoseiGoYoku05().setReadOnly(is入力不可_翌年度5月);
+        tablePanel.getTxtFuchoNokigenYoku05().setReadOnly(is入力不可_翌年度5月);
     }
 
     private void set現年度の特別徴収情報(NendobunFukaList 更正前賦課リスト, NendobunFukaList 更正後賦課リスト) {
@@ -1175,6 +1175,7 @@ public class SokujiFukaKouseiMainHandler {
     }
 
     private boolean is特徴開始者(RString 徴収方法) {
+        // TODO 特徴開始者の判定、QA#94818確認中
         return ChoshuHoho.特別徴収_地共済.getコード().equals(徴収方法) || ChoshuHoho.特別徴収_厚生労働省.getコード().equals(徴収方法);
     }
 

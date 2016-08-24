@@ -46,7 +46,7 @@ public class FutanGenndoGakuNinnteiShouMybatisParameter implements IMyBatisParam
     private final RString 旧措置者区分_旧措置者のみ;
     private final RString 旧措置者区分_旧措置者実質的負担軽減者;
     private final RString 空白;
-    private final RString DBD介護受給;
+    private final RString 業務コード_介護受給;
     private final RString 発行履歴固有情報_被保番号;
     private final RString 発行履歴固有情報_減免適用開始日;
     private final FlexibleDate 年度開始日;
@@ -97,7 +97,7 @@ public class FutanGenndoGakuNinnteiShouMybatisParameter implements IMyBatisParam
         this.減免減額種類_負担限度額認定 = GemmenGengakuShurui.負担限度額認定.getコード();
         this.旧措置者区分_旧措置者のみ = KyuSochishaKubun.旧措置者.getコード();
         this.旧措置者区分_旧措置者実質的負担軽減者 = KyuSochishaKubun.旧措置者実質的負担軽減者.getコード();
-        this.DBD介護受給 = SubGyomuCode.DBD介護受給.getGyomuCode().value();
+        this.業務コード_介護受給 = SubGyomuCode.DBD介護受給.getGyomuCode().value();
         this.発行履歴固有情報_減免適用開始日 = 発行履歴固有情報_減免適用開始日;
         this.発行履歴固有情報_被保番号 = 発行履歴固有情報_被保番号;
         this.空白 = RString.EMPTY;

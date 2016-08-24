@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.Shak
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100012.ShakFuksHjRiysFutKgTsKtTsuchishoReport;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100013.HakkoRirekiKoyuJohoDBD100013;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd1200902.FutanGenndoGakuNinnteiListProperty;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.chohyoikkatsu.TanpyoHakkoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.ShakaiFukushiHoujinnKeigenTsuuchishoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.ShakaiFukushiHoujinnKeigenTsuuchishoEntity;
@@ -20,13 +19,11 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.temptable.ShafukuK
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100012.ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd1200902.ShakaiFukushiHoujinnKeigenTsuuchishoService;
+import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.TeikeibunMojiSize;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
@@ -73,7 +70,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.util.CountedItem;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 社会福祉法人等軽減の通知書発行_process処理クラスです.
@@ -91,8 +87,6 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
     private static final RString 年度 = new RString("年度");
     private static final RString 交付日 = new RString("交付日");
     private static final RString 出力順 = new RString("出力順");
-    private static final RString 出力しない = new RString("出力しない");
-    private static final RString 出力する = new RString("出力する");
 
     private static final RString カラ = new RString("～");
     private static final RString より = new RString("＞");
@@ -108,7 +102,6 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
     private static final int THREE_3 = 3;
     private static final int FOUR_4 = 4;
     private static DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通;
-    private static List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用;
     private static final RString GENERICKEY = new RString("社会福祉法人等利用者負担軽減決定通知書");
     @BatchWriter
     private BatchReportWriter<ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource> batchReportWrite;
@@ -121,8 +114,7 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
     protected void initialize() {
         reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         association = AssociationFinderFactory.createInstance().getAssociation();
-        帳票制御共通 = load帳票制御共通(帳票分類ID);
-        帳票制御汎用 = load帳票制御汎用(帳票分類ID);
+        帳票制御共通 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御共通(帳票分類ID);
         int パターン番号 = 0;
         if (TeikeibunMojiSize.フォント小.getコード().equals(帳票制御共通.getTeikeibunMojiSize())) {
             パターン番号 = ONE_1;
@@ -200,7 +192,7 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
         order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD100020, reamsLoginID, processParamter.get改頁出力順ID());
         RString 出力順 = RString.EMPTY;
         if (order != null) {
-            出力順 = MyBatisOrderByClauseCreator.create(FutanGenndoGakuNinnteiListProperty.DBD100020_ResultListEnum.class, order);
+            出力順 = MyBatisOrderByClauseCreator.create(FutanGenndoGakuNinnteiListProperty.class, order);
         }
         return 出力順;
     }
@@ -267,9 +259,9 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
         builder.append(より);
         builder.append(order.get設定項目リスト().get(2).get項目名());
         builder.append(より);
-        builder.append(order.get設定項目リスト().get(3).get項目名());
+        builder.append(order.get設定項目リスト().get(THREE_3).get項目名());
         builder.append(より);
-        builder.append(order.get設定項目リスト().get(4).get項目名());
+        builder.append(order.get設定項目リスト().get(FOUR_4).get項目名());
         出力条件.add(builder.toRString());
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 帳票ID.value(),
@@ -283,16 +275,6 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
                 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();
-    }
-
-    private RString set出力(RString code) {
-        if (TanpyoHakkoKubun.出力しない.getコード().equals(code)) {
-            return 出力しない;
-        } else if (TanpyoHakkoKubun.出力する.getコード().equals(code)) {
-            return 出力する;
-        } else {
-            return RString.EMPTY;
-        }
     }
 
     private ShafukuKeigenKetteiTempTableEntity create処理(ShakaiFukushiHoujinnKeigenTsuuchishoEntity futan) {
@@ -318,28 +300,4 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
         return data;
     }
 
-    /**
-     * 帳票制御共通を取得します
-     *
-     * @param 帳票分類ID 帳票分類ID
-     * @return 帳票制御共通
-     */
-    public DbT7065ChohyoSeigyoKyotsuEntity load帳票制御共通(ReportId 帳票分類ID) {
-        if (帳票分類ID == null || 帳票分類ID.isEmpty()) {
-            throw new NullPointerException();
-        }
-        DbT7065ChohyoSeigyoKyotsuDac dbT7065Dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
-        return dbT7065Dac.selectByKey(SubGyomuCode.DBD介護受給, 帳票分類ID);
-    }
-
-    /**
-     * 帳票制御汎用をキーから取得します。
-     *
-     * @param 帳票分類ID 帳票分類ID
-     * @return List<帳票制御汎用>
-     */
-    public List load帳票制御汎用(ReportId 帳票分類ID) {
-        DbT7067ChohyoSeigyoHanyoDac dbT7067Dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
-        return dbT7067Dac.get帳票制御汎用(SubGyomuCode.DBD介護受給, 帳票分類ID, new FlexibleYear("0000"));
-    }
 }

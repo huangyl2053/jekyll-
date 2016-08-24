@@ -70,6 +70,11 @@ public class RegistShoriDateKanriProcessParameter implements IBatchProcessParame
         this.抽出期間開始日時 = 抽出期間開始日時;
         this.抽出期間終了日時 = 抽出期間終了日時;
         this.市町村コード = 市町村コード;
+        this.市町村識別ID = 市町村識別ID;
+        this.開始年月日 = 開始年月日;
+        this.終了年月日 = 終了年月日;
+        this.開始時刻 = 開始時刻;
+        this.終了時刻 = 終了時刻;
         this.市町村情報リスト = 市町村情報リスト;
         this.市町村情報 = 市町村情報;
     }

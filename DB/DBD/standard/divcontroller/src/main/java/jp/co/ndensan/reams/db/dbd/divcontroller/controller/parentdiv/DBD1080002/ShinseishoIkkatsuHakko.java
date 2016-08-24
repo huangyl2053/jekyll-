@@ -111,13 +111,13 @@ public class ShinseishoIkkatsuHakko {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         UUID 発行処理ID = UUID.randomUUID();
-        ViewStateHolder.put(Keys.発行処理ID, 発行処理ID);
         ShinseishoIkkatsuHakkoService shinseisho = new ShinseishoIkkatsuHakkoService();
         List<ddlKohoshaList_Row> selectedItem = div.getGenmenShinseiHaakuList().getDdlKohoshaList().getSelectedItems();
         for (ddlKohoshaList_Row row : selectedItem) {
             shinseisho.insertDbT4032(UUID.fromString(row.getHaakuShoriID().toString()), 発行処理ID);
             shinseisho.insertDbT4033(new HihokenshaNo(row.getHihoNo()), 発行処理ID);
         }
+        ViewStateHolder.put(世帯所得, 発行処理ID);
         return ResponseData.of(div).respond();
     }
 
@@ -128,7 +128,7 @@ public class ShinseishoIkkatsuHakko {
      * @return ResponseData<DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter>
      */
     public ResponseData<DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter> onClick_btnprint(ShinseishoIkkatsuHakkoDiv div) {
-        UUID 発行処理ID = ViewStateHolder.get(Keys.発行処理ID, UUID.class);
+        UUID 発行処理ID = ViewStateHolder.get(世帯所得, UUID.class);
         DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter parameter = getHandler(div).getParameter(発行処理ID);
         return ResponseData.of(parameter).respond();
     }
@@ -178,18 +178,4 @@ public class ShinseishoIkkatsuHakko {
     private ShinseishoIkkatsuHakkoHandler getHandler(ShinseishoIkkatsuHakkoDiv div) {
         return new ShinseishoIkkatsuHakkoHandler(div);
     }
-
-    private enum Keys {
-
-        /**
-         * 発行処理ID
-         */
-        発行処理ID;
-
-        @Override
-        public String toString() {
-            return this.getDeclaringClass().getName().concat(name());
-        }
-    }
-
 }

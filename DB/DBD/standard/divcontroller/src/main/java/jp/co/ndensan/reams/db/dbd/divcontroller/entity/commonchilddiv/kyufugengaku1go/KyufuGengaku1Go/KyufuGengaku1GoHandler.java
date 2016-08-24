@@ -325,14 +325,14 @@ public class KyufuGengaku1GoHandler {
             shinseiRiyuSource.add(new KeyValueDataSource(shinseRriyuCode.getコード(), shinseRriyuCode.get名称()));
         }
         div.getDdlIMenjoShinseiRiyu().setDataSource(shinseiRiyuSource);
-        div.getDdlIMenjoShinseiRiyu().setSelectedKey(ShiharaiHenkoShuryoShinseiRiyuCode._空.getコード());
+        div.getDdlIMenjoShinseiRiyu().setSelectedKey(shiharaiHohoHenko.get終了申請理由コード());
         div.getTxtMenjoNaiyoKetteiYMD().setValue(shiharaiHohoHenko.get終了申請審査決定年月日());
         List<KeyValueDataSource> shinsaKekkaSource = new ArrayList();
         for (ShiharaiHenkoBenmeiShinsaKekkaKubun shinsaKekka : ShiharaiHenkoBenmeiShinsaKekkaKubun.values()) {
             shinsaKekkaSource.add(new KeyValueDataSource(shinsaKekka.getコード(), shinsaKekka.get名称()));
         }
         div.getDdlMenjoShinseiShinsaKekka().setDataSource(shinsaKekkaSource);
-        div.getDdlMenjoShinseiShinsaKekka().setSelectedKey(ShiharaiHenkoBenmeiShinsaKekkaKubun._空.getコード());
+        div.getDdlMenjoShinseiShinsaKekka().setSelectedKey(shiharaiHohoHenko.get終了申請審査結果区分());
     }
 
     private DbT4021ShiharaiHohoHenkoEntity get給付額減額の登録Entity() {
@@ -358,15 +358,13 @@ public class KyufuGengaku1GoHandler {
     }
 
     private List<DbT4022ShiharaiHohoHenkoTainoEntity> get支払方法変更滞納Entity(TainoHanteiResultKohen 滞納判定結果) {
-        ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(KyufuGengaku1GoHandler.一号給付額減額ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         List<DbT4022ShiharaiHohoHenkoTainoEntity> 支払方法変更滞納Entity = new ArrayList();
         List<ShiharaiHohoHenkoTaino> 支払方法変更滞納情報 = new ArrayList();
         List<TainoKiSummary> tainoKiSummary = 滞納判定結果.get滞納情報();
-        int 連番 = 支払方法変更滞納連番(証記載保険者番号(), new HihokenshaNo(div.getKey_HihokenshaNo()),
-                ShiharaiHenkoKanriKubun._１号給付額減額.getコード(), 支払方法変更管理業務概念.get履歴番号(),
-                TainoHanteiKubun.給付額減額登録.getコード(), 支払方法変更管理業務概念);
+        int 連番 = 1;
         for (TainoKiSummary summary : tainoKiSummary) {
-            TaishoHanteiKubun 対象管理区分 = get対象管理区分(連番++, summary.get時効区分().getコード(), 支払方法変更滞納情報);
+            int 連番new = 連番;
+            TaishoHanteiKubun 対象管理区分 = get対象管理区分(連番new, summary.get時効区分().getコード(), 支払方法変更滞納情報);
             DbT4022ShiharaiHohoHenkoTainoEntity entity = new DbT4022ShiharaiHohoHenkoTainoEntity();
             entity.setShoKisaiHokenshaNo(証記載保険者番号());
             entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
@@ -605,21 +603,6 @@ public class KyufuGengaku1GoHandler {
             対象管理区分 = TaishoHanteiKubun.今回対象;
         }
         return 対象管理区分;
-    }
-
-    private int 支払方法変更滞納連番(ShoKisaiHokenshaNo shoKisaiHokenshaNo, HihokenshaNo hihokenshaNo, RString コード, int 履歴番号,
-            RString コード0, ShiharaiHohoHenko 支払方法変更管理業務概念) {
-        int 連番 = 0;
-        for (ShiharaiHohoHenkoTaino shiharaiHohoHenkoTaino : 支払方法変更管理業務概念.getShiharaiHohoHenkoTainoList()) {
-            if (shiharaiHohoHenkoTaino.get証記載保険者番号().equals(shoKisaiHokenshaNo)
-                    && shiharaiHohoHenkoTaino.get被保険者番号().equals(hihokenshaNo)
-                    && shiharaiHohoHenkoTaino.get管理区分().equals(コード)
-                    && shiharaiHohoHenkoTaino.get履歴番号() == 履歴番号
-                    && shiharaiHohoHenkoTaino.get滞納判定区分().equals(コード0)) {
-                連番 = shiharaiHohoHenkoTaino.get連番();
-            }
-        }
-        return 連番 + 1;
     }
 
     private ShoKisaiHokenshaNo 証記載保険者番号() {

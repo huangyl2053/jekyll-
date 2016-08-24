@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1000065;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.kijunshunyugakutekiyoshinseishohakkoichiran.DBC190030_KijunsyunygetsujiParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.ShinseishoHakkoChushutsuJoken.ShinseishoHakkoChushutsuJoken;
+import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000065.DBC1000065TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000065.ShinseishoTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000065.ShinseishoTorokuHandler;
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 基準収入額適用申請書_異動分作成
+ * 基準収入額適用申請書_異動分作成のクラスです。
  *
  * @reamsid_L DBC-4640-010 qinzhen
  */
@@ -32,7 +32,7 @@ public class ShinseishoToroku {
     private static final int INDEX_4 = 4;
 
     /**
-     * 画面の初期化
+     * 画面初期化のハンドラクラスです。
      *
      * @param div ShinseishoTorokuDiv
      * @return ResponseData
@@ -43,7 +43,7 @@ public class ShinseishoToroku {
     }
 
     /**
-     * ラジオボタンを切り替えた時に、画面項目の表示を制御する
+     * ラジオボタンを切り替えた時に、画面項目の表示を制御するのクラスです。
      *
      * @param div ShinseishoTorokuDiv
      * @return ResponseData
@@ -65,7 +65,7 @@ public class ShinseishoToroku {
     }
 
     /**
-     * 画面項目の被保険者番号に設定する
+     * 画面項目の被保険者番号に設定のクラスです。
      *
      * @param div ShinseishoTorokuDiv
      * @return ResponseData
@@ -77,7 +77,7 @@ public class ShinseishoToroku {
     }
 
     /**
-     * 文書番号ccdを初期化する
+     * 文書番号ccdを初期化のクラスです。
      *
      * @param div ShinseishoTorokuDiv
      * @return ResponseData
@@ -96,13 +96,13 @@ public class ShinseishoToroku {
     public ResponseData<ShinseishoTorokuDiv> onBeforeOpenDialog(ShinseishoTorokuDiv div) {
         FlexibleYear 処理年度 = new FlexibleYear(div.getTxtShoriNendo().getValue().toString().substring(0, INDEX_4));
         getHandler(div).set出力順の入力チェック();
-        if (ShinseishoHakkoChushutsuJoken.異動分.getコード().equals(div.getRadChushutsuJoken().getSelectedKey()) && getHandler(div).処理年度判定()) {
+        if (ShinseishoTorokuChushutsuJoken.異動分.getコード().equals(div.getRadChushutsuJoken().getSelectedKey()) && getHandler(div).処理年度判定()) {
             ValidationMessageControlPairs valid = getValidationHandler(div).処理年度チェックValidate();
             if (valid.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(valid).respond();
             }
         }
-        if (ShinseishoHakkoChushutsuJoken.異動分.getコード().equals(div.getRadChushutsuJoken().getSelectedKey()) && getHandler(div).世帯員把握基準日判定()) {
+        if (ShinseishoTorokuChushutsuJoken.異動分.getコード().equals(div.getRadChushutsuJoken().getSelectedKey()) && getHandler(div).世帯員把握基準日判定()) {
             ValidationMessageControlPairs valid1 = getValidationHandler(div).世帯員把握基準日チェックValidate(処理年度);
             if (valid1.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(valid1).respond();
@@ -121,14 +121,14 @@ public class ShinseishoToroku {
     }
 
     /**
-     * 「實行」ボタン押下時の処理
+     * 「實行」ボタン押下時の処理クラスです。
      *
      * @param div ShinseishoTorokuDiv
      * @return ResponseData
      */
     public ResponseData<DBC190030_KijunsyunygetsujiParameter> onClick_btnExcute(ShinseishoTorokuDiv div) {
         getHandler(div).set前排他();
-        DBC190030_KijunsyunygetsujiParameter parameter = getHandler(div).setバッチ(div);
+        DBC190030_KijunsyunygetsujiParameter parameter = getHandler(div).setバッチ();
         getHandler(div).release前排他();
         return ResponseData.of(parameter).respond();
     }

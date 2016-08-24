@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003Kibetsu;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003Kibetsu.choshuHouhou;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003Kibetsu.choteiNendo;
@@ -14,13 +15,14 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003Kibetsu.ki;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003Kibetsu.rirekiNo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003Kibetsu.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -177,6 +179,35 @@ public class DbT2003KibetsuDac implements ISaveable<DbT2003KibetsuEntity> {
     }
 
     /**
+     * 介護期別を返します。
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 賦課年度 FlexibleYear
+     * @param 通知書番号 TsuchishoNo
+     * @param 履歴番号 int
+     * @return List<DbT2003KibetsuEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT2003KibetsuEntity> select介護期別_期ASC(
+            FlexibleYear 調定年度,
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号,
+            int 履歴番号) throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT2003Kibetsu.class).
+                where(and(
+                                eq(choteiNendo, 調定年度),
+                                eq(fukaNendo, 賦課年度),
+                                eq(tsuchishoNo, 通知書番号),
+                                eq(rirekiNo, 履歴番号))).
+                order(by(DbT2003Kibetsu.ki, Order.ASC)).
+                toList(DbT2003KibetsuEntity.class);
+    }
+
+    /**
      * DbT2003KibetsuEntityを削除します。状態によってdelete処理に振り分けられます。
      *
      * @param entity entity
@@ -187,4 +218,5 @@ public class DbT2003KibetsuDac implements ISaveable<DbT2003KibetsuEntity> {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護期別エンティティ"));
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
+
 }

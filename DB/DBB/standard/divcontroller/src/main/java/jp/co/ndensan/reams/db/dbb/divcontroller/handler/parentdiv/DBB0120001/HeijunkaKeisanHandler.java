@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.kaigofukatokuchoheijunka6.ShorijyokyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchoheijunka6tsuchishoikatsuhako.HeijunkaKeisanPageJoho;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012003.DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoHeijunkaKeisanHoho6Gatsu;
@@ -162,7 +163,7 @@ public class HeijunkaKeisanHandler {
     }
 
     /**
-     * 画面側からバッチパラメータを取得します。
+     * 画面側からバッチ「特徴平準化（特徴6月分）」パラメータを取得します。
      *
      * @return バッチパラメータ
      */
@@ -192,7 +193,7 @@ public class HeijunkaKeisanHandler {
         }
         data.set帳票グループ(div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get帳票出力グループコード());
 
-        List<OutputChohyoIchiran> outputChohyoIchiranList = new ArrayList<>();
+        ArrayList<OutputChohyoIchiran> outputChohyoIchiranList = new ArrayList<>();
         OutputChohyoIchiran outputChohyoIchiran;
         for (dgOutputChohyoIchiran_Row row : div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧()) {
             outputChohyoIchiran = new OutputChohyoIchiran();
@@ -218,6 +219,65 @@ public class HeijunkaKeisanHandler {
 
         KaigoFukaTokuchoHeijunka6 kaigoFukaTokuchoHeijunka6 = KaigoFukaTokuchoHeijunka6.createInstance();
         return kaigoFukaTokuchoHeijunka6.getBatchiPara(data);
+    }
+
+    /**
+     * 画面側からバッチ「特徴平準化（特徴6月分）通知書一括発行」パラメータを取得します。
+     *
+     * @return バッチパラメータ
+     */
+    public DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter setIkatsuBatchParameter() {
+
+        HeijunkaKeisanPageJoho data = new HeijunkaKeisanPageJoho();
+        data.set調定年度(div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtChoteiNendo().getDomain());
+        data.set賦課年度(div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtFukaNendo().getDomain());
+        if (TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.get名称().equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoZougaku().getText())) {
+            data.set増額平準化方法(TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.getコード());
+        } else if (TokuchoHeijunkaKeisanHoho6Gatsu.前半と後半を１_１にする.get名称()
+                .equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoZougaku().getText())) {
+            data.set増額平準化方法(TokuchoHeijunkaKeisanHoho6Gatsu.前半と後半を１_１にする.getコード());
+        } else if (TokuchoHeijunkaKeisanHoho6Gatsu.年額より４月分を引いた額を５期で割る.get名称()
+                .equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoZougaku().getText())) {
+            data.set増額平準化方法(TokuchoHeijunkaKeisanHoho6Gatsu.年額より４月分を引いた額を５期で割る.getコード());
+        }
+
+        if (TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.get名称().equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoGengaku().getText())) {
+            data.set減額平準化方法(TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.getコード());
+        } else if (TokuchoHeijunkaKeisanHoho6Gatsu.前半と後半を１_１にする.get名称()
+                .equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoGengaku().getText())) {
+            data.set減額平準化方法(TokuchoHeijunkaKeisanHoho6Gatsu.前半と後半を１_１にする.getコード());
+        } else if (TokuchoHeijunkaKeisanHoho6Gatsu.年額より４月分を引いた額を５期で割る.get名称()
+                .equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoGengaku().getText())) {
+            data.set減額平準化方法(TokuchoHeijunkaKeisanHoho6Gatsu.年額より４月分を引いた額を５期で割る.getコード());
+        }
+        data.set帳票グループ(div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get帳票出力グループコード());
+
+        ArrayList<OutputChohyoIchiran> outputChohyoIchiranList = new ArrayList<>();
+        OutputChohyoIchiran outputChohyoIchiran;
+        for (dgOutputChohyoIchiran_Row row : div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧()) {
+            outputChohyoIchiran = new OutputChohyoIchiran();
+            outputChohyoIchiran.set帳票分類ID(row.getChohyoID());
+            outputChohyoIchiran.set帳票名(row.getChohyoName());
+            outputChohyoIchiran.set出力順ID(row.getShutsuryokujunID());
+            outputChohyoIchiranList.add(outputChohyoIchiran);
+        }
+        data.set出力帳票一覧List(outputChohyoIchiranList);
+        data.set発行日(div.getTokuchoHeijunkaChohyoHakko().getTxtHeijunkaHenkoTsuchiHakkoYMD().getValue());
+
+        RString 出力対象 = RString.EMPTY;
+        int 出力対象Index = div.getTokuchoHeijunkaChohyoHakko().getRadHeijunkaHenkoTsuchi().getSelectedIndex();
+        if (出力対象Index == 0) {
+            出力対象 = HeijunkaHenkoOutputJoken.全件_追加候補者含む.getコード();
+        } else if (出力対象Index == 1) {
+            出力対象 = HeijunkaHenkoOutputJoken.全件_追加候補者含まない.getコード();
+        } else if (出力対象Index == 2) {
+            出力対象 = HeijunkaHenkoOutputJoken.追加候補者のみ.getコード();
+        }
+        data.set出力対象指示フラグ(出力対象);
+        data.set一括発行フラグ(true);
+
+        KaigoFukaTokuchoHeijunka6 kaigoFukaTokuchoHeijunka6 = KaigoFukaTokuchoHeijunka6.createInstance();
+        return kaigoFukaTokuchoHeijunka6.getIkatsuBatchiPara(data);
     }
 
 }

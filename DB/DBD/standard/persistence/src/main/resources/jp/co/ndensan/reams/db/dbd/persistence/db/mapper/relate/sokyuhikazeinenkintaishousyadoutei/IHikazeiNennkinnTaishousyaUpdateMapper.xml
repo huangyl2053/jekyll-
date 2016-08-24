@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @author DBD-4910-030 x_xuliang -->
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.sokyuhikazeinenkintaishousyadoutei.IHikazeiNennkinnTaishousyaUpdateMapper">
+
+    <resultMap id="resultMap_HikazeNenkinTaishoshaEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100203.HikazeNenkinTaishoshaEntity" autoMapping="true">
+        <result property="temp_genKisoNennkinnNo" column="genkisonenkinno" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_hihokenshano" column="hihokenshano" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <association property="hikazeNenkinTaishoshaEntity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4037HikazeNenkinTaishoshaMapper.ResultMap_DbT4037HikazeNenkinTaishoshaEntity"/>
+    </resultMap>
+
+    <select resultOrdered="true" id="get非課税年金対象者情報"
+            resultMap="resultMap_HikazeNenkinTaishoshaEntity"
+            fetchSize="500">
+        SELECT
+        非課税年金対象者.*,
+        非課税年金対象者同定結果情報一時."genKisoNennkinnNo",
+        非課税年金対象者同定結果情報一時."hihokenshaNo"
+        FROM
+        rgdb."DbT4037HikazeNenkinTaishosha" AS 非課税年金対象者
+        INNER JOIN
+        (
+        SELECT *
+        FROM "HikazeNenkinTaishoshaDouteiResultJohoTempTable"
+        WHERE
+        "douteiResultKubun" = '1'
+        ) AS 非課税年金対象者同定結果情報一時
+        ON
+        非課税年金対象者."dtnenkinhokenshacode" = 非課税年金対象者同定結果情報一時."dtNennkinnHokenshaCode"
+        AND 非課税年金対象者."dtsakuseiymd" = 非課税年金対象者同定結果情報一時."dtCreateYMD"
+        AND 非課税年金対象者."dtkisonenkinno" = 非課税年金対象者同定結果情報一時."dtKisoNennkinnNo"
+        AND 非課税年金対象者."dtnenkincode" = 非課税年金対象者同定結果情報一時."dtNennkinnCode"
+        AND 非課税年金対象者."dttaishoy" = 非課税年金対象者同定結果情報一時."dtTaisyoYear"
+    </select>
+</mapper>

@@ -639,20 +639,11 @@ public class IchijiSashitome1GoHandler {
 
     private void 給付一時差止登録_Status() {
         div.getBtnSashitomeToroku().setDisabled(true);
-        div.getBtnKojoToroku().setDisabled(true);
+        div.getBtnKojoToroku().setDisplayNone(true);
         div.getBtnSashitomeOrKojoJokyoShokai().setDisabled(true);
         div.getDgSashitomeKojoIchiran().setDisabled(false);
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("sashitome").getCellDetails().setReadOnly(true);
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("kojo").setCellDetails(new DataGridCellDetails());
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("kojo").getCellDetails().setReadOnly(true);
+
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("sashitome2").setVisible(false);
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("seiriNo").getCellDetails().setReadOnly(true);
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtTeikyoYM").getCellDetails().setReadOnly(true);
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtSashitomeTorokuYMD").getCellDetails().setReadOnly(true);
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtSashitomeKaijoYMD").getCellDetails().setReadOnly(true);
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("sashitomeTsuchi").setCellDetails(new DataGridCellDetails());
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("sashitomeTsuchi").getCellDetails().setReadOnly(true);
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtNofuKigenYMD").getCellDetails().setReadOnly(true);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("kojoNo").setVisible(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtKojoTorokuYMD").setVisible(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtShoTeishutsuKigenYMD").setVisible(false);
@@ -667,23 +658,14 @@ public class IchijiSashitome1GoHandler {
 
     private void 保険料控除登録_Status() {
         div.getBtnSashitomeToroku().setDisplayNone(true);
-        div.getBtnKojoToroku().setDisabled(true);
-        div.getBtnKojoToroku().setDisabled(true);
+        div.getBtnKojoToroku().setDisabled(false);
         div.getDgSashitomeKojoIchiran().setDisabled(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().setIsShowDeleteButtonColumn(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("sashitome").setVisible(false);
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("kojo").getCellDetails().setReadOnly(true);
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("sashitome2").getCellDetails().setReadOnly(true);
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("seiriNo").getCellDetails().setReadOnly(true);
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtTeikyoYM").getCellDetails().setReadOnly(true);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtSashitomeTorokuYMD").setVisible(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtSashitomeKaijoYMD").setVisible(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtNofuKigenYMD").setVisible(false);
         div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("sashitomeTsuchi").setVisible(false);
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("kojoNo").getCellDetails().setReadOnly(true);
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtKojoTorokuYMD").getCellDetails().setReadOnly(true);
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("txtShoTeishutsuKigenYMD").getCellDetails().setReadOnly(true);
-        div.getDgSashitomeKojoIchiran().getGridSetting().getColumn("kaijoTsuchi").getCellDetails().setReadOnly(true);
         div.getTxtKojoTorokuKubun().setReadOnly(true);
         div.getTxtKojoKetteiYMD().setReadOnly(true);
         div.getTxtKojoTorokuTsuchiHakkoYMD().setReadOnly(true);

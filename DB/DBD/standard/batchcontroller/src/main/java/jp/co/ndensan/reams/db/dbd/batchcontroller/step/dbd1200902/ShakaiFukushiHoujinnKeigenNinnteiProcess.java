@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100019.ShafukuRiysFutKeigTaisKakuninshoShoNoAriReport;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd1200902.ShakaiFukushiHoujinnKeigenNinnteiListPropery.DBD1200902_ShakaiFukushiHoujinnKeigenNinnteiListEnum;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd1200902.ShakaiFukushiHoujinnKeigenNinnteiListPropery;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.ShakaiFukushiHoujinnKeigenNinnteiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.ShakaiFukushiHoujinnKeigenNinnteiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100019.ShafukuRiysFutKeigTaisKakuninshoShoNoAriReportSource;
+import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
@@ -32,14 +32,12 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
@@ -51,13 +49,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 社会福祉法人等軽減の認定証発行_process処理クラスです.
@@ -67,23 +63,22 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<ShakaiFukushiHoujinnKeigenNinnteiEntity> {
 
     private static final ReportIdDBD 帳票ID = ReportIdDBD.DBD100018;
-    private static final RString 帳票分類ID = new RString("DBD100018_ShafukuRiyoshaFutanKeigenTaishoKakuninsho");
-    private RString ReamsLoginID;
+    private RString reamsLoginID;
     private IOutputOrder outputOrder;
+    private static final int THREE_3 = 3;
+    private static final int FOUR_4 = 4;
     private ShakaiFukushiHoujinnKeigenNinnteiProcessParameter processParamter;
     private RString 出力順;
     private Association 地方公共団体;
-    private Ninshosha 認証者;
-    private GyomuCode 業務コード;
-    private RString 種別コード;
     private final RString 単票発行区分 = new RString("【単票発行区分】");
     private final RString 年度 = new RString("【年度】");
     private final RString 決定日期間 = new RString("【決定日期間】");
-    private final RString 交付日 = new RString("【交付日】");
     private final RString カラ = new RString("～");
     private final RString より大きい = new RString("＞");
     private ShafukuRiysFutKeigTaisKakuninshoShoNoAriReport report;
     private ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減;
+    private DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通;
+    private List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用;
     @BatchWriter
     private BatchReportWriter<ShafukuRiysFutKeigTaisKakuninshoShoNoAriReportSource> batchReportWrite;
     private ReportSourceWriter<ShafukuRiysFutKeigTaisKakuninshoShoNoAriReportSource> reportSourceWriter;
@@ -95,14 +90,13 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
 
     @Override
     protected void beforeExecute() {
-        ReamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
-        outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, 帳票ID.getReportId(), ReamsLoginID,
+        reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
+        outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, 帳票ID.getReportId(), reamsLoginID,
                 processParamter.get改頁出力順ID());
-        出力順 = MyBatisOrderByClauseCreator.create(DBD1200902_ShakaiFukushiHoujinnKeigenNinnteiListEnum.class, outputOrder);
+        出力順 = MyBatisOrderByClauseCreator.create(ShakaiFukushiHoujinnKeigenNinnteiListPropery.class, outputOrder);
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-        認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(業務コード, 種別コード);
-        業務コード = GyomuCode.DB介護保険;
-        種別コード = 帳票分類ID;
+        帳票制御共通 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御共通(帳票ID.getReportId());
+        帳票制御汎用 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御汎用(帳票ID.getReportId());
         ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100020.getReportId(),
                 FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                 KenmeiFuyoKubunType.付与なし, reportSourceWriter);
@@ -115,14 +109,12 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
-
         AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給));
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
         RString psmAtesaki = new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString());
-
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toShakaiFukushiHoujinnKeigenNinnteiMybatisParameter(psmShikibetsuTaisho, psmAtesaki,
-                出力順, 帳票ID.getReportId().getColumnValue()));
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toShakaiFukushiHoujinnKeigenNinnteiMybatisParameter(psmShikibetsuTaisho,
+                psmAtesaki, 出力順, 帳票ID.getReportId().getColumnValue()));
     }
 
     @Override
@@ -131,26 +123,18 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
     }
 
-    private static ChohyoSeigyoKyotsu 帳票制御共通取得() {
-        return new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBD介護受給, new ReportId(帳票分類ID));
-    }
-
-    private List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用取得() {
-        DbT7067ChohyoSeigyoHanyoDac dbT7067Dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
-        return dbT7067Dac.get帳票制御汎用一覧(SubGyomuCode.DBD介護受給, new ReportId(帳票分類ID));
-    }
-
     @Override
-    protected void process(ShakaiFukushiHoujinnKeigenNinnteiEntity t) {
-        IKojin IKojin = ShikibetsuTaishoFactory.createKojin(t.getPsmEntity());
+    protected void process(ShakaiFukushiHoujinnKeigenNinnteiEntity entity) {
+        IKojin iKojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
         RDate 認定証の交付日 = null;
         if (null != processParamter.get認定証の交付日()) {
             認定証の交付日 = new RDate(processParamter.get認定証の交付日().getYearValue(),
                     processParamter.get認定証の交付日().getMonthValue(),
                     processParamter.get認定証の交付日().getDayValue());
         }
-        ShafukuRiysFutKeigTaisKakuninshoShoNoAriReport.createReport(社会福祉法人等利用者負担軽減, IKojin, 帳票制御共通取得(),
-                帳票制御汎用取得(), 地方公共団体, 認定証の交付日, ninshoshaSource);
+        社会福祉法人等利用者負担軽減 = new ShakaifukuRiyoshaFutanKeigen(entity.get社会福祉法人等利用者負担軽減());
+        ShafukuRiysFutKeigTaisKakuninshoShoNoAriReport.createReport(社会福祉法人等利用者負担軽減, iKojin,
+                new ChohyoSeigyoKyotsu(帳票制御共通), 帳票制御汎用, 地方公共団体, 認定証の交付日, ninshoshaSource);
         report.writeBy(reportSourceWriter);
     }
 
@@ -181,9 +165,9 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
                 .concat(より大きい)
                 .concat(outputOrder.get設定項目リスト().get(2).get項目名())
                 .concat(より大きい)
-                .concat(outputOrder.get設定項目リスト().get(3).get項目名())
+                .concat(outputOrder.get設定項目リスト().get(THREE_3).get項目名())
                 .concat(より大きい)
-                .concat(outputOrder.get設定項目リスト().get(4).get項目名()));
+                .concat(outputOrder.get設定項目リスト().get(FOUR_4).get項目名()));
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 帳票ID.getReportId().value(),
                 導入団体コード,

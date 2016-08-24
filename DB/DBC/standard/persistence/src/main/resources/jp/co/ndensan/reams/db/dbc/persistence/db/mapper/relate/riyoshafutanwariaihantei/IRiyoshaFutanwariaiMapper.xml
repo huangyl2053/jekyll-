@@ -35,7 +35,8 @@
                #{対象年度} AS  "SetainJohoTemp_taishoNendo",
                #{対象月}    AS "SetainJohoTemp_taishoTsuki",
                 "TmpSetaiShotoku"."setaiCode" AS "SetainJohoTemp_setaiCode",
-                "TmpSetaiShotoku"."shikibetsuCode" AS "SetainJohoTemp_shikibetsuCode"
+                "TmpSetaiShotoku"."shikibetsuCode" AS "SetainJohoTemp_shikibetsuCode",
+                "TmpSetaiShotoku"."hihokenshaNo" AS "SetainJohoTemp_hihokenshaNo"
             FROM
                     "TmpSetaiShotoku"
             LEFT JOIN
@@ -327,7 +328,6 @@
                     ("UrV0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" <![CDATA[<]]>#{対象終了日}
            AND COALESCE(NULLIF("UrV0508SeikatsuHogoJukyusha"."jukyuHaishiYMD", ''), '99999999')<![CDATA[>=]]> #{対象開始日})
            ORDER BY "UrV0508SeikatsuHogoJukyusha"."shikibetsuCode"
-
     </select>    
     <!-- 処理詳細4(4)月別判定対象者Tempの作成 -->
     <select resultOrdered="true" id="select月別判定対象者作成" 
@@ -501,7 +501,8 @@
                 (SELECT "b".* FROM rgdb."DbV2512KaigoShotokuNewest" AS "b" WHERE "b"."shotokuNendo"=#{対象年度} )
                     AS "DbV2512KaigoShotokuNewest"
             ON  
-                    "DbV2512KaigoShotokuNewest"."shikibetsuCode"= "DbT1001HihokenshaDaicho"."shikibetsuCode"                
+                    "DbV2512KaigoShotokuNewest"."shikibetsuCode"= "DbT1001HihokenshaDaicho"."shikibetsuCode"   
+            ORDER BY "DbT1001HihokenshaDaicho"."hihokenshaNo"
     </select>
     <!-- 処理詳細4(4)月別判定対象者Tempの作成二回目-->
     <select resultOrdered="true" id="select月別判定対象者作成二回目" 
@@ -673,7 +674,8 @@
                 (SELECT "b".* FROM rgdb."DbV2512KaigoShotokuNewest" AS "b" WHERE "b"."shotokuNendo"=#{対象年度} )
                     AS "DbV2512KaigoShotokuNewest"
             ON  
-                    "DbV2512KaigoShotokuNewest"."shikibetsuCode"= "DbT1001HihokenshaDaicho"."shikibetsuCode"     
+                    "DbV2512KaigoShotokuNewest"."shikibetsuCode"= "DbT1001HihokenshaDaicho"."shikibetsuCode" 
+            ORDER BY "DbT1001HihokenshaDaicho"."hihokenshaNo"
     </select>
 
     <!--処理詳細6負担割合判定（年次）-->
@@ -702,6 +704,8 @@
                     AS "DbV2512KaigoShotokuNewest"
             ON  
                     "SetainJohoTemp"."shikibetsuCode"="DbV2512KaigoShotokuNewest"."shikibetsuCode"
+            ORDER BY 
+                "HanteiTaishoshaTemp"."hihokenshaNo"
     </select>
     <!--処理詳細7負担割合判定（月次）-->
         <select resultOrdered="true" id="select負担割合判定月次" 
@@ -1068,7 +1072,7 @@
             "TsukibetsuFutanWariaiNewTemp"."futanwariaiKubunJul" <![CDATA[<>]]>"TsukibetsuFutanWariaiGenTemp"."futanwariaiKubunJul"
         ORDER BY "RiyoshaFutanWariaiMeisaiTemp"."hihokenshaNo" ,"RiyoshaFutanWariaiMeisaiTemp"."edaNo"
     </select>
-    
+
     <!--処理詳細12 利用者負担割合根拠の登録-->
     <select resultOrdered="true" id="select負担割合根拠" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter"
@@ -1317,7 +1321,6 @@
     <resultMap id="ResultMap_FutanWariaiRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.FutanWariaiRelateEntity" autoMapping="true">
       <id  column="RiyoshaFutanWariaiMeisaiTemp_hihokenshaNo"  />
       <id  column="RiyoshaFutanWariaiMeisaiTemp_edaNo"  />
-      <id  column="TsukibetsuFutanWariaiGenTemp_rirekiNo" />
       <association property="利用者負担割合明細" 
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.IRiyoshaFutanWariaiMeisaiTempMapper.ResultMap_RiyoshaFutanWariaiMeisaiTempEntity" />
       <collection property="月別負担割合新" 

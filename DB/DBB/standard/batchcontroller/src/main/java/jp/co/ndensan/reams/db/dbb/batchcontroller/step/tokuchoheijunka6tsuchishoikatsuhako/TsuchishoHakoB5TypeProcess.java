@@ -168,16 +168,18 @@ public class TsuchishoHakoB5TypeProcess extends BatchProcessBase<KarisanteiGakuH
         KariSanteiTsuchiShoKyotsu 仮算定額変更通知書情報 = service.仮算定額変更通知書情報の作成(parameter, entity, 帳票制御共通情報, association);
         KariSanteiTsuchiShoKyotsuKomokuHenshu henshuService = new KariSanteiTsuchiShoKyotsuKomokuHenshu();
         編集後仮算定通知書 = henshuService.create仮算定通知書共通情報(仮算定額変更通知書情報);
-        if (編集後仮算定通知書 != null) {
-            List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書List = new ArrayList<>();
-            編集後仮算定通知書List.add(編集後仮算定通知書);
-            TokuChoHeijunkaKariSanteigakuHakkoIchiranReport report = new TokuChoHeijunkaKariSanteigakuHakkoIchiranReport(編集後仮算定通知書List,
-                    outputOrder, parameter.get帳票作成日時());
-            report.writeBy(reportSourceWriterIchiran);
-            csvData = service.csvData作成(編集後仮算定通知書, parameter, 連番, 通知書番号);
-            csvWriter.writeLine(csvData);
-            csv有無 = true;
+        if (編集後仮算定通知書 == null) {
+            return;
         }
+        service.set普徴と特徴(編集後仮算定通知書, entity);
+        List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書List = new ArrayList<>();
+        編集後仮算定通知書List.add(編集後仮算定通知書);
+        TokuChoHeijunkaKariSanteigakuHakkoIchiranReport ichiranReport = new TokuChoHeijunkaKariSanteigakuHakkoIchiranReport(編集後仮算定通知書List,
+                outputOrder, parameter.get帳票作成日時());
+        ichiranReport.writeBy(reportSourceWriterIchiran);
+        csvData = service.csvData作成(編集後仮算定通知書, parameter, 連番, 通知書番号);
+        csvWriter.writeLine(csvData);
+        csv有無 = true;
 
         KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報 = new KariSanteiNonyuTsuchiShoJoho();
         仮算定納入通知書情報.set編集後仮算定通知書共通情報(編集後仮算定通知書);

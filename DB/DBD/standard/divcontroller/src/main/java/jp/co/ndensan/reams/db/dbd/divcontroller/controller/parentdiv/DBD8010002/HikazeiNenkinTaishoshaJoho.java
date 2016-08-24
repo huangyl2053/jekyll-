@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100201.HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100203.SokyuHikazeiNenkinBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.DBD8010002StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.HikazeiNenkinTaishoshaJohoDiv;
@@ -19,8 +20,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -32,6 +35,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class HikazeiNenkinTaishoshaJoho {
 
+    private static final RString DBDMN81002 = new RString("DBDMN81002");
+    private final RString 単一保険者 = new RString("2");
+
     /**
      * 画面初期化処理です。
      *
@@ -42,6 +48,7 @@ public class HikazeiNenkinTaishoshaJoho {
         List<RString> 取込対象市町村コードリスト = getHandler(div).onLoad(div);
         ViewStateHolder.put(ViewStateKeys.取込対象市町村コードリスト, new ArrayList<>(取込対象市町村コードリスト));
 
+        setDisplayOrOpen(div, false);
         if (DBD8010002StateName.非課税年金対象者情報_単一用.getName().equals(div.getHdnState())) {
             return ResponseData.of(div).setState(DBD8010002StateName.非課税年金対象者情報_単一用);
         } else if (DBD8010002StateName.非課税年金対象者情報_広域用.getName().equals(div.getHdnState())) {
@@ -100,10 +107,26 @@ public class HikazeiNenkinTaishoshaJoho {
      */
     public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onClick_btnBatchRegister(HikazeiNenkinTaishoshaJohoDiv div) {
 
-//        if (DBDMN81002.equals(ResponseHolder.getMenuID())) {
-//            //TODO check
-//        } else {
-//        }
+        if (DBDMN81002.equals(ResponseHolder.getMenuID())) {
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+
+            if (単一保険者.equals(getHandler(div).広域と市町村判断())) {
+                getValidationHandler(div).validateFor処理状態(pairs);
+                //TODO
+            } else {
+                getValidationHandler(div).validateFor処理状態(pairs);
+                getValidationHandler(div).validateFor取込チェックボックス(pairs);
+            }
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+
+            List<RString> 構成市町村コードリスト = ViewStateHolder.
+                    get(ViewStateKeys.取込対象市町村コードリスト, new ArrayList<>().getClass());
+            if (構成市町村コードリスト.isEmpty()) {
+                return ResponseData.of(div).addMessage(DbdErrorMessages.処理なし.getMessage()).respond();
+            }
+        }
         getHandler(div).onClick_btnBatchRegister(div);
         return ResponseData.of(div).respond();
     }
@@ -179,11 +202,66 @@ public class HikazeiNenkinTaishoshaJoho {
         return onLoad(div);
     }
 
+    /**
+     * 検索結果一覧選択
+     *
+     * @param div HikazeiNenkinTaishoshaJohoDiv
+     * @return ResponseData
+     */
+    public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onSelectBySelectButton(HikazeiNenkinTaishoshaJohoDiv div) {
+        setDisplayOrOpen(div, true);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「アップロード」ボタンの処理です。
+     *
+     * @param div HikazeiNenkinTaishoshaJohoDiv
+     * @param files FileData[]
+     * @return 引数のDivを持つResponseData型
+     */
+    @SuppressWarnings("checkstyle:illegaltoken")
+    public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onClick_btnUpload(HikazeiNenkinTaishoshaJohoDiv div, FileData[] files) {
+
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        if (files.length > 0) {
+            getValidationHandler(div).validateFor処理状態(pairs);
+            getValidationHandler(div).validateForアップロードファイル未指定(pairs);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+            div.setHdnFilePath(files[0].getFilePath());
+
+            getHandler(div).readFile();
+
+            ValidationMessageControlPairs newPairs = new ValidationMessageControlPairs();
+            getValidationHandler(div).validateFor年次ファイル通知内容(newPairs);
+            getValidationHandler(div).validateFor月次ファイル通知内容(newPairs);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+
+            Message message = getValidationHandler(div).validate作成年月日();
+            if (null != message) {
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+        }
+
+        getHandler(div).upload(files[0].getFileName());
+        setDisplayOrOpen(div, false);
+        return ResponseData.of(div).respond();
+    }
+
     private HikazeiNenkinTaishoshaJohoHandler getHandler(HikazeiNenkinTaishoshaJohoDiv div) {
         return new HikazeiNenkinTaishoshaJohoHandler(div);
     }
 
     private HikazeiNenkinTaishoshaJohoValidationHandler getValidationHandler(HikazeiNenkinTaishoshaJohoDiv div) {
         return new HikazeiNenkinTaishoshaJohoValidationHandler(div);
+    }
+
+    private void setDisplayOrOpen(HikazeiNenkinTaishoshaJohoDiv div, boolean flg) {
+        div.getFuairuAppurodo().setCanOpenAndClose(flg);
+        div.getFuairuAppurodo().setIsOpen(flg);
     }
 }

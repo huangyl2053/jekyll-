@@ -37,6 +37,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
     @InjectSession
     private SqlSession session;
     private static final RString 事業者番号_事業者 = new RString("事業者番号");
+    private static final int 件数_1 = 1;
 
     /**
      * 主キーで介護除外住所地特例対象施設を取得します。
@@ -214,7 +215,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
     }
 
     /**
-     * 事業者名称_住所地特例対象施設の取得。
+     * 事業者名称_住所地特例対象施設の取得です。
      *
      * @param 入所施設コード RString
      * @param 住所地特例対象施設 RString
@@ -232,6 +233,8 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
                 where(and(
                                 eq(jigyoshaShubetsu, 住所地特例対象施設),
                                 eq(jigyoshaNo, 入所施設コード))).
+                order(by(jigyoshaNo, Order.DESC)).
+                limit(件数_1).
                 toObject(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
     }
 }

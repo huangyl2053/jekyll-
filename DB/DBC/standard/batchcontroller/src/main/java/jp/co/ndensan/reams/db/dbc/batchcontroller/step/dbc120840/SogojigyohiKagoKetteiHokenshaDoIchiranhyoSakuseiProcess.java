@@ -251,7 +251,7 @@ public class SogojigyohiKagoKetteiHokenshaDoIchiranhyoSakuseiProcess extends Bat
     private void CSV明細作成(SogojigyohiKagoKetteiHokenshaChohyoEntity entity, FlexibleYearMonth 処理年月, RDateTime 作成日時) {
         SogojigyohiKagoKetteiHokenshaIchiranCSVEntity output = new SogojigyohiKagoKetteiHokenshaIchiranCSVEntity();
         if (連番 == 1) {
-            output.set取扱年月(処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+            output.set取込年月(処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
@@ -260,7 +260,7 @@ public class SogojigyohiKagoKetteiHokenshaDoIchiranhyoSakuseiProcess extends Bat
                     .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
             output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(SAKUSEI));
         } else {
-            output.set取扱年月(RString.EMPTY);
+            output.set取込年月(RString.EMPTY);
             output.set作成日時(RString.EMPTY);
         }
         output.set証記載保険者番号(getColumnValue(entity.get証記載保険者番号()));

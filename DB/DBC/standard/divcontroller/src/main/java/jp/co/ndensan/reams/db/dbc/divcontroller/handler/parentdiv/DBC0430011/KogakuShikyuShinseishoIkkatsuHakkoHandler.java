@@ -22,9 +22,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -58,9 +61,14 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
     private static final RString 交換情報識別番号_202 = new RString("202");
     private static final RString 交換情報識別番号_331 = new RString("331");
     private static final RString 交換情報識別番号_335 = new RString("335");
-    private static final int DAY_9 = 9;
     private static final RString HYOJI = new RString("hyoji");
     private static final RString HIHYOJI = new RString("hihyoji");
+    private static final RString 帳票分類ID_DBC100068 = new RString("DBC100068_KogakuShikyuShinseisho");
+    private static final RString 帳票分類ID_DBC100070 = new RString("DBC100070_KogakuJigyoShikyuShinseisho");
+    private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
+    private static final RString 項目名_提出期限初期 = new RString("提出期限初期");
+    private static final RString 項目名_電話番号表示 = new RString("電話番号表示");
+    private static final RString 項目名_委任状提出先 = new RString("委任状提出先");
 
     /**
      * コンストラクタです。
@@ -80,6 +88,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         RDate nowdate = RDate.getNowDate();
         KokuhorenInterfaceKanriManager manager = new KokuhorenInterfaceKanriManager();
         RString 交換情報識別番号 = RString.EMPTY;
+        ChohyoSeigyoHanyo 帳票制御汎用キー = null;
         if (メニューID_DBCMN43001.equals(menuID)) {
             RString 区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額, nowdate,
                     SubGyomuCode.DBC介護給付);
@@ -100,6 +109,10 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
             datasource.add(new KeyValueDataSource(OSHIRASEKEY, 高額介護サービス費給付お知らせ通知を発行する));
             div.getShutsuryokuTaisho().getChkShutsuryokuTaisho().setDataSource(datasource);
             div.getShutsuryokuTaisho().getCcdBunshoNo().initialize(ReportIdDBC.DBC100011.getReportId());
+            div.getCcdShuturyokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100011.getReportId());
+            帳票制御汎用キー
+                    = KogakuShikyuShinseishoIkkatsu.createInstance().getChohyoHanyoKey(
+                            SubGyomuCode.DBC介護給付, new ReportId(帳票分類ID_DBC100068), 管理年度, 項目名_提出期限初期);
         } else if (メニューID_DBCMNL3001.equals(menuID)) {
             RString 区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額, nowdate,
                     SubGyomuCode.DBC介護給付);
@@ -120,6 +133,10 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
             datasource.add(new KeyValueDataSource(OSHIRASEKEY, 事業高額介護サービス費給付お知らせ通知を発行する));
             div.getShutsuryokuTaisho().getChkShutsuryokuTaisho().setDataSource(datasource);
             div.getShutsuryokuTaisho().getCcdBunshoNo().initialize(ReportIdDBC.DBC100072.getReportId());
+            div.getCcdShuturyokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200091.getReportId());
+            帳票制御汎用キー
+                    = KogakuShikyuShinseishoIkkatsu.createInstance().getChohyoHanyoKey(
+                            SubGyomuCode.DBC介護給付, new ReportId(帳票分類ID_DBC100070), 管理年度, 項目名_提出期限初期);
         }
 
         KokuhorenInterfaceKanri result = manager.get国保連インターフェース管理(交換情報識別番号);
@@ -135,13 +152,17 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         div.getShinseishoHakkoParameters().getTxtShokaiShinseiHakuKijunDate().setValue(new FlexibleDate(初回申請基準日));
         FlexibleDate nowDate = FlexibleDate.getNowDate();
         div.getShutsuryokuTaisho().getTxtSakuseiDate().setValue(nowDate);
-        div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().setValue(nowDate.plusDay(DAY_9));
+
+        if (帳票制御汎用キー != null) {
+            int 提出期限初期の値 = Integer.parseInt(帳票制御汎用キー.get設定値().toString());
+            div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().setValue(nowDate.plusDay(提出期限初期の値));
+        }
+
         div.getJidoShokanTaishoJohoSettei().getTxtShinseiDate().setValue(nowDate);
         div.getJidoShokanTaishoJohoSettei().getTxtUketsukeDate().setValue(nowDate);
         div.getJidoShokanTaishoJohoSettei().getTxtKetteiDate().setValue(nowDate);
 
-        div.getCcdShuturyokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200091.getReportId());
-        div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setReadOnly(true);
+        div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setDisabled(true);
     }
 
     /**
@@ -187,10 +208,12 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
                 = new DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter();
         FlexibleYearMonth 処理年月 = FlexibleYearMonth.EMPTY;
         if (!div.getShinseishoHakkoParameters().getRadShinsaYM().getSelectedKey().isEmpty()) {
-            処理年月 = new FlexibleYearMonth(div.getShinseishoHakkoParameters().getTxtShinsaYM().getValue().toString());
+            FlexibleDate 年月 = div.getShinseishoHakkoParameters().getTxtShinsaYM().getValue();
+            処理年月 = new FlexibleYearMonth(年月.toString());
             parameter.setChushutsuJoken(ShutsuryokuJoken.審査年月);
         } else if (!div.getShinseishoHakkoParameters().getRadHihokenshaNo().getSelectedKey().isEmpty()) {
-            処理年月 = new FlexibleYearMonth(div.getShinseishoHakkoParameters().getDdlServiceYM().getLabelRText());
+            RString 年月 = div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedValue();
+            処理年月 = new FlexibleYearMonth(年月.toString());
             parameter.setChushutsuJoken(ShutsuryokuJoken.被保険者番号);
         } else if (!div.getShinseishoHakkoParameters().getRadHakushiInsatsu().getSelectedKey().isEmpty()) {
             処理年月 = FlexibleYearMonth.EMPTY;
@@ -251,6 +274,27 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
             parameter.setBunshoMojiretsu(文書番号);
         }
         set受託あり(parameter, menuID);
+
+        ChohyoSeigyoHanyo 帳票制御汎用電話番号表示キー = null;
+        ChohyoSeigyoHanyo 帳票制御汎用委任状提出先キー = null;
+        if (メニューID_DBCMN43001.equals(menuID)) {
+            帳票制御汎用電話番号表示キー = KogakuShikyuShinseishoIkkatsu.createInstance().getChohyoHanyoKey(
+                    SubGyomuCode.DBC介護給付, new ReportId(帳票分類ID_DBC100068), 管理年度, 項目名_電話番号表示);
+            帳票制御汎用委任状提出先キー = KogakuShikyuShinseishoIkkatsu.createInstance().getChohyoHanyoKey(
+                    SubGyomuCode.DBC介護給付, new ReportId(帳票分類ID_DBC100068), 管理年度, 項目名_委任状提出先);
+        } else if (メニューID_DBCMNL3001.equals(menuID)) {
+            帳票制御汎用電話番号表示キー = KogakuShikyuShinseishoIkkatsu.createInstance().getChohyoHanyoKey(
+                    SubGyomuCode.DBC介護給付, new ReportId(帳票分類ID_DBC100070), 管理年度, 項目名_電話番号表示);
+            帳票制御汎用委任状提出先キー = KogakuShikyuShinseishoIkkatsu.createInstance().getChohyoHanyoKey(
+                    SubGyomuCode.DBC介護給付, new ReportId(帳票分類ID_DBC100070), 管理年度, 項目名_委任状提出先);
+        }
+
+        if (帳票制御汎用電話番号表示キー != null) {
+            parameter.setShinseishoTelNoHyoji(帳票制御汎用電話番号表示キー.get設定値());
+        }
+        if (帳票制御汎用委任状提出先キー != null) {
+            parameter.setIninjoTeishutsusaki(帳票制御汎用委任状提出先キー.get設定値());
+        }
         return parameter;
     }
 

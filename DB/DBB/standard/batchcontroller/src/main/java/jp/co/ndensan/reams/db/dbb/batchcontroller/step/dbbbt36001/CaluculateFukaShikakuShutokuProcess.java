@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001;
 
 import jp.co.ndensan.reams.db.dbb.definition.processprm.karisanteiidokekka.KarisanteiIdoKekkaProcessParameter;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.ISetaiShotokuKazeiHanteiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.karisanteiidofuka.KariSanteiIdoFukaBatch;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -18,9 +19,12 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 public class CaluculateFukaShikakuShutokuProcess extends SimpleBatchProcessBase {
 
     private KarisanteiIdoKekkaProcessParameter processParameter;
+    private ISetaiShotokuKazeiHanteiMapper mapper;
 
     @Override
     protected void beforeExecute() {
+        mapper = getMapper(ISetaiShotokuKazeiHanteiMapper.class);
+        mapper.createTmpSetaiShotoku();
     }
 
     @Override

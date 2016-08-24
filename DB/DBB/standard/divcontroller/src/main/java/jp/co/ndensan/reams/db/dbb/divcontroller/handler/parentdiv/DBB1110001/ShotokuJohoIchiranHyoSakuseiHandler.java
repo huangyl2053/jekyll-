@@ -290,7 +290,7 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
                 parameter.set市町村コード(構成市町村情報.get市町村コード());
                 parameter.set市町村名称(構成市町村情報.get市町村名称());
             }
-            List<dgShichosonIchiran_Row> dataList = div.getDgShichosonIchiran().getDataSource();
+            List<dgShichosonIchiran_Row> dataList = div.getDgShichosonIchiran().getSelectedItems();
             List<ShichosonJouhouResult> 市町村情報List = new ArrayList<>();
             for (dgShichosonIchiran_Row row : dataList) {
                 ShichosonJouhouResult result = new ShichosonJouhouResult();

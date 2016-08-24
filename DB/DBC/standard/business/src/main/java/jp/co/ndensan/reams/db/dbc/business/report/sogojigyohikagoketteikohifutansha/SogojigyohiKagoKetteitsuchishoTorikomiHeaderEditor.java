@@ -63,8 +63,8 @@ public class SogojigyohiKagoKetteitsuchishoTorikomiHeaderEditor implements ISogo
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
         source.torikomiYM = 処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        source.kohiFutanshaNo = getColumnValue(帳票出力対象データ.get公費負担者番号());
-        source.kohiFutanshaName = 帳票出力対象データ.get公費負担者名();
+        source.kohiFutanshaNo = getColumnValue(帳票出力対象データ.get証記載保険者番号());
+        source.kohiFutanshaName = 帳票出力対象データ.get証記載保険者名();
         source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);
         source.shutsuryokujun2 = get並び順(KEY_並び順の３件目);
         source.shutsuryokujun3 = get並び順(KEY_並び順の４件目);

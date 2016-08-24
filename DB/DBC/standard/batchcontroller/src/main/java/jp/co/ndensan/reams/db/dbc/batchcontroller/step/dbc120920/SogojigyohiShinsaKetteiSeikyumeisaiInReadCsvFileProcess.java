@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002Kokuho
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.KagoKetteiHokenshaInControlCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
@@ -65,7 +64,6 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess extends Bat
     BatchEntityCreatedTempTableWriter 審査決定請求合計一時tableWriter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 処理結果リスト一時tableWriter;
-    private IKokuhorenKyoutsuuTempTableMapper 一時表Mapper;
     private static final RString 審査決定請求明細一時_TABLE_NAME = new RString("DbWT1611SinsaKetteiSeikyuMeisai");
     private static final RString 審査決定請求高額一時_TABLE_NAME = new RString("DbWT1612SinsaKetteiSeikyuKogaku");
     private static final RString 審査決定請求合計一時_TABLE_NAME = new RString("DbWT1613SinsaKetteiSeikyuGokei");
@@ -92,12 +90,14 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess extends Bat
     private SogojigyohiShinsaKetteiCsvFileToreraRecode2Entity toreraRecord2Entity;
     private int レコード件数合計;
     private int 連番;
+    private boolean errorFlag;
 
     @Override
     protected void initialize() {
         連番 = parameter.getレコード件数合算();
         レコード件数合計 = parameter.get集計件数合算();
         returnEntity = new FlowEntity();
+        errorFlag = false;
     }
 
     @Override
@@ -119,7 +119,6 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess extends Bat
 
     @Override
     protected void beforeExecute() {
-        一時表Mapper = getMapper(IKokuhorenKyoutsuuTempTableMapper.class);
     }
 
     @Override
@@ -137,12 +136,15 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess extends Bat
                 meisaiEntity = new SogojigyohiShinsaKetteiCsvFileMeisaiEntity();
                 meisaiEntity = ListToObjectMappingHelper.toObject(SogojigyohiShinsaKetteiCsvFileMeisaiEntity.class, data);
                 insert審査決定請求明細一時TBL(meisaiEntity);
+                errorFlag = true;
             } else if (帳票レコード種別_T1.equals(data.get(INDEX_3))) {
                 交換情報識別番号(data);
+                errorFlag = true;
             } else if (帳票レコード種別_T2.equals(data.get(INDEX_3))) {
                 toreraRecord2Entity = new SogojigyohiShinsaKetteiCsvFileToreraRecode2Entity();
                 toreraRecord2Entity = ListToObjectMappingHelper.toObject(SogojigyohiShinsaKetteiCsvFileToreraRecode2Entity.class, data);
                 insert審査決定請求合計一時TBL(null, toreraRecord2Entity);
+                errorFlag = true;
             }
         }
     }
@@ -153,10 +155,10 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess extends Bat
             FlexibleYearMonth 処理対象年月 = new FlexibleYearMonth(controlCsvEntity.getShoriYM());
             returnEntity.setShoriYM(処理対象年月);
         }
-        if (連番 == parameter.getレコード件数合算()) {
-            DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
-            errorTempentity.setエラー区分(NUM);
-            一時表Mapper.処理結果リスト一時TBLに登録(errorTempentity);
+        if (!errorFlag) {
+            DbWT0002KokuhorenTorikomiErrorTempEntity エラー結果 = new DbWT0002KokuhorenTorikomiErrorTempEntity();
+            エラー結果.setエラー区分(NUM);
+            処理結果リスト一時tableWriter.insert(エラー結果.toEntity());
         }
         returnEntity.set明細データ登録件数(連番);
         レコード件数合計 = レコード件数合計 + Integer.parseInt(controlCsvEntity.getCodeNum().toString());

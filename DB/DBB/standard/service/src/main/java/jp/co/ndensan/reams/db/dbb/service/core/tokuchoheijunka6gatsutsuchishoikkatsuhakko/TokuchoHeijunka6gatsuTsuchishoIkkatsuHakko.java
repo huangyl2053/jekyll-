@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSant
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsuAfterCorrection;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsuBeforeCorrection;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NokiJoho;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.HeijunkaHenkoOutputJoken;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter;
@@ -106,6 +107,20 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
     private static final int INDEX_5 = 5;
+    private static final int 期1 = 1;
+    private static final int 期2 = 2;
+    private static final int 期3 = 3;
+    private static final int 期4 = 4;
+    private static final int 期5 = 5;
+    private static final int 期6 = 6;
+    private static final int 期7 = 7;
+    private static final int 期8 = 8;
+    private static final int 期9 = 9;
+    private static final int 期10 = 10;
+    private static final int 期11 = 11;
+    private static final int 期12 = 12;
+    private static final int 期13 = 13;
+    private static final int 期14 = 14;
 
     /**
      * コンストラクタです。
@@ -764,6 +779,65 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
             特徴納期情報リスト.add(nokiJoho);
         }
         return 特徴納期情報リスト;
+    }
+
+    /**
+     * 編集後仮算定通知書に、普徴と特徴情報を設定します。
+     *
+     * @param 編集後仮算定通知書 編集後仮算定通知書
+     * @param entity 仮算定額変更情報一時テーブルのデータエンティティ
+     */
+    public void set普徴と特徴(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書, KarisanteiGakuHenkoEntity entity) {
+        List<UniversalPhase> 更正前普徴期別金額リスト = new ArrayList<>();
+        List<UniversalPhase> 更正後普徴期別金額リスト = new ArrayList<>();
+
+        if (編集後仮算定通知書.get更正前() != null) {
+            更正前普徴期別金額リスト.add(setUniversalPhase(期1, entity.get更正前計算後情報().getFuKibetsuGaku01()));
+            更正前普徴期別金額リスト.add(setUniversalPhase(期2, entity.get更正前計算後情報().getFuKibetsuGaku02()));
+            更正前普徴期別金額リスト.add(setUniversalPhase(期3, entity.get更正前計算後情報().getFuKibetsuGaku03()));
+            更正前普徴期別金額リスト.add(setUniversalPhase(期4, entity.get更正前計算後情報().getFuKibetsuGaku04()));
+            更正前普徴期別金額リスト.add(setUniversalPhase(期5, entity.get更正前計算後情報().getFuKibetsuGaku05()));
+            更正前普徴期別金額リスト.add(setUniversalPhase(期6, entity.get更正前計算後情報().getFuKibetsuGaku06()));
+            更正前普徴期別金額リスト.add(setUniversalPhase(期7, entity.get更正前計算後情報().getFuKibetsuGaku07()));
+            更正前普徴期別金額リスト.add(setUniversalPhase(期8, entity.get更正前計算後情報().getFuKibetsuGaku08()));
+            更正前普徴期別金額リスト.add(setUniversalPhase(期9, entity.get更正前計算後情報().getFuKibetsuGaku09()));
+            更正前普徴期別金額リスト.add(setUniversalPhase(期10, entity.get更正前計算後情報().getFuKibetsuGaku10()));
+            更正前普徴期別金額リスト.add(setUniversalPhase(期11, entity.get更正前計算後情報().getFuKibetsuGaku11()));
+            更正前普徴期別金額リスト.add(setUniversalPhase(期12, entity.get更正前計算後情報().getFuKibetsuGaku12()));
+            更正前普徴期別金額リスト.add(setUniversalPhase(期13, entity.get更正前計算後情報().getFuKibetsuGaku13()));
+            更正前普徴期別金額リスト.add(setUniversalPhase(期14, entity.get更正前計算後情報().getFuKibetsuGaku14()));
+            編集後仮算定通知書.get更正前().set更正前普徴期別金額リスト(更正前普徴期別金額リスト);
+            編集後仮算定通知書.get更正前().set更正前特徴期別金額01(entity.get更正前計算後情報().getTkKibetsuGaku01());
+            編集後仮算定通知書.get更正前().set更正前特徴期別金額02(entity.get更正前計算後情報().getTkKibetsuGaku01());
+            編集後仮算定通知書.get更正前().set更正前特徴期別金額03(entity.get更正前計算後情報().getTkKibetsuGaku01());
+        }
+        if (編集後仮算定通知書.get更正後() != null) {
+            更正後普徴期別金額リスト.add(setUniversalPhase(期1, entity.get更正後計算後情報().getFuKibetsuGaku01()));
+            更正後普徴期別金額リスト.add(setUniversalPhase(期2, entity.get更正後計算後情報().getFuKibetsuGaku02()));
+            更正後普徴期別金額リスト.add(setUniversalPhase(期3, entity.get更正後計算後情報().getFuKibetsuGaku03()));
+            更正後普徴期別金額リスト.add(setUniversalPhase(期4, entity.get更正後計算後情報().getFuKibetsuGaku04()));
+            更正後普徴期別金額リスト.add(setUniversalPhase(期5, entity.get更正後計算後情報().getFuKibetsuGaku05()));
+            更正後普徴期別金額リスト.add(setUniversalPhase(期6, entity.get更正後計算後情報().getFuKibetsuGaku06()));
+            更正後普徴期別金額リスト.add(setUniversalPhase(期7, entity.get更正後計算後情報().getFuKibetsuGaku07()));
+            更正後普徴期別金額リスト.add(setUniversalPhase(期8, entity.get更正後計算後情報().getFuKibetsuGaku08()));
+            更正後普徴期別金額リスト.add(setUniversalPhase(期9, entity.get更正後計算後情報().getFuKibetsuGaku09()));
+            更正後普徴期別金額リスト.add(setUniversalPhase(期10, entity.get更正後計算後情報().getFuKibetsuGaku10()));
+            更正後普徴期別金額リスト.add(setUniversalPhase(期11, entity.get更正後計算後情報().getFuKibetsuGaku11()));
+            更正後普徴期別金額リスト.add(setUniversalPhase(期12, entity.get更正後計算後情報().getFuKibetsuGaku12()));
+            更正後普徴期別金額リスト.add(setUniversalPhase(期13, entity.get更正後計算後情報().getFuKibetsuGaku13()));
+            更正後普徴期別金額リスト.add(setUniversalPhase(期14, entity.get更正後計算後情報().getFuKibetsuGaku14()));
+            編集後仮算定通知書.get更正後().set更正後普徴期別金額リスト(更正後普徴期別金額リスト);
+            編集後仮算定通知書.get更正後().set更正後特徴期別金額01(entity.get更正後計算後情報().getTkKibetsuGaku01());
+            編集後仮算定通知書.get更正後().set更正後特徴期別金額02(entity.get更正後計算後情報().getTkKibetsuGaku01());
+            編集後仮算定通知書.get更正後().set更正後特徴期別金額03(entity.get更正後計算後情報().getTkKibetsuGaku01());
+        }
+    }
+
+    private UniversalPhase setUniversalPhase(int 期, Decimal 金額) {
+        UniversalPhase uni = new UniversalPhase();
+        uni.set期(期);
+        uni.set金額(金額);
+        return uni;
     }
 
 }
