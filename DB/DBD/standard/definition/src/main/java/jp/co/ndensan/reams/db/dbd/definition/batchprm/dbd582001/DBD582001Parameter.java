@@ -38,8 +38,12 @@ public class DBD582001Parameter extends BatchParameterBase {
     private Code 終了地区コード;
     private RString 基準フラグ;
     private RString 基準日;
-    private final RString 基準0 = new RString("0");
-    private final RString 基準1 = new RString("1");
+    private static final RString 基準0 = new RString("0");
+    private static final RString 基準1 = new RString("1");
+    private static final int MONTH_4 = 4;
+    private static final int MONTH_12 = 12;
+    private static final int SUBSTRING_4 = 4;
+    private static final int SUBSTRING_6 = 6;
 
     /**
      * バッチProcessパラメターを取得します．
@@ -49,19 +53,19 @@ public class DBD582001Parameter extends BatchParameterBase {
     public DBD582001ProcessParameter toDBD582001ProcessParameter() {
         FlexibleDate 基準年月日 = FlexibleDate.EMPTY;
         if (基準フラグ.equals(基準0)) {
-            if (RDate.getNowDate().getMonthValue() >= 4 && RDate.getNowDate().getMonthValue() <= 12) {
+            if (RDate.getNowDate().getMonthValue() >= MONTH_4 && RDate.getNowDate().getMonthValue() <= MONTH_12) {
                 基準年月日 = new FlexibleDate(対象年度.toDateString()
-                        .concat(RDate.getNowDate().toDateString().substring(4, 6))
+                        .concat(RDate.getNowDate().toDateString().substring(SUBSTRING_4, SUBSTRING_6))
                         .concat(基準日));
             } else {
                 基準年月日 = new FlexibleDate(対象年度.plusYear(1).toDateString()
-                        .concat(RDate.getNowDate().toDateString().substring(4, 6))
+                        .concat(RDate.getNowDate().toDateString().substring(SUBSTRING_4, SUBSTRING_6))
                         .concat(基準日));
             }
         }
         RString 基準年月 = RString.EMPTY;
         if (基準フラグ.equals(基準1)) {
-            if (RDate.getNowDate().getMonthValue() >= 4 && RDate.getNowDate().getMonthValue() <= 12) {
+            if (RDate.getNowDate().getMonthValue() >= MONTH_4 && RDate.getNowDate().getMonthValue() <= MONTH_12) {
                 基準年月 = 対象年度.toDateString().concat(new RString(RDate.getNowDate().getMonthValue()));
             } else {
                 基準年月 = 対象年度.plusYear(1).toDateString().concat(new RString(RDate.getNowDate().getMonthValue()));

@@ -44,6 +44,7 @@ public class JissiJyokyohyoHandler {
     private static final RString 申請区分法令 = new RString("HOUREI");
     private static final RString 基準フラグ0 = new RString("0");
     private static final RString 基準フラグ1 = new RString("1");
+    private static final int SUBSTRING_4 = 4;
 
     /**
      * 画面初期化処理です。
@@ -132,7 +133,7 @@ public class JissiJyokyohyoHandler {
         } else {
             parameter.set出力帳票(要介護認定月別受給者認定者数状況表);
         }
-        parameter.set対象年度(new FlexibleYear(div.getJyoukenPanel().getTxtnendo().getText().substring(0, 4)));
+        parameter.set対象年度(new FlexibleYear(div.getJyoukenPanel().getTxtnendo().getText().substring(0, SUBSTRING_4)));
         if (div.getCyouhyouPanel().getRdoCyouhyou().getSelectedKey().equals(帳票キー1)
                 && div.getJyoukenPanel().getRdoKijyun().getSelectedKey().equals(基準キー0)) {
             parameter.set基準フラグ(基準フラグ0);

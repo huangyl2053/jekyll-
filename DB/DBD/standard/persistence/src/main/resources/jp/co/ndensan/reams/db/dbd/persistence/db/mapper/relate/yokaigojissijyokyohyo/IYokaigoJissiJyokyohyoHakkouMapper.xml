@@ -433,7 +433,7 @@
             A."jukyuShinseiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請受付件数の場合" />
         <include refid="条件A" />
@@ -455,7 +455,7 @@
             A."jukyuShinseiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請受付件数の場合" />
         <include refid="条件A" />
@@ -477,7 +477,7 @@
             A."jukyuShinseiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請受付件数の場合" />
         <include refid="条件A" />
@@ -499,7 +499,7 @@
             A."jukyuShinseiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請受付件数の場合" />
         <include refid="条件A" />
@@ -521,7 +521,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件B" />
@@ -543,7 +543,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件B" />
@@ -565,7 +565,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件B" />
@@ -587,7 +587,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件B" />
@@ -609,7 +609,7 @@
             A."ninteiYM" AS 年月,         
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件C" />
@@ -631,7 +631,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件C" />
@@ -653,7 +653,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件C" />
@@ -675,7 +675,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件C" />
@@ -697,7 +697,7 @@
             A."ninteichosaIraiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査依頼件数の場合" />
         <include refid="条件A" />
@@ -719,7 +719,7 @@
             A."ninteichosaIraiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査依頼件数の場合" />
         <include refid="条件A" />
@@ -741,7 +741,7 @@
             A."ninteichosaIraiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査依頼件数の場合" />
         <include refid="条件A" />
@@ -763,7 +763,7 @@
             A."ninteichosaIraiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A
+              "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査依頼件数の場合" />
         <include refid="条件A" />
@@ -786,7 +786,7 @@
             A."ninteichosaYoteiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査予定件数の場合" />
         <include refid="条件A" />
@@ -808,7 +808,7 @@
             A."ninteichosaYoteiYM" AS 年月,
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査予定件数の場合" />
         <include refid="条件A" />
@@ -830,7 +830,7 @@
             A."ninteichosaYoteiYM" AS 年月,    
             COUNT(*) AS 数量 
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査予定件数の場合" />
         <include refid="条件A" />
@@ -852,7 +852,7 @@
             A."ninteichosaYoteiYM" AS 年月,    
             COUNT(*) AS 数量       
         FROM       
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査予定件数の場合" />
         <include refid="条件A" />
@@ -874,7 +874,7 @@
             A."ninteichosaJisshiYM" AS 年月,     
             COUNT(*) AS 数量      
         FROM           
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査実施件数の場合" />
         <include refid="条件A" />
@@ -896,7 +896,7 @@
             A."ninteichosaJisshiYM" AS 年月,     
             COUNT(*) AS 数量      
         FROM             
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査実施件数の場合" />
         <include refid="条件A" />
@@ -918,7 +918,7 @@
             A."ninteichosaJisshiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査実施件数の場合" />
         <include refid="条件A" />
@@ -940,7 +940,7 @@
             A."ninteichosaJisshiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査実施件数の場合" />
         <include refid="条件A" />
@@ -962,7 +962,7 @@
             A."ikenshoSakuseiIraiYM" AS 年月,             
             COUNT(*) AS 数量       
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書依頼件数の場合" />
         <include refid="条件A" />
@@ -984,7 +984,7 @@
             A."ikenshoSakuseiIraiYM" AS 年月,             
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書依頼件数の場合" />
         <include refid="条件A" />
@@ -1006,7 +1006,7 @@
             A."ikenshoSakuseiIraiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書依頼件数の場合" />
         <include refid="条件A" />
@@ -1028,7 +1028,7 @@
             A."ikenshoSakuseiIraiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書依頼件数の場合" />
         <include refid="条件A" />
@@ -1050,7 +1050,7 @@
             A."ikenshoSakuseiIraiYoteiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ予定件数の場合" />
         <include refid="条件A" />
@@ -1072,7 +1072,7 @@
             A."ikenshoSakuseiIraiYoteiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ予定件数の場合" />
         <include refid="条件A" />
@@ -1094,7 +1094,7 @@
             A."ikenshoSakuseiIraiYoteiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ予定件数の場合" />
         <include refid="条件A" />
@@ -1116,7 +1116,7 @@
             A."ikenshoSakuseiIraiYoteiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ予定件数の場合" />
         <include refid="条件A" />
@@ -1138,7 +1138,7 @@
             A."ikenshoJuryoYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ件数の場合" />
         <include refid="条件A" />
@@ -1160,7 +1160,7 @@
             A."ikenshoJuryoYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ件数の場合" />
         <include refid="条件A" />
@@ -1182,7 +1182,7 @@
             A."ikenshoJuryoYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ件数の場合" />
         <include refid="条件A" />
@@ -1204,7 +1204,7 @@
             A."ikenshoJuryoYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ件数の場合" />
         <include refid="条件A" />
@@ -1226,7 +1226,7 @@
             A."shinsakaiIraiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会依頼件数の場合" />
         <include refid="条件A" />
@@ -1248,7 +1248,7 @@
             A."shinsakaiIraiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会依頼件数の場合" />
         <include refid="条件A" />
@@ -1270,7 +1270,7 @@
             A."shinsakaiIraiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会依頼件数の場合" />
         <include refid="条件A" />
@@ -1292,7 +1292,7 @@
             A."shinsakaiIraiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会依頼件数の場合" />
         <include refid="条件A" />
@@ -1314,7 +1314,7 @@
             A."ninteiShinsakaiWariateYoteiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答予定件数の場合" />
         <include refid="条件A" />
@@ -1336,7 +1336,7 @@
             A."ninteiShinsakaiWariateYoteiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答予定件数の場合" />
         <include refid="条件A" />
@@ -1358,7 +1358,7 @@
             A."ninteiShinsakaiWariateYoteiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答予定件数の場合" />
         <include refid="条件A" />
@@ -1380,7 +1380,7 @@
             A."ninteiShinsakaiWariateYoteiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答予定件数の場合" />
         <include refid="条件A" />
@@ -1402,7 +1402,7 @@
             A."shinsakaiShiryoSakuseiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答件数の場合" />
         <include refid="条件A" />
@@ -1424,7 +1424,7 @@
             A."shinsakaiShiryoSakuseiYM" AS 年月,             
             COUNT(*) AS 数量       
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答件数の場合" />
         <include refid="条件A" />
@@ -1446,7 +1446,7 @@
             A."shinsakaiShiryoSakuseiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答件数の場合" />
         <include refid="条件A" />
@@ -1468,7 +1468,7 @@
             A."shinsakaiShiryoSakuseiYM" AS 年月,              
             COUNT(*) AS 数量        
         FROM              
-            受給者台帳一時テーブル  AS A
+            "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答件数の場合" />
         <include refid="条件A" />
@@ -1491,7 +1491,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1513,7 +1513,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1535,7 +1535,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1557,7 +1557,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1579,7 +1579,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1601,7 +1601,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1623,7 +1623,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1645,7 +1645,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1667,7 +1667,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1689,7 +1689,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1711,7 +1711,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1733,7 +1733,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1755,7 +1755,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A        
+              "jukyushaDaichoTempEntity"  AS A        
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1777,7 +1777,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1799,7 +1799,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1821,7 +1821,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1843,7 +1843,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1865,7 +1865,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1887,7 +1887,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1909,7 +1909,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1931,7 +1931,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1953,7 +1953,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1975,7 +1975,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1997,7 +1997,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -2019,7 +2019,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -2041,7 +2041,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -2063,7 +2063,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -2085,7 +2085,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -2107,7 +2107,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -2129,7 +2129,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -2151,7 +2151,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2173,7 +2173,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2195,7 +2195,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2217,7 +2217,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2239,7 +2239,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2261,7 +2261,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2283,7 +2283,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2305,7 +2305,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2327,7 +2327,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2349,7 +2349,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2371,7 +2371,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2393,7 +2393,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2415,7 +2415,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2437,7 +2437,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2459,7 +2459,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -2481,7 +2481,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2503,7 +2503,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2525,7 +2525,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2547,7 +2547,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2569,7 +2569,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2591,7 +2591,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2613,7 +2613,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2635,7 +2635,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2657,7 +2657,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2679,7 +2679,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2701,7 +2701,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2723,7 +2723,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2745,7 +2745,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2767,7 +2767,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2789,7 +2789,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2811,7 +2811,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2833,7 +2833,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2855,7 +2855,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2877,7 +2877,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2899,7 +2899,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2921,7 +2921,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2943,7 +2943,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2965,7 +2965,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2987,7 +2987,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -3009,7 +3009,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -3031,7 +3031,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -3053,7 +3053,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -3075,7 +3075,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -3097,7 +3097,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -3119,7 +3119,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -3141,7 +3141,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3163,7 +3163,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3185,7 +3185,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3207,7 +3207,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3229,7 +3229,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3251,7 +3251,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3273,7 +3273,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3295,7 +3295,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3317,7 +3317,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3339,7 +3339,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3361,7 +3361,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3383,7 +3383,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3405,7 +3405,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3427,7 +3427,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3449,7 +3449,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -3471,7 +3471,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3493,7 +3493,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3515,7 +3515,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3537,7 +3537,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3559,7 +3559,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3581,7 +3581,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3603,7 +3603,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3625,7 +3625,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3647,7 +3647,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3669,7 +3669,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3691,7 +3691,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3713,7 +3713,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3735,7 +3735,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3757,7 +3757,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3779,7 +3779,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -3801,7 +3801,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -3823,7 +3823,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -3845,7 +3845,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -3867,7 +3867,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -3889,7 +3889,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -3911,7 +3911,7 @@
             A."shichosonMeisho" AS 市町村名,
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -3933,7 +3933,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -3955,7 +3955,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -3977,7 +3977,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -3999,7 +3999,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -4021,7 +4021,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -4043,7 +4043,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -4065,7 +4065,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -4087,7 +4087,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -4109,7 +4109,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -4131,7 +4131,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4153,7 +4153,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4175,7 +4175,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4197,7 +4197,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4219,7 +4219,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4241,7 +4241,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4263,7 +4263,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4285,7 +4285,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4307,7 +4307,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4329,7 +4329,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4351,7 +4351,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4373,7 +4373,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4395,7 +4395,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4417,7 +4417,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4439,7 +4439,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -4461,7 +4461,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -4483,7 +4483,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -4505,7 +4505,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -4527,7 +4527,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -4549,7 +4549,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -4571,7 +4571,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -4593,7 +4593,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -4615,7 +4615,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -4637,7 +4637,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -4659,7 +4659,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -4681,7 +4681,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -4703,7 +4703,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -4725,7 +4725,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -4747,7 +4747,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -4769,7 +4769,7 @@
             A."ninteiYM" AS 年月,  
             COUNT(*) AS 数量
         FROM
-              受給者台帳一時テーブル  AS A 
+              "jukyushaDaichoTempEntity"  AS A 
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
