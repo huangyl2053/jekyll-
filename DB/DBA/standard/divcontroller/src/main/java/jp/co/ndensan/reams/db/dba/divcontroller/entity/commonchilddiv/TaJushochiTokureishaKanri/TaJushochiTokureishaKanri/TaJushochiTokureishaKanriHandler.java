@@ -323,6 +323,7 @@ public class TaJushochiTokureishaKanriHandler {
                 rireki_Row.setHenkouzenEdaNo(変更後枝番);
                 if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
                     rireki_Row.setRowState(RowState.Modified);
+                    rireki_Row.setJotai(状態_修正);
                 }
                 TashichosonJushochiTokurei 住所地特例の識別子
                         = new TashichosonJushochiTokurei(識別コード,
@@ -334,12 +335,14 @@ public class TaJushochiTokureishaKanriHandler {
             if (状態_削除.equals(div.getStrate())) {
                 if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
                     rireki_Row.setRowState(RowState.Deleted);
+                    rireki_Row.setJotai(状態_削除);
                 } else {
                     rowList.remove(rireki_Row);
                 }
             }
             if (状態_追加.equals(div.getStrate())) {
                 rireki_Row.setRowState(RowState.Added);
+                rireki_Row.setJotai(状態_追加);
                 rireki_Row.setShikibetsuCode(識別コード.getColumnValue());
                 rireki_Row.setIdoYMD(div.getTajushochiTokureiInput().getHiddenInputIdoYMD());
                 変更後枝番 = TaJushochiTokureisyaKanriManager.createInstance().
@@ -422,6 +425,7 @@ public class TaJushochiTokureishaKanriHandler {
                 rireki_Row.setHenkouzenEdaNo(変更後枝番);
                 if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
                     rireki_Row.setRowState(RowState.Modified);
+                    rireki_Row.setJotai(状態_修正);
                 }
                  int 最新履歴番号 = TaJushochiTokureisyaKanriManager.createInstance().get最新履歴番号(識別コード);
             ShisetsuNyutaisho taisho = new ShisetsuNyutaisho(識別コード, 最新履歴番号);
@@ -439,6 +443,7 @@ public class TaJushochiTokureishaKanriHandler {
              if (状態_削除.equals(div.getStrate())) {
                 if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
                     rireki_Row.setRowState(RowState.Deleted);
+                    rireki_Row.setJotai(状態_削除);
                 } else {
                     rowList.remove(rireki_Row);
                 }
@@ -446,6 +451,7 @@ public class TaJushochiTokureishaKanriHandler {
               }
             if ((状態_追加.equals(div.getStrate())) || (状態_空白.equals(div.getStrate()))) {
                 rireki_Row.setRowState(RowState.Added);
+                rireki_Row.setJotai(状態_追加);
                 rireki_Row.setShikibetsuCode(識別コード.getColumnValue());
                 rireki_Row.getTekiyoYMD().setValue(new RDate(div.getTxtTekiyobi().getValue().toString()));
                 rireki_Row.getTekiyoTodokedeYMD().setValue(new RDate(div.getTxtTekiyoTodokedebi().getValue().toString()));
@@ -476,6 +482,7 @@ public class TaJushochiTokureishaKanriHandler {
                 rireki_Row.setHenkouzenEdaNo(変更後枝番);
                 if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
                     rireki_Row.setRowState(RowState.Modified);
+                    rireki_Row.setJotai(状態_修正);
                 }
                  int 最新履歴番号 = TaJushochiTokureisyaKanriManager.createInstance().get最新履歴番号(識別コード);
             ShisetsuNyutaisho taisho = new ShisetsuNyutaisho(識別コード, 最新履歴番号);
