@@ -36,6 +36,10 @@ public class TaishoShoriValidationHandler {
     private final TaishoShoriPanelDiv div;
     private static final RString 処理コード_年次 = new RString("0");
     private static final RString 処理コード_月次 = new RString("1");
+    private static final int 作成年月日開始位置 = 9;
+    private static final int 作成年月日終了位置 = 17;
+    private static final int 作成年月終了位置 = 15;
+    private static final int 作成年終了位置 = 13;
 
     /**
      * コンストラクタです。
@@ -106,12 +110,13 @@ public class TaishoShoriValidationHandler {
     public Message validate作成年月日() {
 
         RString 処理コード = div.getDgTaishoShoriItchiran().getSelectedItems().get(0).getHdnShoriCode();
-        RString 作成年月日 = new FlexibleDate(div.getHdnLine().substring(9, 17)).wareki().toDateString();
-        RString 作成年月 = div.getHdnLine().substring(9, 15);
+        RString 作成年月日 = new FlexibleDate(div.getHdnLine().substring(作成年月日開始位置, 作成年月日終了位置))
+                .wareki().toDateString();
+        RString 作成年月 = div.getHdnLine().substring(作成年月日開始位置, 作成年月終了位置);
         RString 処理年度 = div.getDdlShoriNendo().getSelectedKey();
 
         if (処理コード.equals(処理コード_年次)) {
-            RString 作成年 = div.getHdnLine().substring(9, 13);
+            RString 作成年 = div.getHdnLine().substring(作成年月日開始位置, 作成年終了位置);
             if (!作成年.equals(処理年度)) {
                 return DbdWarningMessages.非課税年金年次取込確認.getMessage(ButtonSelectPattern.OKCancel).replace(
                         作成年月日.toString(),
@@ -121,7 +126,7 @@ public class TaishoShoriValidationHandler {
         } else if (処理コード.equals(処理コード_月次)) {
             RString 年度終了月 = DbBusinessConfig.get(ConfigNameDBD.非課税年金対象者情報_月次処理年度終了月,
                     RDate.getNowDate(), SubGyomuCode.DBD介護受給);
-            RString 選択月 = div.getDgTaishoShoriItchiran().getSelectedItems().get(0).getHdnTukiCode().substring(1, 3);
+            RString 選択月 = div.getDgTaishoShoriItchiran().getSelectedItems().get(0).getHdnTukiCode().substring(1);
             RString 処理年月;
             if (年度終了月.compareTo(選択月) < 0) {
                 処理年月 = 処理年度.concat(選択月);
