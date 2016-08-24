@@ -221,6 +221,8 @@ public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<RS
         Hokensha hokensha = 保険者名取得.getHokensha(new HokenjaNo(コントロールレコード.getHokenshaNo()));
         if (hokensha != null) {
             受給者一時entity.setHokenshaName(hokensha.get保険者名());
+        } else {
+            受給者一時entity.setHokenshaName(RString.EMPTY);
         }
         受給者一時entity.setTorikomiYM(parameter.get処理年月());
         受給者情報一時tableWriter.insert(受給者一時entity);
