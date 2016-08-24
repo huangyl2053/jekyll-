@@ -82,6 +82,8 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcessParameter implements IBatchP
      * @param 被保番号 被保番号
      * @param 減免適用開始日 減免適用開始日
      * @param 帳票ID 帳票ID
+     * @param 発行履歴固有情報_減免適用開始日 発行履歴固有情報_減免適用開始日
+     * @param 発行履歴固有情報_被保番号 発行履歴固有情報_被保番号
      * @return 負担限度額認定の認定証発行SQL用パラメター
      */
     public FutanGenndoGakuNinnteiTsuuchishoMybatisParameter toFutanGenndoGakuNinnteiTsuuchishoMybatisParameter(RString psmShikibetsuTaisho,
@@ -89,7 +91,9 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcessParameter implements IBatchP
             RString 出力順,
             RString 被保番号,
             RString 減免適用開始日,
-            ReportId 帳票ID) {
+            ReportId 帳票ID,
+            RString 発行履歴固有情報_減免適用開始日,
+            RString 発行履歴固有情報_被保番号) {
         return new FutanGenndoGakuNinnteiTsuuchishoMybatisParameter(psmShikibetsuTaisho,
                 psmAtesaki,
                 出力順,
@@ -98,6 +102,8 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcessParameter implements IBatchP
                 対象日TO,
                 被保番号,
                 減免適用開始日,
-                帳票ID);
+                帳票ID,
+                発行履歴固有情報_被保番号,
+                発行履歴固有情報_減免適用開始日);
     }
 }
