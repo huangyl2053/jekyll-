@@ -152,9 +152,6 @@ public class ShokanShuruiShikyuGendoGakuManager {
         if (!insert償還List.isEmpty()) {
             for (ShokanShuruiShikyuGendoGaku insert償還 : insert償還List) {
                 requireNonNull(insert償還, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払い給付種類支給限度額"));
-                if (!insert償還.hasChanged()) {
-                    return;
-                }
                 dac.save(insert償還.toEntity());
             }
         }

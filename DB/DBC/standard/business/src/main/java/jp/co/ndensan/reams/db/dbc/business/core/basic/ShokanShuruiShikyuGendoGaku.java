@@ -19,10 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 償還払い給付種類支給限度額を管理するクラスです。
  */
-public class ShokanShuruiShikyuGendoGaku 
-extends ModelBase<ShokanShuruiShikyuGendoGakuIdentifier, 
-        DbT7112ShokanShuruiShikyuGendoGakuEntity, 
-        ShokanShuruiShikyuGendoGaku> implements Serializable {
+public class ShokanShuruiShikyuGendoGaku
+        extends ModelBase<ShokanShuruiShikyuGendoGakuIdentifier, DbT7112ShokanShuruiShikyuGendoGakuEntity, ShokanShuruiShikyuGendoGaku> implements Serializable {
 
     private final DbT7112ShokanShuruiShikyuGendoGakuEntity entity;
     private final ShokanShuruiShikyuGendoGakuIdentifier id;
@@ -176,7 +174,7 @@ extends ModelBase<ShokanShuruiShikyuGendoGakuIdentifier,
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -206,5 +204,4 @@ extends ModelBase<ShokanShuruiShikyuGendoGakuIdentifier,
         return new ShokanShuruiShikyuGendoGakuBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

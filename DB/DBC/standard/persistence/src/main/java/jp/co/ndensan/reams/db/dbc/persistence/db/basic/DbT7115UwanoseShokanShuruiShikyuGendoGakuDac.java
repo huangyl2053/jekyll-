@@ -202,6 +202,6 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements
     public int delete(DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("上乗せ償還払い給付種類支給限度額エンティティ"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
+        return accessor.deletePhysical(entity).execute();
     }
 }

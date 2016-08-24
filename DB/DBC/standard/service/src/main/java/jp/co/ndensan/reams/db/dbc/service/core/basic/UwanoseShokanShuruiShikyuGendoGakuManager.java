@@ -153,9 +153,6 @@ public class UwanoseShokanShuruiShikyuGendoGakuManager {
         if (!insert上乗せList.isEmpty()) {
             for (UwanoseShokanShuruiShikyuGendoGaku insert上乗せ : insert上乗せList) {
                 requireNonNull(insert上乗せ, UrSystemErrorMessages.値がnull.getReplacedMessage("上乗せ償還払い給付種類支給限度額"));
-                if (!insert上乗せ.hasChanged()) {
-                    return;
-                }
                 dac.save(insert上乗せ.toEntity());
             }
         }
