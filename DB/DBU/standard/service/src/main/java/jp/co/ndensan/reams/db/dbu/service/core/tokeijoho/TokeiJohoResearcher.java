@@ -147,52 +147,52 @@ public class TokeiJohoResearcher {
 
         int 要介護１人数 = mapper.get要介護人数(
                 TokeiJohoResearcherMybatisParameter.createParamFor要介護人数(基準日,
-                        市町村コード_Param,
+                        市町村コード_Param, YokaigoJotaiKubun06.要介護1.getコード(),
                         JukyuShinseiJiyu.指定サービス種類変更申請.getコード(),
-                        YukoMukoKubun.有効.getコード(),
-                        YokaigoJotaiKubun06.要介護1.getコード()));
+                        YukoMukoKubun.有効.getコード()
+                ));
         int 要介護２人数 = mapper.get要介護人数(
                 TokeiJohoResearcherMybatisParameter.createParamFor要介護人数(基準日,
                         市町村コード_Param,
+                        YokaigoJotaiKubun06.要介護2.getコード(),
                         JukyuShinseiJiyu.指定サービス種類変更申請.getコード(),
-                        YukoMukoKubun.有効.getコード(),
-                        YokaigoJotaiKubun06.要介護2.getコード()));
+                        YukoMukoKubun.有効.getコード()));
         int 要介護３人数 = mapper.get要介護人数(
                 TokeiJohoResearcherMybatisParameter.createParamFor要介護人数(基準日,
                         市町村コード_Param,
+                        YokaigoJotaiKubun06.要介護3.getコード(),
                         JukyuShinseiJiyu.指定サービス種類変更申請.getコード(),
-                        YukoMukoKubun.有効.getコード(),
-                        YokaigoJotaiKubun06.要介護3.getコード()));
+                        YukoMukoKubun.有効.getコード()));
         int 要介護４人数 = mapper.get要介護人数(
                 TokeiJohoResearcherMybatisParameter.createParamFor要介護人数(基準日,
                         市町村コード_Param,
+                        YokaigoJotaiKubun06.要介護4.getコード(),
                         JukyuShinseiJiyu.指定サービス種類変更申請.getコード(),
-                        YukoMukoKubun.有効.getコード(),
-                        YokaigoJotaiKubun06.要介護4.getコード()));
+                        YukoMukoKubun.有効.getコード()));
         int 要介護５人数 = mapper.get要介護人数(
                 TokeiJohoResearcherMybatisParameter.createParamFor要介護人数(基準日,
                         市町村コード_Param,
+                        YokaigoJotaiKubun06.要介護5.getコード(),
                         JukyuShinseiJiyu.指定サービス種類変更申請.getコード(),
-                        YukoMukoKubun.有効.getコード(),
-                        YokaigoJotaiKubun06.要介護5.getコード()));
+                        YukoMukoKubun.有効.getコード()));
         int 要支援１人数 = mapper.get要介護人数(
                 TokeiJohoResearcherMybatisParameter.createParamFor要介護人数(基準日,
                         市町村コード_Param,
+                        YokaigoJotaiKubun06.要支援1.getコード(),
                         JukyuShinseiJiyu.指定サービス種類変更申請.getコード(),
-                        YukoMukoKubun.有効.getコード(),
-                        YokaigoJotaiKubun06.要支援1.getコード()));
+                        YukoMukoKubun.有効.getコード()));
         int 要支援２人数 = mapper.get要介護人数(
                 TokeiJohoResearcherMybatisParameter.createParamFor要介護人数(基準日,
                         市町村コード_Param,
+                        YokaigoJotaiKubun06.要支援2.getコード(),
                         JukyuShinseiJiyu.指定サービス種類変更申請.getコード(),
-                        YukoMukoKubun.有効.getコード(),
-                        YokaigoJotaiKubun06.要支援2.getコード()));
+                        YukoMukoKubun.有効.getコード()));
         int 経過的要介護人数 = mapper.get要介護人数(
                 TokeiJohoResearcherMybatisParameter.createParamFor要介護人数(基準日,
                         市町村コード_Param,
+                        YokaigoJotaiKubun06.経過的要介護.getコード(),
                         JukyuShinseiJiyu.指定サービス種類変更申請.getコード(),
-                        YukoMukoKubun.有効.getコード(),
-                        YokaigoJotaiKubun06.経過的要介護.getコード()));
+                        YukoMukoKubun.有効.getコード()));
         int 受給人数 = 要介護１人数 + 要介護２人数 + 要介護３人数 + 要介護４人数 + 要介護５人数 + 要支援１人数 + 要支援２人数 + 経過的要介護人数;
         int 自立人数 = mapper.get自立人数(
                 TokeiJohoResearcherMybatisParameter.createParamFor自立人数(基準日, 市町村コード_Param,

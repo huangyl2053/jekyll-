@@ -121,6 +121,9 @@ public class IchijiSashitome1Go {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
+        div.getBtnSashitomeToroku().setDisabled(false);
+        div.getBtnKojoToroku().setDisabled(false);
+        div.getBtnSashitomeOrKojoJokyoShokai().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
