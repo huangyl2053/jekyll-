@@ -514,9 +514,12 @@ public class KijunShunyugakuTekiyo {
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("抽出区分："));
-        jokenBuilder.append(ChushutsuKubun.toValue(processParameter.get抽出区分()).get名称());
+        if (RString.isNullOrEmpty(processParameter.get抽出区分())) {
+            jokenBuilder.append(new RString("－"));
+        } else {
+            jokenBuilder.append(ChushutsuKubun.toValue(processParameter.get抽出区分()).get名称());
+        }
         出力条件List.add(jokenBuilder.toRString());
-
         jokenBuilder = new RStringBuilder();
         if (!RString.isNullOrEmpty(processParameter.get基準年月())) {
             jokenBuilder.append(new RString("基準年月："));

@@ -30,7 +30,7 @@ public class DBC710200_HanyoListKijunShunyugakuTekiyoParameter extends BatchPara
     private RString 出力順項目ID;
     @BatchParameter(key = "komoukumei", name = "is項目名付加")
     private boolean is項目名付加;
-    @BatchParameter(key = "renbanFuka", name = "is項目名付加")
+    @BatchParameter(key = "renbanFuka", name = "is連番付加")
     private boolean is連番付加;
     @BatchParameter(key = "isdateedit", name = "is日付編集")
     private boolean is日付編集;
