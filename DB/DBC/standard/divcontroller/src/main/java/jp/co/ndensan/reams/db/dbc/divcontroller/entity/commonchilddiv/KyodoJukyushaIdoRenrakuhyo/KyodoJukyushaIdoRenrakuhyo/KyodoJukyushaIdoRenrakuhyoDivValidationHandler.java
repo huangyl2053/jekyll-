@@ -34,7 +34,6 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
     private static final RString MSG_既存の異動日 = new RString("既存の異動日");
     private static final RString MSG_履歴番号 = new RString("履歴番号");
     private static final RString 修正 = new RString("修正");
-    private static final RString 削除 = new RString("削除");
     private static final int NUM_ZERO = 0;
     private static final RString チェックボックス_KEY = new RString("key0");
     private static final RString 訂正区分_修正 = new RString("key0");
