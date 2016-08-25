@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -70,6 +69,7 @@ public class ShikakuKihonJoho {
         createHandler(div).適用情報の名称編集(ReportIdDBA.DBA100007.getReportId());
         createHandler(div).get初期文書番号取得(ReportIdDBA.DBA100007.getReportId());
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行ボタン, true);
+        div.getTajutokuTekiyoJohoIchiran().getReportPublish().setIsPublish(true);
         return ResponseData.of(div).respond();
     }
 
@@ -196,8 +196,8 @@ public class ShikakuKihonJoho {
         item.setBunshoNo(business.get文書番号());
         item.setHokenshaJusho(business.get保険者住所());
         item.setHakkoYMD(business.get発行年月日());
-        item.setHokenshaName(business.get保険者名());
-        item.setTantoBushoName(business.get担当部署名());
+        item.setHokenshaName(business.get保険者名().concat(business.get保険者名敬称()));
+        item.setTantoBushoName(business.get担当部署名().concat(business.get担当部署名敬称()));
         item.setBarcode(business.getバーコード情報());
         item.setMidashi1(business.get見出し());
         item.setTennyuYMD(business.get転入年月日());
