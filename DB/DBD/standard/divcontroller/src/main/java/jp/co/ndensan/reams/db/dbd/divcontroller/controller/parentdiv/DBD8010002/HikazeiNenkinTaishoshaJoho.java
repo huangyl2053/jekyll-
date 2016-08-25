@@ -233,6 +233,7 @@ public class HikazeiNenkinTaishoshaJoho {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
             div.setHdnFilePath(files[0].getFilePath());
+            div.getTanitsuTaishoShoriIchiran().setHdnLocalFileName(files[0].getFileName());
 
             getHandler(div).readFile();
 
@@ -249,7 +250,7 @@ public class HikazeiNenkinTaishoshaJoho {
             }
         }
 
-        getHandler(div).upload(files[0].getFileName());
+        getHandler(div).upload(div.getTanitsuTaishoShoriIchiran().getHdnLocalFileName());
         setDisplayOrOpen(div, false);
         return ResponseData.of(div).respond();
     }
@@ -265,7 +266,7 @@ public class HikazeiNenkinTaishoshaJoho {
     private void setDisplayOrOpen(HikazeiNenkinTaishoshaJohoDiv div, boolean flg) {
         div.getFuairuAppurodo().setCanOpenAndClose(flg);
         div.getFuairuAppurodo().setIsOpen(flg);
-        div.getUplTaishoFuairu().setDisplayNone(!flg);
-        div.getBtnAppurodo().setDisplayNone(!flg);
+        div.getFuairuAppurodo().getUplTaishoFuairu().setDisplayNone(!flg);
+        div.getFuairuAppurodo().getBtnAppurodo().setDisplayNone(!flg);
     }
 }
