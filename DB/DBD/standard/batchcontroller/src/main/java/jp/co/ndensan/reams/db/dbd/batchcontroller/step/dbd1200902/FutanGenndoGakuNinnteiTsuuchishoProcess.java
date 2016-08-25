@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1200902;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100013.FutanGendogakuKetteiTsuchishoOrderKey;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100013.FutanGendogakuKetteiTsuchishoReport;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100013.HakkoRirekiKoyuJohoDBD100013;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100020.FutanGendogakuNinteishoOrderKey;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.FutanGenndoGakuNinnteiTsuuchishoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.FutanGenndoGakuNinnteiTsuuchishoEntity;
@@ -88,7 +88,6 @@ import jp.co.ndensan.reams.uz.uza.util.Saiban;
  */
 public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<FutanGenndoGakuNinnteiTsuuchishoEntity> {
 
-    private static final ReportId REPORT_DBD100020 = ReportIdDBD.DBD100020.getReportId();
     private static final ReportId 帳票ID = new ReportId("DBD100013_FutanGendogakuKetteiTsuchisho");
     private static final ReportId 帳票分類ID = new ReportId("DBD100013_FutanGendogakuKetteiTsuchisho");
     private static final RString なし = new RString("なし");
@@ -145,7 +144,7 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
 
         return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toFutanGenndoGakuNinnteiTsuuchishoMybatisParameter(
                 psmShikibetsuTaisho, psmAtesaki, get出力順(),
-                HakkoRirekiKoyuJohoDBD100013.被保番号.get名称(), HakkoRirekiKoyuJohoDBD100013.減免適用開始日.get名称(), REPORT_DBD100020,
+                HakkoRirekiKoyuJohoDBD100013.被保番号.get名称(), HakkoRirekiKoyuJohoDBD100013.減免適用開始日.get名称(), 帳票ID,
                 GyomuKoyuJoho.被保番号.getコード(),
                 GyomuKoyuJoho.減免適用開始日.getコード()));
 
@@ -195,7 +194,7 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
         FutanGenndoGakuNinnteiTsuuchishoService service = new FutanGenndoGakuNinnteiTsuuchishoService();
         count = service.get利用者負担割合(processParamter.toFutanGenndoGakuNinnteiTsuuchishoMybatisParameter(
                 psmShikibetsuTaisho, psmAtesaki, get出力順(),
-                HakkoRirekiKoyuJohoDBD100013.被保番号.get名称(), HakkoRirekiKoyuJohoDBD100013.減免適用開始日.get名称(), REPORT_DBD100020,
+                HakkoRirekiKoyuJohoDBD100013.被保番号.get名称(), HakkoRirekiKoyuJohoDBD100013.減免適用開始日.get名称(), 帳票ID,
                 GyomuKoyuJoho.被保番号.getコード(),
                 GyomuKoyuJoho.減免適用開始日.getコード()));
     }
@@ -222,15 +221,14 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
     @Override
     protected void afterExecute() {
         バッチ出力条件リストの出力();
-
     }
 
     private RString get出力順() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD100020, reamsLoginID, processParamter.get改頁出力順ID());
+        order = finder.get出力順(SubGyomuCode.DBD介護受給, 帳票ID, reamsLoginID, processParamter.get改頁出力順ID());
         RString 出力順 = RString.EMPTY;
         if (order != null) {
-            出力順 = MyBatisOrderByClauseCreator.create(FutanGendogakuNinteishoOrderKey.class, order);
+            出力順 = MyBatisOrderByClauseCreator.create(FutanGendogakuKetteiTsuchishoOrderKey.class, order);
         }
         return 出力順;
     }
