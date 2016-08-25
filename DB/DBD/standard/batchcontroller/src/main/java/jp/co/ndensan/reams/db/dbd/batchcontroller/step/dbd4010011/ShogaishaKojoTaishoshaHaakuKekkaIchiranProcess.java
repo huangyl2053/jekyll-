@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShu
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
@@ -412,6 +413,7 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
         dbt4010Entity.setShinseiTodokedeshaShimei(AtenaMeisho.EMPTY);
         dbt4010Entity.setShinseiTodokedeshaTelNo(TelNo.EMPTY);
         dbt4010Entity.setShinseiTodokedeshaTsuzukigara(RString.EMPTY);
+        dbt4010Entity.setShinseiTodokedeDaikoJigyoshaNo(new JigyoshaNo(new RString("1")));
         dbt4010Entity.setShinseiTodokedeshaYubinNo(YubinNo.EMPTY);
         dbt4010Entity.setJigyoshaKubun(RString.EMPTY);
         return dbt4010Entity;
