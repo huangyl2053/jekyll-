@@ -62,7 +62,7 @@
         "henkanHihokenshaNo" rgdb."DbUDD002HihokenshaNo",
         "hihokenshaNo" rgdb."DbUDD002HihokenshaNo",
         "shichosonCode" rshare."UDD023LasdecCode",
-        "KannaiKangaiKubun" character varying(40),
+        "kannaiKangaiKubun" character varying(40),
         "yubinNo" character varying(40),
         "choikiCode" character varying(40),
         "gyoseikuCode" character varying(40),
