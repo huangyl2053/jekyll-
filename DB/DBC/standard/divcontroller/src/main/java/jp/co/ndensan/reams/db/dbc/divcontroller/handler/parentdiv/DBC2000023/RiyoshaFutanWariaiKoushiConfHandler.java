@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000023;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoDivParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000023.RiyoshaFutanWariaiKoushiConfDiv;
@@ -120,6 +122,8 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
 
             if (INT_1 < 利用者負担割合明細後list.size()) {
 
+                編集昇順List(利用者負担割合明細後list);
+
                 RiyoshaFutanWariaiMeisai 利用者負担割合明細one = 利用者負担割合明細後list.get(利用者負担割合明細後list.size() - 2);
                 div.getPanelShutsuryokuNaiyo().getLbl2wari().setText(FutanwariaiKubun.toValue(利用者負担割合明細one.get負担割合区分()).get名称());
                 div.getPanelShutsuryokuNaiyo().getLbl2wariKaishiYmd().setText(new RString(利用者負担割合明細one.get有効開始日().toString()));
@@ -147,6 +151,18 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
 
         ExpandedInformation expandedInfo3 = new ExpandedInformation(new Code(INFOCODE), 定数_被保険者番号, 被保険者番号);
         return PersonalData.of(識別コード, expandedInfo3);
+    }
+
+    private void 編集昇順List(List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細後list) {
+        Collections.sort(利用者負担割合明細後list, new Comparator<RiyoshaFutanWariaiMeisai>() {
+            @Override
+            public int compare(RiyoshaFutanWariaiMeisai i1, RiyoshaFutanWariaiMeisai i2) {
+                if (i1.get有効開始日().isBefore(i2.get有効開始日())) {
+                    return -1;
+                }
+                return 1;
+            }
+        });
     }
 
     /**

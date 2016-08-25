@@ -50,6 +50,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 非課税年金対象者情報アップロード画面のHandlerです。
@@ -180,7 +181,10 @@ public class TaishoShoriHandler {
                     if (!target.get処理枝番().equals(ShoriJotaiKubun.未処理.getコード())) {
                         YMDHMS 基準日時 = target.get基準日時();
                         row.setTxtShoriNichiji(null != 基準日時 && !基準日時.isEmpty()
-                                ? target.get基準日時().getRDateTime().format和暦("GYY.MM.DD HH:mm:ss") : RString.EMPTY);
+                                ? 基準日時.getDate().wareki().eraType(EraType.KANJI)
+                                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString()
+                                .concat(基準日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
+                                : RString.EMPTY);
                     }
                     break;
                 }
@@ -292,7 +296,7 @@ public class TaishoShoriHandler {
     private RString getFileName() {
         dgTaishoShoriItchiran_Row 一覧対象 = div.getDgTaishoShoriItchiran().getSelectedItems().get(0);
         RStringBuilder build = new RStringBuilder();
-        build.append(一覧対象.getHdnShoriCode().equals(処理_年次) ? 対象ファイル開始_年次 : 対象ファイル開始_月次)
+        build.append(一覧対象.getHdnShoriCode().equals(処理コード_年次) ? 対象ファイル開始_年次 : 対象ファイル開始_月次)
                 .append(div.getDdlShoriNendo().getSelectedKey())
                 .append(一覧対象.getHdnShoriCode())
                 .append(一覧対象.getHdnTukiCode())

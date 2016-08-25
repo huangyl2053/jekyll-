@@ -43,7 +43,7 @@ public enum HikazeiNenkinTaishoshaJohoDivSpec implements IPredicate<HikazeiNenki
     アップロードファイル未指定チェック {
         @Override
         public boolean apply(HikazeiNenkinTaishoshaJohoDiv div) {
-            return div.getUplTaishoFuairu().getRemainUnUploadedFiles().size() > 0;
+            return div.getFuairuAppurodo().getUplTaishoFuairu().getRemainUnUploadedFiles().size() > 0;
         }
     },
     /**
@@ -52,12 +52,19 @@ public enum HikazeiNenkinTaishoshaJohoDivSpec implements IPredicate<HikazeiNenki
     処理状態チェック {
         @Override
         public boolean apply(HikazeiNenkinTaishoshaJohoDiv div) {
-            return div.getDgTanitsuTaishoShoriItchiran().getSelectedItems().get(0).getTxtShoriJotai()
-                    .equals(SyoriJyoutaiCode.未処理.get名称())
-                    || div.getDgTanitsuTaishoShoriItchiran().getSelectedItems().get(0).getTxtShoriJotai()
-                    .equals(SyoriJyoutaiCode.再処理前.get名称())
-                    || div.getDgTanitsuTaishoShoriItchiran().getSelectedItems().get(0).getTxtShoriJotai()
-                    .equals(SyoriJyoutaiCode.追加取込前.get名称());
+
+            List<dgTanitsuTaishoShoriItchiran_Row> list = div.getDgTanitsuTaishoShoriItchiran().getSelectedItems();
+            if (list.isEmpty()) {
+                return false;
+            } else {
+                return list.get(0).getTxtShoriJotai()
+                        .equals(SyoriJyoutaiCode.未処理.get名称())
+                        || list.get(0).getTxtShoriJotai()
+                        .equals(SyoriJyoutaiCode.再処理前.get名称())
+                        || list.get(0).getTxtShoriJotai()
+                        .equals(SyoriJyoutaiCode.追加取込前.get名称());
+            }
+
         }
     },
     /**

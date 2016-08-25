@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -37,6 +36,8 @@ public class TanitsuTaishoShoriIchiranDiv extends Panel {
     private TextBox txtFuairuMei;
     @JsonProperty("hdnFileName")
     private RString hdnFileName;
+    @JsonProperty("hdnLocalFileName")
+    private RString hdnLocalFileName;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -171,26 +172,21 @@ public class TanitsuTaishoShoriIchiranDiv extends Panel {
     }
 
     /*
-     * [ ショートカットの作成 ]
+     * gethdnLocalFileName
+     * @return hdnLocalFileName
      */
-    @JsonIgnore
-    public UploadPanel getUplTaishoFuairu() {
-        return this.getFuairuAppurodo().getUplTaishoFuairu();
+    @JsonProperty("hdnLocalFileName")
+    public RString getHdnLocalFileName() {
+        return hdnLocalFileName;
     }
 
-    @JsonIgnore
-    public void  setUplTaishoFuairu(UploadPanel uplTaishoFuairu) {
-        this.getFuairuAppurodo().setUplTaishoFuairu(uplTaishoFuairu);
-    }
-
-    @JsonIgnore
-    public Button getBtnAppurodo() {
-        return this.getFuairuAppurodo().getBtnAppurodo();
-    }
-
-    @JsonIgnore
-    public void  setBtnAppurodo(Button btnAppurodo) {
-        this.getFuairuAppurodo().setBtnAppurodo(btnAppurodo);
+    /*
+     * sethdnLocalFileName
+     * @param hdnLocalFileName hdnLocalFileName
+     */
+    @JsonProperty("hdnLocalFileName")
+    public void setHdnLocalFileName(RString hdnLocalFileName) {
+        this.hdnLocalFileName = hdnLocalFileName;
     }
 
     // </editor-fold>

@@ -7,8 +7,11 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD8010001
 
 import java.io.Serializable;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.core.shorijotaikubun.ShoriJotaiKubun;
+import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010001.DBD8010001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010001.TaishoShoriPanelDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010001.dgShoriSettei_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010001.TaishoShoriHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010001.TaishoShoriValidationHandler;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
@@ -16,7 +19,9 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -183,11 +188,20 @@ public class TaishoShoriPanel {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        List<ShoriDateKanri> 画面更新用情報 = ViewStateHolder.get(画面キー.画面更新用情報, List.class);
-        getHandler(div).save(画面更新用情報);
 
-        div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString("更新処理が正常に終了しました。"));
-        return ResponseData.of(div).setState(DBD8010001StateName.処理完了);
+        if (!ResponseHolder.isReRequest() && is再処理(div)) {
+            return ResponseData.of(div).addMessage(DbdQuestionMessages.非課税年金再処理確認.getMessage()).respond();
+        }
+
+        if (!ResponseHolder.isReRequest() || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            List<ShoriDateKanri> 画面更新用情報 = ViewStateHolder.get(画面キー.画面更新用情報, List.class);
+            getHandler(div).save(画面更新用情報);
+
+            div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString("更新処理が正常に終了しました。"));
+            return ResponseData.of(div).setState(DBD8010001StateName.処理完了);
+        }
+
+        return ResponseData.of(div).respond();
     }
 
     private TaishoShoriHandler getHandler(TaishoShoriPanelDiv div) {
@@ -203,5 +217,15 @@ public class TaishoShoriPanel {
         div.getFuairuAppurodo().setIsOpen(flg);
         div.getUplTaishoFuairu().setDisplayNone(!flg);
         div.getBtnAppurodo().setDisplayNone(!flg);
+    }
+
+    private boolean is再処理(TaishoShoriPanelDiv div) {
+        for (dgShoriSettei_Row 処理設定 : div.getDgShoriSettei().getDataSource()) {
+            if (処理設定.getTxtShoriJotai().getSelectedKey().equals(ShoriJotaiKubun.再処理前.getコード())
+                    && 処理設定.getTxtShoriJotai().getSelectedIndex() != 0) {
+                return true;
+            }
+        }
+        return false;
     }
 }

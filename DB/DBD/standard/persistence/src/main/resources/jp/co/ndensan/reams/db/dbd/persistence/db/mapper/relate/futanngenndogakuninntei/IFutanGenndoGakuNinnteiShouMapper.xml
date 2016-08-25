@@ -18,6 +18,9 @@ and open the template in the editor.
     <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
 </resultMap>
 <resultMap id="resultMap_IFutanGenndoGakuNinnteiShouEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.FutanGenndoGakuNinnteiShouEntity" autoMapping="true">
+    <result property="shichosonCode"  column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+    <result property="shikibetsuCode" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+    <result property="hihokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
     <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
     <collection property="介護保険負担限度額認定" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futanngenndogakuninntei.IFutanGenndoGakuNinnteiShouMapper.resultMap_FutanGendogakuNinteiEntity"/>
@@ -26,7 +29,7 @@ and open the template in the editor.
         resultMap="resultMap_IFutanGenndoGakuNinnteiShouEntity"
         parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.FutanGenndoGakuNinnteiShouMybatisParameter" fetchSize="500" resultOrdered="true">
     SELECT
-      A.*,B.*,
+      A.*,B.*,C."shichosonCode" AS 市町村コード,C."shikibetsuCode" AS 識別コード,A."hihokenshaNo" AS 被保険者番号,
 	  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />, 
 	  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />	
     FROM(
@@ -54,12 +57,12 @@ and open the template in the editor.
     INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS C
     ON C."hihokenshaNo" = A."hihokenshaNo"
     AND C."logicalDeletedFlag" = FALSE
+    INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+      '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+      true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+    ON "ShikibetsuTaisho"."shikibetsuCode" = C."shikibetsuCode"
     INNER JOIN 
-          <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
-            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
-    ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = C."shikibetsuCode"
-    INNER JOIN 
-    <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
+    rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','true','true','') AS "Atesaki"
      ON "Atesaki"."shikibetsuCode" = C."shikibetsuCode"
     WHERE
       A."ketteiKubun" = #{決定区分_承認する}

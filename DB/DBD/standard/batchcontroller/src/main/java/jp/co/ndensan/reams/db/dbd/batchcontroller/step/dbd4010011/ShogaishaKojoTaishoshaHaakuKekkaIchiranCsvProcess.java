@@ -33,7 +33,7 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranCsvProcess extends BatchProc
 
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString CSV_WRITER_ENCLOSURE = new RString("\"");
-    private static final EucEntityId CSV_ENTITY_ID = new EucEntityId(new RString("DBD4010011"));
+    private static final EucEntityId CSV_ENTITY_ID = new EucEntityId(new RString("DBD419001"));
     private static final RString CSVファイル名 = new RString("ShogaishaKojoTaishoshaHaakuKekkaIchiranData.csv");
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shogaishakoujohaaku"

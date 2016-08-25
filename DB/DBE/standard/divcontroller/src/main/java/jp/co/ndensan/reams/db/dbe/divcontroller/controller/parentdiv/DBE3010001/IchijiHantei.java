@@ -32,12 +32,16 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -46,6 +50,8 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -62,6 +68,7 @@ public class IchijiHantei {
     private final RString メニュー = new RString("DBEMN41001");
     private final RString 完了処理_一次判定 = new RString("DBEMNA1006");
     private static final RString LOCKINGKEY = new RString("ShinseishoKanriNo");
+    private static final RString データ取込 = new RString("btnTorikomi");
 
     /**
      * コンストラクタです。
@@ -349,6 +356,33 @@ public class IchijiHantei {
             ViewStateHolder.put(ViewStateKeys.要介護認定一次判定結果情報, Models.create(new ArrayList()));
         }
         return businessList;
+    }
+
+    /**
+     * アップロードダイアログ。<br/>
+     *
+     * @param div IchijiHanteiDiv
+     * @param files FileData
+     * @return ResponseData<IchijiHanteiDiv>
+     */
+    @SuppressWarnings("checkstyle:illegaltoken")
+    public ResponseData<IchijiHanteiDiv> onclick_BtnUpload(IchijiHanteiDiv div, FileData[] files) {
+
+        for (FileData file : files) {
+
+            RString 共有ファイル名 = file.getFileName();
+            RString ファイルパス = file.getFilePath();
+            ValidationMessageControlPairs validation = getValidatisonHandler(div).ファイルの名称チェック(共有ファイル名);
+            if (validation.iterator().hasNext()) {
+
+                return ResponseData.of(div).addValidationMessages(validation).respond();
+            }
+            SharedFile.defineSharedFile(new FilesystemName(共有ファイル名), 1, SharedFile.GROUP_ALL, null, false, null);
+            RDateTime fileId = SharedFile.copyToSharedFile(new FilesystemPath(ファイルパス), new FilesystemName(共有ファイル名));
+            div.setファイルID(new RString(fileId.toString()));
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(データ取込, false);
+        }
+        return ResponseData.of(div).respond();
     }
 
     private IchijiHanteiHandler getHandler(IchijiHanteiDiv div) {

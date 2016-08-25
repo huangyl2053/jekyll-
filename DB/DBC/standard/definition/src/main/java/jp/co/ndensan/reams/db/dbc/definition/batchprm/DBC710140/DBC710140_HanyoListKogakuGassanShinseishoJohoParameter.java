@@ -23,14 +23,14 @@ public class DBC710140_HanyoListKogakuGassanShinseishoJohoParameter extends Batc
     private static final long serialVersionUID = 1L;
 
     private static final String KEY_CHUSHUTSU_KUBUN = "chushutsuKubun";
-    private static final String KEY_KAIGOGASSAN_SHINSEIJOKYO_KUBUN = "kaigoGassanShinseiJokyoKubun";
+    private static final String KEY_KAIGOGASSAN_KUBUN = "kaigoGassanShinseiJokyoKubun";
     private static final String KEY_FLEXIBLE_YEAR = "flexibleYear";
     private static final String KEY_FLEXIBLE_DATE_FROM = "flexibleDateFrom";
     private static final String KEY_FLEXIBLE_DATE_TO = "flexibleDateTo";
-    private static final String KEY_SHIKYU_SHINSEISHO_SEIRINO_FROM = "shikyuShinseishoSeiriNoFrom";
-    private static final String KEY_SHIKYU_SHINSEISHO_SEIRINO_TO = "shikyuShinseishoSeiriNoTo";
-    private static final String KEY_FLEXIBLE_YEARMONTH_FROM = "flexibleYearMonthFrom";
-    private static final String KEY_FLEXIBLE_YEARMONTH_TO = "flexibleYearMonthTo";
+    private static final String KEY_SHIKYU_FROM = "shikyuShinseishoSeiriNoFrom";
+    private static final String KEY_SHIKYU_TO = "shikyuShinseishoSeiriNoTo";
+    private static final String KEY_FLEXIBLE_FROM = "flexibleYearMonthFrom";
+    private static final String KEY_FLEXIBLE_TO = "flexibleYearMonthTo";
     private static final String KEY_TOMOKUME_FUKA = "tomokumeFuka";
     private static final String KEY_REBAN_FUKA = "rebanFuka";
     private static final String KEY_SLASH_DATE = "slashDate";
@@ -40,7 +40,7 @@ public class DBC710140_HanyoListKogakuGassanShinseishoJohoParameter extends Batc
 
     @BatchParameter(key = KEY_CHUSHUTSU_KUBUN, name = "抽出区分")
     private RString chushutsuKubun;
-    @BatchParameter(key = KEY_KAIGOGASSAN_SHINSEIJOKYO_KUBUN, name = "申請状況区分")
+    @BatchParameter(key = KEY_KAIGOGASSAN_KUBUN, name = "申請状況区分")
     private RString kaigoGassanShinseiJokyoKubun;
     @BatchParameter(key = KEY_FLEXIBLE_YEAR, name = "対象年度")
     private RString flexibleYear;
@@ -48,13 +48,13 @@ public class DBC710140_HanyoListKogakuGassanShinseishoJohoParameter extends Batc
     private FlexibleDate flexibleDateFrom;
     @BatchParameter(key = KEY_FLEXIBLE_DATE_TO, name = "申請年月日To")
     private FlexibleDate flexibleDateTo;
-    @BatchParameter(key = KEY_SHIKYU_SHINSEISHO_SEIRINO_FROM, name = "支給申請書整理番号From")
+    @BatchParameter(key = KEY_SHIKYU_FROM, name = "支給申請書整理番号From")
     private RString shikyuShinseishoSeiriNoFrom;
-    @BatchParameter(key = KEY_SHIKYU_SHINSEISHO_SEIRINO_TO, name = "支給申請書整理番号To")
+    @BatchParameter(key = KEY_SHIKYU_TO, name = "支給申請書整理番号To")
     private RString shikyuShinseishoSeiriNoTo;
-    @BatchParameter(key = KEY_FLEXIBLE_YEARMONTH_FROM, name = "送付年月From")
+    @BatchParameter(key = KEY_FLEXIBLE_FROM, name = "送付年月From")
     private FlexibleDate flexibleYearMonthFrom;
-    @BatchParameter(key = KEY_FLEXIBLE_YEARMONTH_TO, name = "送付年月To")
+    @BatchParameter(key = KEY_FLEXIBLE_TO, name = "送付年月To")
     private FlexibleDate flexibleYearMonthTo;
     @BatchParameter(key = KEY_TOMOKUME_FUKA, name = "項目名付加")
     private boolean tomokumeFuka;

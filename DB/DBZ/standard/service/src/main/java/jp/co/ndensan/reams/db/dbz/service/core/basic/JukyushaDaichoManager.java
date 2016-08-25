@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class JukyushaDaichoManager {
 
+    private final RString 被保険者番号NEW = new RString("被保険者番号");
     private final DbT4001JukyushaDaichoDac dac;
 
     /**
@@ -64,7 +65,7 @@ public class JukyushaDaichoManager {
             RString 枝番,
             Code 受給申請事由) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号NEW.toString()));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
         requireNonNull(受給申請事由, UrSystemErrorMessages.値がnull.getReplacedMessage("受給申請事由"));
@@ -160,7 +161,7 @@ public class JukyushaDaichoManager {
     @Transaction
     public List<JukyushaDaicho> get受給者台帳情報(HihokenshaNo 被保険者番号) {
         List<JukyushaDaicho> businessList = new ArrayList<>();
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号NEW.toString()));
         for (DbT4001JukyushaDaichoEntity entity : dac.get受給者台帳(被保険者番号)) {
             entity.initializeMd5();
             businessList.add(new JukyushaDaicho(entity));
@@ -177,7 +178,7 @@ public class JukyushaDaichoManager {
      */
     @Transaction
     public JukyushaDaicho get受給申請事由認定完了(HihokenshaNo 被保険者番号) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号NEW.toString()));
         DbT4001JukyushaDaichoEntity entity = dac.get認定完了状況(被保険者番号);
         if (entity == null) {
             return null;
@@ -195,7 +196,7 @@ public class JukyushaDaichoManager {
      */
     @Transaction
     public List<JukyushaDaicho> select受給者台帳情報(HihokenshaNo 被保険者番号, FlexibleDate 計画適用開始日) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号NEW.toString()));
         requireNonNull(計画適用開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("計画適用開始日"));
         List<DbT4001JukyushaDaichoEntity> entityList = dac.select受給者台帳情報By適用日(被保険者番号, 計画適用開始日);
         List<JukyushaDaicho> businessList = new ArrayList<>();
@@ -217,7 +218,7 @@ public class JukyushaDaichoManager {
      */
     @Transaction
     public JukyushaDaicho get受給申請事由(HihokenshaNo 被保険者番号) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号NEW.toString()));
         DbT4001JukyushaDaichoEntity entity = dac.get認定申請中状況(被保険者番号);
         if (entity == null) {
             return null;

@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbz.business.report.atenaseal.AtenaSealReport;
 import jp.co.ndensan.reams.db.dba.definition.processprm.atenasealcreate.AtenaSealCreateProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.AtenaSealCreateDBZ100001Entity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.ShorikekkarisutoichijiTBLEntity;
-import jp.co.ndensan.reams.db.dba.entity.euc.atenasealcreate.ShoriKekaListCsvEntity;
 import jp.co.ndensan.reams.db.dbz.entity.report.atenaseal.AtenaSealCreateReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -27,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -68,7 +66,6 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
     private int 帳票枚数;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 処理結果リスト一時TBL;
-    CsvWriter<ShoriKekaListCsvEntity> eucCsvWriter;
     @BatchWriter
     private BatchReportWriter<AtenaSealCreateReportSource> batchReportWriter;
     private ReportSourceWriter<AtenaSealCreateReportSource> reportSourceWriter;

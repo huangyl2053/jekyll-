@@ -30,10 +30,10 @@ public class ChohyoShutsuryokuSijiDiv extends Panel {
     private ChohyoShutsuryokujunDiv ccdChohyoSyuturyokuJun3;
     @JsonProperty("ccdChohyoSyuturyokuJun1")
     private ChohyoShutsuryokujunDiv ccdChohyoSyuturyokuJun1;
-    @JsonProperty("ccdChohyoSyuturyokuJun4")
-    private ChohyoShutsuryokujunDiv ccdChohyoSyuturyokuJun4;
     @JsonProperty("ccdChohyoSyuturyokuJun2")
     private ChohyoShutsuryokujunDiv ccdChohyoSyuturyokuJun2;
+    @JsonProperty("ccdChohyoSyuturyokuJun4")
+    private ChohyoShutsuryokujunDiv ccdChohyoSyuturyokuJun4;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -78,21 +78,21 @@ public class ChohyoShutsuryokuSijiDiv extends Panel {
     }
 
     /*
-     * getccdChohyoSyuturyokuJun4
-     * @return ccdChohyoSyuturyokuJun4
-     */
-    @JsonProperty("ccdChohyoSyuturyokuJun4")
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun4() {
-        return ccdChohyoSyuturyokuJun4;
-    }
-
-    /*
      * getccdChohyoSyuturyokuJun2
      * @return ccdChohyoSyuturyokuJun2
      */
     @JsonProperty("ccdChohyoSyuturyokuJun2")
     public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun2() {
         return ccdChohyoSyuturyokuJun2;
+    }
+
+    /*
+     * getccdChohyoSyuturyokuJun4
+     * @return ccdChohyoSyuturyokuJun4
+     */
+    @JsonProperty("ccdChohyoSyuturyokuJun4")
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun4() {
+        return ccdChohyoSyuturyokuJun4;
     }
 
     /*
