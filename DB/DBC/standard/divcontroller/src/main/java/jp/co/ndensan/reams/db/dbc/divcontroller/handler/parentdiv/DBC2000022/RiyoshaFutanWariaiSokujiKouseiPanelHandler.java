@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoD
 import jp.co.ndensan.reams.db.dbc.definition.core.futanwariai.FutanWariaiHakkoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.futanwariai.FutanWariaiHanteiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.futanwariai.FutanWariaiShikakuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariai.FutanWariaiMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000022.DBC2000022PanelAllDiv;
@@ -34,6 +33,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMe
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuBuilder;
+import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoKofuKaishuManager;
