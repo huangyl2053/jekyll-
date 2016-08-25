@@ -142,7 +142,7 @@
         DbWT0001."henkanHihokenshaNo" as dbWT0001_変換被保険者番号,  
         DbWT0001."hihokenshaNo" as dbWT0001_登録被保険者番号,
         DbWT0001."shichosonCode" as dbWT0001_市町村コード,
-        DbWT0001."KannaiKangaiKubun" as dbWT0001_管内管外区分,
+        DbWT0001."kannaiKangaiKubun" as dbWT0001_管内管外区分,
         DbWT0001."yubinNo" as dbWT0001_郵便番号,
         DbWT0001."choikiCode" as dbWT0001_町域コード,
         DbWT0001."gyoseikuCode" as dbWT0001_行政区コード,

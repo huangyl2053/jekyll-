@@ -355,7 +355,7 @@
         DbWT0001."henkanHihokenshaNo" AS "dbWT0001HihokenshaTemp_henkanHihokenshaNo",
         DbWT0001."hihokenshaNo" AS "dbWT0001HihokenshaTemp_hihokenshaNo",
         DbWT0001."shichosonCode" AS "dbWT0001HihokenshaTemp_shichosonCode",
-        DbWT0001."KannaiKangaiKubun" AS "dbWT0001HihokenshaTemp_kannaiKangaiKubun",
+        DbWT0001."kannaiKangaiKubun" AS "dbWT0001HihokenshaTemp_kannaiKangaiKubun",
         DbWT0001."yubinNo" AS "dbWT0001HihokenshaTemp_yubinNo",
         DbWT0001."choikiCode" AS "dbWT0001HihokenshaTemp_choikiCode",
         DbWT0001."gyoseikuCode" AS "dbWT0001HihokenshaTemp_gyoseikuCode",

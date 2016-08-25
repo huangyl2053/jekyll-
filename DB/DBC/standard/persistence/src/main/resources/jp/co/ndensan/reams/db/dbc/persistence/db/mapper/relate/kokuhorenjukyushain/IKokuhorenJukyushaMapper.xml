@@ -215,7 +215,7 @@
         DbWT0001."henkanHihokenshaNo" as DbWT0001_henkanHihokenshaNo,
         DbWT0001."hihokenshaNo" as DbWT0001_hihokenshaNo,
         DbWT0001."shichosonCode" as DbWT0001_shichosonCode,
-        DbWT0001."KannaiKangaiKubun" as DbWT0001_kannaiKangaiKubun,
+        DbWT0001."kannaiKangaiKubun" as DbWT0001_kannaiKangaiKubun,
         DbWT0001."yubinNo" as DbWT0001_yubinNo,
         DbWT0001."choikiCode" as DbWT0001_choikiCode,
         DbWT0001."gyoseikuCode" as DbWT0001_gyoseikuCode,
