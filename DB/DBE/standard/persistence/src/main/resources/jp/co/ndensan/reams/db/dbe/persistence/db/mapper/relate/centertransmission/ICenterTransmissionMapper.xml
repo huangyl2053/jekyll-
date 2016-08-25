@@ -1222,11 +1222,25 @@
 
     <select id="getGaibuRenkeiDataoutputJoho"
             resultOrdered="true"
-            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7211GaibuRenkeiDataoutputJohoMapper.ResultMap_DbT7211GaibuRenkeiDataoutputJohoEntity"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7211GaibuRenkeiDataoutputJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionMybitisParamter"
             fetchSize="500">
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7211GaibuRenkeiDataoutputJohoMapper.allColumns_DbT7211GaibuRenkeiDataoutputJoho" />
+        "DbT7211GaibuRenkeiDataoutputJoho"."insertDantaiCd"
+        , "DbT7211GaibuRenkeiDataoutputJoho"."insertTimestamp"
+        , "DbT7211GaibuRenkeiDataoutputJoho"."insertReamsLoginId"
+        , "DbT7211GaibuRenkeiDataoutputJoho"."insertContextId"
+        , "DbT7211GaibuRenkeiDataoutputJoho"."isDeleted"
+        , "DbT7211GaibuRenkeiDataoutputJoho"."updateCount"
+        , "DbT7211GaibuRenkeiDataoutputJoho"."lastUpdateTimestamp"
+        , "DbT7211GaibuRenkeiDataoutputJoho"."lastUpdateReamsLoginId"
+        , "DbT7211GaibuRenkeiDataoutputJoho"."shinseishoKanriNo"
+        , "DbT7211GaibuRenkeiDataoutputJoho"."ninteiShinseiJohoChushutsuYMD"
+        , "DbT7211GaibuRenkeiDataoutputJoho"."ninteiChosaKekkaJohoChushutsuYMD"
+        , "DbT7211GaibuRenkeiDataoutputJoho"."ninteiChosaIkenshoKekkaJohoChushutsuYMD"
+        , "DbT7211GaibuRenkeiDataoutputJoho"."ichijihanteiChushutsuYMD"
+        , "DbT7211GaibuRenkeiDataoutputJoho"."shinsakaiKekkaJohoChushutsuYMD"
+        , "DbT7211GaibuRenkeiDataoutputJoho"."centerSoshinChushutsuYMD"
         FROM
         rgdb."DbT7211GaibuRenkeiDataoutputJoho"
         ORDER BY
