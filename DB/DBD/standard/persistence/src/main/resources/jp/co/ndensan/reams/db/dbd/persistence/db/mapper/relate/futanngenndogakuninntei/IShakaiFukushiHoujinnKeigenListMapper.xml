@@ -25,7 +25,8 @@ and open the template in the editor.
   <result property="riyoshaFutanDankai" column="居宅サービス限定" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
   <result property="riyoshaFutanDankai" column="居住費食費のみ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
   <result property="riyoshaFutanDankai" column="旧措置者ユニット型個室のみ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
-  <result property="shikakuSoshitsuYMD" column="shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="shikakuSoshitsuYMD" column="資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="shichosonCode"  column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
   <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
 </resultMap>
  <resultMap id="resultMap_IShafukuKeigenKetteiTempTableEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.temptable.ShafukuKeigenKetteiTempTableEntity" autoMapping="true">
@@ -64,7 +65,8 @@ and open the template in the editor.
       "ShafukuKeigenKetteiTempTable"."kyotakuServiceGentei" AS 居宅サービス限定,
       "ShafukuKeigenKetteiTempTable"."kyojuhiShokuhiNomi" AS 居住費食費のみ,
       "ShafukuKeigenKetteiTempTable"."kyusochishaUnitTypeKoshitsuNomi" AS 旧措置者ユニット型個室のみ,
-      C."shikakuSoshitsuYMD",
+      C."shikakuSoshitsuYMD" AS 資格喪失年月日,
+      C."shichosonCode" AS 市町村コード,
       <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
     FROM
       "ShafukuKeigenKetteiTempTable"

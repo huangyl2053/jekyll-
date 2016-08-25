@@ -17,6 +17,8 @@ and open the template in the editor.
     <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
 </resultMap>
 <resultMap id="resultMap_IShakaiFukushiHoujinnKeigenNinnteiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.ShakaiFukushiHoujinnKeigenNinnteiEntity" autoMapping="true">
+  <result property="市町村コード"  column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+  <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
   <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
   <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
   <association property="社会福祉法人等利用者負担軽減" resultMap="resultMap_FutanGendogakuNinteiEntity"/>
@@ -25,7 +27,7 @@ and open the template in the editor.
         resultMap="resultMap_IShakaiFukushiHoujinnKeigenNinnteiEntity"
         parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.ShakaiFukushiHoujinnKeigenNinnteiMybatisParameter" fetchSize="500" resultOrdered="true">
     SELECT
-      A.*,B.*,
+      A.*,B.*,C."shichosonCode" AS 市町村コード,C."shikibetsuCode" AS 識別コード,
 	  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>, 
 	   <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>	
     FROM(
@@ -55,7 +57,7 @@ and open the template in the editor.
     AND C."logicalDeletedFlag" = FALSE
     INNER JOIN  rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
       '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-      true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')AS "ShikibetsuTaisho" 
+      true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho" 
     ON "ShikibetsuTaisho"."shikibetsuCode" = C."shikibetsuCode"
     INNER JOIN rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','true','true','') AS "Atesaki"
      ON "Atesaki"."shikibetsuCode" = C."shikibetsuCode"

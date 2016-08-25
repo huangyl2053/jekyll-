@@ -191,7 +191,8 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
         RString psmAtesaki = new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString());
         FutanGenndoGakuNinnteiTsuuchishoService service = new FutanGenndoGakuNinnteiTsuuchishoService();
-        count = service.get利用者負担割合(processParamter.toFutanGenndoGakuNinnteiTsuuchishoMybatisParameter(psmShikibetsuTaisho, psmAtesaki, get出力順(),
+        count = service.get利用者負担割合(processParamter.toFutanGenndoGakuNinnteiTsuuchishoMybatisParameter(
+                psmShikibetsuTaisho, psmAtesaki, get出力順(),
                 HakkoRirekiKoyuJohoDBD100013.被保番号.get名称(), HakkoRirekiKoyuJohoDBD100013.減免適用開始日.get名称(), REPORT_DBD100020,
                 GyomuKoyuJoho.被保番号.getコード(),
                 GyomuKoyuJoho.減免適用開始日.getコード()));
@@ -199,7 +200,7 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
 
     @Override
     protected void process(FutanGenndoGakuNinnteiTsuuchishoEntity fatan) {
-        if (!fatan.getHihokenshaNo().isNullOrEmpty() || !fatan.getShikibetsuCode().isNullOrEmpty()) {
+        if (fatan.get市町村コード() == null || fatan.get識別コード() == null) {
             tmpTableWriter.insert(create処理(fatan));
         } else {
             tmpTableWriter.update(create処理(fatan));
@@ -214,7 +215,6 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
                 ShikibetsuTaishoFactory.createKojin(uaFt200Entity), AtesakiFactory.createInstance(uaFt250Entity),
                 new ChohyoSeigyoKyotsu(帳票制御共通), 帳票制御汎用, association, set文書番号(), 通知書定型文, ninshoshaSource);
         find.writeBy(reportSourceWriter);
-
     }
 
     @Override
