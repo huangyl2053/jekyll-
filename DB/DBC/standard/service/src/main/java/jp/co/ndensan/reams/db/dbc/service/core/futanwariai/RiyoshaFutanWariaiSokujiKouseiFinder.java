@@ -10,9 +10,6 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariai.IFuta
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariai;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3113RiyoshaFutanWariaiDac;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3114RiyoshaFutanWariaiMeisaiDac;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3115RiyoshaFutanWariaiKonkyoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -25,18 +22,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class RiyoshaFutanWariaiSokujiKouseiFinder {
 
     private final MapperProvider mapperProvider;
-    private final DbT3113RiyoshaFutanWariaiDac 利用者負担割合Dac;
-    private final DbT3114RiyoshaFutanWariaiMeisaiDac 利用者負担割合明細Dac;
-    private final DbT3115RiyoshaFutanWariaiKonkyoDac 利用者負担割合根拠Dac;
 
     /**
      * コンストラクタです。
      */
     RiyoshaFutanWariaiSokujiKouseiFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.利用者負担割合Dac = InstanceProvider.create(DbT3113RiyoshaFutanWariaiDac.class);
-        this.利用者負担割合明細Dac = InstanceProvider.create(DbT3114RiyoshaFutanWariaiMeisaiDac.class);
-        this.利用者負担割合根拠Dac = InstanceProvider.create(DbT3115RiyoshaFutanWariaiKonkyoDac.class);
     }
 
     /**
@@ -46,36 +37,6 @@ public class RiyoshaFutanWariaiSokujiKouseiFinder {
      */
     public static RiyoshaFutanWariaiSokujiKouseiFinder createInstance() {
         return InstanceProvider.create(RiyoshaFutanWariaiSokujiKouseiFinder.class);
-    }
-
-    /**
-     * テスト用コンストラクタです。
-     *
-     * @param dac {@link MapperProvider}
-     */
-    RiyoshaFutanWariaiSokujiKouseiFinder(MapperProvider mapperProvider,
-            DbT3113RiyoshaFutanWariaiDac 利用者負担割合Dac,
-            DbT3114RiyoshaFutanWariaiMeisaiDac 利用者負担割合明細Dac,
-            DbT3115RiyoshaFutanWariaiKonkyoDac 利用者負担割合根拠Dac) {
-        this.mapperProvider = mapperProvider;
-        this.利用者負担割合Dac = 利用者負担割合Dac;
-        this.利用者負担割合明細Dac = 利用者負担割合明細Dac;
-        this.利用者負担割合根拠Dac = 利用者負担割合根拠Dac;
-
-    }
-
-    /**
-     * テスト用コンストラクタです。
-     *
-     * @param dac {@link MapperProvider}
-     */
-    RiyoshaFutanWariaiSokujiKouseiFinder(MapperProvider mapperProvider,
-            DbT3113RiyoshaFutanWariaiDac 利用者負担割合Dac) {
-        this.mapperProvider = mapperProvider;
-        this.利用者負担割合Dac = 利用者負担割合Dac;
-        this.利用者負担割合明細Dac = null;
-        this.利用者負担割合根拠Dac = null;
-
     }
 
     /**
