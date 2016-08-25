@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
@@ -94,6 +95,10 @@ public class IchijiHanteiHandler {
         }
         parameter.setShinseishoKanriNoList(shinseishoKanriNo);
         parameter.setBattishuturyokukubun(バッチ出力区分);
+        if (new RString("2").equals(バッチ出力区分)) {
+
+            parameter.setFileId(RDateTime.parse(div.getファイルID().toString()));
+        }
         return parameter;
     }
 
