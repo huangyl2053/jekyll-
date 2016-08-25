@@ -71,66 +71,51 @@ public final class TsutishoHakkoCommonProcess {
     /**
      * 通知文_パターン番号_1
      */
-    public static final int 通知文_パターン番号_1;
+    protected static final int 通知文_パターン番号_1 = 1;
     /**
      * 通知文_パターン番号_2
      */
-    public static final int 通知文_パターン番号_2;
+    protected static final int 通知文_パターン番号_2 = 2;
     /**
      * 通知文_パターン番号_3
      */
-    public static final int 通知文_パターン番号_3;
+    protected static final int 通知文_パターン番号_3 = 3;
     /**
      * 通知文_パターン番号_4
      */
-    public static final int 通知文_パターン番号_4;
+    protected static final int 通知文_パターン番号_4 = 4;
     /**
      * 通知文_項目番号_1
      */
-    public static final int 通知文_項目番号_1;
+    protected static final int 通知文_項目番号_1 = 1;
     /**
      * 通知文_項目番号_2
      */
-    public static final int 通知文_項目番号_2;
+    protected static final int 通知文_項目番号_2 = 2;
     /**
      * 通知文_項目番号_3
      */
-    public static final int 通知文_項目番号_3;
+    protected static final int 通知文_項目番号_3 = 3;
     /**
      * 通知文_項目番号_4
      */
-    public static final int 通知文_項目番号_4;
+    protected static final int 通知文_項目番号_4 = 4;
     /**
      * 通知文_項目番号_5
      */
-    public static final int 通知文_項目番号_5;
+    protected static final int 通知文_項目番号_5 = 5;
     /**
      * 通知文_項目番号_6
      */
-    public static final int 通知文_項目番号_6;
+    protected static final int 通知文_項目番号_6 = 6;
     /**
      * DEFAULT_処理支番
      */
-    public static final RString DEFAULT_処理支番;
+    protected static final RString DEFAULT_処理支番 = new RString("0001");
     /**
      * DEFAULT_年度内連番
      */
-    public static final RString DEFAULT_年度内連番;
-
-    static {
-        通知文_パターン番号_1 = 1;
-        通知文_パターン番号_2 = 2;
-        通知文_パターン番号_3 = 3;
-        通知文_パターン番号_4 = 4;
-        通知文_項目番号_1 = 1;
-        通知文_項目番号_2 = 2;
-        通知文_項目番号_3 = 3;
-        通知文_項目番号_4 = 4;
-        通知文_項目番号_5 = 5;
-        通知文_項目番号_6 = 6;
-        DEFAULT_処理支番 = new RString("0001");
-        DEFAULT_年度内連番 = new RString("0001");
-    }
+    protected static final RString DEFAULT_年度内連番 = new RString("0001");
 
     private static final RString 連絡符号 = new RString(",");
 
