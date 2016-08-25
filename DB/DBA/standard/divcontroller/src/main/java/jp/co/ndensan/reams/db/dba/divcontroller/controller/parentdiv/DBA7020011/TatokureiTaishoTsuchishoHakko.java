@@ -74,6 +74,7 @@ public class TatokureiTaishoTsuchishoHakko {
         createHandler(div).get初期文書番号取得(ReportIdDBA.DBA100007.getReportId());
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行ボタン, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行チェックボタン, true);
+        div.getTajutokuTekiyoJohoIchiran().getReportPublish().setIsPublish(true);
         return ResponseData.of(div).respond();
     }
 
@@ -204,10 +205,10 @@ public class TatokureiTaishoTsuchishoHakko {
         item.setBunshoNo(business.get文書番号());
         item.setHokenshaJusho(business.get保険者住所());
         item.setHakkoYMD(business.get発行年月日());
-        item.setHokenshaName(business.get保険者名());
-        item.setTantoBushoName(business.get担当部署名());
+        item.setHokenshaName(business.get保険者名().concat(business.get保険者名敬称()));
+        item.setTantoBushoName(business.get担当部署名().concat(business.get担当部署名敬称()));
         item.setBarcode(business.getバーコード情報());
-        item.setMidashi1(business.get見出し());
+        item.setMidashi2(business.get見出し());
         item.setHihokenshaNo1(business.get被保険者番号１());
         item.setHihokenshaNo2(business.get被保険者番号２());
         item.setHihokenshaNo3(business.get被保険者番号３());
@@ -229,6 +230,9 @@ public class TatokureiTaishoTsuchishoHakko {
         item.setShisetsuFaxNo(business.get施設FAX番号());
         item.setShisetsuYubinNo(business.get施設郵便番号());
         item.setShisetsuJusho(business.get施設住所());
+        item.setTaishoYMD(business.get退所年月日());
+        item.setTaishoJiyu(business.get退所事由());
+        
         return item;
     }
 
