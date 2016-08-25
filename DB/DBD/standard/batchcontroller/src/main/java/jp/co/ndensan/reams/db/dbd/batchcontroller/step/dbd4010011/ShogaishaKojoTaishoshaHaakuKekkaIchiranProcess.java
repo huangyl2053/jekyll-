@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShu
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
@@ -30,13 +29,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -407,15 +401,6 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
 
         dbt4010Entity.setShoKisaiHokenshaNo(証記載保険者番号);
         dbt4010Entity.setGemmenGengakuShurui(GemmenGengakuShurui.障がい者控除.getコード());
-        dbt4010Entity.setShinseiTodokedeshaKanaShimei(AtenaKanaMeisho.EMPTY);
-        dbt4010Entity.setShinseiTodokedeDaikoKubun(RString.EMPTY);
-        dbt4010Entity.setShinseiTodokedeshaJusho(AtenaJusho.EMPTY);
-        dbt4010Entity.setShinseiTodokedeshaShimei(AtenaMeisho.EMPTY);
-        dbt4010Entity.setShinseiTodokedeshaTelNo(TelNo.EMPTY);
-        dbt4010Entity.setShinseiTodokedeshaTsuzukigara(RString.EMPTY);
-        dbt4010Entity.setShinseiTodokedeDaikoJigyoshaNo(new JigyoshaNo(new RString("1")));
-        dbt4010Entity.setShinseiTodokedeshaYubinNo(YubinNo.EMPTY);
-        dbt4010Entity.setJigyoshaKubun(RString.EMPTY);
         return dbt4010Entity;
     }
 

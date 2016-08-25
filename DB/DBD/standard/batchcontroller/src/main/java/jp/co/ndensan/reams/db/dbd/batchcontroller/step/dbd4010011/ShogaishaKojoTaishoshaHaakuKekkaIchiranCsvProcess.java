@@ -157,4 +157,10 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranCsvProcess extends BatchProc
 
         csvEntity.setNinteishoHakkoTaishogai(new RString(String.valueOf(list.getNinteishoHakkoTaishogai())));
     }
+
+    @Override
+    protected void afterExecute() {
+        csvWriter.close();
+        manager.spool(csvFilePath);
+    }
 }
