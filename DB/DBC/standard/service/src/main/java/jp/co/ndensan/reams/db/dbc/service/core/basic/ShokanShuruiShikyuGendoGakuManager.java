@@ -23,6 +23,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class ShokanShuruiShikyuGendoGakuManager {
 
     private final DbT7112ShokanShuruiShikyuGendoGakuDac dac;
+    private static final String 定値_サービス種類コード = "サービス種類コード";
+    private static final String 定値_適用開始年月 = "適用開始年月";
+    private static final String 定値_履歴番号 = "履歴番号";
+    private static final String 定値_償還払い給付種類支給限度額 = "償還払い給付種類支給限度額";
 
     /**
      * コンストラクタです。
@@ -53,9 +57,9 @@ public class ShokanShuruiShikyuGendoGakuManager {
             ServiceShuruiCode サービス種類コード,
             FlexibleYearMonth 適用開始年月,
             int 履歴番号) {
-        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
-        requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_サービス種類コード));
+        requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_適用開始年月));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_履歴番号));
 
         DbT7112ShokanShuruiShikyuGendoGakuEntity entity = dac.selectByKey(
                 サービス種類コード,
@@ -79,8 +83,8 @@ public class ShokanShuruiShikyuGendoGakuManager {
     public ShokanShuruiShikyuGendoGaku get償還払い給付種類支給限度額ByValue(
             ServiceShuruiCode サービス種類コード,
             FlexibleYearMonth 適用開始年月) {
-        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
-        requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_サービス種類コード));
+        requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_適用開始年月));
 
         DbT7112ShokanShuruiShikyuGendoGakuEntity entity = dac.selectByValue(
                 サービス種類コード,
@@ -134,7 +138,7 @@ public class ShokanShuruiShikyuGendoGakuManager {
      */
     @Transaction
     public boolean save償還払い給付種類支給限度額(ShokanShuruiShikyuGendoGaku 償還払い給付種類支給限度額) {
-        requireNonNull(償還払い給付種類支給限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払い給付種類支給限度額"));
+        requireNonNull(償還払い給付種類支給限度額, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_償還払い給付種類支給限度額));
         if (!償還払い給付種類支給限度額.hasChanged()) {
             return false;
         }
@@ -151,13 +155,13 @@ public class ShokanShuruiShikyuGendoGakuManager {
     public void insertAndUpdate償還(List<ShokanShuruiShikyuGendoGaku> insert償還List, List<ShokanShuruiShikyuGendoGaku> update償還List) {
         if (!insert償還List.isEmpty()) {
             for (ShokanShuruiShikyuGendoGaku insert償還 : insert償還List) {
-                requireNonNull(insert償還, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払い給付種類支給限度額"));
+                requireNonNull(insert償還, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_償還払い給付種類支給限度額));
                 dac.save(insert償還.toEntity());
             }
         }
         if (!update償還List.isEmpty()) {
             for (ShokanShuruiShikyuGendoGaku update償還 : update償還List) {
-                requireNonNull(update償還, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払い給付種類支給限度額"));
+                requireNonNull(update償還, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_償還払い給付種類支給限度額));
                 if (!update償還.hasChanged()) {
                     return;
                 }
@@ -176,7 +180,7 @@ public class ShokanShuruiShikyuGendoGakuManager {
     public void deleteAndUpdate償還(List<ShokanShuruiShikyuGendoGaku> delete償還List, List<ShokanShuruiShikyuGendoGaku> update償還List) {
         if (!delete償還List.isEmpty()) {
             for (ShokanShuruiShikyuGendoGaku delete償還 : delete償還List) {
-                requireNonNull(delete償還, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払い給付種類支給限度額"));
+                requireNonNull(delete償還, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_償還払い給付種類支給限度額));
                 if (delete償還.hasChanged()) {
                     return;
                 }
@@ -185,7 +189,7 @@ public class ShokanShuruiShikyuGendoGakuManager {
         }
         if (!update償還List.isEmpty()) {
             for (ShokanShuruiShikyuGendoGaku update償還 : update償還List) {
-                requireNonNull(update償還, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払い給付種類支給限度額"));
+                requireNonNull(update償還, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_償還払い給付種類支給限度額));
                 if (!update償還.hasChanged()) {
                     return;
                 }
@@ -207,9 +211,9 @@ public class ShokanShuruiShikyuGendoGakuManager {
             ServiceShuruiCode サービス種類コード,
             FlexibleYearMonth 適用開始年月,
             int 履歴番号) {
-        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
-        requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_サービス種類コード));
+        requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_適用開始年月));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_履歴番号));
 
         DbT7112ShokanShuruiShikyuGendoGakuEntity entity = dac.selectByKey(
                 サービス種類コード,
