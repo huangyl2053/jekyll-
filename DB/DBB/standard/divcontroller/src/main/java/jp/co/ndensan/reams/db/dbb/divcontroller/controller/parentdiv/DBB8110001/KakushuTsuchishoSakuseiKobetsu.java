@@ -84,16 +84,16 @@ public class KakushuTsuchishoSakuseiKobetsu {
                 List<IdoTaishoshaIchiranparameter> listPar = ViewStateHolder.get(ViewStateKeys.異動者一覧Par, List.class);
                 通知書番号 = listPar.get(0).getTsuchishoNo();
                 賦課年度 = listPar.get(0).getFukaNendo();
-                市町村コード = null;
+                市町村コード = LasdecCode.EMPTY;
                 識別コード = listPar.get(0).getShikibetsuCode();
-                被保険者番号 = null;
+                被保険者番号 = HihokenshaNo.EMPTY;
             } else {
                 // TODO この画面が実装できない。
-                通知書番号 = null;
-                賦課年度 = null;
-                市町村コード = null;
-                識別コード = null;
-                被保険者番号 = null;
+                通知書番号 = TsuchishoNo.EMPTY;
+                賦課年度 = FlexibleYear.EMPTY;
+                市町村コード = LasdecCode.EMPTY;
+                識別コード = ShikibetsuCode.EMPTY;
+                被保険者番号 = HihokenshaNo.EMPTY;
             }
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(再検索する, true);
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索結果一覧へ, true);

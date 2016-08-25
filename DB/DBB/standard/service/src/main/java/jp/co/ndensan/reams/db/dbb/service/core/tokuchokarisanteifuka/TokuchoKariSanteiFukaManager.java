@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
+import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTani;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.TokuchoKariKeisangoFukaEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
@@ -20,13 +23,16 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsu
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
+import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.GyomuConfigJohoClass;
+import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwari;
+import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariInput;
+import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariOutput;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -41,6 +47,8 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -66,13 +74,14 @@ public class TokuchoKariSanteiFukaManager {
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final int 整数_0 = 0;
     private static final int 整数_1 = 1;
+    private static final int 整数_2 = 2;
     private static final int 整数_3 = 3;
+    private static final int 整数_4 = 4;
+    private static final RString RSTRING_1 = new RString("1");
+    private static final RString RSTRING_3 = new RString("3");
     private static final RString 継続 = new RString("継続");
     private static final RString 開始月_6月 = new RString("6月");
     private static final RString 特徴停止 = new RString("特徴停止");
-    private static final CodeShubetsu コード_0008 = new CodeShubetsu("0008");
-    private static final CodeShubetsu コード_0046 = new CodeShubetsu("0046");
-    private static final CodeShubetsu コード_0047 = new CodeShubetsu("0047");
 
     /**
      * コンストラクタです。
@@ -344,5 +353,47 @@ public class TokuchoKariSanteiFukaManager {
             return null;
         }
         return new ChohyoSeigyoKyotsu(entity);
+    }
+
+    /**
+     * get特徴仮算定期割
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 保険料率 Decimal
+     * @return TokuchoKarisanteiKiwariOutput
+     */
+    public TokuchoKarisanteiKiwariOutput get特徴仮算定期割(FlexibleYear 調定年度, Decimal 保険料率) {
+        TokuchoKarisanteiKiwari 保険系業務共通 = new TokuchoKarisanteiKiwari();
+        TokuchoKarisanteiKiwariInput inputEntity = new TokuchoKarisanteiKiwariInput();
+        inputEntity.set前年度最終期別額(Decimal.ZERO);
+        inputEntity.set前年度賦課額(保険料率);
+        inputEntity.set現在特徴期(整数_2);
+        RString 特徴定期数 = DbBusinessConfig.get(ConfigNameDBB.特徴期情報_設定納期数,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        RString 特徴仮算定期数 = DbBusinessConfig.get(ConfigNameDBB.特徴期情報_仮算定期数,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        RString 特徴仮算定計算区分 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_6月開始,
+                new RDate(調定年度.minusYear(整数_1).toString()), SubGyomuCode.DBB介護賦課);
+        RString 端数区分 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_期別端数,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        GyomuConfigJohoClass 業務コンフィグ情報 = new GyomuConfigJohoClass();
+        業務コンフィグ情報.set特徴定期数(Integer.valueOf(特徴定期数.toString()));
+        業務コンフィグ情報.set特徴仮算定期数(Integer.valueOf(特徴仮算定期数.toString()));
+        if (RSTRING_1.equals(特徴仮算定計算区分)) {
+            業務コンフィグ情報.set特徴仮算定計算区分(整数_1);
+        } else if (RSTRING_3.equals(特徴仮算定計算区分)) {
+            業務コンフィグ情報.set特徴仮算定計算区分(整数_2);
+        }
+        if (HasuChoseiTani._1.getコード().equals(端数区分)) {
+            業務コンフィグ情報.set端数区分特徴仮算定期別額(整数_1);
+        } else if (HasuChoseiTani._10.getコード().equals(端数区分)) {
+            業務コンフィグ情報.set端数区分特徴仮算定期別額(整数_2);
+        } else if (HasuChoseiTani._100.getコード().equals(端数区分)) {
+            業務コンフィグ情報.set端数区分特徴仮算定期別額(整数_3);
+        } else if (HasuChoseiTani._1000.getコード().equals(端数区分)) {
+            業務コンフィグ情報.set端数区分特徴仮算定期別額(整数_4);
+        }
+        inputEntity.set業務コンフィグ情報(業務コンフィグ情報);
+        return 保険系業務共通.getTokuchoKarisanteiKibetsuGaku(inputEntity);
     }
 }

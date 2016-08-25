@@ -103,7 +103,7 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
             = new RString("DBC200081_SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohi.csv");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
     private static final RString キー_出力順 = new RString("出力順");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3063.\"hdrShoHokenshaNo\" ASC ");
+    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3063.\"shoKisaiHokenshaNo\" ASC ");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString 漢字_分 = new RString("分");
     private static final CodeShubetsu 再審査結果コード = new CodeShubetsu("0020");
@@ -144,25 +144,24 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
             }
         }
         帳票データの取得Parameter.set出力順(出力順);
-        if (並び順 != null) {
-            int index = 0;
-            for (ISetSortItem item : 並び順.get設定項目リスト()) {
-                if (item.is改頁項目()) {
-                    改頁項目.add(item.get項目名());
-                }
-                if (index == INDEX_1) {
-                    出力順Map.put(KEY_並び順の２件目, item.get項目名());
-                } else if (index == INDEX_2) {
-                    出力順Map.put(KEY_並び順の３件目, item.get項目名());
-                } else if (index == INDEX_3) {
-                    出力順Map.put(KEY_並び順の４件目, item.get項目名());
-                } else if (index == INDEX_4) {
-                    出力順Map.put(KEY_並び順の５件目, item.get項目名());
-                } else if (index == INDEX_5) {
-                    出力順Map.put(KEY_並び順の６件目, item.get項目名());
-                }
-                index = index + 1;
+
+        int index = 0;
+        for (ISetSortItem item : 並び順.get設定項目リスト()) {
+            if (item.is改頁項目()) {
+                改頁項目.add(item.get項目名());
             }
+            if (index == INDEX_1) {
+                出力順Map.put(KEY_並び順の２件目, item.get項目名());
+            } else if (index == INDEX_2) {
+                出力順Map.put(KEY_並び順の３件目, item.get項目名());
+            } else if (index == INDEX_3) {
+                出力順Map.put(KEY_並び順の４件目, item.get項目名());
+            } else if (index == INDEX_4) {
+                出力順Map.put(KEY_並び順の５件目, item.get項目名());
+            } else if (index == INDEX_5) {
+                出力順Map.put(KEY_並び順の６件目, item.get項目名());
+            }
+            index = index + 1;
         }
 
         改頁項目.add(new RString(SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiSource.ReportSourceFields.kohiFutanshaNo.name()));

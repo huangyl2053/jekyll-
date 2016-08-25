@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000065;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.kijunshunyugakutekiyoshinseishohakkoichiran.DBC190030_KijunsyunygetsujiParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.ShinseishoHakkoChushutsuJoken.ShinseishoHakkoChushutsuJoken;
-import jp.co.ndensan.reams.db.dbc.definition.core.shinseishotorokuchushutsutaisho.ShinseishoTorokuChushutsuTaisho;
+import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuJoken;
+import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuTaisho;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000065.ShinseishoTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.kijunshunyugaku.TekiyoShinseishoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -71,7 +71,7 @@ public class ShinseishoTorokuHandler {
         div.getRadChushutsuJoken().setDataSource(get申請書発行_抽出条件());
         div.getRadChushutsuTaisho().setDataSource(get申請書登録_抽出対象());
         div.getRadChushutsuJoken().setSelectedKey(零);
-
+        set抽出条件表示制御処理();
         set処理年度の初期値();
 
         FlexibleDate 世帯員把握基準日基準日 = new FlexibleDate(YMDHMS.now().getYear()
@@ -82,6 +82,7 @@ public class ShinseishoTorokuHandler {
         div.getTxtTeishutsuKigen().setValue(提出期限);
         FlexibleDate 作成日 = new FlexibleDate(YMDHMS.now().getDate().toDateString());
         div.getTxtSakuseiYMD().setValue(作成日);
+        set文書番号();
 
         div.getChkTsuchisho().setSelectedItems(div.getChkTsuchisho().getDataSource());
         div.getChkShinseisho().setSelectedItems(div.getChkShinseisho().getDataSource());
@@ -94,7 +95,7 @@ public class ShinseishoTorokuHandler {
      *
      */
     public void set文書番号() {
-        FlexibleDate 基準日 = new FlexibleDate(YMDHMS.now().getDate().toDateString());
+        FlexibleDate 基準日 = new FlexibleDate(div.getTxtSakuseiYMD().getText());
         div.getCcdBunshoBangoInput().initialize(帳票ID, 基準日);
     }
 
@@ -126,20 +127,24 @@ public class ShinseishoTorokuHandler {
      */
     public void 年次処理が実行済みか確認() {
         if (!年次処理が実施済みか判定()) {
-            throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace(年次処理が未実施の.toString(), 実行.toString()));
+            throw new ApplicationException(DbzErrorMessages.実行不可.getMessage()
+                    .replace(年次処理が未実施の.toString(), 実行.toString()));
         }
     }
 
     /**
-     * 年次処理が実施済みか判定
+     * 年次処理が実施済みか判定のメソッドです。
      *
      * @return 判定
      */
     public boolean 年次処理が実施済みか判定() {
-        if (ShinseishoHakkoChushutsuJoken.異動分.getコード().equals(div.getRadChushutsuJoken().getSelectedKey())
-                || ShinseishoHakkoChushutsuJoken.被保険者番号.getコード().equals(div.getRadChushutsuJoken().getSelectedKey())) {
-            FlexibleYear 年度 = ShinseishoHakkoChushutsuJoken.異動分.getコード().equals(div.getRadChushutsuJoken().getSelectedKey())
-                    ? div.getTxtSetaiinHaakuKijunYMD().getValue().getYear() : new FlexibleYear(div.getTxtShoriNendo().getValue().toString().substring(0, INDEX_4));
+        if (ShinseishoTorokuChushutsuJoken.異動分.getコード().equals(div.getRadChushutsuJoken().getSelectedKey())
+                || ShinseishoTorokuChushutsuJoken.被保険者番号.getコード()
+                .equals(div.getRadChushutsuJoken().getSelectedKey())) {
+            FlexibleYear 年度 = ShinseishoTorokuChushutsuJoken.異動分.getコード()
+                    .equals(div.getRadChushutsuJoken().getSelectedKey())
+                    ? div.getTxtSetaiinHaakuKijunYMD().getValue().getYear()
+                    : new FlexibleYear(div.getTxtShoriNendo().getValue().toString().substring(0, INDEX_4));
             return TekiyoShinseishoManager.createInstance().isNenjiExecute(年度);
         } else {
             return false;
@@ -147,12 +152,11 @@ public class ShinseishoTorokuHandler {
     }
 
     /**
-     * バッチパラメータ
+     * バッチパラメータのメソッドです。
      *
-     * @param div ShinseishoTorokuDiv
      * @return parameter
      */
-    public DBC190030_KijunsyunygetsujiParameter setバッチ(ShinseishoTorokuDiv div) {
+    public DBC190030_KijunsyunygetsujiParameter setバッチ() {
         DBC190030_KijunsyunygetsujiParameter parameter = new DBC190030_KijunsyunygetsujiParameter();
         FlexibleDate 世帯員把握基準日2 = new FlexibleDate(div.getTxtSetaiinHaakuKijunYMD()
                 .getValue().getYear().minusYear(1).toString().concat(十二月三十一.toString()));
@@ -200,19 +204,19 @@ public class ShinseishoTorokuHandler {
     }
 
     /**
-     * 抽出条件表示制御処理
+     * 抽出条件表示制御処理。
      *
      *
      */
     public void set抽出条件表示制御処理() {
 
-        if (ShinseishoHakkoChushutsuJoken.異動分.getコード().equals(div.getRadChushutsuJoken().getSelectedKey())) {
+        if (ShinseishoTorokuChushutsuJoken.異動分.getコード().equals(div.getRadChushutsuJoken().getSelectedKey())) {
             div.getTxtShoriNendo().setDisabled(false);
             div.getBtnSearchHihokensha().setDisabled(true);
             div.getTxtHihokenshaNo().setDisabled(true);
             div.getTxtSetaiinHaakuKijunYMD().setDisabled(false);
             div.getRadChushutsuTaisho().setDisabled(true);
-        } else if (ShinseishoHakkoChushutsuJoken.被保険者番号.getコード().equals(div.getRadChushutsuJoken().getSelectedKey())) {
+        } else if (ShinseishoTorokuChushutsuJoken.被保険者番号.getコード().equals(div.getRadChushutsuJoken().getSelectedKey())) {
             div.getTxtShoriNendo().setDisabled(true);
             div.getBtnSearchHihokensha().setDisabled(false);
             div.getTxtHihokenshaNo().setDisabled(false);
@@ -228,7 +232,7 @@ public class ShinseishoTorokuHandler {
     }
 
     /**
-     * 世帯員把握基準日判定
+     * 世帯員把握基準日判定のメソッドです。
      *
      * @return boolaean
      */
@@ -243,7 +247,7 @@ public class ShinseishoTorokuHandler {
     }
 
     /**
-     * 処理年度判定
+     * 処理年度判定のメソッドです。
      *
      * @return boolaean
      */
@@ -253,7 +257,7 @@ public class ShinseishoTorokuHandler {
 
     private List<KeyValueDataSource> get申請書発行_抽出条件() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        for (ShinseishoHakkoChushutsuJoken 申請書発行_抽出条件 : ShinseishoHakkoChushutsuJoken.values()) {
+        for (ShinseishoTorokuChushutsuJoken 申請書発行_抽出条件 : ShinseishoTorokuChushutsuJoken.values()) {
             KeyValueDataSource dataSource = new KeyValueDataSource(申請書発行_抽出条件.getコード(), 申請書発行_抽出条件.get名称());
             dataSourceList.add(dataSource);
         }

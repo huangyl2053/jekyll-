@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410042
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorendatatorikomi.KokuhorenDataTorikomiBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410042.DBC0410042TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410042.TsuchishoJoho661Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
@@ -30,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class TsuchishoJoho661 {
 
-    private static final ReportId REPORTID = new ReportId("DBC200086_SogojigyohiKagoKetteitsuchishoTorikomiIchiranKohi");
+    private static final ReportId REPORTID = ReportIdDBC.DBC200086.getReportId();
 
     /**
      * 画面の初期化メソッドです。

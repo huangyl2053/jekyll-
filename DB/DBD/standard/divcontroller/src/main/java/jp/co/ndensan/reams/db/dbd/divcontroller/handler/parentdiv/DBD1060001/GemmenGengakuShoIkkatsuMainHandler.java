@@ -46,11 +46,6 @@ public class GemmenGengakuShoIkkatsuMainHandler {
     private final RString 社会福祉対象TO = new RString("ketteiYMDTo");
     private final ReportId 社会福祉帳票のID = new ReportId("DBD100012_ShakaiFukushiHojinRiyoshaFutanKeigenKetteiTsuchisho");
     private final ReportId 社会福祉出力帳票ID = new ReportId("DBD100018_ShafukuRiyoshaFutanKeigenTaishoKakuninsho");
-//    private final RString A場合 = new RString("1");
-//    private final RString B場合 = new RString("2");
-//    private final RString 決定日 = new RString("決定日");
-//    private final RString 申請日 = new RString("申請日");
-    //private final RString 負担限度額認定 = new RString("負担限度額認定");
     private final RString 社会福祉法人等利用者負担軽減 = new RString("社会福祉法人等利用者負担軽減");
 
     /**
@@ -86,8 +81,6 @@ public class GemmenGengakuShoIkkatsuMainHandler {
         BatchParameterMap batchMap = batchParameterManager.getParameterByBatch();
         FlexibleDate 前回対象日From = batchMap.getParameterValue(FlexibleDate.class, 社会福祉対象FROM);
         FlexibleDate 前回対象日To = batchMap.getParameterValue(FlexibleDate.class, 社会福祉対象TO);
-        //div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getRadFutanGendogakuKyusochishaKubun().setVisible(false);
-        //div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getRadFutanGendogakuJoken().setVisible(false);
         if (前回対象日From != null) {
             div.getShafukuKeigen().getShafukuKeigenChushutsuJoken().getTxtShafukuKeigenZenkaiTaishoYmdFrom().setValue(前回対象日From);
         } else {
@@ -164,7 +157,6 @@ public class GemmenGengakuShoIkkatsuMainHandler {
         if (減免減額種類.equals(社会福祉法人等利用者負担軽減)) {
             減免減額種類 = new RString("社会福祉法人等軽減");
         }
-        //RString 社会福祉法人等利用者負担軽 = GemmenGengakuShurui.社会福祉法人等利用者負担軽減.get名称();
         if (減免減額種類.equals(負担限度額認定)) {
             負担画面の表示(div, FlexibleDate.getNowDate());
             return ResponseData.of(div).setState(DBD1060001StateName.負担限度額認定);

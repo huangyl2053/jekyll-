@@ -38,6 +38,7 @@ public class NinteiShienCenterSoshinHandler {
     private static final Code A_06 = new Code("06A");
     private static final Code A_09 = new Code("09A");
     private static final Code B_09 = new Code("09B");
+    private static final RString 未出力 = new RString("key0");
     private final NinteiShienCenterSoshinDiv div;
 
     /**
@@ -139,7 +140,11 @@ public class NinteiShienCenterSoshinHandler {
         parameter.set二次判定開始日(二次判定日_開始 != null ? 二次判定日_開始.toDateString() : RString.EMPTY);
         parameter.set二次判定終了日(二次判定日_終了 != null ? 二次判定日_終了.toDateString() : RString.EMPTY);
         parameter.set申請書管理番号リスト(申請書管理番号リスト);
-        parameter.set転入死亡情報出力区分(転入_死亡情報出力区分);
+        if (未出力.equals(転入_死亡情報出力区分)) {
+            parameter.set転入死亡情報出力区分(new RString("0"));
+        } else {
+            parameter.set転入死亡情報出力区分(new RString("1"));
+        }
         return parameter;
     }
 

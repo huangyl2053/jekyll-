@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei;
 
-import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -27,7 +26,7 @@ public class ShotokuJohoIchiranhyoSakuseiGParameter implements IMyBatisParameter
     private RString ラジオボタン;
     private YMDHMS 開始日時;
     private YMDHMS 終了日時;
-    private List<LasdecCode> 市町村コードリスト;
+    private LasdecCode 市町村コード;
     private RString 出力順;
 
     /**
@@ -38,7 +37,7 @@ public class ShotokuJohoIchiranhyoSakuseiGParameter implements IMyBatisParameter
      * @param ラジオボタン RString
      * @param 開始日時 YMDHMS
      * @param 終了日時 YMDHMS
-     * @param 市町村コードリスト List<LasdecCode>
+     * @param 市町村コード LasdecCode
      * @param 出力順 RString
      */
     public ShotokuJohoIchiranhyoSakuseiGParameter(FlexibleYear 処理年度,
@@ -46,14 +45,14 @@ public class ShotokuJohoIchiranhyoSakuseiGParameter implements IMyBatisParameter
             RString ラジオボタン,
             YMDHMS 開始日時,
             YMDHMS 終了日時,
-            List<LasdecCode> 市町村コードリスト,
+            LasdecCode 市町村コード,
             RString 出力順) {
         this.処理年度 = 処理年度;
         this.チックボックス = チックボックス;
         this.ラジオボタン = ラジオボタン;
         this.開始日時 = 開始日時;
         this.終了日時 = 終了日時;
-        this.市町村コードリスト = 市町村コードリスト;
+        this.市町村コード = 市町村コード;
         this.出力順 = 出力順;
     }
 
@@ -65,7 +64,7 @@ public class ShotokuJohoIchiranhyoSakuseiGParameter implements IMyBatisParameter
      * @param ラジオボタン RString
      * @param 開始日時 YMDHMS
      * @param 終了日時 YMDHMS
-     * @param 市町村コードリスト List<LasdecCode>
+     * @param 市町村コード LasdecCode
      * @param 出力順 RString
      * @return ShotokuJohoIchiranhyoSakuseiGParameter
      */
@@ -74,9 +73,9 @@ public class ShotokuJohoIchiranhyoSakuseiGParameter implements IMyBatisParameter
             RString ラジオボタン,
             YMDHMS 開始日時,
             YMDHMS 終了日時,
-            List<LasdecCode> 市町村コードリスト,
+            LasdecCode 市町村コード,
             RString 出力順) {
         return new ShotokuJohoIchiranhyoSakuseiGParameter(処理年度,
-                チックボックス, ラジオボタン, 開始日時, 終了日時, 市町村コードリスト, 出力順);
+                チックボックス, ラジオボタン, 開始日時, 終了日時, 市町村コード, 出力順);
     }
 }

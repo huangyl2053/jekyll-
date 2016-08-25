@@ -51,16 +51,16 @@ public class tplShinseijohoDiv extends TabPanel {
     private CheckBoxList chkNinteiTsuchishoDoi;
     @JsonProperty("chkJohoTeikyoDoi")
     private CheckBoxList chkJohoTeikyoDoi;
-    @JsonProperty("ccdShinseiSonotaJohoInput")
-    private ShinseiSonotaJohoInputDiv ccdShinseiSonotaJohoInput;
     @JsonProperty("ccdKaigoNinteiShinseiKihon")
     private KaigoNinteiShinseiKihonJohoInputDiv ccdKaigoNinteiShinseiKihon;
     @JsonProperty("ccdNinteiInput")
     private NinteiInputDiv ccdNinteiInput;
-    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
-    private ZenkaiNinteiKekkaJohoDiv ccdZenkaiNinteiKekkaJoho;
+    @JsonProperty("ccdShinseiSonotaJohoInput")
+    private ShinseiSonotaJohoInputDiv ccdShinseiSonotaJohoInput;
     @JsonProperty("ccdShinseiTodokedesha")
     private NinteiShinseiTodokedeshaDiv ccdShinseiTodokedesha;
+    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
+    private ZenkaiNinteiKekkaJohoDiv ccdZenkaiNinteiKekkaJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -159,15 +159,6 @@ public class tplShinseijohoDiv extends TabPanel {
     }
 
     /*
-     * getccdShinseiSonotaJohoInput
-     * @return ccdShinseiSonotaJohoInput
-     */
-    @JsonProperty("ccdShinseiSonotaJohoInput")
-    public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
-        return ccdShinseiSonotaJohoInput;
-    }
-
-    /*
      * getccdKaigoNinteiShinseiKihon
      * @return ccdKaigoNinteiShinseiKihon
      */
@@ -186,12 +177,12 @@ public class tplShinseijohoDiv extends TabPanel {
     }
 
     /*
-     * getccdZenkaiNinteiKekkaJoho
-     * @return ccdZenkaiNinteiKekkaJoho
+     * getccdShinseiSonotaJohoInput
+     * @return ccdShinseiSonotaJohoInput
      */
-    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
-    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
-        return ccdZenkaiNinteiKekkaJoho;
+    @JsonProperty("ccdShinseiSonotaJohoInput")
+    public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
+        return ccdShinseiSonotaJohoInput;
     }
 
     /*
@@ -201,6 +192,15 @@ public class tplShinseijohoDiv extends TabPanel {
     @JsonProperty("ccdShinseiTodokedesha")
     public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
         return ccdShinseiTodokedesha;
+    }
+
+    /*
+     * getccdZenkaiNinteiKekkaJoho
+     * @return ccdZenkaiNinteiKekkaJoho
+     */
+    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
+    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
+        return ccdZenkaiNinteiKekkaJoho;
     }
 
     /*

@@ -36,7 +36,7 @@ public class MenjoKaijoSaiTennyuValidationHandler {
                 .thenAdd(MenjoKaijoSaiTennyuValidationHandler.MenjoKaijoSaiTennyuMessages.期間が不正_追加メッセージあり2).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 MenjoKaijoSaiTennyuValidationHandler.MenjoKaijoSaiTennyuMessages.期間が不正_追加メッセージあり2,
-                div.getTxtGengakuTekiyoKikanKaishiYMD()).build().check(messages));
+                div.getTxtKonkaiKikanKaishiYMD()).build().check(messages));
 
         return pairs;
     }

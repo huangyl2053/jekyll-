@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kijunshunyugakutekiyokettei.DBC190010_kijunsyunyuKetteiTsuchisyosakuseiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC190010.DBC190010_kijunsyunyuKetteiTsuchisyosakuseiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ChushutsuKikan;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.Insho;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000074.TsuuchishoHakkoDiv;

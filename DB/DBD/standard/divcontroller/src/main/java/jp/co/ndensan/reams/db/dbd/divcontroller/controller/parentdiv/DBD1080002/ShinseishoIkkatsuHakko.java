@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1080002.Shi
 import jp.co.ndensan.reams.db.dbd.service.core.kouhoushajoho.KouhoushaJohoService;
 import jp.co.ndensan.reams.db.dbd.service.core.kouhoushajoho.ShinseishoIkkatsuHakkoService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -32,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 減免減額申請書一括発行のDivControllerです。
@@ -39,8 +41,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBD-3530-050 liuyl
  */
 public class ShinseishoIkkatsuHakko {
-
-    private UUID 発行処理ID;
 
     /**
      * 画面初期化処理です。
@@ -111,13 +111,14 @@ public class ShinseishoIkkatsuHakko {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        発行処理ID = UUID.randomUUID();
+        UUID 発行処理ID = UUID.randomUUID();
         ShinseishoIkkatsuHakkoService shinseisho = new ShinseishoIkkatsuHakkoService();
         List<ddlKohoshaList_Row> selectedItem = div.getGenmenShinseiHaakuList().getDdlKohoshaList().getSelectedItems();
         for (ddlKohoshaList_Row row : selectedItem) {
             shinseisho.insertDbT4032(UUID.fromString(row.getHaakuShoriID().toString()), 発行処理ID);
             shinseisho.insertDbT4033(new HihokenshaNo(row.getHihoNo()), 発行処理ID);
         }
+        ViewStateHolder.put(ViewStateKeys.発行処理ID, 発行処理ID);
         return ResponseData.of(div).respond();
     }
 
@@ -128,6 +129,7 @@ public class ShinseishoIkkatsuHakko {
      * @return ResponseData<DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter>
      */
     public ResponseData<DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter> onClick_btnprint(ShinseishoIkkatsuHakkoDiv div) {
+        UUID 発行処理ID = ViewStateHolder.get(ViewStateKeys.発行処理ID, UUID.class);
         DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter parameter = getHandler(div).getParameter(発行処理ID);
         return ResponseData.of(parameter).respond();
     }

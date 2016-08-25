@@ -222,4 +222,29 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
                 ).toObject(DbT7063KaigoJigyoshaShiteiServiceEntity.class);
 
     }
+
+    /**
+     * 事業者名称を取得します。
+     *
+     * @param 計画事業所番号 JigyoshaNo
+     * @param サービス種類コード ServiceShuruiCode
+     * @return DbT7063KaigoJigyoshaShiteiServiceEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7063KaigoJigyoshaShiteiServiceEntity get事業者名称(
+            RString 計画事業所番号,
+            RString サービス種類コード) throws NullPointerException {
+        requireNonNull(計画事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業者の番号.toString()));
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サービスの種類コード.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7063KaigoJigyoshaShiteiService.class).
+                where(and(
+                                eq(jigyoshaNo, 計画事業所番号),
+                                eq(serviceShuruiCode, サービス種類コード))).
+                order(by(DbT7063KaigoJigyoshaShiteiService.yukoKaishiYMD, Order.DESC)).limit(1).
+                toObject(DbT7063KaigoJigyoshaShiteiServiceEntity.class);
+    }
 }

@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoD
 import jp.co.ndensan.reams.db.dbc.definition.core.futanwariai.FutanWariaiHakkoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.futanwariai.FutanWariaiHanteiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.futanwariai.FutanWariaiShikakuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariai.FutanWariaiMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000022.DBC2000022PanelAllDiv;
@@ -34,6 +33,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMe
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuBuilder;
+import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoKofuKaishuManager;
@@ -748,14 +748,17 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         if (!div.getChkShokkenHenko().getSelectedKeys().isEmpty()) {
             利用者負担割合builder.set職権変更フラグ(true);
         }
-        利用者負担割合builder.set発行区分(div.getDdlHakkoKubun().getSelectedKey());
-        利用者負担割合builder.set発行日(FlexibleDate.EMPTY);
-        利用者負担割合builder.set交付日(FlexibleDate.EMPTY);
         if (DBC2000022StateName.新規.getName().equals(処理モード)) {
             利用者負担割合builder.set更正事由(利用者負担割合.get更正事由());
+            利用者負担割合builder.set発行日(FlexibleDate.EMPTY);
+            利用者負担割合builder.set交付日(FlexibleDate.EMPTY);
+            利用者負担割合builder.set発行区分(div.getDdlHakkoKubun().getSelectedKey());
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
             利用者負担割合builder.set更正事由(new Code(RSTFORTY));
+            利用者負担割合builder.set発行日(new FlexibleDate(div.getTxtHakkobi().getValue().toDateString()));
+            利用者負担割合builder.set交付日(new FlexibleDate(div.getTxtKofubi().getValue().toDateString()));
+            利用者負担割合builder.set発行区分(RSTTWO);
         }
 
         利用者負担割合 = 利用者負担割合builder.build();

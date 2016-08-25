@@ -67,7 +67,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
     private static final RString 帳票分類ID_DBC100070 = new RString("DBC100070_KogakuJigyoShikyuShinseisho");
     private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
     private static final RString 項目名_提出期限初期 = new RString("提出期限初期");
-    private static final RString 項目名_電話番号表示 = new RString("項目名");
+    private static final RString 項目名_電話番号表示 = new RString("電話番号表示");
     private static final RString 項目名_委任状提出先 = new RString("委任状提出先");
 
     /**
@@ -162,7 +162,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         div.getJidoShokanTaishoJohoSettei().getTxtUketsukeDate().setValue(nowDate);
         div.getJidoShokanTaishoJohoSettei().getTxtKetteiDate().setValue(nowDate);
 
-        div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setReadOnly(true);
+        div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setDisabled(true);
     }
 
     /**
@@ -208,10 +208,12 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
                 = new DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter();
         FlexibleYearMonth 処理年月 = FlexibleYearMonth.EMPTY;
         if (!div.getShinseishoHakkoParameters().getRadShinsaYM().getSelectedKey().isEmpty()) {
-            処理年月 = new FlexibleYearMonth(div.getShinseishoHakkoParameters().getTxtShinsaYM().getValue().toString());
+            FlexibleDate 年月 = div.getShinseishoHakkoParameters().getTxtShinsaYM().getValue();
+            処理年月 = new FlexibleYearMonth(年月.toString());
             parameter.setChushutsuJoken(ShutsuryokuJoken.審査年月);
         } else if (!div.getShinseishoHakkoParameters().getRadHihokenshaNo().getSelectedKey().isEmpty()) {
-            処理年月 = new FlexibleYearMonth(div.getShinseishoHakkoParameters().getDdlServiceYM().getLabelRText());
+            RString 年月 = div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedValue();
+            処理年月 = new FlexibleYearMonth(年月.toString());
             parameter.setChushutsuJoken(ShutsuryokuJoken.被保険者番号);
         } else if (!div.getShinseishoHakkoParameters().getRadHakushiInsatsu().getSelectedKey().isEmpty()) {
             処理年月 = FlexibleYearMonth.EMPTY;

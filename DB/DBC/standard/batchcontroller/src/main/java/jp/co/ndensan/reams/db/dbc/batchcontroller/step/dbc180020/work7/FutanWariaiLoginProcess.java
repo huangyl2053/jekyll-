@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -119,7 +120,6 @@ public class FutanWariaiLoginProcess extends BatchKeyBreakBase<FutanWariaiRelate
         beforeNo = 利用者負担割合明細.getHihokenshaNo();
         nowNo = entity.get利用者負担割合明細().getHihokenshaNo();
         rirekiNo = 月別負担割合現リスト.get(0).getRirekiNo() + 1;
-        edaNo++;
         loopHandle(利用者負担割合明細, getBefore());
 
     }
@@ -175,6 +175,7 @@ public class FutanWariaiLoginProcess extends BatchKeyBreakBase<FutanWariaiRelate
     }
 
     private void loopHandle(RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細, FutanWariaiRelateEntity entity) {
+        edaNo++;
         if (beforeNo == null || nowNo == null) {
             rirekiNo = getBefore().get月別負担割合現().get(0).getRirekiNo() + 1;
         }
@@ -187,7 +188,8 @@ public class FutanWariaiLoginProcess extends BatchKeyBreakBase<FutanWariaiRelate
         dbt3113Entity.setShokenFlag(false);
         dbt3113Entity.setHanteiYMD(FlexibleDate.getNowDate());
         dbt3113Entity.setHanteiKubun(parameter.getShoriKubun());
-        dbt3113Entity.setKoseiJiyu(new Code(利用者負担割合明細.getKoseiJiyu()));
+        RString koseiJiyu = 利用者負担割合明細.getKoseiJiyu();
+        dbt3113Entity.setKoseiJiyu(RString.isNullOrEmpty(koseiJiyu) ? null : new Code(koseiJiyu));
         dbt3113Entity.setHakoKubun(ZERO);
         dbt3113Entity.setHakoYMD(FlexibleDate.EMPTY);
         dbt3113Entity.setKofuYMD(FlexibleDate.EMPTY);
@@ -200,10 +202,11 @@ public class FutanWariaiLoginProcess extends BatchKeyBreakBase<FutanWariaiRelate
         dbt3114Entity.setFutanWariaiKubun(利用者負担割合明細.getFutanWariaiKubun());
         dbt3114Entity.setYukoKaishiYMD(利用者負担割合明細.getYukoKaishiYMD());
         dbt3114Entity.setYukoShuryoYMD(利用者負担割合明細.getYukoShuryoYMD());
-        dbt3114Entity.setHonninGoukeiShotokuGaku(利用者負担割合明細.getHonninGoukeiShotokuGaku());
+        dbt3114Entity.setHonninGoukeiShotokuGaku(nonullDecimal(利用者負担割合明細.getHonninGoukeiShotokuGaku()));
         dbt3114Entity.setSetaiIchigouHihokenshaSu(利用者負担割合明細.getSetaiIchigouHihokenshaSu());
-        dbt3114Entity.setNenkinShunyuGoukei(利用者負担割合明細.getNenkinShunyuGoukei());
-        dbt3114Entity.setSonotanoGoukeiShotokuKingakuGoukei(利用者負担割合明細.getSonotanoGoukeiShotokuKingakuGoukei());
+        dbt3114Entity.setNenkinShunyuGoukei(nonullDecimal(利用者負担割合明細.getNenkinShunyuGoukei()));
+        dbt3114Entity.setSonotanoGoukeiShotokuKingakuGoukei(
+                nonullDecimal(利用者負担割合明細.getSonotanoGoukeiShotokuKingakuGoukei()));
         dbt3114Entity.setKoseiRiyu(利用者負担割合明細.getKoseiRiyu());
         dbt3114Entity.setSetaiCd(利用者負担割合明細.getSetaiCd());
         dbt3114Entity.setLogicalDeletedFlag(false);
@@ -220,17 +223,23 @@ public class FutanWariaiLoginProcess extends BatchKeyBreakBase<FutanWariaiRelate
         FlexibleDate yukoShuryoYMD = dbt3114Entity.getYukoShuryoYMD();
         insertTemp.setYukoKaishiYMD(yukoKaishiYMD);
         insertTemp.setYukoShuryoYMD(yukoShuryoYMD);
-        insertTemp.setHoninGokeishotokuKingaku(dbt3114Entity.getHonninGoukeiShotokuGaku());
+        insertTemp.setHoninGokeishotokuKingaku(nonullDecimal(dbt3114Entity.getHonninGoukeiShotokuGaku()));
         insertTemp.setSetaiIchigouHihokenshaSu(dbt3114Entity.getSetaiIchigouHihokenshaSu());
-        insertTemp.setNenkinShunyuGoukei(dbt3114Entity.getNenkinShunyuGoukei());
-        insertTemp.setSonotaGokeiShotokuKingaku(dbt3114Entity.getSonotanoGoukeiShotokuKingakuGoukei());
-        Code koseiJiyu = dbt3113Entity.getKoseiJiyu();
-        insertTemp.setKoseiJiyu(koseiJiyu == null ? RString.EMPTY : koseiJiyu.value());
+        insertTemp.setNenkinShunyuGoukei(nonullDecimal(dbt3114Entity.getNenkinShunyuGoukei()));
+        insertTemp.setSonotaGokeiShotokuKingaku(nonullDecimal(dbt3114Entity.getSonotanoGoukeiShotokuKingakuGoukei()));
+        insertTemp.setKoseiJiyu(RString.isNullOrEmpty(koseiJiyu) ? null : koseiJiyu);
         今回利用者負担割合情報Temp.insert(insertTemp);
         if (beforeNo != null && !beforeNo.equals(nowNo)) {
             rirekiNo = entity.get月別負担割合現().get(0).getRirekiNo() + 1;
         } else if (beforeNo != null && beforeNo.equals(nowNo)) {
             rirekiNo++;
         }
+    }
+
+    private Decimal nonullDecimal(Decimal dec) {
+        if (dec == null) {
+            return Decimal.ZERO;
+        }
+        return dec;
     }
 }

@@ -202,6 +202,7 @@ public class DBC120010_KyufukanrihyoInFlow extends BatchFlowBase<KokuhorenKyouts
     protected IBatchFlowCommand callDoMasterTorokuProcess() {
         KyufukanrihyoDoMasterTorokuProcessParameter parameter = new KyufukanrihyoDoMasterTorokuProcessParameter();
         parameter.set再処理区分(getParameter().getSaishoriKubun());
+        parameter.set処理年月(getParameter().getShoriYM());
         return loopBatch(KyufukanrihyoDoMasterTorokuProcess.class).arguments(parameter).define();
     }
 

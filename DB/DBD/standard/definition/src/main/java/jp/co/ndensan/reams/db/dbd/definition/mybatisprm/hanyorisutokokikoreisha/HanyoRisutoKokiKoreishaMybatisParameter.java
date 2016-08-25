@@ -262,7 +262,7 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
     }
 
     private static boolean nullHandan(FlexibleDate 生年月日) {
-        return 生年月日 != null;
+        return 生年月日 != null && !生年月日.isEmpty();
     }
 
     private static boolean nullHandan(LasdecCode 市町村コード) {

@@ -76,6 +76,7 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
     private static final RString 符号 = new RString(",");
     private static final int ZERO = 0;
     private static final int ONE = 1;
+    private static final int FOUR = 4;
     private static final RString 認定区分_却 = new RString("却");
     private static final RString 認定区分_喪 = new RString("喪");
     private static final RString 渡された認定区分_却下 = new RString("1");
@@ -253,9 +254,13 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             model.setJukyuShikakuHakkoDay1(受給者台帳.get受給資格証明書発行年月日１());
             model.setJukyuShikakuHakkoDay2(受給者台帳.get受給資格証明書発行年月日２());
             model.setRiyu(受給者台帳.get異動理由());
+            if (要介護認定申請情報.get認定申請区分_法令_コード() != null && !要介護認定申請情報.get認定申請区分_法令_コード().isEmpty()) {
+                model.setShinseiKubunLaw(NinteiShinseiHoreiCode.toValue(要介護認定申請情報.get認定申請区分_法令_コード().value()).get名称());
+            }
+            if (要介護認定申請情報.get認定申請区分_申請時_コード() != null && !要介護認定申請情報.get認定申請区分_申請時_コード().isEmpty()) {
+                model.setShinseiKubunShinsei(NinteiShinseiShinseijiKubunCode.toValue(要介護認定申請情報.get認定申請区分_申請時_コード().value()).get名称());
+            }
             model.setSakujoJiyuCode(convertCodeToRString(受給者台帳.get削除事由コード()));
-            model.setShinseiKubunLaw(convertCodeToRString(要介護認定申請情報.get認定申請区分_法令_コード()));
-            model.setShinseiKubunShinsei(convertCodeToRString(要介護認定申請情報.get認定申請区分_申請時_コード()));
             model.setSoshitsuDay(受給者台帳.get喪失年月日());
             model.setTorisageDay(要介護認定申請情報.get取下年月日());
             model.setToshoNinteiKikanFrom(受給者台帳.get当初認定有効開始年月日());
@@ -290,8 +295,12 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             model.setJukyuShikakuHakkoDay2(outModel.get発行日２());
             model.setRiyu(outModel.get理由());
             model.setSakujoJiyuCode(outModel.get除事由コード());
-            model.setShinseiKubunLaw(outModel.get申請区分法令());
-            model.setShinseiKubunShinsei(outModel.get申請区分申請時());
+            if (!RString.isNullOrEmpty(outModel.get申請区分法令())) {
+                model.setShinseiKubunLaw(NinteiShinseiHoreiCode.toValue(outModel.get申請区分法令()).get名称());
+            }
+            if (!RString.isNullOrEmpty(outModel.get申請区分申請時())) {
+                model.setShinseiKubunShinsei(NinteiShinseiShinseijiKubunCode.toValue(outModel.get申請区分申請時()).get名称());
+            }
             model.setSoshitsuDay(outModel.get喪失日());
             model.setTorisageDay(outModel.get取下日());
             model.setToshoNinteiKikanFrom(outModel.get当初認定期間開始());
@@ -419,9 +428,13 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
      */
     public DbT4102NinteiKekkaJoho create認定結果情報(RString menuId, ShokkenTorikeshiNinteiJohoKonkaiBusiness 今回情報) {
 
-        DbT4102NinteiKekkaJoho 要介護認定結果情報 = 今回情報.get要介護認定結果情報();
         KekkaShosaiJohoOutModel outModel = DataPassingConverter.deserialize(div.getHdnKekkaShosaiJohoOutModel(), KekkaShosaiJohoOutModel.class);
-        if (!メニュID_職権取消一部喪失.equals(menuId) && outModel != null) {
+        DbT4102NinteiKekkaJoho 要介護認定結果情報 = 今回情報.get要介護認定結果情報();
+        if (メニュID_職権取消一部喪失.equals(menuId) || outModel == null || 要介護認定結果情報.get申請書管理番号() == null
+                || outModel.get理由().equals(要介護認定結果情報.get審査会メモ())) {
+            return null;
+        }
+        if (メニュID_職権修正.equals(menuId) || (!メニュID_職権修正.equals(menuId) && !認定区分_却.equals(div.getTxtKubunKonkai().getValue()))) {
             DbT4102NinteiKekkaJohoBuilder build = 要介護認定結果情報.createBuilderForEdit();
             build.set審査会メモ(outModel.get認定内容().get審査会意見());
             return build.build();
@@ -571,6 +584,10 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
                 登録用情報Builder.set前回認定年月日(nullToEmpty(outModel.get認定内容().get認定年月日()));
                 登録用情報Builder.set前回認定有効期間_開始(nullToEmpty(outModel.get認定内容().get有効開始年月日()));
                 登録用情報Builder.set前回認定有効期間_終了(nullToEmpty(outModel.get認定内容().get有効終了年月日()));
+            } else {
+                登録用情報Builder.set前回認定年月日(nullToEmpty(要介護認定申請情報.get前回認定年月日()));
+                登録用情報Builder.set前回認定有効期間_開始(nullToEmpty(要介護認定申請情報.get前回認定有効期間_開始()));
+                登録用情報Builder.set前回認定有効期間_終了(nullToEmpty(要介護認定申請情報.get前回認定有効期間_終了()));
             }
             登録用情報Builder.set論理削除フラグ(true);
         }
@@ -590,7 +607,7 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
         KekkaShosaiJohoOutModel outModel = DataPassingConverter.deserialize(div.getHdnKekkaShosaiJohoOutModel(), KekkaShosaiJohoOutModel.class);
         JukyushaDaicho 受給者台帳 = 今回情報.get受給者台帳();
         JukyushaDaicho 登録用受給者台帳 = new JukyushaDaicho(受給者台帳.get市町村コード(), 受給者台帳.get被保険者番号(),
-                new RString(String.valueOf(Integer.parseInt(受給者台帳.get履歴番号().toString()) + 1)),
+                new RString(String.valueOf(Integer.parseInt(受給者台帳.get履歴番号().toString()) + 1)).padZeroToLeft(FOUR),
                 受給者台帳.get枝番(), 受給者台帳.get受給申請事由());
         JukyushaDaichoBuilder 登録用builder = 登録用受給者台帳.createBuilderForEdit();
         if (メニュID_職権取消一部喪失.equals(menuId)) {
@@ -631,6 +648,8 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             登録用builder.set認定有効期間終了年月日(nullToEmpty(受給者台帳.get認定有効期間終了年月日()));
             if (outModel != null) {
                 登録用builder.set異動理由(nullToEmpty(outModel.get理由()));
+            } else {
+                登録用builder.set異動理由(nullToEmpty(受給者台帳.get異動理由()));
             }
         } else {
             登録用builder.set直近異動事由コード(new Code(ChokkinIdoJiyuCode.職権修正.getコード()));
@@ -677,6 +696,9 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             if (outModel != null) {
                 登録用builder.set要介護認定状態区分コード(new Code(outModel.get認定内容().get要介護度コード()));
                 登録用builder.set認定有効期間終了年月日(nullToEmpty(outModel.get認定内容().get有効終了年月日()));
+            } else {
+                登録用builder.set要介護認定状態区分コード(nullToEmpty(受給者台帳.get要介護認定状態区分コード()));
+                登録用builder.set認定有効期間終了年月日(nullToEmpty(受給者台帳.get認定有効期間終了年月日()));
             }
             登録用builder.set異動理由(nullToEmpty(受給者台帳.get異動理由()));
         }
@@ -698,8 +720,10 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
         登録用builder.set直近異動年月日(FlexibleDate.getNowDate());
         if (outModel != null) {
             登録用builder.setデータ区分(outModel.get異動事由コード() == null ? Code.EMPTY : new Code(outModel.get異動事由コード()));
+        } else {
+            登録用builder.setデータ区分(nullToEmpty(受給者台帳.getデータ区分()));
         }
-        登録用builder.set同一連番(new RString(String.valueOf(Integer.parseInt(受給者台帳.get履歴番号().toString()) + 1)));
+        登録用builder.set同一連番(new RString(String.valueOf(Integer.parseInt(受給者台帳.get履歴番号().toString()) + 1)).padZeroToLeft(FOUR));
         登録用builder.set申請書区分(nullToEmpty(受給者台帳.get申請書区分()));
         登録用builder.set要支援者認定申請区分(受給者台帳.is要支援者認定申請区分());
         登録用builder.set支給限度単位数(受給者台帳.get支給限度単位数());

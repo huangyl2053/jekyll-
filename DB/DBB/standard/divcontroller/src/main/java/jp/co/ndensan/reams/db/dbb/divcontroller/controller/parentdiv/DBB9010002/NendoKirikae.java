@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB9010002;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.nendokirikae.DBB901002_NendoKirikaeParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB901002.DBB901002_NendoKirikaeParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9010002.NendoKirikaeDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB9010002.NendoKirikaeHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;

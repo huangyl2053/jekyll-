@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4020011;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.ShinseiJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiBuilder;
@@ -46,13 +48,13 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -89,7 +91,6 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
     private final RString 対象外 = new RString("対象外");
     private static final Code CODE_0003 = new Code("0003");
     private static final RString KEY0 = new RString("key0");
-    private static final RString KEY_1 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -125,12 +126,56 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
         div.getCcdGemmenGengakuShinsei().initialize(識別コード);
         List<ShogaishaKoujoToJotai> 情報と状態List = 情報と状態初期化(申請一覧情報);
         div.getDgShinseiList().setDataSource(getDataSource(情報と状態List));
+        div.getDdlNinchishoKoreishaJiritsudo().setDataSource(get認知症高齢者自立度DataSource());
+        div.getDdlNinchishoKoreishaJiritsudo().setSelectedKey(RString.EMPTY);
+        div.getDdlShogaiKoreishaJiritsudo().setDataSource(get障害高齢者自立度DataSource());
+        div.getDdlShogaiKoreishaJiritsudo().setSelectedKey(RString.EMPTY);
+        div.getDdlNinteiKubun().setDataSource(get認定区分DataSource());
+        div.getDdlNinteiKubun().setSelectedKey(RString.EMPTY);
+        div.getDdlNinteiNaiyo().setDataSource(get認定内容DataSource());
+        div.getDdlNinteiNaiyo().setSelectedKey(RString.EMPTY);
         画面初期化制御();
         PersonalData personalData
                 = PersonalData.of(識別コード, new ExpandedInformation(CODE_0003, 被保険者番号_Name, 被保険者番号.getColumnValue()));
         AccessLogger.log(AccessLogType.照会, personalData);
         申請情報エリア非活性制御();
         return 情報と状態List;
+    }
+
+    private List<KeyValueDataSource> get認知症高齢者自立度DataSource() {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        dataSource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+        for (NinchishoNichijoSeikatsuJiritsudoCode value : NinchishoNichijoSeikatsuJiritsudoCode.values()) {
+            dataSource.add(new KeyValueDataSource(value.getコード(), value.get名称()));
+        }
+        return dataSource;
+    }
+
+    private List<KeyValueDataSource> get障害高齢者自立度DataSource() {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        dataSource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+        for (ShogaiNichijoSeikatsuJiritsudoCode value : ShogaiNichijoSeikatsuJiritsudoCode.values()) {
+            dataSource.add(new KeyValueDataSource(value.getコード(), value.get名称()));
+        }
+        return dataSource;
+    }
+
+    private List<KeyValueDataSource> get認定区分DataSource() {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        dataSource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+        for (Ninteikubun value : Ninteikubun.values()) {
+            dataSource.add(new KeyValueDataSource(value.getコード(), value.get名称()));
+        }
+        return dataSource;
+    }
+
+    private List<KeyValueDataSource> get認定内容DataSource() {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        dataSource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+        for (NinteiNaiyoKubun value : NinteiNaiyoKubun.values()) {
+            dataSource.add(new KeyValueDataSource(value.getコード(), value.get名称()));
+        }
+        return dataSource;
     }
 
     private List<dgShinseiList_Row> getDataSource(List<ShogaishaKoujoToJotai> 情報と状態List) {
@@ -271,14 +316,14 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
     public void onClick_btnAddShinsei(ShikibetsuCode 識別コード) {
         div.getTxtShinseiYMD().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
         clear申請情報エリア(識別コード);
-        一覧制御(true, false);
+        一覧制御(true, true);
     }
 
     private void clear申請情報エリア(ShikibetsuCode 識別コード) {
         div.getTxtShinseiYMD().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
         div.getTxtShinseiRiyu().clearValue();
         div.getCcdGemmenGengakuShinsei().initialize(識別コード);
-        div.getRadKettaiKubun().setSelectedValue(漢字承認しない);
+        div.getRadKettaiKubun().setSelectedValue(漢字承認する);
         div.getTxtKettaiYMD().clearValue();
         div.getTxtTaishoNendo().clearDomain();
         div.getTxtKijunYMD().clearValue();
@@ -286,11 +331,11 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
         List<RString> selectedKeys = new ArrayList<>();
         div.getChkHasShogaishaTecho().setSelectedItemsByKey(selectedKeys);
         div.getChkIsNinteishoHakkoTaishoGai().setSelectedItemsByKey(selectedKeys);
-        div.getDdlNinchishoKoreishaJiritsudo().setSelectedKey(KEY_1);
-        div.getDdlShogaiKoreishaJiritsudo().setSelectedKey(KEY_1);
-        div.getDdlNinteiKubun().setSelectedKey(KEY_1);
-        div.getDdlNinteiNaiyo().setSelectedKey(KEY_1);
         div.getTxtHiShoninRiyu().clearValue();
+        div.getDdlNinchishoKoreishaJiritsudo().setSelectedKey(RString.EMPTY);
+        div.getDdlShogaiKoreishaJiritsudo().setSelectedKey(RString.EMPTY);
+        div.getDdlNinteiKubun().setSelectedKey(RString.EMPTY);
+        div.getDdlNinteiNaiyo().setSelectedKey(RString.EMPTY);
     }
 
     private void 一覧制御(boolean is追加修正, boolean is承認する) {
@@ -310,16 +355,16 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
         div.getTxtHaakuYMD().setDisabled(is申請メニュー);
         div.getChkHasShogaishaTecho().setDisabled(is申請メニュー);
         div.getChkIsNinteishoHakkoTaishoGai().setDisabled(is申請メニュー);
-        if (!is承認する) {
+        if (is申請メニュー) {
             div.getDdlNinchishoKoreishaJiritsudo().setDisabled(true);
             div.getDdlShogaiKoreishaJiritsudo().setDisabled(true);
             div.getDdlNinteiKubun().setDisabled(true);
             div.getDdlNinteiNaiyo().setDisabled(true);
         } else {
-            div.getDdlNinchishoKoreishaJiritsudo().setDisabled(is申請メニュー);
-            div.getDdlShogaiKoreishaJiritsudo().setDisabled(is申請メニュー);
-            div.getDdlNinteiKubun().setDisabled(is申請メニュー);
-            div.getDdlNinteiNaiyo().setDisabled(is申請メニュー);
+            div.getDdlNinchishoKoreishaJiritsudo().setDisabled(!is承認する);
+            div.getDdlShogaiKoreishaJiritsudo().setDisabled(!is承認する);
+            div.getDdlNinteiKubun().setDisabled(!is承認する);
+            div.getDdlNinteiNaiyo().setDisabled(!is承認する);
         }
         div.getTxtHiShoninRiyu().setDisabled(is申請メニュー);
         div.getBtnHiShoninRiyu().setDisabled(is申請メニュー);
@@ -378,18 +423,7 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
         } else {
             div.getTxtHaakuYMD().clearValue();
         }
-        if (!isCodeEmpty(障がい書控除申請登録情報.get認知症高齢者の日常生活自立度コード())) {
-            div.getDdlNinchishoKoreishaJiritsudo().setSelectedKey(障がい書控除申請登録情報.get認知症高齢者の日常生活自立度コード().getColumnValue());
-        }
-        if (!isCodeEmpty(障がい書控除申請登録情報.get障がい高齢者の日常生活自立度コード())) {
-            div.getDdlShogaiKoreishaJiritsudo().setSelectedKey(障がい書控除申請登録情報.get障がい高齢者の日常生活自立度コード().getColumnValue());
-        }
-        if (障がい書控除申請登録情報.get認定区分() != null && !障がい書控除申請登録情報.get認定区分().isEmpty()) {
-            div.getDdlNinteiKubun().setSelectedKey(障がい書控除申請登録情報.get認定区分());
-        }
-        if (障がい書控除申請登録情報.get認定内容() != null && !障がい書控除申請登録情報.get認定内容().isEmpty()) {
-            div.getDdlNinteiNaiyo().setSelectedKey(障がい書控除申請登録情報.get認定内容());
-        }
+        setDdl(障がい書控除申請登録情報);
         if (null == 障がい書控除申請登録情報.get決定区分()
                 || 障がい書控除申請登録情報.get決定区分().isEmpty()
                 || 承認しない.equals(障がい書控除申請登録情報.get決定区分())) {
@@ -411,6 +445,29 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
             div.getTxtHiShoninRiyu().setValue(障がい書控除申請登録情報.get非承認理由());
         } else {
             div.getTxtHiShoninRiyu().clearValue();
+        }
+    }
+
+    private void setDdl(ShogaishaKoujo 障がい書控除申請登録情報) {
+        if (!isCodeEmpty(障がい書控除申請登録情報.get認知症高齢者の日常生活自立度コード())) {
+            div.getDdlNinchishoKoreishaJiritsudo().setSelectedKey(障がい書控除申請登録情報.get認知症高齢者の日常生活自立度コード().getColumnValue());
+        } else {
+            div.getDdlNinchishoKoreishaJiritsudo().setSelectedKey(RString.EMPTY);
+        }
+        if (!isCodeEmpty(障がい書控除申請登録情報.get障がい高齢者の日常生活自立度コード())) {
+            div.getDdlShogaiKoreishaJiritsudo().setSelectedKey(障がい書控除申請登録情報.get障がい高齢者の日常生活自立度コード().getColumnValue());
+        } else {
+            div.getDdlShogaiKoreishaJiritsudo().setSelectedKey(RString.EMPTY);
+        }
+        if (障がい書控除申請登録情報.get認定区分() != null && !障がい書控除申請登録情報.get認定区分().isEmpty()) {
+            div.getDdlNinteiKubun().setSelectedKey(障がい書控除申請登録情報.get認定区分());
+        } else {
+            div.getDdlNinteiKubun().setSelectedKey(RString.EMPTY);
+        }
+        if (障がい書控除申請登録情報.get認定内容() != null && !障がい書控除申請登録情報.get認定内容().isEmpty()) {
+            div.getDdlNinteiNaiyo().setSelectedKey(障がい書控除申請登録情報.get認定内容());
+        } else {
+            div.getDdlNinteiNaiyo().setSelectedKey(RString.EMPTY);
         }
     }
 
@@ -520,9 +577,10 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
             ShogaishaKoujoToJotai 情報と状態 = 情報と状態ArrayList.get(index);
             if (id.equals(情報と状態.get障がい書控除申請登録情報().identifier())) {
                 if (!is修正(最初情報)) {
-                    情報と状態.set状態(RString.EMPTY);
+                    最初情報.set状態(RString.EMPTY);
+                    最初情報.set新履歴番号(情報と状態.get新履歴番号());
                     情報と状態ArrayList.remove(index);
-                    add情報と状態(情報と状態ArrayList, 情報と状態, index, size);
+                    add情報と状態(情報と状態ArrayList, 最初情報, index, size);
                 } else {
                     修正情報と状態(情報と状態);
                 }
@@ -537,10 +595,11 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
         builder.set申請年月日(div.getTxtShinseiYMD().getValue());
         builder.set申請事由(div.getTxtShinseiRiyu().getValue());
         if (!申請メニュー.equals(ResponseHolder.getMenuID()) && 承認する.equals(div.getRadKettaiKubun().getSelectedKey())) {
+            builder.set非承認理由(RString.EMPTY);
             builder.set認知症高齢者の日常生活自立度コード(rStringToCode(div.getDdlNinchishoKoreishaJiritsudo().getSelectedKey()));
             builder.set障がい高齢者の日常生活自立度コード(rStringToCode(div.getDdlShogaiKoreishaJiritsudo().getSelectedKey()));
-            builder.set認定区分(div.getDdlNinteiKubun().getSelectedKey());
-            builder.set認定内容(div.getDdlNinteiNaiyo().getSelectedKey());
+            builder.set認定区分(get認定区分Or認定内容Key(div.getDdlNinteiKubun().getSelectedKey()));
+            builder.set認定内容(get認定区分Or認定内容Key(div.getDdlNinteiNaiyo().getSelectedKey()));
         }
         if (!申請メニュー.equals(ResponseHolder.getMenuID())) {
             builder.set決定区分(div.getRadKettaiKubun().getSelectedKey());
@@ -578,6 +637,13 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
         if (情報と状態.get状態().isNullOrEmpty() || 状態_修正.equals(情報と状態.get状態()) || 状態_削除.equals(情報と状態.get状態())) {
             情報と状態.set状態(状態_修正);
         }
+    }
+
+    private RString get認定区分Or認定内容Key(RString key) {
+        if (null == key || key.isEmpty()) {
+            return null;
+        }
+        return key;
     }
 
     private Code rStringToCode(RString value) {
@@ -811,8 +877,8 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
         if (!申請メニュー.equals(ResponseHolder.getMenuID()) && 承認する.equals(div.getRadKettaiKubun().getSelectedKey())) {
             builder.set認知症高齢者の日常生活自立度コード(rStringToCode(div.getDdlNinchishoKoreishaJiritsudo().getSelectedKey()));
             builder.set障がい高齢者の日常生活自立度コード(rStringToCode(div.getDdlShogaiKoreishaJiritsudo().getSelectedKey()));
-            builder.set認定区分(div.getDdlNinteiKubun().getSelectedKey());
-            builder.set認定内容(div.getDdlNinteiNaiyo().getSelectedKey());
+            builder.set認定区分(get認定区分Or認定内容Key(div.getDdlNinteiKubun().getSelectedKey()));
+            builder.set認定内容(get認定区分Or認定内容Key(div.getDdlNinteiNaiyo().getSelectedKey()));
         }
         if (!申請メニュー.equals(ResponseHolder.getMenuID())) {
             builder.set決定区分(div.getRadKettaiKubun().getSelectedKey());
@@ -920,29 +986,14 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
      */
     public boolean 対象年度重複チェック() {
         List<dgShinseiList_Row> rowList = div.getDgShinseiList().getDataSource();
-        ShogaishaKoujoIdentifier id
-                = DataPassingConverter.deserialize(rowList.get(0).getDadaId(), ShogaishaKoujoIdentifier.class);
-        HihokenshaNo 被保険者番号 = id.get被保険者番号();
-        List<FlexibleYear> 対象年度List
-                = ShogaishaKoujoManager.createInstance().対象年度重複チェック(被保険者番号);
+        List<RString> 対象年度List = new ArrayList<>();
         for (dgShinseiList_Row row : rowList) {
-            if (new RString("追加").equals(row.getJotai()) && is重複(対象年度List, row.getShinseiJiyu())) {
-                return true;
+            if (漢字承認する.equals(row.getKetteiKubun())) {
+                対象年度List.add(row.getShinseiJiyu());
             }
         }
-        return false;
-    }
-
-    private boolean is重複(List<FlexibleYear> 対象年度List, RString value) {
-        for (FlexibleYear 対象年度 : 対象年度List) {
-            if (null == 対象年度 || 対象年度.isEmpty()) {
-                continue;
-            }
-            if (value.equals(対象年度.wareki().toDateString())) {
-                return true;
-            }
-        }
-        return false;
+        Set<RString> 対象年度set = new HashSet<>(対象年度List);
+        return 対象年度List.size() != 対象年度set.size();
     }
 
     /**

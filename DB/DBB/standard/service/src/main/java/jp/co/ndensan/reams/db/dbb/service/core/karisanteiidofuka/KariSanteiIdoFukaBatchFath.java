@@ -260,10 +260,10 @@ public class KariSanteiIdoFukaBatchFath {
                 flag2 = true;
             }
         }
-        if (!設定前賦課情報.get資格取得日().equals(当初賦課情報.get資格取得日())
-                || !設定前賦課情報.get資格取得事由().equals(当初賦課情報.get資格取得事由())
-                || !設定前賦課情報.get資格喪失日().equals(当初賦課情報.get資格喪失日())
-                || !設定前賦課情報.get資格喪失事由().equals(当初賦課情報.get資格喪失事由())) {
+        if ((!get資格日(当初賦課情報.get資格取得日()).equals(設定前賦課情報.get資格取得日()))
+                || (!get資格事由(当初賦課情報.get資格取得事由()).equals(設定前賦課情報.get資格取得事由()))
+                || (!get資格日(当初賦課情報.get資格喪失日()).equals(設定前賦課情報.get資格喪失日()))
+                || (!get資格事由(当初賦課情報.get資格喪失事由()).equals(設定前賦課情報.get資格喪失事由()))) {
             if (!flag1) {
                 調定事由1 = ChoteiJiyuCode.資格異動による更正.getコード();
                 flag1 = true;
@@ -288,6 +288,20 @@ public class KariSanteiIdoFukaBatchFath {
         builder.set調定事由3(list.get(NUM_2));
         builder.set調定事由4(list.get(NUM_3));
         return builder.build();
+    }
+
+    private RString get資格事由(RString 資格事由) {
+        if (資格事由 == null) {
+            return RString.EMPTY;
+        }
+        return 資格事由;
+    }
+
+    private FlexibleDate get資格日(FlexibleDate 資格日) {
+        if (資格日 == null) {
+            return FlexibleDate.EMPTY;
+        }
+        return 資格日;
     }
 
     private List<RString> set調定事由(FukaJoho 当初賦課情報, FukaJoho 設定前賦課情報,
@@ -540,7 +554,6 @@ public class KariSanteiIdoFukaBatchFath {
         entity.set作成年月日(調定日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
         entity.set作成時刻(調定日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
         entity.set賦課年度(西暦.concat(LEFTBRACKET).concat(賦課年度.seireki().toDateString()).concat(RIGHTBRACKET));
-        entity.set通知書番号(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get通知書番号().value());
         AtenaMeisho atenaMeisho = 更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity().getKanjiShimei();
         if (atenaMeisho != null) {
             entity.set氏名(atenaMeisho.value());
@@ -556,54 +569,57 @@ public class KariSanteiIdoFukaBatchFath {
             entity.set町域管内管外住所(編集後個人.get町域());
             entity.set番地(編集後個人.get番地().value());
         }
-        entity.set口座情報(口座情報編集(更正前後Entity.get計算後情報_宛名_口座_更正前Entity()));
-        entity.set更正前調定年月日(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get調定日時().getDate().wareki().toDateString());
-        entity.set更正前特徴納付額計(
-                DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get特徴期別金額01()
-                        .add(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get特徴期別金額02())
-                        .add(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get特徴期別金額03()), 0));
-        entity.set更正前普徴納付額計(
-                DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額01()
-                        .add(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額02())
-                        .add(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額03()), 0));
-        entity.set更正前減免額(
-                DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get減免額(), 0));
-        entity.set更正前特徴額_１期(
-                DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get特徴期別金額01(), 0));
-        entity.set更正前特徴額_２期(
-                DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get特徴期別金額02(), 0));
-        entity.set更正前特徴額_３期(
-                DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get特徴期別金額03(), 0));
-        if (月List.contains(NUM_1)) {
-            entity.set更正前普徴額_１期(
-                    DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額01(), 0));
+        if (更正前後Entity.get計算後情報_宛名_口座_更正前Entity() != null) {
+            entity.set通知書番号(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get通知書番号().value());
+            entity.set口座情報(口座情報編集(更正前後Entity.get計算後情報_宛名_口座_更正前Entity()));
+            entity.set更正前調定年月日(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get調定日時().getDate().wareki().toDateString());
+            entity.set更正前特徴納付額計(
+                    DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get特徴期別金額01()
+                            .add(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get特徴期別金額02())
+                            .add(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get特徴期別金額03()), 0));
+            entity.set更正前普徴納付額計(
+                    DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額01()
+                            .add(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額02())
+                            .add(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額03()), 0));
+            entity.set更正前減免額(
+                    DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get減免額(), 0));
+            entity.set更正前特徴額_１期(
+                    DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get特徴期別金額01(), 0));
+            entity.set更正前特徴額_２期(
+                    DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get特徴期別金額02(), 0));
+            entity.set更正前特徴額_３期(
+                    DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get特徴期別金額03(), 0));
+            if (月List.contains(NUM_1)) {
+                entity.set更正前普徴額_１期(
+                        DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額01(), 0));
+            }
+            if (月List.contains(NUM_2)) {
+                entity.set更正前普徴額_２期(
+                        DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額02(), 0));
+            }
+            if (月List.contains(NUM_3)) {
+                entity.set更正前普徴額_３期(
+                        DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額03(), 0));
+            }
+            if (月List.contains(NUM_4)) {
+                entity.set更正前普徴額_４期(
+                        DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額04(), 0));
+            }
+            if (月List.contains(NUM_5)) {
+                entity.set更正前普徴額_５期(
+                        DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額05(), 0));
+            }
+            if (月List.contains(NUM_6)) {
+                entity.set更正前普徴額_６期(
+                        DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額06(), 0));
+            }
+            if (月List.contains(NUM_7)) {
+                entity.set更正前普徴額_７期(
+                        DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額07(), 0));
+            }
+            entity.set更正前口座異動(口座異動編集(更正前後Entity.get計算後情報_宛名_口座_更正前Entity()));
+            entity.set更正前徴収方法(徴収方法編集(更正前後Entity.get計算後情報_宛名_口座_更正前Entity()));
         }
-        if (月List.contains(NUM_2)) {
-            entity.set更正前普徴額_２期(
-                    DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額02(), 0));
-        }
-        if (月List.contains(NUM_3)) {
-            entity.set更正前普徴額_３期(
-                    DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額03(), 0));
-        }
-        if (月List.contains(NUM_4)) {
-            entity.set更正前普徴額_４期(
-                    DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額04(), 0));
-        }
-        if (月List.contains(NUM_5)) {
-            entity.set更正前普徴額_５期(
-                    DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額05(), 0));
-        }
-        if (月List.contains(NUM_6)) {
-            entity.set更正前普徴額_６期(
-                    DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額06(), 0));
-        }
-        if (月List.contains(NUM_7)) {
-            entity.set更正前普徴額_７期(
-                    DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額07(), 0));
-        }
-        entity.set更正前口座異動(口座異動編集(更正前後Entity.get計算後情報_宛名_口座_更正前Entity()));
-        entity.set更正前徴収方法(徴収方法編集(更正前後Entity.get計算後情報_宛名_口座_更正前Entity()));
         entity.set更正後調定年月日(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定日時().getDate().wareki().toDateString());
         entity.set更正後特徴納付額計(
                 DecimalFormatter.toコンマ区切りRString(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get特徴期別金額01()

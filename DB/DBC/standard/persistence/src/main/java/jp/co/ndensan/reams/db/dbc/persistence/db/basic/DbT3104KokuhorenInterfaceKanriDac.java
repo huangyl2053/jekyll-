@@ -42,6 +42,12 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
     private SqlSession session;
 
     private static final boolean 論理削除フラグ = false;
+    private static final RString KEY_処理状態区分 = new RString("処理状態区分");
+    private static final RString KEY_国保連インターフェース管理 = new RString("国保連インターフェース管理エンティティ");
+    private static final RString KEY_処理年月 = new RString("処理年月");
+    private static final RString KEY_交換情報識別番号 = new RString("交換情報識別番号");
+    private static final RString KEY_送付取込区分 = new RString("送付取込区分");
+    private static final RString KEY_TYPE = new RString("type");
 
     /**
      * 主キーで国保連インターフェース管理を取得します(論理削除行ではない)。
@@ -55,8 +61,8 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
     public DbT3104KokuhorenInterfaceKanriEntity select(
             RString 処理状態区分,
             RString 交換情報識別番号) throws NullPointerException {
-        requireNonNull(処理状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("処理状態区分"));
-        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
+        requireNonNull(処理状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_処理状態区分.toString()));
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_交換情報識別番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -86,32 +92,32 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
             RString 送付取込区分,
             RString 処理状態区分,
             RString 交換情報識別番号) throws NullPointerException {
-        requireNonNull(type, UrSystemErrorMessages.値がnull.getReplacedMessage("type"));
-        requireNonNull(送付取込区分, UrSystemErrorMessages.値がnull.getReplacedMessage("送付取込区分"));
-        requireNonNull(処理状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("処理状態区分"));
-        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
+        requireNonNull(type, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_TYPE.toString()));
+        requireNonNull(送付取込区分, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_送付取込区分.toString()));
+        requireNonNull(処理状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_処理状態区分.toString()));
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_交換情報識別番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        if(type.compareTo("MAX") ==0 ){
-        return accessor.select().
-                table(DbT3104KokuhorenInterfaceKanri.class).
-                where(and(
-                                eq(sofuTorikomiKubun, 送付取込区分),
-                                eq(shoriJotaiKubun, 処理状態区分),
-                                eq(kokanShikibetsuNo, 交換情報識別番号),
-                                eq(isDeleted, 論理削除フラグ))).
-                order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.DESC)).limit(1).
-                toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
+        if (type.compareTo("MAX") == 0) {
+            return accessor.select().
+                    table(DbT3104KokuhorenInterfaceKanri.class).
+                    where(and(
+                                    eq(sofuTorikomiKubun, 送付取込区分),
+                                    eq(shoriJotaiKubun, 処理状態区分),
+                                    eq(kokanShikibetsuNo, 交換情報識別番号),
+                                    eq(isDeleted, 論理削除フラグ))).
+                    order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.DESC)).limit(1).
+                    toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
         } else {
             return accessor.select().
-                table(DbT3104KokuhorenInterfaceKanri.class).
-                where(and(
-                                eq(sofuTorikomiKubun, 送付取込区分),
-                                eq(shoriJotaiKubun, 処理状態区分),
-                                eq(kokanShikibetsuNo, 交換情報識別番号),
-                                eq(isDeleted, 論理削除フラグ))).
-                order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.ASC)).limit(1).
-                toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
+                    table(DbT3104KokuhorenInterfaceKanri.class).
+                    where(and(
+                                    eq(sofuTorikomiKubun, 送付取込区分),
+                                    eq(shoriJotaiKubun, 処理状態区分),
+                                    eq(kokanShikibetsuNo, 交換情報識別番号),
+                                    eq(isDeleted, 論理削除フラグ))).
+                    order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.ASC)).limit(1).
+                    toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
         }
     }
 
@@ -127,8 +133,8 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
     public DbT3104KokuhorenInterfaceKanriEntity selectByKey(
             FlexibleYearMonth 処理年月,
             RString 交換情報識別番号) throws NullPointerException {
-        requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年月"));
-        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
+        requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_処理年月.toString()));
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_交換情報識別番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -152,8 +158,8 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
     public DbT3104KokuhorenInterfaceKanriEntity selectByKeyUndeleted(
             FlexibleYearMonth 処理年月,
             RString 交換情報識別番号) throws NullPointerException {
-        requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年月"));
-        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
+        requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_処理年月.toString()));
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_交換情報識別番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -182,7 +188,8 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
                 where(and(
                                 eq(kokanShikibetsuNo, 交換情報識別番号),
                                 eq(sofuTorikomiKubun, SofuTorikomiKubun.それ以外.getコード()),
-                                or(eq(shoriJotaiKubun, ShoriJotaiKubun.処理前.getコード()), eq(shoriJotaiKubun, ShoriJotaiKubun.再処理前.getコード())))).
+                                or(eq(shoriJotaiKubun, ShoriJotaiKubun.処理前.getコード()),
+                                        eq(shoriJotaiKubun, ShoriJotaiKubun.再処理前.getコード())))).
                 order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.ASC)).
                 toList(DbT3104KokuhorenInterfaceKanriEntity.class);
     }
@@ -194,7 +201,8 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
      * @return DbT3104KokuhorenInterfaceKanriEntity
      */
     @Transaction
-    public DbT3104KokuhorenInterfaceKanriEntity select国保連インターフェース管理処理が実行された最新のデータ(RString 交換情報識別番号) {
+    public DbT3104KokuhorenInterfaceKanriEntity select国保連インターフェース管理処理が実行された最新のデータ(
+            RString 交換情報識別番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -243,7 +251,7 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
     @Transaction
     @Override
     public int save(DbT3104KokuhorenInterfaceKanriEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("国保連インターフェース管理エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_国保連インターフェース管理.toString()));
 
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
 //        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);

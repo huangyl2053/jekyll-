@@ -27,8 +27,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
@@ -60,14 +58,14 @@ public class NinteiShinseiTorokuHandler {
      * @param 被保険者番号 被保険者番号
      * @param 介護導入形態 介護導入形態
      */
-    public void loadUpdate(NinteiShinseiTorokuResult result, RString 管理番号,
+    public void loadUpdate(NinteiShinseiTorokuResult result, ShinseishoKanriNo 管理番号,
             RString 被保険者番号, RString 介護導入形態) {
         div.getCcdAtenaInfo().setKaigoDonyuKeitai(介護導入形態);
-        div.getCcdAtenaInfo().setShinseishaJohoByShikibetsuCode(new ShinseishoKanriNo(管理番号), ShikibetsuCode.EMPTY);
+        div.getCcdAtenaInfo().setShinseishaJohoByShikibetsuCode(管理番号, ShikibetsuCode.EMPTY);
         div.getCcdAtenaInfo().setShoriType(new RString("2"));
         div.getCcdAtenaInfo().initialize();
 
-        div.getCcdShikakuInfo().initialize(RString.EMPTY, 被保険者番号);
+        div.getCcdShikakuInfo().initialize(result.get市町村コード().value(), 被保険者番号);
         setCommonDiv(result, 管理番号);
     }
 
@@ -178,7 +176,7 @@ public class NinteiShinseiTorokuHandler {
         return mode;
     }
 
-    private void setCommonDiv(NinteiShinseiTorokuResult result, RString 管理番号) {
+    private void setCommonDiv(NinteiShinseiTorokuResult result, ShinseishoKanriNo 管理番号) {
         div.getCcdKaigoNinteiShinseiKihon().initialize();
         div.getCcdKaigoNinteiShinseiKihon().setTxtShinseiYMD(new RDate(result.get申請日().getYearValue(),
                 result.get申請日().getMonthValue(), result.get申請日().getDayValue()));
@@ -203,7 +201,7 @@ public class NinteiShinseiTorokuHandler {
         div.getCcdKaigoNinteiShinseiKihon().setServiceSakujoTeikeibun(result.get申請サービス削除の理由());
         div.getCcdKaigoNinteiShinseiKihon().setNinteiShinseRiyuTeikeibun(result.get認定申請理由());
         div.getCcdShujiiIryokikanAndShujiiInput().initialize(result.get市町村コード(),
-                new ShinseishoKanriNo(管理番号), SubGyomuCode.DBE認定支援,
+                管理番号, SubGyomuCode.DBE認定支援,
                 result.get主治医医療機関コード(), result.get医療機関名称(), result.get主治医コード(), result.get主治医氏名());
         div.getCcdShujiiIryokikanAndShujiiInput().setRenrakuJiko(result.get主治医への連絡事項());
         div.getCcdShujiiIryokikanAndShujiiInput().setShiteii(result.is指定医フラグ());
@@ -213,23 +211,11 @@ public class NinteiShinseiTorokuHandler {
         div.getTxtTelNo().setDomain(result.get訪問調査先電話番号());
         div.getCcdChodsItakusakiAndChosainInput().initialize(new RString("InputMode"),
                 result.get認定調査委託先コード(), result.get事業者名称(), result.get認定調査員コード(), result.get調査員氏名());
-        div.getCcdChodsItakusakiAndChosainInput().setHdnShinseishoKanriNo(管理番号);
+        div.getCcdChodsItakusakiAndChosainInput().setHdnShinseishoKanriNo(管理番号.value());
         div.getCcdChodsItakusakiAndChosainInput().setHdnShichosonCode(result.get市町村コード().value());
         div.getCcdChodsItakusakiAndChosainInput().setChosainRenrakuJiko(result.get調査員への連絡事項());
-        div.getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBE認定支援, new ShinseishoKanriNo(管理番号), new RString("1"));
+        div.getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBE認定支援, 管理番号, new RString("1"));
 
-        TextBoxFlexibleDate ninteiDay = new TextBoxFlexibleDate();
-        ninteiDay.setValue(result.get前回認定年月日());
-        div.getCcdZenkaiNinteiKekkaJoho().setTxtNinteiDay(ninteiDay);
-        TextBox yokaigodo = new TextBox();
-        yokaigodo.setValue(result.get前回要介護状態区分コード().value());
-        div.getCcdZenkaiNinteiKekkaJoho().setTxtYokaigodo(yokaigodo);
-        TextBoxFlexibleDate yukoKikanFrom = new TextBoxFlexibleDate();
-        yukoKikanFrom.setValue(result.get前回認定有効期間開始());
-        div.getCcdZenkaiNinteiKekkaJoho().setTxtYukoKikanFrom(yukoKikanFrom);
-        TextBoxFlexibleDate yukoKikanTo = new TextBoxFlexibleDate();
-        yukoKikanTo.setValue(result.get前回認定有効期間終了());
-        div.getCcdZenkaiNinteiKekkaJoho().setTxtYukoKikanTo(yukoKikanTo);
         div.getCcdShinseiSonotaJohoInput().initialize();
         div.getCcdShinseiSonotaJohoInput().set削除事由(result.get削除事由コード().value());
         div.getCcdShinseiSonotaJohoInput().set理由(result.get理由());
@@ -254,7 +240,7 @@ public class NinteiShinseiTorokuHandler {
         ninteiInput.set有効開始年月日(result.get認定有効期間開始年月日());
         ninteiInput.set有効終了年月日(result.get認定有効期間終了年月日());
         ninteiInput.set審査会意見(result.get介護認定審査会意見());
-        ninteiInput.set申請書管理番号(new ShinseishoKanriNo(管理番号));
+        ninteiInput.set申請書管理番号(管理番号);
         div.getCcdNinteiInput().initialize(ninteiInput);
     }
 }

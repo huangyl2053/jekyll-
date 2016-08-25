@@ -1175,6 +1175,7 @@ public class SokujiFukaKouseiMainHandler {
     }
 
     private boolean is特徴開始者(RString 徴収方法) {
+        // TODO 特徴開始者の判定、QA#94818確認中
         return ChoshuHoho.特別徴収_地共済.getコード().equals(徴収方法) || ChoshuHoho.特別徴収_厚生労働省.getコード().equals(徴収方法);
     }
 

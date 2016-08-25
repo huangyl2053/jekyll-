@@ -140,7 +140,7 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
             }
         }
         int index = 0;
-        if (並び順 != null) {
+        if (null != 並び順) {
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
                 if (index == INDEX_1) {
                     出力順Map.put(KEY_並び順の２件目, item.get項目名());

@@ -69,7 +69,7 @@ public class TsukibetsuHanteiTaishoshaTempNigaimeProcess extends BatchProcessBas
         insertEntity.setHihokenshaNo(entity.get被保険者番号());
         RYear taishoNendo = parameter.getTaishoNendo();
         insertEntity.setTaishoNendo(taishoNendo == null ? null : new FlexibleYear(taishoNendo.toDateString()));
-        RString taishoTsuki = parameter.getTaishoGetsu().get(parameter.getIndex());
+        RString taishoTsuki = parameter.getTaishoGetsu().get(parameter.getHanteiKijunbiIndex());
         insertEntity.setTaishoTsuki(taishoTsuki);
         if (被保険者台帳 != null) {
             insertEntity.setShikibetsuCode(被保険者台帳.getShikibetsuCode());

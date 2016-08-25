@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 画面設計_DBCMN62006_自己負担額計算（一括）のクラスです。
@@ -24,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBC1120011PanelHandler {
 
     private final DBC1120011PanelDiv div;
-    private final RString NUM_1 = new RString("1");
+    private static final int 定数_1 = 1;
 
     /**
      * コンストラクタです。
@@ -50,7 +49,7 @@ public class DBC1120011PanelHandler {
             div.getTxtZenkaiTaishoYMD().setFromValue(前回対象開始年月日Temp);
             div.getTxtZenkaiTaishoYMD().setToValue(前回対象終了年月日Temp);
             if (!div.getTxtZenkaiTaishoYMD().getToValue().toString().isEmpty()) {
-                RDate 申請対象開始日 = div.getTxtZenkaiTaishoYMD().getToValue().plusDay(Integer.parseInt(NUM_1.toString()));
+                RDate 申請対象開始日 = div.getTxtZenkaiTaishoYMD().getToValue().plusDay(定数_1);
                 div.getTxtShinseiTaishoYMD().setFromValue(申請対象開始日);
             } else {
                 div.getTxtShinseiTaishoYMD().setFromValue(null);

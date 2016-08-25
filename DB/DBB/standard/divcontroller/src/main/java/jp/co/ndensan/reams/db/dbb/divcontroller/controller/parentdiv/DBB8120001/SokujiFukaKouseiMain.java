@@ -105,7 +105,7 @@ public class SokujiFukaKouseiMain {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         LockingKey 前排他キー = new LockingKey(DBB_HIHOKENSHANO.concat(被保険者番号.getColumnValue()));
-        if (!RealInitialLocker.tryGetLock(前排他キー)) {
+        if (!RealInitialLocker.tryGetLock(前排他キー) && !ResponseHolder.isReRequest()) {
             throw new PessimisticLockingException();
         }
         List<KoseiZengoFuka> 更正前後賦課のリスト = new ArrayList<>();
@@ -215,8 +215,7 @@ public class SokujiFukaKouseiMain {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         AccessLogger.log(AccessLogType.更新, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
-        LockingKey 前排他キー = new LockingKey(DBB_HIHOKENSHANO.concat(被保険者番号.getColumnValue()));
-        RealInitialLocker.release(前排他キー);
+        get前排他Release();
         return ResponseData.of(div).setState(DBB8120001StateName.完了);
     }
 
@@ -233,9 +232,7 @@ public class SokujiFukaKouseiMain {
             return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
         if (!is入力があれ || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-            LockingKey 前排他キー = new LockingKey(DBB_HIHOKENSHANO.concat(被保険者番号.getColumnValue()));
-            RealInitialLocker.release(前排他キー);
+            get前排他Release();
             return ResponseData.of(div).forwardWithEventName(DBB8120001TransitionEventName.再検索する).respond();
         }
         return getResponseData(div);
@@ -254,6 +251,7 @@ public class SokujiFukaKouseiMain {
             return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
         if (!is入力があれ || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            get前排他Release();
             return toSearchResultResponseData(div);
         }
         return getResponseData(div);
@@ -267,9 +265,6 @@ public class SokujiFukaKouseiMain {
      */
     public ResponseData<SokujiFukaKouseiMainDiv> onClick_btnKouseiNext(SokujiFukaKouseiMainDiv div) {
         if (is特殊処理()) {
-            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-            LockingKey 前排他キー = new LockingKey(DBB_HIHOKENSHANO.concat(被保険者番号.getColumnValue()));
-            RealInitialLocker.release(前排他キー);
             return ResponseData.of(div).forwardWithEventName(DBB8120001TransitionEventName.再検索する).respond();
         } else {
             return ResponseData.of(div).forwardWithEventName(DBB8120001TransitionEventName.前画面に戻る).respond();
@@ -443,7 +438,6 @@ public class SokujiFukaKouseiMain {
                 SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
                 tablePanel.getTxtTokuchoKoseiGo04().setReadOnly(false);
             }
-            ViewStateHolder.put(ViewStateKeys.賦課年度, 賦課年度);
         } else {
             div.getBtnYokunendoHyoji().setText(翌年度の情報を表示する);
             setViewStateHolder();
@@ -637,9 +631,6 @@ public class SokujiFukaKouseiMain {
 
     private ResponseData<SokujiFukaKouseiMainDiv> toSearchResultResponseData(SokujiFukaKouseiMainDiv div) {
         if (is特殊処理()) {
-            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-            LockingKey 前排他キー = new LockingKey(DBB_HIHOKENSHANO.concat(被保険者番号.getColumnValue()));
-            RealInitialLocker.release(前排他キー);
             if (ViewStateHolder.get(ViewStateKeys.is経由該当者一覧画面, Boolean.class)) {
                 return ResponseData.of(div).forwardWithEventName(DBB8120001TransitionEventName.検索結果一覧に戻る).respond();
             } else {
@@ -696,5 +687,11 @@ public class SokujiFukaKouseiMain {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
         return null;
+    }
+
+    private void get前排他Release() {
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        LockingKey 前排他キー = new LockingKey(DBB_HIHOKENSHANO.concat(被保険者番号.getColumnValue()));
+        RealInitialLocker.release(前排他キー);
     }
 }

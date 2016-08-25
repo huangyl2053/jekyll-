@@ -260,10 +260,10 @@
         </if>
         <if test="is地区2">
             <if test="開始地区コード!=null and !開始地区コード.isEmpty()">
-                AND #{開始地区コード} <![CDATA[<=]]> B."chikucode2"
+                AND #{開始地区コード} <![CDATA[<=]]> B."chikuCode2"
             </if>
             <if test="終了地区コード!=null and !終了地区コード.isEmpty()">
-                AND B."chikucode2" <![CDATA[<=]]> #{終了地区コード}
+                AND B."chikuCode2" <![CDATA[<=]]> #{終了地区コード}
             </if>
         </if>
     </sql>

@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.Juky
 import jp.co.ndensan.reams.db.dbc.entity.report.jukyushateiseirenrakuhyo.JukyushaTeiseiRenrakuhyoSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FillTypeFormatted;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -82,12 +83,12 @@ public class JukyushaTeiseiRenrakuhyoEditor implements IJukyushaTeiseiRenrakuhyo
         source.tashoshitsu = 出力用受給者訂正情報Entity.get多床室();
         source.shin1 = 出力用受給者訂正情報Entity.get新１();
         source.shin2 = 出力用受給者訂正情報Entity.get新２();
-        source.Shin3 = 出力用受給者訂正情報Entity.get新３();
+        source.shin3 = 出力用受給者訂正情報Entity.get新３();
         source.koikiHokenshaNO = 出力用受給者訂正情報Entity.get広域保険者番号();
         source.rokenShichosonNo = 出力用受給者訂正情報Entity.get老人保健市町村番号();
         source.rokenJukyushaNO = 出力用受給者訂正情報Entity.get老人保健受給者番号();
         source.shaKyufuritsu = 出力用受給者訂正情報Entity.get軽減率();
-        source.ShokiboKyotakuUmu = new RString(出力用受給者訂正情報Entity.get小規模居宅ｻｰﾋﾞｽ利用().toString());
+        source.shokiboKyotakuUmu = new RString(出力用受給者訂正情報Entity.get小規模居宅ｻｰﾋﾞｽ利用().toString());
         source.nijiYoboTaishoKbn = 出力用受給者訂正情報Entity.get二次予防事業区分();
         source.shinseiShubetsu = 出力用受給者訂正情報Entity.get申請種別();
         source.henkoShinseiKbn = 出力用受給者訂正情報Entity.get変更申請中区分();
@@ -120,8 +121,8 @@ public class JukyushaTeiseiRenrakuhyoEditor implements IJukyushaTeiseiRenrakuhyo
         source.sakuseiYY = get年(出力用受給者訂正情報Entity.get作成年月日());
         source.sakuseiMM = get月(出力用受給者訂正情報Entity.get作成年月日());
         source.sakuseiDD = get日(出力用受給者訂正情報Entity.get作成年月日());
-        source.IdoNengo = get年号(出力用受給者訂正情報Entity.get異動年月日());
-        source.IdoYMD = get年月日(出力用受給者訂正情報Entity.get異動年月日());
+        source.idoNengo = get年号(出力用受給者訂正情報Entity.get異動年月日());
+        source.idoYMD = get年月日(出力用受給者訂正情報Entity.get異動年月日());
         source.teiseiNengo = get年号(出力用受給者訂正情報Entity.get訂正年月日());
         source.teiseiYMD = get年月日(出力用受給者訂正情報Entity.get訂正年月日());
 
@@ -171,7 +172,7 @@ public class JukyushaTeiseiRenrakuhyoEditor implements IJukyushaTeiseiRenrakuhyo
         source.hyojunTekiyoEDNengo = get年号(出力用受給者訂正情報Entity.get標準適用終了年月日());
         source.hyojunTekiyoEDYMD = get年月日(出力用受給者訂正情報Entity.get標準適用終了年月日());
         source.shoTekiyoSTNengo = get年号(出力用受給者訂正情報Entity.get償還払化適用開始年月日());
-        source.ShoTekiyoSTYMD = get年月日(出力用受給者訂正情報Entity.get償還払化適用開始年月日());
+        source.shoTekiyoSTYMD = get年月日(出力用受給者訂正情報Entity.get償還払化適用開始年月日());
         source.shoTekiyoEDNengo = get年号(出力用受給者訂正情報Entity.get償還払化適用終了年月日());
         source.shoTekiyoEDYMD = get年月日(出力用受給者訂正情報Entity.get償還払化適用終了年月日());
         source.kyuTekiyoSTNengo = get年号(出力用受給者訂正情報Entity.get給付率引下げ適用開始年月日());
@@ -205,59 +206,49 @@ public class JukyushaTeiseiRenrakuhyoEditor implements IJukyushaTeiseiRenrakuhyo
 
     private RString get年号(FlexibleDate date) {
         if (date != null) {
-            RString 年号 = date.wareki().eraType(EraType.KANJI).
+            return date.wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).getEra();
-            return 年号;
-        } else {
-            return RString.EMPTY;
         }
+        return RString.EMPTY;
     }
 
     private RString get年(FlexibleDate date) {
         if (date != null) {
             RString 年号 = date.wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).getYear();
-            RString 年 = new RString(Pattern.compile(new RString("[^0-9]").toString()).matcher(年号).replaceAll("").trim());
-            return 年;
-        } else {
-            return RString.EMPTY;
+            return new RString(Pattern.compile(new RString("[^0-9]").toString()).matcher(年号).replaceAll("").trim());
         }
+        return RString.EMPTY;
+
     }
 
     private RString get月(FlexibleDate date) {
         if (date != null) {
-            RString 月 = date.wareki().eraType(EraType.KANJI).
+            return date.wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).getMonth();
-            return 月;
-        } else {
-            return RString.EMPTY;
         }
+        return RString.EMPTY;
     }
 
     private RString get日(FlexibleDate date) {
         if (date != null) {
-            RString 日 = date.wareki().eraType(EraType.KANJI).
+            return date.wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).getDay();
-            return 日;
-        } else {
-            return RString.EMPTY;
         }
+        return RString.EMPTY;
     }
 
     private RString get年月日(FlexibleDate date) {
         if (date != null) {
-            RString 年号 = date.wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).getYear();
+            FillTypeFormatted fillTypeFormatted = date.wareki().eraType(EraType.KANJI).
+                    firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO);
+            RString 年号 = fillTypeFormatted.getYear();
             RString 年 = new RString(Pattern.compile(new RString("[^0-9]").toString()).matcher(年号).replaceAll("").trim());
-            RString 月 = date.wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).getMonth();
-            RString 日 = date.wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).getDay();
-            RString 年月日 = new RString(new StringBuilder(年).append(月).append(日).toString());
-            return 年月日;
-        } else {
-            return RString.EMPTY;
+            RString 月 = fillTypeFormatted.getMonth();
+            RString 日 = fillTypeFormatted.getDay();
+            return new RString(new StringBuilder(年).append(月).append(日).toString());
         }
+        return RString.EMPTY;
 
     }
 

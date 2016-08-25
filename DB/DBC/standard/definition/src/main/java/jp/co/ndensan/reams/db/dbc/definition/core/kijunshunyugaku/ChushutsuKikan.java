@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 抽出期間radを表す列挙型です。
  *
- * @reamsid_L DBC-4610-010 qinzhen
+ * @reamsid_L DBC-9999-022 qinzhen
  */
 public enum ChushutsuKikan {
 

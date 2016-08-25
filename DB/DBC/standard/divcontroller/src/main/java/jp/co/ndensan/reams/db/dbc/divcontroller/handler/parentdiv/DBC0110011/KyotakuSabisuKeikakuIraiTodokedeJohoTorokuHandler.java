@@ -650,11 +650,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
                 KyotakuKeikakuTodokede 居宅給付計画届出履歴NEXT = 居宅給付計画届出履歴一覧.get(i + 1);
                 is直近履歴 = !居宅給付計画届出履歴.get対象年月().equals(居宅給付計画届出履歴NEXT.get対象年月());
             }
-            if (is事業者作成) {
-                set事業者作成Data(居宅給付計画届出履歴, rows, is直近履歴);
-            }
-            if (is自己作成) {
-                set自己作成Data(居宅給付計画届出履歴, rows, is直近履歴);
+            if (居宅給付計画届出履歴.getKyotakuKeikakuJigyoshaSakuseiList().isEmpty()) {
+                set自己作成Data(居宅給付計画届出履歴, rows, is直近履歴, is事業者作成, is自己作成);
+            } else {
+                set事業者作成Data(居宅給付計画届出履歴, rows, is直近履歴, is事業者作成, is自己作成);
             }
         }
         div.getRireki().getDgKyotakuServiceIchiran().setDataSource(rows);
@@ -662,18 +661,20 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
 
     private void set事業者作成Data(KyotakuKeikakuTodokede 居宅給付計画届出履歴,
             List<dgKyotakuServiceIchiran_Row> rows,
-            boolean is直近履歴) {
+            boolean is直近履歴,
+            boolean is事業者作成,
+            boolean is自己作成) {
         if (居宅給付計画届出履歴.getKyotakuKeikakuJigyoshaSakuseiList().isEmpty()) {
             return;
         }
         KyotakuKeikakuJigyoshaSakusei 居宅給付計画事業者
                 = 居宅給付計画届出履歴.getKyotakuKeikakuJigyoshaSakuseiList().get(0);
         dgKyotakuServiceIchiran_Row row = new dgKyotakuServiceIchiran_Row();
-        if (is事業者作成(居宅給付計画事業者.get作成区分コード())) {
+        if (is事業者作成) {
             row.setSelectButtonState(DataGridButtonState.Enabled);
             row.setModifyButtonState(DataGridButtonState.Enabled);
             row.setDeleteButtonState(DataGridButtonState.Enabled);
-        } else {
+        } else if (is自己作成) {
             row.setSelectButtonState(DataGridButtonState.Disabled);
             row.setModifyButtonState(DataGridButtonState.Disabled);
             row.setDeleteButtonState(DataGridButtonState.Disabled);
@@ -691,18 +692,19 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
 
     private void set自己作成Data(KyotakuKeikakuTodokede 居宅給付計画届出履歴,
             List<dgKyotakuServiceIchiran_Row> rows,
-            boolean is直近履歴) {
+            boolean is直近履歴,
+            boolean is事業者作成,
+            boolean is自己作成) {
         if (居宅給付計画届出履歴.getKyotakuKeikakuJikoSakuseiList().isEmpty()) {
             return;
         }
         KyotakuKeikakuJikoSakusei 居宅給付計画自己作成 = 居宅給付計画届出履歴.getKyotakuKeikakuJikoSakuseiList().get(0);
         dgKyotakuServiceIchiran_Row row = new dgKyotakuServiceIchiran_Row();
-        if (KyotakuservicekeikakuSakuseikubunCode.自己作成.getコード().equals(
-                居宅給付計画自己作成.get作成区分コード())) {
+        if (is自己作成) {
             row.setSelectButtonState(DataGridButtonState.Enabled);
             row.setModifyButtonState(DataGridButtonState.Enabled);
             row.setDeleteButtonState(DataGridButtonState.Enabled);
-        } else {
+        } else if (is事業者作成) {
             row.setSelectButtonState(DataGridButtonState.Disabled);
             row.setModifyButtonState(DataGridButtonState.Disabled);
             row.setDeleteButtonState(DataGridButtonState.Disabled);
@@ -716,12 +718,6 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         row.setYukoMuko(is直近履歴 ? FLAG_直近履歴 : FLAG_履歴);
         row.setRirekiNo(new RString(居宅給付計画届出履歴.get履歴番号()));
         rows.add(row);
-    }
-
-    private boolean is事業者作成(RString 計画作成区分) {
-        return KyotakuservicekeikakuSakuseikubunCode.介護予防支援事業者作成.getコード().equals(計画作成区分)
-                || KyotakuservicekeikakuSakuseikubunCode.基準該当居宅介護支援事業者作成.getコード().equals(計画作成区分)
-                || KyotakuservicekeikakuSakuseikubunCode.指定居宅介護支援事業者作成.getコード().equals(計画作成区分);
     }
 
     /**
@@ -817,7 +813,14 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         if (rowSize == ZERO) {
             return Boolean.TRUE;
         }
-        dgKyotakuServiceIchiran_Row row = div.getRireki().getDgKyotakuServiceIchiran().getDataSource().get(rowSize - ONE);
-        return KyotakuservicekeikakuSakuseikubunCode.自己作成.get名称().equals(row.getKeikakuSakuseiKubun());
+        RString 直近作成区分 = RString.EMPTY;
+        int 履歴番号 = ZERO;
+        for (dgKyotakuServiceIchiran_Row row : div.getRireki().getDgKyotakuServiceIchiran().getDataSource()) {
+            if (履歴番号 < Integer.valueOf(row.getRirekiNo().toString())) {
+                履歴番号 = Integer.valueOf(row.getRirekiNo().toString());
+                直近作成区分 = row.getKeikakuSakuseiKubun();
+            }
+        }
+        return KyotakuservicekeikakuSakuseikubunCode.自己作成.get名称().equals(直近作成区分);
     }
 }

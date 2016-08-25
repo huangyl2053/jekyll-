@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
+import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -107,5 +108,27 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
                 where(eq(hihokenshaNo, 被保険者番号)).
                 order(by(tekiyoKaishiYMD, Order.DESC)).
                 toList(DbT3105SogoJigyoTaishoshaEntity.class);
+    }
+
+    /**
+     * 被保険者番号より、総合事業対象者情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT3105SogoJigyoTaishoshaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT3105SogoJigyoTaishoshaEntity get総合事業対象者情報(HihokenshaNo 被保険者番号)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3105SogoJigyoTaishosha.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                order(by(rirekiNo, DESC),
+                        by(tekiyoKaishiYMD, DESC)).
+                limit(1).
+                toObject(DbT3105SogoJigyoTaishoshaEntity.class);
     }
 }

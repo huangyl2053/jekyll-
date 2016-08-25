@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jp.co.ndensan.reams.db.dbd.business.core.hikazeinenkintaishoshaJoho.HikazeiNenkinTaishoshaJohoBusiness;
+import jp.co.ndensan.reams.db.dbd.business.core.hikazeinenkintaishoshajoho.HikazeiNenkinTaishoshaJohoBusiness;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100201.HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100203.SokyuHikazeiNenkinBatchParameter;
 import jp.co.ndensan.reams.db.dbd.definition.core.syorijyoutaicode.SyoriJyoutaiCode;

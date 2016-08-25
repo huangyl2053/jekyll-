@@ -191,4 +191,5 @@ public class DbV1001HihokenshaDaichoAliveDac {
                 where(eq(hihokenshaNo, 被保険者番号)).
                 toObject(DbV1001HihokenshaDaichoEntity.class);
     }
+
 }

@@ -4,17 +4,24 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210031;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter のクラスファイル 
- * 
- * @author 自動生成
+ * 画面設計_DBBGM21004_段階別被保険者数一覧表作成
+ *
+ * @reamsid_L DBB-1820-010 chenyadong
  */
 public class ShotokuDankaibetsuHihokenshaSuIchiranBatchParameterDiv extends PanelBatchParameter {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
@@ -98,7 +105,7 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranBatchParameterDiv extends Pane
     }
 
     @JsonIgnore
-    public void  setDdlChoteiNendo(DropDownList ddlChoteiNendo) {
+    public void setDdlChoteiNendo(DropDownList ddlChoteiNendo) {
         this.getShotokuDankaibetsuHihokenshaSuIchiranShoriNaiyo().setDdlChoteiNendo(ddlChoteiNendo);
     }
 
@@ -108,7 +115,7 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranBatchParameterDiv extends Pane
     }
 
     @JsonIgnore
-    public void  setTxtHonsanteiShoriYMD(TextBoxDate txtHonsanteiShoriYMD) {
+    public void setTxtHonsanteiShoriYMD(TextBoxDate txtHonsanteiShoriYMD) {
         this.getShotokuDankaibetsuHihokenshaSuIchiranShoriNaiyo().setTxtHonsanteiShoriYMD(txtHonsanteiShoriYMD);
     }
 
@@ -118,7 +125,7 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranBatchParameterDiv extends Pane
     }
 
     @JsonIgnore
-    public void  setRadShichoson(RadioButton radShichoson) {
+    public void setRadShichoson(RadioButton radShichoson) {
         this.getShichoshonSelect().setRadShichoson(radShichoson);
     }
 
@@ -128,7 +135,7 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranBatchParameterDiv extends Pane
     }
 
     @JsonIgnore
-    public void  setBtnShichosonSelect(ButtonDialog btnShichosonSelect) {
+    public void setBtnShichosonSelect(ButtonDialog btnShichosonSelect) {
         this.getShichoshonSelect().setBtnShichosonSelect(btnShichosonSelect);
     }
 
@@ -138,7 +145,7 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranBatchParameterDiv extends Pane
     }
 
     @JsonIgnore
-    public void  setTxtHidden(TextBox txtHidden) {
+    public void setTxtHidden(TextBox txtHidden) {
         this.getShichoshonSelect().setTxtHidden(txtHidden);
     }
 
@@ -148,7 +155,7 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranBatchParameterDiv extends Pane
     }
 
     @JsonIgnore
-    public void  setChkChosaJoken(CheckBoxList chkChosaJoken) {
+    public void setChkChosaJoken(CheckBoxList chkChosaJoken) {
         this.getChushutsuJoken().setChkChosaJoken(chkChosaJoken);
     }
 
@@ -158,7 +165,7 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranBatchParameterDiv extends Pane
     }
 
     @JsonIgnore
-    public void  setTxtShikakuKijunYMD(TextBoxDate txtShikakuKijunYMD) {
+    public void setTxtShikakuKijunYMD(TextBoxDate txtShikakuKijunYMD) {
         this.getChushutsuJoken().setTxtShikakuKijunYMD(txtShikakuKijunYMD);
     }
 
@@ -168,7 +175,7 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranBatchParameterDiv extends Pane
     }
 
     @JsonIgnore
-    public void  setTxtChoteiKijunYMD(TextBoxDate txtChoteiKijunYMD) {
+    public void setTxtChoteiKijunYMD(TextBoxDate txtChoteiKijunYMD) {
         this.getChushutsuJoken().setTxtChoteiKijunYMD(txtChoteiKijunYMD);
     }
 

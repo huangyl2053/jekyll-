@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.ur.urc.entity.db.basic.noki.nokikanri.UrT0729NokiKanr
 import jp.co.ndensan.reams.ur.urc.service.core.noki.nokikanri.NokiManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -38,6 +40,7 @@ public class ShinNendoKanriJohoSakuseiManager {
     private final ShoriDateKanriManager 処理日付管理manager;
     private final ChohyoSeigyoHanyoManager 帳票制御汎用manager;
     private final MapperProvider mapperProvider;
+    private static final RString 調定年度 = new RString("20140401");
 
     /**
      * コンストラクタです。
@@ -85,8 +88,6 @@ public class ShinNendoKanriJohoSakuseiManager {
             for (ShinNendoKanriJohoSakuseiEntity item : resultList) {
                 mapper.insertカスタムコンフィグByKey(item);
             }
-        } else {
-            requireNonNull(resultList, UrSystemErrorMessages.値がnull.getReplacedMessage("resultList"));
         }
         NokiManager 納期管理 = new NokiManager();
         List<Noki> list = 納期管理.create翌年度納期(ShunoKamokuShubetsu.介護保険料_特別徴収,
@@ -98,18 +99,25 @@ public class ShinNendoKanriJohoSakuseiManager {
         for (Noki item : list) {
             UrT0729NokiKanriEntity entity = item.toEntity();
             entity.setState(EntityDataState.Added);
+            //TODO QA.1341
+            entity.setTsuchishoHakkoYMD(new RDate(調定年度.toString()));
             納期管理.save納期(new Noki(entity));
         }
         for (Noki item : list現年度) {
             UrT0729NokiKanriEntity entity = item.toEntity();
             entity.setState(EntityDataState.Added);
+            //TODO QA.1341
+            entity.setTsuchishoHakkoYMD(new RDate(調定年度.toString()));
             納期管理.save納期(new Noki(entity));
         }
         for (Noki item : list過年度) {
             UrT0729NokiKanriEntity entity = item.toEntity();
             entity.setState(EntityDataState.Added);
+            //TODO QA.1341
+            entity.setTsuchishoHakkoYMD(new RDate(調定年度.toString()));
             納期管理.save納期(new Noki(entity));
         }
+
     }
 
 }

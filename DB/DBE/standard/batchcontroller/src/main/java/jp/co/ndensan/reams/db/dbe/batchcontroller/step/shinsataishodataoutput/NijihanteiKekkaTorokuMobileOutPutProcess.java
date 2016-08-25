@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsataishodataoutput.ShinsaTai
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinsataishodataoutput.ShinsaTaishoDataOutPutProcessParammeter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.NijihanteiKekkaTorokuMobileEucCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.NijihanteiKekkaTorokuMobileRelateEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -19,20 +21,19 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 二次判定結果登録用データ（モバイル）のCSV出力処理クラスです。
@@ -48,15 +49,14 @@ public class NijihanteiKekkaTorokuMobileOutPutProcess extends BatchProcessBase<N
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private ShinsaTaishoDataOutPutProcessParammeter processParamter;
-    private FileSpoolManager manager;
     private RString eucFilePath;
+    RString csvFileName = DbBusinessConfig.get(ConfigNameDBE.審査結果入力用データ_モバイル審査結果, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
     @BatchWriter
     private EucCsvWriter<NijihanteiKekkaTorokuMobileEucCsvEntity> eucCsvWriter;
 
     @Override
     protected void initialize() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("NijihanteiKekkaTorokuMobile.csv"));
+
     }
 
     @Override
@@ -66,12 +66,14 @@ public class NijihanteiKekkaTorokuMobileOutPutProcess extends BatchProcessBase<N
 
     @Override
     protected void createWriter() {
+        RString spoolWorkPath = processParamter.getSpoolWorkPath();
+        eucFilePath = Path.combinePath(spoolWorkPath, csvFileName);
         eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.SJIS).
                 setNewLine(NewLine.CRLF).
-                hasHeader(false).
+                hasHeader(true).
                 build();
     }
 
@@ -90,7 +92,6 @@ public class NijihanteiKekkaTorokuMobileOutPutProcess extends BatchProcessBase<N
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
-        manager.spool(eucFilePath);
         outputJokenhyoFactory();
         new KoueMashite().codeMasterEucCsv();
 

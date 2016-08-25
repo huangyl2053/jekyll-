@@ -539,6 +539,22 @@ public class ShinchokuDataOutputBusiness {
         eucEntity.set要介護１の場合の状態像(nullToEmpty(entity.getZenYokaigoKubunCode()));
         eucEntity.set現在のサービス区分コード(nullToEmpty(entity.getServiceKubunCode()));
         eucEntity.set現在の状況(nullToEmpty(entity.getRemban()));
+        if (entity.getKoroshoIfShikibetsuCode() != null
+                && (厚労省IF識別コード_99A.equals(entity.getKoroshoIfShikibetsuCode())
+                || (厚労省IF識別コード_02A.equals(entity.getKoroshoIfShikibetsuCode())))) {
+            eucEntity.set意見書短期記憶(nullToEmpty(entity.get主治医一時remban16()));
+            eucEntity.set意見書認知能力(nullToEmpty(entity.get主治医一時remban17()));
+            eucEntity.set意見書伝達能力(nullToEmpty(entity.get主治医一時remban18()));
+            eucEntity.set意見書食事行為(nullToEmpty(entity.get主治医一時remban19()));
+            eucEntity.set意見書認知症高齢者の日常生活自立度(nullToEmpty(entity.get主治医一時remban15()));
+
+        } else {
+            eucEntity.set意見書短期記憶(nullToEmpty(entity.get主治医一時remban15()));
+            eucEntity.set意見書認知能力(nullToEmpty(entity.get主治医一時remban16()));
+            eucEntity.set意見書伝達能力(nullToEmpty(entity.get主治医一時remban17()));
+            eucEntity.set意見書食事行為(nullToEmpty(entity.get主治医一時remban69()));
+            eucEntity.set意見書認知症高齢者の日常生活自立度(nullToEmpty(entity.get主治医一時remban14()));
+        }
         if (ServiceKubunCode.介護給付サービス.getコード().equals(entity.getServiceKubunCode())) {
             介護給付サービス(entity, eucEntity);
         }
@@ -593,7 +609,7 @@ public class ShinchokuDataOutputBusiness {
         eucEntity.set前回結果_現在のサービス区分コード(nullToEmpty(entity.get前回serviceKubunCode()));
         eucEntity.set前回結果_現在の状況(nullToEmpty(entity.getPo2remban()));
         eucEntity.set前回識別コード(nullToEmpty(entity.get前回koroshoIfShikibetsuCode()));
-        eucEntity.set認定審査会意見等(nullToEmpty(entity.get前回ninteishinsakaiIkenShurui()));
+        eucEntity.set認定審査会意見等(nullToEmpty(entity.get前回shinsakaiIken()));
         eucEntity.setコメント等(nullToEmpty(entity.get前回shinsakaiMemo()));
         認定調査票時テーブル(entity, eucEntity);
         前回認定調査票時テーブル(entity, eucEntity);
@@ -813,22 +829,6 @@ public class ShinchokuDataOutputBusiness {
     }
 
     private void 前回認定調査票時テーブル(ShinchokuDataOutputRelateEntity entity, ShinchokuDataOutputEucCsvEntity eucEntity) {
-        if (ServiceKubunCode.予防給付サービス.getコード().equals(entity.get前回serviceKubunCode())) {
-            eucEntity.set前回結果_訪問介護ホームヘルプサービス(nullToEmpty(entity.get前回サービスremban1()));
-            eucEntity.set前回結果_訪問入浴介護(nullToEmpty(entity.get前回サービスremban2()));
-            eucEntity.set前回結果_訪問看護(nullToEmpty(entity.get前回サービスremban3()));
-            eucEntity.set前回結果_訪問リハビリテーション(nullToEmpty(entity.get前回サービスremban4()));
-            eucEntity.set前回結果_居宅療養管理指導(nullToEmpty(entity.get前回サービスremban5()));
-            eucEntity.set前回結果_通所介護デイサービス(nullToEmpty(entity.get前回サービスremban6()));
-            eucEntity.set前回結果_通所リハビリテーション(nullToEmpty(entity.get前回サービスremban7()));
-            eucEntity.set前回結果_介護予防訪問介護ホームヘルプサービス(entity.getサービスremban1());
-            eucEntity.set前回結果_介護予防訪問入浴介護(entity.getサービスremban2());
-            eucEntity.set前回結果_介護予防訪問看護(entity.getサービスremban3());
-            eucEntity.set前回結果_介護予防訪問リハビリテーション(entity.getサービスremban4());
-            eucEntity.set前回結果_介護予防居宅療養管理指導(entity.getサービスremban5());
-            eucEntity.set前回結果_介護予防通所介護デイサービス(entity.getサービスremban6());
-            eucEntity.set介護予防通所リハビリテーション(entity.getサービスremban7());
-        }
         if (entity.get前回koroshoIfShikibetsuCode() != null
                 && (厚労省IF識別コード_99A.equals(entity.get前回koroshoIfShikibetsuCode())
                 || (厚労省IF識別コード_02A.equals(entity.get前回koroshoIfShikibetsuCode()))

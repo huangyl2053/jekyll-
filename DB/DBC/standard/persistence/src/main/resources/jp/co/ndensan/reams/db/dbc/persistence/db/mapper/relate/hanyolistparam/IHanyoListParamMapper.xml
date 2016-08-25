@@ -121,10 +121,6 @@
         <if test="!is対象年度NULL">
             AND "nendo" = #{対象年度}
         </if>
-        <!--TODO QA1852 下記の場合、検索条件の確認-->
-        <!--        <if test="is削除含める">
-            AND "isDeleted" = false
-        </if>-->
         <if test="isデータ種別_適用決定">
             AND "santeiKijungaku" <![CDATA[<>]]> 0
             <if test="is抽出区分_最新履歴">

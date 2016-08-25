@@ -76,7 +76,7 @@ public class TsukibetsuHanteiTaishoshaTempProcess extends BatchProcessBase<Tsuki
         HanteiTaishoshaTempEntity insertEntity = new HanteiTaishoshaTempEntity();
         RYear taishoNendo = parameter.getTaishoNendo();
         insertEntity.setTaishoNendo(taishoNendo == null ? null : new FlexibleYear(taishoNendo.toDateString()));
-        RString taishoTsuki = parameter.getTaishoGetsu().get(parameter.getIndex());
+        RString taishoTsuki = parameter.getTaishoGetsu().get(parameter.getHanteiKijunbiIndex());
         insertEntity.setTaishoTsuki(taishoTsuki);
         insertEntity.setHihokenshaNo(entity.get被保険者番号());
         if (被保険者台帳 != null) {

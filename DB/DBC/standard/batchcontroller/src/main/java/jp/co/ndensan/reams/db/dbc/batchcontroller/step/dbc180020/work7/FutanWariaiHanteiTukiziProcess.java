@@ -167,7 +167,7 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
         BatchEntityCreatedTempTableWriter writer = writers.get(対象月Index);
         RiyoshaFutanWariaiMeisaiTempEntity insertTemp = new RiyoshaFutanWariaiMeisaiTempEntity();
         insertTemp.setNendo(nendo);
-        insertTemp.setHihokenshaNo(beforeNo);
+        insertTemp.setHihokenshaNo(判定対象者.getHihokenshaNo());
         insertTemp.setEdaNo(対象月Index + 1);
         insertTemp.setShikakuKubun(判定対象者.getHihokenshaKubunCode());
         insertTemp.setYukoKaishiYMD(FlexibleDate.EMPTY);
@@ -175,6 +175,7 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
         insertTemp.setHonninGoukeiShotokuGaku(判定対象者.getGokeiShotokuGaku());
         insertTemp.setSetaiIchigouHihokenshaSu(レコード数);
         insertTemp.setKoseiJiyu(RString.EMPTY);
+        insertTemp.setSetaiCd(判定対象者.getSetaiCode());
         insertTemp.setNinteiYukoKaishiDate(判定対象者.getNinteiYukoKaishiDate());
         insertTemp.setAtenaIdobi(判定対象者.getAtenaIdobi());
         if (生活保護該当情報 != null) {
@@ -190,6 +191,7 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
         writer.insert(insertTemp);
         if (taishoTsuki.equals(util.getTsuki(parameter.getKijunbi()))) {
             for (int i = 対象月Index + 1; i < NUM12; i++) {
+                insertTemp.setEdaNo(i + 1);
                 writer = writers.get(i);
                 writer.insert(insertTemp);
             }
@@ -205,6 +207,8 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
                 insertKonkyoTemp.setEdaNo(i + 1);
                 if (世帯員情報 != null) {
                     insertKonkyoTemp.setSetaiinHihokenshaNo(世帯員情報.getHihokenshaNo());
+                } else {
+                    insertKonkyoTemp.setSetaiinHihokenshaNo(HihokenshaNo.EMPTY);
                 }
                 if (所得管理 != null) {
                     insertKonkyoTemp.setSetaiinShotokuRirekiNo(new Decimal(所得管理.getMotoRirekiNo()));

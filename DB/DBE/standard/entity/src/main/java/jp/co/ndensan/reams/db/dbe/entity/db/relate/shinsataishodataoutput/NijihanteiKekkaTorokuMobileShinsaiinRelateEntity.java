@@ -30,13 +30,13 @@ public class NijihanteiKekkaTorokuMobileShinsaiinRelateEntity {
     private RString 介護認定審査会資料作成年月日;
     private RString 介護認定審査会進捗状況;
     private RString 介護認定審査会割当済み人数;
-    private RString 資料作成済フラグ;
+    private boolean 資料作成済フラグ;
     private RString 介護認定審査会委員コード;
     private RString 介護認定審査会開催年月日;
     private RString 介護認定審査会議長区分コード;
-    private RString 委員出席;
-    private RString 委員遅刻有無;
+    private boolean 委員出席;
+    private boolean 委員遅刻有無;
     private RString 委員出席時間;
-    private RString 委員早退有無;
+    private boolean 委員早退有無;
     private RString 委員退席時間;
 }

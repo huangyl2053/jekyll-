@@ -12,20 +12,30 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 社会福祉法人等軽減の通知書発行の一時テーブルEntity項目定義クラスです。
  *
- * @author admin
+ * @reamsid_L DBD-3981-050 jinge
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShafukuKeigenKetteiTempTableEntity extends DbTableEntityBase<ShafukuKeigenKetteiTempTableEntity> implements IDbAccessable {
 
-    public static final RString TABLE_NAME = new RString("ShafukuKeigenKetteiTempTable");
+    /**
+     * 社会福祉法人等軽減の通知書発行一時テーブル名
+     */
+    @TableName
+    public static final RString TABLE_NAME;
+
+    static {
+        TABLE_NAME = new RString("ShafukuKeigenKetteiTempTable");
+    }
 
     @TempTableColumnOrder(1)
     private HihokenshaNo hihokenshaNo;

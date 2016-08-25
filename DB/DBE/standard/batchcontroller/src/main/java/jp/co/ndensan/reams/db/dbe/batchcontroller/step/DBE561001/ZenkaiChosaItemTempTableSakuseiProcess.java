@@ -76,6 +76,7 @@ public class ZenkaiChosaItemTempTableSakuseiProcess extends BatchKeyBreakBase<Ze
         isデータあり = true;
         tempEntity.setShinseishoKanriNo(entity.getShinseishoKanriNo());
         tempEntity.setKoroshoIfShikibetsuCode(entity.getKoroshoIfShikibetsuCode());
+        tempEntity.setZenkaiShinseishoKanriNo(entity.getZenkaiShinseishoKanriNo());
         new ZenkaiChosaItemTempTableEditorEntity(tempEntity).set前回調査項目(entity);
     }
 
