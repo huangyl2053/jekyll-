@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1060001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd1060001.FutanGendogakuIkkatsuHakkoBatchParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd1060001.ShakaiFukushiHojinKeigenIkkatsuHakkoBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd1200902.FutanGenndoGakuTsuuchishoIkkatsuBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd1200902.ShakaiFukushiHoujinnKeigenBatchParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1060001.GemmenGengakuShoIkkatsuMainDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1060001.GemmenGengakuShoIkkatsuMainHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1060001.GemmenGengakuShoIkkatsuMainValidationHandler;
@@ -111,7 +111,7 @@ public class GemmenGengakuShoIkkatsuMain {
      * @param div GemmenGengakuShoIkkatsuMainDiv
      * @return ResponseData<BatchParameterMap>
      */
-    public ResponseData<FutanGendogakuIkkatsuHakkoBatchParameter> onClick_btnfutanKogakuParamSave(GemmenGengakuShoIkkatsuMainDiv div) {
+    public ResponseData<FutanGenndoGakuTsuuchishoIkkatsuBatchParameter> onClick_btnfutanKogakuParamSave(GemmenGengakuShoIkkatsuMainDiv div) {
 //        BatchParameterManager manager = new BatchParameterManager(SubGyomuCode.DBD介護受給, 負担帳票のID);
 //        BatchParameterMap data = new BatchParameterMap(getHandler(div).onClick_btnJikkouFtanSave());
 //        manager.setParameterByBatch(data); //todo QA
@@ -125,7 +125,7 @@ public class GemmenGengakuShoIkkatsuMain {
      * @param div GemmenGengakuShoIkkatsuMainDiv
      * @return ResponseData<BatchParameterMap>
      */
-    public ResponseData<ShakaiFukushiHojinKeigenIkkatsuHakkoBatchParameter> onClick_btnshakaiKogakuParamSave(GemmenGengakuShoIkkatsuMainDiv div) {
+    public ResponseData<ShakaiFukushiHoujinnKeigenBatchParameter> onClick_btnshakaiKogakuParamSave(GemmenGengakuShoIkkatsuMainDiv div) {
 //        BatchParameterManager manager = new BatchParameterManager(SubGyomuCode.DBD介護受給, 社会福祉のBATCH_ID);
 //        BatchParameterMap data = new BatchParameterMap(getHandler(div).onClick_btnJikkouSkaiSave());
 //        manager.setParameterByBatch(data); //toda QA

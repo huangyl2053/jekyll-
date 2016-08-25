@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd581001.DBD581001Paramet
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5810001.JissiJyokyohyoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5810001.JissiJyokyohyoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5810001.JissiJyokyohyoValidationHandler;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -35,13 +34,12 @@ public class JissiJyokyohyo {
      */
     public ResponseData<JissiJyokyohyoDiv> onLoad(JissiJyokyohyoDiv div) {
         getHandler().onLoad(div);
-        //TODO
-        div.getJokenPanel().getCcdJyuusyoStart().initialize(new LasdecCode("209007"), 0);
-        div.getJokenPanel().getCcdJyuusyoEnd().initialize(new LasdecCode("209007"), 0);
-        div.getJokenPanel().getCcdChikuStart().initialize(new LasdecCode("209007"), 0);
-        div.getJokenPanel().getCcdChikuEnd().initialize(new LasdecCode("209007"), 0);
-        div.getJokenPanel().getCcdGyouseiStart().initialize(new LasdecCode("209007"), 0);
-        div.getJokenPanel().getCcdGyouseiEnd().initialize(new LasdecCode("209007"), 0);
+        div.getJokenPanel().getCcdJyuusyoStart().initialize();
+        div.getJokenPanel().getCcdJyuusyoEnd().initialize();
+        div.getJokenPanel().getCcdChikuStart().initialize();
+        div.getJokenPanel().getCcdChikuEnd().initialize();
+        div.getJokenPanel().getCcdGyouseiStart().initialize();
+        div.getJokenPanel().getCcdGyouseiEnd().initialize();
         return ResponseData.of(div).respond();
     }
 

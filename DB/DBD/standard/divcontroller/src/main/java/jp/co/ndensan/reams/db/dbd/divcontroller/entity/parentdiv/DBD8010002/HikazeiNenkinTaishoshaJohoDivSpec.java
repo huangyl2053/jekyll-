@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.core.syorijyoutaicode.SyoriJyoutaiCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -115,7 +116,17 @@ public enum HikazeiNenkinTaishoshaJohoDivSpec implements IPredicate<HikazeiNenki
 
             return true;
         }
-    };
+    },
+    /**
+     * アップロード済みファイル名チェック。
+     */
+    アップロード済みファイル名チェック {
+        @Override
+        public boolean apply(HikazeiNenkinTaishoshaJohoDiv div) {
+            return !RString.EMPTY.equals(div.getTanitsuTaishoShoriIchiran().getHdnFileName())
+                    && !SharedFile.searchSharedFile(div.getTanitsuTaishoShoriIchiran().getHdnFileName()).isEmpty();
+        }
+    },;
 
     private static final RString 処理_年次 = new RString("年次");
     private static final RString 処理_月次 = new RString("月次");

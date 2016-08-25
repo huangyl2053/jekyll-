@@ -547,10 +547,10 @@
         <result property="前回サービスremban18" column="前回調査票概況調査状況一時テーブル_remban18" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="前回サービスremban19" column="前回調査票概況調査状況一時テーブル_remban19" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="前回サービスremban20" column= "前回調査票概況調査状況一時テーブル_remban20" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="前回serviceJokyoFlag" column="DbT5208Z_serviceJokyoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回serviceJokyoFlag" column="Z_serviceJokyoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="前回koroshoIfShikibetsuCode" column="A2_A2_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="前回shinsakaiIken" column= "N_shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="前回shinsakaiMemo" column= "N_shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回shinsakaiMemo" column= "N_shinsakaiMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
        <select resultOrdered="true" id="get日次進捗データ作成CSV出力" resultMap="resultMap_ShinchokuDataOutputRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinchokudataoutput.ShinchokuDataOutputMybitisParamter" fetchSize="500">
@@ -1059,7 +1059,7 @@
               SELECT
                 P003."remban" AS "P02_remban"
                 , P003."shinseishoKanriNo" AS "P02_shinseishoKanriNo"
-                , T."shinseishoKanriNo"
+                , T."shinseishoKanriNo"  AS "T_shinseishoKanriNo"
               FROM
                 rgdb."DbT5210NinteichosahyoShisetsuRiyo" AS P003
                 , rgdb."DbT5121ShinseiRirekiJoho" AS T 
@@ -1087,7 +1087,7 @@
               ORDER BY
                 P003."remban" 
             ) AS P02 
-              ON A."shinseishoKanriNo" = P02."P02_shinseishoKanriNo" 
+              ON A."shinseishoKanriNo" = P02."T_shinseishoKanriNo" 
             LEFT JOIN
                     "ZenkaiChosaGaikyouJohoTemp" as 前回調査票概況調査状況一時テーブル
              ON A."shinseishoKanriNo" = 前回調査票概況調査状況一時テーブル."shinseishoKanriNo"  

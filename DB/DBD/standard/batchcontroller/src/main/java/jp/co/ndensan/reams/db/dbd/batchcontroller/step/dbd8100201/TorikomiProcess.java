@@ -166,7 +166,7 @@ public class TorikomiProcess extends BatchProcessBase<RString> {
         if (entity != null) {
             data.setDtrekodoKubun(entity.getレコード区分());
             data.setDtshichosonCode(entity.get市町村コード());
-            data.setDtDTnennkinnHokennshaCode(entity.get年金保険者コード());
+            data.setDtnennkinnHokennshaCode(entity.get年金保険者コード());
             data.setDttsuuchiContentCode(entity.get通知内容コード());
             data.setDtyobi1(entity.get予備1());
             data.setDtseidoCode(entity.get制度コード());

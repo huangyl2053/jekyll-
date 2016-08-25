@@ -81,11 +81,21 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
         }
         if (null != iOutputOrder) {
             List<ISetSortItem> 設定項目リスト = this.iOutputOrder.get設定項目リスト();
-            source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
-            source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
-            source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
-            source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-            source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
+            if (設定項目リスト.size() > LISTINDEX_0) {
+                source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
+            }
+            if (設定項目リスト.size() > LISTINDEX_1) {
+                source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
+            }
+            if (設定項目リスト.size() > LISTINDEX_2) {
+                source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
+            }
+            if (設定項目リスト.size() > LISTINDEX_3) {
+                source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
+            }
+            if (設定項目リスト.size() > LISTINDEX_4) {
+                source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
+            }
         }
         source.list_1 = new RString(String.valueOf(index + 1));
     }
@@ -105,12 +115,18 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
                 source.list_3 = new RString("*");
             }
             source.list_4 = this.帳票情報.get被保険者番号().getColumnValue();
-            if (null != 個人情報) {
+            if (null != 個人情報.get名称()) {
                 source.list_5 = this.個人情報.get名称().getName().value();
+            }
+            if (null != 個人情報.get住所()) {
                 source.list_6 = this.個人情報.get住所().get住所();
             }
-            source.list_7 = this.帳票情報.get申請日().wareki().toDateString();
-            source.list_8 = this.帳票情報.get決定日().wareki().toDateString();
+            if (null != this.帳票情報.get申請日()) {
+                source.list_7 = this.帳票情報.get申請日().wareki().toDateString();
+            }
+            if (null != this.帳票情報.get決定日()) {
+                source.list_8 = this.帳票情報.get決定日().wareki().toDateString();
+            }
             source.list_9 = get適用日有効期限();
             if (決定.equals(決定区分承認)) {
                 source.list_10 = new RString("承認");

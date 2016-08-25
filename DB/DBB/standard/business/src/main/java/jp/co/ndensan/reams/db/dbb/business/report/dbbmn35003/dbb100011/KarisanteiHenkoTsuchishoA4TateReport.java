@@ -43,7 +43,10 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
     private final NinshoshaSource ninshoshaSource;
     private final CompKaigoToiawasesakiSource kaigoToiawasesakiSource;
     private final List<KarisanteiHenkoTsuchishoA4TateItem> outputItemList;
-    private final int NUM3 = 3;
+    private final int NUM4 = 4;
+    private final int NUM8 = 8;
+    private final int NUM12 = 12;
+    private final int NUM16 = 16;
 
     /**
      * コンストラクタです。
@@ -92,11 +95,18 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
         if (特徴納期情報リスト != null && !特徴納期情報リスト.isEmpty()) {
             行 = 特徴納期情報リスト.size();
         }
-        行 = 行 > NUM3 ? NUM3 : 行;
         if (普徴納期情報リスト != null && 普徴納期情報リスト.size() > 行) {
             行 = 普徴納期情報リスト.size();
         }
-
+        if (行 < NUM4) {
+            行 = NUM4;
+        } else if (行 > NUM4 && 行 < NUM8) {
+            行 = NUM8;
+        } else if (行 > NUM8 && 行 < NUM12) {
+            行 = NUM12;
+        } else if (行 > NUM12 && 行 < NUM16) {
+            行 = NUM16;
+        }
         for (int index = 0; index < 行; index++) {
             item = new KarisanteiHenkoTsuchishoA4TateItem();
             setLineData(index, item, 編集後仮算定通知書共通情報, 特徴納期情報リスト, 普徴納期情報リスト);

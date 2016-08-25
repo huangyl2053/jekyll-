@@ -133,7 +133,8 @@ public class NinteiShinseiToroku {
 
                 getHandler(div).set医療保険(manager.get医療保険履歴(result.get識別コード()));
 
-                ViewStateHolder.put(ViewStateKeys.モード, getHandler(div).set市町村連絡事項(result.get市町村連絡事項(), true));
+                div.setHdnShichosonRenrakuJiko(result.get市町村連絡事項());
+                getHandler(div).set市町村連絡事項(result.get市町村連絡事項());
 
                 set連絡先(管理番号, div, false);
 
@@ -165,7 +166,6 @@ public class NinteiShinseiToroku {
                 set連絡先(business.get前回申請書管理番号(), div, true);
                 div.setHdnJogaiMode(new RString("入力"));
                 div.setHdnShinseishoKanriNo(RString.EMPTY);
-                ViewStateHolder.put(ViewStateKeys.モード, getHandler(div).set市町村連絡事項(RString.EMPTY, false));
             }
             return ResponseData.of(div).rootTitle(new RString("みなし２号審査受付")).respond();
         }
@@ -237,6 +237,20 @@ public class NinteiShinseiToroku {
     }
 
     /**
+     * 連絡事項ダイアログを表示の前の場合、データを設定します。
+     *
+     * @param div 審査依頼受付／みなし２号審査受付Div
+     * @return ResponseData<NinteiShinseiTorokuDiv>
+     */
+    public ResponseData<NinteiShinseiTorokuDiv> onBefore_btnShichosonRenrakuJiko(NinteiShinseiTorokuDiv div) {
+        NinteiShinseiCodeModel data = new NinteiShinseiCodeModel();
+        data.set連絡事項(div.getHdnShichosonRenrakuJiko());
+        data.set表示モード(new RString("InputMode"));
+        ViewStateHolder.put(ViewStateKeys.モード, data);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 連絡事項ダイアログを閉じるの場合、データを設定します。
      *
      * @param div 審査依頼受付／みなし２号審査受付Div
@@ -246,6 +260,7 @@ public class NinteiShinseiToroku {
         NinteiShinseiCodeModel data = ViewStateHolder.get(ViewStateKeys.モード, NinteiShinseiCodeModel.class);
         if (data != null && !RString.isNullOrEmpty(data.get連絡事項())) {
             div.getBtnShichosonRenrakuJiko().setIconNameEnum(IconName.Complete);
+            div.setHdnShichosonRenrakuJiko(data.get連絡事項());
         }
         return ResponseData.of(div).respond();
     }
@@ -425,9 +440,8 @@ public class NinteiShinseiToroku {
         shinseiJohoBuilder.set訪問調査先住所(div.getTxtJusho().getDomain());
         shinseiJohoBuilder.set訪問調査先名称(new AtenaMeisho(div.getTxtChosasakiName().getValue()));
         shinseiJohoBuilder.set訪問調査先電話番号(div.getTxtTelNo().getDomain());
-        NinteiShinseiCodeModel data = ViewStateHolder.get(ViewStateKeys.モード, NinteiShinseiCodeModel.class);
-        if (data != null && !RString.isNullOrEmpty(data.get連絡事項())) {
-            shinseiJohoBuilder.set市町村連絡事項(data.get連絡事項());
+        if (!RString.isNullOrEmpty(div.getHdnShichosonRenrakuJiko())) {
+            shinseiJohoBuilder.set市町村連絡事項(div.getHdnShichosonRenrakuJiko());
         }
         shinseiJohoBuilder.set延期決定年月日(rDateTOFlexDate(div.getTxtEnkiKetteiYMD().getValue()));
         shinseiJohoBuilder.set延期理由(div.getTxtEnkiRiyu().getValue());
@@ -537,9 +551,8 @@ public class NinteiShinseiToroku {
         shinseiJohoBuilder.set訪問調査先住所(div.getTxtJusho().getDomain());
         shinseiJohoBuilder.set訪問調査先名称(new AtenaMeisho(div.getTxtChosasakiName().getValue()));
         shinseiJohoBuilder.set訪問調査先電話番号(div.getTxtTelNo().getDomain());
-        NinteiShinseiCodeModel data = ViewStateHolder.get(ViewStateKeys.モード, NinteiShinseiCodeModel.class);
-        if (data != null && !RString.isNullOrEmpty(data.get連絡事項())) {
-            shinseiJohoBuilder.set市町村連絡事項(data.get連絡事項());
+        if (!RString.isNullOrEmpty(div.getHdnShichosonRenrakuJiko())) {
+            shinseiJohoBuilder.set市町村連絡事項(div.getHdnShichosonRenrakuJiko());
         }
         shinseiJohoBuilder.set処理状態区分(new Code(ShoriJotaiKubun.通常.getコード()));
         shinseiJohoBuilder.set審査継続区分(false);

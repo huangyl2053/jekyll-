@@ -24,10 +24,13 @@ public class ItziHanteiShoriBatchParamter extends BatchParameterBase {
 
     private static final String SHINSEISHOLANRINOLIST = "shinseishoKanriNoList";
     private static final String BATTISHUTURYOKUKUBUN = "battishuturyokukubun";
+    private static final String FILEPATH = "filePath";
     @BatchParameter(key = SHINSEISHOLANRINOLIST, name = "申請書管理番号リスト")
     private List<RString> shinseishoKanriNoList;
     @BatchParameter(key = BATTISHUTURYOKUKUBUN, name = "バッチ出力区分")
     private RString battishuturyokukubun;
+    @BatchParameter(key = FILEPATH, name = "込ファイルパス")
+    private RString filePath;
 
     /**
      * バッチ設計_DBE309001_一次判定IF作成のMybatisパラメータークラス作成
@@ -36,6 +39,6 @@ public class ItziHanteiShoriBatchParamter extends BatchParameterBase {
      */
     public ItziHanteiShoriProcessParamter toProcessParameter() {
         return new ItziHanteiShoriProcessParamter(shinseishoKanriNoList,
-                battishuturyokukubun);
+                battishuturyokukubun, filePath);
     }
 }

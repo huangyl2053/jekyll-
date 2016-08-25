@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class DbT4014RiyoshaFutangakuGengakuDac {
 
     private static final RString 定数_いち = new RString("01");
+    private static final RString 被保険者番号NEW = new RString("被保険者番号");
 
     @InjectSession
     private SqlSession session;
@@ -62,7 +63,7 @@ public class DbT4014RiyoshaFutangakuGengakuDac {
             HihokenshaNo 被保険者番号,
             int 履歴番号) throws NullPointerException {
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号NEW.toString()));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -150,7 +151,7 @@ public class DbT4014RiyoshaFutangakuGengakuDac {
      */
     @Transaction
     public int get利用者負担額減免情報の件数(HihokenshaNo 被保険者番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号NEW.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -175,7 +176,7 @@ public class DbT4014RiyoshaFutangakuGengakuDac {
      */
     @Transaction
     public DbT4014RiyoshaFutangakuGengakuEntity get利用者負担額減額(HihokenshaNo 被保険者番号, FlexibleDate 基準日, RString 決定区分) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号NEW.toString()));
         requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準日"));
         requireNonNull(決定区分, UrSystemErrorMessages.値がnull.getReplacedMessage("決定区分"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -203,7 +204,7 @@ public class DbT4014RiyoshaFutangakuGengakuDac {
     @Transaction
     public DbT4014RiyoshaFutangakuGengakuEntity get利用者負担額減額情報(HihokenshaNo 被保険者番号)
             throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号NEW.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().

@@ -82,7 +82,6 @@ public class RiyoshaFutanWariaiSokujiKouseiFinder {
      */
     public List<RString> get履歴番号BY年度(FutanWariaiMybatisParameter parameter) {
         IFutanWariaiMeisaiMapper mapper = mapperProvider.create(IFutanWariaiMeisaiMapper.class);
-        List<RString> 履歴番号list = mapper.select履歴番号BY年度(parameter);
-        return 履歴番号list;
+        return mapper.select履歴番号BY年度(parameter);
     }
 }

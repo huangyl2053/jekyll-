@@ -487,9 +487,9 @@
     <sql id="申請受付件数区分変更のデータ取得" >
         SELECT 
             '0104' AS 取得条件,
-            '000013' AS 年月,
             '000000' AS 市町村コード,
             '000000' AS 市町村名,
+            '000013' AS 年月,
             '1' AS 数量
         UNION
         SELECT
@@ -509,9 +509,9 @@
     <sql id="申請取下げ件数新規のデータ取得" >
         SELECT 
             '0201' AS 取得条件,
-            '000013' AS 年月,
             '000000' AS 市町村コード,
             '000000' AS 市町村名,
+            '000013' AS 年月,
             '1' AS 数量
         UNION
         SELECT
@@ -4920,10 +4920,10 @@
     </sql>
     <sql id="区分変更のデータ取得">
         AND A."jukyuShinseiJiyu"='4'
-        AND A."yoshienshaNinteiShinseiFlag" IS NULL
+        AND A."yoshienshaNinteiShinseiFlag" = FALSE
     </sql>
     <sql id="旧措置のデータ取得2">
-        AND A."kyuSochishaFlag" ='1'
+        AND A."kyuSochishaFlag" = TRUE
     </sql>
     <sql id="新規のデータ取得2">
         AND ((A."jukyuShinseiJiyu"='1'
@@ -4938,7 +4938,7 @@
         OR(A."jukyuShinseiJiyu"='4'
         AND A."yoshienshaNinteiShinseiFlag" = TRUE)
         OR  (A."jukyuShinseiJiyu"='6'))
-        AND A."kyuSochishaFlag" ='1'
+        AND A."kyuSochishaFlag" = TRUE
     </sql>
     <sql id="新規要支援のデータ取得2">
         AND A."jukyuShinseiJiyu"='4'
@@ -4947,43 +4947,43 @@
     <sql id="新規要支援旧措置のデータ取得2">
         AND A."jukyuShinseiJiyu"='4'
         AND A."yoshienshaNinteiShinseiFlag"=TRUE
-        AND A."kyuSochishaFlag" ='1'
+        AND A."kyuSochishaFlag" = TRUE
     </sql>
     <sql id="更新のデータ取得2">
         AND A."jukyuShinseiJiyu"='2'
     </sql>
     <sql id="更新旧措置のデータ取得2">
         AND A."jukyuShinseiJiyu"='2'
-        AND A."kyuSochishaFlag" ='1'    
+        AND A."kyuSochishaFlag" = TRUE    
     </sql>
     <sql id="区分変更のデータ取得2">
         AND A."jukyuShinseiJiyu"='4'
-        AND A."yoshienshaNinteiShinseiFlag" IS NULL
+        AND A."yoshienshaNinteiShinseiFlag" = FALSE
     </sql>
     <sql id="区分変更旧措置のデータ取得2">
         AND A."jukyuShinseiJiyu"='4'
-        AND A."yoshienshaNinteiShinseiFlag" IS NULL
-        AND A."kyuSochishaFlag" ='1'
+        AND A."yoshienshaNinteiShinseiFlag" = FALSE
+        AND A."kyuSochishaFlag" = TRUE
     </sql>
     <sql id="転入のデータ取得2">
         AND A."jukyuShinseiJiyu"='7'
-        AND A."dataKubun"=''
+        AND A."dataKubun" IS NULL
     </sql>
     <sql id="転入旧措置のデータ取得2">
         AND A."jukyuShinseiJiyu"='7'
-        AND A."dataKubun"=''
-        AND A."kyuSochishaFlag" ='1'
+        AND A."dataKubun" IS NULL
+        AND A."kyuSochishaFlag" = TRUE
     </sql>
     <sql id="職権他のデータ取得2">
         AND (A."jukyuShinseiJiyu"='7'
         AND A."dataKubun" IN ('11','12','13','14','15','19'))
-        AND A."dataKubun" IN ('21','22','23','24','25','29')
+        OR A."dataKubun" IN ('21','22','23','24','25','29')
     </sql>
     <sql id="職権他旧措置のデータ取得2">
         AND (A."jukyuShinseiJiyu"='7'
         AND A."dataKubun" IN ('11','12','13','14','15','19'))
-        AND A."dataKubun" IN ('21','22','23','24','25','29')
-        AND A."kyuSochishaFlag" ='1'
+        OR A."dataKubun" IN ('21','22','23','24','25','29')
+        AND A."kyuSochishaFlag" = TRUE
     </sql>
     <sql id="資格喪失のデータ取得2">
         AND (A."shikakuSoshitsuYMD" IS NULL
@@ -4992,6 +4992,6 @@
     <sql id="資格喪失旧措置のデータ取得2">
         AND (A."shikakuSoshitsuYMD" IS NULL
         AND substring(A."shikakuSoshitsuYMD",0,7) = A."ninteiYM")
-        AND A."kyuSochishaFlag" ='1'
+        AND A."kyuSochishaFlag" = TRUE
     </sql>    
 </mapper>

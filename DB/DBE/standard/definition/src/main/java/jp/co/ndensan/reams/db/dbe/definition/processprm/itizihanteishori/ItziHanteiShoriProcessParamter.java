@@ -25,18 +25,22 @@ public class ItziHanteiShoriProcessParamter implements IBatchProcessParameter {
     private final List<RString> shinseishoKanriNoList;
     private final RString battishuturyokukubun;
     private RString イメージ区分;
+    private final RString filePath;
 
     /**
      * コンストラクタです。
      *
      * @param 申請書管理番号リスト List<RString>
      * @param battishuturyokukubun RString
+     * @param filePath RString
      */
     public ItziHanteiShoriProcessParamter(
             List<RString> 申請書管理番号リスト,
-            RString battishuturyokukubun) {
+            RString battishuturyokukubun,
+            RString filePath) {
         this.shinseishoKanriNoList = 申請書管理番号リスト;
         this.battishuturyokukubun = battishuturyokukubun;
+        this.filePath = filePath;
     }
 
     /**

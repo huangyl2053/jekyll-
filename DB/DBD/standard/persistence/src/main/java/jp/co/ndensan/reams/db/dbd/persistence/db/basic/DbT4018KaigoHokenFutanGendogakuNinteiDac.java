@@ -38,6 +38,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbT4018KaigoHokenFutanGendogakuNinteiDac {
 
+    private static final RString 被保険者番号NEW = new RString("被保険者番号");
+
     @InjectSession
     private SqlSession session;
 
@@ -56,7 +58,7 @@ public class DbT4018KaigoHokenFutanGendogakuNinteiDac {
             HihokenshaNo 被保険者番号,
             int 履歴番号) throws NullPointerException {
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号NEW.toString()));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -80,7 +82,7 @@ public class DbT4018KaigoHokenFutanGendogakuNinteiDac {
     @Transaction
     public int get負担限度額認定情報の件数(HihokenshaNo 被保険者番号)
             throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号NEW.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -104,7 +106,7 @@ public class DbT4018KaigoHokenFutanGendogakuNinteiDac {
      */
     @Transaction
     public DbT4018KaigoHokenFutanGendogakuNinteiEntity get利用者負担額減額(HihokenshaNo 被保険者番号, FlexibleDate 基準日, RString 決定区分) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号NEW.toString()));
         requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準日"));
         requireNonNull(決定区分, UrSystemErrorMessages.値がnull.getReplacedMessage("決定区分"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -132,7 +134,7 @@ public class DbT4018KaigoHokenFutanGendogakuNinteiDac {
     @Transaction
     public DbT4018KaigoHokenFutanGendogakuNinteiEntity get負担限度額認定情報(HihokenshaNo 被保険者番号)
             throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号NEW.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().

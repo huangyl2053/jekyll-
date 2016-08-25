@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBD-3981-050 jingge-->
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futanngenndogakuninntei.IShakaiFukushiHoujinnKeigenListMapper">
+<resultMap id="resultMap_IShakaiFukushiHoujinnKeigenListEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.ShakaiFukushiHoujinnKeigenListEntity" autoMapping="true">
+  <result property="hihokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+  <result property="ninteishoHakkoZumi" column="認定証発行済み" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+  <result property="tsuchiHakkoZumi" column="通知書発行済み" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+  <result property="shikibetsuCode" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+  <result property="shinseiYMD" column="申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="ketteiYMD" column="決定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="tekiyoYMD" column="適用日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="yukoKigenYMD" column="有効期限" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="ketteiKubun" column="決定区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+  <result property="riyoshaFutanDankai" column="軽減" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/> 
+  <result property="riyoshaFutanDankai" column="軽減率分子" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+  <result property="riyoshaFutanDankai" column="軽減率分母" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+  <result property="riyoshaFutanDankai" column="居宅サービス限定" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+  <result property="riyoshaFutanDankai" column="居住費食費のみ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+  <result property="riyoshaFutanDankai" column="旧措置者ユニット型個室のみ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+  <result property="shikakuSoshitsuYMD" column="shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+</resultMap>
+ <resultMap id="resultMap_IShafukuKeigenKetteiTempTableEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.temptable.ShafukuKeigenKetteiTempTableEntity" autoMapping="true">
+  <result property="hihokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+  <result property="ninteishoHakkoZumi" column="認定証発行済み" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+  <result property="tsuchiHakkoZumi" column="通知書発行済み" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+  <result property="shikibetsuCode" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+  <result property="shinseiYMD" column="申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="ketteiYMD" column="決定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="tekiyoYMD" column="適用日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="yukoKigenYMD" column="有効期限" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="ketteiKubun" column="決定区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+  <result property="keigenritsu" column="軽減" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/> 
+  <result property="keigenritsu_Bunshi" column="軽減率分子" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+  <result property="keigenritsu_Bumbo" column="軽減率分母" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+  <result property="kyotakuServiceGentei" column="居宅サービス限定" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+  <result property="kyojuhiShokuhiNomi" column="居住費食費のみ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+  <result property="kyusochishaUnitTypeKoshitsuNomi" column="旧措置者ユニット型個室のみ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+</resultMap>
+<select id="get社会福祉法人軽減確認証_決定通知書発行一覧表発行情報"
+        resultMap="resultMap_IShakaiFukushiHoujinnKeigenListEntity"
+        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.ShakaiFukushiHoujinnKeigenListMybatisParameter" fetchSize="500" resultOrdered="true">
+    SELECT
+      "ShafukuKeigenKetteiTempTable"."hihokenshaNo" AS 被保険者番号,
+      "ShafukuKeigenKetteiTempTable"."ninteishoHakkoZumi" AS 認定証発行済み,
+      "ShafukuKeigenKetteiTempTable"."tsuchiHakkoZumi" AS 通知書発行済み,
+      "ShafukuKeigenKetteiTempTable"."shikibetsuCode" AS 識別コード,
+      "ShafukuKeigenKetteiTempTable"."shinseiYMD" AS 申請日,
+      "ShafukuKeigenKetteiTempTable"."ketteiYMD" AS 決定日,
+      "ShafukuKeigenKetteiTempTable"."tekiyoYMD" AS 適用日,
+      "ShafukuKeigenKetteiTempTable"."yukoKigenYMD" AS 有効期限,
+      "ShafukuKeigenKetteiTempTable"."ketteiKubun" AS 決定区分,
+      "ShafukuKeigenKetteiTempTable"."keigenritsu" AS 軽減,
+      "ShafukuKeigenKetteiTempTable"."keigenritsu_Bunshi" AS 軽減率分子,
+      "ShafukuKeigenKetteiTempTable"."keigenritsu_Bumbo" AS 軽減率分母,
+      "ShafukuKeigenKetteiTempTable"."kyotakuServiceGentei" AS 居宅サービス限定,
+      "ShafukuKeigenKetteiTempTable"."kyojuhiShokuhiNomi" AS 居住費食費のみ,
+      "ShafukuKeigenKetteiTempTable"."kyusochishaUnitTypeKoshitsuNomi" AS 旧措置者ユニット型個室のみ,
+      C."shikakuSoshitsuYMD",
+      <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+    FROM
+      "ShafukuKeigenKetteiTempTable"
+    INNER JOIN 
+      rgdb."DbV1001HihokenshaDaicho" AS C
+    ON C."hihokenshaNo" = "ShafukuKeigenKetteiTempTable"."hihokenshaNo"
+    AND C."logicalDeletedFlag" = FALSE
+    INNER JOIN 
+    <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+    AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
+    ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = C."shikibetsuCode"
+    ORDER BY
+      #{出力順}
+
+</select>
+<select id="get社会福祉法人等軽減の通知書発行の一時テーブルEntity"
+        resultMap="resultMap_IShafukuKeigenKetteiTempTableEntity"
+        fetchSize="500" resultOrdered="true">
+    SELECT 
+     "ShafukuKeigenKetteiTempTable"."hihokenshaNo" AS 被保険者番号,
+      "ShafukuKeigenKetteiTempTable"."ninteishoHakkoZumi" AS 認定証発行済み,
+      "ShafukuKeigenKetteiTempTable"."tsuchiHakkoZumi" AS 通知書発行済み,
+      "ShafukuKeigenKetteiTempTable"."shikibetsuCode" AS 識別コード,
+      "ShafukuKeigenKetteiTempTable"."shinseiYMD" AS 申請日,
+      "ShafukuKeigenKetteiTempTable"."ketteiYMD" AS 決定日,
+      "ShafukuKeigenKetteiTempTable"."tekiyoYMD" AS 適用日,
+      "ShafukuKeigenKetteiTempTable"."yukoKigenYMD" AS 有効期限,
+      "ShafukuKeigenKetteiTempTable"."ketteiKubun" AS 決定区分,
+      "ShafukuKeigenKetteiTempTable"."keigenritsu" AS 軽減,
+      "ShafukuKeigenKetteiTempTable"."keigenritsu_Bunshi" AS 軽減率分子,
+      "ShafukuKeigenKetteiTempTable"."keigenritsu_Bumbo" AS 軽減率分母,
+      "ShafukuKeigenKetteiTempTable"."kyotakuServiceGentei" AS 居宅サービス限定,
+      "ShafukuKeigenKetteiTempTable"."kyojuhiShokuhiNomi" AS 居住費食費のみ,
+      "ShafukuKeigenKetteiTempTable"."kyusochishaUnitTypeKoshitsuNomi" AS 旧措置者ユニット型個室のみ
+    FROM "ShafukuKeigenKetteiTempTable"
+</select>
+</mapper>
