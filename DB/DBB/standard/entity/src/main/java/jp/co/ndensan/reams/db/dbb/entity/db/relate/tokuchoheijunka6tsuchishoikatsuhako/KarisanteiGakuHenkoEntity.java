@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0303KinyuKikanShitenEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0310KozaEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 計算後情報、宛名、宛先、口座、納組、年金特徴回付情報を取得するEntityクラスです。
@@ -48,8 +49,8 @@ public class KarisanteiGakuHenkoEntity implements Serializable {
         set納組の全項目(entity);
         set口座の全項目(entity);
         set対象者_追加含む情報_更正後の全項目(entity);
+        entity.setZennendoTokuchoKibetsuKingaku06(new RString("0"));
         return entity;
-
     }
 
     private void set口座の全項目(DbT2002FukaTempTableEntity entity) {
