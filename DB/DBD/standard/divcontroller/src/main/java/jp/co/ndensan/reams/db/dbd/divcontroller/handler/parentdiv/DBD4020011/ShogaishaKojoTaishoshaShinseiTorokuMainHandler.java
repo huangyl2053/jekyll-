@@ -91,7 +91,6 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
     private final RString 対象外 = new RString("対象外");
     private static final Code CODE_0003 = new Code("0003");
     private static final RString KEY0 = new RString("key0");
-    private static final RString KEY_1 = new RString("1");
 
     /**
      * コンストラクタです。

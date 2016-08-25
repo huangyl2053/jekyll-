@@ -15,11 +15,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * SogoSyokai のクラスファイル 
+ * KaigoSikakuTokusou のクラスファイル 
  * 
  * @author 自動生成
  */
-public class SogoSyokaiDiv extends Panel {
+public class KaigoSikakuTokusouDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
