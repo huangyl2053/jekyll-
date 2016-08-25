@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.chohyoikkatsu.TanpyoHakkoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.ShakaiFukushiHoujinnKeigenNinnteiMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -61,24 +62,25 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcessParameter implements IBatch
     /**
      * SQL用パラメターを取得します．
      *
-     * @param psmShikibetsuTaisho psmShikibetsuTaisho
-     * @param psmAtesaki psmAtesaki
+     * @param 被保番号 RString
+     * @param 減免適用開始日 RString
      * @param 出力順 出力順
      * @param 帳票ID 帳票ID
      * @return SQL用パラメター
      */
-    public ShakaiFukushiHoujinnKeigenNinnteiMybatisParameter toShakaiFukushiHoujinnKeigenNinnteiMybatisParameter(RString psmShikibetsuTaisho,
-            RString psmAtesaki,
+    public ShakaiFukushiHoujinnKeigenNinnteiMybatisParameter toShakaiFukushiHoujinnKeigenNinnteiMybatisParameter(
             RString 出力順,
-            RString 帳票ID) {
+            ReportId 帳票ID,
+            RString 被保番号,
+            RString 減免適用開始日) {
         return new ShakaiFukushiHoujinnKeigenNinnteiMybatisParameter(単票発行区分,
                 年度開始日,
                 年度終了日,
                 決定日FROM,
                 決定日TO,
-                psmShikibetsuTaisho,
-                psmAtesaki,
                 出力順,
-                帳票ID);
+                帳票ID,
+                被保番号,
+                減免適用開始日);
     }
 }
