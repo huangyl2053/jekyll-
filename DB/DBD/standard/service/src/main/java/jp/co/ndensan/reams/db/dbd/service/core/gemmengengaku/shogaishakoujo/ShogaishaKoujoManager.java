@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shogaishakoujo;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shogaishakoujo.ShogaishaKoujo;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4038ShogaishaKoujoEntity;
@@ -120,7 +119,7 @@ public class ShogaishaKoujoManager {
     }
 
     /**
-     * 利用者負担額減額{@link ShakaifukuRiyoshaFutanKeigen}を保存します。
+     * 利用者負担額減額{@link ShogaishaKoujo}を保存します。
      *
      * @param 障がい書控除申請登録情報 {@link ShogaishaKoujo}
      * @param 減免減額種類 減免減額種類
