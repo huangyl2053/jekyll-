@@ -1137,7 +1137,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
         出力条件.add(get利用者負担段階());
         出力条件.add(get負担割合区分());
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
-                new RString("DBC701002"),
+                new RString("DBD701006"),
                 導入団体コード,
                 市町村名,
                 ジョブ番号,
