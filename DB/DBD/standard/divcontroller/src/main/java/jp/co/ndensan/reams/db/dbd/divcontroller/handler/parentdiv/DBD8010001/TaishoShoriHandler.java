@@ -171,12 +171,16 @@ public class TaishoShoriHandler {
         for (ShoriDateKanri target : targetList) {
             for (dgTaishoShoriItchiran_Row row : dataList) {
                 if (row.getHdnNendoNaiRenban().equals(target.get年度内連番())) {
-                    if (!target.get処理枝番().equals(ShoriJotaiKubun.未処理.getコード())) {
+                    if (null == target.get処理枝番() || target.get処理枝番().isEmpty()) {
+                        row.setTxtShoriJotai(ShoriJotaiKubun.未処理.get名称());
+                    } else {
                         row.setTxtShoriJotai(ShoriJotaiKubun.toValue(target.get処理枝番()).get名称());
+                    }
+
+                    if (!target.get処理枝番().equals(ShoriJotaiKubun.未処理.getコード())) {
                         YMDHMS 基準日時 = target.get基準日時();
-                        if (null != 基準日時 && !基準日時.isEmpty()) {
-                            row.setTxtShoriNichiji(target.get基準日時().getRDateTime().format和暦("GYY.MM.DD HH:mm:ss"));
-                        }
+                        row.setTxtShoriNichiji(null != 基準日時 && !基準日時.isEmpty()
+                                ? target.get基準日時().getRDateTime().format和暦("GYY.MM.DD HH:mm:ss") : RString.EMPTY);
                     }
                     break;
                 }
