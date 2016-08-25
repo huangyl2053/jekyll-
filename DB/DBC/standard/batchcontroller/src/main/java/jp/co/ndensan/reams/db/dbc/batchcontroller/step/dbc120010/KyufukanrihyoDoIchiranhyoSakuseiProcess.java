@@ -323,6 +323,14 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
         report.writeBy(reportSourceWriter_一覧表);
     }
 
+    private void writeCsvLine(KyufukanrihyoIchiranCSVEntity entity) {
+        if (parameter.get導入形態コード().is広域()) {
+            eucCsvWriter.writeLine(entity);
+        } else {
+            eucCsvWriter.writeLine(entity.to単一());
+        }
+    }
+
     private RString doカンマ編集(Decimal number) {
         if (null == number) {
             return RString.EMPTY;
@@ -399,7 +407,7 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
         if (parameter.get導入形態コード().is広域()) {
             csvEntity.set証記載保険者番号(getColumnValue(被保険者.get証記載保険者番号()));
         }
-        eucCsvWriter.writeLine(csvEntity);
+        writeCsvLine(csvEntity);
         csvEntity = new KyufukanrihyoIchiranCSVEntity();
     }
 
@@ -411,7 +419,7 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
         csvEntity.set短期入所件数(doカンマ編集(new Decimal(件数2)));
         csvEntity.set居宅件数(doカンマ編集(new Decimal(件数3)));
         csvEntity.set合計件数(doカンマ編集(new Decimal(合計件数)));
-        eucCsvWriter.writeLine(csvEntity);
+        writeCsvLine(csvEntity);
         csvEntity = new KyufukanrihyoIchiranCSVEntity();
     }
 

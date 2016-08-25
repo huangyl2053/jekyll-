@@ -87,7 +87,7 @@ public class YokaigoJissiJyokyohyoMybatisParameter implements IMyBatisParameter 
             this.is導入形態コード120 = true;
         }
         this.概況調査テキストイメージ区分 = 概況調査テキストイメージ区分;
-        if (!年齢基準日.isEmpty() && 年齢基準日 != null) {
+        if (年齢基準日 != null && !年齢基準日.isEmpty()) {
             this.年齢基準日 = 年齢基準日;
             this.生年月日From2 = 年齢基準日.minusYear(年齢From);
             this.生年月日To2 = 年齢基準日.minusYear(年齢To);

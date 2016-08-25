@@ -150,6 +150,25 @@ public class ShakaiFukushiHojinKeigenNinteishaListHandler {
         Range<FlexibleDate> range = shakaifukushi.estimate対象期間(flexibleyear, 認定者リスト, 軽減);
         div.getTxtTaishoKikanKaishi().setValue(range.getFrom());
         div.getTxtTaishoKikanShuryo().setValue(range.getTo());
+        if (div.getRadTaishoList().getSelectedIndex() == NO_0) {
+            set認定者(div);
+        } else {
+            set該当者(div);
+        }
+    }
+
+    /**
+     * 「平成17」の変更」の処理です。
+     */
+    public void nendoSeidoKaisei_onchange() {
+        if (div.getRadHeisei17NendoSeidoKaisei().getSelectedIndex() == NO_0) {
+            div.getTxtTaishoKikanKaishi().setValue(new FlexibleDate(平17, NO_10, NO_1));
+            div.getTxtTaishoKikanShuryo().setValue(new FlexibleDate(平18, NO_6, NO_30));
+        }
+        if (div.getRadHeisei17NendoSeidoKaisei().getSelectedIndex() == NO_1) {
+            div.getTxtTaishoKikanKaishi().setValue(new FlexibleDate(平17, NO_6, NO_1));
+            div.getTxtTaishoKikanShuryo().setValue(new FlexibleDate(平17, NO_9, NO_30));
+        }
     }
 
     /**

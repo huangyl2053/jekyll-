@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.definition.message;
 
 import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -30,7 +31,7 @@ public enum DbdQuestionMessages implements IMessageGettable {
     非課税年金再処理確認(9, "\"再処理前\"に変更される処理月があります。再処理前に設定後、再処理を実行すると、"
             + "取込済みの年月の非課税年金対象者情報は全て初期化されます。再処理前に設定してよろしいですか？"),
     処理実行の確認(50, "処理を実行してもよろしいですか？", ButtonSelectPattern.OKCancel);
-    private final String message;
+    private final RString message;
     private final int no;
     private final ButtonSelectPattern buttonSelectPattern;
 
@@ -42,19 +43,19 @@ public enum DbdQuestionMessages implements IMessageGettable {
      */
     private DbdQuestionMessages(int no, String message) {
         this.no = no;
-        this.message = message;
+        this.message = new RString(message);
         this.buttonSelectPattern = ButtonSelectPattern.YesNo;
     }
 
     private DbdQuestionMessages(int no, String message, ButtonSelectPattern buttonSelectPattern) {
         this.no = no;
-        this.message = message;
+        this.message = new RString(message);
         this.buttonSelectPattern = buttonSelectPattern;
     }
 
     @Override
     public Message getMessage() {
-        return new QuestionMessage(toCode("DBDQ", no), message, buttonSelectPattern);
+        return new QuestionMessage(toCode("DBDQ", no), message.toString(), buttonSelectPattern);
     }
 
     /**
@@ -64,6 +65,6 @@ public enum DbdQuestionMessages implements IMessageGettable {
      * @return メッセージ
      */
     public Message getMessage(ButtonSelectPattern pattern) {
-        return new QuestionMessage(toCode("Q", no).toString(), message, pattern);
+        return new QuestionMessage(toCode("Q", no).toString(), message.toString(), pattern);
     }
 }

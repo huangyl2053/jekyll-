@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.definition.message;
 
 import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -27,8 +28,7 @@ public enum DbdWarningMessages implements IMessageGettable {
     非課税年金年次取込確認(6, "選択したファイルが作成されたのは?です。?の年次処理として、指定したファイルの取込を行ってよいですか？"),
     非課税年金月次取込確認(7, "選択したファイルが作成されたのは?です。処理年月：?の月次処理では、通常作成年月：?のファイルを処理します。"
             + "<br>指定したファイルの取込処理を行ってよいですか？");
-
-    private final String message;
+    private final RString message;
     private final int no;
 
     /**
@@ -38,13 +38,13 @@ public enum DbdWarningMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbdWarningMessages(int no, String message) {
-        this.message = message;
+        this.message = new RString(message);
         this.no = no;
     }
 
     @Override
     public Message getMessage() {
-        return new QuestionMessage(toCode("DBDQ", no), message);
+        return new QuestionMessage(toCode("DBDQ", no), message.toString());
     }
 
     /**
@@ -54,6 +54,6 @@ public enum DbdWarningMessages implements IMessageGettable {
      * @return メッセージ
      */
     public Message getMessage(ButtonSelectPattern pattern) {
-        return new WarningMessage(toCode("W", no).toString(), message, pattern);
+        return new WarningMessage(toCode("W", no).toString(), message.toString(), pattern);
     }
 }

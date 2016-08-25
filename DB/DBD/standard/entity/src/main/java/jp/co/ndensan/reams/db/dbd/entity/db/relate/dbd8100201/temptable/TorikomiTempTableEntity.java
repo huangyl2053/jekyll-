@@ -42,7 +42,7 @@ public class TorikomiTempTableEntity extends DbTableEntityBase<TorikomiTempTable
     @TempTableColumnOrder(3)
     private RString dtshichosonCode;
     @TempTableColumnOrder(4)
-    private RString dtDTnennkinnHokennshaCode;
+    private RString dtnennkinnHokennshaCode;
     @TempTableColumnOrder(5)
     private RString dttsuuchiContentCode;
     @TempTableColumnOrder(6)

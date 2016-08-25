@@ -14,11 +14,15 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationDictionary;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -111,7 +115,8 @@ public class TaishoShoriValidationHandler {
 
         RString 処理コード = div.getDgTaishoShoriItchiran().getSelectedItems().get(0).getHdnShoriCode();
         RString 作成年月日 = new FlexibleDate(div.getHdnLine().substring(作成年月日開始位置, 作成年月日終了位置))
-                .wareki().toDateString();
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         RString 作成年月 = div.getHdnLine().substring(作成年月日開始位置, 作成年月終了位置);
         RString 処理年度 = div.getDdlShoriNendo().getSelectedKey();
 
@@ -138,8 +143,10 @@ public class TaishoShoriValidationHandler {
             if (!通常作成年月.equals(作成年月)) {
                 return DbdWarningMessages.非課税年金月次取込確認.getMessage(ButtonSelectPattern.OKCancel).replace(
                         作成年月日.toString(),
-                        new FlexibleYearMonth(処理年月).wareki().toDateString().toString(),
-                        new FlexibleYearMonth(通常作成年月).wareki().toDateString().toString());
+                        new FlexibleYearMonth(処理年月).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().toString(),
+                        new FlexibleYearMonth(通常作成年月).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().toString());
 
             }
         }

@@ -41,7 +41,7 @@ public enum KyufuGengaku1GoDivSpec implements IPredicate<KyufuGengaku1GoDiv> {
                 @Override
                 public boolean apply(KyufuGengaku1GoDiv div) {
                     return div.getTxtGengakuTekiyoKikanShuryoYMD().getValue() != null
-                    || !div.getTxtGengakuTekiyoKikanShuryoYMD().getValue().isEmpty();
+                    && !div.getTxtGengakuTekiyoKikanShuryoYMD().getValue().isEmpty();
                 }
             },
     申請理由未選択 {

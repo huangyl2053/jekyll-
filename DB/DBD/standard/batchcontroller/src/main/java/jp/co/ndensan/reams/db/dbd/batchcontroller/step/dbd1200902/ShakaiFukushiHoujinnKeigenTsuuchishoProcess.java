@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100012.ShakFuksHjRiysFutKgTsKtTsuchishoReport;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100013.HakkoRirekiKoyuJohoDBD100013;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd1200902.FutanGenndoGakuNinnteiListProperty;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100020.FutanGendogakuNinteishoOrderKey;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.ShakaiFukushiHoujinnKeigenTsuuchishoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.ShakaiFukushiHoujinnKeigenTsuuchishoEntity;
@@ -162,7 +162,7 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
 
     @Override
     protected void process(ShakaiFukushiHoujinnKeigenTsuuchishoEntity shaka) {
-        if (!shaka.getHihokenshaNo().isNullOrEmpty() || !shaka.getShikibetsuCode().isNullOrEmpty()) {
+        if (shaka.getShichosonCode() == null || shaka.getShikibetsuCode() == null) {
             tmpTableWriter.insert(create処理(shaka));
         } else {
             tmpTableWriter.update(create処理(shaka));
@@ -192,7 +192,7 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
         order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD100020, reamsLoginID, processParamter.get改頁出力順ID());
         RString 出力順 = RString.EMPTY;
         if (order != null) {
-            出力順 = MyBatisOrderByClauseCreator.create(FutanGenndoGakuNinnteiListProperty.class, order);
+            出力順 = MyBatisOrderByClauseCreator.create(FutanGendogakuNinteishoOrderKey.class, order);
         }
         return 出力順;
     }

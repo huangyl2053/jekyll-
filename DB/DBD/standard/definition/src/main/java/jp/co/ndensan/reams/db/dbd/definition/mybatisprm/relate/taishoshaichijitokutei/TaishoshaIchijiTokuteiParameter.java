@@ -37,12 +37,11 @@ public final class TaishoshaIchijiTokuteiParameter implements IMyBatisParameter 
      * @param 対象期間指定 対象期間指定
      * @param 対象年度の開始年月日 対象年度の開始年月日
      * @param 対象年度の終了年月日 対象年度の終了年月日
-     * *@param 対象リスト 対象リスト
      * @param 旧措置者区分 旧措置者区分
      * @param 基準日 基準日
      * @param 課税判定等基準日 課税判定等基準日
-     * @param 受給者区分
-     * @param 抽出対象
+     * @param 受給者区分 受給者区分
+     * @param 抽出対象 抽出対象
      */
     public TaishoshaIchijiTokuteiParameter(
             int 対象リスト,

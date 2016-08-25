@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.itizihanteiiftorikomi;
 
 import jp.co.ndensan.reams.db.dbe.business.core.itizi.itizihanteiiftorikomi.ItizihanteiIFtoriKomiBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.itizihanteishori.ItziHanteiShoriProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteizumifoutput.IchijiHanteizumIfOutputEucCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.itizihanteiiftorikomi.IchijiHanteiKekkaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -32,6 +33,7 @@ public class ItizihanteiIFtoriKomiProcess extends BatchProcessBase<IchijiHanteiz
 
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private ItizihanteiIFtoriKomiBusiness business;
+    private ItziHanteiShoriProcessParamter paramter;
     private RString filePath;
     private RString 込ファイル名;
     private final int 項目数 = 328;
@@ -51,9 +53,7 @@ public class ItizihanteiIFtoriKomiProcess extends BatchProcessBase<IchijiHanteiz
 
     @Override
     protected IBatchReader createReader() {
-        //TODO csvのパースかありません。
-        //RString spoolWorkPath = manager.getEucOutputDirectry();
-        filePath = new RString("C:\\Users\\soft863\\wanghui\\").concat(込ファイル名);
+        filePath = paramter.getFilePath().concat(込ファイル名);
         CsvReader csvReader = new CsvReader.InstanceBuilder(filePath, IchijiHanteizumIfOutputEucCsvEntity.class)
                 .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS)
                 .hasHeader(false).setNewLine(NewLine.CRLF).build();

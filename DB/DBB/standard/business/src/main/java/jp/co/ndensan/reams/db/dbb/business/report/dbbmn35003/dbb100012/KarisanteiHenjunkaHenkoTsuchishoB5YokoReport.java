@@ -43,7 +43,8 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReport extends Report<Karisan
     private final NinshoshaSource ninshoshaSource;
     private final CompKaigoToiawasesakiSource kaigoToiawasesakiSource;
     private final List<KarisanteiHenjunkaHenkoTsuchishoB5YokoItem> outputItemList;
-    private final int NUM3 = 3;
+    private final int NUM8 = 8;
+    private final int NUM16 = 16;
 
     /**
      * コンストラクタです。
@@ -96,9 +97,13 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReport extends Report<Karisan
         if (特徴納期情報リスト != null && !特徴納期情報リスト.isEmpty()) {
             行 = 特徴納期情報リスト.size();
         }
-        行 = 行 > NUM3 ? NUM3 : 行;
         if (普徴納期情報リスト != null && 普徴納期情報リスト.size() > 行) {
             行 = 普徴納期情報リスト.size();
+        }
+        if (行 < NUM8) {
+            行 = NUM8;
+        } else if (行 > NUM8 && 行 < NUM16) {
+            行 = NUM16;
         }
 
         for (int index = 0; index < 行; index++) {

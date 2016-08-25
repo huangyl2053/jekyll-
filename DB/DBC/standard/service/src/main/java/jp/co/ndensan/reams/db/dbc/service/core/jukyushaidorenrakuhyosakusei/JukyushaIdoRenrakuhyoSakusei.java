@@ -84,6 +84,9 @@ public class JukyushaIdoRenrakuhyoSakusei {
      */
     public JukyushaIdoRenrakuhyoSakuseiRelateEntity 出力用受給者訂正情報Entity(JukyushaIdoRenrakuhyoTorokuEntity 変更後entity) {
         JukyushaIdoRenrakuhyoTorokuEntity 変更前entity = 変更前受給者訂正情報作成(変更後entity);
+        if (変更前entity == null) {
+            return null;
+        }
         JukyushaIdoRenrakuhyoSakuseiRelateEntity relateEntity
                 = new JukyushaIdoRenrakuhyoSakuseiRelateEntity(変更前entity, 変更後entity, new JukyushaIdoRenrakuhyoTorokuEntity());
         relateEntity.get出力用受給者訂正情報Entity().set作成年月日(変更後entity.get作成年月日());
@@ -124,8 +127,7 @@ public class JukyushaIdoRenrakuhyoSakusei {
                 get従来型個室特(), 変更後entity.get従来型個室特()));
         relateEntity.get出力用受給者訂正情報Entity().set従来型個室老療(compareRString(変更前entity.
                 get従来型個室老療(), 変更後entity.get従来型個室老療()));
-        relateEntity.get出力用受給者訂正情報Entity().set多床室(compareRString(変更前entity.
-                get多床室(), 変更後entity.get多床室()));
+        relateEntity.get出力用受給者訂正情報Entity().set多床室(compareRString(変更前entity.get多床室(), 変更後entity.get多床室()));
         relateEntity.get出力用受給者訂正情報Entity().set新１(compareRString(変更前entity.get新１(), 変更後entity.get新１()));
         relateEntity.get出力用受給者訂正情報Entity().set新２(compareRString(変更前entity.get新２(), 変更後entity.get新２()));
         relateEntity.get出力用受給者訂正情報Entity().set新３(compareRString(変更前entity.get新３(), 変更後entity.get新３()));

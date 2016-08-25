@@ -7,8 +7,9 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1200902;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd1200902.FutanGenndoGakuNinnteiListProperty;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100020.FutanGendogakuNinteishoOrderKey;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200019.FutangakuNinteiHakkoIchiranReport;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.FutanGenndoGakuNinnteiListProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.FutanGenndoGakuNinnteiListEntity;
@@ -57,7 +58,6 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futanngenndogakuninntei."
                     + "IFutanGenndoGakuNinnteiListMapper.get負担額認定証_決定通知書発行一覧表発行情報");
-    private List<FutangakuNinteiHakkoIchiranEntity> 負担限度額認定List;
     private static final ReportId ID = new ReportId("DBD200019_FutangakuNinteiHakkoIchiran");
     private static final RString なし = new RString("なし");
     private static final RString 単票発行区分 = new RString("単票発行区分");
@@ -100,11 +100,9 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
 
     @Override
     protected void process(FutanGenndoGakuNinnteiListEntity entity) {
-        負担限度額認定List.add(create(entity));
-        for (FutangakuNinteiHakkoIchiranEntity futan : 負担限度額認定List) {
-            FutangakuNinteiHakkoIchiranReport find = FutangakuNinteiHakkoIchiranReport.createReport(futan, association, order, kojin, i++);
-            find.writeBy(reportSourceWriter);
-        }
+        FutangakuNinteiHakkoIchiranReport find = FutangakuNinteiHakkoIchiranReport.createReport(
+                create(entity), association, order, kojin, i++);
+        find.writeBy(reportSourceWriter);
     }
 
     @Override
@@ -119,7 +117,7 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
 
         RString 出力順 = RString.EMPTY;
         if (order != null) {
-            出力順 = MyBatisOrderByClauseCreator.create(FutanGenndoGakuNinnteiListProperty.class, order);
+            出力順 = MyBatisOrderByClauseCreator.create(FutanGendogakuNinteishoOrderKey.class, order);
         }
         return 出力順;
     }
@@ -132,7 +130,7 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
         data.set決定日(futan.getKetteiYMD());
         data.set適用日(futan.getTekiyoYMD());
         data.set有効期限(futan.getTekiyoYMD());
-        data.set決定(futan.getKetteiKubun());
+        data.set決定(KetteiKubun.toValue(futan.getKetteiKubun()));
         data.set負担段階(futan.getRiyoshaFutanDankai());
         data.set認定証発行フラグ(futan.isNinteishoHakkoZumi());
         data.set通知書発行済み(futan.isTsuchiHakkoZumi());

@@ -50,6 +50,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 非課税年金対象者情報アップロード画面のHandlerです。
@@ -171,12 +172,19 @@ public class TaishoShoriHandler {
         for (ShoriDateKanri target : targetList) {
             for (dgTaishoShoriItchiran_Row row : dataList) {
                 if (row.getHdnNendoNaiRenban().equals(target.get年度内連番())) {
-                    if (!target.get処理枝番().equals(ShoriJotaiKubun.未処理.getコード())) {
+                    if (null == target.get処理枝番() || target.get処理枝番().isEmpty()) {
+                        row.setTxtShoriJotai(ShoriJotaiKubun.未処理.get名称());
+                    } else {
                         row.setTxtShoriJotai(ShoriJotaiKubun.toValue(target.get処理枝番()).get名称());
+                    }
+
+                    if (!target.get処理枝番().equals(ShoriJotaiKubun.未処理.getコード())) {
                         YMDHMS 基準日時 = target.get基準日時();
-                        if (null != 基準日時 && !基準日時.isEmpty()) {
-                            row.setTxtShoriNichiji(target.get基準日時().getRDateTime().format和暦("GYY.MM.DD HH:mm:ss"));
-                        }
+                        row.setTxtShoriNichiji(null != 基準日時 && !基準日時.isEmpty()
+                                ? 基準日時.getDate().wareki().eraType(EraType.KANJI)
+                                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString()
+                                .concat(基準日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
+                                : RString.EMPTY);
                     }
                     break;
                 }
@@ -288,7 +296,7 @@ public class TaishoShoriHandler {
     private RString getFileName() {
         dgTaishoShoriItchiran_Row 一覧対象 = div.getDgTaishoShoriItchiran().getSelectedItems().get(0);
         RStringBuilder build = new RStringBuilder();
-        build.append(一覧対象.getHdnShoriCode().equals(処理_年次) ? 対象ファイル開始_年次 : 対象ファイル開始_月次)
+        build.append(一覧対象.getHdnShoriCode().equals(処理コード_年次) ? 対象ファイル開始_年次 : 対象ファイル開始_月次)
                 .append(div.getDdlShoriNendo().getSelectedKey())
                 .append(一覧対象.getHdnShoriCode())
                 .append(一覧対象.getHdnTukiCode())

@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.IryohokenKanyuJokyo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaDataPassModel;
-import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
@@ -160,20 +159,11 @@ public class NinteiShinseiTorokuHandler {
      * 市町村連絡事項の設定
      *
      * @param 市町村連絡事項 市町村連絡事項
-     * @param flag TRUE：更新の場合、FALSE：新規の場合
-     * @return NinteiShinseiCodeModel 市町村連絡事項
      */
-    public NinteiShinseiCodeModel set市町村連絡事項(RString 市町村連絡事項, boolean flag) {
-        NinteiShinseiCodeModel mode = new NinteiShinseiCodeModel();
-        mode.set連絡事項(市町村連絡事項);
-        if (flag) {
-            if (!RString.isNullOrEmpty(市町村連絡事項)) {
-                div.getBtnShichosonRenrakuJiko().setIconNameEnum(IconName.Check);
-            }
-            mode.set連絡事項(市町村連絡事項);
+    public void set市町村連絡事項(RString 市町村連絡事項) {
+        if (!RString.isNullOrEmpty(市町村連絡事項)) {
+            div.getBtnShichosonRenrakuJiko().setIconNameEnum(IconName.Check);
         }
-        mode.set表示モード(new RString("InputMode"));
-        return mode;
     }
 
     private void setCommonDiv(NinteiShinseiTorokuResult result, ShinseishoKanriNo 管理番号) {

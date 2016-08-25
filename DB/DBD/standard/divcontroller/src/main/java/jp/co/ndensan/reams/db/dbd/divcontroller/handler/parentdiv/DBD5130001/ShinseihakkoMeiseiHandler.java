@@ -44,6 +44,7 @@ public class ShinseihakkoMeiseiHandler {
 //    private final NinteishinseihakkoDiv ninteishinseihakkodiv;
     private static final RString 画面区分 = new RString("2");
     private static final RString 正 = new RString("○");
+    private static final RString 通知文_修正 = new RString("○○");
     private static final long NO_10 = 10;
     private static final int NO_1 = 1;
     private static final int NO_2 = 2;
@@ -146,11 +147,12 @@ public class ShinseihakkoMeiseiHandler {
             if (year.startsWith("昭")) {
                 shinseiShoEntity.set出生元号昭和(正);
             }
-            shinseiShoEntity.set生年月日(kaigoNinteiAtenaInfoDiv.getTxtBirthYMD().getValue().toDateString());
-            shinseiShoEntity.set生年月日(new RString(kaigoNinteiAtenaInfoDiv.getTxtBirthYMD().getValue().toString()));
+            shinseiShoEntity.set生年月日(getパターン9(new FlexibleDate(kaigoNinteiAtenaInfoDiv.getTxtBirthYMD().getValue().toDateString())));
             shinseiShoEntity.set生まれYY(kaigoNinteiAtenaInfoDiv.getTxtBirthYMD().getValue().getYear().toDateString());
-            shinseiShoEntity.set出生月MM(new RString(String.valueOf(kaigoNinteiAtenaInfoDiv.getTxtBirthYMD().getValue().getMonthValue())));
-            shinseiShoEntity.set出生日DD(new RString(String.valueOf(kaigoNinteiAtenaInfoDiv.getTxtBirthYMD().getValue().getDayValue())));
+            shinseiShoEntity.set出生月MM(
+                    new RString(String.valueOf(kaigoNinteiAtenaInfoDiv.getTxtBirthYMD().getValue().getMonthValue())).padZeroToLeft(NO_2));
+            shinseiShoEntity.set出生日DD(
+                    new RString(String.valueOf(kaigoNinteiAtenaInfoDiv.getTxtBirthYMD().getValue().getDayValue())).padZeroToLeft(NO_2));
             shinseiShoEntity.set被保険者名称(kaigoNinteiAtenaInfoDiv.getTxtShimei().getValue());
             RString seibetsuVal = kaigoNinteiAtenaInfoDiv.getTxtSeibetsu().getValue();
             shinseiShoEntity.set性別(seibetsuVal);
@@ -160,12 +162,14 @@ public class ShinseihakkoMeiseiHandler {
                 shinseiShoEntity.set性別女(正);
             }
             shinseiShoEntity.set被保険者名称カナ(manager.getKanaName(new ShikibetsuCode(kaigoNinteiAtenaInfoDiv.getTxtShikiBetsuCode().getValue())));
-            shinseiShoEntity.set郵便番号(kaigoNinteiAtenaInfoDiv.getTxtYubinNo().getValue().getYubinNo());
+            shinseiShoEntity.set郵便番号(kaigoNinteiAtenaInfoDiv.getTxtYubinNo().getValue().getEditedYubinNo());
             shinseiShoEntity.set電話番号(kaigoNinteiAtenaInfoDiv.getTxtTelNo().getDomain().value());
             shinseiShoEntity.set住所(kaigoNinteiAtenaInfoDiv.getTxtJusho().getDomain().value());
-            Map<Integer, RString> 通知文
+            Map<Integer, RString> 通知文MAP
                     = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD501002.getReportId(), KamokuCode.EMPTY, 通知文_項目番号_1);
-            shinseiShoEntity.set通知文(通知文.get(通知文_項目番号_1));
+            RString 通知文 = 通知文MAP.get(通知文_項目番号_1);
+            通知文.replace(通知文_修正, div.getNinteishinseihakko().getCcdKaigoninteiShikakuInfo().getHokensha());
+            shinseiShoEntity.set通知文(通知文);
             if (radShinseiKubunSelectIndex != 0) {
                 shinseiShoEntity = set状態区分(shinseiShoEntity);
             }

@@ -20,8 +20,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class HanteiyouConkyosakuseishoushaiqijiEntity extends DbTableEntityBase<HanteiyouConkyosakuseishoushaiqijiEntity> implements IDbAccessable {
+public final class HanteiyouConkyosakuseishoushaiqijiEntity extends
+        DbTableEntityBase<HanteiyouConkyosakuseishoushaiqijiEntity> implements IDbAccessable {
 
+    /**
+     * テーブル名です。
+     */
     @TableName
     public static final RString TABLE_NAME;
 
