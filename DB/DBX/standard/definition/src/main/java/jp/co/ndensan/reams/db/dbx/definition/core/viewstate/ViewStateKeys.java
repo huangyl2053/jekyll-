@@ -2095,5 +2095,9 @@ public enum ViewStateKeys {
     /**
      * 高額合算支給不支給決定Listです。
      */
-    高額合算支給不支給決定List;
+    高額合算支給不支給決定List,
+    /**
+     * 発行処理IDです。
+     */
+    発行処理ID;
 }
