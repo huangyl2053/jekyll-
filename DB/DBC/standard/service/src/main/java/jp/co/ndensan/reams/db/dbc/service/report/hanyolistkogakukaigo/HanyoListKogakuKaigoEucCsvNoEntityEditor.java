@@ -104,6 +104,8 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
 
     /**
      * コンストラクタです。
+     *
+     * @param システム日付 FlexibleDate
      */
     public HanyoListKogakuKaigoEucCsvNoEntityEditor(FlexibleDate システム日付) {
         this.システム日付 = システム日付;

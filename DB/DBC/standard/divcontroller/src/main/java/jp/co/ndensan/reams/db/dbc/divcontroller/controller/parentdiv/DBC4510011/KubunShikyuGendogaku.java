@@ -35,6 +35,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KubunShikyuGendogaku {
 
+    private static final RString MESSAGEMAIN = new RString("サービス種類の登録が完了しました。");
+    private static final RString MESSAGETAISHO1 = new RString("サービス種類コード：");
+    private static final RString MESSAGETAISHO2 = new RString("サービス名称：");
+
     /**
      * 画面初期化のメソッドます。
      *
@@ -166,6 +170,9 @@ public class KubunShikyuGendogaku {
                 }
             }
             manager.save(result);
+            RString messageTaisho1 = MESSAGETAISHO1.concat(div.getServiceShuruiShousai().getTxtServiceCode().getValue());
+            RString messageTaisho2 = MESSAGETAISHO2.concat(div.getServiceShuruiShousai().getTxtServiceMeisho().getValue());
+            div.getKanryo().getKanryoMessage().setSuccessMessage(MESSAGEMAIN, messageTaisho1, messageTaisho2);
             return ResponseData.of(div).setState(DBC4510011StateName.完了状態);
         }
         return ResponseData.of(div).respond();
@@ -182,6 +189,18 @@ public class KubunShikyuGendogaku {
             KubunShikyuGendogakuDiv div) {
         onLoad(div);
         return ResponseData.of(div).setState(DBC4510011StateName.初期状態);
+    }
+
+    /**
+     * 「サービス種類登録に戻る」ボタン表示制御を設定です。
+     *
+     * @param div KubunShikyuGendogakuDiv
+     * @return ResponseData
+     */
+    public ResponseData<KubunShikyuGendogakuDiv> onStateTransition(
+            KubunShikyuGendogakuDiv div) {
+        getHandler(div).setサービス種類登録に戻るする();
+        return ResponseData.of(div).respond();
     }
 
     /**
