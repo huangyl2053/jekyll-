@@ -17,6 +17,12 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
  */
 public class DBBWF35001 {
 
+    /**
+     * バッチ起動画面で通知書発行が指示された場合、104を実行します。
+     *
+     * @param flowVersion flowVersion
+     * @return 判断結果
+     */
     public BranchPrintTshuchisho branchPrintTshuchisho(int flowVersion) {
         FlowParameters params = FlowParameterAccessor.get();
         if (params.get(new RString("通知書一括発行"), Boolean.class)) {
