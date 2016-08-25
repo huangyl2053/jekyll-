@@ -203,7 +203,7 @@ public class KaigoHokenFutanGendogakuNintei extends
      *
      * @return 境界層該当者区分
      */
-    public boolean get境界層該当者区分() {
+    public boolean is境界層該当者区分() {
         return entity.getKyokaisoGaitoshaKubun();
     }
 
@@ -212,7 +212,7 @@ public class KaigoHokenFutanGendogakuNintei extends
      *
      * @return 激変緩和措置対象者区分
      */
-    public boolean get激変緩和措置対象者区分() {
+    public boolean is激変緩和措置対象者区分() {
         return entity.getGekihenKanwaSochiTaishoshaKubun();
     }
 
@@ -284,7 +284,7 @@ public class KaigoHokenFutanGendogakuNintei extends
      *
      * @return 配偶者の有無
      */
-    public boolean get配偶者の有無() {
+    public boolean is配偶者の有無() {
         return entity.getHaigushaUmuFlag();
     }
 
@@ -410,7 +410,7 @@ public class KaigoHokenFutanGendogakuNintei extends
      *
      * @return 遺族年金受給フラグ
      */
-    public boolean get遺族年金受給フラグ() {
+    public boolean is遺族年金受給フラグ() {
         return entity.getIzokuNenkinJukyuFlag();
     }
 
@@ -419,7 +419,7 @@ public class KaigoHokenFutanGendogakuNintei extends
      *
      * @return 障害年金受給フラグ
      */
-    public boolean get障害年金受給フラグ() {
+    public boolean is障害年金受給フラグ() {
         return entity.getShogaiNenkinJukyuFlag();
     }
 
