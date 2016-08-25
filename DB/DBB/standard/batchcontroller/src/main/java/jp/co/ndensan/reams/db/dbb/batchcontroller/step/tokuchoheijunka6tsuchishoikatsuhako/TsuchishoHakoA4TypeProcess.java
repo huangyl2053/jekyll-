@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchoheijunka6tsuchishoikatsuhako.Dbb100012MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb100013.KarisanteiHenjunkaHenkoTsuchishoA4TateReport;
+import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranProperty;
-import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
@@ -172,10 +172,8 @@ public class TsuchishoHakoA4TypeProcess extends BatchProcessBase<KarisanteiGakuH
             return;
         }
         service.set普徴と特徴(編集後仮算定通知書, entity);
-        List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書List = new ArrayList<>();
-        編集後仮算定通知書List.add(編集後仮算定通知書);
-        TokuChoHeijunkaKariSanteigakuHakkoIchiranReport ichiranReport = new TokuChoHeijunkaKariSanteigakuHakkoIchiranReport(編集後仮算定通知書List,
-                outputOrder, parameter.get帳票作成日時());
+        TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport ichiranReport = new TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport(
+                編集後仮算定通知書, outputOrder, parameter.get帳票作成日時(), 連番);
         ichiranReport.writeBy(reportSourceWriterIchiran);
         csvData = service.csvData作成(編集後仮算定通知書, parameter, 連番, 通知書番号);
         csvWriter.writeLine(csvData);
