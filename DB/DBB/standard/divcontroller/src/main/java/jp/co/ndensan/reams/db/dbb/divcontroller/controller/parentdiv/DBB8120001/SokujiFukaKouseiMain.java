@@ -105,7 +105,7 @@ public class SokujiFukaKouseiMain {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         LockingKey 前排他キー = new LockingKey(DBB_HIHOKENSHANO.concat(被保険者番号.getColumnValue()));
-        if (!RealInitialLocker.tryGetLock(前排他キー)) {
+        if (!RealInitialLocker.tryGetLock(前排他キー) && !ResponseHolder.isReRequest()) {
             throw new PessimisticLockingException();
         }
         List<KoseiZengoFuka> 更正前後賦課のリスト = new ArrayList<>();
