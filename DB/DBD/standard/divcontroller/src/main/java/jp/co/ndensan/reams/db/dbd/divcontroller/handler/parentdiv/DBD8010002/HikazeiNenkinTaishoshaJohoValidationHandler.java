@@ -102,7 +102,8 @@ public class HikazeiNenkinTaishoshaJohoValidationHandler {
     public ValidationMessageControlPairs validateFor処理状態(ValidationMessageControlPairs pairs) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        RString syoriJyotai = div.getDgTanitsuTaishoShoriItchiran().getSelectedItems().get(0).getTxtShoriJotai();
+        RString syoriJyotai = div.getDgTanitsuTaishoShoriItchiran().getSelectedItems().isEmpty()
+                ? new RString("空白") : div.getDgTanitsuTaishoShoriItchiran().getSelectedItems().get(0).getTxtShoriJotai();
         NoInputMessages checkMessage = new NoInputMessages(DbdErrorMessages.処理状態不正, syoriJyotai.toString());
         messages.add(ValidateChain.validateStart(div).ifNot(HikazeiNenkinTaishoshaJohoDivSpec.処理状態チェック)
                 .thenAdd(checkMessage).messages());
@@ -143,7 +144,7 @@ public class HikazeiNenkinTaishoshaJohoValidationHandler {
                 ifNot(HikazeiNenkinTaishoshaJohoDivSpec.アップロードファイル未指定チェック)
                 .thenAdd(checkMessage).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                checkMessage, div.getUplTaishoFuairu()).build().check(messages));
+                checkMessage, div.getFuairuAppurodo().getUplTaishoFuairu()).build().check(messages));
         return pairs;
     }
 
@@ -160,7 +161,7 @@ public class HikazeiNenkinTaishoshaJohoValidationHandler {
         messages.add(ValidateChain.validateStart(div).ifNot(HikazeiNenkinTaishoshaJohoDivSpec.年次ファイル通知内容チェック)
                 .thenAdd(checkMessage).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                checkMessage, div.getUplTaishoFuairu()).build().check(messages));
+                checkMessage, div.getFuairuAppurodo().getUplTaishoFuairu()).build().check(messages));
         return pairs;
     }
 
@@ -178,7 +179,7 @@ public class HikazeiNenkinTaishoshaJohoValidationHandler {
                 ifNot(HikazeiNenkinTaishoshaJohoDivSpec.月次ファイル通知内容チェック)
                 .thenAdd(checkMessage).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                checkMessage, div.getUplTaishoFuairu()).build().check(messages));
+                checkMessage, div.getFuairuAppurodo().getUplTaishoFuairu()).build().check(messages));
         return pairs;
     }
 
