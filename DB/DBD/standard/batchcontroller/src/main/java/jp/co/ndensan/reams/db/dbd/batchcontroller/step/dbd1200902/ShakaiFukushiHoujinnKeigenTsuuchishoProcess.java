@@ -162,7 +162,7 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
 
     @Override
     protected void process(ShakaiFukushiHoujinnKeigenTsuuchishoEntity shaka) {
-        if (shaka.getHihokenshaNo() == null || shaka.getShikibetsuCode() == null) {
+        if (shaka.get識別コード() == null || shaka.get市町村コード() == null) {
             tmpTableWriter.insert(create処理(shaka));
         } else {
             tmpTableWriter.update(create処理(shaka));
