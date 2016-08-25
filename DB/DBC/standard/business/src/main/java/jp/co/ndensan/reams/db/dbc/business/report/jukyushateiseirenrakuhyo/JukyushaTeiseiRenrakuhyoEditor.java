@@ -83,12 +83,12 @@ public class JukyushaTeiseiRenrakuhyoEditor implements IJukyushaTeiseiRenrakuhyo
         source.tashoshitsu = 出力用受給者訂正情報Entity.get多床室();
         source.shin1 = 出力用受給者訂正情報Entity.get新１();
         source.shin2 = 出力用受給者訂正情報Entity.get新２();
-        source.Shin3 = 出力用受給者訂正情報Entity.get新３();
+        source.shin3 = 出力用受給者訂正情報Entity.get新３();
         source.koikiHokenshaNO = 出力用受給者訂正情報Entity.get広域保険者番号();
         source.rokenShichosonNo = 出力用受給者訂正情報Entity.get老人保健市町村番号();
         source.rokenJukyushaNO = 出力用受給者訂正情報Entity.get老人保健受給者番号();
         source.shaKyufuritsu = 出力用受給者訂正情報Entity.get軽減率();
-        source.ShokiboKyotakuUmu = new RString(出力用受給者訂正情報Entity.get小規模居宅ｻｰﾋﾞｽ利用().toString());
+        source.shokiboKyotakuUmu = new RString(出力用受給者訂正情報Entity.get小規模居宅ｻｰﾋﾞｽ利用().toString());
         source.nijiYoboTaishoKbn = 出力用受給者訂正情報Entity.get二次予防事業区分();
         source.shinseiShubetsu = 出力用受給者訂正情報Entity.get申請種別();
         source.henkoShinseiKbn = 出力用受給者訂正情報Entity.get変更申請中区分();
@@ -121,8 +121,8 @@ public class JukyushaTeiseiRenrakuhyoEditor implements IJukyushaTeiseiRenrakuhyo
         source.sakuseiYY = get年(出力用受給者訂正情報Entity.get作成年月日());
         source.sakuseiMM = get月(出力用受給者訂正情報Entity.get作成年月日());
         source.sakuseiDD = get日(出力用受給者訂正情報Entity.get作成年月日());
-        source.IdoNengo = get年号(出力用受給者訂正情報Entity.get異動年月日());
-        source.IdoYMD = get年月日(出力用受給者訂正情報Entity.get異動年月日());
+        source.idoNengo = get年号(出力用受給者訂正情報Entity.get異動年月日());
+        source.idoYMD = get年月日(出力用受給者訂正情報Entity.get異動年月日());
         source.teiseiNengo = get年号(出力用受給者訂正情報Entity.get訂正年月日());
         source.teiseiYMD = get年月日(出力用受給者訂正情報Entity.get訂正年月日());
 
@@ -172,7 +172,7 @@ public class JukyushaTeiseiRenrakuhyoEditor implements IJukyushaTeiseiRenrakuhyo
         source.hyojunTekiyoEDNengo = get年号(出力用受給者訂正情報Entity.get標準適用終了年月日());
         source.hyojunTekiyoEDYMD = get年月日(出力用受給者訂正情報Entity.get標準適用終了年月日());
         source.shoTekiyoSTNengo = get年号(出力用受給者訂正情報Entity.get償還払化適用開始年月日());
-        source.ShoTekiyoSTYMD = get年月日(出力用受給者訂正情報Entity.get償還払化適用開始年月日());
+        source.shoTekiyoSTYMD = get年月日(出力用受給者訂正情報Entity.get償還払化適用開始年月日());
         source.shoTekiyoEDNengo = get年号(出力用受給者訂正情報Entity.get償還払化適用終了年月日());
         source.shoTekiyoEDYMD = get年月日(出力用受給者訂正情報Entity.get償還払化適用終了年月日());
         source.kyuTekiyoSTNengo = get年号(出力用受給者訂正情報Entity.get給付率引下げ適用開始年月日());
