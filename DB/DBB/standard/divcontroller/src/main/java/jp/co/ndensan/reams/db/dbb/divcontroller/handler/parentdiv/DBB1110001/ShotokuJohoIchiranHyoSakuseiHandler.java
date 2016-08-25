@@ -46,6 +46,7 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_4 = 4;
+    private static final RString TIME_FORMAT = new RString(":");
     private static final RString ゼロ時ゼロ分ゼロ秒 = new RString("000000");
     private static final int INDEX_処理年度 = 1999;
     private static final RString 抽出対象_INDEX_1 = new RString("1");
@@ -290,16 +291,18 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
                 parameter.set市町村コード(構成市町村情報.get市町村コード());
                 parameter.set市町村名称(構成市町村情報.get市町村名称());
             }
-            List<dgShichosonIchiran_Row> dataList = div.getDgShichosonIchiran().getDataSource();
+            List<dgShichosonIchiran_Row> dataList = div.getDgShichosonIchiran().getSelectedItems();
             List<ShichosonJouhouResult> 市町村情報List = new ArrayList<>();
             for (dgShichosonIchiran_Row row : dataList) {
                 ShichosonJouhouResult result = new ShichosonJouhouResult();
                 result.set市町村コード(new LasdecCode(row.getTxtShichosonCode().getValue()));
                 result.set市町村識別ID(row.getTxtShichosonShikibetsuID().getValue());
                 result.set終了年月日(new FlexibleDate(row.getTxtShoriEdYMD().getValue().toString()));
-                result.set終了時刻(new RString(row.getTxtShoriEdTime().getValue().toString()));
+                result.set終了時刻(row.getTxtShoriEdTime().getValue()
+                        .toFormattedTimeString(DisplayTimeFormat.HH_mm_ss).replace(TIME_FORMAT, RString.EMPTY));
                 result.set開始年月日(new FlexibleDate(row.getTxtShoriStYMD().getValue().toString()));
-                result.set開始時刻(new RString(row.getTxtShoriStTime().getValue().toString()));
+                result.set開始時刻(row.getTxtShoriStTime().getValue()
+                        .toFormattedTimeString(DisplayTimeFormat.HH_mm_ss).replace(TIME_FORMAT, RString.EMPTY));
                 市町村情報List.add(result);
             }
             parameter.set市町村情報リスト(市町村情報List);

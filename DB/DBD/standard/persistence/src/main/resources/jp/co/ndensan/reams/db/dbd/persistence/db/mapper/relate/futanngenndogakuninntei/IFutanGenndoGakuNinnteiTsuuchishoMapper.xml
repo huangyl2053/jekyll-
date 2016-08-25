@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBD-3981-050 jingge-->
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futanngenndogakuninntei.IFutanGenndoGakuNinnteiTsuuchishoMapper">
+<resultMap id="resultMap_FutanGendogakuNinteiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity" autoMapping="true">
+    <id property="介護保険負担限度額認定Entity.shoKisaiHokenshaNo" column="A.shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+    <id property="介護保険負担限度額認定Entity.hihokenshaNo" column="A.hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+    <id property="介護保険負担限度額認定Entity.rirekiNo" column="A.rirekiNo" />
+    <association property="介護保険負担限度額認定Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.ResultMap_DbT4018KaigoHokenFutanGendogakuNinteiEntity"/>
+    <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
+</resultMap>
+<resultMap id="resultMap_IFutanGenndoGakuNinnteiTsuuchishoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.FutanGenndoGakuNinnteiTsuuchishoEntity" autoMapping="true">
+  <result property="hihokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+  <result property="shikibetsuCode" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+  <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+  <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+  <collection property="介護保険負担限度額認定" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futanngenndogakuninntei.IFutanGenndoGakuNinnteiTsuuchishoMapper.resultMap_FutanGendogakuNinteiEntity"/>
+</resultMap>   
+    
+<select id="get負担限度額認定の通知書発行情報"
+        resultMap="resultMap_IFutanGenndoGakuNinnteiTsuuchishoEntity"
+        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.FutanGenndoGakuNinnteiTsuuchishoMybatisParameter" fetchSize="500" resultOrdered="true">
+    SELECT
+    D."hihokenshaNo" AS 被保険者番号,
+    D."shikibetsuCode" AS 識別コード,
+      A.*,B.*,
+	  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />, 
+	  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />	
+    FROM(
+    SELECT 
+       A2.*
+    FROM 
+       rgdb."DbT4018KaigoHokenFutanGendogakuNintei" AS A2
+    INNER JOIN(
+       SELECT
+         "hihokenshaNo",
+          MAX("rirekiNo") AS "rirekiNo"
+       FROM
+          rgdb."DbT4018KaigoHokenFutanGendogakuNintei"
+       GROUP BY
+          "hihokenshaNo"
+        ) AS A1
+       ON A1."hihokenshaNo" = A2."hihokenshaNo"
+       AND A1."rirekiNo" = A2."rirekiNo"
+       ) AS A
+    LEFT JOIN rgdb."DbT4010GemmenGengakuShinsei" AS B
+    ON A."shoKisaiHokenshaNo" = B."shoKisaiHokenshaNo"
+    AND A."hihokenshaNo" = B."hihokenshaNo"
+    AND A."rirekiNo" = B."shinseiRirekiNo"
+    AND B."gemmenGengakuShurui" = #{負担限度額認定}
+    INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS C
+    ON C."hihokenshaNo" = A."hihokenshaNo"
+    AND C."logicalDeletedFlag" = FALSE
+    INNER JOIN 
+          <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
+    ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = C."shikibetsuCode"
+    INNER JOIN 
+    <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
+     ON "Atesaki"."shikibetsuCode" = C."shikibetsuCode"
+    LEFT JOIN "FutanGenndoGakuNinnteiTempTable" AS D
+    ON D."hihokenshaNo" = C."hihokenshaNo"
+    AND  D."shikibetsuCode" = C."shikibetsuCode"
+    WHERE 
+    1=1 
+    <if test="is旧措置者区分_旧措置者のみ">
+       AND (A."kyusochishaKubun" = #{旧措置者} OR A."kyusochishaKubun" = #{旧措置者実質的負担軽減者})
+    </if>
+	<if test="is旧措置者区分_旧措置者以外">
+       AND (A."kyusochishaKubun" = #{非該当}) 
+    </if>
+	<if test="is対象区分_決定日">
+       AND (#{対象日FROM} <![CDATA[<=]]> A."ketteiYMD") 
+    </if>
+	<if test="is対象区分_決定日">
+       AND (A."ketteiYMD" <![CDATA[<=]]> #{対象日TO}) 
+    </if>
+    <if test="is対象区分_申請日">
+       AND (#{対象日FROM} <![CDATA[<=]]> A."shinseiYMD") 
+    </if>
+    <if test="is対象区分_申請日">
+       AND (A."shinseiYMD" <![CDATA[<=]]> #{対象日TO}) 
+    </if>
+    <if test="is年度開始日_不空白">
+       AND (#{年度開始日} <![CDATA[<=]]> A."tekiyoKaishiYMD") 
+    </if>
+    <if test="is年度終了日_不空白">
+       AND (A."tekiyoKaishiYMD" <![CDATA[<=]]> #{年度終了日}) 
+    </if>
+    <if test="is単票発行区分_出力しない">
+    AND ( NOT EXISTS (
+        SELECT
+        単票発行履歴情報."reportId",
+	発行履歴被保番号.naiyo AS 被保険者番号,
+        発行履歴減免適用開始日.naiyo AS 減免適用開始日
+        FROM
+         rgur."UrT0205ChohyoHakkoRirekiKanri" AS 単票発行履歴情報
+        LEFT JOIN(
+         SELECT
+	  "subGyomuCode",
+	  "reportId",
+	  "reportIndex",
+	  naiyo 
+	 FROM
+	  rgur."UrT0206ChohyoHakkoKoyuJoho"
+	 WHERE
+	  "subGyomuCode" = #{業務コード_介護受給}
+	  AND "kensakuKomokuCode" = #{発行履歴固有情報_被保番号}
+         ) AS 発行履歴被保番号
+         ON 単票発行履歴情報."subGyomuCode" = 発行履歴被保番号."subGyomuCode"
+         AND 単票発行履歴情報."reportId" = 発行履歴被保番号."reportId"
+	 AND 単票発行履歴情報."reportIndex" = 発行履歴被保番号."reportIndex"
+         LEFT JOIN(
+          SELECT
+	   "subGyomuCode",
+	   "reportId",
+	   "reportIndex",
+	   naiyo 
+	  FROM
+	   rgur."UrT0206ChohyoHakkoKoyuJoho"
+	  WHERE
+	    "subGyomuCode" = #{業務コード_介護受給} 
+	  AND "kensakuKomokuCode" = #{発行履歴固有情報_減免適用開始日}
+          ) AS 発行履歴減免適用開始日
+          ON 単票発行履歴情報."subGyomuCode" = 発行履歴減免適用開始日."subGyomuCode"
+          AND 単票発行履歴情報."reportId" = 発行履歴減免適用開始日."reportId"
+  	  AND 単票発行履歴情報."reportIndex" = 発行履歴減免適用開始日."reportIndex"
+       WHERE 
+          単票発行履歴情報."subGyomuCode" = #{業務コード_介護受給} 
+	AND 単票発行履歴情報."reportId" = #{帳票ID}
+	AND 発行履歴被保番号.naiyo = A."hihokenshaNo"
+	AND 発行履歴減免適用開始日.naiyo = A."tekiyoKaishiYMD"
+        )                 
+    )
+    </if>
+    ${出力順}	
+</select>
+
+</mapper>

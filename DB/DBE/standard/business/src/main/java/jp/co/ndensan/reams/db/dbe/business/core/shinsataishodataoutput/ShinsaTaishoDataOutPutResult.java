@@ -77,12 +77,29 @@ public class ShinsaTaishoDataOutPutResult {
         eucCsvEntity.set介護認定審査会開催番号(entity.get介護認定審査会開催番号());
         eucCsvEntity.set介護認定審査会開始予定時刻(strToTime(entity.get介護認定審査会開始予定時刻()));
         eucCsvEntity.set合議体番号(entity.get合議体番号());
-        eucCsvEntity.set委員出席(entity.get委員出席());
+        if (entity.is委員出席()) {
+            eucCsvEntity.set委員出席(new RString("1"));
+        } else {
+            eucCsvEntity.set委員出席(new RString("0"));
+        }
         eucCsvEntity.set委員出席時間(strToTime(entity.get委員出席時間()));
-        eucCsvEntity.set委員早退有無(entity.get委員早退有無());
+        if (entity.is委員早退有無()) {
+            eucCsvEntity.set委員早退有無(new RString("1"));
+        } else {
+            eucCsvEntity.set委員早退有無(new RString("0"));
+        }
         eucCsvEntity.set委員退席時間(strToTime(entity.get委員退席時間()));
-        eucCsvEntity.set委員遅刻有無(entity.get委員遅刻有無());
-        eucCsvEntity.set資料作成済フラグ(entity.get資料作成済フラグ());
+        if (entity.is委員遅刻有無()) {
+            eucCsvEntity.set委員遅刻有無(new RString("1"));
+        } else {
+            eucCsvEntity.set委員遅刻有無(new RString("0"));
+        }
+        if (entity.is資料作成済フラグ()) {
+            eucCsvEntity.set資料作成済フラグ(new RString("1"));
+        } else {
+            eucCsvEntity.set資料作成済フラグ(new RString("0"));
+        }
+
         return eucCsvEntity;
     }
 
@@ -226,11 +243,24 @@ public class ShinsaTaishoDataOutPutResult {
         eucCsvEntity.setサービスの状況連番(entity.getサービスの状況連番());
         eucCsvEntity.setサービスの状況(entity.getサービスの状況());
         eucCsvEntity.setサービスの状況フラグ連番(entity.getサービスの状況フラグ連番());
-        eucCsvEntity.setサービスの状況フラグ(entity.getサービスの状況フラグ());
+        setEucCsvEntity(entity, eucCsvEntity);
+        return eucCsvEntity;
+    }
+
+    private void setEucCsvEntity(NijihanteiKekkaTorokuMobileRelateEntity entity, NijihanteiKekkaTorokuMobileEucCsvEntity eucCsvEntity) {
+        if (entity.isサービスの状況フラグ()) {
+            eucCsvEntity.setサービスの状況フラグ(new RString("1"));
+        } else {
+            eucCsvEntity.setサービスの状況フラグ(new RString("0"));
+        }
         eucCsvEntity.set記入項目連番(entity.get記入項目連番());
         eucCsvEntity.setサービスの状況記入(entity.getサービスの状況記入());
         eucCsvEntity.set施設利用連番(entity.get施設利用連番());
-        eucCsvEntity.set施設利用フラグ(entity.get施設利用フラグ());
+        if (entity.is施設利用フラグ()) {
+            eucCsvEntity.set施設利用フラグ(new RString("1"));
+        } else {
+            eucCsvEntity.set施設利用フラグ(new RString("0"));
+        }
         eucCsvEntity.set認定調査認知症高齢者の日常生活自立度コード(entity.get認定調査認知症高齢者の日常生活自立度コード());
         eucCsvEntity.set認定調査認知症高齢者の日常生活自立度(entity.get認定調査認知症高齢者の日常生活自立度());
         eucCsvEntity.set認定調査障害高齢者の日常生活自立度コード(entity.get認定調査障害高齢者の日常生活自立度コード());
@@ -238,8 +268,6 @@ public class ShinsaTaishoDataOutPutResult {
         eucCsvEntity.set調査項目連番(entity.get調査項目連番());
         eucCsvEntity.set調査項目文言(entity.get調査項目文言());
         eucCsvEntity.set内容(entity.get内容());
-
-        return eucCsvEntity;
     }
 
     /**

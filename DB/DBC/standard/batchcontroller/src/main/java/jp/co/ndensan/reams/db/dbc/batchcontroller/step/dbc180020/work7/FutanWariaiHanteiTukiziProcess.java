@@ -207,6 +207,8 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
                 insertKonkyoTemp.setEdaNo(i + 1);
                 if (世帯員情報 != null) {
                     insertKonkyoTemp.setSetaiinHihokenshaNo(世帯員情報.getHihokenshaNo());
+                } else {
+                    insertKonkyoTemp.setSetaiinHihokenshaNo(HihokenshaNo.EMPTY);
                 }
                 if (所得管理 != null) {
                     insertKonkyoTemp.setSetaiinShotokuRirekiNo(new Decimal(所得管理.getMotoRirekiNo()));

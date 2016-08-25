@@ -66,6 +66,11 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
     private static final RString 表示名称_介護予防支援事業者作成 = new RString("介護予防支援事業者作成");
     private final FlexibleDate システム日付;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param システム日付
+     */
     public HanyoListKyotakuServiceKeikakuCsvEntityEditor(FlexibleDate システム日付) {
         this.システム日付 = システム日付;
     }

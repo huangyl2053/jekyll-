@@ -87,7 +87,7 @@ public enum KubunShikyuGendogakuSpec implements IPredicate<KubunShikyuGendogakuD
         private static boolean isYMCompare(RDate startTimeRow, RDate endTimeRow, RDate startDate, RDate endDate) {
             if (endTimeRow != null) {
                 if (endDate != null) {
-                    isYMNotNullCompare(startTimeRow, endTimeRow, startDate, endDate);
+                    return isYMNotNullCompare(startTimeRow, endTimeRow, startDate, endDate);
                 } else {
                     if (startTimeRow.isBeforeOrEquals(startDate) && startDate.isBeforeOrEquals(endTimeRow)) {
                         return false;

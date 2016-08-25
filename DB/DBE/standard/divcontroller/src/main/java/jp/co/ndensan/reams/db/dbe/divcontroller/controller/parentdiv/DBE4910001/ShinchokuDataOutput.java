@@ -98,6 +98,7 @@ public class ShinchokuDataOutput {
      * @return ResponseData<ShinchokuDataOutputDiv>
      */
     public ResponseData<ShinchokuDataOutputDiv> onClick_btnResearchr(ShinchokuDataOutputDiv div) {
+        div.getTxtHihokenshaCode().clearValue();
         return onLoad(div);
     }
 

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class SeikyugakuTsuchishoFutanshaInProcessParameter implements IBatchProcessParameter {
 
     private RString path;

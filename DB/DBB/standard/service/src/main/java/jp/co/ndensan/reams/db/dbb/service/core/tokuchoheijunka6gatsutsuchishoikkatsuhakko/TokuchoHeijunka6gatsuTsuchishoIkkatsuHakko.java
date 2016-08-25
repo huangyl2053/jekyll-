@@ -808,8 +808,8 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
             更正前普徴期別金額リスト.add(setUniversalPhase(期14, entity.get更正前計算後情報().getFuKibetsuGaku14()));
             編集後仮算定通知書.get更正前().set更正前普徴期別金額リスト(更正前普徴期別金額リスト);
             編集後仮算定通知書.get更正前().set更正前特徴期別金額01(entity.get更正前計算後情報().getTkKibetsuGaku01());
-            編集後仮算定通知書.get更正前().set更正前特徴期別金額02(entity.get更正前計算後情報().getTkKibetsuGaku01());
-            編集後仮算定通知書.get更正前().set更正前特徴期別金額03(entity.get更正前計算後情報().getTkKibetsuGaku01());
+            編集後仮算定通知書.get更正前().set更正前特徴期別金額02(entity.get更正前計算後情報().getTkKibetsuGaku02());
+            編集後仮算定通知書.get更正前().set更正前特徴期別金額03(entity.get更正前計算後情報().getTkKibetsuGaku03());
         }
         if (編集後仮算定通知書.get更正後() != null) {
             更正後普徴期別金額リスト.add(setUniversalPhase(期1, entity.get更正後計算後情報().getFuKibetsuGaku01()));
@@ -828,8 +828,8 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
             更正後普徴期別金額リスト.add(setUniversalPhase(期14, entity.get更正後計算後情報().getFuKibetsuGaku14()));
             編集後仮算定通知書.get更正後().set更正後普徴期別金額リスト(更正後普徴期別金額リスト);
             編集後仮算定通知書.get更正後().set更正後特徴期別金額01(entity.get更正後計算後情報().getTkKibetsuGaku01());
-            編集後仮算定通知書.get更正後().set更正後特徴期別金額02(entity.get更正後計算後情報().getTkKibetsuGaku01());
-            編集後仮算定通知書.get更正後().set更正後特徴期別金額03(entity.get更正後計算後情報().getTkKibetsuGaku01());
+            編集後仮算定通知書.get更正後().set更正後特徴期別金額02(entity.get更正後計算後情報().getTkKibetsuGaku02());
+            編集後仮算定通知書.get更正後().set更正後特徴期別金額03(entity.get更正後計算後情報().getTkKibetsuGaku03());
         }
     }
 

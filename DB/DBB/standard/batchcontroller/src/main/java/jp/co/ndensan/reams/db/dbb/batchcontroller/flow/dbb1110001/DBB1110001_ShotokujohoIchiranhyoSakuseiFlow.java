@@ -23,8 +23,11 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
  * バッチ設計_DBBBT51003_所得情報一覧表作成です。
@@ -43,6 +46,7 @@ public class DBB1110001_ShotokujohoIchiranhyoSakuseiFlow extends BatchFlowBase<S
     private static final String 介護保険所得情報一覧表出力 = "prtKaigoHokenShotokuJohoIchiranProcess";
     private static final String 処理日付管理マスタを登録 = "registShoriDateKanriProcess";
     private RegistShoriDateKanriProcessParameter parameter;
+    private ShotokujohoIchiranhyoSakuseiProcessParameter 広域param;
     private RString 出力順;
     private RString 改頁項目ID;
 
@@ -61,7 +65,15 @@ public class DBB1110001_ShotokujohoIchiranhyoSakuseiFlow extends BatchFlowBase<S
         if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
             executeStep(所得情報一覧表のデータ取得_単一);
         } else if (INDEX_111.equals(導入形態コード)) {
-            executeStep(所得情報一覧表のデータ取得_広域);
+            for (ShichosonJouhouResult result : getParameter().get市町村情報リスト()) {
+                広域param = new ShotokujohoIchiranhyoSakuseiProcessParameter();
+                広域param.set市町村情報(result);
+                YMDHMS 開始日時 = new YMDHMS(new RDate(result.get開始年月日().toString()), new RTime(result.get開始時刻()));
+                YMDHMS 終了日時 = new YMDHMS(new RDate(result.get終了年月日().toString()), new RTime(result.get終了時刻()));
+                広域param.set開始日時(開始日時);
+                広域param.set終了日時(終了日時);
+                executeStep(所得情報一覧表のデータ取得_広域);
+            }
         }
         executeStep(介護保険所得情報一覧表出力);
         RString flag = getResult(RString.class, new RString(介護保険所得情報一覧表出力), PrtKaigoHokenShotokuJohoIchiranProcess.REPORT_FLAG);
@@ -92,7 +104,7 @@ public class DBB1110001_ShotokujohoIchiranhyoSakuseiFlow extends BatchFlowBase<S
      */
     @Step(所得情報一覧表のデータ取得_単一)
     protected IBatchFlowCommand tanitsuShichosonShotokuIchiarnProcess() {
-        ShotokujohoIchiranhyoSakuseiProcessParameter param = getParameter().toProcessParameter();
+        ShotokujohoIchiranhyoSakuseiProcessParameter param = creatBatchParameter();
         param.set出力順(出力順);
         if (param.get処理年度() == null || param.getチェックボックス() == null
                 || param.getラジオボタン() == null || param.get開始日時() == null
@@ -110,15 +122,22 @@ public class DBB1110001_ShotokujohoIchiranhyoSakuseiFlow extends BatchFlowBase<S
      */
     @Step(所得情報一覧表のデータ取得_広域)
     protected IBatchFlowCommand koikiShichosonShotokuIchiarnProcess() {
-        ShotokujohoIchiranhyoSakuseiProcessParameter param = getParameter().toProcessParameter();
-        param.set出力順(出力順);
-        if (param.get処理年度() == null || param.getチェックボックス() == null
-                || param.getラジオボタン() == null || (param.get市町村情報リスト() == null || param.get市町村情報リスト().isEmpty())
-                || param.get出力順() == null) {
+        広域param.set導入形態コード(getParameter().get導入形態コード());
+        広域param.set市町村コード(getParameter().get市町村コード());
+        広域param.set市町村名称(getParameter().get市町村名称());
+        広域param.set処理年度(getParameter().get処理年度());
+        広域param.setチェックボックス(getParameter().getチェックボックス());
+        広域param.setラジオボタン(getParameter().getラジオボタン());
+        広域param.set市町村情報リスト(getParameter().get市町村情報リスト());
+        広域param.set出力順ID(getParameter().get出力順ID());
+        広域param.set出力順(出力順);
+        if (広域param.get処理年度() == null || 広域param.getチェックボックス() == null
+                || 広域param.getラジオボタン() == null || (広域param.get市町村情報リスト() == null || 広域param.get市町村情報リスト().isEmpty())
+                || 広域param.get出力順() == null) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り
                     .getMessage().evaluate());
         }
-        return loopBatch(KoikiShichosonShotokuIchiarnProcess.class).arguments(param).define();
+        return loopBatch(KoikiShichosonShotokuIchiarnProcess.class).arguments(広域param).define();
     }
 
     /**
@@ -128,7 +147,7 @@ public class DBB1110001_ShotokujohoIchiranhyoSakuseiFlow extends BatchFlowBase<S
      */
     @Step(介護保険所得情報一覧表出力)
     protected IBatchFlowCommand prtKaigoHokenShotokuJohoIchiranProcess() {
-        ShotokujohoIchiranhyoSakuseiProcessParameter param = getParameter().toProcessParameter();
+        ShotokujohoIchiranhyoSakuseiProcessParameter param = creatBatchParameter();
         param.set出力順(出力順);
         param.set改頁(改頁項目ID);
         return loopBatch(PrtKaigoHokenShotokuJohoIchiranProcess.class).arguments(param).define();
@@ -154,4 +173,18 @@ public class DBB1110001_ShotokujohoIchiranhyoSakuseiFlow extends BatchFlowBase<S
         return loopBatch(RegistShoriDateKanriProcess.class).arguments(parameter).define();
     }
 
+    private ShotokujohoIchiranhyoSakuseiProcessParameter creatBatchParameter() {
+        ShotokujohoIchiranhyoSakuseiProcessParameter param = new ShotokujohoIchiranhyoSakuseiProcessParameter();
+        param.set導入形態コード(getParameter().get導入形態コード());
+        param.set市町村コード(getParameter().get市町村コード());
+        param.set市町村名称(getParameter().get市町村名称());
+        param.set処理年度(getParameter().get処理年度());
+        param.setチェックボックス(getParameter().getチェックボックス());
+        param.setラジオボタン(getParameter().getラジオボタン());
+        param.set開始日時(getParameter().get開始日時());
+        param.set終了日時(getParameter().get終了日時());
+        param.set市町村情報リスト(getParameter().get市町村情報リスト());
+        param.set出力順ID(getParameter().get出力順ID());
+        return param;
+    }
 }

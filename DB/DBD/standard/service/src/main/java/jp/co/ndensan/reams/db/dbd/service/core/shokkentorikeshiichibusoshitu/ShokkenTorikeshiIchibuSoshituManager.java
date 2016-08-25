@@ -209,4 +209,39 @@ public class ShokkenTorikeshiIchibuSoshituManager {
         entity.setState(state);
         return 申請履歴情報Dac.insert(entity);
     }
+
+    /**
+     * 職権修正／職権取消(一部)／認定結果入力(サ変・区変)DB更新します。
+     *
+     * @param 登録用要介護認定申請情報 登録用要介護認定申請情報
+     * @param 登録用受給者台帳 登録用受給者台帳
+     * @param 更新用介護認定申請情報 更新用介護認定申請情報
+     * @param 更新用受給者台帳 更新用受給者台帳
+     * @param 認定結果情報 認定結果情報
+     * @param 申請履歴情報 申請履歴情報
+     */
+    @Transaction
+    public void save(DbT4101NinteiShinseiJoho 登録用要介護認定申請情報, JukyushaDaicho 登録用受給者台帳,
+            DbT4101NinteiShinseiJoho 更新用介護認定申請情報, JukyushaDaicho 更新用受給者台帳,
+            DbT4102NinteiKekkaJoho 認定結果情報, DbT4121ShinseiRirekiJoho 申請履歴情報) {
+
+        if (登録用要介護認定申請情報 != null) {
+            save介護認定申請情報(登録用要介護認定申請情報, EntityDataState.Added);
+        }
+        if (登録用受給者台帳 != null) {
+            save受給者台帳(登録用受給者台帳, EntityDataState.Added);
+        }
+        if (更新用介護認定申請情報 != null) {
+            save介護認定申請情報(更新用介護認定申請情報, EntityDataState.Modified);
+        }
+        if (更新用受給者台帳 != null) {
+            save受給者台帳(更新用受給者台帳, EntityDataState.Modified);
+        }
+        if (認定結果情報 != null) {
+            save認定結果情報(認定結果情報, EntityDataState.Modified);
+        }
+        if (申請履歴情報 != null) {
+            save申請履歴情報(申請履歴情報, EntityDataState.Added);
+        }
+    }
 }
