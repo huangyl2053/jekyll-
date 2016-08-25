@@ -108,7 +108,7 @@
         <result property="要介護認定等基準時間移動" column="kijunJikanIdo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="要介護認定等基準時間清潔保持" column="kijunJikanSeiketsuHoji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="要介護認定等基準時間間接ケア" column="kijunJikanKansetsuCare" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="要介護認定等基準時間BPSD関連" column="kijunJikanKansetsuCare" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="要介護認定等基準時間BPSD関連" column="kijunJikanBPSDKanren" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="要介護認定等基準時間機能訓練" column="kijunJikanKinoKunren" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="要介護認定等基準時間医療関連" column="kijunJikanIryoKanren" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="要介護認定等基準時間認知症加算" column="kijunJikanNinchishoKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
@@ -127,7 +127,7 @@
         <result property="認定調査依頼履歴番号" column="ninteichosaRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="認定調査委託先コード" column="chosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="調査委託先" column="chosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="認定調査員コード" column="ninteichousaIraiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定調査員コード" column="chosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="調査員氏名" column="gaikyoChosaTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="概況特記テキストイメージ区分コード" column="gaikyoChosaTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="概況特記テキストイメージ区分" column="gaikyoChosaTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
