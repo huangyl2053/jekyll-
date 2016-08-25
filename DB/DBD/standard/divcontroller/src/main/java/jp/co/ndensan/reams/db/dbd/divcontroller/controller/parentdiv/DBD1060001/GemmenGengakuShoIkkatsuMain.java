@@ -69,7 +69,7 @@ public class GemmenGengakuShoIkkatsuMain {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         RString 文書番号 = getHandler(div).文書番号チェック();
-        if (文書番号.equals(new RString("1"))) {
+        if (文書番号.equals(new RString("1")) || 文書番号.equals(new RString("2"))) {
             getValidationHandler().validateFor文書番号の設定チェック(pairs, div);
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();

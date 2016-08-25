@@ -211,7 +211,7 @@ public class GemmenGengakuShoIkkatsuMainHandler {
         FlexibleDate nendoYMDFrom = div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getTxtFutanGendogakuNendoFrom().getValue();
         FlexibleDate nendoYMDTo = div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getTxtFutanGendogakuNendoTo().getValue();
         FlexibleDate taishoYMDFrom = div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getTxtFutanGendogakuKonkaiTaishoYmdFrom().getValue();
-        FlexibleDate taishoYMDTo = div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getTxtFutanGendogakuZenkaiTaishoYmdTo().getValue();
+        FlexibleDate taishoYMDTo = div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getTxtFutanGendogakuKonkaiTaishoYmdTo().getValue();
         FlexibleDate ninteishoKofuYMD = div.getFutanGendogaku().getFutanGendogakuNinteisho().getTxtFutanGendogakuNinteishoKofuYmd().getValue();
         FlexibleDate tsuchishoHakkoYMD = div.getFutanGendogaku()
                 .getFutanGendogakuKetteiTsuchisho().getTxtFutanGendogakuKetteiTsuchishoHakkoYmd().getValue();
