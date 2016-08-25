@@ -256,9 +256,9 @@ public class HikazeiNenkinTaishoshaJohoHandler {
                 対象処理.set処理状態(SyoriJyoutaiCode.toValue(RSTRING_1).get名称());
             } else {
                 更新用List.add(月次処理情報);
-                対象処理.set処理日時(年次処理情報.get基準日時() == null ? RString.EMPTY : 年次処理情報.get基準日時().toDateString());
-                対象処理.set処理状態コード(年次処理情報.get処理枝番());
-                対象処理.set処理状態(SyoriJyoutaiCode.toValue(年次処理情報.get処理枝番()).get名称());
+                対象処理.set処理日時(月次処理情報.get基準日時() == null ? RString.EMPTY : 月次処理情報.get基準日時().toDateString());
+                対象処理.set処理状態コード(月次処理情報.get処理枝番());
+                対象処理.set処理状態(SyoriJyoutaiCode.toValue(月次処理情報.get処理枝番()).get名称());
             }
 
             対象処理List.add(対象処理);
@@ -471,37 +471,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
 
     private void データベース登録(List<ShoriDateKanri> 更新用List, dgShoriSettei_Row row) {
 
-        if (更新用List != null && !更新用List.isEmpty()) {
-            for (ShoriDateKanri 処理日付管理マスタ : 更新用List) {
-                if (処理日付管理マスタ.get年度内連番().equals(row.getHdnShori().concat(row.getHdnTuki()))) {
-
-                    ShoriDateKanriManager manager = new ShoriDateKanriManager();
-                    manager.save処理日付管理マスタForDeletePhysical(処理日付管理マスタ);
-                }
-
-                ShoriDateKanri insertShoriDateKanri = new ShoriDateKanri(
-                        SubGyomuCode.DBD介護受給,
-                        new LasdecCode(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)),
-                        ShoriName.非課税年金対象者情報取込.get名称(),
-                        row.getTxtShoriJotai().getSelectedKey(),
-                        new FlexibleYear(div.getShoriSettei().getHdnShoriNendo()),
-                        row.getHdnShori().concat(row.getHdnTuki()));
-
-                ShoriDateKanriBuilder builder = insertShoriDateKanri.createBuilderForEdit();
-
-                builder.set基準年月日(処理日付管理マスタ.get基準年月日());
-                builder.set基準日時(処理日付管理マスタ.get基準日時());
-                builder.set対象終了年月日(処理日付管理マスタ.get対象終了年月日());
-                builder.set対象終了日時(処理日付管理マスタ.get対象終了日時());
-                builder.set対象開始年月日(処理日付管理マスタ.get対象開始年月日());
-                builder.set対象開始日時(処理日付管理マスタ.get対象開始日時());
-
-                ShoriDateKanri newShoriDateKanri = builder.build();
-                ShoriDateKanriManager insertManager = new ShoriDateKanriManager();
-                insertManager.save処理日付管理マスタ(newShoriDateKanri);
-            }
-
-        } else {
+        if (更新用List == null || 更新用List.isEmpty()) {
             ShoriDateKanri insertShoriDateKanri = new ShoriDateKanri(
                     SubGyomuCode.DBD介護受給,
                     new LasdecCode(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)),
@@ -515,8 +485,66 @@ public class HikazeiNenkinTaishoshaJohoHandler {
             ShoriDateKanriManager insertManager = new ShoriDateKanriManager();
             insertManager.save処理日付管理マスタ(newShoriDateKanri);
 
+            return;
         }
 
+        boolean equalFlg = false;
+        for (ShoriDateKanri 処理日付管理マスタ : 更新用List) {
+            if (処理日付管理マスタ.get年度内連番().equals(row.getHdnShori().concat(row.getHdnTuki()))) {
+
+                ShoriDateKanriManager manager = new ShoriDateKanriManager();
+                manager.save処理日付管理マスタForDeletePhysical(処理日付管理マスタ);
+
+                ShoriDateKanri insertShoriDateKanri = new ShoriDateKanri(
+                        SubGyomuCode.DBD介護受給,
+                        new LasdecCode(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)),
+                        ShoriName.非課税年金対象者情報取込.get名称(),
+                        row.getTxtShoriJotai().getSelectedKey(),
+                        new FlexibleYear(div.getShoriSettei().getHdnShoriNendo()),
+                        row.getHdnShori().concat(row.getHdnTuki()));
+
+                ShoriDateKanriBuilder builder = insertShoriDateKanri.createBuilderForEdit();
+
+                if (処理日付管理マスタ.get基準年月日() != null) {
+                    builder.set基準年月日(処理日付管理マスタ.get基準年月日());
+                }
+                if (処理日付管理マスタ.get基準日時() != null) {
+                    builder.set基準日時(処理日付管理マスタ.get基準日時());
+                }
+                if (処理日付管理マスタ.get対象終了年月日() != null) {
+                    builder.set対象終了年月日(処理日付管理マスタ.get対象終了年月日());
+                }
+                if (処理日付管理マスタ.get対象終了日時() != null) {
+                    builder.set対象終了日時(処理日付管理マスタ.get対象終了日時());
+                }
+                if (処理日付管理マスタ.get対象開始年月日() != null) {
+                    builder.set対象開始年月日(処理日付管理マスタ.get対象開始年月日());
+                }
+                if (処理日付管理マスタ.get対象開始日時() != null) {
+                    builder.set対象開始日時(処理日付管理マスタ.get対象開始日時());
+                }
+
+                ShoriDateKanri newShoriDateKanri = builder.build();
+                ShoriDateKanriManager insertManager = new ShoriDateKanriManager();
+                insertManager.save処理日付管理マスタ(newShoriDateKanri);
+
+                equalFlg = true;
+            }
+        }
+        if (!equalFlg) {
+            ShoriDateKanri insertShoriDateKanri = new ShoriDateKanri(
+                    SubGyomuCode.DBD介護受給,
+                    new LasdecCode(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)),
+                    ShoriName.非課税年金対象者情報取込.get名称(),
+                    row.getTxtShoriJotai().getSelectedKey(),
+                    new FlexibleYear(div.getShoriSettei().getHdnShoriNendo()),
+                    row.getHdnShori().concat(row.getHdnTuki()));
+
+            ShoriDateKanriBuilder builder = insertShoriDateKanri.createBuilderForEdit();
+            ShoriDateKanri newShoriDateKanri = builder.build();
+            ShoriDateKanriManager insertManager = new ShoriDateKanriManager();
+            insertManager.save処理日付管理マスタ(newShoriDateKanri);
+        }
     }
 
     private void 単一年度DDLの選択処理() {
@@ -563,9 +591,9 @@ public class HikazeiNenkinTaishoshaJohoHandler {
                 対象処理.set処理状態コード(RSTRING_1);
                 対象処理.set処理状態(SyoriJyoutaiCode.toValue(RSTRING_1).get名称());
             } else {
-                対象処理.set処理日時(年次処理情報.get基準日時() == null ? RString.EMPTY : 年次処理情報.get基準日時().toDateString());
-                対象処理.set処理状態コード(年次処理情報.get処理枝番());
-                対象処理.set処理状態(SyoriJyoutaiCode.toValue(年次処理情報.get処理枝番()).get名称());
+                対象処理.set処理日時(月次処理情報.get基準日時() == null ? RString.EMPTY : 月次処理情報.get基準日時().toDateString());
+                対象処理.set処理状態コード(月次処理情報.get処理枝番());
+                対象処理.set処理状態(SyoriJyoutaiCode.toValue(月次処理情報.get処理枝番()).get名称());
             }
 
             対象処理List.add(対象処理);
