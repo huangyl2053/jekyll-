@@ -112,7 +112,7 @@ public class HikazeiNenkinTaishoshaJoho {
 
             if (単一保険者.equals(getHandler(div).広域と市町村判断())) {
                 getValidationHandler(div).validateFor処理状態(pairs);
-                //TODO
+                getValidationHandler(div).validateForアップロード済みファイル名(pairs);
             } else {
                 getValidationHandler(div).validateFor処理状態(pairs);
                 getValidationHandler(div).validateFor取込チェックボックス(pairs);

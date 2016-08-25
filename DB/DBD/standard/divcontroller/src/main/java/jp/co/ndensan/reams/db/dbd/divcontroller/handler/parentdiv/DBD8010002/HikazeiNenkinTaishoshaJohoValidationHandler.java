@@ -113,6 +113,23 @@ public class HikazeiNenkinTaishoshaJohoValidationHandler {
     }
 
     /**
+     * アップロード済みファイル名チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateForアップロード済みファイル名(ValidationMessageControlPairs pairs) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        NoInputMessages checkMessage = new NoInputMessages(DbdErrorMessages.アップロードファイル無し);
+        messages.add(ValidateChain.validateStart(div).ifNot(HikazeiNenkinTaishoshaJohoDivSpec.アップロード済みファイル名チェック)
+                .thenAdd(checkMessage).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(checkMessage).build().check(messages));
+
+        return pairs;
+    }
+
+    /**
      * アップロードファイル未指定チェックを行います。
      *
      * @param pairs バリデーションコントロール

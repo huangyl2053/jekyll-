@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -34,6 +35,8 @@ public class TanitsuTaishoShoriIchiranDiv extends Panel {
     private TextBox txtShori;
     @JsonProperty("txtFuairuMei")
     private TextBox txtFuairuMei;
+    @JsonProperty("hdnFileName")
+    private RString hdnFileName;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -147,6 +150,24 @@ public class TanitsuTaishoShoriIchiranDiv extends Panel {
     @JsonProperty("txtFuairuMei")
     public void setTxtFuairuMei(TextBox txtFuairuMei) {
         this.txtFuairuMei = txtFuairuMei;
+    }
+
+    /*
+     * gethdnFileName
+     * @return hdnFileName
+     */
+    @JsonProperty("hdnFileName")
+    public RString getHdnFileName() {
+        return hdnFileName;
+    }
+
+    /*
+     * sethdnFileName
+     * @param hdnFileName hdnFileName
+     */
+    @JsonProperty("hdnFileName")
+    public void setHdnFileName(RString hdnFileName) {
+        this.hdnFileName = hdnFileName;
     }
 
     /*

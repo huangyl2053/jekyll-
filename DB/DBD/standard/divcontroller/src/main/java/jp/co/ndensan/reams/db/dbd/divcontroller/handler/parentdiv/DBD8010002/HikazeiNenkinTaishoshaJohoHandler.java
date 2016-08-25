@@ -455,7 +455,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
         div.getTxtTuki().setValue(一覧対象.getTxtTuki());
         div.getTxtShori().setValue(一覧対象.getTxtShori());
         div.getTxtFuairuMei().setValue(fileName);
-
+        div.getTanitsuTaishoShoriIchiran().setHdnFileName(getFileName());
     }
 
     private RString getFileName() {
