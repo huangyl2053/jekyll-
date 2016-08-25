@@ -126,7 +126,7 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
                 table(DbT3001JukyushaIdoRenrakuhyo.class).
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
-                                eq(idoYMD, 異動日),
+                                eq(idoYMD, 異動年月日),
                                 eq(logicalDeletedFlag, 論理削除フラグ),
                                 eq(rirekiNo, ONE))).
                 toObject(DbT3001JukyushaIdoRenrakuhyoEntity.class);
