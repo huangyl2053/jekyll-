@@ -667,6 +667,11 @@ public class KariSanteiIdoFukaBatchFath {
         }
         entity.set更正後口座異動(口座異動編集(更正前後Entity.get計算後情報_宛名_口座_更正後Entity()));
         entity.set更正後徴収方法(徴収方法編集(更正前後Entity.get計算後情報_宛名_口座_更正後Entity()));
+        調定事由編集(entity, 更正前後Entity);
+        return entity;
+    }
+
+    private void 調定事由編集(KarisanteiIdoKekkaIchiranCSVEntity entity, KeisanjohoAtenaKozaKouseizengoEntity 更正前後Entity) {
         if (更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由1() != null) {
             entity.set調定事由1(ChoteiJiyuCode.toValue(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由1()).get名称());
         }
@@ -679,7 +684,6 @@ public class KariSanteiIdoFukaBatchFath {
         if (更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由4() != null) {
             entity.set調定事由4(ChoteiJiyuCode.toValue(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由4()).get名称());
         }
-        return entity;
     }
 
     private RString 口座異動編集(KeisanjohoAtenaKozaEntity entity) {
