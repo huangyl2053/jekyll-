@@ -8,11 +8,9 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchish
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TblDataShutokuMyBatisParameter;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.FukaJohoShutokuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KarisanteiGakuHenkoEntity;
-import jp.co.ndensan.reams.db.dbb.service.core.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
@@ -89,9 +87,6 @@ public class FukaJohoShutokuProcess extends BatchProcessBase<KarisanteiGakuHenko
     @Override
     protected void process(KarisanteiGakuHenkoEntity entity) {
         仮算定額変更情報一時tableWriter.insert(entity.toDbT2002FukaTempTableEntity());
-        TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko service = TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko.createInstance();
-        service.update計算後情報更正前(new TokuchoHeijunka6gatsuMyBatisParameter(
-                parameter.is一括発行フラグ(), null, null, null, ShoriName.特徴平準化計算_6月分.get名称(), null, null, null, null));
     }
 
 }
