@@ -57,7 +57,7 @@ public class MiDouteiDataCreateProcess extends BatchProcessBase<DbT4037HikazeNen
         if (entity != null) {
             data.setDtrekodoKubun(entity.getDtrecordkubun());
             data.setDtshichosonCode(entity.getDtcitycode());
-            data.setDtDTnennkinnHokennshaCode(entity.getDtnenkinhokenshacode());
+            data.setDtnennkinnHokennshaCode(entity.getDtnenkinhokenshacode());
             data.setDttsuuchiContentCode(entity.getDttsuchinaiyocode());
             data.setDtyobi1(entity.getDtyobi1());
             data.setDtseidoCode(entity.getDtseidocode());
