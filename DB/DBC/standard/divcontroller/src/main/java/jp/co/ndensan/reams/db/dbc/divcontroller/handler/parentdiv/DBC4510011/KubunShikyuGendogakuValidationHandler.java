@@ -47,7 +47,10 @@ public class KubunShikyuGendogakuValidationHandler {
 
     private ValidationDictionary createDictionary() {
         return new ValidationDictionaryBuilder()
-                .add(KubunShikyuGendogakuValidationMessage.各項目が未入力の場合)
+                .add(KubunShikyuGendogakuValidationMessage.サービス種類コードが未入力の場合)
+                .add(KubunShikyuGendogakuValidationMessage.提供開始年月が未入力の場合)
+                .add(KubunShikyuGendogakuValidationMessage.名称が未入力の場合)
+                .add(KubunShikyuGendogakuValidationMessage.略称が未入力の場合)
                 .add(KubunShikyuGendogakuValidationMessage.適用期間が一部でも重複する場合)
                 .build();
     }
@@ -73,8 +76,14 @@ public class KubunShikyuGendogakuValidationHandler {
         public IValidationMessages validate() {
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
             messages.add(ValidateChain.validateStart(div)
-                    .ifNot(KubunShikyuGendogakuSpec.必須入力項目の必須入力チェック場合)
-                    .thenAdd(KubunShikyuGendogakuValidationMessage.各項目が未入力の場合)
+                    .ifNot(KubunShikyuGendogakuSpec.サービス種類コードの必須入力チェック場合)
+                    .thenAdd(KubunShikyuGendogakuValidationMessage.サービス種類コードが未入力の場合)
+                    .ifNot(KubunShikyuGendogakuSpec.提供開始年月の必須入力チェック場合)
+                    .thenAdd(KubunShikyuGendogakuValidationMessage.提供開始年月が未入力の場合)
+                    .ifNot(KubunShikyuGendogakuSpec.名称の必須入力チェック場合)
+                    .thenAdd(KubunShikyuGendogakuValidationMessage.名称が未入力の場合)
+                    .ifNot(KubunShikyuGendogakuSpec.略称の必須入力チェック場合)
+                    .thenAdd(KubunShikyuGendogakuValidationMessage.略称が未入力の場合)
                     .ifNot(KubunShikyuGendogakuSpec.重複の入力チェック)
                     .thenAdd(KubunShikyuGendogakuValidationMessage.適用期間が一部でも重複する場合)
                     .messages());
@@ -86,7 +95,10 @@ public class KubunShikyuGendogakuValidationHandler {
     private static enum KubunShikyuGendogakuValidationMessage implements IValidationMessage {
 
         適用期間が一部でも重複する場合(UrErrorMessages.期間が重複),
-        各項目が未入力の場合(UrErrorMessages.必須, "*が付いてる各項目");
+        サービス種類コードが未入力の場合(UrErrorMessages.必須, "サービス種類コード"),
+        提供開始年月が未入力の場合(UrErrorMessages.必須, "提供開始年月"),
+        名称が未入力の場合(UrErrorMessages.必須, "名称"),
+        略称が未入力の場合(UrErrorMessages.必須, "略称");
 
         private final Message message;
 

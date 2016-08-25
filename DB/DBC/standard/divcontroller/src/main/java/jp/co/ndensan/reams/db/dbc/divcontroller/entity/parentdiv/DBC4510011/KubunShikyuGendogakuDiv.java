@@ -4,23 +4,17 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4510011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * KubunShikyuGendogaku のクラスファイル
- *
- * @reamsid_L DBC-3350-010 jiangzongyue
+ * KubunShikyuGendogaku のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class KubunShikyuGendogakuDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
@@ -28,12 +22,12 @@ public class KubunShikyuGendogakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnTsuika")
-    private Button btnTsuika;
-    @JsonProperty("dgServiceShurui")
-    private DataGrid<dgServiceShurui_Row> dgServiceShurui;
+    @JsonProperty("DgSerShurui")
+    private DgSerShuruiDiv DgSerShurui;
     @JsonProperty("ServiceShuruiShousai")
     private ServiceShuruiShousaiDiv ServiceShuruiShousai;
+    @JsonProperty("Kanryo")
+    private KanryoDiv Kanryo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -42,39 +36,21 @@ public class KubunShikyuGendogakuDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getbtnTsuika
-     * @return btnTsuika
+     * getDgSerShurui
+     * @return DgSerShurui
      */
-    @JsonProperty("btnTsuika")
-    public Button getBtnTsuika() {
-        return btnTsuika;
+    @JsonProperty("DgSerShurui")
+    public DgSerShuruiDiv getDgSerShurui() {
+        return DgSerShurui;
     }
 
     /*
-     * setbtnTsuika
-     * @param btnTsuika btnTsuika
+     * setDgSerShurui
+     * @param DgSerShurui DgSerShurui
      */
-    @JsonProperty("btnTsuika")
-    public void setBtnTsuika(Button btnTsuika) {
-        this.btnTsuika = btnTsuika;
-    }
-
-    /*
-     * getdgServiceShurui
-     * @return dgServiceShurui
-     */
-    @JsonProperty("dgServiceShurui")
-    public DataGrid<dgServiceShurui_Row> getDgServiceShurui() {
-        return dgServiceShurui;
-    }
-
-    /*
-     * setdgServiceShurui
-     * @param dgServiceShurui dgServiceShurui
-     */
-    @JsonProperty("dgServiceShurui")
-    public void setDgServiceShurui(DataGrid<dgServiceShurui_Row> dgServiceShurui) {
-        this.dgServiceShurui = dgServiceShurui;
+    @JsonProperty("DgSerShurui")
+    public void setDgSerShurui(DgSerShuruiDiv DgSerShurui) {
+        this.DgSerShurui = DgSerShurui;
     }
 
     /*
@@ -96,66 +72,44 @@ public class KubunShikyuGendogakuDiv extends Panel {
     }
 
     /*
+     * getKanryo
+     * @return Kanryo
+     */
+    @JsonProperty("Kanryo")
+    public KanryoDiv getKanryo() {
+        return Kanryo;
+    }
+
+    /*
+     * setKanryo
+     * @param Kanryo Kanryo
+     */
+    @JsonProperty("Kanryo")
+    public void setKanryo(KanryoDiv Kanryo) {
+        this.Kanryo = Kanryo;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBox getTxtServiceCode() {
-        return this.getServiceShuruiShousai().getTxtServiceCode();
+    public Button getBtnTsuika() {
+        return this.getDgSerShurui().getBtnTsuika();
     }
 
     @JsonIgnore
-    public void setTxtServiceCode(TextBox txtServiceCode) {
-        this.getServiceShuruiShousai().setTxtServiceCode(txtServiceCode);
+    public void  setBtnTsuika(Button btnTsuika) {
+        this.getDgSerShurui().setBtnTsuika(btnTsuika);
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtTeikyoKaishiYM() {
-        return this.getServiceShuruiShousai().getTxtTeikyoKaishiYM();
+    public DataGrid<dgServiceShurui_Row> getDgServiceShurui() {
+        return this.getDgSerShurui().getDgServiceShurui();
     }
 
     @JsonIgnore
-    public void setTxtTeikyoKaishiYM(TextBoxDate txtTeikyoKaishiYM) {
-        this.getServiceShuruiShousai().setTxtTeikyoKaishiYM(txtTeikyoKaishiYM);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtTeikyoShuryoYM() {
-        return this.getServiceShuruiShousai().getTxtTeikyoShuryoYM();
-    }
-
-    @JsonIgnore
-    public void setTxtTeikyoShuryoYM(TextBoxDate txtTeikyoShuryoYM) {
-        this.getServiceShuruiShousai().setTxtTeikyoShuryoYM(txtTeikyoShuryoYM);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtServiceMeisho() {
-        return this.getServiceShuruiShousai().getTxtServiceMeisho();
-    }
-
-    @JsonIgnore
-    public void setTxtServiceMeisho(TextBox txtServiceMeisho) {
-        this.getServiceShuruiShousai().setTxtServiceMeisho(txtServiceMeisho);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtServiceRyakusho() {
-        return this.getServiceShuruiShousai().getTxtServiceRyakusho();
-    }
-
-    @JsonIgnore
-    public void setTxtServiceRyakusho(TextBox txtServiceRyakusho) {
-        this.getServiceShuruiShousai().setTxtServiceRyakusho(txtServiceRyakusho);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlServiceBunruiCode() {
-        return this.getServiceShuruiShousai().getDdlServiceBunruiCode();
-    }
-
-    @JsonIgnore
-    public void setDdlServiceBunruiCode(DropDownList ddlServiceBunruiCode) {
-        this.getServiceShuruiShousai().setDdlServiceBunruiCode(ddlServiceBunruiCode);
+    public void  setDgServiceShurui(DataGrid<dgServiceShurui_Row> dgServiceShurui) {
+        this.getDgSerShurui().setDgServiceShurui(dgServiceShurui);
     }
 
     // </editor-fold>
