@@ -60,7 +60,7 @@ public class TatokureiHenkoTsuchishoHakko {
      */
     public ResponseData<TatokureiHenkoTsuchishoHakkoDiv> onLoad(TatokureiHenkoTsuchishoHakkoDiv div) {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード();
-//        div.getCcdKaigoAtenaInfo().initialize(識別コード);
+        div.getCcdKaigoAtenaInfo().initialize(識別コード);
         div.getCcdKaigoShikakuJoho().initialize(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号());
         List<TaJushochiTokureisyaKanriMaster> tekiyoJohoList = get適用情報(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
         if (tekiyoJohoList != null && !tekiyoJohoList.isEmpty()) {
