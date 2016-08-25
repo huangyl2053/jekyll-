@@ -49,18 +49,14 @@ public class TatokureiHenkoTsuchishoHakkoValidationHandler {
         if ((!yakushoMei.isNullOrEmpty()) &&
                (!onchu.isNullOrEmpty())){
             if ((yakushoMei.length() + onchu.length())>30) {
-                   if (!div.getTajutokuTekiyoJohoIchiran().getReportPublish().isIsPublish()) {
-                       validPairs.add(new ValidationMessageControlPair(KETMessages.役所名と御中の桁数));               
-                }
+                       validPairs.add(new ValidationMessageControlPair(KETMessages.役所名と御中の桁数));    
               }
         }
         
          if ((!tantokamei.isNullOrEmpty()) &&
                (!samu.isNullOrEmpty())){
             if ((tantokamei.length() + samu.length())>15) {
-                   if (!div.getTajutokuTekiyoJohoIchiran().getReportPublish().isIsPublish()) {
-                       validPairs.add(new ValidationMessageControlPair(KETSMessages.担当課名と様の桁数));               
-                }
+                       validPairs.add(new ValidationMessageControlPair(KETSMessages.担当課名と様の桁数)); 
               }
         }
 
