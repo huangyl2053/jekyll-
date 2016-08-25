@@ -10,8 +10,8 @@ and open the template in the editor.
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.sokyuhikazeinenkintaishousyadoutei.IHikazeiNennkinnTaishousyaUpdateMapper">
 
     <resultMap id="resultMap_HikazeNenkinTaishoshaEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100203.HikazeNenkinTaishoshaEntity" autoMapping="true">
-        <result property="temp_genKisoNennkinnNo" column="genkisonenkinno" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="temp_hihokenshano" column="hihokenshano" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_genKisoNennkinnNo" column="genKisoNennkinnNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_hihokenshano" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <association property="hikazeNenkinTaishoshaEntity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4037HikazeNenkinTaishoshaMapper.ResultMap_DbT4037HikazeNenkinTaishoshaEntity"/>
     </resultMap>
 
