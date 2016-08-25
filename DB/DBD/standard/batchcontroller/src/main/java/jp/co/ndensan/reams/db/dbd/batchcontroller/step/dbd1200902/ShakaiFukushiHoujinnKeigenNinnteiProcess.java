@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100019.ShafukuRiysFutKeigTaisKakuninshoShoNoAriReport;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd1200902.ShakaiFukushiHoujinnKeigenNinnteiListPropery;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd1200902.ShakaiFukushiHoujinnKeigenNinnteiListOrderKey;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.ShakaiFukushiHoujinnKeigenNinnteiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.ShakaiFukushiHoujinnKeigenNinnteiEntity;
@@ -85,7 +85,7 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
         reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, 帳票ID.getReportId(), reamsLoginID,
                 processParamter.get改頁出力順ID());
-        出力順 = MyBatisOrderByClauseCreator.create(ShakaiFukushiHoujinnKeigenNinnteiListPropery.class, outputOrder);
+        出力順 = MyBatisOrderByClauseCreator.create(ShakaiFukushiHoujinnKeigenNinnteiListOrderKey.class, outputOrder);
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         帳票制御共通 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御共通(帳票ID.getReportId());
         帳票制御汎用 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御汎用(帳票ID.getReportId());

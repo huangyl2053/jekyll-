@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902;
 
-import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,15 +29,15 @@ public class FutanGenndoGakuNinnteiListEntity {
     private boolean ninteishoHakkoZumi;
     private boolean tsuchiHakkoZumi;
     private ShikibetsuCode shikibetsuCode;
+    private LasdecCode shichosonCode;
     private FlexibleDate shinseiYMD;
     private FlexibleDate ketteiYMD;
     private FlexibleDate tekiyoYMD;
     private FlexibleDate yukoKigenYMD;
-    private KetteiKubun ketteiKubun;
+    private RString ketteiKubun;
     private RString riyoshaFutanDankai;
     private JigyoshaNo nyushoShisetsuCode;
     private FlexibleDate shikakuSoshitsuYMD;
-    //private FutanGenndoGakuNinnteiTempTableEntity 負担限度額認定証通知書発行状況一時Entity;
     private UaFt200FindShikibetsuTaishoEntity psmEntity;
 
 }

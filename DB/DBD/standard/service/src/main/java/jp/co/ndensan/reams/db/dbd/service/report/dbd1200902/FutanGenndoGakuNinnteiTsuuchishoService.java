@@ -41,7 +41,7 @@ public class FutanGenndoGakuNinnteiTsuuchishoService {
                 = mapperProvider.create(IFutanGenndoGakuNinnteiTsuuchishoMapper.class);
         List<FutanGenndoGakuNinnteiTsuuchishoEntity> result
                 = mapper.get負担限度額認定の通知書発行情報(利用者負担割合検索条件);
-        if (result == null || !result.isEmpty()) {
+        if (result == null || result.isEmpty()) {
             return 0;
         }
         return result.size();
