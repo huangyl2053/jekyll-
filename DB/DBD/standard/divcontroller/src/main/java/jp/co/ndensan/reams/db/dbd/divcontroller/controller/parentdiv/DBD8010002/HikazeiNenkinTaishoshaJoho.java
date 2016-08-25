@@ -123,7 +123,9 @@ public class HikazeiNenkinTaishoshaJoho {
 
             List<RString> 構成市町村コードリスト = ViewStateHolder.
                     get(ViewStateKeys.取込対象市町村コードリスト, new ArrayList<>().getClass());
-            if (構成市町村コードリスト.isEmpty()) {
+            if (!単一保険者.equals(getHandler(div).広域と市町村判断())
+                    && 構成市町村コードリスト.isEmpty()) {
+
                 return ResponseData.of(div).addMessage(DbdErrorMessages.処理なし.getMessage()).respond();
             }
         }
@@ -263,5 +265,7 @@ public class HikazeiNenkinTaishoshaJoho {
     private void setDisplayOrOpen(HikazeiNenkinTaishoshaJohoDiv div, boolean flg) {
         div.getFuairuAppurodo().setCanOpenAndClose(flg);
         div.getFuairuAppurodo().setIsOpen(flg);
+        div.getUplTaishoFuairu().setDisplayNone(!flg);
+        div.getBtnAppurodo().setDisplayNone(!flg);
     }
 }
