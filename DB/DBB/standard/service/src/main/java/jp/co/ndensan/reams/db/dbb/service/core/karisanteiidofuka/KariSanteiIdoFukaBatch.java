@@ -1329,7 +1329,11 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         builder.set資格取得届出年月日(資格情報.get資格取得届出年月日());
         builder.set第1号資格取得年月日(資格情報.get第1号資格取得年月日());
         builder.set被保険者区分コード(資格情報.get被保険者区分コード());
-        builder.set資格喪失事由コード(資格情報.get資格喪失事由コード());
+        if (資格情報.get資格喪失事由コード() != null) {
+            builder.set資格喪失事由コード(資格情報.get資格喪失事由コード());
+        } else {
+            builder.set資格喪失事由コード(RString.EMPTY);
+        }
         builder.set資格喪失年月日(資格情報.get資格喪失年月日());
         builder.set資格喪失届出年月日(資格情報.get資格喪失届出年月日());
         builder.set資格変更事由コード(資格情報.get資格変更事由コード());
