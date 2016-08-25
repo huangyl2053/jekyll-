@@ -78,7 +78,8 @@ public class KyufuJissekiGaitosha {
         boolean 訪問通所サービスフラグ = false;
         boolean 短期入所サービスフラグ = false;
         for (KyufuKanrihyoShokaiBusiness 給付管理明細 : 給付管理明細一覧) {
-            給付管理明細一覧Model.add(KyufuKanrihyoShokaiDataModel.createDataModel(給付管理明細));
+            KyufuKanrihyoShokaiDataModel dataModel = new KyufuKanrihyoShokaiDataModel();
+            給付管理明細一覧Model.add(dataModel.createDataModel(給付管理明細));
             if (!居宅サービスフラグ && KyotakuServiceKubun.居宅サービス.getコード().equals(
                     給付管理明細.get給付管理票種別区分コード())) {
                 居宅サービスフラグ = true;

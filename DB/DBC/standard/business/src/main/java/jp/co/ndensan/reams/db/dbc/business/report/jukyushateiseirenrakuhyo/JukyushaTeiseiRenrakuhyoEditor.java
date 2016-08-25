@@ -61,7 +61,9 @@ public class JukyushaTeiseiRenrakuhyoEditor implements IJukyushaTeiseiRenrakuhyo
         source.Hyodai2_1 = 支給限度基準額;
         source.minashiKbn = 出力用受給者訂正情報Entity.getみなし区分();
         source.yoKaigoJotaiKbn = 出力用受給者訂正情報Entity.get要介護状態区分();
-        source.kohiFutanJogenGaku = new RString(出力用受給者訂正情報Entity.get公費負担上限額減額().toString());
+        if (出力用受給者訂正情報Entity.get公費負担上限額減額() != null) {
+            source.kohiFutanJogenGaku = new RString(出力用受給者訂正情報Entity.get公費負担上限額減額().toString());
+        }
         source.sikyuGendoKijunGaKu1 = 出力用受給者訂正情報Entity.get支給限度基準額1();
         source.Hyodai2_2 = 旧訪問通所;
         source.Hyodai3_1 = 支給限度基準額;
@@ -88,7 +90,9 @@ public class JukyushaTeiseiRenrakuhyoEditor implements IJukyushaTeiseiRenrakuhyo
         source.rokenShichosonNo = 出力用受給者訂正情報Entity.get老人保健市町村番号();
         source.rokenJukyushaNO = 出力用受給者訂正情報Entity.get老人保健受給者番号();
         source.shaKyufuritsu = 出力用受給者訂正情報Entity.get軽減率();
-        source.shokiboKyotakuUmu = new RString(出力用受給者訂正情報Entity.get小規模居宅ｻｰﾋﾞｽ利用().toString());
+        if (出力用受給者訂正情報Entity.get小規模居宅ｻｰﾋﾞｽ利用() != null) {
+            source.shokiboKyotakuUmu = new RString(出力用受給者訂正情報Entity.get小規模居宅ｻｰﾋﾞｽ利用().toString());
+        }
         source.nijiYoboTaishoKbn = 出力用受給者訂正情報Entity.get二次予防事業区分();
         source.shinseiShubetsu = 出力用受給者訂正情報Entity.get申請種別();
         source.henkoShinseiKbn = 出力用受給者訂正情報Entity.get変更申請中区分();

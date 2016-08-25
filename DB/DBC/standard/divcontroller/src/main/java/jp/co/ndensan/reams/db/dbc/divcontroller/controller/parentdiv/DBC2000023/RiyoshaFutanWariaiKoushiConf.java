@@ -14,8 +14,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc2000022.FutanWariaiSo
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -54,13 +53,8 @@ public class RiyoshaFutanWariaiKoushiConf {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(DbcQuestionMessages.負担割合証単票発行確認.getMessage()
                     .getCode(),
-                    DbcQuestionMessages.負担割合証単票発行確認.getMessage().evaluate());
+                    DbcQuestionMessages.負担割合証単票発行確認.getMessage().evaluate(), ButtonSelectPattern.OKCancel);
             return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(DbcQuestionMessages.負担割合証単票発行確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).setState(DBC2000023StateName.初期表示);
         }
         return ResponseData.of(div).respond();
     }

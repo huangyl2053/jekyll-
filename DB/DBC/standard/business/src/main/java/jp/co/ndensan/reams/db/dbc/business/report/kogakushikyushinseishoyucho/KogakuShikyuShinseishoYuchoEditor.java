@@ -75,21 +75,21 @@ public class KogakuShikyuShinseishoYuchoEditor implements IKogakuShikyuShinseish
         source.chuibun = 注意文;
         if (this.is金融機関表示) {
             if (帳票出力対象データ.getTsuchoKigoChohyo() != null) {
-                source.tuchoKigo1 = 帳票出力対象データ.getTsuchoKigoChohyo().substring(定値_0, 定値_1);
-                source.tuchoKigo2 = 帳票出力対象データ.getTsuchoKigoChohyo().substring(定値_1, 定値_2);
-                source.tuchoKigo3 = 帳票出力対象データ.getTsuchoKigoChohyo().substring(定値_2, 定値_3);
-                source.tuchoKigo4 = 帳票出力対象データ.getTsuchoKigoChohyo().substring(定値_3, 定値_4);
-                source.tuchoKigo5 = 帳票出力対象データ.getTsuchoKigoChohyo().substring(定値_4, 定値_5);
+                source.tuchoKigo1 = 帳票出力対象データ.getTsuchoKigoChohyo().substringReturnAsPossible(定値_0, 定値_1);
+                source.tuchoKigo2 = 帳票出力対象データ.getTsuchoKigoChohyo().substringReturnAsPossible(定値_1, 定値_2);
+                source.tuchoKigo3 = 帳票出力対象データ.getTsuchoKigoChohyo().substringReturnAsPossible(定値_2, 定値_3);
+                source.tuchoKigo4 = 帳票出力対象データ.getTsuchoKigoChohyo().substringReturnAsPossible(定値_3, 定値_4);
+                source.tuchoKigo5 = 帳票出力対象データ.getTsuchoKigoChohyo().substringReturnAsPossible(定値_4, 定値_5);
             }
             if (帳票出力対象データ.getTsuchoNoChohyo() != null) {
-                source.tuchoNo1 = 帳票出力対象データ.getTsuchoNoChohyo().substring(定値_0, 定値_1);
-                source.tuchoNo2 = 帳票出力対象データ.getTsuchoNoChohyo().substring(定値_1, 定値_2);
-                source.tuchoNo3 = 帳票出力対象データ.getTsuchoNoChohyo().substring(定値_2, 定値_3);
-                source.tuchoNo4 = 帳票出力対象データ.getTsuchoNoChohyo().substring(定値_3, 定値_4);
-                source.tuchoNo5 = 帳票出力対象データ.getTsuchoNoChohyo().substring(定値_4, 定値_5);
-                source.tuchoNo6 = 帳票出力対象データ.getTsuchoNoChohyo().substring(定値_5, 定値_6);
-                source.tuchoNo7 = 帳票出力対象データ.getTsuchoNoChohyo().substring(定値_6, 定値_7);
-                source.tuchoNo8 = 帳票出力対象データ.getTsuchoNoChohyo().substring(定値_7, 定値_8);
+                source.tuchoNo1 = 帳票出力対象データ.getTsuchoNoChohyo().substringReturnAsPossible(定値_0, 定値_1);
+                source.tuchoNo2 = 帳票出力対象データ.getTsuchoNoChohyo().substringReturnAsPossible(定値_1, 定値_2);
+                source.tuchoNo3 = 帳票出力対象データ.getTsuchoNoChohyo().substringReturnAsPossible(定値_2, 定値_3);
+                source.tuchoNo4 = 帳票出力対象データ.getTsuchoNoChohyo().substringReturnAsPossible(定値_3, 定値_4);
+                source.tuchoNo5 = 帳票出力対象データ.getTsuchoNoChohyo().substringReturnAsPossible(定値_4, 定値_5);
+                source.tuchoNo6 = 帳票出力対象データ.getTsuchoNoChohyo().substringReturnAsPossible(定値_5, 定値_6);
+                source.tuchoNo7 = 帳票出力対象データ.getTsuchoNoChohyo().substringReturnAsPossible(定値_6, 定値_7);
+                source.tuchoNo8 = 帳票出力対象データ.getTsuchoNoChohyo().substringReturnAsPossible(定値_7, 定値_8);
             }
         }
         source.remban = 連番;

@@ -128,15 +128,13 @@ public class GaitouIchirannCsvProcess extends BatchProcessBase<HikazeNenkinTaish
                 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), t.getHihokenshaNo().getColumnValue());
         PersonalData personalData = PersonalData.of(t.getShikibetsuCode(), expandedInformations);
         personalDataList.add(personalData);
-
-        AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-        manager.spool(fileName, id);
-
     }
 
     @Override
     protected void afterExecute() {
         csvWriterJunitoJugo.close();
+        AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+        manager.spool(fileName, id);
     }
 
     private void eucCsvEntity(GaitouIchirannCsvEntity eucCsvEntity, HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {
@@ -144,12 +142,12 @@ public class GaitouIchirannCsvProcess extends BatchProcessBase<HikazeNenkinTaish
         eucCsvEntity.set被保険者番号(t.getHihokenshaNo().getColumnValue());
         eucCsvEntity.set年金保険者コード(t.getDtNennkinnHokenshaCode());
         eucCsvEntity.set年金保険者名称(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                UEXCodeShubetsu.年金保険者コード.getCodeShubetsu(), new Code(t.getDtNennkinnHokenshaCode())));
+                UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), new Code(t.getDtNennkinnHokenshaCode())));
         eucCsvEntity.set基礎年金番号(t.getDtKisoNennkinnNo());
         eucCsvEntity.set基礎年金番号変更(t.getKisoNennkinnNoHennkou());
-        eucCsvEntity.set年金コード(t.getNennkinnCode());
+        eucCsvEntity.set年金コード(t.getDtNennkinnCode());
         eucCsvEntity.set年金名称(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                UEXCodeShubetsu.年金コード.getCodeShubetsu(), new Code(set年金(t.getNennkinnCode()))));
+                UEXCodeShubetsu.年金コード.getCodeShubetsu(), new Code(set年金(t.getDtNennkinnCode()))));
         eucCsvEntity.set対象年(t.getDtTaisyoYear());
         eucCsvEntity.set識別コード(t.getShikibetsuCode().getColumnValue());
         eucCsvEntity.set世帯コード(t.getShotaiCode());

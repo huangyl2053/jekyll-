@@ -34,6 +34,18 @@ public class YokaigoNinteiTsukibetsuJukyushaMybatisParameter implements IMyBatis
     private Code 終了地区コード;
     private RString 集計単位;
     private RString psmShikibetsuTaisho;
+    private boolean is住所;
+    private boolean is行政区;
+    private boolean is地区2;
+    private boolean is受給申請事由;
+    private boolean is申請区分申請時;
+    private boolean is申請区分法令;
+    private static final RString 地区区分住所 = new RString("JUSHO");
+    private static final RString 地区区分行政区 = new RString("GYOSEIKU");
+    private static final RString 地区区分地区２ = new RString("CHIKU2");
+    private static final RString 集計単位申請事由 = new RString("ZIYU");
+    private static final RString 集計単位申請時 = new RString("SHINSEIZI");
+    private static final RString 集計単位法令 = new RString("HOUREI");
 
     /**
      * コンストラクタです。
@@ -71,17 +83,31 @@ public class YokaigoNinteiTsukibetsuJukyushaMybatisParameter implements IMyBatis
         } else if (基準フラグ.equals(new RString("1"))) {
             this.is基準フラグ1 = true;
         }
-        this.年齢基準日 = 年齢基準日;
         this.基準年月日 = 基準年月日;
         this.基準年月 = 基準年月;
         this.生年月日From = 生年月日From;
         this.生年月日To = 生年月日To;
-        this.生年月日From2 = 年齢基準日.minusYear(年齢From);
-        this.生年月日To2 = 年齢基準日.minusYear(年齢To);
-        this.地区区分 = 地区区分;
+        if (!年齢基準日.isEmpty() && 年齢基準日 != null) {
+            this.年齢基準日 = 年齢基準日;
+            this.生年月日From2 = 年齢基準日.minusYear(年齢From);
+            this.生年月日To2 = 年齢基準日.minusYear(年齢To);
+        }
+        if (地区区分.equals(地区区分住所)) {
+            this.is住所 = true;
+        } else if (地区区分.equals(地区区分行政区)) {
+            this.is行政区 = true;
+        } else if (地区区分.equals(地区区分地区２)) {
+            this.is地区2 = true;
+        }
         this.開始地区コード = 開始地区コード;
         this.終了地区コード = 終了地区コード;
-        this.集計単位 = 集計単位;
+        if (集計単位.equals(集計単位申請事由)) {
+            this.is受給申請事由 = true;
+        } else if (集計単位.equals(集計単位申請時)) {
+            this.is申請区分申請時 = true;
+        } else if (集計単位.equals(集計単位法令)) {
+            this.is申請区分法令 = true;
+        }
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 }

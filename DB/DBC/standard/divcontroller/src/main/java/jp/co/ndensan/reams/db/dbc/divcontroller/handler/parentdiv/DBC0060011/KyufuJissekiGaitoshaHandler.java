@@ -69,6 +69,7 @@ public class KyufuJissekiGaitoshaHandler {
                 if (給付管理票.getサービス事業所番号() != null) {
                     サービス事業所番号 = 給付管理票.getサービス事業所番号().value();
                 }
+                KyufuKanrihyoShokaiDataModel dataModel = new KyufuKanrihyoShokaiDataModel();
                 rowList.add(new dgHihokenshaSearchGaitosha_Row(
                         給付管理票.getサービス提供年月().wareki().firstYear(FirstYear.ICHI_NEN).toDateString(),
                         給付管理票.get審査年月().wareki().firstYear(FirstYear.ICHI_NEN).toDateString(),
@@ -76,7 +77,7 @@ public class KyufuJissekiGaitoshaHandler {
                         被保険者番号,
                         サービス事業所番号,
                         給付管理票.get氏名(),
-                        DataPassingConverter.serialize(KyufuKanrihyoShokaiDataModel.createDataModel(給付管理票))));
+                        DataPassingConverter.serialize(dataModel.createDataModel(給付管理票))));
             }
             div.getKyufuJissekiGaitoshaListPanel().getDgHihokenshaSearchGaitosha().setDataSource(rowList);
         }
