@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +24,4 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoEntity {
     private ShafukuRiyoshaFutanKeigenEntity 社会福祉法人等利用者負担軽減;
     private UaFt200FindShikibetsuTaishoEntity psmEntity;
     private UaFt250FindAtesakiEntity atesakiEntity;
-    private RString hihokenshaNo;
-    private RString shikibetsuCode;
 }

@@ -59,6 +59,7 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
 
     private static final ReportIdDBD 帳票ID = ReportIdDBD.DBD100018;
     private RString reamsLoginID;
+    private boolean isInsert = false;
     private IOutputOrder outputOrder;
     private ShakaiFukushiHoujinnKeigenNinnteiProcessParameter processParamter;
     private RString 出力順;
@@ -112,6 +113,7 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
 
     @Override
     protected void process(ShakaiFukushiHoujinnKeigenNinnteiEntity entity) {
+        isInsert = true;
         IKojin iKojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
         RDate 認定証の交付日 = null;
         if (null != processParamter.get認定証の交付日()) {
@@ -128,7 +130,9 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
 
     @Override
     protected void afterExecute() {
-        バッチ出力条件リストの出力();
+        if (isInsert) {
+            バッチ出力条件リストの出力();
+        }
     }
 
     private void バッチ出力条件リストの出力() {
