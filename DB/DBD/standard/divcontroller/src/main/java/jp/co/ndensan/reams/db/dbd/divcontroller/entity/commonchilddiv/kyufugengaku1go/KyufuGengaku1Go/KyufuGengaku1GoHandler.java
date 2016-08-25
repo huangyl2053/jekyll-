@@ -361,17 +361,17 @@ public class KyufuGengaku1GoHandler {
         List<DbT4022ShiharaiHohoHenkoTainoEntity> 支払方法変更滞納Entity = new ArrayList();
         List<ShiharaiHohoHenkoTaino> 支払方法変更滞納情報 = new ArrayList();
         List<TainoKiSummary> tainoKiSummary = 滞納判定結果.get滞納情報();
-        int 連番 = 1;
+        int 連番 = 0;
         for (TainoKiSummary summary : tainoKiSummary) {
-            int 連番new = 連番;
-            TaishoHanteiKubun 対象管理区分 = get対象管理区分(連番new, summary.get時効区分().getコード(), 支払方法変更滞納情報);
+            連番 = 連番 + 1;
+            TaishoHanteiKubun 対象管理区分 = get対象管理区分(連番, summary.get時効区分().getコード(), 支払方法変更滞納情報);
             DbT4022ShiharaiHohoHenkoTainoEntity entity = new DbT4022ShiharaiHohoHenkoTainoEntity();
             entity.setShoKisaiHokenshaNo(証記載保険者番号());
             entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
             entity.setKanriKubun(ShiharaiHenkoKanriKubun._１号給付額減額.getコード());
             entity.setRirekiNo(get最大履歴番号());
             entity.setTainoHanteiKubun(TainoHanteiKubun.給付額減額登録.getコード());
-            entity.setRenNo(連番++);
+            entity.setRenNo(連番);
             entity.setChoteiNendo(summary.get調定年度());
             entity.setFukaNendo(summary.get賦課年度());
             entity.setTsuchishoNo(summary.get通知書番号());
@@ -542,10 +542,6 @@ public class KyufuGengaku1GoHandler {
                         .setState(EntityDataState.Modified).build())
                         .setState(EntityDataState.Modified).build());
             }
-            builder.setShiharaiHohoHenkoGengaku(shiharaiHohoHenkoGengaku.createBuilderForEdit()
-                    .set確定減額期間終了年月日(div.getTxtGengakuTekiyoKikanShuryoYMD().getValue())
-                    .setState(EntityDataState.Modified).build())
-                    .setState(EntityDataState.Modified);
         }
         ViewStateHolder.put(KyufuGengaku1GoHandler.一号給付額減額ダイアログキー.支払方法変更管理業務概念, builder.build());
     }
