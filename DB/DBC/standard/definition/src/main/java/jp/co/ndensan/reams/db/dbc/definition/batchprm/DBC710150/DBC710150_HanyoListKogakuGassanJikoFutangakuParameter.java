@@ -29,15 +29,15 @@ public class DBC710150_HanyoListKogakuGassanJikoFutangakuParameter extends Batch
     private static final String KEY_FLEXIBLE_YEAR = "flexibleYear";
     private static final String KEY_FLEXIBLE_DATE_FROM = "flexibleDateFrom";
     private static final String KEY_FLEXIBLE_DATE_TO = "flexibleDateTo";
-    private static final String KEY_SHIKYU_SHINSEISHO_SEIRINO_FROM = "shikyuShinseishoSeiriNoFrom";
-    private static final String KEY_SHIKYU_SHINSEISHO_SEIRINO_TO = "shikyuShinseishoSeiriNoTo";
+    private static final String KEY_SHIKYU_FROM = "shikyuShinseishoSeiriNoFrom";
+    private static final String KEY_SHIKYU_TO = "shikyuShinseishoSeiriNoTo";
     private static final String KEY_SOFU_TAISHOGAI_FUKUMU = "sofuTaishogaiFukumu";
-    private static final String KEY_JIKO_FUTANGAKU_KAKUNIN_FROM = "jikoFutangakuKakuninFrom";
-    private static final String KEY_JIKO_FUTANGAKU_KAKUNIN_TO = "sofuTaishogaiFukumuTo";
-    private static final String KEY_HOSEIZUMI_JIKO_FUTANGAKU_FROM = "hoseizumiJikoFutangakuFrom";
-    private static final String KEY_HOSEIZUMI_JIKO_FUTANGAKU_TO = "hoseizumiJikoFutangakuTo";
-    private static final String KEY_JIKO_FUTANNGAKU_SHOUMEISHO_FROM = "jikoFutanngakuShoumeishoFrom";
-    private static final String KEY_JIKO_FUTANNGAKU_SHOUMEISHO_TO = "jikoFutanngakuShoumeishoTo";
+    private static final String KEY_JIKO_FROM = "jikoFutangakuKakuninFrom";
+    private static final String KEY_JIKO_TO = "sofuTaishogaiFukumuTo";
+    private static final String KEY_HOSEIZUMI_FROM = "hoseizumiJikoFutangakuFrom";
+    private static final String KEY_HOSEIZUMI_TO = "hoseizumiJikoFutangakuTo";
+    private static final String KEY_JIKO_FUTANNGAKU_FROM = "jikoFutanngakuShoumeishoFrom";
+    private static final String KEY_JIKO_FUTANNGAKU_TO = "jikoFutanngakuShoumeishoTo";
     private static final String KEY_TOMOKUME_FUKA = "tomokumeFuka";
     private static final String KEY_REBAN_FUKA = "rebanFuka";
     private static final String KEY_SLASH_DATE = "slashDate";
@@ -59,23 +59,23 @@ public class DBC710150_HanyoListKogakuGassanJikoFutangakuParameter extends Batch
     private FlexibleDate flexibleDateFrom;
     @BatchParameter(key = KEY_FLEXIBLE_DATE_TO, name = "申請年月日To")
     private FlexibleDate flexibleDateTo;
-    @BatchParameter(key = KEY_SHIKYU_SHINSEISHO_SEIRINO_FROM, name = "支給申請書整理番号From")
+    @BatchParameter(key = KEY_SHIKYU_FROM, name = "支給申請書整理番号From")
     private RString shikyuShinseishoSeiriNoFrom;
-    @BatchParameter(key = KEY_SHIKYU_SHINSEISHO_SEIRINO_TO, name = "支給申請書整理番号To")
+    @BatchParameter(key = KEY_SHIKYU_TO, name = "支給申請書整理番号To")
     private RString shikyuShinseishoSeiriNoTo;
     @BatchParameter(key = KEY_SOFU_TAISHOGAI_FUKUMU, name = "送付対象外")
     private boolean sofuTaishogaiFukumu;
-    @BatchParameter(key = KEY_JIKO_FUTANGAKU_KAKUNIN_FROM, name = "自己負担額確認情報受取年月From")
+    @BatchParameter(key = KEY_JIKO_FROM, name = "自己負担額確認情報受取年月From")
     private FlexibleDate jikoFutangakuKakuninFrom;
-    @BatchParameter(key = KEY_JIKO_FUTANGAKU_KAKUNIN_TO, name = "自己負担額確認情報受取年月To")
+    @BatchParameter(key = KEY_JIKO_TO, name = "自己負担額確認情報受取年月To")
     private FlexibleDate sofuTaishogaiFukumuTo;
-    @BatchParameter(key = KEY_HOSEIZUMI_JIKO_FUTANGAKU_FROM, name = "補正済自己負担額情報送付年月From")
+    @BatchParameter(key = KEY_HOSEIZUMI_FROM, name = "補正済自己負担額情報送付年月From")
     private FlexibleDate hoseizumiJikoFutangakuFrom;
-    @BatchParameter(key = KEY_HOSEIZUMI_JIKO_FUTANGAKU_TO, name = "補正済自己負担額情報送付年月To")
+    @BatchParameter(key = KEY_HOSEIZUMI_TO, name = "補正済自己負担額情報送付年月To")
     private FlexibleDate hoseizumiJikoFutangakuTo;
-    @BatchParameter(key = KEY_JIKO_FUTANNGAKU_SHOUMEISHO_FROM, name = "自己負担額証明書情報受取年月From")
+    @BatchParameter(key = KEY_JIKO_FUTANNGAKU_FROM, name = "自己負担額証明書情報受取年月From")
     private FlexibleDate jikoFutanngakuShoumeishoFrom;
-    @BatchParameter(key = KEY_JIKO_FUTANNGAKU_SHOUMEISHO_TO, name = "自己負担額証明書情報受取年月To")
+    @BatchParameter(key = KEY_JIKO_FUTANNGAKU_TO, name = "自己負担額証明書情報受取年月To")
     private FlexibleDate jikoFutanngakuShoumeishoTo;
     @BatchParameter(key = KEY_TOMOKUME_FUKA, name = "項目名付加")
     private boolean tomokumeFuka;
