@@ -77,6 +77,17 @@ public class ShakaiFukushiHojinKeigenNinteishaList {
     }
 
     /**
+     * 「平成17」の変更」の処理です。
+     *
+     * @param div ShakaiFukushiHojinKeigenNinteishaListDiv
+     * @return ResponseData<ShakaiFukushiHojinKeigenNinteishaListDiv>
+     */
+    public ResponseData<ShakaiFukushiHojinKeigenNinteishaListDiv> nendoSeidoKaisei_onchange(ShakaiFukushiHojinKeigenNinteishaListDiv div) {
+        getHandler(div).nendoSeidoKaisei_onchange();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 実行するボタンを押下のチェック処理します。
      *
      * @param div ShakaiFukushiHojinKeigenNinteishaListDiv

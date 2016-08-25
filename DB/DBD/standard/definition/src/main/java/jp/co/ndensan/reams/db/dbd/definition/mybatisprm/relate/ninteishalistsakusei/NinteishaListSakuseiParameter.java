@@ -44,14 +44,15 @@ public class NinteishaListSakuseiParameter extends UaFt200FindShikibetsuTaishoPa
      * @param 課税判定等基準日 課税判定等基準日
      * @param 抽出対象 抽出対象
      * @param 出力順 出力順
-     * @param 対象リスト
-     * @param 対象年度の開始日
-     * @param 対象年度の終了日
-     * @param 基準日
-     * @param searchKey
+     * @param 対象リスト 対象リスト
+     * @param 対象年度の開始日 対象年度の開始日
+     * @param 対象年度の終了日 対象年度の終了日
+     * @param 基準日 基準日
+     * @param searchKey searchKey
      */
     public NinteishaListSakuseiParameter(int 対象期間指定, int 世帯表示, FlexibleDate 課税判定等基準日, List<RString> 世帯非課税等,
-            int 抽出対象, RString 出力順, int 対象リスト, FlexibleDate 対象年度の開始日, FlexibleDate 対象年度の終了日, FlexibleDate 基準日, IShikibetsuTaishoPSMSearchKey searchKey) {
+            int 抽出対象, RString 出力順, int 対象リスト, FlexibleDate 対象年度の開始日, FlexibleDate 対象年度の終了日, FlexibleDate 基準日,
+            IShikibetsuTaishoPSMSearchKey searchKey) {
         super(searchKey);
         this.世帯表示 = 世帯表示;
         this.世帯非課税等 = 世帯非課税等;
@@ -74,11 +75,11 @@ public class NinteishaListSakuseiParameter extends UaFt200FindShikibetsuTaishoPa
      * @param 課税判定等基準日 課税判定等基準日
      * @param 抽出対象 抽出対象
      * @param 出力順 出力順
-     * @param 対象リスト
-     * @param 対象年度の開始日
-     * @param 対象年度の終了日
-     * @param 基準日
-     * @param searchKey
+     * @param 対象リスト 対象リスト
+     * @param 対象年度の開始日 対象年度の開始日
+     * @param 対象年度の終了日 対象年度の終了日
+     * @param 基準日 基準日
+     * @param searchKey searchKey
      * @return NinteishaListSakuseiParameter
      */
     public NinteishaListSakuseiParameter getNinteishaListSakuseiParameter(int 対象期間指定, int 世帯表示, FlexibleDate 課税判定等基準日,
