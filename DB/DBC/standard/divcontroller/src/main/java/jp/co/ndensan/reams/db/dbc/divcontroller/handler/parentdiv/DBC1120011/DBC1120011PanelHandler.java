@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 public class DBC1120011PanelHandler {
 
     private final DBC1120011PanelDiv div;
-    private final int 定数_1 = 1;
+    private static final int 定数_1 = 1;
 
     /**
      * コンストラクタです。
