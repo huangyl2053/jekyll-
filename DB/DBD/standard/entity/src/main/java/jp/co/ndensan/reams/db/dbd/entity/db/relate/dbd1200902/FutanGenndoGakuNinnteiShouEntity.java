@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902;
 
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -28,4 +29,5 @@ public class FutanGenndoGakuNinnteiShouEntity {
     private UaFt250FindAtesakiEntity atesakiEntity;
     private ShikibetsuCode shikibetsuCode;
     private LasdecCode shichosonCode;
+    private HihokenshaNo hihokenshaNo;
 }

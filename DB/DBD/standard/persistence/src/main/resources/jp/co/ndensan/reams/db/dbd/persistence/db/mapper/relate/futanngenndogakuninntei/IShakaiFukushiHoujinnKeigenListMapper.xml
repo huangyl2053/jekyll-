@@ -78,8 +78,7 @@ and open the template in the editor.
     <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
     AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
     ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = C."shikibetsuCode"
-    ORDER BY
-      #{出力順}
+      ${出力順}
 
 </select>
 <select id="get社会福祉法人等軽減の通知書発行の一時テーブルEntity"

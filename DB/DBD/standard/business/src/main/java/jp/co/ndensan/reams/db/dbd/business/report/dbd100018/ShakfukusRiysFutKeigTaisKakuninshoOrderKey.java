@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.report.dbd1200902;
+package jp.co.ndensan.reams.db.dbd.business.report.dbd100018;
 
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 出力順設定可能項目です。
  *
- * @reamsid_L DBD-3981-050 x_miaocl
+ * @reamsid_L DBD-3981-050 x_xuliang
  */
-public enum FutanGenndoGakuNinnteiListOrderKey implements IReportItems {
+public enum ShakfukusRiysFutKeigTaisKakuninshoOrderKey implements IReportItems {
 
     /**
      * 郵便番号
@@ -70,17 +70,26 @@ public enum FutanGenndoGakuNinnteiListOrderKey implements IReportItems {
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("A.\"hihokenshaNo\""));
+    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("A.\"hihokenshaNo\"")),
     /**
-     * 入所施設コード
+     * 確認番号
      */
-    //   入所施設コード(new RString("0108"), new RString("入所施設コード"), new RString(""));
+    確認番号(new RString("0110"), new RString("確認番号"), new RString("A.\"kakuninNo\"")),
+    /**
+     * 決定区分
+     */
+    決定区分(new RString("0111"), new RString("決定区分"), new RString("A.\"ketteiKubun\""));
+    //TODO 計画事業者番号は検索関連のテープルから取得できません。
+    /**
+     * 計画事業者番号
+     */
+    //計画事業者番号(new RString("0311"), new RString("計画事業者番号"), new RString(""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;
     private final RString myBatis項目名;
 
-    private FutanGenndoGakuNinnteiListOrderKey(RString 項目ID, RString フォームフィールド名, RString myBatis項目名) {
+    private ShakfukusRiysFutKeigTaisKakuninshoOrderKey(RString 項目ID, RString フォームフィールド名, RString myBatis項目名) {
         this.項目ID = 項目ID;
         this.フォームフィールド名 = フォームフィールド名;
         this.myBatis項目名 = myBatis項目名;
@@ -100,5 +109,4 @@ public enum FutanGenndoGakuNinnteiListOrderKey implements IReportItems {
     public RString getMyBatis項目名() {
         return myBatis項目名;
     }
-
 }
