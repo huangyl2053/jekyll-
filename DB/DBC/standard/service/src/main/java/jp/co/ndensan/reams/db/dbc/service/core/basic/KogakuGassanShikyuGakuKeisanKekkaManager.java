@@ -25,8 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class KogakuGassanShikyuGakuKeisanKekkaManager {
 
     private final DbT3072KogakuGassanShikyuGakuKeisanKekkaDac dac;
-    public static final RString メッセージ_被保険者番号 = new RString("被保険者番号");
-    public static final RString メッセージ_対象年度 = new RString("対象年度");
+    private static final RString メッセージ_被保険者番号 = new RString("被保険者番号");
+    private static final RString メッセージ_対象年度 = new RString("対象年度");
 
     /**
      * コンストラクタです。
