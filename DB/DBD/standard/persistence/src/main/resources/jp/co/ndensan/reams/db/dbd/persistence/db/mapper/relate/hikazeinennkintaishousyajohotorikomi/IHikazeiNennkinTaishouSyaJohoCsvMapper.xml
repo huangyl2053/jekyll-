@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-4910-030 x_lilh -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hikazeinennkintaishousyajohotorikomi.IHikazeiNennkinTaishouSyaJohoCsvMapper">
+    <resultMap id="resultMap_HikazeiNennkinTaishouSyaJohoListCsvResultEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100201.HikazeiNennkinTaishouSyaJohoListCsvResultEntity" autoMapping="true">
+        <result property="連番" column="連番" />
+        <result property="dtレコード区分" column="DTレコード区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt市町村コード" column="DT市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt年金保険者コード" column="DT年金保険者コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt通知内容コード" column="DT通知内容コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt予備1" column="DT予備1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt制度コード" column="DT制度コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt作成年月日" column="DT作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt基礎年金番号" column="DT基礎年金番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt年金コード" column="DT年金コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt予備2" column="DT予備2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt生年月日" column="DT生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt性別" column="DT性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtカナ氏名" column="DTカナ氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtシフトコード1" column="DTシフトコード1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt漢字氏名" column="DT漢字氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtシフトコード2" column="DTシフトコード2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt郵便番号" column="DT郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtカナ住所" column="DTカナ住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtシフトコード3" column="DTシフトコード3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt漢字住所" column="DT漢字住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtシフトコード4" column="DTシフトコード4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt対象年" column="DT対象年" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt訂正表示" column="DT訂正表示" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt各種区分" column="DT各種区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt処理結果" column="DT処理結果" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt予備3" column="DT予備3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt予備4" column="DT予備4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt金額1" column="DT金額1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt金額予備1" column="DT金額予備1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt金額予備2" column="DT金額予備2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt予備5" column="DT予備5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dt共済年金証書記号番号" column="DT共済年金証書記号番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+
+    </resultMap>
+
+    <select resultOrdered="true" id="get非課税年金対象者情報一覧CSV用のデータ情報"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100201.HikazeiNennkinTaishouSyaJohoListCsvResultEntity"
+            fetchSize="500">
+        SELECT
+        "dtno" AS 連番 ,
+        "dtrekodoKubun" AS DTレコード区分 ,
+        "dtshichosonCode" AS DT市町村コード ,
+        "dtnennkinnHokennshaCode" AS DT年金保険者コード ,
+        "dttsuuchiContentCode" AS DT通知内容コード ,
+        "dtyobi1" AS DT予備1 ,
+        "dtseidoCode" AS DT制度コード ,
+        "dtcreateYMD" AS DT作成年月日 ,
+        "dtnennkinnNo" AS DT基礎年金番号 ,
+        "dtnennkinnCode" AS DT年金コード ,
+        "dtyobi2" AS DT予備2 ,
+        "dtseinenngappi" AS DT生年月日 ,
+        "dtseibetsu" AS DT性別 ,
+        "dtkanaShimei" AS DTカナ氏名 ,
+        "dtshifutoCode1" AS DTシフトコード1 ,
+        "dtkanjiShimei" AS DT漢字氏名 ,
+        "dtshifutoCode2" AS DTシフトコード2 ,
+        "dtYubinNo" AS DT郵便番号 ,
+        "dtkanaJusyo" AS DTカナ住所 ,
+        "dtshifutoCode3" AS DTシフトコード3 ,
+        "dtkanjiJusyo" AS DT漢字住所 ,
+        "dtshifutoCode4" AS DTシフトコード4 ,
+        "dtTaishoYear" AS DT対象年 ,
+        "dtteiseiHyouji" AS DT訂正表示 ,
+        "dtkakushuKubun" AS DT各種区分 ,
+        "dtshoriResult" AS DT処理結果 ,
+        "dtyobi3" AS DT予備3 ,
+        "dtyobi4" AS DT予備4 ,
+        "dtkinngaku1" AS DT金額1 ,
+        "dtkinngakuYobi1" AS DT金額予備1 ,
+        "dtkinngakuYobi2" AS DT金額予備2 ,
+        "dtyobi5" AS DT予備5 ,
+        "dtkyousaiNennkinnShoushoKigouNo" AS DT共済年金証書記号番号
+        FROM
+        "TorikomiTempTable" AS 取込データ一時
+        ORDER BY DT市町村コード,連番
+    </select>
+</mapper>
