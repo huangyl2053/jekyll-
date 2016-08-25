@@ -175,7 +175,7 @@ public class TsuchishoHakoA4TypeProcess extends BatchProcessBase<KarisanteiGakuH
         TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport ichiranReport = new TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport(
                 編集後仮算定通知書, outputOrder, parameter.get帳票作成日時(), 連番);
         ichiranReport.writeBy(reportSourceWriterIchiran);
-        csvData = service.csvData作成(編集後仮算定通知書, parameter, 連番, 通知書番号);
+        csvData = service.csvData作成(編集後仮算定通知書, parameter, 連番, 通知書番号, entity);
         csvWriter.writeLine(csvData);
         csv有無 = true;
 
