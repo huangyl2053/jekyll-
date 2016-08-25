@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc020030;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020030.InsertKogakuKaigoKetteiTsuchishoInfoTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020030.UpdateKogakuShikyuHanteiKekkaProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020030.DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehishikyuketteitsuchisho.KogakuKaigoServiceProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -33,13 +34,23 @@ public class DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoFlow
     }
 
     /**
-     * 高額サービス一時テーブルの登録を行います。
+     * 高額サービス一時テーブルの登録メソッドです
      *
      * @return バッチコマンド
      */
     @Step(高額サービス一時テーブルの登録)
     protected IBatchFlowCommand insertKogakuKaigoKetteiTsuchishoInfoTempProcess() {
         return loopBatch(InsertKogakuKaigoKetteiTsuchishoInfoTempProcess.class).arguments(creatParameter()).define();
+    }
+
+    /**
+     * 高額サービス一時テーブルの設定メソッドです
+     *
+     * @return バッチコマンド
+     */
+    @Step(高額介護サービス費支給判定結果の更新)
+    protected IBatchFlowCommand updateKogakuShikyuHanteiKekkaProcess() {
+        return loopBatch(UpdateKogakuShikyuHanteiKekkaProcess.class).arguments(creatParameter()).define();
     }
 
     private KogakuKaigoServiceProcessParameter creatParameter() {
