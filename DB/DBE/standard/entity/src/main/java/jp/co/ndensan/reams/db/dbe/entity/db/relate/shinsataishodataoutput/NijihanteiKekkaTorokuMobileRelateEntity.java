@@ -125,11 +125,11 @@ public class NijihanteiKekkaTorokuMobileRelateEntity {
     private RString サービスの状況連番;
     private RString サービスの状況;
     private RString サービスの状況フラグ連番;
-    private RString サービスの状況フラグ;
+    private boolean サービスの状況フラグ;
     private RString 記入項目連番;
     private RString サービスの状況記入;
     private RString 施設利用連番;
-    private RString 施設利用フラグ;
+    private boolean 施設利用フラグ;
     private RString 認定調査認知症高齢者の日常生活自立度コード;
     private RString 認定調査認知症高齢者の日常生活自立度;
     private RString 認定調査障害高齢者の日常生活自立度コード;

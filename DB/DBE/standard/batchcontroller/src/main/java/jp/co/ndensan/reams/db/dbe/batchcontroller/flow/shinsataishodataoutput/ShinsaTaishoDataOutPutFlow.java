@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsataishodataoutput.Shi
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定審査会割当委員情報出力（モバイル）のバッチフロークラスです。
@@ -26,6 +28,8 @@ public class ShinsaTaishoDataOutPutFlow extends BatchFlowBase<ShinsaTaishoDataOu
 
     @Override
     protected void defineFlow() {
+        RString spoolWorkPath = Path.getTmpDirectoryPath();
+        getParameter().setSpoolWorkPath(spoolWorkPath);
         executeStep(SHINSATAISHODATAOUTPUT);
         executeStep(NIJIHANTEIKEKKATOROK);
         executeStep(DBT5501UPDATEPROCESS);

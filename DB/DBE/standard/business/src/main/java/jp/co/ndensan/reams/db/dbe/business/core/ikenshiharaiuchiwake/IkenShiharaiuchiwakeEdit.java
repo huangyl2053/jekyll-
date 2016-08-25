@@ -64,7 +64,7 @@ public class IkenShiharaiuchiwakeEdit {
         seikyuEntity.set住所(entity.getJusho());
         seikyuEntity.set医療機関(entity.getIryoKikanMeisho());
         seikyuEntity.set代表者名(entity.getDaihyoshaName());
-        seikyuEntity.set名称付与(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成料支払内訳確認_宛先敬称, RDate.getNowDate(),
+        seikyuEntity.set名称付与(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成料支払内訳確認_宛先敬称書, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援));
         seikyuEntity.set帳票タイトル(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成報酬請求書, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援));

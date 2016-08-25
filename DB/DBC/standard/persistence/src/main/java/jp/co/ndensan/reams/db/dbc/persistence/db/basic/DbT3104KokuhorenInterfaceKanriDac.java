@@ -92,26 +92,26 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        if(type.compareTo("MAX") ==0 ){
-        return accessor.select().
-                table(DbT3104KokuhorenInterfaceKanri.class).
-                where(and(
-                                eq(sofuTorikomiKubun, 送付取込区分),
-                                eq(shoriJotaiKubun, 処理状態区分),
-                                eq(kokanShikibetsuNo, 交換情報識別番号),
-                                eq(isDeleted, 論理削除フラグ))).
-                order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.DESC)).limit(1).
-                toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
+        if (type.compareTo("MAX") == 0) {
+            return accessor.select().
+                    table(DbT3104KokuhorenInterfaceKanri.class).
+                    where(and(
+                                    eq(sofuTorikomiKubun, 送付取込区分),
+                                    eq(shoriJotaiKubun, 処理状態区分),
+                                    eq(kokanShikibetsuNo, 交換情報識別番号),
+                                    eq(isDeleted, 論理削除フラグ))).
+                    order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.DESC)).limit(1).
+                    toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
         } else {
             return accessor.select().
-                table(DbT3104KokuhorenInterfaceKanri.class).
-                where(and(
-                                eq(sofuTorikomiKubun, 送付取込区分),
-                                eq(shoriJotaiKubun, 処理状態区分),
-                                eq(kokanShikibetsuNo, 交換情報識別番号),
-                                eq(isDeleted, 論理削除フラグ))).
-                order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.ASC)).limit(1).
-                toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
+                    table(DbT3104KokuhorenInterfaceKanri.class).
+                    where(and(
+                                    eq(sofuTorikomiKubun, 送付取込区分),
+                                    eq(shoriJotaiKubun, 処理状態区分),
+                                    eq(kokanShikibetsuNo, 交換情報識別番号),
+                                    eq(isDeleted, 論理削除フラグ))).
+                    order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.ASC)).limit(1).
+                    toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
         }
     }
 

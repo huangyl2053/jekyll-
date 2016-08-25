@@ -29,7 +29,7 @@
     </resultMap>
     <select resultOrdered="true" id="get認定審査会割当委員情報出力" resultMap="resultMap_getShinsaTaishoDataOutPut"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsataishodataoutput.ShinsaTaishoDataOutPutMybatisParameter" fetchSize="500">
-        select ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo",
+        SELECT ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo",
         ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD",
         ShinsakaiKaisaiYoteiJoho."shinsakaiKaishiYoteiTime",
         ShinsakaiKaisaiYoteiJoho."shinsakaiShuryoYoteiTime",
@@ -52,11 +52,11 @@
         ShinsakaiWariateIinJoho."shussekiTime",
         ShinsakaiWariateIinJoho."existSotaiFlag",
         ShinsakaiWariateIinJoho."taisekiTime"
-        from rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" as ShinsakaiKaisaiYoteiJoho   
-        left join rgdb."DbT5503ShinsakaiWariateIinJoho" as ShinsakaiWariateIinJoho on 
+        FROM rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS ShinsakaiKaisaiYoteiJoho   
+        LEFT JION rgdb."DbT5503ShinsakaiWariateIinJoho" AS ShinsakaiWariateIinJoho ON 
         ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"=  ShinsakaiWariateIinJoho."shinsakaiKaisaiNo"
-        where ShinsakaiWariateIinJoho."shinsakaiKaisaiNo" = #{kaisaiBangou}
-        order by ShinsakaiWariateIinJoho."shinsakaiIinCode"
+        WHERE  ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" = #{kaisaiBangou}
+        ORDER BY ShinsakaiWariateIinJoho."shinsakaiIinCode"
 			
     </select>
     <resultMap id="resultMap_getNijihanteiKekkaTorokuMobileRelateOutPut" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.NijihanteiKekkaTorokuMobileRelateEntity" autoMapping="true">
@@ -176,7 +176,7 @@
     </resultMap>
     <select resultOrdered="true" id="get二次判定結果登録用データ出力" resultMap="resultMap_getNijihanteiKekkaTorokuMobileRelateOutPut"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsataishodataoutput.ShinsaTaishoDataOutPutMybatisParameter" fetchSize="500">
-        select
+        SELECT
         T5511."shinsakaiKaisaiNo"
         , T5511."gogitaiNo"
         , T5511."shinsakaiKaisaiYMD"
@@ -286,71 +286,71 @@
         , T5115."imageSharedFileId"
         , T5101."shoKisaiHokenshaNo"
         , T5101."hihokenshaNo"
-        from
-        rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" T5511 
-        left join rgdb."DbT5502ShinsakaiWariateJoho" T5502 
-        on T5502."shinsakaiKaisaiNo" = T5511."shinsakaiKaisaiNo"
-        left join rgdb."DbT5101NinteiShinseiJoho" T5101 
-        on T5101."shinseishoKanriNo" = T5502."shinseishoKanriNo" 
-        and T5101."logicalDeletedFlag" = false 
-        inner join rgdb."DbT5201NinteichosaIraiJoho" T5201 
-        on T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo" 
-        and T5201."logicalDeletedFlag" = false 
-        inner join ( 
-        select
-        max(DbT5201."ninteichosaIraiRirekiNo") as 最大履歴番号
+        FROM
+        rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS T5511 
+        LEFT JION rgdb."DbT5502ShinsakaiWariateJoho" AS T5502 
+        ON T5502."shinsakaiKaisaiNo" = T5511."shinsakaiKaisaiNo"
+        LEFT JION rgdb."DbT5101NinteiShinseiJoho" AS T5101 
+        ON T5101."shinseishoKanriNo" = T5502."shinseishoKanriNo" 
+        AND T5101."logicalDeletedFlag" = false 
+        INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201 
+        ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo" 
+        AND T5201."logicalDeletedFlag" = false 
+        INNER JOIN ( 
+        SELECT
+        max(DbT5201."ninteichosaIraiRirekiNo") AS 最大履歴番号
         , DbT5201."shinseishoKanriNo" 
-        from
-        rgdb."DbT5201NinteichosaIraiJoho" DbT5201 
-        where
+        FROM
+        rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201 
+        WHERE
         DbT5201."logicalDeletedFlag" = false 
-        group by
+        GROUB BY
         DbT5201."shinseishoKanriNo"
         ) AS 履歴書最大番号 
-        on 履歴書最大番号."shinseishoKanriNo" = T5201."shinseishoKanriNo" 
-        and 履歴書最大番号."最大履歴番号" = T5201."ninteichosaIraiRirekiNo"
-        left join rgdb."DbT7051KoseiShichosonMaster" T7051
-        on T7051."shoKisaiHokenshaNo" =  T5101."shoKisaiHokenshaNo"
-        left join rgdb."DbT5102NinteiKekkaJoho" T5102 
-        on T5101."shinseishoKanriNo" = T5102."shinseishoKanriNo" 
-        left join rgdb."DbT5510IchiGojiHanteiKekkaJoho" T5510 
-        on T5101."shinseishoKanriNo" = T5510."shinseishoKanriNo" 
-        left join rgdb."DbT5116IchijiHanteiKekkaJoho" T5116 
-        on T5116."shinseishoKanriNo" = T5101."shinseishoKanriNo" 
-        left join rgdb."DbT5105NinteiKanryoJoho" T5105 
-        on T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo" 
-        left join rgdb."DbT5202NinteichosahyoGaikyoChosa" T5202 
-        on T5101."shinseishoKanriNo" = T5202."shinseishoKanriNo" 
-        and T5201."ninteichosaIraiRirekiNo" = T5202."ninteichosaRirekiNo" 
-        left join rgdb."DbT5206GaikyoTokki" T5206 
-        on T5101."shinseishoKanriNo" = T5206."shinseishoKanriNo" 
-        and T5201."ninteichosaIraiRirekiNo" = T5206."ninteichosaRirekiNo" 
-        left join rgdb."DbT5205NinteichosahyoTokkijiko" T5205 
-        on T5101."shinseishoKanriNo" = T5205."shinseishoKanriNo" 
-        and T5201."ninteichosaIraiRirekiNo" = T5205."ninteichosaRirekiNo" 
-        left join rgdb."DbT5207NinteichosahyoServiceJokyo" T5207 
-        on T5101."shinseishoKanriNo" = T5207."shinseishoKanriNo" 
-        and T5201."ninteichosaIraiRirekiNo" = T5207."ninteichosaRirekiNo" 
-        left join rgdb."DbT5208NinteichosahyoServiceJokyoFlag" T5208 
-        on T5101."shinseishoKanriNo" = T5208."shinseishoKanriNo" 
-        and T5201."ninteichosaIraiRirekiNo" = T5208."ninteichosaRirekiNo" 
-        left join rgdb."DbT5209NinteichosahyoKinyuItem" T5209 
-        on T5101."shinseishoKanriNo" = T5209."shinseishoKanriNo" 
-        and T5201."ninteichosaIraiRirekiNo" = T5209."ninteichosaRirekiNo" 
-        left join rgdb."DbT5210NinteichosahyoShisetsuRiyo" T5210 
-        on T5101."shinseishoKanriNo" = T5210."shinseishoKanriNo" 
-        and T5201."ninteichosaIraiRirekiNo" = T5210."ninteichosaRirekiNo" 
-        left join rgdb."DbT5203NinteichosahyoKihonChosa" T5203 
-        on T5101."shinseishoKanriNo" = T5203."shinseishoKanriNo" 
-        and T5201."ninteichosaIraiRirekiNo" = T5203."ninteichosaRirekiNo" 
-        left join rgdb."DbT5115Image" T5115 
-        on T5101."shinseishoKanriNo" = T5115."shinseishoKanriNo"
-        left join rgdb."DbT5211NinteichosahyoChosaItem" T5211 
-        on T5101."shinseishoKanriNo" = T5211."shinseishoKanriNo" 
-        and T5201."ninteichosaIraiRirekiNo"= T5211."ninteichosaRirekiNo"
-        where
+        ON 履歴書最大番号."shinseishoKanriNo" = T5201."shinseishoKanriNo" 
+        AND 履歴書最大番号."最大履歴番号" = T5201."ninteichosaIraiRirekiNo"
+        LEFT JION rgdb."DbT7051KoseiShichosonMaster" AS T7051
+        ON T7051."shoKisaiHokenshaNo" =  T5101."shoKisaiHokenshaNo"
+        LEFT JION rgdb."DbT5102NinteiKekkaJoho" AS T5102 
+        ON T5101."shinseishoKanriNo" = T5102."shinseishoKanriNo" 
+        LEFT JION rgdb."DbT5510IchiGojiHanteiKekkaJoho" AS T5510 
+        ON T5101."shinseishoKanriNo" = T5510."shinseishoKanriNo" 
+        LEFT JION rgdb."DbT5116IchijiHanteiKekkaJoho" AS T5116 
+        ON T5116."shinseishoKanriNo" = T5101."shinseishoKanriNo" 
+        LEFT JION rgdb."DbT5105NinteiKanryoJoho" AS T5105 
+        ON T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo" 
+        LEFT JION rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202 
+        ON T5101."shinseishoKanriNo" = T5202."shinseishoKanriNo" 
+        AND T5201."ninteichosaIraiRirekiNo" = T5202."ninteichosaRirekiNo" 
+        LEFT JION rgdb."DbT5206GaikyoTokki" AS T5206 
+        ON T5101."shinseishoKanriNo" = T5206."shinseishoKanriNo" 
+        AND T5201."ninteichosaIraiRirekiNo" = T5206."ninteichosaRirekiNo" 
+        LEFT JION rgdb."DbT5205NinteichosahyoTokkijiko" AS T5205 
+        ON T5101."shinseishoKanriNo" = T5205."shinseishoKanriNo" 
+        AND T5201."ninteichosaIraiRirekiNo" = T5205."ninteichosaRirekiNo" 
+        LEFT JION rgdb."DbT5207NinteichosahyoServiceJokyo" AS T5207 
+        ON T5101."shinseishoKanriNo" = T5207."shinseishoKanriNo" 
+        AND T5201."ninteichosaIraiRirekiNo" = T5207."ninteichosaRirekiNo" 
+        LEFT JION rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS T5208 
+        ON T5101."shinseishoKanriNo" = T5208."shinseishoKanriNo" 
+        AND T5201."ninteichosaIraiRirekiNo" = T5208."ninteichosaRirekiNo" 
+        LEFT JION rgdb."DbT5209NinteichosahyoKinyuItem" AS T5209 
+        ON T5101."shinseishoKanriNo" = T5209."shinseishoKanriNo" 
+        AND T5201."ninteichosaIraiRirekiNo" = T5209."ninteichosaRirekiNo" 
+        LEFT JION rgdb."DbT5210NinteichosahyoShisetsuRiyo" AS T5210 
+        ON T5101."shinseishoKanriNo" = T5210."shinseishoKanriNo" 
+        AND T5201."ninteichosaIraiRirekiNo" = T5210."ninteichosaRirekiNo" 
+        LEFT JION rgdb."DbT5203NinteichosahyoKihonChosa" AS T5203 
+        ON T5101."shinseishoKanriNo" = T5203."shinseishoKanriNo" 
+        AND T5201."ninteichosaIraiRirekiNo" = T5203."ninteichosaRirekiNo" 
+        LEFT JION rgdb."DbT5115Image" AS T5115 
+        ON T5101."shinseishoKanriNo" = T5115."shinseishoKanriNo"
+        LEFT JION rgdb."DbT5211NinteichosahyoChosaItem" AS T5211 
+        ON T5101."shinseishoKanriNo" = T5211."shinseishoKanriNo" 
+        AND T5201."ninteichosaIraiRirekiNo"= T5211."ninteichosaRirekiNo"
+        WHERE
         T5511."shinsakaiKaisaiNo" = #{kaisaiBangou} 
-        order by
+        ORDER BY
         T5502."shinsakaiOrder"
     </select>
     <select resultOrdered="true" id="getDbT5501ShinsakaiKaisaiYoteiJoho" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.ResultMap_DbT5501ShinsakaiKaisaiYoteiJohoEntity"
