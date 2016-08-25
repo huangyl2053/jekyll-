@@ -17,14 +17,14 @@
         <result property="介護認定審査会資料作成年月日" column="shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="介護認定審査会進捗状況" column="ShinsakaiShinchokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="介護認定審査会割当済み人数" column="shinsakaiWariateZumiNinzu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="資料作成済フラグ" column="shiryoSakuseiZumiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="資料作成済フラグ" column="shiryoSakuseiZumiFlag" /> 
         <result property="介護認定審査会委員コード" column="shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="介護認定審査会開催年月日" column="shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="介護認定審査会議長区分コード" column="kaigoninteiShinsakaiGichoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="委員出席" column="shussekiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="委員遅刻有無" column="existChikokuFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="委員出席" column="shussekiFlag" /> 
+        <result property="委員遅刻有無" column="existChikokuFlag" /> 
         <result property="委員出席時間" column="shussekiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="委員早退有無" column="existSotaiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="委員早退有無" column="existSotaiFlag" /> 
         <result property="委員退席時間" column="taisekiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
     </resultMap>
     <select resultOrdered="true" id="get認定審査会割当委員情報出力" resultMap="resultMap_getShinsaTaishoDataOutPut"
@@ -53,7 +53,7 @@
         ShinsakaiWariateIinJoho."existSotaiFlag",
         ShinsakaiWariateIinJoho."taisekiTime"
         FROM rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS ShinsakaiKaisaiYoteiJoho   
-        LEFT JION rgdb."DbT5503ShinsakaiWariateIinJoho" AS ShinsakaiWariateIinJoho ON 
+        LEFT JOIN rgdb."DbT5503ShinsakaiWariateIinJoho" AS ShinsakaiWariateIinJoho ON 
         ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"=  ShinsakaiWariateIinJoho."shinsakaiKaisaiNo"
         WHERE  ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" = #{kaisaiBangou}
         ORDER BY ShinsakaiWariateIinJoho."shinsakaiIinCode"
@@ -163,11 +163,11 @@
         <result property="サービスの状況連番" column="remban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="サービスの状況" column="serviceJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="サービスの状況フラグ連番" column="remban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="サービスの状況フラグ" column="serviceJokyoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>     
+        <result property="サービスの状況フラグ" column="serviceJokyoFlag"/>     
         <result property="記入項目連番" column="remban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="サービスの状況記入" column="serviceJokyoKinyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>        
         <result property="施設利用連番" column="remban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="施設利用フラグ" column="shisetsuRiyoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="施設利用フラグ" column="shisetsuRiyoFlag"/> 
         <result property="認定調査認知症高齢者の日常生活自立度コード" column="ninchishoNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="認定調査障害高齢者の日常生活自立度コード" column="shogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="調査項目連番" column="remban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
@@ -288,9 +288,9 @@
         , T5101."hihokenshaNo"
         FROM
         rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS T5511 
-        LEFT JION rgdb."DbT5502ShinsakaiWariateJoho" AS T5502 
+        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS T5502 
         ON T5502."shinsakaiKaisaiNo" = T5511."shinsakaiKaisaiNo"
-        LEFT JION rgdb."DbT5101NinteiShinseiJoho" AS T5101 
+        LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101 
         ON T5101."shinseishoKanriNo" = T5502."shinseishoKanriNo" 
         AND T5101."logicalDeletedFlag" = false 
         INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201 
@@ -304,48 +304,48 @@
         rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201 
         WHERE
         DbT5201."logicalDeletedFlag" = false 
-        GROUB BY
+        GROUP BY
         DbT5201."shinseishoKanriNo"
         ) AS 履歴書最大番号 
         ON 履歴書最大番号."shinseishoKanriNo" = T5201."shinseishoKanriNo" 
         AND 履歴書最大番号."最大履歴番号" = T5201."ninteichosaIraiRirekiNo"
-        LEFT JION rgdb."DbT7051KoseiShichosonMaster" AS T7051
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
         ON T7051."shoKisaiHokenshaNo" =  T5101."shoKisaiHokenshaNo"
-        LEFT JION rgdb."DbT5102NinteiKekkaJoho" AS T5102 
+        LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS T5102 
         ON T5101."shinseishoKanriNo" = T5102."shinseishoKanriNo" 
-        LEFT JION rgdb."DbT5510IchiGojiHanteiKekkaJoho" AS T5510 
+        LEFT JOIN rgdb."DbT5510IchiGojiHanteiKekkaJoho" AS T5510 
         ON T5101."shinseishoKanriNo" = T5510."shinseishoKanriNo" 
-        LEFT JION rgdb."DbT5116IchijiHanteiKekkaJoho" AS T5116 
+        LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS T5116 
         ON T5116."shinseishoKanriNo" = T5101."shinseishoKanriNo" 
-        LEFT JION rgdb."DbT5105NinteiKanryoJoho" AS T5105 
+        LEFT JOIN rgdb."DbT5105NinteiKanryoJoho" AS T5105 
         ON T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo" 
-        LEFT JION rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202 
+        LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202 
         ON T5101."shinseishoKanriNo" = T5202."shinseishoKanriNo" 
         AND T5201."ninteichosaIraiRirekiNo" = T5202."ninteichosaRirekiNo" 
-        LEFT JION rgdb."DbT5206GaikyoTokki" AS T5206 
+        LEFT JOIN rgdb."DbT5206GaikyoTokki" AS T5206 
         ON T5101."shinseishoKanriNo" = T5206."shinseishoKanriNo" 
         AND T5201."ninteichosaIraiRirekiNo" = T5206."ninteichosaRirekiNo" 
-        LEFT JION rgdb."DbT5205NinteichosahyoTokkijiko" AS T5205 
+        LEFT JOIN rgdb."DbT5205NinteichosahyoTokkijiko" AS T5205 
         ON T5101."shinseishoKanriNo" = T5205."shinseishoKanriNo" 
         AND T5201."ninteichosaIraiRirekiNo" = T5205."ninteichosaRirekiNo" 
-        LEFT JION rgdb."DbT5207NinteichosahyoServiceJokyo" AS T5207 
+        LEFT JOIN rgdb."DbT5207NinteichosahyoServiceJokyo" AS T5207 
         ON T5101."shinseishoKanriNo" = T5207."shinseishoKanriNo" 
         AND T5201."ninteichosaIraiRirekiNo" = T5207."ninteichosaRirekiNo" 
-        LEFT JION rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS T5208 
+        LEFT JOIN rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS T5208 
         ON T5101."shinseishoKanriNo" = T5208."shinseishoKanriNo" 
         AND T5201."ninteichosaIraiRirekiNo" = T5208."ninteichosaRirekiNo" 
-        LEFT JION rgdb."DbT5209NinteichosahyoKinyuItem" AS T5209 
+        LEFT JOIN rgdb."DbT5209NinteichosahyoKinyuItem" AS T5209 
         ON T5101."shinseishoKanriNo" = T5209."shinseishoKanriNo" 
         AND T5201."ninteichosaIraiRirekiNo" = T5209."ninteichosaRirekiNo" 
-        LEFT JION rgdb."DbT5210NinteichosahyoShisetsuRiyo" AS T5210 
+        LEFT JOIN rgdb."DbT5210NinteichosahyoShisetsuRiyo" AS T5210 
         ON T5101."shinseishoKanriNo" = T5210."shinseishoKanriNo" 
         AND T5201."ninteichosaIraiRirekiNo" = T5210."ninteichosaRirekiNo" 
-        LEFT JION rgdb."DbT5203NinteichosahyoKihonChosa" AS T5203 
+        LEFT JOIN rgdb."DbT5203NinteichosahyoKihonChosa" AS T5203 
         ON T5101."shinseishoKanriNo" = T5203."shinseishoKanriNo" 
         AND T5201."ninteichosaIraiRirekiNo" = T5203."ninteichosaRirekiNo" 
-        LEFT JION rgdb."DbT5115Image" AS T5115 
+        LEFT JOIN rgdb."DbT5115Image" AS T5115 
         ON T5101."shinseishoKanriNo" = T5115."shinseishoKanriNo"
-        LEFT JION rgdb."DbT5211NinteichosahyoChosaItem" AS T5211 
+        LEFT JOIN rgdb."DbT5211NinteichosahyoChosaItem" AS T5211 
         ON T5101."shinseishoKanriNo" = T5211."shinseishoKanriNo" 
         AND T5201."ninteichosaIraiRirekiNo"= T5211."ninteichosaRirekiNo"
         WHERE
