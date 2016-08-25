@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  */
 public class KyufujissekiKoshinkekkaIchiranProperty extends ReportPropertyBase<KyufujissekiKoshinkekkaIchiranSource> {
 
-    private static final RString ENCLOSURE = new RString("\"");
     private final List<RString> pageBreakKeys;
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
