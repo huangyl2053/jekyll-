@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaish
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 利用負担額減額免除認定証Editorのクラスです。
@@ -70,15 +71,18 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
             source.listUpper_3 = edit宛名().get名称().getName().getColumnValue();
             source.listUpper_4 = edit宛名().get年齢算出().get年齢();
         }
-        if (entity.get利用者負担額減額Entity() != null && (entity.get利用者負担額減額Entity().getShinseiYMD() != null
-                || entity.get利用者負担額減額Entity().getKetteiYMD() != null)) {
-            FlexibleDate shinseiYMD = entity.get利用者負担額減額Entity().getShinseiYMD();
-            source.listUpper_5 = editFormmatDate(shinseiYMD);
-            FlexibleDate ketteiYMD = entity.get利用者負担額減額Entity().getKetteiYMD();
-            source.listUpper_6 = editFormmatDate(ketteiYMD);
+        if (entity.get利用者負担額減額Entity() != null) {
+            FlexibleDate youShinseiYMD = entity.get利用者負担額減額Entity().getShinseiYMD();
+            if (youShinseiYMD != null) {
+                source.listUpper_5 = editFormmatDate(youShinseiYMD);
+            }
+            FlexibleDate teiYMD = entity.get利用者負担額減額Entity().getKetteiYMD();
+            if (teiYMD != null) {
+                source.listUpper_6 = editFormmatDate(teiYMD);
+            }
         }
         source.listUpper_7 = eidt空白と空白以外(entity.is老齢福祉年金受給者());
-        if (ONE.equals(entity.get本人課税区分())) {
+        if (ONE.equals(entity.get本人課税区分())) { 
             source.listUpper_8 = 課;
         } else {
             source.listUpper_8 = 空白;
@@ -118,12 +122,15 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
             source.listCenter_3 = edit宛名().get住所().get住所();
             source.listCenter_4 = edit宛名().get住民状態().住民状態略称();
         }
-        if (entity.get利用者負担額減額Entity() != null && (entity.get利用者負担額減額Entity().getTekiyoKaishiYMD() != null
-                || entity.get利用者負担額減額Entity().getTekiyoShuryoYMD() != null)) {
-            FlexibleDate tekiyoKaishiYMD = entity.get利用者負担額減額Entity().getTekiyoKaishiYMD();
-            source.listCenter_5 = editFormmatDate(tekiyoKaishiYMD);
-            FlexibleDate tekiyoShuryoYMD = entity.get利用者負担額減額Entity().getTekiyoShuryoYMD();
-            source.listCenter_6 = editFormmatDate(tekiyoShuryoYMD);
+        if (entity.get利用者負担額減額Entity() != null) {
+            FlexibleDate youTekiyoKaishiYMD = entity.get利用者負担額減額Entity().getTekiyoKaishiYMD();
+            if (youTekiyoKaishiYMD != null) {
+                source.listCenter_5 = editFormmatDate(youTekiyoKaishiYMD);
+            }
+            FlexibleDate youTekiyoShuryoYMD = entity.get利用者負担額減額Entity().getTekiyoShuryoYMD();
+            if (youTekiyoShuryoYMD != null) {
+                source.listCenter_6 = editFormmatDate(youTekiyoShuryoYMD);
+            }
         }
         source.listCenter_7 = entity.get入所施設コード();
         source.listCenter_8 = eidt空白と空白以外(entity.is旧措置者フラグ());
@@ -160,7 +167,10 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
             source.listLower_4 = 空白;
         } else {
             HokenKyufuRitsu kyuhuritsu = entity.get利用者負担額減額Entity().getKyuhuritsu();
-            source.listLower_4 = new RString(kyuhuritsu.getColumnValue().toString());
+            if (kyuhuritsu != null) {
+                Decimal 利用者負担額減額 = kyuhuritsu.getColumnValue();
+                source.listLower_4 = new RString(利用者負担額減額.toString());
+            }
         }
         source.listLower_5 = entity.get入所施設名称();
         source.listLower_6 = editFormmatDate(entity.get認定情報Entity().get認定有効期間終了年月日());

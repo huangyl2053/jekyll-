@@ -28,7 +28,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  *
  * @reamsid_L DBC-9999-012 chenyadong
  */
-public class JigyoKogakuGassanShikyuGakuKeisanKekka extends ModelBase<JigyoKogakuKekkaIdentifier, DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity, JigyoKogakuGassanShikyuGakuKeisanKekka> implements Serializable {
+public class JigyoKogakuGassanShikyuGakuKeisanKekka
+        extends ModelBase<JigyoKogakuKekkaIdentifier, DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity, JigyoKogakuGassanShikyuGakuKeisanKekka>
+        implements Serializable {
 
 //TODO NetBeansの機能を使って必ずequalsとhashCodeを追加してください。
     private final DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity entity;
