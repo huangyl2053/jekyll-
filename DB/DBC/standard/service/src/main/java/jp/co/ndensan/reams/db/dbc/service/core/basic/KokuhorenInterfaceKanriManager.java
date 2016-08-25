@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class KokuhorenInterfaceKanriManager {
 
+    private static final RString 交換情報識別番号NEW = new RString("交換情報識別番号");
     private final DbT3104KokuhorenInterfaceKanriDac dac;
 
     /**
@@ -54,7 +55,7 @@ public class KokuhorenInterfaceKanriManager {
             FlexibleYearMonth 処理年月,
             RString 交換情報識別番号) {
         requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年月"));
-        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(交換情報識別番号NEW.toString()));
 
         DbT3104KokuhorenInterfaceKanriEntity entity = dac.selectByKey(
                 処理年月,
@@ -78,7 +79,7 @@ public class KokuhorenInterfaceKanriManager {
             RString 処理状態区分,
             RString 交換情報識別番号) {
         requireNonNull(処理状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("処理状態区分"));
-        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(交換情報識別番号NEW.toString()));
 
         DbT3104KokuhorenInterfaceKanriEntity entity = dac.select(
                 処理状態区分,
@@ -105,7 +106,7 @@ public class KokuhorenInterfaceKanriManager {
         requireNonNull(type, UrSystemErrorMessages.値がnull.getReplacedMessage("type"));
         requireNonNull(送付取込区分, UrSystemErrorMessages.値がnull.getReplacedMessage("送付取込区分"));
         requireNonNull(処理状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("処理状態区分"));
-        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(交換情報識別番号NEW.toString()));
 
         DbT3104KokuhorenInterfaceKanriEntity entity = dac.select(
                 type,
@@ -191,7 +192,7 @@ public class KokuhorenInterfaceKanriManager {
      */
     @Transaction
     public KokuhorenInterfaceKanri get国保連インターフェース管理(RString 交換情報識別番号) {
-        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(交換情報識別番号NEW.toString()));
 
         DbT3104KokuhorenInterfaceKanriEntity entity = dac.getAllBykokanShikibetsuNo(交換情報識別番号);
         if (entity == null) {
