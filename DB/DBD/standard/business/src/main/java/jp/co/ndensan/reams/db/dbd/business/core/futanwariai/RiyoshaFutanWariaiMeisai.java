@@ -266,6 +266,14 @@ public class RiyoshaFutanWariaiMeisai
     }
 
     /**
+     * 保持する利用者負担割合明細を追加対象とします。<br/>
+     * {@link DbT3114RiyoshaFutanWariaiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば追加状態にします。
+     */
+    public void added() {
+        this.entity.setState(EntityDataState.Added);
+    }
+
+    /**
      * {@link RiyoshaFutanWariaiMeisai}のシリアライズ形式を提供します。
      *
      * @return {@link RiyoshaFutanWariaiMeisai}のシリアライズ形式
