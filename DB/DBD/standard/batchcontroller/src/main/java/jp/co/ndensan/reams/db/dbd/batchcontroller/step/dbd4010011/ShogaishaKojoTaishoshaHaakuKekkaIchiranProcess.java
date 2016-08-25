@@ -248,7 +248,7 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
     }
 
     private void set対象の申請データを更新する(ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity 控除対象者データ) {
-        if (taishoNendo.equals(parameter.get対象年度())) {
+        if (taishoNendo != null && taishoNendo.equals(parameter.get対象年度())) {
             for (DbT4038ShogaishaKoujoEntity entity : 障がい者控除情報List) {
                 FlexibleYear taishonendo = entity.getTaishoNendo();
                 if (taishonendo != null && entity.getHihokenshaNo().equals(控除対象者データ.get被保険者番号()) && taishonendo.equals(taishoNendo)) {
