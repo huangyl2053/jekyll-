@@ -23,7 +23,7 @@ public interface IKogakuShikyuShinseishoIkkatsuHakkoMapper {
      * @param param KogakuShikyuShinseishoIkkatsuHakkoMapperParameter
      * @return List<DbT3056KogakuShikyuShinseiEntity>
      */
-    public List<DbT3056KogakuShikyuShinseiEntity> getServiceTeikyoByDbT3056(KogakuShikyuShinseishoIkkatsuHakkoMapperParameter param);
+    List<DbT3056KogakuShikyuShinseiEntity> getServiceTeikyoByDbT3056(KogakuShikyuShinseishoIkkatsuHakkoMapperParameter param);
 
     /**
      * サービス提供年月の取得のメソッドます
@@ -31,5 +31,5 @@ public interface IKogakuShikyuShinseishoIkkatsuHakkoMapper {
      * @param param KogakuShikyuShinseishoIkkatsuHakkoMapperParameter
      * @return List<DbT3110JigyoKogakuShikyuShinseiEntity>
      */
-    public List<DbT3110JigyoKogakuShikyuShinseiEntity> getServiceTeikyoByDbT3110(KogakuShikyuShinseishoIkkatsuHakkoMapperParameter param);
+    List<DbT3110JigyoKogakuShikyuShinseiEntity> getServiceTeikyoByDbT3110(KogakuShikyuShinseishoIkkatsuHakkoMapperParameter param);
 }
