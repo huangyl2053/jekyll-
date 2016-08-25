@@ -55,7 +55,7 @@ public class ShukihyoHakkouProcess extends BatchProcessBase<YokaigoNinteiTsukibe
     private ReportSourceWriter<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource> reportSourceWriter;
     private DBD582001ProcessParameter parameter;
     private JukyushaSuJokyohyoEntity 受給状況Entity;
-    private YokaigoNinteiJisshiJokyohyoReportEntity yokaigoNinteiJisshiJokyohyoReportEntity;
+    private YokaigoNinteiJisshiJokyohyoReportEntity jisshiJokyohyoReportEntity;
     private static final RString 取得条件01 = new RString("01");
     private static final RString 取得条件02 = new RString("02");
     private static final RString 取得条件03 = new RString("03");
@@ -131,85 +131,85 @@ public class ShukihyoHakkouProcess extends BatchProcessBase<YokaigoNinteiTsukibe
     }
 
     @Override
-    protected void process(YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity) {
-        set市町村(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity);
-        if (yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get取得条件().equals(取得条件01)) {
-            yokaigoNinteiJisshiJokyohyoReportEntity.set集計項目(集計項目認定件数);
-        } else if (yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get取得条件().equals(取得条件02)) {
-            yokaigoNinteiJisshiJokyohyoReportEntity.set集計項目(集計項目要介護度1);
-        } else if (yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get取得条件().equals(取得条件03)) {
-            yokaigoNinteiJisshiJokyohyoReportEntity.set集計項目(集計項目要介護度2);
-        } else if (yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get取得条件().equals(取得条件04)) {
-            yokaigoNinteiJisshiJokyohyoReportEntity.set集計項目(集計項目要介護度3);
-        } else if (yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get取得条件().equals(取得条件05)) {
-            yokaigoNinteiJisshiJokyohyoReportEntity.set集計項目(集計項目要介護度4);
-        } else if (yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get取得条件().equals(取得条件06)) {
-            yokaigoNinteiJisshiJokyohyoReportEntity.set集計項目(集計項目要介護度5);
-        } else if (yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get取得条件().equals(取得条件07)) {
-            yokaigoNinteiJisshiJokyohyoReportEntity.set集計項目(集計項目要支援1);
-        } else if (yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get取得条件().equals(取得条件08)) {
-            yokaigoNinteiJisshiJokyohyoReportEntity.set集計項目(集計項目要支援2);
-        } else if (yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get取得条件().equals(取得条件09)) {
-            yokaigoNinteiJisshiJokyohyoReportEntity.set集計項目(集計項目経過介護);
-        } else if (yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get取得条件().equals(取得条件10)) {
-            yokaigoNinteiJisshiJokyohyoReportEntity.set集計項目(集計項目自立);
+    protected void process(YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity jukyushaSuJokyohyoEntity) {
+        set市町村(jukyushaSuJokyohyoEntity);
+        if (jukyushaSuJokyohyoEntity.get取得条件().equals(取得条件01)) {
+            jisshiJokyohyoReportEntity.set集計項目(集計項目認定件数);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().equals(取得条件02)) {
+            jisshiJokyohyoReportEntity.set集計項目(集計項目要介護度1);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().equals(取得条件03)) {
+            jisshiJokyohyoReportEntity.set集計項目(集計項目要介護度2);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().equals(取得条件04)) {
+            jisshiJokyohyoReportEntity.set集計項目(集計項目要介護度3);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().equals(取得条件05)) {
+            jisshiJokyohyoReportEntity.set集計項目(集計項目要介護度4);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().equals(取得条件06)) {
+            jisshiJokyohyoReportEntity.set集計項目(集計項目要介護度5);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().equals(取得条件07)) {
+            jisshiJokyohyoReportEntity.set集計項目(集計項目要支援1);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().equals(取得条件08)) {
+            jisshiJokyohyoReportEntity.set集計項目(集計項目要支援2);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().equals(取得条件09)) {
+            jisshiJokyohyoReportEntity.set集計項目(集計項目経過介護);
+        } else if (jukyushaSuJokyohyoEntity.get取得条件().equals(取得条件10)) {
+            jisshiJokyohyoReportEntity.set集計項目(集計項目自立);
         }
-        yokaigoNinteiJisshiJokyohyoReportEntity.set年度合計(new RString(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get件数().intValue())
+        jisshiJokyohyoReportEntity.set年度合計(new RString(jukyushaSuJokyohyoEntity.get件数().intValue())
                 .concat("(")
-                .concat(new RString(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get件数旧措置().intValue()))
+                .concat(new RString(jukyushaSuJokyohyoEntity.get件数旧措置().intValue()))
                 .concat(")"));
-        受給状況Entity.get受給状況リスト().add(yokaigoNinteiJisshiJokyohyoReportEntity);
-        set市町村(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity);
-        yokaigoNinteiJisshiJokyohyoReportEntity.set集計項目(集計項目新規);
-        yokaigoNinteiJisshiJokyohyoReportEntity.set年度合計(new RString(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get新規().intValue())
+        受給状況Entity.get受給状況リスト().add(jisshiJokyohyoReportEntity);
+        set市町村(jukyushaSuJokyohyoEntity);
+        jisshiJokyohyoReportEntity.set集計項目(集計項目新規);
+        jisshiJokyohyoReportEntity.set年度合計(new RString(jukyushaSuJokyohyoEntity.get新規().intValue())
                 .concat("(")
-                .concat(new RString(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get新規旧措置().intValue()))
+                .concat(new RString(jukyushaSuJokyohyoEntity.get新規旧措置().intValue()))
                 .concat(")"));
-        受給状況Entity.get受給状況リスト().add(yokaigoNinteiJisshiJokyohyoReportEntity);
-        set市町村(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity);
-        yokaigoNinteiJisshiJokyohyoReportEntity.set集計項目(集計項目要支援);
-        yokaigoNinteiJisshiJokyohyoReportEntity.set年度合計(new RString(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get要支援().intValue())
+        受給状況Entity.get受給状況リスト().add(jisshiJokyohyoReportEntity);
+        set市町村(jukyushaSuJokyohyoEntity);
+        jisshiJokyohyoReportEntity.set集計項目(集計項目要支援);
+        jisshiJokyohyoReportEntity.set年度合計(new RString(jukyushaSuJokyohyoEntity.get要支援().intValue())
                 .concat("(")
-                .concat(new RString(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get要支援旧措置().intValue()))
+                .concat(new RString(jukyushaSuJokyohyoEntity.get要支援旧措置().intValue()))
                 .concat(")"));
-        受給状況Entity.get受給状況リスト().add(yokaigoNinteiJisshiJokyohyoReportEntity);
-        set市町村(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity);
-        yokaigoNinteiJisshiJokyohyoReportEntity.set集計項目(集計項目更新);
-        yokaigoNinteiJisshiJokyohyoReportEntity.set年度合計(new RString(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get更新().intValue())
+        受給状況Entity.get受給状況リスト().add(jisshiJokyohyoReportEntity);
+        set市町村(jukyushaSuJokyohyoEntity);
+        jisshiJokyohyoReportEntity.set集計項目(集計項目更新);
+        jisshiJokyohyoReportEntity.set年度合計(new RString(jukyushaSuJokyohyoEntity.get更新().intValue())
                 .concat("(")
-                .concat(new RString(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get更新旧措置().intValue()))
+                .concat(new RString(jukyushaSuJokyohyoEntity.get更新旧措置().intValue()))
                 .concat(")"));
-        受給状況Entity.get受給状況リスト().add(yokaigoNinteiJisshiJokyohyoReportEntity);
-        set市町村(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity);
-        yokaigoNinteiJisshiJokyohyoReportEntity.set集計項目(集計項目区分変更);
-        yokaigoNinteiJisshiJokyohyoReportEntity.set年度合計(new RString(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get区分変更().intValue())
+        受給状況Entity.get受給状況リスト().add(jisshiJokyohyoReportEntity);
+        set市町村(jukyushaSuJokyohyoEntity);
+        jisshiJokyohyoReportEntity.set集計項目(集計項目区分変更);
+        jisshiJokyohyoReportEntity.set年度合計(new RString(jukyushaSuJokyohyoEntity.get区分変更().intValue())
                 .concat("(")
-                .concat(new RString(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get区分変更旧措置().intValue()))
+                .concat(new RString(jukyushaSuJokyohyoEntity.get区分変更旧措置().intValue()))
                 .concat(")"));
-        受給状況Entity.get受給状況リスト().add(yokaigoNinteiJisshiJokyohyoReportEntity);
-        set市町村(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity);
-        yokaigoNinteiJisshiJokyohyoReportEntity.set集計項目(集計項目転入);
-        yokaigoNinteiJisshiJokyohyoReportEntity.set年度合計(new RString(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get転入().intValue())
+        受給状況Entity.get受給状況リスト().add(jisshiJokyohyoReportEntity);
+        set市町村(jukyushaSuJokyohyoEntity);
+        jisshiJokyohyoReportEntity.set集計項目(集計項目転入);
+        jisshiJokyohyoReportEntity.set年度合計(new RString(jukyushaSuJokyohyoEntity.get転入().intValue())
                 .concat("(")
-                .concat(new RString(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get転入旧措置().intValue()))
+                .concat(new RString(jukyushaSuJokyohyoEntity.get転入旧措置().intValue()))
                 .concat(")"));
-        受給状況Entity.get受給状況リスト().add(yokaigoNinteiJisshiJokyohyoReportEntity);
-        set市町村(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity);
-        yokaigoNinteiJisshiJokyohyoReportEntity.set集計項目(集計項目職権他);
-        yokaigoNinteiJisshiJokyohyoReportEntity.set年度合計(new RString(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get職権他().intValue())
+        受給状況Entity.get受給状況リスト().add(jisshiJokyohyoReportEntity);
+        set市町村(jukyushaSuJokyohyoEntity);
+        jisshiJokyohyoReportEntity.set集計項目(集計項目職権他);
+        jisshiJokyohyoReportEntity.set年度合計(new RString(jukyushaSuJokyohyoEntity.get職権他().intValue())
                 .concat("(")
-                .concat(new RString(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get職権他旧措置().intValue()))
+                .concat(new RString(jukyushaSuJokyohyoEntity.get職権他旧措置().intValue()))
                 .concat(")"));
-        受給状況Entity.get受給状況リスト().add(yokaigoNinteiJisshiJokyohyoReportEntity);
-        set市町村(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity);
-        yokaigoNinteiJisshiJokyohyoReportEntity.set集計項目(RString.EMPTY);
-        受給状況Entity.get受給状況リスト().add(yokaigoNinteiJisshiJokyohyoReportEntity);
+        受給状況Entity.get受給状況リスト().add(jisshiJokyohyoReportEntity);
+        set市町村(jukyushaSuJokyohyoEntity);
+        jisshiJokyohyoReportEntity.set集計項目(RString.EMPTY);
+        受給状況Entity.get受給状況リスト().add(jisshiJokyohyoReportEntity);
     }
 
-    private void set市町村(YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity) {
-        yokaigoNinteiJisshiJokyohyoReportEntity = new YokaigoNinteiJisshiJokyohyoReportEntity();
-        yokaigoNinteiJisshiJokyohyoReportEntity.set市町村番号(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get市町村コード().value());
-        yokaigoNinteiJisshiJokyohyoReportEntity.set市町村名(yokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity.get市町村名称());
+    private void set市町村(YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity jukyushaSuJokyohyoEntity) {
+        jisshiJokyohyoReportEntity = new YokaigoNinteiJisshiJokyohyoReportEntity();
+        jisshiJokyohyoReportEntity.set市町村番号(jukyushaSuJokyohyoEntity.get市町村コード().value());
+        jisshiJokyohyoReportEntity.set市町村名(jukyushaSuJokyohyoEntity.get市町村名称());
     }
 
     @Override

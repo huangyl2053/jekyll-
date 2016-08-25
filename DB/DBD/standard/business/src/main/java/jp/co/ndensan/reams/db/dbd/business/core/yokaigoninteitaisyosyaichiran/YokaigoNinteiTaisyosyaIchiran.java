@@ -276,13 +276,13 @@ public class YokaigoNinteiTaisyosyaIchiran implements Serializable {
      * @return 取込日時
      */
     public RString get取込日時() {
-        if (要介護認定インターフェース情報Entity.getTorikomiTimestamp() != null) {
-            return 要介護認定インターフェース情報Entity.getTorikomiTimestamp().getDate().wareki().toDateString()
+        YMDHMS 取込日時 = 要介護認定インターフェース情報Entity.getTorikomiTimestamp();
+        if (取込日時 != null && !取込日時.isEmpty()) {
+            return 取込日時.getDate().wareki().toDateString()
                     .concat(" ")
-                    .concat(取込日時2.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分));
-        } else {
-            return RString.EMPTY;
+                    .concat(取込日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分));
         }
+        return RString.EMPTY;
 
     }
 
