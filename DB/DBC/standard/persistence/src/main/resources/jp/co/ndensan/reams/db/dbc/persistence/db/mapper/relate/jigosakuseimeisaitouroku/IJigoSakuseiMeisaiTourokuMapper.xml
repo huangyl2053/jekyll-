@@ -223,7 +223,7 @@
         A.電話番号,
         A.郵便番号,
         A.住所,
-        A.居宅・総合事業区分 
+        A.居宅総合事業区分 
         FROM(
         SELECT
         rgdb."DbT3005KyotakuKeikakuTodokede"."taishoYM" AS 対象年月
@@ -244,7 +244,7 @@
         , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaTelNo"      AS 電話番号
         , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaYubinNo"      AS 郵便番号
         , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaJusho"      AS 住所
-        , '' AS 居宅・総合事業区分  
+        , '' AS 居宅総合事業区分 
         , row_number() OVER (PARTITION BY         
         rgdb."DbT3005KyotakuKeikakuTodokede"."hihokenshaNo",   
         rgdb."DbT3005KyotakuKeikakuTodokede"."taishoYM"
@@ -288,7 +288,7 @@
         , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaTelNo"      AS 電話番号
         , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaYubinNo"      AS 郵便番号
         , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaJusho"      AS 住所
-        , rgdb."DbT3007KyotakuKeikakuJikoSakusei"."kyotaku_SogoJigyoKubun" AS 居宅・総合事業区分  
+        , rgdb."DbT3007KyotakuKeikakuJikoSakusei"."kyotaku_SogoJigyoKubun" AS 居宅総合事業区分  
         , row_number() OVER (PARTITION BY         
         rgdb."DbT3005KyotakuKeikakuTodokede"."hihokenshaNo",        
         rgdb."DbT3005KyotakuKeikakuTodokede"."taishoYM"        
