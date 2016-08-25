@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KyuhuJissekiShukei {
 
     private static final int NOCOUNT_2 = 2;
@@ -26,26 +27,29 @@ public class KyuhuJissekiShukei {
 
     /**
      * コンストラクタです。
+     *
+     * @return 助成後利用者負担額
      */
     public int get助成後利用者負担額() {
-        int 助成後利用者負担額 = 利用者負担額 * NOCOUNT_9 / NOCOUNT_10;
-        return 助成後利用者負担額;
+        return 利用者負担額 * NOCOUNT_9 / NOCOUNT_10;
     }
 
     /**
      * コンストラクタです。
+     *
+     * @return 助成額
      */
     public int get助成額() {
-        int 助成額 = 利用者負担額 - get助成後利用者負担額();
-        return 助成額;
+        return 利用者負担額 - get助成後利用者負担額();
     }
 
     /**
      * コンストラクタです。
+     *
+     * @return 保険者助成額
      */
     public int get保険者助成額() {
-        int 保険者助成額 = get助成額() / NOCOUNT_2;
-        return 保険者助成額;
+        return get助成額() / NOCOUNT_2;
     }
 
 }

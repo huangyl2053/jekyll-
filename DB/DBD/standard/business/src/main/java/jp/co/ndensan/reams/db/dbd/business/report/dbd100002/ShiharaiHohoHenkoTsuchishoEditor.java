@@ -220,15 +220,15 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
             if (get3年以前滞納額合計().intValue() != 0) {
                 source.izen_hokenryo = new RString(get3年以前滞納額合計().toString());
             }
-            if (年度1リスト.size() > 0) {
+            if (null != 年度1リスト && !年度1リスト.isEmpty()) {
                 source.hokenGokei1 = DecimalFormatter.toコンマ区切りRString(get保険料合計(年度1リスト), 0);
                 source.entaiGokei1 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(年度1リスト), 0);
             }
-            if (年度2リスト.size() > 0) {
+            if (null != 年度2リスト && !年度2リスト.isEmpty()) {
                 source.hokenGokei2 = DecimalFormatter.toコンマ区切りRString(get保険料合計(年度2リスト), 0);
                 source.entaiGokei2 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(年度2リスト), 0);
             }
-            if (年度3リスト.size() > 0) {
+            if (null != 年度3リスト && !年度3リスト.isEmpty()) {
                 source.hokenGokei3 = DecimalFormatter.toコンマ区切りRString(get保険料合計(年度3リスト), 0);
                 source.entaiGokei3 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(年度3リスト), 0);
             }

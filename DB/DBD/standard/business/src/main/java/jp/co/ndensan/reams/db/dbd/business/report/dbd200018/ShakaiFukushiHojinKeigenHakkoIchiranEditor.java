@@ -124,7 +124,7 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
             }
             if (this.帳票情報.get軽減率_分子() != null
                     && this.帳票情報.get軽減率_分母() != null
-                    && !this.帳票情報.get軽減率_分母().equals(new RString("0"))) {
+                    && !this.帳票情報.get軽減率_分母().equals(new Decimal(0))) {
                 Decimal 軽減率_分子 = new Decimal(this.帳票情報.get軽減率_分子().toString());
                 Decimal 軽減率_分母 = new Decimal(this.帳票情報.get軽減率_分母().toString());
                 source.list_12 = new RString(軽減率_分子.divide(軽減率_分母).toString());
@@ -191,14 +191,12 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
         RString 年月日 = システム日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 時分秒 = システム日時.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-        RString 印刷日時 = 年月日.concat("").concat(時分秒).concat("").concat("作成");
-        return 印刷日時;
+        return 年月日.concat("").concat(時分秒).concat("").concat("作成");
     }
 
     private RString get適用日有効期限() {
         RString 適用日 = this.帳票情報.get適用日().wareki().toDateString();
         RString 有効期限 = this.帳票情報.get有効期限().wareki().toDateString();
-        RString 適用日有効期限 = 適用日.concat(new RString("~")).concat(有効期限);
-        return 適用日有効期限;
+        return 適用日.concat(new RString("~")).concat(有効期限);
     }
 }

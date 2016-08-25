@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class FutanGendogakuNinteiShinseishoHakkoIchiran {
 
     private HihokenshaNo 被保番号;

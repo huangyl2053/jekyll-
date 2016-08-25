@@ -121,7 +121,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
     private void setHihokenshaStep1(FutanGendogakuNinteiKakunin 負担限度額認定宛名Entity,
             FutanGendogakuNinteiKakuninIchiranReportSource source) {
         FutanGendogakuNinteiKakunin 負担限度額認定確認 = this.負担限度額認定確認リスト.get(index);
-        if (null != 負担限度額認定確認リスト && !負担限度額認定確認リスト.isEmpty()) {
+        if (!負担限度額認定確認リスト.isEmpty()) {
             source.list1_1 = 負担限度額認定確認.get被保番号().value();
             IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(負担限度額認定宛名Entity.get宛名Entity());
             if (null != 宛名) {
@@ -166,7 +166,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
 
     private void setHihokenshaStep2(FutanGendogakuNinteiKakuninIchiranReportSource source) {
         FutanGendogakuNinteiKakunin 負担限度額認定確認 = this.負担限度額認定確認リスト.get(index);
-        if (null != 負担限度額認定確認リスト && !負担限度額認定確認リスト.isEmpty()) {
+        if (!負担限度額認定確認リスト.isEmpty()) {
             if (Boolean.valueOf(負担限度額認定確認.get訪問減額().toString())) {
                 source.list4_3 = new RString("申");
             } else if (負担限度額認定確認.get訪問減額().isEmpty()) {
@@ -212,7 +212,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             Decimal 預貯金額 = 負担限度額認定確認.get預貯金額();
             Decimal 有価証券評価概算額 = 負担限度額認定確認.get有価証券評価概算額();
             Decimal その他金額 = 負担限度額認定確認.getその他金額();
-            if (預貯金額 != null || 有価証券評価概算額 != null || その他金額 != null) {
+            if (有価証券評価概算額 != null || その他金額 != null) {
                 source.list6_2 = DecimalFormatter.toコンマ区切りRString(預貯金額.add(有価証券評価概算額).add(その他金額), 0);
             }
         }
@@ -220,7 +220,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
 
     private void setKonkai1(FutanGendogakuNinteiKakuninIchiranReportSource source) {
         KonkaiNinteiKekka 今回認定結果 = 負担限度額認定確認リスト.get(index).get今回認定結果();
-        if (null != 負担限度額認定確認リスト && !負担限度額認定確認リスト.isEmpty()) {
+        if (!負担限度額認定確認リスト.isEmpty()) {
             source.list1_6 = 今回認定結果.get申請年月日().wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.list3_4 = 今回認定結果.get決定年月日().wareki().eraType(EraType.KANJI_RYAKU).
@@ -253,7 +253,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
 
     private void setKonkai2(FutanGendogakuNinteiKakuninIchiranReportSource source) {
         KonkaiNinteiKekka 今回認定結果 = 負担限度額認定確認リスト.get(index).get今回認定結果();
-        if (null != 負担限度額認定確認リスト && !負担限度額認定確認リスト.isEmpty()) {
+        if (!負担限度額認定確認リスト.isEmpty()) {
             source.list1_9 = 今回認定結果.get利用者負担段階().getコード();
             source.list2_10 = DecimalFormatter.toコンマ区切りRString(今回認定結果.get食費負担額(), 0);
             source.list3_6 = DecimalFormatter.toコンマ区切りRString(今回認定結果.getユニット型個室(), 0);
@@ -273,7 +273,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
 
     private void setZenkai(FutanGendogakuNinteiKakuninIchiranReportSource source) {
         ZenkaiNinteiKekka 前回認定結果 = 負担限度額認定確認リスト.get(index).get前回認定結果();
-        if (null != 負担限度額認定確認リスト && !負担限度額認定確認リスト.isEmpty()) {
+        if (!負担限度額認定確認リスト.isEmpty()) {
             source.list1_12 = 前回認定結果.get申請年月日().wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.list2_13 = 前回認定結果.get決定年月日().wareki().eraType(EraType.KANJI_RYAKU).
@@ -314,8 +314,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         RString 年月日 = システム日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 時分秒 = システム日時.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-        RString 印刷日時 = 年月日.concat("").concat(時分秒).concat("").concat("作成");
-        return 印刷日時;
+        return 年月日.concat("").concat(時分秒).concat("").concat("作成");
     }
 
     private RString get要介護度() {
@@ -323,7 +322,6 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         RString 要介護認定状態区分コード = 負担限度額認定確認.get要介護認定状態区分コード();
         KoroshoInterfaceShikibetsuCode 厚労省IF識別コード = KoroshoInterfaceShikibetsuCode.
                 toValue(負担限度額認定確認.get厚労省IF識別コード());
-        RString 要介護度 = YokaigoJotaiKubunSupport.toValue(厚労省IF識別コード, 要介護認定状態区分コード).getName();
-        return 要介護度;
+        return YokaigoJotaiKubunSupport.toValue(厚労省IF識別コード, 要介護認定状態区分コード).getName();
     }
 }
