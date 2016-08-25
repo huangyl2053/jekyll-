@@ -62,11 +62,11 @@ public enum NinteishaListSakuseiOrderKey implements IReportItems {
     /**
      * 項目ID:0016 フォームフィールド名:市町村コード MyBatis項目名:定義なし
      */
-    市町村コード("0013", "市町村コード", ""),
+    市町村コード("0013", "市町村コード", "受給者台帳Newest.\"shichosonCode\""),
     /**
      * 項目ID:0103 フォームフィールド名:証記載保険者番号 MyBatis項目名:定義なし
      */
-    証記載保険者番号("0103", "証記載保険者番号", ""),
+    証記載保険者番号("0103", "証記載保険者番号", "社会福祉法人等利用者負担軽減.\"shoKisaiHokenshaNo\""),
     /**
      * 項目ID:0104 フォームフィールド名:被保険者番号 MyBatis項目名:定義なし
      */
@@ -74,7 +74,7 @@ public enum NinteishaListSakuseiOrderKey implements IReportItems {
     /**
      * 項目ID:0110 フォームフィールド名:確認番号 MyBatis項目名:定義なし
      */
-    確認番号("0110", "確認番号", ""),
+    確認番号("0110", "確認番号", "社会福祉法人等利用者負担軽減.\"kakuninNo\""),
     /**
      * 項目ID:0311 フォームフィールド名:計画事業者番号 MyBatis項目名:定義なし
      */

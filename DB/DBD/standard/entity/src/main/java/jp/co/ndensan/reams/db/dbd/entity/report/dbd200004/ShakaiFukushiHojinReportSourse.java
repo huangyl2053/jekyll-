@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
  * @reamsid_L DBD-3830-060 tianyh
  */
 public class ShakaiFukushiHojinReportSourse implements IReportSource {
+// <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "printTimeStamp", length = 34, order = 1)
     public RString printTimeStamp;
@@ -152,5 +153,5 @@ public class ShakaiFukushiHojinReportSourse implements IReportSource {
     public RString list4_8;
     @ReportItem(name = "list4_9", length = 1, order = 68)
     public RString list4_9;
-
+// </editor-fold>
 }
