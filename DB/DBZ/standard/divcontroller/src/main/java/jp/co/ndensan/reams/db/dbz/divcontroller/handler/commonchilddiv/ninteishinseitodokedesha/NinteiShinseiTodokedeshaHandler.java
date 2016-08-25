@@ -79,8 +79,12 @@ public class NinteiShinseiTodokedeshaHandler {
                 div.getTxtYubinNo().setValue(new YubinNo(model.get郵便番号()));
             }
             div.getCcdChoikiInput().load(ChoikiCode.EMPTY, model.get住所());
-            div.getDdlTodokledeDaikoKubun().setSelectedKey(model.get申請届出代行区分コード());
-            div.getDdlShinseiKankeisha().setSelectedKey(model.get事業者区分());
+            if (!RString.isNullOrEmpty(model.get申請届出代行区分コード())) {
+                div.getDdlTodokledeDaikoKubun().setSelectedKey(model.get申請届出代行区分コード());
+            }
+            if (!RString.isNullOrEmpty(model.get事業者区分())) {
+                div.getDdlShinseiKankeisha().setSelectedKey(model.get事業者区分());
+            }
         }
         setHidden(model);
         div.setMode_DisplayType(NinteiShinseiTodokedeshaDiv.DisplayType.管内);
