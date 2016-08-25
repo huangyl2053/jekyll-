@@ -348,54 +348,54 @@
     </sql>
     
     <sql id="条件3">
-        <if test = "#{年齢基準日} != ''">
-            <if test = "#{生年月日From2} != ''">
+        <if test = "年齢基準日 != null and !年齢基準日.isEmpty()">
+            <if test = "生年月日From2 != null and !生年月日From2.isEmpty()">
                 AND #{生年月日From2} <![CDATA[<=]]> B."seinengappiYMD"
             </if>
-            <if test = "#{生年月日To2} != ''">
+            <if test = "生年月日To2 != null and !生年月日To2.isEmpty()">
             AND B."seinengappiYMD" <![CDATA[<=]]> #{生年月日To2}
             </if>
         </if>
-        <if test = "#{生年月日From} != ''">
-            AND #{生年月日From2} <![CDATA[<=]]> B."seinengappiYMD"
+        <if test = "生年月日From != null and !生年月日From.isEmpty()">
+            AND #{生年月日From} <![CDATA[<=]]> B."seinengappiYMD"
         </if>
-        <if test = "#{生年月日To} != ''">
-            AND B."seinengappiYMD" <![CDATA[<=]]> #{生年月日To2}
+        <if test = "生年月日To != null and !生年月日To.isEmpty()">
+            AND B."seinengappiYMD" <![CDATA[<=]]> #{生年月日To}
         </if>
     </sql>
     
     <sql id="条件4">
-        <if test= "#{地区区分} == 'JUSHO'">
-            <if test = "#{開始地区コード} != ''">
+        <if test= "is住所">
+            <if test = "開始地区コード != null and !開始地区コード.isEmpty()">
                 AND #{開始地区コード} <![CDATA[<=]]> B."choikiCode"
             </if>
-            <if test = "#{終了地区コード} != ''">
+            <if test = "終了地区コード != null and !終了地区コード.isEmpty()">
                 AND B."choikiCode" <![CDATA[<=]]> #{終了地区コード}
             </if>
         </if>
-        <if test = "#{地区区分} == 'GYOSEIKU'">
-            <if test = "#{開始地区コード} != ''">
+        <if test = "is行政区">
+            <if test = "開始地区コード != null and !開始地区コード.isEmpty()">
                 AND #{開始地区コード} <![CDATA[<=]]> B."gyoseikuCode"
             </if>
-            <if test = "#{終了地区コード} != ''">
+            <if test = "終了地区コード != null and !終了地区コード.isEmpty()">
                 AND B."gyoseikuCode" <![CDATA[<=]]> #{終了地区コード}
             </if>
         </if>
-        <if test = "#{地区区分} == 'CHIKU2'">
-            <if test = "#{開始地区コード} != ''">
+        <if test = "is地区2">
+            <if test = "開始地区コード != null and !開始地区コード.isEmpty()">
                 AND #{開始地区コード} <![CDATA[<=]]> B."chikuCode2"
             </if>
-            <if test = "#{終了地区コード} != ''">
+            <if test = "終了地区コード != null and !終了地区コード.isEmpty()">
                 AND B."chikuCode2" <![CDATA[<=]]> #{終了地区コード}
             </if>
         </if>
     </sql>
     
     <sql id="条件5">
-        <if test = "#{集計単位} == 'ZIYU'">
+        <if test = "is受給申請事由">
             AND T4001."jukyuShinseiJiyu" IS NOT NULL
         </if>
-        <if test = "#{集計単位} == 'SHINSEIZI'">
+        <if test = "is申請区分申請時">
             AND ((T4101."ninteiShinseiHoreiKubunCode" = '1' 
                     AND T4001."jukyuShinseiJiyu" IN('1','3','6'))
                 OR (T4101."ninteiShinseiHoreiKubunCode" = '2' 
@@ -406,7 +406,7 @@
                     OR T4101."ninteiShinseiHoreiKubunCode" = '5') 
                     AND T4001."jukyuShinseiJiyu" = '7'))
         </if>
-        <if test = "#{集計単位} == 'HOUREI'">
+        <if test = "is申請区分法令">
             AND ((T4101."ninteiShinseiHoreiKubunCode" = '1' 
                     AND T4001."jukyuShinseiJiyu" IN('1','3','6'))
                 OR (T4101."ninteiShinseiHoreiKubunCode" = '2' 
