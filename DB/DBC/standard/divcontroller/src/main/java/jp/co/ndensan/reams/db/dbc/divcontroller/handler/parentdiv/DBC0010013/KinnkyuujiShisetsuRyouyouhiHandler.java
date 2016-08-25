@@ -479,7 +479,7 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
         setDataGrid(緊急時施設療養データ);
         div.getBtnMaeJigyosha().setDisabled(true);
         div.getBtnAtoJigyosha().setDisabled(true);
-        if (index + i - 1 > 0) {
+        if (0 < index + i) {
             div.getBtnMaeJigyosha().setDisabled(false);
         }
         if (index + i + 1 < 事業者番号リスト.size()) {
@@ -566,7 +566,7 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
             div.getBtnMaeJigyosha().setDisabled(true);
             div.getBtnAtoJigyosha().setDisabled(true);
             int index = get事業者番号index(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月, 実績区分コード);
-            if (index - 1 > 0) {
+            if (0 < index) {
                 div.getBtnMaeJigyosha().setDisabled(false);
             }
             if (index + 1 < 事業者番号リスト.size()) {
