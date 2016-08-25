@@ -26,6 +26,6 @@ public class FutanGenndoGakuNinnteiShouEntity {
     private FutanGendogakuNinteiEntity 介護保険負担限度額認定;
     private UaFt200FindShikibetsuTaishoEntity psmEntity;
     private UaFt250FindAtesakiEntity atesakiEntity;
-    private ShikibetsuCode 識別コード;
-    private LasdecCode 市町村コード;
+    private ShikibetsuCode shikibetsuCode;
+    private LasdecCode shichosonCode;
 }

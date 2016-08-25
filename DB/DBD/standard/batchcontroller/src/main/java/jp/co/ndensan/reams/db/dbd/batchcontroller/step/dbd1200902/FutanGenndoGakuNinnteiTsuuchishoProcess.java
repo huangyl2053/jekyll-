@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100013.FutanGendogakuKetteiTsuchishoReport;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100013.HakkoRirekiKoyuJohoDBD100013;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd1200902.FutanGenndoGakuNinnteiListOrderKey;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.FutanGenndoGakuNinnteiTsuuchishoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.FutanGenndoGakuNinnteiTsuuchishoEntity;
@@ -45,6 +46,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNoHatsubanHoho;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.core.teikeibunhenkan.ITextHenkanRule;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
@@ -200,7 +202,7 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
 
     @Override
     protected void process(FutanGenndoGakuNinnteiTsuuchishoEntity fatan) {
-        if (fatan.get市町村コード() == null || fatan.get識別コード() == null) {
+        if (fatan.getShichosonCode() == null || fatan.getShikibetsuCode() == null) {
             tmpTableWriter.insert(create処理(fatan));
         } else {
             tmpTableWriter.update(create処理(fatan));
@@ -227,9 +229,9 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD100020, reamsLoginID, processParamter.get改頁出力順ID());
         RString 出力順 = RString.EMPTY;
-        //if (order != null) {
-        //  出力順 = MyBatisOrderByClauseCreator.create(FutanGenndoGakuNinnteiListProperty.class, order);
-        //  }
+        if (order != null) {
+            出力順 = MyBatisOrderByClauseCreator.create(FutanGenndoGakuNinnteiListOrderKey.class, order);
+        }
         return 出力順;
     }
 

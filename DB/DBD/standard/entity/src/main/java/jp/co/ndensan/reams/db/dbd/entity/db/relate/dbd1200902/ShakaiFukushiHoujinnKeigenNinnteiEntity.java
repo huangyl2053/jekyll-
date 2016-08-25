@@ -26,6 +26,6 @@ public class ShakaiFukushiHoujinnKeigenNinnteiEntity {
     private ShafukuRiyoshaFutanKeigenEntity 社会福祉法人等利用者負担軽減;
     private UaFt200FindShikibetsuTaishoEntity psmEntity;
     private UaFt250FindAtesakiEntity atesakiEntity;
-    private ShikibetsuCode 識別コード;
-    private LasdecCode 市町村コード;
+    private ShikibetsuCode shikibetsuCode;
+    private LasdecCode shichosonCode;
 }
