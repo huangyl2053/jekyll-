@@ -148,22 +148,17 @@ public class NinteiShinseiRenrakusakiJoho {
                 && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
             NinteiShinseiBusinessCollection data = ViewStateHolder.get(ViewStateKeys.連絡先情報, NinteiShinseiBusinessCollection.class);
             List<dgRenrakusakiIchiran_Row> dateSoruce = div.getDgRenrakusakiIchiran().getDataSource();
-            if (data == null) {
-                dateSoruce.remove(div.getDgRenrakusakiIchiran().getActiveRow());
-                div.getDgRenrakusakiIchiran().setDataSource(dateSoruce);
-                return ResponseData.of(div).respond();
-            }
             List<RenrakusakiJoho> johoList = data.getDbdBusiness();
             for (int i = 0; i < johoList.size(); i++) {
                 RenrakusakiJoho joho = johoList.get(i);
                 dgRenrakusakiIchiran_Row row = div.getDgRenrakusakiIchiran().getActiveRow();
                 if (row.getShinseishoKanriNo().equals(joho.get申請書管理番号().value())
                         && row.getRenban().equals(new RString(joho.get連番()))) {
-                    dateSoruce.remove(div.getDgRenrakusakiIchiran().getActiveRow());
-                    div.getDgRenrakusakiIchiran().setDataSource(dateSoruce);
                     johoList.set(i, joho.deleted());
                 }
             }
+            dateSoruce.remove(div.getDgRenrakusakiIchiran().getActiveRow());
+            div.getDgRenrakusakiIchiran().setDataSource(dateSoruce);
             data.setDbdBusiness(johoList);
             ViewStateHolder.put(ViewStateKeys.連絡先情報, data);
 
