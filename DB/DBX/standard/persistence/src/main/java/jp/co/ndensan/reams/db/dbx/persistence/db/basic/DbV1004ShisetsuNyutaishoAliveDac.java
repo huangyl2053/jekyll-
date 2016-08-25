@@ -96,6 +96,8 @@ public class DbV1004ShisetsuNyutaishoAliveDac implements ISaveable<DbV1004Shiset
      */
     @Transaction
     public DbV1004ShisetsuNyutaishoEntity get施設入退所(ShikibetsuCode 識別コード) {
+
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -115,6 +117,8 @@ public class DbV1004ShisetsuNyutaishoAliveDac implements ISaveable<DbV1004Shiset
      */
     @Transaction
     public DbV1004ShisetsuNyutaishoEntity get施設入退所Order(ShikibetsuCode 識別コード, RString 台帳種別) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(台帳種別, UrSystemErrorMessages.値がnull.getReplacedMessage("台帳種別"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
