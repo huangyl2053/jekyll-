@@ -19,25 +19,15 @@ import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 import jp.co.ndensan.reams.ua.uax.service.core.kinyukikan.KinyuKikanManager;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.DayOfWeek;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -55,22 +45,14 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
     private static final RString 窓口 = new RString("窓口");
     private static final RString 口座 = new RString("口座");
     private static final RString ＦＤ作成_1 = new RString("1");
-    private static final RString ＦＤ作成_0 = new RString("0");
     private static final RString 全て = new RString("全て");
     private static final RString 振込指定日_MSG = new RString("振込指定日");
     private static final RString 発行済のみ = new RString("発行済のみ");
     private static final RString KEY_1 = new RString("1");
-    private static final RString 時 = new RString("時");
-    private static final RString 分 = new RString("分");
-    private static final RString 秒 = new RString("秒");
     private static final int INDEX_0 = 0;
-    private static final int INDEX_2 = 2;
-    private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
     private static final int INDEX_5 = 5;
-    private static final int INDEX_6 = 6;
     private static final int INDEX_8 = 8;
-    private static final ReportId 帳票ID = new ReportId("DBC200003_FurikomiMeisaiIchiran");
 
     /**
      * コンストラクタです。
@@ -274,48 +256,9 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
      */
     public DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter creatParameter() {
         // QA#94411
-        RString 出力順 = RString.EMPTY;
-        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder iOutputOrder = finder.get出力順(
-                SubGyomuCode.DBC介護給付,
-                帳票ID,
-                Long.valueOf(div.getCcdChohyoShusuryokujun().get出力順ID().toString()));
-        if (iOutputOrder != null) {
-            出力順 = MyBatisOrderByClauseCreator.create(null, iOutputOrder);
-        }
-//        RString 支払方法 = div.getRadSiharaihouhou().getSelectedValue();
+        long 出力順ID = div.getCcdChohyoShusuryokujun().get出力順ID();
         DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter parameter = new DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter();
-//        RDate 今回対象年月日From = div.getTyuusyutuHanni().getTxtKonnkaiTaisyouNenngappi().getFromValue();
-//        RDate 今回対象年月日To = div.getTyuusyutuHanni().getTxtKonnkaiTaisyouNenngappi().getToValue();
-//        RString 出力帳票 = div.getShuturyokuTyouhyou().getDdlSyuturyokuTyouhyou().getSelectedValue();
-//        boolean fdDataを作成する = false;
-//        RString ＦＤ作成 = div.getFdSakusei();
-//        if (ＦＤ作成_1.equals(ＦＤ作成) && 口座.equals(支払方法)
-//                && div.getShuturyokuTyouhyou().getChkFDDataSakusei().getSelectedKeys().isEmpty()) {
-//            fdDataを作成する = true;
-//        }
-//        RString 作成日 = format作成日();
-//        RDate 依頼日 = div.getShuturyokuTyouhyou().getTxtIraibi().getValue();
-//        RDate 振込指定日 = div.getShuturyokuTyouhyou().getTxtFurikomiSiteibi().getValue();
-//        RString 発行対象 = div.getTyuusyutuHanni().getDdlHakkouTaisyou().getSelectedValue();
-//        RString 取引先金融機関 = div.getTyuusyutuJyoukenn().getTxtTorihikiKinyukikan().getValue();
-//        RString 取引先金融機関支店名称 = div.getTorihikiKinyukikanShitennmei();
-//        RDate 対象作成年月日 = div.getTyuusyutuHanni().getTxt().getValue();
-//        parameter.set支払方法(支払方法);
-//        parameter.set今回対象年月日From(今回対象年月日From);
-//        parameter.set今回対象年月日To(今回対象年月日To);
-//        parameter.set取引先金融機関(取引先金融機関);
-//        parameter.set出力帳票(出力帳票);
-//        parameter.setFDDataを作成する(fdDataを作成する);
-//        parameter.set作成日(作成日);
-//        parameter.set依頼日(依頼日);
-//        parameter.set振込指定日(振込指定日);
-//        parameter.set発行対象(発行対象);
-//        parameter.set取引先金融機関支店名称(取引先金融機関支店名称);
-//        List<RString> 出力順リスト = new ArrayList<>();
-//        出力順リスト.add(出力順);
-//        parameter.set出力順設定リスト(出力順リスト);
-//        parameter.set対象作成年月日(対象作成年月日);
+        parameter.set出力順ID(出力順ID);
         return parameter;
     }
 
@@ -383,18 +326,5 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamHandler {
             return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
-    }
-
-    private RString format作成日() {
-        RDate date = div.getShuturyokuTyouhyou().getTxtSakuseibi().getValue();
-        RTime time = RTime.now();
-        RString hour = new RString(time.toString()).substring(INDEX_0, INDEX_2);
-        RString min = new RString(time.toString()).substring(INDEX_3, INDEX_5);
-        RString sec = new RString(time.toString()).substring(INDEX_6, INDEX_8);
-        RString timeFormat = hour.concat(時).concat(min).concat(分).concat(sec).concat(秒);
-        RString 作成日 = date.wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
-                fillType(FillType.BLANK).toDateString().concat(RString.FULL_SPACE).concat(timeFormat);
-        return 作成日;
     }
 }

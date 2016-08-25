@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KogakuShikyuShinseishoIkkatsuHakkoMapperParameter {
+public final class KogakuShikyuShinseishoIkkatsuHakkoMapperParameter {
 
     private final HihokenshaNo hihokenshaNo;
     private final HokenshaNo shoKisaiHokenshaNo;
