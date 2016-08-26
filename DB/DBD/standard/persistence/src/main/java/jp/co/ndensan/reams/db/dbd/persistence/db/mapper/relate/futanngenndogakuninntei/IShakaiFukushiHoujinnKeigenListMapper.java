@@ -26,5 +26,11 @@ public interface IShakaiFukushiHoujinnKeigenListMapper {
      */
     List<ShakaiFukushiHoujinnKeigenListEntity> get社会福祉法人軽減確認証_決定通知書発行一覧表発行情報(ShakaiFukushiHoujinnKeigenListMybatisParameter parameter);
 
+    /**
+     * 社会福祉法人等軽減の通知書発行の一時テーブルEntityを取得します．
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return ShafukuKeigenKetteiTempTableEntity
+     */
     ShafukuKeigenKetteiTempTableEntity get社会福祉法人等軽減の通知書発行の一時テーブルEntity(HihokenshaNo 被保険者番号);
 }
