@@ -212,7 +212,7 @@
         AND "ShinseiJohoTemp"."rirekiNoJoho" = 高額介護."dbT3056KogakuShikyuShinsei_rirekiNo"
         WHERE 
         高額介護."dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo" = #{ 保険者番号 }
-        AND 高額介護."dbT3054KogakuKyufuTaishoshaMeisai_taishoshaUketoriYM" = #{ shoriYm }
+        AND 高額介護."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM" = #{ shoriYm }
         ORDER BY 
         "ShinseiJohoTemp"."hihokenshaNoJoho" ASC,
         "ShinseiJohoTemp"."serviceTeikyoYMJoho" ASC
@@ -233,7 +233,7 @@
         AND "ShinseiJohoTemp"."rirekiNoJoho" = 高額介護."dbT3110JigyoKogakuShikyuShinsei_rirekiNo"
         WHERE 
         高額介護."dbT3110JigyoKogakuShikyuShinsei_shoKisaiHokenshaNo" = #{ 保険者番号 }
-        AND 高額介護."dbT3108JigyoKogakuKyufuTaishoshaMeisai_taishoshaUketoriYM" = #{ shoriYm }
+        AND 高額介護."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM" = #{ shoriYm }
         ORDER BY 
         "ShinseiJohoTemp"."hihokenshaNoJoho" ASC,
         "ShinseiJohoTemp"."serviceTeikyoYMJoho" ASC
