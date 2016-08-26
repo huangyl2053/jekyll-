@@ -117,4 +117,11 @@ public interface IServiceRiyohyoInfoDiv extends ICommonChildDivBaseProperties {
      */
     public void DB削除処理(RString 居宅総合事業区分, TankiNyushoResult 短期入所情報);
 
+    /**
+     * サービス利用票情報取得メソッドです。
+     *
+     * @return List<KyufuJikoSakuseiResult>
+     */
+    public List<KyufuJikoSakuseiResult> getサービス利用票情報();
+
 }

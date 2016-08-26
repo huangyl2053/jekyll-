@@ -119,9 +119,6 @@ public class JukyushaIdoRenrakuhyoSakuseiPanel {
         } else {
             JukyushaIdoRenrakuhyoTorokuEntity 受給者訂正連絡票Entity = getHandler(div).get受給者訂正連絡票Entity(
                     作成年月日, 氏名性別生年月日を印字する);
-            if (受給者訂正連絡票Entity == null) {
-                受給者訂正連絡票Entity = new JukyushaIdoRenrakuhyoTorokuEntity();
-            }
             JukyushaTeiseiRenrakuhyoPrintService 訂正連絡票service = new JukyushaTeiseiRenrakuhyoPrintService();
             return ResponseData.of(訂正連絡票service.printSingle(受給者訂正連絡票Entity)).respond();
         }

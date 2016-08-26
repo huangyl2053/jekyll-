@@ -1253,7 +1253,10 @@ public class JukyushaIdoRenrakuhyoHandler {
         entity.set氏名性別生年月日を印字する(氏名性別生年月日を印字する);
         JukyushaIdoRenrakuhyoSakusei business = JukyushaIdoRenrakuhyoSakusei.createInstance();
         JukyushaIdoRenrakuhyoSakuseiRelateEntity entityReturn = business.出力用受給者訂正情報Entity(entity);
-        return entityReturn.get出力用受給者訂正情報Entity();
+        if (entityReturn != null) {
+            return entityReturn.get出力用受給者訂正情報Entity();
+        }
+        return null;
     }
 
     /**
