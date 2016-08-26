@@ -77,7 +77,7 @@ public class KyufuKanrihyoTorikomiKekkaIchiranHeaderEditor implements IKyufuKanr
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
         source.torikomiYM = 処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        source.hokenshaNo = 帳票出力対象データ.get給付管理票().getコントロールレコード保険者名();
+        source.hokenshaNo = 帳票出力対象データ.get給付管理票().getコントロールレコード保険者番号();
         source.hokenshaName = 帳票出力対象データ.get給付管理票().getコントロールレコード保険者名();
         source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);
         source.shutsuryokujun2 = get並び順(KEY_並び順の３件目);
