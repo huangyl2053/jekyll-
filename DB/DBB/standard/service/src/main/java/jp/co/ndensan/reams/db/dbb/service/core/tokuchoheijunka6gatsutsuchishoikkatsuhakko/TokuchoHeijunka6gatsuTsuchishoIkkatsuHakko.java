@@ -598,7 +598,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
                 param.get帳票ID(), association.getLasdecCode_().getColumnValue(), association.get市町村名(),
                 ジョブ番号.concat(RString.HALF_SPACE).concat(new RString(String.valueOf(JobContextHolder.getJobId()))),
                 帳票名,
-                new RString(通知書ページ数.toString()), csv出力有無, csvファイル名, 出力条件List);
+                new RString(通知書ページ数), csv出力有無, csvファイル名, 出力条件List);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
         printer.print();
     }
