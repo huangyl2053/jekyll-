@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
@@ -20,7 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SetaiHaakuEntity implements IDbAccessable {
+public class SetaiHaakuEntity extends DbTableEntityBase<SetaiHaakuEntity>
+        implements IDbAccessable {
 
     private HihokenshaNo hihokenshaNo;
     private ShikibetsuCode shikibetsuCode;

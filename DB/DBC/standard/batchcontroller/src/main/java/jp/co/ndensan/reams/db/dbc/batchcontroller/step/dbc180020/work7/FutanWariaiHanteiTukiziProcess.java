@@ -195,12 +195,13 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
                 writer = writers.get(i);
                 writer.insert(insertTemp);
             }
+            RiyoshaFutanWariaiKonkyoTempEntity insertKonkyoTemp;
             for (int i = 0; i < レコード数; i++) {
                 List<SetainJohoRelateEntity> 世帯員情報Entities = entities.get(i).get世帯員情報Entity();
                 SetainJohoRelateEntity 世帯員情報Entitity = 世帯員情報Entities.isEmpty() ? null : 世帯員情報Entities.get(0);
                 SetainJohoTempEntity 世帯員情報 = 世帯員情報Entitity == null ? null : 世帯員情報Entitity.get世帯員情報();
                 DbV2512KaigoShotokuNewestEntity 所得管理 = 世帯員情報Entitity == null ? null : 世帯員情報Entitity.get介護所得情報();
-                RiyoshaFutanWariaiKonkyoTempEntity insertKonkyoTemp = new RiyoshaFutanWariaiKonkyoTempEntity();
+                insertKonkyoTemp = new RiyoshaFutanWariaiKonkyoTempEntity();
                 insertKonkyoTemp.setNendo(nendo);
                 insertKonkyoTemp.setHihokenshaNo(判定対象者.getHihokenshaNo());
                 insertKonkyoTemp.setRirekiNo(Decimal.ZERO);

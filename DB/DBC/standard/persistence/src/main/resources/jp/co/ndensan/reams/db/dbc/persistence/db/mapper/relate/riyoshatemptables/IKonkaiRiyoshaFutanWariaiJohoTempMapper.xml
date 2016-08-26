@@ -17,7 +17,7 @@
         "KonkaiRiyoshaFutanWariaiJohoTemp"."koseiJiyu"as "KonkaiRiyoshaFutanWariaiJohoTemp_koseiJiyu"
     </sql>
     <resultMap id="ResultMap_KonkaiRiyoshaFutanWariaiJohoTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.KonkaiRiyoshaFutanWariaiJohoTempEntity" autoMapping="true">
-        <result property="nendo" column="KonkaiRiyoshaFutanWariaiJohoTemp_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nendo" column="KonkaiRiyoshaFutanWariaiJohoTemp_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="hihokenshaNo" column="KonkaiRiyoshaFutanWariaiJohoTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="edaNo" column="KonkaiRiyoshaFutanWariaiJohoTemp_edaNo"  />
         <result property="futanWariaiKubun" column="KonkaiRiyoshaFutanWariaiJohoTemp_futanWariaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

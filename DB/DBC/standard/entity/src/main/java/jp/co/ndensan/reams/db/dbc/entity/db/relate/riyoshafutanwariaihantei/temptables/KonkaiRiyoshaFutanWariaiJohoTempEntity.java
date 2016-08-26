@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.tem
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
@@ -25,7 +26,7 @@ public class KonkaiRiyoshaFutanWariaiJohoTempEntity
 
     private HihokenshaNo hihokenshaNo;
     private RString koseiJiyu;
-    private RString nendo;
+    private FlexibleYear nendo;
     private int edaNo;
     private RString futanWariaiKubun;
     private Decimal honinGokeishotokuKingaku;

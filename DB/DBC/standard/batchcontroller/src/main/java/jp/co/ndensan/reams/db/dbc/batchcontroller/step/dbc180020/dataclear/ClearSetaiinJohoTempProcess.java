@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ClearSetaiinJohoTempProcess extends BatchProcessBase<SetainJohoTempEntity> {
 
-    private static final RString TABLENAME = new RString("SetaiinJohoTemp");
+    private static final RString TABLENAME = new RString("SetainJohoTemp");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select世帯員情報Temp");
     @BatchWriter

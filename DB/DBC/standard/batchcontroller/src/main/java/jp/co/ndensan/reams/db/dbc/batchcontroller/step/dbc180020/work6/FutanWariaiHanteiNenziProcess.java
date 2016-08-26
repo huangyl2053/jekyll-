@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.Seta
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.KonkaiRiyoshaFutanWariaiJohoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetainJohoTempEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
@@ -119,6 +120,7 @@ public class FutanWariaiHanteiNenziProcess extends BatchKeyBreakBase<FutanWariai
         insertDbt3113Entity.setLogicalDeletedFlag(false);
         利用者負担割合.insert(insertDbt3113Entity);
         int レコード数 = entities.size();
+        getMapper(IRiyoshaFutanwariaiMapper.class).select世帯員情報Temp();
         RString 負担割合区分 = service.futanWariaiHantei(util.getFutanWariaiHanteiJoho(entities)).get負担割合区分();
         loopHandle(レコード数, 負担割合区分, insertDbt3113Entity);
         entities = new ArrayList<>();
@@ -186,7 +188,7 @@ public class FutanWariaiHanteiNenziProcess extends BatchKeyBreakBase<FutanWariai
             insertDbt3114Entity.setLogicalDeletedFlag(false);
             insertDbt3114Entity.setFutanWariaiKubun(負担割合区分);
             利用者負担割合明細.insert(insertDbt3114Entity);
-            insertTemp.setNendo(nendo.toDateString());
+            insertTemp.setNendo(nendo);
             insertTemp.setHihokenshaNo(insertDbt3114Entity.getHihokenshaNo());
             insertTemp.setEdaNo(insertDbt3114Entity.getEdaNo());
             insertTemp.setFutanWariaiKubun(insertDbt3114Entity.getFutanWariaiKubun());
