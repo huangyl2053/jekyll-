@@ -129,11 +129,11 @@ public class KyufuKanrihyoTorikomiKekkaIchiranBodyEditor implements IKyufuKanrih
         RString 計画作成区分コード = 給付管理票.get居宅サービス計画作成区分コード();
         if (居宅サービス計画作成区分コード_自己作成.equals(計画作成区分コード)) {
             source.listUpper_1 = RString.EMPTY;
-            source.listUpper_2 = 給付管理票.get居宅支援事業所番号();
-        } else {
             JukyushaIF_KeikakuSakuseiKubunCode 居宅サービス計画作成区分
                     = JukyushaIF_KeikakuSakuseiKubunCode.toValue(給付管理票.get居宅サービス計画作成区分コード());
-            source.listUpper_1 = (null != 居宅サービス計画作成区分) ? 居宅サービス計画作成区分.get名称() : RString.EMPTY;
+            source.listUpper_2 = (null != 居宅サービス計画作成区分) ? 居宅サービス計画作成区分.get名称() : RString.EMPTY;
+        } else {
+            source.listUpper_1 = 給付管理票.get居宅支援事業所番号();
             source.listUpper_2 = RString.EMPTY;
             source.listLower_1 = 給付管理票.get事業者名称();
         }

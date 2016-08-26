@@ -7,11 +7,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010013
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKinkyuShisetsuRyoyo;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010013.DBC0010013TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010013.KinnkyuujiShisetsuRyouyouhiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010013.KinnkyuujiShisetsuRyouyouhiHandler;
+import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -40,8 +42,9 @@ public class KinnkyuujiShisetsuRyouyouhi {
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         NyuryokuShikibetsuNo 識別番号 = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class);
         getHandler(div).load共有子Div(引き継ぎ情報, 整理番号, サービス提供年月, 識別番号);
-        getHandler(div).setButton(ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class),
-                ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
+        ShikibetsuNoKanri 識別番号管理 = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
+                サービス提供年月, 識別番号).records().get(0);
+        getHandler(div).setButton(サービス提供年月, 識別番号, 識別番号管理);
         List<KyufujissekiKinkyuShisetsuRyoyo> 給付実績緊急時施設療養データ取得 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getCsData_C();
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();

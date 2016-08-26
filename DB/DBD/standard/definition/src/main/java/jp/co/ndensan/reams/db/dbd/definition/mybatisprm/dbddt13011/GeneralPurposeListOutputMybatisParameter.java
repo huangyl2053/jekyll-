@@ -80,6 +80,9 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
     private RString chiku3_From;
     private RString chiku3_To;
 
+    private FlexibleDate 年齢Fromから逆算した生年月日;
+    private FlexibleDate 年齢Toから逆算した生年月日;
+
     /**
      * コンストラクタです。
      *
@@ -180,6 +183,7 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
     }
 
     private void set年齢範囲について(AtenaSelectBatchParameter 宛名抽出条件) {
+        FlexibleDate systemDate = FlexibleDate.getNowDate();
 
         if (NenreiSoChushutsuHoho.年齢範囲.equals(宛名抽出条件.getAgeSelectKijun())) {
             is宛名抽出区分_年齢 = true;
@@ -188,11 +192,12 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
             if (Decimal.ZERO != ageRange.getFrom()) {
                 is宛名抽出区分_年齢From = true;
                 ageFrom = ageRange.getFrom();
+                年齢Fromから逆算した生年月日 = systemDate.minusYear(ageFrom.intValue());
             }
             if (Decimal.ZERO != ageRange.getTo()) {
                 is宛名抽出区分_年齢To = true;
                 ageTo = ageRange.getTo();
-
+                年齢Toから逆算した生年月日 = systemDate.minusYear(ageTo.intValue());
             }
         }
     }
