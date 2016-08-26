@@ -86,6 +86,7 @@ and open the template in the editor.
 </select>
 <select id="get社会福祉法人等軽減の通知書発行の一時テーブルEntity"
         resultMap="resultMap_IShafukuKeigenKetteiTempTableEntity"
+         parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.ShakaiFukushiHoujinnKeigenParameter"
         fetchSize="500" resultOrdered="true">
     SELECT 
      "ShafukuKeigenKetteiTempTable"."hihokenshaNo" AS 被保険者番号,
@@ -106,6 +107,7 @@ and open the template in the editor.
       "ShafukuKeigenKetteiTempTable"."kakuninNo"  AS 確認番号
     FROM "ShafukuKeigenKetteiTempTable"
     WHERE "ShafukuKeigenKetteiTempTable"."hihokenshaNo" =#{被保険者番号}
+    AND "ShafukuKeigenKetteiTempTable"."shikibetsuCode" =#{識別コード}
     LIMIT 1
 </select>
 </mapper>
