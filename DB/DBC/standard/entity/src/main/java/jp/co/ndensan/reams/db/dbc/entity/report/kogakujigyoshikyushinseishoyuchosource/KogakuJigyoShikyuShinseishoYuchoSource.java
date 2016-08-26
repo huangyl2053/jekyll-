@@ -24,9 +24,9 @@ public class KogakuJigyoShikyuShinseishoYuchoSource implements IReportSource {
     @ReportItem(name = "hokenshaNo", length = 6, order = 4)
     public RString hokenshaNo;
     @ReportItem(name = "hihokenshaName", order = 5)
-    @ReportExpandedInfo(id = "X")
     public RString hihokenshaName;
     @ReportItem(name = "hihokenshaNo", length = 10, order = 6)
+    @ReportExpandedInfo(id = "X")
     public RString hihokenshaNo;
     @ReportItem(name = "birthYMD", length = 11, order = 7)
     public RString birthYMD;
