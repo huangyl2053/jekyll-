@@ -8,9 +8,8 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1200902;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100012.ShakFuksHjRiysFutKgTsKtTsuchishoOrderKey;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100012.ShakFuksHjRiysFutKgTsKtTsuchishoReport;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100013.HakkoRirekiKoyuJohoDBD100013;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100020.FutanGendogakuNinteishoOrderKey;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.ShakaiFukushiHoujinnKeigenTsuuchishoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.ShakaiFukushiHoujinnKeigenTsuuchishoEntity;
@@ -20,8 +19,8 @@ import jp.co.ndensan.reams.db.dbd.entity.report.dbd100012.ShakFuksHojRiysFutKeig
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futanngenndogakuninntei.IShakaiFukushiHoujinnKeigenListMapper;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd1200902.ShakaiFukushiHoujinnKeigenTsuuchishoService;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.report.hakkorireki.GyomuKoyuJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.TeikeibunMojiSize;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
@@ -80,7 +79,6 @@ import jp.co.ndensan.reams.uz.uza.util.Saiban;
  */
 public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBase<ShakaiFukushiHoujinnKeigenTsuuchishoEntity> {
 
-    private static final ReportId REPORT_DBD100020 = ReportIdDBD.DBD100020.getReportId();
     private static final ReportId 帳票ID = new ReportId("DBD100012_ShakaiFukushiHojinRiyoshaFutanKeigenKetteiTsuchisho");
     private static final ReportId 帳票分類ID = new ReportId("DBD100012_ShakaiFukushiHojinRiyoshaFutanKeigenKetteiTsuchisho");
     private static final RString なし = new RString("なし");
@@ -104,8 +102,6 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
     private static final int FOUR_4 = 4;
     private static DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通;
     private IShakaiFukushiHoujinnKeigenListMapper mapper;
-    private List<ShafukuKeigenKetteiTempTableEntity> tempTables;
-    private List<HihokenshaNo> hihokenshaNoList;
     private static final RString GENERICKEY = new RString("社会福祉法人等利用者負担軽減決定通知書");
     @BatchWriter
     private BatchReportWriter<ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource> batchReportWrite;
@@ -117,11 +113,6 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
     @Override
     protected void initialize() {
         mapper = getMapper(IShakaiFukushiHoujinnKeigenListMapper.class);
-        tempTables = mapper.get社会福祉法人等軽減の通知書発行の一時テーブルEntity();
-        hihokenshaNoList = new ArrayList<>();
-        for (ShafukuKeigenKetteiTempTableEntity entity : tempTables) {
-            hihokenshaNoList.add(entity.getHihokenshaNo());
-        }
         reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         association = AssociationFinderFactory.createInstance().getAssociation();
         帳票制御共通 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御共通(帳票分類ID);
@@ -147,16 +138,15 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
         }
         ShakaiFukushiHoujinnKeigenTsuuchishoService shakai = new ShakaiFukushiHoujinnKeigenTsuuchishoService();
         count = shakai.get利用者負担割合(processParamter.toShakaiFukushiHoujinnKeigenTsuuchishoMybatisParameter(RString.EMPTY,
-                RString.EMPTY, HakkoRirekiKoyuJohoDBD100013.被保番号.get名称(), HakkoRirekiKoyuJohoDBD100013.減免適用開始日.get名称(),
-                REPORT_DBD100020, get出力順()));
+                RString.EMPTY, GyomuKoyuJoho.被保番号.getコード(), GyomuKoyuJoho.減免適用開始日.getコード(),
+                帳票ID, get出力順()));
     }
 
     @Override
     protected IBatchReader createReader() {
 
         return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toShakaiFukushiHoujinnKeigenTsuuchishoMybatisParameter(RString.EMPTY,
-                RString.EMPTY, HakkoRirekiKoyuJohoDBD100013.被保番号.get名称(), HakkoRirekiKoyuJohoDBD100013.減免適用開始日.get名称(),
-                REPORT_DBD100020, get出力順()));
+                RString.EMPTY, GyomuKoyuJoho.被保番号.getコード(), GyomuKoyuJoho.減免適用開始日.getコード(), 帳票ID, get出力順()));
     }
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
@@ -172,10 +162,12 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
 
     @Override
     protected void process(ShakaiFukushiHoujinnKeigenTsuuchishoEntity shaka) {
-        if (!hihokenshaNoList.contains(shaka.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getHihokenshaNo())) {
+        ShafukuKeigenKetteiTempTableEntity shafukuEntity = mapper.get社会福祉法人等軽減の通知書発行の一時テーブルEntity(shaka.
+                get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getHihokenshaNo());
+        if (shafukuEntity == null) {
             tmpTableWriter.insert(create処理(shaka));
         } else {
-            tmpTableWriter.update(insert(shaka));
+            tmpTableWriter.update(insert(shafukuEntity, shaka));
         }
         UaFt250FindAtesakiEntity uaFt250Entity = shaka.getAtesakiEntity();
         UaFt200FindShikibetsuTaishoEntity uaFt200Entity = shaka.getPsmEntity();
@@ -199,10 +191,10 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
 
     private RString get出力順() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD100020, reamsLoginID, processParamter.get改頁出力順ID());
+        order = finder.get出力順(SubGyomuCode.DBD介護受給, 帳票ID, reamsLoginID, processParamter.get改頁出力順ID());
         RString 出力順 = RString.EMPTY;
         if (order != null) {
-            出力順 = MyBatisOrderByClauseCreator.create(FutanGendogakuNinteishoOrderKey.class, order);
+            出力順 = MyBatisOrderByClauseCreator.create(ShakFuksHjRiysFutKgTsKtTsuchishoOrderKey.class, order);
         }
         return 出力順;
     }
@@ -264,8 +256,10 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
         出力条件.add(builder.toRString());
         RStringBuilder builder4 = new RStringBuilder();
         builder4.append(出力順);
-        for (ISetSortItem item : order.get設定項目リスト()) {
-            builder4.append(より).append(item.get項目名());
+        if (order != null) {
+            for (ISetSortItem item : order.get設定項目リスト()) {
+                builder4.append(より).append(item.get項目名());
+            }
         }
         出力条件.add(builder4.toRString());
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
@@ -296,26 +290,20 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
         data.setKetteiKubun(futan.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getKetteiKubun());
         data.setKeigenritsu_Bunshi(futan.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getKeigenritsu_Bunshi());
         data.setKeigenritsu_Bumbo(futan.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getKeigenritsu_Bumbo());
-        data.setKeigenritsu(data.getKeigenritsu_Bunshi().divide(data.getKeigenritsu_Bumbo()));
+        data.setKeigenritsu(futan.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getGemmenKubun());
         data.setKyotakuServiceGentei(futan.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getKyotakuServiceGentei());
         data.setKyojuhiShokuhiNomi(futan.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getKyojuhiShokuhiNomi());
         data.setKyusochishaUnitTypeKoshitsuNomi(futan.get社会福祉法人等利用者負担軽減().
                 get社会福祉法人等利用者負担軽減Entity().getKyusochishaUnitTypeKoshitsuNomi());
+        data.setKakuninNo(futan.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getKakuninNo());
         return data;
     }
 
-    private ShafukuKeigenKetteiTempTableEntity insert(ShakaiFukushiHoujinnKeigenTsuuchishoEntity futan) {
-        ShafukuKeigenKetteiTempTableEntity updateEntity = null;
-        for (ShafukuKeigenKetteiTempTableEntity entity : tempTables) {
-            if (entity.getHihokenshaNo().equals(futan.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getHihokenshaNo())) {
-                updateEntity = entity;
-                break;
-            }
-        }
-        IKojin kojin = ShikibetsuTaishoFactory.createKojin(futan.getPsmEntity());
-        updateEntity.setHihokenshaNo(futan.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getHihokenshaNo());
-        updateEntity.setShikibetsuCode(kojin.get識別コード());
-        updateEntity.setTsuchiHakkoZumi(true);
-        return updateEntity;
+    private ShafukuKeigenKetteiTempTableEntity insert(ShafukuKeigenKetteiTempTableEntity entity, ShakaiFukushiHoujinnKeigenTsuuchishoEntity shaka) {
+        entity.setTsuchiHakkoZumi(true);
+        entity.setHihokenshaNo(shaka.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getHihokenshaNo());
+        IKojin kojin = ShikibetsuTaishoFactory.createKojin(shaka.getPsmEntity());
+        entity.setShikibetsuCode(kojin.get識別コード());
+        return entity;
     }
 }

@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1200902;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100019.ShafukuRiysFutKeigTaisKakuninshoShoNoAriReport;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100018.ShakfukusRiysFutKeigTaisKakuninshoOrderKey;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100019.ShafukuRiysFutKeigTaisKakuninshoShoNoAriReport;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.ShakaiFukushiHoujinnKeigenNinnteiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.ShakaiFukushiHoujinnKeigenNinnteiEntity;
@@ -85,7 +85,11 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
         reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, 帳票ID.getReportId(), reamsLoginID,
                 processParamter.get改頁出力順ID());
-        出力順 = MyBatisOrderByClauseCreator.create(ShakfukusRiysFutKeigTaisKakuninshoOrderKey.class, outputOrder);
+        if (outputOrder != null) {
+            出力順 = MyBatisOrderByClauseCreator.create(ShakfukusRiysFutKeigTaisKakuninshoOrderKey.class, outputOrder);
+        } else {
+            出力順 = RString.EMPTY;
+        }
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         帳票制御共通 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御共通(帳票ID.getReportId());
         帳票制御汎用 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御汎用(帳票ID.getReportId());
@@ -152,8 +156,10 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
                 .concat(カラ)
                 .concat(processParamter.get決定日TO().toString()));
         RString 設定項目 = RString.EMPTY;
-        for (ISetSortItem item : outputOrder.get設定項目リスト()) {
-            設定項目.concat(より大きい).concat(item.get項目名());
+        if (outputOrder != null) {
+            for (ISetSortItem item : outputOrder.get設定項目リスト()) {
+                設定項目.concat(より大きい).concat(item.get項目名());
+            }
         }
         出力条件.add(new RString("【出力順】").concat(設定項目));
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
@@ -178,7 +184,7 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
         tempEntity.setKetteiKubun(entity.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getKetteiKubun());
         tempEntity.setKetteiYMD(entity.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getKetteiYMD());
         tempEntity.setKyojuhiShokuhiNomi(entity.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getKyojuhiShokuhiNomi());
-        tempEntity.setKeigenritsu(tempEntity.getKeigenritsu_Bunshi().divide(tempEntity.getKeigenritsu_Bumbo()));
+        tempEntity.setKeigenritsu(entity.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getGemmenKubun());
         tempEntity.setKyotakuServiceGentei(entity.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getKyotakuServiceGentei());
         tempEntity.setShikibetsuCode(entity.getPsmEntity().getShikibetsuCode());
         tempEntity.setShinseiYMD(entity.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getShinseiYMD());
@@ -188,6 +194,7 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
         tempEntity.setYukoKigenYMD(entity.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getTekiyoShuryoYMD());
         tempEntity.setKyusochishaUnitTypeKoshitsuNomi(entity.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().
                 getKyusochishaUnitTypeKoshitsuNomi());
+        tempEntity.setKakuninNo(entity.get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getKakuninNo());
         return tempEntity;
     }
 }

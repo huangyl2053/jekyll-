@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.ShakaiFukushiHoujinnKeigenListMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.ShakaiFukushiHoujinnKeigenListEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.temptable.ShafukuKeigenKetteiTempTableEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 
 /**
  * 社会福祉法人軽減確認証・決定通知書発行一覧表発行のMapperクラスです。
@@ -25,5 +26,5 @@ public interface IShakaiFukushiHoujinnKeigenListMapper {
      */
     List<ShakaiFukushiHoujinnKeigenListEntity> get社会福祉法人軽減確認証_決定通知書発行一覧表発行情報(ShakaiFukushiHoujinnKeigenListMybatisParameter parameter);
 
-    List<ShafukuKeigenKetteiTempTableEntity> get社会福祉法人等軽減の通知書発行の一時テーブルEntity();
+    ShafukuKeigenKetteiTempTableEntity get社会福祉法人等軽減の通知書発行の一時テーブルEntity(HihokenshaNo 被保険者番号);
 }

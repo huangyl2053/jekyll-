@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 import lombok.Getter;
@@ -36,7 +37,7 @@ public class ShafukuKeigenKetteiTempTableEntity extends DbTableEntityBase<Shafuk
     static {
         TABLE_NAME = new RString("ShafukuKeigenKetteiTempTable");
     }
-
+    @PrimaryKey
     @TempTableColumnOrder(1)
     private HihokenshaNo hihokenshaNo;
     @TempTableColumnOrder(2)
@@ -57,7 +58,7 @@ public class ShafukuKeigenKetteiTempTableEntity extends DbTableEntityBase<Shafuk
     private RString ketteiKubun;
 
     @TempTableColumnOrder(10)
-    private Decimal keigenritsu;
+    private RString keigenritsu;
     @TempTableColumnOrder(11)
     private Decimal keigenritsu_Bunshi;
     @TempTableColumnOrder(12)
@@ -68,4 +69,6 @@ public class ShafukuKeigenKetteiTempTableEntity extends DbTableEntityBase<Shafuk
     private boolean kyojuhiShokuhiNomi;
     @TempTableColumnOrder(15)
     private boolean kyusochishaUnitTypeKoshitsuNomi;
+    @TempTableColumnOrder(16)
+    private RString kakuninNo;
 }

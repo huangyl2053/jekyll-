@@ -30,9 +30,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukushiHojinKeigenHakkoIchiranEditor {
 
-    private static final int NOCOUNT_1 = 1;
-    private static final int NOCOUNT_2 = 2;
-    private static final int NOCOUNT_3 = 3;
     private static final int LISTINDEX_0 = 0;
     private static final int LISTINDEX_1 = 1;
     private static final int LISTINDEX_2 = 2;
@@ -158,21 +155,21 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
             KetteiKubun 決定区分承認しない = KetteiKubun.承認しない;
             boolean 居宅サービス限定 = this.帳票情報.is居宅サービス限定();
             if (決定.equals(決定区分承認) && 居宅サービス限定) {
-                source.list_13 = new RString("宅").substring(0, NOCOUNT_1);
+                source.list_13 = new RString("宅");
             } else if (決定.equals(決定区分承認) && !居宅サービス限定) {
-                source.list_13 = RString.EMPTY.substring(0, NOCOUNT_1);
+                source.list_13 = RString.EMPTY;
             }
             boolean 居住費食費のみ = this.帳票情報.is居住費食費のみ();
             if (決定.equals(決定区分承認) && 居住費食費のみ) {
-                source.list_13 = new RString("住").substring(NOCOUNT_1, NOCOUNT_2);
+                source.list_13 = new RString("住");
             } else if (決定.equals(決定区分承認) && !居住費食費のみ) {
-                source.list_13 = RString.EMPTY.substring(NOCOUNT_1, NOCOUNT_2);
+                source.list_13 = RString.EMPTY;
             }
             boolean 旧措置者ユニット型個室のみ = this.帳票情報.is旧措置者ユニット型個室のみ();
             if (決定.equals(決定区分承認) && 旧措置者ユニット型個室のみ) {
-                source.list_13 = new RString("ユ").substring(NOCOUNT_2, NOCOUNT_3);
+                source.list_13 = new RString("ユ");
             } else if (決定.equals(決定区分承認) && !旧措置者ユニット型個室のみ) {
-                source.list_13 = RString.EMPTY.substring(NOCOUNT_2, NOCOUNT_3);
+                source.list_13 = RString.EMPTY;
             }
             if (決定.equals(決定区分承認しない)) {
                 source.list_13 = RString.EMPTY;
