@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * SearchHihokensha のクラスファイル
  *
- * @reamsid_L DBC-2100-010 jiangzongyue
+ * @author 自動生成
  */
 public class SearchHihokenshaDiv extends Panel {
 
@@ -29,21 +29,6 @@ public class SearchHihokenshaDiv extends Panel {
     private SearchResultOfHihokenshaDiv SearchResultOfHihokensha;
     @JsonProperty("SearchConditionOfHihokensha")
     private HihokenshaFinderDiv SearchConditionOfHihokensha;
-
-    /*
-     * [ GetterとSetterの作成 ]
-     * クライアント側から取得した情報を元に検索を行い
-     * コントロール名とフィールド名を取得する
-     * フィールド名のGetterとSetter を作成
-     */
-    /*
-     * getSearchResultOfHihokensha
-     * @return SearchResultOfHihokensha
-     */
-//    @JsonProperty("SearchResultOfHihokensha")
-//    public ISearchResultOfHihokenshaDiv getSearchResultOfHihokensha() {
-//        return SearchResultOfHihokensha;
-//    }
 
     /*
      * getSearchConditionOfHihokensha

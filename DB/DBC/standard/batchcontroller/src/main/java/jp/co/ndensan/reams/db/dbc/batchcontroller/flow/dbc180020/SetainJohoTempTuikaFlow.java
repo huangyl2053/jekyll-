@@ -81,8 +81,16 @@ public class SetainJohoTempTuikaFlow
             executeStep(世帯員把握FLOW);
             executeStep(判定基準日設定);
             loopProcessPrm.getHanteiKijunbi().set(i, HanteiKijunYMDInstance.getInstance().get判定基準日());
+            executeStep(世帯員情報作成);
+//            getMapper(IRiyoshaFutanwariaiMapper.class).select判定対象者Temp();
+//            getMapper(IRiyoshaFutanwariaiMapper.class).select世帯員情報Temp();
+//            getMapper(IRiyoshaFutanwariaiMapper.class).select世帯員把握入力Temp();
+//            getMapper(IRiyoshaFutanwariaiMapper.class).select世帯員所得情報Temp();
             executeStep(月別判定対象者の作成);
+//            getMapper(IRiyoshaFutanwariaiMapper.class).select月別判定対象者Temp();
             executeStep(月別判定対象者の作成二回目);
+//            getMapper(IRiyoshaFutanwariaiMapper.class).select月別判定対象者Temp();
+//            getMapper(IRiyoshaFutanwariaiMapper.class).select被保険者番号Temp();
             executeStep(CLEAR被保険者番号);
             executeStep(CLEAR世帯員所得情報);
             executeStep(CLEAR世帯員把握入力);

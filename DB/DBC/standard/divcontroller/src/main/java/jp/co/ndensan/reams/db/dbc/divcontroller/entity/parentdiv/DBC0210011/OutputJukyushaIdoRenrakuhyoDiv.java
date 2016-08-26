@@ -6,16 +6,16 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0210011;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.printcontentssetting.IPrintContentsSettingDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.printcontentssetting.PrintContentsSettingDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.IPrintContentsSettingDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.PrintContentsSettingDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonReportPublish;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * OutputJukyushaIdoRenrakuhyo のクラスファイル
  *
- * @reamsid_L DBC-2100-010 jiangzongyue
+ * @author 自動生成
  */
 public class OutputJukyushaIdoRenrakuhyoDiv extends Panel {
 
@@ -30,10 +30,10 @@ public class OutputJukyushaIdoRenrakuhyoDiv extends Panel {
     private CheckBoxList chkJukyushaIdoRearakuhyoHakkou;
     @JsonProperty("chkJukyushaIdoRenrakuhyo")
     private CheckBoxList chkJukyushaIdoRenrakuhyo;
-    @JsonProperty("btnHakkou")
-    private Button btnHakkou;
     @JsonProperty("OutputJukyushaIdoRenrakuhyoSetting")
     private PrintContentsSettingDiv OutputJukyushaIdoRenrakuhyoSetting;
+    @JsonProperty("btnHakkou")
+    private ButtonReportPublish btnHakkou;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -78,11 +78,20 @@ public class OutputJukyushaIdoRenrakuhyoDiv extends Panel {
     }
 
     /*
+     * getOutputJukyushaIdoRenrakuhyoSetting
+     * @return OutputJukyushaIdoRenrakuhyoSetting
+     */
+    @JsonProperty("OutputJukyushaIdoRenrakuhyoSetting")
+    public IPrintContentsSettingDiv getOutputJukyushaIdoRenrakuhyoSetting() {
+        return OutputJukyushaIdoRenrakuhyoSetting;
+    }
+
+    /*
      * getbtnHakkou
      * @return btnHakkou
      */
     @JsonProperty("btnHakkou")
-    public Button getBtnHakkou() {
+    public ButtonReportPublish getBtnHakkou() {
         return btnHakkou;
     }
 
@@ -91,17 +100,8 @@ public class OutputJukyushaIdoRenrakuhyoDiv extends Panel {
      * @param btnHakkou btnHakkou
      */
     @JsonProperty("btnHakkou")
-    public void setBtnHakkou(Button btnHakkou) {
+    public void setBtnHakkou(ButtonReportPublish btnHakkou) {
         this.btnHakkou = btnHakkou;
-    }
-
-    /*
-     * getOutputJukyushaIdoRenrakuhyoSetting
-     * @return OutputJukyushaIdoRenrakuhyoSetting
-     */
-    @JsonProperty("OutputJukyushaIdoRenrakuhyoSetting")
-    public IPrintContentsSettingDiv getOutputJukyushaIdoRenrakuhyoSetting() {
-        return OutputJukyushaIdoRenrakuhyoSetting;
     }
 
     // </editor-fold>

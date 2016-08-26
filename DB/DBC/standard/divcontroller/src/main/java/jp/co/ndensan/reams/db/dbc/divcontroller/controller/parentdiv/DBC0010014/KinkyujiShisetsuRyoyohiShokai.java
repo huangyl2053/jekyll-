@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiP
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010014.DBC0010014TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010014.KinkyujiShisetsuRyoyohiShokaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010014.KinkyujiShisetsuRyoyohiShokaiHandler;
+import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -40,8 +41,10 @@ public class KinkyujiShisetsuRyoyohiShokai {
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
                 ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
         getHandler(div).setKinkyujiShisetsuRyoyohi(給付実績情報照会情報.getCsData_P());
-        getHandler(div).setButton(ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class),
-                ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
+        getHandler(div).setButton(KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
+                ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class),
+                ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class)).records().get(0),
+                ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class));
         div.getKyufuJissekiTekiyoPanel().setIsOpen(false);
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
@@ -50,7 +53,7 @@ public class KinkyujiShisetsuRyoyohiShokai {
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
         getHandler(div).check事業者btn(事業者番号リスト, ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-                事業者番号, 様式番号, サービス提供.toDateString(), 実績区分コード);
+                事業者番号, 様式番号, サービス提供.getYearMonth().toDateString(), 実績区分コード);
         return ResponseData.of(div).respond();
     }
 

@@ -75,8 +75,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -240,10 +242,10 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
-//        if (!personalDataList.isEmpty()) {
-//            AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-//            manager.spool(eucFilePath, log);
-//        }
+        if (!personalDataList.isEmpty()) {
+            AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+            manager.spool(eucFilePath, log);
+        }
         eucFileOutputJohoFactory();
     }
 
@@ -951,8 +953,11 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     }
 
     private RString edit日期(FlexibleDate 変更前日期) {
-        return 変更前日期.wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+        if (変更前日期 != null && !変更前日期.isEmpty()) {
+            return 変更前日期.wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+        }
+        return RString.EMPTY;
     }
 
     private void set出力条件表_年齢(AtenaSelectBatchParameter atenaSelectBatchParameter,

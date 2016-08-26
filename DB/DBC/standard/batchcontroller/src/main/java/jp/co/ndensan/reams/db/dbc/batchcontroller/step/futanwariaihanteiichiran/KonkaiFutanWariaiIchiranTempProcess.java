@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -51,7 +50,7 @@ public class KonkaiFutanWariaiIchiranTempProcess extends BatchProcessBase<Konkai
         riyoshaFutanWariaiHanteiEntity.setFutanWariaiKubun(entity.getFutanWariaiKubun());
         riyoshaFutanWariaiHanteiEntity.setHonninGoukeiShotokuGaku(entity.getHoninGokeishotokuKingaku());
         riyoshaFutanWariaiHanteiEntity.setKoseiJiyu(new Code(entity.getKoseiJiyu()));
-        riyoshaFutanWariaiHanteiEntity.setNendo(new FlexibleYear(entity.getNendo()));
+        riyoshaFutanWariaiHanteiEntity.setNendo(entity.getNendo());
         riyoshaFutanWariaiHanteiEntity.setNenkinShunyuGoukei(entity.getNenkinShunyuGoukei());
         riyoshaFutanWariaiHanteiEntity.setSetaiIchigouHihokenshaSu(entity.getSetaiIchigouHihokenshaSu());
         riyoshaFutanWariaiHanteiEntity.setSonotanoGoukeiShotokuKingakuGoukei(entity.getSonotaGokeiShotokuKingaku());

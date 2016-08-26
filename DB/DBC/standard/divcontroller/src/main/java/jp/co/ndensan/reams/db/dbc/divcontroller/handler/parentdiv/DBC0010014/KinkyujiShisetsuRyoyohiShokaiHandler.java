@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010014.KinkyujiShisetsuRyoyohiShokaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010014.dgKinkyujiShisetsuRyoyohi_Row;
-import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
@@ -205,12 +204,10 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
     /**
      * ボタン状態の設定です。
      *
+     * @param 識別番号管理 識別番号管理
      * @param サービス提供年月 サービス提供年月
-     * @param 識別番号 識別番号
      */
-    public void setButton(FlexibleYearMonth サービス提供年月, NyuryokuShikibetsuNo 識別番号) {
-        ShikibetsuNoKanri 識別番号管理 = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
-                サービス提供年月, 識別番号).records().get(0);
+    public void setButton(ShikibetsuNoKanri 識別番号管理, FlexibleYearMonth サービス提供年月) {
         if (ZERO.equals(識別番号管理.get基本設定区分())) {
             div.getBtnKihon().setDisabled(true);
         } else {
