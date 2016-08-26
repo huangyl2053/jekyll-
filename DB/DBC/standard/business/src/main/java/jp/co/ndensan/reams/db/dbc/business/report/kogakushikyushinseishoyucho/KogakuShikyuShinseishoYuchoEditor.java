@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.kogakushikyushinseishoyucho;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoChohyoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakushikyushinseishoyucho.KogakuShikyuShinseishoYuchoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakushikyushinseishoyucho.KogakuShikyuShinseishoYuchoSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -64,7 +65,7 @@ public class KogakuShikyuShinseishoYuchoEditor implements IKogakuShikyuShinseish
         source.hihokenshaNameKana = getColumnValue(帳票出力対象データ.getShimeikanaChohyo());
         source.hihokenshaName = getColumnValue(帳票出力対象データ.getMeishoChohyo());
         source.birthYMD = doパターン12(帳票出力対象データ.getSeinengappiYMDChohyo());
-        source.seibetsu = 帳票出力対象データ.getSeibetsuCodeChohyo();
+        source.seibetsu = Seibetsu.toValue(帳票出力対象データ.getSeibetsuCodeChohyo()).get名称();
         source.hihokenJusho = getColumnValue(帳票出力対象データ.getJushoChohyo());
         source.telNo = getColumnValue(帳票出力対象データ.getTelNoChohyo());
         source.hokenshaNo = getColumnValue(帳票出力対象データ.getShoKisaiHokenshaNoChohyo());
