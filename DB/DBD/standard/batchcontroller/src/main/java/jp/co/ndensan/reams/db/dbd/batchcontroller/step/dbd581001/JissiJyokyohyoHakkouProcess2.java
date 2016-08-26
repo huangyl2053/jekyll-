@@ -305,6 +305,7 @@ public class JissiJyokyohyoHakkouProcess2 extends BatchProcessBase<JissiJyokyohy
 
     @Override
     protected void afterExecute() {
+        jisshiJokyohyoEntity.set年度合計(jisshiJokyohyoEntity.get年度合計() - 1);
         実施状況Entity.get実施状況リスト16().add(jisshiJokyohyoEntity);
         set実施状況リスト1();
         for (int index = 0; index < INDEX_10; index++) {
@@ -543,7 +544,7 @@ public class JissiJyokyohyoHakkouProcess2 extends BatchProcessBase<JissiJyokyohy
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBD.DBD300004.getReportName(),
-                new RString("5ページ"),
+                new RString("5"),
                 new RString("なし"),
                 new RString("なし"),
                 contribute());

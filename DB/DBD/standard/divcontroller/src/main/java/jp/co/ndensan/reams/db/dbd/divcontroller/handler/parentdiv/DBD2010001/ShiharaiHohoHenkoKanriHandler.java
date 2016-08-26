@@ -177,8 +177,9 @@ public class ShiharaiHohoHenkoKanriHandler {
      * ダイアログ画面に追加されたデータを支払変更管理一覧に追加します。
      *
      * @param dialog支払方法変更 ダイアログ画面に追加された支払方法変更
+     * @return 追加行が一覧に既に存在か true:存在
      */
-    public void 支払変更管理一覧に追加(ShiharaiHohoHenko dialog支払方法変更) {
+    public boolean 支払変更管理一覧に追加(ShiharaiHohoHenko dialog支払方法変更) {
         boolean is追加行が存在 = false;
         List<dgShiharaiHohoHenkoRireki_Row> rowList = div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getDataSource();
         for (dgShiharaiHohoHenkoRireki_Row row : rowList) {
@@ -198,6 +199,7 @@ public class ShiharaiHohoHenkoKanriHandler {
         }
         Collections.sort(rowList, new ShiharaiHohoHenkoKanriRowComparator());
         div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().setDataSource(rowList);
+        return is追加行が存在;
     }
 
     /**

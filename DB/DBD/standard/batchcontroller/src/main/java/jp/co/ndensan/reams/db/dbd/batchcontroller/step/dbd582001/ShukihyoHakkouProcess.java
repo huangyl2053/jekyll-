@@ -74,14 +74,14 @@ public class ShukihyoHakkouProcess extends BatchProcessBase<YokaigoNinteiTsukibe
     private static final RString 集計項目要介護度5 = new RString("要介護度５（旧措置）");
     private static final RString 集計項目要支援1 = new RString("要支援１  （旧措置）");
     private static final RString 集計項目要支援2 = new RString("要支援２  （旧措置）");
-    private static final RString 集計項目経過介護 = new RString("経過介護  （旧措置）");
+    private static final RString 集計項目経過介護 = new RString("経過介護　（旧措置）");
     private static final RString 集計項目自立 = new RString("自立      （旧措置）");
     private static final RString 集計項目新規 = new RString("新規　  （旧措置）");
     private static final RString 集計項目要支援 = new RString("（要支援）（旧措置）");
     private static final RString 集計項目更新 = new RString("更新　  （旧措置）");
     private static final RString 集計項目区分変更 = new RString("区分変更　（旧措置）");
     private static final RString 集計項目転入 = new RString("転入　  （旧措置）");
-    private static final RString 集計項目職権他 = new RString("職権他    （旧措置）");
+    private static final RString 集計項目職権他 = new RString("職権他　　（旧措置）");
     private static final RString 地区区分全て = new RString("ALL");
     private static final RString 地区全て = new RString("全て");
     private static final RString 集計単位受給申請 = new RString("ZIYU");
@@ -256,7 +256,7 @@ public class ShukihyoHakkouProcess extends BatchProcessBase<YokaigoNinteiTsukibe
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBD.DBD300004.getReportName(),
-                new RString("3ページ"),
+                new RString("3"),
                 new RString("なし"),
                 new RString("なし"),
                 contribute());
@@ -266,7 +266,7 @@ public class ShukihyoHakkouProcess extends BatchProcessBase<YokaigoNinteiTsukibe
     private List<RString> contribute() {
         List<RString> 出力条件 = new ArrayList<>();
         出力条件.add(new RString("【対象年度】 " + parameter.get対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()));
-        出力条件.add(new RString("【基準日】 "));
+        出力条件.add(new RString("【基準日】 ").concat(new RString(parameter.get基準年月日().getDayValue())));
         出力条件.add(new RString("【集計単位】 " + parameter.get集計単位()));
         出力条件.add(new RString("【年齢From】 " + parameter.get年齢From()));
         出力条件.add(new RString("【年齢To】 " + parameter.get年齢To()));
