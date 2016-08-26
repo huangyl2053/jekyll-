@@ -635,6 +635,9 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                     DbT2002FukaJohoTempTableEntity 賦課情報Entity = set賦課情報一時テーブルEntity(設定後_賦課の情報);
                     int index = NUM_0;
                     for (int 期 = 算定期; 期 <= 最終期; 期++) {
+                        if (普徴期別金額リスト.size() <= index) {
+                            break;
+                        }
                         set普徴期別金額(index, 普徴期別金額リスト, 賦課情報Entity, 期);
                         index = index + 1;
                     }
@@ -1337,24 +1340,58 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         } else {
             builder.set資格喪失事由コード(RString.EMPTY);
         }
-        builder.set資格喪失年月日(資格情報.get資格喪失年月日());
-        builder.set資格喪失届出年月日(資格情報.get資格喪失届出年月日());
-        builder.set資格変更事由コード(資格情報.get資格変更事由コード());
-        builder.set資格変更年月日(資格情報.get資格変更年月日());
-        builder.set資格変更届出年月日(資格情報.get資格変更届出年月日());
-        builder.set住所地特例適用事由コード(資格情報.get住所地特例適用事由コード());
-        builder.set適用年月日(資格情報.get適用年月日());
-        builder.set適用届出年月日(資格情報.get適用届出年月日());
-        builder.set住所地特例解除事由コード(資格情報.get住所地特例解除事由コード());
-        builder.set解除年月日(資格情報.get解除年月日());
-        builder.set解除届出年月日(資格情報.get解除届出年月日());
-        builder.set住所地特例フラグ(資格情報.get住所地特例フラグ());
-        builder.set広域内住所地特例フラグ(資格情報.get広域内住所地特例フラグ());
-        builder.set広住特措置元市町村コード(資格情報.get広住特措置元市町村コード());
-        builder.set旧市町村コード(資格情報.get旧市町村コード());
+        builder.set資格喪失年月日(getFlexibleDate(資格情報.get資格喪失年月日()));
+        builder.set資格喪失届出年月日(getFlexibleDate(資格情報.get資格喪失届出年月日()));
+        if (資格情報.get資格変更事由コード() != null) {
+            builder.set資格変更事由コード(資格情報.get資格変更事由コード());
+        } else {
+            builder.set資格変更事由コード(RString.EMPTY);
+        }
+        builder.set資格変更年月日(getFlexibleDate(資格情報.get資格変更年月日()));
+        builder.set資格変更届出年月日(getFlexibleDate(資格情報.get資格変更届出年月日()));
+        if (資格情報.get住所地特例適用事由コード() != null) {
+            builder.set住所地特例適用事由コード(資格情報.get住所地特例適用事由コード());
+        } else {
+            builder.set住所地特例適用事由コード(RString.EMPTY);
+        }
+        builder.set適用年月日(getFlexibleDate(資格情報.get適用年月日()));
+        builder.set適用届出年月日(getFlexibleDate(資格情報.get適用届出年月日()));
+        if (資格情報.get住所地特例解除事由コード() != null) {
+            builder.set住所地特例解除事由コード(資格情報.get住所地特例解除事由コード());
+        } else {
+            builder.set住所地特例解除事由コード(RString.EMPTY);
+        }
+        builder.set解除年月日(getFlexibleDate(資格情報.get解除年月日()));
+        builder.set解除届出年月日(getFlexibleDate(資格情報.get解除届出年月日()));
+        if (資格情報.get住所地特例フラグ() != null) {
+            builder.set住所地特例フラグ(資格情報.get住所地特例フラグ());
+        } else {
+            builder.set住所地特例フラグ(RString.EMPTY);
+        }
+        if (資格情報.get広域内住所地特例フラグ() != null) {
+            builder.set広域内住所地特例フラグ(資格情報.get広域内住所地特例フラグ());
+        } else {
+            builder.set広域内住所地特例フラグ(RString.EMPTY);
+        }
+        if (資格情報.get広住特措置元市町村コード() != null) {
+            builder.set広住特措置元市町村コード(資格情報.get広住特措置元市町村コード());
+        } else {
+            builder.set広住特措置元市町村コード(LasdecCode.EMPTY);
+        }
+        if (資格情報.get旧市町村コード() != null) {
+            builder.set旧市町村コード(資格情報.get旧市町村コード());
+        } else {
+            builder.set旧市町村コード(LasdecCode.EMPTY);
+        }
         builder.set論理削除フラグ(資格情報.is論理削除フラグ());
         return builder.build();
+    }
 
+    private FlexibleDate getFlexibleDate(FlexibleDate 年月日) {
+        if (年月日 != null) {
+            return 年月日;
+        }
+        return FlexibleDate.EMPTY;
     }
 
     /**

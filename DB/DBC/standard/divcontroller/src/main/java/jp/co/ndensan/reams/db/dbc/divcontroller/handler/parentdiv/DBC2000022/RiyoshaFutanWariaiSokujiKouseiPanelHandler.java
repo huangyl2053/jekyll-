@@ -77,6 +77,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
     private final RiyoshaFutanWariaiSokujiKouseiManager manager;
     private final RiyoshaFutanWariaiSokujiKouseiFinder finder;
 
+    private static final RString 回収事由 = new RString("00");
     private static final RString RSTZERO = new RString("0");
     private static final RString RSTONE = new RString("1");
     private static final RString RSTTWO = new RString("2");
@@ -600,6 +601,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         parameter.set氏名(div.getCcdKaigoAtenaInfo().get氏名漢字());
         parameter.set生年月日(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getShokaiData().getTxtSeinengappiYMD().getValue());
         parameter.set性別(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getShokaiData().getTxtSeibetsu().getValue());
+        parameter.set利用者負担割合明細(利用者負担割合明細);
         return futanWariaisho.getSourceDataSinger(資格対象者.get識別コード(), 資格対象者.get被保険者番号(), parameter, RSTONE);
     }
 
@@ -642,10 +644,14 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
     public void insert証交付回収(RiyoshaFutanWariai 利用者負担割合) {
         ShoKofuKaishuManager 証交付回収manager = new ShoKofuKaishuManager();
         ShoKofuKaishu max履歴番号証交付回収entity = 証交付回収manager.get証交付回収(利用者負担割合.get被保険者番号(), 交付証種類);
+        int 履歴番号 = 1;
+        if (max履歴番号証交付回収entity != null) {
+            履歴番号 = max履歴番号証交付回収entity.get履歴番号() + 1;
+        }
         ShoKofuKaishu new証交付回収 = new ShoKofuKaishu(
                 new HihokenshaNo(div.getCcdKaigoShikakuKihon().get被保険者番号()),
                 交付証種類,
-                max履歴番号証交付回収entity.get履歴番号() + 1);
+                履歴番号);
         ShoKofuKaishuBuilder 証交付回収builder = new証交付回収.createBuilderForEdit();
         証交付回収builder.set市町村コード(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード());
         証交付回収builder.set識別コード(
@@ -653,6 +659,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         証交付回収builder.set交付年月日(new FlexibleDate(div.getTxtKofubi().getValue().toString()));
         List<dgFutanWariai_Row> list = div.getDgFutanWariai().getDataSource();
         証交付回収builder.set有効期限(new FlexibleDate(list.get(list.size() - 1).getTekiyoShuryobi().getValue().toString()));
+        証交付回収builder.set回収事由(回収事由);
         RString 交付事由 = div.getDdlKofuJiyu().getSelectedKey();
         if (交付事由 != null) {
             証交付回収builder.set交付事由(交付事由);
