@@ -4986,12 +4986,12 @@
         AND A."kyuSochishaFlag" = TRUE
     </sql>
     <sql id="資格喪失のデータ取得2">
-        AND (A."shikakuSoshitsuYMD" IS NULL
-        AND substring(A."shikakuSoshitsuYMD",0,7) = A."ninteiYM")
+        AND (A."shikakuSoshitsuYMD" IS NOT NULL
+        AND SUBSTRING(A."shikakuSoshitsuYMD",0,6) = SUBSTRING(A."ninteiYMD",0,6))
     </sql>
     <sql id="資格喪失旧措置のデータ取得2">
-        AND (A."shikakuSoshitsuYMD" IS NULL
-        AND substring(A."shikakuSoshitsuYMD",0,7) = A."ninteiYM")
+        AND (A."shikakuSoshitsuYMD" IS NOT NULL
+        AND SUBSTRING(A."shikakuSoshitsuYMD",0,6) = SUBSTRING(A."ninteiYMD",0,6))
         AND A."kyuSochishaFlag" = TRUE
     </sql>    
 </mapper>

@@ -157,4 +157,12 @@ public class YokaigoNinteiJisshiJokyohyoReportSource implements IReportSource {
     @ReportItem(name = "label17", order = 69)
     public RString label17;
 // </editor-fold>
+
+    /**
+     * 改ページ条件のキーです。
+     */
+    public enum ReportSourceFields {
+
+        hokenshaNo
+    }
 }
