@@ -9,11 +9,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.JukyushaIdoRenrakuhyo.IJukyushaIdoRenrakuhyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.JukyushaIdoRenrakuhyo.JukyushaIdoRenrakuhyoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
  * JukyushaIdoRenrakuhyoShinkiTorokuPanel のクラスファイル
  *
- * @reamsid_L DBC-2100-010 jiangzongyue
+ * @author 自動生成
  */
 public class JukyushaIdoRenrakuhyoShinkiTorokuPanelDiv extends Panel {
 
@@ -26,6 +27,8 @@ public class JukyushaIdoRenrakuhyoShinkiTorokuPanelDiv extends Panel {
      */
     @JsonProperty("OutputJukyushaIdoRenrakuhyo")
     private OutputJukyushaIdoRenrakuhyoDiv OutputJukyushaIdoRenrakuhyo;
+    @JsonProperty("hdnFlag")
+    private TextBox hdnFlag;
     @JsonProperty("JukyushaIdoRenrakuhyo")
     private JukyushaIdoRenrakuhyoDiv JukyushaIdoRenrakuhyo;
 
@@ -51,6 +54,24 @@ public class JukyushaIdoRenrakuhyoShinkiTorokuPanelDiv extends Panel {
     @JsonProperty("OutputJukyushaIdoRenrakuhyo")
     public void setOutputJukyushaIdoRenrakuhyo(OutputJukyushaIdoRenrakuhyoDiv OutputJukyushaIdoRenrakuhyo) {
         this.OutputJukyushaIdoRenrakuhyo = OutputJukyushaIdoRenrakuhyo;
+    }
+
+    /*
+     * gethdnFlag
+     * @return hdnFlag
+     */
+    @JsonProperty("hdnFlag")
+    public TextBox getHdnFlag() {
+        return hdnFlag;
+    }
+
+    /*
+     * sethdnFlag
+     * @param hdnFlag hdnFlag
+     */
+    @JsonProperty("hdnFlag")
+    public void setHdnFlag(TextBox hdnFlag) {
+        this.hdnFlag = hdnFlag;
     }
 
     /*

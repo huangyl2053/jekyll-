@@ -49,6 +49,8 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
     private static final RString DBCHIHOKENSHANO = new RString("DBCHihokenshaNo");
     private static final RString ZERO = new RString("0");
     private static final RString 新規モード = new RString("新規モード");
+    private static final RString 起動 = new RString("1");
+    private static final RString 停止 = new RString("0");
 
     private JukyushaIdoRenrakuhyoTorokuPanelHandler getHandler(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
         return new JukyushaIdoRenrakuhyoTorokuPanelHandler(div);
@@ -78,6 +80,8 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
         }
         div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo()
                 .initialize(新規モード, 資格対象者.get識別コード(), 資格対象者.get被保険者番号(), 0, false, FlexibleDate.getNowDate());
+        div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getOutputJukyushaIdoRenrakuhyo()
+                .getOutputJukyushaIdoRenrakuhyoSetting().initialize(true, null, true, false, null, false);
         handler.printLog識別コード照会(資格対象者.get識別コード(), 資格対象者.get被保険者番号().getColumnValue());
         return ResponseData.of(div).setState(DBC0210011StateName.登録);
     }
@@ -90,6 +94,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
      * @return ResponseData<SearchHihokenshaDiv>
      */
     public ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> onClick_btnSave(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
+        div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getHdnFlag().setValue(起動);
         ValidationMessageControlPairs pair
                 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo().validateCheck();
         if (pair.iterator().hasNext() && !ResponseHolder.isReRequest()) {
@@ -153,7 +158,6 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
             result.toEntity().setState(EntityDataState.Added);
             boolean flag = manager.save受給者異動送付(result);
             handler.printLog識別コード更新(資格対象者.get識別コード(), 資格対象者.get被保険者番号().getColumnValue());
-            onClick_btnReportPublish(div);
             List<RString> チェック状態 = handler.getチェックボックス状態();
             if (flag && !チェック状態.isEmpty()) {
                 return false;
@@ -173,8 +177,24 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
      * @return ResponseData
      */
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
-        return ResponseData.of(getHandler(div).to帳票発行(div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo()))
-                .setState(DBC0210011StateName.完了メッセージ);
+        return ResponseData.of(getHandler(div).to帳票発行(
+                div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo())).respond();
+    }
+
+    /**
+     * 「発行」ボタンを更新完了に状態遷移のメソッドです。
+     *
+     * @param div 画面Div
+     * @return ResponseData
+     */
+    public ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> toAfterPrint(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
+        RString 完了メッセージ対象情報1 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel()
+                .getJukyushaIdoRenrakuhyo().get受給者異動送付().get被保険者番号().getColumnValue();
+        RString 完了メッセージ対象情報2 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel()
+                .getJukyushaIdoRenrakuhyo().get受給者異動送付().get被保険者氏名カナ();
+        div.getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
+                完了メッセージ対象情報1, 完了メッセージ対象情報2, true);
+        return ResponseData.of(div).setState(DBC0210011StateName.完了メッセージ);
     }
 
     /**
@@ -195,6 +215,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
      * @return ResponseData
      */
     public ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> onClick_btnReSearch(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
+        div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getHdnFlag().setValue(停止);
         return getCheckMessage(div, DBC0210011TransitionEventName.該当者検索へ);
     }
 
@@ -205,6 +226,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
      * @return ResponseData
      */
     public ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> onClick_btnResultDg(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
+        div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getHdnFlag().setValue(停止);
         return getCheckMessage(div, DBC0210011TransitionEventName.検索条件);
     }
 
