@@ -4,8 +4,8 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -34,6 +34,10 @@ public class TanitsuTaishoShoriIchiranDiv extends Panel {
     private TextBox txtShori;
     @JsonProperty("txtFuairuMei")
     private TextBox txtFuairuMei;
+    @JsonProperty("hdnFileName")
+    private RString hdnFileName;
+    @JsonProperty("hdnLocalFileName")
+    private RString hdnLocalFileName;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -150,26 +154,39 @@ public class TanitsuTaishoShoriIchiranDiv extends Panel {
     }
 
     /*
-     * [ ショートカットの作成 ]
+     * gethdnFileName
+     * @return hdnFileName
      */
-    @JsonIgnore
-    public UploadPanel getUplTaishoFuairu() {
-        return this.getFuairuAppurodo().getUplTaishoFuairu();
+    @JsonProperty("hdnFileName")
+    public RString getHdnFileName() {
+        return hdnFileName;
     }
 
-    @JsonIgnore
-    public void  setUplTaishoFuairu(UploadPanel uplTaishoFuairu) {
-        this.getFuairuAppurodo().setUplTaishoFuairu(uplTaishoFuairu);
+    /*
+     * sethdnFileName
+     * @param hdnFileName hdnFileName
+     */
+    @JsonProperty("hdnFileName")
+    public void setHdnFileName(RString hdnFileName) {
+        this.hdnFileName = hdnFileName;
     }
 
-    @JsonIgnore
-    public Button getBtnAppurodo() {
-        return this.getFuairuAppurodo().getBtnAppurodo();
+    /*
+     * gethdnLocalFileName
+     * @return hdnLocalFileName
+     */
+    @JsonProperty("hdnLocalFileName")
+    public RString getHdnLocalFileName() {
+        return hdnLocalFileName;
     }
 
-    @JsonIgnore
-    public void  setBtnAppurodo(Button btnAppurodo) {
-        this.getFuairuAppurodo().setBtnAppurodo(btnAppurodo);
+    /*
+     * sethdnLocalFileName
+     * @param hdnLocalFileName hdnLocalFileName
+     */
+    @JsonProperty("hdnLocalFileName")
+    public void setHdnLocalFileName(RString hdnLocalFileName) {
+        this.hdnLocalFileName = hdnLocalFileName;
     }
 
     // </editor-fold>

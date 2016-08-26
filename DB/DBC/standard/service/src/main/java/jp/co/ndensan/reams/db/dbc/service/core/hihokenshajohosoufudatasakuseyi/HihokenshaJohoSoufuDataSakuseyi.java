@@ -6,52 +6,46 @@
 package jp.co.ndensan.reams.db.dbc.service.core.hihokenshajohosoufudatasakuseyi;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.hihokenshajohosoufudatasakuseyi.KokuhorenSofuJohoResult;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.hihokenshajohosoufudatasakuseyi.KokuhorenSofuJohoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbV3104KokuhorenTorikomiJohoEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3104KokuhorenInterfaceKanriDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hihokenshajohosoufudatasakuseyi.IKokuhorenSofuJohoMapper;
-import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbV3104KokuhorenTorikomiJohoDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 保険者情報送付データ作成
+ * 保険者情報送付データ作成のクラスです。
  *
  * @reamsid_L DBC-3300-170 wangxingpeng
  */
 public class HihokenshaJohoSoufuDataSakuseyi {
 
-    private final MapperProvider mapperProvider;
     private final DbT3104KokuhorenInterfaceKanriDac 国保連インターフェース管理Dac;
-    private final RString 定数_当月処理年月 = new RString("当月処理年月");
-    private final RString 定数_前月処理年月 = new RString("前月処理年月");
-    private final RString 定数_前々月処理年月 = new RString("前々月処理年月");
+    private final DbV3104KokuhorenTorikomiJohoDac 国保連取り込み情報Dac;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      */
     HihokenshaJohoSoufuDataSakuseyi() {
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.国保連インターフェース管理Dac = InstanceProvider.create(DbT3104KokuhorenInterfaceKanriDac.class);
+        this.国保連取り込み情報Dac = InstanceProvider.create(DbV3104KokuhorenTorikomiJohoDac.class);
     }
 
     /**
      * {@link InstanceProvider#create}により生成されたインタフェースを返します。
      *
      * @return
-     * {@link InstanceProvider#create}により生成された{@link HihokenshaJohoSoufuDataSakuseyi}
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaJohoSoufuDataSakuseyi}のインスタンス
      */
     public static HihokenshaJohoSoufuDataSakuseyi createInstance() {
         return InstanceProvider.create(HihokenshaJohoSoufuDataSakuseyi.class);
     }
 
     /**
+     * getMaxShoriYearMonthのメソッドです。
      *
      * @return FlexibleYearMonth
      */
@@ -67,33 +61,27 @@ public class HihokenshaJohoSoufuDataSakuseyi {
     }
 
     /**
+     * getKokuhorenSofuJohoのメソッドです。
      *
-     * @param 当月処理年月 FlexibleYearMonth
+     * @param 処理年月 FlexibleYearMonth
      * @return List KokuhorenSofuJohoResult
      */
-    public List<KokuhorenSofuJohoResult> getKokuhorenSofuJoho(FlexibleYearMonth 当月処理年月) {
-        FlexibleYearMonth 前月処理年月 = 当月処理年月.plusMonth(-1);
-        FlexibleYearMonth 前々月処理年月 = 当月処理年月.plusMonth(-2);
+    public List<KokuhorenSofuJohoResult> getKokuhorenSofuJoho(FlexibleYearMonth 処理年月) {
         List<KokuhorenSofuJohoResult> list = new ArrayList<>();
-        IKokuhorenSofuJohoMapper mapper = mapperProvider.create(IKokuhorenSofuJohoMapper.class);
-        Map<String, Object> map = new HashMap<>();
-        map.put(定数_当月処理年月.toString(), 当月処理年月);
-        map.put(定数_前月処理年月.toString(), 前月処理年月);
-        map.put(定数_前々月処理年月.toString(), 前々月処理年月);
-        List<KokuhorenSofuJohoEntity> resultList = mapper.select国保連送付情報取得(map);
+        List<DbV3104KokuhorenTorikomiJohoEntity> resultList = 国保連取り込み情報Dac.selectBy処理年月(処理年月);
         if (resultList == null || resultList.isEmpty()) {
             return list;
         }
-        for (KokuhorenSofuJohoEntity entity : resultList) {
+        for (DbV3104KokuhorenTorikomiJohoEntity entity : resultList) {
             KokuhorenSofuJohoResult result = new KokuhorenSofuJohoResult();
             if (entity != null) {
-                result.set交換情報識別番号(entity.get交換情報識別番号());
-                result.set再処理可能区分(entity.is再処理可能区分());
-                result.set処理年月(entity.get処理年月());
-                result.set処理状態区分(entity.get処理状態区分());
-                result.set当月処理実施日時(entity.get当月処理実施日時());
-                result.set前月処理状態区分(entity.get前月処理状態区分());
-                result.set前々月処理状態区分(entity.get前々月処理状態区分());
+                result.set交換情報識別番号(entity.getKokanShikibetsuNo());
+                result.set再処理可能区分(entity.getSaiShoriKanoKubun());
+                result.set処理年月(entity.getShoriYM());
+                result.set処理状態区分(entity.getShoriJotaiKubun());
+                result.set当月処理実施日時(entity.getTougetsushoridate());
+                result.set前月処理状態区分(entity.getZen_shorijotaikubun());
+                result.set前々月処理状態区分(entity.getZenzen_shorijotaikubun());
             }
             list.add(result);
         }

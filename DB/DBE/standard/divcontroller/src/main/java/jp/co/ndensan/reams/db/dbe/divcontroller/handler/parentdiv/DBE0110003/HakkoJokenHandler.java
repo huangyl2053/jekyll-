@@ -157,14 +157,14 @@ public class HakkoJokenHandler {
             batchParamter.setCheckListJoken(true);
             if (div.getRadJoken3().getSelectedKey().contains(SELECT_KEY3)) {
                 batchParamter.setJoken3(new RString("4"));
-                batchParamter.setShinsakai(new RString(div.getTxtShinsakai().toString()));
+                batchParamter.setShinsakai(new RString(div.getTxtShinsakai().getValue().toString()));
             } else if (div.getRadJoken3().getSelectedKey().contains(SELECT_KEY1)) {
                 batchParamter.setJoken3(new RString("2"));
                 batchParamter.setCheckListShinseiYMDFrom(div.getTxtCheckListShinseiYMD().getFromValue().toDateString());
                 batchParamter.setCheckListShinseiYMDTo(div.getTxtCheckListShinseiYMD().getToValue().toDateString());
             } else if (div.getRadJoken3().getSelectedKey().contains(SELECT_KEY2)) {
                 batchParamter.setJoken3(new RString("3"));
-                batchParamter.setShinsaYMD(new RString(div.getTxtShinsaYMD().toString()));
+                batchParamter.setShinsaYMD(div.getTxtShinsaYMD().getValue().toDateString());
             } else {
                 batchParamter.setJoken3(new RString("1"));
             }

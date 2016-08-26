@@ -67,10 +67,11 @@ public class HikazeiNenkinTaishoshaJohoValidationHandler {
     public ValidationMessageControlPairs validateFor編集なし(ValidationMessageControlPairs pairs) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        NoInputMessages checkMessage = new NoInputMessages(DbdErrorMessages.変更無し);
         messages.add(ValidateChain.validateStart(div).ifNot(HikazeiNenkinTaishoshaJohoDivSpec.編集なしチェック)
-                .thenAdd(new NoInputMessages(DbdErrorMessages.変更無し)).messages());
+                .thenAdd(checkMessage).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                new NoInputMessages(DbdErrorMessages.変更無し), div.getDgShoriSettei()).build().check(messages));
+                checkMessage, div.getDgShoriSettei()).build().check(messages));
         return pairs;
     }
 
@@ -101,11 +102,31 @@ public class HikazeiNenkinTaishoshaJohoValidationHandler {
     public ValidationMessageControlPairs validateFor処理状態(ValidationMessageControlPairs pairs) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        RString syoriJyotai = div.getDgTanitsuTaishoShoriItchiran().getSelectedItems().isEmpty()
+                ? new RString("空白") : div.getDgTanitsuTaishoShoriItchiran().getSelectedItems().get(0).getTxtShoriJotai();
+        NoInputMessages checkMessage = new NoInputMessages(DbdErrorMessages.処理状態不正, syoriJyotai.toString());
         messages.add(ValidateChain.validateStart(div).ifNot(HikazeiNenkinTaishoshaJohoDivSpec.処理状態チェック)
-                .thenAdd(new NoInputMessages(DbdErrorMessages.処理状態不正,
-                        div.getDgTanitsuTaishoShoriItchiran().getSelectedItems().get(0).getTxtShoriJotai().toString())).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                new NoInputMessages(DbdErrorMessages.処理状態不正), div.getDgTanitsuTaishoShoriItchiran()).build().check(messages));
+                .thenAdd(checkMessage).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(checkMessage,
+                div.getDgTanitsuTaishoShoriItchiran()).build().check(messages));
+
+        return pairs;
+    }
+
+    /**
+     * アップロード済みファイル名チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateForアップロード済みファイル名(ValidationMessageControlPairs pairs) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        NoInputMessages checkMessage = new NoInputMessages(DbdErrorMessages.アップロードファイル無し);
+        messages.add(ValidateChain.validateStart(div).ifNot(HikazeiNenkinTaishoshaJohoDivSpec.アップロード済みファイル名チェック)
+                .thenAdd(checkMessage).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(checkMessage).build().check(messages));
+
         return pairs;
     }
 
@@ -118,11 +139,12 @@ public class HikazeiNenkinTaishoshaJohoValidationHandler {
     public ValidationMessageControlPairs validateForアップロードファイル未指定(ValidationMessageControlPairs pairs) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        NoInputMessages checkMessage = new NoInputMessages(DbzErrorMessages.ファイル指定なし);
         messages.add(ValidateChain.validateStart(div).
                 ifNot(HikazeiNenkinTaishoshaJohoDivSpec.アップロードファイル未指定チェック)
-                .thenAdd(new NoInputMessages(DbzErrorMessages.ファイル指定なし)).messages());
+                .thenAdd(checkMessage).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                new NoInputMessages(DbzErrorMessages.ファイル指定なし), div.getUplTaishoFuairu()).build().check(messages));
+                checkMessage, div.getFuairuAppurodo().getUplTaishoFuairu()).build().check(messages));
         return pairs;
     }
 
@@ -135,10 +157,11 @@ public class HikazeiNenkinTaishoshaJohoValidationHandler {
     public ValidationMessageControlPairs validateFor年次ファイル通知内容(ValidationMessageControlPairs pairs) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        NoInputMessages checkMessage = new NoInputMessages(DbdErrorMessages.年次ファイル相違);
         messages.add(ValidateChain.validateStart(div).ifNot(HikazeiNenkinTaishoshaJohoDivSpec.年次ファイル通知内容チェック)
-                .thenAdd(new NoInputMessages(DbdErrorMessages.年次ファイル相違)).messages());
+                .thenAdd(checkMessage).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                new NoInputMessages(DbdErrorMessages.変更無し), div.getUplTaishoFuairu()).build().check(messages));
+                checkMessage, div.getFuairuAppurodo().getUplTaishoFuairu()).build().check(messages));
         return pairs;
     }
 
@@ -151,11 +174,12 @@ public class HikazeiNenkinTaishoshaJohoValidationHandler {
     public ValidationMessageControlPairs validateFor月次ファイル通知内容(ValidationMessageControlPairs pairs) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        NoInputMessages checkMessage = new NoInputMessages(DbdErrorMessages.月次ファイル相違);
         messages.add(ValidateChain.validateStart(div).
                 ifNot(HikazeiNenkinTaishoshaJohoDivSpec.月次ファイル通知内容チェック)
-                .thenAdd(new NoInputMessages(DbdErrorMessages.月次ファイル相違)).messages());
+                .thenAdd(checkMessage).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                new NoInputMessages(DbdErrorMessages.変更無し), div.getUplTaishoFuairu()).build().check(messages));
+                checkMessage, div.getFuairuAppurodo().getUplTaishoFuairu()).build().check(messages));
         return pairs;
     }
 
@@ -168,11 +192,12 @@ public class HikazeiNenkinTaishoshaJohoValidationHandler {
     public ValidationMessageControlPairs validateFor取込チェックボックス(ValidationMessageControlPairs pairs) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        NoInputMessages checkMessage = new NoInputMessages(DbdErrorMessages.アップロードファイル無し_広域);
         messages.add(ValidateChain.validateStart(div).
                 ifNot(HikazeiNenkinTaishoshaJohoDivSpec.アップロードファイル無し_広域チェック)
-                .thenAdd(new NoInputMessages(DbdErrorMessages.アップロードファイル無し_広域)).messages());
+                .thenAdd(checkMessage).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                new NoInputMessages(DbdErrorMessages.アップロードファイル無し_広域), div.getDgKoikiTaishoShoriItiran()).build().check(messages));
+                checkMessage, div.getDgKoikiTaishoShoriItiran()).build().check(messages));
         return pairs;
     }
 

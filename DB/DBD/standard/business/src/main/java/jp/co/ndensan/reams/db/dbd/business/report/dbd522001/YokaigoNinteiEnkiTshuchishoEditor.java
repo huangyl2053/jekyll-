@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
@@ -80,13 +81,15 @@ class YokaigoNinteiEnkiTshuchishoEditor implements IYokaigoNinteiEnkiTshuchishoE
                 source.hihokenshaName = dbT4101entity.getHihokenshaName().getColumnValue();
             }
             source.riyu1 = dbT4101entity.getEnkiRiyu();
-            if (dbT4101entity.getEnkiMikomiKaishiYMD() != null && dbT4101entity.getEnkiMikomiKaishiYMD().isWareki()) {
-                source.shoriMikomiKaishiYMD = dbT4101entity.getEnkiMikomiKaishiYMD()
+            FlexibleDate enkiMikomiKaishiYMD = dbT4101entity.getEnkiMikomiKaishiYMD();
+            if (enkiMikomiKaishiYMD != null && enkiMikomiKaishiYMD.isWareki()) {
+                source.shoriMikomiKaishiYMD = enkiMikomiKaishiYMD
                         .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
             }
-            if (dbT4101entity.getEnkiMikomiShuryoYMD() != null && dbT4101entity.getEnkiMikomiShuryoYMD().isWareki()) {
-                source.shoriMikomiShuryoYMD = dbT4101entity.getEnkiMikomiShuryoYMD()
+            FlexibleDate enkiMikomiShuryoYMD = dbT4101entity.getEnkiMikomiShuryoYMD();
+            if (enkiMikomiShuryoYMD != null && enkiMikomiShuryoYMD.isWareki()) {
+                source.shoriMikomiShuryoYMD = enkiMikomiShuryoYMD
                         .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
             }

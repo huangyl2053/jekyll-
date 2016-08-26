@@ -34,10 +34,37 @@ public enum KubunShikyuGendogakuSpec implements IPredicate<KubunShikyuGendogakuD
     /**
      * 必須入力項目の必須入力チェック場合。
      */
-    必須入力項目の必須入力チェック場合 {
+    サービス種類コードの必須入力チェック場合 {
                 @Override
                 public boolean apply(KubunShikyuGendogakuDiv div) {
-                    return SpecHelper.isが各必須入力項目の必須入力チェック場合(div);
+                    return SpecHelper.isがサービス種類コードが未入力の場合の必須入力チェック場合(div);
+                }
+            },
+    /**
+     * 必須入力項目の必須入力チェック場合。
+     */
+    提供開始年月の必須入力チェック場合 {
+                @Override
+                public boolean apply(KubunShikyuGendogakuDiv div) {
+                    return SpecHelper.isが提供開始年月が未入力の場合の必須入力チェック場合(div);
+                }
+            },
+    /**
+     * 必須入力項目の必須入力チェック場合。
+     */
+    名称の必須入力チェック場合 {
+                @Override
+                public boolean apply(KubunShikyuGendogakuDiv div) {
+                    return SpecHelper.isが名称が未入力の場合の必須入力チェック場合(div);
+                }
+            },
+    /**
+     * 必須入力項目の必須入力チェック場合。
+     */
+    略称の必須入力チェック場合 {
+                @Override
+                public boolean apply(KubunShikyuGendogakuDiv div) {
+                    return SpecHelper.isが略称が未入力の場合の必須入力チェック場合(div);
                 }
             };
 
@@ -77,17 +104,41 @@ public enum KubunShikyuGendogakuSpec implements IPredicate<KubunShikyuGendogakuD
          *
          * @param div DvShikyuNinteiParamDiv
          */
-        public static boolean isが各必須入力項目の必須入力チェック場合(KubunShikyuGendogakuDiv div) {
-            return (!RString.isNullOrEmpty(div.getServiceShuruiShousai().getTxtServiceCode().getValue())
-                    && div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().getValue() != null
-                    && !RString.isNullOrEmpty(div.getServiceShuruiShousai().getTxtServiceMeisho().getValue())
-                    && !RString.isNullOrEmpty(div.getServiceShuruiShousai().getTxtServiceRyakusho().getValue()));
+        public static boolean isがサービス種類コードが未入力の場合の必須入力チェック場合(KubunShikyuGendogakuDiv div) {
+            return !RString.isNullOrEmpty(div.getServiceShuruiShousai().getTxtServiceCode().getValue());
+        }
+
+        /**
+         * *が各必須入力項目の必須入力チェック場合です。
+         *
+         * @param div DvShikyuNinteiParamDiv
+         */
+        public static boolean isが提供開始年月が未入力の場合の必須入力チェック場合(KubunShikyuGendogakuDiv div) {
+            return div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().getValue() != null;
+        }
+
+        /**
+         * *が各必須入力項目の必須入力チェック場合です。
+         *
+         * @param div DvShikyuNinteiParamDiv
+         */
+        public static boolean isが名称が未入力の場合の必須入力チェック場合(KubunShikyuGendogakuDiv div) {
+            return !RString.isNullOrEmpty(div.getServiceShuruiShousai().getTxtServiceMeisho().getValue());
+        }
+
+        /**
+         * *が各必須入力項目の必須入力チェック場合です。
+         *
+         * @param div DvShikyuNinteiParamDiv
+         */
+        public static boolean isが略称が未入力の場合の必須入力チェック場合(KubunShikyuGendogakuDiv div) {
+            return !RString.isNullOrEmpty(div.getServiceShuruiShousai().getTxtServiceRyakusho().getValue());
         }
 
         private static boolean isYMCompare(RDate startTimeRow, RDate endTimeRow, RDate startDate, RDate endDate) {
             if (endTimeRow != null) {
                 if (endDate != null) {
-                    isYMNotNullCompare(startTimeRow, endTimeRow, startDate, endDate);
+                    return isYMNotNullCompare(startTimeRow, endTimeRow, startDate, endDate);
                 } else {
                     if (startTimeRow.isBeforeOrEquals(startDate) && startDate.isBeforeOrEquals(endTimeRow)) {
                         return false;
@@ -108,8 +159,8 @@ public enum KubunShikyuGendogakuSpec implements IPredicate<KubunShikyuGendogakuD
         }
 
         private static boolean isYMNotNullCompare(RDate startTimeRow, RDate endTimeRow, RDate startDate, RDate endDate) {
-            return (!startTimeRow.isBeforeOrEquals(startDate) || !startDate.isBeforeOrEquals(endTimeRow))
-                    && (!startTimeRow.isBeforeOrEquals(endDate) || !endDate.isBeforeOrEquals(endTimeRow));
+            return (!(startTimeRow.isBeforeOrEquals(startDate) && startDate.isBeforeOrEquals(endTimeRow)))
+                    && (!(startTimeRow.isBeforeOrEquals(endDate) && endDate.isBeforeOrEquals(endTimeRow)));
         }
     }
 }

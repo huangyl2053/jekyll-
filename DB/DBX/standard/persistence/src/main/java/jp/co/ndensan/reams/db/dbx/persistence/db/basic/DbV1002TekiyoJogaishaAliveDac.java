@@ -99,6 +99,7 @@ public class DbV1002TekiyoJogaishaAliveDac {
      */
     @Transaction
     public DbV1002TekiyoJogaishaEntity get適用除外者情報(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().

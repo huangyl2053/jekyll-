@@ -29,7 +29,7 @@ public class KyufuJissekiKoshinJohoIchiranCsvEntity {
     @CsvField(order = 40, name = "保険者名")
     private RString 保険者名;
     @CsvField(order = 50, name = "No.")
-    private int no;
+    private RString no;
     @CsvField(order = 60, name = "入力識別番号")
     private RString 入力識別番号;
     @CsvField(order = 70, name = "入力識別名称")

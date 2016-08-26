@@ -29,13 +29,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -208,13 +203,13 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
         if (!deleted障がい者List.isEmpty()) {
             nextTaishoNendo = deleted障がい者List.get(0).getTaishoNendo();
         }
-        if (被保険者番号障がい者List.isEmpty() && 控除対象者データ != null) {
+        if (!被保険者番号障がい者List.isEmpty() && 控除対象者データ != null) {
             set履歴番号0の申請データ(控除対象者データ);
             set申請決定を同時に行う(控除対象者データ);
         } else if (控除対象者データ != null) {
             dbt4038Entity = new DbT4038ShogaishaKoujoEntity();
             dbt4038Entity.setRirekiNo(1);
-            set障がい者控除(控除対象者データ);
+            set障がい者控除(控除対象者データ, dbt4038Entity);
             障がい者控除情報ListClone.add(dbt4038Entity);
             dbt4038tableWriter.insert(dbt4038Entity);
 
@@ -248,7 +243,7 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
     }
 
     private void set対象の申請データを更新する(ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity 控除対象者データ) {
-        if (taishoNendo.equals(parameter.get対象年度())) {
+        if (taishoNendo != null && taishoNendo.equals(parameter.get対象年度())) {
             for (DbT4038ShogaishaKoujoEntity entity : 障がい者控除情報List) {
                 FlexibleYear taishonendo = entity.getTaishoNendo();
                 if (taishonendo != null && entity.getHihokenshaNo().equals(控除対象者データ.get被保険者番号()) && taishonendo.equals(taishoNendo)) {
@@ -259,7 +254,7 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
         } else {
             dbt4038Entity = new DbT4038ShogaishaKoujoEntity();
             dbt4038Entity.setRirekiNo(rirekiNo + 1);
-            set障がい者控除(控除対象者データ);
+            set障がい者控除(控除対象者データ, dbt4038Entity);
             障がい者控除情報ListClone.add(dbt4038Entity);
             dbt4038tableWriter.insert(dbt4038Entity);
 
@@ -284,7 +279,7 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
         }
         dbt4038Entity = new DbT4038ShogaishaKoujoEntity();
         dbt4038Entity.setRirekiNo(rirekiNo + 1);
-        set障がい者控除(控除対象者データ);
+        set障がい者控除(控除対象者データ, dbt4038Entity);
         障がい者控除情報ListClone.add(dbt4038Entity);
         dbt4038tableWriter.insert(dbt4038Entity);
 
@@ -311,7 +306,7 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
         if (noDeleted障がい者List.size() == 1 && deleted障がい者List.isEmpty() && taishoNendo.equals(parameter.get対象年度())) {
             DbT4038ShogaishaKoujoEntity newEntity = 被保険者番号障がい者List.get(0).clone();
             newEntity.setRirekiNo(1);
-            set障がい者控除(控除対象者データ);
+            set障がい者控除(控除対象者データ, newEntity);
             障がい者控除情報ListClone.remove(被保険者番号障がい者List.get(0));
             dbt4038tableWriter.delete(被保険者番号障がい者List.get(0));
             被保険者番号障がい者List.remove(0);
@@ -322,6 +317,7 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
             減免減額申請ListClone.remove(find減免減額申請(被保険者番号障がい者List.get(0), false));
             tableWriter.delete(find減免減額申請(被保険者番号障がい者List.get(0), false));
 
+            dbt4010Entity = new DbT4010GemmenGengakuShinseiEntity();
             dbt4010Entity.setShinseiRirekiNo(1);
             set減免減額申請(控除対象者データ);
             減免減額申請ListClone.add(dbt4010Entity);
@@ -343,58 +339,58 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
         return null;
     }
 
-    private DbT4038ShogaishaKoujoEntity set障がい者控除(ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity 控除対象者データ) {
+    private DbT4038ShogaishaKoujoEntity set障がい者控除(ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity 控除対象者データ, DbT4038ShogaishaKoujoEntity newEntity) {
         if (控除対象者データ.get被保険者番号() == null || 控除対象者データ.get被保険者番号().isEmpty()) {
-            dbt4038Entity.setHihokenshaNo(HihokenshaNo.EMPTY);
+            newEntity.setHihokenshaNo(HihokenshaNo.EMPTY);
         } else {
-            dbt4038Entity.setHihokenshaNo(控除対象者データ.get被保険者番号());
+            newEntity.setHihokenshaNo(控除対象者データ.get被保険者番号());
         }
-        dbt4038Entity.setShoKisaiHokenshaNo(証記載保険者番号);
+        newEntity.setShoKisaiHokenshaNo(証記載保険者番号);
         if (控除対象者データ.get申請理由() == null || 控除対象者データ.get申請理由().isEmpty()) {
-            dbt4038Entity.setShinseiJiyu(RString.EMPTY);
+            newEntity.setShinseiJiyu(RString.EMPTY);
         } else {
-            dbt4038Entity.setShinseiJiyu(控除対象者データ.get申請理由());
+            newEntity.setShinseiJiyu(控除対象者データ.get申請理由());
         }
 
-        dbt4038Entity.setTaishoNendo(parameter.get対象年度());
-        dbt4038Entity.setKijunYMD(parameter.get基準日());
-        dbt4038Entity.setHaakuYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
-        dbt4038Entity.setNinteiKubun(認定区分);
-        dbt4038Entity.setNinteiNaiyo(認定内容);
+        newEntity.setTaishoNendo(parameter.get対象年度());
+        newEntity.setKijunYMD(parameter.get基準日());
+        newEntity.setHaakuYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
+        newEntity.setNinteiKubun(認定区分);
+        newEntity.setNinteiNaiyo(認定内容);
         if (控除対象者データ.get認知症高齢者の日常生活自立度コード() == null || 控除対象者データ.get認知症高齢者の日常生活自立度コード().isEmpty()) {
-            dbt4038Entity.setNinchishoNichijoSeikatsuJiritsudoCode(Code.EMPTY);
+            newEntity.setNinchishoNichijoSeikatsuJiritsudoCode(Code.EMPTY);
         } else {
-            dbt4038Entity.setNinchishoNichijoSeikatsuJiritsudoCode(控除対象者データ.get認知症高齢者の日常生活自立度コード());
+            newEntity.setNinchishoNichijoSeikatsuJiritsudoCode(控除対象者データ.get認知症高齢者の日常生活自立度コード());
         }
 
         if (控除対象者データ.get障害高齢者の日常生活自立度コード() == null || 控除対象者データ.get障害高齢者の日常生活自立度コード().isEmpty()) {
-            dbt4038Entity.setShikakuSoshitsuJiyuCode(RString.EMPTY);
+            newEntity.setShikakuSoshitsuJiyuCode(RString.EMPTY);
         } else {
-            dbt4038Entity.setShikakuSoshitsuJiyuCode(控除対象者データ.get障害高齢者の日常生活自立度コード().getColumnValue());
+            newEntity.setShikakuSoshitsuJiyuCode(控除対象者データ.get障害高齢者の日常生活自立度コード().getColumnValue());
         }
 
-        dbt4038Entity.setShogaishaTechoUmu(false);
+        newEntity.setShogaishaTechoUmu(false);
 
         if (控除対象者データ.get資格喪失事由コード() == null || 控除対象者データ.get資格喪失事由コード().isEmpty()) {
-            dbt4038Entity.setShikakuSoshitsuJiyuCode(RString.EMPTY);
+            newEntity.setShikakuSoshitsuJiyuCode(RString.EMPTY);
         } else {
-            dbt4038Entity.setShikakuSoshitsuJiyuCode(控除対象者データ.get資格喪失事由コード());
+            newEntity.setShikakuSoshitsuJiyuCode(控除対象者データ.get資格喪失事由コード());
         }
 
         if (控除対象者データ.get資格喪失年月日() == null || 控除対象者データ.get資格喪失年月日().isEmpty()) {
-            dbt4038Entity.setShikakuSoshitsuYMD(FlexibleDate.EMPTY);
+            newEntity.setShikakuSoshitsuYMD(FlexibleDate.EMPTY);
         } else {
-            dbt4038Entity.setShikakuSoshitsuYMD(控除対象者データ.get資格喪失年月日());
+            newEntity.setShikakuSoshitsuYMD(控除対象者データ.get資格喪失年月日());
         }
 
-        dbt4038Entity.setNinteishoHakkoTaishogai(false);
-        dbt4038Entity.setShinseiYMD(parameter.get申請年月日());
-        dbt4038Entity.setKetteiYMD(parameter.get決定年月日());
-        dbt4038Entity.setTekiyoKaishiYMD(FlexibleDate.EMPTY);
-        dbt4038Entity.setTekiyoShuryoYMD(FlexibleDate.EMPTY);
-        dbt4038Entity.setKetteiKubun(new RString(1));
-        dbt4038Entity.setHiShoninRiyu(RString.EMPTY);
-        return dbt4038Entity;
+        newEntity.setNinteishoHakkoTaishogai(false);
+        newEntity.setShinseiYMD(parameter.get申請年月日());
+        newEntity.setKetteiYMD(parameter.get決定年月日());
+        newEntity.setTekiyoKaishiYMD(FlexibleDate.EMPTY);
+        newEntity.setTekiyoShuryoYMD(FlexibleDate.EMPTY);
+        newEntity.setKetteiKubun(new RString(1));
+        newEntity.setHiShoninRiyu(RString.EMPTY);
+        return newEntity;
     }
 
     private DbT4010GemmenGengakuShinseiEntity set減免減額申請(ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity 控除対象者データ) {
@@ -406,14 +402,6 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
 
         dbt4010Entity.setShoKisaiHokenshaNo(証記載保険者番号);
         dbt4010Entity.setGemmenGengakuShurui(GemmenGengakuShurui.障がい者控除.getコード());
-        dbt4010Entity.setShinseiTodokedeshaKanaShimei(AtenaKanaMeisho.EMPTY);
-        dbt4010Entity.setShinseiTodokedeDaikoKubun(RString.EMPTY);
-        dbt4010Entity.setShinseiTodokedeshaJusho(AtenaJusho.EMPTY);
-        dbt4010Entity.setShinseiTodokedeshaShimei(AtenaMeisho.EMPTY);
-        dbt4010Entity.setShinseiTodokedeshaTelNo(TelNo.EMPTY);
-        dbt4010Entity.setShinseiTodokedeshaTsuzukigara(RString.EMPTY);
-        dbt4010Entity.setShinseiTodokedeshaYubinNo(YubinNo.EMPTY);
-        dbt4010Entity.setJigyoshaKubun(RString.EMPTY);
         return dbt4010Entity;
     }
 

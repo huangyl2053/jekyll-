@@ -204,22 +204,25 @@ public class JukyushaIdoRenrakuhyoHandler {
             }
         } else if (照会モード.equals(処理モード)) {
             div.setMode_DisplayMode(JukyushaIdoRenrakuhyoDiv.DisplayMode.shokai);
+            div.getJushochiTokureiPanel().getHokenshaJohoPanel().getBtnHokenshaSelect().setDisabled(true);
         }
         set支給限度基準額Edit(処理モード, 異動日);
     }
 
     private void set支給限度基準額Edit(RString 処理モード, FlexibleDate 異動日) {
         FlexibleDate 制度改正施行日 = new FlexibleDate(DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_支給限度額一本化,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付).toString());
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString());
         if (新規モード.equals(処理モード) || 訂正モード.equals(処理モード)) {
             if (制度改正施行日.isBefore(異動日)) {
                 div.getShikyuGendoKijungakuPanel().getTxtTankiNyushoServiceShikyuGendoKijungaku().setDisabled(true);
                 div.getShikyuGendoKijungakuPanel().getTxtTankiNyushoServiceShikyuGendoKijungaku().setReadOnly(true);
                 div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().setDisabled(true);
+                div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().setReadOnly(true);
             } else {
                 div.getShikyuGendoKijungakuPanel().getTxtTankiNyushoServiceShikyuGendoKijungaku().setDisabled(false);
                 div.getShikyuGendoKijungakuPanel().getTxtTankiNyushoServiceShikyuGendoKijungaku().setReadOnly(false);
                 div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().setDisabled(false);
+                div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().setReadOnly(false);
             }
         }
     }
@@ -1250,7 +1253,10 @@ public class JukyushaIdoRenrakuhyoHandler {
         entity.set氏名性別生年月日を印字する(氏名性別生年月日を印字する);
         JukyushaIdoRenrakuhyoSakusei business = JukyushaIdoRenrakuhyoSakusei.createInstance();
         JukyushaIdoRenrakuhyoSakuseiRelateEntity entityReturn = business.出力用受給者訂正情報Entity(entity);
-        return entityReturn.get出力用受給者訂正情報Entity();
+        if (entityReturn != null) {
+            return entityReturn.get出力用受給者訂正情報Entity();
+        }
+        return null;
     }
 
     /**

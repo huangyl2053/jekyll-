@@ -69,7 +69,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
     /**
      * コンストラクタです。
      *
-     * @param システム日付
+     * @param システム日付 FlexibleDate
      */
     public HanyoListKyotakuServiceKeikakuCsvEntityEditor(FlexibleDate システム日付) {
         this.システム日付 = システム日付;

@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class TokubetsuChiikiKasanKeigenJissekiKanri {
 
     private JigyoshaNo 事業者番号;

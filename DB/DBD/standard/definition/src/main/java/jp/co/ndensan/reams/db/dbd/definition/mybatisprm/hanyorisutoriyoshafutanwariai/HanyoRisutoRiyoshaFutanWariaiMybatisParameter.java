@@ -178,10 +178,10 @@ public class HanyoRisutoRiyoshaFutanWariaiMybatisParameter implements IMyBatisPa
     }
 
     private static boolean nullHandan(FlexibleYear 年度) {
-        return 年度 != null;
+        return 年度 != null && !年度.isEmpty();
     }
 
     private static boolean nullHandan(FlexibleDate 基準日) {
-        return 基準日 != null;
+        return 基準日 != null && !基準日.isEmpty();
     }
 }

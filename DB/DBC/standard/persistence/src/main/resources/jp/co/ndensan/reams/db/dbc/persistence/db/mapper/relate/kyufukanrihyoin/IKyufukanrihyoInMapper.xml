@@ -92,7 +92,7 @@
         (SELECT <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" /> 
         FROM rgdb."DbFt7802FindHihokenshaDaicho"('99999999', null) AS "DbT1001HihokenshaDaicho") AS DAICHO
         ON TEMP.dbWT0001HihokenshaTemp_hihokenshaNo = DAICHO."dbT1001HihokenshaDaicho_hihokenshaNo"
-        WHERE DAICHO."dbT1001HihokenshaDaicho_idoYMD" <![CDATA[<=]]> TEMP.dbWT0001HihokenshaTemp_serviceTeikyoYmd
+        AND DAICHO."dbT1001HihokenshaDaicho_idoYMD" <![CDATA[<=]]> TEMP.dbWT0001HihokenshaTemp_serviceTeikyoYmd
     </select>
     
     <!-- 被保険者一時データに証記載保険者番号を登録する -->

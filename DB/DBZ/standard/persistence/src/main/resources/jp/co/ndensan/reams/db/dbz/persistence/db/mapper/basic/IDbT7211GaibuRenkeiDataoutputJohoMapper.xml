@@ -26,11 +26,11 @@
         "DbT7211GaibuRenkeiDataoutputJoho"."updateCount" as "dbT7211GaibuRenkeiDataoutputJoho_updateCount",
         "DbT7211GaibuRenkeiDataoutputJoho"."lastUpdateTimestamp" as "dbT7211GaibuRenkeiDataoutputJoho_lastUpdateTimestamp",
         "DbT7211GaibuRenkeiDataoutputJoho"."lastUpdateReamsLoginId" as "dbT7211GaibuRenkeiDataoutputJoho_lastUpdateReamsLoginId",
-        "DbT7211GaibuRenkeiDataoutputJoho"."ninteiShinseiJohoChushutsuYMD" as "dbT7211GaibuRenkeiDataoutputJoho_ninteiShinseiJohoChushutsuYMD",
-        "DbT7211GaibuRenkeiDataoutputJoho"."ninteiChosaKekkaJohoChushutsuYMD" as "dbT7211GaibuRenkeiDataoutputJoho_ninteiChosaKekkaJohoChushutsuYMD",
-        "DbT7211GaibuRenkeiDataoutputJoho"."ninteiChosaIkenshoKekkaJohoChushutsuYMD" as "dbT7211GaibuRenkeiDataoutputJoho_ninteiChosaIkenshoKekkaJohoChushutsuYMD",
+        "DbT7211GaibuRenkeiDataoutputJoho"."ninteiShinseiJohoChushutsuYMD" as "ninteiShinseiJohoChushutsuYMD",
+        "DbT7211GaibuRenkeiDataoutputJoho"."ninteiChosaKekkaJohoChushutsuYMD" as "ninteiChosaKekkaJohoChushutsuYMD",
+        "DbT7211GaibuRenkeiDataoutputJoho"."ninteiChosaIkenshoKekkaJohoChushutsuYMD" as "ninteiChosaIkenshoKekkaJohoChushutsuYMD",
         "DbT7211GaibuRenkeiDataoutputJoho"."ichijihanteiChushutsuYMD" as "dbT7211GaibuRenkeiDataoutputJoho_ichijihanteiChushutsuYMD",
-        "DbT7211GaibuRenkeiDataoutputJoho"."shinsakaiKekkaJohoChushutsuYMD" as "dbT7211GaibuRenkeiDataoutputJoho_shinsakaiKekkaJohoChushutsuYMD",
+        "DbT7211GaibuRenkeiDataoutputJoho"."shinsakaiKekkaJohoChushutsuYMD" as "shinsakaiKekkaJohoChushutsuYMD",
         "DbT7211GaibuRenkeiDataoutputJoho"."centerSoshinChushutsuYMD" as "dbT7211GaibuRenkeiDataoutputJoho_centerSoshinChushutsuYMD"
     </sql>
 
@@ -46,11 +46,11 @@
         <result property="updateCount" column="dbT7211GaibuRenkeiDataoutputJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT7211GaibuRenkeiDataoutputJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT7211GaibuRenkeiDataoutputJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="ninteiShinseiJohoChushutsuYMD" column="dbT7211GaibuRenkeiDataoutputJoho_ninteiShinseiJohoChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="ninteiChosaKekkaJohoChushutsuYMD" column="dbT7211GaibuRenkeiDataoutputJoho_ninteiChosaKekkaJohoChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="ninteiChosaIkenshoKekkaJohoChushutsuYMD" column="dbT7211GaibuRenkeiDataoutputJoho_ninteiChosaIkenshoKekkaJohoChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiShinseiJohoChushutsuYMD" column="ninteiShinseiJohoChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiChosaKekkaJohoChushutsuYMD" column="ninteiChosaKekkaJohoChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiChosaIkenshoKekkaJohoChushutsuYMD" column="ninteiChosaIkenshoKekkaJohoChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ichijihanteiChushutsuYMD" column="dbT7211GaibuRenkeiDataoutputJoho_ichijihanteiChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="shinsakaiKekkaJohoChushutsuYMD" column="dbT7211GaibuRenkeiDataoutputJoho_shinsakaiKekkaJohoChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinsakaiKekkaJohoChushutsuYMD" column="shinsakaiKekkaJohoChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="centerSoshinChushutsuYMD" column="dbT7211GaibuRenkeiDataoutputJoho_centerSoshinChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
 

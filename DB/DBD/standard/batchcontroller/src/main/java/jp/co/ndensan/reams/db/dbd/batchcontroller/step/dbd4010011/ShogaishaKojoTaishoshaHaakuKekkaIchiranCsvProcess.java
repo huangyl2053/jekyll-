@@ -6,18 +6,23 @@
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd4010011;
 
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4038ShogaishaKoujoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100201.FuicchiCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shogaishakojotaishoshahaakukekkaichiran.ShogaishaKojoTaishoshaCsvEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
+import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * バッチ設計_DBDMN41001_障がい者控除対象者把握のCSV出力クラスです。
@@ -27,11 +32,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShogaishaKojoTaishoshaHaakuKekkaIchiranCsvProcess extends BatchProcessBase<DbT4038ShogaishaKoujoEntity> {
 
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString CSV_WRITER_ENCLOSURE = new RString("\"");
+    private static final EucEntityId CSV_ENTITY_ID = new EucEntityId(new RString("DBD419001"));
     private static final RString CSVファイル名 = new RString("ShogaishaKojoTaishoshaHaakuKekkaIchiranData.csv");
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shogaishakoujohaaku"
                     + ".IShogaishaKojoTaishoshaHaakuKekkaIchiranMapper.get障がい者控除");
     private RString csvFilePath;
+    private FileSpoolManager manager;
+    private RString fileName;
 
     @BatchWriter
     private CsvWriter<ShogaishaKojoTaishoshaCsvEntity> csvWriter;
@@ -43,9 +52,17 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranCsvProcess extends BatchProc
 
     @Override
     protected void createWriter() {
-        csvFilePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
-        csvWriter = new CsvWriter.InstanceBuilder(csvFilePath).canAppend(false)
-                .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).setNewLine(NewLine.CRLF).build();
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, CSV_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        csvFilePath = manager.getEucOutputDirectry();
+        fileName = Path.combinePath(csvFilePath, CSVファイル名);
+        csvWriter = new CsvWriter.InstanceBuilder(fileName)
+                .alwaysWriteHeader(FuicchiCsvEntity.class)
+                .setEncode(Encode.UTF_8withBOM)
+                .setDelimiter(CSV_WRITER_DELIMITER)
+                .setEnclosure(CSV_WRITER_ENCLOSURE)
+                .setNewLine(NewLine.CRLF)
+                .hasHeader(true)
+                .build();
     }
 
     @Override
@@ -139,5 +156,11 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranCsvProcess extends BatchProc
         }
 
         csvEntity.setNinteishoHakkoTaishogai(new RString(String.valueOf(list.getNinteishoHakkoTaishogai())));
+    }
+
+    @Override
+    protected void afterExecute() {
+        csvWriter.close();
+        manager.spool(csvFilePath);
     }
 }

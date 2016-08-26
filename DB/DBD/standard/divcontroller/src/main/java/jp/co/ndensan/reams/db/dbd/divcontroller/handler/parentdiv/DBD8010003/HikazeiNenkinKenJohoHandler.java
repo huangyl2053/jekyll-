@@ -448,11 +448,18 @@ public class HikazeiNenkinKenJohoHandler {
      */
     public boolean pk変更チェック(HousholdBusiness 非課税年金対象者一時) {
         return !div.getCcdKaigoShikaku().get被保険者番号().equals(非課税年金対象者一時.get被保険者番号())
-                || !div.getTbNenkinHokenshaCode().getValue().equals(非課税年金対象者一時.get年金保険者())
+                || !isEquals(div.getTbNenkinHokenshaCode().getValue(), 非課税年金対象者一時.get年金保険者())
                 || !div.getTbNenkinCode().getValue().substring(0, INT_3).equals(非課税年金対象者一時.get年金コード().substring(0, INT_3))
-                || !div.getTbGenkisoNenkinNo().getValue().equals(非課税年金対象者一時.get現基礎年金番号())
-                || !div.getTbTaishoNen().getValue().equals(非課税年金対象者一時.get対象年())
-                || !div.getTbCreateDate().getValue().toDateString().equals(非課税年金対象者一時.get作成年月日());
+                || !isEquals(div.getTbGenkisoNenkinNo().getValue(), 非課税年金対象者一時.get現基礎年金番号())
+                || !isEquals(div.getTbTaishoNen().getValue(), 非課税年金対象者一時.get対象年())
+                || !isEquals(div.getTbCreateDate().getValue().toDateString(), 非課税年金対象者一時.get作成年月日());
+    }
+
+    private boolean isEquals(RString value1, RString value2) {
+        if (null == value1 || value1.isEmpty()) {
+            return null == value2 || value2.isEmpty();
+        }
+        return value1.equals(value2);
     }
 
     /**

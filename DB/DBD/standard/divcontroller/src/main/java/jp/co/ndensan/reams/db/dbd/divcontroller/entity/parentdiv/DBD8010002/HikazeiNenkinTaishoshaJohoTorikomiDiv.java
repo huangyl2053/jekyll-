@@ -306,26 +306,6 @@ public class HikazeiNenkinTaishoshaJohoTorikomiDiv extends Panel {
     }
 
     @JsonIgnore
-    public UploadPanel getUplTaishoFuairu() {
-        return this.getTanitsuTaishoShoriIchiran().getFuairuAppurodo().getUplTaishoFuairu();
-    }
-
-    @JsonIgnore
-    public void  setUplTaishoFuairu(UploadPanel uplTaishoFuairu) {
-        this.getTanitsuTaishoShoriIchiran().getFuairuAppurodo().setUplTaishoFuairu(uplTaishoFuairu);
-    }
-
-    @JsonIgnore
-    public Button getBtnAppurodo() {
-        return this.getTanitsuTaishoShoriIchiran().getFuairuAppurodo().getBtnAppurodo();
-    }
-
-    @JsonIgnore
-    public void  setBtnAppurodo(Button btnAppurodo) {
-        this.getTanitsuTaishoShoriIchiran().getFuairuAppurodo().setBtnAppurodo(btnAppurodo);
-    }
-
-    @JsonIgnore
     public TextBox getTxtShoriNendo() {
         return this.getTanitsuTaishoShoriIchiran().getTxtShoriNendo();
     }
@@ -416,16 +396,6 @@ public class HikazeiNenkinTaishoshaJohoTorikomiDiv extends Panel {
     }
 
     @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun2() {
-        return this.getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun2();
-    }
-
-    @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun4() {
-        return this.getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun4();
-    }
-
-    @JsonIgnore
     public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun3() {
         return this.getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun3();
     }
@@ -433,6 +403,16 @@ public class HikazeiNenkinTaishoshaJohoTorikomiDiv extends Panel {
     @JsonIgnore
     public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun1() {
         return this.getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun1();
+    }
+
+    @JsonIgnore
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun2() {
+        return this.getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun2();
+    }
+
+    @JsonIgnore
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun4() {
+        return this.getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun4();
     }
 
     // </editor-fold>

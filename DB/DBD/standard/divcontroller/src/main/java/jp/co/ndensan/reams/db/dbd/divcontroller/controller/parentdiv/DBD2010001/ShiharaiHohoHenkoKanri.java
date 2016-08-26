@@ -600,8 +600,14 @@ public class ShiharaiHohoHenkoKanri {
         ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
         if (EntityDataState.Added.equals(dialog支払方法変更.getState())) {
             dataList.add(dialog支払方法変更);
-            ViewStateHolder.put(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, dataList);
-            getHandler(div).支払変更管理一覧に追加(dialog支払方法変更);
+            boolean is追加行が存在 = getHandler(div).支払変更管理一覧に追加(dialog支払方法変更);
+            if (!is追加行が存在) {
+                ViewStateHolder.put(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, dataList);
+            } else {
+                dataList.remove(getHandler(div).get支払方法変更情報FromViewState(dataList));
+                dataList.add(dialog支払方法変更);
+                ViewStateHolder.put(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, dataList);
+            }
         } else if (EntityDataState.Modified.equals(dialog支払方法変更.getState())) {
             dataList.remove(getHandler(div).get支払方法変更情報FromViewState(dataList));
             dataList.add(dialog支払方法変更);

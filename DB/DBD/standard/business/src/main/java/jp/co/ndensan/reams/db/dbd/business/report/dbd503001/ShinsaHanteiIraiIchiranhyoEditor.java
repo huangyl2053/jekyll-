@@ -56,7 +56,7 @@ public class ShinsaHanteiIraiIchiranhyoEditor implements IShinsaHanteiIraiIchira
         source.title = DbBusinessConfig.get(
                 ConfigNameDBD.要介護認定_要支援認定審査判定依頼一覧表, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
         ChohyoShuchiryokuyoShiseiJyohoEntity 帳票出力用申請情報Entity = 帳票出力用申請情報Entityリスト.get(index);
-        if (null != 帳票出力用申請情報Entityリスト && !帳票出力用申請情報Entityリスト.isEmpty()) {
+        if (!帳票出力用申請情報Entityリスト.isEmpty()) {
             source.cityName = 帳票出力用申請情報Entity.get保険者名称();
             source.hokenshaNo = 帳票出力用申請情報Entity.get証記載保険者番号();
             source.listIraiichiranhyo1_1 = new RString(String.valueOf(index + 1));

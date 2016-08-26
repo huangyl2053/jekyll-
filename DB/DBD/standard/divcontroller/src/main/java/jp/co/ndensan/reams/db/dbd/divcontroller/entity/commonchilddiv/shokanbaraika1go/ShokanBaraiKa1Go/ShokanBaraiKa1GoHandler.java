@@ -85,7 +85,7 @@ public class ShokanBaraiKa1GoHandler {
         if (shiharaiHohoHenko != null
                 && shiharaiHohoHenko.get被保険者番号().value().equals(div.getKey_HihokenshaNo())
                 && shiharaiHohoHenko.get管理区分().equals(ShiharaiHenkoKanriKubun._１号償還払い化.getコード())
-                && shiharaiHohoHenko.get登録区分().equals(get登録区分())) {
+                && 登録区分(div.getKey_Button(), shiharaiHohoHenko.get登録区分())) {
             if ((ShoriKubun._1号予告者登録.equals(押下ボタン区分) && shiharaiHohoHenko.get予告登録年月日() == null)
                     || (ShoriKubun.償還払い化登録.equals(押下ボタン区分) && shiharaiHohoHenko.get償還払化決定年月日() == null)) {
                 div.setShinkiKubun(新規登録);
@@ -243,21 +243,30 @@ public class ShokanBaraiKa1GoHandler {
         div.getDdlShinseiShinsaKekka().setDisplayNone(displayNone);
     }
 
-    private RString get登録区分() {
-        RString torokuKubun = new RString("");
-        switch (ShoriKubun.toValue(div.getKey_Button())) {
+    private boolean 登録区分(RString 押下ボタン, RString 登録区分) {
+        boolean 区分 = false;
+        switch (ShoriKubun.toValue(押下ボタン)) {
             case _1号予告者登録:
             case _1号弁明書受理:
-                torokuKubun = ShiharaiHenkoTorokuKubun._１号予告登録者.getコード();
+                if (登録区分.equals(ShiharaiHenkoTorokuKubun._１号予告登録者.getコード())) {
+                    区分 = true;
+                }
                 break;
             case 償還払い化登録:
+                if (登録区分.equals(ShiharaiHenkoTorokuKubun._１号予告登録者.getコード())
+                        || 登録区分.equals(ShiharaiHenkoTorokuKubun._１号償還払い化登録.getコード())) {
+                    区分 = true;
+                }
+                break;
             case 償還払い化終了申請:
-                torokuKubun = ShiharaiHenkoTorokuKubun._１号償還払い化登録.getコード();
+                if (登録区分.equals(ShiharaiHenkoTorokuKubun._１号償還払い化登録.getコード())) {
+                    区分 = true;
+                }
                 break;
             default:
                 break;
         }
-        return torokuKubun;
+        return 区分;
     }
 
     private int get最大履歴番号() {
@@ -348,7 +357,10 @@ public class ShokanBaraiKa1GoHandler {
         builder.set弁明書受付年月日(div.getTxtBemmeiUketsukeYMD().getValue())
                 .set弁明理由コード(div.getDdlBemmeiRiyu().getSelectedKey())
                 .set弁明審査決定年月日(div.getTxtBemmeiNaiyoKetteiYMD().getValue());
-        builder.setState(EntityDataState.Modified);
+        if (null != builder.build().getState()
+                && !builder.build().getState().equals(EntityDataState.Added)) {
+            builder.setState(EntityDataState.Modified);
+        }
         ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
     }
 
@@ -357,7 +369,10 @@ public class ShokanBaraiKa1GoHandler {
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
         builder.set予告登録年月日(div.getTxtYokokuTorokuYMD().getValue())
                 .set弁明書提出期限(div.getTxtBemmeishoTeishutsuKigenYMD().getValue());
-        builder.setState(EntityDataState.Modified);
+        if (null != builder.build().getState()
+                && !builder.build().getState().equals(EntityDataState.Added)) {
+            builder.setState(EntityDataState.Modified);
+        }
         ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
     }
 
@@ -385,7 +400,14 @@ public class ShokanBaraiKa1GoHandler {
                         .set調定額(summary.get調定額());
                 shiharaiHohoHenkoTaino.createBuilderForEdit().build();
                 builder.setShiharaiHohoHenkoTaino(shiharaiHohoHenkoTaino);
-                builder.setState(EntityDataState.Modified);
+                if (null != shiharaiHohoHenkoTaino.toEntity().getState()
+                        && !shiharaiHohoHenkoTaino.toEntity().getState().equals(EntityDataState.Added)) {
+                    builder.setShiharaiHohoHenkoTaino(shiharaiHohoHenkoTaino.createBuilderForEdit().setState(EntityDataState.Modified).build());
+                }
+                if (null != builder.build().getState()
+                        && !builder.build().getState().equals(EntityDataState.Added)) {
+                    builder.setState(EntityDataState.Modified);
+                }
                 break;
             }
         }
@@ -398,7 +420,10 @@ public class ShokanBaraiKa1GoHandler {
         builder.set適用開始年月日(div.getTxtTekiyoKikanKaishi().getValue())
                 .set償還払化決定年月日(div.getTxtHenkoKetteiYMD().getValue())
                 .set被保険者証提出期限(div.getTxtHokenshoTeishutsuKigenYMD().getValue());
-        builder.setState(EntityDataState.Modified);
+        if (null != builder.build().getState()
+                && !builder.build().getState().equals(EntityDataState.Added)) {
+            builder.setState(EntityDataState.Modified);
+        }
         ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
     }
 
@@ -412,7 +437,10 @@ public class ShokanBaraiKa1GoHandler {
                 .set終了申請理由コード(div.getDdlShinseiRiyu().getSelectedKey())
                 .set終了申請審査決定年月日(div.getTxtShinseiNaiyoKetteiYMD().getValue())
                 .set終了申請審査結果区分(div.getDdlShinseiShinsaKekka().getSelectedKey());
-        builder.setState(EntityDataState.Modified);
+        if (null != builder.build().getState()
+                && !builder.build().getState().equals(EntityDataState.Added)) {
+            builder.setState(EntityDataState.Modified);
+        }
         ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
     }
 

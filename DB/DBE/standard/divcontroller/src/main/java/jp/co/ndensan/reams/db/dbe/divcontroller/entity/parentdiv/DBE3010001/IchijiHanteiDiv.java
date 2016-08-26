@@ -4,8 +4,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -25,8 +27,12 @@ public class IchijiHanteiDiv extends Panel {
     private IchijiHanteiKensakuJokenDiv IchijiHanteiKensakuJoken;
     @JsonProperty("IchijiHanteiShoriTaishoshaIchiran")
     private IchijiHanteiShoriTaishoshaIchiranDiv IchijiHanteiShoriTaishoshaIchiran;
+    @JsonProperty("torikomiPanel")
+    private torikomiPanelDiv torikomiPanel;
     @JsonProperty("インデックス")
     private RString インデックス;
+    @JsonProperty("ファイルID")
+    private RString ファイルID;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -71,6 +77,24 @@ public class IchijiHanteiDiv extends Panel {
     }
 
     /*
+     * gettorikomiPanel
+     * @return torikomiPanel
+     */
+    @JsonProperty("torikomiPanel")
+    public torikomiPanelDiv getTorikomiPanel() {
+        return torikomiPanel;
+    }
+
+    /*
+     * settorikomiPanel
+     * @param torikomiPanel torikomiPanel
+     */
+    @JsonProperty("torikomiPanel")
+    public void setTorikomiPanel(torikomiPanelDiv torikomiPanel) {
+        this.torikomiPanel = torikomiPanel;
+    }
+
+    /*
      * getインデックス
      * @return インデックス
      */
@@ -86,6 +110,47 @@ public class IchijiHanteiDiv extends Panel {
     @JsonProperty("インデックス")
     public void setインデックス(RString インデックス) {
         this.インデックス = インデックス;
+    }
+
+    /*
+     * getファイルID
+     * @return ファイルID
+     */
+    @JsonProperty("ファイルID")
+    public RString getファイルID() {
+        return ファイルID;
+    }
+
+    /*
+     * setファイルID
+     * @param ファイルID ファイルID
+     */
+    @JsonProperty("ファイルID")
+    public void setファイルID(RString ファイルID) {
+        this.ファイルID = ファイルID;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public UploadPanel getUploadPanel() {
+        return this.getTorikomiPanel().getUploadPanel();
+    }
+
+    @JsonIgnore
+    public void  setUploadPanel(UploadPanel UploadPanel) {
+        this.getTorikomiPanel().setUploadPanel(UploadPanel);
+    }
+
+    @JsonIgnore
+    public Button getUploadButton() {
+        return this.getTorikomiPanel().getUploadButton();
+    }
+
+    @JsonIgnore
+    public void  setUploadButton(Button uploadButton) {
+        this.getTorikomiPanel().setUploadButton(uploadButton);
     }
 
     // </editor-fold>

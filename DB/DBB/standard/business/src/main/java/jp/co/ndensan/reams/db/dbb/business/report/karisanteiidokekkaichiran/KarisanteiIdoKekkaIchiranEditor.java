@@ -448,6 +448,9 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
             }
             期の表記.add(期.get表記().asX期());
         }
+        for (int i = NUM_7 - 期の表記.size(); i > 0; i--) {
+            期の表記.add(RString.EMPTY);
+        }
         return 期の表記;
     }
 

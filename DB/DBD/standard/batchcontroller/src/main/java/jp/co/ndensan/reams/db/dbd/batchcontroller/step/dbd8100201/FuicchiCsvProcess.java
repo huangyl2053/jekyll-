@@ -118,24 +118,23 @@ public class FuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaishoshaDou
         FuicchiCsvEntity eucCsvEntity = new FuicchiCsvEntity();
         eucCsvEntity(eucCsvEntity, t);
         csvWriterJunitoJugo.writeLine(eucCsvEntity);
-        manager.spool(fileName);
-
     }
 
     @Override
     protected void afterExecute() {
         csvWriterJunitoJugo.close();
+        manager.spool(fileName);
     }
 
     private void eucCsvEntity(FuicchiCsvEntity eucCsvEntity, HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {
         eucCsvEntity.set市町村コード(t.getDtShichosonCode());
         eucCsvEntity.set年金保険者コード(t.getDtNennkinnHokenshaCode());
         eucCsvEntity.set年金保険者名称(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                UEXCodeShubetsu.年金保険者コード.getCodeShubetsu(), new Code(t.getDtNennkinnHokenshaCode())));
+                UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), new Code(t.getDtNennkinnHokenshaCode())));
         eucCsvEntity.set基礎年金番号(t.getDtKisoNennkinnNo());
         eucCsvEntity.set年金コード(t.getDtNennkinnCode());
         eucCsvEntity.set年金名称(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                UEXCodeShubetsu.年金保険者コード.getCodeShubetsu(), new Code(set年金(t.getDtNennkinnCode()))));
+                UEXCodeShubetsu.年金コード.getCodeShubetsu(), new Code(set年金(t.getDtNennkinnCode()))));
         eucCsvEntity.set対象年(t.getDtTaisyoYear());
         eucCsvEntity.set生年月日(set年月日(t.getDtSeinenngappi()));
         eucCsvEntity.set性別コード(t.getDtSeibetsu());
@@ -245,4 +244,5 @@ public class FuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaishoshaDou
             return RString.EMPTY;
         }
     }
+
 }

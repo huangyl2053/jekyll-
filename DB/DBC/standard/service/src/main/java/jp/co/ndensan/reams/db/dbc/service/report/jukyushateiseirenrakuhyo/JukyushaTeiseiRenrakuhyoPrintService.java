@@ -38,6 +38,9 @@ public class JukyushaTeiseiRenrakuhyoPrintService {
      */
     public SourceDataCollection printSingle(
             JukyushaIdoRenrakuhyoTorokuEntity 出力用受給者訂正情報Entity) {
+        if (出力用受給者訂正情報Entity == null) {
+            return new SourceDataCollection();
+        }
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             print(出力用受給者訂正情報Entity, reportManager);

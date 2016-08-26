@@ -104,7 +104,7 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
     private static final RString 給付管理票種別区分コード2 = new RString("2");
     private static final RString 給付管理票種別区分コード3 = new RString("3");
     private static final RString 居宅サービス計画作成区分コード_自己作成 = new RString("2");
-    private static final RString 備考_支援事業者未登録 = new RString("2");
+    private static final RString 備考_支援事業者未登録 = new RString("支援事業者未登録");
     private static final RString 漢字_被保険者番号 = new RString("被保険者番号");
     private static final Code コード = new Code("0003");
     private static final FlexibleYearMonth 基準サービス提供年月 = new FlexibleYearMonth("200604");
@@ -323,6 +323,14 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
         report.writeBy(reportSourceWriter_一覧表);
     }
 
+    private void writeCsvLine(KyufukanrihyoIchiranCSVEntity entity) {
+        if (parameter.get導入形態コード().is広域()) {
+            eucCsvWriter.writeLine(entity);
+        } else {
+            eucCsvWriter.writeLine(entity.to単一());
+        }
+    }
+
     private RString doカンマ編集(Decimal number) {
         if (null == number) {
             return RString.EMPTY;
@@ -399,7 +407,7 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
         if (parameter.get導入形態コード().is広域()) {
             csvEntity.set証記載保険者番号(getColumnValue(被保険者.get証記載保険者番号()));
         }
-        eucCsvWriter.writeLine(csvEntity);
+        writeCsvLine(csvEntity);
         csvEntity = new KyufukanrihyoIchiranCSVEntity();
     }
 
@@ -411,7 +419,7 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
         csvEntity.set短期入所件数(doカンマ編集(new Decimal(件数2)));
         csvEntity.set居宅件数(doカンマ編集(new Decimal(件数3)));
         csvEntity.set合計件数(doカンマ編集(new Decimal(合計件数)));
-        eucCsvWriter.writeLine(csvEntity);
+        writeCsvLine(csvEntity);
         csvEntity = new KyufukanrihyoIchiranCSVEntity();
     }
 

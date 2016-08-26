@@ -6,37 +6,25 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList;
 
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0430011.KogakuShikyuShinseishoIkkatsuHakkoDiv;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
+ * 高額サービス費給付お知らせ通知書作成です。
  *
- * @author slzheng
+ * @reamsid_L DBC-4770-010 zhengshenlei
  */
 public class KogakuShikyuValidationHandler {
 
-    private final KogakuShikyuShinseishoIkkatsuHakkoDiv div;
-
     /**
      * コンストラクタです。
      *
-     * @param div KogakuKyufuTaishoListDiv
+     * @return KogakuShikyuValidationHandler
      */
-    public KogakuShikyuValidationHandler(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-        this.div = div;
-    }
-
-    /**
-     * コンストラクタです。
-     *
-     * @param div 画面DIV
-     * @return KogakuKyufuTaishoListDiv
-     */
-    public static KogakuShikyuValidationHandler of(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-        return new KogakuShikyuValidationHandler(div);
+    public static KogakuShikyuValidationHandler of() {
+        return new KogakuShikyuValidationHandler();
     }
 
     /**

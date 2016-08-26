@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.Nijiha
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.NijihanteiKekkaTorokuMobileShinsaiinEucCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.NijihanteiKekkaTorokuMobileShinsaiinRelateEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.NijiHanteiKekkaInputHoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsShiryoSakuseiZumi;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
@@ -37,6 +38,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.NinteiShin
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.YokaigoJotaizoReiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiYukoKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -159,16 +161,16 @@ public class ShinsaTaishoDataOutPutResult {
         eucCsvEntity.set認知機能及び状態安定性から推定される給付区分コード(entity.get認知機能及び状態安定性から推定される給付区分コード());
         eucCsvEntity.set申請書管理番号(entity.get申請書管理番号());
         eucCsvEntity.set厚労省IF識別コード(entity.get厚労省IF識別コード());
-        if (entity.get厚労省IF識別コード() == null) {
-            eucCsvEntity.set厚労省認定ソフトのバージョン(null);
-        } else {
+        if (!RString.isNullOrEmpty(entity.get厚労省IF識別コード())) {
             eucCsvEntity.set厚労省認定ソフトのバージョン(KoroshoIfShikibetsuCode.toValue(entity.get厚労省IF識別コード()).get名称());
         }
         eucCsvEntity.set証記載保険者番号(entity.get証記載保険者番号());
         eucCsvEntity.set被保険者番号(entity.get被保険者番号());
         eucCsvEntity.set認定申請年月日(setDateFormat(entity.get認定申請年月日()));
         eucCsvEntity.set認定申請区分申請時コード(entity.get認定申請区分申請時コード());
-        eucCsvEntity.set認定申請区分申請時(entity.get認定申請区分申請時());
+        if (!RString.isNullOrEmpty(entity.get認定申請区分申請時コード())) {
+            eucCsvEntity.set認定申請区分申請時(NinteiShinseiYukoKubunCode.toValue(entity.get認定申請区分申請時コード()).get名称());
+        }
         eucCsvEntity.set被保険者氏名(entity.get被保険者氏名());
         eucCsvEntity.set被保険者氏名カナ(entity.get被保険者氏名カナ());
         eucCsvEntity.set生年月日(setDateFormat(entity.get生年月日()));
@@ -177,25 +179,24 @@ public class ShinsaTaishoDataOutPutResult {
         eucCsvEntity.set郵便番号(setYobuinNoFormat(entity.get郵便番号()));
         eucCsvEntity.set住所(entity.get住所());
         eucCsvEntity.set電話番号(entity.get電話番号());
-        eucCsvEntity.set保険者名(entity.get保険者名());
+        eucCsvEntity.set市町村名称(entity.get市町村名称());
         eucCsvEntity.set一次判定年月日(setDateFormat(entity.get一次判定年月日()));
         eucCsvEntity.set要介護認定一次判定結果コード(entity.get要介護認定一次判定結果コード());
         eucCsvEntity.set認定調査依頼完了年月日(setDateFormat(entity.get認定調査依頼完了年月日()));
         eucCsvEntity.set認定調査依頼履歴番号(entity.get認定調査依頼履歴番号());
         eucCsvEntity.set認定調査委託先コード(entity.get認定調査委託先コード());
-        eucCsvEntity.set調査委託先(entity.get調査委託先());
+        if (!RString.isNullOrEmpty(entity.get認定調査委託先コード())) {
+            eucCsvEntity.set調査委託先(SaibanHanyokeyName.toValue(entity.get認定調査委託先コード()).get名称());
+        }
+
         eucCsvEntity.set認定調査員コード(entity.get認定調査員コード());
         eucCsvEntity.set調査員氏名(entity.get調査員氏名());
         eucCsvEntity.set概況特記テキストイメージ区分コード(entity.get概況特記テキストイメージ区分コード());
-        if (entity.get概況特記テキストイメージ区分コード() == null) {
-            eucCsvEntity.set概況特記テキストイメージ区分(null);
-        } else {
+        if (!RString.isNullOrEmpty(entity.get概況特記テキストイメージ区分コード())) {
             eucCsvEntity.set概況特記テキストイメージ区分(TokkijikoTextImageKubun.toValue(entity.get概況特記テキストイメージ区分コード()).get名称());
         }
         eucCsvEntity.set認定調査依頼区分コード(entity.get認定調査依頼区分コード());
-        if (entity.get認定調査依頼区分コード() == null) {
-            eucCsvEntity.set認定調査依頼区分(null);
-        } else {
+        if (!RString.isNullOrEmpty(entity.get認定調査依頼区分コード())) {
             eucCsvEntity.set認定調査依頼区分(NinteiChousaIraiKubunCode.toValue(entity.get認定調査依頼区分コード()).get名称());
         }
 
@@ -203,22 +204,16 @@ public class ShinsaTaishoDataOutPutResult {
         eucCsvEntity.set認定調査実施年月日(setDateFormat(entity.get認定調査実施年月日()));
         eucCsvEntity.set認定調査受領年月日(setDateFormat(entity.get認定調査受領年月日()));
         eucCsvEntity.set認定調査区分コード(entity.get認定調査区分コード());
-        if (entity.get認定調査区分コード() == null) {
-            eucCsvEntity.set認定調査区分(null);
-        } else {
+        if (!RString.isNullOrEmpty(entity.get認定調査区分コード())) {
             eucCsvEntity.set認定調査区分(ChosaKubun.toValue(entity.get認定調査区分コード()).get名称());
         }
         eucCsvEntity.set認定調査実施場所コード(entity.get認定調査実施場所コード());
-        if (entity.get認定調査実施場所コード() == null) {
-            eucCsvEntity.set認定調査実施場所(null);
-        } else {
+        if (!RString.isNullOrEmpty(entity.get認定調査実施場所コード())) {
             eucCsvEntity.set認定調査実施場所(ChosaJisshiBashoCode.toValue(entity.get認定調査実施場所コード()).get名称());
         }
         eucCsvEntity.set認定調査実施場所名称(entity.get認定調査実施場所名称());
         eucCsvEntity.set認定調査サービス区分コード(entity.get認定調査サービス区分コード());
-        if (entity.get認定調査サービス区分コード() == null) {
-            eucCsvEntity.set認定調査サービス区分(null);
-        } else {
+        if (!RString.isNullOrEmpty(entity.get認定調査サービス区分コード())) {
             eucCsvEntity.set認定調査サービス区分(ServiceKubunCode.toValue(entity.get認定調査サービス区分コード()).get名称());
         }
         eucCsvEntity.set利用施設名(entity.get利用施設名());
@@ -238,7 +233,9 @@ public class ShinsaTaishoDataOutPutResult {
         eucCsvEntity.set認定調査特記事項番号(entity.get認定調査特記事項番号());
         eucCsvEntity.set認定調査特記事項連番(entity.get認定調査特記事項連番());
         eucCsvEntity.set原本マスク区分コード(entity.get原本マスク区分コード());
-        eucCsvEntity.set原本マスク区分(entity.get原本マスク区分());
+        if (!RString.isNullOrEmpty(entity.get原本マスク区分コード())) {
+            eucCsvEntity.set原本マスク区分(GenponMaskKubun.toValue(entity.get原本マスク区分コード()).get名称());
+        }
         eucCsvEntity.set特記事項(entity.get特記事項());
         eucCsvEntity.setサービスの状況連番(entity.getサービスの状況連番());
         eucCsvEntity.setサービスの状況(entity.getサービスの状況());

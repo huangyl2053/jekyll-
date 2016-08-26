@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
@@ -86,6 +86,5 @@ public class ShiharaiHohoHenkoEntity {
     private List<ShunoNendoEntity> 収納情報List;
     private RString 収納情報なし;
 
-    private RYear 賦課年度;
-    private RYear 日付関連_調定年度;
+    private FlexibleYear 賦課年度;
 }

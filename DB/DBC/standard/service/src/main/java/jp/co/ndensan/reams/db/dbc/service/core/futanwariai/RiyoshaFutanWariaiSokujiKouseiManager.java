@@ -106,6 +106,18 @@ public class RiyoshaFutanWariaiSokujiKouseiManager {
     }
 
     /**
+     * Max履歴番号を取得します。
+     *
+     * @param 年度 Nendo
+     * @param 被保険者番号 HihokenshaNo
+     *
+     * @return RiyoshaFutanWariai
+     */
+    public RiyoshaFutanWariai selectMax履歴番号(FlexibleYear 年度, HihokenshaNo 被保険者番号) {
+        return new RiyoshaFutanWariai(利用者負担割合Dac.selectMax履歴番号(年度, 被保険者番号));
+    }
+
+    /**
      * 利用者負担割合と利用者負担割合明細一覧と利用者負担割合根拠一覧を保存します。
      *
      * @param 利用者負担割合 RiyoshaFutanWariai

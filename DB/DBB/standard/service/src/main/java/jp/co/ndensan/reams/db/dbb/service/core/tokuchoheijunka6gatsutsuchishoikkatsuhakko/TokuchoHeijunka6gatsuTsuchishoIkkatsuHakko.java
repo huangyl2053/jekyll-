@@ -58,6 +58,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.daikoprint.IDaikoPrint;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -101,6 +102,8 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
     private static final RString なし = new RString("なし");
     private static final RString あり = new RString("あり");
     private static final RString SIGN = new RString(" ＞ ");
+    private static final RString 区分_管内 = new RString("1");
+    private static final RString 区分_管外 = new RString("2");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -340,10 +343,11 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
      * @param param 帳票の発行パラメータ
      * @param 連番 連番
      * @param 通知書番号 通知書番号
+     * @param entity 仮算定額変更情報一時テーブルのエンティティ
      * @return csvデータ
      */
     public KariSanteigakuHenkoTsuchishoHakkoIchiranData csvData作成(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通,
-            TsuchishoHakoProcessParameter param, int 連番, TsuchishoNo 通知書番号) {
+            TsuchishoHakoProcessParameter param, int 連番, TsuchishoNo 通知書番号, KarisanteiGakuHenkoEntity entity) {
 
         EditedKariSanteiTsuchiShoKyotsuBeforeCorrection 更正前;
         if (編集後仮算定通知書共通.get更正前() == null) {
@@ -362,14 +366,14 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         if (編集後仮算定通知書共通.get編集後宛先() != null) {
             data.set郵便番号(編集後仮算定通知書共通.get編集後宛先().get郵便番号());
             data.set住所(編集後仮算定通知書共通.get編集後宛先().get編集後住所());
-            data.set町域管内管外住所(編集後仮算定通知書共通.get編集後宛先().get町域());
+            set町域管内管外住所(編集後仮算定通知書共通, data, entity);
             if (編集後仮算定通知書共通.get編集後宛先().get行政区コード() != null) {
                 data.set行政区コード(編集後仮算定通知書共通.get編集後宛先().get行政区コード().getColumnValue());
             }
         }
         if (編集後仮算定通知書共通.get編集後個人() != null) {
             data.set性別(編集後仮算定通知書共通.get編集後個人().get性別());
-            data.set生年月日(編集後仮算定通知書共通.get編集後個人().get生年月日());
+            data.set生年月日(編集後仮算定通知書共通.get編集後個人().get生年月日Csv());
 
             if (編集後仮算定通知書共通.get編集後個人().get番地() != null) {
                 data.set番地(編集後仮算定通知書共通.get編集後個人().get番地().getColumnValue());
@@ -397,6 +401,18 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
 
         set更正後(編集後仮算定通知書共通, data);
         return data;
+    }
+
+    private void set町域管内管外住所(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通,
+            KariSanteigakuHenkoTsuchishoHakkoIchiranData data, KarisanteiGakuHenkoEntity entity) {
+        if (entity.get宛名() != null && 区分_管内.equals(entity.get宛名().getKannaiKangaiKubun())) {
+            data.set町域管内管外住所(編集後仮算定通知書共通.get編集後宛先().get町域());
+        } else if (entity.get宛名() != null && 区分_管外.equals(entity.get宛名().getKannaiKangaiKubun())) {
+            AtenaJusho 住所 = entity.get宛名().getJusho();
+            if (住所 != null) {
+                data.set町域管内管外住所(住所.getColumnValue());
+            }
+        }
     }
 
     private void set更正後(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通, KariSanteigakuHenkoTsuchishoHakkoIchiranData data) {
@@ -808,8 +824,8 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
             更正前普徴期別金額リスト.add(setUniversalPhase(期14, entity.get更正前計算後情報().getFuKibetsuGaku14()));
             編集後仮算定通知書.get更正前().set更正前普徴期別金額リスト(更正前普徴期別金額リスト);
             編集後仮算定通知書.get更正前().set更正前特徴期別金額01(entity.get更正前計算後情報().getTkKibetsuGaku01());
-            編集後仮算定通知書.get更正前().set更正前特徴期別金額02(entity.get更正前計算後情報().getTkKibetsuGaku01());
-            編集後仮算定通知書.get更正前().set更正前特徴期別金額03(entity.get更正前計算後情報().getTkKibetsuGaku01());
+            編集後仮算定通知書.get更正前().set更正前特徴期別金額02(entity.get更正前計算後情報().getTkKibetsuGaku02());
+            編集後仮算定通知書.get更正前().set更正前特徴期別金額03(entity.get更正前計算後情報().getTkKibetsuGaku03());
         }
         if (編集後仮算定通知書.get更正後() != null) {
             更正後普徴期別金額リスト.add(setUniversalPhase(期1, entity.get更正後計算後情報().getFuKibetsuGaku01()));
@@ -828,8 +844,8 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
             更正後普徴期別金額リスト.add(setUniversalPhase(期14, entity.get更正後計算後情報().getFuKibetsuGaku14()));
             編集後仮算定通知書.get更正後().set更正後普徴期別金額リスト(更正後普徴期別金額リスト);
             編集後仮算定通知書.get更正後().set更正後特徴期別金額01(entity.get更正後計算後情報().getTkKibetsuGaku01());
-            編集後仮算定通知書.get更正後().set更正後特徴期別金額02(entity.get更正後計算後情報().getTkKibetsuGaku01());
-            編集後仮算定通知書.get更正後().set更正後特徴期別金額03(entity.get更正後計算後情報().getTkKibetsuGaku01());
+            編集後仮算定通知書.get更正後().set更正後特徴期別金額02(entity.get更正後計算後情報().getTkKibetsuGaku02());
+            編集後仮算定通知書.get更正後().set更正後特徴期別金額03(entity.get更正後計算後情報().getTkKibetsuGaku03());
         }
     }
 

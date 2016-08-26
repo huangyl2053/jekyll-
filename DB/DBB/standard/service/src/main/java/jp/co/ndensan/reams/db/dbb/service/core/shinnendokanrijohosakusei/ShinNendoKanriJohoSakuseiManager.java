@@ -88,8 +88,6 @@ public class ShinNendoKanriJohoSakuseiManager {
             for (ShinNendoKanriJohoSakuseiEntity item : resultList) {
                 mapper.insertカスタムコンフィグByKey(item);
             }
-        } else {
-            requireNonNull(resultList, UrSystemErrorMessages.値がnull.getReplacedMessage("resultList"));
         }
         NokiManager 納期管理 = new NokiManager();
         List<Noki> list = 納期管理.create翌年度納期(ShunoKamokuShubetsu.介護保険料_特別徴収,

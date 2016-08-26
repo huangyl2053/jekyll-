@@ -238,7 +238,7 @@ public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<RS
         被保険者一時entity.setOrgHihokenshaKanaShimei(受給者情報.getHihokenshaShimeikana());
         被保険者一時entity.setOrgHihokenshaShimei(RString.EMPTY);
         被保険者一時entity.setOldShichosonCode(LasdecCode.EMPTY);
-        被保険者一時entity.setHenkanHihokenshaNo(new HihokenshaNo(受給者情報.getHihokenshashoNo()));
+        被保険者一時entity.setHenkanHihokenshaNo(HihokenshaNo.EMPTY);
         被保険者一時entity.setHihokenshaNo(new HihokenshaNo(受給者情報.getHihokenshashoNo()));
         被保険者一時entity.setShichosonCode(LasdecCode.EMPTY);
         被保険者一時entity.setKannaiKangaiKubun(RString.EMPTY);

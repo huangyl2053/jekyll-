@@ -143,7 +143,7 @@
         HIHOKENSHATEMP."henkanHihokenshaNo" AS "dbWT0001HihokenshaTemp_henkanHihokenshaNo",
         HIHOKENSHATEMP."hihokenshaNo" AS "dbWT0001HihokenshaTemp_hihokenshaNo",
         HIHOKENSHATEMP."shichosonCode" AS "dbWT0001HihokenshaTemp_shichosonCode",
-        HIHOKENSHATEMP."KannaiKangaiKubun" AS "dbWT0001HihokenshaTemp_kannaiKangaiKubun",
+        HIHOKENSHATEMP."kannaiKangaiKubun" AS "dbWT0001HihokenshaTemp_kannaiKangaiKubun",
         HIHOKENSHATEMP."yubinNo" AS "dbWT0001HihokenshaTemp_yubinNo",
         HIHOKENSHATEMP."choikiCode" AS "dbWT0001HihokenshaTemp_choikiCode",
         HIHOKENSHATEMP."gyoseikuCode" AS "dbWT0001HihokenshaTemp_gyoseikuCode",

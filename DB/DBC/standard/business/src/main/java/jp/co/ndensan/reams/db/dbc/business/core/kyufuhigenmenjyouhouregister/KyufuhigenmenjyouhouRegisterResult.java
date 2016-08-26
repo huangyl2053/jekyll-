@@ -95,9 +95,11 @@ public class KyufuhigenmenjyouhouRegisterResult {
      * @return サービス種類コード
      */
     public RString getサービス種類() {
-        if ((null != getサービス種類コード() || !getサービス種類コード().isEmpty())
-                && (null != getサービス種類略称() || !getサービス種類略称().isEmpty())) {
-            return new RString(getサービス種類コード().toString() + RString.HALF_SPACE.toString() + getサービス種類略称().toString());
+        ServiceShuruiCode サービス種類コード = getサービス種類コード();
+        RString サービス種類略称 = getサービス種類略称();
+        if (null != サービス種類コード && !サービス種類コード.isEmpty()
+                && RString.isNullOrEmpty(サービス種類略称)) {
+            return new RString(サービス種類コード.toString() + RString.HALF_SPACE.toString() + サービス種類略称.toString());
         }
         return RString.EMPTY;
     }

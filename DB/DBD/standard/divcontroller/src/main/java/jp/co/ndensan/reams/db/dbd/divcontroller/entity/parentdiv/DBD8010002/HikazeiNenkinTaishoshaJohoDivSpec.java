@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.core.syorijyoutaicode.SyoriJyoutaiCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -42,7 +43,7 @@ public enum HikazeiNenkinTaishoshaJohoDivSpec implements IPredicate<HikazeiNenki
     アップロードファイル未指定チェック {
         @Override
         public boolean apply(HikazeiNenkinTaishoshaJohoDiv div) {
-            return div.getUplTaishoFuairu().getRemainUnUploadedFiles().size() > 0;
+            return div.getFuairuAppurodo().getUplTaishoFuairu().getRemainUnUploadedFiles().size() > 0;
         }
     },
     /**
@@ -51,12 +52,19 @@ public enum HikazeiNenkinTaishoshaJohoDivSpec implements IPredicate<HikazeiNenki
     処理状態チェック {
         @Override
         public boolean apply(HikazeiNenkinTaishoshaJohoDiv div) {
-            return div.getDgTanitsuTaishoShoriItchiran().getSelectedItems().get(0).getTxtShoriJotai()
-                    .equals(SyoriJyoutaiCode.未処理.get名称())
-                    || div.getDgTanitsuTaishoShoriItchiran().getSelectedItems().get(0).getTxtShoriJotai()
-                    .equals(SyoriJyoutaiCode.再処理前.get名称())
-                    || div.getDgTanitsuTaishoShoriItchiran().getSelectedItems().get(0).getTxtShoriJotai()
-                    .equals(SyoriJyoutaiCode.追加取込前.get名称());
+
+            List<dgTanitsuTaishoShoriItchiran_Row> list = div.getDgTanitsuTaishoShoriItchiran().getSelectedItems();
+            if (list.isEmpty()) {
+                return false;
+            } else {
+                return list.get(0).getTxtShoriJotai()
+                        .equals(SyoriJyoutaiCode.未処理.get名称())
+                        || list.get(0).getTxtShoriJotai()
+                        .equals(SyoriJyoutaiCode.再処理前.get名称())
+                        || list.get(0).getTxtShoriJotai()
+                        .equals(SyoriJyoutaiCode.追加取込前.get名称());
+            }
+
         }
     },
     /**
@@ -115,7 +123,17 @@ public enum HikazeiNenkinTaishoshaJohoDivSpec implements IPredicate<HikazeiNenki
 
             return true;
         }
-    };
+    },
+    /**
+     * アップロード済みファイル名チェック。
+     */
+    アップロード済みファイル名チェック {
+        @Override
+        public boolean apply(HikazeiNenkinTaishoshaJohoDiv div) {
+            return !RString.EMPTY.equals(div.getTanitsuTaishoShoriIchiran().getHdnFileName())
+                    && !SharedFile.searchSharedFile(div.getTanitsuTaishoShoriIchiran().getHdnFileName()).isEmpty();
+        }
+    },;
 
     private static final RString 処理_年次 = new RString("年次");
     private static final RString 処理_月次 = new RString("月次");

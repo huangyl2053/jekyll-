@@ -15,16 +15,15 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 給付管理票照会のDataModelです。
  *
  * @reamsid_L DBC-2960-010 chenxiangyu
  */
-@Getter
-@Setter
+@lombok.Getter
+@lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class KyufuKanrihyoShokaiDataModel implements Serializable {
 
     private static final long serialVersionUID = -1185858210492467270L;
@@ -164,7 +163,7 @@ public final class KyufuKanrihyoShokaiDataModel implements Serializable {
      * @param business 給付管理票照会のBusiness
      * @return KyufuKanrihyoShokaiDataModel
      */
-    public static KyufuKanrihyoShokaiDataModel createDataModel(KyufuKanrihyoShokaiBusiness business) {
+    public KyufuKanrihyoShokaiDataModel createDataModel(KyufuKanrihyoShokaiBusiness business) {
         return new KyufuKanrihyoShokaiDataModel(
                 business.getInsertDantaiCd(),
                 business.getInsertTimestamp(),

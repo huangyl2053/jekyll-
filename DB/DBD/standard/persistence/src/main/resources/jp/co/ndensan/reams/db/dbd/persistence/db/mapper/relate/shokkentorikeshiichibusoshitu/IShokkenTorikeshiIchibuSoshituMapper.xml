@@ -92,13 +92,8 @@
         INNER JOIN rgdb."DbT4101NinteiShinseiJoho" AS "DbT4101NinteiShinseiJoho"
         ON "DbT4121ShinseiRirekiJoho"."zenkaiShinseishoKanriNo" = "DbT4101NinteiShinseiJoho"."shinseishoKanriNo"
 
-        INNER JOIN rgdb."DbV4001JukyushaDaicho" AS "DbV4001JukyushaDaicho"
-        ON "DbT4121ShinseiRirekiJoho"."zenkaiShinseishoKanriNo" = "DbV4001JukyushaDaicho"."shinseishoKanriNo"
-
-        INNER JOIN  rgdb."DbT4001JukyushaDaicho" AS "DbT4001JukyushaDaicho"
-        ON "DbV4001JukyushaDaicho"."shinseishoKanriNo" = "DbT4001JukyushaDaicho"."shinseishoKanriNo"
-        AND "DbV4001JukyushaDaicho"."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
-        AND "DbV4001JukyushaDaicho"."edaban" = "DbT4001JukyushaDaicho"."edaban"
+        INNER JOIN rgdb."DbT4001JukyushaDaicho" AS "DbT4001JukyushaDaicho"
+        ON "DbT4121ShinseiRirekiJoho"."zenkaiShinseishoKanriNo" = "DbT4001JukyushaDaicho"."shinseishoKanriNo"
 
         LEFT JOIN rgdb."DbT4102NinteiKekkaJoho" AS "DbT4102NinteiKekkaJoho"
         ON "DbT4102NinteiKekkaJoho"."shinseishoKanriNo" = T4101."shinseishoKanriNo"
@@ -106,7 +101,7 @@
         WHERE
         T4101."shinseishoKanriNo" = #{shinseishoKanriNo}
         ORDER BY
-        "DbV4001JukyushaDaicho"."rirekiNo" DESC, "DbV4001JukyushaDaicho"."edaban" DESC
+        "DbT4001JukyushaDaicho"."rirekiNo" DESC, "DbT4001JukyushaDaicho"."edaban" DESC
         LIMIT 1
     </select>
 </mapper>

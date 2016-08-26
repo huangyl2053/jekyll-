@@ -69,7 +69,7 @@ public class JigyoKogakuShinseikanriMasterUpdateProcess extends BatchProcessBase
         dbt3109Entity.setSetaiShuyakuNo(entity.get給付対象者合計().getSetaiShuyakuNo());
         dbt3109Entity.setKyokaisoTaishoshaFlag(entity.get給付対象者合計().getKyokaisoTaishoshaFlag());
         dbt3109Entity.setKogakuTaishoGaiFlag(entity.get給付対象者合計().getKogakuTaishoGaiFlag());
-        dbt3109Entity.setJidoShokanTaishoFlag(entity.get給付対象者合計().getJidoShokanTaishoFlag());
+        dbt3109Entity.setJidoShokanTaishoFlag(entity.get申請情報().isJidoShokanTaishoFlagJoho());
         dbt3109Entity.setState(EntityDataState.Added);
         dbt3109Writer.insert(dbt3109Entity);
 

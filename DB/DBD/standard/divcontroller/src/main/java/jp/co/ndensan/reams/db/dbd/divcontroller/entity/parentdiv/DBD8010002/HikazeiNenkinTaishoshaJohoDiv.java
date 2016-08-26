@@ -307,26 +307,6 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public UploadPanel getUplTaishoFuairu() {
-        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getTanitsuTaishoShoriIchiran().getFuairuAppurodo().getUplTaishoFuairu();
-    }
-
-    @JsonIgnore
-    public void  setUplTaishoFuairu(UploadPanel uplTaishoFuairu) {
-        this.getHikazeiNenkinTaishoshaJohoTorikomi().getTanitsuTaishoShoriIchiran().getFuairuAppurodo().setUplTaishoFuairu(uplTaishoFuairu);
-    }
-
-    @JsonIgnore
-    public Button getBtnAppurodo() {
-        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getTanitsuTaishoShoriIchiran().getFuairuAppurodo().getBtnAppurodo();
-    }
-
-    @JsonIgnore
-    public void  setBtnAppurodo(Button btnAppurodo) {
-        this.getHikazeiNenkinTaishoshaJohoTorikomi().getTanitsuTaishoShoriIchiran().getFuairuAppurodo().setBtnAppurodo(btnAppurodo);
-    }
-
-    @JsonIgnore
     public TextBox getTxtShoriNendo() {
         return this.getHikazeiNenkinTaishoshaJohoTorikomi().getTanitsuTaishoShoriIchiran().getTxtShoriNendo();
     }
@@ -447,16 +427,6 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun2() {
-        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun2();
-    }
-
-    @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun4() {
-        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun4();
-    }
-
-    @JsonIgnore
     public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun3() {
         return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun3();
     }
@@ -464,6 +434,16 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     @JsonIgnore
     public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun1() {
         return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun1();
+    }
+
+    @JsonIgnore
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun2() {
+        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun2();
+    }
+
+    @JsonIgnore
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun4() {
+        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun4();
     }
 
     @JsonIgnore

@@ -112,7 +112,7 @@ public class HikazeiNenkinTaishoshaJoho {
 
             if (単一保険者.equals(getHandler(div).広域と市町村判断())) {
                 getValidationHandler(div).validateFor処理状態(pairs);
-                //TODO
+                getValidationHandler(div).validateForアップロード済みファイル名(pairs);
             } else {
                 getValidationHandler(div).validateFor処理状態(pairs);
                 getValidationHandler(div).validateFor取込チェックボックス(pairs);
@@ -123,7 +123,9 @@ public class HikazeiNenkinTaishoshaJoho {
 
             List<RString> 構成市町村コードリスト = ViewStateHolder.
                     get(ViewStateKeys.取込対象市町村コードリスト, new ArrayList<>().getClass());
-            if (構成市町村コードリスト.isEmpty()) {
+            if (!単一保険者.equals(getHandler(div).広域と市町村判断())
+                    && 構成市町村コードリスト.isEmpty()) {
+
                 return ResponseData.of(div).addMessage(DbdErrorMessages.処理なし.getMessage()).respond();
             }
         }
@@ -231,6 +233,7 @@ public class HikazeiNenkinTaishoshaJoho {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
             div.setHdnFilePath(files[0].getFilePath());
+            div.getTanitsuTaishoShoriIchiran().setHdnLocalFileName(files[0].getFileName());
 
             getHandler(div).readFile();
 
@@ -247,7 +250,7 @@ public class HikazeiNenkinTaishoshaJoho {
             }
         }
 
-        getHandler(div).upload(files[0].getFileName());
+        getHandler(div).upload(div.getTanitsuTaishoShoriIchiran().getHdnLocalFileName());
         setDisplayOrOpen(div, false);
         return ResponseData.of(div).respond();
     }
@@ -263,5 +266,7 @@ public class HikazeiNenkinTaishoshaJoho {
     private void setDisplayOrOpen(HikazeiNenkinTaishoshaJohoDiv div, boolean flg) {
         div.getFuairuAppurodo().setCanOpenAndClose(flg);
         div.getFuairuAppurodo().setIsOpen(flg);
+        div.getFuairuAppurodo().getUplTaishoFuairu().setDisplayNone(!flg);
+        div.getFuairuAppurodo().getBtnAppurodo().setDisplayNone(!flg);
     }
 }

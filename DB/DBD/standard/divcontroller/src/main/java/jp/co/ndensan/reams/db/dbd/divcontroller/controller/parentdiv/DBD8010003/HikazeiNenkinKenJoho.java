@@ -142,7 +142,7 @@ public class HikazeiNenkinKenJoho {
             if (div.getCcdKaigoShikaku().get被保険者番号().equals(非課税年金対象情報.get被保険者番号())) {
                 return ResponseData.of(div).addMessage(DbdQuestionMessages.新規登録確認.getMessage()).respond();
             }
-            if (非課税年金対象情報.get被保険者番号().isNullOrEmpty()) {
+            if (null == 非課税年金対象情報.get被保険者番号() || 非課税年金対象情報.get被保険者番号().isEmpty()) {
                 handler.画面編集制御処理(非課税年金対象情報);
                 ViewStateHolder.put(ViewStateKeys.非課税年金対象者一時テーブル, 非課税年金対象情報);
             } else {

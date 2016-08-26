@@ -25,7 +25,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class SokyuHikazeiNenkinTaishousyaDouteiFlow extends BatchFlowBase<SokyuHikazeiNenkinBatchParameter> {
 
-    public static final RString HIKAIFLOW = new RString("HikazeNenkinTaishoshaDouteiFlow");
+    /**
+     * 非課税年金対象者同定フロー
+     */
+    private static final RString HIKAIFLOW = new RString("HikazeNenkinTaishoshaDouteiFlow");
 
     private static final String 未同定データ作成 = "未同定データ作成";
     private static final String 非課税年金対象者同定 = "非課税年金対象者同定";

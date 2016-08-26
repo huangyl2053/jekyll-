@@ -49,6 +49,10 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
     private static final RString 異動日 = new RString("異動年月日");
     private static final RString 被保険番号 = new RString("被保険者番号");
     private static final RString 履歴号 = new RString("履歴番号");
+    private static final RString KEY_受給者異動送付エンティティ = new RString("受給者異動送付エンティティ");
+    private static final RString KEY_異動区分コード = new RString("異動区分コード");
+    private static final RString KEY_受給者異動事由 = new RString("受給者異動事由");
+    private static final RString KEY_証記載保険者番号 = new RString("証記載保険者番号");
     private static final int ONE = 1;
 
     /**
@@ -71,12 +75,12 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
             ShoKisaiHokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,
             int 履歴番号) throws NullPointerException {
-        requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
-        requireNonNull(異動区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("異動区分コード"));
-        requireNonNull(受給者異動事由, UrSystemErrorMessages.値がnull.getReplacedMessage("受給者異動事由"));
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage(異動日.toString()));
+        requireNonNull(異動区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_異動区分コード.toString()));
+        requireNonNull(受給者異動事由, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_受給者異動事由.toString()));
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_証記載保険者番号.toString()));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険番号.toString()));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(履歴号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -122,7 +126,7 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
                 table(DbT3001JukyushaIdoRenrakuhyo.class).
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
-                                eq(idoYMD, 異動日),
+                                eq(idoYMD, 異動年月日),
                                 eq(logicalDeletedFlag, 論理削除フラグ),
                                 eq(rirekiNo, ONE))).
                 toObject(DbT3001JukyushaIdoRenrakuhyoEntity.class);
@@ -137,8 +141,8 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
      */
     @Transaction
     public DbT3001JukyushaIdoRenrakuhyoEntity select異動区分(RString 被保険者番号, RString 異動日) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険番号.toString()));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage(異動日.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.selectSpecific(idoKubunCode).
                 table(DbT3001JukyushaIdoRenrakuhyo.class).
@@ -159,8 +163,8 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
      */
     @Transaction
     public DbT3001JukyushaIdoRenrakuhyoEntity selectAll受給者異動連絡票情報(RString 被保険者番号, RString 異動日) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険番号.toString()));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage(異動日.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT3001JukyushaIdoRenrakuhyo.class).
@@ -182,8 +186,8 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
      */
     @Transaction
     public int selectCount(RString 被保険者番号, RString 異動日) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険番号.toString()));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage(異動日.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT3001JukyushaIdoRenrakuhyo.class).
@@ -331,8 +335,8 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
      */
     @Transaction
     public DbT3001JukyushaIdoRenrakuhyoEntity select受給者訂正情報を取得(RString 被保険者番号, RString 異動年月日) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険番号.toString()));
+        requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage(異動日.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT3001JukyushaIdoRenrakuhyo.class).
@@ -353,7 +357,7 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
     @Transaction
     @Override
     public int save(DbT3001JukyushaIdoRenrakuhyoEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("受給者異動送付エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_受給者異動送付エンティティ.toString()));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);

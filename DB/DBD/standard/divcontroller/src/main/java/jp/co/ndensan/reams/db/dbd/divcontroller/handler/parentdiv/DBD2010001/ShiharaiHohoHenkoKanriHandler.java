@@ -179,12 +179,23 @@ public class ShiharaiHohoHenkoKanriHandler {
      * @param dialog支払方法変更 ダイアログ画面に追加された支払方法変更
      */
     public void 支払変更管理一覧に追加(ShiharaiHohoHenko dialog支払方法変更) {
-        dgShiharaiHohoHenkoRireki_Row row = new dgShiharaiHohoHenkoRireki_Row();
-        row.setJotai(変更状態_追加);
-        setRow(row, dialog支払方法変更);
-
+        boolean is追加行が存在 = false;
         List<dgShiharaiHohoHenkoRireki_Row> rowList = div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getDataSource();
-        rowList.add(row);
+        for (dgShiharaiHohoHenkoRireki_Row row : rowList) {
+            if (dialog支払方法変更.get証記載保険者番号().getColumnValue().equals(row.getHdnShoKisaiHokenshaNo())
+                    && dialog支払方法変更.get被保険者番号().getColumnValue().equals(row.getHdnHihokenshaNo())
+                    && dialog支払方法変更.get管理区分().equals(row.getHdnKanriKubun())
+                    && dialog支払方法変更.get履歴番号() == Integer.valueOf(row.getHdnRirekiNo().toString())) {
+                setRow(row, dialog支払方法変更);
+                is追加行が存在 = true;
+            }
+        }
+        if (!is追加行が存在) {
+            dgShiharaiHohoHenkoRireki_Row row = new dgShiharaiHohoHenkoRireki_Row();
+            row.setJotai(変更状態_追加);
+            setRow(row, dialog支払方法変更);
+            rowList.add(row);
+        }
         Collections.sort(rowList, new ShiharaiHohoHenkoKanriRowComparator());
         div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().setDataSource(rowList);
     }

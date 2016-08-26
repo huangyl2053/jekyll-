@@ -84,7 +84,7 @@ public class KyufuJissekiKoshinJohoService {
                 = new KyufuJissekiKoshinJohoIchiranCsvEntity();
         resultEntity.set保険者番号(entity.get給付実績_コントロールレコード保険者番号());
         resultEntity.set保険者名(entity.get給付実績_コントロールレコード保険者名());
-        resultEntity.setNo(連番);
+        resultEntity.setNo(new RString(連番));
         resultEntity.set入力識別番号(entity.get給付実績_入力識別番号());
         resultEntity.set入力識別名称(entity.get給付実績_入力識別名称());
         if (!RString.isNullOrEmpty(entity.get給付実績_給付実績情報作成区分コード())) {

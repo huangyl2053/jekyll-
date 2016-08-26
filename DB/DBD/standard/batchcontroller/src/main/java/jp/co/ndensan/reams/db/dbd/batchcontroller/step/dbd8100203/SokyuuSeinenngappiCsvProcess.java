@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsury
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.IBatchWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -122,16 +121,13 @@ public class SokyuuSeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinT
         PersonalData personalData = PersonalData.of(t.getShikibetsuCode(), expandedInformations);
         personalDataList.add(personalData);
 
-        AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-        IBatchWriter batchWriter = (IBatchWriter) csvWriterJunitoJugo;
-        batchWriter.close();
-        manager.spool(fileName, id);
-
     }
 
     @Override
     protected void afterExecute() {
         csvWriterJunitoJugo.close();
+        AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+        manager.spool(fileName, id);
     }
 
     private void eucCsvEntity(SokyuuSeinenngappiCsvEntity eucCsvEntity, HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {
@@ -139,11 +135,11 @@ public class SokyuuSeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinT
         eucCsvEntity.set被保険者番号(t.getHihokenshaNo().getColumnValue());
         eucCsvEntity.set年金保険者コード(t.getDtNennkinnHokenshaCode());
         eucCsvEntity.set年金保険者(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                UEXCodeShubetsu.年金保険者コード.getCodeShubetsu(), new Code(t.getDtNennkinnHokenshaCode())));
+                UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), new Code(t.getDtNennkinnHokenshaCode())));
         eucCsvEntity.set基礎年金番号(t.getDtKisoNennkinnNo());
         eucCsvEntity.set年金コード(t.getDtNennkinnCode());
         eucCsvEntity.set年金名称(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                UEXCodeShubetsu.年金保険者コード.getCodeShubetsu(), new Code(set年金(t.getNennkinnCode()))));
+                UEXCodeShubetsu.年金コード.getCodeShubetsu(), new Code(set年金(t.getDtNennkinnCode()))));
         eucCsvEntity.set識別コード(t.getShikibetsuCode().getColumnValue());
         eucCsvEntity.set世帯コード(t.getShotaiCode());
         eucCsvEntity.set対象年(t.getDtTaisyoYear());
@@ -163,7 +159,7 @@ public class SokyuuSeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinT
             return RString.EMPTY;
         } else {
             FlexibleDate date = new FlexibleDate(年月日);
-            return date.seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString();
+            return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
     }
 

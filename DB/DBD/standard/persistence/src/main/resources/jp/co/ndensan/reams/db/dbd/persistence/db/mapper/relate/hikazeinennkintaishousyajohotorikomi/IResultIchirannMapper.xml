@@ -194,7 +194,7 @@ and open the template in the editor.
     </select>
 
     <select id="get年金番号情報" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd8100201.NennkinnBanngouCsvMybatisParameter"
-            resultOrdered="true" resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable.HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity" fetchSize="500">
+            resultOrdered="true" resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable.NenkinNoCheckListTempTableEntity" fetchSize="500">
         SELECT
         "hihokenshaNo",
         "atenaKanaShimei",

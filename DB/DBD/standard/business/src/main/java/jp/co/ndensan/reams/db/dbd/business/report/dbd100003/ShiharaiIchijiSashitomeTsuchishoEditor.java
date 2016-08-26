@@ -199,7 +199,7 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
         }
 
         RString サービス種類コード = RString.EMPTY;
-        if (償還払集計情報リスト.size() > 0 && 償還払集計情報リスト.size() <= NOCOUNT_13) {
+        if (!償還払集計情報リスト.isEmpty() && 償還払集計情報リスト.size() <= NOCOUNT_13) {
             for (int i = 0; i < 償還払集計情報リスト.size(); i++) {
                 サービス種類コード = サービス種類コード.concat(償還払集計情報リスト.get(i).getサービス種類コード()).
                         concat(new RString(","));
@@ -264,15 +264,15 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
                     source.tsuchibun2 = 通知書定型文リスト.get(2);
                 }
 
-                if (null != 年度1リスト && 年度1リスト.size() > 0) {
+                if (null != 年度1リスト && !年度1リスト.isEmpty()) {
                     source.hokenGokei1 = DecimalFormatter.toコンマ区切りRString(get保険料合計(年度1リスト), 0);
                     source.entaiGokei1 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(年度1リスト), 0);
                 }
-                if (null != 年度2リスト && 年度2リスト.size() > 0) {
+                if (null != 年度2リスト && !年度2リスト.isEmpty()) {
                     source.hokenGokei2 = DecimalFormatter.toコンマ区切りRString(get保険料合計(年度2リスト), 0);
                     source.entaiGokei2 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(年度2リスト), 0);
                 }
-                if (null != 年度3リスト && 年度3リスト.size() > 0) {
+                if (null != 年度3リスト && !年度3リスト.isEmpty()) {
                     source.hokenGokei3 = DecimalFormatter.toコンマ区切りRString(get保険料合計(年度3リスト), 0);
                     source.entaiGokei3 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(年度3リスト), 0);
                 }

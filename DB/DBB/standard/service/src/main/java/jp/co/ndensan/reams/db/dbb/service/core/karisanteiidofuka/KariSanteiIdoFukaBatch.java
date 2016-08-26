@@ -674,7 +674,10 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         int 最終期 = 普徴仮算定期間.getLast().get期AsInt();
         int 仮算定期数 = 最終期 - 算定期;
         int 納付額 = 年額保険料.multiply(仮算定期数 / (納期数 - (算定期 - 1))).intValue();
-        int 期別金額 = 納付額 / 仮算定期数;
+        int 期別金額 = 0;
+        if (仮算定期数 > 0) {
+            期別金額 = 納付額 / 仮算定期数;
+        }
         RString 端数調整 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_期別端数,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         RString 仮算定端数調整有無 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定端数調整有無,
@@ -1329,7 +1332,11 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         builder.set資格取得届出年月日(資格情報.get資格取得届出年月日());
         builder.set第1号資格取得年月日(資格情報.get第1号資格取得年月日());
         builder.set被保険者区分コード(資格情報.get被保険者区分コード());
-        builder.set資格喪失事由コード(資格情報.get資格喪失事由コード());
+        if (資格情報.get資格喪失事由コード() != null) {
+            builder.set資格喪失事由コード(資格情報.get資格喪失事由コード());
+        } else {
+            builder.set資格喪失事由コード(RString.EMPTY);
+        }
         builder.set資格喪失年月日(資格情報.get資格喪失年月日());
         builder.set資格喪失届出年月日(資格情報.get資格喪失届出年月日());
         builder.set資格変更事由コード(資格情報.get資格変更事由コード());

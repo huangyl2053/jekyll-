@@ -186,7 +186,7 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
         if (申請届出者情報.get申請届出者電話番号() != null) {
             model.set電話番号(申請届出者情報.get申請届出者電話番号().value());
         }
-        //  div.getCcdShinseiTodokedesha().initialize(model);
+        div.getCcdShinseiTodokedesha().initialize(model);
         div.getCcdShujiiIryokikanAndShujiiInput().initialize(
                 今回情報.get主治医医療機関情報().get市町村コード(), 申請書管理番号, SubGyomuCode.DBD介護受給, 今回情報.get主治医医療機関情報().get主治医医療機関コード(),
                 今回情報.get主治医医療機関情報().get医療機関名称(), 今回情報.get主治医情報().get主治医コード(), 今回情報.get主治医情報().get主治医氏名());
@@ -254,9 +254,13 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             model.setJukyuShikakuHakkoDay1(受給者台帳.get受給資格証明書発行年月日１());
             model.setJukyuShikakuHakkoDay2(受給者台帳.get受給資格証明書発行年月日２());
             model.setRiyu(受給者台帳.get異動理由());
+            if (要介護認定申請情報.get認定申請区分_法令_コード() != null && !要介護認定申請情報.get認定申請区分_法令_コード().isEmpty()) {
+                model.setShinseiKubunLaw(NinteiShinseiHoreiCode.toValue(要介護認定申請情報.get認定申請区分_法令_コード().value()).get名称());
+            }
+            if (要介護認定申請情報.get認定申請区分_申請時_コード() != null && !要介護認定申請情報.get認定申請区分_申請時_コード().isEmpty()) {
+                model.setShinseiKubunShinsei(NinteiShinseiShinseijiKubunCode.toValue(要介護認定申請情報.get認定申請区分_申請時_コード().value()).get名称());
+            }
             model.setSakujoJiyuCode(convertCodeToRString(受給者台帳.get削除事由コード()));
-            model.setShinseiKubunLaw(convertCodeToRString(要介護認定申請情報.get認定申請区分_法令_コード()));
-            model.setShinseiKubunShinsei(convertCodeToRString(要介護認定申請情報.get認定申請区分_申請時_コード()));
             model.setSoshitsuDay(受給者台帳.get喪失年月日());
             model.setTorisageDay(要介護認定申請情報.get取下年月日());
             model.setToshoNinteiKikanFrom(受給者台帳.get当初認定有効開始年月日());

@@ -103,7 +103,7 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
             = new RString("DBC200081_SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohi.csv");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
     private static final RString キー_出力順 = new RString("出力順");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3063.\"hdrShoHokenshaNo\" ASC ");
+    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3063.\"shoKisaiHokenshaNo\" ASC ");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString 漢字_分 = new RString("分");
     private static final CodeShubetsu 再審査結果コード = new CodeShubetsu("0020");

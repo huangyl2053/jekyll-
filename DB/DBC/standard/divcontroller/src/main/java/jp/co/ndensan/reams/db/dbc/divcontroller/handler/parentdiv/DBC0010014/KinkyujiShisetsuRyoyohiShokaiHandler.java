@@ -400,9 +400,9 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
                 }
             }
         }
-        if (前月.equals(changge月) && flg_SetButton) {
+        if (前月.equals(changge月)) {
             div.getBtnZengetsu().setDisabled(flg_SetButton);
-        } else if (flg_SetButton) {
+        } else {
             div.getBtnJigetsu().setDisabled(flg_SetButton);
         }
         div.getDgKinkyujiShisetsuRyoyohi().setDataSource(rowList);
@@ -450,7 +450,7 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
             }
         }
         div.getDgKinkyujiShisetsuRyoyohi().setDataSource(rowList);
-        if (index + i - 1 > 0) {
+        if (0 < index + i) {
             div.getBtnMaeJigyosha().setDisabled(false);
         }
         if (index + i + 1 < 事業者番号リスト.size()) {
@@ -511,7 +511,7 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
             div.getBtnMaeJigyosha().setDisabled(true);
             div.getBtnAtoJigyosha().setDisabled(true);
             int index = get事業者番号index(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月, 実績区分コード);
-            if (index - 1 > 0) {
+            if (0 < index) {
                 div.getBtnMaeJigyosha().setDisabled(false);
             }
             if (index + 1 < 事業者番号リスト.size()) {

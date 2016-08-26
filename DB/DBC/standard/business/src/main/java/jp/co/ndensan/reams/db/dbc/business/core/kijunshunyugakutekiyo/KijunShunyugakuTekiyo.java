@@ -203,8 +203,7 @@ public class KijunShunyugakuTekiyo {
             eucEntity.set課税所得(entity.get課税所得額());
             eucEntity.set課税所得控除後(entity.get課税所得額_除後());
             eucEntity.set決定通知書発行日(set日付編集(entity.get決定通知書発行日()));
-            //TODO QA1852 削除データの編集元を確認
-            //eucEntity.set削除データ(entity.get削除データ());
+            eucEntity.set削除データ(RString.EMPTY);
         }
         return eucEntity;
     }
@@ -330,8 +329,7 @@ public class KijunShunyugakuTekiyo {
             eucEntity.set課税所得(entity.get課税所得額());
             eucEntity.set課税所得控除後(entity.get課税所得額_除後());
             eucEntity.set決定通知書発行日(set日付編集(entity.get決定通知書発行日()));
-            //TODO QA1852 削除データの編集元を確認
-            //eucEntity.set削除データ(entity.get削除データ());
+            eucEntity.set削除データ(RString.EMPTY);
         }
         return eucEntity;
     }

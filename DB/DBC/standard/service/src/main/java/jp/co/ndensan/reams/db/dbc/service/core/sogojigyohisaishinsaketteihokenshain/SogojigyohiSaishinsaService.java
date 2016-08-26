@@ -176,6 +176,7 @@ public class SogojigyohiSaishinsaService {
      * @param outOrder IOutputOrder
      * @param 処理年月 FlexibleYearMonth
      * @param 通番 int
+     * @param 集計flg boolean
      * @return SogojigyohiSaishinsaKetteiHokenshaInItem
      */
     public SogojigyohiSaishinsaKetteiHokenshaInItem setItem(SogojigyohiSaishinsaKetteiHokenshaInEntity entity,

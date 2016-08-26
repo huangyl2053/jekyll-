@@ -46,7 +46,7 @@ public class KyufuKanrihyoTorikomiKekkaIchiranBodyEditor implements IKyufuKanrih
     private static final int 字数_20 = 10;
     private static final RString から = new RString("～");
     private static final RString 居宅サービス計画作成区分コード_自己作成 = new RString("2");
-    private static final RString 備考_支援事業者未登録 = new RString("2");
+    private static final RString 備考_支援事業者未登録 = new RString("支援事業者未登録");
     private static final FlexibleYearMonth 基準サービス提供年月 = new FlexibleYearMonth("200604");
 
     private static final RString 件数1タイトル = new RString("訪問通所");

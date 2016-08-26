@@ -49,7 +49,7 @@ public class DbWT0001HihokenshaIchijiEntity extends DbTableEntityBase<DbWT0001Hi
     @TempTableColumnOrder(10)
     private LasdecCode shichosonCode;
     @TempTableColumnOrder(11)
-    private RString KannaiKangaiKubun;
+    private RString kannaiKangaiKubun;
     @TempTableColumnOrder(12)
     private RString yubinNo;
     @TempTableColumnOrder(13)

@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiCyouHyouProcess extends BatchProcessBase<AtenaSealCreateDBZ100001Entity> {
 
+    private static final RString 現住所 = new RString("genjusho");
     private static final int 枚数_TWELVE = 12;
     private static final int 剰余_THREE = 3;
     private static final int 剰余_FOUR = 4;
@@ -48,8 +49,8 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiCyouHyouProcess
     private static final int 剰余_ELEVEN = 11;
     private static final int 剰余_ONE = 1;
     private static final int 剰余_TWO = 2;
-    private static final RString KAKKORIGHT = new RString(")");
-    private static final RString KAKKOLEFT = new RString("(");
+    private static final RString KAKKORIGHT = new RString("）");
+    private static final RString KAKKOLEFT = new RString("（");
     private static final RString ADDRESSEE = new RString("宛名シール");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.atenasealcreate.IAtenaSealCreateDBZ100001Mapper.getEntityListFour");
@@ -167,12 +168,18 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiCyouHyouProcess
         business.setGyoseiku(listDBZ100001.get(0).get行政区());
         business.setJushoText(listDBZ100001.get(0).get住所());
         if (processParamter.isIskatagaki()) {
-            business.setKatagakiSmall2(listDBZ100001.get(0).get方書());
-            business.setKatagakiSmall1(listDBZ100001.get(0).get方書());
+            if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+                business.setKatagakiSmall1(listDBZ100001.get(0).get方書());
+            } else {
+                business.setKatagakiSmall2(listDBZ100001.get(0).get方書());
+            }
         }
         business.setDainoKubunMei(RString.EMPTY);
-        business.setShimeiSmall2(listDBZ100001.get(0).get氏名());
-        business.setShimeiSmall1(listDBZ100001.get(0).get氏名());
+        if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+            business.setShimeiSmall1(listDBZ100001.get(0).get氏名());
+        } else {
+            business.setShimeiSmall2(listDBZ100001.get(0).get氏名());
+        }
         business.setSamabunShimeiSmall2(processParamter.getKeishou());
         business.setSamabunShimeiSmall1(processParamter.getKeishou());
         business.setKakkoLeft2(KAKKOLEFT);
@@ -196,12 +203,18 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiCyouHyouProcess
         business.setGyoseiku(listDBZ100001.get(i).get行政区());
         business.setJushoText(listDBZ100001.get(i).get住所());
         if (processParamter.isIskatagaki()) {
-            business.setKatagakiSmall2(listDBZ100001.get(i).get方書());
-            business.setKatagakiSmall1(listDBZ100001.get(i).get方書());
+            if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+                business.setKatagakiSmall1(listDBZ100001.get(i).get方書());
+            } else {
+                business.setKatagakiSmall2(listDBZ100001.get(i).get方書());
+            }
         }
         business.setDainoKubunMei(RString.EMPTY);
-        business.setShimeiSmall2(listDBZ100001.get(i).get氏名());
-        business.setShimeiSmall1(listDBZ100001.get(i).get氏名());
+        if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+            business.setShimeiSmall1(listDBZ100001.get(i).get氏名());
+        } else {
+            business.setShimeiSmall2(listDBZ100001.get(i).get氏名());
+        }
         business.setSamabunShimeiSmall2(processParamter.getKeishou());
         business.setSamabunShimeiSmall1(processParamter.getKeishou());
         business.setKakkoLeft2(KAKKOLEFT);
@@ -228,12 +241,18 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiCyouHyouProcess
         business.setGyoseiku1(listDBZ100001.get(i).get行政区());
         business.setJushoText1(listDBZ100001.get(i).get住所());
         if (processParamter.isIskatagaki()) {
-            business.setKatagakiSmall4(listDBZ100001.get(i).get方書());
-            business.setKatagakiSmall3(listDBZ100001.get(i).get方書());
+            if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+                business.setKatagakiSmall3(listDBZ100001.get(i).get方書());
+            } else {
+                business.setKatagakiSmall4(listDBZ100001.get(i).get方書());
+            }
         }
         business.setDainoKubunMei1(RString.EMPTY);
-        business.setShimeiSmall4(listDBZ100001.get(i).get氏名());
-        business.setShimeiSmall3(listDBZ100001.get(i).get氏名());
+        if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+            business.setShimeiSmall3(listDBZ100001.get(i).get氏名());
+        } else {
+            business.setShimeiSmall4(listDBZ100001.get(i).get氏名());
+        }
         business.setSamabunShimeiSmall4(processParamter.getKeishou());
         business.setSamabunShimeiSmall3(processParamter.getKeishou());
         business.setKakkoLeft4(KAKKOLEFT);
@@ -260,12 +279,18 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiCyouHyouProcess
         business.setGyoseiku2(listDBZ100001.get(i).get行政区());
         business.setJushoText2(listDBZ100001.get(i).get住所());
         if (processParamter.isIskatagaki()) {
-            business.setKatagakiSmall6(listDBZ100001.get(i).get方書());
-            business.setKatagakiSmall5(listDBZ100001.get(i).get方書());
+            if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+                business.setKatagakiSmall5(listDBZ100001.get(i).get方書());
+            } else {
+                business.setKatagakiSmall6(listDBZ100001.get(i).get方書());
+            }
         }
         business.setDainoKubunMei3(RString.EMPTY);
-        business.setShimeiSmall6(listDBZ100001.get(i).get氏名());
-        business.setShimeiSmall5(listDBZ100001.get(i).get氏名());
+        if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+            business.setShimeiSmall5(listDBZ100001.get(i).get氏名());
+        } else {
+            business.setShimeiSmall6(listDBZ100001.get(i).get氏名());
+        }
         business.setSamabunShimeiSmall6(processParamter.getKeishou());
         business.setSamabunShimeiSmall5(processParamter.getKeishou());
         business.setKakkoLeft6(KAKKOLEFT);
@@ -292,12 +317,18 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiCyouHyouProcess
         business.setGyoseiku3(listDBZ100001.get(i).get行政区());
         business.setJushoText3(listDBZ100001.get(i).get住所());
         if (processParamter.isIskatagaki()) {
-            business.setKatagakiSmall8(listDBZ100001.get(i).get方書());
-            business.setKatagakiSmall7(listDBZ100001.get(i).get方書());
+            if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+                business.setKatagakiSmall7(listDBZ100001.get(i).get方書());
+            } else {
+                business.setKatagakiSmall8(listDBZ100001.get(i).get方書());
+            }
         }
         business.setDainoKubunMei3(RString.EMPTY);
-        business.setShimeiSmall8(listDBZ100001.get(i).get氏名());
-        business.setShimeiSmall7(listDBZ100001.get(i).get氏名());
+        if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+            business.setShimeiSmall7(listDBZ100001.get(i).get氏名());
+        } else {
+            business.setShimeiSmall8(listDBZ100001.get(i).get氏名());
+        }
         business.setSamabunShimeiSmall8(processParamter.getKeishou());
         business.setSamabunShimeiSmall7(processParamter.getKeishou());
         business.setKakkoLeft8(KAKKOLEFT);
@@ -324,12 +355,18 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiCyouHyouProcess
         business.setGyoseiku4(listDBZ100001.get(i).get行政区());
         business.setJushoText4(listDBZ100001.get(i).get住所());
         if (processParamter.isIskatagaki()) {
-            business.setKatagakiSmall10(listDBZ100001.get(i).get方書());
-            business.setKatagakiSmall9(listDBZ100001.get(i).get方書());
+            if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+                business.setKatagakiSmall9(listDBZ100001.get(i).get方書());
+            } else {
+                business.setKatagakiSmall10(listDBZ100001.get(i).get方書());
+            }
         }
         business.setDainoKubunMei4(RString.EMPTY);
-        business.setShimeiSmall10(listDBZ100001.get(i).get氏名());
-        business.setShimeiSmall9(listDBZ100001.get(i).get氏名());
+        if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+            business.setShimeiSmall9(listDBZ100001.get(i).get氏名());
+        } else {
+            business.setShimeiSmall10(listDBZ100001.get(i).get氏名());
+        }
         business.setSamabunShimeiSmall10(processParamter.getKeishou());
         business.setSamabunShimeiSmall9(processParamter.getKeishou());
         business.setKakkoLeft10(KAKKOLEFT);
@@ -356,12 +393,18 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiCyouHyouProcess
         business.setGyoseiku5(listDBZ100001.get(i).get行政区());
         business.setJushoText5(listDBZ100001.get(i).get住所());
         if (processParamter.isIskatagaki()) {
-            business.setKatagakiSmall12(listDBZ100001.get(i).get方書());
-            business.setKatagakiSmall11(listDBZ100001.get(i).get方書());
+            if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+                business.setKatagakiSmall11(listDBZ100001.get(i).get方書());
+            } else {
+                business.setKatagakiSmall12(listDBZ100001.get(i).get方書());
+            }
         }
         business.setDainoKubunMei5(RString.EMPTY);
-        business.setShimeiSmall12(listDBZ100001.get(i).get氏名());
-        business.setShimeiSmall11(listDBZ100001.get(i).get氏名());
+        if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+            business.setShimeiSmall11(listDBZ100001.get(i).get氏名());
+        } else {
+            business.setShimeiSmall12(listDBZ100001.get(i).get氏名());
+        }
         business.setSamabunShimeiSmall12(processParamter.getKeishou());
         business.setSamabunShimeiSmall11(processParamter.getKeishou());
         business.setKakkoLeft12(KAKKOLEFT);
@@ -388,12 +431,18 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiCyouHyouProcess
         business.setGyoseiku6(listDBZ100001.get(i).get行政区());
         business.setJushoText6(listDBZ100001.get(i).get住所());
         if (processParamter.isIskatagaki()) {
-            business.setKatagakiSmall14(listDBZ100001.get(i).get方書());
-            business.setKatagakiSmall13(listDBZ100001.get(i).get方書());
+            if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+                business.setKatagakiSmall13(listDBZ100001.get(i).get方書());
+            } else {
+                business.setKatagakiSmall14(listDBZ100001.get(i).get方書());
+            }
         }
         business.setDainoKubunMei6(RString.EMPTY);
-        business.setShimeiSmall14(listDBZ100001.get(i).get氏名());
-        business.setShimeiSmall13(listDBZ100001.get(i).get氏名());
+        if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+            business.setShimeiSmall13(listDBZ100001.get(i).get氏名());
+        } else {
+            business.setShimeiSmall14(listDBZ100001.get(i).get氏名());
+        }
         business.setSamabunShimeiSmall14(processParamter.getKeishou());
         business.setSamabunShimeiSmall13(processParamter.getKeishou());
         business.setKakkoLeft14(KAKKOLEFT);
@@ -420,12 +469,18 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiCyouHyouProcess
         business.setGyoseiku7(listDBZ100001.get(i).get行政区());
         business.setJushoText7(listDBZ100001.get(i).get住所());
         if (processParamter.isIskatagaki()) {
-            business.setKatagakiSmall16(listDBZ100001.get(i).get方書());
-            business.setKatagakiSmall15(listDBZ100001.get(i).get方書());
+            if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+                business.setKatagakiSmall15(listDBZ100001.get(i).get方書());
+            } else {
+                business.setKatagakiSmall16(listDBZ100001.get(i).get方書());
+            }
         }
         business.setDainoKubunMei7(RString.EMPTY);
-        business.setShimeiSmall16(listDBZ100001.get(i).get氏名());
-        business.setShimeiSmall15(listDBZ100001.get(i).get氏名());
+        if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+            business.setShimeiSmall15(listDBZ100001.get(i).get氏名());
+        } else {
+            business.setShimeiSmall16(listDBZ100001.get(i).get氏名());
+        }
         business.setSamabunShimeiSmall16(processParamter.getKeishou());
         business.setSamabunShimeiSmall15(processParamter.getKeishou());
         business.setKakkoLeft18(KAKKOLEFT);
@@ -452,12 +507,18 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiCyouHyouProcess
         business.setGyoseiku8(listDBZ100001.get(i).get行政区());
         business.setJushoText8(listDBZ100001.get(i).get住所());
         if (processParamter.isIskatagaki()) {
-            business.setKatagakiSmall18(listDBZ100001.get(i).get方書());
-            business.setKatagakiSmall17(listDBZ100001.get(i).get方書());
+            if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+                business.setKatagakiSmall17(listDBZ100001.get(i).get方書());
+            } else {
+                business.setKatagakiSmall18(listDBZ100001.get(i).get方書());
+            }
         }
         business.setDainoKubunMei8(RString.EMPTY);
-        business.setShimeiSmall18(listDBZ100001.get(i).get氏名());
-        business.setShimeiSmall17(listDBZ100001.get(i).get氏名());
+        if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+            business.setShimeiSmall17(listDBZ100001.get(i).get氏名());
+        } else {
+            business.setShimeiSmall18(listDBZ100001.get(i).get氏名());
+        }
         business.setSamabunShimeiSmall18(processParamter.getKeishou());
         business.setSamabunShimeiSmall17(processParamter.getKeishou());
         business.setKakkoLeft18(KAKKOLEFT);
@@ -484,12 +545,18 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiCyouHyouProcess
         business.setGyoseiku9(listDBZ100001.get(i).get行政区());
         business.setJushoText9(listDBZ100001.get(i).get住所());
         if (processParamter.isIskatagaki()) {
-            business.setKatagakiSmall20(listDBZ100001.get(i).get方書());
-            business.setKatagakiSmall19(listDBZ100001.get(i).get方書());
+            if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+                business.setKatagakiSmall19(listDBZ100001.get(i).get方書());
+            } else {
+                business.setKatagakiSmall20(listDBZ100001.get(i).get方書());
+            }
         }
         business.setDainoKubunMei9(RString.EMPTY);
-        business.setShimeiSmall20(listDBZ100001.get(i).get氏名());
-        business.setShimeiSmall19(listDBZ100001.get(i).get氏名());
+        if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+            business.setShimeiSmall19(listDBZ100001.get(i).get氏名());
+        } else {
+            business.setShimeiSmall20(listDBZ100001.get(i).get氏名());
+        }
         business.setSamabunShimeiSmall20(processParamter.getKeishou());
         business.setSamabunShimeiSmall19(processParamter.getKeishou());
         business.setKakkoLeft20(KAKKOLEFT);
@@ -516,12 +583,18 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiCyouHyouProcess
         business.setGyoseiku10(listDBZ100001.get(i).get行政区());
         business.setJushoText10(listDBZ100001.get(i).get住所());
         if (processParamter.isIskatagaki()) {
-            business.setKatagakiSmall22(listDBZ100001.get(i).get方書());
-            business.setKatagakiSmall21(listDBZ100001.get(i).get方書());
+            if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+                business.setKatagakiSmall21(listDBZ100001.get(i).get方書());
+            } else {
+                business.setKatagakiSmall22(listDBZ100001.get(i).get方書());
+            }
         }
         business.setDainoKubunMei10(RString.EMPTY);
-        business.setShimeiSmall22(listDBZ100001.get(i).get氏名());
-        business.setShimeiSmall21(listDBZ100001.get(i).get氏名());
+        if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+            business.setShimeiSmall21(listDBZ100001.get(i).get氏名());
+        } else {
+            business.setShimeiSmall22(listDBZ100001.get(i).get氏名());
+        }
         business.setSamabunShimeiSmall22(processParamter.getKeishou());
         business.setSamabunShimeiSmall21(processParamter.getKeishou());
         business.setKakkoLeft22(KAKKOLEFT);
@@ -548,12 +621,18 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiCyouHyouProcess
         business.setGyoseiku11(listDBZ100001.get(i).get行政区());
         business.setJushoText11(listDBZ100001.get(i).get住所());
         if (processParamter.isIskatagaki()) {
-            business.setKatagakiSmall24(listDBZ100001.get(i).get方書());
-            business.setKatagakiSmall23(listDBZ100001.get(i).get方書());
+            if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+                business.setKatagakiSmall23(listDBZ100001.get(i).get方書());
+            } else {
+                business.setKatagakiSmall24(listDBZ100001.get(i).get方書());
+            }
         }
         business.setDainoKubunMei11(RString.EMPTY);
-        business.setShimeiSmall24(listDBZ100001.get(i).get氏名());
-        business.setShimeiSmall23(listDBZ100001.get(i).get氏名());
+        if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
+            business.setShimeiSmall23(listDBZ100001.get(i).get氏名());
+        } else {
+            business.setShimeiSmall24(listDBZ100001.get(i).get氏名());
+        }
         business.setSamabunShimeiSmall24(processParamter.getKeishou());
         business.setSamabunShimeiSmall23(processParamter.getKeishou());
         business.setKakkoLeft24(KAKKOLEFT);

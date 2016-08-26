@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc2000022.FutanWariaiSo
 import jp.co.ndensan.reams.db.dbc.service.core.futanwariai.RiyoshaFutanWariaiSokujiKouseiFinder;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariai;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiKonkyo;
+import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiKonkyoBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisaiBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisaiIdentifier;
@@ -91,7 +92,14 @@ public class DBC2000022PanelAll {
             ViewStateHolder.put(ViewStateKeys.利用者負担割合, new RiyoshaFutanWariai(判定結果.get利用者負担割合entity()));
             List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細list = new ArrayList<>();
             for (int i = 0; i < 判定結果.get利用者負担割合明細list().size(); i++) {
-                利用者負担割合明細list.add(new RiyoshaFutanWariaiMeisai(判定結果.get利用者負担割合明細list().get(i)));
+                RiyoshaFutanWariaiMeisai meisai = new RiyoshaFutanWariaiMeisai(判定結果.get利用者負担割合明細list().get(i));
+                RString 資格区分 = 判定結果.get利用者負担割合明細list().get(i).getShikakuKubun();
+                if (資格区分 != null) {
+                    RiyoshaFutanWariaiMeisaiBuilder meisaiBuilder = meisai.createBuilderForEdit();
+                    meisaiBuilder.set資格区分(資格区分.padZeroToLeft(2));
+                    meisai = meisaiBuilder.build();
+                }
+                利用者負担割合明細list.add(meisai);
             }
             ViewStateHolder.put(ViewStateKeys.利用者負担割合明細,
                     new FutanWariaiSokujiKouseiHolder(利用者負担割合明細list));
@@ -321,22 +329,36 @@ public class DBC2000022PanelAll {
         if (DBC2000022StateName.新規.getName().equals(処理モード)) {
             RiyoshaFutanWariaiHanteiManagerResult 判定結果
                     = ViewStateHolder.get(ViewStateKeys.判定結果, RiyoshaFutanWariaiHanteiManagerResult.class);
+            利用者負担割合 = getHandler(div).update利用者負担割合情報(利用者負担割合, 処理モード);
             List<RiyoshaFutanWariaiKonkyo> 利用者負担割合根拠list = new ArrayList<>();
             for (int i = 0; i < 判定結果.get利用者負担割合根拠list().size(); i++) {
                 判定結果.get利用者負担割合根拠list().get(i).setState(EntityDataState.Added);
-                利用者負担割合根拠list.add(new RiyoshaFutanWariaiKonkyo(判定結果.get利用者負担割合根拠list().get(i)));
+                RiyoshaFutanWariaiKonkyo 利用者負担割合根拠
+                        = new RiyoshaFutanWariaiKonkyo(判定結果.get利用者負担割合根拠list().get(i));
+                RiyoshaFutanWariaiKonkyoBuilder 利用者負担割合根拠builder = 利用者負担割合根拠.createBuilderForEdit();
+                利用者負担割合根拠builder.set履歴番号(利用者負担割合.get履歴番号());
+                利用者負担割合根拠builder.set枝番号(i + 1);
+                利用者負担割合根拠 = 利用者負担割合根拠builder.build();
+                利用者負担割合根拠list.add(利用者負担割合根拠);
             }
-            getHandler(div).update利用者負担割合情報(利用者負担割合, 処理モード);
-            利用者負担割合.toEntity().setState(EntityDataState.Added);
+
+            List<RiyoshaFutanWariaiMeisai> 明細list = new ArrayList<>();
+            int 枝番 = 1;
             for (RiyoshaFutanWariaiMeisai 明細 : holder.get利用者負担割合明細()) {
-                明細.toEntity().setState(EntityDataState.Added);
+                RiyoshaFutanWariaiMeisaiBuilder builder = 明細.createBuilderForEdit();
+                builder.set履歴番号(利用者負担割合.get履歴番号());
+                builder.set枝番号(枝番);
+                明細 = builder.build();
+                明細.added();
+                明細list.add(明細);
+                枝番 = 枝番 + 1;
             }
             getHandler(div).onClick_btnUpdate(資格対象者.get識別コード(),
                     利用者負担割合,
-                    holder.get利用者負担割合明細(),
+                    明細list,
                     利用者負担割合根拠list);
         } else {
-            getHandler(div).update利用者負担割合情報(利用者負担割合, 処理モード);
+            利用者負担割合 = getHandler(div).update利用者負担割合情報(利用者負担割合, 処理モード);
             ViewStateHolder.put(ViewStateKeys.利用者負担割合, 利用者負担割合);
             ValidationMessageControlPairs validPairs1 = getCheckHandler(div).枝番間期間チェック();
             if (validPairs1.iterator().hasNext()) {

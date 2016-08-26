@@ -91,7 +91,6 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
     private final RString 対象外 = new RString("対象外");
     private static final Code CODE_0003 = new Code("0003");
     private static final RString KEY0 = new RString("key0");
-    private static final RString KEY_1 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -367,8 +366,8 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
             div.getDdlNinteiKubun().setDisabled(!is承認する);
             div.getDdlNinteiNaiyo().setDisabled(!is承認する);
         }
-        div.getTxtHiShoninRiyu().setDisabled(is申請メニュー);
-        div.getBtnHiShoninRiyu().setDisabled(is申請メニュー);
+        div.getTxtHiShoninRiyu().setDisabled(is申請メニュー || is承認する);
+        div.getBtnHiShoninRiyu().setDisabled(is申請メニュー || is承認する);
     }
 
     /**
