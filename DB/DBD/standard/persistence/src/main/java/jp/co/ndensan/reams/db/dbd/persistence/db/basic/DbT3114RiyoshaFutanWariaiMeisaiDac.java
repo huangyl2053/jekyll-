@@ -22,7 +22,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
@@ -141,6 +143,7 @@ public class DbT3114RiyoshaFutanWariaiMeisaiDac implements ISaveable<DbT3114Riyo
                 where(and(
                                 eq(nendo, 年度),
                                 eq(hihokenshaNo, 被保険者番号))).
+                order(by(rirekiNo, Order.DESC)).
                 toList(DbT3114RiyoshaFutanWariaiMeisaiEntity.class);
     }
 }

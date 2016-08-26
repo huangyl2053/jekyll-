@@ -55,7 +55,8 @@ public class JigyoKogakuServiceShikyuShinseishoOutputProcess extends BatchProces
 
     private RString 認証者名;
     private RString 注意文;
-    private int count;
+    private int count1;
+    private int count2;
 
     @BatchWriter
     private BatchReportWriter<KogakuJigyoShikyuShinseishoSource> shinseishoBatchReportWriter;
@@ -66,7 +67,8 @@ public class JigyoKogakuServiceShikyuShinseishoOutputProcess extends BatchProces
 
     @Override
     protected void initialize() {
-        count = 1;
+        count1 = 1;
+        count2 = 1;
         Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, 保険者印);
         認証者名 = 認証者.get市町村付与名称(AssociationFinderFactory.createInstance().getAssociation());
         IOutputOrder 出力順 = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBC介護給付,
@@ -106,22 +108,23 @@ public class JigyoKogakuServiceShikyuShinseishoOutputProcess extends BatchProces
             param.set注意文(注意文);
             param.set帳票出力対象データ(entity);
             param.set認証者役職名(認証者名);
-            param.set連番(new RString(count));
+            param.set連番(new RString(count1));
             param.setIs金融機関表示(parameter.isKinyuKikanHyoji());
 
             KogakuJigyoShikyuShinseishoYuchoReport report = new KogakuJigyoShikyuShinseishoYuchoReport(param);
             report.writeBy(yuchoReportSourceWriter);
+            count1 = count1 + 1;
         } else {
             KogakuJigyoShikyuShinseishoEntity param = new KogakuJigyoShikyuShinseishoEntity();
             param.setシステム日付(RDate.getNowDate());
             param.set申請情報帳票発行一時(entity);
             param.set認証者役職名(認証者名);
-            param.set連番(new RString(count));
+            param.set連番(new RString(count2));
             param.set注意文(注意文);
 
             KogakuJigyoShikyuShinseishoReport report = new KogakuJigyoShikyuShinseishoReport(param);
             report.writeBy(shinseishoReportSourceWriter);
+            count2 = count2 + 1;
         }
-        count = count + 1;
     }
 }

@@ -223,17 +223,20 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
             履歴番号 = 1;
         }
         ShoKofuKaishu shoKofuKaishu = new ShoKofuKaishu(資格対象者.get被保険者番号(), 交付証種類, 履歴番号);
+        RString 終了日2 = div.getPanelShutsuryokuNaiyo().getLbl1wariShuryoYmd().getText();
+        RString 終了日1 = div.getPanelShutsuryokuNaiyo().getLbl2wariShuryoYmd().getText();
 
         shoKofuKaishu = shoKofuKaishu.createBuilderForEdit().set被保険者番号(資格対象者.get被保険者番号())
                 .set交付証種類(交付証種類).set履歴番号(shoKofuKaishu.get履歴番号() + 1)
                 .set市町村コード(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード())
                 .set識別コード(資格対象者.get識別コード())
                 .set交付年月日(new FlexibleDate(div.getPanelHakko().getTxtKofubi().getValue().toDateString()))
-                .set有効期限(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl1wariShuryoYmd().getText()))
+                .set有効期限(new FlexibleDate(終了日2 == null ? 終了日1 : 終了日2))
                 .set交付事由(div.getPanelHakko().getDdlKofuJiyu().getSelectedKey())
                 .set交付理由(RString.EMPTY)
                 .set回収年月日(new FlexibleDate(RString.EMPTY))
                 .set回収事由(RString.EMPTY)
+                .set回収理由(RString.EMPTY)
                 .set単票発行有無フラグ(TRUE)
                 .set発行処理日時(YMDHMS.now())
                 .set新様式印書済区分コード(RString.EMPTY)

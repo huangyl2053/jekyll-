@@ -250,12 +250,7 @@ public class RiyoshaFutanWariai
      */
     public RiyoshaFutanWariai modified() {
         DbT3113RiyoshaFutanWariaiEntity modifiedEntity = this.toEntity();
-        if (modifiedEntity.getState() != EntityDataState.Added) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        } else {
-            //TODO メッセージの検討
-            throw new IllegalStateException(UrErrorMessages.不正.toString());
-        }
+        modifiedEntity.setState(EntityDataState.Modified);
         return new RiyoshaFutanWariai(modifiedEntity, id);
     }
 

@@ -5,7 +5,7 @@ Uz._LoadInOrder.prototype.requestSequenceCallbackHandler = function(eventName){
           if(eventName === "btnSave_onClick_btnSave"){
             var $span = $(event.target);
             if ($span.text() === "はい" && $("#hdnFlag_core").val() === "1") {
-                if ($("#chkJukyushaIdoRearakuhyoHakkou_core").is(':checked')) {
+                if ($("#chkJukyushaIdoRearakuhyoHakkou_key0").is(':checked')) {
                     $("#btnHakkou").click();
                 }
             }

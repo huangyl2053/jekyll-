@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000022;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.FutanWariaiSokujiKouseiHolder;
 import jp.co.ndensan.reams.db.dbc.business.core.futanwariai.FutanWariaiSokujiKouseiResult;
@@ -625,15 +623,16 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
      * 利用者負担割合を設定します。
      *
      * @param 利用者負担割合 RiyoshaFutanWariai
+     *
+     * @return RiyoshaFutanWariai
      */
-    public void 利用者負担割合編集(RiyoshaFutanWariai 利用者負担割合) {
+    public RiyoshaFutanWariai 利用者負担割合編集(RiyoshaFutanWariai 利用者負担割合) {
         RiyoshaFutanWariaiBuilder 利用者負担割合builder = 利用者負担割合.createBuilderForEdit();
         利用者負担割合builder.set発行区分(div.getDdlHakkoKubun().getSelectedKey());
         利用者負担割合builder.set発行日(new FlexibleDate(div.getTxtHakkobi().getValue().toString()));
         利用者負担割合builder.set交付日(new FlexibleDate(div.getTxtKofubi().getValue().toString()));
-        利用者負担割合builder.set論理削除フラグ(true);
         利用者負担割合 = 利用者負担割合builder.build();
-        利用者負担割合.modified();
+        return 利用者負担割合.modified();
     }
 
     /**
@@ -694,8 +693,12 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             RiyoshaFutanWariaiMeisaiBuilder builderModified = 明細entity.createBuilderForEdit();
             builderModified.set資格区分(div.getDdlShikaku().getSelectedKey());
             builderModified.set負担割合区分(div.getDdlFutanWariai().getSelectedKey());
-            builderModified.set有効開始日(new FlexibleDate(div.getTxtTekiyoKaishibi().getValue().toDateString()));
-            builderModified.set有効終了日(new FlexibleDate(div.getTxtTekiyoShuryobi().getValue().toDateString()));
+            if (div.getTxtTekiyoKaishibi().getValue() != null) {
+                builderModified.set有効開始日(new FlexibleDate(div.getTxtTekiyoKaishibi().getValue().toDateString()));
+            }
+            if (div.getTxtTekiyoShuryobi().getValue() != null) {
+                builderModified.set有効終了日(new FlexibleDate(div.getTxtTekiyoShuryobi().getValue().toDateString()));
+            }
             builderModified.set本人合計所得金額(div.getTxtHonninGokeiShotoku().getValue());
             builderModified.set世帯１号被保険者数(div.getTxtSetaiinsu().getValue().intValue());
             builderModified.set年金収入合計(div.getTxtNenkinShunyuGokei().getValue());
@@ -713,8 +716,12 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             RiyoshaFutanWariaiMeisaiBuilder builder = new利用者負担割合明細.createBuilderForEdit();
             builder.set資格区分(div.getDdlShikaku().getSelectedKey());
             builder.set負担割合区分(div.getDdlFutanWariai().getSelectedKey());
-            builder.set有効開始日(new FlexibleDate(div.getTxtTekiyoKaishibi().getValue().toDateString()));
-            builder.set有効終了日(new FlexibleDate(div.getTxtTekiyoShuryobi().getValue().toDateString()));
+            if (div.getTxtTekiyoKaishibi().getValue() != null) {
+                builder.set有効開始日(new FlexibleDate(div.getTxtTekiyoKaishibi().getValue().toDateString()));
+            }
+            if (div.getTxtTekiyoShuryobi().getValue() != null) {
+                builder.set有効終了日(new FlexibleDate(div.getTxtTekiyoShuryobi().getValue().toDateString()));
+            }
             builder.set本人合計所得金額(div.getTxtHonninGokeiShotoku().getValue());
             builder.set世帯１号被保険者数(div.getTxtSetaiinsu().getValue().intValue());
             builder.set年金収入合計(div.getTxtNenkinShunyuGokei().getValue());
@@ -722,41 +729,9 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             builder.set更正理由(div.getTxtBiko().getValue());
             builder.set世帯コード(new SetaiCode(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getHdnTxtSetaiCode()));
             new利用者負担割合明細 = builder.build();
-            new利用者負担割合明細.toEntity().setState(EntityDataState.Added);
+            new利用者負担割合明細.added();
             holder.addRiyoshaFutanWariaiMeisai(new利用者負担割合明細);
         }
-        sort利用者負担割合明細(holder.get利用者負担割合明細());
-
-        List<dgFutanWariai_Row> dataGridList = new ArrayList<>();
-        for (RiyoshaFutanWariaiMeisai 明細 : holder.get利用者負担割合明細()) {
-            dgFutanWariai_Row rowData = new dgFutanWariai_Row();
-            rowData.setNendo(明細.get年度().toDateString());
-            rowData.setRirekiNo(new RString(明細.get履歴番号()));
-            rowData.setEdaNo(new RString(明細.get枝番号()));
-            rowData.setShikakuCode(明細.get資格区分());
-            rowData.setFutanWariaiCode(明細.get負担割合区分());
-            rowData.setShikaku(FutanWariaiShikakuKubun.toValue(明細.get資格区分()).get名称());
-            rowData.setFutanWariai(FutanwariaiKubun.toValue(明細.get負担割合区分()).get名称());
-            FlexibleDate 適用開始日 = 明細.get有効開始日();
-            FlexibleDate 適用終了日 = 明細.get有効終了日();
-            if (適用開始日 != null) {
-                rowData.getTekiyoKaishibi().setValue(new RDate(適用開始日.toString()));
-            }
-            if (適用終了日 != null) {
-                rowData.getTekiyoShuryobi().setValue(new RDate(適用終了日.toString()));
-            }
-            rowData.getGokeiShotoku().setValue(明細.get本人合計所得金額());
-            rowData.getSetaiinsu().setValue(Decimal.valueOf(明細.get世帯１号被保険者数()));
-            rowData.getNenkinShunyuGokei().setValue(明細.get年金収入合計());
-            rowData.getSonotaGokeiShotoku().setValue(明細.getその他の合計所得金額合計());
-            rowData.setBiko(明細.get更正理由());
-            rowData.setLogicalDeletedFlag(明細.is論理削除フラグ());
-            if (明細.is論理削除フラグ()) {
-                rowData.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
-            }
-            dataGridList.add(rowData);
-        }
-        div.getDgFutanWariai().setDataSource(dataGridList);
         編集項目をクリアする();
     }
 
@@ -925,22 +900,5 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
     private void 前排他キーの解除(RString 被保険者番号) {
         LockingKey 排他キー = new LockingKey(前排他キー.concat(被保険者番号));
         RealInitialLocker.release(排他キー);
-    }
-
-    private void sort利用者負担割合明細(List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細list) {
-        Collections.sort(利用者負担割合明細list, new Comparator<RiyoshaFutanWariaiMeisai>() {
-            @Override
-            public int compare(RiyoshaFutanWariaiMeisai arg0, RiyoshaFutanWariaiMeisai arg1) {
-                if (arg0.get有効開始日() != null && arg1.get有効開始日() != null
-                        && arg0.get有効終了日() != null && arg1.get有効終了日() != null) {
-                    if (arg0.get有効開始日().compareTo(arg1.get有効開始日()) == 0) {
-                        return arg0.get有効終了日().compareTo(arg1.get有効終了日());
-                    } else {
-                        return arg0.get有効開始日().compareTo(arg1.get有効開始日());
-                    }
-                }
-                return 0;
-            }
-        });
     }
 }
