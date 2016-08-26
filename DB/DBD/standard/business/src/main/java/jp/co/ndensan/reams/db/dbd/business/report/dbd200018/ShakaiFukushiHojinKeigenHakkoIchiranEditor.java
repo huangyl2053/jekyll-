@@ -153,24 +153,20 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
             KetteiKubun 決定 = this.帳票情報.get決定();
             KetteiKubun 決定区分承認 = KetteiKubun.承認する;
             KetteiKubun 決定区分承認しない = KetteiKubun.承認しない;
+            RString 居宅 = RString.EMPTY;
             boolean 居宅サービス限定 = this.帳票情報.is居宅サービス限定();
             if (決定.equals(決定区分承認) && 居宅サービス限定) {
-                source.list_13 = new RString("宅");
-            } else if (決定.equals(決定区分承認) && !居宅サービス限定) {
-                source.list_13 = RString.EMPTY;
+                居宅 = new RString("宅");
             }
             boolean 居住費食費のみ = this.帳票情報.is居住費食費のみ();
             if (決定.equals(決定区分承認) && 居住費食費のみ) {
-                source.list_13 = new RString("住");
-            } else if (決定.equals(決定区分承認) && !居住費食費のみ) {
-                source.list_13 = RString.EMPTY;
+                居宅 = 居宅.concat(new RString("住"));
             }
             boolean 旧措置者ユニット型個室のみ = this.帳票情報.is旧措置者ユニット型個室のみ();
             if (決定.equals(決定区分承認) && 旧措置者ユニット型個室のみ) {
-                source.list_13 = new RString("ユ");
-            } else if (決定.equals(決定区分承認) && !旧措置者ユニット型個室のみ) {
-                source.list_13 = RString.EMPTY;
+                居宅 = 居宅.concat(new RString("ユ"));
             }
+            source.list_13 = 居宅;
             if (決定.equals(決定区分承認しない)) {
                 source.list_13 = RString.EMPTY;
             }
