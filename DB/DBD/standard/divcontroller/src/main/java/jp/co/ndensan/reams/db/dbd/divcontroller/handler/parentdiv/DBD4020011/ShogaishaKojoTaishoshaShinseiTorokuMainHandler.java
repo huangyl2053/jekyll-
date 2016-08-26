@@ -378,7 +378,6 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
     public void onSelectByModifyButton(ShogaishaKoujoToJotai 情報と状態) {
         set申請情報エリア(情報と状態);
         一覧制御(状態_追加.equals(情報と状態.get状態()), 承認する.equals(情報と状態.get障がい書控除申請登録情報().get決定区分()));
-        div.getTxtTaishoNendo().setDisabled(true);
     }
 
     private void set申請情報エリア(ShogaishaKoujoToJotai 情報と状態) {
@@ -635,9 +634,13 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
             builder.setGemmenGengakuShinsei(get修正減免減額申請(減免減額申請));
         }
         情報と状態.set障がい書控除申請登録情報(builder.build());
-        if (情報と状態.get状態().isNullOrEmpty() || 状態_修正.equals(情報と状態.get状態()) || 状態_削除.equals(情報と状態.get状態())) {
+        if (isNullOrEmpty(情報と状態.get状態()) || 状態_修正.equals(情報と状態.get状態()) || 状態_削除.equals(情報と状態.get状態())) {
             情報と状態.set状態(状態_修正);
         }
+    }
+
+    private boolean isNullOrEmpty(RString value) {
+        return null == value || value.isEmpty();
     }
 
     private RString get認定区分Or認定内容Key(RString key) {
@@ -973,7 +976,7 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
     public boolean 変更有無チェック() {
         List<dgShinseiList_Row> rowList = div.getDgShinseiList().getDataSource();
         for (dgShinseiList_Row row : rowList) {
-            if (!row.getJotai().isNullOrEmpty()) {
+            if (!isNullOrEmpty(row.getJotai())) {
                 return true;
             }
         }
