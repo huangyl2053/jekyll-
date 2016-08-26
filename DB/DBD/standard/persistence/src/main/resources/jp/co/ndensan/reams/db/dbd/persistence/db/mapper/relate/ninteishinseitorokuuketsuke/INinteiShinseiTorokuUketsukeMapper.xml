@@ -142,8 +142,6 @@
         INNER JOIN
         rgdb."DbT1001HihokenshaDaicho" AS T1001
         ON V4001."shichosonCode" = T1001."shichosonCode"
-        AND T1001."idoYMD"=(SELECT MAX("idoYMD") FROM rgdb."DbT1001HihokenshaDaicho")
-        AND T1001."edaNo"=(SELECT MAX("edaNo") FROM rgdb."DbT1001HihokenshaDaicho")
         AND T1001."logicalDeletedFlag"=false
         LEFT JOIN rgdb."DbT4001JukyushaDaicho" T4001
         ON V4001."shichosonCode" = T4001."shichosonCode"
@@ -191,6 +189,8 @@
         OR
         (#{表示パターン }='1'
         AND V4001."shinseishoKanriNo" = #{申請書管理番号})
+        ORDER BY T1001."idoYMD" DESC,T1001."edaNo" DESC
+        Limit 1
     </select>
 
 
