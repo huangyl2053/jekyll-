@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Iryohoken
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Aug 09 09:44:03 JST 2016 
+ * Fri Aug 26 14:42:11 JST 2016 
  */
 
 
