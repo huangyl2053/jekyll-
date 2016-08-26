@@ -655,7 +655,7 @@ public class JukyushaIdoRenrakuhyoHandler {
         if (支援事業者名称 != null) {
             div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().setValue(支援事業者名称.value());
         } else {
-            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().setValue(null);
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().setValue(RString.EMPTY);
         }
 
     }
