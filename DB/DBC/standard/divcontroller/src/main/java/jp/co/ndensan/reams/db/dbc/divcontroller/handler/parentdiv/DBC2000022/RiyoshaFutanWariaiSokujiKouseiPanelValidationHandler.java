@@ -96,6 +96,43 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelValidationHandler {
     }
 
     /**
+     * 保存入力チェックです。
+     *
+     * @return validPairs
+     */
+    public ValidationMessageControlPairs 保存入力チェック() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        List<dgFutanWariai_Row> rowsData = div.getDgFutanWariai().getDataSource();
+        for (int i = 0; i < rowsData.size(); i++) {
+            if (rowsData.get(i).getTekiyoKaishibi().getValue() == null) {
+                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                        UrErrorMessages.必須, 適用開始日.toString())));
+            }
+            if (rowsData.get(i).getTekiyoShuryobi().getValue() == null) {
+                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                        UrErrorMessages.必須, 適用終了日.toString())));
+            }
+            if (rowsData.get(i).getGokeiShotoku().getValue() == null) {
+                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                        UrErrorMessages.必須, 本人合計所得.toString())));
+            }
+            if (rowsData.get(i).getSetaiinsu().getValue() == null) {
+                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                        UrErrorMessages.必須, 世帯員数１号.toString())));
+            }
+            if (rowsData.get(i).getNenkinShunyuGokei().getValue() == null) {
+                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                        UrErrorMessages.必須, 年金収入合計.toString())));
+            }
+            if (rowsData.get(i).getSonotaGokeiShotoku().getValue() == null) {
+                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                        UrErrorMessages.必須, その他の合計所得合計.toString())));
+            }
+        }
+        return validPairs;
+    }
+
+    /**
      * 妥当性チェックです。
      *
      * @return validPairs
