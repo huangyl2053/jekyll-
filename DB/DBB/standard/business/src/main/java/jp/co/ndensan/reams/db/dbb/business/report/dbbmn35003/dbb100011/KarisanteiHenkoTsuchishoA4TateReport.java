@@ -43,10 +43,10 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
     private final NinshoshaSource ninshoshaSource;
     private final CompKaigoToiawasesakiSource kaigoToiawasesakiSource;
     private final List<KarisanteiHenkoTsuchishoA4TateItem> outputItemList;
-    private final int NUM4 = 4;
-    private final int NUM8 = 8;
-    private final int NUM12 = 12;
-    private final int NUM16 = 16;
+    private static final int NUM4 = 4;
+    private static final int NUM8 = 8;
+    private static final int NUM12 = 12;
+    private static final int NUM16 = 16;
 
     /**
      * コンストラクタです。
