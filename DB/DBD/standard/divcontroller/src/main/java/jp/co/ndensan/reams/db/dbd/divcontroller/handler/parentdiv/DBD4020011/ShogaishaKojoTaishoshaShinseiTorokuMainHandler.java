@@ -125,6 +125,9 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
         div.getCcdKaigoKihon().initialize(被保険者番号);
         div.getCcdGemmenGengakuShinsei().initialize(識別コード);
         List<ShogaishaKoujoToJotai> 情報と状態List = 情報と状態初期化(申請一覧情報);
+        if (申請メニュー.equals(ResponseHolder.getMenuID())) {
+            申請情報を追加するボタン活性設定(申請一覧情報);
+        }
         div.getDgShinseiList().setDataSource(getDataSource(情報と状態List));
         div.getDdlNinchishoKoreishaJiritsudo().setDataSource(get認知症高齢者自立度DataSource());
         div.getDdlNinchishoKoreishaJiritsudo().setSelectedKey(RString.EMPTY);
@@ -140,6 +143,15 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
         AccessLogger.log(AccessLogType.照会, personalData);
         申請情報エリア非活性制御();
         return 情報と状態List;
+    }
+
+    private void 申請情報を追加するボタン活性設定(List<ShogaishaKoujo> 申請一覧情報) {
+        for (ShogaishaKoujo 申請情報 : 申請一覧情報) {
+            if (null == 申請情報.get決定年月日() || 申請情報.get決定年月日().isEmpty()) {
+                div.getBtnAddShinsei().setDisabled(true);
+                return;
+            }
+        }
     }
 
     private List<KeyValueDataSource> get認知症高齢者自立度DataSource() {
