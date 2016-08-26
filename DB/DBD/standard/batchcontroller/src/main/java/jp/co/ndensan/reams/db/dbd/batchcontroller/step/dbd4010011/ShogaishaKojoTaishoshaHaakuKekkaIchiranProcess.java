@@ -261,9 +261,23 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
             dbt4010Entity = new DbT4010GemmenGengakuShinseiEntity();
             dbt4010Entity.setShinseiRirekiNo(rirekiNo + 1);
             set減免減額申請(控除対象者データ);
-            減免減額申請ListClone.add(dbt4010Entity);
-            tableWriter.insert(dbt4010Entity);
+            if (!isRecordExists(dbt4010Entity)) {
+                減免減額申請ListClone.add(dbt4010Entity);
+                tableWriter.insert(dbt4010Entity);
+            }
         }
+    }
+
+    private boolean isRecordExists(DbT4010GemmenGengakuShinseiEntity entity) {
+        boolean state = false;
+        for (DbT4010GemmenGengakuShinseiEntity 減免減額Entity : 減免減額申請List) {
+            if (減免減額Entity.getHihokenshaNo().equals(entity.getHihokenshaNo())
+                    && (減免減額Entity.getShinseiRirekiNo() == entity.getShinseiRirekiNo())
+                    && 減免減額Entity.getShoKisaiHokenshaNo().equals(entity.getShoKisaiHokenshaNo())) {
+                state = true;
+            }
+        }
+        return state;
     }
 
     private void set履歴の途中に追加(ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity 控除対象者データ) {
