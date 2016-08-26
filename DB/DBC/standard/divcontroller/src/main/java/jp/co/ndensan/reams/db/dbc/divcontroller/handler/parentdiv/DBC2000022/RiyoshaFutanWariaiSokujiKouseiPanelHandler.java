@@ -722,7 +722,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             builder.set更正理由(div.getTxtBiko().getValue());
             builder.set世帯コード(new SetaiCode(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getHdnTxtSetaiCode()));
             new利用者負担割合明細 = builder.build();
-            new利用者負担割合明細.toEntity().setState(EntityDataState.Added);
+            new利用者負担割合明細.added();
             holder.addRiyoshaFutanWariaiMeisai(new利用者負担割合明細);
         }
         sort利用者負担割合明細(holder.get利用者負担割合明細());
@@ -801,7 +801,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             利用者負担割合 = 利用者負担割合.added();
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
-            利用者負担割合 = 利用者負担割合.modified();
+            利用者負担割合.modified();
         }
         return 利用者負担割合;
     }
