@@ -97,6 +97,8 @@ public class FutanGenndoGakuNinnteiShouProcess extends BatchProcessBase<FutanGen
                 UrControlDataFactory.createInstance().getLoginInfo().getUserId(), processParamter.get改頁出力順ID());
         if (outputOrder != null) {
             出力順 = MyBatisOrderByClauseCreator.create(FutangakuNinteiHakkoIchiranOrderKey.class, outputOrder);
+        } else {
+            出力順 = RString.EMPTY;
         }
         帳票制御共通 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御共通(帳票分類ID.getReportId());
         帳票制御汎用 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御汎用(帳票分類ID.getReportId());
