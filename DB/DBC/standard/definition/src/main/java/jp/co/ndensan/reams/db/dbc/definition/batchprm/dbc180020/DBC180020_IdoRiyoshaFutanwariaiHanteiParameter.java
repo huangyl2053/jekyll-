@@ -27,6 +27,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBC180020_IdoRiyoshaFutanwariaiHanteiParameter extends BatchParameterBase {
 
+    private static final long serialVersionUID = 1L;
     @BatchParameter(key = "taishoNendo", name = "対象年度")
     private FlexibleYear taishoNendo;
     @BatchParameter(key = "kijunbi", name = "基準日")
