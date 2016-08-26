@@ -132,7 +132,7 @@ public class GemmenJuminKihon {
         Code 減免種類コード = handler.load申請情報パネル(最新減免の情報);
         ViewStateHolder.put(ViewStateKeys.減免種類コード, 減免種類コード);
         handler.load決定情報パネル(最新減免の情報);
-        handler.load減免情報パネル(減免リスト);
+        handler.load減免情報パネル(減免リスト.get年度分賦課減免リスト());
         handler.loadパネル状態1(状況, 減免リスト.get年度分賦課減免リスト());
     }
 
@@ -331,6 +331,7 @@ public class GemmenJuminKihon {
         handler.load申請情報パネル(最新減免の情報);
         handler.load決定情報パネル(最新減免の情報);
         handler.loadパネル状態1(状況, 年度分賦課減免リスト);
+        handler.load減免情報パネル(年度分賦課減免リスト);
         handler.setRequired();
         return createResponse(div);
     }
