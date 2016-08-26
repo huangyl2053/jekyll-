@@ -239,12 +239,11 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
      * @param 導入団体クラス 導入団体クラス
      * @param outputOrder outputOrder
      * @param 通知書ページ数 通知書ページ数
-     * @param 通知書一覧ページ数 通知書一覧ページ数
      */
     public void 代行プリント送付票の出力とバッチ条件の出力(boolean csv有無,
             TsuchishoHakoProcessParameter parameter, DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通情報,
             Association 導入団体クラス,
-            IOutputOrder outputOrder, Decimal 通知書ページ数, Decimal 通知書一覧ページ数) {
+            IOutputOrder outputOrder, int 通知書ページ数) {
 
         代行プリント送付票の出力(parameter, 帳票制御共通情報, 導入団体クラス, outputOrder, 通知書ページ数);
         バッチ出力条件リストの出力(parameter, 導入団体クラス, outputOrder, csv有無, 通知書ページ数);
@@ -493,7 +492,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
      */
     private void 代行プリント送付票の出力(TsuchishoHakoProcessParameter param, DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通情報,
             Association 導入団体クラス,
-            IOutputOrder outputOrder, Decimal 通知書ページ数) {
+            IOutputOrder outputOrder, int 通知書ページ数) {
         if (!帳票制御共通情報.getDaikoPrintUmu()) {
             return;
         }
@@ -512,7 +511,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         set改頁名前(outputOrder, 改ページ項目List);
 
         List<Decimal> ページ数List = new ArrayList<>();
-        ページ数List.add(通知書ページ数);
+        ページ数List.add(new Decimal(通知書ページ数));
 
         List<RString> 抽出条件List = new ArrayList<>();
         RStringBuilder 発行日Builder = new RStringBuilder();
@@ -551,7 +550,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
      */
     private void バッチ出力条件リストの出力(TsuchishoHakoProcessParameter param, Association association,
             IOutputOrder outputOrder, boolean csv有無,
-            Decimal 通知書ページ数) {
+            int 通知書ページ数) {
 
         RString csv出力有無 = csv有無 ? あり : なし;
         RString csvファイル名 = csv有無 ? CSVファイル名 : new RString("-");
