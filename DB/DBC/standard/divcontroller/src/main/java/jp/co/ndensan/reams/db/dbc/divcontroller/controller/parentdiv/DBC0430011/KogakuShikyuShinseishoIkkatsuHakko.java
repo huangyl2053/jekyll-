@@ -84,6 +84,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
         div.getShinseishoHakkoParameters().getDdlServiceYM().setDisabled(false);
         div.getShinseishoHakkoParameters().getRadShinsaYM().clearSelectedItem();
         div.getShinseishoHakkoParameters().getRadHakushiInsatsu().clearSelectedItem();
+        // TODO QA1349
         div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setDisabled(false);
         getHandler(div).setサービス年月DDL(menuID);
         return ResponseData.of(div).respond();

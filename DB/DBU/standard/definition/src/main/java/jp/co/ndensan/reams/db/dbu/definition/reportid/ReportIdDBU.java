@@ -65,7 +65,7 @@ public enum ReportIdDBU {
     /**
      * 介護事業状況報告月報・保険給付決定状況（様式2）の帳票ID。
      */
-    DBU300021(new ReportId("DBU300021_JigyohokokuGeppoYoshiki2_1_2016"), new RString("介護事業状況報告月報・保険給付決定状況（様式2）")),
+    DBU300021(new ReportId("DBU300021_JigyohokokuGeppoYoshiki2_1_2016"), DBU300022.getReportName()),
     /**
      * 介護保険連絡票の帳票ID。
      */
@@ -129,7 +129,7 @@ public enum ReportIdDBU {
     /**
      * 介護事業状況報告月報・保険給付決定状況（様式2-7）の帳票ＩＤです。
      */
-    DBU300010(new ReportId("DBU300010_JigyohokokuCompYoshiki2_0_2"), new RString("介護事業状況報告月報・保険給付決定状況（様式2）")),
+    DBU300010(new ReportId("DBU300010_JigyohokokuCompYoshiki2_0_2"), DBU300022.getReportName()),
     /**
      * 介護事業状況報告月報（様式2-5）の帳票ＩＤです。
      */
@@ -166,15 +166,15 @@ public enum ReportIdDBU {
     /**
      * 介護事業状況報告月報・保険給付決定状況（様式2）の帳票ID。
      */
-    DBU3000211(new ReportId("DBU300021_JigyohokokuGeppoYoshiki2of1_2016"), new RString("介護事業状況報告月報・保険給付決定状況（様式2）")),
+    DBU3000211(new ReportId("DBU300021_JigyohokokuGeppoYoshiki2of1_2016"), DBU300022.getReportName()),
     /**
      * 介護事業状況報告月報・保険給付決定状況（様式2）の帳票ID。
      */
-    DBU3000221(DBU300022.reportId, new RString("介護事業状況報告月報・保険給付決定状況（様式2）")),
+    DBU3000221(DBU300022.reportId, DBU300022.getReportName()),
     /**
      * 事業状況報告年報（様式１・２　被保険者数）の帳票ID。
      */
-    DBU300101(new ReportId("DBU300101_JigyohokokuNenpoYoshiki1of1"), new RString("介護事業状況報告月報・保険給付決定状況（様式2）"));
+    DBU300101(new ReportId("DBU300101_JigyohokokuNenpoYoshiki1of1"), DBU300022.getReportName());
     private final ReportId reportId;
 
     private final RString reportName;
