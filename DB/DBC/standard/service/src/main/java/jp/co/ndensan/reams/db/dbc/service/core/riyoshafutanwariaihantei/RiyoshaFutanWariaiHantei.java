@@ -643,6 +643,11 @@ public class RiyoshaFutanWariaiHantei {
         if (now == null || before == null || 対象年度 == null) {
             return;
         }
+        if (!equalsInteger(now.getSetaiIchigouHihokenshaSu(), before.getSetaiIchigouHihokenshaSu())) {
+            now.setKoseiJiyu(KoseiJiyuType.世帯構成変更.getコード());
+            now.setYukoKaishiYMD(get有効開始日２(対象年度, now.getAtenaIdobi()));
+            return;
+        }
         if (!equalsDecimal(now.getHonninGoukeiShotokuGaku(), before.getHonninGoukeiShotokuGaku())) {
             now.setKoseiJiyu(KoseiJiyuType.本人所得更正.getコード());
             now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
@@ -653,11 +658,6 @@ public class RiyoshaFutanWariaiHantei {
                         before.getSonotanoGoukeiShotokuKingakuGoukei()))) {
             now.setKoseiJiyu(KoseiJiyuType.世帯員所得更正.getコード());
             now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
-            return;
-        }
-        if (!equalsInteger(now.getSetaiIchigouHihokenshaSu(), before.getSetaiIchigouHihokenshaSu())) {
-            now.setKoseiJiyu(KoseiJiyuType.世帯構成変更.getコード());
-            now.setYukoKaishiYMD(get有効開始日２(対象年度, now.getAtenaIdobi()));
         }
     }
 
