@@ -81,14 +81,14 @@ public class DBC120030_JukyushaKoshinKekkaInFlow extends BatchFlowBase<DBC120030
                 } else {
                     さいごファイルフラグ = false;
                 }
-                executeStep(CSVファイル取込);
-                flowEntity = getResult(KokuhorenJukyushaFlowEntity.class, new RString(CSVファイル取込),
-                        JukyushaKoshinKekkaInReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
                 if (i == 0) {
                     連番 = 0;
                 } else {
                     連番 = flowEntity.get連番();
                 }
+                executeStep(CSVファイル取込);
+                flowEntity = getResult(KokuhorenJukyushaFlowEntity.class, new RString(CSVファイル取込),
+                        JukyushaKoshinKekkaInReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
                 明細データ登録件数合算 = 明細データ登録件数合算 + flowEntity.get明細データ登録件数();
             }
             if (0 == 明細データ登録件数合算) {
