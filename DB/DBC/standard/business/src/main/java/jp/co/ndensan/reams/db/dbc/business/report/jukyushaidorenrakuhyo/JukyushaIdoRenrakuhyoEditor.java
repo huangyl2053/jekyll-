@@ -58,15 +58,17 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
     public JukyushaIdoRenrakuhyoSource edit(JukyushaIdoRenrakuhyoSource source) {
         if (entity != null) {
             source.sakuseiGG = commonEra(entity.get作成年月日());
-            source.sakuseiYY = entity.get作成年月日().wareki()
-                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.NONE).fillType(FillType.ZERO).getYear();
-            source.sakuseiMM = entity.get作成年月日().wareki()
-                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.NONE).fillType(FillType.ZERO).getMonth();
-            source.sakuseiDD = entity.get作成年月日().wareki()
-                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.NONE).fillType(FillType.ZERO).getDay();
+            if (entity.get作成年月日() != null) {
+                source.sakuseiYY = entity.get作成年月日().wareki()
+                        .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.NONE).fillType(FillType.ZERO).getYear();
+                source.sakuseiMM = entity.get作成年月日().wareki()
+                        .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.NONE).fillType(FillType.ZERO).getMonth();
+                source.sakuseiDD = entity.get作成年月日().wareki()
+                        .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.NONE).fillType(FillType.ZERO).getDay();
+            }
             source.hokenshaName = 市町村名称;
             source.shoHokenshaNo = entity.get証記載保険者番号();
             source.hihokenshaNo = entity.get被保険者番号();

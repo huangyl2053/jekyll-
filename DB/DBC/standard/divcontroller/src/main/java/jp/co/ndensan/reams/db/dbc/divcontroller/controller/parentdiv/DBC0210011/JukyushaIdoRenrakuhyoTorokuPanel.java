@@ -93,7 +93,6 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
      * @return ResponseData<SearchHihokenshaDiv>
      */
     public ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> onClick_btnSave(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
-        div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getHdnFlag().setValue(起動);
         ValidationMessageControlPairs pair
                 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo().validateCheck();
         if (pair.iterator().hasNext() && !ResponseHolder.isReRequest()) {
@@ -151,6 +150,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
         JukyushaIdoRenrakuhyoManager manager = InstanceProvider.create(JukyushaIdoRenrakuhyoManager.class);
         JukyushaIdoRenrakuhyoTorokuPanelHandler handler = getHandler(div);
         if (ZERO.equals(エラー有無)) {
+            div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getHdnFlag().setValue(起動);
             JukyushaIdoRenrakuhyo result = getDataEdit(被保険者番号, 異動日, div, manager);
             result.toEntity().setState(EntityDataState.Added);
             boolean flag = manager.save受給者異動送付(result);
