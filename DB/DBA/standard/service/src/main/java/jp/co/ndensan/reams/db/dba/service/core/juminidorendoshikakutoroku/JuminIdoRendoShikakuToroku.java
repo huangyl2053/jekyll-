@@ -384,7 +384,6 @@ public class JuminIdoRendoShikakuToroku {
         dbt1011dac.save(dbt1011Entity);
     }
 
-    // 4
     private boolean isShoriTaisho(UaFt200FindShikibetsuTaishoEntity 住民異動情報) {
         requireNonNull(住民異動情報);
         ShikibetsuCode 識別コード = 住民異動情報.getShikibetsuCode();
@@ -412,7 +411,6 @@ public class JuminIdoRendoShikakuToroku {
         return true;
     }
 
-    // 5
     private JuminIdoRendoShikakuTorokuEntity tennyu(
             UaFt200FindShikibetsuTaishoEntity 住民異動情報, DbV1001HihokenshaDaichoEntity 被保険者台帳, RString 介護保険施行日,
             RString 第２号被保険者到達基準年齢, RString 広域システム構成, RString 自動資格異動連動区分) {
@@ -464,7 +462,6 @@ public class JuminIdoRendoShikakuToroku {
         return entity;
     }
 
-    // 6
     private Map<String, RString> getTennyuShoriKubun(UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             RString 広域システム構成, RString 自動資格異動連動区分) {
         requireNonNull(住民異動情報);
@@ -534,7 +531,6 @@ public class JuminIdoRendoShikakuToroku {
                 町域コード, 番地コード1, 番地コード2, 番地コード3).isEmpty();
     }
 
-    //8
     private RString getNenrei(FlexibleDate 登録異動年月日,
             FlexibleDate 生年月日,
             RString 住民状態コード,
@@ -568,7 +564,6 @@ public class JuminIdoRendoShikakuToroku {
 
     }
 
-    // 9
     private JuminIdoRendoShikakuTorokuEntity checkTekiyoJogaisha(UaFt200FindShikibetsuTaishoEntity 住民異動情報) {
         requireNonNull(住民異動情報);
         JuminIdoRendoShikakuTorokuEntity entity = new JuminIdoRendoShikakuTorokuEntity();
@@ -589,7 +584,6 @@ public class JuminIdoRendoShikakuToroku {
         return entity;
     }
 
-    // 10
     private JuminIdoRendoShikakuTorokuEntity checkTaTokureisha(UaFt200FindShikibetsuTaishoEntity 住民異動情報) {
         requireNonNull(住民異動情報);
         JuminIdoRendoShikakuTorokuEntity entity = new JuminIdoRendoShikakuTorokuEntity();
@@ -610,7 +604,6 @@ public class JuminIdoRendoShikakuToroku {
         return entity;
     }
 
-    // 11
     private JuminIdoRendoShikakuTorokuEntity sonotaIdo(UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             DbV1001HihokenshaDaichoEntity 被保険者台帳, RString 介護保険施行日, RString 広域システム構成) {
         requireNonNull(住民異動情報);
@@ -710,7 +703,6 @@ public class JuminIdoRendoShikakuToroku {
         }
     }
 
-    // 12
     private Map<String, RString> getTenshutsuShoriKubun(UaFt200FindShikibetsuTaishoEntity 住民異動情報, RString 広域システム構成) {
         requireNonNull(住民異動情報);
         requireNonNull(広域システム構成);
@@ -742,7 +734,6 @@ public class JuminIdoRendoShikakuToroku {
         return map;
     }
 
-    // 13
     private RString getTennyuTsuchiJuriShoriKubun(UaFt200FindShikibetsuTaishoEntity 住民異動情報, RString 広域システム構成) {
         requireNonNull(住民異動情報);
         requireNonNull(広域システム構成);
@@ -754,7 +745,6 @@ public class JuminIdoRendoShikakuToroku {
         return 処理区分_転入通知受理;
     }
 
-    // 14
     private RString getNenreiIdoJiyu(UaFt200FindShikibetsuTaishoEntity 住民異動情報, RString 介護保険施行日) {
         requireNonNull(住民異動情報);
         requireNonNull(介護保険施行日);
@@ -785,7 +775,6 @@ public class JuminIdoRendoShikakuToroku {
         return agecalculator.get年齢();
     }
 
-    // 15
     private JuminIdoRendoShikakuTorokuEntity tenkyo(
             UaFt200FindShikibetsuTaishoEntity 住民異動情報, DbV1001HihokenshaDaichoEntity 被保険者台帳, RString 介護保険施行日,
             RString 第１号被保険者到達基準年齢) {
@@ -846,7 +835,6 @@ public class JuminIdoRendoShikakuToroku {
         return RString.EMPTY;
     }
 
-    // 16
     private LasdecCode getShichosonCode(ZenkokuJushoCode 全国住所コード) {
         requireNonNull(全国住所コード);
         if (全国住所コード.value().length() < LENGTH5) {
