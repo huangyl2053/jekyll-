@@ -267,7 +267,8 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnBeppyoGokeiKakutei(ServiceRiyohyoInfoDiv div) {
-        Decimal 給付率 = ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class);
+        Decimal 給付率 = ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class) == null
+                ? Decimal.ZERO : ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class);
         Decimal 給付率div = div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue() == null
                 ? Decimal.ZERO : div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue();
         if (給付率.compareTo(給付率div) != 0) {
@@ -413,7 +414,7 @@ public class ServiceRiyohyoInfo {
     }
 
     /**
-     * 対象年月onBlurのイベントです。
+     * 利用年月onBlurのイベントです。
      *
      * @param div ServiceRiyohyoInfoDiv
      * @return ResponseData<ServiceRiyohyoInfoDiv>
