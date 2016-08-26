@@ -60,7 +60,7 @@ public class TorikomiProcess extends BatchProcessBase<RString> {
     private int k = 0;
     private RString batFileName;
     private static final int ROW_LENGTH = 1596;
-    private final RString エラー = new RString("入力データエラー");
+    private final RString エラー = new RString("ファイルの桁数エラー");
     private List<RString> codeList;
 
     @Override
@@ -146,7 +146,6 @@ public class TorikomiProcess extends BatchProcessBase<RString> {
 
     private void batchError(RString logMessage) {
         RLogger.error(logMessage);
-        throw new BatchGyomuException(DbdErrorMessages.アップロードファイル無し.getMessage());
     }
 
     private TorikomiTempTableEntity setTbleName1(TorikomiCsvDataEntity entity) {
