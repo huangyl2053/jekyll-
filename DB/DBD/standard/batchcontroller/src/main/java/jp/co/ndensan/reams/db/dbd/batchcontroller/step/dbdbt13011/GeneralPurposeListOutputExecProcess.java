@@ -923,18 +923,21 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
             list.add(出力条件表_保険者.concat(edit市町村(atenaSelectBatchParameter.getShichoson_Code())));
         }
 
-        if (processParamter.get基準日() != null) {
+        if (processParamter.get基準日() != null && !processParamter.get基準日().isEmpty()) {
             list.add(出力条件表_基準日.concat(edit日期(processParamter.get基準日())));
         }
 
-        if (processParamter.get日付範囲From() != null && processParamter.get日付範囲To() != null) {
+        if ((processParamter.get日付範囲From() != null && !processParamter.get日付範囲From().isEmpty())
+                && (processParamter.get日付範囲To() != null && !processParamter.get日付範囲To().isEmpty())) {
             list.add(processParamter.get抽出項目区分().concat(new RString(":")).concat(edit日期(processParamter.get日付範囲From())).concat(出力条件表_中間符号)
                     .concat(edit日期(processParamter.get日付範囲To())));
         }
-        if (processParamter.get日付範囲From() != null && processParamter.get日付範囲To() == null) {
+        if ((processParamter.get日付範囲From() != null && !processParamter.get日付範囲From().isEmpty())
+                && (processParamter.get日付範囲To() == null || processParamter.get日付範囲To().isEmpty())) {
             list.add(processParamter.get抽出項目区分().concat(new RString(":")).concat(edit日期(processParamter.get日付範囲From())).concat(出力条件表_中間符号));
         }
-        if (processParamter.get日付範囲From() == null && processParamter.get日付範囲To() != null) {
+        if ((processParamter.get日付範囲From() == null || processParamter.get日付範囲From().isEmpty())
+                && (processParamter.get日付範囲To() != null && !processParamter.get日付範囲To().isEmpty())) {
             list.add(processParamter.get抽出項目区分().concat(new RString(":")).concat(出力条件表_中間符号).concat(edit日期(processParamter.get日付範囲To())));
         }
 
