@@ -992,7 +992,7 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
         List<dgShinseiList_Row> rowList = div.getDgShinseiList().getDataSource();
         List<RString> 対象年度List = new ArrayList<>();
         for (dgShinseiList_Row row : rowList) {
-            if (漢字承認する.equals(row.getKetteiKubun())) {
+            if (!isNullOrEmpty(row.getKetteiKubun())) {
                 対象年度List.add(row.getShinseiJiyu());
             }
         }
