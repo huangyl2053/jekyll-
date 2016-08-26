@@ -120,6 +120,7 @@ public class JigyoKogakuServiceHiOshiraseTsuchishoKigenAriOutputProcess extends 
     protected void process(ShinseiJohoChohyoTempRelateEntity entity) {
         KogakuJigyoOshiraseTsuchishopaParameterEntity param = new KogakuJigyoOshiraseTsuchishopaParameterEntity();
         param.set申請情報帳票発行一時(entity.get申請情報());
+        param.set申請書提出期限(parameter.getShinseishoTeishutsuKigen());
         if (entity.get申請情報().isJidoShokanTaishoFlagChohyo()) {
             param.set自動償還(true);
             param.set通知文1(償還分通知文1);
