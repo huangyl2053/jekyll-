@@ -616,12 +616,12 @@ public class RiyoshaFutanWariaiHantei {
         }
         if (HanteiKubunType.負担割合判定.code().equals(現判定区分)
                 && HanteiKubunType.旧措置.code().equals(前判定区分)) {
-            now.setKoseiJiyu(KoseiJiyuType.本人所得更正.getコード());
+            now.setKoseiJiyu(KoseiJiyuType.その他.getコード());
             now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
         }
         if (HanteiKubunType.負担割合判定.code().equals(現判定区分)
                 && HanteiKubunType.非課税.code().equals(前判定区分)) {
-            now.setKoseiJiyu(KoseiJiyuType.その他.getコード());
+            now.setKoseiJiyu(KoseiJiyuType.本人所得更正.getコード());
             now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
         }
     }
@@ -646,12 +646,14 @@ public class RiyoshaFutanWariaiHantei {
         if (!equalsDecimal(now.getHonninGoukeiShotokuGaku(), before.getHonninGoukeiShotokuGaku())) {
             now.setKoseiJiyu(KoseiJiyuType.本人所得更正.getコード());
             now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
+            return;
         }
         if (!equalsDecimal(now.getNenkinShunyuGoukei(), before.getNenkinShunyuGoukei())
                 || (!equalsDecimal(now.getSonotanoGoukeiShotokuKingakuGoukei(),
                         before.getSonotanoGoukeiShotokuKingakuGoukei()))) {
             now.setKoseiJiyu(KoseiJiyuType.世帯員所得更正.getコード());
             now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
+            return;
         }
         if (!equalsInteger(now.getSetaiIchigouHihokenshaSu(), before.getSetaiIchigouHihokenshaSu())) {
             now.setKoseiJiyu(KoseiJiyuType.世帯構成変更.getコード());
