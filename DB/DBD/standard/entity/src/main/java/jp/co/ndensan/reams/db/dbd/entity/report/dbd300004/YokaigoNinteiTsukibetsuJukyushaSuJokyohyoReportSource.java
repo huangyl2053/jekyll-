@@ -75,4 +75,12 @@ public class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource implements IR
     @ReportItem(name = "reportID", order = 28)
     public RString reportID;
 // </editor-fold>
+
+    /**
+     * 改ページ条件のキーです。
+     */
+    public enum ReportSourceFields {
+
+        hokenshaNo
+    }
 }

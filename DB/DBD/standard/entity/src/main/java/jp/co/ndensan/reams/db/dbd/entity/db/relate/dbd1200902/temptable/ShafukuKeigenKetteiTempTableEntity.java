@@ -44,6 +44,7 @@ public class ShafukuKeigenKetteiTempTableEntity extends DbTableEntityBase<Shafuk
     private boolean ninteishoHakkoZumi;
     @TempTableColumnOrder(3)
     private boolean tsuchiHakkoZumi;
+    @PrimaryKey
     @TempTableColumnOrder(4)
     private ShikibetsuCode shikibetsuCode;
     @TempTableColumnOrder(5)

@@ -633,7 +633,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         利用者負担割合builder.set交付日(new FlexibleDate(div.getTxtKofubi().getValue().toString()));
         利用者負担割合builder.set論理削除フラグ(true);
         利用者負担割合 = 利用者負担割合builder.build();
-        利用者負担割合.toEntity().setState(EntityDataState.Modified);
+        利用者負担割合.modified();
     }
 
     /**
@@ -722,7 +722,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             builder.set更正理由(div.getTxtBiko().getValue());
             builder.set世帯コード(new SetaiCode(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getHdnTxtSetaiCode()));
             new利用者負担割合明細 = builder.build();
-            new利用者負担割合明細.toEntity().setState(EntityDataState.Added);
+            new利用者負担割合明細.added();
             holder.addRiyoshaFutanWariaiMeisai(new利用者負担割合明細);
         }
         sort利用者負担割合明細(holder.get利用者負担割合明細());
@@ -801,7 +801,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             利用者負担割合 = 利用者負担割合.added();
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
-            利用者負担割合 = 利用者負担割合.modified();
+            利用者負担割合.modified();
         }
         return 利用者負担割合;
     }
@@ -934,9 +934,9 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
                 if (arg0.get有効開始日() != null && arg1.get有効開始日() != null
                         && arg0.get有効終了日() != null && arg1.get有効終了日() != null) {
                     if (arg0.get有効開始日().compareTo(arg1.get有効開始日()) == 0) {
-                        return arg1.get有効終了日().compareTo(arg0.get有効終了日());
+                        return arg0.get有効終了日().compareTo(arg1.get有効終了日());
                     } else {
-                        return arg1.get有効開始日().compareTo(arg0.get有効開始日());
+                        return arg0.get有効開始日().compareTo(arg1.get有効開始日());
                     }
                 }
                 return 0;
