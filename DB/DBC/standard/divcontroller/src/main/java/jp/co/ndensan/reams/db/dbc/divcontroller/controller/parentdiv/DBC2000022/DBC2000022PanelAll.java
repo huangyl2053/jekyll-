@@ -284,7 +284,6 @@ public class DBC2000022PanelAll {
      * @return ResponseData<DBC2000022PanelAllDiv>
      */
     public ResponseData<DBC2000022PanelAllDiv> onClick_btnKakutei(DBC2000022PanelAllDiv div) {
-        dgFutanWariai_Row rowData = div.getDgFutanWariai().getClickedItem();
         ValidationMessageControlPairs validPairs = getCheckHandler(div).入力チェック();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -293,11 +292,6 @@ public class DBC2000022PanelAll {
         FutanWariaiSokujiKouseiHolder holder
                 = ViewStateHolder.get(ViewStateKeys.利用者負担割合明細, FutanWariaiSokujiKouseiHolder.class);
         getHandler(div).onClick_btnKakutei();
-        ValidationMessageControlPairs validPairs2 = getCheckHandler(div).開始終了チェック();
-        if (validPairs2.iterator().hasNext()) {
-            reset(rowData, div);
-            return ResponseData.of(div).addValidationMessages(validPairs2).respond();
-        }
         getHandler(div).kakuteiShori(利用者負担割合, holder);
         ViewStateHolder.put(ViewStateKeys.利用者負担割合明細, holder);
         return ResponseData.of(div).respond();

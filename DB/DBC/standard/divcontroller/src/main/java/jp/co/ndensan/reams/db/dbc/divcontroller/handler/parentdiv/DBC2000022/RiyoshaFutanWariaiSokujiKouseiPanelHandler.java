@@ -694,8 +694,12 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             RiyoshaFutanWariaiMeisaiBuilder builderModified = 明細entity.createBuilderForEdit();
             builderModified.set資格区分(div.getDdlShikaku().getSelectedKey());
             builderModified.set負担割合区分(div.getDdlFutanWariai().getSelectedKey());
-            builderModified.set有効開始日(new FlexibleDate(div.getTxtTekiyoKaishibi().getValue().toDateString()));
-            builderModified.set有効終了日(new FlexibleDate(div.getTxtTekiyoShuryobi().getValue().toDateString()));
+            if (div.getTxtTekiyoKaishibi().getValue() != null) {
+                builderModified.set有効開始日(new FlexibleDate(div.getTxtTekiyoKaishibi().getValue().toDateString()));
+            }
+            if (div.getTxtTekiyoShuryobi().getValue() != null) {
+                builderModified.set有効終了日(new FlexibleDate(div.getTxtTekiyoShuryobi().getValue().toDateString()));
+            }
             builderModified.set本人合計所得金額(div.getTxtHonninGokeiShotoku().getValue());
             builderModified.set世帯１号被保険者数(div.getTxtSetaiinsu().getValue().intValue());
             builderModified.set年金収入合計(div.getTxtNenkinShunyuGokei().getValue());
@@ -713,8 +717,12 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             RiyoshaFutanWariaiMeisaiBuilder builder = new利用者負担割合明細.createBuilderForEdit();
             builder.set資格区分(div.getDdlShikaku().getSelectedKey());
             builder.set負担割合区分(div.getDdlFutanWariai().getSelectedKey());
-            builder.set有効開始日(new FlexibleDate(div.getTxtTekiyoKaishibi().getValue().toDateString()));
-            builder.set有効終了日(new FlexibleDate(div.getTxtTekiyoShuryobi().getValue().toDateString()));
+            if (div.getTxtTekiyoKaishibi().getValue() != null) {
+                builder.set有効開始日(new FlexibleDate(div.getTxtTekiyoKaishibi().getValue().toDateString()));
+            }
+            if (div.getTxtTekiyoShuryobi().getValue() != null) {
+                builder.set有効終了日(new FlexibleDate(div.getTxtTekiyoShuryobi().getValue().toDateString()));
+            }
             builder.set本人合計所得金額(div.getTxtHonninGokeiShotoku().getValue());
             builder.set世帯１号被保険者数(div.getTxtSetaiinsu().getValue().intValue());
             builder.set年金収入合計(div.getTxtNenkinShunyuGokei().getValue());
@@ -725,38 +733,6 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             new利用者負担割合明細.added();
             holder.addRiyoshaFutanWariaiMeisai(new利用者負担割合明細);
         }
-        sort利用者負担割合明細(holder.get利用者負担割合明細());
-
-        List<dgFutanWariai_Row> dataGridList = new ArrayList<>();
-        for (RiyoshaFutanWariaiMeisai 明細 : holder.get利用者負担割合明細()) {
-            dgFutanWariai_Row rowData = new dgFutanWariai_Row();
-            rowData.setNendo(明細.get年度().toDateString());
-            rowData.setRirekiNo(new RString(明細.get履歴番号()));
-            rowData.setEdaNo(new RString(明細.get枝番号()));
-            rowData.setShikakuCode(明細.get資格区分());
-            rowData.setFutanWariaiCode(明細.get負担割合区分());
-            rowData.setShikaku(FutanWariaiShikakuKubun.toValue(明細.get資格区分()).get名称());
-            rowData.setFutanWariai(FutanwariaiKubun.toValue(明細.get負担割合区分()).get名称());
-            FlexibleDate 適用開始日 = 明細.get有効開始日();
-            FlexibleDate 適用終了日 = 明細.get有効終了日();
-            if (適用開始日 != null) {
-                rowData.getTekiyoKaishibi().setValue(new RDate(適用開始日.toString()));
-            }
-            if (適用終了日 != null) {
-                rowData.getTekiyoShuryobi().setValue(new RDate(適用終了日.toString()));
-            }
-            rowData.getGokeiShotoku().setValue(明細.get本人合計所得金額());
-            rowData.getSetaiinsu().setValue(Decimal.valueOf(明細.get世帯１号被保険者数()));
-            rowData.getNenkinShunyuGokei().setValue(明細.get年金収入合計());
-            rowData.getSonotaGokeiShotoku().setValue(明細.getその他の合計所得金額合計());
-            rowData.setBiko(明細.get更正理由());
-            rowData.setLogicalDeletedFlag(明細.is論理削除フラグ());
-            if (明細.is論理削除フラグ()) {
-                rowData.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
-            }
-            dataGridList.add(rowData);
-        }
-        div.getDgFutanWariai().setDataSource(dataGridList);
         編集項目をクリアする();
     }
 
