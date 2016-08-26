@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0210011;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyoBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
@@ -251,6 +252,15 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
         JukyushaIdoRenrakuhyoPrintSevice printService
                 = new JukyushaIdoRenrakuhyoPrintSevice();
         return printService.printSingle(受給者連絡票データ);
+    }
+
+    /**
+     * 「共同処理用受給者異動連絡票を発行する」チェックボックスの状態。
+     *
+     * @return チェック状態
+     */
+    public List<RString> getチェックボックス状態() {
+        return div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getOutputJukyushaIdoRenrakuhyo().getChkJukyushaIdoRearakuhyoHakkou().getSelectedKeys();
     }
 
 }

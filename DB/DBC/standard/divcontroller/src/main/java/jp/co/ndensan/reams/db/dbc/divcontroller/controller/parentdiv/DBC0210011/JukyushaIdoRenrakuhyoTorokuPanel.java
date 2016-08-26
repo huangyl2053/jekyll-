@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0210011;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0210011.DBC0210011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0210011.DBC0210011TransitionEventName;
@@ -14,9 +15,11 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0210011.Juk
 import jp.co.ndensan.reams.db.dbc.service.core.basic.JukyushaIdoRenrakuhyoManager;
 import jp.co.ndensan.reams.db.dbc.service.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoToroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -44,6 +47,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
 
     private static final RString 被保険者番号なし = new RString("被保険者番号なし");
     private static final RString DBCHIHOKENSHANO = new RString("DBCHihokenshaNo");
+    private static final RString 完了メッセージメイン = new RString("受給者異動連絡票の登録が完了しました。");
     private static final RString ZERO = new RString("0");
     private static final RString 新規モード = new RString("新規モード");
 
@@ -86,7 +90,6 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
      * @return ResponseData<SearchHihokenshaDiv>
      */
     public ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> onClick_btnSave(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
-        JukyushaIdoRenrakuhyoManager manager = InstanceProvider.create(JukyushaIdoRenrakuhyoManager.class);
         ValidationMessageControlPairs pair
                 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo().validateCheck();
         if (pair.iterator().hasNext() && !ResponseHolder.isReRequest()) {
@@ -98,8 +101,8 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
@@ -111,17 +114,21 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
                     getJukyushaIdoRenrakuhyo().get受給者異動送付().get異動区分コード();
             JukyushaIdoRenrakuhyoToroku jukyushaIdoRen = JukyushaIdoRenrakuhyoToroku.createInstance();
             RString エラー有無 = jukyushaIdoRen.regJukyushaIdoJoho(被保険者番号, new RDate(異動日.toString()), 異動区分);
-            if (ZERO.equals(エラー有無)) {
-                JukyushaIdoRenrakuhyo result = getDataEdit(被保険者番号, 異動日, div, manager);
-                result.toEntity().setState(EntityDataState.Added);
-                manager.save受給者異動送付(result);
-                onClick_btnReportPublish(div);
+            boolean flag1 = getState(エラー有無, 被保険者番号, 異動日, div);
+            if (flag1) {
+                RString 完了メッセージ対象情報1 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel()
+                        .getJukyushaIdoRenrakuhyo().get受給者異動送付().get被保険者番号().getColumnValue();
+                RString 完了メッセージ対象情報2 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel()
+                        .getJukyushaIdoRenrakuhyo().get受給者異動送付().get被保険者氏名カナ();
+                div.getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
+                        完了メッセージ対象情報1, 完了メッセージ対象情報2, true);
+                return ResponseData.of(div).setState(DBC0210011StateName.完了メッセージ);
+            } else {
+                return ResponseData.of(div).respond();
             }
         } else {
             return ResponseData.of(div).respond();
         }
-        return ResponseData.of(div).setState(DBC0210011StateName.完了メッセージ);
-
     }
 
     private JukyushaIdoRenrakuhyo getDataEdit(RString 被保険者番号, RString 異動日,
@@ -129,10 +136,32 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
         JukyushaIdoRenrakuhyoTorokuPanelHandler handler = getHandler(div);
         JukyushaIdoRenrakuhyo entity = manager.get受給者異動連絡票情報(被保険者番号, 異動日);
         JukyushaIdoRenrakuhyo result = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo().get受給者異動送付();
+        result.createBuilderForEdit().set広域連合_政令市_保険者番号(new ShoKisaiHokenshaNo(new RString("12345")));
         if (entity != null) {
             result = handler.editResult(result);
         }
         return result;
+    }
+
+    private boolean getState(RString エラー有無, RString 被保険者番号, RString 異動日, JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        JukyushaIdoRenrakuhyoManager manager = InstanceProvider.create(JukyushaIdoRenrakuhyoManager.class);
+        JukyushaIdoRenrakuhyoTorokuPanelHandler handler = getHandler(div);
+        if (ZERO.equals(エラー有無)) {
+            JukyushaIdoRenrakuhyo result = getDataEdit(被保険者番号, 異動日, div, manager);
+            result.toEntity().setState(EntityDataState.Added);
+            boolean flag = manager.save受給者異動送付(result);
+            handler.printLog識別コード更新(資格対象者.get識別コード(), 資格対象者.get被保険者番号().getColumnValue());
+            onClick_btnReportPublish(div);
+            List<RString> チェック状態 = handler.getチェックボックス状態();
+            if (flag && !チェック状態.isEmpty()) {
+                return false;
+            }
+            if (flag && チェック状態.isEmpty()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
