@@ -69,7 +69,7 @@ public class ServiceRiyohyoInfo {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth 対象年月 = ViewStateHolder.get(ViewStateKeys.対象年月, FlexibleYearMonth.class);
         int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, Integer.class);
-        FlexibleYearMonth 利用年月 = ViewStateHolder.get(ViewStateKeys.利用年月, FlexibleYearMonth.class);
+        FlexibleYearMonth 利用年月 = new FlexibleYearMonth(div.getTxtRiyoYM().getValue().getYearMonth().toDateString());
         getHandler(div).setサービス利用票(被保険者番号, 対象年月, 履歴番号, 利用年月.minusMonth(1));
         return ResponseData.of(div).respond();
     }
@@ -284,8 +284,7 @@ public class ServiceRiyohyoInfo {
                 || !new RString(DbcQuestionMessages.給付率修正確認
                         .getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
 
-            RString 状態 = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
-            getHandler(div).onClick_btnBeppyoGokeiKakutei(状態);
+            getHandler(div).onClick_btnBeppyoGokeiKakutei();
         }
         return ResponseData.of(div).respond();
     }

@@ -1031,10 +1031,9 @@ public class ServiceRiyohyoInfoDivHandler {
     /**
      * 合計情報の確定するのイベントです。
      *
-     * @param 状態 RString
      */
-    public void onClick_btnBeppyoGokeiKakutei(RString 状態) {
-        合計反映(状態);
+    public void onClick_btnBeppyoGokeiKakutei() {
+        合計反映();
         List<dgServiceRiyohyoBeppyoList_Row> rowList
                 = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
         rowList = ソードGrid(rowList);
@@ -1051,9 +1050,8 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
     }
 
-    private void 合計反映(RString 状態) {
+    private void 合計反映() {
         boolean 選択有无 = ViewStateHolder.get(ViewStateKeys.選択有无, Boolean.class);
-//        ステータス設定(状態);
         List<dgServiceRiyohyoBeppyoList_Row> rowList = div.getServiceRiyohyoBeppyoList()
                 .getDgServiceRiyohyoBeppyoList().getDataSource();
         dgServiceRiyohyoBeppyoList_Row row = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
