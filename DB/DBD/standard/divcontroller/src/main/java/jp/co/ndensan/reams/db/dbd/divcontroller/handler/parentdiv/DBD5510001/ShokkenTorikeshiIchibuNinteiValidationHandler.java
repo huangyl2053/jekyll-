@@ -96,7 +96,7 @@ public class ShokkenTorikeshiIchibuNinteiValidationHandler {
         if (今回認定日 == null || 今回認定日.isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(
                     new ShokkenTorikeshiIchibuNinteiValidationHandler.ShokkenTorikeshiIchibuNinteiMessages(
-                            UrErrorMessages.必須項目_追加メッセージあり, "認定日")));
+                            UrErrorMessages.必須項目_追加メッセージあり, "認定日"), div.getTxtNinteibiKonkai()));
         }
         return validationMessages;
     }
@@ -106,7 +106,7 @@ public class ShokkenTorikeshiIchibuNinteiValidationHandler {
         if (div.getTxtSoshitsubi().getValue() == null) {
             validationMessages.add(new ValidationMessageControlPair(
                     new ShokkenTorikeshiIchibuNinteiValidationHandler.ShokkenTorikeshiIchibuNinteiMessages(
-                            UrErrorMessages.必須項目_追加メッセージあり, "喪失日")));
+                            UrErrorMessages.必須項目_追加メッセージあり, "喪失日"), div.getTxtSoshitsubi()));
         }
         return validationMessages;
     }
@@ -118,7 +118,7 @@ public class ShokkenTorikeshiIchibuNinteiValidationHandler {
         if (RString.isNullOrEmpty(今回要介護度)) {
             validationMessages.add(new ValidationMessageControlPair(
                     new ShokkenTorikeshiIchibuNinteiValidationHandler.ShokkenTorikeshiIchibuNinteiMessages(
-                            UrErrorMessages.必須項目_追加メッセージあり, "要介護度")));
+                            UrErrorMessages.必須項目_追加メッセージあり, "要介護度"), div.getTxtYokaigodoKonkai()));
         }
         return validationMessages;
     }
@@ -130,7 +130,7 @@ public class ShokkenTorikeshiIchibuNinteiValidationHandler {
         if (isEmpty(今回有効開始日)) {
             validationMessages.add(new ValidationMessageControlPair(
                     new ShokkenTorikeshiIchibuNinteiValidationHandler.ShokkenTorikeshiIchibuNinteiMessages(
-                            UrErrorMessages.必須項目_追加メッセージあり, "有効開始日")));
+                            UrErrorMessages.必須項目_追加メッセージあり, "有効開始日"), div.getTxtYukoKaishibiKonkai()));
         }
         return validationMessages;
     }
@@ -142,7 +142,7 @@ public class ShokkenTorikeshiIchibuNinteiValidationHandler {
         if (isEmpty(今回有効終了日)) {
             validationMessages.add(new ValidationMessageControlPair(
                     new ShokkenTorikeshiIchibuNinteiValidationHandler.ShokkenTorikeshiIchibuNinteiMessages(
-                            UrErrorMessages.必須項目_追加メッセージあり, "有効終了日")));
+                            UrErrorMessages.必須項目_追加メッセージあり, "有効終了日"), div.getTxtYukoShuryobiKonkai()));
         }
         return validationMessages;
     }
@@ -155,13 +155,15 @@ public class ShokkenTorikeshiIchibuNinteiValidationHandler {
         if (!isEmpty(今回有効開始日) && !isEmpty(今回有効終了日) && 今回有効終了日.isBefore(今回有効開始日)) {
             validationMessages.add(new ValidationMessageControlPair(
                     new ShokkenTorikeshiIchibuNinteiValidationHandler.ShokkenTorikeshiIchibuNinteiMessages(
-                            UrErrorMessages.期間が不正_追加メッセージあり２, "今回有効開始日", "今回有効終了日")));
+                            UrErrorMessages.期間が不正_追加メッセージあり２, "有効開始日", "有効終了日"),
+                    div.getTxtYukoKaishibiKonkai(), div.getTxtYukoShuryobiKonkai()));
         }
         FlexibleDate 前回有効終了日 = div.getTxtYukoShuryobiZenkai().getValue();
         if (!isEmpty(今回有効開始日) && !isEmpty(前回有効終了日) && 今回有効開始日.isBefore(前回有効終了日)) {
             validationMessages.add(new ValidationMessageControlPair(
                     new ShokkenTorikeshiIchibuNinteiValidationHandler.ShokkenTorikeshiIchibuNinteiMessages(
-                            UrErrorMessages.期間が不正_追加メッセージあり２, "有効開始日", "有効終了日")));
+                            UrErrorMessages.期間が不正_追加メッセージあり２, "前回有効終了日", "今回有効開始日"),
+                    div.getTxtYukoShuryobiZenkai(), div.getTxtYukoKaishibiKonkai()));
         }
         return validationMessages;
     }
