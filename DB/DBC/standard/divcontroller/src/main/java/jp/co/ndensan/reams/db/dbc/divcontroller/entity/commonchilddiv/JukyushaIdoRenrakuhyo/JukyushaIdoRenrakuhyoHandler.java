@@ -147,6 +147,7 @@ public class JukyushaIdoRenrakuhyoHandler {
                     getRadKaizeisoTokureiGengakuSochiTaishoFlag().setSelectedKey(空KEY);
             div.getKyufuSeigenPanel().getRadKohiFutanJogenGengakuAriFlag().setSelectedKey(空KEY);
             div.getNijiyoboJigyoPanel().getRadNijiyoboJigyoKubun().setSelectedKey(空KEY);
+            onClick_計画作成区分();
             return 受給者異動情報;
         }
         div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().setValue(受給者異動情報.get異動年月日());
@@ -188,6 +189,7 @@ public class JukyushaIdoRenrakuhyoHandler {
         set二割負担エリア(受給者異動情報);
         set二次予防事業エリア(受給者異動情報);
         set老人保健エリア(受給者異動情報);
+        onClick_計画作成区分();
         return 受給者異動情報;
     }
 
