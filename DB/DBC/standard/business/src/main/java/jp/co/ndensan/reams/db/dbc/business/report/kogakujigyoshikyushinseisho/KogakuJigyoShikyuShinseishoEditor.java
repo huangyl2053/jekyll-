@@ -66,20 +66,22 @@ public class KogakuJigyoShikyuShinseishoEditor implements IKogakuJigyoShikyuShin
                 source.taishoYM = 帳票出力対象データ.getServiceTeikyoYMChohyo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             }
-            if (帳票出力対象データ.getShinseishaShimeiKanaChohyo() != null) {
-                source.hihokenshaNameKana = 帳票出力対象データ.getShinseishaShimeiKanaChohyo().getColumnValue();
+            if (帳票出力対象データ.getShimeikanaChohyo() != null) {
+                source.hihokenshaNameKana = 帳票出力対象データ.getShimeikanaChohyo().getColumnValue();
             }
-            if (帳票出力対象データ.getShinseishaShimeiChohyo() != null) {
-                source.hihokenshaName = 帳票出力対象データ.getShinseishaShimeiChohyo().getColumnValue();
+            if (帳票出力対象データ.getMeishoChohyo() != null) {
+                source.hihokenshaName = 帳票出力対象データ.getMeishoChohyo().getColumnValue();
             }
             if (帳票出力対象データ.getSeinengappiYMDChohyo() != null) {
                 source.birthYMD = 帳票出力対象データ.getSeinengappiYMDChohyo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             }
             source.seibetsu = Seibetsu.toValue(帳票出力対象データ.getSeibetsuCodeChohyo()).get名称();
-            source.hihokenJusho = 帳票出力対象データ.getShinseishaJushoChohyo();
-            if (帳票出力対象データ.getShinseishaTelNoChohyo() != null) {
-                source.telNo = 帳票出力対象データ.getShinseishaTelNoChohyo().getColumnValue();
+            if (帳票出力対象データ.getJushoChohyo() != null) {
+                source.hihokenJusho = 帳票出力対象データ.getJushoChohyo().getColumnValue();
+            }
+            if (帳票出力対象データ.getTelNoChohyo() != null) {
+                source.telNo = 帳票出力対象データ.getTelNoChohyo().getColumnValue();
             }
             if (帳票出力対象データ.getShoKisaiHokenshaNoChohyo() != null) {
                 source.hokenshaNo = 帳票出力対象データ.getShoKisaiHokenshaNoChohyo().getColumnValue();
