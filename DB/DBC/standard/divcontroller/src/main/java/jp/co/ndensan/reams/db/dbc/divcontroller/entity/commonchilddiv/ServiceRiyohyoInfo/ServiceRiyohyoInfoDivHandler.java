@@ -756,7 +756,7 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getBtnCalcGokei().setVisible(false);
             div.getBtnBeppyoMeisaiKakutei().setVisible(false);
             div.getBtnBeppyoGokeiKakutei().setDisabled(false);
-            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setReadOnly(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setReadOnly(false);
         }
         if (サービスフラグTmp && 利用サービス
                 != null) {
@@ -1071,7 +1071,7 @@ public class ServiceRiyohyoInfoDivHandler {
             サービスTmp = div.getCcdServiceCodeInput().getサービス名称();
         } else {
             サービス種類コードTmp = div.getCcdServiceTypeInput().getサービス種類コード();
-            サービス項目コードTmp = RString.EMPTY;
+            サービス項目コードTmp = div.getCcdServiceCodeInput().getサービスコード2();
             サービスTmp = div.getCcdServiceTypeInput().getサービス種類名称();
         }
         row.setJigyosha(div.getCcdJigyoshaInput().getNyuryokuShisetsuMeisho());
@@ -1465,7 +1465,7 @@ public class ServiceRiyohyoInfoDivHandler {
                     YoboKeikakuJikoSakuseiKanri 予防給付計画自己作成管理 = new YoboKeikakuJikoSakuseiKanri(被保険者番号,
                             対象年月, 履歴番号, 画面の利用年月, 固定値_3, Integer.parseInt(saiban.nextString().trim().toString()));
                     YoboKeikakuJikoSakuseiKanriBuilder builder = 予防給付計画自己作成管理.createBuilderForEdit();
-                    builder.setサービス提供事業者番号(new JigyoshaNo(row.getJigyosha()))
+                    builder.setサービス提供事業者番号(new JigyoshaNo(row.getHdnJigyoshaCode()))
                             .setサービス種類コード(new ServiceShuruiCode(row.getHdnServiceShuruiCode()))
                             .setサービス項目コード(new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
                             .set単位数(row.getTani().getValue())
@@ -1486,7 +1486,7 @@ public class ServiceRiyohyoInfoDivHandler {
                     YoboKeikakuJikoSakuseiKanri 予防給付計画自己作成管理 = jigoSakusei.select予防給付計画自己作成管理ByKey(
                             被保険者番号, 対象年月, 履歴番号, 利用年月, 固定値_3, Integer.parseInt(row.getHdnMeisaiNo().toString()));
                     YoboKeikakuJikoSakuseiKanriBuilder builder = 予防給付計画自己作成管理.createBuilderForEdit();
-                    builder.setサービス提供事業者番号(new JigyoshaNo(row.getJigyosha()))
+                    builder.setサービス提供事業者番号(new JigyoshaNo(row.getHdnJigyoshaCode()))
                             .setサービス種類コード(new ServiceShuruiCode(row.getHdnServiceShuruiCode()))
                             .setサービス項目コード(new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
                             .set単位数(row.getTani().getValue())
@@ -1514,7 +1514,7 @@ public class ServiceRiyohyoInfoDivHandler {
                     KyotakuKeikakuJikosakuseiKanri 居宅給付計画自己作成管理 = new KyotakuKeikakuJikosakuseiKanri(被保険者番号,
                             対象年月, 履歴番号, 画面の利用年月, 固定値_3, Integer.parseInt(saiban.nextString().trim().toString()));
                     KyotakuKeikakuJikosakuseiKanriBuilder builder = 居宅給付計画自己作成管理.createBuilderForEdit();
-                    builder.setサービス提供事業者番号(new JigyoshaNo(row.getJigyosha()))
+                    builder.setサービス提供事業者番号(new JigyoshaNo(row.getHdnJigyoshaCode()))
                             .setサービス種類コード(new ServiceShuruiCode(row.getHdnServiceShuruiCode()))
                             .setサービス項目コード(new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
                             .set単位数(row.getTani().getValue())
@@ -1534,7 +1534,7 @@ public class ServiceRiyohyoInfoDivHandler {
                     KyotakuKeikakuJikosakuseiKanri 居宅給付計画自己作成管理 = jigoSakusei.select居宅給付計画自己作成管理ByKey(
                             被保険者番号, 対象年月, 履歴番号, 利用年月, 固定値_3, Integer.parseInt(row.getHdnMeisaiNo().toString()));
                     KyotakuKeikakuJikosakuseiKanriBuilder builder = 居宅給付計画自己作成管理.createBuilderForEdit();
-                    builder.setサービス提供事業者番号(new JigyoshaNo(row.getJigyosha()))
+                    builder.setサービス提供事業者番号(new JigyoshaNo(row.getHdnJigyoshaCode()))
                             .setサービス種類コード(new ServiceShuruiCode(row.getHdnServiceShuruiCode()))
                             .setサービス項目コード(new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
                             .set単位数(row.getTani().getValue())
