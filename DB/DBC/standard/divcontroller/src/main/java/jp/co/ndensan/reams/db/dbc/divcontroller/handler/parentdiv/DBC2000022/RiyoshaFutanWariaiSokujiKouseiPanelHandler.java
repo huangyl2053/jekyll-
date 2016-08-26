@@ -631,7 +631,6 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         利用者負担割合builder.set発行区分(div.getDdlHakkoKubun().getSelectedKey());
         利用者負担割合builder.set発行日(new FlexibleDate(div.getTxtHakkobi().getValue().toString()));
         利用者負担割合builder.set交付日(new FlexibleDate(div.getTxtKofubi().getValue().toString()));
-        利用者負担割合builder.set論理削除フラグ(true);
         利用者負担割合 = 利用者負担割合builder.build();
         return 利用者負担割合.modified();
     }
