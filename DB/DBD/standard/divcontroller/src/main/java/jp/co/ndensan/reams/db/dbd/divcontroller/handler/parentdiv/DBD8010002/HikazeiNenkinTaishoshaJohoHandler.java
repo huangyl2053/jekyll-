@@ -362,17 +362,17 @@ public class HikazeiNenkinTaishoshaJohoHandler {
         HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter parameter = new HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter();
 
         parameter.set処理年度(new FlexibleYear(div.getDdlShoriNendo().getSelectedKey()));
-        parameter.set処理区分(div.getDdlTuki().getSelectedKey().substring(INT_0));
-        parameter.set対象月(div.getDdlTuki().getSelectedKey().substring(INT_1, INT_4));
+        parameter.set処理区分(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getHdnShoriCode());
+        parameter.set対象月(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getHdnTukiCode());
         parameter.setテスト処理(div.getHeddaeria().getChkTesutoShoriTorikomi().isAllSelected() ? RSTRING_1 : RSTRING_0);
         if (KEY0.equals(div.getChohyoShutsuryokuUmu().getRadSonotaChohyo().getSelectedKey())) {
             parameter.set出力区分(RSTRING_1);
         } else if (KEY1.equals(div.getChohyoShutsuryokuUmu().getRadSonotaChohyo().getSelectedKey())) {
             parameter.set出力区分(RSTRING_0);
         }
-        parameter.set処理状態(div.getTxtShoriJotai().getText());
+        parameter.set処理状態(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShoriJotai());
         parameter.set構成市町村コードリスト(構成市町村コードリスト);
-        parameter.set処理日時(new YMDHMS(div.getTxtShoriNichiji().getValue()));
+        parameter.set処理日時(new YMDHMS(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShoriNichiji()));
         parameter.set出力順ID1(div.getCcdChohyoSyuturyokuJun1().get出力順ID());
         parameter.set出力順ID2(div.getCcdChohyoSyuturyokuJun2().get出力順ID());
         parameter.set出力順ID3(div.getCcdChohyoSyuturyokuJun3().get出力順ID());
