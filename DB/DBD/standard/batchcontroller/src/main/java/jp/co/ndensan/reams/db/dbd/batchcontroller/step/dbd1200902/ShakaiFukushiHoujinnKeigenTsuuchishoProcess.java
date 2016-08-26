@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100012.ShakFuksHjRiysFutKgTsKtTsuchishoOrderKey;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100012.ShakFuksHjRiysFutKgTsKtTsuchishoReport;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.ShakaiFukushiHoujinnKeigenParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.ShakaiFukushiHoujinnKeigenTsuuchishoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.ShakaiFukushiHoujinnKeigenTsuuchishoEntity;
@@ -162,8 +163,9 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
 
     @Override
     protected void process(ShakaiFukushiHoujinnKeigenTsuuchishoEntity shaka) {
-        ShafukuKeigenKetteiTempTableEntity shafukuEntity = mapper.get社会福祉法人等軽減の通知書発行の一時テーブルEntity(shaka.
-                get社会福祉法人等利用者負担軽減().get社会福祉法人等利用者負担軽減Entity().getHihokenshaNo());
+        ShakaiFukushiHoujinnKeigenParameter parameter = new ShakaiFukushiHoujinnKeigenParameter(shaka.get社会福祉法人等利用者負担軽減().
+                get社会福祉法人等利用者負担軽減Entity().getHihokenshaNo(), shaka.getPsmEntity().getShikibetsuCode());
+        ShafukuKeigenKetteiTempTableEntity shafukuEntity = mapper.get社会福祉法人等軽減の通知書発行の一時テーブルEntity(parameter);
         if (shafukuEntity == null) {
             tmpTableWriter.insert(create処理(shaka));
         } else {

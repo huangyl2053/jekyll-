@@ -11,12 +11,14 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunint
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100013.FutanGendogakuKetteiTsuchishoOrderKey;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100013.FutanGendogakuKetteiTsuchishoReport;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100013.HakkoRirekiKoyuJohoDBD100013;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.ShakaiFukushiHoujinnKeigenParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.FutanGenndoGakuNinnteiTsuuchishoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.FutanGenndoGakuNinnteiTsuuchishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.temptable.FutanGenndoGakuNinnteiTempTableEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100013.FutanGendogakuKetteiTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futanngenndogakuninntei.IFutanGenndoGakuNinnteiListMapper;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd1200902.FutanGenndoGakuNinnteiTsuuchishoService;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
@@ -106,6 +108,7 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
     private static RString reamsLoginID;
     private static IOutputOrder order;
     private static int count;
+    private IFutanGenndoGakuNinnteiListMapper mapper;
     private static List<RString> 通知書定型文;
     private static final int ONE_1 = 1;
     private static final int TWO_2 = 2;
@@ -123,6 +126,7 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
 
     @Override
     protected void initialize() {
+        mapper = getMapper(IFutanGenndoGakuNinnteiListMapper.class);
         reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         association = AssociationFinderFactory.createInstance().getAssociation();
         帳票制御共通 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御共通(帳票ID);
@@ -201,10 +205,13 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
 
     @Override
     protected void process(FutanGenndoGakuNinnteiTsuuchishoEntity fatan) {
-        if (fatan.getShichosonCode() == null || fatan.getShikibetsuCode() == null) {
+        ShakaiFukushiHoujinnKeigenParameter parameter = new ShakaiFukushiHoujinnKeigenParameter(fatan.get介護保険負担限度額認定().
+                get介護保険負担限度額認定Entity().getHihokenshaNo(), fatan.getShikibetsuCode());
+        FutanGenndoGakuNinnteiTempTableEntity entity = mapper.get負担限度額認定の認定証発行一時テーブル(parameter);
+        if (entity == null) {
             tmpTableWriter.insert(create処理(fatan));
         } else {
-            tmpTableWriter.update(create処理(fatan));
+            tmpTableWriter.update(insert(entity, fatan));
         }
         UaFt250FindAtesakiEntity uaFt250Entity = fatan.getAtesakiEntity();
         UaFt200FindShikibetsuTaishoEntity uaFt200Entity = fatan.getPsmEntity();
@@ -335,4 +342,12 @@ public class FutanGenndoGakuNinnteiTsuuchishoProcess extends BatchProcessBase<Fu
         return data;
     }
 
+    private FutanGenndoGakuNinnteiTempTableEntity insert(FutanGenndoGakuNinnteiTempTableEntity tempEntity,
+            FutanGenndoGakuNinnteiTsuuchishoEntity fatan) {
+        IKojin kojin = ShikibetsuTaishoFactory.createKojin(fatan.getPsmEntity());
+        tempEntity.setShikibetsuCode(kojin.get識別コード());
+        tempEntity.setTsuchiHakkoZumi(true);
+        tempEntity.setHihokenshaNo(fatan.get介護保険負担限度額認定().get介護保険負担限度額認定Entity().getHihokenshaNo());
+        return tempEntity;
+    }
 }

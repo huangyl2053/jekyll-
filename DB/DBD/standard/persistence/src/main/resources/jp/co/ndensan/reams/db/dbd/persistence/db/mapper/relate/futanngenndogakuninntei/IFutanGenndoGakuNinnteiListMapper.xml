@@ -4,7 +4,7 @@
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
-and open the template in the editor.
+and open the template in the editor. jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.temptable
 -->
 
 
@@ -24,7 +24,19 @@ and open the template in the editor.
   <result property="shikakuSoshitsuYMD" column="資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
   <result property="shichosonCode"  column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
   <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
-</resultMap>   
+</resultMap> 
+<resultMap id="resultMap_FutanGenndoGakuNinnteiTempTableEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.temptable.FutanGenndoGakuNinnteiTempTableEntity" autoMapping="true">
+  <result property="hihokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+  <result property="ninteishoHakkoZumi" column="認定証発行済み" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+  <result property="tsuchiHakkoZumi" column="通知書発行済み" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+  <result property="shikibetsuCode" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+  <result property="shinseiYMD" column="申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="ketteiYMD" column="決定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="tekiyoYMD" column="適用日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="yukoKigenYMD" column="有効期限" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="ketteiKubun" column="決定区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+  <result property="riyoshaFutanDankai" column="利用者負担段階" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>  
+</resultMap>    
 <select id="get負担額認定証_決定通知書発行一覧表発行情報"
         resultMap="resultMap_IFutanGenndoGakuNinnteiListEntity"
         parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.FutanGenndoGakuNinnteiListMybatisParameter" fetchSize="500" resultOrdered="true">
@@ -77,5 +89,24 @@ and open the template in the editor.
    ON "ShikibetsuTaisho"."shikibetsuCode" = C."shikibetsuCode"
    ${出力順}
     
+</select>
+<select id="get負担限度額認定の認定証発行一時テーブル"
+        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.ShakaiFukushiHoujinnKeigenParameter"
+        resultMap="resultMap_FutanGenndoGakuNinnteiTempTableEntity" fetchSize="500" resultOrdered="true">
+    SELECT
+      "FutanGenndoGakuNinnteiTempTable"."hihokenshaNo" AS 被保険者番号,
+      "FutanGenndoGakuNinnteiTempTable"."ninteishoHakkoZumi" AS 認定証発行済み,
+      "FutanGenndoGakuNinnteiTempTable"."tsuchiHakkoZumi" AS 通知書発行済み,
+      "FutanGenndoGakuNinnteiTempTable"."shikibetsuCode" AS 識別コード,
+      "FutanGenndoGakuNinnteiTempTable"."shinseiYMD" AS 申請日,
+      "FutanGenndoGakuNinnteiTempTable"."ketteiYMD" AS 決定日,
+      "FutanGenndoGakuNinnteiTempTable"."tekiyoYMD" AS 適用日,
+      "FutanGenndoGakuNinnteiTempTable"."yukoKigenYMD" AS 有効期限,
+      "FutanGenndoGakuNinnteiTempTable"."ketteiKubun" AS 決定区分,
+      "FutanGenndoGakuNinnteiTempTable"."riyoshaFutanDankai" AS 利用者負担段階
+       FROM "FutanGenndoGakuNinnteiTempTable"
+       WHERE "FutanGenndoGakuNinnteiTempTable"."hihokenshaNo" =#{被保険者番号}
+       AND  "FutanGenndoGakuNinnteiTempTable"."shikibetsuCode" =#{識別コード}
+       LIMIT 1
 </select>
 </mapper>

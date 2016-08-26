@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100201;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -15,7 +14,6 @@ import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.TorikomiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100201.TorikomiCsvDataEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100201.temptable.TorikomiTempTableEntity;
-import jp.co.ndensan.reams.uz.uza.batch.BatchGyomuException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriterBuilders;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -36,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.RLogger;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -59,8 +56,6 @@ public class TorikomiProcess extends BatchProcessBase<RString> {
     private int i = 0;
     private int k = 0;
     private RString batFileName;
-    private static final int ROW_LENGTH = 1596;
-    private final RString エラー = new RString("ファイルの桁数エラー");
     private List<RString> codeList;
 
     @Override
@@ -126,13 +121,7 @@ public class TorikomiProcess extends BatchProcessBase<RString> {
 
     @Override
     protected void process(RString data) {
-        try {
-            if (data.toString().getBytes(Encode.SJIS.getName()).length != ROW_LENGTH) {
-                batchError(エラー);
-            }
-        } catch (UnsupportedEncodingException e) {
-            RLogger.error(new RString(e.getMessage()));
-        }
+        //        
     }
 
     @Override
@@ -142,10 +131,6 @@ public class TorikomiProcess extends BatchProcessBase<RString> {
         while (null != (data = reader.readLine())) {
             tmpTableWriter.insert(setTbleName1(data));
         }
-    }
-
-    private void batchError(RString logMessage) {
-        RLogger.error(logMessage);
     }
 
     private TorikomiTempTableEntity setTbleName1(TorikomiCsvDataEntity entity) {

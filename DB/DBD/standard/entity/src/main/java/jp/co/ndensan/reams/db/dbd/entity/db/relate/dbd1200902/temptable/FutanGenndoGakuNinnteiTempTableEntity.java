@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 import lombok.Getter;
@@ -35,13 +36,14 @@ public class FutanGenndoGakuNinnteiTempTableEntity extends DbTableEntityBase<Fut
     static {
         TABLE_NAME = new RString("FutanGenndoGakuNinnteiTempTable");
     }
-
+    @PrimaryKey
     @TempTableColumnOrder(1)
     private HihokenshaNo hihokenshaNo;
     @TempTableColumnOrder(2)
     private boolean ninteishoHakkoZumi;
     @TempTableColumnOrder(3)
     private boolean tsuchiHakkoZumi;
+    @PrimaryKey
     @TempTableColumnOrder(4)
     private ShikibetsuCode shikibetsuCode;
     @TempTableColumnOrder(5)

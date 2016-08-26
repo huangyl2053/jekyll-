@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.business.report.dbd200019.FutangakuNinteiHakko
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.FutanGenndoGakuNinnteiShouProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.FutanGenndoGakuNinnteiShouEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.temptable.FutanGenndoGakuNinnteiTempTableEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100020.FutanGendogakuNinteishoReportSource;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
@@ -45,6 +46,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJok
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
@@ -124,12 +126,16 @@ public class FutanGenndoGakuNinnteiShouProcess extends BatchProcessBase<FutanGen
                 GyomuKoyuJoho.被保番号.getコード(),
                 GyomuKoyuJoho.減免適用開始日.getコード()));
     }
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter tempWriter;
 
     @Override
     protected void createWriter() {
         batchReportWrite = BatchReportFactory.createBatchReportWriter(帳票ID.getReportId().value(),
                 SubGyomuCode.DBD介護受給).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
+        tempWriter = new BatchEntityCreatedTempTableWriter(FutanGenndoGakuNinnteiTempTableEntity.TABLE_NAME,
+                FutanGenndoGakuNinnteiTempTableEntity.class);
         ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100020.getReportId(), FlexibleDate.getNowDate(),
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                 KenmeiFuyoKubunType.付与なし, reportSourceWriter);
@@ -154,6 +160,7 @@ public class FutanGenndoGakuNinnteiShouProcess extends BatchProcessBase<FutanGen
                 認定証の交付日,
                 ninshoshaSource);
         report.writeBy(reportSourceWriter);
+        tempWriter.insert(creatTempEntity(entity));
     }
 
     @Override
@@ -203,5 +210,21 @@ public class FutanGenndoGakuNinnteiShouProcess extends BatchProcessBase<FutanGen
                 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();
+    }
+
+    private FutanGenndoGakuNinnteiTempTableEntity creatTempEntity(FutanGenndoGakuNinnteiShouEntity entity) {
+        IKojin iKojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
+        FutanGenndoGakuNinnteiTempTableEntity tempEntity = new FutanGenndoGakuNinnteiTempTableEntity();
+        tempEntity.setHihokenshaNo(entity.get介護保険負担限度額認定().get介護保険負担限度額認定Entity().getHihokenshaNo());
+        tempEntity.setKetteiKubun(entity.get介護保険負担限度額認定().get介護保険負担限度額認定Entity().getKetteiKubun());
+        tempEntity.setKetteiYMD(entity.get介護保険負担限度額認定().get介護保険負担限度額認定Entity().getKetteiYMD());
+        tempEntity.setNinteishoHakkoZumi(true);
+        tempEntity.setRiyoshaFutanDankai(entity.get介護保険負担限度額認定().get介護保険負担限度額認定Entity().getRiyoshaFutanDankai());
+        tempEntity.setShikibetsuCode(iKojin.get識別コード());
+        tempEntity.setShinseiYMD(entity.get介護保険負担限度額認定().get介護保険負担限度額認定Entity().getShinseiYMD());
+        tempEntity.setTekiyoYMD(entity.get介護保険負担限度額認定().get介護保険負担限度額認定Entity().getTekiyoKaishiYMD());
+        tempEntity.setTsuchiHakkoZumi(false);
+        tempEntity.setYukoKigenYMD(entity.get介護保険負担限度額認定().get介護保険負担限度額認定Entity().getTekiyoShuryoYMD());
+        return tempEntity;
     }
 }
