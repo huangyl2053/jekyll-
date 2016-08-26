@@ -231,7 +231,7 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
                 .set市町村コード(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード())
                 .set識別コード(資格対象者.get識別コード())
                 .set交付年月日(new FlexibleDate(div.getPanelHakko().getTxtKofubi().getValue().toDateString()))
-                .set有効期限(new FlexibleDate(終了日2 == null ? 終了日1 : 終了日2))
+                .set有効期限(new FlexibleDate(終了日2.isNullOrEmpty() ? 終了日1 : 終了日2))
                 .set交付事由(div.getPanelHakko().getDdlKofuJiyu().getSelectedKey())
                 .set交付理由(RString.EMPTY)
                 .set回収年月日(new FlexibleDate(RString.EMPTY))
