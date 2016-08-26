@@ -87,9 +87,9 @@
         <result property="shikakuShutokuMaeShinseiFlag" column="dbT4001JukyushaDaicho_shikakuShutokuMaeShinseiFlag" />
         <result property="kyuSochishaFlag" column="dbT4001JukyushaDaicho_kyuSochishaFlag" />
         <result property="logicalDeletedFlag" column="dbT4001JukyushaDaicho_logicalDeletedFlag" />
-        <result property="ninteiShinsakaiWariateYoteiYMD" column="T5123_ninteiShinsakaiWariateYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="ninteichosaYoteiYMD" column="T5123_ninteichosaYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="ikenshoSakuseiIraiYoteiYMD" column="T5123_ikenshoSakuseiIraiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ninteiShinsakaiWariateYoteiYMD" column="T4123_ninteiShinsakaiWariateYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ninteichosaYoteiYMD" column="T4123_ninteichosaYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ikenshoSakuseiIraiYoteiYMD" column="T4123_ikenshoSakuseiIraiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="shichosonMeisho" column="T7051_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteichosaIraiYMD" column="X4102_ninteichosaIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ninteichosaJisshiYMD" column="X4102_ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
@@ -105,9 +105,9 @@
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd581001.YokaigoJissiJyokyohyoMybatisParameter">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho" />,
-            T5123."ninteiShinsakaiWariateYoteiYMD" AS T5123_ninteiShinsakaiWariateYoteiYMD,
-            T5123."ninteichosaYoteiYMD" AS T5123_ninteichosaYoteiYMD,
-            T5123."ikenshoSakuseiIraiYoteiYMD" AS T5123_ikenshoSakuseiIraiYoteiYMD,
+            T4123."ninteiShinsakaiWariateYoteiYMD" AS T4123_ninteiShinsakaiWariateYoteiYMD,
+            T4123."ninteichosaYoteiYMD" AS T4123_ninteichosaYoteiYMD,
+            T4123."ikenshoSakuseiIraiYoteiYMD" AS T4123_ikenshoSakuseiIraiYoteiYMD,
             T7051."kokuhorenKoikiShichosonNo" AS T7051_kokuhorenKoikiShichosonNo,
             T7051."shichosonMeisho" AS T7051_shichosonMeisho,
             <if test="is導入形態コード111 || is導入形態コード112">
@@ -141,9 +141,6 @@
             INNER JOIN  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />  
             AS B
             ON B."shikibetsuCode"  = "DbT4001JukyushaDaicho"."shikibetsuCode" 
-              
-            INNER JOIN   rgdb."DbT5123NinteiKeikakuJoho" AS T5123
-                ON      "DbT4001JukyushaDaicho"."shinseishoKanriNo" = T5123."shinseishoKanriNo"  
             <if test="is導入形態コード111 || is導入形態コード112">
                 INNER JOIN  rgdb."DbT4003YokaigoNinteiInterface" AS T4003
                     ON      "DbT4001JukyushaDaicho"."hihokenshaNo" = T4003."hihokenshaNo"
