@@ -91,10 +91,10 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
             source.listHakkoTaishosha_5 = 帳票出力対象データ.getYubinNoChohyo().getColumnValue();
         }
         if (帳票出力対象データ.getJushoChohyo() != null) {
-            source.listHakkoTaishosha_6 = 帳票出力対象データ.getGyoseikuCodeChohyo().getColumnValue();
+            source.listHakkoTaishosha_6 = 帳票出力対象データ.getJushoChohyo().getColumnValue();
         }
         if (帳票出力対象データ.getGyoseikuCodeChohyo() != null) {
-            source.listHakkoTaishosha_7 = 帳票出力対象データ.getGyoseikuNameChohyo();
+            source.listHakkoTaishosha_7 = 帳票出力対象データ.getGyoseikuCodeChohyo().getColumnValue();
         }
         source.listHakkoTaishosha_8 = 帳票出力対象データ.getGyoseikuNameChohyo();
         if (帳票出力対象データ.isKyuSochishaFlagChohyo()) {
