@@ -38,7 +38,7 @@ public class ShakaiFukushiHoujinnKeigenNinnteiMybatisParameter implements IMyBat
     private ReportId 帳票ID;
     private RString 出力順;
     private RString 被保番号;
-    private RString DBD介護受給;
+    private RString 介護受給;
     private RString 減免適用開始日;
 
     /**
@@ -68,7 +68,7 @@ public class ShakaiFukushiHoujinnKeigenNinnteiMybatisParameter implements IMyBat
         this.年度開始日 = 年度開始日;
         this.年度終了日 = 年度終了日;
         this.決定区分_承認する = KetteiKubun.承認する.getコード();
-        this.DBD介護受給 = SubGyomuCode.DBD介護受給.getGyomuCode().value();
+        this.介護受給 = SubGyomuCode.DBD介護受給.getGyomuCode().value();
         this.被保番号 = 被保番号;
         this.出力順 = 出力順;
         this.帳票ID = 帳票ID;
