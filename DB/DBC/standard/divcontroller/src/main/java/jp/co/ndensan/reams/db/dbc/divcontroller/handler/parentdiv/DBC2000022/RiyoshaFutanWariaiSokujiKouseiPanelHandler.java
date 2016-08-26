@@ -929,9 +929,9 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
                 if (arg0.get有効開始日() != null && arg1.get有効開始日() != null
                         && arg0.get有効終了日() != null && arg1.get有効終了日() != null) {
                     if (arg0.get有効開始日().compareTo(arg1.get有効開始日()) == 0) {
-                        return arg0.get有効終了日().compareTo(arg1.get有効終了日());
+                        return arg1.get有効終了日().compareTo(arg0.get有効終了日());
                     } else {
-                        return arg0.get有効開始日().compareTo(arg1.get有効開始日());
+                        return arg1.get有効開始日().compareTo(arg0.get有効開始日());
                     }
                 }
                 return 0;

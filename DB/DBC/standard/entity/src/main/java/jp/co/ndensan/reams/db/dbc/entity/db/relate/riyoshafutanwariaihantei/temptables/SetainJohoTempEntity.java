@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  * 世帯員情報の一時表エンティティです。
@@ -23,14 +24,19 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SetainJohoTempEntity implements IDbAccessable {
 
+    @PrimaryKey
     private HihokenshaNo hihokenshaNo;
+    @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
+    @PrimaryKey
+    private FlexibleYear taishoNendo;
+    @PrimaryKey
+    private RString taishoTsuki;
+    @PrimaryKey
+    private SetaiCode setaiCode;
     private ShikibetsuCode honinShikibetsuCode;
     private FlexibleDate kijunYMD;
     private FlexibleYear shotokuNendo;
     private boolean jutokuGaitoFlag;
-    private FlexibleYear taishoNendo;
-    private RString taishoTsuki;
-    private SetaiCode setaiCode;
     private RString setaiShotokuHonninKubun;
 }

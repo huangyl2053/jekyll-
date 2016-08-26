@@ -205,9 +205,12 @@ public class RiyoshaFutanWariaiHantei {
     private Decimal get公的年金収入額世帯員分の合計(List<SetaiinShotoku> 介護所得情報リスト) {
         Decimal sum = Decimal.ZERO;
         for (SetaiinShotoku 介護所得情報 : 介護所得情報リスト) {
+            if (介護所得情報 == null) {
+                continue;
+            }
             Decimal sub = 介護所得情報.get年金収入額();
             if (sub != null) {
-                sum.add(介護所得情報.get年金収入額());
+                sum = sum.add(nonullDecimal(介護所得情報.get年金収入額()));
             }
         }
         return sum;
@@ -216,7 +219,10 @@ public class RiyoshaFutanWariaiHantei {
     private Decimal getその他の合計所得金額世帯員分の合計(List<SetaiinShotoku> 介護所得情報リスト) {
         Decimal sum = Decimal.ZERO;
         for (SetaiinShotoku 介護所得情報 : 介護所得情報リスト) {
-            sum.add(noMinusDecimal(nonullSubstract(介護所得情報.get合計所得金額(),
+            if (介護所得情報 == null) {
+                continue;
+            }
+            sum = sum.add(noMinusDecimal(nonullSubstract(介護所得情報.get合計所得金額(),
                     介護所得情報.get年金所得額())));
         }
         return sum;
@@ -231,7 +237,10 @@ public class RiyoshaFutanWariaiHantei {
     public Decimal get公的年金収入額世帯員分合計(List<DbV2512KaigoShotokuNewestEntity> 介護所得情報リスト) {
         Decimal sum = Decimal.ZERO;
         for (DbV2512KaigoShotokuNewestEntity 介護所得情報 : 介護所得情報リスト) {
-            sum.add(介護所得情報.getNenkiniShunyuGaku());
+            if (介護所得情報 == null) {
+                continue;
+            }
+            sum = sum.add(nonullDecimal(介護所得情報.getNenkiniShunyuGaku()));
         }
         return sum;
     }
@@ -245,7 +254,10 @@ public class RiyoshaFutanWariaiHantei {
     public Decimal getその他の合計所得金額世帯員分合計(List<DbV2512KaigoShotokuNewestEntity> 介護所得情報リスト) {
         Decimal sum = Decimal.ZERO;
         for (DbV2512KaigoShotokuNewestEntity 介護所得情報 : 介護所得情報リスト) {
-            sum.add(noMinusDecimal(nonullSubstract(介護所得情報.getGokeiShotokuGaku(),
+            if (介護所得情報 == null) {
+                continue;
+            }
+            sum = sum.add(noMinusDecimal(nonullSubstract(介護所得情報.getGokeiShotokuGaku(),
                     介護所得情報.getNenkiniShotokuGaku())));
         }
         return sum;
@@ -549,7 +561,6 @@ public class RiyoshaFutanWariaiHantei {
             }
             edaNo++;
             now.setEdaNo(edaNo);
-            before.setYukoShuryoYMD(now.getYukoKaishiYMD().minusDay(1));
             前負担割合区分 = before.getFutanWariaiKubun();
             現負担割合区分 = now.getFutanWariaiKubun();
             前判定区分 = before.getHanteiKubun();
@@ -559,6 +570,9 @@ public class RiyoshaFutanWariaiHantei {
             } else {
                 now.setKoseiJiyu(before.getKoseiJiyu());
                 now.setYukoKaishiYMD(before.getYukoKaishiYMD());
+            }
+            if (now.getYukoKaishiYMD() != null && !now.getYukoKaishiYMD().isEmpty()) {
+                before.setYukoShuryoYMD(now.getYukoKaishiYMD().minusDay(1));
             }
             before = now;
         }
@@ -602,12 +616,12 @@ public class RiyoshaFutanWariaiHantei {
         }
         if (HanteiKubunType.負担割合判定.code().equals(現判定区分)
                 && HanteiKubunType.旧措置.code().equals(前判定区分)) {
-            now.setKoseiJiyu(KoseiJiyuType.本人所得更正.getコード());
+            now.setKoseiJiyu(KoseiJiyuType.その他.getコード());
             now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
         }
         if (HanteiKubunType.負担割合判定.code().equals(現判定区分)
                 && HanteiKubunType.非課税.code().equals(前判定区分)) {
-            now.setKoseiJiyu(KoseiJiyuType.その他.getコード());
+            now.setKoseiJiyu(KoseiJiyuType.本人所得更正.getコード());
             now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
         }
     }
@@ -632,12 +646,14 @@ public class RiyoshaFutanWariaiHantei {
         if (!equalsDecimal(now.getHonninGoukeiShotokuGaku(), before.getHonninGoukeiShotokuGaku())) {
             now.setKoseiJiyu(KoseiJiyuType.本人所得更正.getコード());
             now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
+            return;
         }
         if (!equalsDecimal(now.getNenkinShunyuGoukei(), before.getNenkinShunyuGoukei())
                 || (!equalsDecimal(now.getSonotanoGoukeiShotokuKingakuGoukei(),
                         before.getSonotanoGoukeiShotokuKingakuGoukei()))) {
             now.setKoseiJiyu(KoseiJiyuType.世帯員所得更正.getコード());
             now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
+            return;
         }
         if (!equalsInteger(now.getSetaiIchigouHihokenshaSu(), before.getSetaiIchigouHihokenshaSu())) {
             now.setKoseiJiyu(KoseiJiyuType.世帯構成変更.getコード());

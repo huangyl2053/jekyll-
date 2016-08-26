@@ -34,8 +34,8 @@ public enum JukyushaIdoRenrakuhyoTorokuPanelSpec implements IPredicate<JukyushaI
          * @param div JukyushaIdoRenrakuhyoTorokuPanelDiv
          */
         public static boolean is発行日の必須チェック場合(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
-            // TODO QA1320
-            return (div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getOutputJukyushaIdoRenrakuhyo().getBtnHakkou() != null);
+            return (div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getOutputJukyushaIdoRenrakuhyo()
+                    .getOutputJukyushaIdoRenrakuhyoSetting().getIssueDate() != null);
         }
 
     }

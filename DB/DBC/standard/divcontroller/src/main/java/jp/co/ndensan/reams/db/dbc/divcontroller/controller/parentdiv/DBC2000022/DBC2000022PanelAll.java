@@ -360,6 +360,10 @@ public class DBC2000022PanelAll {
         } else {
             利用者負担割合 = getHandler(div).update利用者負担割合情報(利用者負担割合, 処理モード);
             ViewStateHolder.put(ViewStateKeys.利用者負担割合, 利用者負担割合);
+            ValidationMessageControlPairs validPairs3 = getCheckHandler(div).保存入力チェック();
+            if (validPairs3.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs3).respond();
+            }
             ValidationMessageControlPairs validPairs1 = getCheckHandler(div).枝番間期間チェック();
             if (validPairs1.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs1).respond();

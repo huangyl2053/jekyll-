@@ -76,14 +76,6 @@ public class NijihanteiKekkaTorokuMobileOutPutProcess extends BatchProcessBase<N
     @Override
     protected void process(NijihanteiKekkaTorokuMobileRelateEntity entity) {
         eucCsvWriter.writeLine(new ShinsaTaishoDataOutPutResult().setNijihanteiKekkaTorokuMobileEucCsvEntity(entity));
-        // TODO Redmine#96649　未回答
-//        if (entity.getイメージ共有ファイルID() != null) {
-//            ReadOnlySharedFileEntryDescriptor ro_sfed = new ReadOnlySharedFileEntryDescriptor(
-//                    new FilesystemName(entity.get証記載保険者番号().concat(entity.get被保険者番号())), entity.getイメージ共有ファイルID());
-//            RString tmpPath = Path.getTmpDirectoryPath();
-//            FilesystemPath filesystemPath = new FilesystemPath(tmpPath);
-//            SharedFile.copyToLocal(ro_sfed, filesystemPath);
-//        }
     }
 
     @Override

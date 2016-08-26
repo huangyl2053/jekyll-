@@ -332,8 +332,14 @@
         "koseimae_fuShunyuGaku13" = DbT2015KeisangoJohoTemp."fuShunyuGaku13",
         "koseimae_fuShunyuGaku14" = DbT2015KeisangoJohoTemp."fuShunyuGaku14",
         "koseimaeJohoUmuKubun" = '1'
+        <if test="一括発行起動">
         FROM
-        "DbT2015KeisangoJohoTemp"  AS DbT2015KeisangoJohoTemp
+            "DbT2015KeisangoJohoTemp"  AS DbT2015KeisangoJohoTemp
+        </if>
+        <if test="!一括発行起動">
+        FROM
+            rgdb."DbT2015KeisangoJoho"  AS DbT2015KeisangoJohoTemp
+        </if>
         WHERE
         "DbT2002FukaTemp"."koseigo_choteiNendo" = DbT2015KeisangoJohoTemp."choteiNendo"
         AND "DbT2002FukaTemp"."koseigo_fukaNendo" = DbT2015KeisangoJohoTemp."fukaNendo"
@@ -491,10 +497,10 @@
             AND 1 = 1
         </if>
         <if test="出力対象区分 == 2">
-            AND DbT2002FukaTemp."hihokenshaKubun" = '0'
+            AND "DbT2002FukaTemp"."hihokenshaKubun" = '0'
         </if>
         <if test="出力対象区分 == 3">
-            AND (DbT2002FukaTemp."hihokenshaKubun" = '1' OR "hihokenshaKubun" = '2')
+            AND ("DbT2002FukaTemp"."hihokenshaKubun" = '1' OR "DbT2002FukaTemp"."hihokenshaKubun" = '2')
         </if>
         <if test="出力順 != null and !出力順.isEmpty()">
             ${出力順}
