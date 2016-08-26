@@ -441,7 +441,7 @@
         WHERE
         "koseigo_choshuHoho4gatsu" IN (#{特別徴収_厚生労働省}, #{特別徴収_地共済})
         AND
-        "zennendoTokuchoKibetsuKingaku06" = '0'
+        ("zennendoTokuchoKibetsuKingaku06" = '0' OR "zennendoTokuchoKibetsuKingaku06" IS NULL)
     </select>
 
     <select resultOrdered="true" id="select6月開始の被保険者区分TempTableEntity"
