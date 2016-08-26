@@ -366,8 +366,8 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
             div.getDdlNinteiKubun().setDisabled(!is承認する);
             div.getDdlNinteiNaiyo().setDisabled(!is承認する);
         }
-        div.getTxtHiShoninRiyu().setDisabled(is申請メニュー);
-        div.getBtnHiShoninRiyu().setDisabled(is申請メニュー);
+        div.getTxtHiShoninRiyu().setDisabled(is申請メニュー || is承認する);
+        div.getBtnHiShoninRiyu().setDisabled(is申請メニュー || is承認する);
     }
 
     /**
