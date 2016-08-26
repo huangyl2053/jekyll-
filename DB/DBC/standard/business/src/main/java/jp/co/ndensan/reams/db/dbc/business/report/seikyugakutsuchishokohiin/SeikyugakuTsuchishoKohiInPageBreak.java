@@ -22,8 +22,8 @@ public class SeikyugakuTsuchishoKohiInPageBreak extends PageBreaker<SeikyugakuTs
 
     private final List<RString> breakKeysList = Collections.unmodifiableList(Arrays.asList(
             new RString(SeikyugakuTsuchishoKohifutanshabunSource.DBC200067SeikyugakuTsuchishoKohifutanshabunFields.kohiFutanshaNo.name()),
-            new RString(SeikyugakuTsuchishoKohifutanshabunSource.DBC200067SeikyugakuTsuchishoKohifutanshabunFields.kanName.name()),
-            new RString(SeikyugakuTsuchishoKohifutanshabunSource.DBC200067SeikyugakuTsuchishoKohifutanshabunFields.kouName.name())
+            new RString(SeikyugakuTsuchishoKohifutanshabunSource.DBC200067SeikyugakuTsuchishoKohifutanshabunFields.kanCode.name()),
+            new RString(SeikyugakuTsuchishoKohifutanshabunSource.DBC200067SeikyugakuTsuchishoKohifutanshabunFields.kouCode.name())
     ));
 
     @Override

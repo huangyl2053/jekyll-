@@ -307,7 +307,8 @@ public class JigoSakuseiMeisaiTouroku {
             result.set利用者負担定率定額区分(entity.get利用者負担定率定額区分());
             if (entity.is合計フラグ()) {
                 Decimal 利用者負担額;
-                if (ServiceCategoryShurui.総用貸与.getコード().equals(entity.getサービス種類コード().getColumnValue())) {
+                if (ServiceCategoryShurui.総用貸与.getコード()
+                        .equals(entity.getサービス種類コード() == null ? null : entity.getサービス種類コード().getColumnValue())) {
                     利用者負担額 = entity.get定額利用者負担単価金額();
                 } else {
                     利用者負担額 = nullToZero(entity.get定額利用者負担単価金額()).multiply(nullToZero(entity.get回数()));

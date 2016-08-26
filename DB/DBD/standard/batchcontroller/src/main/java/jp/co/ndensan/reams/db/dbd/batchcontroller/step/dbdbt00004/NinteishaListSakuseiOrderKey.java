@@ -18,47 +18,52 @@ public enum NinteishaListSakuseiOrderKey implements IReportItems {
     /**
      * 項目ID:0001 フォームフィールド名:郵便番号 MyBatis項目名:定義なし
      */
-    郵便番号("0001", "郵便番号", "宛名.\"yubinNo\""),
+    郵便番号("0001", "郵便番号", "\"ShikibetsuTaisho\".\"yubinNo\""),
+    //    郵便番号("0001", "郵便番号", "shikibetsuCode.\"yubinNo\""),
     /**
      * 項目ID:0002 フォームフィールド名:町域コード MyBatis項目名:定義なし
      */
-    町域コード("0002", "町域コード", "宛名.\"choikiCode\""),
+    町域コード("0002", "町域コード", "\"ShikibetsuTaisho\".\"choikiCode\""),
+    //    町域コード("0002", "町域コード", "shikibetsuCode.\"choikiCode\""),
     /**
      * 項目ID:0003 フォームフィールド名:番地コード MyBatis項目名:定義なし
      */
-    番地コード("0003", "番地コード", "宛名.\"banchiCode1\""),
+    番地コード("0003", "番地コード", "\"ShikibetsuTaisho\".\"banchiCode1\""),
+    //    番地コード("0003", "番地コード", "shikibetsuCode.\"banchiCode1\""),
     /**
      * 項目ID:0004 フォームフィールド名:行政区コード MyBatis項目名:定義なし
      */
-    行政区コード("0004", "行政区コード", "宛名.\"gyoseikuCode\""),
+    行政区コード("0004", "行政区コード", "\"ShikibetsuTaisho\".\"gyoseikuCode\""),
     /**
      * 項目ID:0005 フォームフィールド名:地区１ MyBatis項目名:定義なし
      */
-    地区１("0005", "地区１", "宛名.\"chikuName1\""),
+    地区１("0005", "地区１", "\"ShikibetsuTaisho\".\"chikuName1\""),
     /**
      * 項目ID:0006 フォームフィールド名:地区 2 MyBatis項目名:定義なし
      */
-    地区2("0006", "地区2", "宛名.\"chikuName2\""),
+    地区2("0006", "地区2", "\"ShikibetsuTaisho\".\"chikuName2\""),
     /**
      * 項目ID:0008 フォームフィールド名:世帯コードMyBatis項目名:定義なし
      */
-    世帯コード("0008", "世帯コード", "宛名.\"setaiCode\""),
+    世帯コード("0008", "世帯コード", "\"ShikibetsuTaisho\".\"setaiCode\""),
+    //    世帯コード("0008", "世帯コード", "shikibetsuCode.\"setaiCode\""),
     /**
      * 項目ID:0009 フォームフィールド名:識別コードMyBatis項目名:定義なし
      */
-    識別コード("0009", "識別コード", "宛名.\"shikibetsuCode\""),
+    識別コード("0009", "識別コード", "\"ShikibetsuTaisho\".\"shikibetsuCode\""),
+    //    識別コード("0009", "識別コード", "shikibetsuCode.\"shikibetsuCode\""),
     /**
      * 項目ID:0010 フォームフィールド名:氏名５０音カナMyBatis項目名:定義なし
      */
-    氏名５０音カナ("0010", "氏名５０音カナ", "宛名.\"gaikokujinKanaShimei\""),
+    氏名５０音カナ("0010", "氏名５０音カナ", "\"ShikibetsuTaisho\".\"gaikokujinKanaShimei\""),
     /**
      * 項目ID:0012 フォームフィールド名:生年月日MyBatis項目名:定義なし
      */
-    生年月日("0012", "生年月日", "宛名.\"seinengappiYMD\""),
+    生年月日("0012", "生年月日", "\"ShikibetsuTaisho\".\"seinengappiYMD\""),
     /**
      * 項目ID:0013 フォームフィールド名:性別MyBatis項目名:定義なし
      */
-    性別("0013", "性別", "宛名.\"seibetsuCode\""),
+    性別("0013", "性別", "\"ShikibetsuTaisho\".\"seibetsuCode\""),
     /**
      * 項目ID:0016 フォームフィールド名:市町村コード MyBatis項目名:定義なし
      */

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt13011;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt13011.GeneralPurposeListOutputProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputEucCsvEntity;
@@ -911,6 +912,14 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         return YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(koroshoIfCode), code).getName();
     }
 
+    private RString edit抽出項目区分(RString 抽出項目区分) {
+        try {
+            return ChushutsuKomokuKubun.toValue(抽出項目区分).get名称();
+        } catch (Exception e) {
+            return RString.EMPTY;
+        }
+    }
+
     private List<RString> get出力条件表() {
         List<RString> list = new ArrayList<>();
         AtenaSelectBatchParameter atenaSelectBatchParameter = processParamter.get宛名抽出条件();
@@ -929,16 +938,16 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
 
         if ((processParamter.get日付範囲From() != null && !processParamter.get日付範囲From().isEmpty())
                 && (processParamter.get日付範囲To() != null && !processParamter.get日付範囲To().isEmpty())) {
-            list.add(processParamter.get抽出項目区分().concat(new RString(":")).concat(edit日期(processParamter.get日付範囲From())).concat(出力条件表_中間符号)
+            list.add(edit抽出項目区分(processParamter.get抽出項目区分()).concat(new RString(":")).concat(edit日期(processParamter.get日付範囲From())).concat(出力条件表_中間符号)
                     .concat(edit日期(processParamter.get日付範囲To())));
         }
         if ((processParamter.get日付範囲From() != null && !processParamter.get日付範囲From().isEmpty())
                 && (processParamter.get日付範囲To() == null || processParamter.get日付範囲To().isEmpty())) {
-            list.add(processParamter.get抽出項目区分().concat(new RString(":")).concat(edit日期(processParamter.get日付範囲From())).concat(出力条件表_中間符号));
+            list.add(edit抽出項目区分(processParamter.get抽出項目区分()).concat(new RString(":")).concat(edit日期(processParamter.get日付範囲From())).concat(出力条件表_中間符号));
         }
         if ((processParamter.get日付範囲From() == null || processParamter.get日付範囲From().isEmpty())
                 && (processParamter.get日付範囲To() != null && !processParamter.get日付範囲To().isEmpty())) {
-            list.add(processParamter.get抽出項目区分().concat(new RString(":")).concat(出力条件表_中間符号).concat(edit日期(processParamter.get日付範囲To())));
+            list.add(edit抽出項目区分(processParamter.get抽出項目区分()).concat(new RString(":")).concat(出力条件表_中間符号).concat(edit日期(processParamter.get日付範囲To())));
         }
 
         if (processParamter.is直近データ抽出()) {
@@ -948,8 +957,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         if (processParamter.get喪失区分() != null && !資格判定なし.equals(processParamter.get喪失区分().get名称())) {
             list.add(出力条件表_喪失区分.concat(processParamter.get喪失区分().get名称()));
         }
-        set出力条件表_年齢(atenaSelectBatchParameter, nenreiSoChushutsuHoho, list
-        );
+        set出力条件表_年齢(atenaSelectBatchParameter, nenreiSoChushutsuHoho, list);
         set出力条件表_生年月日(atenaSelectBatchParameter, nenreiSoChushutsuHoho, list);
         set出力条件表_地区選択(atenaSelectBatchParameter, list);
         return list;
@@ -957,6 +965,14 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
 
     private RString edit日期(FlexibleDate 変更前日期) {
         if (変更前日期 != null && !変更前日期.isEmpty()) {
+            return 変更前日期.wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString edit日期RDate(RDate 変更前日期) {
+        if (変更前日期 != null) {
             return 変更前日期.wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         }
@@ -983,7 +999,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
                         .concat(出力条件表_HALF_SPACE)
                         .concat(出力条件表_左丸括弧)
                         .concat(出力条件表_年齢基準日)
-                        .concat(edit日期(processParamter.get基準日()))
+                        .concat(edit日期RDate(atenaSelectBatchParameter.getNenreiKijunbi()))
                         .concat(出力条件表_右丸括弧));
             }
             if (Decimal.ZERO != startAge && Decimal.ZERO == endAge) {
@@ -995,7 +1011,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
                         .concat(出力条件表_HALF_SPACE)
                         .concat(出力条件表_左丸括弧)
                         .concat(出力条件表_年齢基準日)
-                        .concat(edit日期(processParamter.get基準日()))
+                        .concat(edit日期RDate(atenaSelectBatchParameter.getNenreiKijunbi()))
                         .concat(出力条件表_右丸括弧));
             }
 
@@ -1007,7 +1023,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
                         .concat(出力条件表_HALF_SPACE)
                         .concat(出力条件表_左丸括弧)
                         .concat(出力条件表_年齢基準日)
-                        .concat(edit日期(processParamter.get基準日()))
+                        .concat(edit日期RDate(atenaSelectBatchParameter.getNenreiKijunbi()))
                         .concat(出力条件表_右丸括弧));
             }
         }

@@ -14,7 +14,16 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 public enum DBU0600031TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    再検索("再検索");
+    再検索("再検索"),
+    総合照会資格情報("総合照会資格情報"),
+    総合照会受給情報("総合照会受給情報"),
+    総合照会賦課情報("総合照会賦課情報"),
+    総合照会住民情報("総合照会住民情報"),
+    居宅サービス計画情報("居宅サービス計画情報"),
+    償還払い情報("償還払い情報"),
+    高額サービス費情報("高額サービス費情報"),
+    給付実績情報("給付実績情報"),
+    完了("完了");
 
     private final RString name;
 

@@ -184,14 +184,15 @@ public class ShokanBaraiKa1GoManager {
         List<TainoKiSummary> tainoKiSummary = 滞納判定結果.get滞納情報();
         int 連番 = 0;
         for (TainoKiSummary summary : tainoKiSummary) {
-            TaishoHanteiKubun 対象管理区分 = get対象管理区分(連番 + 1, summary.get時効区分().getコード(), 支払方法変更滞納情報);
+            連番 = 連番 + 1;
+            TaishoHanteiKubun 対象管理区分 = get対象管理区分(連番, summary.get時効区分().getコード(), 支払方法変更滞納情報);
             DbT4022ShiharaiHohoHenkoTainoEntity entity = new DbT4022ShiharaiHohoHenkoTainoEntity();
             entity.setShoKisaiHokenshaNo(証記載保険者番号);
             entity.setHihokenshaNo(被保険者番号);
             entity.setKanriKubun(ShiharaiHenkoKanriKubun._１号償還払い化.getコード());
             entity.setRirekiNo(get最大履歴番号(最大履歴番号));
             entity.setTainoHanteiKubun(滞納判定区分);
-            entity.setRenNo(連番++);
+            entity.setRenNo(連番);
             entity.setChoteiNendo(summary.get調定年度());
             entity.setFukaNendo(summary.get賦課年度());
             entity.setTsuchishoNo(summary.get通知書番号());

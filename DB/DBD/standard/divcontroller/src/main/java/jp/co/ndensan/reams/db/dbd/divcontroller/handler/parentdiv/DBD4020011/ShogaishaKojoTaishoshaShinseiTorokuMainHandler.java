@@ -125,6 +125,9 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
         div.getCcdKaigoKihon().initialize(被保険者番号);
         div.getCcdGemmenGengakuShinsei().initialize(識別コード);
         List<ShogaishaKoujoToJotai> 情報と状態List = 情報と状態初期化(申請一覧情報);
+        if (申請メニュー.equals(ResponseHolder.getMenuID())) {
+            申請情報を追加するボタン活性設定(申請一覧情報);
+        }
         div.getDgShinseiList().setDataSource(getDataSource(情報と状態List));
         div.getDdlNinchishoKoreishaJiritsudo().setDataSource(get認知症高齢者自立度DataSource());
         div.getDdlNinchishoKoreishaJiritsudo().setSelectedKey(RString.EMPTY);
@@ -140,6 +143,15 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
         AccessLogger.log(AccessLogType.照会, personalData);
         申請情報エリア非活性制御();
         return 情報と状態List;
+    }
+
+    private void 申請情報を追加するボタン活性設定(List<ShogaishaKoujo> 申請一覧情報) {
+        for (ShogaishaKoujo 申請情報 : 申請一覧情報) {
+            if (null == 申請情報.get決定年月日() || 申請情報.get決定年月日().isEmpty()) {
+                div.getBtnAddShinsei().setDisabled(true);
+                return;
+            }
+        }
     }
 
     private List<KeyValueDataSource> get認知症高齢者自立度DataSource() {
@@ -378,7 +390,6 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
     public void onSelectByModifyButton(ShogaishaKoujoToJotai 情報と状態) {
         set申請情報エリア(情報と状態);
         一覧制御(状態_追加.equals(情報と状態.get状態()), 承認する.equals(情報と状態.get障がい書控除申請登録情報().get決定区分()));
-        div.getTxtTaishoNendo().setDisabled(true);
     }
 
     private void set申請情報エリア(ShogaishaKoujoToJotai 情報と状態) {
@@ -635,9 +646,13 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
             builder.setGemmenGengakuShinsei(get修正減免減額申請(減免減額申請));
         }
         情報と状態.set障がい書控除申請登録情報(builder.build());
-        if (情報と状態.get状態().isNullOrEmpty() || 状態_修正.equals(情報と状態.get状態()) || 状態_削除.equals(情報と状態.get状態())) {
+        if (isNullOrEmpty(情報と状態.get状態()) || 状態_修正.equals(情報と状態.get状態()) || 状態_削除.equals(情報と状態.get状態())) {
             情報と状態.set状態(状態_修正);
         }
+    }
+
+    private boolean isNullOrEmpty(RString value) {
+        return null == value || value.isEmpty();
     }
 
     private RString get認定区分Or認定内容Key(RString key) {
@@ -973,7 +988,7 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
     public boolean 変更有無チェック() {
         List<dgShinseiList_Row> rowList = div.getDgShinseiList().getDataSource();
         for (dgShinseiList_Row row : rowList) {
-            if (!row.getJotai().isNullOrEmpty()) {
+            if (!isNullOrEmpty(row.getJotai())) {
                 return true;
             }
         }
@@ -989,7 +1004,7 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
         List<dgShinseiList_Row> rowList = div.getDgShinseiList().getDataSource();
         List<RString> 対象年度List = new ArrayList<>();
         for (dgShinseiList_Row row : rowList) {
-            if (漢字承認する.equals(row.getKetteiKubun())) {
+            if (!isNullOrEmpty(row.getKetteiKubun())) {
                 対象年度List.add(row.getShinseiJiyu());
             }
         }

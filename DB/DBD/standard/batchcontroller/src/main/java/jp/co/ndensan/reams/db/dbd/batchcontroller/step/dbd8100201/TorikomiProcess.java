@@ -60,7 +60,7 @@ public class TorikomiProcess extends BatchProcessBase<RString> {
     private int k = 0;
     private RString batFileName;
     private static final int ROW_LENGTH = 1596;
-    private final RString エラー = new RString("入力データエラー");
+    private final RString エラー = new RString("ファイルの桁数エラー");
     private List<RString> codeList;
 
     @Override
@@ -109,7 +109,7 @@ public class TorikomiProcess extends BatchProcessBase<RString> {
             FilesystemName filesystemName = new FilesystemName(entry.getSharedFileName());
             ReadOnlySharedFileEntryDescriptor entitydesc = new ReadOnlySharedFileEntryDescriptor(filesystemName, entry.getSharedFileId());
             SharedFile.copyToLocal(entitydesc, filesystemPath);
-            batFileName = Path.combinePath(tmpPath, entry.getSharedFileName());
+            batFileName = Path.combinePath(tmpPath, entry.getLocalFileName());
             reader = new FldReader.InstanceBuilder(batFileName, TorikomiCsvDataEntity.class)
                     .setEncodeShiftJis()
                     .setNewLine(NewLine.LF)
@@ -146,7 +146,6 @@ public class TorikomiProcess extends BatchProcessBase<RString> {
 
     private void batchError(RString logMessage) {
         RLogger.error(logMessage);
-        throw new BatchGyomuException(DbdErrorMessages.アップロードファイル無し.getMessage());
     }
 
     private TorikomiTempTableEntity setTbleName1(TorikomiCsvDataEntity entity) {

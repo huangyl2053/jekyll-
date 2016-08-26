@@ -77,7 +77,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
     private final RiyoshaFutanWariaiSokujiKouseiManager manager;
     private final RiyoshaFutanWariaiSokujiKouseiFinder finder;
 
-    private static final RString 回収事由 = new RString("00");
+    private static final int INT_2 = 2;
     private static final RString RSTZERO = new RString("0");
     private static final RString RSTONE = new RString("1");
     private static final RString RSTTWO = new RString("2");
@@ -121,7 +121,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             for (RiyoshaFutanWariaiMeisai entity : entityList) {
                 RString 資格区分 = entity.get資格区分();
                 RiyoshaFutanWariaiMeisaiBuilder builder = entity.createBuilderForEdit();
-                builder.set資格区分(資格区分.padZeroToLeft(2));
+                builder.set資格区分(資格区分.padZeroToLeft(INT_2));
                 entity = builder.build();
                 rowsData.add(getDataGridRow(entity, RSTZERO));
             }
@@ -629,11 +629,11 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
     public void 利用者負担割合編集(RiyoshaFutanWariai 利用者負担割合) {
         RiyoshaFutanWariaiBuilder 利用者負担割合builder = 利用者負担割合.createBuilderForEdit();
         利用者負担割合builder.set発行区分(div.getDdlHakkoKubun().getSelectedKey());
-        利用者負担割合builder.set発行日(new FlexibleDate(div.getTxtHanteibi().getValue().toString()));
+        利用者負担割合builder.set発行日(new FlexibleDate(div.getTxtHakkobi().getValue().toString()));
         利用者負担割合builder.set交付日(new FlexibleDate(div.getTxtKofubi().getValue().toString()));
         利用者負担割合builder.set論理削除フラグ(true);
         利用者負担割合 = 利用者負担割合builder.build();
-        利用者負担割合.toEntity().setState(EntityDataState.Modified);
+        利用者負担割合.modified();
     }
 
     /**
@@ -659,13 +659,18 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         証交付回収builder.set交付年月日(new FlexibleDate(div.getTxtKofubi().getValue().toString()));
         List<dgFutanWariai_Row> list = div.getDgFutanWariai().getDataSource();
         証交付回収builder.set有効期限(new FlexibleDate(list.get(list.size() - 1).getTekiyoShuryobi().getValue().toString()));
-        証交付回収builder.set回収事由(回収事由);
         RString 交付事由 = div.getDdlKofuJiyu().getSelectedKey();
         if (交付事由 != null) {
             証交付回収builder.set交付事由(交付事由);
         }
+        証交付回収builder.set交付理由(RString.EMPTY);
+        証交付回収builder.set回収年月日(FlexibleDate.EMPTY);
+        証交付回収builder.set回収事由(RString.EMPTY);
+        証交付回収builder.set回収理由(RString.EMPTY);
         証交付回収builder.set単票発行有無フラグ(true);
         証交付回収builder.set発行処理日時(YMDHMS.now());
+        証交付回収builder.set新様式印書済区分コード(RString.EMPTY);
+        証交付回収builder.set証様式区分コード(RString.EMPTY);
         証交付回収builder.set論理削除フラグ(false);
         new証交付回収 = 証交付回収builder.build();
         new証交付回収.toEntity().setState(EntityDataState.Added);
@@ -717,7 +722,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             builder.set更正理由(div.getTxtBiko().getValue());
             builder.set世帯コード(new SetaiCode(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getHdnTxtSetaiCode()));
             new利用者負担割合明細 = builder.build();
-            new利用者負担割合明細.toEntity().setState(EntityDataState.Added);
+            new利用者負担割合明細.added();
             holder.addRiyoshaFutanWariaiMeisai(new利用者負担割合明細);
         }
         sort利用者負担割合明細(holder.get利用者負担割合明細());
@@ -796,7 +801,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             利用者負担割合 = 利用者負担割合.added();
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
-            利用者負担割合 = 利用者負担割合.modified();
+            利用者負担割合.modified();
         }
         return 利用者負担割合;
     }
@@ -929,9 +934,9 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
                 if (arg0.get有効開始日() != null && arg1.get有効開始日() != null
                         && arg0.get有効終了日() != null && arg1.get有効終了日() != null) {
                     if (arg0.get有効開始日().compareTo(arg1.get有効開始日()) == 0) {
-                        return arg1.get有効終了日().compareTo(arg0.get有効終了日());
+                        return arg0.get有効終了日().compareTo(arg1.get有効終了日());
                     } else {
-                        return arg1.get有効開始日().compareTo(arg0.get有効開始日());
+                        return arg0.get有効開始日().compareTo(arg1.get有効開始日());
                     }
                 }
                 return 0;

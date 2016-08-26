@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC27000",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "給付費単位数表標準マスタ取込",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC2700011",
+     "toLayoutTitle": "給付費単位数表標準マスタ取込",
+     "toState": "初期画面"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC2700011",
+     "layoutTitle": "給付費単位数表標準マスタ取込",
+     "eventName": "バッチ起動",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

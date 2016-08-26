@@ -4,10 +4,10 @@
 <!-- 概要： 社会福祉法人軽減情報を抽出する用XMLです。-->
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteishalistsakusei.INinteishaListSakuseiMapper">
     <select resultOrdered="true" id="select社会福祉法人軽減情報"  resultMap="NinteishaListSakuseiEntityResult"
-    parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.ninteishalistsakusei.NinteishaListSakuseiParameter" fetchSize="500">
-    <include refid="selectNinteishaListSakuseiEntityList" />
-  </select>
-  <resultMap id="NinteishaListSakuseiEntityResult" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd200004.ShakaiFukushiHojinKeigenGaitoshaIchiranEntity">
+        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.ninteishalistsakusei.NinteishaListSakuseiParameter" fetchSize="500">
+        <include refid="selectNinteishaListSakuseiEntityList" />
+    </select>
+  <resultMap id="NinteishaListSakuseiEntityResult" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd200004.ShakaiFukushiHojinKeigenGaitoshaIchiranEntity" autoMapping="true">
         <id property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="本人課税区分" column="本人課税区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -25,9 +25,8 @@
         <result property="計画事業者番号" column="計画事業者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="計画事業者名" column="計画事業者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="is自己作成" column="is自己作成"  typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
-        <association  property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
-        <association  property="社会福祉法人等利用者負担軽減の情報"  
-resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.shafukukeigen.IShafukuRiyoshaFutanKeigenMapper.resultMap_ShafukuRiyoshaFutanKeigenEntity"/>
+        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="社会福祉法人等利用者負担軽減の情報" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.shafukukeigen.IShafukuRiyoshaFutanKeigenMapper.resultMap_ShafukuRiyoshaFutanKeigenEntity"/>
         <collection property="世帯員リスト" resultMap="resultMap_setaiinshotokujoho"/>
     </resultMap>
     <sql id="selectNinteishaListSakuseiEntityList">
@@ -37,20 +36,20 @@ resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku
         減免減額対象者判定用根拠."is老齢福祉年金受給者",
         減免減額対象者判定用根拠."is所得税課税者",
         減免減額対象者判定用根拠."is生活保護受給者",
-        宛名.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />,
         認定情報.*,
         要介護認定申請情報."koroshoIfShikibetsuCode",
         受給者台帳Newest."kyuSochishaFlag",
         社会福祉法人等利用者負担軽減.*,
         減免減額申請.*,
-        世帯員情報.*,
+<!--        世帯員情報.*,-->
         施設入所情報.*
         FROM
         "taishoShaHanteiYoukonkyoItokiTemp" AS 減免減額対象者判定用根拠
         LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
-        AS 宛名
+        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
         ON
-        宛名."shikibetsuCode" = 減免減額対象者判定用根拠."本人識別コード"
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = 減免減額対象者判定用根拠."本人識別コード"
         LEFT JOIN
          (
            SELECT 
@@ -99,13 +98,14 @@ resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku
                      世帯員所得情報一時."shikibetsuCode",
                      世帯員所得情報一時."kazeiKubun",
                      世帯員所得情報一時."kazeiShotokuGaku",
-                     世帯員宛名.*
+                     <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
                FROM
                      "TmpSetaiShotoku" AS 世帯員所得情報一時
-               INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
-                      AS 世帯員宛名
+               INNER JOIN 
+                     <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+               AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
                ON 
-               世帯員宛名."shikibetsuCode" = 世帯員所得情報一時."shikibetsuCode"
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = 世帯員所得情報一時."shikibetsuCode"
                WHERE 
                <![CDATA[世帯員所得情報一時."honninKubun"<>'1']]>
               <if test="世帯表示 ==2">
@@ -245,7 +245,7 @@ resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku
                      </if>
               </foreach>
             </if>
-           ${出力順}
+            ${出力順}
     </sql>
     
     <resultMap id="resultMap_setaiinshotokujoho" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd200004.Setaiinshotokujoho" autoMapping="true">

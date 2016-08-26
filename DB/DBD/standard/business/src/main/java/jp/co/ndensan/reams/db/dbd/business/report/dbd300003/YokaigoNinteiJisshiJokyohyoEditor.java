@@ -34,6 +34,7 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
     private final List<YokaigoNinteiJisshiJokyohyoReportEntity> 実施状況Entityリストlist3;
     private final List<YokaigoNinteiJisshiJokyohyoReportEntity> 実施状況Entityリストlist4;
     private final int index;
+    private static final RString 年度YEAR = new RString("年度");
 
     /**
      * インスタンスを生成します。
@@ -87,6 +88,10 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
                 source.hokenshaName = list1.get市町村名();
                 source.hokenshaNo = list1.get市町村番号();
             }
+            if (list1.get対象年度() != null) {
+                source.nendo = list1.get対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()
+                        .concat(年度YEAR);
+            }
             source.list1_1 = list1.get集計項目();
             source.list1_2 = list1.get四月の合計();
             source.list1_3 = list1.get五月の合計();
@@ -110,6 +115,10 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
                 source.hokenshaName = list2.get市町村名();
                 source.hokenshaNo = list2.get市町村番号();
             }
+            if (list1.get対象年度() != null) {
+                source.nendo = list2.get対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()
+                        .concat(年度YEAR);
+            }
             source.list2_1 = list2.get集計項目();
             source.list2_2 = list2.get四月の合計();
             source.list2_3 = list2.get五月の合計();
@@ -132,6 +141,10 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
                 source.hokenshaName = list3.get市町村名();
                 source.hokenshaNo = list3.get市町村番号();
             }
+            if (list1.get対象年度() != null) {
+                source.nendo = list3.get対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()
+                        .concat(年度YEAR);
+            }
             source.list3_1 = list3.get集計項目();
             source.list3_2 = list3.get四月の合計();
             source.list3_3 = list3.get五月の合計();
@@ -153,6 +166,10 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
                 source.shichosonName = list4.get市町村名();
                 source.hokenshaName = list4.get市町村名();
                 source.hokenshaNo = list4.get市町村番号();
+            }
+            if (list1.get対象年度() != null) {
+                source.nendo = list4.get対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()
+                        .concat(年度YEAR);
             }
             source.list4_1 = list4.get集計項目();
             source.list4_2 = list4.get四月の合計();
