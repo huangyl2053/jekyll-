@@ -48,11 +48,6 @@ public class ShokanShikyuGendogakuMain {
      * @return ResponseData
      */
     public ResponseData<ShokanShikyuGendogakuMainDiv> onLoad(ShokanShikyuGendogakuMainDiv div) {
-        load(div);
-        return ResponseData.of(div).setState(DBC4220011StateName.標準);
-    }
-
-    private void load(ShokanShikyuGendogakuMainDiv div) throws PessimisticLockingException {
         ShokanShuruiShikyuGendoGakuManager 償還manager = new ShokanShuruiShikyuGendoGakuManager();
         List<ShokanShuruiShikyuGendoGaku> 償還list = 償還manager.get償還払い給付種類支給限度額データ();
         UwanoseShokanShuruiShikyuGendoGakuManager 上乗せ償還manager = new UwanoseShokanShuruiShikyuGendoGakuManager();
@@ -70,6 +65,7 @@ public class ShokanShikyuGendogakuMain {
         if (entityList != null) {
             handler.状態１(entityList);
         }
+        return ResponseData.of(div).setState(DBC4220011StateName.標準);
     }
 
     /**
@@ -195,17 +191,6 @@ public class ShokanShikyuGendogakuMain {
             div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().setToDisabled(false);
         }
         return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 「登録処理を続ける」ボタンクリック時の事件です。
-     *
-     * @param div ShokanShikyuGendogakuMainDiv
-     * @return ResponseData
-     */
-    public ResponseData<ShokanShikyuGendogakuMainDiv> onClick_btnContinue(ShokanShikyuGendogakuMainDiv div) {
-        load(div);
-        return ResponseData.of(div).setState(DBC4220011StateName.標準);
     }
 
     private ShokanShikyuGendogakuMainHandler getHandler(ShokanShikyuGendogakuMainDiv div) {
