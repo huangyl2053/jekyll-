@@ -84,9 +84,9 @@ public class KogakuOshiraseTsuchiTeshutsuKigenNashiEditor implements IKogakuOshi
                 source.meishoFuyo1 = target.get送付別宛先().meishoFuyo1;
                 source.samabunShimeiText = target.get送付別宛先().samabunShimeiText;
                 source.samaBun2 = target.get送付別宛先().samaBun2;
-                source.samabunShimeiSmall2 = target.get送付別宛先().kakkoLeft2;
-                source.kakkoLeft2 = target.get送付別宛先().samabunShimei2;
-                source.samabunShimei2 = target.get送付別宛先().samabunShimeiSmall2;
+                source.samabunShimeiSmall2 = target.get送付別宛先().samabunShimeiSmall2;
+                source.kakkoLeft2 = target.get送付別宛先().kakkoLeft2;
+                source.samabunShimei2 = target.get送付別宛先().samabunShimei2;
                 source.kakkoRight2 = target.get送付別宛先().kakkoRight2;
                 source.kakkoLeft1 = target.get送付別宛先().kakkoLeft1;
                 source.samabunShimei1 = target.get送付別宛先().samabunShimei1;
