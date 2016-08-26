@@ -37,7 +37,6 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
     private static final RString ONE = new RString("1");
     private static final RString ZERO1 = new RString("0");
     private static final Decimal ZERO = new Decimal("0");
-    private static final int ZERO0 = 0;
     private static final Code THREE = new Code("0003");
 
     /**
