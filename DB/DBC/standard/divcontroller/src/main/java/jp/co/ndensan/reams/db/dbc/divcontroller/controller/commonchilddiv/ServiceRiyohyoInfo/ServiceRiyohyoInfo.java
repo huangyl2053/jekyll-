@@ -106,6 +106,9 @@ public class ServiceRiyohyoInfo {
         ViewStateHolder.put(ViewStateKeys.選択有无, false);
         div.getServiceRiyohyoBeppyoMeisai().setDisabled(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setDisabled(false);
         div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setDisabled(false);

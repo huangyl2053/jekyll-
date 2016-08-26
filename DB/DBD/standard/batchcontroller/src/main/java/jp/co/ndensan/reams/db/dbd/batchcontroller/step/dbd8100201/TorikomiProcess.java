@@ -109,7 +109,7 @@ public class TorikomiProcess extends BatchProcessBase<RString> {
             FilesystemName filesystemName = new FilesystemName(entry.getSharedFileName());
             ReadOnlySharedFileEntryDescriptor entitydesc = new ReadOnlySharedFileEntryDescriptor(filesystemName, entry.getSharedFileId());
             SharedFile.copyToLocal(entitydesc, filesystemPath);
-            batFileName = Path.combinePath(tmpPath, entry.getSharedFileName());
+            batFileName = Path.combinePath(tmpPath, entry.getLocalFileName());
             reader = new FldReader.InstanceBuilder(batFileName, TorikomiCsvDataEntity.class)
                     .setEncodeShiftJis()
                     .setNewLine(NewLine.LF)
