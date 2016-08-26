@@ -9,13 +9,13 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.FukaTsujoIdoPro
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.HonsanteiIdoKekkaIchiranProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.IdoJohoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.IdoTriggerTempProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.KeisangoJohoDelete;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.SetaiinProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.SystemTimeGennendoIdoFukaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.SystemTimeUpdateProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.TokuchoIraikinProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.TokuchoKaishishaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.TsuchishoNoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.KeisangoJohoDelete;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku.FukaJohoTorokuBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -99,6 +100,10 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
         for (ChohyoResult entity : parameter.get出力帳票List()) {
             if (帳票分類ID.equals(entity.get帳票分類ID())) {
                 processParameter.set出力帳票一覧(entity);
+                if (Tsuki._2月.getコード().equals(parameter.get処理対象())) {
+                    processParameter.set調定年度(parameter.getChoteiNendo().plusYear(1));
+                    processParameter.set賦課年度(parameter.get賦課年度().plusYear(1));
+                }
                 executeStep(本算定異動_現年度_結果一覧表);
                 break;
             }
@@ -234,9 +239,16 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
     }
 
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
-        return new KeisangoJohoSakuseiBatchParamter(getParameter().getChoteiNendo().toDateString(),
-                getParameter().get賦課年度().toDateString(),
-                new RString(getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeGennendoIdoFukaProcess.SYSTEM_TIME).toString()),
+        FlexibleYear 調定年度 = getParameter().getChoteiNendo();
+        FlexibleYear 賦課年度 = getParameter().get賦課年度();
+        if (parameter != null && Tsuki._2月.getコード().equals(parameter.get処理対象())) {
+            調定年度 = 調定年度.plusYear(1);
+            賦課年度 = 賦課年度.plusYear(1);
+        }
+        return new KeisangoJohoSakuseiBatchParamter(調定年度.toDateString(),
+                賦課年度.toDateString(),
+                new RString(getResult(YMDHMS.class, new RString(システム日時の取得),
+                                SystemTimeGennendoIdoFukaProcess.SYSTEM_TIME).toString()),
                 ShoriName.異動賦課.get名称(), 帳票分類ID);
     }
 
