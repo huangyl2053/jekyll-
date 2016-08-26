@@ -69,7 +69,7 @@ public class ServiceRiyohyoInfo {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth 対象年月 = ViewStateHolder.get(ViewStateKeys.対象年月, FlexibleYearMonth.class);
         int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, Integer.class);
-        FlexibleYearMonth 利用年月 = ViewStateHolder.get(ViewStateKeys.利用年月, FlexibleYearMonth.class);
+        FlexibleYearMonth 利用年月 = new FlexibleYearMonth(div.getTxtRiyoYM().getValue().getYearMonth().toDateString());
         getHandler(div).setサービス利用票(被保険者番号, 対象年月, 履歴番号, 利用年月.minusMonth(1));
         return ResponseData.of(div).respond();
     }
@@ -106,6 +106,9 @@ public class ServiceRiyohyoInfo {
         ViewStateHolder.put(ViewStateKeys.選択有无, false);
         div.getServiceRiyohyoBeppyoMeisai().setDisabled(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setDisabled(false);
         div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setDisabled(false);
@@ -267,7 +270,8 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnBeppyoGokeiKakutei(ServiceRiyohyoInfoDiv div) {
-        Decimal 給付率 = ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class);
+        Decimal 給付率 = ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class) == null
+                ? Decimal.ZERO : ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class);
         Decimal 給付率div = div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue() == null
                 ? Decimal.ZERO : div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue();
         if (給付率.compareTo(給付率div) != 0) {
@@ -283,8 +287,7 @@ public class ServiceRiyohyoInfo {
                 || !new RString(DbcQuestionMessages.給付率修正確認
                         .getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
 
-            RString 状態 = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
-            getHandler(div).onClick_btnBeppyoGokeiKakutei(状態);
+            getHandler(div).onClick_btnBeppyoGokeiKakutei();
         }
         return ResponseData.of(div).respond();
     }
@@ -413,7 +416,7 @@ public class ServiceRiyohyoInfo {
     }
 
     /**
-     * 対象年月onBlurのイベントです。
+     * 利用年月onBlurのイベントです。
      *
      * @param div ServiceRiyohyoInfoDiv
      * @return ResponseData<ServiceRiyohyoInfoDiv>

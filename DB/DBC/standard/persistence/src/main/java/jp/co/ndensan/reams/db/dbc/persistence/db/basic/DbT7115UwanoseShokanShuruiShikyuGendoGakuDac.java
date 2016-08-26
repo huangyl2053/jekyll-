@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -41,6 +42,11 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements
 
     @InjectSession
     private SqlSession session;
+    private static final RString 定値_サービス種類コード = new RString("サービス種類コード");
+    private static final RString 定値_適用開始年月 = new RString("適用開始年月");
+    private static final RString 定値_履歴番号 = new RString("履歴番号");
+    private static final RString 定値_上乗せ償還払い給付種類支給限度額エンティティ = new RString("上乗せ償還払い給付種類支給限度額エンティティ");
+    private static final RString 定値_サービス提供年月 = new RString("サービス提供年月");
 
     /**
      * 主キーで上乗せ償還払い給付種類支給限度額を取得します。
@@ -56,9 +62,9 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements
             ServiceShuruiCode サービス種類コード,
             FlexibleYearMonth 適用開始年月,
             int 履歴番号) throws NullPointerException {
-        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
-        requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_サービス種類コード.toString()));
+        requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_適用開始年月.toString()));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_履歴番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -83,8 +89,8 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements
     public DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity selectByValue(
             ServiceShuruiCode サービス種類コード,
             FlexibleYearMonth 適用開始年月) throws NullPointerException {
-        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
-        requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_サービス種類コード.toString()));
+        requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_適用開始年月.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -135,7 +141,7 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements
     @Transaction
     @Override
     public int save(DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("上乗せ償還払い給付種類支給限度額エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_上乗せ償還払い給付種類支給限度額エンティティ.toString()));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
@@ -150,8 +156,8 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements
      */
     @Transaction
     public DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity select支給限度単位数(ServiceShuruiCode サービス種類コード, FlexibleYearMonth サービス提供年月) {
-        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_サービス種類コード.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_サービス提供年月.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -200,7 +206,7 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements
      */
     @Override
     public int delete(DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("上乗せ償還払い給付種類支給限度額エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_上乗せ償還払い給付種類支給限度額エンティティ.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.deletePhysical(entity).execute();
     }

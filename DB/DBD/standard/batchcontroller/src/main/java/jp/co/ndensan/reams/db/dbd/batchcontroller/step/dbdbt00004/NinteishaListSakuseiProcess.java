@@ -329,9 +329,9 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
     protected void process(ShakaiFukushiHojinKeigenGaitoshaIchiranEntity entity) {
         RString 帳票タイトル;
         if (processParameter.get対象リスト().equals(認定者)) {
-            帳票タイトル = new RString("介護保険　社会福祉法人軽減認定者リスト");
+            帳票タイトル = new RString("社会福祉法人軽減認定者リスト");
         } else {
-            帳票タイトル = new RString("介護保険　社会福祉法人軽減該当者リスト");
+            帳票タイトル = new RString("社会福祉法人軽減該当者リスト");
         }
         ShakaiFukushiHojinKeigenReport report = new ShakaiFukushiHojinKeigenReport(entity, 帳票タイトル, processParameter.get帳票作成日時(),
                 association, outputOrder);
@@ -576,8 +576,11 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
             }
         } else {
             eucCsvEntity.set決定区分(RString.EMPTY);
+
         }
-        eucCsvEntity.set減免事由(RString.EMPTY);
+        if (shakaifukuriyoshafutankeigen.get申請事由() != null && !shakaifukuriyoshafutankeigen.get申請事由().isEmpty()) {
+            eucCsvEntity.set減免事由(shakaifukuriyoshafutankeigen.get申請事由());
+        }
         eucCsvEntity.set減免申請日(toパターン32or34(日付スラッシュ編集_flag, shakaifukuriyoshafutankeigen.get申請年月日()));
         eucCsvEntity.set減免決定日(toパターン32or34(日付スラッシュ編集_flag, shakaifukuriyoshafutankeigen.get決定年月日()));
         eucCsvEntity.set減免適用日(toパターン32or34(日付スラッシュ編集_flag, shakaifukuriyoshafutankeigen.get適用開始年月日()));
@@ -592,13 +595,14 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
         } else {
             eucCsvEntity.set軽減率分母(RString.EMPTY);
         }
+
         if (shakaifukuriyoshafutankeigen.is居宅サービス限定()) {
             eucCsvEntity.set対象サービスの制限(居宅サービスのみ.concat(POINT));
         }
-        if (shakaifukuriyoshafutankeigen.is居住費_食費のみ()) {
+        if (shakaifukuriyoshafutankeigen.is居住費_食費のみ() && shakaifukuriyoshafutankeigen.is居宅サービス限定()) {
             eucCsvEntity.set対象サービスの制限(eucCsvEntity.get対象サービスの制限().concat(居住費食費のみ.concat(POINT)));
         }
-        if (shakaifukuriyoshafutankeigen.is旧措置者ユニット型個室のみ()) {
+        if (shakaifukuriyoshafutankeigen.is旧措置者ユニット型個室のみ() && !eucCsvEntity.get対象サービスの制限().isNullOrEmpty()) {
             eucCsvEntity.set対象サービスの制限(eucCsvEntity.get対象サービスの制限().concat(旧措ユ個のみ.concat(POINT)));
         }
         if (eucCsvEntity.get対象サービスの制限() != null) {
@@ -773,7 +777,9 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
         } else {
             eucCsvEntity.set決定区分(RString.EMPTY);
         }
-        eucCsvEntity.set減免事由(RString.EMPTY);
+        if (shakaifukuriyoshafutankeigen.get申請事由() != null && !shakaifukuriyoshafutankeigen.get申請事由().isEmpty()) {
+            eucCsvEntity.set減免事由(shakaifukuriyoshafutankeigen.get申請事由());
+        }
         eucCsvEntity.set減免申請日(toパターン32or34(日付スラッシュ編集_flag, shakaifukuriyoshafutankeigen.get申請年月日()));
         eucCsvEntity.set減免決定日(toパターン32or34(日付スラッシュ編集_flag, shakaifukuriyoshafutankeigen.get決定年月日()));
         eucCsvEntity.set減免適用日(toパターン32or34(日付スラッシュ編集_flag, shakaifukuriyoshafutankeigen.get適用開始年月日()));
@@ -842,7 +848,8 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
         builder.append(抽出対象);
         builder.append(ChushutsuTaisho.toValue(processParameter.get抽出対象()));
         出力条件.add(builder.toRString());
-        出力条件.add(CSV出力設定);
+        builder.delete(NO_0, builder.length());
+        builder.append(CSV出力設定);
         for (int i = 0; i < processParameter.get出力設定().size(); i++) {
             if (i == processParameter.get出力設定().size() - NO_1) {
                 builder.append(CSVSettings.toValue(processParameter.get出力設定().get(i)));
@@ -879,17 +886,19 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
         builder.append(受給者区分);
         builder.append(JukyushaKubun2.toValue(processParameter.get受給者区分()));
         出力条件.add(builder.toRString());
+        builder.delete(NO_0, builder.length());
         builder.append(世帯非課税等);
         for (int i = 0; i < processParameter.get世帯非課税等().size(); i++) {
             if (i == NO_0) {
                 builder.append(HihokenshaKeizaiJokyo.toValue(processParameter.get世帯非課税等().get(i)));
-                出力条件.add(builder.toRString());
             } else {
                 builder.append(SPACE);
                 builder.append(HihokenshaKeizaiJokyo.toValue(processParameter.get世帯非課税等().get(i)));
-                出力条件.add(builder.toRString());
             }
         }
+        出力条件.add(builder.toRString());
+        builder.delete(NO_0, builder.length());
+        builder.append(CSV出力設定);
         for (int i = 0; i < processParameter.get出力設定().size(); i++) {
             if (i == processParameter.get出力設定().size() - NO_1) {
                 builder.append(CSVSettings.toValue(processParameter.get出力設定().get(i)));
@@ -916,8 +925,11 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
     private void set出力条件(List<RString> 出力条件) {
         RStringBuilder builder = new RStringBuilder();
         builder.append(対象期間指定);
+//        RString test = new RString("1");
         builder.append(TaishoKikan.toValue(processParameter.get対象期間指定()));
+//        builder.append(TaishoKikan.toValue(test));
         出力条件.add(builder.toRString());
+        builder.delete(NO_0, builder.length());
         if (processParameter.get対象期間指定().equals(new RString("1"))) {
             builder.append(対象年度);
             if (null != processParameter.get対象年度の開始年月日()) {
@@ -928,24 +940,50 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
                 builder.append(new RString(processParameter.get対象年度の終了年月日().toString()));
             }
             出力条件.add(builder.toRString());
+            builder.delete(NO_0, builder.length());
             builder.append(課税判定等基準日);
             builder.append(new RString(processParameter.get課税判定等基準日().toString()));
             出力条件.add(builder.toRString());
+            builder.delete(NO_0, builder.length());
         }
         if (processParameter.get対象期間指定().equals(new RString("2"))) {
             builder.append(基準日);
             builder.append(new RString(processParameter.get基準日().toString()));
             出力条件.add(builder.toRString());
+            builder.delete(NO_0, builder.length());
         }
+//        builder.append(対象年度);
+//        if (null != processParameter.get対象年度の開始年月日()) {
+//            builder.append(new RString(processParameter.get対象年度の開始年月日().toString()));
+//        }
+//        builder.append(カラ);
+//        if (null != processParameter.get対象年度の終了年月日()) {
+//            builder.append(new RString(processParameter.get対象年度の終了年月日().toString()));
+//        }
+//        出力条件.add(builder.toRString());
+//        builder.delete(NO_0, builder.length());
+//        builder.append(課税判定等基準日);
+//        builder.append(new RString(processParameter.get課税判定等基準日().toString()));
+//        出力条件.add(builder.toRString());
+//        builder.delete(NO_0, builder.length());
+//        if (processParameter.get対象期間指定().equals(new RString("2"))) {
+//            builder.append(基準日);
+//            builder.append(new RString(processParameter.get基準日().toString()));
+//            出力条件.add(builder.toRString());
+//            builder.delete(NO_0, builder.length());
+//        }
         builder.append(所得年度);
         builder.append(new RString(processParameter.get所得年度().toString()));
         出力条件.add(builder.toRString());
+        builder.delete(NO_0, builder.length());
         builder.append(旧措置者区分);
         builder.append(processParameter.get旧措置者区分());
         出力条件.add(builder.toRString());
+        builder.delete(NO_0, builder.length());
         builder.append(世帯表示);
         builder.append(SetaiHyoji.toValue(processParameter.get世帯表示()));
         出力条件.add(builder.toRString());
+        builder.delete(NO_0, builder.length());
     }
 
     private static <T extends Enum<T> & IReportItems> RString createOrderSqlStr(Class<T> clazz, IOutputOrder outputOrder) {

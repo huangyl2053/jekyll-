@@ -12,11 +12,11 @@
            temp."koseiJiyu",
            temp."futanWariaiKubun",
            temp."honinGokeishotokuKingaku",
-           temp."setaiFirstHihokenshaNo",
-           temp."yukoKaishiDate",
-           temp."yukoShuryoDate",
-           temp."nenkinShunyuGokei",
-           temp."sonotaGokeiShotokuKingakuGokei",
+           <!--temp."setaiFirstHihokenshaNo",-->
+           temp."yukoKaishiYMD",
+           temp."yukoShuryoYMD",
+           temp."nenkinShunyuGoukei",
+           temp."sonotaGokeiShotokuKingaku",
            temp."nendo"
           FROM  "KonkaiRiyoshaFutanWariaiJohoTemp"  as temp
           WHERE
@@ -255,11 +255,11 @@
         <result property="nendo" column="nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="futanWariaiKubun" column="futanWariaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="honinGokeishotokuKingaku" column="honninGoukeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="setaiFirstHihokenshaNo" column="setaiIchigouHihokenshaSu" />
+        <!--<result property="setaiFirstHihokenshaNo" column="setaiIchigouHihokenshaSu" />-->
         <result property="yukoKaishiYMD" column="yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="yukoShuryoYMD" column="yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="nenkinShunyuGoukei" column="nenkinShunyuGoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="sonotanoGoukeiShotokuKingakuGoukei" column="sonotanoGoukeiShotokuKingakuGoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sonotaGokeiShotokuKingaku" column="sonotaGokeiShotokuKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
  </mapper>   
     

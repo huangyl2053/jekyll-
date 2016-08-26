@@ -250,18 +250,18 @@ public class GemmenJuminKihonHandler {
     /**
      * 減免情報パネルの初期化メソッドです。
      *
-     * @param 減免リスト NendobunFukaGemmenListResult
+     * @param 年度分賦課減免リスト NendobunFukaGemmenList
      */
-    public void load減免情報パネル(NendobunFukaGemmenListResult 減免リスト) {
+    public void load減免情報パネル(NendobunFukaGemmenList 年度分賦課減免リスト) {
         KiwarigakuDiv 減免情報パネル = div.getGemmenMain().getKiwarigaku();
         減免情報パネル.getTxtGemmengaku().setValue(null);
-        GemmenJoho 現年度 = 減免リスト.get年度分賦課減免リスト().get現年度();
+        GemmenJoho 現年度 = 年度分賦課減免リスト.get現年度();
         if (現年度 != null) {
             set普通徴収グリッド(現年度);
             set特別徴収グリッド(現年度);
         }
-        GemmenJoho 過年度1 = 減免リスト.get年度分賦課減免リスト().get過年度1();
-        GemmenJoho 過年度2 = 減免リスト.get年度分賦課減免リスト().get過年度2();
+        GemmenJoho 過年度1 = 年度分賦課減免リスト.get過年度1();
+        GemmenJoho 過年度2 = 年度分賦課減免リスト.get過年度2();
         KiwarigakuKanendo1Div 過年度1パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo1();
         KiwarigakuKanendo2Div 過年度2パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo2();
         if (過年度1 != null && 過年度2 == null) {
@@ -349,7 +349,7 @@ public class GemmenJuminKihonHandler {
         決定情報パネル.getTxtKetteiRiyu().setValue(null);
         取消情報パネル.getTxtTorikeshiYMD().clearValue();
         取消情報パネル.getTxtTorikeshiShurui().clearValue();
-        取消情報パネル.getTxtTorikeshiRiyu().setValue(null);
+        取消情報パネル.getTxtTorikeshiRiyu().clearValue();
         減免情報パネル.getTxtGemmengaku().clearValue();
     }
 

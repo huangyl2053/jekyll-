@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.Hant
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.SetainJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SeikatsuHogoGaitoJohoTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetainJohoTempEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2512KaigoShotokuNewestEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -175,7 +176,7 @@ public class RiyoshaFutanWariaiHanteiUtil {
             return;
         }
         RString 対象來年度 = 対象年度.substring(0, NUM3).concat(
-                new RString(Integer.parseInt(対象年度.substring(NUM3, NUM4).toString() + 1)));
+                new RString(Integer.parseInt(対象年度.substring(NUM3, NUM4).toString()) + 1));
         param.set対象年度終了日(対象來年度.concat(STR0731));
         param.set対象年度開始日(対象年度.concat(STR0801));
     }
@@ -267,14 +268,16 @@ public class RiyoshaFutanWariaiHanteiUtil {
                 || 生活保護該当情報リスト.isEmpty() ? null : 生活保護該当情報リスト.get(0);
         FlexibleDate 判定基準日 = entities.get(0).get判定基準日();
         List<DbV2512KaigoShotokuNewestEntity> 介護所得情報 = new ArrayList<>();
+        List<SetainJohoTempEntity> 世帯員情報 = new ArrayList<>();
         for (FutanWariaiHanteiJohoEntity entity : entities) {
             List<SetainJohoRelateEntity> 世帯員情報Entities = entity.get世帯員情報Entity();
             if (世帯員情報Entities == null || 世帯員情報Entities.isEmpty()) {
                 continue;
             }
             介護所得情報.add(世帯員情報Entities.get(0).get介護所得情報());
+            世帯員情報.add(世帯員情報Entities.get(0).get世帯員情報());
         }
-        return new FutanWariaiHanteiJoho(判定対象者Temp, 生活保護該当情報Temp, 介護所得情報, 判定基準日);
+        return new FutanWariaiHanteiJoho(判定対象者Temp, 生活保護該当情報Temp, 世帯員情報, 介護所得情報, 判定基準日);
     }
 
     /**

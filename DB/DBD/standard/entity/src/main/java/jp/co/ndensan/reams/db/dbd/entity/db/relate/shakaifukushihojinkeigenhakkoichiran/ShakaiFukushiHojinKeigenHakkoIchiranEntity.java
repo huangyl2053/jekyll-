@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.shakaifukushihojinkeigenhakkoichiran;
 
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
-import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shakaifukushihojinkeigen.GemmenKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -28,7 +28,7 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEntity {
     private FlexibleDate 適用日;
     private FlexibleDate 有効期限;
     private KetteiKubun 決定;
-    private KyuSochishaKubun 軽減;
+    private GemmenKubun 軽減;
     private Decimal 軽減率_分子;
     private Decimal 軽減率_分母;
     private boolean 居宅サービス限定;

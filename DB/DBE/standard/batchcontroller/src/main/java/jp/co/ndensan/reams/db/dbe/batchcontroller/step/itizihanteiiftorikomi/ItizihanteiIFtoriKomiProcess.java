@@ -17,12 +17,20 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * バッチ設計_DBE309002_一次判定IF取込のProcessクラスです。
@@ -53,7 +61,12 @@ public class ItizihanteiIFtoriKomiProcess extends BatchProcessBase<IchijiHanteiz
 
     @Override
     protected IBatchReader createReader() {
-        filePath = paramter.getFilePath().concat(込ファイル名);
+        FileSpoolManager manager = new FileSpoolManager(
+                UzUDE0835SpoolOutputType.EucOther, new RString("ItizihanteiIFtoriKomiProcess"), UzUDE0831EucAccesslogFileType.Csv);
+        RString spoolWorkPath = manager.getEucOutputDirectry();
+        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(込ファイル名),
+                paramter.getFileId()), new FilesystemPath(spoolWorkPath));
+        filePath = Path.combinePath(spoolWorkPath, 込ファイル名);
         CsvReader csvReader = new CsvReader.InstanceBuilder(filePath, IchijiHanteizumIfOutputEucCsvEntity.class)
                 .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS)
                 .hasHeader(false).setNewLine(NewLine.CRLF).build();

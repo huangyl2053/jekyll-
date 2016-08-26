@@ -77,13 +77,11 @@ public class DBC120810_KokuhorenJukyushaInFlow extends BatchFlowBase<KokuhorenKy
                 csvFullPath = new RString(path.getPath());
 
                 if (i == 0) {
-
-                    csvParameter.set処理年月(null);
                     csvParameter.set連番(0);
                 } else {
-                    csvParameter.set処理年月(flowEntity.getShoriYM());
                     csvParameter.set連番(flowEntity.get連番());
                 }
+                csvParameter.set処理年月(getParameter().getShoriYM());
                 csvParameter.setLast(false);
                 if (i == size - 1) {
                     csvParameter.setLast(true);

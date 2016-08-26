@@ -155,8 +155,12 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
         RString 市町村コード = null;
         if (result != null
-                && result.getEntity().get市町村コード() != null) {
-            市町村コード = result.getEntity().get市町村コード().getColumnValue();
+                && result.getEntity().getT1001市町村コード() != null) {
+            if (表示パターン_新規.equals(表示パターン)) {
+                市町村コード = result.getEntity().getT1001市町村コード().getColumnValue();
+            } else {
+                市町村コード = result.getEntity().getT4001市町村コード().getColumnValue();
+            }
         }
 
         div.getCcdKaigoNinteiShikakuInfo().initialize(
@@ -770,15 +774,32 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     }
 
+    private RString get受給申請事由() {
+
+        if (DBD5120001StateName.申請追加.getName().equals(ResponseHolder.getState())) {
+            return JukyuShinseiJiyu.再申請_有効期限外.getコード();
+        } else if (DBD5120001StateName.区分変更追加.getName().equals(ResponseHolder.getState())) {
+            return JukyuShinseiJiyu.要介護度変更申請.getコード();
+        } else if (DBD5120001StateName.サービス変更追加.getName().equals(ResponseHolder.getState())) {
+            return JukyuShinseiJiyu.指定サービス種類変更申請.getコード();
+        } else {
+            return null;
+        }
+    }
+
     private void insert受給者台帳_申請() {
 
+        RString 受給申請事由 = get受給申請事由();
+        if (受給申請事由 == null) {
+            return;
+        }
         //TODO受給申請事由
         JukyushaDaicho jukyushaDaicho = new JukyushaDaicho(
                 new LasdecCode(div.getHdnShichosonCode()),
                 new HihokenshaNo(div.getHdnHihokenshaNo()),
                 new RString("0").padZeroToLeft(INT_4),
                 new RString("00"),
-                new Code(""));
+                new Code(受給申請事由));
 
         JukyushaDaichoBuilder builder = jukyushaDaicho.createBuilderForEdit();
         //TODO
@@ -815,7 +836,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void insert要介護認定申請情報_申請() {
         //TODO
-        NinteiShinseiJoho ninteiShinseiJoho = new NinteiShinseiJoho(new ShinseishoKanriNo(""));
+        NinteiShinseiJoho ninteiShinseiJoho = new NinteiShinseiJoho(shinseishoKanriNo);
         NinteiShinseiJohoBuilder builder = ninteiShinseiJoho.createBuilderForEdit();
 
         //TODO
@@ -892,7 +913,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
     private void insert申請届出者() {
 
         //TODO
-        ShinseitodokedeJoho shinseitodokedeJoho = new ShinseitodokedeJoho(new ShinseishoKanriNo(""));
+        ShinseitodokedeJoho shinseitodokedeJoho = new ShinseitodokedeJoho(shinseishoKanriNo);
         ShinseitodokedeJohoBuilder builder = shinseitodokedeJoho.createBuilderForEdit();
 
         builder.set申請届出代行区分コード(new Code(div.getCcdShinseiTodokedesha().getDdlTodokledeDaikoKubun().getSelectedKey()));
@@ -915,7 +936,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void insert申請履歴情報() {
         //TODO
-        ShinseiRirekiJoho shinseiRirekiJoho = new ShinseiRirekiJoho(new ShinseishoKanriNo(""));
+        ShinseiRirekiJoho shinseiRirekiJoho = new ShinseiRirekiJoho(shinseishoKanriNo);
         ShinseiRirekiJohoBuilder builder = shinseiRirekiJoho.createBuilderForEdit();
         //TODO
         builder.set前回申請管理番号(new ShinseishoKanriNo(ZERO_17));
@@ -1007,7 +1028,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void insert要介護認定申請情報_転入() {
         //TODO
-        NinteiShinseiJoho ninteiShinseiJoho = new NinteiShinseiJoho(new ShinseishoKanriNo(""));
+        NinteiShinseiJoho ninteiShinseiJoho = new NinteiShinseiJoho(shinseishoKanriNo);
         NinteiShinseiJohoBuilder builder = ninteiShinseiJoho.createBuilderForEdit();
 
         //TODO
@@ -1123,7 +1144,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void insert要介護認定申請情報_職権() {
         //TODO
-        NinteiShinseiJoho ninteiShinseiJoho = new NinteiShinseiJoho(new ShinseishoKanriNo(""));
+        NinteiShinseiJoho ninteiShinseiJoho = new NinteiShinseiJoho(shinseishoKanriNo);
         NinteiShinseiJohoBuilder builder = ninteiShinseiJoho.createBuilderForEdit();
 
         //TODO
@@ -1241,7 +1262,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void insert要介護認定申請情報_特殊() {
         //TODO
-        NinteiShinseiJoho ninteiShinseiJoho = new NinteiShinseiJoho(new ShinseishoKanriNo(""));
+        NinteiShinseiJoho ninteiShinseiJoho = new NinteiShinseiJoho(shinseishoKanriNo);
         NinteiShinseiJohoBuilder builder = ninteiShinseiJoho.createBuilderForEdit();
 
         //TODO

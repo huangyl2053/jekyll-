@@ -43,8 +43,8 @@ public class KarisanteiHenkoTsuchishoB5YokoReport extends Report<KarisanteiHenko
     private final NinshoshaSource ninshoshaSource;
     private final CompKaigoToiawasesakiSource kaigoToiawasesakiSource;
     private final List<KarisanteiHenkoTsuchishoB5YokoItem> outputItemList;
-    private final int NUM8 = 8;
-    private final int NUM16 = 16;
+    private static final int NUM8 = 8;
+    private static final int NUM16 = 16;
 
     /**
      * コンストラクタです。

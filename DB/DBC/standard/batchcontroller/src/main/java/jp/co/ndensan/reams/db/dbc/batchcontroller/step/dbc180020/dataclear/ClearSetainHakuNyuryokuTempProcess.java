@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ClearSetainHakuNyuryokuTempProcess extends BatchProcessBase<SetaiHaakuEntity> {
 
-    private static final RString TABLENAME = new RString("SetainHakuNyuryokuTemp");
+    private static final RString TABLENAME = new RString("TmpSetaiHaaku");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select世帯員把握入力Temp");
     @BatchWriter

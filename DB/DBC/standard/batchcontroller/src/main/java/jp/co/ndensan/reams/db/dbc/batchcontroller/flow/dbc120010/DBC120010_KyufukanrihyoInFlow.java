@@ -91,9 +91,9 @@ public class DBC120010_KyufukanrihyoInFlow extends BatchFlowBase<KokuhorenKyouts
                 executeStep(CSVファイル取込);
                 flowEntity = getResult(KyufukanrihyoInCsvReadReturnEntity.class, new RString(CSVファイル取込),
                         KyufukanrihyoReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
-                明細件数合算 = 明細件数合算 + flowEntity.get明細件数合算();
-                集計件数合算 = 集計件数合算 + flowEntity.get集計件数合算();
-                レコード件数合算 = レコード件数合算 + flowEntity.getレコード件数合算();
+                明細件数合算 = flowEntity.get明細件数合算();
+                集計件数合算 = flowEntity.get集計件数合算();
+                レコード件数合算 = flowEntity.getレコード件数合算();
             }
 
             if (0 == flowEntity.get明細件数合算()) {

@@ -140,7 +140,7 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranProperty extends ReportPro
         /**
          * 番地コード
          */
-        番地コード(new RString("0003"), new RString(""), new RString("")),
+        番地コード(new RString("0003"), new RString(""), new RString("atesaki_banchi")),
         /**
          * 行政区コード
          */
@@ -168,7 +168,7 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranProperty extends ReportPro
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString(""), new RString("")),
+        氏名５０音カナ(new RString("0010"), new RString(""), new RString("atena_kanaShimei")),
         /**
          * 生年月日
          */
@@ -176,11 +176,11 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranProperty extends ReportPro
         /**
          * 性別
          */
-        性別(new RString("0013"), new RString(""), new RString("")),
+        性別(new RString("0013"), new RString(""), new RString("atena_seibetsuCode")),
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString(""), new RString("")),
+        市町村コード(new RString("0016"), new RString(""), new RString("koseigo_fukaShichosonCode")),
         /**
          * 被保険者番号
          */

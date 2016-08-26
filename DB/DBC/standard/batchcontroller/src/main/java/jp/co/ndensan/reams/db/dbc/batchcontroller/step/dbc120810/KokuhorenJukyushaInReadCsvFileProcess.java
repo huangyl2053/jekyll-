@@ -120,15 +120,14 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
     @Override
     protected void afterExecute() {
 
-        if (null == parameter.get処理年月()) {
-            FlexibleYearMonth 処理対象年月temp = new FlexibleYearMonth(controlCsvEntity.getShoriYM());
-            parameter.set処理年月(処理対象年月temp);
+        if (null == flowEntity.getShoriYM()) {
+            FlexibleYearMonth 処理対象年月 = new FlexibleYearMonth(controlCsvEntity.getShoriYM());
+            flowEntity.setShoriYM(処理対象年月);
         }
 
         if (parameter.isLast() && 連番 == INDEX_0) {
             登録対象なしエラー登録();
         }
-        flowEntity.setShoriYM(parameter.get処理年月());
         flowEntity.setCodeNum(Integer.parseInt(controlCsvEntity.getCodeNum().toString()));
         flowEntity.set連番(連番);
         returnFlowEntity.setValue(flowEntity);

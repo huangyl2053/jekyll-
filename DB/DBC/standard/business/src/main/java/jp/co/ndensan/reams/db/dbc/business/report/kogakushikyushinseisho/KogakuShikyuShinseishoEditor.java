@@ -37,7 +37,7 @@ public class KogakuShikyuShinseishoEditor implements IKogakuShikyuShinseishoEdit
     private static final RString 文字_農協 = new RString("農協");
     private static final RString 文字_本店 = new RString("本店");
     private static final RString 文字_支店 = new RString("支店");
-    private static final RString 文字_主張書 = new RString("主張書");
+    private static final RString 文字_出張所 = new RString("出張所");
     private static final RString 文字_支所 = new RString("支所");
 
     /**
@@ -80,7 +80,7 @@ public class KogakuShikyuShinseishoEditor implements IKogakuShikyuShinseishoEdit
         source.nokyo = 文字_農協;
         source.honten = 文字_本店;
         source.shiten = 文字_支店;
-        source.shuccho = 文字_主張書;
+        source.shuccho = 文字_出張所;
         source.shisho = 文字_支所;
         source.remban = 連番;
         source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();

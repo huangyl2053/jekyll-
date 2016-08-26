@@ -295,12 +295,8 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             model.setJukyuShikakuHakkoDay2(outModel.get発行日２());
             model.setRiyu(outModel.get理由());
             model.setSakujoJiyuCode(outModel.get除事由コード());
-            if (!RString.isNullOrEmpty(outModel.get申請区分法令())) {
-                model.setShinseiKubunLaw(NinteiShinseiHoreiCode.toValue(outModel.get申請区分法令()).get名称());
-            }
-            if (!RString.isNullOrEmpty(outModel.get申請区分申請時())) {
-                model.setShinseiKubunShinsei(NinteiShinseiShinseijiKubunCode.toValue(outModel.get申請区分申請時()).get名称());
-            }
+            model.setShinseiKubunLaw(outModel.get申請区分法令());
+            model.setShinseiKubunShinsei(outModel.get申請区分申請時());
             model.setSoshitsuDay(outModel.get喪失日());
             model.setTorisageDay(outModel.get取下日());
             model.setToshoNinteiKikanFrom(outModel.get当初認定期間開始());

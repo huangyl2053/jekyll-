@@ -44,16 +44,19 @@ public class FutanWariaiHanteiJoho {
      *
      * @param 判定対象者Temp HanteiTaishoshaTempEntity
      * @param 生活保護該当情報Temp SeikatsuHogoGaitoJohoTempEntity
+     * @param 世帯員情報 List<SetainJohoTempEntity>
      * @param 介護所得情報 List<SetaiinShotoku>
      * @param 判定基準日 FlexibleDate
      */
     public FutanWariaiHanteiJoho(
             HanteiTaishoshaTempEntity 判定対象者Temp,
             SeikatsuHogoGaitoJohoTempEntity 生活保護該当情報Temp,
+            List<SetainJohoTempEntity> 世帯員情報,
             List<DbV2512KaigoShotokuNewestEntity> 介護所得情報,
             FlexibleDate 判定基準日) {
         this.判定対象者Temp = 判定対象者Temp;
         this.生活保護該当情報Temp = 生活保護該当情報Temp;
+        this.世帯員情報 = 世帯員情報;
         this.介護所得情報 = 介護所得情報;
         this.判定基準日 = 判定基準日;
     }

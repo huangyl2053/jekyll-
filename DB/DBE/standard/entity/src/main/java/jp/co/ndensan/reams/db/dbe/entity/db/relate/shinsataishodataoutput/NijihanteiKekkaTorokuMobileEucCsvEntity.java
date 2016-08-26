@@ -140,8 +140,8 @@ public class NijihanteiKekkaTorokuMobileEucCsvEntity {
     private RString 住所;
     @CsvField(order = 61, name = "電話番号")
     private RString 電話番号;
-    @CsvField(order = 62, name = "保険者名")
-    private RString 保険者名;
+    @CsvField(order = 62, name = "市町村名称")
+    private RString 市町村名称;
     @CsvField(order = 63, name = "一次判定年月日")
     private RString 一次判定年月日;
     @CsvField(order = 64, name = "要介護認定一次判定結果コード")

@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyotakuKeikakuJikosakuseiKanri;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyotakuKeikakuJikosakuseiKanriBuilder;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.YoboKeikakuJikoSakuseiKanri;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.YoboKeikakuJikoSakuseiKanriBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.YoboKeikakuJikoSakuseiTankiRiyoNissu;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.YoboKeikakuJikoSakuseiTankiRiyoNissuBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.GokeiKeisan;
@@ -35,6 +39,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouManager;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -43,9 +48,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.CountedItem;
+import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -85,6 +93,7 @@ public class ServiceRiyohyoInfoDivHandler {
     private static final RString 負担割合区分_1割 = new RString("10");
     private static final RString 負担割合区分_2割 = new RString("20");
     private static final RString 選択 = new RString("選択");
+    private static final RString 汎用キー_明細番号 = new RString("明細番号");
     private static final RString 居宅予防区分_0 = new RString("0");
     private static final RString 居宅予防区分_1 = new RString("1");
     private static final RString 限度額対象外フラグ_1 = new RString("1");
@@ -92,7 +101,9 @@ public class ServiceRiyohyoInfoDivHandler {
     private static final RString RSTRING_ONE = new RString("1");
     private static final RString RSTRING_TWO = new RString("2");
     private static final int INT_0 = 0;
+    private static final int INT_1 = 1;
     private static final int INT_2 = 2;
+    private static final RString 固定値_3 = new RString("3");
     private static final Decimal DECIMAL_80 = new Decimal(80);
     private static final Decimal DECIMAL_90 = new Decimal(90);
     private static final Decimal DECIMAL_100 = new Decimal(100);
@@ -194,8 +205,12 @@ public class ServiceRiyohyoInfoDivHandler {
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.利用年月, 利用年月);
         ViewStateHolder.put(ViewStateKeys.対象年月, 対象年月);
+        ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号);
         ViewStateHolder.put(ViewStateKeys.選択有无, false);
+        非活性または活性(false);
         set初期化状態(表示モード);
+        画面初期化の値のクリア();
+        createDDLKoshinKbn();
         div.getTxtKoshinYMD().setValue(RDate.getNowDate());
         if (利用年月 != null && !利用年月.isEmpty()) {
             RStringBuilder rst = new RStringBuilder();
@@ -227,6 +242,7 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getTxtKubunShikyuGendogaku().setDisabled(true);
         div.getTxtGendoKanriKikan().setDisabled(true);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(true);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoRiyoNissu().getTxtRuikeiRiyoNissu().setDisabled(true);
         div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().setDisabled(true);
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnBeppyoMeisaiKakutei().setDisabled(true);
@@ -268,6 +284,7 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendonaiTani().setDisabled(false);
             div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setDisabled(false);
             div.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCancelGokeiInput().setDisabled(false);
+            div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(false);
 
         } else if (修正.equals(表示モード)) {
             div.getDdlKoshinKbn().setDisabled(false);
@@ -297,10 +314,14 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendonaiTani().setDisabled(false);
             div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setDisabled(false);
             div.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCancelGokeiInput().setDisabled(false);
+            div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(false);
         } else if (削除.equals(表示モード)) {
-            div.getDdlKoshinKbn().setDisabled(true);
-            div.getTxtKoshinYMD().setDisabled(true);
-            div.getBtnZengetsuCopy().setDisabled(true);
+            非活性または活性(true);
+            div.getDdlKoshinKbn().setDisabled(false);
+            div.getTxtKoshinYMD().setDisabled(false);
+            div.getTxtKoshinYMD().setDisabled(false);
+            div.getServiceRiyohyoBeppyoRiyoNissu().getTxtZengetsuRiyoNissu().setDisabled(false);
+            div.getServiceRiyohyoBeppyoRiyoNissu().getTxtTogetsuRiyoNissu().setDisabled(false);
             div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getGridSetting().setIsShowSelectButtonColumn(true);
             div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getGridSetting().setIsShowModifyButtonColumn(false);
             div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getGridSetting().setIsShowDeleteButtonColumn(false);
@@ -312,7 +333,10 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCancelGokeiInput().setDisabled(false);
             div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
             div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
+            div.getServiceRiyohyoBeppyoFooter().getBtnBackRiyoNengetsuIchiran().setDisabled(false);
+            div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(false);
         } else if (照会.equals(表示モード)) {
+            非活性または活性(true);
             div.getDdlKoshinKbn().setDisabled(true);
             div.getTxtKoshinYMD().setDisabled(true);
             div.getBtnZengetsuCopy().setDisabled(true);
@@ -330,7 +354,42 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
             div.getServiceRiyohyoBeppyoGokei().setDisabled(true);
             div.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCancelGokeiInput().setDisabled(true);
+            div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(true);
         }
+    }
+
+    private void 画面初期化の値のクリア() {
+        div.getTxtTodokedeYMD().clearValue();
+        div.getTxtTekiyoKikan().clearFromValue();
+        div.getTxtTekiyoKikan().clearToValue();
+        div.getTxtKubunShikyuGendogaku().clearValue();
+        div.getTxtGendoKanriKikan().clearFromValue();
+        div.getTxtGendoKanriKikan().clearToValue();
+        div.getTxtRiyoYM().clearValue();
+        div.getTxtKoshinYMD().clearValue();
+        div.getTxtSofuYM().clearValue();
+        div.getServiceRiyohyoBeppyoRiyoNissu().getTxtZengetsuRiyoNissu().clearValue();
+        div.getServiceRiyohyoBeppyoRiyoNissu().getTxtTogetsuRiyoNissu().clearValue();
+        div.getServiceRiyohyoBeppyoRiyoNissu().getTxtRuikeiRiyoNissu().clearValue();
+        div.getChkZanteiKubun().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList()
+                .setDataSource(new ArrayList<dgServiceRiyohyoBeppyoList_Row>());
+    }
+
+    private void 非活性または活性(boolean flg) {
+        div.getTxtRiyoYM().setDisabled(flg);
+        div.getChkZanteiKubun().setDisabled(flg);
+        div.getDdlKoshinKbn().setDisabled(flg);
+        div.getTxtKoshinYMD().setDisabled(flg);
+        div.getTxtSofuYM().setDisabled(flg);
+        div.getBtnZengetsuCopy().setDisabled(flg);
+        div.getServiceRiyohyoBeppyoList().getBtnBeppyoMeisaiNew().setDisabled(flg);
+        div.getServiceRiyohyoBeppyoList().getBtnBeppyoGokeiNew().setDisabled(flg);
+        div.getServiceRiyohyoBeppyoRiyoNissu().setDisabled(flg);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisabled(flg);
+        div.getServiceRiyohyoBeppyoGokei().setDisabled(flg);
+        div.getServiceRiyohyoBeppyoMeisai().setDisabled(flg);
+        div.getServiceRiyohyoBeppyoFooter().getBtnBackRiyoNengetsuIchiran().setDisabled(false);
     }
 
     /**
@@ -348,7 +407,7 @@ public class ServiceRiyohyoInfoDivHandler {
             if (居宅.equals(居宅総合事業区分)) {
                 List<RString> list = new ArrayList<>();
                 list.add(暫定区分_1);
-                div.getChkZanteiKubun().setDisabledItemsByKey(list);
+                div.getChkZanteiKubun().setSelectedItemsByKey(list);
             } else if (総合事業.equals(居宅総合事業区分)) {
                 throw new ApplicationException(DbcErrorMessages.対象年月入力不正.getMessage().evaluate());
             }
@@ -369,7 +428,6 @@ public class ServiceRiyohyoInfoDivHandler {
 
     private void set暫定区分制御(HihokenshaNo 被保険者番号, RString 居宅総合事業区分, FlexibleYearMonth 対象年月,
             int 履歴番号, FlexibleYearMonth 利用年月) {
-        createDDLKoshinKbn();
         JigoSakuseiMeisaiTouroku jigoSakusei = JigoSakuseiMeisaiTouroku.createInstance();
         TankiNyushoResult 短期入所情報 = jigoSakusei.getTankiNyuryo(被保険者番号, 対象年月, 履歴番号, 利用年月);
         if (短期入所情報 != null) {
@@ -407,7 +465,8 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoRiyoNissu().getTxtTogetsuRiyoNissu().setValue(今回計画利用日数);
         div.getServiceRiyohyoBeppyoRiyoNissu().getTxtRuikeiRiyoNissu()
                 .setValue(nullToZero(前回迄利用日数).add(nullToZero(今回計画利用日数)));
-        div.getTxtSofuYM().setValue(isFlexibleYearMonthNullOrEmpty(送付年月) ? null : new RDate(送付年月.toString().concat(定値_01.toString())));
+        div.getTxtSofuYM().setValue(isFlexibleYearMonthNullOrEmpty(送付年月) ? null
+                : new RDate(送付年月.toString().concat(定値_01.toString())));
         if (暫定区分_1.equals(暫定区分)) {
             List<RString> list = new ArrayList<>();
             list.add(暫定区分_1);
@@ -457,6 +516,7 @@ public class ServiceRiyohyoInfoDivHandler {
             dgServiceRiyohyoBeppyoList_Row row = setRow(result);
             if (i == サービス利用票情報.size() - 1) {
                 row.setHdnGokeiGyoFlag(RSTRING_ONE);
+                setRowButtonState(row);
             } else {
                 row.setHdnGokeiGyoFlag(RSTRING_ZERO);
             }
@@ -465,6 +525,12 @@ public class ServiceRiyohyoInfoDivHandler {
         }
         div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
         ViewStateHolder.put(ViewStateKeys.給付計画自己作成EntityList, (Serializable) サービス利用票情報);
+    }
+
+    private void setRowButtonState(dgServiceRiyohyoBeppyoList_Row row) {
+        row.setSelectButtonState(DataGridButtonState.Disabled);
+        row.setDeleteButtonState(DataGridButtonState.Disabled);
+        row.setModifyButtonState(DataGridButtonState.Disabled);
     }
 
     private dgServiceRiyohyoBeppyoList_Row setRow(KyufuJikoSakuseiResult result) {
@@ -529,7 +595,6 @@ public class ServiceRiyohyoInfoDivHandler {
      */
     public void setパネルにデータ反映() {
         dgServiceRiyohyoBeppyoList_Row row = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
-
         if (合計なし.equals(row.getHdnGokeiGyoFlag())) {
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setNyuryokuShisetsuKodo(row.getHdnJigyoshaCode());
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setサービス種類コード(row.getHdnServiceShuruiCode());
@@ -691,7 +756,7 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getBtnCalcGokei().setVisible(false);
             div.getBtnBeppyoMeisaiKakutei().setVisible(false);
             div.getBtnBeppyoGokeiKakutei().setDisabled(false);
-            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setReadOnly(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setReadOnly(false);
         }
         if (サービスフラグTmp && 利用サービス
                 != null) {
@@ -704,7 +769,8 @@ public class ServiceRiyohyoInfoDivHandler {
         }
     }
 
-    private void 総合事業の場合(RString サービス種類コード, RString サービス種類Tmp, boolean サービスフラグTmp, KaigoServiceNaiyou 利用サービス) throws ApplicationException {
+    private void 総合事業の場合(RString サービス種類コード, RString サービス種類Tmp, boolean サービスフラグTmp,
+            KaigoServiceNaiyou 利用サービス) throws ApplicationException {
         KaigoServiceShuruiManager serviceShuruimanager = KaigoServiceShuruiManager.createInstance();
         List<KaigoServiceShurui> result = serviceShuruimanager.getFocusServiceTypeList(サービス種類コード).records();
         if (result == null || result.isEmpty()) {
@@ -804,7 +870,6 @@ public class ServiceRiyohyoInfoDivHandler {
         明細パネルを初期化();
         List<dgServiceRiyohyoBeppyoList_Row> rowList
                 = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
-//        rowList = ソードGrid(rowList);
         div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
     }
 
@@ -908,7 +973,7 @@ public class ServiceRiyohyoInfoDivHandler {
 
     private void 種類支給額チェック(Decimal 種類限度内単位, Decimal 種類限度超過単位) {
         if (Decimal.ZERO.compareTo(種類限度内単位.add(種類限度超過単位)) < 0
-                && 種類限度内単位.add(種類限度超過単位).equals(
+                && !種類限度内単位.add(種類限度超過単位).equals(
                         div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getValue())) {
             throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
                     .replace(種類限度単位指定エラー.toString()));
@@ -966,11 +1031,9 @@ public class ServiceRiyohyoInfoDivHandler {
     /**
      * 合計情報の確定するのイベントです。
      *
-     * @param 状態 RString
      */
-    public void onClick_btnBeppyoGokeiKakutei(RString 状態) {
-        合計反映(状態);
-//        合計パネルを初期化();
+    public void onClick_btnBeppyoGokeiKakutei() {
+        合計反映();
         List<dgServiceRiyohyoBeppyoList_Row> rowList
                 = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
         rowList = ソードGrid(rowList);
@@ -981,15 +1044,16 @@ public class ServiceRiyohyoInfoDivHandler {
         KyufuJikoSakuseiResult result = service.getMeisaiGoukeiListGridAdjust(rowListToResult(rowList));
         dgServiceRiyohyoBeppyoList_Row row = setRow(result);
         row.setHdnGokeiGyoFlag(RSTRING_ONE);
+        setRowButtonState(row);
         rowList.add(row);
         rowList = ソードGrid(rowList);
         div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
     }
 
-    private void 合計反映(RString 状態) {
+    private void 合計反映() {
         boolean 選択有无 = ViewStateHolder.get(ViewStateKeys.選択有无, Boolean.class);
-        ステータス設定(状態);
-        List<dgServiceRiyohyoBeppyoList_Row> rowList = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
+        List<dgServiceRiyohyoBeppyoList_Row> rowList = div.getServiceRiyohyoBeppyoList()
+                .getDgServiceRiyohyoBeppyoList().getDataSource();
         dgServiceRiyohyoBeppyoList_Row row = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
         if (!選択有无) {
             row = rowList.get(rowList.size() - 1);
@@ -1007,7 +1071,7 @@ public class ServiceRiyohyoInfoDivHandler {
             サービスTmp = div.getCcdServiceCodeInput().getサービス名称();
         } else {
             サービス種類コードTmp = div.getCcdServiceTypeInput().getサービス種類コード();
-            サービス項目コードTmp = RString.EMPTY;
+            サービス項目コードTmp = div.getCcdServiceCodeInput().getサービスコード2();
             サービスTmp = div.getCcdServiceTypeInput().getサービス種類名称();
         }
         row.setJigyosha(div.getCcdJigyoshaInput().getNyuryokuShisetsuMeisho());
@@ -1038,9 +1102,6 @@ public class ServiceRiyohyoInfoDivHandler {
         row.setHdnGokeiGyoFlag(RSTRING_ZERO);
     }
 
-//    private void 合計パネルを初期化() {
-//        div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
-//    }
     private List<KyufuJikoSakuseiResult> rowListToResult(List<dgServiceRiyohyoBeppyoList_Row> rowList) {
         List<KyufuJikoSakuseiResult> resultlist = new ArrayList();
         for (dgServiceRiyohyoBeppyoList_Row row : rowList) {
@@ -1124,6 +1185,8 @@ public class ServiceRiyohyoInfoDivHandler {
      */
     public void init修正() {
         dgServiceRiyohyoBeppyoList_Row row = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
+        ViewStateHolder.put(ViewStateKeys.給付率, row.getKyufuritsu().getValue());
+        div.getServiceRiyohyoBeppyoList().getBtnBeppyoGokeiNew().setDisabled(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setNyuryokuShisetsuKodo(row.getHdnJigyoshaCode());
 
@@ -1142,7 +1205,9 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setValue(row.getServiceTani().getValue());
         div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().setValue(null);
         div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().setValue(row.getRiyoshaFutangakuTeigaku().getValue());
-
+        div.getServiceRiyohyoBeppyoMeisai().getTxtHdnGendogakuTaishogaiFlg().setValue(row.getHdnGendogakuTaishogaiFlag());
+        div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn()
+                .setValue(row.getHdnRiyoshaFutanTeiritsuTeigakuKbn());
         if (合計有り.equals(row.getHdnGokeiFlag())) {
             div.getServiceRiyohyoBeppyoGokei().setDisabled(false);
             div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
@@ -1263,6 +1328,8 @@ public class ServiceRiyohyoInfoDivHandler {
                         .set今回計画利用日数(div.getServiceRiyohyoBeppyoRiyoNissu().getTxtTogetsuRiyoNissu().getValue())
                         .set暫定区分(div.getChkZanteiKubun().isAllSelected() ? 暫定区分_1 : 暫定区分_0)
                         .set更新区分(div.getDdlKoshinKbn().getSelectedKey())
+                        .set更新年月日(div.getTxtKoshinYMD().getValue() == null ? null
+                                : new FlexibleDate(div.getTxtKoshinYMD().getValue().toDateString()))
                         .set送付年月(FlexibleYearMonth.EMPTY);
                 yoboManager.update予防短期入所情報(builder.build());
             }
@@ -1281,6 +1348,8 @@ public class ServiceRiyohyoInfoDivHandler {
                         .set今回計画利用日数(div.getServiceRiyohyoBeppyoRiyoNissu().getTxtTogetsuRiyoNissu().getValue())
                         .set暫定区分(div.getChkZanteiKubun().isAllSelected() ? 暫定区分_1 : 暫定区分_0)
                         .set更新区分(div.getDdlKoshinKbn().getSelectedKey())
+                        .set更新年月日(div.getTxtKoshinYMD().getValue() == null ? null
+                                : new FlexibleDate(div.getTxtKoshinYMD().getValue().toDateString()))
                         .set送付年月(FlexibleYearMonth.EMPTY);
                 kyoManager.update居宅短期入所情報(builder.build());
             }
@@ -1295,38 +1364,42 @@ public class ServiceRiyohyoInfoDivHandler {
      */
     public void DB追加処理(RString 居宅総合事業区分, TankiNyushoResult 短期入所情報) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        if (居宅.equals(居宅総合事業区分) && 居宅予防区分_0.equals(短期入所情報.get居宅予防区分())) {
+        FlexibleYearMonth 対象年月 = ViewStateHolder.get(ViewStateKeys.対象年月, FlexibleYearMonth.class);
+        int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, Integer.class);
+        if (居宅.equals(居宅総合事業区分)) {
             KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuManager manager
                     = InstanceProvider.create(KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuManager.class);
             KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu 居宅短期入所情報
                     = new KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu(
                             被保険者番号,
-                            短期入所情報.get居宅短期入所情報().get対象年月(),
-                            短期入所情報.get居宅短期入所情報().get履歴番号(),
+                            対象年月,
+                            履歴番号,
                             new FlexibleYearMonth(div.getTxtRiyoYM().getValue().getYearMonth().toDateString()));
             KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuBuilder builder = 居宅短期入所情報.createBuilderForEdit();
             builder.set前回迄利用日数(div.getServiceRiyohyoBeppyoRiyoNissu().getTxtZengetsuRiyoNissu().getValue())
                     .set今回計画利用日数(div.getServiceRiyohyoBeppyoRiyoNissu().getTxtTogetsuRiyoNissu().getValue())
                     .set暫定区分(div.getChkZanteiKubun().isAllSelected() ? 暫定区分_1 : 暫定区分_0)
                     .set更新区分(div.getDdlKoshinKbn().getSelectedKey())
-                    .set更新年月日(new FlexibleDate(div.getTxtKoshinYMD().getValue().toDateString()))
+                    .set更新年月日(div.getTxtKoshinYMD().getValue() == null ? null
+                            : new FlexibleDate(div.getTxtKoshinYMD().getValue().toDateString()))
                     .set送付年月(FlexibleYearMonth.EMPTY);
             manager.insert居宅短期入所情報(builder.build());
-        } else if (総合事業.equals(居宅総合事業区分) && 居宅予防区分_1.equals(短期入所情報.get居宅予防区分())) {
+        } else if (総合事業.equals(居宅総合事業区分)) {
             YoboKeikakuJikoSakuseiTankiRiyoNissuManager manager
                     = InstanceProvider.create(YoboKeikakuJikoSakuseiTankiRiyoNissuManager.class);
             YoboKeikakuJikoSakuseiTankiRiyoNissu 予防短期入所情報
                     = new YoboKeikakuJikoSakuseiTankiRiyoNissu(
                             被保険者番号,
-                            短期入所情報.get予防短期入所情報().get対象年月(),
-                            短期入所情報.get予防短期入所情報().get履歴番号(),
+                            対象年月,
+                            履歴番号,
                             new FlexibleYearMonth(div.getTxtRiyoYM().getValue().getYearMonth().toDateString()));
             YoboKeikakuJikoSakuseiTankiRiyoNissuBuilder builder = 予防短期入所情報.createBuilderForEdit();
             builder.set前回迄利用日数(div.getServiceRiyohyoBeppyoRiyoNissu().getTxtZengetsuRiyoNissu().getValue())
                     .set今回計画利用日数(div.getServiceRiyohyoBeppyoRiyoNissu().getTxtTogetsuRiyoNissu().getValue())
                     .set暫定区分(div.getChkZanteiKubun().isAllSelected() ? 暫定区分_1 : 暫定区分_0)
                     .set更新区分(div.getDdlKoshinKbn().getSelectedKey())
-                    .set更新年月日(new FlexibleDate(div.getTxtKoshinYMD().getValue().toDateString()))
+                    .set更新年月日(div.getTxtKoshinYMD().getValue() == null ? null
+                            : new FlexibleDate(div.getTxtKoshinYMD().getValue().toDateString()))
                     .set送付年月(FlexibleYearMonth.EMPTY);
             manager.insert予防短期入所情報(builder.build());
         }
@@ -1348,8 +1421,7 @@ public class ServiceRiyohyoInfoDivHandler {
                     .set今回計画利用日数(div.getServiceRiyohyoBeppyoRiyoNissu().getTxtTogetsuRiyoNissu().getValue())
                     .set暫定区分(div.getChkZanteiKubun().isAllSelected() ? 暫定区分_1 : 暫定区分_0)
                     .set更新区分(div.getDdlKoshinKbn().getSelectedKey())
-                    .set更新年月日(
-                            div.getTxtKoshinYMD().getValue() == null ? null
+                    .set更新年月日(div.getTxtKoshinYMD().getValue() == null ? null
                             : new FlexibleDate(div.getTxtKoshinYMD().getValue().toDateString()))
                     .set送付年月(FlexibleYearMonth.EMPTY);
             manager.update居宅短期入所情報(builder.build());
@@ -1377,14 +1449,114 @@ public class ServiceRiyohyoInfoDivHandler {
      */
     public void init保存処理(RString 居宅総合事業区分, List<KyufuJikoSakuseiResult> サービス利用票情報) {
         // TODO QAのNo.1234 業務概念を取得できないので、DB保存処理できない。
-//        List<dgServiceRiyohyoBeppyoList_Row> rowList = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
-//        for (dgServiceRiyohyoBeppyoList_Row row : rowList) {
-//            if (総合事業.equals(居宅総合事業区分)) {
-//                if (RowState.Added.equals(row.getRowState())) {
-//
-//                }
-//            }
-//        }
+        List<dgServiceRiyohyoBeppyoList_Row> rowList = div.getServiceRiyohyoBeppyoList()
+                .getDgServiceRiyohyoBeppyoList().getDataSource();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        FlexibleYearMonth 対象年月 = ViewStateHolder.get(ViewStateKeys.対象年月, FlexibleYearMonth.class);
+        int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, Integer.class);
+        FlexibleYearMonth 利用年月 = ViewStateHolder.get(ViewStateKeys.利用年月, FlexibleYearMonth.class);
+        RDate 利用年月日 = div.getTxtRiyoYM().getValue();
+        FlexibleYearMonth 画面の利用年月 = new FlexibleYearMonth(利用年月日.getYearMonth().toDateString());
+        JigoSakuseiMeisaiTouroku jigoSakusei = JigoSakuseiMeisaiTouroku.createInstance();
+        for (dgServiceRiyohyoBeppyoList_Row row : rowList) {
+            if (総合事業.equals(居宅総合事業区分)) {
+                if (RowState.Added.equals(row.getRowState())) {
+                    CountedItem saiban = Saiban.get(SubGyomuCode.DBC介護給付, 汎用キー_明細番号, FlexibleDate.getNowDate().getNendo());
+                    YoboKeikakuJikoSakuseiKanri 予防給付計画自己作成管理 = new YoboKeikakuJikoSakuseiKanri(被保険者番号,
+                            対象年月, 履歴番号, 画面の利用年月, 固定値_3, Integer.parseInt(saiban.nextString().trim().toString()));
+                    YoboKeikakuJikoSakuseiKanriBuilder builder = 予防給付計画自己作成管理.createBuilderForEdit();
+                    builder.setサービス提供事業者番号(new JigyoshaNo(row.getHdnJigyoshaCode()))
+                            .setサービス種類コード(new ServiceShuruiCode(row.getHdnServiceShuruiCode()))
+                            .setサービス項目コード(new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
+                            .set単位数(row.getTani().getValue())
+                            .set回数_日数(row.getKaisu().getValue())
+                            .set割引後適用率(new HokenKyufuRitsu(row.getWaribikigoRitsu().getValue()))
+                            .set割引後適用単位数(row.getWaribikigoTani().getValue())
+                            .set定額利用者負担単価金額(row.getRiyoshaFutangakuTeigaku().getValue())
+                            .set合計明細フラグ(合計有り.equals(row.getHdnGokeiFlag()))
+                            .set種類限度内単位数_日数(row.getShuruiGendonaiTani().getValue())
+                            .set種類限度超過単位数_日数(row.getShuruiGendoChokaTani().getValue())
+                            .set区分限度内単位数_日数(row.getKubunGendonaiTani().getValue())
+                            .set区分限度超過単位数_日数(row.getKubunGendoChokaTani().getValue())
+                            .set単位数単価(row.getTanisuTanka().getValue())
+                            .set給付率(new HokenKyufuRitsu(row.getKyufuritsu().getValue()))
+                            .set給付計画単位数(row.getServiceTani().getValue());
+                    jigoSakusei.save予防給付計画自己作成管理(builder.build());
+                } else if (RowState.Modified.equals(row.getRowState())) {
+                    YoboKeikakuJikoSakuseiKanri 予防給付計画自己作成管理 = jigoSakusei.select予防給付計画自己作成管理ByKey(
+                            被保険者番号, 対象年月, 履歴番号, 利用年月, 固定値_3, Integer.parseInt(row.getHdnMeisaiNo().toString()));
+                    YoboKeikakuJikoSakuseiKanriBuilder builder = 予防給付計画自己作成管理.createBuilderForEdit();
+                    builder.setサービス提供事業者番号(new JigyoshaNo(row.getHdnJigyoshaCode()))
+                            .setサービス種類コード(new ServiceShuruiCode(row.getHdnServiceShuruiCode()))
+                            .setサービス項目コード(new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
+                            .set単位数(row.getTani().getValue())
+                            .set回数_日数(row.getKaisu().getValue())
+                            .set割引後適用率(new HokenKyufuRitsu(row.getWaribikigoRitsu().getValue()))
+                            .set割引後適用単位数(row.getWaribikigoTani().getValue())
+                            .set定額利用者負担単価金額(row.getRiyoshaFutangakuTeigaku().getValue())
+                            .set合計明細フラグ(合計有り.equals(row.getHdnGokeiFlag()))
+                            .set種類限度内単位数_日数(row.getShuruiGendonaiTani().getValue())
+                            .set種類限度超過単位数_日数(row.getShuruiGendoChokaTani().getValue())
+                            .set区分限度内単位数_日数(row.getKubunGendonaiTani().getValue())
+                            .set区分限度超過単位数_日数(row.getKubunGendoChokaTani().getValue())
+                            .set単位数単価(row.getTanisuTanka().getValue())
+                            .set給付率(new HokenKyufuRitsu(row.getKyufuritsu().getValue()))
+                            .set給付計画単位数(row.getServiceTani().getValue());
+                    jigoSakusei.update予防給付計画自己作成管理(builder.build());
+                } else if (RowState.Deleted.equals(row.getRowState())) {
+                    YoboKeikakuJikoSakuseiKanri 予防給付計画自己作成管理 = jigoSakusei.select予防給付計画自己作成管理ByKey(
+                            被保険者番号, 対象年月, 履歴番号, 利用年月, 固定値_3, Integer.parseInt(row.getHdnMeisaiNo().toString()));
+                    jigoSakusei.delete予防給付計画自己作成管理(予防給付計画自己作成管理);
+                }
+            } else if (居宅.equals(居宅総合事業区分)) {
+                if (RowState.Added.equals(row.getRowState())) {
+                    CountedItem saiban = Saiban.get(SubGyomuCode.DBC介護給付, 汎用キー_明細番号, FlexibleDate.getNowDate().getNendo());
+                    KyotakuKeikakuJikosakuseiKanri 居宅給付計画自己作成管理 = new KyotakuKeikakuJikosakuseiKanri(被保険者番号,
+                            対象年月, 履歴番号, 画面の利用年月, 固定値_3, Integer.parseInt(saiban.nextString().trim().toString()));
+                    KyotakuKeikakuJikosakuseiKanriBuilder builder = 居宅給付計画自己作成管理.createBuilderForEdit();
+                    builder.setサービス提供事業者番号(new JigyoshaNo(row.getHdnJigyoshaCode()))
+                            .setサービス種類コード(new ServiceShuruiCode(row.getHdnServiceShuruiCode()))
+                            .setサービス項目コード(new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
+                            .set単位数(row.getTani().getValue())
+                            .set回数_日数(row.getKaisu().getValue())
+                            .set割引後適用率(new HokenKyufuRitsu(row.getWaribikigoRitsu().getValue()))
+                            .set割引後適用単位数(row.getWaribikigoTani().getValue())
+                            .set合計明細フラグ(合計有り.equals(row.getHdnGokeiFlag()))
+                            .set種類限度内単位数_日数(row.getShuruiGendonaiTani().getValue())
+                            .set種類限度超過単位数_日数(row.getShuruiGendoChokaTani().getValue())
+                            .set区分限度内単位数_日数(row.getKubunGendonaiTani().getValue())
+                            .set区分限度超過単位数_日数(row.getKubunGendoChokaTani().getValue())
+                            .set単位数単価(row.getTanisuTanka().getValue())
+                            .set給付率(new HokenKyufuRitsu(row.getKyufuritsu().getValue()))
+                            .set給付計画単位数(row.getServiceTani().getValue());
+                    jigoSakusei.save居宅給付計画自己作成管理(builder.build());
+                } else if (RowState.Modified.equals(row.getRowState())) {
+                    KyotakuKeikakuJikosakuseiKanri 居宅給付計画自己作成管理 = jigoSakusei.select居宅給付計画自己作成管理ByKey(
+                            被保険者番号, 対象年月, 履歴番号, 利用年月, 固定値_3, Integer.parseInt(row.getHdnMeisaiNo().toString()));
+                    KyotakuKeikakuJikosakuseiKanriBuilder builder = 居宅給付計画自己作成管理.createBuilderForEdit();
+                    builder.setサービス提供事業者番号(new JigyoshaNo(row.getHdnJigyoshaCode()))
+                            .setサービス種類コード(new ServiceShuruiCode(row.getHdnServiceShuruiCode()))
+                            .setサービス項目コード(new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
+                            .set単位数(row.getTani().getValue())
+                            .set回数_日数(row.getKaisu().getValue())
+                            .set割引後適用率(new HokenKyufuRitsu(row.getWaribikigoRitsu().getValue()))
+                            .set割引後適用単位数(row.getWaribikigoTani().getValue())
+                            .set合計明細フラグ(合計有り.equals(row.getHdnGokeiFlag()))
+                            .set種類限度内単位数_日数(row.getShuruiGendonaiTani().getValue())
+                            .set種類限度超過単位数_日数(row.getShuruiGendoChokaTani().getValue())
+                            .set区分限度内単位数_日数(row.getKubunGendonaiTani().getValue())
+                            .set区分限度超過単位数_日数(row.getKubunGendoChokaTani().getValue())
+                            .set単位数単価(row.getTanisuTanka().getValue())
+                            .set給付率(new HokenKyufuRitsu(row.getKyufuritsu().getValue()))
+                            .set給付計画単位数(row.getServiceTani().getValue());
+                    jigoSakusei.update予防給付計画自己作成管理(builder.build());
+                } else if (RowState.Deleted.equals(row.getRowState())) {
+                    KyotakuKeikakuJikosakuseiKanri 居宅給付計画自己作成管理 = jigoSakusei.select居宅給付計画自己作成管理ByKey(
+                            被保険者番号, 対象年月, 履歴番号, 利用年月, 固定値_3, Integer.parseInt(row.getHdnMeisaiNo().toString()));
+                    jigoSakusei.delete居宅給付計画自己作成管理(居宅給付計画自己作成管理);
+                }
+            }
+        }
     }
 
     /**
@@ -1397,14 +1569,15 @@ public class ServiceRiyohyoInfoDivHandler {
             return;
         }
         Decimal サービス単位合計 = Decimal.ZERO;
-        for (KyufuJikoSakuseiResult result : サービス利用票情報) {
+        for (int index = 0; index < サービス利用票情報.size(); index++) {
+            KyufuJikoSakuseiResult result = サービス利用票情報.get(index);
             if (result.is合計フラグ()) {
                 if (サービス単位合計.equals(result.getサービス単位())) {
                     サービス単位合計 = Decimal.ZERO;
                 } else {
                     throw new ApplicationException(DbcErrorMessages.サービス単位不正.getMessage().evaluate());
                 }
-                限度チェック(result);
+                限度チェック(result, index);
             }
             if (!限度額対象外フラグ_1.equals(result.get限度額対象外フラグ())) {
                 サービス単位合計 = サービス単位合計.add(nullToZero(result.getサービス単位()));
@@ -1412,7 +1585,7 @@ public class ServiceRiyohyoInfoDivHandler {
         }
     }
 
-    private void 限度チェック(KyufuJikoSakuseiResult result) {
+    private void 限度チェック(KyufuJikoSakuseiResult result, int index) {
         Decimal 区分限度 = nullToZero(result.get区分限度超過単位()).add(nullToZero(result.get区分限度内単位()));
         Decimal 種類限度 = nullToZero(result.get種類限度超過単位()).add(nullToZero(result.get種類限度内単位()));
         if (区分限度.compareTo(Decimal.ZERO) <= 0) {
@@ -1420,11 +1593,13 @@ public class ServiceRiyohyoInfoDivHandler {
         }
         if (Decimal.ZERO.compareTo(種類限度) < 0) {
             if (!区分限度.equals(result.get種類限度内単位())) {
-                throw new ApplicationException(DbcErrorMessages.区分支給限度額不正.getMessage().evaluate());
+                throw new ApplicationException(DbcErrorMessages.区分支給限度額不正.getMessage()
+                        .replace(String.valueOf(index + INT_1)).evaluate());
             }
         } else {
             if (!区分限度.equals(result.getサービス単位())) {
-                throw new ApplicationException(DbcErrorMessages.区分支給限度額不正.getMessage().evaluate());
+                throw new ApplicationException(DbcErrorMessages.区分支給限度額不正.getMessage()
+                        .replace(String.valueOf(index + INT_1)).evaluate());
             }
         }
     }
@@ -1433,4 +1608,14 @@ public class ServiceRiyohyoInfoDivHandler {
         return data == null || RString.isNullOrEmpty(data.toDateString());
     }
 
+    /**
+     * サービス利用票情報取得メソッドです。
+     *
+     * @return List<KyufuJikoSakuseiResult>
+     */
+    public List<KyufuJikoSakuseiResult> getサービス利用票情報() {
+        List<dgServiceRiyohyoBeppyoList_Row> rowList
+                = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
+        return rowListToResult(rowList);
+    }
 }

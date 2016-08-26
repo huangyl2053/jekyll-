@@ -211,9 +211,14 @@ public class MenjoKaijoSaiTennyuHandler {
         ShiharaiHohoHenkoGengaku shiharaiHohoHenkoGengaku = 支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().get(index);
         builder.setShiharaiHohoHenkoGengaku(shiharaiHohoHenkoGengaku.createBuilderForEdit()
                 .set確定減額期間終了年月日(div.getTxtKonkaiKikanShuryoYMD().getValue())
-                .set確定減額期間開始年月日(div.getTxtKonkaiKikanKaishiYMD().getValue())
-                .setState(EntityDataState.Modified).build())
-                .setState(EntityDataState.Modified);
+                .set確定減額期間開始年月日(div.getTxtKonkaiKikanKaishiYMD().getValue()).build());
+        if (!shiharaiHohoHenkoGengaku.toEntity().getState().equals(EntityDataState.Added)) {
+            builder.setShiharaiHohoHenkoGengaku(shiharaiHohoHenkoGengaku.createBuilderForEdit().setState(EntityDataState.Modified).build());
+        }
+        if (null != builder.build().toEntity().getState()
+                && !builder.build().getState().equals(EntityDataState.Added)) {
+            builder.setState(EntityDataState.Modified);
+        }
         ViewStateHolder.put(免除解除再転入ダイアロググキー.支払方法変更管理業務概念, builder.build());
     }
 

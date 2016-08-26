@@ -77,6 +77,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
     private final RiyoshaFutanWariaiSokujiKouseiManager manager;
     private final RiyoshaFutanWariaiSokujiKouseiFinder finder;
 
+    private static final int INT_2 = 2;
     private static final RString RSTZERO = new RString("0");
     private static final RString RSTONE = new RString("1");
     private static final RString RSTTWO = new RString("2");
@@ -118,6 +119,10 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         if (!entityList.isEmpty()) {
             List<dgFutanWariai_Row> rowsData = new ArrayList<>();
             for (RiyoshaFutanWariaiMeisai entity : entityList) {
+                RString 資格区分 = entity.get資格区分();
+                RiyoshaFutanWariaiMeisaiBuilder builder = entity.createBuilderForEdit();
+                builder.set資格区分(資格区分.padZeroToLeft(INT_2));
+                entity = builder.build();
                 rowsData.add(getDataGridRow(entity, RSTZERO));
             }
             div.getDgFutanWariai().setDataSource(rowsData);
@@ -224,9 +229,19 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
     }
 
     private void setヘッダ項目(RiyoshaFutanWariai 利用者負担割合, RString 処理区分) {
-        if (RSTZERO.equals(処理区分) || RSTONE.equals(処理区分)) {
+        if (RSTZERO.equals(処理区分)) {
             div.getTxtHanteibi().setValue(RDate.getNowDate());
             div.getTxtHanteiKubun().setValue(FutanWariaiHanteiKubun.即時更正.get名称());
+        }
+        if (RSTONE.equals(処理区分)) {
+            div.getTxtHanteibi().setValue(RDate.getNowDate());
+            div.getTxtHanteiKubun().setValue(FutanWariaiHanteiKubun.即時更正.get名称());
+            if (利用者負担割合.get発行日() != null && !利用者負担割合.get発行日().isEmpty()) {
+                div.getTxtHakkobi().setValue(new RDate(利用者負担割合.get発行日().toString()));
+            }
+            if (利用者負担割合.get交付日() != null && !利用者負担割合.get交付日().isEmpty()) {
+                div.getTxtKofubi().setValue(new RDate(利用者負担割合.get交付日().toString()));
+            }
         }
         if (RSTTWO.equals(処理区分)) {
             FlexibleDate 判定日 = 利用者負担割合.get判定日();
@@ -280,9 +295,9 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             div.getPanelEdit().getBtnCancel().setDisabled(true);
             div.getPanelEdit().getBtnKakutei().setDisabled(true);
             div.getChkShokkenHenko().setDisabled(true);
-            div.getTxtKijunbi().setDisplayNone(true);
-            div.getTxtHakkobi().setDisplayNone(true);
-            div.getTxtKofubi().setDisplayNone(true);
+            div.getTxtKijunbi().setDisplayNone(false);
+            div.getTxtHakkobi().setDisplayNone(false);
+            div.getTxtKofubi().setDisplayNone(false);
 
         }
         if (RSTTWO.equals(処理区分)) {
@@ -340,10 +355,10 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         rowData.setFutanWariai(FutanwariaiKubun.toValue(利用者負担割合明細.get負担割合区分()).get名称());
         FlexibleDate 適用開始日 = 利用者負担割合明細.get有効開始日();
         FlexibleDate 適用終了日 = 利用者負担割合明細.get有効終了日();
-        if (適用開始日 != null) {
+        if (適用開始日 != null && !適用開始日.isEmpty()) {
             rowData.getTekiyoKaishibi().setValue(new RDate(適用開始日.toString()));
         }
-        if (適用終了日 != null) {
+        if (適用終了日 != null && !適用終了日.isEmpty()) {
             rowData.getTekiyoShuryobi().setValue(new RDate(適用終了日.toString()));
         }
         rowData.getGokeiShotoku().setValue(利用者負担割合明細.get本人合計所得金額());
@@ -586,6 +601,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         parameter.set氏名(div.getCcdKaigoAtenaInfo().get氏名漢字());
         parameter.set生年月日(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getShokaiData().getTxtSeinengappiYMD().getValue());
         parameter.set性別(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getShokaiData().getTxtSeibetsu().getValue());
+        parameter.set利用者負担割合明細(利用者負担割合明細);
         return futanWariaisho.getSourceDataSinger(資格対象者.get識別コード(), 資格対象者.get被保険者番号(), parameter, RSTONE);
     }
 
@@ -613,11 +629,11 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
     public void 利用者負担割合編集(RiyoshaFutanWariai 利用者負担割合) {
         RiyoshaFutanWariaiBuilder 利用者負担割合builder = 利用者負担割合.createBuilderForEdit();
         利用者負担割合builder.set発行区分(div.getDdlHakkoKubun().getSelectedKey());
-        利用者負担割合builder.set発行日(new FlexibleDate(div.getTxtHanteibi().getValue().toString()));
+        利用者負担割合builder.set発行日(new FlexibleDate(div.getTxtHakkobi().getValue().toString()));
         利用者負担割合builder.set交付日(new FlexibleDate(div.getTxtKofubi().getValue().toString()));
         利用者負担割合builder.set論理削除フラグ(true);
         利用者負担割合 = 利用者負担割合builder.build();
-        利用者負担割合.toEntity().setState(EntityDataState.Modified);
+        利用者負担割合.modified();
     }
 
     /**
@@ -628,10 +644,14 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
     public void insert証交付回収(RiyoshaFutanWariai 利用者負担割合) {
         ShoKofuKaishuManager 証交付回収manager = new ShoKofuKaishuManager();
         ShoKofuKaishu max履歴番号証交付回収entity = 証交付回収manager.get証交付回収(利用者負担割合.get被保険者番号(), 交付証種類);
+        int 履歴番号 = 1;
+        if (max履歴番号証交付回収entity != null) {
+            履歴番号 = max履歴番号証交付回収entity.get履歴番号() + 1;
+        }
         ShoKofuKaishu new証交付回収 = new ShoKofuKaishu(
                 new HihokenshaNo(div.getCcdKaigoShikakuKihon().get被保険者番号()),
                 交付証種類,
-                max履歴番号証交付回収entity.get履歴番号() + 1);
+                履歴番号);
         ShoKofuKaishuBuilder 証交付回収builder = new証交付回収.createBuilderForEdit();
         証交付回収builder.set市町村コード(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード());
         証交付回収builder.set識別コード(
@@ -643,8 +663,14 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         if (交付事由 != null) {
             証交付回収builder.set交付事由(交付事由);
         }
+        証交付回収builder.set交付理由(RString.EMPTY);
+        証交付回収builder.set回収年月日(FlexibleDate.EMPTY);
+        証交付回収builder.set回収事由(RString.EMPTY);
+        証交付回収builder.set回収理由(RString.EMPTY);
         証交付回収builder.set単票発行有無フラグ(true);
         証交付回収builder.set発行処理日時(YMDHMS.now());
+        証交付回収builder.set新様式印書済区分コード(RString.EMPTY);
+        証交付回収builder.set証様式区分コード(RString.EMPTY);
         証交付回収builder.set論理削除フラグ(false);
         new証交付回収 = 証交付回収builder.build();
         new証交付回収.toEntity().setState(EntityDataState.Added);
@@ -739,8 +765,9 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
      *
      * @param 利用者負担割合 RiyoshaFutanWariai
      * @param 処理モード RString
+     * @return RiyoshaFutanWariai
      */
-    public void update利用者負担割合情報(RiyoshaFutanWariai 利用者負担割合, RString 処理モード) {
+    public RiyoshaFutanWariai update利用者負担割合情報(RiyoshaFutanWariai 利用者負担割合, RString 処理モード) {
         RiyoshaFutanWariaiBuilder 利用者負担割合builder = 利用者負担割合.createBuilderForEdit();
         if (!div.getChkShoHakkoFuyo().getSelectedKeys().isEmpty()) {
             利用者負担割合builder.set発行不要フラグ(true);
@@ -753,6 +780,14 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             利用者負担割合builder.set発行日(FlexibleDate.EMPTY);
             利用者負担割合builder.set交付日(FlexibleDate.EMPTY);
             利用者負担割合builder.set発行区分(div.getDdlHakkoKubun().getSelectedKey());
+            RiyoshaFutanWariai maxRireki = manager.selectMax履歴番号(
+                    利用者負担割合.get年度(),
+                    利用者負担割合.get被保険者番号());
+            if (maxRireki != null) {
+                利用者負担割合builder.set履歴番号(maxRireki.get履歴番号() + 1);
+            } else {
+                利用者負担割合builder.set履歴番号(1);
+            }
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
             利用者負担割合builder.set更正事由(new Code(RSTFORTY));
@@ -763,11 +798,12 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
 
         利用者負担割合 = 利用者負担割合builder.build();
         if (DBC2000022StateName.新規.getName().equals(処理モード)) {
-            利用者負担割合.toEntity().setState(EntityDataState.Added);
+            利用者負担割合 = 利用者負担割合.added();
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
-            利用者負担割合.toEntity().setState(EntityDataState.Modified);
+            利用者負担割合 = 利用者負担割合.modified();
         }
+        return 利用者負担割合;
     }
 
     private FutanWariaiSokujiKouseiResult setDataGridInfo(RString 処理区分) {

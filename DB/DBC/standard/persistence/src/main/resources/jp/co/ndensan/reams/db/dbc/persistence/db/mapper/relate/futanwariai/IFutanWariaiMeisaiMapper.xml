@@ -49,7 +49,8 @@
     </select>
     
     <sql id="selectDbT3113RiyoshaFutanWariai">
-        SELECT
+        SELECT DISTINCT
+            ON ("DbT3113RiyoshaFutanWariai"."rirekiNo")
             <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3113RiyoshaFutanWariaiMapper.allColumns_DbT3113RiyoshaFutanWariai" />
         FROM
             rgdb."DbT3113RiyoshaFutanWariai" AS "DbT3113RiyoshaFutanWariai"
@@ -58,7 +59,7 @@
             AND "DbT3113RiyoshaFutanWariai"."nendo" = #{年度}
             AND "DbT3113RiyoshaFutanWariai"."hihokenshaNo" = #{被保険者番号}
         ORDER BY
-            "DbT3113RiyoshaFutanWariai"."rirekiNo"
+            "DbT3113RiyoshaFutanWariai"."rirekiNo" DESC
     </sql>
     
     <resultMap id="resultMap_FutanWariaiMeisai"

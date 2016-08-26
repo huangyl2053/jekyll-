@@ -148,7 +148,7 @@ public class ShinseihakkoMeiseiHandler {
                 shinseiShoEntity.set出生元号昭和(正);
             }
             shinseiShoEntity.set生年月日(getパターン9(new FlexibleDate(kaigoNinteiAtenaInfoDiv.getTxtBirthYMD().getValue().toDateString())));
-            shinseiShoEntity.set生まれYY(kaigoNinteiAtenaInfoDiv.getTxtBirthYMD().getValue().getYear().toDateString());
+            shinseiShoEntity.set生まれYY(year.substring(1));
             shinseiShoEntity.set出生月MM(
                     new RString(String.valueOf(kaigoNinteiAtenaInfoDiv.getTxtBirthYMD().getValue().getMonthValue())).padZeroToLeft(NO_2));
             shinseiShoEntity.set出生日DD(
@@ -168,7 +168,7 @@ public class ShinseihakkoMeiseiHandler {
             Map<Integer, RString> 通知文MAP
                     = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD501002.getReportId(), KamokuCode.EMPTY, 通知文_項目番号_1);
             RString 通知文 = 通知文MAP.get(通知文_項目番号_1);
-            通知文.replace(通知文_修正, div.getNinteishinseihakko().getCcdKaigoninteiShikakuInfo().getHokensha());
+            通知文 = 通知文.replace(通知文_修正, div.getNinteishinseihakko().getCcdKaigoninteiShikakuInfo().getHokensha());
             shinseiShoEntity.set通知文(通知文);
             if (radShinseiKubunSelectIndex != 0) {
                 shinseiShoEntity = set状態区分(shinseiShoEntity);

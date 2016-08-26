@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyotakuKeikakuJikosakuseiKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.YoboKeikakuJikoSakuseiKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.YoboKeikakuJikoSakuseiTankiRiyoNissu;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.GokeiKeisan;
@@ -24,6 +25,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeika.Kyotak
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KubunGendoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KyufuJikoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3119KyotakuKeikakuJikosakuseiKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3120YoboKeikakuJikoSakuseiKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KubunGendoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyotakuServiceRirekiIchiranEntity;
@@ -31,6 +33,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyufuJikoSak
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.RiyoNentstsuIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.ServiceTypeTotalEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDac;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3119KyotakuKeikakuJikosakuseiKanriDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3120YoboKeikakuJikoSakuseiKanriDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigosakuseimeisaitouroku.IJigoSakuseiMeisaiTourokuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
@@ -67,6 +70,7 @@ public class JigoSakuseiMeisaiTouroku {
     private final DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuDac 居宅給付計画自己作成短期入所利用日数Dac;
     private final DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDac 予防給付計画自己作成短期利用日数Dac;
     private final DbT3120YoboKeikakuJikoSakuseiKanriDac 予防給付計画自己作成管理Dac;
+    private final DbT3119KyotakuKeikakuJikosakuseiKanriDac 居宅給付計画自己作成管理Dac;
     private static final Decimal 定値_100 = new Decimal("100");
     private static final RString 限度対象外フラグ = new RString("0");
     private static final RString 定値_合計 = new RString("合計");
@@ -93,13 +97,13 @@ public class JigoSakuseiMeisaiTouroku {
                 = InstanceProvider.create(DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuDac.class);
         this.予防給付計画自己作成短期利用日数Dac = InstanceProvider.create(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDac.class);
         this.予防給付計画自己作成管理Dac = InstanceProvider.create(DbT3120YoboKeikakuJikoSakuseiKanriDac.class);
+        this.居宅給付計画自己作成管理Dac = InstanceProvider.create(DbT3119KyotakuKeikakuJikosakuseiKanriDac.class);
     }
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link JigoSakuseiMeisaiTouroku}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link JigoSakuseiMeisaiTouroku}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link JigoSakuseiMeisaiTouroku}のインスタンス
      */
     public static JigoSakuseiMeisaiTouroku createInstance() {
         return InstanceProvider.create(JigoSakuseiMeisaiTouroku.class);
@@ -303,7 +307,8 @@ public class JigoSakuseiMeisaiTouroku {
             result.set利用者負担定率定額区分(entity.get利用者負担定率定額区分());
             if (entity.is合計フラグ()) {
                 Decimal 利用者負担額;
-                if (ServiceCategoryShurui.総用貸与.getコード().equals(entity.getサービス種類コード().getColumnValue())) {
+                if (ServiceCategoryShurui.総用貸与.getコード()
+                        .equals(entity.getサービス種類コード() == null ? null : entity.getサービス種類コード().getColumnValue())) {
                     利用者負担額 = entity.get定額利用者負担単価金額();
                 } else {
                     利用者負担額 = nullToZero(entity.get定額利用者負担単価金額()).multiply(nullToZero(entity.get回数()));
@@ -464,6 +469,97 @@ public class JigoSakuseiMeisaiTouroku {
             DbT3120YoboKeikakuJikoSakuseiKanriEntity entity = 予防管理情報.toEntity();
             entity.setState(EntityDataState.Modified);
             予防給付計画自己作成管理Dac.save(entity);
+        }
+    }
+
+    /**
+     * 予防給付計画自己作成管理情報を削除します。
+     *
+     * @param 予防管理情報 YoboKeikakuJikoSakuseiKanri
+     */
+    public void delete予防給付計画自己作成管理(YoboKeikakuJikoSakuseiKanri 予防管理情報) {
+        if (予防管理情報 != null) {
+            DbT3120YoboKeikakuJikoSakuseiKanriEntity entity = 予防管理情報.toEntity();
+            entity.setState(EntityDataState.Deleted);
+            予防給付計画自己作成管理Dac.save(entity);
+        }
+    }
+
+    /**
+     * 予防給付計画自己作成管理情報を登録します。
+     *
+     * @param 予防管理情報 YoboKeikakuJikoSakuseiKanri
+     */
+    public void save予防給付計画自己作成管理(YoboKeikakuJikoSakuseiKanri 予防管理情報) {
+        if (予防管理情報 != null) {
+            DbT3120YoboKeikakuJikoSakuseiKanriEntity entity = 予防管理情報.toEntity();
+            entity.setState(EntityDataState.Added);
+            予防給付計画自己作成管理Dac.save(entity);
+        }
+    }
+
+    /**
+     * 居宅給付計画自己作成管理情報を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年月 FlexibleYearMonth
+     * @param 履歴番号 int
+     * @param 利用年月 FlexibleYearMonth
+     * @param 居宅サービス区分 RString
+     * @param 明細番号 int
+     * @return KyotakuKeikakuJikosakuseiKanri
+     */
+    public KyotakuKeikakuJikosakuseiKanri select居宅給付計画自己作成管理ByKey(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth 対象年月,
+            int 履歴番号,
+            FlexibleYearMonth 利用年月,
+            RString 居宅サービス区分,
+            int 明細番号) {
+        DbT3119KyotakuKeikakuJikosakuseiKanriEntity entity
+                = 居宅給付計画自己作成管理Dac.selectByKey(被保険者番号, 対象年月, 履歴番号, 利用年月, 居宅サービス区分, 明細番号);
+        if (entity != null) {
+            entity.initializeMd5();
+            return new KyotakuKeikakuJikosakuseiKanri(entity);
+        }
+        return null;
+    }
+
+    /**
+     * 居宅給付計画自己作成管理情報を更新します。
+     *
+     * @param 居宅管理情報 KyotakuKeikakuJikosakuseiKanri
+     */
+    public void update予防給付計画自己作成管理(KyotakuKeikakuJikosakuseiKanri 居宅管理情報) {
+        if (居宅管理情報 != null) {
+            DbT3119KyotakuKeikakuJikosakuseiKanriEntity entity = 居宅管理情報.toEntity();
+            entity.setState(EntityDataState.Modified);
+            居宅給付計画自己作成管理Dac.save(entity);
+        }
+    }
+
+    /**
+     * 居宅給付計画自己作成管理情報を削除します。
+     *
+     * @param 居宅管理情報 YoboKeikakuJikoSakuseiKanri
+     */
+    public void delete居宅給付計画自己作成管理(KyotakuKeikakuJikosakuseiKanri 居宅管理情報) {
+        if (居宅管理情報 != null) {
+            DbT3119KyotakuKeikakuJikosakuseiKanriEntity entity = 居宅管理情報.toEntity();
+            entity.setState(EntityDataState.Deleted);
+            居宅給付計画自己作成管理Dac.save(entity);
+        }
+    }
+
+    /**
+     * 居宅給付計画自己作成管理情報を登録します。
+     *
+     * @param 居宅管理情報 KyotakuKeikakuJikosakuseiKanri
+     */
+    public void save居宅給付計画自己作成管理(KyotakuKeikakuJikosakuseiKanri 居宅管理情報) {
+        if (居宅管理情報 != null) {
+            DbT3119KyotakuKeikakuJikosakuseiKanriEntity entity = 居宅管理情報.toEntity();
+            entity.setState(EntityDataState.Added);
+            居宅給付計画自己作成管理Dac.save(entity);
         }
     }
 

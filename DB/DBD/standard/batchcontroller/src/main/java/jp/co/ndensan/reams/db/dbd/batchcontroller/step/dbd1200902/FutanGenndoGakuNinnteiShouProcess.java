@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1200902;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100020.FutanGendogakuNinteishoOrderKey;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100020.FutanGendogakuNinteishoReport;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd200019.FutangakuNinteiHakkoIchiranOrderKey;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.FutanGenndoGakuNinnteiShouProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.FutanGenndoGakuNinnteiShouEntity;
@@ -95,7 +95,11 @@ public class FutanGenndoGakuNinnteiShouProcess extends BatchProcessBase<FutanGen
     protected void initialize() {
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, 帳票ID.getReportId(),
                 UrControlDataFactory.createInstance().getLoginInfo().getUserId(), processParamter.get改頁出力順ID());
-        出力順 = MyBatisOrderByClauseCreator.create(FutanGendogakuNinteishoOrderKey.class, outputOrder);
+        if (outputOrder != null) {
+            出力順 = MyBatisOrderByClauseCreator.create(FutangakuNinteiHakkoIchiranOrderKey.class, outputOrder);
+        } else {
+            出力順 = RString.EMPTY;
+        }
         帳票制御共通 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御共通(帳票分類ID.getReportId());
         帳票制御汎用 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御汎用(帳票分類ID.getReportId());
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
@@ -177,8 +181,10 @@ public class FutanGenndoGakuNinnteiShouProcess extends BatchProcessBase<FutanGen
                 .concat(processParamter.get対象日TO().toString()));
         出力条件.add(交付日.concat(processParamter.get認定証の交付日().toString()));
         RString 設定項目 = RString.EMPTY;
-        for (ISetSortItem item : outputOrder.get設定項目リスト()) {
-            設定項目.concat(より大きい).concat(item.get項目名());
+        if (outputOrder != null) {
+            for (ISetSortItem item : outputOrder.get設定項目リスト()) {
+                設定項目.concat(より大きい).concat(item.get項目名());
+            }
         }
         if (!設定項目.isEmpty()) {
             設定項目 = 設定項目.substringEmptyOnError(1, 設定項目.length() - 1);

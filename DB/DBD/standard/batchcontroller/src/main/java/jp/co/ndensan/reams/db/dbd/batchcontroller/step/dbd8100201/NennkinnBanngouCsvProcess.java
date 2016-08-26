@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbd.business.report.dbd8100201.NennkinnBanngouCsvP
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.NennkinnBanngouCsvProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100201.NennkinnBanngouCsvEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable.HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable.NenkinNoCheckListTempTableEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsury
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.IBatchWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -49,7 +48,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  *
  * @reamsid_L DBD-4910-030 x_miaocl
  */
-public class NennkinnBanngouCsvProcess extends BatchProcessBase<HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity> {
+public class NennkinnBanngouCsvProcess extends BatchProcessBase<NenkinNoCheckListTempTableEntity> {
 
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate."
             + "hikazeinennkintaishousyajohotorikomi.IResultIchirannMapper.get年金番号情報");
@@ -108,7 +107,7 @@ public class NennkinnBanngouCsvProcess extends BatchProcessBase<HikazeNenkinTais
     }
 
     @Override
-    protected void process(HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {
+    protected void process(NenkinNoCheckListTempTableEntity t) {
         NennkinnBanngouCsvEntity eucCsvEntity = new NennkinnBanngouCsvEntity();
         eucCsvEntity(eucCsvEntity, t);
         csvWriterJunitoJugo.writeLine(eucCsvEntity);
@@ -117,30 +116,26 @@ public class NennkinnBanngouCsvProcess extends BatchProcessBase<HikazeNenkinTais
         PersonalData personalData = PersonalData.of(t.getShikibetsuCode(), expandedInformations);
         personalDataList.add(personalData);
 
-        AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-        IBatchWriter batchWriter = (IBatchWriter) csvWriterJunitoJugo;
-        batchWriter.close();
-        manager.spool(fileName, id);
-
     }
 
     @Override
     protected void afterExecute() {
         csvWriterJunitoJugo.close();
+        AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+        manager.spool(fileName, id);
     }
 
-    private void eucCsvEntity(NennkinnBanngouCsvEntity eucCsvEntity, HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {
+    private void eucCsvEntity(NennkinnBanngouCsvEntity eucCsvEntity, NenkinNoCheckListTempTableEntity t) {
         eucCsvEntity.set市町村コード(t.getDtShichosonCode());
         eucCsvEntity.set被保険者番号(t.getHihokenshaNo().getColumnValue());
         eucCsvEntity.set年金保険者コード(t.getDtNennkinnHokenshaCode());
         eucCsvEntity.set年金保険者(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                UEXCodeShubetsu.年金保険者コード.getCodeShubetsu(),
+                UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
                 new Code(t.getDtNennkinnHokenshaCode())));
         eucCsvEntity.set基礎年金番号(t.getDtKisoNennkinnNo());
-        eucCsvEntity.set年金コード(t.getNennkinnCode());
+        eucCsvEntity.set年金コード(t.getDtNennkinnCode());
         eucCsvEntity.set年金名称(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                UEXCodeShubetsu.年金保険者コード.getCodeShubetsu(),
-                new Code(set年金(t.getNennkinnCode()))));
+                UEXCodeShubetsu.年金コード.getCodeShubetsu(), new Code(set年金(t.getDtNennkinnCode()))));
         eucCsvEntity.set識別コード(t.getShikibetsuCode().getColumnValue());
         eucCsvEntity.set世帯コード(t.getShotaiCode());
         eucCsvEntity.set生年月日(set年月日(t.getDtSeinenngappi()));

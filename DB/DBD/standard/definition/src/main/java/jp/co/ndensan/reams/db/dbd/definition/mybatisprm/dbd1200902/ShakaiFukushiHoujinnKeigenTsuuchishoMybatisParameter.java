@@ -39,7 +39,7 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoMybatisParameter implements IMy
     private RString 被保番号;
     private RString 減免適用開始日;
     private ReportId 帳票ID;
-    private RString DBD介護受給;
+    private RString 介護受給;
 
     /**
      * コンストラクタです。
@@ -77,7 +77,7 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoMybatisParameter implements IMy
         this.被保番号 = 被保番号;
         this.減免適用開始日 = 減免適用開始日;
         this.帳票ID = 帳票ID;
-        this.DBD介護受給 = SubGyomuCode.DBD介護受給.getGyomuCode().value();
+        this.介護受給 = SubGyomuCode.DBD介護受給.getGyomuCode().value();
         edit年度開始日(年度開始日);
         edit年度終了日(年度終了日);
         edit減免減額種類();

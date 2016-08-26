@@ -81,6 +81,7 @@ public class SetainJohoTempTuikaFlow
             executeStep(世帯員把握FLOW);
             executeStep(判定基準日設定);
             loopProcessPrm.getHanteiKijunbi().set(i, HanteiKijunYMDInstance.getInstance().get判定基準日());
+            executeStep(世帯員情報作成);
             executeStep(月別判定対象者の作成);
             executeStep(月別判定対象者の作成二回目);
             executeStep(CLEAR被保険者番号);

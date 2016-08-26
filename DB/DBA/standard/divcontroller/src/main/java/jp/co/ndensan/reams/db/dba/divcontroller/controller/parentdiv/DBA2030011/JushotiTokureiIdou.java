@@ -81,7 +81,7 @@ public class JushotiTokureiIdou {
         }
         if (DBAMN25003_届出により施設変更.equals(UrControlDataFactory.createInstance().getMenuID())) {
             div.getCcdHihosyosai().住所地特例表示タイプ(資格異動モード);
-            前排他ロックキー = new LockingKey("ShikakuJutokuKaijo、HihokenshaNo");
+            前排他ロックキー = new LockingKey("ShikakuJutokuShikakuIdo、HihokenshaNo");
         }
         div.getCcdHihosyosai().資格関連異動表示モード(照会モード);
         div.getCcdHihosyosai().施設入退所表示モード(表示モード);
@@ -188,8 +188,6 @@ public class JushotiTokureiIdou {
     private void 変更情報の保存(JushotiTokureiIdouDiv div) {
         List<HihokenshaDaicho> hihokenshaDaichoList = div.getCcdHihosyosai().住所地特例履歴情報取得().records();
         for (HihokenshaDaicho hihokenshaDaicho : hihokenshaDaichoList) {
-            jushotiTokureiIdouFinder.shikakuJutokuCheck(
-                    getKey().get識別コード(), getKey().get被保険者番号(), hihokenshaDaicho.get適用年月日(), hihokenshaDaicho.get解除年月日());
             jushotiTokureiIdouFinder.saveShikakuJutoku(
                     getKey().get識別コード(), getKey().get被保険者番号(),
                     hihokenshaDaicho.get適用年月日(), hihokenshaDaicho.get適用届出年月日(), hihokenshaDaicho.get住所地特例適用事由コード(),

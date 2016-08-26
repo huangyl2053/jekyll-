@@ -100,6 +100,7 @@ public class TsukibetsuHanteiTaishoshaTempNigaimeProcess extends BatchProcessBas
         List<DbT3105SogoJigyoTaishoshaEntity> dbt3105Entities = entity.get総合事業対象者();
         if (!dbt4001Entities.isEmpty()) {
             DbT4001JukyushaDaichoEntity 受給者台帳 = dbt4001Entities.get(0);
+            insertEntity.setKyuSochishaFlag(受給者台帳.getKyuSochishaFlag());
             insertEntity.setTaishoKubun(ONE);
             insertEntity.setCityCode(受給者台帳.getShichosonCode().value());
             insertEntity.setRirekiNo(受給者台帳.getRirekiNo());

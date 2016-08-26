@@ -83,7 +83,7 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEditor implements IFutanG
         if (null != iOutputOrder) {
             source = set出力順改頁(source);
         }
-        source.hdrGekihenKanwa = RString.EMPTY;
+        source.hdrGekihenKanwa = new RString(" ");
         source.listUpper_1 = new RString(String.valueOf(index + 1));
         if (null != 帳票情報) {
             if (this.帳票情報.get被保番号() != null) {

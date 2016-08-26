@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd581001;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd300004.YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd581001.YokaigoJissiJyokyohyoProcessParameter;
@@ -21,7 +23,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -29,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -36,12 +39,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBD-1771-020 chenxin
  */
-public class JissiJyokyohyoHakkouProcess2 extends BatchProcessBase<JissiJyokyohyoHakkouEntity> {
+public class JissiJyokyohyoHakkouProcess2 extends BatchKeyBreakBase<JissiJyokyohyoHakkouEntity> {
 
     private static final ReportId REPORT_DBD300004 = ReportIdDBD.DBD300004.getReportId();
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigojissijyokyohyo."
                     + "IYokaigoJissiJyokyohyoHakkouMapper.get帳票DBD300004の場合のデータ");
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
+            new RString(YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource.ReportSourceFields.hokenshaNo.name())));
     @BatchWriter
     private BatchReportWriter<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource> batchReportWriter;
     private ReportSourceWriter<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource> reportSourceWriter;
@@ -150,12 +155,19 @@ public class JissiJyokyohyoHakkouProcess2 extends BatchProcessBase<JissiJyokyohy
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(REPORT_DBD300004.value()).create();
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(REPORT_DBD300004.value())
+                .addBreak(new BreakerCatalog<YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .create();
         reportSourceWriter = new ReportSourceWriter(batchReportWriter);
     }
 
     @Override
-    protected void process(JissiJyokyohyoHakkouEntity jissiJyokyohyoHakkouEntity) {
+    protected void keyBreakProcess(JissiJyokyohyoHakkouEntity current) {
+
+    }
+
+    @Override
+    protected void usualProcess(JissiJyokyohyoHakkouEntity jissiJyokyohyoHakkouEntity) {
         if (beforeEntity != null
                 && !jissiJyokyohyoHakkouEntity.get取得条件().equals(beforeEntity.get取得条件())) {
             if (beforeEntity.get取得条件().substring(2).equals(取得条件01)) {
@@ -305,6 +317,7 @@ public class JissiJyokyohyoHakkouProcess2 extends BatchProcessBase<JissiJyokyohy
 
     @Override
     protected void afterExecute() {
+        jisshiJokyohyoEntity.set年度合計(jisshiJokyohyoEntity.get年度合計() - 1);
         実施状況Entity.get実施状況リスト16().add(jisshiJokyohyoEntity);
         set実施状況リスト1();
         for (int index = 0; index < INDEX_10; index++) {
@@ -543,7 +556,7 @@ public class JissiJyokyohyoHakkouProcess2 extends BatchProcessBase<JissiJyokyohy
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBD.DBD300004.getReportName(),
-                new RString("5ページ"),
+                new RString("5"),
                 new RString("なし"),
                 new RString("なし"),
                 contribute());
@@ -556,13 +569,26 @@ public class JissiJyokyohyoHakkouProcess2 extends BatchProcessBase<JissiJyokyohy
         出力条件.add(new RString("【地区区分】 " + parameter.get地区区分()));
         出力条件.add(new RString("【開始地区コード】 " + parameter.get開始地区コード()));
         出力条件.add(new RString("【終了地区コード】 " + parameter.get終了地区コード()));
-        出力条件.add(new RString("【基準日】 " + parameter.get基準日()));
+        if (parameter.get基準日() == null) {
+            出力条件.add(new RString("【基準日】 "));
+        } else {
+            出力条件.add(new RString("【基準日】 " + parameter.get基準日()));
+        }
         出力条件.add(new RString("【集計単位】 " + parameter.get集計単位()));
         出力条件.add(new RString("【年齢From】 " + parameter.get年齢From()));
         出力条件.add(new RString("【年齢To】 " + parameter.get年齢To()));
-        出力条件.add(new RString("【年齢基準日】 " + parameter.get年齢基準日().wareki().toDateString()));
-        出力条件.add(new RString("【生年月日From】 " + parameter.get生年月日From()));
-        出力条件.add(new RString("【生年月日To】 " + parameter.get生年月日To()));
+        if (parameter.get年齢基準日() == null || parameter.get年齢基準日().isEmpty()) {
+            出力条件.add(new RString("【年齢基準日】 "));
+        } else {
+            出力条件.add(new RString("【年齢基準日】 " + parameter.get年齢基準日().wareki().toDateString()));
+        }
+        if (parameter.get生年月日From() == null || parameter.get生年月日To() == null) {
+            出力条件.add(new RString("【生年月日From】 "));
+            出力条件.add(new RString("【生年月日To】 "));
+        } else {
+            出力条件.add(new RString("【生年月日From】 " + parameter.get生年月日From()));
+            出力条件.add(new RString("【生年月日To】 " + parameter.get生年月日To()));
+        }
         return 出力条件;
     }
 }

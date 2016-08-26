@@ -63,6 +63,9 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMain {
         ShogaishaKojoTaishoshaShinseiTorokuMainHandler hanlder = getHandler(div);
         if (!ResponseHolder.isReRequest()) {
             TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            if (null == taishoshaKey) {
+                return ResponseData.of(div).addMessage(DbdInformationMessages.受給共通_被保データなし.getMessage()).respond();
+            }
             ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
             HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
             if (null == 被保険者番号 || 被保険者番号.isEmpty()) {

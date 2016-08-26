@@ -63,11 +63,10 @@ public enum FutanGendogakuNinteishoOrderKey implements IReportItems {
      * 市町村コード
      */
     市町村コード(new RString("0016"), new RString("市町村コード"), new RString("市町村コード")),
-    //TODO 証記載保険者番号は検索関連のテープルから取得できません。
     /**
      * 証記載保険者番号
      */
-    //証記載保険者番号(new RString("0103"), new RString("証記載保険者番号"), new RString("A.\"shoKisaiHokenshaNo\"")),
+    証記載保険者番号(new RString("0103"), new RString("証記載保険者番号"), new RString("A.\"shoKisaiHokenshaNo\"")),
     /**
      * 被保険者番号
      */

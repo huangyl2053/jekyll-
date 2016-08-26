@@ -215,7 +215,7 @@ public class FutanWariaiLoginProcess extends BatchKeyBreakBase<FutanWariaiRelate
             利用者負担割合明細Writer.insert(dbt3114Entity);
         }
         KonkaiRiyoshaFutanWariaiJohoTempEntity insertTemp = new KonkaiRiyoshaFutanWariaiJohoTempEntity();
-        insertTemp.setNendo(nendo.toDateString());
+        insertTemp.setNendo(nendo);
         insertTemp.setHihokenshaNo(dbt3114Entity.getHihokenshaNo());
         insertTemp.setEdaNo(dbt3114Entity.getEdaNo());
         insertTemp.setFutanWariaiKubun(dbt3114Entity.getFutanWariaiKubun());

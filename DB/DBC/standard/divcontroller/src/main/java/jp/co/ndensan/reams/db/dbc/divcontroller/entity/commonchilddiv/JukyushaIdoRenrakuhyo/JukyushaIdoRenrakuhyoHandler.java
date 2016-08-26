@@ -147,6 +147,7 @@ public class JukyushaIdoRenrakuhyoHandler {
                     getRadKaizeisoTokureiGengakuSochiTaishoFlag().setSelectedKey(空KEY);
             div.getKyufuSeigenPanel().getRadKohiFutanJogenGengakuAriFlag().setSelectedKey(空KEY);
             div.getNijiyoboJigyoPanel().getRadNijiyoboJigyoKubun().setSelectedKey(空KEY);
+            onClick_計画作成区分();
             return 受給者異動情報;
         }
         div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().setValue(受給者異動情報.get異動年月日());
@@ -188,6 +189,7 @@ public class JukyushaIdoRenrakuhyoHandler {
         set二割負担エリア(受給者異動情報);
         set二次予防事業エリア(受給者異動情報);
         set老人保健エリア(受給者異動情報);
+        onClick_計画作成区分();
         return 受給者異動情報;
     }
 
@@ -652,6 +654,8 @@ public class JukyushaIdoRenrakuhyoHandler {
                 = JukyushaTeiseiRenrakuhyoToroku.createInstance().getSienJikyoshaName(new JigyoshaNo(支援事業者番号), 計画作成区分, 異動日);
         if (支援事業者名称 != null) {
             div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().setValue(支援事業者名称.value());
+        } else {
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().setValue(null);
         }
 
     }
@@ -1253,7 +1257,10 @@ public class JukyushaIdoRenrakuhyoHandler {
         entity.set氏名性別生年月日を印字する(氏名性別生年月日を印字する);
         JukyushaIdoRenrakuhyoSakusei business = JukyushaIdoRenrakuhyoSakusei.createInstance();
         JukyushaIdoRenrakuhyoSakuseiRelateEntity entityReturn = business.出力用受給者訂正情報Entity(entity);
-        return entityReturn.get出力用受給者訂正情報Entity();
+        if (entityReturn != null) {
+            return entityReturn.get出力用受給者訂正情報Entity();
+        }
+        return null;
     }
 
     /**

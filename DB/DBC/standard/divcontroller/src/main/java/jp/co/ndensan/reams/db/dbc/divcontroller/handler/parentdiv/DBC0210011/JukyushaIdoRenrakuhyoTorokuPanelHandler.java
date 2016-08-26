@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0210011;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyoBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
@@ -33,8 +34,9 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
     private final JukyushaIdoRenrakuhyoTorokuPanelDiv div;
     private static final RString 被保険者番号R = new RString("被保険者番号");
     private static final RString 半角アスタリスク = new RString("*");
+    private static final RString ONE = new RString("1");
+    private static final RString ZERO1 = new RString("0");
     private static final Decimal ZERO = new Decimal("0");
-    private static final int ZERO0 = 0;
     private static final Code THREE = new Code("0003");
 
     /**
@@ -245,12 +247,31 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
      */
     public SourceDataCollection to帳票発行(IJukyushaIdoRenrakuhyoDiv idiv) {
         JukyushaIdoRenrakuhyoToroku 受給者連絡票データ作成 = JukyushaIdoRenrakuhyoToroku.createInstance();
+        RString チェック場合 = チェック場合state();
         JukyushaIdoRenrakuhyoTorokuEntity 受給者連絡票データ = 受給者連絡票データ作成
-                .editJukyushaIdoRenrakuhyo(idiv.get受給者異動送付().get被保険者番号().getColumnValue(), new RDate(idiv.get受給者異動送付().get異動年月日().toString()),
-                        div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getOutputJukyushaIdoRenrakuhyo().getChkJukyushaIdoRenrakuhyo().getSelectedKeys().get(ZERO0));
+                .editJukyushaIdoRenrakuhyo(idiv.get受給者異動送付().get被保険者番号().getColumnValue(),
+                        new RDate(idiv.get受給者異動送付().get異動年月日().toString()), チェック場合);
         JukyushaIdoRenrakuhyoPrintSevice printService
                 = new JukyushaIdoRenrakuhyoPrintSevice();
         return printService.printSingle(受給者連絡票データ);
+    }
+
+    private RString チェック場合state() {
+        List<RString> chkJukyushaIdoRenrakuhyo = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel()
+                .getOutputJukyushaIdoRenrakuhyo().getChkJukyushaIdoRenrakuhyo().getSelectedKeys();
+        if (chkJukyushaIdoRenrakuhyo.isEmpty()) {
+            return ZERO1;
+        }
+        return ONE;
+    }
+
+    /**
+     * 「共同処理用受給者異動連絡票を発行する」チェックボックスの状態。
+     *
+     * @return チェック状態
+     */
+    public List<RString> getチェックボックス状態() {
+        return div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getOutputJukyushaIdoRenrakuhyo().getChkJukyushaIdoRearakuhyoHakkou().getSelectedKeys();
     }
 
 }
