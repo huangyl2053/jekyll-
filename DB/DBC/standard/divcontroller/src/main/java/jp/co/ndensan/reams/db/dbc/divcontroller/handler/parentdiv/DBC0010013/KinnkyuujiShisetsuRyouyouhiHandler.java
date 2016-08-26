@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiH
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010013.KinnkyuujiShisetsuRyouyouhiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010013.dgKinkyujiShisetsuRyoyohi_Row;
-import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
@@ -172,10 +171,10 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
      *
      * @param サービス提供年月 サービス提供年月
      * @param 識別番号 NyuryokuShikibetsuNo
+     * @param 識別番号管理 ShikibetsuNoKanri
      */
-    public void setButton(FlexibleYearMonth サービス提供年月, NyuryokuShikibetsuNo 識別番号) {
-        ShikibetsuNoKanri 識別番号管理 = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
-                サービス提供年月, 識別番号).records().get(0);
+    public void setButton(FlexibleYearMonth サービス提供年月, NyuryokuShikibetsuNo 識別番号, ShikibetsuNoKanri 識別番号管理) {
+
         if (DISABLED.equals(識別番号管理.get基本設定区分())) {
             div.getBtnKihon().setDisabled(true);
         } else {
@@ -400,18 +399,18 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
     /**
      * change年月です。
      *
-     * @param changge月 RString
+     * @param change月 RString
      * @param 被保険者番号 HihokenshaNo
      * @param 給付実績緊急時施設療養データ取得 List<KyufujissekiKinkyuShisetsuRyoyo>
      */
-    public void change年月(RString changge月, HihokenshaNo 被保険者番号, List<KyufujissekiKinkyuShisetsuRyoyo> 給付実績緊急時施設療養データ取得) {
+    public void change年月(RString change月, HihokenshaNo 被保険者番号, List<KyufujissekiKinkyuShisetsuRyoyo> 給付実績緊急時施設療養データ取得) {
         RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
 
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().toString());
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         NyuryokuShikibetsuNo 識別番号 = new NyuryokuShikibetsuNo(div.getCcdKyufuJissekiHeader().get様式番号());
         FlexibleYearMonth 年月;
-        if (前月.equals(changge月)) {
+        if (前月.equals(change月)) {
             年月 = get前月(サービス提供年月);
             div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 年月, 整理番号, 識別番号);
         } else {

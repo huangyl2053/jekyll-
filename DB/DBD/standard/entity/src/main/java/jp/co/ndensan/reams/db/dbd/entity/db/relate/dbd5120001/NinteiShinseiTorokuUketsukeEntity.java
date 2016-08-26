@@ -48,7 +48,8 @@ public class NinteiShinseiTorokuUketsukeEntity {
     private RString 申請届出者氏名カナ;
     private RString 届出者_本人との関係;
     private RString 管内管外区分;
-    private LasdecCode 市町村コード;
+    private LasdecCode t1001市町村コード;
+    private LasdecCode t4001市町村コード;
     private TelNo 申請届出者電話番号;
     private YubinNo 申請届出者郵便番号;
     private RString 申請届出者住所;
