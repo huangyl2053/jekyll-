@@ -124,7 +124,7 @@
     <select resultOrdered="true" id="get自動償還For受託ありの申請情報償還一時" resultMap="resultMap_ShinseiJohoShokanTempEntity" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufuoshirasetsuchisho.KogakuKaigoServicehiOshiraseHakkoMybatisParameter">
         SELECT *  FROM "ShinseiJohoShokanTemp" 
         <!-- TODO QA.1142 下記項目はありません-->
-        WHERE "taishoshaHanteiShinsaYMShokan" <![CDATA[<>]]> #{ shoriYm }
+        WHERE "gokeiTashoshaUketoriYMShokan" <![CDATA[<>]]> #{ shoriYm }
         OR "shinseiYMDShokan" IS NOT NULL
         OR "jidoShokanTaishoFlagShokan" <![CDATA[<>]]> FALSE
         OR "gokeiKogakuShikyuGakuShokan" = '0'
