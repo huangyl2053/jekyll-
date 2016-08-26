@@ -631,17 +631,16 @@ public class ServiceRiyohyoInfoDivHandler {
 
         RString 居宅総合事業区分 = ViewStateHolder.get(ViewStateKeys.居宅総合事業区分, RString.class);
         if (総合事業.equals(居宅総合事業区分)) {
-            div.getServiceRiyohyoBeppyoGokei().getTxtHokenKyufugaku().setLabelLText(事業者請求額);
             div.getServiceRiyohyoBeppyoGokei().getTxtHokenKyufugaku().setLabelLText(総合事業費請求額);
             div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuHoken().setLabelLText(事業対象利用者負担額);
             if (RSTRING_TWO.equals(row.getHdnRiyoshaFutanTeiritsuTeigakuKbn())) {
                 div.getServiceRiyohyoBeppyoGokei().getLblHokenKyufugaku().setText(保険給付額説明ラベル_2);
                 div.getServiceRiyohyoBeppyoGokei().getLblRiyoshaFutangakuHoken().setText(保険対象利用者負担額説明ラベル_2);
             } else if (RSTRING_ONE.equals(row.getHdnRiyoshaFutanTeiritsuTeigakuKbn())) {
+                div.getServiceRiyohyoBeppyoGokei().getLblHokenKyufugaku().setText(保険給付額説明ラベル_1);
                 div.getServiceRiyohyoBeppyoGokei().getLblRiyoshaFutangakuHoken().setText(保険対象利用者負担額説明ラベル_1);
             }
         } else if (居宅.equals(居宅総合事業区分)) {
-            div.getServiceRiyohyoBeppyoGokei().getTxtHokenKyufugaku().setLabelLText(保険給付額);
             div.getServiceRiyohyoBeppyoGokei().getTxtHokenKyufugaku().setLabelLText(保険給付額);
             div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuHoken().setLabelLText(保険対象利用者負担額);
             div.getServiceRiyohyoBeppyoGokei().getLblHokenKyufugaku().setText(保険給付額説明ラベル_1);
@@ -658,7 +657,6 @@ public class ServiceRiyohyoInfoDivHandler {
         RString サービス種類コード = div.getCcdServiceCodeInput().getサービスコード1();
         RString サービス項目コード = div.getCcdServiceCodeInput().getサービスコード2();
         Decimal 単位 = div.getServiceRiyohyoBeppyoMeisai().getTxtTani().getValue();
-//        Decimal 回数 = div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getValue();
         KaigoServiceNaiyouManager manager = new KaigoServiceNaiyouManager();
         List<KaigoServiceNaiyou> 利用サービスリスト = manager.getServiceCodeList(サービス種類コード, サービス項目コード);
         return 入力不可判定(利用サービスリスト, 単位);
@@ -1084,7 +1082,8 @@ public class ServiceRiyohyoInfoDivHandler {
         row.getServiceTani().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getValue());
         row.getShuruiGendoChokaTani().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendoChokaTani().getValue());
         row.getShuruiGendonaiTani().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendonaiTani().getValue());
-        row.getTanisuTanka().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().getValue());
+        row.getTanisuTanka().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().getText() == null ? null
+                : new Decimal(div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().getText().toString()));
         row.getKubunGendoChokaTani().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendoChokaTani().getValue());
         row.getKubunGendonaiTani().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendonaiTani().getValue());
         row.getKyufuritsu().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue());
