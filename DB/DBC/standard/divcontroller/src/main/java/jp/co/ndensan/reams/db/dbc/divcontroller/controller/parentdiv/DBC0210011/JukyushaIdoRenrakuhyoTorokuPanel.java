@@ -47,7 +47,6 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
 
     private static final RString 被保険者番号なし = new RString("被保険者番号なし");
     private static final RString DBCHIHOKENSHANO = new RString("DBCHihokenshaNo");
-    private static final RString 完了メッセージメイン = new RString("受給者異動連絡票の登録が完了しました。");
     private static final RString ZERO = new RString("0");
     private static final RString 新規モード = new RString("新規モード");
 
@@ -77,7 +76,8 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
         if (!RealInitialLocker.tryGetLock(key)) {
             throw new PessimisticLockingException();
         }
-        div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo().initialize(新規モード, 資格対象者.get識別コード(), 資格対象者.get被保険者番号(), 0, false, FlexibleDate.getNowDate());
+        div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo()
+                .initialize(新規モード, 資格対象者.get識別コード(), 資格対象者.get被保険者番号(), 0, false, FlexibleDate.getNowDate());
         handler.printLog識別コード照会(資格対象者.get識別コード(), 資格対象者.get被保険者番号().getColumnValue());
         return ResponseData.of(div).setState(DBC0210011StateName.登録);
     }
@@ -136,6 +136,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
         JukyushaIdoRenrakuhyoTorokuPanelHandler handler = getHandler(div);
         JukyushaIdoRenrakuhyo entity = manager.get受給者異動連絡票情報(被保険者番号, 異動日);
         JukyushaIdoRenrakuhyo result = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo().get受給者異動送付();
+        // TODO Dummy
         result.createBuilderForEdit().set広域連合_政令市_保険者番号(new ShoKisaiHokenshaNo(new RString("12345")));
         if (entity != null) {
             result = handler.editResult(result);
