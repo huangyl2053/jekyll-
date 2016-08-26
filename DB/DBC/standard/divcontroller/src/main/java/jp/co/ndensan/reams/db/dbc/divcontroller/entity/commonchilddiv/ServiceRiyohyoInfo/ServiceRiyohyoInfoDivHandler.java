@@ -800,7 +800,7 @@ public class ServiceRiyohyoInfoDivHandler {
             throw new ApplicationException(DbcErrorMessages.サービス種類不正.getMessage());
         }
         if (サービスフラグTmp) {
-            if (利用サービス == null || RSTRING_ONE.equals(利用サービス.get総合事業サービス区分())) {
+            if (利用サービス == null || !RSTRING_ONE.equals(利用サービス.get総合事業サービス区分())) {
                 throw new ApplicationException(DbcErrorMessages.サービス種類不正.getMessage());
             } else if (RSTRING_TWO.equals(利用サービス.get利用者負担定率定額区分())) {
                 set利用者負担額(利用サービス);
