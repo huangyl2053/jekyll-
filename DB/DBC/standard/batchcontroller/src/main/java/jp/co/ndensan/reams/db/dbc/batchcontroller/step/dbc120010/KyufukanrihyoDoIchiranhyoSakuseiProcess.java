@@ -116,9 +116,10 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
             + "kyufukanrihyoin.IKyufukanrihyoInMapper.get帳票出力対象データ");
     private static final RString 出力ファイル名
             = new RString("DBC200073_KyufuKanrihyoTorikomiKekkaIchiran.csv");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY \"temp\".\"hihokenshaNo\" ASC, "
-            + "\"DbWT1121KyufuKanrihyo\".\"serviceTeikyoYM\" ASC, \"DbWT1121KyufuKanrihyo\".\"kyufuSakuseiKubunCode\" ASC, "
-            + "\"DbWT1121KyufuKanrihyo\".\"kyufuShubetsuKubunCode\" ASC, \"DbWT1121KyufuKanrihyo\".\"hokenshaNo\" ASC ");
+    private static final RString デフォルト出力順 = new RString(
+            ", \"temp\".\"hihokenshaNo\" ASC, \"DbWT1121KyufuKanrihyo\".\"serviceTeikyoYM\" ASC,"
+            + " \"DbWT1121KyufuKanrihyo\".\"kyufuSakuseiKubunCode\" ASC, "
+            + "\"DbWT1121KyufuKanrihyo\".\"kyufuShubetsuKubunCode\" ASC  ");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
 
@@ -139,17 +140,7 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
         並び順 = get並び順(parameter.get帳票ID(), parameter.get出力順ID());
         RString 出力順 = MyBatisOrderByClauseCreator
                 .create(KyufuKanrihyoTorikomiKekkaIchiranProperty.DBC200073BreakerFieldsEnum.class, 並び順);
-        if (RString.isNullOrEmpty(出力順)) {
-            出力順 = デフォルト出力順;
-        } else {
-            List<RString> 出力順BODY = 出力順.split(コンマ.toString());
-            出力順 = デフォルト出力順;
-            if (出力順BODY.size() > 1) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
-                }
-            }
-        }
+        出力順.concat(デフォルト出力順);
         帳票データの取得Parameter.set出力順(出力順);
         if (並び順 != null) {
             int i = 0;
