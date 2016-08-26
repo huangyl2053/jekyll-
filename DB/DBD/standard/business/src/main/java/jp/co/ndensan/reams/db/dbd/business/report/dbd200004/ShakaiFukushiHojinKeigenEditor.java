@@ -215,9 +215,9 @@ public class ShakaiFukushiHojinKeigenEditor implements IShakaiFukushiHojinKeigen
         }
         if (shakaifukuriyoshafutankeigen.get軽減率_分母() != null && shakaifukuriyoshafutankeigen.get軽減率_分子() != null) {
             RString 軽減率 = new RString("");
-            軽減率.concat(new RString(shakaifukuriyoshafutankeigen.get軽減率_分子().toString()));
-            軽減率.concat(new RString("/"));
-            軽減率.concat(new RString(shakaifukuriyoshafutankeigen.get軽減率_分母().toString()));
+            軽減率 = 軽減率.concat(new RString(shakaifukuriyoshafutankeigen.get軽減率_分子().toString()));
+            軽減率 = 軽減率.concat(new RString("/"));
+            軽減率 = 軽減率.concat(new RString(shakaifukuriyoshafutankeigen.get軽減率_分母().toString()));
             source.list3_5 = 軽減率;
         }
         set社会福祉法人等利用者負担軽減の情報_line_up(shakaifukuriyoshafutankeigen, source);
