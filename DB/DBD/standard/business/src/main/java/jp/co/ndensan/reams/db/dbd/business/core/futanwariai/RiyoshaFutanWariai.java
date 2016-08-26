@@ -245,18 +245,9 @@ public class RiyoshaFutanWariai
     /**
      * 保持する利用者負担割合を追加対象とします。
      * <br/> {@link DbT3113RiyoshaFutanWariaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば修正状態にします。
-     *
-     * @return 修正対象処理実施後の{@link RiyoshaFutanWariai}
      */
-    public RiyoshaFutanWariai modified() {
-        DbT3113RiyoshaFutanWariaiEntity modifiedEntity = this.toEntity();
-        if (modifiedEntity.getState() != EntityDataState.Added) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        } else {
-            //TODO メッセージの検討
-            throw new IllegalStateException(UrErrorMessages.不正.toString());
-        }
-        return new RiyoshaFutanWariai(modifiedEntity, id);
+    public void modified() {
+        this.entity.setState(EntityDataState.Modified);
     }
 
     /**
