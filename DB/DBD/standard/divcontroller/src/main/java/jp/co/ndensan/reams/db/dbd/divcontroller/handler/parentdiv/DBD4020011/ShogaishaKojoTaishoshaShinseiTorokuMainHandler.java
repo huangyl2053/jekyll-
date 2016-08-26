@@ -378,6 +378,7 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
     public void onSelectByModifyButton(ShogaishaKoujoToJotai 情報と状態) {
         set申請情報エリア(情報と状態);
         一覧制御(状態_追加.equals(情報と状態.get状態()), 承認する.equals(情報と状態.get障がい書控除申請登録情報().get決定区分()));
+        div.getTxtTaishoNendo().setDisabled(true);
     }
 
     private void set申請情報エリア(ShogaishaKoujoToJotai 情報と状態) {
