@@ -189,8 +189,10 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
         出力条件.add(builder.toRString());
 
         RString 設定項目 = RString.EMPTY;
-        for (ISetSortItem item : order.get設定項目リスト()) {
-            設定項目.concat(より).concat(item.get項目名());
+        if (order != null) {
+            for (ISetSortItem item : order.get設定項目リスト()) {
+                設定項目.concat(より).concat(item.get項目名());
+            }
         }
         if (!設定項目.isEmpty()) {
             設定項目 = 設定項目.substringEmptyOnError(1, 設定項目.length() - 1);
