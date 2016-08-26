@@ -20,9 +20,14 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.Nijiha
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.NijihanteiKekkaTorokuMobileShinsaiinRelateEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.NijiHanteiKekkaInputHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsShiryoSakuseiZumi;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
@@ -175,7 +180,9 @@ public class ShinsaTaishoDataOutPutResult {
         eucCsvEntity.set被保険者氏名カナ(entity.get被保険者氏名カナ());
         eucCsvEntity.set生年月日(setDateFormat(entity.get生年月日()));
         eucCsvEntity.set年齢(entity.get年齢());
-        eucCsvEntity.set性別(entity.get性別());
+        if (!RString.isNullOrEmpty(entity.get性別())) {
+            eucCsvEntity.set性別(Seibetsu.toValue(entity.get性別()).get名称());
+        }
         eucCsvEntity.set郵便番号(setYobuinNoFormat(entity.get郵便番号()));
         eucCsvEntity.set住所(entity.get住所());
         eucCsvEntity.set電話番号(entity.get電話番号());
@@ -437,6 +444,34 @@ public class ShinsaTaishoDataOutPutResult {
             eucCsvEntity.setコード名称(new RString("要介護状態区分コード"));
             eucCsvEntity.setコード値(yokaigoJotaiKubun.getコード());
             eucCsvEntity.setコード表示名称(yokaigoJotaiKubun.get名称());
+            codeMasterEucCsvEntityList.add(eucCsvEntity);
+        }
+        for (YokaigoJotaiKubun02 yokaigoJotaiKubun02 : YokaigoJotaiKubun02.values()) {
+            CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
+            eucCsvEntity.setコード名称(new RString("要介護状態区分コード02"));
+            eucCsvEntity.setコード値(yokaigoJotaiKubun02.getコード());
+            eucCsvEntity.setコード表示名称(yokaigoJotaiKubun02.get名称());
+            codeMasterEucCsvEntityList.add(eucCsvEntity);
+        }
+        for (YokaigoJotaiKubun06 yokaigoJotaiKubun06 : YokaigoJotaiKubun06.values()) {
+            CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
+            eucCsvEntity.setコード名称(new RString("要介護状態区分コード06"));
+            eucCsvEntity.setコード値(yokaigoJotaiKubun06.getコード());
+            eucCsvEntity.setコード表示名称(yokaigoJotaiKubun06.get名称());
+            codeMasterEucCsvEntityList.add(eucCsvEntity);
+        }
+        for (YokaigoJotaiKubun09 yokaigoJotaiKubun09 : YokaigoJotaiKubun09.values()) {
+            CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
+            eucCsvEntity.setコード名称(new RString("要介護状態区分コード09"));
+            eucCsvEntity.setコード値(yokaigoJotaiKubun09.getコード());
+            eucCsvEntity.setコード表示名称(yokaigoJotaiKubun09.get名称());
+            codeMasterEucCsvEntityList.add(eucCsvEntity);
+        }
+        for (YokaigoJotaiKubun99 yokaigoJotaiKubun99 : YokaigoJotaiKubun99.values()) {
+            CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
+            eucCsvEntity.setコード名称(new RString("要介護状態区分コード99"));
+            eucCsvEntity.setコード値(yokaigoJotaiKubun99.getコード());
+            eucCsvEntity.setコード表示名称(yokaigoJotaiKubun99.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (GenponMaskKubun genponMaskKubun : GenponMaskKubun.values()) {

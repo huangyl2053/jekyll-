@@ -286,6 +286,7 @@
         , T5115."imageSharedFileId"
         , T5101."shoKisaiHokenshaNo"
         , T5101."hihokenshaNo"
+        ,T5913."chosainShimei"
         FROM
         rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS T5511 
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS T5502 
@@ -316,12 +317,16 @@
         LEFT JOIN rgdb."DbT5510IchiGojiHanteiKekkaJoho" AS T5510 
         ON T5101."shinseishoKanriNo" = T5510."shinseishoKanriNo" 
         LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS T5116 
-        ON T5116."shinseishoKanriNo" = T5101."shinseishoKanriNo" 
+        ON T5116."shinseishoKanriNo" = T5101."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5105NinteiKanryoJoho" AS T5105 
         ON T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo" 
         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202 
         ON T5101."shinseishoKanriNo" = T5202."shinseishoKanriNo" 
         AND T5201."ninteichosaIraiRirekiNo" = T5202."ninteichosaRirekiNo" 
+        LEFT JOIN rgdb."DbT5913ChosainJoho" AS T5913
+        ON T5913."shichosonCode" = T7051."shichosonCode"
+        AND T5913."ninteiChosaItakusakiCode" = T5202."chosaItakusakiCode"
+        AND T5913."ninteiChosainCode" = T5202."chosainCode"
         LEFT JOIN rgdb."DbT5206GaikyoTokki" AS T5206 
         ON T5101."shinseishoKanriNo" = T5206."shinseishoKanriNo" 
         AND T5201."ninteichosaIraiRirekiNo" = T5206."ninteichosaRirekiNo" 
