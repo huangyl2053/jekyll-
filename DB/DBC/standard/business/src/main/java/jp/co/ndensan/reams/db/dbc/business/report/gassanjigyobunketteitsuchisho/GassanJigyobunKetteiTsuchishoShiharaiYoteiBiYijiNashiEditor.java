@@ -416,7 +416,7 @@ public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor impleme
             }
             source.shumokuTitle = 口座種別;
             if (entity.get口座情報().get預金種別() != null) {
-                source.kouzaShu = new RString(entity.get口座情報().get預金種別().toString());
+                source.kouzaShu = entity.get口座情報().get預金種別().get預金種別名称();
             }
         } else {
 
