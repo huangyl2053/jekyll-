@@ -158,7 +158,7 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
         @Override
         public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
 
-            //TODO
+            //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
             return true;
         }
     },
