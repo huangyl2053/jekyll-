@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd582001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijisshijokyohyo.YokaigoNinteiJisshiJokyohyoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijisshijokyohyo.YokaigoNinteiJisshiJokyohyoReportEntity;
 
 /**
  * 受給状況Entityクラスです。
@@ -35,5 +34,5 @@ public class JukyushaSuJokyohyoEntity {
     private List<YokaigoNinteiJisshiJokyohyoEntity> 受給状況リスト14;
     private List<YokaigoNinteiJisshiJokyohyoEntity> 受給状況リスト15;
     private List<YokaigoNinteiJisshiJokyohyoEntity> 受給状況リスト16;
-    private List<YokaigoNinteiJisshiJokyohyoReportEntity> 受給状況リスト;
+
 }

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 年齢階級別利用状況作成 Builderクラスです。
  *
- * @reamsid_L DBE-3470-040 dongyabin
+ * @reamsid_L DBC-3470-040 dongyabin
  */
 public class NenreiKeikyuBetsuRiyoJyokyoBuilder implements INenreiKeikyuBetsuRiyoJyokyoBuilder {
 

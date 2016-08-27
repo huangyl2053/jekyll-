@@ -24,7 +24,6 @@ public class HikazeiNennkinDeleteMybatisParameter implements IMyBatisParameter {
     private FlexibleYear 処理年度;
     private RString 処理区分;
     private RString 対象月;
-    private RString 登録区分;
 
     /**
      * DB出力(処理日付管理マスタ)
@@ -32,15 +31,12 @@ public class HikazeiNennkinDeleteMybatisParameter implements IMyBatisParameter {
      * @param 処理年度 処理年度
      * @param 処理区分 処理区分
      * @param 対象月 対象月
-     * @param 登録区分 登録区分
      */
     public HikazeiNennkinDeleteMybatisParameter(FlexibleYear 処理年度,
             RString 処理区分,
-            RString 対象月,
-            RString 登録区分) {
+            RString 対象月) {
         this.処理年度 = 処理年度;
         this.処理区分 = 処理区分;
         this.対象月 = 対象月;
-        this.登録区分 = 登録区分;
     }
 }

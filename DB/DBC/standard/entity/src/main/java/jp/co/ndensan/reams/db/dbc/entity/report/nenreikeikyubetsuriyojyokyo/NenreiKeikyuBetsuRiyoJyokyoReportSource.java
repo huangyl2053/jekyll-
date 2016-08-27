@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 年齢階級別利用状況作成の帳票ReportSourceクラスです。
  *
- * @reamsid_L DBE-3470-040 dongyabin
+ * @reamsid_L DBC-3470-040 dongyabin
  */
 public class NenreiKeikyuBetsuRiyoJyokyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

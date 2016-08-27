@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * DBDMN32001_2_支払方法変更滞納者把握リスト作成_滞納対象者情報一時テーブル登録_Process処理クラスです．
  *
- * @reamsid_L DBD-3650-040 x_lilh
+ * @reamsid_L DBD-3650-050 x_lilh
  */
 public class ShiharaiHohoHenkoTainoTempTableInsertProcess extends BatchProcessBase<ShiharaiHohoHenkoHaakuResultEntity> {
 
@@ -32,14 +32,6 @@ public class ShiharaiHohoHenkoTainoTempTableInsertProcess extends BatchProcessBa
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
-
-    @Override
-    protected void beforeExecute() {
-//        IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
-//                parameter.get帳票ID(), parameter.get出力順ID());
-//
-//        出力順 = MyBatisOrderByClauseCreator.create(ShiharaiHohoHenkoHaakuIchiranOrderKey.class, outputOrder);
-    }
 
     @Override
     protected IBatchReader createReader() {

@@ -48,7 +48,6 @@ public class KarisanteiHenkoTsuchishoB5YokoReportSource implements IReportSource
     public RString hyojicode2;
     @ReportItem(name = "hyojicode3", length = 9, order = 17)
     public RString hyojicode3;
-    @ReportPerson
     @ReportItem(name = "tsuchishoNo", order = 18)
     public RString tsuchishoNo;
     @ReportItem(name = "setaiCode", length = 15, order = 19)
@@ -60,7 +59,7 @@ public class KarisanteiHenkoTsuchishoB5YokoReportSource implements IReportSource
     @ReportExpandedInfo(id = "本人")
     @ReportItem(name = "hihokenshaNo", length = 10, order = 22)
     public RString hihokenshaNo;
-    @ReportPerson(id = "本人")
+    @ReportPerson
     @ReportItem(name = "shikibetsuCode", length = 15, order = 23)
     public RString shikibetsuCode;
     @ReportItem(name = "shutokuYMDMae", length = 10, order = 24)

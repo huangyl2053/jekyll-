@@ -8,8 +8,10 @@ package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100201;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.FuicchiCsvProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.GaitouIchirannCsvProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.HikazeiNennkinDeleteProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.NennkinnBanngouCsvProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.SeinenngappiCsvProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.SyoriHidukeKanriMasterUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.TorikomiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -116,4 +118,21 @@ public class HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter extends BatchPar
         return new NennkinnBanngouCsvProcessParameter(出力順ID4);
     }
 
+    /**
+     * 削除非課税年金対象者
+     *
+     * @return HikazeiNennkinDeleteProcessParameter
+     */
+    public HikazeiNennkinDeleteProcessParameter toHikazeiNennkinDeleteProcessParameter() {
+        return new HikazeiNennkinDeleteProcessParameter(処理年度, 処理区分, 対象月);
+    }
+
+    /**
+     * 処理日付管理マスタ更新
+     *
+     * @return SyoriHidukeKanriMasterUpdateProcessParameter
+     */
+    public SyoriHidukeKanriMasterUpdateProcessParameter toSyoriHidukeKanriMasterUpdateProcessParameter() {
+        return new SyoriHidukeKanriMasterUpdateProcessParameter(処理年度, 処理区分, 対象月, 処理年月日, 処理日時);
+    }
 }

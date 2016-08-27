@@ -15,14 +15,14 @@ public class TokubetsuTiikiKasannKeigennJiqsekiKannri {
     /**
      * 給付実績参照キー作成 TODO 返却値とパラメター該当は一致です．
      */
-    public void TaishoKyufuJissekiTokutei() {
+    public void taishoKyufuJissekiTokutei() {
         //TODO
     }
 
     /**
      * 帳票を作成する TODO 返却値とパラメター該当は一致です．
      */
-    public void TokuchiJissekiKanriListSakusei() {
+    public void tokuchiJissekiKanriListSakusei() {
         //TODO
     }
 }

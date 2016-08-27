@@ -25,26 +25,28 @@ public class HikazeiNennkinDeleteProcessParameter implements IBatchProcessParame
     private FlexibleYear 処理年度;
     private RString 処理区分;
     private RString 対象月;
-    private RString 登録区分;
-    private RString 処理状態;
 
     /**
+     * 削除非課税年金対象者
      *
      * @param 処理年度 処理年度
      * @param 処理区分 処理区分
      * @param 対象月 対象月
-     * @param 登録区分 登録区分
-     * @return HikazeiNennkinDeleteMybatisParameter
      */
-    public HikazeiNennkinDeleteMybatisParameter mybatisParameter(FlexibleYear 処理年度,
-            RString 処理区分,
-            RString 対象月,
-            RString 登録区分) {
+    public HikazeiNennkinDeleteProcessParameter(FlexibleYear 処理年度,
+            RString 処理区分, RString 対象月) {
         this.処理年度 = 処理年度;
         this.処理区分 = 処理区分;
         this.対象月 = 対象月;
-        this.登録区分 = 登録区分;
-        return new HikazeiNennkinDeleteMybatisParameter(処理年度, 処理区分, 対象月, 登録区分);
+    }
+
+    /**
+     * 非課税年金対象者削除SQLのパラメターを取得します．
+     *
+     * @return HikazeiNennkinDeleteMybatisParameter
+     */
+    public HikazeiNennkinDeleteMybatisParameter mybatisParameter() {
+        return new HikazeiNennkinDeleteMybatisParameter(処理年度, 処理区分, 対象月);
     }
 
 }
