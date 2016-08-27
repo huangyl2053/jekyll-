@@ -30,8 +30,6 @@ public class DBD2020001ValidationHandler {
     private static final int 月数_12 = 12;
     private static final int MIN = 0;
     private static final RString 基準日 = new RString("基準日");
-    private static final RString 受給認定日抽出 = new RString("受給認定日抽出");
-    private static final RString 償還支給決定日抽出 = new RString("償還支給決定日抽出");
 
     private final ShiharaiHohoHenkoHakuListMainDiv div;
 
@@ -98,7 +96,6 @@ public class DBD2020001ValidationHandler {
 
         ShiharaiHohoHenkoHaakuIchiran shiharaiHohoHenkoHaakuIchiran = new ShiharaiHohoHenkoHaakuIchiran();
         return shiharaiHohoHenkoHaakuIchiran.createShiharaiHohoHenkoHaakuIchiranParameter(div);
-        //  return null;
     }
 
     /**

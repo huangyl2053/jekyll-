@@ -1,26 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package jp.co.ndensan.reams.db.dba.entity.report.homonkaigoriyoushafutangakugengakushinseisho;
+package jp.co.ndensan.reams.db.dbd.entity.report.dbd800004;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- * 訪問介護利用者負担額減額申請書の帳票データのクラスです。
+ * 
+ * 護保険特定負担限度額申請書の帳票データのクラスです。
  *
- * @reamsid_L DBA-0540-701 zhengshukai
+ * @reamsid_L DBA-0540-688 houtianpeng
  */
-public class HomonKaigoRiyoshaFutangakuGengakuShinseishoReportSource implements IReportSource {
+public class TokuteiFutangendogakuShinseishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
-    @ReportItem(name = "hihokenshaNameKana", order = 1)
-    public RString hihokenshaNameKana;
-    @ReportItem(name = "hokenshaNo", length = 6, order = 2)
+    @ReportItem(name = "hokenshaNo", length = 6, order = 1)
     public RString hokenshaNo;
+    @ReportItem(name = "hihokenshaNameKana", order = 2)
+    public RString hihokenshaNameKana;
     @ReportItem(name = "hihokenshaName", order = 3)
     public RString hihokenshaName;
     @ReportItem(name = "hihokenshaNo", length = 10, order = 4)
@@ -29,17 +25,23 @@ public class HomonKaigoRiyoshaFutangakuGengakuShinseishoReportSource implements 
     public RString seibetsu;
     @ReportItem(name = "birthYMD", length = 11, order = 6)
     public RString birthYMD;
-    @ReportItem(name = "hihokenshaYubinNo", length = 8, order = 7)
-    public RString hihokenshaYubinNo;
-    @ReportItem(name = "hihokenshaTelNo", length = 20, order = 8)
+    @ReportItem(name = "hihokenshaTelNo", length = 20, order = 7)
     public RString hihokenshaTelNo;
+    @ReportItem(name = "hihokenshaYubinNo", length = 8, order = 8)
+    public RString hihokenshaYubinNo;
     @ReportItem(name = "hihokenJusho", order = 9)
     public RString hihokenJusho;
-    @ReportItem(name = "tsuchiBun", order = 10)
-    public RString tsuchiBun;
-    @ReportItem(name = "remban", length = 4, order = 11)
+    @ReportItem(name = "shisetsuYubinNo", length = 8, order = 10)
+    public RString shisetsuYubinNo;
+    @ReportItem(name = "shisetsuTelNo", length = 20, order = 11)
+    public RString shisetsuTelNo;
+    @ReportItem(name = "shisetsuJusho", order = 12)
+    public RString shisetsuJusho;
+    @ReportItem(name = "shisetsuMeisho", order = 13)
+    public RString shisetsuMeisho;
+    @ReportItem(name = "remban", length = 4, order = 14)
     public RString remban;
-    @ReportItem(name = "ninshoshaYakushokuMei", length = 15, order = 12)
+    @ReportItem(name = "ninshoshaYakushokuMei", length = 15, order = 15)
     public RString ninshoshaYakushokuMei;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

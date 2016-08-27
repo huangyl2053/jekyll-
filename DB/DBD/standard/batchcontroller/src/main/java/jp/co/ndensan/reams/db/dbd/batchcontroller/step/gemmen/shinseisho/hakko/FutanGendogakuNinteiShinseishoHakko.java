@@ -7,17 +7,25 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmen.shinseisho.hakko;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd800004.TokuteiFutangendogakuShinseishoItem;
+
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd800004.TokuteiFutangendogakuShinseishoReportSource;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmen.shinseisho.hakko.Ddb102020MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd800001.FutangendogakuNinteiShinseishoBodyItem;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd800001.FutangendogakuNinteiShinseishoOrderKey;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd800001.FutangendogakuNinteiShinseishoReport;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd800004.TokuteiFutangendogakuShinseishoReport;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.gemmen.shinseisho.hakko.ShinseishoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmen.shinseisho.hakko.FutanGendogakuNinteiShinseishoHakkoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd800001.FutangendogakuNinteiShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -64,17 +72,25 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmen.shinseisho.hakko."
             + "IFutanGendogakuNinteiShinseishoHakkoMapper.get出力対象者情報");
     private static final ReportId ID = new ReportId("DBD800001_FutangendogakuNinteiShinseisho");
+    private static final ReportId REPORTID = new ReportId("DBD800004_TokuteiFutangendogakuShinseisho");
     private static final int STARTINDEX = 9;
     private ShinseishoHakkoProcessParameter processParamter;
     private RString 導入団体コード;
     private RString 市町村名;
+    private RString reamsLoginID;
     @BatchWriter
     private BatchReportWriter<FutangendogakuNinteiShinseishoReportSource> batchReportWrite;
     private ReportSourceWriter<FutangendogakuNinteiShinseishoReportSource> reportSourceWriter;
+    @BatchWriter
+    private BatchReportWriter<TokuteiFutangendogakuShinseishoReportSource> reportWrtye;
+    private ReportSourceWriter<TokuteiFutangendogakuShinseishoReportSource> sourceWriter;
     private Association association;
     private Ninshosha ninshosha;
+    private IOutputOrder order;
     private RString 出力順;
     private List<RString> 通知書定型文;
+    private HokenshaList hokenshaList;
+    private int i = 0;
 
     @Override
     protected void initialize() {
@@ -82,8 +98,9 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
         ninshosha = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, RString.EMPTY);
         導入団体コード = association.getLasdecCode_().value();
         市町村名 = association.get市町村名();
+        reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         通知書定型文 = new ArrayList();
-        出力順 = RString.EMPTY;
+        hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
         TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = manager.get通知書定型文項目(SubGyomuCode.DBD介護受給, processParamter.get帳票ID(), KamokuCode.EMPTY, 1);
         ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(SubGyomuCode.DBD介護受給, processParamter.get帳票ID());
@@ -100,19 +117,26 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
         batchReportWrite = BatchReportFactory.createBatchReportWriter(ID.value(),
                 SubGyomuCode.DBD介護受給).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
+        reportWrtye = BatchReportFactory.createBatchReportWriter(REPORTID.value(), SubGyomuCode.DBD介護受給).create();
+        sourceWriter = new ReportSourceWriter<>(reportWrtye);
     }
 
     @Override
     protected IBatchReader createReader() {
-        IOutputOrder order = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
-                SubGyomuCode.DBD介護受給,
-                processParamter.get帳票ID(),
-                processParamter.get改頁出力順ID());
+        if (processParamter.get帳票ID().value().equals(ID.value())) {
+            order = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, ID, reamsLoginID,
+                    processParamter.get改頁出力順ID());
+        } else {
+            order = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, REPORTID, reamsLoginID,
+                    processParamter.get改頁出力順ID());
+        }
         if (order != null) {
             出力順 = Ddb102020MyBatisOrderByClauseCreator.create(FutangendogakuNinteiShinseishoOrderKey.class, order);
             if (processParamter.is出力フラグ()) {
                 出力順 = COMMA.concat(出力順.substring(STARTINDEX, 出力順.length()));
             }
+        } else {
+            出力順 = RString.EMPTY;
         }
         return new BatchDbReader(MYBATIS_SELECT_ID,
                 processParamter.toFutanGendogakuMybatisParameter(出力順));
@@ -122,9 +146,49 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
     protected void process(FutanGendogakuNinteiShinseishoHakkoEntity entity) {
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
         if (entity.is旧措置者フラグ()) {
-            //TODO 帳票設計_DBD800004_介護保険特定負担限度額申請書 の実装がありません。
-            //2016/08/16まで。
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            RString 郵便番号;
+            RString 電話番号;
+            RString 事業者住所;
+            RString 事業者名称;
+            if (entity.get郵便番号() == null || entity.get郵便番号().isEmpty()) {
+                郵便番号 = RString.EMPTY;
+            } else {
+                郵便番号 = entity.get郵便番号().value();
+            }
+            if (entity.get電話番号() == null || entity.get郵便番号().isEmpty()) {
+                電話番号 = RString.EMPTY;
+            } else {
+                電話番号 = entity.get電話番号().value();
+            }
+            if (entity.get事業者住所() == null || entity.get事業者住所().isEmpty()) {
+                事業者住所 = RString.EMPTY;
+            } else {
+                事業者住所 = entity.get事業者住所().value();
+            }
+            if (entity.get事業者名称() == null || entity.get事業者名称().isEmpty()) {
+                事業者名称 = RString.EMPTY;
+            } else {
+                事業者名称 = entity.get事業者名称().value();
+            }
+            TokuteiFutangendogakuShinseishoItem item = new TokuteiFutangendogakuShinseishoItem(
+                    get認証者(),
+                    kojin.get名称().getKana().value(),
+                    kojin.get名称().getName().value(),
+                    get保険者番号(entity),
+                    entity.get被保険者番号().value(),
+                    get被保険者生年月日(kojin),
+                    kojin.get性別().getName().getShortJapanese(),
+                    kojin.get住所().get郵便番号().getEditedYubinNo(),
+                    kojin.get住所().get住所(),
+                    kojin.get連絡先１().value(),
+                    郵便番号,
+                    電話番号,
+                    事業者住所,
+                    事業者名称,
+                    new RString(i++)
+            );
+            TokuteiFutangendogakuShinseishoReport report = TokuteiFutangendogakuShinseishoReport.createFrom(item);
+            report.writeBy(sourceWriter);
         } else {
             FutangendogakuNinteiShinseishoBodyItem bodyItem = new FutangendogakuNinteiShinseishoBodyItem(
                     get認証者(),
@@ -198,9 +262,15 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
         if (processParamter.get帳票ID().equals(ID)) {
             return ReportIdDBD.DBD800001.getReportName();
         } else {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            // TODO　帳票設計_DBD800004_介護保険特定負担限度額申請書 の実装がありません。
-            // return ReportIdDBD.DBD800004.getReportName();
+            return ReportIdDBD.DBD800004.getReportName();
+        }
+    }
+
+    private RString get保険者番号(FutanGendogakuNinteiShinseishoHakkoEntity entity) {
+        if (entity.get広住特措置元市町村コード() != null && !entity.get広住特措置元市町村コード().isEmpty()) {
+            return hokenshaList.get(entity.get広住特措置元市町村コード()).get証記載保険者番号().value();
+        } else {
+            return hokenshaList.get(entity.get市町村コード()).get証記載保険者番号().value();
         }
     }
 }

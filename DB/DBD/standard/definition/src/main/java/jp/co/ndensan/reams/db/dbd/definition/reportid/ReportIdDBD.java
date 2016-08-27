@@ -44,6 +44,10 @@ public enum ReportIdDBD {
      */
     DBD800007(new ReportId("DBD800007_TokubetsuChiikiKasanGenmenTaishoShinseisho"), new RString("特別地域加算減免・訪問介護等利用者負担減額対象確認申請書")),
     /**
+     * 介護保険被保険者証交付申請書（第2号被保険者）の帳票ＩＤです。
+     */
+    DBD800004(new ReportId("DBD800004_TokuteiFutangendogakuShinseisho"), new RString("介護保険特定負担限度額申請書")),
+    /**
      * 訪問介護利用者負担額減額申請書の帳票ＩＤです。
      */
     DBD800005(new ReportId("DBD800005_HomonKaigoRiyoshaFutangakuGengakuShinseisho"), new RString("訪問介護利用者負担額減額申請書")),

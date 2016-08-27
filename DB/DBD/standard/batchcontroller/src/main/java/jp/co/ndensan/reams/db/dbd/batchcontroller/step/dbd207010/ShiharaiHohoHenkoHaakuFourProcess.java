@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * DBDMN32001_2_支払方法変更滞納者把握リスト作成_バッチプロセス4クラスです．
  *
- * @reamsid_L DBD-3650-040 x_lilh
+ * @reamsid_L DBD-3650-050 x_lilh
  */
 public class ShiharaiHohoHenkoHaakuFourProcess extends BatchProcessBase<ShiharaiHohoHenkoHaakuFourEntity> {
 
@@ -93,11 +93,14 @@ public class ShiharaiHohoHenkoHaakuFourProcess extends BatchProcessBase<Shiharai
             RString 差止償還整理番号, RString 償還払支給申請_整理番号,
             Decimal 支給金額, Decimal 差額金額合計) {
 
-        if (差止サービス提供年月 != null && 還払支給申請年月 != null && !差止償還整理番号.isNullOrEmpty() && !償還払支給申請_整理番号.isNullOrEmpty()) {
+        if (差止サービス提供年月 != null && 還払支給申請年月 != null
+                && !差止償還整理番号.isNullOrEmpty()
+                && !償還払支給申請_整理番号.isNullOrEmpty()
+                && 差止サービス提供年月.equals(還払支給申請年月)
+                && 差止償還整理番号.equals(償還払支給申請_整理番号)) {
 
-            if (差止サービス提供年月.equals(還払支給申請年月) && 差止償還整理番号.equals(償還払支給申請_整理番号)) {
-                差止中金額 = 差止中金額.add(支給金額.multiply(差額金額合計));
-            }
+            差止中金額 = 差止中金額.add(支給金額.multiply(差額金額合計));
+
         }
         return Decimal.ZERO;
     }

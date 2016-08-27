@@ -30,7 +30,7 @@ public enum HomonKaigoRiyoshaFutangakuGengakuShinseishoOrderKey implements IRepo
     /**
      * 項目ID:0010 フォームフィールド名:氏名５０音カナ MyBatis項目名:氏名５０音カナ
      */
-    氏名５０音カナ("0010", "氏名５０音カナ", "氏名５０音カナ"),
+    氏名５０音カナ("0010", "氏名５０音カナ", "氏名カナ"),
     /**
      * 項目ID:0012 フォームフィールド名:生年月日 MyBatis項目名:生年月日
      */

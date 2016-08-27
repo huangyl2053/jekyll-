@@ -20,11 +20,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * DBDMN32001_2_支払方法変更滞納者把握リスト作成_バッチプロセス3クラスです．
  *
- * @reamsid_L DBD-3650-040 x_lilh
+ * @reamsid_L DBD-3650-050 x_lilh
  */
 public class ShiharaiHohoHenkoHaakuThreeProcess extends BatchProcessBase<ShiharaiHohoHenkoHaakuThreeEntity> {
-
-    private static final RString 管理区分_1 = new RString("1");
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihohohenkohaakuichiran."

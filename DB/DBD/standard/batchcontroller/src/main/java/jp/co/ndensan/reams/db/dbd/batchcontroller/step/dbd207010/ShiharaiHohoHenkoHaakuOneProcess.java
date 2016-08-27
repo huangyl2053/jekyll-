@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd207010;
 
-import jp.co.ndensan.reams.db.dbd.definition.core.jikokisanbikanri.JikoKisanbiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd207010.ShiharaiHohoHenkoHaakuOneProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuOneEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.temptable.ShiharaiHohoHenkoTempTableEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.temptable.ShunoStatusTempTableEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.taino.MinoKannoKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * DBDMN32001_2_支払方法変更滞納者把握リスト作成_バッチプロセス１クラスです．
  *
- * @reamsid_L DBD-3650-040 x_lilh
+ * @reamsid_L DBD-3650-050 x_lilh
  */
 public class ShiharaiHohoHenkoHaakuOneProcess extends BatchProcessBase<ShiharaiHohoHenkoHaakuOneEntity> {
 
@@ -47,18 +47,16 @@ public class ShiharaiHohoHenkoHaakuOneProcess extends BatchProcessBase<ShiharaiH
     private static final RString 時効到来 = new RString("時効到来");
     private static final RString 時効未到来 = new RString("時効未到来");
 
-    private static final RString 時効成立 = new RString("時効成立");
-    private static final RString 納期限未到来 = new RString("納期限未到来");
-    private static final RString 滞納期 = new RString("滞納期");
-
-    private boolean is時効起算日;
-    private boolean is督促状発行年月日;
-    private boolean is納期限の翌日;
-    private boolean is収入年月日;
-
+//    private static final RString 時効成立 = new RString("時効成立");
+//    private static final RString 納期限未到来 = new RString("納期限未到来");
+//    private static final RString 滞納期 = new RString("滞納期");
+//    private boolean is時効起算日;
+//    private boolean is督促状発行年月日;
+//    private boolean is納期限の翌日;
+//    private boolean is収入年月日;
     private FlexibleDate 時効成立日;
-    private RString 滞納区分;
-    private RString 時効起算事由;
+//    private RString 滞納区分;
+//    private RString 時効起算事由;
     private ShiharaiHohoHenkoHaakuOneProcessParameter processParamter;
 
     private static final RString MYBATIS_SELECT_ID = new RString(
@@ -69,7 +67,7 @@ public class ShiharaiHohoHenkoHaakuOneProcess extends BatchProcessBase<ShiharaiH
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
 
     @BatchWriter
-    private BatchEntityCreatedTempTableWriter shiharaiHohoHenkoTempTableWriter;
+    private BatchEntityCreatedTempTableWriter shiharaiHohoWriter;
 
     @Override
     protected IBatchReader createReader() {
@@ -83,7 +81,7 @@ public class ShiharaiHohoHenkoHaakuOneProcess extends BatchProcessBase<ShiharaiH
 
     @Override
     protected void createWriter() {
-        shiharaiHohoHenkoTempTableWriter = BatchEntityCreatedTempTableWriterBuilders.createBuilder(ShiharaiHohoHenkoTempTableEntity.class)
+        shiharaiHohoWriter = BatchEntityCreatedTempTableWriterBuilders.createBuilder(ShiharaiHohoHenkoTempTableEntity.class)
                 .tempTableName(ShiharaiHohoHenkoTempTableEntity.TABLE_NAME).build();
 
         tmpTableWriter = BatchEntityCreatedTempTableWriterBuilders.createBuilder(ShunoStatusTempTableEntity.class)
@@ -92,7 +90,7 @@ public class ShiharaiHohoHenkoHaakuOneProcess extends BatchProcessBase<ShiharaiH
 
     @Override
     protected void process(ShiharaiHohoHenkoHaakuOneEntity t) {
-        shiharaiHohoHenkoTempTableWriter.insert(create支払方法変更情報一時テーブルEntity(t));
+        shiharaiHohoWriter.insert(create支払方法変更情報一時テーブルEntity(t));
 
         ShunoStatusTempTableEntity tempTableEntity = create収納状況一時テーブル(t);
         tmpTableWriter.insert(tempTableEntity);
@@ -398,42 +396,41 @@ public class ShiharaiHohoHenkoHaakuOneProcess extends BatchProcessBase<ShiharaiH
         return RString.EMPTY;
     }
 
-    private FlexibleDate edit仮の時効起算日(FlexibleDate 時効起算日, FlexibleDate 督促状発行年月日, FlexibleDate 納期限の翌日) {
-
-        if ((時効起算日 == null || FlexibleDate.EMPTY.equals(時効起算日)) && (督促状発行年月日 == null || FlexibleDate.EMPTY.equals(督促状発行年月日))
-                && (納期限の翌日 == null || FlexibleDate.EMPTY.equals(納期限の翌日))) {
-            return FlexibleDate.EMPTY;
-        }
-
-        if (時効起算日 != null && !FlexibleDate.EMPTY.equals(時効起算日)) {
-            is時効起算日 = true;
-            return 時効起算日;
-        }
-        if (督促状発行年月日 != null && !FlexibleDate.EMPTY.equals(督促状発行年月日)) {
-            is督促状発行年月日 = true;
-            return 督促状発行年月日;
-        }
-        if (納期限の翌日 != null && !FlexibleDate.EMPTY.equals(納期限の翌日)) {
-            is納期限の翌日 = true;
-            return 納期限の翌日;
-        }
-        return FlexibleDate.EMPTY;
-    }
-
-    private void edit時効起算事由() {
-
-        if (is収入年月日) {
-            時効起算事由 = JikoKisanbiKubun.収入日.get名称();
-        } else if (is時効起算日) {
-            //TODO
-            時効起算事由 = JikoKisanbiKubun.収入日.get名称();
-        } else if (is督促状発行年月日) {
-            時効起算事由 = JikoKisanbiKubun.督促状発行日.get名称();
-        } else if (is納期限の翌日) {
-            時効起算事由 = JikoKisanbiKubun.納期限翌日.get名称();
-        }
-    }
-
+//    private FlexibleDate edit仮の時効起算日(FlexibleDate 時効起算日, FlexibleDate 督促状発行年月日, FlexibleDate 納期限の翌日) {
+//
+//        if ((時効起算日 == null || FlexibleDate.EMPTY.equals(時効起算日)) && (督促状発行年月日 == null || FlexibleDate.EMPTY.equals(督促状発行年月日))
+//                && (納期限の翌日 == null || FlexibleDate.EMPTY.equals(納期限の翌日))) {
+//            return FlexibleDate.EMPTY;
+//        }
+//
+//        if (時効起算日 != null && !FlexibleDate.EMPTY.equals(時効起算日)) {
+//            is時効起算日 = true;
+//            return 時効起算日;
+//        }
+//        if (督促状発行年月日 != null && !FlexibleDate.EMPTY.equals(督促状発行年月日)) {
+//            is督促状発行年月日 = true;
+//            return 督促状発行年月日;
+//        }
+//        if (納期限の翌日 != null && !FlexibleDate.EMPTY.equals(納期限の翌日)) {
+//            is納期限の翌日 = true;
+//            return 納期限の翌日;
+//        }
+//        return FlexibleDate.EMPTY;
+//    }
+//
+//    private void edit時効起算事由() {
+//
+//        if (is収入年月日) {
+//            時効起算事由 = JikoKisanbiKubun.収入日.get名称();
+//        } else if (is時効起算日) {
+//            //TODO
+//            時効起算事由 = JikoKisanbiKubun.収入日.get名称();
+//        } else if (is督促状発行年月日) {
+//            時効起算事由 = JikoKisanbiKubun.督促状発行日.get名称();
+//        } else if (is納期限の翌日) {
+//            時効起算事由 = JikoKisanbiKubun.納期限翌日.get名称();
+//        }
+//    }
     private RString edit完納_未納区分(FlexibleDate 基準日, FlexibleDate 納期限, Decimal 調定額, Decimal 収入額) {
         if (基準日.isBeforeOrEquals(納期限)) {
             return 未来納期;
@@ -456,10 +453,11 @@ public class ShiharaiHohoHenkoHaakuOneProcess extends BatchProcessBase<ShiharaiH
 
     private RString edit時効区分(RString 完納_未納区分, FlexibleDate 時効起算日, FlexibleDate 基準日) {
 
-//        FlexibleDate 時効起算日2年後 = 時効起算日.plusYear(2);
-//        if (MinoKannoKubun.未納あり.getコード().equals(完納_未納区分) && 時効起算日2年後.isBeforeOrEquals(基準日)) {
-//            return 時効到来;
-//        }
+        // todo
+        //FlexibleDate 時効起算日2年後 = FlexibleDate.MAX;
+        if (MinoKannoKubun.未納あり.getコード().equals(完納_未納区分) && 時効起算日.isBeforeOrEquals(基準日)) {
+            return 時効到来;
+        }
         return 時効未到来;
     }
 

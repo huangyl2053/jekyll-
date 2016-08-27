@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.homonkaigoriyoushafutangakugengakushinseisho;
+package jp.co.ndensan.reams.db.dbd.business.report.dbd800005;
 
-import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
-import jp.co.ndensan.reams.db.dba.entity.report.homonkaigoriyoushafutangakugengakushinseisho.HomonKaigoRiyoshaFutangakuGengakuShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd800005.HomonKaigoRiyoshaFutangakuGengakuShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -21,6 +21,6 @@ public class HomonkaigoRiyoushaFutangakuGengakuShinseishoProerty extends ReportP
      * コンストラクタです。
      */
     public HomonkaigoRiyoushaFutangakuGengakuShinseishoProerty() {
-        super(SubGyomuCode.DBD介護受給, ReportIdDBA.DBD800005.getReportId());
+        super(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD800005.getReportId());
     }
 }
