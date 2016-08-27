@@ -2,7 +2,9 @@ package jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100012;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票「特別徴収平準化【B5横タイプ】」の項目を定義するクラスです。
@@ -46,6 +48,7 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReportSource implements IRepo
     public RString hyojicode2;
     @ReportItem(name = "hyojicode3", length = 9, order = 17)
     public RString hyojicode3;
+    @ReportPerson
     @ReportItem(name = "tsuchishoNo", order = 18)
     public RString tsuchishoNo;
     @ReportItem(name = "setaiCode", length = 15, order = 19)
@@ -54,8 +57,10 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReportSource implements IRepo
     public RString kongoNofuSubekiGaku;
     @ReportItem(name = "mitoraikiNofuzumiGaku", length = 7, order = 21)
     public RString mitoraikiNofuzumiGaku;
+    @ReportExpandedInfo(id = "本人")
     @ReportItem(name = "hihokenshaNo", length = 10, order = 22)
     public RString hihokenshaNo;
+    @ReportPerson(id = "本人")
     @ReportItem(name = "shikibetsuCode", length = 15, order = 23)
     public RString shikibetsuCode;
     @ReportItem(name = "shutokuYMDMae", length = 10, order = 24)
