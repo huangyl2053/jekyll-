@@ -34,6 +34,8 @@ public class HikazeiNennkinTaishouSyaJohoTorikomiFlow extends BatchFlowBase<Hika
      */
     private static final RString HIKAIFLOW = new RString("HikazeNenkinTaishoshaDouteiFlow");
 
+    private static final RString 処理区_1 = new RString("1");
+    private static final RString 処理区_9 = new RString("9");
     private static final String 取込データ一時作成 = "取込データ一時作成";
     private static final String 非課税年金対象者同定 = "非課税年金対象者同定";
     private static final String 非課税年金対象者情報一覧CSV作成 = "非課税年金対象者情報一覧CSV作成";
@@ -54,7 +56,9 @@ public class HikazeiNennkinTaishouSyaJohoTorikomiFlow extends BatchFlowBase<Hika
         executeStep(非課税年金対象者情報_該当一覧CSV);
         executeStep(非課税年金対象者情報_不一致CSV);
         executeStep(非課税年金対象者情報_生年月日CSV);
-        executeStep(非課税年金対象者情報_年金番号CSV);
+        if (!処理区_1.equals(getParameter().get処理区分()) && !処理区_9.equals(getParameter().get処理区分())) {
+            executeStep(非課税年金対象者情報_年金番号CSV);
+        }
         if (処理状態.equals(getParameter().get処理状態())) {
             executeStep(削除非課税年金対象者);
         }
