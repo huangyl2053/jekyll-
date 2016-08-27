@@ -794,7 +794,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         if (受給申請事由 == null) {
             return;
         }
-        //TODO受給申請事由
+        //TODO受給申請事由 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         JukyushaDaicho jukyushaDaicho = new JukyushaDaicho(
                 new LasdecCode(div.getHdnShichosonCode()),
                 new HihokenshaNo(div.getHdnHihokenshaNo()),
@@ -803,7 +803,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
                 new Code(受給申請事由));
 
         JukyushaDaichoBuilder builder = jukyushaDaicho.createBuilderForEdit();
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set申請書管理番号(shinseishoKanriNo);
         builder.set申請状況区分(new RString("0"));
         builder.set支所コード(div.getCcdKaigoNinteiShinseiKihon().
@@ -823,7 +823,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set有効無効区分(new Code("0"));
         builder.set申請書区分(new Code(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getRadShinseishoKubun().getSelectedKey()));
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set要支援者認定申請区分(false);
         builder.set旧措置者フラグ(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getChkKyuSochisha().isAllSelected());
@@ -836,11 +836,11 @@ public class NinteiShinseiTorokuUketsukeHandler {
     }
 
     private void insert要介護認定申請情報_申請() {
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         NinteiShinseiJoho ninteiShinseiJoho = new NinteiShinseiJoho(shinseishoKanriNo);
         NinteiShinseiJohoBuilder builder = ninteiShinseiJoho.createBuilderForEdit();
 
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set厚労省IF識別コード(new Code(""));
         builder.set証記載保険者番号(div.getCcdKaigoNinteiShikakuInfo().getHookenshaCode());
         builder.set申請年度(new FlexibleYear(div.getCcdKaigoNinteiShinseiKihon().
@@ -849,9 +849,9 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set認定申請年月日(new FlexibleDate(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getTxtShinseiYMD().getText()));
         builder.set認定申請枝番コード(new EdabanCode("000"));
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set認定申請区分_法令_コード(Code.EMPTY);
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set認定申請区分_申請時_コード(Code.EMPTY);
         builder.set取下区分コード(new Code("1"));
         builder.set被保険者区分コード(div.getCcdKaigoNinteiShinseiKihon().
@@ -877,35 +877,35 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set識別コード(new ShikibetsuCode(div.getHdnShikibetsuCode()));
         builder.set広域内転居区分(new Code("0"));
         builder.set認定申請有効区分(new Code("1"));
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set要介護申請_要支援申請の区分(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getRadShinseishoKubun().getSelectedKey());
         builder.set認定申請理由(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getNinteiShinseiRiyu().getTxtNinteiShinseRiyu().getText());
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set申請サービス削除の理由(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getTxtServiceSakujo().getValue());
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set前回要介護状態区分コード(new Code(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue()));
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set前回認定年月日(div.getCcdZenkaiNinteiKekkaJoho().getTxtNinteiDay().getValue());
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set前回認定有効期間_開始_(div.getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue());
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set前回認定有効期間_終了_(div.getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue());
-        //TODO２号医療保険者名 ２号医療保険記号番号
+        //TODO２号医療保険者名 ２号医療保険記号番号 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set２号特定疾病コード(new Code(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().getSelectedKey()));
         builder.set自動割当除外者区分(new RString("2"));
         builder.set認定調査委託先コード(new ChosaItakusakiCode(div.getCcdChosaItakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue()));
         builder.set認定調査員コード(new ChosainCode(div.getCcdChosaItakusakiAndChosainInput().getTxtChosainCode().getValue()));
-        //TODO調査員への連絡事項
+        //TODO調査員への連絡事項 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set主治医医療機関コード(div.getCcdShujiiIryokikanAndShujiiInput().getIryoKikanCode());
         builder.set主治医コード(div.getCcdShujiiIryokikanAndShujiiInput().getShujiiCode());
         builder.set指定医フラグ(div.getCcdShujiiIryokikanAndShujiiInput().hasShiteii());
-        //TODO主治医への連絡事項
+        //TODO主治医への連絡事項 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set認定延期通知発行しないことに対する同意有無(div.getChkNinteiTsuchishoDoi().isAllSelected());
-        //TODO施設入所の有無 入所施設コード 市町村連絡事項
+        //TODO施設入所の有無 入所施設コード 市町村連絡事項 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set処理状態区分(new Code("1"));
         builder.set延期通知発行回数(0);
         builder.set介護認定審査会優先振分区分コード(new Code("0"));
@@ -922,7 +922,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void insert申請届出者() {
 
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         ShinseitodokedeJoho shinseitodokedeJoho = new ShinseitodokedeJoho(shinseishoKanriNo);
         ShinseitodokedeJohoBuilder builder = shinseitodokedeJoho.createBuilderForEdit();
 
@@ -951,14 +951,14 @@ public class NinteiShinseiTorokuUketsukeHandler {
     }
 
     private void insert介護連絡先() {
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
     }
 
     private void insert申請履歴情報() {
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         ShinseiRirekiJoho shinseiRirekiJoho = new ShinseiRirekiJoho(shinseishoKanriNo);
         ShinseiRirekiJohoBuilder builder = shinseiRirekiJoho.createBuilderForEdit();
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set前回申請管理番号(new ShinseishoKanriNo(ZERO_17));
 
         ShinseiRirekiJoho newShinseiRirekiJoho = builder.build();
@@ -968,10 +968,10 @@ public class NinteiShinseiTorokuUketsukeHandler {
     }
 
 //    private void insert介護保険施設入退所() {
-//        //TODO
+//        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
 //        ShisetsuNyutaisho shisetsuNyutaisho = new ShisetsuNyutaisho(new ShikibetsuCode(div.getHdnShikibetsuCode()), 0);
 //        ShisetsuNyutaishoBuilder builder = shisetsuNyutaisho.createBuilderForEdit();
-//        //TODO
+//        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
 //        builder.set市町村コード(new LasdecCode(div.getHdnShichosonCode()));
 //        builder.set台帳種別(RString.EMPTY);
 //        builder.set入所施設種類(RString.EMPTY);
@@ -981,7 +981,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 //        builder.set退所処理年月日(FlexibleDate.MAX);
 //        builder.set退所年月日(FlexibleDate.MAX);
 //        builder.set部屋記号番号(RString.EMPTY);
-//        //TODO
+//        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
 //
 //        ShisetsuNyutaisho newShisetsuNyutaisho = builder.build();
 //        ShisetsuNyutaishoManager manager = new ShisetsuNyutaishoManager();
@@ -989,13 +989,13 @@ public class NinteiShinseiTorokuUketsukeHandler {
 //
 //    }
 //    private void insert介護保険医療機関加入状況() {
-//        //TODO
+//        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
 //        IryohokenKanyuJokyo iryohokenKanyuJokyo = new IryohokenKanyuJokyo(new ShikibetsuCode(div.getHdnShikibetsuCode()), 0);
 //        IryohokenKanyuJokyoBuilder builder = iryohokenKanyuJokyo.createBuilderForEdit();
-//        //TODO
+//        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
 //        builder.set市町村コード(new LasdecCode(div.getHdnShichosonCode()));
 //        builder.set被保険者番号(new HihokenshaNo(div.getHdnHihokenshaNo()));
-//        //TODO
+//        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
 //
 //        IryohokenKanyuJokyo newIryohokenKanyuJokyo = builder.build();
 //        IryohokenKanyuJokyoManager manager = new IryohokenKanyuJokyoManager();
@@ -1012,14 +1012,14 @@ public class NinteiShinseiTorokuUketsukeHandler {
                 new Code("7"));
 
         JukyushaDaichoBuilder builder = jukyushaDaicho.createBuilderForEdit();
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set申請書管理番号(shinseishoKanriNo);
         builder.set申請状況区分(new RString("0"));
         builder.set支所コード(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().getSelectedKey());
         builder.set直近フラグ(true);
         builder.set識別コード(new ShikibetsuCode(div.getHdnShikibetsuCode()));
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set申請理由(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getNinteiShinseiRiyu().getTxtNinteiShinseRiyu().getText());
         builder.set届出者_申請者関係コード(new Code(div.getCcdShinseiTodokedesha().getDdlShinseiKankeisha().getSelectedKey()));
@@ -1032,7 +1032,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set認定有効期間開始年月日(div.getCcdNinteiInput().getNaiyo().get有効開始年月日());
         builder.set認定有効期間終了年月日(div.getCcdNinteiInput().getNaiyo().get有効終了年月日());
         builder.set認定年月日(div.getCcdNinteiInput().getNaiyo().get認定年月日());
-        //TODO指定サービス種類
+        //TODO指定サービス種類 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set直近異動年月日(FlexibleDate.getNowDate());
         builder.set直近異動事由コード(new Code("00"));
         builder.set有効無効区分(new Code("1"));
@@ -1053,11 +1053,11 @@ public class NinteiShinseiTorokuUketsukeHandler {
     }
 
     private void insert要介護認定申請情報_転入() {
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         NinteiShinseiJoho ninteiShinseiJoho = new NinteiShinseiJoho(shinseishoKanriNo);
         NinteiShinseiJohoBuilder builder = ninteiShinseiJoho.createBuilderForEdit();
 
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set厚労省IF識別コード(new Code(""));
         builder.set証記載保険者番号(div.getCcdKaigoNinteiShikakuInfo().getHookenshaCode());
         builder.set申請年度(new FlexibleYear(div.getCcdKaigoNinteiShinseiKihon().
@@ -1089,24 +1089,24 @@ public class NinteiShinseiTorokuUketsukeHandler {
                 getKaigoNinteiShinseiKihonJohoInputDiv().getRadShinseishoKubun().getSelectedKey());
         builder.set認定申請理由(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getNinteiShinseiRiyu().getTxtNinteiShinseRiyu().getText());
-        //TODO２号医療保険者名 ２号医療保険記号番号
+        //TODO２号医療保険者名 ２号医療保険記号番号 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set２号特定疾病コード(new Code(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().getSelectedKey()));
         builder.set自動割当除外者区分(new RString("2"));
         builder.set情報提供への同意有無(div.getChkJohoTeikyoDoi().isAllSelected());
         builder.set認定調査委託先コード(new ChosaItakusakiCode(div.getCcdChosaItakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue()));
         builder.set認定調査員コード(new ChosainCode(div.getCcdChosaItakusakiAndChosainInput().getTxtChosainCode().getValue()));
-        //TODO調査員への連絡事項
+        //TODO調査員への連絡事項 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set主治医医療機関コード(div.getCcdShujiiIryokikanAndShujiiInput().getIryoKikanCode());
         builder.set主治医コード(div.getCcdShujiiIryokikanAndShujiiInput().getShujiiCode());
         builder.set指定医フラグ(div.getCcdShujiiIryokikanAndShujiiInput().hasShiteii());
-        //TODO主治医への連絡事項
+        //TODO主治医への連絡事項 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set認定延期通知発行しないことに対する同意有無(div.getChkNinteiTsuchishoDoi().isAllSelected());
-        //TODO施設入所の有無 入所施設コード 市町村連絡事項
+        //TODO施設入所の有無 入所施設コード 市町村連絡事項 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set処理状態区分(new Code("1"));
         builder.set延期通知発行回数(0);
         builder.set介護認定審査会優先振分区分コード(new Code("0"));
-        //更新通知発行年月日 更新通知発行完了年月日
+        //更新通知発行年月日 更新通知発行完了年月日 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set再調査依頼回数(0);
         builder.set再作成依頼回数(0);
         builder.set論理削除フラグ(false);
@@ -1127,7 +1127,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
                 new Code("7"));
 
         JukyushaDaichoBuilder builder = jukyushaDaicho.createBuilderForEdit();
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set申請書管理番号(shinseishoKanriNo);
         builder.set申請状況区分(new RString("1"));
         builder.set支所コード(div.getCcdKaigoNinteiShinseiKihon().
@@ -1146,12 +1146,12 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set認定有効期間開始年月日(div.getCcdNinteiInput().getNaiyo().get有効開始年月日());
         builder.set認定有効期間終了年月日(div.getCcdNinteiInput().getNaiyo().get有効終了年月日());
         builder.set認定年月日(div.getCcdNinteiInput().getNaiyo().get認定年月日());
-        //TODO指定サービス種類
+        //TODO指定サービス種類 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set直近異動年月日(FlexibleDate.getNowDate());
         builder.set直近異動事由コード(new Code("10"));
         builder.set有効無効区分(new Code("0"));
         builder.setデータ区分(new Code("24"));
-        // 履歴番号と同一
+        // 履歴番号と同一 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set同一連番(new RString("0001"));
         builder.set異動理由(div.getCcdShinseiSonotaJohoInput().get理由());
         builder.set申請書区分(new Code(div.getCcdKaigoNinteiShinseiKihon().
@@ -1169,11 +1169,11 @@ public class NinteiShinseiTorokuUketsukeHandler {
     }
 
     private void insert要介護認定申請情報_職権() {
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         NinteiShinseiJoho ninteiShinseiJoho = new NinteiShinseiJoho(shinseishoKanriNo);
         NinteiShinseiJohoBuilder builder = ninteiShinseiJoho.createBuilderForEdit();
 
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set厚労省IF識別コード(new Code(""));
         builder.set証記載保険者番号(div.getCcdKaigoNinteiShikakuInfo().getHookenshaCode());
         builder.set申請年度(new FlexibleYear(div.getCcdKaigoNinteiShinseiKihon().
@@ -1207,20 +1207,20 @@ public class NinteiShinseiTorokuUketsukeHandler {
                 getKaigoNinteiShinseiKihonJohoInputDiv().getRadShinseishoKubun().getSelectedKey());
         builder.set認定申請理由(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getNinteiShinseiRiyu().getTxtNinteiShinseRiyu().getText());
-        //TODO２号医療保険者名 ２号医療保険記号番号
+        //TODO２号医療保険者名 ２号医療保険記号番号 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set２号特定疾病コード(new Code(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().getSelectedKey()));
         builder.set自動割当除外者区分(new RString("2"));
         builder.set情報提供への同意有無(div.getChkJohoTeikyoDoi().isAllSelected());
         builder.set認定調査委託先コード(new ChosaItakusakiCode(div.getCcdChosaItakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue()));
         builder.set認定調査員コード(new ChosainCode(div.getCcdChosaItakusakiAndChosainInput().getTxtChosainCode().getValue()));
-        //TODO調査員への連絡事項
+        //TODO調査員への連絡事項 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set主治医医療機関コード(div.getCcdShujiiIryokikanAndShujiiInput().getIryoKikanCode());
         builder.set主治医コード(div.getCcdShujiiIryokikanAndShujiiInput().getShujiiCode());
         builder.set指定医フラグ(div.getCcdShujiiIryokikanAndShujiiInput().hasShiteii());
-        //TODO主治医への連絡事項
+        //TODO主治医への連絡事項 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set認定延期通知発行しないことに対する同意有無(div.getChkNinteiTsuchishoDoi().isAllSelected());
-        //TODO施設入所の有無 入所施設コード 市町村連絡事項
+        //TODO施設入所の有無 入所施設コード 市町村連絡事項 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set処理状態区分(new Code("1"));
         builder.set延期通知発行回数(0);
         builder.set介護認定審査会優先振分区分コード(new Code("0"));
@@ -1245,7 +1245,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
                 new Code("7"));
 
         JukyushaDaichoBuilder builder = jukyushaDaicho.createBuilderForEdit();
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set申請書管理番号(shinseishoKanriNo);
         builder.set申請状況区分(new RString("1"));
         builder.set支所コード(div.getCcdKaigoNinteiShinseiKihon().
@@ -1264,12 +1264,12 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set認定有効期間開始年月日(div.getCcdNinteiInput().getNaiyo().get有効開始年月日());
         builder.set認定有効期間終了年月日(div.getCcdNinteiInput().getNaiyo().get有効終了年月日());
         builder.set認定年月日(div.getCcdNinteiInput().getNaiyo().get認定年月日());
-        //TODO指定サービス種類
+        //TODO指定サービス種類 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set直近異動年月日(FlexibleDate.getNowDate());
         builder.set直近異動事由コード(new Code("01"));
         builder.set有効無効区分(new Code("0"));
         builder.setデータ区分(new Code(div.getCcdShinseiSonotaJohoInput().get異動事由()));
-        // 履歴番号と同一
+        // 履歴番号と同一 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set同一連番(new RString("0001"));
         builder.set異動理由(div.getCcdShinseiSonotaJohoInput().get理由());
         builder.set申請書区分(new Code(div.getCcdKaigoNinteiShinseiKihon().
@@ -1287,11 +1287,11 @@ public class NinteiShinseiTorokuUketsukeHandler {
     }
 
     private void insert要介護認定申請情報_特殊() {
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         NinteiShinseiJoho ninteiShinseiJoho = new NinteiShinseiJoho(shinseishoKanriNo);
         NinteiShinseiJohoBuilder builder = ninteiShinseiJoho.createBuilderForEdit();
 
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set厚労省IF識別コード(new Code(""));
         builder.set証記載保険者番号(div.getCcdKaigoNinteiShikakuInfo().getHookenshaCode());
         builder.set申請年度(new FlexibleYear(div.getCcdKaigoNinteiShinseiKihon().
@@ -1326,20 +1326,20 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set前回認定年月日(div.getCcdZenkaiNinteiKekkaJoho().getTxtNinteiDay().getValue());
         builder.set前回認定有効期間_開始_(div.getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue());
         builder.set前回認定有効期間_終了_(div.getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue());
-        //TODO２号医療保険者名 ２号医療保険記号番号
+        //TODO２号医療保険者名 ２号医療保険記号番号 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set２号特定疾病コード(new Code(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().getSelectedKey()));
         builder.set自動割当除外者区分(new RString("2"));
         builder.set情報提供への同意有無(div.getChkJohoTeikyoDoi().isAllSelected());
         builder.set認定調査委託先コード(new ChosaItakusakiCode(div.getCcdChosaItakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue()));
         builder.set認定調査員コード(new ChosainCode(div.getCcdChosaItakusakiAndChosainInput().getTxtChosainCode().getValue()));
-        //TODO調査員への連絡事項
+        //TODO調査員への連絡事項 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set主治医医療機関コード(div.getCcdShujiiIryokikanAndShujiiInput().getIryoKikanCode());
         builder.set主治医コード(div.getCcdShujiiIryokikanAndShujiiInput().getShujiiCode());
         builder.set指定医フラグ(div.getCcdShujiiIryokikanAndShujiiInput().hasShiteii());
-        //TODO主治医への連絡事項
+        //TODO主治医への連絡事項 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set認定延期通知発行しないことに対する同意有無(div.getChkNinteiTsuchishoDoi().isAllSelected());
-        //TODO施設入所の有無 入所施設コード 市町村連絡事項
+        //TODO施設入所の有無 入所施設コード 市町村連絡事項 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         //更新通知発行年月日 更新通知発行完了年月日
         builder.set論理削除フラグ(false);
 
@@ -1359,7 +1359,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
                 new Code(""));
 
         JukyushaDaichoBuilder builder = jukyushaDaicho.createBuilderForEdit();
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set直近フラグ(true);
         builder.set申請理由(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getNinteiShinseiRiyu().getTxtNinteiShinseRiyu().getText());
@@ -1382,11 +1382,11 @@ public class NinteiShinseiTorokuUketsukeHandler {
     }
 
     private void update要介護認定申請情報_申請修正() {
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         NinteiShinseiJoho ninteiShinseiJoho = new NinteiShinseiJoho(shinseishoKanriNo);
         NinteiShinseiJohoBuilder builder = ninteiShinseiJoho.createBuilderForEdit();
 
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set申請年度(new FlexibleYear(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getTxtShinseiYMD().getValue().getYear().toDateString()));
         builder.set認定申請年月日(new FlexibleDate(div.getCcdKaigoNinteiShinseiKihon().
@@ -1406,7 +1406,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set支所コード(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().getSelectedKey());
         builder.set識別コード(new ShikibetsuCode(div.getCcdKaigoNinteiAtenaInfo().get識別コード()));
-        //TODO地区コード
+        //TODO地区コード QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.setみなし２号等対象フラグ(false);
         builder.set広域内転居区分(new Code("0"));
         builder.set認定申請有効区分(new Code("1"));
@@ -1414,16 +1414,16 @@ public class NinteiShinseiTorokuUketsukeHandler {
                 getKaigoNinteiShinseiKihonJohoInputDiv().getRadShinseishoKubun().getSelectedKey());
         builder.set認定申請理由(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getNinteiShinseiRiyu().getTxtNinteiShinseRiyu().getText());
-        //TODO申請サービス削除の理由
+        //TODO申請サービス削除の理由 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set申請サービス削除の理由(new RString(""));
         builder.set前回要介護状態区分コード(new Code(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue()));
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set前回認定年月日(div.getCcdZenkaiNinteiKekkaJoho().getTxtNinteiDay().getValue());
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set前回認定有効期間_開始_(div.getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue());
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set前回認定有効期間_終了_(div.getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue());
-        //TODO２号医療保険者名 ２号医療保険記号番号
+        //TODO２号医療保険者名 ２号医療保険記号番号 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set２号特定疾病コード(new Code(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().getSelectedKey()));
         builder.set自動割当除外者区分(new RString("2"));
@@ -1432,14 +1432,14 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set調査区分(null);
         builder.set認定調査委託先コード(new ChosaItakusakiCode(div.getCcdChosaItakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue()));
         builder.set認定調査員コード(new ChosainCode(div.getCcdChosaItakusakiAndChosainInput().getTxtChosainCode().getValue()));
-        //TODO調査員への連絡事項
+        //TODO調査員への連絡事項 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set主治医医療機関コード(div.getCcdShujiiIryokikanAndShujiiInput().getIryoKikanCode());
         builder.set主治医コード(div.getCcdShujiiIryokikanAndShujiiInput().getShujiiCode());
         builder.set指定医フラグ(div.getCcdShujiiIryokikanAndShujiiInput().hasShiteii());
         builder.set意見書データ種別(null);
-        //TODO主治医への連絡事項
+        //TODO主治医への連絡事項 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set認定延期通知発行しないことに対する同意有無(div.getChkNinteiTsuchishoDoi().isAllSelected());
-        //TODO施設入所の有無 入所施設コード 市町村連絡事項
+        //TODO施設入所の有無 入所施設コード 市町村連絡事項 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set取下年月日(null);
         builder.set取下理由(null);
         builder.set却下年月日(null);
@@ -1471,7 +1471,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
                 new Code(""));
 
         JukyushaDaichoBuilder builder = jukyushaDaicho.createBuilderForEdit();
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set直近異動事由コード(new Code("00"));
         builder.set有効無効区分(new Code("2"));
         builder.setデータ区分(new Code(div.getCcdShinseiSonotaJohoInput().get異動事由()));
@@ -1483,11 +1483,11 @@ public class NinteiShinseiTorokuUketsukeHandler {
     }
 
     private void update要介護認定申請情報_申請取下() {
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         NinteiShinseiJoho ninteiShinseiJoho = new NinteiShinseiJoho(shinseishoKanriNo);
         NinteiShinseiJohoBuilder builder = ninteiShinseiJoho.createBuilderForEdit();
 
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set取下区分コード(new Code("3"));
         builder.set取下年月日(div.getCcdShinseiSonotaJohoInput().get取消日());
         builder.set取下理由(div.getCcdShinseiSonotaJohoInput().get削除事由());
@@ -1500,7 +1500,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void update申請届出者() {
 
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         ShinseitodokedeJoho shinseitodokedeJoho = new ShinseitodokedeJoho(shinseishoKanriNo);
         ShinseitodokedeJohoBuilder builder = shinseitodokedeJoho.createBuilderForEdit();
 
@@ -1519,16 +1519,16 @@ public class NinteiShinseiTorokuUketsukeHandler {
     }
 
     private void update介護連絡先() {
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
     }
 
     private void update介護保険施設入退所() {
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         ShisetsuNyutaisho shisetsuNyutaisho = new ShisetsuNyutaisho(new ShikibetsuCode(div.getCcdKaigoNinteiAtenaInfo().get識別コード()), 0);
         ShisetsuNyutaishoBuilder builder = shisetsuNyutaisho.createBuilderForEdit();
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set市町村コード(new LasdecCode(div.getHdnShichosonCode()));
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
 
         ShisetsuNyutaisho newShisetsuNyutaisho = builder.build();
         ShisetsuNyutaishoManager manager = new ShisetsuNyutaishoManager();
@@ -1537,13 +1537,13 @@ public class NinteiShinseiTorokuUketsukeHandler {
     }
 
     private void update介護保険医療機関加入状況() {
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         IryohokenKanyuJokyo iryohokenKanyuJokyo = new IryohokenKanyuJokyo(new ShikibetsuCode(div.getCcdKaigoNinteiAtenaInfo().get識別コード()), 0);
         IryohokenKanyuJokyoBuilder builder = iryohokenKanyuJokyo.createBuilderForEdit();
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set市町村コード(new LasdecCode(div.getHdnShichosonCode()));
         builder.set被保険者番号(new HihokenshaNo(div.getHdnHihokenshaNo()));
-        //TODO
+        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
 
         IryohokenKanyuJokyo newIryohokenKanyuJokyo = builder.build();
         IryohokenKanyuJokyoManager manager = new IryohokenKanyuJokyoManager();
