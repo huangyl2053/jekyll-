@@ -95,7 +95,7 @@
         TD."dtno" AS  連番,
         TD."dtrekodoKubun" AS  DTレコード区分,
         TD."dtshichosonCode" AS DT市町村コード,
-        TD."dtDTnennkinnHokennshaCode" AS  DT年金保険者コード,
+        TD."dtnennkinnHokennshaCode" AS  DT年金保険者コード,
         TD."dttsuuchiContentCode" AS  DT通知内容コード,
         TD."dtyobi1" AS  DT予備1,
         TD."dtseidoCode" AS  DT制度コード,
@@ -178,7 +178,7 @@
         INNER JOIN
         "JissekiDataIchijiSakuseiTempTable" AS JD
         ON  TD."dtTaishoYear" = JD."dtTaisyoYear"
-        AND TD."dtDTnennkinnHokennshaCode" = JD."dtNennkinnHokenshaCode"
+        AND TD."dtnennkinnHokennshaCode" = JD."dtNennkinnHokenshaCode"
         AND substring(TD."dtnennkinnCode",1,3) =substring(JD."dtNennkinnCode",1,3)
         AND TD."dtnennkinnNo" = JD."genKisoNennkinnNo"
         AND TD."dtcreateYMD" = JD."dtCreateYMD"
@@ -197,7 +197,7 @@
         ) AS 重複データ
         WHERE
         "TorikomiTempTable"."dtTaishoYear" = 重複データ."dtTaisyoYear"
-        AND "TorikomiTempTable"."dtDTnennkinnHokennshaCode" = 重複データ."dtNennkinnHokenshaCode"
+        AND "TorikomiTempTable"."dtnennkinnHokennshaCode" = 重複データ."dtNennkinnHokenshaCode"
         AND "TorikomiTempTable"."dtnennkinnCode" = 重複データ."dtNennkinnCode"
         AND "TorikomiTempTable"."dtnennkinnNo" = 重複データ."dtKisoNennkinnNo"
         AND "TorikomiTempTable"."dtcreateYMD" = 重複データ."dtCreateYMD"

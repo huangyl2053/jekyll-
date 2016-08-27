@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100201.SyoriHidukeKan
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100201.TorikomiProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100201.HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100202.HikazeNenkinTaishoshaDouteiBatchParameter;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.TorikomiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -45,17 +44,20 @@ public class HikazeiNennkinTaishouSyaJohoTorikomiFlow extends BatchFlowBase<Hika
     private static final String 削除非課税年金対象者 = "削除非課税年金対象者";
     private static final String 更新非課税年金対象者 = "更新非課税年金対象者";
     private static final String 処理日付管理マスタ更新 = "処理日付管理マスタ更新";
+    private final RString 処理状態 = new RString("3");
 
     @Override
     protected void defineFlow() {
         executeStep(取込データ一時作成);
-        executeStep(非課税年金対象者同定);
         executeStep(非課税年金対象者情報一覧CSV作成);
+        executeStep(非課税年金対象者同定);
         executeStep(非課税年金対象者情報_該当一覧CSV);
         executeStep(非課税年金対象者情報_不一致CSV);
         executeStep(非課税年金対象者情報_生年月日CSV);
         executeStep(非課税年金対象者情報_年金番号CSV);
-        executeStep(削除非課税年金対象者);
+        if (処理状態.equals(getParameter().get処理状態())) {
+            executeStep(削除非課税年金対象者);
+        }
         executeStep(更新非課税年金対象者);
         executeStep(処理日付管理マスタ更新);
     }
@@ -68,7 +70,7 @@ public class HikazeiNennkinTaishouSyaJohoTorikomiFlow extends BatchFlowBase<Hika
     @Step(取込データ一時作成)
     protected IBatchFlowCommand reportProcess() {
         return loopBatch(TorikomiProcess.class)
-                .arguments(createProcessParameter())
+                .arguments(getParameter().toTorikomiProcessParameter())
                 .define();
     }
 
@@ -140,7 +142,9 @@ public class HikazeiNennkinTaishouSyaJohoTorikomiFlow extends BatchFlowBase<Hika
      */
     @Step(削除非課税年金対象者)
     protected IBatchFlowCommand hikazeiNennkinnTaishouSyaDeleteProcess() {
-        return loopBatch(HikazeiNennkinnTaishouSyaDeleteProcess.class).define();
+        return loopBatch(HikazeiNennkinnTaishouSyaDeleteProcess.class)
+                .arguments(getParameter().toHikazeiNennkinDeleteProcessParameter())
+                .define();
     }
 
     /**
@@ -160,12 +164,9 @@ public class HikazeiNennkinTaishouSyaJohoTorikomiFlow extends BatchFlowBase<Hika
      */
     @Step(処理日付管理マスタ更新)
     protected IBatchFlowCommand syoriHidukeKanriMasterUpdateProcess() {
-        return loopBatch(SyoriHidukeKanriMasterUpdateProcess.class).define();
-    }
-
-    private TorikomiProcessParameter createProcessParameter() {
-        HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter parameter = getParameter();
-        return parameter.toTorikomiProcessParameter();
+        return loopBatch(SyoriHidukeKanriMasterUpdateProcess.class)
+                .arguments(getParameter().toSyoriHidukeKanriMasterUpdateProcessParameter())
+                .define();
     }
 
     private HikazeNenkinTaishoshaDouteiBatchParameter createHikazeNenkinTaishoshaDouteiBatchParameter() {

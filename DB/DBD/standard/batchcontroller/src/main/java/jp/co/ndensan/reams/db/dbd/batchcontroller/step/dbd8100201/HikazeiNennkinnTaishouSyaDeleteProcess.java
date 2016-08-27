@@ -15,26 +15,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 非課税年金対象者削除クラスです．
  *
- * @reamsid_L DBD-4910-030 x_lilh
+ * @reamsid_L DBD-4910-030 x_xuliang
  */
 public class HikazeiNennkinnTaishouSyaDeleteProcess extends BatchProcessBase<DbT4037HikazeNenkinTaishoshaEntity> {
 
     private static final RString MAPPERPATH_削除 = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate."
             + "hikazeinennkintaishousyajohotorikomi.IHikazeiNennkinnTaishouSyaDeleteMapper.getBP_処理状態削除する");
-    private HikazeiNennkinDeleteProcessParameter processParameter;
+    private HikazeiNennkinDeleteProcessParameter processparameter;
 
     @Override
     protected IBatchReader createReader() {
-
-        if (processParameter.get処理状態().equals(new RString("3"))) {
-            return new BatchDbReader(MAPPERPATH_削除, processParameter.mybatisParameter(processParameter.get処理年度(),
-                    processParameter.get処理区分(), processParameter.get対象月(), processParameter.get登録区分()));
-        }
-        return null;
+        return new BatchDbReader(MAPPERPATH_削除, processparameter.mybatisParameter());
     }
 
     @Override
     protected void process(DbT4037HikazeNenkinTaishoshaEntity t) {
-
+        //
     }
 }
