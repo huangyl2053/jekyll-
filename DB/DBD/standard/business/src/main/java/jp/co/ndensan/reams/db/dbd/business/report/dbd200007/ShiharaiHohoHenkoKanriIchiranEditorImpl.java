@@ -57,6 +57,7 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
     private static final RString 右括弧 = new RString("度保険料＞");
     private static final RString 収納情報なし = new RString("1");
     private static final RString 収納情報なし文字 = new RString("収　納　情　報　な　し");
+    private static final RString 住特フラグ_1 = new RString("1");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -238,7 +239,7 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         if (支払方法変更リストEntity_上.get資格区分() != null) {
             source.listUpper1_8 = 支払方法変更リストEntity_上.get資格区分().get名称();
         }
-        if (支払方法変更リストEntity_上.is住特フラグ()) {
+        if (住特フラグ_1.equals(支払方法変更リストEntity_上.get住特フラグ())) {
             source.listUpper1_9 = ホシ;
         }
         source.listUpper1_10 = 支払方法変更リストEntity_上.get生保();
@@ -672,7 +673,7 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         if (支払方法変更リストEntity_下.get資格区分() != null) {
             source.listLower1_8 = 支払方法変更リストEntity_下.get資格区分().get名称();
         }
-        if (支払方法変更リストEntity_下.is住特フラグ()) {
+        if (住特フラグ_1.equals(支払方法変更リストEntity_上.get住特フラグ())) {
             source.listUpper1_9 = ホシ;
         }
         source.listUpper1_10 = 支払方法変更リストEntity_下.get生保();

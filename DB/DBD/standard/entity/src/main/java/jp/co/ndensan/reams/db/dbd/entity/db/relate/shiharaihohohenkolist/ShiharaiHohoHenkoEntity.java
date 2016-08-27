@@ -43,7 +43,7 @@ public class ShiharaiHohoHenkoEntity {
     private FlexibleDate 資格喪失日;
     private ShikakuSoshitsuJiyu 喪失事由;
     private ShikakuKubun 資格区分;
-    private boolean 住特フラグ;
+    private RString 住特フラグ;
     private RString 生保;
 
     private RString 要介護度;
