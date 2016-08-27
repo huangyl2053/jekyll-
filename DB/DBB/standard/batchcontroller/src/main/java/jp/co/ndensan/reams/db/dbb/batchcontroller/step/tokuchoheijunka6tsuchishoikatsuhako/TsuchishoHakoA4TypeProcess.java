@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchWriter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -51,7 +52,6 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
@@ -85,21 +85,19 @@ public class TsuchishoHakoA4TypeProcess extends BatchProcessBase<KarisanteiGakuH
     private IOutputOrder outputOrder;
 
     int 連番 = 1;
-    Decimal 通知書ページ数;
-    Decimal 通知書一覧ページ数;
     private KariSanteigakuHenkoTsuchishoHakkoIchiranData csvData;
-    private CsvWriter csvWriter;
     private boolean csv有無;
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString ファイル名 = new RString("TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranData.csv");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString EUCファイル名 = new RString("TokuChoHeijunkaTsuchishoHakkoIchiran.csv");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBB200004"));
+    private RString eucPathName = RString.EMPTY;
+
+    private CsvWriter<KariSanteigakuHenkoTsuchishoHakkoIchiranData> csvWriter;
     private FileSpoolManager manager;
 
     @Override
     protected void initialize() {
-        通知書ページ数 = Decimal.ZERO;
-        通知書一覧ページ数 = Decimal.ZERO;
         service = TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko.createInstance();
     }
 
@@ -150,10 +148,12 @@ public class TsuchishoHakoA4TypeProcess extends BatchProcessBase<KarisanteiGakuH
         outputOrder = finder.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID_DBB100012, Long.parseLong(parameter.get出力順ID().toString()));
 
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = manager.getEucOutputDirectry();
-        RString tempPathName = Path.combinePath(spoolWorkPath, ファイル名);
-        csvWriter = new CsvWriter.InstanceBuilder(tempPathName).canAppend(false)
-                .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).setNewLine(NewLine.CRLF)
+        eucPathName = Path.combinePath(manager.getEucOutputDirectry(), EUCファイル名);
+        csvWriter = new CsvWriter.InstanceBuilder(eucPathName).canAppend(false)
+                .alwaysWriteHeader(KariSanteigakuHenkoTsuchishoHakkoIchiranData.class)
+                .setDelimiter(CSV_WRITER_DELIMITER)
+                .setEnclosure(EUC_WRITER_ENCLOSURE)
+                .setEncode(Encode.UTF_8withBOM).setNewLine(NewLine.CRLF)
                 .hasHeader(true).build();
     }
 
@@ -185,21 +185,17 @@ public class TsuchishoHakoA4TypeProcess extends BatchProcessBase<KarisanteiGakuH
         KarisanteiHenjunkaHenkoTsuchishoA4TateReport report = new KarisanteiHenjunkaHenkoTsuchishoA4TateReport(
                 仮算定納入通知書情報, 通知書番号.getColumnValue(), ninshoshaSource, kaigoToiawasesakiSource);
         report.writeBy(reportSourceWriterA4);
-        通知書ページ数 = 通知書ページ数.add(new Decimal(batchReportWriterA4.getPageCount()));
         連番++;
     }
 
     @Override
     protected void afterExecute() {
-        通知書一覧ページ数.add(new Decimal(batchReportWriterIchiran.getPageCount()));
+        service.代行プリント送付票の出力とバッチ条件の出力(csv有無, parameter, 帳票制御共通情報, association,
+                outputOrder, batchReportWriterA4.getPageCount());
 
-        service.代行プリント送付票の出力とバッチ条件の出力(csv有無, parameter, 帳票制御共通情報, association, outputOrder,
-                通知書ページ数, 通知書一覧ページ数);
-
-        csvWriter.close();
-        if (csv有無) {
-            manager.spool(EUCファイル名);
-        }
+        IBatchWriter batchWriter = (IBatchWriter) csvWriter;
+        batchWriter.close();
+        manager.spool(eucPathName);
     }
 
 }

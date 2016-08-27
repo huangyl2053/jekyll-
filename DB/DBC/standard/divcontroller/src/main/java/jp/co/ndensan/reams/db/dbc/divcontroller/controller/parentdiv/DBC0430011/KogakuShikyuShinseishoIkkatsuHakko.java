@@ -14,9 +14,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0430011.Kog
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -162,13 +159,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
     public ResponseData<DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter> onclick_btBatch(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
-        LockingKey 排他キー = new LockingKey(controlData.getMenuID());
-        boolean gotLock = RealInitialLocker.tryGetLock(排他キー);
-        if (!gotLock) {
-            throw new PessimisticLockingException();
-        }
         DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter parameter = getHandler(div).createBatchParameter(menuID);
-        RealInitialLocker.release(排他キー);
         return ResponseData.of(parameter).respond();
     }
 

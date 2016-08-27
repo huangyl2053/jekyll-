@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5120001;
 
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5120001.DBD5120001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5120001.NinteiShinseiTorokuUketsukeDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5120001.NinteiShinseiTorokuUketsukeHandler;
-import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5120001.NinteiShinseiTorokuUketsukeValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -278,7 +277,7 @@ public class NinteiShinseiTorokuUketsuke {
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onClick_btnUpdate(NinteiShinseiTorokuUketsukeDiv div) {
 
         //必須項目が未入力の場合、エラーメッセージを表示する。TODO
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        //ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
 //        if (DBD5120001StateName.申請追加.getName().equals(ResponseHolder.getState())) {
 //            getValidationHandler().validateFor申請日の必須入力(pairs, div);
 //            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
@@ -384,17 +383,16 @@ public class NinteiShinseiTorokuUketsuke {
 //            getValidationHandler().validateFor喪失日の必須入力(pairs, div);
 //            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
 //        }
-
         getHandler(div).onClick_btnUpdate();
 
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBD5120001StateName.新規完了);
     }
 
     private NinteiShinseiTorokuUketsukeHandler getHandler(NinteiShinseiTorokuUketsukeDiv div) {
         return new NinteiShinseiTorokuUketsukeHandler(div);
     }
 
-    private NinteiShinseiTorokuUketsukeValidationHandler getValidationHandler() {
-        return new NinteiShinseiTorokuUketsukeValidationHandler();
-    }
+//    private NinteiShinseiTorokuUketsukeValidationHandler getValidationHandler() {
+//        return new NinteiShinseiTorokuUketsukeValidationHandler();
+//    }
 }

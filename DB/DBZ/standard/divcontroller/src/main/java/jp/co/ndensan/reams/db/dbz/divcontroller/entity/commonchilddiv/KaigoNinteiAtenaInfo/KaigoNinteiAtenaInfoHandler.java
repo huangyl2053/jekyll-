@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ur.urz.definition.core.memo.MemoShikibetsuTaisho;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -137,7 +138,7 @@ public class KaigoNinteiAtenaInfoHandler {
         } else if (business.get性別().equals(new RString("2"))) {
             div.getTxtSeibetsu().setValue(new RString("女"));
         }
-        div.getTxtJuminShubetsu().setValue(business.get住民種別コード());
+        div.getTxtJuminShubetsu().setValue(JuminJotai.toValue(business.get住民種別コード()).住民状態略称());
         div.getTxtShikiBetsuCode().setValue(business.get識別コード());
         div.getTxtKojinNo().setValue(new RString(business.get個人番号().toString()));
         div.getTxtYubinNo().setValue(business.get郵便番号());

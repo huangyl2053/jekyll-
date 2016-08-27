@@ -311,8 +311,9 @@ public class ServiceRiyohyoInfo {
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnDelete(ServiceRiyohyoInfoDiv div) {
         ViewStateHolder.put(ViewStateKeys.選択有无, true);
-        getHandler(div).setパネルにデータ反映();
-        getHandler(div).init削除();
+        ServiceRiyohyoInfoDivHandler handler = getHandler(div);
+        handler.setパネルにデータ反映();
+        handler.init削除();
         return ResponseData.of(div).respond();
     }
 
@@ -441,7 +442,9 @@ public class ServiceRiyohyoInfo {
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnModify(ServiceRiyohyoInfoDiv div) {
         ViewStateHolder.put(ViewStateKeys.選択有无, true);
-        getHandler(div).init修正();
+        ServiceRiyohyoInfoDivHandler handler = getHandler(div);
+        handler.setパネルにデータ反映();
+        handler.init修正();
         return ResponseData.of(div).respond();
     }
 

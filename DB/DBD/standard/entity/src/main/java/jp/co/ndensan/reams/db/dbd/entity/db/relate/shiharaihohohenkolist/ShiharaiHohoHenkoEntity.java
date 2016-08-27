@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -39,8 +39,8 @@ public class ShiharaiHohoHenkoEntity {
     private YubinNo 郵便番号;
     private RString 住所;
 
-    private RDate 資格取得日;
-    private RDate 資格喪失日;
+    private FlexibleDate 資格取得日;
+    private FlexibleDate 資格喪失日;
     private ShikakuSoshitsuJiyu 喪失事由;
     private ShikakuKubun 資格区分;
     private int 住特フラグ;
@@ -48,12 +48,12 @@ public class ShiharaiHohoHenkoEntity {
 
     private RString 要介護度;
     private RString 認定有効期間;
-    private RDate 認定日;
+    private FlexibleDate 認定日;
     private RString 認定情報_申請中;
-    private RDate 申請日;
+    private FlexibleDate 申請日;
 
     private RString 償還未払い情報_申請中;
-    private RDate 償還未払い情報_申請日;
+    private FlexibleDate 償還未払い情報_申請日;
     private RString 申請中件数;
     private Code 整理番号;
     private RYearMonth 提供年月;
@@ -65,19 +65,19 @@ public class ShiharaiHohoHenkoEntity {
     private TainoKubun 以前滞納区分;
     private ShiharaiHenkoShuryoKubun 終了状況;
 
-    private RDate 適用開始日_1行目;
-    private RDate 適用終了日_2行目;
-    private RDate 終了受付日_3行目;
-    private RDate 予告発行日_4行目;
-    private RDate 弁明期限_5行目;
-    private RDate 弁明受付日_6行目;
-    private RDate 償還発行日_7行目;
-    private RDate 償還証期限_8行目;
+    private FlexibleDate 適用開始日_1行目;
+    private FlexibleDate 適用終了日_2行目;
+    private FlexibleDate 終了受付日_3行目;
+    private FlexibleDate 予告発行日_4行目;
+    private FlexibleDate 弁明期限_5行目;
+    private FlexibleDate 弁明受付日_6行目;
+    private FlexibleDate 償還発行日_7行目;
+    private FlexibleDate 償還証期限_8行目;
     private RString 差止中件数_9行目;
     private Decimal 差止中金額_10行目;
-    private RDate 差止納付期日_11行目;
+    private FlexibleDate 差止納付期日_11行目;
     private RString 控除件数_12行目;
-    private RDate 控除証期限_13行目;
+    private FlexibleDate 控除証期限_13行目;
     private RString 行14;
     private RString 行15;
     private RString 行16;

@@ -54,7 +54,7 @@ public class KogakuOshiraseTsuchiTeshutsuKigenAriEditor implements IKogakuOshira
             } else {
                 source.ketteiGaku = 支給予定金額;
             }
-//        source.shikyuGaku = 
+//        source.shikyuGaku =
             source.kigenYMD = ReportKomokuEditorUtil.パターン12(target.get申請書提出期限());
             source.remban = target.get連番();
 
@@ -88,10 +88,10 @@ public class KogakuOshiraseTsuchiTeshutsuKigenAriEditor implements IKogakuOshira
             source.shimei6 = target.get送付別宛先().shimei2;
             source.meishoFuyo1 = target.get送付別宛先().meishoFuyo1;
             source.samabunShimeiText = target.get送付別宛先().samabunShimeiText;
+            source.kakkoLeft2 = target.get送付別宛先().kakkoLeft2;
+            source.samabunShimei2 = target.get送付別宛先().samabunShimei2;
+            source.samabunShimeiSmall2 = target.get送付別宛先().samabunShimeiSmall2;
             source.samaBun2 = target.get送付別宛先().samaBun2;
-            source.samabunShimeiSmall2 = target.get送付別宛先().kakkoLeft2;
-            source.kakkoLeft2 = target.get送付別宛先().samabunShimei2;
-            source.samabunShimei2 = target.get送付別宛先().samabunShimeiSmall2;
             source.kakkoRight2 = target.get送付別宛先().kakkoRight2;
             source.kakkoLeft1 = target.get送付別宛先().kakkoLeft1;
             source.samabunShimei1 = target.get送付別宛先().samabunShimei1;

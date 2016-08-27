@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.kogakujigyooshirasetsuchishok
 
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyooshirasetsuchishokigenari.KogakuJigyoOshiraseTsuchishoKigenAriSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyooshirasetsuchishokigenari.KogakuJigyoOshiraseTsuchishopaParameterEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -45,6 +46,7 @@ public class KogakuJigyoOshiraseTsuchishoKigenAriEditor implements IKogakuJigyoO
         source.tsuchibun1 = entity.get通知文1();
         source.tsuchibun2 = entity.get通知文2();
         source.bunshoNo = entity.get文書番号文字列();
+        source.remban = entity.get連番();
 
         if (entity.get申請書提出期限() != null && !entity.is空白()) {
             source.kigenYMD = entity.get申請書提出期限().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
@@ -54,7 +56,10 @@ public class KogakuJigyoOshiraseTsuchishoKigenAriEditor implements IKogakuJigyoO
         if (entity.get申請情報帳票発行一時() != null && !entity.is空白()) {
             source.hihokenshaNameKana = entity.get申請情報帳票発行一時().getShimeikanaChohyo().value();
             source.hihokenshaName = entity.get申請情報帳票発行一時().getMeishoChohyo().value();
-            source.seibetsu = entity.get申請情報帳票発行一時().getSeibetsuCodeChohyo();
+            if (entity.get申請情報帳票発行一時().getSeibetsuCodeChohyo() != null) {
+                source.seibetsu = Seibetsu.toValue(entity.get申請情報帳票発行一時().getSeibetsuCodeChohyo()).get名称();
+            }
+
             source.birthYMD = entity.get申請情報帳票発行一時().getSeinengappiYMDChohyo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.hokensha_no = entity.get申請情報帳票発行一時().getShoKisaiHokenshaNoChohyo().value();

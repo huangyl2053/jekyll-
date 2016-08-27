@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC40000",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "サービスコード情報管理",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC4000011",
+     "toLayoutTitle": "サービス内容登録",
+     "toState": "初期状態"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC4000011",
+     "layoutTitle": "サービス内容登録",
+     "eventName": "処理完了",
+     "destroy": true,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
