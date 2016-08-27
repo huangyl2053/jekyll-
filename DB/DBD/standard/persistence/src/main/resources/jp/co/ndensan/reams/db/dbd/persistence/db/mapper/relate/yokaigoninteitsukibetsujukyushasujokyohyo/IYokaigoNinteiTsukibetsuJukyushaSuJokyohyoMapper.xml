@@ -46,7 +46,7 @@
         (<include refid="select要支援の場合" />)
         UNION
         (<include refid="select自立の場合" />)
-        ORDER BY 取得条件
+        ORDER BY 市町村コード,取得条件
     </select>
     
     <sql id = "selectSql1">
