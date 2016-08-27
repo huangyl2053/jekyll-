@@ -59,7 +59,7 @@ public class KarisanteiHenkoTsuchishoB5YokoReportSource implements IReportSource
     @ReportExpandedInfo(id = "本人")
     @ReportItem(name = "hihokenshaNo", length = 10, order = 22)
     public RString hihokenshaNo;
-    @ReportPerson
+    @ReportPerson(id = "本人")
     @ReportItem(name = "shikibetsuCode", length = 15, order = 23)
     public RString shikibetsuCode;
     @ReportItem(name = "shutokuYMDMae", length = 10, order = 24)
