@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 /**
  * 年齢階級別利用状況作成 Editorクラスです。
  *
- * @reamsid_L DBE-3470-040 dongyabin
+ * @reamsid_L DBC-3470-040 dongyabin
  */
 public class NenreiKeikyuBetsuRiyoJyokyoEditor implements INenreiKeikyuBetsuRiyoJyokyoEditor {
 

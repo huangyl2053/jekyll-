@@ -13,7 +13,7 @@ import lombok.Setter;
 /**
  * 年齢階級別利用状況作成の帳票パラメータクラスです。
  *
- * @reamsid_L DBE-3470-040 dongyabin
+ * @reamsid_L DBC-3470-040 dongyabin
  */
 @Getter
 @Setter

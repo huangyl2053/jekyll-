@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 年齢階級別利用状況作成 Reportクラスです。
  *
- * @reamsid_L DBE-3470-040 dongyabin
+ * @reamsid_L DBC-3470-040 dongyabin
  */
 public class NenreiKeikyuBetsuRiyoJyokyoReport extends Report<NenreiKeikyuBetsuRiyoJyokyoReportSource> {
 
