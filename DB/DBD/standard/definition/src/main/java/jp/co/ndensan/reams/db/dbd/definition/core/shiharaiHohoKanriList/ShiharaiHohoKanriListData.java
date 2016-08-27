@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohokanrilist;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,5 +32,7 @@ public class ShiharaiHohoKanriListData implements Serializable {
     private RString 償還決定登録者1の選択;
     private RString 償還決定登録者2の選択;
     private Long 改頁出力順ID;
-    private RString 帳票ID;
+    private ReportId 帳票ID;
+    private ReportId 帳票分類ID;
+    private RDateTime 帳票作成日時;
 }

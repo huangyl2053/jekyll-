@@ -23,7 +23,14 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShiharaiHohoHenkoKanriTempTableEntity extends DbTableEntityBase<ShiharaiHohoHenkoKanriTempTableEntity> implements IDbAccessable {
 
-    public static final RString TABLE_NAME = new RString("ShiharaiHohoHenkoKanriTempTable");
+    /**
+     * 支払方法変更管理対象者一時テーブル名称
+     */
+    public static final RString TABLE_NAME;
+
+    static {
+        TABLE_NAME = new RString("ShiharaiHohoHenkoKanriTempTable");
+    }
 
     @TempTableColumnOrder(1)
     private HihokenshaNo hihokenshaNo;

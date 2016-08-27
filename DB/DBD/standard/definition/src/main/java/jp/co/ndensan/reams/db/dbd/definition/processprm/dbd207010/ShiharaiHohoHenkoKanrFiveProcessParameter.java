@@ -75,7 +75,6 @@ public class ShiharaiHohoHenkoKanrFiveProcessParameter implements IBatchProcessP
         this.差止登録者２号の選択 = 差止登録者２号の選択;
         this.償還予告登録者１号の選択 = 償還予告登録者１号の選択;
         this.償還決定登録者１号の選択 = 償還決定登録者１号の選択;
-        this.償還決定登録者１号の選択 = 償還決定登録者１号の選択;
         this.差止中あり者のみの選択 = 償還決定登録者１号_差止中あり者のみの選択;
         this.保険料控除あり者のみの選択 = 償還決定登録者１号_保険料控除あり者のみの選択;
         this.改頁出力順ID = 改頁出力順ID;

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbddt13011;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuHohoKubun;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
@@ -92,13 +91,7 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
      * @param 日付範囲From 日付範囲From
      * @param 日付範囲To 日付範囲To
      * @param 直近データ抽出 直近データ抽出
-     * @param 喪失区分 喪失区分
-     * @param 項目名付加 項目名付加
-     * @param 連番付加 連番付加
-     * @param 日付スラッシュ付加 日付スラッシュ付加
      * @param 宛名抽出条件 宛名抽出条件
-     * @param 出力順 出力順
-     * @param 出力項目 出力項目
      * @param psmShikibetsuTaisho 宛名識別対象PSM
      * @param psmAtesaki 宛名識別対象PSM
      */
@@ -108,13 +101,7 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
             FlexibleDate 日付範囲From,
             FlexibleDate 日付範囲To,
             boolean 直近データ抽出,
-            SoshitsuKubun 喪失区分,
-            boolean 項目名付加,
-            boolean 連番付加,
-            boolean 日付スラッシュ付加,
             AtenaSelectBatchParameter 宛名抽出条件,
-            Long 出力順,
-            RString 出力項目,
             RString psmShikibetsuTaisho,
             RString psmAtesaki) {
 
@@ -139,7 +126,7 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
         RString 抽出項目区分_範囲_入所日 = new RString("入所日");
         RString 抽出項目区分_範囲_退所日 = new RString("退所日");
 
-        if (抽出方法区分_基準日.equals(抽出方法区分)) {
+        if (抽出方法区分_基準日.equals(抽出方法区分.get名称())) {
             is抽出方法区分_基準日 = true;
         }
         if (抽出方法区分_範囲.equals(抽出方法区分.get名称())) {

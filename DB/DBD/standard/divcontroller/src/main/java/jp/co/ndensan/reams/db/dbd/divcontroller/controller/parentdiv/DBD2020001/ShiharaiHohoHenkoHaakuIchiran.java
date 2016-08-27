@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd2020001.ShiharaiHohoHenkoHaakuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd207010.ShiharaiHohoHenkoHaakuIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020001.ShiharaiHohoHenkoHakuListMainDiv;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -20,7 +22,7 @@ public class ShiharaiHohoHenkoHaakuIchiran {
 
     private static final RString SELECTED_VALUE = new RString("0");
     private static final RString UN_SELECTED_VALUE = new RString("1");
-    private static final RString REPORTID = new RString("DBD200006_ShiharaiHohoHenkoHaakuIchiran");
+    private static final ReportId REPORTID = new ReportId("DBD200006_ShiharaiHohoHenkoHaakuIchiran");
 
     /**
      * コンストラクタです。
@@ -38,9 +40,9 @@ public class ShiharaiHohoHenkoHaakuIchiran {
         ShiharaiHohoHenkoHaakuIchiranBatchParameter parameter = new ShiharaiHohoHenkoHaakuIchiranBatchParameter();
         parameter.setKijunYMD(div.getChushutsuJoken().getTxtKijunYMD().getValue());
         if (!div.getRadHihokenshaAll().getSelectedKey().isNullOrEmpty()) {
-            parameter.setHihokenshaAll(Long.parseLong(SELECTED_VALUE.toString()));
+            parameter.setHihokenshaAll(SELECTED_VALUE);
         } else {
-            parameter.setHihokenshaAll(Long.parseLong(UN_SELECTED_VALUE.toString()));
+            parameter.setHihokenshaAll(UN_SELECTED_VALUE);
         }
         parameter.setTainoKikanHihokenshaAll(get滞納期間(div.getTxtTainoKikanHihokenshaAll().getValue()));
         parameter.setJukyushaAll(isCheckedValue(div.getChkJukyushaAll().getSelectedValues()));
@@ -63,20 +65,22 @@ public class ShiharaiHohoHenkoHaakuIchiran {
         parameter.setShokanKetteiYMDTo(div.getTxtShokanKetteiYMDTo().getValue());
         parameter.setTab(div.getCcdChohyoShutsuryokujun().get出力順ID());
         parameter.setReportId(REPORTID);
+        parameter.setReportTypeId(REPORTID);
+        parameter.setReportCreateDateTime(RDateTime.now());
         return parameter;
     }
 
-    private Long isCheckedValue(List<RString> isSelectedList) {
+    private RString isCheckedValue(List<RString> isSelectedList) {
         if (isSelectedList != null && !isSelectedList.isEmpty()) {
-            return Long.parseLong(SELECTED_VALUE.toString());
+            return SELECTED_VALUE;
         }
-        return Long.parseLong(UN_SELECTED_VALUE.toString());
+        return UN_SELECTED_VALUE;
     }
 
-    private Long get滞納期間(Decimal value) {
+    private int get滞納期間(Decimal value) {
         if (value == null) {
-            return Long.parseLong(SELECTED_VALUE.toString());
+            return Integer.parseInt(SELECTED_VALUE.toString());
         }
-        return value.longValue();
+        return value.intValue();
     }
 }

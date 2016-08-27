@@ -71,7 +71,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -130,7 +129,6 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private static final RString 英数字ファイル名 = new RString("HanyoList_ShisetuNyutaisyo.csv");
     private static final RString 出力条件表_保険者 = new RString("保険者：");
     private static final RString 出力条件表_基準日 = new RString("基準日：");
-    private static final RString 出力条件表_取得日 = new RString("取得日：～　");
     private static final RString 出力条件表_対象データ_直近のみ = new RString("対象データ：直近のみ");
     private static final RString 出力条件表_喪失区分 = new RString("喪失区分：");
     private static final RString 出力条件表_年齢 = new RString("年齢：");
@@ -186,7 +184,6 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
             + "IGeneralPurposeListOutputMapper.getGeneralPurposeListOutputInfo");
 
     private Association 地方公共団体情報;
-    private RDateTime sysDateTime;
     private HokenshaList 保険者リスト;
     private FileSpoolManager manager;
     private RString eucFilePath;
@@ -812,20 +809,6 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
             return date.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
         }
         return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
-    }
-
-    private RString edit月日_yyyymm(FlexibleDate date) {
-
-        if (processParamter.is日付スラッシュ付加()) {
-            if (!FlexibleDate.EMPTY.equals(date)) {
-                return date.getYearMonth().toDateString();
-            }
-            return RString.EMPTY;
-        }
-        if (!FlexibleDate.EMPTY.equals(date)) {
-            return date.getYearMonth().toDateString();
-        }
-        return RString.EMPTY;
     }
 
     private RString get住所_番地_方書(RString 住所, RString 番地, RString 方書) {
