@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /*
  * このコードはツールによって生成されました。
- * @reamsid_L DBC-4390-010 xupeng
+ * @reamsid_L DBC-4390-030 xupeng
  */
 public interface IKyodoJukyushaIdoRenrakuhyoDiv extends ICommonChildDivBaseProperties {
 
