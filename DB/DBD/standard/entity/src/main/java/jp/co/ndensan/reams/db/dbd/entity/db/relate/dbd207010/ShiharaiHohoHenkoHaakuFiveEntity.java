@@ -54,10 +54,10 @@ public class ShiharaiHohoHenkoHaakuFiveEntity {
     private FlexibleYear 収納状況_調定年度;
     private FlexibleYear 収納状況_賦課年度;
     private RString 収納状況_通知書番号;
-    private FlexibleYear 収納状況_期;
+    private int 収納状況_期;
     private HihokenshaNo 収納状況_被保険者番号;
     private ShikibetsuCode 収納状況_識別コード;
-    private FlexibleYear 収納状況_納期限;
+    private FlexibleDate 収納状況_納期限;
     private Decimal 収納状況_調定額;
     private FlexibleDate 収納状況_収入日;
     private Decimal 収納状況_収入額;
