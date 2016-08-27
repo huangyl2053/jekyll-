@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd207010.ShiharaiHohoHe
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuOneEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.temptable.ShiharaiHohoHenkoTempTableEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.temptable.ShunoStatusTempTableEntity;
-import jp.co.ndensan.reams.db.dbz.definition.core.taino.MinoKannoKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -457,10 +456,10 @@ public class ShiharaiHohoHenkoHaakuOneProcess extends BatchProcessBase<ShiharaiH
 
     private RString edit時効区分(RString 完納_未納区分, FlexibleDate 時効起算日, FlexibleDate 基準日) {
 
-        FlexibleDate 時効起算日2年後 = 時効起算日.plusYear(2);
-        if (MinoKannoKubun.未納あり.getコード().equals(完納_未納区分) && 時効起算日2年後.isBeforeOrEquals(基準日)) {
-            return 時効到来;
-        }
+//        FlexibleDate 時効起算日2年後 = 時効起算日.plusYear(2);
+//        if (MinoKannoKubun.未納あり.getコード().equals(完納_未納区分) && 時効起算日2年後.isBeforeOrEquals(基準日)) {
+//            return 時効到来;
+//        }
         return 時効未到来;
     }
 
