@@ -109,7 +109,7 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
 
     @Override
     protected void usualProcess(ChosahyoIkenshoCheckListRelateEntity entity) {
-        if (!hasBrek(getBefore(), entity)) {
+        if (getBefore() != null && !hasBrek(getBefore(), entity)) {
             AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
             index_tmp++;
             ChosahyoIkenshoCheckListData data = new ChosahyoIkenshoCheckListData(entity);
