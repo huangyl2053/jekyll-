@@ -234,12 +234,26 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
     }
 
     private void set申請決定を同時に行う(ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity 控除対象者データ) {
-        if (nextTaishoNendo == null) {
-            set対象の申請データを更新する(控除対象者データ);
+        if (!find障がい者控除(parameter.get対象年度(), 控除対象者データ.get被保険者番号(), 証記載保険者番号)) {
+            if (nextTaishoNendo == null) {
+                set対象の申請データを更新する(控除対象者データ);
+            } else {
+                set履歴の途中に追加(控除対象者データ);
+            }
         } else {
-            set履歴の途中に追加(控除対象者データ);
+            set更新申請データ(控除対象者データ);
         }
 
+    }
+
+    private void set更新申請データ(ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity 控除対象者データ) {
+        for (DbT4038ShogaishaKoujoEntity 障がい者控除 : 障がい者控除情報List) {
+            if (障がい者控除.getTaishoNendo().equals(taishoNendo) && 障がい者控除.getHihokenshaNo().equals(控除対象者データ.get被保険者番号())
+                    && 障がい者控除.getShoKisaiHokenshaNo().equals(証記載保険者番号)) {
+                障がい者控除.setKetteiKubun(new RString("1"));
+                dbt4038tableWriter.update(障がい者控除);
+            }
+        }
     }
 
     private void set対象の申請データを更新する(ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity 控除対象者データ) {
@@ -270,11 +284,13 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
 
     private boolean isRecordExists(DbT4010GemmenGengakuShinseiEntity entity) {
         boolean state = false;
-        for (DbT4010GemmenGengakuShinseiEntity 減免減額Entity : 減免減額申請List) {
-            if (減免減額Entity.getHihokenshaNo().equals(entity.getHihokenshaNo())
-                    && (減免減額Entity.getShinseiRirekiNo() == entity.getShinseiRirekiNo())
-                    && 減免減額Entity.getShoKisaiHokenshaNo().equals(entity.getShoKisaiHokenshaNo())) {
-                state = true;
+        if (entity != null) {
+            for (DbT4010GemmenGengakuShinseiEntity 減免減額Entity : 減免減額申請List) {
+                if (減免減額Entity.getHihokenshaNo().equals(entity.getHihokenshaNo())
+                        && (減免減額Entity.getShinseiRirekiNo() == entity.getShinseiRirekiNo())
+                        && 減免減額Entity.getShoKisaiHokenshaNo().equals(entity.getShoKisaiHokenshaNo())) {
+                    state = true;
+                }
             }
         }
         return state;
@@ -283,14 +299,17 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
     private void set履歴の途中に追加(ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity 控除対象者データ) {
         for (DbT4038ShogaishaKoujoEntity entity : 障がい者控除情報List) {
             FlexibleYear getTaishonendo = entity.getTaishoNendo();
-            if (getTaishonendo != null && entity.getHihokenshaNo().equals(控除対象者データ.get被保険者番号()) && !getTaishonendo.isBeforeOrEquals(taishoNendo)) {
+            if (getTaishonendo != null && entity.getHihokenshaNo().equals(控除対象者データ.get被保険者番号()) && !getTaishonendo.isBefore(taishoNendo)) {
                 障がい者控除情報ListClone.remove(entity);
                 dbt4038tableWriter.delete(entity);
 
-                減免減額申請ListClone.remove(find減免減額申請(entity, false));
-                tableWriter.delete(find減免減額申請(entity, false));
+                if (isRecordExists(find減免減額申請(entity, false))) {
+                    減免減額申請ListClone.remove(find減免減額申請(entity, false));
+                    tableWriter.delete(find減免減額申請(entity, false));
+                }
             }
         }
+
         dbt4038Entity = new DbT4038ShogaishaKoujoEntity();
         dbt4038Entity.setRirekiNo(rirekiNo + 1);
         set障がい者控除(控除対象者データ, dbt4038Entity);
@@ -353,6 +372,16 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
         return null;
     }
 
+    private boolean find障がい者控除(FlexibleYear taishoNendo, HihokenshaNo hihokenshaNo, ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+        for (DbT4038ShogaishaKoujoEntity 障がい者控除 : 障がい者控除情報List) {
+            if (障がい者控除.getTaishoNendo().equals(taishoNendo) && 障がい者控除.getHihokenshaNo().equals(hihokenshaNo)
+                    && 障がい者控除.getShoKisaiHokenshaNo().equals(shoKisaiHokenshaNo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private DbT4038ShogaishaKoujoEntity set障がい者控除(ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity 控除対象者データ, DbT4038ShogaishaKoujoEntity newEntity) {
         if (控除対象者データ.get被保険者番号() == null || 控除対象者データ.get被保険者番号().isEmpty()) {
             newEntity.setHihokenshaNo(HihokenshaNo.EMPTY);
@@ -378,9 +407,9 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
         }
 
         if (控除対象者データ.get障害高齢者の日常生活自立度コード() == null || 控除対象者データ.get障害高齢者の日常生活自立度コード().isEmpty()) {
-            newEntity.setShikakuSoshitsuJiyuCode(RString.EMPTY);
+            newEntity.setShogaiNichijoSeikatsuJiritsudoCode(Code.EMPTY);
         } else {
-            newEntity.setShikakuSoshitsuJiyuCode(控除対象者データ.get障害高齢者の日常生活自立度コード().getColumnValue());
+            newEntity.setShogaiNichijoSeikatsuJiritsudoCode(new Code(控除対象者データ.get障害高齢者の日常生活自立度コード().toString()));
         }
 
         newEntity.setShogaishaTechoUmu(false);
@@ -402,7 +431,7 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
         newEntity.setKetteiYMD(parameter.get決定年月日());
         newEntity.setTekiyoKaishiYMD(FlexibleDate.EMPTY);
         newEntity.setTekiyoShuryoYMD(FlexibleDate.EMPTY);
-        newEntity.setKetteiKubun(new RString(1));
+        newEntity.setKetteiKubun(new RString("1"));
         newEntity.setHiShoninRiyu(RString.EMPTY);
         return newEntity;
     }

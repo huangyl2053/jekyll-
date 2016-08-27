@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJokyohyoEditor {
 
-    private static final RString NOCOUNT = new RString("000000");
     private final FlexibleDate 基準日;
     private final RString 年齢;
     private final RString 地区;
