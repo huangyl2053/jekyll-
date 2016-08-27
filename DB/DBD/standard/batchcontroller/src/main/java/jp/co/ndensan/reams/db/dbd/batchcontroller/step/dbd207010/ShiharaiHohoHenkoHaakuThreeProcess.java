@@ -24,8 +24,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShiharaiHohoHenkoHaakuThreeProcess extends BatchProcessBase<ShiharaiHohoHenkoHaakuThreeEntity> {
 
-    private static final RString 管理区分_1 = new RString("1");
-
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihohohenkohaakuichiran."
             + "IShiharaiHohoHenkoHakuListMainMapper.find最大履歴情報");

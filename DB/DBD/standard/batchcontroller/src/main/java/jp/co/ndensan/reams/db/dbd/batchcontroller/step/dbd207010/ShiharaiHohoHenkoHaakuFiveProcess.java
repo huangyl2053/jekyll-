@@ -121,6 +121,7 @@ public class ShiharaiHohoHenkoHaakuFiveProcess extends BatchProcessBase<Shiharai
         result.add(受給支給決定日抽出の開始.concat(edit日期(parameter.get受給支給決定日抽出の開始())));
         result.add(受給支給決定日抽出の終了.concat(edit日期(parameter.get受給支給決定日抽出の終了())));
 
+        // todo
         //parameter.get改頁出力順ID().toString())
         result.add(改頁出力順.concat(new RString("1")));
         result.add(帳票分類ID.concat(parameter.get帳票分類ID().getColumnValue()));

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd207010.ShiharaiHohoHe
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuOneEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.temptable.ShiharaiHohoHenkoTempTableEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.temptable.ShunoStatusTempTableEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.taino.MinoKannoKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -49,11 +50,10 @@ public class ShiharaiHohoHenkoHaakuOneProcess extends BatchProcessBase<ShiharaiH
 //    private static final RString 時効成立 = new RString("時効成立");
 //    private static final RString 納期限未到来 = new RString("納期限未到来");
 //    private static final RString 滞納期 = new RString("滞納期");
-    private boolean is時効起算日;
-    private boolean is督促状発行年月日;
-    private boolean is納期限の翌日;
-    private boolean is収入年月日;
-
+//    private boolean is時効起算日;
+//    private boolean is督促状発行年月日;
+//    private boolean is納期限の翌日;
+//    private boolean is収入年月日;
     private FlexibleDate 時効成立日;
 //    private RString 滞納区分;
 //    private RString 時効起算事由;
@@ -67,7 +67,7 @@ public class ShiharaiHohoHenkoHaakuOneProcess extends BatchProcessBase<ShiharaiH
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
 
     @BatchWriter
-    private BatchEntityCreatedTempTableWriter shiharaiHohoHenkoTempTableWriter;
+    private BatchEntityCreatedTempTableWriter shiharaiHohoWriter;
 
     @Override
     protected IBatchReader createReader() {
@@ -81,7 +81,7 @@ public class ShiharaiHohoHenkoHaakuOneProcess extends BatchProcessBase<ShiharaiH
 
     @Override
     protected void createWriter() {
-        shiharaiHohoHenkoTempTableWriter = BatchEntityCreatedTempTableWriterBuilders.createBuilder(ShiharaiHohoHenkoTempTableEntity.class)
+        shiharaiHohoWriter = BatchEntityCreatedTempTableWriterBuilders.createBuilder(ShiharaiHohoHenkoTempTableEntity.class)
                 .tempTableName(ShiharaiHohoHenkoTempTableEntity.TABLE_NAME).build();
 
         tmpTableWriter = BatchEntityCreatedTempTableWriterBuilders.createBuilder(ShunoStatusTempTableEntity.class)
@@ -90,7 +90,7 @@ public class ShiharaiHohoHenkoHaakuOneProcess extends BatchProcessBase<ShiharaiH
 
     @Override
     protected void process(ShiharaiHohoHenkoHaakuOneEntity t) {
-        shiharaiHohoHenkoTempTableWriter.insert(create支払方法変更情報一時テーブルEntity(t));
+        shiharaiHohoWriter.insert(create支払方法変更情報一時テーブルEntity(t));
 
         ShunoStatusTempTableEntity tempTableEntity = create収納状況一時テーブル(t);
         tmpTableWriter.insert(tempTableEntity);
@@ -453,10 +453,11 @@ public class ShiharaiHohoHenkoHaakuOneProcess extends BatchProcessBase<ShiharaiH
 
     private RString edit時効区分(RString 完納_未納区分, FlexibleDate 時効起算日, FlexibleDate 基準日) {
 
-//        FlexibleDate 時効起算日2年後 = 時効起算日.plusYear(2);
-//        if (MinoKannoKubun.未納あり.getコード().equals(完納_未納区分) && 時効起算日2年後.isBeforeOrEquals(基準日)) {
-//            return 時効到来;
-//        }
+        // todo
+        //FlexibleDate 時効起算日2年後 = FlexibleDate.MAX;
+        if (MinoKannoKubun.未納あり.getコード().equals(完納_未納区分) && 時効起算日.isBeforeOrEquals(基準日)) {
+            return 時効到来;
+        }
         return 時効未到来;
     }
 
