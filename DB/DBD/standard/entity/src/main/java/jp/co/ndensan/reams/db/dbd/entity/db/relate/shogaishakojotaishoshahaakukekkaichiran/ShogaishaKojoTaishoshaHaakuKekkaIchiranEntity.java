@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.shogaishakojotaishoshahaakukekkaichiran;
 
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4010GemmenGengakuShinseiEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4038ShogaishaKoujoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -32,6 +30,5 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity {
     private LasdecCode 広住特措置元市町村コード;
     private FlexibleDate 資格喪失年月日;
     private RString 資格喪失事由コード;
-    private DbT4038ShogaishaKoujoEntity 障がい者控除Entity;
-    private DbT4010GemmenGengakuShinseiEntity 減免減額申請Entity;
+
 }
