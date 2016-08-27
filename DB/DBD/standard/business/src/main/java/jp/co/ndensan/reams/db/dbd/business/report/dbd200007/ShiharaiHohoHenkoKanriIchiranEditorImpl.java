@@ -258,7 +258,7 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
                     new FlexibleDate(支払方法変更リストEntity_上.get認定有効期間().substring(INDEX_9)).wareki().
                     eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
-        source.listUpper1_13 = 支払方法変更リストEntity_上.get認定情報_申請中();
+        source.listUpper1_13 = 支払方法変更リストEntity_上.get償還未払い情報_申請中();
         if (支払方法変更リストEntity_上.get申請日() != null) {
             source.listUpper1_14 = 支払方法変更リストEntity_上.get申請日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -271,7 +271,7 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
     }
 
     private ShiharaiHohoHenkoKanriIchiranReportSource edit上部の償還未払い情報(ShiharaiHohoHenkoKanriIchiranReportSource source) {
-        source.listUpper2_8 = 支払方法変更リストEntity_上.get償還未払い情報_申請中();
+        source.listUpper2_8 = 支払方法変更リストEntity_上.get認定情報_申請中();
         if (支払方法変更リストEntity_上.get償還未払い情報_申請日() != null) {
             source.listUpper2_9 = 支払方法変更リストEntity_上.get償還未払い情報_申請日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -696,7 +696,7 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
                     new FlexibleDate(支払方法変更リストEntity_下.get認定有効期間().substring(INDEX_9)).wareki().
                     eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
-        source.listLower1_13 = 支払方法変更リストEntity_下.get認定情報_申請中();
+        source.listLower1_13 = 支払方法変更リストEntity_下.get償還未払い情報_申請中();
         if (支払方法変更リストEntity_下.get申請日() != null) {
             source.listLower1_14 = 支払方法変更リストEntity_下.get申請日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -709,7 +709,7 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
     }
 
     private ShiharaiHohoHenkoKanriIchiranReportSource edit下部の償還未払い情報(ShiharaiHohoHenkoKanriIchiranReportSource source) {
-        source.listLower2_8 = 支払方法変更リストEntity_下.get償還未払い情報_申請中();
+        source.listLower2_8 = 支払方法変更リストEntity_下.get認定情報_申請中();
         if (支払方法変更リストEntity_下.get償還未払い情報_申請日() != null) {
             source.listLower2_9 = 支払方法変更リストEntity_下.get償還未払い情報_申請日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
