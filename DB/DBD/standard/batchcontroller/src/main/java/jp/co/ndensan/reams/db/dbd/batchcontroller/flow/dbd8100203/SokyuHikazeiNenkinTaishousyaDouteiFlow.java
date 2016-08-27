@@ -36,6 +36,7 @@ public class SokyuHikazeiNenkinTaishousyaDouteiFlow extends BatchFlowBase<SokyuH
     private static final String 非課税年金対象者情報_遡及不一致CSV = "非課税年金対象者情報_遡及不一致CSV";
     private static final String 非課税年金対象者情報_生年月日CSV = "非課税年金対象者情報_生年月日CSV";
     private static final String 非課税年金対象者更新 = "非課税年金対象者更新";
+    private static final RString テスト処理 = new RString("1");
 
     @Override
     protected void defineFlow() {
@@ -44,7 +45,9 @@ public class SokyuHikazeiNenkinTaishousyaDouteiFlow extends BatchFlowBase<SokyuH
         executeStep(非課税年金対象者情報_遡及該当一覧CSV);
         executeStep(非課税年金対象者情報_遡及不一致CSV);
         executeStep(非課税年金対象者情報_生年月日CSV);
-        executeStep(非課税年金対象者更新);
+        if (!テスト処理.equals(getParameter().getテスト処理())) {
+            executeStep(非課税年金対象者更新);
+        }
     }
 
     /**
