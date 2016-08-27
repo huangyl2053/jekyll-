@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.chosahyoikenshochecklist.ChosahyoIkenshoCheckListData;
 import jp.co.ndensan.reams.db.dbe.business.report.chosahyoikenshochecklist.ChosahyoIkenshoCheckListReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosayoteimitei.ChosahyoIkenshoCheckListProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyoikenshochecklist.ChosahyoIkenshoCheckListRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyoikenshochecklist.ChosahyoIkenshoCheckListReportEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahyoikenshochecklist.ChosahyoIkenshoCheckListReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosairaihenko.NinteichosaIraiHenkoReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -65,6 +67,7 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
     private int index_tmp = 0;
     private RString 導入団体コード;
     private RString 市町村名;
+    private ChosahyoIkenshoCheckListReportEntity reportData = new ChosahyoIkenshoCheckListReportEntity();
 
     @Override
     protected void beforeExecute() {
@@ -92,7 +95,9 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
         if (index_tmp == 0) {
             ChosahyoIkenshoCheckListRelateEntity entity = new ChosahyoIkenshoCheckListRelateEntity();
             entity.setDbT5101_hihokenshaName(new AtenaMeisho("該当データがありません"));
-            ChosahyoIkenshoCheckListReport report = new ChosahyoIkenshoCheckListReport(entity);
+            ChosahyoIkenshoCheckListData data = new ChosahyoIkenshoCheckListData(entity);
+            reportData = data.get帳票データ(reportData);
+            ChosahyoIkenshoCheckListReport report = new ChosahyoIkenshoCheckListReport(reportData);
             report.writeBy(reportSourceWriter);
         }
         バッチ出力条件リストの出力();
@@ -102,16 +107,19 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
     protected void usualProcess(ChosahyoIkenshoCheckListRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         index_tmp++;
-        ChosahyoIkenshoCheckListReport report = new ChosahyoIkenshoCheckListReport(entity);
-        report.writeBy(reportSourceWriter);
+        ChosahyoIkenshoCheckListData data = new ChosahyoIkenshoCheckListData(entity);
+        reportData = data.get帳票データ(reportData);
     }
 
     @Override
     protected void keyBreakProcess(ChosahyoIkenshoCheckListRelateEntity current) {
         if (hasBrek(getBefore(), current)) {
             AccessLogger.log(AccessLogType.照会, toPersonalData(current));
-            ChosahyoIkenshoCheckListReport report = new ChosahyoIkenshoCheckListReport(current);
+            ChosahyoIkenshoCheckListReport report = new ChosahyoIkenshoCheckListReport(reportData);
             report.writeBy(reportSourceWriter);
+            ChosahyoIkenshoCheckListData data = new ChosahyoIkenshoCheckListData(current);
+            reportData = new ChosahyoIkenshoCheckListReportEntity();
+            reportData = data.get帳票データ(reportData);
             index_tmp++;
         }
     }
