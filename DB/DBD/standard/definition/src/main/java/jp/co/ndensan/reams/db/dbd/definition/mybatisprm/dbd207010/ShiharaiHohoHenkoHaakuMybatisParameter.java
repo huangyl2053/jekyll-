@@ -22,9 +22,9 @@ import lombok.Setter;
 @Setter
 public class ShiharaiHohoHenkoHaakuMybatisParameter implements IMyBatisParameter {
 
-    private static final Long 被保険者選択_被保険者全員 = Long.parseLong("0");
+    private static final RString 被保険者選択_被保険者全員 = new RString("0");
 
-    private static final Long 選択_チェックオン = Long.parseLong("0");
+    private static final RString 選択_チェックオン = new RString("0");
 
     private RDate 基準日;
     private RString 出力順;
@@ -38,14 +38,14 @@ public class ShiharaiHohoHenkoHaakuMybatisParameter implements IMyBatisParameter
     private boolean is受給申請中者;
     private boolean is受給支給決定日抽出;
 
-    private Long 被保険者全員の滞納期間;
-    private Long 受給者全員の滞納期間;
-    private Long 受給認定申請中者の滞納期間;
-    private Long 受給認定日抽出の滞納期間;
+    private int 被保険者全員の滞納期間;
+    private int 受給者全員の滞納期間;
+    private int 受給認定申請中者の滞納期間;
+    private int 受給認定日抽出の滞納期間;
     private FlexibleDate 受給認定日抽出の開始;
     private FlexibleDate 受給認定日抽出の終了;
-    private Long 償還申請中者の滞納期間;
-    private Long 償還支給決定日抽出の滞納期間;
+    private int 償還申請中者の滞納期間;
+    private int 償還支給決定日抽出の滞納期間;
     private FlexibleDate 受給支給決定日抽出の開始;
     private FlexibleDate 受給支給決定日抽出の終了;
 
@@ -72,25 +72,25 @@ public class ShiharaiHohoHenkoHaakuMybatisParameter implements IMyBatisParameter
      * @param 出力順 出力順
      */
     public ShiharaiHohoHenkoHaakuMybatisParameter(FlexibleDate 基準日,
-            Long 被保険者選択,
-            Long 被保険者全員の滞納期間,
-            Long 受給者全員,
-            Long 受給者全員の滞納期間,
-            Long 受給認定申請中者,
-            Long 受給認定申請中者の滞納期間,
-            Long 受給認定日抽出,
-            Long 受給認定日抽出の滞納期間,
+            RString 被保険者選択,
+            int 被保険者全員の滞納期間,
+            RString 受給者全員,
+            int 受給者全員の滞納期間,
+            RString 受給認定申請中者,
+            int 受給認定申請中者の滞納期間,
+            RString 受給認定日抽出,
+            int 受給認定日抽出の滞納期間,
             FlexibleDate 受給認定日抽出の開始,
             FlexibleDate 受給認定日抽出の終了,
-            Long 受給申請中者,
-            Long 受給申請中者の滞納期間,
-            Long 受給支給決定日抽出,
-            Long 受給支給決定日抽出の滞納期間,
+            RString 受給申請中者,
+            int 受給申請中者の滞納期間,
+            RString 受給支給決定日抽出,
+            int 受給支給決定日抽出の滞納期間,
             FlexibleDate 受給支給決定日抽出の開始,
             FlexibleDate 受給支給決定日抽出の終了,
             RString 出力順) {
 
-        if (基準日 != null && !FlexibleDate.EMPTY.equals(基準日)) {
+        if (基準日 != null) {
             this.基準日 = new RDate(基準日.toString());
         }
 
@@ -116,66 +116,42 @@ public class ShiharaiHohoHenkoHaakuMybatisParameter implements IMyBatisParameter
         set選択_受給支給決定日抽出(受給支給決定日抽出);
     }
 
-    private void set被保険者選択について(Long 被保険者選択) {
-        if (被保険者選択_被保険者全員 == 被保険者選択) {
+    private void set被保険者選択について(RString 被保険者選択) {
+        if (被保険者選択_被保険者全員.equals(被保険者選択)) {
             is被保険者選択_被保険者全員_0 = true;
         } else {
             is被保険者選択_被保険者全員以外_1 = true;
         }
     }
 
-    private void set選択_受給者全員(Long 受給者全員) {
+    private void set選択_受給者全員(RString 受給者全員) {
 
-        if (選択_チェックオン == 受給者全員) {
+        if (選択_チェックオン.equals(受給者全員)) {
             is受給者全員 = true;
         }
     }
 
-    private void set選択_受給認定申請中者(Long 受給認定申請中者) {
-        if (選択_チェックオン == 受給認定申請中者) {
+    private void set選択_受給認定申請中者(RString 受給認定申請中者) {
+        if (選択_チェックオン.equals(受給認定申請中者)) {
             is受給認定申請中者 = true;
         }
     }
 
-    private void set選択_受給認定日抽出(Long 受給認定日抽出) {
-        if (選択_チェックオン == 受給認定日抽出) {
+    private void set選択_受給認定日抽出(RString 受給認定日抽出) {
+        if (選択_チェックオン.equals(受給認定日抽出)) {
             is受給認定日抽出 = true;
         }
     }
 
-    private void set選択_受給申請中者(Long 受給申請中者) {
-        if (選択_チェックオン == 受給申請中者) {
+    private void set選択_受給申請中者(RString 受給申請中者) {
+        if (選択_チェックオン.equals(受給申請中者)) {
             is受給申請中者 = true;
         }
     }
 
-    private void set選択_受給支給決定日抽出(Long 受給支給決定日抽出) {
-        if (選択_チェックオン == 受給支給決定日抽出) {
+    private void set選択_受給支給決定日抽出(RString 受給支給決定日抽出) {
+        if (選択_チェックオン.equals(受給支給決定日抽出)) {
             is受給支給決定日抽出 = true;
         }
     }
-
-//    private void set被保険者全員の滞納期間(Long 被保険者全員の滞納期間) {
-//
-//    }
-//
-//    private void set受給者全員の滞納期間(Long 受給者全員の滞納期間) {
-//
-//    }
-//
-//    private void set受給認定申請中者の滞納期間(Long 受給認定申請中者の滞納期間) {
-//
-//    }
-//
-//    private void set受給認定日抽出の滞納期間(Long 受給認定日抽出の滞納期間) {
-//
-//    }
-//
-//    private void set償還申請中者の滞納期間(Long 償還申請中者の滞納期間) {
-//
-//    }
-//
-//    private void set償還支給決定日抽出の滞納期間(Long 償還支給決定日抽出の滞納期間) {
-//
-//    }
 }

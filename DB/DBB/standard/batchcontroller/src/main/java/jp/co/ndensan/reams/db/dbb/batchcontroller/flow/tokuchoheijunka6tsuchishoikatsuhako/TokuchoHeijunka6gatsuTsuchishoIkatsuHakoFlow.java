@@ -47,19 +47,6 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
     private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
     private static final RString 帳票分類ID = new RString("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
 
-//    @Override
-//    protected void initialize() {
-//        super.initialize();
-//        FlowParameters fp = FlowParameterAccessor.get();
-//        getParameter().set調定年度(fp.get(new RString("調定年度"), FlexibleYear.class));
-//        getParameter().set賦課年度(fp.get(new RString("賦課年度"), FlexibleYear.class));
-//        getParameter().set出力帳票一覧List(fp.get(new RString("出力帳票一覧List"), ArrayList.class));
-//        getParameter().set発行日(fp.get(new RString("発行日"), FlexibleDate.class));
-//        getParameter().set出力対象(fp.get(new RString("出力対象"), RString.class));
-//        getParameter().set一括発行フラグ(fp.get(new RString("一括発行フラグ"), Boolean.class));
-//        getParameter().set帳票グループ(fp.get(new RString("帳票グループ"), RString.class));
-//        getParameter().set文書番号(fp.get(new RString("文書番号"), RString.class));
-//    }
     @Override
     protected void defineFlow() {
 

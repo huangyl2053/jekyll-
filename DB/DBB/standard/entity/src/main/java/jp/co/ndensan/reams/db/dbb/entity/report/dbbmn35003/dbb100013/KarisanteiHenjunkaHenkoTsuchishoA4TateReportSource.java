@@ -2,7 +2,9 @@ package jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100013;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票「特別徴収平準化【A4縦タイプ】」の項目を定義するクラスです。
@@ -36,12 +38,15 @@ public class KarisanteiHenjunkaHenkoTsuchishoA4TateReportSource implements IRepo
     public RString hyojicode3;
     @ReportItem(name = "setaiCode", length = 15, order = 12)
     public RString setaiCode;
+    @ReportPerson
     @ReportItem(name = "tsuchishoNo", order = 13)
     public RString tsuchishoNo;
     @ReportItem(name = "zanteiHokenryoGaku", length = 6, order = 14)
     public RString zanteiHokenryoGaku;
+    @ReportExpandedInfo(id = "本人")
     @ReportItem(name = "hihokenshaNo", length = 10, order = 15)
     public RString hihokenshaNo;
+    @ReportPerson(id = "本人")
     @ReportItem(name = "shikibetsuCode", length = 15, order = 16)
     public RString shikibetsuCode;
     @ReportItem(name = "shutokuYMDMae", length = 10, order = 17)

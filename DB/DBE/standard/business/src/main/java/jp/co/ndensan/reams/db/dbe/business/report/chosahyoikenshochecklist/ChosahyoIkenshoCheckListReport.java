@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.chosahyoikenshochecklist;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyoikenshochecklist.ChosahyoIkenshoCheckListRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyoikenshochecklist.ChosahyoIkenshoCheckListReportEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahyoikenshochecklist.ChosahyoIkenshoCheckListReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,14 +17,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ChosahyoIkenshoCheckListReport extends Report<ChosahyoIkenshoCheckListReportSource> {
 
-    private final ChosahyoIkenshoCheckListRelateEntity data;
+    private final ChosahyoIkenshoCheckListReportEntity data;
 
     /**
      * インスタンスを生成します。
      *
      * @param data 申請に関する帳票発行のdataList
      */
-    public ChosahyoIkenshoCheckListReport(ChosahyoIkenshoCheckListRelateEntity data) {
+    public ChosahyoIkenshoCheckListReport(ChosahyoIkenshoCheckListReportEntity data) {
         this.data = data;
     }
 

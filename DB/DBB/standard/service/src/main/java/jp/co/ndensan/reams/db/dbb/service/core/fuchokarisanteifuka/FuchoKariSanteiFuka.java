@@ -108,8 +108,7 @@ public class FuchoKariSanteiFuka {
     /**
      * 初期化メソッドです。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link FuchoKariSanteiFuka}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link FuchoKariSanteiFuka}のインスタンス
      */
     public static FuchoKariSanteiFuka createInstance() {
         return InstanceProvider.create(FuchoKariSanteiFuka.class);
@@ -125,12 +124,13 @@ public class FuchoKariSanteiFuka {
     public List<ShoriDateKanri> getShoriDateKanriList(FlexibleYear 調定年度, RString 遷移元区分) {
         List<DbT7022ShoriDateKanriEntity> entityList = new ArrayList<>();
         SubGyomuCode サブ業務コード = SubGyomuCode.DBB介護賦課;
+        List<RString> 処理名リスト = new ArrayList<>();
         if (遷移元区分_0.equals(遷移元区分)) {
-            RString 処理名 = ShoriName.特徴仮算定賦課.get名称();
-            entityList = 処理日付管理Dac.select処理状況_普徴仮算定賦課(調定年度, 処理名, サブ業務コード);
+            処理名リスト.add(ShoriName.特徴仮算定賦課.get名称());
+            entityList = 処理日付管理Dac.select処理状況(調定年度, 処理名リスト, サブ業務コード);
         } else if (遷移元区分_1.equals(遷移元区分)) {
-            RString 処理名 = ShoriName.普徴仮算定賦課.get名称();
-            entityList = 処理日付管理Dac.select処理状況_普徴仮算定賦課(調定年度, 処理名, サブ業務コード);
+            処理名リスト.add(ShoriName.普徴仮算定賦課.get名称());
+            entityList = 処理日付管理Dac.select処理状況(調定年度, 処理名リスト, サブ業務コード);
         }
         if (entityList == null || entityList.isEmpty()) {
             return new ArrayList<>();

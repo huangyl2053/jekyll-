@@ -231,7 +231,7 @@ public class NinteiShinseiTorokuUketsuke {
             TextBox 氏名 = new TextBox();
             氏名.setValue(div.getCcdKaigoNinteiAtenaInfo().get被保険者氏名());
             div.getCcdShinseiTodokedesha().setTxtShimei(氏名);
-            //カナ氏名TODO
+            //カナ氏名TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
             TextBoxTelNo 電話番号 = new TextBoxTelNo();
             電話番号.setDomain(new TelNo(div.getCcdKaigoNinteiAtenaInfo().get電話番号()));
             div.getCcdShinseiTodokedesha().setTxtTelNo(電話番号);
@@ -276,7 +276,6 @@ public class NinteiShinseiTorokuUketsuke {
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onClick_btnUpdate(NinteiShinseiTorokuUketsukeDiv div) {
 
-        //必須項目が未入力の場合、エラーメッセージを表示する。TODO
         //ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
 //        if (DBD5120001StateName.申請追加.getName().equals(ResponseHolder.getState())) {
 //            getValidationHandler().validateFor申請日の必須入力(pairs, div);

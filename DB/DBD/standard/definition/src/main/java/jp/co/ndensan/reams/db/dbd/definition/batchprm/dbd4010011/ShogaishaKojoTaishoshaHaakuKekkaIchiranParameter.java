@@ -31,15 +31,15 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter extends BatchParam
 
     @BatchParameter(key = KIJUNRI, name = "基準日")
     private FlexibleDate 基準日;
-    @BatchParameter(key = TAISHONANDU, name = "基準日")
+    @BatchParameter(key = TAISHONANDU, name = "対象年度")
     private FlexibleYear 対象年度;
-    @BatchParameter(key = SINSEIYMD, name = "基準日")
+    @BatchParameter(key = SINSEIYMD, name = "申請年月日")
     private FlexibleDate 申請年月日;
-    @BatchParameter(key = KETEIYMD, name = "基準日")
+    @BatchParameter(key = KETEIYMD, name = "決定年月日")
     private FlexibleDate 決定年月日;
-    @BatchParameter(key = ZENKAIKAIGO, name = "基準日")
+    @BatchParameter(key = ZENKAIKAIGO, name = "前回把握時の非該当者")
     private boolean 前回把握時の非該当者;
-    @BatchParameter(key = KIJUNRIYOLI, name = "基準日")
+    @BatchParameter(key = KIJUNRIYOLI, name = "基準日より後に資格喪失した者")
     private boolean 基準日より後に資格喪失した者;
 
 }

@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,9 +33,9 @@ public class ShiharaiHohoHenkoEntity {
     private RString 被保険者氏名カナ;
     private RString 被保険者氏名;
     private Code 世帯番号;
-    private Code 行政区ｺｰﾄﾞ;
+    private RString 行政区ｺｰﾄﾞ;
     private RString 行政区;
-    private Code 住所コード;
+    private RString 住所コード;
     private YubinNo 郵便番号;
     private RString 住所;
 
@@ -43,7 +43,7 @@ public class ShiharaiHohoHenkoEntity {
     private FlexibleDate 資格喪失日;
     private ShikakuSoshitsuJiyu 喪失事由;
     private ShikakuKubun 資格区分;
-    private int 住特フラグ;
+    private RString 住特フラグ;
     private RString 生保;
 
     private RString 要介護度;
@@ -56,7 +56,7 @@ public class ShiharaiHohoHenkoEntity {
     private FlexibleDate 償還未払い情報_申請日;
     private RString 申請中件数;
     private Code 整理番号;
-    private RYearMonth 提供年月;
+    private FlexibleYearMonth 提供年月;
     private RString 未通知件数;
 
     private ShiharaiHenkoTorokuKubun 滞納管理状況;

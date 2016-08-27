@@ -161,7 +161,7 @@ public class KaigoFukaTokuchoHeijunka6 {
             } else {
                 処理名.add(ShoriName.特徴仮算定賦課.get名称());
             }
-            List<DbT7022ShoriDateKanriEntity> entityList = bT7022ShoriDateKanriDac.select処理状況(調定年度, 処理名);
+            List<DbT7022ShoriDateKanriEntity> entityList = bT7022ShoriDateKanriDac.select処理状況(調定年度, 処理名, SubGyomuCode.DBB介護賦課);
             for (DbT7022ShoriDateKanriEntity entity : entityList) {
                 shoriEntity.set処理名(entity.getShoriName());
                 shoriEntity.set基準年月日(entity.getKijunYMD());
@@ -170,7 +170,7 @@ public class KaigoFukaTokuchoHeijunka6 {
             }
         } else if (遷移元区分_1.equals(遷移元区分)) {
             処理名.add(ShoriName.特徴平準化計算_6月分.get名称());
-            List<DbT7022ShoriDateKanriEntity> entityList = bT7022ShoriDateKanriDac.select処理状況(調定年度, 処理名);
+            List<DbT7022ShoriDateKanriEntity> entityList = bT7022ShoriDateKanriDac.select処理状況(調定年度, 処理名, SubGyomuCode.DBB介護賦課);
             for (DbT7022ShoriDateKanriEntity entity : entityList) {
                 shoriEntity.set処理名(entity.getShoriName());
                 shoriEntity.set基準年月日(entity.getKijunYMD());

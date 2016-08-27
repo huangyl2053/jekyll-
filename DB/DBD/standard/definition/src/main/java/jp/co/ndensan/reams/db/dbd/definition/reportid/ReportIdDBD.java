@@ -54,6 +54,10 @@ public enum ReportIdDBD {
     /**
      * 支払方法変更管理リストの帳票ＩＤです。
      */
+    DBD200006(new ReportId("DBD200006_ShiharaiHohoHenkoHaakuIchiran"), new RString("支払方法変更把握リスト")),
+    /**
+     * 支払方法変更管理リストの帳票ＩＤです。
+     */
     DBD200007(new ReportId("DBD200007_ShiharaiHohoHenkoKanriIchiran"), new RString("支払方法変更管理リスト")),
     /**
      * 支払方法変更予告通知書の帳票ＩＤです。

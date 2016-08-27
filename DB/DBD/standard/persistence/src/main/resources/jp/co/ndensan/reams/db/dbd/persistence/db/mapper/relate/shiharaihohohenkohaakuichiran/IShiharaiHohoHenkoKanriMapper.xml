@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--概要： 支払方法変更管理のマッピング用XMLです。-->
+<!-- @reamsid_L DBD-3650-040 x_lilh -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihohohenkohaakuichiran.IShiharaiHohoHenkoKanriMapper">
+    
+    <select resultOrdered="true" id="get支払方法変更管理対象者" resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoKanriResultEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd207010.ShiharaiHohoHenkoKanriMybatisParameter" fetchSize="500">
+        SELECT
+                Distinct(支払方法変更."hihokenshaNo") AS 被保険者番号
+        FROM
+                rgdb."DbT4021ShiharaiHohoHenko" AS 支払方法変更
+        INNER JOIN rgdb."DbT4024ShiharaiHohoHenkoSashitome"  AS 支払方法変更差止
+                ON 	支払方法変更."shoKisaiHokenshaNo" = 支払方法変更差止."shoKisaiHokenshaNo" AND
+                        支払方法変更."hihokenshaNo" = 支払方法変更差止."hihokenshaNo" AND
+                        支払方法変更."kanriKubun" = 支払方法変更差止."kanriKubun" AND
+                        支払方法変更."rirekiNo" = 支払方法変更差止."rirekiNo"
+        LEFT JOIN (
+                        SELECT
+                                賦課Newest."hihokenshaNo" AS 被保険者番号,
+                                賦課Newest.*,
+                                介護期別.*,
+                                調定共通_介護継承.*,
+                                時効起算日管理.*
+                        FROM
+                                rgdb."DbV2002Fuka" AS 賦課Newest
+                        INNER JOIN  rgdb."DbT2003Kibetsu" AS 介護期別
+                            ON 賦課Newest."choteiNendo" = 介護期別."choteiNendo"
+                            AND 賦課Newest."fukaNendo" = 介護期別."fukaNendo"
+                            AND 賦課Newest."tsuchishoNo" = 介護期別."tsuchishoNo"
+                            AND 賦課Newest."rirekiNo" = 介護期別."rirekiNo"
+                        INNER JOIN  rgdb."UrT0705ChoteiKyotsu" AS 調定共通_介護継承
+                                ON	介護期別."choteiId" = 調定共通_介護継承."choteiId"
+                        LEFT JOIN  
+                                        (
+                                        SELECT 
+                                                時効起算日管理_明細.*
+                                        FROM
+                                                rgdb."DbT4023JikoKisambiKanri" AS 時効起算日管理_明細
+                                        INNER JOIN  
+                                                (
+                                                SELECT 
+                                                        "hihokenshaNo", "choteiNendo", "fukaNendo", "tokucho_FuchoKubun", "tsuchishoNo", "shuno_Ki_Tsuki", MAX("jikoKisanYMD") AS 時効起算年月日
+                                                FROM
+                                                        rgdb."DbT4023JikoKisambiKanri" AS 時効起算日管理temp
+                                                WHERE
+                                                        時効起算日管理temp."tokucho_FuchoKubun" = '2'
+                                                GROUP BY
+                                                        "hihokenshaNo", "choteiNendo", "fukaNendo", "tokucho_FuchoKubun", "tsuchishoNo", "shuno_Ki_Tsuki"
+                                                ) AS 時効起算日管理_最大情報
+                                        ON 時効起算日管理_最大情報."hihokenshaNo" = 時効起算日管理_明細."hihokenshaNo"
+                                              AND 時効起算日管理_最大情報."choteiNendo" = 時効起算日管理_明細."choteiNendo"
+                                              AND 時効起算日管理_最大情報."fukaNendo" = 時効起算日管理_明細."fukaNendo"
+                                              AND 時効起算日管理_最大情報."tsuchishoNo" = 時効起算日管理_明細."tsuchishoNo"
+                                              AND 時効起算日管理_最大情報."shuno_Ki_Tsuki" = 時効起算日管理_明細."shuno_Ki_Tsuki"
+                                              AND 時効起算日管理_最大情報."tokucho_FuchoKubun" = 時効起算日管理_明細."tokucho_FuchoKubun"
+                                              AND 時効起算日管理_最大情報."時効起算年月日" = 時効起算日管理_明細."jikoKisanYMD"
+                                        )AS 時効起算日管理
+                                ON	賦課Newest."hihokenshaNo" = 時効起算日管理."hihokenshaNo"
+                                      AND 賦課Newest."choteiNendo" = 時効起算日管理."choteiNendo"
+                                      AND 賦課Newest."fukaNendo" = 時効起算日管理."fukaNendo"
+                                      AND 賦課Newest."tsuchishoNo" = 時効起算日管理."tsuchishoNo"
+                                     <!-- AND 介護期別."ki" = 時効起算日管理."shuno_Ki_Tsuki"-->
+                                      AND 介護期別."choshuHouhou" = 時効起算日管理."tokucho_FuchoKubun"
+                        WHERE
+                                介護期別."choshuHouhou" = '2'
+                        )収納情報
+                ON	支払方法変更."hihokenshaNo" = 収納情報.被保険者番号
+        LEFT JOIN
+                        (
+                        SELECT
+                                "shunoId",
+                                SUM(収入temp."shunyugaku")
+                        FROM
+                                rgca."CaT0701Shunyu" AS 収入temp
+                        WHERE
+                                収入temp."shunyuYMD" <![CDATA[<=]]> #{基準日RDate}
+                         AND	収入temp."sokuhoKubun"  =  false
+                        GROUP BY
+                                "shunoId"
+                        ) AS 収入
+                ON   収納情報."shunoId" =  収入."shunoId"
+        WHERE
+                1 = 1
+                <if test="is登録者選択_0">
+                   AND 支払方法変更."kanriKubun" IN ('1','2') 	
+                   AND 支払方法変更."logicalDeletedFlag"  = false
+                </if>
+                
+                <if test="is登録者選択_1">
+                    <if test="is２号差止予告登録者の選択_0">
+                       AND 支払方法変更."kanriKubun"  = '1' 
+                       AND 支払方法変更."torokuKubun" = '01'
+                       AND 支払方法変更."logicalDeletedFlag"  =  false
+                    </if>
+                    <if test="is２号差止予告登録者の選択_1">
+                       AND 支払方法変."kanriKubun"  = '1'
+                       AND 支払方法変更."torokuKubun" = '01'
+                       AND 支払方法変更."logicalDeletedFlag"  =  false
+                       AND (支払方法変更."yokoku_TsuchiHakkoYMD" IS NULL OR 支払方法変更."yokoku_TsuchiHakkoYMD" = '') 
+                       AND 支払方法変更."yokoku_TsuchiSaiHakkoFlag"  =  true
+                    </if>
+                    <if test="is２号差止予告登録者の選択_2">
+                       AND 支払方法変."kanriKubun"  = '1'
+                       AND 支払方法変更."torokuKubun" = '01'
+                       AND 支払方法変更."logicalDeletedFlag"  =  false
+                       AND (支払方法変更."shuryoKubun" IS NULL OR 支払方法変更."shuryoKubun" = '')
+                    </if>
+                    <if test="is２号差止予告登録者の選択_3">
+                       AND 支払方法変更."torokuKubun" = '01'
+                       AND 支払方法変更."logicalDeletedFlag"  =  false
+                       AND (支払方法変更."shuryoKubun" IS NOT NULL AND 支払方法変更."shuryoKubun" != '')
+                    </if>
+                </if>
+                <if test="is登録者選択_2">
+                     <if test="is２号差止登録者の選択_0">
+                       AND 支払方法変."kanriKubun"  = '1'
+                       AND 支払方法変更."torokuKubun" = '02'
+                       AND 支払方法変更."logicalDeletedFlag"  =  false
+                     </if>
+                    <if test="is２号差止登録者の選択_1">
+                       AND 支払方法変."kanriKubun"  = '1'
+                       AND 支払方法変更."torokuKubun" = '02'
+                       AND 支払方法変更."logicalDeletedFlag"  =  false
+                       AND (支払方法変更."yokoku_TsuchiHakkoYMD" IS NULL OR 支払方法変更."yokoku_TsuchiHakkoYMD" = '')
+                       AND 支払方法変更."yokoku_TsuchiSaiHakkoFlag"  = true
+                    </if>
+                    <if test="is２号差止登録者の選択_2">
+                        AND 支払方法変."kanriKubun"  = '1'
+                        AND 支払方法変更."torokuKubun" = '02'
+                        AND 支払方法変更."logicalDeletedFlag"  =  false
+                        AND (支払方法変更."shuryoKubun" IS NULL OR 支払方法変更."shuryoKubun" = '')
+                    </if>
+                    <if test="is２号差止登録者の選択_3">
+                       AND 支払方法変."kanriKubun"  = '1'
+                       AND 支払方法変更."torokuKubun" = '02'
+                       AND 支払方法変更."logicalDeletedFlag"  = false
+                       AND (支払方法変更."shuryoKubun" IS NOT NULL OR 支払方法変更."shuryoKubun" != '')
+                    </if>
+                </if>
+                <if test="is登録者選択_3">
+                    <if test="is１号償還予告登録者の選択_0">
+                        AND 支払方法変."kanriKubun"  = '2'
+                        AND 支払方法変更."torokuKubun" = '11'
+                        AND 支払方法変更."logicalDeletedFlag"  =  false
+                    </if>
+                    <if test="is１号償還予告登録者の選択_1">
+                        AND 支払方法変."kanriKubun"  = '2'
+                        AND 支払方法変更."torokuKubun" = '11'
+                        AND 支払方法変更."logicalDeletedFlag"  =  false
+                        AND (支払方法変更."yokoku_TsuchiHakkoYMD" IS NULL OR 支払方法変更."yokoku_TsuchiHakkoYMD" = '')
+                    </if>
+                    <if test="is１号償還予告登録者の選択_2">
+                        AND 支払方法変."kanriKubun"  = '2' 
+                        AND 支払方法変更."torokuKubun" = '11'
+                        AND 支払方法変更."logicalDeletedFlag"  =  false
+                        AND (支払方法変更."shuryoKubun" IS NULL OR 支払方法変更."shuryoKubun" = '')           
+                    </if>
+                    <if test="is１号償還予告登録者の選択_3">
+                          AND 支払方法変."kanriKubun"  = '2'
+                          AND 支払方法変更."torokuKubun" = '11'
+                          AND 支払方法変更."logicalDeletedFlag"  =  false
+                          AND 支払方法変更."shuryoKubun" IS NULL また Empty
+                          AND (収納情報."nokigenYMD" + #{支払方法変更_支払方法変更期限}) <![CDATA[>=]]> #{基準日}
+                          AND 収納情報."nokigenYMD" <![CDATA[<=]]> #{基準日}
+                          AND 収納情報."choteigaku" <![CDATA[>]]> 収入."shunyugaku"
+                    </if>
+                    <if test="is１号償還予告登録者の選択_4">
+                        AND 支払方法変."kanriKubun"  = '2'
+                        AND 支払方法変更."torokuKubun" = '11'
+                        AND 支払方法変更."logicalDeletedFlag"  =  false
+                        AND (支払方法変更."shuryoKubun" IS NOT NULL AND 支払方法変更."shuryoKubun" != '')
+                    </if>
+                </if>
+                <if test="is登録者選択_4">
+                    <if test="is１号償還決定登録者の選択_0">
+                        AND 支払方法変."kanriKubun"  = '2'
+                        AND 支払方法変更."torokuKubun" = '12'
+                        AND 支払方法変更."logicalDeletedFlag"  =  false
+                    </if>
+                    <if test="is１号償還決定登録者の選択_1">
+                       AND 支払方法変."kanriKubun"  = '2'
+                       AND 支払方法変更."torokuKubun" = '12'
+                       AND 支払方法変更."logicalDeletedFlag"  =  false
+                       AND (支払方法変更."yokoku_TsuchiHakkoYMD" IS NULL OR 支払方法変更."yokoku_TsuchiHakkoYMD" = '')
+                    </if>
+                    <if test="is１号償還決定登録者の選択_2">
+                       AND 支払方法変."kanriKubun"  = '2'
+                       AND 支払方法変更."torokuKubun" = '12'
+                       AND 支払方法変更."logicalDeletedFlag"  =  false
+                       AND (支払方法変更."shuryoKubun" IS NULL OR 支払方法変更."shuryoKubun" = '')
+                    </if>
+                    <if test="is１号償還決定登録者の選択_3">
+                       AND 支払方法変."kanriKubun"  = '2'
+                       AND 支払方法変更."torokuKubun" = '12'
+                       AND 支払方法変更."logicalDeletedFlag"  =  false
+                       AND (支払方法変更."shuryoKubun" IS NULL OR 支払方法変更."shuryoKubun" = '')
+                       AND 収納情報."nokigenYMD" + #{支払方法変更_支払方法変更期限} <![CDATA[>=]]> #{基準日}
+                       AND 収納情報."nokigenYMD" <![CDATA[<=]]> #{基準日}
+                       AND 収納情報."choteigaku" <![CDATA[>=]]> 収入.収入額
+                    </if>
+                    <if test="is１号償還決定登録者の選択_4">
+                       AND 支払方法変."kanriKubun"  = '2'
+                       AND 支払方法変更."torokuKubun" = '12'
+                       AND 支払方法変更."logicalDeletedFlag"  =  false
+                       AND (支払方法変更."shuryoKubun" IS NOT NULL AND 支払方法変更."shuryoKubun" != '')
+                    </if>
+                </if>
+                <if test="is登録者選択_5">
+                    <if test="is１号償還決定登録者_差止中あり者のみの選択_0">
+                       AND 支払方法変."kanriKubun"  = '2'
+                       AND 支払方法変更."torokuKubun" = '12'
+                       AND 支払方法変更."logicalDeletedFlag"  = false
+                       AND 支払方法変更差止."johoBunruiKubun" = '1'
+                       AND 支払方法変更差止."logicalDeletedFlag"  =  false
+                       AND 支払方法変更差止."sashitomeKojoJotaiKubun" = '01'
+                       AND (支払方法変更差止."sashitomeKojoNo" IS NOT NULL AND 支払方法変更差止."sashitomeKojoNo" != '')
+                    </if>
+                    <if test="is１号償還決定登録者_差止中あり者のみの選択_1">
+                       AND 支払方法変."kanriKubun"  = '2'
+                       AND 支払方法変更."torokuKubun" = '12'
+                       AND 支払方法変更."logicalDeletedFlag"  = false
+                       AND 支払方法変更差止."johoBunruiKubun" = '1'
+                       AND 支払方法変更差止."logicalDeletedFlag"  =  false
+                       AND 支払方法変更差止."sashitomeKojoJotaiKubun" = '01'
+                       AND (支払方法変更差止."sashitomeKojoNo" IS NULL OR 支払方法変更差止."sashitomeKojoNo" = '')
+                       AND (支払方法変更差止."kojo_TsuchiHakkoYMD" = '' OR 支払方法変更差止."kojo_TsuchiHakkoYMD" IS NULL)
+                    </if>
+                    <if test="is１号償還決定登録者_差止中あり者のみの選択_2">
+                        支払方法変."kanriKubun"  = '2' AND
+                        支払方法変更."torokuKubun" = '12' AND
+                        支払方法変更."logicalDeletedFlag"  = false AND
+                        支払方法変更差止."johoBunruiKubun" = '1' AND
+                        支払方法変更差止."logicalDeletedFlag"  =  false AND
+                        支払方法変更差止."sashitomeKojoJotaiKubun" = '01' AND
+                        支払方法変更差止."sashitomeKojoNo" IS NULL また Empty AND
+                        (収納情報."nokigenYMD" + #{支払方法変更_支払一時差止期限}) <![CDATA[>=]]> #{基準日} AND
+                        収納情報."nokigenYMD" <![CDATA[<=]]> #{基準日} AND
+                        収納情報."choteigaku" <![CDATA[>=]]> 収入.収入額
+                    </if>
+                </if>
+                <if test="is登録者選択_6">
+                    <if test="is１号償還決定登録者_保険料控除あり者のみの選択_0">
+                       AND 支払方法変."kanriKubun"  = '2'
+                       AND 支払方法変更."torokuKubun" = '12'
+                       AND 支払方法変更."logicalDeletedFlag"  = false
+                       AND 支払方法変更差止."johoBunruiKubun" = '2'
+                       AND 支払方法変更差止."logicalDeletedFlag"  =  false
+                       AND 支払方法変更差止."sashitomeKojoJotaiKubun" = '01'
+                       AND (支払方法変更差止."sashitomeKojoNo" IS null or 支払方法変更差止."sashitomeKojoNo" = '')
+                    </if>
+                    <if test="is１号償還決定登録者_保険料控除あり者のみの選択_1">
+                       AND 支払方法変."kanriKubun"  = '2'
+                       AND 支払方法変更."torokuKubun" = '12'
+                       AND 支払方法変更."logicalDeletedFlag"  = false
+                       AND 支払方法変更差止."johoBunruiKubun" = '2'
+                       AND 支払方法変更差止."logicalDeletedFlag"  =  false
+                       AND 支払方法変更差止."sashitomeKojoJotaiKubun" = '01'
+                       AND (支払方法変更差止."sashitomeKojoNo" IS NULL or 支払方法変更差止."sashitomeKojoNo" = '')
+                       AND (支払方法変更差止."kojo_TsuchiHakkoYMD" =' ' or 支払方法変更差止."kojo_TsuchiHakkoYMD" is null)
+                    </if>
+                    <if test="is１号償還決定登録者_保険料控除あり者のみの選択_2">
+                       AND 支払方法変."kanriKubun"  = '2'
+                       AND 支払方法変更."torokuKubun" = '12'
+                       AND 支払方法変更."logicalDeletedFlag"  = false
+                       AND 支払方法変更差止."johoBunruiKubun" = '2'
+                       AND 支払方法変更差止."logicalDeletedFlag"  =  false
+                       AND 支払方法変更差止."sashitomeKojoJotaiKubun" = '01'
+                       AND (支払方法変更差止."sashitomeKojoNo" is null or 支払方法変更差止."sashitomeKojoNo" = '')
+                       AND (収納情報."nokigenYMD" + #{支払方法変更_支払一時差止期限}) <![CDATA[>=]]>  #{基準日}
+                       AND 収納情報."nokigenYMD" <![CDATA[<=]]> #{基準日}
+                       AND 収納情報."choteigaku" <![CDATA[>=]]> 収入.収入額
+                    </if>
+               </if>
+        <!--ORDER BY #{出力順}-->
+    </select>
+</mapper>
