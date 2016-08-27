@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * DBDMN32001_2_支払方法変更滞納者把握リスト作成_バッチプロセス5SQL検索結果クラスです．
  *
- * @reamsid_L DBD-3650-040 x_lilh
+ * @reamsid_L DBD-3650-050 x_lilh
  */
 @lombok.Getter
 @lombok.Setter

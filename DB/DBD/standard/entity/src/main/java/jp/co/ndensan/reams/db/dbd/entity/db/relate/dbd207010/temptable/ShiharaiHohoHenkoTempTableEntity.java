@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -570,7 +571,9 @@ public class ShiharaiHohoHenkoTempTableEntity extends DbTableEntityBase<Shiharai
     private AtenaJusho uaFt200_jusho;
     @TempTableColumnOrder(253)
     private SetaiCode uaFt200_setaiCode;
-    //申請中
     @TempTableColumnOrder(254)
+    private ZenkokuJushoCode uaFt200_zenkokujushocode;
+    //申請中
+    @TempTableColumnOrder(255)
     private RString reqProcess;
 }

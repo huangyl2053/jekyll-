@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd207010;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200007.ShiharaiHohoHenkoKanriIchiranReport;
+import jp.co.ndensan.reams.db.dbd.definition.core.common.TainoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd207010.ShiharaiHohoHenkoKanrFiveProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuFiveEntity;
@@ -15,6 +16,8 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenkolist.Shihara
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200007.ShiharaiHohoHenkoKanriIchiranReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -29,18 +32,21 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * DBDMN32001_2_支払方法変更滞納者把握リスト作成_バッチプロセス5クラスです．
  *
- * @reamsid_L DBD-3650-040 x_lilh
+ * @reamsid_L DBD-3650-050 x_lilh
  */
 public class ShiharaiHohoHenkoKanrFiveProcess extends BatchProcessBase<ShiharaiHohoHenkoHaakuFiveEntity> {
 
@@ -125,36 +131,39 @@ public class ShiharaiHohoHenkoKanrFiveProcess extends BatchProcessBase<ShiharaiH
         reportData.set識別コード(ShikibetsuCode.EMPTY);
         reportData.set被保険者氏名カナ(t.get支払方法変更情報_被保険者氏名カナ());
         reportData.set被保険者氏名(t.get支払方法変更情報_被保険者氏名());
-//        reportData.set世帯番号();
-//        reportData.set行政区ｺｰﾄﾞ();
-//        reportData.set行政区();
-//        reportData.set住所コード();
-//        reportData.set郵便番号();
-//        reportData.set住所();
-//
-//        reportData.set資格取得日();
-//        reportData.set資格喪失日();
-//        reportData.set喪失事由();
-//        reportData.set資格区分();
-//        reportData.set住特フラグ();
-//        reportData.set生保();
+        reportData.set世帯番号(t.get支払方法変更情報_世帯番号());
+        reportData.set行政区ｺｰﾄﾞ(t.get支払方法変更情報_行政区コード().getColumnValue());
+        reportData.set行政区(t.get支払方法変更情報_行政区());
+        reportData.set住所コード(t.get支払方法変更情報_住所());
+        reportData.set郵便番号(t.get支払方法変更情報_郵便番号());
+        reportData.set住所(t.get支払方法変更情報_住所());
 
-//        reportData.set要介護度();
-//        reportData.set認定有効期間();
-//        reportData.set認定日();
-//        reportData.set認定情報_申請中();
-//        reportData.set申請日();
+        reportData.set資格取得日(t.get支払方法変更情報_資格取得日());
+        reportData.set資格喪失日(t.get支払方法変更情報_資格喪失日());
+        reportData.set喪失事由(ShikakuSoshitsuJiyu.toValue(t.get支払方法変更情報_喪失事由()));
+        reportData.set資格区分(ShikakuKubun.toValue(t.get支払方法変更情報_申請中()));
+        reportData.set住特フラグ(new RString(t.get支払方法変更情報_住特フラグ().toString()));
+        reportData.set生保(t.get支払方法変更情報_生保());
+
+        reportData.set要介護度(t.get支払方法変更情報_要介護度().value());
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(t.get支払方法変更情報_認定開始年月日().toString()).append("～").append(t.get支払方法変更情報_認定終了年月日().toString());
+        reportData.set認定有効期間(builder.toRString());
+        reportData.set認定日(t.get支払方法変更情報_認定終了年月日());
+        reportData.set認定情報_申請中(t.get支払方法変更情報_申請中());
+        reportData.set申請日(t.get支払方法変更情報_申請日());
         reportData.set償還未払い情報_申請中(t.get償還未払い_申請中());
-        //     reportData.set償還未払い情報_申請日(t.get償還未払い_申請日());
-//        reportData.set申請中件数(t.get償還未払い_申請中件数());
-//        reportData.set整理番号(t.get償還未払い_整理番号());
-//        reportData.set提供年月(t.get償還未払い_提供年月());
-//        reportData.set未通知件数(t.get償還未払い_未通知件数());
-//
+        reportData.set償還未払い情報_申請日(t.get償還未払い_申請日());
+        reportData.set申請中件数(new RString(t.get償還未払い_申請中件数()));
+        reportData.set整理番号(new Code(t.get償還未払い_整理番号()));
+        reportData.set提供年月(new FlexibleYearMonth(t.get償還未払い_提供年月().toDateString()));
+        reportData.set未通知件数(new RString(t.get償還未払い_未通知件数()));
+
+        // TODO 滞納管理状況  終了状況
 //        reportData.set滞納管理状況();
-//        reportData.set最長滞納期間();
-//        reportData.set以前滞納額(t.get収納状況_以前滞納額());
-//        reportData.set以前滞納区分(t.get収納状況_以前滞納区分());
+        reportData.set最長滞納期間(new RString(String.valueOf(t.get収納状況_最長滞納期間())));
+        reportData.set以前滞納額(t.get収納状況_以前滞納額());
+        reportData.set以前滞納区分(TainoKubun.toValue(t.get収納状況_以前滞納区分()));
 //        reportData.set終了状況();
 
         reportData.set適用終了日_2行目(t.get滞納者対策情報_適用終了日());
@@ -163,12 +172,13 @@ public class ShiharaiHohoHenkoKanrFiveProcess extends BatchProcessBase<ShiharaiH
         reportData.set弁明期限_5行目(t.get滞納者対策情報_弁明期限());
         reportData.set弁明受付日_6行目(t.get滞納者対策情報_弁明受付日());
         reportData.set償還発行日_7行目(t.get滞納者対策情報_償還発行日());
-//        reportData.set償還証期限_8行目(t.get滞納者対策情報_償還証期限());
-//        reportData.set差止中件数_9行目(new RString(t.get滞納者対策情報_差止中件数()));
-//        reportData.set差止中金額_10行目((t.get滞納者対策情報_差止中金額());
-//        reportData.set差止納付期日_11行目((t.get滞納者対策情報_差止納付期日());
-//        reportData.set控除件数_12行目(t.get滞納者対策情報_控除件数());
-//        reportData.set控除証期限_13行目((t.get滞納者対策情報_控除証期限());
+        reportData.set償還証期限_8行目(new FlexibleDate(String.valueOf(t.get滞納者対策情報_償還証期限())));
+        reportData.set差止中件数_9行目(new RString(t.get滞納者対策情報_差止中件数()));
+        reportData.set差止中金額_10行目((t.get滞納者対策情報_差止中金額()));
+
+        reportData.set差止納付期日_11行目((t.get滞納者対策情報_差止納付期日()));
+        reportData.set控除件数_12行目(new RString(t.get滞納者対策情報_控除件数()));
+        reportData.set控除証期限_13行目((t.get滞納者対策情報_控除証期限()));
         reportData.set行14(RString.EMPTY);
         reportData.set行15(RString.EMPTY);
         reportData.set行16(RString.EMPTY);
