@@ -700,14 +700,14 @@
         <result property="収納状況_以前滞納額" column="収納状況_以前滞納額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="収納状況_以前滞納区分" column="収納状況_以前滞納区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="収納状況_過年度フラグ" column="収納状況_過年度フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
-        <result property="償還未払い_被保険者番号" column="償還未払い_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="償還未払い_被保険者番号" column="償還未払い_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="償還未払い_申請中" column="償還未払い_申請中" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="償還未払い_申請日" column="償還未払い_申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="償還未払い_申請中件数" column="償還未払い_申請中件数" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
         <result property="償還未払い_整理番号" column="償還未払い_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="償還未払い_提供年月" column="償還未払い_提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="償還未払い_未通知件数" column="償還未払い_未通知件数" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
-        <result property="滞納者対策情報_被保険者番号" column="滞納者対策情報_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="滞納者対策情報_被保険者番号" column="滞納者対策情報_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="滞納者対策情報_適用開始日" column="滞納者対策情報_適用開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="滞納者対策情報_適用終了日" column="滞納者対策情報_適用終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="滞納者対策情報_終了受付日" column="滞納者対策情報_終了受付日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
