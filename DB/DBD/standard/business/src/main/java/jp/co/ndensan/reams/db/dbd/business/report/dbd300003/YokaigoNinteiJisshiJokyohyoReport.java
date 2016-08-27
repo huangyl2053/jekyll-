@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public final class YokaigoNinteiJisshiJokyohyoReport extends Report<YokaigoNinteiJisshiJokyohyoReportSource> {
 
-    private static final int NOCOUNT_12 = 12;
     private final FlexibleDate 基準日;
     private final RString 年齢;
     private final RString 地区;
@@ -74,7 +73,7 @@ public final class YokaigoNinteiJisshiJokyohyoReport extends Report<YokaigoNinte
      */
     @Override
     public void writeBy(ReportSourceWriter<YokaigoNinteiJisshiJokyohyoReportSource> writer) {
-        for (int index = 0; index < NOCOUNT_12; index++) {
+        for (int index = 0; index < 実施状況Entityリストlist1.size(); index++) {
             IYokaigoNinteiJisshiJokyohyoEditor bodyEditor = new YokaigoNinteiJisshiJokyohyoEditor(基準日, 年齢, 地区,
                     集計単位, 実施状況Entityリストlist1, 実施状況Entityリストlist2,
                     実施状況Entityリストlist3, 実施状況Entityリストlist4, index);
