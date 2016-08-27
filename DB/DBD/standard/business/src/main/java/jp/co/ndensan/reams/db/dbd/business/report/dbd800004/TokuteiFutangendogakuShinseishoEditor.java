@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.tokuteifutangendogakushinseisho;
+package jp.co.ndensan.reams.db.dbd.business.report.dbd800004;
 
-import jp.co.ndensan.reams.db.dba.entity.report.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd800004.TokuteiFutangendogakuShinseishoReportSource;
 
 /**
  * 介護保険特定負担限度額申請書Editorです。
@@ -27,6 +27,7 @@ public class TokuteiFutangendogakuShinseishoEditor implements ITokuteiFutangendo
 
     /**
      * 介護保険特定負担限度額申請書の帳票データの設定処理です。
+     *
      * @param source 護保険特定負担限度額申請書の帳票データ
      * @return 護保険特定負担限度額申請書の帳票データ
      */

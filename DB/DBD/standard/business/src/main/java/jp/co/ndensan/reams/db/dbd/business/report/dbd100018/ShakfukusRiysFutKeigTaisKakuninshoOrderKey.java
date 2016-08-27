@@ -79,7 +79,7 @@ public enum ShakfukusRiysFutKeigTaisKakuninshoOrderKey implements IReportItems {
      * 決定区分
      */
     決定区分(new RString("0111"), new RString("決定区分"), new RString("A.\"ketteiKubun\""));
-    //TODO 計画事業者番号は検索関連のテープルから取得できません。
+    //TODO 計画事業者番号は検索関連のテープルから取得できません。QA:446
     /**
      * 計画事業者番号
      */

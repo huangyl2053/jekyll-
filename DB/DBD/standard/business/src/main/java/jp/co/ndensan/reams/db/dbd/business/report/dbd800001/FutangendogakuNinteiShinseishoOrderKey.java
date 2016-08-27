@@ -44,7 +44,7 @@ public enum FutangendogakuNinteiShinseishoOrderKey implements IReportItems {
      */
     被保険者番号("0104", "被保険者番号", "被保険者番号");
 
-//TODO 指定事業者番号と計画事業者番号と契約開始年月日は検索関連のテープルから取得できません。
+//TODO 指定事業者番号と計画事業者番号と契約開始年月日は検索関連のテープルから取得できません。QA:447
 //    /**
 //     * 項目ID:0303 フォームフィールド名:指定事業者番号 MyBatis項目名:定義なし
 //     */

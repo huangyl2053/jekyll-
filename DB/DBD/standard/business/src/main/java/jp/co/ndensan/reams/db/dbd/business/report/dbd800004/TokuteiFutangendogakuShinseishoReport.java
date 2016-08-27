@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.tokuteifutangendogakushinseisho;
+package jp.co.ndensan.reams.db.dbd.business.report.dbd800004;
 
-import jp.co.ndensan.reams.db.dba.entity.report.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd800004.TokuteiFutangendogakuShinseishoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -42,6 +42,7 @@ public class TokuteiFutangendogakuShinseishoReport extends Report<TokuteiFutange
 
     /**
      * 護保険特定負担限度額申請書の印刷処理です。
+     *
      * @param reportSourceWriter 護保険特定負担限度額申請書の帳票データ
      */
     @Override

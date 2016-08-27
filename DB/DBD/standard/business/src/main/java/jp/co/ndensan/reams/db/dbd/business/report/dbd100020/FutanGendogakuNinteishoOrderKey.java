@@ -71,7 +71,7 @@ public enum FutanGendogakuNinteishoOrderKey implements IReportItems {
      * 被保険者番号
      */
     被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("被保険者番号"));
-    //TODO 証記載保険者番号は検索関連のテープルから取得できません。
+    //TODO 証記載保険者番号は検索関連のテープルから取得できません。QA:446
     /**
      * 入所施設コード
      */
