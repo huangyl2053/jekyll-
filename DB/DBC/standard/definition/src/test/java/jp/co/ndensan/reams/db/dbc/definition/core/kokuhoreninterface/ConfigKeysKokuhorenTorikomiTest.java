@@ -9,10 +9,10 @@ import org.junit.Test;
 
 /**
  * 国保連取込コンフィグ一覧のテストクラスです。
- * 
- * @author LDNS 
+ *
+ * @author LDNS
  */
-public class ConfigKeysKokuhorenTorikomiTest extends DbcTestBase{
+public class ConfigKeysKokuhorenTorikomiTest extends DbcTestBase {
 
     @Test(expected = NullPointerException.class)
     public void 引数がNullである場合_toValueは_NullPointerExceptionが発生する() {
@@ -155,8 +155,8 @@ public class ConfigKeysKokuhorenTorikomiTest extends DbcTestBase{
     }
 
     @Test
-    public void 引数に37Jを指定した場合_toValueは_総合事業費請求額通知書情報を返す() {
-        assertThat(ConfigKeysKokuhorenTorikomi.toValue(new RString("37J")), is(ConfigKeysKokuhorenTorikomi.総合事業費請求額通知書情報));
+    public void 引数に37Jを指定した場合_toValueは_高額合算自己負担額確認情報を返す() {
+        assertThat(ConfigKeysKokuhorenTorikomi.toValue(new RString("37J")), is(ConfigKeysKokuhorenTorikomi.高額合算自己負担額確認情報));
     }
 
     @Test
@@ -170,8 +170,8 @@ public class ConfigKeysKokuhorenTorikomiTest extends DbcTestBase{
     }
 
     @Test
-    public void 引数に5C3を指定した場合_toValueは_資格照合表情報を返す() {
-        assertThat(ConfigKeysKokuhorenTorikomi.toValue(new RString("5C3")), is(ConfigKeysKokuhorenTorikomi.資格照合表情報));
+    public void 引数に5C3を指定した場合_toValueは_共同処理用受給者情報更新結果を返す() {
+        assertThat(ConfigKeysKokuhorenTorikomi.toValue(new RString("5C3")), is(ConfigKeysKokuhorenTorikomi.共同処理用受給者情報更新結果));
     }
 
     @Test
@@ -311,7 +311,7 @@ public class ConfigKeysKokuhorenTorikomiTest extends DbcTestBase{
 
     @Test
     public void 総合事業費請求額通知書情報を指定した場合_getコードは_37Jを返す() {
-        assertThat(ConfigKeysKokuhorenTorikomi.総合事業費請求額通知書情報.getコード(), is(new RString("37J")));
+        assertThat(ConfigKeysKokuhorenTorikomi.高額合算自己負担額確認情報.getコード(), is(new RString("37J")));
     }
 
     @Test
@@ -326,7 +326,7 @@ public class ConfigKeysKokuhorenTorikomiTest extends DbcTestBase{
 
     @Test
     public void 資格照合表情報を指定した場合_getコードは_5C3を返す() {
-        assertThat(ConfigKeysKokuhorenTorikomi.資格照合表情報.getコード(), is(new RString("5C3")));
+        assertThat(ConfigKeysKokuhorenTorikomi.共同処理用受給者情報更新結果.getコード(), is(new RString("5C3")));
     }
 
     @Test
@@ -465,8 +465,8 @@ public class ConfigKeysKokuhorenTorikomiTest extends DbcTestBase{
     }
 
     @Test
-    public void 総合事業費請求額通知書情報を指定した場合_get名称は_総合事業費請求額通知書情報を返す() {
-        assertThat(ConfigKeysKokuhorenTorikomi.総合事業費請求額通知書情報.get名称(), is(new RString("総合事業費請求額通知書情報")));
+    public void 総合事業費経過措置請求額通知書情報を指定した場合_get名称は_総合事業費経過措置請求額通知書情報を返す() {
+        assertThat(ConfigKeysKokuhorenTorikomi.総合事業費経過措置請求額通知書情報.get名称(), is(new RString("総合事業費経過措置請求額通知書情報")));
     }
 
     @Test
@@ -480,8 +480,8 @@ public class ConfigKeysKokuhorenTorikomiTest extends DbcTestBase{
     }
 
     @Test
-    public void 資格照合表情報を指定した場合_get名称は_資格照合表情報を返す() {
-        assertThat(ConfigKeysKokuhorenTorikomi.資格照合表情報.get名称(), is(new RString("資格照合表情報")));
+    public void 介護給付費資格照合表情報を指定した場合_get名称は_介護給付費資格照合表情報を返す() {
+        assertThat(ConfigKeysKokuhorenTorikomi.介護給付費資格照合表情報.get名称(), is(new RString("介護給付費資格照合表情報")));
     }
 
     @Test

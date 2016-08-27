@@ -68,11 +68,11 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanelHandler {
         }
         if (div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().getChkIsSearchDeletedData().isAllSelected()) {
             RString 削除データ = new RString(Boolean.TRUE.toString());
-            div.getJukyushaIdoRenrakuhyoHenkoSearchResultListPanel().getCommonChildDiv().initialize(メニューID,
+            div.getJukyushaIdoRenrakuhyoHenkoSearchResultListPanel().getCcdTaishoshaIchiran().initialize(メニューID,
                     被保険者番号, 異動日From, 異動日To, 表示モード, 削除データ, 対象者一覧list);
         } else {
             RString 削除データ = new RString(Boolean.FALSE.toString());
-            div.getJukyushaIdoRenrakuhyoHenkoSearchResultListPanel().getCommonChildDiv().initialize(メニューID,
+            div.getJukyushaIdoRenrakuhyoHenkoSearchResultListPanel().getCcdTaishoshaIchiran().initialize(メニューID,
                     被保険者番号, 異動日From, 異動日To, 表示モード, 削除データ, 対象者一覧list);
         }
     }

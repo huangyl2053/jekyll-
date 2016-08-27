@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHe
 import jp.co.ndensan.reams.db.dbd.business.report.ShiharaiHohoHenkoTsuchisho;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2010002.DBD2010002TransitionEventName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2010002.ShiharaiHenkoTsuchiHakkoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2010002.dgShiharaiHohoHenkoRireki_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2010002.ShiharaiHenkoTsuchiHakkoHandler;
@@ -34,6 +35,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -57,8 +60,22 @@ public class ShiharaiHenkoTsuchiHakko {
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
         div.getCcdAtenaInfo().initialize(識別コード);
-        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
-            div.getDgShiharaiHohoHenkoRireki().setDataSource(null);
+        if ((被保険者番号 == null || 被保険者番号.isEmpty()) && !ResponseHolder.isReRequest()) {
+            div.getDgShiharaiHohoHenkoRireki().setVisible(true);
+            div.getDgShiharaiHohoHenkoRireki().getGridSetting().setShowFilter(true);
+            div.getYokokuTsuchisho().setDisabled(true);
+            div.getYokokuTsuchisho().setIsPublish(false);
+            div.getHenkoTsuchisho().setDisabled(true);
+            div.getHenkoTsuchisho().setIsPublish(false);
+            div.getKojoTsuchisho().setDisabled(true);
+            div.getKojoTsuchisho().setIsPublish(false);
+            div.getSashitomeTsuchisho().setDisabled(true);
+            div.getSashitomeTsuchisho().setIsPublish(false);
+            div.getGengakuTsuchisho().setDisabled(true);
+            div.getGengakuTsuchisho().setIsPublish(false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnReportPublish"), true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToSearchResult"), false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnReSearch"), false);
             return ResponseData.of(div).addMessage(DbdInformationMessages.受給共通_被保データなし.getMessage()).respond();
         } else {
             ArrayList<ShiharaiHohoHenko> shiharaiHohoHenkoEntityList = getHandler().get支払方法変更の情報(被保険者番号);
@@ -68,17 +85,18 @@ public class ShiharaiHenkoTsuchiHakko {
             ViewStateHolder.put(ShiharaiHenkoTsuchiHakkoHandler.ShiharaiHenkoTsuchiHakkoEnum.リストキー, shiharaiHohoHenkoIndexList);
             div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
             getHandler().setアクセスログ(被保険者番号, 識別コード);
+            div.getYokokuTsuchisho().setDisplayNone(true);
+            div.getYokokuTsuchisho().setIsPublish(false);
+            div.getHenkoTsuchisho().setDisplayNone(true);
+            div.getHenkoTsuchisho().setIsPublish(false);
+            div.getKojoTsuchisho().setDisplayNone(true);
+            div.getKojoTsuchisho().setIsPublish(false);
+            div.getSashitomeTsuchisho().setDisplayNone(true);
+            div.getSashitomeTsuchisho().setIsPublish(false);
+            div.getGengakuTsuchisho().setDisplayNone(true);
+            div.getGengakuTsuchisho().setIsPublish(false);
         }
-        div.getYokokuTsuchisho().setDisplayNone(true);
-        div.getYokokuTsuchisho().setIsPublish(false);
-        div.getHenkoTsuchisho().setDisplayNone(true);
-        div.getHenkoTsuchisho().setIsPublish(false);
-        div.getKojoTsuchisho().setDisplayNone(true);
-        div.getKojoTsuchisho().setIsPublish(false);
-        div.getSashitomeTsuchisho().setDisplayNone(true);
-        div.getSashitomeTsuchisho().setIsPublish(false);
-        div.getGengakuTsuchisho().setDisplayNone(true);
-        div.getGengakuTsuchisho().setIsPublish(false);
+
         return ResponseData.of(div).respond();
     }
 
@@ -255,6 +273,26 @@ public class ShiharaiHenkoTsuchiHakko {
             response.data = collection;
         }
         return response;
+    }
+
+    /**
+     * 「「再検索する」ボタン
+     *
+     * @param div ShiharaiHenkoTsuchiHakkoDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShiharaiHenkoTsuchiHakkoDiv> onClick_reSearch(ShiharaiHenkoTsuchiHakkoDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBD2010002TransitionEventName.再検索へ).respond();
+    }
+
+    /**
+     * 「検索結果一覧へ」ボタン
+     *
+     * @param div ShiharaiHenkoTsuchiHakkoDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShiharaiHenkoTsuchiHakkoDiv> onClick_searchResult(ShiharaiHenkoTsuchiHakkoDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBD2010002TransitionEventName.検索結果一覧へ).respond();
     }
 
     private ShiharaiHenkoTsuchiHakkoHandler getHandler() {

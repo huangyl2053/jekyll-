@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb055003;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055003.HonsanteiIdoTsuchishoKanendoTempCreatProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055003.HonsanteiIdoTsuchishoKanendoTempDropProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055003.HonsanteiTsuchishoKanendoTempDeleteProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055003.IdoFukaJohoFlgFalseProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055003.IdoFukaJohoFlgTrueProcess;
@@ -45,6 +46,7 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
     private static final String 計算後情報作成_TWO = "keisangoJohoSakuseiTwo";
     private static final String 計算後情報作成_THREE = "keisangoJohoSakuseiThree";
     private static final String 異動賦課情報一時テーブルクリア = "deleteIdoFukaJohoTempProcess";
+    private static final String 一時テーブル削除 = "dropTempTable";
     private static final String CREAT_PROCESS = "creatTmpProcess";
     private static final String INSERT_FLGTRUE_ONEPROCESS = "insIdoFukaJohoTsuchishoFlgTrueOneProcess";
     private static final String INSERT_FLGTRUE_TWOPROCESS = "insIdoFukaJohoTsuchishoFlgTrueTwoProcess";
@@ -76,6 +78,7 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
         executeStep(CREAT_PROCESS);
         List<ChohyoResult> 出力帳票一覧List = parameter.get出力帳票List();
         for (ChohyoResult 出力帳票 : 出力帳票一覧List) {
+            boolean 判定フラグ = false;
             if (出力帳票.get帳票ID() == null) {
                 continue;
             }
@@ -98,6 +101,7 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
                     executeStep(INSERT_FLGTRUE_TWOPROCESS);
                     executeStep(計算後情報作成_THREE);
                     executeStep(INSERT_FLGTRUE_THREEPROCESS);
+                    判定フラグ = true;
                 }
                 executeStep(INSERT_FLGFALSE_PROCESS);
 
@@ -115,6 +119,7 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
                     executeStep(INSERT_FLGTRUE_TWOPROCESS);
                     executeStep(計算後情報作成_THREE);
                     executeStep(INSERT_FLGTRUE_THREEPROCESS);
+                    判定フラグ = true;
                 }
                 executeStep(INSERT_FLGFALSE_PROCESS);
                 executeStep(PRINT_HENKOTSUCHISHO_PROCESS);
@@ -129,10 +134,14 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
                     executeStep(INSERT_FLGTRUE_TWOPROCESS);
                     executeStep(計算後情報作成_THREE);
                     executeStep(INSERT_FLGTRUE_THREEPROCESS);
+                    判定フラグ = true;
                 }
                 executeStep(INSERT_FLGFALSE_PROCESS);
                 executeStep(PRINT_NONYUTSUCHISHO_PROCESS);
                 executeStep(INSERT_NONYUTSUCHISHO_PROCESS);
+            }
+            if (判定フラグ) {
+                executeStep(一時テーブル削除);
             }
         }
     }
@@ -304,6 +313,16 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
     protected IBatchFlowCommand keisangoJohoSakuseiThree() {
         return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課,
                 getKeisangoJohoSakuseiBatchParamter(バッチフロー_帳票分類ID, 回目３)).define();
+    }
+
+    /**
+     * 一時テーブル削除メソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(一時テーブル削除)
+    protected IBatchFlowCommand dropTempTable() {
+        return simpleBatch(HonsanteiIdoTsuchishoKanendoTempDropProcess.class).define();
     }
 
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID, RString 回目) {

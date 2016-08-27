@@ -5,9 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki153old;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki153old.JigyohokokuCompYoshiki153OldChange;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki153old.JigyohokokuCompYoshiki153OldData;
 import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki153old.JigyohokokuCompYoshiki153OldReportSource;
+import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.HokenshaJohoConfig;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -44,11 +47,12 @@ public class JigyohokokuCompYoshiki153OldEditor implements IJigyohokokuCompYoshi
     }
 
     private JigyohokokuCompYoshiki153OldReportSource editSource(JigyohokokuCompYoshiki153OldReportSource source) {
+        List<RString> 保険者 = get保険者();
         source.printTimeStamp = data.getプリント日時();
         source.shukeiKubun = data.get集計区分();
         source.shuukeiHani = set集計範囲(data.get集計範囲());
-        source.hokenshaNo = data.get保険者番号();
-        source.hokenshaName = data.get保険者名();
+        source.hokenshaNo = 保険者.get(1);
+        source.hokenshaName = 保険者.get(0);
         source.kyufuKubun = set給付集計区分(data.get給付区分());
         source.list_1 = change.getList_1();
         source.list_2 = change.getList_2();
@@ -90,5 +94,21 @@ public class JigyohokokuCompYoshiki153OldEditor implements IJigyohokokuCompYoshi
             給付集計区分_GF.append(new RString("償還(決定年月)"));
         }
         return 給付集計区分_GF.toRString();
+    }
+
+    private List<RString> get保険者() {
+        List<RString> 保険者 = new ArrayList<>();
+        HokenshaJohoConfig config = new HokenshaJohoConfig();
+        if (config.get保険者名() != null) {
+            保険者.add(config.get保険者名().value());
+        } else {
+            保険者.add(RString.EMPTY);
+        }
+        if (config.get保険者番号() != null) {
+            保険者.add(config.get保険者番号().value());
+        } else {
+            保険者.add(RString.EMPTY);
+        }
+        return 保険者;
     }
 }

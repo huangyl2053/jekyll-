@@ -11,6 +11,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KokuhorenJoho_TorikomiErrorKubun {
 
     /**
+     * コード:01 名称:キー項目不一致 略称:定義なし
+     */
+    キー項目不一致("01", "キー項目不一致"),
+    /**
+     * コード:02 名称:レコード構成不正 略称:定義なし
+     */
+    レコード構成不正("02", "レコード構成不正"),
+    /**
+     * コード:03 名称:必須レコードなし 略称:定義なし
+     */
+    必須レコードなし("03", "必須レコードなし"),
+    /**
+     * コード:04 名称:複数レコード不可 略称:定義なし
+     */
+    複数レコード不可("04", "複数レコード不可"),
+    /**
+     * コード:05 名称:名称取得エラー 略称:定義なし
+     */
+    名称取得エラー("05", "名称取得エラー"),
+    /**
      * コード:10 名称:新旧被保険者番号変換エラー 略称:定義なし
      */
     新旧被保険者番号変換エラー("10", "新旧被保険者番号変換エラー"),
@@ -88,6 +108,12 @@ public enum KokuhorenJoho_TorikomiErrorKubun {
                 || (KokuhorenJoho_TorikomiErrorKubun.関連データなし.getコード().contains(code))
                 || (KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード().contains(code))) {
             return new RString("DB登録");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.キー項目不一致.getコード().contains(code)
+                || KokuhorenJoho_TorikomiErrorKubun.レコード構成不正.getコード().contains(code)
+                || KokuhorenJoho_TorikomiErrorKubun.必須レコードなし.getコード().contains(code)
+                || KokuhorenJoho_TorikomiErrorKubun.複数レコード不可.getコード().contains(code)
+                || KokuhorenJoho_TorikomiErrorKubun.名称取得エラー.getコード().contains(code)) {
+            return new RString("CSVファイル取込");
         }
         return null;
     }
@@ -114,6 +140,16 @@ public enum KokuhorenJoho_TorikomiErrorKubun {
             return new RString("関連データが存在しません。");
         } else if (KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード().contains(code)) {
             return new RString("取り込むデータがありません。");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.キー項目不一致.getコード().contains(code)) {
+            return new RString("キー項目が不一致です。");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.レコード構成不正.getコード().contains(code)) {
+            return new RString("レコード構成が不正です。（不要レコード存在）");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.必須レコードなし.getコード().contains(code)) {
+            return new RString("必須レコードが存在しません。");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.複数レコード不可.getコード().contains(code)) {
+            return new RString("レコード構成が不正です。（複数レコード不可）");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.名称取得エラー.getコード().contains(code)) {
+            return new RString("名称が取得できません。");
         }
         return null;
     }

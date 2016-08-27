@@ -52,6 +52,18 @@ public class ChoteiKyotsuBuilder {
     }
 
     /**
+     * 履歴番号を設定します。
+     *
+     * @param 履歴番号 履歴番号
+     * @return {@link ChoteiKyotsuBuilder}
+     */
+    public ChoteiKyotsuBuilder set履歴番号(int 履歴番号) {
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        entity.setRirekiNo(履歴番号);
+        return this;
+    }
+
+    /**
      * 会計年度を設定します。
      *
      * @param 会計年度 会計年度

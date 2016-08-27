@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenkoBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.gengaku.ShiharaiHohoHenkoGengaku;
+import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShoriKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TainoHanteiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
@@ -64,7 +65,7 @@ public class MenjoKaijoSaiTennyuHandler {
             支払方法変更レコード.add(支払方法変更管理業務概念);
         }
         if (支払方法変更管理業務概念 == null || 支払方法変更レコード.isEmpty() || 支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.対象ファイルが存在しない.getMessage().replace("支払方法変更"));
+            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("支払方法変更"));
         }
         initializeDisplayData(ViewStateHolder.get(免除解除再転入ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class));
     }
@@ -76,7 +77,7 @@ public class MenjoKaijoSaiTennyuHandler {
         int index = div.getDgMenjoKaijoOrSaitennyu().getClickedItem().getId();
         div.setKey_hannteiIndex(new RString(String.valueOf(index)));
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(免除解除再転入ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
-        div.getTxtTorokuJokyo().setValue(支払方法変更管理業務概念.get登録区分());
+        div.getTxtTorokuJokyo().setValue(ShiharaiHenkoTorokuKubun.toValue(支払方法変更管理業務概念.get登録区分()).get名称());
         div.getTxtGengakuTekiyoKikanKaishiYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().get(index).get確定減額期間開始年月日());
         div.getTxtGengakuTekiyoKikanShuryoYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().get(index).get確定減額期間終了年月日());
         div.getTxtChoshukenShometsuKikan().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().get(index).get徴収権消滅期間());
@@ -106,6 +107,20 @@ public class MenjoKaijoSaiTennyuHandler {
         update支払方法変更減額();
         div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(ViewStateHolder.get(免除解除再転入ダイアロググキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class)));
         div.getDgMenjoKaijoOrSaitennyu().getClickedItem().setJotai(new RString("修正"));
+        div.getTxtTorokuJokyo().setValue(RString.EMPTY);
+        div.setTxtKyufugakuGengakuKikan(null);
+        div.setTxtGengakuTekiyoKikanKaishiYMD(null);
+        div.setTxtGengakuTekiyoKikanShuryoYMD(null);
+        div.setTxtChoshukenShometsuKikan(null);
+        div.setTxtNofuzumiKikan(null);
+        div.setTxtGengakuKetteiYMD(null);
+        div.setTxtZenkaiKikanKaishiYMD(null);
+        div.setTxtZenkaiKikanShuryoYMD(null);
+        div.setTxtGengakuTsuchiHakkoYMD(null);
+        div.setTxtKonkaiKikanKaishiYMD(null);
+        div.setTxtKonkaiKikanShuryoYMD(null);
+        div.getKyufugakuGengakuToroku().getTxtTainoJokyo().setIconNameEnum(IconName.Info);
+        div.getTxtTainoJokyo().setDisabled(false);
         div.getBtnTorikeshi().setDisabled(true);
         div.getBtnKakutei().setDisabled(true);
         return pairs;
@@ -138,7 +153,7 @@ public class MenjoKaijoSaiTennyuHandler {
     }
 
     private void initializeDisplayData(ShiharaiHohoHenko shiharaiHohoHenko) {
-        div.setTitle(div.getKey_Button());
+        div.setTitle(ShoriKubun.toValue(div.getKey_Button()).get名称());
         div.getDgMenjoKaijoOrSaitennyu().setDisabled(false);
         div.getDgMenjoKaijoOrSaitennyu().setDataSource(createDateSource(shiharaiHohoHenko));
         div.getTxtTorokuJokyo().setValue(RString.EMPTY);
@@ -196,10 +211,15 @@ public class MenjoKaijoSaiTennyuHandler {
         ShiharaiHohoHenkoGengaku shiharaiHohoHenkoGengaku = 支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().get(index);
         builder.setShiharaiHohoHenkoGengaku(shiharaiHohoHenkoGengaku.createBuilderForEdit()
                 .set確定減額期間終了年月日(div.getTxtKonkaiKikanShuryoYMD().getValue())
-                .set確定減額期間開始年月日(div.getTxtKonkaiKikanKaishiYMD().getValue())
-                .setState(EntityDataState.Modified)
-                .build());
-        ViewStateHolder.put(免除解除再転入ダイアロググキー.支払方法変更管理業務概念, 支払方法変更管理業務概念);
+                .set確定減額期間開始年月日(div.getTxtKonkaiKikanKaishiYMD().getValue()).build());
+        if (!shiharaiHohoHenkoGengaku.toEntity().getState().equals(EntityDataState.Added)) {
+            builder.setShiharaiHohoHenkoGengaku(shiharaiHohoHenkoGengaku.createBuilderForEdit().setState(EntityDataState.Modified).build());
+        }
+        if (null != builder.build().toEntity().getState()
+                && !builder.build().getState().equals(EntityDataState.Added)) {
+            builder.setState(EntityDataState.Modified);
+        }
+        ViewStateHolder.put(免除解除再転入ダイアロググキー.支払方法変更管理業務概念, builder.build());
     }
 
     private Decimal get給付額減額期間(Decimal value, Decimal value0) {

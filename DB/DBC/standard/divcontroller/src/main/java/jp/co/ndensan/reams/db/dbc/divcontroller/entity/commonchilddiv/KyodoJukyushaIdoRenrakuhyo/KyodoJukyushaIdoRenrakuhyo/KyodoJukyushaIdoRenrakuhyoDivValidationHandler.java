@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyodoJukyushaIdoRenrakuhyo.KyodoJukyushaIdoRenrakuhyo;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyodoshoriyoJukyushaIdoRenrakuhyoParam;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_IdoKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
@@ -24,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 共同処理用受給者異動連絡票共有子Divのバリデーション
  *
- * @reamsid_L DBC-4390-010 xupeng
+ * @reamsid_L DBC-4390-030 xupeng
  */
 public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
 
@@ -33,7 +34,11 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
     private static final RString MSG_既存の異動日 = new RString("既存の異動日");
     private static final RString MSG_履歴番号 = new RString("履歴番号");
     private static final RString 修正 = new RString("修正");
-    private static final RString 削除 = new RString("削除");
+    private static final int NUM_ZERO = 0;
+    private static final RString チェックボックス_KEY = new RString("key0");
+    private static final RString 訂正区分_修正 = new RString("key0");
+    private static final RString 訂正区分_削除 = new RString("key1");
+    private static final RString 異動区分_新規 = new RString("key0");
 
     /**
      * コンストラクタです。
@@ -90,8 +95,11 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
      */
     public ValidationMessageControlPairs 基本送付情報の異動日チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getChkKihonSofuAdd().getRequired()) {
-            FlexibleDate 異動日 = new FlexibleDate(div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtKihonIdoYMD().getValue().toDateString().toString());
+        List<RString> 基本送付情報チェックボックス = div.getChkKihonSofuAdd().getSelectedKeys();
+        if (!基本送付情報チェックボックス.isEmpty()
+                && チェックボックス_KEY.equals(基本送付情報チェックボックス.get(NUM_ZERO))) {
+            FlexibleDate 異動日 = new FlexibleDate(
+                    div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtKihonIdoYMD().getValue().toDateString().toString());
             HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHiHokenshaNo().getValue().toString());
             int count = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().基本送付情報の異動日チェック(被保険者番号, 異動日);
             if (count > 0) {
@@ -108,11 +116,16 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
      */
     public ValidationMessageControlPairs 償還送付情報の異動日チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        FlexibleDate 異動日 = new FlexibleDate(div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtShokanIdoYMD().getValue().toDateString().toString());
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHiHokenshaNo().getValue().toString());
-        int count = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().償還送付情報の異動日チェック(被保険者番号, 異動日);
-        if (count > 0) {
-            validPairs.add(new ValidationMessageControlPair(ValidationMessages.異動日チェック));
+        List<RString> 償還送付情報チェックボックス = div.getChkShokanSofuAdd().getSelectedKeys();
+        if (!償還送付情報チェックボックス.isEmpty()
+                && チェックボックス_KEY.equals(償還送付情報チェックボックス.get(NUM_ZERO))) {
+            FlexibleDate 異動日 = new FlexibleDate(
+                    div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtShokanIdoYMD().getValue().toDateString().toString());
+            HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHiHokenshaNo().getValue().toString());
+            int count = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().償還送付情報の異動日チェック(被保険者番号, 異動日);
+            if (count > 0) {
+                validPairs.add(new ValidationMessageControlPair(ValidationMessages.異動日チェック));
+            }
         }
         return validPairs;
     }
@@ -124,11 +137,16 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
      */
     public ValidationMessageControlPairs 高額送付情報の異動日チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        FlexibleDate 異動日 = new FlexibleDate(div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getTxtKogakuIdoYMD().getValue().toDateString().toString());
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHiHokenshaNo().getValue().toString());
-        int count = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().高額送付情報の異動日チェック(被保険者番号, 異動日);
-        if (count > 0) {
-            validPairs.add(new ValidationMessageControlPair(ValidationMessages.異動日チェック));
+        List<RString> 高額送付情報チェックボックス = div.getChkKogakuSofuAdd().getSelectedKeys();
+        if (!高額送付情報チェックボックス.isEmpty()
+                && チェックボックス_KEY.equals(高額送付情報チェックボックス.get(NUM_ZERO))) {
+            FlexibleDate 異動日 = new FlexibleDate(
+                    div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getTxtKogakuIdoYMD().getValue().toDateString().toString());
+            HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHiHokenshaNo().getValue().toString());
+            int count = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().高額送付情報の異動日チェック(被保険者番号, 異動日);
+            if (count > 0) {
+                validPairs.add(new ValidationMessageControlPair(ValidationMessages.異動日チェック));
+            }
         }
         return validPairs;
     }
@@ -140,12 +158,19 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
      */
     public ValidationMessageControlPairs 基本送付情報の異動区分チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        FlexibleDate 異動日 = new FlexibleDate(div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtKihonIdoYMD().getValue().toDateString().toString());
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHiHokenshaNo().getValue().toString());
-        RString 異動区分コード = JukyushaIF_IdoKubunCode.新規.getコード();
-        int count = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().基本送付情報の異動区分チェック(被保険者番号, 異動区分コード, 異動日);
-        if (count > 0) {
-            validPairs.add(new ValidationMessageControlPair(ValidationMessages.異動区分チェック));
+        List<RString> 基本送付情報チェックボックス = div.getChkKihonSofuAdd().getSelectedKeys();
+        RString 異動区分 = div.getRadIdoKubunCode().getSelectedKey();
+        if (!基本送付情報チェックボックス.isEmpty() && 異動区分_新規.equals(異動区分)
+                && チェックボックス_KEY.equals(基本送付情報チェックボックス.get(NUM_ZERO))) {
+            FlexibleDate 異動日 = new FlexibleDate(
+                    div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtKihonIdoYMD().getValue().toDateString().toString());
+            HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHiHokenshaNo().getValue().toString());
+            RString 異動区分コード = JukyushaIF_IdoKubunCode.新規.getコード();
+            int count = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().基本送付情報の異動区分チェック(
+                    被保険者番号, 異動区分コード, 異動日);
+            if (count > 0) {
+                validPairs.add(new ValidationMessageControlPair(ValidationMessages.異動区分チェック));
+            }
         }
         return validPairs;
     }
@@ -157,12 +182,19 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
      */
     public ValidationMessageControlPairs 償還送付情報の異動区分チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        FlexibleDate 異動日 = new FlexibleDate(div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtShokanIdoYMD().getValue().toDateString().toString());
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHiHokenshaNo().getValue().toString());
-        RString 異動区分コード = JukyushaIF_IdoKubunCode.新規.getコード();
-        int count = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().償還送付情報の異動区分チェック(被保険者番号, 異動区分コード, 異動日);
-        if (count > 0) {
-            validPairs.add(new ValidationMessageControlPair(ValidationMessages.異動区分チェック));
+        List<RString> 償還送付情報チェックボックス = div.getChkShokanSofuAdd().getSelectedKeys();
+        RString 異動区分 = div.getRadIdoKubunCode().getSelectedKey();
+        if (!償還送付情報チェックボックス.isEmpty() && 異動区分_新規.equals(異動区分)
+                && チェックボックス_KEY.equals(償還送付情報チェックボックス.get(NUM_ZERO))) {
+            FlexibleDate 異動日 = new FlexibleDate(
+                    div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtShokanIdoYMD().getValue().toDateString().toString());
+            HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHiHokenshaNo().getValue().toString());
+            RString 異動区分コード = JukyushaIF_IdoKubunCode.新規.getコード();
+            int count = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().償還送付情報の異動区分チェック(
+                    被保険者番号, 異動区分コード, 異動日);
+            if (count > 0) {
+                validPairs.add(new ValidationMessageControlPair(ValidationMessages.異動区分チェック));
+            }
         }
         return validPairs;
     }
@@ -174,34 +206,49 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
      */
     public ValidationMessageControlPairs 高額送付情報の異動区分チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        FlexibleDate 異動日 = new FlexibleDate(div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getTxtKogakuIdoYMD().getValue().toDateString().toString());
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHiHokenshaNo().getValue().toString());
-        RString 異動区分コード = JukyushaIF_IdoKubunCode.新規.getコード();
-        int count = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().高額送付情報の異動区分チェック(被保険者番号, 異動区分コード, 異動日);
-        if (count > 0) {
-            validPairs.add(new ValidationMessageControlPair(ValidationMessages.異動区分チェック));
+        List<RString> 高額送付情報チェックボックス = div.getChkKogakuSofuAdd().getSelectedKeys();
+        RString 異動区分 = div.getRadIdoKubunCode().getSelectedKey();
+        if (!高額送付情報チェックボックス.isEmpty() && 異動区分_新規.equals(異動区分)
+                && チェックボックス_KEY.equals(高額送付情報チェックボックス.get(NUM_ZERO))) {
+            FlexibleDate 異動日 = new FlexibleDate(
+                    div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getTxtKogakuIdoYMD().getValue().toDateString().toString());
+            HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHiHokenshaNo().getValue().toString());
+            RString 異動区分コード = JukyushaIF_IdoKubunCode.新規.getコード();
+            int count = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().高額送付情報の異動区分チェック(
+                    被保険者番号, 異動区分コード, 異動日);
+            if (count > 0) {
+                validPairs.add(new ValidationMessageControlPair(ValidationMessages.異動区分チェック));
+            }
         }
         return validPairs;
     }
 
     /**
-     * 基本送付情報を追加するチェックボックスがチェックONの場合で、画面．基本送付情報エリア．異動日と同一日のデータが共同処理用受給者異動基本送付テーブルにないこと
+     * 基本送付情報を追加するチェックボックスがチェックONの場合で、<br>
+     * 画面．基本送付情報エリア．異動日と同一日のデータが共同処理用受給者異動基本送付テーブルにないこと
      *
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 基本送付情報の履歴番号チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        List<RString> 基本送付情報追加チェックボックス = div.getChkKihonSofuAdd().getSelectedKeys();
+        boolean 基本送付情報追加チェック = (!基本送付情報追加チェックボックス.isEmpty()
+                && チェックボックス_KEY.equals(基本送付情報追加チェックボックス.get(NUM_ZERO)));
+        List<RString> 基本送付情報削除チェックボックス = div.getChkKihonSofuDelete().getSelectedKeys();
+        boolean 基本送付情報削除チェック = (!基本送付情報削除チェックボックス.isEmpty()
+                && チェックボックス_KEY.equals(基本送付情報削除チェックボックス.get(NUM_ZERO)));
+        RString 訂正区分 = div.getRadTeiseiKubunCode().getSelectedKey();
         if ((KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
-                && 修正.equals(div.getKyodoJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().getSelectedValue())
-                && div.getChkKihonSofuAdd().getRequired())
+                && 訂正区分_修正.equals(訂正区分) && 基本送付情報追加チェック)
                 || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
-                && 削除.equals(div.getKyodoJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().getSelectedValue())
-                && div.getChkKihonSofuDelete().getRequired()
+                && 訂正区分_削除.equals(訂正区分) && 基本送付情報削除チェック)
                 || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.sakujyo.equals(div.getMode_DisplayMode())
-                && div.getChkKihonSofuAdd().isAllSelected()))) {
-            FlexibleDate 異動日 = new FlexibleDate(div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtKihonIdoYMD().getValue().toDateString().toString());
+                && 基本送付情報追加チェック)) {
+            FlexibleDate 異動日 = new FlexibleDate(
+                    div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtKihonIdoYMD().getValue().toDateString().toString());
             HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHiHokenshaNo().getValue().toString());
-            int rirekiNoMax = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().基本送付情報の履歴番号チェック(被保険者番号, 異動日);
+            int rirekiNoMax = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().基本送付情報の履歴番号チェック(
+                    被保険者番号, 異動日);
             int 画面履歴番号 = div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtRirekiNo().getValue().intValue();
             if (rirekiNoMax != 画面履歴番号) {
                 validPairs.add(new ValidationMessageControlPair(ValidationMessages.履歴番号チェック));
@@ -211,24 +258,31 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
     }
 
     /**
-     * 償還送付情報を追加するチェックボックスがチェックONの場合で、画面．基本送付情報エリア．異動日と同一日のデータが共同処理用受給者異動基本送付テーブルにないこと
+     * 償還送付情報を追加するチェックボックスがチェックONの場合で、<br>
+     * 画面．償還送付情報エリア．異動日と同一日のデータが共同処理用受給者異動償還送付テーブルにないこと
      *
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 償還送付情報の履歴番号チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        List<RString> 償還送付情報追加チェックボックス = div.getChkShokanSofuAdd().getSelectedKeys();
+        boolean 償還送付情報追加チェック = (!償還送付情報追加チェックボックス.isEmpty()
+                && チェックボックス_KEY.equals(償還送付情報追加チェックボックス.get(NUM_ZERO)));
+        List<RString> 償還送付情報削除チェックボックス = div.getChkShokanSofuDelete().getSelectedKeys();
+        boolean 償還送付情報削除チェック = (!償還送付情報削除チェックボックス.isEmpty()
+                && チェックボックス_KEY.equals(償還送付情報削除チェックボックス.get(NUM_ZERO)));
+        RString 訂正区分 = div.getRadTeiseiKubunCode().getSelectedKey();
         if ((KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
-                && 修正.equals(div.getKyodoJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().getSelectedValue())
-                && div.getChkShokanSofuAdd().getRequired())
+                && 訂正区分_修正.equals(訂正区分) && 償還送付情報追加チェック)
                 || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
-                && 削除.equals(div.getKyodoJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().getSelectedValue())
-                && div.getChkShokanSofuDelete().getRequired()
+                && 訂正区分_削除.equals(訂正区分) && 償還送付情報削除チェック)
                 || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.sakujyo.equals(div.getMode_DisplayMode())
-                && div.getChkShokanSofuAdd().isAllSelected()))) {
-            FlexibleDate 異動日 = new FlexibleDate(div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtShokanIdoYMD().getValue().toDateString().toString());
+                && 償還送付情報追加チェック)) {
+            FlexibleDate 異動日 = new FlexibleDate(
+                    div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtShokanIdoYMD().getValue().toDateString().toString());
             HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHiHokenshaNo().getValue().toString());
             int rirekiNoMax = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().償還送付情報の履歴番号チェック(被保険者番号, 異動日);
-            int 画面履歴番号 = div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtRirekiNo().getValue().intValue();
+            int 画面履歴番号 = div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtShokanRirekiNo().getValue().intValue();
             if (rirekiNoMax != 画面履歴番号) {
                 validPairs.add(new ValidationMessageControlPair(ValidationMessages.履歴番号チェック));
             }
@@ -237,24 +291,31 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
     }
 
     /**
-     * 高額送付情報を追加するチェックボックスがチェックONの場合で、画面．基本送付情報エリア．異動日と同一日のデータが共同処理用受給者異動基本送付テーブルにないこと
+     * 高額送付情報を追加するチェックボックスがチェックONの場合で、<br>
+     * 画面．高額送付情報エリア．異動日と同一日のデータが共同処理用受給者異動高額送付テーブルにないこと
      *
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 高額送付情報の履歴番号チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        List<RString> 高額送付情報追加チェックボックス = div.getChkKogakuSofuAdd().getSelectedKeys();
+        boolean 高額送付情報追加チェック = (!高額送付情報追加チェックボックス.isEmpty()
+                && チェックボックス_KEY.equals(高額送付情報追加チェックボックス.get(NUM_ZERO)));
+        List<RString> 高額送付情報削除チェックボックス = div.getChkShokanSofuDelete().getSelectedKeys();
+        boolean 高額送付情報削除チェック = (!高額送付情報削除チェックボックス.isEmpty()
+                && チェックボックス_KEY.equals(高額送付情報削除チェックボックス.get(NUM_ZERO)));
+        RString 訂正区分 = div.getRadTeiseiKubunCode().getSelectedKey();
         if ((KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
-                && 修正.equals(div.getKyodoJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().getSelectedValue())
-                && div.getChkKogakuSofuAdd().getRequired())
+                && 訂正区分_修正.equals(訂正区分) && 高額送付情報追加チェック)
                 || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
-                && 削除.equals(div.getKyodoJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().getSelectedValue())
-                && div.getChkKogakuSofuDelete().getRequired()
+                && 訂正区分_削除.equals(訂正区分) && 高額送付情報削除チェック)
                 || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.sakujyo.equals(div.getMode_DisplayMode())
-                && div.getChkKogakuSofuAdd().isAllSelected()))) {
-            FlexibleDate 異動日 = new FlexibleDate(div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getTxtKogakuIdoYMD().getValue().toDateString().toString());
+                && 高額送付情報追加チェック)) {
+            FlexibleDate 異動日 = new FlexibleDate(
+                    div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getTxtKogakuIdoYMD().getValue().toDateString().toString());
             HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHiHokenshaNo().getValue().toString());
             int rirekiNoMax = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().高額送付情報の履歴番号チェック(被保険者番号, 異動日);
-            int 画面履歴番号 = div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtRirekiNo().getValue().intValue();
+            int 画面履歴番号 = div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getTxtKogakuRirekiNo().getValue().intValue();
             if (rirekiNoMax != 画面履歴番号) {
                 validPairs.add(new ValidationMessageControlPair(ValidationMessages.履歴番号チェック));
             }
@@ -279,9 +340,9 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
         if (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
                 && 修正.equals(div.getKyodoJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().getSelectedValue())) {
             KyodoJukyushaIdoRenrakuhyoHandler hander = new KyodoJukyushaIdoRenrakuhyoHandler();
-            if (!(hander.is基本送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, 基本送付情報Flag))
-                    || !(hander.is償還送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, 償還送付情報変Flag))
-                    || !(hander.is高額送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, 高額送付情報Flag))) {
+            if (!((hander.is高額送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, 高額送付情報Flag))
+                    || (hander.is基本送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, 基本送付情報Flag))
+                    || (hander.is償還送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, 償還送付情報変Flag)))) {
                 validPairs.add(new ValidationMessageControlPair(ValidationMessages.修正有無チェック));
             }
         }

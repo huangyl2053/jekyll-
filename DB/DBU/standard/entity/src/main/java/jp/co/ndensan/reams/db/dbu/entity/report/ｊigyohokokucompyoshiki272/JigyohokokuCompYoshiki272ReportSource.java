@@ -26,7 +26,7 @@ public class JigyohokokuCompYoshiki272ReportSource implements IReportSource {
     public RString listUpper_1;
     @ReportItem(name = "listLower_1", length = 17, order = 7)
     public RString listLower_1;
-    @ReportItem(name = "shichosonkodo", length = 17, order = 7)
+    @ReportItem(name = "shichosonkodo", length = 17, order = 8)
     public RString shichosonkodo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

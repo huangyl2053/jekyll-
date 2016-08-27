@@ -72,7 +72,7 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoHandler {
                 div.getShogaishaKojoNinteishoHakko().getShogaishaKojoTaishoshaDetail().getTxtShougaishaJiritsudo().setValue(
                         ShogaiNichijoSeikatsuJiritsudoCode.toValue(shogaishaKoujo.get障害高齢者自立度().getColumnValue()).get名称());
             }
-            if (shogaishaKoujo.get障がい者手帳あり()) {
+            if (shogaishaKoujo.is障がい者手帳あり()) {
                 List checkedItemList = new ArrayList<>();
                 checkedItemList.add(new RString("key0"));
                 div.getShogaishaKojoNinteishoHakko().getChkTechoAri().setSelectedItemsByKey(checkedItemList);

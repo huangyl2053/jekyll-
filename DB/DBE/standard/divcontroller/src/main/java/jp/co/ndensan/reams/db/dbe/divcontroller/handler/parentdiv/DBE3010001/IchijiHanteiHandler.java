@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001.Ichi
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001.dgIchijiHanteiTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
@@ -26,11 +25,11 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 画面設計_DBE3010001_一次判定処理クラスです。
@@ -45,7 +44,6 @@ public class IchijiHanteiHandler {
     private static final Code 認定ｿﾌﾄ2006 = new Code(new RString("06A"));
     private static final Code 認定ｿﾌﾄ2009_A = new Code(new RString("09A"));
     private static final Code 認定ｿﾌﾄ2009_B = new Code(new RString("09B"));
-    private static final RString データ出力を実行する = new RString("btnSyutsuryoku");
 
     /**
      * コンストラクタです。
@@ -90,13 +88,17 @@ public class IchijiHanteiHandler {
         ItziHanteiShoriBatchParamter parameter = new ItziHanteiShoriBatchParamter();
         List<dgIchijiHanteiTaishoshaIchiran_Row> rowList = div.getIchijiHanteiShoriTaishoshaIchiran().
                 getDgIchijiHanteiTaishoshaIchiran().getSelectedItems();
-        List<ShinseishoKanriNo> shinseishoKanriNo = new ArrayList<>();
+        List<RString> shinseishoKanriNo = new ArrayList<>();
         for (dgIchijiHanteiTaishoshaIchiran_Row row : rowList) {
 
-            shinseishoKanriNo.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+            shinseishoKanriNo.add(row.getShinseishoKanriNo());
         }
         parameter.setShinseishoKanriNoList(shinseishoKanriNo);
         parameter.setBattishuturyokukubun(バッチ出力区分);
+        if (new RString("2").equals(バッチ出力区分)) {
+
+            parameter.setFileId(RDateTime.parse(div.getファイルID().toString()));
+        }
         return parameter;
     }
 
@@ -210,10 +212,6 @@ public class IchijiHanteiHandler {
             personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
                     business.get申請書管理番号().value()));
             rowList.add(row);
-        }
-        if (一次判定対象者一覧List.isEmpty()) {
-
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(データ出力を実行する, true);
         }
         div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().setDataSource(rowList);
     }

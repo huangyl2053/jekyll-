@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dba.business.report.tashichosonjushochitokureishar
 import jp.co.ndensan.reams.db.dba.business.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoProperty;
 import jp.co.ndensan.reams.db.dba.business.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoReport;
 import jp.co.ndensan.reams.db.dba.entity.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
@@ -54,6 +56,8 @@ public class TashichosonJushochitokureishaRenrakuhyoPrintService {
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(property.subGyomuCode(),
                     property.reportId(),
                     FlexibleDate.getNowDate(),
+                    NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                    KenmeiFuyoKubunType.付与なし,
                     reportSourceWriter);
             item.setDenshiKoin(ninshoshaSource.denshiKoin);
             item.setShomeiHakkoYMD(ninshoshaSource.hakkoYMD);

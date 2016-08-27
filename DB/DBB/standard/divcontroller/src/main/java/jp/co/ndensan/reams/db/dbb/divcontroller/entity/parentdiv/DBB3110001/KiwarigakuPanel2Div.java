@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  */
 public class KiwarigakuPanel2Div extends TablePanel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -113,6 +113,16 @@ public class KiwarigakuPanel2Div extends TablePanel {
     @JsonIgnore
     public Label getLblKiwarigaku2Total() {
         return this.celKiwarigaku20401.getLblKiwarigaku2Total();
+    }
+
+    @JsonIgnore
+    public Label getMaeTotalMae1() {
+        return this.celKiwarigaku20403.getMaeTotalMae1();
+    }
+
+    @JsonIgnore
+    public Label getMaeTotalGo1() {
+        return this.celKiwarigaku20404.getMaeTotalGo1();
     }
 
     /*
@@ -401,7 +411,7 @@ public class KiwarigakuPanel2Div extends TablePanel {
  */
 class celKiwarigaku20201AtKiwarigakuPanel2 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblKiwarigaku2Tsuki")
     private Label lblKiwarigaku2Tsuki;
 
@@ -433,7 +443,7 @@ class celKiwarigaku20201AtKiwarigakuPanel2 extends TableCell {
  */
 class celKiwarigaku20202AtKiwarigakuPanel2 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblKi2")
     private Label lblKi2;
 
@@ -465,7 +475,7 @@ class celKiwarigaku20202AtKiwarigakuPanel2 extends TableCell {
  */
 class celKiwarigaku20203AtKiwarigakuPanel2 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblGemmemMae2")
     private Label lblGemmemMae2;
 
@@ -497,7 +507,7 @@ class celKiwarigaku20203AtKiwarigakuPanel2 extends TableCell {
  */
 class celKiwarigaku20204AtKiwarigakuPanel2 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblGemmemGo2")
     private Label lblGemmemGo2;
 
@@ -529,7 +539,7 @@ class celKiwarigaku20204AtKiwarigakuPanel2 extends TableCell {
  */
 class celKiwarigaku20205AtKiwarigakuPanel2 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblNokigen2")
     private Label lblNokigen2;
 
@@ -561,7 +571,7 @@ class celKiwarigaku20205AtKiwarigakuPanel2 extends TableCell {
  */
 class celKiwarigaku20301AtKiwarigakuPanel2 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblKiwarigaku24Gatsu")
     private Label lblKiwarigaku24Gatsu;
 
@@ -593,7 +603,7 @@ class celKiwarigaku20301AtKiwarigakuPanel2 extends TableCell {
  */
 class celKiwarigaku20302AtKiwarigakuPanel2 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("ki1")
     private Label ki1;
 
@@ -625,7 +635,7 @@ class celKiwarigaku20302AtKiwarigakuPanel2 extends TableCell {
  */
 class celKiwarigaku20303AtKiwarigakuPanel2 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("Mae1")
     private Label Mae1;
 
@@ -657,7 +667,7 @@ class celKiwarigaku20303AtKiwarigakuPanel2 extends TableCell {
  */
 class celKiwarigaku20304AtKiwarigakuPanel2 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("Go1")
     private Label Go1;
 
@@ -689,7 +699,7 @@ class celKiwarigaku20304AtKiwarigakuPanel2 extends TableCell {
  */
 class celKiwarigaku20305AtKiwarigakuPanel2 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("Nokigen1")
     private Label Nokigen1;
 
@@ -721,7 +731,7 @@ class celKiwarigaku20305AtKiwarigakuPanel2 extends TableCell {
  */
 class celKiwarigaku20401AtKiwarigakuPanel2 extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblKiwarigaku2Total")
     private Label lblKiwarigaku2Total;
 
@@ -752,7 +762,7 @@ class celKiwarigaku20401AtKiwarigakuPanel2 extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku20402AtKiwarigakuPanel2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
     // </editor-fold>
 }
@@ -763,7 +773,28 @@ class celKiwarigaku20402AtKiwarigakuPanel2 extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku20403AtKiwarigakuPanel2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("MaeTotalMae1")
+    private Label MaeTotalMae1;
+
+    /*
+     * getMaeTotalMae1
+     * @return MaeTotalMae1
+     */
+    @JsonProperty("MaeTotalMae1")
+    public Label getMaeTotalMae1() {
+        return MaeTotalMae1;
+    }
+
+    /*
+     * setMaeTotalMae1
+     * @param MaeTotalMae1 MaeTotalMae1
+     */
+    @JsonProperty("MaeTotalMae1")
+    public void setMaeTotalMae1(Label MaeTotalMae1) {
+        this.MaeTotalMae1 = MaeTotalMae1;
+    }
 
     // </editor-fold>
 }
@@ -774,7 +805,28 @@ class celKiwarigaku20403AtKiwarigakuPanel2 extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku20404AtKiwarigakuPanel2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("MaeTotalGo1")
+    private Label MaeTotalGo1;
+
+    /*
+     * getMaeTotalGo1
+     * @return MaeTotalGo1
+     */
+    @JsonProperty("MaeTotalGo1")
+    public Label getMaeTotalGo1() {
+        return MaeTotalGo1;
+    }
+
+    /*
+     * setMaeTotalGo1
+     * @param MaeTotalGo1 MaeTotalGo1
+     */
+    @JsonProperty("MaeTotalGo1")
+    public void setMaeTotalGo1(Label MaeTotalGo1) {
+        this.MaeTotalGo1 = MaeTotalGo1;
+    }
 
     // </editor-fold>
 }
@@ -785,7 +837,7 @@ class celKiwarigaku20404AtKiwarigakuPanel2 extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku20405AtKiwarigakuPanel2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
     // </editor-fold>
 }

@@ -18,6 +18,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteiShinseiTodokedeshaDataPassModel implements Serializable {
 
+    private RString 申請届出代行区分コード;
+    private RString 事業者区分;
+    private RString 申請届出代行事業者番号;
     private RString 申請書管理番号;
     private RString 識別コード;
     private RString 氏名;

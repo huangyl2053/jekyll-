@@ -24,7 +24,7 @@ public class NenkinNoTotsugoGaitouJohoNasiProcess extends BatchProcessBase<Nenki
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hikazenenkintaishoshadoutei."
-                    + "INenkinNoCheckListMapper.get年金番号突合_該当情報なし");
+                    + "INenkinNoTotsugoMapper.get年金番号突合_該当情報なし");
 
     @Override
     protected IBatchReader createReader() {
@@ -44,40 +44,41 @@ public class NenkinNoTotsugoGaitouJohoNasiProcess extends BatchProcessBase<Nenki
         tmpTableWriter.insert(createNenkinNoTotsugoGaitouJohoNasiTempTableEntity(t));
     }
 
-    private NenkinNoTotsugoGaitouJohoNasiTempTableEntity createNenkinNoTotsugoGaitouJohoNasiTempTableEntity(NenkinNoTotsugoGaitouJohoNasiJohoEntity t) {
+    private NenkinNoTotsugoGaitouJohoNasiTempTableEntity createNenkinNoTotsugoGaitouJohoNasiTempTableEntity(
+            NenkinNoTotsugoGaitouJohoNasiJohoEntity t) {
         NenkinNoTotsugoGaitouJohoNasiTempTableEntity data = new NenkinNoTotsugoGaitouJohoNasiTempTableEntity();
-        data.setDtRekoDoKubunn(t.getDTレコード区分());
-        data.setDtShichosonCode(t.getDT市町村コード());
-        data.setDtNennkinnHokenshaCode(t.getDT年金保険者コード());
-        data.setDtTsuuchiContentCode(t.getDT通知内容コード());
-        data.setDtYobi1(t.getDT予備1());
-        data.setDtSeidoCode(t.getDT制度コード());
-        data.setDtCreateYMD(t.getDT作成年月日());
-        data.setDtKisoNennkinnNo(t.getDT基礎年金番号());
-        data.setDtNennkinnCode(t.getDT年金コード());
-        data.setDtYobi2(t.getDT予備2());
-        data.setDtSeinenngappi(t.getDT生年月日());
-        data.setDtSeibetsu(t.getDT性別());
-        data.setDtKanaShimei(t.getDTカナ氏名());
-        data.setDtShifutoCode1(t.getDTシフトコード1());
-        data.setDtKanjiShimei(t.getDT漢字氏名());
-        data.setDtShifutoCode2(t.getDTシフトコード2());
-        data.setDtYubinNo(t.getDT郵便番号());
-        data.setDtKanajusyo(t.getDTカナ住所());
-        data.setDtShifutoCode3(t.getDTシフトコード3());
-        data.setDtKanjijusyo(t.getDT漢字住所());
-        data.setDtShifutoCode4(t.getDTシフトコード4());
-        data.setDtTaisyoYear(t.getDT対象年());
-        data.setDtTeiseiHyouji(t.getDT訂正表示());
-        data.setDtKakushuKubun(t.getDT各種区分());
-        data.setDtShoriResult(t.getDT処理結果());
-        data.setDtYobi3(t.getDT予備3());
-        data.setDtYobi4(t.getDT予備4());
-        data.setDtkinngaku1(t.getDT金額1());
-        data.setDtKinngakuYobi1(t.getDT金額予備1());
-        data.setDtKinngakuYobi2(t.getDT金額予備2());
-        data.setDtYobi5(t.getDT予備5());
-        data.setDtKyousaiNennkinnShoushoKigouNo(t.getDT共済年金証書記号番号());
+        data.setDtRekoDoKubunn(t.get取込_DTレコード区分());
+        data.setDtShichosonCode(t.get取込_DT市町村コード());
+        data.setDtNennkinnHokenshaCode(t.get取込_DT年金保険者コード());
+        data.setDtTsuuchiContentCode(t.get取込_DT通知内容コード());
+        data.setDtYobi1(t.get取込_DT予備1());
+        data.setDtSeidoCode(t.get取込_DT制度コード());
+        data.setDtCreateYMD(t.get取込_DT作成年月日());
+        data.setDtKisoNennkinnNo(t.get取込_DT基礎年金番号());
+        data.setDtNennkinnCode(t.get取込_DT年金コード());
+        data.setDtYobi2(t.get取込_DT予備2());
+        data.setDtSeinenngappi(t.get取込_DT生年月日());
+        data.setDtSeibetsu(t.get取込_DT性別());
+        data.setDtKanaShimei(t.get取込_DTカナ氏名());
+        data.setDtShifutoCode1(t.get取込_DTシフトコード1());
+        data.setDtKanjiShimei(t.get取込_DT漢字氏名());
+        data.setDtShifutoCode2(t.get取込_DTシフトコード2());
+        data.setDtYubinNo(t.get取込_DT郵便番号());
+        data.setDtKanajusyo(t.get取込_DTカナ住所());
+        data.setDtShifutoCode3(t.get取込_DTシフトコード3());
+        data.setDtKanjijusyo(t.get取込_DT漢字住所());
+        data.setDtShifutoCode4(t.get取込_DTシフトコード4());
+        data.setDtTaisyoYear(t.get取込_DT対象年());
+        data.setDtTeiseiHyouji(t.get取込_DT訂正表示());
+        data.setDtKakushuKubun(t.get取込_DT各種区分());
+        data.setDtShoriResult(t.get取込_DT処理結果());
+        data.setDtYobi3(t.get取込_DT予備3());
+        data.setDtYobi4(t.get取込_DT予備4());
+        data.setDtkinngaku1(t.get取込_DT金額1());
+        data.setDtKinngakuYobi1(t.get取込_DT金額予備1());
+        data.setDtKinngakuYobi2(t.get取込_DT金額予備2());
+        data.setDtYobi5(t.get取込_DT予備5());
+        data.setDtKyousaiNennkinnShoushoKigouNo(t.get取込_DT共済年金証書記号番号());
         return data;
     }
 }

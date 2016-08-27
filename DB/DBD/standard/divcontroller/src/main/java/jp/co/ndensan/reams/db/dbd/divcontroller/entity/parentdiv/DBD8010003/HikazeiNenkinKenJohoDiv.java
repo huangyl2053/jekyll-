@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HikazeiNenkinKenJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -234,32 +234,32 @@ public class HikazeiNenkinKenJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTbNenkinHokenshaCode() {
+    public TextBoxCode getTbNenkinHokenshaCode() {
         return this.getShoSaiPanel().getTbNenkinHokenshaCode();
     }
 
     @JsonIgnore
-    public void  setTbNenkinHokenshaCode(TextBox tbNenkinHokenshaCode) {
+    public void  setTbNenkinHokenshaCode(TextBoxCode tbNenkinHokenshaCode) {
         this.getShoSaiPanel().setTbNenkinHokenshaCode(tbNenkinHokenshaCode);
     }
 
     @JsonIgnore
-    public TextBox getTbKisoNenkinNo() {
+    public TextBoxCode getTbKisoNenkinNo() {
         return this.getShoSaiPanel().getTbKisoNenkinNo();
     }
 
     @JsonIgnore
-    public void  setTbKisoNenkinNo(TextBox tbKisoNenkinNo) {
+    public void  setTbKisoNenkinNo(TextBoxCode tbKisoNenkinNo) {
         this.getShoSaiPanel().setTbKisoNenkinNo(tbKisoNenkinNo);
     }
 
     @JsonIgnore
-    public TextBox getTbNenkinCode() {
+    public TextBoxCode getTbNenkinCode() {
         return this.getShoSaiPanel().getTbNenkinCode();
     }
 
     @JsonIgnore
-    public void  setTbNenkinCode(TextBox tbNenkinCode) {
+    public void  setTbNenkinCode(TextBoxCode tbNenkinCode) {
         this.getShoSaiPanel().setTbNenkinCode(tbNenkinCode);
     }
 
@@ -304,12 +304,12 @@ public class HikazeiNenkinKenJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTbGenkisoNenkinNo() {
+    public TextBoxCode getTbGenkisoNenkinNo() {
         return this.getShoSaiPanel().getNaiyoArea().getTbGenkisoNenkinNo();
     }
 
     @JsonIgnore
-    public void  setTbGenkisoNenkinNo(TextBox tbGenkisoNenkinNo) {
+    public void  setTbGenkisoNenkinNo(TextBoxCode tbGenkisoNenkinNo) {
         this.getShoSaiPanel().getNaiyoArea().setTbGenkisoNenkinNo(tbGenkisoNenkinNo);
     }
 

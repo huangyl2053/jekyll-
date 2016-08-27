@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Aug 02 17:39:07 CST 2016 
+ * Thu Aug 18 17:11:12 CST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 
 public class dgChosahyoTorikomiKekka_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
     private RString no;
     private RString okOrNg;
@@ -35,6 +35,9 @@ public class dgChosahyoTorikomiKekka_Row extends DataRow {
     private RString ninteiYukoKikan;
     private RString ninteiYukoKikanKaishiYMD;
     private RString ninteiYukoKikanShuryoYMD;
+    private RString shoKisaiHokenshaNo;
+    private RString shinseishoKanriNo;
+    private RString shinsakaiKaisaiNo;
 
     public dgChosahyoTorikomiKekka_Row() {
         super();
@@ -51,6 +54,9 @@ public class dgChosahyoTorikomiKekka_Row extends DataRow {
         this.ninteiYukoKikan = RString.EMPTY;
         this.ninteiYukoKikanKaishiYMD = RString.EMPTY;
         this.ninteiYukoKikanShuryoYMD = RString.EMPTY;
+        this.shoKisaiHokenshaNo = RString.EMPTY;
+        this.shinseishoKanriNo = RString.EMPTY;
+        this.shinsakaiKaisaiNo = RString.EMPTY;
         this.setOriginalData("no", no);
         this.setOriginalData("okOrNg", okOrNg);
         this.setOriginalData("hokensha", hokensha);
@@ -64,9 +70,12 @@ public class dgChosahyoTorikomiKekka_Row extends DataRow {
         this.setOriginalData("ninteiYukoKikan", ninteiYukoKikan);
         this.setOriginalData("ninteiYukoKikanKaishiYMD", ninteiYukoKikanKaishiYMD);
         this.setOriginalData("ninteiYukoKikanShuryoYMD", ninteiYukoKikanShuryoYMD);
+        this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
+        this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
+        this.setOriginalData("shinsakaiKaisaiNo", shinsakaiKaisaiNo);
     }
 
-    public dgChosahyoTorikomiKekka_Row(RString no, RString okOrNg, RString hokensha, RString hihokenshaNo, TextBoxFlexibleDate txtShinseiDate, RString shinseiKubun, RString hihoName, RString firstJudgmentResult, RString yokaigoJotaizorei, RString secondJudgmentResult, RString ninteiYukoKikan, RString ninteiYukoKikanKaishiYMD, RString ninteiYukoKikanShuryoYMD) {
+    public dgChosahyoTorikomiKekka_Row(RString no, RString okOrNg, RString hokensha, RString hihokenshaNo, TextBoxFlexibleDate txtShinseiDate, RString shinseiKubun, RString hihoName, RString firstJudgmentResult, RString yokaigoJotaizorei, RString secondJudgmentResult, RString ninteiYukoKikan, RString ninteiYukoKikanKaishiYMD, RString ninteiYukoKikanShuryoYMD, RString shoKisaiHokenshaNo, RString shinseishoKanriNo, RString shinsakaiKaisaiNo) {
         super();
         this.setOriginalData("no", no);
         this.setOriginalData("okOrNg", okOrNg);
@@ -81,6 +90,9 @@ public class dgChosahyoTorikomiKekka_Row extends DataRow {
         this.setOriginalData("ninteiYukoKikan", ninteiYukoKikan);
         this.setOriginalData("ninteiYukoKikanKaishiYMD", ninteiYukoKikanKaishiYMD);
         this.setOriginalData("ninteiYukoKikanShuryoYMD", ninteiYukoKikanShuryoYMD);
+        this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
+        this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
+        this.setOriginalData("shinsakaiKaisaiNo", shinsakaiKaisaiNo);
         this.no = no;
         this.okOrNg = okOrNg;
         this.hokensha = hokensha;
@@ -94,6 +106,9 @@ public class dgChosahyoTorikomiKekka_Row extends DataRow {
         this.ninteiYukoKikan = ninteiYukoKikan;
         this.ninteiYukoKikanKaishiYMD = ninteiYukoKikanKaishiYMD;
         this.ninteiYukoKikanShuryoYMD = ninteiYukoKikanShuryoYMD;
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
+        this.shinseishoKanriNo = shinseishoKanriNo;
+        this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
     }
 
     public RString getNo() {
@@ -146,6 +161,18 @@ public class dgChosahyoTorikomiKekka_Row extends DataRow {
 
     public RString getNinteiYukoKikanShuryoYMD() {
         return ninteiYukoKikanShuryoYMD;
+    }
+
+    public RString getShoKisaiHokenshaNo() {
+        return shoKisaiHokenshaNo;
+    }
+
+    public RString getShinseishoKanriNo() {
+        return shinseishoKanriNo;
+    }
+
+    public RString getShinsakaiKaisaiNo() {
+        return shinsakaiKaisaiNo;
     }
 
     public void setNo(RString no) {
@@ -211,6 +238,21 @@ public class dgChosahyoTorikomiKekka_Row extends DataRow {
     public void setNinteiYukoKikanShuryoYMD(RString ninteiYukoKikanShuryoYMD) {
         this.setOriginalData("ninteiYukoKikanShuryoYMD", ninteiYukoKikanShuryoYMD);
         this.ninteiYukoKikanShuryoYMD = ninteiYukoKikanShuryoYMD;
+    }
+
+    public void setShoKisaiHokenshaNo(RString shoKisaiHokenshaNo) {
+        this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
+    }
+
+    public void setShinseishoKanriNo(RString shinseishoKanriNo) {
+        this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
+        this.shinseishoKanriNo = shinseishoKanriNo;
+    }
+
+    public void setShinsakaiKaisaiNo(RString shinsakaiKaisaiNo) {
+        this.setOriginalData("shinsakaiKaisaiNo", shinsakaiKaisaiNo);
+        this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
     }
 
     // </editor-fold>

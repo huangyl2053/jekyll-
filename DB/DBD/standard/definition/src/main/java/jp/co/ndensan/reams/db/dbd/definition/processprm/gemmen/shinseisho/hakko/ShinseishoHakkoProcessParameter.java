@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.processprm.gemmen.shinseisho.hakko;
 
+import java.util.UUID;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmen.shinseisho.hakko.FutanGendogakuMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -23,7 +24,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShinseishoHakkoProcessParameter implements IBatchProcessParameter {
 
-    private RString 発行処理ID;
+    private UUID 発行処理ID;
     private boolean 出力フラグ;
     private long 改頁出力順ID;
     private FlexibleDate 基準日;
@@ -41,7 +42,7 @@ public class ShinseishoHakkoProcessParameter implements IBatchProcessParameter {
      * @param 発行日 発行日
      */
     public ShinseishoHakkoProcessParameter(
-            RString 発行処理ID,
+            UUID 発行処理ID,
             boolean 出力フラグ,
             long 改頁出力順ID,
             FlexibleDate 基準日,

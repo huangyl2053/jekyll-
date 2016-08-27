@@ -24,6 +24,7 @@ public class KarisanteiIdoTsuchishoTempDropProcess extends SimpleBatchProcessBas
 
     @Override
     protected void process() {
+        mapper.drop計算後情報中間一時();
         mapper.drop計算後情報一時();
     }
 }

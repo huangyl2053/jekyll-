@@ -4,24 +4,68 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onOkClose_btnChosainGuide = function () {
+                return "onOkClose_btnChosainGuide";
+            };
+
+            Events.onBeforeOpenDialog_btnChosainGuide = function () {
+                return "onBeforeOpenDialog_btnChosainGuide";
+            };
+
+            Events.onOKClose_btnItakusakiGuide = function () {
+                return "onOKClose_btnItakusakiGuide";
+            };
+
+            Events.onBeforeOpenDialog_btnItakusakiGuide = function () {
+                return "onBeforeOpenDialog_btnItakusakiGuide";
+            };
+
             Events.onClick_btnChosainJohoClear = function () {
                 return "onClick_btnChosainJohoClear";
+            };
+
+            Events.onClick_btnZenKaiFukusha = function () {
+                return "onClick_btnZenKaiFukusha";
+            };
+
+            Events.onClick_btnHonninJushoFukusha = function () {
+                return "onClick_btnHonninJushoFukusha";
+            };
+
+            Events.onClick_btnNyushoShisetsuFukusha = function () {
+                return "onClick_btnNyushoShisetsuFukusha";
             };
 
             Events.onClick_btnHomonChosaClear = function () {
                 return "onClick_btnHomonChosaClear";
             };
 
+            Events.onOKClose_btnShujiiGuide = function () {
+                return "onOKClose_btnShujiiGuide";
+            };
+
+            Events.onBeforeOpenDialog_btnShujiiGuide = function () {
+                return "onBeforeOpenDialog_btnShujiiGuide";
+            };
+
+            Events.onOKClose_btnIryoKikanGuide = function () {
+                return "onOKClose_btnIryoKikanGuide";
+            };
+
+            Events.onBeforeOpenDialog_btnIryoKikanGuide = function () {
+                return "onBeforeOpenDialog_btnIryoKikanGuide";
+            };
+
             Events.onClick_btnShujiiJohoClear = function () {
                 return "onClick_btnShujiiJohoClear";
             };
 
-            Events.onOkClose = function () {
-                return "onOkClose";
+            Events.onClick_btnKakutei = function () {
+                return "onClick_btnKakutei";
             };
 
-            Events.onCancelClose = function () {
-                return "onCancelClose";
+            Events.onClick_btnTorikeshi = function () {
+                return "onClick_btnTorikeshi";
             };
 
             Events.onClick_btnAllClear = function () {
@@ -71,12 +115,12 @@ var DBZ;
                 return new UZA.TextBoxCode(this.convFiledName("txtNinteiChosaItakusakiCode"));
             };
 
-            Controls.prototype.btnItakusakiGuide = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnItakusakiGuide"));
-            };
-
             Controls.prototype.txtNinteiChosaItakusakiName = function () {
                 return new UZA.TextBox(this.convFiledName("txtNinteiChosaItakusakiName"));
+            };
+
+            Controls.prototype.btnItakusakiGuide = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnItakusakiGuide"));
             };
 
             Controls.prototype.btnChosainJohoClear = function () {

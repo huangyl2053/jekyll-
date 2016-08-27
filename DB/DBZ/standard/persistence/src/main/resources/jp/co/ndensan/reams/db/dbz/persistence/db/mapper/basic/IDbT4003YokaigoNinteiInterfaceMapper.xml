@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4003YokaigoNinteiInterfaceマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4003YokaigoNinteiInterface">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.allColumns_DbT4003YokaigoNinteiInterface" />
+     FROM
+         rgdb."DbT4003YokaigoNinteiInterface"
+     WHERE
+         rgdb."DbT4003YokaigoNinteiInterface"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4003YokaigoNinteiInterface">
+         "DbT4003YokaigoNinteiInterface"."insertDantaiCd" as "dbT4003YokaigoNinteiInterface_insertDantaiCd",
+         "DbT4003YokaigoNinteiInterface"."insertTimestamp" as "dbT4003YokaigoNinteiInterface_insertTimestamp",
+         "DbT4003YokaigoNinteiInterface"."insertReamsLoginId" as "dbT4003YokaigoNinteiInterface_insertReamsLoginId",
+         "DbT4003YokaigoNinteiInterface"."insertContextId" as "dbT4003YokaigoNinteiInterface_insertContextId",
+         "DbT4003YokaigoNinteiInterface"."isDeleted" as "dbT4003YokaigoNinteiInterface_isDeleted",
+         "DbT4003YokaigoNinteiInterface"."updateCount" as "dbT4003YokaigoNinteiInterface_updateCount",
+         "DbT4003YokaigoNinteiInterface"."lastUpdateTimestamp" as "dbT4003YokaigoNinteiInterface_lastUpdateTimestamp",
+         "DbT4003YokaigoNinteiInterface"."lastUpdateReamsLoginId" as "dbT4003YokaigoNinteiInterface_lastUpdateReamsLoginId",
+         "DbT4003YokaigoNinteiInterface"."shinseishoKanriNo" as "dbT4003YokaigoNinteiInterface_shinseishoKanriNo",
+         "DbT4003YokaigoNinteiInterface"."hihokenshaNo" as "dbT4003YokaigoNinteiInterface_hihokenshaNo",
+         "DbT4003YokaigoNinteiInterface"."rirekiNo" as "dbT4003YokaigoNinteiInterface_rirekiNo",
+         "DbT4003YokaigoNinteiInterface"."torikomiTimestamp" as "dbT4003YokaigoNinteiInterface_torikomiTimestamp",
+         "DbT4003YokaigoNinteiInterface"."torikomiKubun" as "dbT4003YokaigoNinteiInterface_torikomiKubun",
+         "DbT4003YokaigoNinteiInterface"."shinseiShubetsuCode" as "dbT4003YokaigoNinteiInterface_shinseiShubetsuCode",
+         "DbT4003YokaigoNinteiInterface"."torisageKubunCode" as "dbT4003YokaigoNinteiInterface_torisageKubunCode",
+         "DbT4003YokaigoNinteiInterface"."shinseiYMD" as "dbT4003YokaigoNinteiInterface_shinseiYMD",
+         "DbT4003YokaigoNinteiInterface"."iryoKikanCode" as "dbT4003YokaigoNinteiInterface_iryoKikanCode",
+         "DbT4003YokaigoNinteiInterface"."shujiiCode" as "dbT4003YokaigoNinteiInterface_shujiiCode",
+         "DbT4003YokaigoNinteiInterface"."ikenshoIraiYMD" as "dbT4003YokaigoNinteiInterface_ikenshoIraiYMD",
+         "DbT4003YokaigoNinteiInterface"."ikenshoToriyoseYMD" as "dbT4003YokaigoNinteiInterface_ikenshoToriyoseYMD",
+         "DbT4003YokaigoNinteiInterface"."chosaItakuYMD" as "dbT4003YokaigoNinteiInterface_chosaItakuYMD",
+         "DbT4003YokaigoNinteiInterface"."chosaShuryoYMD" as "dbT4003YokaigoNinteiInterface_chosaShuryoYMD",
+         "DbT4003YokaigoNinteiInterface"."chosaItakusakiCode" as "dbT4003YokaigoNinteiInterface_chosaItakusakiCode",
+         "DbT4003YokaigoNinteiInterface"."chosainCode" as "dbT4003YokaigoNinteiInterface_chosainCode",
+         "DbT4003YokaigoNinteiInterface"."ichijiHanteiYMD" as "dbT4003YokaigoNinteiInterface_ichijiHanteiYMD",
+         "DbT4003YokaigoNinteiInterface"."ichijiHanteiKekkaCode" as "dbT4003YokaigoNinteiInterface_ichijiHanteiKekkaCode",
+         "DbT4003YokaigoNinteiInterface"."ichijiHanteiKekkaKasanCode" as "dbT4003YokaigoNinteiInterface_ichijiHanteiKekkaKasanCode",
+         "DbT4003YokaigoNinteiInterface"."shinsakaiShiryoSakuseiYMD" as "dbT4003YokaigoNinteiInterface_shinsakaiShiryoSakuseiYMD",
+         "DbT4003YokaigoNinteiInterface"."shinsakaiYoteiYMD" as "dbT4003YokaigoNinteiInterface_shinsakaiYoteiYMD",
+         "DbT4003YokaigoNinteiInterface"."gogitaiNo" as "dbT4003YokaigoNinteiInterface_gogitaiNo",
+         "DbT4003YokaigoNinteiInterface"."nijiHanteiYMD" as "dbT4003YokaigoNinteiInterface_nijiHanteiYMD",
+         "DbT4003YokaigoNinteiInterface"."nijiHanteiKekkaCode" as "dbT4003YokaigoNinteiInterface_nijiHanteiKekkaCode",
+         "DbT4003YokaigoNinteiInterface"."ninteiYukoKikanStart" as "dbT4003YokaigoNinteiInterface_ninteiYukoKikanStart",
+         "DbT4003YokaigoNinteiInterface"."ninteiYukoKikanEnd" as "dbT4003YokaigoNinteiInterface_ninteiYukoKikanEnd",
+         "DbT4003YokaigoNinteiInterface"."serviceHenkoRiyuCode" as "dbT4003YokaigoNinteiInterface_serviceHenkoRiyuCode",
+         "DbT4003YokaigoNinteiInterface"."tokuteiShippeiCode" as "dbT4003YokaigoNinteiInterface_tokuteiShippeiCode",
+         "DbT4003YokaigoNinteiInterface"."shogaiKoreiJiritsudo" as "dbT4003YokaigoNinteiInterface_shogaiKoreiJiritsudo",
+         "DbT4003YokaigoNinteiInterface"."ninchishoKoreiJiritsudo" as "dbT4003YokaigoNinteiInterface_ninchishoKoreiJiritsudo",
+         "DbT4003YokaigoNinteiInterface"."shinsakaiIken" as "dbT4003YokaigoNinteiInterface_shinsakaiIken",
+         "DbT4003YokaigoNinteiInterface"."versionNo" as "dbT4003YokaigoNinteiInterface_versionNo",
+         "DbT4003YokaigoNinteiInterface"."ichijiHanteiNaiyo" as "dbT4003YokaigoNinteiInterface_ichijiHanteiNaiyo",
+         "DbT4003YokaigoNinteiInterface"."ichijiHanteiNaiyo2" as "dbT4003YokaigoNinteiInterface_ichijiHanteiNaiyo2",
+         "DbT4003YokaigoNinteiInterface"."zenTorikomiTimestamp" as "dbT4003YokaigoNinteiInterface_zenTorikomiTimestamp",
+         "DbT4003YokaigoNinteiInterface"."keshikomiFlag" as "dbT4003YokaigoNinteiInterface_keshikomiFlag",
+         "DbT4003YokaigoNinteiInterface"."keshikomiTimestamp" as "dbT4003YokaigoNinteiInterface_keshikomiTimestamp",
+         "DbT4003YokaigoNinteiInterface"."yobiKomoku1" as "dbT4003YokaigoNinteiInterface_yobiKomoku1",
+         "DbT4003YokaigoNinteiInterface"."yobiKomoku2" as "dbT4003YokaigoNinteiInterface_yobiKomoku2",
+         "DbT4003YokaigoNinteiInterface"."yobiKomoku3" as "dbT4003YokaigoNinteiInterface_yobiKomoku3",
+         "DbT4003YokaigoNinteiInterface"."yobiKomoku4" as "dbT4003YokaigoNinteiInterface_yobiKomoku4",
+         "DbT4003YokaigoNinteiInterface"."yobiKomoku5" as "dbT4003YokaigoNinteiInterface_yobiKomoku5",
+         "DbT4003YokaigoNinteiInterface"."yobiKubun1" as "dbT4003YokaigoNinteiInterface_yobiKubun1",
+         "DbT4003YokaigoNinteiInterface"."yobiKubun2" as "dbT4003YokaigoNinteiInterface_yobiKubun2",
+         "DbT4003YokaigoNinteiInterface"."yobiKubun3" as "dbT4003YokaigoNinteiInterface_yobiKubun3",
+         "DbT4003YokaigoNinteiInterface"."yobiKubun4" as "dbT4003YokaigoNinteiInterface_yobiKubun4",
+         "DbT4003YokaigoNinteiInterface"."yobiKubun5" as "dbT4003YokaigoNinteiInterface_yobiKubun5",
+         "DbT4003YokaigoNinteiInterface"."reserve" as "dbT4003YokaigoNinteiInterface_reserve"
+    </sql>
+
+
+    <!--テーブルDbT4003YokaigoNinteiInterfaceの項目をDbT4003YokaigoNinteiInterfaceEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4003YokaigoNinteiInterfaceEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity" autoMapping="true">
+        <result property="insertDantaiCd" column="dbT4003YokaigoNinteiInterface_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4003YokaigoNinteiInterface_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4003YokaigoNinteiInterface_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4003YokaigoNinteiInterface_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4003YokaigoNinteiInterface_isDeleted" />
+        <result property="updateCount" column="dbT4003YokaigoNinteiInterface_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4003YokaigoNinteiInterface_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4003YokaigoNinteiInterface_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseishoKanriNo" column="dbT4003YokaigoNinteiInterface_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="hihokenshaNo" column="dbT4003YokaigoNinteiInterface_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="rirekiNo" column="dbT4003YokaigoNinteiInterface_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="torikomiTimestamp" column="dbT4003YokaigoNinteiInterface_torikomiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="torikomiKubun" column="dbT4003YokaigoNinteiInterface_torikomiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiShubetsuCode" column="dbT4003YokaigoNinteiInterface_shinseiShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="torisageKubunCode" column="dbT4003YokaigoNinteiInterface_torisageKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiYMD" column="dbT4003YokaigoNinteiInterface_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="iryoKikanCode" column="dbT4003YokaigoNinteiInterface_iryoKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shujiiCode" column="dbT4003YokaigoNinteiInterface_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ikenshoIraiYMD" column="dbT4003YokaigoNinteiInterface_ikenshoIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ikenshoToriyoseYMD" column="dbT4003YokaigoNinteiInterface_ikenshoToriyoseYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="chosaItakuYMD" column="dbT4003YokaigoNinteiInterface_chosaItakuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="chosaShuryoYMD" column="dbT4003YokaigoNinteiInterface_chosaShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="chosaItakusakiCode" column="dbT4003YokaigoNinteiInterface_chosaItakusakiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="chosainCode" column="dbT4003YokaigoNinteiInterface_chosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichijiHanteiYMD" column="dbT4003YokaigoNinteiInterface_ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ichijiHanteiKekkaCode" column="dbT4003YokaigoNinteiInterface_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichijiHanteiKekkaKasanCode" column="dbT4003YokaigoNinteiInterface_ichijiHanteiKekkaKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiShiryoSakuseiYMD" column="dbT4003YokaigoNinteiInterface_shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinsakaiYoteiYMD" column="dbT4003YokaigoNinteiInterface_shinsakaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="gogitaiNo" column="dbT4003YokaigoNinteiInterface_gogitaiNo" />
+        <result property="nijiHanteiYMD" column="dbT4003YokaigoNinteiInterface_nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nijiHanteiKekkaCode" column="dbT4003YokaigoNinteiInterface_nijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiYukoKikanStart" column="dbT4003YokaigoNinteiInterface_ninteiYukoKikanStart" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiYukoKikanEnd" column="dbT4003YokaigoNinteiInterface_ninteiYukoKikanEnd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="serviceHenkoRiyuCode" column="dbT4003YokaigoNinteiInterface_serviceHenkoRiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuteiShippeiCode" column="dbT4003YokaigoNinteiInterface_tokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shogaiKoreiJiritsudo" column="dbT4003YokaigoNinteiInterface_shogaiKoreiJiritsudo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninchishoKoreiJiritsudo" column="dbT4003YokaigoNinteiInterface_ninchishoKoreiJiritsudo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiIken" column="dbT4003YokaigoNinteiInterface_shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="versionNo" column="dbT4003YokaigoNinteiInterface_versionNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichijiHanteiNaiyo" column="dbT4003YokaigoNinteiInterface_ichijiHanteiNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichijiHanteiNaiyo2" column="dbT4003YokaigoNinteiInterface_ichijiHanteiNaiyo2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="zenTorikomiTimestamp" column="dbT4003YokaigoNinteiInterface_zenTorikomiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="keshikomiFlag" column="dbT4003YokaigoNinteiInterface_keshikomiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="keshikomiTimestamp" column="dbT4003YokaigoNinteiInterface_keshikomiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="yobiKomoku1" column="dbT4003YokaigoNinteiInterface_yobiKomoku1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yobiKomoku2" column="dbT4003YokaigoNinteiInterface_yobiKomoku2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yobiKomoku3" column="dbT4003YokaigoNinteiInterface_yobiKomoku3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yobiKomoku4" column="dbT4003YokaigoNinteiInterface_yobiKomoku4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yobiKomoku5" column="dbT4003YokaigoNinteiInterface_yobiKomoku5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yobiKubun1" column="dbT4003YokaigoNinteiInterface_yobiKubun1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yobiKubun2" column="dbT4003YokaigoNinteiInterface_yobiKubun2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yobiKubun3" column="dbT4003YokaigoNinteiInterface_yobiKubun3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yobiKubun4" column="dbT4003YokaigoNinteiInterface_yobiKubun4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yobiKubun5" column="dbT4003YokaigoNinteiInterface_yobiKubun5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="reserve" column="dbT4003YokaigoNinteiInterface_reserve" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>

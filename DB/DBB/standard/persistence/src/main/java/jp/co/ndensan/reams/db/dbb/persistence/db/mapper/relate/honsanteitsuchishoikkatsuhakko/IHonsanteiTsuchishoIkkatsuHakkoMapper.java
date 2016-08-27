@@ -20,6 +20,11 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteitsuchishoikkatsuhakk
 public interface IHonsanteiTsuchishoIkkatsuHakkoMapper {
 
     /**
+     * 計算後情報中間一時テーブル削除メソッドです。
+     */
+    void drop計算後情報中間一時();
+
+    /**
      * creat本算定通知書一時テーブルメソッドです。
      */
     void creat本算定通知書一時();

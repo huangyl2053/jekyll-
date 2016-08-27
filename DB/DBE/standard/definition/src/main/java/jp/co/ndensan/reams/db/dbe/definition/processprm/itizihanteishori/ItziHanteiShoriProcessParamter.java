@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.definition.processprm.itizihanteishori;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itizihanteishori.ItziHanteiShoriMybitisParamter;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,23 +23,25 @@ import lombok.Setter;
 @Setter
 public class ItziHanteiShoriProcessParamter implements IBatchProcessParameter {
 
-    private final List<ShinseishoKanriNo> shinseishoKanriNoList;
+    private final List<RString> shinseishoKanriNoList;
     private final RString battishuturyokukubun;
     private RString イメージ区分;
-    private RString 取下;
-    private RString 延期;
+    private final RDateTime fileId;
 
     /**
      * コンストラクタです。
      *
      * @param 申請書管理番号リスト List<RString>
      * @param battishuturyokukubun RString
+     * @param fileId RDateTime
      */
     public ItziHanteiShoriProcessParamter(
-            List<ShinseishoKanriNo> 申請書管理番号リスト,
-            RString battishuturyokukubun) {
+            List<RString> 申請書管理番号リスト,
+            RString battishuturyokukubun,
+            RDateTime fileId) {
         this.shinseishoKanriNoList = 申請書管理番号リスト;
         this.battishuturyokukubun = battishuturyokukubun;
+        this.fileId = fileId;
     }
 
     /**
@@ -50,8 +52,6 @@ public class ItziHanteiShoriProcessParamter implements IBatchProcessParameter {
     public ItziHanteiShoriMybitisParamter toItziHanteiShoriMybitisParamter() {
         return ItziHanteiShoriMybitisParamter.createParam(shinseishoKanriNoList,
                 battishuturyokukubun,
-                イメージ区分,
-                取下,
-                延期);
+                イメージ区分);
     }
 }

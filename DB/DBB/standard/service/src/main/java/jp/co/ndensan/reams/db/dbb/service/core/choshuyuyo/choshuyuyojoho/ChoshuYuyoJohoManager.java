@@ -151,6 +151,23 @@ public class ChoshuYuyoJohoManager {
     }
 
     /**
+     * 主キーに合致する徴収猶予の情報を返します。
+     *
+     * @param 徴収猶予の情報検索条件 徴収猶予の情報検索条件
+     * @return ChoshuYuyoJoho nullが返る可能性があります。
+     */
+    public ChoshuYuyoJoho select最新の徴収猶予の情報(ChoshuYuyoJohoRelateMapperParameter 徴収猶予の情報検索条件) {
+        requireNonNull(徴収猶予の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(検索条件.toString()));
+        IChoshuYuyoJohoRelateMapper mapper = mapperProvider.create(IChoshuYuyoJohoRelateMapper.class);
+        ChoshuYuyoJohoRelateEntity relateEntity = mapper.select最新の徴収猶予の情報(徴収猶予の情報検索条件);
+        if (relateEntity == null) {
+            return null;
+        }
+        relateEntity.initializeMd5ToEntities();
+        return new ChoshuYuyoJoho(relateEntity);
+    }
+
+    /**
      * 徴収猶予情報{@link ChoshuYuyoJoho}を保存します。
      *
      * @param 徴収猶予情報 徴収猶予情報

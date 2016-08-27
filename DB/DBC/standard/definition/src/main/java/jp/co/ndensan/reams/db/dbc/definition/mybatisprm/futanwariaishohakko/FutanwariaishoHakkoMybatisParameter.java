@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -55,8 +54,6 @@ public class FutanwariaishoHakkoMybatisParameter extends UaFt200FindShikibetsuTa
     private RDateTime 抽出期間終了日時;
     private RString 出力順;
 
-    private LasdecCode 市町村コード;
-
     private RString サブ業務コード;
     private RString 帳票分類ID;
     private FlexibleYear 管理年度;
@@ -95,11 +92,10 @@ public class FutanwariaishoHakkoMybatisParameter extends UaFt200FindShikibetsuTa
      * @param 抽出期間終了日時 抽出期間終了日時
      * @param 出力順 出力順
      * @param searchKey searchKey
-     * @param 市町村コード 市町村コード
      */
     public FutanwariaishoHakkoMybatisParameter(IAtesakiPSMSearchKey atesakiKey, FlexibleYear 年度, RDate 交付年月日,
             RString 発行区分, RString 出力対象, RDateTime 抽出期間開始日時, RDateTime 抽出期間終了日時,
-            RString 出力順, IShikibetsuTaishoPSMSearchKey searchKey, LasdecCode 市町村コード) {
+            RString 出力順, IShikibetsuTaishoPSMSearchKey searchKey) {
         super(searchKey);
         this.atesakiKey = atesakiKey;
         this.uaft250_gyomuCode = atesakiKey.get業務判定キー().get業務コード();
@@ -122,7 +118,6 @@ public class FutanwariaishoHakkoMybatisParameter extends UaFt200FindShikibetsuTa
         this.抽出期間開始日時 = 抽出期間開始日時;
         this.抽出期間終了日時 = 抽出期間終了日時;
         this.出力順 = 出力順;
-        this.市町村コード = 市町村コード;
     }
 
 }

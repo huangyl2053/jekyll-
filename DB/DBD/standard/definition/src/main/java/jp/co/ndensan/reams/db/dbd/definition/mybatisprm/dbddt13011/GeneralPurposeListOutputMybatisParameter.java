@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbddt13011;
 
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuHohoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
@@ -47,12 +48,12 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
     private boolean is住所To;
     private boolean is行政区From;
     private boolean is行政区To;
-    private boolean is地区１From;
-    private boolean is地区１To;
-    private boolean is地区２From;
-    private boolean is地区２To;
-    private boolean is地区３From;
-    private boolean is地区３To;
+    private boolean is地区1From;
+    private boolean is地区1To;
+    private boolean is地区2From;
+    private boolean is地区2To;
+    private boolean is地区3From;
+    private boolean is地区3To;
 
     private RString psmShikibetsuTaisho;
     private RString psmAtesaki;
@@ -78,6 +79,9 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
     private RString chiku3_From;
     private RString chiku3_To;
 
+    private FlexibleDate 年齢Fromから逆算した生年月日;
+    private FlexibleDate 年齢Toから逆算した生年月日;
+
     /**
      * コンストラクタです。
      *
@@ -87,29 +91,17 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
      * @param 日付範囲From 日付範囲From
      * @param 日付範囲To 日付範囲To
      * @param 直近データ抽出 直近データ抽出
-     * @param 喪失区分 喪失区分
-     * @param 項目名付加 項目名付加
-     * @param 連番付加 連番付加
-     * @param 日付スラッシュ付加 日付スラッシュ付加
      * @param 宛名抽出条件 宛名抽出条件
-     * @param 出力順 出力順
-     * @param 出力項目 出力項目
      * @param psmShikibetsuTaisho 宛名識別対象PSM
      * @param psmAtesaki 宛名識別対象PSM
      */
-    public GeneralPurposeListOutputMybatisParameter(RString 抽出方法区分,
+    public GeneralPurposeListOutputMybatisParameter(ChushutsuHohoKubun 抽出方法区分,
             RString 抽出項目区分,
             FlexibleDate 基準日,
             FlexibleDate 日付範囲From,
             FlexibleDate 日付範囲To,
             boolean 直近データ抽出,
-            RString 喪失区分,
-            boolean 項目名付加,
-            boolean 連番付加,
-            boolean 日付スラッシュ付加,
             AtenaSelectBatchParameter 宛名抽出条件,
-            Long 出力順,
-            RString 出力項目,
             RString psmShikibetsuTaisho,
             RString psmAtesaki) {
 
@@ -120,7 +112,7 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
         set宛名抽出区分について(宛名抽出条件);
     }
 
-    private void set抽出方法区分について(RString 抽出方法区分, RString 抽出項目区分, boolean 直近データ抽出,
+    private void set抽出方法区分について(ChushutsuHohoKubun 抽出方法区分, RString 抽出項目区分, boolean 直近データ抽出,
             FlexibleDate 日付範囲From,
             FlexibleDate 日付範囲To,
             RString psmShikibetsuTaisho,
@@ -134,10 +126,10 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
         RString 抽出項目区分_範囲_入所日 = new RString("入所日");
         RString 抽出項目区分_範囲_退所日 = new RString("退所日");
 
-        if (抽出方法区分_基準日.equals(抽出方法区分)) {
+        if (抽出方法区分_基準日.equals(抽出方法区分.get名称())) {
             is抽出方法区分_基準日 = true;
         }
-        if (抽出方法区分_範囲.equals(抽出方法区分)) {
+        if (抽出方法区分_範囲.equals(抽出方法区分.get名称())) {
             is抽出方法区分_範囲 = true;
 
             if (抽出項目区分_範囲_入所日.equals(抽出項目区分)) {
@@ -178,6 +170,7 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
     }
 
     private void set年齢範囲について(AtenaSelectBatchParameter 宛名抽出条件) {
+        FlexibleDate systemDate = FlexibleDate.getNowDate();
 
         if (NenreiSoChushutsuHoho.年齢範囲.equals(宛名抽出条件.getAgeSelectKijun())) {
             is宛名抽出区分_年齢 = true;
@@ -186,11 +179,12 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
             if (Decimal.ZERO != ageRange.getFrom()) {
                 is宛名抽出区分_年齢From = true;
                 ageFrom = ageRange.getFrom();
+                年齢Fromから逆算した生年月日 = systemDate.minusYear(ageFrom.intValue());
             }
             if (Decimal.ZERO != ageRange.getTo()) {
                 is宛名抽出区分_年齢To = true;
                 ageTo = ageRange.getTo();
-
+                年齢Toから逆算した生年月日 = systemDate.minusYear(ageTo.intValue());
             }
         }
     }
@@ -239,30 +233,30 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
             }
 
             if (!宛名抽出条件.getChiku1_From().isNullOrEmpty()) {
-                is地区１From = true;
+                is地区1From = true;
                 chiku1_From = 宛名抽出条件.getChiku1_From();
             }
 
             if (!宛名抽出条件.getChiku1_To().isNullOrEmpty()) {
-                is地区１To = true;
+                is地区1To = true;
                 chiku1_To = 宛名抽出条件.getChiku1_To();
             }
 
             if (!宛名抽出条件.getChiku2_From().isNullOrEmpty()) {
-                is地区２From = true;
+                is地区2From = true;
                 chiku2_From = 宛名抽出条件.getChiku2_From();
             }
             if (!宛名抽出条件.getChiku2_To().isNullOrEmpty()) {
-                is地区２To = true;
+                is地区2To = true;
                 chiku2_To = 宛名抽出条件.getChiku2_To();
             }
 
             if (!宛名抽出条件.getChiku3_From().isNullOrEmpty()) {
-                is地区３From = true;
+                is地区3From = true;
                 chiku3_From = 宛名抽出条件.getChiku3_From();
             }
             if (!宛名抽出条件.getChiku3_To().isNullOrEmpty()) {
-                is地区３To = true;
+                is地区3To = true;
                 chiku3_To = 宛名抽出条件.getChiku3_To();
             }
         }

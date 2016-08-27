@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5120001
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5120001.DBD5120001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5120001.NinteiShinseiTorokuUketsukeDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5120001.NinteiShinseiTorokuUketsukeHandler;
-import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5120001.NinteiShinseiTorokuUketsukeValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -23,8 +22,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -36,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class NinteiShinseiTorokuUketsuke {
 
     private final RString 表示パターン_新規 = new RString("0");
-    private final RString 表示パターン_申請中 = new RString("1");
 
     /**
      * 画面初期化
@@ -235,7 +231,7 @@ public class NinteiShinseiTorokuUketsuke {
             TextBox 氏名 = new TextBox();
             氏名.setValue(div.getCcdKaigoNinteiAtenaInfo().get被保険者氏名());
             div.getCcdShinseiTodokedesha().setTxtShimei(氏名);
-            //カナ氏名TODO
+            //カナ氏名TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
             TextBoxTelNo 電話番号 = new TextBoxTelNo();
             電話番号.setDomain(new TelNo(div.getCcdKaigoNinteiAtenaInfo().get電話番号()));
             div.getCcdShinseiTodokedesha().setTxtTelNo(電話番号);
@@ -256,7 +252,7 @@ public class NinteiShinseiTorokuUketsuke {
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnEnkiRiyuTeikeibun(NinteiShinseiTorokuUketsukeDiv div) {
 
         div.setHdn登録業務コード(GyomuCode.DB介護保険.getColumnValue());
-        div.setHdn登録グループコード(new RString("1"));
+        div.setHdn登録グループコード(new RString("1007"));
         return ResponseData.of(div).respond();
     }
 
@@ -280,124 +276,122 @@ public class NinteiShinseiTorokuUketsuke {
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onClick_btnUpdate(NinteiShinseiTorokuUketsukeDiv div) {
 
-        //必須項目が未入力の場合、エラーメッセージを表示する。TODO
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        if (DBD5120001StateName.申請追加.getName().equals(ResponseHolder.getState())) {
-            getValidationHandler().validateFor申請日の必須入力(pairs, div);
-            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
-            getValidationHandler().validateFor医療保険情報なし(pairs, div);
-            getValidationHandler().validateFor特定疾病なし(pairs, div);
-        } else if (DBD5120001StateName.申請修正.getName().equals(ResponseHolder.getState())) {
-            getValidationHandler().validateFor申請日の必須入力(pairs, div);
-            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
-        } else if (DBD5120001StateName.申請取下.getName().equals(ResponseHolder.getState())) {
-            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
-        } else if (DBD5120001StateName.区分変更追加.getName().equals(ResponseHolder.getState())) {
-            getValidationHandler().validateFor申請日の必須入力(pairs, div);
-            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
-            getValidationHandler().validateFor医療保険情報なし(pairs, div);
-            getValidationHandler().validateFor特定疾病なし(pairs, div);
-            getValidationHandler().validateFor変更元が_要支援(pairs, div);
-            getValidationHandler().validateFor変更元が_自立(pairs, div);
-        } else if (DBD5120001StateName.区分変更修正.getName().equals(ResponseHolder.getState())) {
-            getValidationHandler().validateFor申請日の必須入力(pairs, div);
-            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
-        } else if (DBD5120001StateName.区分変更取下.getName().equals(ResponseHolder.getState())) {
-            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
-        } else if (DBD5120001StateName.サービス変更追加.getName().equals(ResponseHolder.getState())) {
-            getValidationHandler().validateFor申請日の必須入力(pairs, div);
-            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
-            getValidationHandler().validateFor医療保険情報なし(pairs, div);
-            getValidationHandler().validateFor特定疾病なし(pairs, div);
-        } else if (DBD5120001StateName.サービス変更修正.getName().equals(ResponseHolder.getState())) {
-            getValidationHandler().validateFor申請日の必須入力(pairs, div);
-            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
-        } else if (DBD5120001StateName.サービス変更取下.getName().equals(ResponseHolder.getState())) {
-            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
-        } else if (DBD5120001StateName.受給者転入追加.getName().equals(ResponseHolder.getState())) {
-            getValidationHandler().validateFor開始日の必須入力(pairs, div);
-            getValidationHandler().validateFor終了日の必須入力(pairs, div);
-            getValidationHandler().validateFor申請日の必須入力(pairs, div);
-            getValidationHandler().validateFor要介護度の必須入力(pairs, div);
-            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
-            getValidationHandler().validateFor開始日と終了日の前後順(pairs, div);
-            getValidationHandler().validateFor有効期間が重複(pairs, div);
-            getValidationHandler().validateFor変更元が_要支援(pairs, div);
-            getValidationHandler().validateFor変更元が_自立(pairs, div);
-            getValidationHandler().validateFor旧措置者ではなく_自立(pairs, div);
-            getValidationHandler().validateFor旧措置者ではなく_自立で有効期間記入あり(pairs, div);
-            getValidationHandler().validateFor自立_かつサービス指定あり(pairs, div);
-            getValidationHandler().validateFor却下かつ_自立で異動理由あり(pairs, div);
-        } else if (DBD5120001StateName.特殊追加.getName().equals(ResponseHolder.getState())) {
-            getValidationHandler().validateFor開始日の必須入力(pairs, div);
-            getValidationHandler().validateFor終了日の必須入力(pairs, div);
-            getValidationHandler().validateFor申請日の必須入力(pairs, div);
-            getValidationHandler().validateFor要介護度の必須入力(pairs, div);
-            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
-            getValidationHandler().validateFor医療保険情報なし(pairs, div);
-            getValidationHandler().validateFor特定疾病なし(pairs, div);
-            getValidationHandler().validateFor開始日と終了日の前後順(pairs, div);
-            getValidationHandler().validateFor有効期間が重複(pairs, div);
-            getValidationHandler().validateFor変更元が_要支援(pairs, div);
-            getValidationHandler().validateFor変更元が_自立(pairs, div);
-            getValidationHandler().validateFor旧措置者ではなく_自立(pairs, div);
-            getValidationHandler().validateFor旧措置者ではなく_自立で有効期間記入あり(pairs, div);
-            getValidationHandler().validateFor自立_かつサービス指定あり(pairs, div);
-            getValidationHandler().validateFor却下かつ_自立で異動理由あり(pairs, div);
-        } else if (DBD5120001StateName.特殊修正.getName().equals(ResponseHolder.getState())) {
-            getValidationHandler().validateFor開始日の必須入力(pairs, div);
-            getValidationHandler().validateFor終了日の必須入力(pairs, div);
-            getValidationHandler().validateFor申請日の必須入力(pairs, div);
-            getValidationHandler().validateFor要介護度の必須入力(pairs, div);
-            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
-            getValidationHandler().validateFor医療保険情報なし(pairs, div);
-            getValidationHandler().validateFor特定疾病なし(pairs, div);
-            getValidationHandler().validateFor開始日と終了日の前後順(pairs, div);
-            getValidationHandler().validateFor有効期間が重複(pairs, div);
-            getValidationHandler().validateFor変更元が_要支援(pairs, div);
-            getValidationHandler().validateFor変更元が_自立(pairs, div);
-            getValidationHandler().validateFor旧措置者ではなく_自立(pairs, div);
-            getValidationHandler().validateFor旧措置者ではなく_自立で有効期間記入あり(pairs, div);
-            getValidationHandler().validateFor自立_かつサービス指定あり(pairs, div);
-            getValidationHandler().validateFor却下かつ_自立で異動理由あり(pairs, div);
-        } else if (DBD5120001StateName.特殊削除.getName().equals(ResponseHolder.getState())) {
-            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
-        } else if (DBD5120001StateName.削除回復.getName().equals(ResponseHolder.getState())) {
-            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
-            getValidationHandler().validateFor削除回復の対象ではない(pairs, div);
-        } else if (DBD5120001StateName.職権記載.getName().equals(ResponseHolder.getState())) {
-            getValidationHandler().validateFor開始日の必須入力(pairs, div);
-            getValidationHandler().validateFor終了日の必須入力(pairs, div);
-            getValidationHandler().validateFor申請日の必須入力(pairs, div);
-            getValidationHandler().validateFor要介護度の必須入力(pairs, div);
-            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
-            getValidationHandler().validateFor医療保険情報なし(pairs, div);
-            getValidationHandler().validateFor特定疾病なし(pairs, div);
-            getValidationHandler().validateFor６０日以前の申請(pairs, div);
-            getValidationHandler().validateFor開始日と終了日の前後順(pairs, div);
-            getValidationHandler().validateFor有効期間が重複(pairs, div);
-            getValidationHandler().validateFor変更元が_要支援(pairs, div);
-            getValidationHandler().validateFor変更元が_自立(pairs, div);
-            getValidationHandler().validateFor職権取消_記載_修正_変更申請中のデータあり(pairs, div);
-            getValidationHandler().validateFor旧措置者ではなく_自立(pairs, div);
-            getValidationHandler().validateFor旧措置者ではなく_自立で有効期間記入あり(pairs, div);
-            getValidationHandler().validateFor自立_かつサービス指定あり(pairs, div);
-            getValidationHandler().validateFor却下かつ_自立で異動理由あり(pairs, div);
-        } else if (DBD5120001StateName.職権全喪失.getName().equals(ResponseHolder.getState())) {
-            getValidationHandler().validateFor喪失日の必須入力(pairs, div);
-            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
-        }
-
+        //ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+//        if (DBD5120001StateName.申請追加.getName().equals(ResponseHolder.getState())) {
+//            getValidationHandler().validateFor申請日の必須入力(pairs, div);
+//            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
+//            getValidationHandler().validateFor医療保険情報なし(pairs, div);
+//            getValidationHandler().validateFor特定疾病なし(pairs, div);
+//        } else if (DBD5120001StateName.申請修正.getName().equals(ResponseHolder.getState())) {
+//            getValidationHandler().validateFor申請日の必須入力(pairs, div);
+//            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
+//        } else if (DBD5120001StateName.申請取下.getName().equals(ResponseHolder.getState())) {
+//            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
+//        } else if (DBD5120001StateName.区分変更追加.getName().equals(ResponseHolder.getState())) {
+//            getValidationHandler().validateFor申請日の必須入力(pairs, div);
+//            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
+//            getValidationHandler().validateFor医療保険情報なし(pairs, div);
+//            getValidationHandler().validateFor特定疾病なし(pairs, div);
+//            getValidationHandler().validateFor変更元が_要支援(pairs, div);
+//            getValidationHandler().validateFor変更元が_自立(pairs, div);
+//        } else if (DBD5120001StateName.区分変更修正.getName().equals(ResponseHolder.getState())) {
+//            getValidationHandler().validateFor申請日の必須入力(pairs, div);
+//            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
+//        } else if (DBD5120001StateName.区分変更取下.getName().equals(ResponseHolder.getState())) {
+//            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
+//        } else if (DBD5120001StateName.サービス変更追加.getName().equals(ResponseHolder.getState())) {
+//            getValidationHandler().validateFor申請日の必須入力(pairs, div);
+//            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
+//            getValidationHandler().validateFor医療保険情報なし(pairs, div);
+//            getValidationHandler().validateFor特定疾病なし(pairs, div);
+//        } else if (DBD5120001StateName.サービス変更修正.getName().equals(ResponseHolder.getState())) {
+//            getValidationHandler().validateFor申請日の必須入力(pairs, div);
+//            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
+//        } else if (DBD5120001StateName.サービス変更取下.getName().equals(ResponseHolder.getState())) {
+//            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
+//        } else if (DBD5120001StateName.受給者転入追加.getName().equals(ResponseHolder.getState())) {
+//            getValidationHandler().validateFor開始日の必須入力(pairs, div);
+//            getValidationHandler().validateFor終了日の必須入力(pairs, div);
+//            getValidationHandler().validateFor申請日の必須入力(pairs, div);
+//            getValidationHandler().validateFor要介護度の必須入力(pairs, div);
+//            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
+//            getValidationHandler().validateFor開始日と終了日の前後順(pairs, div);
+//            getValidationHandler().validateFor有効期間が重複(pairs, div);
+//            getValidationHandler().validateFor変更元が_要支援(pairs, div);
+//            getValidationHandler().validateFor変更元が_自立(pairs, div);
+//            getValidationHandler().validateFor旧措置者ではなく_自立(pairs, div);
+//            getValidationHandler().validateFor旧措置者ではなく_自立で有効期間記入あり(pairs, div);
+//            getValidationHandler().validateFor自立_かつサービス指定あり(pairs, div);
+//            getValidationHandler().validateFor却下かつ_自立で異動理由あり(pairs, div);
+//        } else if (DBD5120001StateName.特殊追加.getName().equals(ResponseHolder.getState())) {
+//            getValidationHandler().validateFor開始日の必須入力(pairs, div);
+//            getValidationHandler().validateFor終了日の必須入力(pairs, div);
+//            getValidationHandler().validateFor申請日の必須入力(pairs, div);
+//            getValidationHandler().validateFor要介護度の必須入力(pairs, div);
+//            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
+//            getValidationHandler().validateFor医療保険情報なし(pairs, div);
+//            getValidationHandler().validateFor特定疾病なし(pairs, div);
+//            getValidationHandler().validateFor開始日と終了日の前後順(pairs, div);
+//            getValidationHandler().validateFor有効期間が重複(pairs, div);
+//            getValidationHandler().validateFor変更元が_要支援(pairs, div);
+//            getValidationHandler().validateFor変更元が_自立(pairs, div);
+//            getValidationHandler().validateFor旧措置者ではなく_自立(pairs, div);
+//            getValidationHandler().validateFor旧措置者ではなく_自立で有効期間記入あり(pairs, div);
+//            getValidationHandler().validateFor自立_かつサービス指定あり(pairs, div);
+//            getValidationHandler().validateFor却下かつ_自立で異動理由あり(pairs, div);
+//        } else if (DBD5120001StateName.特殊修正.getName().equals(ResponseHolder.getState())) {
+//            getValidationHandler().validateFor開始日の必須入力(pairs, div);
+//            getValidationHandler().validateFor終了日の必須入力(pairs, div);
+//            getValidationHandler().validateFor申請日の必須入力(pairs, div);
+//            getValidationHandler().validateFor要介護度の必須入力(pairs, div);
+//            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
+//            getValidationHandler().validateFor医療保険情報なし(pairs, div);
+//            getValidationHandler().validateFor特定疾病なし(pairs, div);
+//            getValidationHandler().validateFor開始日と終了日の前後順(pairs, div);
+//            getValidationHandler().validateFor有効期間が重複(pairs, div);
+//            getValidationHandler().validateFor変更元が_要支援(pairs, div);
+//            getValidationHandler().validateFor変更元が_自立(pairs, div);
+//            getValidationHandler().validateFor旧措置者ではなく_自立(pairs, div);
+//            getValidationHandler().validateFor旧措置者ではなく_自立で有効期間記入あり(pairs, div);
+//            getValidationHandler().validateFor自立_かつサービス指定あり(pairs, div);
+//            getValidationHandler().validateFor却下かつ_自立で異動理由あり(pairs, div);
+//        } else if (DBD5120001StateName.特殊削除.getName().equals(ResponseHolder.getState())) {
+//            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
+//        } else if (DBD5120001StateName.削除回復.getName().equals(ResponseHolder.getState())) {
+//            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
+//            getValidationHandler().validateFor削除回復の対象ではない(pairs, div);
+//        } else if (DBD5120001StateName.職権記載.getName().equals(ResponseHolder.getState())) {
+//            getValidationHandler().validateFor開始日の必須入力(pairs, div);
+//            getValidationHandler().validateFor終了日の必須入力(pairs, div);
+//            getValidationHandler().validateFor申請日の必須入力(pairs, div);
+//            getValidationHandler().validateFor要介護度の必須入力(pairs, div);
+//            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
+//            getValidationHandler().validateFor医療保険情報なし(pairs, div);
+//            getValidationHandler().validateFor特定疾病なし(pairs, div);
+//            getValidationHandler().validateFor６０日以前の申請(pairs, div);
+//            getValidationHandler().validateFor開始日と終了日の前後順(pairs, div);
+//            getValidationHandler().validateFor有効期間が重複(pairs, div);
+//            getValidationHandler().validateFor変更元が_要支援(pairs, div);
+//            getValidationHandler().validateFor変更元が_自立(pairs, div);
+//            getValidationHandler().validateFor職権取消_記載_修正_変更申請中のデータあり(pairs, div);
+//            getValidationHandler().validateFor旧措置者ではなく_自立(pairs, div);
+//            getValidationHandler().validateFor旧措置者ではなく_自立で有効期間記入あり(pairs, div);
+//            getValidationHandler().validateFor自立_かつサービス指定あり(pairs, div);
+//            getValidationHandler().validateFor却下かつ_自立で異動理由あり(pairs, div);
+//        } else if (DBD5120001StateName.職権全喪失.getName().equals(ResponseHolder.getState())) {
+//            getValidationHandler().validateFor喪失日の必須入力(pairs, div);
+//            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
+//        }
         getHandler(div).onClick_btnUpdate();
 
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBD5120001StateName.新規完了);
     }
 
     private NinteiShinseiTorokuUketsukeHandler getHandler(NinteiShinseiTorokuUketsukeDiv div) {
         return new NinteiShinseiTorokuUketsukeHandler(div);
     }
 
-    private NinteiShinseiTorokuUketsukeValidationHandler getValidationHandler() {
-        return new NinteiShinseiTorokuUketsukeValidationHandler();
-    }
+//    private NinteiShinseiTorokuUketsukeValidationHandler getValidationHandler() {
+//        return new NinteiShinseiTorokuUketsukeValidationHandler();
+//    }
 }

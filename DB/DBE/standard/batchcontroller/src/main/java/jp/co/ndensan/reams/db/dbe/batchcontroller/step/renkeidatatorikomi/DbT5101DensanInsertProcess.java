@@ -37,8 +37,8 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
     private RenkeiDataTorikomiBusiness business;
     private RenkeiDataTorikomiProcessParamter processParamter;
     @BatchWriter
-
     BatchPermanentTableWriter<DbT5101NinteiShinseiJohoEntity> dbT5101Writer;
+    @BatchWriter
     BatchPermanentTableWriter<DbT5123NinteiKeikakuJohoEntity> dbT5123Writer;
 
     @Override

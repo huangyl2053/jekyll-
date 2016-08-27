@@ -31,6 +31,7 @@ public class JigyohokokuCompYoshiki15206Editor implements IJigyohokokuCompYoshik
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
+    private static final RString 作成 = new RString("作成");
 
     /**
      * インスタンスを生成します。
@@ -58,11 +59,11 @@ public class JigyohokokuCompYoshiki15206Editor implements IJigyohokokuCompYoshik
         } else if (給付集計区分が2.equals(item.get給付集計区分())) {
             builder.append(new RString("(審査)"));
             source.shuukeiHani = builder.toRString();
-            source.kyufuKubun = new RString("償還審査分");
+            source.kyufuKubun = new RString("償還分");
         } else if (給付集計区分が3.equals(item.get給付集計区分())) {
             builder.append(new RString("(決定)"));
             source.shuukeiHani = builder.toRString();
-            source.kyufuKubun = new RString("償還決定分");
+            source.kyufuKubun = new RString("償還分");
         }
         source.hokenshaNo = item.get保険者番号();
         source.hokenshaName = item.get保険者名();
@@ -82,6 +83,7 @@ public class JigyohokokuCompYoshiki15206Editor implements IJigyohokokuCompYoshik
         printTimeStampSb.append(DATE_分);
         printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
         printTimeStampSb.append(DATE_秒);
+        printTimeStampSb.append(作成);
         return printTimeStampSb.toRString();
     }
 

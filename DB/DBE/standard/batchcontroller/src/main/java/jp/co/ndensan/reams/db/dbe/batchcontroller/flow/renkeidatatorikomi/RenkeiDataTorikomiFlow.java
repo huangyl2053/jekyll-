@@ -100,12 +100,15 @@ public class RenkeiDataTorikomiFlow extends BatchFlowBase<RenkeiDataTorikomiBatc
                 call電算標準版_4マスタIF種類(取込み対象ファイルリスト, 基準日);
             }
             if (IF種類_厚労省.equals(認定申請IF種類)) {
+                getParameter().set厚労省フラグ(true);
                 call厚労省版_認定申請IF種類(取込み対象ファイルリスト, 基準日);
             }
             if (IF種類_厚労省.equals(マスタIF種類)) {
+                getParameter().set厚労省フラグ(true);
                 call厚労省版_4マスタIF種類(取込み対象ファイルリスト, 基準日);
             }
             if (IF種類_東芝版.equals(認定申請IF種類)) {
+                getParameter().set東芝版フラグ(true);
                 call東芝版(取込み対象ファイルリスト, 基準日);
             }
         }

@@ -5,12 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohisaishinsaketteihokenshain;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.report.source.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteiHokenshaInSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohisaishinsaokenshain.SogojigyohiSaishinsaKetteiHokenshaInSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 総合事業費再審査決定通知書情報取込一覧表（保険者分）帳票Report
+ * 総合事業費再審査決定通知書情報取込一覧表帳票Report
  *
  * @reamsid_L DBC-4680-040 wangxue
  */

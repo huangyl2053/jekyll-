@@ -92,4 +92,5 @@ public class TorikomiEntity implements Serializable {
     private FlexibleDate 二次判定認定有効終了年月日;
     private int 合議体番号;
     private RString 介護認定審査会開催予定場所コード;
+    private FlexibleDate 介護認定審査会開催予定年月日;
 }

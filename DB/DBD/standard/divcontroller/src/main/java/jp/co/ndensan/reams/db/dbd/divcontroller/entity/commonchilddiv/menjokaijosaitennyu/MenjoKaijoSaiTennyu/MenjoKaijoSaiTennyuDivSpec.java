@@ -19,17 +19,16 @@ public enum MenjoKaijoSaiTennyuDivSpec implements IPredicate<MenjoKaijoSaiTennyu
                 /**
                  * 適用期間のチェックです。
                  *
-                 * @param div ShokanBaraiKa1GoDiv
+                 * @param div MenjoKaijoSaiTennyuDiv
                  * @return true:期間が正確、false:期間が不正
                  */
                 @Override
                 public boolean apply(MenjoKaijoSaiTennyuDiv div) {
-                    if (!div.getTxtGengakuTekiyoKikanKaishiYMD().getValue().isEmpty() && !div.getTxtGengakuTekiyoKikanShuryoYMD().getValue().isEmpty()) {
-                        return div.getTxtGengakuTekiyoKikanKaishiYMD().getValue().isBefore(div.getTxtGengakuTekiyoKikanShuryoYMD().getValue());
+                    if (!div.getTxtKonkaiKikanKaishiYMD().getValue().isEmpty() && !div.getTxtKonkaiKikanShuryoYMD().getValue().isEmpty()) {
+                        return div.getTxtKonkaiKikanKaishiYMD().getValue().isBeforeOrEquals(div.getTxtKonkaiKikanShuryoYMD().getValue());
                     } else {
-                        return !div.getTxtGengakuTekiyoKikanKaishiYMD().getValue().isEmpty() || !div.getTxtGengakuTekiyoKikanShuryoYMD().getValue().isEmpty();
+                        return !div.getTxtKonkaiKikanKaishiYMD().getValue().isEmpty() || !div.getTxtKonkaiKikanShuryoYMD().getValue().isEmpty();
                     }
                 }
             }
-
 }

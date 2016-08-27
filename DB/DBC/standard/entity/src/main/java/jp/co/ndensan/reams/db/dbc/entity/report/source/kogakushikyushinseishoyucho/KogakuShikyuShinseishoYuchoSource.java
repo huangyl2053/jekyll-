@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 /**
  * 高額介護（予防）サービス費支給申請書（ゆうちょ）のソースクラスです。
  *
- * @reamsid_L DBC-4770-070 jianglaisheng
+ * @reamsid_L DBC-4770-070 jiangxiaolong
  */
 public class KogakuShikyuShinseishoYuchoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -80,4 +80,39 @@ public class KogakuShikyuShinseishoYuchoSource implements IReportSource {
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * KogakuShikyuShinseishoYuchoSourceのENUM
+     */
+    public enum DBC100069SourceFields {
+
+        taishoYM,
+        hakkoubi,
+        hihokenshaNameKana,
+        hokenshaNo,
+        hihokenshaName,
+        hihokenshaNo,
+        seibetsu,
+        birthYMD,
+        kojinNo,
+        hihokenJusho,
+        telNo,
+        ninshoshaYakushokuMei,
+        chuiTitle,
+        chuibun,
+        tuchoKigo1,
+        tuchoKigo2,
+        tuchoKigo3,
+        tuchoKigo4,
+        tuchoKigo5,
+        tuchoNo1,
+        tuchoNo2,
+        tuchoNo3,
+        tuchoNo4,
+        tuchoNo5,
+        tuchoNo6,
+        tuchoNo7,
+        tuchoNo8,
+        remban
+    }
 }

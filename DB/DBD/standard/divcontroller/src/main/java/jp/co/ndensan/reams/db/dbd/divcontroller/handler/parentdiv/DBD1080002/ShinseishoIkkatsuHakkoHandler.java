@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.KouhoushaJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShinseishoHakkoTaishoshaHaakuBatch;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd102020.DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.kouhoushajoho.KouhoushaJohoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1080002.ShinseishoIkkatsuHakkoDiv;
@@ -21,8 +22,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -106,6 +109,8 @@ public class ShinseishoIkkatsuHakkoHandler {
             KeyValueDataSource keyValues = new KeyValueDataSource(new RString("key" + i), new RString(バッチ処理日時リスト.get(i).toString()));
             result.add(keyValues);
         }
+        KeyValueDataSource keValuesEmpty = new KeyValueDataSource(new RString("empty"), new RString(""));
+        result.add(keValuesEmpty);
         return result;
     }
 
@@ -146,35 +151,88 @@ public class ShinseishoIkkatsuHakkoHandler {
         List<ddlKohoshaList_Row> dataSources = new ArrayList<>();
         for (KouhoushaJoho kouhoushaJoho : 候補者情報List) {
             ddlKohoshaList_Row ddlKohoshaList = new ddlKohoshaList_Row();
-            if (kouhoushaJoho.get更新認定フラグ()) {
+            if (kouhoushaJoho.is更新認定フラグ()) {
                 ddlKohoshaList.setShinkiKoshin(new RString("更新"));
             } else {
                 ddlKohoshaList.setShinkiKoshin(new RString("新規"));
             }
             ddlKohoshaList.setHihoNo(kouhoushaJoho.get被保険者番号().value());
             ddlKohoshaList.setShikibetsuCode(kouhoushaJoho.get識別コード().value());
-            ddlKohoshaList.setShimei(kouhoushaJoho.get宛名識別対象().get名称().value());
-            ddlKohoshaList.setKana(kouhoushaJoho.get宛名識別対象().getカナ氏名().value());
-            ddlKohoshaList.setNenrei(kouhoushaJoho.get宛名識別対象().get年齢());
-            ddlKohoshaList.setJigyoshaNo(kouhoushaJoho.get事業者番号().value());
-            if (kouhoushaJoho.get世帯課税().equals(SetaiKazeiKubun.課税.getコード())) {
+            if (kouhoushaJoho.get宛名識別対象() != null) {
+                if (kouhoushaJoho.get宛名識別対象().get名称() != null) {
+                    ddlKohoshaList.setShimei(kouhoushaJoho.get宛名識別対象().get名称().value());
+                } else {
+                    ddlKohoshaList.setShimei(RString.EMPTY);
+                }
+                if (kouhoushaJoho.get宛名識別対象().getカナ氏名() != null) {
+                    ddlKohoshaList.setKana(kouhoushaJoho.get宛名識別対象().getカナ氏名().value());
+                } else {
+                    ddlKohoshaList.setKana(RString.EMPTY);
+                }
+                if (!kouhoushaJoho.get宛名識別対象().get年齢().isNull()) {
+                    ddlKohoshaList.setNenrei(kouhoushaJoho.get宛名識別対象().get年齢());
+                } else {
+                    ddlKohoshaList.setNenrei(RString.EMPTY);
+                }
+                if (!kouhoushaJoho.get宛名識別対象().get住所().isNull()) {
+                    ddlKohoshaList.setJusho(kouhoushaJoho.get宛名識別対象().get住所());
+                } else {
+                    ddlKohoshaList.setJusho(RString.EMPTY);
+                }
+            } else {
+                ddlKohoshaList.setShimei(RString.EMPTY);
+                ddlKohoshaList.setKana(RString.EMPTY);
+                ddlKohoshaList.setNenrei(RString.EMPTY);
+                ddlKohoshaList.setJusho(RString.EMPTY);
+            }
+            if (kouhoushaJoho.get事業者番号() != null) {
+                ddlKohoshaList.setJigyoshaNo(kouhoushaJoho.get事業者番号().value());
+            } else {
+                ddlKohoshaList.setJigyoshaNo(RString.EMPTY);
+            }
+            if (kouhoushaJoho.get世帯課税().equals(SetaiKazeiKubun.課税.getコード()) && !SetaiKazeiKubun.課税.getコード().isNull()) {
                 ddlKohoshaList.setChkSetaiKazei(true);
             } else {
                 ddlKohoshaList.setChkSetaiKazei(false);
             }
-            ddlKohoshaList.setJusho(kouhoushaJoho.get宛名識別対象().get住所());
             ddlKohoshaList.setShichosonCode(kouhoushaJoho.get市町村コード().value());
-            ddlKohoshaList.setChkRofuku(kouhoushaJoho.get老福());
-            ddlKohoshaList.setChkSeiho(kouhoushaJoho.get生保());
-            ddlKohoshaList.setChkKyusochi(kouhoushaJoho.get旧措置());
-            ddlKohoshaList.setYokaigodo(YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.
-                    toValue(kouhoushaJoho.get厚労省IF識別コード().value()), kouhoushaJoho.get要介護認定状態区分コード().value()).getName());
-            ddlKohoshaList.getTxtNinteiKaishiYMD().setValue(kouhoushaJoho.get認定開始日());
-            ddlKohoshaList.getTxtNinteiShuryoYMD().setValue(kouhoushaJoho.get認定終了日());
-            ddlKohoshaList.setRiyoshaFutanDankai(kouhoushaJoho.get利用者負担段階());
-            ddlKohoshaList.getGokeiShotokuKingaku().setValue(kouhoushaJoho.get合計所得金額());
-            ddlKohoshaList.getNenkinShunyuGaku().setValue(kouhoushaJoho.get年金収入額());
-            ddlKohoshaList.getHikazeinenkinKananGaku().setValue(kouhoushaJoho.get非課税年金勘案額());
+            ddlKohoshaList.setChkRofuku(kouhoushaJoho.is老福());
+            ddlKohoshaList.setChkSeiho(kouhoushaJoho.is生保());
+            ddlKohoshaList.setChkKyusochi(kouhoushaJoho.is旧措置());
+            if (kouhoushaJoho.get厚労省IF識別コード() != null && kouhoushaJoho.get要介護認定状態区分コード().value() != null) {
+                ddlKohoshaList.setYokaigodo(YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.
+                        toValue(kouhoushaJoho.get厚労省IF識別コード().value()), kouhoushaJoho.get要介護認定状態区分コード().value()).getName());
+            } else {
+                ddlKohoshaList.setYokaigodo(RString.EMPTY);
+            }
+            if (kouhoushaJoho.get認定開始日() != null) {
+                ddlKohoshaList.getTxtNinteiKaishiYMD().setValue(kouhoushaJoho.get認定開始日());
+            } else {
+                ddlKohoshaList.getTxtNinteiKaishiYMD().clearValue();
+            }
+            if (kouhoushaJoho.get認定終了日() != null) {
+                ddlKohoshaList.getTxtNinteiShuryoYMD().setValue(kouhoushaJoho.get認定終了日());
+            } else {
+                ddlKohoshaList.getTxtNinteiShuryoYMD().clearValue();
+            }
+            if (!kouhoushaJoho.get利用者負担段階().isNull()) {
+                ddlKohoshaList.setRiyoshaFutanDankai(kouhoushaJoho.get利用者負担段階());
+            } else {
+                ddlKohoshaList.setRiyoshaFutanDankai(RString.EMPTY);
+            }
+            if (kouhoushaJoho.get合計所得金額() != null) {
+                ddlKohoshaList.getGokeiShotokuKingaku().setValue(kouhoushaJoho.get合計所得金額());
+            } else {
+                ddlKohoshaList.getGokeiShotokuKingaku().clearValue();
+            }
+            if (kouhoushaJoho.get年金収入額() != null) {
+                ddlKohoshaList.getNenkinShunyuGaku().setValue(kouhoushaJoho.get年金収入額());
+            } else {
+                ddlKohoshaList.getNenkinShunyuGaku().clearValue();
+            }
+            if (kouhoushaJoho.get非課税年金勘案額() != null) {
+                ddlKohoshaList.getHikazeinenkinKananGaku().setValue(kouhoushaJoho.get非課税年金勘案額());
+            }
             ddlKohoshaList.setHaakuShoriID(new RString(kouhoushaJoho.get把握処理ID().toString()));
             dataSources.add(ddlKohoshaList);
         }
@@ -228,5 +286,53 @@ public class ShinseishoIkkatsuHakkoHandler {
             div.getGenmenShinseiHaakuList().getGenmenShinseiHaakuShinseisho().
                     setTitle(社会福祉法人等利用者負担額減額対象確認申請書);
         }
+    }
+
+    /**
+     * 画面側からバッチパラメータを取得します。
+     *
+     * @param 発行処理ID UUID
+     * @return DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter
+     */
+    public DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter getParameter(UUID 発行処理ID) {
+        if (div.getGenmenShinseiHaakuList().getDdlGemmenGengakuShurui().getSelectedValue().
+                equals(GemmenGengakuShurui.負担限度額認定.get名称())) {
+            return toParameter(発行処理ID, ReportIdDBD.DBD800001.getReportId());
+
+        }
+        if (div.getGenmenShinseiHaakuList().getDdlGemmenGengakuShurui().getSelectedValue().
+                equals(GemmenGengakuShurui.利用者負担額減額.get名称())) {
+            return toParameter(発行処理ID, ReportIdDBD.DBD800002.getReportId());
+        }
+        if (div.getGenmenShinseiHaakuList().getDdlGemmenGengakuShurui().getSelectedValue().
+                equals(GemmenGengakuShurui.訪問介護利用者負担額減額.get名称())) {
+            return toParameter(発行処理ID, ReportIdDBD.DBD800005.getReportId());
+        } else {
+            return toParameter(発行処理ID, ReportIdDBD.DBD800006.getReportId());
+        }
+    }
+
+    private DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter toParameter(UUID 発行処理ID, ReportId reportId) {
+        DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter parameter = new DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter();
+        parameter.set出力フラグ(div.getGenmenShinseiHaakuList().getGenmenShinseiHaakuShinseisho().getChkShinkiKoshin().isAllSelected());
+        parameter.set帳票ID(reportId);
+        parameter.set発行処理ID(発行処理ID);
+        if (div.getGenmenShinseiHaakuList().getTxtKijunYMD() == null) {
+            parameter.set基準日(FlexibleDate.EMPTY);
+        } else {
+            parameter.set基準日(div.getGenmenShinseiHaakuList().getTxtKijunYMD().getValue());
+        }
+        if (div.getGenmenShinseiHaakuList().getGenmenShinseiHaakuShinseisho().getCcdChohyoShutsuryokujun().get出力順ID() == null) {
+            parameter.set改頁出力順ID(0);
+        } else {
+            parameter.set改頁出力順ID(div.getGenmenShinseiHaakuList().getGenmenShinseiHaakuShinseisho().
+                    getCcdChohyoShutsuryokujun().get出力順ID());
+        }
+        if (div.getGenmenShinseiHaakuList().getGenmenShinseiHaakuShinseisho().getTxtHakkoYMD() == null) {
+            parameter.set発行日(FlexibleDate.EMPTY);
+        } else {
+            parameter.set発行日(div.getGenmenShinseiHaakuList().getGenmenShinseiHaakuShinseisho().getTxtHakkoYMD().getValue());
+        }
+        return parameter;
     }
 }

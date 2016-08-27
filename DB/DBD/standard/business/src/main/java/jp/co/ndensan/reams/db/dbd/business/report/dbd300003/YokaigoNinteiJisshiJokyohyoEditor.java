@@ -6,9 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.business.report.dbd300003;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijisshijokyohyo.YokaigoNinteiJisshiJokyohyoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijisshijokyohyo.YokaigoNinteiJisshiJokyohyoReportEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd300003.YokaigoNinteiJisshiJokyohyoReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -28,13 +27,13 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
     private final FlexibleDate 基準日;
     private final RString 年齢;
     private final RString 地区;
-    private final Code 集計単位;
-    private final List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリストlist1;
-    private final List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリストlist2;
-    private final List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリストlist3;
-    private final List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリストlist4;
-    private final List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリスト;
+    private final RString 集計単位;
+    private final List<YokaigoNinteiJisshiJokyohyoReportEntity> 実施状況Entityリストlist1;
+    private final List<YokaigoNinteiJisshiJokyohyoReportEntity> 実施状況Entityリストlist2;
+    private final List<YokaigoNinteiJisshiJokyohyoReportEntity> 実施状況Entityリストlist3;
+    private final List<YokaigoNinteiJisshiJokyohyoReportEntity> 実施状況Entityリストlist4;
     private final int index;
+    private static final RString 年度YEAR = new RString("年度");
 
     /**
      * インスタンスを生成します。
@@ -43,7 +42,6 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
      * @param 年齢 RString
      * @param 地区 RString
      * @param 集計単位 Code
-     * @param 実施状況Entityリスト List<YokaigoNinteiJisshiJokyohyoEntity>
      * @param 実施状況Entityリストlist1 List<YokaigoNinteiJisshiJokyohyoEntity>
      * @param 実施状況Entityリストlist2 List<YokaigoNinteiJisshiJokyohyoEntity>
      * @param 実施状況Entityリストlist3 List<YokaigoNinteiJisshiJokyohyoEntity>
@@ -51,16 +49,15 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
      * @param index int
      */
     public YokaigoNinteiJisshiJokyohyoEditor(FlexibleDate 基準日, RString 年齢, RString 地区,
-            Code 集計単位, List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリスト,
-            List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリストlist1,
-            List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリストlist2,
-            List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリストlist3,
-            List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリストlist4, int index) {
+            RString 集計単位,
+            List<YokaigoNinteiJisshiJokyohyoReportEntity> 実施状況Entityリストlist1,
+            List<YokaigoNinteiJisshiJokyohyoReportEntity> 実施状況Entityリストlist2,
+            List<YokaigoNinteiJisshiJokyohyoReportEntity> 実施状況Entityリストlist3,
+            List<YokaigoNinteiJisshiJokyohyoReportEntity> 実施状況Entityリストlist4, int index) {
         this.基準日 = 基準日;
         this.年齢 = 年齢;
         this.地区 = 地区;
         this.集計単位 = 集計単位;
-        this.実施状況Entityリスト = 実施状況Entityリスト;
         this.実施状況Entityリストlist1 = 実施状況Entityリストlist1;
         this.実施状況Entityリストlist2 = 実施状況Entityリストlist2;
         this.実施状況Entityリストlist3 = 実施状況Entityリストlist3;
@@ -78,19 +75,20 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
         source.kijunbi = this.基準日.wareki().toDateString();
         source.nenrei = this.年齢;
         source.chiku = this.地区;
-        source.shukeiTani = this.集計単位.getColumnValue();
+        source.shukeiTani = this.集計単位;
         source.printTimeStamp = get印刷日時();
         source.label48 = new RString("介護保険");
         source.label18 = new RString("要介護認定実施状況表");
-        if (null != 実施状況Entityリスト && !実施状況Entityリスト.isEmpty()) {
-            source.shichosonName = 実施状況Entityリスト.get(index).get市町村名();
-            source.hokenshaNo = 実施状況Entityリスト.get(index).get市町村番号();
-            source.hokenshaName = 実施状況Entityリスト.get(index).get市町村名();
-            source.nendo = 実施状況Entityリスト.get(index).get対象年度().toDateString();
-        }
 
-        YokaigoNinteiJisshiJokyohyoEntity list1 = 実施状況Entityリストlist1.get(index);
-        if (null != 実施状況Entityリストlist1 && !実施状況Entityリストlist1.isEmpty()) {
+        YokaigoNinteiJisshiJokyohyoReportEntity list1 = 実施状況Entityリストlist1.get(index);
+        if (!実施状況Entityリストlist1.isEmpty()) {
+            source.shichosonName = list1.get市町村名();
+            source.hokenshaName = list1.get市町村名();
+            source.hokenshaNo = list1.get市町村番号();
+            if (list1.get対象年度() != null) {
+                source.nendo = list1.get対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()
+                        .concat(年度YEAR);
+            }
             source.list1_1 = list1.get集計項目();
             source.list1_2 = list1.get四月の合計();
             source.list1_3 = list1.get五月の合計();
@@ -106,8 +104,16 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
             source.list1_13 = list1.get三月の合計();
             source.list1_14 = list1.get年度合計();
         }
-        YokaigoNinteiJisshiJokyohyoEntity list2 = 実施状況Entityリストlist2.get(index);
-        if (null != 実施状況Entityリストlist2 && !実施状況Entityリストlist2.isEmpty()) {
+
+        YokaigoNinteiJisshiJokyohyoReportEntity list2 = 実施状況Entityリストlist2.get(index);
+        if (!実施状況Entityリストlist2.isEmpty()) {
+            source.shichosonName = list2.get市町村名();
+            source.hokenshaName = list2.get市町村名();
+            source.hokenshaNo = list2.get市町村番号();
+            if (list1.get対象年度() != null) {
+                source.nendo = list2.get対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()
+                        .concat(年度YEAR);
+            }
             source.list2_1 = list2.get集計項目();
             source.list2_2 = list2.get四月の合計();
             source.list2_3 = list2.get五月の合計();
@@ -123,8 +129,16 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
             source.list2_13 = list2.get三月の合計();
             source.list2_14 = list2.get年度合計();
         }
-        YokaigoNinteiJisshiJokyohyoEntity list3 = 実施状況Entityリストlist3.get(index);
-        if (null != 実施状況Entityリストlist3 && !実施状況Entityリストlist3.isEmpty()) {
+        YokaigoNinteiJisshiJokyohyoReportEntity list3 = 実施状況Entityリストlist3.get(index);
+        if (!実施状況Entityリストlist3.isEmpty()) {
+            source.shichosonName = list3.get市町村名();
+            source.hokenshaName = list3.get市町村名();
+            source.hokenshaNo = list3.get市町村番号();
+
+            if (list1.get対象年度() != null) {
+                source.nendo = list3.get対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()
+                        .concat(年度YEAR);
+            }
             source.list3_1 = list3.get集計項目();
             source.list3_2 = list3.get四月の合計();
             source.list3_3 = list3.get五月の合計();
@@ -140,8 +154,16 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
             source.list3_13 = list3.get三月の合計();
             source.list3_14 = list3.get年度合計();
         }
-        YokaigoNinteiJisshiJokyohyoEntity list4 = 実施状況Entityリストlist4.get(index);
-        if (null != 実施状況Entityリストlist4 && !実施状況Entityリストlist4.isEmpty()) {
+        YokaigoNinteiJisshiJokyohyoReportEntity list4 = 実施状況Entityリストlist4.get(index);
+        if (!実施状況Entityリストlist4.isEmpty()) {
+            source.shichosonName = list4.get市町村名();
+            source.hokenshaName = list4.get市町村名();
+            source.hokenshaNo = list4.get市町村番号();
+
+            if (list1.get対象年度() != null) {
+                source.nendo = list4.get対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()
+                        .concat(年度YEAR);
+            }
             source.list4_1 = list4.get集計項目();
             source.list4_2 = list4.get四月の合計();
             source.list4_3 = list4.get五月の合計();

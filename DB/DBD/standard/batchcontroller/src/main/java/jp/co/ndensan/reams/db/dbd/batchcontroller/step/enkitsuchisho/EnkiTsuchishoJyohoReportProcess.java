@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
@@ -80,7 +81,8 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
                 SubGyomuCode.DBD介護受給,
                 REPORT_DBD522001,
                 parameter.get通知書発行日(),
-                NinshoshaDenshikoinshubetsuCode.toValue(NinshoshaDenshikoinshubetsuCode.保険者印.getコード()),
+                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                KenmeiFuyoKubunType.付与なし,
                 reportSourceWriter);
         entity.set電子公印(ninshoshaSource.denshiKoin);
         entity.set発行日(ninshoshaSource.hakkoYMD);

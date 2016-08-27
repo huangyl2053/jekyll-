@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 再審査決定通知書情報取込（公費負担者分）帳票出力対象
  *
- * @reamsid_L DBC-2820-020 sunhui
+ * @reamsid_L DBC-2820-010 sunhui
  */
 @lombok.Getter
 @lombok.Setter

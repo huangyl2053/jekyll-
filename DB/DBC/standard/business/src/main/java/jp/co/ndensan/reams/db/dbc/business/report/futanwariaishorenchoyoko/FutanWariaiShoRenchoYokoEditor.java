@@ -49,7 +49,7 @@ public class FutanWariaiShoRenchoYokoEditor implements IFutanWariaiShoRenchoYoko
         source.hokenshaCode6 = entity.get保険者コード６();
         source.hokenshaJusho = entity.get保険者住所();
         source.ninshosha_ninshoshaShimeiKakenai = entity.get保険者名();
-        source.tel = entity.get被保険者番号();
+        source.tel = entity.get保険者電話番号();
         source.ninshosha_denshiKoin = entity.get電子公印();
         source.renban = entity.get連番();
         source.ocrRenban = entity.getOcr連番();

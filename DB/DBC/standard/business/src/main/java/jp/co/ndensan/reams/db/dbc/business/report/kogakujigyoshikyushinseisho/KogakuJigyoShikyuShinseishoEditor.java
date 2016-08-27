@@ -36,7 +36,7 @@ public class KogakuJigyoShikyuShinseishoEditor implements IKogakuJigyoShikyuShin
     private static final RString 定数_農協 = new RString("農協");
     private static final RString 定数_本店 = new RString("本店");
     private static final RString 定数_支店 = new RString("支店");
-    private static final RString 定数_主張書 = new RString("主張書");
+    private static final RString 定数_出張所 = new RString("出張所");
     private static final RString 定数_支所 = new RString("支所");
 
     /**
@@ -66,20 +66,22 @@ public class KogakuJigyoShikyuShinseishoEditor implements IKogakuJigyoShikyuShin
                 source.taishoYM = 帳票出力対象データ.getServiceTeikyoYMChohyo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             }
-            if (帳票出力対象データ.getShinseishaShimeiKanaChohyo() != null) {
-                source.hihokenshaNameKana = 帳票出力対象データ.getShinseishaShimeiKanaChohyo().getColumnValue();
+            if (帳票出力対象データ.getShimeikanaChohyo() != null) {
+                source.hihokenshaNameKana = 帳票出力対象データ.getShimeikanaChohyo().getColumnValue();
             }
-            if (帳票出力対象データ.getShinseishaShimeiChohyo() != null) {
-                source.hihokenshaName = 帳票出力対象データ.getShinseishaShimeiChohyo().getColumnValue();
+            if (帳票出力対象データ.getMeishoChohyo() != null) {
+                source.hihokenshaName = 帳票出力対象データ.getMeishoChohyo().getColumnValue();
             }
             if (帳票出力対象データ.getSeinengappiYMDChohyo() != null) {
                 source.birthYMD = 帳票出力対象データ.getSeinengappiYMDChohyo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             }
             source.seibetsu = Seibetsu.toValue(帳票出力対象データ.getSeibetsuCodeChohyo()).get名称();
-            source.hihokenJusho = 帳票出力対象データ.getShinseishaJushoChohyo();
-            if (帳票出力対象データ.getShinseishaTelNoChohyo() != null) {
-                source.telNo = 帳票出力対象データ.getShinseishaTelNoChohyo().getColumnValue();
+            if (帳票出力対象データ.getJushoChohyo() != null) {
+                source.hihokenJusho = 帳票出力対象データ.getJushoChohyo().getColumnValue();
+            }
+            if (帳票出力対象データ.getTelNoChohyo() != null) {
+                source.telNo = 帳票出力対象データ.getTelNoChohyo().getColumnValue();
             }
             if (帳票出力対象データ.getShoKisaiHokenshaNoChohyo() != null) {
                 source.hokenshaNo = 帳票出力対象データ.getShoKisaiHokenshaNoChohyo().getColumnValue();
@@ -106,7 +108,7 @@ public class KogakuJigyoShikyuShinseishoEditor implements IKogakuJigyoShikyuShin
         source.nokyo = 定数_農協;
         source.honten = 定数_本店;
         source.shiten = 定数_支店;
-        source.shuccho = 定数_主張書;
+        source.shuccho = 定数_出張所;
         source.shisho = 定数_支所;
         source.remban = count;
         source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();

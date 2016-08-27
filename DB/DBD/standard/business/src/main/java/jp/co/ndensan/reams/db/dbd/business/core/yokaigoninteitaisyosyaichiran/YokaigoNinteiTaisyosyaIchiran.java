@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbd.business.core.yokaigoninteitaisyosyaichiran;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteitaisyosyaichiran.YokaigoNinteiTaisyosyaIchiranEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 要介護認定処理対象者一覧画面のbusinessです。
@@ -115,7 +116,7 @@ public class YokaigoNinteiTaisyosyaIchiran implements Serializable {
      * @param 二次判定認定有効終了年月日 二次判定認定有効終了年月日
      * @param 要介護認定一次判定年月日 要介護認定一次判定年月日
      * @param 要介護認定一次判定結果コード認知症加算 要介護認定一次判定結果コード認知症加算
-     * @param 取込日時2
+     * @param 取込日時2 取込日時2
      */
     public YokaigoNinteiTaisyosyaIchiran(
             DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity,
@@ -275,11 +276,13 @@ public class YokaigoNinteiTaisyosyaIchiran implements Serializable {
      * @return 取込日時
      */
     public RString get取込日時() {
-        if (要介護認定インターフェース情報Entity.getTorikomiTimestamp() != null) {
-            return 要介護認定インターフェース情報Entity.getTorikomiTimestamp().toDateString();
-        } else {
-            return RString.EMPTY;
+        YMDHMS 取込日時 = 要介護認定インターフェース情報Entity.getTorikomiTimestamp();
+        if (取込日時 != null && !取込日時.isEmpty()) {
+            return 取込日時.getDate().wareki().toDateString()
+                    .concat(" ")
+                    .concat(取込日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分));
         }
+        return RString.EMPTY;
 
     }
 
@@ -289,8 +292,11 @@ public class YokaigoNinteiTaisyosyaIchiran implements Serializable {
      * @return 取込日時2
      */
     public RString get取込日時2() {
+
         if (取込日時2 != null) {
-            return 取込日時2.toDateString();
+            return 取込日時2.getDate().wareki().toDateString()
+                    .concat(" ")
+                    .concat(取込日時2.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分));
         } else {
             return RString.EMPTY;
         }

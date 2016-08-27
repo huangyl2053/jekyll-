@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd8100202;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,6 +29,9 @@ public class NenkinNoCheckListMybatisprmParamter implements IMyBatisParameter {
      * @param 年度 年度
      */
     public NenkinNoCheckListMybatisprmParamter(FlexibleYear 年度) {
-        this.年度 = 年度;
+        int year = 年度.getYearValue();
+        year = year - 2;
+        RString str = new RString(year);
+        this.年度 = new FlexibleYear(str);
     }
 }

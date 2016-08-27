@@ -95,7 +95,7 @@ public class ShogaishaKoujoTaishoNinteiShoValidationHandler {
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.出力順序の必須入力,
                 div.getShogaishaKojoNinteishoOutput()).build().check(messages));
-        div.getShogaishaKojoNinteishoOutput().getCommonChildDiv1().get出力順ID();
+        div.getShogaishaKojoNinteishoOutput().getCcdChohyoShutsuryokujun().get出力順ID();
         return pairs;
 
     }

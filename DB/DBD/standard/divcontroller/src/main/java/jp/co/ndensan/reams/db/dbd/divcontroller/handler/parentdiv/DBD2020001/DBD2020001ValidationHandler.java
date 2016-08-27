@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd2020001.ShiharaiHohoHenkoHaakuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd207010.ShiharaiHohoHenkoHaakuIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020001.ShiharaiHohoHenkoHaakuIchiran;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020001.ShiharaiHohoHenkoHakuListMainDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -30,8 +30,6 @@ public class DBD2020001ValidationHandler {
     private static final int 月数_12 = 12;
     private static final int MIN = 0;
     private static final RString 基準日 = new RString("基準日");
-    private static final RString 受給認定日抽出 = new RString("受給認定日抽出");
-    private static final RString 償還支給決定日抽出 = new RString("償還支給決定日抽出");
 
     private final ShiharaiHohoHenkoHakuListMainDiv div;
 

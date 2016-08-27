@@ -42,13 +42,8 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
 
     private final KyodoIdoRenrakuhyoTorokuMainDiv div;
     private static final RString DBCHIHOKENSHANO = new RString("DBCHihokenshaNo");
-    private static final RString 個人番号_利用有無名称 = new RString("個人番号 利用有無");
-    private static final RString 法人番号_利用有無名称 = new RString("法人番号 利用有無");
     private static final RString 業務固有の識別情報名称 = new RString("業務固有の識別情報");
-    private static final Code 個人番号 = new Code("0001");
-    private static final Code 法人番号 = new Code("0002");
     private static final Code 業務固有 = new Code("0003");
-    private static final RString 無し = new RString("無し");
     private static final RString 被保険者番号_なし = new RString("被保険者番号なし");
     private static final RString 完了メッセージメイン = new RString("共同処理用受給者異動連絡票の登録が完了しました。");
     private static final RString 連絡票を保存 = new RString("btnSave");
@@ -135,14 +130,15 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
         }
         List<RString> チェック状態 = getチェックボックス状態();
 
-        KyodoShoriyoJukyushaIdoKihonSofu 異動基本送付Entity = new KyodoShoriyoJukyushaIdoKihonSofu(
-                共通項目Entity.get異動年月日(),
-                共通項目Entity.get異動区分(),
-                共通項目Entity.get異動事由(),
-                共通項目Entity.get証記載保険者番号(),
-                被保険者番号,
-                履歴番号);
+        KyodoShoriyoJukyushaIdoKihonSofu 異動基本送付Entity = null;
         if (is基本送付情報) {
+            異動基本送付Entity = new KyodoShoriyoJukyushaIdoKihonSofu(
+                    new FlexibleDate(div.getKyodoIdoRenrakuhyoTorokuInfo().get基本送付_異動日().toDateString()),
+                    共通項目Entity.get異動区分(),
+                    共通項目Entity.get異動事由(),
+                    共通項目Entity.get証記載保険者番号(),
+                    被保険者番号,
+                    履歴番号);
             異動基本送付Entity = 異動基本送付Entity.createBuilderForEdit()
                     .set被保険者氏名(entity.get基本情報Entity().get被保険者氏名())
                     .set郵便番号(entity.get基本情報Entity().get郵便番号())
@@ -162,14 +158,15 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
             }
         }
 
-        KyodoShoriyoJukyushaIdoShokanSofu 異動償還送付Entity = new KyodoShoriyoJukyushaIdoShokanSofu(
-                共通項目Entity.get異動年月日(),
-                共通項目Entity.get異動区分(),
-                共通項目Entity.get異動事由(),
-                共通項目Entity.get証記載保険者番号(),
-                被保険者番号,
-                履歴番号);
+        KyodoShoriyoJukyushaIdoShokanSofu 異動償還送付Entity = null;
         if (is償還送付情報) {
+            異動償還送付Entity = new KyodoShoriyoJukyushaIdoShokanSofu(
+                    new FlexibleDate(div.getKyodoIdoRenrakuhyoTorokuInfo().get償還送付_異動日().toDateString()),
+                    共通項目Entity.get異動区分(),
+                    共通項目Entity.get異動事由(),
+                    共通項目Entity.get証記載保険者番号(),
+                    被保険者番号,
+                    履歴番号);
             異動償還送付Entity = 異動償還送付Entity.createBuilderForEdit()
                     .set保険給付支払一時差止開始年月日(entity.get償還情報Entity().get保険給付支払一時差止開始年月日())
                     .set保険給付支払一時差止終了年月日(entity.get償還情報Entity().get保険給付支払一時差止終了年月日())
@@ -187,14 +184,15 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
             }
         }
 
-        KyodoShoriyoJukyushaIdoKogakuSofu 異動高額送付 = new KyodoShoriyoJukyushaIdoKogakuSofu(
-                共通項目Entity.get異動年月日(),
-                共通項目Entity.get異動区分(),
-                共通項目Entity.get異動事由(),
-                共通項目Entity.get証記載保険者番号(),
-                被保険者番号,
-                履歴番号);
+        KyodoShoriyoJukyushaIdoKogakuSofu 異動高額送付 = null;
         if (is高額送付情報) {
+            異動高額送付 = new KyodoShoriyoJukyushaIdoKogakuSofu(
+                    new FlexibleDate(div.getKyodoIdoRenrakuhyoTorokuInfo().get高額送付_異動日().toDateString()),
+                    共通項目Entity.get異動区分(),
+                    共通項目Entity.get異動事由(),
+                    共通項目Entity.get証記載保険者番号(),
+                    被保険者番号,
+                    履歴番号);
             HihokenshaNo 世帯集約番号 = entity.get高額情報Entity().get世帯集約番号();
             if (世帯集約番号 != null && !世帯集約番号.isEmpty()) {
                 異動高額送付 = 異動高額送付.createBuilderForEdit().set世帯集約番号(世帯集約番号).build();
@@ -223,7 +221,7 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
                 is基本送付情報,
                 is償還送付情報,
                 is高額送付情報);
-        AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
+        AccessLogger.log(AccessLogType.更新, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
         前排他キーの解除(被保険者番号.getColumnValue());
     }
 
@@ -252,10 +250,8 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
     }
 
     private PersonalData toPersonalData(ShikibetsuCode 識別コード, RString 被保険者番号) {
-        ExpandedInformation expandedInfo1 = new ExpandedInformation(個人番号, 個人番号_利用有無名称, 無し);
-        ExpandedInformation expandedInfo2 = new ExpandedInformation(法人番号, 法人番号_利用有無名称, 無し);
         ExpandedInformation expandedInfo3 = new ExpandedInformation(業務固有, 業務固有の識別情報名称, 被保険者番号);
-        return PersonalData.of(識別コード, expandedInfo1, expandedInfo2, expandedInfo3);
+        return PersonalData.of(識別コード, expandedInfo3);
     }
 
     /**

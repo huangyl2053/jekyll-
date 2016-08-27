@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 public class KiwarigakuDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -738,6 +738,16 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getMaeTotalMae1() {
+        return this.getKiwarigakuKanendo1().getKiwarigakuPanel2().getMaeTotalMae1();
+    }
+
+    @JsonIgnore
+    public Label getMaeTotalGo1() {
+        return this.getKiwarigakuKanendo1().getKiwarigakuPanel2().getMaeTotalGo1();
+    }
+
+    @JsonIgnore
     public TextBoxDate getTxtKanendoChoteiYY2() {
         return this.getKiwarigakuKanendo2().getTxtKanendoChoteiYY2();
     }
@@ -820,6 +830,16 @@ public class KiwarigakuDiv extends Panel {
     @JsonIgnore
     public Label getLblKiwarigaku3Total() {
         return this.getKiwarigakuKanendo2().getKiwarigakuPanel3().getLblKiwarigaku3Total();
+    }
+
+    @JsonIgnore
+    public Label getMaeTotalMae2() {
+        return this.getKiwarigakuKanendo2().getKiwarigakuPanel3().getMaeTotalMae2();
+    }
+
+    @JsonIgnore
+    public Label getMaeTotalGo2() {
+        return this.getKiwarigakuKanendo2().getKiwarigakuPanel3().getMaeTotalGo2();
     }
 
     // </editor-fold>

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100202.NenkinNoCheck
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100202.ShimeiKanaTotsugoGaitousyaNasiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100202.ShimeiKanaTotsugoSedProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100202.ShimeiKanaTotsugoTouItuninProcessParameter;
+import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -28,8 +29,15 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HikazeNenkinTaishoshaDouteiBatchParameter extends BatchParameterBase {
 
+    private static final String NENDO = "nendo";
+    private static final String SHORIKUBUNN = "shoriKubunn";
+    private static final String TAISHOUMONTH = "taishouMonth";
+
+    @BatchParameter(key = NENDO, name = "年度")
     private FlexibleYear 年度;
+    @BatchParameter(key = SHORIKUBUNN, name = "処理区分")
     private RString 処理区分;
+    @BatchParameter(key = TAISHOUMONTH, name = "対象月")
     private RString 対象月;
 
     /**

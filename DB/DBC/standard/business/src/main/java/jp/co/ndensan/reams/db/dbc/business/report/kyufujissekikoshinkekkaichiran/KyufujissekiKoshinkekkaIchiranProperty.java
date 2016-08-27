@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  */
 public class KyufujissekiKoshinkekkaIchiranProperty extends ReportPropertyBase<KyufujissekiKoshinkekkaIchiranSource> {
 
-    private static final RString ENCLOSURE = new RString("\"");
     private final List<RString> pageBreakKeys;
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
@@ -134,51 +133,51 @@ public class KyufujissekiKoshinkekkaIchiranProperty extends ReportPropertyBase<K
         /**
          * 保険者番号
          */
-        保険者番号(new RString("0365"), new RString(""), ENCLOSURE.concat(new RString("").concat(ENCLOSURE))),
+        保険者番号(new RString("0365"), new RString("hokenshaNo"), new RString("DbWT1111.\"hokenshaNo\"")),
         /**
          * 郵便番号
          */
-        郵便番号(new RString("0001"), new RString(""), ENCLOSURE.concat(new RString("").concat(ENCLOSURE))),
+        郵便番号(new RString("0001"), new RString("yubinNo"), new RString("DbWT0001.\"yubinNo\"")),
         /**
          * 町域コード
          */
-        町域コード(new RString("0002"), new RString(""), ENCLOSURE.concat(new RString("").concat(ENCLOSURE))),
+        町域コード(new RString("0002"), new RString("choikiCode"), new RString("DbWT0001.\"choikiCode\"")),
         /**
          * 行政区コード
          */
-        行政区コード(new RString("0004"), new RString(""), ENCLOSURE.concat(new RString("").concat(ENCLOSURE))),
+        行政区コード(new RString("0004"), new RString("gyoseikuCode"), new RString("DbWT0001.\"gyoseikuCode\"")),
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString(""), ENCLOSURE.concat(new RString("").concat(ENCLOSURE))),
+        氏名５０音カナ(new RString("0010"), new RString("shimei50onKana"), new RString("DbWT0001.\"shimei50onKana\"")),
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString(""), ENCLOSURE.concat(new RString("").concat(ENCLOSURE))),
+        市町村コード(new RString("0016"), new RString("shichosonCode"), new RString("DbWT0001.\"shichosonCode\"")),
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString(""), ENCLOSURE.concat(new RString("").concat(ENCLOSURE))),
+        被保険者番号(new RString("0104"), new RString("hihokenshaNo"), new RString("DbWT0001.\"hihokenshaNo\"")),
         /**
          * サービス提供年月
          */
-        サービス提供年月(new RString("0364"), new RString(""), ENCLOSURE.concat(new RString("").concat(ENCLOSURE))),
+        サービス提供年月(new RString("0364"), new RString("serviceTeikyoYM"), new RString("DbWT1111.\"serviceTeikyoYM\"")),
         /**
          * 事業者番号
          */
-        事業者番号(new RString("0366"), new RString(""), ENCLOSURE.concat(new RString("").concat(ENCLOSURE))),
+        事業者番号(new RString("0366"), new RString("jigyoshoNo"), new RString("DbWT1111.\"jigyoshoNo\"")),
         /**
          * 入力識別番号
          */
-        入力識別番号(new RString("0304"), new RString(""), ENCLOSURE.concat(new RString("").concat(ENCLOSURE))),
+        入力識別番号(new RString("0304"), new RString("nyuryokuShikibetsuNo"), new RString("DbWT1111.\"nyuryokuShikibetsuNo\"")),
         /**
          * 整理番号
          */
-        整理番号(new RString("0305"), new RString(""), ENCLOSURE.concat(new RString("").concat(ENCLOSURE))),
+        整理番号(new RString("0305"), new RString("seiriNo"), new RString("DbWT1111.\"seiriNo\"")),
         /**
          * 現物償還の別
          */
-        現物償還の別(new RString("0306"), new RString(""), ENCLOSURE.concat(new RString("").concat(ENCLOSURE)));
+        現物償還の別(new RString("0306"), new RString("kyufuJissekiKubun"), new RString("DbWT1111.\"kyufuJissekiKubun\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

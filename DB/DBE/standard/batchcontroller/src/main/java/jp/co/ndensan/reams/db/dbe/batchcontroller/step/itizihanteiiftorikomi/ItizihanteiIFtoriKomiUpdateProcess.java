@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.itizihanteiiftorikomi;
 import jp.co.ndensan.reams.db.dbe.business.core.itizi.itizihanteiiftorikomi.ItizihanteiIFtoriKomiBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.itizihanteishori.ItziHanteiShoriProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.itizihanteiiftorikomi.ItizihanteiIFtoriKomiRelateEntity;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
@@ -30,12 +29,6 @@ public class ItizihanteiIFtoriKomiUpdateProcess extends BatchProcessBase<Itiziha
     private ItziHanteiShoriProcessParamter paramter;
     @BatchWriter
     private BatchPermanentTableWriter<DbT5116IchijiHanteiKekkaJohoEntity> tableWrite;
-
-    @Override
-    protected void initialize() {
-        paramter.set取下(ShoriJotaiKubun.取下.getコード());
-        paramter.set延期(ShoriJotaiKubun.延期.getコード());
-    }
 
     @Override
     protected void beforeExecute() {

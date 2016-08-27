@@ -27,7 +27,7 @@
      "condition": "",
      "toLayoutSubGyomuCode": "DBD",
      "toLayoutName": "DBD4020011",
-     "toLayoutTitle": "障がい者控除対象者申請登録",
+     "toLayoutTitle": "仮申請情報登録",
      "toState": "一覧"
     },
     {
@@ -35,7 +35,7 @@
      "type": "end",
      "layoutSubGyomuCode": "DBD",
      "layoutName": "DBD4020011",
-     "layoutTitle": "障がい者控除対象者申請登録",
+     "layoutTitle": "仮申請情報登録",
      "eventName": "完了",
      "destroy": false,
      "condition": ""
@@ -59,7 +59,7 @@
      "type": "ordinal",
      "layoutSubGyomuCode": "DBD",
      "layoutName": "DBD4020011",
-     "layoutTitle": "障がい者控除対象者申請登録",
+     "layoutTitle": "仮申請情報登録",
      "eventName": "検索結果一覧へ",
      "destroy": true,
      "condition": "",

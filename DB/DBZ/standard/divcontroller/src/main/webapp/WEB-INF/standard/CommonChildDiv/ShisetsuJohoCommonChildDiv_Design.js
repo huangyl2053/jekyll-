@@ -12,6 +12,10 @@ var DBZ;
                 return "onBlur_nyuryokuShisetsuKodo";
             };
 
+            Events.onChange_nyuryokuShisetsuKodo = function () {
+                return "onChange_nyuryokuShisetsuKodo";
+            };
+
             Events.onOkClose_btnSenTaKu = function () {
                 return "onOkClose_btnSenTaKu";
             };

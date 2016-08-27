@@ -83,4 +83,25 @@ public class DbV3104KokuhorenTorikomiJohoDac implements ISaveable<DbV3104Kokuhor
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("国保連取り込み情報エンティティ"));
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 国保連送付情報を取得します。
+     *
+     * @param 処理年月 処理年月
+     * @return List DbV3104KokuhorenTorikomiJohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbV3104KokuhorenTorikomiJohoEntity> selectBy処理年月(
+            FlexibleYearMonth 処理年月) throws NullPointerException {
+        requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年月"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV3104KokuhorenTorikomiJoho.class).
+                where(
+                        eq(shoriYM, 処理年月)).
+                toList(DbV3104KokuhorenTorikomiJohoEntity.class);
+    }
 }

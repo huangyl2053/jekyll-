@@ -80,6 +80,8 @@ public class KarisanteiIdoKekkaIchiranPrintService {
                 ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, ID);
                 EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通, association);
                 住所編集リスト.add(編集後個人.get編集後住所());
+            } else {
+                住所編集リスト.add(RString.EMPTY);
             }
         }
 

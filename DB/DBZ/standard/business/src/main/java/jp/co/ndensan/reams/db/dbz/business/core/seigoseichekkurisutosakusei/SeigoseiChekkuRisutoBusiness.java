@@ -172,7 +172,7 @@ public final class SeigoseiChekkuRisutoBusiness {
         AgeCalculator ac = new AgeCalculator(DateOfBirthFactory.createInstance(entity.get生年月日()),
                 JuminJotai.toValue(entity.get住民状態コード()), entity.get消除異動年月日());
         FlexibleDate 年齢到達日 = ac.get年齢到達日(連番);
-        if (!(コード.equals(entity.get取得事由コード()) && 年齢到達日.equals(entity.get資格異動日()))
+        if (!(コード.equals(entity.get取得事由コード()) && 年齢到達日.equals(entity.get資格取得日()))
                 && FlexibleDate.getNowDate().isBefore(年齢到達日)) {
             SeigoseiChekkuTempTableBEntity tableEntity = set宛名なし情報(entity);
             tableEntity.set不整合理由コード(new RString("03"));
@@ -206,20 +206,20 @@ public final class SeigoseiChekkuRisutoBusiness {
             tableEntity.set不整合理由コード(new RString("04"));
             return tableEntity;
         }
-        if (種別_1.equals(entity.get台帳種別()) && entity.get消除異動年月日() != null && !entity.get消除異動年月日().isEmpty()
-                && !entity.get消除異動年月日().plusDay(1).equals(比較解除年月日)) {
+        if (種別_1.equals(entity.get台帳種別()) && (entity.get消除異動年月日() == null || entity.get消除異動年月日().isEmpty()
+                || !entity.get消除異動年月日().plusDay(1).equals(比較解除年月日))) {
             SeigoseiChekkuTempTableBEntity tableEntity = set宛名なし情報(entity);
             tableEntity.set不整合理由コード(new RString("31"));
             return tableEntity;
         }
-        if (種別_2.equals(entity.get台帳種別()) && entity.get消除異動年月日() != null && !entity.get消除異動年月日().isEmpty()
-                && !entity.get消除異動年月日().plusDay(1).equals(比較解除年月日)) {
+        if (種別_2.equals(entity.get台帳種別()) && (entity.get消除異動年月日() == null || entity.get消除異動年月日().isEmpty()
+                || !entity.get消除異動年月日().plusDay(1).equals(比較解除年月日))) {
             SeigoseiChekkuTempTableBEntity tableEntity = set宛名なし情報(entity);
             tableEntity.set不整合理由コード(new RString("52"));
             return tableEntity;
         }
-        if (種別_3.equals(entity.get台帳種別()) && entity.get消除異動年月日() != null && !entity.get消除異動年月日().isEmpty()
-                && !entity.get消除異動年月日().plusDay(1).equals(比較解除年月日)) {
+        if (種別_3.equals(entity.get台帳種別()) && (entity.get消除異動年月日() == null || entity.get消除異動年月日().isEmpty()
+                || !entity.get消除異動年月日().plusDay(1).equals(比較解除年月日))) {
             SeigoseiChekkuTempTableBEntity tableEntity = set宛名なし情報(entity);
             tableEntity.set不整合理由コード(new RString("62"));
             return tableEntity;
@@ -229,26 +229,26 @@ public final class SeigoseiChekkuRisutoBusiness {
     }
 
     private static SeigoseiChekkuTempTableBEntity setチェック判定2(SeigoseiChekkuRisutoEntity entity, FlexibleDate 比較解除年月日) {
-        if (種別_1.equals(entity.get台帳種別()) && entity.get転出予定異動年月日() != null && !entity.get転出予定異動年月日().isEmpty()
-                && !entity.get転出予定異動年月日().plusDay(1).equals(比較解除年月日)) {
+        if (種別_1.equals(entity.get台帳種別()) && (entity.get転出予定異動年月日() == null || entity.get転出予定異動年月日().isEmpty()
+                || !entity.get転出予定異動年月日().plusDay(1).equals(比較解除年月日))) {
             SeigoseiChekkuTempTableBEntity tableEntity = set宛名なし情報(entity);
             tableEntity.set不整合理由コード(new RString("32"));
             return tableEntity;
         }
-        if (種別_2.equals(entity.get台帳種別()) && entity.get転出予定異動年月日() != null && !entity.get転出予定異動年月日().isEmpty()
-                && !entity.get転出予定異動年月日().plusDay(1).equals(比較解除年月日)) {
+        if (種別_2.equals(entity.get台帳種別()) && (entity.get転出予定異動年月日() == null || entity.get転出予定異動年月日().isEmpty()
+                || !entity.get転出予定異動年月日().plusDay(1).equals(比較解除年月日))) {
             SeigoseiChekkuTempTableBEntity tableEntity = set宛名なし情報(entity);
             tableEntity.set不整合理由コード(new RString("53"));
             return tableEntity;
         }
-        if (種別_3.equals(entity.get台帳種別()) && entity.get転出予定異動年月日() != null && !entity.get転出予定異動年月日().isEmpty()
-                && !entity.get転出予定異動年月日().plusDay(1).equals(比較解除年月日)) {
+        if (種別_3.equals(entity.get台帳種別()) && (entity.get転出予定異動年月日() == null || entity.get転出予定異動年月日().isEmpty()
+                || !entity.get転出予定異動年月日().plusDay(1).equals(比較解除年月日))) {
             SeigoseiChekkuTempTableBEntity tableEntity = set宛名なし情報(entity);
             tableEntity.set不整合理由コード(new RString("63"));
             return tableEntity;
         }
-        if (種別_1.equals(entity.get台帳種別()) && entity.get転出確定異動年月日() != null && !entity.get転出確定異動年月日().isEmpty()
-                && !entity.get転出確定異動年月日().equals(比較解除年月日)) {
+        if (種別_1.equals(entity.get台帳種別()) && (entity.get転出確定異動年月日() == null || entity.get転出確定異動年月日().isEmpty()
+                || !entity.get転出確定異動年月日().equals(比較解除年月日))) {
             SeigoseiChekkuTempTableBEntity tableEntity = set宛名なし情報(entity);
             tableEntity.set不整合理由コード(new RString("33"));
             return tableEntity;
@@ -258,13 +258,13 @@ public final class SeigoseiChekkuRisutoBusiness {
 
     private static SeigoseiChekkuTempTableBEntity setチェック判定3(SeigoseiChekkuRisutoEntity entity, FlexibleDate 比較解除年月日) {
         SeigoseiChekkuTempTableBEntity tableEntity = new SeigoseiChekkuTempTableBEntity();
-        if (種別_2.equals(entity.get台帳種別()) && entity.get転出確定異動年月日() != null && !entity.get転出確定異動年月日().isEmpty()
-                && !entity.get転出確定異動年月日().equals(比較解除年月日)) {
+        if (種別_2.equals(entity.get台帳種別()) && (entity.get転出確定異動年月日() == null || entity.get転出確定異動年月日().isEmpty()
+                || !entity.get転出確定異動年月日().equals(比較解除年月日))) {
             tableEntity = set宛名なし情報(entity);
             tableEntity.set不整合理由コード(new RString("54"));
         }
-        if (種別_3.equals(entity.get台帳種別()) && entity.get転出確定異動年月日() != null && !entity.get転出確定異動年月日().isEmpty()
-                && !entity.get転出確定異動年月日().equals(比較解除年月日)) {
+        if (種別_3.equals(entity.get台帳種別()) && (entity.get転出確定異動年月日() == null || entity.get転出確定異動年月日().isEmpty()
+                || !entity.get転出確定異動年月日().equals(比較解除年月日))) {
             tableEntity = set宛名なし情報(entity);
             tableEntity.set不整合理由コード(new RString("64"));
         }

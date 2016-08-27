@@ -40,7 +40,8 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
     private final List<RString> 改頁項目List;
     private final YMDHMS システム日時;
     private final int 連番;
-    private final List<RString> indexList;
+    private final boolean flag;
+    private final int 合計;
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -71,7 +72,8 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
      * @param 改頁項目List List<RString>
      * @param システム日時 YMDHMS
      * @param 連番 int
-     * @param indexList List<RString>
+     * @param flag boolean
+     * @param 合計 int
      */
     public KyufujissekiKoshinkekkaIchiranEditor(
             FlexibleYearMonth 処理年月,
@@ -84,7 +86,8 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
             List<RString> 改頁項目List,
             YMDHMS システム日時,
             int 連番,
-            List<RString> indexList) {
+            boolean flag,
+            int 合計) {
         this.処理年月 = 処理年月;
         this.entity = entity;
         this.並び順の１件目 = 並び順の１件目;
@@ -95,7 +98,8 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
         this.改頁項目List = 改頁項目List;
         this.システム日時 = システム日時;
         this.連番 = 連番;
-        this.indexList = indexList;
+        this.flag = flag;
+        this.合計 = 合計;
     }
 
     /**
@@ -111,7 +115,7 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
         RString 帳票作成時 = システム日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
         source.printTimeStamp = 帳票作成年月日.concat(RString.HALF_SPACE).concat(帳票作成時)
                 .concat(RString.HALF_SPACE).concat(SAKUSEI);
-        source.shoriYM = 処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+        source.shoriYM = 処理年月.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         if (entity != null) {
             source.hokenshaNo = entity.get給付実績_コントロールレコード保険者番号();
@@ -119,7 +123,9 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
             set出力順And改ページ(source);
             source.listUpper_1 = new RString(連番);
             source.listUpper_2 = entity.get給付実績_入力識別番号();
-            source.listUpper_3 = entity.get給付実績_入力識別名称().substring(NUM_0, NUM_8);
+            if (entity.get給付実績_入力識別名称() != null && entity.get給付実績_入力識別名称().length() >= NUM_8) {
+                source.listUpper_3 = entity.get給付実績_入力識別名称().substring(NUM_0, NUM_8);
+            }
             if (entity.get給付実績_給付実績情報作成区分コード() != null) {
                 source.listUpper_4 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.給付実績情報作成区分.getコード(),
                         new Code(entity.get給付実績_給付実績情報作成区分コード()), FlexibleDate.getNowDate());
@@ -185,17 +191,9 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
     }
 
     private KyufujissekiKoshinkekkaIchiranSource editor集計(KyufujissekiKoshinkekkaIchiranSource source) {
-        RString value = new RString(連番);
-        if (indexList.contains(value)) {
-            int index = indexList.indexOf(value);
-            if (index == NUM_0) {
-                source.gokeiKensuTitle = 合計件数タイトル;
-                source.gokeiKensu = value;
-            } else {
-                int frontValue = Integer.parseInt(indexList.get(index - NUM_1).toString());
-                source.gokeiKensuTitle = 合計件数タイトル;
-                source.gokeiKensu = new RString(連番 - frontValue);
-            }
+        if (flag) {
+            source.gokeiKensuTitle = 合計件数タイトル;
+            source.gokeiKensu = new RString(合計);
         }
         return source;
     }
@@ -213,10 +211,12 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
         if (entity.get給付実績_レコード件数DC() >= NUM_1) {
             source.listUpper_23 = 図形_ONE;
         }
-        if (NUM_ONE.equals(entity.get給付実績_警告区分コード())) {
-            source.listUpper_24 = RString.EMPTY;
-        } else {
-            source.listUpper_24 = KeikokuKubun.toValue(entity.get給付実績_警告区分コード()).get名称();
+        if (entity.get給付実績_警告区分コード() != null && !entity.get給付実績_警告区分コード().isEmpty()) {
+            if (NUM_ONE.equals(entity.get給付実績_警告区分コード())) {
+                source.listUpper_24 = RString.EMPTY;
+            } else {
+                source.listUpper_24 = KeikokuKubun.toValue(entity.get給付実績_警告区分コード()).get名称();
+            }
         }
         int 入力識別名称Length = entity.get給付実績_入力識別名称().length();
         if (入力識別名称Length >= NUM_9 && 入力識別名称Length < NUM_16) {

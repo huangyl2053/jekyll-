@@ -381,7 +381,7 @@
         WHERE
             B."shikakuSoshitsuYMD" IS NULL
         OR  B."shikakuSoshitsuYMD" = ''
-        OR  B."shikakuSoshitsuYMD" <![CDATA[>=]]> #{choteiNendoYMD}
+        OR  #{choteiNendoYMD} <![CDATA[<=]]> B."shikakuSoshitsuYMD"
     </select>
     
     <!-- 住基（宛名）異動の取得に本人の異動を「異動Temp」に追加する-->
@@ -425,7 +425,7 @@
             rgdb."DbV2502KaigoShotoku" AS A
         WHERE
             A."shotokuNendo" = #{調定年度}
-        AND substring(A."shoriTimeStamp",0,8) <![CDATA[>=]]> to_char(to_date(#{抽出開始日時}, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD')
+        AND to_char(to_date(#{抽出開始日時}, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD') <![CDATA[<=]]> substring(A."shoriTimeStamp",0,8)
         AND substring(A."shoriTimeStamp",0,8) <![CDATA[<=]]> to_char(to_date(#{抽出終了日時}, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD')
     </select>
     
@@ -508,7 +508,7 @@
         WHERE
            B."shikakuSoshitsuYMD" IS NULL 
         OR B."shikakuSoshitsuYMD" = ''
-        OR B."shikakuSoshitsuYMD" <![CDATA[>=]]> #{choteiNendoYMD}
+        OR #{choteiNendoYMD} <![CDATA[<=]]> B."shikakuSoshitsuYMD"
     </select>
     
     <!-- 所得異動の取得に本人の異動を「異動Temp」に追加する-->
@@ -538,7 +538,7 @@
         WHERE
             A."hihokennshaKubunCode" = '1'
         AND A."logicalDeletedFlag" = FALSE
-        AND A."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+        AND #{抽出開始日時} <![CDATA[<=]]> A."lastUpdateTimestamp"
         AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
@@ -560,9 +560,9 @@
         AND B."gyomuCode" = C."gyomuCode"
         AND B."jukyuKaishiYMD" = C."jukyuKaishiYMD"
         WHERE
-            B."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+            #{抽出開始日時} <![CDATA[<=]]> B."lastUpdateTimestamp"
         AND B."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
-        AND C."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+        AND #{抽出開始日時} <![CDATA[<=]]> C."lastUpdateTimestamp"
         AND C."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
@@ -578,7 +578,7 @@
         ON
             A."shikibetsuCode" = B."shikibetsuCode"
         WHERE
-            A."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+            #{抽出開始日時} <![CDATA[<=]]> A."lastUpdateTimestamp"
         AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
@@ -594,7 +594,7 @@
         ON
             A."hihokenshaNo" = B."hihokenshaNo"
         WHERE
-            B."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
+            #{抽出開始日時} <![CDATA[<=]]> B."lastUpdateTimestamp"
         AND B."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
@@ -897,7 +897,7 @@
         ON
             口座."uaT0310Koza_shikibetsuCode" = A."shikibetsuCode"
         WHERE
-            (COALESCE(A."fuchoKibetsuGaku1",0)
+            '0' <![CDATA[<]]> (COALESCE(A."fuchoKibetsuGaku1",0)
                 +COALESCE(A."fuchoKibetsuGaku2", 0) 
                 +COALESCE(A."fuchoKibetsuGaku3", 0) 
                 +COALESCE(A."fuchoKibetsuGaku4", 0) 
@@ -911,7 +911,7 @@
                 +COALESCE(A."fuchoKibetsuGaku12", 0)
                 +COALESCE(A."fuchoKibetsuGaku13", 0) 
                 +COALESCE(A."fuchoKibetsuGaku14", 0) 
-              ) <![CDATA[>]]> '0'
+              )  
        AND A."kozaKubun" = '0'
     </select>
     
@@ -933,7 +933,7 @@
             ON
                 口座."uaT0310Koza_shikibetsuCode" = B."shikibetsuCode"
             )
-        AND (COALESCE(A."fuchoKibetsuGaku1",0)
+        AND '0' <![CDATA[<]]> (COALESCE(A."fuchoKibetsuGaku1",0)
                 +COALESCE(A."fuchoKibetsuGaku2", 0) 
                 +COALESCE(A."fuchoKibetsuGaku3", 0) 
                 +COALESCE(A."fuchoKibetsuGaku4", 0) 
@@ -947,7 +947,7 @@
                 +COALESCE(A."fuchoKibetsuGaku12", 0)
                 +COALESCE(A."fuchoKibetsuGaku13", 0) 
                 +COALESCE(A."fuchoKibetsuGaku14", 0) 
-              ) <![CDATA[>]]> '0'
+              ) 
         AND A."kozaKubun" = '1'
     </select>
     
@@ -1011,9 +1011,7 @@
                 DbT1001.*
              FROM
                 rgdb."DbT1001HihokenshaDaicho" AS DbT1001
-             WHERE
-             (DbT1001."hihokenshaNo", DbT1001."ichigoShikakuShutokuYMD", DbT1001."shikakuSoshitsuYMD", DbT1001."idoYMD", DbT1001."edaNo")
-             IN
+             INNER JOIN
              (SELECT
                 Q."hihokenshaNo",
                 Q."ichigoShikakuShutokuYMD",
@@ -1038,15 +1036,19 @@
                 ON
                     T."hihokenshaNo" = Q."hihokenshaNo"
                 AND T."ichigoShikakuShutokuYMD" = Q."ichigoShikakuShutokuYMD"
-                AND COALESCE(T."shikakuSoshitsuYMD",'') = COALESCE(Q."shikakuSoshitsuYMD",'')
+                AND COALESCE(T."shikakuSoshitsuYMD",'00000000') = COALESCE(Q."shikakuSoshitsuYMD",'00000000')
                 AND T."max1" = (Q."idoYMD" || Q."edaNo")
-                )
+                ) AS R
+               ON
+                  R."hihokenshaNo" = DbT1001."hihokenshaNo"
+                AND R."idoYMD" = DbT1001."idoYMD"
+                AND R."edaNo" = DbT1001."edaNo"
             ) AS A
             INNER JOIN
                 "TmpIdoTrigger" AS B
             ON
                 A."hihokenshaNo" = B."hihokenshaNo"
-        WHERE
+         WHERE
             A."hihokennshaKubunCode" = '1'
         AND A."logicalDeletedFlag" = FALSE
         AND (A."shikakuSoshitsuYMD" IS NULL OR A."shikakuSoshitsuYMD" = ''
@@ -1567,7 +1569,7 @@
      <!--賦課計算の情報の取得します。--> 
     <select resultOrdered="true" id="get賦課計算の情報" resultMap="resultMap_CalculateFukaEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.CalculateFukaParameter" fetchSize="500" >
-        SELECT
+        SELECT 
             <include refid="allColumns_TmpHonsantei" />,
             "TmpHonsantei"."choteiNendo",
             "TmpHonsantei"."fukaNendo",
@@ -1624,38 +1626,38 @@
         ON "TmpHonsantei"."shikibetsuCode" = "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"
         LEFT JOIN rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS "DbT7006RoreiFukushiNenkinJukyusha"
         ON "TmpHonsantei"."shikibetsuCode" = "DbT7006RoreiFukushiNenkinJukyusha"."shikibetsuCode"
-        INNER JOIN 
-            (SELECT B.*
-            FROM 
-                (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.noDeleted_DbT1006KyokaisoGaitosha" />) AS B
-            INNER JOIN
-                (SELECT C."hihokenshaNo",
-                        C."linkNo",
-                        MAX(C."rirekiNo") as "rirekiNo"
-                 FROM 
-                        rgdb."DbT1006KyokaisoGaitosha" AS C
-                GROUP BY
-                    C."hihokenshaNo",
-                    C."linkNo"
-                ) AS A
+        LEFT JOIN 
+                (SELECT B.*
+                FROM 
+                    (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.noDeleted_DbT1006KyokaisoGaitosha" />) AS B
+                INNER JOIN
+                    (SELECT C."hihokenshaNo",
+                            C."linkNo",
+                            MAX(C."rirekiNo") as "rirekiNo"
+                     FROM 
+                            rgdb."DbT1006KyokaisoGaitosha" AS C
+                    GROUP BY
+                        C."hihokenshaNo",
+                        C."linkNo"
+                    ) AS A
+                ON
+                  A."hihokenshaNo" = B."dbT1006KyokaisoGaitosha_hihokenshaNo"
+                  AND A."linkNo" = B."dbT1006KyokaisoGaitosha_linkNo"
+                  AND A."rirekiNo" = B."dbT1006KyokaisoGaitosha_rirekiNo"
+                ) AS DbT1006KyokaisoGaitosha
+            LEFT JOIN
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1013KyokaisoSochiShinseiMapper.noDeleted_DbT1013KyokaisoSochiShinsei" />) AS DbT1013KyokaisoSochiShinsei
             ON
-              A."hihokenshaNo" = B."dbT1006KyokaisoGaitosha_hihokenshaNo"
-              AND A."linkNo" = B."dbT1006KyokaisoGaitosha_linkNo"
-              AND A."rirekiNo" = B."dbT1006KyokaisoGaitosha_rirekiNo"
-            ) AS DbT1006KyokaisoGaitosha
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_hihokenshaNo" and
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_rirekiNo" and
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_linkNo"
+            LEFT JOIN
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1007KyokaisoHokenryoDankaiMapper.noDeleted_DbT1007KyokaisoHokenryoDankai" />) AS DbT1007KyokaisoHokenryoDankai
+            ON
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_hihokenshaNo" and
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_rirekiNo" and
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_linkNo"
         ON "TmpHonsantei"."hihokenshaNo"  =  DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo"
-        LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1013KyokaisoSochiShinseiMapper.noDeleted_DbT1013KyokaisoSochiShinsei" />) AS DbT1013KyokaisoSochiShinsei
-        ON
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_hihokenshaNo" and
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_rirekiNo" and
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_linkNo"
-        LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1007KyokaisoHokenryoDankaiMapper.noDeleted_DbT1007KyokaisoHokenryoDankai" />) AS DbT1007KyokaisoHokenryoDankai
-        ON
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_hihokenshaNo" and
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_rirekiNo" and
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_linkNo"
         LEFT JOIN 
         (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
         ON "TmpHonsantei"."shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
@@ -1966,6 +1968,11 @@
         AND "DbT2015KeisangoJoho"."fukaNendo" = #{賦課年度}
         AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '異動賦課'
         <!--AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時}-->
-        ${出力順}
+        ${出力順},
+        "dbT2015KeisangoJoho_choteiNendo",
+        "dbT2015KeisangoJoho_fukaNendo",
+        "dbT2015KeisangoJoho_tsuchishoNo",
+        "dbT2015KeisangoJoho_koseiZengoKubun",
+        "dbT2015KeisangoJoho_sakuseiShoriName"
     </select>
 </mapper>

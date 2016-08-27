@@ -11,13 +11,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * @author DBC-2730-030 chenjie
+ * @reamsid_L DBC-2730-030 chenjie
  */
 public enum JukyushaIF_HenkoShinseichuKubunCode {
        /**
-     * コード:1 名称:申請無し 表示名称:申請無し
+     * コード:1 名称:申請なし 表示名称:申請なし
      */
-    申請無し("1", "申請無し"),
+    申請無し("1", "申請なし"),
     /**
      * コード:2 名称:申請中 表示名称:申請中
      */

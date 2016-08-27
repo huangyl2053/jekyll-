@@ -22,11 +22,13 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010003.Hik
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -87,9 +89,11 @@ public class HikazeiNenkinKenJoho {
      * @return ResponseData<HikazeiNenkinKenJohoDiv>
      */
     public ResponseData<HikazeiNenkinKenJohoDiv> onClick_btnSearch(HikazeiNenkinKenJohoDiv div) {
+        if (!ResponseHolder.isReRequest() && 削除解除モード.equals(div.getHiddenModel())) {
+            return ResponseData.of(div).addMessage(DbdQuestionMessages.編集破棄確認.getMessage(ButtonSelectPattern.OKCancel)).respond();
+        }
         div.setHiddenHihokenshaNo(div.getCcdKaigoShikaku().get被保険者番号());
         div.setHiddenNendo(div.getDdlYear().getSelectedKey());
-        //TODO 画面設計_HikazeiNenkinKensaku_非課税年金検索 未作成
         return ResponseData.of(div).respond();
     }
 
@@ -103,7 +107,12 @@ public class HikazeiNenkinKenJoho {
         HousholdBusiness 非課税年金対象者情報
                 = DataPassingConverter.deserialize(div.getHiddenLastInputHousehold(), HousholdBusiness.class);
         getHandler(div).画面編集制御処理(非課税年金対象者情報);
+        div.getTbNenkinHokenshaCode().setDisabled(true);
+        div.getTbKisoNenkinNo().setDisabled(true);
+        div.getTbNenkinCode().setDisabled(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
         ViewStateHolder.put(ViewStateKeys.非課税年金対象者一時テーブル, 非課税年金対象者情報);
+        div.getShoSaiPanel().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
@@ -133,7 +142,7 @@ public class HikazeiNenkinKenJoho {
             if (div.getCcdKaigoShikaku().get被保険者番号().equals(非課税年金対象情報.get被保険者番号())) {
                 return ResponseData.of(div).addMessage(DbdQuestionMessages.新規登録確認.getMessage()).respond();
             }
-            if (非課税年金対象情報.get被保険者番号().isNullOrEmpty()) {
+            if (null == 非課税年金対象情報.get被保険者番号() || 非課税年金対象情報.get被保険者番号().isEmpty()) {
                 handler.画面編集制御処理(非課税年金対象情報);
                 ViewStateHolder.put(ViewStateKeys.非課税年金対象者一時テーブル, 非課税年金対象情報);
             } else {
@@ -141,9 +150,12 @@ public class HikazeiNenkinKenJoho {
                         .replace(非課税年金対象情報.get被保険者番号().toString()));
             }
         }
-        if (new RString(DbdWarningMessages.既存データなし.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            handler.新規編集画面制御処理();
+        if (new RString(DbdWarningMessages.既存データなし.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            if (ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+                handler.新規編集画面制御処理();
+            } else {
+                return ResponseData.of(div).respond();
+            }
         }
         if (new RString(DbdQuestionMessages.新規登録確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
@@ -154,6 +166,7 @@ public class HikazeiNenkinKenJoho {
         div.getTbKisoNenkinNo().setDisabled(true);
         div.getTbNenkinCode().setDisabled(true);
         div.getBtnDisplay().setDisabled(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
         return ResponseData.of(div).respond();
     }
 
@@ -195,22 +208,7 @@ public class HikazeiNenkinKenJoho {
 
         if (!ResponseHolder.isReRequest()) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            HikazeiNenkinKenJohoValidationHandler validationHandler = getValidationHandler();
-
-            validationHandler.現基礎年金番号の未入力チェック(pairs, div);
-            validationHandler.月の未入力チェック(pairs, div);
-            validationHandler.金額の未入力チェック(pairs, div);
-            validationHandler.作成年月日の未入力チェック(pairs, div);
-            validationHandler.対象年の未入力チェック(pairs, div);
-            validationHandler.氏名カナの未入力チェック(pairs, div);
-            validationHandler.性別の未入力チェック(pairs, div);
-            validationHandler.生年月日の未入力チェック(pairs, div);
-            validationHandler.氏名漢字の未入力チェック(pairs, div);
-            validationHandler.住所漢字の未入力チェック(pairs, div);
-            validationHandler.登録区分の未入力チェック(pairs, div);
-            validationHandler.年金保険者コードの未入力チェック(pairs, div);
-            validationHandler.基礎年金番号の未入力チェック(pairs, div);
-            validationHandler.年金コードの未入力チェック(pairs, div);
+            保存チェック(pairs, div);
 
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -242,6 +240,7 @@ public class HikazeiNenkinKenJoho {
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             handler.削除解除_登録区分_画面登録_保存処理(非課税年金対象者一時);
             handler.前排他の解除(key.get被保険者番号());
+            div.getCcvComplateMsg().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(complate);
         }
 
@@ -265,6 +264,41 @@ public class HikazeiNenkinKenJoho {
 
         return ResponseData.of(div).respond();
 
+    }
+
+    private void 保存チェック(ValidationMessageControlPairs pairs, HikazeiNenkinKenJohoDiv div) {
+        HikazeiNenkinKenJohoValidationHandler validationHandler = getValidationHandler();
+
+        if (!div.getTbGenkisoNenkinNo().isDisabled()) {
+            validationHandler.現基礎年金番号の未入力チェック(pairs, div);
+        }
+        if (!div.getDdlTsuki().isDisabled()) {
+            validationHandler.月の未入力チェック(pairs, div);
+        }
+        if (!div.getTbKingaku().isDisabled()) {
+            validationHandler.金額の未入力チェック(pairs, div);
+        }
+        if (!div.getTbCreateDate().isDisabled()) {
+            validationHandler.作成年月日の未入力チェック(pairs, div);
+        }
+        if (!div.getTbTaishoNen().isDisabled()) {
+            validationHandler.対象年の未入力チェック(pairs, div);
+        }
+        if (div.getTbNameKana().isDisabled()) {
+            validationHandler.氏名カナの未入力チェック(pairs, div);
+        }
+        if (div.getDdlSex().isDisabled()) {
+            validationHandler.性別の未入力チェック(pairs, div);
+        }
+        if (div.getTbBirthday().isDisabled()) {
+            validationHandler.生年月日の未入力チェック(pairs, div);
+        }
+        if (div.getTbNameKanji().isDisabled()) {
+            validationHandler.氏名漢字の未入力チェック(pairs, div);
+        }
+        if (div.getTbAddressKanji().isDisabled()) {
+            validationHandler.住所漢字の未入力チェック(pairs, div);
+        }
     }
 
     private Message get新規モードMessage(HikazeiNenkinKenJohoDiv div, int 重複チェック) {
@@ -310,15 +344,18 @@ public class HikazeiNenkinKenJoho {
      * @return ResponseData<HikazeiNenkinKenJohoDiv>
      */
     public ResponseData<HikazeiNenkinKenJohoDiv> onClick_btnCreate(HikazeiNenkinKenJohoDiv div) {
+        div.getShoSaiPanel().setDisabled(false);
         if (!ResponseHolder.isReRequest()) {
             if (削除解除モード.equals(div.getHiddenModel())) {
                 return ResponseData.of(div).addMessage(DbdQuestionMessages.編集破棄確認.getMessage()).respond();
             }
+            div.setHiddenModel(RString.EMPTY);
             getHandler(div).新規ボタンの処理();
         }
         if (new RString(DbdQuestionMessages.編集破棄確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             getHandler(div).新規ボタンの処理();
+            div.setHiddenModel(RString.EMPTY);
         }
         return ResponseData.of(div).respond();
     }

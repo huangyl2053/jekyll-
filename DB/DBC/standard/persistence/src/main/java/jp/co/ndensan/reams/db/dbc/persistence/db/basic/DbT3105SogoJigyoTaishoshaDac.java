@@ -8,6 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishosha;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishosha.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishosha.isDeleted;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishosha.rirekiNo;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -102,6 +103,27 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
         return accessor.select().
                 table(DbT3105SogoJigyoTaishosha.class).
                 where(eq(hihokenshaNo, 被保険者番号)).
+                toList(DbT3105SogoJigyoTaishoshaEntity.class);
+    }
+
+    /**
+     * 被保険者番号より事業対象者を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return DbT3105SogoJigyoTaishoshaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3105SogoJigyoTaishoshaEntity> get総合事業対象者(
+            HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3105SogoJigyoTaishosha.class).
+                where(and(eq(hihokenshaNo, 被保険者番号),
+                                eq(isDeleted, false))).
                 toList(DbT3105SogoJigyoTaishoshaEntity.class);
     }
 }

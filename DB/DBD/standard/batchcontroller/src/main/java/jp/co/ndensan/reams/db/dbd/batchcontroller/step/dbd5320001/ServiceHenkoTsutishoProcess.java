@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiTsutishoIkkatsuHakkoJoho;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd550002.ServiceHenkoTshuchishoReport;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd550002.ServiceHenkoTsuchishoJoho;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5320001.ServiceHenkoTsutishoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.ServiceHenkoTsuchishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiIkatusHakkoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd550002.ServiceHenkoTshuchishoReportSource;
 import jp.co.ndensan.reams.db.dbd.service.core.yokaigoninteijoho.YokaigoNinteiTsutishoManager;
@@ -97,17 +97,15 @@ public class ServiceHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
 
     @Override
     protected void afterExecute() {
-        if (null == 最新Entity) {
-            return;
+        if (null != 最新Entity) {
+            ServiceHenkoTshuchishoReport report = createServiceHenkoTshuchishoReport();
+            report.writeBy(reportSourceWriter);
+            DbT4001JukyushaDaichoEntity jukyushaDaichoEntity = createJukyushaDaichoEntity();
+            dbT4001tableWriter.insert(jukyushaDaichoEntity);
+
+            DbT7022ShoriDateKanriEntity shoriDateKanriEntity = createShoriDateKanriEntity();
+            dbT7022tableWriter.insert(shoriDateKanriEntity);
         }
-
-        ServiceHenkoTshuchishoReport report = createServiceHenkoTshuchishoReport();
-        report.writeBy(reportSourceWriter);
-        DbT4001JukyushaDaichoEntity jukyushaDaichoEntity = createJukyushaDaichoEntity();
-        dbT4001tableWriter.insert(jukyushaDaichoEntity);
-
-        DbT7022ShoriDateKanriEntity shoriDateKanriEntity = createShoriDateKanriEntity();
-        dbT7022tableWriter.insert(shoriDateKanriEntity);
 
         バッチ出力条件リストの出力();
     }
@@ -141,12 +139,12 @@ public class ServiceHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
     private DbT4001JukyushaDaichoEntity createJukyushaDaichoEntity() {
         DbT4001JukyushaDaichoEntity result = 最新Entity.get受給者台帳Entity();
         result.setRirekiNo(new RString(String.format("%04d", Integer.parseInt(result.getRirekiNo().toString()) + 1)));
-        result.setNinteiKekkaTsuchishoHakkoYMD(parameter.get発行日());
+        result.setServiceHenkoTsuchishoHakkoYMD(parameter.get発行日());
         return result;
     }
 
     private ServiceHenkoTshuchishoReport createServiceHenkoTshuchishoReport() {
-        ServiceHenkoTsuchishoEntity reportEntity = createServiceHenkoTsuchishoEntity();
+        ServiceHenkoTsuchishoJoho reportEntity = createServiceHenkoTsuchishoEntity();
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, REPORT_ID.getReportId(),
                 parameter.get発行日(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                 KenmeiFuyoKubunType.付与なし, reportSourceWriter);
@@ -155,12 +153,12 @@ public class ServiceHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
         return report;
     }
 
-    private ServiceHenkoTsuchishoEntity createServiceHenkoTsuchishoEntity() {
+    private ServiceHenkoTsuchishoJoho createServiceHenkoTsuchishoEntity() {
         ChohyoSeigyoKyotsu 帳票共通情報 = TsutishoHakkoCommonProcess.get帳票共通情報(REPORT_ID.getReportId());
         FlexibleDate 発行日 = parameter.get発行日();
         SofubutsuAtesakiSource 送付物宛先情報 = TsutishoHakkoCommonProcess.get送付物宛先情報(帳票共通情報);
 
-        ServiceHenkoTsuchishoEntity printEntity = new ServiceHenkoTsuchishoEntity();
+        ServiceHenkoTsuchishoJoho printEntity = new ServiceHenkoTsuchishoJoho();
 
         printEntity.setBunshoNo(TsutishoHakkoCommonProcess.get文書番号(parameter.get文書番号(), REPORT_ID.getReportId(), 発行日));
         printEntity.setTitle(TsutishoHakkoCommonProcess.getタイトル(ConfigNameDBA.サービス変更通知書));
@@ -250,23 +248,25 @@ public class ServiceHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
         RString 導入団体コード = association.getLasdecCode_().value();
         RString 市町村名 = association.get市町村名();
         RString 出力ページ数 = new RString(String.valueOf(batchReportWrite.getPageCount()));
-        RString CSV出力有無 = new RString("無し");
-        RString CSVファイル名 = new RString("無し");
+        RString csv出力有無 = new RString("無し");
+        RString csvファイル名 = new RString("無し");
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         RString 日時 = TsutishoHakkoCommonProcess.get日付日時(parameter.get開始日(), parameter.get開始日時());
         if (!日時.isEmpty()) {
             builder.append(new RString("今回の開始日時:"));
-            builder.append(parameter.get開始日時());
+            builder.append(日時);
             出力条件.add(builder.toRString());
         }
+        builder = new RStringBuilder();
         日時 = TsutishoHakkoCommonProcess.get日付日時(parameter.get終了日(), parameter.get終了日時());
         if (!日時.isEmpty()) {
             builder.append(new RString("今回の終了日時:"));
-            builder.append(parameter.get終了日時());
+            builder.append(日時);
             出力条件.add(builder.toRString());
         }
+        builder = new RStringBuilder();
         if (null != parameter.get文書番号() && !parameter.get文書番号().isEmpty()) {
             builder.append(new RString("文書番号:"));
             builder.append(parameter.get文書番号());
@@ -279,8 +279,8 @@ public class ServiceHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
                 ジョブ番号,
                 REPORT_ID.getReportName(),
                 出力ページ数,
-                CSV出力有無,
-                CSVファイル名,
+                csv出力有無,
+                csvファイル名,
                 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();

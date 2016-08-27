@@ -499,7 +499,12 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      */
     @Override
     public RString get主治医医療機関コード() {
-        return entity.getShujiiIryokikanCode().value();
+        ShujiiIryokikanCode code = entity.getShujiiIryokikanCode();
+        if (code != null) {
+            return code.value();
+        } else {
+            return RString.EMPTY;
+        }
     }
 
     /**
@@ -509,7 +514,13 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      */
     @Override
     public RString get主治医コード() {
-        return entity.getShujiiCode().value();
+
+        ShujiiCode code = entity.getShujiiCode();
+        if (code != null) {
+            return code.value();
+        } else {
+            return RString.EMPTY;
+        }
     }
 
     /**

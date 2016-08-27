@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201;
 
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd8100201.FuicchiCsvMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,5 +20,25 @@ import lombok.Setter;
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class FuicchiCsvProcessParameter implements IBatchProcessParameter {
-  // TODO
+
+    private Long 出力順ID2;
+
+    /**
+     * コンストラクタです。
+     *
+     * @param 出力順ID2 出力順ID2
+     */
+    public FuicchiCsvProcessParameter(Long 出力順ID2) {
+        this.出力順ID2 = 出力順ID2;
+    }
+
+    /**
+     * ＳＱＬ使用された情報を作成します．
+     *
+     * @param 出力順 出力順
+     * @return ＳＱＬ使用されたパラメター
+     */
+    public FuicchiCsvMybatisParameter toFuicchiCsvMybatisParameter(RString 出力順) {
+        return new FuicchiCsvMybatisParameter(出力順);
+    }
 }

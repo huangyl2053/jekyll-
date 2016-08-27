@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchoheijunka6tsuchishoikatsuhako.Dbb100012MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb100012.KarisanteiHenjunkaHenkoTsuchishoB5YokoReport;
+import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranProperty;
-import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReport;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiTsuchiShoKyotsuKomokuHenshu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.ShutsuRyokuTaishoShutokuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
@@ -25,8 +27,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
-import jp.co.ndensan.reams.db.dbz.service.report.parts.kaigotoiawasesaki.KaigoToiawasesakiSourceBuilderCreator;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.db.dbz.service.report.parts.kaigotoiawasesaki.KaigoToiawasesakiSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
@@ -40,12 +42,20 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchWriter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
+import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 「帳票の発行」処理です。
@@ -54,17 +64,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class TsuchishoHakoB5TypeProcess extends BatchProcessBase<KarisanteiGakuHenkoEntity> {
 
+    private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
+            + "tokuchoheijunka6tsuchishoikatsuhako.ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper.select出力対象情報");
+    private TsuchishoHakoProcessParameter parameter;
+    private static final ReportId 帳票分類ID_DBB100012 = new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
     @BatchWriter
     private BatchReportWriter<KarisanteiHenjunkaHenkoTsuchishoB5YokoReportSource> batchReportWriterB5;
     private ReportSourceWriter<KarisanteiHenjunkaHenkoTsuchishoB5YokoReportSource> reportSourceWriterB5;
     @BatchWriter
     private BatchReportWriter<TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource> batchReportWriterIchiran;
     private ReportSourceWriter<TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource> reportSourceWriterIchiran;
-
-    private TsuchishoHakoProcessParameter parameter;
-    private static final ReportId 帳票分類ID_DBB100012 = new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
-    private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
-            + "tokuchoheijunka6tsuchishoikatsuhako.ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper.select出力対象情報");
 
     private EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書;
     private TsuchishoNo 通知書番号;
@@ -76,18 +85,19 @@ public class TsuchishoHakoB5TypeProcess extends BatchProcessBase<KarisanteiGakuH
     private IOutputOrder outputOrder;
 
     int 連番 = 1;
-    Decimal 通知書ページ数;
-    Decimal 通知書一覧ページ数;
-    List<EditedKariSanteiTsuchiShoKyotsu> reportDataList;
-    List<KariSanteigakuHenkoTsuchishoHakkoIchiranData> csvDataList;
+    private KariSanteigakuHenkoTsuchishoHakkoIchiranData csvData;
+    private boolean csv有無;
+    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final RString EUCファイル名 = new RString("TokuChoHeijunkaTsuchishoHakkoIchiran.csv");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBB200004"));
+    private RString eucPathName = RString.EMPTY;
+
+    private CsvWriter<KariSanteigakuHenkoTsuchishoHakkoIchiranData> csvWriter;
+    private FileSpoolManager manager;
 
     @Override
     protected void initialize() {
-        reportDataList = new ArrayList<>();
-        csvDataList = new ArrayList<>();
-        通知書ページ数 = Decimal.ZERO;
-        通知書一覧ページ数 = Decimal.ZERO;
-
         service = TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko.createInstance();
     }
 
@@ -136,6 +146,15 @@ public class TsuchishoHakoB5TypeProcess extends BatchProcessBase<KarisanteiGakuH
 
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         outputOrder = finder.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID_DBB100012, Long.parseLong(parameter.get出力順ID().toString()));
+
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        eucPathName = Path.combinePath(manager.getEucOutputDirectry(), EUCファイル名);
+        csvWriter = new CsvWriter.InstanceBuilder(eucPathName).canAppend(false)
+                .alwaysWriteHeader(KariSanteigakuHenkoTsuchishoHakkoIchiranData.class)
+                .setDelimiter(CSV_WRITER_DELIMITER)
+                .setEnclosure(EUC_WRITER_ENCLOSURE)
+                .setEncode(Encode.UTF_8withBOM).setNewLine(NewLine.CRLF)
+                .hasHeader(true).build();
     }
 
     @Override
@@ -146,33 +165,37 @@ public class TsuchishoHakoB5TypeProcess extends BatchProcessBase<KarisanteiGakuH
         }
 
         編集後仮算定通知書 = null;
-        service.printTsuchisho(編集後仮算定通知書, entity, parameter, 帳票制御共通情報, association, reportDataList, csvDataList, 連番);
-    }
-
-    @Override
-    protected void afterProcess() {
+        KariSanteiTsuchiShoKyotsu 仮算定額変更通知書情報 = service.仮算定額変更通知書情報の作成(parameter, entity, 帳票制御共通情報, association);
+        KariSanteiTsuchiShoKyotsuKomokuHenshu henshuService = new KariSanteiTsuchiShoKyotsuKomokuHenshu();
+        編集後仮算定通知書 = henshuService.create仮算定通知書共通情報(仮算定額変更通知書情報);
+        if (編集後仮算定通知書 == null) {
+            return;
+        }
+        service.set普徴と特徴(編集後仮算定通知書, entity);
+        TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport ichiranReport = new TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport(
+                編集後仮算定通知書, outputOrder, parameter.get帳票作成日時(), 連番);
+        ichiranReport.writeBy(reportSourceWriterIchiran);
+        csvData = service.csvData作成(編集後仮算定通知書, parameter, 連番, 通知書番号, entity);
+        csvWriter.writeLine(csvData);
+        csv有無 = true;
 
         KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報 = new KariSanteiNonyuTsuchiShoJoho();
         仮算定納入通知書情報.set編集後仮算定通知書共通情報(編集後仮算定通知書);
-
         KarisanteiHenjunkaHenkoTsuchishoB5YokoReport report = new KarisanteiHenjunkaHenkoTsuchishoB5YokoReport(
                 仮算定納入通知書情報, 通知書番号.getColumnValue(), ninshoshaSource, kaigoToiawasesakiSource);
         report.writeBy(reportSourceWriterB5);
-        通知書ページ数 = 通知書ページ数.add(new Decimal(batchReportWriterB5.getPageCount()));
-
         連番++;
+
     }
 
     @Override
     protected void afterExecute() {
+        service.代行プリント送付票の出力とバッチ条件の出力(csv有無, parameter, 帳票制御共通情報, association,
+                outputOrder, batchReportWriterB5.getPageCount());
 
-        TokuChoHeijunkaKariSanteigakuHakkoIchiranReport report = new TokuChoHeijunkaKariSanteigakuHakkoIchiranReport(reportDataList,
-                outputOrder, parameter.get帳票作成日時());
-        report.writeBy(reportSourceWriterIchiran);
-        通知書一覧ページ数.add(new Decimal(batchReportWriterIchiran.getPageCount()));
-
-        service.csv出力と代行プリント送付票の出力とバッチ条件の出力(csvDataList, parameter, 帳票制御共通情報, association, outputOrder,
-                通知書ページ数, 通知書一覧ページ数);
+        IBatchWriter batchWriter = (IBatchWriter) csvWriter;
+        batchWriter.close();
+        manager.spool(eucPathName);
     }
 
 }

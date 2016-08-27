@@ -91,6 +91,8 @@ public class IchijiSashitome1Go {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
+        div.getBtnSashitomeOrKojoTorokuKakutei().setDisabled(false);
+        div.getIchijiSashitome1GoKakutei().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
@@ -119,6 +121,9 @@ public class IchijiSashitome1Go {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
+        div.getBtnSashitomeToroku().setDisabled(false);
+        div.getBtnKojoToroku().setDisabled(false);
+        div.getBtnSashitomeOrKojoJokyoShokai().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
@@ -175,11 +180,13 @@ public class IchijiSashitome1Go {
      * @return ResponseData<IchijiSashitome1GoDiv>
      */
     public ResponseData<IchijiSashitome1GoDiv> onClick_SashitomeToRokuKaKuTei(IchijiSashitome1GoDiv div) {
+        ResponseData<IchijiSashitome1GoDiv> response = new ResponseData();
         ValidationMessageControlPairs pairs = getHandler(div).onClick_SashitomeToRokuKaKuTei();
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        return ResponseData.of(div).respond();
+        response.data = div;
+        return ResponseData.of(div).dialogOKClose();
     }
 
     private IchijiSashitome1GoHandler getHandler(IchijiSashitome1GoDiv div) {

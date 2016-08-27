@@ -53,11 +53,13 @@ public class KyufuGengaku1Go {
      * @return ResponseData<KyufuGengaku1GoDiv>
      */
     public ResponseData<KyufuGengaku1GoDiv> onClick_BtnKakutei(KyufuGengaku1GoDiv div) {
+        ResponseData<KyufuGengaku1GoDiv> response = new ResponseData();
         IDialogResponse dialogResponse = ResponseData.of(div);
         ValidationMessageControlPairs pairs = getHandler(div).onClick_BtnKakutei();
         if (pairs.iterator().hasNext()) {
             return dialogResponse.addValidationMessages(pairs).respond();
         }
+        response.data = div;
         return dialogResponse.dialogOKClose();
     }
 

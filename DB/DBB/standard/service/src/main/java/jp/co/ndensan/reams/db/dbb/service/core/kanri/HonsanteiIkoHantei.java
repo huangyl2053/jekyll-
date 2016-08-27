@@ -70,7 +70,8 @@ public class HonsanteiIkoHantei {
                         賦課.get賦課年度(),
                         年度内連番);
 
-        if (shoriDateKanriEntity == null) {
+        if (shoriDateKanriEntity == null || shoriDateKanriEntity.getKijunTimestamp() == null
+                || shoriDateKanriEntity.getKijunTimestamp().isEmpty()) {
             return false;
         }
         YMDHMS 本算定の終了日時 = shoriDateKanriEntity.getKijunTimestamp();

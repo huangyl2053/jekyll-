@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohisaishinsaketteihokenshain;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.report.source.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteiHokenshaInSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohisaishinsaokenshain.SogojigyohiSaishinsaKetteiHokenshaInSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 総合事業費再審査決定通知書情報取込一覧表（保険者分）帳票Builder
+ * 総合事業費再審査決定通知書情報取込一覧表帳票Builder
  *
  * @reamsid_L DBC-4680-040 wangxue
  */
@@ -20,7 +20,7 @@ public class SogojigyohiSaishinsaKetteiHokenshaInBuilder implements ISogojigyohi
     /**
      * コンストラクタです
      *
-     * @param editor
+     * @param editor ISogojigyohiSaishinsaKetteiHokenshaInEditor
      */
     public SogojigyohiSaishinsaKetteiHokenshaInBuilder(ISogojigyohiSaishinsaKetteiHokenshaInEditor editor) {
         this.editor = editor;

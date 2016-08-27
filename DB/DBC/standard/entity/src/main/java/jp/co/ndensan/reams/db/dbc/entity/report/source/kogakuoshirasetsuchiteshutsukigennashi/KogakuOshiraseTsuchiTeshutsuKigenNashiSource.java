@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuoshirasetsuchitesh
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
@@ -28,6 +29,7 @@ public class KogakuOshiraseTsuchiTeshutsuKigenNashiSource implements IReportSour
     public RString hihokenshaName;
     @ReportItem(name = "man", length = 1, order = 7)
     public RString man;
+    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "hihokenshaNo", length = 10, order = 8)
     public RString hihokenshaNo;
     @ReportItem(name = "birthYMD", length = 11, order = 9)

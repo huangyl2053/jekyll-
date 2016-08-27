@@ -307,7 +307,7 @@
         UPDATE "DbWT0001Hihokensha"
         set
         "shichosonCode" = #{旧市町村コード},
-        "KannaiKangaiKubun" = #{管内管外区分},
+        "kannaiKangaiKubun" = #{管内管外区分},
         "yubinNo" = #{郵便番号},
         "choikiCode" = #{町域コード},
         "gyoseikuCode" = #{行政区コード},
@@ -569,7 +569,7 @@
         TEMP."henkanHihokenshaNo" as dbWT0001HihokenshaTemp_henkanHihokenshaNo,
         TEMP."hihokenshaNo" as dbWT0001HihokenshaTemp_hihokenshaNo,
         TEMP."shichosonCode" as dbWT0001HihokenshaTemp_shichosonCode,
-        TEMP."KannaiKangaiKubun" as dbWT0001HihokenshaTemp_kannaiKangaiKubun,
+        TEMP."kannaiKangaiKubun" as dbWT0001HihokenshaTemp_kannaiKangaiKubun,
         TEMP."yubinNo" as dbWT0001HihokenshaTemp_yubinNo,
         TEMP."choikiCode" as dbWT0001HihokenshaTemp_choikiCode,
         TEMP."gyoseikuCode" as dbWT0001HihokenshaTemp_gyoseikuCode,

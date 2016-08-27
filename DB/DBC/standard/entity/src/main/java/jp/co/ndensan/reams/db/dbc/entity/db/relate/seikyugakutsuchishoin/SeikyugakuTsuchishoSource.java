@@ -5,7 +5,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- * 帳票設計_DBC200066_介護給付費等請求額通知書Source
+ * 帳票設計_DBC200066_介護給付費等請求額通知書Sourceクラスです
  *
  * @reamsid_L DBC-2480-030 jiangwenkai
  */
@@ -90,6 +90,10 @@ public class SeikyugakuTsuchishoSource implements IReportSource {
     public RString tesuryoSeikyugaku;
     @ReportItem(name = "tesuryoRuikeigaku", length = 15, order = 39)
     public RString tesuryoRuikeigaku;
+    @ReportItem(name = "kanCode", length = 15, order = 40)
+    public RString kanCode;
+    @ReportItem(name = "kouCode", length = 15, order = 41)
+    public RString kouCode;
 
     /**
      * SeikyugakuTsuchishoSourceSourceのENUM
@@ -134,7 +138,9 @@ public class SeikyugakuTsuchishoSource implements IReportSource {
         ruikeiRiyoshaFutangaku,
         ruikeiKohiFutangaku,
         tesuryoSeikyugaku,
-        tesuryoRuikeigaku
+        tesuryoRuikeigaku,
+        kanCode,
+        kouCode
     }
 
 }

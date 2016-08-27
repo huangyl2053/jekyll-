@@ -311,6 +311,11 @@ public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShik
         return txtHookenshaCode.getValue();
     }
 
+    @Override
+    public RString getHokensha() {
+        return txtHokensha.getValue();
+    }
+
     private KaigoNinteiShikakuInfoHandler getHandler() {
         return new KaigoNinteiShikakuInfoHandler(this);
     }

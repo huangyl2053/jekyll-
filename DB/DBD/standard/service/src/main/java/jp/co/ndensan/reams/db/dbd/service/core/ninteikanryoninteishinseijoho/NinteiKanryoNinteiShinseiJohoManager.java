@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibe
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -143,16 +145,23 @@ public class NinteiKanryoNinteiShinseiJohoManager {
     /**
      * get被保険者名称カナ
      *
-     * @param 識別コード 識別コード
+     * @param shikibetsuCode ShikibetsuCode
      * @return RString KanaName
      */
-    public RString getKanaName(ShikibetsuCode 識別コード) {
+    public RString getKanaName(ShikibetsuCode shikibetsuCode) {
         ShikibetsuTaishoSearchKeyBuilder builder = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先));
-        IShikibetsuTaishoSearchKey searchKey = builder.set識別コード(識別コード).build();
+        IShikibetsuTaishoSearchKey searchKey = builder.set識別コード(shikibetsuCode).build();
         List<IShikibetsuTaisho> 識別対象 = ShikibetsuTaishoService.getShikibetsuTaishoFinder().get識別対象s(searchKey);
-        if (!識別対象.isEmpty()) {
-            return 識別対象.get(0).toEntity().getKanaName();
+        if (識別対象 != null && 識別対象.get(0).toEntity() != null) {
+            IShikibetsuTaisho shikibetsu = 識別対象.get(0);
+            UaFt200FindShikibetsuTaishoEntity psm = shikibetsu.toEntity();
+            AtenaKanaMeisho 名称カナ = psm.getKanaMeisho();
+            RString kanaName = RString.EMPTY;
+            if (null != 名称カナ) {
+                kanaName = 名称カナ.value();
+            }
+            return kanaName;
         } else {
             return null;
         }

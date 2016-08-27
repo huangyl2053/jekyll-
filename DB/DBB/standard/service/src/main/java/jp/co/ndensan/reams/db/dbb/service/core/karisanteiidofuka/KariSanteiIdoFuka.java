@@ -45,6 +45,7 @@ public class KariSanteiIdoFuka {
     private static final RString 特別徴収開始通知書_仮算定_帳票分類ＩＤ = new RString("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private static final RString 仮算定額変更通知書_帳票分類ＩＤ = new RString("DBB100010_KarisanteiHenkoTsuchishoDaihyo");
     private static final RString 保険料納入通知書_本算定_帳票分類ＩＤ = new RString("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
+    private static final RString 仮算定異動一括結果一覧表_帳票分類ＩＤ = new RString("DBB200013_KarisanteiIdoKekkaIchiran");
     private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
     private static final RString 項目名_追加候補者用通知書タイプ = new RString("追加候補者用通知書タイプ");
     private static final RString 項目名_追加候補者用連帳区分 = new RString("追加候補者用連帳区分");
@@ -232,6 +233,11 @@ public class KariSanteiIdoFuka {
             } else if (納入通知書entity != null) {
                 return new TyouhyouResult(納入通知書entity);
             }
+        } else if (仮算定異動一括結果一覧表_帳票分類ＩＤ.equals(帳票分類ID.value())) {
+            TyouhyouEntity 一覧表 = new TyouhyouEntity();
+            一覧表.set帳票分類ID(帳票分類ID);
+            一覧表.set出力順ID(出力順ID);
+            return new TyouhyouResult(一覧表);
         }
         return null;
     }

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 却下者を表す列挙型です。
  *
- * @reamsid_L DBD-3900-030 mawy
+ * @reamsid_L DBD-9999-023 mawy
  */
 public enum Kyakasha {
 

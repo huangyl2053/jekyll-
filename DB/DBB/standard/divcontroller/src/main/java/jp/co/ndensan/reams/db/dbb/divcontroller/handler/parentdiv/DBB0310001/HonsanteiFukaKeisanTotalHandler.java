@@ -451,7 +451,7 @@ public class HonsanteiFukaKeisanTotalHandler {
         paramter.set文書番号(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getCcdBunshoBangoKetteiTsuchi().get文書番号());
         paramter.set決定変更_発行日(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtKetteTsuchiHakkoYMD2().getValue());
         paramter.set納入_出力方法(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtShutsuryokuHoho().getValue());
-        paramter.set出力期(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getDdlNotsuShuturyokuki2().getSelectedValue());
+        paramter.set出力期(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getDdlNotsuShuturyokuki2().getSelectedKey());
         paramter.set納入_対象者(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getChkNotsuTaishosha2().getSelectedValues());
         paramter.set納入_発行日(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtNotsuHakkoYMD2().getValue());
         paramter.set納入_生活保護対象者をまとめて先頭に出力(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho()

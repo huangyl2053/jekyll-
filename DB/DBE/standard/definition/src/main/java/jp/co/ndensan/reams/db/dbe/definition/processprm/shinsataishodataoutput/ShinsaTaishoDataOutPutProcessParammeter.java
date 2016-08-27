@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbe.definition.processprm.shinsataishodataoutput;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsataishodataoutput.ShinsaTaishoDataOutPutMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -15,22 +17,24 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1840-011 yaoyahui
  */
-@lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
+@Getter
+@Setter
 public class ShinsaTaishoDataOutPutProcessParammeter implements IBatchProcessParameter {
 
+    private RString spoolWorkPath;
     private final RString kaisaiBangou;
 
     /**
      * コンストラクタです。
      *
      * @param kaisaiBangou 開催番号
-     * 
+     * @param spoolWorkPath spoolWorkPath
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
-    public ShinsaTaishoDataOutPutProcessParammeter(RString kaisaiBangou) {
+    public ShinsaTaishoDataOutPutProcessParammeter(RString kaisaiBangou, RString spoolWorkPath) {
         this.kaisaiBangou = kaisaiBangou;
-      
+        this.spoolWorkPath = spoolWorkPath;
     }
 
     /**

@@ -36,19 +36,24 @@
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>
         FROM rgdb."DbV2002Fuka" AS "DbT2002Fuka"
-        INNER JOIN
+        LEFT JOIN
             rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
         ON
             "DbT2003Kibetsu"."choteiNendo" = "DbT2002Fuka"."choteiNendo" and
             "DbT2003Kibetsu"."fukaNendo" = "DbT2002Fuka"."fukaNendo" and
             "DbT2003Kibetsu"."tsuchishoNo" = "DbT2002Fuka"."tsuchishoNo" and
             "DbT2003Kibetsu"."rirekiNo" = "DbT2002Fuka"."rirekiNo"
-            INNER JOIN
+            LEFT JOIN
             rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
         ON
             "UrT0705ChoteiKyotsu"."choteiId" = "DbT2003Kibetsu"."choteiId"
         WHERE "DbT2002Fuka"."choteiNendo"=#{調定年度}
         AND "DbT2002Fuka"."fukaNendo"=#{賦課年度}
+        ORDER BY
+            "DbT2002Fuka"."choteiNendo",
+            "DbT2002Fuka"."fukaNendo",
+            "DbT2002Fuka"."tsuchishoNo",
+            "DbT2002Fuka"."rirekiNo"
     </select>
     
     <!--資格の情報を取得します。--> 
@@ -66,17 +71,17 @@
                     MAX("idoYMD"||"edaNo") AS max
                  FROM
                     rgdb."DbT1001HihokenshaDaicho" 
+                 WHERE
+                    "hihokennshaKubunCode" = '1'
+                    AND "logicalDeletedFlag" = FALSE
+                    AND ("shikakuSoshitsuYMD" IS NULL OR "shikakuSoshitsuYMD" = ''
+                        OR #{賦課年度_修正後} <![CDATA[<]]> "shikakuSoshitsuYMD")
+                    AND "ichigoShikakuShutokuYMD" <![CDATA[<=]]> #{資格基準日}
                     GROUP BY "hihokenshaNo", "ichigoShikakuShutokuYMD", "shikakuSoshitsuYMD") AS B
         ON "DbT1001HihokenshaDaicho". "hihokenshaNo" = B. "hihokenshaNo"
-        AND "DbT1001HihokenshaDaicho". "ichigoShikakuShutokuYMD" = B. "ichigoShikakuShutokuYMD"
-        AND "DbT1001HihokenshaDaicho". "shikakuSoshitsuYMD" = B. "shikakuSoshitsuYMD"
+        AND COALESCE("DbT1001HihokenshaDaicho" . "ichigoShikakuShutokuYMD",'00000000') = COALESCE(B. "ichigoShikakuShutokuYMD",'00000000')
+        AND COALESCE("DbT1001HihokenshaDaicho" . "shikakuSoshitsuYMD",'00000000') = COALESCE(B. "shikakuSoshitsuYMD",'00000000')
         AND ("DbT1001HihokenshaDaicho". "idoYMD" || "DbT1001HihokenshaDaicho". "edaNo") = B.max
-        WHERE
-        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode" = '1'
-        AND "DbT1001HihokenshaDaicho"."logicalDeletedFlag" = FALSE
-        AND ("DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD" IS NULL OR "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD" = ''
-        OR #{賦課年度_修正後}<![CDATA[<]]>"DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD")
-        AND "DbT1001HihokenshaDaicho"."ichigoShikakuShutokuYMD" <![CDATA[<=]]> #{資格基準日}
     </select>
     
     <!--データに本算定抽出一時テーブルを登録します。-->
@@ -256,10 +261,10 @@
             koza.*
         FROM
             "HonSanJonTyuShutuTemp" AS "HonSanJonTyuShutuTemp"
-        INNER JOIN
+        LEFT JOIN
             "KuBunnGaTsurakuTemp" AS "KuBunnGaTsurakuTemp"
         ON  "HonSanJonTyuShutuTemp"."hihokenshaNo" = "KuBunnGaTsurakuTemp"."hihokenshaNo"
-        INNER JOIN 
+        LEFT JOIN 
             "TmpSetaiShotoku" AS "TmpSetaiShotoku"
         ON "HonSanJonTyuShutuTemp"."hihokenshaNo" = "TmpSetaiShotoku"."hihokenshaNo"
         INNER JOIN 
@@ -282,7 +287,7 @@
         LEFT JOIN 
             rgur."UrT0508SeikatsuHogoJukyusha" AS "UrT0508SeikatsuHogoJukyusha"
         ON "HonSanJonTyuShutuTemp"."shikibetsuCode" = "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"
-        INNER JOIN
+        LEFT JOIN
             rgur."UrT0526SeikatsuHogoFujoShurui" AS "UrT0526SeikatsuHogoFujoShurui"
         ON "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode"
         AND "UrT0508SeikatsuHogoJukyusha"."gyomuCode" = "UrT0526SeikatsuHogoFujoShurui"."gyomuCode"
@@ -295,7 +300,7 @@
         LEFT JOIN
             rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS "DbT7006RoreiFukushiNenkinJukyusha"
         ON "HonSanJonTyuShutuTemp"."shikibetsuCode" = "DbT7006RoreiFukushiNenkinJukyusha"."shikibetsuCode"
-        INNER JOIN
+        LEFT JOIN
             (SELECT B.*
             FROM 
                 (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.noDeleted_DbT1006KyokaisoGaitosha" />) AS B
@@ -328,6 +333,19 @@
         LEFT JOIN 
             (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
         ON "HonSanJonTyuShutuTemp"."shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
+        ORDER BY
+            "dbT1001HihokenshaDaicho_hihokenshaNo",
+            "dbT1001HihokenshaDaicho_idoYMD",
+            "dbT1001HihokenshaDaicho_edaNo",
+            "choteiNendo",
+            "fukaNendo",
+            "tsuchishoNo",
+            "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode",
+            "UrT0508SeikatsuHogoJukyusha"."gyomuCode",
+            "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD",
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo",
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo",
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" 
     </select>
     
     <resultMap id="resultMap_SeikatsuHogoJukyushaRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity" autoMapping="true">
@@ -365,7 +383,7 @@
         <id property="shikibetsuCode" column="UrT0526SeikatsuHogoFujoShurui_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <id property="gyomuCode" column="UrT0526SeikatsuHogoFujoShurui_gyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler"/>
         <id property="jukyuKaishiYMD" column="UrT0526SeikatsuHogoFujoShurui_jukyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <!--<id property="fujoShuruiCode" column="UrT0526SeikatsuHogoFujoShurui_fujoShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>-->
+        <id property="fujoShuruiCode" column="UrT0526SeikatsuHogoFujoShurui_fujoShuruiCode" typeHandler="jp.co.ndensan.reams.ur.urd.entity.typehandlers.FujoShuruiCodeValueTypeHandler"/>
         <result property="insertDantaiCd" column="UrT0526SeikatsuHogoFujoShurui_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="UrT0526SeikatsuHogoFujoShurui_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="UrT0526SeikatsuHogoFujoShurui_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -702,6 +720,157 @@
         )
     </insert>
   
+    <!--賦課情報一時テーブルを作成します。-->
+    <insert id="createDbT2002FukaJohoTemp">
+        CREATE TEMP TABLE "DbT2002FukaJohoTemp"
+        (
+        "choteiNendo" rshare."UDD012YSeireki",
+        "fukaNendo" rshare."UDD012YSeireki",
+        "tsuchishoNo" rgdb."DbUDD008TsuchishoNo",
+        "rirekiNo" smallint,
+        "hihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "shikibetsuCode" rshare."UDD001ShikibetsuCode",
+        "setaiCode" rshare."UDD051SetaiCode",
+        "setaiInsu" smallint,
+        "shikakuShutokuYMD" rshare."UDD015YMD",
+        "shikakuShutokuJiyu" character varying(2),
+        "shikakuSoshitsuYMD" rshare."UDD015YMD",
+        "shikakuSoshitsuJiyu" character varying(2),
+        "seihofujoShurui" character varying(2),
+        "seihoKaishiYMD" rshare."UDD015YMD",
+        "seihoHaishiYMD" rshare."UDD015YMD",
+        "ronenKaishiYMD" rshare."UDD015YMD",
+        "ronenHaishiYMD" rshare."UDD015YMD",
+        "fukaYMD" rshare."UDD015YMD",
+        "kazeiKubun" character varying(1),
+        "setaikazeiKubun" character varying(1),
+        "gokeiShotokuGaku" numeric(12,0),
+        "nenkinShunyuGaku" numeric(12,0),
+        "hokenryoDankai" character varying(3),
+        "hokenryoDankai1" character varying(3),
+        "nengakuHokenryo1" numeric(7,0),
+        "tsukiwariStartYM1" rshare."UDD014YM",
+        "tsukiwariEndYM1" rshare."UDD014YM",
+        "hokenryoDankai2" character varying(3),
+        "nengakuHokenryo2" numeric(7,0),
+        "tsukiwariStartYM2" rshare."UDD014YM",
+        "tsukiwariEndYM2" rshare."UDD014YM",
+        "choteiNichiji" rshare."UDD018YMDHMS",
+        "choteiJiyu1" character varying(2),
+        "choteiJiyu2" character varying(2),
+        "choteiJiyu3" character varying(2),
+        "choteiJiyu4" character varying(2),
+        "koseiM" character varying(2),
+        "gemmenMaeHokenryo" numeric(7,0),
+        "gemmenGaku" numeric(7,0),
+        "kakuteiHokenryo" numeric(7,0),
+        "hokenryoDankaiKarisanntei" character varying(3),
+        "choshuHohoRirekiNo" smallint,
+        "idoKijunNichiji" rshare."UDD018YMDHMS",
+        "kozaKubun" character varying(1),
+        "kyokaisoKubun" character varying(1),
+        "shokkenKubun" character varying(1),
+        "fukaShichosonCode" rshare."UDD023LasdecCode",
+        "tkSaishutsuKampuGaku" numeric(7,0),
+        "fuSaishutsuKampuGaku" numeric(7,0),
+        "tkKibetsuGaku01" numeric,
+        "tkKibetsuGaku02" numeric,
+        "tkKibetsuGaku03" numeric,
+        "tkKibetsuGaku04" numeric,
+        "tkKibetsuGaku05" numeric,
+        "tkKibetsuGaku06" numeric,
+        "fuKibetsuGaku01" numeric,
+        "fuKibetsuGaku02" numeric,
+        "fuKibetsuGaku03" numeric,
+        "fuKibetsuGaku04" numeric,
+        "fuKibetsuGaku05" numeric,
+        "fuKibetsuGaku06" numeric,
+        "fuKibetsuGaku07" numeric,
+        "fuKibetsuGaku08" numeric,
+        "fuKibetsuGaku09" numeric,
+        "fuKibetsuGaku10" numeric,
+        "fuKibetsuGaku11" numeric,
+        "fuKibetsuGaku12" numeric,
+        "fuKibetsuGaku13" numeric,
+        "fuKibetsuGaku14" numeric
+        )
+    </insert>
     
+    <!--賦課の情報一時テーブルを登録します。 -->
+    <insert id="insert賦課の情報一時テーブル" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity">
+        INSERT INTO 
+        "DbT2002FukaJohoTemp"
+        VALUES
+        (#{choteiNendo},
+        #{fukaNendo},
+        #{tsuchishoNo},
+        #{rirekiNo},
+        #{hihokenshaNo},
+        #{shikibetsuCode},
+        #{setaiCode},
+        #{setaiInsu},
+        #{shikakuShutokuYMD},
+        #{shikakuShutokuJiyu},
+        #{shikakuSoshitsuYMD},
+        #{shikakuSoshitsuJiyu},
+        #{seihofujoShurui},
+        #{seihoKaishiYMD},
+        #{seihoHaishiYMD},
+        #{ronenKaishiYMD},
+        #{ronenHaishiYMD},
+        #{fukaYMD},
+        #{kazeiKubun},
+        #{setaikazeiKubun},
+        #{gokeiShotokuGaku},
+        #{nenkinShunyuGaku},
+        #{hokenryoDankai},
+        #{hokenryoDankai1},
+        #{nengakuHokenryo1},
+        #{tsukiwariStartYM1},
+        #{tsukiwariEndYM1},
+        #{hokenryoDankai2},
+        #{nengakuHokenryo2},
+        #{tsukiwariStartYM2},
+        #{tsukiwariEndYM2},
+        #{choteiNichiji},
+        #{choteiJiyu1},
+        #{choteiJiyu2},
+        #{choteiJiyu3},
+        #{choteiJiyu4},
+        #{koseiM},
+        #{gemmenMaeHokenryo},
+        #{gemmenGaku},
+        #{kakuteiHokenryo},
+        #{hokenryoDankaiKarisanntei},
+        #{choshuHohoRirekiNo},
+        #{idoKijunNichiji},
+        #{kozaKubun},
+        #{kyokaisoKubun},
+        #{shokkenKubun},
+        #{fukaShichosonCode},
+        #{tkSaishutsuKampuGaku},
+        #{fuSaishutsuKampuGaku},
+        #{tkKibetsuGaku01},
+        #{tkKibetsuGaku02},
+        #{tkKibetsuGaku03},
+        #{tkKibetsuGaku04},
+        #{tkKibetsuGaku05},
+        #{tkKibetsuGaku06},
+        #{fuKibetsuGaku01},
+        #{fuKibetsuGaku02},
+        #{fuKibetsuGaku03},
+        #{fuKibetsuGaku04},
+        #{fuKibetsuGaku05},
+        #{fuKibetsuGaku06},
+        #{fuKibetsuGaku07},
+        #{fuKibetsuGaku08},
+        #{fuKibetsuGaku09},
+        #{fuKibetsuGaku10},
+        #{fuKibetsuGaku11},
+        #{fuKibetsuGaku12},
+        #{fuKibetsuGaku13},
+        #{fuKibetsuGaku14}
+        )
+    </insert>
 </mapper>
     

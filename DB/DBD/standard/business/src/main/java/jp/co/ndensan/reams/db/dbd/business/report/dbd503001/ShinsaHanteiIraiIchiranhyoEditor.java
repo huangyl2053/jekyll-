@@ -56,7 +56,7 @@ public class ShinsaHanteiIraiIchiranhyoEditor implements IShinsaHanteiIraiIchira
         source.title = DbBusinessConfig.get(
                 ConfigNameDBD.要介護認定_要支援認定審査判定依頼一覧表, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
         ChohyoShuchiryokuyoShiseiJyohoEntity 帳票出力用申請情報Entity = 帳票出力用申請情報Entityリスト.get(index);
-        if (null != 帳票出力用申請情報Entityリスト && !帳票出力用申請情報Entityリスト.isEmpty()) {
+        if (!帳票出力用申請情報Entityリスト.isEmpty()) {
             source.cityName = 帳票出力用申請情報Entity.get保険者名称();
             source.hokenshaNo = 帳票出力用申請情報Entity.get証記載保険者番号();
             source.listIraiichiranhyo1_1 = new RString(String.valueOf(index + 1));
@@ -91,9 +91,8 @@ public class ShinsaHanteiIraiIchiranhyoEditor implements IShinsaHanteiIraiIchira
             source.listIraiichiranhyo2_6 = 帳票出力用申請情報Entity.get前回要介護状態区分コード();
             source.listIraiichiranhyo2_7 = 帳票出力用申請情報Entity.get前回認定有効期間開始().wareki().toDateString();
             source.listIraiichiranhyo2_8 = 帳票出力用申請情報Entity.get前回認定有効期間終了().wareki().toDateString();
+            source.listIraiichiranhyo2_9 = 帳票出力用申請情報Entity.get出力CSV状況申請();
         }
-        //TODO被保険者情報はなんですか
-//        source.listIraiichiranhyo2_9 =
         source.reportId = new RString("DBD503001");
     }
 

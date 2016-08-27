@@ -328,9 +328,16 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         INinteiShinseiTodokedeshaDiv 申請届出者Div = div.getCcdShinseiTodokedesha();
         NinteiShinseiTodokedeshaDataPassModel model = new NinteiShinseiTodokedeshaDataPassModel();
         model.set申請書管理番号(申請書管理番号);
+
+        // TODO. for test
+        model.set電話番号(new RString("02552141527"));
+        model.set郵便番号(new RString("012-1234"));
+        model.set住所(new RString("testtest"));
+        model.set申請届出代行区分コード(new RString("1"));
+        model.set事業者区分(new RString("10"));
+
         申請届出者Div.initialize(model);
         申請届出者Div.set状態(new RString(NinteiShinseiTodokedeshaDiv.ShoriType.ShokaiMode.toString()));
-        申請届出者Div.set状態(new RString(NinteiShinseiTodokedeshaDiv.DisplayType.管内.toString()));
 
         IShujiiIryokikanAndShujiiInputDiv 主治医Div = div.getShujiiIryokikanAndShujii().getCcdShujiiIryokikanAndShujiiInput();
         主治医Div.setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.ShokaiMode);

@@ -397,22 +397,24 @@ public class HihokenshashoChohyoFinder {
             business.set施設名1(dbt1005Dac.select事業者名称(new JigyoshaNo(parameter.get入退所年月日().get(桁数_0).get入所施設コード()))
                     .get(桁数_0).getJigyoshaMeisho().getColumnValue());
         }
+        RString 入所施設コード0 = parameter.get入退所年月日().get(桁数_0).get入所施設コード().padRight(RString.HALF_SPACE, 桁数_3);
         if (文字_11.equals(get入所施設種類(parameter, 桁数_0))
-                && (文字_1.equals(parameter.get入退所年月日().get(桁数_0).get入所施設コード().substring(桁数_2, 桁数_3))
-                || 文字_3.equals(parameter.get入退所年月日().get(桁数_0).get入所施設コード().substring(桁数_2, 桁数_3))
-                || 文字_4.equals(parameter.get入退所年月日().get(桁数_0).get入所施設コード().substring(桁数_2, 桁数_3))
-                || 文字_6.equals(parameter.get入退所年月日().get(桁数_0).get入所施設コード().substring(桁数_2, 桁数_3)))) {
+                && (文字_1.equals(入所施設コード0.substring(桁数_2))
+                || 文字_3.equals(入所施設コード0.substring(桁数_2))
+                || 文字_4.equals(入所施設コード0.substring(桁数_2))
+                || 文字_6.equals(入所施設コード0.substring(桁数_2)))) {
             business.set入所チェック1(星アイコン);
             business.set退所チェック1(星アイコン);
         } else {
             business.set入院チェック1(星アイコン);
             business.set退院チェック1(星アイコン);
         }
+        RString 入所施設コード1 = parameter.get入退所年月日().get(桁数_1).get入所施設コード().padRight(RString.HALF_SPACE, 桁数_3);
         if (文字_11.equals(get入所施設種類(parameter, 桁数_1))
-                && (文字_1.equals(parameter.get入退所年月日().get(桁数_1).get入所施設コード().substring(桁数_2, 桁数_3))
-                || 文字_3.equals(parameter.get入退所年月日().get(桁数_1).get入所施設コード().substring(桁数_2, 桁数_3))
-                || 文字_4.equals(parameter.get入退所年月日().get(桁数_1).get入所施設コード().substring(桁数_2, 桁数_3))
-                || 文字_6.equals(parameter.get入退所年月日().get(桁数_1).get入所施設コード().substring(桁数_2, 桁数_3)))) {
+                && (文字_1.equals(入所施設コード1.substring(桁数_2))
+                || 文字_3.equals(入所施設コード1.substring(桁数_2))
+                || 文字_4.equals(入所施設コード1.substring(桁数_2))
+                || 文字_6.equals(入所施設コード1.substring(桁数_2)))) {
             business.set入所チェック2(星アイコン);
             business.set退所チェック2(星アイコン);
         } else {
@@ -517,7 +519,7 @@ public class HihokenshashoChohyoFinder {
         business.set構成性別1(戸籍上の);
         INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
         Ninshosha ninshosha = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
-        business.set複合コントロール(new RString(ninshosha.toString()));
+        business.set複合コントロール(ninshosha.get公印().getImagePath());
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
         ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBA介護資格, 帳票分類ID,
                 FlexibleDate.getNowDate().getYear(), 要介護認定期限切れ_表示有無);
@@ -760,8 +762,9 @@ public class HihokenshashoChohyoFinder {
         business.set再交付2(RString.EMPTY);
         if (!RString.isNullOrEmpty(get給付制限内容(parameter, 桁数_0))) {
             if (parameter.get適用年月日().get(桁数_0).get給付制限内容().length() <= 文字数_8) {
-                business.set給付制限1(parameter.get適用年月日().get(桁数_0).get給付制限内容().substring(桁数_0, 桁数_4));
-                business.set給付制限2(parameter.get適用年月日().get(桁数_0).get給付制限内容().substring(桁数_4));
+                RString 給付制限内容 = parameter.get適用年月日().get(桁数_0).get給付制限内容().padRight(RString.HALF_SPACE, 文字数_8);
+                business.set給付制限1(給付制限内容.substring(桁数_0, 桁数_4));
+                business.set給付制限2(給付制限内容.substring(桁数_4));
             } else {
                 business.set給付制限長1(parameter.get適用年月日().get(桁数_0).get給付制限内容().substring(桁数_0, 桁数_6));
                 business.set給付制限長2(parameter.get適用年月日().get(桁数_0).get給付制限内容().substring(桁数_6));
@@ -769,8 +772,9 @@ public class HihokenshashoChohyoFinder {
         }
         if (!RString.isNullOrEmpty(get給付制限内容(parameter, 桁数_1))) {
             if (parameter.get適用年月日().get(桁数_1).get給付制限内容().length() <= 文字数_8) {
-                business.set給付制限3(parameter.get適用年月日().get(桁数_1).get給付制限内容().substring(桁数_0, 桁数_4));
-                business.set給付制限4(parameter.get適用年月日().get(桁数_1).get給付制限内容().substring(桁数_4));
+                RString 給付制限内容 = parameter.get適用年月日().get(桁数_1).get給付制限内容().padRight(RString.HALF_SPACE, 文字数_8);
+                business.set給付制限3(給付制限内容.substring(桁数_0, 桁数_4));
+                business.set給付制限4(給付制限内容.substring(桁数_4));
             } else {
                 business.set給付制限長3(parameter.get適用年月日().get(桁数_1).get給付制限内容().substring(桁数_0, 桁数_6));
                 business.set給付制限長4(parameter.get適用年月日().get(桁数_1).get給付制限内容().substring(桁数_6));
@@ -778,8 +782,9 @@ public class HihokenshashoChohyoFinder {
         }
         if (!RString.isNullOrEmpty(get給付制限内容(parameter, 桁数_2))) {
             if (parameter.get適用年月日().get(桁数_2).get給付制限内容().length() <= 文字数_8) {
-                business.set給付制限5(parameter.get適用年月日().get(桁数_2).get給付制限内容().substring(桁数_0, 桁数_4));
-                business.set給付制限6(parameter.get適用年月日().get(桁数_2).get給付制限内容().substring(桁数_4));
+                RString 給付制限内容 = parameter.get適用年月日().get(桁数_2).get給付制限内容().padRight(RString.HALF_SPACE, 文字数_8);
+                business.set給付制限5(給付制限内容.substring(桁数_0, 桁数_4));
+                business.set給付制限6(給付制限内容.substring(桁数_4));
             } else {
                 business.set給付制限長5(parameter.get適用年月日().get(桁数_2).get給付制限内容().substring(桁数_0, 桁数_6));
                 business.set給付制限長6(parameter.get適用年月日().get(桁数_2).get給付制限内容().substring(桁数_6));

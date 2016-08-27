@@ -16,5 +16,11 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.kouhoushajoho.KouhoushaJohoEn
  */
 public interface IKouhoushaJohoMapper {
 
+    /**
+     * 候補者情報を取得する。
+     *
+     * @param parameter KouhoushaJohoParamete
+     * @return List<KouhoushaJohoEntity>
+     */
     List<KouhoushaJohoEntity> find候補者情報(KouhoushaJohoParameter parameter);
 }

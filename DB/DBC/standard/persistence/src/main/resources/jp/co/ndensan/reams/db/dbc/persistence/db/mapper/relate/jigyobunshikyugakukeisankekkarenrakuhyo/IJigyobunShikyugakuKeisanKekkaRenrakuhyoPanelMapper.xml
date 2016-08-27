@@ -59,7 +59,7 @@
         </if>
         ORDER BY
         K."taishoNendo" DESC,
-        K."shoKisaiHokenshaNo" DESC,
-        K."shikyuShinseishoSeiriNo" ASC
+        K."shikyuShinseishoSeiriNo" DESC,
+        K."shoKisaiHokenshaNo" ASC
     </select>
-    </mapper>
+</mapper>

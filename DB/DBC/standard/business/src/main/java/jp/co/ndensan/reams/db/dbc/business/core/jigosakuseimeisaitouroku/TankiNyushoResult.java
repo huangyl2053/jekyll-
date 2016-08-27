@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.TankiNyushoEntity;
+import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.YoboKeikakuJikoSakuseiTankiRiyoNissu;
+import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeika.KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 短期入所情報クラスです。
@@ -15,7 +18,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.TankiNyushoE
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TankiNyushoResult {
+public class TankiNyushoResult implements Serializable {
 
-    private TankiNyushoEntity entity;
+    private KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu 居宅短期入所情報;
+    private YoboKeikakuJikoSakuseiTankiRiyoNissu 予防短期入所情報;
+    private RString 居宅予防区分;
 }

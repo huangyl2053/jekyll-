@@ -10,12 +10,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ServiceRiyohyoBeppyoMeisai のクラスファイル 
- * 
- * @author 自動生成
+ * ServiceRiyohyoBeppyoMeisai のクラスファイル
+ *
+ * @reamsid_L DBC-1930-050 cuilin
  */
 public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

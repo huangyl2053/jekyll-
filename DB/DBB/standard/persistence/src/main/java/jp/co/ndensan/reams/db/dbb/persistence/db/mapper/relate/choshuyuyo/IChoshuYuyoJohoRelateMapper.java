@@ -46,4 +46,12 @@ public interface IChoshuYuyoJohoRelateMapper {
      * @return ChoshuYuyoJohoRelateEntity
      */
     ChoshuYuyoJohoRelateEntity select徴収猶予の情報_最新(ChoshuYuyoJohoRelateMapperParameter 徴収猶予の情報検索条件);
+
+    /**
+     * 徴収猶予の情報情報をキー検索で１件取得します。
+     *
+     * @param 徴収猶予の情報検索条件 徴収猶予の情報検索条件
+     * @return ChoshuYuyoJohoRelateEntity
+     */
+    ChoshuYuyoJohoRelateEntity select最新の徴収猶予の情報(ChoshuYuyoJohoRelateMapperParameter 徴収猶予の情報検索条件);
 }

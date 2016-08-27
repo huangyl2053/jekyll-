@@ -60,7 +60,7 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
                 @Override
                 public boolean apply(ServiceRiyohyoInfoDiv div) {
                     Decimal 割引適用後率 = div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().getValue();
-                    return Decimal.ONE.compareTo(割引適用後率) >= 0;
+                    return 0 <= Decimal.ONE.compareTo(割引適用後率);
                 }
             },
     /**
@@ -70,7 +70,7 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
                 @Override
                 public boolean apply(ServiceRiyohyoInfoDiv div) {
                     Decimal 回数 = div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getValue();
-                    return Decimal.ZERO.compareTo(回数) >= 0;
+                    return 0 <= Decimal.ZERO.compareTo(回数);
                 }
             },
     /**
@@ -91,6 +91,33 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
                 public boolean apply(ServiceRiyohyoInfoDiv div) {
                     Decimal 給付率 = div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue();
                     return Decimal.ONE.compareTo(給付率) < 0;
+                }
+            },
+    /**
+     * 単位数単価必須入力のチェックです。
+     */
+    単位数単価必須入力チェック {
+                @Override
+                public boolean apply(ServiceRiyohyoInfoDiv div) {
+                    return !RString.isNullOrEmpty(div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().getText());
+                }
+            },
+    /**
+     * 区分限度内単位必須入力のチェックです。
+     */
+    区分限度内単位必須入力チェック {
+                @Override
+                public boolean apply(ServiceRiyohyoInfoDiv div) {
+                    return !RString.isNullOrEmpty(div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendonaiTani().getText());
+                }
+            },
+    /**
+     * 給付率必須入力のチェックです。
+     */
+    給付率必須入力チェック {
+                @Override
+                public boolean apply(ServiceRiyohyoInfoDiv div) {
+                    return !RString.isNullOrEmpty(div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getText());
                 }
             };
 }

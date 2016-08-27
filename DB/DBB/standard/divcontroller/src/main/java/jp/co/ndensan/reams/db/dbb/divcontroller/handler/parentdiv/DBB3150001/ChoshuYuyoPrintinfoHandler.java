@@ -16,7 +16,9 @@ import jp.co.ndensan.reams.db.dbb.service.core.kaigofukachoshuyuyo.KaigoFukaChos
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 画面設計_DBBGM62001_1_更新結果確認 のhandlerです。
@@ -36,9 +38,9 @@ public class ChoshuYuyoPrintinfoHandler {
     private static final RString 徴収猶予取消通知書 = new RString("徴収猶予取消通知書");
 
     /**
+     * コンストラクタです。
      *
      * @param div JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv
-     *
      */
     public ChoshuYuyoPrintinfoHandler(ChoshuYuyoJuminKihonDiv div) {
         this.div = div;
@@ -54,24 +56,25 @@ public class ChoshuYuyoPrintinfoHandler {
     public void initialize(FlexibleYear 賦課年度, FlexibleYear 調定年度, TsuchishoNo 通知書番号) {
 
         div.getPritPublish2().getComdiv1().initialize(true, null, false, true, null, false);
+        div.getChoshuYuyoPrintinfo().getPritPublish2().getBunshoBango1().initialize(null);
         div.getPritPublish2().getComdiv1().setSendDateDisable(true);
         ChoshuYuyoJoho 徴収猶予情報 = KaigoFukaChoshuYuyo.createInstance().getChoshuYuyoJoho(調定年度, 賦課年度, 通知書番号);
-        RString 徴収猶予状態区分 = 徴収猶予情報.get徴収猶予状態区分();
-        RString 徴収猶予作成区分 = 徴収猶予情報.get徴収猶予作成区分();
-        if ((申請.equals(徴収猶予状態区分) && 申請.equals(徴収猶予作成区分))
-                || 申請.equals(徴収猶予状態区分) && 取消.equals(徴収猶予作成区分)) {
-            div.getChoshuYuyoPrintinfo().getPritPublish2().setVisible(false);
-        }
-        if ((承認.equals(徴収猶予状態区分) && 承認.equals(徴収猶予作成区分))
-                || (不承認.equals(徴収猶予状態区分) && 不承認.equals(徴収猶予作成区分))
-                || (承認.equals(徴収猶予状態区分) && 訂正.equals(徴収猶予作成区分))
-                || (不承認.equals(徴収猶予状態区分) && 訂正.equals(徴収猶予作成区分))) {
-            div.getChoshuYuyoPrintinfo().getPritPublish2().setVisible(true);
-            div.getChoshuYuyoPrintinfo().getPritPublish2().setTitle(徴収猶予決定通知書);
-        }
-        if (承認.equals(徴収猶予状態区分) && 取消.equals(徴収猶予作成区分)) {
-            div.getChoshuYuyoPrintinfo().getPritPublish2().setVisible(true);
-            div.getChoshuYuyoPrintinfo().getPritPublish2().setTitle(徴収猶予取消通知書);
+        if (徴収猶予情報 != null) {
+            RString 徴収猶予状態区分 = 徴収猶予情報.get徴収猶予状態区分();
+            RString 徴収猶予作成区分 = 徴収猶予情報.get徴収猶予作成区分();
+            if ((申請.equals(徴収猶予状態区分) && 申請.equals(徴収猶予作成区分))
+                    || (申請.equals(徴収猶予状態区分) && 取消.equals(徴収猶予作成区分))) {
+                div.getChoshuYuyoPrintinfo().getPritPublish2().setVisible(false);
+            } else if ((承認.equals(徴収猶予状態区分) && 承認.equals(徴収猶予作成区分))
+                    || (不承認.equals(徴収猶予状態区分) && 不承認.equals(徴収猶予作成区分))
+                    || (承認.equals(徴収猶予状態区分) && 訂正.equals(徴収猶予作成区分))
+                    || (不承認.equals(徴収猶予状態区分) && 訂正.equals(徴収猶予作成区分))) {
+                div.getChoshuYuyoPrintinfo().getPritPublish2().setVisible(true);
+                div.getChoshuYuyoPrintinfo().getPritPublish2().setTitle(徴収猶予決定通知書);
+            } else if (承認.equals(徴収猶予状態区分) && 取消.equals(徴収猶予作成区分)) {
+                div.getChoshuYuyoPrintinfo().getPritPublish2().setVisible(true);
+                div.getChoshuYuyoPrintinfo().getPritPublish2().setTitle(徴収猶予取消通知書);
+            }
         }
     }
 
@@ -81,24 +84,28 @@ public class ChoshuYuyoPrintinfoHandler {
      * @param 賦課年度 FlexibleYear
      * @param 調定年度 FlexibleYear
      * @param 通知書番号 TsuchishoNo
+     * @return SourceDataCollection
      */
-    public void onClick発行する(FlexibleYear 賦課年度, FlexibleYear 調定年度, TsuchishoNo 通知書番号) {
+    public SourceDataCollection onClick発行する(FlexibleYear 賦課年度, FlexibleYear 調定年度, TsuchishoNo 通知書番号) {
 
         FukaJoho 賦課情報 = KaigoFukaChoshuYuyo.createInstance().getFukaJoho(調定年度, 賦課年度, 通知書番号);
         KakushuTsuchishoParameter pama = new KakushuTsuchishoParameter();
+        List<RString> list = new ArrayList<>();
         if (徴収猶予決定通知書.equals(div.getChoshuYuyoPrintinfo().getPritPublish2().getTitle())) {
-            List<RString> list = new ArrayList<>();
             list.add(TsuchiSho.介護保険料徴収猶予決定通知書.get名称());
-            pama.set発行する帳票List(list);
         } else if (徴収猶予取消通知書.equals(div.getChoshuYuyoPrintinfo().getPritPublish2().getTitle())) {
-            List<RString> list = new ArrayList<>();
             list.add(TsuchiSho.介護保険料徴収猶予取消通知書.get名称());
-            pama.set発行する帳票List(list);
         }
-        pama.set賦課の情報_更正前(new FukaJoho(null));
+        pama.set発行する帳票List(list);
+        pama.set賦課の情報_更正前(null);
         pama.set賦課の情報_更正後(賦課情報);
-        pama.set徴収猶予通知書_発行日(new FlexibleDate(div.getChoshuYuyoPrintinfo().getPritPublish2().getComdiv1().getIssueDate().toDateString()));
-//        pama.set徴収猶予通知書_文書番号();
+        RDate 発行日 = div.getChoshuYuyoPrintinfo().getPritPublish2().getComdiv1().getIssueDate();
+        if (発行日 != null) {
+            pama.set徴収猶予通知書_発行日(new FlexibleDate(div.getChoshuYuyoPrintinfo().getPritPublish2().getComdiv1().getIssueDate().toString()));
+        } else {
+            pama.set徴収猶予通知書_発行日(FlexibleDate.EMPTY);
+        }
+        pama.set徴収猶予通知書_文書番号(div.getPritPublish2().getBunshoBango1().get文書番号());
         pama.set変更通知書_文書番号(RString.EMPTY);
         pama.set変更通知書_発行日(FlexibleDate.EMPTY);
         pama.set決定通知書_文書番号(RString.EMPTY);
@@ -111,7 +118,14 @@ public class ChoshuYuyoPrintinfoHandler {
         pama.set納入通知書_発行日(FlexibleDate.EMPTY);
         pama.set調定事由List(null);
         pama.set郵振納付書_出力期(RString.EMPTY);
+        return KaigoFukaChoshuYuyo.createInstance().publish(pama);
+    }
 
-        KaigoFukaChoshuYuyo.createInstance().publish(pama);
+    /**
+     * 初期化の状態に戻るのメソッドです。
+     */
+    public void clearBanmen() {
+        div.getPritPublish2().getComdiv1().initialize(true, null, false, true, null, false);
+        div.getChoshuYuyoPrintinfo().getPritPublish2().getBunshoBango1().initialize(null);
     }
 }

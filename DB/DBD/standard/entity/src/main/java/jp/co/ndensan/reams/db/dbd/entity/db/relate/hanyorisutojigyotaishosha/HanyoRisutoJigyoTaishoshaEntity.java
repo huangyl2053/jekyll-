@@ -27,7 +27,6 @@ public class HanyoRisutoJigyoTaishoshaEntity {
     private FlexibleDate 二次予防事業対象者_適用終了年月日;
     private FlexibleDate 二次予防事業対象者_チェックリスト実施日;
     private FlexibleDate 二次予防事業対象者_決定年月日;
-    private RString 二次予防事業対象者_識別コード;
     private UaFt200FindShikibetsuTaishoEntity psmEntity;
     private UaFt250FindAtesakiEntity atesakiEntity;
 }

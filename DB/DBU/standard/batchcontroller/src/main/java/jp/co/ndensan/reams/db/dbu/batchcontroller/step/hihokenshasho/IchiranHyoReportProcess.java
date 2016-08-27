@@ -33,11 +33,15 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -90,7 +94,16 @@ public class IchiranHyoReportProcess extends BatchKeyBreakBase<IkkatsuHakkoRelat
 
     @Override
     protected void usualProcess(IkkatsuHakkoRelateEntity entity) {
+        アクセスログ(entity);
         帳票用Entityリスト.add(entity);
+    }
+
+    private void アクセスログ(IkkatsuHakkoRelateEntity entity) {
+        if (entity.getShikibetsuCode() != null && !entity.getShikibetsuCode().isEmpty()) {
+            AccessLogger.log(AccessLogType.照会, PersonalData.of(entity.getShikibetsuCode()));
+        } else {
+            AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY));
+        }
     }
 
     @Override

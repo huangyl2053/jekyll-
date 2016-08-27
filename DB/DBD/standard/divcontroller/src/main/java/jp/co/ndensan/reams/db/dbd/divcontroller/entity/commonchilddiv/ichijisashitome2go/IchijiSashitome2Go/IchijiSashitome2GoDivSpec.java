@@ -73,7 +73,8 @@ public enum IchijiSashitome2GoDivSpec implements IPredicate<IchijiSashitome2GoDi
                  */
                 @Override
                 public boolean apply(IchijiSashitome2GoDiv div) {
-                    return div.getTxtNigoBenmeishoJuriBenmeishoUketsukebi().getValue() != null;
+                    return div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().getSelectedValue().equals(getValue_申請不要())
+                    || !div.getTxtNigoBenmeishoJuriBenmeishoUketsukebi().getValue().isEmpty();
                 }
             },
     弁明理由未選択 {
@@ -85,7 +86,8 @@ public enum IchijiSashitome2GoDivSpec implements IPredicate<IchijiSashitome2GoDi
                  */
                 @Override
                 public boolean apply(IchijiSashitome2GoDiv div) {
-                    return !div.getDdlNigoBenmeishoJuriBenmeiRiyu().getSelectedValue().isEmpty();
+                    return div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().getSelectedValue().equals(getValue_申請不要())
+                    || !div.getDdlNigoBenmeishoJuriBenmeiRiyu().getSelectedValue().isEmpty();
                 }
             },
     弁明内容決定日未入力 {
@@ -97,7 +99,8 @@ public enum IchijiSashitome2GoDivSpec implements IPredicate<IchijiSashitome2GoDi
                  */
                 @Override
                 public boolean apply(IchijiSashitome2GoDiv div) {
-                    return div.getTxtBemmeiNaiyoKetteiYMD().getValue() != null;
+                    return div.getDdlNigoBenmeishoJuriBenmeiShinsakekka().getSelectedValue().equals(getValue_申請不要())
+                    || !div.getTxtBemmeiNaiyoKetteiYMD().getValue().isEmpty();
                 }
             },
     適用期間開始未入力 {
@@ -109,7 +112,7 @@ public enum IchijiSashitome2GoDivSpec implements IPredicate<IchijiSashitome2GoDi
                  */
                 @Override
                 public boolean apply(IchijiSashitome2GoDiv div) {
-                    return div.getTxtTekiyoKaishi().getValue() != null;
+                    return !div.getTxtTekiyoKaishi().getValue().isEmpty();
                 }
             },
     差止決定日未入力 {
@@ -121,7 +124,7 @@ public enum IchijiSashitome2GoDivSpec implements IPredicate<IchijiSashitome2GoDi
                  */
                 @Override
                 public boolean apply(IchijiSashitome2GoDiv div) {
-                    return div.getTxtSashitomeKetteiYMD().getValue() != null;
+                    return !div.getTxtSashitomeKetteiYMD().getValue().isEmpty();
                 }
             },
     保険証提出期限未入力 {
@@ -133,7 +136,7 @@ public enum IchijiSashitome2GoDivSpec implements IPredicate<IchijiSashitome2GoDi
                  */
                 @Override
                 public boolean apply(IchijiSashitome2GoDiv div) {
-                    return div.getTxtHokenshaTeishutsuKigenYMD().getValue() != null;
+                    return !div.getTxtHokenshaTeishutsuKigenYMD().getValue().isEmpty();
                 }
             },
     適用期間チェック {
@@ -146,7 +149,7 @@ public enum IchijiSashitome2GoDivSpec implements IPredicate<IchijiSashitome2GoDi
                 @Override
                 public boolean apply(IchijiSashitome2GoDiv div) {
                     if (!div.getTxtTekiyoKaishi().getValue().isEmpty() && !div.getTxtTekiyoShuryo().getValue().isEmpty()) {
-                        return div.getTxtTekiyoKaishi().getValue().isBefore(div.getTxtTekiyoShuryo().getValue());
+                        return div.getTxtTekiyoKaishi().getValue().isBeforeOrEquals(div.getTxtTekiyoShuryo().getValue());
                     } else {
                         return !div.getTxtTekiyoKaishi().getValue().isEmpty() || !div.getTxtTekiyoShuryo().getValue().isEmpty();
                     }
@@ -173,7 +176,7 @@ public enum IchijiSashitome2GoDivSpec implements IPredicate<IchijiSashitome2GoDi
                  */
                 @Override
                 public boolean apply(IchijiSashitome2GoDiv div) {
-                    return !div.getDdlIraiShinsaKekka().getSelectedValue().equals(getValue_申請受理()) || div.getTxtTekiyoShuryo().getValue() != null;
+                    return !div.getDdlIraiShinsaKekka().getSelectedValue().equals(getValue_申請受理()) || !div.getTxtTekiyoShuryo().getValue().isEmpty();
                 }
             },
     終了状況未選択 {
@@ -197,7 +200,7 @@ public enum IchijiSashitome2GoDivSpec implements IPredicate<IchijiSashitome2GoDi
                  */
                 @Override
                 public boolean apply(IchijiSashitome2GoDiv div) {
-                    return !div.getDdlIraiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || div.getTxtIraiUketsukeYMD().getValue() != null;
+                    return div.getDdlIraiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getTxtIraiUketsukeYMD().getValue().isEmpty();
                 }
             },
     依頼日未入力 {
@@ -209,7 +212,7 @@ public enum IchijiSashitome2GoDivSpec implements IPredicate<IchijiSashitome2GoDi
                  */
                 @Override
                 public boolean apply(IchijiSashitome2GoDiv div) {
-                    return !div.getDdlIraiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || div.getTxtIraiYMD().getValue() != null;
+                    return div.getDdlIraiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getTxtIraiYMD().getValue().isEmpty();
                 }
             },
     依頼理由未選択 {
@@ -221,7 +224,7 @@ public enum IchijiSashitome2GoDivSpec implements IPredicate<IchijiSashitome2GoDi
                  */
                 @Override
                 public boolean apply(IchijiSashitome2GoDiv div) {
-                    return !div.getDdlIraiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getDdlIraiRiyu().getSelectedValue().isEmpty();
+                    return div.getDdlIraiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getDdlIraiRiyu().getSelectedValue().isEmpty();
                 }
             },
     依頼内容決定日未入力 {
@@ -233,7 +236,7 @@ public enum IchijiSashitome2GoDivSpec implements IPredicate<IchijiSashitome2GoDi
                  */
                 @Override
                 public boolean apply(IchijiSashitome2GoDiv div) {
-                    return !div.getDdlIraiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || div.getTxtIraiNaiyoKetteiYMD().getValue() != null;
+                    return div.getDdlIraiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getTxtIraiNaiyoKetteiYMD().getValue().isEmpty();
                 }
             };
 

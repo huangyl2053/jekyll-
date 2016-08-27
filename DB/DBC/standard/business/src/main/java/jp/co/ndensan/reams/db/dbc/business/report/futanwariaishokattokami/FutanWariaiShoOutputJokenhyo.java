@@ -84,7 +84,7 @@ public class FutanWariaiShoOutputJokenhyo {
         outputJokenhyo.add(builder.toRString());
         if (出力順 != null) {
             builder = new RStringBuilder();
-            builder.append(出力順.getFormated出力順名());
+            builder.append(出力順.getFormated出力順項目());
             outputJokenhyo.add(builder.toRString());
         }
         return outputJokenhyo;

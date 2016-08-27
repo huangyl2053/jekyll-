@@ -7,9 +7,12 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.commonchilddiv.shoka
 
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.shokanbaraika1go.ShokanBaraiKa1Go.ShokanBaraiKa1GoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.shokanbaraika1go.ShokanBaraiKa1Go.ShokanBaraiKa1GoHandler;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IDialogResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -29,7 +32,13 @@ public class ShokanBaraiKa1Go {
      * @return ResponseData<ShokanBaraiKa1GoDiv>
      */
     public ResponseData<ShokanBaraiKa1GoDiv> onLoad(ShokanBaraiKa1GoDiv div) {
-        getHandler(div).onLoad();
+        Message message = getHandler(div).onLoad();
+        if (new RString(UrInformationMessages.該当データなし.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())) {
+            return ResponseData.of(div).respond();
+        } else if (!ResponseHolder.isReRequest() && message != null) {
+            return ResponseData.of(div).addMessage(message).respond();
+        }
         return ResponseData.of(div).respond();
     }
 

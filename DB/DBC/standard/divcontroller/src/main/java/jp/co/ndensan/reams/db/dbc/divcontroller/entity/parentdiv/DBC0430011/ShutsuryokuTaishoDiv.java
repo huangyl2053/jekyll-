@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * ShutsuryokuTaisho のクラスファイル
  *
- * @reamsid DBC-0430-011 zhengshenlei
+ * @reamsid_L DBC-4770-010 zhengshenlei
  */
 public class ShutsuryokuTaishoDiv extends Panel {
 

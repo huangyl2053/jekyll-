@@ -160,6 +160,25 @@ public class DbT7130KaigoServiceShuruiDac {
     }
 
     /**
+     * 主キーで介護サービス種類を取得します。
+     *
+     * @param サービス種類コード サービス種類コード
+     * @return DbT7130KaigoServiceShuruiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT7130KaigoServiceShuruiEntity> selectByShuruiCode(
+            ServiceShuruiCode サービス種類コード) throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7130KaigoServiceShurui.class).
+                where(eq(DbT7130KaigoServiceShurui.serviceShuruiCd, サービス種類コード)).
+                toList(DbT7130KaigoServiceShuruiEntity.class);
+    }
+
+    /**
      * 介護サービス種類を全件返します。
      *
      * @param systemDate システム日付

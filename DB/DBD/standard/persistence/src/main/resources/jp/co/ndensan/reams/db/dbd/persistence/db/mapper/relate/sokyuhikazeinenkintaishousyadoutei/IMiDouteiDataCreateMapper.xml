@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 未同定データXMLです。 -->
+<!-- @reamsid_L DBD-4910-050 x_youyj -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.sokyuhikazeinenkintaishousyadoutei.IMiDouteiDataCreateMapper">
+
+    <select id="get未同定データ作成情報" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4037HikazeNenkinTaishoshaMapper.ResultMap_DbT4037HikazeNenkinTaishoshaEntity"
+            fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4037HikazeNenkinTaishoshaMapper.allColumns_DbT4037HikazeNenkinTaishosha" />
+        FROM
+        rgdb."DbT4037HikazeNenkinTaishosha"
+        WHERE
+        rgdb."DbT4037HikazeNenkinTaishosha"."hihokenshano" = '' OR rgdb."DbT4037HikazeNenkinTaishosha"."hihokenshano" IS NULL
+    </select>
+</mapper>

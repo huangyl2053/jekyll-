@@ -10,7 +10,7 @@
             resultMap="ResultMap_KouikiYokaigoNinteiTaisyosyaIchiranEntity" fetchSize="500" resultOrdered="true">
             
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.allColumns_DbT4003YokaigoNinteiInterface" />,
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.allColumns_DbT4003YokaigoNinteiInterface" />,
             rgdb."DbT4101NinteiShinseiJoho"."hihokenshaName" as DbT4101NinteiShinseiJoho_hihokenshaName
         FROM
             rgdb."DbT4003YokaigoNinteiInterface"
@@ -24,7 +24,7 @@
 <!--        <id column="dbT4003YokaigoNinteiInterface_shinseishoKanriNo" />-->
         <id property="要介護認定インターフェース情報Entity.shinseishoKanriNo" column="dbT4003YokaigoNinteiInterface_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="被保険者氏名" column="DbT4101NinteiShinseiJoho_hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
-        <association property="要介護認定インターフェース情報Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.ResultMap_DbT4003YokaigoNinteiInterfaceEntity"/>
+        <association property="要介護認定インターフェース情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.ResultMap_DbT4003YokaigoNinteiInterfaceEntity"/>
     </resultMap>
     
     <select id="get単独タイプ" 

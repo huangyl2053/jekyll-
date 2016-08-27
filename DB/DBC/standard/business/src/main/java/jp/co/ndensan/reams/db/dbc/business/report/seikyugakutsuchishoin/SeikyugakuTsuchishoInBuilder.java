@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.seikyugakutsuchishoin.Seikyug
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 介護給付費等請求額通知書一覧表帳票Builder
+ * 介護給付費等請求額通知書一覧表帳票Builderクラスです
  *
  * @reamsid_L DBC-2480-030 jiangwenkai
  */

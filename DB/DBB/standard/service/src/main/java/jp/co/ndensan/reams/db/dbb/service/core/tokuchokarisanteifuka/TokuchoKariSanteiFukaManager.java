@@ -9,8 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
+import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTani;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.TokuchoKariKeisangoFukaEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
@@ -18,13 +22,17 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntit
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
+import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.GyomuConfigJohoClass;
+import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwari;
+import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariInput;
+import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariOutput;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -39,6 +47,8 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -64,13 +74,14 @@ public class TokuchoKariSanteiFukaManager {
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final int 整数_0 = 0;
     private static final int 整数_1 = 1;
+    private static final int 整数_2 = 2;
     private static final int 整数_3 = 3;
+    private static final int 整数_4 = 4;
+    private static final RString RSTRING_1 = new RString("1");
+    private static final RString RSTRING_3 = new RString("3");
     private static final RString 継続 = new RString("継続");
     private static final RString 開始月_6月 = new RString("6月");
     private static final RString 特徴停止 = new RString("特徴停止");
-    private static final CodeShubetsu コード_0008 = new CodeShubetsu("0008");
-    private static final CodeShubetsu コード_0046 = new CodeShubetsu("0046");
-    private static final CodeShubetsu コード_0047 = new CodeShubetsu("0047");
 
     /**
      * コンストラクタです。
@@ -164,7 +175,8 @@ public class TokuchoKariSanteiFukaManager {
                 bodyList.add(get漢字氏名(entity.get宛名().getKanjiShimei()));
                 bodyList.add(get特別徴収業務者コード(entity.get特別徴収義務者コード()));
                 if (entity.get特別徴収義務者コード() != null) {
-                    bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード_0047, entity.get特別徴収義務者コード()));
+                    bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+                            entity.get特別徴収義務者コード()));
                 } else {
                     bodyList.add(RString.EMPTY);
                 }
@@ -174,14 +186,15 @@ public class TokuchoKariSanteiFukaManager {
                     特別徴収対象年金コード = entity.get仮徴収_年金コード().substring(整数_0, 整数_3);
                 }
                 if (特別徴収対象年金コード != null) {
-                    bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード_0046, new Code(特別徴収対象年金コード)));
+                    bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
+                            new Code(特別徴収対象年金コード)));
                 } else {
                     bodyList.add(RString.EMPTY);
                 }
                 if (entity.get特別徴収停止事由コード() == null || entity.get特別徴収停止事由コード().isEmpty()) {
-                    bodyList.add(DecimalFormatter.toコンマ区切りRString(entity.get特徴期期別金額01(), 整数_0));
-                    bodyList.add(DecimalFormatter.toコンマ区切りRString(entity.get特徴期期別金額02(), 整数_0));
-                    bodyList.add(DecimalFormatter.toコンマ区切りRString(entity.get特徴期期別金額03(), 整数_0));
+                    set特徴期期別金額01(entity, bodyList);
+                    set特徴期期別金額02(entity, bodyList);
+                    set特徴期期別金額03(entity, bodyList);
                     bodyList.add(RString.EMPTY);
                     bodyList.add(RString.EMPTY);
                 } else {
@@ -190,7 +203,8 @@ public class TokuchoKariSanteiFukaManager {
                     bodyList.add(RString.EMPTY);
                     bodyList.add(特徴停止);
                     if (entity.get特別徴収停止事由コード() != null) {
-                        bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.DBB介護賦課, コード_0008, new Code(entity.get特別徴収停止事由コード())));
+                        bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.特別徴収停止事由.getコード(),
+                                new Code(entity.get特別徴収停止事由コード())));
                     } else {
                         bodyList.add(RString.EMPTY);
                     }
@@ -206,6 +220,30 @@ public class TokuchoKariSanteiFukaManager {
             }
             csvListWriter.close();
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
+        }
+    }
+
+    private void set特徴期期別金額03(TokuchoKariKeisangoFukaEntity entity, List<RString> bodyList) {
+        if (entity.get特徴期期別金額03() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(entity.get特徴期期別金額03(), 整数_0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+    }
+
+    private void set特徴期期別金額02(TokuchoKariKeisangoFukaEntity entity, List<RString> bodyList) {
+        if (entity.get特徴期期別金額02() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(entity.get特徴期期別金額02(), 整数_0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+    }
+
+    private void set特徴期期別金額01(TokuchoKariKeisangoFukaEntity entity, List<RString> bodyList) {
+        if (entity.get特徴期期別金額01() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(entity.get特徴期期別金額01(), 整数_0));
+        } else {
+            bodyList.add(RString.EMPTY);
         }
     }
 
@@ -253,14 +291,30 @@ public class TokuchoKariSanteiFukaManager {
             Decimal 特徴期期別金額02,
             Decimal 特徴期期別金額03) {
         if (特別徴収停止事由コード == null || 特別徴収停止事由コード.isEmpty()) {
-            if (特徴期期別金額01.intValue() > 整数_0 && 特徴期期別金額02.intValue() > 整数_0 && 特徴期期別金額03.intValue() > 整数_0) {
+            if (set開始月_継続(特徴期期別金額01, 特徴期期別金額02, 特徴期期別金額03)) {
                 return 継続;
             }
-            if (特徴期期別金額01.equals(Decimal.ZERO) && 特徴期期別金額02.intValue() > 整数_0 && 特徴期期別金額03.intValue() > 整数_0) {
+            if (set開始月_6月(特徴期期別金額01, 特徴期期別金額02, 特徴期期別金額03)) {
                 return 開始月_6月;
             }
         }
         return RString.EMPTY;
+    }
+
+    private boolean set開始月_6月(Decimal 特徴期期別金額01, Decimal 特徴期期別金額02, Decimal 特徴期期別金額03) {
+        if (特徴期期別金額01 != null && 特徴期期別金額02 != null && 特徴期期別金額03 != null && 特徴期期別金額01.equals(Decimal.ZERO)
+                && 特徴期期別金額02.intValue() > 整数_0 && 特徴期期別金額03.intValue() > 整数_0) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean set開始月_継続(Decimal 特徴期期別金額01, Decimal 特徴期期別金額02, Decimal 特徴期期別金額03) {
+        if (特徴期期別金額01 != null && 特徴期期別金額02 != null && 特徴期期別金額03 != null && 特徴期期別金額01.intValue() > 整数_0
+                && 特徴期期別金額02.intValue() > 整数_0 && 特徴期期別金額03.intValue() > 整数_0) {
+            return true;
+        }
+        return false;
     }
 
     private RString get通知書番号(TsuchishoNo 通知書番号) {
@@ -299,5 +353,47 @@ public class TokuchoKariSanteiFukaManager {
             return null;
         }
         return new ChohyoSeigyoKyotsu(entity);
+    }
+
+    /**
+     * get特徴仮算定期割
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 保険料率 Decimal
+     * @return TokuchoKarisanteiKiwariOutput
+     */
+    public TokuchoKarisanteiKiwariOutput get特徴仮算定期割(FlexibleYear 調定年度, Decimal 保険料率) {
+        TokuchoKarisanteiKiwari 保険系業務共通 = new TokuchoKarisanteiKiwari();
+        TokuchoKarisanteiKiwariInput inputEntity = new TokuchoKarisanteiKiwariInput();
+        inputEntity.set前年度最終期別額(Decimal.ZERO);
+        inputEntity.set前年度賦課額(保険料率);
+        inputEntity.set現在特徴期(整数_2);
+        RString 特徴定期数 = DbBusinessConfig.get(ConfigNameDBB.特徴期情報_設定納期数,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        RString 特徴仮算定期数 = DbBusinessConfig.get(ConfigNameDBB.特徴期情報_仮算定期数,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        RString 特徴仮算定計算区分 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_6月開始,
+                new RDate(調定年度.minusYear(整数_1).toString()), SubGyomuCode.DBB介護賦課);
+        RString 端数区分 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_期別端数,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        GyomuConfigJohoClass 業務コンフィグ情報 = new GyomuConfigJohoClass();
+        業務コンフィグ情報.set特徴定期数(Integer.valueOf(特徴定期数.toString()));
+        業務コンフィグ情報.set特徴仮算定期数(Integer.valueOf(特徴仮算定期数.toString()));
+        if (RSTRING_1.equals(特徴仮算定計算区分)) {
+            業務コンフィグ情報.set特徴仮算定計算区分(整数_1);
+        } else if (RSTRING_3.equals(特徴仮算定計算区分)) {
+            業務コンフィグ情報.set特徴仮算定計算区分(整数_2);
+        }
+        if (HasuChoseiTani._1.getコード().equals(端数区分)) {
+            業務コンフィグ情報.set端数区分特徴仮算定期別額(整数_1);
+        } else if (HasuChoseiTani._10.getコード().equals(端数区分)) {
+            業務コンフィグ情報.set端数区分特徴仮算定期別額(整数_2);
+        } else if (HasuChoseiTani._100.getコード().equals(端数区分)) {
+            業務コンフィグ情報.set端数区分特徴仮算定期別額(整数_3);
+        } else if (HasuChoseiTani._1000.getコード().equals(端数区分)) {
+            業務コンフィグ情報.set端数区分特徴仮算定期別額(整数_4);
+        }
+        inputEntity.set業務コンフィグ情報(業務コンフィグ情報);
+        return 保険系業務共通.getTokuchoKarisanteiKibetsuGaku(inputEntity);
     }
 }

@@ -16,6 +16,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBC {
 
     /**
+     * 自己負担額補正一覧表
+     */
+    DBC200031(new ReportId("DBC200031_GassanJikofutangakuHoseiIchiran"), new RString("自己負担額補正一覧表")),
+    /**
+     * 高額合算自己負担額計算結果一覧表
+     */
+    DBC200029(new ReportId("DBC200029_GassanJikofutangakuKeisanKekkaIchiran"), new RString("高額合算自己負担額計算結果一覧表")),
+    /**
      * 高額サービス給付のお知らせ通知書（初回申請分）（提出期限あり）
      */
     DBC100011_申請分(new ReportId("DBC100011_KogakuOshiraseTsuchiTeshutsuKigenAriShoShokai"),
@@ -46,11 +54,15 @@ public enum ReportIdDBC {
     /**
      * 総合事業費過再審査定通知書情報
      */
-    DBC200080(new ReportId("DBC200080_KyufujissekiKoshinkekkaIchiran"), new RString("総合事業費過再審査定通知書情報")),
+    DBC200080(new ReportId("DBC200080_SogojigyohiSaishinsaKetteiTsuchishoTorikomiIchiran"), new RString("総合事業費過再審査定通知書情報")),
     /**
      * 総合事業費（経過措置）過誤決定通知書情報取込一覧表
      */
     DBC200075(new ReportId("DBC200075_SogojigyohiKagoKetteiTsuchishoTorikomiIchiran"), new RString("総合事業費（経過措置）過誤決定通知書情報取込一覧表")),
+    /**
+     * 総合事業費審査決定請求明細表
+     */
+    DBC200084(new ReportId("DBC200084_SogojigyohiShinsaKetteiSeikyumeisaihyo"), new RString("総合事業費審査決定請求明細表")),
     /**
      * 総合事業費過誤決定通知書情報取込一覧表
      */
@@ -68,6 +80,10 @@ public enum ReportIdDBC {
      */
     DBC200055(new ReportId("DBC200055_JukyushaKoshinkekkaIchiran"), new RString("受給者情報更新結果一覧表")),
     /**
+     * 受給者情報突合結果一覧表
+     */
+    DBC200058(new ReportId("DBC200058_JukyushaTotsugokekkaIchiran"), new RString("受給者情報突合結果一覧表")),
+    /**
      * 負担割合証（カット紙）
      */
     DBC100065(new ReportId("DBC100065_FutanWariaiSho"), new RString("負担割合証（カット紙）")),
@@ -79,6 +95,10 @@ public enum ReportIdDBC {
      * 負担割合証（連帳　横）
      */
     DBC100067(new ReportId("DBC100067_FutanWariaiShoRenchoYoko"), new RString("負担割合証（連帳　横）")),
+    /**
+     * 総合事業費再審査決定通知書情報取込一覧表（公費）帳票ＩＤです。
+     */
+    DBC200081(new ReportId("DBC200081_SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohi"), new RString("総合事業費再審査決定通知書情報取込一覧表（公費）")),
     /**
      * 高額介護（予防）サービス費支給申請書
      */
@@ -104,6 +124,10 @@ public enum ReportIdDBC {
      * 高額総合事業サービス費判定エラーリスト
      */
     DBC200076(new ReportId("DBC200076_KogakuSogoJigyoServicehiHanteiErrorIchiran"), new RString("高額総合事業サービス費判定エラーリスト ")),
+    /**
+     * 高額介護サービス費判定エラーリスト
+     */
+    DBC200017(new ReportId("DBC200017_KogakuShikyuShinseishoHakkoIchiran"), new RString("高額介護サービス費支給申請書発行一覧表 ")),
     /**
      * 高額介護サービス費判定エラーリスト
      */
@@ -231,7 +255,7 @@ public enum ReportIdDBC {
     DBC100071(
             new ReportId("DBC100071_KogakuJigyoShikyuShinseishoYucho"), new RString("介護保険高額総合事業サービス費支給申請書（ゆうちょ銀行）")),
     /**
-     * 事業分高額合算支給決定通知書（単）
+     * （高額合算支給（不支給）決定通知書）支払予定日なし帳票ＩＤです。
      */
     DBC200201(new ReportId("DBC200201_GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashi"), new RString("事業分高額合算支給決定通知書（単）")),
     /**
@@ -276,13 +300,61 @@ public enum ReportIdDBC {
      */
     DBC200067(new ReportId("DBC200067_SeikyugakuTsuchishoKohi"), new RString("介護給付費等請求額通知書（公費負担者分）")),
     /**
+     * 帳票設計_DBCMN81002_受給者訂正連絡票（紙媒体）の帳票ＩＤです。
+     */
+    DBC100014(new ReportId("DBC100014_JukyushaTeiseiRenrakuhyo"), new RString("受給者訂正連絡票（紙媒体）")),
+    /**
      * （受給者台帳（一覧表）帳票ＩＤです。
      */
     DBC200006(new ReportId("DBC200006_KokuhorenJukyushaDaichoIchiran"), new RString("受給者台帳（一覧表）")),
     /**
+     * 給付管理票取込結果一覧表帳票ＩＤです。
+     */
+    DBC200073(new ReportId("DBC200073_KyufuKanrihyoTorikomiKekkaIchiran"), new RString("給付管理票取込結果一覧表")),
+    /**
      * 総合事業費等請求額通知書（公費負担者分）帳票ＩＤです。
      */
-    DBC200082(new ReportId("DBC200082_SogojigyohiSeikyugakuTsuchishoKohi"), new RString("総合事業費等請求額通知書（公費負担者分）"));
+    DBC200082(new ReportId("DBC200082_SogojigyohiSeikyugakuTsuchishoKohi"), new RString("総合事業費等請求額通知書（公費負担者分）")),
+    /**
+     * 総合事業費過誤決定通知書情報取込一覧表（公費）帳票ＩＤです。
+     */
+    DBC200086(new ReportId("DBC200086_SogojigyohiKagoKetteitsuchishoTorikomiIchiranKohi"), new RString("総合事業費過誤決定通知書情報取込一覧表（公費）")),
+    /**
+     * 介護給付費資格照合表 帳票ＩＤです。
+     */
+    DBC100017(new ReportId("DBC100017_ShikakuShogohyo"), new RString("介護給付費資格照合表")),
+    /**
+     * 給付費通知減免補正一覧表 帳票ＩＤです。
+     */
+    DBC200043(new ReportId("DBC200043_KyufuhiTuchiGenmenhoseiIchiran"), new RString("給付費通知減免補正一覧表")),
+    /**
+     * 介護予防・日常生活支援総合事業費審査決定請求明細表帳票ＩＤです。
+     */
+    DBC200070(new ReportId("DBC200070_SogojigyohiShinsaKetteiSeikyumeisaihyo"), new RString("介護予防・日常生活支援総合事業費審査決定請求明細表")),
+    /**
+     * 介護給付費資格照合表 帳票ＩＤです。
+     */
+    DBC300003(new ReportId("DBC300003_NenreiKeikyuBetsuRiyoJyokyo"), new RString("年齢階級別利用状況作成")),
+    /**
+     * 介護給付費等審査決定請求明細表帳票ＩＤです。
+     */
+    DBC200069(new ReportId("DBC200069_KyufuhiShinsaKetteiSeikyuMeisaihyo"), new RString("介護給付費等審査決定請求明細表")),
+    /**
+     * （高額合算支給（不支給）決定通知書）支払予定日なし帳票ＩＤです。
+     */
+    DBC100053(new ReportId("DBC100053_GassanKetteiTsuchishoShiharaiYoteiBiYijiNashi"), new RString("高額合算支給（不支給）決定通知書（単）")),
+    /**
+     * 振込明細一覧表帳票ＩＤです。
+     */
+    DBC200003(new ReportId("DBC200003_FurikomiMeisaiIchiran"), new RString("振込明細一覧表")),
+    /**
+     * （高額合算支給（不支給）決定通知書）支払予定日あり帳票ＩＤです。
+     */
+    DBC100054(new ReportId("DBC100054_GassanKetteiTsuchishoShiharaiYoteiBiYijiAri"), new RString("高額合算支給（不支給）決定通知書（単）")),
+    /**
+     * 総合事業費（経過措置）資格照合表帳票ＩＤです。
+     */
+    DBC100018(new ReportId("DBC100018_SogojigyohiShikakuShogohyoKeikaSochi"), new RString("総合事業費（経過措置）資格照合表"));
 
     private final ReportId reportId;
 

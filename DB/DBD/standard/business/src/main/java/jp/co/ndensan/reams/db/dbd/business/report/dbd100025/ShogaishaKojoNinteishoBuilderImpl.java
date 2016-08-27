@@ -15,15 +15,15 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 public class ShogaishaKojoNinteishoBuilderImpl implements IShogaishaKojoNinteishoBuilder {
 
-    private final IShogaishaKojoNinteishoEditor shogaishaKojoNinteishoEditorImpl;
+    private final IShogaishaKojoNinteishoEditor editorImpl;
 
     /**
      * インスタンスを生成します。
      *
-     * @param shogaishaKojoNinteishoEditorImpl {@link IShogaishaKojoNinteishoEditor}
+     * @param editorImpl {@link IShogaishaKojoNinteishoEditor}
      */
-    ShogaishaKojoNinteishoBuilderImpl(IShogaishaKojoNinteishoEditor shogaishaKojoNinteishoEditorImpl) {
-        this.shogaishaKojoNinteishoEditorImpl = shogaishaKojoNinteishoEditorImpl;
+    ShogaishaKojoNinteishoBuilderImpl(IShogaishaKojoNinteishoEditor editorImpl) {
+        this.editorImpl = editorImpl;
     }
 
     /**
@@ -33,7 +33,7 @@ public class ShogaishaKojoNinteishoBuilderImpl implements IShogaishaKojoNinteish
      */
     @Override
     public NinteishoJohoReportSource build() {
-        return ReportEditorJoiner.from(new NinteishoJohoReportSource()).join(shogaishaKojoNinteishoEditorImpl).buildSource();
+        return ReportEditorJoiner.from(new NinteishoJohoReportSource()).join(editorImpl).buildSource();
     }
 
 }

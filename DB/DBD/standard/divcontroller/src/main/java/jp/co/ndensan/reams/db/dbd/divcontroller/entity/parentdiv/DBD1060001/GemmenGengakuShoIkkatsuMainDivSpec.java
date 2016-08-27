@@ -22,7 +22,7 @@ public enum GemmenGengakuShoIkkatsuMainDivSpec implements IPredicate<GemmenGenga
                  * 出力の選択チェックです。
                  *
                  * @param div 減免減額帳票一括画面Div
-                 * @return true:出力が選択しています、false:今回開始時間が選択されていません。
+                 * @return true:出力が選択しています、false:出力が選択されていません。
                  */
                 @Override
                 public boolean apply(GemmenGengakuShoIkkatsuMainDiv div) {
@@ -37,7 +37,7 @@ public enum GemmenGengakuShoIkkatsuMainDivSpec implements IPredicate<GemmenGenga
                         出力Falg2 = div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho().isIsPublish();
                     }
 
-                    return 出力Falg1 && 出力Falg2;
+                    return 出力Falg1 || 出力Falg2;
                 }
             },
     交付日の非空チェック {

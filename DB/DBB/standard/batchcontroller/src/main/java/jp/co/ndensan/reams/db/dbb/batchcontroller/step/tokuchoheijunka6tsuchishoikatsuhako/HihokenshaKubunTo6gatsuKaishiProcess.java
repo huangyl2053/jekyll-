@@ -47,7 +47,6 @@ public class HihokenshaKubunTo6gatsuKaishiProcess extends BatchProcessBase<DbT20
     @Override
     protected void process(DbT2002FukaTempTableEntity entity) {
         TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko service = TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko.createInstance();
-
         batchEntityCreatedWriter.update(service.set6月開始の被保険者区分_更新対象(entity));
     }
 

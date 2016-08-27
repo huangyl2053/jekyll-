@@ -136,9 +136,9 @@ public class HyojunFutangakuGemmenSinseiHandler {
     /**
      * 申請一覧情報データ処理です。
      *
-     * @param dgShinseiIchiran_Row　選ばれた情報
-     * @param List<HyojunFutangakuGemmen>　申請一覧情報
-     * @return　HyojunFutangakuGemmen
+     * @param row dgShinseiIchiran_Row
+     * @param dbDatalist List<HyojunFutangakuGemmen>
+     * @return HyojunFutangakuGemmen dbDatalistは暇な時にnullを戻る
      */
     public HyojunFutangakuGemmen get該当Joho(dgShinseiIchiran_Row row, List<HyojunFutangakuGemmen> dbDatalist) {
         if (dbDatalist != null) {

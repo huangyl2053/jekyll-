@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.service.report.gassanjigyobunketteitsuchisho;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunketteitsuchisho.GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunketteitsuchisho.GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiReport;
+import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunketteitsuchisho.KogakuGassanShikyuKetteiTsuchisho;
 import jp.co.ndensan.reams.db.dbc.entity.report.gassanjigyobunketteitsuchisho.GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiSource;
-import jp.co.ndensan.reams.db.dbc.entity.report.gassanjigyobunketteitsuchisho.KogakuGassanShikyuKetteiTsuchisho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 /**
  * （高額合算支給（不支給）決定通知書）支払予定日なし PrintSevice
  *
- * @reamsid_L DBC-4850-030 dongqianjing
+ * @reamsid_L DBC-4850-030 chenyadong
  */
 public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiPrintService {
 

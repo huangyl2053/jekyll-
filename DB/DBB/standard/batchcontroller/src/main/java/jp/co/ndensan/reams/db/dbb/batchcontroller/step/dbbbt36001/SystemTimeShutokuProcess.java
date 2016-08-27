@@ -7,8 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001;
 
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -27,9 +26,9 @@ public class SystemTimeShutokuProcess extends SimpleBatchProcessBase {
         SYSTEM_TIME = new RString("systemTime");
 
     }
-    private OutputParameter<RDateTime> systemTime;
+    private OutputParameter<YMDHMS> systemTime;
 
-    RDateTime バッチ起動時処理日時_年月日時分秒;
+    YMDHMS バッチ起動時処理日時_年月日時分秒;
 
     @Override
     protected void beforeExecute() {
@@ -39,7 +38,7 @@ public class SystemTimeShutokuProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void process() {
-        バッチ起動時処理日時_年月日時分秒 = RDate.getNowDateTime();
+        バッチ起動時処理日時_年月日時分秒 = YMDHMS.now();
 
     }
 

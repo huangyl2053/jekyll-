@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbd.business.core.shogaishakoujo;
 
 import static java.util.Objects.requireNonNull;
@@ -18,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBD-3870-010 jinge
  */
 public class ShogaishaKoujo {
+
     private final DbT4038ShogaishaKoujoEntity 障がい者控除;
 
     /**
@@ -71,7 +71,7 @@ public class ShogaishaKoujo {
      *
      * @return 障がい者手帳あり
      */
-    public boolean get障がい者手帳あり() {
+    public boolean is障がい者手帳あり() {
         return 障がい者控除.getShogaishaTechoUmu();
     }
 

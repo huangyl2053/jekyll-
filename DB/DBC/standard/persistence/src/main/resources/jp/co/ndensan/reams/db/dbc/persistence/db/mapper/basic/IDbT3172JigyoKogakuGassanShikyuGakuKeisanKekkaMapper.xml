@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaとDbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntityの単テーブル(追記型)用MapperXMLです。 -->
-<!-- 作者：  -->
+<!-- @reamsid_L DBC-9999-012 pengxingyi -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaMapper">
     <sql id="allColumns_DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka">
          "DbT3172JigyoKogakuGassanShikyuGakuKeisanKekka"."hihokenshaNo" as "dbT3172JigyoKogakuGassanShikyuGakuKeisanKekka_hihokenshaNo",

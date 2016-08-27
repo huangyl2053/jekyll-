@@ -27,7 +27,8 @@
         <result property="申請届出者氏名カナ" column="申請届出者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="届出者_本人との関係" column="届出者_本人との関係" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="管内管外区分" column="管内管外区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="t1001市町村コード" column="t1001市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="t4001市町村コード" column="t4001市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
         <result property="申請届出者電話番号" column="申請届出者電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
         <result property="申請届出者郵便番号" column="申請届出者郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
         <result property="申請届出者住所" column="申請届出者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -86,7 +87,7 @@
         T4101."ninteiShinseiShinseijiKubunCode" AS 認定申請区分コード_申請時,
         V4001."shishoCode" AS 支所コード,
         V4001."kyuSochishaFlag" AS 旧措置者フラグ,
-        T4101."enkiTsuchiHakkoKaisu" AS 被保険者区分コード,
+        T4101."hihokenshaKubunCode" AS 被保険者区分コード,
         V4001."shikakuShutokuMaeShinseiFlag" AS 資格取得前申請フラグ,
         T4101."nigoTokuteiShippeiCode" AS 二号特定疾病コード,
         T4101."ninteiShinseiRiyu" AS 認定申請理由,
@@ -98,7 +99,6 @@
         T4120."shinseiTodokedeshaKanaShimei" AS 申請届出者氏名カナ,
         V4001."homninKankei" AS 届出者_本人との関係,
         PSM."kannaiKangaiKubun" AS 管内管外区分,
-        T7051."shichosonCode" AS 市町村コード,
         T4120."shinseiTodokedeshaTelNo" AS 申請届出者電話番号,
         T4120."shinseiTodokedeshaYubinNo" AS 申請届出者郵便番号,
         T4120."shinseiTodokedeshaJusho" AS 申請届出者住所,
@@ -134,9 +134,20 @@
         T4101."enkiMikomiShuryoYMD" AS 延期見込期間終了年月日,
         T4101."enkiRiyu" AS 延期理由,
         T4101."enkiTsuchiHakkoYMD" AS 延期通知発行年月日,
-        T4101."enkiTsuchiHakkoKaisu" AS 延期通知発行回数
+        T4101."enkiTsuchiHakkoKaisu" AS 延期通知発行回数,
+        T1001."shichosonCode" AS t1001市町村コード,
+        T4001."shichosonCode" AS t4001市町村コード
         FROM
         rgdb."DbV4001JukyushaDaicho" AS V4001
+        INNER JOIN
+        rgdb."DbT1001HihokenshaDaicho" AS T1001
+        ON V4001."shichosonCode" = T1001."shichosonCode"
+        AND T1001."logicalDeletedFlag"=false
+        LEFT JOIN rgdb."DbT4001JukyushaDaicho" T4001
+        ON V4001."shichosonCode" = T4001."shichosonCode"
+        AND V4001."hihokenshaNo" = T4001."hihokenshaNo"
+        AND T4001."rirekiNo" = '0000'
+        AND T4001."logicalDeletedFlag" = false
         LEFT JOIN rgdb."DbT4101NinteiShinseiJoho" T4101
         ON V4001."shinseishoKanriNo" = T4101."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT4120ShinseitodokedeJoho" T4120
@@ -178,6 +189,8 @@
         OR
         (#{表示パターン }='1'
         AND V4001."shinseishoKanriNo" = #{申請書管理番号})
+        ORDER BY T1001."idoYMD" DESC,T1001."edaNo" DESC
+        Limit 1
     </select>
 
 

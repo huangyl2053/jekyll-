@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.toiawasesaki.Toiawasesaki;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.toiawasesaki.IToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.toiawasesaki._ToiawasesakiSourceBuilderFactory;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.toiawasesaki.ToiawasesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.bunshono.BunshoNoFinderFactory;
@@ -95,7 +96,8 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService {
                     = new ReportSourceWriter(assembler);
 
             NinshoshaSource sourceBuilder = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付,
-                    ReportIdDBC.DBC100032.getReportId(), 発行日, NinshoshaDenshikoinshubetsuCode.保険者印, reportSourceWriter);
+                    ReportIdDBC.DBC100032.getReportId(), 発行日, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                    KenmeiFuyoKubunType.付与なし, reportSourceWriter);
 
             IToiawasesakiFinder iToiawasesakiFinder = ToiawasesakiFinderFactory.createInstance();
             Toiawasesaki toiawase = iToiawasesakiFinder.

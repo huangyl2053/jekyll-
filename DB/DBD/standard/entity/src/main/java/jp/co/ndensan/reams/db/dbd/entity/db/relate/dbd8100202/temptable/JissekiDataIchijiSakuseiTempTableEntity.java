@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +27,15 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JissekiDataIchijiSakuseiTempTableEntity extends DbTableEntityBase<JissekiDataIchijiSakuseiTempTableEntity> implements IDbAccessable {
 
-    public static final RString TABLE_NAME = new RString("JissekiDataIchijiSakuseiTempTable");
+    /**
+     * 実績データ一時テーブルの名称．
+     */
+    @TableName
+    public static final RString TABLE_NAME;
+
+    static {
+        TABLE_NAME = new RString("JissekiDataIchijiSakuseiTempTable");
+    }
 
     @TempTableColumnOrder(1)
     private HihokenshaNo hihokenshaNo;

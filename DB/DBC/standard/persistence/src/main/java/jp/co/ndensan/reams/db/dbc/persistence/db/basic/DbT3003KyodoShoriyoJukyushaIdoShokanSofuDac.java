@@ -46,6 +46,14 @@ public class DbT3003KyodoShoriyoJukyushaIdoShokanSofuDac implements ISaveable<Db
 
     @InjectSession
     private SqlSession session;
+    private static final RString KEY_異動年月日 = new RString("異動年月日");
+    private static final RString KEY_被保険者番号 = new RString("被保険者番号");
+    private static final RString KEY_異動区分コード = new RString("異動区分コード");
+    private static final RString KEY_対象年月 = new RString("対象年月");
+    private static final RString KEY_履歴番号 = new RString("履歴番号");
+    private static final RString KEY_証記載保険者番号 = new RString("証記載保険者番号");
+    private static final RString KEY_受給者異動事由 = new RString("受給者異動事由");
+    private static final RString KEY_共同処理用受給者異動償還送付 = new RString("共同処理用受給者異動償還送付エンティティ");
 
     /**
      * 主キーで共同処理用受給者異動償還送付を取得します。
@@ -67,12 +75,12 @@ public class DbT3003KyodoShoriyoJukyushaIdoShokanSofuDac implements ISaveable<Db
             ShoKisaiHokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,
             int 履歴番号) throws NullPointerException {
-        requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
-        requireNonNull(異動区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("異動区分コード"));
-        requireNonNull(受給者異動事由, UrSystemErrorMessages.値がnull.getReplacedMessage("受給者異動事由"));
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_異動年月日.toString()));
+        requireNonNull(異動区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_異動区分コード.toString()));
+        requireNonNull(受給者異動事由, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_受給者異動事由.toString()));
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_証記載保険者番号.toString()));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_被保険者番号.toString()));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_履歴番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -111,7 +119,7 @@ public class DbT3003KyodoShoriyoJukyushaIdoShokanSofuDac implements ISaveable<Db
     @Transaction
     @Override
     public int save(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("共同処理用受給者異動償還送付エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_共同処理用受給者異動償還送付.toString()));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
@@ -133,9 +141,9 @@ public class DbT3003KyodoShoriyoJukyushaIdoShokanSofuDac implements ISaveable<Db
             FlexibleDate 異動年月日,
             FlexibleYearMonth 対象年月,
             boolean 論理削除) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
-        requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_被保険者番号.toString()));
+        requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_異動年月日.toString()));
+        requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_対象年月.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -163,8 +171,8 @@ public class DbT3003KyodoShoriyoJukyushaIdoShokanSofuDac implements ISaveable<Db
     public List<DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity> selectByKey(
             HihokenshaNo 被保険者番号,
             FlexibleDate 異動年月日) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_被保険者番号.toString()));
+        requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_異動年月日.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -181,15 +189,15 @@ public class DbT3003KyodoShoriyoJukyushaIdoShokanSofuDac implements ISaveable<Db
     /**
      * count共同処理用受給者異動償還送付テーブルを検索して償還送付情報の異動日を判断します
      *
-     * @param 被保険者番号
-     * @param 異動日
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 FlexibleDate
      * @return int
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public int select償還送付情報の異動日Count(HihokenshaNo 被保険者番号, FlexibleDate 異動日) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_被保険者番号.toString()));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_異動年月日.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -204,17 +212,18 @@ public class DbT3003KyodoShoriyoJukyushaIdoShokanSofuDac implements ISaveable<Db
     /**
      * count共同処理用受給者異動償還送付テーブルを検索して償還送付情報の異動区分を判断します
      *
-     * @param 被保険者番号
-     * @param 異動区分
-     * @param 異動日
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動区分 RString
+     * @param 異動日 FlexibleDate
      * @return int
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public int select償還送付情報の異動区分Count(HihokenshaNo 被保険者番号, RString 異動区分, FlexibleDate 異動日) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(異動区分, UrSystemErrorMessages.値がnull.getReplacedMessage("異動区分コード"));
-        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
+    public int select償還送付情報の異動区分Count(
+            HihokenshaNo 被保険者番号, RString 異動区分, FlexibleDate 異動日) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_被保険者番号.toString()));
+        requireNonNull(異動区分, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_異動区分コード.toString()));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_異動年月日.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -230,14 +239,16 @@ public class DbT3003KyodoShoriyoJukyushaIdoShokanSofuDac implements ISaveable<Db
     /**
      * 償還送付情報の履歴番号チェック
      *
-     * @param 被保険者番号
-     * @param 異動日
-     * @return int
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 FlexibleDate
+     * @return DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public int get償還送付情報の履歴番号Max(HihokenshaNo 被保険者番号, FlexibleDate 異動日) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
+    public DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity get償還送付情報の履歴番号Max(
+            HihokenshaNo 被保険者番号, FlexibleDate 異動日) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_被保険者番号.toString()));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_異動年月日.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -246,6 +257,6 @@ public class DbT3003KyodoShoriyoJukyushaIdoShokanSofuDac implements ISaveable<Db
                 where(and(eq(hiHokenshaNo, 被保険者番号),
                                 eq(idoYMD, 異動日))).
                 groupBy(hiHokenshaNo, idoYMD).
-                toObject(Integer.class).intValue();
+                toObject(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity.class);
     }
 }

@@ -59,7 +59,7 @@ public class HoshushiharaiJumbiShinsaCsvProcess extends BatchProcessBase<Hoshush
     private RString eucFilePath;
     private int count = 0;
     private int kinkaku = 0;
-    private static final int maxKeepVersions = 1;
+    private static final int MAXKEEPVERSIONS = 1;
     private static final int INT_ONE = 110;
     private static final int INT_NINE = 119;
     private OutputParameter<RString> outSharedFileName;
@@ -116,7 +116,7 @@ public class HoshushiharaiJumbiShinsaCsvProcess extends BatchProcessBase<Hoshush
     }
 
     private void setSharedFile(FilesystemName 共有ファイル名) {
-        SharedFile.defineSharedFile(共有ファイル名, maxKeepVersions, SharedFile.GROUP_ALL, null, false, null);
+        SharedFile.defineSharedFile(共有ファイル名, MAXKEEPVERSIONS, SharedFile.GROUP_ALL, null, false, null);
         RDateTime fileId = SharedFile.copyToSharedFile(new FilesystemPath(eucFilePath), 共有ファイル名);
         outSharedFileName.setValue(共有ファイル名.toRString());
         outSharedFileID.setValue(fileId);
@@ -158,7 +158,7 @@ public class HoshushiharaiJumbiShinsaCsvProcess extends BatchProcessBase<Hoshush
     private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                new RString("報酬支払いデータ（審査会委員報酬）.csv"),
+                new RString("報酬支払いデータ（審査会委員報酬）"),
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),

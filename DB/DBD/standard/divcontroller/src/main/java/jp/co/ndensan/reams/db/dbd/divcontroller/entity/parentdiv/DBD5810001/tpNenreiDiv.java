@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tpNenreiDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -122,7 +122,7 @@ public class tpNenreiDiv extends TablePanel {
  * @author 自動生成
  */
 class tcRdoNenreiAttpNenrei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("rdoNenrei")
     private RadioButton rdoNenrei;
 
@@ -152,7 +152,7 @@ class tcRdoNenreiAttpNenrei extends TableCell {
  * @author 自動生成
  */
 class tcNenreiAttpNenrei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("txtNenrei")
     private TextBoxNumRange txtNenrei;
     @JsonProperty("txtNenreikijyun")
@@ -222,7 +222,7 @@ class tcNenreiAttpNenrei extends TableCell {
  * @author 自動生成
  */
 class tcNenrei3AttpNenrei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
     // </editor-fold>
 }

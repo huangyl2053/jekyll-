@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin;
+    package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagoketteiin.SogojigyohiKagoKetteiInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohikagoketteiin.SogojigyohiKagoKetteiInSource;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 /**
  * 総合事業費（経過措置）過誤決定通知書情報取込一覧表帳票BodyEditor。
  *
- * @reamsid_L DBC-2550-030　jianglaishen
+ * @reamsid_L DBC-2550-030 jianglaisheng
  */
 public class SogojigyohiKagoKetteiInBodyEditor implements ISogojigyohiKagoKetteiInEditor {
 
@@ -35,7 +35,7 @@ public class SogojigyohiKagoKetteiInBodyEditor implements ISogojigyohiKagoKettei
      *
      * @param 帳票出力対象データ SogojigyohiKagoKetteiInEntity
      * @param 集計Flag boolean
-     * @param no
+     * @param no int
      */
     public SogojigyohiKagoKetteiInBodyEditor(SogojigyohiKagoKetteiInEntity 帳票出力対象データ,
             boolean 集計Flag, int no) {
@@ -46,10 +46,10 @@ public class SogojigyohiKagoKetteiInBodyEditor implements ISogojigyohiKagoKettei
 
     @Override
     public SogojigyohiKagoKetteiInSource edit(SogojigyohiKagoKetteiInSource source) {
-        edit明細(source);
         if (集計Flag) {
             edit集計(source);
         }
+        edit明細(source);
         return source;
     }
 

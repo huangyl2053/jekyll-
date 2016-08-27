@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * ファイル出力(非課税年金対象者情報　該当一覧CSV)用データEntity。
  *
- * reamsid_L DBD-4910-030 donghj
+ * @reamsid_L DBD-4910-030 donghj
  */
 @lombok.Getter
 @lombok.Setter

@@ -6,18 +6,17 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120850;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.core.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteiHokenshaInOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.business.core.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteiHokenshaInPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteiHokenshaInReport;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaDoIchiranhyoSakuseiProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteiHokenshaInEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.report.source.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteiHokenshaInSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohisaishinsaokenshain.SogojigyohiSaishinsaKetteiHokenshaInSource;
 import jp.co.ndensan.reams.db.dbc.service.core.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaService;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -30,15 +29,17 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -63,27 +64,30 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends
     private static final RString 出力ファイル名
             = new RString("DBC200080_SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiran.csv");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
-    private static final RString キー_出力順 = new RString("出力順");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3063.\"hdrShoHokenshaNo\" ASC ");
+    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3063.\"shoKisaiHokenshaNo\" ASC ");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final int INT_1 = 1;
+    private static final Code EUC_CODE = new Code("0003");
+    private static final RString EUC_CODE_NAME = new RString("被保険者番号");
 
     private FileSpoolManager manager;
     private RString eucFilePath;
     private SogojigyohiSaishinsaDoIchiranhyoSakuseiProcessParameter parameter;
     private RString 出力順;
     private SogojigyohiSaishinsaService service;
-    private EucCsvWriter<SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranCSVEntity> eucCsvWriter;
     private Set<ShikibetsuCode> 識別コードset = new HashSet<>();
     private final List<PersonalData> personalDataList = new ArrayList<>();
-    private BatchReportWriter<SogojigyohiSaishinsaKetteiHokenshaInSource> batchReportWriter;
-    private ReportSourceWriter<SogojigyohiSaishinsaKetteiHokenshaInSource> reportSourceWriter;
-
     private SogojigyohiSaishinsaKetteiHokenshaInEntity beforeEntity;
     private IOutputOrder 並び順;
     private List<RString> 改頁項目リスト;
     private int count;
+
+    @BatchWriter
+    private CsvWriter<SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranCSVEntity> eucCsvWriter;
+    @BatchWriter
+    private BatchReportWriter<SogojigyohiSaishinsaKetteiHokenshaInSource> batchReportWriter;
+    private ReportSourceWriter<SogojigyohiSaishinsaKetteiHokenshaInSource> reportSourceWriter;
 
     @Override
     protected void initialize() {
@@ -96,35 +100,32 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(実行不可MESSAGE.toString()).toString());
         }
-        if (並び順 != null) {
-            for (ISetSortItem item : 並び順.get設定項目リスト()) {
-                if (item.is改頁項目()) {
-                    改頁項目リスト.add(item.get項目名());
-                }
+        for (ISetSortItem item : 並び順.get設定項目リスト()) {
+            if (item.is改頁項目()) {
+                改頁項目リスト.add(item.get項目ID());
             }
         }
         出力順 = get出力順();
-        count = INT_1;
+        count = 0;
     }
 
     @Override
     protected IBatchReader createReader() {
 
-        Map<String, Object> mybatisParameter = new HashMap<>();
-        mybatisParameter.put(キー_出力順.toString(), 出力順);
-        return new BatchDbReader(MAPPERPATH);
+        parameter.set出力順(出力順);
+        return new BatchDbReader(MAPPERPATH, parameter.toパラメタ());
     }
 
     @Override
     protected void createWriter() {
 
         PageBreaker<SogojigyohiSaishinsaKetteiHokenshaInSource> breaker = new SogojigyohiSaishinsaKetteiHokenshaInPageBreak(改頁項目リスト);
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(parameter.get帳票ID().value()).addBreak(breaker).create();
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200080.getReportId().value()).addBreak(breaker).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.SJIS).
@@ -140,10 +141,16 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends
     @Override
     protected void usualProcess(SogojigyohiSaishinsaKetteiHokenshaInEntity entity) {
 
-        SogojigyohiSaishinsaKetteiHokenshaInReport report
-                = new SogojigyohiSaishinsaKetteiHokenshaInReport(service.setItem(entity, 並び順, parameter.get処理年月(),
-                                parameter.getシステム日付(), count));
-        report.writeBy(reportSourceWriter);
+        boolean 集計flg = false;
+        if (null != beforeEntity) {
+            if (!beforeEntity.get証記載保険者番号().equals(entity.get証記載保険者番号())) {
+                集計flg = true;
+            }
+            SogojigyohiSaishinsaKetteiHokenshaInReport report
+                    = new SogojigyohiSaishinsaKetteiHokenshaInReport(service.setItem(beforeEntity, 並び順,
+                                    parameter.get処理年月(), count, 集計flg));
+            report.writeBy(reportSourceWriter);
+        }
         if (null == beforeEntity) {
             eucCsvWriter.writeLine(service.toヘッダのデータ(entity, parameter));
         } else {
@@ -167,22 +174,20 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends
     protected void afterExecute() {
 
         if (null != beforeEntity) {
+            SogojigyohiSaishinsaKetteiHokenshaInReport report
+                    = new SogojigyohiSaishinsaKetteiHokenshaInReport(service.setItem(beforeEntity, 並び順,
+                                    parameter.get処理年月(), count, true));
+            report.writeBy(reportSourceWriter);
             eucCsvWriter.writeLine(service.to集計項目(beforeEntity));
         }
         eucCsvWriter.close();
-        if (null != personalDataList && !personalDataList.isEmpty()) {
-            AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-            manager.spool(eucFilePath, log);
-        } else {
-            manager.spool(eucFilePath);
-        }
-        batchReportWriter.close();
-
+        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+        manager.spool(eucFilePath, log);
     }
 
     private PersonalData getPersonalData(SogojigyohiSaishinsaKetteiHokenshaInEntity entity) {
 
-        ExpandedInformation expandedInformations = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
+        ExpandedInformation expandedInformations = new ExpandedInformation(EUC_CODE, EUC_CODE_NAME,
                 entity.get被保険者番号().getColumnValue());
         return PersonalData.of(entity.get識別コード(), expandedInformations);
     }
@@ -190,7 +195,7 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends
     private IOutputOrder get並び順() {
 
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outOrder = finder.get出力順(parameter.getサブ業務コード(), parameter.get帳票ID(),
+        IOutputOrder outOrder = finder.get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200080.getReportId(),
                 parameter.get出力順ID());
         return outOrder;
     }

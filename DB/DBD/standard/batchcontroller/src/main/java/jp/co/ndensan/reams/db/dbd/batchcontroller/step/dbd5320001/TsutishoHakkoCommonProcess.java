@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5320001;
 
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiIkatusHakkoEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBDCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -39,6 +40,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.bunshono.BunshoNoFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -50,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -57,56 +60,62 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  *
  * @reamsid_L DBD-1430-020 lit
  */
-public class TsutishoHakkoCommonProcess {
+public final class TsutishoHakkoCommonProcess {
+
+    /**
+     * コンストラクス。
+     */
+    private TsutishoHakkoCommonProcess() {
+    }
 
     /**
      * 通知文_パターン番号_1
      */
-    public static final int 通知文_パターン番号_1 = 1;
+    protected static final int 通知文_パターン番号_1 = 1;
     /**
      * 通知文_パターン番号_2
      */
-    public static final int 通知文_パターン番号_2 = 2;
+    protected static final int 通知文_パターン番号_2 = 2;
     /**
      * 通知文_パターン番号_3
      */
-    public static final int 通知文_パターン番号_3 = 3;
+    protected static final int 通知文_パターン番号_3 = 3;
     /**
      * 通知文_パターン番号_4
      */
-    public static final int 通知文_パターン番号_4 = 4;
+    protected static final int 通知文_パターン番号_4 = 4;
     /**
      * 通知文_項目番号_1
      */
-    public static final int 通知文_項目番号_1 = 1;
+    protected static final int 通知文_項目番号_1 = 1;
     /**
      * 通知文_項目番号_2
      */
-    public static final int 通知文_項目番号_2 = 2;
+    protected static final int 通知文_項目番号_2 = 2;
     /**
      * 通知文_項目番号_3
      */
-    public static final int 通知文_項目番号_3 = 3;
+    protected static final int 通知文_項目番号_3 = 3;
     /**
      * 通知文_項目番号_4
      */
-    public static final int 通知文_項目番号_4 = 4;
+    protected static final int 通知文_項目番号_4 = 4;
     /**
      * 通知文_項目番号_5
      */
-    public static final int 通知文_項目番号_5 = 5;
+    protected static final int 通知文_項目番号_5 = 5;
     /**
      * 通知文_項目番号_6
      */
-    public static final int 通知文_項目番号_6 = 6;
+    protected static final int 通知文_項目番号_6 = 6;
     /**
      * DEFAULT_処理支番
      */
-    public static final RString DEFAULT_処理支番 = new RString("0001");
+    protected static final RString DEFAULT_処理支番 = new RString("0001");
     /**
      * DEFAULT_年度内連番
      */
-    public static final RString DEFAULT_年度内連番 = new RString("0001");
+    protected static final RString DEFAULT_年度内連番 = new RString("0001");
 
     private static final RString 連絡符号 = new RString(",");
 
@@ -212,7 +221,7 @@ public class TsutishoHakkoCommonProcess {
      */
     public static RString getタイトル(ConfigNameDBA configName) {
 
-        RString タイトル = DbBusinessConfig.get(configName, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
+        RString タイトル = DbBusinessConfig.get(configName, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         return null != タイトル ? タイトル : RString.EMPTY;
     }
 
@@ -291,11 +300,13 @@ public class TsutishoHakkoCommonProcess {
             return 連絡前文字列;
         }
 
+        RString 略称 = CodeMaster.getCodeRyakusho(DBDCodeShubetsu.指定サービス種類コード.getコード(),
+                new Code(サービス種類.value()), FlexibleDate.getNowDate());
         if (null == 連絡前文字列 || 連絡前文字列.isEmpty()) {
-            return サービス種類.value();
+            return 略称;
         }
 
-        return 連絡前文字列.concat(連絡符号).concat(サービス種類.value());
+        return 連絡前文字列.concat(連絡符号).concat(略称);
     }
 
     /**

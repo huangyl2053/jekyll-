@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itizihanteishori;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -20,11 +20,11 @@ import lombok.Getter;
 @Getter
 public final class ItziHanteiShoriMybitisParamter implements IMyBatisParameter {
 
-    private final List<ShinseishoKanriNo> shinseishoKanriNoList;
+    private final List<RString> shinseishoKanriNoList;
     private final RString battishuturyokukubun;
     private final RString イメージ区分;
-    private final RString 取下;
-    private final RString 延期;
+    private final RString 取下 = ShoriJotaiKubun.取下.getコード();
+    private final RString 延期 = ShoriJotaiKubun.延期.getコード();
 
     /**
      * コンストラクタです。
@@ -34,16 +34,12 @@ public final class ItziHanteiShoriMybitisParamter implements IMyBatisParameter {
      * @param イメージ区分 RString
      */
     private ItziHanteiShoriMybitisParamter(
-            List<ShinseishoKanriNo> shinseishoKanriNoList,
+            List<RString> shinseishoKanriNoList,
             RString battishuturyokukubun,
-            RString イメージ区分,
-            RString 取下,
-            RString 延期) {
+            RString イメージ区分) {
         this.shinseishoKanriNoList = shinseishoKanriNoList;
         this.battishuturyokukubun = battishuturyokukubun;
         this.イメージ区分 = イメージ区分;
-        this.取下 = 取下;
-        this.延期 = 延期;
     }
 
     /**
@@ -52,18 +48,14 @@ public final class ItziHanteiShoriMybitisParamter implements IMyBatisParameter {
      * @param shinseishoKanriNoList List<RString>
      * @param battishuturyokukubun RString
      * @param イメージ区分 RString
-     * @param 取下 RString
-     * @param 延期 RString
      * @return ItziHanteiShoriMybitisParamter
      */
     public static ItziHanteiShoriMybitisParamter createParam(
-            List<ShinseishoKanriNo> shinseishoKanriNoList,
+            List<RString> shinseishoKanriNoList,
             RString battishuturyokukubun,
-            RString イメージ区分,
-            RString 取下,
-            RString 延期
+            RString イメージ区分
     ) {
         return new ItziHanteiShoriMybitisParamter(shinseishoKanriNoList, battishuturyokukubun,
-                イメージ区分, 取下, 延期);
+                イメージ区分);
     }
 }

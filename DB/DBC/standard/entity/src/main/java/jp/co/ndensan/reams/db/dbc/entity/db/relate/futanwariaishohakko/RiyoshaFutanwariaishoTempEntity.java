@@ -32,4 +32,15 @@ public class RiyoshaFutanwariaishoTempEntity {
     private LasdecCode 証記載保険者番号;
     private DbT7037ShoKofuKaishuEntity 証交付回収;
 
+    /**
+     * コンストラクタです。
+     */
+    public RiyoshaFutanwariaishoTempEntity() {
+        this.利用者負担割合 = new DbT3113RiyoshaFutanWariaiEntity();
+        this.被保台帳 = new DbT1001HihokenshaDaichoEntity();
+        this.宛名 = new UaFt200FindShikibetsuTaishoEntity();
+        this.宛先 = new UaFt250FindAtesakiEntity();
+        this.負担割合期間 = new FutanWariKikanTempEntity();
+    }
+
 }

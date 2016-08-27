@@ -110,7 +110,6 @@ public final class ShiharaiIchijiSashitomeTsuchishoReport extends Report<Shihara
         if (最新賦課年度.isEmpty()) {
             return;
         }
-
         for (ShiharaiHohoHenkoTaino 支払方法変更滞納 : 帳票情報.getShiharaiHohoHenkoTainoList()) {
             if (最新賦課年度.minusYear(2).equals(支払方法変更滞納.get賦課年度())) {
                 年度1リスト.add(支払方法変更滞納);

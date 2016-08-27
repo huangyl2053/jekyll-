@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.FukaTsujoIdoPro
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.HonsanteiIdoKekkaIchiranProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.IdoJohoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.IdoTriggerTempProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.KeisangoJohoDelete;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.SetaiinProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.SystemTimeGennendoIdoFukaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.SystemTimeUpdateProcess;
@@ -30,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -55,6 +57,7 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
     private static final RString 賦課の情報登録フローBATCHID = new RString("FukaJohoTorokuFlow");
     private static final RString 計算後情報作成BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
+    private static final String 計算後情報テーブル削除 = "keisangoJohoDelete";
     private static final String 本算定異動_現年度_結果一覧表 = "spoolHonsanteiIdoKekkaIchiranData";
     private static final String 処理日付管理テーブル更新 = "updateSystemTimeProcess";
     private static final ReportId 帳票分類ID = new ReportId("DBB200015_HonsanteiIdouKekkaIchiran");
@@ -92,11 +95,17 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
             executeStep(特徴依頼金計算_４月開始);
         }
         executeStep(賦課の情報登録フロー);
+        executeStep(計算後情報テーブル削除);
+        executeStep(計算後情報作成);
         for (ChohyoResult entity : parameter.get出力帳票List()) {
             if (帳票分類ID.equals(entity.get帳票分類ID())) {
                 processParameter.set出力帳票一覧(entity);
-                executeStep(計算後情報作成);
+                if (Tsuki._2月.getコード().equals(parameter.get処理対象())) {
+                    processParameter.set調定年度(parameter.getChoteiNendo().plusYear(1));
+                    processParameter.set賦課年度(parameter.get賦課年度().plusYear(1));
+                }
                 executeStep(本算定異動_現年度_結果一覧表);
+                break;
             }
         }
         executeStep(処理日付管理テーブル更新);
@@ -209,6 +218,16 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
     }
 
     /**
+     * 計算後情報テーブル削除を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(計算後情報テーブル削除)
+    protected IBatchFlowCommand keisangoJohoDelete() {
+        return simpleBatch(KeisangoJohoDelete.class).define();
+    }
+
+    /**
      * 計算後情報作成バッチを呼び出す。
      *
      * @return バッチコマンド
@@ -220,9 +239,16 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
     }
 
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
-        return new KeisangoJohoSakuseiBatchParamter(getParameter().getChoteiNendo().toDateString(),
-                getParameter().get賦課年度().toDateString(),
-                new RString(getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeGennendoIdoFukaProcess.SYSTEM_TIME).toString()),
+        FlexibleYear 調定年度 = getParameter().getChoteiNendo();
+        FlexibleYear 賦課年度 = getParameter().get賦課年度();
+        if (parameter != null && Tsuki._2月.getコード().equals(parameter.get処理対象())) {
+            調定年度 = 調定年度.plusYear(1);
+            賦課年度 = 賦課年度.plusYear(1);
+        }
+        return new KeisangoJohoSakuseiBatchParamter(調定年度.toDateString(),
+                賦課年度.toDateString(),
+                new RString(getResult(YMDHMS.class, new RString(システム日時の取得),
+                                SystemTimeGennendoIdoFukaProcess.SYSTEM_TIME).toString()),
                 ShoriName.異動賦課.get名称(), 帳票分類ID);
     }
 

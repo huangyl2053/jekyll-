@@ -11,15 +11,20 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4510011.DBC4
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4510011.KubunShikyuGendogakuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4510011.dgServiceShurui_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4510011.KubunShikyuGendogakuHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4510011.KubunShikyuGendogakuValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.kubunshikyugendogaku.KubunShikyuGendogakuManager;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShurui;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiHolder;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -29,6 +34,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @reamsid_L DBC-3350-010 jiangzongyue
  */
 public class KubunShikyuGendogaku {
+
+    private static final RString MESSAGEMAIN = new RString("サービス種類の登録が完了しました。");
+    private static final RString MESSAGETAISHO1 = new RString("サービス種類コード：");
+    private static final RString MESSAGETAISHO2 = new RString("サービス名称：");
 
     /**
      * 画面初期化のメソッドます。
@@ -117,6 +126,7 @@ public class KubunShikyuGendogaku {
         handler.setEnable();
         handler.clearValue();
         handler.setServiceShuruiShousaiEnable(true);
+        handler.setCommonButtonVisible(false);
         return ResponseData.of(div).respond();
     }
 
@@ -128,27 +138,45 @@ public class KubunShikyuGendogaku {
      */
     public ResponseData<KubunShikyuGendogakuDiv> onSelect_Save(
             KubunShikyuGendogakuDiv div) {
-        KubunShikyuGendogakuHandler handler = getHandler(div);
-        KaigoServiceShuruiHolder holder = ViewStateHolder.get(ViewStateKeys.介護サービス種類データ, KaigoServiceShuruiHolder.class);
-        KubunShikyuGendogakuManager manager = InstanceProvider.create(KubunShikyuGendogakuManager.class);
-        RString サービス種類コード = div.getServiceShuruiShousai().getTxtServiceCode().getValue();
-        RString 提供開始年月 = div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().getValue().getYearMonth().toDateString();
-        KaigoServiceShuruiIdentifier identifier = new KaigoServiceShuruiIdentifier(
-                new ServiceShuruiCode(サービス種類コード), new FlexibleYearMonth(提供開始年月));
-        KaigoServiceShurui result = holder.getKogakuGassanJikoFutanGaku(identifier);
-        if (result == null) {
-            result = new KaigoServiceShurui(
-                    new ServiceShuruiCode(サービス種類コード), new FlexibleYearMonth(提供開始年月));
-            result = handler.setResult追加(result);
-        } else {
-            if (div.getServiceShuruiShousai().getTxtTeikyoShuryoYM().isDisabled()) {
-                result = result.deleted();
-            } else {
-                result = handler.setResult修正(result);
-            }
+        KubunShikyuGendogakuValidationHandler validationHander = getValidationHandler(div);
+        ValidationMessageControlPairs pairs = validationHander.validate();
+        if (pairs.iterator().hasNext() && !ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        manager.save(result);
-        return ResponseData.of(div).setState(DBC4510011StateName.完了状態);
+        if (!ResponseHolder.isReRequest() && !div.getServiceShuruiShousai().getTxtTeikyoShuryoYM().isDisabled()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
+        }
+        if (!ResponseHolder.isReRequest() && div.getServiceShuruiShousai().getTxtTeikyoShuryoYM().isDisabled()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            KubunShikyuGendogakuHandler handler = getHandler(div);
+            KaigoServiceShuruiHolder holder = ViewStateHolder.get(ViewStateKeys.介護サービス種類データ, KaigoServiceShuruiHolder.class);
+            KubunShikyuGendogakuManager manager = InstanceProvider.create(KubunShikyuGendogakuManager.class);
+            RString サービス種類コード = div.getServiceShuruiShousai().getTxtServiceCode().getValue();
+            RString 提供開始年月 = div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().getValue().getYearMonth().toDateString();
+            KaigoServiceShuruiIdentifier identifier = new KaigoServiceShuruiIdentifier(
+                    new ServiceShuruiCode(サービス種類コード), new FlexibleYearMonth(提供開始年月));
+            KaigoServiceShurui result = holder.getKogakuGassanJikoFutanGaku(identifier);
+            if (result == null) {
+                result = new KaigoServiceShurui(
+                        new ServiceShuruiCode(サービス種類コード), new FlexibleYearMonth(提供開始年月));
+                result = handler.setResult追加(result);
+            } else {
+                if (div.getServiceShuruiShousai().getTxtTeikyoShuryoYM().isDisabled()) {
+                    result = result.deleted();
+                } else {
+                    result = handler.setResult修正(result);
+                }
+            }
+            manager.save(result);
+            RString messageTaisho1 = MESSAGETAISHO1.concat(div.getServiceShuruiShousai().getTxtServiceCode().getValue());
+            RString messageTaisho2 = MESSAGETAISHO2.concat(div.getServiceShuruiShousai().getTxtServiceMeisho().getValue());
+            div.getKanryo().getKanryoMessage().setSuccessMessage(MESSAGEMAIN, messageTaisho1, messageTaisho2);
+            return ResponseData.of(div).setState(DBC4510011StateName.完了状態);
+        }
+        return ResponseData.of(div).respond();
+
     }
 
     /**
@@ -164,6 +192,18 @@ public class KubunShikyuGendogaku {
     }
 
     /**
+     * 「サービス種類登録に戻る」ボタン表示制御を設定です。
+     *
+     * @param div KubunShikyuGendogakuDiv
+     * @return ResponseData
+     */
+    public ResponseData<KubunShikyuGendogakuDiv> onStateTransition(
+            KubunShikyuGendogakuDiv div) {
+        getHandler(div).setサービス種類登録に戻るする();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「完了する」ボタンの処理です。
      *
      * @param div div
@@ -176,5 +216,9 @@ public class KubunShikyuGendogaku {
 
     private KubunShikyuGendogakuHandler getHandler(KubunShikyuGendogakuDiv div) {
         return new KubunShikyuGendogakuHandler(div);
+    }
+
+    private KubunShikyuGendogakuValidationHandler getValidationHandler(KubunShikyuGendogakuDiv div) {
+        return new KubunShikyuGendogakuValidationHandler(div);
     }
 }

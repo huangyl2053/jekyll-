@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 帳票設計_DBC200080_総合事業費再審査決定通知書情報取込一覧表（保険者分） 出力順設定可能項目です。
+ * 総合事業費再審査決定通知書情報取込一覧表出力順設定可能項目です。
  *
  * @reamsid_L DBC-4680-040 wangxue
  */
@@ -18,7 +18,7 @@ public enum SogojigyohiSaishinsaKetteiHokenshaInOutPutOrder implements IReportIt
     /**
      * 証記載保険者番号
      */
-    証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("DbWT3063.\"hdrShoHokenshaNo\"")),
+    証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("DbWT3063.\"shoKisaiHokenshaNo\"")),
     /**
      * 郵便番号
      */
@@ -38,11 +38,11 @@ public enum SogojigyohiSaishinsaKetteiHokenshaInOutPutOrder implements IReportIt
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0360"), new RString("hihokenshaNo"), new RString("DbWT0001.\"orgHihokenshaShimei\"")),
+    被保険者番号(new RString("0360"), new RString("hihokenshaNo"), new RString("DbWT0001.\"hihokenshaNo\"")),
     /**
      * サービス提供年月
      */
-    サービス提供年月(new RString("0361"), new RString("serviceTeikyoYM"), new RString("DbWT3064.\"serviceTeikyoYm\"")),
+    サービス提供年月(new RString("0361"), new RString("serviceTeikyoYM"), new RString("DbWT3064.\"serviceTeikyoYM\"")),
     /**
      * 事業所番号
      */
@@ -50,7 +50,7 @@ public enum SogojigyohiSaishinsaKetteiHokenshaInOutPutOrder implements IReportIt
     /**
      * 取り扱い年月
      */
-    取り扱い年月(new RString("0363"), new RString("toriatsukaiYM"), new RString("DbWT3064.\"toriatsukaiYm\""));
+    取り扱い年月(new RString("0363"), new RString("toriatsukaiYM"), new RString("DbWT3064.\"toriatsukaiYM\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

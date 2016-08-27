@@ -95,6 +95,10 @@ public class SogojigyohiSeikyugakuTsuchishoInSource implements IReportSource {
     public RString tesuryoSeikyugaku;
     @ReportItem(name = "tesuryoRuikeigaku", length = 15, order = 39)
     public RString tesuryoRuikeigaku;
+    @ReportItem(name = "kanCode", length = 15, order = 40)
+    public RString kanCode;
+    @ReportItem(name = "kouCode", length = 15, order = 41)
+    public RString kouCode;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
@@ -145,6 +149,8 @@ public class SogojigyohiSeikyugakuTsuchishoInSource implements IReportSource {
         ruikeiRiyoshaFutangaku,
         ruikeiKohiFutangaku,
         tesuryoSeikyugaku,
-        tesuryoRuikeigaku
+        tesuryoRuikeigaku,
+        kanCode,
+        kouCode
     }
 }

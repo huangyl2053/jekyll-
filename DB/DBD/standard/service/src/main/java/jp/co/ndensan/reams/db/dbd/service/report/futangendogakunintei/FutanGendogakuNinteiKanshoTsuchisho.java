@@ -204,7 +204,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
 
     private Ninshosha get認証者情報(FlexibleDate kaisiYMD) {
         INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
-        return ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), kaisiYMD);
+        return ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), kaisiYMD);
     }
 
     private FutanGendogakuNintei get介護負担限度額認定の情報(HihokenshaNo 被保険者番号, int 履歴番号) {

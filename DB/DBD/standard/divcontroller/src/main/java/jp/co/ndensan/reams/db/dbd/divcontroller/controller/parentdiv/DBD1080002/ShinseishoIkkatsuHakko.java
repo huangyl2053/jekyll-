@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.KouhoushaJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShinseishoHakkoTaishoshaHaakuBatch;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd102020.DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.kouhoushajoho.KouhoushaJohoParameter;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1080002.DBD1080002StateName.世帯所得;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1080002.DBD1080002TransitionEventName;
@@ -19,7 +20,6 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1080002.Shi
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1080002.ShinseishoIkkatsuHakkoValidationHandler;
 import jp.co.ndensan.reams.db.dbd.service.core.kouhoushajoho.KouhoushaJohoService;
 import jp.co.ndensan.reams.db.dbd.service.core.kouhoushajoho.ShinseishoIkkatsuHakkoService;
-import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -61,6 +61,11 @@ public class ShinseishoIkkatsuHakko {
         List<KeyValueDataSource> dataSource = getHandler(div).getDataSource(div.getGenmenShinseiHaakuList().getDdlGemmenGengakuShurui().
                 getSelectedKey());
         div.getGenmenShinseiHaakuList().getDdlShoriTimestamp().setDataSource(dataSource);
+        div.getGenmenShinseiHaakuList().getDdlShoriTimestamp().setSelectedKey(new RString("empty"));
+        div.getGenmenShinseiHaakuList().getTxtKijunYMD().clearValue();
+        div.getGenmenShinseiHaakuList().getTxtShotokuNendo().clearDomain();
+        List<ddlKohoshaList_Row> data = new ArrayList<>();
+        div.getGenmenShinseiHaakuList().getDdlKohoshaList().setDataSource(data);
         getHandler(div).set帳票文言();
         return ResponseData.of(div).respond();
 
@@ -104,14 +109,25 @@ public class ShinseishoIkkatsuHakko {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「把握リストを発行する」の処理です。
+     *
+     * @param div ShinseishoIkkatsuHakkoDiv
+     * @return ResponseData<DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter>
+     */
+    public ResponseData<DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter> onClick_btnprint(ShinseishoIkkatsuHakkoDiv div) {
+        UUID 発行処理ID = UUID.randomUUID();
         ShinseishoIkkatsuHakkoService shinseisho = new ShinseishoIkkatsuHakkoService();
         List<ddlKohoshaList_Row> selectedItem = div.getGenmenShinseiHaakuList().getDdlKohoshaList().getSelectedItems();
         for (ddlKohoshaList_Row row : selectedItem) {
-            UUID 発行処理ID = UUID.randomUUID();
             shinseisho.insertDbT4032(UUID.fromString(row.getHaakuShoriID().toString()), 発行処理ID);
             shinseisho.insertDbT4033(new HihokenshaNo(row.getHihoNo()), 発行処理ID);
         }
-        return ResponseData.of(div).respond();
+        DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter parameter = getHandler(div).getParameter(発行処理ID);
+        return ResponseData.of(parameter).respond();
     }
 
     /**
@@ -140,8 +156,8 @@ public class ShinseishoIkkatsuHakko {
             div.getGenmenShinseiHaakuList().getTxtKijunYMD().setValue(shineisho.get基準日());
             div.getGenmenShinseiHaakuList().getTxtShotokuNendo().setDomain(shineisho.get所得年度().getNendo());
             KouhoushaJohoParameter parameter = new KouhoushaJohoParameter(shineisho.get基準日(), shineisho.getバッチ処理日時(),
-                    GemmenGengakuShurui.valueOf(div.getGenmenShinseiHaakuList().getDdlGemmenGengakuShurui().
-                            getSelectedValue().toString()).getコード());
+                    div.getGenmenShinseiHaakuList().getDdlGemmenGengakuShurui().
+                    getSelectedKey());
             KouhoushaJohoService kouhoushaJohoSerive = KouhoushaJohoService.creatInstence();
             List<KouhoushaJoho> 候補者情報List = kouhoushaJohoSerive.find候補者情報(parameter);
             div.getGenmenShinseiHaakuList().getDdlKohoshaList().setDataSource(getHandler(div).get候補者情報(候補者情報List));
@@ -159,5 +175,4 @@ public class ShinseishoIkkatsuHakko {
     private ShinseishoIkkatsuHakkoHandler getHandler(ShinseishoIkkatsuHakkoDiv div) {
         return new ShinseishoIkkatsuHakkoHandler(div);
     }
-
 }

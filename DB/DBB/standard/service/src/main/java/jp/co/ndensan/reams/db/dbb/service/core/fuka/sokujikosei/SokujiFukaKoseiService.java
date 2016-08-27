@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.db.dbb.business.core.kanri.MonthShichoson;
 import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.SokujiFukaKoseiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.SokujiFukaKoseiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.YokunenFukaKoseiResult;
-import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
@@ -37,6 +36,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.fuka.fukakeisan.FukaKeisan;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoRank;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
@@ -315,7 +315,19 @@ public class SokujiFukaKoseiService {
             koseiParam.set保険料段階リスト(保険料段階List);
 
             FukaKeisan fukaKeisan = FukaKeisan.createInstance();
-            return fukaKeisan.do全履歴更正計算(koseiParam);
+            KoseiShoriResult result = fukaKeisan.do全履歴更正計算(koseiParam);
+            List<KoseiZengoFuka> koseiZengoFukaList = new ArrayList<>();
+            for (KoseiZengoFuka koseiZengoFuka : result.get更正前後賦課のリスト()) {
+                if (is変化有り(koseiZengoFuka.get更正前().get現年度(), koseiZengoFuka.get更正後().get現年度())) {
+                    koseiZengoFuka.setHasChanged(true);
+                } else {
+                    koseiZengoFuka.setHasChanged(false);
+                }
+                koseiZengoFukaList.add(koseiZengoFuka);
+            }
+            result.set更正前後賦課のリスト(koseiZengoFukaList);
+            return result;
+
         } else {
             Decimal 減免前介護保険料_年額 = param.get更正後年度分賦課リスト().get最新賦課の情報().get減免前介護保険料_年額();
             Decimal 年額保険料 = (減免前介護保険料_年額 == null ? Decimal.ZERO : 減免前介護保険料_年額)

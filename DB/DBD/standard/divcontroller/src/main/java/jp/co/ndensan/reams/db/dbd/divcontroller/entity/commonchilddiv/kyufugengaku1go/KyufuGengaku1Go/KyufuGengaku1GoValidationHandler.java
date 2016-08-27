@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class KyufuGengaku1GoValidationHandler {
 
     private final RString 減額免除申請 = new RString("減額免除申請");
-    private final RString 給付額減額 = new RString("給付額減額");
+    private final RString 給付額減額 = new RString("給付額減額登録");
 
     /**
      * 1号給付額減額ダイアログの滞納状況情報チェック。
@@ -39,9 +39,12 @@ public class KyufuGengaku1GoValidationHandler {
      * @param shiharaiHohoHenko 支払方法変更管理業務概念
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateFor滞納状況情報(ValidationMessageControlPairs pairs, KyufuGengaku1GoDiv div, ShiharaiHohoHenko shiharaiHohoHenko) {
+    public ValidationMessageControlPairs validateFor滞納状況情報(ValidationMessageControlPairs pairs, KyufuGengaku1GoDiv div,
+            ShiharaiHohoHenko shiharaiHohoHenko) {
         if ((ShoriKubun.toValue(div.getKey_Button()).get名称().equals(給付額減額))
-                && (shiharaiHohoHenko.getShiharaiHohoHenkoTainoList().isEmpty() || div.getTainoHanteiKekka().isEmpty())) {
+                && (shiharaiHohoHenko != null
+                && shiharaiHohoHenko.getShiharaiHohoHenkoTainoList().isEmpty()
+                && (div.getTainoHanteiKekka().isEmpty() || div.getTainoHanteiKekka() == null))) {
             pairs.add(new ValidationMessageControlPair(KyufuGengaku1GoValidationHandler.KyufuGengaku1GoMessages.支払方法変更_要滞納状況確定));
         }
         return pairs;
@@ -105,6 +108,44 @@ public class KyufuGengaku1GoValidationHandler {
     }
 
     /**
+     * 1号給付額減額ダイアログの申請理由未選択チェック。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div KyufuGengaku1GoDiv
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor状況未選択チェック(ValidationMessageControlPairs pairs, KyufuGengaku1GoDiv div) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(減額免除申請)) {
+            messages.add(ValidateChain.validateStart(div).ifNot(KyufuGengaku1GoDivSpec.状況未選択)
+                    .thenAdd(KyufuGengaku1GoMessages.状況未選択).messages());
+            pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                    KyufuGengaku1GoMessages.状況未選択,
+                    div.getDdlMenjoShinseiJokyo()).build().check(messages));
+        }
+        return pairs;
+    }
+
+    /**
+     * 1号給付額減額ダイアログの申請理由未選択チェック。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div KyufuGengaku1GoDiv
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor申請審査結果未選択チェック(ValidationMessageControlPairs pairs, KyufuGengaku1GoDiv div) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(減額免除申請)) {
+            messages.add(ValidateChain.validateStart(div).ifNot(KyufuGengaku1GoDivSpec.申請審査結果未選択)
+                    .thenAdd(KyufuGengaku1GoMessages.申請審査結果未選択).messages());
+            pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                    KyufuGengaku1GoMessages.申請審査結果未選択,
+                    div.getDdlMenjoShinseiShinsaKekka()).build().check(messages));
+        }
+        return pairs;
+    }
+
+    /**
      * 1号給付額減額ダイアログの減額適用期間2チェック。
      *
      * @param pairs バリデーションコントロール
@@ -128,7 +169,9 @@ public class KyufuGengaku1GoValidationHandler {
         支払方法変更_要滞納状況確定(DbdErrorMessages.支払方法変更_要滞納状況確定),
         期間が不正_追加メッセージあり2(UrErrorMessages.期間が不正_追加メッセージあり２, "減額適用期間(開始)", "減額適用期間(終了)"),
         減額適用期間終了未入力(UrErrorMessages.未入力, "減額適用期間終了"),
-        申請理由未選択(UrErrorMessages.選択されていない, "申請理由");
+        申請理由未選択(UrErrorMessages.選択されていない, "申請理由"),
+        状況未選択(UrErrorMessages.選択されていない, "状況"),
+        申請審査結果未選択(UrErrorMessages.選択されていない, "申請審査結果");
         private final Message message;
 
         private KyufuGengaku1GoMessages(IMessageGettable message, String... replacements) {

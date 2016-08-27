@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiTsutishoEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
@@ -15,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -134,6 +137,42 @@ public class YokaigoNinteiTsutisho implements Serializable {
      */
     public Code get認定申請区分申請時コード() {
         return null == 要介護認定申請情報受給Entity ? Code.EMPTY : 要介護認定申請情報受給Entity.getNinteiShinseiShinseijiKubunCode();
+    }
+
+    /**
+     * 市町村コードを返します。
+     *
+     * @return 市町村コード
+     */
+    public LasdecCode get市町村コード() {
+        return null == 受給者台帳Entity ? LasdecCode.EMPTY : 受給者台帳Entity.getShichosonCode();
+    }
+
+    /**
+     * 被保険者番号受給者台帳を返します。
+     *
+     * @return 被保険者番号受給者台帳
+     */
+    public HihokenshaNo get被保険者番号受給者台帳() {
+        return null == 受給者台帳Entity ? HihokenshaNo.EMPTY : 受給者台帳Entity.getHihokenshaNo();
+    }
+
+    /**
+     * 受給申請事由受給者台帳を返します。
+     *
+     * @return 受給申請事由受給者台帳
+     */
+    public Code get受給申請事由受給者台帳() {
+        return null == 受給者台帳Entity ? Code.EMPTY : 受給者台帳Entity.getJukyuShinseiJiyu();
+    }
+
+    /**
+     * 申請書管理番号受給者台帳を返します。
+     *
+     * @return 申請書管理番号受給者台帳
+     */
+    public ShinseishoKanriNo get申請書管理番号受給者台帳() {
+        return null == 受給者台帳Entity ? ShinseishoKanriNo.EMPTY : 受給者台帳Entity.getShinseishoKanriNo();
     }
 
     /**
@@ -294,7 +333,7 @@ public class YokaigoNinteiTsutisho implements Serializable {
      *
      * @return 指定医フラグ受給
      */
-    public boolean get指定医フラグ() {
+    public boolean is指定医フラグ() {
         return null == 要介護認定申請情報受給Entity ? false : 要介護認定申請情報受給Entity.getShiteiiFlag();
     }
 
@@ -357,7 +396,7 @@ public class YokaigoNinteiTsutisho implements Serializable {
      *
      * @return 旧措置者フラグ
      */
-    public boolean get旧措置者フラグ() {
+    public boolean is旧措置者フラグ() {
         return null == 受給者台帳Entity ? false : 受給者台帳Entity.getKyuSochishaFlag();
     }
 
@@ -366,7 +405,7 @@ public class YokaigoNinteiTsutisho implements Serializable {
      *
      * @return 資格取得前申請フラグ
      */
-    public boolean get資格取得前申請フラグ() {
+    public boolean is資格取得前申請フラグ() {
         return null == 受給者台帳Entity ? false : 受給者台帳Entity.getShikakuShutokuMaeShinseiFlag();
     }
 
@@ -718,7 +757,7 @@ public class YokaigoNinteiTsutisho implements Serializable {
      * @return 介護認定審査会意見
      */
     public RString get介護認定審査会意見() {
-        return null == 要介護認定結果情報Entity ? RString.EMPTY : 要介護認定結果情報Entity.getNinteishinsakaiIkenShurui();
+        return null == 要介護認定結果情報Entity ? RString.EMPTY : 要介護認定結果情報Entity.getShinsakaiIken();
     }
 
     /**

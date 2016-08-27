@@ -102,4 +102,54 @@ public class ServiceRiyohyoInfoDivValidator {
                 .messages());
         return messages;
     }
+
+    /**
+     * サービス単位必須のチェックです。
+     *
+     * @return エラーメッセージ
+     */
+    public IValidationMessages validateサービス単位必須() {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(ServiceRiyohyoInfoDivSpec.サービス単位必須入力チェック)
+                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.サービス単位必須項目)
+                .messages());
+        return messages;
+    }
+
+    /**
+     * サービス単位必須以外のチェックです。
+     *
+     * @return エラーメッセージ
+     */
+    public IValidationMessages validateサービス単位必須以外() {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(ServiceRiyohyoInfoDivSpec.サービスコード必須入力チェック)
+                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目)
+                .ifNot(ServiceRiyohyoInfoDivSpec.単位必須入力チェック)
+                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.単位必須項目)
+                .ifNot(ServiceRiyohyoInfoDivSpec.回数必須入力チェック)
+                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.回数必須項目)
+                .ifNot(ServiceRiyohyoInfoDivSpec.単位数単価必須入力チェック)
+                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.単位数単価必須項目)
+                .ifNot(ServiceRiyohyoInfoDivSpec.区分限度内単位必須入力チェック)
+                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.区分限度内単位必須項目)
+                .messages());
+        return messages;
+    }
+
+    /**
+     * 給付率必須のチェックです。
+     *
+     * @return エラーメッセージ
+     */
+    public IValidationMessages validate給付率必須() {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(ServiceRiyohyoInfoDivSpec.給付率必須入力チェック)
+                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.給付率必須項目)
+                .messages());
+        return messages;
+    }
 }

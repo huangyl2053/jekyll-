@@ -64,14 +64,16 @@ public class KaigoHokenShotokuTempEntity implements IDbAccessable {
         entity.setShojoIdoYMD(temp.getShojoIdoYMD());
         RString 消除事由コード = temp.getShojoJiyuCode();
         FlexibleDate 生年月日 = temp.getSeinengappiYMD();
-        if (INDEX_22.equals(消除事由コード)) {
-            FlexibleDate 消除異動年月日 = temp.getShojoIdoYMD();
-            int 年齢 = 消除異動年月日.getYearValue() - 生年月日.getYearValue();
-            entity.setAge(年齢);
-        } else {
-            int システム年 = FlexibleDate.getNowDate().getYearValue();
-            int 年齢 = システム年 - 生年月日.getYearValue();
-            entity.setAge(年齢);
+        if (生年月日 != null) {
+            if (INDEX_22.equals(消除事由コード)) {
+                FlexibleDate 消除異動年月日 = temp.getShojoIdoYMD();
+                int 年齢 = 消除異動年月日.getYearValue() - 生年月日.getYearValue();
+                entity.setAge(年齢);
+            } else {
+                int システム年 = FlexibleDate.getNowDate().getYearValue();
+                int 年齢 = システム年 - 生年月日.getYearValue();
+                entity.setAge(年齢);
+            }
         }
         entity.setSeibetsuCode(temp.getSeibetsuCode());
         entity.setJuminShubetsuCode(temp.getJuminShubetsuCode());

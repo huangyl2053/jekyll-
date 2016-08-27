@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukarisanteikekk
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.TokuchoKariKeisangoFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukarisanteikekkaIchiran.TokubetsuChoshuKarisanteiKekkaIchiranSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -153,16 +153,34 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         set特別徴収対象年金(source);
         if (特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード() == null || 特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード().isEmpty()) {
             source.listLower_6 = FOUR月;
-            source.listLower_7 = new RString(特徴仮算定計算後賦課情報Entity.get特徴期期別金額01().toString());
+            set特徴期期別金額01(source);
             source.listLower_8 = SIX月;
-            source.listLower_9 = new RString(特徴仮算定計算後賦課情報Entity.get特徴期期別金額02().toString());
+            set特徴期期別金額02(source);
             source.listLower_10 = EIGHT月;
-            source.listLower_11 = new RString(特徴仮算定計算後賦課情報Entity.get特徴期期別金額03().toString());
+            set特徴期期別金額03(source);
         }
 
         set特別徴収停止事由(source);
         return source;
 
+    }
+
+    private void set特徴期期別金額03(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
+        if (特徴仮算定計算後賦課情報Entity.get特徴期期別金額03() != null) {
+            source.listLower_11 = new RString(特徴仮算定計算後賦課情報Entity.get特徴期期別金額03().toString());
+        }
+    }
+
+    private void set特徴期期別金額02(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
+        if (特徴仮算定計算後賦課情報Entity.get特徴期期別金額02() != null) {
+            source.listLower_9 = new RString(特徴仮算定計算後賦課情報Entity.get特徴期期別金額02().toString());
+        }
+    }
+
+    private void set特徴期期別金額01(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
+        if (特徴仮算定計算後賦課情報Entity.get特徴期期別金額01() != null) {
+            source.listLower_7 = new RString(特徴仮算定計算後賦課情報Entity.get特徴期期別金額01().toString());
+        }
     }
 
     private void set行政区(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
@@ -194,7 +212,8 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
     private void set特別徴収業務者(TokubetsuChoshuKarisanteiKekkaIchiranSource source) throws NullPointerException, IllegalArgumentException {
         if (特徴仮算定計算後賦課情報Entity.get特別徴収義務者コード() != null) {
             Code 特別徴収義務者コード = 特徴仮算定計算後賦課情報Entity.get特別徴収義務者コード();
-            RString 特別徴収業務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0047"), 特別徴収義務者コード);
+            RString 特別徴収業務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+                    特別徴収義務者コード);
             source.listLower_4 = 特別徴収業務者;
         }
     }
@@ -218,7 +237,7 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         if (特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード() != null && !特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード().isEmpty()) {
             source.listBiko_1 = 特徴中止;
             Code 特別徴収停止事由コード = new Code(特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード().toString());
-            RString 備考２ = CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, new CodeShubetsu("0008"), 特別徴収停止事由コード);
+            RString 備考２ = CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.特別徴収停止事由.getコード(), 特別徴収停止事由コード);
             source.listBiko_2 = 備考２;
         }
     }
@@ -227,14 +246,13 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         Decimal 特徴期期別金額01 = 特徴仮算定計算後賦課情報Entity.get特徴期期別金額01();
         Decimal 特徴期期別金額02 = 特徴仮算定計算後賦課情報Entity.get特徴期期別金額02();
         Decimal 特徴期期別金額03 = 特徴仮算定計算後賦課情報Entity.get特徴期期別金額03();
-        if (特徴期期別金額01.compareTo(Decimal.ZERO) > NUM_0 && 特徴期期別金額02.compareTo(Decimal.ZERO) > NUM_0
-                && 特徴期期別金額03.compareTo(Decimal.ZERO) > NUM_0) {
+        if (特徴期期別金額01 != null && 特徴期期別金額02 != null && 特徴期期別金額03 != null && 特徴期期別金額01.compareTo(Decimal.ZERO) > NUM_0
+                && 特徴期期別金額02.compareTo(Decimal.ZERO) > NUM_0 && 特徴期期別金額03.compareTo(Decimal.ZERO) > NUM_0) {
             source.listUpper_7 = 継続;
         }
-        if (Decimal.ZERO.equals(特徴期期別金額01) && 特徴期期別金額02.compareTo(Decimal.ZERO) > NUM_0
-                && 特徴期期別金額03.compareTo(Decimal.ZERO) > NUM_0) {
+        if (特徴期期別金額01 != null && 特徴期期別金額02 != null && 特徴期期別金額03 != null && Decimal.ZERO.equals(特徴期期別金額01)
+                && 特徴期期別金額02.compareTo(Decimal.ZERO) > NUM_0 && 特徴期期別金額03.compareTo(Decimal.ZERO) > NUM_0) {
             source.listUpper_7 = SIX月;
         }
-
     }
 }

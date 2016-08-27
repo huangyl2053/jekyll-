@@ -7,7 +7,10 @@ package jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.FutanWariaiHanteiJoho;
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.FutanWariaiHanteiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.HanteiKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KoseiJiyuType;
@@ -18,8 +21,11 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temp
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2512KaigoShotokuNewestEntity;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -28,11 +34,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * ビジネス設計_DBCMNK1002_利用者負担割合判定（共通）のクラスです。 <br/>
+ * ビジネス設計_DBCMNK1002_利用者負担割合判定（共通）のクラスです。
  *
  * @reamsid_L DBC-4950-032 liuyang
  */
@@ -45,7 +50,6 @@ public class RiyoshaFutanWariaiHantei {
     private static final RString 課税区分未申告 = new RString("3");
     private static final RString 課税区分所得調査中 = new RString("4");
     private static final RString 課税区分非課税 = new RString("2");
-
     private static final Integer NUM2 = 2;
     private static final Integer 西暦年の長さ = 4;
     private static final Integer 西暦年月の長さ = 6;
@@ -54,7 +58,6 @@ public class RiyoshaFutanWariaiHantei {
     private static final Integer NUM八月 = 8;
     private static final Integer NUM十二月 = 12;
     private static final Integer NUM三十一日 = 31;
-
     private static final RString 年のパターン = new RString("0000");
     private static final RString 月のパターン = new RString("00");
     private static final RString 八月 = new RString("08");
@@ -74,7 +77,6 @@ public class RiyoshaFutanWariaiHantei {
     private static final RString 二十九日 = new RString("29");
     private static final RString 三十日 = new RString("30");
     private static final RString 三十一日 = new RString("31");
-
     private static final RString 基準日がNULL = new RString("基準日がnullです。");
     private static final RString 負担割合判定情報がNULL = new RString("負担割合判定情報がnullです。");
     private static final RString 年度がNULL = new RString("年度がnullです。");
@@ -104,10 +106,10 @@ public class RiyoshaFutanWariaiHantei {
         SeikatsuHogoGaitoJohoTempEntity 生活保護該当情報Temp = 負担割合判定情報.get生活保護該当情報Temp();
         List<SetaiinShotoku> 介護所得情報 = 負担割合判定情報.get介護所得情報();
         FlexibleDate 判定基準日 = 負担割合判定情報.get判定基準日();
-        FlexibleYearMonth 判定基準日の年月 = 判定基準日 == null ? null : 判定基準日.getYearMonth();
+        FlexibleYearMonth 判定基準日の年月 = 判定基準日 == null || 判定基準日.isEmpty() ? null : 判定基準日.getYearMonth();
         FlexibleDate 認定有効期間開始年月日 = 判定対象者Temp == null ? null
                 : 判定対象者Temp.getNinteiYukoKaishiDate();
-        FlexibleYearMonth 認定有効期間開始年月 = 認定有効期間開始年月日 == null ? null
+        FlexibleYearMonth 認定有効期間開始年月 = 認定有効期間開始年月日 == null || 認定有効期間開始年月日.isEmpty() ? null
                 : 認定有効期間開始年月日.getYearMonth();
         if (判定基準日の年月 != null && 認定有効期間開始年月 != null && 判定基準日の年月.isBefore(認定有効期間開始年月)) {
             負担割合判定結果.set負担割合区分(なし);
@@ -119,7 +121,7 @@ public class RiyoshaFutanWariaiHantei {
             負担割合判定結果.set判定区分(HanteiKubunType.第２号被保険者.code());
             return 負担割合判定結果;
         }
-        if (生活保護該当情報Temp != null && RString.isNullOrEmpty(生活保護該当情報Temp.getShikibetsuCode())) {
+        if (生活保護該当情報Temp != null && 生活保護該当情報Temp.getShikibetsuCode() != null) {
             負担割合判定結果.set負担割合区分(FutanwariaiKubun._１割.getコード());
             負担割合判定結果.set判定区分(HanteiKubunType.生活保護.code());
             return 負担割合判定結果;
@@ -144,10 +146,72 @@ public class RiyoshaFutanWariaiHantei {
         return 負担割合判定結果;
     }
 
+    /**
+     * 負担割合判定。
+     *
+     * @param 負担割合判定情報 FutanWariaiHanteiJohoEntity
+     * @return FutanWariaiHanteiResult 負担割合判定結果
+     * @throws NullPointerException
+     */
+    public FutanWariaiHanteiResult futanWariaiHantei(FutanWariaiHanteiJoho 負担割合判定情報) {
+        if (負担割合判定情報 == null) {
+            throw new NullPointerException(負担割合判定情報がNULL.toString());
+        }
+        FutanWariaiHanteiResult 負担割合判定結果 = new FutanWariaiHanteiResult();
+        HanteiTaishoshaTempEntity 判定対象者Temp = 負担割合判定情報.get判定対象者Temp();
+        SeikatsuHogoGaitoJohoTempEntity 生活保護該当情報Temp = 負担割合判定情報.get生活保護該当情報Temp();
+        List<DbV2512KaigoShotokuNewestEntity> 介護所得情報 = 負担割合判定情報.get介護所得情報();
+        FlexibleDate 判定基準日 = 負担割合判定情報.get判定基準日();
+        FlexibleYearMonth 判定基準日の年月 = 判定基準日 == null || 判定基準日.isEmpty() ? null : 判定基準日.getYearMonth();
+        FlexibleDate 認定有効期間開始年月日 = 判定対象者Temp == null ? null
+                : 判定対象者Temp.getNinteiYukoKaishiDate();
+        FlexibleYearMonth 認定有効期間開始年月 = 認定有効期間開始年月日 == null || 認定有効期間開始年月日.isEmpty() ? null
+                : 認定有効期間開始年月日.getYearMonth();
+        if (判定基準日の年月 != null && 認定有効期間開始年月 != null && 判定基準日の年月.isBefore(認定有効期間開始年月)) {
+            負担割合判定結果.set負担割合区分(なし);
+            負担割合判定結果.set判定区分(HanteiKubunType.対象外.code());
+            return 負担割合判定結果;
+        }
+        if (判定対象者Temp != null && TWO.equals(判定対象者Temp.getHihokenshaKubunCode())) {
+            負担割合判定結果.set負担割合区分(FutanwariaiKubun._１割.getコード());
+            負担割合判定結果.set判定区分(HanteiKubunType.第２号被保険者.code());
+            return 負担割合判定結果;
+        }
+        if (生活保護該当情報Temp != null && 生活保護該当情報Temp.getShikibetsuCode() != null) {
+            負担割合判定結果.set負担割合区分(FutanwariaiKubun._１割.getコード());
+            負担割合判定結果.set判定区分(HanteiKubunType.生活保護.code());
+            return 負担割合判定結果;
+        }
+        if (判定対象者Temp != null && 判定対象者Temp.isKyuSochishaFlag()) {
+            負担割合判定結果.set負担割合区分(FutanwariaiKubun._１割.getコード());
+            負担割合判定結果.set判定区分(HanteiKubunType.旧措置.code());
+            return 負担割合判定結果;
+        }
+        負担割合判定結果 = 課税区分負担割合判定(判定対象者Temp);
+        if (負担割合判定結果 != null) {
+            return 負担割合判定結果;
+        }
+        Decimal 合計所得金額 = noMinusDecimal(負担割合判定情報.get判定対象者Temp().getGokeiShotokuGaku());
+        Decimal 年金収入 = get公的年金収入額世帯員分合計(介護所得情報);
+        Decimal その他の合計所得金額 = getその他の合計所得金額世帯員分合計(介護所得情報);
+        int 世帯員数 = 介護所得情報.size();
+        RString 負担割合区分 = getFutanWariaiKubun(合計所得金額, 年金収入, その他の合計所得金額, 世帯員数);
+        負担割合判定結果 = new FutanWariaiHanteiResult();
+        負担割合判定結果.set負担割合区分(負担割合区分);
+        負担割合判定結果.set判定区分(HanteiKubunType.負担割合判定.code());
+        return 負担割合判定結果;
+    }
+
     private Decimal get公的年金収入額世帯員分の合計(List<SetaiinShotoku> 介護所得情報リスト) {
         Decimal sum = Decimal.ZERO;
         for (SetaiinShotoku 介護所得情報 : 介護所得情報リスト) {
-            sum.add(介護所得情報.get年金収入額());
+            if (介護所得情報 == null) {
+                continue;
+            }
+            Decimal sub = 介護所得情報.get年金収入額();
+            if (sub != null) {
+                sum = sum.add(nonullDecimal(介護所得情報.get年金収入額()));
+            }
         }
         return sum;
     }
@@ -155,8 +219,46 @@ public class RiyoshaFutanWariaiHantei {
     private Decimal getその他の合計所得金額世帯員分の合計(List<SetaiinShotoku> 介護所得情報リスト) {
         Decimal sum = Decimal.ZERO;
         for (SetaiinShotoku 介護所得情報 : 介護所得情報リスト) {
-            sum.add(noMinusDecimal(nonullSubstract(介護所得情報.get合計所得金額(),
+            if (介護所得情報 == null) {
+                continue;
+            }
+            sum = sum.add(noMinusDecimal(nonullSubstract(介護所得情報.get合計所得金額(),
                     介護所得情報.get年金所得額())));
+        }
+        return sum;
+    }
+
+    /**
+     * get公的年金収入額世帯員分合計のメソッドです。
+     *
+     * @param 介護所得情報リスト List<DbV2512KaigoShotokuNewestEntity>
+     * @return Decimal
+     */
+    public Decimal get公的年金収入額世帯員分合計(List<DbV2512KaigoShotokuNewestEntity> 介護所得情報リスト) {
+        Decimal sum = Decimal.ZERO;
+        for (DbV2512KaigoShotokuNewestEntity 介護所得情報 : 介護所得情報リスト) {
+            if (介護所得情報 == null) {
+                continue;
+            }
+            sum = sum.add(nonullDecimal(介護所得情報.getNenkiniShunyuGaku()));
+        }
+        return sum;
+    }
+
+    /**
+     * getその他の合計所得金額世帯員分合計のメソッドです。
+     *
+     * @param 介護所得情報リスト List<DbV2512KaigoShotokuNewestEntity>
+     * @return Decimal
+     */
+    public Decimal getその他の合計所得金額世帯員分合計(List<DbV2512KaigoShotokuNewestEntity> 介護所得情報リスト) {
+        Decimal sum = Decimal.ZERO;
+        for (DbV2512KaigoShotokuNewestEntity 介護所得情報 : 介護所得情報リスト) {
+            if (介護所得情報 == null) {
+                continue;
+            }
+            sum = sum.add(noMinusDecimal(nonullSubstract(介護所得情報.getGokeiShotokuGaku(),
+                    介護所得情報.getNenkiniShotokuGaku())));
         }
         return sum;
     }
@@ -172,7 +274,7 @@ public class RiyoshaFutanWariaiHantei {
             負担割合判定結果.set負担割合区分(FutanwariaiKubun._１割.getコード());
             負担割合判定結果.set判定区分(HanteiKubunType.非課税.code());
         } else if (課税区分未申告.equals(課税区分)) {
-            RString 本人未申告区分 = BusinessConfig.get(ConfigNameDBC.利用者負担割合判定基準_本人未申告区分,
+            RString 本人未申告区分 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定基準_本人未申告区分,
                     now, SubGyomuCode.DBC介護給付);
             if (ONE.equals(本人未申告区分)) {
                 負担割合判定結果.set負担割合区分(FutanwariaiKubun._１割.getコード());
@@ -182,7 +284,7 @@ public class RiyoshaFutanWariaiHantei {
             }
             負担割合判定結果.set判定区分(HanteiKubunType.非課税.code());
         } else if (課税区分所得調査中.equals(課税区分)) {
-            RString 本人所得調査中区分 = BusinessConfig.get(ConfigNameDBC.利用者負担割合判定基準_本人所得調査中区分,
+            RString 本人所得調査中区分 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定基準_本人所得調査中区分,
                     now, SubGyomuCode.DBC介護給付);
             if (ONE.equals(本人所得調査中区分)) {
                 負担割合判定結果.set負担割合区分(FutanwariaiKubun._１割.getコード());
@@ -221,13 +323,13 @@ public class RiyoshaFutanWariaiHantei {
             return null;
         }
         RDate now = RDate.getNowDate();
-        Decimal 本人合計所得金額基準 = rstringToDecimal(BusinessConfig.get(
+        Decimal 本人合計所得金額基準 = rstringToDecimal(DbBusinessConfig.get(
                 ConfigNameDBC.利用者負担割合判定基準_本人合計所得金額基準,
                 now, SubGyomuCode.DBC介護給付));
-        Decimal 世帯年金収入等基準単身 = rstringToDecimal(BusinessConfig.get(
+        Decimal 世帯年金収入等基準単身 = rstringToDecimal(DbBusinessConfig.get(
                 ConfigNameDBC.利用者負担割合判定基準_世帯年金収入等基準単身,
                 now, SubGyomuCode.DBC介護給付));
-        Decimal 世帯年金収入等基準複数 = rstringToDecimal(BusinessConfig.get(
+        Decimal 世帯年金収入等基準複数 = rstringToDecimal(DbBusinessConfig.get(
                 ConfigNameDBC.利用者負担割合判定基準_世帯年金収入等基準複数,
                 now, SubGyomuCode.DBC介護給付));
         Decimal 合計所得金額Temp = noMinusDecimal(合計所得金額);
@@ -254,6 +356,9 @@ public class RiyoshaFutanWariaiHantei {
     }
 
     private Decimal noMinusDecimal(Decimal decimal) {
+        if (decimal == null) {
+            return Decimal.ZERO;
+        }
         if (decimal.compareTo(Decimal.ZERO) < 0) {
             return Decimal.ZERO;
         }
@@ -286,6 +391,9 @@ public class RiyoshaFutanWariaiHantei {
     public List<RString> getHanteiKijunbi(RString 基準日) {
         if (基準日 == null) {
             throw new NullPointerException(基準日がNULL.toString());
+        }
+        if (RString.isNullOrEmpty(基準日)) {
+            return new ArrayList<>();
         }
         int 基準日の月 = Integer.parseInt(基準日.substring(西暦年の長さ, 西暦年月の長さ).toString());
         List<RString> 判定基準日リスト = new ArrayList<>();
@@ -380,7 +488,7 @@ public class RiyoshaFutanWariaiHantei {
         対象終了日リスト.add(今年.concat(十一月).concat(三十日));
         対象終了日リスト.add(今年.concat(十二月).concat(三十一日));
         対象終了日リスト.add(来年.concat(一月).concat(三十一日));
-        if (年度.isLeapYear()) {
+        if (new RYear(来年.toString()).isLeapYear()) {
             対象終了日リスト.add(来年.concat(二月).concat(二十九日));
         } else {
             対象終了日リスト.add(来年.concat(二月).concat(二十八日));
@@ -406,6 +514,7 @@ public class RiyoshaFutanWariaiHantei {
         if (利用者負担割合明細情報 == null || 対象年度 == null) {
             throw new NullPointerException();
         }
+        set負担割合判定マージソット(利用者負担割合明細情報);
         List<RiyoshaFutanWariaiMeisaiTempEntity> result = new ArrayList<>();
         List<Boolean> flags = new ArrayList<>();
         int oldSize = 利用者負担割合明細情報.size();
@@ -431,44 +540,61 @@ public class RiyoshaFutanWariaiHantei {
                 result.add(利用者負担割合明細情報.get(i));
             }
         }
-        int newSize = result.size();
-        for (int i = 0; i < newSize; i++) {
-            result.get(i).setEdaNo(i + 1);
-        }
         RiyoshaFutanWariaiMeisaiTempEntity before = null;
-        RString beforeKubn = null;
-        RString nowKubun;
+        RString 前負担割合区分;
+        RString 現負担割合区分;
         RString 現判定区分;
-        RString 前判定区分 = null;
+        RString 前判定区分;
+        int edaNo = 1;
         for (RiyoshaFutanWariaiMeisaiTempEntity now : result) {
             if (before == null) {
-                before = now.clone();
-                beforeKubn = before.getFutanWariaiKubun();
-                前判定区分 = before.getHanteiKubun();
+                before = now;
+                before.setEdaNo(edaNo);
                 continue;
             }
-            before.setYukoShuryoYMD(now.getYukoKaishiYMD().minusDay(1));
-            nowKubun = now.getFutanWariaiKubun();
+            if (!nonullRStr(before.getHihokenshaNo()).equals(nonullRStr(now.getHihokenshaNo()))) {
+                before.setYukoShuryoYMD(new FlexibleDate(対象年度.getYearValue() + 1, NUM七月, NUM三十一日));
+                edaNo = 1;
+                before = now;
+                before.setEdaNo(edaNo);
+                continue;
+            }
+            edaNo++;
+            now.setEdaNo(edaNo);
+            前負担割合区分 = before.getFutanWariaiKubun();
+            現負担割合区分 = now.getFutanWariaiKubun();
+            前判定区分 = before.getHanteiKubun();
             現判定区分 = now.getHanteiKubun();
-            if (!equalsRString(nowKubun, beforeKubn)) {
-                負担割合判定マージ(前判定区分, 現判定区分, now, 対象年度, before);
-
+            if (!equalsRString(現負担割合区分, 前負担割合区分)) {
+                負担割合判定マージ処理(前判定区分, 現判定区分, now, 対象年度, before);
             } else {
                 now.setKoseiJiyu(before.getKoseiJiyu());
                 now.setYukoKaishiYMD(before.getYukoKaishiYMD());
             }
+            if (now.getYukoKaishiYMD() != null && !now.getYukoKaishiYMD().isEmpty()) {
+                before.setYukoShuryoYMD(now.getYukoKaishiYMD().minusDay(1));
+            }
+            before = now;
         }
         result.get(result.size() - 1).setYukoShuryoYMD(new FlexibleDate(対象年度.getYearValue() + 1, NUM七月, NUM三十一日));
         return result;
     }
 
-    private void 負担割合判定マージ(RString 前判定区分, RString 現判定区分, RiyoshaFutanWariaiMeisaiTempEntity now,
+    private void 負担割合判定マージ処理(RString 前判定区分, RString 現判定区分, RiyoshaFutanWariaiMeisaiTempEntity now,
             FlexibleYear 対象年度, RiyoshaFutanWariaiMeisaiTempEntity before) {
         if (HanteiKubunType.対象外.code().equals(前判定区分)
                 && Arrays.asList(HanteiKubunType.values()).contains(HanteiKubunType.toValue(現判定区分))
                 && !HanteiKubunType.対象外.code().equals(現判定区分)) {
             now.setKoseiJiyu(KoseiJiyuType.当初_継続_新規認定.getコード());
             now.setYukoKaishiYMD(now.getNinteiYukoKaishiDate());
+        }
+        if (HanteiKubunType.生活保護.code().equals(現判定区分)
+                && HanteiKubunType.負担割合判定.code().equals(前判定区分)) {
+            now.setKoseiJiyu(KoseiJiyuType.その他.getコード());
+            FlexibleDate jukyuKaishiYMD = now.getJukyuKaishiYMD();
+            if (jukyuKaishiYMD != null) {
+                now.setYukoKaishiYMD(new FlexibleDate(jukyuKaishiYMD.getYearValue(), jukyuKaishiYMD.getMonthValue(), 1));
+            }
         }
         if (HanteiKubunType.非課税.code().equals(現判定区分)
                 && HanteiKubunType.負担割合判定.code().equals(前判定区分)) {
@@ -490,14 +616,26 @@ public class RiyoshaFutanWariaiHantei {
         }
         if (HanteiKubunType.負担割合判定.code().equals(現判定区分)
                 && HanteiKubunType.旧措置.code().equals(前判定区分)) {
-            now.setKoseiJiyu(KoseiJiyuType.本人所得更正.getコード());
+            now.setKoseiJiyu(KoseiJiyuType.その他.getコード());
             now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
         }
         if (HanteiKubunType.負担割合判定.code().equals(現判定区分)
                 && HanteiKubunType.非課税.code().equals(前判定区分)) {
-            now.setKoseiJiyu(KoseiJiyuType.その他.getコード());
+            now.setKoseiJiyu(KoseiJiyuType.本人所得更正.getコード());
             now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
         }
+    }
+
+    private void set負担割合判定マージソット(List<RiyoshaFutanWariaiMeisaiTempEntity> 利用者負担割合明細情報) {
+        Collections.sort(利用者負担割合明細情報, new Comparator<RiyoshaFutanWariaiMeisaiTempEntity>() {
+            @Override
+            public int compare(RiyoshaFutanWariaiMeisaiTempEntity o1, RiyoshaFutanWariaiMeisaiTempEntity o2) {
+                if (!o1.getHihokenshaNo().equals(o2.getHihokenshaNo())) {
+                    return o1.getHihokenshaNo().compareTo(o2.getHihokenshaNo());
+                }
+                return Integer.valueOf(o1.getEdaNo()).compareTo(o2.getEdaNo());
+            }
+        });
     }
 
     private void handle数額変更(RiyoshaFutanWariaiMeisaiTempEntity now, RiyoshaFutanWariaiMeisaiTempEntity before,
@@ -505,19 +643,21 @@ public class RiyoshaFutanWariaiHantei {
         if (now == null || before == null || 対象年度 == null) {
             return;
         }
-        if (!equalsDecimal(now.getHonninGoukeiShotokuGaku(), before.getHonninGoukeiShotokuGaku())) {
-            now.setKoseiJiyu(KoseiJiyuType.本人所得更正.getコード());
-            now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
-        }
-        if (!equalsDecimal(now.getNenkinShunyuGoukei(), before.getNenkinShunyuGoukei())
-                && (!equalsDecimal(now.getSonotanoGoukeiShotokuKingakuGoukei(),
-                        before.getSonotanoGoukeiShotokuKingakuGoukei()))) {
-            now.setKoseiJiyu(KoseiJiyuType.世帯員所得更正.getコード());
-            now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
-        }
         if (!equalsInteger(now.getSetaiIchigouHihokenshaSu(), before.getSetaiIchigouHihokenshaSu())) {
             now.setKoseiJiyu(KoseiJiyuType.世帯構成変更.getコード());
             now.setYukoKaishiYMD(get有効開始日２(対象年度, now.getAtenaIdobi()));
+            return;
+        }
+        if (!equalsDecimal(now.getHonninGoukeiShotokuGaku(), before.getHonninGoukeiShotokuGaku())) {
+            now.setKoseiJiyu(KoseiJiyuType.本人所得更正.getコード());
+            now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
+            return;
+        }
+        if (!equalsDecimal(now.getNenkinShunyuGoukei(), before.getNenkinShunyuGoukei())
+                || (!equalsDecimal(now.getSonotanoGoukeiShotokuKingakuGoukei(),
+                        before.getSonotanoGoukeiShotokuKingakuGoukei()))) {
+            now.setKoseiJiyu(KoseiJiyuType.世帯員所得更正.getコード());
+            now.setYukoKaishiYMD(get有効開始日１(対象年度, now.getNinteiYukoKaishiDate()));
         }
     }
 
@@ -575,7 +715,8 @@ public class RiyoshaFutanWariaiHantei {
         if (entity == null) {
             return RString.EMPTY;
         }
-        return nonullRStr(entity.getFutanWariaiKubun())
+        return nonullRStr(entity.getHihokenshaNo())
+                .concat(LINE).concat(nonullRStr(entity.getFutanWariaiKubun()))
                 .concat(LINE).concat(nonullRStr(entity.getHonninGoukeiShotokuGaku()))
                 .concat(LINE).concat(nonullRStr(entity.getSetaiIchigouHihokenshaSu()))
                 .concat(LINE).concat(nonullRStr(entity.getNenkinShunyuGoukei()))
@@ -587,6 +728,13 @@ public class RiyoshaFutanWariaiHantei {
             return RString.EMPTY;
         }
         return rstr;
+    }
+
+    private RString nonullRStr(HihokenshaNo no) {
+        if (no == null) {
+            return RString.EMPTY;
+        }
+        return no.value();
     }
 
     private RString nonullRStr(Decimal dec) {
@@ -626,43 +774,72 @@ public class RiyoshaFutanWariaiHantei {
      */
     public List<DbT3114RiyoshaFutanWariaiMeisaiEntity> riyoshaFutanWariaiMeisaiMerge(
             List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 入力明細リスト) {
-        if (入力明細リスト == null) {
+        if (入力明細リスト == null || 入力明細リスト.isEmpty()) {
             throw new NullPointerException();
         }
+        List<DbT3114RiyoshaFutanWariaiMeisaiEntity> results = new ArrayList<>();
         RString nowKubun;
         DbT3114RiyoshaFutanWariaiMeisaiEntity beforeEntity = null;
         RString beforeKubun = null;
-        FlexibleDate 有効開始日 = null;
+        FlexibleDate 有効開始日;
+        FlexibleDate 有効終了日;
         DbT3114RiyoshaFutanWariaiMeisaiEntity result;
         List<DbT3114RiyoshaFutanWariaiMeisaiEntity> resultList = new ArrayList<>();
-        boolean singleFlag = true;
         for (DbT3114RiyoshaFutanWariaiMeisaiEntity 入力明細 : 入力明細リスト) {
-            nowKubun = 入力明細.getFutanWariaiKubun();
+            DbT3114RiyoshaFutanWariaiMeisaiEntity nowEntity = 入力明細;
+            nowKubun = nowEntity.getFutanWariaiKubun();
             if (beforeEntity == null) {
                 beforeEntity = 入力明細;
                 beforeKubun = nowKubun;
-                有効開始日 = 入力明細.getYukoKaishiYMD();
+                results.add(beforeEntity);
                 continue;
             }
-            singleFlag = false;
             if (beforeKubun != null && beforeKubun.equals(nowKubun)) {
                 beforeEntity = 入力明細;
+                beforeKubun = nowKubun;
+                results.add(beforeEntity);
             } else if (beforeKubun != null && !beforeKubun.equals(nowKubun)) {
-                result = beforeEntity.clone();
+                int maxIndex = getMaxEdaNoIndex(results);
+                result = results.get(maxIndex);
+                有効開始日 = results.get(0).getYukoKaishiYMD();
+                有効終了日 = results.get(results.size() - 1).getYukoShuryoYMD();
                 result.setYukoKaishiYMD(有効開始日);
+                result.setYukoShuryoYMD(有効終了日);
                 resultList.add(result);
-                有効開始日 = 入力明細.getYukoKaishiYMD();
+                results = new ArrayList<>();
                 beforeEntity = 入力明細;
+                beforeKubun = nowKubun;
+                results.add(beforeEntity);
             }
         }
-        if (singleFlag) {
-            resultList.add(beforeEntity);
-        } else if (!singleFlag && beforeEntity != null) {
-            result = beforeEntity.clone();
-            result.setYukoKaishiYMD(有効開始日);
-            resultList.add(result);
-        }
+        int maxIndex = getMaxEdaNoIndex(results);
+        result = results.get(maxIndex);
+        有効開始日 = results.get(0).getYukoKaishiYMD();
+        有効終了日 = results.get(results.size() - 1).getYukoShuryoYMD();
+        result.setYukoKaishiYMD(有効開始日);
+        result.setYukoShuryoYMD(有効終了日);
+        resultList.add(result);
         return resultList;
+    }
+
+    private Integer getMaxEdaNoIndex(List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 入力明細リスト) {
+        List<Integer> edaNos = new ArrayList<>();
+        for (DbT3114RiyoshaFutanWariaiMeisaiEntity entity : 入力明細リスト) {
+            edaNos.add(entity.getEdaNo());
+        }
+        Collections.sort(edaNos, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2.compareTo(o1);
+            }
+        });
+        int maxEdaNo = edaNos.get(0);
+        for (int i = 0; i < 入力明細リスト.size(); i++) {
+            if (maxEdaNo == 入力明細リスト.get(i).getEdaNo()) {
+                return i;
+            }
+        }
+        return null;
     }
 
     /**
@@ -674,43 +851,51 @@ public class RiyoshaFutanWariaiHantei {
      */
     public List<RiyoshaFutanWariaiMeisai> riyoshaFutanWariaiMeisaiMergeGamen(
             List<RiyoshaFutanWariaiMeisai> 入力明細リスト) {
-        if (入力明細リスト == null) {
+        if (入力明細リスト == null || 入力明細リスト.isEmpty()) {
             throw new NullPointerException();
         }
+        List<DbT3114RiyoshaFutanWariaiMeisaiEntity> results = new ArrayList<>();
         RString nowKubun;
         DbT3114RiyoshaFutanWariaiMeisaiEntity beforeEntity = null;
         RString beforeKubun = null;
-        FlexibleDate 有効開始日 = null;
+        FlexibleDate 有効開始日;
+        FlexibleDate 有効終了日;
         RiyoshaFutanWariaiMeisai result;
         List<RiyoshaFutanWariaiMeisai> resultList = new ArrayList<>();
-        boolean singleFlag = true;
         for (RiyoshaFutanWariaiMeisai 入力明細 : 入力明細リスト) {
             DbT3114RiyoshaFutanWariaiMeisaiEntity nowEntity = 入力明細.toEntity();
             nowKubun = nowEntity.getFutanWariaiKubun();
             if (beforeEntity == null) {
-                beforeEntity = 入力明細.toEntity().clone();
+                beforeEntity = 入力明細.toEntity();
                 beforeKubun = nowKubun;
-                有効開始日 = nowEntity.getYukoKaishiYMD();
+                results.add(beforeEntity);
                 continue;
             }
-            singleFlag = false;
             if (beforeKubun != null && beforeKubun.equals(nowKubun)) {
-                beforeEntity = 入力明細.toEntity().clone();
+                beforeEntity = 入力明細.toEntity();
+                beforeKubun = nowKubun;
+                results.add(beforeEntity);
             } else if (beforeKubun != null && !beforeKubun.equals(nowKubun)) {
-                result = new RiyoshaFutanWariaiMeisai(beforeEntity.clone());
-                result.createBuilderForEdit().set有効開始日(有効開始日);
+                int maxIndex = getMaxEdaNoIndex(results);
+                result = new RiyoshaFutanWariaiMeisai(results.get(maxIndex));
+                有効開始日 = results.get(0).getYukoKaishiYMD();
+                有効終了日 = results.get(results.size() - 1).getYukoShuryoYMD();
+                result = result.createBuilderForEdit().set有効開始日(有効開始日).build();
+                result = result.createBuilderForEdit().set有効終了日(有効終了日).build();
                 resultList.add(result);
-                beforeEntity = 入力明細.toEntity().clone();
-                有効開始日 = beforeEntity.getYukoKaishiYMD();
+                results = new ArrayList<>();
+                beforeEntity = 入力明細.toEntity();
+                beforeKubun = nowKubun;
+                results.add(beforeEntity);
             }
         }
-        if (singleFlag && beforeEntity != null) {
-            resultList.add(new RiyoshaFutanWariaiMeisai(beforeEntity.clone()));
-        } else if (!singleFlag && beforeEntity != null) {
-            result = new RiyoshaFutanWariaiMeisai(beforeEntity.clone());
-            result.createBuilderForEdit().set有効開始日(有効開始日);
-            resultList.add(result);
-        }
+        int maxIndex = getMaxEdaNoIndex(results);
+        result = new RiyoshaFutanWariaiMeisai(results.get(maxIndex));
+        有効開始日 = results.get(0).getYukoKaishiYMD();
+        有効終了日 = results.get(results.size() - 1).getYukoShuryoYMD();
+        result = result.createBuilderForEdit().set有効開始日(有効開始日).build();
+        result = result.createBuilderForEdit().set有効終了日(有効終了日).build();
+        resultList.add(result);
         return resultList;
     }
 }

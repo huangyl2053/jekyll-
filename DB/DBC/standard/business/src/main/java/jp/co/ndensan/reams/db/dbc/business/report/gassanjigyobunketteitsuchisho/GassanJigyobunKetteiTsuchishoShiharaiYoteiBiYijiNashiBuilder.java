@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  *
  * （高額合算支給（不支給）決定通知書）支払予定日なし
  *
- * @reamsid_L DBC-4850-030 dongqianjing
+ * @reamsid_L DBC-4850-030 chenyadong
  */
 public class GassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiBuilder implements
         IGassanJigyobunKetteiTsuchishoShiharaiYoteiBiYijiNashiBuilder {

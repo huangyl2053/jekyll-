@@ -25,7 +25,7 @@ public enum KyufuGengaku1GoDivSpec implements IPredicate<KyufuGengaku1GoDiv> {
                 @Override
                 public boolean apply(KyufuGengaku1GoDiv div) {
                     if (!div.getTxtKonkaiKikanKaishiYMD().getValue().isEmpty() && !div.getTxtKonkaiKikanShuryoYMD().getValue().isEmpty()) {
-                        return div.getTxtKonkaiKikanKaishiYMD().getValue().isBefore(div.getTxtKonkaiKikanShuryoYMD().getValue());
+                        return div.getTxtKonkaiKikanKaishiYMD().getValue().isBeforeOrEquals(div.getTxtKonkaiKikanShuryoYMD().getValue());
                     } else {
                         return !div.getTxtKonkaiKikanKaishiYMD().getValue().isEmpty() || !div.getTxtKonkaiKikanShuryoYMD().getValue().isEmpty();
                     }
@@ -40,7 +40,8 @@ public enum KyufuGengaku1GoDivSpec implements IPredicate<KyufuGengaku1GoDiv> {
                  */
                 @Override
                 public boolean apply(KyufuGengaku1GoDiv div) {
-                    return div.getTxtGengakuTekiyoKikanShuryoYMD().getValue() != null;
+                    return div.getTxtGengakuTekiyoKikanShuryoYMD().getValue() != null
+                    && !div.getTxtGengakuTekiyoKikanShuryoYMD().getValue().isEmpty();
                 }
             },
     申請理由未選択 {
@@ -55,6 +56,30 @@ public enum KyufuGengaku1GoDivSpec implements IPredicate<KyufuGengaku1GoDiv> {
                     return !div.getDdlIMenjoShinseiRiyu().getSelectedValue().isEmpty();
                 }
             },
+    状況未選択 {
+                /**
+                 * 申請理由未選択の必須入力です。
+                 *
+                 * @param div KyufuGengaku1GoDiv
+                 * @return true:出力対象が選択、false:画面に出力対象が選択しない、エラーとする
+                 */
+                @Override
+                public boolean apply(KyufuGengaku1GoDiv div) {
+                    return !div.getDdlMenjoShinseiJokyo().getSelectedValue().isEmpty();
+                }
+            },
+    申請審査結果未選択 {
+                /**
+                 * 申請理由未選択の必須入力です。
+                 *
+                 * @param div KyufuGengaku1GoDiv
+                 * @return true:出力対象が選択、false:画面に出力対象が選択しない、エラーとする
+                 */
+                @Override
+                public boolean apply(KyufuGengaku1GoDiv div) {
+                    return !div.getDdlMenjoShinseiShinsaKekka().getSelectedValue().isEmpty();
+                }
+            },
     減額適用期間2チェック {
                 /**
                  * 減額適用期間チェックです。
@@ -65,7 +90,7 @@ public enum KyufuGengaku1GoDivSpec implements IPredicate<KyufuGengaku1GoDiv> {
                 @Override
                 public boolean apply(KyufuGengaku1GoDiv div) {
                     if (!div.getTxtGengakuTekiyoKikanKaishiYMD().getValue().isEmpty() && !div.getTxtGengakuTekiyoKikanShuryoYMD().getValue().isEmpty()) {
-                        return div.getTxtGengakuTekiyoKikanKaishiYMD().getValue().isBefore(div.getTxtGengakuTekiyoKikanShuryoYMD().getValue());
+                        return div.getTxtGengakuTekiyoKikanKaishiYMD().getValue().isBeforeOrEquals(div.getTxtGengakuTekiyoKikanShuryoYMD().getValue());
                     } else {
                         return !div.getTxtGengakuTekiyoKikanKaishiYMD().getValue().isEmpty() || !div.getTxtGengakuTekiyoKikanShuryoYMD().getValue().isEmpty();
                     }

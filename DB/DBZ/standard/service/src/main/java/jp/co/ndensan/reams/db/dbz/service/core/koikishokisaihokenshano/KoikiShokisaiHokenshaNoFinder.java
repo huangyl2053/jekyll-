@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.koikishokisaihokenshano;
 
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.GappeiCityJyoho;
@@ -69,6 +70,7 @@ public class KoikiShokisaiHokenshaNoFinder {
                     return new ShoKisaiHokenshaNo(証記載保険者番号);
                 }
             }
+            Collections.reverse(合併市町村情報List);
             for (GappeiCityJyoho 合併市町村情報 : 合併市町村情報List) {
                 if (市町村コード.equals(合併市町村情報.get旧市町村コード()) && 基準年月.isBefore(合併市町村情報
                         .get国保連データ連携開始年月日().getYearMonth())) {
@@ -76,6 +78,7 @@ public class KoikiShokisaiHokenshaNoFinder {
                     return new ShoKisaiHokenshaNo(証記載保険者番号);
                 }
             }
+            Collections.reverse(合併市町村情報List);
         }
         if (null != 現市町村情報List && !現市町村情報List.isEmpty()) {
             for (KoikiZenShichosonJoho 現市町村情報 : 現市町村情報List) {

@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.KoseiTaishoParam
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.KoseiZengoChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.KoseiZengoFuka;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.NendobunFukaList;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJohoBuilder;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
@@ -69,6 +71,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbx.service.core.choshuhoho.ChoshuHohoKoshin;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
@@ -170,12 +173,12 @@ public class FukaKeisan {
         for (FukaShikakuPair pair : 更正対象) {
             更正計算パラメータ.set年度分賦課リスト_更正前(pair.get年度分賦課リスト());
             更正計算パラメータ.set資格の情報(pair.get資格の情報());
-            KoseiShorikoaResult 更正処理情報 = do更正計算(更正計算パラメータ);
 
             KoseiZengoFuka 更正前後賦課 = new KoseiZengoFuka();
             更正前後賦課.set賦課年度(param.get賦課年度());
             更正前後賦課.set通知書番号(param.get通知書番号());
             更正前後賦課.set更正前(pair.get年度分賦課リスト());
+            KoseiShorikoaResult 更正処理情報 = do更正計算(更正計算パラメータ);
             更正前後賦課.set更正後(更正処理情報.get年度分賦課リスト_更正後());
             更正前後賦課リスト.add(更正前後賦課);
 
@@ -186,10 +189,20 @@ public class FukaKeisan {
         更正前後徴収方法.set賦課年度(param.get賦課年度());
         更正前後徴収方法.set被保険者番号(null);
         更正前後徴収方法.set更正前(param.get徴収方法の情報());
-
-        for (ChoshuHoho entity : 徴収方法の情報リスト) {
-            if (EntityDataState.Added.equals(entity.toEntity().getState())) {
-                更正前後徴収方法.set更正後(entity);
+        for (ChoshuHoho choshuHoho : 徴収方法の情報リスト) {
+            int 履歴番号 = choshuHoho.get履歴番号();
+            if (更正前後徴収方法.get更正前().get履歴番号() == 履歴番号) {
+                履歴番号 = 履歴番号 + INT_1;
+            }
+            if (choshuHoho.hasChanged()) {
+                DbT2001ChoshuHohoEntity choshuHohoEntity = choshuHoho.toEntity();
+                choshuHohoEntity.setRirekiNo(履歴番号);
+                choshuHohoEntity.setState(EntityDataState.Added);
+                choshuHoho = new ChoshuHoho(choshuHohoEntity);
+            }
+            if (EntityDataState.Added.equals(choshuHoho.toEntity().getState())) {
+                更正前後徴収方法.setHasChanged(true);
+                更正前後徴収方法.set更正後(choshuHoho);
                 break;
             }
         }
@@ -252,6 +265,25 @@ public class FukaKeisan {
             throw new SystemException(エラーメッセージ.toString());
         }
         return 賦課の情報_資格の情報ペアのリスト;
+    }
+
+    private NendobunFukaList 年度分賦課リストローン(NendobunFukaList 年度分賦課リスト) {
+        if (年度分賦課リスト == null) {
+            return null;
+        }
+        NendobunFukaList 年度分賦課リストローン = new NendobunFukaList();
+        年度分賦課リストローン.set賦課年度(年度分賦課リスト.get賦課年度());
+        年度分賦課リストローン.set通知書番号(年度分賦課リスト.get通知書番号());
+        年度分賦課リストローン.set現年度(賦課の情報クローン(年度分賦課リスト.get現年度()));
+        年度分賦課リストローン.set過年度1(賦課の情報クローン(年度分賦課リスト.get過年度1()));
+        年度分賦課リストローン.set過年度2(賦課の情報クローン(年度分賦課リスト.get過年度2()));
+        年度分賦課リストローン.set過年度3(賦課の情報クローン(年度分賦課リスト.get過年度3()));
+        年度分賦課リストローン.set過年度4(賦課の情報クローン(年度分賦課リスト.get過年度4()));
+        年度分賦課リストローン.set過年度5(賦課の情報クローン(年度分賦課リスト.get過年度5()));
+        年度分賦課リストローン.set賦課期日(年度分賦課リスト.get賦課期日());
+        年度分賦課リストローン.setHas過年度賦課(年度分賦課リスト.isHas過年度賦課());
+        年度分賦課リストローン.set最新賦課の情報(賦課の情報クローン(年度分賦課リスト.get最新賦課の情報()));
+        return 年度分賦課リストローン;
     }
 
     private List<HihokenshaDaicho> get有効な資格の情報(List<HihokenshaDaicho> 資格の情報リスト, FlexibleYear 賦課年度) {
@@ -636,7 +668,7 @@ public class FukaKeisan {
         FukaJohoBuilder builder = 賦課の情報.createBuilderForEdit();
         builder.set調定日時(param.get調定日時())
                 .set異動基準日時(param.get調定日時())
-                .set徴収方法履歴番号(調定計算.get徴収方法の情報_更正後().get履歴番号());
+                .set徴収方法履歴番号(調定計算.get徴収方法の情報_更正後().get履歴番号() + INT_1);
         if (!is普徴期別金額あり(賦課の情報)) {
             builder.set口座区分(KozaKubun.現金納付.getコード());
         } else {
@@ -661,7 +693,7 @@ public class FukaKeisan {
 
     private KoseiShorikoaResult create既存の賦課処理コア(KoseiShorikoaParameter param, FukaKokyoParameter 賦課根拠パラメータ,
             CalculateChoteiParameter 調定計算パラメータ, Decimal 年額保険料) {
-        NendobunFukaList 調定計算用年度分賦課リスト = param.get年度分賦課リスト_更正前();
+        NendobunFukaList 調定計算用年度分賦課リスト = 年度分賦課リストローン(param.get年度分賦課リスト_更正前());
         if (param.get年度分賦課リスト_更正前().get現年度() != null) {
             賦課根拠パラメータ.set賦課の情報_設定前(param.get年度分賦課リスト_更正前().get現年度());
             FukaJoho 賦課の情報 = reflect賦課根拠(賦課根拠パラメータ);
@@ -700,7 +732,7 @@ public class FukaKeisan {
         }
 
         NendobunFukaList 年度分賦課リスト_更正後 = 調定計算用年度分賦課リスト;
-        ChoshuHoho 出力徴収方法の情報 = param.get徴収方法の情報_更正前();
+        ChoshuHoho 出力徴収方法の情報 = new ChoshuHoho(param.get徴収方法の情報_更正前().toEntity());
         HihokenshaDaicho 資格の情報 = param.get資格の情報();
         if ((調定計算用年度分賦課リスト.get現年度() != null
                 && !年額保険料.equals(調定計算用年度分賦課リスト.get現年度().get減免前介護保険料_年額()))
@@ -750,12 +782,11 @@ public class FukaKeisan {
         if (賦課の情報_更正前 == null) {
             builder.set履歴番号(0);
         } else if (is変化有り(賦課の情報_更正前, 賦課の情報_更正後)) {
-            builder.set履歴番号(賦課の情報_更正前.get履歴番号() + INT_1);
+            builder = get賦課の情報履歴番号採番(builder.build()).createBuilderForEdit();
         }
-
         builder.set調定日時(param.get調定日時());
         builder.set異動基準日時(param.get調定日時());
-        builder.set徴収方法履歴番号(出力徴収方法の情報.get履歴番号());
+        builder.set徴収方法履歴番号(出力徴収方法の情報.get履歴番号() + INT_1);
         if (!is普徴期別金額あり(賦課の情報_更正後)) {
             builder.set口座区分(KozaKubun.現金納付.getコード());
         } else {
@@ -1004,10 +1035,10 @@ public class FukaKeisan {
      * @return FukaJoho
      */
     public FukaJoho reflect賦課根拠(FukaKokyoParameter param) {
-        FukaJoho 賦課の情報 = param.get賦課の情報_設定前();
-        if (賦課の情報 == null) {
+        if (param.get賦課の情報_設定前() == null) {
             return null;
         }
+        FukaJoho 賦課の情報 = 賦課の情報クローン(param.get賦課の情報_設定前());
         FukaJohoBuilder builder = 賦課の情報.createBuilderForEdit();
         FlexibleDate 本年度開始日 = new FlexibleDate(NendoUtil.toNendoStartDate(賦課の情報.get賦課年度()).toDateString());
         FlexibleDate 本年度終了日 = new FlexibleDate(賦課の情報.get賦課年度().plusYear(INT_1).getYearValue(),
@@ -1031,10 +1062,10 @@ public class FukaKeisan {
      * @return FukaJoho
      */
     public FukaJoho reflect賦課根拠(FukaKokyoBatchParameter param) {
-        FukaJoho 賦課の情報 = param.get賦課の情報_設定前();
-        if (賦課の情報 == null) {
+        if (param.get賦課の情報_設定前() == null) {
             return null;
         }
+        FukaJoho 賦課の情報 = 賦課の情報クローン(param.get賦課の情報_設定前());
         FukaJohoBuilder builder = 賦課の情報.createBuilderForEdit();
         FlexibleDate 本年度開始日 = new FlexibleDate(NendoUtil.toNendoStartDate(賦課の情報.get賦課年度()).toDateString());
         FlexibleDate 本年度終了日 = new FlexibleDate(賦課の情報.get賦課年度().plusYear(INT_1).getYearValue(),
@@ -1049,6 +1080,27 @@ public class FukaKeisan {
         set新しい賦課の情報_バッチ(builder, param);
         賦課の情報 = builder.build();
         return 賦課の情報;
+    }
+
+    private FukaJoho 賦課の情報クローン(FukaJoho 賦課の情報) {
+        if (賦課の情報 == null) {
+            return null;
+        }
+        FukaJohoRelateEntity 賦課RelateEntity = new FukaJohoRelateEntity();
+        賦課RelateEntity.set介護賦課Entity(賦課の情報.toEntity());
+        List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
+        for (Kibetsu kibetsu : 賦課の情報.getKibetsuList()) {
+            KibetsuEntity entity = new KibetsuEntity();
+            List<UrT0705ChoteiKyotsuEntity> 調定共通Entity = new ArrayList<>();
+            for (ChoteiKyotsu choteiKyotsu : kibetsu.getChoteiKyotsuList()) {
+                調定共通Entity.add(choteiKyotsu.toEntity());
+            }
+            entity.set介護期別Entity(kibetsu.toEntity());
+            entity.set調定共通Entity(調定共通Entity);
+            介護期別RelateEntity.add(entity);
+        }
+        賦課RelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
+        return new FukaJoho(賦課RelateEntity);
     }
 
     private void set生活保護(FukaJohoBuilder builder, List<SeikatsuHogoJukyusha> 生保情報のリスト,
@@ -1650,6 +1702,74 @@ public class FukaKeisan {
             return 年度分賦課リスト.get過年度5();
         }
         return null;
+    }
+
+    private FukaJoho get賦課の情報履歴番号採番(FukaJoho 賦課の情報) {
+        FukaJohoBuilder fukaJohoBuilder = new FukaJoho(
+                賦課の情報.get調定年度(),
+                賦課の情報.get賦課年度(),
+                賦課の情報.get通知書番号(),
+                賦課の情報.get履歴番号() + INT_1).createBuilderForEdit().
+                set被保険者番号(賦課の情報.get被保険者番号()).
+                set識別コード(賦課の情報.get識別コード()).
+                set世帯コード(賦課の情報.get世帯コード()).
+                set世帯員数(賦課の情報.get世帯員数()).
+                set資格取得日(賦課の情報.get資格取得日()).
+                set資格取得事由(賦課の情報.get資格取得事由()).
+                set資格喪失日(賦課の情報.get資格喪失日()).
+                set資格喪失事由(賦課の情報.get資格喪失事由()).
+                set生活保護扶助種類(賦課の情報.get生活保護扶助種類()).
+                set生保開始日(賦課の情報.get生保開始日()).
+                set生保廃止日(賦課の情報.get生保廃止日()).
+                set老年開始日(賦課の情報.get老年開始日()).
+                set老年廃止日(賦課の情報.get老年廃止日()).
+                set賦課期日(賦課の情報.get賦課期日()).
+                set課税区分(賦課の情報.get課税区分()).
+                set世帯課税区分(賦課の情報.get世帯課税区分()).
+                set合計所得金額(賦課の情報.get合計所得金額()).
+                set公的年金収入額(賦課の情報.get公的年金収入額()).
+                set保険料段階(賦課の情報.get保険料段階()).
+                set保険料算定段階1(賦課の情報.get保険料算定段階1()).
+                set算定年額保険料1(賦課の情報.get算定年額保険料1()).
+                set月割開始年月1(賦課の情報.get月割開始年月1()).
+                set月割終了年月1(賦課の情報.get月割終了年月1()).
+                set保険料算定段階2(賦課の情報.get保険料算定段階2()).
+                set算定年額保険料2(賦課の情報.get算定年額保険料2()).
+                set月割開始年月2(賦課の情報.get月割開始年月2()).
+                set月割終了年月2(賦課の情報.get月割終了年月2()).
+                set調定日時(賦課の情報.get調定日時()).
+                set調定事由1(賦課の情報.get調定事由1()).
+                set調定事由2(賦課の情報.get調定事由2()).
+                set調定事由3(賦課の情報.get調定事由3()).
+                set調定事由4(賦課の情報.get調定事由4()).
+                set更正月(賦課の情報.get更正月()).
+                set減免前介護保険料_年額(賦課の情報.get減免前介護保険料_年額()).
+                set減免額(賦課の情報.get減免額()).
+                set確定介護保険料_年額(賦課の情報.get確定介護保険料_年額()).
+                set保険料段階_仮算定時(賦課の情報.get保険料段階_仮算定時()).
+                set徴収方法履歴番号(賦課の情報.get徴収方法履歴番号()).
+                set異動基準日時(賦課の情報.get異動基準日時()).
+                set口座区分(賦課の情報.get口座区分()).
+                set境界層区分(賦課の情報.get境界層区分()).
+                set職権区分(賦課の情報.get職権区分()).
+                set賦課市町村コード(賦課の情報.get賦課市町村コード()).
+                set特徴歳出還付額(賦課の情報.get特徴歳出還付額()).
+                set普徴歳出還付額(賦課の情報.get普徴歳出還付額());
+        List<Kibetsu> kibetsuList = 賦課の情報.getKibetsuList();
+        for (Kibetsu kibetsu : kibetsuList) {
+            ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(kibetsu.get調定ID().longValue());
+            Kibetsu 介護期別 = new Kibetsu(
+                    kibetsu.get調定年度(),
+                    kibetsu.get賦課年度(),
+                    kibetsu.get通知書番号(),
+                    kibetsu.get履歴番号() + INT_1,
+                    kibetsu.get徴収方法(),
+                    kibetsu.get期()).createBuilderForEdit().
+                    set調定ID(kibetsu.get調定ID()).
+                    setKibetsu(kibetsu.getChoteiKyotsu(identifier)).build();
+            fukaJohoBuilder.setKibetsu(介護期別);
+        }
+        return fukaJohoBuilder.build();
     }
 
     private SeigyoJoho get月別保険料制御情報(HokenryoDankaiList 保険料段階リスト) {

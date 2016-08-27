@@ -31,7 +31,7 @@ public class TsuchishoJoho38B38G {
      */
     public ResponseData<TsuchishoJoho38B38GDiv> onLoad(TsuchishoJoho38B38GDiv div) {
         ChohyoBunruiKanri code = ChohyoBunruiKanriManager.createInstance().get帳票分類管理(SubGyomuCode.DBC介護給付,
-                new ReportId(new RString("DBC200053_GassanKetteiTsuchishoShiharaiYoteiBiYijiNashi")));
+                new ReportId(new RString("DBC200039_GassanShikyuFushikyuKetteiTsuchishoTorikomiIchiran")));
         KokuhorenDataTorikomiViewStateClass parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
                 KokuhorenDataTorikomiViewStateClass.class);
         div.getCcdKokurenJohoTorikomi().initialize(SubGyomuCode.DBC介護給付, code.get帳票分類ID(), parmater);

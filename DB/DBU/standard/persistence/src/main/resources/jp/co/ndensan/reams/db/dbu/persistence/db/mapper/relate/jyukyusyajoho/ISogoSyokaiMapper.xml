@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBU-4100-030 xuyannan -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jyukyusyajoho.ISogoSyokaiMapper">
+    <resultMap id="resultMap_getJukyuNinteiJoho" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.jyukyusyajoho.JukyuNinteiJohoRelateEntity" autoMapping="true">
+    <result property="要介護認定状態区分コード" column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="認定有効期間開始年月日" column="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="受給申請年月日" column="jukyuShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="受給申請事由" column="jukyuShinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="旧措置者フラグ" column="kyuSochishaFlag" />
+    <result property="認定有効期間終了年月日" column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="認定年月日" column="ninteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="データ区分" column="dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="認定申請区分_申請時コード" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="認定申請区分_法令コード" column="ninteiShinseiHoreiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    <select resultOrdered="true" id="getJukyuNinteiJoho" resultMap="resultMap_getJukyuNinteiJoho"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jyukyusyajoho.SogoSyokaiMybatisParameter"
+                fetchSize="500">
+        SELECT
+            dbT4001."yokaigoJotaiKubunCode"
+            ,dbT4001."ninteiYukoKikanKaishiYMD"
+            ,dbT4001."jukyuShinseiYMD"
+            ,dbT4001."jukyuShinseiJiyu"
+            ,dbT4001."kyuSochishaFlag"
+            ,dbT4001."ninteiYukoKikanShuryoYMD"
+            ,dbT4001."ninteiYMD"
+            ,dbT4001."dataKubun"
+            ,dbT4101."ninteiShinseiShinseijiKubunCode"
+            ,dbT4101."ninteiShinseiHoreiKubunCode"
+        FROM
+            rgdb."DbT4001JukyushaDaicho" AS dbT4001
+        LEFT JOIN
+            rgdb."DbT4101NinteiShinseiJoho" AS dbT4101
+        ON dbT4101."shinseishoKanriNo" = dbT4001."shinseishoKanriNo"
+        WHERE
+           dbT4001."hihokenshaNo" = #{被保険者番号}
+           AND dbT4001."shinseiJokyoKubun" = #{申請状況区分}
+           AND dbT4001."logicalDeletedFlag" =  false
+           AND dbT4101."shinseishoKanriNo" = dbT4001."shinseishoKanriNo"
+        ORDER BY
+            dbT4001."rirekiNo" DESC
+        LIMIT 1
+    </select>
+    <resultMap id="resultMap_getJukyuShinseiJoho" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.jyukyusyajoho.JukyuShinseiJohoRelateEntity" autoMapping="true">
+    <result property="受給申請年月日" column="jukyuShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="受給申請事由" column="jukyuShinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="認定申請区分_申請時コード" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    <select resultOrdered="true" id="getJukyuShinseiJoho" resultMap="resultMap_getJukyuShinseiJoho"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jyukyusyajoho.SogoSyokaiMybatisParameter"
+            fetchSize="500">
+        SELECT
+            dbT4001."jukyuShinseiYMD"
+            ,dbT4001."jukyuShinseiJiyu"
+            ,dbT4101."ninteiShinseiShinseijiKubunCode"
+        FROM
+            rgdb."DbT4001JukyushaDaicho" AS dbT4001
+        LEFT JOIN
+            rgdb."DbT4101NinteiShinseiJoho" AS dbT4101
+        ON dbT4101."shinseishoKanriNo" = dbT4001."shinseishoKanriNo"
+        WHERE
+           dbT4001."hihokenshaNo" = #{被保険者番号}
+           AND dbT4001."shinseiJokyoKubun" = #{申請状況区分}
+           AND dbT4001."logicalDeletedFlag" =  false
+           AND dbT4101."shinseishoKanriNo" = dbT4001."shinseishoKanriNo"
+        ORDER BY
+            dbT4001."rirekiNo" DESC
+        LIMIT 1
+    </select>  
+</mapper>

@@ -32,4 +32,5 @@ public class ChohyoShuchiryokuyoShiseiJyohoEntity {
     private RString 前回要介護状態区分コード;
     private FlexibleDate 前回認定有効期間開始;
     private FlexibleDate 前回認定有効期間終了;
+    private RString 出力CSV状況申請;
 }

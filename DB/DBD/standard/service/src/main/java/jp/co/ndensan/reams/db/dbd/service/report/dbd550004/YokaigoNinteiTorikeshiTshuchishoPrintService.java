@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.business.report.dbd550004.YokaigoNinteiTorikes
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd550004.YokaigoNinteiTorikeshiTshuchishoSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
@@ -26,6 +27,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SetainushiRiyoK
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibun;
@@ -51,12 +53,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 要介護認定取消通知書
  *
- * @reamsid_L DBD-1440-010 liuyl
+ * @reamsid_L DBD-1440-020 liuyl
  */
 public class YokaigoNinteiTorikeshiTshuchishoPrintService {
 
     private static final int NO_3 = 3;
-    private static final int NO_4 = 4;
     private static final int NO_5 = 5;
     private static final int NO_6 = 6;
 
@@ -67,9 +68,12 @@ public class YokaigoNinteiTorikeshiTshuchishoPrintService {
      * @param date RDate
      * @param bunshoNo RString
      * @param hihokenshaNo RString
+     * @param hihokenshaName RString
      * @param riyu RString
+     * @param teishutsuKigenYMD RString
      */
-    public void print(ReportManager reportManager, RDate date, RString bunshoNo, RString hihokenshaNo, RString riyu) {
+    public void print(ReportManager reportManager, RDate date, RString bunshoNo, RString hihokenshaNo, RString hihokenshaName, RString riyu,
+            RString teishutsuKigenYMD) {
         YokaigoNinteiTorikeshiTshuchishoProperty property = new YokaigoNinteiTorikeshiTshuchishoProperty();
         try (ReportAssembler<YokaigoNinteiTorikeshiTshuchishoSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<YokaigoNinteiTorikeshiTshuchishoSource> reportSourceWriter = new ReportSourceWriter(assembler);
@@ -79,7 +83,7 @@ public class YokaigoNinteiTorikeshiTshuchishoPrintService {
             List<RString> 通知書定型文リスト = get通知文情報();
             ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(get帳票制御(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD550004.getReportId()));
             YokaigoNinteiTorikeshiTshuchishoReport report = new YokaigoNinteiTorikeshiTshuchishoReport(宛先情報, association,
-                    帳票制御共通, 通知書定型文リスト, ninshoshaSource, bunshoNo, hihokenshaNo, riyu);
+                    帳票制御共通, 通知書定型文リスト, ninshoshaSource, bunshoNo, hihokenshaNo, hihokenshaName, riyu, teishutsuKigenYMD);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -117,7 +121,7 @@ public class YokaigoNinteiTorikeshiTshuchishoPrintService {
 
     private NinshoshaSource get認証者情報(RDate date, ReportSourceWriter<YokaigoNinteiTorikeshiTshuchishoSource> writer) {
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD550004.getReportId(),
-                new FlexibleDate(date.toDateString()), writer);
+                new FlexibleDate(date.toDateString()), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, writer);
         return ninshoshaSource;
     }
 

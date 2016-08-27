@@ -7,17 +7,17 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt13011;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt13011.GeneralPurposeListOutputProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputEucCsvEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputNotContainNoEucCsvEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.Datakubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseishaKankeiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
@@ -40,14 +40,19 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.ur.urz.business.config.jushoinput.IJushoNyuryokuConfig;
+import jp.co.ndensan.reams.ur.urz.business.config.jushoinput.JushoNyuryokuConfigFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.definition.core.config.jushoinput.ConfigKeysCodeName;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.EucFileOutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -56,18 +61,23 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -87,6 +97,9 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private static final RString 住所地特例フラグ_TRUE = new RString("0");
     private static final RString 有効 = new RString("有効");
     private static final RString 無効 = new RString("無効");
+    private static final RString 有効無効区分_有効_コード = new RString("1");
+    private static final RString 有効無効区分_無効_コード = new RString("2");
+
     private static final RString 資格取得前申請区分_資格取得前申請 = new RString("資格取得前申請");
     private static final RString 指定医区分_指定医 = new RString("指定医");
     private static final RString 入所施設種類_11 = new RString("11");
@@ -116,7 +129,6 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private static final RString 英数字ファイル名 = new RString("HanyoList_ShisetuNyutaisyo.csv");
     private static final RString 出力条件表_保険者 = new RString("保険者：");
     private static final RString 出力条件表_基準日 = new RString("基準日：");
-    private static final RString 出力条件表_取得日 = new RString("取得日：～　");
     private static final RString 出力条件表_対象データ_直近のみ = new RString("対象データ：直近のみ");
     private static final RString 出力条件表_喪失区分 = new RString("喪失区分：");
     private static final RString 出力条件表_年齢 = new RString("年齢：");
@@ -127,12 +139,9 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private static final RString 出力条件表_右丸括弧 = new RString(")");
     private static final RString 出力条件表_生年月日 = new RString("生年月日：");
     private static final RString 出力条件表_HALF_SPACE = RString.HALF_SPACE;
-
-    private static final RString 出力条件表_住所 = new RString("住所： ");
     private static final RString 出力条件表_行政区 = new RString("行政区： ");
-    private static final RString 出力条件表_地区１ = new RString("地区１： ");
-    private static final RString 出力条件表_地区２ = new RString("地区２： ");
-    private static final RString 出力条件表_地区３ = new RString("地区３： ");
+    private static final RString 出力条件表_町域 = new RString("町域：");
+    private static final RString 出力条件表_抽出対象者 = new RString("【抽出対象者】");
 
     private static final RString TRUE = new RString("true");
     private static final RString FALSE = new RString("false");
@@ -141,6 +150,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private static final int INDEX_0 = 0;
     private static final int INDEX_2 = 2;
 
+    private static final RString みなし要介護区分_通常の認定_コード = new RString("1");
     private static final RString みなし = new RString("みなし");
 
     private static final RString 旧措置者 = new RString("旧措置者");
@@ -167,15 +177,13 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
 
     private GeneralPurposeListOutputProcessParameter processParamter;
-    private EucCsvWriter<GeneralPurposeListOutputEucCsvEntity> eucCsvWriter;
-    private EucCsvWriter<GeneralPurposeListOutputNotContainNoEucCsvEntity> eucNotContainNoCsvWriter;
+    private CsvWriter<GeneralPurposeListOutputEucCsvEntity> eucCsvWriter;
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.generalpurposelistoutput."
             + "IGeneralPurposeListOutputMapper.getGeneralPurposeListOutputInfo");
 
     private Association 地方公共団体情報;
-    private RDateTime sysDateTime;
     private HokenshaList 保険者リスト;
     private FileSpoolManager manager;
     private RString eucFilePath;
@@ -191,14 +199,12 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
 
     @Override
     protected void beforeExecute() {
-        // 地方公共団体情報 = AssociationFinderFactory.createInstance().getAssociation();
-        //sysDateTime = RDateTime.now();
-        // 保険者リスト = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
-        //personalDataList = new ArrayList<>();
-
 //        IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
-//                new ReportId(processParamter.get帳票ID()), processParamter.getReamsLoginID(), processParamter.get改頁出力順ID());
+//                new ReportId("帳票ID"), processParamter.get出力順());
+//        outputOrder.getFormated改頁項目();
+//
 //        RString 出力順 = MyBatisOrderByClauseCreator.create(ShiharaiHohoHenkoHaakuIchiranOrderKey.class, outputOrder);
+
     }
 
     @Override
@@ -229,10 +235,12 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
 
     @Override
     protected void afterExecute() {
-        eucCsvWriter.close();
         eucFileOutputJohoFactory();
-//        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-//        manager.spool(eucFilePath, log);
+        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+
+        IBatchWriter batchWriter = (IBatchWriter) eucCsvWriter;
+        batchWriter.close();
+        manager.spool(eucFilePath, log);
     }
 
     private PersonalData toPersonalData(GeneralPurposeListOutputEntity entity) {
@@ -245,23 +253,16 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_ShisetuNyutaisyo.csv"));
-        if (processParamter.is連番付加()) {
-            eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
-                    setDelimiter(EUC_WRITER_DELIMITER).
-                    setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.UTF_8withBOM).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(processParamter.is項目名付加()).
-                    build();
-        } else {
-            eucNotContainNoCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
-                    setDelimiter(EUC_WRITER_DELIMITER).
-                    setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.UTF_8withBOM).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(processParamter.is項目名付加()).
-                    build();
-        }
+
+        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
+                .alwaysWriteHeader(GeneralPurposeListOutputEucCsvEntity.class)
+                .setEncode(Encode.UTF_8withBOM)
+                .setDelimiter(EUC_WRITER_DELIMITER)
+                .setEnclosure(EUC_WRITER_ENCLOSURE)
+                .setNewLine(NewLine.CRLF)
+                .hasHeader(processParamter.is項目名付加())
+                .build();
+
     }
 
     private void eucFileOutputJohoFactory() {
@@ -366,10 +367,8 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
             eucCsvEntity.set前住所番地(new RString(kojin.get転入前().get番地().toString()));
             eucCsvEntity.set前住所方書(kojin.get転入前().get方書().getColumnValue());
 
-            eucCsvEntity.set市町村コード(new RString("TODO"));
-            eucCsvEntity.set市町村名(地方公共団体情報.get地方公共団体コード().getColumnValue());
-            eucCsvEntity.set保険者コード(new RString("TODO"));
-            eucCsvEntity.set保険者名(new RString("TODO"));
+            eucCsvEntity.set保険者コード(地方公共団体情報.get地方公共団体コード().getColumnValue());
+            eucCsvEntity.set保険者名(地方公共団体情報.get市町村名());
             eucCsvEntity.set空白(RString.EMPTY);
         }
     }
@@ -391,16 +390,23 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
             eucCsvEntity.set送付先方書(atesaki.get宛先住所().get方書().getColumnValue());
             eucCsvEntity.set送付先行政区コード(atesaki.get宛先行政区().getコード().getColumnValue());
             eucCsvEntity.set送付先行政区名(atesaki.get宛先行政区().get名称());
-            eucCsvEntity.set被保険者番号(new RString("TODO"));
         }
     }
 
     private void set被保険者台帳管理について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity) {
         //被保険者台帳管理
+        if (entity.get被保険者台帳管理_市町村コード() != null && !entity.get被保険者台帳管理_市町村コード().isEmpty()) {
+            eucCsvEntity.set市町村名(edit市町村(new LasdecCode(entity.get被保険者台帳管理_市町村コード())));
+        }
+
+        eucCsvEntity.set市町村コード(entity.get被保険者台帳管理_市町村コード());
         eucCsvEntity.set被保険者番号(entity.get被保険者台帳管理_被保険者番号());
-        eucCsvEntity.set資格取得事由(getコードマスタ(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(),
-                new Code(entity.get被保険者台帳管理_資格取得事由コード())));
+        if (entity.get被保険者台帳管理_資格取得事由コード() != null && !entity.get被保険者台帳管理_資格取得事由コード().isEmpty()) {
+            eucCsvEntity.set資格取得事由(getコードマスタ(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(),
+                    new Code(entity.get被保険者台帳管理_資格取得事由コード())));
+        }
+
         eucCsvEntity.set資格取得日(edit年月日_yyyymmdd(entity.get被保険者台帳管理_資格取得年月日()));
         eucCsvEntity.set資格取得届出日(edit年月日_yyyymmdd(entity.get被保険者台帳管理_資格取得届出年月日()));
         eucCsvEntity.set喪失事由(entity.get被保険者台帳管理_資格喪失事由コード());
@@ -421,8 +427,11 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private void set医療保険加入状況について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity) {
         //医療保険加入状況
-        eucCsvEntity.set医療保険種別(getコードマスタ(DBACodeShubetsu.医療保険種類.getコード(),
-                new Code(entity.get医療保険加入状況_医療保険種別コード())));
+        if (entity.get医療保険加入状況_医療保険種別コード() != null && !entity.get医療保険加入状況_医療保険種別コード().isEmpty()) {
+            eucCsvEntity.set医療保険種別(getコードマスタ(DBACodeShubetsu.医療保険種類.getコード(),
+                    new Code(entity.get医療保険加入状況_医療保険種別コード())));
+        }
+
         eucCsvEntity.set医療保険番号(entity.get医療保険加入状況_医療保険番号());
         eucCsvEntity.set医療保険者名(entity.get医療保険加入状況_医療保険者名称());
         eucCsvEntity.set医療保険記号番号(entity.get医療保険加入状況_医療保険記号番号());
@@ -434,8 +443,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         eucCsvEntity.set特定疾病(entity.get受給者台帳_2号特定疾病コード());
         eucCsvEntity.set受給申請事由(edit受給申請事由(entity.get受給者台帳_受給申請事由(), entity.get受給者台帳_要支援者認定申請区分()));
         eucCsvEntity.set申請理由(entity.get受給者台帳_申請理由());
-        //TODO
-        eucCsvEntity.set申請関係者(entity.get受給者台帳_本人との関係());
+        eucCsvEntity.set申請関係者(ShinseishaKankeiCode.toValue(entity.get受給者台帳_申請者関係コード()).get名称());
         eucCsvEntity.set本人関係(entity.get受給者台帳_本人との関係());
         eucCsvEntity.set受給申請日(edit年月日_yyyymmdd(entity.get受給者台帳_受給申請年月日()));
         eucCsvEntity.set審査回答日(edit年月日_yyyymmdd(entity.get受給者台帳_認定年月日()));
@@ -460,7 +468,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         eucCsvEntity.set削除理由コード(entity.get受給者台帳_削除事由コード());
         eucCsvEntity.set異動事由文言(edit異動事由文言(entity.get受給者台帳_直近異動事由コード()));
         eucCsvEntity.set削除理由文言(entity.get受給者台帳_削除事由コード());
-        eucCsvEntity.set支援申請区分(edit支援申請区分(entity.get受給者台帳_要支援者認定申請区分()));
+        eucCsvEntity.set支援申請区分(edit支援申請(entity.get受給者台帳_要支援者認定申請区分()));
 
         eucCsvEntity.set訪問支給限度額単位数(entity.get受給者台帳_支給限度単位数());
         eucCsvEntity.set訪問支給限度有効開始年月日(edit年月日_yyyymmdd(entity.get受給者台帳_支給限度有効開始年月日()));
@@ -513,10 +521,10 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         eucCsvEntity.set指定医区分(edit指定医区分(entity.is今回申請_指定医フラグ()));
         entity.get今回一次判定結果_要介護認定一次判定結果コード();
 
-//        eucCsvEntity.set一次判定要介護度(edit要介護度(KoroshoInterfaceShikibetsuCode.toValue(entity.get今回申請_厚労省IF識別コード()),
-//                entity.get今回一次判定結果_要介護認定一次判定結果コード()));
-//        eucCsvEntity.set要介護度(edit要介護度(KoroshoInterfaceShikibetsuCode.toValue(entity.get今回申請_厚労省IF識別コード()),
-//                entity.get受給者台帳_要介護認定状態区分コード()));
+        eucCsvEntity.set一次判定要介護度(edit要介護度(entity.get今回申請_厚労省IF識別コード(),
+                entity.get今回一次判定結果_要介護認定一次判定結果コード()));
+        eucCsvEntity.set要介護度(edit要介護度(entity.get今回申請_厚労省IF識別コード(),
+                entity.get受給者台帳_要介護認定状態区分コード()));
     }
 
     private void set今回調査委託先について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
@@ -636,12 +644,12 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         eucCsvEntity.set初回申請日(edit年月日_yyyymmdd(entity.get初回受給情報_受給申請年月日()));
         eucCsvEntity.set初回認定日(edit年月日_yyyymmdd(entity.get初回受給情報_認定年月日()));
 
-//        eucCsvEntity.set初回要介護度(edit要介護度(KoroshoInterfaceShikibetsuCode.toValue(entity.get初回申請_厚労省IF識別コード()),
-//                entity.get初回受給情報_要介護認定状態区分コード()));
+        eucCsvEntity.set初回要介護度(edit要介護度(entity.get初回申請_厚労省IF識別コード(),
+                entity.get初回受給情報_要介護認定状態区分コード()));
         eucCsvEntity.set初回認定開始日(edit年月日_yyyymmdd(entity.get初回受給情報_認定有効期間開始年月日()));
         eucCsvEntity.set初回認定終了日(edit年月日_yyyymmdd(entity.get初回受給情報_認定有効期間終了年月日()));
         eucCsvEntity.set初回申請事由(edit受給申請事由(entity.get初回受給情報_受給申請事由(), entity.get初回申請_要支援者認定申請区分()));
-        eucCsvEntity.set初回みなし更新(entity.get初回受給情報_みなし要介護区分コード());
+        eucCsvEntity.set初回みなし更新(editみなし更新(entity.get初回受給情報_みなし要介護区分コード()));
         eucCsvEntity.set初回当初認定有効開始日(edit年月日_yyyymmdd(entity.get初回受給情報_当初認定有効開始年月日()));
         eucCsvEntity.set初回当初認定有効終了日(edit年月日_yyyymmdd(entity.get初回受給情報_当初認定有効終了年月日()));
     }
@@ -649,7 +657,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private void set初回申請について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity) {
         //初回申請
-        eucCsvEntity.set初回支援申請事由(edit支援申請事由(new Code(entity.get初回申請_要支援者認定申請区分())));
+        eucCsvEntity.set初回支援申請事由(edit支援申請(entity.get初回申請_要支援者認定申請区分()));
     }
 
     private void set前回受給情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
@@ -657,13 +665,13 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         //前回受給情報
         eucCsvEntity.set前回申請日(edit年月日_yyyymmdd(entity.get前回受給情報_受給申請年月日()));
         eucCsvEntity.set前回認定日(edit年月日_yyyymmdd(entity.get前回受給情報_認定年月日()));
-//        eucCsvEntity.set前回要介護度(edit要介護度(KoroshoInterfaceShikibetsuCode.toValue(entity.get前回申請_厚労省IF識別コード()),
-//                entity.get前回受給情報_要介護認定状態区分コード()));
+        eucCsvEntity.set前回要介護度(edit要介護度(entity.get前回申請_厚労省IF識別コード(),
+                entity.get前回受給情報_要介護認定状態区分コード()));
         eucCsvEntity.set前回認定開始日(edit年月日_yyyymmdd(entity.get前回受給情報_認定有効期間開始年月日()));
         eucCsvEntity.set前回認定終了日(edit年月日_yyyymmdd(entity.get前回受給情報_認定有効期間終了年月日()));
         eucCsvEntity.set前回受給申請事由(edit受給申請事由(entity.get前回受給情報_受給申請事由(),
                 entity.get前回申請_要支援者認定申請区分()));
-        eucCsvEntity.set前回みなし更新(entity.get前回受給情報_みなし要介護区分コード());
+        eucCsvEntity.set前回みなし更新(editみなし更新(entity.get前回受給情報_みなし要介護区分コード()));
         eucCsvEntity.set前回当初認定有効開始日(edit年月日_yyyymmdd(entity.get前回受給情報_当初認定有効開始年月日()));
         eucCsvEntity.set前回当初認定有効終了日(edit年月日_yyyymmdd(entity.get前回受給情報_当初認定有効終了年月日()));
     }
@@ -671,7 +679,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private void set前回申請について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity) {
         //前回申請
-        // eucCsvEntity.set前回支援申請事由(edit支援申請事由(new Code(entity.get前回申請_要支援者認定申請区分())));
+        eucCsvEntity.set前回支援申請事由(edit支援申請(entity.get前回申請_要支援者認定申請区分()));
     }
 
     private void set前々回受給情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
@@ -679,7 +687,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         //前々回受給情報
         eucCsvEntity.set前々回申請日(edit年月日_yyyymmdd(entity.get前々回受給情報_受給申請年月日()));
         eucCsvEntity.set前々回認定日(edit年月日_yyyymmdd(entity.get前々回受給情報_認定年月日()));
-        eucCsvEntity.set前々回要介護度(edit要介護度(KoroshoInterfaceShikibetsuCode.toValue(entity.get前々回申請_厚労省IF識別コード()),
+        eucCsvEntity.set前々回要介護度(edit要介護度(entity.get前々回申請_厚労省IF識別コード(),
                 entity.get前々回受給情報_要介護認定状態区分コード()));
         eucCsvEntity.set前々回認定開始日(edit年月日_yyyymmdd(entity.get前々回受給情報_認定有効期間開始年月日()));
         eucCsvEntity.set前々回認定終了日(edit年月日_yyyymmdd(entity.get前々回受給情報_認定有効期間終了年月日()));
@@ -688,7 +696,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         eucCsvEntity.set前々回みなし更新(editみなし更新(entity.get前々回受給情報_みなし要介護区分コード()));
         eucCsvEntity.set前々回当初認定有効開始日(edit年月日_yyyymmdd(entity.get前々回受給情報_当初認定有効開始年月日()));
         eucCsvEntity.set前々回当初認定有効終了日(edit年月日_yyyymmdd(entity.get前々回受給情報_当初認定有効終了年月日()));
-        eucCsvEntity.set前々回支援申請事由(edit支援申請区分(entity.get前々回受給情報_要支援者認定申請区分()));
+        eucCsvEntity.set前々回支援申請事由(edit支援申請(entity.get前々回受給情報_要支援者認定申請区分()));
     }
 
     private void set今回調査結果_基本について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
@@ -797,34 +805,10 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
             return RString.EMPTY;
         }
 
-        if (processParamter.is日付スラッシュ付加()) {
-            if (!FlexibleDate.EMPTY.equals(date)) {
-                StringBuilder builder = new StringBuilder();
-                builder.append(date.getYearMonth());
-                builder.append(date.getDayValue());
-
-                return new RString(builder.toString());
-            }
-            if (!FlexibleDate.EMPTY.equals(date)) {
-                return new RString(date.toString());
-            }
-            return RString.EMPTY;
+        if (!processParamter.is日付スラッシュ付加()) {
+            return date.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
         }
-        return new RString(date.toString());
-    }
-
-    private RString edit月日_yyyymm(FlexibleDate date) {
-
-        if (processParamter.is日付スラッシュ付加()) {
-            if (!FlexibleDate.EMPTY.equals(date)) {
-                return date.getYearMonth().toDateString();
-            }
-            return RString.EMPTY;
-        }
-        if (!FlexibleDate.EMPTY.equals(date)) {
-            return date.getYearMonth().toDateString();
-        }
-        return RString.EMPTY;
+        return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
     }
 
     private RString get住所_番地_方書(RString 住所, RString 番地, RString 方書) {
@@ -891,8 +875,19 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         return 入所施設種類_12.equals(nyushoShisetsuShurui) || 入所施設種類_21.equals(nyushoShisetsuShurui);
     }
 
-    private RString edit要介護度(KoroshoInterfaceShikibetsuCode koroshoIfCode, RString code) {
-        return YokaigoJotaiKubunSupport.toValue(koroshoIfCode, code).getName();
+    private RString edit要介護度(RString koroshoIfCode, RString code) {
+        if ((koroshoIfCode != null && !koroshoIfCode.isEmpty()) || (code != null && !code.isEmpty())) {
+            return RString.EMPTY;
+        }
+        return YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(koroshoIfCode), code).getName();
+    }
+
+    private RString edit抽出項目区分(RString 抽出項目区分) {
+        try {
+            return ChushutsuKomokuKubun.toValue(抽出項目区分).get名称();
+        } catch (Exception e) {
+            return RString.EMPTY;
+        }
     }
 
     private List<RString> get出力条件表() {
@@ -900,38 +895,63 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         AtenaSelectBatchParameter atenaSelectBatchParameter = processParamter.get宛名抽出条件();
         NenreiSoChushutsuHoho nenreiSoChushutsuHoho = atenaSelectBatchParameter.getAgeSelectKijun();
 
+        list.add(出力条件表_抽出対象者);
         if (!atenaSelectBatchParameter.getShichoson_Code().getColumnValue().isNullOrEmpty()
-                && すべて.equals(atenaSelectBatchParameter.getShichoson_Code().getColumnValue())) {
-            list.add(出力条件表_保険者.concat(地方公共団体情報.get地方公共団体コード().code市町村RString()));
+                && !すべて.equals(atenaSelectBatchParameter.getShichoson_Code().getColumnValue())) {
+
+            list.add(出力条件表_保険者.concat(edit市町村(atenaSelectBatchParameter.getShichoson_Code())));
         }
 
-        if (processParamter.get基準日() != null) {
-            list.add(出力条件表_基準日.concat(processParamter.get基準日().toString()));
+        if (processParamter.get基準日() != null && !processParamter.get基準日().isEmpty()) {
+            list.add(出力条件表_基準日.concat(edit日期(processParamter.get基準日())));
         }
-
-        if (processParamter.get日付範囲From() != null && processParamter.get日付範囲To() != null) {
-            list.add(processParamter.get抽出項目区分().concat(processParamter.get日付範囲From().toString()).concat(出力条件表_中間符号)
-                    .concat(processParamter.get日付範囲To().toString()));
-        }
-        if (processParamter.get日付範囲From() != null && processParamter.get日付範囲To() == null) {
-            list.add(processParamter.get抽出項目区分().concat(processParamter.get日付範囲From().toString()).concat(出力条件表_中間符号));
-        }
-        if (processParamter.get日付範囲From() == null && processParamter.get日付範囲To() != null) {
-            list.add(出力条件表_取得日.concat(出力条件表_中間符号).concat(RString.HALF_SPACE).concat(processParamter.get日付範囲To().toString()));
-        }
-
+        set日付範囲について(list);
         if (processParamter.is直近データ抽出()) {
             list.add(出力条件表_対象データ_直近のみ);
         }
 
-        if (!processParamter.get喪失区分().isNullOrEmpty() && !資格判定なし.equals(processParamter.get喪失区分())) {
-            list.add(出力条件表_喪失区分.concat(processParamter.get喪失区分()));
+        if (processParamter.get喪失区分() != null && !資格判定なし.equals(processParamter.get喪失区分().get名称())) {
+            list.add(出力条件表_喪失区分.concat(processParamter.get喪失区分().get名称()));
         }
-
         set出力条件表_年齢(atenaSelectBatchParameter, nenreiSoChushutsuHoho, list);
         set出力条件表_生年月日(atenaSelectBatchParameter, nenreiSoChushutsuHoho, list);
         set出力条件表_地区選択(atenaSelectBatchParameter, list);
         return list;
+    }
+
+    private void set日付範囲について(List<RString> list) {
+        if ((processParamter.get日付範囲From() != null && !processParamter.get日付範囲From().isEmpty())
+                && (processParamter.get日付範囲To() != null && !processParamter.get日付範囲To().isEmpty())) {
+            list.add(edit抽出項目区分(processParamter.get抽出項目区分()).concat(new RString(":"))
+                    .concat(edit日期(processParamter.get日付範囲From())).concat(出力条件表_中間符号)
+                    .concat(edit日期(processParamter.get日付範囲To())));
+        }
+        if ((processParamter.get日付範囲From() != null && !processParamter.get日付範囲From().isEmpty())
+                && (processParamter.get日付範囲To() == null || processParamter.get日付範囲To().isEmpty())) {
+            list.add(edit抽出項目区分(processParamter.get抽出項目区分()).concat(new RString(":"))
+                    .concat(edit日期(processParamter.get日付範囲From())).concat(出力条件表_中間符号));
+        }
+        if ((processParamter.get日付範囲From() == null || processParamter.get日付範囲From().isEmpty())
+                && (processParamter.get日付範囲To() != null && !processParamter.get日付範囲To().isEmpty())) {
+            list.add(edit抽出項目区分(processParamter.get抽出項目区分()).concat(new RString(":"))
+                    .concat(出力条件表_中間符号).concat(edit日期(processParamter.get日付範囲To())));
+        }
+    }
+
+    private RString edit日期(FlexibleDate 変更前日期) {
+        if (変更前日期 != null && !変更前日期.isEmpty()) {
+            return 変更前日期.wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString edit日期RDate(RDate 変更前日期) {
+        if (変更前日期 != null) {
+            return 変更前日期.wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+        }
+        return RString.EMPTY;
     }
 
     private void set出力条件表_年齢(AtenaSelectBatchParameter atenaSelectBatchParameter,
@@ -954,7 +974,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
                         .concat(出力条件表_HALF_SPACE)
                         .concat(出力条件表_左丸括弧)
                         .concat(出力条件表_年齢基準日)
-                        .concat(processParamter.get基準日().toString())
+                        .concat(edit日期RDate(atenaSelectBatchParameter.getNenreiKijunbi()))
                         .concat(出力条件表_右丸括弧));
             }
             if (Decimal.ZERO != startAge && Decimal.ZERO == endAge) {
@@ -966,20 +986,19 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
                         .concat(出力条件表_HALF_SPACE)
                         .concat(出力条件表_左丸括弧)
                         .concat(出力条件表_年齢基準日)
-                        .concat(processParamter.get基準日().toString())
+                        .concat(edit日期RDate(atenaSelectBatchParameter.getNenreiKijunbi()))
                         .concat(出力条件表_右丸括弧));
             }
 
             if (Decimal.ZERO == startAge && Decimal.ZERO != endAge) {
                 list.add(出力条件表_年齢
+                        .concat(出力条件表_中間符号)
                         .concat(endAge.toString())
                         .concat(出力条件表_歳)
                         .concat(出力条件表_HALF_SPACE)
-                        .concat(出力条件表_中間符号)
-                        .concat(出力条件表_HALF_SPACE)
                         .concat(出力条件表_左丸括弧)
                         .concat(出力条件表_年齢基準日)
-                        .concat(processParamter.get基準日().toString())
+                        .concat(edit日期RDate(atenaSelectBatchParameter.getNenreiKijunbi()))
                         .concat(出力条件表_右丸括弧));
             }
         }
@@ -991,18 +1010,18 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         if (生年月日.equals(nenreiSoChushutsuHoho.get名称())) {
             Range<RDate> seinengappiRange = atenaSelectBatchParameter.getSeinengappiRange();
             RDate startSeinengappiRange = seinengappiRange.getFrom();
-            RDate endSeinengappiRange = seinengappiRange.getFrom();
+            RDate endSeinengappiRange = seinengappiRange.getTo();
             if (startSeinengappiRange != null && endSeinengappiRange != null) {
                 list.add(出力条件表_生年月日
-                        .concat(startSeinengappiRange.toDateString())
+                        .concat(edit日期(new FlexibleDate(startSeinengappiRange.toDateString())))
                         .concat(出力条件表_HALF_SPACE)
                         .concat(出力条件表_中間符号)
                         .concat(出力条件表_HALF_SPACE)
-                        .concat(endSeinengappiRange.toDateString()));
+                        .concat(edit日期(new FlexibleDate(endSeinengappiRange.toDateString()))));
             }
             if (startSeinengappiRange != null && endSeinengappiRange == null) {
                 list.add(出力条件表_生年月日
-                        .concat(startSeinengappiRange.toDateString())
+                        .concat(edit日期(new FlexibleDate(startSeinengappiRange.toDateString())))
                         .concat(出力条件表_HALF_SPACE)
                         .concat(出力条件表_中間符号));
             }
@@ -1010,42 +1029,124 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
                 list.add(出力条件表_生年月日
                         .concat(出力条件表_HALF_SPACE)
                         .concat(出力条件表_中間符号)
-                        .concat(endSeinengappiRange.toDateString()));
+                        .concat(edit日期(new FlexibleDate(endSeinengappiRange.toDateString()))));
             }
         }
     }
 
-    private void set出力条件表_地区選択(AtenaSelectBatchParameter atenaSelectBatchParameter, List<RString> list) {
-        if (atenaSelectBatchParameter.getChiku_Kubun() != null && 全て.equals(atenaSelectBatchParameter.getChiku_Kubun().get名称())) {
+    private RString edit市町村(LasdecCode 市町村コード) {
+        IAssociationFinder finder = AssociationFinderFactory.createInstance();
+        Association 地方公共団体 = finder.getAssociation(市町村コード);
+        return 地方公共団体.get市町村名();
+    }
 
-            list.add(出力条件表_住所.concat(edit地区選択(atenaSelectBatchParameter.getJusho_From(), atenaSelectBatchParameter.getJusho_To())));
-            list.add(出力条件表_行政区.concat(edit地区選択(atenaSelectBatchParameter.getGyoseiku_From(), atenaSelectBatchParameter.getGyoseiku_To())));
-            list.add(出力条件表_地区１.concat(edit地区選択(atenaSelectBatchParameter.getChiku1_From(), atenaSelectBatchParameter.getChiku1_To())));
-            list.add(出力条件表_地区２.concat(edit地区選択(atenaSelectBatchParameter.getChiku2_From(), atenaSelectBatchParameter.getChiku2_To())));
-            list.add(出力条件表_地区３.concat(edit地区選択(atenaSelectBatchParameter.getChiku3_From(), atenaSelectBatchParameter.getChiku3_To())));
+    private void set出力条件表_地区選択(AtenaSelectBatchParameter atenaSelectBatchParameter, List<RString> list) {
+        if (atenaSelectBatchParameter.getChiku_Kubun() != null && !全て.equals(atenaSelectBatchParameter.getChiku_Kubun().get名称())) {
+
+            RString 町域Str = edit地区選択(出力条件表_町域, atenaSelectBatchParameter.getJusho_From(),
+                    atenaSelectBatchParameter.getJusho_FromMesho(), atenaSelectBatchParameter.getJusho_To(),
+                    atenaSelectBatchParameter.getJusho_ToMesho());
+            RString 地区Str = edit地区選択(出力条件表_行政区, atenaSelectBatchParameter.getGyoseiku_From(),
+                    atenaSelectBatchParameter.getGyoseiku_FromMesho(), atenaSelectBatchParameter.getGyoseiku_To(),
+                    atenaSelectBatchParameter.getGyoseiku_ToMesho());
+
+            if (!町域Str.isNullOrEmpty()) {
+                list.add(町域Str);
+            }
+            if (!地区Str.isNullOrEmpty()) {
+                list.add(地区Str);
+            }
+
+            IJushoNyuryokuConfig config = JushoNyuryokuConfigFactory.createInstance();
+            RString 名称1 = config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１);
+            RString 名称2 = config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類２);
+            RString 名称3 = config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類３);
+
+            RString 地区1Str = edit地区(名称1, atenaSelectBatchParameter.getChiku1_From(), atenaSelectBatchParameter.getChiku1_FromMesho(),
+                    atenaSelectBatchParameter.getChiku1_To(), atenaSelectBatchParameter.getChiku1_ToMesho());
+            RString 地区2Str = edit地区(名称2, atenaSelectBatchParameter.getChiku2_From(), atenaSelectBatchParameter.getChiku2_FromMesho(),
+                    atenaSelectBatchParameter.getChiku2_To(), atenaSelectBatchParameter.getChiku2_ToMesho());
+            RString 地区3Str = edit地区(名称3, atenaSelectBatchParameter.getChiku3_From(), atenaSelectBatchParameter.getChiku3_FromMesho(),
+                    atenaSelectBatchParameter.getChiku3_To(), atenaSelectBatchParameter.getChiku3_ToMesho());
+
+            if (!地区1Str.isNullOrEmpty()) {
+                list.add(地区1Str);
+            }
+            if (!地区2Str.isNullOrEmpty()) {
+                list.add(地区2Str);
+            }
+            if (!地区3Str.isNullOrEmpty()) {
+                list.add(地区3Str);
+            }
+
         }
     }
 
-    private RString edit地区選択(RString from, RString to) {
+    private RString edit地区(RString 名称, RString 地区From, RString 地区From名称, RString 地区To, RString 地区To名称) {
+        RString 地区Str = RString.EMPTY;
+
+        if (地区From != null && !地区From.isEmpty() && 地区To != null && !地区To.isEmpty()) {
+            地区Str = 地区Str.concat(名称)
+                    .concat(出力条件表_左丸括弧)
+                    .concat(地区From)
+                    .concat(出力条件表_右丸括弧)
+                    .concat(地区From名称)
+                    .concat(出力条件表_中間符号)
+                    .concat(出力条件表_左丸括弧)
+                    .concat(地区To)
+                    .concat(出力条件表_右丸括弧)
+                    .concat(地区To名称);
+        }
+
+        if (地区From != null && !地区From.isEmpty() && (地区To == null || 地区To.isEmpty())) {
+
+            地区Str = 地区Str.concat(名称).concat(出力条件表_左丸括弧).concat(地区From).concat(出力条件表_右丸括弧).concat(地区From名称).concat(出力条件表_中間符号)
+                    .concat(出力条件表_左丸括弧).concat(地区From).concat(出力条件表_右丸括弧).concat(地区From名称);
+        }
+
+        if ((地区From == null || 地区From.isEmpty()) && 地区To != null && !地区To.isEmpty()) {
+
+            地区Str = 地区Str.concat(名称).concat(出力条件表_右丸括弧).concat(地区To).concat(出力条件表_右丸括弧).concat(地区To名称).concat(出力条件表_中間符号)
+                    .concat(出力条件表_左丸括弧).concat(地区To).concat(出力条件表_右丸括弧).concat(地区To名称);
+        }
+        return 地区Str;
+    }
+
+    private RString edit地区選択(RString kubun, RString from, RString fromNm, RString to, RString toNm) {
 
         RString 地区選択Str = RString.EMPTY;
-        if (!from.isNullOrEmpty() && !to.isNullOrEmpty()) {
-            地区選択Str = from
+        if (from != null && !from.isEmpty() && to != null && !to.isEmpty()) {
+            地区選択Str = kubun
+                    .concat(出力条件表_左丸括弧)
+                    .concat(from)
+                    .concat(出力条件表_右丸括弧)
+                    .concat(fromNm)
                     .concat(出力条件表_HALF_SPACE)
                     .concat(出力条件表_中間符号)
                     .concat(出力条件表_HALF_SPACE)
-                    .concat(to);
+                    .concat(出力条件表_左丸括弧)
+                    .concat(to)
+                    .concat(出力条件表_右丸括弧)
+                    .concat(toNm);
         }
-        if (!from.isNullOrEmpty() && to.isNullOrEmpty()) {
-            地区選択Str = from
+
+        if (from != null && !from.isEmpty() && (to == null || to.isEmpty())) {
+            地区選択Str = kubun.concat(出力条件表_左丸括弧)
+                    .concat(from)
+                    .concat(出力条件表_右丸括弧)
+                    .concat(fromNm)
                     .concat(出力条件表_HALF_SPACE)
                     .concat(出力条件表_中間符号);
         }
-        if (from.isNullOrEmpty() && !to.isNullOrEmpty()) {
-            地区選択Str = 出力条件表_中間符号
+        if ((from == null || from.isEmpty()) && to != null && !to.isEmpty()) {
+            地区選択Str = kubun.concat(出力条件表_中間符号)
                     .concat(出力条件表_HALF_SPACE)
-                    .concat(to);
+                    .concat(出力条件表_左丸括弧)
+                    .concat(to)
+                    .concat(出力条件表_右丸括弧)
+                    .concat(toNm);
         }
+
         return 地区選択Str;
     }
 
@@ -1061,11 +1162,9 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         } else if (JukyuShinseiJiyu.再申請_有効期限外.getコード().equals(jukyuShinseiJiyu)) {
             return 再申請外;
         } else if (JukyuShinseiJiyu.要介護度変更申請.getコード().equals(jukyuShinseiJiyu)) {
-
             if (NinteiShienShinseiKubun.認定支援申請.getコード().equals(shienShinseiKubun)) {
                 return 支援から申請;
             }
-
             return 区分変更申請;
         } else if (JukyuShinseiJiyu.指定サービス種類変更申請.getコード().equals(jukyuShinseiJiyu)) {
             return サ変更申請;
@@ -1084,20 +1183,14 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         return RString.EMPTY;
     }
 
-    private RString edit支援申請区分(RString shienShinseiKubun) {
-
-        if (要支援申請.equals(shienShinseiKubun)) {
-            return 要支援申請;
-        }
-        return 要介護申請;
-    }
-
-    private RString edit支援申請事由(Code ninteiShinseiHoreiKubunCode) {
-
-        if (NinteiShienShinseiKubun.認定支援申請.getコード().equals(ninteiShinseiHoreiKubunCode.getColumnValue())) {
-            return 要支援申請;
-        } else {
+    private RString edit支援申請(RString ninteiShinseiHoreiKubunCode) {
+        try {
+            if (NinteiShienShinseiKubun.認定支援申請.getコード().equals(ninteiShinseiHoreiKubunCode)) {
+                return 要支援申請;
+            }
             return 要介護申請;
+        } catch (Exception e) {
+            return RString.EMPTY;
         }
     }
 
@@ -1161,10 +1254,10 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
 
     private RString editみなし更新(RString minashiCode) {
         try {
-            if (MinashiCode.通常の認定.getコード().equals(minashiCode)) {
+            if (みなし要介護区分_通常の認定_コード.equals(MinashiCode.toValue(minashiCode).getコード())) {
                 return RString.EMPTY;
             } else {
-                return MinashiCode.toValue(minashiCode).get名称();
+                return みなし;
             }
         } catch (Exception ex) {
             return RString.EMPTY;
@@ -1173,11 +1266,15 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
 
     private RString edit受給状況(RString yukoMukoKubun) {
 
-        if (YukoMukoKubun.有効.getコード().equals(yukoMukoKubun)) {
-            return 有効;
-        } else if (YukoMukoKubun.無効.getコード().equals(yukoMukoKubun)) {
-            return 無効;
-        } else {
+        try {
+            if (有効無効区分_有効_コード.equals(yukoMukoKubun)) {
+                return 有効;
+            } else if (有効無効区分_無効_コード.equals(yukoMukoKubun)) {
+                return 無効;
+            } else {
+                return RString.EMPTY;
+            }
+        } catch (Exception e) {
             return RString.EMPTY;
         }
     }
@@ -1192,13 +1289,14 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
 
     private RString edit異動事由コード(RString dataKubun) {
 
-        if (dataKubun == null) {
-            return RString.EMPTY;
-        }
         if (Datakubun.通常_認定.getコード().equals(dataKubun)) {
             return RString.EMPTY;
         }
-        return Datakubun.toValue(dataKubun).get名称();
+        try {
+            return Datakubun.toValue(dataKubun).get名称();
+        } catch (Exception e) {
+            return RString.EMPTY;
+        }
     }
 
     private RString edit異動事由文言(RString chokkinIdoJiyuCode) {

@@ -89,6 +89,25 @@ public class KyokaisoGaitoshaPanelValidationHandler {
         return validPairs;
     }
 
+    /**
+     * 確認するボタンを押下するとき、バリデーションチェックを行う。
+     *
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateForKakuninn() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (div.getTxtHohenryoNofuFromDate() == null || div.getTxtHohenryoNofuFromDate().getValue() == null) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.適用開始日, div.getTxtHohenryoNofuFromDate()));
+        }
+        if (div.getTxtHohenryoNofuToDate() == null || div.getTxtHohenryoNofuToDate().getValue() == null) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.適用終了日, div.getTxtHohenryoNofuToDate()));
+        }
+        if (RString.isNullOrEmpty(div.getDdlTekiyouSuruShutokuDankai().getSelectedKey())) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.適用する所得段階, div.getDdlTekiyouSuruShutokuDankai()));
+        }
+        return validPairs;
+    }
+
     private void 標準負担額該当の開始日チェック(ValidationMessageControlPairs validPairs) {
         RDate 開始日 = div.getTxtKaishibi().getValue();
         RString 標準負担額 = div.getRadHyojunFutanGaku().getSelectedKey();
@@ -169,7 +188,10 @@ public class KyokaisoGaitoshaPanelValidationHandler {
                 "特定介護サービス等に係る読替後高額介護世帯上限額"),
         組合せチェック(DbaErrorMessages.開始日が制度改正前のため減額措置登録不可,
                 "特定介護サービス等に係る標準負担額・居住費等負担額減額・食費負担額減額・読替後高額介護世帯上限額"),
-        保険料納付減額存在チェック(DbaErrorMessages.適用する項目を設定, "所得段階");
+        保険料納付減額存在チェック(DbaErrorMessages.適用する項目を設定, "所得段階"),
+        適用開始日(UrErrorMessages.必須項目_追加メッセージあり, "適用開始日"),
+        適用終了日(UrErrorMessages.必須項目_追加メッセージあり, "適用終了日"),
+        適用する所得段階(UrErrorMessages.必須項目_追加メッセージあり, "適用する所得段階");
 
         private final Message message;
 

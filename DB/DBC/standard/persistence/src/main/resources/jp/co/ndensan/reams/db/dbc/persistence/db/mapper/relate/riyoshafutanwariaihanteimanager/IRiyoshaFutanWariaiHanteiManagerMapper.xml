@@ -13,9 +13,9 @@
         FROM
         rgur."UrT0508SeikatsuHogoJukyusha" AS A
         WHERE
-        A"shikibetsuCode" = #{識別コード},
-        AND  A"gyomuCode" ='DB',
-        AND  A"jukyuKaishiYMD" = #{対象開始日},
-        AND  A"jukyuHaishiYMD" = #{対象終了日}
+        A."shikibetsuCode" = #{識別コード}
+        AND  A."gyomuCode" ='DB'
+        AND  A."jukyuKaishiYMD" = #{対象開始日}
+        AND  A."jukyuHaishiYMD" = #{対象終了日}
     </select>
 </mapper>

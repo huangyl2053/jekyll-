@@ -9,6 +9,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigoserviceshurui.KaigoServiceShuruiMapperParameter;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
@@ -70,7 +71,8 @@ public class KaigoServiceShuruiManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoServiceShuruiManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link KaigoServiceShuruiManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link KaigoServiceShuruiManager}のインスタンス
      */
     public static KaigoServiceShuruiManager createInstance() {
         return InstanceProvider.create(KaigoServiceShuruiManager.class);
@@ -140,6 +142,25 @@ public class KaigoServiceShuruiManager {
                     leq(介護サービス種類検索条件.getTeikyoKaishiYM(), DbT7130KaigoServiceShurui.teikyoshuryoYM));
         }
         List<DbT7130KaigoServiceShuruiEntity> サービス種類情報リスト = 介護サービス種類Dac.select(makeShuruiConditions);
+        ArrayList<KaigoServiceShurui> 介護サービス種類List = new ArrayList<>();
+        for (DbT7130KaigoServiceShuruiEntity entity : サービス種類情報リスト) {
+            KaigoServiceShuruiEntity kaigoServiceShuruiEntity = new KaigoServiceShuruiEntity();
+            kaigoServiceShuruiEntity.set介護サービス種類Entity(entity);
+            介護サービス種類List.add(new KaigoServiceShurui(kaigoServiceShuruiEntity));
+        }
+        return SearchResult.of(介護サービス種類List, 0, false);
+    }
+
+    /**
+     * サービス種類コードより、フォーカスアウトのサービス種類取得のリストを返します。
+     *
+     * @param サービス種類コード サービス種類コード
+     * @return KaigoServiceShuruiの{@code list}
+     */
+    @Transaction
+    public SearchResult<KaigoServiceShurui> getFocusServiceTypeList(RString サービス種類コード) {
+        List<DbT7130KaigoServiceShuruiEntity> サービス種類情報リスト = 介護サービス種類Dac.selectByShuruiCode(
+                new ServiceShuruiCode(サービス種類コード));
         ArrayList<KaigoServiceShurui> 介護サービス種類List = new ArrayList<>();
         for (DbT7130KaigoServiceShuruiEntity entity : サービス種類情報リスト) {
             KaigoServiceShuruiEntity kaigoServiceShuruiEntity = new KaigoServiceShuruiEntity();

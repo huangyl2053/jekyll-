@@ -126,7 +126,7 @@ public class JushotiTokureiIdouFinder {
         登録用Entity.setShikakuHenkoJiyuCode(hihokenshaShutokuJyoho.get資格変更事由コード());
         登録用Entity.setShikakuHenkoYMD(hihokenshaShutokuJyoho.get資格変更年月日());
         登録用Entity.setShikakuHenkoTodokedeYMD(hihokenshaShutokuJyoho.get資格変更届出年月日());
-        登録用Entity.setKoikinaiJushochiTokureiFlag(hihokenshaShutokuJyoho.get住所地特例フラグ());
+        登録用Entity.setKoikinaiJushochiTokureiFlag(hihokenshaShutokuJyoho.get広域内住所地特例フラグ());
         登録用Entity.setKoikinaiTokureiSochimotoShichosonCode(hihokenshaShutokuJyoho.get広住特措置元市町村コード());
         登録用Entity.setKyuShichosonCode(hihokenshaShutokuJyoho.get旧市町村コード());
         登録用Entity.setLogicalDeletedFlag(hihokenshaShutokuJyoho.is論理削除フラグ());
@@ -167,7 +167,7 @@ public class JushotiTokureiIdouFinder {
         登録用Entity.setJushochitokureiKaijoJiyuCode(hihokenshaShutokuJyoho.get住所地特例解除事由コード());
         登録用Entity.setJushochitokureiKaijoYMD(hihokenshaShutokuJyoho.get解除年月日());
         登録用Entity.setJushochitokureiKaijoTodokedeYMD(hihokenshaShutokuJyoho.get解除届出年月日());
-        登録用Entity.setJushochiTokureiFlag(new RString("1"));
+        登録用Entity.setJushochiTokureiFlag(new RString("0"));
         return 登録用Entity;
     }
 
@@ -191,10 +191,10 @@ public class JushotiTokureiIdouFinder {
 
     private void 適用解除日の存在性チェック(FlexibleDate 異動日, FlexibleDate 適用解除日, RString 住所地特例Flag) {
         if (適用解除日 != null && !適用解除日.isEmpty()) {
-            if (is期間チェック(異動日, 適用解除日) && new RString("適用").equals(住所地特例Flag)) {
+            if (is期間チェック(適用解除日, 異動日) && new RString("適用").equals(住所地特例Flag)) {
                 throw new ApplicationException(DbaErrorMessages.適用日以降新資格異動有り.getMessage());
             }
-            if (is期間チェック(異動日, 適用解除日) && new RString("解除").equals(住所地特例Flag)) {
+            if (is期間チェック(適用解除日, 異動日) && new RString("解除").equals(住所地特例Flag)) {
                 throw new ApplicationException(DbaErrorMessages.解除日以降新資格異動有り.getMessage());
             }
         }
@@ -204,7 +204,7 @@ public class JushotiTokureiIdouFinder {
         if (解除年月日 == null && 適用日.isEmpty()) {
             throw new ApplicationException(DbaErrorMessages.適用日不正適用期間重複.getMessage());
         }
-        if (解除年月日 != null && !適用日.isEmpty() && is期間チェック(解除年月日, 適用日)) {
+        if (解除年月日 != null && !適用日.isEmpty() && is期間チェック(適用日, 解除年月日)) {
             throw new ApplicationException(DbaErrorMessages.適用日不正適用期間重複.getMessage());
         }
     }
@@ -213,12 +213,12 @@ public class JushotiTokureiIdouFinder {
         if (適用年月日.isEmpty() && 解除日.isEmpty()) {
             throw new ApplicationException(DbaErrorMessages.適用日不正適用期間重複.getMessage());
         }
-        if (適用年月日.isEmpty() && !解除日.isEmpty() && is期間チェック(適用年月日, 解除日)) {
+        if (適用年月日.isEmpty() && !解除日.isEmpty() && is期間チェック(解除日, 適用年月日)) {
             throw new ApplicationException(DbaErrorMessages.適用日不正適用期間重複.getMessage());
         }
     }
 
     private boolean is期間チェック(FlexibleDate 期間日期, FlexibleDate 期間日期2) {
-        return !期間日期.isBefore(期間日期2);
+        return 期間日期.isBefore(期間日期2);
     }
 }

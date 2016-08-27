@@ -106,8 +106,6 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
         source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
         source.jushoText = sofubutsuAtesakiSource.jushoText;
         source.katagakiText = sofubutsuAtesakiSource.katagakiText;
-
-        // TODO RSE項目名が設計書と違い
         source.shimei3 = sofubutsuAtesakiSource.shimei1;
         source.shimei4 = sofubutsuAtesakiSource.shimei2;
         source.katagaki3 = sofubutsuAtesakiSource.katagaki1;
@@ -115,7 +113,6 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
         source.jusho4 = sofubutsuAtesakiSource.jusho1;
         source.jusho5 = sofubutsuAtesakiSource.jusho2;
         source.jusho6 = sofubutsuAtesakiSource.jusho3;
-
         source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
         source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
         source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
@@ -169,15 +166,12 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
             source.hihokenshaNo9 = 被保険者番号.substring(NOCOUNT_8, NOCOUNT_9);
             source.hihokenshaNo10 = 被保険者番号.substring(NOCOUNT_9, NOCOUNT_10);
         }
-        if (null != 帳票制御共通) {
-            RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-            if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
-                source.tsuchibun = 通知書定型文リスト.get(NOCOUNT_1);
-                if (new RString("1").equals(定型文文字サイズ)) {
-                    source.renrakusakiHoka = 通知書定型文リスト.get(NOCOUNT_2);
-                } else {
-                    source.renrakusakiHoka = RString.EMPTY;
-                }
+
+        RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
+        if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
+            source.tsuchibun = 通知書定型文リスト.get(NOCOUNT_1);
+            if (new RString("1").equals(定型文文字サイズ)) {
+                source.renrakusakiHoka = 通知書定型文リスト.get(NOCOUNT_2);
             }
         }
     }
@@ -186,31 +180,28 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
         ShiharaiHohoHenkoGengaku 支払方法変更情報 = this.帳票情報.getShiharaiHohoHenkoGengakuList().get(0);
         ShiharaiHohoHenkoGengakuMeisai 支払方法変更減額明細 = 支払方法変更情報.getShiharaiHohoHenkoGengakuMeisaiList().get(index);
         if (null != this.帳票情報.getShiharaiHohoHenkoGengakuList()) {
-            //TODO   支払方法変更減額明細が設計書と違い
-//            source.gengakuKikan = 支払方法変更情報.get確定減額期間開始年月日().wareki().toDateString().concat("~").
-//                    concat(支払方法変更情報.get確定減額期間終了年月日().wareki().toDateString());
+            source.gengakuKikan = 支払方法変更情報.get確定減額期間開始年月日().wareki().toDateString().concat("~").
+                    concat(支払方法変更情報.get確定減額期間終了年月日().wareki().toDateString());
             source.listTainoJokyo_1 = 支払方法変更減額明細.get対象年度().toDateString();
             source.listTainoJokyo_2 = DecimalFormatter.toコンマ区切りRString(支払方法変更減額明細.get未納_時効消滅減額(), 0);
             source.listTainoJokyo_3 = DecimalFormatter.toコンマ区切りRString(支払方法変更減額明細.get納付額(), 0);
             source.listTainoJokyo_4 = DecimalFormatter.toコンマ区切りRString(支払方法変更減額明細.get年賦課額(), 0);
         }
         source.santeiKonkyoKikan1 = new RString("徴収権消滅期間：（未納・時効消滅額／年賦課額）＋（未納・時効消滅額／年賦課額）＋・・");
-//        source.shometsuKikan = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
+        source.shometsuKikan = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
         source.santeiKonkyoKikan2 = new RString("納付済期間：（納付額／年賦課額）＋（納付額／年賦課額）＋・・・・・・・・・・・・・・");
-//        source.sumiKikan = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get納付済期間(), 0);
+        source.sumiKikan = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get納付済期間(), 0);
         source.calGengakuKikan = new RString("給付額減額期間＝徴収権消滅期間*徴収権消滅期間/(徴収権消滅期間＋納付済期間)/2*12");
-//        source.shometsuKikana = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
-//        source.shometsuKikanb = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
-//        source.shometsuKikanc = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
-//        source.sumiKikana = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get納付済期間(), 0);
+        source.shometsuKikana = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
+        source.shometsuKikanb = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
+        source.shometsuKikanc = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
+        source.sumiKikana = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get納付済期間(), 0);
     }
 
     private void setLayerFontLarge(KyufugakuGengakuTsuchishoReportSource source) {
         RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
         if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("2").equals(定型文文字サイズ)) {
             source.renrakusakiHokaLarge = 通知書定型文リスト.get(NOCOUNT_2);
-        } else {
-            source.renrakusakiHokaLarge = RString.EMPTY;
         }
     }
 
@@ -220,9 +211,6 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
             if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("3").equals(定型文文字サイズ)) {
                 source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(NOCOUNT_2);
                 source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(NOCOUNT_3);
-            } else {
-                source.renrakusakiHokaJodanSmall = RString.EMPTY;
-                source.renrakusakiHokaGedanLarge = RString.EMPTY;
             }
         }
     }
@@ -233,9 +221,6 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
             if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty() && new RString("4").equals(定型文文字サイズ)) {
                 source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(NOCOUNT_2);
                 source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(NOCOUNT_3);
-            } else {
-                source.renrakusakiHokaJodanLarge = RString.EMPTY;
-                source.renrakusakiHokaGedanSmall = RString.EMPTY;
             }
         }
     }

@@ -3,12 +3,15 @@
 <!-- @reamsid_L DBC-2820-010 sunhui -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.sogojigyohisaishinsaketteihokenshain.ISogojigyohiSaishinsaKetteiHokenshaInMapper">
     <select id="get帳票出力対象データ"
-                resultMap="resultMap_SogojigyohiSaishinsaKetteiHokenshaInEntity" parameterType="java.util.Map"  fetchSize="500" resultOrdered="true">
+                resultMap="resultMap_SogojigyohiSaishinsaKetteiHokenshaInEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaDoIchiranhyoSakuseiMyBatisParameter"  fetchSize="500" resultOrdered="true">
         SELECT 
         <include refid="allColumns_SogojigyohiSaishinsaKetteiHokenshaIn" />
         FROM "DbWT3063SaishinsaKetteiShukei" AS DbWT3063 
-        INNER JOIN "DbWT3064SaishinsaKetteiMeisai" AS DbWT3064 ON DbWT3063."hdrRirekiNo" = DbWT3064."rirekiNo"
-        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001 ON DbWT3064."renban" = DbWT0001."meisaiRenban"
+        INNER JOIN "DbWT3064SaishinsaKetteiMeisai" AS DbWT3064 
+        ON DbWT3063."hdrRirekiNo" = DbWT3064."rirekiNo"
+        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001 
+        ON DbWT3064."renban" = DbWT0001."meisaiRenban"
         ${出力順}
     </select>
     
@@ -44,25 +47,26 @@
         <result property="履歴番号" column="dbwt3063_hdrRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="郵便番号" column="dbwt0001_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="町域コード" column="dbwt0001_choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler"/>
-        <result property="行政区コード" column="dbwt0001_gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
+        <result property="行政区コード" column="dbwt0001_gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="氏名５０音カナ" column="dbwt0001_shimei50onKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="宛名名称" column="dbwt0001_meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="保険者番号" column="dbwt3063_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>        
         <result property="保険者名" column="dbwt3063_hokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>     
     </resultMap>
     
     <sql id="allColumns_SogojigyohiSaishinsaKetteiHokenshaIn">
-        DbWT3063."kokuhoRengokaiName" AS dbwt3063_kokuhoRengokaiName,
-        DbWT3063."sinsaiinkaiName" AS dbwt3063_sinsaiinkaiName,
-        DbWT3063."hdrShoHokenshaNo" AS dbwt3063_hdrShoHokenshaNo,
-        DbWT3063."hdrShoHokenshaMei" AS dbwt3063_hdrShoHokenshaMei,
-        DbWT3064."toriatsukaiYm" AS dbwt3064_toriatsukaiYm,
+        DbWT3063."kokuhorenName" AS dbwt3063_kokuhoRengokaiName,
+        DbWT3063."shinsakaiName" AS dbwt3063_sinsaiinkaiName,
+        DbWT3063."shoKisaiHokenshaNo" AS dbwt3063_hdrShoHokenshaNo,
+        DbWT3063."shoKisaiHokenshaName" AS dbwt3063_hdrShoHokenshaMei,
+        DbWT3064."toriatsukaiYM" AS dbwt3064_toriatsukaiYm,
         DbWT3064."jigyoshoNo" AS dbwt3064_jigyoshoNo,
-        DbWT3064."jigyoshoMei" AS dbwt3064_jigyoshoMei,
+        DbWT3064."jigyoshoName" AS dbwt3064_jigyoshoMei,
         DbWT0001."hihokenshaNo" AS dbwt0001_hihokenshaNo,
         DbWT0001."orgHihokenshaShimei" AS dbwt0001_orgHihokenshaShimei,
-        DbWT3064."serviceTeikyoYm" AS dbwt3064_serviceTeikyoYm,
+        DbWT3064."serviceTeikyoYM" AS dbwt3064_serviceTeikyoYm,
         DbWT3064."serviceShuruiCode" AS dbwt3064_serviceShuruiCode,
-        DbWT3064."serviceShuruiName" AS dbwt3064_serviceShuruiName,
+        DbWT3064."serviceShuruiMei" AS dbwt3064_serviceShuruiName,
         DbWT3064."kagomoushitateJiyuCode" AS dbwt3064_kagomoushitateJiyuCode,
         DbWT3064."kagomoushitateJiyu" AS dbwt3064_kagomoushitateJiyu,
         DbWT3064."toshoSeikyuTanisu" AS dbwt3064_toshoSeikyuTanisu,
@@ -82,7 +86,8 @@
         DbWT0001."choikiCode" AS dbwt0001_choikiCode,
         DbWT0001."gyoseikuCode" AS dbwt0001_gyoseikuCode,
         DbWT0001."shimei50onKana" AS dbwt0001_shimei50onKana,
+        DbWT0001."meisho" AS dbwt0001_meisho,
         DbWT3063."hokenshaNo" AS dbwt3063_hokenshaNo,
-        DbWT3063."hokenshaMei" AS dbwt3063_hokenshaMei
+        DbWT3063."hokenshaName" AS dbwt3063_hokenshaMei
     </sql>
 </mapper>

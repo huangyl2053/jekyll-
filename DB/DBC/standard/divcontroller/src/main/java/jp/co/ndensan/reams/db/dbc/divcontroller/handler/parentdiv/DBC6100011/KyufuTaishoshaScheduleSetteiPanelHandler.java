@@ -72,10 +72,14 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
                 YMDHMS 抽出開始日時 = 履歴情報.get抽出開始日時();
                 if (抽出開始日時 != null && !抽出開始日時.isEmpty()) {
                     row.setShinsaNengetsuFrom(抽出開始日時.wareki().toDateString());
+                } else {
+                    row.setShinsaNengetsuFrom(RString.EMPTY);
                 }
                 YMDHMS 抽出終了日時 = 履歴情報.get抽出終了日時();
                 if (抽出終了日時 != null && !抽出終了日時.isEmpty()) {
                     row.setShinsaNengetsuTo(抽出終了日時.wareki().toDateString());
+                } else {
+                    row.setShinsaNengetsuTo(RString.EMPTY);
                 }
                 row.getDdlShoriJokyo().setDataSource(dataSource);
                 row.getDdlShoriJokyo().setSelectedKey(履歴情報.get処理状態区分());
@@ -86,6 +90,8 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
                     RString 時分 = 履歴情報.get処理実施日時().getRDateTime().getTime().toFormattedTimeString(
                             DisplayTimeFormat.HH時mm分);
                     row.setShoriTimestamp(年月日.concat(RString.HALF_SPACE).concat(時分));
+                } else {
+                    row.setShoriTimestamp(RString.EMPTY);
                 }
                 row.setId(index);
                 rowList.add(row);

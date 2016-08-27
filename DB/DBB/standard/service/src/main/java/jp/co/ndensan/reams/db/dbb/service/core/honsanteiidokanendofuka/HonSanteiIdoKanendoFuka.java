@@ -58,6 +58,7 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteiidokanen
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.choteijiyu.ChoteiJiyuHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.fukakeisan.FukaKeisan;
+import jp.co.ndensan.reams.db.dbb.service.core.kanendokoseikeisan.KanendoKoseiKeisan;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoRank;
 import jp.co.ndensan.reams.db.dbb.service.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranPrintService;
@@ -407,6 +408,9 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
     }
 
     private void dbの処理(List<HihokenshaDaicho> 資格の情報年度, List<FukaJoho> 賦課の情報年度, KanendoFukaParameter param) {
+        if (資格の情報年度.isEmpty()) {
+            return;
+        }
         Collections.sort(資格の情報年度, new Comparator<HihokenshaDaicho>() {
             @Override
             public int compare(HihokenshaDaicho o1, HihokenshaDaicho o2) {
@@ -687,23 +691,25 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
             NengakuHokenryoKeisanParameter 年額保険料パラメータ = new NengakuHokenryoKeisanParameter();
             年額保険料パラメータ.set賦課年度(賦課計算の情報.get賦課年度());
             TsukibetsuRankuTmpEntity 月別ランク = 賦課計算の情報.get月別ランク();
-            NengakuFukaKonkyo 年額賦課根拠 = nengakuFukaKonkyo.createNengakuFukaKonkyo(
-                    賦課計算の情報.get賦課期日(),
-                    賦課計算の情報.get資格の情報().getIchigoShikakuShutokuYMD(),
-                    賦課計算の情報.get資格の情報().getShikakuSoshitsuYMD(),
-                    月別保険料段階,
-                    月別ランク.getRankKubun4Gatsu(),
-                    月別ランク.getRankKubun5Gatsu(),
-                    月別ランク.getRankKubun6Gatsu(),
-                    月別ランク.getRankKubun7Gatsu(),
-                    月別ランク.getRankKubun8Gatsu(),
-                    月別ランク.getRankKubun9Gatsu(),
-                    月別ランク.getRankKubun10Gatsu(),
-                    月別ランク.getRankKubun11Gatsu(),
-                    月別ランク.getRankKubun12Gatsu(),
-                    月別ランク.getRankKubun1Gatsu(),
-                    月別ランク.getRankKubun2Gatsu(),
-                    月別ランク.getRankKubun3Gatsu());
+            NengakuFukaKonkyo 年額賦課根拠;
+            if (月別ランク == null) {
+                年額賦課根拠 = nengakuFukaKonkyo.createNengakuFukaKonkyo(
+                        賦課計算の情報.get賦課期日(),
+                        賦課計算の情報.get資格の情報().getIchigoShikakuShutokuYMD(),
+                        賦課計算の情報.get資格の情報().getShikakuSoshitsuYMD(),
+                        月別保険料段階,
+                        null, null, null, null, null, null, null, null, null, null, null, null);
+            } else {
+                年額賦課根拠 = nengakuFukaKonkyo.createNengakuFukaKonkyo(
+                        賦課計算の情報.get賦課期日(),
+                        賦課計算の情報.get資格の情報().getIchigoShikakuShutokuYMD(),
+                        賦課計算の情報.get資格の情報().getShikakuSoshitsuYMD(),
+                        月別保険料段階,
+                        月別ランク.getRankKubun4Gatsu(), 月別ランク.getRankKubun5Gatsu(), 月別ランク.getRankKubun6Gatsu(),
+                        月別ランク.getRankKubun7Gatsu(), 月別ランク.getRankKubun8Gatsu(), 月別ランク.getRankKubun9Gatsu(),
+                        月別ランク.getRankKubun10Gatsu(), 月別ランク.getRankKubun11Gatsu(), 月別ランク.getRankKubun12Gatsu(),
+                        月別ランク.getRankKubun1Gatsu(), 月別ランク.getRankKubun2Gatsu(), 月別ランク.getRankKubun3Gatsu());
+            }
             年額保険料パラメータ.set年額賦課根拠(年額賦課根拠);
             年額保険料パラメータ.set年額制御情報(年額制御情報);
             NengakuHokenryo 年額保険料 = keisan.calculate年額保険料(年額保険料パラメータ);
@@ -877,6 +883,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
     }
 
     private void set賦課の情報(DbT2002FukaJohoTempTableEntity entity, FukaJoho 更新後, boolean has口座) {
+        entity.setShikibetsuCode(更新後.get識別コード());
         entity.setChoteiJiyu1(更新後.get調定事由1());
         entity.setChoteiJiyu2(更新後.get調定事由2());
         entity.setChoteiJiyu3(更新後.get調定事由3());
@@ -1282,18 +1289,22 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
     /**
      * 調定計算と調定事由メソッドです
      *
-     * @param 賦課情報リスト List<FukaJoho>
+     * @param 賦課の情報リスト List<FukaJoho>
      * @param 徴収方法情報 ChoshuHoho
      * @param 調定年度 FlexibleYear
      * @param 調定日時 YMDHMS
      * @return FukaJohoToChoshuHoho 更正後の賦課の情報と徴収方法の情報
      */
-    public FukaJohoToChoshuHoho caluculateChotei(List<FukaJoho> 賦課情報リスト,
+    public FukaJohoToChoshuHoho caluculateChotei(List<FukaJoho> 賦課の情報リスト,
             ChoshuHoho 徴収方法情報, FlexibleYear 調定年度, YMDHMS 調定日時) {
-        // TODO ビジネス設計_DBBBZ00002_過年度更正計算 を実装完了しない。使用しないのパラメータ。
-        if (調定年度 == null && 調定日時 == null) {
+        if (調定年度 == null || 調定日時 == null) {
             throw new ApplicationException(UrErrorMessages.入力値が不正.getMessage());
         }
+        KanendoKoseiKeisan kanendoKoseiKeisan = KanendoKoseiKeisan.createInstance();
+        KoseigoFukaResult koseigoFukaResult = kanendoKoseiKeisan.getKoseigoFuka(賦課の情報リスト,
+                徴収方法情報, 調定年度, 調定日時);
+        List<FukaJoho> 賦課情報リスト = koseigoFukaResult.get賦課の情報リスト();
+
         KoseigoFukaResult 調定計算Result = new KoseigoFukaResult(賦課情報リスト, 徴収方法情報);
         FukaJoho 入力_現年度 = get賦課情報_現年度(賦課情報リスト);
         List<FukaJoho> 調定計算_賦課リスト = 調定計算Result.get賦課の情報リスト();

@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 特別徴収開始通知書（仮算定）帳票 A4縦・オーバーレイタイプEditor
@@ -27,10 +26,9 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
         ITokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor {
 
-    private static final int INDEX_5 = 5;
-    private static final int INDEX_7 = 7;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_6 = 6;
     private static final int INDEX_8 = 8;
-    private static final int INDEX_10 = 10;
 
     private final KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報;
     private final RString 通知書定型文１;
@@ -126,8 +124,8 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
                 && 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日() != null) {
             FlexibleDate 生年月日 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日_A4();
             source.birthYYYY = 生年月日.getYear().wareki().toDateString();
-            source.birthMM = new RString(生年月日.toString()).substring(INDEX_5, INDEX_7);
-            source.birthDD = new RString(生年月日.toString()).substring(INDEX_8, INDEX_10);
+            source.birthMM = new RString(生年月日.toString()).substring(INDEX_4, INDEX_6);
+            source.birthDD = new RString(生年月日.toString()).substring(INDEX_6, INDEX_8);
         }
     }
 
@@ -193,24 +191,22 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
                 && 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額01() != null
                 && 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額02() != null
                 && 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額03() != null) {
-            source.karisanteiGakuGokei = DecimalFormatter.toコンマ区切りRString(
-                    仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額01()
+            source.karisanteiGakuGokei = new RString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額01()
                     .add(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額02())
-                    .add(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額03()),
-                    0);
+                    .add(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額03()).toString());
         }
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後() != null) {
             if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額01() != null) {
-                source.hokenryoGaku4Gatsu1 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
-                        .get更正後().get更正後特徴期別金額01(), 0);
+                source.hokenryoGaku4Gatsu1 = new RString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                        .get更正後().get更正後特徴期別金額01().toString());
             }
             if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額02() != null) {
-                source.hokenryoGaku6Gatsu1 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
-                        .get更正後().get更正後特徴期別金額02(), 0);
+                source.hokenryoGaku6Gatsu1 = new RString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                        .get更正後().get更正後特徴期別金額02().toString());
             }
             if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額03() != null) {
-                source.hokenryoGaku8Gatsu1 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
-                        .get更正後().get更正後特徴期別金額03(), 0);
+                source.hokenryoGaku8Gatsu1 = new RString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                        .get更正後().get更正後特徴期別金額03().toString());
             }
         }
     }
@@ -227,32 +223,32 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateEditor implements
             }
             source.shotokuDankai = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度保険料段階();
             if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度保険料率() != null) {
-                source.karisanteiGakuGokei1 = DecimalFormatter.toコンマ区切りRString(
-                        仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度保険料率(), 0);
+                source.karisanteiGakuGokei1 = new RString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                        .get前年度情報().get前年度保険料率().toString());
             }
             if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度特徴期別金額04() != null) {
-                source.hokenryoGaku10Gatsu = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
-                        .get前年度情報().get前年度特徴期別金額04(), 0);
+                source.hokenryoGaku10Gatsu = new RString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                        .get前年度情報().get前年度特徴期別金額04().toString());
             }
             if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度特徴期別金額01() != null) {
-                source.hokenryoGaku4Gatsu2 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
-                        .get前年度情報().get前年度特徴期別金額01(), 0);
+                source.hokenryoGaku4Gatsu2 = new RString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                        .get前年度情報().get前年度特徴期別金額01().toString());
             }
             if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度特徴期別金額05() != null) {
-                source.hokenryoGaku12Gatsu = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
-                        .get前年度情報().get前年度特徴期別金額05(), 0);
+                source.hokenryoGaku12Gatsu = new RString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                        .get前年度情報().get前年度特徴期別金額05().toString());
             }
             if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度特徴期別金額02() != null) {
-                source.hokenryoGaku6Gatsu2 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
-                        .get前年度情報().get前年度特徴期別金額02(), 0);
+                source.hokenryoGaku6Gatsu2 = new RString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                        .get前年度情報().get前年度特徴期別金額02().toString());
             }
             if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度最終期特徴期別介護保険料() != null) {
-                source.hokenryoGaku2Gatsu = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
-                        .get前年度情報().get前年度最終期特徴期別介護保険料(), 0);
+                source.hokenryoGaku2Gatsu = new RString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                        .get前年度情報().get前年度最終期特徴期別介護保険料().toString());
             }
             if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報().get前年度特徴期別金額03() != null) {
-                source.hokenryoGaku8Gatsu2 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
-                        .get前年度情報().get前年度特徴期別金額03(), 0);
+                source.hokenryoGaku8Gatsu2 = new RString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
+                        .get前年度情報().get前年度特徴期別金額03().toString());
             }
         }
         source.tsuchibun = 通知書定型文１;

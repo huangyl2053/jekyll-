@@ -38,16 +38,15 @@ public class JigyohokokuCompYoshiki272Report extends Report<JigyohokokuCompYoshi
 
     @Override
     public void writeBy(ReportSourceWriter<JigyohokokuCompYoshiki272ReportSource> writer) {
-        IJigyohokokuCompYoshiki272Editor headeditor = new JigyohokokuCompYoshiki272HeadEditor(entity);
-        for (JigyohokokuCompYoshiki272Change change : getData()) {
-            IJigyohokokuCompYoshiki272Editor bodyeditor = new JigyohokokuCompYoshiki272BodyEditor(change);
+        for (int i = 0; i < getData().size(); i++) {
+            IJigyohokokuCompYoshiki272Editor headeditor = new JigyohokokuCompYoshiki272HeadEditor(entity, i);
+            IJigyohokokuCompYoshiki272Editor bodyeditor = new JigyohokokuCompYoshiki272BodyEditor(getData().get(i));
             IJigyohokokuCompYoshiki272Builder builder = new JigyohokokuCompYoshiki272Builder(headeditor, bodyeditor);
             writer.writeLine(builder);
         }
-
     }
 
-    private Iterable<JigyohokokuCompYoshiki272Change> getData() {
+    private List<JigyohokokuCompYoshiki272Change> getData() {
         List<JigyohokokuCompYoshiki272Change> dataList = new ArrayList<>();
         List<DbT7021JigyoHokokuTokeiDataEntity> jigyohokokutokeis = entity.get事業報告統計データ();
         for (DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei : jigyohokokutokeis) {

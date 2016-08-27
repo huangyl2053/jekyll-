@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ZenkaiNinteiKekka {
 
     private FlexibleDate 申請年月日;

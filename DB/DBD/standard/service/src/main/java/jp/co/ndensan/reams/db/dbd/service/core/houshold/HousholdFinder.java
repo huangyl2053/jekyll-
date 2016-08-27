@@ -11,15 +11,19 @@ import jp.co.ndensan.reams.db.dbd.business.core.houshold.HousholdBusiness;
 import jp.co.ndensan.reams.db.dbd.definition.core.hikazeinenkin.TorokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.houshold.HousholdParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.houshold.HousholdUpdateParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4037HikazeNenkinTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.houshold.HousholdEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4037HikazeNenkinTaishoshaDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.houshold.IHousholdMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1001HihokenshaDaichoAliveDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -43,6 +47,8 @@ public class HousholdFinder {
     private final RString 補足給付初回回付_年次_情報 = new RString("93");
     private final RString 補足給付初回回付_月次_情報 = new RString("94");
     private final RString 処理結果_00 = new RString("00");
+    private final RString 後排他Message
+            = new RString("他のユーザーによって更新が実施されました。お手数をおかけ致しますが、再度更新処理を実施してください。");
     private static final int 桁_3 = 3;
     private static final int 桁_4 = 4;
     private static final int 桁_10 = 10;
@@ -124,10 +130,35 @@ public class HousholdFinder {
     public int 重複チェック(RString 被保番号, RString 年金保険者コード,
             RString 年金コードの先頭３桁, RString 現基礎年金番号, RString 対象年, RString 作成年月日) {
         DbT4037HikazeNenkinTaishoshaDac dac = InstanceProvider.create(DbT4037HikazeNenkinTaishoshaDac.class);
-        if (dac.select重複チェックデータ(被保番号, 年金保険者コード, 年金コードの先頭３桁, 現基礎年金番号, 対象年, 作成年月日).isEmpty()) {
+        List<DbT4037HikazeNenkinTaishoshaEntity> entityList
+                = dac.select重複チェックデータ(被保番号, 年金保険者コード, 年金コードの先頭３桁, 現基礎年金番号, 対象年, 作成年月日);
+        if (entityList.isEmpty()) {
             return 0;
         }
-        return 1;
+        return entityList.size();
+    }
+
+    private boolean 後排他処理(RString 被保番号, RString 基礎年金番号, RString 年金コード,
+            RString 年金保険者コード, RString 作成年月日, RString 対象年, int count, boolean isInsert) {
+        DbT4037HikazeNenkinTaishoshaDac dac = InstanceProvider.create(DbT4037HikazeNenkinTaishoshaDac.class);
+        DbT4037HikazeNenkinTaishoshaEntity entity
+                = dac.selectByKey(被保番号, 基礎年金番号, 年金コード, 年金保険者コード, 作成年月日, 対象年);
+        if (isInsert) {
+            if (entity != null) {
+                throw new ApplicationException(後排他Message.toString());
+            }
+            return false;
+        } else {
+            return null == entity || entity.getUpdateCount() != count;
+        }
+    }
+
+    private void 更新後排他処理(HousholdBusiness 非課税年金対象者一時) {
+        if (後排他処理(非課税年金対象者一時.get被保険者番号(), 非課税年金対象者一時.get基礎年金番号(), 非課税年金対象者一時.get年金コード(),
+                非課税年金対象者一時.get年金保険者(), 非課税年金対象者一時.get作成年月日(), 非課税年金対象者一時.get対象年(),
+                非課税年金対象者一時.getCount(), false)) {
+            throw new ApplicationException(後排他Message.toString());
+        }
     }
 
     /**
@@ -163,11 +194,15 @@ public class HousholdFinder {
      * 「DB出力(非課税年金対象者)」の「編集仕様(UPDATE)」の「解除キー」を参照し、当該データを削除します。
      *
      * @param 非課税年金対象者一時 非課税年金対象者一時
+     * @param userId userId
      */
     @Transaction
-    public void 削除解除_登録区分_画面登録_保存処理(HousholdBusiness 非課税年金対象者一時) {
+    public void 削除解除_登録区分_画面登録_保存処理(HousholdBusiness 非課税年金対象者一時, RString userId) {
+        更新後排他処理(非課税年金対象者一時);
         HousholdUpdateParameter parameter = new HousholdUpdateParameter();
         setキー(非課税年金対象者一時, parameter);
+        parameter.setLastUpdateReamsLoginId(userId);
+        parameter.setUpdateCount(非課税年金対象者一時.getCount() + 1);
         IHousholdMapper mapper = mapperProvider.create(IHousholdMapper.class);
         mapper.削除解除_登録区分_画面登録_保存処理(parameter);
     }
@@ -178,9 +213,11 @@ public class HousholdFinder {
      * @param 非課税年金対象者一時 非課税年金対象者一時
      * @param 現基礎年金番号 現基礎年金番号
      * @param 被保番号 被保番号
+     * @param userId userId
      */
     @Transaction
-    public void 取込_保存処理(HousholdBusiness 非課税年金対象者一時, RString 現基礎年金番号, RString 被保番号) {
+    public void 取込_保存処理(HousholdBusiness 非課税年金対象者一時, RString 現基礎年金番号, RString 被保番号, RString userId) {
+        更新後排他処理(非課税年金対象者一時);
         HousholdUpdateParameter parameter = new HousholdUpdateParameter();
         setキー(非課税年金対象者一時, parameter);
         if (null == 現基礎年金番号) {
@@ -193,6 +230,8 @@ public class HousholdFinder {
         } else {
             parameter.set被保険者番号(被保番号);
         }
+        parameter.setLastUpdateReamsLoginId(userId);
+        parameter.setUpdateCount(非課税年金対象者一時.getCount() + 1);
         IHousholdMapper mapper = mapperProvider.create(IHousholdMapper.class);
         mapper.取込_保存処理(parameter);
     }
@@ -218,22 +257,25 @@ public class HousholdFinder {
      * @param 対象年 対象年
      * @param 各種区分 各種区分
      * @param 金額 金額
+     * @param userId userId
      */
     @Transaction
     public void 新規_保存処理(RString 年度, RString 月, RString 基礎年金番号, RString 現基礎年金番号, RString 年金コード,
             RString 被保番号, RString 年金保険者コード, RDate 作成年月日, RDate 生年月日, RString 性別, RString 氏名カナ,
-            RString 氏名漢字, RString 住所カナ, RString 住所漢字, RString 対象年, RString 訂正区分, RString 各種区分, RString 金額) {
+            RString 氏名漢字, RString 住所カナ, RString 住所漢字, RString 対象年, RString 訂正区分, RString 各種区分,
+            RString 金額, RString userId) {
+        後排他処理(被保番号, 基礎年金番号, 年金コード, 年金保険者コード, 作成年月日.toDateString(), 対象年, 1, true);
         HousholdUpdateParameter parameter = new HousholdUpdateParameter();
         parameter.set年度(年度);
         parameter.set処理区分(get処理区分(月));
-        parameter.set対象月(月.substring(0));
+        parameter.set対象月(月.substring(1));
         parameter.set基礎年金番号(get左0埋めRString(基礎年金番号, 桁_10));
         parameter.set現基礎年金番号(get左0埋めRString(現基礎年金番号, 桁_10));
         parameter.set年金コード(get左0埋めRString(年金コード, 桁_4));
         parameter.set被保険者番号(被保番号);
         parameter.set登録区分(TorokuKubun.画面登録.getコード());
         parameter.setDtレコード区分(データレコード);
-        //DT市町村コード
+        parameter.setDt市町村コード(getDT市町村コード(被保番号));
         parameter.setDt年金保険者コード(get左0埋めRString(年金保険者コード, 桁_3));
         parameter.setDt通知内容コード(getDT通知内容コード(月));
         parameter.setDt作成年月日(作成年月日.toDateString());
@@ -250,8 +292,19 @@ public class HousholdFinder {
         parameter.setDt各種区分(各種区分);
         parameter.setDt処理結果(処理結果_00);
         parameter.setDt金額１(金額);
+        parameter.setLastUpdateReamsLoginId(userId);
+        parameter.setUpdateCount(1);
         IHousholdMapper mapper = mapperProvider.create(IHousholdMapper.class);
         mapper.新規_保存処理(parameter);
+    }
+
+    private RString getDT市町村コード(RString 被保番号) {
+        DbV1001HihokenshaDaichoAliveDac dac = InstanceProvider.create(DbV1001HihokenshaDaichoAliveDac.class);
+        DbV1001HihokenshaDaichoEntity entity = dac.get被保険者台帳(new HihokenshaNo(被保番号));
+        if (null == entity || null == entity.getShichosonCode()) {
+            return RString.EMPTY;
+        }
+        return entity.getShichosonCode().getColumnValue();
     }
 
     /**
@@ -261,7 +314,7 @@ public class HousholdFinder {
      * @param 月 月
      * @param 現基礎年金番号 現基礎年金番号
      * @param 被保番号 被保番号
-     * @param 基礎年金番号 基礎年金番号
+     * @param 性別 性別
      * @param 生年月日 生年月日
      * @param 作成年月日 作成年月日
      * @param 氏名カナ 氏名カナ
@@ -270,26 +323,29 @@ public class HousholdFinder {
      * @param 住所漢字 住所漢字
      * @param 対象年 対象年
      * @param 金額 金額
+     * @param userId userId
      */
     @Transaction
     public void 修正_登録区分_画面登録_保存処理(HousholdBusiness 非課税年金対象者一時, RString 月, RString 現基礎年金番号,
-            RString 被保番号, RDate 作成年月日, RDate 生年月日, RString 基礎年金番号, RString 氏名カナ,
-            RString 氏名漢字, RString 住所カナ, RString 住所漢字, RString 対象年, RString 金額) {
+            RString 被保番号, RDate 作成年月日, RDate 生年月日, RString 性別, RString 氏名カナ,
+            RString 氏名漢字, RString 住所カナ, RString 住所漢字, RString 対象年, RString 金額, RString userId) {
         HousholdUpdateParameter parameter = new HousholdUpdateParameter();
         setキー(非課税年金対象者一時, parameter);
         parameter.set処理区分(get処理区分(月));
-        parameter.set対象月(月.substring(0));
+        parameter.set対象月(月.substring(1));
         parameter.set現基礎年金番号(get左0埋めRString(現基礎年金番号, 桁_10));
         parameter.set被保険者番号(被保番号);
         parameter.setDt作成年月日(作成年月日.toDateString());
         parameter.setDt生年月日(生年月日.toDateString());
-        parameter.setDt基礎年金番号(基礎年金番号);
+        parameter.setDt性別(性別);
         parameter.setDtカナ氏名(氏名カナ);
         parameter.setDt漢字氏名(氏名漢字);
         parameter.setDtカナ住所(住所カナ);
         parameter.setDt漢字住所(住所漢字);
         parameter.setDt対象年(対象年);
         parameter.setDt金額１(金額);
+        parameter.setLastUpdateReamsLoginId(userId);
+        parameter.setUpdateCount(非課税年金対象者一時.getCount() + 1);
         IHousholdMapper mapper = mapperProvider.create(IHousholdMapper.class);
         mapper.修正_登録区分_画面登録_保存処理(parameter);
     }

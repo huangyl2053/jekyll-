@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuShins
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuShinsakaiIinJohoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuSonotaJohoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuSonotaJohoDataSakuseiA4Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTokkiJikouDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTokkiJikouDataSakuseiA42Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTokkiJikouDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTuikaSiryoDataSakuseiA3Process;
@@ -52,6 +53,7 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
     private static final String 事務局_特記事項_一次判定結果 = "jimuTokkiJikouItiziHantei";
     private static final String 事務局_特記事項 = "jimuTokkiJikou";
     private static final String 事務局_特記事項_2枚目以降 = "jimuTokkiJikou_2";
+    private static final String 事務局_特記事項_一次判定結果_2枚目以降 = "jimuTokkiJikouItiziHantei_2";
     private static final String 事務局_概況特記 = "jimuTokkiIran";
     private static final String 事務局_概況特記その他 = "jimuGaikyotokkiSonota";
     private static final RString 選択 = new RString("1");
@@ -93,6 +95,7 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
         }
         if (選択.equals(getParameter().getChoyoJimu_tokkiJikouHanteiFalg())) {
             executeStep(事務局_特記事項_一次判定結果);
+            executeStep(事務局_特記事項_一次判定結果_2枚目以降);
         }
         if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
             executeStep(事務局_追加資料鑑);
@@ -250,9 +253,6 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
     protected IBatchFlowCommand createJimuTokkiJikouItiziHanteiData() {
         return loopBatch(JimuItiziHanteiDataSakuseiA3Process.class)
                 .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
-        // TODO　凌護行 特記事項2枚目の出力方法が不正です。実装ない。
-//         loopBatch(JimuTokkiJikouDataSakuseiA3Process.class)
-//                .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
     }
 
     /**
@@ -275,6 +275,18 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
     protected IBatchFlowCommand createJimuTokkiJikouNiData() {
         // TODO　凌護行 特記事項2枚目の出力方法が不正です。　　
         return loopBatch(JimuTokkiJikouDataSakuseiA42Process.class)
+                .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
+    }
+
+    /**
+     * 事務局用介護認定審査対象者一覧データの作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(事務局_特記事項_一次判定結果_2枚目以降)
+    protected IBatchFlowCommand createJimuTokkiJikouItiziHanteiNiData() {
+        // TODO　凌護行 特記事項2枚目の出力方法が不正です。実装ない。
+        return loopBatch(JimuTokkiJikouDataSakuseiA3Process.class)
                 .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
     }
 }

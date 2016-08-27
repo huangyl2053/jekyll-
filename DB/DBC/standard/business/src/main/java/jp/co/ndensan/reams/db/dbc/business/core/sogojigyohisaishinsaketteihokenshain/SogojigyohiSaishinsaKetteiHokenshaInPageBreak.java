@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.sogojigyohisaishinsaketteihokenshain;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.db.report.source.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaKetteiHokenshaInSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohisaishinsaokenshain.SogojigyohiSaishinsaKetteiHokenshaInSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
@@ -38,7 +38,7 @@ public class SogojigyohiSaishinsaKetteiHokenshaInPageBreak
     public boolean isBreak(ReportLineRecord<SogojigyohiSaishinsaKetteiHokenshaInSource> currentSource,
             ReportLineRecord<SogojigyohiSaishinsaKetteiHokenshaInSource> nextSource) {
         boolean flg = false;
-        if (this.breakKeysList.contains(SogojigyohiSaishinsaKetteiHokenshaInOutPutOrder.証記載保険者番号.getフォームフィールド名())
+        if (this.breakKeysList.contains(SogojigyohiSaishinsaKetteiHokenshaInOutPutOrder.証記載保険者番号.get項目ID())
                 && !currentSource.getSource().shoKisaiHokenshaNo.equals(nextSource.getSource().shoKisaiHokenshaNo)) {
             flg = true;
         }

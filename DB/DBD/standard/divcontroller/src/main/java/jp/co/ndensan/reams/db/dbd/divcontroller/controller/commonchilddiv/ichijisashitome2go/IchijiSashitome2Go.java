@@ -53,11 +53,13 @@ public class IchijiSashitome2Go {
      * @return ResponseData<IchijiSashitome2GoDiv>
      */
     public ResponseData<IchijiSashitome2GoDiv> onClick_BtnKakutei(IchijiSashitome2GoDiv div) {
+        ResponseData<IchijiSashitome2GoDiv> response = new ResponseData();
         IDialogResponse dialogResponse = ResponseData.of(div);
         ValidationMessageControlPairs pairs = getHandler(div).onClick_BtnKakutei();
         if (pairs.iterator().hasNext()) {
             return dialogResponse.addValidationMessages(pairs).respond();
         }
+        response.data = div;
         return dialogResponse.dialogOKClose();
     }
 

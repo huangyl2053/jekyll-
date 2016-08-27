@@ -68,7 +68,6 @@ public class TaishoSetaiinIdoManager {
     private static final RString DATA_対象者判定 = new RString("対象者判定");
     private static final RString DATA_ENTITY_ID = new RString("DBC110065");
     private static final RString DATA_資格喪失 = new RString("資格喪失、認定期間切れ等によって対象外になりました。");
-    private final DbT3116KijunShunyugakuTekiyoKanriDac 基準収入額適用管理Dac;
     private static final RString 異動分 = new RString("0001");
     private static final RString 被保険者番号 = new RString("0002");
     private static final RString 基準収入額適用申請書 = new RString("0001");
@@ -100,23 +99,20 @@ public class TaishoSetaiinIdoManager {
             = new RString("世帯把握基準日が遡っているため、申請書を出力しません");
     private final DbT3116KijunShunyugakuTekiyoKanriDac dac;
     private final MapperProvider mapperProvider;
-    private boolean hanndann;
 
     /**
      * コンストラクタです。
      */
     public TaishoSetaiinIdoManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        dac = InstanceProvider.create(DbT3116KijunShunyugakuTekiyoKanriDac.class);
-        this.基準収入額適用管理Dac = InstanceProvider.create(DbT3116KijunShunyugakuTekiyoKanriDac.class);
+        this.dac = InstanceProvider.create(DbT3116KijunShunyugakuTekiyoKanriDac.class);
 
     }
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link TaishoSetaiinIdoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link TaishoSetaiinIdoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TaishoSetaiinIdoManager}のインスタンス
      */
     public static TaishoSetaiinIdoManager createInstance() {
         return InstanceProvider.create(TaishoSetaiinIdoManager.class);
@@ -155,8 +151,7 @@ public class TaishoSetaiinIdoManager {
                     || DATA_世帯員が存在しないため申請書.equals(対象世帯員クラス.getメッセージ())
                     || DATA_単独世帯.equals(対象世帯員クラス.getメッセージ())
                     || DATA_複数世帯.equals(対象世帯員クラス.getメッセージ()))) {
-                List<DbT3116KijunShunyugakuTekiyoKanriEntity> kijunlist = new ArrayList();
-                kijunlist = dac.selectJouhousootoNendo(対象世帯員クラス.get世帯コード(), 対象世帯員クラス.get処理年度());
+                dac.selectJouhousootoNendo(対象世帯員クラス.get世帯コード(), 対象世帯員クラス.get処理年度());
             }
         } else if (被保険者番号.equals(抽出条件)
                 && 無条件抽出.equals(抽出対象)) {
@@ -176,7 +171,7 @@ public class TaishoSetaiinIdoManager {
     public void kekkaKakuninListOutput(TaishoSetaiin 対象世帯員クラス, FlexibleYear 年度) {
         List<DbT3116KijunShunyugakuTekiyoKanriEntity> list_select基準収入額適用管理マスタ = dac.select基準収入額適用管理マスタ(年度);
         for (DbT3116KijunShunyugakuTekiyoKanriEntity dbt3116entity : list_select基準収入額適用管理マスタ) {
-            if (!(対象世帯員クラス.get世帯コード().equals(dbt3116entity.getSetaiCode()))) {
+            if (!(対象世帯員クラス.get世帯コード().equals(new RString((dbt3116entity.getSetaiCode().toString()))))) {
                 publish処理結果確認リスト(list_select基準収入額適用管理マスタ);
             }
         }
@@ -191,7 +186,7 @@ public class TaishoSetaiinIdoManager {
      *
      */
     private void hanntei(TaishoSetaiin 対象世帯員クラス, TaishoSetaiin temp_対象世帯員クラス) {
-        temp_対象世帯員クラス.setメッセージ(null);
+        temp_対象世帯員クラス.setメッセージ(RString.EMPTY);
         temp_対象世帯員クラス.set出力有無(出力する);
         for (Shotai shotailist : 対象世帯員クラス.get世帯員情報()) {
             if (!(資格区分_1.equals(shotailist.get資格区分()))) {
@@ -209,16 +204,16 @@ public class TaishoSetaiinIdoManager {
             } else if ((!(対象世帯員クラス.get世帯員情報().size() < 2)) && (!(対象世帯員クラス.get総収入額().compareTo(DATA_520) < 0))) {
                 temp_対象世帯員クラス.setメッセージ(DATA_複数世帯);
                 temp_対象世帯員クラス.set出力有無(出力しない);
-
-                if (出力する.equals(対象世帯員クラス.get出力有無())) {
-
-                    TaishoSetaiinIdoMybatisParameter parameter = TaishoSetaiinIdoMybatisParameter
-                            .createMybatisParam(対象世帯員クラス.get世帯コード(), 対象世帯員クラス.get処理年度());
-                    ITaishoSetaiinIdoMapper mapper = mapperProvider.create(ITaishoSetaiinIdoMapper.class);
-                    List<TaishoSetaiinIdoEntity> entityList = mapper.select基準収入額適用管理(parameter);
-                    set対象世帯員(entityList, shotailist, 対象世帯員クラス, temp_対象世帯員クラス);
-                }
             }
+            if (出力する.equals(対象世帯員クラス.get出力有無())) {
+
+                TaishoSetaiinIdoMybatisParameter parameter = TaishoSetaiinIdoMybatisParameter
+                        .createMybatisParam(対象世帯員クラス.get世帯コード(), 対象世帯員クラス.get処理年度());
+                ITaishoSetaiinIdoMapper mapper = mapperProvider.create(ITaishoSetaiinIdoMapper.class);
+                List<TaishoSetaiinIdoEntity> entityList = mapper.select基準収入額適用管理(parameter);
+                set対象世帯員(entityList, shotailist, 対象世帯員クラス, temp_対象世帯員クラス);
+            }
+
         }
 
     }
@@ -274,16 +269,16 @@ public class TaishoSetaiinIdoManager {
             temp_対象世帯員クラス.set更新時履歴番号(対象世帯員クラス.get更新時履歴番号() + 1);
         }
         for (TaishoSetaiinIdoEntity taishosetaiinidoentity : entityList) {
-            if (!(0 < taishosetaiinidoentity.getShinseishoSakuseiSetaiKijunYMD().compareTo(対象世帯員クラス.get世帯員把握基準日()))) {
+            if (taishosetaiinidoentity.getShinseishoSakuseiSetaiKijunYMD().isBeforeOrEquals(対象世帯員クラス.get世帯員把握基準日())) {
+                temp_対象世帯員クラス.setメッセージ(DATA_世帯把握基準日が遡);
+                temp_対象世帯員クラス.set出力有無(出力しない);
+            } else {
                 if (taishosetaiinidoentity.getHihokenshaNo().equals(shotailist.get被保険者番号())) {
                     temp_対象世帯員クラス.setメッセージ(DATA_既に発行済み);
                     temp_対象世帯員クラス.set出力有無(出力しない);
                 } else {
                     temp_対象世帯員クラス.set更新時履歴番号(taishosetaiinidoentity.getRirekiNo() + 1);
                 }
-            } else {
-                temp_対象世帯員クラス.setメッセージ(DATA_世帯把握基準日が遡);
-                temp_対象世帯員クラス.set出力有無(出力しない);
             }
         }
     }
@@ -291,8 +286,7 @@ public class TaishoSetaiinIdoManager {
     /**
      * 処理結果確認リストです。
      *
-     * @param list_select基準収入額適用管理マスタ
-     * List<DbT3116KijunShunyugakuTekiyoKanriEntity>
+     * @param list_select基準収入額適用管理マスタ List<DbT3116KijunShunyugakuTekiyoKanriEntity>
      *
      */
     public void publish処理結果確認リスト(List<DbT3116KijunShunyugakuTekiyoKanriEntity> list_select基準収入額適用管理マスタ) {

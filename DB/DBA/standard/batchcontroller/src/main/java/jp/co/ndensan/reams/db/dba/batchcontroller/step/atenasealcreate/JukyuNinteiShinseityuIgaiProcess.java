@@ -5,13 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.step.atenasealcreate;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.atenasealcreate.AtenaSealCreateResult;
 import jp.co.ndensan.reams.db.dba.definition.processprm.atenasealcreate.AtenaSealCreateProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.AtenaSealCreateRelate4001Entity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.DbTAtenaSealCreateTempTableEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
-import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtenaSearchKeyBuilder;
@@ -39,16 +36,10 @@ public class JukyuNinteiShinseityuIgaiProcess extends BatchProcessBase<AtenaSeal
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.atenasealcreate."
             + "IAtenaSealCreateJukyuNinteiShinseityuIgaiMapper.getJukyuNinteiShinseityuIgai");
-    private AtenaSealCreateProcessParameter processParamter;
     private static final RString TABLE_宛名識別対象一時テーブル3 = new RString("DbWT2009AtenaShikibetuTaisyou3");
-    List<KoikiZenShichosonJoho> koikiZenShichosonJoho;
+    private AtenaSealCreateProcessParameter processParamter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 宛名識別対象一時テーブル3;
-
-    @Override
-    protected void initialize() {
-        koikiZenShichosonJoho = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records();
-    }
 
     @Override
     protected IBatchReader createReader() {

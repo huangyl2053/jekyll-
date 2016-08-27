@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinShinsa
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinShinsakaiIinJohoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinSonotaJohoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinSonotaJohoDataSakuseiA4Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTokkiJikouDataSakuseiA4NirameProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTokkiJikouDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTokkiJikouItiziHanteiDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTuikaSiryoDataSakuseiA3Process;
@@ -34,6 +35,7 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
 
     private static final String 委員_審査会開催通知書 = "iinTuutisho";
     private static final String 委員_特記事項 = "iinTokkiJikou";
+    private static final String 委員_特記事項_2枚目以降 = "iinTokkiJikou_2";
     private static final String 委員_一次判定結果 = "iinItiziHantei";
     private static final String 委員_主治医意見書_1枚目 = "iinIkensho_1";
     private static final String 委員_主治医意見書_2枚目以降 = "iinIkensho_2";
@@ -53,6 +55,7 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
         }
         if (選択.equals(getParameter().getChohyoIin_tokkiJikouFalg())) {
             executeStep(委員_特記事項);
+            executeStep(委員_特記事項_2枚目以降);
         }
         if (選択.equals(getParameter().getChohyoIin_itiziHanteiFalg())) {
             executeStep(委員_一次判定結果);
@@ -101,6 +104,17 @@ public class IinShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchPa
     @Step(委員_特記事項)
     protected IBatchFlowCommand createIinTokkiJikouData() {
         return loopBatch(IinTokkiJikouDataSakuseiA4Process.class)
+                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+    }
+
+    /**
+     * 委員用特記事項情報データの作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(委員_特記事項_2枚目以降)
+    protected IBatchFlowCommand createIinTokkiJikouData_2() {
+        return loopBatch(IinTokkiJikouDataSakuseiA4NirameProcess.class)
                 .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
 

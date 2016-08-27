@@ -10,8 +10,10 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.taino.ShiharaiHohoHenkoTaino;
+import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TainoHanteiKubun;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100002.ShiharaiHohoHenkoTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -106,14 +108,16 @@ public final class ShiharaiHohoHenkoTsuchishoReport extends Report<ShiharaiHohoH
         if (最新賦課年度.isEmpty()) {
             return;
         }
-
         for (ShiharaiHohoHenkoTaino 支払方法変更滞納 : 帳票情報.getShiharaiHohoHenkoTainoList()) {
-            if (最新賦課年度.minusYear(2).equals(支払方法変更滞納.get賦課年度())) {
-                年度1リスト.add(支払方法変更滞納);
-            } else if (最新賦課年度.minusYear(1).equals(支払方法変更滞納.get賦課年度())) {
-                年度2リスト.add(支払方法変更滞納);
-            } else if (最新賦課年度.equals(支払方法変更滞納.get賦課年度())) {
-                年度3リスト.add(支払方法変更滞納);
+            if (支払方法変更滞納.get管理区分().equals(ShiharaiHenkoKanriKubun._１号償還払い化.getコード())
+                    && 支払方法変更滞納.get滞納判定区分().equals(TainoHanteiKubun.予告登録.getコード())) {
+                if (最新賦課年度.minusYear(2).equals(支払方法変更滞納.get賦課年度())) {
+                    年度1リスト.add(支払方法変更滞納);
+                } else if (最新賦課年度.minusYear(1).equals(支払方法変更滞納.get賦課年度())) {
+                    年度2リスト.add(支払方法変更滞納);
+                } else if (最新賦課年度.equals(支払方法変更滞納.get賦課年度())) {
+                    年度3リスト.add(支払方法変更滞納);
+                }
             }
         }
     }

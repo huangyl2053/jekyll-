@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.processprm.seikyugakutsuchishofutanshain;
 
-import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -16,8 +15,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class SeikyugakuTsuchishoFutanshaInProcessParameter implements IBatchProcessParameter {
 
-    private RString 保存先フォルダ;
-    private List<RString> エントリ情報List;
+    private RString path;
+    private RString fileName;
+
 }

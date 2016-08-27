@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.util;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -42,6 +44,7 @@ public final class DateConverter {
     private static final RString FULLYEAR = new RString("0000");
     private static final RString FULLMONTH = new RString("00");
     private static final RString HALFMONTH = new RString("#0");
+    private static final RString STRING = new RString("###,###,###,##0");
 
     /**
      * formatYearFullのメソドです。
@@ -521,4 +524,22 @@ public final class DateConverter {
         }
         return new RDate(fd.getYearValue(), fd.getMonthValue(), fd.getDayValue());
     }
+
+    /**
+     * 金額を編集します。
+     * <pre>
+     * 結果：###,###,###,##9
+     * </pre>
+     *
+     * @param number 金額
+     * @return 結果
+     */
+    public static RString decimalFormat(Decimal number) {
+        if (number == null) {
+            return RString.EMPTY;
+        }
+        NumberFormat format = new DecimalFormat(STRING.toString());
+        return new RString(format.format(number));
+    }
+
 }

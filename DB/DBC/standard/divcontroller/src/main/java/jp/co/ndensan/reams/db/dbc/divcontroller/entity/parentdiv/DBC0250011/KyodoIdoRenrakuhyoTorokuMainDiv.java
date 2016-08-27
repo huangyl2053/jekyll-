@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMess
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonReportPublish;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
  * KyodoIdoRenrakuhyoTorokuMain のクラスファイル
@@ -22,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class KyodoIdoRenrakuhyoTorokuMainDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,10 +32,12 @@ public class KyodoIdoRenrakuhyoTorokuMainDiv extends Panel {
      */
     @JsonProperty("KyodoIdoRenrakuhyoTorokuPrint")
     private KyodoIdoRenrakuhyoTorokuPrintDiv KyodoIdoRenrakuhyoTorokuPrint;
-    @JsonProperty("KyodoIdoRenrakuhyoTorokuInfo")
-    private KyodoJukyushaIdoRenrakuhyoDiv KyodoIdoRenrakuhyoTorokuInfo;
+    @JsonProperty("hdnFlag")
+    private TextBox hdnFlag;
     @JsonProperty("KanryoMessage")
     private KanryoMessageDiv KanryoMessage;
+    @JsonProperty("KyodoIdoRenrakuhyoTorokuInfo")
+    private KyodoJukyushaIdoRenrakuhyoDiv KyodoIdoRenrakuhyoTorokuInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -61,12 +64,21 @@ public class KyodoIdoRenrakuhyoTorokuMainDiv extends Panel {
     }
 
     /*
-     * getKyodoIdoRenrakuhyoTorokuInfo
-     * @return KyodoIdoRenrakuhyoTorokuInfo
+     * gethdnFlag
+     * @return hdnFlag
      */
-    @JsonProperty("KyodoIdoRenrakuhyoTorokuInfo")
-    public IKyodoJukyushaIdoRenrakuhyoDiv getKyodoIdoRenrakuhyoTorokuInfo() {
-        return KyodoIdoRenrakuhyoTorokuInfo;
+    @JsonProperty("hdnFlag")
+    public TextBox getHdnFlag() {
+        return hdnFlag;
+    }
+
+    /*
+     * sethdnFlag
+     * @param hdnFlag hdnFlag
+     */
+    @JsonProperty("hdnFlag")
+    public void setHdnFlag(TextBox hdnFlag) {
+        this.hdnFlag = hdnFlag;
     }
 
     /*
@@ -76,6 +88,15 @@ public class KyodoIdoRenrakuhyoTorokuMainDiv extends Panel {
     @JsonProperty("KanryoMessage")
     public IKanryoMessageDiv getKanryoMessage() {
         return KanryoMessage;
+    }
+
+    /*
+     * getKyodoIdoRenrakuhyoTorokuInfo
+     * @return KyodoIdoRenrakuhyoTorokuInfo
+     */
+    @JsonProperty("KyodoIdoRenrakuhyoTorokuInfo")
+    public IKyodoJukyushaIdoRenrakuhyoDiv getKyodoIdoRenrakuhyoTorokuInfo() {
+        return KyodoIdoRenrakuhyoTorokuInfo;
     }
 
     /*

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5610001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishiencentersoshin.NinteiShienCenterSoshinData;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE561001.DBE561001_CenterTransmissionParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5610001.NinteiShienCenterSoshinDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5610001.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -37,6 +38,7 @@ public class NinteiShienCenterSoshinHandler {
     private static final Code A_06 = new Code("06A");
     private static final Code A_09 = new Code("09A");
     private static final Code B_09 = new Code("09B");
+    private static final RString 未出力 = new RString("key0");
     private final NinteiShienCenterSoshinDiv div;
 
     /**
@@ -54,6 +56,7 @@ public class NinteiShienCenterSoshinHandler {
     public void onLoad() {
         div.getRadDataShutsuryoku().setSelectedKey(new RString("key0"));
         RDate システム日付 = RDate.getNowDate();
+        div.getTxtNijiHanteibi().clearFromValue();
         div.getTxtNijiHanteibi().setToValue(システム日付);
         RString 最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, システム日付, SubGyomuCode.DBU介護統計報告);
         RString 最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, システム日付, SubGyomuCode.DBU介護統計報告);
@@ -116,6 +119,33 @@ public class NinteiShienCenterSoshinHandler {
             rowList.add(row);
         }
         div.getDgTaishoshaIchiran().setDataSource(rowList);
+        div.getRadTennyuShiboJoho().setSelectedKey(new RString("key0"));
+    }
+
+    /**
+     * センター送信データ作成のバッチパラメータ設定です。
+     *
+     * @return DBE561001_CenterTransmissionParameter
+     */
+    public DBE561001_CenterTransmissionParameter setParameter() {
+        List<dgTaishoshaIchiran_Row> rowList = div.getDgTaishoshaIchiran().getSelectedItems();
+        List<RString> 申請書管理番号リスト = new ArrayList<>();
+        for (dgTaishoshaIchiran_Row row : rowList) {
+            申請書管理番号リスト.add(row.getShinseishokanrino());
+        }
+        RDate 二次判定日_開始 = div.getTxtNijiHanteibi().getFromValue();
+        RDate 二次判定日_終了 = div.getTxtNijiHanteibi().getToValue();
+        RString 転入_死亡情報出力区分 = div.getRadTennyuShiboJoho().getSelectedKey();
+        DBE561001_CenterTransmissionParameter parameter = new DBE561001_CenterTransmissionParameter();
+        parameter.set二次判定開始日(二次判定日_開始 != null ? 二次判定日_開始.toDateString() : RString.EMPTY);
+        parameter.set二次判定終了日(二次判定日_終了 != null ? 二次判定日_終了.toDateString() : RString.EMPTY);
+        parameter.set申請書管理番号リスト(申請書管理番号リスト);
+        if (未出力.equals(転入_死亡情報出力区分)) {
+            parameter.set転入死亡情報出力区分(new RString("0"));
+        } else {
+            parameter.set転入死亡情報出力区分(new RString("1"));
+        }
+        return parameter;
     }
 
     private RString get認定申請区分_申請時(NinteiShienCenterSoshinData data) {

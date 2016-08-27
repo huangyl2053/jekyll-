@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4510011;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4510011.DBC4510011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4510011.KubunShikyuGendogakuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4510011.dgServiceShurui_Row;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShurui;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * サービス種類登録Handlerです。
@@ -79,7 +81,6 @@ public class KubunShikyuGendogakuHandler {
         }
         div.getServiceShuruiShousai().getTxtServiceMeisho().setValue(row.getDefaultDataName4());
         div.getServiceShuruiShousai().getTxtServiceRyakusho().setValue(row.getDefaultDataName5());
-        //div.getServiceShuruiShousai().getDdlServiceBunruiCode().setSelectedKey(row.getDefaultDataName6().substring(0, 2));
     }
 
     /**
@@ -180,6 +181,15 @@ public class KubunShikyuGendogakuHandler {
                                 .getTxtTeikyoShuryoYM().getValue().getYearMonth().toDateString()))
                 .setIsDeleted(false)
                 .build();
+    }
+
+    /**
+     * 保存する設定です。
+     */
+    public void setサービス種類登録に戻るする() {
+        if (DBC4510011StateName.初期状態.getName().equals(ResponseHolder.getState())) {
+            setCommonButtonVisible(false);
+        }
     }
 
 }

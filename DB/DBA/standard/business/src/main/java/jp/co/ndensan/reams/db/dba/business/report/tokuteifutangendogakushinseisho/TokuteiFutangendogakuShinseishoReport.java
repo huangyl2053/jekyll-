@@ -42,6 +42,7 @@ public class TokuteiFutangendogakuShinseishoReport extends Report<TokuteiFutange
 
     /**
      * 護保険特定負担限度額申請書の印刷処理です。
+     *
      * @param reportSourceWriter 護保険特定負担限度額申請書の帳票データ
      */
     @Override

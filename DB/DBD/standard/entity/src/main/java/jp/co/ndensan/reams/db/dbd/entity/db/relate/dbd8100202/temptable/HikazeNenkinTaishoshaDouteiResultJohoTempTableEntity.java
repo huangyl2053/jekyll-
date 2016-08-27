@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,9 +24,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity extends DbTableEntityBase<HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity> implements IDbAccessable {
+public class HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity extends DbTableEntityBase<HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity>
+        implements IDbAccessable {
 
-    public static final RString TABLE_NAME = new RString("HikazeNenkinTaishoshaDouteiResultJohoTempTable");
+    /**
+     * 非課税年金対象者同定結果情報一時テーブの名称
+     */
+    @TableName
+    public static final RString TABLE_NAME;
+
+    static {
+        TABLE_NAME = new RString("HikazeNenkinTaishoshaDouteiResultJohoTempTable");
+    }
 
     @TempTableColumnOrder(1)
     private RString douteiResultKubun;
@@ -54,7 +64,7 @@ public class HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity extends DbTabl
     @TempTableColumnOrder(13)
     private RString shoriKubunn;
     @TempTableColumnOrder(14)
-    private RString TaishoMonth;
+    private RString taishoMonth;
     @TempTableColumnOrder(15)
     private RString kisoNennkinnNo;
     @TempTableColumnOrder(16)

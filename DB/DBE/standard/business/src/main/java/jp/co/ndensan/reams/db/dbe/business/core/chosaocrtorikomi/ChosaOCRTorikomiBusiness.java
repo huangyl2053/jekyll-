@@ -260,6 +260,15 @@ public class ChosaOCRTorikomiBusiness {
     }
 
     /**
+     * 介護認定審査会開催予定年月日を返します。
+     *
+     * @return 介護認定審査会開催予定年月日
+     */
+    public FlexibleDate get介護認定審査会開催予定年月日() {
+        return entity.get介護認定審査会開催予定年月日();
+    }
+
+    /**
      * イメージ共有ファイルIDを返します。
      *
      * @return イメージ共有ファイルID

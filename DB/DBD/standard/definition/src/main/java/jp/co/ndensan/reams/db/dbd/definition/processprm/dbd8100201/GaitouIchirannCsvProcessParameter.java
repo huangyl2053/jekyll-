@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201;
 
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd8100201.GaitouIchirannCsvMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,5 +20,25 @@ import lombok.Setter;
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class GaitouIchirannCsvProcessParameter implements IBatchProcessParameter {
-  // TODO
+
+    private Long 出力順ID1;
+
+    /**
+     * コンストラクタです。
+     *
+     * @param 出力順ID1 出力順ID1
+     */
+    public GaitouIchirannCsvProcessParameter(Long 出力順ID1) {
+        this.出力順ID1 = 出力順ID1;
+    }
+
+    /**
+     * ＳＱＬ使用された情報を作成します．
+     *
+     * @param 出力順 出力順
+     * @return ＳＱＬ使用されたパラメター
+     */
+    public GaitouIchirannCsvMybatisParameter toGaitouIchirannCsvMybatisParameter(RString 出力順) {
+        return new GaitouIchirannCsvMybatisParameter(出力順);
+    }
 }

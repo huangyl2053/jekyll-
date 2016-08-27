@@ -5,13 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1060001;
 
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd1200902.FutanGenndoGakuTsuuchishoIkkatsuBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd1200902.ShakaiFukushiHoujinnKeigenBatchParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1060001.GemmenGengakuShoIkkatsuMainDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1060001.GemmenGengakuShoIkkatsuMainHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1060001.GemmenGengakuShoIkkatsuMainValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
-import jp.co.ndensan.reams.uz.uza.batch.api.parameter.BatchParameterManager;
-import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -23,9 +22,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class GemmenGengakuShoIkkatsuMain {
 
-    private final RString 負担帳票のID = new RString("DBD100013_FutanGendogakuKetteiTsuchisho");
-    private final RString 社会福祉のBATCH_ID = new RString("DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakko");
-
+//    private final RString 負担帳票のID = new RString("DBD100013_FutanGendogakuKetteiTsuchisho");
+//    private final RString 社会福祉のBATCH_ID = new RString("DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakko"); todo
     /**
      * 画面の初期化。
      *
@@ -71,7 +69,7 @@ public class GemmenGengakuShoIkkatsuMain {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         RString 文書番号 = getHandler(div).文書番号チェック();
-        if (文書番号.equals(new RString("1"))) {
+        if (文書番号.equals(new RString("1")) || 文書番号.equals(new RString("2"))) {
             getValidationHandler().validateFor文書番号の設定チェック(pairs, div);
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -113,12 +111,12 @@ public class GemmenGengakuShoIkkatsuMain {
      * @param div GemmenGengakuShoIkkatsuMainDiv
      * @return ResponseData<BatchParameterMap>
      */
-    public ResponseData<BatchParameterMap> onClick_btnfutanKogakuParamSave(GemmenGengakuShoIkkatsuMainDiv div) {
-        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
-        BatchParameterManager manager = new BatchParameterManager(SubGyomuCode.DBD介護受給, 負担帳票のID);
-        responseData.data = new BatchParameterMap(getHandler(div).onClick_btnJikkouFtanSave());
-        manager.setParameterByBatch(responseData.data);
-        return ResponseData.of(responseData.data).respond();
+    public ResponseData<FutanGenndoGakuTsuuchishoIkkatsuBatchParameter> onClick_btnfutanKogakuParamSave(GemmenGengakuShoIkkatsuMainDiv div) {
+//        BatchParameterManager manager = new BatchParameterManager(SubGyomuCode.DBD介護受給, 負担帳票のID);
+//        BatchParameterMap data = new BatchParameterMap(getHandler(div).onClick_btnJikkouFtanSave());
+//        manager.setParameterByBatch(data); //todo QA
+        //FutanGendogakuIkkatsuHakkoBatchParameter futanParameer = getHandler(div).onClick_btnJikkouFtanSave();
+        return ResponseData.of(getHandler(div).onClick_btnJikkouFtanSave()).respond();
     }
 
     /**
@@ -127,12 +125,11 @@ public class GemmenGengakuShoIkkatsuMain {
      * @param div GemmenGengakuShoIkkatsuMainDiv
      * @return ResponseData<BatchParameterMap>
      */
-    public ResponseData<BatchParameterMap> onClick_btnshakaiKogakuParamSave(GemmenGengakuShoIkkatsuMainDiv div) {
-        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
-        BatchParameterManager manager = new BatchParameterManager(SubGyomuCode.DBD介護受給, 社会福祉のBATCH_ID);
-        responseData.data = new BatchParameterMap(getHandler(div).onClick_btnJikkouSkaiSave());
-        manager.setParameterByBatch(responseData.data);
-        return ResponseData.of(responseData.data).respond();
+    public ResponseData<ShakaiFukushiHoujinnKeigenBatchParameter> onClick_btnshakaiKogakuParamSave(GemmenGengakuShoIkkatsuMainDiv div) {
+//        BatchParameterManager manager = new BatchParameterManager(SubGyomuCode.DBD介護受給, 社会福祉のBATCH_ID);
+//        BatchParameterMap data = new BatchParameterMap(getHandler(div).onClick_btnJikkouSkaiSave());
+//        manager.setParameterByBatch(data); //toda QA
+        return ResponseData.of(getHandler(div).onClick_btnJikkouSkaiSave()).respond();
     }
 
     /**
@@ -142,12 +139,6 @@ public class GemmenGengakuShoIkkatsuMain {
      * @return ResponseData<BatchParameterMap>
      */
     public ResponseData<GemmenGengakuShoIkkatsuMainDiv> onChange_futanNendoJikan(GemmenGengakuShoIkkatsuMainDiv div) {
-//        FlexibleYear nendo = div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getTxtFutanGendogakuNendo().getDomain();
-//        if (nendo != null) {
-//            INendo getNendo = GemmenNendoResearcher.createInstance(GemmenGengakuShurui.負担限度額認定).find年度(nendo);
-//            div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getTxtFutanGendogakuNendoFrom().setValue(getNendo.get開始日());
-//            div.getFutanGendogaku().getFutanGendogakuChushutsuJoken().getTxtFutanGendogakuNendoTo().setValue(getNendo.get終了日());
-//        }
         getHandler(div).geFuTanNendo(div);
         return ResponseData.of(div).respond();
     }
@@ -159,12 +150,6 @@ public class GemmenGengakuShoIkkatsuMain {
      * @return ResponseData<BatchParameterMap>
      */
     public ResponseData<GemmenGengakuShoIkkatsuMainDiv> onChange_shakaiNendoJikan(GemmenGengakuShoIkkatsuMainDiv div) {
-//        FlexibleYear nendo = div.getShafukuKeigen().getShafukuKeigenChushutsuJoken().getTxtShafukuKeigenNendo().getDomain();
-//        if (nendo != null) {
-//            INendo getNendo = GemmenNendoResearcher.createInstance(GemmenGengakuShurui.負担限度額認定).find年度(nendo);
-//            div.getShafukuKeigen().getShafukuKeigenChushutsuJoken().getTxtShafukuKeigenNendoFrom().setValue(getNendo.get開始日());
-//            div.getShafukuKeigen().getShafukuKeigenChushutsuJoken().getTxtShafukuKeigenNendoTo().setValue(getNendo.get終了日());
-//        }
         getHandler(div).getShakaiNendo(div);
         return ResponseData.of(div).respond();
     }

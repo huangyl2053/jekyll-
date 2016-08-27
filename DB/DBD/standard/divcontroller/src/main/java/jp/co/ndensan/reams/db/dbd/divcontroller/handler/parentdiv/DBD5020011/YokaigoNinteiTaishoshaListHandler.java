@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5020011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.core.yokaigoninteiinterface.YokaigoNinteiInterface;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.YokaigoNinteiInterface;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigoninteitaisyosyaichiran.YokaigoNinteiTaisyosyaIchiran;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5020011.dgNinteiTaishosha_Row;
 import jp.co.ndensan.reams.db.dbd.service.report.yokaigoninteitaisyosyaichiran.YokaigoNinteiTaisyosyaIchiranManager;

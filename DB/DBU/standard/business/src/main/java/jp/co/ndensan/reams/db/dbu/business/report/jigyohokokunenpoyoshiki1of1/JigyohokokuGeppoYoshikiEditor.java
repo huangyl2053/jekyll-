@@ -48,6 +48,7 @@ public class JigyohokokuGeppoYoshikiEditor implements IJigyohokokuGeppoYoshikiEd
         builder.append(getパターン62(item.get集計期間TO()));
         source.hokenshaNo = item.get保険者番号();
         source.hokenshaName = item.get保険者名();
+        source.shuukeiHani = builder.toRString();
         return source;
     }
 

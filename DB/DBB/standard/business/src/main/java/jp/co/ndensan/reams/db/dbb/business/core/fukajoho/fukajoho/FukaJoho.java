@@ -585,8 +585,18 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      * @param 期 期
      * @return 収納ID
      */
-    public Long get収納ID(int 期) {
+    public Long get普通徴収収納ID(int 期) {
         return get収納ID(期, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 収納IDを返します。
+     *
+     * @param 期 期
+     * @return 収納ID
+     */
+    public Long get特別徴収収納ID(int 期) {
+        return get収納ID(期, ChoshuHohoKibetsu.特別徴収.getコード());
     }
 
     /**

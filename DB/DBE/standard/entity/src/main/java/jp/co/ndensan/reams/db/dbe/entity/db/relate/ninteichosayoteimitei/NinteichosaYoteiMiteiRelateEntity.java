@@ -34,7 +34,7 @@ public class NinteichosaYoteiMiteiRelateEntity {
     private Code dbT5101_ninteiShinseiShinseijiKubunCode;
     private FlexibleDate dbT5101_ninteiShinseiYMD;
     private RString dbT7051_shichosonMeisho;
-    private int dbT5121_zenkaiShinseishoKanriNo;
+    private ShinseishoKanriNo dbT5121_zenkaiShinseishoKanriNo;
     private RString dbT5910_jigyoshaMeisho;
     private RString dbT5913_chosainShimei;
     private RString dbT5910_Zenkai_jigyoshaMeisho;

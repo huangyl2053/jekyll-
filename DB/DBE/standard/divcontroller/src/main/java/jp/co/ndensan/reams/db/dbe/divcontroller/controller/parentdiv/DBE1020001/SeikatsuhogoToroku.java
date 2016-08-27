@@ -177,6 +177,7 @@ public class SeikatsuhogoToroku {
         if (!市町村セキュリティ情報.get支所管理有無フラグ()) {
             div.getDdlShisho().setDisabled(true);
         } else {
+            div.getDdlShisho().setDisabled(false);
             if (市町村コード != null) {
                 list = manager.get構成市町村支所マスタ一覧By市町村コード(
                         市町村コード, new ShishoCode(支所コード)).records();

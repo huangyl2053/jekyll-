@@ -35,16 +35,16 @@ public class KaigoNinteiShinsakai {
     private static final RString 遷移モード_審査会結果登録 = new RString("shinsaKekkaToroku");
     private static final RString 遷移モード_介護認定審査会審査結果データ取込み = new RString("dataShutsuryoku");
     private static final RString 遷移モード_介護認定審査会審査結果登録 = new RString("shinsaKekkaToroku");
-    private static final RString メニューID_審査会個人別状況照会 = new RString("DBEMN11004");
-    private static final RString メニューID_介護認定審査会審査対象データ出力 = new RString("DBEMN51004");
-    private static final RString メニューID_介護認定審査会対象者割付 = new RString("DBEMN51005");
-    private static final RString メニューID_介護認定審査会資料作成 = new RString("DBEMN51007");
-    private static final RString メニューID_介護認定審査会委員事前審査 = new RString("DBEMN51008");
-    private static final RString メニューID_介護認定審査会委員事前審査結果登録 = new RString("DBEMN51009");
-    private static final RString メニューID_審査会開催結果登録 = new RString("DBEMN52001");
-    private static final RString メニューID_審査会審査結果登録 = new RString("DBEMN52003");
-    private static final RString メニューID_介護認定審査会審査結果データ取込み = new RString("DBEMN52002");
-    private static final RString メニューID_介護認定審査会審査結果登録 = new RString("DBEMN52004");
+    private static final RString メニューID_審査会個人別状況照会 = new RString("DBEMN21004");
+    private static final RString メニューID_介護認定審査会審査対象データ出力 = new RString("DBEMN61004");
+    private static final RString メニューID_介護認定審査会対象者割付 = new RString("DBEMN61005");
+    private static final RString メニューID_介護認定審査会資料作成 = new RString("DBEMN61007");
+    private static final RString メニューID_介護認定審査会委員事前審査 = new RString("DBEMN61008");
+    private static final RString メニューID_介護認定審査会委員事前審査結果登録 = new RString("DBEMN61009");
+    private static final RString メニューID_審査会開催結果登録 = new RString("DBEMN62001");
+    private static final RString メニューID_審査会審査結果登録 = new RString("DBEMN62003");
+    private static final RString メニューID_介護認定審査会審査結果データ取込み = new RString("DBEMN62002");
+    private static final RString メニューID_介護認定審査会審査結果登録 = new RString("DBEMN62004");
     private static final int 数字_0 = 0;
 
     /**

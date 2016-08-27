@@ -44,7 +44,7 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
     /**
      * インスタンスを生成します。
      *
-     * @param 帳票情報 FutangakuNinteiHakkoIchiranEntity
+     * @param 帳票情報 FutanGenndoGakuNinnteiListRecordEntity
      * @param association Association
      * @param iOutputOrder IOutputOrder
      * @param 個人情報 IKojin
@@ -75,43 +75,35 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
             source.hokenshaName = this.association.get市町村名();
         }
         if (null != iOutputOrder) {
-            List<ISetSortItem> 設定項目リスト = this.iOutputOrder.get設定項目リスト();
-            source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
-            source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
-            source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
-            source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-            source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
-            if (設定項目リスト.get(LISTINDEX_0).is改頁項目()) {
-                source.kaipage1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
-            }
-            if (設定項目リスト.get(LISTINDEX_1).is改頁項目()) {
-                source.kaipage2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
-            }
-            if (設定項目リスト.get(LISTINDEX_2).is改頁項目()) {
-                source.kaipage3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
-            }
-            if (設定項目リスト.get(LISTINDEX_3).is改頁項目()) {
-                source.kaipage4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-            }
-            if (設定項目リスト.get(LISTINDEX_4).is改頁項目()) {
-                source.kaipage5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
-            }
+            source = set出力順改頁(source);
         }
         source.list_1 = new RString(String.valueOf(index + 1));
-
-    }
-
-    private void setLayer1Step2(FutangakuNinteiHakkoIchiranReportSource source) {
         if (null != 帳票情報) {
             FlexibleDate 喪失年月日 = this.帳票情報.get喪失年月日();
             if (null != 喪失年月日 && !喪失年月日.isEmpty()) {
                 source.list_2 = new RString("*");
             }
-            source.list_3 = this.帳票情報.get被保険者番号().value();
-            source.list_4 = this.個人情報.get名称().getName().value();
-            source.list_5 = this.個人情報.get住所().get住所();
-            source.list_6 = this.帳票情報.get申請日().wareki().toDateString();
-            source.list_7 = this.帳票情報.get決定日().wareki().toDateString();
+            if (null != this.帳票情報.get被保険者番号()) {
+                source.list_3 = this.帳票情報.get被保険者番号().value();
+            }
+            if (null != this.個人情報.get名称()) {
+                source.list_4 = this.個人情報.get名称().getName().value();
+            }
+            if (null != this.個人情報.get住所()) {
+                source.list_5 = this.個人情報.get住所().get住所();
+            }
+            if (null != this.帳票情報.get申請日()) {
+                source.list_6 = this.帳票情報.get申請日().wareki().toDateString();
+            }
+        }
+    }
+
+    private void setLayer1Step2(FutangakuNinteiHakkoIchiranReportSource source) {
+        if (null != 帳票情報) {
+
+            if (null != this.帳票情報.get決定日()) {
+                source.list_7 = this.帳票情報.get決定日().wareki().toDateString();
+            }
             source.list_8 = get適用日有効期限();
             if (this.帳票情報.get決定().equals(KetteiKubun.承認する)) {
                 source.list_9 = new RString("承認");
@@ -135,7 +127,9 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
             if (this.帳票情報.is通知書発行フラグ()) {
                 source.list_12 = new RString("○");
             }
-            source.list_13 = this.帳票情報.get入所施設CD();
+            if (null != this.帳票情報.get入所施設CD()) {
+                source.list_13 = this.帳票情報.get入所施設CD().getColumnValue();
+            }
         }
     }
 
@@ -151,14 +145,47 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
         RString 年月日 = システム日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 時分秒 = システム日時.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-        RString 印刷日時 = 年月日.concat("").concat(時分秒).concat("").concat("作成");
-        return 印刷日時;
+        return 年月日.concat("").concat(時分秒).concat("").concat("作成");
     }
 
     private RString get適用日有効期限() {
         RString 適用日 = this.帳票情報.get適用日().wareki().toDateString();
         RString 有効期限 = this.帳票情報.get有効期限().wareki().toDateString();
-        RString 適用日有効期限 = 適用日.concat(new RString("~")).concat(有効期限);
-        return 適用日有効期限;
+        return 適用日.concat(new RString("~")).concat(有効期限);
+    }
+
+    private FutangakuNinteiHakkoIchiranReportSource set出力順改頁(FutangakuNinteiHakkoIchiranReportSource source) {
+        List<ISetSortItem> 設定項目リスト = this.iOutputOrder.get設定項目リスト();
+        if (設定項目リスト.size() > LISTINDEX_0) {
+            source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
+            if (設定項目リスト.get(LISTINDEX_0).is改頁項目()) {
+                source.kaipage1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
+            }
+        }
+        if (設定項目リスト.size() > LISTINDEX_1) {
+            source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
+            if (設定項目リスト.get(LISTINDEX_1).is改頁項目()) {
+                source.kaipage2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
+            }
+        }
+        if (設定項目リスト.size() > LISTINDEX_2) {
+            source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
+            if (設定項目リスト.get(LISTINDEX_2).is改頁項目()) {
+                source.kaipage3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
+            }
+        }
+        if (設定項目リスト.size() > LISTINDEX_3) {
+            source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
+            if (設定項目リスト.get(LISTINDEX_3).is改頁項目()) {
+                source.kaipage4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
+            }
+        }
+        if (設定項目リスト.size() > LISTINDEX_4) {
+            source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
+            if (設定項目リスト.get(LISTINDEX_4).is改頁項目()) {
+                source.kaipage5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
+            }
+        }
+        return source;
     }
 }

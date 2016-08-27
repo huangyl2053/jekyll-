@@ -30,6 +30,7 @@ public class RegistShoriDateKanriParameter implements IMyBatisParameter {
     private LasdecCode 市町村コード;
     private RString 市町村識別ID;
     private List<ShichosonJouhouResult> 市町村情報リスト;
+    private ShichosonJouhouResult 市町村情報;
 
     /**
      * コンストラクタです。
@@ -40,6 +41,7 @@ public class RegistShoriDateKanriParameter implements IMyBatisParameter {
      * @param 抽出期間終了日時 YMDHMS
      * @param 市町村コード LasdecCode
      * @param 市町村識別ID RString
+     * @param 市町村情報 ShichosonJouhouResult
      * @param 市町村情報リスト List<ShichosonJouhouResult>
      */
     public RegistShoriDateKanriParameter(RString 導入形態コード,
@@ -48,6 +50,7 @@ public class RegistShoriDateKanriParameter implements IMyBatisParameter {
             YMDHMS 抽出期間終了日時,
             LasdecCode 市町村コード,
             RString 市町村識別ID,
+            ShichosonJouhouResult 市町村情報,
             List<ShichosonJouhouResult> 市町村情報リスト) {
         this.導入形態コード = 導入形態コード;
         this.処理年度 = 処理年度;
@@ -55,6 +58,7 @@ public class RegistShoriDateKanriParameter implements IMyBatisParameter {
         this.抽出期間終了日時 = 抽出期間終了日時;
         this.市町村コード = 市町村コード;
         this.市町村識別ID = 市町村識別ID;
+        this.市町村情報 = 市町村情報;
         this.市町村情報リスト = 市町村情報リスト;
     }
 }

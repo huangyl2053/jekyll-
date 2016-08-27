@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc120890;
 
+import java.io.File;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120890.SogojigyohiSeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120890.SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyout
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorenkyoutsu.KokuhorenKyoutsuBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaReadCsvFileProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuCsvFileReadProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDeleteReveicedFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
@@ -26,7 +27,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -47,11 +47,12 @@ public class DBC120890_SogojigyohiSeikyugakuTsuchishoInFlow extends BatchFlowBas
     private static final String 取込済ファイル削除 = "deleteReveicedFile";
 
     private static final RString ファイル格納フォルダ名 = new RString("DBC120890");
-    private static final RString 帳票ID = new RString("DBC200087_SogojigyohiSeikyugakuTsuchisho");
 
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
     private FlowEntity flowEntity;
-
+    private RString csvFullPath;
+    private int レコード件数合算;
+    private int 集計件数;
     private static RString 交換情報識別番号;
 
     @Override
@@ -65,9 +66,17 @@ public class DBC120890_SogojigyohiSeikyugakuTsuchishoInFlow extends BatchFlowBas
             returnEntity
                     = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得),
                             KokuhorenkyoutsuGetFileProcess.PARAMETER_OUT_RETURNENTITY);
-            executeStep(CSVファイル取込);
-            flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
-                    SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
+            for (int i = 0; i < returnEntity.getFileNameList().size(); i++) {
+                String filePath = returnEntity.get保存先フォルダのパス() + File.separator
+                        + returnEntity.getFileNameList().get(i);
+                File path = new File(filePath);
+                csvFullPath = new RString(path.getPath());
+                executeStep(CSVファイル取込);
+                flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
+                        SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
+                レコード件数合算 = flowEntity.get明細データ登録件数();
+                集計件数 = flowEntity.getCodeNum();
+            }
             if (0 == flowEntity.get明細データ登録件数()) {
                 executeStep(国保連インタフェース管理更新);
                 executeStep(処理結果リスト作成);
@@ -104,11 +113,12 @@ public class DBC120890_SogojigyohiSeikyugakuTsuchishoInFlow extends BatchFlowBas
      */
     @Step(CSVファイル取込)
     protected IBatchFlowCommand callReadCsvFileProcess() {
-        KohifutanshaReadCsvFileProcessParameter parameter = new KohifutanshaReadCsvFileProcessParameter();
+        KokuhorenkyotsuCsvFileReadProcessParameter parameter = new KokuhorenkyotsuCsvFileReadProcessParameter();
         parameter.set処理年月(getParameter().getShoriYM());
-        parameter.set保存先フォルダ(returnEntity.get保存先フォルダのパス().toRString());
-        parameter.setエントリ情報List(returnEntity.getFileNameList());
-        return simpleBatch(SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess.class).arguments(parameter).define();
+        parameter.set保存先パース(csvFullPath);
+        parameter.setレコード件数合算(レコード件数合算);
+        parameter.set集計件数合算(集計件数);
+        return loopBatch(SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess.class).arguments(parameter).define();
     }
 
     /**
@@ -137,11 +147,8 @@ public class DBC120890_SogojigyohiSeikyugakuTsuchishoInFlow extends BatchFlowBas
     protected IBatchFlowCommand callDoIchiranhyoSakuseiProcess() {
         KohifutanshaDoIchiranhyoSakuseiProcessParameter parameter
                 = new KohifutanshaDoIchiranhyoSakuseiProcessParameter();
-        parameter.setサブ業務コード(SubGyomuCode.DBC介護給付);
-        parameter.set帳票ID(new ReportId(帳票ID));
         parameter.setシステム日付(RDateTime.now());
-        return simpleBatch(SogojigyohiSeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess.class).arguments(parameter).
-                define();
+        return loopBatch(SogojigyohiSeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess.class).arguments(parameter).define();
     }
 
     /**
@@ -153,7 +160,7 @@ public class DBC120890_SogojigyohiSeikyugakuTsuchishoInFlow extends BatchFlowBas
     protected IBatchFlowCommand callDoShoriKekkaListSakuseiProcess() {
         KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter parameter
                 = new KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter();
-        parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ1);
+        parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ0);
         return simpleBatch(KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess.class).arguments(parameter).define();
     }
 

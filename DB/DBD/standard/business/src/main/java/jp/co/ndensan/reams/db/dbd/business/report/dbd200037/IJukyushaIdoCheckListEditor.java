@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 受給者台帳異動チェックリストエディターのインターフェースクラスです。
  *
- * @reamsid_L DBD-1770-030 donghj
+ * @reamsid_L DBD-1770-040 donghj
  */
 interface IJukyushaIdoCheckListEditor extends IReportEditor<JukyushaIdoCheckListReportSource> {
 

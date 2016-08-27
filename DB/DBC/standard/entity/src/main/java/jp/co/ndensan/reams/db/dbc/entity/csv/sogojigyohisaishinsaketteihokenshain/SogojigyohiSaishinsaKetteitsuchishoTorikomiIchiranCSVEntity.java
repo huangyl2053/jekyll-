@@ -60,19 +60,19 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranCSVEntity {
     private RString 決定単位数;
     @CsvField(order = 200, name = "調整単位数")
     private RString 調整単位数;
-    @CsvField(order = 210, name = "負担額")
+    @CsvField(order = 210, name = "保険者負担額")
     private RString 負担額;
     @CsvField(order = 220, name = "総合事業費・決定・件数")
     private RString 総合事業費_決定_件数;
     @CsvField(order = 230, name = "総合事業費・決定・単位数")
     private RString 総合事業費_決定_単位数;
-    @CsvField(order = 240, name = "総合事業費・決定・負担額")
+    @CsvField(order = 240, name = "総合事業費・決定・保険者負担額")
     private RString 総合事業費_決定_負担額;
     @CsvField(order = 250, name = "総合事業費・調整・件数")
     private RString 総合事業費_調整_件数;
     @CsvField(order = 260, name = "総合事業費・調整・単位数")
     private RString 総合事業費_調整_単位数;
-    @CsvField(order = 270, name = "総合事業費・調整・負担額")
+    @CsvField(order = 270, name = "総合事業費・調整・保険者負担額")
     private RString 総合事業費_調整_負担額;
 
 }

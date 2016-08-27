@@ -361,6 +361,10 @@ public class NinteiOcrDbT5211Handler {
             item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_カテーテル()).build();
             調査項目.add(NinteichosaKomokuMapping09A.カテーテル.getコード());
         }
+        if (NinteichosaKomokuMapping09A.中心静脈栄養.getコード().equals(new RString(item.get連番()))) {
+            item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_中心静脈栄養()).build();
+            調査項目.add(NinteichosaKomokuMapping09A.中心静脈栄養.getコード());
+        }
         return item;
     }
 
@@ -959,6 +963,14 @@ public class NinteiOcrDbT5211Handler {
                     rStringToInt(NinteichosaKomokuMapping09A.カテーテル.getコード()));
             item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
             item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_カテーテル()).build();
+            builder.setTodokedesha(item);
+        }
+        if (!調査項目.contains(NinteichosaKomokuMapping09A.中心静脈栄養.getコード())) {
+            NinteichosahyoChosaItem item = new NinteichosahyoChosaItem(new ShinseishoKanriNo(
+                    data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
+                    rStringToInt(NinteichosaKomokuMapping09A.中心静脈栄養.getコード()));
+            item = item.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
+            item = item.createBuilderForEdit().set調査項目(data.get過去14日間に受けた治療_中心静脈栄養()).build();
             builder.setTodokedesha(item);
         }
     }

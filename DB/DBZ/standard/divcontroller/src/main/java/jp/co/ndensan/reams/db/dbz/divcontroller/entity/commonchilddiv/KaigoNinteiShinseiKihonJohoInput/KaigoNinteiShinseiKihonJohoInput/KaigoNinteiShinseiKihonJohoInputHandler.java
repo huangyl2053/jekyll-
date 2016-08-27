@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 介護認定申請基本情報の入力用クラスのハンドラークラスです。
  *
  * @reamsid_L DBZ-1300-070 wangxiaodong
@@ -64,35 +63,25 @@ public class KaigoNinteiShinseiKihonJohoInputHandler {
 
     private List<KeyValueDataSource> get申請種別List() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.初回申請.getコード(), JukyuShinseiJiyu.初回申請.get名称()));
-        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.再申請_有効期限内.getコード(), JukyuShinseiJiyu.再申請_有効期限内.get名称()));
-        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.再申請_有効期限外.getコード(), JukyuShinseiJiyu.再申請_有効期限外.get名称()));
-        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.要介護度変更申請.getコード(), JukyuShinseiJiyu.要介護度変更申請.get名称()));
-        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.指定サービス種類変更申請.getコード(), JukyuShinseiJiyu.指定サービス種類変更申請.get名称()));
-        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.申請_法施行前.getコード(), JukyuShinseiJiyu.申請_法施行前.get名称()));
-        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.追加_申請なしの追加.getコード(), JukyuShinseiJiyu.追加_申請なしの追加.get名称()));
+        for (JukyuShinseiJiyu jukyuShinseiJiyu : JukyuShinseiJiyu.values()) {
+            dataSource.add(new KeyValueDataSource(jukyuShinseiJiyu.getコード(), jukyuShinseiJiyu.get名称()));
+        }
         return dataSource;
     }
 
     private List<KeyValueDataSource> get申請時区分List() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.新規申請.getコード(), NinteiShinseiShinseijiKubunCode.新規申請.get名称()));
-        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.更新申請.getコード(), NinteiShinseiShinseijiKubunCode.更新申請.get名称()));
-        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.区分変更申請.getコード(), NinteiShinseiShinseijiKubunCode.区分変更申請.get名称()));
-        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.職権.getコード(), NinteiShinseiShinseijiKubunCode.職権.get名称()));
-        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.転入申請.getコード(), NinteiShinseiShinseijiKubunCode.転入申請.get名称()));
-        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.資格喪失_死亡.getコード(), NinteiShinseiShinseijiKubunCode.資格喪失_死亡.get名称()));
-        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.新規申請_事前.getコード(), NinteiShinseiShinseijiKubunCode.新規申請_事前.get名称()));
-        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.更新申請_事前.getコード(), NinteiShinseiShinseijiKubunCode.更新申請_事前.get名称()));
+        for (NinteiShinseiShinseijiKubunCode shinseiShinseijiCode : NinteiShinseiShinseijiKubunCode.values()) {
+            dataSource.add(new KeyValueDataSource(shinseiShinseijiCode.getコード(), shinseiShinseijiCode.get名称()));
+        }
         return dataSource;
     }
 
     private List<KeyValueDataSource> get申請法令区分List() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        dataSource.add(new KeyValueDataSource(NinteiShinseiHoreiCode.新規申請.getコード(), NinteiShinseiShinseijiKubunCode.新規申請.get名称()));
-        dataSource.add(new KeyValueDataSource(NinteiShinseiHoreiCode.更新申請.getコード(), NinteiShinseiShinseijiKubunCode.更新申請.get名称()));
-        dataSource.add(new KeyValueDataSource(NinteiShinseiHoreiCode.区分変更申請.getコード(), NinteiShinseiShinseijiKubunCode.区分変更申請.get名称()));
-        dataSource.add(new KeyValueDataSource(NinteiShinseiHoreiCode.職権.getコード(), NinteiShinseiShinseijiKubunCode.職権.get名称()));
+        for (NinteiShinseiHoreiCode shinseiHoreiCode : NinteiShinseiHoreiCode.values()) {
+            dataSource.add(new KeyValueDataSource(shinseiHoreiCode.getコード(), shinseiHoreiCode.get名称()));
+        }
         return dataSource;
     }
 
@@ -107,33 +96,17 @@ public class KaigoNinteiShinseiKihonJohoInputHandler {
 
     private List<KeyValueDataSource> get被保険者区分List() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        dataSource.add(new KeyValueDataSource(HihokenshaKubunCode.第１号被保険者.getコード(), HihokenshaKubunCode.第１号被保険者.get名称()));
-        dataSource.add(new KeyValueDataSource(HihokenshaKubunCode.第２号被保険者.getコード(), HihokenshaKubunCode.第２号被保険者.get名称()));
-        dataSource.add(new KeyValueDataSource(HihokenshaKubunCode.その他.getコード(), HihokenshaKubunCode.その他.get名称()));
+        for (HihokenshaKubunCode hihokenshaKubun : HihokenshaKubunCode.values()) {
+            dataSource.add(new KeyValueDataSource(hihokenshaKubun.getコード(), hihokenshaKubun.get名称()));
+        }
         return dataSource;
     }
 
     private List<KeyValueDataSource> get特定疾病List() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        dataSource.add(new KeyValueDataSource(TokuteiShippei.筋萎縮性側索硬化症.getコード(), TokuteiShippei.筋萎縮性側索硬化症.get名称()));
-        dataSource.add(new KeyValueDataSource(TokuteiShippei.後縦靭帯骨化症.getコード(), TokuteiShippei.後縦靭帯骨化症.get名称()));
-        dataSource.add(new KeyValueDataSource(TokuteiShippei.骨折を伴う骨粗鬆症.getコード(), TokuteiShippei.骨折を伴う骨粗鬆症.get名称()));
-        dataSource.add(new KeyValueDataSource(TokuteiShippei.多系統萎縮症.getコード(), TokuteiShippei.多系統萎縮症.get名称()));
-        dataSource.add(new KeyValueDataSource(TokuteiShippei.初老期における認知症.getコード(), TokuteiShippei.初老期における認知症.get名称()));
-        dataSource.add(new KeyValueDataSource(TokuteiShippei.脊髄小脳変性症.getコード(), TokuteiShippei.脊髄小脳変性症.get名称()));
-        dataSource.add(new KeyValueDataSource(TokuteiShippei.脊柱管狭窄症.getコード(), TokuteiShippei.脊柱管狭窄症.get名称()));
-        dataSource.add(new KeyValueDataSource(TokuteiShippei.早老症.getコード(), TokuteiShippei.早老症.get名称()));
-        dataSource.add(new KeyValueDataSource(TokuteiShippei.糖尿病性神経障害_糖尿病性腎症及び糖尿病性網膜症.getコード(),
-                TokuteiShippei.糖尿病性神経障害_糖尿病性腎症及び糖尿病性網膜症.get名称()));
-        dataSource.add(new KeyValueDataSource(TokuteiShippei.脳血管疾患.getコード(), TokuteiShippei.脳血管疾患.get名称()));
-        dataSource.add(new KeyValueDataSource(TokuteiShippei.パーキンソン病関連疾患.getコード(), TokuteiShippei.パーキンソン病関連疾患.get名称()));
-        dataSource.add(new KeyValueDataSource(TokuteiShippei.閉塞性動脈硬化症.getコード(), TokuteiShippei.閉塞性動脈硬化症.get名称()));
-        dataSource.add(new KeyValueDataSource(TokuteiShippei.関節リウマチ.getコード(), TokuteiShippei.関節リウマチ.get名称()));
-        dataSource.add(new KeyValueDataSource(TokuteiShippei.慢性閉塞性肺疾患.getコード(), TokuteiShippei.慢性閉塞性肺疾患.get名称()));
-        dataSource.add(new KeyValueDataSource(TokuteiShippei.両側の膝関節又は股関節に著しい変形を伴う変形性関節症.getコード(),
-                TokuteiShippei.両側の膝関節又は股関節に著しい変形を伴う変形性関節症.get名称()));
-        dataSource.add(new KeyValueDataSource(TokuteiShippei.がん_末期.getコード(), TokuteiShippei.がん_末期.get名称()));
-        dataSource.add(new KeyValueDataSource(TokuteiShippei.特定疾病以外.getコード(), TokuteiShippei.特定疾病以外.get名称()));
+        for (TokuteiShippei tokuteiShippei : TokuteiShippei.values()) {
+            dataSource.add(new KeyValueDataSource(tokuteiShippei.getコード(), tokuteiShippei.get名称()));
+        }
         return dataSource;
     }
 }

@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
+import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -204,5 +205,26 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac {
                                 not(isNULL(ketteiKubun)),
                                 not(eq(ketteiKubun, RString.EMPTY)))).
                 getCount();
+    }
+
+    /**
+     * 被保険者番号より、社会福祉法人等利用者負担軽減情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity get社会福祉法人等利用者負担軽減情報(HihokenshaNo 被保険者番号)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                order(by(rirekiNo, DESC)).
+                limit(1).
+                toObject(DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity.class);
     }
 }

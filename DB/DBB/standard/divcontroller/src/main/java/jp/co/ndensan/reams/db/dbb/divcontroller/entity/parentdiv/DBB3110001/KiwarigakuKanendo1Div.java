@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 public class KiwarigakuKanendo1Div extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -148,6 +148,16 @@ public class KiwarigakuKanendo1Div extends Panel {
     @JsonIgnore
     public Label getLblKiwarigaku2Total() {
         return this.getKiwarigakuPanel2().getLblKiwarigaku2Total();
+    }
+
+    @JsonIgnore
+    public Label getMaeTotalMae1() {
+        return this.getKiwarigakuPanel2().getMaeTotalMae1();
+    }
+
+    @JsonIgnore
+    public Label getMaeTotalGo1() {
+        return this.getKiwarigakuPanel2().getMaeTotalGo1();
     }
 
     // </editor-fold>

@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * SokujiFukaKouseiMain のクラスファイル
- *
+ * SokujiFukaKouseiMain のクラスファイル 
+ * 
  * @reamsid_L DBB-0660-010 tianshuai
  */
 public class SokujiFukaKouseiMainDiv extends Panel {
@@ -56,6 +56,10 @@ public class SokujiFukaKouseiMainDiv extends Panel {
     private RString tokuchoNofugakuValue06;
     @JsonProperty("tokuchoNofugakuValue08")
     private RString tokuchoNofugakuValue08;
+    @JsonProperty("isDataChange")
+    private RString isDataChange;
+    @JsonProperty("initData")
+    private RString initData;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -298,6 +302,42 @@ public class SokujiFukaKouseiMainDiv extends Panel {
     }
 
     /*
+     * getisDataChange
+     * @return isDataChange
+     */
+    @JsonProperty("isDataChange")
+    public RString getIsDataChange() {
+        return isDataChange;
+    }
+
+    /*
+     * setisDataChange
+     * @param isDataChange isDataChange
+     */
+    @JsonProperty("isDataChange")
+    public void setIsDataChange(RString isDataChange) {
+        this.isDataChange = isDataChange;
+    }
+
+    /*
+     * getinitData
+     * @return initData
+     */
+    @JsonProperty("initData")
+    public RString getInitData() {
+        return initData;
+    }
+
+    /*
+     * setinitData
+     * @param initData initData
+     */
+    @JsonProperty("initData")
+    public void setInitData(RString initData) {
+        this.initData = initData;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -306,7 +346,7 @@ public class SokujiFukaKouseiMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setSokujiKoseiTab1(SokujiKoseiTab1Div SokujiKoseiTab1) {
+    public void  setSokujiKoseiTab1(SokujiKoseiTab1Div SokujiKoseiTab1) {
         this.getTabSokujiKousei().setSokujiKoseiTab1(SokujiKoseiTab1);
     }
 
@@ -316,7 +356,7 @@ public class SokujiFukaKouseiMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setSokujikouseiFukakonkyo(SokujikouseiFukakonkyoDiv SokujikouseiFukakonkyo) {
+    public void  setSokujikouseiFukakonkyo(SokujikouseiFukakonkyoDiv SokujikouseiFukakonkyo) {
         this.getTabSokujiKousei().getSokujiKoseiTab1().setSokujikouseiFukakonkyo(SokujikouseiFukakonkyo);
     }
 
@@ -326,7 +366,7 @@ public class SokujiFukaKouseiMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setGemmenGakuInput(GemmenGakuInputDiv GemmenGakuInput) {
+    public void  setGemmenGakuInput(GemmenGakuInputDiv GemmenGakuInput) {
         this.getTabSokujiKousei().getSokujiKoseiTab1().setGemmenGakuInput(GemmenGakuInput);
     }
 
@@ -336,7 +376,7 @@ public class SokujiFukaKouseiMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtGemmenGakuInput(TextBoxNum txtGemmenGakuInput) {
+    public void  setTxtGemmenGakuInput(TextBoxNum txtGemmenGakuInput) {
         this.getTabSokujiKousei().getSokujiKoseiTab1().getGemmenGakuInput().setTxtGemmenGakuInput(txtGemmenGakuInput);
     }
 
@@ -346,7 +386,7 @@ public class SokujiFukaKouseiMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnApplyGemmenGaku(Button btnApplyGemmenGaku) {
+    public void  setBtnApplyGemmenGaku(Button btnApplyGemmenGaku) {
         this.getTabSokujiKousei().getSokujiKoseiTab1().getGemmenGakuInput().setBtnApplyGemmenGaku(btnApplyGemmenGaku);
     }
 
@@ -356,7 +396,7 @@ public class SokujiFukaKouseiMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setSokujikouseiKiwarigaku(SokujikouseiKiwarigakuDiv SokujikouseiKiwarigaku) {
+    public void  setSokujikouseiKiwarigaku(SokujikouseiKiwarigakuDiv SokujikouseiKiwarigaku) {
         this.getTabSokujiKousei().getSokujiKoseiTab1().setSokujikouseiKiwarigaku(SokujikouseiKiwarigaku);
     }
 
@@ -366,7 +406,7 @@ public class SokujiFukaKouseiMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgFuchoKanendo(DataGrid<dgFuchoKanendo_Row> dgFuchoKanendo) {
+    public void  setDgFuchoKanendo(DataGrid<dgFuchoKanendo_Row> dgFuchoKanendo) {
         this.getTabSokujiKousei().getSokujiKoseiTab1().setDgFuchoKanendo(dgFuchoKanendo);
     }
 
@@ -376,7 +416,7 @@ public class SokujiFukaKouseiMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setSokujiKoseiTab2(SokujiKoseiTab2Div SokujiKoseiTab2) {
+    public void  setSokujiKoseiTab2(SokujiKoseiTab2Div SokujiKoseiTab2) {
         this.getTabSokujiKousei().setSokujiKoseiTab2(SokujiKoseiTab2);
     }
 
@@ -386,7 +426,7 @@ public class SokujiFukaKouseiMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setSokujikouseiSanteinoKiso(SokujikouseiSanteinoKisoDiv SokujikouseiSanteinoKiso) {
+    public void  setSokujikouseiSanteinoKiso(SokujikouseiSanteinoKisoDiv SokujikouseiSanteinoKiso) {
         this.getTabSokujiKousei().getSokujiKoseiTab2().setSokujikouseiSanteinoKiso(SokujikouseiSanteinoKiso);
     }
 
@@ -396,7 +436,7 @@ public class SokujiFukaKouseiMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setSokujikouseiJiyu(SokujikouseiJiyuDiv SokujikouseiJiyu) {
+    public void  setSokujikouseiJiyu(SokujikouseiJiyuDiv SokujikouseiJiyu) {
         this.getTabSokujiKousei().getSokujiKoseiTab2().setSokujikouseiJiyu(SokujikouseiJiyu);
     }
 

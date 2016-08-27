@@ -34,6 +34,7 @@ public class IchiGojiHanteiKekkaJohoHandler {
     private static final RString 済 = new RString("済");
     private static final RString 厚労省IF識別コード_09B = new RString("09B");
     private static final RString 厚労省IF識別コード_09A = new RString("09A");
+    private static final RString 照会 = new RString("照会");
 
     /**
      * コンストラクタです。
@@ -47,7 +48,7 @@ public class IchiGojiHanteiKekkaJohoHandler {
     /**
      * 画面初期化処理です。
      *
-     * @param business
+     * @param business 要介護認定一五次判定結果情報
      */
     public void onLoad(IchiGojiHanteiKekkaJohoBusiness business) {
         if (!business.isEmpty()) {
@@ -118,13 +119,16 @@ public class IchiGojiHanteiKekkaJohoHandler {
             if (認知症自立度Ⅱ_蓋然性 != null) {
                 div.getTxtGaizensei().setValue(new Decimal(認知症自立度Ⅱ_蓋然性.toString()));
             }
+            if (照会.equals(div.getHdnMode())) {
+                set照会モードの戻り値(business);
+            }
         }
     }
 
     /**
      * 呼び出し元画面への戻り値設定。
      *
-     * @param ビジネス情報
+     * @param ビジネス情報 ビジネス情報
      */
     public void 呼び出し元画面への戻り値(IchiGojiHanteiKekkaJohoBusiness ビジネス情報) {
         IchiGojiHanteiKekkaJoho 情報 = new IchiGojiHanteiKekkaJoho(new ShinseishoKanriNo(div.getHdnShinseishoKanriNo()));
@@ -132,6 +136,12 @@ public class IchiGojiHanteiKekkaJohoHandler {
 
         builder.set要介護認定1_5次判定年月日(FlexibleDate.getNowDate());
         // TODO QA#93089 JavaでDLLを呼び出し方のご提供がありません。
+        //        builder.set要介護認定1_5次判定結果コード(ビジネス情報.get判定結果コード());
+        //        builder.set要介護認定1_5次判定結果コード_認知症加算_(ビジネス情報.認知症加算後の一五次判定結果コード());
+        //        builder.set要介護認定状態の安定性コード(ビジネス情報.get安定性コード());
+        //        builder.set認知機能及び状態安定性から推定される給付区分コード(ビジネス情報.get給付区分コード());
+        //        builder.set認知症自立度Ⅱ以上の蓋然性(div.getTxtGaizensei().getValue());
+        //        builder.set要介護認定1_5次判定警告コード(ビジネス情報.get判定警告コード());
         builder.set要介護認定等基準時間(Integer.parseInt(div.getTxtKijunJikan().getValue().toString()));
         builder.set要介護認定等基準時間_食事_(div.getTxtShokuji().getValue().intValue());
         builder.set要介護認定等基準時間_排泄_(div.getTxtHaisetsu().getValue().intValue());
@@ -148,6 +158,35 @@ public class IchiGojiHanteiKekkaJohoHandler {
         builder.set中間評価項目得点第4群(div.getTxtDai4gun().getValue().intValue());
         builder.set中間評価項目得点第5群(div.getTxtDai5gun().getValue().intValue());
 
-        div.setHdnIchiGojiHanteiKekka(DataPassingConverter.serialize(情報));
+        div.setHdnIchiGojiHanteiKekka(DataPassingConverter.serialize(builder.build()));
+    }
+
+    private void set照会モードの戻り値(IchiGojiHanteiKekkaJohoBusiness business) {
+        IchiGojiHanteiKekkaJoho 情報 = new IchiGojiHanteiKekkaJoho(new ShinseishoKanriNo(div.getHdnShinseishoKanriNo()));
+        IchiGojiHanteiKekkaJohoBuilder builder = 情報.createBuilderForEdit();
+
+        builder.set要介護認定1_5次判定年月日(business.get判定年月日());
+        builder.set要介護認定1_5次判定結果コード(business.get判定結果コード());
+        builder.set要介護認定状態の安定性コード(business.get安定性コード());
+        builder.set認知機能及び状態安定性から推定される給付区分コード(business.get給付区分コード());
+        builder.set認知症自立度Ⅱ以上の蓋然性(business.get認知症自立度Ⅱ_蓋然性());
+        builder.set要介護認定1_5次判定警告コード(business.get判定警告コード());
+        builder.set要介護認定等基準時間(business.get基準時間());
+        builder.set要介護認定等基準時間_食事_(business.get基準時間_食事());
+        builder.set要介護認定等基準時間_排泄_(business.get基準時間_排泄());
+        builder.set要介護認定等基準時間_移動_(business.get基準時間_移動());
+        builder.set要介護認定等基準時間_清潔保持_(business.get基準時間_清潔保持());
+        builder.set要介護認定等基準時間_間接ケア_(business.get基準時間_間接ケア());
+        builder.set要介護認定等基準時間_BPSD関連_(business.get基準時間_BPSD関連());
+        builder.set要介護認定等基準時間_機能訓練_(business.get基準時間_機能訓練());
+        builder.set要介護認定等基準時間_医療関連_(business.get基準時間_医療関連());
+        builder.set要介護認定等基準時間_認知症加算_(business.get基準時間_認知症加算());
+        builder.set中間評価項目得点第1群(business.get中間評価項目得点第一群());
+        builder.set中間評価項目得点第2群(business.get中間評価項目得点第二群());
+        builder.set中間評価項目得点第3群(business.get中間評価項目得点第三群());
+        builder.set中間評価項目得点第4群(business.get中間評価項目得点第四群());
+        builder.set中間評価項目得点第5群(business.get中間評価項目得点第五群());
+
+        div.setHdnIchiGojiHanteiKekka(DataPassingConverter.serialize(builder.build()));
     }
 }

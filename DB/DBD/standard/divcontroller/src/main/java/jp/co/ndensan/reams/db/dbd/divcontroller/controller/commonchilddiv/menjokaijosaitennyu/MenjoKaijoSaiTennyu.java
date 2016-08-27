@@ -8,9 +8,10 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.commonchilddiv.menjo
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.menjokaijosaitennyu.MenjoKaijoSaiTennyu.MenjoKaijoSaiTennyuDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.menjokaijosaitennyu.MenjoKaijoSaiTennyu.MenjoKaijoSaiTennyuHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.IDialogResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -52,9 +53,10 @@ public class MenjoKaijoSaiTennyu {
      * @return ResponseData<MenjoKaijoSaiTennyuDiv>
      */
     public ResponseData<MenjoKaijoSaiTennyuDiv> onClick_btnToJiRu(MenjoKaijoSaiTennyuDiv div) {
-        IDialogResponse dialogResponse = ResponseData.of(div);
+        ResponseData<MenjoKaijoSaiTennyuDiv> response = new ResponseData();
         getHandler(div).onClick_btnToJiRu();
-        return dialogResponse.dialogOKClose();
+        response.data = div;
+        return ResponseData.of(div).dialogOKClose();
 
     }
 
@@ -68,9 +70,24 @@ public class MenjoKaijoSaiTennyu {
         if (!ResponseHolder.isReRequest() && getHandler(div).onClick_BtnTorikeshi()) {
             return ResponseData.of(div).addMessage(UrWarningMessages.未保存情報の破棄確認.getMessage().replace("処理中のデータ")).respond();
         }
-        div.getBtnTorikeshi().setDisabled(true);
-        div.getBtnKakutei().setDisabled(true);
-        div.getDgMenjoKaijoOrSaitennyu().getClickedItem().setJotai(new RString("修正"));
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getTxtTorokuJokyo().setValue(RString.EMPTY);
+            div.setTxtKyufugakuGengakuKikan(null);
+            div.setTxtGengakuTekiyoKikanKaishiYMD(null);
+            div.setTxtGengakuTekiyoKikanShuryoYMD(null);
+            div.setTxtChoshukenShometsuKikan(null);
+            div.setTxtNofuzumiKikan(null);
+            div.setTxtGengakuKetteiYMD(null);
+            div.setTxtZenkaiKikanKaishiYMD(null);
+            div.setTxtZenkaiKikanShuryoYMD(null);
+            div.setTxtGengakuTsuchiHakkoYMD(null);
+            div.setTxtKonkaiKikanKaishiYMD(null);
+            div.setTxtKonkaiKikanShuryoYMD(null);
+            div.getKyufugakuGengakuToroku().getTxtTainoJokyo().setIconNameEnum(IconName.Info);
+            div.getTxtTainoJokyo().setDisabled(false);
+            div.getBtnTorikeshi().setDisabled(true);
+            div.getBtnKakutei().setDisabled(true);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -81,10 +98,12 @@ public class MenjoKaijoSaiTennyu {
      * @return ResponseData<ShokanBaraiKa1GoDiv>
      */
     public ResponseData<MenjoKaijoSaiTennyuDiv> onClick_BtnKakutei(MenjoKaijoSaiTennyuDiv div) {
+        ResponseData<MenjoKaijoSaiTennyuDiv> response = new ResponseData();
         ValidationMessageControlPairs pairs = getHandler(div).onClick_BtnKakutei();
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
+        response.data = div;
         return ResponseData.of(div).respond();
     }
 

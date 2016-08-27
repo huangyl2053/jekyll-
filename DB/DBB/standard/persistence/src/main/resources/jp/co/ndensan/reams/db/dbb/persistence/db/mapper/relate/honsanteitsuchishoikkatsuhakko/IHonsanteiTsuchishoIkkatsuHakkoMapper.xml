@@ -971,7 +971,11 @@
          "出力順グループ指定" character varying(200)
         )
     </insert>
- 
+  
+    <delete id="drop計算後情報中間一時">
+        DROP TABLE "KeisanTyukanTemp"
+    </delete>
+       
     <delete id="drop計算後情報一時">
         DROP TABLE "DbT2015KeisangoJohoTemp"
     </delete>

@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoP
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoReport;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.futanwariaisho.FutanWariaiShoSource;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
+import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -53,6 +55,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -66,8 +69,6 @@ public class FutanWariaisho {
 
     private final DbV1001HihokenshaDaichoAliveDac dac;
     private static final RString 種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
-    private static final RString 定数_事務広域 = new RString("事務広域");
-    private static final RString 定数_認定広域 = new RString("認定広域");
     private static final int ZERO_INDEX = 0;
 
     /**
@@ -96,18 +97,38 @@ public class FutanWariaisho {
     }
 
     /**
+     * ソースデータ取得By画面
+     *
+     * @param 識別コード ShikibetsuCode
+     * @param 被保険者番号 HihokenshaNo
+     * @param entity FutanWariaiShoDivParameter
+     * @param flag RString
+     * @return SourceDataCollection
+     */
+    public SourceDataCollection getSourceDataSinger(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号,
+            FutanWariaiShoDivParameter entity, RString flag) {
+        SourceDataCollection collection;
+        try (ReportManager reportManager = new ReportManager()) {
+            getSourceData(識別コード, 被保険者番号, entity, flag, reportManager);
+            collection = reportManager.publish();
+        }
+        return collection;
+    }
+
+    /**
      * ソースデータ取得
      *
      * @param 識別コード ShikibetsuCode
      * @param 被保険者番号 HihokenshaNo
      * @param entity FutanWariaiShoDivParameter
      * @param flag RString
+     * @param reportManager ReportManager
      */
-    public void getSourceData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FutanWariaiShoDivParameter entity, RString flag) {
+    public void getSourceData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FutanWariaiShoDivParameter entity,
+            RString flag, ReportManager reportManager) {
         if (識別コード == null || 被保険者番号 == null || entity == null || flag == null) {
             throw new NullPointerException();
         }
-        ReportManager reportManager = new ReportManager();
         FutanWariaiShoProperty property = new FutanWariaiShoProperty();
         try (ReportAssembler<FutanWariaiShoSource> assembler = createAssembler(property, reportManager)) {
             Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, 種別コード,
@@ -150,11 +171,12 @@ public class FutanWariaisho {
             EditedKojin 編集後個人 = null;
             if (kojinList != null && !kojinList.isEmpty()) {
                 //TODO QA#1173
-                編集後個人 = new EditedKojin(kojinList.get(ZERO_INDEX), 帳票共通情報, null);
+                編集後個人 = new EditedKojin(kojinList.get(ZERO_INDEX), 帳票共通情報, 地方公共団体);
             }
             HokenshaNo 保険者コード取得 = getHokenshaCode(被保険者番号);
-            //TODO QA#1174  RiyoshaFutanWariaiHantei riyoshaFutanWariaiHantei = RiyoshaFutanWariaiHantei.createInstance()
-            List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 利用者負担割合明細List = null;
+            RiyoshaFutanWariaiHantei riyoshaFutanWariaiHantei = RiyoshaFutanWariaiHantei.createInstance();
+            List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細List
+                    = riyoshaFutanWariaiHantei.riyoshaFutanWariaiMeisaiMergeGamen(entity.get利用者負担割合明細());
             FutanWariaiShoReport report = new FutanWariaiShoReport(entity, 認証者ソースデータ, 被保険者番号, 編集後個人,
                     利用者負担割合明細List, 保険者コード取得, flag, kojinList);
             report.writeBy(reportSourceWriter);
@@ -177,8 +199,8 @@ public class FutanWariaisho {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         RString 導入形態コード = 市町村セキュリティ情報.get導入形態コード().value();
         KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
-        if (定数_事務広域.equals(導入形態コード) || 定数_認定広域.equals(導入形態コード)) {
-            //TODO QA#1175
+        if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード)
+                || DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード)) {
             DbV1001HihokenshaDaichoEntity entity = dac.get被保険者台帳(被保険者番号);
             SearchResult<ShichosonCodeYoriShichoson> shichoson = null;
             if (entity.getKoikinaiTokureiSochimotoShichosonCode() == null) {

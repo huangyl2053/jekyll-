@@ -3118,6 +3118,14 @@
        ${出力順}
     </select>
     
+    <delete id="drop計算後情報一時">
+        DROP TABLE "DbT2015KeisangoJohoTemp"
+    </delete>
+    
+    <delete id="drop計算中間一時">
+        DROP TABLE "KeisanTyukanTemp"
+    </delete>
+    
     <resultMap id="resultMap_IdoFukaJohoTemp" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoTempEntity" autoMapping="true">
         <id column="dbT2015KeisangoJoho_choteiNendo"/>
         <id column="dbT2015KeisangoJoho_fukaNendo"/>

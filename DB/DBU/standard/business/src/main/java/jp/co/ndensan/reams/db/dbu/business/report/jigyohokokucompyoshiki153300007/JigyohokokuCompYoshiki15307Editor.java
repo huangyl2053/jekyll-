@@ -58,11 +58,11 @@ public class JigyohokokuCompYoshiki15307Editor implements IJigyohokokuCompYoshik
         } else if (給付集計区分が2.equals(item.get給付集計区分())) {
             builder.append(new RString("(審査)"));
             source.shuukeiHani = builder.toRString();
-            source.kyufuKubun = new RString("償還審査分");
+            source.kyufuKubun = new RString("償還分");
         } else if (給付集計区分が3.equals(item.get給付集計区分())) {
             builder.append(new RString("(決定)"));
             source.shuukeiHani = builder.toRString();
-            source.kyufuKubun = new RString("償還決定分");
+            source.kyufuKubun = new RString("償還分");
         }
         source.hokenshaNo = item.get保険者番号();
         source.hokenshaName = item.get保険者名();

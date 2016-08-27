@@ -221,6 +221,6 @@ public class IkkatsuHakkoRelateEntity implements IDbAccessable {
     private YubinNo yubinNo;
     private RString seibetsuCode;
     private RString jukyuKubun;
+    private RString seinengappiFushoKubun;
     private RString taisyoKubun;
-
 }

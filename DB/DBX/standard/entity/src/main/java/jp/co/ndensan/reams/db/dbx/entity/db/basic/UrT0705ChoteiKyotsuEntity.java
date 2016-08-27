@@ -32,6 +32,7 @@ public class UrT0705ChoteiKyotsuEntity extends DbTableEntityBase<UrT0705ChoteiKy
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private Long choteiId;
+    private int rirekiNo;
     private Long shunoId;
     private RYear kaikeiNendo;
     private RYear shoriNendo;
@@ -106,6 +107,24 @@ public class UrT0705ChoteiKyotsuEntity extends DbTableEntityBase<UrT0705ChoteiKy
      */
     public void setChoteiId(Long choteiId) {
         this.choteiId = choteiId;
+    }
+
+    /**
+     * getRirekiNo
+     *
+     * @return rirekiNo
+     */
+    public int getRirekiNo() {
+        return rirekiNo;
+    }
+
+    /**
+     * setRirekiNo
+     *
+     * @param rirekiNo rirekiNo
+     */
+    public void setRirekiNo(int rirekiNo) {
+        this.rirekiNo = rirekiNo;
     }
 
     /**

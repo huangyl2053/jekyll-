@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.report.honsanteiidou.KeisanjohoAtenaKozaKouseizengoEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTani;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoNengakuKijunNendo8Gatsu;
@@ -58,6 +57,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.util.NendoUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
@@ -635,6 +635,9 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                     DbT2002FukaJohoTempTableEntity 賦課情報Entity = set賦課情報一時テーブルEntity(設定後_賦課の情報);
                     int index = NUM_0;
                     for (int 期 = 算定期; 期 <= 最終期; 期++) {
+                        if (普徴期別金額リスト.size() <= index) {
+                            break;
+                        }
                         set普徴期別金額(index, 普徴期別金額リスト, 賦課情報Entity, 期);
                         index = index + 1;
                     }
@@ -674,7 +677,10 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         int 最終期 = 普徴仮算定期間.getLast().get期AsInt();
         int 仮算定期数 = 最終期 - 算定期;
         int 納付額 = 年額保険料.multiply(仮算定期数 / (納期数 - (算定期 - 1))).intValue();
-        int 期別金額 = 納付額 / 仮算定期数;
+        int 期別金額 = 0;
+        if (仮算定期数 > 0) {
+            期別金額 = 納付額 / 仮算定期数;
+        }
         RString 端数調整 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_期別端数,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         RString 仮算定端数調整有無 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定端数調整有無,
@@ -1117,6 +1123,9 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     }
 
     private Decimal get保険料率(RString 保険料段階) {
+        if (保険料段階 == null || 保険料段階.isEmpty()) {
+            return Decimal.ZERO;
+        }
         HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
         HokenryoDankai dankai = 保険料段階List.getBy段階区分(保険料段階);
         return dankai.get保険料率();
@@ -1326,25 +1335,63 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         builder.set資格取得届出年月日(資格情報.get資格取得届出年月日());
         builder.set第1号資格取得年月日(資格情報.get第1号資格取得年月日());
         builder.set被保険者区分コード(資格情報.get被保険者区分コード());
-        builder.set資格喪失事由コード(資格情報.get資格喪失事由コード());
-        builder.set資格喪失年月日(資格情報.get資格喪失年月日());
-        builder.set資格喪失届出年月日(資格情報.get資格喪失届出年月日());
-        builder.set資格変更事由コード(資格情報.get資格変更事由コード());
-        builder.set資格変更年月日(資格情報.get資格変更年月日());
-        builder.set資格変更届出年月日(資格情報.get資格変更届出年月日());
-        builder.set住所地特例適用事由コード(資格情報.get住所地特例適用事由コード());
-        builder.set適用年月日(資格情報.get適用年月日());
-        builder.set適用届出年月日(資格情報.get適用届出年月日());
-        builder.set住所地特例解除事由コード(資格情報.get住所地特例解除事由コード());
-        builder.set解除年月日(資格情報.get解除年月日());
-        builder.set解除届出年月日(資格情報.get解除届出年月日());
-        builder.set住所地特例フラグ(資格情報.get住所地特例フラグ());
-        builder.set広域内住所地特例フラグ(資格情報.get広域内住所地特例フラグ());
-        builder.set広住特措置元市町村コード(資格情報.get広住特措置元市町村コード());
-        builder.set旧市町村コード(資格情報.get旧市町村コード());
+        if (資格情報.get資格喪失事由コード() != null) {
+            builder.set資格喪失事由コード(資格情報.get資格喪失事由コード());
+        } else {
+            builder.set資格喪失事由コード(RString.EMPTY);
+        }
+        builder.set資格喪失年月日(getFlexibleDate(資格情報.get資格喪失年月日()));
+        builder.set資格喪失届出年月日(getFlexibleDate(資格情報.get資格喪失届出年月日()));
+        if (資格情報.get資格変更事由コード() != null) {
+            builder.set資格変更事由コード(資格情報.get資格変更事由コード());
+        } else {
+            builder.set資格変更事由コード(RString.EMPTY);
+        }
+        builder.set資格変更年月日(getFlexibleDate(資格情報.get資格変更年月日()));
+        builder.set資格変更届出年月日(getFlexibleDate(資格情報.get資格変更届出年月日()));
+        if (資格情報.get住所地特例適用事由コード() != null) {
+            builder.set住所地特例適用事由コード(資格情報.get住所地特例適用事由コード());
+        } else {
+            builder.set住所地特例適用事由コード(RString.EMPTY);
+        }
+        builder.set適用年月日(getFlexibleDate(資格情報.get適用年月日()));
+        builder.set適用届出年月日(getFlexibleDate(資格情報.get適用届出年月日()));
+        if (資格情報.get住所地特例解除事由コード() != null) {
+            builder.set住所地特例解除事由コード(資格情報.get住所地特例解除事由コード());
+        } else {
+            builder.set住所地特例解除事由コード(RString.EMPTY);
+        }
+        builder.set解除年月日(getFlexibleDate(資格情報.get解除年月日()));
+        builder.set解除届出年月日(getFlexibleDate(資格情報.get解除届出年月日()));
+        if (資格情報.get住所地特例フラグ() != null) {
+            builder.set住所地特例フラグ(資格情報.get住所地特例フラグ());
+        } else {
+            builder.set住所地特例フラグ(RString.EMPTY);
+        }
+        if (資格情報.get広域内住所地特例フラグ() != null) {
+            builder.set広域内住所地特例フラグ(資格情報.get広域内住所地特例フラグ());
+        } else {
+            builder.set広域内住所地特例フラグ(RString.EMPTY);
+        }
+        if (資格情報.get広住特措置元市町村コード() != null) {
+            builder.set広住特措置元市町村コード(資格情報.get広住特措置元市町村コード());
+        } else {
+            builder.set広住特措置元市町村コード(LasdecCode.EMPTY);
+        }
+        if (資格情報.get旧市町村コード() != null) {
+            builder.set旧市町村コード(資格情報.get旧市町村コード());
+        } else {
+            builder.set旧市町村コード(LasdecCode.EMPTY);
+        }
         builder.set論理削除フラグ(資格情報.is論理削除フラグ());
         return builder.build();
+    }
 
+    private FlexibleDate getFlexibleDate(FlexibleDate 年月日) {
+        if (年月日 != null) {
+            return 年月日;
+        }
+        return FlexibleDate.EMPTY;
     }
 
     /**
@@ -1620,28 +1667,35 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         賦課情報Entity.setFukaShichosonCode(賦課情報.get賦課市町村コード());
         賦課情報Entity.setTkSaishutsuKampuGaku(賦課情報.get特徴歳出還付額());
         賦課情報Entity.setFuSaishutsuKampuGaku(賦課情報.get普徴歳出還付額());
-        賦課情報Entity.setTkKibetsuGaku01(賦課情報.get特徴期別金額01());
-        賦課情報Entity.setTkKibetsuGaku02(賦課情報.get特徴期別金額02());
-        賦課情報Entity.setTkKibetsuGaku03(賦課情報.get特徴期別金額03());
-        賦課情報Entity.setTkKibetsuGaku04(賦課情報.get特徴期別金額04());
-        賦課情報Entity.setTkKibetsuGaku05(賦課情報.get特徴期別金額05());
-        賦課情報Entity.setTkKibetsuGaku06(賦課情報.get特徴期別金額06());
-        賦課情報Entity.setFuKibetsuGaku01(賦課情報.get普徴期別金額01());
-        賦課情報Entity.setFuKibetsuGaku02(賦課情報.get普徴期別金額02());
-        賦課情報Entity.setFuKibetsuGaku03(賦課情報.get普徴期別金額03());
-        賦課情報Entity.setFuKibetsuGaku04(賦課情報.get普徴期別金額04());
-        賦課情報Entity.setFuKibetsuGaku05(賦課情報.get普徴期別金額05());
-        賦課情報Entity.setFuKibetsuGaku06(賦課情報.get普徴期別金額06());
-        賦課情報Entity.setFuKibetsuGaku07(賦課情報.get普徴期別金額07());
-        賦課情報Entity.setFuKibetsuGaku08(賦課情報.get普徴期別金額08());
-        賦課情報Entity.setFuKibetsuGaku09(賦課情報.get普徴期別金額09());
-        賦課情報Entity.setFuKibetsuGaku10(賦課情報.get普徴期別金額10());
-        賦課情報Entity.setFuKibetsuGaku11(賦課情報.get普徴期別金額11());
-        賦課情報Entity.setFuKibetsuGaku12(賦課情報.get普徴期別金額12());
-        賦課情報Entity.setFuKibetsuGaku13(賦課情報.get普徴期別金額13());
-        賦課情報Entity.setFuKibetsuGaku14(賦課情報.get普徴期別金額14());
+        賦課情報Entity.setTkKibetsuGaku01(get期別金額(賦課情報.get特徴期別金額01()));
+        賦課情報Entity.setTkKibetsuGaku02(get期別金額(賦課情報.get特徴期別金額02()));
+        賦課情報Entity.setTkKibetsuGaku03(get期別金額(賦課情報.get特徴期別金額03()));
+        賦課情報Entity.setTkKibetsuGaku04(get期別金額(賦課情報.get特徴期別金額04()));
+        賦課情報Entity.setTkKibetsuGaku05(get期別金額(賦課情報.get特徴期別金額05()));
+        賦課情報Entity.setTkKibetsuGaku06(get期別金額(賦課情報.get特徴期別金額06()));
+        賦課情報Entity.setFuKibetsuGaku01(get期別金額(賦課情報.get普徴期別金額01()));
+        賦課情報Entity.setFuKibetsuGaku02(get期別金額(賦課情報.get普徴期別金額02()));
+        賦課情報Entity.setFuKibetsuGaku03(get期別金額(賦課情報.get普徴期別金額03()));
+        賦課情報Entity.setFuKibetsuGaku04(get期別金額(賦課情報.get普徴期別金額04()));
+        賦課情報Entity.setFuKibetsuGaku05(get期別金額(賦課情報.get普徴期別金額05()));
+        賦課情報Entity.setFuKibetsuGaku06(get期別金額(賦課情報.get普徴期別金額06()));
+        賦課情報Entity.setFuKibetsuGaku07(get期別金額(賦課情報.get普徴期別金額07()));
+        賦課情報Entity.setFuKibetsuGaku08(get期別金額(賦課情報.get普徴期別金額08()));
+        賦課情報Entity.setFuKibetsuGaku09(get期別金額(賦課情報.get普徴期別金額09()));
+        賦課情報Entity.setFuKibetsuGaku10(get期別金額(賦課情報.get普徴期別金額10()));
+        賦課情報Entity.setFuKibetsuGaku11(get期別金額(賦課情報.get普徴期別金額11()));
+        賦課情報Entity.setFuKibetsuGaku12(get期別金額(賦課情報.get普徴期別金額12()));
+        賦課情報Entity.setFuKibetsuGaku13(get期別金額(賦課情報.get普徴期別金額13()));
+        賦課情報Entity.setFuKibetsuGaku14(get期別金額(賦課情報.get普徴期別金額14()));
         return 賦課情報Entity;
 
+    }
+
+    private Decimal get期別金額(Decimal 金額) {
+        if (金額 == null) {
+            return Decimal.ZERO;
+        }
+        return 金額;
     }
 
     private DbT2002FukaJohoTempTableEntity set金額ToZero(DbT2002FukaJohoTempTableEntity 賦課情報Entity) {

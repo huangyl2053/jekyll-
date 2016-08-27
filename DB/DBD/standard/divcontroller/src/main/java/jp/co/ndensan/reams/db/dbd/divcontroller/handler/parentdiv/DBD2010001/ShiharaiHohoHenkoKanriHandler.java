@@ -177,16 +177,29 @@ public class ShiharaiHohoHenkoKanriHandler {
      * ダイアログ画面に追加されたデータを支払変更管理一覧に追加します。
      *
      * @param dialog支払方法変更 ダイアログ画面に追加された支払方法変更
+     * @return 追加行が一覧に既に存在か true:存在
      */
-    public void 支払変更管理一覧に追加(ShiharaiHohoHenko dialog支払方法変更) {
-        dgShiharaiHohoHenkoRireki_Row row = new dgShiharaiHohoHenkoRireki_Row();
-        row.setJotai(変更状態_追加);
-        setRow(row, dialog支払方法変更);
-
+    public boolean 支払変更管理一覧に追加(ShiharaiHohoHenko dialog支払方法変更) {
+        boolean is追加行が存在 = false;
         List<dgShiharaiHohoHenkoRireki_Row> rowList = div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getDataSource();
-        rowList.add(row);
+        for (dgShiharaiHohoHenkoRireki_Row row : rowList) {
+            if (dialog支払方法変更.get証記載保険者番号().getColumnValue().equals(row.getHdnShoKisaiHokenshaNo())
+                    && dialog支払方法変更.get被保険者番号().getColumnValue().equals(row.getHdnHihokenshaNo())
+                    && dialog支払方法変更.get管理区分().equals(row.getHdnKanriKubun())
+                    && dialog支払方法変更.get履歴番号() == Integer.valueOf(row.getHdnRirekiNo().toString())) {
+                setRow(row, dialog支払方法変更);
+                is追加行が存在 = true;
+            }
+        }
+        if (!is追加行が存在) {
+            dgShiharaiHohoHenkoRireki_Row row = new dgShiharaiHohoHenkoRireki_Row();
+            row.setJotai(変更状態_追加);
+            setRow(row, dialog支払方法変更);
+            rowList.add(row);
+        }
         Collections.sort(rowList, new ShiharaiHohoHenkoKanriRowComparator());
         div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().setDataSource(rowList);
+        return is追加行が存在;
     }
 
     /**
@@ -373,6 +386,16 @@ public class ShiharaiHohoHenkoKanriHandler {
     }
 
     private void 管理区分が2の時ボタン群の設定(ShiharaiHohoHenko data) {
+        dgShiharaiHohoHenkoRireki_Row row = div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow();
+        if (row != null && 変更状態_追加.equals(row.getJotai())) {
+            if (ShiharaiHenkoTorokuKubun._１号予告登録者.get名称().equals(row.getTorokuJokyo())) {
+                div.getShiharaiHohoHenkoKanriMain().getBtnIchigoYokokushaToroku1().setDisabled(false);
+            } else if (ShiharaiHenkoTorokuKubun._１号償還払い化登録.get名称().equals(row.getTorokuJokyo())) {
+                div.getShiharaiHohoHenkoKanriMain().getBtnShokanBaraikaToroku().setDisabled(false);
+            }
+            return;
+        }
+
         if (data.get終了区分() != null && !data.get終了区分().isEmpty()) {
             return;
         }
@@ -391,6 +414,14 @@ public class ShiharaiHohoHenkoKanriHandler {
     }
 
     private void 管理区分が3の時ボタン群の設定(ShiharaiHohoHenko data) {
+        dgShiharaiHohoHenkoRireki_Row row = div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow();
+        if (row != null && 変更状態_追加.equals(row.getJotai())) {
+            if (ShiharaiHenkoTorokuKubun._１号給付額減額登録.get名称().equals(row.getTorokuJokyo())) {
+                div.getShiharaiHohoHenkoKanriMain().getBtnKyufugakuGengakuToroku().setDisabled(false);
+            }
+            return;
+        }
+
         if (ShiharaiHenkoShuryoShinseiShinsaKekkaKubun._空.getコード().equals(data.get終了申請審査結果区分())) {
             div.getShiharaiHohoHenkoKanriMain().getBtnKyufugakuGengakuToroku().setDisabled(false);
             div.getShiharaiHohoHenkoKanriMain().getBtnGengakuMenjoShinsei().setDisabled(false);
@@ -404,6 +435,16 @@ public class ShiharaiHohoHenkoKanriHandler {
     }
 
     private void 管理区分が1の時ボタン群の設定(ShiharaiHohoHenko data) {
+        dgShiharaiHohoHenkoRireki_Row row = div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow();
+        if (row != null && 変更状態_追加.equals(row.getJotai())) {
+            if (ShiharaiHenkoTorokuKubun._２号予告登録者.get名称().equals(row.getTorokuJokyo())) {
+                div.getShiharaiHohoHenkoKanriMain().getBtnNigoYokokushaToroku().setDisabled(false);
+            } else if (ShiharaiHenkoTorokuKubun._２号差止登録.get名称().equals(row.getTorokuJokyo())) {
+                div.getShiharaiHohoHenkoKanriMain().getBtnNigoIchijiSashitomeToroku().setDisabled(false);
+            }
+            return;
+        }
+
         if (data.get終了区分() != null && !data.get終了区分().isEmpty()) {
             return;
         }
@@ -436,7 +477,11 @@ public class ShiharaiHohoHenkoKanriHandler {
         /**
          * 初期の支払方法変更の情報リスト
          */
-        初期の支払方法変更の情報リスト
+        初期の支払方法変更の情報リスト,
+        /**
+         * 初期の支払方法変更の情報リストIgnore論理削除
+         */
+        初期の支払方法変更の情報リストIgnore論理削除
     }
 
     /**
@@ -447,8 +492,12 @@ public class ShiharaiHohoHenkoKanriHandler {
         @Override
         public int compare(dgShiharaiHohoHenkoRireki_Row row1, dgShiharaiHohoHenkoRireki_Row row2) {
 
-            return row1.getHdnKanriKubun().compareTo(row2.getHdnKanriKubun()) > 0
-                    ? 1 : (row1.getHdnRirekiNo().compareTo(row2.getHdnRirekiNo()) > 0 ? -1 : 1);
+            int result = row1.getHdnKanriKubun().compareTo(row2.getHdnKanriKubun()) >= 0
+                    ? row1.getHdnKanriKubun().compareTo(row2.getHdnKanriKubun()) : -1;
+            if (result == 0) {
+                result = Integer.valueOf(row1.getHdnRirekiNo().toString()) > Integer.valueOf(row2.getHdnRirekiNo().toString()) ? -1 : 1;
+            }
+            return result;
 
         }
     }

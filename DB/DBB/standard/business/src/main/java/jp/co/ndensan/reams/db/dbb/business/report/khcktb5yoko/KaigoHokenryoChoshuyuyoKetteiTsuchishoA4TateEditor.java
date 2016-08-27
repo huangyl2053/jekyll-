@@ -60,6 +60,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
     private static final int 定数_TEN = 10;
     private static final RString RSTR_0 = new RString("　");
     private static final RString 波線 = new RString("～");
+    private static final RString FORMAT_1桁 = new RString("%02d");
     private static final RString 期_1 = new RString("01");
     private static final RString 期_2 = new RString("02");
     private static final RString 期_3 = new RString("03");
@@ -381,7 +382,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
         List<KibetsuChoshuYuyo> 介護期別徴収猶予List = choshuYuyoJoho.get介護期別徴収猶予();
         for (KibetsuChoshuYuyo 介護期別徴収猶予 : 介護期別徴収猶予List) {
             RString 徴収方法 = 介護期別徴収猶予.get徴収方法();
-            RString 期 = new RString(String.valueOf(介護期別徴収猶予.get期()));
+            RString 期 = new RString(String.format(FORMAT_1桁.toString(), 介護期別徴収猶予.get期()));
             if (ChoshuHohoKibetsu.普通徴収.getコード().equals(徴収方法) && 普徴期月.get期().equals(期)) {
                 徴収猶予期間 = new RString(DateEditor.to西暦(介護期別徴収猶予.get徴収猶予開始日()).toString()
                         + 波線.toString() + DateEditor.to西暦(介護期別徴収猶予.get徴収猶予終了日()).toString());

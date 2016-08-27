@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 高額介護（予防）サービス費支給申請書（ゆうちょ）の出力クラスです。
+ * 高額介護（予防）サービス費支給申請書（ゆうちょ）のReportクラスです。
  *
- * @reamsid_L DBC-4770-070 jianglaisheng
+ * @reamsid_L DBC-4770-070 jiangxiaolong
  */
 public class KogakuShikyuShinseishoYuchoReport extends Report<KogakuShikyuShinseishoYuchoSource> {
 
@@ -30,7 +30,9 @@ public class KogakuShikyuShinseishoYuchoReport extends Report<KogakuShikyuShinse
 
     @Override
     public void writeBy(ReportSourceWriter<KogakuShikyuShinseishoYuchoSource> writer) {
-        System.out.print("");
+        IKogakuShikyuShinseishoYuchoEditor editor = new KogakuShikyuShinseishoYuchoEditor(target);
+        IKogakuShikyuShinseishoYuchoBuilder builder = new KogakuShikyuShinseishoYuchoBuilder(editor);
+        writer.writeLine(builder);
     }
 
 }

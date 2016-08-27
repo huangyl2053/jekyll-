@@ -5,16 +5,24 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt00005;
 
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 帳票出力情報の取得のMyBatis用パラメータクラスです。
  *
  * @reamsid_L DBD-3880-050 x_lilh
  */
-public class ChohyoShutsuryokuJohoShutokuMybatisParameter {
+@Getter
+@Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
+public class ChohyoShutsuryokuJohoShutokuMybatisParameter implements IMyBatisParameter {
     // TODO SQL使用のパラメター
     //
+
+    private RString パラメター;
 
     /**
      * コンストラクタです。
@@ -23,5 +31,6 @@ public class ChohyoShutsuryokuJohoShutokuMybatisParameter {
      */
     public ChohyoShutsuryokuJohoShutokuMybatisParameter(RString パラメター) {
         //TODO
+        this.パラメター = パラメター;
     }
 }

@@ -95,6 +95,15 @@ public class HousholdBusiness implements Serializable {
     }
 
     /**
+     * countを返します。
+     *
+     * @return count
+     */
+    public int getCount() {
+        return entity.getCount();
+    }
+
+    /**
      * カナ氏名を返します。
      *
      * @return カナ氏名

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3110JigyoKogakuShikyuShinse
 /**
  * 高額サービス費給付お知らせ通知書作成のハンドラクラスです。
  *
- * @reamsid DBC-4770-010 zhengshenlei
+ * @reamsid_L DBC-4770-010 zhengshenlei
  */
 public interface IKogakuShikyuShinseishoIkkatsuHakkoMapper {
 
@@ -23,7 +23,7 @@ public interface IKogakuShikyuShinseishoIkkatsuHakkoMapper {
      * @param param KogakuShikyuShinseishoIkkatsuHakkoMapperParameter
      * @return List<DbT3056KogakuShikyuShinseiEntity>
      */
-    public List<DbT3056KogakuShikyuShinseiEntity> getServiceTeikyoByDbT3056(KogakuShikyuShinseishoIkkatsuHakkoMapperParameter param);
+    List<DbT3056KogakuShikyuShinseiEntity> getServiceTeikyoByDbT3056(KogakuShikyuShinseishoIkkatsuHakkoMapperParameter param);
 
     /**
      * サービス提供年月の取得のメソッドます
@@ -31,5 +31,5 @@ public interface IKogakuShikyuShinseishoIkkatsuHakkoMapper {
      * @param param KogakuShikyuShinseishoIkkatsuHakkoMapperParameter
      * @return List<DbT3110JigyoKogakuShikyuShinseiEntity>
      */
-    public List<DbT3110JigyoKogakuShikyuShinseiEntity> getServiceTeikyoByDbT3110(KogakuShikyuShinseishoIkkatsuHakkoMapperParameter param);
+    List<DbT3110JigyoKogakuShikyuShinseiEntity> getServiceTeikyoByDbT3110(KogakuShikyuShinseishoIkkatsuHakkoMapperParameter param);
 }

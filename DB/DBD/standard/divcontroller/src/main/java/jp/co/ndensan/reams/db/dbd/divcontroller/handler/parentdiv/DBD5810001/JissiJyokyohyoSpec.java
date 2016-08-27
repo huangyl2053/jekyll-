@@ -74,7 +74,7 @@ public enum JissiJyokyohyoSpec implements IPredicate<JissiJyokyohyoDiv> {
 
                     return !年齢From.isEmpty()
                     && !年齢To.isEmpty()
-                    && (!年齢基準日.isEmpty() && 年齢基準日 != null);
+                    && (!年齢基準日.isEmpty());
 
                 }
 
@@ -87,7 +87,7 @@ public enum JissiJyokyohyoSpec implements IPredicate<JissiJyokyohyoDiv> {
                 public boolean apply(JissiJyokyohyoDiv div) {
                     RDate 生年月日From = div.getJokenPanel().getTxtSeinen().getFromValue();
                     RDate 生年月日To = div.getJokenPanel().getTxtSeinen().getToValue();
-                    return null != 生年月日From && null != 生年月日To;
+                    return 生年月日From != null && 生年月日To != null;
 
                 }
             };

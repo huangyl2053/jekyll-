@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.futanwariaisho.FutanWariaiShoSource;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
@@ -30,7 +30,7 @@ public class FutanWariaiShoReport extends
     private final NinshoshaSource 認証者ソースデータ;
     private final HihokenshaNo 被保険者番号;
     private final EditedKojin 編集後個人;
-    private final List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 利用者負担割合明細List;
+    private final List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細List;
     private final HokenshaNo 保険者コード取得;
     private final RString flag;
     private final List<IKojin> 個人;
@@ -42,13 +42,13 @@ public class FutanWariaiShoReport extends
      * @param 認証者ソースデータ NinshoshaSource
      * @param 被保険者番号 HihokenshaNo
      * @param 編集後個人 EditedKojin
-     * @param 利用者負担割合明細List List<DbT3114RiyoshaFutanWariaiMeisaiEntity>
+     * @param 利用者負担割合明細List List<RiyoshaFutanWariaiMeisai>
      * @param 保険者コード取得 HokenshaNo
      * @param flag RString
      * @param 個人 List<IKojin>
      */
     public FutanWariaiShoReport(FutanWariaiShoDivParameter entity, NinshoshaSource 認証者ソースデータ, HihokenshaNo 被保険者番号,
-            EditedKojin 編集後個人, List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 利用者負担割合明細List, HokenshaNo 保険者コード取得,
+            EditedKojin 編集後個人, List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細List, HokenshaNo 保険者コード取得,
             RString flag, List<IKojin> 個人) {
         this.entity = entity;
         this.認証者ソースデータ = 認証者ソースデータ;

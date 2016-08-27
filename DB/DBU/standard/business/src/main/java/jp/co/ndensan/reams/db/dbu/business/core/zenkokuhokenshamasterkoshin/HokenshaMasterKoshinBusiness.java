@@ -12,7 +12,7 @@ import lombok.Getter;
 /**
  * 保険者情報のBusinessクラスです。
  *
- * @reamsid_L　DBU-4230-010 chenxiangyu
+ * @reamsid_L DBU-4230-010 chenxiangyu
  */
 @Getter
 public class HokenshaMasterKoshinBusiness {

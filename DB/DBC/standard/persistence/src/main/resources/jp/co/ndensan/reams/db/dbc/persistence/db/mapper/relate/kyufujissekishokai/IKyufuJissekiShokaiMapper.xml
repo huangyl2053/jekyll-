@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： ビジネス設計_DBCMN11002_給付実績照会検索用XMLです。 -->
+<!-- @reamsid_L DBC-2970-170 dingyi -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufujissekishokai.IKyufuJissekiShokaiMapper">
+    
+    <select resultOrdered="true" id="get識別対象" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiHeaderJohoMapperParameter" fetchSize="500">
+        SELECT
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+    </select>
+    
+    <select resultOrdered="true" id="get給付実績情報" resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiJyohoRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiHeaderJohoMapperParameter" fetchSize="500">
+        SELECT	
+            DbT3017."hiHokenshaNo",
+            DbT3017."serviceTeikyoYM",
+            DbT3017."seiriNo",
+            DbT3017."kyufuSakuseiKubunCode",
+            DbT3017."jigyoshoNo",
+            shikibetsuNoA."shikibetsuNo",
+            shikibetsuNoA."shikibetsuNo" || ' ' || shikibetsuNoA."ryakusho" AS shikibetsuMeisho
+        FROM rgdb."DbT3017KyufujissekiKihon" AS DbT3017
+        LEFT JOIN 
+            (SELECT "shikibetsuNo", "ryakusho", rank_number FROM 
+                (SELECT T3118."shikibetsuNo",
+                        T3118."ryakusho", 
+                        ROW_NUMBER() OVER(PARTITION BY T3118."shikibetsuNo" ORDER BY T3118."tekiyoKaishiYM"DESC, T3118."tekiyoShuryoYM" DESC) AS rank_number 
+                 FROM rgdb."DbT3118ShikibetsuNoKanri" AS T3118 
+                 WHERE T3118."isDeleted" = FALSE 
+                 AND   T3118."tekiyoKaishiYM" <![CDATA[<=]]> #{サービス提供年月}
+                 AND   (T3118."tekiyoShuryoYM" IS NULL OR (
+                            T3118."tekiyoShuryoYM" IS NOT NULL AND #{サービス提供年月} <![CDATA[<=]]> T3118."tekiyoShuryoYM"))
+                 ) AS T1
+                 WHERE T1.rank_number = 1
+             ) AS shikibetsuNoA
+         ON  DbT3017."seiriNo" = shikibetsuNoA."shikibetsuNo"
+         WHERE DbT3017."isDeleted" = FALSE
+         AND   DbT3017."serviceTeikyoYM" = #{サービス提供年月}
+         AND   DbT3017."hiHokenshaNo" = #{被保険者番号}
+         AND   DbT3017."seiriNo" = #{整理番号}
+         AND   DbT3017."inputShikibetsuNo" = #{識別番号}
+         ORDER BY DbT3017."toshiNo" DESC
+    </select>
+    
+    <select resultOrdered="true" id="get介護事業者情報" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiHeaderJohoMapperParameter" fetchSize="500">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.allColumns_DbT7060KaigoJigyosha" />
+        FROM
+            rgdb."DbT7060KaigoJigyosha"
+        WHERE
+            rgdb."DbT7060KaigoJigyosha"."isDeleted" = FALSE
+        AND
+            rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" = #{事業所番号}
+        AND (((SUBSTR(rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> #{サービス提供年月}) 
+                AND (#{サービス提供年月} <![CDATA[<=]]> SUBSTR(rgdb."DbT7060KaigoJigyosha"."yukoShuryoYMD", 1, 6)))
+        OR  ((SUBSTR(rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> #{サービス提供年月}) 
+                AND rgdb."DbT7060KaigoJigyosha"."yukoShuryoYMD" IS NULL))
+    </select>
+    
+    <select resultOrdered="true" id="get介護事業者指定サービス情報" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7063KaigoJigyoshaShiteiServiceMapper.ResultMap_DbT7063KaigoJigyoshaShiteiServiceEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiHeaderJohoMapperParameter" fetchSize="500">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7063KaigoJigyoshaShiteiServiceMapper.allColumns_DbT7063KaigoJigyoshaShiteiService" />
+        FROM
+            rgdb."DbT7063KaigoJigyoshaShiteiService"
+        WHERE
+            rgdb."DbT7063KaigoJigyoshaShiteiService"."isDeleted" = FALSE
+        AND
+            rgdb."DbT7063KaigoJigyoshaShiteiService"."jigyoshaNo" = #{事業所番号}
+        AND (((SUBSTR(rgdb."DbT7063KaigoJigyoshaShiteiService"."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> #{サービス提供年月}) 
+                AND (#{サービス提供年月} <![CDATA[<=]]> SUBSTR(rgdb."DbT7063KaigoJigyoshaShiteiService"."yukoShuryoYMD", 1, 6)))
+        OR  ((SUBSTR(rgdb."DbT7063KaigoJigyoshaShiteiService"."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> #{サービス提供年月}) 
+                AND rgdb."DbT7063KaigoJigyoshaShiteiService"."yukoShuryoYMD" IS NULL))
+        AND rgdb."DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" IN ('43', '46')
+    </select>
+    
+<!--    <select resultOrdered="true" id="get識別番号管理データ" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7063KaigoJigyoshaShiteiServiceMapper.ResultMap_DbT7063KaigoJigyoshaShiteiServiceEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiHeaderJohoMapperParameter" fetchSize="500">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7063KaigoJigyoshaShiteiServiceMapper.allColumns_DbT7063KaigoJigyoshaShiteiService" />
+        FROM
+            rgdb."DbT7063KaigoJigyoshaShiteiService"
+        WHERE
+            rgdb."DbT7063KaigoJigyoshaShiteiService"."isDeleted" = FALSE
+        AND
+            rgdb."DbT7063KaigoJigyoshaShiteiService"."jigyoshaNo" = #{事業所番号}
+        AND (((SUBSTR(rgdb."DbT7063KaigoJigyoshaShiteiService"."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> #{サービス提供年月}) 
+                AND (#{サービス提供年月} <![CDATA[<=]]> SUBSTR(rgdb."DbT7063KaigoJigyoshaShiteiService"."yukoShuryoYMD", 1, 6)))
+        OR  ((SUBSTR(rgdb."DbT7063KaigoJigyoshaShiteiService"."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> #{サービス提供年月}) 
+                AND rgdb."DbT7063KaigoJigyoshaShiteiService"."yukoShuryoYMD" IS NULL))
+        AND rgdb."DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" IN ('43', '46')
+    </select>-->
+    
+</mapper>

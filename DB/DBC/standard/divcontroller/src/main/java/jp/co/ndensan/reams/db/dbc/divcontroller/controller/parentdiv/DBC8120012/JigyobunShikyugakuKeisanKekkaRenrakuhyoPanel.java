@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBC-4840-010 lihang
  */
 public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanel {
+
+    private static final RString この連絡票は既に印刷されていますが = new RString("この連絡票は既に印刷されていますが");
 
     /**
      * 画面を初期化します
@@ -101,8 +103,12 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanel {
      */
     public ResponseData<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv> onClick_check(
             JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv div) {
-        if (!div.getSakuseiPanel().getTxtZenkaiSakuseiYMD().getValue().toString().equals("")) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.確認_汎用.getMessage()).respond();
+        if (!ResponseHolder.isReRequest()
+                && !div.getSakuseiPanel().getTxtZenkaiSakuseiYMD().getValue().toString().equals(RString.EMPTY.toString())) {
+            QuestionMessage message = new QuestionMessage(
+                    UrQuestionMessages.確認_汎用.getMessage().getCode(),
+                    UrQuestionMessages.確認_汎用.getMessage().replace(この連絡票は既に印刷されていますが.toString()).evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -116,11 +122,8 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanel {
      */
     public ResponseData<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelBatchParameter> onClick_btnPrint(
             JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv div) {
-        if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()))
-                && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-            return ResponseData.of(createHandler(div).onClick発行する(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号())).respond();
-        }
-        return ResponseData.of(new JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelBatchParameter()).respond();
+        return ResponseData.of(createHandler(div).onClick発行する(ViewStateHolder.get(
+                ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号())).respond();
     }
 
     /**

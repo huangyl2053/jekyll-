@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.shiharaihohohenkolist.Shih
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohokanrilist.ShiharaiHohoKanriListData;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020002.ShiharaiHohoKanriListMainDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 
 /**
  * 支払方法変更管理リスト（画面）のビジネスクラス
@@ -44,7 +45,9 @@ public class ShiharaiHohoHenkoKanriIchiran {
         tempData.set償還決定登録者1の選択(div.getChushutsuJoken().getDdl1GoShokanKetteiSashitomeAriOnly().getSelectedKey());
         tempData.set償還決定登録者2の選択(div.getChushutsuJoken().getDdl1GoShokanKetteiKojoAriOnly().getSelectedKey());
         tempData.set改頁出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
-        tempData.set帳票ID(ReportIdDBD.DBD200007.getReportId().value());
+        tempData.set帳票ID(ReportIdDBD.DBD200007.getReportId());
+        tempData.set帳票分類ID(ReportIdDBD.DBD200007.getReportId());
+        tempData.set帳票作成日時(RDateTime.now());
         ShiharaiHohoHenkoListFlowParameter batchParameter = new ShiharaiHohoHenkoListFlowParameter();
         batchParameter.toDbd207010BatchParameter(tempData);
         return batchParameter;

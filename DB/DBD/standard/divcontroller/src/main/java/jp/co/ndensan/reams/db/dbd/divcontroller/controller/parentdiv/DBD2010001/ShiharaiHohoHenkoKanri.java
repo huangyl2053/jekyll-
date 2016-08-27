@@ -67,6 +67,7 @@ public class ShiharaiHohoHenkoKanri {
     private static final RString ボタン２号弁明書受理 = new RString("btnNigoBemmeishoJuri");
     private static final RString ボタン２号一時差止登録 = new RString("btnNigoIchijiSashitomeToroku");
     private static final RString ボタン２号一時差止解除 = new RString("btnNigoIchijiSashitomeKaijo");
+    private static final RString 変更状態_追加 = new RString("追加");
 
     /**
      * 画面初期化です。
@@ -100,8 +101,10 @@ public class ShiharaiHohoHenkoKanri {
         }
 
         ArrayList<ShiharaiHohoHenko> dataList = service.find支払方法変更(被保険者番号);
+        ArrayList<ShiharaiHohoHenko> dataListIgnore論理削除 = service.find支払方法変更Ignore論理削除(被保険者番号);
         ViewStateHolder.put(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, dataList);
         ViewStateHolder.put(ShiharaiHohoHenkoKanriEnum.初期の支払方法変更の情報リスト, dataList);
+        ViewStateHolder.put(ShiharaiHohoHenkoKanriEnum.初期の支払方法変更の情報リストIgnore論理削除, dataListIgnore論理削除);
         getHandler(div).画面初期化(識別コード, 被保険者番号, dataList);
         return ResponseData.of(div).setState(DBD2010001StateName.支払方法変更管理);
     }
@@ -163,6 +166,8 @@ public class ShiharaiHohoHenkoKanri {
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
 
         ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+        ArrayList<ShiharaiHohoHenko> dataListIncludeDel = ViewStateHolder.
+                get(ShiharaiHohoHenkoKanriEnum.初期の支払方法変更の情報リストIgnore論理削除, ArrayList.class);
 
         div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
         div.setKey_Button(getHandler(div).getボタンの支払方法変更処理区分());
@@ -171,13 +176,13 @@ public class ShiharaiHohoHenkoKanri {
 
             if (ボタン１号予告者登録.equals(div.getFocusPositionID())) {
                 div.setKey_MaxRirekiNo(getHandler(div).
-                        get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._１号償還払い化.getコード()));
+                        get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataListIncludeDel, ShiharaiHenkoKanriKubun._１号償還払い化.getコード()));
             } else if (ボタン１給付額減額登録.equals(div.getFocusPositionID())) {
                 div.setKey_MaxRirekiNo(getHandler(div).
-                        get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._１号給付額減額.getコード()));
+                        get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataListIncludeDel, ShiharaiHenkoKanriKubun._１号給付額減額.getコード()));
             } else if (ボタン２号予告者登録.equals(div.getFocusPositionID())) {
                 div.setKey_MaxRirekiNo(getHandler(div).
-                        get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._２号差止.getコード()));
+                        get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataListIncludeDel, ShiharaiHenkoKanriKubun._２号差止.getコード()));
             } else {
                 div.setKey_MaxRirekiNo(RString.EMPTY);
             }
@@ -187,14 +192,14 @@ public class ShiharaiHohoHenkoKanri {
 
             if (ボタン１号予告者登録.equals(div.getFocusPositionID()) || ボタン１償還払い化登録.equals(div.getFocusPositionID())) {
                 div.setKey_MaxRirekiNo(getHandler(div).
-                        get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._１号償還払い化.getコード()));
+                        get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataListIncludeDel, ShiharaiHenkoKanriKubun._１号償還払い化.getコード()));
             } else if (ボタン１給付額減額登録.equals(div.getFocusPositionID())) {
                 div.setKey_MaxRirekiNo(getHandler(div).
-                        get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._１号給付額減額.getコード()));
+                        get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataListIncludeDel, ShiharaiHenkoKanriKubun._１号給付額減額.getコード()));
             } else if (ボタン２号予告者登録.equals(div.getFocusPositionID())
                     || ボタン２号一時差止登録.equals(div.getFocusPositionID())) {
                 div.setKey_MaxRirekiNo(getHandler(div).
-                        get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._２号差止.getコード()));
+                        get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataListIncludeDel, ShiharaiHenkoKanriKubun._２号差止.getコード()));
             } else {
                 div.setKey_MaxRirekiNo(RString.EMPTY);
             }
@@ -213,18 +218,27 @@ public class ShiharaiHohoHenkoKanri {
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
 
         ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+        ArrayList<ShiharaiHohoHenko> dataListIncludeDel = ViewStateHolder.
+                get(ShiharaiHohoHenkoKanriEnum.初期の支払方法変更の情報リストIgnore論理削除, ArrayList.class);
 
         div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
         div.setKey_Button(ShoriKubun._1号予告者登録.getコード());
-        if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
+
+        dgShiharaiHohoHenkoRireki_Row row = div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow();
+        if (row == null) {
             div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
             div.setKey_MaxRirekiNo(getHandler(div).
-                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._１号償還払い化.getコード()));
+                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataListIncludeDel, ShiharaiHenkoKanriKubun._１号償還払い化.getコード()));
 
         } else {
-            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
-            div.setKey_MaxRirekiNo(getHandler(div).
-                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._１号償還払い化.getコード()));
+            ShiharaiHohoHenko 支払方法変更情報 = getHandler(div).get支払方法変更情報FromViewState(dataList);
+            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(支払方法変更情報));
+            if (変更状態_追加.equals(row.getJotai())) {
+                div.setKey_MaxRirekiNo(new RString(支払方法変更情報.get履歴番号()));
+            } else {
+                div.setKey_MaxRirekiNo(getHandler(div).
+                        get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataListIncludeDel, ShiharaiHenkoKanriKubun._１号償還払い化.getコード()));
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -265,17 +279,26 @@ public class ShiharaiHohoHenkoKanri {
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
 
         ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+        ArrayList<ShiharaiHohoHenko> dataListIncludeDel = ViewStateHolder.
+                get(ShiharaiHohoHenkoKanriEnum.初期の支払方法変更の情報リストIgnore論理削除, ArrayList.class);
 
         div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
         div.setKey_Button(ShoriKubun.償還払い化登録.getコード());
-        if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
+
+        dgShiharaiHohoHenkoRireki_Row row = div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow();
+        if (row == null) {
             div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
             div.setKey_MaxRirekiNo(RString.EMPTY);
 
         } else {
-            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
-            div.setKey_MaxRirekiNo(getHandler(div).
-                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._１号償還払い化.getコード()));
+            ShiharaiHohoHenko 支払方法変更情報 = getHandler(div).get支払方法変更情報FromViewState(dataList);
+            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(支払方法変更情報));
+            if (変更状態_追加.equals(row.getJotai())) {
+                div.setKey_MaxRirekiNo(new RString(支払方法変更情報.get履歴番号()));
+            } else {
+                div.setKey_MaxRirekiNo(getHandler(div).
+                        get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataListIncludeDel, ShiharaiHenkoKanriKubun._１号償還払い化.getコード()));
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -366,18 +389,27 @@ public class ShiharaiHohoHenkoKanri {
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
 
         ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+        ArrayList<ShiharaiHohoHenko> dataListIncludeDel = ViewStateHolder.
+                get(ShiharaiHohoHenkoKanriEnum.初期の支払方法変更の情報リストIgnore論理削除, ArrayList.class);
 
         div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
         div.setKey_Button(ShoriKubun.給付額減額登録.getコード());
-        if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
+
+        dgShiharaiHohoHenkoRireki_Row row = div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow();
+        if (row == null) {
             div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
             div.setKey_MaxRirekiNo(getHandler(div).
-                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._１号給付額減額.getコード()));
+                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataListIncludeDel, ShiharaiHenkoKanriKubun._１号給付額減額.getコード()));
 
         } else {
-            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
-            div.setKey_MaxRirekiNo(getHandler(div).
-                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._１号給付額減額.getコード()));
+            ShiharaiHohoHenko 支払方法変更情報 = getHandler(div).get支払方法変更情報FromViewState(dataList);
+            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(支払方法変更情報));
+            if (変更状態_追加.equals(row.getJotai())) {
+                div.setKey_MaxRirekiNo(new RString(支払方法変更情報.get履歴番号()));
+            } else {
+                div.setKey_MaxRirekiNo(getHandler(div).
+                        get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataListIncludeDel, ShiharaiHenkoKanriKubun._１号給付額減額.getコード()));
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -443,18 +475,27 @@ public class ShiharaiHohoHenkoKanri {
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
 
         ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+        ArrayList<ShiharaiHohoHenko> dataListIncludeDel = ViewStateHolder.
+                get(ShiharaiHohoHenkoKanriEnum.初期の支払方法変更の情報リストIgnore論理削除, ArrayList.class);
 
         div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
         div.setKey_Button(ShoriKubun._2号予告者登録.getコード());
-        if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
+
+        dgShiharaiHohoHenkoRireki_Row row = div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow();
+        if (row == null) {
             div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
             div.setKey_MaxRirekiNo(getHandler(div).
-                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._２号差止.getコード()));
+                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataListIncludeDel, ShiharaiHenkoKanriKubun._２号差止.getコード()));
 
         } else {
-            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
-            div.setKey_MaxRirekiNo(getHandler(div).
-                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._２号差止.getコード()));
+            ShiharaiHohoHenko 支払方法変更情報 = getHandler(div).get支払方法変更情報FromViewState(dataList);
+            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(支払方法変更情報));
+            if (変更状態_追加.equals(row.getJotai())) {
+                div.setKey_MaxRirekiNo(new RString(支払方法変更情報.get履歴番号()));
+            } else {
+                div.setKey_MaxRirekiNo(getHandler(div).
+                        get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataListIncludeDel, ShiharaiHenkoKanriKubun._２号差止.getコード()));
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -495,17 +536,26 @@ public class ShiharaiHohoHenkoKanri {
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
 
         ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+        ArrayList<ShiharaiHohoHenko> dataListIncludeDel = ViewStateHolder.
+                get(ShiharaiHohoHenkoKanriEnum.初期の支払方法変更の情報リストIgnore論理削除, ArrayList.class);
 
         div.setKey_HihokenshaNo(被保険者番号.getColumnValue());
         div.setKey_Button(ShoriKubun._2号一時差止登録.getコード());
-        if (div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow() == null) {
+
+        dgShiharaiHohoHenkoRireki_Row row = div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow();
+        if (row == null) {
             div.setKey_ShiharaiHohoHenkoKanri(RString.EMPTY);
             div.setKey_MaxRirekiNo(RString.EMPTY);
 
         } else {
-            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(getHandler(div).get支払方法変更情報FromViewState(dataList)));
-            div.setKey_MaxRirekiNo(getHandler(div).
-                    get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataList, ShiharaiHenkoKanriKubun._２号差止.getコード()));
+            ShiharaiHohoHenko 支払方法変更情報 = getHandler(div).get支払方法変更情報FromViewState(dataList);
+            div.setKey_ShiharaiHohoHenkoKanri(DataPassingConverter.serialize(支払方法変更情報));
+            if (変更状態_追加.equals(row.getJotai())) {
+                div.setKey_MaxRirekiNo(new RString(支払方法変更情報.get履歴番号()));
+            } else {
+                div.setKey_MaxRirekiNo(getHandler(div).
+                        get最大履歴番号plus1By支払方法変更登録区分(被保険者番号, dataListIncludeDel, ShiharaiHenkoKanriKubun._２号差止.getコード()));
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -549,9 +599,15 @@ public class ShiharaiHohoHenkoKanri {
 
         ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
         if (EntityDataState.Added.equals(dialog支払方法変更.getState())) {
-            dataList.add(dialog支払方法変更);
-            ViewStateHolder.put(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, dataList);
-            getHandler(div).支払変更管理一覧に追加(dialog支払方法変更);
+            boolean is追加行が存在 = getHandler(div).支払変更管理一覧に追加(dialog支払方法変更);
+            if (!is追加行が存在) {
+                dataList.add(dialog支払方法変更);
+                ViewStateHolder.put(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, dataList);
+            } else {
+                dataList.remove(getHandler(div).get支払方法変更情報FromViewState(dataList));
+                dataList.add(dialog支払方法変更);
+                ViewStateHolder.put(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, dataList);
+            }
         } else if (EntityDataState.Modified.equals(dialog支払方法変更.getState())) {
             dataList.remove(getHandler(div).get支払方法変更情報FromViewState(dataList));
             dataList.add(dialog支払方法変更);

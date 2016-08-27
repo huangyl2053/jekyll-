@@ -388,6 +388,16 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
         getHandler().onClick_BtnClear();
     }
 
+    @Override
+    public RString getChosainRenrakuJiko() {
+        return this.hdnChosainRenrakuJiko;
+    }
+
+    @Override
+    public void setChosainRenrakuJiko(RString chosainRenrakuJiko) {
+        this.hdnChosainRenrakuJiko = chosainRenrakuJiko;
+    }
+
     @JsonIgnore
     private ChosaItakusakiAndChosainInputHandler getHandler() {
         return new ChosaItakusakiAndChosainInputHandler(this);

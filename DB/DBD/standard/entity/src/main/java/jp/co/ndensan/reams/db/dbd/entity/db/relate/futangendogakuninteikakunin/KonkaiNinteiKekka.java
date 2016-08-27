@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KonkaiNinteiKekka {
 
     private ShinseiRiyuKubun 申請理由区分;

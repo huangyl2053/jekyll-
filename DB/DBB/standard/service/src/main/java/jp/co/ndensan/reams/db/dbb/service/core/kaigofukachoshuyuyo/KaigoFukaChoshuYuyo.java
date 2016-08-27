@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護保険料徴収猶予
@@ -89,7 +90,7 @@ public class KaigoFukaChoshuYuyo {
      */
     public ChoshuYuyoJoho getJokyo(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
         ChoshuYuyoJohoRelateMapperParameter parameter = ChoshuYuyoJohoRelateMapperParameter.createSelectByKeyParam(調定年度, 賦課年度, 通知書番号);
-        return 徴収猶予情報Manager.select徴収猶予の情報_最新(parameter);
+        return 徴収猶予情報Manager.select最新の徴収猶予の情報(parameter);
     }
 
     /**
@@ -98,6 +99,7 @@ public class KaigoFukaChoshuYuyo {
      * @param 徴収猶予の情報 ChoshuYuyoJoho
      * @param 画面情報param KaigoFukaChoshuYuyoParam
      */
+    @Transaction
     public void saveDBDate(ChoshuYuyoJoho 徴収猶予の情報, KaigoFukaChoshuYuyoParam 画面情報param) {
         RString 状況 = 画面情報param.get状況();
         boolean 決定区分 = 画面情報param.is決定区分();
@@ -281,7 +283,7 @@ public class KaigoFukaChoshuYuyo {
         FukaJohoRelateMapperParameter param = FukaJohoRelateMapperParameter.createSelectListParam(調定年度, 賦課年度, 通知書番号);
         return 介護賦課Manager.select賦課の情報_最新(param);
     }
-    
+
     /**
      * 通知書発行のメソッドです。
      *
@@ -289,7 +291,6 @@ public class KaigoFukaChoshuYuyo {
      * @return SourceDataCollection
      */
     public SourceDataCollection publish(KakushuTsuchishoParameter param) {
-        SourceDataCollection sourceDataCollection = KakushuTsuchishoSakusei.createInstance().publish(param);
-        return sourceDataCollection;
+        return KakushuTsuchishoSakusei.createInstance().publish(param);
     }
 }

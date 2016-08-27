@@ -98,7 +98,8 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
 
         setCompSofubutsuAtesaki(source);
         setCompNinshosha(source);
-        setLayer1(source);
+        setLayer1step1(source);
+        setLayer1step2(source);
         setAccessLogEditor(source);
         return source;
     }
@@ -116,8 +117,6 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
         source.jushoText = sofubutsuAtesakiSource.jushoText;
         source.katagakiText = sofubutsuAtesakiSource.katagakiText;
-
-        // TODO RSE項目名が設計書と違い
         source.shimei3 = sofubutsuAtesakiSource.shimei1;
         source.shimei4 = sofubutsuAtesakiSource.shimei2;
         source.katagaki3 = sofubutsuAtesakiSource.katagaki1;
@@ -125,7 +124,6 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         source.jusho4 = sofubutsuAtesakiSource.jusho1;
         source.jusho5 = sofubutsuAtesakiSource.jusho2;
         source.jusho6 = sofubutsuAtesakiSource.jusho3;
-
         source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
         source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
         source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
@@ -161,7 +159,7 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         source.koinShoryaku = 認証者ソースビルダー.koinShoryaku;
     }
 
-    private void setLayer1(ShiharaiHohoHenkoYokokuTsuchishoReportSource source) {
+    private void setLayer1step1(ShiharaiHohoHenkoYokokuTsuchishoReportSource source) {
         source.bunshoNo = this.文書番号;
         EditedKojin 編集後個人 = getEditedKojin(this.個人情報, this.帳票制御共通, this.地方公共団体);
         if (null != 編集後個人) {
@@ -190,22 +188,26 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
             source.nendoTitle2 = 最新賦課年度.minusYear(1).toDateString();
             source.nendoTitle3 = 最新賦課年度.toDateString();
         }
-        if (null != 帳票情報.getShiharaiHohoHenkoTainoList() && !帳票情報.getShiharaiHohoHenkoTainoList().isEmpty()) {
-            if (null != 年度1リスト && 年度1リスト.size() > index) {
+
+    }
+
+    private void setLayer1step2(ShiharaiHohoHenkoYokokuTsuchishoReportSource source) {
+        if (!帳票情報.getShiharaiHohoHenkoTainoList().isEmpty()) {
+            if (null != 年度1リスト && !年度1リスト.isEmpty() && 年度1リスト.size() > index) {
                 ShiharaiHohoHenkoTaino 支払方法変更滞納 = 年度1リスト.get(index);
                 source.listTainoJokyo_1 = 支払方法変更滞納.get収納期_月();
                 source.listTainoJokyo_2 = DecimalFormatter.toコンマ区切りRString(
                         支払方法変更滞納.get収入額(支払方法変更滞納.get調定額(), 支払方法変更滞納.get滞納額()), 0);
                 source.listTainoJokyo_3 = DecimalFormatter.toコンマ区切りRString(支払方法変更滞納.get滞納額(), 0);
             }
-            if (null != 年度2リスト && 年度2リスト.size() > index) {
+            if (null != 年度2リスト && !年度2リスト.isEmpty() && 年度2リスト.size() > index) {
                 ShiharaiHohoHenkoTaino 支払方法変更滞納 = 年度2リスト.get(index);
                 source.listTainoJokyo_4 = 支払方法変更滞納.get収納期_月();
                 source.listTainoJokyo_5 = DecimalFormatter.toコンマ区切りRString(
                         支払方法変更滞納.get収入額(支払方法変更滞納.get調定額(), 支払方法変更滞納.get滞納額()), 0);
                 source.listTainoJokyo_6 = DecimalFormatter.toコンマ区切りRString(支払方法変更滞納.get滞納額(), 0);
             }
-            if (null != 年度3リスト && 年度3リスト.size() > index) {
+            if (null != 年度3リスト && !年度3リスト.isEmpty() && 年度3リスト.size() > index) {
                 ShiharaiHohoHenkoTaino 支払方法変更滞納 = 年度3リスト.get(index);
                 source.listTainoJokyo_7 = 支払方法変更滞納.get収納期_月();
                 source.listTainoJokyo_8 = DecimalFormatter.toコンマ区切りRString(
@@ -216,15 +218,15 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
             if (get3年以前滞納額合計().intValue() != 0) {
                 source.izenHokenryo = new RString(get3年以前滞納額合計().toString());
             }
-            if (年度1リスト.size() > 0) {
+            if (null != 年度1リスト && !年度1リスト.isEmpty()) {
                 source.hokenGokei1 = DecimalFormatter.toコンマ区切りRString(get保険料合計(年度1リスト), 0);
                 source.entaiGokei1 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(年度1リスト), 0);
             }
-            if (年度2リスト.size() > 0) {
+            if (null != 年度2リスト && !年度2リスト.isEmpty()) {
                 source.hokenGokei2 = DecimalFormatter.toコンマ区切りRString(get保険料合計(年度2リスト), 0);
                 source.entaiGokei2 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(年度2リスト), 0);
             }
-            if (年度3リスト.size() > 0) {
+            if (null != 年度3リスト && !年度3リスト.isEmpty()) {
                 source.hokenGokei3 = DecimalFormatter.toコンマ区切りRString(get保険料合計(年度3リスト), 0);
                 source.entaiGokei3 = DecimalFormatter.toコンマ区切りRString(get滞納額合計(年度3リスト), 0);
             }
@@ -250,7 +252,7 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
     private Decimal get3年以前滞納額合計() {
         Decimal 以前保険料合計 = Decimal.ZERO;
         for (ShiharaiHohoHenkoTaino 支払方法変更滞納 : this.帳票情報.getShiharaiHohoHenkoTainoList()) {
-            if (支払方法変更滞納.get賦課年度().isBeforeOrEquals(最新賦課年度.minusYear(3))) {
+            if (支払方法変更滞納.get賦課年度().isBeforeOrEquals(最新賦課年度.minusYear(NOCOUNT_3))) {
                 以前保険料合計 = 以前保険料合計.add(支払方法変更滞納.get滞納額());
             }
         }

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  * 受給者台帳異動チェックリストBuilderのインターフェースクラスです。
  *
- * @reamsid_L DBD-1770-030 donghj
+ * @reamsid_L DBD-1770-040 donghj
  */
 interface IJukyushaIdoCheckListBuilder extends IReportBuilder<JukyushaIdoCheckListReportSource> {
 

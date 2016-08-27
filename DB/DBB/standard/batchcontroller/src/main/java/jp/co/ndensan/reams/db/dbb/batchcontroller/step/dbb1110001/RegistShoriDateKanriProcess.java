@@ -13,13 +13,16 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
  * 処理日付管理マスタを登録です。
@@ -42,16 +45,24 @@ public class RegistShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDa
     private RegistShoriDateKanriProcessParameter processparameter;
     private RegistShoriDateKanriParameter parameter;
     private RString 導入形態コード;
+    @BatchWriter
     BatchPermanentTableWriter permanentTableWriter;
+    private boolean flag;
 
     @Override
     public void initialize() {
+        flag = false;
         parameter = creatParameter(processparameter);
         導入形態コード = parameter.get導入形態コード();
         if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
             LasdecCode 市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
             parameter.set市町村コード(市町村コード);
         }
+    }
+
+    @Override
+    protected void createWriter() {
+        permanentTableWriter = new BatchPermanentTableWriter(DbT7022ShoriDateKanriEntity.class);
     }
 
     @Override
@@ -66,18 +77,25 @@ public class RegistShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDa
     @Override
     protected void process(DbT7022ShoriDateKanriEntity item) {
         if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
-            permanentTableWriter.update(update処理日付管理_広域(item));
+            DbT7022ShoriDateKanriEntity entity = update処理日付管理_単一(item);
+            permanentTableWriter.update(entity);
         } else if (INDEX_111.equals(導入形態コード)) {
-            permanentTableWriter.update(update処理日付管理_単一(item));
+            DbT7022ShoriDateKanriEntity entity = update処理日付管理_広域(item);
+            permanentTableWriter.update(entity);
         }
+        flag = true;
     }
 
     @Override
     protected void afterExecute() {
-        if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
-            permanentTableWriter.insert(insert処理日付管理_広域());
-        } else if (INDEX_120.equals(導入形態コード)) {
-            permanentTableWriter.insert(insert処理日付管理_単一());
+        if (!flag) {
+            if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
+                DbT7022ShoriDateKanriEntity entity = insert処理日付管理_単一();
+                permanentTableWriter.insert(entity);
+            } else if (INDEX_111.equals(導入形態コード)) {
+                DbT7022ShoriDateKanriEntity entity = insert処理日付管理_広域();
+                permanentTableWriter.insert(entity);
+            }
         }
     }
 
@@ -89,23 +107,29 @@ public class RegistShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDa
         entity.setShoriEdaban(parameter.get市町村識別ID());
         entity.setNendo(parameter.get処理年度());
         entity.setNendoNaiRenban(年度内枝番);
-        entity.setKijunYMD(new FlexibleDate(YMDHMS.now().getRDateTime().toString().substring(INDEX_0, INDEX_8)));
-        entity.setTaishoKaishiYMD(new FlexibleDate(processparameter.get開始年月日().toString()));
-        entity.setTaishoShuryoYMD(new FlexibleDate(processparameter.get終了年月日().toString()));
-        RString 対象開始日時 = new RString(processparameter.get開始年月日().toString()).concat(processparameter.get開始時刻());
-        RString 対象終了日時 = new RString(processparameter.get終了年月日().toString()).concat(processparameter.get終了時刻());
-        entity.setTaishoKaishiTimestamp(new YMDHMS(対象開始日時.toString()));
-        entity.setTaishoShuryoTimestamp(new YMDHMS(対象終了日時.toString()));
+        entity.setKijunYMD(new FlexibleDate(YMDHMS.now().toString().substring(INDEX_0, INDEX_8)));
+        entity.setTaishoKaishiYMD(parameter.get市町村情報().get開始年月日());
+        entity.setTaishoShuryoYMD(parameter.get市町村情報().get終了年月日());
+        YMDHMS 対象開始日時 = new YMDHMS(new RDate(parameter.get市町村情報().get開始年月日().toString()),
+                new RTime(parameter.get市町村情報().get開始時刻()));
+        YMDHMS 対象終了日時 = new YMDHMS(new RDate(parameter.get市町村情報().get終了年月日().toString()),
+                new RTime(parameter.get市町村情報().get終了時刻()));
+        entity.setTaishoKaishiTimestamp(対象開始日時);
+        entity.setTaishoShuryoTimestamp(対象終了日時);
         return entity;
     }
 
     private DbT7022ShoriDateKanriEntity update処理日付管理_広域(DbT7022ShoriDateKanriEntity item) {
         DbT7022ShoriDateKanriEntity entity = item.clone();
         entity.setKijunYMD(new FlexibleDate(YMDHMS.now().toString().substring(INDEX_0, INDEX_8)));
-        entity.setTaishoKaishiYMD(new FlexibleDate(processparameter.get開始年月日().toString()));
-        entity.setTaishoShuryoYMD(new FlexibleDate(processparameter.get終了年月日().toString()));
-        RString 対象開始日時 = new RString(processparameter.get開始年月日().toString()).concat(processparameter.get開始時刻());
-        RString 対象終了日時 = new RString(processparameter.get終了年月日().toString()).concat(processparameter.get終了時刻());
+        entity.setTaishoKaishiYMD(new FlexibleDate(parameter.get市町村情報().get開始年月日().toString()));
+        entity.setTaishoShuryoYMD(new FlexibleDate(parameter.get市町村情報().get終了年月日().toString()));
+        YMDHMS 対象開始日時 = new YMDHMS(new RDate(parameter.get市町村情報().get開始年月日().toString()),
+                new RTime(parameter.get市町村情報().get開始時刻()));
+        YMDHMS 対象終了日時 = new YMDHMS(new RDate(parameter.get市町村情報().get終了年月日().toString()),
+                new RTime(parameter.get市町村情報().get終了時刻()));
+        entity.setTaishoKaishiTimestamp(対象開始日時);
+        entity.setTaishoShuryoTimestamp(対象終了日時);
         entity.setTaishoKaishiTimestamp(new YMDHMS(対象開始日時.toString()));
         entity.setTaishoShuryoTimestamp(new YMDHMS(対象終了日時.toString()));
         return entity;
@@ -149,7 +173,7 @@ public class RegistShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDa
         RString 市町村識別ID = processparameter.get市町村識別ID();
         RegistShoriDateKanriParameter param = new RegistShoriDateKanriParameter(
                 processparameter.get導入形態コード(), 処理年度, 開始日時, 終了日時, 市町村コード, 市町村識別ID,
-                processparameter.get市町村情報リスト());
+                processparameter.get市町村情報(), processparameter.get市町村情報リスト());
         return param;
     }
 

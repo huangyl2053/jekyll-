@@ -13,7 +13,11 @@ import jp.co.ndensan.reams.db.dbc.entity.report.saishinsa.SaishinsaKetteitsuchis
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.Breakers;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 過誤決定通知書情報取込一覧表（公費負担者分）帳票のプロパティです。
@@ -39,6 +43,28 @@ public class SaishinsaKetteiTsuchishoIchiranKohifutanshaProperty
         pageBreakKeys.add(new RString(ReportSourceFields.kohiFutanshaNo.name()));
     }
 
+    @Override
+    public Breakers<SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource> defineBreakers(
+            Breakers<SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource> breakers,
+            BreakerCatalog<SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource> catalog) {
+        return breakers.add(catalog.new SimplePageBreaker(
+
+
+
+            pageBreakKeys) {
+            @Override
+            public ReportLineRecord<SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource> occuredBreak(
+                    ReportLineRecord<SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource> currentRecord,
+                    ReportLineRecord<SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource> nextRecord,
+                    ReportDynamicChart dynamicChart) {
+                if (nextRecord == ReportLineRecord.LAST_RECORD) {
+                    return currentRecord;
+                }
+                return currentRecord;
+            }
+        }).fixed();
+    }
+
     /**
      * 帳票設計_DBC200049_再審査決定通知書情報取込一覧表（公費負担者分） 出力順設定可能項目です。
      */
@@ -47,7 +73,7 @@ public class SaishinsaKetteiTsuchishoIchiranKohifutanshaProperty
         /**
          * 公費負担者番号
          */
-        公費負担者番号(new RString("0134"), new RString("kohiFutanshaNo"), new RString("DbWT3063.\"hdrShoHokenshaNo\"")),
+        公費負担者番号(new RString("0134"), new RString("kohiFutanshaNo"), new RString("DbWT3063.\"shoKisaiHokenshaNo\"")),
         /**
          * 被保険者番号
          */
@@ -55,7 +81,7 @@ public class SaishinsaKetteiTsuchishoIchiranKohifutanshaProperty
         /**
          * サービス提供年月
          */
-        サービス提供年月(new RString("0361"), new RString("listUpper_5"), new RString("DbWT3064.\"serviceTeikyoYm\"")),
+        サービス提供年月(new RString("0361"), new RString("listUpper_5"), new RString("DbWT3064.\"serviceTeikyoYM\"")),
         /**
          * 事業所番号
          */
@@ -63,7 +89,7 @@ public class SaishinsaKetteiTsuchishoIchiranKohifutanshaProperty
         /**
          * 取り扱い年月
          */
-        取り扱い年月(new RString("0363"), new RString("listUpper_2"), new RString("DbWT3064.\"toriatsukaiYm\""));
+        取り扱い年月(new RString("0363"), new RString("listUpper_2"), new RString("DbWT3064.\"toriatsukaiYM\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

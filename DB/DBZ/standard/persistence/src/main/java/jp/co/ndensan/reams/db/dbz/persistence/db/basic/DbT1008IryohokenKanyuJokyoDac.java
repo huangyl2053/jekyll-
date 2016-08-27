@@ -136,4 +136,21 @@ public class DbT1008IryohokenKanyuJokyoDac implements ISaveable<DbT1008Iryohoken
                 toList(DbT1008IryohokenKanyuJokyoEntity.class);
     }
 
+    /**
+     * 識別コードで介護保険医療保険加入状況を取得します。
+     *
+     * @param 識別コード 識別コード
+     * @return DbT1008IryohokenKanyuJokyoEntity 介護保険医療保険加入状況情報
+     */
+    @Transaction
+    public DbT1008IryohokenKanyuJokyoEntity select医療保険加入状況ByShikibetsuCode(
+            ShikibetsuCode 識別コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1008IryohokenKanyuJokyo.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                order(by(rirekiNo, Order.DESC))
+                .limit(1).toObject(DbT1008IryohokenKanyuJokyoEntity.class);
+    }
+
 }

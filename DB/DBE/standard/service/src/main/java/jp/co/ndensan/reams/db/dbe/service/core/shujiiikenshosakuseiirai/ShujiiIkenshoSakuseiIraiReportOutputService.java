@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoteishutsuira
 import jp.co.ndensan.reams.db.dbe.entity.report.source.syujiyikensho.IkenshoSakuseiIraiHakkoIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -73,8 +74,7 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoSakuseiIraiReportOutputService}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoSakuseiIraiReportOutputService}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoSakuseiIraiReportOutputService}のインスタンス
      */
     public static ShujiiIkenshoSakuseiIraiReportOutputService createInstance() {
         return InstanceProvider.create(ShujiiIkenshoSakuseiIraiReportOutputService.class);
@@ -93,7 +93,7 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
         try (ReportAssembler<ShujiiIkenshoSakuseiIraishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<ShujiiIkenshoSakuseiIraishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230001.getReportId(),
-                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印, reportSourceWriter);
+                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             list.add(ShujiiIkenshoSakuseiIraishoReport.createFrom(set主治医意見書作成依頼(主治医意見書作成依頼情報ItemList, ninshosha)));
             for (ShujiiIkenshoSakuseiIraishoReport report : list) {
                 report.writeBy(reportSourceWriter);
@@ -132,7 +132,7 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
         try (ReportAssembler<KaigohokenShindanMeireishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<KaigohokenShindanMeireishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE235001.getReportId(),
-                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印, reportSourceWriter);
+                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             list.add(KaigohokenShindanMeireishoReport.createFrom(set介護保険診断命令書(介護保険診断命令書ItemList, ninshosha)));
             for (KaigohokenShindanMeireishoReport report : list) {
                 report.writeBy(reportSourceWriter);
@@ -153,7 +153,7 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
         try (ReportAssembler<ShujiiIkenshoTeishutsuIraishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<ShujiiIkenshoTeishutsuIraishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE236001.getReportId(),
-                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印, reportSourceWriter);
+                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             list.add(ShujiiIkenshoTeishutsuIraishoReport.createFrom(setNishosha(介護保険指定医依頼兼主治医意見書提出意見書ItemList,
                     ninshosha)));
             for (ShujiiIkenshoTeishutsuIraishoReport report : list) {
@@ -175,7 +175,7 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
         try (ReportAssembler<IkenshoSakuseiIraiIchiranhyoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<IkenshoSakuseiIraiIchiranhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230002.getReportId(),
-                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印, reportSourceWriter);
+                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             list.add(IkenshoSakuseiIraiIchiranhyoReport.createFrom(set主治医意見書作成依頼一覧表認定者(
                     主治医意見書作成依頼一覧表ItemList, ninshosha)));
             for (IkenshoSakuseiIraiIchiranhyoReport report : list) {

@@ -42,14 +42,25 @@ public enum ServiceRiyohyoInfoDivValidationMessage implements IValidationMessage
      */
     回数入力値が不正(UrErrorMessages.入力値が不正_追加メッセージあり, "回数：マイナス値入力不可"),
     /**
-     * 単位数単価
+     * 単位数単価が不正
      */
     単位数単価入力値が不正(UrErrorMessages.入力値が不正_追加メッセージあり, "単位単価：1.00以上を指定"),
     /**
      * 給付率入力値が不正
      */
-    給付率入力値が不正(UrErrorMessages.入力値が不正_追加メッセージあり, "給付率：１以上を指定");
-
+    給付率入力値が不正(UrErrorMessages.入力値が不正_追加メッセージあり, "給付率：１以上を指定"),
+    /**
+     * 単位数単価必須項目
+     */
+    単位数単価必須項目(UrErrorMessages.必須項目_追加メッセージあり, "単位数単価"),
+    /**
+     * 区分限度内単位必須項目
+     */
+    区分限度内単位必須項目(UrErrorMessages.必須項目_追加メッセージあり, "区分限度内単位"),
+    /**
+     * 給付率必須項目
+     */
+    給付率必須項目(UrErrorMessages.必須項目_追加メッセージあり, "給付率");
     private final Message message;
 
     /**

@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -51,6 +52,25 @@ public class DbT1011TenshutsuHoryuTaishoshaDac implements ISaveable<DbT1011Tensh
                                 eq(shikibetsuCode, 識別コード),
                                 eq(rirekiNo, 履歴番号))).
                 toObject(DbT1011TenshutsuHoryuTaishoshaEntity.class);
+    }
+
+    /**
+     * 識別コードで転出保留対象者を取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return List<DbT1011TenshutsuHoryuTaishoshaEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT1011TenshutsuHoryuTaishoshaEntity> selectBy識別コード(ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1011TenshutsuHoryuTaishosha.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                toList(DbT1011TenshutsuHoryuTaishoshaEntity.class);
     }
 
     /**
@@ -94,5 +114,23 @@ public class DbT1011TenshutsuHoryuTaishoshaDac implements ISaveable<DbT1011Tensh
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.deletePhysical(entity).execute();
+    }
+
+    /**
+     * 転出保留対象者の履歴番号の取得。
+     *
+     * @param 識別コード 識別コード
+     * @return DbT1011TenshutsuHoryuTaishoshaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT1011TenshutsuHoryuTaishoshaEntity get転出保留対象者の履歴番号Max(ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(max(rirekiNo)).
+                table(DbT1011TenshutsuHoryuTaishosha.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                toObject(DbT1011TenshutsuHoryuTaishoshaEntity.class);
     }
 }

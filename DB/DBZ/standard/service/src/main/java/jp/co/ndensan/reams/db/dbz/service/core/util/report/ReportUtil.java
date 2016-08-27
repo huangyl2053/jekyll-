@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
@@ -64,22 +63,27 @@ public final class ReportUtil {
     private static final RString 汎用キー_文書番号 = new RString("文書番号");
 
     /**
-     * 種別コードが認定用印の場合、雛形部品_認証者を取得します。
+     * 雛形部品_認証者を取得します。
      *
      * @param subGyomuCode サブ業務コード
      * @param reportId 帳票分類ID
      * @param kaisiYMD 開始年月日
+     * @param denshikoinshubetsuCode 認証者電子公印種別コード
+     * @param kenmeiFuyoKubunType 県郡名付与区分
      * @param reportSourceWriter ReportSourceWriter
      * @return 認証者情報
      */
-    public static NinshoshaSource get認証者情報(SubGyomuCode subGyomuCode,
+    public static NinshoshaSource get認証者情報(
+            SubGyomuCode subGyomuCode,
             ReportId reportId,
             FlexibleDate kaisiYMD,
+            RString denshikoinshubetsuCode,
+            KenmeiFuyoKubunType kenmeiFuyoKubunType,
             ReportSourceWriter reportSourceWriter) {
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
         ChohyoSeigyoKyotsu chohyoSeigyoKyotsu = chohyoSeigyoKyotsuManager.get帳票制御共通(subGyomuCode, reportId);
         INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
-        Ninshosha ninshosha = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), kaisiYMD);
+        Ninshosha ninshosha = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, denshikoinshubetsuCode, kaisiYMD);
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         boolean is公印に掛ける = false;
         boolean is公印を省略 = false;
@@ -92,7 +96,7 @@ public final class ReportUtil {
                 new RDate(kaisiYMD.toString()),
                 is公印に掛ける,
                 is公印を省略,
-                KenmeiFuyoKubunType.付与なし).buildSource();
+                kenmeiFuyoKubunType).buildSource();
     }
 
     /**
@@ -103,7 +107,10 @@ public final class ReportUtil {
      * @param kaisiYMD 開始年月日
      * @return 文書番号
      */
-    public static RString get文書番号(SubGyomuCode subGyomuCode, ReportId reportId, FlexibleDate kaisiYMD) {
+    public static RString get文書番号(
+            SubGyomuCode subGyomuCode,
+            ReportId reportId,
+            FlexibleDate kaisiYMD) {
         IBunshoNoFinder bushoFineder = BunshoNoFinderFactory.createInstance();
         BunshoNo bushoNo = bushoFineder.get文書番号管理(reportId, kaisiYMD);
         RString 文書番号 = RString.EMPTY;
@@ -130,7 +137,11 @@ public final class ReportUtil {
      * @param patternNo パターン番号
      * @return 通知文
      */
-    public static Map<Integer, RString> get通知文(SubGyomuCode subGyomuCode, ReportId reportId, KamokuCode kamokuCode, int patternNo) {
+    public static Map<Integer, RString> get通知文(
+            SubGyomuCode subGyomuCode,
+            ReportId reportId,
+            KamokuCode kamokuCode,
+            int patternNo) {
         TsuchishoTeikeibunManager tsuchishoTeikeibunManager = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo info = tsuchishoTeikeibunManager.get通知書定型文項目(subGyomuCode, reportId, kamokuCode, patternNo);
         ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(subGyomuCode, reportId);
@@ -144,89 +155,6 @@ public final class ReportUtil {
     }
 
     /**
-     * カスタマーバーコードを取得します。
-     *
-     * @param yubinNo 郵便番号
-     * @param jusho 住所
-     * @return カスタマーバーコード
-     */
-    public static RString getCustomerBarCode(RString yubinNo, RString jusho) {
-        CustomerBarCode barcode = new CustomerBarCode();
-        CustomerBarCodeResult result = barcode.convertCustomerBarCode(yubinNo, jusho);
-        return result.getCustomerBarCode();
-    }
-
-    /**
-     * 雛形部品_認証者を取得します。
-     *
-     * @param subGyomuCode サブ業務コード
-     * @param reportId 帳票分類ID
-     * @param kaisiYMD 開始年月日
-     * @param shubetsuCode 種別コード
-     * @param reportSourceWriter ReportSourceWriter
-     * @return 認証者情報
-     */
-    public static NinshoshaSource get認証者情報(SubGyomuCode subGyomuCode,
-            ReportId reportId,
-            FlexibleDate kaisiYMD,
-            NinshoshaDenshikoinshubetsuCode shubetsuCode,
-            ReportSourceWriter reportSourceWriter) {
-        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
-        ChohyoSeigyoKyotsu chohyoSeigyoKyotsu = chohyoSeigyoKyotsuManager.get帳票制御共通(subGyomuCode, reportId);
-        INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
-        Ninshosha ninshosha = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, shubetsuCode.getコード(), kaisiYMD);
-        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
-        boolean is公印に掛ける = false;
-        boolean is公印を省略 = false;
-        if (chohyoSeigyoKyotsu != null) {
-            is公印に掛ける = 首長名印字位置.equals(chohyoSeigyoKyotsu.get首長名印字位置());
-            is公印を省略 = !chohyoSeigyoKyotsu.is電子公印印字有無();
-        }
-        return NinshoshaSourceBuilderFactory.createInstance(ninshosha, 導入団体クラス,
-                reportSourceWriter.getImageFolderPath(),
-                new RDate(kaisiYMD.toString()),
-                is公印に掛ける,
-                is公印を省略,
-                KenmeiFuyoKubunType.付与なし).buildSource();
-    }
-
-    /**
-     * 種別コードが認定用印の場合、雛形部品_認証者を取得します。
-     *
-     * @param subGyomuCode サブ業務コード
-     * @param reportId 帳票分類ID
-     * @param kaisiYMD 開始年月日
-     * @param denshikoinshubetsuCode 認証者電子公印種別コード
-     * @param kenmeiFuyoKubunType 県郡名付与区分
-     * @param reportSourceWriter ReportSourceWriter
-     * @return 認証者情報
-     */
-    public static NinshoshaSource get認証者情報(SubGyomuCode subGyomuCode,
-            ReportId reportId,
-            FlexibleDate kaisiYMD,
-            RString denshikoinshubetsuCode,
-            KenmeiFuyoKubunType kenmeiFuyoKubunType,
-            ReportSourceWriter reportSourceWriter) {
-        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
-        ChohyoSeigyoKyotsu chohyoSeigyoKyotsu = chohyoSeigyoKyotsuManager.get帳票制御共通(subGyomuCode, reportId);
-        INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
-        Ninshosha ninshosha = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, denshikoinshubetsuCode, kaisiYMD);
-        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
-        boolean is公印に掛ける = false;
-        boolean is公印を省略 = false;
-        if (chohyoSeigyoKyotsu != null) {
-            is公印に掛ける = 首長名印字位置.equals(chohyoSeigyoKyotsu.get首長名印字位置());
-            is公印を省略 = !chohyoSeigyoKyotsu.is電子公印印字有無();
-        }
-        return NinshoshaSourceBuilderFactory.createInstance(ninshosha, 導入団体クラス,
-                reportSourceWriter.getImageFolderPath(),
-                new RDate(kaisiYMD.toString()),
-                is公印に掛ける,
-                is公印を省略,
-                kenmeiFuyoKubunType).buildSource();
-    }
-
-    /**
      * 基準日により、通知文を取得します。
      *
      * @param subGyomuCode サブ業務コード
@@ -237,8 +165,13 @@ public final class ReportUtil {
      * @param kijunDate 基準年月日
      * @return 通知文
      */
-    public static RString get通知文(SubGyomuCode subGyomuCode, ReportId reportId,
-            KamokuCode kamokuCode, int patternNo, int sentenceNo, FlexibleDate kijunDate) {
+    public static RString get通知文(
+            SubGyomuCode subGyomuCode,
+            ReportId reportId,
+            KamokuCode kamokuCode,
+            int patternNo,
+            int sentenceNo,
+            FlexibleDate kijunDate) {
         TsuchishoTeikeibunManager tsuchishoTeikeibunManager = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo info = tsuchishoTeikeibunManager.get通知書定形文検索(subGyomuCode, reportId,
                 kamokuCode, patternNo, sentenceNo, kijunDate);
@@ -250,13 +183,30 @@ public final class ReportUtil {
     }
 
     /**
+     * カスタマーバーコードを取得します。
+     *
+     * @param yubinNo 郵便番号
+     * @param jusho 住所
+     * @return カスタマーバーコード
+     */
+    public static RString getCustomerBarCode(
+            RString yubinNo,
+            RString jusho) {
+        CustomerBarCode barcode = new CustomerBarCode();
+        CustomerBarCodeResult result = barcode.convertCustomerBarCode(yubinNo, jusho);
+        return result.getCustomerBarCode();
+    }
+
+    /**
      * 定型文文字サイズを取得します。
      *
      * @param subGyomuCode サブ業務コード
      * @param reportBunruiId 帳票分類ID
      * @return 定型文文字サイズ
      */
-    public static RString get定型文文字サイズ(SubGyomuCode subGyomuCode, ReportId reportBunruiId) {
+    public static RString get定型文文字サイズ(
+            SubGyomuCode subGyomuCode,
+            ReportId reportBunruiId) {
 
         ChohyoSeigyoKyotsuManager manager = new ChohyoSeigyoKyotsuManager();
         ChohyoSeigyoKyotsu kyotsu = manager.get帳票制御共通(subGyomuCode, reportBunruiId);
@@ -274,7 +224,10 @@ public final class ReportUtil {
      * @param subGyomuCode サブ業務コード
      * @return List<ISetSortItem>
      */
-    public static Map<Integer, ISetSortItem> get出力順項目(SubGyomuCode subGyomuCode, Long shutsuryokujunId, ReportId reportId) {
+    public static Map<Integer, ISetSortItem> get出力順項目(
+            SubGyomuCode subGyomuCode,
+            Long shutsuryokujunId,
+            ReportId reportId) {
         List<ISetSortItem> 設定項目リスト = new ArrayList<>();
         IOutputOrder iOutputOrder = ReportUtil.get出力順ID(subGyomuCode, shutsuryokujunId, reportId);
         if (iOutputOrder != null) {
@@ -297,7 +250,10 @@ public final class ReportUtil {
      * @param subGyomuCode サブ業務コード
      * @return List<ISetSortItem>
      */
-    public static Map<Integer, RString> get改頁項目(SubGyomuCode subGyomuCode, Long shutsuryokujunId, ReportId reportId) {
+    public static Map<Integer, RString> get改頁項目(
+            SubGyomuCode subGyomuCode,
+            Long shutsuryokujunId,
+            ReportId reportId) {
         List<ISetSortItem> 設定項目リスト = new ArrayList<>();
         IOutputOrder iOutputOrder = ReportUtil.get出力順ID(subGyomuCode, shutsuryokujunId, reportId);
         if (iOutputOrder != null) {
@@ -322,7 +278,10 @@ public final class ReportUtil {
      * @param subGyomuCode サブ業務コード
      * @return List<ISetSortItem>
      */
-    public static IOutputOrder get出力順ID(SubGyomuCode subGyomuCode, Long shutsuryokujunId, ReportId reportId) {
+    public static IOutputOrder get出力順ID(
+            SubGyomuCode subGyomuCode,
+            Long shutsuryokujunId,
+            ReportId reportId) {
         if (shutsuryokujunId != null) {
             IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
             RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();

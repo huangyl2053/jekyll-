@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohiSeikyugakuTsuchisho;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.DbWT1511SeikyugakuTsuchishoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.dbc120890.SogojigyohiSeikyugakuTsuchishoInSource;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -19,35 +18,25 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class SogojigyohiSeikyugakuTsuchishoInReport extends Report<SogojigyohiSeikyugakuTsuchishoInSource> {
 
-    private final List<DbWT1511SeikyugakuTsuchishoTempEntity> 帳票出力対象データリスト;
+    private final DbWT1511SeikyugakuTsuchishoTempEntity 帳票出力対象データ;
     private final RDateTime 作成日時;
 
     /**
      * コンストラクタです
      *
-     * @param 帳票出力対象データリスト List<DbWT1511SeikyugakuTsuchishoTempEntity>
+     * @param 帳票出力対象データ DbWT1511SeikyugakuTsuchishoTempEntity
      * @param 作成日時 RDateTime
      */
     public SogojigyohiSeikyugakuTsuchishoInReport(
-            List<DbWT1511SeikyugakuTsuchishoTempEntity> 帳票出力対象データリスト,
+            DbWT1511SeikyugakuTsuchishoTempEntity 帳票出力対象データ,
             RDateTime 作成日時) {
-        this.帳票出力対象データリスト = 帳票出力対象データリスト;
+        this.帳票出力対象データ = 帳票出力対象データ;
         this.作成日時 = 作成日時;
     }
 
     @Override
-    public void writeBy(ReportSourceWriter<SogojigyohiSeikyugakuTsuchishoInSource> writer) {
-        if (null == 帳票出力対象データリスト || 帳票出力対象データリスト.isEmpty()) {
-            return;
-        }
-        for (int index = 0; index < 帳票出力対象データリスト.size(); index++) {
-            writeLine(writer, 帳票出力対象データリスト.get(index));
-        }
+    public void writeBy(ReportSourceWriter<SogojigyohiSeikyugakuTsuchishoInSource> reportSourceWriter) {
 
-    }
-
-    private void writeLine(ReportSourceWriter<SogojigyohiSeikyugakuTsuchishoInSource> writer,
-            DbWT1511SeikyugakuTsuchishoTempEntity 帳票出力対象データ) {
         ISogojigyohiSeikyugakuTsuchishoInEditor headerEditor
                 = new SogojigyohiSeikyugakuTsuchishoInHeaderEditor(
                         帳票出力対象データ, 作成日時);
@@ -55,7 +44,7 @@ public class SogojigyohiSeikyugakuTsuchishoInReport extends Report<SogojigyohiSe
                 = new SogojigyohiSeikyugakuTsuchishoInBodyEditor(帳票出力対象データ);
         ISogojigyohiSeikyugakuTsuchishoInBuilder builder
                 = new SogojigyohiSeikyugakuTsuchishoInBuilder(headerEditor, bodyEditor);
-        writer.writeLine(builder);
+        reportSourceWriter.writeLine(builder);
     }
 
 }

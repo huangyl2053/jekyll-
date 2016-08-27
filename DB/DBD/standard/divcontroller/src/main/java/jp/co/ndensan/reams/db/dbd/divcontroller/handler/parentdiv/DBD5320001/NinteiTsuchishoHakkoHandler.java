@@ -6,23 +6,25 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5320001;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbd.business.core.outputorderkey.ShiharaiHohoHenkoHaakuIchiranOrderKey;
+import jp.co.ndensan.reams.db.dbd.business.core.outputorderkey.NinteiTsuchishoHakkoOrderKey;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiTsutisho;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiTsutishoBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiTsutishoIkkatsuHakkoJoho;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd532001.NinteiKekkaTsuchishoJoho;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd550001.NinteikyakkaTsuchishoJoho;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd550002.ServiceHenkoTsuchishoJoho;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd550003.YokaigodoHenkoTsuchishoJoho;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5320001.ShutsuryokuTaishoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5320001.TsutishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.yokaigoninteijoho.YokaigoNinteiTsutishoMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5320001.NinteiTsuchishoHakkoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5320001.dgTaishoshaIchiran_Row;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.NinteiKekkaTsuchishoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.NinteikyakkaTsuchishoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.ServiceHenkoTsuchishoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.YokaigodoHenkoTsuchishoEntity;
+import jp.co.ndensan.reams.db.dbd.service.core.yokaigoninteijoho.YokaigoNinteiJohoManager;
 import jp.co.ndensan.reams.db.dbd.service.core.yokaigoninteijoho.YokaigoNinteiTsutishoManager;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd532001.YokaigoNinteiKekkaTshuchishoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd550001.YokaigoNinteiKyakkaTshuchishoPrintService;
@@ -64,7 +66,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiSearchDefault;
-import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
@@ -296,7 +297,7 @@ public class NinteiTsuchishoHakkoHandler {
 
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務);
         div.getChkSeibetsu().setDataSource(get性別データソース());
-        div.getChkSeibetsu().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getChkSeibetsu().setSelectedItemsByKey(Arrays.asList(RadioValue.男.getKey(), RadioValue.女.getKey()));
 
         div.getDdlMachJoken().setDataSource(get検索条件区分データソース());
         div.getDdlMachJoken().setSelectedKey(RadioValue.前方一致.getKey());
@@ -436,6 +437,37 @@ public class NinteiTsuchishoHakkoHandler {
         return parameter;
     }
 
+    /**
+     * 「出力対象」チェックのonChange処理
+     */
+    public void changeChkOutPutSelect() {
+        List<RString> selectedList = div.getChkOutPutSelect().getSelectedKeys();
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (null == 市町村セキュリティ情報) {
+            return;
+        }
+        RString 市町村コード = 市町村セキュリティ情報.get市町村情報().get市町村コード().value();
+
+        if (selectedList.contains(RadioValue.認定結果通知書.getKey())) {
+            set一括発行認定結果通知書(市町村コード, PanelType.一括発行認定結果通知書パネル);
+        } else {
+            clear一括発行認定結果通知書();
+        }
+
+        if (selectedList.contains(RadioValue.サービス変更通知書.getKey())) {
+            set一括発行サービス変更通知書(市町村コード, PanelType.一括発行サービス変更通知書パネル);
+        } else {
+            clear一括発行サービス変更通知書();
+        }
+
+        if (selectedList.contains(RadioValue.要介護度変更通知書.getKey())) {
+            set一括発行要介護区分変更通知書(市町村コード, PanelType.一括発行要介護度変更通知書パネル);
+        } else {
+            clear一括発行要介護度変更通知書();
+        }
+
+    }
+
     private List<KeyValueDataSource> get通知書発行方法データソース() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         dataSource.add(new KeyValueDataSource(RadioValue.個別発行を行う.getKey(), RadioValue.個別発行を行う.getValue()));
@@ -495,7 +527,7 @@ public class NinteiTsuchishoHakkoHandler {
             set個別発行要介護度変更通知書(パネル);
         } else if (PanelType.個別発行認定却下通知書パネル.equals(パネル)) {
             set個別発行認定却下通知書(パネル);
-        } else if (PanelType.一括発行パネル.equals(PanelType.一括発行パネル)) {
+        } else if (PanelType.一括発行パネル.equals(パネル)) {
             set一括発行();
         }
     }
@@ -612,6 +644,10 @@ public class NinteiTsuchishoHakkoHandler {
         set一括発行サービス変更通知書(市町村コード, PanelType.一括発行サービス変更通知書パネル);
         set一括発行要介護区分変更通知書(市町村コード, PanelType.一括発行要介護度変更通知書パネル);
 
+        div.getChkOutPutSelect().setSelectedItemsByKey(
+                Arrays.asList(RadioValue.認定結果通知書.getKey(),
+                        RadioValue.サービス変更通知書.getKey(),
+                        RadioValue.要介護度変更通知書.getKey()));
     }
 
     private void set一括発行認定結果通知書(RString 市町村コード, PanelType パネル) {
@@ -686,7 +722,7 @@ public class NinteiTsuchishoHakkoHandler {
     }
 
     private void clear個別発行認定結果通知書() {
-        div.getCcdKobetsuNinteiKekkaBunshoBango().initialize(ReportIdDBD.DBD532001.getReportId());
+        div.getCcdKobetsuNinteiKekkaBunshoBango().initialize(ReportId.EMPTY);
         div.getRadNinteiKekkaRireki().setDataSource(get発行履歴データソース());
         div.getRadNinteiKekkaRireki().setSelectedKey(RadioValue.残す.getKey());
         div.getTxtNinteiKekkaSakuseiDay().clearValue();
@@ -698,7 +734,7 @@ public class NinteiTsuchishoHakkoHandler {
     }
 
     private void clear個別発行サービス変更通知書() {
-        div.getCcdKobetsuServiceHenkoBunshoBango().initialize(ReportIdDBD.DBD550002.getReportId());
+        div.getCcdKobetsuServiceHenkoBunshoBango().initialize(ReportId.EMPTY);
         div.getRadServiceHenkoBunshoRireki().setDataSource(get発行履歴データソース());
         div.getRadServiceHenkoBunshoRireki().setSelectedKey(RadioValue.残す.getKey());
         div.getTxtServiceHenkoBunshoSakuseiDay().clearValue();
@@ -711,7 +747,7 @@ public class NinteiTsuchishoHakkoHandler {
     }
 
     private void clear個別発行要介護度変更通知書() {
-        div.getCcdKobetsuKaigodoHenkoBunshoBango().initialize(ReportIdDBD.DBD550003.getReportId());
+        div.getCcdKobetsuKaigodoHenkoBunshoBango().initialize(ReportId.EMPTY);
         div.getRadYokaigodoHenkoRireki().setDataSource(get発行履歴データソース());
         div.getRadYokaigodoHenkoRireki().setSelectedKey(RadioValue.残す.getKey());
         div.getTxtYokaigodoHenkoTsuchiSakuseiDay().clearValue();
@@ -724,7 +760,7 @@ public class NinteiTsuchishoHakkoHandler {
     }
 
     private void clear個別発行認定却下通知書() {
-        div.getCcdKobetsuNinteiKyakkaBunshoBango().initialize(ReportIdDBD.DBD550001.getReportId());
+        div.getCcdKobetsuNinteiKyakkaBunshoBango().initialize(ReportId.EMPTY);
         div.getRadNinteiKyakkaRireki().setDataSource(get発行履歴データソース());
         div.getRadNinteiKyakkaRireki().setSelectedKey(RadioValue.残す.getKey());
         div.getTxtNinteiKyakkaTsuchi().clearValue();
@@ -749,7 +785,7 @@ public class NinteiTsuchishoHakkoHandler {
         div.getTxtNinteiKekkaKonkaiTimeFrom().clearValue();
         div.getTxtNinteiKekkaKonkaiYMDTo().clearValue();
         div.getTxtNinteiKekkaKonkaiTimeTo().clearValue();
-        div.getCcdIkkatsuNinteiKekkaBunshoBango().initialize(ReportIdDBD.DBD532001.getReportId());
+        div.getCcdIkkatsuNinteiKekkaBunshoBango().initialize(ReportId.EMPTY);
     }
 
     private void clear一括発行サービス変更通知書() {
@@ -761,7 +797,7 @@ public class NinteiTsuchishoHakkoHandler {
         div.getTxtServiceHenkoKonkaiTimeFrom().clearValue();
         div.getTxtServiceHenkoKonkaiYMDTo().clearValue();
         div.getTxtServiceHenkoKonkaiTimeTo().clearValue();
-        div.getCcdIkkatsuServiceHenkoBunshoBango().initialize(ReportIdDBD.DBD550002.getReportId());
+        div.getCcdIkkatsuServiceHenkoBunshoBango().initialize(ReportId.EMPTY);
 
     }
 
@@ -774,7 +810,7 @@ public class NinteiTsuchishoHakkoHandler {
         div.getTxtKubunHenkoKonkaiTimeFrom().clearValue();
         div.getTxtKubunHenkoKonkaiYMDTo().clearValue();
         div.getTxtKubunHenkoKonkaiTimeTo().clearValue();
-        div.getCcdIkkatsuKubunHenkoBunshoBango().initialize(ReportIdDBD.DBD550003.getReportId());
+        div.getCcdIkkatsuKubunHenkoBunshoBango().initialize(ReportId.EMPTY);
     }
 
     private void clear一括発行() {
@@ -782,7 +818,7 @@ public class NinteiTsuchishoHakkoHandler {
         div.getChkOutPutSelect().setSelectedItemsByKey(new ArrayList<RString>());
         div.getTxtSakuseiDaytxtSakuseiDaytxtSakuseiDay().clearValue();
         div.getRadTanpyoHakkoZumi().setDataSource(get単票発行済みデータソース());
-        div.getRadTanpyoHakkoZumi().setSelectedKey(RadioValue.発行済みを出力する.getKey());
+        div.getRadTanpyoHakkoZumi().setSelectedKey(RadioValue.発行済みを出力しない.getKey());
 
         clear一括発行認定結果通知書();
         clear一括発行サービス変更通知書();
@@ -904,7 +940,7 @@ public class NinteiTsuchishoHakkoHandler {
         IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
         List<IOutputOrder> 帳票出力順 = chohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBD介護受給, パネル.getChohyoId());
         if (null != 帳票出力順 && !帳票出力順.isEmpty()) {
-            return MyBatisOrderByClauseCreator.create(ShiharaiHohoHenkoHaakuIchiranOrderKey.class, 帳票出力順.get(0));
+            return MyBatisOrderByClauseCreator.create(NinteiTsuchishoHakkoOrderKey.class, 帳票出力順.get(0));
         } else {
             return RString.EMPTY;
         }
@@ -914,7 +950,7 @@ public class NinteiTsuchishoHakkoHandler {
         return new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBD介護受給, パネル.getChohyoId());
     }
 
-    private SofubutsuAtesakiSource get送付物宛先情報(ChohyoSeigyoKyotsu 帳票共通情報) {
+    private EditedAtesaki get送付物宛先情報(ChohyoSeigyoKyotsu 帳票共通情報) {
         IAtesakiGyomuHanteiKey key = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給);
         AtesakiPSMSearchKeyBuilder builder = new AtesakiPSMSearchKeyBuilder(key);
         builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
@@ -926,15 +962,7 @@ public class NinteiTsuchishoHakkoHandler {
         builder.set法人代表者利用区分(HojinDaihyoshaRiyoKubun.利用しない);
         IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(builder.build());
 
-        EditedAtesaki 編集後宛先 = EditedAtesakiBuilder.create編集後宛先(宛先, 地方公共団体, 帳票共通情報);
-        SofubutsuAtesakiSource sofubutsuAtesakiSource;
-        try {
-            sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
-        } catch (Exception e) {
-            sofubutsuAtesakiSource = new SofubutsuAtesakiSource();
-        }
-
-        return sofubutsuAtesakiSource;
+        return EditedAtesakiBuilder.create編集後宛先(宛先, 地方公共団体, 帳票共通情報);
     }
 
     private RString get通知文情報通知文(PanelType パネル, int パターン番号, int 項目番号) {
@@ -944,13 +972,14 @@ public class NinteiTsuchishoHakkoHandler {
     }
 
     private SourceDataCollection print個別発行認定結果通知書(YokaigoNinteiTsutisho 画面選択データ, PanelType パネル) {
+        SourceDataCollection collection = null;
         try (ReportManager reportManager = new ReportManager()) {
             YokaigoNinteiKekkaTshuchishoPrintService printService = new YokaigoNinteiKekkaTshuchishoPrintService();
             printService.print(create個別発行認定結果通知書データ(パネル, 画面選択データ), get帳票共通情報(パネル), パネル.getChohyoId(), reportManager);
 
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(ChohyoHakkoRirekiSearchDefault.帳票ID.getCode()), パネル.getChohyoId().getColumnValue());
-            SourceDataCollection collection = reportManager.publish();
+            collection = reportManager.publish();
 
             if (div.getRadNinteiKekkaRireki().getSelectedKey().equals(RadioValue.発行済みを出力する.getKey())) {
                 List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
@@ -959,74 +988,75 @@ public class NinteiTsuchishoHakkoHandler {
                     insert発行履歴(data, div.getTxtNinteiKekkaSakuseiDay().getValue(), shikibetsuCodeList, hashMap);
                 }
             }
-            return collection;
         }
+        return collection;
     }
 
     private SourceDataCollection print個別発行サービス変更通知書(YokaigoNinteiTsutisho 画面選択データ, PanelType パネル) {
+        SourceDataCollection collection = null;
         try (ReportManager reportManager = new ReportManager()) {
             ServiceHenkoTshuchishoPrintService printService = new ServiceHenkoTshuchishoPrintService();
             printService.print(create個別発行サービス変更通知書データ(パネル, 画面選択データ), get帳票共通情報(パネル), パネル.getChohyoId(), reportManager);
 
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(ChohyoHakkoRirekiSearchDefault.帳票ID.getCode()), パネル.getChohyoId().getColumnValue());
-            SourceDataCollection collection = reportManager.publish();
+            collection = reportManager.publish();
             if (div.getRadServiceHenkoBunshoRireki().getSelectedKey().equals(RadioValue.発行済みを出力する.getKey())) {
                 List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
                 shikibetsuCodeList.add(画面選択データ.get識別コード());
                 for (SourceData data : collection) {
-                    insert発行履歴(data, div.getTxtNinteiKekkaSakuseiDay().getValue(), shikibetsuCodeList, hashMap);
+                    insert発行履歴(data, div.getTxtServiceHenkoBunshoSakuseiDay().getValue(), shikibetsuCodeList, hashMap);
                 }
             }
-            return collection;
         }
+        return collection;
     }
 
     private SourceDataCollection print個別発行要介護度変更通知書(YokaigoNinteiTsutisho 画面選択データ, PanelType パネル) {
+        SourceDataCollection collection = null;
         try (ReportManager reportManager = new ReportManager()) {
             YokaigodoHenkoTshuchishoPrintService printService = new YokaigodoHenkoTshuchishoPrintService();
             printService.print(create個別発行要介護度変更通知書データ(パネル, 画面選択データ), get帳票共通情報(パネル), パネル.getChohyoId(), reportManager);
 
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(ChohyoHakkoRirekiSearchDefault.帳票ID.getCode()), パネル.getChohyoId().getColumnValue());
-            SourceDataCollection collection = reportManager.publish();
+            collection = reportManager.publish();
             if (div.getRadYokaigodoHenkoRireki().getSelectedKey().equals(RadioValue.発行済みを出力する.getKey())) {
                 List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
                 shikibetsuCodeList.add(画面選択データ.get識別コード());
                 for (SourceData data : collection) {
-                    insert発行履歴(data, div.getTxtNinteiKekkaSakuseiDay().getValue(), shikibetsuCodeList, hashMap);
+                    insert発行履歴(data, div.getTxtYokaigodoHenkoTsuchiSakuseiDay().getValue(), shikibetsuCodeList, hashMap);
                 }
             }
-            return collection;
         }
+        return collection;
     }
 
     private SourceDataCollection print個別発行認定却下通知書(YokaigoNinteiTsutisho 画面選択データ, PanelType パネル) {
+        SourceDataCollection collection = null;
         try (ReportManager reportManager = new ReportManager()) {
             YokaigoNinteiKyakkaTshuchishoPrintService printService = new YokaigoNinteiKyakkaTshuchishoPrintService();
             printService.print(create個別発行認定却下通知書データ(パネル, 画面選択データ), get帳票共通情報(パネル), パネル.getChohyoId(), reportManager);
 
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(ChohyoHakkoRirekiSearchDefault.帳票ID.getCode()), パネル.getChohyoId().getColumnValue());
-            SourceDataCollection collection = reportManager.publish();
+            collection = reportManager.publish();
             if (div.getRadNinteiKyakkaRireki().getSelectedKey().equals(RadioValue.発行済みを出力する.getKey())) {
                 List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
                 shikibetsuCodeList.add(画面選択データ.get識別コード());
                 for (SourceData data : collection) {
-                    insert発行履歴(data, div.getTxtNinteiKekkaSakuseiDay().getValue(), shikibetsuCodeList, hashMap);
+                    insert発行履歴(data, div.getTxtNinteiKyakkaTsuchi().getValue(), shikibetsuCodeList, hashMap);
                 }
             }
-            return collection;
         }
+        return collection;
     }
 
-    private NinteiKekkaTsuchishoEntity create個別発行認定結果通知書データ(PanelType パネル, YokaigoNinteiTsutisho 画面選択データ) {
+    private NinteiKekkaTsuchishoJoho create個別発行認定結果通知書データ(PanelType パネル, YokaigoNinteiTsutisho 画面選択データ) {
         ChohyoSeigyoKyotsu 帳票共通情報 = get帳票共通情報(パネル);
         FlexibleDate 発行日 = div.getTxtNinteiKekkaSakuseiDay().getValue();
 
-        SofubutsuAtesakiSource 送付物宛先情報 = get送付物宛先情報(帳票共通情報);
-
-        NinteiKekkaTsuchishoEntity printEntity = new NinteiKekkaTsuchishoEntity();
+        NinteiKekkaTsuchishoJoho printEntity = new NinteiKekkaTsuchishoJoho();
         printEntity.setHakkoYMD(発行日);
         printEntity.setBunshoNo(div.getCcdKobetsuNinteiKekkaBunshoBango().get文書番号());
         printEntity.setTitle(getタイトル(ConfigNameDBA.要介護認定結果通知書));
@@ -1065,46 +1095,15 @@ public class NinteiTsuchishoHakkoHandler {
         printEntity.setTsuchibun6(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_3));
         printEntity.setTsuchibun7(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_4));
 
-        printEntity.setYubinNo(送付物宛先情報.yubinNo);
-        printEntity.setGyoseiku(送付物宛先情報.gyoseiku);
-        printEntity.setJushoText(送付物宛先情報.jushoText);
-        printEntity.setJusho1(送付物宛先情報.jusho1);
-        printEntity.setJusho2(送付物宛先情報.jusho2);
-        printEntity.setJusho3(送付物宛先情報.jusho3);
-        printEntity.setKatagakiText(送付物宛先情報.katagakiText);
-        printEntity.setKatagaki1(送付物宛先情報.katagaki1);
-        printEntity.setKatagaki2(送付物宛先情報.katagaki2);
-        printEntity.setKatagakiSmall1(送付物宛先情報.katagakiSmall1);
-        printEntity.setKatagakiSmall2(送付物宛先情報.katagakiSmall2);
-        printEntity.setDainoKubunMei(送付物宛先情報.dainoKubunMei);
-        printEntity.setShimeiText(送付物宛先情報.shimeiText);
-        printEntity.setShimei1(送付物宛先情報.shimei1);
-        printEntity.setShimei2(送付物宛先情報.shimei2);
-        printEntity.setShimeiSmall1(送付物宛先情報.shimeiSmall1);
-        printEntity.setShimeiSmall2(送付物宛先情報.shimeiSmall2);
-        printEntity.setSamabunShimeiText(送付物宛先情報.samabunShimeiText);
-        printEntity.setSamabunShimei1(送付物宛先情報.samabunShimei1);
-        printEntity.setSamabunShimei2(送付物宛先情報.samabunShimei2);
-        printEntity.setSamabunShimeiSmall1(送付物宛先情報.samabunShimeiSmall1);
-        printEntity.setSamabunShimeiSmall2(送付物宛先情報.samabunShimeiSmall2);
-        printEntity.setMeishoFuyo1(送付物宛先情報.meishoFuyo1);
-        printEntity.setMeishoFuyo2(送付物宛先情報.meishoFuyo2);
-        printEntity.setSamaBun1(送付物宛先情報.samaBun1);
-        printEntity.setSamaBun2(送付物宛先情報.samaBun2);
-        printEntity.setKakkoLeft1(送付物宛先情報.kakkoLeft1);
-        printEntity.setKakkoLeft2(送付物宛先情報.kakkoLeft2);
-        printEntity.setKakkoRight1(送付物宛先情報.kakkoRight1);
-        printEntity.setKakkoRight2(送付物宛先情報.kakkoRight2);
-        printEntity.setCustomerBarCode(送付物宛先情報.customerBarCode);
+        printEntity.set送付物宛先情報(get送付物宛先情報(帳票共通情報));
         return printEntity;
     }
 
-    private ServiceHenkoTsuchishoEntity create個別発行サービス変更通知書データ(PanelType パネル, YokaigoNinteiTsutisho 画面選択データ) {
+    private ServiceHenkoTsuchishoJoho create個別発行サービス変更通知書データ(PanelType パネル, YokaigoNinteiTsutisho 画面選択データ) {
         ChohyoSeigyoKyotsu 帳票共通情報 = get帳票共通情報(パネル);
         FlexibleDate 発行日 = div.getTxtServiceHenkoBunshoSakuseiDay().getValue();
-        SofubutsuAtesakiSource 送付物宛先情報 = get送付物宛先情報(帳票共通情報);
 
-        ServiceHenkoTsuchishoEntity printEntity = new ServiceHenkoTsuchishoEntity();
+        ServiceHenkoTsuchishoJoho printEntity = new ServiceHenkoTsuchishoJoho();
         printEntity.setHakkoYMD(発行日);
         printEntity.setBunshoNo(div.getCcdKobetsuServiceHenkoBunshoBango().get文書番号());
         printEntity.setTitle(getタイトル(ConfigNameDBA.サービス変更通知書));
@@ -1137,46 +1136,16 @@ public class NinteiTsuchishoHakkoHandler {
         printEntity.setTsuchibun5(get通知文情報通知文(パネル, 通知文_パターン番号_3, 通知文_項目番号_3));
         printEntity.setTsuchibun6(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_2));
         printEntity.setTsuchibun7(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_3));
-        printEntity.setYubinNo(送付物宛先情報.yubinNo);
-        printEntity.setGyoseiku(送付物宛先情報.gyoseiku);
-        printEntity.setJushoText(送付物宛先情報.jushoText);
-        printEntity.setJusho1(送付物宛先情報.jusho1);
-        printEntity.setJusho2(送付物宛先情報.jusho2);
-        printEntity.setJusho3(送付物宛先情報.jusho3);
-        printEntity.setKatagakiText(送付物宛先情報.katagakiText);
-        printEntity.setKatagaki1(送付物宛先情報.katagaki1);
-        printEntity.setKatagaki2(送付物宛先情報.katagaki2);
-        printEntity.setKatagakiSmall1(送付物宛先情報.katagakiSmall1);
-        printEntity.setKatagakiSmall2(送付物宛先情報.katagakiSmall2);
-        printEntity.setDainoKubunMei(送付物宛先情報.dainoKubunMei);
-        printEntity.setShimeiText(送付物宛先情報.shimeiText);
-        printEntity.setShimei1(送付物宛先情報.shimei1);
-        printEntity.setShimei2(送付物宛先情報.shimei2);
-        printEntity.setShimeiSmall1(送付物宛先情報.shimeiSmall1);
-        printEntity.setShimeiSmall2(送付物宛先情報.shimeiSmall2);
-        printEntity.setSamabunShimeiText(送付物宛先情報.samabunShimeiText);
-        printEntity.setSamabunShimei1(送付物宛先情報.samabunShimei1);
-        printEntity.setSamabunShimei2(送付物宛先情報.samabunShimei2);
-        printEntity.setSamabunShimeiSmall1(送付物宛先情報.samabunShimeiSmall1);
-        printEntity.setSamabunShimeiSmall2(送付物宛先情報.samabunShimeiSmall2);
-        printEntity.setMeishoFuyo1(送付物宛先情報.meishoFuyo1);
-        printEntity.setMeishoFuyo2(送付物宛先情報.meishoFuyo2);
-        printEntity.setSamaBun1(送付物宛先情報.samaBun1);
-        printEntity.setSamaBun2(送付物宛先情報.samaBun2);
-        printEntity.setKakkoLeft1(送付物宛先情報.kakkoLeft1);
-        printEntity.setKakkoLeft2(送付物宛先情報.kakkoLeft2);
-        printEntity.setKakkoRight1(送付物宛先情報.kakkoRight1);
-        printEntity.setKakkoRight2(送付物宛先情報.kakkoRight2);
-        printEntity.setCustomerBarCode(送付物宛先情報.customerBarCode);
+
+        printEntity.set送付物宛先情報(get送付物宛先情報(帳票共通情報));
         return printEntity;
     }
 
-    private YokaigodoHenkoTsuchishoEntity create個別発行要介護度変更通知書データ(PanelType パネル, YokaigoNinteiTsutisho 画面選択データ) {
+    private YokaigodoHenkoTsuchishoJoho create個別発行要介護度変更通知書データ(PanelType パネル, YokaigoNinteiTsutisho 画面選択データ) {
         ChohyoSeigyoKyotsu 帳票共通情報 = get帳票共通情報(パネル);
         FlexibleDate 発行日 = div.getTxtYokaigodoHenkoTsuchiSakuseiDay().getValue();
-        SofubutsuAtesakiSource 送付物宛先情報 = get送付物宛先情報(帳票共通情報);
 
-        YokaigodoHenkoTsuchishoEntity printEntity = new YokaigodoHenkoTsuchishoEntity();
+        YokaigodoHenkoTsuchishoJoho printEntity = new YokaigodoHenkoTsuchishoJoho();
         printEntity.setHakkoYMD(発行日);
         printEntity.setBunshoNo(div.getCcdKobetsuKaigodoHenkoBunshoBango().get文書番号());
         printEntity.setTitle(getタイトル(ConfigNameDBA.要介護度変更通知書));
@@ -1216,49 +1185,18 @@ public class NinteiTsuchishoHakkoHandler {
         printEntity.setTsuchibun7(get通知文情報通知文(パネル, 通知文_パターン番号_3, 通知文_項目番号_6));
         printEntity.setTsuchibun8(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_5));
         printEntity.setTsuchibun9(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_6));
-        printEntity.setYubinNo(送付物宛先情報.yubinNo);
-        printEntity.setGyoseiku(送付物宛先情報.gyoseiku);
-        printEntity.setJushoText(送付物宛先情報.jushoText);
-        printEntity.setJusho1(送付物宛先情報.jusho1);
-        printEntity.setJusho2(送付物宛先情報.jusho2);
-        printEntity.setJusho3(送付物宛先情報.jusho3);
-        printEntity.setKatagakiText(送付物宛先情報.katagakiText);
-        printEntity.setKatagaki1(送付物宛先情報.katagaki1);
-        printEntity.setKatagaki2(送付物宛先情報.katagaki2);
-        printEntity.setKatagakiSmall1(送付物宛先情報.katagakiSmall1);
-        printEntity.setKatagakiSmall2(送付物宛先情報.katagakiSmall2);
-        printEntity.setDainoKubunMei(送付物宛先情報.dainoKubunMei);
-        printEntity.setShimeiText(送付物宛先情報.shimeiText);
-        printEntity.setShimei1(送付物宛先情報.shimei1);
-        printEntity.setShimei2(送付物宛先情報.shimei2);
-        printEntity.setShimeiSmall1(送付物宛先情報.shimeiSmall1);
-        printEntity.setShimeiSmall2(送付物宛先情報.shimeiSmall2);
-        printEntity.setSamabunShimeiText(送付物宛先情報.samabunShimeiText);
-        printEntity.setSamabunShimei1(送付物宛先情報.samabunShimei1);
-        printEntity.setSamabunShimei2(送付物宛先情報.samabunShimei2);
-        printEntity.setSamabunShimeiSmall1(送付物宛先情報.samabunShimeiSmall1);
-        printEntity.setSamabunShimeiSmall2(送付物宛先情報.samabunShimeiSmall2);
-        printEntity.setMeishoFuyo1(送付物宛先情報.meishoFuyo1);
-        printEntity.setMeishoFuyo2(送付物宛先情報.meishoFuyo2);
-        printEntity.setSamaBun1(送付物宛先情報.samaBun1);
-        printEntity.setSamaBun2(送付物宛先情報.samaBun2);
-        printEntity.setKakkoLeft1(送付物宛先情報.kakkoLeft1);
-        printEntity.setKakkoLeft2(送付物宛先情報.kakkoLeft2);
-        printEntity.setKakkoRight1(送付物宛先情報.kakkoRight1);
-        printEntity.setKakkoRight2(送付物宛先情報.kakkoRight2);
-        printEntity.setCustomerBarCode(送付物宛先情報.customerBarCode);
+        printEntity.set送付物宛先情報(get送付物宛先情報(帳票共通情報));
         return printEntity;
     }
 
-    private NinteikyakkaTsuchishoEntity create個別発行認定却下通知書データ(PanelType パネル, YokaigoNinteiTsutisho 画面選択データ) {
+    private NinteikyakkaTsuchishoJoho create個別発行認定却下通知書データ(PanelType パネル, YokaigoNinteiTsutisho 画面選択データ) {
         ChohyoSeigyoKyotsu 帳票共通情報 = get帳票共通情報(パネル);
         FlexibleDate 発行日 = div.getTxtNinteiKyakkaTsuchi().getValue();
-        SofubutsuAtesakiSource 送付物宛先情報 = get送付物宛先情報(帳票共通情報);
-        NinteikyakkaTsuchishoEntity printEntity = new NinteikyakkaTsuchishoEntity();
+        NinteikyakkaTsuchishoJoho printEntity = new NinteikyakkaTsuchishoJoho();
 
         printEntity.setHakkoYMD(発行日);
         printEntity.setBunshoNo(div.getCcdKobetsuNinteiKyakkaBunshoBango().get文書番号());
-        printEntity.setTitle1(getタイトル(ConfigNameDBA.認定却下通知書));
+        printEntity.setTitle1(getタイトル(ConfigNameDBA.要介護認定却下通知書));
         printEntity.setTsuchibun1(get通知文情報通知文(パネル, 通知文_パターン番号_1, 通知文_項目番号_1));
         printEntity.setTsuchibun2(get通知文情報通知文(パネル, 通知文_パターン番号_1, 通知文_項目番号_2));
         AtenaMeisho 被保険者氏名 = 画面選択データ.get被保険者氏名();
@@ -1285,37 +1223,7 @@ public class NinteiTsuchishoHakkoHandler {
         printEntity.setTsuchibun5(get通知文情報通知文(パネル, 通知文_パターン番号_3, 通知文_項目番号_3));
         printEntity.setTsuchibun6(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_2));
         printEntity.setTsuchibun7(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_3));
-        printEntity.setYubinNo(送付物宛先情報.yubinNo);
-        printEntity.setGyoseiku(送付物宛先情報.gyoseiku);
-        printEntity.setJushoText(送付物宛先情報.jushoText);
-        printEntity.setJusho1(送付物宛先情報.jusho1);
-        printEntity.setJusho2(送付物宛先情報.jusho2);
-        printEntity.setJusho3(送付物宛先情報.jusho3);
-        printEntity.setKatagakiText(送付物宛先情報.katagakiText);
-        printEntity.setKatagaki1(送付物宛先情報.katagaki1);
-        printEntity.setKatagaki2(送付物宛先情報.katagaki2);
-        printEntity.setKatagakiSmall1(送付物宛先情報.katagakiSmall1);
-        printEntity.setKatagakiSmall2(送付物宛先情報.katagakiSmall2);
-        printEntity.setDainoKubunMei(送付物宛先情報.dainoKubunMei);
-        printEntity.setShimeiText(送付物宛先情報.shimeiText);
-        printEntity.setShimei1(送付物宛先情報.shimei1);
-        printEntity.setShimei2(送付物宛先情報.shimei2);
-        printEntity.setShimeiSmall1(送付物宛先情報.shimeiSmall1);
-        printEntity.setShimeiSmall2(送付物宛先情報.shimeiSmall2);
-        printEntity.setSamabunShimeiText(送付物宛先情報.samabunShimeiText);
-        printEntity.setSamabunShimei1(送付物宛先情報.samabunShimei1);
-        printEntity.setSamabunShimei2(送付物宛先情報.samabunShimei2);
-        printEntity.setSamabunShimeiSmall1(送付物宛先情報.samabunShimeiSmall1);
-        printEntity.setSamabunShimeiSmall2(送付物宛先情報.samabunShimeiSmall2);
-        printEntity.setMeishoFuyo1(送付物宛先情報.meishoFuyo1);
-        printEntity.setMeishoFuyo2(送付物宛先情報.meishoFuyo2);
-        printEntity.setSamaBun1(送付物宛先情報.samaBun1);
-        printEntity.setSamaBun2(送付物宛先情報.samaBun2);
-        printEntity.setKakkoLeft1(送付物宛先情報.kakkoLeft1);
-        printEntity.setKakkoLeft2(送付物宛先情報.kakkoLeft2);
-        printEntity.setKakkoRight1(送付物宛先情報.kakkoRight1);
-        printEntity.setKakkoRight2(送付物宛先情報.kakkoRight2);
-        printEntity.setCustomerBarCode(送付物宛先情報.customerBarCode);
+        printEntity.set送付物宛先情報(get送付物宛先情報(帳票共通情報));
         return printEntity;
     }
 
@@ -1327,18 +1235,28 @@ public class NinteiTsuchishoHakkoHandler {
 
     private YokaigoNinteiTsutisho edit個別発行受給者台帳(YokaigoNinteiTsutisho データ, PanelType パネル) {
         YokaigoNinteiTsutishoBuilder builder = データ.createBuilderForNyukyushaAddEdit();
-        if (パネル.equals(パネル)) {
+
+        if (PanelType.個別発行認定結果通知書パネル.equals(パネル)) {
             builder.set認定結果通知書発行年月日(div.getTxtNinteiKekkaSakuseiDay().getValue());
-        } else if (パネル.equals(パネル)) {
+        } else if (PanelType.個別発行サービス変更通知書パネル.equals(パネル)) {
             builder.setサービス変更通知書発行年月日(div.getTxtServiceHenkoBunshoSakuseiDay().getValue());
-        } else if (パネル.equals(パネル)) {
+        } else if (PanelType.個別発行要介護度変更通知書パネル.equals(パネル)) {
             builder.set区分変更通知書発行年月日(div.getTxtYokaigodoHenkoTsuchiSakuseiDay().getValue());
-        } else if (パネル.equals(パネル)) {
+        } else if (PanelType.個別発行認定却下通知書パネル.equals(パネル)) {
             builder.set認定却下通知書発行年月日(div.getTxtNinteiKyakkaTsuchi().getValue());
         }
 
-        builder.set受給者台帳履歴番号(new RString(String.format("%04d", Integer.parseInt(データ.get履歴番号().toString()) + 1)));
+        builder.set受給者台帳履歴番号(new RString(String.format("%04d", Integer.parseInt(getMax履歴番号(データ).toString()) + 1)));
         return builder.build();
+    }
+
+    private RString getMax履歴番号(YokaigoNinteiTsutisho データ) {
+        if (null == データ) {
+            return new RString("0000");
+        }
+        return YokaigoNinteiJohoManager.createInstance()
+                .getMax履歴番号ByKey(データ.get市町村コード(), データ.get被保険者番号受給者台帳(),
+                        データ.get受給申請事由受給者台帳(), データ.get申請書管理番号受給者台帳());
     }
 
     private RString getサービス種類(YokaigoNinteiTsutisho 受給者台帳情報) {
@@ -1385,11 +1303,13 @@ public class NinteiTsuchishoHakkoHandler {
             return 連絡前文字列;
         }
 
+        RString 略称 = CodeMaster.getCodeRyakusho(DBDCodeShubetsu.指定サービス種類コード.getコード(),
+                new Code(サービス種類.value()), FlexibleDate.getNowDate());
         if (null == 連絡前文字列 || 連絡前文字列.isEmpty()) {
-            return サービス種類.value();
+            return 略称;
         }
 
-        return 連絡前文字列.concat(連絡符号).concat(サービス種類.value());
+        return 連絡前文字列.concat(連絡符号).concat(略称);
     }
 
     private RString get要介護度名(RString 厚労省IF識別コード, RString 要介護度コード) {
@@ -1423,7 +1343,7 @@ public class NinteiTsuchishoHakkoHandler {
     }
 
     private RString getタイトル(ConfigNameDBA configName) {
-        RString タイトル = DbBusinessConfig.get(configName, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
+        RString タイトル = DbBusinessConfig.get(configName, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         return null != タイトル ? タイトル : RString.EMPTY;
     }
 

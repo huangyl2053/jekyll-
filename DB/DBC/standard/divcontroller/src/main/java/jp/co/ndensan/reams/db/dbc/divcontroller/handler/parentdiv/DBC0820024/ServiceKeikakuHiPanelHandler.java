@@ -20,11 +20,11 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.Serv
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.dgdYichiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -51,7 +51,6 @@ public class ServiceKeikakuHiPanelHandler {
     private final ServiceKeikakuHiPanelDiv div;
     private static final int 連番LENGTH = 2;
     private static final RString 連番_1 = new RString("01");
-    private static final RString コード種別 = new RString("0002");
     private static final RString 事業者区分BLANK = new RString("0");
     private static final FlexibleYearMonth サービス年月_200904 = new FlexibleYearMonth("200904");
     private static final FlexibleYearMonth サービス年月_200903 = new FlexibleYearMonth("200903");
@@ -841,7 +840,7 @@ public class ServiceKeikakuHiPanelHandler {
         KeyValueDataSource dataSourceBlank = new KeyValueDataSource(事業者区分BLANK, RString.EMPTY);
         dataSourceList.add(dataSourceBlank);
         List<UzT0007CodeEntity> 事業者区分リスト = CodeMaster.getCode(
-                SubGyomuCode.DBC介護給付, new CodeShubetsu(コード種別), FlexibleDate.getNowDate());
+                SubGyomuCode.DBC介護給付, DBCCodeShubetsu.指定_基準該当等事業所区分.getコード(), FlexibleDate.getNowDate());
         for (UzT0007CodeEntity 事業者区分 : 事業者区分リスト) {
             KeyValueDataSource dataSource = new KeyValueDataSource(事業者区分.getコード().value(), 事業者区分.getコード名称());
             dataSourceList.add(dataSource);

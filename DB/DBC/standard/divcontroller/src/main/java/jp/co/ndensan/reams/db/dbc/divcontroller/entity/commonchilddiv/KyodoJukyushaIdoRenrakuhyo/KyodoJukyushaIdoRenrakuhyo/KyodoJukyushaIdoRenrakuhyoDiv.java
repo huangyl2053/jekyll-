@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * KyodoJukyushaIdoRenrakuhyo のクラスファイル
  *
- * @reamsid_L DBC-4390-010 xupeng
+ * @reamsid_L DBC-4390-030 xupeng
  */
 public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyushaIdoRenrakuhyoDiv {
 
@@ -734,7 +734,7 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     @JsonIgnore
     @Override
     public Decimal get償還送付_履歴番号() {
-        return this.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtRirekiNo().getValue();
+        return this.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtShokanRirekiNo().getValue();
     }
 
     /**
@@ -745,7 +745,7 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
     @JsonIgnore
     @Override
     public Decimal get高額送付_履歴番号() {
-        return this.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtRirekiNo().getValue();
+        return this.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getTxtKogakuRirekiNo().getValue();
     }
 
     /**
@@ -914,5 +914,38 @@ public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyus
             boolean 償還送付情報変Flag, boolean 高額送付情報Flag) {
         return KyodoJukyushaIdoRenrakuhyoDivValidationHandler.of(this).修正有無チェック(初期化異動情報Entity,
                 画面項目異動情報Entity, 基本送付情報Flag, 償還送付情報変Flag, 高額送付情報Flag);
+    }
+
+    /**
+     * 基本送付情報の異動日。
+     *
+     * @return 異動日 RDate
+     */
+    @JsonIgnore
+    @Override
+    public RDate get基本送付_異動日() {
+        return this.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtKihonIdoYMD().getValue();
+    }
+
+    /**
+     * 償還送付情報の異動日。
+     *
+     * @return 異動日 RDate
+     */
+    @JsonIgnore
+    @Override
+    public RDate get償還送付_異動日() {
+        return this.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtShokanIdoYMD().getValue();
+    }
+
+    /**
+     * 高額送付情報の異動日。
+     *
+     * @return 異動日 RDate
+     */
+    @JsonIgnore
+    @Override
+    public RDate get高額送付_異動日() {
+        return this.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getTxtKogakuIdoYMD().getValue();
     }
 }

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200012;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.KyuhuJissekiHihokensha;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.TokubetsuChiikiKasanKeigenJissekiKanri;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200012.TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource;
@@ -22,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public final class TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport extends
         Report<TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource> {
 
-    private final List<TokubetsuChiikiKasanKeigenJissekiKanri> 帳票情報リスト;
+    private final TokubetsuChiikiKasanKeigenJissekiKanri 帳票情報;
     private final Association association;
     private final IOutputOrder iOutputOrder;
     private final KyuhuJissekiHihokensha 宛名;
@@ -30,22 +29,22 @@ public final class TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport extends
     /**
      * インスタンスを生成します。
      *
-     * @param 帳票情報リスト List<TokubetsuChiikiKasanKeigenJissekiKanri>
+     * @param 帳票情報 TokubetsuChiikiKasanKeigenJissekiKanri
      * @param association Association
      * @param iOutputOrder IOutputOrder
      * @param 宛名 KyuhuJissekiHihokensha
      * @return 特別地域加算軽減実績管理リスト
      */
     public static TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport createReport(
-            List<TokubetsuChiikiKasanKeigenJissekiKanri> 帳票情報リスト, Association association,
+            TokubetsuChiikiKasanKeigenJissekiKanri 帳票情報, Association association,
             IOutputOrder iOutputOrder, KyuhuJissekiHihokensha 宛名) {
-        return new TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport(帳票情報リスト, association, iOutputOrder, 宛名);
+        return new TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport(帳票情報, association, iOutputOrder, 宛名);
     }
 
     private TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport(
-            List<TokubetsuChiikiKasanKeigenJissekiKanri> 帳票情報リスト, Association association,
+            TokubetsuChiikiKasanKeigenJissekiKanri 帳票情報, Association association,
             IOutputOrder iOutputOrder, KyuhuJissekiHihokensha 宛名) {
-        this.帳票情報リスト = 帳票情報リスト;
+        this.帳票情報 = 帳票情報;
         this.association = association;
         this.iOutputOrder = iOutputOrder;
         this.宛名 = 宛名;
@@ -58,12 +57,10 @@ public final class TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport extends
      */
     @Override
     public void writeBy(ReportSourceWriter<TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource> writer) {
-        for (int index = 0; index < 帳票情報リスト.size(); index++) {
-            ITokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor bodyEditor = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor(
-                    帳票情報リスト, association, iOutputOrder, index, 宛名);
-            ITokubetsuChiikiKasanKeigenJissekiKanriIchiranBuilder builder = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranBuilder(bodyEditor);
-            writer.writeLine(builder);
-        }
-
+        ITokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor bodyEditor = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor(
+                帳票情報, association, iOutputOrder, 宛名);
+        ITokubetsuChiikiKasanKeigenJissekiKanriIchiranBuilder builder = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranBuilder(bodyEditor);
+        writer.writeLine(builder);
     }
+
 }

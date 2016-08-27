@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 支払方法変更管理リストクラスです．
  *
- * @reamsid_L DBD-36500-040 x_lilh
+ * @reamsid_L DBD-3650-040 x_lilh
  */
 public interface IShiharaiHohoHenkoKanriMapper {
 

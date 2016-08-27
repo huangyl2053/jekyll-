@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.kijunshunyugakutekiyokettei;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -34,4 +36,6 @@ public class KijunShunyugakuTekiyoKetteiEntity implements Serializable {
     private FlexibleDate 決定日;
     private ShikibetsuCode 識別コード;
     private boolean 宛先印字対象者フラグ;
+    private UaFt200FindShikibetsuTaishoEntity 宛名Entity;
+    private UaFt250FindAtesakiEntity 宛先Entity;
 }

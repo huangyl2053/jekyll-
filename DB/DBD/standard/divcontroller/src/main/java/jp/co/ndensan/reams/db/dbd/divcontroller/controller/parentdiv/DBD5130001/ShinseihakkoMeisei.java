@@ -14,10 +14,8 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5130001.Shi
 import jp.co.ndensan.reams.db.dbd.service.report.dbd501001.YokaigoNinteiShinseishoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd501002.YokaigoNinteikbnHenkoShinseishoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.report.hakkorireki.GyomuKoyuJoho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiJotai;
 import jp.co.ndensan.reams.ur.urz.service.core.reportprinthistory.HakkoRirekiManagerFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportprinthistory.IHakkoRirekiManager;
@@ -31,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 要介護認定申請書発行画面のDivControllerです。
@@ -47,9 +44,11 @@ public class ShinseihakkoMeisei {
      * @return ResponseData<ShinseihakkoMeiseiDiv>
      */
     public ResponseData<ShinseihakkoMeiseiDiv> onLoad(ShinseihakkoMeiseiDiv shinseihakkoMeiseiDiv) {
-        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+//        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+//        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+//        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(new RString("6000000010"));
+        ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("000000000000010"));
         getHandler(shinseihakkoMeiseiDiv).initialize(識別コード, 被保険者番号);
         return ResponseData.of(shinseihakkoMeiseiDiv).respond();
     }
@@ -63,8 +62,11 @@ public class ShinseihakkoMeisei {
     public ResponseData<ShinseihakkoMeiseiDiv> check_RadShinseiKubun(ShinseihakkoMeiseiDiv div) {
         int selectIndex = div.getShinseihakkoMeisei2().getPrintSelect().getRadShinseiKubun().getSelectedIndex();
         RString yokaigodo = div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue();
-        if (selectIndex != 0 && (yokaigodo == null || yokaigodo.isEmpty())) {
-            throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace("要介護度が空白のため", "更新申請の選択ができません"));
+        if (selectIndex == 1 && (yokaigodo == null || yokaigodo.isEmpty())) {
+            throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace("要介護度が空白の", "更新申請の選択が"));
+        }
+        if (selectIndex == 2 && (yokaigodo == null || yokaigodo.isEmpty())) {
+            throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace("要介護度が空白の", "区分変更申請の選択が"));
         }
         return ResponseData.of(div).respond();
     }
@@ -75,24 +77,24 @@ public class ShinseihakkoMeisei {
      * @param shinseihakkoMeiseiDiv ShinseihakkoMeiseiDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseihakkoMeiseiDiv> onClick_btnPublish(ShinseihakkoMeiseiDiv shinseihakkoMeiseiDiv) {
+    public ResponseData<SourceDataCollection> onClick_btnPublish(ShinseihakkoMeiseiDiv shinseihakkoMeiseiDiv) {
         ShinseiShoEntity shinseiShoEntity = getHandler(shinseihakkoMeiseiDiv).getShinseiShoEntity();
         ResponseData<SourceDataCollection> response = new ResponseData<>();
         int radShinseiKubunSelectIndex = shinseihakkoMeiseiDiv.getShinseihakkoMeisei2().getPrintSelect().getRadShinseiKubun().getSelectedIndex();
         try (ReportManager reportManager = new ReportManager()) {
             if (radShinseiKubunSelectIndex == 2) {
-                YokaigoNinteiShinseishoPrintService shinseishoPrintService = new YokaigoNinteiShinseishoPrintService();
-                shinseishoPrintService.print(shinseiShoEntity, reportManager);
-            } else {
                 YokaigoNinteikbnHenkoShinseishoPrintService teiShinseishoPrintService = new YokaigoNinteikbnHenkoShinseishoPrintService();
                 teiShinseishoPrintService.print(shinseiShoEntity, reportManager);
+            } else {
+                YokaigoNinteiShinseishoPrintService shinseishoPrintService = new YokaigoNinteiShinseishoPrintService();
+                shinseishoPrintService.print(shinseiShoEntity, reportManager);
             }
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(GyomuKoyuJoho.被保番号.getコード()), shinseiShoEntity.get被保険者番号());
             SourceDataCollection collection = reportManager.publish();
             response.data = collection;
         }
-        return ResponseData.of(shinseihakkoMeiseiDiv).respond();
+        return response;
     }
 
     /**

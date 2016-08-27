@@ -5,19 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajoho;
 
-import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.*;
+import jp.co.ndensan.reams.db.dbc.entity.csv.jukyushakoshinkekka.DbWT5331JukyushaJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 
 /**
  * 被保険者一時TBLと受給者情報明細一時TBL結びついたエンティティ。
  *
- * @reamsid_L DBC-2730-010 chenjie
+ * @reamsid_L DBC-2730-030 chenjie
  */
 @lombok.Getter
 @lombok.Setter
 public class JukyushaHihokenshaEntity {
 
     private DbWT0001HihokenshaTempEntity 被保険者一時;
-    private DbWT5331JukyushaJohoTempEntity 受給者情報明細一時;
+    private DbWT5331JukyushaJohoCsvEntity 受給者情報明細一時;
 
 }

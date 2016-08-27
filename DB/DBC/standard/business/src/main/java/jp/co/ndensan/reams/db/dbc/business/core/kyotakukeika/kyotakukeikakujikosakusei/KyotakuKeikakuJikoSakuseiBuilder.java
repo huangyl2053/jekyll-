@@ -81,7 +81,6 @@ public class KyotakuKeikakuJikoSakuseiBuilder {
      * @return {@link KyotakuKeikakuJikoSakuseiBuilder}
      */
     public KyotakuKeikakuJikoSakuseiBuilder set適用終了年月日(FlexibleDate 適用終了年月日) {
-        requireNonNull(適用終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用終了年月日"));
         entity.setTekiyoShuryoYMD(適用終了年月日);
         return this;
     }

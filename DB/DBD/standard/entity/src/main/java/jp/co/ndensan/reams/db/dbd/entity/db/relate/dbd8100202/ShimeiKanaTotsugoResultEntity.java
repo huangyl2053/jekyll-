@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -29,7 +28,7 @@ public class ShimeiKanaTotsugoResultEntity {
     private RString dt通知内容コード;
     private RString dt予備1;
     private RString dt制度コード;
-    private FlexibleYear dt作成年月日;
+    private FlexibleDate dt作成年月日;
     private RString dt基礎年金番号;
     private RString dt年金コード;
     private RString dt予備2;

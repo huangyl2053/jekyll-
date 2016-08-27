@@ -23,5 +23,5 @@ public class JissekiDataIchijiSakuseiJohoEntity {
     private DbT1001HihokenshaDaichoEntity 被保険者台帳管理NewestEntity;
     private DbT4037HikazeNenkinTaishoshaEntity 非課税年金対象者Entity;
     private RString 履歴番号;
-    private UaFt200FindShikibetsuTaishoEntity 宛名Entity;
+    private UaFt200FindShikibetsuTaishoEntity psmEntity;
 }

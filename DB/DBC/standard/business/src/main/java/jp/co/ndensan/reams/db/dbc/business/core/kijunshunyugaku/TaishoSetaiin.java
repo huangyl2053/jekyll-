@@ -10,16 +10,15 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 対象世帯員クラスです
  *
  * @reamsid_L DBC-4640-080 liuxiaoyu
  */
-@Getter
-@Setter
+@lombok.Getter
+@lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class TaishoSetaiin {
 
     private RString 世帯コード;
@@ -38,6 +37,12 @@ public class TaishoSetaiin {
     private Boolean 印字文字欠け区分;
     private List<Shotai> 世帯員情報;
 
+    /**
+     * 対象者cloneメソッドです。
+     *
+     * @param 対象世帯員クラス TaishoSetaiin
+     * @return TaishoSetaiin
+     */
     public TaishoSetaiin clone(TaishoSetaiin 対象世帯員クラス) {
         TaishoSetaiin 対象世帯員クラス_1 = new TaishoSetaiin();
         対象世帯員クラス_1.set世帯コード(対象世帯員クラス.get世帯コード());

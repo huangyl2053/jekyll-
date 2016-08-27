@@ -9,8 +9,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 
 /**
  * JigyobunKogakuGassanFurikomiMeisaishoBatchParam のクラスファイル
@@ -36,6 +42,8 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv extends PanelBat
     private RString torihikiKinyukikanShitennmei;
     @JsonProperty("fdSakusei")
     private RString fdSakusei;
+    @JsonProperty("itakusya")
+    private RString itakusya;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -131,6 +139,24 @@ public class JigyobunKogakuGassanFurikomiMeisaishoBatchParamDiv extends PanelBat
     @JsonProperty("fdSakusei")
     public void setFdSakusei(RString fdSakusei) {
         this.fdSakusei = fdSakusei;
+    }
+
+    /*
+     * getitakusya
+     * @return itakusya
+     */
+    @JsonProperty("itakusya")
+    public RString getItakusya() {
+        return itakusya;
+    }
+
+    /*
+     * setitakusya
+     * @param itakusya itakusya
+     */
+    @JsonProperty("itakusya")
+    public void setItakusya(RString itakusya) {
+        this.itakusya = itakusya;
     }
 
     /*

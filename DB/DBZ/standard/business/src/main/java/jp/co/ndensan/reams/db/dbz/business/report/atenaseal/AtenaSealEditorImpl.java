@@ -7,6 +7,10 @@ package jp.co.ndensan.reams.db.dbz.business.report.atenaseal;
 
 import jp.co.ndensan.reams.db.dbz.business.core.atenaseal.AtenaSealReportBusiness;
 import jp.co.ndensan.reams.db.dbz.entity.report.atenaseal.AtenaSealCreateReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 宛名シールのEditorです。
@@ -15,6 +19,9 @@ import jp.co.ndensan.reams.db.dbz.entity.report.atenaseal.AtenaSealCreateReportS
  */
 public class AtenaSealEditorImpl implements IAtenaSealEditor {
 
+    private static final ShikibetsuCode SHIKIBETSUCODE = new ShikibetsuCode("000000");
+    private static final Code CODE = Code.EMPTY;
+    private static final RString RSTRING = RString.EMPTY;
     private final AtenaSealReportBusiness business;
 
     /**
@@ -40,6 +47,8 @@ public class AtenaSealEditorImpl implements IAtenaSealEditor {
     private AtenaSealCreateReportSource editSource(AtenaSealCreateReportSource source) {
         partOne(source);
         partTwo(source);
+        source.識別コード = SHIKIBETSUCODE;
+        source.拡張情報 = new ExpandedInformation(CODE, RSTRING, RSTRING);
         source.kakkoLeft16 = business.getKakkoLeft16();
         source.kakkoRight15 = business.getKakkoRight15();
         source.samabunShimeiSmall16 = business.getSamabunShimeiSmall16();

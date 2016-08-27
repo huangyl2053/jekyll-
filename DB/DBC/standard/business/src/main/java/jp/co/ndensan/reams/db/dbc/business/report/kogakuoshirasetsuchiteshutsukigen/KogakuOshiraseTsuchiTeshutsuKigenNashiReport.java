@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 高額サービス給付のお知らせ通知書（提出期限なし）帳票Report。
  *
- * @reamsid_L DBC-4770-050 jianglaishen
+ * @reamsid_L DBC-4770-050 jianglaisheng
  */
 public class KogakuOshiraseTsuchiTeshutsuKigenNashiReport extends
         Report<KogakuOshiraseTsuchiTeshutsuKigenNashiSource> {

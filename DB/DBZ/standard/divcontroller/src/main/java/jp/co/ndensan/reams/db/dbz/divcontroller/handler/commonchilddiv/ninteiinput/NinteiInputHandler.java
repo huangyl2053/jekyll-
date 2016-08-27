@@ -46,8 +46,12 @@ public class NinteiInputHandler {
      */
     public void initialize(NinteiInputDataPassModel model) {
         div.setHdnShinseishoKanriNo(model.get申請書管理番号() == null ? RString.EMPTY : model.get申請書管理番号().value());
-        div.getRadNinteiKubun().setSelectedKey(model.get認定区分());
-        div.getChkMinashiKoshinNintei().setSelectedItemsByKey(model.getみなし更新認定());
+        if (!RString.isNullOrEmpty(model.get認定区分())) {
+            div.getRadNinteiKubun().setSelectedKey(model.get認定区分());
+        }
+        if (model.getみなし更新認定() != null && !model.getみなし更新認定().isEmpty()) {
+            div.getChkMinashiKoshinNintei().setSelectedItemsByKey(model.getみなし更新認定());
+        }
         div.setHdnDatabaseSubGyomuCode(model.getSubGyomuCode());
         div.setHdnKoroshoIfShikibetsuCode(model.get厚労省IFコード());
         div.getTxtNinteiYMD().setValue(model.get認定年月日());
@@ -67,8 +71,12 @@ public class NinteiInputHandler {
             rowList.add(row);
         }
         div.getDgServiceIchiran().setDataSource(rowList);
-        List<JukyushaDaicho> jukyushaDaichoList = ninteiInputFinder.getサービス(model.get申請書管理番号()).records();
-        setSelect(rowList, jukyushaDaichoList);
+        if (model.getサービス一覧リスト() != null && !model.getサービス一覧リスト().isEmpty()) {
+            setSelectIchiran(rowList, model.getサービス一覧リスト());
+        } else {
+            List<JukyushaDaicho> jukyushaDaichoList = ninteiInputFinder.getサービス(model.get申請書管理番号()).records();
+            setSelect(rowList, jukyushaDaichoList);
+        }
         if (new RString("TemnyuMode").equals(new RString(div.getMode_ShoriType().toString()))
                 || new RString("InputMode").equals(new RString(div.getMode_ShoriType().toString()))
                 || new RString("TokushuTsuikaMode").equals(new RString(div.getMode_ShoriType().toString()))
@@ -114,6 +122,17 @@ public class NinteiInputHandler {
             }
         }
         return rowList;
+    }
+
+    private void setSelectIchiran(List<dgServiceIchiran_Row> rowList, List<RString> サービス一覧リスト) {
+        for (RString サービスコード : サービス一覧リスト) {
+            for (dgServiceIchiran_Row row : rowList) {
+                if (row.getCode().equals(サービスコード)) {
+                    row.setSelected(true);
+                    break;
+                }
+            }
+        }
     }
 
     private void setSelect(List<dgServiceIchiran_Row> rowList, List<JukyushaDaicho> jukyushaDaichoList) {

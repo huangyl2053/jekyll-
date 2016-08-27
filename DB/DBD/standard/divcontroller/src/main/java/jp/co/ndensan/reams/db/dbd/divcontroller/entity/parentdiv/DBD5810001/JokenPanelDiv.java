@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JokenPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,18 +34,24 @@ public class JokenPanelDiv extends Panel {
     private Label lblChiku;
     @JsonProperty("ddlChiku")
     private DropDownList ddlChiku;
+    @JsonProperty("lblFromTo1")
+    private Label lblFromTo1;
+    @JsonProperty("lblFromTo2")
+    private Label lblFromTo2;
+    @JsonProperty("lblFromTo3")
+    private Label lblFromTo3;
+    @JsonProperty("ccdChikuStart")
+    private Chiku2InputDiv ccdChikuStart;
     @JsonProperty("ccdJyuusyoStart")
     private ChoikiInputDiv ccdJyuusyoStart;
+    @JsonProperty("ccdJyuusyoEnd")
+    private ChoikiInputDiv ccdJyuusyoEnd;
     @JsonProperty("ccdGyouseiEnd")
     private GyoseikuInputDiv ccdGyouseiEnd;
     @JsonProperty("ccdChikuEnd")
     private Chiku2InputDiv ccdChikuEnd;
     @JsonProperty("ccdGyouseiStart")
     private GyoseikuInputDiv ccdGyouseiStart;
-    @JsonProperty("ccdJyuusyoEnd")
-    private ChoikiInputDiv ccdJyuusyoEnd;
-    @JsonProperty("ccdChikuStart")
-    private Chiku2InputDiv ccdChikuStart;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -108,12 +114,84 @@ public class JokenPanelDiv extends Panel {
     }
 
     /*
+     * getlblFromTo1
+     * @return lblFromTo1
+     */
+    @JsonProperty("lblFromTo1")
+    public Label getLblFromTo1() {
+        return lblFromTo1;
+    }
+
+    /*
+     * setlblFromTo1
+     * @param lblFromTo1 lblFromTo1
+     */
+    @JsonProperty("lblFromTo1")
+    public void setLblFromTo1(Label lblFromTo1) {
+        this.lblFromTo1 = lblFromTo1;
+    }
+
+    /*
+     * getlblFromTo2
+     * @return lblFromTo2
+     */
+    @JsonProperty("lblFromTo2")
+    public Label getLblFromTo2() {
+        return lblFromTo2;
+    }
+
+    /*
+     * setlblFromTo2
+     * @param lblFromTo2 lblFromTo2
+     */
+    @JsonProperty("lblFromTo2")
+    public void setLblFromTo2(Label lblFromTo2) {
+        this.lblFromTo2 = lblFromTo2;
+    }
+
+    /*
+     * getlblFromTo3
+     * @return lblFromTo3
+     */
+    @JsonProperty("lblFromTo3")
+    public Label getLblFromTo3() {
+        return lblFromTo3;
+    }
+
+    /*
+     * setlblFromTo3
+     * @param lblFromTo3 lblFromTo3
+     */
+    @JsonProperty("lblFromTo3")
+    public void setLblFromTo3(Label lblFromTo3) {
+        this.lblFromTo3 = lblFromTo3;
+    }
+
+    /*
+     * getccdChikuStart
+     * @return ccdChikuStart
+     */
+    @JsonProperty("ccdChikuStart")
+    public IChiku2InputDiv getCcdChikuStart() {
+        return ccdChikuStart;
+    }
+
+    /*
      * getccdJyuusyoStart
      * @return ccdJyuusyoStart
      */
     @JsonProperty("ccdJyuusyoStart")
     public IChoikiInputDiv getCcdJyuusyoStart() {
         return ccdJyuusyoStart;
+    }
+
+    /*
+     * getccdJyuusyoEnd
+     * @return ccdJyuusyoEnd
+     */
+    @JsonProperty("ccdJyuusyoEnd")
+    public IChoikiInputDiv getCcdJyuusyoEnd() {
+        return ccdJyuusyoEnd;
     }
 
     /*
@@ -141,24 +219,6 @@ public class JokenPanelDiv extends Panel {
     @JsonProperty("ccdGyouseiStart")
     public IGyoseikuInputDiv getCcdGyouseiStart() {
         return ccdGyouseiStart;
-    }
-
-    /*
-     * getccdJyuusyoEnd
-     * @return ccdJyuusyoEnd
-     */
-    @JsonProperty("ccdJyuusyoEnd")
-    public IChoikiInputDiv getCcdJyuusyoEnd() {
-        return ccdJyuusyoEnd;
-    }
-
-    /*
-     * getccdChikuStart
-     * @return ccdChikuStart
-     */
-    @JsonProperty("ccdChikuStart")
-    public IChiku2InputDiv getCcdChikuStart() {
-        return ccdChikuStart;
     }
 
     /*

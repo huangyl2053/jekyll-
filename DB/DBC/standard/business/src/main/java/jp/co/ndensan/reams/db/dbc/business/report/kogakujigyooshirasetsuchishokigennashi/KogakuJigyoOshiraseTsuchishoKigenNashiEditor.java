@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.kogakujigyooshirasetsuchishok
 
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakujigyooshirasetsuchishoteshutsukigennashi.KogakuJigyoOshiraseTsuchishoKigenNashiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakujigyooshirasetsuchishoteshutsukigennashi.KogakuJigyoOshiraseTsuchishoKigenNashiSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -45,28 +46,32 @@ public class KogakuJigyoOshiraseTsuchishoKigenNashiEditor implements IKogakuJigy
         source.tsuchibun1 = entity.get通知文1();
         source.tsuchibun2 = entity.get通知文2();
         source.bunshoNo = entity.get文書番号文字列();
-
-        if (entity.get申請情報帳票発行一時() != null) {
+        source.remban = entity.get連番();
+        if (!entity.is空白() && entity.get申請情報帳票発行一時() != null) {
             source.hihokenshaNameKana = entity.get申請情報帳票発行一時().getShimeikanaChohyo().value();
             source.hihokenshaName = entity.get申請情報帳票発行一時().getMeishoChohyo().value();
-            source.seibetsu = entity.get申請情報帳票発行一時().getSeibetsuCodeChohyo();
+            if (entity.get申請情報帳票発行一時().getSeibetsuCodeChohyo() != null) {
+                source.seibetsu = Seibetsu.toValue(entity.get申請情報帳票発行一時().getSeibetsuCodeChohyo()).get名称();
+            }
             source.birthYMD = entity.get申請情報帳票発行一時().getSeinengappiYMDChohyo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.hokensha_no = entity.get申請情報帳票発行一時().getShoKisaiHokenshaNoChohyo().value();
             source.hihokenshaNo = entity.get申請情報帳票発行一時().getHihokenshaNoChohyo().value();
             source.taishoYM = entity.get申請情報帳票発行一時().getServiceTeikyoYMChohyo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            source.zikoFutanGaku = DecimalFormatter.toコンマ区切りRString(entity.get申請情報帳票発行一時().getRiyoshaFutanGakuGokeiChohyo(), 0);
-
+            if (entity.get申請情報帳票発行一時().getRiyoshaFutanGakuGokeiChohyo() != null) {
+                source.zikoFutanGaku = DecimalFormatter.toコンマ区切りRString(entity.get申請情報帳票発行一時().getRiyoshaFutanGakuGokeiChohyo(), 0);
+            }
             if (entity.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo().compareTo(Decimal.ZERO) < ゼロ) {
                 source.ketteiGaku = 調整金額;
             } else {
                 source.ketteiGaku = 支給金額;
             }
-
-            source.shikyuGaku = DecimalFormatter.toコンマ区切りRString(entity.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo(), 0);
-
+            if (entity.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo() != null) {
+                source.shikyuGaku = DecimalFormatter.toコンマ区切りRString(entity.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo(), 0);
+            }
         }
+
         if (entity.get認証者() != null) {
             source.denshiKoin = entity.get認証者().denshiKoin;
             source.hakkoYMD = entity.get認証者().hakkoYMD;

@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -31,5 +33,6 @@ public class FutanWariaiShoDivParameter {
     private RString 負担割合下段;
     private FlexibleDate 適用期間開始日下段;
     private FlexibleDate 適用期間終了日下段;
+    private List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細;
 
 }

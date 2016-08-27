@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0110001;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchokarisanteifuka.FukaParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchokarisanteifuka.TokuchoKariSanteiEntity;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
@@ -62,6 +63,7 @@ public final class TokutyoKariSanteiFukaHandler {
     private static final RString 実行する1 = new RString("btnTsuchishoSakusei");
     private static final RString 年額基準年度 = new RString("年額基準年度");
     private static final RString 特徴開始計算方法6月 = new RString("6月特徴開始計算方法");
+    private static final RString 特別徴収開始通知書仮算定 = new RString("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private static final RString 当年度 = new RString("当年度");
     private static final RString 翌年度 = new RString("翌年度");
     private static final RString 年度 = new RString("年度");
@@ -240,22 +242,36 @@ public final class TokutyoKariSanteiFukaHandler {
         List<dgOutputChohyoIchiran_Row> 出力帳票一覧List = div.getTokutyoKariSanteiFukaChohyoHakko()
                 .getCcdChohyoIchiran().get出力帳票一覧();
         fukaParameter.set出力帳票一覧List(listChange(出力帳票一覧List));
+        fukaParameter.set調定年度(div.getShoriJokyo().getTokutyoKariSanteiShoriNaiyo().getTxtChoteiNendo().getDomain());
+        fukaParameter.set賦課年度(div.getShoriJokyo().getTokutyoKariSanteiShoriNaiyo().getTxtFukaNendo().getDomain());
+        fukaParameter.set出力対象(div.getTokutyoKariSanteiFukaChohyoHakko().
+                getTokutyoKariTsuchiKobetsuJoho().getRadTokuKaishiTsuchiTaisho2().getSelectedValue());
+        if (div.getTokutyoKariSanteiFukaChohyoHakko().
+                getTokutyoKariTsuchiKobetsuJoho().getTxtTokuKaishiTsuchiHakkoYMD2().getValue() != null) {
+            fukaParameter.set発行日(new FlexibleDate(div.getTokutyoKariSanteiFukaChohyoHakko().
+                    getTokutyoKariTsuchiKobetsuJoho().getTxtTokuKaishiTsuchiHakkoYMD2().getValue().toDateString()));
+        }
         TokuchoKaishiTsuchishoBatchParameter param = tokuchokarisanteifuka
                 .createTokuchoKariSanteiParameter(fukaParameter);
         List<ShuturyokuTyoutuke> 出力帳票一覧 = new ArrayList();
         for (KarisanteiBatchEntity result : param.get出力帳票一覧()) {
-            if (result.get出力順ID() == null) {
+            if (result.get帳票ID() == null || result.get帳票分類ID() == null) {
                 continue;
             }
             ShuturyokuTyoutuke shuturyokutyoutuke = new ShuturyokuTyoutuke();
-            shuturyokutyoutuke.set出力順ID(Long.parseLong(result.get出力順ID().toString()));
+            shuturyokutyoutuke.set出力順ID(RString.isNullOrEmpty(result.get出力順ID()) ? null : Long.parseLong(result.get出力順ID().toString()));
             shuturyokutyoutuke.set帳票ID(result.get帳票ID());
             shuturyokutyoutuke.set帳票分類ID(result.get帳票分類ID());
             出力帳票一覧.add(shuturyokutyoutuke);
         }
         batchParam.set出力帳票一覧(出力帳票一覧);
         batchParam.setParameter(param);
-        batchParam.setFlag(param.is一括発行起動フラグ());
+        Map<RString, RString> 帳票IdAnd出力順Id = div.getTokutyoKariSanteiFukaChohyoHakko().getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
+        if (帳票IdAnd出力順Id.containsKey(特別徴収開始通知書仮算定)) {
+            batchParam.setFlag(param.is一括発行起動フラグ());
+        } else {
+            batchParam.setFlag(false);
+        }
         return batchParam;
     }
 

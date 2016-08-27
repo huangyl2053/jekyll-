@@ -34,8 +34,8 @@ public class KeikakuRirekiIchiran {
     private final MapperProvider mapperProvider;
     private final DbT7060KaigoJigyoshaDac 介護事業者Dac;
     private final DbT7063KaigoJigyoshaShiteiServiceDac 介護事業者指定サービスDac;
-    private final RString DATE_A = new RString("A");
-    private final RString DATE_B = new RString("B");
+    private final RString 定数_A = new RString("A");
+    private final RString 定数_B = new RString("B");
     private final AtenaMeisho 定数_自己作成 = new AtenaMeisho("自己作成");
     private final RString 準拠する = new RString("1");
     private final RString 準拠しない = new RString("0");
@@ -83,10 +83,10 @@ public class KeikakuRirekiIchiran {
         }
         for (KeikakuRirekiIchiranEnitity keienitity : entityList) {
             KeikakuRireki 計画履歴一覧情報 = new KeikakuRireki();
-            if (DATE_A.equals(keienitity.getKyotakuKeikakuShurui())) {
+            if (定数_A.equals(keienitity.getKyotakuKeikakuShurui())) {
                 計画履歴一覧情報.set計画事業者名称(get事業者名称(keienitity.getTekiyoKaishiYMD(), keienitity.getKeikakuJigyoshaNo()));
                 計画履歴一覧情報.set委託先事業者名称(get事業者名称(keienitity.getTekiyoKaishiYMD(), keienitity.getItakusakiJigyoshaNo()));
-            } else if (DATE_B.equals(keienitity.getKyotakuKeikakuShurui())) {
+            } else if (定数_B.equals(keienitity.getKyotakuKeikakuShurui())) {
                 計画履歴一覧情報.set計画事業者名称(定数_自己作成);
             }
             if (データあり.equals(keienitity.getZanteiKubun())) {

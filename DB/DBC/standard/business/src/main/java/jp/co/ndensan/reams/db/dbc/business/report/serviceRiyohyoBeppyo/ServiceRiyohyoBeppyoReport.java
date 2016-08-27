@@ -71,7 +71,8 @@ public class ServiceRiyohyoBeppyoReport extends Report<ServiceRiyohyoBeppyoSourc
         for (Map.Entry<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> entry : 帳票情報マップ.entrySet()) {
             loopSize++;
             is最後事業者 = 帳票情報マップ.size() == loopSize;
-            総ページ数 = doPrint(reportSourceWriter, entry.getValue(), 総ページ数, is最後事業者);
+            総ページ数 = doPrint(reportSourceWriter, get提供票別表リスト変換後(entry.getValue()),
+                    総ページ数, is最後事業者);
         }
     }
 
@@ -137,5 +138,16 @@ public class ServiceRiyohyoBeppyoReport extends Report<ServiceRiyohyoBeppyoSourc
             種類超過単位数合計 = 種類超過単位数合計.add(serviceTypeTotal.get限度超過単位数());
         }
         return 種類超過単位数合計;
+    }
+
+    private List<KyufuJikoSakuseiEntityResult> get提供票別表リスト変換後(List<KyufuJikoSakuseiEntityResult> 提供票別表リスト) {
+        List<KyufuJikoSakuseiEntityResult> resultList = new ArrayList<>();
+        if (提供票別表リスト == null || 提供票別表リスト.isEmpty()) {
+            return resultList;
+        }
+        KyufuJikoSakuseiEntityResult 合計Entity = 提供票別表リスト.get(0);
+        提供票別表リスト.remove(0);
+        提供票別表リスト.add(合計Entity);
+        return 提供票別表リスト;
     }
 }

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.jukyushaidorenrakuhyo;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jukyushaidorenrakuhyo.JukyushaIdoRenrakuhyoSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -23,15 +23,16 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
 
     private final JukyushaIdoRenrakuhyoTorokuEntity entity;
     private final RString 市町村名称;
-    private static final RString 旧短期入所 = new RString("旧短期入所");
+    private static final RString 旧短期入所 = new RString("(旧短期入所)");
     private static final RString 支給限度基準額 = new RString("支給限度基準額");
-    private static final RString 旧訪問通所 = new RString("旧訪問通所");
+    private static final RString 旧訪問通所 = new RString("(旧訪問通所)");
     private static final RString 区分 = new RString("区分");
     private static final RString BLANK = new RString(" ");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
     private static final RString CIRCLE = new RString("○");
+    private static final RString DOT = new RString(".");
 
     /**
      * コンストラクタです
@@ -57,15 +58,17 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
     public JukyushaIdoRenrakuhyoSource edit(JukyushaIdoRenrakuhyoSource source) {
         if (entity != null) {
             source.sakuseiGG = commonEra(entity.get作成年月日());
-            source.sakuseiYY = entity.get作成年月日().wareki()
-                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.NONE).fillType(FillType.ZERO).getYear();
-            source.sakuseiMM = entity.get作成年月日().wareki()
-                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.NONE).fillType(FillType.ZERO).getMonth();
-            source.sakuseiDD = entity.get作成年月日().wareki()
-                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.NONE).fillType(FillType.ZERO).getDay();
+            if (entity.get作成年月日() != null) {
+                source.sakuseiYY = entity.get作成年月日().wareki()
+                        .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.NONE).fillType(FillType.ZERO).getYear();
+                source.sakuseiMM = entity.get作成年月日().wareki()
+                        .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.NONE).fillType(FillType.ZERO).getMonth();
+                source.sakuseiDD = entity.get作成年月日().wareki()
+                        .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.NONE).fillType(FillType.ZERO).getDay();
+            }
             source.hokenshaName = 市町村名称;
             source.shoHokenshaNo = entity.get証記載保険者番号();
             source.hihokenshaNo = entity.get被保険者番号();
@@ -200,15 +203,22 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
     }
 
     private RString commonEra(FlexibleDate 年月日) {
-        return 年月日.wareki()
-                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.PERIOD).fillType(FillType.ZERO).getEra();
+        if (年月日 != null) {
+            return 年月日.wareki()
+                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.PERIOD).fillType(FillType.ZERO).getEra();
+        }
+        return RString.EMPTY;
     }
 
     private RString commonYMD(FlexibleDate 年月日) {
-        return 年月日.wareki()
-                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.NONE).fillType(FillType.ZERO).toDateString();
+        if (年月日 != null) {
+            return 年月日.wareki()
+                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.PERIOD).fillType(FillType.ZERO)
+                    .toDateString().substring(2).replace(DOT, RString.EMPTY);
+        }
+        return RString.EMPTY;
     }
 
     private RString 性別男の場合() {

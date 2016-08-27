@@ -16,7 +16,7 @@
            <result property="dbT5101_ninteiShinseiShinseijiKubunCode"  column="dbT5101_ninteiShinseiShinseijiKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
            <result property="dbT5101_ninteiShinseiYMD"  column="dbT5101_ninteiShinseiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
            <result property="dbT7051_shichosonMeisho"  column="dbT7051_shichosonMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-           <result property="dbT5121_zenkaiShinseishoKanriNo"  column="dbT5121_zenkaiShinseishoKanriNo" />
+           <result property="dbT5121_zenkaiShinseishoKanriNo"  column="dbT5121_zenkaiShinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
            <result property="dbT5910_jigyoshaMeisho"  column="dbT5910_jigyoshaMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
            <result property="dbT5913_chosainShimei"  column="dbT5913_chosainShimei"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
            <result property="dbT5910_Zenkai_jigyoshaMeisho"  column="dbT5910_Zenkai_jigyoshaMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoHokensha;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7050KaigoHokenshaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7050KaigoHokenshaDac;
@@ -18,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護保険者を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 chengsanyuan
  */
 public class KaigoHokenshaManager {
 
@@ -37,6 +40,15 @@ public class KaigoHokenshaManager {
      */
     KaigoHokenshaManager(DbT7050KaigoHokenshaDac dac) {
         this.dac = dac;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link KaigoHokenshaManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link KaigoHokenshaManager}のインスタンス
+     */
+    public static KaigoHokenshaManager createInstance() {
+        return InstanceProvider.create(KaigoHokenshaManager.class);
     }
 
     /**
@@ -74,6 +86,26 @@ public class KaigoHokenshaManager {
         }
 
         return businessList;
+    }
+
+    /**
+     * 広域保険者番号に合致する介護保険者を返します。
+     *
+     * @param 広域保険者番号 広域保険者番号
+     * @return 介護保険者
+     */
+    @Transaction
+    public KaigoHokensha get介護保険者By広域保険者番号(
+            ShoKisaiHokenshaNo 広域保険者番号) {
+        requireNonNull(広域保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("広域保険者番号"));
+
+        DbT7050KaigoHokenshaEntity entity = dac.selectByHokenshaNo(
+                広域保険者番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new KaigoHokensha(entity);
     }
 
     /**

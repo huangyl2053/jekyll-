@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufukettei.KogakuKyufuKettei
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufukettei.KogakuKyufuKetteiChohyoDataEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukyufukettei.KogakuKyufuKetteiJohoManager;
 import jp.co.ndensan.reams.db.dbc.service.report.kogakukyufukettei.KogakuShikyuFushikyuKetteishaIchiranPrintService;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.service.core.chohyojushoeditor.ChohyoJushoEditor;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -30,16 +31,15 @@ import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -74,7 +74,6 @@ public class KogakuKyufuKetteiDoIchiranhyoSakuseiProcess extends SimpleBatchProc
     private static final RString 支払方法区分_窓口 = new RString("窓口");
     private static final RString 支払方法区分_口座 = new RString("口座");
 
-    private static final CodeShubetsu 介護資格喪失事由_被保険者 = new CodeShubetsu("0010");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
     private static final RString キー_出力順 = new RString("出力順");
     private static final RString デフォルト出力順 = new RString(" ORDER BY SHINSAKETTEITEMP.\"shokisaiHokenshaNo\" ASC ");
@@ -89,7 +88,7 @@ public class KogakuKyufuKetteiDoIchiranhyoSakuseiProcess extends SimpleBatchProc
     private FileSpoolManager manager;
     private RString eucFilePath;
     @BatchWriter
-    private EucCsvWriter eucCsvWriter;
+    private CsvWriter eucCsvWriter;
 
     @Override
     protected void process() {
@@ -129,7 +128,7 @@ public class KogakuKyufuKetteiDoIchiranhyoSakuseiProcess extends SimpleBatchProc
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID)
+        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .setDelimiter(コンマ)
                 .setEnclosure(ダブル引用符)
                 .setEncode(Encode.SJIS)
@@ -209,7 +208,8 @@ public class KogakuKyufuKetteiDoIchiranhyoSakuseiProcess extends SimpleBatchProc
         csvEntity.set利用者負担額(doカンマ編集(審査決定.get利用者負担額()));
         csvEntity.set決定支給額(doカンマ編集(審査決定.get高額支給額()));
         if (null != 被保険者.get資格喪失事由コード()) {
-            csvEntity.set資格喪失事由(CodeMaster.getCodeMeisho(介護資格喪失事由_被保険者,
+
+            csvEntity.set資格喪失事由(CodeMaster.getCodeMeisho(DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(),
                     new Code(被保険者.get資格喪失事由コード())));
         }
         if (null != 被保険者.get資格喪失日()) {

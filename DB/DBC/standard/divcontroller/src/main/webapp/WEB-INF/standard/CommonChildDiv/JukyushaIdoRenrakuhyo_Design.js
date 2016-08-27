@@ -4,8 +4,20 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
-            Events.onBlur_txtHokenshaNo = function () {
-                return "onBlur_txtHokenshaNo";
+            Events.onBlur_txtIdoYMD = function () {
+                return "onBlur_txtIdoYMD";
+            };
+
+            Events.onClick_radKyotakuServiceSakuseiKubun = function () {
+                return "onClick_radKyotakuServiceSakuseiKubun";
+            };
+
+            Events.onBlur_txtKyotakuKaigoShienJigyoshoNo = function () {
+                return "onBlur_txtKyotakuKaigoShienJigyoshoNo";
+            };
+
+            Events.onBlur_txtShisetsuShozaiHokenjaNo = function () {
+                return "onBlur_txtShisetsuShozaiHokenjaNo";
             };
 
             Events.onOkClose_btnSearch = function () {
@@ -14,6 +26,10 @@ var DBC;
 
             Events.onBeforeOpenDialog_btnSearch = function () {
                 return "onBeforeOpenDialog_btnSearch";
+            };
+
+            Events.onClick_radNijiyoboJigyoKubun = function () {
+                return "onClick_radNijiyoboJigyoKubun";
             };
             return Events;
         })();
@@ -124,7 +140,7 @@ var DBC;
             };
 
             Controls.prototype.btnYokaigoninteiRireki = function () {
-                return new UZA.Button(this.convFiledName("btnYokaigoninteiRireki"));
+                return new UZA.ButtonDialog(this.convFiledName("btnYokaigoninteiRireki"));
             };
 
             Controls.prototype.ddlYokaigoJotaiKubun = function () {
@@ -180,7 +196,7 @@ var DBC;
             };
 
             Controls.prototype.btnKyotakuServiceRireki = function () {
-                return new UZA.Button(this.convFiledName("btnKyotakuServiceRireki"));
+                return new UZA.ButtonDialog(this.convFiledName("btnKyotakuServiceRireki"));
             };
 
             Controls.prototype.txtKyotakuKaigoShienJigyoshoNo = function () {
@@ -231,12 +247,12 @@ var DBC;
                 return new UZA.Panel(this.convFiledName("GemmenGengakuPanel"));
             };
 
-            Controls.prototype.radGemmenShinseichuKubun = function () {
-                return new UZA.RadioButton(this.convFiledName("radGemmenShinseichuKubun"));
+            Controls.prototype.btnGemmenGengakuRireki = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnGemmenGengakuRireki"));
             };
 
-            Controls.prototype.btnGemmenGengakuRireki = function () {
-                return new UZA.Button(this.convFiledName("btnGemmenGengakuRireki"));
+            Controls.prototype.radGemmenShinseichuKubun = function () {
+                return new UZA.RadioButton(this.convFiledName("radGemmenShinseichuKubun"));
             };
 
             Controls.prototype.JukyushaIdoRenrakuhyoGemmenGengakuSub = function () {
@@ -387,12 +403,12 @@ var DBC;
                 return new UZA.Panel(this.convFiledName("KyufuSeigenPanel"));
             };
 
-            Controls.prototype.radKohiFutanJogenGengakuAriFlag = function () {
-                return new UZA.RadioButton(this.convFiledName("radKohiFutanJogenGengakuAriFlag"));
+            Controls.prototype.btnKyufuSeigenRireki = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnKyufuSeigenRireki"));
             };
 
-            Controls.prototype.btnKyufuSeigenRireki = function () {
-                return new UZA.Button(this.convFiledName("btnKyufuSeigenRireki"));
+            Controls.prototype.radKohiFutanJogenGengakuAriFlag = function () {
+                return new UZA.RadioButton(this.convFiledName("radKohiFutanJogenGengakuAriFlag"));
             };
 
             Controls.prototype.txtShokanbaraikaYMD = function () {

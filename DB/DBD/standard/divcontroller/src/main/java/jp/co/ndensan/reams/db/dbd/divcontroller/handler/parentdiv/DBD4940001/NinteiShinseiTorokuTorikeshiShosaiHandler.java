@@ -146,7 +146,7 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
         IKaigoNinteiShinseiKihonJohoInputDiv 介護認定申請基本情報入力Div = div.getCcdKaigoNinteiShinseiKihon();
         介護認定申請基本情報入力Div.initialize();
         介護認定申請基本情報入力Div.setShinseiShubetsu(JukyuShinseiJiyu.toValue(convertCodeToRString(認定情報.get受給申請事由())));
-        介護認定申請基本情報入力Div.setTxtShinseiJokyo(認定情報.get申請状況区分());
+        介護認定申請基本情報入力Div.setTxtShinseiJokyo(JukyuShinseiJiyu.toValue(認定情報.get申請状況区分()).get名称());
         介護認定申請基本情報入力Div.setKyuSochisha(認定情報.is旧措置者フラグ()
                 ? Arrays.asList(new RString("key0")) : new ArrayList<RString>());
         介護認定申請基本情報入力Div.setChkShikakuShutokuMae(認定情報.is資格取得前申請フラグ()
@@ -197,9 +197,9 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
                     association.get地方公共団体コード(),
                     new ShinseishoKanriNo(認定情報.get申請書管理番号認定()),
                     SubGyomuCode.DBD介護受給,
-                    認定情報.get主治医医療機関コード認定(),
+                    認定情報.get主治医医療機関コード認定().getColumnValue(),
                     認定情報.get医療機関名称認定(),
-                    認定情報.get主治医コード認定(),
+                    認定情報.get主治医コード認定().getColumnValue(),
                     認定情報.get主治医氏名認定());
             主治医Div.setShiteii(認定情報.is指定医フラグ認定());
         }

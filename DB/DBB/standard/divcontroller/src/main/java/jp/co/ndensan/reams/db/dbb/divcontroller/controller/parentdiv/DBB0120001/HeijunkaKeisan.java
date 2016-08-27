@@ -5,15 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.dbb0120001;
 
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012003.DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.DBB0120001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.HeijunkaKeisanDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0120001.HeijunkaKeisanHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0120001.HeijunkaKeisanValidationHandler;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.dgOutputChohyoIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.serialization.Base64Serializer;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 特徴平準化（特徴6月分）コントロールdivです。
@@ -23,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class HeijunkaKeisan {
 
     private final RString 特徴平準化_特徴6月分_メニュー = new RString("DBBMN35001");
+    private final RString 帳票分類ID_DBB100012 = new RString("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
 
     /**
      * コントロールdivが「生成」された際の処理です。(オンロード)<br/>
@@ -50,7 +56,7 @@ public class HeijunkaKeisan {
     }
 
     /**
-     * 「実行/予約する」ボタンの前処理です。
+     * 「実行」ボタンの前処理です。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ
@@ -72,20 +78,8 @@ public class HeijunkaKeisan {
      * @return レスポンスデータ
      */
     public ResponseData<TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter> onClick_btnHeijunkaJikko(HeijunkaKeisanDiv div) {
-        // TODO 「バッチ設計_DBBBT35001_特徴平準化（特徴6月分）.xlsx」が未実装
         TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter parameter = getHandler(div).setBatchParameter();
-        return ResponseData.of(parameter).respond();
-    }
-
-    /**
-     * 特徴平準化（特徴6月分）メニューからの「予約する」ボタンの処理です。
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     */
-    public ResponseData<TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter> onClick_btnHeijunkaYoyaku(HeijunkaKeisanDiv div) {
-        // TODO 「バッチ設計_DBBBT35001_特徴平準化（特徴6月分）.xlsx」が未実装
-        TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter parameter = getHandler(div).setBatchParameter();
+        createFlowParameter(div, parameter);
         return ResponseData.of(parameter).respond();
     }
 
@@ -95,22 +89,29 @@ public class HeijunkaKeisan {
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    public ResponseData<TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter> onClick_btnIkkatsuHakkoJikko(HeijunkaKeisanDiv div) {
-
-        TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter parameter = getHandler(div).setBatchParameter();
+    public ResponseData<DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter> onClick_btnIkkatsuHakkoJikko(HeijunkaKeisanDiv div) {
+        DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter parameter = getHandler(div).setIkatsuBatchParameter();
         return ResponseData.of(parameter).respond();
     }
 
-    /**
-     * 特徴平準化（特徴6月分）通知書一括発行メニューからの「予約する」ボタンの処理です。
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     */
-    public ResponseData<TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter> onClick_btnIkkatsuHakkoYoyaku(HeijunkaKeisanDiv div) {
-
-        TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter parameter = getHandler(div).setBatchParameter();
-        return ResponseData.of(parameter).respond();
+    private void createFlowParameter(HeijunkaKeisanDiv div, TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter parameter) {
+        FlowParameters fp = new FlowParameters();
+        boolean 通知書一括発行 = false;
+        for (dgOutputChohyoIchiran_Row row : div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧()) {
+            if (帳票分類ID_DBB100012.equals(row.getChohyoID())) {
+                通知書一括発行 = true;
+            }
+        }
+        fp.add(new RString("通知書一括発行"), 通知書一括発行);
+        fp.add(new RString("調定年度"), parameter.get調定年度());
+        fp.add(new RString("賦課年度"), parameter.get賦課年度());
+        fp.add(new RString("出力帳票一覧List"), Base64Serializer.serialize(parameter.get出力帳票entity()));
+        fp.add(new RString("発行日"), parameter.get発行日());
+        fp.add(new RString("出力対象"), parameter.get出力対象指示フラグ());
+        fp.add(new RString("一括発行フラグ"), parameter.is一括発行フラグ());
+        fp.add(new RString("帳票グループ"), parameter.get帳票グループ());
+        fp.add(new RString("文書番号"), parameter.get文書番号());
+        FlowParameterAccessor.merge(fp);
     }
 
     private HeijunkaKeisanValidationHandler getValidationHandler() {

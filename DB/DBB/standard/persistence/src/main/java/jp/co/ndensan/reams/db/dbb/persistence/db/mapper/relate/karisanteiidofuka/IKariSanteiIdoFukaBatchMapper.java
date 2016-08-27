@@ -220,4 +220,9 @@ public interface IKariSanteiIdoFukaBatchMapper {
      * @return List<TokutyouKariSannteiRelateEntity>
      */
     List<TokutyouKariSannteiRelateEntity> select8月特徴開始(KariSanteiIdoFukaMybatisParameter parameter);
+
+    /**
+     * 賦課の情報一時テーブルを削除します。
+     */
+    void delete賦課の情報一時テーブル();
 }

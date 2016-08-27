@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 /**
  * 高額サービス費給付お知らせ通知書作成のハンドラクラスです。
  *
- * @reamsid DBC-4770-010 zhengshenlei
+ * @reamsid_L DBC-4770-010 zhengshenlei
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KogakuShikyuShinseishoIkkatsuHakkoMapperParameter {
+public final class KogakuShikyuShinseishoIkkatsuHakkoMapperParameter {
 
     private final HihokenshaNo hihokenshaNo;
     private final HokenshaNo shoKisaiHokenshaNo;

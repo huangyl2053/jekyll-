@@ -42,6 +42,7 @@ public class ShinsakaiJIzenShinsakekkaToroku {
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString CSV_TAIPU = new RString(".csv");
     private boolean 終了フラグ = true;
+    private boolean ヌルフラグ = true;
     private static final RString 事前審査結果 = new RString("事前審査結果を上書きしても");
 
     /**
@@ -84,13 +85,23 @@ public class ShinsakaiJIzenShinsakekkaToroku {
         if (new RString(UrQuestionMessages.確認_汎用.getMessage().replace(事前審査結果.toString()).getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            fileName = getValidationHandler(requestDiv).getIsExistsFile(new RStringBuilder(Path.getTmpDirectoryPath()), fileName);
+            RStringBuilder emptyName = new RStringBuilder();
             for (RString name : fileName) {
                 List<ShinsakaikekkaIchiranInputCsvEntity> csvEntityList = モバイルデータ取込(name);
-                ValidationMessageControlPairs vallidations = getValidationHandler(requestDiv).
-                        ヌルチェック_btnGetResult(csvEntityList, name);
-                if (vallidations.iterator().hasNext()) {
-                    return ResponseData.of(requestDiv).addValidationMessages(vallidations).respond();
+                if (!csvEntityList.isEmpty()) {
+                    ヌルフラグ = false;
+                } else {
+                    emptyName.append(name);
                 }
+            }
+            if (ヌルフラグ) {
+                ValidationMessageControlPairs vallidations = getValidationHandler(requestDiv).
+                        ヌルチェック_btnGetResult(emptyName.toRString());
+                return ResponseData.of(requestDiv).addValidationMessages(vallidations).respond();
+            }
+            for (RString name : fileName) {
+                List<ShinsakaikekkaIchiranInputCsvEntity> csvEntityList = モバイルデータ取込(name);
                 if (!getHandler(requestDiv).onclick_btnGetResult(csvEntityList)) {
                     終了フラグ = false;
                 }

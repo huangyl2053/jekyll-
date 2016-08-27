@@ -5,11 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.processprm.sogojigyohisaishinsaketteihokenshain;
 
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.sogojigyohisaishinsaketteihokenshain.SogojigyohiSaishinsaDoIchiranhyoSakuseiMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 総合事業費再審査決定通知書情報取込（保険者分）の一覧表作成パラメータです。
@@ -21,9 +20,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcessParameter implements IBatchProcessParameter {
 
-    private SubGyomuCode サブ業務コード;
-    private ReportId 帳票ID;
     private long 出力順ID;
     private FlexibleYearMonth 処理年月;
-    private RDateTime システム日付;
+    private RString 出力順;
+
+    /**
+     * コンストラクス
+     *
+     * @return SogojigyohiSaishinsaDoIchiranhyoSakuseiMyBatisParameter
+     */
+    public SogojigyohiSaishinsaDoIchiranhyoSakuseiMyBatisParameter toパラメタ() {
+        return new SogojigyohiSaishinsaDoIchiranhyoSakuseiMyBatisParameter(出力順);
+    }
 }

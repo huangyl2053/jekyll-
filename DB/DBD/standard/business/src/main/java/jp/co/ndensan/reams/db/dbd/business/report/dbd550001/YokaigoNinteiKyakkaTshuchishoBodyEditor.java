@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd550001;
 
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.NinteikyakkaTsuchishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd550001.YokaigoNinteiKyakkaTshuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -22,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class YokaigoNinteiKyakkaTshuchishoBodyEditor implements IYokaigoNinteiKyakkaTshuchishoEditor {
 
-    private final NinteikyakkaTsuchishoEntity entity;
+    private final NinteikyakkaTsuchishoJoho entity;
     private final ChohyoSeigyoKyotsu 帳票制御共通;
     private final NinshoshaSource ninshoshaSource;
 
@@ -33,7 +32,7 @@ public class YokaigoNinteiKyakkaTshuchishoBodyEditor implements IYokaigoNinteiKy
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param ninshoshaSource NinshoshaSource
      */
-    public YokaigoNinteiKyakkaTshuchishoBodyEditor(NinteikyakkaTsuchishoEntity entity,
+    public YokaigoNinteiKyakkaTshuchishoBodyEditor(NinteikyakkaTsuchishoJoho entity,
             ChohyoSeigyoKyotsu 帳票制御共通,
             NinshoshaSource ninshoshaSource) {
         this.entity = entity;
