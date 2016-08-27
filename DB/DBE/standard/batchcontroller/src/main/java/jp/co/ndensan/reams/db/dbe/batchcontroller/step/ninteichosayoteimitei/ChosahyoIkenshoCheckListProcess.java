@@ -100,15 +100,21 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
             ChosahyoIkenshoCheckListReport report = new ChosahyoIkenshoCheckListReport(reportData);
             report.writeBy(reportSourceWriter);
         }
+        if (!RString.isNullOrEmpty(reportData.getHihokenshaNo())) {
+            ChosahyoIkenshoCheckListReport report = new ChosahyoIkenshoCheckListReport(reportData);
+            report.writeBy(reportSourceWriter);
+        }
         バッチ出力条件リストの出力();
     }
 
     @Override
     protected void usualProcess(ChosahyoIkenshoCheckListRelateEntity entity) {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
-        index_tmp++;
-        ChosahyoIkenshoCheckListData data = new ChosahyoIkenshoCheckListData(entity);
-        reportData = data.get帳票データ(reportData);
+        if (!hasBrek(getBefore(), entity)) {
+            AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
+            index_tmp++;
+            ChosahyoIkenshoCheckListData data = new ChosahyoIkenshoCheckListData(entity);
+            reportData = data.get帳票データ(reportData);
+        }
     }
 
     @Override
