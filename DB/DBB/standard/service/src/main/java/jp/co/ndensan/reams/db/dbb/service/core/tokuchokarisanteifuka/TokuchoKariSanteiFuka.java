@@ -97,11 +97,11 @@ public class TokuchoKariSanteiFuka {
         List<RString> 処理名リスト = new ArrayList<>();
         if (STR0.equals(遷移元区分)) {
             処理名リスト.add(ShoriName.年度切替.get名称());
-            entityList = 処理日付管理Dac.select処理状況(調定年度, 処理名リスト);
+            entityList = 処理日付管理Dac.select処理状況(調定年度, 処理名リスト, SubGyomuCode.DBB介護賦課);
         } else if (STR1.equals(遷移元区分)) {
             処理名リスト.add(ShoriName.特徴仮算定賦課.get名称());
             処理名リスト.add(ShoriName.特徴平準化計算_6月分.get名称());
-            entityList = 処理日付管理Dac.select処理状況(調定年度, 処理名リスト);
+            entityList = 処理日付管理Dac.select処理状況(調定年度, 処理名リスト, SubGyomuCode.DBB介護賦課);
         }
         List<ShoriDateKanri> kanriList = new ArrayList<>();
         for (DbT7022ShoriDateKanriEntity entity : entityList) {

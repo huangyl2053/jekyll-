@@ -644,7 +644,8 @@ public class ShotokuJohoChushutsuRenkeiBatch {
     }
 
     private void 異動_広域場合Handle(DbtKaigoShotokuTempEntity entity, RString 処理区分, FlexibleYear 処理年度, YMDHMS バッチ起動処理日時) {
-        DbT7022ShoriDateKanriEntity 異動_広域処理日付管理Entity = 処理日付管理dac.select異動広域最大年度内連番(処理区分, 処理年度);
+        DbT7022ShoriDateKanriEntity 異動_広域処理日付管理Entity
+                = 処理日付管理dac.select異動最大年度内連番(処理年度, new RString(String.format(FORMAT_補00.toString(), entity.get市町村識別ID())));
         if (異動_広域処理日付管理Entity != null) {
             Decimal 最大年度内連番 = new Decimal(異動_広域処理日付管理Entity.getNendoNaiRenban().toString()).add(Decimal.ONE);
             YMDHMS 対象開始日時 = 異動_広域処理日付管理Entity.getTaishoShuryoTimestamp();
@@ -663,7 +664,7 @@ public class ShotokuJohoChushutsuRenkeiBatch {
             RString 最大年度内連番 = FORMAT_最大年度内連番;
             FlexibleYear 前年度処理年度 = 処理年度.minusYear(1);
             DbT7022ShoriDateKanriEntity 前年度異動_広域処理日付管理Entity = 処理日付管理dac
-                    .select異動広域最大年度内連番(処理区分, 前年度処理年度);
+                    .select異動最大年度内連番(前年度処理年度, new RString(String.format(FORMAT_補00.toString(), entity.get市町村識別ID())));
             if (前年度異動_広域処理日付管理Entity != null) {
                 YMDHMS 対象開始日時 = 前年度異動_広域処理日付管理Entity.getTaishoShuryoTimestamp();
                 前年度異動_広域処理日付管理Entity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
@@ -682,7 +683,7 @@ public class ShotokuJohoChushutsuRenkeiBatch {
     }
 
     private void 異動_単一場合Handle(FlexibleYear 処理年度, YMDHMS バッチ起動処理日時) {
-        DbT7022ShoriDateKanriEntity 異動_単一処理日付管理Entity = 処理日付管理dac.select異動単一最大年度内連番(処理年度);
+        DbT7022ShoriDateKanriEntity 異動_単一処理日付管理Entity = 処理日付管理dac.select異動最大年度内連番(処理年度, 処理枝番);
         if (異動_単一処理日付管理Entity != null) {
             Decimal 最大年度内連番 = new Decimal(異動_単一処理日付管理Entity.getNendoNaiRenban().toString()).add(Decimal.ONE);
             YMDHMS 対象開始日時 = 異動_単一処理日付管理Entity.getTaishoShuryoTimestamp();
@@ -701,7 +702,7 @@ public class ShotokuJohoChushutsuRenkeiBatch {
         } else {
             RString 最大年度内連番 = FORMAT_最大年度内連番;
             FlexibleYear 前年度処理年度 = 処理年度.minusYear(1);
-            DbT7022ShoriDateKanriEntity 前年度異動_単一処理日付管理Entity = 処理日付管理dac.select異動単一最大年度内連番(前年度処理年度);
+            DbT7022ShoriDateKanriEntity 前年度異動_単一処理日付管理Entity = 処理日付管理dac.select異動最大年度内連番(前年度処理年度, 処理枝番);
             if (前年度異動_単一処理日付管理Entity != null) {
                 YMDHMS 対象開始日時 = 前年度異動_単一処理日付管理Entity.getTaishoShuryoTimestamp();
                 前年度異動_単一処理日付管理Entity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);

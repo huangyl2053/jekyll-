@@ -1413,7 +1413,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
      */
     public void insert処理日付管理(GennendoIdoFukaProcessParameter processParameter, YMDHMS システム日時, RString 処理枝番, RString 年度内連番) {
         RString 年度連番;
-        DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select異動賦課最大年度内連番(processParameter.get賦課年度());
+        DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select最大年度内連番(processParameter.get賦課年度());
         if (entity != null) {
             年度連番 = new RString(String.valueOf(Integer.parseInt(entity.getNendoNaiRenban().toString()) + 1)).padZeroToLeft(INT_4);
         } else {
