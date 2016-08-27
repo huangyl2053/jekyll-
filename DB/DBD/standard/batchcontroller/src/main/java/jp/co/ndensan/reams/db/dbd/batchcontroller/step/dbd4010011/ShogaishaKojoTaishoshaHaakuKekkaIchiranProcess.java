@@ -248,7 +248,8 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
 
     private void set更新申請データ(ShogaishaKojoTaishoshaHaakuKekkaIchiranEntity 控除対象者データ) {
         for (DbT4038ShogaishaKoujoEntity 障がい者控除 : 障がい者控除情報List) {
-            if (障がい者控除.getTaishoNendo().equals(taishoNendo) && 障がい者控除.getHihokenshaNo().equals(控除対象者データ.get被保険者番号())
+            FlexibleYear nendo = 障がい者控除.getTaishoNendo();
+            if (nendo != null && nendo.equals(taishoNendo) && 障がい者控除.getHihokenshaNo().equals(控除対象者データ.get被保険者番号())
                     && 障がい者控除.getShoKisaiHokenshaNo().equals(証記載保険者番号)) {
                 障がい者控除.setKetteiKubun(new RString("1"));
                 dbt4038tableWriter.update(障がい者控除);
@@ -374,7 +375,8 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess extends BatchProcess
 
     private boolean find障がい者控除(FlexibleYear taishoNendo, HihokenshaNo hihokenshaNo, ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         for (DbT4038ShogaishaKoujoEntity 障がい者控除 : 障がい者控除情報List) {
-            if (障がい者控除.getTaishoNendo().equals(taishoNendo) && 障がい者控除.getHihokenshaNo().equals(hihokenshaNo)
+            FlexibleYear nendo = 障がい者控除.getTaishoNendo();
+            if (nendo != null && nendo.equals(taishoNendo) && 障がい者控除.getHihokenshaNo().equals(hihokenshaNo)
                     && 障がい者控除.getShoKisaiHokenshaNo().equals(shoKisaiHokenshaNo)) {
                 return true;
             }
