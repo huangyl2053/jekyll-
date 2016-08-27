@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 public class KyufuJisekiSanshoKeyTempTableEntity extends DbTableEntityBase<KyufuJisekiSanshoKeyTempTableEntity> implements IDbAccessable {
 
     //TODO
-    //public static final RString TABLE_NAME = new RString ("KyufuJisekiSanshoKeyTempTable");
     //[給付実績参照キー作成]シートSQL検索結果
     //A2．全ての項目
 }

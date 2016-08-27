@@ -34,10 +34,10 @@ public class TokubetsuTiikiKasannKeigennJiqsekiKannriParameter extends BatchPara
     //改頁出力順ID
     //帳票ID
     /**
-     * TODO 帳票出力情報の取得_process処理のパラメターを取得します．
+     * 帳票出力情報の取得_process処理のパラメターを取得します．
      *
      * @param パラメター パラメターTODO仕様書必要パラメター
-     * @return　帳票出力情報の取得_process処理のパラメター
+     * @return 帳票出力情報の取得_process処理のパラメター
      */
     public ChohyoShutsuryokuJohoShutokuProcessParameter toChohyoShutsuryokuJohoShutokuProcessParameter(RString パラメター) {
 
