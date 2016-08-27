@@ -5,17 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 支払方法変更滞納者抽出結果情報クラスです.
+ * DBDMN32001_2_支払方法変更滞納者把握リスト作成_バッチプロセス3SQL検索結果クラスです．
  *
  * @reamsid_L DBD-3650-040 x_lilh
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShiharaiHohoHenkoHaakuResultEntity {
+public class ShiharaiHohoHenkoHaakuThreeEntity {
 
-    private HihokenshaNo 被保険者番号;
+    private RString 証記載保険者番号;
+    private RString 被保険者番号;
+    private RString 管理区分;
+    private RString 履歴番号;
 }
