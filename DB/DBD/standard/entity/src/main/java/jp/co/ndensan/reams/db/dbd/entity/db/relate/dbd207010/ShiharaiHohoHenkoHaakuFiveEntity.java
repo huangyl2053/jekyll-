@@ -34,6 +34,7 @@ public class ShiharaiHohoHenkoHaakuFiveEntity {
     private RString 支払方法変更情報_被保険者氏名;
     private YubinNo 支払方法変更情報_郵便番号;
     private RString 支払方法変更情報_住所;
+    private RString 支払方法変更情報_住所コード;
     private FlexibleDate 支払方法変更情報_資格取得日;
     private FlexibleDate 支払方法変更情報_資格喪失日;
     private RString 支払方法変更情報_喪失事由;
