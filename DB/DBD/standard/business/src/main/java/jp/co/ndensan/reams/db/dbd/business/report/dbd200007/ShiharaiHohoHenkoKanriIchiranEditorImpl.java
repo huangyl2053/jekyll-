@@ -606,10 +606,10 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         if (年度２の収納.get期別情報() != null) {
             for (ShunoKibetsuEntity 期別情報 : 年度２の収納.get期別情報()) {
                 if (期別情報.get保険料金() != null) {
-                    保険料額合計２ = 保険料額合計１.add(期別情報.get保険料金());
+                    保険料額合計２ = 保険料額合計２.add(期別情報.get保険料金());
                 }
                 if (期別情報.get滞納額() != null) {
-                    滞納額合計２ = 滞納額合計１.add(期別情報.get滞納額());
+                    滞納額合計２ = 滞納額合計２.add(期別情報.get滞納額());
                 }
             }
         }
@@ -1044,10 +1044,10 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         if (年度２の収納.get期別情報() != null) {
             for (ShunoKibetsuEntity 期別情報 : 年度２の収納.get期別情報()) {
                 if (期別情報.get保険料金() != null) {
-                    保険料額合計２ = 保険料額合計１.add(期別情報.get保険料金());
+                    保険料額合計２ = 保険料額合計２.add(期別情報.get保険料金());
                 }
                 if (期別情報.get滞納額() != null) {
-                    滞納額合計２ = 滞納額合計１.add(期別情報.get滞納額());
+                    滞納額合計２ = 滞納額合計２.add(期別情報.get滞納額());
                 }
             }
         }
