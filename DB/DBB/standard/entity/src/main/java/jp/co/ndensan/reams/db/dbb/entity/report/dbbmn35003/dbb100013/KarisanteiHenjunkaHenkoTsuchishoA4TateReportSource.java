@@ -45,7 +45,7 @@ public class KarisanteiHenjunkaHenkoTsuchishoA4TateReportSource implements IRepo
     @ReportExpandedInfo(id = "本人")
     @ReportItem(name = "hihokenshaNo", length = 10, order = 15)
     public RString hihokenshaNo;
-    @ReportPerson
+    @ReportPerson(id = "本人")
     @ReportItem(name = "shikibetsuCode", length = 15, order = 16)
     public RString shikibetsuCode;
     @ReportItem(name = "shutokuYMDMae", length = 10, order = 17)

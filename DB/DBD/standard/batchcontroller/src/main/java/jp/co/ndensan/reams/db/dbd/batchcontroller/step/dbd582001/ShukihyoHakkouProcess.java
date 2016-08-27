@@ -293,8 +293,9 @@ public class ShukihyoHakkouProcess extends BatchKeyBreakBase<YokaigoNinteiTsukib
 
             jisshiJokyohyoReportEntity = new YokaigoNinteiJisshiJokyohyoReportEntity();
             jisshiJokyohyoReportEntity.set集計項目(null);
-            帳票リスト作成(受給状況Entity.get受給状況リスト15().get(index), 受給状況Entity.get受給状況リスト16().get(index));
-
+            jisshiJokyohyoReportEntity.set市町村番号(jisshiJokyohyoEntity.get市町村番号());
+            jisshiJokyohyoReportEntity.set市町村名(jisshiJokyohyoEntity.get市町村名());
+            受給状況リストEntity.get受給状況リスト().add(jisshiJokyohyoReportEntity);
         }
     }
 
