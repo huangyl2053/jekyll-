@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.Chus
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt13011.GeneralPurposeListOutputProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputEucCsvEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputNotContainNoEucCsvEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
@@ -54,6 +53,7 @@ import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -181,7 +181,6 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
 
     private GeneralPurposeListOutputProcessParameter processParamter;
     private CsvWriter<GeneralPurposeListOutputEucCsvEntity> eucCsvWriter;
-    private CsvWriter<GeneralPurposeListOutputNotContainNoEucCsvEntity> eucNotContainNoCsvWriter;
 
 //    private static final RString MYBATIS_SELECT_ID = new RString(
 //            "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.generalpurposelistoutput."
@@ -242,12 +241,12 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
 
     @Override
     protected void afterExecute() {
-        eucCsvWriter.close();
-        if (!personalDataList.isEmpty()) {
-            AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-            manager.spool(eucFilePath, log);
-        }
         eucFileOutputJohoFactory();
+        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+
+        IBatchWriter batchWriter = (IBatchWriter) eucCsvWriter;
+        batchWriter.close();
+        manager.spool(eucFilePath, log);
     }
 
     private PersonalData toPersonalData(GeneralPurposeListOutputEntity entity) {
@@ -270,7 +269,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
                     .hasHeader(processParamter.is項目名付加())
                     .build();
         } else {
-            eucNotContainNoCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
+            eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                     .alwaysWriteHeader(GeneralPurposeListOutputEucCsvEntity.class)
                     .setEncode(Encode.UTF_8withBOM)
                     .setDelimiter(EUC_WRITER_DELIMITER)
