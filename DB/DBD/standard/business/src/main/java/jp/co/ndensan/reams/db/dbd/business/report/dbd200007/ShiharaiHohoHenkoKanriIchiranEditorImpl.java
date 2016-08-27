@@ -213,13 +213,9 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         if (支払方法変更リストEntity_上.get世帯番号() != null) {
             source.listUpper1_3 = 支払方法変更リストEntity_上.get世帯番号().value();
         }
-        if (支払方法変更リストEntity_上.get行政区ｺｰﾄﾞ() != null) {
-            source.listUpper1_4 = 支払方法変更リストEntity_上.get行政区ｺｰﾄﾞ().value();
-        }
+        source.listUpper1_4 = 支払方法変更リストEntity_上.get行政区ｺｰﾄﾞ();
         source.listUpper2_3 = 支払方法変更リストEntity_上.get行政区();
-        if (支払方法変更リストEntity_上.get住所コード() != null) {
-            source.listUpper2_4 = 支払方法変更リストEntity_上.get住所コード().value();
-        }
+        source.listUpper2_4 = 支払方法変更リストEntity_上.get住所コード();
         if (支払方法変更リストEntity_上.get郵便番号() != null) {
             source.listUpper2_5 = 支払方法変更リストEntity_上.get郵便番号().getEditedYubinNo();
         }
@@ -242,7 +238,7 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         if (支払方法変更リストEntity_上.get資格区分() != null) {
             source.listUpper1_8 = 支払方法変更リストEntity_上.get資格区分().get名称();
         }
-        if (1 == 支払方法変更リストEntity_上.get住特フラグ()) {
+        if (支払方法変更リストEntity_上.is住特フラグ()) {
             source.listUpper1_9 = ホシ;
         }
         source.listUpper1_10 = 支払方法変更リストEntity_上.get生保();
@@ -651,13 +647,9 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         if (支払方法変更リストEntity_下.get世帯番号() != null) {
             source.listLower1_3 = 支払方法変更リストEntity_下.get世帯番号().value();
         }
-        if (支払方法変更リストEntity_下.get行政区ｺｰﾄﾞ() != null) {
-            source.listLower1_4 = 支払方法変更リストEntity_下.get行政区ｺｰﾄﾞ().value();
-        }
+        source.listLower1_4 = 支払方法変更リストEntity_下.get行政区ｺｰﾄﾞ();
         source.listLower2_3 = 支払方法変更リストEntity_下.get行政区();
-        if (支払方法変更リストEntity_下.get住所コード() != null) {
-            source.listLower2_4 = 支払方法変更リストEntity_下.get住所コード().value();
-        }
+        source.listLower2_4 = 支払方法変更リストEntity_下.get住所コード();
         if (支払方法変更リストEntity_下.get郵便番号() != null) {
             source.listLower2_5 = 支払方法変更リストEntity_下.get郵便番号().getEditedYubinNo();
         }
@@ -680,7 +672,7 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         if (支払方法変更リストEntity_下.get資格区分() != null) {
             source.listLower1_8 = 支払方法変更リストEntity_下.get資格区分().get名称();
         }
-        if (1 == 支払方法変更リストEntity_下.get住特フラグ()) {
+        if (支払方法変更リストEntity_下.is住特フラグ()) {
             source.listUpper1_9 = ホシ;
         }
         source.listUpper1_10 = 支払方法変更リストEntity_下.get生保();
