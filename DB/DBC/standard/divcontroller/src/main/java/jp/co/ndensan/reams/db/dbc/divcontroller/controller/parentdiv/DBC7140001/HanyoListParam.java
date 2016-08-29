@@ -6,16 +6,14 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7140001;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710140.DBC710140_HanyoListKogakuGassanShinseishoJohoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7140001.HanyoListParamDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7140001.HanyoListParamHandler;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7140001.HanyoListParamValidationHandler;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 汎用リスト出力(高額合算申請書情報)のクラスです。
@@ -24,8 +22,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class HanyoListParam {
 
-    private static final ReportId 帳票ID = new ReportId("DBC701014_HanyoList_KogakuGassanShinseishoJoho");
-
     /**
      * 画面の初期化メソッドです。
      *
@@ -33,9 +29,8 @@ public class HanyoListParam {
      * @return 初期化画面
      */
     public ResponseData<HanyoListParamDiv> onLoad(HanyoListParamDiv div) {
-        RString 市町村判定 = getHandler(div).initialize();
-        ViewStateHolder.put(ViewStateKeys.市町村判定, 市町村判定);
-        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
+        getHandler(div).initialize();
+        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701014.getReportId());
         return createResponse(div);
     }
 
@@ -46,7 +41,7 @@ public class HanyoListParam {
      * @return ResponseData
      */
     public ResponseData<HanyoListParamDiv> onClick_Check(HanyoListParamDiv div) {
-        HanyoListParamHandler handler = getHandler(div);
+        HanyoListParamValidationHandler handler = new HanyoListParamValidationHandler(div);
         ValidationMessageControlPairs pairs = handler.getCheckMessage();
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -62,7 +57,8 @@ public class HanyoListParam {
      */
     public ResponseData<BatchParameterMap> onClick_btnSeikatsuKogakuParamSave(HanyoListParamDiv div) {
         ResponseData<BatchParameterMap> responseData = new ResponseData<>();
-        responseData.data = new BatchParameterMap(getHandler(div).onClick_btnKogakuParamSave());
+        DBC710140_HanyoListKogakuGassanShinseishoJohoParameter parameter = getHandler(div).onClick_btnKogakuParamSave();
+        responseData.data = new BatchParameterMap(parameter);
         return responseData;
     }
 
@@ -73,7 +69,6 @@ public class HanyoListParam {
      * @return ResponseData<HanyoListParamDiv>
      */
     public ResponseData<HanyoListParamDiv> onClick_tekiyoJyokenFukugen(HanyoListParamDiv div) {
-        getHandler(div).onClick_btnKogakuParamRestore();
         return ResponseData.of(div).respond();
     }
 
