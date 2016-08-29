@@ -5,15 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120900;
 
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohiseikyugakutsuchishokohi.SogojigyohiSeikyugakuTsuchishoKohiPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohiseikyugakutsuchishokohi.SogojigyohiSeikyugakuTsuchishoKohiReport;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.sogojigyohiseikyugakutsuchishokohiin.TsuchishoKohiDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.DbWT1511SeikyugakuTsuchishoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.sogojigyohiseikyugakutsuchishokohi.TsuchishofutanshaIchiranCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohiseikyugakutsuchishokohi.SogojigyohiSeikyugakuTsuchishoKohiSource;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -33,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -42,14 +45,14 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  *
  * @reamsid_L DBC-4700-030 qinzhen
  */
-public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchProcessBase<DbWT1511SeikyugakuTsuchishoTempEntity> {
+public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<DbWT1511SeikyugakuTsuchishoTempEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper"
             + ".relate.sogojigyohiseikyugakutsuchishokohikouhifutann.ITsuchishoKohiChoyoMapper.get帳票出力対象データ");
-    private TsuchishoKohiDoIchiranhyoSakuseiProcessParameter parameter;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200082");
     private FileSpoolManager manager;
     private RString eucFilePath;
+    private List<RString> pageBreakKeys;
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString 出力ファイル名
@@ -60,12 +63,25 @@ public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchProcessBase<Db
     private CsvWriter<TsuchishofutanshaIchiranCSVEntity> csvEntityWriter;
     private final RString 総合計 = new RString("＊＊　総合計　＊＊");
     private final RString コード_99 = new RString("99");
+    private YMDHMS システム日付;
     private int index = 0;
     private static final RString SAKUSEI = new RString("作成");
 
     @Override
+    protected void initialize() {
+        pageBreakKeys = new ArrayList<>();
+        pageBreakKeys.add(
+                new RString(SogojigyohiSeikyugakuTsuchishoKohiSource.ReportSourceFields.kohiFutanshaNo.name()));
+        pageBreakKeys.add(
+                new RString(SogojigyohiSeikyugakuTsuchishoKohiSource.ReportSourceFields.kanName.name()));
+        pageBreakKeys.add(
+                new RString(SogojigyohiSeikyugakuTsuchishoKohiSource.ReportSourceFields.kouName.name()));
+    }
+
+    @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200082.getReportId().value()).create();
+        PageBreaker<SogojigyohiSeikyugakuTsuchishoKohiSource> breaker = new SogojigyohiSeikyugakuTsuchishoKohiPageBreak(pageBreakKeys);
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200082.getReportId().value()).addBreak(breaker).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), 出力ファイル名);
@@ -73,7 +89,7 @@ public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchProcessBase<Db
                 .filePath(eucFilePath)
                 .setDelimiter(コンマ)
                 .setEnclosure(ダブル引用符)
-                .setEncode(Encode.UTF_8withBOM)
+                .setEncode(Encode.SJIS)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true)
                 .build();
@@ -81,6 +97,7 @@ public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchProcessBase<Db
 
     @Override
     protected void beforeExecute() {
+        システム日付 = YMDHMS.now();
     }
 
     @Override
@@ -89,10 +106,14 @@ public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchProcessBase<Db
     }
 
     @Override
-    protected void process(DbWT1511SeikyugakuTsuchishoTempEntity entity) {
-        SogojigyohiSeikyugakuTsuchishoKohiReport report = new SogojigyohiSeikyugakuTsuchishoKohiReport(entity, parameter.getシステム日付());
+    protected void keyBreakProcess(DbWT1511SeikyugakuTsuchishoTempEntity entity) {
+    }
+
+    @Override
+    protected void usualProcess(DbWT1511SeikyugakuTsuchishoTempEntity entity) {
+        SogojigyohiSeikyugakuTsuchishoKohiReport report = new SogojigyohiSeikyugakuTsuchishoKohiReport(entity, システム日付);
         report.writeBy(reportSourceWriter);
-        TsuchishofutanshaIchiranCSVEntity csvEntity = do帳票のCSVファイル作成(entity, parameter.getシステム日付());
+        TsuchishofutanshaIchiranCSVEntity csvEntity = do帳票のCSVファイル作成(entity, システム日付);
         csvEntityWriter.writeLine(csvEntity);
     }
 
@@ -183,4 +204,5 @@ public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchProcessBase<Db
         return 年月.wareki().eraType(EraType.KANJI_RYAKU)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
+
 }

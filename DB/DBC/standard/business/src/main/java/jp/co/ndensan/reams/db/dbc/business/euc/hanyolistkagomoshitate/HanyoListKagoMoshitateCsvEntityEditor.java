@@ -89,7 +89,9 @@ public class HanyoListKagoMoshitateCsvEntityEditor {
     public HanyoListKagoMoshitateCsvEntity edit() {
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
         HanyoListKagoMoshitateCsvEntity csvEntity = new HanyoListKagoMoshitateCsvEntity();
-        csvEntity.set連番(new RString(連番));
+        if (param.is連番付加()) {
+            csvEntity.set連番(new RString(連番));
+        }
         csvEntity.set識別コード(kojin.get識別コード().getColumnValue());
         csvEntity.set住民種別(kojin.get住民種別().toRString());
         csvEntity.set氏名(kojin.get名称().getName().getColumnValue());
@@ -102,8 +104,12 @@ public class HanyoListKagoMoshitateCsvEntityEditor {
         csvEntity.set世帯主名(kojin.get世帯主名().getColumnValue());
         csvEntity.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
         csvEntity.set郵便番号(kojin.get住所().get郵便番号().getYubinNo());
-        csvEntity.set住所番地方書(kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue())
-                .concat(RString.FULL_SPACE).concat(kojin.get住所().get方書().getColumnValue()));
+        if (kojin.get住所().get方書().getColumnValue() != null) {
+            csvEntity.set住所番地方書(kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue())
+                    .concat(RString.FULL_SPACE).concat(kojin.get住所().get方書().getColumnValue()));
+        } else {
+            csvEntity.set住所番地方書(kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue()));
+        }
         csvEntity.set住所(kojin.get住所().get住所());
         csvEntity.set番地(kojin.get住所().get番地().getBanchi().getColumnValue());
         csvEntity.set方書(kojin.get住所().get方書().getColumnValue());
@@ -125,8 +131,12 @@ public class HanyoListKagoMoshitateCsvEntityEditor {
         csvEntity.set消除届出日(format日付項目(kojin.get消除届出年月日()));
         csvEntity.set転出入理由(RString.EMPTY);
         csvEntity.set前住所郵便番号(kojin.get転入前().get郵便番号().getColumnValue());
-        csvEntity.set前住所番地方書(kojin.get転入前().get住所().concat(kojin.get転入前().get番地().getBanchi().getColumnValue()).
-                concat(RString.FULL_SPACE).concat(kojin.get転入前().get方書().getColumnValue()));
+        if (kojin.get転入前().get方書() != null) {
+            csvEntity.set前住所番地方書(kojin.get転入前().get住所().concat(kojin.get転入前().get番地().getBanchi().getColumnValue()).
+                    concat(RString.FULL_SPACE).concat(kojin.get転入前().get方書().getColumnValue()));
+        } else {
+            csvEntity.set前住所番地方書(kojin.get転入前().get住所().concat(kojin.get転入前().get番地().getBanchi().getColumnValue()));
+        }
         csvEntity.set前住所(kojin.get転入前().get住所());
         csvEntity.set前住所番地(kojin.get転入前().get番地().getBanchi().getColumnValue());
         csvEntity.set前住所方書(kojin.get転入前().get方書().getColumnValue());
@@ -178,7 +188,7 @@ public class HanyoListKagoMoshitateCsvEntityEditor {
         csvEntity.set申立事由コード(entity.get過誤申立().getMoshitateJiyuCode());
         csvEntity.set申立事由(get申立事由(entity.get過誤申立().getMoshitateJiyuCode()));
         csvEntity.set国保連送付年月(format日付項目(entity.get過誤申立().getKokuhorenSofuYM()));
-        if (RString.isNullOrEmpty(entity.get過誤申立().getMoshitateshoKubunCode())) {
+        if (!RString.isNullOrEmpty(entity.get過誤申立().getMoshitateshoKubunCode())) {
             csvEntity.set過誤申立給付区分(KagoMoshitateMoshitateshoKubun.toValue(entity.get過誤申立().getMoshitateshoKubunCode()).get名称());
         }
         csvEntity.set受給申請事由(get受給申請事由(entity.get受給者台帳().getJukyuShinseiJiyu().getColumnValue()));
