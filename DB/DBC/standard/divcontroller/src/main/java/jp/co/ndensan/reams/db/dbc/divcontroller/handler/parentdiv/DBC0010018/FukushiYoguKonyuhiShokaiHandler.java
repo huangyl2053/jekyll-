@@ -68,8 +68,12 @@ public class FukushiYoguKonyuhiShokaiHandler {
 
     private dgFukushiYoguKonyuhi_Row setRowData(KyufujissekiFukushiYoguHanbaihiBusiness 給付実績福祉用具販売費) {
         RString 福祉用具販売年月日 = RString.EMPTY;
-        if (給付実績福祉用具販売費.get給付実績福祉用具販売費基本情報().get福祉用具販売年月日() == null) {
+        RString 審査年月 = RString.EMPTY;
+        if (給付実績福祉用具販売費.get給付実績福祉用具販売費基本情報().get福祉用具販売年月日() != null) {
             福祉用具販売年月日 = 給付実績福祉用具販売費.get給付実績福祉用具販売費基本情報().get福祉用具販売年月日().wareki().toDateString();
+        }
+        if (給付実績福祉用具販売費.get給付実績福祉用具販売費基本情報().get審査年月() != null) {
+            審査年月 = 給付実績福祉用具販売費.get給付実績福祉用具販売費基本情報().get審査年月().toDateString();
         }
         dgFukushiYoguKonyuhi_Row row = new dgFukushiYoguKonyuhi_Row();
         row.setTxtService(給付実績福祉用具販売費.getサービス種類略称());
@@ -79,6 +83,7 @@ public class FukushiYoguKonyuhiShokaiHandler {
         row.setTxtSeizoJigyoshaName(給付実績福祉用具販売費.get給付実績福祉用具販売費基本情報().get福祉用具製造事業者名());
         row.setTxtHanbaiJigyoshaName(給付実績福祉用具販売費.get給付実績福祉用具販売費基本情報().get福祉用具販売事業者名());
         row.setTxtKonyuKingaku(kinngakuFormat(給付実績福祉用具販売費.get給付実績福祉用具販売費基本情報().get販売金額()));
+        row.setTxtShinsaYM(審査年月);
         row.setBtnTekiyo(給付実績福祉用具販売費.get給付実績福祉用具販売費基本情報().get摘要_品目コード());
         return row;
     }
