@@ -40,7 +40,7 @@ public class HanteiTaishoshaTempProcess extends BatchProcessBase<HanteiTaishosha
 
     @Override
     protected void createWriter() {
-        this.tempDbWriter = new BatchEntityCreatedTempTableWriter(new RString("NanteiTaishoshaTempTable"), HanteiTaishoshaTempEntity.class);
+        this.tempDbWriter = new BatchEntityCreatedTempTableWriter(new RString("HanteiTaishoshaTemp"), HanteiTaishoshaTempEntity.class);
     }
 
     @Override

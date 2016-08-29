@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.ShoriDateKanriP
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.SinseicyuDateDeleteProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.SogoJigyoTaishoshaTempProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.futanwariaiichiran.FutanWariaiIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.nenjiriyoshafutanwariaihantei.NenjiRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -121,12 +120,12 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<Nenji
      */
     @Step(負担割合判定一覧出力)
     protected IBatchFlowCommand futanwariaiHantei() {
-        FutanWariaiIchiranBatchParameter parameter = new FutanWariaiIchiranBatchParameter();
-        parameter.set対象年度(getParameter().get対象年度());
-        parameter.set基準日(getParameter().get基準日());
-        parameter.set処理区分(getParameter().get処理区分().getコード());
-        parameter.setテストモード(getParameter().isテストモード());
-        parameter.set処理日時(getParameter().get処理日時());
+        DBC180020_IdoRiyoshaFutanwariaiHanteiParameter parameter = new DBC180020_IdoRiyoshaFutanwariaiHanteiParameter();
+        parameter.setTaishoNendo(getParameter().get対象年度());
+        parameter.setKijunbi(getParameter().get基準日());
+        parameter.setShoriKubun(getParameter().get処理区分().getコード());
+        parameter.setTestMode(getParameter().isテストモード());
+        parameter.setShoriNichiji(getParameter().get処理日時());
         return otherBatchFlow(負担割合判定一覧BATCH_ID, SubGyomuCode.DBC介護給付,
                 parameter).define();
     }

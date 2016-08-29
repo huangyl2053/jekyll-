@@ -151,7 +151,7 @@
           今回利用者負担割合判定Temp."hihokenshaNo" = 前回利用者負担割合判定Temp."hihokenshaNo"
           AND 今回利用者負担割合判定Temp."nendo" = 前回利用者負担割合判定Temp."nendo"
           LEFT OUTER JOIN 
-            "NanteiTaishoshaTempTable" as 判定対象者Temp
+            "HanteiTaishoshaTemp" as 判定対象者Temp
           ON
               判定対象者Temp."taishoNendo" = 今回利用者負担割合判定Temp."nendo"
           AND 判定対象者Temp."hihokenshaNo" = 今回利用者負担割合判定Temp."hihokenshaNo"
