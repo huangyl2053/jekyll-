@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2640-011 qinzhen -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanjikofutangakushomeishoin.IKogakuGassanJikofutangakuShomeishoMapper">
+    <select  resultOrdered="true" id="select高額合算自己負担額一時TBL件数"  resultType="int" fetchSize="500">
+        SELECT
+            COUNT(*)
+        FROM
+            "DbWT37H1KogakuGassanaJikofutangaku"
+    </select>
+    <select  resultOrdered="true" id="select請求額通知書一時"  resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.DbWT37H1KogakuGassanaJikofutangakuTempEntity" fetchSize="500">
+        SELECT
+            *
+        FROM
+            "DbWT37H1KogakuGassanaJikofutangaku"
+    </select>
+    <select  resultOrdered="true" id="select請求額通知書一"  resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity" fetchSize="500">
+        SELECT
+            *
+        FROM
+            "DbWT37H2KogakuGassanaJikofutangakuMeisai"
+    </select>
+    <select  resultOrdered="true" id="select請求額通知書時"  resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0001HihokenshaEntity" fetchSize="500">
+        SELECT
+            *
+        FROM
+            "DbWT0001Hihokensha"
+    </select>
+
+</mapper>
