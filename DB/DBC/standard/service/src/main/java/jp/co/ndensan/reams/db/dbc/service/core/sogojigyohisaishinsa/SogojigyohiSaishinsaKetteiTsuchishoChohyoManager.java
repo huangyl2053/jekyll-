@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.sogojigyohisaishinsa;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohisaishinsaketteitsuchisho.SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.sogojigyohisaishinsa.ISogojigyohiSaishinsaKetteiTsuchishoChohyoMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
@@ -55,7 +55,7 @@ public class SogojigyohiSaishinsaKetteiTsuchishoChohyoManager {
      * @return List<ISogojigyohiSaishinsaKetteiTsuchishoChohyoMapper>
      */
     @Transaction
-    public List<SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiEntity> get帳票出力対象データ(Map<String, Object> parameter) {
+    public List<SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiEntity> get帳票出力対象データ(KokuhorenIchiranhyoMybatisParameter parameter) {
         ISogojigyohiSaishinsaKetteiTsuchishoChohyoMapper mapper = mapperProvider.create(ISogojigyohiSaishinsaKetteiTsuchishoChohyoMapper.class);
         List<SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiEntity> list = mapper.get帳票出力対象データ(parameter);
         if (null == list) {
