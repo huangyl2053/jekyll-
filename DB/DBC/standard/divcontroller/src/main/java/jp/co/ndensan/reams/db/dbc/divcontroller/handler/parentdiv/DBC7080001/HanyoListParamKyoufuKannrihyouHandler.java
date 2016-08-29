@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-3096-010 zhengshenlei
  */
-public class HanyoListParamHandler {
+public class HanyoListParamKyoufuKannrihyouHandler {
 
     private final HanyoListParamDiv div;
     private static final RString 帳票ID = new RString("DBC701008_HanyoList_KyufuKanriHyo");
@@ -38,7 +38,7 @@ public class HanyoListParamHandler {
      *
      * @param div NendoKirikaeDiv
      */
-    public HanyoListParamHandler(HanyoListParamDiv div) {
+    public HanyoListParamKyoufuKannrihyouHandler(HanyoListParamDiv div) {
         this.div = div;
     }
 

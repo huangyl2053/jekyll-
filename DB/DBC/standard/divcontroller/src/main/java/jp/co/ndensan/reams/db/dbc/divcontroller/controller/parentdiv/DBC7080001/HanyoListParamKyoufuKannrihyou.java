@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7080001
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc710080.DBC710080_HanyoListKyufuKanriHyoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7080001.HanyoListParamDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7080001.HanyoListParamHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7080001.HanyoListParamKyoufuKannrihyouHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
  *
  * @reamsid_L DBC-3096-010 zhengshenlei
  */
-public class HanyoListParam {
+public class HanyoListParamKyoufuKannrihyou {
 
     /**
      * 画面初期化です。
@@ -39,7 +39,7 @@ public class HanyoListParam {
         return ResponseData.of(parameter).respond();
     }
 
-    private HanyoListParamHandler getHandler(HanyoListParamDiv div) {
-        return new HanyoListParamHandler(div);
+    private HanyoListParamKyoufuKannrihyouHandler getHandler(HanyoListParamDiv div) {
+        return new HanyoListParamKyoufuKannrihyouHandler(div);
     }
 }
