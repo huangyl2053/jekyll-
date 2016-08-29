@@ -66,8 +66,8 @@ public class SogojigyohiShinsaKetteiSeikyumeisaihyoHeaderEditor implements ISogo
         RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 作成時 = 作成日時.getTime()
-                .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(SAKUSEI);
-        source.printTimeStamp = 作成日.concat(作成時);
+                .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+        source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.shinsaYM = this.パターン56(帳票出力対象データ.get審査決定請求合計().get審査年月());
         source.hokenshaNo = this.getColumnValue(帳票出力対象データ.get審査決定請求合計().get保険者番号());
         source.hokenshaName = 帳票出力対象データ.get審査決定請求合計().get保険者名();
