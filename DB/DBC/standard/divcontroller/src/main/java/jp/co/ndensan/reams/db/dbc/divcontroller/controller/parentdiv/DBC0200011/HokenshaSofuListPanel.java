@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 保険者情報送付データ作成
+ * 保険者情報送付データ作成のクラスです。
  *
  * @reamsid_L DBC-3300-010 wangxingpeng
  */
@@ -43,27 +43,15 @@ public class HokenshaSofuListPanel {
     }
 
     /**
+     * 「表示する」ボタンのメソッドます。
      *
      * @param div HokenshaSofuListPanelDiv
      * @return ResponseData HokenshaSofuListPanelDiv
      */
     public ResponseData<HokenshaSofuListPanelDiv> onClick_btnHyojisuru(HokenshaSofuListPanelDiv div) {
-        処理年月 = new FlexibleYearMonth(div.getTxtShoriNengetsu().getValue().getYearMonth().toDateString());
-        getHandler(div).initialize(処理年月);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 処理年月テキストボックス変更時にリストを更新します。
-     *
-     * @param div KokuhorenTorikomiListDiv
-     * @return ResponseData
-     */
-    public ResponseData<HokenshaSofuListPanelDiv> onChange_txtShoriYM(HokenshaSofuListPanelDiv div) {
         if (div.getTxtShoriNengetsu().getValue() == null) {
             ValidationMessageControlPairs valid = getValidationHandler(div).validateFor処理年月未入力チェック();
             if (valid.iterator().hasNext()) {
-                div.getBtnHyojisuru().setDisabled(true);
                 return ResponseData.of(div).addValidationMessages(valid).respond();
             }
         }
@@ -91,7 +79,7 @@ public class HokenshaSofuListPanel {
     }
 
     /**
-     * 「スケジュール設定」ボタンのメソッドます。
+     * スケジュール設定へのメソッドます。
      *
      * @param div KokuhorenTorikomiListDiv
      * @return ResponseData
@@ -104,8 +92,8 @@ public class HokenshaSofuListPanel {
     /**
      * 保険者情報送付データ作成のHandlerクラスを取得のンメソッドます。
      *
-     * @param div YokaigoninteiJigyotaishoRirekiListDiv
-     * @return YokaigoninteiJigyotaishoRirekiListHandler
+     * @param div HokenshaSofuListPanelHandler
+     * @return HokenshaSofuListPanelHandler
      */
     private HokenshaSofuListPanelHandler getHandler(HokenshaSofuListPanelDiv div) {
         return new HokenshaSofuListPanelHandler(div);
