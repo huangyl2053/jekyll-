@@ -57,8 +57,12 @@ public class JyukyushaDaichoIdoCheckListHandler {
                         new RDate(shoriDateKanri.get対象終了年月日().toString()));
                 div.getJhokenPancel().getTxtRangeZenkai().setToTimeValue(new RTime(shoriDateKanri.get対象終了日時().
                         getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
+            }
+            if (div.getJhokenPancel().getTxtRangeZenkai().getToDateValue() != null) {
                 div.getJhokenPancel().getTxtRangeKonkai().setFromDateValue(
                         div.getJhokenPancel().getTxtRangeZenkai().getToDateValue());
+            }
+            if (div.getJhokenPancel().getTxtRangeZenkai().getToTimeValue() != null) {
                 div.getJhokenPancel().getTxtRangeKonkai().setFromTimeValue(
                         div.getJhokenPancel().getTxtRangeZenkai().getToTimeValue().plusSeconds(1));
             }
