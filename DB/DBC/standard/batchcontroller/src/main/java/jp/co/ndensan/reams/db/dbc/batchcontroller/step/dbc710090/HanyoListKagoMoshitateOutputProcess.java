@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -145,9 +146,9 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
 
     @Override
     protected void afterExecute() {
+        AccessLogUUID accessLogUUID = AccessLogger.logReport(personalDataList);
         csvWriter.close();
-        spoolManager.spool(eucFilePath);
-        AccessLogger.logReport(personalDataList);
+        spoolManager.spool(csvFileName, accessLogUUID);
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
                 地方公共団体情報.getLasdecCode_().value(),
