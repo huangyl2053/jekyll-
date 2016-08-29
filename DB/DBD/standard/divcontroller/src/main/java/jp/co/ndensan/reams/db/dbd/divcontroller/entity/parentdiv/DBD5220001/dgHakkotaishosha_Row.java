@@ -3,13 +3,13 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5220001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Aug 01 14:26:32 CST 2016 
+ * Mon Aug 29 10:36:53 CST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
@@ -21,9 +21,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgHakkotaishosha_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
-    private Button riyuselect;
+    private ButtonDialog riyuselect;
     private RString hokenshano;
     private RString hokensha;
     private RString hihokenshano;
@@ -45,7 +45,7 @@ public class dgHakkotaishosha_Row extends DataRow {
 
     public dgHakkotaishosha_Row() {
         super();
-        this.riyuselect = new Button();
+        this.riyuselect = new ButtonDialog();
         this.hokenshano = RString.EMPTY;
         this.hokensha = RString.EMPTY;
         this.hihokenshano = RString.EMPTY;
@@ -85,7 +85,7 @@ public class dgHakkotaishosha_Row extends DataRow {
         this.setOriginalData("changeflag", changeflag);
     }
 
-    public dgHakkotaishosha_Row(Button riyuselect, RString hokenshano, RString hokensha, RString hihokenshano, RString hihokenshaname, TextBoxDate ninteishinseiymd, RString shinseikubun, TextBoxDate enkiketteidate, RString enkiriyu, TextBoxDate tsuchishohakkoymd, RString enkikaisu, TextBoxDate mikomishorikikanfrom, TextBoxDate mikomishorikikanto, TextBoxDate chosajissiymd, TextBoxDate ikenshojyuryoymd, TextBoxDate ichijihanteiymd, TextBoxDate shinsakaiyoteiymd, RString shinseishokanrino, RString changeflag) {
+    public dgHakkotaishosha_Row(ButtonDialog riyuselect, RString hokenshano, RString hokensha, RString hihokenshano, RString hihokenshaname, TextBoxDate ninteishinseiymd, RString shinseikubun, TextBoxDate enkiketteidate, RString enkiriyu, TextBoxDate tsuchishohakkoymd, RString enkikaisu, TextBoxDate mikomishorikikanfrom, TextBoxDate mikomishorikikanto, TextBoxDate chosajissiymd, TextBoxDate ikenshojyuryoymd, TextBoxDate ichijihanteiymd, TextBoxDate shinsakaiyoteiymd, RString shinseishokanrino, RString changeflag) {
         super();
         this.setOriginalData("riyuselect", riyuselect);
         this.setOriginalData("hokenshano", hokenshano);
@@ -127,7 +127,7 @@ public class dgHakkotaishosha_Row extends DataRow {
         this.changeflag = changeflag;
     }
 
-    public Button getRiyuselect() {
+    public ButtonDialog getRiyuselect() {
         return riyuselect;
     }
 
@@ -203,7 +203,7 @@ public class dgHakkotaishosha_Row extends DataRow {
         return changeflag;
     }
 
-    public void setRiyuselect(Button riyuselect) {
+    public void setRiyuselect(ButtonDialog riyuselect) {
         this.setOriginalData("riyuselect", riyuselect);
         this.riyuselect = riyuselect;
     }

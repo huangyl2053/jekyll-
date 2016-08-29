@@ -94,6 +94,10 @@ public enum ReportIdDBC {
      */
     DBC200058(new ReportId("DBC200058_JukyushaTotsugokekkaIchiran"), new RString("受給者情報突合結果一覧表")),
     /**
+     * 負担割合判定一覧表帳票ＩＤです。
+     */
+    DBC200089(new ReportId("DBC200089_FutanWariaiHanteiIchiran"), new RString("負担割合判定一覧表")),
+    /**
      * 負担割合証（カット紙）
      */
     DBC100065(new ReportId("DBC100065_FutanWariaiSho"), new RString("負担割合証（カット紙）")),
@@ -396,7 +400,11 @@ public enum ReportIdDBC {
     /**
      * 総合事業費（経過措置）資格照合表帳票ＩＤです。
      */
-    DBC100018(new ReportId("DBC100018_SogojigyohiShikakuShogohyoKeikaSochi"), new RString("総合事業費（経過措置）資格照合表"));
+    DBC100018(new ReportId("DBC100018_SogojigyohiShikakuShogohyoKeikaSochi"), new RString("総合事業費（経過措置）資格照合表")),
+    /**
+     * 総合事業費（経過措置）資格照合表帳票ＩＤです。
+     */
+    DBC100204(new ReportId("DBC100204_GassanJigyobunKeisanKekkaRenrakuhyo"), new RString("事業分計算結果連絡票"));
 
     private final ReportId reportId;
 

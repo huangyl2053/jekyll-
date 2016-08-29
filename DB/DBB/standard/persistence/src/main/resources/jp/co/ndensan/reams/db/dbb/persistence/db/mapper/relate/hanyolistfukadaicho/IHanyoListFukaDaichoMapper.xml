@@ -35,7 +35,8 @@
             WHERE
                     賦課."choteiNendo" = #{調定年度}
                 AND 賦課."fukaNendo" = #{賦課年度}
-                <if test="最新状態で抽出">
+                <choose>
+                <when test="最新状態で抽出">
                     AND EXISTS (
                         SELECT 1
                         FROM 
@@ -46,6 +47,8 @@
                             AND 賦課."tsuchishoNo" = 介護賦課Newest."tsuchishoNo"
                             AND 賦課."rirekiNo" = 介護賦課Newest."rirekiNo"
                     )
+                </when>
+                <otherwise>
                     <if test="基準日区分 != null and 賦課基準日で抽出 != null and 基準日区分 == 賦課基準日で抽出">
                         AND 賦課."fukaYMD" <![CDATA[<=]]> #{基準日}
                         AND NOT EXISTS (
@@ -70,7 +73,8 @@
                                 AND 賦課."rirekiNo"  <![CDATA[<]]>  介護賦課2."rirekiNo"
                         )
                     </if>
-                </if>
+                </otherwise>
+            </choose>
         ), 年金特徴回付情報 AS (
             SELECT
                 *

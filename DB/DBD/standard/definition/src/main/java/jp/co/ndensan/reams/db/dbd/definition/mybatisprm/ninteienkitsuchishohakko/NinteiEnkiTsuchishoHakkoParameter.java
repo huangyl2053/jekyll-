@@ -58,6 +58,7 @@ public class NinteiEnkiTsuchishoHakkoParameter implements IMyBatisParameter {
     private boolean is一次判定_判定済チェックON;
     private boolean is審査会割付_割付未チェックON;
     private boolean is審査会割付_割付済チェックON;
+    private boolean is単一;
 
     /**
      * コンストラクタです。

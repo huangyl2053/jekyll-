@@ -237,7 +237,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInProcess extends Batc
                     .fillType(FillType.BLANK).toDateString();
             RString 作成時 = 作成日時.getTime()
                     .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-            output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(SAKUSEI));
+            output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(SAKUSEI));
             output.set国保連合会名(審査決定請求合計.get国保連合会名());
             index++;
         } else {

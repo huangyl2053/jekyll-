@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
-import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBC200081_総合事業費再審査決定通知書情報取込一覧表（公費）Source
@@ -51,7 +50,6 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiSource implem
     public RString kaipage4;
     @ReportItem(name = "kaipage5", length = 20, order = 16)
     public RString kaipage5;
-    @ReportPerson(id = "A")
     @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listLower_1", length = 10, order = 17)
     public RString listLower_1;
