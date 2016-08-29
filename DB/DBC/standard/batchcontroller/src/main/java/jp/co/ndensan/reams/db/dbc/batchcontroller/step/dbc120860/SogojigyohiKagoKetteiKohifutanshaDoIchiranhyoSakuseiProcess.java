@@ -177,7 +177,7 @@ public class SogojigyohiKagoKetteiKohifutanshaDoIchiranhyoSakuseiProcess extends
         csvWriter = new CsvWriter.InstanceBuilder(一覧ファイルパス)
                 .setDelimiter(コンマ)
                 .setEnclosure(ダブル引用符)
-                .setEncode(Encode.UTF_8withBOM)
+                .setEncode(Encode.SJIS)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true)
                 .build();

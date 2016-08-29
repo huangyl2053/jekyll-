@@ -30,7 +30,7 @@ public enum KaigoGassan_Over70_ShotokuKbn {
     /**
      * コード:4 名称:低所得者Ⅰ 略称:定義なし
      */
-    低所得者Ⅰ("5", "低所得者Ⅰ");
+    低所得者Ⅰ("4", "低所得者Ⅰ");
 
     private final RString code;
     private final RString fullName;

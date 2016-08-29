@@ -13,6 +13,14 @@ package jp.co.ndensan.reams.db.dbx.definition.core.viewstate;
 public enum ViewStateKeys {
 
     /**
+     * 最新の処理年月
+     */
+    最新の処理年月,
+    /**
+     * 最古の処理年月
+     */
+    最古の処理年月,
+    /**
      * イメージ情報_存在
      */
     イメージ情報_存在,
@@ -2099,5 +2107,13 @@ public enum ViewStateKeys {
     /**
      * 発行処理IDです。
      */
-    発行処理ID;
+    発行処理ID,
+    /**
+     * 発行処理IDです。
+     */
+    償還払い給付種類支給限度額,
+    /**
+     * 発行処理IDです。
+     */
+    上乗せ償還払い給付種類支給限度額;
 }

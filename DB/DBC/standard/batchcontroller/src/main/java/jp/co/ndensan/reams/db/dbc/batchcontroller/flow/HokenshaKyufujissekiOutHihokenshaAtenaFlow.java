@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
- * 国保連情報作成共通処理（新旧被保険者番号変換）クラスです
+ * 国保連情報作成共通処理（被保険者・宛名情報取得）クラスです
  *
  * @reamsid_L DBC-2460-013 jiangwenkai
  */

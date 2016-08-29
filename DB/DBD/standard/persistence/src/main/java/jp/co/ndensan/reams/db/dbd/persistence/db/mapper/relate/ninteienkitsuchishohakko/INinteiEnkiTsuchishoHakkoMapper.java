@@ -22,6 +22,14 @@ public interface INinteiEnkiTsuchishoHakkoMapper {
      * @param parameter パラメータ
      * @return 居宅サービス計画情報
      */
-    List<NinteiEnkiTsuchishoHakkoEntity> get発行対象者一覧情報(NinteiEnkiTsuchishoHakkoParameter parameter);
+    List<NinteiEnkiTsuchishoHakkoEntity> get発行対象者一覧情報_単一(NinteiEnkiTsuchishoHakkoParameter parameter);
+
+    /**
+     * 居宅サービス計画情報を取得する。
+     *
+     * @param parameter パラメータ
+     * @return 居宅サービス計画情報
+     */
+    List<NinteiEnkiTsuchishoHakkoEntity> get発行対象者一覧情報_広域(NinteiEnkiTsuchishoHakkoParameter parameter);
 
 }

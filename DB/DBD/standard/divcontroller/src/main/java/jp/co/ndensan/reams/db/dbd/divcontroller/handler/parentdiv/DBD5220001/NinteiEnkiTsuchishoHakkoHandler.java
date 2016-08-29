@@ -22,12 +22,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoChild;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -51,6 +50,7 @@ public class NinteiEnkiTsuchishoHakkoHandler {
 
     private final RString 含む_key = new RString("key0");
     private final RString 印刷する_key = new RString("key0");
+    private final RString 印刷しない_key = new RString("key1");
     private final RString 変更フラグ_変更 = new RString("1");
     private final RString 一覧表を発行する_FileName = new RString("btnPrint1");
     private final RString 保存処理完了Message = new RString("認定延期通知発行の保存処理が完了しました。");
@@ -82,15 +82,18 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         }
         RString 延期理由 = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.消費税率.getコード(),
                 new FlexibleDate(RDate.getNowDate().toDateString())).get(0).getコード名称();
+        CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.消費税率.getコード());
         List<KeyValueDataSource> 延期の理由DataSource = new ArrayList<>();
         延期の理由DataSource.add(new KeyValueDataSource(DBDCodeShubetsu.延期理由.getコード().getColumnValue(), 延期理由));
         div.getDdlEnkiRiyu().setDataSource(延期の理由DataSource);
+        div.getDdlEnkiRiyuInput().setDataSource(延期の理由DataSource);
         RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (!最大表示件数.isNullOrEmpty()) {
             div.getTxtMaxDisp().setValue(new Decimal(最大表示件数.toString()));
         }
         div.getCcdHokenshaList().loadHokenshaList();
         div.getTxtInsatsuDate().setValue(RDate.getNowDate());
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(一覧表を発行する_FileName, true);
     }
 
     private void clear検索条件() {
@@ -108,7 +111,7 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         div.getCblIchijiHantei().setSelectedItemsByKey(emptyKeys);
         div.getCblShinsakaiWaritsuke().setSelectedItemsByKey(emptyKeys);
         div.getTxtMaxDisp().clearValue();
-        div.getRadEnkiTsuchiHakkoIchiranhyo().setSelectedKey(印刷する_key);
+        div.getRadEnkiTsuchiHakkoIchiranhyo().setSelectedKey(印刷しない_key);
         div.getTxtMikomiDateIchiran().clearFromValue();
         div.getTxtMikomiDateIchiran().clearToValue();
         div.getTxtInsatsuDate().clearValue();
@@ -181,8 +184,9 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         dataSource.setHihokenshano(発行対象者情報.get被保番号());
         dataSource.setHihokenshaname(発行対象者情報.get氏名());
         dataSource.setNinteishinseiymd(getTextBoxDate(発行対象者情報.get認定申請年月日()));
-        if (発行対象者情報.get申請区分_申請時_コード() != null) {
-            dataSource.setShinseikubun(発行対象者情報.get申請区分_申請時_コード().getColumnValue());
+        if (発行対象者情報.get申請区分_申請時_コード() != null && !発行対象者情報.get申請区分_申請時_コード().isEmpty()) {
+            dataSource.setShinseikubun(NinteiShinseiShinseijiKubunCode
+                    .toValue(発行対象者情報.get申請区分_申請時_コード().getColumnValue()).get名称());
         }
         dataSource.setEnkiketteidate(getTextBoxDate(発行対象者情報.get延期決定日()));
         dataSource.setEnkiriyu(発行対象者情報.get延期理由());
@@ -214,6 +218,7 @@ public class NinteiEnkiTsuchishoHakkoHandler {
      * @return 要介護認定申請情報
      */
     public List<NinteiShinseiJohoChild> get要介護認定申請情報(List<NinteiEnkiTsuchishoHakkoBusiness> 発行対象者一覧情報) {
+
         List<RString> 申請書管理番号List = new ArrayList<>();
         for (NinteiEnkiTsuchishoHakkoBusiness 発行対象者情報 : 発行対象者一覧情報) {
             申請書管理番号List.add(発行対象者情報.get申請書管理番号());
@@ -226,18 +231,19 @@ public class NinteiEnkiTsuchishoHakkoHandler {
      *
      */
     public void 対象行延期理由のセット() {
-        List<dgHakkotaishosha_Row> rowList = div.getDgHakkotaishosha().getSelectedItems();
-        List<KeyValueDataSource> dataSource = new ArrayList<>();
-        for (dgHakkotaishosha_Row row : rowList) {
-            RString enkiriyu = RString.EMPTY;
-            if (row.getEnkiriyu() != null) {
-                enkiriyu = row.getEnkiriyu();
-            }
-            if (!isEnkiriyuAri(dataSource, enkiriyu)) {
-                dataSource.add(new KeyValueDataSource(row.getShinseishokanrino(), enkiriyu));
+        RString 延期理由 = div.getDdlEnkiRiyuInput().getSelectedValue();
+        List<dgHakkotaishosha_Row> rowList = div.getDgHakkotaishosha().getDataSource();
+        List<dgHakkotaishosha_Row> selectedRowList = div.getDgHakkotaishosha().getSelectedItems();
+        for (int index = 0; index < rowList.size(); index++) {
+            if (selectedRowList.contains(rowList.get(index))) {
+                rowList.get(index).setEnkiriyu(延期理由);
             }
         }
-        div.getDdlEnkiRiyuInput().setDataSource(dataSource);
+        for (int index = 0; index < selectedRowList.size(); index++) {
+            selectedRowList.get(index).setEnkiriyu(延期理由);
+        }
+        div.getDgHakkotaishosha().setDataSource(rowList);
+        div.getDgHakkotaishosha().setSelectedItems(selectedRowList);
     }
 
     /**
@@ -377,7 +383,6 @@ public class NinteiEnkiTsuchishoHakkoHandler {
      * @param 要介護認定申請情報List 要介護認定申請情報List
      */
     public void 更新処理(List<NinteiShinseiJohoChild> 要介護認定申請情報List) {
-        排他制御();
         List<dgHakkotaishosha_Row> rowList = div.getDgHakkotaishosha().getDataSource();
         List<DgHakkotaishoshaRow> rowEntityList = new ArrayList<>();
         for (dgHakkotaishosha_Row row : rowList) {
@@ -387,7 +392,6 @@ public class NinteiEnkiTsuchishoHakkoHandler {
             }
         }
         NinteiEnkiTsuchishoHakkoManager.createInstance().更新処理(要介護認定申請情報List, rowEntityList);
-        排他制御の解除();
         div.getCcdKanryoMessage().setMessage(保存処理完了Message, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
     }
 
@@ -406,14 +410,6 @@ public class NinteiEnkiTsuchishoHakkoHandler {
 
     }
 
-    private void 排他制御() {
-        RealInitialLocker.lock(new LockingKey(new RString("ShinseishoKanriNo")));
-    }
-
-    private void 排他制御の解除() {
-        RealInitialLocker.release(new LockingKey(new RString("ShinseishoKanriNo")));
-    }
-
     /**
      * バッチパラメータを設定します。
      *
@@ -423,8 +419,12 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         NinteiEnkiTsuchishoHakkoParameter parameter = new NinteiEnkiTsuchishoHakkoParameter();
         if (検索.getName().equals(ResponseHolder.getState())) {
             parameter.set画面モード(画面モード_1);
-            parameter.set処理見込み日From(new FlexibleDate(div.getTxtMikomiDateIchiran().getFromValue().toDateString()));
-            parameter.set処理見込み日To(new FlexibleDate(div.getTxtMikomiDateIchiran().getToValue().toDateString()));
+            if (div.getTxtMikomiDateIchiran().getFromValue() != null) {
+                parameter.set処理見込み日From(new FlexibleDate(div.getTxtMikomiDateIchiran().getFromValue().toDateString()));
+            }
+            if (div.getTxtMikomiDateIchiran().getToValue() != null) {
+                parameter.set処理見込み日To(new FlexibleDate(div.getTxtMikomiDateIchiran().getToValue().toDateString()));
+            }
             parameter.set通知書発行日(new FlexibleDate(div.getTxtInsatsuDate().getValue().toDateString()));
         } else if (通知書.getName().equals(ResponseHolder.getState())) {
             parameter.set画面モード(画面モード_2);
@@ -443,6 +443,31 @@ public class NinteiEnkiTsuchishoHakkoHandler {
             申請書管理番号リスト.add(new ShinseishoKanriNo(row.getShinseishokanrino()));
         }
         return 申請書管理番号リスト;
+    }
+
+    /**
+     * 選択した理由を該当行の延期理由へセットする処理です。
+     *
+     * @param サンプル文書 サンプル文書
+     */
+    public void onOkClose_riyuselect(RString サンプル文書) {
+        List<dgHakkotaishosha_Row> rowList = div.getDgHakkotaishosha().getDataSource();
+        List<dgHakkotaishosha_Row> selectedRowList = div.getDgHakkotaishosha().getSelectedItems();
+        dgHakkotaishosha_Row clickRow = div.getDgHakkotaishosha().getActiveRow();
+        for (int index = 0; index < rowList.size(); index++) {
+            dgHakkotaishosha_Row row = rowList.get(index);
+            if (clickRow.equals(row)) {
+                row.setEnkiriyu(サンプル文書);
+            }
+        }
+        for (int index = 0; index < selectedRowList.size(); index++) {
+            dgHakkotaishosha_Row row = selectedRowList.get(index);
+            if (clickRow.equals(row)) {
+                row.setEnkiriyu(サンプル文書);
+            }
+        }
+        div.getDgHakkotaishosha().setDataSource(rowList);
+        div.getDgHakkotaishosha().setSelectedItems(selectedRowList);
     }
 
 }

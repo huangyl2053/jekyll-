@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.saishinsaketteihokenshainkouhifu
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
@@ -65,7 +66,6 @@ public class SaishinsaKetteiHokenshaInKouhiFutann {
     private static final RString カンマ = new RString(",");
     private static final Integer INDEX_0 = 0;
     private static final Integer INDEX_3 = 3;
-    private static final RString NUM = new RString("99");
 
     /**
      * コンストラクタです。
@@ -118,7 +118,7 @@ public class SaishinsaKetteiHokenshaInKouhiFutann {
         DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
         FlowEntity getEntity = バッチフロ(csvlist);
         int レコード件数合算 = getEntity.getCodeNum();
-        errorTempentity.setエラー区分(NUM);
+        errorTempentity.setエラー区分(KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード());
         int 集計データ登録件数 = INDEX_0;
         int 明細データ登録件数 = INDEX_0;
         if (レコード件数合算 != INDEX_0) {

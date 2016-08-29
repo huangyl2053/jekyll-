@@ -16,6 +16,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBC {
 
     /**
+     * 高額合算支給額計算結果連絡票情報取込一覧表
+     */
+    DBC200037(new ReportId("DBC200037_GassanShikyugakuKeisankekkaRanrakuhyoTorikomiIchiran"),
+            new RString("高額合算支給額計算結果連絡票情報取込一覧表")),
+    /**
+     * 高額合算支給額計算結果連絡票情報確認リスト
+     */
+    DBC200038(new ReportId("DBC200038_GassanShikyugakuKeisankekkaRanrakuhyoKakuninIchiran"),
+            new RString("高額合算支給額計算結果連絡票情報確認リスト")),
+    /**
      * 自己負担額補正一覧表
      */
     DBC200031(new ReportId("DBC200031_GassanJikofutangakuHoseiIchiran"), new RString("自己負担額補正一覧表")),
@@ -83,6 +93,10 @@ public enum ReportIdDBC {
      * 受給者情報突合結果一覧表
      */
     DBC200058(new ReportId("DBC200058_JukyushaTotsugokekkaIchiran"), new RString("受給者情報突合結果一覧表")),
+    /**
+     * 負担割合判定一覧表帳票ＩＤです。
+     */
+    DBC200089(new ReportId("DBC200089_FutanWariaiHanteiIchiran"), new RString("負担割合判定一覧表")),
     /**
      * 負担割合証（カット紙）
      */
@@ -379,6 +393,10 @@ public enum ReportIdDBC {
      * 受領委任契約事業者一覧表帳票ＩＤです。
      */
     DBC200012(new ReportId("DBC200012_JuryoIninJigyoshaIchiran"), new RString("受領委任契約事業者一覧表")),
+    /**
+     * 高額合算自己負担額証明書情報一覧表
+     */
+    DBC200034(new ReportId("DBC200034_GassanJikofutangakuShomeishoTorikomiIchiran"), new RString("高額合算自己負担額証明書情報一覧表")),
     /**
      * 総合事業費（経過措置）資格照合表帳票ＩＤです。
      */

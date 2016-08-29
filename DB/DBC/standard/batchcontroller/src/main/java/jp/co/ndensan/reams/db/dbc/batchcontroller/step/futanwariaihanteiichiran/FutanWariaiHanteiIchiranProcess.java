@@ -10,10 +10,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.euc.futanwariaihanteiichiran.FutanWariaiHanteiIchiranCsvEntityEditor;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaihanteiichiran.FutanWariaiHanteiIchiranReport;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaihanteiichiran.FutanWariaiHanteiIchiranProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.futanwariaihanteiichiran.FutanWariaiHanteiIchiranCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaihanteiichiran.FutanwariaiHanteiIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaihanteiichiran.FutanWariaiHanteiIchiranSource;
 import jp.co.ndensan.reams.db.dbx.business.util.DateConverter;
+import jp.co.ndensan.reams.db.dbz.business.config.KaigoToiawasesakiConfig;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -57,7 +59,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  */
 public class FutanWariaiHanteiIchiranProcess extends BatchProcessBase<FutanwariaiHanteiIchiranEntity> {
 
-    private static final ReportId ID = new ReportId("DBC200089_FutanWariaiHanteiIchiran");
+    private static final ReportId ID = ReportIdDBC.DBC200089.getReportId();
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaihanteiichiran.IFutanwariaiHanteiIchiranMapper.get負担割合判定一覧データ");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("FutanWariaiHanteiIchiranCsv"));
@@ -75,8 +77,12 @@ public class FutanWariaiHanteiIchiranProcess extends BatchProcessBase<Futanwaria
     private static final RString 秒 = new RString("秒");
     private static final RString HALFMONTH = new RString("#0");
     private static final RString 被保険者番号 = new RString("被保険者番号");
+    private static final RString RSTRING = new RString("0003");
+    private static final RString RSTRING_TWO = new RString("2");
+    private static final RString RSTRING_THREE = new RString("3");
     private RString eucFilePath;
     private FileSpoolManager manager;
+    private RString EUC共通_文字コード;
     private FutanWariaiHanteiIchiranProcessParameter processParameter;
     private final List<PersonalData> personalDataList = new ArrayList<>();
     private Association 導入団体クラス;
@@ -89,6 +95,8 @@ public class FutanWariaiHanteiIchiranProcess extends BatchProcessBase<Futanwaria
     @Override
     protected void initialize() {
         導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
+        KaigoToiawasesakiConfig config = new KaigoToiawasesakiConfig();
+        EUC共通_文字コード = config.getEUC共通_文字コード();
     }
 
     @Override
@@ -97,11 +105,19 @@ public class FutanWariaiHanteiIchiranProcess extends BatchProcessBase<Futanwaria
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
+        Encode 文字コード;
+        if (RSTRING_TWO.equals(EUC共通_文字コード)) {
+            文字コード = Encode.SJIS;
+        } else if (RSTRING_THREE.equals(EUC共通_文字コード)) {
+            文字コード = Encode.JIS;
+        } else {
+            文字コード = Encode.UTF_8withBOM;
+        }
         eucFilePath = Path.combinePath(spoolWorkPath, CSVMEISHO);
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.UTF_8withBOM).
+                setEncode(文字コード).
                 setNewLine(NewLine.CRLF).
                 hasHeader(true).
                 build();
@@ -172,7 +188,7 @@ public class FutanWariaiHanteiIchiranProcess extends BatchProcessBase<Futanwaria
     }
 
     private PersonalData getPersonalData(FutanwariaiHanteiIchiranEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), 被保険者番号, entity.get今回被保険者番号().value());
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(RSTRING), 被保険者番号, entity.get今回被保険者番号().value());
         return PersonalData.of(new ShikibetsuCode(entity.get生活保護受給者識別コード()), expandedInfo);
     }
 }
