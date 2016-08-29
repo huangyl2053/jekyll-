@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710210;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.jigyobunkogakugassanshikyukettei.JigyoBunKogakuGassanShikyuKetteiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -22,29 +23,42 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter extends BatchParameterBase {
 
-    @BatchParameter(key = "reportID", name = "帳票ID")
+    private static final String KEY_REPORTID = "帳票ID";
+    private static final String KEY_SHUTSURYOKUJUNID = "出力順ID";
+    private static final String KEY_SHUTSURYOKUJUNKOMOKUID = "出力順項目ID";
+    private static final String KEY_KOMOUKUMEI = "is項目名付加";
+    private static final String KEY_RENBANFUKA = "is連番付加";
+    private static final String KEY_ISDATEEDIT = "is日付編集";
+    private static final String KEY_HONKENSHACODE = "保険者コード";
+    private static final String KEY_SHIKYUKUBUN = "支給区分List";
+    private static final String KEY_SHIHARAIHOHOKUBUN = "支払方法区分List";
+    private static final String KEY_KIKANCODE = "金融機関コード";
+    private static final String KEY_KIKANMEI = "金融機関名";
+    private static final String KEY_TAISHONENDO = "対象年度";
+
+    @BatchParameter(key = "KEY_REPORTID", name = "帳票ID")
     private RString 帳票ID;
-    @BatchParameter(key = "shutsuryokujunId", name = "出力順ID")
+    @BatchParameter(key = "KEY_SHUTSURYOKUJUNID", name = "出力順ID")
     private long 出力順ID;
-    @BatchParameter(key = "shutsuryokujunkomokuId", name = "出力順項目ID")
+    @BatchParameter(key = "KEY_SHUTSURYOKUJUNKOMOKUID", name = "出力順項目ID")
     private RString 出力順項目ID;
-    @BatchParameter(key = "komoukumei", name = "is項目名付加")
+    @BatchParameter(key = "KEY_KOMOUKUMEI", name = "is項目名付加")
     private boolean is項目名付加;
-    @BatchParameter(key = "renbanFuka", name = "is連番付加")
+    @BatchParameter(key = "KEY_RENBANFUKA", name = "is連番付加")
     private boolean is連番付加;
-    @BatchParameter(key = "isdateedit", name = "is日付編集")
+    @BatchParameter(key = "KEY_ISDATEEDIT", name = "is日付編集")
     private boolean is日付編集;
-    @BatchParameter(key = "honkenshaCode", name = "保険者コード")
+    @BatchParameter(key = "KEY_HONKENSHACODE", name = "保険者コード")
     private RString 保険者コード;
-    @BatchParameter(key = "shikyuKubun", name = "支給区分")
-    private RString 支給区分;
-    @BatchParameter(key = "shiharaiHohoKubun", name = "支払方法区分")
-    private RString 支払方法区分;
-    @BatchParameter(key = "kikanCode", name = "金融機関コード")
+    @BatchParameter(key = "KEY_SHIKYUKUBUN", name = "支給区分")
+    private List<RString> 支給区分List;
+    @BatchParameter(key = "KEY_SHIHARAIHOHOKUBUN", name = "支払方法区分")
+    private List<RString> 支払方法区分List;
+    @BatchParameter(key = "KEY_KIKANCODE", name = "金融機関コード")
     private RString 金融機関コード;
-    @BatchParameter(key = "kikanmei", name = "金融機関名")
+    @BatchParameter(key = "KEY_KIKANMEI", name = "金融機関名")
     private RString 金融機関名;
-    @BatchParameter(key = "taishonendo", name = "対象年度")
+    @BatchParameter(key = "KEY_TAISHONENDO", name = "対象年度")
     private RString 対象年度;
 
     /**
@@ -60,8 +74,8 @@ public class DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter extend
                 is連番付加,
                 is日付編集,
                 保険者コード,
-                支給区分,
-                支払方法区分,
+                支給区分List,
+                支払方法区分List,
                 金融機関コード,
                 金融機関名,
                 対象年度);

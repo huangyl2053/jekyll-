@@ -100,7 +100,7 @@
         事業高額合算情報."uketoriYM" AS "uketoriYM"
     </sql>
     <select resultOrdered="true" id="get事業高額合算情報" resultMap="get事業高額合算情報Result"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunshunyugakutekiyo.KijunShunyugakuTekiyoMybatisParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunkogakugassanshikyukettei.JigyoBunKogakuGassanShikyuKetteiMybatisParameter" fetchSize="500">
         WITH  抽出対象  AS (
         SELECT
         "hihokenshaNo",
@@ -113,8 +113,10 @@
         rgdb."DbT3174JigyoKogakuGassanShikyuFushikyuKettei"
         WHERE
         1= 1
-        AND "shikyuKubunCode" = #{支給区分}
-        AND "shiharaiHohoKubun" =#{支払方法区分}
+        AND "shikyuKubunCode" IN
+        <foreach collection="支給区分List" item="item" open="(" separator="," close=")"> #{item}</foreach>
+        AND "shiharaiHohoKubun" IN
+        <foreach collection="支払方法区分List" item="item" open="(" separator="," close=")"> #{item}</foreach>
         <if test="!is対象年度NULL">
             AND "taishoNendo" = #{対象年度}
         </if>
