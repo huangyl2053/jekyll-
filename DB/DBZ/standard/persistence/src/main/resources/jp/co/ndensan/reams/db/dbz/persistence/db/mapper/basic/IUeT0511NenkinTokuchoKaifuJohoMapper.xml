@@ -215,6 +215,6 @@
         FROM
             rgue."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
         WHERE
-            rgue."UeT0511NenkinTokuchoKaifuJoho"."isDeleted" = FALSE
+            "UeT0511NenkinTokuchoKaifuJoho"."isDeleted" = FALSE
     </select>
 </mapper>
