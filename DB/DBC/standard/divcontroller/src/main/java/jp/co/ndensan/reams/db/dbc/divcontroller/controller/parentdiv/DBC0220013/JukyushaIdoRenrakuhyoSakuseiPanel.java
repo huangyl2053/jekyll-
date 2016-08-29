@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyodojukyushataishosha.KyodoJuky
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220013.DBC0220013TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220013.JukyushaIdoRenrakuhyoSakuseiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0220013.JukyushaIdoRenrakuhyoSakuseiPanelHandler;
-import jp.co.ndensan.reams.db.dbc.service.core.kyodoshoriyojukyushaidorenrakuhyo.KyodoshoriyoJukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.service.report.jukyushaidorenrakuhyo.JukyushaIdoRenrakuhyoPrintSevice;
 import jp.co.ndensan.reams.db.dbc.service.report.jukyushateiseirenrakuhyo.JukyushaTeiseiRenrakuhyoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -70,7 +69,7 @@ public class JukyushaIdoRenrakuhyoSakuseiPanel {
         ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号);
         div.getCcdJukyushaIdoRenrakuhyo().initialize(
                 処理モード, ShikibetsuCode.EMPTY, 被保険者番号, 履歴番号, 論理削除フラグ, 異動日);
-        ShikibetsuCode 識別コード = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().get識別コード(被保険者番号);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         AccessLogger.log(AccessLogType.照会,
                 getHandler(div).toPersonalData(識別コード,
                         被保険者番号.getColumnValue()));
