@@ -82,8 +82,12 @@ public class DBC1120011PanelValidationHandler {
         必須設定項目_出力順 {
                     @Override
                     public boolean apply(DBC1120011PanelDiv div) {
-                        return div.getCcdChohyoShutsuryokujun().get出力順ID() != null
-                        && div.getCcdChohyoShutsuryokujun().get出力順ID() != 0;
+                        if (div.getJikoFutangakuKeisanKekkaIchiranhyoPanelPublish().isIsPublish()) {
+                            return div.getCcdChohyoShutsuryokujun().get出力順ID() != null
+                            && div.getCcdChohyoShutsuryokujun().get出力順ID() != 0;
+                        } else {
+                            return true;
+                        }
                     }
                 };
     }
