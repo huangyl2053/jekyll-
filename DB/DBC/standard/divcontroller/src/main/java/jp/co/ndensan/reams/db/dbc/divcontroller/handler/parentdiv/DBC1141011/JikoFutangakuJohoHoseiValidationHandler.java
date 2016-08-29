@@ -5,10 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1141011;
 
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1141011.JikoFutangakuJohoHoseiDiv;
-import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhorenInterfaceKanriManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionaryBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -23,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面設計_DBCMN62002_高額合算自己負担額情報補正（一括）のクラスです。
@@ -35,11 +35,6 @@ public class JikoFutangakuJohoHoseiValidationHandler {
     private static final RString NUM_24 = new RString("24");
     private static final RString NUM_60 = new RString("60");
     private static final RString 出力順 = new RString("出力順を");
-    private static final RString 送付取込区分 = new RString("2");
-    private static final RString 処理状態区分 = new RString("3");
-    private static final RString 交換情報識別番号 = new RString("37J");
-    private static final RString MAX = new RString("MAX");
-    private static final RString MIN = new RString("MIN");
 
     /**
      * コンストラクタです。
@@ -101,26 +96,19 @@ public class JikoFutangakuJohoHoseiValidationHandler {
                     @Override
                     public boolean apply(JikoFutangakuJohoHoseiDiv div) {
 
-                        KokuhorenInterfaceKanri 国保連インターフェース管理Max;
-                        KokuhorenInterfaceKanri 国保連インターフェース管理Min;
-                        KokuhorenInterfaceKanriManager 国保連インターフェース管理Manager = new KokuhorenInterfaceKanriManager();
-                        国保連インターフェース管理Max = 国保連インターフェース管理Manager.get新国保連インターフェース管理(
-                                MAX, 送付取込区分, 処理状態区分, 交換情報識別番号);
-                        国保連インターフェース管理Min = 国保連インターフェース管理Manager.get新国保連インターフェース管理(
-                                MIN, 送付取込区分, 処理状態区分, 交換情報識別番号);
-                        FlexibleYearMonth 最新の処理年月 = 国保連インターフェース管理Max.get処理年月();
-                        FlexibleYearMonth 最古の処理年月 = 国保連インターフェース管理Min.get処理年月();
                         return new RDate(div.getTxtKakuninJouhouUketoriYM().getValue().toString()).getYearMonth()
-                        .toString().compareTo(最新の処理年月.toString()) <= 0
-                        && new RDate(div.getTxtKakuninJouhouUketoriYM().getValue().toString()).getYearMonth().
-                        toString().compareTo(最古の処理年月.toString()) >= 0;
+                        .toString().compareTo(ViewStateHolder.get(ViewStateKeys.最新の処理年月, FlexibleYearMonth.class)
+                                .toString()) <= 0
+                        && 0 <= new RDate(div.getTxtKakuninJouhouUketoriYM().getValue().toString()).getYearMonth().
+                        toString().compareTo(ViewStateHolder.get(ViewStateKeys.最古の処理年月, FlexibleYearMonth.class)
+                                .toString());
                     }
                 },
         開始時間の時間_誤り {
                     @Override
                     public boolean apply(JikoFutangakuJohoHoseiDiv div) {
 
-                        return Integer.parseInt(div.getTxtKaishiJikanHH().getValue().toString()) >= 0
+                        return 0 <= Integer.parseInt(div.getTxtKaishiJikanHH().getValue().toString())
                         && Integer.parseInt(div.getTxtKaishiJikanHH().getValue().toString())
                         < Integer.parseInt(NUM_24.toString());
                     }
@@ -128,7 +116,7 @@ public class JikoFutangakuJohoHoseiValidationHandler {
         開始時間の分_誤り {
                     @Override
                     public boolean apply(JikoFutangakuJohoHoseiDiv div) {
-                        return Integer.parseInt(div.getTxtKaishiJIkanMM().getValue().toString()) >= 0
+                        return 0 <= Integer.parseInt(div.getTxtKaishiJIkanMM().getValue().toString())
                         && Integer.parseInt(div.getTxtKaishiJIkanMM().getValue().toString())
                         < Integer.parseInt(NUM_60.toString());
                     }
@@ -136,7 +124,7 @@ public class JikoFutangakuJohoHoseiValidationHandler {
         終了時間の時間_誤り {
                     @Override
                     public boolean apply(JikoFutangakuJohoHoseiDiv div) {
-                        return Integer.parseInt(div.getTxtshuryoJikanHH().getValue().toString()) >= 0
+                        return 0 <= Integer.parseInt(div.getTxtshuryoJikanHH().getValue().toString())
                         && Integer.parseInt(div.getTxtshuryoJikanHH().getValue().toString())
                         < Integer.parseInt(NUM_24.toString());
                     }
@@ -144,7 +132,7 @@ public class JikoFutangakuJohoHoseiValidationHandler {
         終了時間の分_誤り {
                     @Override
                     public boolean apply(JikoFutangakuJohoHoseiDiv div) {
-                        return Integer.parseInt(div.getTxtshuryoJikanMM().getValue().toString()) >= 0
+                        return 0 <= Integer.parseInt(div.getTxtshuryoJikanMM().getValue().toString())
                         && Integer.parseInt(div.getTxtshuryoJikanMM().getValue().toString())
                         < Integer.parseInt(NUM_60.toString());
                     }
@@ -152,20 +140,24 @@ public class JikoFutangakuJohoHoseiValidationHandler {
         開始日_誤り {
                     @Override
                     public boolean apply(JikoFutangakuJohoHoseiDiv div) {
-                        return div.getTxtKaishiYMD().getValue().compareTo(RDate.getNowDate()) > 0;
+                        return 0 < div.getTxtKaishiYMD().getValue().compareTo(RDate.getNowDate());
                     }
                 },
         終了日_誤り {
                     @Override
                     public boolean apply(JikoFutangakuJohoHoseiDiv div) {
-                        return div.getTxtShuryoYMD().getValue().compareTo(div.getTxtKaishiYMD().getValue()) > 0;
+                        return 0 < div.getTxtShuryoYMD().getValue().compareTo(div.getTxtKaishiYMD().getValue());
                     }
                 },
         必須設定項目_出力順 {
                     @Override
                     public boolean apply(JikoFutangakuJohoHoseiDiv div) {
-                        return div.getCcdChohyoShutsuryokujun().get出力順ID() != null
-                        && div.getCcdChohyoShutsuryokujun().get出力順ID() != 0;
+                        if (div.getJikoFutangakuHoseiPrint().isIsPublish()) {
+                            return div.getCcdChohyoShutsuryokujun().get出力順ID() != null
+                            && div.getCcdChohyoShutsuryokujun().get出力順ID() != 0;
+                        } else {
+                            return true;
+                        }
                     }
                 };
     }
