@@ -34,6 +34,10 @@ public class TokuchoHeijunkaKeisanPanelHandler {
     private static final RString TWO = new RString("2");
     private static final RString 未 = new RString("未");
     private static final RString 済 = new RString("済");
+    private static final RString 当初所得引出 = new RString("当初所得引出");
+    private static final RString 依頼金額計算 = new RString("依頼金額計算");
+    private static final RString 本算定賦課確定 = new RString("本算定賦課確定");
+    private static final RString 特徴異動情報作成 = new RString("特徴異動情報作成");
 
     /**
      * コンストラクタです。
@@ -56,6 +60,7 @@ public class TokuchoHeijunkaKeisanPanelHandler {
             dgHeijunka8ShoriKakunin1_Row row = new dgHeijunka8ShoriKakunin1_Row();
             if (ShoriName.当初所得引出.get名称().equals(特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName())) {
                 if (特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName().isNullOrEmpty()) {
+                    row.setTxtShoriNichiji(当初所得引出);
                     row.setTxtJokyo(未);
                     row.setTxtShoriNichiji(特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp().toDateString());
                     rowList.add(row);
@@ -63,11 +68,13 @@ public class TokuchoHeijunkaKeisanPanelHandler {
                 } else {
                     if (DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, nowDate, SubGyomuCode.DBB介護賦課).
                             equals(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, nowDate, SubGyomuCode.DBB介護賦課))) {
+                        row.setTxtShoriNichiji(当初所得引出);
                         row.setTxtJokyo(済);
                         row.setTxtShoriNichiji(RString.EMPTY);
                         rowList.add(row);
 
                     } else {
+                        row.setTxtShoriNichiji(当初所得引出);
                         row.setTxtJokyo(未);
                         row.setTxtShoriNichiji(RString.EMPTY);
                         rowList.add(row);
@@ -78,15 +85,18 @@ public class TokuchoHeijunkaKeisanPanelHandler {
 
             if (ShoriName.依頼金額計算.get名称().equals(特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName())) {
                 if (特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName().isNullOrEmpty()) {
+                    row.setTxtShoriNichiji(依頼金額計算);
                     row.setTxtJokyo(未);
                     row.setTxtShoriNichiji(RString.EMPTY);
                     rowList.add(row);
                 } else if (特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp() == null
                         || 特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp().isEmpty()) {
+                    row.setTxtShoriNichiji(依頼金額計算);
                     row.setTxtJokyo(未);
                     row.setTxtShoriNichiji(RString.EMPTY);
                     rowList.add(row);
                 } else {
+                    row.setTxtShoriNichiji(依頼金額計算);
                     row.setTxtJokyo(済);
                     row.setTxtShoriNichiji(特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp().toDateString());
                     rowList.add(row);
@@ -96,15 +106,18 @@ public class TokuchoHeijunkaKeisanPanelHandler {
 
             if (ShoriName.本算定賦課確定.get名称().equals(特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName())) {
                 if (特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName().isNullOrEmpty()) {
+                    row.setTxtShoriNichiji(本算定賦課確定);
                     row.setTxtJokyo(未);
                     row.setTxtShoriNichiji(RString.EMPTY);
                     rowList.add(row);
                 } else if (特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp() == null
                         || 特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp().isEmpty()) {
+                    row.setTxtShoriNichiji(本算定賦課確定);
                     row.setTxtJokyo(未);
                     row.setTxtShoriNichiji(RString.EMPTY);
                     rowList.add(row);
                 } else {
+                    row.setTxtShoriNichiji(本算定賦課確定);
                     row.setTxtJokyo(済);
                     row.setTxtShoriNichiji(特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp().toDateString());
                     rowList.add(row);
@@ -113,15 +126,18 @@ public class TokuchoHeijunkaKeisanPanelHandler {
 
             if (ShoriName.特徴異動情報作成.get名称().equals(特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName())) {
                 if (特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName().isNullOrEmpty()) {
+                    row.setTxtShoriNichiji(特徴異動情報作成);
                     row.setTxtJokyo(未);
                     row.setTxtShoriNichiji(RString.EMPTY);
                     rowList.add(row);
                 } else if (特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp() == null
                         || 特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp().isEmpty()) {
+                    row.setTxtShoriNichiji(特徴異動情報作成);
                     row.setTxtJokyo(未);
                     row.setTxtShoriNichiji(RString.EMPTY);
                     rowList.add(row);
                 } else {
+                    row.setTxtShoriNichiji(特徴異動情報作成);
                     row.setTxtJokyo(済);
                     row.setTxtShoriNichiji(特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp().toDateString());
                     rowList.add(row);
