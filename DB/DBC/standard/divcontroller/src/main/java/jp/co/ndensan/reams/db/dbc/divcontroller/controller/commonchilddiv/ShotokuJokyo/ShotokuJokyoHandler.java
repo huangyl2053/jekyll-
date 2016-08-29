@@ -17,11 +17,11 @@ import jp.co.ndensan.reams.db.dbz.service.core.setaiinshotokujoho.SetaiinShotoku
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
+import jp.co.ndensan.reams.ur.urz.definition.core.memo.MemoShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.divcontroller.controller.commonchilddiv.memo.MemoNyuryoku.MemoNyuryokuHandler;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -42,14 +42,13 @@ public class ShotokuJokyoHandler {
 
     private static final RString 照会モード = new RString("0");
     private static final RString 識別対象区分_個人 = new RString("個人");
-    private static final RString 数値_0 = new RString("0");
     private static final RString 改行記号 = new RString("<br>");
     private static final Decimal 数値_38万 = new Decimal("380000");
     private static final Decimal 年齢_15 = new Decimal("15");
     private static final Decimal 年齢_16 = new Decimal("16");
     private static final Decimal 年齢_18 = new Decimal("18");
-    private static final RString 文字列_識別対象コード = new RString("memoShikibetsuTaishoCode");
-    private static final RString メモボタン = new RString("btnMemo");
+    private static final RString 文字列_識別対象コード = new RString("shikibetsuCode");
+    private static final RString メモボタン = new RString("memo");
     private final ShotokuJokyoDiv div;
 
     /**
@@ -93,8 +92,8 @@ public class ShotokuJokyoHandler {
                 get世帯員所得情報(hdnShikibetuCode, hdnShoriNendo.getNendo(), null);
         List<dgSteaiinShotoku_Row> rowList = set世帯員所得情報Grid(世帯員所得情報リスト, hdnKijunYMD);
         div.getDgSteaiinShotoku().setDataSource(rowList);
-        MemoNyuryokuHandler.dataGridupdateImage(new GyomuCode(div.getHdnGyomuCode()), SubGyomuCode.DBC介護給付, div.getDgSteaiinShotoku(),
-                識別対象区分_個人, 文字列_識別対象コード, RString.EMPTY, RString.EMPTY,
+        MemoNyuryokuHandler.dataGridupdateImage(new GyomuCode(div.getHdnGyomuCode()), null, div.getDgSteaiinShotoku(),
+                MemoShikibetsuTaisho.識別コード.get識別対象(), 文字列_識別対象コード, RString.EMPTY, RString.EMPTY,
                 メモボタン);
     }
 
@@ -192,8 +191,8 @@ public class ShotokuJokyoHandler {
                 row.setKazeiShotoku(課税所得);
                 row.setShikibetsuTaishoKubun(識別対象区分_個人);
                 Decimal 計算結果 = Decimal.ZERO;
-                計算結果 = 計算結果.add(new Decimal(合計所得金額.toString())).
-                        subtract(new Decimal(年金等所得.toString())).add(new Decimal(年金等収入.toString()));
+                計算結果 = 計算結果.add(nullToZero(item.get合計所得金額())).
+                        subtract(nullToZero(item.get年金収入額())).add(nullToZero(item.get課税所得額()));
                 if (計算結果.compareTo(数値_38万) <= 0 && new Decimal(年齢.toString()).compareTo(年齢_15) <= 0) {
                     row.setRowBgColor(DataGridCellBgColor.bgColorLightBlue);
                 } else if (計算結果.compareTo(数値_38万) <= 0
