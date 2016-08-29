@@ -297,8 +297,11 @@ public class ShokanShikyuGendogakuMainHandler {
     /**
      * 「追加する」ボタン押下による入力の場合、詳細エリアの入力内容をINSERTする
      *
+     * @param 償還HolderList List<ShokanShuruiShikyuGendoGaku>
+     * @param 上乗せ償還HolderList List<UwanoseShokanShuruiShikyuGendoGaku>
      */
-    public void insertAndUpdate() {
+    public void insertAndUpdate(List<ShokanShuruiShikyuGendoGaku> 償還HolderList,
+            List<UwanoseShokanShuruiShikyuGendoGaku> 上乗せ償還HolderList) {
         ServiceShuruiCode サービス種類コード = null;
         FlexibleYearMonth 適用開始年月 = new FlexibleYearMonth(
                 div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().getFromValue()
@@ -339,7 +342,8 @@ public class ShokanShikyuGendogakuMainHandler {
                 if (RS_1.equals(row.getHdnSaishinFlag())
                         && row.getTekiyoShuryoYM().getValue() == null
                         && テーブル区分.equals(row.getTableKubun())) {
-                    setUpdateList(適用開始年月.minusMonth(INDEX_1), update償還List, update上乗せList, row);
+                    setUpdateList(適用開始年月.minusMonth(INDEX_1), update償還List,
+                            update上乗せList, row, 償還HolderList, 上乗せ償還HolderList);
                 }
             }
             ShokanShuruiShikyuGendoGakuManager 償還manager = new ShokanShuruiShikyuGendoGakuManager();
@@ -353,8 +357,11 @@ public class ShokanShikyuGendogakuMainHandler {
     /**
      * 「修正」ボタン押下による入力の場合、詳細エリアの入力内容でUPDATEする
      *
+     * @param 償還HolderList List<ShokanShuruiShikyuGendoGaku>
+     * @param 上乗せ償還HolderList List<UwanoseShokanShuruiShikyuGendoGaku>
      */
-    public void update() {
+    public void update(List<ShokanShuruiShikyuGendoGaku> 償還HolderList,
+            List<UwanoseShokanShuruiShikyuGendoGaku> 上乗せ償還HolderList) {
         ServiceShuruiCode サービス種類コード = null;
         FlexibleYearMonth 適用開始年月 = new FlexibleYearMonth(
                 div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().getFromValue().
@@ -371,25 +378,29 @@ public class ShokanShikyuGendogakuMainHandler {
         if (div.getShokanShikyuGendogakuShosai().getTxtKyotakuKaigoFukushiYogu().getValue() != null) {
             サービス種類コード = new ServiceShuruiCode(ServiceCategoryShurui.用具販売.getコード());
             支給限度単位数 = div.getShokanShikyuGendogakuShosai().getTxtKyotakuKaigoFukushiYogu().getValue();
-            valueChange(テーブル区分, サービス種類コード, 適用開始年月, 支給限度単位数, update償還List, update上乗せList);
+            valueChange(テーブル区分, サービス種類コード, 適用開始年月, 支給限度単位数, update償還List,
+                    update上乗せList, 償還HolderList, 上乗せ償還HolderList);
         }
 
         if (div.getShokanShikyuGendogakuShosai().getTxtKyotakuKaigoJutakuKaishu().getValue() != null) {
             サービス種類コード = new ServiceShuruiCode(ServiceCategoryShurui.住宅改修.getコード());
             支給限度単位数 = div.getShokanShikyuGendogakuShosai().getTxtKyotakuKaigoJutakuKaishu().getValue();
-            valueChange(テーブル区分, サービス種類コード, 適用開始年月, 支給限度単位数, update償還List, update上乗せList);
+            valueChange(テーブル区分, サービス種類コード, 適用開始年月, 支給限度単位数, update償還List,
+                    update上乗せList, 償還HolderList, 上乗せ償還HolderList);
         }
 
         if (div.getShokanShikyuGendogakuShosai().getTxtKyotakuShienFukushiYogu().getValue() != null) {
             サービス種類コード = new ServiceShuruiCode(ServiceCategoryShurui.予用販売.getコード());
             支給限度単位数 = div.getShokanShikyuGendogakuShosai().getTxtKyotakuShienFukushiYogu().getValue();
-            valueChange(テーブル区分, サービス種類コード, 適用開始年月, 支給限度単位数, update償還List, update上乗せList);
+            valueChange(テーブル区分, サービス種類コード, 適用開始年月, 支給限度単位数, update償還List,
+                    update上乗せList, 償還HolderList, 上乗せ償還HolderList);
         }
 
         if (div.getShokanShikyuGendogakuShosai().getTxtKyotakuShienJutakuKaishu().getValue() != null) {
             サービス種類コード = new ServiceShuruiCode(ServiceCategoryShurui.予住改修.getコード());
             支給限度単位数 = div.getShokanShikyuGendogakuShosai().getTxtKyotakuShienJutakuKaishu().getValue();
-            valueChange(テーブル区分, サービス種類コード, 適用開始年月, 支給限度単位数, update償還List, update上乗せList);
+            valueChange(テーブル区分, サービス種類コード, 適用開始年月, 支給限度単位数, update償還List,
+                    update上乗せList, 償還HolderList, 上乗せ償還HolderList);
         }
         if (!update償還List.isEmpty()) {
             for (ShokanShuruiShikyuGendoGaku update償還 : update償還List) {
@@ -407,36 +418,42 @@ public class ShokanShikyuGendogakuMainHandler {
             FlexibleYearMonth 適用開始年月,
             Decimal 支給限度単位数,
             List<ShokanShuruiShikyuGendoGaku> update償還List,
-            List<UwanoseShokanShuruiShikyuGendoGaku> update上乗せList) {
-
-        ShokanShuruiShikyuGendoGakuManager 償還manager = new ShokanShuruiShikyuGendoGakuManager();
-        UwanoseShokanShuruiShikyuGendoGakuManager 上乗せ償還manager
-                = new UwanoseShokanShuruiShikyuGendoGakuManager();
+            List<UwanoseShokanShuruiShikyuGendoGaku> update上乗せList,
+            List<ShokanShuruiShikyuGendoGaku> 償還HolderList,
+            List<UwanoseShokanShuruiShikyuGendoGaku> 上乗せ償還HolderList) {
 
         if (ShikyuGendogakuTableKubun.標準.get名称().equals(
                 テーブル区分)) {
-            ShokanShuruiShikyuGendoGaku update償還 = 償還manager
-                    .get償還払い給付種類支給限度額ByValue(サービス種類コード, 適用開始年月);
-            update償還 = update償還.createBuilderForEdit()
-                    .set支給限度単位数(支給限度単位数)
-                    .build();
-            update償還List.add(update償還);
+            for (ShokanShuruiShikyuGendoGaku 償還Holder : 償還HolderList) {
+                if (サービス種類コード.equals(償還Holder.getサービス種類コード())
+                        && 適用開始年月.equals(償還Holder.get適用開始年月())) {
+                    償還Holder = 償還Holder.createBuilderForEdit()
+                            .set支給限度単位数(支給限度単位数)
+                            .build();
+                    update償還List.add(償還Holder);
+                }
+            }
         } else {
-            UwanoseShokanShuruiShikyuGendoGaku update上乗せ = 上乗せ償還manager
-                    .get上乗せ償還払い給付種類支給限度額ByValue(サービス種類コード, 適用開始年月);
-            update上乗せ = update上乗せ.createBuilderForEdit()
-                    .set支給限度単位数(支給限度単位数)
-                    .build();
-            update上乗せList.add(update上乗せ);
+            for (UwanoseShokanShuruiShikyuGendoGaku 上乗せ償還Holder : 上乗せ償還HolderList) {
+                if (サービス種類コード.equals(上乗せ償還Holder.getサービス種類コード())
+                        && 適用開始年月.equals(上乗せ償還Holder.get適用開始年月())) {
+                    上乗せ償還Holder = 上乗せ償還Holder.createBuilderForEdit()
+                            .set支給限度単位数(支給限度単位数)
+                            .build();
+                    update上乗せList.add(上乗せ償還Holder);
+                }
+            }
         }
-
     }
 
     /**
      * 「削除」ボタン押下による入力の場合、選択行のデータを物理削除する
      *
+     * @param 償還HolderList List<ShokanShuruiShikyuGendoGaku>
+     * @param 上乗せ償還HolderList List<UwanoseShokanShuruiShikyuGendoGaku>
      */
-    public void deleteAndUpdate() {
+    public void deleteAndUpdate(List<ShokanShuruiShikyuGendoGaku> 償還HolderList,
+            List<UwanoseShokanShuruiShikyuGendoGaku> 上乗せ償還HolderList) {
         ServiceShuruiCode サービス種類コード = null;
         FlexibleYearMonth 適用開始年月 = new FlexibleYearMonth(
                 div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange()
@@ -453,22 +470,26 @@ public class ShokanShikyuGendogakuMainHandler {
 
         if (div.getShokanShikyuGendogakuShosai().getTxtKyotakuKaigoFukushiYogu().getValue() != null) {
             サービス種類コード = new ServiceShuruiCode(ServiceCategoryShurui.用具販売.getコード());
-            setDeleteList(テーブル区分, サービス種類コード, 適用開始年月, delete償還List, delete上乗せList);
+            setDeleteList(テーブル区分, サービス種類コード, 適用開始年月, delete償還List,
+                    delete上乗せList, 償還HolderList, 上乗せ償還HolderList);
         }
 
         if (div.getShokanShikyuGendogakuShosai().getTxtKyotakuKaigoJutakuKaishu().getValue() != null) {
             サービス種類コード = new ServiceShuruiCode(ServiceCategoryShurui.住宅改修.getコード());
-            setDeleteList(テーブル区分, サービス種類コード, 適用開始年月, delete償還List, delete上乗せList);
+            setDeleteList(テーブル区分, サービス種類コード, 適用開始年月, delete償還List,
+                    delete上乗せList, 償還HolderList, 上乗せ償還HolderList);
         }
 
         if (div.getShokanShikyuGendogakuShosai().getTxtKyotakuShienFukushiYogu().getValue() != null) {
             サービス種類コード = new ServiceShuruiCode(ServiceCategoryShurui.予用販売.getコード());
-            setDeleteList(テーブル区分, サービス種類コード, 適用開始年月, delete償還List, delete上乗せList);
+            setDeleteList(テーブル区分, サービス種類コード, 適用開始年月, delete償還List,
+                    delete上乗せList, 償還HolderList, 上乗せ償還HolderList);
         }
 
         if (div.getShokanShikyuGendogakuShosai().getTxtKyotakuShienJutakuKaishu().getValue() != null) {
             サービス種類コード = new ServiceShuruiCode(ServiceCategoryShurui.予住改修.getコード());
-            setDeleteList(テーブル区分, サービス種類コード, 適用開始年月, delete償還List, delete上乗せList);
+            setDeleteList(テーブル区分, サービス種類コード, 適用開始年月, delete償還List,
+                    delete上乗せList, 償還HolderList, 上乗せ償還HolderList);
         }
         List<dgShikyuGendogaku_Row> rowList = div.getShokanShikyuGendogakuIchiran()
                 .getDgShikyuGendogaku().getDataSource();
@@ -477,7 +498,8 @@ public class ShokanShikyuGendogakuMainHandler {
                     && !RS_1.equals(row.getHdnSaishinFlag())
                     && 適用開始年月.minusMonth(INDEX_1).toDateString().equals(
                             row.getTekiyoShuryoYM().getValue().getYearMonth().toDateString())) {
-                setUpdateList(null, update償還List, update上乗せList, row);
+                setUpdateList(null, update償還List, update上乗せList, row,
+                        償還HolderList, 上乗せ償還HolderList);
             }
         }
         償還manager.deleteAndUpdate償還(delete償還List, update償還List);
@@ -487,21 +509,28 @@ public class ShokanShikyuGendogakuMainHandler {
     private void setDeleteList(RString テーブル区分, ServiceShuruiCode サービス種類コード,
             FlexibleYearMonth 適用開始年月,
             List<ShokanShuruiShikyuGendoGaku> delete償還List,
-            List<UwanoseShokanShuruiShikyuGendoGaku> delete上乗せList) {
+            List<UwanoseShokanShuruiShikyuGendoGaku> delete上乗せList,
+            List<ShokanShuruiShikyuGendoGaku> 償還HolderList,
+            List<UwanoseShokanShuruiShikyuGendoGaku> 上乗せ償還HolderList) {
         int 履歴番号 = INDEX_1;
-        ShokanShuruiShikyuGendoGakuManager 償還manager = new ShokanShuruiShikyuGendoGakuManager();
-        UwanoseShokanShuruiShikyuGendoGakuManager 上乗せ償還manager
-                = new UwanoseShokanShuruiShikyuGendoGakuManager();
 
         if (ShikyuGendogakuTableKubun.標準.get名称().equals(
                 テーブル区分)) {
-            ShokanShuruiShikyuGendoGaku delete償還 = 償還manager
-                    .get償還払い給付種類支給限度額(サービス種類コード, 適用開始年月, 履歴番号);
-            delete償還List.add(delete償還);
+            for (ShokanShuruiShikyuGendoGaku 償還Holder : 償還HolderList) {
+                if (サービス種類コード.equals(償還Holder.getサービス種類コード())
+                        && 適用開始年月.equals(償還Holder.get適用開始年月())
+                        && 履歴番号 == 償還Holder.get履歴番号()) {
+                    delete償還List.add(償還Holder);
+                }
+            }
         } else {
-            UwanoseShokanShuruiShikyuGendoGaku delete上乗せ = 上乗せ償還manager
-                    .get上乗せ償還払い給付種類支給限度額(サービス種類コード, 適用開始年月, 履歴番号);
-            delete上乗せList.add(delete上乗せ);
+            for (UwanoseShokanShuruiShikyuGendoGaku 上乗せ償還Holder : 上乗せ償還HolderList) {
+                if (サービス種類コード.equals(上乗せ償還Holder.getサービス種類コード())
+                        && 適用開始年月.equals(上乗せ償還Holder.get適用開始年月())
+                        && 履歴番号 == 上乗せ償還Holder.get履歴番号()) {
+                    delete上乗せList.add(上乗せ償還Holder);
+                }
+            }
         }
     }
 
@@ -537,26 +566,32 @@ public class ShokanShikyuGendogakuMainHandler {
     private void setUpdateList(FlexibleYearMonth 適用終了年月,
             List<ShokanShuruiShikyuGendoGaku> update償還List,
             List<UwanoseShokanShuruiShikyuGendoGaku> update上乗せList,
-            dgShikyuGendogaku_Row row) {
+            dgShikyuGendogaku_Row row,
+            List<ShokanShuruiShikyuGendoGaku> 償還HolderList,
+            List<UwanoseShokanShuruiShikyuGendoGaku> 上乗せ償還HolderList) {
         FlexibleYearMonth 適用開始年月 = new FlexibleYearMonth(
                 row.getTekiyoKaishiYM().getValue().getYearMonth().toDateString());
         ServiceShuruiCode サービス種類コード = null;
         RString テーブル区分 = row.getTableKubun();
         if (row.getKyotakukaigoFukushiyoguGendogaku().getValue() != null) {
             サービス種類コード = new ServiceShuruiCode(ServiceCategoryShurui.用具販売.getコード());
-            setUpdateList2(サービス種類コード, テーブル区分, 適用開始年月, 適用終了年月, update償還List, update上乗せList);
+            setUpdateList2(サービス種類コード, テーブル区分, 適用開始年月, 適用終了年月, update償還List,
+                    update上乗せList, 償還HolderList, 上乗せ償還HolderList);
         }
         if (row.getKyotakukaigoJutakuKaishuGendogaku().getValue() != null) {
             サービス種類コード = new ServiceShuruiCode(ServiceCategoryShurui.住宅改修.getコード());
-            setUpdateList2(サービス種類コード, テーブル区分, 適用開始年月, 適用終了年月, update償還List, update上乗せList);
+            setUpdateList2(サービス種類コード, テーブル区分, 適用開始年月, 適用終了年月, update償還List,
+                    update上乗せList, 償還HolderList, 上乗せ償還HolderList);
         }
         if (row.getKyotakushienFukushiyoguGendogaku().getValue() != null) {
             サービス種類コード = new ServiceShuruiCode(ServiceCategoryShurui.予用販売.getコード());
-            setUpdateList2(サービス種類コード, テーブル区分, 適用開始年月, 適用終了年月, update償還List, update上乗せList);
+            setUpdateList2(サービス種類コード, テーブル区分, 適用開始年月, 適用終了年月, update償還List,
+                    update上乗せList, 償還HolderList, 上乗せ償還HolderList);
         }
         if (row.getKyotakushienJutakuKaishuGendogaku().getValue() != null) {
             サービス種類コード = new ServiceShuruiCode(ServiceCategoryShurui.予住改修.getコード());
-            setUpdateList2(サービス種類コード, テーブル区分, 適用開始年月, 適用終了年月, update償還List, update上乗せList);
+            setUpdateList2(サービス種類コード, テーブル区分, 適用開始年月, 適用終了年月, update償還List,
+                    update上乗せList, 償還HolderList, 上乗せ償還HolderList);
         }
     }
 
@@ -564,26 +599,30 @@ public class ShokanShikyuGendogakuMainHandler {
             RString テーブル区分, FlexibleYearMonth 適用開始年月,
             FlexibleYearMonth 適用終了年月,
             List<ShokanShuruiShikyuGendoGaku> update償還List,
-            List<UwanoseShokanShuruiShikyuGendoGaku> update上乗せList) {
-        ShokanShuruiShikyuGendoGakuManager 償還manager
-                = new ShokanShuruiShikyuGendoGakuManager();
-        UwanoseShokanShuruiShikyuGendoGakuManager 上乗せ償還manager
-                = new UwanoseShokanShuruiShikyuGendoGakuManager();
+            List<UwanoseShokanShuruiShikyuGendoGaku> update上乗せList,
+            List<ShokanShuruiShikyuGendoGaku> 償還HolderList,
+            List<UwanoseShokanShuruiShikyuGendoGaku> 上乗せ償還HolderList) {
 
         if (ShikyuGendogakuTableKubun.標準.get名称().equals(テーブル区分)) {
-            ShokanShuruiShikyuGendoGaku update償還 = 償還manager
-                    .get償還払い給付種類支給限度額ByValue(サービス種類コード, 適用開始年月);
-            update償還 = update償還.createBuilderForEdit()
-                    .set適用終了年月(適用終了年月)
-                    .build();
-            update償還List.add(update償還);
+            for (ShokanShuruiShikyuGendoGaku 償還Holder : 償還HolderList) {
+                if (サービス種類コード.equals(償還Holder.getサービス種類コード())
+                        && 適用開始年月.equals(償還Holder.get適用開始年月())) {
+                    償還Holder = 償還Holder.createBuilderForEdit()
+                            .set適用終了年月(適用終了年月)
+                            .build();
+                    update償還List.add(償還Holder);
+                }
+            }
         } else {
-            UwanoseShokanShuruiShikyuGendoGaku update上乗せ = 上乗せ償還manager
-                    .get上乗せ償還払い給付種類支給限度額ByValue(サービス種類コード, 適用開始年月);
-            update上乗せ = update上乗せ.createBuilderForEdit()
-                    .set適用終了年月(適用終了年月)
-                    .build();
-            update上乗せList.add(update上乗せ);
+            for (UwanoseShokanShuruiShikyuGendoGaku 上乗せ償還Holder : 上乗せ償還HolderList) {
+                if (サービス種類コード.equals(上乗せ償還Holder.getサービス種類コード())
+                        && 適用開始年月.equals(上乗せ償還Holder.get適用開始年月())) {
+                    上乗せ償還Holder = 上乗せ償還Holder.createBuilderForEdit()
+                            .set適用終了年月(適用終了年月)
+                            .build();
+                    update上乗せList.add(上乗せ償還Holder);
+                }
+            }
         }
     }
 
