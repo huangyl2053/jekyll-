@@ -75,6 +75,8 @@ public class SogojigyohiShinsaKetteiSeikyumeisaihyoSource implements IReportSour
     public RString gokeiKaigoKyufugaku;
     @ReportItem(name = "gokeiRiyoshaFutangaku", length = 15, order = 31)
     public RString gokeiRiyoshaFutangaku;
+    @ReportItem(name = "listMeisai_11", length = 15, order = 32)
+    public RString listMeisai_11;
 
     /**
      * GassanJigyobunJikofutangakuKeisanKekkaIchiranSourceのENUM
