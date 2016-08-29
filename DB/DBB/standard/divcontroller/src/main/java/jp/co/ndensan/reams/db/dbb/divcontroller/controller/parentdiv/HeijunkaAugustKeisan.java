@@ -42,9 +42,8 @@ public class HeijunkaAugustKeisan {
         panel.getHeijunka8ShoriNaiyo().getTxtFukaNendo().setValue(cg.getAsRString("賦課年度"));
 
         // 平準化計算方法
-        panel.getHeijunka8KeisanHohoPanel().getTxtKeisanHohoZougaku().setValue(cg.getAsRString("増額"));
-        panel.getHeijunka8KeisanHohoPanel().getTxtKeisanHohoGengaku().setValue(cg.getAsRString("減額"));
-
+//        panel.getHeijunka8KeisanHohoPanel().getTxtKeisanHohoZougaku().setValue(cg.getAsRString("増額"));
+//        panel.getHeijunka8KeisanHohoPanel().getTxtKeisanHohoGengaku().setValue(cg.getAsRString("減額"));
         List<dgHeijunka8ShoriKakunin1_Row> arrayData = createKakunin1Data();
         DataGrid<dgHeijunka8ShoriKakunin1_Row> grid = panel.getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1();
         grid.setDataSource(arrayData);
