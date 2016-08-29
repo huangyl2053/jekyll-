@@ -69,6 +69,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInProcess extends Batc
     private KokuhorenIchiranhyoMybatisParameter 帳票データの取得Parameter;
     private IOutputOrder 並び順;
     private List<RString> 改頁項目リスト;
+    private List<RString> 改頁項目名リスト;
     private Map<RString, RString> 出力順Map;
     private int index = 0;
     private int index_1 = 0;
@@ -107,6 +108,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInProcess extends Batc
         super.initialize();
         帳票データの取得Parameter = new KokuhorenIchiranhyoMybatisParameter();
         改頁項目リスト = new ArrayList<>();
+        改頁項目名リスト = new ArrayList<>();
         出力順Map = new HashMap<>();
         並び順 = get並び順(parameter.get帳票ID(), parameter.get出力順ID());
         RString 出力順 = MyBatisOrderByClauseCreator
@@ -131,6 +133,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInProcess extends Batc
         for (ISetSortItem item : 並び順.get設定項目リスト()) {
             if (item.is改頁項目()) {
                 改頁項目リスト.add(item.get項目ID());
+                改頁項目名リスト.add(item.get項目名());
             }
             if (i == INT_1) {
                 出力順Map.put(KEY_並び順の２件目, item.get項目名());
@@ -189,7 +192,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInProcess extends Batc
         } else {
             SogojigyohiShinsaKetteiSeikyumeisaihyoReport sogojigyohiShinsaKetteiSeikyumeisaihyoReport
                     = new SogojigyohiShinsaKetteiSeikyumeisaihyoReport(this.exEtntity, 出力順Map,
-                            parameter.getシステム日付(), this.get合計flag(this.exEtntity, entity));
+                            parameter.getシステム日付(), this.get合計flag(this.exEtntity, entity), 改頁項目名リスト);
             sogojigyohiShinsaKetteiSeikyumeisaihyoReport.writeBy(reportSourceWriter);
             if (this.get合計flag(this.exEtntity, entity)) {
                 SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInCsvEntity output
@@ -212,7 +215,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInProcess extends Batc
     protected void afterExecute() {
         SogojigyohiShinsaKetteiSeikyumeisaihyoReport sogojigyohiShinsaKetteiSeikyumeisaihyoReport
                 = new SogojigyohiShinsaKetteiSeikyumeisaihyoReport(this.exEtntity, 出力順Map,
-                        parameter.getシステム日付(), true);
+                        parameter.getシステム日付(), true, 改頁項目名リスト);
         sogojigyohiShinsaKetteiSeikyumeisaihyoReport.writeBy(reportSourceWriter);
         SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInCsvEntity output
                 = this.get帳票のCSVファイル作成(this.exEtntity, parameter.getシステム日付(), false);
