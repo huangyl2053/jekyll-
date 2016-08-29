@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710090.DBC710090_HanyoL
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710090.HanyoListKagoMoshitateProcessParameter;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -56,7 +57,7 @@ public class DBC710090_HanyoListKagoMoshitate extends BatchFlowBase<DBC710090_Ha
         param.setシステム日時(システム日時);
         param.setシステム日付(new FlexibleDate(システム日時.getDate().toDateString()));
         param.setSearchKey(new ShikibetsuTaishoPSMSearchKeyBuilder(
-                GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先).build());
+                GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先).setデータ取得区分(DataShutokuKubun.直近レコード).build());
         return param;
     }
 }
