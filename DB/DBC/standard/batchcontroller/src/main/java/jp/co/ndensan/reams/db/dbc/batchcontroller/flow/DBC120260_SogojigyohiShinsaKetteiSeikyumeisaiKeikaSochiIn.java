@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -151,6 +152,7 @@ public class DBC120260_SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiIn extends B
         parameter.set処理年月(getParameter().getShoriYM());
         parameter.set出力順ID(getParameter().getShutsuryokujunId());
         parameter.set帳票ID(ReportIdDBC.DBC200070.getReportId());
+        parameter.setシステム日付(RDateTime.now());
         return loopBatch(SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInProcess.class).arguments(parameter).
                 define();
     }

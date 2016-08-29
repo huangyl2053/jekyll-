@@ -50,6 +50,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaihyoBodyEditor implements ISogoji
         source.listMeisai_8 = doカンマ編集(帳票出力対象データ.get審査決定請求明細().get金額());
         source.listMeisai_9 = doカンマ編集(帳票出力対象データ.get審査決定請求明細().get介護給付費_総合事業費());
         source.listMeisai_10 = doカンマ編集(帳票出力対象データ.get審査決定請求明細().get利用者負担額());
+        source.listMeisai_11 = getColumnValue(帳票出力対象データ.get審査決定請求明細().getサービス種類コード());
         if (合計出力flag) {
             source.gokeiKensu = doカンマ編集(帳票出力対象データ.get審査決定請求合計().get合計_件数());
             source.gokeiTanisu = doカンマ編集(帳票出力対象データ.get審査決定請求合計().get合計_単位数());

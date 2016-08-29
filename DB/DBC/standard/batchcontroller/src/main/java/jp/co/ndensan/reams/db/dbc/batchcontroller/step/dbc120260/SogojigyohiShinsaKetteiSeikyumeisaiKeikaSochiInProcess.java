@@ -120,7 +120,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInProcess extends Batc
         } else {
             List<RString> 出力順BODY = 出力順.split(コンマ.toString());
             出力順 = デフォルト出力順;
-            if (出力順BODY.size() > 1) {
+            if (1 < 出力順BODY.size()) {
                 for (int i = 1; i < 出力順BODY.size(); i++) {
                     出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
                 }
@@ -189,18 +189,18 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInProcess extends Batc
         } else {
             SogojigyohiShinsaKetteiSeikyumeisaihyoReport sogojigyohiShinsaKetteiSeikyumeisaihyoReport
                     = new SogojigyohiShinsaKetteiSeikyumeisaihyoReport(this.exEtntity, 出力順Map,
-                            RDateTime.now(), this.get合計flag(this.exEtntity, entity));
+                            parameter.getシステム日付(), this.get合計flag(this.exEtntity, entity));
             sogojigyohiShinsaKetteiSeikyumeisaihyoReport.writeBy(reportSourceWriter);
             if (this.get合計flag(this.exEtntity, entity)) {
                 SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInCsvEntity output
-                        = this.get帳票のCSVファイル作成(this.exEtntity, RDateTime.now(), false);
+                        = this.get帳票のCSVファイル作成(this.exEtntity, parameter.getシステム日付(), false);
                 seikyugakuTsuchishoInCsvWriter.writeLine(output);
                 output
-                        = this.get帳票のCSVファイル作成(this.exEtntity, RDateTime.now(), true);
+                        = this.get帳票のCSVファイル作成(this.exEtntity, parameter.getシステム日付(), true);
                 seikyugakuTsuchishoInCsvWriter.writeLine(output);
             } else {
                 SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInCsvEntity output
-                        = this.get帳票のCSVファイル作成(this.exEtntity, RDateTime.now(), false);
+                        = this.get帳票のCSVファイル作成(this.exEtntity, parameter.getシステム日付(), false);
                 seikyugakuTsuchishoInCsvWriter.writeLine(output);
             }
             this.exEtntity = entity;
@@ -212,12 +212,12 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInProcess extends Batc
     protected void afterExecute() {
         SogojigyohiShinsaKetteiSeikyumeisaihyoReport sogojigyohiShinsaKetteiSeikyumeisaihyoReport
                 = new SogojigyohiShinsaKetteiSeikyumeisaihyoReport(this.exEtntity, 出力順Map,
-                        RDateTime.now(), true);
+                        parameter.getシステム日付(), true);
         sogojigyohiShinsaKetteiSeikyumeisaihyoReport.writeBy(reportSourceWriter);
         SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInCsvEntity output
-                = this.get帳票のCSVファイル作成(this.exEtntity, RDateTime.now(), false);
+                = this.get帳票のCSVファイル作成(this.exEtntity, parameter.getシステム日付(), false);
         seikyugakuTsuchishoInCsvWriter.writeLine(output);
-        output = this.get帳票のCSVファイル作成(this.exEtntity, RDateTime.now(), true);
+        output = this.get帳票のCSVファイル作成(this.exEtntity, parameter.getシステム日付(), true);
         seikyugakuTsuchishoInCsvWriter.writeLine(output);
         seikyugakuTsuchishoInCsvWriter.close();
     }
