@@ -304,6 +304,18 @@ public enum ReportIdDBC {
      */
     DBC100014(new ReportId("DBC100014_JukyushaTeiseiRenrakuhyo"), new RString("受給者訂正連絡票（紙媒体）")),
     /**
+     * 帳票設計_DBC100063_基準収入額適用お知らせ通知書の帳票ＩＤです。
+     */
+    DBC100063(new ReportId("DBC100063_KijunShunyugakuTekiyoOshiraseTsuchisho"), new RString("基準収入額適用お知らせ通知書")),
+    /**
+     * 帳票設計_DBC100064_基準収入額適用申請書の帳票ＩＤです。
+     */
+    DBC100064(new ReportId("DBC100064_KijunShunyugakuTekiyoShinseisho"), new RString("基準収入額適用申請書")),
+    /**
+     * 帳票設計_DBC200088_基準収入額適用申請書一覧表の帳票ＩＤです。
+     */
+    DBC200088(new ReportId("DBC200088_KijunShunyugakuTekiyoShinseishoHakkoIchiran"), new RString("基準収入額適用申請書一覧表")),
+    /**
      * 汎用リスト出力(高額合算申請書情報)
      */
     DBC701014(new ReportId("DBC701014_HanyoList_KogakuGassanShinseishoJoho"), new RString("汎用リスト出力(高額合算申請書情報)")),
