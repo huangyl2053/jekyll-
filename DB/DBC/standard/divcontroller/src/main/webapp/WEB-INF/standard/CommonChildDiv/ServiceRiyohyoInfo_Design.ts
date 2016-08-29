@@ -50,6 +50,10 @@ module DBC {
                 return "onClick_btnDelete";
             }
 
+            public static onClick_btnSave(): string {
+                return "onClick_btnSave";
+            }
+
             public static onBlur_txtTani(): string {
                 return "onBlur_txtTani";
             }
@@ -112,10 +116,6 @@ module DBC {
 
             public static onClick_btnGokeiKeisan(): string {
                 return "onClick_btnGokeiKeisan";
-            }
-
-            public static onClick_btnSave(): string {
-                return "onClick_btnSave";
             }
 
             public static onClick_btnBackRiyoNengetsuIchiran(): string {
@@ -238,6 +238,10 @@ module DBC {
             //public ccdServiceTypeInput(): DBZ.ServiceTypeInputCommonChildDiv.ModeController {
             //    return new DBZ.ServiceTypeInputCommonChildDiv.ModeController(this.convFiledName("ccdServiceTypeInput"));
             //}
+
+            public btnKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
+            }
 
             public ServiceRiyohyoBeppyoMeisai(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("ServiceRiyohyoBeppyoMeisai"));

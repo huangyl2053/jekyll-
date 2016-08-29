@@ -44,6 +44,10 @@ var DBC;
                 return "onClick_btnDelete";
             };
 
+            Events.onClick_btnSave = function () {
+                return "onClick_btnSave";
+            };
+
             Events.onBlur_txtTani = function () {
                 return "onBlur_txtTani";
             };
@@ -106,10 +110,6 @@ var DBC;
 
             Events.onClick_btnGokeiKeisan = function () {
                 return "onClick_btnGokeiKeisan";
-            };
-
-            Events.onClick_btnSave = function () {
-                return "onClick_btnSave";
             };
 
             Events.onClick_btnBackRiyoNengetsuIchiran = function () {
@@ -217,6 +217,10 @@ var DBC;
 
             Controls.prototype.ServiceRiyohyoBeppyoJigyoshaServiceInput = function () {
                 return new UZA.Panel(this.convFiledName("ServiceRiyohyoBeppyoJigyoshaServiceInput"));
+            };
+
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             };
 
             Controls.prototype.ServiceRiyohyoBeppyoMeisai = function () {
