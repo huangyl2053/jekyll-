@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -100,17 +99,15 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiProcess
     private static final RString 出力ファイル名
             = new RString("DBC200081_SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohi.csv");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
-    private static final RString キー_出力順 = new RString("出力順");
     private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3064.\"kohiFutanshaNo\" ASC ");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString 漢字_分 = new RString("分");
-    private static final CodeShubetsu 再審査結果コード = new CodeShubetsu("0020");
+
     @BatchWriter
     private CsvWriter eucCsvWriter;
     @BatchWriter
     private BatchReportWriter<SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiSource> batchReportWriter;
     private ReportSourceWriter<SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiSource> reportSourceWriter;
-    private CsvWriter<SogojigyohiSaishinsaCSVEntity> sogojigyohiSaishinsaCSVwriter;
 
     @Override
     protected void initialize() {
