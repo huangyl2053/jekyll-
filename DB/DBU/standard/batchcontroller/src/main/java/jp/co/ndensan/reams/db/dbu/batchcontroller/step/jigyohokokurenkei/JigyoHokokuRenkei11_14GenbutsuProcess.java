@@ -64,7 +64,7 @@ public class JigyoHokokuRenkei11_14GenbutsuProcess extends BatchProcessBase<DbT7
     private static final RString 番号_12 = new RString("12");
     private RString eucFilePath;
     private RString csvFileName;
-    private RDate 基準日;
+    private final RDate 基準日 = RDate.getNowDate();
     private JigyoHokokuRenkeiProcessParameter processParameter;
     private JigyoHokokuRenkei11or14Entity record1Entity;
     private JigyoHokokuRenkei11or14Entity record2Entity;
@@ -74,7 +74,7 @@ public class JigyoHokokuRenkei11_14GenbutsuProcess extends BatchProcessBase<DbT7
     @Override
     protected void initialize() {
         csvFileName = new RString("DUJRENF06_" + processParameter.get過去集計年月()
-                + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援) + ".csv");
+                + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告) + ".csv");
         record1Entity = new JigyoHokokuRenkei11or14Entity();
         record2Entity = new JigyoHokokuRenkei11or14Entity();
         record3Entity = new JigyoHokokuRenkei11or14Entity();
@@ -111,8 +111,8 @@ public class JigyoHokokuRenkei11_14GenbutsuProcess extends BatchProcessBase<DbT7
                         dateFomart(new RString(processParameter.get過去集計年月() + "01")),
                         dateFomart(RDate.getNowDate().toDateString()),
                         new RString("国民健康保険団体連合会"),
-                        DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援),
-                        DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, 基準日, SubGyomuCode.DBE認定支援)
+                        DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告),
+                        DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, 基準日, SubGyomuCode.DBU介護統計報告)
                 )
         );
     }

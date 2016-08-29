@@ -51,7 +51,7 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_SanProcess extends BatchProcessBa
     private static final RString 番号_12 = new RString("12");
     private static final int 桁_4 = 4;
     private static final int 桁_3 = 3;
-    private RDate 基準日;
+    private final RDate 基準日 = RDate.getNowDate();
     private RString eucFilePath;
     private RString csvFileName;
     private JigyoHokokuRenkeiProcessParameter processParameter;
@@ -62,7 +62,7 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_SanProcess extends BatchProcessBa
         csvFileName = new RString("DUJRENF03_"
                 + processParameter.get過去集計年月()
                 + "_"
-                + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援) + ".csv");
+                + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告) + ".csv");
     }
 
     @BatchWriter
@@ -102,7 +102,7 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_SanProcess extends BatchProcessBa
                 new JigyoHokokuRenkei2or3EucCsvEntity(
                         dateFormat(processParameter.get過去集計年月()),
                         processParameter.get過去集計年月().substring(桁_4),
-                        DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援),
+                        DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告),
                         jigyoHokokuRenkeiEntity.getD001(),
                         jigyoHokokuRenkeiEntity.getD002(),
                         jigyoHokokuRenkeiEntity.getD003(),
