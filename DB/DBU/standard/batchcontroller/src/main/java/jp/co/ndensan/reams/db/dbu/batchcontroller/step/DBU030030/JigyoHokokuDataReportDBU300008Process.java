@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 介護事業状況報告年報（様式1-5）帳票出力のバッチ処理クラスです。
+ * 介護事業状況報告月報・一般状況（別紙）帳票出力のバッチ処理クラスです。
  *
  * @reamsid_L DBU-5600-030 dingyi
  *
@@ -43,6 +43,7 @@ public class JigyoHokokuDataReportDBU300008Process extends BatchProcessBase<Jigy
     private static final RString 過去集計分旧市町村区分 = new RString("1");
     private static final RString 固定文字列_旧 = new RString("（旧）");
     private static final RString 年報月報区分 = new RString("年報");
+    private static final RString 年報月報区分CODE = new RString("2");
     private static final int 数値_10 = 10;
     private static final Decimal 数値_11 = new Decimal(11);
     private static final Decimal 数値_12 = new Decimal(12);
@@ -94,8 +95,10 @@ public class JigyoHokokuDataReportDBU300008Process extends BatchProcessBase<Jigy
         reportData.set作成日時(processParameter.get処理日時());
         reportData.set保険者名(保険者名);
         reportData.set保険者番号(保険者番号);
-        // TODO
-        reportData.set集計範囲(processParameter.get集計開始年月());
+        reportData.set年報月報区分(年報月報区分CODE);
+        reportData.set集計年度(processParameter.get集計年度());
+        reportData.set集計期間FROM(processParameter.get集計開始年月());
+        reportData.set集計期間TO(processParameter.get集計終了年月());
         reportData.set項目標題列1(new RString("前年度末現在"));
         reportData.set項目標題列2(new RString("当年度中増"));
         reportData.set項目標題列3(new RString("当年度中減"));
