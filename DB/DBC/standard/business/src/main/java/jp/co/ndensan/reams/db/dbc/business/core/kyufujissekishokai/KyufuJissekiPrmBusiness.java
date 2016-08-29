@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai;
 
+import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufuJissekiCareManagementHi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufuJissekiShakaiFukushiHojinKeigengaku;
@@ -37,7 +38,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KyufuJissekiPrmBusiness {
+public class KyufuJissekiPrmBusiness implements Serializable {
+
+    private static final long serialVersionUID = -5919506043541482841L;
 
 //    private DukanriJoho dukanriJoho; 共通管理情報
     private KojinKakuteiKey kojinKakuteiKey;
