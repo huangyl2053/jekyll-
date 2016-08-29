@@ -36,6 +36,10 @@ module DBD {
                 return "onBeforeOpenDialog_BtnTainoJokyo";
             }
 
+            public static onClick_btnSashitomeClose(): string {
+                return "onClick_btnSashitomeClose";
+            }
+
             public static onClick_SashitomeToRokuKaKuTei(): string {
                 return "onClick_SashitomeToRokuKaKuTei";
             }
