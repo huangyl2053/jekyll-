@@ -51,11 +51,11 @@ public class HanyoListParamHandler {
         Code 導入形態コード = shichosonSecurityJoho.get導入形態コード();
         if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getKey())) {
             div.getChushutsuJokenPanel().getCcdHokenshaList().setDisplayNone(false);
+            div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務);
         } else {
             div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().setDisplayNone(false);
             div.getChushutsuJokenPanel().getCcdHokenshaList().setDisabled(true);
             div.getChushutsuJokenPanel().getCcdHokenshaList().setVisible(false);
-            div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務);
         }
 
         div.getCcdShutsuryokuKoumoku().setDisabled(true);
