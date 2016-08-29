@@ -574,11 +574,11 @@ public class IchijiSashitome1GoHandler {
 
     private List<dgSashitomeKojoIchiran_Row> creatDateSource(RString 押下ボタン, ShiharaiHohoHenko 支払方法変更管理業務概念) {
         List<dgSashitomeKojoIchiran_Row> rowList = new ArrayList();
-        dgSashitomeKojoIchiran_Row row = new dgSashitomeKojoIchiran_Row();
         div.getTxtSagakuKingakuGokei().setValue(null);
         RString 差止控除状態区分;
         if (押下ボタン.equals(_給付一時差止登録)) {
             for (int i = 0; i < 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().size(); i++) {
+                dgSashitomeKojoIchiran_Row row = new dgSashitomeKojoIchiran_Row();
                 if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get情報分類区分()
                         .equals(ShiharaiHenkoJohoBunruiKubun.保険料控除情報.getコード())) {
                     差止控除状態区分 = 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除状態区分();
@@ -617,6 +617,7 @@ public class IchijiSashitome1GoHandler {
             }
         } else if (押下ボタン.equals(_保険料控除登録)) {
             for (int i = 0; i < 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().size(); i++) {
+                dgSashitomeKojoIchiran_Row row = new dgSashitomeKojoIchiran_Row();
                 if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get情報分類区分().equals(ShiharaiHenkoJohoBunruiKubun.差止情報.getコード())) {
                     row.setSashitome2(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除状態区分());
                     row.setSeiriNo(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止償還整理番号());
