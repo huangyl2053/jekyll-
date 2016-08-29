@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HanyoListFukaDaichoBatchParameter extends BatchParameterBase {
+public class DBB022001_FukaDaichoHanyoListSakuseiParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;
     private static final String KEY_1 = "帳票ID";
