@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NenjiRiyoshaFutanwariaiHanteiParameter extends BatchParameterBase {
+public class DBC180010_NenjiRiyoshaFutanwariaiHanteiParameter extends BatchParameterBase {
 
     @BatchParameter(key = "対象年度", name = "対象年度")
     private FlexibleYear 対象年度;
