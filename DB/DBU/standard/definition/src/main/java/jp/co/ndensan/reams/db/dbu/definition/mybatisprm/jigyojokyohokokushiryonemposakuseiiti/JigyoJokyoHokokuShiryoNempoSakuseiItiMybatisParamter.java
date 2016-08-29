@@ -114,7 +114,7 @@ public final class JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter implemen
             市町村コードリスト.addAll(旧市町村コードリスト);
         }
         return new JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter(
-                市町村コードリスト, 集計年度.concat("99"), get集計番号リスト(), get表番号リスト(),
+                市町村コードリスト, 集計年度.concat("99"), get集計番号List(), get表番号List(),
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
@@ -153,7 +153,7 @@ public final class JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter implemen
             }
         }
         return new JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter(
-                市町村コードリスト, RString.EMPTY, get集計番号リスト(), get表番号リスト(),
+                市町村コードリスト, RString.EMPTY, get集計番号List(), get表番号List(),
                 new RString("1"), 集計開始年月, 集計終了年月, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
@@ -233,12 +233,12 @@ public final class JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter implemen
             }
         }
         return new JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter(
-                市町村コードリスト, 年度.concat("99"), get集計番号リスト(), get表番号リスト(),
+                市町村コードリスト, 年度.concat("99"), get集計番号List(), get表番号List(),
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
 
-    private static List<RString> get集計番号リスト() {
+    private static List<RString> get集計番号List() {
         List<RString> 集計番号リスト = new ArrayList<>();
         集計番号リスト.add(ShukeiNo.別紙_1_第1号被保険者のいる世帯数.getコード());
         集計番号リスト.add(ShukeiNo.一般状況_1_第1号被保険者数.getコード());
@@ -260,7 +260,7 @@ public final class JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter implemen
         return 集計番号リスト;
     }
 
-    private static List<RString> get表番号リスト() {
+    private static List<RString> get表番号List() {
         List<RString> 表番号リスト = new ArrayList<>();
         表番号リスト.add(new RString("01"));
         表番号リスト.add(new RString("11"));
