@@ -75,7 +75,7 @@ public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<D
         pageBreakKeys.add(
                 new RString(SogojigyohiSeikyugakuTsuchishoKohiSource.ReportSourceFields.kanCode.name()));
         pageBreakKeys.add(
-                new RString(SogojigyohiSeikyugakuTsuchishoKohiSource.ReportSourceFields.kouName.name()));
+                new RString(SogojigyohiSeikyugakuTsuchishoKohiSource.ReportSourceFields.kouCode.name()));
     }
 
     @Override
@@ -143,11 +143,13 @@ public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<D
         csvEntity.set公費負担者番号(csvDataEntity.get公費負担者番号());
         csvEntity.set公費負担者名(csvDataEntity.get公費負担者名());
         if (コード_99.equals(csvDataEntity.get款コード())) {
+            csvEntity.set款コード(csvDataEntity.get款コード());
             csvEntity.set款名(総合計);
         } else {
             csvEntity.set款名(csvDataEntity.get款名());
         }
         if (コード_99.equals(csvDataEntity.get項コード())) {
+            csvEntity.set項コード(csvDataEntity.get項コード());
             csvEntity.set項名(RString.EMPTY);
         } else {
             csvEntity.set項名(csvDataEntity.get項名());
