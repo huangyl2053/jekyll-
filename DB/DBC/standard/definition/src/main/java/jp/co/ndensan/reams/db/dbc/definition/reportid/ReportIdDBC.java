@@ -16,6 +16,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBC {
 
     /**
+     * 高額合算支給額計算結果連絡票情報取込一覧表
+     */
+    DBC200037(new ReportId("DBC200037_GassanShikyugakuKeisankekkaRanrakuhyoTorikomiIchiran"),
+            new RString("高額合算支給額計算結果連絡票情報取込一覧表")),
+    /**
+     * 高額合算支給額計算結果連絡票情報確認リスト
+     */
+    DBC200038(new ReportId("DBC200038_GassanShikyugakuKeisankekkaRanrakuhyoKakuninIchiran"),
+            new RString("高額合算支給額計算結果連絡票情報確認リスト")),
+    /**
      * 自己負担額補正一覧表
      */
     DBC200031(new ReportId("DBC200031_GassanJikofutangakuHoseiIchiran"), new RString("自己負担額補正一覧表")),
