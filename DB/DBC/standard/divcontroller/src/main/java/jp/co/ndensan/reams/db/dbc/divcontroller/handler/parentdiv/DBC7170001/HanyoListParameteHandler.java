@@ -60,7 +60,6 @@ public class HanyoListParameteHandler {
      */
     public void initialize() {
 
-        div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
         set調定年度();
 
         List<RString> selectKey = new ArrayList<>();
@@ -70,6 +69,7 @@ public class HanyoListParameteHandler {
 
         ShichosonSecurityJoho 市町村情報セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (事務広域.equals(市町村情報セキュリティ情報.get導入形態コード().value())) {
+            div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
             div.getChushutsuJokenPanel().getCcdHokenshaList().setDisplayNone(false);
         } else {
             div.getChushutsuJokenPanel().getCcdHokenshaList().setVisible(false);
