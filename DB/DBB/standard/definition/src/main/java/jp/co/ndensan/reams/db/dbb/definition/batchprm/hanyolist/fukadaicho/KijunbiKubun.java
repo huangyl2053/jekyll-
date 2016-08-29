@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 基準日区分クラスです。
  *
- * @reamsid_L DBB-1900-030 zhaowei
+ * @reamsid_L DBB-9999-022 zhaowei
  */
 public enum KijunbiKubun {
 
@@ -20,9 +20,9 @@ public enum KijunbiKubun {
      */
     賦課基準日で抽出("1", "賦課基準日で抽出"),
     /**
-     * コード:2 名称:調定日で抽出 略称:定義なし
+     * コード:2 名称:調定日（処理日）で抽出 略称:定義なし
      */
-    調定日で抽出("2", "調定日で抽出");
+    調定日で抽出("2", "調定日（処理日）で抽出");
 
     private final RString code;
     private final RString fullName;

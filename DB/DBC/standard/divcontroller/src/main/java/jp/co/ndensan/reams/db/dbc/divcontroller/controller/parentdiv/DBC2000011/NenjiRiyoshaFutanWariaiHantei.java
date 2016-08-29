@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC2000011;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.nenjiriyoshafutanwariaihantei.NenjiRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.nenjiriyoshafutanwariaihantei.DBC180010_NenjiRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
@@ -118,8 +118,8 @@ public class NenjiRiyoshaFutanWariaiHantei {
      * @param div NenjiRiyoshaFutanWariaiHanteiDiv
      * @return ResponseData
      */
-    public ResponseData<NenjiRiyoshaFutanwariaiHanteiParameter> onClick_Batch(NenjiRiyoshaFutanWariaiHanteiDiv div) {
-        NenjiRiyoshaFutanwariaiHanteiParameter parameter = new NenjiRiyoshaFutanwariaiHanteiParameter();
+    public ResponseData<DBC180010_NenjiRiyoshaFutanwariaiHanteiParameter> onClick_Batch(NenjiRiyoshaFutanWariaiHanteiDiv div) {
+        DBC180010_NenjiRiyoshaFutanwariaiHanteiParameter parameter = new DBC180010_NenjiRiyoshaFutanwariaiHanteiParameter();
         RYear 年 = div.getPanelAll().getTxtNendo().getValue().getYear().plusYear(1);
         RString 月日 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年度終了月日, RDate.getNowDate(),
                 SubGyomuCode.DBC介護給付);

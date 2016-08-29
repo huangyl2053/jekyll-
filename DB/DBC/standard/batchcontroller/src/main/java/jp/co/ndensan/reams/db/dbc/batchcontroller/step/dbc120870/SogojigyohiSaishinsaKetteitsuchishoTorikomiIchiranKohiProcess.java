@@ -66,7 +66,8 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  *
  * @reamsid_L DBC-4730-030 liuxiaoyu
  */
-public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiEntity> {
+public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiProcess
+        extends BatchKeyBreakBase<SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiEntity> {
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.sogojigyohisaishinsa."
@@ -77,10 +78,7 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
     private List<RString> 改頁項目;
     private Map<RString, RString> 出力順Map;
     private static final RString コンマ = new RString(",");
-    private static final RString 作成 = new RString("作成");
     private SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiEntity lastEntity;
-    private Code code;
-    private RString 被保険者番号;
     private Set<ShikibetsuCode> 識別コードset = new HashSet();
     private KokuhorenIchiranhyoMybatisParameter 帳票データの取得Parameter;
     private static final int INDEX_1 = 1;
@@ -103,7 +101,7 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
             = new RString("DBC200081_SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohi.csv");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
     private static final RString キー_出力順 = new RString("出力順");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3063.\"shoKisaiHokenshaNo\" ASC ");
+    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3064.\"kohiFutanshaNo\" ASC ");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString 漢字_分 = new RString("分");
     private static final CodeShubetsu 再審査結果コード = new CodeShubetsu("0020");
@@ -137,7 +135,7 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
         } else {
             List<RString> 出力順BODY = 出力順.split(コンマ.toString());
             出力順 = デフォルト出力順;
-            if (出力順BODY.size() > 1) {
+            if (1 < 出力順BODY.size()) {
                 for (int i = 1; i < 出力順BODY.size(); i++) {
                     出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
                 }

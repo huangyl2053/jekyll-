@@ -94,6 +94,10 @@ public enum ReportIdDBC {
      */
     DBC200058(new ReportId("DBC200058_JukyushaTotsugokekkaIchiran"), new RString("受給者情報突合結果一覧表")),
     /**
+     * 負担割合判定一覧表帳票ＩＤです。
+     */
+    DBC200089(new ReportId("DBC200089_FutanWariaiHanteiIchiran"), new RString("負担割合判定一覧表")),
+    /**
      * 負担割合証（カット紙）
      */
     DBC100065(new ReportId("DBC100065_FutanWariaiSho"), new RString("負担割合証（カット紙）")),
