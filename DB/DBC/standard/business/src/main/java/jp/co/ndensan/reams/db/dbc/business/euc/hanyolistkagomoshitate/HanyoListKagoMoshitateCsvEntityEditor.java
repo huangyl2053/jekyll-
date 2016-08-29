@@ -221,7 +221,7 @@ public class HanyoListKagoMoshitateCsvEntityEditor {
     }
 
     private RString get申立事由(RString key) {
-        return CodeMaster.getCodeMeisho(DBCCodeShubetsu.過誤申立事由コード_下２桁_申立理由.getコード(),
+        return CodeMaster.getCodeRyakusho(DBCCodeShubetsu.過誤申立事由コード_下２桁_申立理由.getコード(),
                 new Code(key), FlexibleDate.getNowDate());
     }
 
