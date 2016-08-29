@@ -227,4 +227,28 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac {
                 limit(1).
                 toObject(DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity.class);
     }
+
+    /**
+     * 社会福祉法人等利用者負担軽減履歴情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     *
+     * @return List<DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity>
+     *
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity> get社会福祉法人等利用者負担軽減履歴情報(HihokenshaNo 被保険者番号)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen.class).
+                where(
+                        eq(hihokenshaNo, 被保険者番号)).
+                order(by(tekiyoKaishiYMD, DESC)).
+                toList(DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity.class);
+
+    }
 }
