@@ -25,7 +25,7 @@ public class TokuChoJohoTorikomiRirekiTuikaProcess extends BatchProcessBase<
         jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity> {
 
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic."
-            + "IUeT0511NenkinTokuchoKaifuJohoMapper.selectAllNoDeleted");
+            + "IUeT0511NenkinTokuchoKaifuJohoMapper.selectAllNoDeletedUex");
     private TokuchoSeidokanIFSakuseiDBUpdateProcessParameter parameter;
     private RDateTime システム日時;
 

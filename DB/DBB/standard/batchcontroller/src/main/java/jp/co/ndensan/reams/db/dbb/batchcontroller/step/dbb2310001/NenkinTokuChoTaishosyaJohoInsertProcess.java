@@ -24,7 +24,7 @@ public class NenkinTokuChoTaishosyaJohoInsertProcess extends BatchProcessBase<
         jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity> {
 
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic."
-            + "IUeT0511NenkinTokuchoKaifuJohoMapper.selectAllNoDeleted");
+            + "IUeT0511NenkinTokuchoKaifuJohoMapper.selectAllNoDeletedUex");
 
     @BatchWriter
     BatchPermanentTableWriter<UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity> ueT0515Writer;
