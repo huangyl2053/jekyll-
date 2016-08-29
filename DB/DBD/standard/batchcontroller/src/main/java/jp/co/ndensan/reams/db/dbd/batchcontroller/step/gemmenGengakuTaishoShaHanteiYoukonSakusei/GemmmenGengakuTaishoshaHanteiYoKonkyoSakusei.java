@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * DBDBTZ0001_減免減額対象者判定用根拠作成_process処理クラスです。
  *
- * @reamsid_L DBD-3710-090 liuwei2
+ * @reamsid_L DBD-3710-050 liuwei2
  */
 public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBase<TaishouJohoEntity> {
 

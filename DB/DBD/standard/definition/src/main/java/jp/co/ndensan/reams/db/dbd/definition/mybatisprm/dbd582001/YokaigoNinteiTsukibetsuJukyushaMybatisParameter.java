@@ -87,10 +87,10 @@ public class YokaigoNinteiTsukibetsuJukyushaMybatisParameter implements IMyBatis
         this.基準年月 = 基準年月;
         this.生年月日From = 生年月日From;
         this.生年月日To = 生年月日To;
-        if (!年齢基準日.isEmpty() && 年齢基準日 != null) {
+        if (年齢基準日 != null && !年齢基準日.isEmpty()) {
             this.年齢基準日 = 年齢基準日;
-            this.生年月日From2 = 年齢基準日.minusYear(年齢From);
-            this.生年月日To2 = 年齢基準日.minusYear(年齢To);
+            this.生年月日From2 = 年齢基準日.minusYear(年齢To);
+            this.生年月日To2 = 年齢基準日.minusYear(年齢From);
         }
         if (地区区分.equals(地区区分住所)) {
             this.is住所 = true;

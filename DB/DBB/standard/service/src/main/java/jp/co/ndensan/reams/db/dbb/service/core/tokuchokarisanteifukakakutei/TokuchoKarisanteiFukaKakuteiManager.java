@@ -115,7 +115,7 @@ public class TokuchoKarisanteiFukaKakuteiManager {
         if (処理名.equals(ShoriName.仮算定異動賦課確定.get名称()) || 処理名.equals(ShoriName.異動賦課確定.get名称())) {
             List<RString> 処理名リスト = new ArrayList<>();
             処理名リスト.add(処理名);
-            List<DbT7022ShoriDateKanriEntity> 登録_処理リスト = 介護賦課Dac.select処理状況(賦課年度, 処理名リスト);
+            List<DbT7022ShoriDateKanriEntity> 登録_処理リスト = 介護賦課Dac.select処理状況(賦課年度, 処理名リスト, SubGyomuCode.DBB介護賦課);
             if (登録_処理リスト.get(0).getNendoNaiRenban() == null) {
                 IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
                 登録_処理リスト.get(0).setSubGyomuCode(SubGyomuCode.DBB介護賦課);

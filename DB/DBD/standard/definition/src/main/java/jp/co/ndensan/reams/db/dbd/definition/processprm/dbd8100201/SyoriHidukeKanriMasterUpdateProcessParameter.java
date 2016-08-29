@@ -41,4 +41,22 @@ public class SyoriHidukeKanriMasterUpdateProcessParameter implements IBatchProce
             RString 処理名) {
         return new SyoriHidukeKanriMasterUpdateMybatisParameter(保険者情報_保険者番号, 処理名, 処理年度, 処理区分, 対象月);
     }
+
+    /**
+     * 処理日付管理マスタ更新
+     *
+     * @param 処理年度 処理年度
+     * @param 処理区分 処理区分
+     * @param 対象月 対象月
+     * @param 処理年月日 処理年月日
+     * @param 処理日時 処理日時
+     */
+    public SyoriHidukeKanriMasterUpdateProcessParameter(FlexibleYear 処理年度, RString 処理区分,
+            RString 対象月, FlexibleDate 処理年月日, YMDHMS 処理日時) {
+        this.処理区分 = 処理区分;
+        this.処理年度 = 処理年度;
+        this.処理年月日 = 処理年月日;
+        this.処理日時 = 処理日時;
+        this.対象月 = 対象月;
+    }
 }

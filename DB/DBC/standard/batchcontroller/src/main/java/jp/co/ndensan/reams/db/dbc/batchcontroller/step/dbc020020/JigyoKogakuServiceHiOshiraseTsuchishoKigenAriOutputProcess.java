@@ -65,7 +65,8 @@ public class JigyoKogakuServiceHiOshiraseTsuchishoKigenAriOutputProcess extends 
     private RString 通常分通知文2;
     private RString 償還分通知文1;
     private RString 償還分通知文2;
-    private int count;
+    private int count1;
+    private int count2;
 
     @BatchWriter
     private BatchReportWriter<KogakuJigyoOshiraseTsuchishoKigenAriSource> 通常分BatchReportWriter;
@@ -76,7 +77,8 @@ public class JigyoKogakuServiceHiOshiraseTsuchishoKigenAriOutputProcess extends 
 
     @Override
     protected void initialize() {
-        count = 1;
+        count1 = 1;
+        count2 = 1;
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
 
         IOutputOrder 出力順 = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBC介護給付,
@@ -120,11 +122,12 @@ public class JigyoKogakuServiceHiOshiraseTsuchishoKigenAriOutputProcess extends 
     protected void process(ShinseiJohoChohyoTempRelateEntity entity) {
         KogakuJigyoOshiraseTsuchishopaParameterEntity param = new KogakuJigyoOshiraseTsuchishopaParameterEntity();
         param.set申請情報帳票発行一時(entity.get申請情報());
+        param.set申請書提出期限(parameter.getShinseishoTeishutsuKigen());
         if (entity.get申請情報().isJidoShokanTaishoFlagChohyo()) {
             param.set自動償還(true);
             param.set通知文1(償還分通知文1);
             param.set通知文2(償還分通知文2);
-            param.set連番(new RString(count));
+            param.set連番(new RString(count1));
             param.set認証者(認証者情報_償還分);
             param.set文書番号文字列(parameter.getBunshoMojiretsu());
             param.setタイトル(総合事業高額サービス給付のお知らせ通知書自動償還分);
@@ -132,11 +135,12 @@ public class JigyoKogakuServiceHiOshiraseTsuchishoKigenAriOutputProcess extends 
                     帳票制御共通).getSofubutsuAtesakiSource().get送付物宛先ソース());
             KogakuJigyoOshiraseTsuchishoKigenAriReport report = new KogakuJigyoOshiraseTsuchishoKigenAriReport(param);
             report.writeBy(自動償還分ReportSourceWriter);
+            count1 = count1 + 1;
         } else {
             param.set自動償還(false);
             param.set通知文1(通常分通知文1);
             param.set通知文2(通常分通知文2);
-            param.set連番(new RString(count));
+            param.set連番(new RString(count2));
             param.set認証者(認証者情報_通常分);
             param.setタイトル(総合事業高額サービス給付のお知らせ通知書);
             param.set文書番号文字列(parameter.getBunshoMojiretsu());
@@ -144,6 +148,7 @@ public class JigyoKogakuServiceHiOshiraseTsuchishoKigenAriOutputProcess extends 
                     帳票制御共通).getSofubutsuAtesakiSource().get送付物宛先ソース());
             KogakuJigyoOshiraseTsuchishoKigenAriReport report = new KogakuJigyoOshiraseTsuchishoKigenAriReport(param);
             report.writeBy(通常分ReportSourceWriter);
+            count2 = count2 + 1;
         }
     }
 

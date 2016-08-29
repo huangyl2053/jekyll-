@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * KyodoJukyushaIdoRenrakuhyo のクラスファイル
  *
- * @reamsid_L DBC-4390-010 xupeng
+ * @reamsid_L DBC-4390-030 xupeng
  */
 public class KyodoJukyushaIdoRenrakuhyoDiv extends Panel implements IKyodoJukyushaIdoRenrakuhyoDiv {
 

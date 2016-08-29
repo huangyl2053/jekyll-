@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd2020001.ShiharaiHohoHenkoHaakuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd207010.ShiharaiHohoHenkoHaakuIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020001.ShiharaiHohoHenkoHakuListMainDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020001.DBD2020001ValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
@@ -55,28 +55,8 @@ public class ShiharaiHohoHenkoHakuListMain {
      * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_radHihokenshaAll(ShiharaiHohoHenkoHakuListMainDiv div) {
-        div.getRadHihokenshaIgaiAll().clearSelectedItem();
         div.getTxtTainoKikanHihokenshaAll().setDisabled(false);
         div.getHihokenshaIgai().setDisabled(true);
-        div.getChkJukyushaAll().getSelectedItems().clear();
-        div.getTxtTainoKikanJukyushaAll().clearValue();
-        div.getTxtTainoNengetsuJukyushaAll().clearValue();
-        div.getChkNinteiShinseisha().getSelectedItems().clear();
-        div.getTxtTainoKikanNinteiShinseisha().clearValue();
-        div.getTxtTainoNengetsuNinteiShinseisha().clearValue();
-        div.getChkNinteiYMD().getSelectedItems().clear();
-        div.getTxtNinteiDateFrom().clearValue();
-        div.getTxtNinteiYMDTo().clearValue();
-        div.getTxtTainoKikanNinteiYMD().clearValue();
-        div.getTxtTainoNengetsuNinteiYMD().clearValue();
-        div.getChkShokanShinseisha().getSelectedItems().clear();
-        div.getTxtTainoKikanShokanShinseisha().clearValue();
-        div.getTxtTainoNengetsuShokanShinseisha().clearValue();
-        div.getChkShokanKetteiYMD().getSelectedItems().clear();
-        div.getTxtShokanKetteiYMDFrom().clearValue();
-        div.getTxtShokanKetteiYMDTo().clearValue();
-        div.getTxtTainoKikanShokanKettei().clearValue();
-        div.getTxtTainoNengetsuShokanKettei().clearValue();
 
         return ResponseData.of(div).respond();
     }
@@ -88,15 +68,12 @@ public class ShiharaiHohoHenkoHakuListMain {
      * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_radHihokenshaIgaiAll(ShiharaiHohoHenkoHakuListMainDiv div) {
-        div.getRadHihokenshaAll().clearSelectedItem();
         div.getHihokenshaIgai().setDisabled(false);
         div.getChkJukyushaAll().setDisabled(false);
         div.getChkNinteiShinseisha().setDisabled(false);
         div.getChkNinteiYMD().setDisabled(false);
         div.getChkShokanShinseisha().setDisabled(false);
         div.getChkShokanKetteiYMD().setDisabled(false);
-        div.getTxtTainoKikanHihokenshaAll().clearValue();
-        div.getTxtTainoNengetsuHihokenshaAll().clearValue();
 
         div.getTxtTainoKikanHihokenshaAll().setDisabled(true);
         div.getTxtTainoKikanJukyushaAll().setDisabled(true);
@@ -123,8 +100,6 @@ public class ShiharaiHohoHenkoHakuListMain {
         if (div.getChkJukyushaAll().getSelectedKeys() != null && !div.getChkJukyushaAll().getSelectedKeys().isEmpty()) {
             div.getTxtTainoKikanJukyushaAll().setDisabled(false);
         } else {
-            div.getTxtTainoKikanJukyushaAll().clearValue();
-            div.getTxtTainoNengetsuHihokenshaAll().clearValue();
             div.getTxtTainoKikanJukyushaAll().setDisabled(true);
         }
 
@@ -142,8 +117,6 @@ public class ShiharaiHohoHenkoHakuListMain {
         if (div.getChkNinteiShinseisha().getSelectedKeys() != null && !div.getChkNinteiShinseisha().getSelectedKeys().isEmpty()) {
             div.getTxtTainoKikanNinteiShinseisha().setDisabled(false);
         } else {
-            div.getTxtTainoKikanNinteiShinseisha().clearValue();
-            div.getTxtTainoNengetsuNinteiShinseisha().clearValue();
             div.getTxtTainoKikanNinteiShinseisha().setDisabled(true);
         }
 
@@ -163,10 +136,7 @@ public class ShiharaiHohoHenkoHakuListMain {
             div.getTxtNinteiDateFrom().setDisabled(false);
             div.getTxtNinteiYMDTo().setDisabled(false);
         } else {
-            div.getTxtTainoKikanNinteiYMD().clearValue();
-            div.getTxtNinteiDateFrom().clearValue();
-            div.getTxtNinteiYMDTo().clearValue();
-            div.getTxtTainoNengetsuNinteiYMD().clearValue();
+
             div.getTxtTainoKikanNinteiYMD().setDisabled(true);
             div.getTxtNinteiDateFrom().setDisabled(true);
             div.getTxtNinteiYMDTo().setDisabled(true);
@@ -186,8 +156,7 @@ public class ShiharaiHohoHenkoHakuListMain {
         if (div.getChkShokanShinseisha().getSelectedKeys() != null && !div.getChkShokanShinseisha().getSelectedKeys().isEmpty()) {
             div.getTxtTainoKikanShokanShinseisha().setDisabled(false);
         } else {
-            div.getTxtTainoKikanShokanShinseisha().clearValue();
-            div.getTxtTainoNengetsuShokanShinseisha().clearValue();
+
             div.getTxtTainoKikanShokanShinseisha().setDisabled(true);
         }
 
@@ -207,10 +176,6 @@ public class ShiharaiHohoHenkoHakuListMain {
             div.getTxtShokanKetteiYMDFrom().setDisabled(false);
             div.getTxtShokanKetteiYMDTo().setDisabled(false);
         } else {
-            div.getTxtTainoKikanShokanKettei().clearValue();
-            div.getTxtShokanKetteiYMDFrom().clearValue();
-            div.getTxtShokanKetteiYMDTo().clearValue();
-            div.getTxtTainoNengetsuShokanKettei().clearValue();
             div.getTxtTainoKikanShokanKettei().setDisabled(true);
             div.getTxtShokanKetteiYMDFrom().setDisabled(true);
             div.getTxtShokanKetteiYMDTo().setDisabled(true);

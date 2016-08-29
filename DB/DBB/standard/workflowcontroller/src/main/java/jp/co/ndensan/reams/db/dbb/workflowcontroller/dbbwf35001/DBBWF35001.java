@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.BranchPrintTshuchish
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.RLogger;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
@@ -31,7 +30,6 @@ public class DBBWF35001 {
     public BranchPrintTshuchisho branchPrintTshuchisho(int flowVersion) {
 
         FlowParameters params = FlowParameterAccessor.get();
-        RLogger.info(new RString("===================通知書一括発行==============" + params.get(new RString("通知書一括発行："), Boolean.class)));
         if (params.get(new RString("通知書一括発行"), Boolean.class)) {
             return BranchPrintTshuchisho.発行処理する;
         }
@@ -45,7 +43,6 @@ public class DBBWF35001 {
      * @return バッチパラメータ
      */
     public DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter setTsuchishoBatchParam(FlowParameters flowPrm) {
-        RLogger.info(new RString("===================DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter=============="));
         DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter param = new DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter();
         param.set調定年度(flowPrm.get(new RString("調定年度"), FlexibleYear.class));
         param.set賦課年度(flowPrm.get(new RString("賦課年度"), FlexibleYear.class));

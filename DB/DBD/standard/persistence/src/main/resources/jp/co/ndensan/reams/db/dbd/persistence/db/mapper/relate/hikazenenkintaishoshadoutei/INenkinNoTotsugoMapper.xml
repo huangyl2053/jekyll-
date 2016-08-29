@@ -97,7 +97,7 @@
         A."dtno" AS 連番,
         A."dtrekodoKubun" AS DTレコード区分,
         A."dtshichosonCode" AS DT市町村コード,
-        A."dtDTnennkinnHokennshaCode" AS DT年金保険者コード,
+        A."dtnennkinnHokennshaCode" AS DT年金保険者コード,
         A."dttsuuchiContentCode" AS DT通知内容コード,
         A."dtyobi1" AS DT予備1,
         A."dtseidoCode" AS DT制度コード,
@@ -186,7 +186,7 @@
         "TorikomiTempTable" AS A
         INNER JOIN
         "JissekiDataIchijiSakuseiTempTable" AS B
-        ON A."dtDTnennkinnHokennshaCode" = B."dtNennkinnHokenshaCode"
+        ON A."dtnennkinnHokennshaCode" = B."dtNennkinnHokenshaCode"
         AND subString(A."dtnennkinnCode",1,3) = subString(B."dtNennkinnCode",1,3)
         AND A."dtnennkinnNo" = B."dtKisoNennkinnNo"
     </select>
@@ -234,7 +234,7 @@
         A."dtno" AS 連番,
         A."dtrekodoKubun" AS DTレコード区分,
         A."dtshichosonCode" AS DT市町村コード,
-        A."dtDTnennkinnHokennshaCode" AS DT年金保険者コード,
+        A."dtnennkinnHokennshaCode" AS DT年金保険者コード,
         A."dttsuuchiContentCode" AS DT通知内容コード,
         A."dtyobi1" AS DT予備1,
         A."dtseidoCode" AS DT制度コード,
@@ -275,7 +275,7 @@
         WHERE B."douteiResultKubun" = '1'
         AND B."gaitouJiyu" = '1'
         AND A."dtTaishoYear" = B."dtTaisyoYear"
-        AND A."dtDTnennkinnHokennshaCode" = B."dtNennkinnHokenshaCode"
+        AND A."dtnennkinnHokennshaCode" = B."dtNennkinnHokenshaCode"
         AND A."dtnennkinnCode" = B."dtNennkinnCode"
         AND A."dtnennkinnNo" = B."dtKisoNennkinnNo"
         AND A."dtcreateYMD" = B."dtCreateYMD"

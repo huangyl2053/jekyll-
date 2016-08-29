@@ -97,13 +97,7 @@ public class GeneralPurposeListOutputProcessParameter implements IBatchProcessPa
                 日付範囲From,
                 日付範囲To,
                 直近データ抽出,
-                喪失区分,
-                項目名付加,
-                連番付加,
-                日付スラッシュ付加,
                 宛名抽出条件,
-                出力順,
-                出力項目,
                 psmShikibetsuTaisho,
                 psmAtesaki);
     }

@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 共同処理用受給者異動連絡票共有子Divのバリデーション
  *
- * @reamsid_L DBC-4390-010 xupeng
+ * @reamsid_L DBC-4390-030 xupeng
  */
 public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
 

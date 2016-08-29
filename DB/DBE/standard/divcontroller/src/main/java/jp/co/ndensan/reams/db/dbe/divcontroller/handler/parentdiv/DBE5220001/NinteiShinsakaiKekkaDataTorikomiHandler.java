@@ -75,8 +75,9 @@ public class NinteiShinsakaiKekkaDataTorikomiHandler {
     /**
      * バッチ用パラメータクラスを作成します。
      *
+     * @return ShinsakaiKekkaDataTorikomiBatchParameter
      */
-    public void setBatchParameter() {
+    public ShinsakaiKekkaDataTorikomiBatchParameter setBatchParameter() {
         ShinsakaiKekkaDataTorikomiBatchParameter batchParameter = new ShinsakaiKekkaDataTorikomiBatchParameter();
         List<RString> fileList = new ArrayList<>();
         for (dgTorikomiTaiasho_Row row : div.getDgTorikomiTaiasho().getSelectedItems()) {
@@ -100,6 +101,7 @@ public class NinteiShinsakaiKekkaDataTorikomiHandler {
         }
         batchParameter.setMediapath(DbBusinessConfig
                 .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        return batchParameter;
     }
 
     private dgTorikomiTaiasho_Row creatDgShinseishaIchiranRow(RString meisho, RString fileName) {

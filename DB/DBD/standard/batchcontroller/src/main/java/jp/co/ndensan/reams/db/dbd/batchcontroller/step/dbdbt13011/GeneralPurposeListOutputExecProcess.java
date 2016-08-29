@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.Chus
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt13011.GeneralPurposeListOutputProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputEucCsvEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputNotContainNoEucCsvEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
@@ -19,7 +18,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.Datakubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseishaKankeiCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
@@ -54,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -72,7 +71,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -131,7 +129,6 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private static final RString 英数字ファイル名 = new RString("HanyoList_ShisetuNyutaisyo.csv");
     private static final RString 出力条件表_保険者 = new RString("保険者：");
     private static final RString 出力条件表_基準日 = new RString("基準日：");
-    private static final RString 出力条件表_取得日 = new RString("取得日：～　");
     private static final RString 出力条件表_対象データ_直近のみ = new RString("対象データ：直近のみ");
     private static final RString 出力条件表_喪失区分 = new RString("喪失区分：");
     private static final RString 出力条件表_年齢 = new RString("年齢：");
@@ -181,16 +178,12 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
 
     private GeneralPurposeListOutputProcessParameter processParamter;
     private CsvWriter<GeneralPurposeListOutputEucCsvEntity> eucCsvWriter;
-    private CsvWriter<GeneralPurposeListOutputNotContainNoEucCsvEntity> eucNotContainNoCsvWriter;
 
-//    private static final RString MYBATIS_SELECT_ID = new RString(
-//            "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.generalpurposelistoutput."
-//            + "IGeneralPurposeListOutputMapper.getGeneralPurposeListOutputInfo");
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.generalpurposelistoutput.IGeneralPurposeListOutputMapper.getGeneralPurposeListOutputInfo");
+            "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.generalpurposelistoutput."
+            + "IGeneralPurposeListOutputMapper.getGeneralPurposeListOutputInfo");
 
     private Association 地方公共団体情報;
-    private RDateTime sysDateTime;
     private HokenshaList 保険者リスト;
     private FileSpoolManager manager;
     private RString eucFilePath;
@@ -242,12 +235,12 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
 
     @Override
     protected void afterExecute() {
-        eucCsvWriter.close();
-        if (!personalDataList.isEmpty()) {
-            AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-            manager.spool(eucFilePath, log);
-        }
         eucFileOutputJohoFactory();
+        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+
+        IBatchWriter batchWriter = (IBatchWriter) eucCsvWriter;
+        batchWriter.close();
+        manager.spool(eucFilePath, log);
     }
 
     private PersonalData toPersonalData(GeneralPurposeListOutputEntity entity) {
@@ -260,25 +253,16 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_ShisetuNyutaisyo.csv"));
-        if (processParamter.is連番付加()) {
-            eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
-                    .alwaysWriteHeader(GeneralPurposeListOutputEucCsvEntity.class)
-                    .setEncode(Encode.UTF_8withBOM)
-                    .setDelimiter(EUC_WRITER_DELIMITER)
-                    .setEnclosure(EUC_WRITER_ENCLOSURE)
-                    .setNewLine(NewLine.CRLF)
-                    .hasHeader(processParamter.is項目名付加())
-                    .build();
-        } else {
-            eucNotContainNoCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
-                    .alwaysWriteHeader(GeneralPurposeListOutputEucCsvEntity.class)
-                    .setEncode(Encode.UTF_8withBOM)
-                    .setDelimiter(EUC_WRITER_DELIMITER)
-                    .setEnclosure(EUC_WRITER_ENCLOSURE)
-                    .setNewLine(NewLine.CRLF)
-                    .hasHeader(processParamter.is項目名付加())
-                    .build();
-        }
+
+        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
+                .alwaysWriteHeader(GeneralPurposeListOutputEucCsvEntity.class)
+                .setEncode(Encode.UTF_8withBOM)
+                .setDelimiter(EUC_WRITER_DELIMITER)
+                .setEnclosure(EUC_WRITER_ENCLOSURE)
+                .setNewLine(NewLine.CRLF)
+                .hasHeader(processParamter.is項目名付加())
+                .build();
+
     }
 
     private void eucFileOutputJohoFactory() {
@@ -827,20 +811,6 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
     }
 
-    private RString edit月日_yyyymm(FlexibleDate date) {
-
-        if (processParamter.is日付スラッシュ付加()) {
-            if (!FlexibleDate.EMPTY.equals(date)) {
-                return date.getYearMonth().toDateString();
-            }
-            return RString.EMPTY;
-        }
-        if (!FlexibleDate.EMPTY.equals(date)) {
-            return date.getYearMonth().toDateString();
-        }
-        return RString.EMPTY;
-    }
-
     private RString get住所_番地_方書(RString 住所, RString 番地, RString 方書) {
 
         StringBuilder builder = new StringBuilder();
@@ -935,21 +905,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         if (processParamter.get基準日() != null && !processParamter.get基準日().isEmpty()) {
             list.add(出力条件表_基準日.concat(edit日期(processParamter.get基準日())));
         }
-
-        if ((processParamter.get日付範囲From() != null && !processParamter.get日付範囲From().isEmpty())
-                && (processParamter.get日付範囲To() != null && !processParamter.get日付範囲To().isEmpty())) {
-            list.add(edit抽出項目区分(processParamter.get抽出項目区分()).concat(new RString(":")).concat(edit日期(processParamter.get日付範囲From())).concat(出力条件表_中間符号)
-                    .concat(edit日期(processParamter.get日付範囲To())));
-        }
-        if ((processParamter.get日付範囲From() != null && !processParamter.get日付範囲From().isEmpty())
-                && (processParamter.get日付範囲To() == null || processParamter.get日付範囲To().isEmpty())) {
-            list.add(edit抽出項目区分(processParamter.get抽出項目区分()).concat(new RString(":")).concat(edit日期(processParamter.get日付範囲From())).concat(出力条件表_中間符号));
-        }
-        if ((processParamter.get日付範囲From() == null || processParamter.get日付範囲From().isEmpty())
-                && (processParamter.get日付範囲To() != null && !processParamter.get日付範囲To().isEmpty())) {
-            list.add(edit抽出項目区分(processParamter.get抽出項目区分()).concat(new RString(":")).concat(出力条件表_中間符号).concat(edit日期(processParamter.get日付範囲To())));
-        }
-
+        set日付範囲について(list);
         if (processParamter.is直近データ抽出()) {
             list.add(出力条件表_対象データ_直近のみ);
         }
@@ -961,6 +917,25 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         set出力条件表_生年月日(atenaSelectBatchParameter, nenreiSoChushutsuHoho, list);
         set出力条件表_地区選択(atenaSelectBatchParameter, list);
         return list;
+    }
+
+    private void set日付範囲について(List<RString> list) {
+        if ((processParamter.get日付範囲From() != null && !processParamter.get日付範囲From().isEmpty())
+                && (processParamter.get日付範囲To() != null && !processParamter.get日付範囲To().isEmpty())) {
+            list.add(edit抽出項目区分(processParamter.get抽出項目区分()).concat(new RString(":"))
+                    .concat(edit日期(processParamter.get日付範囲From())).concat(出力条件表_中間符号)
+                    .concat(edit日期(processParamter.get日付範囲To())));
+        }
+        if ((processParamter.get日付範囲From() != null && !processParamter.get日付範囲From().isEmpty())
+                && (processParamter.get日付範囲To() == null || processParamter.get日付範囲To().isEmpty())) {
+            list.add(edit抽出項目区分(processParamter.get抽出項目区分()).concat(new RString(":"))
+                    .concat(edit日期(processParamter.get日付範囲From())).concat(出力条件表_中間符号));
+        }
+        if ((processParamter.get日付範囲From() == null || processParamter.get日付範囲From().isEmpty())
+                && (processParamter.get日付範囲To() != null && !processParamter.get日付範囲To().isEmpty())) {
+            list.add(edit抽出項目区分(processParamter.get抽出項目区分()).concat(new RString(":"))
+                    .concat(出力条件表_中間符号).concat(edit日期(processParamter.get日付範囲To())));
+        }
     }
 
     private RString edit日期(FlexibleDate 変更前日期) {
@@ -1292,9 +1267,9 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private RString edit受給状況(RString yukoMukoKubun) {
 
         try {
-            if (有効無効区分_有効_コード.equals(YukoMukoKubun.toValue(yukoMukoKubun))) {
+            if (有効無効区分_有効_コード.equals(yukoMukoKubun)) {
                 return 有効;
-            } else if (有効無効区分_無効_コード.equals(YukoMukoKubun.toValue(yukoMukoKubun))) {
+            } else if (有効無効区分_無効_コード.equals(yukoMukoKubun)) {
                 return 無効;
             } else {
                 return RString.EMPTY;

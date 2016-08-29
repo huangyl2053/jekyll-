@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -37,8 +38,12 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 public class ShinseishoTorokuHandler {
 
     private final ShinseishoTorokuDiv div;
-    private static final int 八 = 8;
-    private static final int 十二 = 12;
+    private static final int INDEX_8 = 8;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_101 = 101;
+    private static final int INDEX_731 = 731;
+    private static final int INDEX_801 = 801;
+    private static final int INDEX_1231 = 1231;
     private static final int INDEX_4 = 4;
     private static final int 平成年度 = 2015;
     private static final RString 八月一日 = new RString("0801");
@@ -104,9 +109,9 @@ public class ShinseishoTorokuHandler {
      *
      */
     public void set処理年度の初期値() {
-        if (1 <= YMDHMS.now().getMonthValue() && YMDHMS.now().getMonthValue() < 八) {
+        if (INDEX_101 < Integer.valueOf((RDate.getNowDate().toString().substring(INDEX_5, INDEX_8))) && Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_5, INDEX_8)) < INDEX_731) {
             div.getTxtShoriNendo().setValue(FlexibleDate.getNowDate().minusYear(1));
-        } else if (八 <= YMDHMS.now().getMonthValue() && YMDHMS.now().getMonthValue() <= 十二) {
+        } else if (INDEX_801 < Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_5, INDEX_8)) && Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_4, INDEX_8)) < INDEX_1231) {
             div.getTxtShoriNendo().setValue(FlexibleDate.getNowDate());
         }
     }

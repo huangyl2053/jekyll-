@@ -575,6 +575,8 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMainHandler {
             if (id.equals(情報と状態ArrayList.get(index).get障がい書控除申請登録情報().identifier())) {
                 情報と状態ArrayList.remove(index);
                 isDeleteed = true;
+            } else {
+                情報と状態ArrayList.get(index).set新履歴番号(情報と状態ArrayList.get(index).get新履歴番号() - 1);
             }
         }
         修正情報と状態(編集情報);

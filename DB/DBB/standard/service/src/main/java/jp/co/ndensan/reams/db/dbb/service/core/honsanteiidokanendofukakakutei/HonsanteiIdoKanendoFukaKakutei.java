@@ -87,7 +87,7 @@ public class HonsanteiIdoKanendoFukaKakutei {
      * @return 処理日付管理entity 取得できない場合、NULLを返す
      */
     public ShoriDateKanri getKakuteiKijunbi(FlexibleYear 調定年度) {
-        DbT7022ShoriDateKanriEntity shoriDateKanri = shoriDateKanriDac.select確定の最新の基準日(調定年度);
+        DbT7022ShoriDateKanriEntity shoriDateKanri = shoriDateKanriDac.select最新の基準日(調定年度);
         if (shoriDateKanri == null) {
             return null;
         }

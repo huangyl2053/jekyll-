@@ -27,6 +27,7 @@ public class TokuteiFutangendogakuShinseishoEditor implements ITokuteiFutangendo
 
     /**
      * 介護保険特定負担限度額申請書の帳票データの設定処理です。
+     *
      * @param source 護保険特定負担限度額申請書の帳票データ
      * @return 護保険特定負担限度額申請書の帳票データ
      */

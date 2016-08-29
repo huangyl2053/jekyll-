@@ -78,10 +78,6 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
             source = set出力順改頁(source);
         }
         source.list_1 = new RString(String.valueOf(index + 1));
-
-    }
-
-    private void setLayer1Step2(FutangakuNinteiHakkoIchiranReportSource source) {
         if (null != 帳票情報) {
             FlexibleDate 喪失年月日 = this.帳票情報.get喪失年月日();
             if (null != 喪失年月日 && !喪失年月日.isEmpty()) {
@@ -99,6 +95,12 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
             if (null != this.帳票情報.get申請日()) {
                 source.list_6 = this.帳票情報.get申請日().wareki().toDateString();
             }
+        }
+    }
+
+    private void setLayer1Step2(FutangakuNinteiHakkoIchiranReportSource source) {
+        if (null != 帳票情報) {
+
             if (null != this.帳票情報.get決定日()) {
                 source.list_7 = this.帳票情報.get決定日().wareki().toDateString();
             }
@@ -125,7 +127,9 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
             if (this.帳票情報.is通知書発行フラグ()) {
                 source.list_12 = new RString("○");
             }
-            source.list_13 = this.帳票情報.get入所施設CD().getColumnValue();
+            if (null != this.帳票情報.get入所施設CD()) {
+                source.list_13 = this.帳票情報.get入所施設CD().getColumnValue();
+            }
         }
     }
 

@@ -60,7 +60,7 @@ public class DBD200004_ShakaiFukushiHojinKeigenNinteishaListFlow extends BatchFl
      * @return バッチコマンド
      */
     @Step(減免減額対象者判定用根拠作成)
-    protected IBatchFlowCommand 減免減額対象者判定用根拠作成() {
+    protected IBatchFlowCommand youkonSakusei() {
         GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter youkonsakuseiparameter
                 = new GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter(getParameter().get所得年度());
         return otherBatchFlow(バッチID_DBDBZZ0001, SubGyomuCode.DBD介護受給, youkonsakuseiparameter).define();

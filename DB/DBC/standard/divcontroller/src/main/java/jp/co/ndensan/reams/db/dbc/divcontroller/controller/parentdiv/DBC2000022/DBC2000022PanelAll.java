@@ -418,7 +418,7 @@ public class DBC2000022PanelAll {
                 = ViewStateHolder.get(ViewStateKeys.利用者負担割合明細, FutanWariaiSokujiKouseiHolder.class);
         SourceDataCollection collection = getHandler(div).onClick_btnPrint(資格対象者, holder.get利用者負担割合明細());
         RiyoshaFutanWariai 利用者負担割合 = ViewStateHolder.get(ViewStateKeys.利用者負担割合, RiyoshaFutanWariai.class);
-        getHandler(div).利用者負担割合編集(利用者負担割合);
+        利用者負担割合 = getHandler(div).利用者負担割合編集(利用者負担割合);
         ViewStateHolder.put(ViewStateKeys.利用者負担割合, 利用者負担割合);
         getHandler(div).onClick_btnUpdate(資格対象者.get識別コード(),
                 利用者負担割合, null, null);
@@ -593,23 +593,6 @@ public class DBC2000022PanelAll {
             }
         }
         return false;
-    }
-
-    private void reset(dgFutanWariai_Row rowData, DBC2000022PanelAllDiv div) {
-        div.getDgFutanWariai().getClickedItem().setShikakuCode(rowData.getShikakuCode());
-        div.getDgFutanWariai().getClickedItem().setFutanWariaiCode(rowData.getFutanWariaiCode());
-        div.getDgFutanWariai().getClickedItem().setShikaku(rowData.getShikaku());
-        div.getDgFutanWariai().getClickedItem().setFutanWariai(rowData.getFutanWariai());
-        div.getDgFutanWariai().getClickedItem().getTekiyoKaishibi().setValue(rowData.getTekiyoKaishibi().getValue());
-        div.getDgFutanWariai().getClickedItem().getTekiyoShuryobi().setValue(rowData.getTekiyoShuryobi().getValue());
-        div.getDgFutanWariai().getClickedItem().getGokeiShotoku().setValue(rowData.getGokeiShotoku().getValue());
-        div.getDgFutanWariai().getClickedItem().getSetaiinsu().setValue(rowData.getSetaiinsu().getValue());
-        div.getDgFutanWariai().getClickedItem().getNenkinShunyuGokei().setValue(rowData.getNenkinShunyuGokei().getValue());
-        div.getDgFutanWariai().getClickedItem().getSonotaGokeiShotoku().setValue(rowData.getSonotaGokeiShotoku().getValue());
-        div.getDgFutanWariai().getClickedItem().setBiko(rowData.getBiko());
-        if (!RowState.Added.equals(rowData.getRowState())) {
-            div.getDgFutanWariai().getClickedItem().setRowState(RowState.Modified);
-        }
     }
 
     private RiyoshaFutanWariaiSokujiKouseiPanelValidationHandler getCheckHandler(DBC2000022PanelAllDiv div) {

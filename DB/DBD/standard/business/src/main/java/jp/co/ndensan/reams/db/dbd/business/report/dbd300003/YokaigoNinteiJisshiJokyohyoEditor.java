@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJokyohyoEditor {
 
-    private static final RString NOCOUNT = new RString("000000");
     private final FlexibleDate 基準日;
     private final RString 年齢;
     private final RString 地区;
@@ -83,11 +82,9 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
 
         YokaigoNinteiJisshiJokyohyoReportEntity list1 = 実施状況Entityリストlist1.get(index);
         if (!実施状況Entityリストlist1.isEmpty()) {
-            if (list1.get市町村名() != null && !list1.get市町村名().equals(NOCOUNT)) {
-                source.shichosonName = list1.get市町村名();
-                source.hokenshaName = list1.get市町村名();
-                source.hokenshaNo = list1.get市町村番号();
-            }
+            source.shichosonName = list1.get市町村名();
+            source.hokenshaName = list1.get市町村名();
+            source.hokenshaNo = list1.get市町村番号();
             if (list1.get対象年度() != null) {
                 source.nendo = list1.get対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()
                         .concat(年度YEAR);
@@ -110,11 +107,9 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
 
         YokaigoNinteiJisshiJokyohyoReportEntity list2 = 実施状況Entityリストlist2.get(index);
         if (!実施状況Entityリストlist2.isEmpty()) {
-            if (list2.get市町村名() != null && !list2.get市町村名().equals(NOCOUNT)) {
-                source.shichosonName = list2.get市町村名();
-                source.hokenshaName = list2.get市町村名();
-                source.hokenshaNo = list2.get市町村番号();
-            }
+            source.shichosonName = list2.get市町村名();
+            source.hokenshaName = list2.get市町村名();
+            source.hokenshaNo = list2.get市町村番号();
             if (list1.get対象年度() != null) {
                 source.nendo = list2.get対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()
                         .concat(年度YEAR);
@@ -136,11 +131,10 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
         }
         YokaigoNinteiJisshiJokyohyoReportEntity list3 = 実施状況Entityリストlist3.get(index);
         if (!実施状況Entityリストlist3.isEmpty()) {
-            if (list3.get市町村名() != null && !list3.get市町村名().equals(NOCOUNT)) {
-                source.shichosonName = list3.get市町村名();
-                source.hokenshaName = list3.get市町村名();
-                source.hokenshaNo = list3.get市町村番号();
-            }
+            source.shichosonName = list3.get市町村名();
+            source.hokenshaName = list3.get市町村名();
+            source.hokenshaNo = list3.get市町村番号();
+
             if (list1.get対象年度() != null) {
                 source.nendo = list3.get対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()
                         .concat(年度YEAR);
@@ -162,11 +156,10 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
         }
         YokaigoNinteiJisshiJokyohyoReportEntity list4 = 実施状況Entityリストlist4.get(index);
         if (!実施状況Entityリストlist4.isEmpty()) {
-            if (list4.get市町村名() != null && !list4.get市町村名().equals(NOCOUNT)) {
-                source.shichosonName = list4.get市町村名();
-                source.hokenshaName = list4.get市町村名();
-                source.hokenshaNo = list4.get市町村番号();
-            }
+            source.shichosonName = list4.get市町村名();
+            source.hokenshaName = list4.get市町村名();
+            source.hokenshaNo = list4.get市町村番号();
+
             if (list1.get対象年度() != null) {
                 source.nendo = list4.get対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()
                         .concat(年度YEAR);

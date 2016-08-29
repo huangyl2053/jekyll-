@@ -23,7 +23,6 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShinsakaiKekkaDataTorikomiBatchParameter extends BatchParameterBase {
 
-    private static final long serialVersionUID = 1983264275818454152L;
     private static final String FILENAME = "filename";
     private static final String TORIKOMIDATAKUBUN = "torikomidatakubun";
     private static final String TORIKOMINAIYOUKUBUN = "torikominaiyoukubun";

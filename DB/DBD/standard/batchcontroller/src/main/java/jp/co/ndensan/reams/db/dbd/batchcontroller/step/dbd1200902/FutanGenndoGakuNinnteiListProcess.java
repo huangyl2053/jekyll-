@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200019.FutangakuNinteiHakkoIchiranOrderKey;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200019.FutangakuNinteiHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.FutanGenndoGakuNinnteiListProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.FutanGenndoGakuNinnteiListEntity;
@@ -129,7 +130,7 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
         data.set適用日(futan.getTekiyoYMD());
         data.set有効期限(futan.getTekiyoYMD());
         data.set決定(KetteiKubun.toValue(futan.getKetteiKubun()));
-        data.set負担段階(futan.getRiyoshaFutanDankai());
+        data.set負担段階(RiyoshaFutanDankai.toValue(futan.getKetteiKubun()).get名称());
         data.set認定証発行フラグ(futan.isNinteishoHakkoZumi());
         data.set通知書発行済み(futan.isTsuchiHakkoZumi());
         data.set認定証発行フラグ(parameter.is認定証発行フラグ());

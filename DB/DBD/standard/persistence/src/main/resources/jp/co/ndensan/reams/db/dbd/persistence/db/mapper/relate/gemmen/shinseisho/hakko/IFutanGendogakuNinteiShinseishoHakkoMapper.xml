@@ -25,6 +25,7 @@
               fetchSize="500">
         SELECT C."hihokenshaNo" AS  被保険者番号,
                C."shikibetsuCode" AS 識別コード,
+               F."kyuSochishaFlag" AS 旧措置者フラグ,
                E."shichosonCode" AS 市町村コード,
                E."koikinaiTokureiSochimotoShichosonCode" AS 広住特措置元市町村コード,
                G."jigyoshaName" AS 事業者名称,

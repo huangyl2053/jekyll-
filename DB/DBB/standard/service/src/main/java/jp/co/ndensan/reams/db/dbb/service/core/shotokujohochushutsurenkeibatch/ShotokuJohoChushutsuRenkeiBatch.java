@@ -383,7 +383,7 @@ public class ShotokuJohoChushutsuRenkeiBatch {
                 処理日付管理dac.save(当初_単一処理日付管理EntityList.get(0));
             }
             if (異動_広域.equals(処理区分)) {
-                異動_広域場合Handle(entity, 処理区分, 処理年度, バッチ起動処理日時);
+                異動_広域場合Handle(entity, 処理年度, バッチ起動処理日時);
             }
             if (異動_単一.equals(処理区分)) {
                 異動_単一場合Handle(処理年度, バッチ起動処理日時);
@@ -504,48 +504,46 @@ public class ShotokuJohoChushutsuRenkeiBatch {
             shoriKegaKakunin.set市町村コード(entity.get市町村コード());
             shoriKegaKakunin.set非課税区分(entity.get非課税区分());
             shoriKegaKakunin.setエラー内容(当年度の所得情報が既に存在します);
+        } else if (!課税_0非課税_1課税取消_2未申告_3.equals(entity.get非課税区分())) {
+            shoriKegaKakunin = new ShoriKegaKakunin();
+            shoriKegaKakunin.set賦課年度(entity.get賦課年度());
+            shoriKegaKakunin.set住民コード(entity.get住民ｺｰﾄﾞ());
+            shoriKegaKakunin.set市町村コード(entity.get市町村コード());
+            shoriKegaKakunin.set非課税区分(entity.get非課税区分());
+            shoriKegaKakunin.setエラー内容(非課税区分が誤ってます);
         } else {
-            if (!課税_0非課税_1課税取消_2未申告_3.equals(entity.get非課税区分())) {
-                shoriKegaKakunin = new ShoriKegaKakunin();
-                shoriKegaKakunin.set賦課年度(entity.get賦課年度());
-                shoriKegaKakunin.set住民コード(entity.get住民ｺｰﾄﾞ());
-                shoriKegaKakunin.set市町村コード(entity.get市町村コード());
-                shoriKegaKakunin.set非課税区分(entity.get非課税区分());
-                shoriKegaKakunin.setエラー内容(非課税区分が誤ってます);
-            } else {
-                List<DbtKaigoShotokuTempEntity> kaigoList = new ArrayList<>();
-                DbtKaigoShotokuTempEntity kaigoEntity = new DbtKaigoShotokuTempEntity();
-                kaigoEntity.set市町村コード(entity.get市町村コード());
-                kaigoEntity.set市町村識別ID(entity.get識別ＩＤ());
-                kaigoEntity.set所得年度(entity.get賦課年度());
-                kaigoEntity.set識別コード(entity.get住民ｺｰﾄﾞ());
-                kaigoEntity.set履歴番号(値_0);
-                if (非課税区分_0.equals(entity.get非課税区分())) {
-                    kaigoEntity.set課税区分_住民税減免前(課税_1);
-                } else if (非課税区分_1.equals(entity.get非課税区分()) || 非課税区分_2.equals(entity.get非課税区分())) {
-                    kaigoEntity.set課税区分_住民税減免前(非課税_2);
-                } else if (非課税区分_3.equals(entity.get非課税区分())) {
-                    kaigoEntity.set課税区分_住民税減免前(未申告_3);
-                }
-                if (非課税区分_0.equals(entity.get非課税区分())) {
-                    kaigoEntity.set課税区分_住民税減免後(課税_1);
-                } else if (非課税区分_1.equals(entity.get非課税区分()) || 非課税区分_2.equals(entity.get非課税区分())) {
-                    kaigoEntity.set課税区分_住民税減免後(非課税_2);
-                } else if (非課税区分_3.equals(entity.get非課税区分())) {
-                    kaigoEntity.set課税区分_住民税減免後(未申告_3);
-                }
-                kaigoEntity.set合計所得金額(entity.get合計所得金額());
-                kaigoEntity.set公的年金収入額(entity.get公的年金等収入額());
-                kaigoEntity.set公的年金所得額(entity.get公的年金等所得額());
-                kaigoEntity.set課税所得額(new Decimal(値_0.toString()));
-                kaigoEntity.set激変緩和措置区分(entity.get激変緩和区分());
-                kaigoEntity.set優先区分(値_0);
-                kaigoEntity.set処理日時(YMDHMS.now());
-                kaigoList.add(kaigoEntity);
-                for (int i = 0; i < kaigoList.size(); i++) {
-                    IShutokuJohoChushutsuRenkeiMapper mapper = this.mapperProvider.create(IShutokuJohoChushutsuRenkeiMapper.class);
-                    mapper.insert介護所得一時テーブル(kaigoList.get(i));
-                }
+            List<DbtKaigoShotokuTempEntity> kaigoList = new ArrayList<>();
+            DbtKaigoShotokuTempEntity kaigoEntity = new DbtKaigoShotokuTempEntity();
+            kaigoEntity.set市町村コード(entity.get市町村コード());
+            kaigoEntity.set市町村識別ID(entity.get識別ＩＤ());
+            kaigoEntity.set所得年度(entity.get賦課年度());
+            kaigoEntity.set識別コード(entity.get住民ｺｰﾄﾞ());
+            kaigoEntity.set履歴番号(値_0);
+            if (非課税区分_0.equals(entity.get非課税区分())) {
+                kaigoEntity.set課税区分_住民税減免前(課税_1);
+            } else if (非課税区分_1.equals(entity.get非課税区分()) || 非課税区分_2.equals(entity.get非課税区分())) {
+                kaigoEntity.set課税区分_住民税減免前(非課税_2);
+            } else if (非課税区分_3.equals(entity.get非課税区分())) {
+                kaigoEntity.set課税区分_住民税減免前(未申告_3);
+            }
+            if (非課税区分_0.equals(entity.get非課税区分())) {
+                kaigoEntity.set課税区分_住民税減免後(課税_1);
+            } else if (非課税区分_1.equals(entity.get非課税区分()) || 非課税区分_2.equals(entity.get非課税区分())) {
+                kaigoEntity.set課税区分_住民税減免後(非課税_2);
+            } else if (非課税区分_3.equals(entity.get非課税区分())) {
+                kaigoEntity.set課税区分_住民税減免後(未申告_3);
+            }
+            kaigoEntity.set合計所得金額(entity.get合計所得金額());
+            kaigoEntity.set公的年金収入額(entity.get公的年金等収入額());
+            kaigoEntity.set公的年金所得額(entity.get公的年金等所得額());
+            kaigoEntity.set課税所得額(new Decimal(値_0.toString()));
+            kaigoEntity.set激変緩和措置区分(entity.get激変緩和区分());
+            kaigoEntity.set優先区分(値_0);
+            kaigoEntity.set処理日時(YMDHMS.now());
+            kaigoList.add(kaigoEntity);
+            for (int i = 0; i < kaigoList.size(); i++) {
+                IShutokuJohoChushutsuRenkeiMapper mapper = this.mapperProvider.create(IShutokuJohoChushutsuRenkeiMapper.class);
+                mapper.insert介護所得一時テーブル(kaigoList.get(i));
             }
         }
     }
@@ -561,32 +559,30 @@ public class ShotokuJohoChushutsuRenkeiBatch {
                 shoriKegaKakunin.set市町村コード(entity.get市町村コード());
                 shoriKegaKakunin.set非課税区分(entity.get非課税区分());
                 shoriKegaKakunin.setエラー内容(調査中として登録されています);
+            } else if (介護優先_1.equals(介護所得管理制限Entity.getYusenKubun())) {
+                shoriKegaKakunin = new ShoriKegaKakunin();
+                shoriKegaKakunin.set賦課年度(entity.get賦課年度());
+                shoriKegaKakunin.set住民コード(entity.get住民ｺｰﾄﾞ());
+                shoriKegaKakunin.set市町村コード(entity.get市町村コード());
+                shoriKegaKakunin.set非課税区分(entity.get非課税区分());
+                shoriKegaKakunin.setエラー内容(介護優先として登録されています);
             } else {
-                if (介護優先_1.equals(介護所得管理制限Entity.getYusenKubun())) {
-                    shoriKegaKakunin = new ShoriKegaKakunin();
-                    shoriKegaKakunin.set賦課年度(entity.get賦課年度());
-                    shoriKegaKakunin.set住民コード(entity.get住民ｺｰﾄﾞ());
-                    shoriKegaKakunin.set市町村コード(entity.get市町村コード());
-                    shoriKegaKakunin.set非課税区分(entity.get非課税区分());
-                    shoriKegaKakunin.setエラー内容(介護優先として登録されています);
-                } else {
-                    List<KaigoShotokukanri> kaigoList = new ArrayList<>();
-                    KaigoShotokukanri kaigoEntity = new KaigoShotokukanri();
-                    kaigoEntity.set市町村コード(entity.get市町村コード());
-                    kaigoEntity.set市町村識別ID(entity.get識別ＩＤ());
-                    kaigoEntity.set所得年度(entity.get賦課年度());
-                    kaigoEntity.set識別コード(new ShikibetsuCode(entity.get住民ｺｰﾄﾞ()));
-                    kaigoEntity.set履歴番号(new RString(介護所得管理制限Entity.getRirekiNo() + 1));
-                    課税区分Handle(entity, kaigoEntity);
-                    kaigoEntity.set合計所得金額(entity.get合計所得金額());
-                    kaigoEntity.set公的年金収入額(entity.get公的年金等収入額());
-                    kaigoEntity.set公的年金所得額(entity.get公的年金等所得額());
-                    kaigoEntity.set課税所得額(new Decimal(値_0.toString()));
-                    kaigoEntity.set激変緩和措置区分(entity.get激変緩和区分());
-                    kaigoEntity.set優先区分(値_0);
-                    kaigoEntity.set処理日時(YMDHMS.now());
-                    kaigoList.add(kaigoEntity);
-                }
+                List<KaigoShotokukanri> kaigoList = new ArrayList<>();
+                KaigoShotokukanri kaigoEntity = new KaigoShotokukanri();
+                kaigoEntity.set市町村コード(entity.get市町村コード());
+                kaigoEntity.set市町村識別ID(entity.get識別ＩＤ());
+                kaigoEntity.set所得年度(entity.get賦課年度());
+                kaigoEntity.set識別コード(new ShikibetsuCode(entity.get住民ｺｰﾄﾞ()));
+                kaigoEntity.set履歴番号(new RString(介護所得管理制限Entity.getRirekiNo() + 1));
+                課税区分Handle(entity, kaigoEntity);
+                kaigoEntity.set合計所得金額(entity.get合計所得金額());
+                kaigoEntity.set公的年金収入額(entity.get公的年金等収入額());
+                kaigoEntity.set公的年金所得額(entity.get公的年金等所得額());
+                kaigoEntity.set課税所得額(new Decimal(値_0.toString()));
+                kaigoEntity.set激変緩和措置区分(entity.get激変緩和区分());
+                kaigoEntity.set優先区分(値_0);
+                kaigoEntity.set処理日時(YMDHMS.now());
+                kaigoList.add(kaigoEntity);
             }
         } else {
             List<DbtKaigoShotokuTempEntity> kaigoList = new ArrayList<>();
@@ -643,8 +639,9 @@ public class ShotokuJohoChushutsuRenkeiBatch {
         }
     }
 
-    private void 異動_広域場合Handle(DbtKaigoShotokuTempEntity entity, RString 処理区分, FlexibleYear 処理年度, YMDHMS バッチ起動処理日時) {
-        DbT7022ShoriDateKanriEntity 異動_広域処理日付管理Entity = 処理日付管理dac.select異動広域最大年度内連番(処理区分, 処理年度);
+    private void 異動_広域場合Handle(DbtKaigoShotokuTempEntity entity, FlexibleYear 処理年度, YMDHMS バッチ起動処理日時) {
+        DbT7022ShoriDateKanriEntity 異動_広域処理日付管理Entity
+                = 処理日付管理dac.select異動最大年度内連番(処理年度, new RString(String.format(FORMAT_補00.toString(), entity.get市町村識別ID())));
         if (異動_広域処理日付管理Entity != null) {
             Decimal 最大年度内連番 = new Decimal(異動_広域処理日付管理Entity.getNendoNaiRenban().toString()).add(Decimal.ONE);
             YMDHMS 対象開始日時 = 異動_広域処理日付管理Entity.getTaishoShuryoTimestamp();
@@ -663,7 +660,7 @@ public class ShotokuJohoChushutsuRenkeiBatch {
             RString 最大年度内連番 = FORMAT_最大年度内連番;
             FlexibleYear 前年度処理年度 = 処理年度.minusYear(1);
             DbT7022ShoriDateKanriEntity 前年度異動_広域処理日付管理Entity = 処理日付管理dac
-                    .select異動広域最大年度内連番(処理区分, 前年度処理年度);
+                    .select異動最大年度内連番(前年度処理年度, new RString(String.format(FORMAT_補00.toString(), entity.get市町村識別ID())));
             if (前年度異動_広域処理日付管理Entity != null) {
                 YMDHMS 対象開始日時 = 前年度異動_広域処理日付管理Entity.getTaishoShuryoTimestamp();
                 前年度異動_広域処理日付管理Entity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
@@ -682,7 +679,7 @@ public class ShotokuJohoChushutsuRenkeiBatch {
     }
 
     private void 異動_単一場合Handle(FlexibleYear 処理年度, YMDHMS バッチ起動処理日時) {
-        DbT7022ShoriDateKanriEntity 異動_単一処理日付管理Entity = 処理日付管理dac.select異動単一最大年度内連番(処理年度);
+        DbT7022ShoriDateKanriEntity 異動_単一処理日付管理Entity = 処理日付管理dac.select異動最大年度内連番(処理年度, 処理枝番);
         if (異動_単一処理日付管理Entity != null) {
             Decimal 最大年度内連番 = new Decimal(異動_単一処理日付管理Entity.getNendoNaiRenban().toString()).add(Decimal.ONE);
             YMDHMS 対象開始日時 = 異動_単一処理日付管理Entity.getTaishoShuryoTimestamp();
@@ -701,7 +698,7 @@ public class ShotokuJohoChushutsuRenkeiBatch {
         } else {
             RString 最大年度内連番 = FORMAT_最大年度内連番;
             FlexibleYear 前年度処理年度 = 処理年度.minusYear(1);
-            DbT7022ShoriDateKanriEntity 前年度異動_単一処理日付管理Entity = 処理日付管理dac.select異動単一最大年度内連番(前年度処理年度);
+            DbT7022ShoriDateKanriEntity 前年度異動_単一処理日付管理Entity = 処理日付管理dac.select異動最大年度内連番(前年度処理年度, 処理枝番);
             if (前年度異動_単一処理日付管理Entity != null) {
                 YMDHMS 対象開始日時 = 前年度異動_単一処理日付管理Entity.getTaishoShuryoTimestamp();
                 前年度異動_単一処理日付管理Entity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd581001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijisshijokyohyo.YokaigoNinteiJisshiJokyohyoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijisshijokyohyo.YokaigoNinteiJisshiJokyohyoReportEntity;
 
 /**
  * 実施状況Entityクラスです。
@@ -35,10 +34,5 @@ public class JissiJyokyoEntity {
     private List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況リスト14;
     private List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況リスト15;
     private List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況リスト16;
-    private List<YokaigoNinteiJisshiJokyohyoReportEntity> 実施状況Entityリスト1;
-    private List<YokaigoNinteiJisshiJokyohyoReportEntity> 実施状況Entityリスト2;
-    private List<YokaigoNinteiJisshiJokyohyoReportEntity> 実施状況Entityリスト3;
-    private List<YokaigoNinteiJisshiJokyohyoReportEntity> 実施状況Entityリスト4;
-    private List<YokaigoNinteiJisshiJokyohyoReportEntity> 実施状況リスト;
 
 }

@@ -774,43 +774,72 @@ public class RiyoshaFutanWariaiHantei {
      */
     public List<DbT3114RiyoshaFutanWariaiMeisaiEntity> riyoshaFutanWariaiMeisaiMerge(
             List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 入力明細リスト) {
-        if (入力明細リスト == null) {
+        if (入力明細リスト == null || 入力明細リスト.isEmpty()) {
             throw new NullPointerException();
         }
+        List<DbT3114RiyoshaFutanWariaiMeisaiEntity> results = new ArrayList<>();
         RString nowKubun;
         DbT3114RiyoshaFutanWariaiMeisaiEntity beforeEntity = null;
         RString beforeKubun = null;
-        FlexibleDate 有効開始日 = null;
+        FlexibleDate 有効開始日;
+        FlexibleDate 有効終了日;
         DbT3114RiyoshaFutanWariaiMeisaiEntity result;
         List<DbT3114RiyoshaFutanWariaiMeisaiEntity> resultList = new ArrayList<>();
-        boolean singleFlag = true;
         for (DbT3114RiyoshaFutanWariaiMeisaiEntity 入力明細 : 入力明細リスト) {
-            nowKubun = 入力明細.getFutanWariaiKubun();
+            DbT3114RiyoshaFutanWariaiMeisaiEntity nowEntity = 入力明細;
+            nowKubun = nowEntity.getFutanWariaiKubun();
             if (beforeEntity == null) {
                 beforeEntity = 入力明細;
                 beforeKubun = nowKubun;
-                有効開始日 = 入力明細.getYukoKaishiYMD();
+                results.add(beforeEntity);
                 continue;
             }
-            singleFlag = false;
             if (beforeKubun != null && beforeKubun.equals(nowKubun)) {
                 beforeEntity = 入力明細;
+                beforeKubun = nowKubun;
+                results.add(beforeEntity);
             } else if (beforeKubun != null && !beforeKubun.equals(nowKubun)) {
-                result = beforeEntity;
+                int maxIndex = getMaxEdaNoIndex(results);
+                result = results.get(maxIndex);
+                有効開始日 = results.get(0).getYukoKaishiYMD();
+                有効終了日 = results.get(results.size() - 1).getYukoShuryoYMD();
                 result.setYukoKaishiYMD(有効開始日);
+                result.setYukoShuryoYMD(有効終了日);
                 resultList.add(result);
-                有効開始日 = 入力明細.getYukoKaishiYMD();
+                results = new ArrayList<>();
                 beforeEntity = 入力明細;
+                beforeKubun = nowKubun;
+                results.add(beforeEntity);
             }
         }
-        if (singleFlag) {
-            resultList.add(beforeEntity);
-        } else if (!singleFlag && beforeEntity != null) {
-            result = beforeEntity;
-            result.setYukoKaishiYMD(有効開始日);
-            resultList.add(result);
-        }
+        int maxIndex = getMaxEdaNoIndex(results);
+        result = results.get(maxIndex);
+        有効開始日 = results.get(0).getYukoKaishiYMD();
+        有効終了日 = results.get(results.size() - 1).getYukoShuryoYMD();
+        result.setYukoKaishiYMD(有効開始日);
+        result.setYukoShuryoYMD(有効終了日);
+        resultList.add(result);
         return resultList;
+    }
+
+    private Integer getMaxEdaNoIndex(List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 入力明細リスト) {
+        List<Integer> edaNos = new ArrayList<>();
+        for (DbT3114RiyoshaFutanWariaiMeisaiEntity entity : 入力明細リスト) {
+            edaNos.add(entity.getEdaNo());
+        }
+        Collections.sort(edaNos, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2.compareTo(o1);
+            }
+        });
+        int maxEdaNo = edaNos.get(0);
+        for (int i = 0; i < 入力明細リスト.size(); i++) {
+            if (maxEdaNo == 入力明細リスト.get(i).getEdaNo()) {
+                return i;
+            }
+        }
+        return null;
     }
 
     /**
@@ -822,43 +851,51 @@ public class RiyoshaFutanWariaiHantei {
      */
     public List<RiyoshaFutanWariaiMeisai> riyoshaFutanWariaiMeisaiMergeGamen(
             List<RiyoshaFutanWariaiMeisai> 入力明細リスト) {
-        if (入力明細リスト == null) {
+        if (入力明細リスト == null || 入力明細リスト.isEmpty()) {
             throw new NullPointerException();
         }
+        List<DbT3114RiyoshaFutanWariaiMeisaiEntity> results = new ArrayList<>();
         RString nowKubun;
         DbT3114RiyoshaFutanWariaiMeisaiEntity beforeEntity = null;
         RString beforeKubun = null;
-        FlexibleDate 有効開始日 = null;
+        FlexibleDate 有効開始日;
+        FlexibleDate 有効終了日;
         RiyoshaFutanWariaiMeisai result;
         List<RiyoshaFutanWariaiMeisai> resultList = new ArrayList<>();
-        boolean singleFlag = true;
         for (RiyoshaFutanWariaiMeisai 入力明細 : 入力明細リスト) {
             DbT3114RiyoshaFutanWariaiMeisaiEntity nowEntity = 入力明細.toEntity();
             nowKubun = nowEntity.getFutanWariaiKubun();
             if (beforeEntity == null) {
                 beforeEntity = 入力明細.toEntity();
                 beforeKubun = nowKubun;
-                有効開始日 = nowEntity.getYukoKaishiYMD();
+                results.add(beforeEntity);
                 continue;
             }
-            singleFlag = false;
             if (beforeKubun != null && beforeKubun.equals(nowKubun)) {
                 beforeEntity = 入力明細.toEntity();
+                beforeKubun = nowKubun;
+                results.add(beforeEntity);
             } else if (beforeKubun != null && !beforeKubun.equals(nowKubun)) {
-                result = new RiyoshaFutanWariaiMeisai(beforeEntity);
-                result.createBuilderForEdit().set有効開始日(有効開始日);
+                int maxIndex = getMaxEdaNoIndex(results);
+                result = new RiyoshaFutanWariaiMeisai(results.get(maxIndex));
+                有効開始日 = results.get(0).getYukoKaishiYMD();
+                有効終了日 = results.get(results.size() - 1).getYukoShuryoYMD();
+                result = result.createBuilderForEdit().set有効開始日(有効開始日).build();
+                result = result.createBuilderForEdit().set有効終了日(有効終了日).build();
                 resultList.add(result);
+                results = new ArrayList<>();
                 beforeEntity = 入力明細.toEntity();
-                有効開始日 = beforeEntity.getYukoKaishiYMD();
+                beforeKubun = nowKubun;
+                results.add(beforeEntity);
             }
         }
-        if (singleFlag && beforeEntity != null) {
-            resultList.add(new RiyoshaFutanWariaiMeisai(beforeEntity));
-        } else if (!singleFlag && beforeEntity != null) {
-            result = new RiyoshaFutanWariaiMeisai(beforeEntity);
-            result.createBuilderForEdit().set有効開始日(有効開始日);
-            resultList.add(result);
-        }
+        int maxIndex = getMaxEdaNoIndex(results);
+        result = new RiyoshaFutanWariaiMeisai(results.get(maxIndex));
+        有効開始日 = results.get(0).getYukoKaishiYMD();
+        有効終了日 = results.get(results.size() - 1).getYukoShuryoYMD();
+        result = result.createBuilderForEdit().set有効開始日(有効開始日).build();
+        result = result.createBuilderForEdit().set有効終了日(有効終了日).build();
+        resultList.add(result);
         return resultList;
     }
 }

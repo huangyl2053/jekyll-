@@ -592,10 +592,9 @@ public class ShoriDateKanriManager {
         requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
         requireNonNull(処理年度, UrSystemErrorMessages.値がnull.getReplacedMessage(処理年度メッセージ.toString()));
         List<ShoriDateKanri> shoriDateKanriList = new ArrayList<>();
-        List<DbT7022ShoriDateKanriEntity> entityList = dac.select処理状況_普徴仮算定賦課(
-                処理年度,
-                処理名,
-                サブ業務コード);
+        List<RString> 処理名リスト = new ArrayList<>();
+        処理名リスト.add(処理名);
+        List<DbT7022ShoriDateKanriEntity> entityList = dac.select処理状況(処理年度, 処理名リスト, サブ業務コード);
         for (DbT7022ShoriDateKanriEntity entity : entityList) {
             entity.initializeMd5();
             shoriDateKanriList.add(new ShoriDateKanri(entity));

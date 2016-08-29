@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.service.core.juminidorendotennyu;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.definition.core.juminrendo.JuminRendoFuseigo;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakuidomishorisha.TennyuSakuseiJiyu;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.juminidorendotennyu.JuminIdoRendoTennyuEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.juminidorendotennyu.TennyuuMaeparametaEntity;
@@ -223,8 +224,7 @@ public class JuminIdoRendoTennyuManager {
         HihokenshanotsukibanFinder finder = HihokenshanotsukibanFinder.createInstance();
         被保険者番号 = finder.getHihokenshanotsukiban(処理対象者.getShikibetsuCode());
         if (被保険者番号 == null || 被保険者番号.isEmpty()) {
-            //TODO  DBAのEnum. JuminRendoFuseigoは存在しない。QA1497
-            転入処理後Entity.setデータ不整合理由(new RString("1001"));
+            転入処理後Entity.setデータ不整合理由(JuminRendoFuseigo.年齢到達_転入保留対象者.getコード());
             return 転入処理後Entity;
         }
         RString 取得事由;
@@ -271,8 +271,7 @@ public class JuminIdoRendoTennyuManager {
         HihokenshanotsukibanFinder finder = HihokenshanotsukibanFinder.createInstance();
         被保険者番号 = finder.getHihokenshanotsukiban(処理対象者.getShikibetsuCode());
         if (被保険者番号 == null || 被保険者番号.isEmpty()) {
-            //TODO  DBAのEnum. JuminRendoFuseigoは存在しない。QA1497
-            転入処理後Entity.setデータ不整合理由(new RString("1001"));
+            転入処理後Entity.setデータ不整合理由(JuminRendoFuseigo.年齢到達_転入保留対象者.getコード());
             return 転入処理後Entity;
         }
         RString 取得事由;
@@ -292,13 +291,12 @@ public class JuminIdoRendoTennyuManager {
             年齢到達日 = 転入前Entity.get年齢到達日();
         }
         if (直近被保データ.getShikakuSoshitsuJiyuCode().equals(ShikakuSoshitsuJiyu.死亡.getコード())) {
-            //TODO  DBAのEnum. JuminRendoFuseigoは存在しない。QA1497
-            転入処理後Entity.setデータ不整合理由(new RString("0003"));
+            転入処理後Entity.setデータ不整合理由(JuminRendoFuseigo.転入_取得不能_死亡者.getコード());
             転入処理後Entity.set作成事由(TennyuSakuseiJiyu.死亡喪失.getコード());
             return 転入処理後Entity;
         }
         if (直近被保データ.getShikakuSoshitsuYMD() != null && 転入前Entity.get登録異動日().isBefore(直近被保データ.getShikakuSoshitsuYMD())) {
-            転入処理後Entity.setデータ不整合理由(new RString("0004"));
+            転入処理後Entity.setデータ不整合理由(JuminRendoFuseigo.転入_取得不能_資格取得日_資格喪失日_不整合.getコード());
             転入処理後Entity.set作成事由(TennyuSakuseiJiyu.日付不整合.getコード());
             return 転入処理後Entity;
         }
@@ -344,8 +342,7 @@ public class JuminIdoRendoTennyuManager {
                     && (ShikakuShutokuJiyu.転入.getCode().equals(直近被保データ.getShikakuShutokuJiyuCode())
                     && (直近被保データ.getShikakuShutokuYMD().equals(転入前Entity.get登録異動日()))
                     && (直近被保データ.getShikakuShutokuTodokedeYMD().equals(転入前Entity.get登録届出日())))) {
-                //TODO  DBAのEnum. JuminRendoFuseigoは存在しない。QA1497
-                転入処理後Entity.setデータ不整合理由(new RString("0017"));
+                転入処理後Entity.setデータ不整合理由(JuminRendoFuseigo.転入_取得不能_取得中.getコード());
             }
             if (転入前Entity.is広域()) {
                 転入処理後Entity.set作成事由(TennyuSakuseiJiyu.広域内転入.getコード());
@@ -369,8 +366,7 @@ public class JuminIdoRendoTennyuManager {
         List<DbT1001HihokenshaDaichoEntity> 喪失被保険者list = new ArrayList<>();
         if (転入前Entity.get登録異動日() != null && 直近被保データ.getShikakuShutokuYMD() != null
                 && 転入前Entity.get登録異動日().isBefore(直近被保データ.getShikakuShutokuYMD())) {
-            //TODO  DBAのEnum. JuminRendoFuseigoは存在しない。QA1497
-            転入処理後Entity.setデータ不整合理由(new RString("0005"));
+            転入処理後Entity.setデータ不整合理由(JuminRendoFuseigo.自特例転入_喪失不能_資格取得日_資格喪失日_不整合.getコード());
             if (転入前Entity.is広域()) {
                 転入処理後Entity.set作成事由(TennyuSakuseiJiyu.日付不整合.getコード());
                 return 転入処理後Entity;
@@ -509,8 +505,7 @@ public class JuminIdoRendoTennyuManager {
     private boolean set転入処理_年齢到達(DbV1001HihokenshaDaichoEntity 直近被保データ, TennyuuMaeparametaEntity 転入前Entity,
             JuminIdoRendoTennyuEntity 転入処理後Entity, boolean 資格取得フラグ) {
         if (転入前Entity.get登録異動日().isBefore(直近被保データ.getShikakuShutokuYMD())) {
-            //TODO  DBAのEnum. JuminRendoFuseigoは存在しない。QA1497
-            転入処理後Entity.setデータ不整合理由(new RString("0005"));
+            転入処理後Entity.setデータ不整合理由(JuminRendoFuseigo.自特例転入_喪失不能_資格取得日_資格喪失日_不整合.getコード());
             資格取得フラグ = true;
             if (転入前Entity.is広域()) {
                 転入処理後Entity.set作成事由(TennyuSakuseiJiyu.日付不整合.getコード());
@@ -988,7 +983,7 @@ public class JuminIdoRendoTennyuManager {
     private boolean 年齢到達(DbV1001HihokenshaDaichoEntity 直近被保データ, TennyuuMaeparametaEntity 転入前Entity,
             JuminIdoRendoTennyuEntity 転入処理後Entity, boolean 資格取得フラグ) {
         if (転入前Entity.get年齢到達日().isBefore(直近被保データ.getShikakuShutokuYMD())) {
-            転入処理後Entity.setデータ不整合理由(new RString("0005"));
+            転入処理後Entity.setデータ不整合理由(JuminRendoFuseigo.自特例転入_喪失不能_資格取得日_資格喪失日_不整合.getコード());
             資格取得フラグ = true;
             if (転入前Entity.is広域()) {
                 転入処理後Entity.set作成事由(TennyuSakuseiJiyu.日付不整合.getコード());

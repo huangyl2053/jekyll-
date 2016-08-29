@@ -52,7 +52,9 @@ public class HikazeiNennkinnTaishouSyaUpdateProcess extends BatchProcessBase<Hik
         insertHikazeNenkinTableEntity.setKisonenkinno(t.getKisoNennkinnNo());
         insertHikazeNenkinTableEntity.setGenkisonenkinno(t.getGenKisoNennkinnNo());
         insertHikazeNenkinTableEntity.setNenkincode(t.getNennkinnCode());
-        insertHikazeNenkinTableEntity.setHihokenshano(t.getHihokenshaNo().getColumnValue());
+        if (null != t.getHihokenshaNo() && !t.getHihokenshaNo().isEmpty()) {
+            insertHikazeNenkinTableEntity.setHihokenshano(t.getHihokenshaNo().getColumnValue());
+        }
         insertHikazeNenkinTableEntity.setTorokukubun(t.getTourokuKubunn());
         insertHikazeNenkinTableEntity.setDtrecordkubun(t.getDtRekoDoKubunn());
         insertHikazeNenkinTableEntity.setDtcitycode(t.getDtShichosonCode());
