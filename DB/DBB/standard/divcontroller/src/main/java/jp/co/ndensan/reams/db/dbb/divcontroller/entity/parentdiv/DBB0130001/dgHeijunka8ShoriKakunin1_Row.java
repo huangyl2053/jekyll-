@@ -3,23 +3,19 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Mar 30 21:32:08 JST 2016 
+ * Thu Aug 25 13:09:19 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 /**
- * dgHeijunka8ShoriKakunin1_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgHeijunka8ShoriKakunin1_Row のクラスファイル
+ *
+ * @reamsid_L DBB-0860-010 lihang
  */
-
 public class dgHeijunka8ShoriKakunin1_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
     private RString txtShoriMei;
     private RString txtJokyo;
