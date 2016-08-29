@@ -612,7 +612,7 @@ public class JigyoHokokuRenkeiGassanYousikiNi_IchiToYonProcess extends BatchProc
     private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_再掲_給付費_介護療養型医療施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
     private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_再掲_給付費_総計Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
     private RString csvFileName;
-    private RDate 基準日;
+    private final RDate 基準日 = RDate.getNowDate();
     private JigyoHokokuRenkeiProcessParameter processParameter;
     private final JigyoHokokuRenkei24or26EucCsvEntity eucCsvEntity = new JigyoHokokuRenkei24or26EucCsvEntity();
 
@@ -629,7 +629,7 @@ public class JigyoHokokuRenkeiGassanYousikiNi_IchiToYonProcess extends BatchProc
                     + "get保険給付決定状況合算分決定年月情報の取得");
         }
         csvFileName = new RString("DUJRENF08_" + processParameter.get過去集計年月()
-                + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援) + ".csv");
+                + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告) + ".csv");
     }
 
     @BatchWriter
@@ -716,8 +716,8 @@ public class JigyoHokokuRenkeiGassanYousikiNi_IchiToYonProcess extends BatchProc
                 dateFomart(new RString(processParameter.get過去集計年月() + "01")),
                 dateFomart(RDate.getNowDate().toDateString()),
                 国民健康保険団体連合会,
-                DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援),
-                DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, 基準日, SubGyomuCode.DBE認定支援)
+                DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告),
+                DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, 基準日, SubGyomuCode.DBU介護統計報告)
         );
     }
 

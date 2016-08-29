@@ -72,7 +72,7 @@ public class JigyoHokokuRenkeiShokanYousikiNi_SitiProcess extends BatchProcessBa
     private int 件数_T12;
     private Decimal 給付費_T12 = Decimal.ZERO;
     private RString csvFileName;
-    private RDate 基準日;
+    private final RDate 基準日 = RDate.getNowDate();
     private JigyoHokokuRenkeiProcessParameter processParameter;
 
     @Override
@@ -88,7 +88,7 @@ public class JigyoHokokuRenkeiShokanYousikiNi_SitiProcess extends BatchProcessBa
                     + "get保険給付決定状況償還分決定年月情報の取得");
         }
         csvFileName = new RString("DUJRENF16_" + processParameter.get過去集計年月()
-                + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援) + ".csv");
+                + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告) + ".csv");
     }
 
     @BatchWriter
@@ -149,8 +149,8 @@ public class JigyoHokokuRenkeiShokanYousikiNi_SitiProcess extends BatchProcessBa
                 dateFomart(new RString(processParameter.get過去集計年月() + "01")),
                 dateFomart(RDate.getNowDate().toDateString()),
                 国民健康保険団体連合会,
-                DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援),
-                DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, 基準日, SubGyomuCode.DBE認定支援)
+                DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告),
+                DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, 基準日, SubGyomuCode.DBU介護統計報告)
         );
     }
 

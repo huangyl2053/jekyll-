@@ -535,6 +535,7 @@ public class JigyoJokyoHokokuGeppoHandler {
                 市町村コードリスト.add(result.get市町村コード().value());
             }
         }
+        市町村コードリスト.add(new RString("123401"));
         JigyoHokokuRenkeiBatchParameter batchParameter = new JigyoHokokuRenkeiBatchParameter(
                 div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedKey(),
                 dateToRString(div.getTblShutsuryokuTaisho().getTxtShukeiYM1().getValue()),
