@@ -78,7 +78,7 @@
         FROM
         rgdb."DbT7130KaigoServiceShurui"
         WHERE
-        rgdb."DbT7130KaigoServiceShurui"."teikyoKaishiYM" = #{sysDateYM}
+        rgdb."DbT7130KaigoServiceShurui"."teikyoKaishiYM"  <![CDATA[<=]]> #{sysDateYM}
         ) TEMP
         WHERE TEMP."rrkno" = 1
         ) DbT7130
@@ -204,7 +204,7 @@
         FROM
         rgdb."DbT7130KaigoServiceShurui"
         WHERE
-        rgdb."DbT7130KaigoServiceShurui"."teikyoKaishiYM" = #{sysDateYM}
+        rgdb."DbT7130KaigoServiceShurui"."teikyoKaishiYM" <![CDATA[<=]]> #{sysDateYM}
         ) TEMP
         WHERE TEMP."rrkno" = 1
         ) DbT7130
