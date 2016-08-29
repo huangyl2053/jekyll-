@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiFukushiYoguHanbaihi;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -18,7 +19,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KyufujissekiFukushiYoguHanbaihiBusiness {
+public class KyufujissekiFukushiYoguHanbaihiBusiness implements Serializable {
+
+    private static final long serialVersionUID = 5343138744350817648L;
 
     private KyufujissekiFukushiYoguHanbaihi 給付実績福祉用具販売費基本情報;
     private RString サービス種類略称;

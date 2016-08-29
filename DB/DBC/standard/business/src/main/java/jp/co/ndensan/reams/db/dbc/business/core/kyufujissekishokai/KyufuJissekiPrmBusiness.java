@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufuJissekiCareManagementHi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufuJissekiShakaiFukushiHojinKeigengaku;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiFukushiYoguHanbaihi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiJutakuKaishuhi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKinkyuShisetsuRyoyo;
@@ -61,7 +60,7 @@ public class KyufuJissekiPrmBusiness implements Serializable {
     private List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> csData_J;
     private List<KyufujissekiShokujiHiyo> csData_E;
     private List<KyufujissekiKyotakuService> csData_F;
-    private List<KyufujissekiFukushiYoguHanbaihi> csData_G;
+    private List<KyufujissekiFukushiYoguHanbaihiBusiness> csData_G;
     private List<KyufujissekiJutakuKaishuhi> csData_H;
     private List<KyufujissekiKogakuKaigoServicehi> csData_I;
     private List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyo> csData_K;
