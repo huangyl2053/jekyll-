@@ -15,19 +15,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.SystemException;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 汎用リスト(高額合算自己負担額情報)のHandlerです。
@@ -39,13 +32,10 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
     private final HanyoListParamKougakuGassanJikoFudanDiv div;
     private static final RString BLANK = new RString("0");
     private static final RString すべて = new RString("すべて");
-    private static final RString 広域 = new RString("広域");
-    private static final RString 単一 = new RString("単一");
     private static final RString 項目名付加 = new RString("1");
     private static final RString 連番付加 = new RString("2");
     private static final RString 日付 = new RString("3");
     private static final RString 送付対象外を含める = new RString("key0");
-    private static final RString 交付申請書整理番号 = new RString("交付申請書整理番号");
     private static final int 調定年度を含めて8年分 = 8;
     private static final int INDEX_ゼロ = 0;
 
@@ -61,51 +51,24 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
     /**
      * initializeの初期化メソッドです。
      *
-     * @return 市町村判定 RString
      */
-    public RString initialize() {
+    public void initialize() {
         ShichosonSecurityJoho 市町村セキュリティ情報
                 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
         ChushutsuJokenPanelDiv panel = div.getChushutsuJokenPanel();
 
-        RString 市町村判定 = 単一;
-        if (市町村セキュリティ情報 == null) {
-            throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
-        }
-        if (市町村セキュリティ情報.get導入形態コード() != null
-                && 市町村セキュリティ情報.get導入形態コード().is広域()) {
-            市町村判定 = 広域;
-            panel.getCcdHokenshaList().setDisplayNone(true);
-        } else {
-            panel.getCcdHokenshaList().loadHokenshaList();
+        if (null != 市町村セキュリティ情報) {
+            if (市町村セキュリティ情報.get導入形態コード() != null
+                    && 市町村セキュリティ情報.get導入形態コード().is広域()) {
+
+                panel.getCcdHokenshaList().loadHokenshaList();
+            } else {
+                panel.getCcdHokenshaList().setDisplayNone(true);
+            }
         }
         panel.getDdlDetaSakuseiKubun().setDataSource(getデータ作成区分());
         div.getChushutsuJokenPanel().getDdlDetaSakuseiKubun().setSelectedIndex(INDEX_ゼロ);
         set調定年度();
-        return 市町村判定;
-    }
-
-    /**
-     * 入力チェックのメソッドです。
-     *
-     * @return ValidationMessageControlPairs
-     *
-     */
-    public ValidationMessageControlPairs getCheckMessage() {
-
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        RString 支給申請書整理番号From = div.getTxtSikyuSinseishoSeiriBangoKaishi().getValue();
-        RString 支給申請書整理番号To = div.getTxtSikyuSinseishoSeiriBangoShuryo().getValue();
-        if (null != 支給申請書整理番号From && null != 支給申請書整理番号To) {
-            int 支給申請書整理番号F = Integer.parseInt(支給申請書整理番号From.toString());
-            int 支給申請書整理番号T = Integer.parseInt(支給申請書整理番号To.toString());
-            if (支給申請書整理番号T < 支給申請書整理番号F) {
-                pairs.add(new ValidationMessageControlPair(
-                        new IdocheckMessages(UrErrorMessages.大小関係が不正, 交付申請書整理番号.toString())));
-                return pairs;
-            }
-        }
-        return pairs;
     }
 
     /**
@@ -220,10 +183,11 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
 
     private void set調定年度() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        RDate rDate = RDate.getNowDate();
         RYear 日付関連_当初年度 = new RYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_当初年度,
-                RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
+                rDate, SubGyomuCode.DBB介護賦課).toString());
         RYear 日付関連_調定年度 = new RYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
-                RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
+                rDate, SubGyomuCode.DBB介護賦課).toString());
         KeyValueDataSource dataSourceBlank = new KeyValueDataSource(BLANK, RString.EMPTY);
         dataSourceList.add(dataSourceBlank);
         for (int i = 日付関連_調定年度.getYearValue(); 日付関連_当初年度.getYearValue() <= i; i--) {
@@ -237,19 +201,5 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         }
         div.getChushutsuJokenPanel().getDdlTaishoNendo().setDataSource(dataSourceList);
 
-    }
-
-    private static class IdocheckMessages implements IValidationMessage {
-
-        private final Message message;
-
-        public IdocheckMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
     }
 }

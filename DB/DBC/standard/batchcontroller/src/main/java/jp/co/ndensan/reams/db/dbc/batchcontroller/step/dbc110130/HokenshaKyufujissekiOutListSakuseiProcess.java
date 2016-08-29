@@ -66,7 +66,7 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC900002"));
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
-    private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hokenshakyufujissekiout"
+    private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hokenshakyufujissekiout."
             + "IHokenshaKyufujissekiOutMapper.select処理結果リスト一時TBL");
 
     @BatchWriter
@@ -153,30 +153,32 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
                     .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
             rStringList.add(作成日.concat(RString.HALF_SPACE).concat(作成時));
             numble_0++;
+        } else {
+            rStringList.add(RString.EMPTY);
         }
-        rStringList.add(getColumnValue(entity.get証記載保険者番号()));
-        rStringList.add(getColumnValue(entity.get被保険者番号()));
-        rStringList.add(entity.get被保険者カナ氏名());
-        rStringList.add(entity.get被保険者氏名());
+        rStringList.add(getColumnValue(entity.getShoHokanehshaNo()));
+        rStringList.add(getColumnValue(entity.getHihokenshaNo()));
+        rStringList.add(entity.getHihokenshaKanaShimei());
+        rStringList.add(entity.getHihokenshaShimei());
         if (this.key_1flag) {
-            rStringList.add(entity.getキー1());
+            rStringList.add(entity.getKey1());
         }
         if (this.key_2flag) {
-            rStringList.add(entity.getキー2());
+            rStringList.add(entity.getKey2());
         }
         if (this.key_3flag) {
-            rStringList.add(entity.getキー3());
+            rStringList.add(entity.getKey3());
         }
         if (this.key_4flag) {
-            rStringList.add(entity.getキー4());
+            rStringList.add(entity.getKey4());
         }
         if (this.key_5flag) {
-            rStringList.add(entity.getキー5());
+            rStringList.add(entity.getKey5());
         }
-        rStringList.add(entity.get備考());
+        rStringList.add(entity.getBiko());
         try {
-            rStringList.add(KokuhorenJoho_TorikomiErrorKubun.get処理名(entity.getエラー区分()));
-            rStringList.add(KokuhorenJoho_TorikomiErrorKubun.getエラーメッセージ(entity.getエラー区分()));
+            rStringList.add(KokuhorenJoho_TorikomiErrorKubun.get処理名(entity.getErrorKubun()));
+            rStringList.add(KokuhorenJoho_TorikomiErrorKubun.getエラーメッセージ(entity.getErrorKubun()));
         } catch (IllegalArgumentException ex) {
             Logger.getLogger(HokenshaKyufujissekiOutListSakuseiProcess.class.getName()).log(Level.SEVERE, null, ex);
             throw new BatchInterruptedException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(
