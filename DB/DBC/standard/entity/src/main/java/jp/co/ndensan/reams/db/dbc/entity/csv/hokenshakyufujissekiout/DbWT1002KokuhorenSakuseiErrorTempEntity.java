@@ -8,6 +8,9 @@ package jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,18 +22,29 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DbWT1002KokuhorenSakuseiErrorTempEntity {
+public class DbWT1002KokuhorenSakuseiErrorTempEntity extends DbTableEntityBase<DbWT1002KokuhorenSakuseiErrorTempEntity> implements IDbAccessable {
 
-    private RString エラー区分;
-    private ShoKisaiHokenshaNo 証記載保険者番号;
-    private HihokenshaNo 被保険者番号;
-    private RString キー1;
-    private RString キー2;
-    private RString キー3;
-    private RString キー4;
-    private RString キー5;
-    private RString 被保険者カナ氏名;
-    private RString 被保険者氏名;
-    private RString 備考;
+    @TempTableColumnOrder(1)
+    private RString errorKubun;
+    @TempTableColumnOrder(2)
+    private ShoKisaiHokenshaNo shoHokanehshaNo;
+    @TempTableColumnOrder(3)
+    private HihokenshaNo hihokenshaNo;
+    @TempTableColumnOrder(4)
+    private RString key1;
+    @TempTableColumnOrder(5)
+    private RString key2;
+    @TempTableColumnOrder(6)
+    private RString key3;
+    @TempTableColumnOrder(7)
+    private RString key4;
+    @TempTableColumnOrder(8)
+    private RString key5;
+    @TempTableColumnOrder(9)
+    private RString hihokenshaKanaShimei;
+    @TempTableColumnOrder(10)
+    private RString hihokenshaShimei;
+    @TempTableColumnOrder(11)
+    private RString biko;
 
 }
