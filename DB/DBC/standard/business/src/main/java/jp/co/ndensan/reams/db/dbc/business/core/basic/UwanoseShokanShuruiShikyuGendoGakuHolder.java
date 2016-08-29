@@ -18,13 +18,15 @@ import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 public class UwanoseShokanShuruiShikyuGendoGakuHolder implements Serializable {
 
     private static final long serialVersionUID = -3935825012351482058L;
-    private final Models<UwanoseShokanShuruiShikyuGendoGakuIdentifier, UwanoseShokanShuruiShikyuGendoGaku> uwanoseShokanShuruiShikyuGendoGakuList;
+    private final Models<
+            UwanoseShokanShuruiShikyuGendoGakuIdentifier, UwanoseShokanShuruiShikyuGendoGaku> uwanoseShokanShuruiShikyuGendoGakuList;
 
     /**
      * UwanoseShokanShuruiShikyuGendoGakuHolderのobj作成です。
      */
     public UwanoseShokanShuruiShikyuGendoGakuHolder() {
-        this.uwanoseShokanShuruiShikyuGendoGakuList = Models.create(new ArrayList<UwanoseShokanShuruiShikyuGendoGaku>());
+        this.uwanoseShokanShuruiShikyuGendoGakuList
+                = Models.create(new ArrayList<UwanoseShokanShuruiShikyuGendoGaku>());
     }
 
     /**
@@ -33,7 +35,8 @@ public class UwanoseShokanShuruiShikyuGendoGakuHolder implements Serializable {
      * @param uwanoseShokanShuruiShikyuGendoGakuList
      * List<UwanoseShokanShuruiShikyuGendoGaku>
      */
-    public UwanoseShokanShuruiShikyuGendoGakuHolder(List<UwanoseShokanShuruiShikyuGendoGaku> uwanoseShokanShuruiShikyuGendoGakuList) {
+    public UwanoseShokanShuruiShikyuGendoGakuHolder(
+            List<UwanoseShokanShuruiShikyuGendoGaku> uwanoseShokanShuruiShikyuGendoGakuList) {
         this.uwanoseShokanShuruiShikyuGendoGakuList = Models.create(uwanoseShokanShuruiShikyuGendoGakuList);
     }
 
@@ -45,8 +48,8 @@ public class UwanoseShokanShuruiShikyuGendoGakuHolder implements Serializable {
      * Models<UwanoseShokanShuruiShikyuGendoGakuIdentifier,
      * UwanoseShokanShuruiShikyuGendoGaku>
      */
-    public UwanoseShokanShuruiShikyuGendoGakuHolder(
-            Models<UwanoseShokanShuruiShikyuGendoGakuIdentifier, UwanoseShokanShuruiShikyuGendoGaku> uwanoseShokanShuruiShikyuGendoGakuList) {
+    public UwanoseShokanShuruiShikyuGendoGakuHolder(Models<
+                    UwanoseShokanShuruiShikyuGendoGakuIdentifier, UwanoseShokanShuruiShikyuGendoGaku> uwanoseShokanShuruiShikyuGendoGakuList) {
         this.uwanoseShokanShuruiShikyuGendoGakuList = uwanoseShokanShuruiShikyuGendoGakuList;
     }
 
@@ -65,7 +68,8 @@ public class UwanoseShokanShuruiShikyuGendoGakuHolder implements Serializable {
      * @param uwanoseShokanShuruiShikyuGendoGaku
      * UwanoseShokanShuruiShikyuGendoGaku
      */
-    public void addUwanoseShokanShuruiShikyuGendoGaku(UwanoseShokanShuruiShikyuGendoGaku uwanoseShokanShuruiShikyuGendoGaku) {
+    public void addUwanoseShokanShuruiShikyuGendoGaku(
+            UwanoseShokanShuruiShikyuGendoGaku uwanoseShokanShuruiShikyuGendoGaku) {
         uwanoseShokanShuruiShikyuGendoGakuList.add(uwanoseShokanShuruiShikyuGendoGaku);
     }
 
@@ -75,7 +79,8 @@ public class UwanoseShokanShuruiShikyuGendoGakuHolder implements Serializable {
      * @param id UwanoseShokanShuruiShikyuGendoGakuIdentifier
      * @return UwanoseShokanShuruiShikyuGendoGaku
      */
-    public UwanoseShokanShuruiShikyuGendoGaku getUwanoseShokanShuruiShikyuGendoGaku(UwanoseShokanShuruiShikyuGendoGakuIdentifier id) {
+    public UwanoseShokanShuruiShikyuGendoGaku getUwanoseShokanShuruiShikyuGendoGaku(
+            UwanoseShokanShuruiShikyuGendoGakuIdentifier id) {
         if (uwanoseShokanShuruiShikyuGendoGakuList.contains(id)) {
             return uwanoseShokanShuruiShikyuGendoGakuList.clone().get(id);
         }

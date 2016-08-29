@@ -43,7 +43,8 @@ public class ShokanShuruiShikyuGendoGakuHolder implements Serializable {
      * Models<ShokanShuruiShikyuGendoGakuIdentifier,
      * ShokanShuruiShikyuGendoGaku>
      */
-    public ShokanShuruiShikyuGendoGakuHolder(Models<ShokanShuruiShikyuGendoGakuIdentifier, ShokanShuruiShikyuGendoGaku> shokanShuruiShikyuGendoGakuList) {
+    public ShokanShuruiShikyuGendoGakuHolder(
+            Models<ShokanShuruiShikyuGendoGakuIdentifier, ShokanShuruiShikyuGendoGaku> shokanShuruiShikyuGendoGakuList) {
         this.shokanShuruiShikyuGendoGakuList = shokanShuruiShikyuGendoGakuList;
     }
 
