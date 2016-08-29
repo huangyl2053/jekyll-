@@ -77,6 +77,9 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
             if (div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
                 return validPairs;
             }
+            if (rowList.isEmpty()) {
+                return validPairs;
+            }
             if (div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue()
                     .compareTo(rowList.get(0).getTaishoDate().getValue()) <= 0) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.施設入所期間重複_入所日,
