@@ -12,7 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 給付実績の福祉用具購入費を照会の画面処理Handlerクラスです。
+ * 給付実績の福祉用具購入費を照会のbusinessクラスです。
  *
  * @reamsid_L DBC-2970-100 zhaoyao
  */
