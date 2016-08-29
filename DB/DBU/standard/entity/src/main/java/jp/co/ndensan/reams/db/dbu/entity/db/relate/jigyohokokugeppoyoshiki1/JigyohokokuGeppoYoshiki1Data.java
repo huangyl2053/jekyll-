@@ -21,7 +21,6 @@ public class JigyohokokuGeppoYoshiki1Data {
 
     private RString 集計区分;
     private RString 作成日時;
-    private RString 集計範囲;
     private RString 年報月報区分;
     private RString 集計期間FROM;
     private RString 集計期間TO;
