@@ -4,14 +4,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Kokuhoren
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * @reamsid_L DBC-3300-030 wangxingpeng
  */
 public class KokuhorenJohoSofuDiv extends Panel implements IKokuhorenJohoSofuDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -185,7 +184,7 @@ public class KokuhorenJohoSofuDiv extends Panel implements IKokuhorenJohoSofuDiv
     }
 
     @JsonIgnore
-    public void setLblKakuninJiko1(Label lblKakuninJiko1) {
+    public void  setLblKakuninJiko1(Label lblKakuninJiko1) {
         this.getShoriJikkoMaekakuninJiko().setLblKakuninJiko1(lblKakuninJiko1);
     }
 
@@ -195,7 +194,7 @@ public class KokuhorenJohoSofuDiv extends Panel implements IKokuhorenJohoSofuDiv
     }
 
     @JsonIgnore
-    public void setLblKakuninJiko2(Label lblKakuninJiko2) {
+    public void  setLblKakuninJiko2(Label lblKakuninJiko2) {
         this.getShoriJikkoMaekakuninJiko().setLblKakuninJiko2(lblKakuninJiko2);
     }
 
