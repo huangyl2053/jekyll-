@@ -210,8 +210,8 @@
         <id column="dbT2002Fuka_tsuchishoNo" />
         <id column="dbT2002Fuka_rirekiNo" />
         <result property="本算定後" column="本算定後" />
-        <!--<result property="翌４月特徴額" column="翌４月特徴額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>-->
-        <!--<result property="特別徴収義務者コード" column="特別徴収義務者コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>-->
+        <result property="特別徴収義務者コード" column="ueT0511NenkinTokuchoKaifuJoho_dtTokubetsuChoshuGimushaCode" 
+                        typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="介護賦課"
                      resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
         <association property="介護徴収方法"
