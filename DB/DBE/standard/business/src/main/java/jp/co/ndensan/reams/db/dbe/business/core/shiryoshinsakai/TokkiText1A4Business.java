@@ -55,6 +55,8 @@ public class TokkiText1A4Business {
     private final boolean is2枚目以降;
     private final int 現在ページ;
     private boolean has改ページ;
+    private boolean isFirst;
+    private RString 全面テキスト内容;
     private int 表示行数;
 
     /**
@@ -75,6 +77,8 @@ public class TokkiText1A4Business {
         this.特記情報List = 特記情報List;
         this.kyotsuEntity = entity;
         has改ページ = false;
+        isFirst = true;
+        全面テキスト内容 = RString.EMPTY;
         表示行数 = 0;
     }
 
@@ -292,6 +296,9 @@ public class TokkiText1A4Business {
 
     private RString getTextByテキスト全面イメージ() {
         boolean isテキスト = false;
+        if (!isFirst) {
+            return 全面テキスト内容;
+        }
         RStringBuilder テキスト全面 = new RStringBuilder();
         for (DbT5205NinteichosahyoTokkijikoEntity entity : 特記情報List) {
             if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
@@ -312,21 +319,30 @@ public class TokkiText1A4Business {
                         || (is2枚目以降 && ページ最大表示行数 * 現在ページ <= 表示行数)) {
                     has改ページ = true;
                     テキスト全面.append(テキストBuilder.toRString());
+                    全面テキスト内容 = テキスト全面.toRString();
+                    isFirst = false;
                     return テキスト全面.toRString();
+                }
+                if (!テキストBuilder.toRString().endsWith(System.lineSeparator())) {
+                    テキストBuilder.append(System.lineSeparator());
+                    表示行数 = 表示行数 + 1;
                 }
                 if (is2枚目以降 && 表示行数 % (ページ最大表示行数 * (現在ページ - 1)) == 0) {
                     テキスト全面 = new RStringBuilder();
-                } else {
-                    テキストBuilder.append(System.lineSeparator());
-                    表示行数 = 表示行数 + 1;
                 }
                 テキスト全面.append(テキストBuilder.toRString());
             }
         }
-        if ((isテキスト && !is2枚目以降) || (isテキスト && (is2枚目以降 && ページ最大表示行数 * (現在ページ - 1) <= 表示行数
-                && ページ最大表示行数 * 現在ページ - 1 <= 表示行数))) {
+        if ((isテキスト && !is2枚目以降) || (isテキスト && (is2枚目以降 && ページ最大表示行数 * (現在ページ - 1) <= 表示行数))) {
+            全面テキスト内容 = テキスト全面.toRString();
+            isFirst = false;
+            if (テキスト全面.toRString().endsWith(System.lineSeparator())) {
+                return テキスト全面.toRString().substring(0, テキスト全面.length() - System.lineSeparator().length());
+            }
             return テキスト全面.toRString();
         }
+        全面テキスト内容 = RString.EMPTY;
+        表示行数 = 0;
         return RString.EMPTY;
     }
 
@@ -350,6 +366,9 @@ public class TokkiText1A4Business {
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString filename) {
+        if (sharedFileId == null) {
+            return RString.EMPTY;
+        }
         RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(filename),
