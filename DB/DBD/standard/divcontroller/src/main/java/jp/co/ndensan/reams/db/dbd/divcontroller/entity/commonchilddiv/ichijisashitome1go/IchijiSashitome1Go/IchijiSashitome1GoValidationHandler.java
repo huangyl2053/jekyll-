@@ -94,7 +94,8 @@ public class IchijiSashitome1GoValidationHandler {
         if (div.getKey_Button().equals(ShoriKubun.給付一時差止登録.getコード())) {
             for (ShiharaiHohoHenkoSashitome shiharaiHohoHenkoSashitome : shiharaiHohoHenko.getShiharaiHohoHenkoSashitomeList()) {
                 if (shiharaiHohoHenkoSashitome.get情報分類区分().equals(ShiharaiHenkoJohoBunruiKubun.差止情報.getコード())
-                        && shiharaiHohoHenkoSashitome.get差止解除年月日() == null
+                        && (shiharaiHohoHenkoSashitome.get差止解除年月日() == null
+                        || shiharaiHohoHenkoSashitome.get差止解除年月日().isEmpty())
                         && !shiharaiHohoHenkoSashitome.is論理削除フラグ()) {
                     pairs.add(new ValidationMessageControlPair(IchijiSashitome1GoMessages.給付一時差止未解除データチェック));
                 }
