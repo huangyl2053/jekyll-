@@ -15,10 +15,12 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0220011.Juk
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0220011.JukyushaIdoRenrakuhyoHenkoMainPanelValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0220011.JukyushaIdoRenrakuhyoHenkoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.taishoshaichiran.TaishoshaIchiranParameter;
+import jp.co.ndensan.reams.db.dbc.service.core.kyodoshoriyojukyushaidorenrakuhyo.KyodoshoriyoJukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.service.core.taishoshakensaku.TaishoshaKensaku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -97,6 +99,8 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanel {
             if (異動対象者一覧情報 == null) {
                 throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
             }
+            ShikibetsuCode 識別コード = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().get識別コード(被保険者番号);
+            ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
             getHandler(div).initialize対象者一覧(メニューID, 異動日From, 異動日To, 被保険者番号, 異動対象者一覧情報);
             return ResponseData.of(div).setState(DBC0220011StateName.対象者一覧);
         }
