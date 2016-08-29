@@ -72,6 +72,12 @@ public class DBU030030_JigyoHokokuNenpo_IppanParamter extends BatchParameterBase
     private RString 過去集計分旧市町村区分;
 
     /**
+     * コンストラクタです。
+     */
+    public DBU030030_JigyoHokokuNenpo_IppanParamter() {
+    }
+
+    /**
      * Process用のパラメータを生成します。
      *
      * @return JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParamter
