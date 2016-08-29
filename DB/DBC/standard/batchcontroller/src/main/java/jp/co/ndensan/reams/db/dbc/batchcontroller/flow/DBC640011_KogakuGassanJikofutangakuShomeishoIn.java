@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc640011.KogakuGassanJik
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc640011.KogakuGassanJikofutangakuTempProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoInParamerter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoInProcessParamerter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoFlowEntity;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -25,6 +26,9 @@ public class DBC640011_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
     private static final String CSVファイル取込 = "callReadCsvFileProcess";
     private static final String 処理結果リスト一時登録 = "callErrorTempInsertProcess";
     private static final Integer INDEX_0 = 0;
+    private int 高額合算自己負担額一時TBL登録件数 = 0;
+    private int レコード件数合算 = 0;
+    private KogakuGassanJikofutangakuShomeishoFlowEntity returnEntity;
     private KogakuGassanJikofutangakuShomeishoInProcessParamerter parameter;
 
     @Override
@@ -36,6 +40,10 @@ public class DBC640011_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
             for (int i = INDEX_0; i < fileNameList.size(); i++) {
                 parameter.setFileName(fileNameList.get(i));
                 executeStep(CSVファイル取込);
+                returnEntity = getResult(KogakuGassanJikofutangakuShomeishoFlowEntity.class, new RString(CSVファイル取込),
+                        KogakuGassanJikofutangakuShomeishoInProcess.PARAMETER_OUT_FLOWENTITY);
+                レコード件数合算 = レコード件数合算 + returnEntity.getCodeNum();
+                高額合算自己負担額一時TBL登録件数 = 高額合算自己負担額一時TBL登録件数 + returnEntity.get高額合算自己負担額一時TBL登録件数();
             }
         }
         executeStep(処理結果リスト一時登録);

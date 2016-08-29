@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 総合事業費等請求額通知書情報（公費）取込 のバッチ処理フロー
+ * 総合事業費等請求額通知書情報（公費）取込 のParameter
  *
  * @reamsid_L DBC-4700-010 qinzhen
  */

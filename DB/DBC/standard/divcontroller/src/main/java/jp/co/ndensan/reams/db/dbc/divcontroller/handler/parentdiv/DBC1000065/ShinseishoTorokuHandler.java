@@ -148,8 +148,8 @@ public class ShinseishoTorokuHandler {
                 .equals(div.getRadChushutsuJoken().getSelectedKey())) {
             FlexibleYear 年度 = ShinseishoTorokuChushutsuJoken.異動分.getコード()
                     .equals(div.getRadChushutsuJoken().getSelectedKey())
-                    ? div.getTxtSetaiinHaakuKijunYMD().getValue().getYear()
-                    : new FlexibleYear(div.getTxtShoriNendo().getValue().toString().substring(0, INDEX_4));
+                    ? new FlexibleYear(div.getTxtShoriNendo().getValue().toString().substring(0, INDEX_4))
+                    : div.getTxtSetaiinHaakuKijunYMD().getValue().getYear();
             return TekiyoShinseishoManager.createInstance().isNenjiExecute(年度);
         } else {
             return false;
