@@ -28,7 +28,6 @@ public class HanyoListParame {
 
         return ResponseData.of(div).respond();
     }
-    //TODO
 
     /**
      * 「実行ボタン押下した時の処理」ボタンのメソッドです。
