@@ -42,18 +42,6 @@ public class SogojigyohiSaishinsaKetteitsuchishoPageBreak extends PageBreaker<So
         if (this.breakKeysList.contains(SogojigyohiSaishinsaOutPutOrder.公費負担者番号.getフォームフィールド名())
                 && !currentSource.getSource().koshiFutanshaNo.equals(nextSource.getSource().koshiFutanshaNo)) {
             flag = true;
-        } else if (this.breakKeysList.contains(SogojigyohiSaishinsaOutPutOrder.被保険者番号.getフォームフィールド名())
-                && !currentSource.getSource().listLower_1.equals(nextSource.getSource().listLower_1)) {
-            flag = true;
-        } else if (this.breakKeysList.contains(SogojigyohiSaishinsaOutPutOrder.サービス提供年月.getフォームフィールド名())
-                && !currentSource.getSource().listUpper_5.equals(nextSource.getSource().listUpper_5)) {
-            flag = true;
-        } else if (this.breakKeysList.contains(SogojigyohiSaishinsaOutPutOrder.事業者番号.getフォームフィールド名())
-                && !currentSource.getSource().listUpper_3.equals(nextSource.getSource().listUpper_3)) {
-            flag = true;
-        } else if (this.breakKeysList.contains(SogojigyohiSaishinsaOutPutOrder.取り扱い年月.getフォームフィールド名())
-                && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
-            flag = true;
         }
         return flag;
     }
@@ -70,18 +58,6 @@ public class SogojigyohiSaishinsaKetteitsuchishoPageBreak extends PageBreaker<So
         boolean flag = false;
         if (this.breakKeysList.contains(SogojigyohiSaishinsaOutPutOrder.公費負担者番号.getフォームフィールド名())
                 && !currentSource.get公費負担者番号().equals(nextSource.get公費負担者番号())) {
-            flag = true;
-        } else if (this.breakKeysList.contains(SogojigyohiSaishinsaOutPutOrder.被保険者番号.getフォームフィールド名())
-                && !currentSource.get被保険者番号().equals(nextSource.get被保険者番号())) {
-            flag = true;
-        } else if (this.breakKeysList.contains(SogojigyohiSaishinsaOutPutOrder.サービス提供年月.getフォームフィールド名())
-                && !currentSource.getサービス提供年月().equals(nextSource.getサービス提供年月())) {
-            flag = true;
-        } else if (this.breakKeysList.contains(SogojigyohiSaishinsaOutPutOrder.事業者番号.getフォームフィールド名())
-                && !currentSource.get事業者番号().equals(nextSource.get事業者番号())) {
-            flag = true;
-        } else if (this.breakKeysList.contains(SogojigyohiSaishinsaOutPutOrder.取り扱い年月.getフォームフィールド名())
-                && !currentSource.get取扱年月().equals(nextSource.get取扱年月())) {
             flag = true;
         }
         return flag;

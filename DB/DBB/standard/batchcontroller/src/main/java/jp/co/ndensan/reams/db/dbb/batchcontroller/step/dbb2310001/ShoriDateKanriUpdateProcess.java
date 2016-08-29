@@ -30,7 +30,7 @@ public class ShoriDateKanriUpdateProcess extends BatchProcessBase<
     private static final int NUM10 = 10;
     private static final int NUM12 = 12;
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic."
-            + "IUeT0511NenkinTokuchoKaifuJohoMapper.selectAllNoDeleted");
+            + "IUeT0511NenkinTokuchoKaifuJohoMapper.selectAllNoDeletedUex");
     private static final RString 年度内年番_0001 = new RString("0001");
     private static final RString 年度内年番_0002 = new RString("0002");
     private static final RString 年度内年番_0003 = new RString("0003");

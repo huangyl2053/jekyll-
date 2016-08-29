@@ -81,7 +81,7 @@ public class JikoFutangakuKeisanIkkatsuPanelHandler {
         }
     }
 
-     /**
+    /**
      * 画面初期化被保険者番号のメソッドます。
      */
     public void 画面初期化被保険者番号() {
@@ -167,15 +167,4 @@ public class JikoFutangakuKeisanIkkatsuPanelHandler {
                     padZeroToLeft(Integer.parseInt(NUM_10.toString())));
         }
     }
-//TODO QA.1080
-    /**
-     * 出力CHKのonChange事件です。
-     */
-    /* public void onChange出力CHK() {
-     if (div.getJikoFutangakuKeisanKekkaIchiranhyoPanelPublish().isIsPublish()) {
-     div.getCcdChohyoShutsuryokujun().setDisabled(false);
-     } else {
-     div.getCcdChohyoShutsuryokujun().setDisabled(true);
-     }
-     }*/
 }

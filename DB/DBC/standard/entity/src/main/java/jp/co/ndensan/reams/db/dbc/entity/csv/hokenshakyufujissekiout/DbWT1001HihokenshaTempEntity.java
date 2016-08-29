@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -40,7 +42,7 @@ public class DbWT1001HihokenshaTempEntity extends DbTableEntityBase<DbWT1001Hiho
     @TempTableColumnOrder(5)
     private HihokenshaNo exHihokenshaNo;
     @TempTableColumnOrder(6)
-    private FlexibleDate exServiceTeikyoYm;
+    private FlexibleYearMonth exServiceTeikyoYm;
     @TempTableColumnOrder(7)
     private boolean henkanFlag;
     @TempTableColumnOrder(8)
@@ -72,7 +74,7 @@ public class DbWT1001HihokenshaTempEntity extends DbTableEntityBase<DbWT1001Hiho
     @TempTableColumnOrder(21)
     private RString shimei50onKana;
     @TempTableColumnOrder(22)
-    private RString shikibetsuCode;
+    private ShikibetsuCode shikibetsuCode;
     @TempTableColumnOrder(23)
     private FlexibleDate shikakuShutokuYmd;
     @TempTableColumnOrder(24)
@@ -82,7 +84,7 @@ public class DbWT1001HihokenshaTempEntity extends DbTableEntityBase<DbWT1001Hiho
     @TempTableColumnOrder(26)
     private RString shikakuSoshitsuJiyuCode;
     @TempTableColumnOrder(27)
-    private ShoKisaiHokenshaNo setaiShuyakuNo;
+    private RString setaiShuyakuNo;
     @TempTableColumnOrder(28)
     private FlexibleDate seinenYmd;
     @TempTableColumnOrder(29)

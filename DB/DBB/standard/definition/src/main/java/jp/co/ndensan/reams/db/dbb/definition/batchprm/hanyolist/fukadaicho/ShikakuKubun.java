@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 資格区分のクラスです。
  *
- * @reamsid_L DBB-1900-030 zhaowei
+ * @reamsid_L DBB-9999-022 zhaowei
  */
 public enum ShikakuKubun {
 

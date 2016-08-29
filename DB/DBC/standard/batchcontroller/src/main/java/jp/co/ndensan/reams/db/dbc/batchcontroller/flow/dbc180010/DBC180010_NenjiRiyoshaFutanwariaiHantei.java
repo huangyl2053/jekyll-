@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.ShoriDateKanriP
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.SinseicyuDateDeleteProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.SogoJigyoTaishoshaTempProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.nenjiriyoshafutanwariaihantei.NenjiRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.nenjiriyoshafutanwariaihantei.DBC180010_NenjiRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-4980-030 yuanzhenxia
  */
-public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<NenjiRiyoshaFutanwariaiHanteiParameter> {
+public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC180010_NenjiRiyoshaFutanwariaiHanteiParameter> {
 
     private static final String 受給者台帳TEMPへ登録する = "creatJukyushaTaichoTemp";
     private static final String 総合事業対象者台帳TEMPへ登録する = "creatSogoJigyoTaishoshaTemp";

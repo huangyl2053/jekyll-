@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikohijukyusha.Sogoj
 /**
  * 介護予防・日常生活支援総合事業費公費受給者別一覧表情報取込のバッチのDB操作です。
  *
- * @reamsid_L DBC-4710-030 jianglaisheng
+ * @reamsid_L DBC-4710-030 chenjie
  */
 public interface ISogojigyohiKohiJukyushaMapper {
 

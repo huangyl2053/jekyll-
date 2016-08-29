@@ -316,4 +316,30 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
                 order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.DESC)).limit(1).
                 toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
     }
+
+    /**
+     * get最新の処理年月。
+     *
+     * @param 交換情報識別番号 KokanShikibetsuNo
+     * @param 送付取込区分 sofuTorikomiKubun
+     * @param 処理状態区分 shoriJotaiKubun
+     * @return KokuhorenInterfaceKanri
+     */
+    @Transaction
+    public DbT3104KokuhorenInterfaceKanriEntity get最新の処理年月(
+            RString 交換情報識別番号,
+            RString 送付取込区分,
+            RString 処理状態区分) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(and(
+                                eq(kokanShikibetsuNo, 交換情報識別番号),
+                                eq(sofuTorikomiKubun, 送付取込区分),
+                                eq(shoriJotaiKubun, 処理状態区分),
+                                eq(isDeleted, 論理削除フラグ))).
+                order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.DESC)).limit(1).
+                toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
 }

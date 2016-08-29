@@ -76,7 +76,7 @@ public class HokenshaKyufujissekiOutGetHihokenshaAtenaProcess extends BatchProce
         dbWT1001.setKanaMeisho(getColumnValue(識別対象.get名称().getKana()));
         dbWT1001.setMeisho(getColumnValue(識別対象.get名称().getName()));
         dbWT1001.setShimei50onKana(RStringUtil.convertTo清音化(getColumnValue(識別対象.get名称().getKana())));
-        dbWT1001.setShikibetsuCode(getColumnValue(識別対象.get識別コード()));
+        dbWT1001.setShikibetsuCode(識別対象.get識別コード());
         dbWT1001.setShikakuShutokuYmd(dbV1001.getShikakuShutokuYMD());
         dbWT1001.setShikakuShutokuJiyuCode(dbV1001.getShikakuShutokuJiyuCode());
         dbWT1001.setShikakuSoshitsuYmd(dbV1001.getShikakuSoshitsuYMD());

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 徴収方法クラスです。
  *
- * @reamsid_L DBB-1900-030 zhaowei
+ * @reamsid_L DBB-9999-022 zhaowei
  */
 public enum ChoshuHoho {
 
@@ -32,9 +32,9 @@ public enum ChoshuHoho {
      */
     併徴者のみ("4", "併徴者のみ"),
     /**
-     * コード:5 名称:前半普後半特 略称:定義なし
+     * コード:5 名称:前半普徴・後半特徴 略称:定義なし
      */
-    前半普後半特("5", "前半普後半特");
+    前半普後半特("5", "前半普徴・後半特徴");
 
     private final RString code;
     private final RString fullName;

@@ -155,7 +155,9 @@ public class HanyoListKagoMoshitateCsvEntityEditor {
         csvEntity.set喪失事由(new ShikakuSositsuJiyuHihokensha(entity.get最新被保台帳().getShikakuSoshitsuJiyuCode()).getRyakusho());
         csvEntity.set資格喪失日(format日付項目(entity.get最新被保台帳().getShikakuSoshitsuYMD()));
         csvEntity.set資格喪失届日(format日付項目(entity.get最新被保台帳().getShikakuSoshitsuTodokedeYMD()));
-        csvEntity.set資格区分(ShikakuKubun.toValue(entity.get最新被保台帳().getHihokennshaKubunCode()).get名称());
+        if (!RString.isNullOrEmpty(entity.get最新被保台帳().getHihokennshaKubunCode())) {
+            csvEntity.set資格区分(ShikakuKubun.toValue(entity.get最新被保台帳().getHihokennshaKubunCode()).get名称());
+        }
         if (定数_1.equals(entity.get最新被保台帳().getJushochiTokureiFlag())) {
             csvEntity.set住所地特例状態(定数_住特);
         }
@@ -170,11 +172,15 @@ public class HanyoListKagoMoshitateCsvEntityEditor {
         csvEntity.setサービス提供年月(format日付項目(entity.get過誤申立().getServiceTeikyoYM()));
         csvEntity.set給付証記載保険者番号(entity.get過誤申立().getShokisaiHokenshaNo().getColumnValue());
         csvEntity.set申立年月日(format日付項目(entity.get過誤申立().getMoshitateYMD()));
-        csvEntity.set申立者区分(KagoMoshitateMoshitateshaKubun.toValue(entity.get過誤申立().getMoshitateshaKubunCode()).get名称());
+        if (!RString.isNullOrEmpty(entity.get過誤申立().getMoshitateshaKubunCode())) {
+            csvEntity.set申立者区分(KagoMoshitateMoshitateshaKubun.toValue(entity.get過誤申立().getMoshitateshaKubunCode()).get名称());
+        }
         csvEntity.set申立事由コード(entity.get過誤申立().getMoshitateJiyuCode());
         csvEntity.set申立事由(get申立事由(entity.get過誤申立().getMoshitateJiyuCode()));
         csvEntity.set国保連送付年月(format日付項目(entity.get過誤申立().getKokuhorenSofuYM()));
-        csvEntity.set過誤申立給付区分(KagoMoshitateMoshitateshoKubun.toValue(entity.get過誤申立().getMoshitateshoKubunCode()).get名称());
+        if (RString.isNullOrEmpty(entity.get過誤申立().getMoshitateshoKubunCode())) {
+            csvEntity.set過誤申立給付区分(KagoMoshitateMoshitateshoKubun.toValue(entity.get過誤申立().getMoshitateshoKubunCode()).get名称());
+        }
         csvEntity.set受給申請事由(get受給申請事由(entity.get受給者台帳().getJukyuShinseiJiyu().getColumnValue()));
         csvEntity.set受給申請日(format日付項目(entity.get受給者台帳().getJukyuShinseiYMD()));
         csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.
@@ -192,7 +198,9 @@ public class HanyoListKagoMoshitateCsvEntityEditor {
         } else {
             csvEntity.set受給みなし更新認定(定数_みなし);
         }
-        csvEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(entity.get受給者台帳().getChokkinIdoJiyuCode().getColumnValue()).get名称());
+        if (entity.get受給者台帳().getChokkinIdoJiyuCode() != null) {
+            csvEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(entity.get受給者台帳().getChokkinIdoJiyuCode().getColumnValue()).get名称());
+        }
         return csvEntity;
     }
 
@@ -221,7 +229,7 @@ public class HanyoListKagoMoshitateCsvEntityEditor {
     }
 
     private RString get申立事由(RString key) {
-        return CodeMaster.getCodeMeisho(DBCCodeShubetsu.過誤申立事由コード_下２桁_申立理由.getコード(),
+        return CodeMaster.getCodeRyakusho(DBCCodeShubetsu.過誤申立事由コード_下２桁_申立理由.getコード(),
                 new Code(key), FlexibleDate.getNowDate());
     }
 

@@ -16,6 +16,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBC {
 
     /**
+     * 高額合算支給額計算結果連絡票情報取込一覧表
+     */
+    DBC200037(new ReportId("DBC200037_GassanShikyugakuKeisankekkaRanrakuhyoTorikomiIchiran"),
+            new RString("高額合算支給額計算結果連絡票情報取込一覧表")),
+    /**
+     * 高額合算支給額計算結果連絡票情報確認リスト
+     */
+    DBC200038(new ReportId("DBC200038_GassanShikyugakuKeisankekkaRanrakuhyoKakuninIchiran"),
+            new RString("高額合算支給額計算結果連絡票情報確認リスト")),
+    /**
      * 自己負担額補正一覧表
      */
     DBC200031(new ReportId("DBC200031_GassanJikofutangakuHoseiIchiran"), new RString("自己負担額補正一覧表")),
@@ -83,6 +93,10 @@ public enum ReportIdDBC {
      * 受給者情報突合結果一覧表
      */
     DBC200058(new ReportId("DBC200058_JukyushaTotsugokekkaIchiran"), new RString("受給者情報突合結果一覧表")),
+    /**
+     * 負担割合判定一覧表帳票ＩＤです。
+     */
+    DBC200089(new ReportId("DBC200089_FutanWariaiHanteiIchiran"), new RString("負担割合判定一覧表")),
     /**
      * 負担割合証（カット紙）
      */
@@ -304,6 +318,18 @@ public enum ReportIdDBC {
      */
     DBC100014(new ReportId("DBC100014_JukyushaTeiseiRenrakuhyo"), new RString("受給者訂正連絡票（紙媒体）")),
     /**
+     * 帳票設計_DBC100063_基準収入額適用お知らせ通知書の帳票ＩＤです。
+     */
+    DBC100063(new ReportId("DBC100063_KijunShunyugakuTekiyoOshiraseTsuchisho"), new RString("基準収入額適用お知らせ通知書")),
+    /**
+     * 帳票設計_DBC100064_基準収入額適用申請書の帳票ＩＤです。
+     */
+    DBC100064(new ReportId("DBC100064_KijunShunyugakuTekiyoShinseisho"), new RString("基準収入額適用申請書")),
+    /**
+     * 帳票設計_DBC200088_基準収入額適用申請書一覧表の帳票ＩＤです。
+     */
+    DBC200088(new ReportId("DBC200088_KijunShunyugakuTekiyoShinseishoHakkoIchiran"), new RString("基準収入額適用申請書一覧表")),
+    /**
      * 汎用リスト出力(高額合算申請書情報)
      */
     DBC701014(new ReportId("DBC701014_HanyoList_KogakuGassanShinseishoJoho"), new RString("汎用リスト出力(高額合算申請書情報)")),
@@ -364,9 +390,21 @@ public enum ReportIdDBC {
      */
     DBC100054(new ReportId("DBC100054_GassanKetteiTsuchishoShiharaiYoteiBiYijiAri"), new RString("高額合算支給（不支給）決定通知書（単）")),
     /**
+     * 受領委任契約事業者一覧表帳票ＩＤです。
+     */
+    DBC200012(new ReportId("DBC200012_JuryoIninJigyoshaIchiran"), new RString("受領委任契約事業者一覧表")),
+    /**
+     * 高額合算自己負担額証明書情報一覧表
+     */
+    DBC200034(new ReportId("DBC200034_GassanJikofutangakuShomeishoTorikomiIchiran"), new RString("高額合算自己負担額証明書情報一覧表")),
+    /**
      * 総合事業費（経過措置）資格照合表帳票ＩＤです。
      */
-    DBC100018(new ReportId("DBC100018_SogojigyohiShikakuShogohyoKeikaSochi"), new RString("総合事業費（経過措置）資格照合表"));
+    DBC100018(new ReportId("DBC100018_SogojigyohiShikakuShogohyoKeikaSochi"), new RString("総合事業費（経過措置）資格照合表")),
+    /**
+     * 総合事業費（経過措置）資格照合表帳票ＩＤです。
+     */
+    DBC100204(new ReportId("DBC100204_GassanJigyobunKeisanKekkaRenrakuhyo"), new RString("事業分計算結果連絡票"));
 
     private final ReportId reportId;
 

@@ -5,9 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7080001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc710080.DBC710080_HanyoListKyufuKanriHyoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.chushutsujoken.ChushutsuJoken;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufukanrihyo.Kyufukanrihyo_MeisaigyoBango;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7080001.HanyoListParamDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -31,8 +32,6 @@ public class HanyoListParamHandler {
     private static final RString KEY_項目名付加 = new RString("項目名付加");
     private static final RString KEY_連番付加 = new RString("連番付加");
     private static final RString KEY_日付編集 = new RString("日付編集");
-    private static final RString 広域 = new RString("広域");
-    private static final RString 単一 = new RString("単一");
 
     /**
      * コンストラクタです。
@@ -48,23 +47,25 @@ public class HanyoListParamHandler {
      *
      */
     public void initialize() {
-        RString 稼働市町村;
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         Code 導入形態コード = shichosonSecurityJoho.get導入形態コード();
         if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getKey())) {
-            稼働市町村 = 広域;
-            div.getChushutsuJokenPanel().getCcdHokenshaList().setDisplayNone(true);
+            div.getChushutsuJokenPanel().getCcdHokenshaList().setDisplayNone(false);
+            div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務);
         } else {
-            稼働市町村 = 単一;
-            div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().setDisplayNone(true);
-        }
-        if (単一.equals(稼働市町村)) {
+            div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().setDisplayNone(false);
             div.getChushutsuJokenPanel().getCcdHokenshaList().setDisabled(true);
             div.getChushutsuJokenPanel().getCcdHokenshaList().setVisible(false);
         }
 
         div.getCcdShutsuryokuKoumoku().setDisabled(true);
+        div.getCcdShutsuryokuKoumoku().setVisible(true);
 
+        List<RString> keyList = new ArrayList<>();
+        keyList.add(KEY_項目名付加);
+        keyList.add(KEY_日付編集);
+        div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(keyList);
+        // TODO QA1355
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, new ReportId(帳票ID));
         div.getCcdShutsuryokuKoumoku().load(帳票ID, SubGyomuCode.DBC介護給付);
     }
@@ -86,10 +87,11 @@ public class HanyoListParamHandler {
         parameter.set委託先支援事業者名(div.getChushutsuJokenPanel().getCcdItakusakiSienJigyoshaBango().getNyuryokuShisetsuMeisho());
 
         RString key = div.getChushutsuJokenPanel().getRadMeisaigyoSyuturyokuUmu().getSelectedKey();
+        // TODO QA1358
         if (KEY_0.equals(key)) {
-            parameter.set明細行出力有無(ChushutsuJoken.終端行);
+            parameter.set明細行出力有無(Kyufukanrihyo_MeisaigyoBango.終端行.get名称());
         } else if (KEY_1.equals(key)) {
-            parameter.set明細行出力有無(null);
+            parameter.set明細行出力有無(RString.EMPTY);
         }
 
         List<RString> keyList = div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys();
@@ -120,7 +122,7 @@ public class HanyoListParamHandler {
         if (!div.getCcdShutsuryokuKoumoku().isDisabled()) {
             parameter.set出力項目(div.getCcdShutsuryokuKoumoku().get出力項目ID());
         } else {
-            parameter.set出力項目(null);
+            parameter.set出力項目(RString.EMPTY);
         }
 
         return parameter;

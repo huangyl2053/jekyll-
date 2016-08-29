@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.processprm.jigyobunkogakugassanshikyukettei;
 
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -25,8 +26,8 @@ public class JigyoBunKogakuGassanShikyuKetteiProcessParameter implements IBatchP
     private final boolean is連番付加;
     private final boolean is日付編集;
     private final RString 保険者コード;
-    private final RString 支給区分;
-    private final RString 支払方法区分;
+    private final List<RString> 支給区分List;
+    private final List<RString> 支払方法区分List;
     private final RString 金融機関コード;
     private final RString 金融機関名;
     private final RString 対象年度;
@@ -41,8 +42,8 @@ public class JigyoBunKogakuGassanShikyuKetteiProcessParameter implements IBatchP
      * @param is連番付加 is連番付加
      * @param is日付編集 is日付編集
      * @param 保険者コード 保険者コード
-     * @param 支給区分 支給区分
-     * @param 支払方法区分 支払方法区分
+     * @param 支給区分List 支給区分List
+     * @param 支払方法区分List 支払方法区分List
      * @param 金融機関コード 金融機関コード
      * @param 金融機関名 金融機関名
      * @param 対象年度 対象年度
@@ -54,8 +55,8 @@ public class JigyoBunKogakuGassanShikyuKetteiProcessParameter implements IBatchP
             boolean is連番付加,
             boolean is日付編集,
             RString 保険者コード,
-            RString 支給区分,
-            RString 支払方法区分,
+            List<RString> 支給区分List,
+            List<RString> 支払方法区分List,
             RString 金融機関コード,
             RString 金融機関名,
             RString 対象年度) {
@@ -66,8 +67,8 @@ public class JigyoBunKogakuGassanShikyuKetteiProcessParameter implements IBatchP
         this.is連番付加 = is連番付加;
         this.is日付編集 = is日付編集;
         this.保険者コード = 保険者コード;
-        this.支給区分 = 支給区分;
-        this.支払方法区分 = 支払方法区分;
+        this.支給区分List = 支給区分List;
+        this.支払方法区分List = 支払方法区分List;
         this.金融機関コード = 金融機関コード;
         this.金融機関名 = 金融機関名;
         this.対象年度 = 対象年度;

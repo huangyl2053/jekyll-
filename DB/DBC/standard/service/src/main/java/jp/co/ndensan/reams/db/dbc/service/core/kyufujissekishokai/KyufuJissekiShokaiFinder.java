@@ -158,6 +158,7 @@ public class KyufuJissekiShokaiFinder {
             給付実績ヘッダ情報2.set識別番号名称(給付実績情報.getShikibetsuMeisho());
             給付実績ヘッダ情報2.set事業所番号(給付実績情報.getJigyoshoNo());
             給付実績ヘッダ情報2.set事業者名称(getJikyoshaName(給付実績情報.getJigyoshoNo(), サービス提供年月));
+            給付実績ヘッダ情報2リスト.add(給付実績ヘッダ情報2);
         }
         return SearchResult.of(給付実績ヘッダ情報2リスト, 0, false);
     }

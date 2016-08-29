@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunkogakugassanshikyukettei;
 
+import java.util.List;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,8 +24,8 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements I
     private final boolean is保険者コード;
     private final RString 対象年度;
     private final boolean is対象年度NULL;
-    private final RString 支給区分;
-    private final RString 支払方法区分;
+    private final List<RString> 支給区分List;
+    private final List<RString> 支払方法区分List;
     private final RString 金融機関コード;
     private final boolean is金融機関コードNULL;
     private final RString psmShikibetsuTaisho;
@@ -39,8 +40,8 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements I
             boolean is保険者コード,
             RString 対象年度,
             boolean is対象年度NULL,
-            RString 支給区分,
-            RString 支払方法区分,
+            List<RString> 支給区分List,
+            List<RString> 支払方法区分List,
             RString 金融機関コード,
             boolean is金融機関コードNULL,
             RString psmShikibetsuTaisho,
@@ -50,8 +51,8 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements I
         this.is保険者コード = is保険者コード;
         this.対象年度 = 対象年度;
         this.is対象年度NULL = is対象年度NULL;
-        this.支給区分 = 支給区分;
-        this.支払方法区分 = 支払方法区分;
+        this.支給区分List = 支給区分List;
+        this.支払方法区分List = 支払方法区分List;
         this.金融機関コード = 金融機関コード;
         this.is金融機関コードNULL = is金融機関コードNULL;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
@@ -63,8 +64,8 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements I
      * MybatisParameterの作成です。
      *
      * @param 保険者コード 保険者コード
-     * @param 支給区分 支給区分
-     * @param 支払方法区分 支払方法区分
+     * @param 支給区分List 支給区分List
+     * @param 支払方法区分List 支払方法区分List
      * @param 金融機関コード 金融機関コード
      * @param 対象年度 対象年度
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
@@ -74,8 +75,8 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements I
      */
     public static JigyoBunKogakuGassanShikyuKetteiMybatisParameter createMybatisParameter(RString 保険者コード,
             RString 対象年度,
-            RString 支給区分,
-            RString 支払方法区分,
+            List<RString> 支給区分List,
+            List<RString> 支払方法区分List,
             RString 金融機関コード,
             RString psmShikibetsuTaisho,
             RString psmAtesaki,
@@ -89,8 +90,8 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements I
                 is保険者コード,
                 対象年度,
                 isnull(対象年度),
-                支給区分,
-                支払方法区分,
+                支給区分List,
+                支払方法区分List,
                 金融機関コード,
                 isnull(金融機関コード),
                 psmShikibetsuTaisho,
