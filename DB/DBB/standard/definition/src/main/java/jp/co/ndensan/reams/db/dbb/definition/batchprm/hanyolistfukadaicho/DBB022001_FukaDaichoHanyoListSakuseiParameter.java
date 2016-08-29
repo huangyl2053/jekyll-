@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistfukadaicho;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.definition.processprm.hanyolistfukadaicho.HanyoListFukaDaichoProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -74,5 +75,15 @@ public class DBB022001_FukaDaichoHanyoListSakuseiParameter extends BatchParamete
     private RString 徴収方法;
     @BatchParameter(key = KEY_16, name = "保険料段階s")
     private List<RString> 保険料段階s;
+
+    /**
+     * toProcessParameter
+     *
+     * @return HanyoListFukaDaichoProcessParameter
+     */
+    public HanyoListFukaDaichoProcessParameter toProcessParameter() {
+        return new HanyoListFukaDaichoProcessParameter(帳票ID, 宛名抽出条件, 出力順ID, 出力項目ID, 項目名付加, 連番付加, 日付編集,
+                調定年度, 賦課年度, 最新状態で抽出, 基準日, 基準日区分, 資格区分, 受給者判定, 徴収方法, 保険料段階s);
+    }
 
 }
