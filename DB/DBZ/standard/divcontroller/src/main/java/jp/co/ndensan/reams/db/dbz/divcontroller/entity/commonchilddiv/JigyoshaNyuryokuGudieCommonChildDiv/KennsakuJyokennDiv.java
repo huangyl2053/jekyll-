@@ -24,7 +24,7 @@ public class KennsakuJyokennDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtJIgyoshaNo")
-    private TextBox txtJIgyoshaNo;
+    private TextBoxCode txtJIgyoshaNo;
     @JsonProperty("txtYukouKaishibi")
     private TextBoxDateRange txtYukouKaishibi;
     @JsonProperty("txtJigyoshamei")
@@ -49,7 +49,7 @@ public class KennsakuJyokennDiv extends Panel {
      * @return txtJIgyoshaNo
      */
     @JsonProperty("txtJIgyoshaNo")
-    public TextBox getTxtJIgyoshaNo() {
+    public TextBoxCode getTxtJIgyoshaNo() {
         return txtJIgyoshaNo;
     }
 
@@ -58,7 +58,7 @@ public class KennsakuJyokennDiv extends Panel {
      * @param txtJIgyoshaNo txtJIgyoshaNo
      */
     @JsonProperty("txtJIgyoshaNo")
-    public void setTxtJIgyoshaNo(TextBox txtJIgyoshaNo) {
+    public void setTxtJIgyoshaNo(TextBoxCode txtJIgyoshaNo) {
         this.txtJIgyoshaNo = txtJIgyoshaNo;
     }
 
