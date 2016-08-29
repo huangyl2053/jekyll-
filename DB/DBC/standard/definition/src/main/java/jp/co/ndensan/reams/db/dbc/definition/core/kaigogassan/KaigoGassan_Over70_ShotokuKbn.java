@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-9999-022 huzongcheng
  */
-public enum OverSeventyShotokuKbn {
+public enum KaigoGassan_Over70_ShotokuKbn {
 
     /**
      * コード:1 名称:一般 略称:定義なし
@@ -35,7 +35,7 @@ public enum OverSeventyShotokuKbn {
     private final RString code;
     private final RString fullName;
 
-    private OverSeventyShotokuKbn(String code, String fullName) {
+    private KaigoGassan_Over70_ShotokuKbn(String code, String fullName) {
         this.code = new RString(code);
         this.fullName = new RString(fullName);
     }
@@ -64,8 +64,8 @@ public enum OverSeventyShotokuKbn {
      * @param code 介護合算_70歳以上の者に係る所得区分のコード
      * @return {@code code} に対応する介護合算_70歳以上の者に係る所得区分
      */
-    public static OverSeventyShotokuKbn toValue(RString code) {
-        for (OverSeventyShotokuKbn kaigogassanidokubun : OverSeventyShotokuKbn.values()) {
+    public static KaigoGassan_Over70_ShotokuKbn toValue(RString code) {
+        for (KaigoGassan_Over70_ShotokuKbn kaigogassanidokubun : KaigoGassan_Over70_ShotokuKbn.values()) {
             if (kaigogassanidokubun.code.equals(code)) {
                 return kaigogassanidokubun;
             }

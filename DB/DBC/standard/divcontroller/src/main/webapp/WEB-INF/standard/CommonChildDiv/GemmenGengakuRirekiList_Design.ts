@@ -8,6 +8,10 @@ module DBC {
 
         export class Events {
 
+            public static onClose(): string {
+                return "onClose";
+            }
+
         }
 
         export class Controls {

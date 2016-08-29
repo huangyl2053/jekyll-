@@ -146,6 +146,7 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
     @Override
     protected void afterExecute() {
         csvWriter.close();
+        spoolManager.spool(eucFilePath);
         AccessLogger.logReport(personalDataList);
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),

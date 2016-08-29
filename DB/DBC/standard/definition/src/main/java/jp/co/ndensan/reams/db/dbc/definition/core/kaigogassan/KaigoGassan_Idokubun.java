@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-9999-022 huzongcheng
  */
-public enum KaigoGassanIdokubun {
+public enum KaigoGassan_Idokubun {
 
     /**
      * コード:1 名称:新規 略称:定義なし
@@ -31,7 +31,7 @@ public enum KaigoGassanIdokubun {
     private final RString code;
     private final RString fullName;
 
-    private KaigoGassanIdokubun(String code, String fullName) {
+    private KaigoGassan_Idokubun(String code, String fullName) {
         this.code = new RString(code);
         this.fullName = new RString(fullName);
     }
@@ -60,8 +60,8 @@ public enum KaigoGassanIdokubun {
      * @param code 介護合算_異動区分のコード
      * @return {@code code} に対応する介護合算_異動区分
      */
-    public static KaigoGassanIdokubun toValue(RString code) {
-        for (KaigoGassanIdokubun kaigogassanidokubun : KaigoGassanIdokubun.values()) {
+    public static KaigoGassan_Idokubun toValue(RString code) {
+        for (KaigoGassan_Idokubun kaigogassanidokubun : KaigoGassan_Idokubun.values()) {
             if (kaigogassanidokubun.code.equals(code)) {
                 return kaigogassanidokubun;
             }
