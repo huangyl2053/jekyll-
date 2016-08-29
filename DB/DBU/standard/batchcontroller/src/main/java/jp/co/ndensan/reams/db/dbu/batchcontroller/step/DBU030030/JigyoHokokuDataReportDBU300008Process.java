@@ -1,0 +1,110 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU030030;
+
+import java.util.Map;
+import jp.co.ndensan.reams.db.dbu.business.report.jigyohokokugeppoyoshikibesshi.JigyohokokuGeppoYoshikiBesshiReport;
+import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNo;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParamter;
+import jp.co.ndensan.reams.db.dbu.definition.reportid.ReportIdDBU;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoyoshikibesshi.JigyohokokuGeppoYoshikiBesshiData;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyojokyohokokushiryonemposakuseiiti.JigyoHokokuDataRelateEntity;
+import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokugeppoyoshikibesshi.JigyohokokuGeppoYoshikiBesshiReportSource;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+
+/**
+ * 介護事業状況報告年報（様式1-5）帳票出力のバッチ処理クラスです。
+ *
+ * @reamsid_L DBU-5600-030 dingyi
+ *
+ */
+public class JigyoHokokuDataReportDBU300008Process extends BatchProcessBase<JigyoHokokuDataRelateEntity> {
+
+    private static final RString MYBATIS_SELECT_ID = new RString(
+            "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyojokyohokokushiryonemposakuseiiti."
+            + "IJigyoJokyoHokokuShiryoNempoSakuseiItiMapper.getJigyouHokokuTokeiReportJyoho");
+    private JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParamter processParameter;
+
+    private static final ReportId REPORT_DBU300008 = ReportIdDBU.DBU300008.getReportId();
+    private static final RString 過去集計分旧市町村区分 = new RString("1");
+    private static final RString 固定文字列_旧 = new RString("（旧）");
+    private static final RString 年報月報区分 = new RString("年報");
+    private static final int 数値_10 = 10;
+    private static final Decimal 数値_11 = new Decimal(11);
+    private static final Decimal 数値_12 = new Decimal(12);
+    private static final Decimal 数値_13 = new Decimal(13);
+    private static final Decimal 数値_14 = new Decimal(14);
+
+    private RString 保険者番号;
+    private RString 保険者名;
+    private Map<Decimal, Decimal> syukeiNo0100;
+
+    @BatchWriter
+    private BatchReportWriter<JigyohokokuGeppoYoshikiBesshiReportSource> batchWrite;
+    private ReportSourceWriter<JigyohokokuGeppoYoshikiBesshiReportSource> reportSourceWriter;
+
+    @Override
+    protected void beforeExecute() {
+        super.beforeExecute();
+        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        保険者番号 = 地方公共団体.get地方公共団体コード().value();
+        if (過去集計分旧市町村区分.equals(processParameter.get過去集計分旧市町村区分())) {
+            保険者名 = 固定文字列_旧.concat(地方公共団体.get市町村名());
+        } else {
+            保険者名 = 地方公共団体.get市町村名();
+        }
+    }
+
+    @Override
+    protected IBatchReader createReader() {
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toSelectReportDataMybitisParamter());
+    }
+
+    @Override
+    protected void createWriter() {
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBU300008.value()).create();
+        reportSourceWriter = new ReportSourceWriter(batchWrite);
+    }
+
+    @Override
+    protected void process(JigyoHokokuDataRelateEntity entity) {
+        if (ShukeiNo.別紙_1_第1号被保険者のいる世帯数.getコード().equals(entity.getSyukeiNo().value())) {
+            syukeiNo0100.put(entity.getTateNo().multiply(数値_10).add(entity.getYokoNo()), entity.getSukeiKekkaAtai());
+        }
+    }
+
+    @Override
+    protected void afterExecute() {
+        JigyohokokuGeppoYoshikiBesshiData reportData = new JigyohokokuGeppoYoshikiBesshiData();
+        reportData.set集計区分(年報月報区分);
+        reportData.set作成日時(processParameter.get処理日時());
+        reportData.set保険者名(保険者名);
+        reportData.set保険者番号(保険者番号);
+        // TODO
+        reportData.set集計範囲(processParameter.get集計開始年月());
+        reportData.set項目標題列1(new RString("前年度末現在"));
+        reportData.set項目標題列2(new RString("当年度中増"));
+        reportData.set項目標題列3(new RString("当年度中減"));
+        reportData.set項目標題列4(new RString("当年度末現在"));
+        reportData.set前月末現在の集計結果値_1(new RString(syukeiNo0100.get(数値_11).longValue()));
+        reportData.set当月中増の集計結果値_1(new RString(syukeiNo0100.get(数値_12).longValue()));
+        reportData.set当月中減の集計結果値_1(new RString(syukeiNo0100.get(数値_13).longValue()));
+        reportData.set当月末現在の集計結果値_1(new RString(syukeiNo0100.get(数値_14).longValue()));
+        JigyohokokuGeppoYoshikiBesshiReport report = new JigyohokokuGeppoYoshikiBesshiReport(reportData);
+        report.writeBy(reportSourceWriter);
+    }
+}

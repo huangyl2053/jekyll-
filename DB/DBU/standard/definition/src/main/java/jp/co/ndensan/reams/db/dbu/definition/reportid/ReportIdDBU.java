@@ -174,7 +174,19 @@ public enum ReportIdDBU {
     /**
      * 事業状況報告年報（様式１・２　被保険者数）の帳票ID。
      */
-    DBU300101(new ReportId("DBU300101_JigyohokokuNenpoYoshiki1of1"), DBU300022.getReportName());
+    DBU300101(new ReportId("DBU300101_JigyohokokuNenpoYoshiki1of1"), DBU300022.getReportName()),
+    /**
+     * 介護事業状況報告年報（様式1-3）の帳票ID。
+     */
+    DBU300104(new ReportId("DBU300104_JigyohokokuNenpoYoshiki1_3"), new RString("介護事業状況報告年報（様式1-3）")),
+    /**
+     * 介護事業状況報告年報（様式1-4）の帳票ID。
+     */
+    DBU300105(new ReportId("DBU300105_JigyohokokuNenpoYoshiki1_4"), new RString("介護事業状況報告年報（様式1-4）")),
+    /**
+     * 介護事業状況報告年報（様式1-5）の帳票ID。
+     */
+    DBU300106(new ReportId("DBU300106_JigyohokokuNenpoYoshiki1_5of1"), new RString("介護事業状況報告年報（様式1-5）"));
     private final ReportId reportId;
 
     private final RString reportName;
