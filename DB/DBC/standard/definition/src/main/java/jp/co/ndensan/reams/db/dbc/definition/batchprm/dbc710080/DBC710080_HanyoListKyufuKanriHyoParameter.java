@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc710080;
 
-import jp.co.ndensan.reams.db.dbc.definition.core.chushutsujoken.ChushutsuJoken;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
+import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,60 +19,60 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBC710080_HanyoListKyufuKanriHyoParameter {
+public class DBC710080_HanyoListKyufuKanriHyoParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;
 
-    private static final String A = "給付対象年月From";
-    @BatchParameter(key = A, name = "給付対象年月From")
+    private static final String YEAR_FROM = "給付対象年月From";
+    @BatchParameter(key = YEAR_FROM, name = "給付対象年月From")
     private RDate 給付対象年月From;
 
-    private static final String B = "給付対象年月To";
-    @BatchParameter(key = B, name = "給付対象年月To")
+    private static final String YEAR_TO = "給付対象年月To";
+    @BatchParameter(key = YEAR_TO, name = "給付対象年月To")
     private RDate 給付対象年月To;
 
-    private static final String C = "居宅支援事業者コード";
-    @BatchParameter(key = C, name = "居宅支援事業者コード")
+    private static final String HOME_WORKER_CODE = "居宅支援事業者コード";
+    @BatchParameter(key = HOME_WORKER_CODE, name = "居宅支援事業者コード")
     private RString 居宅支援事業者コード;
 
-    private static final String D = "居宅支援事業者名";
-    @BatchParameter(key = D, name = "居宅支援事業者名")
+    private static final String HOME_WORKER_NAME = "居宅支援事業者名";
+    @BatchParameter(key = HOME_WORKER_NAME, name = "居宅支援事業者名")
     private RString 居宅支援事業者名;
 
-    private static final String E = "委託先支援事業者コード";
-    @BatchParameter(key = E, name = "委託先支援事業者コード")
+    private static final String SUPPORT_WORKER_CODE = "委託先支援事業者コード";
+    @BatchParameter(key = SUPPORT_WORKER_CODE, name = "委託先支援事業者コード")
     private RString 委託先支援事業者コード;
 
-    private static final String F = "委託先支援事業者名";
-    @BatchParameter(key = F, name = "委託先支援事業者名")
+    private static final String SUPPORT_WORKER_NAME = "委託先支援事業者名";
+    @BatchParameter(key = SUPPORT_WORKER_NAME, name = "委託先支援事業者名")
     private RString 委託先支援事業者名;
 
-    private static final String G = "明細行出力有無";
-    @BatchParameter(key = G, name = "明細行出力有無")
-    private ChushutsuJoken 明細行出力有無;
+    private static final String DETAIL_OUTPUT = "明細行出力有無";
+    @BatchParameter(key = DETAIL_OUTPUT, name = "明細行出力有無")
+    private RString 明細行出力有無;
 
-    private static final String H = "項目名付加";
-    @BatchParameter(key = H, name = "項目名付加")
+    private static final String PROJECT_NAME_ADD = "項目名付加";
+    @BatchParameter(key = PROJECT_NAME_ADD, name = "項目名付加")
     private boolean 項目名付加;
 
-    private static final String I = "連番付加";
-    @BatchParameter(key = I, name = "連番付加")
+    private static final String NO_ADD = "連番付加";
+    @BatchParameter(key = NO_ADD, name = "連番付加")
     private boolean 連番付加;
 
-    private static final String J = "日付スラッシュ付加";
-    @BatchParameter(key = J, name = "日付スラッシュ付加")
+    private static final String DATE_SLASH_ADD = "日付スラッシュ付加";
+    @BatchParameter(key = DATE_SLASH_ADD, name = "日付スラッシュ付加")
     private boolean 日付スラッシュ付加;
 
-    private static final String K = "保険者コード";
-    @BatchParameter(key = K, name = "保険者コード")
+    private static final String INSURANCE_CODE = "保険者コード";
+    @BatchParameter(key = INSURANCE_CODE, name = "保険者コード")
     private LasdecCode 保険者コード;
 
-    private static final String L = "出力順";
-    @BatchParameter(key = L, name = "出力順")
+    private static final String OUTPUT_ORDER = "出力順";
+    @BatchParameter(key = OUTPUT_ORDER, name = "出力順")
     private Long 出力順;
 
-    private static final String M = "出力項目";
-    @BatchParameter(key = M, name = "出力項目")
+    private static final String OUTPUT_ITEM = "出力項目";
+    @BatchParameter(key = OUTPUT_ITEM, name = "出力項目")
     private RString 出力項目;
 
 }

@@ -380,6 +380,10 @@ public enum ReportIdDBC {
      */
     DBC200012(new ReportId("DBC200012_JuryoIninJigyoshaIchiran"), new RString("受領委任契約事業者一覧表")),
     /**
+     * 高額合算自己負担額証明書情報一覧表
+     */
+    DBC200034(new ReportId("DBC200034_GassanJikofutangakuShomeishoTorikomiIchiran"), new RString("高額合算自己負担額証明書情報一覧表")),
+    /**
      * 総合事業費（経過措置）資格照合表帳票ＩＤです。
      */
     DBC100018(new ReportId("DBC100018_SogojigyohiShikakuShogohyoKeikaSochi"), new RString("総合事業費（経過措置）資格照合表"));
