@@ -69,18 +69,6 @@ public class TaJushochiTokureishaKanriValidationHandler {
                         || div.getDdlTekiyoJiyo().getSelectedKey().isEmpty()) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用事由, div.getDdlTekiyoJiyo()));
                 }
-
-                if (div.getTxtTekiyobi().getValue() != null
-                        && div.getTxtTekiyoTodokedebi().getValue() != null
-                        && (div.getTxtTekiyobi().getValue().isBefore(div.getTxtTekiyoTodokedebi().getValue()))) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            RRVMessages.適用日と適用届出日の整合性チェック, div.getTxtTekiyobi(), div.getTxtTekiyoTodokedebi()));
-                }
-                if (div.getTxtKaijyobi().getValue() != null && div.getTxtKaijyoTodokedebi().getValue() != null
-                        && (div.getTxtKaijyobi().getValue().isBefore(div.getTxtKaijyoTodokedebi().getValue()))) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            RRVMessages.解除日と解除届出日の整合性チェック, div.getTxtKaijyobi(), div.getTxtKaijyoTodokedebi()));
-                }
                 if (div.getTxtKaijyobi().getValue() != null && div.getTxtTekiyobi().getValue() != null
                         && (div.getTxtKaijyobi().getValue().isBefore(div.getTxtTekiyobi().getValue()))) {
                     validPairs.add(new ValidationMessageControlPair(
@@ -132,10 +120,6 @@ public class TaJushochiTokureishaKanriValidationHandler {
                         || div.getDdlTekiyoJiyo().getSelectedKey().isEmpty()) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用事由, div.getDdlTekiyoJiyo()));
                 }
-                if (div.getTxtTekiyobi().getValue() != null && div.getTxtTekiyoTodokedebi().getValue() != null
-                        && div.getTxtTekiyobi().getValue().isBefore(div.getTxtTekiyoTodokedebi().getValue())) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日と適用届出日の整合性チェック, div.getTxtTekiyobi(), div.getTxtTekiyoTodokedebi()));
-                }
                 if (div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null
                         && !div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isEmpty()
                         && div.getTxtNyusyobi().getValue() == null) {
@@ -161,10 +145,6 @@ public class TaJushochiTokureishaKanriValidationHandler {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.入力値が不正, div.getTxtKaijyobi()));
                     }
                 }
-                if (div.getTxtKaijyobi().getValue() != null && div.getTxtKaijyoTodokedebi().getValue() != null
-                        && (div.getTxtKaijyobi().getValue().isBefore(div.getTxtKaijyoTodokedebi().getValue()))) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.解除日と解除届出日の整合性チェック));
-                }
             }
         }
         return validPairs;
@@ -176,8 +156,6 @@ public class TaJushochiTokureishaKanriValidationHandler {
         解除日(UrErrorMessages.必須, "解除日"),
         適用事由(UrErrorMessages.必須, "適用事由"),
         解除事由(UrErrorMessages.必須, "解除事由"),
-        適用日と適用届出日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "適用届出日", メッセージ適用日.toString()),
-        解除日と解除届出日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "解除届出日", "解除日"),
         適用日と解除日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "解除日", メッセージ適用日.toString()),
         適用日と最新の適用情報の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, メッセージ適用日.toString(), "最新の適用情報"),
         入所日の必須チェック(DbzErrorMessages.複数必須項目相関チェックエラー, "入所施設", "入所日"),
