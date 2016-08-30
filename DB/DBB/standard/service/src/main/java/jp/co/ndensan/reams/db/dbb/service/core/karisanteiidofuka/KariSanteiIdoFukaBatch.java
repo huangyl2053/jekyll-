@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.report.honsanteiidou.KeisanjohoAtenaKozaKouseizengoEntity;
+import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTani;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoNengakuKijunNendo8Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter;
@@ -83,10 +84,10 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.KozaYotoKubunTy
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
-//import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.GyomuConfigJohoClass;
-//import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwari;
-//import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariInput;
-//import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariOutput;
+import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.GyomuConfigJohoClass;
+import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwari;
+import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariInput;
+import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariOutput;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -804,11 +805,11 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                         .get保険料段階ListIn(調定年度);
                 保険料率 = 前年度の保険料段階リスト.getBy段階区分(編集後賦課の情報.get保険料段階_仮算定時()).get保険料率();
             }
-//            TokuchoKarisanteiKiwariOutput 特徴仮算定期割 = get特徴仮算定期割(調定年度, 保険料率);
+            TokuchoKarisanteiKiwariOutput 特徴仮算定期割 = get特徴仮算定期割(調定年度, 保険料率);
             Decimal 特徴期別額 = Decimal.ZERO;
-//            if (特徴仮算定期割 != null && 特徴仮算定期割.get特徴期別額() != null && NUM_2 <= 特徴仮算定期割.get特徴期別額().size()) {
-//                特徴期別額 = 特徴仮算定期割.get特徴期別額().get(NUM_2);
-//            }
+            if (特徴仮算定期割 != null && 特徴仮算定期割.get特徴期別額() != null && NUM_2 <= 特徴仮算定期割.get特徴期別額().size()) {
+                特徴期別額 = 特徴仮算定期割.get特徴期別額().get(NUM_2);
+            }
 
             DbT2002FukaJohoTempTableEntity 賦課情報Entity = set賦課情報一時テーブルEntity(編集後賦課の情報);
             賦課情報Entity.setTkKibetsuGaku03(特徴期別額);
@@ -1530,40 +1531,41 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         }
     }
 
-//    private TokuchoKarisanteiKiwariOutput get特徴仮算定期割(FlexibleYear 調定年度, Decimal 保険料率) {
-//        TokuchoKarisanteiKiwari 保険系業務共通 = new TokuchoKarisanteiKiwari();
-//        TokuchoKarisanteiKiwariInput inputEntity = new TokuchoKarisanteiKiwariInput();
-//        inputEntity.set前年度賦課額(保険料率);
-//        inputEntity.set現在特徴期(NUM_3);
-//        inputEntity.set前年度最終期別額(Decimal.ZERO);
-//        RString 特徴定期数 = DbBusinessConfig.get(ConfigNameDBB.特徴期情報_設定納期数,
-//                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-//        RString 特徴仮算定期数 = DbBusinessConfig.get(ConfigNameDBB.特徴期情報_仮算定期数,
-//                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-//        RString 特徴仮算定計算区分 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_8月開始,
-//                new RDate(調定年度.minusYear(NUM_1).toString()), SubGyomuCode.DBB介護賦課);
-//        RString 端数区分 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_期別端数,
-//                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-//        GyomuConfigJohoClass 業務コンフィグ情報 = new GyomuConfigJohoClass();
-//        業務コンフィグ情報.set特徴定期数(Integer.valueOf(特徴定期数.toString()));
-//        業務コンフィグ情報.set特徴仮算定期数(Integer.valueOf(特徴仮算定期数.toString()));
-//        if (RSTRING_1.equals(特徴仮算定計算区分)) {
-//            業務コンフィグ情報.set特徴仮算定計算区分(NUM_1);
-//        } else if (RSTRING_3.equals(特徴仮算定計算区分)) {
-//            業務コンフィグ情報.set特徴仮算定計算区分(NUM_2);
-//        }
-//        if (HasuChoseiTani._1.getコード().equals(端数区分)) {
-//            業務コンフィグ情報.set端数区分特徴仮算定期別額(NUM_1);
-//        } else if (HasuChoseiTani._10.getコード().equals(端数区分)) {
-//            業務コンフィグ情報.set端数区分特徴仮算定期別額(NUM_2);
-//        } else if (HasuChoseiTani._100.getコード().equals(端数区分)) {
-//            業務コンフィグ情報.set端数区分特徴仮算定期別額(NUM_3);
-//        } else if (HasuChoseiTani._1000.getコード().equals(端数区分)) {
-//            業務コンフィグ情報.set端数区分特徴仮算定期別額(NUM_4);
-//        }
-//        inputEntity.set業務コンフィグ情報(業務コンフィグ情報);
-//        return 保険系業務共通.getTokuchoKarisanteiKibetsuGaku(inputEntity);
-//    }
+    private TokuchoKarisanteiKiwariOutput get特徴仮算定期割(FlexibleYear 調定年度, Decimal 保険料率) {
+        TokuchoKarisanteiKiwari 保険系業務共通 = new TokuchoKarisanteiKiwari();
+        TokuchoKarisanteiKiwariInput inputEntity = new TokuchoKarisanteiKiwariInput();
+        inputEntity.set前年度賦課額(保険料率);
+        inputEntity.set現在特徴期(NUM_3);
+        inputEntity.set前年度最終期別額(Decimal.ZERO);
+        RString 特徴定期数 = DbBusinessConfig.get(ConfigNameDBB.特徴期情報_設定納期数,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        RString 特徴仮算定期数 = DbBusinessConfig.get(ConfigNameDBB.特徴期情報_仮算定期数,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        RString 特徴仮算定計算区分 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_8月開始,
+                new RDate(調定年度.minusYear(NUM_1).toString()), SubGyomuCode.DBB介護賦課);
+        RString 端数区分 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_期別端数,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        GyomuConfigJohoClass 業務コンフィグ情報 = new GyomuConfigJohoClass();
+        業務コンフィグ情報.set特徴定期数(Integer.valueOf(特徴定期数.toString()));
+        業務コンフィグ情報.set特徴仮算定期数(Integer.valueOf(特徴仮算定期数.toString()));
+        if (RSTRING_1.equals(特徴仮算定計算区分)) {
+            業務コンフィグ情報.set特徴仮算定計算区分(NUM_1);
+        } else if (RSTRING_3.equals(特徴仮算定計算区分)) {
+            業務コンフィグ情報.set特徴仮算定計算区分(NUM_2);
+        }
+        if (HasuChoseiTani._1.getコード().equals(端数区分)) {
+            業務コンフィグ情報.set端数区分特徴仮算定期別額(NUM_1);
+        } else if (HasuChoseiTani._10.getコード().equals(端数区分)) {
+            業務コンフィグ情報.set端数区分特徴仮算定期別額(NUM_2);
+        } else if (HasuChoseiTani._100.getコード().equals(端数区分)) {
+            業務コンフィグ情報.set端数区分特徴仮算定期別額(NUM_3);
+        } else if (HasuChoseiTani._1000.getコード().equals(端数区分)) {
+            業務コンフィグ情報.set端数区分特徴仮算定期別額(NUM_4);
+        }
+        inputEntity.set業務コンフィグ情報(業務コンフィグ情報);
+        return 保険系業務共通.getTokuchoKarisanteiKibetsuGaku(inputEntity);
+    }
+
     /**
      * 異動賦課計算
      *

@@ -59,8 +59,8 @@ public class NinteiShinseiTorokuTorikeshiShosai {
             被保険者番号 = key.get被保険者番号().value();
         }
 
-//        YokaigoNinteiJoho 画面更新用情報 = getHandler(div).onLoad(被保険者番号);
-//        ViewStateHolder.put(要介護認定取消画面キー.画面更新用情報, 画面更新用情報);
+        YokaigoNinteiJoho 画面更新用情報 = getHandler(div).onLoad(被保険者番号);
+        ViewStateHolder.put(要介護認定取消画面キー.画面更新用情報, 画面更新用情報);
         return ResponseData.of(div).respond();
     }
 

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.service.report.tsuchisho.notsu;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -344,10 +345,10 @@ public class NonyuTsuchiShoJohoFactory {
             ShunoKanri shunoKanri = builder.build();
             ShunoKey 収納キー = new ShunoKey(shunoKanri, 収納科目, 納期月リスト.get納期月From期(期));
             Decimal 普徴期別金額 = get金額By期(普徴期別金額リスト, 期);
-//            SeikyuItemMeisai 請求明細 = new SeikyuItemMeisai(
-//                    収納キー, 普徴期別金額, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Collections.EMPTY_LIST, 納期情報.get納期().get納期限());
+            SeikyuItemMeisai 請求明細 = new SeikyuItemMeisai(
+                    収納キー, 普徴期別金額, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Collections.EMPTY_LIST, 納期情報.get納期().get納期限());
             List<SeikyuItemMeisai> 請求明細リスト = new ArrayList<>();
-//            請求明細リスト.add(請求明細);
+            請求明細リスト.add(請求明細);
             SeikyuItem 編集元情報 = new SeikyuItem(地方公共団体コード, SeikyushoType.納付書, new RYear(調定年度.toDateString()),
                     納期情報.get納期().get通知書発行日(), 識別コード, 納期情報.get納期().get納期限(), null,
                     ToriatsukaiKigenCheckKubun.発行日を取扱期限とする, false, RString.EMPTY, false,

@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbu.service.core.jyukyusyajoho;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.NijiYoboJigyoTaishosha;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3100NijiYoboJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3100NijiYoboJigyoTaishoshaDac;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.KaigoHokenFutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShakaiFukushiHojinRiyoshaFutanKeigen;
@@ -290,14 +292,15 @@ public class SogoSyokaiJyukyusyaJohoFinder {
      * @param 被保険者番号 被保険者番号
      * @return NijiYoboJigyoTaishosha
      */
-//    public NijiYoboJigyoTaishosha get総合事業_経過措置_対象者情報(HihokenshaNo 被保険者番号) {
-//        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号メッセージ.toString()));
-////        DbT3100NijiYoboJigyoTaishoshaEntity entity = 二次予防事業対象者dac.get総合事業_経過措置_対象者情報(被保険者番号);
-//        if (entity == null) {
-//            return null;
-//        }
-//        return new NijiYoboJigyoTaishosha(entity);
-//    }
+    public NijiYoboJigyoTaishosha get総合事業_経過措置_対象者情報(HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号メッセージ.toString()));
+        DbT3100NijiYoboJigyoTaishoshaEntity entity = 二次予防事業対象者dac.get総合事業_経過措置_対象者情報(被保険者番号);
+        if (entity == null) {
+            return null;
+        }
+        return new NijiYoboJigyoTaishosha(entity);
+    }
+
     /**
      * 総合事業対象者を取得します。
      *
