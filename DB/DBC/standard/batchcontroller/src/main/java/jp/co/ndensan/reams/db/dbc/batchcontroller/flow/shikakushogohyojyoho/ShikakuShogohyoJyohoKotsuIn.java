@@ -51,6 +51,11 @@ public class ShikakuShogohyoJyohoKotsuIn extends BatchFlowBase<ShikakuShogohyoJy
         }
     }
 
+    /**
+     * CSVファイル取込
+     *
+     * @return ShikakuShogohyoJyohoReadCsvFileProcess
+     */
     @Step(CSVファイル取込)
     protected IBatchFlowCommand readCsvFile() {
 

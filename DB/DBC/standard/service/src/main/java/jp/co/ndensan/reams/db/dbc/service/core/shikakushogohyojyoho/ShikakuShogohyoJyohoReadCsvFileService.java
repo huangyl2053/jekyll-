@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.shikakushogohyojyoho;
 
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.KagoKetteiHokenshaInControlCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.shikakushogohyojyoho.ShikakuShogohyoJyohoInDataHeadEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.shikakushogohyojyoho.ShikakuShogohyoJyohoInDataMeisaiEntity;
@@ -35,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class ShikakuShogohyoJyohoReadCsvFileService {
 
     private static final int INT_0 = 0;
-    private static final RString エラー区分_取込対象データなし = new RString("99");
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShikakuShogohyoJyohoReadCsvFileService}のインスタンスを返します。
@@ -50,12 +50,12 @@ public class ShikakuShogohyoJyohoReadCsvFileService {
     /**
      * 資格照合表一時テーブル登録を設定する。
      *
-     * @param conttolCsvEntity KagoKetteiHokenshaInControlCsvEntity
+     * @param controlCsvEntity KagoKetteiHokenshaInControlCsvEntity
      * @param meisaiCsvEntity ShikakuShogohyoJyohoInDataMeisaiEntity
      * @param 連番 int
      * @return DbWT1211ShikakuShogohyoEntity
      */
-    public DbWT1211ShikakuShogohyoTempEntity to資格照合表一時(KagoKetteiHokenshaInControlCsvEntity conttolCsvEntity,
+    public DbWT1211ShikakuShogohyoTempEntity to資格照合表一時(KagoKetteiHokenshaInControlCsvEntity controlCsvEntity,
             ShikakuShogohyoJyohoInDataMeisaiEntity meisaiCsvEntity, int 連番) {
         DbWT1211ShikakuShogohyoTempEntity tempEntity = new DbWT1211ShikakuShogohyoTempEntity();
 
@@ -91,43 +91,18 @@ public class ShikakuShogohyoJyohoReadCsvFileService {
                 && !meisaiCsvEntity.get居宅サービス計画作成区分コード().isEmpty()) {
             tempEntity.setKyotakuServicePlanSakuseiKubunCode(new Code(meisaiCsvEntity.get居宅サービス計画作成区分コード()));
         }
-        if (meisaiCsvEntity.get支援事業所番号() != null && !meisaiCsvEntity.get支援事業所番号().isEmpty()) {
-            tempEntity.setShienJigyoshoNo(new JigyoshaNo(meisaiCsvEntity.get支援事業所番号()));
-        }
-        tempEntity.setGetsuGakuShokujiFutanGaku(getDecimal(meisaiCsvEntity.get食事標準負担額_月額()));
-        tempEntity.setNichiGakuShokujiFutanGaku(getDecimal(meisaiCsvEntity.get食事標準負担額_日額()));
-        tempEntity.setShokuhiFutanGendoGaku(getDecimal(meisaiCsvEntity.get食費負担限度額()));
-        tempEntity.setKyojuhiFutanGendoGaku1(getDecimal(meisaiCsvEntity.get居住費_負担限度額_1()));
-        tempEntity.setKyojuhiFutanGendoGaku2(getDecimal(meisaiCsvEntity.get居住費_負担限度額_2()));
-        tempEntity.setKyojuhiFutanGendoGaku3(getDecimal(meisaiCsvEntity.get居住費_負担限度額_3()));
-        tempEntity.setKyojuhiFutanGendoGaku4(getDecimal(meisaiCsvEntity.get居住費_負担限度額_4()));
-        tempEntity.setKyojuhiFutanGendoGaku5(getDecimal(meisaiCsvEntity.get居住費_負担限度額_5()));
-        tempEntity.setTanisuTanka(getDecimal(meisaiCsvEntity.get単位数単価()));
-
-        tempEntity.setHokenKyufuRitsu(get給付率(meisaiCsvEntity.get保険給付率()));
-        tempEntity.setKohi1KyufuRitsu(get給付率(meisaiCsvEntity.get公費給付率_1()));
-        tempEntity.setKohi2KyufuRitsu(get給付率(meisaiCsvEntity.get公費給付率_2()));
-        tempEntity.setKohi3KyufuRitsu(get給付率(meisaiCsvEntity.get公費給付率_3()));
-        if (null == meisaiCsvEntity.getサービス日数_回数() || meisaiCsvEntity.getサービス日数_回数().isEmpty()) {
-            tempEntity.setServiceNissuKaisu(INT_0);
-        } else {
-            tempEntity.setServiceNissuKaisu(Integer.valueOf(meisaiCsvEntity.getサービス日数_回数().toString()));
-        }
-        tempEntity.setServiceTanisu(getDecimal(meisaiCsvEntity.getサービス単位数()));
-        tempEntity.setTokuteiNyushoshaKaigoServiceGaku(getDecimal(meisaiCsvEntity.get特定入所者介護サービス費等()));
-        tempEntity.setRiyoshaFutanGaku(getDecimal(meisaiCsvEntity.get利用者負担額()));
-        tempEntity.setShokujiFutanGaku(getDecimal(meisaiCsvEntity.get食事標準負担額()));
-        if (conttolCsvEntity.getHokenshaNo() != null && !conttolCsvEntity.getHokenshaNo().isEmpty()) {
-            tempEntity.setHokenshaNo(new HihokenshaNo(conttolCsvEntity.getHokenshaNo()));
+        set事業所番号と費用(tempEntity, meisaiCsvEntity);
+        if (controlCsvEntity.getHokenshaNo() != null && !controlCsvEntity.getHokenshaNo().isEmpty()) {
+            tempEntity.setHokenshaNo(new HihokenshaNo(controlCsvEntity.getHokenshaNo()));
         }
         HokenshaNyuryokuHojoFinder hokenshaNyuryokuHojoFinder = HokenshaNyuryokuHojoFinder.createInstance();
-        Hokensha hokensha = hokenshaNyuryokuHojoFinder.getHokensha(new HokenjaNo(conttolCsvEntity.getHokenshaNo()));
+        Hokensha hokensha = hokenshaNyuryokuHojoFinder.getHokensha(new HokenjaNo(controlCsvEntity.getHokenshaNo()));
         if (hokensha != null) {
             tempEntity.setHokenshaName(hokensha.get保険者名());
         } else {
             tempEntity.setHokenshaName(RString.EMPTY);
         }
-        tempEntity.setShinsaYM(new FlexibleYearMonth(conttolCsvEntity.getShoriYM()));
+        tempEntity.setShinsaYM(new FlexibleYearMonth(controlCsvEntity.getShoriYM()));
         return tempEntity;
     }
 
@@ -189,7 +164,7 @@ public class ShikakuShogohyoJyohoReadCsvFileService {
      */
     public DbWT0002KokuhorenTorikomiErrorEntity to処理結果リスト一時() {
         DbWT0002KokuhorenTorikomiErrorEntity tempEntity = new DbWT0002KokuhorenTorikomiErrorEntity();
-        tempEntity.setErrorKubun(エラー区分_取込対象データなし);
+        tempEntity.setErrorKubun(KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード());
         tempEntity.setShoHokanehshaNo(null);
         tempEntity.setHihokenshaNo(null);
         tempEntity.setKey1(RString.EMPTY);
@@ -202,6 +177,35 @@ public class ShikakuShogohyoJyohoReadCsvFileService {
         tempEntity.setBiko(RString.EMPTY);
 
         return tempEntity;
+    }
+
+    private void set事業所番号と費用(DbWT1211ShikakuShogohyoTempEntity tempEntity, ShikakuShogohyoJyohoInDataMeisaiEntity meisaiCsvEntity) {
+
+        if (meisaiCsvEntity.get支援事業所番号() != null && !meisaiCsvEntity.get支援事業所番号().isEmpty()) {
+            tempEntity.setShienJigyoshoNo(new JigyoshaNo(meisaiCsvEntity.get支援事業所番号()));
+        }
+        tempEntity.setGetsuGakuShokujiFutanGaku(getDecimal(meisaiCsvEntity.get食事標準負担額_月額()));
+        tempEntity.setNichiGakuShokujiFutanGaku(getDecimal(meisaiCsvEntity.get食事標準負担額_日額()));
+        tempEntity.setShokuhiFutanGendoGaku(getDecimal(meisaiCsvEntity.get食費負担限度額()));
+        tempEntity.setKyojuhiFutanGendoGaku1(getDecimal(meisaiCsvEntity.get居住費_負担限度額_1()));
+        tempEntity.setKyojuhiFutanGendoGaku2(getDecimal(meisaiCsvEntity.get居住費_負担限度額_2()));
+        tempEntity.setKyojuhiFutanGendoGaku3(getDecimal(meisaiCsvEntity.get居住費_負担限度額_3()));
+        tempEntity.setKyojuhiFutanGendoGaku4(getDecimal(meisaiCsvEntity.get居住費_負担限度額_4()));
+        tempEntity.setKyojuhiFutanGendoGaku5(getDecimal(meisaiCsvEntity.get居住費_負担限度額_5()));
+        tempEntity.setTanisuTanka(getDecimal(meisaiCsvEntity.get単位数単価()));
+        tempEntity.setHokenKyufuRitsu(get給付率(meisaiCsvEntity.get保険給付率()));
+        tempEntity.setKohi1KyufuRitsu(get給付率(meisaiCsvEntity.get公費給付率_1()));
+        tempEntity.setKohi2KyufuRitsu(get給付率(meisaiCsvEntity.get公費給付率_2()));
+        tempEntity.setKohi3KyufuRitsu(get給付率(meisaiCsvEntity.get公費給付率_3()));
+        if (null == meisaiCsvEntity.getサービス日数_回数() || meisaiCsvEntity.getサービス日数_回数().isEmpty()) {
+            tempEntity.setServiceNissuKaisu(INT_0);
+        } else {
+            tempEntity.setServiceNissuKaisu(Integer.valueOf(meisaiCsvEntity.getサービス日数_回数().toString()));
+        }
+        tempEntity.setServiceTanisu(getDecimal(meisaiCsvEntity.getサービス単位数()));
+        tempEntity.setTokuteiNyushoshaKaigoServiceGaku(getDecimal(meisaiCsvEntity.get特定入所者介護サービス費等()));
+        tempEntity.setRiyoshaFutanGaku(getDecimal(meisaiCsvEntity.get利用者負担額()));
+        tempEntity.setShokujiFutanGaku(getDecimal(meisaiCsvEntity.get食事標準負担額()));
     }
 
     private Decimal getDecimal(RString decimal) {
