@@ -12,21 +12,15 @@ import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshut
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokukomoku.ChohyoShutsuryokuKomoku.ChohyoShutsuryokuKomokuDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokukomoku.ChohyoShutsuryokuKomoku.IChohyoShutsuryokuKomokuDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonBatchParameterRestore;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonBatchParameterSave;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 
 /**
- * HanyoListParam のクラスファイル
+ * HanyoListParamForKougaku のクラスファイル
  *
  * @reamsid_L DBC-3103-010 dingminghao
  */
-public class HanyoListParamDiv extends PanelBatchParameter {
+public class HanyoListParamForKougakuDiv extends PanelBatchParameter {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*

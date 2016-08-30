@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710140.DBC710140_HanyoListKogakuGassanShinseishoJohoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShinseiJokyoKbn;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7140001.ChushutsuJokenPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7140001.HanyoListParamDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7140001.HanyoListParamForKougakuDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -28,9 +28,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  *
  * @reamsid_L DBC-3103-010 dingminghao
  */
-public class HanyoListParamHandler {
+public class HanyoListParamForKougakuHandler {
 
-    private final HanyoListParamDiv div;
+    private final HanyoListParamForKougakuDiv div;
     private static final RString BLANK = new RString("0");
     private static final RString すべて = new RString("すべて");
     private static final RString 項目名付加 = new RString("1");
@@ -44,7 +44,7 @@ public class HanyoListParamHandler {
      *
      * @param div 汎用リスト出力(高額合算申請書情報)画面のdiv
      */
-    public HanyoListParamHandler(HanyoListParamDiv div) {
+    public HanyoListParamForKougakuHandler(HanyoListParamForKougakuDiv div) {
         this.div = div;
     }
 
