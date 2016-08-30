@@ -24,6 +24,7 @@ public class SinseicyuDateDeleteProcess extends BatchProcessBase<JukyushaDaichoT
     private static final RString DB_READER_MAPPER_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.nenjiriyoshafutanwariaihantei"
                     + ".INenjiRiyoshaFutanwariaiHanteiMapper.delete申請中データ");
+    private static final RString 受給者TEMP = new RString("JukyuShaTaichoTempTable");
     @BatchWriter
     private IBatchTableWriter tempDbWriter;
 
@@ -34,7 +35,7 @@ public class SinseicyuDateDeleteProcess extends BatchProcessBase<JukyushaDaichoT
 
     @Override
     protected void createWriter() {
-        this.tempDbWriter = new BatchEntityCreatedTempTableWriter(new RString("JukyuShaTaichoTempTable"), JukyushaDaichoTempEntity.class);
+        this.tempDbWriter = new BatchEntityCreatedTempTableWriter(受給者TEMP, JukyushaDaichoTempEntity.class);
     }
 
     @Override

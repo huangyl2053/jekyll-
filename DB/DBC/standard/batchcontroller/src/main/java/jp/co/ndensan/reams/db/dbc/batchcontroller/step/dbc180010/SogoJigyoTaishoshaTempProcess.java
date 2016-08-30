@@ -25,6 +25,7 @@ public class SogoJigyoTaishoshaTempProcess extends BatchProcessBase<SogoJigyoTai
     private static final RString DB_READER_MAPPER_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.nenjiriyoshafutanwariaihantei"
                     + ".INenjiRiyoshaFutanwariaiHanteiMapper.getSogoJigyoTaishoshaTemp");
+    private static final RString 総合事業対象者TEMP = new RString("SogoJigyoTaishoshaTempTable");
     private NenjiRiyoshaFutanwariaiHanteiProcessParameter processParameter;
 
     @BatchWriter
@@ -37,7 +38,7 @@ public class SogoJigyoTaishoshaTempProcess extends BatchProcessBase<SogoJigyoTai
 
     @Override
     protected void createWriter() {
-        this.tempDbWriter = new BatchEntityCreatedTempTableWriter(new RString("SogoJigyoTaishoshaTempTable"), SogoJigyoTaishoshaTempEntity.class);
+        this.tempDbWriter = new BatchEntityCreatedTempTableWriter(総合事業対象者TEMP, SogoJigyoTaishoshaTempEntity.class);
     }
 
     @Override
