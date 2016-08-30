@@ -4,9 +4,8 @@
 <!-- @reamsid_L DBU-5600-030 dingyi -->
 <mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyojokyohokokushiryonemposakuseiiti.IJigyoJokyoHokokuShiryoNempoSakuseiItiMapper">
 
-    <select id="deleteJigyouHokokuTokei"
-            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter" 
-            resultOrdered="true" fetchSize="500">
+    <delete id="deleteJigyouHokokuTokei"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter" >
         SELECT rgdb."DbFx7020JigyouHoukokuTokeiDelete"(
             ARRAY<foreach  
                     collection="市町村コードリスト"  
@@ -34,7 +33,7 @@
                     #{code} 
                  </foreach>
             );
-    </select>
+    </delete>
     
     <select id="getJigyouHokokuTokeiJyoho"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter" 
@@ -70,9 +69,8 @@
             );
     </select>
     
-    <select id="insertShoriDateKanri"
-            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter" 
-            resultOrdered="true" fetchSize="500">
+    <update id="insertShoriDateKanri"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter" >
         SELECT rgdb."DbFx7014ShoriDateKanriUpdate"(
             #{サブ業務コード},
             ARRAY<foreach  
@@ -89,7 +87,7 @@
             #{基準年月日},
             #{基準日時}
             );
-    </select>
+    </update>
     
     <select id="getJigyouHokokuTokeiReportJyoho"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter" 
