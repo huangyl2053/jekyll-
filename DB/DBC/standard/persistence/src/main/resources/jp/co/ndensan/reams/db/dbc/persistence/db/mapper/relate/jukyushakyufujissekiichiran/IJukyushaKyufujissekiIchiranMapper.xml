@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 受給者給付実績一覧表取得のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-3070-030 dangjingjing -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishusikyushinsei.IJutakukaishuSikyuShinseiMapper">
+    <resultMap id="haishameigihenkouiraiResult" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekiichiran.JukyushaKyufujissekiIchiranRelateEntity">
+        <result property="入力識別番号" column="DbT3017_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="証記載保険者番号" column="DbT3017_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者番号" column="DbT3017_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービス提供年月" column="DbT3017_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="事業所番号" column="DbT3017_jigyoshoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付実績区分コード" column="DbT3017_kyufuJissekiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="公費1_負担者番号" column="DbT3017_kohi1FutanshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="公費1_受給者番号" column="DbT3017_kohi1JukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="公費2_負担者番号" column="DbT3017_kohi2FutanshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="公費2_受給者番号" column="DbT3017_kohi2JukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="公費3_負担者番号" column="DbT3017_kohi3FutanshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="公費3_受給者番号" column="DbT3017_kohi3JukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="要介護状態区分コード" column="DbT3017_yoKaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_保険_サービス単位数" column="DbT3017_atoHokenServiceTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_保険_請求額" column="DbT3017_atoHokenSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_保険_利用者負担額" column="DbT3017_atoHokenRiyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_緊急時施設療養費請求額" column="DbT3017_atoHokenKinkyuShisetsuRyoyoSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_保険_特定診療費請求額" column="DbT3017_atoHokenTokuteiShinryohiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_保険_特定入所者介護サービス費等請求額" column="DbT3017_atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_公費1_サービス単位数" column="DbT3017_atoKohi1ServiceTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_公費1_請求額" column="DbT3017_atoKohi1Seikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_公費1_本人負担額" column="DbT3017_atoKohi1RiyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費1_緊急時施設療養費請求額" column="DbT3017_atoKohi1KinkyuShisetsuRyoyoSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費1_特定診療費請求額" column="DbT3017_atoKohi1TokuteiShinryohiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費1_特定入所者介護サービス費等請求額" column="DbT3017_atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費2_サービス単位数" column="DbT3017_atoKohi2ServiceTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_公費2_請求額" column="DbT3017_atoKohi2Seikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_公費2_本人負担額" column="DbT3017_atoKohi2RiyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費2_緊急時施設療養費請求額" column="DbT3017_atoKohi2KinkyuShisetsuRyoyoSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費2_特定診療費請求額" column="DbT3017_atoKohi2TokuteiShinryohiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費2_特定入所者介護サービス費等請求額" column="DbT3017_atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費3_サービス単位数" column="DbT3017_atoKohi3ServiceTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_公費3_請求額" column="DbT3017_atoKohi3Seikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_公費3_本人負担額" column="DbT3017_atoKohi3RiyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費3_緊急時施設療養費請求額" column="DbT3017_atoKohi3KinkyuShisetsuRyoyoSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費3_特定診療費請求額" column="DbT3017_atoKohi3TokuteiShinryohiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="後_公費3_特定入所者介護サービス費等請求額" column="DbT3017_atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku," typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="審査年月" column="DbT3017_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="識別コード" column="T4_shikibetsuCode," typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="市町村コード" column="T4_shichosonCode," typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="名称" column="PSM_meisho," typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="カナ名称" column="PSM_kanaMeisho," typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住所_番地_方書" column="PSM_jusho_banchi_katagaki," typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="町域コード" column="PSM_choikiCode," typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="行政区コード" column="PSM_gyoseikuCode," typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="世帯コード" column="PSM_setaiCode," typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業者名称" column="T2_jigyoshaName," typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+     
+    <select resultOrdered="true" id="get受給者給付実績" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekiichiran.JukyushaKyufujissekiIchiranMybatisParameter" 
+            resultMap="haishameigihenkouiraiResult" fetchSize="500">
+SELECT																												
+	DbT3017."inputShikibetsuNo" AS DbT3017_inputShikibetsuNo,																										
+	DbT3017."shokisaiHokenshaNo" AS DbT3017_shokisaiHokenshaNo,																											
+	DbT3017."hiHokenshaNo" AS DbT3017_hiHokenshaNo,	
+	DbT3017."serviceTeikyoYM" AS DbT3017_serviceTeikyoYM,
+	DbT3017."jigyoshoNo" AS DbT3017_jigyoshoNo,																								
+	DbT3017."kyufuJissekiKubunCode" AS DbT3017_kyufuJissekiKubunCode,																											
+	DbT3017."kohi1FutanshaNo" AS DbT3017_kohi1FutanshaNo,																											
+	DbT3017."kohi1JukyushaNo" AS DbT3017_kohi1JukyushaNo,
+	DbT3017."kohi2FutanshaNo" AS DbT3017_kohi2FutanshaNo,																											
+	DbT3017."kohi2JukyushaNo" AS DbT3017_kohi2JukyushaNo,																											
+	DbT3017."kohi3FutanshaNo" AS DbT3017_kohi3FutanshaNo,																											
+	DbT3017."kohi3JukyushaNo" AS DbT3017_kohi3JukyushaNo,	
+	DbT3017."yoKaigoJotaiKubunCode" AS DbT3017_yoKaigoJotaiKubunCode,																										
+	DbT3017."atoHokenServiceTanisu" AS DbT3017_atoHokenServiceTanisu,																											
+	DbT3017."atoHokenSeikyugaku" AS DbT3017_atoHokenSeikyugaku,																											
+	DbT3017."atoHokenRiyoshaFutangaku" AS DbT3017_atoHokenRiyoshaFutangaku,	
+	DbT3017."atoHokenKinkyuShisetsuRyoyoSeikyugaku" AS DbT3017_atoHokenKinkyuShisetsuRyoyoSeikyugaku,																											
+	DbT3017."atoHokenTokuteiShinryohiSeikyugaku" AS DbT3017_atoHokenTokuteiShinryohiSeikyugaku,																											
+	DbT3017."atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" AS DbT3017_atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku,	
+	DbT3017."atoKohi1ServiceTanisu" AS DbT3017_atoKohi1ServiceTanisu,	
+	DbT3017."atoKohi1Seikyugaku" AS DbT3017_atoKohi1Seikyugaku,	
+	DbT3017."atoKohi1RiyoshaFutangaku" AS DbT3017_atoKohi1RiyoshaFutangaku,																											
+	DbT3017."atoKohi1KinkyuShisetsuRyoyoSeikyugaku" AS DbT3017_atoKohi1KinkyuShisetsuRyoyoSeikyugaku,	
+	DbT3017."atoKohi1TokuteiShinryohiSeikyugaku" AS DbT3017_atoKohi1TokuteiShinryohiSeikyugaku,	
+	DbT3017."atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku" AS DbT3017_atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku,																											
+        DbT3017."atoKohi2ServiceTanisu" AS DbT3017_atoKohi2ServiceTanisu,																											
+	DbT3017."atoKohi2Seikyugaku" AS DbT3017_atoKohi2Seikyugaku,																											
+        DbT3017."atoKohi2RiyoshaFutangaku" AS DbT3017_atoKohi2RiyoshaFutangaku,	
+	DbT3017."atoKohi2KinkyuShisetsuRyoyoSeikyugaku" AS DbT3017_atoKohi2KinkyuShisetsuRyoyoSeikyugaku,																											
+        DbT3017."atoKohi2TokuteiShinryohiSeikyugaku" AS DbT3017_atoKohi2TokuteiShinryohiSeikyugaku,																											
+	DbT3017."atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku" AS DbT3017_atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku,																											
+        DbT3017."atoKohi3ServiceTanisu" AS DbT3017_atoKohi3ServiceTanisu,
+	DbT3017."atoKohi3Seikyugaku" AS DbT3017_atoKohi3Seikyugaku,																											
+        DbT3017."atoKohi3RiyoshaFutangaku" AS DbT3017_atoKohi3RiyoshaFutangaku,																											
+	DbT3017."atoKohi3KinkyuShisetsuRyoyoSeikyugaku" AS DbT3017_atoKohi3KinkyuShisetsuRyoyoSeikyugaku,																											
+        DbT3017."atoKohi3TokuteiShinryohiSeikyugaku" AS DbT3017_atoKohi3TokuteiShinryohiSeikyugaku,	
+	DbT3017."atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku" AS DbT3017_atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku,																											
+        DbT3017."shinsaYM" AS DbT3017_shinsaYM,	
+	T4."shikibetsuCode" AS T4_shikibetsuCode,																										
+	T4."shichosonCode" AS T4_shichosonCode,																											
+	PSM."meisho" AS PSM_meisho,
+	PSM."kanaMeisho" AS PSM_kanaMeisho,																											
+	(PSM."jusho" + PSM."banchi" + PSM."katagaki" ) AS PSM_jusho_banchi_katagaki,																
+	PSM."choikiCode" AS PSM_choikiCode,	
+	PSM."gyoseikuCode" AS PSM_gyoseikuCode,																											
+	PSM."setaiCode" AS PSM_setaiCode,																											
+	T2."jigyoshaName" AS T2_jigyoshaName,																										
+	'',																	
+	''															
+FROM																												
+	rgdb."DbT3017KyufujissekiKihon" AS DbT3017																											
+LEFT JOIN																												
+	(SELECT * FROM 
+        (SELECT 																											
+	入力識別番号,																											
+        DbT7060."yukoKaishiYMD" as DbT7060_yukoKaishiYMD,																											
+        DbT7060."jigyoshaName" as DbT7060_jigyoshaName																											
+        FROM rgdb."DbT7060KaigoJigyosha" as DbT7060 
+        WHERE　T1.jigyoshaNo=jigyoshaNo　AND yukoKaishiYMD <![CDATA[<=]]> T1.serviceTeikyoYM　
+               AND T1.serviceTeikyoYM <![CDATA[<=]]> yukoShuryoYMD AS S1 																											
+	WHERE S1.rank_number1 = 1) AS T2																											
+	ON T1.jigyoshaNo=T2.jigyoshaNo 
+        AND																											
+LEFT JOIN 																												
+	(SELECT 																											
+	DbT1001."shikibetsuCode" AS DbT1001_shikibetsuCode,																											
+	DbT1001."hihokenshaNo" AS DbT1001_hihokenshaNo,																											
+	DbT1001."shichosonCode" AS DbT1001_shichosonCode																										
+	FROM rgdb."DbT1001HihokenshaDaicho" AS DbT1001 ) AS T4																											
+	ON T1.hihokenshaNo=T4.hihokenshaNo																											
+LEFT JOIN 																												
+	rgua.${psmShikibetsuTaisho} AS PSM
+        ON
+        T4."shikibetsuCode" = PSM."shikibetsuCode"
+ WHERE		
+    </select>
+
+    
+    <select id="get住宅改修費事前申請情報"
+            resultMap="resultMap_ShokanJutakukaishuSikyuShinsei"
+            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
+        SELECT																			
+	T1."inputShikibetsuNo" AS T1_inputShikibetsuNo,																		
+	T1."shokisaiHokenshaNo" AS T1_shokisaiHokenshaNo,																		
+	T1."hiHokenshaNo" AS T1_hiHokenshaNo,																		
+	T1."serviceTeikyoYM" AS T1_serviceTeikyoYM,																		
+	'',																		
+	T1."kyufuJissekiKubunCode" AS T1_kyufuJissekiKubunCode,																		
+	T1."kohi1FutanNo" AS T1_kohi1FutanNo,																		
+	'',																		
+	T1."kohi2FutanNo" AS T1_kohi2FutanNo,																		
+	'',																		
+	T1."kohi3FutanNo" AS T1_kohi3FutanNo,																		
+	'',																		
+	'',																		
+	'',																		
+	T1."riyoshaFutangaku" AS T1_riyoshaFutangaku,																		
+	T1."shikyugaku" AS T1_shikyugaku,																	
+	'',																		
+	'',																		
+	'',																		
+	'',																		
+	T1."kohi1Futangaku" AS T1_kohi1Futangaku,																		
+	T1."kohi2Shikyugaku" AS T1_kohi2Shikyugaku,																		
+	'',																		
+	'',																		
+	'',																		
+	'',																		
+	T1."kohi2Futangaku" AS T1_kohi2Futangaku,																		
+	T1."kohi2Shikyugaku" AS T1_kohi2Shikyugaku,																		
+	'',																		
+	'',																		
+	'',																		
+	'',																		
+	T1."kohi3Shikyugaku" AS T1_kohi3Shikyugaku,																		
+	T1."kohi3Futangaku" AS T1_kohi3Futangaku,																		
+	'',																		
+	'',																		
+	'',																		
+	T1."shinsaYM" AS T1_shinsaYM,																		
+	T4."shikibetsuCode" AS T4_shikibetsuCode,																		
+	T4."hihokenshaNo" AS T4_hihokenshaNo,																		
+	PSM."meisho" AS PSM_meisho,
+	PSM."kanaMeisho" AS PSM_kanaMeisho,																											
+	(PSM."jusho" + PSM."banchi" + PSM."katagaki") AS PSM_jusho_banchi_katagaki,																
+	PSM."choikiCode" AS PSM_choikiCode,	
+	PSM."gyoseikuCode" AS PSM_gyoseikuCode,																											
+	PSM."setaiCode" AS PSM_setaiCode,																		
+	'',								
+	'',									
+	''									
+FROM																			
+	rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" AS T1																		
+LEFT JOIN 																			
+	(SELECT 																		
+	DbT1001."shikibetsuCode" AS DbT1001_shikibetsuCode,																		
+	DbT1001."hihokenshaNo" AS DbT1001_hihokenshaNo																
+	FROM rgdb."DbT1001HihokenshaDaicho" AS DbT1001 ) AS T4																		
+	ON T1.hihokenshaNo=T4.hihokenshaNo																		
+LEFT JOIN 																			
+	rgua.${psmShikibetsuTaisho} AS PSM
+        ON
+        T4."shikibetsuCode" = PSM."shikibetsuCode"																		
+WHERE
+    </select>
+</mapper>
