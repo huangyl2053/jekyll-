@@ -398,10 +398,6 @@ public class ShakaiFukushiHojinKeigenNinteishaListHandler {
                 div.getTxtTaishoKikanKaishi().setValue(new FlexibleDate(平17, NO_6, NO_1));
                 div.getTxtTaishoKikanShuryo().setValue(new FlexibleDate(平17, NO_9, NO_30));
             }
-        } else {
-            div.getRadHeisei17NendoSeidoKaisei().setDisplayNone(true);
-            div.getTxtTaishoKikanKaishi().setValue(new FlexibleDate(flexibleyear.getYearValue(), NO_6, NO_1));
-            div.getTxtTaishoKikanShuryo().setValue(new FlexibleDate(flexibleyear.getYearValue() + NO_1, NO_5, NO_31));
         }
     }
 
@@ -411,9 +407,6 @@ public class ShakaiFukushiHojinKeigenNinteishaListHandler {
         if (flexibleyear.isBeforeOrEquals(new FlexibleYear(平17年))) {
             div.getTxtTaishoKikanKaishi().setValue(new FlexibleDate(平17, NO_10, NO_1));
             div.getTxtTaishoKikanShuryo().setValue(new FlexibleDate(平18, NO_6, NO_30));
-        } else {
-            div.getTxtTaishoKikanKaishi().setValue(new FlexibleDate(flexibleyear.getYearValue(), NO_6, NO_1));
-            div.getTxtTaishoKikanShuryo().setValue(new FlexibleDate(flexibleyear.getYearValue() + NO_1, NO_5, NO_31));
         }
     }
 
