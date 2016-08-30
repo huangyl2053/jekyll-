@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KokuhorenJohoSofu.KokuhorenJohoSofu;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -12,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 保険者情報送付データ作成_共有子DIVのハンドラクラスです。
@@ -78,6 +81,15 @@ public class KokuhorenJohoSofuHandler {
         RString 同月審査区分 = DbBusinessConfig.get(ConfigNameDBC.過誤取下げ再請求指示_同月審査区分, 基準日, SubGyomuCode.DBC介護給付);
         if (!同月審査区分.equals(NUM_1)) {
             div.getDdlSofuTaishojoho().setVisible(false);
+        } else {
+            List<KeyValueDataSource> dateSourceList = new ArrayList<>();
+            KeyValueDataSource keyValueData1 = new KeyValueDataSource(new RString("0"), RString.EMPTY);
+            dateSourceList.add(keyValueData1);
+            KeyValueDataSource keyValueData2 = new KeyValueDataSource(new RString("1"), new RString("同月過誤分過誤申立書"));
+            dateSourceList.add(keyValueData2);
+            KeyValueDataSource keyValueData3 = new KeyValueDataSource(new RString("2"), new RString("通常分過誤申立書"));
+            dateSourceList.add(keyValueData3);
+            div.getDdlSofuTaishojoho().setDataSource(dateSourceList);
         }
         div.getShoriJikkoMaekakuninJiko().setVisible(false);
     }
