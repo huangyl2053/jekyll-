@@ -299,6 +299,9 @@ public class IchijiSashitome1GoHandler {
                 div.getTxtKojoKetteiYMD().setValue(支払方法変更差止.get控除決定年月日());
                 div.getTxtKojoTorokuTsuchiHakkoYMD().setValue(支払方法変更管理業務概念.get被保険者証提出期限());
                 div.getTxtHokenshoTeishutsuKigenYMD().setValue(支払方法変更差止.get控除通知書発行年月日());
+                if (支払方法変更差止.get差止控除番号() == null) {
+                    div.getDdlTorokuKojoNo().setSelectedKey(RString.EMPTY);
+                }
                 div.getDdlTorokuKojoNo().setSelectedKey(支払方法変更差止.get差止控除番号());
                 break;
             default:

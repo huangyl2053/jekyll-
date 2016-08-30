@@ -195,7 +195,7 @@ public class IchijiSashitome1Go {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         response.data = div;
-        return ResponseData.of(div).dialogOKClose();
+        return ResponseData.of(div).respond();
     }
 
     private IchijiSashitome1GoHandler getHandler(IchijiSashitome1GoDiv div) {
