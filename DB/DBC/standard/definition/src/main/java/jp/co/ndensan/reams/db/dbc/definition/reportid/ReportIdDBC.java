@@ -406,6 +406,14 @@ public enum ReportIdDBC {
      */
     DBC100204(new ReportId("DBC100204_GassanJigyobunKeisanKekkaRenrakuhyo"), new RString("事業分計算結果連絡票")),
     /**
+     * DBC701008_HanyoList_KyufuKanriHyo
+     */
+    DBC701008(new ReportId("DBC701008_HanyoList_KyufuKanriHyo"), new RString("汎用リスト出力(給付管理票)")),
+    /**
+     * DBC701016_HanyoListKogakuGassanKeisanKekkaRenrakuHyo
+     */
+    DBC701016(new ReportId("DBC71016_HanyoListKogakuGassanKeisanKekkaRenrakuHyo"), new RString("汎用リスト出力(高額合算計算結果連絡票情報)")),
+    /**
      * 汎用リスト　基準収入額適用情報帳票ＩＤです。
      */
     DBC701020(new ReportId("DBC701020_HanyoListKijunShunyugakuTekiyo"), new RString("汎用リスト　基準収入額適用情報"));

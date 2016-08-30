@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc710160.DBC710160_HanyoL
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ChushutsuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_DataKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_DataShubetsu;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7160001.HanyoListkougakugasSannKeiSuukekkaDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -18,7 +19,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiC
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,7 +34,6 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
 
     private final HanyoListkougakugasSannKeiSuukekkaDiv div;
     private static final int NUM_1 = 1;
-    private static final RString 帳票ID = new RString("DBC71016_HanyoListKogakuGassanKeisanKekkaRenrakuHyo");
     private static final RString すべて = new RString("すべて");
     private static final RString 国保連作成 = new RString("国保連作成");
     private static final RString 保険者作成 = new RString("保険者作成");
@@ -62,15 +61,21 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         Code 導入形態コード = shichosonSecurityJoho.get導入形態コード();
         if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getKey())) {
-            div.getChushutsuJokenPanel().getCcdHokenshaList().setDisplayNone(true);
+            div.getChushutsuJokenPanel().getCcdHokenshaList().setDisplayNone(false);
+            div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務);
         } else {
-            div.getChushutsuJokenPanel().getTxtUketoriNengetsu().setDisplayNone(true);
-            div.getChushutsuJokenPanel().getTxtSofuNengetsu().setDisplayNone(true);
+            div.getChushutsuJokenPanel().getTxtUketoriNengetsu().setDisplayNone(false);
+            div.getChushutsuJokenPanel().getTxtSofuNengetsu().setDisplayNone(false);
             div.getChushutsuJokenPanel().getCcdHokenshaList().setDisabled(true);
             div.getChushutsuJokenPanel().getCcdHokenshaList().setVisible(false);
         }
 
         div.getCcdShutsuryokuKoumoku().setDisabled(true);
+
+        List<RString> keyList = new ArrayList<>();
+        keyList.add(項目名付加キー);
+        keyList.add(日付編集キー);
+        div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(keyList);
 
         RDate 日付関連_当初年度 = new RDate(DbBusinessConfig.get(ConfigNameDBB.日付関連_当初年度, nowdate, SubGyomuCode.DBB介護賦課).toString());
         RDate 日付関連_調定年度 = new RDate(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, nowdate, SubGyomuCode.DBB介護賦課).toString());
@@ -83,9 +88,8 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
         }
         div.getChushutsuJokenPanel().getDdlTaishoNendo().setDataSource(datasource);
 
-        // TODO QA1356
-        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, new ReportId(帳票ID));
-        div.getCcdShutsuryokuKoumoku().load(帳票ID, SubGyomuCode.DBC介護給付);
+        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701016.getReportId());
+        div.getCcdShutsuryokuKoumoku().load(ReportIdDBC.DBC701016.getReportId().getColumnValue(), SubGyomuCode.DBC介護給付);
 
         RString データ区分 = div.getChushutsuJokenPanel().getDdlDetaKubun().getSelectedValue();
         if (すべて.equals(データ区分)) {

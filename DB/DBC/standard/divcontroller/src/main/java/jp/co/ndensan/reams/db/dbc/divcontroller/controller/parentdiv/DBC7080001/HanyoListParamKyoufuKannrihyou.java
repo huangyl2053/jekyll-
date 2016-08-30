@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7080001
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc710080.DBC710080_HanyoListKyufuKanriHyoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7080001.HanyoListParamDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7080001.HanyoListParamKyoufuKannrihyouDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7080001.HanyoListParamKyoufuKannrihyouHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
@@ -23,7 +24,7 @@ public class HanyoListParamKyoufuKannrihyou {
      * @param div 汎用リスト出力(給付管理票) の画面Div
      * @return ResponseData<HanyoListParamDiv>
      */
-    public ResponseData<HanyoListParamDiv> onload(HanyoListParamDiv div) {
+    public ResponseData<HanyoListParamKyoufuKannrihyouDiv> onload(HanyoListParamKyoufuKannrihyouDiv div) {
         getHandler(div).initialize();
         return ResponseData.of(div).respond();
     }
@@ -39,7 +40,7 @@ public class HanyoListParamKyoufuKannrihyou {
         return ResponseData.of(parameter).respond();
     }
 
-    private HanyoListParamKyoufuKannrihyouHandler getHandler(HanyoListParamDiv div) {
+    private HanyoListParamKyoufuKannrihyouHandler getHandler(HanyoListParamKyoufuKannrihyouDiv div) {
         return new HanyoListParamKyoufuKannrihyouHandler(div);
     }
 }

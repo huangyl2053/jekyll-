@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc710080.DBC710080_HanyoListKyufuKanriHyoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufukanrihyo.Kyufukanrihyo_MeisaigyoBango;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7080001.HanyoListParamDiv;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7080001.HanyoListParamKyoufuKannrihyouDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -25,8 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class HanyoListParamKyoufuKannrihyouHandler {
 
-    private final HanyoListParamDiv div;
-    private static final RString 帳票ID = new RString("DBC701008_HanyoList_KyufuKanriHyo");
+    private final HanyoListParamKyoufuKannrihyouDiv div;
     private static final RString KEY_0 = new RString("key0");
     private static final RString KEY_1 = new RString("key1");
     private static final RString KEY_項目名付加 = new RString("項目名付加");
@@ -38,7 +37,7 @@ public class HanyoListParamKyoufuKannrihyouHandler {
      *
      * @param div NendoKirikaeDiv
      */
-    public HanyoListParamKyoufuKannrihyouHandler(HanyoListParamDiv div) {
+    public HanyoListParamKyoufuKannrihyouHandler(HanyoListParamKyoufuKannrihyouDiv div) {
         this.div = div;
     }
 
@@ -65,9 +64,8 @@ public class HanyoListParamKyoufuKannrihyouHandler {
         keyList.add(KEY_項目名付加);
         keyList.add(KEY_日付編集);
         div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(keyList);
-        // TODO QA1355
-        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, new ReportId(帳票ID));
-        div.getCcdShutsuryokuKoumoku().load(帳票ID, SubGyomuCode.DBC介護給付);
+        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701008.getReportId());
+        div.getCcdShutsuryokuKoumoku().load(ReportIdDBC.DBC701008.getReportId().getColumnValue(), SubGyomuCode.DBC介護給付);
     }
 
     /**
