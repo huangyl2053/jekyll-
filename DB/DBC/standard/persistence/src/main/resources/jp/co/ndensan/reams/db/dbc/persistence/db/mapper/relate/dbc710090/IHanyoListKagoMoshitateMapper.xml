@@ -108,17 +108,17 @@
             "NijiYoboJigyoTaisho"."hihokenshaNo" =  "JukyushaDaicho"."hihokenshaNo"
         WHERE 
             "DbT3059KagoMoshitate"."isDeleted" =false    
-            <if test="国保連送付年月From !=null" >
+            <if test="国保連送付年月From !=null and 国保連送付年月From.toString()!=''" >
                 AND  #{国保連送付年月From} <![CDATA[<=]]> "DbT3059KagoMoshitate"."kokuhorenSofuYM"   
             </if>
-            <if test="国保連送付年月To !=null" >
+            <if test="国保連送付年月To !=null and 国保連送付年月To.toString()!=''" >
                 AND  "DbT3059KagoMoshitate"."kokuhorenSofuYM"  <![CDATA[<=]]> #{国保連送付年月To}    
             </if>
                 AND  "DbT3059KagoMoshitate"."moshitateshoKubunCode" = #{過誤申立給付区分}
-            <if test="サービス提供年月From !=null" >
+            <if test="サービス提供年月From !=null and サービス提供年月From.toString()!=''" >
                 AND  #{サービス提供年月From} <![CDATA[<=]]> "DbT3059KagoMoshitate"."serviceTeikyoYM"  
             </if>
-            <if test="サービス提供年月To !=null" >
+            <if test="サービス提供年月To !=null and サービス提供年月To.toString()!=''" >
                 AND  "DbT3059KagoMoshitate"."serviceTeikyoYM"  <![CDATA[<=]]> #{サービス提供年月To}   
             </if>
             <if test="事業者コード !=null and !事業者コード.isEmpty()" >
