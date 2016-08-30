@@ -82,7 +82,8 @@ public class GemmenGengakuRirekiListHandler {
             tRow.setGemmenGengakuShurui(GemmenGengakuShurui.toValue(entity.get減免_減額種類()).get名称());
             tRow.getTekiyoKaishiYMD().setValue(entity.get適用開始日());
             tRow.getTekiyoShuryoYMD().setValue(entity.get適用終了日());
-            tRow.getKyufuritsuKeigenritsuFutangaku().setValue(new RString(entity.get負担額().toString()));
+            tRow.getKyufuritsuKeigenritsuFutangaku().setValue(
+                    entity.get負担額() == null ? null : new RString(entity.get負担額().toString()));
 
             tRowList.add(tRow);
         }
@@ -91,7 +92,8 @@ public class GemmenGengakuRirekiListHandler {
             tRow.setGemmenGengakuShurui(GemmenGengakuShurui.toValue(entity.get減免_減額種類()).get名称());
             tRow.getTekiyoKaishiYMD().setValue(entity.get適用開始日());
             tRow.getTekiyoShuryoYMD().setValue(entity.get適用終了日());
-            tRow.getKyufuritsuKeigenritsuFutangaku().setValue(new RString(entity.get給付率().value().toString()));
+            tRow.getKyufuritsuKeigenritsuFutangaku().setValue(
+                    entity.get給付率() == null ? null : new RString(entity.get給付率().value().toString()));
 
             tRowList.add(tRow);
         }

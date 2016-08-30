@@ -87,7 +87,7 @@ public class GemmenGengakuRirekiJyoho {
                 entity.set食費負担限度額(relateEntity.get食費負担限度額());
                 entity.setユニット型個室(relateEntity.getユニット型個室());
                 entity.setユニット型準個室(relateEntity.getユニット型準個室());
-                entity.set従来型個室_特養等(relateEntity.getユニット型個室());
+                entity.set従来型個室_特養等(relateEntity.get従来型個室_特養等());
                 entity.set従来型個室_老健_療養等(relateEntity.get従来型個室_老健_療養等());
                 entity.set多床室(relateEntity.get多床室());
                 list.add(entity);
