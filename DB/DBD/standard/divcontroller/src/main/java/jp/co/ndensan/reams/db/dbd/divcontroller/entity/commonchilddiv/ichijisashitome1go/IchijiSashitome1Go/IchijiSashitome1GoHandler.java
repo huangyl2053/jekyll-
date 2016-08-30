@@ -803,12 +803,9 @@ public class IchijiSashitome1GoHandler {
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
         builder.set差止対象フラグ(true)
                 .set差止対象決定年月日(div.getTxtSashitomeTorokuYMD().getValue())
-                .setShiharaiHohoHenkoSashitome(支払方法変更差止.createBuilderForEdit().setState(EntityDataState.Added).build());
+                .setShiharaiHohoHenkoSashitome(支払方法変更差止);
         for (ShiharaiHohoHenkoTaino shiharaiHohoHenkoTaino : 支払方法変更滞納) {
-            if (null != shiharaiHohoHenkoTaino.toEntity().getState()
-                    && !shiharaiHohoHenkoTaino.toEntity().getState().equals(EntityDataState.Added)) {
-                builder.setShiharaiHohoHenkoTaino(shiharaiHohoHenkoTaino.createBuilderForEdit().setState(EntityDataState.Modified).build());
-            }
+            builder.setShiharaiHohoHenkoTaino(shiharaiHohoHenkoTaino);
         }
         if (null != builder.build().toEntity().getState()
                 && !builder.build().toEntity().getState().equals(EntityDataState.Added)) {
@@ -1078,7 +1075,7 @@ public class IchijiSashitome1GoHandler {
         DbT4024ShiharaiHohoHenkoSashitomeEntity entity = new DbT4024ShiharaiHohoHenkoSashitomeEntity();
         entity.setShoKisaiHokenshaNo(証記載保険者番号());
         entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
-        entity.setKanriKubun(ShiharaiHenkoKanriKubun._２号差止.getコード());
+        entity.setKanriKubun(ShiharaiHenkoKanriKubun._１号償還払い化.getコード());
         entity.setRirekiNo(支払方法変更管理業務概念.get履歴番号());
         entity.setJohoBunruiKubun(ShiharaiHenkoJohoBunruiKubun.差止情報.getコード());
         entity.setRenNo(支払方法変更差止連番(entity.getShoKisaiHokenshaNo(), entity.getHihokenshaNo(), entity.getKanriKubun(),
@@ -1100,7 +1097,7 @@ public class IchijiSashitome1GoHandler {
         DbT4024ShiharaiHohoHenkoSashitomeEntity entity = new DbT4024ShiharaiHohoHenkoSashitomeEntity();
         entity.setShoKisaiHokenshaNo(証記載保険者番号());
         entity.setHihokenshaNo(new HihokenshaNo(div.getKey_HihokenshaNo()));
-        entity.setKanriKubun(ShiharaiHenkoKanriKubun._２号差止.getコード());
+        entity.setKanriKubun(ShiharaiHenkoKanriKubun._１号償還払い化.getコード());
         entity.setRirekiNo(支払方法変更管理業務概念.get履歴番号());
         entity.setJohoBunruiKubun(ShiharaiHenkoJohoBunruiKubun.保険料控除情報.getコード());
         entity.setRenNo(支払方法変更差止連番(entity.getShoKisaiHokenshaNo(), entity.getHihokenshaNo(), entity.getKanriKubun(),
