@@ -7,17 +7,19 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB5140001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * NoufuGakuDataSakusei のクラスファイル 
- * 
- * @author 自動生成
+ * NoufuGakuDataSakusei のクラスファイル
+ *
+ * @reamsid_L DBB-1890-010 chenhui
  */
 public class NoufuGakuDataSakuseiDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -61,7 +63,7 @@ public class NoufuGakuDataSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setShoriNaiyo(ShoriNaiyoDiv ShoriNaiyo) {
+    public void setShoriNaiyo(ShoriNaiyoDiv ShoriNaiyo) {
         this.getNoufuGakuDataSakuseiBatchParameter().setShoriNaiyo(ShoriNaiyo);
     }
 
@@ -71,7 +73,7 @@ public class NoufuGakuDataSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTaishoNendo(TextBoxDate txtTaishoNendo) {
+    public void setTxtTaishoNendo(TextBoxDate txtTaishoNendo) {
         this.getNoufuGakuDataSakuseiBatchParameter().getShoriNaiyo().setTxtTaishoNendo(txtTaishoNendo);
     }
 
@@ -81,7 +83,7 @@ public class NoufuGakuDataSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChushutsuKikan(ChushutsuKikanDiv ChushutsuKikan) {
+    public void setChushutsuKikan(ChushutsuKikanDiv ChushutsuKikan) {
         this.getNoufuGakuDataSakuseiBatchParameter().setChushutsuKikan(ChushutsuKikan);
     }
 
@@ -91,7 +93,7 @@ public class NoufuGakuDataSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgTanitsuShoriJoken(DataGrid<dgTanitsuShoriJoken_Row> dgTanitsuShoriJoken) {
+    public void setDgTanitsuShoriJoken(DataGrid<dgTanitsuShoriJoken_Row> dgTanitsuShoriJoken) {
         this.getNoufuGakuDataSakuseiBatchParameter().getChushutsuKikan().setDgTanitsuShoriJoken(dgTanitsuShoriJoken);
     }
 
@@ -101,7 +103,7 @@ public class NoufuGakuDataSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKoikiShori(KoikiShoriDiv KoikiShori) {
+    public void setKoikiShori(KoikiShoriDiv KoikiShori) {
         this.getNoufuGakuDataSakuseiBatchParameter().setKoikiShori(KoikiShori);
     }
 
@@ -111,7 +113,7 @@ public class NoufuGakuDataSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgKoikiShoriTaishoSelect(DataGrid<dgKoikiShoriTaishoSelect_Row> dgKoikiShoriTaishoSelect) {
+    public void setDgKoikiShoriTaishoSelect(DataGrid<dgKoikiShoriTaishoSelect_Row> dgKoikiShoriTaishoSelect) {
         this.getNoufuGakuDataSakuseiBatchParameter().getKoikiShori().setDgKoikiShoriTaishoSelect(dgKoikiShoriTaishoSelect);
     }
 
@@ -121,7 +123,7 @@ public class NoufuGakuDataSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setShoriSelect(ShoriSelectDiv ShoriSelect) {
+    public void setShoriSelect(ShoriSelectDiv ShoriSelect) {
         this.getNoufuGakuDataSakuseiBatchParameter().setShoriSelect(ShoriSelect);
     }
 
@@ -131,7 +133,7 @@ public class NoufuGakuDataSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkHikazeiNomiSakusei(CheckBoxList chkHikazeiNomiSakusei) {
+    public void setChkHikazeiNomiSakusei(CheckBoxList chkHikazeiNomiSakusei) {
         this.getNoufuGakuDataSakuseiBatchParameter().getShoriSelect().setChkHikazeiNomiSakusei(chkHikazeiNomiSakusei);
     }
 

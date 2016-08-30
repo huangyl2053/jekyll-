@@ -4,19 +4,22 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB5140001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * NoufuGakuDataSakuseiBatchParameter のクラスファイル 
- * 
- * @author 自動生成
+ * NoufuGakuDataSakuseiBatchParameter のクラスファイル
+ *
+ * @reamsid_L DBB-1890-010 chenhui
  */
 public class NoufuGakuDataSakuseiBatchParameterDiv extends PanelBatchParameter {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -120,7 +123,7 @@ public class NoufuGakuDataSakuseiBatchParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtTaishoNendo(TextBoxDate txtTaishoNendo) {
+    public void setTxtTaishoNendo(TextBoxDate txtTaishoNendo) {
         this.getShoriNaiyo().setTxtTaishoNendo(txtTaishoNendo);
     }
 
@@ -130,7 +133,7 @@ public class NoufuGakuDataSakuseiBatchParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setDgTanitsuShoriJoken(DataGrid<dgTanitsuShoriJoken_Row> dgTanitsuShoriJoken) {
+    public void setDgTanitsuShoriJoken(DataGrid<dgTanitsuShoriJoken_Row> dgTanitsuShoriJoken) {
         this.getChushutsuKikan().setDgTanitsuShoriJoken(dgTanitsuShoriJoken);
     }
 
@@ -140,7 +143,7 @@ public class NoufuGakuDataSakuseiBatchParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setDgKoikiShoriTaishoSelect(DataGrid<dgKoikiShoriTaishoSelect_Row> dgKoikiShoriTaishoSelect) {
+    public void setDgKoikiShoriTaishoSelect(DataGrid<dgKoikiShoriTaishoSelect_Row> dgKoikiShoriTaishoSelect) {
         this.getKoikiShori().setDgKoikiShoriTaishoSelect(dgKoikiShoriTaishoSelect);
     }
 
@@ -150,7 +153,7 @@ public class NoufuGakuDataSakuseiBatchParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setChkHikazeiNomiSakusei(CheckBoxList chkHikazeiNomiSakusei) {
+    public void setChkHikazeiNomiSakusei(CheckBoxList chkHikazeiNomiSakusei) {
         this.getShoriSelect().setChkHikazeiNomiSakusei(chkHikazeiNomiSakusei);
     }
 

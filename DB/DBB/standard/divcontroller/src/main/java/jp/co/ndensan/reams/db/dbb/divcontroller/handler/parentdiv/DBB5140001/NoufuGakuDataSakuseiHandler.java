@@ -239,7 +239,7 @@ public class NoufuGakuDataSakuseiHandler {
             parameter.set非課税年金のみ作成フラグ(false);
         }
         parameter.set出力順ID(div.getShoriSelect().getCcdChohyoShutsuryokujun().get出力順ID());
-        List<dgKoikiShoriTaishoSelect_Row> 処理対象Rows = div.getKoikiShori().getDgKoikiShoriTaishoSelect().getDataSource();
+        List<dgKoikiShoriTaishoSelect_Row> 処理対象Rows = div.getKoikiShori().getDgKoikiShoriTaishoSelect().getSelectedItems();
         if (処理対象Rows == null || 処理対象Rows.isEmpty()) {
             return parameter;
         }
