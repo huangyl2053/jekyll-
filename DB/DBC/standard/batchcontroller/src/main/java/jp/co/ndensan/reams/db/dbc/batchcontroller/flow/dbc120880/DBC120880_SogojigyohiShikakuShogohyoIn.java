@@ -32,8 +32,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 総合事業費資格照合表情報取込ののバッチ処理フロー
  *
- * @author wangxue
+ * @reamsid_L DBC-2890-012 wangxue
  */
 public class DBC120880_SogojigyohiShikakuShogohyoIn extends BatchFlowBase<DBC120880_SogojigyohiShikakuShogohyoInParameter> {
 
