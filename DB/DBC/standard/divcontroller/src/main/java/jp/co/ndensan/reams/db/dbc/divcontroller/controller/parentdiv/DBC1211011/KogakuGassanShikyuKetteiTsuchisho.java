@@ -132,10 +132,8 @@ public class KogakuGassanShikyuKetteiTsuchisho {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
         }
-        if (getHandler(div).get支払予定日印字有無().equals(NUM_1)) {
-            if (支払予定日 == null && !ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(UrWarningMessages.未入力.getMessage()).respond();
-            }
+        if ((getHandler(div).get支払予定日印字有無().equals(NUM_1)) && 支払予定日 == null && !ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrWarningMessages.未入力.getMessage()).respond();
         }
         if (div.getCcdChohyoShutsuryokujun().get帳票ID().isEmpty()) {
             throw new ApplicationException(UrErrorMessages.未指定.getMessage());
@@ -152,10 +150,7 @@ public class KogakuGassanShikyuKetteiTsuchisho {
      */
     public ResponseData<DBC040050_KogakugassanShikyuKetteitsuchishoParameter> onClick_BtnPrint(KogakuGassanShikyuKetteiTsuchishoDiv div) {
         DBC040050_KogakugassanShikyuKetteitsuchishoParameter param = getHandler(div).setバッチ();
-        if (param != null) {
-            return ResponseData.of(param).respond();
-        }
-        return ResponseData.of(new DBC040050_KogakugassanShikyuKetteitsuchishoParameter()).respond();
+        return ResponseData.of(param).respond();
     }
 
     private KogakuGassanShikyuKetteiTsuchishoHandler getHandler(KogakuGassanShikyuKetteiTsuchishoDiv div) {
