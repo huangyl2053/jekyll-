@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710080.HanyoListKyufuKanriHyoNoRenbanOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710080.HanyoListKyufuKanriHyoOutputProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc710080.DBC710080_HanyoListKyufuKanriHyoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710080.HanyoListKyufuKanriHyoProcessParameter;
@@ -26,17 +27,29 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 public class DBC710080_HanyoListKyufuKanriHyo extends BatchFlowBase<DBC710080_HanyoListKyufuKanriHyoParameter> {
 
     private static final String 給付管理票 = "HanyoListKyufuKanriHyoOutputProcess";
+    private static final String 給付管理票_連番しない = "HanyoListKyufuKanriHyoNoRenbanOutputProcess";
     private RDateTime システム日時;
 
     @Override
     protected void defineFlow() {
         システム日時 = RDateTime.now();
-        executeStep(給付管理票);
+        if (getParameter().is連番付加()) {
+            executeStep(給付管理票);
+        } else {
+            executeStep(給付管理票_連番しない);
+        }
     }
 
     @Step(給付管理票)
     IBatchFlowCommand hanyoListKyufuKanriHyoOutputProcess() {
         return loopBatch(HanyoListKyufuKanriHyoOutputProcess.class)
+                .arguments(getProcessParameter())
+                .define();
+    }
+
+    @Step(給付管理票_連番しない)
+    IBatchFlowCommand hanyoListKyufuKanriHyoNoRenbanOutputProcess() {
+        return loopBatch(HanyoListKyufuKanriHyoNoRenbanOutputProcess.class)
                 .arguments(getProcessParameter())
                 .define();
     }
