@@ -58,4 +58,11 @@ public class ShisetsuTaishoTsuchishoItem {
     private RString shuchoMei;
     private RString shichosonMei2;
     private RString koinShoryaku;
+    private RString koinMojiretsu;
+    private RString ninshoshaShimeiKakenai;
+    private RString ninshoshaShimeiKakeru;
+    private RString ninshoshaYakushokuMei;
+    private RString ninshoshaYakushokuMei1;
+    private RString ninshoshaYakushokuMei2;
+    
 }

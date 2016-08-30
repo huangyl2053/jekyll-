@@ -120,7 +120,9 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
      * @return HokaShichosonJyusyochiTokureisyaKanriDiv
      */
     public ResponseData<HokaShichosonJyusyochiTokureisyaKanriDiv> onClick_Kanryo(HokaShichosonJyusyochiTokureisyaKanriDiv div) {
+        RString 識別コード = div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getHdnTxtShikibetsuCode();
         RealInitialLocker.release(LOCKINGKEY);
+        ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         return ResponseData.of(div).respond();
     }
 

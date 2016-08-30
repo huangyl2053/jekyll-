@@ -5,14 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1050011;
 
+import jp.co.ndensan.reams.db.dba.business.core.exclusivekey.DbaExclusiveKey;
 import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.SikakuIdouTeiseiJoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.DBA1050011StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.DBA1050011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.SikakuIdouTeiseiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1050011.SikakuIdouTeiseiHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -38,7 +41,6 @@ public class SikakuIdouTeisei {
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString 状態_照会 = new RString("照会");
-    private static final LockingKey 前排他ロックキー = new LockingKey("ShikakuIdoTeisei、HihokenshaNo");
 
     /**
      * 画面を初期化します。
@@ -49,9 +51,34 @@ public class SikakuIdouTeisei {
     public ResponseData<SikakuIdouTeiseiDiv> onLoad(SikakuIdouTeiseiDiv div) {
         SikakuIdouTeiseiJoho joho = getHandler(div).onLoad(getKey().get被保険者番号(), getKey().get識別コード());
         ViewStateHolder.put(ViewStateKeys.初期化時医療保険情報, joho);
-        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
+        if (!RealInitialLocker.tryGetLock(create排他キー())) {
             div.setReadOnly(true);
             throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private LockingKey create排他キー() {
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo hihokenshaNo = key.get被保険者番号();
+        System.out.println(DbaExclusiveKey.create被保険者番号排他キー(hihokenshaNo));
+        return new LockingKey(DbaExclusiveKey.create被保険者番号排他キー(hihokenshaNo));
+    }
+
+    /**
+     * 資格の履歴を初期化します。 TODO 城間
+     * 現在、更新した被保険者台帳情報をメイン画面に反映していない為、onLoad時に行っている資格得喪履歴の初期化と同様の処理を
+     * こちらでも行う。更新中のデータをメモリで持回るように修正された後に処理の修正を検討する。
+     *
+     * @param div
+     * @return
+     */
+    public ResponseData<SikakuIdouTeiseiDiv> onActive(SikakuIdouTeiseiDiv div) {
+        if (ResponseHolder.getBeforeEvent().equals(new RString("DBA1050021_資格異動の訂正を保存する"))) {
+            TaishoshaKey key = getKey();
+            div.getShikakuShutokuJoho().getShikakuTokusoRirekii().getCcdShikakuTokusoRireki()
+                    .initialize(key.get被保険者番号(), key.get識別コード());
+            getHandler(div).setButtonDisable();
         }
         return ResponseData.of(div).respond();
     }
@@ -120,7 +147,8 @@ public class SikakuIdouTeisei {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).save(getKey().get識別コード(), joho);
-            RealInitialLocker.release(前排他ロックキー);
+            RealInitialLocker.release(create排他キー());
+            div.getComplete().getCcdComplete().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(DBA1050011StateName.完了状態);
         }
         return ResponseData.of(div).respond();
@@ -133,7 +161,7 @@ public class SikakuIdouTeisei {
      * @return ResponseData<SikakuIdouTeiseiDiv>
      */
     public ResponseData<SikakuIdouTeiseiDiv> onClick_Modoru(SikakuIdouTeiseiDiv div) {
-        RealInitialLocker.release(前排他ロックキー);
+        RealInitialLocker.release(create排他キー());
         return ResponseData.of(div).forwardWithEventName(DBA1050011TransitionEventName.検索結果一覧へ).respond();
     }
 
@@ -144,7 +172,7 @@ public class SikakuIdouTeisei {
      * @return ResponseData<SikakuIdouTeiseiDiv>
      */
     public ResponseData<SikakuIdouTeiseiDiv> onClick_btnResearch(SikakuIdouTeiseiDiv div) {
-        RealInitialLocker.release(前排他ロックキー);
+        RealInitialLocker.release(create排他キー());
         return ResponseData.of(div).forwardWithEventName(DBA1050011TransitionEventName.再検索).respond();
     }
 

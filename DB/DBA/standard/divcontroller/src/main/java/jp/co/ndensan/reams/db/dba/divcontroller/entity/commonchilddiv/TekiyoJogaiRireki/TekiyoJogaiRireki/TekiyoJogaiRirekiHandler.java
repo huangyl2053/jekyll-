@@ -153,6 +153,7 @@ public class TekiyoJogaiRirekiHandler {
                 div.getDatagridTekiyoJogai().getGridSetting().setIsShowSelectButtonColumn(false);
                 div.getDatagridTekiyoJogai().getGridSetting().setIsShowModifyButtonColumn(true);
                 div.getDatagridTekiyoJogai().getGridSetting().setIsShowDeleteButtonColumn(true);
+                div.getDatagridTekiyoJogai().getGridSetting().setIsShowRowState(false);
                 div.getPanelTekiyoJokaiTekiInput().setVisible(false);
                 div.getPanelTekiyoJokaiKaiJyoInput().setVisible(false);
                 div.getPanelTekiyoInput().setVisible(true);
@@ -238,6 +239,7 @@ public class TekiyoJogaiRirekiHandler {
                  setTekiyoJokaiKaiJyoInputToSelectedRow(div.getPanelTekiyoJokaiKaiJyoInput(), div.getDatagridTekiyoJogai().getClickedItem());
                  div.getBtnKakutei().setDisabled(false);
                  div.getPanelTekiyoJokaiKaiJyoInput().setDisabled(false);
+                 div.getDatagridTekiyoJogai().getGridSetting().setIsShowModifyButtonColumn(true);
                  setTekiyoJokaiKaiJyoInputDivDisabled(div.getPanelTekiyoJokaiKaiJyoInput(), false);
                 break;
                 
@@ -265,6 +267,12 @@ public class TekiyoJogaiRirekiHandler {
     public void onClick_Delete() {
         div.setStauts(状態_削除);
         switch (div.getMode_DisplayMode()) {
+            case 適用登録モード:
+                setTekiyoJokaiTekiInputToSelectedRow(div.getPanelTekiyoJokaiTekiInput(),div.getDatagridTekiyoJogai().getClickedItem());
+                div.getPanelTekiyoInput().setDisabled(true);
+                div.getBtnInputClear().setDisabled(false);
+                div.getBtnKakutei().setDisabled(false);
+                break;
             default:
                 setTekiyoInputToSelectedRow(div.getPanelTekiyoInput(), div.getDatagridTekiyoJogai().getClickedItem());
                 div.getPanelTekiyoInput().setDisabled(true);
@@ -1003,13 +1011,21 @@ public class TekiyoJogaiRirekiHandler {
     }
 
     private static boolean isデータ変更(TekiyoJogaiRirekiDiv div, datagridTekiyoJogai_Row 選択データ) {
-        if (選択データ.getTekiyoDate().getValue().equals(div.getPanelTekiyoInput().getTxtTekiyoDate().getValue())
+        if(DisplayMode.訂正履歴モード.equals(div.getMode_DisplayMode())){
+            if (選択データ.getTekiyoDate().getValue().equals(div.getPanelTekiyoInput().getTxtTekiyoDate().getValue())
             && 選択データ.getTekiyoTodokeDate().getValue().equals(div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue())
-            && 選択データ.getTekiyoJiyuCode().equals(div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedKey())
-            && 選択データ.getKayijoDate().getValue().equals(div.getPanelTekiyoInput().getTxtKayijoDate().getValue())
-            && 選択データ.getKaijoTodokeDate().getValue().equals(div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue())
-            && 選択データ.getKaijoJiyuCode().equals(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey())) {
-            return false;
+            && 選択データ.getTekiyoJiyuCode().equals(div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedKey())){
+                return false;
+             }
+        }else{
+            if (選択データ.getTekiyoDate().getValue().equals(div.getPanelTekiyoInput().getTxtTekiyoDate().getValue())
+                && 選択データ.getTekiyoTodokeDate().getValue().equals(div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue())
+                && 選択データ.getTekiyoJiyuCode().equals(div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedKey())
+                && 選択データ.getKayijoDate().getValue().equals(div.getPanelTekiyoInput().getTxtKayijoDate().getValue())
+                && 選択データ.getKaijoTodokeDate().getValue().equals(div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue())
+                && 選択データ.getKaijoJiyuCode().equals(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey())) {
+                return false;
+            }
         }
         return true;
     }
