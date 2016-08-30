@@ -51,11 +51,28 @@ public enum ShokanShikyuGendogakuMainSpec implements IPredicate<ShokanShikyuGend
             RDate 入力適用期間From = div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().getFromValue();
             List<dgShikyuGendogaku_Row> rowList = div.getShokanShikyuGendogakuIchiran().getDgShikyuGendogaku().getDataSource();
             for (dgShikyuGendogaku_Row row : rowList) {
-                if (入力テーブル区分.equalsIgnoreCase(row.getTableKubun())
-                        && RS_1.equalsIgnoreCase(row.getHdnSaishinFlag())
-                        && 入力適用期間From.getYearMonth().isBeforeOrEquals(
-                                row.getTekiyoKaishiYM().getValue().getYearMonth())) {
-                    return false;
+                if (ShikyuGendogakuTableKubun.標準.get名称().equalsIgnoreCase(入力テーブル区分)) {
+                    if (入力テーブル区分.equalsIgnoreCase(row.getTableKubun())
+                            && RS_1.equalsIgnoreCase(row.getHdnSaishinFlag())
+                            && 入力適用期間From.getYearMonth().isBeforeOrEquals(
+                                    row.getTekiyoKaishiYM().getValue().getYearMonth())) {
+                        return false;
+                    }
+                } else {
+                    if (入力テーブル区分.equalsIgnoreCase(row.getTableKubun())
+                            && RS_1.equalsIgnoreCase(row.getHdnSaishinFlag())
+                            && row.getTekiyoShuryoYM().getValue() == null
+                            && 入力適用期間From.getYearMonth().isBeforeOrEquals(
+                                    row.getTekiyoKaishiYM().getValue().getYearMonth())) {
+                        return false;
+                    }
+                    if (入力テーブル区分.equalsIgnoreCase(row.getTableKubun())
+                            && RS_1.equalsIgnoreCase(row.getHdnSaishinFlag())
+                            && row.getTekiyoShuryoYM().getValue() != null
+                            && 入力適用期間From.getYearMonth().isBeforeOrEquals(
+                                    row.getTekiyoShuryoYM().getValue().getYearMonth())) {
+                        return false;
+                    }
                 }
             }
             return true;
