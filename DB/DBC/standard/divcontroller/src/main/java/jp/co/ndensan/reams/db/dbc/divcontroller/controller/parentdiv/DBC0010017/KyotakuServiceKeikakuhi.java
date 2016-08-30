@@ -53,8 +53,6 @@ public class KyotakuServiceKeikakuhi {
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = 引き継ぎ情報.getCommonHeader().get給付実績ヘッダ情報2();
         getHandler(div).check事業者btn(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供.toDateString(), 実績区分コード);
         div.getCcdKyufuJissekiHeader().setサービス提供年月(サービス提供);
-        List<FlexibleYearMonth> サービス提供年月list = getHandler(div).getサービス提供年月list(給付実績居宅サービス計画費list);
-        getHandler(div).isDisabled(サービス提供年月, サービス提供年月list);
         List<KyufujissekiKyotakuService> 居宅サービス計画費データ = getHandler(div).get給付実績データ(給付実績居宅サービス計画費list,
                 整理番号, 事業者番号, 様式番号, サービス提供.getYearMonth().toDateString());
         getHandler(div).setDataGrid(居宅サービス計画費データ, サービス提供年月);
@@ -71,7 +69,11 @@ public class KyotakuServiceKeikakuhi {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getKojinKakuteiKey().get被保険者番号();
         List<KyufujissekiKyotakuService> 給付実績居宅サービス計画費list = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getCsData_F();
-        getHandler(div).change年月(new RString("前月"), 被保険者番号, 給付実績居宅サービス計画費list);
+        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+        NyuryokuShikibetsuNo 識別番号検索キー = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class);
+        getHandler(div).change年月(new RString("前月"), 給付実績居宅サービス計画費list, サービス提供年月,
+                整理番号, 被保険者番号, 識別番号検索キー);
         return createResponse(div);
     }
 
@@ -85,7 +87,11 @@ public class KyotakuServiceKeikakuhi {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getKojinKakuteiKey().get被保険者番号();
         List<KyufujissekiKyotakuService> 給付実績居宅サービス計画費list = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getCsData_F();
-        getHandler(div).change年月(new RString("次月"), 被保険者番号, 給付実績居宅サービス計画費list);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+        NyuryokuShikibetsuNo 識別番号検索キー = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class);
+        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        getHandler(div).change年月(new RString("次月"), 給付実績居宅サービス計画費list, サービス提供年月, 整理番号,
+                被保険者番号, 識別番号検索キー);
         return createResponse(div);
     }
 
