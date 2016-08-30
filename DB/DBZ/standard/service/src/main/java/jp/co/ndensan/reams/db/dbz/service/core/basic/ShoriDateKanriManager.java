@@ -40,6 +40,7 @@ public class ShoriDateKanriManager {
     private static final RString サブ業務コードメッセージ = new RString("サブ業務コード");
     private static final RString 開始時分秒 = new RString("000000");
     private static final RString 終了時分秒 = new RString("235959");
+    private static final RString 処理年度 = new RString("年度");
 
     /**
      * コンストラクタです。
@@ -60,8 +61,7 @@ public class ShoriDateKanriManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShoriDateKanriManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShoriDateKanriManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShoriDateKanriManager}のインスタンス
      */
     public static ShoriDateKanriManager createInstance() {
         return InstanceProvider.create(ShoriDateKanriManager.class);
@@ -772,6 +772,51 @@ public class ShoriDateKanriManager {
     @Transaction
     public ShoriDateKanri select最大年度内連番() {
         DbT7022ShoriDateKanriEntity entity = dac.select最大年度内連番();
+        if (entity == null) {
+            return null;
+        }
+        return new ShoriDateKanri(entity);
+    }
+
+    /**
+     * 年次利用者負担割合判定を実施した最新の年度を取得です。
+     *
+     * @return SearchResult<ShoriDateKanri>
+     */
+    public ShoriDateKanri get年次の最新実施年度() {
+        DbT7022ShoriDateKanriEntity entity = dac.get年次の最新実施年度();
+        if (entity == null) {
+            return null;
+        }
+        return new ShoriDateKanri(entity);
+    }
+
+    /**
+     * 年次利用者負担割合判定の実施日時の取得です。
+     *
+     * @param 年度 FlexibleYear
+     *
+     * @return SearchResult<ShoriDateKanri>
+     */
+    public ShoriDateKanri get年次の実施日時(FlexibleYear 年度) {
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(処理年度.toString()));
+        DbT7022ShoriDateKanriEntity entity = dac.get年次の実施日時(年度);
+        if (entity == null) {
+            return null;
+        }
+        return new ShoriDateKanri(entity);
+    }
+
+    /**
+     * 異動分利用者負担割合判定の実施日時の取得です。
+     *
+     * @param 年度 FlexibleYear
+     *
+     * @return SearchResult<ShoriDateKanri>
+     */
+    public ShoriDateKanri get異動の実施日時(FlexibleYear 年度) {
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(処理年度.toString()));
+        DbT7022ShoriDateKanriEntity entity = dac.get異動の実施日時(年度);
         if (entity == null) {
             return null;
         }
