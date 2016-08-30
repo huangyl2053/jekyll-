@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710150;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -66,17 +67,17 @@ public class DBC710150_HanyoListKogakuGassanJikoFutangakuParameter extends Batch
     @BatchParameter(key = KEY_SOFU_TAISHOGAI_FUKUMU, name = "送付対象外")
     private boolean sofuTaishogaiFukumu;
     @BatchParameter(key = KEY_JIKO_FROM, name = "自己負担額確認情報受取年月From")
-    private FlexibleDate jikoFutangakuKakuninFrom;
+    private FlexibleYearMonth jikoFutangakuKakuninFrom;
     @BatchParameter(key = KEY_JIKO_TO, name = "自己負担額確認情報受取年月To")
-    private FlexibleDate sofuTaishogaiFukumuTo;
+    private FlexibleYearMonth sofuTaishogaiFukumuTo;
     @BatchParameter(key = KEY_HOSEIZUMI_FROM, name = "補正済自己負担額情報送付年月From")
-    private FlexibleDate hoseizumiJikoFutangakuFrom;
+    private FlexibleYearMonth hoseizumiJikoFutangakuFrom;
     @BatchParameter(key = KEY_HOSEIZUMI_TO, name = "補正済自己負担額情報送付年月To")
-    private FlexibleDate hoseizumiJikoFutangakuTo;
+    private FlexibleYearMonth hoseizumiJikoFutangakuTo;
     @BatchParameter(key = KEY_JIKO_FUTANNGAKU_FROM, name = "自己負担額証明書情報受取年月From")
-    private FlexibleDate jikoFutanngakuShoumeishoFrom;
+    private FlexibleYearMonth jikoFutanngakuShoumeishoFrom;
     @BatchParameter(key = KEY_JIKO_FUTANNGAKU_TO, name = "自己負担額証明書情報受取年月To")
-    private FlexibleDate jikoFutanngakuShoumeishoTo;
+    private FlexibleYearMonth jikoFutanngakuShoumeishoTo;
     @BatchParameter(key = KEY_TOMOKUME_FUKA, name = "項目名付加")
     private boolean tomokumeFuka;
     @BatchParameter(key = KEY_REBAN_FUKA, name = "連番付加")

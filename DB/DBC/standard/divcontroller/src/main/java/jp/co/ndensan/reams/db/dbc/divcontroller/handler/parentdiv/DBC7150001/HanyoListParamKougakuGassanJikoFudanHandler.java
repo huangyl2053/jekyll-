@@ -133,22 +133,22 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
 
     private DBC710150_HanyoListKogakuGassanJikoFutangakuParameter setChkCsvHenshuHoho(DBC710150_HanyoListKogakuGassanJikoFutangakuParameter batchparam) {
         if (null != div.getTxtJikoFutangakuKakunin().getFromValue()) {
-            batchparam.setJikoFutangakuKakuninFrom(new FlexibleDate(div.getTxtJikoFutangakuKakunin().getFromValue().toString()));
+            batchparam.setJikoFutangakuKakuninFrom(new FlexibleYearMonth(div.getTxtJikoFutangakuKakunin().getFromValue().toString()));
         }
         if (null != div.getTxtJikoFutangakuKakunin().getToValue()) {
-            batchparam.setSofuTaishogaiFukumuTo(new FlexibleDate(div.getTxtJikoFutangakuKakunin().getToValue().toString()));
+            batchparam.setSofuTaishogaiFukumuTo(new FlexibleYearMonth(div.getTxtJikoFutangakuKakunin().getToValue().toString()));
         }
         if (null != div.getTxtHoseizumiJikoFutangaku().getFromValue()) {
-            batchparam.setHoseizumiJikoFutangakuFrom(new FlexibleDate(div.getTxtHoseizumiJikoFutangaku().getFromValue().toString()));
+            batchparam.setHoseizumiJikoFutangakuFrom(new FlexibFlexibleYearMonthleDate(div.getTxtHoseizumiJikoFutangaku().getFromValue().toString()));
         }
         if (null != div.getTxtHoseizumiJikoFutangaku().getToValue()) {
-            batchparam.setHoseizumiJikoFutangakuTo(new FlexibleDate(div.getTxtHoseizumiJikoFutangaku().getToValue().toString()));
+            batchparam.setHoseizumiJikoFutangakuTo(new FlexibleYearMonth(div.getTxtHoseizumiJikoFutangaku().getToValue().toString()));
         }
         if (null != div.getTxtJikoFutanngakuShoumeisho().getFromValue()) {
-            batchparam.setJikoFutanngakuShoumeishoFrom(new FlexibleDate(div.getTxtJikoFutanngakuShoumeisho().getFromValue().toString()));
+            batchparam.setJikoFutanngakuShoumeishoFrom(new FlexibleYearMonth(div.getTxtJikoFutanngakuShoumeisho().getFromValue().toString()));
         }
         if (null != div.getTxtJikoFutangakuKakunin().getToValue()) {
-            batchparam.setJikoFutanngakuShoumeishoTo(new FlexibleDate(div.getTxtJikoFutanngakuShoumeisho().getToValue().toString()));
+            batchparam.setJikoFutanngakuShoumeishoTo(new FlexibleYearMonth(div.getTxtJikoFutanngakuShoumeisho().getToValue().toString()));
         }
         List<RString> selectKey = div.getChkCsvHenshuHoho().getSelectedKeys();
         if (selectKey.contains(項目名付加)) {
