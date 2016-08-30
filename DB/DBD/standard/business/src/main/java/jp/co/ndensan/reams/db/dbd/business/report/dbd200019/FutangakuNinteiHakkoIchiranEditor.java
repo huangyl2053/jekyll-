@@ -128,7 +128,7 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
                 source.list_12 = new RString("○");
             }
             if (null != this.帳票情報.get入所施設CD()) {
-                source.list_13 = this.帳票情報.get入所施設CD();
+                source.list_13 = this.帳票情報.get入所施設CD().getColumnValue();
             }
         }
     }
