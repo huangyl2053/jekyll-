@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -74,10 +75,25 @@ public class KyufuGengakuHaakuIchiranBatchParameter extends BatchParameterBase {
     /**
      * 給付額減額滞納者把握情報の取得_Process処理パラメターを取得します．
      *
+     * @param バッチ起動時処理日時 バッチ起動時処理日時
      * @return 給付額減額滞納者把握情報の取得_Process処理パラメター
      */
-    public KyufuGengakuHaakuListSakuseiProcessParameter toKyufuGengakuHaakuListSakuseiProcessParameter() {
-        return new KyufuGengakuHaakuListSakuseiProcessParameter(基準日, 帳票ID, 改頁出力順ID);
+    public KyufuGengakuHaakuListSakuseiProcessParameter toKyufuGengakuHaakuListSakuseiProcessParameter(RDateTime バッチ起動時処理日時) {
+        return new KyufuGengakuHaakuListSakuseiProcessParameter(基準日,
+                時効起算日登録者の選択,
+                被保険者全員の選択,
+                受給者全員の選択,
+                受給認定申請中者の選択,
+                受給認定日抽出,
+                受給認定日抽出の開始,
+                受給認定日抽出の終了,
+                認定有効終了日抽出,
+                認定有効終了日抽出の開始,
+                認定有効終了日抽出の終了,
+                保険料完納者も出力,
+                改頁出力順ID,
+                帳票ID,
+                バッチ起動時処理日時);
     }
 
     /**
