@@ -237,10 +237,12 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         for (int index = 0; index < rowList.size(); index++) {
             if (selectedRowList.contains(rowList.get(index))) {
                 rowList.get(index).setEnkiriyu(延期理由);
+                rowList.get(index).setChangeflag(変更フラグ_変更);
             }
         }
         for (int index = 0; index < selectedRowList.size(); index++) {
             selectedRowList.get(index).setEnkiriyu(延期理由);
+            selectedRowList.get(index).setChangeflag(変更フラグ_変更);
         }
         div.getDgHakkotaishosha().setDataSource(rowList);
         div.getDgHakkotaishosha().setSelectedItems(selectedRowList);
@@ -446,12 +448,14 @@ public class NinteiEnkiTsuchishoHakkoHandler {
             dgHakkotaishosha_Row row = rowList.get(index);
             if (clickRow.equals(row)) {
                 row.setEnkiriyu(サンプル文書);
+                row.setChangeflag(変更フラグ_変更);
             }
         }
         for (int index = 0; index < selectedRowList.size(); index++) {
             dgHakkotaishosha_Row row = selectedRowList.get(index);
             if (clickRow.equals(row)) {
                 row.setEnkiriyu(サンプル文書);
+                row.setChangeflag(変更フラグ_変更);
             }
         }
         div.getDgHakkotaishosha().setDataSource(rowList);
