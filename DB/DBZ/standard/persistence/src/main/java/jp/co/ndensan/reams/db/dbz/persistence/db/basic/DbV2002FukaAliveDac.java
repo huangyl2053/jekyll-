@@ -132,7 +132,7 @@ public class DbV2002FukaAliveDac implements ISaveable<DbV2002FukaEntity> {
     }
 
     /**
-     * select賦課情報
+     * 賦課情報の取得です。
      *
      * @param 調定年度 FlexibleYear
      * @param 賦課年度 FlexibleYear
@@ -155,4 +155,33 @@ public class DbV2002FukaAliveDac implements ISaveable<DbV2002FukaEntity> {
                                 eq(fukaNendo, 賦課年度))).
                 toList(DbT2002FukaEntity.class);
     }
+
+    /**
+     * 賦課情報の取得です。
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 賦課年度 FlexibleYear
+     * @param 通知書番号 TsuchishoNo
+     * @return DbT2002FukaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT2002FukaEntity select賦課情報(
+            FlexibleYear 調定年度,
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号) throws NullPointerException {
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbV2002Fuka.class).
+                where(and(
+                                eq(choteiNendo, 調定年度),
+                                eq(fukaNendo, 賦課年度),
+                                eq(tsuchishoNo, 通知書番号))).
+                toObject(DbT2002FukaEntity.class);
+    }
+
 }

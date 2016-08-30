@@ -178,7 +178,9 @@ public class HanyoListKagoMoshitateCsvEntityEditor {
             csvEntity.set二次予防決定日(format日付項目(entity.get二次予防事業対象情報().getKetteiYMD()));
         }
         csvEntity.set過誤事業者番号(entity.get過誤申立().getJigyoshoNo().getColumnValue());
-        csvEntity.set過誤事業者名(entity.get過誤申立事業者().getJigyoshaName().getColumnValue());
+        if (entity.get過誤申立事業者() != null) {
+            csvEntity.set過誤事業者名(entity.get過誤申立事業者().getJigyoshaName().getColumnValue());
+        }
         csvEntity.setサービス提供年月(format日付項目(entity.get過誤申立().getServiceTeikyoYM()));
         csvEntity.set給付証記載保険者番号(entity.get過誤申立().getShokisaiHokenshaNo().getColumnValue());
         csvEntity.set申立年月日(format日付項目(entity.get過誤申立().getMoshitateYMD()));
@@ -203,10 +205,11 @@ public class HanyoListKagoMoshitateCsvEntityEditor {
         } else {
             csvEntity.set受給旧措置(RString.EMPTY);
         }
-        if (MinashiCode.通常の認定.getコード().equals(entity.get受給者台帳().getMinashiCode().getColumnValue())) {
-            csvEntity.set受給みなし更新認定(RString.EMPTY);
-        } else {
+        if (MinashiCode.みなし認定_旧措置入所者.getコード().equals(entity.get受給者台帳().getMinashiCode().getColumnValue())
+                || MinashiCode.やむを得ない事由.getコード().equals(entity.get受給者台帳().getMinashiCode().getColumnValue())) {
             csvEntity.set受給みなし更新認定(定数_みなし);
+        } else {
+            csvEntity.set受給みなし更新認定(RString.EMPTY);
         }
         if (entity.get受給者台帳().getChokkinIdoJiyuCode() != null) {
             csvEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(entity.get受給者台帳().getChokkinIdoJiyuCode().getColumnValue()).get名称());

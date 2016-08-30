@@ -52,6 +52,9 @@ public enum NoufuGakuDataSakuseiSpec implements IPredicate<NoufuGakuDataSakuseiD
          */
         public static boolean 単一チェック(NoufuGakuDataSakuseiDiv div) {
             List<dgTanitsuShoriJoken_Row> 抽出条件Rows = div.getChushutsuKikan().getDgTanitsuShoriJoken().getDataSource();
+            if (抽出条件Rows == null || 抽出条件Rows.isEmpty()) {
+                return true;
+            }
             RString 抽出終了補正 = 抽出条件Rows.get(0).getTxtKikanEdHosei().getValue();
             return (check英数(抽出終了補正) && check範囲(抽出終了補正));
         }
@@ -63,7 +66,10 @@ public enum NoufuGakuDataSakuseiSpec implements IPredicate<NoufuGakuDataSakuseiD
          * @return 「false」エラー 「true」正常
          */
         public static boolean 広域チェック(NoufuGakuDataSakuseiDiv div) {
-            List<dgKoikiShoriTaishoSelect_Row> 処理対象Rows = div.getKoikiShori().getDgKoikiShoriTaishoSelect().getDataSource();
+            List<dgKoikiShoriTaishoSelect_Row> 処理対象Rows = div.getKoikiShori().getDgKoikiShoriTaishoSelect().getSelectedItems();
+            if (処理対象Rows == null || 処理対象Rows.isEmpty()) {
+                return true;
+            }
             boolean result = true;
             for (dgKoikiShoriTaishoSelect_Row row : 処理対象Rows) {
                 RString 抽出終了補正 = row.getTxtKikanEdHosei().getValue();
@@ -79,7 +85,7 @@ public enum NoufuGakuDataSakuseiSpec implements IPredicate<NoufuGakuDataSakuseiD
 
         private static boolean check範囲(RString 抽出終了) {
             Integer 抽出終了補正 = Integer.valueOf(抽出終了.toString());
-            return (INT_99 < 抽出終了補正 || 抽出終了補正 < INT99);
+            return (INT_99 < 抽出終了補正 && 抽出終了補正 < INT99);
         }
     }
 }
