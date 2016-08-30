@@ -40,7 +40,7 @@
     <!--テーブルDbWT0001Hihokenshaの項目をDbWT1001HihokenshaTempEntityの項目にマッピングします。-->
     <resultMap id="resultMap_DbWT1001HihokenshaTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity" autoMapping="true">
         <id property="exRenban" column="exRenban" />
-        <result property="exHokenshaNo" column="exHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="exHokenshaNo" column="exHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
         <result property="exHokenshaName" column="exHokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="exShoHokenshaNo" column="exShoHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <result property="exHihokenshaNo" column="exHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>

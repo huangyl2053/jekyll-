@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -52,7 +52,7 @@ public class HokenshaKyufujissekiOutSetHihokenshaNoProcess extends BatchProcessB
 
     @Override
     protected void process(DbWT1001HihokenshaTempEntity entity) {
-        entity.setExHokenshaNo(new ShoKisaiHokenshaNo(保険者番号));
+        entity.setExHokenshaNo(new HokenshaNo(保険者番号));
         dbWT0001TableWriter.update(entity);
     }
 

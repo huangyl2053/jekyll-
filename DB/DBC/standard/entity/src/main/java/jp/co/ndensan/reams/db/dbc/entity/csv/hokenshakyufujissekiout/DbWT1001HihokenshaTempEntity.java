@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -34,7 +35,7 @@ public class DbWT1001HihokenshaTempEntity extends DbTableEntityBase<DbWT1001Hiho
     private int exRenban;
 
     @TempTableColumnOrder(2)
-    private ShoKisaiHokenshaNo exHokenshaNo;
+    private HokenshaNo exHokenshaNo;
     @TempTableColumnOrder(3)
     private RString exHokenshaName;
     @TempTableColumnOrder(4)

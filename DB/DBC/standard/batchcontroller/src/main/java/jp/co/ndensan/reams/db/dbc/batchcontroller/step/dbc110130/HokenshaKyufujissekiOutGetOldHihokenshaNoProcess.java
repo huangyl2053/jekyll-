@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001Hih
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetOldHihokenshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -61,7 +62,7 @@ public class HokenshaKyufujissekiOutGetOldHihokenshaNoProcess extends BatchProce
 
     @Override
     protected void process(HokenshaKyufujissekiOutGetOldHihokenshaEntity entity) {
-        entity.getDbWT1001Entity().setExHokenshaNo(entity.getDbWT1001Entity().getExShoHokenshaNo());
+        entity.getDbWT1001Entity().setExHokenshaNo(new HokenshaNo(entity.getDbWT1001Entity().getExShoHokenshaNo().getColumnValue()));
         entity.getDbWT1001Entity().setOldShichosonCode(entity.getDbT7026Entity().getShichosonCode());
         entity.getDbWT1001Entity().setSofuHihokenshaNo(new HihokenshaNo(entity.getDbT7026Entity().getKyuNo()));
         dbWT0001TableWriter.update(entity.getDbWT1001Entity());
