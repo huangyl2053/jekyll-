@@ -275,18 +275,6 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         }
     }
 
-    private boolean isEnkiriyuAri(List<KeyValueDataSource> dataSourceList, RString enkiriyu) {
-        if (dataSourceList.isEmpty()) {
-            return false;
-        }
-        for (KeyValueDataSource dataSource : dataSourceList) {
-            if (enkiriyu.equals(dataSource.getValue())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     /**
      * 選択状態を制御します。
      *
