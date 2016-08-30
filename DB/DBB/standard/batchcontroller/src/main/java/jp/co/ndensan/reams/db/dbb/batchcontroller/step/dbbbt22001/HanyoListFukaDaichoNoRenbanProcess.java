@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbx.service.core.basic.KaigoDonyuKeitaiManager;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
@@ -77,6 +78,7 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchProcessBase<HanyoLi
 
     private static final RString ID = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
             + "hanyolistfukadaicho.IHanyoListFukaDaichoMapper.getHanyoListFukaDaicho");
+
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBB200033"));
     private static final RString 日本語ファイル名 = new RString("汎用リスト 賦課台帳CSV");
     private static final RString ファイル名 = new RString("HanyoList_FukaDaicho.csv");
@@ -86,9 +88,9 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchProcessBase<HanyoLi
     private static final RString 抽出条件 = new RString("【抽出条件】");
     private static final RString 賦課年度 = new RString("　　　賦課年度：");
     private static final RString 調定年度 = new RString("　　　調定年度：");
-    private static final RString 資格区分 = new RString("　　　資格区分：○○○○○○");
-    private static final RString 受給者判定 = new RString("　　　受給者判定：○○○○○○");
-    private static final RString 徴収方法 = new RString("　　　徴収方法：○○○○○○");
+    private static final RString 資格区分 = new RString("　　　資格区分：");
+    private static final RString 受給者判定 = new RString("　　　受給者判定：");
+    private static final RString 徴収方法 = new RString("　　　徴収方法：");
     private static final RString 保険料段階 = new RString("　　　保険料段階：");
     private static final RString SPACE = new RString("　　　　　　　　　");
     private static final RString 時点 = new RString("　　　時点：");
@@ -169,9 +171,6 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchProcessBase<HanyoLi
     private static final RString 右記号 = new RString(")");
     private static final RString LINE = new RString("　～　");
     private static final RString 定数_歳 = new RString("歳");
-    private static final RString 定数_住所 = new RString("住所");
-    private static final RString 定数_行政区 = new RString("行政区");
-    private static final RString 定数_地区 = new RString("地区");
     private static final RString 住所SHOW = new RString("　　　住所：");
     private static final RString 行政区SHOW = new RString("　　　行政区：");
     private static final RString 地区1SHOW = new RString("　　　地区1：");
@@ -351,12 +350,15 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchProcessBase<HanyoLi
         出力条件.add(RString.EMPTY);
         RStringBuilder builder7 = new RStringBuilder();
         builder7.append(資格区分);
+        builder7.append(ShikakuKubun.toValue(processParameter.get資格区分()).get名称());
         出力条件.add(builder7.toRString());
         RStringBuilder builder11 = new RStringBuilder();
         builder11.append(受給者判定);
+        builder11.append(JukyushaHantei.toValue(processParameter.get受給者判定()).get名称());
         出力条件.add(builder11.toRString());
         RStringBuilder builder12 = new RStringBuilder();
         builder12.append(徴収方法);
+        builder12.append(ChoshuHoho.toValue(processParameter.get徴収方法()).get名称());
         出力条件.add(builder12.toRString());
         RStringBuilder builder6 = new RStringBuilder();
         set保険料段階１(builder6, 出力条件);
@@ -377,6 +379,7 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchProcessBase<HanyoLi
         if (list.get(INDEX_ZERO).get導入形態コード().is広域()) {
             builder10.append(保険者SHOW);
             builder10.append(processParameter.get宛名抽出条件().getShichoson_Code().getColumnValue());
+            builder10.append(processParameter.get宛名抽出条件().getShichoson_Mesho());
             出力条件.add(builder10.toRString());
         }
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
@@ -480,31 +483,6 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchProcessBase<HanyoLi
         } else {
             builder.append(段階１５FALSE);
         }
-        if (processParameter.get保険料段階s().contains(定数_１６)) {
-            builder.append(段階１６TRUE);
-        } else {
-            builder.append(段階１６FALSE);
-        }
-        if (processParameter.get保険料段階s().contains(定数_１７)) {
-            builder.append(段階１７TRUE);
-        } else {
-            builder.append(段階１７FALSE);
-        }
-        if (processParameter.get保険料段階s().contains(定数_１８)) {
-            builder.append(段階１８TRUE);
-        } else {
-            builder.append(段階１８FALSE);
-        }
-        if (processParameter.get保険料段階s().contains(定数_１９)) {
-            builder.append(段階１９TRUE);
-        } else {
-            builder.append(段階１９FALSE);
-        }
-        if (processParameter.get保険料段階s().contains(定数_２０)) {
-            builder.append(段階２０TRUE);
-        } else {
-            builder.append(段階２０FALSE);
-        }
         出力条件.add(builder.toRString());
     }
 
@@ -539,39 +517,50 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchProcessBase<HanyoLi
     }
 
     private void set地区区分(RStringBuilder builder, List<RString> 出力条件) {
+        RString 地区区分コード = processParameter.get宛名抽出条件().getChiku_Kubun().getコード();
         if (processParameter != null && processParameter.get宛名抽出条件() != null
-                && processParameter.get宛名抽出条件().getChiku_Kubun() != null) {
-            RString 地区区分名称 = processParameter.get宛名抽出条件().getChiku_Kubun().get名称();
-            if (定数_住所.equals(地区区分名称)) {
+                && processParameter.get宛名抽出条件().getChiku_Kubun() != null
+                && !Chiku.全て.getコード().equals(地区区分コード)) {
+            if (Chiku.住所.getコード().equals(地区区分コード)) {
                 builder.append(住所SHOW);
-                RString 町域From = processParameter.get宛名抽出条件().getJusho_From();
-                RString 町域To = processParameter.get宛名抽出条件().getJusho_To();
-                builder.append(町域From).append(LINE).append(町域To);
+                RString 町域CodeFrom = processParameter.get宛名抽出条件().getJusho_From();
+                RString 町域名称From = processParameter.get宛名抽出条件().getJusho_FromMesho();
+                RString 町域CodeTo = processParameter.get宛名抽出条件().getJusho_To();
+                RString 町域名称To = processParameter.get宛名抽出条件().getJusho_ToMesho();
+                builder.append(町域CodeFrom).append(町域名称From).append(LINE).append(町域CodeTo).append(町域名称To);
                 出力条件.add(builder.toRString());
-            } else if (定数_行政区.equals(地区区分名称)) {
+            } else if (Chiku.行政区.getコード().equals(地区区分コード)) {
                 builder.append(行政区SHOW);
-                RString 行政区From = processParameter.get宛名抽出条件().getGyoseiku_From();
-                RString 行政区To = processParameter.get宛名抽出条件().getGyoseiku_To();
-                builder.append(行政区From).append(LINE).append(行政区To);
+                RString 行政区CodeFrom = processParameter.get宛名抽出条件().getGyoseiku_From();
+                RString 行政区名称From = processParameter.get宛名抽出条件().getGyoseiku_FromMesho();
+                RString 行政区CodeTo = processParameter.get宛名抽出条件().getGyoseiku_To();
+                RString 行政区名称To = processParameter.get宛名抽出条件().getGyoseiku_ToMesho();
+                builder.append(行政区CodeFrom).append(行政区名称From).append(LINE).append(行政区CodeTo).append(行政区名称To);
                 出力条件.add(builder.toRString());
-            } else if (定数_地区.equals(地区区分名称)) {
+            } else if (Chiku.地区.getコード().equals(地区区分コード)) {
                 RStringBuilder builder1 = new RStringBuilder();
                 builder1.append(地区1SHOW);
-                RString 地区１From = processParameter.get宛名抽出条件().getChiku1_From();
-                RString 地区１To = processParameter.get宛名抽出条件().getChiku1_To();
-                builder1.append(地区１From).append(LINE).append(地区１To);
+                RString 地区１CodeFrom = processParameter.get宛名抽出条件().getChiku1_From();
+                RString 地区１名称From = processParameter.get宛名抽出条件().getChiku1_FromMesho();
+                RString 地区１CodeTo = processParameter.get宛名抽出条件().getChiku1_To();
+                RString 地区１名称To = processParameter.get宛名抽出条件().getChiku1_ToMesho();
+                builder1.append(地区１CodeFrom).append(地区１名称From).append(LINE).append(地区１CodeTo).append(地区１名称To);
                 出力条件.add(builder1.toRString());
                 RStringBuilder builder2 = new RStringBuilder();
                 builder2.append(地区2SHOW);
-                RString 地区2From = processParameter.get宛名抽出条件().getChiku2_From();
-                RString 地区2To = processParameter.get宛名抽出条件().getChiku2_To();
-                builder2.append(地区2From).append(LINE).append(地区2To);
+                RString 地区2CodeFrom = processParameter.get宛名抽出条件().getChiku2_From();
+                RString 地区2名称From = processParameter.get宛名抽出条件().getChiku2_From();
+                RString 地区2CodeTo = processParameter.get宛名抽出条件().getChiku2_To();
+                RString 地区2名称To = processParameter.get宛名抽出条件().getChiku2_To();
+                builder2.append(地区2CodeFrom).append(地区2名称From).append(LINE).append(地区2CodeTo).append(地区2名称To);
                 出力条件.add(builder2.toRString());
                 RStringBuilder builder3 = new RStringBuilder();
                 builder3.append(地区3SHOW);
-                RString 地区3From = processParameter.get宛名抽出条件().getChiku3_From();
-                RString 地区3To = processParameter.get宛名抽出条件().getChiku3_To();
-                builder2.append(地区3From).append(LINE).append(地区3To);
+                RString 地区3CodeFrom = processParameter.get宛名抽出条件().getChiku3_From();
+                RString 地区3名称From = processParameter.get宛名抽出条件().getChiku3_FromMesho();
+                RString 地区3CodeTo = processParameter.get宛名抽出条件().getChiku3_To();
+                RString 地区3名称To = processParameter.get宛名抽出条件().getChiku3_ToMesho();
+                builder3.append(地区3CodeFrom).append(地区3名称From).append(LINE).append(地区3CodeTo).append(地区3名称To);
                 出力条件.add(builder3.toRString());
             }
         }

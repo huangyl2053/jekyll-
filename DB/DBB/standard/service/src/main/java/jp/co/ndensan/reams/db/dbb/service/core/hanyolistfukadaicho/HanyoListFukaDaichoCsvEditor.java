@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbb.definition.processprm.hanyolistfukadaicho.Hany
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistfukadaicho.HanyoListFukaDaichoCsvEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistfukadaicho.HanyoListFukaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
@@ -32,12 +33,12 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.code.FujoShuruiCodeValue;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.idojiyu.IIdoJiyu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -70,8 +71,6 @@ public class HanyoListFukaDaichoCsvEditor {
     private List<DbT2003KibetsuEntity> 介護期別list;
     private HanyoListFukaDaichoProcessParameter parameter;
 
-    private static final RString 介護資格取得事由 = new RString("0007");
-    private static final RString 介護資格喪失事由 = new RString("0010");
     private static final RString 特例状態住特 = new RString("住特");
     private static final RString RSTONE = new RString("1");
     private static final RString 捕捉月２月 = new RString("02");
@@ -88,6 +87,8 @@ public class HanyoListFukaDaichoCsvEditor {
     private static final RString 特徴 = new RString("特徴");
     private static final RString 普徴 = new RString("普徴");
     private static final RString 併徴 = new RString("併徴");
+    private static final RString HOSHI = new RString("*");
+    private static final RString 境界層 = new RString("境界層");
     private static final int INT_ONE = 1;
     private static final int INT_TWO = 2;
     private static final int INT_THREE = 3;
@@ -346,10 +347,19 @@ public class HanyoListFukaDaichoCsvEditor {
         if (調定日 != null) {
             csvEntity.set調定日(dataToRString(new FlexibleDate(調定日.getDate().toString())));
         }
-        csvEntity.set口座対象者(KozaKubun.toValue(介護賦課.getKozaKubun()).get名称());
+        if (KozaKubun.口座振替.getコード().equals(介護賦課.getKozaKubun())) {
+            csvEntity.set口座対象者(HOSHI);
+        } else {
+            csvEntity.set口座対象者(KozaKubun.toValue(介護賦課.getKozaKubun()).get名称());
+        }
         csvEntity.set年金収入額(numToRString(介護賦課.getNenkinShunyuGaku()));
         csvEntity.set生活保護種別(new FujoShuruiCodeValue(介護賦課.getSeihofujoShurui()).getRyakusho());
-        csvEntity.set境界層区分(KyokaisoKubun.toValue(介護賦課.getKyokaisoKubun()).get名称());
+        if (KyokaisoKubun.該当.getコード().equals(介護賦課.getKyokaisoKubun())) {
+            csvEntity.set境界層区分(境界層);
+        } else {
+            csvEntity.set境界層区分(KyokaisoKubun.toValue(介護賦課.getKyokaisoKubun()).get名称());
+        }
+
         csvEntity.set調定年度(new RString(介護賦課.getChoteiNendo().getYearValue()));
         csvEntity.set賦課年度(new RString(介護賦課.getFukaNendo().getYearValue()));
         csvEntity.set特徴歳出還付額(numToRString(介護賦課.getTkSaishutsuKampuGaku()));
@@ -512,14 +522,14 @@ public class HanyoListFukaDaichoCsvEditor {
         if (atenaBanchi != null) {
             stringBuilder.append(atenaBanchi.toString());
         }
-        if (stringBuilder.length() > 0) {
+        if (0 < stringBuilder.length()) {
             stringBuilder.append(RString.FULL_SPACE);
         }
         Katagaki katagaki = entity.get宛名().getKatagaki();
         if (katagaki != null) {
             stringBuilder.append(katagaki.toString());
         }
-        if (stringBuilder.length() > 0) {
+        if (0 < stringBuilder.length()) {
             csvEntity.set住所と番地と方書(new RString(stringBuilder.toString()));
         } else {
             csvEntity.set住所と番地と方書(RString.EMPTY);
@@ -608,13 +618,13 @@ public class HanyoListFukaDaichoCsvEditor {
         if (atenaBanchi1 != null) {
             stringBuilder1.append(atenaBanchi1.value());
         }
-        if (stringBuilder1.length() > 0) {
+        if (0 < stringBuilder1.length()) {
             stringBuilder1.append(RString.FULL_SPACE);
         }
         if (katagaki1 != null) {
             stringBuilder1.append(katagaki1.value());
         }
-        if (stringBuilder1.length() > 0) {
+        if (0 < stringBuilder1.length()) {
             csvEntity.set前住所と番地と方書(new RString(stringBuilder1.toString()));
         } else {
             csvEntity.set前住所と番地と方書(RString.EMPTY);
@@ -643,6 +653,12 @@ public class HanyoListFukaDaichoCsvEditor {
         Association 地方公共団体 = AssociationFinderFactory.createInstance()
                 .getAssociation(entity.get被保険者台帳管理Newest().getShichosonCode(), FlexibleDate.getNowDate());
         csvEntity.set市町村名(地方公共団体.get市町村名());
+        IAssociationFinder finder = AssociationFinderFactory.createInstance();
+        Association association = finder.getAssociation();
+        if (association != null) {
+            csvEntity.set保険者コード(association.get地方公共団体コード().getColumnValue());
+            csvEntity.set保険者名(association.get市町村名());
+        }
         AtenaMeisho atenaMeisho2 = entity.get宛先().getKanjiShimei();
         if (atenaMeisho2 != null) {
             csvEntity.set送付先氏名(atenaMeisho2.value());
@@ -677,13 +693,13 @@ public class HanyoListFukaDaichoCsvEditor {
         if (atenaBanchi2 != null) {
             stringBuilder2.append(atenaBanchi2.getColumnValue());
         }
-        if (stringBuilder2.length() > 0) {
+        if (0 < stringBuilder2.length()) {
             stringBuilder2.append(RString.FULL_SPACE);
         }
         if (katagaki2 != null) {
             stringBuilder2.append(katagaki2.getColumnValue());
         }
-        if (stringBuilder2.length() > 0) {
+        if (0 < stringBuilder2.length()) {
             csvEntity.set送付先住所と番地と方書(new RString(stringBuilder2.toString()));
         } else {
             csvEntity.set送付先住所と番地と方書(RString.EMPTY);
@@ -718,7 +734,8 @@ public class HanyoListFukaDaichoCsvEditor {
                 ? RString.EMPTY : 被保険者台帳管理.getHihokenshaNo().value());
         RString 資格取得事由 = RString.EMPTY;
         if (被保険者台帳管理.getShikakuShutokuJiyuCode() != null) {
-            資格取得事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(介護資格取得事由),
+            資格取得事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
+                    DBACodeShubetsu.介護資格取得事由_被保険者.getコード(),
                     new Code(被保険者台帳管理.getShikakuShutokuJiyuCode()), FlexibleDate.getNowDate());
         }
         csvEntity.set資格取得事由(資格取得事由);
@@ -726,7 +743,8 @@ public class HanyoListFukaDaichoCsvEditor {
         csvEntity.set資格取得届出日(dataToRString(被保険者台帳管理.getShikakuShutokuTodokedeYMD()));
         RString 喪失事由 = RString.EMPTY;
         if (被保険者台帳管理.getShikakuSoshitsuJiyuCode() != null && !被保険者台帳管理.getShikakuSoshitsuJiyuCode().isEmpty()) {
-            喪失事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(介護資格喪失事由),
+            喪失事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
+                    DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(),
                     new Code(被保険者台帳管理.getShikakuSoshitsuJiyuCode()), FlexibleDate.getNowDate());
         }
         csvEntity.set喪失事由(喪失事由);
@@ -790,8 +808,8 @@ public class HanyoListFukaDaichoCsvEditor {
     private boolean 徴収方法判定(DbT2003KibetsuEntity 介護期別) {
         for (UrT0705ChoteiKyotsuEntity 調定共通 : 調定共通list) {
             if (介護期別.getChoteiId().compareTo(new Decimal(調定共通.getChoteiId())) == 0) {
-                return (調定共通.getChoteigaku() == null ? Decimal.ZERO : 調定共通.getChoteigaku())
-                        .compareTo(Decimal.ZERO) > 0;
+                return Decimal.ZERO
+                        .compareTo(調定共通.getChoteigaku() == null ? Decimal.ZERO : 調定共通.getChoteigaku()) < 0;
             }
         }
         return false;
@@ -799,7 +817,7 @@ public class HanyoListFukaDaichoCsvEditor {
 
     private void set保険者番号By広住特措置元市町村コード(HanyoListFukaDaichoCsvEntity csvEntity,
             List<KoseiShichosonMaster> 構成市町村マスタlist) {
-        if (構成市町村マスタlist.size() > 0 && 被保険者台帳管理.getKoikinaiTokureiSochimotoShichosonCode() != null) {
+        if (0 < 構成市町村マスタlist.size() && 被保険者台帳管理.getKoikinaiTokureiSochimotoShichosonCode() != null) {
             for (int i = 0; i < 構成市町村マスタlist.size(); i++) {
                 if (被保険者台帳管理.getKoikinaiTokureiSochimotoShichosonCode()
                         .equals(構成市町村マスタlist.get(i).get市町村コード())) {
@@ -811,7 +829,7 @@ public class HanyoListFukaDaichoCsvEditor {
 
     private void set保険者番号By市町村コード(HanyoListFukaDaichoCsvEntity csvEntity,
             List<KoseiShichosonMaster> 構成市町村マスタlist) {
-        if (構成市町村マスタlist.size() > 0 && 被保険者台帳管理.getShichosonCode() != null) {
+        if (0 < 構成市町村マスタlist.size() && 被保険者台帳管理.getShichosonCode() != null) {
             for (int i = 0; i < 構成市町村マスタlist.size(); i++) {
                 if (被保険者台帳管理.getShichosonCode().equals(構成市町村マスタlist.get(i).get市町村コード())) {
                     csvEntity.set資格_証記載保険者番号(構成市町村マスタlist.get(i).get証記載保険者番号().getColumnValue());
@@ -823,7 +841,7 @@ public class HanyoListFukaDaichoCsvEditor {
     private RString get翌４月特徴額(HanyoListFukaDaichoEntity entity) {
         Decimal 翌４月特徴額 = Decimal.ZERO;
         for (UrT0705ChoteiKyotsuEntity 調定共通 : entity.get調定共通リスト()) {
-            if (調定共通.getChoteigaku().compareTo(翌４月特徴額) > 0) {
+            if (翌４月特徴額.compareTo(調定共通.getChoteigaku()) < 0) {
                 翌４月特徴額 = 調定共通.getChoteigaku();
             }
         }

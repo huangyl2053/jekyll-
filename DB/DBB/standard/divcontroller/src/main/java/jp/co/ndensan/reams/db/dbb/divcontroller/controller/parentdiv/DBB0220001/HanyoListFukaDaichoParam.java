@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0220001;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistfukadaicho.DBB022001_FukaDaichoHanyoListSakuseiParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB022001.DBB022001_FukaDaichoHanyoListSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0220001.HanyoListFukaDaichoParamDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0220001.HanyoListFukaDaichoParamHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0220001.HanyoListFukaDaichoParamValidationHandler;

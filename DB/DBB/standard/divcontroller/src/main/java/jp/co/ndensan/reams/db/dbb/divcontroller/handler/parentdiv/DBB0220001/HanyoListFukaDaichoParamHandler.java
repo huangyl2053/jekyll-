@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolist.fukadaicho.Chosh
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolist.fukadaicho.JukyushaHantei;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolist.fukadaicho.KijunbiKubun;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolist.fukadaicho.ShikakuKubun;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistfukadaicho.DBB022001_FukaDaichoHanyoListSakuseiParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB022001.DBB022001_FukaDaichoHanyoListSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0220001.HanyoListFukaDaichoParamDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;

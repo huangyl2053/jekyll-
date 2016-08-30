@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistfukadaicho;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB022001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.hanyolistfukadaicho.HanyoListFukaDaichoProcessParameter;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * バッチ設計_DBBBT22001_汎用リスト 賦課台帳BatchParameterのクラス
+ * バッチ設計_DBBBT22001_汎用リスト 賦課台帳BatchParameterのクラスです。
  *
  * @reamsid_L DBB-1900-030 surun
  */

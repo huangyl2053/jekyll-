@@ -31,7 +31,6 @@ public class HanyoListDaichoMybatisParameter extends UaFt200FindShikibetsuTaisho
     private final RDate 基準日;
     private final RString 基準日区分;
     private final List<RString> 保険料段階s;
-    // todo
     private final RString 保険者コード;
     private final RString 資格区分;
     private final RString 受給者判定;
