@@ -53,7 +53,7 @@ public class JyukyushaDaichoIdoCheckList {
         if (今回抽出開始年月日 == null && 今回抽出終了年月日 != null && !ResponseHolder.isReRequest()) {
             if (今回抽出終了時分秒 != null) {
                 Message 以前出力確認 = DbdQuestionMessages.受給者台帳異動チェックリスト_以前出力確認.getMessage().replace(
-                        今回抽出終了年月日.toString() + 今回抽出終了時分秒.toString());
+                        今回抽出終了年月日.toString().concat(今回抽出終了時分秒.toString()));
                 return ResponseData.of(div).addMessage(以前出力確認).respond();
             } else {
                 Message 以前出力確認 = DbdQuestionMessages.受給者台帳異動チェックリスト_以前出力確認.getMessage().replace(
@@ -64,7 +64,7 @@ public class JyukyushaDaichoIdoCheckList {
         if (今回抽出開始年月日 != null && 今回抽出終了年月日 == null && !ResponseHolder.isReRequest()) {
             if (今回抽出開始時分秒 != null) {
                 Message 以後出力確認 = DbdQuestionMessages.受給者台帳異動チェックリスト_以後出力確認.getMessage().replace(
-                        今回抽出開始年月日.toString() + 今回抽出開始時分秒.toString());
+                        今回抽出開始年月日.toString().concat(今回抽出開始時分秒.toString()));
                 return ResponseData.of(div).addMessage(以後出力確認).respond();
             } else {
                 Message 以後出力確認 = DbdQuestionMessages.受給者台帳異動チェックリスト_以後出力確認.getMessage().

@@ -132,53 +132,60 @@ public class JigyoHokokuDataReportDBU300001Process extends BatchProcessBase<Jigy
         reportData.set第1号被保険者増減内訳_項目標題行1(new RString("当年度中増"));
         reportData.set第1号被保険者増減内訳_項目標題行2(new RString("当年度中減"));
 
-        reportData.set前月末現在_1(new RString(syukeiNo0200.get(数値_11).longValue()));
-        reportData.set前月末現在_2(new RString(syukeiNo0200.get(数値_21).longValue()));
-        reportData.set前月末現在_3(new RString(syukeiNo0200.get(数値_31).longValue()));
-        reportData.set前月末現在_4(new RString(syukeiNo0200.get(数値_41).longValue()));
-        reportData.set前月末現在_5(new RString(syukeiNo0200.get(数値_51).longValue()));
-        reportData.set当月中増_計_1(new RString(syukeiNo0200.get(数値_12).longValue()));
-        reportData.set当月中増_計_2(new RString(syukeiNo0200.get(数値_22).longValue()));
-        reportData.set当月中増_計_3(new RString(syukeiNo0200.get(数値_32).longValue()));
-        reportData.set当月中増_計_4(new RString(syukeiNo0200.get(数値_42).longValue()));
-        reportData.set当月中増_計_5(new RString(syukeiNo0200.get(数値_52).longValue()));
-        reportData.set当月中減_計_1(new RString(syukeiNo0200.get(数値_13).longValue()));
-        reportData.set当月中減_計_2(new RString(syukeiNo0200.get(数値_23).longValue()));
-        reportData.set当月中減_計_3(new RString(syukeiNo0200.get(数値_33).longValue()));
-        reportData.set当月中減_計_4(new RString(syukeiNo0200.get(数値_43).longValue()));
-        reportData.set当月中減_計_5(new RString(syukeiNo0200.get(数値_53).longValue()));
-        reportData.set当月末現在_1(new RString(syukeiNo0200.get(数値_14).longValue()));
-        reportData.set当月末現在_2(new RString(syukeiNo0200.get(数値_24).longValue()));
-        reportData.set当月末現在_3(new RString(syukeiNo0200.get(数値_34).longValue()));
-        reportData.set当月末現在_4(new RString(syukeiNo0200.get(数値_44).longValue()));
-        reportData.set当月末現在_5(new RString(syukeiNo0200.get(数値_54).longValue()));
+        reportData.set前月末現在_1(getValue(syukeiNo0200, 数値_11));
+        reportData.set前月末現在_2(getValue(syukeiNo0200, 数値_21));
+        reportData.set前月末現在_3(getValue(syukeiNo0200, 数値_31));
+        reportData.set前月末現在_4(getValue(syukeiNo0200, 数値_41));
+        reportData.set前月末現在_5(getValue(syukeiNo0200, 数値_51));
+        reportData.set当月中増_計_1(getValue(syukeiNo0200, 数値_12));
+        reportData.set当月中増_計_2(getValue(syukeiNo0200, 数値_22));
+        reportData.set当月中増_計_3(getValue(syukeiNo0200, 数値_32));
+        reportData.set当月中増_計_4(getValue(syukeiNo0200, 数値_42));
+        reportData.set当月中増_計_5(getValue(syukeiNo0200, 数値_52));
+        reportData.set当月中減_計_1(getValue(syukeiNo0200, 数値_13));
+        reportData.set当月中減_計_2(getValue(syukeiNo0200, 数値_23));
+        reportData.set当月中減_計_3(getValue(syukeiNo0200, 数値_33));
+        reportData.set当月中減_計_4(getValue(syukeiNo0200, 数値_43));
+        reportData.set当月中減_計_5(getValue(syukeiNo0200, 数値_53));
+        reportData.set当月末現在_1(getValue(syukeiNo0200, 数値_14));
+        reportData.set当月末現在_2(getValue(syukeiNo0200, 数値_24));
+        reportData.set当月末現在_3(getValue(syukeiNo0200, 数値_34));
+        reportData.set当月末現在_4(getValue(syukeiNo0200, 数値_44));
+        reportData.set当月末現在_5(getValue(syukeiNo0200, 数値_54));
 
-        reportData.set転入転出_1(new RString(syukeiNo0301.get(数値_11).longValue()));
-        reportData.set職権復活職権喪失_1(new RString(syukeiNo0301.get(数値_12).longValue()));
-        reportData.set歳到達65死亡_1(new RString(syukeiNo0301.get(数値_13).longValue()));
-        reportData.set適用除外非該当適用除外該当_1(new RString(syukeiNo0301.get(数値_14).longValue()));
-        reportData.setその他_1(new RString(syukeiNo0301.get(数値_15).longValue()));
-        reportData.set計_1(new RString(syukeiNo0301.get(数値_16).longValue()));
-        reportData.set自特例適用自特例解除_1(new RString(syukeiNo0301.get(数値_21).longValue()));
-        reportData.set自特例転入_1(new RString(syukeiNo0301.get(数値_22).longValue()));
-        reportData.set他特例居住他特例適用_1(new RString(syukeiNo0301.get(数値_23).longValue()));
-        reportData.set外国人申請国籍喪失_1(new RString(syukeiNo0301.get(数値_24).longValue()));
-        reportData.set帰化_1(new RString(syukeiNo0301.get(数値_25).longValue()));
-        reportData.set左記以外_1(new RString(syukeiNo0301.get(数値_26).longValue()));
+        reportData.set転入転出_1(getValue(syukeiNo0301, 数値_11));
+        reportData.set職権復活職権喪失_1(getValue(syukeiNo0301, 数値_12));
+        reportData.set歳到達65死亡_1(getValue(syukeiNo0301, 数値_13));
+        reportData.set適用除外非該当適用除外該当_1(getValue(syukeiNo0301, 数値_14));
+        reportData.setその他_1(getValue(syukeiNo0301, 数値_15));
+        reportData.set計_1(getValue(syukeiNo0301, 数値_16));
+        reportData.set自特例適用自特例解除_1(getValue(syukeiNo0301, 数値_21));
+        reportData.set自特例転入_1(getValue(syukeiNo0301, 数値_22));
+        reportData.set他特例居住他特例適用_1(getValue(syukeiNo0301, 数値_23));
+        reportData.set外国人申請国籍喪失_1(getValue(syukeiNo0301, 数値_24));
+        reportData.set帰化_1(getValue(syukeiNo0301, 数値_25));
+        reportData.set左記以外_1(getValue(syukeiNo0301, 数値_26));
 
-        reportData.set転入転出_2(new RString(syukeiNo0302.get(数値_11).longValue()));
-        reportData.set職権復活職権喪失_2(new RString(syukeiNo0302.get(数値_12).longValue()));
-        reportData.set歳到達65死亡_2(new RString(syukeiNo0302.get(数値_13).longValue()));
-        reportData.set適用除外非該当適用除外該当_2(new RString(syukeiNo0302.get(数値_14).longValue()));
-        reportData.setその他_2(new RString(syukeiNo0302.get(数値_15).longValue()));
-        reportData.set計_2(new RString(syukeiNo0302.get(数値_16).longValue()));
-        reportData.set自特例適用自特例解除_2(new RString(syukeiNo0302.get(数値_21).longValue()));
-        reportData.set自特例転入_2(new RString(syukeiNo0302.get(数値_22).longValue()));
-        reportData.set他特例居住他特例適用_2(new RString(syukeiNo0302.get(数値_23).longValue()));
-        reportData.set外国人申請国籍喪失_2(new RString(syukeiNo0302.get(数値_24).longValue()));
-        reportData.set帰化_2(new RString(syukeiNo0302.get(数値_25).longValue()));
-        reportData.set左記以外_2(new RString(syukeiNo0302.get(数値_26).longValue()));
+        reportData.set転入転出_2(getValue(syukeiNo0302, 数値_11));
+        reportData.set職権復活職権喪失_2(getValue(syukeiNo0302, 数値_12));
+        reportData.set歳到達65死亡_2(getValue(syukeiNo0302, 数値_13));
+        reportData.set適用除外非該当適用除外該当_2(getValue(syukeiNo0302, 数値_14));
+        reportData.setその他_2(getValue(syukeiNo0302, 数値_15));
+        reportData.set計_2(getValue(syukeiNo0302, 数値_16));
+        reportData.set自特例適用自特例解除_2(getValue(syukeiNo0302, 数値_21));
+        reportData.set自特例転入_2(getValue(syukeiNo0302, 数値_22));
+        reportData.set他特例居住他特例適用_2(getValue(syukeiNo0302, 数値_23));
+        reportData.set外国人申請国籍喪失_2(getValue(syukeiNo0302, 数値_24));
+        reportData.set帰化_2(getValue(syukeiNo0302, 数値_25));
+        reportData.set左記以外_2(getValue(syukeiNo0302, 数値_26));
         JigyohokokuGeppoYoshiki1Report report = new JigyohokokuGeppoYoshiki1Report(reportData);
         report.writeBy(reportSourceWriter);
+    }
+
+    private RString getValue(Map<Decimal, Decimal> map, Decimal key) {
+        if (map != null && map.get(key) != null) {
+            return new RString(map.get(key).longValue());
+        }
+        return RString.EMPTY;
     }
 }

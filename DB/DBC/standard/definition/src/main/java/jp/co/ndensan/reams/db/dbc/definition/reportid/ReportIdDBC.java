@@ -410,6 +410,10 @@ public enum ReportIdDBC {
      */
     DBC701016(new ReportId("DBC71016_HanyoListKogakuGassanKeisanKekkaRenrakuHyo"), new RString("汎用リスト出力(高額合算計算結果連絡票情報)")),
     /**
+     * 介護保険受領委任契約承認（不承認）確認書（利用者向け）帳票ＩＤです。
+     */
+    DBC100029(new ReportId("DBC100029_JyuryoItakuKeiyakuKakuninSho"), new RString("介護保険受領委任契約承認（不承認）確認書（利用者向け）")),
+    /**
      * 汎用リスト　基準収入額適用情報帳票ＩＤです。
      */
     DBC701020(new ReportId("DBC701020_HanyoListKijunShunyugakuTekiyo"), new RString("汎用リスト　基準収入額適用情報"));
