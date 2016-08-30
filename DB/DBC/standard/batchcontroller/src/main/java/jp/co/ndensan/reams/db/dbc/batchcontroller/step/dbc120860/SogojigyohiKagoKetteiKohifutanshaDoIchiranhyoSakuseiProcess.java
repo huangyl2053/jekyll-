@@ -237,13 +237,6 @@ public class SogojigyohiKagoKetteiKohifutanshaDoIchiranhyoSakuseiProcess extends
         }
     }
 
-    /**
-     * CSV書き込むデータを作成する。
-     *
-     * @param 出力データ SogoKohifutanshaEntity
-     * @param 作成日時 RDateTime
-     * @return　CSV書き込むデータ
-     */
     private SogojigyohiKagoKetteiKohifutanshaInCsvEntity 書き込むデータ作成(SogoKohifutanshaEntity 出力データ, boolean ヘッダーフラグ) {
         SogojigyohiKagoKetteiKohifutanshaInCsvEntity output = new SogojigyohiKagoKetteiKohifutanshaInCsvEntity();
         if (ヘッダーフラグ) {
@@ -287,12 +280,6 @@ public class SogojigyohiKagoKetteiKohifutanshaDoIchiranhyoSakuseiProcess extends
         return output;
     }
 
-    /**
-     * CSV集計項目を作成する。
-     *
-     * @param 集計項目 SogoKohifutanshaEntity
-     * @return　output SogojigyohiKagoKetteiKohifutanshaInCsvEntity
-     */
     private SogojigyohiKagoKetteiKohifutanshaInCsvEntity 集計項目作成(SogoKohifutanshaEntity 集計項目) {
         SogojigyohiKagoKetteiKohifutanshaInCsvEntity output = new SogojigyohiKagoKetteiKohifutanshaInCsvEntity();
         output.set公費負担者番号(getColumnValue(集計項目.get証記載保険者番号()));
@@ -303,23 +290,12 @@ public class SogojigyohiKagoKetteiKohifutanshaDoIchiranhyoSakuseiProcess extends
         return output;
     }
 
-    /**
-     *
-     * @param entity 被保険者情報
-     * @return
-     */
     private PersonalData getPersonalData(SogoKohifutanshaEntity entity) {
         ExpandedInformation expandedInformations = new ExpandedInformation(new Code(CODE), 被保険者番号,
                 getColumnValue(entity.get登録被保険者番号()));
         return PersonalData.of(new ShikibetsuCode(RString.EMPTY), expandedInformations);
     }
 
-    /**
-     * 数値からstringに転換する。
-     *
-     * @param number 数値
-     * @return カンマで編集した値
-     */
     private static RString doカンマ編集(Decimal number) {
         if (null == number) {
             return RString.EMPTY;

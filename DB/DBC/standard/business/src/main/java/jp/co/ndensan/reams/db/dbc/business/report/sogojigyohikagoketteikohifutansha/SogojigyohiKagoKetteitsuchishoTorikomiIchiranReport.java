@@ -57,12 +57,6 @@ public class SogojigyohiKagoKetteitsuchishoTorikomiIchiranReport extends Report<
 
     }
 
-    /**
-     *
-     * @param writer
-     * ReportSourceWriter<SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource>
-     * @param 帳票出力対象データ SogoKohifutanshaEntity
-     */
     private void writeLine(ReportSourceWriter<SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource> writer,
             SogoKohifutanshaEntity 帳票出力対象データ) {
         ISogojigyohiKagoKetteitsuchishoTorikomiEditor headerEditor
