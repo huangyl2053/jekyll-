@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0220014
 import jp.co.ndensan.reams.db.dbc.business.core.kyodojukyushataishosha.KyodoJukyushaTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220014.DBC0220014TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220014.JukyushaIdoRenrakuhyoJohoShokaiPanelDiv;
-import jp.co.ndensan.reams.db.dbc.service.core.kyodoshoriyojukyushaidorenrakuhyo.KyodoshoriyoJukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
@@ -55,7 +54,7 @@ public class JukyushaIdoRenrakuhyoJohoShokaiPanel {
         boolean 論理削除フラグ = entity.is論理削除フラグ();
         FlexibleDate 異動日 = entity.get異動日();
         HihokenshaNo 被保険者番号 = entity.get被保番号();
-        ShikibetsuCode 識別コード = KyodoshoriyoJukyushaIdoRenrakuhyo.createInstance().get識別コード(被保険者番号);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         if ((被保険者番号 == null || 被保険者番号.isEmpty())) {
             throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace(
                     被保険者番号_なし.toString()));
