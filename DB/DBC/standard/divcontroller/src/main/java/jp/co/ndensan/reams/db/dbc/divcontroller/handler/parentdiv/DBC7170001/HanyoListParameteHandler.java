@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.common.CSVSettings;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
@@ -143,15 +143,15 @@ public class HanyoListParameteHandler {
         parameter.set対象年度(panel.getDdlTaishoNendo().getSelectedKey());
 
         if (panel.getTxtKetteiJohoUketoriNengetsu().getFromValue() != null) {
-            parameter.set決定情報受取年月From(new FlexibleDate(panel.getTxtKetteiJohoUketoriNengetsu().getFromValue().toString()));
+            parameter.set決定情報受取年月From(new FlexibleYearMonth(panel.getTxtKetteiJohoUketoriNengetsu().getFromValue().getYearMonth().toDateString()));
         } else {
-            parameter.set決定情報受取年月From(FlexibleDate.EMPTY);
+            parameter.set決定情報受取年月From(FlexibleYearMonth.EMPTY);
         }
 
         if (panel.getTxtKetteiJohoUketoriNengetsu().getToValue() != null) {
-            parameter.set決定情報受取年月To(new FlexibleDate(panel.getTxtKetteiJohoUketoriNengetsu().getToValue().toString()));
+            parameter.set決定情報受取年月To(new FlexibleYearMonth(panel.getTxtKetteiJohoUketoriNengetsu().getToValue().getYearMonth().toDateString()));
         } else {
-            parameter.set決定情報受取年月To(FlexibleDate.EMPTY);
+            parameter.set決定情報受取年月To(FlexibleYearMonth.EMPTY);
         }
 
         boolean is項目名付加 = false;
