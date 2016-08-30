@@ -222,8 +222,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     }
 
     /**
-     * requireNonNull(entity,
-     * UrSystemErrorMessages.値がnull.getReplacedMessage(処理日付管理マスタエンティティ.toString()));
+     * requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(処理日付管理マスタエンティティ.toString()));
      *
      * DbT7022ShoriDateKanriEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
@@ -2009,6 +2008,64 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
 
         return accessor.selectSpecific(max(nendoNaiRenban)).
                 table(DbT7022ShoriDateKanri.class).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 年次利用者負担割合判定を実施した最新の年度を取得です。
+     *
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    public DbT7022ShoriDateKanriEntity get年次の最新実施年度() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBC介護給付),
+                                eq(shoriName, ShoriName.年次利用者負担割合判定.get名称()),
+                                not(eq(nendo, FlexibleYear.EMPTY)))).
+                order(by(nendo, Order.DESC)).
+                limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 年次利用者負担割合判定の実施日時の取得です。
+     *
+     * @param 年度 FlexibleYear
+     *
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    public DbT7022ShoriDateKanriEntity get年次の実施日時(FlexibleYear 年度) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBC介護給付),
+                                eq(shoriName, ShoriName.年次利用者負担割合判定.get名称()),
+                                eq(nendo, 年度))).
+                order(by(nendoNaiRenban, Order.DESC)).
+                limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 異動分利用者負担割合判定の実施日時の取得です。
+     *
+     * @param 年度 FlexibleYear
+     *
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    public DbT7022ShoriDateKanriEntity get異動の実施日時(FlexibleYear 年度) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBC介護給付),
+                                eq(shoriName, ShoriName.異動分負担割合判定.get名称()),
+                                eq(nendo, 年度))).
+                order(by(nendoNaiRenban, Order.DESC)).
+                limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
 
