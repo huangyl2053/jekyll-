@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSe
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.common.CSVSettings;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -78,15 +78,15 @@ public class HanyoListParameHandler {
         ChushutsuJokenPanelDiv panel = div.getChushutsuJokenPanel();
 
         if (panel.getTxtKokuhorenSofuNengetu().getFromValue() != null) {
-            parameter.set国保連送付年月From(new FlexibleDate(panel.getTxtKokuhorenSofuNengetu().getFromValue().toString()));
+            parameter.set国保連送付年月From(new FlexibleYearMonth(panel.getTxtKokuhorenSofuNengetu().getFromValue().getYearMonth().toDateString()));
         } else {
-            parameter.set国保連送付年月From(FlexibleDate.EMPTY);
+            parameter.set国保連送付年月From(FlexibleYearMonth.EMPTY);
         }
 
         if (panel.getTxtKokuhorenSofuNengetu().getToValue() != null) {
-            parameter.set国保連送付年月To(new FlexibleDate(panel.getTxtKokuhorenSofuNengetu().getToValue().toString()));
+            parameter.set国保連送付年月To(new FlexibleYearMonth(panel.getTxtKokuhorenSofuNengetu().getToValue().getYearMonth().toDateString()));
         } else {
-            parameter.set国保連送付年月To(FlexibleDate.EMPTY);
+            parameter.set国保連送付年月To(FlexibleYearMonth.EMPTY);
         }
 
         if (すべて.equals(panel.getRadKagoMoshitateKyufuKubun().getSelectedKey())) {
@@ -100,15 +100,15 @@ public class HanyoListParameHandler {
         }
 
         if (panel.getTxtSabisuTeikyoNengetu().getFromValue() != null) {
-            parameter.setサービス提供年月From(new FlexibleDate(panel.getTxtSabisuTeikyoNengetu().getFromValue().toString()));
+            parameter.setサービス提供年月From(new FlexibleYearMonth(panel.getTxtSabisuTeikyoNengetu().getFromValue().getYearMonth().toDateString()));
         } else {
-            parameter.setサービス提供年月From(FlexibleDate.EMPTY);
+            parameter.setサービス提供年月From(FlexibleYearMonth.EMPTY);
         }
 
         if (panel.getTxtSabisuTeikyoNengetu().getToValue() != null) {
-            parameter.setサービス提供年月To(new FlexibleDate(panel.getTxtSabisuTeikyoNengetu().getToValue().toString()));
+            parameter.setサービス提供年月To(new FlexibleYearMonth(panel.getTxtSabisuTeikyoNengetu().getToValue().getYearMonth().toDateString()));
         } else {
-            parameter.setサービス提供年月To(FlexibleDate.EMPTY);
+            parameter.setサービス提供年月To(FlexibleYearMonth.EMPTY);
         }
 
         parameter.set事業者コード(panel.getCcdJigyoshaBango().getNyuryokuShisetsuKodo());

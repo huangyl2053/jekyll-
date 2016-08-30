@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710100;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,15 +38,15 @@ public class DBC710100_HanyoListKagoKekkaParameter extends BatchParameterBase {
     private static final String KEY_出力項目 = "出力項目";
 
     @BatchParameter(key = KEY_国保連取扱年月FROM, name = "国保連取扱年月From")
-    private FlexibleDate 国保連取扱年月From;
+    private FlexibleYearMonth 国保連取扱年月From;
     @BatchParameter(key = KEY_国保連取扱年月TO, name = "国保連取扱年月To")
-    private FlexibleDate 国保連取扱年月To;
+    private FlexibleYearMonth 国保連取扱年月To;
     @BatchParameter(key = KEY_保険者区分, name = "保険者区分")
     private RString 保険者区分;
     @BatchParameter(key = KEY_サービス提供年月FROM, name = "サービス提供年月From")
-    private FlexibleDate サービス提供年月From;
+    private FlexibleYearMonth サービス提供年月From;
     @BatchParameter(key = KEY_サービス提供年月TO, name = "サービス提供年月To")
-    private FlexibleDate サービス提供年月To;
+    private FlexibleYearMonth サービス提供年月To;
     @BatchParameter(key = KEY_事業者コード, name = "事業者コード")
     private RString 事業者コード;
     @BatchParameter(key = KEY_事業者名, name = "事業者名")
