@@ -132,7 +132,6 @@ public class IchijiSashitome1GoHandler {
         ArrayList<ShokanHaraiShikyu> shokanHaraiShikyuList = service.find償還払い支給(new HihokenshaNo(div.getKey_HihokenshaNo()));
         ViewStateHolder.put(一号一時差止ダイアロググキー.償還払支給の情報List, shokanHaraiShikyuList);
         initializeDisplayData(押下ボタン, kojoNoSource);
-        div.getButton_Name();
     }
 
     /**
@@ -395,7 +394,7 @@ public class IchijiSashitome1GoHandler {
             div.getTxtSashitomeTorokuYMD().setReadOnly(true);
             div.getTxtSashitomeTorokuTsuchiHakkoYMD().setReadOnly(true);
             div.getTxtSashitomeNofuKigenYMD().setReadOnly(true);
-            div.getTxtSashitomeKaijoYMD().setDisabled(true);
+            div.getTxtSashitomeKaijoYMD().setDisabled(false);
         } else if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_保険料控除登録)) {
             div.getShokanJoho().setTitle(new RString("控除解除"));
             div.getTxtKojoTorokuKubun().setReadOnly(true);
@@ -640,8 +639,9 @@ public class IchijiSashitome1GoHandler {
                     }
                 }
                 if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除状態区分()
-                        .equals(ShiharaiHenkoSashitomeKojoJotaiKubun.登録.getコード().substring(1))
-                        && 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除番号() == null) {
+                        .equals(ShiharaiHenkoSashitomeKojoJotaiKubun.登録.getコード())
+                        && (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除番号() == null
+                        || 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除番号().isEmpty())) {
                     row.getKaijo().setDisabled(false);
                 } else {
                     row.getKaijo().setDisabled(true);
