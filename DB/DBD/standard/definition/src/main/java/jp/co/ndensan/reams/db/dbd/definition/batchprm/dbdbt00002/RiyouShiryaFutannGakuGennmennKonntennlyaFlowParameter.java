@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiH
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.ChohyoShutsuryokuJohoShutokuProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.HchiJinoSyouriCreateProcessParamter;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.common.CSVSettings;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

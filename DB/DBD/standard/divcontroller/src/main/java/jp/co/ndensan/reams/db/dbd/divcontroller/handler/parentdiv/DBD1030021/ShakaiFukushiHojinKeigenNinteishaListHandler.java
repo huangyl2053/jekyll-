@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.Target
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.shafuku.ChushutsuTaisho;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030021.ShakaiFukushiHojinKeigenNinteishaListDiv;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.common.CSVSettings;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
