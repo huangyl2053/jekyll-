@@ -27,6 +27,7 @@ public class JyukyushaDaichoIdoCheckListMybatisParameter extends UaFt200FindShik
     private final RDateTime 行挿入日時終了;
     private final RString 出力対象;
     private final RString 出力順;
+    private final UaFt200FindShikibetsuTaishoParam psmShikibetsuTaisho;
 
     /**
      * コンストラクタです。
@@ -49,6 +50,7 @@ public class JyukyushaDaichoIdoCheckListMybatisParameter extends UaFt200FindShik
         this.行挿入日時終了 = 行挿入日時終了;
         this.出力対象 = 出力対象;
         this.出力順 = 出力順;
+        this.psmShikibetsuTaisho = new UaFt200FindShikibetsuTaishoParam(shikibetsuTaishoPSMSearchKey);
 
     }
 
