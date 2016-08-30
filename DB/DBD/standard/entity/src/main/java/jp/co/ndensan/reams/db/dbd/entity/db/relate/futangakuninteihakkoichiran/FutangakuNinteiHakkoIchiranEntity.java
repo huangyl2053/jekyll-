@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.futangakuninteihakkoichiran;
 
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -30,8 +31,9 @@ public class FutangakuNinteiHakkoIchiranEntity {
     private KetteiKubun 決定;
     private RString 負担段階;
     private boolean 認定証発行済み;
+    private boolean 通知書発行済み;
     private boolean 認定証発行フラグ;
     private boolean 通知書発行フラグ;
-    private RString 入所施設CD;
+    private JigyoshaNo 入所施設CD;
     private FlexibleDate 喪失年月日;
 }
