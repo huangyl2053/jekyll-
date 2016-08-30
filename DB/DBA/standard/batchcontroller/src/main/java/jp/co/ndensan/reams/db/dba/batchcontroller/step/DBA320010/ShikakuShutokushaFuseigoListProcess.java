@@ -62,7 +62,7 @@ public class ShikakuShutokushaFuseigoListProcess extends SimpleBatchProcessBase 
     protected void beforeExecute() {
         super.beforeExecute();
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilename = Path.combinePath(manager.getEucOutputDirectry(), new RString("ShikakushutokushaFuseigoIchiran.csv"));
+        eucFilename = Path.combinePath(manager.getEucOutputDirectry(), new RString("資格取得者不整合一覧表.csv"));
         csvWriter = new CsvWriter.InstanceBuilder(eucFilename)
                 .setEncode(Encode.SJIS)
                 .setDelimiter(EUC_WRITER_DELIMITER)
