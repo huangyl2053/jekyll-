@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -24,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class JikoFutangakuJohoHoseiHandler {
 
     private final JikoFutangakuJohoHoseiDiv div;
+    private static final RString 入力前 = new RString("onClick_btn");
 
     /**
      * コンストラクタです。
@@ -46,6 +48,15 @@ public class JikoFutangakuJohoHoseiHandler {
                 SubGyomuCode.DBC介護給付);
         div.getTxtShiharaiBasho().setValue(支払場所);
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200031.getReportId());
+    }
+
+    /**
+     * エラー時処理。
+     *
+     * @param flag boolean
+     */
+    public void setCommonButtonVisible(boolean flag) {
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(入力前, flag);
     }
 
     /**

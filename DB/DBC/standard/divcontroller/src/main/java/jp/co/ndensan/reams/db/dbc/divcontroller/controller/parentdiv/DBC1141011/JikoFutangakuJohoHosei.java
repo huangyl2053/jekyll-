@@ -70,6 +70,7 @@ public class JikoFutangakuJohoHosei {
             ViewStateHolder.put(ViewStateKeys.最新の処理年月, 最新の処理年月);
             ViewStateHolder.put(ViewStateKeys.最古の処理年月, 最古の処理年月);
         } else {
+            getHandler(div).setCommonButtonVisible(true);
             throw new ApplicationException(DbcErrorMessages.自己負担額確認情報取込前.getMessage());
         }
         getHandler(div).initialize();
