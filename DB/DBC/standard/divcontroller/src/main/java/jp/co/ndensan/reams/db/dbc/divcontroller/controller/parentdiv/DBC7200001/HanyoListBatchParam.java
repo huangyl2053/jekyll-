@@ -30,12 +30,7 @@ public class HanyoListBatchParam {
      */
     public ResponseData<HanyoListBatchParamDiv> onLoad(HanyoListBatchParamDiv div) {
         List<KaigoDonyuKeitai> list = KaigoDonyuKeitaiManager.createInstance().get介護導入形態By業務分類(GyomuBunrui.介護事務);
-        if (list.get(0).get導入形態コード().is単一()) {
-            div.getChushutsuJokenPanel().getCcdHokenshaList().setDisplayNone(true);
-        } else if (list.get(0).get導入形態コード().is広域()) {
-            div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
-        }
-        getHandler(div).onLoad();
+        getHandler(div).onLoad(list);
         return ResponseData.of(div).respond();
     }
 
