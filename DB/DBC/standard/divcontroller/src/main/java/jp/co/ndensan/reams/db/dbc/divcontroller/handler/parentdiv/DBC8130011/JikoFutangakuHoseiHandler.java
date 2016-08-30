@@ -11,7 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanJikoFutanGaku;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanJikoFutanGakuMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.JigyoKogakuGassanJikofutangakuHosei;
-import jp.co.ndensan.reams.db.dbc.definition.core.jigyougassan.ShoumeishoyouDataKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.jigyougassan.JigyouGassan_ShoumeishoyouDataKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Idokubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
@@ -129,7 +129,7 @@ public class JikoFutangakuHoseiHandler {
         KogakuGassanJikoFutanGaku 高額合算自己負担額 = manager.getMax履歴番号(
                 被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号);
         return 履歴番号 - 高額合算自己負担額.get履歴番号() == 0
-                && ShoumeishoyouDataKubun.証明書用.get名称().equals(row.getTxtDataKBN());
+                && JigyouGassan_ShoumeishoyouDataKubun.証明書用.get名称().equals(row.getTxtDataKBN());
     }
 
     /**
@@ -218,7 +218,7 @@ public class JikoFutangakuHoseiHandler {
                     : DateConverter.toWarekiHalf_Zero(
                             new RDate(result.get自己負担額計算年月日().toString())));
             row.setTxtDataKBN(result.getデータ作成区分() == null ? RString.EMPTY
-                    : ShoumeishoyouDataKubun.toValue(result.getデータ作成区分()).get名称());
+                    : JigyouGassan_ShoumeishoyouDataKubun.toValue(result.getデータ作成区分()).get名称());
             row.setTxtHoseiYMDTan(result.getリアル補正実施年月日() == null ? RString.EMPTY
                     : DateConverter.toWarekiHalf_Zero(
                             new RDate(result.getリアル補正実施年月日().toString())));
