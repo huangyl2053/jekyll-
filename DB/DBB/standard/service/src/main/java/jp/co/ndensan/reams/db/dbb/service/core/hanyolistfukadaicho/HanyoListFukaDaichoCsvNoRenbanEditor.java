@@ -130,7 +130,7 @@ public class HanyoListFukaDaichoCsvNoRenbanEditor {
         edit資格(csvEntity, entity);
         edit資格Two(csvEntity, entity, 保険料段階リスト, 構成市町村マスタlist);
         edit介護賦課(csvEntity, バッチ処理日);
-        csvEntity.set翌４月特依頼額(numToRString(entity.get翌４月特徴額()));
+        csvEntity.set翌４月特依頼額(get翌４月特徴額(entity));
         editその他(csvEntity, バッチ処理日);
         return csvEntity;
     }
@@ -744,7 +744,7 @@ public class HanyoListFukaDaichoCsvNoRenbanEditor {
         if (RSTONE.equals(被保険者台帳管理.getKoikinaiJushochiTokureiFlag())) {
             set保険者番号By広住特措置元市町村コード(csvEntity, 構成市町村マスタlist);
         } else {
-            set保険者番号By市町村コード(csvEntity, entity, 構成市町村マスタlist);
+            set保険者番号By市町村コード(csvEntity, 構成市町村マスタlist);
         }
         csvEntity.set通知書番号(介護賦課.getTsuchishoNo().value());
         csvEntity.set徴収方法(get徴収方法2());
@@ -807,7 +807,7 @@ public class HanyoListFukaDaichoCsvNoRenbanEditor {
         }
     }
 
-    private void set保険者番号By市町村コード(HanyoListFukaDaichoNoRenbanCsvEntity csvEntity, HanyoListFukaDaichoEntity entity,
+    private void set保険者番号By市町村コード(HanyoListFukaDaichoNoRenbanCsvEntity csvEntity,
             List<KoseiShichosonMaster> 構成市町村マスタlist) {
         if (構成市町村マスタlist.size() > 0 && 被保険者台帳管理.getShichosonCode() != null) {
             for (int i = 0; i < 構成市町村マスタlist.size(); i++) {
@@ -816,6 +816,16 @@ public class HanyoListFukaDaichoCsvNoRenbanEditor {
                 }
             }
         }
+    }
+
+    private RString get翌４月特徴額(HanyoListFukaDaichoEntity entity) {
+        Decimal 翌４月特徴額 = Decimal.ZERO;
+        for (UrT0705ChoteiKyotsuEntity 調定共通 : entity.get調定共通リスト()) {
+            if (調定共通.getChoteigaku().compareTo(翌４月特徴額) > 0) {
+                翌４月特徴額 = 調定共通.getChoteigaku();
+            }
+        }
+        return numToRString(翌４月特徴額);
     }
 
     private RString numToRString(Decimal decimal) {

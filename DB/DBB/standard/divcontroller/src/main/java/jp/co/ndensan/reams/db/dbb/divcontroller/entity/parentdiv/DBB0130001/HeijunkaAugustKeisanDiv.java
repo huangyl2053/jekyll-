@@ -4,16 +4,18 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * HeijunkaAugustKeisan のクラスファイル 
- * 
- * @author 自動生成
+ * HeijunkaAugustKeisan のクラスファイル
+ *
+ * @reamsid_L DBB-0860-010 lihang
  */
 public class HeijunkaAugustKeisanDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,8 +26,6 @@ public class HeijunkaAugustKeisanDiv extends Panel {
     private Heijunka8ShoriNaiyoDiv Heijunka8ShoriNaiyo;
     @JsonProperty("Heijunka8ShoriKakunin")
     private Heijunka8ShoriKakuninDiv Heijunka8ShoriKakunin;
-    @JsonProperty("Heijunka8KeisanHoho")
-    private Heijunka8KeisanHohoPanelDiv Heijunka8KeisanHohoPanel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -69,14 +69,5 @@ public class HeijunkaAugustKeisanDiv extends Panel {
         this.Heijunka8ShoriKakunin = Heijunka8ShoriKakunin;
     }
 
-    @JsonProperty("Heijunka8KeisanHoho")
-    public Heijunka8KeisanHohoPanelDiv getHeijunka8KeisanHohoPanel() {
-        return Heijunka8KeisanHohoPanel;
-    }
-
-    @JsonProperty("Heijunka8KeisanHoho")
-    public void setHeijunka8KeisanHohoPanel(Heijunka8KeisanHohoPanelDiv Heijunka8KeisanHohoPanel) {
-        this.Heijunka8KeisanHohoPanel = Heijunka8KeisanHohoPanel;
-    }
     // </editor-fold>
 }

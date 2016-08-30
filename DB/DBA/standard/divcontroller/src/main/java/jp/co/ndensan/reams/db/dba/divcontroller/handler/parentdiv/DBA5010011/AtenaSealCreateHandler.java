@@ -133,7 +133,6 @@ public class AtenaSealCreateHandler {
         if (listKey.contains(SHIKAKUSHUTOKU) && listKey.contains(NENREITOTATSU)) {
             div.getCyushutsuJoken().getDdlShikakuKubun().setSelectedKey(SUBETE);
         }
-
     }
 
     private void set抽出対象者() {
@@ -269,7 +268,7 @@ public class AtenaSealCreateHandler {
                 code,
                 div.getCyushutsuJoken().getDdlZensisyouson().getSelectedKey(),
                 div.getHensyuHoho().getDdlSaiyusenJusho().getSelectedKey(),
-                div.getHensyuHoho().getDdlKeisho().getSelectedKey(),
+                div.getHensyuHoho().getDdlKeisho().getSelectedValue(),
                 div.getHensyuHoho().getRadIsPrintHihokenshaNo().getSelectedKey(),
                 div.getHensyuHoho().getCcdJushoSettei().is方書表示(),
                 div.getHensyuHoho().getCcdJushoSettei().is市町村名表示(),

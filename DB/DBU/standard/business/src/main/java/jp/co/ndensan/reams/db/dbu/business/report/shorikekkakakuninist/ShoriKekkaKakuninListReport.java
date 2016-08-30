@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.report.shorikekkakakuninist;
 
-import java.util.List;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.shorikekkakakuninlist.ShoriKekkaKakuninListEntity;
 import jp.co.ndensan.reams.db.dbu.entity.report.shorikekkakakuninlist.ShoriKekkaKakuninListReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,31 +17,22 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShoriKekkaKakuninListReport extends Report<ShoriKekkaKakuninListReportSource> {
 
-    private final List<ShoriKekkaKakuninListBodyItem> bodyItemList;
-    private final ShoriKekkaKakuninListHeadItem headItem;
+    private final ShoriKekkaKakuninListEntity entity;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headItem 処理確認リストヘッダのITEM
-     * @param itemList 処理確認リストのITEMリスト
+     * @param entity ShoriKekkaKakuninListEntity
      */
-    public ShoriKekkaKakuninListReport(
-            ShoriKekkaKakuninListHeadItem headItem,
-            List<ShoriKekkaKakuninListBodyItem> itemList) {
-        this.headItem = headItem;
-        this.bodyItemList = itemList;
+    public ShoriKekkaKakuninListReport(ShoriKekkaKakuninListEntity entity) {
+        this.entity = entity;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<ShoriKekkaKakuninListReportSource> writer) {
-
-        IShoriKekkaKakuninListEditor headerEditor = new ShoriKekkaKakuninListHeaderEditor(headItem);
-        for (ShoriKekkaKakuninListBodyItem item : bodyItemList) {
-            IShoriKekkaKakuninListEditor bodyEditor = new ShoriKekkaKakuninListBodyEditor(item);
-            IShoriKekkaKakuninListBuidler builder = new ShoriKekkaKakuninListBuilder(headerEditor, bodyEditor);
-            writer.writeLine(builder);
-        }
+        IShoriKekkaKakuninListEditor headerEditor = new ShoriKekkaKakuninListEditor(entity);
+        IShoriKekkaKakuninListBuidler builder = new ShoriKekkaKakuninListBuilder(headerEditor);
+        writer.writeLine(builder);
     }
 
 }

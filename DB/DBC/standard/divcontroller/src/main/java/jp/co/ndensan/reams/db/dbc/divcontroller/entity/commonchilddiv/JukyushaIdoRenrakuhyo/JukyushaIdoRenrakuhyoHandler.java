@@ -174,10 +174,14 @@ public class JukyushaIdoRenrakuhyoHandler {
         }
         if (!(照会モード.equals(処理モード) && INT_1 == 履歴番号)
                 && 受給者異動情報.get訂正年月日() != null) {
-            div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().setValue(new RDate(受給者異動情報.get訂正年月日().toString()));
+            if (!訂正モード.equals(処理モード)) {
+                div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().setValue(new RDate(受給者異動情報.get訂正年月日().toString()));
+            }
         }
         if (!照会モード.equals(処理モード) || INT_1 != 履歴番号) {
-            div.getJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().setSelectedKey(受給者異動情報.get訂正区分コード());
+            if (!訂正モード.equals(処理モード)) {
+                div.getJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().setSelectedKey(受給者異動情報.get訂正区分コード());
+            }
         }
         set要介護認定エリア(受給者異動情報);
         set支給限度基準額エリア(受給者異動情報);
@@ -189,7 +193,12 @@ public class JukyushaIdoRenrakuhyoHandler {
         set二割負担エリア(受給者異動情報);
         set二次予防事業エリア(受給者異動情報);
         set老人保健エリア(受給者異動情報);
-        onClick_計画作成区分();
+        if (新規モード.equals(処理モード) || 訂正モード.equals(処理モード)) {
+            onClick_計画作成区分();
+        }
+        if (新規モード.equals(処理モード)) {
+            onClick_事業区分();
+        }
         return 受給者異動情報;
     }
 
@@ -563,7 +572,6 @@ public class JukyushaIdoRenrakuhyoHandler {
             div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().setToValue(
                     new RDate(受給者異動情報.get二次予防事業有効期間終了年月日().toString()));
         }
-        onClick_事業区分();
 
     }
 

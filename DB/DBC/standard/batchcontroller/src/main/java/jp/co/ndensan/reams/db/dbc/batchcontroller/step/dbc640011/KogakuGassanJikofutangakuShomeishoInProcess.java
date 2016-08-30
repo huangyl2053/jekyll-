@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.KagoKetteiHoke
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoInCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.DbWT37H1KogakuGassanaJikofutangakuTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoFlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0001HihokenshaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -45,7 +47,6 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
     private static final RString 高額合算自己負担額一時_TABLE_NAME = new RString("DbWT37H1KogakuGassanaJikofutangaku");
     private static final RString 高額合算自己負担額明細一時_TABLE_NAME = new RString("DbWT37H2KogakuGassanaJikofutangakuMeisai");
     private static final RString 被保険者一時_TABLE_NAME = new RString("DbWT0001Hihokensha");
-    public static final RString PARAMETER_OUT_FLOWENTITY;
     private static final RString 交換情報識別番号_37H1 = new RString("37H1");
     private static final RString 交換情報識別番号_37J1 = new RString("37J1");
     private static final RString 対象年度420 = new RString("420");
@@ -71,6 +72,11 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
     private static final RString レコード種別 = new RString("1");
     private static final RString KEY_分離文字 = new RString("\\");
     private final RString 区切り文字 = new RString(",");
+    private int renban;
+    /**
+     * returnEnyity
+     */
+    public static final RString PARAMETER_OUT_FLOWENTITY;
 
     private RString csvReaderPath;
 
@@ -80,12 +86,13 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
     private DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity dbWT37H2TempEntity;
     private DbWT0001HihokenshaEntity dbWT0001TempEntity;
     private KogakuGassanJikofutangakuShomeishoInCsvEntity csvEntity;
+    private KagoKetteiHokenshaInControlCsvEntity controlCsvEntity;
+    private KogakuGassanJikofutangakuShomeishoFlowEntity returnEntity;
+    private OutputParameter<KogakuGassanJikofutangakuShomeishoFlowEntity> flowEntity;
 
     static {
-        PARAMETER_OUT_FLOWENTITY = new RString("outFlowEntity");
+        PARAMETER_OUT_FLOWENTITY = new RString("flowEntity");
     }
-
-    private int renban;
 
     @BatchWriter
     BatchEntityCreatedTempTableWriter 高額合算自己負担額一時tableWriter;
@@ -96,7 +103,6 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
 
     @Override
     protected void initialize() {
-        renban = INDEX_1;
         csvReaderPath = parameter.getPath().concat(KEY_分離文字).concat(parameter.getFileName());
         dbWT37H1TempEntity = new DbWT37H1KogakuGassanaJikofutangakuTempEntity();
         dbWT37H2TempEntity = new DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity();
@@ -124,7 +130,7 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
         List<RString> data = line.split(区切り文字.toString());
         if (data != null && !data.isEmpty()) {
             if (レコード種別.equals(data.get(INDEX_0))) {
-                ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);
+                controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);
             } else if (交換情報識別番号_37H1.equals(data.get(INDEX_2))) {
                 csvEntity = ListToObjectMappingHelper.toObject(KogakuGassanJikofutangakuShomeishoInCsvEntity.class, data);
                 renban = renban + 1;
@@ -139,6 +145,21 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
                 set被保険者一時TBL(dbWT0001TempEntity, renban, csvEntity);
             }
         }
+    }
+
+    @Override
+    protected void afterExecute() {
+        int レコード件数合算 = INDEX_0;
+        if (controlCsvEntity != null && controlCsvEntity.getCodeNum() != null) {
+            レコード件数合算 = Integer.parseInt(controlCsvEntity.getCodeNum().toString());
+        }
+        if (controlCsvEntity != null && controlCsvEntity.getShoriYM() != null) {
+            FlexibleYearMonth 処理対象年月 = new FlexibleYearMonth(controlCsvEntity.getShoriYM());
+            returnEntity.setShoriYM(処理対象年月);
+        }
+        returnEntity.setCodeNum(レコード件数合算);
+        returnEntity.set高額合算自己負担額一時TBL登録件数(renban);
+        flowEntity.setValue(returnEntity);
     }
 
     private void set高額合算自己負担額一時TBL(DbWT37H1KogakuGassanaJikofutangakuTempEntity dbWT37H1TempEntity,

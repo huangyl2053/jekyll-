@@ -8,6 +8,10 @@ module DBC {
 
         export class Events {
 
+            public static onClick_btnClose(): string {
+                return "onClick_btnClose";
+            }
+
             public static onClick_btnKakutei(): string {
                 return "onClick_btnKakutei";
             }

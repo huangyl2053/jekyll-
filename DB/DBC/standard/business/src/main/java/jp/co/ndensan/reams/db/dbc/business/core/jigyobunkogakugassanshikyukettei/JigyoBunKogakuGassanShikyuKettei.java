@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunkogakugassanshikyukettei.JigyoBunKogakuGassanShikyuKetteiMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.jigyobunkogakugassanshikyukettei.JigyoBunKogakuGassanShikyuKetteiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunkogakugassanshikyukettei.JigyoBunKogakuGassanShikyuKetteiRelateEntity;
@@ -534,11 +532,20 @@ public class JigyoBunKogakuGassanShikyuKettei {
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("支給区分："));
-        jokenBuilder.append(ShikyuKubun.toValue(processParameter.get支給区分()).get名称());
+        //TODO enumクラス「ShikyuKubun、ShiharaiHohoKubun」で、「すべて」がない
+//        if (1 < processParameter.get支給区分List().size()) {
+//            jokenBuilder.append(ShikyuKubun.すべて.get名称());
+//        } else {
+//            jokenBuilder.append(ShikyuKubun.toValue(processParameter.get支給区分List().get(0)).get名称());
+//        }
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("支払方法区分："));
-        jokenBuilder.append(ShiharaiHohoKubun.toValue(processParameter.get支払方法区分()).get名称());
+//        if (1 < processParameter.get支払方法区分List().size()) {
+//            jokenBuilder.append(ShiharaiHohoKubun.すべて.get名称());
+//        } else {
+//            jokenBuilder.append(ShiharaiHohoKubun.toValue(processParameter.get支払方法区分List().get(0)).get名称());
+//        }
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("金融機関："));
@@ -581,12 +588,11 @@ public class JigyoBunKogakuGassanShikyuKettei {
         KozaSearchKeyBuilder keyBuilder = new KozaSearchKeyBuilder();
         keyBuilder.set業務コード(GyomuCode.DB介護保険);
         keyBuilder.setサブ業務コード(SubGyomuCode.DBC介護給付);
-        KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
-        IKozaSearchKey iKozaSearchKey = builder.build();
+        IKozaSearchKey iKozaSearchKey = keyBuilder.build();
         return JigyoBunKogakuGassanShikyuKetteiMybatisParameter.createMybatisParameter(processParameter.get保険者コード(),
                 processParameter.get対象年度(),
-                processParameter.get支給区分(),
-                processParameter.get支払方法区分(),
+                processParameter.get支給区分List(),
+                processParameter.get支払方法区分List(),
                 processParameter.get金融機関コード(),
                 new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
                 new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString()),

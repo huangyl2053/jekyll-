@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufuji
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutGetOldHihokenshaNoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutSetHihokenshaNoProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetHihokenshaNoProcessParameter;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorenkyoutsu.KokuhorenKyoutsuBatchParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
@@ -32,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2460-012 jiangwenkai
  */
-public class HokenshaKyufujissekiOutChangeHihokenshaNoFlow extends BatchFlowBase<KokuhorenKyoutsuBatchParameter> {
+public class HokenshaKyufujissekiOutChangeHihokenshaNoFlow extends BatchFlowBase {
 
     private static final String 被保険者番号変換対象データの取得 = "getHihokenshaNoDataInformation";
     private static final String 広域加入日以前のデータを取得 = "getHihokenshaNoBeforeKanyuYMDData";

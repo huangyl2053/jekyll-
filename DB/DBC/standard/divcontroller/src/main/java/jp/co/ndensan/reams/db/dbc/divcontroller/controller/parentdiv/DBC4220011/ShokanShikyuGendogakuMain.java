@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC4220011
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShuruiShikyuGendoGaku;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShuruiShikyuGendoGakuHolder;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.UwanoseShokanShuruiShikyuGendoGaku;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.UwanoseShokanShuruiShikyuGendoGakuHolder;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyugendogaku.ShikyuGendogakuTableKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4220011.DBC4220011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4220011.ShokanShikyuGendogakuMainDiv;
@@ -15,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4220011.Sho
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4220011.ShokanShikyuGendogakuMainValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.ShokanShuruiShikyuGendoGakuManager;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.UwanoseShokanShuruiShikyuGendoGakuManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -24,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還支給限度額登録のクラスです。
@@ -55,6 +59,12 @@ public class ShokanShikyuGendogakuMain {
                 = new UwanoseShokanShuruiShikyuGendoGakuManager();
         List<UwanoseShokanShuruiShikyuGendoGaku> 上乗せ償還list
                 = 上乗せ償還manager.get上乗せ償還払い給付種類支給限度額データ();
+
+        ViewStateHolder.put(ViewStateKeys.償還払い給付種類支給限度額,
+                new ShokanShuruiShikyuGendoGakuHolder(償還list));
+        ViewStateHolder.put(ViewStateKeys.上乗せ償還払い給付種類支給限度額,
+                new UwanoseShokanShuruiShikyuGendoGakuHolder(上乗せ償還list));
+
         ShokanShikyuGendogakuMainHandler handler = getHandler(div);
         handler.initializeDisplay(償還list, 上乗せ償還list);
 
@@ -135,6 +145,15 @@ public class ShokanShikyuGendogakuMain {
             return ResponseData.of(div).respond();
         }
         ShokanShikyuGendogakuMainHandler handler = getHandler(div);
+
+        ShokanShuruiShikyuGendoGakuHolder 償還 = ViewStateHolder.get(
+                ViewStateKeys.償還払い給付種類支給限度額, ShokanShuruiShikyuGendoGakuHolder.class);
+        UwanoseShokanShuruiShikyuGendoGakuHolder 上乗せ償還 = ViewStateHolder.get(
+                ViewStateKeys.上乗せ償還払い給付種類支給限度額, UwanoseShokanShuruiShikyuGendoGakuHolder.class);
+
+        List<ShokanShuruiShikyuGendoGaku> 償還list = 償還.getShokanShuruiShikyuGendoGakuList();
+        List<UwanoseShokanShuruiShikyuGendoGaku> 上乗せ償還list = 上乗せ償還.getuwanoseShokanShuruiShikyuGendoGakuList();
+
         if (!(div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().isFromDisabled()
                 || div.getBtnCancel().isDisabled())) {
             ShokanShikyuGendogakuMainValidationHandler validationhandler = getValidatioHandler(div);
@@ -142,15 +161,15 @@ public class ShokanShikyuGendogakuMain {
             if (保存Pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(保存Pairs).respond();
             }
-            handler.insertAndUpdate();
+            handler.insertAndUpdate(償還list, 上乗せ償還list);
         }
         if (div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().isFromDisabled()
                 && !div.getBtnCancel().isDisabled()) {
-            handler.update();
+            handler.update(償還list, 上乗せ償還list);
         }
         if (div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().isFromDisabled()
                 && div.getBtnCancel().isDisabled()) {
-            handler.deleteAndUpdate();
+            handler.deleteAndUpdate(償還list, 上乗せ償還list);
         }
         div.getCcdKanryoMessage().setMessage(完了メッセージメイン, 省略_空, 省略_空, true);
         LockingKey key = new LockingKey(排他キー);

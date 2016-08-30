@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * バッチ設計_DBBBT22002_汎用リスト 賦課台帳Entityのクラスです。
@@ -37,6 +36,5 @@ public class HanyoListFukaDaichoEntity {
     private UaFt250FindAtesakiEntity 宛先;
 
     private boolean 本算定後;
-    private Decimal 翌４月特徴額;
     private RString 特別徴収義務者コード;
 }

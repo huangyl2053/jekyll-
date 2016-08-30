@@ -16,6 +16,14 @@ var DBZ;
                 return "onClick_BtnChosaItakusakiGuide";
             };
 
+            Events.onOKClose_btnChosainRenrakuJiko = function () {
+                return "onOKClose_btnChosainRenrakuJiko";
+            };
+
+            Events.onBefore_btnChosainRenrakuJiko = function () {
+                return "onBefore_btnChosainRenrakuJiko";
+            };
+
             Events.onClick_BtnZenkaiFukusha = function () {
                 return "onClick_BtnZenkaiFukusha";
             };

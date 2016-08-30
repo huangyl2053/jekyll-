@@ -283,4 +283,30 @@ public class DbT7130KaigoServiceShuruiDac {
                 toList(DbT7130KaigoServiceShuruiEntity.class);
     }
 
+    /**
+     * サービス種類支給限度額を全件返します。
+     *
+     * @param サービス種類コード ServiceShuruiCode
+     * @param 適用期間From FlexibleYearMonth
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     * @return List<DbT7130KaigoServiceShuruiEntity>
+     */
+    @Transaction
+    public List<DbT7130KaigoServiceShuruiEntity> select介護サービス種類データ(
+            ServiceShuruiCode サービス種類コード,
+            FlexibleYearMonth 適用期間From) throws NullPointerException {
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
+        requireNonNull(適用期間From, UrSystemErrorMessages.値がnull.getReplacedMessage("提供開始年月"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7130KaigoServiceShurui.class).
+                where(and(
+                                eq(serviceShuruiCd, サービス種類コード),
+                                leq(serviceShuruiCd, 適用期間From)
+                        )).
+                order(by(DbT7130KaigoServiceShurui.serviceShuruiCd, Order.DESC)).
+                toList(DbT7130KaigoServiceShuruiEntity.class);
+    }
 }
