@@ -102,13 +102,12 @@ public class JigyoBunKogakuGassanShikyuKetteiProcess extends BatchProcessBase<Ji
         if (processParameter.is連番付加()) {
             eucCsvWriter.writeLine(business.set連番ありEUCEntity(entity, iKoza, 市町村名MasterMap, 市町村名, 連番++));
         } else {
-            eucCsvWriter.writeLine(business.set連番なしEUCEntity(entity, iKoza, 市町村名MasterMap, 市町村名, 連番++));
+            eucCsvWriter.writeLine(business.set連番なしEUCEntity(entity, iKoza, 市町村名MasterMap, 市町村名));
         }
     }
 
     @Override
     protected void afterExecute() {
-        eucCsvWriter.close();
         manager.spool(eucFilePath);
         outputJokenhyoFactory();
     }
