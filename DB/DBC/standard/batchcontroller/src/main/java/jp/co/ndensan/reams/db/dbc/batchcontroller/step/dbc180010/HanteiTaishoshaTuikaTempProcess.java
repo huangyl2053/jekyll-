@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.nenjiriyoshafutanwariaihantei.NenjiRiyoshaFutanwariaiHanteiProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.JukyushaDaichoTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.SogoJigyoTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -21,15 +21,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-4980-030 yuanzhenxia
  */
-public class HanteiTaishoshaTempProcess extends BatchProcessBase<JukyushaDaichoTempEntity> {
+public class HanteiTaishoshaTuikaTempProcess extends BatchProcessBase<SogoJigyoTaishoshaTempEntity> {
 
     private static final RString DB_READER_MAPPER_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.nenjiriyoshafutanwariaihantei"
-                    + ".INenjiRiyoshaFutanwariaiHanteiMapper.getHanteiTaishoshaTemp_JukyuSha");
+                    + ".INenjiRiyoshaFutanwariaiHanteiMapper.getHanteiTaishoshaTemp_SogoJigyo");
     private static final RString 判定対象者TEMP = new RString("HanteiTaishoshaTemp");
     private NenjiRiyoshaFutanwariaiHanteiProcessParameter processParameter;
-    private final RString 対象区分1 = new RString("1");
 
+    private final RString 対象区分2 = new RString("2");
     @BatchWriter
     private IBatchTableWriter tempDbWriter;
 
@@ -44,26 +44,22 @@ public class HanteiTaishoshaTempProcess extends BatchProcessBase<JukyushaDaichoT
     }
 
     @Override
-    protected void process(JukyushaDaichoTempEntity entity) {
+    protected void process(SogoJigyoTaishoshaTempEntity entity) {
         HanteiTaishoshaTempEntity hanteiTaishoshaTempEntity = new HanteiTaishoshaTempEntity();
         hanteiTaishoshaTempEntity.setTaishoNendo(processParameter.get対象年度());
-        hanteiTaishoshaTempEntity.setTaishoKubun(対象区分1);
+        hanteiTaishoshaTempEntity.setTaishoKubun(対象区分2);
         hanteiTaishoshaTempEntity.setHihokenshaNo(entity.getDbT1001HihokenshaDaicho_hihokenshaNo());
-        hanteiTaishoshaTempEntity.setShikibetsuCode(entity.getDbT4001JukyushaDaicho_shikibetsuCode());
+        hanteiTaishoshaTempEntity.setShikibetsuCode(entity.getUaFt200FindShikibetsuTaisho_shikibetsuCode());
         hanteiTaishoshaTempEntity.setSetaiCode(entity.getSetaiCode());
         hanteiTaishoshaTempEntity.setIdobi(entity.getIdoYMD());
         hanteiTaishoshaTempEntity.setIdoJiyuCode(entity.getIdoJiyuCode());
         hanteiTaishoshaTempEntity.setShikakuShiyutokiDate(entity.getShikakuShutokuYMD());
         hanteiTaishoshaTempEntity.setFirstShikakuShiyutokiDate(entity.getIchigoShikakuShutokuYMD());
         hanteiTaishoshaTempEntity.setHihokenshaKubunCode(entity.getHihokennshaKubunCode());
-        hanteiTaishoshaTempEntity.setSetaiCode(entity.getSetaiCode());
-        hanteiTaishoshaTempEntity.setRirekiNo(entity.getRirekiNoRString());
-        hanteiTaishoshaTempEntity.setEdaNo(entity.getEdaban());
-        hanteiTaishoshaTempEntity.setJukyuShinseiJiyu(entity.getJukyuShinseiJiyu().value());
-        hanteiTaishoshaTempEntity.setNinteiYukoKaishiDate(entity.getNinteiYukoKikanKaishiYMD());
-        hanteiTaishoshaTempEntity.setNinteiYukoShuryoDate(entity.getNinteiYukoKikanShuryoYMD());
-        hanteiTaishoshaTempEntity.setNinteiDate(entity.getNinteiYMD());
-        hanteiTaishoshaTempEntity.setYoKaigoninteiJoutaiKubunCode(entity.getYokaigoJotaiKubunCode().value());
+        hanteiTaishoshaTempEntity.setRirekiNo(new RString(entity.getDbT3105SogoJigyoTaishosha_rirekiNo()));
+        hanteiTaishoshaTempEntity.setNinteiYukoKaishiDate(entity.getTekiyoKaishiYMD());
+        hanteiTaishoshaTempEntity.setNinteiYukoShuryoDate(entity.getTekiyoShuryoYMD());
+        hanteiTaishoshaTempEntity.setNinteiDate(entity.getChecklistJisshiYMD());
         hanteiTaishoshaTempEntity.setShotokuNendo(entity.getShotokuNendo());
         hanteiTaishoshaTempEntity.setShotokuRirekiNo(new RString(entity.getRirekiNoInt()));
         hanteiTaishoshaTempEntity.setKazeiKubun(entity.getKazeiKubun());
@@ -75,5 +71,4 @@ public class HanteiTaishoshaTempProcess extends BatchProcessBase<JukyushaDaichoT
         hanteiTaishoshaTempEntity.setGekihenKanwaKubun(entity.getGekihenKanwaKubun());
         tempDbWriter.insert(hanteiTaishoshaTempEntity);
     }
-
 }

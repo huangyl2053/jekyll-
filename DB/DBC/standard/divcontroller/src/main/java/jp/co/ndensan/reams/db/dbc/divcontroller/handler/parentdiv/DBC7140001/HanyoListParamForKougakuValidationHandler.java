@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7140001;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7140001.HanyoListParamDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7140001.HanyoListParamForKougakuDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -19,9 +19,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * @reamsid_L DBC-3103-010 dingminghao
  */
-public class HanyoListParamValidationHandler {
+public class HanyoListParamForKougakuValidationHandler {
 
-    private final HanyoListParamDiv div;
+    private final HanyoListParamForKougakuDiv div;
     private static final RString 交付申請書整理番号 = new RString("交付申請書整理番号");
 
     /**
@@ -29,7 +29,7 @@ public class HanyoListParamValidationHandler {
      *
      * @param div 汎用リスト出力(高額合算申請書情報)画面のdiv
      */
-    public HanyoListParamValidationHandler(HanyoListParamDiv div) {
+    public HanyoListParamForKougakuValidationHandler(HanyoListParamForKougakuDiv div) {
         this.div = div;
     }
 

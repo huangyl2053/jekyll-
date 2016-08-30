@@ -17,7 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JukyushaTeiseiRenrakuhyoTorokuManagerResult {
 
-    private RString メッセージコード;
+    private RString エラーメッセージコード;
+    private RString 警告メッセージコード;
     private int 登録件数;
 
 }

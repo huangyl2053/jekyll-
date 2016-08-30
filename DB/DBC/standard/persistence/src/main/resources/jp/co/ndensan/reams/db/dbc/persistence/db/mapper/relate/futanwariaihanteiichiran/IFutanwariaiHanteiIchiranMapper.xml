@@ -162,17 +162,17 @@
           AND 生活保護受給者."shikibetsuCode" = 判定対象者Temp."shikibetsuCode"
            <if test="処理区分 != 3 ">
                  AND (( 生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> #{基準日}
-                      AND 生活保護受給者."jukyuHaishiYMD" <![CDATA[>=]]> #{基準日} )
+                      AND #{基準日} <![CDATA[<=]]> 生活保護受給者."jukyuHaishiYMD" )
                  OR (生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> #{基準日}
                       AND 生活保護受給者."jukyuHaishiYMD" ='' ))
            </if>
            <if test="処理区分 == 3 ">
-                 AND (( 生活保護受給者."jukyuKaishiYMD" <![CDATA[>=]]>  #{現年度開始日} 
+                 AND (( #{現年度開始日} <![CDATA[<=]]> 生活保護受給者."jukyuKaishiYMD"   
                       AND 生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> #{現年度終了日} )
-                 OR (生活保護受給者."jukyuHaishiYMD" <![CDATA[>=]]> #{現年度開始日}
+                 OR (#{現年度開始日} <![CDATA[<=]]> 生活保護受給者."jukyuHaishiYMD"
                       AND 生活保護受給者."jukyuHaishiYMD" <![CDATA[<=]]> #{現年度終了日} )
                       OR( 生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> #{現年度開始日}
-                         AND 生活保護受給者."jukyuHaishiYMD" <![CDATA[>=]]> #{現年度終了日})
+                         AND #{現年度終了日} <![CDATA[<=]]> 生活保護受給者."jukyuHaishiYMD" )
                       OR(生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> #{現年度開始日}
                          AND 生活保護受給者."jukyuHaishiYMD" = ''))
            </if>
@@ -182,15 +182,15 @@
            AND 利用者負担額減額."ketteiKubun" = '1'
            <if test="処理区分 != 3 ">
                  AND  利用者負担額減額."tekiyoKaishiYMD" <![CDATA[<=]]> #{基準日}
-                 AND 利用者負担額減額."tekiyoShuryoYMD" <![CDATA[>=]]> #{基準日} 
+                 AND #{基準日} <![CDATA[<=]]> 利用者負担額減額."tekiyoShuryoYMD"
            </if>
            <if test="処理区分 == 3 ">
-                 AND (( 利用者負担額減額."tekiyoKaishiYMD" <![CDATA[>=]]>  #{現年度開始日} 
+                 AND (( #{現年度開始日} <![CDATA[<=]]> 利用者負担額減額."tekiyoKaishiYMD"  
                       AND 利用者負担額減額."tekiyoKaishiYMD" <![CDATA[<=]]> #{現年度終了日} )
-                 OR (利用者負担額減額."tekiyoShuryoYMD" <![CDATA[>=]]> #{現年度開始日}
+                 OR (#{現年度開始日} <![CDATA[<=]]> 利用者負担額減額."tekiyoShuryoYMD"
                       AND 利用者負担額減額."tekiyoShuryoYMD" <![CDATA[<=]]> #{現年度終了日} )
                       OR( 利用者負担額減額."tekiyoKaishiYMD" <![CDATA[<=]]> #{現年度開始日}
-                         AND 利用者負担額減額."tekiyoShuryoYMD" <![CDATA[>=]]> #{現年度終了日})
+                         AND #{現年度終了日} <![CDATA[<=]]> 利用者負担額減額."tekiyoShuryoYMD" )
                       OR ( 利用者負担額減額."tekiyoKaishiYMD" <![CDATA[<=]]> #{現年度開始日}
                          AND 利用者負担額減額."tekiyoShuryoYMD" = ''))
            </if>

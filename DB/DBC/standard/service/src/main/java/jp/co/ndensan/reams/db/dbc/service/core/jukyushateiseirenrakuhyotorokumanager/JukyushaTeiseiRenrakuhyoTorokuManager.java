@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushateiseirenrakuhyotorokumanager.JukyushaTeiseiRenrakuhyoTorokuManagerResult;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3001JukyushaIdoRenrakuhyoDac;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzWarningMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -63,14 +64,14 @@ public class JukyushaTeiseiRenrakuhyoTorokuManager {
                 受給者訂正連絡票登録画面Div.get異動年月日(), 履歴番号, 論理削除フラグ);
         if (0 == 件数) {
             result.set登録件数(1);
-            result.setメッセージコード(new RString(UrErrorMessages.対象データなし.getMessage().getCode()));
+            result.setエラーメッセージコード(new RString(UrErrorMessages.対象データなし.getMessage().getCode()));
         } else {
             DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付entity = 受給者異動送付Dac.
                     selectAllByTwoKey(受給者訂正連絡票登録画面Div.get被保険者番号(),
                             受給者訂正連絡票登録画面Div.get異動年月日());
             if (受給者異動送付entity != null && 受給者異動送付entity.getRirekiNo() != 履歴番号) {
                 result.set登録件数(1);
-                result.setメッセージコード(new RString(UrErrorMessages.既に存在.getMessage().getCode()));
+                result.setエラーメッセージコード(new RString(UrErrorMessages.既に存在.getMessage().getCode()));
             } else {
                 DbT3001JukyushaIdoRenrakuhyoEntity minRirekiNoの受給者異動送付
                         = 受給者異動送付Dac.selectMaxRirekiNoByMinIdoYMD(受給者訂正連絡票登録画面Div.get被保険者番号(),
@@ -106,14 +107,12 @@ public class JukyushaTeiseiRenrakuhyoTorokuManager {
                 && minRirekiNoの受給者異動送付 != null
                 && (TWO.equals(minRirekiNoの受給者異動送付.getIdoKubunCode())
                 || THREE.equals(minRirekiNoの受給者異動送付.getIdoKubunCode()))) {
-            result.set登録件数(1);
-            result.setメッセージコード(new RString(UrErrorMessages.実行不可.getMessage().getCode()));
+            result.set警告メッセージコード(new RString(DbzWarningMessages.確認.getMessage().getCode()));
         } else if (THREE.equals(受給者訂正連絡票登録画面Div.get訂正区分コード())
                 && THREE.equals(受給者訂正連絡票登録画面Div.get異動区分コード())
                 && minRirekiNoの受給者異動送付 != null
                 && ONE.equals(minRirekiNoの受給者異動送付.getIdoKubunCode())) {
-            result.set登録件数(1);
-            result.setメッセージコード(new RString(UrErrorMessages.実行不可.getMessage().getCode()));
+            result.set警告メッセージコード(new RString(DbzWarningMessages.確認.getMessage().getCode()));
         }
     }
 }

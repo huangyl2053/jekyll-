@@ -159,6 +159,17 @@ public class IchijiSashitome1Go {
     }
 
     /**
+     * 「閉じる」ボタンを押下します。
+     *
+     * @param div IchijiSashitome1GoDiv
+     * @return ResponseData<IchijiSashitome1GoDiv>
+     */
+    public ResponseData<IchijiSashitome1GoDiv> onClick_btnSashitomeClose(IchijiSashitome1GoDiv div) {
+        getHandler(div).onClick_btnSashitomeClose();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「(差止登録)取消」ボタンの処理です
      *
      * @param div IchijiSashitome1GoDiv

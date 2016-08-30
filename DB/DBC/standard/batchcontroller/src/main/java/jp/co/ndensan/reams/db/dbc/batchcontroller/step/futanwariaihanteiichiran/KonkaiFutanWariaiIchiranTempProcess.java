@@ -52,7 +52,7 @@ public class KonkaiFutanWariaiIchiranTempProcess extends BatchProcessBase<Konkai
         riyoshaFutanWariaiHanteiEntity.setKoseiJiyu(new Code(entity.getKoseiJiyu()));
         riyoshaFutanWariaiHanteiEntity.setNendo(entity.getNendo());
         riyoshaFutanWariaiHanteiEntity.setNenkinShunyuGoukei(entity.getNenkinShunyuGoukei());
-        //riyoshaFutanWariaiHanteiEntity.setSetaiIchigouHihokenshaSu(entity.getSetaiIchigouHihokenshaSu());
+        riyoshaFutanWariaiHanteiEntity.setSetaiIchigouHihokenshaSu(entity.getSetaiIchigouHihokenshaSu());
         riyoshaFutanWariaiHanteiEntity.setSonotanoGoukeiShotokuKingakuGoukei(entity.getSonotaGokeiShotokuKingaku());
         riyoshaFutanWariaiHanteiEntity.setTaisyouKubun(対象区分);
         riyoshaFutanWariaiHanteiEntity.setYukoKaishiYMD(entity.getYukoKaishiYMD());

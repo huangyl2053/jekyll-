@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc180010;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.HanteiTaishoshaTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.HanteiTaishoshaTuikaTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.JukyushaTaichoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.RiyoshaFutanWariaiDeleteProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.RiyoshaFutanWariaiKonkyoDeleteProcess;
@@ -31,7 +32,8 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
     private static final String 受給者台帳TEMPへ登録する = "creatJukyushaTaichoTemp";
     private static final String 総合事業対象者台帳TEMPへ登録する = "creatSogoJigyoTaishoshaTemp";
     private static final String 申請中データを削除する = "deleteSinseicyuDate";
-    private static final String 判定対象者TEMPにデータを追加する = "creatHanteiTaishoshaTemp";
+    private static final String 判定対象者TEMPに受給者データを追加する = "creatHanteiTaishoshaTemp";
+    private static final String 判定対象者TEMPに総合事業データを追加する = "creatHanteiTaishoshaTuikaTemp";
     private static final String 利用者負担割合を削除する = "deleteRiyoshaFutanWariai";
     private static final String 利用者負担割合明細を削除する = "deleteRiyoshaFutanWariaiMeisai";
     private static final String 利用者負担割合世帯員を削除する = "deleteRiyoshaFutanWariaiKonkyo";
@@ -47,8 +49,9 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
         executeStep(受給者台帳TEMPへ登録する);
         executeStep(総合事業対象者台帳TEMPへ登録する);
         executeStep(申請中データを削除する);
-        executeStep(判定対象者TEMPにデータを追加する);
-        if (再処理前.equals(getParameter().get処理区分().再処理.getコード())) {
+        executeStep(判定対象者TEMPに受給者データを追加する);
+        executeStep(判定対象者TEMPに総合事業データを追加する);
+        if (再処理前.equals(getParameter().get処理区分().getコード())) {
             executeStep(利用者負担割合を削除する);
             executeStep(利用者負担割合明細を削除する);
             executeStep(利用者負担割合世帯員を削除する);
@@ -74,9 +77,14 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
         return loopBatch(SinseicyuDateDeleteProcess.class).define();
     }
 
-    @Step(判定対象者TEMPにデータを追加する)
+    @Step(判定対象者TEMPに受給者データを追加する)
     IBatchFlowCommand creatHanteiTaishoshaTemp() {
         return loopBatch(HanteiTaishoshaTempProcess.class).arguments(getParameter().toNenjiRiyoshaFutanwariaiHanteiProcessParameter()).define();
+    }
+
+    @Step(判定対象者TEMPに総合事業データを追加する)
+    IBatchFlowCommand creatHanteiTaishoshaTuikaTemp() {
+        return loopBatch(HanteiTaishoshaTuikaTempProcess.class).arguments(getParameter().toNenjiRiyoshaFutanwariaiHanteiProcessParameter()).define();
     }
 
     @Step(利用者負担割合を削除する)

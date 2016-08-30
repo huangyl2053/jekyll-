@@ -46,6 +46,10 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
     private static final RString 修正済 = new RString("修正済");
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
+    private static final RString T_O_Z = new RString("210");
+    private static final RString T_S_Z = new RString("360");
+    private static final RString 既存の異動日 = new RString("既存の異動日");
+    private static final RString 履歴番号 = new RString("履歴番号");
 
     /**
      * 画面初期化です。
@@ -73,9 +77,9 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
                     引き継ぎ情報.get被保番号(), 引き継ぎ情報.get履歴番号(), true, 引き継ぎ情報.get異動日());
             ViewStateHolder.put(ViewStateKeys.モード, 照会モード);
         }
-        //TODO
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         AccessLogger.log(AccessLogType.照会,
-                getHandler(div).toPersonalData(new ShikibetsuCode("0000000010"),
+                getHandler(div).toPersonalData(識別コード,
                         引き継ぎ情報.get被保番号().getColumnValue()));
         return ResponseData.of(div).respond();
     }
@@ -109,10 +113,22 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
             if (0 == result.get登録件数()) {
                 return get更新状態遷移(div, 受給者訂正連絡票登録画面Div, 引き継ぎ情報);
             } else {
+                getErrorMessages(result);
                 return ResponseData.of(div).respond();
             }
         } else {
             return ResponseData.of(div).respond();
+        }
+    }
+
+    private void getErrorMessages(
+            JukyushaTeiseiRenrakuhyoTorokuManagerResult result) {
+        if (result.getエラーメッセージコード().equals(T_S_Z)) {
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().replace(
+                    既存の異動日.toString()));
+        } else if (result.getエラーメッセージコード().equals(T_O_Z)) {
+            throw new ApplicationException(UrErrorMessages.既に存在.getMessage().replace(
+                    履歴番号.toString()));
         }
     }
 
@@ -128,19 +144,23 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
                     受給者訂正連絡票登録画面Div, 修正モード_TWO);
         }
         //TODO
-        if (登録件数 == 1 && ViewStateHolder.get(ViewStateKeys.モード, RString.class).equals(訂正モード)) {
-            div.getCcdKanryoMessage().setMessage(
-                    UrInformationMessages.保存終了,
-                    受給者訂正連絡票登録画面Div.get被保険者番号().value(),
-                    受給者訂正連絡票登録画面Div.get被保険者氏名カナ(), true);
-            return ResponseData.of(div).setState(DBC0220012StateName.完了メッセージ);
-        } else if (登録件数 == 0) {
+        try {
+            if (登録件数 == 1 && ViewStateHolder.get(ViewStateKeys.モード, RString.class).equals(訂正モード)) {
+                div.getCcdKanryoMessage().setMessage(
+                        UrInformationMessages.保存終了,
+                        受給者訂正連絡票登録画面Div.get被保険者番号().value(),
+                        受給者訂正連絡票登録画面Div.get被保険者氏名カナ(), true);
+                return ResponseData.of(div).setState(DBC0220012StateName.完了メッセージ);
+            }
+        } catch (Exception e) {
+            e.toString();
             div.getCcdKanryoMessage().setMessage(
                     UrErrorMessages.異常終了,
                     受給者訂正連絡票登録画面Div.get被保険者番号().value(),
                     受給者訂正連絡票登録画面Div.get被保険者氏名カナ(), false);
             return ResponseData.of(div).setState(DBC0220012StateName.完了メッセージ);
         }
+
         return ResponseData.of(div).respond();
     }
 

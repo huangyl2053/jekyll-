@@ -25,6 +25,7 @@ public class JukyushaTaichoTempProcess extends BatchProcessBase<JukyushaDaichoTe
     private static final RString DB_READER_MAPPER_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.nenjiriyoshafutanwariaihantei"
                     + ".INenjiRiyoshaFutanwariaiHanteiMapper.getJukyushaDaichoTemp");
+    private static final RString 受給者TEMP = new RString("JukyuShaTaichoTempTable");
     private NenjiRiyoshaFutanwariaiHanteiProcessParameter processParameter;
 
     @BatchWriter
@@ -37,7 +38,7 @@ public class JukyushaTaichoTempProcess extends BatchProcessBase<JukyushaDaichoTe
 
     @Override
     protected void createWriter() {
-        this.tempDbWriter = new BatchEntityCreatedTempTableWriter(new RString("JukyuShaTaichoTempTable"), JukyushaDaichoTempEntity.class);
+        this.tempDbWriter = new BatchEntityCreatedTempTableWriter(受給者TEMP, JukyushaDaichoTempEntity.class);
     }
 
     @Override

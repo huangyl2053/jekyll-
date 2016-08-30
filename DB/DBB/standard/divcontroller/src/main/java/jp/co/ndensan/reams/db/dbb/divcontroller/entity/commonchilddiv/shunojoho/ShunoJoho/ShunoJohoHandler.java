@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.ca.cax.business.core.shunyu.shunokanri.ShunyuCollecti
 import jp.co.ndensan.reams.ca.cax.service.core.shuno.shuno.ShunoManager;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choteikyotsu.ChoteiKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.core.shunojoho.ShunoJohoResult;
-import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.KibetsuManager;
 import jp.co.ndensan.reams.db.dbb.service.core.choshuyuyo.choteikyotsu.ChoteiKyotsuManager;
+import jp.co.ndensan.reams.db.dbb.service.core.shunojoho.ShunoJohoManager;
 import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbx.business.core.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -120,7 +120,7 @@ public class ShunoJohoHandler {
      */
     public void load(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
 
-        FukaManager 賦課Manager = new FukaManager();
+        ShunoJohoManager 賦課Manager = new ShunoJohoManager();
         Fuka 介護賦課情報 = 賦課Manager.get介護賦課_履歴番号最新(調定年度, 賦課年度, 通知書番号);
 
         List<ShunoJohoResult> 特別徴収List = new ArrayList<>();
@@ -128,7 +128,8 @@ public class ShunoJohoHandler {
 
         if (介護賦課情報 != null) {
             KibetsuManager 期別Manager = new KibetsuManager();
-            List<Kibetsu> 介護期別情報List = 期別Manager.get介護期別_期昇順(調定年度, 賦課年度, 通知書番号, 介護賦課情報.get履歴番号());
+            List<Kibetsu> 介護期別情報List = 期別Manager.get介護期別_期昇順(調定年度, 賦課年度, 通知書番号,
+                    介護賦課情報.get履歴番号());
 
             ChoteiKyotsuManager 調定共通Manager = new ChoteiKyotsuManager();
             for (Kibetsu 介護期別情報 : 介護期別情報List) {

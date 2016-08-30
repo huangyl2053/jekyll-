@@ -64,6 +64,8 @@ public class IchijiSashitome1GoHandler {
     private final RString 控除登録 = new RString("控除登録");
     private final RString 削除アイコン押下 = new RString("削除アイコン押下");
     private final RString 解除アイコン押下 = new RString("解除アイコン押下");
+    private final RString 初期化処理 = new RString("初期化処理");
+    private final RString 登録一覧 = new RString("登録一覧");
 
     /**
      * コンストラクタです。
@@ -98,6 +100,7 @@ public class IchijiSashitome1GoHandler {
      */
     public void onLoad() {
         RString 押下ボタン = ShoriKubun.toValue(div.getKey_Button()).get名称();
+        div.setButton_Name(初期化処理);
         ShiharaiHohoHenko 支払方法変更管理業務概念 = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
         ArrayList<ShiharaiHohoHenko> 支払方法変更レコード = new ArrayList();
         ArrayList<ShiharaiHohoHenkoSashitome> shiharaiHohoHenkoSashitomeList = new ArrayList();
@@ -129,6 +132,7 @@ public class IchijiSashitome1GoHandler {
         ArrayList<ShokanHaraiShikyu> shokanHaraiShikyuList = service.find償還払い支給(new HihokenshaNo(div.getKey_HihokenshaNo()));
         ViewStateHolder.put(一号一時差止ダイアロググキー.償還払支給の情報List, shokanHaraiShikyuList);
         initializeDisplayData(押下ボタン, kojoNoSource);
+        div.getButton_Name();
     }
 
     /**
@@ -280,13 +284,7 @@ public class IchijiSashitome1GoHandler {
         div.getTxtSagakuKingakuGokei().setValue(new Decimal(sagakuKingakuGokei));
         switch (ShoriKubun.toValue(div.getKey_Button()).get名称().toString()) {
             case "給付一時差止登録":
-                div.getTxtSashitomeTorokuKubun().setReadOnly(true);
-                div.getTxtSashitomeTorokuYMD().setReadOnly(false);
-                div.getTxtSashitomeTorokuYMD().setDisabled(false);
-                div.getTxtSashitomeTorokuTsuchiHakkoYMD().setReadOnly(true);
-                div.getTxtSashitomeNofuKigenYMD().setReadOnly(false);
-                div.getTxtSashitomeNofuKigenYMD().setDisabled(false);
-                div.getTxtSashitomeKaijoYMD().setDisplayNone(true);
+                get給付一時差止登録();
                 if (支払方法変更差止.get差止控除状態区分() != null && !支払方法変更差止.get差止控除状態区分().isEmpty()) {
                     div.getTxtSashitomeTorokuKubun().setValue(ShiharaiHenkoSashitomeKojoJotaiKubun.
                             toValue(支払方法変更差止.get差止控除状態区分()).get名称());
@@ -297,14 +295,7 @@ public class IchijiSashitome1GoHandler {
                 div.getTxtSashitomeKaijoYMD().setValue(支払方法変更差止.get差止解除年月日());
                 break;
             case "保険料控除登録":
-                div.getTxtKojoTorokuKubun().setReadOnly(true);
-                div.getTxtKojoKetteiYMD().setReadOnly(false);
-                div.getTxtKojoKetteiYMD().setDisabled(false);
-                div.getTxtKojoTorokuTsuchiHakkoYMD().setReadOnly(true);
-                div.getTxtHokenshoTeishutsuKigenYMD().setReadOnly(false);
-                div.getTxtHokenshoTeishutsuKigenYMD().setDisabled(false);
-                div.getDdlTorokuKojoNo().setReadOnly(false);
-                div.getDdlTorokuKojoNo().setDisabled(false);
+                get保険料控除登録();
                 div.getTxtKojoTorokuKubun().setValue(支払方法変更差止.get差止控除状態区分());
                 div.getTxtKojoKetteiYMD().setValue(支払方法変更差止.get控除決定年月日());
                 div.getTxtKojoTorokuTsuchiHakkoYMD().setValue(支払方法変更管理業務概念.get被保険者証提出期限());
@@ -320,6 +311,7 @@ public class IchijiSashitome1GoHandler {
         div.getBtnSashitomeOrKojoTorokuKakutei().setDisabled(false);
         div.setPTN(更新PTN);
         償還情報一覧初期表示();
+        div.setButton_Name(登録一覧);
         return pairs;
     }
 
@@ -454,6 +446,27 @@ public class IchijiSashitome1GoHandler {
     }
 
     /**
+     * 「閉じる」ボタンの処理です。
+     *
+     *
+     */
+    public void onClick_btnSashitomeClose() {
+        if (div.getButton_Name().equals(初期化処理)) {
+            onLoad();
+        } else if (div.getButton_Name().equals(差止登録)) {
+            onClick_SashitomeToRoku();
+        } else if (div.getButton_Name().equals(控除登録)) {
+            onClick_KaijoToRoku();
+        } else if (div.getButton_Name().equals(削除アイコン押下)) {
+            onClick_DeleteItem();
+        } else if (div.getButton_Name().equals(解除アイコン押下)) {
+            onClick_KaijoItem();
+        } else if (div.getButton_Name().equals(登録一覧)) {
+            onClick_SelectedItem();
+        }
+    }
+
+    /**
      * 「(差止登録)取消」ボタンの処理です。
      *
      *
@@ -506,6 +519,27 @@ public class IchijiSashitome1GoHandler {
         div.getBtnSashitomeOrKojoTorokuKakutei().setDisabled(true);
         div.getIchijiSashitome1GoKakutei().setDisabled(false);
         return pairs;
+    }
+
+    private void get給付一時差止登録() {
+        div.getTxtSashitomeTorokuKubun().setReadOnly(true);
+        div.getTxtSashitomeTorokuYMD().setReadOnly(false);
+        div.getTxtSashitomeTorokuYMD().setDisabled(false);
+        div.getTxtSashitomeTorokuTsuchiHakkoYMD().setReadOnly(true);
+        div.getTxtSashitomeNofuKigenYMD().setReadOnly(false);
+        div.getTxtSashitomeNofuKigenYMD().setDisabled(false);
+        div.getTxtSashitomeKaijoYMD().setDisplayNone(true);
+    }
+
+    private void get保険料控除登録() {
+        div.getTxtKojoTorokuKubun().setReadOnly(true);
+        div.getTxtKojoKetteiYMD().setReadOnly(false);
+        div.getTxtKojoKetteiYMD().setDisabled(false);
+        div.getTxtKojoTorokuTsuchiHakkoYMD().setReadOnly(true);
+        div.getTxtHokenshoTeishutsuKigenYMD().setReadOnly(false);
+        div.getTxtHokenshoTeishutsuKigenYMD().setDisabled(false);
+        div.getDdlTorokuKojoNo().setReadOnly(false);
+        div.getDdlTorokuKojoNo().setDisabled(false);
     }
 
     private TaishoHanteiKubun get対象管理区分(int 連番, RString 時効区分, List<ShiharaiHohoHenkoTaino> 支払方法変更滞納情報) {
