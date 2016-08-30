@@ -253,6 +253,10 @@ public enum ReportIdDBD {
      */
     DBD900006(new ReportId("DBD900006_HikazeiNenkinSokyuGaitoIchiran"), new RString("非課税年金対象者情報遡及該当者一覧表")),
     /**
+     * 給付額減額把握リストの帳票ＩＤです。
+     */
+    DBD200008(new ReportId("DBD200008_KyufuGengakuHaakuIchiran"), new RString("給付額減額把握リスト")),
+    /**
      * 非課税年金対象者情報遡及不一致チェックリストの帳票ＩＤです。
      */
     DBD900007(new ReportId("DBD900007_HikazeiNenkinSokyuFuicchiCheckList"), new RString("非課税年金対象者情報遡及不一致チェックリスト"));

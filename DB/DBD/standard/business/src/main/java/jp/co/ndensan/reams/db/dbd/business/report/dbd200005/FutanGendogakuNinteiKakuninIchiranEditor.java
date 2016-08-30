@@ -93,27 +93,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             source.hokenshaName = this.導入団体.get市町村名();
         }
         if (null != 帳票出力順) {
-            List<ISetSortItem> 設定項目リスト = this.帳票出力順.get設定項目リスト();
-            source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
-            source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
-            source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
-            source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-            source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
-            if (設定項目リスト.get(LISTINDEX_0).is改頁項目()) {
-                source.kaiPege1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
-            }
-            if (設定項目リスト.get(LISTINDEX_1).is改頁項目()) {
-                source.kaiPege2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
-            }
-            if (設定項目リスト.get(LISTINDEX_2).is改頁項目()) {
-                source.kaiPege3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
-            }
-            if (設定項目リスト.get(LISTINDEX_3).is改頁項目()) {
-                source.kaiPege4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-            }
-            if (設定項目リスト.get(LISTINDEX_4).is改頁項目()) {
-                source.kaiPege5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
-            }
+            source = set出力順改頁(source);
         }
         source.hdrGekihenKanwa = RString.EMPTY;
     }
@@ -323,5 +303,40 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         KoroshoInterfaceShikibetsuCode 厚労省IF識別コード = KoroshoInterfaceShikibetsuCode.
                 toValue(負担限度額認定確認.get厚労省IF識別コード());
         return YokaigoJotaiKubunSupport.toValue(厚労省IF識別コード, 要介護認定状態区分コード).getName();
+    }
+
+    private FutanGendogakuNinteiKakuninIchiranReportSource set出力順改頁(FutanGendogakuNinteiKakuninIchiranReportSource source) {
+        List<ISetSortItem> 設定項目リスト = this.帳票出力順.get設定項目リスト();
+        if (設定項目リスト.size() > LISTINDEX_0) {
+            source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
+            if (設定項目リスト.get(LISTINDEX_0).is改頁項目()) {
+                source.kaiPege1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
+            }
+        }
+        if (設定項目リスト.size() > LISTINDEX_1) {
+            source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
+            if (設定項目リスト.get(LISTINDEX_1).is改頁項目()) {
+                source.kaiPege2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
+            }
+        }
+        if (設定項目リスト.size() > LISTINDEX_2) {
+            source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
+            if (設定項目リスト.get(LISTINDEX_2).is改頁項目()) {
+                source.kaiPege3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
+            }
+        }
+        if (設定項目リスト.size() > LISTINDEX_3) {
+            source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
+            if (設定項目リスト.get(LISTINDEX_3).is改頁項目()) {
+                source.kaiPege4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
+            }
+        }
+        if (設定項目リスト.size() > LISTINDEX_4) {
+            source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
+            if (設定項目リスト.get(LISTINDEX_4).is改頁項目()) {
+                source.kaiPege5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
+            }
+        }
+        return source;
     }
 }
