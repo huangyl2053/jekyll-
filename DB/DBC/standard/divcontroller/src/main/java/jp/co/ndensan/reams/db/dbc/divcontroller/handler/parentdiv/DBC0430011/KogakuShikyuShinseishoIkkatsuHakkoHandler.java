@@ -222,11 +222,11 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         parameter.setShoriYm(処理年月);
 
         parameter.setSakuseibi(div.getShutsuryokuTaisho().getTxtSakuseiDate().getValue());
-        HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
+        RString 被保険者番号 = RString.EMPTY;
         if (!div.getShinseishoHakkoParameters().getRadHihokenshaNo().getSelectedKey().isEmpty()) {
-            被保険者番号 = new HihokenshaNo(div.getShinseishoHakkoParameters().getTxtHihokenshaNo().getValue().toString());
+            被保険者番号 = div.getShinseishoHakkoParameters().getTxtHihokenshaNo().getValue();
         }
-        parameter.setHihokenshaNo(被保険者番号.value());
+        parameter.setHihokenshaNo(被保険者番号);
 
         List<KeyValueDataSource> alist = div.getShutsuryokuTaisho().getChkShutsuryokuTaisho().getSelectedItems();
         List<RString> rsList = new ArrayList<>();
