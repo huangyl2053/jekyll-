@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -45,13 +46,13 @@ public class JuminIdoRendoShikakuTorokuProcess extends BatchProcessBase<UaFt200F
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString FILENAME = new RString("fuseigoList.csv");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBA800001");
-
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.juminidorendoshikakutoroku."
             + "IJuminIdoRendoShikakuTorokuMapper.getShikibetsuTaishoPsm");
 //    private IIdoData idoData;
     private FileSpoolManager manager;
     private RString filePath;
+    @BatchWriter
     private CsvWriter<FuseigoListCsvEntity> csvWriter;
 
     @Override
@@ -67,9 +68,6 @@ public class JuminIdoRendoShikakuTorokuProcess extends BatchProcessBase<UaFt200F
         // TODO  内部QA：1599  Redmine：#98306(識別コードリストの取得方法)
 //        key.set識別コードリスト(idoData.get異動世帯情報().get(this).get識別コードs());
         List<ShikibetsuCode> 識別コードリスト = new ArrayList<>();
-        識別コードリスト.add(new ShikibetsuCode("000000000000010"));
-        識別コードリスト.add(new ShikibetsuCode("000000000000011"));
-        識別コードリスト.add(new ShikibetsuCode("000000001011012"));
         key.set識別コードリスト(識別コードリスト);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
@@ -80,10 +78,10 @@ public class JuminIdoRendoShikakuTorokuProcess extends BatchProcessBase<UaFt200F
 
     @Override
     protected void createWriter() {
-        filePath = Path.combinePath(Path.getTmpDirectoryPath(), FILENAME);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        filePath = Path.combinePath(manager.getEucOutputDirectry(), FILENAME);
         csvWriter = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(getEncode()).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build();
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
     }
 
     @Override
@@ -93,10 +91,7 @@ public class JuminIdoRendoShikakuTorokuProcess extends BatchProcessBase<UaFt200F
 
     @Override
     protected void afterExecute() {
-        if (csvWriter.getCount() != 0) {
-            csvWriter.close();
-            manager.spool(filePath);
-        }
+        manager.spool(filePath);
     }
 
     private Encode getEncode() {
