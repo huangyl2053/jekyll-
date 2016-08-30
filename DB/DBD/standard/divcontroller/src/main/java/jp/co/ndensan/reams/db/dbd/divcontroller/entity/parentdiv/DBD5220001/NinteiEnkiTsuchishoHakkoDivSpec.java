@@ -175,6 +175,27 @@ public enum NinteiEnkiTsuchishoHakkoDivSpec implements IPredicate<NinteiEnkiTsuc
                     }
                     return false;
                 }
+            },
+    整合性チェック {
+                /**
+                 * 更新対象のデータがないチェックです。
+                 *
+                 * @param div 認定延期通知発行Div
+                 * @return true:更新対象のデータがありです、false:更新対象のデータがないです。
+                 */
+                @Override
+                public boolean apply(NinteiEnkiTsuchishoHakkoDiv div) {
+                    List<dgHakkotaishosha_Row> rowList = div.getDgHakkotaishosha().getSelectedItems();
+                    for (dgHakkotaishosha_Row row : rowList) {
+                        if (null == row.getEnkiriyu() || row.getEnkiriyu().isEmpty()
+                        || null == row.getMikomishorikikanfrom().getValue()
+                        || null == row.getMikomishorikikanto().getValue()
+                        || null == row.getEnkiketteidate().getValue()) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
             }
 
 }

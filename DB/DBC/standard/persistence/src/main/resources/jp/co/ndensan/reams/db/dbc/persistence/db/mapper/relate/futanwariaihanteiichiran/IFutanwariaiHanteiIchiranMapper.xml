@@ -28,7 +28,9 @@
           </if>
           ORDER BY
            temp."hihokenshaNo",
-           temp."edaNo" DESC
+           temp."edaNo" DESC ,
+           temp."futanWariaiKubun" DESC ,
+           temp."yukoKaishiYMD" DESC 
         
     </select>   
     <select id="get前回利用者負担割合判定" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaihanteiichiran.FutanwariaiHanteiIchiranMybaticParameter"
@@ -83,7 +85,8 @@
                  ORDER BY
                  利用者負担割合."hihokenshaNo",
                  利用者負担割合明細."futanWariaiKubun" DESC,
-                 利用者負担割合明細."edaNo" DESC
+                 利用者負担割合明細."edaNo" DESC ,
+                 利用者負担割合明細."yukoKaishiYMD" DESC
              ) AS 利用者負担割合判定2
              <if test="(処理区分 == 3  and テストモード) or (処理区分 == 2 and テストモード ) or (処理区分 == 1 and テストモード ) ">
                  WHERE 利用者負担割合判定2.rank_number = 1
