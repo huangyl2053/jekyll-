@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7150001
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710150.DBC710150_HanyoListKogakuGassanJikoFutangakuParameter;
-import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7150001.HanyoListParamKougakuGassanJikoFudanDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7150001.HanyoListParamKougakuGassanJikoFudanHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7150001.HanyoListParamKougakuGassanJikoFudanValidationHandler;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,6 +30,7 @@ public class HanyoListParamKougakuGassanJikoFudan {
     private static final RString 証明書計算処理時作成_申請書有 = new RString("証明書計算処理時作成(申請書有)");
     private static final RString 証明書計算処理時作成_全受給者 = new RString("証明書計算処理時作成(全受給者)");
     private static final RString KEY1 = new RString("key1");
+    private static final ReportId 帳票ID = new ReportId("DBC701015_HanyoList_KogakuGassanJikoFutangaku");
 
     /**
      * 画面の初期化メソッドです。
@@ -39,8 +40,7 @@ public class HanyoListParamKougakuGassanJikoFudan {
      */
     public ResponseData<HanyoListParamKougakuGassanJikoFudanDiv> onLoad(HanyoListParamKougakuGassanJikoFudanDiv div) {
         getHandler(div).initialize();
-        // QA
-        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701015.getReportId());
+        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
         return createResponse(div);
     }
 

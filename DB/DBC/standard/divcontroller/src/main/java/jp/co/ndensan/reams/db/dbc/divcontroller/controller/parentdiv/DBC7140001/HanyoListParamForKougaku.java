@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7140001;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710140.DBC710140_HanyoListKogakuGassanShinseishoJohoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7140001.HanyoListParamForKougakuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7140001.HanyoListParamForKougakuHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7140001.HanyoListParamForKougakuValidationHandler;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class HanyoListParamForKougaku {
 
+    private static final ReportId 帳票ID = new ReportId("DBC701014_HanyoList_KogakuGassanShinseishoJoho");
+
     /**
      * 画面の初期化メソッドです。
      *
@@ -30,7 +32,7 @@ public class HanyoListParamForKougaku {
      */
     public ResponseData<HanyoListParamForKougakuDiv> onLoad(HanyoListParamForKougakuDiv div) {
         getHandler(div).initialize();
-        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701014.getReportId());
+        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
         return createResponse(div);
     }
 
