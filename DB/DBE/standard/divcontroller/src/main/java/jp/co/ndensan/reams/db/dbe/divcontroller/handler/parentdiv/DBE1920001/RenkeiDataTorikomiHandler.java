@@ -55,7 +55,7 @@ public class RenkeiDataTorikomiHandler {
     private static final RString 法改正後 = new RString("key1");
     private static final int 電算標準版_197 = 197;
     private static final int 厚労省_174 = 174;
-    private static final int 東芝版_87 = 87;
+    private static final int 東芝版_197 = 197;
     private static final RString 要介護認定申請連携データ取込みファイル名 = new RString("Z8NCI201.CSV");
     private static final RString フォーマット_要介護認定申請 = new RString("NCI201");
     private static final RString フォーマット_認定調査委託先 = new RString("NCI101");
@@ -261,14 +261,13 @@ public class RenkeiDataTorikomiHandler {
                         AccessLogger.log(AccessLogType.照会, personalData);
                     }
                 }
-                // TODO
-            } else if (東芝版_87 == size) {
-                try (CsvReader<NinteiShinseiJohoKouroushouCsvEntity> csvReader = new CsvReader.InstanceBuilder(
-                        filePath, NinteiShinseiJohoKouroushouCsvEntity.class).setDelimiter(EUC_WRITER_DELIMITER)
+            } else if (東芝版_197 == size) {
+                try (CsvReader<NinteiShinseiJohoDensanCsvEntity> csvReader = new CsvReader.InstanceBuilder(
+                        filePath, NinteiShinseiJohoDensanCsvEntity.class).setDelimiter(EUC_WRITER_DELIMITER)
                         .setEncode(コード).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
-                    List<NinteiShinseiJohoKouroushouCsvEntity> csvEntityList = new ArrayList<>();
+                    List<NinteiShinseiJohoDensanCsvEntity> csvEntityList = new ArrayList<>();
                     while (true) {
-                        NinteiShinseiJohoKouroushouCsvEntity csventity = csvReader.readLine();
+                        NinteiShinseiJohoDensanCsvEntity csventity = csvReader.readLine();
                         if (csventity != null) {
                             csventity.set項目数(size);
                             csvEntityList.add(csventity);
@@ -276,7 +275,7 @@ public class RenkeiDataTorikomiHandler {
                             break;
                         }
                     }
-                    for (NinteiShinseiJohoKouroushouCsvEntity csvEntity : csvEntityList) {
+                    for (NinteiShinseiJohoDensanCsvEntity csvEntity : csvEntityList) {
                         dgtorikomidataichiran_Row row = new dgtorikomidataichiran_Row();
                         row.setSelected(Boolean.TRUE);
                         row.setKoroshoifshikibetsucode(csvEntity.get識別コード());

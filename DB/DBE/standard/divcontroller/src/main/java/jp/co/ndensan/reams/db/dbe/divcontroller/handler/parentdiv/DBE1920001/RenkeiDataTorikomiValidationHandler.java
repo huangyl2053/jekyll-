@@ -52,7 +52,7 @@ public class RenkeiDataTorikomiValidationHandler {
     private static final RString 東芝版 = new RString("5");
     private static final int 電算標準版_197 = 197;
     private static final int 厚労省_174 = 174;
-    private static final int 東芝版_87 = 87;
+    private static final int 東芝版_197 = 197;
     private static final int 電算標準版_11 = 11;
     private static final int 厚労省_10 = 10;
     private static final int 電算標準版_10 = 10;
@@ -146,19 +146,19 @@ public class RenkeiDataTorikomiValidationHandler {
                 }
             } else if (東芝版.equals(認定申請IF種類)) {
                 if (new CsvReader.InstanceBuilder(
-                        filePath, NinteiShinseiJohoKouroushouCsvEntity.class)
+                        filePath, NinteiShinseiJohoDensanCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
                     validPairs.add(new ValidationMessageControlPair(
                             FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
                     return validPairs;
                 }
-                CsvReader<NinteiShinseiJohoKouroushouCsvEntity> csvReader = new CsvReader.InstanceBuilder(
-                        filePath, NinteiShinseiJohoKouroushouCsvEntity.class)
+                CsvReader<NinteiShinseiJohoDensanCsvEntity> csvReader = new CsvReader.InstanceBuilder(
+                        filePath, NinteiShinseiJohoDensanCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF)
                         .hasHeader(false).build();
-                if (東芝版_87 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
+                if (東芝版_197 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
                     validPairs.add(new ValidationMessageControlPair(
                             FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
                 }
