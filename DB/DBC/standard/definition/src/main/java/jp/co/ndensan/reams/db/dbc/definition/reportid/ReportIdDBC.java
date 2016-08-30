@@ -394,6 +394,10 @@ public enum ReportIdDBC {
      */
     DBC100018(new ReportId("DBC100018_SogojigyohiShikakuShogohyoKeikaSochi"), new RString("総合事業費（経過措置）資格照合表")),
     /**
+     * 総合事業費資格照合表帳票ＩＤです。
+     */
+    DBC100099(new ReportId("DBC100099_SogojigyohiShikakuShogohyo"), new RString("総合事業費資格照合表 ")),
+    /**
      * 総合事業費（経過措置）資格照合表帳票ＩＤです。
      */
     DBC100204(new ReportId("DBC100204_GassanJigyobunKeisanKekkaRenrakuhyo"), new RString("事業分計算結果連絡票")),
