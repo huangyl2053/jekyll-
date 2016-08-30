@@ -109,6 +109,7 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
             div.getChushutsuJokenPanel().getRadDataShurui().setDisabled(false);
             div.getChushutsuJokenPanel().getTxtUketoriNengetsu().setDisabled(false);
             div.getChushutsuJokenPanel().getTxtSofuNengetsu().setDisabled(false);
+            div.getChushutsuJokenPanel().getRadDataShurui().clearSelectedItem();
         } else if (保険者作成.equals(データ区分)) {
             List<KeyValueDataSource> datasource = new ArrayList<>();
             datasource.add(new KeyValueDataSource(KEY_0, すべて));
@@ -121,6 +122,7 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
             div.getChushutsuJokenPanel().getRadDataShurui().setDisabled(false);
             div.getChushutsuJokenPanel().getTxtUketoriNengetsu().setDisabled(false);
             div.getChushutsuJokenPanel().getTxtSofuNengetsu().setDisabled(true);
+            div.getChushutsuJokenPanel().getRadDataShurui().clearSelectedItem();
         }
     }
 
