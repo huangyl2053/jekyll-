@@ -43,11 +43,19 @@ public class DBC710090_HanyoListKagoMoshitate extends BatchFlowBase<DBC710090_Ha
 
     private HanyoListKagoMoshitateProcessParameter getProcessParameter() {
         HanyoListKagoMoshitateProcessParameter param = new HanyoListKagoMoshitateProcessParameter();
-        param.set国保連送付年月From(getParameter().get国保連送付年月From().getYearMonth());
-        param.set国保連送付年月To(getParameter().get国保連送付年月To().getYearMonth());
+        if (getParameter().get国保連送付年月From() != null) {
+            param.set国保連送付年月From(getParameter().get国保連送付年月From().getYearMonth());
+        }
+        if (getParameter().get国保連送付年月To() != null) {
+            param.set国保連送付年月To(getParameter().get国保連送付年月To().getYearMonth());
+        }
         param.set過誤申立給付区分(getParameter().get過誤申立給付区分());
-        param.setサービス提供年月From(getParameter().getサービス提供年月From().getYearMonth());
-        param.setサービス提供年月To(getParameter().getサービス提供年月To().getYearMonth());
+        if (getParameter().getサービス提供年月From() != null) {
+            param.setサービス提供年月From(getParameter().getサービス提供年月From().getYearMonth());
+        }
+        if (getParameter().getサービス提供年月To() != null) {
+            param.setサービス提供年月To(getParameter().getサービス提供年月To().getYearMonth());
+        }
         param.set事業者コード(getParameter().get事業者コード());
         param.set事業者名(getParameter().get事業者名());
         param.set項目名付加(getParameter().is項目名付加());
