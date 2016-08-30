@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.hanyolistfukadai
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.hanyolistfukadaicho.HanyoListDaichoMybatisParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistfukadaicho.HanyoListFukaDaichoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistfukadaicho.HanyoListFukaDaichoTmpEntity;
 
 /**
  * 汎用リスト 賦課台帳のマッパーインタフェースです。
@@ -20,7 +20,7 @@ public interface IHanyoListFukaDaichoMapper {
      * 賦課台帳情報を取得します。
      *
      * @param parameter HanyoListDaichoMybatisParameter
-     * @return List<HanyoListFukaDaichoEntity>
+     * @return List<HanyoListFukaDaichoTmpEntity>
      */
-    List<HanyoListFukaDaichoEntity> getHanyoListFukaDaicho(HanyoListDaichoMybatisParameter parameter);
+    List<HanyoListFukaDaichoTmpEntity> getHanyoListFukaDaicho(HanyoListDaichoMybatisParameter parameter);
 }
