@@ -144,7 +144,9 @@ public class HanyoListParamForKougakuHandler {
         } else {
             batchparam.setSlashDate(false);
         }
-        batchparam.setHokenshaNo(div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue());
+        if (null != div.getCcdHokenshaList()) {
+            batchparam.setHokenshaNo(div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue());
+        }
         if (null != div.getCcdShutsuryokujun().getSelected出力順()) {
             batchparam.setShutsuryokuju(div.getCcdShutsuryokujun().getSelected出力順().get出力順ID());
         }
