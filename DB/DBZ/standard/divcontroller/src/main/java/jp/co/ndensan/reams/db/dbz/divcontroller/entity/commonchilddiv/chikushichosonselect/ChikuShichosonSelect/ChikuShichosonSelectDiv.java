@@ -10,14 +10,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 
 /**
- * ChikuShichosonSelect のクラスファイル 
- * 
- * @author 自動生成
+ * ChikuShichosonSelect のクラスファイルです。
+ *
+ * @reamsid_L DBB-5720-010 xuxin
  */
 public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSelectDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -266,5 +270,13 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public void initialize() {
+        getHandler().init();
+    }
 
+    @JsonIgnore
+    public ChikuShichosonSelectHandler getHandler() {
+        return new ChikuShichosonSelectHandler(this);
+    }
 }

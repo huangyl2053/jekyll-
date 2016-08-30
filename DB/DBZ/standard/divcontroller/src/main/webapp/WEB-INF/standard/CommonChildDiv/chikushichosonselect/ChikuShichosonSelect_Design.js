@@ -4,6 +4,10 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_DdlChiku = function () {
+                return "onChange_DdlChiku";
+            };
+
             Events.onOkClose_btnChoikiGuide = function () {
                 return "onOkClose_btnChoikiGuide";
             };

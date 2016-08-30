@@ -8,6 +8,10 @@ module DBZ {
 
         export class Events {
 
+            public static onChange_DdlChiku(): string {
+                return "onChange_DdlChiku";
+            }
+
             public static onOkClose_btnChoikiGuide(): string {
                 return "onOkClose_btnChoikiGuide";
             }
