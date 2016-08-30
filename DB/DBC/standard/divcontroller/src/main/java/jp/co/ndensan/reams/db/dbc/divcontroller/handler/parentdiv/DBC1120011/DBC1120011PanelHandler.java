@@ -52,8 +52,8 @@ public class DBC1120011PanelHandler {
                 RDate 申請対象開始日 = div.getTxtZenkaiTaishoYMD().getToValue().plusDay(定数_1);
                 div.getTxtShinseiTaishoYMD().setFromValue(申請対象開始日);
             }
-            div.getTxtShinseiTaishoYMD().setToValue(RDate.getNowDate());
         }
+        div.getTxtShinseiTaishoYMD().setToValue(RDate.getNowDate());
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200029.getReportId());
     }
 }
