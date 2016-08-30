@@ -101,12 +101,7 @@ public class ShikakuShogohyoEditor implements IShikakuShogohyoEditor {
             if (target.get資格照合表一時().getNinteiYukoKikanKaishiYMD() != null) {
                 source.listUpper_9 = パターン4(target.get資格照合表一時().getNinteiYukoKikanKaishiYMD());
             }
-            if (target.get資格照合表一時().getNinteiYukoKikanKaishiYMD().isEmpty()
-                    && target.get資格照合表一時().getNinteiYukoKikanShuryoYMD().isEmpty()) {
-                source.listUpper_10 = null;
-            } else {
-                source.listUpper_10 = 期間;
-            }
+
             if (target.get資格照合表一時().getNinteiYukoKikanShuryoYMD() != null) {
                 source.listUpper_11 = パターン4(target.get資格照合表一時().getNinteiYukoKikanShuryoYMD());
             }
@@ -159,6 +154,14 @@ public class ShikakuShogohyoEditor implements IShikakuShogohyoEditor {
             source.listLower_6 = null;
         } else {
             source.listLower_6 = 期間;
+        }
+        if (target.get資格照合表一時().getNinteiYukoKikanShuryoYMD() != null
+                && target.get資格照合表一時().getNinteiYukoKikanKaishiYMD() != null
+                && target.get資格照合表一時().getNinteiYukoKikanKaishiYMD().isEmpty()
+                && target.get資格照合表一時().getNinteiYukoKikanShuryoYMD().isEmpty()) {
+            source.listUpper_10 = null;
+        } else {
+            source.listUpper_10 = 期間;
         }
         if (target.get資格照合表一時().getGetsuGakuShokujiFutanGaku() != null) {
             source.listUpper_14 = decimal_to_string(target.get資格照合表一時().getGetsuGakuShokujiFutanGaku());
