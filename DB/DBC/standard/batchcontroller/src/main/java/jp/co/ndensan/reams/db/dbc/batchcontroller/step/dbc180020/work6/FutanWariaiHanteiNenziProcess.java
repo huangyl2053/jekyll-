@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.Seta
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.KonkaiRiyoshaFutanWariaiJohoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetainJohoTempEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
@@ -120,7 +119,6 @@ public class FutanWariaiHanteiNenziProcess extends BatchKeyBreakBase<FutanWariai
         insertDbt3113Entity.setLogicalDeletedFlag(false);
         利用者負担割合.insert(insertDbt3113Entity);
         int レコード数 = entities.size();
-        getMapper(IRiyoshaFutanwariaiMapper.class).select世帯員情報Temp();
         RString 負担割合区分 = service.futanWariaiHantei(util.getFutanWariaiHanteiJoho(entities)).get負担割合区分();
         loopHandle(レコード数, 負担割合区分, insertDbt3113Entity);
         entities = new ArrayList<>();
@@ -165,7 +163,7 @@ public class FutanWariaiHanteiNenziProcess extends BatchKeyBreakBase<FutanWariai
             DbT3114RiyoshaFutanWariaiMeisaiEntity insertDbt3114Entity = new DbT3114RiyoshaFutanWariaiMeisaiEntity();
             KonkaiRiyoshaFutanWariaiJohoTempEntity insertTemp = new KonkaiRiyoshaFutanWariaiJohoTempEntity();
             insertDbt3114Entity.setNendo(nendo);
-            insertDbt3114Entity.setHihokenshaNo(beforeNo);
+            insertDbt3114Entity.setHihokenshaNo(判定対象者.getHihokenshaNo());
             insertDbt3114Entity.setRirekiNo(1);
             insertDbt3114Entity.setEdaNo(i + 1);
             insertDbt3114Entity.setShikakuKubun(判定対象者.getHihokenshaKubunCode());
