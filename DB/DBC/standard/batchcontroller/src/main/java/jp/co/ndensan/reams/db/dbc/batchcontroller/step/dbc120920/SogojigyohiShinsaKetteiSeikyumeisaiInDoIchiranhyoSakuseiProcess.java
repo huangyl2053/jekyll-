@@ -193,7 +193,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInDoIchiranhyoSakuseiProcess
             do帳票のCSVファイル作成(lastEntity, false);
             if (is改頁(lastEntity, entity)) {
                 report = new SogojigyohiShinsaKetteiSeikyumeisaiInReport(lastEntity,
-                        出力順Map, RDateTime.now(), true, 改頁項目名リスト);
+                        出力順Map, parameter.getシステム日付(), true, 改頁項目名リスト);
                 do帳票のCSVファイル作成(lastEntity, true);
             } else {
                 report = new SogojigyohiShinsaKetteiSeikyumeisaiInReport(lastEntity,
