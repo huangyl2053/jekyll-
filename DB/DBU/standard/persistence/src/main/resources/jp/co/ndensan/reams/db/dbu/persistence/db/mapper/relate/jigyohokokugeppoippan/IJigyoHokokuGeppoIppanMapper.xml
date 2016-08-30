@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBU-1060-050 zhengshukai -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokugeppoippan.IJigyoHokokuGeppoIppanMapper">
+
+    <select id="exeShotaiDataInsert"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.SyotaiJohoSyoriMybatisParamter"
+            fetchSize="500">
+        SELECT rgdb."DbFt7021ShotaiDataInsert"(#{syukeiYM});
+    </select>
+
+    <select id="getShotaiJohoKonkyoCSV"
+            resultOrdered="true"
+            resultMap="resultMap_ShotaiJohoKonkyoCSV"
+            fetchSize="500">
+        SELECT "dataKubun"
+        , "shukeiKubun"
+        , "hyouNo"
+        , "shukeiNo"
+        , "shukeiTani"
+        , "tateNo"
+        , "yokoNo"
+        , "setaiCode"
+        , "shichosonCode"
+        , "kyuShichosonCode"
+        rgdb."DbFt7022ShotaiJohoKonkyoCSV"();
+    </select>
+
+    <resultMap id="resultMap_ShotaiJohoKonkyoCSV"
+               type="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.SyotaiJohoCsvEntity"
+               autoMapping="true">
+        <result property="データ区分" column="dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集計区分" column="shukeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="表番号" column="hyouNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集計番号" column="shukeiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="集計単位" column="shukeiTani" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="縦番号" column="tateNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="横番号" column="yokoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="世帯コード" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="旧市町村コード" column="kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+</mapper>
