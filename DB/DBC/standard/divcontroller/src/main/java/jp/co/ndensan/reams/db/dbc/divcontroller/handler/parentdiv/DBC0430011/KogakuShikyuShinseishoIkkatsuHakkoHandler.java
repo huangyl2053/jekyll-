@@ -226,7 +226,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         if (!div.getShinseishoHakkoParameters().getRadHihokenshaNo().getSelectedKey().isEmpty()) {
             被保険者番号 = new HihokenshaNo(div.getShinseishoHakkoParameters().getTxtHihokenshaNo().getValue().toString());
         }
-        parameter.setHihokenshaNo(被保険者番号);
+        parameter.setHihokenshaNo(被保険者番号.value());
 
         List<KeyValueDataSource> alist = div.getShutsuryokuTaisho().getChkShutsuryokuTaisho().getSelectedItems();
         List<RString> rsList = new ArrayList<>();
