@@ -42,7 +42,7 @@ public class DBC1120011PanelHandler {
         ShoriDateKanri 処理日付管理マスタ;
         ShoriDateKanriManager manager = new ShoriDateKanriManager();
         処理日付管理マスタ = manager.get処理日付管理マスタ(SubGyomuCode.DBC介護給付, 市町村コードTemp.get地方公共団体コード(),
-                ShoriName.事業分自己負担額計算.get名称());
+                ShoriName.高額合算自己負担額計算登録.get名称());
         if (処理日付管理マスタ != null) {
             RDate 前回対象開始年月日Temp = new RDate(処理日付管理マスタ.get対象開始年月日().toString());
             RDate 前回対象終了年月日Temp = new RDate(処理日付管理マスタ.get対象終了年月日().toString());
