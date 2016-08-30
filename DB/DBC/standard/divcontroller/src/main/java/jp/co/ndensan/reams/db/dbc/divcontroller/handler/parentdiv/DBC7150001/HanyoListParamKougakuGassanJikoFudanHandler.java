@@ -39,6 +39,8 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
     private static final RString 送付対象外を含める = new RString("key0");
     private static final int 調定年度を含めて8年分 = 8;
     private static final int INDEX_ゼロ = 0;
+    private static final RString 項目名付加キー = new RString("項目名付加");
+    private static final RString 日付編集キー = new RString("日付編集");
 
     /**
      * コンストラクタです。
@@ -67,6 +69,11 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
                 panel.getCcdHokenshaList().setDisplayNone(true);
             }
         }
+        div.getCcdShutsuryokuKoumoku().setDisabled(true);
+        List<RString> keyList = new ArrayList<>();
+        keyList.add(項目名付加キー);
+        keyList.add(日付編集キー);
+        div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(keyList);
         panel.getDdlDetaSakuseiKubun().setDataSource(getデータ作成区分());
         div.getChushutsuJokenPanel().getDdlDetaSakuseiKubun().setSelectedIndex(INDEX_ゼロ);
         set調定年度();
@@ -140,7 +147,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
             batchparam.setSofuTaishogaiFukumuTo(new FlexibleYearMonth(div.getTxtJikoFutangakuKakunin().getToValue().toString()));
         }
         if (null != div.getTxtHoseizumiJikoFutangaku().getFromValue()) {
-            batchparam.setHoseizumiJikoFutangakuFrom(new FlexibFlexibleYearMonthleDate(div.getTxtHoseizumiJikoFutangaku().getFromValue().toString()));
+            batchparam.setHoseizumiJikoFutangakuFrom(new FlexibleYearMonth(div.getTxtHoseizumiJikoFutangaku().getFromValue().toString()));
         }
         if (null != div.getTxtHoseizumiJikoFutangaku().getToValue()) {
             batchparam.setHoseizumiJikoFutangakuTo(new FlexibleYearMonth(div.getTxtHoseizumiJikoFutangaku().getToValue().toString()));

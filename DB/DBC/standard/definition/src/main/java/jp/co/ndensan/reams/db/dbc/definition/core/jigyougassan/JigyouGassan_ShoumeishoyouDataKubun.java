@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-9999-022 huzongcheng
  */
-public enum ShoumeishoyouDataKubun {
+public enum JigyouGassan_ShoumeishoyouDataKubun {
 
     /**
      * コード:1 名称:"" 略称:定義なし
@@ -27,7 +27,7 @@ public enum ShoumeishoyouDataKubun {
     private final RString code;
     private final RString fullName;
 
-    private ShoumeishoyouDataKubun(String code, String fullName) {
+    private JigyouGassan_ShoumeishoyouDataKubun(String code, String fullName) {
         this.code = new RString(code);
         this.fullName = new RString(fullName);
     }
@@ -56,8 +56,8 @@ public enum ShoumeishoyouDataKubun {
      * @param code 事業高額合算_証明書用データ区分のコード
      * @return {@code code} に対応する事業高額合算_証明書用データ区分
      */
-    public static ShoumeishoyouDataKubun toValue(RString code) {
-        for (ShoumeishoyouDataKubun shoumeishoyoudatakubun : ShoumeishoyouDataKubun.values()) {
+    public static JigyouGassan_ShoumeishoyouDataKubun toValue(RString code) {
+        for (JigyouGassan_ShoumeishoyouDataKubun shoumeishoyoudatakubun : JigyouGassan_ShoumeishoyouDataKubun.values()) {
             if (shoumeishoyoudatakubun.code.equals(code)) {
                 return shoumeishoyoudatakubun;
             }
