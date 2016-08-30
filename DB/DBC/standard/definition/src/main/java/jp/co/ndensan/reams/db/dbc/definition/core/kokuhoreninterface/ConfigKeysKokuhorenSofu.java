@@ -89,46 +89,46 @@ public enum ConfigKeysKokuhorenSofu {
     }
 
     /**
-     * 国保連取込コンフィグ一覧のコードを返します。
+     * 国保連送付コンフィグ一覧のコードを返します。
      *
-     * @return 国保連取込コンフィグ一覧のコード
+     * @return 国保連送付コンフィグ一覧のコード
      */
     public RString getコード() {
         return code;
     }
 
     /**
-     * 国保連取込コンフィグ一覧の名称を返します。
+     * 国保連送付コンフィグ一覧の名称を返します。
      *
-     * @return 国保連取込コンフィグ一覧の名称
+     * @return 国保連送付コンフィグ一覧の名称
      */
     public RString get名称() {
         return fullName;
     }
 
     /**
-     * 国保連取込コンフィグ一覧の略称を返します。
+     * 国保連送付コンフィグ一覧の略称を返します。
      *
-     * @return 国保連取込コンフィグ一覧の略称
+     * @return 国保連送付コンフィグ一覧の略称
      */
     public RString get略称() {
         return shortName;
     }
 
     /**
-     * 国保連取込コンフィグ一覧の一覧表示順を返します。
+     * 国保連送付コンフィグ一覧の一覧表示順を返します。
      *
-     * @return 国保連取込コンフィグ一覧の一覧表示順
+     * @return 国保連送付コンフィグ一覧の一覧表示順
      */
     public RString get一覧表示順() {
         return hyoujiSunao;
     }
 
     /**
-     * 国保連取込コンフィグ一覧のコードと一致する内容を探します。
+     * 国保連送付コンフィグ一覧のコードと一致する内容を探します。
      *
-     * @param code 国保連取込コンフィグ一覧のコード
-     * @return {@code code} に対応する国保連取込コンフィグ一覧
+     * @param code 国保連送付コンフィグ一覧のコード
+     * @return {@code code} に対応する国保連送付コンフィグ一覧
      */
     public static ConfigKeysKokuhorenSofu toValue(RString code) {
 

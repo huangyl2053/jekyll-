@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Kokuhoren
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.kagomoshitatesho.KagomoshitateshoSofutaishoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -24,7 +25,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class KokuhorenJohoSofuHandler {
 
     private final KokuhorenJohoSofuDiv div;
+    private final RString NUM_0 = new RString("0");
     private final RString NUM_1 = new RString("1");
+    private final RString NUM_2 = new RString("2");
 
     /**
      * コンストラクタです。
@@ -83,11 +86,11 @@ public class KokuhorenJohoSofuHandler {
             div.getDdlSofuTaishojoho().setVisible(false);
         } else {
             List<KeyValueDataSource> dateSourceList = new ArrayList<>();
-            KeyValueDataSource keyValueData1 = new KeyValueDataSource(new RString("0"), RString.EMPTY);
+            KeyValueDataSource keyValueData1 = new KeyValueDataSource(NUM_0, RString.EMPTY);
             dateSourceList.add(keyValueData1);
-            KeyValueDataSource keyValueData2 = new KeyValueDataSource(new RString("1"), new RString("同月過誤分過誤申立書"));
+            KeyValueDataSource keyValueData2 = new KeyValueDataSource(NUM_1, KagomoshitateshoSofutaishoKubun.toValue(NUM_1).get名称());
             dateSourceList.add(keyValueData2);
-            KeyValueDataSource keyValueData3 = new KeyValueDataSource(new RString("2"), new RString("通常分過誤申立書"));
+            KeyValueDataSource keyValueData3 = new KeyValueDataSource(NUM_2, KagomoshitateshoSofutaishoKubun.toValue(NUM_2).get名称());
             dateSourceList.add(keyValueData3);
             div.getDdlSofuTaishojoho().setDataSource(dateSourceList);
         }
@@ -140,11 +143,38 @@ public class KokuhorenJohoSofuHandler {
     }
 
     /**
-     * get送付対象情報のメソッドます。
+     * get送付対象情報のkeyのメソッドます。
      *
      * @return RString
      */
-    public RString get送付対象情報() {
+    public RString get送付対象情報のkey() {
         return div.getDdlSofuTaishojoho().getSelectedKey();
+    }
+
+    /**
+     * get送付対象情報のValueのメソッドます。
+     *
+     * @return RString
+     */
+    public RString get送付対象情報のValue() {
+        return div.getDdlSofuTaishojoho().getSelectedValue();
+    }
+
+    /**
+     * get処理年月のValueのメソッドます。
+     *
+     * @return RDate
+     */
+    public RDate get処理年月のValue() {
+        return div.getTxtShoritaishoNengetsu().getValue();
+    }
+
+    /**
+     * get再処理区分のValueのメソッドます。
+     *
+     * @return RString
+     */
+    public RString get再処理区分のValue() {
+        return div.getTxtsaishoriKubun().getValue();
     }
 }
