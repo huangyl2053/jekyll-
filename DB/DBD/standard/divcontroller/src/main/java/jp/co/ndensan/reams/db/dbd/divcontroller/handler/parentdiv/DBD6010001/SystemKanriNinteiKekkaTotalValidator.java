@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 
 /**
+ * システム管理登録（認定結果通知書文言変更）画面の入力チェッククラスです。
  *
- * @author tz_sunl
+ * @reamsid_L DBD-3760-010 tz_chengpeng
  */
 public class SystemKanriNinteiKekkaTotalValidator implements IValidatable {
 

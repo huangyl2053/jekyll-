@@ -25,8 +25,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
+ * システム管理登録（認定結果通知書文言変更）画面のDivControllerです。
  *
- * @author tz_sunl
+ * @reamsid_L DBD-3760-010 tz_chengpeng
  */
 public class SystemKanriNinteiKekkaTotal {
 
