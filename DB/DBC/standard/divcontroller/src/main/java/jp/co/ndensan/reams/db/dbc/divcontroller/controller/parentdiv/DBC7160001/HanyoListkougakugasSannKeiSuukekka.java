@@ -29,6 +29,17 @@ public class HanyoListkougakugasSannKeiSuukekka {
     }
 
     /**
+     * 抽出条件画面項目の制御のメソッドです。
+     *
+     * @param div HanyoListkougakugasSannKeiSuukekkaDiv
+     * @return ResponseData
+     */
+    public ResponseData<HanyoListkougakugasSannKeiSuukekkaDiv> onChange(HanyoListkougakugasSannKeiSuukekkaDiv div) {
+        getHandler(div).setChange();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「実行する」ボタンのメソッドです。
      *
      * @param div HanyoListParamDiv
