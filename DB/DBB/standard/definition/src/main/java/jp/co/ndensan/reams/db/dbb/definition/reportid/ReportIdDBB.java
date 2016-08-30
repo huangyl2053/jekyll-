@@ -136,6 +136,10 @@ public enum ReportIdDBB {
      */
     DBB200009(new ReportId("DBB200009_HonsanteiKekkaIcihiran"), new RString("本算定結果一覧表")),
     /**
+     * 特別徴収平準化計算（特別徴収8月分）結果一覧表
+     */
+    DBB200005(new ReportId("DBB200005_TokubetsuChoshuHeijunkaKeisanAugustKekkaIchiran"), new RString("特別徴収平準化計算（特別徴収8月分）結果一覧表")),
+    /**
      * 保険料納入通知書（本算定）【コンビニ角公タイプ】
      */
     DBB100059(new ReportId("DBB100059_NonyuTsuchishoCVSKakuko"), new RString("保険料納入通知書（本算定）【コンビニ角公タイプ】")),
