@@ -441,6 +441,11 @@ public enum ReportIdDBB {
      */
     DBB200027(new ReportId("DBB200027_KanendoIdouKekkaIchiran"), new RString("本算定異動（過年度）結果一覧表")),
     /**
+     *
+     * 納付額一覧表（確定申告用）の帳票ID
+     */
+    DBB300005(new ReportId("DBB300005_NofugakuIchiran"), new RString("納付額一覧表（確定申告用）")),
+    /**
      * 保険料納入通知書（仮算定）発行一覧表の帳票ID
      */
     DBB200007(new ReportId("DBB200007_KariNonyuTsuchishoHakkoIchiran"), new RString("保険料納入通知書（仮算定）発行一覧表"));

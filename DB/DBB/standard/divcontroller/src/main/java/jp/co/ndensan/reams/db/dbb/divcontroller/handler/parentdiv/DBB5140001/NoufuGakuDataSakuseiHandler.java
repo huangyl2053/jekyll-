@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.nofugakudatasakusei.NofugakuDataParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.nofugakudatasakusei.NofugakuDataTsushutsuJoken;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB5140001.NoufuGakuDataSakuseiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB5140001.dgKoikiShoriTaishoSelect_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB5140001.dgTanitsuShoriJoken_Row;
@@ -24,7 +25,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -42,7 +42,6 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 public class NoufuGakuDataSakuseiHandler {
 
     private final NoufuGakuDataSakuseiDiv div;
-    private static final ReportId 帳票ID = new ReportId("DBB300005_NofugakuIchiran");
     private static final RString STR_00 = new RString("00");
     private static final RString STR_0 = new RString("0");
     private static final RString STR_2 = new RString("2");
@@ -88,7 +87,7 @@ public class NoufuGakuDataSakuseiHandler {
         RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課);
         div.getShoriNaiyo().getTxtTaishoNendo().setValue(new RDate(調定年度.toString()));
-        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBB介護賦課, 帳票ID);
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB300005.getReportId());
         return 画面の状態;
     }
 
