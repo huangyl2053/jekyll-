@@ -36,7 +36,7 @@ public class SogojigyohiShikakuShogohyoKeikaSochiEditor
     private IYokaigoJotaiKubun 要介護状態区分;
     private static final RString 合計件数 = new RString("合計件数");
     private static final RString 件 = new RString("件");
-    private static final RString 期間 = new RString("~");
+    private static final RString 期間 = new RString("～");
     private final boolean flag;
     private final int 合計;
     private final YMDHMS システム日時;
@@ -73,6 +73,7 @@ public class SogojigyohiShikakuShogohyoKeikaSochiEditor
         source.printTimeStamp = パターン12(システム日時);
         source.listUpper_1 = new RString(連番);
         if (target.get被保険者一時() != null) {
+            editor編集1(source);
             source.listUpper_2 = target.get被保険者一時().get登録被保険者番号().getColumnValue();
             source.listLower_1 = target.get被保険者一時().get宛名名称();
             if (導入形態コード.is広域()) {
@@ -92,24 +93,7 @@ public class SogojigyohiShikakuShogohyoKeikaSochiEditor
             source.listUpper_7 = target.get資格照合表一時().getShubetsu();
             source.listUpper_8 = target.get資格照合表一時().getJigyoshoNo().getColumnValue();
             source.listUpper_9 = target.get資格照合表一時().getJigyoshoMei();
-            要介護状態区分 = YokaigoJotaiKubunSupport.toValue(target.get資格照合表一時().getServiceTeikyoYM(),
-                    target.get資格照合表一時().getYokaigoKubunCode().getColumnValue());
-            source.listUpper_10 = 要介護状態区分.getName();
-            if (target.get資格照合表一時().getNinteiYukoKikanKaishiYMD() != null) {
-                source.listUpper_11 = パターン4(target.get資格照合表一時().getNinteiYukoKikanKaishiYMD());
-            }
-            if (target.get資格照合表一時().getNinteiYukoKikanKaishiYMD().isEmpty()
-                    && target.get資格照合表一時().getNinteiYukoKikanShuryoYMD().isEmpty()) {
-                source.listUpper_12 = null;
-            } else {
-                source.listUpper_12 = 期間;
-            }
-            if (target.get資格照合表一時().getNinteiYukoKikanShuryoYMD() != null) {
-                source.listUpper_13 = パターン4(target.get資格照合表一時().getNinteiYukoKikanShuryoYMD());
-            }
-
             source.listUpper_14 = new RString(target.get資格照合表一時().getServiceNissuKaisu());
-
             if (target.get資格照合表一時().getServiceTanisu() != null) {
                 source.listUpper_15 = decimal_to_string(target.get資格照合表一時().getServiceTanisu());
             }
@@ -119,6 +103,27 @@ public class SogojigyohiShikakuShogohyoKeikaSochiEditor
         }
         editor集計(source);
 
+        return source;
+    }
+
+    private SogojigyohiShikakuShogohyoKeikaSochiSource editor編集1(SogojigyohiShikakuShogohyoKeikaSochiSource source) {
+        要介護状態区分 = YokaigoJotaiKubunSupport.toValue(target.get資格照合表一時().getServiceTeikyoYM(),
+                target.get資格照合表一時().getYokaigoKubunCode().getColumnValue());
+        source.listUpper_10 = 要介護状態区分.getName();
+        if (target.get資格照合表一時().getNinteiYukoKikanKaishiYMD() != null) {
+            source.listUpper_11 = パターン4(target.get資格照合表一時().getNinteiYukoKikanKaishiYMD());
+        }
+        if (target.get資格照合表一時().getGendoGakuTekiyoKikanKaishiYMD() != null
+                && target.get資格照合表一時().getGendoGakuTekiyoKikanShuryoYMD() != null
+                && target.get資格照合表一時().getGendoGakuTekiyoKikanKaishiYMD().isEmpty()
+                && target.get資格照合表一時().getGendoGakuTekiyoKikanShuryoYMD().isEmpty()) {
+            source.listUpper_12 = null;
+        } else {
+            source.listUpper_12 = 期間;
+        }
+        if (target.get資格照合表一時().getNinteiYukoKikanShuryoYMD() != null) {
+            source.listUpper_13 = パターン4(target.get資格照合表一時().getNinteiYukoKikanShuryoYMD());
+        }
         return source;
     }
 
