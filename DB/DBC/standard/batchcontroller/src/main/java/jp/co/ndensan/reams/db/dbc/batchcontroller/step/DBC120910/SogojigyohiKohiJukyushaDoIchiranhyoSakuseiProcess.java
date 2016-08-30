@@ -58,6 +58,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -261,6 +262,9 @@ public class SogojigyohiKohiJukyushaDoIchiranhyoSakuseiProcess extends BatchKeyB
         output.set公費対象単位数(doカンマ編集(entity.get公費対象単位数()));
         output.set公費負担金額(doカンマ編集(entity.get公費負担金額()));
         output.set公費分本人負担額(doカンマ編集(entity.get公費分本人負担額()));
+        output.set被保険者番号(getColumnValue(entity.get被保険者番号()));
+        output.set被保険者氏名(entity.get宛名名称());
+        output.set証記載保険者番号(getColumnValue(entity.get証記載保険者番号()));
         output.set公費対象単位数集計(RString.EMPTY);
         output.set公費分本人負担額集計(RString.EMPTY);
         output.set公費負担金額集計(RString.EMPTY);
@@ -282,6 +286,9 @@ public class SogojigyohiKohiJukyushaDoIchiranhyoSakuseiProcess extends BatchKeyB
         output.set公費対象単位数(RString.EMPTY);
         output.set公費負担金額(RString.EMPTY);
         output.set公費分本人負担額(RString.EMPTY);
+        output.set被保険者番号(RString.EMPTY);
+        output.set被保険者氏名(RString.EMPTY);
+        output.set証記載保険者番号(RString.EMPTY);
         output.set公費対象単位数集計(doカンマ編集(entity.get公費対象単位数集計()));
         output.set公費分本人負担額集計(doカンマ編集(entity.get公費分本人負担額集計()));
         output.set公費負担金額集計(doカンマ編集(entity.get公費負担金額集計()));
@@ -331,5 +338,12 @@ public class SogojigyohiKohiJukyushaDoIchiranhyoSakuseiProcess extends BatchKeyB
             return RString.EMPTY;
         }
         return 年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString getColumnValue(IDbColumnMappable entity) {
+        if (null != entity) {
+            return entity.getColumnValue();
+        }
+        return RString.EMPTY;
     }
 }
