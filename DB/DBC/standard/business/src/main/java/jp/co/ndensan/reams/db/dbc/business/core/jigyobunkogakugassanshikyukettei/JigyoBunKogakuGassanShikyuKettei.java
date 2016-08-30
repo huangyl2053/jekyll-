@@ -224,11 +224,10 @@ public class JigyoBunKogakuGassanShikyuKettei {
      * @param iKoza iKoza
      * @param 市町村名MasterMap 市町村名MasterMap
      * @param 市町村名 市町村名
-     * @param 連番 連番
      * @return JigyoBunKogakuGassanShikyuKetteibanAriEUCEntity
      */
     public JigyoBunKogakuGassanShikyuKetteibanNashiEUCEntity set連番なしEUCEntity(JigyoBunKogakuGassanShikyuKetteiRelateEntity entity, IKoza iKoza,
-            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, RString 市町村名, int 連番) {
+            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, RString 市町村名) {
         JigyoBunKogakuGassanShikyuKetteibanNashiEUCEntity eucEntity = new JigyoBunKogakuGassanShikyuKetteibanNashiEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
