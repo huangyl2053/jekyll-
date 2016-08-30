@@ -6,16 +6,22 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1030011;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.exclusivekey.DbaExclusiveKey;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.DBA1030011StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.DBA1030011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.ShikakuSoshitsuIdoTotalDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1030011.ShikakuSoshitsuIdoTotalHandler;
+import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureiChecker;
+import jp.co.ndensan.reams.db.dba.service.core.tekiyojogaisha.TekiyoJogaishaChecker;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -26,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -36,7 +43,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ShikakuSoshitsuIdoTotal {
 
-    private static final LockingKey 前排他ロックキー = new LockingKey("ShikakuSoshitsuIdo");
     private static final RString DEFAULT = new RString("被保履歴");
     private static final RString IRYOU = new RString("医療保険");
     private static final RString RONEN = new RString("老福年金");
@@ -45,6 +51,8 @@ public class ShikakuSoshitsuIdoTotal {
     private static final RString 修正 = new RString("修正");
     private static final Integer FIRSTINDEX = Integer.valueOf("0");
 
+    private static final RString COMMON_BUTTON_RESEARCH = new RString("btnUpdate");
+
     /**
      * 資格喪失異動の初期化します。
      *
@@ -52,15 +60,63 @@ public class ShikakuSoshitsuIdoTotal {
      * @return レスポンス
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onLoad(ShikakuSoshitsuIdoTotalDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
+
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode shikibetsuCode = key.get識別コード();
+        HihokenshaNo hihokenshaNo = key.get被保険者番号();
+
+        if (shikibetsuCode == null || shikibetsuCode.isEmpty()) {
+            return setNotExecutableAndReturnMessage(div, UrInformationMessages.該当データなし.getMessage());
+        }
+        if (hihokenshaNo == null || hihokenshaNo.isEmpty()) {
+            return setNotExecutableAndReturnMessage(div, UrInformationMessages.該当データなし.getMessage());
+        }
+
         createHandler(div).load(ViewStateHolder.get(ViewStateKeys.資格喪失異動_状態_被保履歴タブ, RString.class));
-        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
+        if (!RealInitialLocker.tryGetLock(create排他キー())) {
             div.setReadOnly(true);
             throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
         }
+
+        if (createHandler(div).is資格喪失中()) {
+            releaseLock(div);
+            return setNotExecutableAndReturnMessage(div, DbzInformationMessages.資格喪失済み.getMessage());
+        }
+        if (TaJushochiTokureiChecker.createInstance().is他市町村住所地特例者(shikibetsuCode)) {
+            releaseLock(div);
+            return setNotExecutableAndReturnMessage(div, DbzInformationMessages.他特例者登録済み.getMessage());
+        }
+        if (TekiyoJogaishaChecker.createInstance().is適用除外者(shikibetsuCode)) {
+            releaseLock(div);
+            return setNotExecutableAndReturnMessage(div, DbzInformationMessages.適用除外者登録済み.getMessage());
+        }
+
         return ResponseData.of(div).respond();
     }
 
+    private LockingKey create排他キー() {
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo hihokenshaNo = key.get被保険者番号();
+        System.out.println(DbaExclusiveKey.create被保険者番号排他キー(hihokenshaNo));
+        return new LockingKey(DbaExclusiveKey.create被保険者番号排他キー(hihokenshaNo));
+    }
+
+    private void releaseLock(ShikakuSoshitsuIdoTotalDiv div) {
+        RealInitialLocker.release(create排他キー());
+    }
+
+    private ResponseData<ShikakuSoshitsuIdoTotalDiv> setNotExecutableAndReturnMessage(ShikakuSoshitsuIdoTotalDiv div, Message message) {
+        div.setDisabled(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_RESEARCH, true);
+        return ResponseData.of(div).addMessage(message).respond();
+    }
+
     /**
+     *
+     * /**
      * 資格喪失異動タブの切替処理します。
      *
      * @param div ShikakuSoshitsuIdoTotalDiv
@@ -96,6 +152,11 @@ public class ShikakuSoshitsuIdoTotal {
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnUpdate(ShikakuSoshitsuIdoTotalDiv div) {
         if (!ResponseHolder.isReRequest()) {
+
+            if (!isSavable(div)) {
+                throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
+            }
+
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
@@ -103,11 +164,15 @@ public class ShikakuSoshitsuIdoTotal {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             createHandler(div).save();
-            RealInitialLocker.release(前排他ロックキー);
+            releaseLock(div);
             div.getComplete().getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(DBA1030011StateName.完了状態);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private boolean isSavable(ShikakuSoshitsuIdoTotalDiv div) {
+        return createHandler(div).isSavable();
     }
 
     /**
@@ -117,7 +182,7 @@ public class ShikakuSoshitsuIdoTotal {
      * @return レスポンス
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnSyouHoSo(ShikakuSoshitsuIdoTotalDiv div) {
-        RealInitialLocker.release(前排他ロックキー);
+        releaseLock(div);
         createHandler(div).setパラメータ();
         return ResponseData.of(div).forwardWithEventName(DBA1030011TransitionEventName.詳細へ).respond();
     }
@@ -129,7 +194,23 @@ public class ShikakuSoshitsuIdoTotal {
      * @return レスポンス
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnBack(ShikakuSoshitsuIdoTotalDiv div) {
-        RealInitialLocker.release(前排他ロックキー);
+        releaseLock(div);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_証類状況タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_施設入退所タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_老福年金タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_医療保険タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_被保履歴タブ, null);
+        return ResponseData.of(div).forwardWithEventName(DBA1030011TransitionEventName.検索結果一覧).respond();
+    }
+
+    /**
+     * 「戻る」ボタン処理します。
+     *
+     * @param div ShikakuSoshitsuIdoTotalDiv
+     * @return レスポンス
+     */
+    public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnResearch(ShikakuSoshitsuIdoTotalDiv div) {
+        releaseLock(div);
         ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_証類状況タブ, null);
         ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_施設入退所タブ, null);
         ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_老福年金タブ, null);

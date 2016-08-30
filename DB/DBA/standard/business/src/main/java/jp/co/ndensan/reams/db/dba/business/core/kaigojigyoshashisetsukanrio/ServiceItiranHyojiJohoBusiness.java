@@ -83,4 +83,14 @@ public class ServiceItiranHyojiJohoBusiness {
     public RString getサービス種類略称() {
         return entity.getServiceShuruiRyakusho();
     }
+    
+        /**
+     * isDeletedのgetメソッドです。
+     * 
+     * @return isDeleted
+     */
+    public boolean get削除フラグ() {
+        return entity.isDeleted();
+    }
+
 }

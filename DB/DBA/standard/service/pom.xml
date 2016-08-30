@@ -85,7 +85,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxPersistence</artifactId>
-            <version>${jp.co.ndensan.reams.uax.version}</version>
+            <version>${jp.co.ndensan.reams.uaxVersion}</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ux.uxx</groupId>

@@ -45,38 +45,49 @@
     <select resultOrdered="true" id="get施設情報" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter"
             resultMap="resultMap_get施設情報" fetchSize="500">
         SELECT
-        ShisetsuNyutaisho."rirekiNo" AS "shisetsuNyutaisho_rirekiNo",
-        ShisetsuNyutaisho."daichoShubetsu" AS "shisetsuNyutaisho_daichoShubetsu",
-        ShisetsuNyutaisho."nyushoShisetsuShurui" AS "shisetsuNyutaisho_nyushoShisetsuShurui",
-        ShisetsuNyutaisho."nyushoShisetsuCode" AS "shisetsuNyutaisho_nyushoShisetsuCode",
-        ShisetsuNyutaisho."nyushoYMD" AS "shisetsuNyutaisho_nyushoYMD",
-        ShisetsuNyutaisho."taishoYMD" AS "shisetsuNyutaisho_taishoYMD",
-        T1."jigyoshaMeisho" AS "T1_jigyoshaMeisho"
+            ShisetsuNyutaisho."rirekiNo" AS "shisetsuNyutaisho_rirekiNo",
+            ShisetsuNyutaisho."daichoShubetsu" AS "shisetsuNyutaisho_daichoShubetsu",
+            ShisetsuNyutaisho."nyushoShisetsuShurui" AS "shisetsuNyutaisho_nyushoShisetsuShurui",
+            ShisetsuNyutaisho."nyushoShisetsuCode" AS "shisetsuNyutaisho_nyushoShisetsuCode",
+            ShisetsuNyutaisho."nyushoYMD" AS "shisetsuNyutaisho_nyushoYMD",
+            ShisetsuNyutaisho."taishoYMD" AS "shisetsuNyutaisho_taishoYMD",
+            T1."jigyoshaMeisho" AS "T1_jigyoshaMeisho"
         FROM
-        rgdb."DbT1004ShisetsuNyutaisho" AS ShisetsuNyutaisho
+            rgdb."DbT1004ShisetsuNyutaisho" AS ShisetsuNyutaisho
         LEFT JOIN rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS T1
-        ON ShisetsuNyutaisho."nyushoShisetsuCode" = T1."jigyoshaNo"
+            ON ShisetsuNyutaisho."nyushoShisetsuCode" = T1."jigyoshaNo"
         WHERE
-        ShisetsuNyutaisho."shikibetsuCode" = #{識別コード}
-        AND ShisetsuNyutaisho."daichoShubetsu" = '3'
-        AND ShisetsuNyutaisho."nyushoShisetsuShurui" = '21'
-        AND T1."jigyoshaShubetsu" = '02'
-        AND T1."yukoKaishiYMD" = (SELECT
-        MAX(KaigoJogaiTokureiTaishoShisetsu."yukoKaishiYMD")
-        FROM
-        rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS KaigoJogaiTokureiTaishoShisetsu
-        WHERE
-        KaigoJogaiTokureiTaishoShisetsu."jigyoshaNo" = T1."jigyoshaNo"
-        AND KaigoJogaiTokureiTaishoShisetsu."jigyoshaShubetsu" = '02')
-        <if test="解除日なし">
-            AND ( ( ShisetsuNyutaisho."taishoYMD" is null OR ShisetsuNyutaisho."taishoYMD" = '' ) OR ShisetsuNyutaisho."taishoYMD" <![CDATA[>]]> #{tekiyoYMD})
-        </if>
-        <if test="解除日あり">
-            AND (( ( ShisetsuNyutaisho."taishoYMD" is null OR ShisetsuNyutaisho."taishoYMD" = '')  AND ShisetsuNyutaisho."nyushoYMD" <![CDATA[<]]> #{kaijoYMD})
-            OR (ShisetsuNyutaisho."nyushoYMD" <![CDATA[<]]> #{kaijoYMD} AND ShisetsuNyutaisho."taishoYMD" <![CDATA[>]]> #{tekiyoYMD}))
-        </if>
+            ShisetsuNyutaisho."shikibetsuCode" = #{識別コード}
+            AND ShisetsuNyutaisho."daichoShubetsu" = '3'
+            AND ShisetsuNyutaisho."nyushoShisetsuShurui" = '21'
+            AND T1."jigyoshaShubetsu" = '02'
+            AND T1."yukoKaishiYMD" = (SELECT
+                    MAX(KaigoJogaiTokureiTaishoShisetsu."yukoKaishiYMD")
+                    FROM
+                    rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS KaigoJogaiTokureiTaishoShisetsu
+                    WHERE
+                        KaigoJogaiTokureiTaishoShisetsu."jigyoshaNo" = T1."jigyoshaNo"
+                        AND KaigoJogaiTokureiTaishoShisetsu."jigyoshaShubetsu" = '02'
+                )
+            <if test="解除日なし">
+                AND (
+                    (ShisetsuNyutaisho."taishoYMD" is null OR ShisetsuNyutaisho."taishoYMD" = '')
+                     OR ShisetsuNyutaisho."taishoYMD" <![CDATA[>]]> #{tekiyoYMD}
+                 )
+            </if>
+            <if test="解除日あり">
+                AND (
+                     (
+                        (ShisetsuNyutaisho."taishoYMD" is null OR ShisetsuNyutaisho."taishoYMD" = '')
+                         AND ShisetsuNyutaisho."nyushoYMD" <![CDATA[<]]> #{kaijoYMD}
+                     ) OR (
+                        ShisetsuNyutaisho."nyushoYMD" <![CDATA[<]]> #{kaijoYMD}
+                         AND ShisetsuNyutaisho."taishoYMD" <![CDATA[>]]> #{tekiyoYMD}
+                     )
+                 )
+            </if>
         ORDER BY
-        ShisetsuNyutaisho."nyushoYMD" DESC, ShisetsuNyutaisho."taishoYMD" DESC
+            ShisetsuNyutaisho."nyushoYMD" DESC, ShisetsuNyutaisho."taishoYMD" DESC
     </select>
 
     <select resultOrdered="true" id="getMax履歴番号" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter"
@@ -119,18 +130,22 @@
         FROM
         rgdb."DbT1004ShisetsuNyutaisho" AS "DbT1004ShisetsuNyutaisho"
         WHERE
-        "DbT1004ShisetsuNyutaisho"."shikibetsuCode" = #{識別コード}
-        AND "DbT1004ShisetsuNyutaisho"."daichoShubetsu" = '3'
-        AND "DbT1004ShisetsuNyutaisho"."nyushoShisetsuShurui" = '21'
+            "DbT1004ShisetsuNyutaisho"."shikibetsuCode" = #{識別コード}
+        <!--
+            AND "DbT1004ShisetsuNyutaisho"."daichoShubetsu" = '3'
+            AND "DbT1004ShisetsuNyutaisho"."nyushoShisetsuShurui" = '21'
         <if test="解除日なし">
-            AND ( ("DbT1004ShisetsuNyutaisho"."taishoYMD" is null OR "DbT1004ShisetsuNyutaisho"."taishoYMD" = '') OR "DbT1004ShisetsuNyutaisho"."taishoYMD" <![CDATA[>]]> #{tekiyoYMD})
+            AND ( ("DbT1004ShisetsuNyutaisho"."taishoYMD" is null OR "DbT1004ShisetsuNyutaisho"."taishoYMD" = '')
+            OR "DbT1004ShisetsuNyutaisho"."taishoYMD" <![CDATA[>]]> #{tekiyoYMD})
         </if>
         <if test="解除日あり">
-            AND (( ("DbT1004ShisetsuNyutaisho"."taishoYMD" is null OR "DbT1004ShisetsuNyutaisho"."taishoYMD" = '') AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> #{kaijoYMD})
+            AND (( ("DbT1004ShisetsuNyutaisho"."taishoYMD" is null OR "DbT1004ShisetsuNyutaisho"."taishoYMD" = '')
+            AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> #{kaijoYMD})
             OR ("DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> #{kaijoYMD} AND "DbT1004ShisetsuNyutaisho"."taishoYMD" <![CDATA[>]]> #{tekiyoYMD}))
         </if>
+        -->
         ORDER BY
-        "DbT1004ShisetsuNyutaisho"."nyushoYMD" DESC, "DbT1004ShisetsuNyutaisho"."taishoYMD" DESC
+            "DbT1004ShisetsuNyutaisho"."nyushoYMD" DESC, "DbT1004ShisetsuNyutaisho"."taishoYMD" DESC
     </select>
 
     <select resultOrdered="true" id="select宛名情報" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"

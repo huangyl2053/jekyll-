@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiI
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaiichiranhyo.ChosaIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilders.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

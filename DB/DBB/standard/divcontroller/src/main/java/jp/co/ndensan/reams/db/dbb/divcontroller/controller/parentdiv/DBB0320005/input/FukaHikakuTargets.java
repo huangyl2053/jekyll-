@@ -46,6 +46,9 @@ public class FukaHikakuTargets {
         if (key.hasAll(賦課年度, 被保険者番号)) {
             return Optional.ofNullable(manager.get賦課年度最新賦課From被保険者番号(key.get賦課年度(), key.get被保険者番号()));
         }
+        if (key.hasAll(被保険者番号)) {
+            return manager.find最新賦課(key.get被保険者番号());
+        }
         return Optional.empty();
     }
 

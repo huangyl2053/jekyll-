@@ -52,9 +52,10 @@ public class TekiyoJogaiTotal {
      * @param requestDiv 適用除外者管理Div
      * @return レスポンス
      */
-    public ResponseData onLoad(TekiyoJogaiTotalDiv requestDiv) {
+    public ResponseData<TekiyoJogaiTotalDiv> onLoad(TekiyoJogaiTotalDiv requestDiv) {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
         RString menuId = ResponseHolder.getMenuID();
+        //XXX メニューIDによる分岐は保守性が低いので是正するべき。
         getHandler(requestDiv).initialize(識別コード, menuId);
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             requestDiv.setReadOnly(true);
@@ -78,7 +79,7 @@ public class TekiyoJogaiTotal {
      * @param requestDiv 適用除外者管理Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnBack(TekiyoJogaiTotalDiv requestDiv) {
+    public ResponseData<TekiyoJogaiTotalDiv> onClick_btnBack(TekiyoJogaiTotalDiv requestDiv) {
         RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(requestDiv).forwardWithEventName(DBA2050011TransitionEventName.検索に戻る).respond();
     }
@@ -89,7 +90,7 @@ public class TekiyoJogaiTotal {
      * @param requestDiv 適用除外者管理Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnUpdate(TekiyoJogaiTotalDiv requestDiv) {
+    public ResponseData<TekiyoJogaiTotalDiv> onClick_btnUpdate(TekiyoJogaiTotalDiv requestDiv) {
         if (!isデータ変更(requestDiv)) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(requestDiv).addMessage(
@@ -103,7 +104,7 @@ public class TekiyoJogaiTotal {
             }
             if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 一覧データの保存(requestDiv);
                 RealInitialLocker.release(前排他ロックキー);
                 requestDiv.getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(
@@ -120,7 +121,7 @@ public class TekiyoJogaiTotal {
      * @param requestDiv 適用除外者管理Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnComplete(TekiyoJogaiTotalDiv requestDiv) {
+    public ResponseData<TekiyoJogaiTotalDiv> onClick_btnComplete(TekiyoJogaiTotalDiv requestDiv) {
         RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(requestDiv).forwardWithEventName(DBA2050011TransitionEventName.完了).respond();
     }

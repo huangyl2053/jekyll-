@@ -38,13 +38,11 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -95,7 +93,8 @@ public class HihokenshaDaichoKoshin {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoKoshin}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoKoshin}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoKoshin}のインスタンス
      */
     public static HihokenshaDaichoKoshin createInstance() {
         return InstanceProvider.create(HihokenshaDaichoKoshin.class);
@@ -120,16 +119,16 @@ public class HihokenshaDaichoKoshin {
     public void 資格異動対象者の取得と被保険者台帳の更新(HihokenshaDaichoKoshinProcessParameter parameter) {
         INenreitotatsuShikakuIdoRelateMapper mapper = mapperProvider.create(INenreitotatsuShikakuIdoRelateMapper.class);
 
-        FlexibleDate 開始日 = parameter.get開始日();
-        FlexibleDate 終了日 = parameter.get終了日();
+        FlexibleDate 年齢到達期間開始日 = parameter.get開始日().minusYear(AGE_65).plusDay(1);
+        FlexibleDate 年齢到達期間終了日 = parameter.get終了日().minusYear(AGE_65).plusDay(1);
 
-        List<ShikibetsuCode> shikibetsuCode = new ArrayList<>();
-
-        ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
+        ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         List<JuminShubetsu> juminShubetsuList = new ArrayList<>();
         juminShubetsuList.add(JuminShubetsu.日本人);
         juminShubetsuList.add(JuminShubetsu.外国人);
+        juminShubetsuList.add(JuminShubetsu.住登外個人_日本人);
+        juminShubetsuList.add(JuminShubetsu.住登外個人_外国人);
         key.set住民種別(juminShubetsuList);
         List<JuminJotai> juminJotaiList = new ArrayList<>();
         juminJotaiList.add(JuminJotai.住民);
@@ -139,50 +138,15 @@ public class HihokenshaDaichoKoshin {
         key.set住民状態(juminJotaiList);
         IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
 
-        List<UaFt200FindShikibetsuTaishoEntity> entityList = mapper.select識別コード(parameter
-                .toAtenaMybatisParameter(shikibetsuTaishoPSMSearchKey, null));
-        for (UaFt200FindShikibetsuTaishoEntity entity : entityList) {
-            if (entity.getShikibetsuCode() != null) {
-                shikibetsuCode.add(entity.getShikibetsuCode());
-            }
-        }
+        List<ShikakuIdoTaishoshaEntity> 資格異動対象者List = mapper.select資格異動対象者(parameter
+                .toAtenaMybatisParameter(shikibetsuTaishoPSMSearchKey, 年齢到達期間開始日, 年齢到達期間終了日));
 
-        key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
-        key.setデータ取得区分(DataShutokuKubun.直近レコード);
-        juminShubetsuList = new ArrayList<>();
-        juminShubetsuList.add(JuminShubetsu.日本人);
-        juminShubetsuList.add(JuminShubetsu.外国人);
-        juminShubetsuList.add(JuminShubetsu.住登外個人_日本人);
-        juminShubetsuList.add(JuminShubetsu.住登外個人_外国人);
-        key.set住民種別(juminShubetsuList);
-        juminJotaiList = new ArrayList<>();
-        juminJotaiList.add(JuminJotai.住民);
-        juminJotaiList.add(JuminJotai.住登外);
-        juminJotaiList.add(JuminJotai.消除者);
-        juminJotaiList.add(JuminJotai.転出者);
-        key.set住民状態(juminJotaiList);
-        shikibetsuTaishoPSMSearchKey = key.build();
-
-        List<ShikakuIdoTaishoshaEntity> 資格異動対象者ListTmp = mapper.select資格異動対象者(parameter
-                .toAtenaMybatisParameter(shikibetsuTaishoPSMSearchKey, shikibetsuCode));
-
-        List<ShikakuIdoTaishoshaEntity> 資格異動対象者List = new ArrayList<>();
-        資格異動対象者List.addAll(資格異動対象者ListTmp);
-        for (ShikakuIdoTaishoshaEntity entity : 資格異動対象者ListTmp) {
-            if (entity.get生年月日().isBefore(開始日.minusYear(AGE_65).plusDay(1))
-                    || 終了日.minusYear(AGE_65).plusDay(1).isBefore(entity.get生年月日())) {
-                資格異動対象者List.remove(entity);
-            }
-        }
-
-        資格異動対象者ListTmp.clear();
-        資格異動対象者ListTmp.addAll(資格異動対象者List);
         List<DbT1003TashichosonJushochiTokureiEntity> 他市町村住所地特例List;
         List<DbT1002TekiyoJogaishaEntity> 適用除外者List;
         List<DbT1009ShikakuShutokuJogaishaEntity> 資格取得除外者List;
         List<DbT1010TennyushutsuHoryuTaishoshaEntity> 転入保留対象者List;
 
-        for (ShikakuIdoTaishoshaEntity entity : 資格異動対象者ListTmp) {
+        for (ShikakuIdoTaishoshaEntity entity : 資格異動対象者List) {
 
             AgeCalculator ageCalculator = new AgeCalculator(new _DateOfBirth(entity.get生年月日()),
                     JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日);
@@ -261,7 +225,7 @@ public class HihokenshaDaichoKoshin {
         if ((dbT1001HihokenshaDaichoEntity != null && (JuminJotai.住登外.コード().equals(entity.get住民状態コード())
                 || JuminJotai.転出者.コード().equals(entity.get住民状態コード())
                 || JuminJotai.消除者.コード().equals(entity.get住民状態コード())))
-                && (saishinIdohiDataEntity.get資格取得年月日() != null && saishinIdohiDataEntity.get資格喪失年月日() == null
+                && (saishinIdohiDataEntity.get資格取得年月日() != null && (saishinIdohiDataEntity.get資格喪失年月日() == null || saishinIdohiDataEntity.get資格喪失年月日().isEmpty())
                 && saishinIdohiDataEntity.get被保険者区分コード().equals(HihokenshaKubunCode.第２号被保険者.getコード())
                 && 住所地特例フラグ_1.equals(saishinIdohiDataEntity.get住所地特例フラグ()))) {
 
@@ -331,7 +295,7 @@ public class HihokenshaDaichoKoshin {
 
     private void updateHihokenshaDaicho(ShikakuIdoTaishoshaEntity entity, SaishinIdohiDataEntity saishinIdohiDataEntity, FlexibleDate age) {
         枝番 = hihokenshaManager.getSaidaiEdaban(saishinIdohiDataEntity.get被保険者番号(), age);
-        if (saishinIdohiDataEntity.get資格取得年月日() != null && saishinIdohiDataEntity.get資格喪失年月日() != null
+        if (saishinIdohiDataEntity.get資格取得年月日() != null && saishinIdohiDataEntity.get資格喪失年月日() != null && !saishinIdohiDataEntity.get資格喪失年月日().isEmpty()
                 && saishinIdohiDataEntity.get被保険者区分コード().equals(HihokenshaKubunCode.第２号被保険者.getコード())) {
 
             DbT1001HihokenshaDaichoEntity insertEn = new DbT1001HihokenshaDaichoEntity();
@@ -351,7 +315,7 @@ public class HihokenshaDaichoKoshin {
             insertEn.setKyuShichosonCode(entity.get旧全国地方公共団体コード());
             insertEn.setLogicalDeletedFlag(false);
             dbT1001Dac.save(insertEn);
-        } else if (saishinIdohiDataEntity.get資格取得年月日() != null && saishinIdohiDataEntity.get資格喪失年月日() == null
+        } else if (saishinIdohiDataEntity.get資格取得年月日() != null && (saishinIdohiDataEntity.get資格喪失年月日() == null || saishinIdohiDataEntity.get資格喪失年月日().isEmpty())
                 && saishinIdohiDataEntity.get被保険者区分コード().equals(HihokenshaKubunCode.第２号被保険者.getコード())) {
 
             DbT1001HihokenshaDaichoEntity insertEn = new DbT1001HihokenshaDaichoEntity();
@@ -370,6 +334,7 @@ public class HihokenshaDaichoKoshin {
             insertEn.setHihokennshaKubunCode(ShikakuKubun._１号.getコード());
             insertEn.setShikakuHenkoJiyuCode(idoJiyuCode);
             insertEn.setShikakuHenkoYMD(age);
+            insertEn.setShikakuHenkoTodokedeYMD(age);
             insertEn.setKoikinaiJushochiTokureiFlag(saishinIdohiDataEntity.get広域内住所地特例フラグ());
             insertEn.setKoikinaiTokureiSochimotoShichosonCode(saishinIdohiDataEntity.get広住特措置元市町村コード());
             insertEn.setKyuShichosonCode(saishinIdohiDataEntity.get旧市町村コード());

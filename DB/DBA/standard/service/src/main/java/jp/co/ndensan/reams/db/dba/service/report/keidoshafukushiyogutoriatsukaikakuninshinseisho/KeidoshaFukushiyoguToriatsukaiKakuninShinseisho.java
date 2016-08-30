@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilders.ReportSourceBuilders;
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;

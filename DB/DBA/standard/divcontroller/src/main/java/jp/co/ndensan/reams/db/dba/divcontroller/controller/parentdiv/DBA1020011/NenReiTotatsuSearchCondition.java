@@ -32,7 +32,7 @@ public class NenReiTotatsuSearchCondition {
      * @return ResponseData
      */
     public ResponseData<NenReiTotatsuSearchConditionDiv> onLoad(NenReiTotatsuSearchConditionDiv div) {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("BatchRegister"), false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("BatchRegister"), true);
         createHandler(div).load(new NenreitotatsuJoken(new NenreitotatsuShikakuIdo().getNenreitotatsuJoken()));
         return createResponse(div);
     }

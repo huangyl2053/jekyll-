@@ -252,6 +252,8 @@ public class HihokenshaShikakuTeiseiManager {
             dbT1001Entity.setShichosonCode(new LasdecCode(資格詳細情報.getShozaiHokensha()));
             dbT1001Entity.setKoikinaiTokureiSochimotoShichosonCode(new LasdecCode(資格詳細情報.getSochimotoHokensha()));
             dbT1001Entity.setKyuShichosonCode(new LasdecCode(資格詳細情報.getKyuHokensha()));
+            dbT1001Entity.setJushochiTokureiFlag(資格詳細情報.getJutokuKubun());
+
             資格訂正情報List.add(dbT1001Entity);
             FlexibleDate 喪失日 = 資格詳細情報.getSoshitsuDate();
             if (喪失日 != null && !喪失日.isEmpty()) {
@@ -589,7 +591,8 @@ public class HihokenshaShikakuTeiseiManager {
                 }
             } else {
                 for (DbT1001HihokenshaDaichoEntity entity : dbT1001List) {
-                    entity.setState(EntityDataState.Deleted);
+                    entity.setState(EntityDataState.Modified);
+                    entity.setLogicalDeletedFlag(true);
                     dac.save(entity);
                 }
                 for (HihokenshaDaicho hihokenshaDaicho : 資格訂正登録リスト) {

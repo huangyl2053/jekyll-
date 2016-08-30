@@ -73,4 +73,11 @@ public interface IShisetsuNyutaishoRirekiKanriDiv extends ICommonChildDivBasePro
      * @return List<dgShisetsuNyutaishoRireki_Row> 施設入退所履歴の一覧
      */
     public List<dgShisetsuNyutaishoRireki_Row> get施設入退所履歴一覧();
+
+    /**
+     * 保存可能な状態か確認します。
+     *
+     * @return return 保存可能ならtrue
+     */
+    public boolean isSavable();
 }

@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
+package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -15,8 +15,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public final class DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator {
 
-    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
-    public static final FlexibleYearMonth DEFAULT_サービス提供年月 = new FlexibleYearMonth("199001");
+    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("0000000273");
+    public static final FlexibleYearMonth DEFAULT_サービス提供年月 = new FlexibleYearMonth("201103");
     public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
     public static final Decimal DEFAULT_サービス費用合計額合計 = new Decimal(0);
     public static final Decimal DEFAULT_利用者負担額合計 = new Decimal(0);

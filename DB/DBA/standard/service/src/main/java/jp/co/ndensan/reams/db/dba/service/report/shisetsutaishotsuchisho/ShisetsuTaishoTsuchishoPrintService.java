@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dba.entity.report.shisetsutaishotsuchisho.Shisetsu
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -56,9 +57,13 @@ public class ShisetsuTaishoTsuchishoPrintService {
                     FlexibleDate.getNowDate(),
                     reportSourceWriter);
             item.setDenshiKoin(ninshoshaSource.denshiKoin);
-            item.setShomeiHakkoYMD(ninshoshaSource.hakkoYMD);
-            item.setShuchoMei(ninshoshaSource.ninshoshaYakushokuMei);
-            item.setShichosonMei2(ninshoshaSource.ninshoshaYakushokuMei2);
+            item.setKoinMojiretsu(ninshoshaSource.koinMojiretsu);
+            item.setNinshoshaShimeiKakenai(ninshoshaSource.ninshoshaShimeiKakenai);
+            item.setNinshoshaShimeiKakeru(ninshoshaSource.ninshoshaShimeiKakeru);
+            item.setNinshoshaYakushokuMei1(ninshoshaSource.ninshoshaYakushokuMei1);
+            item.setShomeiHakkoYMD(RString.EMPTY);
+            item.setNinshoshaYakushokuMei(ninshoshaSource.ninshoshaYakushokuMei);
+            item.setNinshoshaYakushokuMei2(ninshoshaSource.ninshoshaYakushokuMei2);
             item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
             ShisetsuTaishoTsuchishoReport report = ShisetsuTaishoTsuchishoReport.createFrom(item);
             report.writeBy(reportSourceWriter);

@@ -13,8 +13,6 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriMaster;
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TashichosonBusiness;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TaJushochiTokureisyaKanriRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TashichosonRelateEntity;
@@ -25,10 +23,14 @@ import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.code.KaigoTatokuK
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.code.KaigoTatokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJushochiTokureiEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1003TashichosonJushochiTokureiAliveDac;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
@@ -71,6 +73,7 @@ public class TaJushochiTokureisyaKanriManager {
     private final MapperProvider mapperProvider;
     private final DbT1003TashichosonJushochiTokureiDac dbT1003Dac;
     private final DbT1004ShisetsuNyutaishoDac 介護保険施設入退所Manager;
+    private final DbV1003TashichosonJushochiTokureiAliveDac viewDac;
 
     /**
      * コンストラクタです。
@@ -79,6 +82,7 @@ public class TaJushochiTokureisyaKanriManager {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.dbT1003Dac = InstanceProvider.create(DbT1003TashichosonJushochiTokureiDac.class);
         this.介護保険施設入退所Manager = InstanceProvider.create(DbT1004ShisetsuNyutaishoDac.class);
+        this.viewDac = InstanceProvider.create(DbV1003TashichosonJushochiTokureiAliveDac.class);
     }
 
     /**
@@ -88,11 +92,12 @@ public class TaJushochiTokureisyaKanriManager {
      */
     TaJushochiTokureisyaKanriManager(MapperProvider mapperProvider,
             DbT1003TashichosonJushochiTokureiDac dbT1003Dac,
-            DbT1004ShisetsuNyutaishoDac 介護保険施設入退所Manager) {
+            DbT1004ShisetsuNyutaishoDac 介護保険施設入退所Manager,
+            DbV1003TashichosonJushochiTokureiAliveDac viewDac) {
         this.mapperProvider = mapperProvider;
         this.dbT1003Dac = dbT1003Dac;
         this.介護保険施設入退所Manager = 介護保険施設入退所Manager;
-
+        this.viewDac = viewDac;
     }
 
     /**
@@ -201,6 +206,45 @@ public class TaJushochiTokureisyaKanriManager {
             set他市町村住所地特例(tokureiEntity, nyutaishoEntity, tashichosonBusiness);
         }
         return tashichosonBusiness;
+    }
+
+    /**
+     * 最新の他市町村住所地特例情報を取得します。
+     *
+     * @param shikibetsuCode 識別コード
+     * @return 最新の他市町村住所地特例情報。取得できなかった場合はnullを返す。
+     */
+    @Transaction
+    public TashichosonJushochiTokurei getNewestTaJushochiTokurei(ShikibetsuCode shikibetsuCode) {
+        DbV1003TashichosonJushochiTokureiEntity entity = viewDac.selectByShikibetsuCode(shikibetsuCode);
+        if (entity == null) {
+            return null;
+        }
+        return new TashichosonJushochiTokurei(toEntity(entity));
+    }
+
+    private DbT1003TashichosonJushochiTokureiEntity toEntity(DbV1003TashichosonJushochiTokureiEntity entity) {
+        DbT1003TashichosonJushochiTokureiEntity tableEntity = new DbT1003TashichosonJushochiTokureiEntity();
+        tableEntity.setShikibetsuCode(entity.getShikibetsuCode());
+        tableEntity.setIdoYMD(entity.getIdoYMD());
+        tableEntity.setEdaNo(entity.getEdaNo());
+        tableEntity.setIdoJiyuCode(entity.getIdoJiyuCode());
+        tableEntity.setShichosonCode(entity.getShichosonCode());
+        tableEntity.setTekiyoJiyuCode(entity.getTekiyoJiyuCode());
+        tableEntity.setTekiyoYMD(entity.getTekiyoYMD());
+        tableEntity.setTekiyoTodokedeYMD(entity.getTekiyoTodokedeYMD());
+        tableEntity.setTekiyoUketsukeYMD(entity.getTekiyoUketsukeYMD());
+        tableEntity.setKaijoJiyuCode(entity.getKaijoJiyuCode());
+        tableEntity.setKaijoYMD(entity.getKaijoYMD());
+        tableEntity.setKaijoTodokedeYMD(entity.getKaijoTodokedeYMD());
+        tableEntity.setKaijoUketsukeYMD(entity.getKaijoUketsukeYMD());
+        tableEntity.setSochiHokenshaNo(entity.getSochiHokenshaNo());
+        tableEntity.setSochiHihokenshaNo(entity.getSochiHihokenshaNo());
+        tableEntity.setTatokuRenrakuhyoHakkoYMD(entity.getTatokuRenrakuhyoHakkoYMD());
+        tableEntity.setShisetsuTaishoTsuchiHakkoYMD(entity.getShisetsuTaishoTsuchiHakkoYMD());
+        tableEntity.setShisetsuHenkoTsuchiHakkoYMD(entity.getShisetsuHenkoTsuchiHakkoYMD());
+        tableEntity.setLogicalDeletedFlag(entity.getLogicalDeletedFlag());
+        return tableEntity;
     }
 
     /**
@@ -384,7 +428,7 @@ public class TaJushochiTokureisyaKanriManager {
             return new RString("0001");
         }
         return entity.getEdaNo() == null || entity.getEdaNo().isEmpty()
-                ? new RString("0001") : new RString(Integer.parseInt(entity.getEdaNo().toString()) + 1).padZeroToLeft(枝番);
+               ? new RString("0001") : new RString(Integer.parseInt(entity.getEdaNo().toString()) + 1).padZeroToLeft(枝番);
     }
 
     private void set他市町村住所地特例(

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import java.util.List;
@@ -332,4 +333,19 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
         return RoreiFukushiNenkinJukyushaManager.createInstance();
     }
 
+    @Override
+    public boolean isSavable() {
+
+        Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha
+                = ViewStateHolder.get(ViewStateKeys.老齢福祉年金情報検索結果一覧, Models.class);
+        if (roreiFukushiNenkinJukyusha != null) {
+            Iterator<RoreiFukushiNenkinJukyusha> iterater = roreiFukushiNenkinJukyusha.iterator();
+            while (iterater.hasNext()) {
+                if (iterater.next().hasChanged()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

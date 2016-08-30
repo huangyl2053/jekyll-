@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItak
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jul 21 13:51:14 JST 2016 
+ * Mon Aug 08 21:41:52 JST 2016 
  */
 
 

@@ -93,7 +93,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxEntity</artifactId>
-            <version>${jp.co.ndensan.reams.dbx.version}</version>
+            <version>${jp.co.ndensan.reams.dbxVersion}</version>
             <scope>test</scope>
             <classifier>tests</classifier>
         </dependency>

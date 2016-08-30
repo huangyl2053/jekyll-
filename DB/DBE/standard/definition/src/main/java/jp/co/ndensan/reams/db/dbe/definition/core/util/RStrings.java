@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.core.util;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 
 /**
@@ -34,5 +35,15 @@ public final class RStrings {
         } else {
             return aRawValue;
         }
+    }
+
+    public static RString removedSpaces(RString aRawValue) {
+        if (RString.isNullOrEmpty(aRawValue)) {
+            return aRawValue;
+        }
+        return new RStringBuilder().append(aRawValue)
+                .replace(RString.FULL_SPACE, RString.EMPTY)
+                .replace(RString.HALF_SPACE, RString.EMPTY)
+                .toRString();
     }
 }
