@@ -414,6 +414,10 @@ public enum ReportIdDBC {
      */
     DBC100029(new ReportId("DBC100029_JyuryoItakuKeiyakuKakuninSho"), new RString("介護保険受領委任契約承認（不承認）確認書（利用者向け）")),
     /**
+     * 事業分高額合算支給決定情報
+     */
+    DBC7210001(new ReportId("DBC701021_HanyoListJigyoBunKogakuGassanShikyuKettei"), new RString("事業分高額合算支給決定情報")),
+    /**
      * 汎用リスト　基準収入額適用情報帳票ＩＤです。
      */
     DBC701020(new ReportId("DBC701020_HanyoListKijunShunyugakuTekiyo"), new RString("汎用リスト　基準収入額適用情報"));
