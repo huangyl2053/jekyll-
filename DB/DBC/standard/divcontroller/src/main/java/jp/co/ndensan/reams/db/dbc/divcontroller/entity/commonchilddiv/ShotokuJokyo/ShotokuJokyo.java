@@ -58,7 +58,7 @@ public class ShotokuJokyo {
         List<KijunShunyugakuDate> list = getHandler(div).set世帯員情報クラス格納リスト();
         div.setHdnDaialogSelectSetaiinJoho(DataPassingConverter.serialize((Serializable) list));
         response.data = div;
-        return response;
+        return ResponseData.of(div).dialogOKClose();
     }
 
     /**
