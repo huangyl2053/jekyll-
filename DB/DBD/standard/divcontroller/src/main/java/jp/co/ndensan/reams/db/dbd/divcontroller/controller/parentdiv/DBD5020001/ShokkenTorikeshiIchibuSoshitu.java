@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5020001;
 
-import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiJoho;
+//import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiJoho;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5020001.DBD5020001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5020001.DBD5020001TransitionEventName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5020001.ShokkenTorikeshiIchibuSoshituDiv;
@@ -59,9 +59,8 @@ public class ShokkenTorikeshiIchibuSoshitu {
 
         ShokkenTorikeshiIchibuSoshituHandler handler = getHandler(div);
 
-        ShokkenTorikeshiIchibuSoshituGamenJoho 画面更新用情報 = handler.onLoad(申請書管理番号);
-        ViewStateHolder.put(要介護認定処理画面キー.画面更新用情報, 画面更新用情報);
-
+//        ShokkenTorikeshiIchibuSoshituGamenJoho 画面更新用情報 = handler.onLoad(申請書管理番号);
+//        ViewStateHolder.put(要介護認定処理画面キー.画面更新用情報, 画面更新用情報);
         ValidationMessageControlPairs pairs = getValidationHandler(div).validate履歴番号();
         if (pairs.iterator().hasNext()) {
             div.setHdnKekkaCommonDivMode(new RString(KekkaShosaiJohoDiv.ShoriType.ShokaiMode.toString()));
@@ -158,12 +157,12 @@ public class ShokkenTorikeshiIchibuSoshitu {
     public ResponseData<ShokkenTorikeshiIchibuSoshituDiv> onBeforeOpenDialog_btnZenkaiNinteichi(ShokkenTorikeshiIchibuSoshituDiv div) {
 
         ShokkenTorikeshiIchibuSoshituGamenJoho 画面更新用情報 = ViewStateHolder.get(要介護認定処理画面キー.画面更新用情報, ShokkenTorikeshiIchibuSoshituGamenJoho.class);
-        YokaigoNinteiJoho 前回情報 = 画面更新用情報.get前回情報();
-        if (null == 前回情報) {
-            return ResponseData.of(div).respond();
-        }
+//        YokaigoNinteiJoho 前回情報 = 画面更新用情報.get前回情報();
+//        if (null == 前回情報) {
+//            return ResponseData.of(div).respond();
+//        }
 
-        div.setHdnZenkaiSerializedBusiness(DataPassingConverter.serialize(getHandler(div).getKekkaShosaiJohoModel(前回情報, false)));
+//        div.setHdnZenkaiSerializedBusiness(DataPassingConverter.serialize(getHandler(div).getKekkaShosaiJohoModel(前回情報, false)));
         return ResponseData.of(div).respond();
     }
 
@@ -185,12 +184,12 @@ public class ShokkenTorikeshiIchibuSoshitu {
      */
     public ResponseData<ShokkenTorikeshiIchibuSoshituDiv> onBeforeOpenDialog_btnKonkaiNinteichi(ShokkenTorikeshiIchibuSoshituDiv div) {
         ShokkenTorikeshiIchibuSoshituGamenJoho 画面更新用情報 = ViewStateHolder.get(要介護認定処理画面キー.画面更新用情報, ShokkenTorikeshiIchibuSoshituGamenJoho.class);
-        YokaigoNinteiJoho 今回情報 = 画面更新用情報.get今回情報();
-        if (null == 今回情報) {
-            return ResponseData.of(div).respond();
-        }
+//        YokaigoNinteiJoho 今回情報 = 画面更新用情報.get今回情報();
+//        if (null == 今回情報) {
+//            return ResponseData.of(div).respond();
+//        }
 
-        div.setHdnKonkaiSerializedBusiness(DataPassingConverter.serialize(getHandler(div).getKekkaShosaiJohoModel(今回情報, true)));
+//        div.setHdnKonkaiSerializedBusiness(DataPassingConverter.serialize(getHandler(div).getKekkaShosaiJohoModel(今回情報, true)));
         return ResponseData.of(div).respond();
     }
 
@@ -247,7 +246,7 @@ public class ShokkenTorikeshiIchibuSoshitu {
 
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ShokkenTorikeshiIchibuSoshituGamenJoho 画面更新用情報 = ViewStateHolder.get(要介護認定処理画面キー.画面更新用情報, ShokkenTorikeshiIchibuSoshituGamenJoho.class);
-            getHandler(div).save(画面更新用情報);
+//            getHandler(div).save(画面更新用情報);
         } else {
             return ResponseData.of(div).respond();
         }

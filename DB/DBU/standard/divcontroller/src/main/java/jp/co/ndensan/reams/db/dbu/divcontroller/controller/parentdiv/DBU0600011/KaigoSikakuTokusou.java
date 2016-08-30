@@ -9,8 +9,11 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600011.DBU0
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600011.KaigoSikakuTokusouDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0600011.KaigoSikakuTokusouHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.sogosyokai.SoyoSyokaiService;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -21,13 +24,15 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KaigoSikakuTokusou {
 
-    private final TaishoshaKey key;
+    private TaishoshaKey key;
     private final SoyoSyokaiService soyosyokaiservice;
 
     /**
      * インスタンスです。
      */
     public KaigoSikakuTokusou() {
+        key = new TaishoshaKey(new HihokenshaNo("1000000000"), new ShikibetsuCode("000000000000010"), new SetaiCode("1"));
+        ViewStateHolder.put(ViewStateKeys.資格対象者, key);
         key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         this.soyosyokaiservice = SoyoSyokaiService.createInstance();
     }

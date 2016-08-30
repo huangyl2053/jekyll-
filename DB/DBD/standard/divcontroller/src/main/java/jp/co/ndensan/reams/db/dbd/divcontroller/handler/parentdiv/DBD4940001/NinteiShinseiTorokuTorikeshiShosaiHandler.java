@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiJohoB
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4940001.NinteiShinseiTorokuTorikeshiShosaiDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.yokaigoninteijoho.YokaigoNinteiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseiJokyoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -74,23 +73,22 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
      *
      * @return 認定情報 YokaigoNinteiJoho
      */
-    public YokaigoNinteiJoho onLoad(RString 被保険者番号) {
-
-        YokaigoNinteiJoho 認定情報 = get認定情報(被保険者番号, true);
-        if (null == 認定情報) {
-            return null;
-        }
-        setHdnArea(認定情報);
-
-        initialize(
-                //                被保険者番号,
-                認定情報, is受給());
-
-        edit状態(認定情報.get申請状況区分().equals(ShinseiJokyoKubun.申請中.getコード()));
-
-        return 認定情報;
-    }
-
+//    public YokaigoNinteiJoho onLoad(RString 被保険者番号) {
+//
+////        YokaigoNinteiJoho 認定情報 = get認定情報(被保険者番号, true);
+//        if (null == 認定情報) {
+//            return null;
+//        }
+//        setHdnArea(認定情報);
+//
+//        initialize(
+//                //                被保険者番号,
+//                認定情報, is受給());
+//
+//        edit状態(認定情報.get申請状況区分().equals(ShinseiJokyoKubun.申請中.getコード()));
+//
+//        return 認定情報;
+//    }
     /**
      * 「保存する」ボタンをクリック
      *
@@ -104,8 +102,7 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
             認定情報 = edit要介護認定申請情報認定(認定情報);
         }
 
-        YokaigoNinteiJohoManager.createInstance().save介護認定申請情報(認定情報, is受給());
-
+//        YokaigoNinteiJohoManager.createInstance().save介護認定申請情報(認定情報, is受給());
     }
 
 //    /**
@@ -118,16 +115,15 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
 //    public List<YokaigoRirekiJoho> get今回前回履歴情報(RString 被保険者番号) {
 //        return YokaigoNinteiJohoManager.createInstance().get今回前回履歴情報(被保険者番号);
 //    }
-    private YokaigoNinteiJoho get認定情報(RString 被保険者番号, boolean is受給) {
-        YokaigoNinteiJoho 認定情報;
-        if (is受給) {
-            認定情報 = YokaigoNinteiJohoManager.createInstance().get認定情報受給(被保険者番号);
-        } else {
-            認定情報 = YokaigoNinteiJohoManager.createInstance().get認定情報認定(被保険者番号);
-        }
-        return 認定情報;
-    }
-
+//    private YokaigoNinteiJoho get認定情報(RString 被保険者番号, boolean is受給) {
+//        YokaigoNinteiJoho 認定情報;
+//        if (is受給) {
+//            認定情報 = YokaigoNinteiJohoManager.createInstance().get認定情報受給(被保険者番号);
+//        } else {
+//            認定情報 = YokaigoNinteiJohoManager.createInstance().get認定情報認定(被保険者番号);
+//        }
+//        return 認定情報;
+//    }
     private void initialize(
             //            RString 被保険者番号,
             YokaigoNinteiJoho 認定情報, boolean is受給) {

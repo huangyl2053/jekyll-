@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KyufuJohoParamter {
+public final class KyufuJohoParamter {
 
     private final RString 被保険者番号;
     private final RString サービス提供年月;

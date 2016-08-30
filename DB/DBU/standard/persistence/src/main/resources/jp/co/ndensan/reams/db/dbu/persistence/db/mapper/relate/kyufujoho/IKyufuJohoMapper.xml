@@ -20,7 +20,6 @@
         <result property="保険請求額" column="保険請求額"  />
         <result property="利用者負担額" column="利用者負担額"  />
         <result property="改修費用合計" column="改修費用合計"  />
-        <!--<association property="事業者名称" resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity"/>-->
     </resultMap>
     <select id="get居宅サービス計画情報"
             resultMap="getKyufujohoentity"
@@ -66,7 +65,7 @@
             AND "DbT3048"."seiriNo" = "DbT3036"."seiriNo" 
         WHERE
             "DbT3048"."hiHokenshaNo" = #{被保険者番号} 
-             AND "DbT3048"."serviceTeikyoYM" <![CDATA[>=]]> #{開始年月} 
+             AND #{開始年月} <![CDATA[<=]]> "DbT3048"."serviceTeikyoYM" <![CDATA[>=]]>  
              AND "DbT3048"."serviceTeikyoYM" <![CDATA[<=]]> #{終了年月} 
              AND "DbT3036"."shikyuHushikyuKetteiKubun" = #{支給不支給}
         

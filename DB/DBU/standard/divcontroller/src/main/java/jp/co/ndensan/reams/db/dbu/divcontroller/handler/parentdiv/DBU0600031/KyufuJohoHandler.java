@@ -26,8 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class KyufuJohoHandler {
 
-    private final KyufuJohoDiv div;
     private static final int MONTH_3 = 3;
+    private final KyufuJohoDiv div;
 
     /**
      * インスタンスです。
@@ -44,8 +44,8 @@ public class KyufuJohoHandler {
      * @param key TaishoshaKey
      */
     public void onLoad(TaishoshaKey key) {
-//        div.getCcdKaigoatenaInfo().initialize(key.get識別コード());
-//        div.getCcdKaigoShikakuKihon().initialize(key.get被保険者番号());
+        div.getCcdKaigoatenaInfo().initialize(key.get識別コード());
+        div.getCcdKaigoShikakuKihon().initialize(key.get被保険者番号());
         div.getBtnKyufuInfo().setDisabled(true);
     }
 
@@ -211,6 +211,8 @@ public class KyufuJohoHandler {
             div.getTxtKeikakuSakuseiKubun().setValue(kyufujoho.get自己計画作成区分());
             div.getTxtTekyouKikan().setFromValue(new RDate(kyufujoho.get自己適用開始().toString()));
             div.getTxtTekyouKikan().setToValue(new RDate(kyufujoho.get自己適用終了().toString()));
+            div.getTxtZigyoushaKodo().setValue(RString.EMPTY);
+            div.getTxtZigyoushaMesai().setValue(RString.EMPTY);
         }
         return RString.EMPTY;
     }
@@ -241,7 +243,6 @@ public class KyufuJohoHandler {
         }
         if (ServiceBunrui.地域密着型サービス.getコード().equals(kyufuJoho.getサービス分類コード())) {
             if (!kyufuJoho.getサービス提供年月().equals(提供年月)) {
-                提供年月 = kyufuJoho.getサービス提供年月();
                 分類コード = kyufuJoho.getサービス分類コード();
             } else {
                 if (提供年月.isEmpty()) {

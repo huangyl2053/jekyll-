@@ -62,7 +62,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  *
@@ -176,8 +175,8 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
 
         ShokkenTorikeshiIchibuSoshituGamenJoho 画面更新用情報 = new ShokkenTorikeshiIchibuSoshituGamenJoho();
         画面更新用情報.set導入形態コード(市町村セキュリティ情報.get導入形態コード());
-        画面更新用情報.set今回情報(今回情報);
-        画面更新用情報.set前回情報(前回情報);
+//        画面更新用情報.set今回情報(今回情報);
+//        画面更新用情報.set前回情報(前回情報);
         return 画面更新用情報;
     }
 
@@ -195,30 +194,29 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
      *
      * @param 画面更新用情報 ShokkenTorikeshiIchibuSoshituGamenJoho
      */
-    public void save(ShokkenTorikeshiIchibuSoshituGamenJoho 画面更新用情報) {
-        YokaigoNinteiJoho 今回情報 = 画面更新用情報.get今回情報();
-        Code 導入形態コード = 画面更新用情報.get導入形態コード();
-        KekkaShosaiJohoOutModel model = null;
-        if (null != div.getHdnKekkaShosaiJohoOutModel() && !div.getHdnKekkaShosaiJohoOutModel().isEmpty()) {
-            model = DataPassingConverter.deserialize(div.getHdnKekkaShosaiJohoOutModel(), KekkaShosaiJohoOutModel.class);
-        }
-
-        今回情報 = edit受給者台帳(今回情報, 導入形態コード, model);
-
-        if (div.getHdnKonkaiRirekiNo().equals(new RString("0000"))) {
-            今回情報 = edit要介護認定申請情報(今回情報, model);
-
-            if (DonyuKeitaiCode.認定広域.getCode().equals(convertCodeToRString(導入形態コード))) {
-                今回情報 = edit認定結果情報(今回情報, true, 導入形態コード);
-                今回情報 = edit要介護認定インターフェース情報(今回情報);
-            } else if (DonyuKeitaiCode.認定単一.getCode().equals(convertCodeToRString(導入形態コード))) {
-                今回情報 = edit認定結果情報(今回情報, false, 導入形態コード);
-            }
-        }
-
-        YokaigoNinteiJohoManager.createInstance().save(今回情報, is履歴番号更新要());
-    }
-
+//    public void save(ShokkenTorikeshiIchibuSoshituGamenJoho 画面更新用情報) {
+////        YokaigoNinteiJoho 今回情報 = 画面更新用情報.get今回情報();
+//        Code 導入形態コード = 画面更新用情報.get導入形態コード();
+//        KekkaShosaiJohoOutModel model = null;
+//        if (null != div.getHdnKekkaShosaiJohoOutModel() && !div.getHdnKekkaShosaiJohoOutModel().isEmpty()) {
+//            model = DataPassingConverter.deserialize(div.getHdnKekkaShosaiJohoOutModel(), KekkaShosaiJohoOutModel.class);
+//        }
+//
+//        今回情報 = edit受給者台帳(今回情報, 導入形態コード, model);
+//
+//        if (div.getHdnKonkaiRirekiNo().equals(new RString("0000"))) {
+//            今回情報 = edit要介護認定申請情報(今回情報, model);
+//
+//            if (DonyuKeitaiCode.認定広域.getCode().equals(convertCodeToRString(導入形態コード))) {
+//                今回情報 = edit認定結果情報(今回情報, true, 導入形態コード);
+//                今回情報 = edit要介護認定インターフェース情報(今回情報);
+//            } else if (DonyuKeitaiCode.認定単一.getCode().equals(convertCodeToRString(導入形態コード))) {
+//                今回情報 = edit認定結果情報(今回情報, false, 導入形態コード);
+//            }
+//        }
+//
+//        YokaigoNinteiJohoManager.createInstance().save(今回情報, is履歴番号更新要());
+//    }
     /**
      * 「今回認定値」ダイアログ或は「前回認定値」ダイアログOPENボタン押した後のメソッドです。
      *

@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyufujoho.KyufuJohoEntity;
 public interface IKyufuJohoMapper {
 
     /**
-     * 居宅サービス計画情報の取得です。
+     * 居宅サービス計画情報の取得します。
      *
      * @param paramter KyufuJohoParamter
      * @return KyufuJohoEntity
@@ -25,7 +25,7 @@ public interface IKyufuJohoMapper {
     KyufuJohoEntity get居宅サービス計画情報(KyufuJohoParamter paramter);
 
     /**
-     * 購入金額の取得。
+     * 購入金額の取得します。
      *
      * @param paramter KounyukingakuParamter
      * @return KyufuJohoEntity
@@ -33,7 +33,7 @@ public interface IKyufuJohoMapper {
     KyufuJohoEntity get購入金額(KounyukingakuParamter paramter);
 
     /**
-     * 購入金額の取得。
+     * 購入金額の取得します。
      *
      * @param paramter KounyukingakuParamter
      * @return KyufuJohoEntity
@@ -41,7 +41,7 @@ public interface IKyufuJohoMapper {
     KyufuJohoEntity get保険請求負担額(KounyukingakuParamter paramter);
 
     /**
-     * 住宅改修費用合計の取得。
+     * 住宅改修費用合計の取得します。
      *
      * @param paramter KounyukingakuParamter
      * @return KyufuJohoEntity
@@ -49,7 +49,7 @@ public interface IKyufuJohoMapper {
     KyufuJohoEntity get住宅改修費用合計(KounyukingakuParamter paramter);
 
     /**
-     * 住宅改修請求負担額の取得。
+     * 住宅改修請求負担額の取得します。
      *
      * @param paramter KounyukingakuParamter
      * @return KyufuJohoEntity
@@ -57,7 +57,7 @@ public interface IKyufuJohoMapper {
     KyufuJohoEntity get住宅改修請求負担額(KounyukingakuParamter paramter);
 
     /**
-     * サービス利用状況情報の取得。
+     * サービス利用状況情報の取得します。
      *
      * @param paramter KounyukingakuParamter
      * @return KyufuJohoEntity

@@ -149,7 +149,6 @@ public class KyufuJohoFinder {
         return new KyufuJohoBusiness(kyufujoho);
     }
 
-    //
     /**
      * サービス利用状況情報の取得です。
      *

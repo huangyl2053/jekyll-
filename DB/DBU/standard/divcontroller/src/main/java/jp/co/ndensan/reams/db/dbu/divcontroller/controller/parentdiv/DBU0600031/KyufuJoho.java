@@ -13,11 +13,8 @@ import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyufujoho.KyufuJohoParam
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600031.KyufuJohoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0600031.KyufuJohoHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.kyufujoho.KyufuJohoFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,16 +27,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KyufuJoho {
 
-    private TaishoshaKey key;
-    private final KyufuJohoFinder kyufujohofinder;
     private static final int YEAR_3 = 3;
+    private final TaishoshaKey key;
+    private final KyufuJohoFinder kyufujohofinder;
 
     /**
      * インスタンスです。
      */
     public KyufuJoho() {
-        key = new TaishoshaKey(new HihokenshaNo("1000000000"), new ShikibetsuCode("000000000000010"), new SetaiCode("1"));
-        ViewStateHolder.put(ViewStateKeys.資格対象者, key);
         key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         this.kyufujohofinder = KyufuJohoFinder.createInstance();
     }
@@ -88,6 +83,6 @@ public class KyufuJoho {
     private void set利用状況情報(KyufuJohoDiv div) {
         RDate date = RDate.getNowDate();
         getHandler(div).set利用状況情報(kyufujohofinder.getサービス利用状況情報(KyufuJohoParamter.createParameter(
-                key.get被保険者番号().value(), new RString((date.getYearValue() - YEAR_3)), setサービス分類コード(div))).records());
+                key.get被保険者番号().value(), new RString((date.getYear().minusYear(YEAR_3).toString())), setサービス分類コード(div))).records());
     }
 }

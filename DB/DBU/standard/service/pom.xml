@@ -95,5 +95,10 @@
             <artifactId>DbbPersistence</artifactId>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.aa.aax</groupId>
+            <artifactId>AaxService</artifactId>
+            <version>1.12.0</version>
+        </dependency>
     </dependencies>
 </project>
