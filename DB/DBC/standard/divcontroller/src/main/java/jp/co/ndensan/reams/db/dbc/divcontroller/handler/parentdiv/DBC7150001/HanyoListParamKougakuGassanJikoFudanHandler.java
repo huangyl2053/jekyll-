@@ -39,8 +39,6 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
     private static final RString 送付対象外を含める = new RString("key0");
     private static final int 調定年度を含めて8年分 = 8;
     private static final int INDEX_ゼロ = 0;
-    private static final RString 項目名付加キー = new RString("項目名付加");
-    private static final RString 日付編集キー = new RString("日付編集");
 
     /**
      * コンストラクタです。
@@ -71,8 +69,8 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         }
         div.getCcdShutsuryokuKoumoku().setDisabled(true);
         List<RString> keyList = new ArrayList<>();
-        keyList.add(項目名付加キー);
-        keyList.add(日付編集キー);
+        keyList.add(項目名付加);
+        keyList.add(日付);
         div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(keyList);
         panel.getDdlDetaSakuseiKubun().setDataSource(getデータ作成区分());
         div.getChushutsuJokenPanel().getDdlDetaSakuseiKubun().setSelectedIndex(INDEX_ゼロ);

@@ -44,7 +44,8 @@ public class HanyoListParamForKougakuValidationHandler {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         RString 支給申請書整理番号From = div.getTxtSikyuSinseishoSeiriBangoKaishi().getValue();
         RString 支給申請書整理番号To = div.getTxtSikyuSinseishoSeiriBangoShuryo().getValue();
-        if (null != 支給申請書整理番号From && null != 支給申請書整理番号To) {
+        if (null != 支給申請書整理番号From && null != 支給申請書整理番号To
+                && RString.EMPTY != 支給申請書整理番号From && RString.EMPTY != 支給申請書整理番号To) {
             int 支給申請書整理番号F = Integer.parseInt(支給申請書整理番号From.toString());
             int 支給申請書整理番号T = Integer.parseInt(支給申請書整理番号To.toString());
             if (支給申請書整理番号T < 支給申請書整理番号F) {
