@@ -330,14 +330,6 @@ public enum ReportIdDBC {
      */
     DBC200088(new ReportId("DBC200088_KijunShunyugakuTekiyoShinseishoHakkoIchiran"), new RString("基準収入額適用申請書一覧表")),
     /**
-     * 汎用リスト出力(高額合算申請書情報)
-     */
-    DBC701014(new ReportId("DBC701014_HanyoList_KogakuGassanShinseishoJoho"), new RString("汎用リスト出力(高額合算申請書情報)")),
-    /**
-     * 汎用リスト出力(高額合算自己負担額情報
-     */
-    DBC701015(new ReportId("DBC701015_HanyoList_KogakuGassanJikoFutangaku"), new RString("汎用リスト出力(高額合算自己負担額情報")),
-    /**
      * （受給者台帳（一覧表）帳票ＩＤです。
      */
     DBC200006(new ReportId("DBC200006_KokuhorenJukyushaDaichoIchiran"), new RString("受給者台帳（一覧表）")),
