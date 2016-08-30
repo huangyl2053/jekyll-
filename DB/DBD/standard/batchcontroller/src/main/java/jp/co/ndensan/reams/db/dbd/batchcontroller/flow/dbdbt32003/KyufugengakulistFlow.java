@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdbt32003.KyufuGengakuHaa
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 
 /**
  * 給付額減額滞納者把握リスト（バッチ）フロークラスです．
@@ -52,6 +53,6 @@ public class KyufugengakulistFlow extends BatchFlowBase<KyufuGengakuHaakuIchiran
     @Step(給付額減額滞納者把握情報取得)
     protected IBatchFlowCommand kyufuGengakuHaakuListSakusei() {
         return loopBatch(KyufuGengakuHaakuListSakuseiProcess.class)
-                .arguments(getParameter().toKyufuGengakuHaakuListSakuseiProcessParameter()).define();
+                .arguments(getParameter().toKyufuGengakuHaakuListSakuseiProcessParameter(RDateTime.MAX)).define();
     }
 }
