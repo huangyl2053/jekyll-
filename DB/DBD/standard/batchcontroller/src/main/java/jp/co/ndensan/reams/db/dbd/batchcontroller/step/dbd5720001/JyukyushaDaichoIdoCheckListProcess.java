@@ -51,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -246,28 +245,22 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
         List<RString> 出力条件 = new ArrayList<>();
 
         if (parameter.get今回抽出開始年月日() != null) {
-            出力条件.add(add出力条件(new RString("今回抽出開始年月日"), parameter.get今回抽出開始年月日().wareki().toDateString()));
+            出力条件.add(new RString("【今回抽出開始年月日】　").concat(parameter.get今回抽出開始年月日().wareki().toDateString()));
         }
         if (parameter.get今回抽出開始時分秒() != null) {
-            出力条件.add(add出力条件(new RString("今回抽出開始時分秒"), parameter.get今回抽出開始時分秒().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
+            出力条件.add(new RString("【今回抽出開始時分秒】　").concat(parameter.get今回抽出開始時分秒().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
         }
         if (parameter.get今回抽出終了年月日() != null) {
-            出力条件.add(add出力条件(new RString("今回抽出終了年月日"), parameter.get今回抽出終了年月日().wareki().toDateString()));
+            出力条件.add(new RString("【今回抽出終了年月日】　").concat(parameter.get今回抽出終了年月日().wareki().toDateString()));
         }
         if (parameter.get今回抽出終了時分秒() != null) {
-            出力条件.add(add出力条件(new RString("今回抽出終了時分秒"), parameter.get今回抽出終了時分秒().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
+            出力条件.add(new RString("【今回抽出終了時分秒】　").concat(parameter.get今回抽出終了時分秒().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
         }
         if (parameter.get出力対象() != null) {
-            出力条件.add(add出力条件(new RString("出力対象"), parameter.get出力対象()));
+            出力条件.add(new RString("【出力対象】　").concat(parameter.get出力対象()));
         }
 
         return 出力条件;
-    }
-
-    private RString add出力条件(RString バッチパラメータ名, RString 値) {
-        RString 条件 = new RStringBuilder(new RString("[")).append(バッチパラメータ名).
-                append(new RString("]")).append(値).toRString();
-        return 条件;
     }
 
 }

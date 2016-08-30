@@ -29,6 +29,10 @@ public class JyukyushaDaichoIdoCheckListMybatisParameter extends UaFt200FindShik
     private final RString 出力順;
     private final UaFt200FindShikibetsuTaishoParam psmShikibetsuTaisho;
 
+    private final boolean is全て;
+    private final boolean is申請者異動以外全て;
+    private final boolean is申請者異動のみ;
+
     /**
      * コンストラクタです。
      *
@@ -49,6 +53,9 @@ public class JyukyushaDaichoIdoCheckListMybatisParameter extends UaFt200FindShik
         this.今回抽出終了年月日 = 今回抽出終了年月日;
         this.行挿入日時終了 = 行挿入日時終了;
         this.出力対象 = 出力対象;
+        this.is全て = new RString("全て").equals(出力対象);
+        this.is申請者異動以外全て = new RString("申請者異動以外全て").equals(出力対象);
+        this.is申請者異動のみ = new RString("申請者異動のみ").equals(出力対象);
         this.出力順 = 出力順;
         this.psmShikibetsuTaisho = new UaFt200FindShikibetsuTaishoParam(shikibetsuTaishoPSMSearchKey);
 
