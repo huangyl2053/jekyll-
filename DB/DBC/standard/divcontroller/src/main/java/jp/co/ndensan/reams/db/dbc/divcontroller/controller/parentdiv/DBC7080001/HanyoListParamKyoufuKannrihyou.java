@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7080001;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc710080.DBC710080_HanyoListKyufuKanriHyoParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7080001.HanyoListParamDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7080001.HanyoListParamKyoufuKannrihyouDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7080001.HanyoListParamKyoufuKannrihyouHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -35,7 +34,7 @@ public class HanyoListParamKyoufuKannrihyou {
      * @param div HanyoListParamDiv
      * @return ResponseData
      */
-    public ResponseData<DBC710080_HanyoListKyufuKanriHyoParameter> onclick_btBatch(HanyoListParamDiv div) {
+    public ResponseData<DBC710080_HanyoListKyufuKanriHyoParameter> onclick_btBatch(HanyoListParamKyoufuKannrihyouDiv div) {
         DBC710080_HanyoListKyufuKanriHyoParameter parameter = getHandler(div).バッチ実行();
         return ResponseData.of(parameter).respond();
     }
