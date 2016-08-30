@@ -26,7 +26,6 @@ public class SogojigyohiKohiJukyushaBodyEditor implements ISogojigyohiKohiJukyus
 
     private final SogojigyohiKohiJukyushaEntity 帳票出力対象データ;
     private final boolean 集計Flag;
-    private final int no;
     private final int eight = 8;
 
     /**
@@ -34,13 +33,11 @@ public class SogojigyohiKohiJukyushaBodyEditor implements ISogojigyohiKohiJukyus
      *
      * @param 帳票出力対象データ SogojigyohiKohiJukyushaEntity
      * @param 集計Flag boolean
-     * @param no no
      */
     public SogojigyohiKohiJukyushaBodyEditor(SogojigyohiKohiJukyushaEntity 帳票出力対象データ,
-            boolean 集計Flag, int no) {
+            boolean 集計Flag) {
         this.帳票出力対象データ = 帳票出力対象データ;
         this.集計Flag = 集計Flag;
-        this.no = no;
     }
 
     @Override
@@ -53,7 +50,7 @@ public class SogojigyohiKohiJukyushaBodyEditor implements ISogojigyohiKohiJukyus
     }
 
     private void edit明細(SogojigyohiKohiJukyushaSource source) {
-        source.listUpper_1 = new RString(no);
+        source.listUpper_1 = 帳票出力対象データ.get公費受給者番号();
         source.listUpper_2 = doパターン54(帳票出力対象データ.getサービス提供年月());
         source.listUpper_3 = 帳票出力対象データ.get事業者番号();
         source.listLower_1 = 帳票出力対象データ.get事業者名();

@@ -24,7 +24,6 @@ public class SogojigyohiKohiJukyushaReport extends
 
     private final SogojigyohiKohiJukyushaEntity 帳票出力対象データ;
     private final boolean 集計Flag;
-    private final int no;
     private final RDateTime 作成日時;
     private final Map<RString, RString> 出力順Map;
     private final List<RString> 改頁リスト;
@@ -34,15 +33,13 @@ public class SogojigyohiKohiJukyushaReport extends
      *
      * @param 帳票出力対象データ SogojigyohiKagoKetteiInEntity
      * @param 集計Flag boolean
-     * @param no int
      * @param 作成日時 RDateTime
      * @param 出力順Map Map<RString, RString>
      * @param 改頁リスト List<RString>
      */
     public SogojigyohiKohiJukyushaReport(SogojigyohiKohiJukyushaEntity 帳票出力対象データ,
-            boolean 集計Flag, int no, RDateTime 作成日時, Map<RString, RString> 出力順Map, List<RString> 改頁リスト) {
+            boolean 集計Flag, RDateTime 作成日時, Map<RString, RString> 出力順Map, List<RString> 改頁リスト) {
         this.帳票出力対象データ = 帳票出力対象データ;
-        this.no = no;
         this.集計Flag = 集計Flag;
         this.作成日時 = 作成日時;
         this.出力順Map = 出力順Map;
@@ -58,7 +55,7 @@ public class SogojigyohiKohiJukyushaReport extends
         ISogojigyohiKohiJukyushaEditor headerEditor
                 = new SogojigyohiKohiJukyushaHeadEditor(帳票出力対象データ, 出力順Map, 作成日時, 改頁リスト);
         ISogojigyohiKohiJukyushaEditor bodyEditor
-                = new SogojigyohiKohiJukyushaBodyEditor(帳票出力対象データ, 集計Flag, no);
+                = new SogojigyohiKohiJukyushaBodyEditor(帳票出力対象データ, 集計Flag);
         ISogojigyohiKohiJukyushaBuilder builder
                 = new SogojigyohiKohiJukyushaBuilder(headerEditor, bodyEditor);
         writer.writeLine(builder);

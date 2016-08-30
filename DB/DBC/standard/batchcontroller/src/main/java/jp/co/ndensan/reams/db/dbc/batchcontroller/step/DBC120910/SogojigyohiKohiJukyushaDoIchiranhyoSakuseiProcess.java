@@ -192,7 +192,11 @@ public class SogojigyohiKohiJukyushaDoIchiranhyoSakuseiProcess extends BatchKeyB
         SogojigyohiKohiJukyushaEntity beforeEntity = getBefore();
         if (null != beforeEntity) {
             Boolean 集計Flag = get集計Flag(beforeEntity, entity);
-            SogojigyohiKohiJukyushaReport report = new SogojigyohiKohiJukyushaReport(beforeEntity, 集計Flag, 連番, parameter.getシステム日付(), 出力順Map, 改頁リスト);
+            SogojigyohiKohiJukyushaReport report = new SogojigyohiKohiJukyushaReport(beforeEntity,
+                    集計Flag,
+                    parameter.getシステム日付(),
+                    出力順Map,
+                    改頁リスト);
             report.writeBy(reportSourceWriter);
             this.do帳票のCSVファイル作成(beforeEntity, parameter.getシステム日付(), 集計Flag);
             連番++;
@@ -202,7 +206,11 @@ public class SogojigyohiKohiJukyushaDoIchiranhyoSakuseiProcess extends BatchKeyB
 
     @Override
     protected void afterExecute() {
-        SogojigyohiKohiJukyushaReport report = new SogojigyohiKohiJukyushaReport(lastEntity, true, 連番, parameter.getシステム日付(), 出力順Map, 改頁リスト);
+        SogojigyohiKohiJukyushaReport report = new SogojigyohiKohiJukyushaReport(lastEntity,
+                true,
+                parameter.getシステム日付(),
+                出力順Map,
+                改頁リスト);
         report.writeBy(reportSourceWriter);
         this.do帳票のCSVファイル作成(lastEntity, parameter.getシステム日付(), true);
         sogojigyohiKohiJukyushaCsvWriter.close();
