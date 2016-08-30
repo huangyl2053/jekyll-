@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.nenjiriyoshafuta
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.nenjiriyoshafutanwariaihantei.NenjiRiyoshaFutanwariaiHanteiMybaticParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.HanteiTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.JukyushaDaichoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.SogoJigyoTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity;
@@ -49,7 +48,14 @@ public interface INenjiRiyoshaFutanwariaiHanteiMapper {
      *
      * @return 判定対象者情報
      */
-    List<HanteiTaishoshaEntity> getHanteiTaishoshaTemp();
+    List<SogoJigyoTaishoshaTempEntity> getHanteiTaishoshaTemp_SogoJigyo();
+
+    /**
+     * 判定対象者TEMPを検索する
+     *
+     * @return 判定対象者情報
+     */
+    List<JukyushaDaichoTempEntity> getHanteiTaishoshaTemp_JukyuSha();
 
     /**
      * 利用者負担割合明細を削除する

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.nenjiriyoshafutanwariaihantei;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -22,6 +23,7 @@ public class NenjiRiyoshaFutanwariaiHanteiMybaticParameter implements IMyBatisPa
     private final FlexibleDate 基準日;
     private final RString 処理状態;
     private final FlexibleYear 対象年度;
+    private final RString 処理名 = ShoriName.年次利用者負担割合判定.get名称();
 
     /**
      * コンストラクタです。
