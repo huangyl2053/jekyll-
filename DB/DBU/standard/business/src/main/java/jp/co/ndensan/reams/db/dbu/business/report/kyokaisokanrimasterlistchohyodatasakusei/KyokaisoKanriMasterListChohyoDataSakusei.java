@@ -181,7 +181,9 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
             } else {
                 給付額減額解除.add(RString.EMPTY);
             }
-            標準負担減額後負担額.add(nullToEmpty(new RString(entity.getHyojunFutanKeigengoFutangaku().toString())));
+            if (entity.getHyojunFutanKeigengoFutangaku() != null) {
+                標準負担減額後負担額.add(new RString(entity.getHyojunFutanKeigengoFutangaku().toString()));
+            }
             UzT0007CodeEntity 居室種類 = CodeMaster.getCode(SubGyomuCode.DBZ介護共通,
                     DBZCodeShubetsu.居室種類.getコード(), new Code(entity.getKyojuhiKeigengoKyoshitsuShuruiCode()), FlexibleDate.getNowDate());
             if (居室種類 != null) {
@@ -189,11 +191,18 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
             } else {
                 居住費軽減後居室種類.add(RString.EMPTY);
             }
-            居住費軽減後負担額.add(nullToEmpty(new RString(entity.getKyojuhiKeigengoHutangaku().toString())));
-            食費軽減後負担額.add(nullToEmpty(new RString(entity.getShokuhiKeigengoHutangaku().toString())));
-            高額ｻｰﾋﾞｽ費減額後上限額.add(nullToEmpty(new RString(entity.getKogakuServicehiJogengakuGengakugoJogengaku().toString())));
-            保険料納付減額後保険料段階.add(nullToEmpty(new RString(entity.getGengakuGoHokenryoDankai().toString())));
-
+            if (entity.getKyojuhiKeigengoHutangaku() != null) {
+                居住費軽減後負担額.add(new RString(entity.getKyojuhiKeigengoHutangaku().toString()));
+            }
+            if (entity.getShokuhiKeigengoHutangaku() != null) {
+                食費軽減後負担額.add(new RString(entity.getShokuhiKeigengoHutangaku().toString()));
+            }
+            if (entity.getKogakuServicehiJogengakuGengakugoJogengaku() != null) {
+                高額ｻｰﾋﾞｽ費減額後上限額.add(new RString(entity.getKogakuServicehiJogengakuGengakugoJogengaku().toString()));
+            }
+            if (entity.getGengakuGoHokenryoDankai() != null) {
+                保険料納付減額後保険料段階.add(new RString(entity.getGengakuGoHokenryoDankai().toString()));
+            }
             if ((nocount + 1) % NOCOUNT_20 == 0) {
                 KyokaisoKanriMasterListChohyoDataSakuseiEntity データEntity
                         = new KyokaisoKanriMasterListChohyoDataSakuseiEntity();
