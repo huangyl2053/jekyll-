@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuGetFileProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -147,9 +148,8 @@ public class DBC120920_SogojigyohiShinsaKetteiSeikyumeisaiIn extends BatchFlowBa
         SogojigyohiShinsaKetteiSeikyumeisaiInDoIchiranhyoSakuseiProcessParameter parameter
                 = new SogojigyohiShinsaKetteiSeikyumeisaiInDoIchiranhyoSakuseiProcessParameter();
         parameter.setサブ業務コード(SubGyomuCode.DBC介護給付);
-        parameter.set帳票ID(new ReportId(帳票ID));
+        parameter.set帳票ID(ReportIdDBC.DBC200084.getReportId());
         parameter.set出力順ID(getParameter().getShutsuryokujunId());
-        parameter.set処理年月(getParameter().getShoriYM());
         parameter.setシステム日付(RDateTime.now());
         return loopBatch(SogojigyohiShinsaKetteiSeikyumeisaiInDoIchiranhyoSakuseiProcess.class).arguments(parameter).
                 define();

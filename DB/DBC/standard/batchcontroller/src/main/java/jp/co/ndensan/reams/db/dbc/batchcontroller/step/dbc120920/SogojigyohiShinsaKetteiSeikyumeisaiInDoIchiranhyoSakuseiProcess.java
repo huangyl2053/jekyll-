@@ -61,8 +61,8 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  *
  * @reamsid_L DBC-2500-012 jiangxiaolong
  */
-public class SogojigyohiShinsaKetteiSeikyumeisaiInDoIchiranhyoSakuseiProcess 
-extends BatchKeyBreakBase<SogojigyohiShinsaKetteiSeikyumeisaiInEntity> {
+public class SogojigyohiShinsaKetteiSeikyumeisaiInDoIchiranhyoSakuseiProcess
+        extends BatchKeyBreakBase<SogojigyohiShinsaKetteiSeikyumeisaiInEntity> {
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc120920."
@@ -84,6 +84,9 @@ extends BatchKeyBreakBase<SogojigyohiShinsaKetteiSeikyumeisaiInEntity> {
     private static final RString KEY_並び順の４件目 = new RString("KEY_並び順の４件目");
     private static final RString KEY_並び順の５件目 = new RString("KEY_並び順の５件目");
     private static final RString KEY_並び順の６件目 = new RString("KEY_並び順の６件目");
+    private static final RString アステリスク = new RString("**********");
+    private static final RString 文字_高額介護サービス費 = new RString("高額介護サービス費");
+    private static final RString 文字_合計 = new RString("合計");
     private FileSpoolManager manager;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200084");
     private RString eucFilePath;
@@ -123,32 +126,30 @@ extends BatchKeyBreakBase<SogojigyohiShinsaKetteiSeikyumeisaiInEntity> {
         } else {
             List<RString> 出力順BODY = 出力順.split(コンマ.toString());
             出力順 = デフォルト出力順;
-            if (出力順BODY.size() > 1) {
+            if (1 < 出力順BODY.size()) {
                 for (int i = 1; i < 出力順BODY.size(); i++) {
                     出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
                 }
             }
         }
         int index = 0;
-        if (出力順 != null) {
-            for (ISetSortItem item : 並び順.get設定項目リスト()) {
-                if (item.is改頁項目()) {
-                    改頁リスト.add(item.get項目ID());
-                    改頁項目名リスト.add(item.get項目名());
-                }
-                if (index == INDEX_1) {
-                    出力順Map.put(KEY_並び順の２件目, item.get項目名());
-                } else if (index == INDEX_2) {
-                    出力順Map.put(KEY_並び順の３件目, item.get項目名());
-                } else if (index == INDEX_3) {
-                    出力順Map.put(KEY_並び順の４件目, item.get項目名());
-                } else if (index == INDEX_4) {
-                    出力順Map.put(KEY_並び順の５件目, item.get項目名());
-                } else if (index == INDEX_5) {
-                    出力順Map.put(KEY_並び順の６件目, item.get項目名());
-                }
-                index = index + 1;
+        for (ISetSortItem item : 並び順.get設定項目リスト()) {
+            if (item.is改頁項目()) {
+                改頁リスト.add(item.get項目ID());
+                改頁項目名リスト.add(item.get項目名());
             }
+            if (index == INDEX_1) {
+                出力順Map.put(KEY_並び順の２件目, item.get項目名());
+            } else if (index == INDEX_2) {
+                出力順Map.put(KEY_並び順の３件目, item.get項目名());
+            } else if (index == INDEX_3) {
+                出力順Map.put(KEY_並び順の４件目, item.get項目名());
+            } else if (index == INDEX_4) {
+                出力順Map.put(KEY_並び順の５件目, item.get項目名());
+            } else if (index == INDEX_5) {
+                出力順Map.put(KEY_並び順の６件目, item.get項目名());
+            }
+            index = index + 1;
         }
         帳票データの取得Parameter.set出力順(出力順);
 
@@ -191,12 +192,12 @@ extends BatchKeyBreakBase<SogojigyohiShinsaKetteiSeikyumeisaiInEntity> {
         if (null != lastEntity) {
             do帳票のCSVファイル作成(lastEntity, false);
             if (is改頁(lastEntity, entity)) {
-                report = new SogojigyohiShinsaKetteiSeikyumeisaiInReport(lastEntity, 
+                report = new SogojigyohiShinsaKetteiSeikyumeisaiInReport(lastEntity,
                         出力順Map, RDateTime.now(), true, 改頁項目名リスト);
-        do帳票のCSVファイル作成(lastEntity, true);
+                do帳票のCSVファイル作成(lastEntity, true);
             } else {
-                 report = new SogojigyohiShinsaKetteiSeikyumeisaiInReport(lastEntity, 
-                        出力順Map, RDateTime.now(), false, 改頁項目名リスト);
+                report = new SogojigyohiShinsaKetteiSeikyumeisaiInReport(lastEntity,
+                        出力順Map, parameter.getシステム日付(), false, 改頁項目名リスト);
             }
             report.writeBy(reportSourceWriter);
         }
@@ -207,7 +208,7 @@ extends BatchKeyBreakBase<SogojigyohiShinsaKetteiSeikyumeisaiInEntity> {
     @Override
     protected void afterExecute() {
         SogojigyohiShinsaKetteiSeikyumeisaiInReport report = new SogojigyohiShinsaKetteiSeikyumeisaiInReport(lastEntity,
-                        出力順Map, RDateTime.now(), true, 改頁項目名リスト);
+                出力順Map, RDateTime.now(), true, 改頁項目名リスト);
         report.writeBy(reportSourceWriter);
         do帳票のCSVファイル作成(lastEntity, false);
         do帳票のCSVファイル作成(lastEntity, true);
@@ -215,11 +216,11 @@ extends BatchKeyBreakBase<SogojigyohiShinsaKetteiSeikyumeisaiInEntity> {
     }
 
     private void do帳票のCSVファイル作成(SogojigyohiShinsaKetteiSeikyumeisaiInEntity entity, boolean 集計) {
-        RDateTime 作成日時 = RDateTime.now();
+        RDateTime 作成日時 = parameter.getシステム日付();
         SogojigyohiShinsaKetteiSeikyumeisaiInCSVEntity output = new SogojigyohiShinsaKetteiSeikyumeisaiInCSVEntity();
         DbWT1613SinsaKetteiSeikyuGokeiEntity 審査決定請求合計一時TBL = entity.get審査決定請求合計一時TBL();
         if (連番 == 1) {
-            output.set審査年月(審査決定請求合計一時TBL.get審査年月().toDateString());
+            output.set審査年月(パターン56(審査決定請求合計一時TBL.get審査年月()));
             RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
@@ -237,9 +238,9 @@ extends BatchKeyBreakBase<SogojigyohiShinsaKetteiSeikyumeisaiInEntity> {
         output.set証記載保険者番号(getColumnValue(審査決定請求合計一時TBL.get証記載保険者番号()));
 
         if (集計) {
-            edit集計項目(entity, output);
-            sogojigyohiKagoKetteiInCsvWriter.writeLine(output);
             edit高額介護サービス費項目(entity, output);
+            sogojigyohiKagoKetteiInCsvWriter.writeLine(output);
+            edit集計項目(entity, output);
             sogojigyohiKagoKetteiInCsvWriter.writeLine(output);
         } else {
             edit明細項目(entity, output);
@@ -261,11 +262,12 @@ extends BatchKeyBreakBase<SogojigyohiShinsaKetteiSeikyumeisaiInEntity> {
         output.set利用者負担額(doカンマ編集(審査決定請求明細一時TBL.get利用者負担額()));
         output.set公費負担額(doカンマ編集(審査決定請求明細一時TBL.get公費負担額()));
     }
+
     private void edit集計項目(SogojigyohiShinsaKetteiSeikyumeisaiInEntity entity, SogojigyohiShinsaKetteiSeikyumeisaiInCSVEntity output) {
         DbWT1613SinsaKetteiSeikyuGokeiEntity 審査決定請求合計一時TBL = entity.get審査決定請求合計一時TBL();
         setEmpty(output);
-        output.set事業者番号(new RString("**********"));
-        output.set事業者名(new RString("合計"));
+        output.set事業者番号(アステリスク);
+        output.set事業者名(文字_合計);
         output.set件数(doカンマ編集(審査決定請求合計一時TBL.get合計_件数()));
         output.set単位(doカンマ編集(審査決定請求合計一時TBL.get合計_単位数()));
         output.set金額(doカンマ編集(審査決定請求合計一時TBL.get合計_金額()));
@@ -273,16 +275,18 @@ extends BatchKeyBreakBase<SogojigyohiShinsaKetteiSeikyumeisaiInEntity> {
         output.set利用者負担額(doカンマ編集(審査決定請求合計一時TBL.get合計_利用者負担額()));
         output.set公費負担額(doカンマ編集(審査決定請求合計一時TBL.get合計_公費負担額()));
     }
+
     private void edit高額介護サービス費項目(SogojigyohiShinsaKetteiSeikyumeisaiInEntity entity
             , SogojigyohiShinsaKetteiSeikyumeisaiInCSVEntity output) {
         DbWT1612SinsaKetteiSeikyuKogakuEntity 審査決定請求高額一時TBL = entity.get審査決定請求高額一時TBL();
         setEmpty(output);
-        output.set事業者番号(new RString("**********"));
-        output.set事業者名(new RString("高額介護サービス費"));
+        output.set事業者番号(アステリスク);
+        output.set事業者名(文字_高額介護サービス費);
         output.set件数(doカンマ編集(審査決定請求高額一時TBL.get高額_高額該当件数()));
         output.set総合事業費(doカンマ編集(審査決定請求高額一時TBL.get高額_高額介護サービス費()));
         output.set公費負担額(doカンマ編集(審査決定請求高額一時TBL.get高額_公費負担額()));
     }
+
     private boolean is改頁(SogojigyohiShinsaKetteiSeikyumeisaiInEntity currentSource,
             SogojigyohiShinsaKetteiSeikyumeisaiInEntity nextSource) {
         boolean flag = false;
@@ -291,6 +295,7 @@ extends BatchKeyBreakBase<SogojigyohiShinsaKetteiSeikyumeisaiInEntity> {
         }
         return flag;
     }
+
     private void setEmpty(SogojigyohiShinsaKetteiSeikyumeisaiInCSVEntity output) {
         output.set審査年月(RString.EMPTY);
         output.set作成日時(RString.EMPTY);
@@ -323,6 +328,13 @@ extends BatchKeyBreakBase<SogojigyohiShinsaKetteiSeikyumeisaiInEntity> {
             return entity.getColumnValue();
         }
         return RString.EMPTY;
+    }
+    private RString パターン56(FlexibleYearMonth 年月) {
+        if (null == 年月) {
+            return RString.EMPTY;
+        }
+        return 年月.wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
 }

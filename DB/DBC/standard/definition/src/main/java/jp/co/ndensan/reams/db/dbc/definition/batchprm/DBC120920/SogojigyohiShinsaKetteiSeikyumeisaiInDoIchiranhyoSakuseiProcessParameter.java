@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120920;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -25,6 +24,5 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInDoIchiranhyoSakuseiProcessPara
     private ReportId 帳票ID;
     private RString 出力順ID;
     private SubGyomuCode サブ業務コード;
-    private FlexibleYearMonth 処理年月;
     private RDateTime システム日付;
 }

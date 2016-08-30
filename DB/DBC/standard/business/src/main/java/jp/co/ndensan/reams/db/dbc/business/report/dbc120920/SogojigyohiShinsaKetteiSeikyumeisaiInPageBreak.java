@@ -41,13 +41,13 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInPageBreak extends PageBreaker<
         boolean flag = false;
         if (!currentSource.getSource().shoKisaiHokenshaNo.equals(nextSource.getSource().shoKisaiHokenshaNo)) {
             flag = true;
-        } else if (this.breakKeysList.contains(SogojigyohiShinsaKetteiSeikyumeisaiInOutPutOrder.サービス種類コード.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(SogojigyohiShinsaKetteiSeikyumeisaiInOutPutOrder.サービス種類コード.get項目ID())
                 && !currentSource.getSource().listMeisai_4.equals(nextSource.getSource().listMeisai_4)) {
             flag = true;
-        } else if (this.breakKeysList.contains(SogojigyohiShinsaKetteiSeikyumeisaiInOutPutOrder.サービス提供年月.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(SogojigyohiShinsaKetteiSeikyumeisaiInOutPutOrder.サービス提供年月.get項目ID())
                 && !currentSource.getSource().listMeisai_3.equals(nextSource.getSource().listMeisai_3)) {
             flag = true;
-        } else if (this.breakKeysList.contains(SogojigyohiShinsaKetteiSeikyumeisaiInOutPutOrder.事業者番号.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(SogojigyohiShinsaKetteiSeikyumeisaiInOutPutOrder.事業者番号.get項目ID())
                 && !currentSource.getSource().listMeisai_1.equals(nextSource.getSource().listMeisai_1)) {
             flag = true;
         }
@@ -66,13 +66,15 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInPageBreak extends PageBreaker<
         boolean flag = false;
         if (!currentSource.get審査決定請求合計一時TBL().get証記載保険者番号().equals(nextSource.get審査決定請求合計一時TBL().get証記載保険者番号())) {
             flag = true;
-        } else if (this.breakKeysList.contains(SogojigyohiShinsaKetteiSeikyumeisaiInOutPutOrder.サービス種類コード.getフォームフィールド名())
-                && !currentSource.get審査決定請求明細一時TBL().getサービス種類コード().equals(nextSource.get審査決定請求明細一時TBL().getサービス種類コード())) {
+        } else if (this.breakKeysList.contains(SogojigyohiShinsaKetteiSeikyumeisaiInOutPutOrder.サービス種類コード.get項目ID())
+                && !currentSource.get審査決定請求明細一時TBL().getサービス種類コード()
+                .equals(nextSource.get審査決定請求明細一時TBL().getサービス種類コード())) {
             flag = true;
-        } else if (this.breakKeysList.contains(SogojigyohiShinsaKetteiSeikyumeisaiInOutPutOrder.サービス提供年月.getフォームフィールド名())
-                && !currentSource.get審査決定請求明細一時TBL().getサービス提供年月().equals(nextSource.get審査決定請求明細一時TBL().getサービス提供年月())) {
+        } else if (this.breakKeysList.contains(SogojigyohiShinsaKetteiSeikyumeisaiInOutPutOrder.サービス提供年月.get項目ID())
+                && !currentSource.get審査決定請求明細一時TBL().getサービス提供年月()
+                .equals(nextSource.get審査決定請求明細一時TBL().getサービス提供年月())) {
             flag = true;
-        } else if (this.breakKeysList.contains(SogojigyohiShinsaKetteiSeikyumeisaiInOutPutOrder.事業者番号.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(SogojigyohiShinsaKetteiSeikyumeisaiInOutPutOrder.事業者番号.get項目ID())
                 && !currentSource.get審査決定請求明細一時TBL().get事業所番号().equals(nextSource.get審査決定請求明細一時TBL().get事業所番号())) {
             flag = true;
         }
