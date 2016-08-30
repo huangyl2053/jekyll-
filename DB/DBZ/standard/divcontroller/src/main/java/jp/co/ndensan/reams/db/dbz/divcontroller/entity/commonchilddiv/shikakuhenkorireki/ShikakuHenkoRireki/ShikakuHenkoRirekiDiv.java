@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoIdentifier;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewExecutionStatus;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -642,6 +643,16 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     @Override
     public void setDisplayTypeBykey(RString mode) {
         this.setMode_DisplayType(ShikakuHenkoRirekiDiv.DisplayType.getEnum(mode.toString()));
+    }
+
+    @Override
+    public boolean is追加済み() {
+        for (dgHenko_Row row : this.getDgHenko().getDataSource()) {
+            if (row.getState().equals(ViewExecutionStatus.Add.get名称())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

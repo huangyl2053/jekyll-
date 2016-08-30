@@ -145,4 +145,11 @@ public interface IHihosyosaiDiv extends ICommonChildDivBaseProperties {
      * @return ValidationMessageControlPairs ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 取得日と喪失日の前後順();
+
+    /**
+     * 資格変更情報グリッドに、状態が「追加」となっているデータが存在するかをチェックします。
+     *
+     * @return 状態が「追加」になっているデータが存在する場合、{@code true}
+     */
+    boolean is資格変更情報追加済み();
 }

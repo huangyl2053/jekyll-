@@ -73,8 +73,8 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
     public ResponseData<TennyuTenshutsuHoryuTaishoshaIchiranDiv> onLoad(TennyuTenshutsuHoryuTaishoshaIchiranDiv div) {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (市町村セキュリティ情報 == null) {
-            return ResponseData.of(div).respond();
-        }
+          return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.完了する).respond();
+        } 
         DonyuKeitaiCode 導入形態コード = DonyuKeitaiCode.toValue(市町村セキュリティ情報.get導入形態コード().value());
         if (導入形態コード.is広域()) {
             div.getTplTennyu().setVisible(false);
@@ -82,11 +82,39 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             div.getTabTennyuTenshutsuHoryuTaishosha().setSelectedItem(div.getTplKoiki());
         } else {
             div.getTplKoiki().setVisible(false);
+            
         }
         save転入転出保留対象者情報ToViewState();
         List<ITennyuTenshutsuHoryuTaishosha> 転出保留対象者情報 = manager.getTenshutsuHoryuTaishoshaList().records();
         List<ITennyuTenshutsuHoryuTaishosha> 転入保留対象者情報 = manager.getTennyuHoryuTaishoshaList().records();
         List<ITennyuTenshutsuHoryuTaishosha> 広域保留対象者情報 = manager.getKoikiHoryuTaishoshaList().records();
+        boolean 比較結果 = false;
+        for (ITennyuTenshutsuHoryuTaishosha 転出対象者情報 : 転出保留対象者情報) {
+        if ((転出対象者情報.get識別コード() != null) && (!転出対象者情報.get識別コード().isEmpty())) {
+                if (転出対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
+                   比較結果 = true;
+                }
+           }
+        }
+        for (ITennyuTenshutsuHoryuTaishosha 転入対象者情報 : 転入保留対象者情報) {
+        if ((転入対象者情報.get識別コード() != null) && (!転入対象者情報.get識別コード().isEmpty())) {
+                if (転入対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
+                   比較結果 = true;
+                }
+           }
+        }
+        for (ITennyuTenshutsuHoryuTaishosha 広域対象者情報 : 広域保留対象者情報) {
+        if ((広域対象者情報.get識別コード() != null) && (!広域対象者情報.get識別コード().isEmpty())) {
+                if (広域対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
+                   比較結果 = true;
+                }
+           }
+        }
+        if (!比較結果) {
+                   return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.完了する).respond();
+            
+        }
+
         TennyuTenshutsuHoryuTaishoshaIchiranHandler handler = getHandler(div);
         handler.load_転入情報(転入保留対象者情報);
         handler.load_転出情報(転出保留対象者情報);

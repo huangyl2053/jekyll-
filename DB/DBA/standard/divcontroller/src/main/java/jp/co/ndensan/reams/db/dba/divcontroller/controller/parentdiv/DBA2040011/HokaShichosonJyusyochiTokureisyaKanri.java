@@ -120,7 +120,9 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
      * @return HokaShichosonJyusyochiTokureisyaKanriDiv
      */
     public ResponseData<HokaShichosonJyusyochiTokureisyaKanriDiv> onClick_Kanryo(HokaShichosonJyusyochiTokureisyaKanriDiv div) {
+        RString 識別コード = div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getHdnTxtShikibetsuCode();
         RealInitialLocker.release(LOCKINGKEY);
+        ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         return ResponseData.of(div).respond();
     }
 
@@ -221,7 +223,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
     }
 
     private void set適用(List<TaJushochiTokureisyaKanriParameter> paramaterList) {
-        if (!paramaterList.isEmpty() && 新規.equals(paramaterList.get(0).get状態())) {
+        if (!paramaterList.isEmpty()) {
             TaJushochiTokureisyaKanriParameter parameter1 = paramaterList.get(0);
             TaJushochiTokureisyaKanriParameter parameter = TaJushochiTokureisyaKanriParameter.createParamBy他市町村住所地特例者管理(
                     parameter1.getNyuusyoYMD(), parameter1.getTayishoYMD(), parameter1.getKaijoYMD(), parameter1.getTekiyoYMD(), SHINKI
@@ -231,7 +233,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
     }
 
     private void set解除(List<TaJushochiTokureisyaKanriParameter> paramaterList) {
-        if (!paramaterList.isEmpty() && 修正.equals(paramaterList.get(0).get状態())) {
+        if (!paramaterList.isEmpty()) {
             TaJushochiTokureisyaKanriParameter parameter1 = paramaterList.get(0);
             TaJushochiTokureisyaKanriParameter parameter = TaJushochiTokureisyaKanriParameter.createParamBy他市町村住所地特例者管理(
                     parameter1.getNyuusyoYMD(), parameter1.getTayishoYMD(), parameter1.getKaijoYMD(), parameter1.getTekiyoYMD(), SYUSEI

@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.service.core.shokofukaishujoho.ShoKofuKaishuJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -103,6 +105,7 @@ public class ShoKaishuKirokuKanriHandler {
                     dgJigyoshaItiran.setKaishuRiyu(jigyoshaInput.get回収理由());
                     dgKoufuKaishuList.add(dgJigyoshaItiran);
                 }
+                Collections.sort(dgKoufuKaishuList, new GridComparator());
                 div.getDgKoufuKaishu().setDataSource(dgKoufuKaishuList);
             }
             div.getPanelInput().setVisible(false);
@@ -153,6 +156,7 @@ public class ShoKaishuKirokuKanriHandler {
                     dgJigyoshaItiran.setKoufuTypeNo(jigyoshaInput.get交付証種類());
                     dgKoufuKaishuList.add(dgJigyoshaItiran);
                 }
+                Collections.sort(dgKoufuKaishuList, new GridComparator());
                 div.getDgKoufuKaishu().setDataSource(dgKoufuKaishuList);
             }
             div.getDgKoufuKaishu().getGridSetting().setIsShowSelectButtonColumn(false);
@@ -268,5 +272,14 @@ public class ShoKaishuKirokuKanriHandler {
         } else {
             div.setMode_DisplayMode(ShoKaishuKirokuKanriDiv.DisplayMode.koshin);
         }
+    }
+
+    private class GridComparator implements Comparator<dgKoufuKaishu_Row> {
+
+        @Override
+        public int compare(dgKoufuKaishu_Row o1, dgKoufuKaishu_Row o2) {
+            return -1 * o1.getKoufuDate().getValue().compareTo(o2.getKoufuDate().getValue());
+        }
+
     }
 }

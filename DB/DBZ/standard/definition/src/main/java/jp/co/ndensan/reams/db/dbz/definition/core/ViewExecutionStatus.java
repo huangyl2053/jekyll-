@@ -19,28 +19,30 @@ public enum ViewExecutionStatus {
     /**
      * 追加状態を表します。
      */
-    Add("Add"),
+    Add("Add", "追加"),
     /**
      * 修正状態を表します。
      */
-    Modify("Modify"),
+    Modify("Modify", "修正"),
     /**
      * 削除状態を表します。
      */
-    Delete("Delete"),
+    Delete("Delete", "削除"),
     /**
      * 初期状態、もしくはいずれの操作も行っていない状態を表します。
      */
-    None("None");
+    None("None", "");
     private final RString statusValue;
+    private final RString statusName;
 
     /**
      * 各項目が持つ初期値を設定するプライベートコンストラクタです。
      *
      * @param value
      */
-    private ViewExecutionStatus(String value) {
+    private ViewExecutionStatus(String value, String name) {
         this.statusValue = new RString(value);
+        this.statusName = new RString(name);
     }
 
     /**
@@ -50,6 +52,15 @@ public enum ViewExecutionStatus {
      */
     public RString getValue() {
         return statusValue;
+    }
+
+    /**
+     * 状態を示す日本語名（追加、修正、削除）を返します。
+     *
+     * @return 状態を示す日本語名
+     */
+    public RString get名称() {
+        return statusName;
     }
 
     /**

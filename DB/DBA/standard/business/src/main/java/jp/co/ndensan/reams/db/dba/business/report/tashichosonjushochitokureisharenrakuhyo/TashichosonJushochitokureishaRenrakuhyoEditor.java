@@ -67,12 +67,14 @@ class TashichosonJushochitokureishaRenrakuhyoEditor implements ITashichosonJusho
         source.shisetsuYubinNo = item.getShisetsuYubinNo();
         source.shisetsuJusho = item.getShisetsuJusho();
         source.denshiKoin = item.getDenshiKoin();
-        source.denshiKoin = item.getDenshiKoin();
+        source.koinMojiretsu = item.getKoinMojiretsu();
+        source.koinShoryaku = item.getKoinShoryaku();
+        source.ninshoshaShimeiKakenai = item.getNinshoshaShimeiKakenai();
+        source.ninshoshaShimeiKakeru = item.getNinshoshaShimeiKakeru();
+        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
+        source.ninshoshaYakushokuMei1 = item.getNinshoshaYakushokuMei1();
+        source.ninshoshaYakushokuMei2 = item.getNinshoshaYakushokuMei2();
         source.shomeiHakkoYMD = item.getShomeiHakkoYMD();
-        source.shuchoMei = item.getShuchoMei();
-        source.shichosonMei = item.getShichosonMei();
-        source.koinShoryaku = item.getKoinShoryaku();
-        source.koinShoryaku = item.getKoinShoryaku();
         return source;
     }
 }

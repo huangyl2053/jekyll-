@@ -3,14 +3,13 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Aug 08 22:47:26 JST 2016 
+ * Fri Aug 19 10:27:54 JST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
@@ -20,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgGaitoshaList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
 
     private RString hihokenshaNo;
     private RString shikibetsuCode;
@@ -29,9 +28,9 @@ public class dgGaitoshaList_Row extends DataRow {
     private RString kanaShimsei;
     private RString shimeiAndKanaShimsei;
     private RString gender;
-    private TextBoxNum intNenrei;
     private RString birthDay;
     private RString nenrei;
+    private RString sortBirthDay;
     private RString yubinNo;
     private RString jusho;
     private RString kojinNo;
@@ -47,9 +46,9 @@ public class dgGaitoshaList_Row extends DataRow {
         this.kanaShimsei = RString.EMPTY;
         this.shimeiAndKanaShimsei = RString.EMPTY;
         this.gender = RString.EMPTY;
-        this.intNenrei = new TextBoxNum();
         this.birthDay = RString.EMPTY;
         this.nenrei = RString.EMPTY;
+        this.sortBirthDay = RString.EMPTY;
         this.yubinNo = RString.EMPTY;
         this.jusho = RString.EMPTY;
         this.kojinNo = RString.EMPTY;
@@ -62,9 +61,9 @@ public class dgGaitoshaList_Row extends DataRow {
         this.setOriginalData("kanaShimsei", kanaShimsei);
         this.setOriginalData("shimeiAndKanaShimsei", shimeiAndKanaShimsei);
         this.setOriginalData("gender", gender);
-        this.setOriginalData("intNenrei", intNenrei);
         this.setOriginalData("birthDay", birthDay);
         this.setOriginalData("nenrei", nenrei);
+        this.setOriginalData("sortBirthDay", sortBirthDay);
         this.setOriginalData("yubinNo", yubinNo);
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("kojinNo", kojinNo);
@@ -72,7 +71,7 @@ public class dgGaitoshaList_Row extends DataRow {
         this.setOriginalData("setaiCode", setaiCode);
     }
 
-    public dgGaitoshaList_Row(RString hihokenshaNo, RString shikibetsuCode, RString hihokenshaKubun, RString shimei, RString kanaShimsei, RString shimeiAndKanaShimsei, RString gender, TextBoxNum intNenrei, RString birthDay, RString nenrei, RString yubinNo, RString jusho, RString kojinNo, RString juminJotai, RString setaiCode) {
+    public dgGaitoshaList_Row(RString hihokenshaNo, RString shikibetsuCode, RString hihokenshaKubun, RString shimei, RString kanaShimsei, RString shimeiAndKanaShimsei, RString gender, RString birthDay, RString nenrei, RString sortBirthDay, RString yubinNo, RString jusho, RString kojinNo, RString juminJotai, RString setaiCode) {
         super();
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
         this.setOriginalData("shikibetsuCode", shikibetsuCode);
@@ -81,9 +80,9 @@ public class dgGaitoshaList_Row extends DataRow {
         this.setOriginalData("kanaShimsei", kanaShimsei);
         this.setOriginalData("shimeiAndKanaShimsei", shimeiAndKanaShimsei);
         this.setOriginalData("gender", gender);
-        this.setOriginalData("intNenrei", intNenrei);
         this.setOriginalData("birthDay", birthDay);
         this.setOriginalData("nenrei", nenrei);
+        this.setOriginalData("sortBirthDay", sortBirthDay);
         this.setOriginalData("yubinNo", yubinNo);
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("kojinNo", kojinNo);
@@ -96,9 +95,9 @@ public class dgGaitoshaList_Row extends DataRow {
         this.kanaShimsei = kanaShimsei;
         this.shimeiAndKanaShimsei = shimeiAndKanaShimsei;
         this.gender = gender;
-        this.intNenrei = intNenrei;
         this.birthDay = birthDay;
         this.nenrei = nenrei;
+        this.sortBirthDay = sortBirthDay;
         this.yubinNo = yubinNo;
         this.jusho = jusho;
         this.kojinNo = kojinNo;
@@ -134,16 +133,16 @@ public class dgGaitoshaList_Row extends DataRow {
         return gender;
     }
 
-    public TextBoxNum getIntNenrei() {
-        return intNenrei;
-    }
-
     public RString getBirthDay() {
         return birthDay;
     }
 
     public RString getNenrei() {
         return nenrei;
+    }
+
+    public RString getSortBirthDay() {
+        return sortBirthDay;
     }
 
     public RString getYubinNo() {
@@ -201,11 +200,6 @@ public class dgGaitoshaList_Row extends DataRow {
         this.gender = gender;
     }
 
-    public void setIntNenrei(TextBoxNum intNenrei) {
-        this.setOriginalData("intNenrei", intNenrei);
-        this.intNenrei = intNenrei;
-    }
-
     public void setBirthDay(RString birthDay) {
         this.setOriginalData("birthDay", birthDay);
         this.birthDay = birthDay;
@@ -214,6 +208,11 @@ public class dgGaitoshaList_Row extends DataRow {
     public void setNenrei(RString nenrei) {
         this.setOriginalData("nenrei", nenrei);
         this.nenrei = nenrei;
+    }
+
+    public void setSortBirthDay(RString sortBirthDay) {
+        this.setOriginalData("sortBirthDay", sortBirthDay);
+        this.sortBirthDay = sortBirthDay;
     }
 
     public void setYubinNo(RString yubinNo) {

@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.shisetujyoho.KaigoJogaiTokureiTa
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuDac;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -94,5 +93,4 @@ public class ShisetsuJohoInputGuideFinder {
         }
         return SearchResult.of(taishoShisetsuList, 0, false);
     }
-
 }

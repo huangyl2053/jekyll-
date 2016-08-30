@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7030011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriMaster;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7030011.TatokureiHenkoTsuchishoHakkoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7030011.dgJushochiTokureiRireki_Row;
 import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoFinder;
@@ -184,15 +185,15 @@ public class TatokureiHenkoTsuchishoHakkoHandler {
             RString 文書番号発番方法 = bushoNo.get文書番号発番方法();
             if (BunshoNoHatsubanHoho.固定.getCode().equals(文書番号発番方法)) {
                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo()
-                        .getTxtBunshoBango().setValue(bushoNo.edit文書番号());
+                        .getCcdBunshoBangoInput().setDecorationClass(bushoNo.edit文書番号());
                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getBtnJidoFuban().setDisplayNone(true);
             } else if (BunshoNoHatsubanHoho.手入力.getCode().equals(文書番号発番方法)) {
                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo()
-                        .getTxtBunshoBango().setValue(RString.EMPTY);
+                        .getCcdBunshoBangoInput().setDecorationClass(RString.EMPTY);
                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getBtnJidoFuban().setDisplayNone(true);
             } else if (BunshoNoHatsubanHoho.自動採番.getCode().equals(文書番号発番方法)) {
                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo()
-                        .getTxtBunshoBango().setValue(RString.EMPTY);
+                        .getCcdBunshoBangoInput().setDecorationClass(RString.EMPTY);
                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getBtnJidoFuban().setDisplayNone(false);
             }
         }

@@ -27,7 +27,8 @@ public class NenreitotatsuShikakuIdoBatchFlowParameter extends BatchParameterBas
      * コンストラクタです。
      */
     public NenreitotatsuShikakuIdoBatchFlowParameter() {
-
+        this.kaishiYMD = FlexibleDate.EMPTY;
+        this.shuryoYMD = FlexibleDate.EMPTY;
     }
 
     /**

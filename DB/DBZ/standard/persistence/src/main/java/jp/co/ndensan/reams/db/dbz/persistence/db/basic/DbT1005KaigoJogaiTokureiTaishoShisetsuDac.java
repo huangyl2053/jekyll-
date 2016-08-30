@@ -113,10 +113,9 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
      *
      * @param 事業者種類 事業者種別
      * @param 事業者種別 事業者番号
-     * @return List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity>
+     * @return 介護除外住所地特例対象施設
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
-    @Transaction
     public List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> select介護除外住所地特例対象施設(
             JigyosyaType 事業者種別, JigyoshaNo 事業者番号) throws NullPointerException {
         requireNonNull(事業者種別, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者種別"));

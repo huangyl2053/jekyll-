@@ -51,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.FlexibleDateOperator;
@@ -107,8 +106,8 @@ public class TaishoshaSearch {
     public ResponseData<TaishoshaSearchDiv> onBlur_txtMaxNumber(TaishoshaSearchDiv div) {
 
         // 最大取得件数上限超過チェック
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-//        div.getSearchCondition().getCcdSearchCondition().check最大表示件数(pairs);
+        ValidationMessageControlPairs pairs = TaishoshaSearchValidationHelper.validate最大表示件数(最大取得件数,
+                div.getSearchCondition().getCcdSearchCondition().getButtonsForHihokenshaFinder().getTxtMaxNumber());
         ResponseData<TaishoshaSearchDiv> responseData = ResponseData.of(div).addValidationMessages(pairs).respond();
 
         //UZの仕様変更により不要になったため削除
@@ -169,6 +168,8 @@ public class TaishoshaSearch {
         // 該当者を検索する
         SearchResult<TaishoshaRelateBusiness> result = get対象者(div.getSearchCondition().getCcdSearchCondition());
 
+        int 最大表示件数 = div.getSearchCondition().getCcdSearchCondition().get最大表示件数();
+
         // 検索結果の絞り込み
         // TODO 【資格、賦課共通】部分
         // 検索結果の件数判定
@@ -185,13 +186,12 @@ public class TaishoshaSearch {
             put対象者Key(create対象者Key(対象者));
             // 最近処理者履歴の保存
             save最近処理者(div, 対象者);
-            div.getGaitoshaList().getDgGaitoshaList().setDataSource(toRowList(result));
+            div.getGaitoshaList().getDgGaitoshaList().setDataSource(toRowList(result, 最大表示件数));
             // 次画面遷移
             return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
             // 検索結果が２件以上の場合
         } else {
             // 最大表示件数チェック
-            int 最大表示件数 = div.getSearchCondition().getCcdSearchCondition().get最大表示件数();
             DataGridSetting dataGridSetting = div.getGaitoshaList().getDgGaitoshaList().getGridSetting();
             if (検索結果件数 > 最大表示件数) {
                 dataGridSetting.setLimitRowCount(最大表示件数);
@@ -201,7 +201,7 @@ public class TaishoshaSearch {
                 dataGridSetting.setSelectedRowCount(最大取得件数);
             }
             // 検索結果の表示
-            div.getGaitoshaList().getDgGaitoshaList().setDataSource(toRowList(result));
+            div.getGaitoshaList().getDgGaitoshaList().setDataSource(toRowList(result, 最大表示件数));
             div.getSearchCondition().getCcdSearchCondition().getButtonsForHihokenshaFinder()
                     .getTxtMaxNumber().setValue(new Decimal(最大表示件数));
             // 画面状態遷移
@@ -233,7 +233,7 @@ public class TaishoshaSearch {
                 put対象者Key(create対象者Key(entity));
                 save最近処理者(div, entity);
             }
-            div.getGaitoshaList().getDgGaitoshaList().setDataSource(toRowList(対象者));
+            div.getGaitoshaList().getDgGaitoshaList().setDataSource(toRowList(対象者, 最近処理者検索数));
         }
         return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
     }
@@ -369,16 +369,21 @@ public class TaishoshaSearch {
                 createKojin(entity.get住基個人住登外エンティティ()).get名称().getName());
     }
 
-    private List<dgGaitoshaList_Row> toRowList(SearchResult<TaishoshaRelateBusiness> result) {
+    private List<dgGaitoshaList_Row> toRowList(SearchResult<TaishoshaRelateBusiness> result, int 最大表示件数) {
+        int 出力件数 = 0;
         List<dgGaitoshaList_Row> rowList = new ArrayList<>();
         for (TaishoshaRelateBusiness 対象者 : result.records()) {
+            if (出力件数 >= 最大表示件数) {
+                break;
+            }
 //            UaFt200FindShikibetsuTaishoEntity 住基個人住登外 = 対象者.get住基個人住登外エンティティ();
             DbV7901ShikakuSearchBusiness 資格検索結果 = new DbV7901ShikakuSearchBusiness(対象者.get資格検索エンティティ());
             IKojin 個人 = createKojin(対象者.get住基個人住登外エンティティ());
             IShikibetsuTaisho 識別対象 = createShikibetsuTaisho(対象者.get住基個人住登外エンティティ());
             HihoKubun 被保険者区分 = judge被保険者区分(資格検索結果);
-
             rowList.add(createdgGaitoshaList_Row(資格検索結果, 個人, 識別対象, 被保険者区分));
+
+            出力件数++;
         }
         return rowList;
     }
@@ -410,6 +415,12 @@ public class TaishoshaSearch {
         RString 番地 = 識別対象.get住所().get番地() != null ? 識別対象.get住所().get番地().getBanchi().value() : RString.EMPTY;
         RString 住所番地 = 住所.concat(番地);
 
+        RString sort用生年月日 = 個人.get生年月日() != null ? new RString(個人.get生年月日().toFlexibleDate().toString()) : RString.EMPTY;
+        if (!sort用生年月日.isEmpty() && sort用生年月日.length() < FlexibleDate.MAX.toString().length()) {
+            int padNum = FlexibleDate.MAX.toString().length() - sort用生年月日.length();
+            sort用生年月日.padRight("0", padNum);
+        }
+
         dgGaitoshaList_Row newRow = new dgGaitoshaList_Row(
                 資格検索結果.getHihokenshaNo() != null ? 資格検索結果.getHihokenshaNo().value() : RString.EMPTY,
                 識別対象.get識別コード() != null ? 識別対象.get識別コード().getColumnValue() : RString.EMPTY,
@@ -418,18 +429,15 @@ public class TaishoshaSearch {
                 名称カナ,
                 識別対象.get名称() != null ? 名称.concat(名称カナ) : RString.EMPTY,
                 個人.get性別() != null ? (個人.get性別().getName() != null ? 個人.get性別().getName().getShortJapanese() : RString.EMPTY) : RString.EMPTY,
-                new TextBoxNum(),
                 生年月日,
                 個人.get年齢算出().get年齢(),
+                sort用生年月日,
                 郵便番号,
                 住所番地,
                 個人.get個人番号() != null ? 個人.get個人番号().value() : RString.EMPTY,
                 個人.get住民状態() != null ? 個人.get住民状態().住民状態略称() : RString.EMPTY,
                 個人.get世帯コード() != null ? 個人.get世帯コード().value() : RString.EMPTY);
 
-        if (!個人.get年齢算出().get年齢().isEmpty()) {
-            newRow.getIntNenrei().setValue(new Decimal(個人.get年齢算出().get年齢().toString()));
-        }
         return newRow;
     }
 

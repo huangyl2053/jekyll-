@@ -21,7 +21,7 @@ public class DBAWFBC010 {
      * @param flowparam フローパラメータ
      * @return nenreitotatsuShikakuIdoParameter バッチパラメータクラス
      */
-    public NenreitotatsuShikakuIdoBatchFlowParameter createBPForNenreitotatsuShikakuId(FlowParameters flowparam) {
+    public NenreitotatsuShikakuIdoBatchFlowParameter createBPForNenreitotatsuShikakuIdo(FlowParameters flowparam) {
         NenreitotatsuShikakuIdoBatchFlowParameter nenreitotatsuShikakuIdoParameter = new NenreitotatsuShikakuIdoBatchFlowParameter();
 
         return nenreitotatsuShikakuIdoParameter;
