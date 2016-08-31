@@ -6,7 +6,7 @@
 
     <select id="exeShotaiDataInsert"
             resultOrdered="true"
-            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.SyotaiJohoSyoriMybatisParamter"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.SyotaiJohoSyoriMybatisParameter"
             fetchSize="500">
         SELECT rgdb."DbFt7021ShotaiDataInsert"(#{syukeiYM});
     </select>
@@ -15,7 +15,8 @@
             resultOrdered="true"
             resultMap="resultMap_ShotaiJohoKonkyoCSV"
             fetchSize="500">
-        SELECT "dataKubun"
+        SELECT
+        "dataKubun"
         , "shukeiKubun"
         , "hyouNo"
         , "shukeiNo"
@@ -25,6 +26,7 @@
         , "setaiCode"
         , "shichosonCode"
         , "kyuShichosonCode"
+        FROM
         rgdb."DbFt7022ShotaiJohoKonkyoCSV"();
     </select>
 

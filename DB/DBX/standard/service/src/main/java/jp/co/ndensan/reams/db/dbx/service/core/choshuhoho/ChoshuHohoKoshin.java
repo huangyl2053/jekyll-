@@ -141,8 +141,6 @@ public class ChoshuHohoKoshin {
             ChoshuHoho 徴収方法情報 = 徴収方法の情報;
             int 履歴番号 = 徴収方法の情報.get履歴番号() + 1;
             徴収方法の情報 = 徴収方法の情報.createBuilderForEdit().set履歴番号(履歴番号).build();
-            RString 特別徴収停止事由コード = ChoteiJiyuCode.年金保険者からの通知.getコード();
-            徴収方法の情報 = 徴収方法の情報.createBuilderForEdit().set特別徴収停止事由コード(特別徴収停止事由コード).build();
 
             if (資格取得日 == null || 資格喪失日 == null || 資格取得日.isEmpty() || 資格喪失日.isEmpty()) {
                 return 徴収方法の情報;

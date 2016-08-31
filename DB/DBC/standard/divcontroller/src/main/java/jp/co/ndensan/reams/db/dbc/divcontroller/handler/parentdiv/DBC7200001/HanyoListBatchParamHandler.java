@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7200001.HanyoListBatchParamDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.common.CSVSettings;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class HanyoListBatchParamHandler {
 
     private static final FlexibleYear 固定年度 = new FlexibleYear("2015");
+    private static final RString 導入形態_単一 = new RString("0");
+    private static final RString 導入形態_広域 = new RString("1");
     private static final RString KEY = new RString("key0");
     private final HanyoListBatchParamDiv div;
 
@@ -52,8 +54,10 @@ public class HanyoListBatchParamHandler {
     public void onLoad(List<KaigoDonyuKeitai> keitaiList) {
         if (keitaiList.get(0).get導入形態コード().is単一()) {
             div.getChushutsuJokenPanel().getCcdHokenshaList().setDisplayNone(true);
+            div.setHdnDonyuKeitai(導入形態_単一);
         } else if (keitaiList.get(0).get導入形態コード().is広域()) {
             div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
+            div.setHdnDonyuKeitai(導入形態_広域);
         }
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701020.getReportId());
         div.getCcdShutsuryokuKoumoku().load(ReportIdDBC.DBC701020.getReportId().value(), SubGyomuCode.DBC介護給付);
@@ -89,7 +93,9 @@ public class HanyoListBatchParamHandler {
     public DBC710200_HanyoListKijunShunyugakuTekiyoParameter onClick_btnBatchParameterSave() {
         DBC710200_HanyoListKijunShunyugakuTekiyoParameter parameter = new DBC710200_HanyoListKijunShunyugakuTekiyoParameter();
         parameter.set帳票ID(div.getCcdShutsuryokujun().get帳票ID().value());
-        parameter.set出力順ID(div.getCcdShutsuryokujun().get出力順ID());
+        if (div.getCcdShutsuryokujun().get出力順ID() != null) {
+            parameter.set出力順ID(div.getCcdShutsuryokujun().get出力順ID());
+        }
         parameter.set出力順項目ID(div.getCcdShutsuryokuKoumoku().get出力項目ID());
         boolean is項目名付加 = false;
         boolean is連番付加 = false;
@@ -108,7 +114,8 @@ public class HanyoListBatchParamHandler {
         parameter.set連番付加(is連番付加);
         parameter.set日付編集(is日付編集);
         RString 市町村コード = RString.EMPTY;
-        if (div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード() != null
+        if (導入形態_広域.equals(div.getHdnDonyuKeitai())
+                && div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード() != null
                 && !div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
             市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
         }
@@ -148,8 +155,10 @@ public class HanyoListBatchParamHandler {
             編集方法.add(CSVSettings.日付スラッシュ編集.getコード());
         }
         div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(編集方法);
-        div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(
-                new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("honkenshaCode"))));
+        if (導入形態_広域.equals(div.getHdnDonyuKeitai())) {
+            div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(
+                    new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("honkenshaCode"))));
+        }
         div.getChushutsuJokenPanel().getDdlTaishoNendo().setSelectedValue(
                 restoreBatchParameterMap.getParameterValue(RString.class, new RString("taishonendo")));
         if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("isdeleteflag"))) {

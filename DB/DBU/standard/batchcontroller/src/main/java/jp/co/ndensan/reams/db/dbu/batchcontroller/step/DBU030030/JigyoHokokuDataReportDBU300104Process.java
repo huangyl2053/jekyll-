@@ -5,10 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU030030;
 
+import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki300103.JigyohokokuCompYoshiki300103Report;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNo;
-import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParamter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.reportid.ReportIdDBU;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki300103.JigyohokokuCompYoshiki300103Data;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyojokyohokokushiryonemposakuseiiti.JigyoHokokuDataRelateEntity;
@@ -40,7 +41,7 @@ public class JigyoHokokuDataReportDBU300104Process extends BatchProcessBase<Jigy
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyojokyohokokushiryonemposakuseiiti."
             + "IJigyoJokyoHokokuShiryoNempoSakuseiItiMapper.getJigyouHokokuTokeiReportJyoho");
-    private JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParamter processParameter;
+    private JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter processParameter;
 
     private static final ReportId REPORT_DBU300104 = ReportIdDBU.DBU300104.getReportId();
     private static final RString 過去集計分旧市町村区分 = new RString("1");
@@ -140,6 +141,10 @@ public class JigyoHokokuDataReportDBU300104Process extends BatchProcessBase<Jigy
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
+        syukeiNo1010 = new HashMap<>();
+        syukeiNo0900 = new HashMap<>();
+        syukeiNo1020 = new HashMap<>();
+        syukeiNo1002 = new HashMap<>();
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         保険者番号 = 地方公共団体.get地方公共団体コード().value();
         if (過去集計分旧市町村区分.equals(processParameter.get過去集計分旧市町村区分())) {
@@ -189,114 +194,122 @@ public class JigyoHokokuDataReportDBU300104Process extends BatchProcessBase<Jigy
         reportData.set表2のタイトル2(new RString("（再掲：第２号被保険者分）"));
         reportData.set表3のタイトル(new RString("介護老人福祉施設旧措置入所者に係る減額・免除認定（再掲：第２号被保険者分）"));
 
-        reportData.set介護老人福祉施設の申請件数(new RString(syukeiNo1010.get(数値_101).longValue()));
-        reportData.set介護老人保健施設の申請件数(new RString(syukeiNo1010.get(数値_102).longValue()));
-        reportData.set介護療養型医療施設の申請件数(new RString(syukeiNo1010.get(数値_103).longValue()));
-        reportData.set地域密着型介護老人福祉施設入居者生活介護の申請件数(new RString(syukeiNo1010.get(数値_106).longValue()));
-        reportData.setその他の申請件数(new RString(syukeiNo1010.get(数値_104).longValue()));
-        reportData.set合計の申請件数(new RString(syukeiNo1010.get(数値_105).longValue()));
+        reportData.set介護老人福祉施設の申請件数(getValue(syukeiNo1010, 数値_101));
+        reportData.set介護老人保健施設の申請件数(getValue(syukeiNo1010, 数値_102));
+        reportData.set介護療養型医療施設の申請件数(getValue(syukeiNo1010, 数値_103));
+        reportData.set地域密着型介護老人福祉施設入居者生活介護の申請件数(getValue(syukeiNo1010, 数値_106));
+        reportData.setその他の申請件数(getValue(syukeiNo1010, 数値_104));
+        reportData.set合計の申請件数(getValue(syukeiNo1010, 数値_105));
 
-        reportData.set介護老人福祉施設_食費_1(new RString(syukeiNo1010.get(数値_201).longValue()));
-        reportData.set介護老人福祉施設_食費_2(new RString(syukeiNo1010.get(数値_301).longValue()));
-        reportData.set介護老人福祉施設_食費_3(new RString(syukeiNo1010.get(数値_401).longValue()));
-        reportData.set介護老人福祉施設_食費_4(new RString(syukeiNo1010.get(数値_501).longValue()));
-        reportData.set介護老人福祉施設_食費_5(new RString(syukeiNo1010.get(数値_601).longValue()));
-        reportData.set介護老人福祉施設_食費_6(new RString(syukeiNo1010.get(数値_701).longValue()));
-        reportData.set介護老人福祉施設_居住費_1(new RString(syukeiNo1010.get(数値_202).longValue()));
-        reportData.set介護老人福祉施設_居住費_2(new RString(syukeiNo1010.get(数値_302).longValue()));
-        reportData.set介護老人福祉施設_居住費_3(new RString(syukeiNo1010.get(数値_402).longValue()));
-        reportData.set介護老人福祉施設_居住費_4(new RString(syukeiNo1010.get(数値_502).longValue()));
-        reportData.set介護老人福祉施設_居住費_5(new RString(syukeiNo1010.get(数値_602).longValue()));
-        reportData.set介護老人福祉施設_居住費_6(new RString(syukeiNo1010.get(数値_702).longValue()));
-        reportData.set介護老人保健施設_食費_1(new RString(syukeiNo1010.get(数値_203).longValue()));
-        reportData.set介護老人保健施設_食費_2(new RString(syukeiNo1010.get(数値_303).longValue()));
-        reportData.set介護老人保健施設_食費_3(new RString(syukeiNo1010.get(数値_403).longValue()));
-        reportData.set介護老人保健施設_食費_4(new RString(syukeiNo1010.get(数値_503).longValue()));
-        reportData.set介護老人保健施設_食費_5(new RString(syukeiNo1010.get(数値_603).longValue()));
-        reportData.set介護老人保健施設_食費_6(new RString(syukeiNo1010.get(数値_703).longValue()));
-        reportData.set介護老人保健施設_居住費_1(new RString(syukeiNo1010.get(数値_204).longValue()));
-        reportData.set介護老人保健施設_居住費_2(new RString(syukeiNo1010.get(数値_304).longValue()));
-        reportData.set介護老人保健施設_居住費_3(new RString(syukeiNo1010.get(数値_404).longValue()));
-        reportData.set介護老人保健施設_居住費_4(new RString(syukeiNo1010.get(数値_504).longValue()));
-        reportData.set介護老人保健施設_居住費_5(new RString(syukeiNo1010.get(数値_604).longValue()));
-        reportData.set介護老人保健施設_居住費_6(new RString(syukeiNo1010.get(数値_704).longValue()));
-        reportData.set介護療養型医療施設_食費_1(new RString(syukeiNo1010.get(数値_205).longValue()));
-        reportData.set介護療養型医療施設_食費_2(new RString(syukeiNo1010.get(数値_305).longValue()));
-        reportData.set介護療養型医療施設_食費_3(new RString(syukeiNo1010.get(数値_405).longValue()));
-        reportData.set介護療養型医療施設_食費_4(new RString(syukeiNo1010.get(数値_505).longValue()));
-        reportData.set介護療養型医療施設_食費_5(new RString(syukeiNo1010.get(数値_605).longValue()));
-        reportData.set介護療養型医療施設_食費_6(new RString(syukeiNo1010.get(数値_705).longValue()));
-        reportData.set介護療養型医療施設_居住費_1(new RString(syukeiNo1010.get(数値_206).longValue()));
-        reportData.set介護療養型医療施設_居住費_2(new RString(syukeiNo1010.get(数値_306).longValue()));
-        reportData.set介護療養型医療施設_居住費_3(new RString(syukeiNo1010.get(数値_406).longValue()));
-        reportData.set介護療養型医療施設_居住費_4(new RString(syukeiNo1010.get(数値_506).longValue()));
-        reportData.set介護療養型医療施設_居住費_5(new RString(syukeiNo1010.get(数値_606).longValue()));
-        reportData.set介護療養型医療施設_居住費_6(new RString(syukeiNo1010.get(数値_706).longValue()));
-        reportData.set地域密着型介護老人福祉施設入居者生活介護_食費_1(new RString(syukeiNo1010.get(数値_211).longValue()));
-        reportData.set地域密着型介護老人福祉施設入居者生活介護_食費_2(new RString(syukeiNo1010.get(数値_311).longValue()));
-        reportData.set地域密着型介護老人福祉施設入居者生活介護_食費_3(new RString(syukeiNo1010.get(数値_411).longValue()));
-        reportData.set地域密着型介護老人福祉施設入居者生活介護_食費_4(new RString(syukeiNo1010.get(数値_511).longValue()));
-        reportData.set地域密着型介護老人福祉施設入居者生活介護_食費_5(new RString(syukeiNo1010.get(数値_611).longValue()));
-        reportData.set地域密着型介護老人福祉施設入居者生活介護_食費_6(new RString(syukeiNo1010.get(数値_711).longValue()));
-        reportData.set地域密着型介護老人福祉施設入居者生活介護_居住費_1(new RString(syukeiNo1010.get(数値_212).longValue()));
-        reportData.set地域密着型介護老人福祉施設入居者生活介護_居住費_2(new RString(syukeiNo1010.get(数値_312).longValue()));
-        reportData.set地域密着型介護老人福祉施設入居者生活介護_居住費_3(new RString(syukeiNo1010.get(数値_412).longValue()));
-        reportData.set地域密着型介護老人福祉施設入居者生活介護_居住費_4(new RString(syukeiNo1010.get(数値_512).longValue()));
-        reportData.set地域密着型介護老人福祉施設入居者生活介護_居住費_5(new RString(syukeiNo1010.get(数値_612).longValue()));
-        reportData.set地域密着型介護老人福祉施設入居者生活介護_居住費_6(new RString(syukeiNo1010.get(数値_712).longValue()));
-        reportData.setその他_食費_1(new RString(syukeiNo1010.get(数値_207).longValue()));
-        reportData.setその他_食費_2(new RString(syukeiNo1010.get(数値_307).longValue()));
-        reportData.setその他_食費_3(new RString(syukeiNo1010.get(数値_407).longValue()));
-        reportData.setその他_食費_4(new RString(syukeiNo1010.get(数値_507).longValue()));
-        reportData.setその他_食費_5(new RString(syukeiNo1010.get(数値_607).longValue()));
-        reportData.setその他_食費_6(new RString(syukeiNo1010.get(数値_707).longValue()));
-        reportData.setその他_居住費_1(new RString(syukeiNo1010.get(数値_208).longValue()));
-        reportData.setその他_居住費_2(new RString(syukeiNo1010.get(数値_308).longValue()));
-        reportData.setその他_居住費_3(new RString(syukeiNo1010.get(数値_408).longValue()));
-        reportData.setその他_居住費_4(new RString(syukeiNo1010.get(数値_508).longValue()));
-        reportData.setその他_居住費_5(new RString(syukeiNo1010.get(数値_608).longValue()));
-        reportData.setその他_居住費_6(new RString(syukeiNo1010.get(数値_708).longValue()));
-        reportData.set合計_食費_1(new RString(syukeiNo1010.get(数値_209).longValue()));
-        reportData.set合計_食費_2(new RString(syukeiNo1010.get(数値_309).longValue()));
-        reportData.set合計_食費_3(new RString(syukeiNo1010.get(数値_409).longValue()));
-        reportData.set合計_食費_4(new RString(syukeiNo1010.get(数値_509).longValue()));
-        reportData.set合計_食費_5(new RString(syukeiNo1010.get(数値_609).longValue()));
-        reportData.set合計_食費_6(new RString(syukeiNo1010.get(数値_709).longValue()));
-        reportData.set合計_居住費_1(new RString(syukeiNo1010.get(数値_210).longValue()));
-        reportData.set合計_居住費_2(new RString(syukeiNo1010.get(数値_310).longValue()));
-        reportData.set合計_居住費_3(new RString(syukeiNo1010.get(数値_410).longValue()));
-        reportData.set合計_居住費_4(new RString(syukeiNo1010.get(数値_510).longValue()));
-        reportData.set合計_居住費_5(new RString(syukeiNo1010.get(数値_610).longValue()));
-        reportData.set合計_居住費_6(new RString(syukeiNo1010.get(数値_710).longValue()));
+        reportData.set介護老人福祉施設_食費_1(getValue(syukeiNo1010, 数値_201));
+        reportData.set介護老人福祉施設_食費_2(getValue(syukeiNo1010, 数値_301));
+        reportData.set介護老人福祉施設_食費_3(getValue(syukeiNo1010, 数値_401));
+        reportData.set介護老人福祉施設_食費_4(getValue(syukeiNo1010, 数値_501));
+        reportData.set介護老人福祉施設_食費_5(getValue(syukeiNo1010, 数値_601));
+        reportData.set介護老人福祉施設_食費_6(getValue(syukeiNo1010, 数値_701));
+        reportData.set介護老人福祉施設_居住費_1(getValue(syukeiNo1010, 数値_202));
+        reportData.set介護老人福祉施設_居住費_2(getValue(syukeiNo1010, 数値_302));
+        reportData.set介護老人福祉施設_居住費_3(getValue(syukeiNo1010, 数値_402));
+        reportData.set介護老人福祉施設_居住費_4(getValue(syukeiNo1010, 数値_502));
+        reportData.set介護老人福祉施設_居住費_5(getValue(syukeiNo1010, 数値_602));
+        reportData.set介護老人福祉施設_居住費_6(getValue(syukeiNo1010, 数値_702));
+        reportData.set介護老人保健施設_食費_1(getValue(syukeiNo1010, 数値_203));
+        reportData.set介護老人保健施設_食費_2(getValue(syukeiNo1010, 数値_303));
+        reportData.set介護老人保健施設_食費_3(getValue(syukeiNo1010, 数値_403));
+        reportData.set介護老人保健施設_食費_4(getValue(syukeiNo1010, 数値_503));
+        reportData.set介護老人保健施設_食費_5(getValue(syukeiNo1010, 数値_603));
+        reportData.set介護老人保健施設_食費_6(getValue(syukeiNo1010, 数値_703));
+        reportData.set介護老人保健施設_居住費_1(getValue(syukeiNo1010, 数値_204));
+        reportData.set介護老人保健施設_居住費_2(getValue(syukeiNo1010, 数値_304));
+        reportData.set介護老人保健施設_居住費_3(getValue(syukeiNo1010, 数値_404));
+        reportData.set介護老人保健施設_居住費_4(getValue(syukeiNo1010, 数値_504));
+        reportData.set介護老人保健施設_居住費_5(getValue(syukeiNo1010, 数値_604));
+        reportData.set介護老人保健施設_居住費_6(getValue(syukeiNo1010, 数値_704));
+        reportData.set介護療養型医療施設_食費_1(getValue(syukeiNo1010, 数値_205));
+        reportData.set介護療養型医療施設_食費_2(getValue(syukeiNo1010, 数値_305));
+        reportData.set介護療養型医療施設_食費_3(getValue(syukeiNo1010, 数値_405));
+        reportData.set介護療養型医療施設_食費_4(getValue(syukeiNo1010, 数値_505));
+        reportData.set介護療養型医療施設_食費_5(getValue(syukeiNo1010, 数値_605));
+        reportData.set介護療養型医療施設_食費_6(getValue(syukeiNo1010, 数値_705));
+        reportData.set介護療養型医療施設_居住費_1(getValue(syukeiNo1010, 数値_206));
+        reportData.set介護療養型医療施設_居住費_2(getValue(syukeiNo1010, 数値_306));
+        reportData.set介護療養型医療施設_居住費_3(getValue(syukeiNo1010, 数値_406));
+        reportData.set介護療養型医療施設_居住費_4(getValue(syukeiNo1010, 数値_506));
+        reportData.set介護療養型医療施設_居住費_5(getValue(syukeiNo1010, 数値_606));
+        reportData.set介護療養型医療施設_居住費_6(getValue(syukeiNo1010, 数値_706));
+        reportData.set地域密着型介護老人福祉施設入居者生活介護_食費_1(getValue(syukeiNo1010, 数値_211));
+        reportData.set地域密着型介護老人福祉施設入居者生活介護_食費_2(getValue(syukeiNo1010, 数値_311));
+        reportData.set地域密着型介護老人福祉施設入居者生活介護_食費_3(getValue(syukeiNo1010, 数値_411));
+        reportData.set地域密着型介護老人福祉施設入居者生活介護_食費_4(getValue(syukeiNo1010, 数値_511));
+        reportData.set地域密着型介護老人福祉施設入居者生活介護_食費_5(getValue(syukeiNo1010, 数値_611));
+        reportData.set地域密着型介護老人福祉施設入居者生活介護_食費_6(getValue(syukeiNo1010, 数値_711));
+        reportData.set地域密着型介護老人福祉施設入居者生活介護_居住費_1(getValue(syukeiNo1010, 数値_212));
+        reportData.set地域密着型介護老人福祉施設入居者生活介護_居住費_2(getValue(syukeiNo1010, 数値_312));
+        reportData.set地域密着型介護老人福祉施設入居者生活介護_居住費_3(getValue(syukeiNo1010, 数値_412));
+        reportData.set地域密着型介護老人福祉施設入居者生活介護_居住費_4(getValue(syukeiNo1010, 数値_512));
+        reportData.set地域密着型介護老人福祉施設入居者生活介護_居住費_5(getValue(syukeiNo1010, 数値_612));
+        reportData.set地域密着型介護老人福祉施設入居者生活介護_居住費_6(getValue(syukeiNo1010, 数値_712));
+        reportData.setその他_食費_1(getValue(syukeiNo1010, 数値_207));
+        reportData.setその他_食費_2(getValue(syukeiNo1010, 数値_307));
+        reportData.setその他_食費_3(getValue(syukeiNo1010, 数値_407));
+        reportData.setその他_食費_4(getValue(syukeiNo1010, 数値_507));
+        reportData.setその他_食費_5(getValue(syukeiNo1010, 数値_607));
+        reportData.setその他_食費_6(getValue(syukeiNo1010, 数値_707));
+        reportData.setその他_居住費_1(getValue(syukeiNo1010, 数値_208));
+        reportData.setその他_居住費_2(getValue(syukeiNo1010, 数値_308));
+        reportData.setその他_居住費_3(getValue(syukeiNo1010, 数値_408));
+        reportData.setその他_居住費_4(getValue(syukeiNo1010, 数値_508));
+        reportData.setその他_居住費_5(getValue(syukeiNo1010, 数値_608));
+        reportData.setその他_居住費_6(getValue(syukeiNo1010, 数値_708));
+        reportData.set合計_食費_1(getValue(syukeiNo1010, 数値_209));
+        reportData.set合計_食費_2(getValue(syukeiNo1010, 数値_309));
+        reportData.set合計_食費_3(getValue(syukeiNo1010, 数値_409));
+        reportData.set合計_食費_4(getValue(syukeiNo1010, 数値_509));
+        reportData.set合計_食費_5(getValue(syukeiNo1010, 数値_609));
+        reportData.set合計_食費_6(getValue(syukeiNo1010, 数値_709));
+        reportData.set合計_居住費_1(getValue(syukeiNo1010, 数値_210));
+        reportData.set合計_居住費_2(getValue(syukeiNo1010, 数値_310));
+        reportData.set合計_居住費_3(getValue(syukeiNo1010, 数値_410));
+        reportData.set合計_居住費_4(getValue(syukeiNo1010, 数値_510));
+        reportData.set合計_居住費_5(getValue(syukeiNo1010, 数値_610));
+        reportData.set合計_居住費_6(getValue(syukeiNo1010, 数値_710));
 
-        reportData.set利用者負担減額_免除認定表の利用者負担_1(new RString(syukeiNo0900.get(数値_101).longValue()));
-        reportData.set利用者負担減額_免除認定表の利用者負担_2(new RString(syukeiNo0900.get(数値_102).longValue()));
-        reportData.set利用者負担減額_免除認定表の利用者負担_3(new RString(syukeiNo0900.get(数値_103).longValue()));
-        reportData.set利用者負担減額_免除認定表の利用者負担_4(new RString(syukeiNo0900.get(数値_104).longValue()));
-        reportData.set利用者負担減額_免除認定表の利用者負担_5(new RString(syukeiNo0900.get(数値_105).longValue()));
-        reportData.set利用者負担減額_免除認定表の利用者負担_6(new RString(syukeiNo0900.get(数値_106).longValue()));
+        reportData.set利用者負担減額_免除認定表の利用者負担_1(getValue(syukeiNo0900, 数値_101));
+        reportData.set利用者負担減額_免除認定表の利用者負担_2(getValue(syukeiNo0900, 数値_102));
+        reportData.set利用者負担減額_免除認定表の利用者負担_3(getValue(syukeiNo0900, 数値_103));
+        reportData.set利用者負担減額_免除認定表の利用者負担_4(getValue(syukeiNo0900, 数値_104));
+        reportData.set利用者負担減額_免除認定表の利用者負担_5(getValue(syukeiNo0900, 数値_105));
+        reportData.set利用者負担減額_免除認定表の利用者負担_6(getValue(syukeiNo0900, 数値_106));
 
-        reportData.set特定負担限度額の申請件数(new RString(syukeiNo1020.get(数値_101).longValue()));
-        reportData.set減免認定表の特定負担限度額_食費_1(new RString(syukeiNo1020.get(数値_201).longValue()));
-        reportData.set減免認定表の特定負担限度額_食費_2(new RString(syukeiNo1020.get(数値_301).longValue()));
-        reportData.set減免認定表の特定負担限度額_食費_3(new RString(syukeiNo1020.get(数値_401).longValue()));
-        reportData.set減免認定表の特定負担限度額_食費_4(new RString(syukeiNo1020.get(数値_501).longValue()));
-        reportData.set減免認定表の特定負担限度額_食費_5(new RString(syukeiNo1020.get(数値_601).longValue()));
-        reportData.set減免認定表の特定負担限度額_食費_6(new RString(syukeiNo1020.get(数値_701).longValue()));
-        reportData.set減免認定表の特定負担限度額_居住費_1(new RString(syukeiNo1020.get(数値_202).longValue()));
-        reportData.set減免認定表の特定負担限度額_居住費_2(new RString(syukeiNo1020.get(数値_302).longValue()));
-        reportData.set減免認定表の特定負担限度額_居住費_3(new RString(syukeiNo1020.get(数値_402).longValue()));
-        reportData.set減免認定表の特定負担限度額_居住費_4(new RString(syukeiNo1020.get(数値_502).longValue()));
-        reportData.set減免認定表の特定負担限度額_居住費_5(new RString(syukeiNo1020.get(数値_602).longValue()));
-        reportData.set減免認定表の特定負担限度額_居住費_6(new RString(syukeiNo1020.get(数値_702).longValue()));
+        reportData.set特定負担限度額の申請件数(getValue(syukeiNo1020, 数値_101));
+        reportData.set減免認定表の特定負担限度額_食費_1(getValue(syukeiNo1020, 数値_201));
+        reportData.set減免認定表の特定負担限度額_食費_2(getValue(syukeiNo1020, 数値_301));
+        reportData.set減免認定表の特定負担限度額_食費_3(getValue(syukeiNo1020, 数値_401));
+        reportData.set減免認定表の特定負担限度額_食費_4(getValue(syukeiNo1020, 数値_501));
+        reportData.set減免認定表の特定負担限度額_食費_5(getValue(syukeiNo1020, 数値_601));
+        reportData.set減免認定表の特定負担限度額_食費_6(getValue(syukeiNo1020, 数値_701));
+        reportData.set減免認定表の特定負担限度額_居住費_1(getValue(syukeiNo1020, 数値_202));
+        reportData.set減免認定表の特定負担限度額_居住費_2(getValue(syukeiNo1020, 数値_302));
+        reportData.set減免認定表の特定負担限度額_居住費_3(getValue(syukeiNo1020, 数値_402));
+        reportData.set減免認定表の特定負担限度額_居住費_4(getValue(syukeiNo1020, 数値_502));
+        reportData.set減免認定表の特定負担限度額_居住費_5(getValue(syukeiNo1020, 数値_602));
+        reportData.set減免認定表の特定負担限度額_居住費_6(getValue(syukeiNo1020, 数値_702));
 
-        reportData.set免除認定表の利用者負担_1(new RString(syukeiNo1002.get(数値_101).longValue()));
-        reportData.set免除認定表の利用者負担_2(new RString(syukeiNo1002.get(数値_201).longValue()));
-        reportData.set免除認定表の利用者負担_3(new RString(syukeiNo1002.get(数値_301).longValue()));
-        reportData.set免除認定表の利用者負担_4(new RString(syukeiNo1002.get(数値_401).longValue()));
-        reportData.set免除認定表の利用者負担_5(new RString(syukeiNo1002.get(数値_501).longValue()));
-        reportData.set免除認定表の利用者負担_6(new RString(syukeiNo1002.get(数値_601).longValue()));
+        reportData.set免除認定表の利用者負担_1(getValue(syukeiNo1020, 数値_101));
+        reportData.set免除認定表の利用者負担_2(getValue(syukeiNo1020, 数値_201));
+        reportData.set免除認定表の利用者負担_3(getValue(syukeiNo1020, 数値_301));
+        reportData.set免除認定表の利用者負担_4(getValue(syukeiNo1020, 数値_401));
+        reportData.set免除認定表の利用者負担_5(getValue(syukeiNo1020, 数値_501));
+        reportData.set免除認定表の利用者負担_6(getValue(syukeiNo1020, 数値_601));
         JigyohokokuCompYoshiki300103Report report = new JigyohokokuCompYoshiki300103Report(reportData);
         report.writeBy(reportSourceWriter);
     }
+
+    private RString getValue(Map<Decimal, Decimal> map, Decimal key) {
+        if (map != null && map.get(key) != null) {
+            return new RString(map.get(key).longValue());
+        }
+        return RString.EMPTY;
+    }
+
 }

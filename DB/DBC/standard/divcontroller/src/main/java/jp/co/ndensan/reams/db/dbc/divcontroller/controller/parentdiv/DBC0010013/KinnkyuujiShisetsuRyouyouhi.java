@@ -57,8 +57,6 @@ public class KinnkyuujiShisetsuRyouyouhi {
                 整理番号, 事業者番号, 様式番号, サービス提供.getYearMonth().toDateString());
         getHandler(div).setDataGrid(緊急時施設療養データ);
         div.getKyufuJissekiTekiyoPanel().setIsOpen(false);
-        //ＴＯＤＯ QA1579が回答ない、先月ボタン、次月ボタンの状態の判定が実装ない
-
         return createResponse(div);
     }
 
@@ -75,7 +73,11 @@ public class KinnkyuujiShisetsuRyouyouhi {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getKojinKakuteiKey().get被保険者番号();
         List<KyufujissekiKinkyuShisetsuRyoyo> 給付実績緊急時施設療養データ取得 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getCsData_C();
-        getHandler(div).change年月(new RString("前月"), 被保険者番号, 給付実績緊急時施設療養データ取得);
+        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+        NyuryokuShikibetsuNo 識別番号検索キー = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class);
+        getHandler(div).change年月(new RString("前月"), 給付実績緊急時施設療養データ取得, サービス提供年月,
+                整理番号, 被保険者番号, 識別番号検索キー);
         return createResponse(div);
     }
 
@@ -92,7 +94,11 @@ public class KinnkyuujiShisetsuRyouyouhi {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getKojinKakuteiKey().get被保険者番号();
         List<KyufujissekiKinkyuShisetsuRyoyo> 給付実績緊急時施設療養データ取得 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getCsData_C();
-        getHandler(div).change年月(new RString("次月"), 被保険者番号, 給付実績緊急時施設療養データ取得);
+        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+        NyuryokuShikibetsuNo 識別番号検索キー = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class);
+        getHandler(div).change年月(new RString("次月"), 給付実績緊急時施設療養データ取得, サービス提供年月,
+                整理番号, 被保険者番号, 識別番号検索キー);
         return createResponse(div);
     }
 

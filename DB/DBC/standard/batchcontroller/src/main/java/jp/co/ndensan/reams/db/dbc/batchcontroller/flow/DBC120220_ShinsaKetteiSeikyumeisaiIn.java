@@ -49,6 +49,7 @@ public class DBC120220_ShinsaKetteiSeikyumeisaiIn extends BatchFlowBase<Kokuhore
     private int レコード件数合算;
     private RString csvFullPath;
     private int 集計件数;
+    private int 明細件数;
 
     private FlowEntity flowEntity;
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
@@ -74,8 +75,9 @@ public class DBC120220_ShinsaKetteiSeikyumeisaiIn extends BatchFlowBase<Kokuhore
                 executeStep(CSVファイル取込);
                 flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
                         SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
-                レコード件数合算 = flowEntity.get明細データ登録件数();
-                集計件数 = flowEntity.getCodeNum();
+                レコード件数合算 = flowEntity.getCodeNum();
+                集計件数 = flowEntity.get集計データ登録件数();
+                明細件数 = flowEntity.get明細データ登録件数();
             }
             if (0 == flowEntity.get明細データ登録件数()) {
                 executeStep(国保連インタフェース管理更新);
@@ -117,6 +119,7 @@ public class DBC120220_ShinsaKetteiSeikyumeisaiIn extends BatchFlowBase<Kokuhore
         parameter.set保存先パース(csvFullPath);
         parameter.setレコード件数合算(レコード件数合算);
         parameter.set集計件数合算(集計件数);
+        parameter.set明細件数合算(明細件数);
         return loopBatch(SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess.class).arguments(parameter).define();
     }
 

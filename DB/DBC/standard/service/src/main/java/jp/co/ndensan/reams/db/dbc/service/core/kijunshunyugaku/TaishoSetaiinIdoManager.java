@@ -202,10 +202,11 @@ public class TaishoSetaiinIdoManager {
                 } else if ((!(対象世帯員クラス.get世帯員情報().size() < 2)) && (!(対象世帯員クラス.get総収入額().compareTo(DATA_520) < 0))) {
                     temp_対象世帯員クラス.setメッセージ(DATA_複数世帯);
                     temp_対象世帯員クラス.set出力有無(出力しない);
-                } else {
-                    temp_対象世帯員クラス.setメッセージ(DATA_第１号被保険者が存在);
-                    temp_対象世帯員クラス.set出力有無(出力しない);
                 }
+                break;
+            } else {
+                temp_対象世帯員クラス.setメッセージ(DATA_第１号被保険者が存在);
+                temp_対象世帯員クラス.set出力有無(出力しない);
             }
         }
         if (出力する.equals(対象世帯員クラス.get出力有無())) {
@@ -272,16 +273,16 @@ public class TaishoSetaiinIdoManager {
         }
         for (TaishoSetaiinIdoEntity taishosetaiinidoentity : entityList) {
             if (対象世帯員クラス.get世帯員把握基準日().isBeforeOrEquals(taishosetaiinidoentity.getShinseishoSakuseiSetaiKijunYMD())) {
+                temp_対象世帯員クラス.setメッセージ(DATA_世帯把握基準日が遡);
+                temp_対象世帯員クラス.set出力有無(出力しない);
+            } else {
                 if (taishosetaiinidoentity.getHihokenshaNo().equals(shotailist.get被保険者番号())) {
                     temp_対象世帯員クラス.setメッセージ(DATA_既に発行済み);
                     temp_対象世帯員クラス.set出力有無(出力しない);
                 } else {
                     temp_対象世帯員クラス.set更新時履歴番号(taishosetaiinidoentity.getRirekiNo() + 1);
+                    break;
                 }
-
-            } else {
-                temp_対象世帯員クラス.setメッセージ(DATA_世帯把握基準日が遡);
-                temp_対象世帯員クラス.set出力有無(出力しない);
             }
         }
     }

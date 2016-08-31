@@ -5,10 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU030030;
 
+import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbu.business.report.jigyohokokugeppoyoshikibesshi.JigyohokokuGeppoYoshikiBesshiReport;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNo;
-import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParamter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.reportid.ReportIdDBU;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoyoshikibesshi.JigyohokokuGeppoYoshikiBesshiData;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyojokyohokokushiryonemposakuseiiti.JigyoHokokuDataRelateEntity;
@@ -37,7 +38,7 @@ public class JigyoHokokuDataReportDBU300008Process extends BatchProcessBase<Jigy
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyojokyohokokushiryonemposakuseiiti."
             + "IJigyoJokyoHokokuShiryoNempoSakuseiItiMapper.getJigyouHokokuTokeiReportJyoho");
-    private JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParamter processParameter;
+    private JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter processParameter;
 
     private static final ReportId REPORT_DBU300008 = ReportIdDBU.DBU300008.getReportId();
     private static final RString 過去集計分旧市町村区分 = new RString("1");
@@ -61,6 +62,7 @@ public class JigyoHokokuDataReportDBU300008Process extends BatchProcessBase<Jigy
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
+        syukeiNo0100 = new HashMap<>();
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         保険者番号 = 地方公共団体.get地方公共団体コード().value();
         if (過去集計分旧市町村区分.equals(processParameter.get過去集計分旧市町村区分())) {
@@ -103,11 +105,18 @@ public class JigyoHokokuDataReportDBU300008Process extends BatchProcessBase<Jigy
         reportData.set項目標題列2(new RString("当年度中増"));
         reportData.set項目標題列3(new RString("当年度中減"));
         reportData.set項目標題列4(new RString("当年度末現在"));
-        reportData.set前月末現在の集計結果値_1(new RString(syukeiNo0100.get(数値_11).longValue()));
-        reportData.set当月中増の集計結果値_1(new RString(syukeiNo0100.get(数値_12).longValue()));
-        reportData.set当月中減の集計結果値_1(new RString(syukeiNo0100.get(数値_13).longValue()));
-        reportData.set当月末現在の集計結果値_1(new RString(syukeiNo0100.get(数値_14).longValue()));
+        reportData.set前月末現在の集計結果値_1(getValue(syukeiNo0100, 数値_11));
+        reportData.set当月中増の集計結果値_1(getValue(syukeiNo0100, 数値_12));
+        reportData.set当月中減の集計結果値_1(getValue(syukeiNo0100, 数値_13));
+        reportData.set当月末現在の集計結果値_1(getValue(syukeiNo0100, 数値_14));
         JigyohokokuGeppoYoshikiBesshiReport report = new JigyohokokuGeppoYoshikiBesshiReport(reportData);
         report.writeBy(reportSourceWriter);
+    }
+
+    private RString getValue(Map<Decimal, Decimal> map, Decimal key) {
+        if (map != null && map.get(key) != null) {
+            return new RString(map.get(key).longValue());
+        }
+        return RString.EMPTY;
     }
 }

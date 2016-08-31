@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU030030;
 
-import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParamter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyojokyohokokushiryonemposakuseiiti.JigyoHokokuDataRelateEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyojokyohokokushiryonemposakuseiiti.IJigyoJokyoHokokuShiryoNempoSakuseiItiMapper;
@@ -29,7 +29,7 @@ public class JigyoHokokuDataTorokuProcess extends BatchProcessBase<JigyoHokokuDa
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyojokyohokokushiryonemposakuseiiti."
             + "IJigyoJokyoHokokuShiryoNempoSakuseiItiMapper.getJigyouHokokuTokeiJyoho");
-    private JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParamter processParameter;
+    private JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter processParameter;
     private IJigyoJokyoHokokuShiryoNempoSakuseiItiMapper mapper;
     @BatchWriter
     private BatchPermanentTableWriter<DbT7021JigyoHokokuTokeiDataEntity> dbT7021EntityWriter;

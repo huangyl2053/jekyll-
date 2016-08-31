@@ -45,6 +45,14 @@ public class SogojigyohiShikakuShogohyoDoSakuseiService {
         return InstanceProvider.create(SogojigyohiShikakuShogohyoDoSakuseiService.class);
     }
 
+    /**
+     * CSVファイル出力データを作成する。
+     *
+     * @param entity SogojigyohiShikakuShogohyoInEntity
+     * @param システム日付 RDateTime
+     * @param 市町村セキュリティ ShichosonSecurityJoho
+     * @return SogojigyohiShikakuShogohyoInCsvEntity
+     */
     public SogojigyohiShikakuShogohyoInCsvEntity getCsvEntity(SogojigyohiShikakuShogohyoInEntity entity,
             RDateTime システム日付, ShichosonSecurityJoho 市町村セキュリティ) {
         SogojigyohiShikakuShogohyoInCsvEntity resultEntity
@@ -94,6 +102,19 @@ public class SogojigyohiShikakuShogohyoDoSakuseiService {
                 resultEntity.set要介護度(要介護区分.getName());
             }
         }
+        set有効期間(entity, resultEntity);
+        set費用と区分(entity, resultEntity);
+        if (市町村セキュリティ.get導入形態コード().is広域()) {
+            if (null != entity.get証記載保険者番号()) {
+                resultEntity.set証記載保険者番号(entity.get証記載保険者番号().getColumnValue());
+            } else {
+                resultEntity.set証記載保険者番号(RString.EMPTY);
+            }
+        }
+        return resultEntity;
+    }
+
+    private void set有効期間(SogojigyohiShikakuShogohyoInEntity entity, SogojigyohiShikakuShogohyoInCsvEntity resultEntity) {
         if (null != entity.get認定有効期間_開始年月日()) {
             resultEntity.set認定有効期間_開始(entity.get認定有効期間_開始年月日().wareki().separator(Separator.PERIOD)
                     .fillType(FillType.BLANK).toDateString());
@@ -110,6 +131,9 @@ public class SogojigyohiShikakuShogohyoDoSakuseiService {
             resultEntity.set限度額適用期間_終了(entity.get限度額適用期間_終了年月日().wareki().separator(Separator.PERIOD)
                     .fillType(FillType.BLANK).toDateString());
         }
+    }
+
+    private void set費用と区分(SogojigyohiShikakuShogohyoInEntity entity, SogojigyohiShikakuShogohyoInCsvEntity resultEntity) {
         resultEntity.set支給限度額(doカンマ編集(entity.get支給限度額()));
         if (null != entity.get居宅サービス計画作成区分コード()) {
             resultEntity.set居宅サービス計画作成区分コード(entity.get居宅サービス計画作成区分コード().getColumnValue());
@@ -132,14 +156,6 @@ public class SogojigyohiShikakuShogohyoDoSakuseiService {
         resultEntity.setサービス日数_回数(new RString(Integer.toString(entity.getサービス日数_回数())));
         resultEntity.setサービス単位数(doカンマ編集(entity.getサービス単位数()));
         resultEntity.set利用者負担額(doカンマ編集(entity.get利用者負担額()));
-        if (市町村セキュリティ.get導入形態コード().is広域()) {
-            if (null != entity.get証記載保険者番号()) {
-                resultEntity.set証記載保険者番号(entity.get証記載保険者番号().getColumnValue());
-            } else {
-                resultEntity.set証記載保険者番号(RString.EMPTY);
-            }
-        }
-        return resultEntity;
     }
 
     private RString doカンマ編集(Decimal number) {

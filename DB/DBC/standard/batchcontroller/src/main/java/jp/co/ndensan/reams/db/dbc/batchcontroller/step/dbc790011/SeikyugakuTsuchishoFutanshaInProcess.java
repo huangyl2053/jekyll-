@@ -240,8 +240,8 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
         suchishoTempentity.setS_Tanisu(getDecimal(meisaiEntity.get再審査_過誤_公費対象単位数()));
         suchishoTempentity.setS_Choseigaku(getDecimal(meisaiEntity.get再審査_過誤_公費対象調整額()));
         suchishoTempentity.setKaigokyufuSogojigyohi(Decimal.ZERO);
-        suchishoTempentity.setRiyoshaFutangaku(getDecimal(meisaiEntity.get負担額()));
-        suchishoTempentity.setKohiFutangaku(getDecimal(meisaiEntity.get公費分本人負担額()));
+        suchishoTempentity.setRiyoshaFutangaku(getDecimal(meisaiEntity.get公費分本人負担額()));
+        suchishoTempentity.setKohiFutangaku(getDecimal(meisaiEntity.get負担額()));
     }
 
     private void set合計レコード(DbWT1511SeikyugakuTsuchishoTempEntity suchishoTempentity,
@@ -255,8 +255,8 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
             suchishoTempentity.setS_GokeiTanisu(getDecimal(gokeiCsvEntity.get再審査_過誤_公費対象単位数()));
             suchishoTempentity.setS_GokeiChoseigaku(getDecimal(gokeiCsvEntity.get再審査_過誤_公費対象調整額()));
             suchishoTempentity.setGokeiKaigokyufuSogojigyohi(Decimal.ZERO);
-            suchishoTempentity.setGokeiRiyoshaFutangaku(getDecimal(gokeiCsvEntity.get負担額()));
-            suchishoTempentity.setGokeiKohiFutangaku(getDecimal(gokeiCsvEntity.get公費分本人負担額()));
+            suchishoTempentity.setGokeiRiyoshaFutangaku(getDecimal(gokeiCsvEntity.get公費分本人負担額()));
+            suchishoTempentity.setGokeiKohiFutangaku(getDecimal(gokeiCsvEntity.get負担額()));
         } else {
             suchishoTempentity.setGokeiChohyoRecordShubetsu(RString.EMPTY);
             suchishoTempentity.setT_GokeiKensu(Decimal.ZERO);
@@ -283,8 +283,8 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
             suchishoTempentity.setS_RuisekiTanisu(getDecimal(ruikeiCsvEntity.get再審査_過誤_公費対象単位数()));
             suchishoTempentity.setS_RuisekiChoseigaku(getDecimal(ruikeiCsvEntity.get再審査_過誤_公費対象調整額()));
             suchishoTempentity.setRuisekiKaigokyufuSogojigyohi(Decimal.ZERO);
-            suchishoTempentity.setRuisekiRiyoshaFutangaku(getDecimal(ruikeiCsvEntity.get負担額()));
-            suchishoTempentity.setRuisekiKohiFutangaku(getDecimal(ruikeiCsvEntity.get公費分本人負担額()));
+            suchishoTempentity.setRuisekiRiyoshaFutangaku(getDecimal(ruikeiCsvEntity.get公費分本人負担額()));
+            suchishoTempentity.setRuisekiKohiFutangaku(getDecimal(ruikeiCsvEntity.get負担額()));
         } else {
             suchishoTempentity.setRuisekiChohyoRecordShubetsu(RString.EMPTY);
             suchishoTempentity.setT_RuisekiKensu(Decimal.ZERO);

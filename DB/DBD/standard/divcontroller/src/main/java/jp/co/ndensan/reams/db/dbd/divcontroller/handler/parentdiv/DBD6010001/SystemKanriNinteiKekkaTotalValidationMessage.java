@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
+ * システム管理登録（認定結果通知書文言変更）画面の入力チェックのメッセージクラスです。
  *
- * @author tz_sunl
+ * @reamsid_L DBD-3760-010 tz_chengpeng
  */
 public enum SystemKanriNinteiKekkaTotalValidationMessage implements IValidationMessage {
 

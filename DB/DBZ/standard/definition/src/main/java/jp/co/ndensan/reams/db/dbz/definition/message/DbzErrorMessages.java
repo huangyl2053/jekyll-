@@ -67,7 +67,8 @@ public enum DbzErrorMessages implements IMessageGettable, IValidationMessage {
     アップロードファイルが不正(53, "アップロードファイルが不正です。：?"),
     最大取得件数範囲外(54, "表示件数上限999以下に指定してください。"),
     ファイル指定なし(55, "ファイルが指定されていません。"),
-    対象者を選択(56, "対象者を選択してください。");
+    対象者を選択(56, "対象者を選択してください。"),
+    必須項目_追加メッセージあり(57, "必須項目_追加メッセージあり:?");
 
     private final transient Message message;
 
