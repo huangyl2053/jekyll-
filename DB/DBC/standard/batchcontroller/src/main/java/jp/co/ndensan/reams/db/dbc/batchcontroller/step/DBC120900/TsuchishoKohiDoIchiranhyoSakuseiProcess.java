@@ -183,7 +183,7 @@ public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<D
             csvEntity.set累計_再審査_過誤_件数(doカンマ編集(csvDataEntity.get累計_再審査_過誤_件数()));
             csvEntity.set累計_再審査_過誤_公費対象単位数(doカンマ編集(csvDataEntity.get累計_再審査_過誤_単位数()));
             csvEntity.set累計_再審査_過誤_公費対象調整額(doカンマ編集(csvDataEntity.get累計_再審査_過誤_調整額()));
-            csvEntity.set累計_負担額(doカンマ編集(csvDataEntity.get合計_公費負担額()));
+            csvEntity.set累計_負担額(doカンマ編集(csvDataEntity.get累計_公費負担額()));
             csvEntity.set累計_公費分本人負担額(doカンマ編集(csvDataEntity.get累計_利用者負担額()));
         }
         if (!RString.isNullOrEmpty(csvDataEntity.get手数料_帳票レコード種別())) {
