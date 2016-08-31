@@ -95,10 +95,10 @@ public class EnkiTsuchishohakenIchiranhyoJyohoReportProcess extends BatchProcess
             出力条件.add(new RString(parameter.get処理見込み日From().toString()));
         }
         if (parameter.get処理見込み日To() != null) {
-            出力条件.add(new RString(parameter.get処理見込み日From().toString()));
+            出力条件.add(new RString(parameter.get処理見込み日To().toString()));
         }
         if (parameter.get通知書発行日() != null) {
-            出力条件.add(new RString(parameter.get処理見込み日From().toString()));
+            出力条件.add(new RString(parameter.get通知書発行日().toString()));
         }
         return 出力条件;
     }
