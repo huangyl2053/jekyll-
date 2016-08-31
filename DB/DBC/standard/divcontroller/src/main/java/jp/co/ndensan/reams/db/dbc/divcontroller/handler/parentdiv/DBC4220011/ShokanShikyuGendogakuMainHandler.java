@@ -402,16 +402,8 @@ public class ShokanShikyuGendogakuMainHandler {
             valueChange(テーブル区分, サービス種類コード, 適用開始年月, 支給限度単位数, update償還List,
                     update上乗せList, 償還HolderList, 上乗せ償還HolderList);
         }
-        if (!update償還List.isEmpty()) {
-            for (ShokanShuruiShikyuGendoGaku update償還 : update償還List) {
-                償還manager.save償還払い給付種類支給限度額(update償還);
-            }
-        }
-        if (!update上乗せList.isEmpty()) {
-            for (UwanoseShokanShuruiShikyuGendoGaku update上乗せ : update上乗せList) {
-                上乗せ償還manager.save上乗せ償還払い給付種類支給限度額(update上乗せ);
-            }
-        }
+        償還manager.save償還List(update償還List);
+        上乗せ償還manager.save上乗せList(update上乗せList);
     }
 
     private void valueChange(RString テーブル区分, ServiceShuruiCode サービス種類コード,
@@ -426,7 +418,8 @@ public class ShokanShikyuGendogakuMainHandler {
                 テーブル区分)) {
             for (ShokanShuruiShikyuGendoGaku 償還Holder : 償還HolderList) {
                 if (サービス種類コード.equals(償還Holder.getサービス種類コード())
-                        && 適用開始年月.equals(償還Holder.get適用開始年月())) {
+                        && 適用開始年月.equals(償還Holder.get適用開始年月())
+                        && !支給限度単位数.equals(償還Holder.get支給限度単位数())) {
                     償還Holder = 償還Holder.createBuilderForEdit()
                             .set支給限度単位数(支給限度単位数)
                             .build();
@@ -436,7 +429,8 @@ public class ShokanShikyuGendogakuMainHandler {
         } else {
             for (UwanoseShokanShuruiShikyuGendoGaku 上乗せ償還Holder : 上乗せ償還HolderList) {
                 if (サービス種類コード.equals(上乗せ償還Holder.getサービス種類コード())
-                        && 適用開始年月.equals(上乗せ償還Holder.get適用開始年月())) {
+                        && 適用開始年月.equals(上乗せ償還Holder.get適用開始年月())
+                        && !支給限度単位数.equals(上乗せ償還Holder.get支給限度単位数())) {
                     上乗せ償還Holder = 上乗せ償還Holder.createBuilderForEdit()
                             .set支給限度単位数(支給限度単位数)
                             .build();
