@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout;
 
 import jp.co.ndensan.reams.ur.urz.entity.db.basic.hokenja.UrT0507HokenjaEntity;
-import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
-import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 
 /**
  * 保険者名の取得パラメータです。
@@ -17,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HokenshaKyufujissekiOutGetHihokenshaNameEntity implements IBatchProcessParameter, IMyBatisParameter {
+public class HokenshaKyufujissekiOutGetHihokenshaNameEntity {
 
     private UrT0507HokenjaEntity urT0507Entity;
     private DbWT1001HihokenshaTempEntity dbWT1001Entity;

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130;
 
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetBeforeKanyuYMDEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -21,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2460-012 jiangwenkai
  */
-public class HokenshaKyufujissekiOutGetBeforeKanyuYMDProcess extends BatchProcessBase<HokenshaKyufujissekiOutGetBeforeKanyuYMDEntity> {
+public class HokenshaKyufujissekiOutGetBeforeKanyuYMDProcess extends BatchProcessBase<DbWT1001HihokenshaTempEntity> {
 
     /**
      * 広域加入日以前のデータを取得後の返したエンティティ
@@ -59,9 +58,9 @@ public class HokenshaKyufujissekiOutGetBeforeKanyuYMDProcess extends BatchProces
     }
 
     @Override
-    protected void process(HokenshaKyufujissekiOutGetBeforeKanyuYMDEntity entity) {
-        entity.getDbWT1001Entity().setHenkanFlag(true);
-        dbWT0001TableWriter.update(entity.getDbWT1001Entity());
+    protected void process(DbWT1001HihokenshaTempEntity entity) {
+        entity.setHenkanFlag(true);
+        dbWT0001TableWriter.update(entity);
         numble++;
     }
 
