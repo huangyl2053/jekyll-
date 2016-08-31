@@ -204,8 +204,10 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
         } else {
             parameter.set日付スラッシュ付加(false);
         }
+        if (div.getChushutsuJokenPanel().getCcdHokenshaList().isVisible()) {
+            parameter.set保険者コード(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード());
+        }
 
-        parameter.set保険者コード(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード());
         parameter.set出力順(div.getCcdShutsuryokujun().get出力順ID());
         if (!div.getCcdShutsuryokuKoumoku().isDisabled()) {
             parameter.set出力項目(div.getCcdShutsuryokuKoumoku().get出力項目ID());
