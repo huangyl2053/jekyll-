@@ -40,7 +40,7 @@ public class SogojigyohiSaishinsaKetteitsuchishoPageBreak extends PageBreaker<So
             ReportLineRecord<SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiSource> nextSource) {
         boolean flag = false;
         if (this.breakKeysList.contains(SogojigyohiSaishinsaOutPutOrder.公費負担者番号.getフォームフィールド名())
-                && !currentSource.getSource().koshiFutanshaNo.equals(nextSource.getSource().koshiFutanshaNo)) {
+                && !currentSource.getSource().kohiFutanshaNo.equals(nextSource.getSource().kohiFutanshaNo)) {
             flag = true;
         }
         return flag;

@@ -196,6 +196,7 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiProcess
         }
         公費負担者番号 = this公費負担者番号;
         if (集計Flag) {
+            連番 = 1;
             SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport report = new SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport(
                     lastEntity,
                     出力順Map,
