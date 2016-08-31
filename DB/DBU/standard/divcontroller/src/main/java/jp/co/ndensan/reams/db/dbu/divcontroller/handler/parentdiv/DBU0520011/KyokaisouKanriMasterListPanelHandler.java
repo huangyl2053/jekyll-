@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0520011;
 
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kyokaisogaitoshabatchparameter.KyokaisoKanriMasterListBatchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.reportid.ReportIdDBU;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0520011.KyokaisouKanriMasterListPanelDiv;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -56,6 +58,7 @@ public class KyokaisouKanriMasterListPanelHandler {
     public void initialize(ChohyoBunruiKanri chohyoBunruiKanri) {
         //TODO 出力顺ID获取已提技术点待解决。
         //div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBA介護資格, chohyoBunruiKanri.get帳票分類ID());
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBU介護統計報告, ReportIdDBU.DBA200005.getReportId());
         div.getKyokaisoKariParam().getRadKijunbi().setSelectedKey(KY1);
         div.getKyokaisoKariParam().getTxtKijumbi().setDisabled(false);
         div.getKyokaisoKariParam().getTxtKijumbi().setValue(RDate.getNowDate());
