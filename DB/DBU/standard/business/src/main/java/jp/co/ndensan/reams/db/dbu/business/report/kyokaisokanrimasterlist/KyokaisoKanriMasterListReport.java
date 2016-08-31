@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlist;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.entity.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
@@ -56,35 +57,39 @@ public class KyokaisoKanriMasterListReport extends Report<KyokaisoKanriMasterLis
      */
     @Override
     public void writeBy(ReportSourceWriter<KyokaisoKanriMasterListReportSource> reportSourceWriter) {
-        if (bodyItemList != null && !bodyItemList.isEmpty()) {
-            for (KyokaisoKanriMasterListBodyItem item : bodyItemList) {
-                for (int i = 0; i < item.getListUpper_1().size(); i++) {
-                    KyokaisoKanriMasterListBodyTempItem tempItem = new KyokaisoKanriMasterListBodyTempItem();
-                    tempItem.setListUpper_1(item.getListUpper_1().get(i));
-                    tempItem.setListUpper_2(item.getListUpper_2().get(i));
-                    tempItem.setListUpper_3(item.getListUpper_3().get(i));
-                    tempItem.setListUpper_4(item.getListUpper_4().get(i));
-                    tempItem.setListUpper_5(item.getListUpper_5().get(i));
-                    tempItem.setListUpper_6(item.getListUpper_6().get(i));
-                    tempItem.setListUpper_7(item.getListUpper_7().get(i));
-                    tempItem.setListUpper_8(item.getListUpper_8().get(i));
-                    tempItem.setListUpper_9(item.getListUpper_9().get(i));
-                    tempItem.setListLower_1(item.getListLower_1().get(i));
-                    tempItem.setListLower_2(item.getListLower_2().get(i));
-                    tempItem.setListLower_3(item.getListLower_3().get(i));
-                    tempItem.setListLower_4(item.getListLower_4().get(i));
-                    tempItem.setListLower_5(item.getListLower_5().get(i));
-                    tempItem.setListLower_6(item.getListLower_6().get(i));
-                    tempItem.setListLower_7(item.getListLower_7().get(i));
-                    tempItem.setListLower_8(item.getListLower_8().get(i));
-                    tempItem.setListLower_9(item.getListLower_9().get(i));
-                    tempItem.setListLower_10(item.getListLower_10().get(i));
-                    IKyokaisoKanriMasterListEditor headerEditor = new KyokaisoKanriMasterListHeaderEditor(headItem);
-                    IKyokaisoKanriMasterListEditor bodyEditor = new KyokaisoKanriMasterListBodyEditor(tempItem);
-                    IKyokaisoKanriMasterListBuilder builder = new KyokaisoKanriMasterListBuilderImpl(headerEditor, bodyEditor);
-                    reportSourceWriter.writeLine(builder);
-                }
+        for (KyokaisoKanriMasterListBodyItem item : bodyItemList) {
+            for (int i = 0; i < item.getListUpper_1().size(); i++) {
+                KyokaisoKanriMasterListBodyTempItem tempItem = new KyokaisoKanriMasterListBodyTempItem();
+                tempItem.setListUpper_1(item.getListUpper_1().get(i));
+                tempItem.setListUpper_2(item.getListUpper_2().get(i));
+                tempItem.setListUpper_3(item.getListUpper_3().get(i));
+                tempItem.setListUpper_4(item.getListUpper_4().get(i));
+                tempItem.setListUpper_5(item.getListUpper_5().get(i));
+                tempItem.setListUpper_6(item.getListUpper_6().get(i));
+                tempItem.setListUpper_7(item.getListUpper_7().get(i));
+                tempItem.setListUpper_8(item.getListUpper_8().get(i));
+                tempItem.setListUpper_9(item.getListUpper_9().get(i));
+                tempItem.setListLower_1(item.getListLower_1().get(i));
+                tempItem.setListLower_2(item.getListLower_2().get(i));
+                tempItem.setListLower_3(item.getListLower_3().get(i));
+                tempItem.setListLower_4(item.getListLower_4().get(i));
+                tempItem.setListLower_5(item.getListLower_5().get(i));
+                tempItem.setListLower_6(item.getListLower_6().get(i));
+                tempItem.setListLower_7(item.getListLower_7().get(i));
+                tempItem.setListLower_8(item.getListLower_8().get(i));
+                tempItem.setListLower_9(item.getListLower_9().get(i));
+                tempItem.setListLower_10(item.getListLower_10().get(i));
+                IKyokaisoKanriMasterListEditor headerEditor = new KyokaisoKanriMasterListHeaderEditor(headItem);
+                IKyokaisoKanriMasterListEditor bodyEditor = new KyokaisoKanriMasterListBodyEditor(tempItem);
+                IKyokaisoKanriMasterListBuilder builder = new KyokaisoKanriMasterListBuilderImpl(headerEditor, bodyEditor);
+                reportSourceWriter.writeLine(builder);
             }
+        }
+    }
+
+    private void setwriteBy(KyokaisoKanriMasterListBodyItem item, KyokaisoKanriMasterListBodyTempItem tempItem, int i) {
+        if (!RString.isNullOrEmpty(item.getListUpper_1().get(i))) {
+
         }
     }
 }
