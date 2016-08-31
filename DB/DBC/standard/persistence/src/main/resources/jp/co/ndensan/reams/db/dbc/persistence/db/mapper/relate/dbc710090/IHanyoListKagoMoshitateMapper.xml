@@ -124,7 +124,7 @@
             <if test="事業者コード !=null and !事業者コード.isEmpty()" >
                 AND  "DbT3059KagoMoshitate"."jigyoshoNo" = #{事業者コード}
             </if>  
-            <if test="保険者コード!=null and !保険者コード.isEmpty() and  保険者コード.toString() != 'すべて' ">
+            <if test="保険者コード!=null and !保険者コード.isEmpty()">
                 AND  "DbT1001HihokenshaDaicho"."shichosonCode" = #{保険者コード}
             </if>            
     </sql>

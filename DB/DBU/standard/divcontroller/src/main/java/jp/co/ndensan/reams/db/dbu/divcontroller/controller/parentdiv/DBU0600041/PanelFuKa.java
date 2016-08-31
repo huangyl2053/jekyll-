@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -45,10 +46,8 @@ public class PanelFuKa {
      * @return ResponseData
      */
     public ResponseData<PanelFuKaDiv> onLoad(PanelFuKaDiv div) {
-//        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
-//        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000001011007");
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("0000000051");
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
         div.getCcdKaigoatenaInfo().initialize(識別コード);
         div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
         List<Fuka> fukaList = get最新の賦課年度と調定年度の取得(被保険者番号);

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020;
 
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNo;
-import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.SyotaiJohoSyoriProcessParamter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.SyotaiJohoSyoriProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.SyotaiJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokugeppoippan.IJigyoHokokuGeppoIppanMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -37,7 +37,7 @@ public class SyotaiJohoSyoriProcess extends BatchProcessBase<SyotaiJohoCsvEntity
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
 
-    private SyotaiJohoSyoriProcessParamter processParameter;
+    private SyotaiJohoSyoriProcessParameter processParameter;
     private IJigyoHokokuGeppoIppanMapper mapper;
     private FileSpoolManager manager;
     private RString filename;
@@ -66,7 +66,7 @@ public class SyotaiJohoSyoriProcess extends BatchProcessBase<SyotaiJohoCsvEntity
 
     @Override
     protected void beforeExecute() {
-        mapper.exeShotaiDataInsert(processParameter.toSyotaiJohoSyoriMybatisParamter());
+        mapper.exeShotaiDataInsert(processParameter.toSyotaiJohoSyoriMybatisParameter());
     }
 
     @Override
