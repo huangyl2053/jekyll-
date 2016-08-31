@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0350011;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.juryoininkeiyakujigyoshaichiranhyo.JuryoIninKeiyakuJigyoshaIchiranhyoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC010030.DBC010030_JuryoinbinKeiyakuJigyoshaIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0350011.DBC0350011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0350011.DBC0350011TransitionEventName;
@@ -71,8 +71,8 @@ public class JuryoIninKeiyakuJigyoshaIchiranhyo {
      * @param div NenjiRiyoshaFutanWariaiHanteiDiv
      * @return ResponseData
      */
-    public ResponseData<JuryoIninKeiyakuJigyoshaIchiranhyoParameter> onClick_BtnPrint(JuryoIninKeiyakuJigyoshaIchiranhyoDiv div) {
-        JuryoIninKeiyakuJigyoshaIchiranhyoParameter parameter = new JuryoIninKeiyakuJigyoshaIchiranhyoParameter();
+    public ResponseData<DBC010030_JuryoinbinKeiyakuJigyoshaIchiranParameter> onClick_BtnPrint(JuryoIninKeiyakuJigyoshaIchiranhyoDiv div) {
+        DBC010030_JuryoinbinKeiyakuJigyoshaIchiranParameter parameter = new DBC010030_JuryoinbinKeiyakuJigyoshaIchiranParameter();
 
         parameter.set契約事業者番号FROM(div.getJuryoininbaraiChushutsuJoken().getTxtKeiyakuBangoFrom().getValue());
         parameter.set契約事業者番号TO(div.getJuryoininbaraiChushutsuJoken().getTxtKeiyakuBangoTo().getValue());

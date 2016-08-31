@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.juryoininkeiyakujigyoshaichiranhyo;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC010030;
 
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JuryoIninKeiyakuJigyoshaIchiranhyoParameter extends BatchParameterBase {
+public class DBC010030_JuryoinbinKeiyakuJigyoshaIchiranParameter extends BatchParameterBase {
 
     @BatchParameter(key = "契約事業者番号FROM", name = "契約事業者番号FROM")
     private RString 契約事業者番号FROM;
