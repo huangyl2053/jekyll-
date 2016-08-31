@@ -130,7 +130,7 @@ public class JikoFutangakuJohoHosei {
     private DBC040030_KogakugassanJikofutangakuInfoHoseiParameter setBatchParameter(JikoFutangakuJohoHoseiDiv div) {
         DBC040030_KogakugassanJikofutangakuInfoHoseiParameter parameter;
         parameter = new DBC040030_KogakugassanJikofutangakuInfoHoseiParameter();
-        parameter.setKakunin_UketoriYM(div.getTxtKakuninJouhouUketoriYM().getValue().toDateString());
+        parameter.setKakunin_UketoriYM(div.getTxtKakuninJouhouUketoriYM().getValue().getYearMonth().toDateString());
         parameter.setKaishiYMD(div.getTxtKaishiYMD().getValue().toDateString());
         parameter.setKaishiWeek(new RString(div.getTxtKaishiYoubi().getValue().toString()));
         parameter.setKaishiHHMM(new RString(div.getTxtKaishiJikanHH().getValue().toString().
@@ -141,16 +141,16 @@ public class JikoFutangakuJohoHosei {
                 concat(div.getTxtshuryoJikanMM().getValue().toString())));
         if (div.getJikoFutangakuHoseiPrint().isIsPublish()) {
             long 出力順ID = div.getCcdChohyoShutsuryokujun().get出力順ID();
-            parameter.setShutsuryokujunId(出力順ID);
+            parameter.setShutsuryokujunId(new RString(Long.toString(出力順ID)));
         } else {
-            parameter.setShutsuryokujunId(0);
+            parameter.setShutsuryokujunId(null);
         }
         RString 国保連共同処理受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(),
                 SubGyomuCode.DBC介護給付);
         parameter.setTreatmentType(国保連共同処理受託区分);
         Association 市町村コード_Temp = AssociationFinderFactory.createInstance().getAssociation();
         parameter.setDantaiCd(市町村コード_Temp.get地方公共団体コード());
-        parameter.setHandleTimestamp(RDate.getNowDate());
+        parameter.setHandleTimestamp(RDate.getNowDateTime());
         return parameter;
     }
 
