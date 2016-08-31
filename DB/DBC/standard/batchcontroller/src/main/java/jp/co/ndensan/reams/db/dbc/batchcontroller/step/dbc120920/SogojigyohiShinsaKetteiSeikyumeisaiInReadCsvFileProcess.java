@@ -90,12 +90,14 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess extends Bat
     private SogojigyohiShinsaKetteiCsvFileToreraRecode2Entity toreraRecord2Entity;
     private int レコード件数合計;
     private int 連番;
+    private int 明細件数;
     private boolean errorFlag;
 
     @Override
     protected void initialize() {
-        連番 = parameter.getレコード件数合算();
-        レコード件数合計 = parameter.get集計件数合算();
+        連番 = parameter.get集計件数合算();
+        レコード件数合計 = parameter.getレコード件数合算();
+        明細件数 = parameter.get明細件数合算();
         returnEntity = new FlowEntity();
         errorFlag = false;
     }
@@ -135,6 +137,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess extends Bat
             } else if (帳票レコード種別_D1.equals(data.get(INDEX_3))) {
                 meisaiEntity = new SogojigyohiShinsaKetteiCsvFileMeisaiEntity();
                 meisaiEntity = ListToObjectMappingHelper.toObject(SogojigyohiShinsaKetteiCsvFileMeisaiEntity.class, data);
+                明細件数 = 明細件数 + 定値_1;
                 insert審査決定請求明細一時TBL(meisaiEntity);
                 errorFlag = true;
             } else if (帳票レコード種別_T1.equals(data.get(INDEX_3))) {
@@ -160,7 +163,8 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess extends Bat
             エラー結果.setエラー区分(NUM);
             処理結果リスト一時tableWriter.insert(エラー結果.toEntity());
         }
-        returnEntity.set明細データ登録件数(連番);
+        returnEntity.set明細データ登録件数(明細件数);
+        returnEntity.set集計データ登録件数(連番);
         レコード件数合計 = レコード件数合計 + Integer.parseInt(controlCsvEntity.getCodeNum().toString());
         returnEntity.setCodeNum(レコード件数合計);
         flowEntity = new OutputParameter<>();
