@@ -126,6 +126,25 @@ public class KubunShikyuGendoGakuManager {
     /**
      * 居宅サービス区分支給限度額{@link KubunShikyuGendoGaku}を保存します。
      *
+     * @param 居宅サービス区分List {@link KubunShikyuGendoGaku}
+     */
+    @Transaction
+    public void save居宅サービス区分List(List<KubunShikyuGendoGaku> 居宅サービス区分List) {
+        if (!居宅サービス区分List.isEmpty()) {
+            for (KubunShikyuGendoGaku 居宅サービス区分 : 居宅サービス区分List) {
+                requireNonNull(居宅サービス区分,
+                        UrSystemErrorMessages.値がnull.getReplacedMessage(定値_居宅サービス区分支給限度額.toString()));
+                if (!居宅サービス区分.hasChanged()) {
+                    return;
+                }
+                dac.save(居宅サービス区分.toEntity());
+            }
+        }
+    }
+
+    /**
+     * 居宅サービス区分支給限度額{@link KubunShikyuGendoGaku}を保存します。
+     *
      * @param insert居宅List {@link KubunShikyuGendoGaku}
      * @param update居宅List {@link KubunShikyuGendoGaku}
      */

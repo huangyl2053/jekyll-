@@ -3,25 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyushinseitoroku;
+package jp.co.ndensan.reams.db.dbc.business.core.kogaku;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 申請書情報検索結果です。
+ * 高額合算申請書データです。
  *
  * @reamsid_L DBC-2040-040 huzongcheng
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShinseishoJohoResult {
+public class KogakuGassanShinseishoResult {
 
+    private RString 状態;
     private KogakuGassanShinseisho 高額合算申請書;
-    private AtenaMeisho 被保険者名;
-    private ShikibetsuCode 識別コード;
 }

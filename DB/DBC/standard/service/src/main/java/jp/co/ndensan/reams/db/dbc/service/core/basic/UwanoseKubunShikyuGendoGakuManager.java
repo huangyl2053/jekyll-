@@ -127,6 +127,26 @@ public class UwanoseKubunShikyuGendoGakuManager {
     /**
      * 上乗せ居宅サービス区分支給限度額{@link UwanoseKubunShikyuGendoGaku}を保存します。
      *
+     * @param 上乗せ居宅サービス区分List {@link UwanoseKubunShikyuGendoGaku}
+     */
+    @Transaction
+    public void save上乗せ居宅サービス区分List(
+            List<UwanoseKubunShikyuGendoGaku> 上乗せ居宅サービス区分List) {
+        if (!上乗せ居宅サービス区分List.isEmpty()) {
+            for (UwanoseKubunShikyuGendoGaku 上乗せ居宅サービス区分 : 上乗せ居宅サービス区分List) {
+                requireNonNull(上乗せ居宅サービス区分,
+                        UrSystemErrorMessages.値がnull.getReplacedMessage(定値_上乗せ居宅サービス.toString()));
+                if (!上乗せ居宅サービス区分.hasChanged()) {
+                    return;
+                }
+                dac.save(上乗せ居宅サービス区分.toEntity());
+            }
+        }
+    }
+
+    /**
+     * 上乗せ居宅サービス区分支給限度額{@link UwanoseKubunShikyuGendoGaku}を保存します。
+     *
      * @param insert上乗せ居宅List {@link UwanoseKubunShikyuGendoGaku}
      * @param update上乗せ居宅List {@link UwanoseKubunShikyuGendoGaku}
      */
