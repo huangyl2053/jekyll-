@@ -124,9 +124,7 @@ public class ShotokuJokyoHandler {
             item.set生年月日(new FlexibleDate(row.getBirthYMD()));
             item.set性別(row.getGender());
             item.set年齢(row.getAge());
-            if (!row.getZokugara().isNullOrEmpty()) {
-                item.set続柄(Integer.valueOf(row.getZokugara().toString()));
-            }
+            item.set続柄(row.getZokugara());
             item.set住民税(row.getJuminZei());
             if (!row.getGokeiShotoku().isNullOrEmpty()) {
                 item.set合計所得金額(new Decimal(row.getGokeiShotoku().toString()));
