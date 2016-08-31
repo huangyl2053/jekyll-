@@ -110,7 +110,7 @@ public class HanyoListParamKyoufuKannrihyouHandler {
             parameter.set日付スラッシュ付加(false);
         }
 
-        if (!div.getChushutsuJokenPanel().getCcdHokenshaList().isDisplayNone()) {
+        if (div.getChushutsuJokenPanel().getCcdHokenshaList().isVisible()) {
             parameter.set保険者コード(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード());
         }
 
