@@ -127,7 +127,8 @@ public class NenjiRiyoshaFutanWariaiHantei {
         parameter.set処理日時(RDateTime.now());
         parameter.set基準日(new FlexibleDate(div.getPanelAll().getTxtKijunbi().getValue().plusDay(1).toDateString()));
         parameter.set年度終了年月日(new FlexibleDate((年.toDateString()).concat(月日)));
-        parameter.set処理状態(new RString(div.getPanelAll().getTxtShoriJotai().getValue().toString()));
+        parameter.set処理状態(DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理状態, RDate.getNowDate(),
+                SubGyomuCode.DBC介護給付));
         parameter.setテストモード(false);
         return ResponseData.of(parameter).respond();
     }
