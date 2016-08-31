@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.definition.processprm.kogakugassanjikofutangakushomeishoin;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -19,4 +20,7 @@ public class KogakuGassanJikofutangakuShomeishoInProcessParamerter implements IB
 
     private RString path;
     private RString fileName;
+    private FlexibleYearMonth 処理年月;
+    private int 連番;
+    private boolean さいごファイルフラグ;
 }
