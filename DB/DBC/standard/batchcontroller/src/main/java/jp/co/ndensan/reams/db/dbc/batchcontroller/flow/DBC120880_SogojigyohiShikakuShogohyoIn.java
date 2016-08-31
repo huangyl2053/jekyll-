@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc120880;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.io.File;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120880.SogojigyohiShikakuDoIchiranhyoSakuseiProcess;
@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shikakushogohyojyoho.ShikakuShogohyoJyohoReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc120880.DBC120880_SogojigyohiShikakuShogohyoInParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120880.DBC120880_SogojigyohiShikakuShogohyoInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDeleteReveicedFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
@@ -50,7 +50,7 @@ public class DBC120880_SogojigyohiShikakuShogohyoIn extends BatchFlowBase<DBC120
     private RString 交換情報識別番号;
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
     private FlowEntity flowEntity;
-    private RString CsvFullPath;
+    private RString csvFullPath;
     private int 登録件数 = 0;
     private int レコード件数合計 = 0;
     private boolean isLast = false;
@@ -69,7 +69,7 @@ public class DBC120880_SogojigyohiShikakuShogohyoIn extends BatchFlowBase<DBC120
                 String filePath = returnEntity.get保存先フォルダのパス() + File.separator
                         + returnEntity.getFileNameList().get(i);
                 File path = new File(filePath);
-                CsvFullPath = new RString(path.getPath());
+                csvFullPath = new RString(path.getPath());
                 if (i == size - 1) {
                     isLast = true;
                 }
@@ -117,7 +117,7 @@ public class DBC120880_SogojigyohiShikakuShogohyoIn extends BatchFlowBase<DBC120
     protected IBatchFlowCommand readerCsvFile() {
         ShikakuShogohyoJyohoReadCsvFileParameter parameter = new ShikakuShogohyoJyohoReadCsvFileParameter();
         parameter.setエントリ情報List(returnEntity.getFileNameList());
-        parameter.set保存先フォルダ(CsvFullPath);
+        parameter.set保存先フォルダ(csvFullPath);
         parameter.setLast(isLast);
         parameter.set連番(登録件数);
         parameter.setCodeNum(レコード件数合計);
