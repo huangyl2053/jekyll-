@@ -38,7 +38,7 @@
     <select id="getJigyouHokokuTokeiJyoho"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter" 
             resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyojokyohokokushiryonemposakuseiiti.JigyoHokokuDataRelateEntity" resultOrdered="true" fetchSize="500">
-        SELECT * from rgdb."DbFt7044JigyouHoukokuTokeiNenppou"(
+        SELECT * FROM rgdb."DbFt7044JigyouHoukokuTokeiNenppou"(
             #{集計区分},
             #{集計開始年月},
             #{集計終了年月},
@@ -92,7 +92,7 @@
     <select id="getJigyouHokokuTokeiReportJyoho"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter" 
             resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyojokyohokokushiryonemposakuseiiti.JigyoHokokuDataRelateEntity" resultOrdered="true" fetchSize="500">
-        SELECT * from rgdb."DbFt7019JigyouHoukokuTokeiTyouhyou"(
+        SELECT * FROM rgdb."DbFt7019JigyouHoukokuTokeiTyouhyou"(
             ARRAY<foreach  
                     collection="市町村コードリスト"  
                     item="code"  
