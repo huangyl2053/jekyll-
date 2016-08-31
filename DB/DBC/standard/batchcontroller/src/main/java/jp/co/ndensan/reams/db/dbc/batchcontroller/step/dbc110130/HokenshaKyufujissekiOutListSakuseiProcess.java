@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
@@ -156,6 +154,13 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
         } else {
             rStringList.add(RString.EMPTY);
         }
+        if (null != KokuhorenJoho_TorikomiErrorKubun.get処理名(entity.getErrorKubun())) {
+            rStringList.add(KokuhorenJoho_TorikomiErrorKubun.get処理名(entity.getErrorKubun()));
+        } else {
+            throw new BatchInterruptedException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(
+                    MSG_国保連情報作成エラー区分.toString()).toString());
+        }
+
         rStringList.add(getColumnValue(entity.getShoHokanehshaNo()));
         rStringList.add(getColumnValue(entity.getHihokenshaNo()));
         rStringList.add(entity.getHihokenshaKanaShimei());
@@ -175,12 +180,10 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
         if (this.key_5flag) {
             rStringList.add(entity.getKey5());
         }
-        rStringList.add(entity.getBiko());
-        try {
-            rStringList.add(KokuhorenJoho_TorikomiErrorKubun.get処理名(entity.getErrorKubun()));
+
+        if (null != KokuhorenJoho_TorikomiErrorKubun.getエラーメッセージ(entity.getErrorKubun())) {
             rStringList.add(KokuhorenJoho_TorikomiErrorKubun.getエラーメッセージ(entity.getErrorKubun()));
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(HokenshaKyufujissekiOutListSakuseiProcess.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
             throw new BatchInterruptedException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(
                     MSG_国保連情報作成エラー区分.toString()).toString());
         }
