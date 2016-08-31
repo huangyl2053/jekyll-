@@ -64,17 +64,17 @@ public class MaeFutanWariaiHanteiIchiranTempProcess extends BatchKeyBreakBase<Ma
         }
         if (前回利用者負担割合判定List.size() == INT_1) {
             RiyoshaFutanWariaiHanteiEntity riyoshaFutanWariaiHanteiEntity = new RiyoshaFutanWariaiHanteiEntity();
-            riyoshaFutanWariaiHanteiEntity.setHihokenshaNo(entity.getHihokenshaNo());
-            riyoshaFutanWariaiHanteiEntity.setFutanWariaiKubun(entity.getFutanWariaiKubun());
-            riyoshaFutanWariaiHanteiEntity.setHonninGoukeiShotokuGaku(entity.getHonninGoukeiShotokuGaku());
-            riyoshaFutanWariaiHanteiEntity.setKoseiJiyu(entity.getKoseiJiyu());
-            riyoshaFutanWariaiHanteiEntity.setNendo(entity.getNendo());
-            riyoshaFutanWariaiHanteiEntity.setNenkinShunyuGoukei(entity.getNenkinShunyuGoukei());
-            riyoshaFutanWariaiHanteiEntity.setSetaiIchigouHihokenshaSu(entity.getSetaiIchigouHihokenshaSu());
-            riyoshaFutanWariaiHanteiEntity.setSonotanoGoukeiShotokuKingakuGoukei(entity.getSonotanoGoukeiShotokuKingakuGoukei());
+            riyoshaFutanWariaiHanteiEntity.setHihokenshaNo(前回利用者負担割合判定List.get(0).getHihokenshaNo());
+            riyoshaFutanWariaiHanteiEntity.setFutanWariaiKubun(前回利用者負担割合判定List.get(0).getFutanWariaiKubun());
+            riyoshaFutanWariaiHanteiEntity.setHonninGoukeiShotokuGaku(前回利用者負担割合判定List.get(0).getHonninGoukeiShotokuGaku());
+            riyoshaFutanWariaiHanteiEntity.setKoseiJiyu(前回利用者負担割合判定List.get(0).getKoseiJiyu());
+            riyoshaFutanWariaiHanteiEntity.setNendo(前回利用者負担割合判定List.get(0).getNendo());
+            riyoshaFutanWariaiHanteiEntity.setNenkinShunyuGoukei(前回利用者負担割合判定List.get(0).getNenkinShunyuGoukei());
+            riyoshaFutanWariaiHanteiEntity.setSetaiIchigouHihokenshaSu(前回利用者負担割合判定List.get(0).getSetaiIchigouHihokenshaSu());
+            riyoshaFutanWariaiHanteiEntity.setSonotanoGoukeiShotokuKingakuGoukei(前回利用者負担割合判定List.get(0).getSonotanoGoukeiShotokuKingakuGoukei());
             riyoshaFutanWariaiHanteiEntity.setTaisyouKubun(対象区分);
-            riyoshaFutanWariaiHanteiEntity.setYukoKaishiYMD(entity.getYukoKaishiYMD());
-            riyoshaFutanWariaiHanteiEntity.setYukoShuryoYMD(entity.getYukoShuryoYMD());
+            riyoshaFutanWariaiHanteiEntity.setYukoKaishiYMD(前回利用者負担割合判定List.get(0).getYukoKaishiYMD());
+            riyoshaFutanWariaiHanteiEntity.setYukoShuryoYMD(前回利用者負担割合判定List.get(0).getYukoShuryoYMD());
             tempDbWriter.insert(riyoshaFutanWariaiHanteiEntity);
         } else if (前回利用者負担割合判定List.size() > INT_1) {
             RiyoshaFutanWariaiHanteiEntity riyoshaFutanWariaiHanteiEntity = new RiyoshaFutanWariaiHanteiEntity();
@@ -94,7 +94,7 @@ public class MaeFutanWariaiHanteiIchiranTempProcess extends BatchKeyBreakBase<Ma
                     .getSonotanoGoukeiShotokuKingakuGoukei());
             riyoshaFutanWariaiHanteiEntity.setTaisyouKubun(対象区分);
             riyoshaFutanWariaiHanteiEntity.setYukoKaishiYMD(前回利用者負担割合判定List.get(前回利用者負担割合判定List.size() - INT_1).getYukoKaishiYMD());
-            riyoshaFutanWariaiHanteiEntity.setYukoShuryoYMD(前回利用者負担割合判定List.get(INT_1).getYukoShuryoYMD());
+            riyoshaFutanWariaiHanteiEntity.setYukoShuryoYMD(前回利用者負担割合判定List.get(0).getYukoShuryoYMD());
             tempDbWriter.insert(riyoshaFutanWariaiHanteiEntity);
         }
         前回利用者負担割合判定List = new ArrayList<>();
