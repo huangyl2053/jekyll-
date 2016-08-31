@@ -227,7 +227,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
                         なし,
                         RString.EMPTY,
                         contribute());
-        OutputJokenhyoFactory.createInstance(item);
+        OutputJokenhyoFactory.createInstance(item).print();
     }
 
     private KyokaisoKanriMasterListBodyItem setBodyItem(KyokaisoKanriMasterListChohyoDataSakuseiEntity entity) {
