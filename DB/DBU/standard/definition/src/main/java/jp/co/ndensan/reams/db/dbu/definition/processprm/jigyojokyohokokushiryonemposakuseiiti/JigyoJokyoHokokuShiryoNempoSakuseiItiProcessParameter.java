@@ -18,7 +18,7 @@ import lombok.Getter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParamter implements IBatchProcessParameter {
+public class JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter implements IBatchProcessParameter {
 
     private final RString プリントコントロール区分;
     private final RString 報告年度;
@@ -57,7 +57,7 @@ public class JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParamter implements IBa
      * @param 過去集計分市町村コードリスト 過去集計分市町村コードリスト
      * @param 過去集計分旧市町村区分 過去集計分旧市町村区分
      */
-    public JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParamter(RString プリントコントロール区分,
+    public JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter(RString プリントコントロール区分,
             RString 報告年度,
             RString 報告開始年月,
             RString 報告終了年月,

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030030;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParamter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -80,10 +80,10 @@ public class DBU030030_JigyoHokokuNenpo_IppanParamter extends BatchParameterBase
     /**
      * Process用のパラメータを生成します。
      *
-     * @return JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParamter
+     * @return JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter
      */
-    public JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParamter toProcessParamter() {
-        return new JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParamter(
+    public JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter toProcessParamter() {
+        return new JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter(
                 プリントコントロール区分,
                 報告年度,
                 報告開始年月,

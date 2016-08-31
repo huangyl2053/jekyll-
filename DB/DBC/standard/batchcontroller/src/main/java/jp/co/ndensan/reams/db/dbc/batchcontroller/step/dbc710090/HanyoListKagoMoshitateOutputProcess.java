@@ -170,8 +170,7 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
         List<RString> 抽出条件 = new ArrayList<>();
         RString temp;
         抽出条件.add(TITLE_抽出対象者);
-        //TODO  BP・保険者コード <> 「すべて」
-        if (parameter.get保険者コード() != null) {
+        if (parameter.get保険者コード() != null && !LasdecCode.EMPTY.equals(parameter.get保険者コード())) {
             Association association = AssociationFinderFactory.
                     createInstance().getAssociation(parameter.get保険者コード());
             抽出条件.add(TITLE_保険者.concat(association.get市町村名()));
