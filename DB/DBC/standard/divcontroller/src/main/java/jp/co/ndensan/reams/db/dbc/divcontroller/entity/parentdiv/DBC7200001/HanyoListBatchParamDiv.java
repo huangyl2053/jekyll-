@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshut
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokukomoku.ChohyoShutsuryokuKomoku.ChohyoShutsuryokuKomokuDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokukomoku.ChohyoShutsuryokuKomoku.IChohyoShutsuryokuKomokuDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonBatchParameterRestore;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonBatchParameterSave;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
@@ -46,6 +47,8 @@ public class HanyoListBatchParamDiv extends PanelBatchParameter {
     private ChohyoShutsuryokujunDiv ccdShutsuryokujun;
     @JsonProperty("ccdShutsuryokuKoumoku")
     private ChohyoShutsuryokuKomokuDiv ccdShutsuryokuKoumoku;
+    @JsonProperty("hdnDonyuKeitai")
+    private RString hdnDonyuKeitai;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -123,6 +126,24 @@ public class HanyoListBatchParamDiv extends PanelBatchParameter {
     @JsonProperty("ccdShutsuryokuKoumoku")
     public IChohyoShutsuryokuKomokuDiv getCcdShutsuryokuKoumoku() {
         return ccdShutsuryokuKoumoku;
+    }
+
+    /*
+     * gethdnDonyuKeitai
+     * @return hdnDonyuKeitai
+     */
+    @JsonProperty("hdnDonyuKeitai")
+    public RString getHdnDonyuKeitai() {
+        return hdnDonyuKeitai;
+    }
+
+    /*
+     * sethdnDonyuKeitai
+     * @param hdnDonyuKeitai hdnDonyuKeitai
+     */
+    @JsonProperty("hdnDonyuKeitai")
+    public void setHdnDonyuKeitai(RString hdnDonyuKeitai) {
+        this.hdnDonyuKeitai = hdnDonyuKeitai;
     }
 
     /*
