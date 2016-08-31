@@ -92,6 +92,7 @@ public class SogojigyohiKohiJukyushaDoIchiranhyoSakuseiProcess extends BatchKeyB
             = new RString("DBC200083_SogojigyohiKohiJukyushaBetsuIchiran.csv");
     private static final RString ダブル引用符 = new RString("\"");
     private int 連番 = 1;
+    private RString 固定改頁項目ID = new RString("0134");
 
     private FileSpoolManager manager;
     private IOutputOrder 出力順情報;
@@ -122,7 +123,7 @@ public class SogojigyohiKohiJukyushaDoIchiranhyoSakuseiProcess extends BatchKeyB
         出力順Map = new HashMap<>();
         pageBreakKeys = new ArrayList<>();
         帳票データの取得Parameter = new KokuhorenIchiranhyoMybatisParameter();
-        pageBreakKeys.add(new RString(SogojigyohiKohiJukyushaSource.ReportSourceFields.kohiFutanshaNo.name()));
+        pageBreakKeys.add(固定改頁項目ID);
         RString orderByStr = MyBatisOrderByClauseCreator.create(SogojigyohiKohiJukyushaOutPutOrder.class, 出力順情報);
         if (RString.isNullOrEmpty(orderByStr)) {
             orderByStr = デフォルト出力順;
@@ -235,7 +236,7 @@ public class SogojigyohiKohiJukyushaDoIchiranhyoSakuseiProcess extends BatchKeyB
         SogojigyohiKohiJukyushaCsvEntity output = new SogojigyohiKohiJukyushaCsvEntity();
         if (連番 == 1) {
             FlexibleYearMonth 審査年月 = entity.get審査年月();
-            output.set審査年月(審査年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+            output.set審査年月(審査年月.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
