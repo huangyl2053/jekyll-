@@ -51,7 +51,7 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
         executeStep(申請中データを削除する);
         executeStep(判定対象者TEMPに受給者データを追加する);
         executeStep(判定対象者TEMPに総合事業データを追加する);
-        if (再処理前.equals(getParameter().get処理区分().getコード())) {
+        if (再処理前.equals(getParameter().get処理区分())) {
             executeStep(利用者負担割合を削除する);
             executeStep(利用者負担割合明細を削除する);
             executeStep(利用者負担割合世帯員を削除する);
@@ -114,7 +114,7 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
         DBC180020_IdoRiyoshaFutanwariaiHanteiParameter parameter = new DBC180020_IdoRiyoshaFutanwariaiHanteiParameter();
         parameter.setTaishoNendo(getParameter().get対象年度());
         parameter.setKijunbi(getParameter().get基準日());
-        parameter.setShoriKubun(getParameter().get処理区分().getコード());
+        parameter.setShoriKubun(getParameter().get処理区分());
         parameter.setTestMode(getParameter().isテストモード());
         parameter.setShoriNichiji(getParameter().get処理日時());
         return otherBatchFlow(利用者負担割合判定BATCH_ID, SubGyomuCode.DBC介護給付,
@@ -131,7 +131,7 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
         DBC180020_IdoRiyoshaFutanwariaiHanteiParameter parameter = new DBC180020_IdoRiyoshaFutanwariaiHanteiParameter();
         parameter.setTaishoNendo(getParameter().get対象年度());
         parameter.setKijunbi(getParameter().get基準日());
-        parameter.setShoriKubun(getParameter().get処理区分().getコード());
+        parameter.setShoriKubun(getParameter().get処理区分());
         parameter.setTestMode(getParameter().isテストモード());
         parameter.setShoriNichiji(getParameter().get処理日時());
         return otherBatchFlow(負担割合判定一覧BATCH_ID, SubGyomuCode.DBC介護給付,

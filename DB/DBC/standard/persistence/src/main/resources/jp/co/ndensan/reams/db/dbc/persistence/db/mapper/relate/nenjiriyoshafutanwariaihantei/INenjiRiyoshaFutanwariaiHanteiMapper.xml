@@ -315,7 +315,7 @@
             <result property="idoYMD" column="Hihokennsha_idoYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
             <result property="idoJiyuCode" column="Hihokennsha_idoJiyuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
             <result property="shikibetsuCode" column="Hihokennsha_shikibetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-            <result property="shikakuShutokuYMD" column=" Hihokennsha_shikakuShutokuYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+            <result property="shikakuShutokuYMD" column="Hihokennsha_shikakuShutokuYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
             <result property="shikakuShutokuTodokedeYMD" column="Hihokennsha_shikakuShutokuTodokedeYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
             <result property="ichigoShikakuShutokuYMD" column="Hihokennsha_ichigoShikakuShutokuYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
             <result property="hihokennshaKubunCode" column="Hihokennsha_hihokennshaKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -337,7 +337,7 @@
             <result property="dbT4001JukyushaDaicho_hihokenshaNo" column="Jukyu_hihokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
             <result property="dbT4001JukyushaDaicho_shikibetsuCode" column="Jukyu_shikibetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
             <result property="shichosonCode" column="Jukyu_shichosonCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
-            <result property="rirekiNoRString" column="Jukyu_rirekiNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+            <result property="rirekiNoRString" column="Jukyu_rirekiNoRString"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
             <result property="edaban" column="Jukyu_edaban"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
             <result property="jukyuShinseiJiyu" column="Jukyu_jukyuShinseiJiyu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
             <result property="jukyuShinseiYMD" column="Jukyu_jukyuShinseiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
@@ -349,7 +349,7 @@
             <result property="dbT1001HihokenshaDaicho_hihokenshaNo" column="Hihokennsha_hihokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
             <result property="idoYMD" column="Hihokennsha_idoYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
             <result property="idoJiyuCode" column="Hihokennsha_idoJiyuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-            <result property="shikakuShutokuYMD" column=" Hihokennsha_shikakuShutokuYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+            <result property="shikakuShutokuYMD" column="Hihokennsha_shikakuShutokuYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
             <result property="shikakuShutokuTodokedeYMD" column="Hihokennsha_shikakuShutokuTodokedeYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
             <result property="ichigoShikakuShutokuYMD" column="Hihokennsha_ichigoShikakuShutokuYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
             <result property="hihokennshaKubunCode" column="Hihokennsha_hihokennshaKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
