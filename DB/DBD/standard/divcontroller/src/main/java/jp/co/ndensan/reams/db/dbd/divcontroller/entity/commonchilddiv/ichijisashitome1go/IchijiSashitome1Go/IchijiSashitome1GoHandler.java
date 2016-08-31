@@ -314,6 +314,7 @@ public class IchijiSashitome1GoHandler {
         div.getBtnSashitomeOrKojoTorokuKakutei().setDisabled(false);
         div.setPTN(更新PTN);
         償還情報一覧初期表示();
+        DisplayNone_照会用(true);
         div.setButton_Name(登録一覧);
         return pairs;
     }
