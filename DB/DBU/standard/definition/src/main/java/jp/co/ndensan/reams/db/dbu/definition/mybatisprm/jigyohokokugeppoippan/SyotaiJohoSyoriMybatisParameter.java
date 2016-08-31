@@ -16,7 +16,7 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class SyotaiJohoSyoriMybatisParamter implements IMyBatisParameter {
+public final class SyotaiJohoSyoriMybatisParameter implements IMyBatisParameter {
 
     private final FlexibleYearMonth syukeiYM;
 
@@ -25,7 +25,7 @@ public final class SyotaiJohoSyoriMybatisParamter implements IMyBatisParameter {
      *
      * @param 集計年月 集計年月
      */
-    public SyotaiJohoSyoriMybatisParamter(FlexibleYearMonth 集計年月) {
+    public SyotaiJohoSyoriMybatisParameter(FlexibleYearMonth 集計年月) {
         this.syukeiYM = 集計年月;
     }
 }

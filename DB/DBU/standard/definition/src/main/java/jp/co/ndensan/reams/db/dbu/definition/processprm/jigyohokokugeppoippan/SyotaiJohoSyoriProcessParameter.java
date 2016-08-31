@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan;
 
-import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.SyotaiJohoSyoriMybatisParamter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.SyotaiJohoSyoriMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import lombok.Getter;
@@ -17,7 +17,7 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SyotaiJohoSyoriProcessParamter implements IBatchProcessParameter {
+public class SyotaiJohoSyoriProcessParameter implements IBatchProcessParameter {
 
     private final FlexibleYearMonth 集計年月;
 
@@ -26,17 +26,17 @@ public class SyotaiJohoSyoriProcessParamter implements IBatchProcessParameter {
      *
      * @param 集計年月 FlexibleYearMonth
      */
-    public SyotaiJohoSyoriProcessParamter(FlexibleYearMonth 集計年月) {
+    public SyotaiJohoSyoriProcessParameter(FlexibleYearMonth 集計年月) {
         this.集計年月 = 集計年月;
     }
 
     /**
      * 事業報告統計データの削除処理mybatisのパラメータを生成します。
      *
-     * @return SyotaiJohoSyoriMybatisParamter
+     * @return SyotaiJohoSyoriMybatisParameter
      */
-    public SyotaiJohoSyoriMybatisParamter toSyotaiJohoSyoriMybatisParamter() {
-        return new SyotaiJohoSyoriMybatisParamter(集計年月);
+    public SyotaiJohoSyoriMybatisParameter toSyotaiJohoSyoriMybatisParameter() {
+        return new SyotaiJohoSyoriMybatisParameter(集計年月);
     }
 
 }

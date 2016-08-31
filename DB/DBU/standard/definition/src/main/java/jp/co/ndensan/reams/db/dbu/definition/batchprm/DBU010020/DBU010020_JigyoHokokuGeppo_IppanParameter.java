@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010020;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.SyotaiJohoSyoriProcessParamter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.SyotaiJohoSyoriProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -64,9 +64,9 @@ public class DBU010020_JigyoHokokuGeppo_IppanParameter extends BatchParameterBas
     /**
      * Process用のパラメータを生成します。
      *
-     * @return SyotaiJohoSyoriProcessParamter
+     * @return SyotaiJohoSyoriProcessParameter
      */
-    public SyotaiJohoSyoriProcessParamter toSyotaiJohoSyoriProcessParamter() {
-        return new SyotaiJohoSyoriProcessParamter(syukeiYM);
+    public SyotaiJohoSyoriProcessParameter toSyotaiJohoSyoriProcessParameter() {
+        return new SyotaiJohoSyoriProcessParameter(syukeiYM);
     }
 }

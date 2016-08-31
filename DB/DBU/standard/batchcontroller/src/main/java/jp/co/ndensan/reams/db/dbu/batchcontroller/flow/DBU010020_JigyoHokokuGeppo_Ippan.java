@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_JigyoHokokuGeppo_IppanParameter> {
 
     private static final String 世帯情報処理 = "SyotaiJohoSyori";
+//    private static final String 被保台帳生年月日情報処理 = "HihokenshaDaichoBirthYMDSyori";
 
     @Override
     protected void defineFlow() {
@@ -28,6 +29,7 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
 //        } else {
         createTempTable(JigyoHokokuHihokenshaTokeiMotoTempEntity.TABLE_NAME, JigyoHokokuHihokenshaTokeiMotoTempEntity.class);
         executeStep(世帯情報処理);
+//            executeStep(被保台帳生年月日情報処理);
 //        }
     }
 
@@ -39,6 +41,17 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
     @Step(世帯情報処理)
     protected IBatchFlowCommand exeSyotaiJohoSyori() {
         return loopBatch(SyotaiJohoSyoriProcess.class)
-                .arguments(getParameter().toSyotaiJohoSyoriProcessParamter()).define();
+                .arguments(getParameter().toSyotaiJohoSyoriProcessParameter()).define();
     }
+//
+//    /**
+//     * 世帯情報処理です。
+//     *
+//     * @return IBatchFlowCommand
+//     */
+//    @Step(被保台帳生年月日情報処理)
+//    protected IBatchFlowCommand exeHihokenshaDaichoBirthYMDSyori() {
+//        return loopBatch(HihokenshaDaichoBirthYMDProcess.class)
+//                .arguments(getParameter().toSyotaiJohoSyoriProcessParameter()).define();
+//    }
 }

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokugeppoippan;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.SyotaiJohoSyoriMybatisParamter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.SyotaiJohoSyoriMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.SyotaiJohoCsvEntity;
 
 /**
@@ -19,9 +19,9 @@ public interface IJigyoHokokuGeppoIppanMapper {
     /**
      * 事業状況報告世帯情報をtemp事業報告被保険者統計元データテーブルに登録します。
      *
-     * @param paramter SyotaiJohoSyoriMybatisParamter
+     * @param paramter SyotaiJohoSyoriMybatisParameter
      */
-    void exeShotaiDataInsert(SyotaiJohoSyoriMybatisParamter paramter);
+    void exeShotaiDataInsert(SyotaiJohoSyoriMybatisParameter paramter);
 
     /**
      * 事業状況報告情報を取得します。
