@@ -84,11 +84,11 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
         RDate 日付関連_調定年度 = new RDate(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, nowdate, SubGyomuCode.DBB介護賦課).toString());
         List<KeyValueDataSource> datasource = new ArrayList<>();
         datasource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
-        datasource.add(new KeyValueDataSource(日付関連_調定年度.toDateString(), 日付関連_調定年度.wareki().toDateString()));
+        datasource.add(new KeyValueDataSource(日付関連_調定年度.toDateString(), 日付関連_調定年度.getYear().wareki().toDateString()));
         for (int i = 0; i < 調定年度を含めて8年分; i++) {
             if (日付関連_当初年度.isBefore(日付関連_調定年度)) {
                 日付関連_調定年度 = 日付関連_調定年度.minusYear(NUM_1);
-                datasource.add(new KeyValueDataSource(日付関連_調定年度.getYear().toDateString(), 日付関連_調定年度.wareki().toDateString()));
+                datasource.add(new KeyValueDataSource(日付関連_調定年度.getYear().toDateString(), 日付関連_調定年度.getYear().wareki().toDateString()));
             } else {
                 break;
             }
@@ -110,6 +110,7 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
             div.getChushutsuJokenPanel().getTxtUketoriNengetsu().setDisabled(false);
             div.getChushutsuJokenPanel().getTxtSofuNengetsu().setDisabled(false);
             div.getChushutsuJokenPanel().getRadDataShurui().clearSelectedItem();
+            div.getChushutsuJokenPanel().getRadDataShurui().setDisabled(false);
         } else if (保険者作成.equals(データ区分)) {
             List<KeyValueDataSource> datasource = new ArrayList<>();
             datasource.add(new KeyValueDataSource(KEY_0, すべて));
@@ -123,6 +124,7 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
             div.getChushutsuJokenPanel().getTxtUketoriNengetsu().setDisabled(false);
             div.getChushutsuJokenPanel().getTxtSofuNengetsu().setDisabled(true);
             div.getChushutsuJokenPanel().getRadDataShurui().clearSelectedItem();
+            div.getChushutsuJokenPanel().getRadDataShurui().setDisabled(false);
         }
     }
 
