@@ -33,7 +33,6 @@ public class DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter extends Batc
     private static final String KIZYUNNICHI = "kizyunnichi";
     private static final String HITSUKEHANIFROM = "hitsukehanifrom";
     private static final String HITSUKEHANITO = "hitsukehanito";
-    private static final String NENDOCHOKINDATACYUSYUTSU = "nendochokindatacyusyutsu";
     private static final String CHOKINDATACYUSYUTSU = "chokindatacyusyutsu";
     private static final String SOSHITSUKUBUN = "soshitsukubun";
     private static final String KOMOKUMEIFUKA = "komokumeifuka";
@@ -43,7 +42,6 @@ public class DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter extends Batc
     private static final String CYOHYOID = "cyohyoid";
     private static final String SYUTSURYOKUKOMOKU = "syutsuryokukomoku";
     private static final String KYAKASHA = "kyakasha";
-    private static final String JIGYOTAISYOSHADATACYUSHUTSU = "jigyotaisyoshadatacyushutsu";
     private static final String SHINSEISHADATACYUSHUTSU = "shinseishadatacyushutsu";
     private static final String SYUTSURYOKUJUNPARAMETER = "syutsuryokujunparameter";
 
@@ -63,14 +61,10 @@ public class DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter extends Batc
     private FlexibleDate hitsukehanifrom;
     @BatchParameter(key = HITSUKEHANITO, name = "日付範囲To")
     private FlexibleDate hitsukehanito;
-    @BatchParameter(key = NENDOCHOKINDATACYUSYUTSU, name = "年度直近データ抽出")
-    private boolean isNendochokindatacyusyutsu;
     @BatchParameter(key = CHOKINDATACYUSYUTSU, name = "直近データ抽出")
     private boolean isChokindatacyusyutsu;
     @BatchParameter(key = SHINSEISHADATACYUSHUTSU, name = "申請者データ抽出")
     private boolean isShinseishadatacyushutsu;
-    @BatchParameter(key = JIGYOTAISYOSHADATACYUSHUTSU, name = "事業対象者データ抽出")
-    private boolean isJigyotaisyoshadatacyushutsu;
     @BatchParameter(key = KYAKASHA, name = "却下者")
     private RString kyakasha;
     @BatchParameter(key = SOSHITSUKUBUN, name = "喪失区分")
