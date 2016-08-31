@@ -50,7 +50,7 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
     /**
      * コンストラクタです。
      *
-     * @param div HanyoListOutputParamDiv
+     * @param div HanyoListkougakugasSannKeiSuukekkaDiv
      */
     public HanyoListkougakugasSannKeiSuukekkaHandler(HanyoListkougakugasSannKeiSuukekkaDiv div) {
         this.div = div;
@@ -106,6 +106,9 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
     public void setChange() {
         RString データ区分 = div.getChushutsuJokenPanel().getDdlDetaKubun().getSelectedValue();
         if (すべて.equals(データ区分)) {
+            List<KeyValueDataSource> datasource = new ArrayList<>();
+            datasource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+            div.getChushutsuJokenPanel().getRadDataShurui().setDisabledItem(datasource);
             div.getChushutsuJokenPanel().getRadDataShurui().setDisabled(false);
             div.getChushutsuJokenPanel().getTxtUketoriNengetsu().setDisabled(false);
             div.getChushutsuJokenPanel().getTxtSofuNengetsu().setDisabled(false);
@@ -120,6 +123,9 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
             div.getChushutsuJokenPanel().getTxtUketoriNengetsu().setDisabled(true);
             div.getChushutsuJokenPanel().getTxtSofuNengetsu().setDisabled(false);
         } else if (国保連作成.equals(データ区分)) {
+            List<KeyValueDataSource> datasource = new ArrayList<>();
+            datasource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+            div.getChushutsuJokenPanel().getRadDataShurui().setDisabledItem(datasource);
             div.getChushutsuJokenPanel().getRadDataShurui().setDisabled(false);
             div.getChushutsuJokenPanel().getTxtUketoriNengetsu().setDisabled(false);
             div.getChushutsuJokenPanel().getTxtSofuNengetsu().setDisabled(true);
