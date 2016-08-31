@@ -137,7 +137,7 @@
              "RiyoshaFutanWariaiHanteiTemp" as temp
              WHERE
              temp."taisyouKubun" = '1'
-             <if test="処理区分 != 3 ">
+             <if test="処理区分 == 3 ">
                  AND temp."nendo" <![CDATA[<]]> #{対象年度}
              </if>
           ) AS 今回利用者負担割合判定Temp

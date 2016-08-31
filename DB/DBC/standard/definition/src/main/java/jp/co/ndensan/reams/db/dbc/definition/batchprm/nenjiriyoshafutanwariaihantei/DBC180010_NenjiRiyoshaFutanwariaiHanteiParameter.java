@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.nenjiriyoshafutanwariaihantei;
 
-import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.nenjiriyoshafutanwariaihantei.NenjiRiyoshaFutanwariaiHanteiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -30,7 +29,7 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHanteiParameter extends BatchParam
     @BatchParameter(key = "基準日", name = "基準日")
     private FlexibleDate 基準日;
     @BatchParameter(key = "処理区分", name = "処理区分")
-    private SaiShoriKubun 処理区分;
+    private RString 処理区分;
     @BatchParameter(key = "年度終了年月日", name = "年度終了年月日")
     private FlexibleDate 年度終了年月日;
     @BatchParameter(key = "処理日時", name = "処理日時")
