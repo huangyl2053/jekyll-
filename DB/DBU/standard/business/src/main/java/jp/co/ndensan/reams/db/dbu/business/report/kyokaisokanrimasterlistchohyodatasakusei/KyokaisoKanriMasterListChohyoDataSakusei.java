@@ -171,7 +171,11 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
                     ? RString.EMPTY : JuminShubetsu.toValue(entity.getJuminShubetsuCode()).toRString());
             状態.add(entity.getJuminJotaiCode() == null
                     ? RString.EMPTY : JuminJotai.toValue(entity.getJuminJotaiCode()).住民状態略称());
-            世帯コード.add(nullToEmpty(entity.getSetaiCode().value()));
+            if (entity.getSetaiCode() != null) {
+                世帯コード.add(nullToEmpty(entity.getSetaiCode().value()));
+            } else {
+                世帯コード.add(null);
+            }
             生年月日.add(共通ポリシfomart(entity.getSeinengappiYMD()));
             該当申請日.add(共通ポリシfomart(entity.getShinseiYMD()));
             該当開始日.add(共通ポリシfomart(entity.getTekiyoKaishiYMD()));
@@ -183,26 +187,17 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
             }
             if (entity.getHyojunFutanKeigengoFutangaku() != null) {
                 標準負担減額後負担額.add(new RString(entity.getHyojunFutanKeigengoFutangaku().toString()));
+            } else {
+                標準負担減額後負担額.add(null);
             }
             UzT0007CodeEntity 居室種類 = CodeMaster.getCode(SubGyomuCode.DBZ介護共通,
                     DBZCodeShubetsu.居室種類.getコード(), new Code(entity.getKyojuhiKeigengoKyoshitsuShuruiCode()), FlexibleDate.getNowDate());
             if (居室種類 != null) {
                 居住費軽減後居室種類.add(new RString(居室種類.getコード名称().toString()));
             } else {
-                居住費軽減後居室種類.add(RString.EMPTY);
+                居住費軽減後居室種類.add(null);
             }
-            if (entity.getKyojuhiKeigengoHutangaku() != null) {
-                居住費軽減後負担額.add(new RString(entity.getKyojuhiKeigengoHutangaku().toString()));
-            }
-            if (entity.getShokuhiKeigengoHutangaku() != null) {
-                食費軽減後負担額.add(new RString(entity.getShokuhiKeigengoHutangaku().toString()));
-            }
-            if (entity.getKogakuServicehiJogengakuGengakugoJogengaku() != null) {
-                高額ｻｰﾋﾞｽ費減額後上限額.add(new RString(entity.getKogakuServicehiJogengakuGengakugoJogengaku().toString()));
-            }
-            if (entity.getGengakuGoHokenryoDankai() != null) {
-                保険料納付減額後保険料段階.add(new RString(entity.getGengakuGoHokenryoDankai().toString()));
-            }
+            setlist(entity, 居住費軽減後負担額, 食費軽減後負担額, 高額ｻｰﾋﾞｽ費減額後上限額, 保険料納付減額後保険料段階);
             if ((nocount + 1) % NOCOUNT_20 == 0) {
                 KyokaisoKanriMasterListChohyoDataSakuseiEntity データEntity
                         = new KyokaisoKanriMasterListChohyoDataSakuseiEntity();
@@ -272,6 +267,32 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
             nocount++;
         }
         return 境界層管理マスタ帳票用データリスト;
+    }
+
+    private void setlist(KyokaisogGaitoshaRelateEntity entity, List<RString> 居住費軽減後負担額,
+            List<RString> 食費軽減後負担額,
+            List<RString> 高額ｻｰﾋﾞｽ費減額後上限額,
+            List<RString> 保険料納付減額後保険料段階) {
+        if (entity.getKyojuhiKeigengoHutangaku() != null) {
+            居住費軽減後負担額.add(new RString(entity.getKyojuhiKeigengoHutangaku().toString()));
+        } else {
+            居住費軽減後負担額.add(null);
+        }
+        if (entity.getShokuhiKeigengoHutangaku() != null) {
+            食費軽減後負担額.add(new RString(entity.getShokuhiKeigengoHutangaku().toString()));
+        } else {
+            食費軽減後負担額.add(null);
+        }
+        if (entity.getKogakuServicehiJogengakuGengakugoJogengaku() != null) {
+            高額ｻｰﾋﾞｽ費減額後上限額.add(new RString(entity.getKogakuServicehiJogengakuGengakugoJogengaku().toString()));
+        } else {
+            高額ｻｰﾋﾞｽ費減額後上限額.add(null);
+        }
+        if (entity.getGengakuGoHokenryoDankai() != null) {
+            保険料納付減額後保険料段階.add(new RString(entity.getGengakuGoHokenryoDankai().toString()));
+        } else {
+            保険料納付減額後保険料段階.add(null);
+        }
     }
 
     private RString 共通ポリシfomart(FlexibleDate date) {
