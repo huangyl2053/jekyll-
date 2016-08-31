@@ -98,8 +98,11 @@ public class KogakuGassanKyufuJissekiHandler {
 
     private void set一覧(List<KogakuGassanKyufuJisseki> 高額合算給付実績情報, boolean isデータ存在) {
         List<dgRireki_Row> rowList = new ArrayList<>();
+        List<dgRireki_Row> 一覧データ = new ArrayList<>();
         if (!div.getChkRirekiHyoji().isAllSelected()) {
             高額合算給付実績情報 = get履歴を抽出チェックオフ(高額合算給付実績情報);
+        } else {
+            一覧データ = div.getDgRireki().getDataSource();
         }
         for (KogakuGassanKyufuJisseki 高額合算給付実績 : 高額合算給付実績情報) {
             dgRireki_Row row = new dgRireki_Row();
@@ -121,7 +124,8 @@ public class KogakuGassanKyufuJissekiHandler {
             row.setTxtSeiriNo(高額合算給付実績.get整理番号());
             // TODO QA1628回答まち、文字を赤色で表示する。
             if (div.getChkRirekiHyoji().isAllSelected() && is履歴を抽出チェックオン(get交換情報識別番号(高額合算給付実績.get交換情報識別番号()),
-                    高額合算給付実績.get被保険者番号().value(), 高額合算給付実績.get支給申請書整理番号(), 高額合算給付実績.get整理番号())) {
+                    高額合算給付実績.get被保険者番号().value(), 高額合算給付実績.get支給申請書整理番号(),
+                    高額合算給付実績.get整理番号(), 一覧データ)) {
                 row.setRowBgColor(DataGridCellBgColor.bgColorRed);
             }
             rowList.add(row);
@@ -182,8 +186,8 @@ public class KogakuGassanKyufuJissekiHandler {
         return チェックオフ;
     }
 
-    private boolean is履歴を抽出チェックオン(RString 交換情報識別番号, RString 被保険者番号, RString 支給申請書整理番号, RString 整理番号) {
-        List<dgRireki_Row> rowList = div.getDgRireki().getDataSource();
+    private boolean is履歴を抽出チェックオン(RString 交換情報識別番号, RString 被保険者番号,
+            RString 支給申請書整理番号, RString 整理番号, List<dgRireki_Row> rowList) {
         for (dgRireki_Row row : rowList) {
             if (!交換情報識別番号.equals(row.getTxtKokanShikibetsu()) && !被保険者番号.equals(row.getTxtHihokenshaNo())
                     && !支給申請書整理番号.equals(row.getTxtShikyuShinseishoSeiriNo()) && !整理番号.equals(row.getTxtSeiriNo())) {
