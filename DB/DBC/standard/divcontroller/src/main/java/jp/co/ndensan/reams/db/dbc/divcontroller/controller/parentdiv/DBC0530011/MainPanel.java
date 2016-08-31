@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class MainPanel {
 
     /**
-     * 画面初期化のメソッドです。
+     * 画面初期化です。
      *
      * @param div MainPanelDiv
      * @return ResponseData<MainPanelDiv>
