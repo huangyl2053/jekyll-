@@ -51,23 +51,23 @@ public enum ShokanShikyuGendogakuMainSpec implements IPredicate<ShokanShikyuGend
             RDate 入力適用期間From = div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().getFromValue();
             List<dgShikyuGendogaku_Row> rowList = div.getShokanShikyuGendogakuIchiran().getDgShikyuGendogaku().getDataSource();
             for (dgShikyuGendogaku_Row row : rowList) {
-                if (ShikyuGendogakuTableKubun.標準.get名称().equalsIgnoreCase(入力テーブル区分)) {
-                    if (入力テーブル区分.equalsIgnoreCase(row.getTableKubun())
-                            && RS_1.equalsIgnoreCase(row.getHdnSaishinFlag())
+                if (ShikyuGendogakuTableKubun.標準.get名称().equals(入力テーブル区分)) {
+                    if (入力テーブル区分.equals(row.getTableKubun())
+                            && RS_1.equals(row.getHdnSaishinFlag())
                             && 入力適用期間From.getYearMonth().isBeforeOrEquals(
                                     row.getTekiyoKaishiYM().getValue().getYearMonth())) {
                         return false;
                     }
                 } else {
-                    if (入力テーブル区分.equalsIgnoreCase(row.getTableKubun())
-                            && RS_1.equalsIgnoreCase(row.getHdnSaishinFlag())
+                    if (入力テーブル区分.equals(row.getTableKubun())
+                            && RS_1.equals(row.getHdnSaishinFlag())
                             && row.getTekiyoShuryoYM().getValue() == null
                             && 入力適用期間From.getYearMonth().isBeforeOrEquals(
                                     row.getTekiyoKaishiYM().getValue().getYearMonth())) {
                         return false;
                     }
-                    if (入力テーブル区分.equalsIgnoreCase(row.getTableKubun())
-                            && RS_1.equalsIgnoreCase(row.getHdnSaishinFlag())
+                    if (入力テーブル区分.equals(row.getTableKubun())
+                            && RS_1.equals(row.getHdnSaishinFlag())
                             && row.getTekiyoShuryoYM().getValue() != null
                             && 入力適用期間From.getYearMonth().isBeforeOrEquals(
                                     row.getTekiyoShuryoYM().getValue().getYearMonth())) {
@@ -83,9 +83,9 @@ public enum ShokanShikyuGendogakuMainSpec implements IPredicate<ShokanShikyuGend
             RDate 入力適用期間From = div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().getFromValue();
             List<dgShikyuGendogaku_Row> rowList = div.getShokanShikyuGendogakuIchiran().getDgShikyuGendogaku().getDataSource();
             for (dgShikyuGendogaku_Row row : rowList) {
-                if (ShikyuGendogakuTableKubun.上乗せ後.get名称().equalsIgnoreCase(入力テーブル区分)
-                        && ShikyuGendogakuTableKubun.標準.get名称().equalsIgnoreCase(row.getTableKubun())
-                        && RS_1.equalsIgnoreCase(row.getHdnSaishinFlag())
+                if (ShikyuGendogakuTableKubun.上乗せ後.get名称().equals(入力テーブル区分)
+                        && ShikyuGendogakuTableKubun.標準.get名称().equals(row.getTableKubun())
+                        && RS_1.equals(row.getHdnSaishinFlag())
                         && 入力適用期間From.getYearMonth().isBefore(
                                 row.getTekiyoKaishiYM().getValue().getYearMonth())) {
                     return false;

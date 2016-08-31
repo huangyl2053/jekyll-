@@ -82,7 +82,7 @@ public class FutanWariaiHanteiIchiranProcess extends BatchProcessBase<Futanwaria
     private static final RString RSTRING_THREE = new RString("3");
     private RString eucFilePath;
     private FileSpoolManager manager;
-    private RString EUC共通_文字コード;
+    private RString 共通_文字コード;
     private FutanWariaiHanteiIchiranProcessParameter processParameter;
     private final List<PersonalData> personalDataList = new ArrayList<>();
     private Association 導入団体クラス;
@@ -96,7 +96,7 @@ public class FutanWariaiHanteiIchiranProcess extends BatchProcessBase<Futanwaria
     protected void initialize() {
         導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         KaigoToiawasesakiConfig config = new KaigoToiawasesakiConfig();
-        EUC共通_文字コード = config.getEUC共通_文字コード();
+        共通_文字コード = config.getEUC共通_文字コード();
     }
 
     @Override
@@ -106,9 +106,9 @@ public class FutanWariaiHanteiIchiranProcess extends BatchProcessBase<Futanwaria
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         Encode 文字コード;
-        if (RSTRING_TWO.equals(EUC共通_文字コード)) {
+        if (RSTRING_TWO.equals(共通_文字コード)) {
             文字コード = Encode.SJIS;
-        } else if (RSTRING_THREE.equals(EUC共通_文字コード)) {
+        } else if (RSTRING_THREE.equals(共通_文字コード)) {
             文字コード = Encode.JIS;
         } else {
             文字コード = Encode.UTF_8withBOM;

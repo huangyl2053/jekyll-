@@ -123,7 +123,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
             batchparam.setSofuTaishogaiFukumu(true);
         }
         batchparam = setChkCsvHenshuHoho(batchparam);
-        if (null != div.getCcdHokenshaList().getSelectedItem().get市町村コード().toString()) {
+        if (null != div.getCcdHokenshaList().getSelectedItem() && null != div.getCcdHokenshaList().getSelectedItem().get市町村コード().toString()) {
             batchparam.setHokenshaNo(div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue());
         }
         if (null != div.getCcdShutsuryokujun().getSelected出力順()) {

@@ -301,8 +301,9 @@ public class IchijiSashitome1GoHandler {
                 div.getTxtHokenshoTeishutsuKigenYMD().setValue(支払方法変更差止.get控除通知書発行年月日());
                 if (支払方法変更差止.get差止控除番号() == null) {
                     div.getDdlTorokuKojoNo().setSelectedKey(RString.EMPTY);
+                } else {
+                    div.getDdlTorokuKojoNo().setSelectedKey(支払方法変更差止.get差止控除番号());
                 }
-                div.getDdlTorokuKojoNo().setSelectedKey(支払方法変更差止.get差止控除番号());
                 break;
             default:
                 break;
@@ -658,7 +659,12 @@ public class IchijiSashitome1GoHandler {
                 if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get情報分類区分().equals(ShiharaiHenkoJohoBunruiKubun.差止情報.getコード())) {
                     row.setSashitome2(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除状態区分());
                     row.setSeiriNo(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止償還整理番号());
-                    row.getTxtTeikyoYM().setValue(new FlexibleDate(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止サービス提供年月().toString()));
+                    FlexibleYearMonth 差止サービス提供年月 = 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止サービス提供年月();
+                    if (差止サービス提供年月 == null || 差止サービス提供年月.isEmpty()) {
+                        row.setTxtTeikyoYM(null);
+                    } else {
+                        row.getTxtTeikyoYM().setValue(new FlexibleDate(差止サービス提供年月.toString()));
+                    }
                 }
                 row.setKojoNo(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除番号());
                 row.getTxtKojoTorokuYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get控除決定年月日());

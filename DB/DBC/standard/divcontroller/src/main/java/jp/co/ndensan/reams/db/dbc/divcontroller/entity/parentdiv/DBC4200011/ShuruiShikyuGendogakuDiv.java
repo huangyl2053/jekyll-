@@ -1,18 +1,16 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShuruiShikyuGendogaku のクラスファイル 
- * 
- * @author 自動生成
+ * ShuruiShikyuGendogaku のクラスファイル
+ *
+ * @reamsid_L DBC-3410-010 jianglaisheng
  */
 public class ShuruiShikyuGendogakuDiv extends Panel {
     /*
@@ -21,6 +19,7 @@ public class ShuruiShikyuGendogakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("lblServicehiShurui")
     private Label lblServicehiShurui;
     @JsonProperty("lblServicehiHiritsu")
@@ -47,7 +46,7 @@ public class ShuruiShikyuGendogakuDiv extends Panel {
 
     @JsonProperty("lblServicehiShurui")
     public void setLblServicehiShurui(Label lblServicehiShurui) {
-        this.lblServicehiShurui=lblServicehiShurui;
+        this.lblServicehiShurui = lblServicehiShurui;
     }
 
     @JsonProperty("lblServicehiHiritsu")
@@ -57,7 +56,7 @@ public class ShuruiShikyuGendogakuDiv extends Panel {
 
     @JsonProperty("lblServicehiHiritsu")
     public void setLblServicehiHiritsu(Label lblServicehiHiritsu) {
-        this.lblServicehiHiritsu=lblServicehiHiritsu;
+        this.lblServicehiHiritsu = lblServicehiHiritsu;
     }
 
     @JsonProperty("btnAddServicehiShurui")
@@ -67,7 +66,7 @@ public class ShuruiShikyuGendogakuDiv extends Panel {
 
     @JsonProperty("btnAddServicehiShurui")
     public void setBtnAddServicehiShurui(Button btnAddServicehiShurui) {
-        this.btnAddServicehiShurui=btnAddServicehiShurui;
+        this.btnAddServicehiShurui = btnAddServicehiShurui;
     }
 
     @JsonProperty("btnAddServicehiHiritsu")
@@ -77,7 +76,7 @@ public class ShuruiShikyuGendogakuDiv extends Panel {
 
     @JsonProperty("btnAddServicehiHiritsu")
     public void setBtnAddServicehiHiritsu(Button btnAddServicehiHiritsu) {
-        this.btnAddServicehiHiritsu=btnAddServicehiHiritsu;
+        this.btnAddServicehiHiritsu = btnAddServicehiHiritsu;
     }
 
     @JsonProperty("dgServicehiShurui")
@@ -87,7 +86,7 @@ public class ShuruiShikyuGendogakuDiv extends Panel {
 
     @JsonProperty("dgServicehiShurui")
     public void setDgServicehiShurui(DataGrid<dgServicehiShurui_Row> dgServicehiShurui) {
-        this.dgServicehiShurui=dgServicehiShurui;
+        this.dgServicehiShurui = dgServicehiShurui;
     }
 
     @JsonProperty("dgServicehiHiritsu")
@@ -97,7 +96,7 @@ public class ShuruiShikyuGendogakuDiv extends Panel {
 
     @JsonProperty("dgServicehiHiritsu")
     public void setDgServicehiHiritsu(DataGrid<dgServicehiHiritsu_Row> dgServicehiHiritsu) {
-        this.dgServicehiHiritsu=dgServicehiHiritsu;
+        this.dgServicehiHiritsu = dgServicehiHiritsu;
     }
 
 }

@@ -8,18 +8,19 @@ package jp.co.ndensan.reams.db.dbx.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7064CareManegerEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護支援専門員を管理するクラスです。
+ *
+ * @reamsid_L DBC-3370-010 yuqingzhang
  */
 public class CareManeger extends ModelBase<CareManegerIdentifier, DbT7064CareManegerEntity, CareManeger> implements Serializable {
 
@@ -143,20 +144,25 @@ public class CareManeger extends ModelBase<CareManegerIdentifier, DbT7064CareMan
     }
 
     /**
-     * 保持する介護支援専門員を削除対象とします。<br/>
-     * {@link DbT7064CareManegerEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護支援専門員を削除対象とします。<br/> {@link DbT7064CareManegerEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link CareManeger}
      */
     @Override
     public CareManeger deleted() {
         DbT7064CareManegerEntity deletedEntity = this.toEntity();
-        if (deletedEntity.getState() != EntityDataState.Added) {
-            deletedEntity.setState(EntityDataState.Deleted);
-        } else {
-            //TODO メッセージの検討
-            throw new IllegalStateException(UrErrorMessages.不正.toString());
-        }
+        deletedEntity.setState(EntityDataState.Deleted);
+        return new CareManeger(deletedEntity, id);
+    }
+
+    /**
+     * 保持する介護支援専門員を修正対象とします。<br/> {@link DbT7064CareManegerEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば修正状態にします。
+     *
+     * @return 修正対象処理実施後の{@link CareManeger}
+     */
+    public CareManeger modified() {
+        DbT7064CareManegerEntity deletedEntity = this.toEntity();
+        deletedEntity.setState(EntityDataState.Modified);
         return new CareManeger(deletedEntity, id);
     }
 
@@ -172,7 +178,7 @@ public class CareManeger extends ModelBase<CareManegerIdentifier, DbT7064CareMan
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

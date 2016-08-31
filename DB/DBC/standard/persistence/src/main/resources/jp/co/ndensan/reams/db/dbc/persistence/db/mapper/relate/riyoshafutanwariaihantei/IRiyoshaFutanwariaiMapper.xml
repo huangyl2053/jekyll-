@@ -37,7 +37,7 @@
                 "TmpSetaiShotoku"."honninKubun" AS "SetainJohoTemp_setaiShotokuHonninKubun"
             FROM
                     "TmpSetaiShotoku"
-            LEFT JOIN
+            INNER JOIN
                     (SELECT "a".* FROM
                         (<include refid="dbt1001LeqIdoYMDAndDoubleMax" />) AS "a"
                     WHERE

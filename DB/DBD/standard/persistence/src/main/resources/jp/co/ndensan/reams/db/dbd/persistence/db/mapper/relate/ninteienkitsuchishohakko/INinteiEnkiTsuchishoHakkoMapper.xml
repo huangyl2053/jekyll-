@@ -146,10 +146,10 @@
             AND  (A."ninteiShinseiShinseijiKubunCode" = #{申請区分_更新申請} OR A."ninteiShinseiShinseijiKubunCode" = #{申請区分_区分変更申請})
         </if>
         <if test="is発行有無_発行未チェックON">
-            AND  (A."enkiTsuchiHakkoYMD" IS NULL OR A."enkiTsuchiHakkoYMD" = '')
+            AND  (A."enkiTsuchiHakkoYMD" IS NULL)
         </if>
         <if test="is発行有無_発行済チェックON">
-            AND  (A."enkiTsuchiHakkoYMD" IS NOT NULL OR A."enkiTsuchiHakkoYMD" <![CDATA[<>]]> '')
+            AND  (A."enkiTsuchiHakkoYMD" IS NOT NULL)
         </if>
         AND A."minashiNigoEtcTaishoFlag" = #{みなし２号等対象フラグ}
         <if test="is処理見込み日Fromが入力">

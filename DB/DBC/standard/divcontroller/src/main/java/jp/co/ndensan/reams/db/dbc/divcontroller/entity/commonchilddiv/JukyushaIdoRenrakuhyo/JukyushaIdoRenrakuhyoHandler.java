@@ -174,14 +174,10 @@ public class JukyushaIdoRenrakuhyoHandler {
         }
         if (!(照会モード.equals(処理モード) && INT_1 == 履歴番号)
                 && 受給者異動情報.get訂正年月日() != null) {
-            if (!訂正モード.equals(処理モード)) {
-                div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().setValue(new RDate(受給者異動情報.get訂正年月日().toString()));
-            }
+            div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().setValue(new RDate(受給者異動情報.get訂正年月日().toString()));
         }
         if (!照会モード.equals(処理モード) || INT_1 != 履歴番号) {
-            if (!訂正モード.equals(処理モード)) {
-                div.getJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().setSelectedKey(受給者異動情報.get訂正区分コード());
-            }
+            div.getJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().setSelectedKey(受給者異動情報.get訂正区分コード());
         }
         set要介護認定エリア(受給者異動情報);
         set支給限度基準額エリア(受給者異動情報);

@@ -1,18 +1,16 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShikyuGendogakuKyotakuServiceTop のクラスファイル 
- * 
- * @author 自動生成
+ * ShikyuGendogakuKyotakuServiceTop のクラスファイル
+ *
+ * @reamsid_L DBC-3410-010 jianglaisheng
  */
 public class ShikyuGendogakuKyotakuServiceTopDiv extends Panel {
     /*
@@ -21,6 +19,7 @@ public class ShikyuGendogakuKyotakuServiceTopDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtIdoDate")
     private TextBoxDate txtIdoDate;
     @JsonProperty("radIdoKubun")
@@ -45,7 +44,7 @@ public class ShikyuGendogakuKyotakuServiceTopDiv extends Panel {
 
     @JsonProperty("txtIdoDate")
     public void setTxtIdoDate(TextBoxDate txtIdoDate) {
-        this.txtIdoDate=txtIdoDate;
+        this.txtIdoDate = txtIdoDate;
     }
 
     @JsonProperty("radIdoKubun")
@@ -55,7 +54,7 @@ public class ShikyuGendogakuKyotakuServiceTopDiv extends Panel {
 
     @JsonProperty("radIdoKubun")
     public void setRadIdoKubun(RadioButton radIdoKubun) {
-        this.radIdoKubun=radIdoKubun;
+        this.radIdoKubun = radIdoKubun;
     }
 
     @JsonProperty("txtIdoJiyu")
@@ -65,7 +64,7 @@ public class ShikyuGendogakuKyotakuServiceTopDiv extends Panel {
 
     @JsonProperty("txtIdoJiyu")
     public void setTxtIdoJiyu(TextBoxCode txtIdoJiyu) {
-        this.txtIdoJiyu=txtIdoJiyu;
+        this.txtIdoJiyu = txtIdoJiyu;
     }
 
     @JsonProperty("txtYukoDateRange")
@@ -75,7 +74,7 @@ public class ShikyuGendogakuKyotakuServiceTopDiv extends Panel {
 
     @JsonProperty("txtYukoDateRange")
     public void setTxtYukoDateRange(TextBoxDateRange txtYukoDateRange) {
-        this.txtYukoDateRange=txtYukoDateRange;
+        this.txtYukoDateRange = txtYukoDateRange;
     }
 
     @JsonProperty("radTeiseiKubun")
@@ -85,7 +84,7 @@ public class ShikyuGendogakuKyotakuServiceTopDiv extends Panel {
 
     @JsonProperty("radTeiseiKubun")
     public void setRadTeiseiKubun(RadioButton radTeiseiKubun) {
-        this.radTeiseiKubun=radTeiseiKubun;
+        this.radTeiseiKubun = radTeiseiKubun;
     }
 
 }
