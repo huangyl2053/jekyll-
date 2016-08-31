@@ -21,5 +21,6 @@ public class KogakuGassanJikofutangakuShomeishoFlowEntity {
 
     private FlexibleYearMonth shoriYM;
     private int codeNum;
+    private int 連番;
     private int 高額合算自己負担額一時TBL登録件数;
 }
