@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410045
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorenkyoutsu.KokuhorenKyoutsuBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410045.DBC0410045TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410045.TsuchishoJoho534Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
@@ -44,16 +43,6 @@ public class TsuchishoJoho534 {
                 KokuhorenDataTorikomiViewStateClass.class);
         div.getCcdKokurenJohoTorikomi().initialize(parmater, SubGyomuCode.DBC介護給付, REPORTID);
         return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 国保連情報データ取込画面へ遷移する。
-     *
-     * @param div 画面DIV
-     * @return 国保連情報データ取込へ遷移
-     */
-    public ResponseData<TsuchishoJoho534Div> onClick_btnBackToKokuhorenTorikomiList(TsuchishoJoho534Div div) {
-        return ResponseData.of(div).forwardWithEventName(DBC0410045TransitionEventName.戻る).respond();
     }
 
     /**
