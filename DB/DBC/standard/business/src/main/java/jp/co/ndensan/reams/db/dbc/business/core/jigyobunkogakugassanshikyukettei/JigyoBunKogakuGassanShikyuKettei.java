@@ -49,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -589,7 +590,7 @@ public class JigyoBunKogakuGassanShikyuKettei {
         keyBuilder.setサブ業務コード(SubGyomuCode.DBC介護給付);
         IKozaSearchKey iKozaSearchKey = keyBuilder.build();
         return JigyoBunKogakuGassanShikyuKetteiMybatisParameter.createMybatisParameter(processParameter.get保険者コード(),
-                processParameter.get対象年度(),
+                new RDate(processParameter.get対象年度().toString()).getYear().toDateString(),
                 processParameter.get支給区分List(),
                 processParameter.get支払方法区分List(),
                 processParameter.get金融機関コード(),

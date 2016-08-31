@@ -63,5 +63,21 @@ public class KijunShunyugakuTekiyoShinseishoEntity {
     private RString 通知文１１;
     private RString 通知文１２;
     private RString 通知文１３;
+    private RString 通知文１４;
+    private RString 通知文１５;
+    private RString 通知文１６;
+    private RString 通知文１７;
+    private RString 通知文１８;
+    private RString 通知文１９;
+    private RString 通知文２０;
+    private RString 通知文２１;
+    private RString 通知文２２;
+    private RString 通知文２３;
+    private RString 通知文２４;
+    private RString 通知文２５;
+    private RString 通知文２６;
+    private RString 通知文２７;
+    private RString 通知文２８;
+    private RString 通知文２９;
 
 }
