@@ -58,9 +58,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- * バッチ設計_DBBBT22002_汎用リスト 賦課台帳CsvEditorのクラス
+ * バッチ設計_DBBBT22002_汎用リスト 賦課台帳CsvEditorのクラスです。
  *
- * @reamsid_L DBB-1901-030 surun
+ * @reamsid_L DBB-1900-030 zhaowei
  */
 public class HanyoListFukaDaichoCsvNoRenbanEditor {
 
@@ -362,7 +362,6 @@ public class HanyoListFukaDaichoCsvNoRenbanEditor {
         if (KyokaisoKubun.該当.getコード().equals(介護賦課.getKyokaisoKubun())) {
             csvEntity.set境界層区分(境界層);
         }
-
         csvEntity.set調定年度(new RString(介護賦課.getChoteiNendo().getYearValue()));
         csvEntity.set賦課年度(new RString(介護賦課.getFukaNendo().getYearValue()));
         csvEntity.set特徴歳出還付額(numToRString(介護賦課.getTkSaishutsuKampuGaku()));
