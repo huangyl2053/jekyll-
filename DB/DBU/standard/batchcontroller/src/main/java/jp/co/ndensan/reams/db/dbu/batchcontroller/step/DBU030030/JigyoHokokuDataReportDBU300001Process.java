@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU030030;
 
+import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbu.business.report.jigyohokokugeppoyoshiki1.JigyohokokuGeppoYoshiki1Report;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNo;
@@ -83,6 +84,9 @@ public class JigyoHokokuDataReportDBU300001Process extends BatchProcessBase<Jigy
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
+        syukeiNo0200 = new HashMap<>();
+        syukeiNo0301 = new HashMap<>();
+        syukeiNo0302 = new HashMap<>();
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         保険者番号 = 地方公共団体.get地方公共団体コード().value();
         if (過去集計分旧市町村区分.equals(processParameter.get過去集計分旧市町村区分())) {
