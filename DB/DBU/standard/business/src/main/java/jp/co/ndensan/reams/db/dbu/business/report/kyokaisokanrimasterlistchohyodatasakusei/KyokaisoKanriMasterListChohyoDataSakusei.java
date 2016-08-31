@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  *
@@ -41,7 +42,6 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
     private static final RString 性別_男 = new RString("男");
     private static final RString 性別_女 = new RString("女");
     private static final RString 給付額減額記載解除フラグ_解除する = new RString("解除する");
-    private static final RString 改頁 = new RString("1");
 
     /**
      *
@@ -66,16 +66,16 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
                 データリスト.setページ数(new RString(String.valueOf(pageCount)));
                 データリスト.set市町村コード(kyokaisogGaitoshaListEntity.get市町村コード());
                 データリスト.set市町村名(kyokaisogGaitoshaListEntity.get市町村名());
-                データリスト.set並び順1(男);
-                データリスト.set並び順2(男);
-                データリスト.set並び順3(男);
-                データリスト.set並び順4(男);
-                データリスト.set並び順5(男);
-                データリスト.set改頁1(改頁);
-                データリスト.set改頁2(改頁);
-                データリスト.set改頁3(改頁);
-                データリスト.set改頁4(改頁);
-                データリスト.set改頁5(改頁);
+                データリスト.set並び順1(null);
+                データリスト.set並び順2(null);
+                データリスト.set並び順3(null);
+                データリスト.set並び順4(null);
+                データリスト.set並び順5(null);
+                データリスト.set改頁1(null);
+                データリスト.set改頁2(null);
+                データリスト.set改頁3(null);
+                データリスト.set改頁4(null);
+                データリスト.set改頁5(null);
                 pageCount++;
             }
         }
@@ -186,7 +186,7 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
                 給付額減額解除.add(RString.EMPTY);
             }
             if (entity.getHyojunFutanKeigengoFutangaku() != null) {
-                標準負担減額後負担額.add(new RString(entity.getHyojunFutanKeigengoFutangaku().toString()));
+                標準負担減額後負担額.add(new RString(DecimalFormatter.toコンマ区切りRString(entity.getHyojunFutanKeigengoFutangaku(), 0).toString()));
             } else {
                 標準負担減額後負担額.add(null);
             }
@@ -274,22 +274,26 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
             List<RString> 高額ｻｰﾋﾞｽ費減額後上限額,
             List<RString> 保険料納付減額後保険料段階) {
         if (entity.getKyojuhiKeigengoHutangaku() != null) {
-            居住費軽減後負担額.add(new RString(entity.getKyojuhiKeigengoHutangaku().toString()));
+            居住費軽減後負担額.add(new RString(DecimalFormatter.toコンマ区切りRString(entity.getKyojuhiKeigengoHutangaku(), 0).toString()));
         } else {
             居住費軽減後負担額.add(null);
         }
         if (entity.getShokuhiKeigengoHutangaku() != null) {
-            食費軽減後負担額.add(new RString(entity.getShokuhiKeigengoHutangaku().toString()));
+            食費軽減後負担額.add(new RString(DecimalFormatter.toコンマ区切りRString(entity.getShokuhiKeigengoHutangaku(), 0).toString()));
         } else {
             食費軽減後負担額.add(null);
         }
         if (entity.getKogakuServicehiJogengakuGengakugoJogengaku() != null) {
-            高額ｻｰﾋﾞｽ費減額後上限額.add(new RString(entity.getKogakuServicehiJogengakuGengakugoJogengaku().toString()));
+            高額ｻｰﾋﾞｽ費減額後上限額.add(new RString(DecimalFormatter.toコンマ区切りRString(entity.getKogakuServicehiJogengakuGengakugoJogengaku(), 0).toString()));
         } else {
             高額ｻｰﾋﾞｽ費減額後上限額.add(null);
         }
         if (entity.getGengakuGoHokenryoDankai() != null) {
-            保険料納付減額後保険料段階.add(new RString(entity.getGengakuGoHokenryoDankai().toString()));
+            RStringBuilder nituliki = new RStringBuilder();
+            nituliki.append(new RString("第"));
+            nituliki.append(entity.getGengakuGoHokenryoDankai());
+            nituliki.append(new RString("段階"));
+            保険料納付減額後保険料段階.add(nituliki.toRString());
         } else {
             保険料納付減額後保険料段階.add(null);
         }
