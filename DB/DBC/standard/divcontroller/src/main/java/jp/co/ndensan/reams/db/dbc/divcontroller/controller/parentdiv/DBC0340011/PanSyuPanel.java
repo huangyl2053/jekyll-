@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
  */
 public class PanSyuPanel {
 
-    private static final ReportId 帳票ID = new ReportId("DBC100053_GassanKetteiTsuchisho");
+    private static final ReportId 帳票ID = new ReportId("DBC100031_KogakuServiceHiJyuryoItakuKeiyakuKakuninSho");
     private static final RString 契約申請日の範囲 = new RString("契約申請日の範囲");
     private static final RString 契約決定日の範囲 = new RString("契約決定日の範囲");
     private static final RString 発行する = new RString("Execute");
