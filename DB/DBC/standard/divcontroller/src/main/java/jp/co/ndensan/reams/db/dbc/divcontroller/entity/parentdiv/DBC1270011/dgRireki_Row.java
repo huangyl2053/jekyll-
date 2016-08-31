@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1270011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Aug 19 10:11:25 CST 2016 
+ * Wed Aug 31 14:32:45 CST 2016 
  */
 
 
@@ -32,6 +32,8 @@ public class dgRireki_Row extends DataRow {
     private RString txtSofuNengetsu;
     private RString txtJikoFutanSeiriNo;
     private RString txtShoriYM;
+    private RString txtHihokenshaNo;
+    private RString txtSeiriNo;
 
     public dgRireki_Row() {
         super();
@@ -46,6 +48,8 @@ public class dgRireki_Row extends DataRow {
         this.txtSofuNengetsu = RString.EMPTY;
         this.txtJikoFutanSeiriNo = RString.EMPTY;
         this.txtShoriYM = RString.EMPTY;
+        this.txtHihokenshaNo = RString.EMPTY;
+        this.txtSeiriNo = RString.EMPTY;
         this.setOriginalData("txtKokanShikibetsu", txtKokanShikibetsu);
         this.setOriginalData("txtShikyuShinseishoSeiriNo", txtShikyuShinseishoSeiriNo);
         this.setOriginalData("txtSakuseiKubun", txtSakuseiKubun);
@@ -57,9 +61,11 @@ public class dgRireki_Row extends DataRow {
         this.setOriginalData("txtSofuNengetsu", txtSofuNengetsu);
         this.setOriginalData("txtJikoFutanSeiriNo", txtJikoFutanSeiriNo);
         this.setOriginalData("txtShoriYM", txtShoriYM);
+        this.setOriginalData("txtHihokenshaNo", txtHihokenshaNo);
+        this.setOriginalData("txtSeiriNo", txtSeiriNo);
     }
 
-    public dgRireki_Row(RString txtKokanShikibetsu, RString txtShikyuShinseishoSeiriNo, RString txtSakuseiKubun, RString txtHokenshaNo, RString txtShinseiYMD, RString txtKetteiYMD, RString txtShikyugaku, RString txtUketoriNengetsu, RString txtSofuNengetsu, RString txtJikoFutanSeiriNo, RString txtShoriYM) {
+    public dgRireki_Row(RString txtKokanShikibetsu, RString txtShikyuShinseishoSeiriNo, RString txtSakuseiKubun, RString txtHokenshaNo, RString txtShinseiYMD, RString txtKetteiYMD, RString txtShikyugaku, RString txtUketoriNengetsu, RString txtSofuNengetsu, RString txtJikoFutanSeiriNo, RString txtShoriYM, RString txtHihokenshaNo, RString txtSeiriNo) {
         super();
         this.setOriginalData("txtKokanShikibetsu", txtKokanShikibetsu);
         this.setOriginalData("txtShikyuShinseishoSeiriNo", txtShikyuShinseishoSeiriNo);
@@ -72,6 +78,8 @@ public class dgRireki_Row extends DataRow {
         this.setOriginalData("txtSofuNengetsu", txtSofuNengetsu);
         this.setOriginalData("txtJikoFutanSeiriNo", txtJikoFutanSeiriNo);
         this.setOriginalData("txtShoriYM", txtShoriYM);
+        this.setOriginalData("txtHihokenshaNo", txtHihokenshaNo);
+        this.setOriginalData("txtSeiriNo", txtSeiriNo);
         this.txtKokanShikibetsu = txtKokanShikibetsu;
         this.txtShikyuShinseishoSeiriNo = txtShikyuShinseishoSeiriNo;
         this.txtSakuseiKubun = txtSakuseiKubun;
@@ -83,6 +91,8 @@ public class dgRireki_Row extends DataRow {
         this.txtSofuNengetsu = txtSofuNengetsu;
         this.txtJikoFutanSeiriNo = txtJikoFutanSeiriNo;
         this.txtShoriYM = txtShoriYM;
+        this.txtHihokenshaNo = txtHihokenshaNo;
+        this.txtSeiriNo = txtSeiriNo;
     }
 
     public RString getTxtKokanShikibetsu() {
@@ -127,6 +137,14 @@ public class dgRireki_Row extends DataRow {
 
     public RString getTxtShoriYM() {
         return txtShoriYM;
+    }
+
+    public RString getTxtHihokenshaNo() {
+        return txtHihokenshaNo;
+    }
+
+    public RString getTxtSeiriNo() {
+        return txtSeiriNo;
     }
 
     public void setTxtKokanShikibetsu(RString txtKokanShikibetsu) {
@@ -182,6 +200,16 @@ public class dgRireki_Row extends DataRow {
     public void setTxtShoriYM(RString txtShoriYM) {
         this.setOriginalData("txtShoriYM", txtShoriYM);
         this.txtShoriYM = txtShoriYM;
+    }
+
+    public void setTxtHihokenshaNo(RString txtHihokenshaNo) {
+        this.setOriginalData("txtHihokenshaNo", txtHihokenshaNo);
+        this.txtHihokenshaNo = txtHihokenshaNo;
+    }
+
+    public void setTxtSeiriNo(RString txtSeiriNo) {
+        this.setOriginalData("txtSeiriNo", txtSeiriNo);
+        this.txtSeiriNo = txtSeiriNo;
     }
 
     // </editor-fold>
