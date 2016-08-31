@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ViewControl;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- * システム管理登録（認定結果通知書文言変更）のHandlerです。
+ * システム管理登録（認定結果通知書文言変更）のバリデーションハンドラークラスです。
  *
  * @reamsid_L DBD-3760-010 tz_chengpeng
  */
@@ -52,7 +52,7 @@ public class SystemKanriNinteiKekkaTotalValidationHandler {
     }
 
     private List<ViewControl> get付加情報() {
-        List<ViewControl> viewControls = new ArrayList();
+        List<ViewControl> viewControls = new ArrayList<>();
         viewControls.add(div.getSystemKanri().getSystemKanriNinteiKekka().getTxtFukaJoho1());
         viewControls.add(div.getSystemKanri().getSystemKanriNinteiKekka().getTxtFukaJoho2());
         viewControls.add(div.getSystemKanri().getSystemKanriNinteiKekka().getTxtFukaJoho3());
