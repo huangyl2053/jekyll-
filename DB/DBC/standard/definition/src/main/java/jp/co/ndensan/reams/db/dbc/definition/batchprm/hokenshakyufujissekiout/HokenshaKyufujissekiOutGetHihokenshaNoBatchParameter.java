@@ -6,18 +6,18 @@
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.hokenshakyufujissekiout;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
- * 保険者番号の設定パラメータです。
+ * 被保険者番号変換対象データの取得パラメータです。
  *
  * @reamsid_L DBC-2460-012 jiangwenkai
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HokenshaKyufujissekiOutSetHihokenshaNoParameter implements IMyBatisParameter {
+public class HokenshaKyufujissekiOutGetHihokenshaNoBatchParameter implements IMyBatisParameter {
 
-    private RString 保険者番号;
+    private FlexibleDate 年月;
 
 }

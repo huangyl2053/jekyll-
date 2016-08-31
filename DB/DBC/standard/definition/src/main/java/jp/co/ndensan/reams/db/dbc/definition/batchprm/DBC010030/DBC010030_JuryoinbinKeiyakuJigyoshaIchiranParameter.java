@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -39,5 +39,5 @@ public class DBC010030_JuryoinbinKeiyakuJigyoshaIchiranParameter extends BatchPa
     @BatchParameter(key = "市町村コード", name = "市町村コード")
     private LasdecCode 市町村コード;
     @BatchParameter(key = "処理日時", name = "処理日時")
-    private RDate 処理日時;
+    private RDateTime 処理日時;
 }

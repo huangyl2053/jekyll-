@@ -661,7 +661,7 @@ public class IchijiSashitome1GoHandler {
                     row.setSeiriNo(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止償還整理番号());
                     FlexibleYearMonth 差止サービス提供年月 = 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止サービス提供年月();
                     if (差止サービス提供年月 == null || 差止サービス提供年月.isEmpty()) {
-                        row.setTxtTeikyoYM(null);
+                        row.getTxtTeikyoYM().setValue(FlexibleDate.EMPTY);
                     } else {
                         row.getTxtTeikyoYM().setValue(new FlexibleDate(差止サービス提供年月.toString()));
                     }

@@ -8,14 +8,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0350011
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC010030.DBC010030_JuryoinbinKeiyakuJigyoshaIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0350011.DBC0350011StateName;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0350011.DBC0350011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0350011.JuryoIninKeiyakuJigyoshaIchiranhyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0350011.JuryoIninKeiyakuJigyoshaIchiranhyoValidationHandler;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -54,18 +53,6 @@ public class JuryoIninKeiyakuJigyoshaIchiranhyo {
     }
 
     /**
-     * 「メニューに戻る」ボタンのメソッドです。
-     *
-     * @param div JuryoIninKeiyakuJigyoshaIchiranhyoDiv
-     * @return ResponseData
-     */
-    public ResponseData<JuryoIninKeiyakuJigyoshaIchiranhyoDiv> onClick_btnBackMenu(
-            JuryoIninKeiyakuJigyoshaIchiranhyoDiv div) {
-
-        return ResponseData.of(div).forwardWithEventName(DBC0350011TransitionEventName.完了).respond();
-    }
-
-    /**
      * 「印刷する」ボタンを押下します。
      *
      * @param div NenjiRiyoshaFutanWariaiHanteiDiv
@@ -88,8 +75,7 @@ public class JuryoIninKeiyakuJigyoshaIchiranhyo {
             parameter.set改頁出力順ID(new RString(div.getCcdChohyoShutsuryokujun().getSelected出力順().get出力順ID()));
         }
         parameter.set市町村コード(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード());
-        parameter.set処理日時(RDate.getNowDate());
-        //TODO バッチ処理：帳票発行 未着手 and バッチ実行 QA 1405
+        parameter.set処理日時(RDateTime.now());
         return ResponseData.of(parameter).respond();
     }
 
