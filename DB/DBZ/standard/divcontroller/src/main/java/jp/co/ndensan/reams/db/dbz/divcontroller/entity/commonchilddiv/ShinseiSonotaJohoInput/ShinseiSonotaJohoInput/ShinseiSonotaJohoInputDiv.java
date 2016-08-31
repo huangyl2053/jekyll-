@@ -1,23 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput;
-
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * ShinseiSonotaJohoInput のクラスファイル
@@ -25,8 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @reamsid_L DBZ-1300-120 houtianpeng
  */
 public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJohoInputDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -60,7 +59,7 @@ public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJo
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
- /*
+    /*
      * getddlIdoJiyu
      * @return ddlIdoJiyu
      */
@@ -119,7 +118,6 @@ public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJo
      * @return txtSoshitsuDay
      */
     @JsonProperty("txtSoshitsuDay")
-    @Override
     public TextBoxFlexibleDate getTxtSoshitsuDay() {
         return txtSoshitsuDay;
     }
@@ -272,7 +270,7 @@ public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJo
             ShoriType[] enumArray = ShoriType.values();
 
             for (ShoriType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -287,11 +285,11 @@ public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJo
     }
 
     public ShoriType getMode_ShoriType() {
-        return (ShoriType) _CommonChildDivModeUtil.getMode(this.modes, ShoriType.class);
+        return (ShoriType) _CommonChildDivModeUtil.getMode( this.modes, ShoriType.class );
     }
 
-    public void setMode_ShoriType(ShoriType value) {
-        _CommonChildDivModeUtil.setMode(this.modes, ShoriType.class, value);
+    public void setMode_ShoriType( ShoriType value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, ShoriType.class , value );
     }
 
     // </editor-fold>
