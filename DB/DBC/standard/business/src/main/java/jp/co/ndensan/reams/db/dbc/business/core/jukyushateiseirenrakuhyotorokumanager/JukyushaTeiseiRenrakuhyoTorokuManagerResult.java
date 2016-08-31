@@ -19,6 +19,6 @@ public class JukyushaTeiseiRenrakuhyoTorokuManagerResult {
 
     private RString エラーメッセージコード;
     private RString 警告メッセージコード;
-    private int 登録件数;
+    private int エラー有無;
 
 }

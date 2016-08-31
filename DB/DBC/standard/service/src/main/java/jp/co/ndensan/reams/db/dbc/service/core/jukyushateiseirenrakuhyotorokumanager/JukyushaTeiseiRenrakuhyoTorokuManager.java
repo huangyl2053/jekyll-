@@ -58,25 +58,25 @@ public class JukyushaTeiseiRenrakuhyoTorokuManager {
             boolean 論理削除フラグ,
             JukyushaIdoRenrakuhyo 受給者訂正連絡票登録画面Div) {
         JukyushaTeiseiRenrakuhyoTorokuManagerResult result = new JukyushaTeiseiRenrakuhyoTorokuManagerResult();
-        result.set登録件数(0);
+        result.setエラー有無(0);
         int 件数 = 受給者異動送付Dac.selectCountByKey(
                 受給者訂正連絡票登録画面Div.get被保険者番号(),
                 受給者訂正連絡票登録画面Div.get異動年月日(), 履歴番号, 論理削除フラグ);
         if (0 == 件数) {
-            result.set登録件数(1);
+            result.setエラー有無(1);
             result.setエラーメッセージコード(new RString(UrErrorMessages.対象データなし.getMessage().getCode()));
         } else {
             DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付entity = 受給者異動送付Dac.
                     selectAllByTwoKey(受給者訂正連絡票登録画面Div.get被保険者番号(),
                             受給者訂正連絡票登録画面Div.get異動年月日());
             if (受給者異動送付entity != null && 受給者異動送付entity.getRirekiNo() != 履歴番号) {
-                result.set登録件数(1);
+                result.setエラー有無(1);
                 result.setエラーメッセージコード(new RString(UrErrorMessages.既に存在.getMessage().getCode()));
             } else {
                 DbT3001JukyushaIdoRenrakuhyoEntity minRirekiNoの受給者異動送付
                         = 受給者異動送付Dac.selectMaxRirekiNoByMinIdoYMD(受給者訂正連絡票登録画面Div.get被保険者番号(),
                                 受給者訂正連絡票登録画面Div.get異動年月日());
-                get登録件数(受給者訂正連絡票登録画面Div, result, minRirekiNoの受給者異動送付);
+                get警告メッセージコード(受給者訂正連絡票登録画面Div, result, minRirekiNoの受給者異動送付);
             }
         }
         return result;
@@ -98,7 +98,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuManager {
         }
     }
 
-    private void get登録件数(
+    private void get警告メッセージコード(
             JukyushaIdoRenrakuhyo 受給者訂正連絡票登録画面Div,
             JukyushaTeiseiRenrakuhyoTorokuManagerResult result,
             DbT3001JukyushaIdoRenrakuhyoEntity minRirekiNoの受給者異動送付) {
