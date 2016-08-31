@@ -30,6 +30,7 @@ public class KogakuGassanShikyuKetteiTsuchisho {
     private static final RString KEY_0 = new RString("key0");
     private static final RString KEY_1 = new RString("key1");
     private static final RString NUM_1 = new RString("1");
+    private static final RString 予定日 = new RString("支払予定日");
 
     /**
      * onloadのメソッドです。
@@ -44,7 +45,6 @@ public class KogakuGassanShikyuKetteiTsuchisho {
         }
         getHandler(div).initialize();
         return ResponseData.of(div).respond();
-
     }
 
     /**
@@ -133,7 +133,7 @@ public class KogakuGassanShikyuKetteiTsuchisho {
             }
         }
         if ((getHandler(div).get支払予定日印字有無().equals(NUM_1)) && 支払予定日 == null && !ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrWarningMessages.未入力.getMessage()).respond();
+            return ResponseData.of(div).addMessage(UrWarningMessages.未入力.getMessage().replace(予定日.toString())).respond();
         }
         if (div.getCcdChohyoShutsuryokujun().get帳票ID().isEmpty()) {
             throw new ApplicationException(UrErrorMessages.未指定.getMessage());
