@@ -489,6 +489,12 @@ public class IchijiSashitome1GoHandler {
         TainoHanteiResultKohen 滞納判定結果 = DataPassingConverter.deserialize(div.getTainoHanteiKekka(), TainoHanteiResultKohen.class);
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().validateFor滞納状況情報チェック(pairs, div, 支払方法変更管理業務概念);
+        getValidationHandler().validateFor差止登録日未入力(pairs, div);
+        getValidationHandler().validateFor差止納付期限未入力(pairs, div);
+        getValidationHandler().validateFor差止解除日未入力(pairs, div);
+        getValidationHandler().validateFor控除決定日未入力(pairs, div);
+        getValidationHandler().validateFor控除番号未選択(pairs, div);
+        getValidationHandler().validateFor保険証提出期限未入力(pairs, div);
         if (pairs.iterator().hasNext()) {
             return pairs;
         }
