@@ -20,6 +20,10 @@ module DBZ {
                 return "onOkClose_btnChikuNyuryokuGuide";
             }
 
+            public static onChange_市町村DDL(): string {
+                return "onChange_市町村DDL";
+            }
+
         }
 
         export class Controls {

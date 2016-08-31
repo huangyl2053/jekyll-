@@ -6,20 +6,26 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chikushichosonselect.ChikuShichosonSelect;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonShikibetsuIDniYoruShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.kyushichosoncode.KyuShichosonCode;
+import jp.co.ndensan.reams.db.dbz.service.core.kyushichosoncode.KyuShichosonCodeJoho;
 import jp.co.ndensan.reams.ur.urz.definition.core.chiku.ChikuShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.core.config.jushoinput.ConfigKeysCodeName;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -113,6 +119,7 @@ public class ChikuShichosonSelectHandler {
                 dataSource.add(new KeyValueDataSource(市町村Code, 市町村Code.concat(全角空白).concat(市町村名称)));
                 div.getDdlShichoson().setDataSource(dataSource);
                 div.getDdlShichoson().setSelectedKey(市町村Code);
+                onChange_市町村DDL();
             }
         }
     }
@@ -200,7 +207,7 @@ public class ChikuShichosonSelectHandler {
                 row.setName(entry.getValue());
                 dataSource.add(row);
             }
-            div.getDdlCodeList().setDataSource(dataSource);
+            div.getDdlCodeList().setDataSource(setDgDataSource昇順ByKey(dataSource));
         }
     }
 
@@ -218,7 +225,7 @@ public class ChikuShichosonSelectHandler {
                 row.setName(entry.getValue());
                 dataSource.add(row);
             }
-            div.getDdlCodeList().setDataSource(dataSource);
+            div.getDdlCodeList().setDataSource(setDgDataSource昇順ByKey(dataSource));
         }
     }
 
@@ -229,7 +236,57 @@ public class ChikuShichosonSelectHandler {
 
         if (KEY.equals(div.getDdlShichoson().getSelectedKey())) {
             div.getDdlKyushichosonKoiki().setDisplayNone(true);
+        } else {
+            KyuShichosonCodeJoho 旧市町村情報 = KyuShichosonCode.getKyuShichosonCodeJoho(
+                    new LasdecCode(div.getDdlShichoson().getSelectedKey()),
+                    DonyuKeitaiCode.toValue(div.getHdnTxtDonyuKeitaiCode()));
+            if (旧市町村情報 != null && 旧市町村情報.is合併市町村有無フラグ()) {
+                div.getDdlKyushichosonKoiki().setDisplayNone(false);
+                List<KyuShichosonCode> 旧市町村コード情報List = 旧市町村情報.get旧市町村コード情報List();
+                if (旧市町村コード情報List != null && !旧市町村コード情報List.isEmpty()) {
+                    List<KeyValueDataSource> dataSource = new ArrayList<>();
+                    for (KyuShichosonCode item : 旧市町村コード情報List) {
+                        dataSource.add(new KeyValueDataSource(item.get旧市町村コード().getColumnValue(), item.get旧市町村名称()));
+                    }
+                    div.getDdlKyushichosonKoiki().setDataSource(setDdlDataSource昇順ByKey(dataSource));
+                    if (dataSource.size() > 1) {
+                        div.getDdlKyushichosonKoiki().setSelectedIndex(1);
+                    }
+                }
+            } else {
+                div.getDdlKyushichosonKoiki().setDisplayNone(true);
+            }
         }
+    }
+
+    private List<KeyValueDataSource> setDdlDataSource昇順ByKey(List<KeyValueDataSource> dataSource) {
+        if (dataSource.isEmpty()) {
+            return dataSource;
+        }
+        Collections.sort(dataSource,
+                new Comparator<KeyValueDataSource>() {
+                    @Override
+                    public int compare(KeyValueDataSource arg0, KeyValueDataSource arg1) {
+                        return arg0.getKey().toString().compareTo(arg1.getKey().toString());
+                    }
+                }
+        );
+        return dataSource;
+    }
+
+    private List<ddlCodeList_Row> setDgDataSource昇順ByKey(List<ddlCodeList_Row> dataSource) {
+        if (dataSource.isEmpty()) {
+            return dataSource;
+        }
+        Collections.sort(dataSource,
+                new Comparator<ddlCodeList_Row>() {
+                    @Override
+                    public int compare(ddlCodeList_Row arg0, ddlCodeList_Row arg1) {
+                        return arg0.getCode().toString().compareTo(arg1.getCode().toString());
+                    }
+                }
+        );
+        return dataSource;
     }
 
 }
