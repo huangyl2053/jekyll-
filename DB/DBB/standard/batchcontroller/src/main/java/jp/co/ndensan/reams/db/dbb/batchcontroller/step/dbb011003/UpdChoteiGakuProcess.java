@@ -5,31 +5,30 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003;
 
-import jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoDataHenshu;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchokarisanteitsuchishohakko.ITokuchoKarisanteiTsuchishoHakkoMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
 /**
- * 賦課情報の取得
+ * 更新特徴調定額クラスです。
  *
  * @reamsid_L DBB-0790-030 chenaoqi
  */
-public class GetFukaJohoProcess extends SimpleBatchProcessBase {
+public class UpdChoteiGakuProcess extends SimpleBatchProcessBase {
 
-    private TokuchoKaishiTsuchishoDataHenshu manager;
+    private ITokuchoKarisanteiTsuchishoHakkoMapper mapper;
 
     @Override
     protected void beforeExecute() {
-        manager = TokuchoKaishiTsuchishoDataHenshu.createInstance();
+        mapper = getMapper(ITokuchoKarisanteiTsuchishoHakkoMapper.class);
     }
 
     @Override
     protected void process() {
-        manager.getFukaJoho();
+        mapper.update仮算定一括発行一時_特徴調定額();
     }
 
     @Override
     protected void afterExecute() {
 
     }
-
 }
