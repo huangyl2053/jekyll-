@@ -180,15 +180,17 @@
         DbT0700."kazeiNendo",
         DbT0700."tsuchishoNo"
         FROM
-        "UrT0700ShunoKanri_work" DbT0700,
-        "UrT0705ChoteiKyotsu_work" DbT0705
+        rgdb."UrT0700ShunoKanri" DbT0700,
+        rgdb."UrT0705ChoteiKyotsu" DbT0705
         WHERE
         DbT0700."shunoId" = DbT0705."shunoId"
+        AND  DbT0700."shunoId" IN (SELECT MAX("shunoId")
+        FROM rgdb."UrT0700ShunoKanri"
+        GROUP BY "kamokuCode","choteiNendo","tsuchishoNo","kibetsu")
         )choteiIdToroku
         ON
         choteiIdToroku."choteiNendo" = dbT2002."choteiNendo"
         AND choteiIdToroku."kazeiNendo" = dbT2002."fukaNendo"
-        <!--TODO QA1470一時案対応 2016/08/01 王暁冬-->
         AND choteiIdToroku."tsuchishoNo" = (CAST(dbT2002."tsuchishoNo" AS numeric))
         ORDER BY
         dbT2002."choteiNendo",

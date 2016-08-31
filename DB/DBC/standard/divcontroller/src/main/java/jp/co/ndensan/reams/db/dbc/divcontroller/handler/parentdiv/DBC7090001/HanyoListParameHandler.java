@@ -30,6 +30,7 @@ public class HanyoListParameHandler {
     private static final RString 項目名 = new RString("1");
     private static final RString 日付 = new RString("3");
     private static final RString 事務広域 = new RString("111");
+    private static final RString 全市町村 = new RString("全市町村");
     private static final RString すべて = new RString("key0");
     private static final RString 介護給付費 = new RString("key1");
     private static final RString 総合事業費_経過措置 = new RString("key2");
@@ -130,8 +131,11 @@ public class HanyoListParameHandler {
         parameter.set項目名付加(is項目名付加);
         parameter.set連番付加(is連番付加);
         parameter.set日付スラッシュ付加(is日付編集);
-        parameter.set保険者コード(panel.getCcdHokenshaList().getSelectedItem().get市町村コード());
 
+        if (!panel.getCcdHokenshaList().isDisabled() && !panel.getCcdHokenshaList().getSelectedItem().get市町村名称().equals(全市町村)) {
+            parameter.set保険者コード(panel.getCcdHokenshaList().getSelectedItem().get市町村コード());
+
+        }
         if (div.getCcdShutsuryokujun().get出力順ID() == null) {
             parameter.set出力順(RString.EMPTY);
         } else {

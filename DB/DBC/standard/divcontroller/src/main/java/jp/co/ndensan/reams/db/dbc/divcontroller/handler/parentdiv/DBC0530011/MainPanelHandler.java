@@ -1,0 +1,186 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0530011;
+
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KokiKoreishaInfo;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+
+/**
+ * 後期資格情報登録Handler
+ *
+ * @reamsid_L DBD-5740-010 liuyl
+ */
+public class MainPanelHandler {
+
+    private final MainPanelDiv div;
+    private static final RString コード = new RString("2");
+    private static final RString コード111 = new RString("111");
+    private static final RString コード112 = new RString("112");
+    private static final RString コード120 = new RString("120");
+    private static final RString 単一市町村 = new RString("1");
+    private static final RString 広域市町村 = new RString("2");
+    private static final RString 広域保険者 = new RString("3");
+    private static final RString DBCSHIKIBETSUCODE = new RString("DBCshikibetsuCode");
+    private static final RString DBCRIREKINO = new RString("DBCrirekiNo");
+
+    /**
+     * 生成されたインタフェースを返します
+     *
+     * @param div 画面DIV
+     */
+    public MainPanelHandler(MainPanelDiv div) {
+        this.div = div;
+    }
+
+    /**
+     * 初期化
+     *
+     * @param shikibetsuCode ShikibetsuCode
+     * @param 被保険者番号 HihokenshaNo
+     * @param 後期高齢者情報 KokiKoreishaInfo
+     */
+    public void onLoad(ShikibetsuCode shikibetsuCode, HihokenshaNo 被保険者番号, KokiKoreishaInfo 後期高齢者情報) {
+        RString 履歴番号;
+        if (後期高齢者情報 != null) {
+            履歴番号 = 後期高齢者情報.get履歴番号();
+        } else {
+            履歴番号 = RString.EMPTY;
+        }
+        LockingKey key = new LockingKey(DBCSHIKIBETSUCODE.concat(shikibetsuCode.getColumnValue()).concat(DBCRIREKINO).
+                concat(履歴番号));
+
+        if (!RealInitialLocker.tryGetLock(key)) {
+            throw new PessimisticLockingException();
+        }
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        RString 介護導入形態 = shichosonSecurityJoho.get導入形態コード().value();
+        if (介護導入形態.equals(コード111)) {
+            介護導入形態 = 広域保険者;
+        }
+        if (介護導入形態.equals(コード112)) {
+            介護導入形態 = 広域市町村;
+        }
+        if (介護導入形態.equals(コード120)) {
+            介護導入形態 = 単一市町村;
+        }
+        div.getHeaderPanel().getCcdAtenaInfo().setKaigoDonyuKeitai(介護導入形態);
+        div.getHeaderPanel().getCcdAtenaInfo().setShoriType(コード);
+        div.getHeaderPanel().getCcdAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, shikibetsuCode);
+        div.getHeaderPanel().getCcdAtenaInfo().initialize();
+        div.getHeaderPanel().getCcdShikakuInfo().set被保険者番号(被保険者番号.value());
+        set資格取得事由();
+        set資格喪失事由();
+        if (後期高齢者情報 != null) {
+            div.getMeisaiPanel().getTxtRirekiNo().setValue(後期高齢者情報.get履歴番号());
+            if (!後期高齢者情報.get後期高齢被保険者番号().isNullOrEmpty()) {
+                div.getMeisaiPanel().getTxtHihokenshaNo().setValue(後期高齢者情報.get後期高齢被保険者番号());
+            }
+            if (!後期高齢者情報.get資格取得日().isNullOrEmpty()) {
+                div.getMeisaiPanel().getTxtShikakuShutokuYMD().setValue(new RDate(後期高齢者情報.get資格取得日().toString()));
+            }
+
+            if (!後期高齢者情報.get資格喪失日().isNullOrEmpty()) {
+                div.getMeisaiPanel().getTxtShikakuSoshitsuYMD().setValue(new RDate(後期高齢者情報.get資格喪失日().toString()));
+            }
+            if (後期高齢者情報.get登録区分().equals(new RString("1"))) {
+                List<RString> keys = new ArrayList<>();
+                keys.add(new RString("key0"));
+                div.getMeisaiPanel().getChkTorokuKubun().setSelectedItemsByKey(keys);
+            }
+            if (!後期高齢者情報.get保険者適用開始日().isNullOrEmpty()) {
+                div.getMeisaiPanel().getTxtHokenshaKaishiYMD().setValue(new RDate(後期高齢者情報.get保険者適用開始日().toString()));
+            }
+            if (!後期高齢者情報.get保険者適用終了日().isNullOrEmpty()) {
+                div.getMeisaiPanel().getTxtHokenshaShuryoYMD().setValue(new RDate(後期高齢者情報.get保険者適用終了日().toString()));
+            }
+            if (!後期高齢者情報.get資格取得事由コード().isNullOrEmpty()) {
+                div.getMeisaiPanel().getDdlShikakuShutokuJiyu().setSelectedKey(後期高齢者情報.get資格取得事由コード());
+            }
+            if (!後期高齢者情報.get資格喪失事由コード().isNullOrEmpty()) {
+                div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().setSelectedKey(後期高齢者情報.get資格喪失事由コード());
+            }
+            if (!後期高齢者情報.get個人区分コード().isNullOrEmpty()) {
+                div.getMeisaiPanel().getDdlKojinKubunCode().setSelectedKey(後期高齢者情報.get個人区分コード());
+            }
+        }
+        if (!DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期ＩＦ種類, RDate.getNowDate(), SubGyomuCode.DBC介護給付).
+                equals(コード)) {
+            div.getMeisaiPanel().getTxtHokenshaKaishiYMD().setReadOnly(true);
+            div.getMeisaiPanel().getTxtHokenshaShuryoYMD().setReadOnly(true);
+            div.getMeisaiPanel().getDdlShikakuShutokuJiyu().setReadOnly(true);
+            div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().setReadOnly(true);
+            div.getMeisaiPanel().getDdlKojinKubunCode().setReadOnly(true);
+        }
+
+    }
+
+    /**
+     * 前排他キーの解除
+     *
+     * @param shikibetsuCode ShikibetsuCode
+     * @param rirekiNo RString
+     */
+    public void 前排他キーの解除(ShikibetsuCode shikibetsuCode, RString rirekiNo) {
+        LockingKey 排他キー = new LockingKey(DBCSHIKIBETSUCODE.concat(shikibetsuCode.getColumnValue()).
+                concat(DBCRIREKINO).concat(rirekiNo));
+        RealInitialLocker.release(排他キー);
+    }
+
+    private void set資格取得事由() {
+        List<KeyValueDataSource> dataSources = new ArrayList<>();
+        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.転入));
+        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.年齢到達));
+        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.外国人));
+        dataSources.add(get資格取得事由(ShikakuShutokuJiyu._２号申請));
+        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.他特例居住));
+        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.除外者居住));
+        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.帰化));
+        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.国籍取得));
+        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.職権取得));
+        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.施行時取得));
+        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.その他));
+        div.getMeisaiPanel().getDdlShikakuShutokuJiyu().setDataSource(dataSources);
+    }
+
+    private void set資格喪失事由() {
+        List<KeyValueDataSource> dataSources = new ArrayList<>();
+        dataSources.add(get資格喪失事由(ShikakuSoshitsuJiyu.転出));
+        dataSources.add(get資格喪失事由(ShikakuSoshitsuJiyu.死亡));
+        dataSources.add(get資格喪失事由(ShikakuSoshitsuJiyu.除外者));
+        dataSources.add(get資格喪失事由(ShikakuSoshitsuJiyu.自特例解除));
+        dataSources.add(get資格喪失事由(ShikakuSoshitsuJiyu.国籍喪失));
+        dataSources.add(get資格喪失事由(ShikakuSoshitsuJiyu.他特例者));
+        dataSources.add(get資格喪失事由(ShikakuSoshitsuJiyu.職権喪失));
+        dataSources.add(get資格喪失事由(ShikakuSoshitsuJiyu.その他));
+        div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().setDataSource(dataSources);
+    }
+
+    private KeyValueDataSource get資格取得事由(ShikakuShutokuJiyu 資格取得事由) {
+        return new KeyValueDataSource(資格取得事由.getコード(), 資格取得事由.get名称());
+    }
+
+    private KeyValueDataSource get資格喪失事由(ShikakuSoshitsuJiyu 資格喪失事由) {
+        return new KeyValueDataSource(資格喪失事由.getコード(), 資格喪失事由.get名称());
+    }
+}

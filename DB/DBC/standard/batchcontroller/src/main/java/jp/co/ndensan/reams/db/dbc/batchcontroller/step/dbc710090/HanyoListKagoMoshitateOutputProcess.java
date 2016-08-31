@@ -168,7 +168,6 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
 
     private List<RString> get抽出条件() {
         List<RString> 抽出条件 = new ArrayList<>();
-        RString temp;
         抽出条件.add(TITLE_抽出対象者);
         if (parameter.get保険者コード() != null && !LasdecCode.EMPTY.equals(parameter.get保険者コード())) {
             Association association = AssociationFinderFactory.
@@ -177,7 +176,7 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
         }
         if ((parameter.get国保連送付年月From() != null && !FlexibleYearMonth.EMPTY.equals(parameter.get国保連送付年月From()))
                 || (parameter.get国保連送付年月To() != null && !FlexibleYearMonth.EMPTY.equals(parameter.get国保連送付年月To()))) {
-            temp = TITLE_国保連送付年月;
+            RString temp = TITLE_国保連送付年月;
             if (parameter.get国保連送付年月From() != null && !FlexibleYearMonth.EMPTY.equals(parameter.get国保連送付年月From())) {
                 temp = temp.concat(dateFormat(parameter.get国保連送付年月From())).concat(RString.FULL_SPACE);
             }
@@ -187,10 +186,17 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
             }
             抽出条件.add(temp);
         }
-        抽出条件.add(TITLE_過誤申立給付区分.concat(KagoMoshitateHokenshaKubun.toValue(parameter.get過誤申立給付区分()).get名称()));
+        get抽出条件Part2(抽出条件);
+        return 抽出条件;
+    }
+
+    private void get抽出条件Part2(List<RString> 抽出条件) {
+        if (!RString.isNullOrEmpty(parameter.get過誤申立給付区分())) {
+            抽出条件.add(TITLE_過誤申立給付区分.concat(KagoMoshitateHokenshaKubun.toValue(parameter.get過誤申立給付区分()).get名称()));
+        }
         if ((parameter.getサービス提供年月From() != null && !FlexibleYearMonth.EMPTY.equals(parameter.getサービス提供年月From()))
                 || (parameter.getサービス提供年月To() != null && !FlexibleYearMonth.EMPTY.equals(parameter.getサービス提供年月To()))) {
-            temp = TITLE_サービス提供年月;
+            RString temp = TITLE_サービス提供年月;
             if (parameter.getサービス提供年月From() != null && !FlexibleYearMonth.EMPTY.equals(parameter.getサービス提供年月From())) {
                 temp = temp.concat(dateFormat(parameter.getサービス提供年月From())).concat(RString.FULL_SPACE);
             }
@@ -204,7 +210,6 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
             抽出条件.add(TITLE_事業者.concat(括弧LEFT).concat(parameter.get事業者コード()).
                     concat(括弧RIGHT).concat(parameter.get事業者名()));
         }
-        return 抽出条件;
     }
 
     private RString dateFormat(FlexibleYearMonth date) {
