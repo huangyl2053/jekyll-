@@ -41,6 +41,7 @@ public class HanyoListParameteHandler {
     private static final RString 不支給 = new RString("Key2");
     private static final RString 窓口払 = new RString("key1");
     private static final RString BLANK = new RString("0");
+    private static final RString 全市町村 = new RString("全市町村");
     private static final int 調定年度を含めて8年分 = 8;
     private static final ReportId 帳票ID = new ReportId("DBC701017_HanyoList_KogakuGassanShikyugakuKettei");
 
@@ -170,7 +171,11 @@ public class HanyoListParameteHandler {
         parameter.set項目名付加(is項目名付加);
         parameter.set連番付加(is連番付加);
         parameter.set日付スラッシュ付加(is日付編集);
-        parameter.set保険者コード(panel.getCcdHokenshaList().getSelectedItem().get市町村コード());
+
+        if (!panel.getCcdHokenshaList().isDisabled() && !panel.getCcdHokenshaList().getSelectedItem().get市町村名称().equals(全市町村)) {
+            parameter.set保険者コード(panel.getCcdHokenshaList().getSelectedItem().get市町村コード());
+
+        }
 
         if (div.getCcdShutsuryokujun().get出力順ID() == null) {
             parameter.set出力順(RString.EMPTY);
