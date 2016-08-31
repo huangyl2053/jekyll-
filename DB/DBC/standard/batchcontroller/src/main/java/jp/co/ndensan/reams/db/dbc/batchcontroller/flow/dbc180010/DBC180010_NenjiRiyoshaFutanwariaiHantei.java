@@ -42,7 +42,7 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
     private static final RString 負担割合判定一覧BATCH_ID = new RString("FutanWariaiIchiranFlow");
     private static final RString 利用者負担割合判定BATCH_ID = new RString("RiyoshaFutanwariaiHanteiCommonFlow");
     private static final String 処理日付管理マスタAND受給管理情報の更新 = "updateDate";
-    private static final RString 再処理前 = new RString("3");
+    private static final RString 再処理前 = new RString("2");
 
     @Override
     protected void defineFlow() {
@@ -51,7 +51,7 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
         executeStep(申請中データを削除する);
         executeStep(判定対象者TEMPに受給者データを追加する);
         executeStep(判定対象者TEMPに総合事業データを追加する);
-        if (再処理前.equals(getParameter().get処理区分())) {
+        if (再処理前.equals(getParameter().get処理状態())) {
             executeStep(利用者負担割合を削除する);
             executeStep(利用者負担割合明細を削除する);
             executeStep(利用者負担割合世帯員を削除する);

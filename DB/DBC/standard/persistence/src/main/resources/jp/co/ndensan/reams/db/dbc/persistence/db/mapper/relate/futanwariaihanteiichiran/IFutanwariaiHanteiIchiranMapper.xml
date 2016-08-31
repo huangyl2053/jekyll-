@@ -119,12 +119,12 @@
             前回利用者負担割合判定Temp."sonotanoGoukeiShotokuKingakuGoukei" as maeSonotanoGoukeiShotokuKingakuGoukei,
             判定対象者Temp."hihokenshaKubunCode" as HanteiTaishoshaTemp_hihokenshaKubunCode,
             判定対象者Temp."shikakuShiyutokiDate" as HanteiTaishoshaTemp_shikakuShiyutokiYMD,
-            判定対象者Temp."firstShikakuShiyutokiDate" as HanteiTaishoshaTemp_shikakuShutokuTodokedeYMD,
+            判定対象者Temp."shikakuSoshitsuDate" as HanteiTaishoshaTemp_shikakuSoshitsuDate,
             判定対象者Temp."ninteiYukoKaishiDate" as HanteiTaishoshaTemp_ninteiYukoKaishiDate,
             判定対象者Temp."ninteiYukoShuryoDate" as HanteiTaishoshaTemp_ninteiYukoShuryoDate,
             判定対象者Temp."shikibetsuCode" as HanteiTaishoshaTemp_shikibetsuCode,
             判定対象者Temp."kazeiKubun" as HanteiTaishoshaTemp_kazeiKubun,
-            <!--判定対象者Temp."HanteiTaishoshaTemp_dataKubun",-->
+            判定対象者Temp."dataKubun" as "HanteiTaishoshaTemp_dataKubun",
             判定対象者Temp."yoKaigoninteiJoutaiKubunCode" as HanteiTaishoshaTemp_yoKaigoninteiJoutaiKubunCode,
             判定対象者Temp."kyuSochishaFlag" as HanteiTaishoshaTemp_kyuSochishaFlag,
             生活保護受給者."shikibetsuCode",
@@ -198,7 +198,7 @@
                          AND 利用者負担額減額."tekiyoShuryoYMD" = ''))
            </if>
            LEFT OUTER JOIN
-            rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
+            rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
             '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
              true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名PSM
            ON  宛名PSM."shikibetsuCode" = 判定対象者Temp."shikibetsuCode"
@@ -226,7 +226,7 @@
         <result property="前回その他の合計所得金額合計" column="maeSonotanoGoukeiShotokuKingakuGoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="被保険者区分コード" column="HanteiTaishoshaTemp_hihokenshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="資格取得年月日" column="HanteiTaishoshaTemp_shikakuShiyutokiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="資格喪失年月日" column="HanteiTaishoshaTemp_shikakuShutokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格喪失年月日" column="HanteiTaishoshaTemp_shikakuSoshitsuDate" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="認定有効期間開始年月日" column="HanteiTaishoshaTemp_ninteiYukoKaishiDate" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="認定有効期間終了年月日" column="HanteiTaishoshaTemp_ninteiYukoShuryoDate" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="判定対象者識別コード" column="HanteiTaishoshaTemp_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -241,7 +241,7 @@
     <resultMap id="前回利用者負担割合判定ResultMap" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaihanteiichiran.MaeRiyoshaFutanWariaiHanteiEntity">
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="koseiJiyu" column="koseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koseiJiyu" column="koseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="nendo" column="nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="futanWariaiKubun" column="futanWariaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="honninGoukeiShotokuGaku" column="honninGoukeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
