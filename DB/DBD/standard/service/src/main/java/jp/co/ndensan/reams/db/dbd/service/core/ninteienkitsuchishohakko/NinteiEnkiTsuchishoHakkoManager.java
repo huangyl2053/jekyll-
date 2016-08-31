@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.ninteienkitsuchishohakko
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteienkitsuchishohakko.NinteiEnkiTsuchishoHakkoEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteienkitsuchishohakko.INinteiEnkiTsuchishoHakkoMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
@@ -21,9 +22,12 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -158,6 +162,23 @@ public class NinteiEnkiTsuchishoHakkoManager {
             return FlexibleDate.EMPTY;
         }
         return new FlexibleDate(date.toDateString());
+    }
+
+    /**
+     * 延期の理由を取得します。
+     *
+     *
+     * @return 延期の理由
+     */
+    @Transaction
+    public List<RString> get延期の理由() {
+        List<UzT0007CodeEntity> entityList
+                = CodeMaster.getCodeRireki(SubGyomuCode.DBE認定支援, DBECodeShubetsu.消費税率.getコード());
+        List<RString> 延期の理由 = new ArrayList<>();
+        for (UzT0007CodeEntity entity : entityList) {
+            延期の理由.add(entity.getコード名称());
+        }
+        return 延期の理由;
     }
 
 }

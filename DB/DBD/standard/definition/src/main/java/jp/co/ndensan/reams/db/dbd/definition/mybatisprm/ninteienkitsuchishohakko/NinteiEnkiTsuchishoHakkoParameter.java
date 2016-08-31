@@ -99,7 +99,7 @@ public class NinteiEnkiTsuchishoHakkoParameter implements IMyBatisParameter {
         this.申請区分_区分変更申請 = new RString(NinteiShinseiKubunShinsei.区分変更申請.コード());
         if (!発行有無KeyList.contains(KEY0)) {
             this.is発行有無_発行未チェックON = 発行有無KeyList.contains(KEY1) && !発行有無KeyList.contains(KEY2);
-            this.is発行有無_発行済チェックON = 発行有無KeyList.contains(KEY2) && 発行有無KeyList.contains(KEY1);
+            this.is発行有無_発行済チェックON = 発行有無KeyList.contains(KEY2) && !発行有無KeyList.contains(KEY1);
         }
         this.みなし２号等対象フラグ = KEY0.equals(みなし２号Key);
         if (処理見込み日From != null) {
