@@ -63,7 +63,7 @@ public class ShinseishoTorokuValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         validPairs.add(new ValidationMessageControlPair(new ShinseishoTorokuValidationMessages(
                 UrErrorMessages.項目に対する制約,
-                世帯員把握基準日.toString(), 処理年度の範囲.toString().replace(引数_XX, 処理年度.toDateString()).replace(引数_XXX, 処理年度.plusYear(INDEX_1).toString())), div.getTxtSetaiinHaakuKijunYMD()));
+                世帯員把握基準日.toString(), 処理年度の範囲.toString().replace(引数_XX, 処理年度.wareki().toString()).replace(引数_XXX, 処理年度.plusYear(INDEX_1).wareki().toString())), div.getTxtSetaiinHaakuKijunYMD()));
         return validPairs;
     }
 
