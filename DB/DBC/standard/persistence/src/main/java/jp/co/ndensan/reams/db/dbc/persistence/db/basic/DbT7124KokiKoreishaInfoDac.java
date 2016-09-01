@@ -60,7 +60,7 @@ public class DbT7124KokiKoreishaInfoDac implements ISaveable<DbT7124KokiKoreisha
     @Transaction
     @Override
     public int save(DbT7124KokiKoreishaInfoEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("支払方法変更減額明細エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("後期高齢者情報エンティティ"));
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

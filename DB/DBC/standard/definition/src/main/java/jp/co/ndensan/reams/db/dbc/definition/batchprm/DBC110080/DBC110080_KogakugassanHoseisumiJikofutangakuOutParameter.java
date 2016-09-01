@@ -5,28 +5,45 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110080;
 
+import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakugassan.KogakugassanProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 
 /**
- * 高額合算補正済自己負担額情報作成（国保連分）のParameter
+ * 高額合算補正済自己負担額情報作成のバッチパラメータです。
  *
- * @reamsid_L DBC-3300-050 wangxingpeng
+ * @reamsid_L DBC-2660-030 gongliang
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBC110080_KogakugassanHoseisumiJikofutangakuOutParameter extends BatchParameterBase {
 
-    private static final String KEY_処理年月 = "処理年月";
-    private static final String KEY_再処理区分 = "再処理区分";
-    private static final String KEY_出力順ID = "出力順ID";
-    @BatchParameter(key = KEY_処理年月, name = "処理年月")
-    private RYearMonth 処理年月;
-    @BatchParameter(key = KEY_再処理区分, name = "再処理区分")
-    private RString 再処理区分;
-    @BatchParameter(key = KEY_出力順ID, name = "出力順ID")
-    private RString 出力順ID;
+    private static final String KEY_SHORIYM = "shoriYM";
+    private static final String NAME_SHORIYM = "処理年月";
+    private static final String KEY_SAISHORIKUBUN = "saishoriKubun";
+    private static final String NAME_SAISHORIKUBUN = "再処理区分";
+    private static final String KEY_SHUTSURYOKUJUNID = "shutsuryokujunId";
+    private static final String NAME_SHUTSURYOKUJUNID = "出力順ID";
+
+    @BatchParameter(key = KEY_SHORIYM, name = NAME_SHORIYM)
+    private FlexibleYearMonth shoriYM;
+    @BatchParameter(key = KEY_SAISHORIKUBUN, name = NAME_SAISHORIKUBUN)
+    private RString saishoriKubun;
+    @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = NAME_SHUTSURYOKUJUNID)
+    private RString shutsuryokujunId;
+
+    /**
+     * Processパラメータ作成メソッドです。
+     *
+     * @param now YMDHMS
+     * @return Processパラメータ
+     */
+    public KogakugassanProcessParameter toKogakugassanProcessParameter(YMDHMS now) {
+        return new KogakugassanProcessParameter(shoriYM, saishoriKubun, shutsuryokujunId, now);
+    }
+
 }

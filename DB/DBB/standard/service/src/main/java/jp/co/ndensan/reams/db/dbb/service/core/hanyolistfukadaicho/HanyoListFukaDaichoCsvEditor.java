@@ -211,16 +211,17 @@ public class HanyoListFukaDaichoCsvEditor {
                     UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
                     new Code(賦課台帳.get特別徴収義務者コード())));
         }
-        if (賦課台帳.get介護徴収方法().getHonNenkinCode() != null
-                && 賦課台帳.get介護徴収方法().getKariNenkinCode() != null) {
+        RString 本徴収年金コード = 賦課台帳.get介護徴収方法().getHonNenkinCode();
+        RString 仮徴収年金コード = 賦課台帳.get介護徴収方法().getKariNenkinCode();
+        if (本徴収年金コード != null && 仮徴収年金コード != null) {
             if (賦課台帳.is本算定後()) {
                 csvEntity.set年金種類(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
                         UEXCodeShubetsu.年金コード.getCodeShubetsu(),
-                        new Code(賦課台帳.get介護徴収方法().getHonNenkinCode())));
+                        new Code(本徴収年金コード.substring(0, INT_THREE))));
             } else {
                 csvEntity.set年金種類(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
                         UEXCodeShubetsu.年金コード.getCodeShubetsu(),
-                        new Code(賦課台帳.get介護徴収方法().getKariNenkinCode())));
+                        new Code(仮徴収年金コード.substring(0, INT_THREE))));
             }
         }
         if (賦課台帳.get介護徴収方法().getHonHosokuM() != null

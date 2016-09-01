@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130;
 
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1002KokuhorenSakuseiErrorTempEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -24,7 +25,6 @@ public class HokenshaKyufujissekiOutDoErrorProcess extends BatchProcessBase<DbWT
     private static final RString TABLE_NAME = new RString("DbWT1002KokuhorenSakuseiError");
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hokenshakyufujissekiout."
             + "IHokenshaKyufujissekiOutMapper.doエラー登録");
-    private static final RString エラーコード = new RString("03");
     @BatchWriter
     BatchEntityCreatedTempTableWriter dbWT0001TableWriter;
 
@@ -43,7 +43,7 @@ public class HokenshaKyufujissekiOutDoErrorProcess extends BatchProcessBase<DbWT
     protected void process(DbWT1001HihokenshaTempEntity entity) {
         DbWT1002KokuhorenSakuseiErrorTempEntity dbWT1002 = new DbWT1002KokuhorenSakuseiErrorTempEntity();
         dbWT1002.setHihokenshaNo(entity.getExHihokenshaNo());
-        dbWT1002.setErrorKubun(エラーコード);
+        dbWT1002.setErrorKubun(KokuhorenJoho_SakuseiErrorKubun.被保険者_宛名情報取得エラー.getコード());
         dbWT0001TableWriter.insert(dbWT1002);
     }
 
