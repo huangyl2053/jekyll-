@@ -62,6 +62,17 @@ public class MaeFutanWariaiHanteiIchiranTempProcess extends BatchKeyBreakBase<Ma
             前回利用者負担割合判定List.add(entity);
             return;
         }
+        edit利用者負担割合判定();
+        前回利用者負担割合判定List = new ArrayList<>();
+        前回利用者負担割合判定List.add(entity);
+    }
+
+    @Override
+    protected void afterExecute() {
+        edit利用者負担割合判定();
+    }
+
+    private void edit利用者負担割合判定() {
         if (前回利用者負担割合判定List.size() == INT_1) {
             RiyoshaFutanWariaiHanteiEntity riyoshaFutanWariaiHanteiEntity = new RiyoshaFutanWariaiHanteiEntity();
             riyoshaFutanWariaiHanteiEntity.setHihokenshaNo(前回利用者負担割合判定List.get(0).getHihokenshaNo());
@@ -97,12 +108,6 @@ public class MaeFutanWariaiHanteiIchiranTempProcess extends BatchKeyBreakBase<Ma
             riyoshaFutanWariaiHanteiEntity.setYukoShuryoYMD(前回利用者負担割合判定List.get(0).getYukoShuryoYMD());
             tempDbWriter.insert(riyoshaFutanWariaiHanteiEntity);
         }
-        前回利用者負担割合判定List = new ArrayList<>();
-        前回利用者負担割合判定List.add(entity);
-    }
-
-    @Override
-    protected void afterExecute() {
     }
 
 }
