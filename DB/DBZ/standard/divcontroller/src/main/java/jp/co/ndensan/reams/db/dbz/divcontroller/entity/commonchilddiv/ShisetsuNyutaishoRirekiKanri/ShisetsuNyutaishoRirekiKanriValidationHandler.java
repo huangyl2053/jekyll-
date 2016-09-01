@@ -44,10 +44,7 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
      */
     public ValidationMessageControlPairs validateForUpdate() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue() == null
-                || div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
-//            validPairs.add(new ValidationMessageControlPair(RRVMessages.入所日, div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
-        } else {
+        if (!div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
             if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue() != null
                     && !div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()
                     && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().
@@ -58,9 +55,7 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
                         div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
             }
         }
-//        if (RString.isNullOrEmpty(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo())) {
-//            validPairs.add(new ValidationMessageControlPair(RRVMessages.入所施設コード));
-//        }
+        
         if (RString.isNullOrEmpty(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類())) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.施設種類));
         }
