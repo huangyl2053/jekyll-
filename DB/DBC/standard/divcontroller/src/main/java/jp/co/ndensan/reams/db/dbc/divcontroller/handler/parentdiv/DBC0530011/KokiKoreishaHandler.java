@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0530011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokiKoreishaInfo;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.KokiKoreishaDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -30,9 +30,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  *
  * @reamsid_L DBD-5740-010 liuyl
  */
-public class MainPanelHandler {
+public class KokiKoreishaHandler {
 
-    private final MainPanelDiv div;
+    private final KokiKoreishaDiv div;
     private static final RString コード = new RString("2");
     private static final RString コード111 = new RString("111");
     private static final RString コード112 = new RString("112");
@@ -48,7 +48,7 @@ public class MainPanelHandler {
      *
      * @param div 画面DIV
      */
-    public MainPanelHandler(MainPanelDiv div) {
+    public KokiKoreishaHandler(KokiKoreishaDiv div) {
         this.div = div;
     }
 
@@ -122,11 +122,11 @@ public class MainPanelHandler {
         }
         if (!DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期ＩＦ種類, RDate.getNowDate(), SubGyomuCode.DBC介護給付).
                 equals(コード)) {
-            div.getMeisaiPanel().getTxtHokenshaKaishiYMD().setReadOnly(true);
-            div.getMeisaiPanel().getTxtHokenshaShuryoYMD().setReadOnly(true);
-            div.getMeisaiPanel().getDdlShikakuShutokuJiyu().setReadOnly(true);
-            div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().setReadOnly(true);
-            div.getMeisaiPanel().getDdlKojinKubunCode().setReadOnly(true);
+            div.getMeisaiPanel().getTxtHokenshaKaishiYMD().setVisible(false);
+            div.getMeisaiPanel().getTxtHokenshaShuryoYMD().setVisible(false);
+            div.getMeisaiPanel().getDdlShikakuShutokuJiyu().setVisible(false);
+            div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().setVisible(false);
+            div.getMeisaiPanel().getDdlKojinKubunCode().setVisible(false);
         }
 
     }

@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0530011
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokiKoreishaInfo;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.DBC0530011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.DBC0530011TransitionEventName;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.MainPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0530011.MainPanelHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0530011.MainPanelValidationHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.KokiKoreishaDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0530011.KokiKoreishaHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0530011.KokiKoreishaValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KokiKoreishaInfoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  *
  * @reamsid_L DBD-5740-010 liuyl
  */
-public class MainPanel {
+public class KokiKoreisha {
 
     /**
      * 画面初期化です。
@@ -37,7 +37,7 @@ public class MainPanel {
      * @param div MainPanelDiv
      * @return ResponseData<MainPanelDiv>
      */
-    public ResponseData<MainPanelDiv> onLoad(MainPanelDiv div) {
+    public ResponseData<KokiKoreishaDiv> onLoad(KokiKoreishaDiv div) {
 //        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = new HihokenshaNo(new RString("0000000001"));
         ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("000000000000010"));
@@ -61,7 +61,7 @@ public class MainPanel {
      * @param div MainPanelDiv
      * @return ResponseData<MainPanelDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_back(MainPanelDiv div) {
+    public ResponseData<KokiKoreishaDiv> onClick_back(KokiKoreishaDiv div) {
         getHandler(div).前排他キーの解除(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
                 ViewStateHolder.get(ViewStateKeys.履歴番号, RString.class));
         return ResponseData.of(div).forwardWithEventName(DBC0530011TransitionEventName.対象者検索へ戻る).respond();
@@ -73,8 +73,8 @@ public class MainPanel {
      * @param div MainPanelDiv
      * @return ResponseData<MainPanelDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_Save(MainPanelDiv div) {
-        MainPanelValidationHandler validation = new MainPanelValidationHandler();
+    public ResponseData<KokiKoreishaDiv> onClick_Save(KokiKoreishaDiv div) {
+        KokiKoreishaValidationHandler validation = new KokiKoreishaValidationHandler();
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         validation.保険者適用期間大小関係チェック(pairs, div);
         validation.資格期間大小関係チェック(pairs, div);
@@ -166,7 +166,7 @@ public class MainPanel {
         return ResponseData.of(div).setState(DBC0530011StateName.完了);
     }
 
-    private MainPanelHandler getHandler(MainPanelDiv div) {
-        return new MainPanelHandler(div);
+    private KokiKoreishaHandler getHandler(KokiKoreishaDiv div) {
+        return new KokiKoreishaHandler(div);
     }
 }

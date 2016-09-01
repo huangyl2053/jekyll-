@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
  *
  * @reamsid_L DBD-5740-010 liuyl
  */
-public enum MainPanelDivSpec implements IPredicate<MainPanelDiv> {
+public enum KokiKoreishaDivSpec implements IPredicate<KokiKoreishaDiv> {
     資格期間大小関係チェック {
         /**
          * 資格期間大小関係チェックです。
@@ -20,7 +20,7 @@ public enum MainPanelDivSpec implements IPredicate<MainPanelDiv> {
          * @return boolean
          */
         @Override
-        public boolean apply(MainPanelDiv div) {
+        public boolean apply(KokiKoreishaDiv div) {
             if (div.getMeisaiPanel().getTxtShikakuSoshitsuYMD().getValue() != null && div.getMeisaiPanel().
                     getTxtShikakuShutokuYMD().getValue() != null) {
                 return div.getMeisaiPanel().getTxtShikakuShutokuYMD().getValue().isBeforeOrEquals(div.getMeisaiPanel().
@@ -37,7 +37,7 @@ public enum MainPanelDivSpec implements IPredicate<MainPanelDiv> {
          * @return boolean
          */
         @Override
-        public boolean apply(MainPanelDiv div) {
+        public boolean apply(KokiKoreishaDiv div) {
             if (div.getMeisaiPanel().getTxtHokenshaKaishiYMD().getValue() != null && div.getMeisaiPanel().
                     getTxtHokenshaShuryoYMD().getValue() != null) {
                 return div.getMeisaiPanel().getTxtHokenshaKaishiYMD().getValue().isBeforeOrEquals(div.getMeisaiPanel().
