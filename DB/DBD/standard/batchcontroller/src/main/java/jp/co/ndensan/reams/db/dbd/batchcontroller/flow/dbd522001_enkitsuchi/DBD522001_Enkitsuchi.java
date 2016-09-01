@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.enkitsuchisho;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd522001_enkitsuchi;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.enkitsuchisho.EnkiTsuchishoJyohoReportProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.enkitsuchisho.EnkiTsuchishohakenIchiranhyoJyohoReportProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5220001.NinteiEnkiTsuchishoHakkoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd522001.DBD522001_EnkitsuchiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-1410-020 chenxin
  */
-public class EnkiTsuchishoFlow extends BatchFlowBase<NinteiEnkiTsuchishoHakkoParameter> {
+public class DBD522001_Enkitsuchi extends BatchFlowBase<DBD522001_EnkitsuchiParameter> {
 
     private static final String 画面モードが検索モード = "1";
     private static final String 画面モードが通知書モード = "2";

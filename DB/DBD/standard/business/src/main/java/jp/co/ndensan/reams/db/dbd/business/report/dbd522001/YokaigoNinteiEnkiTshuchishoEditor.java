@@ -82,13 +82,13 @@ class YokaigoNinteiEnkiTshuchishoEditor implements IYokaigoNinteiEnkiTshuchishoE
             }
             source.riyu1 = dbT4101entity.getEnkiRiyu();
             FlexibleDate enkiMikomiKaishiYMD = dbT4101entity.getEnkiMikomiKaishiYMD();
-            if (enkiMikomiKaishiYMD != null && enkiMikomiKaishiYMD.isWareki()) {
+            if (enkiMikomiKaishiYMD != null && !enkiMikomiKaishiYMD.isEmpty() && enkiMikomiKaishiYMD.isWareki()) {
                 source.shoriMikomiKaishiYMD = enkiMikomiKaishiYMD
                         .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
             }
             FlexibleDate enkiMikomiShuryoYMD = dbT4101entity.getEnkiMikomiShuryoYMD();
-            if (enkiMikomiShuryoYMD != null && enkiMikomiShuryoYMD.isWareki()) {
+            if (enkiMikomiShuryoYMD != null && !enkiMikomiShuryoYMD.isEmpty() && enkiMikomiShuryoYMD.isWareki()) {
                 source.shoriMikomiShuryoYMD = enkiMikomiShuryoYMD
                         .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
