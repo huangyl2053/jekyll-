@@ -8,10 +8,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0520011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhoShikakuInfo;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0520011.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0520011.KokuhoShikakuInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhoShikakuInfoManager;
+import jp.co.ndensan.reams.db.dbd.definition.core.hikazeinenkin.TorokuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -20,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -30,26 +32,18 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @reamsid_L DBD-5730-010 tianyh
  */
-public class MainPanelHandler {
+public class KokuhoShikakuInfoPanelHandler {
 
-    private final MainPanelDiv div;
-
+    private final KokuhoShikakuInfoPanelDiv div;
+    private KokuhoShikakuInfo 国保資格詳細情報;
     private static final RString コード = new RString("2");
-    private static final RString コード111 = new RString("111");
-    private static final RString コード112 = new RString("112");
-    private static final RString コード120 = new RString("120");
-    private static final RString コード211 = new RString("211");
-    private static final RString 単一市町村 = new RString("1");
-    private static final RString 広域市町村 = new RString("2");
-    private static final RString 広域保険者 = new RString("3");
-    private static final RString 広域審査会 = new RString("4");
 
     /**
      * コンストラクタです。
      *
      * @param div mainPanelDiv
      */
-    public MainPanelHandler(MainPanelDiv div) {
+    public KokuhoShikakuInfoPanelHandler(KokuhoShikakuInfoPanelDiv div) {
         this.div = div;
     }
 
@@ -62,55 +56,52 @@ public class MainPanelHandler {
     public void initialize(ShikibetsuCode shikibetsuCode, HihokenshaNo 被保険者番号) {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         RString 介護導入形態 = shichosonSecurityJoho.get導入形態コード().value();
-        if (介護導入形態.equals(コード111)) {
-            介護導入形態 = 広域保険者;
+        if (DonyuKeitaiCode.事務広域.getCode().equals(介護導入形態)) {
+            介護導入形態 = HokenshaKosei.広域保険者.getコード();
         }
-        if (介護導入形態.equals(コード112)) {
-            介護導入形態 = 広域市町村;
+        if (DonyuKeitaiCode.事務単一.getCode().equals(介護導入形態)) {
+            介護導入形態 = HokenshaKosei.単一市町村.getコード();
         }
-        if (介護導入形態.equals(コード120)) {
-            介護導入形態 = 単一市町村;
-        }
-        if (介護導入形態.equals(コード211)) {
-            介護導入形態 = 広域審査会;
+        if (DonyuKeitaiCode.事務構成市町村.getCode().equals(介護導入形態)) {
+            介護導入形態 = HokenshaKosei.広域市町村.getコード();
         }
         div.getHeaderPanel().getCcdAtenaInfo().setKaigoDonyuKeitai(介護導入形態);
         div.getHeaderPanel().getCcdAtenaInfo().setShoriType(コード);
         div.getHeaderPanel().getCcdAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, shikibetsuCode);
         div.getHeaderPanel().getCcdAtenaInfo().initialize();
-        div.getHeaderPanel().getCcdShikakuInfo().set被保険者番号(被保険者番号.value());
-        KokuhoShikakuInfoManager kokuhoShikakuInfoManager = new KokuhoShikakuInfoManager();
-        KokuhoShikakuInfo kokuhoShikakuInfo = kokuhoShikakuInfoManager.get国保資格詳細情報(shikibetsuCode);
-        if (kokuhoShikakuInfo != null) {
-            if (kokuhoShikakuInfo.get国保保険証番号() != null && !kokuhoShikakuInfo.get国保保険証番号().isEmpty()) {
-                div.getMeisaiPanel().getTxtKokuhoHokenshoNo().setValue(new Decimal(kokuhoShikakuInfo.get国保保険証番号().toString()));
+        div.getHeaderPanel().getCcdShikakuInfo().initialize(shichosonSecurityJoho.get市町村情報().get市町村コード().value(), 被保険者番号.value());
+        KokuhoShikakuInfoManager kokuhoShikakuInfoManager = KokuhoShikakuInfoManager.createInstance();
+        国保資格詳細情報 = kokuhoShikakuInfoManager.get国保資格詳細情報(shikibetsuCode);
+        if (国保資格詳細情報 != null) {
+            if (国保資格詳細情報.get国保保険証番号() != null && !国保資格詳細情報.get国保保険証番号().isEmpty()) {
+                div.getMeisaiPanel().getTxtKokuhoHokenshoNo().setValue(new Decimal(国保資格詳細情報.get国保保険証番号().toString()));
             }
-            if (kokuhoShikakuInfo.get国保個人番号() != null && !kokuhoShikakuInfo.get国保個人番号().isEmpty()) {
-                div.getMeisaiPanel().getTxtKokuhoKojinNo().setValue(kokuhoShikakuInfo.get国保個人番号());
+            if (国保資格詳細情報.get国保個人番号() != null && !国保資格詳細情報.get国保個人番号().isEmpty()) {
+                div.getMeisaiPanel().getTxtKokuhoKojinNo().setValue(国保資格詳細情報.get国保個人番号());
             }
             div.getMeisaiPanel().getTxtShikakuShutokuYMD().setValue(
-                    new RDate(edit日付パターン1(new FlexibleDate(kokuhoShikakuInfo.get資格取得日())).toString()));
+                    new RDate(国保資格詳細情報.get資格取得日().toString()));
             div.getMeisaiPanel().getTxtShikakuSoshitsuYMD().setValue(
-                    new RDate(edit日付パターン1(new FlexibleDate(kokuhoShikakuInfo.get資格喪失日())).toString()));
-            div.getMeisaiPanel().getTxtKokuhoNo().setValue(kokuhoShikakuInfo.get国保番号());
+                    new RDate(国保資格詳細情報.get資格喪失日().toString()));
+            div.getMeisaiPanel().getTxtKokuhoNo().setValue(国保資格詳細情報.get国保番号());
             List<RString> keys = new ArrayList<>();
-            if (kokuhoShikakuInfo.get登録区分().equals(new RString("1"))) {
+            if (TorokuKubun.取込.getコード().equals(国保資格詳細情報.get登録区分())) {
                 keys.add(new RString("key0"));
             }
             div.getMeisaiPanel().getChkTorokuKubun().setSelectedItemsByKey(keys);
             RString 文字コード = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_国保ＩＦ種類, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-            if (文字コード.equals(new RString("2"))) {
+            if (new RString("2").equals(文字コード)) {
                 div.getMeisaiPanel().getTxtTaishokuGaitoYMD().setValue(
-                        new RDate(edit日付パターン1(new FlexibleDate(kokuhoShikakuInfo.get退職該当日())).toString()));
+                        new RDate(国保資格詳細情報.get退職該当日().toString()));
                 div.getMeisaiPanel().getTxtTaishokuHigaitoYMD().setValue(
-                        new RDate(edit日付パターン1(new FlexibleDate(kokuhoShikakuInfo.get退職非該当日())).toString()));
-                div.getMeisaiPanel().getDdlKojinKubunCode().setSelectedKey(kokuhoShikakuInfo.get個人区分コード());
+                        new RDate(国保資格詳細情報.get退職非該当日().toString()));
+                div.getMeisaiPanel().getDdlKojinKubunCode().setSelectedKey(国保資格詳細情報.get個人区分コード());
             } else {
                 div.getMeisaiPanel().getTxtTaishokuGaitoYMD().setDisplayNone(true);
                 div.getMeisaiPanel().getTxtTaishokuHigaitoYMD().setDisplayNone(true);
                 div.getMeisaiPanel().getDdlKojinKubunCode().setDisplayNone(true);
             }
-            前排他の設定(shikibetsuCode, kokuhoShikakuInfo.get履歴番号());
+            前排他の設定(shikibetsuCode, 国保資格詳細情報.get履歴番号());
         }
     }
 
@@ -122,22 +113,36 @@ public class MainPanelHandler {
      */
     public boolean updateorinsert(ShikibetsuCode shikibetsuCode) {
         boolean flag = false;
-        KokuhoShikakuInfoManager kokuhoShikakuInfoManager = new KokuhoShikakuInfoManager();
-        KokuhoShikakuInfo kokuhoShikakuInfo = kokuhoShikakuInfoManager.get国保資格詳細情報(shikibetsuCode);
-        if (kokuhoShikakuInfo != null) {
-            setkokuhoShikakuInfo(kokuhoShikakuInfo);
-            if (kokuhoShikakuInfoManager.save国保資格詳細情報(kokuhoShikakuInfo)) {
-                前排他制御の解除(shikibetsuCode, kokuhoShikakuInfo.get履歴番号());
+        KokuhoShikakuInfoManager kokuhoShikakuInfoManager = KokuhoShikakuInfoManager.createInstance();
+        if (国保資格詳細情報 != null) {
+            setkokuhoShikakuInfo(国保資格詳細情報);
+            if (kokuhoShikakuInfoManager.save国保資格詳細情報(国保資格詳細情報)) {
+                前排他制御の解除(shikibetsuCode, 国保資格詳細情報.get履歴番号());
                 flag = true;
             }
         } else {
             KokuhoShikakuInfo kokuhoShikakuInfo2 = new KokuhoShikakuInfo(shikibetsuCode, new RString("0001"));
             setkokuhoShikakuInfo(kokuhoShikakuInfo2);
             if (kokuhoShikakuInfoManager.save国保資格詳細情報(kokuhoShikakuInfo2)) {
+                前排他制御の解除(shikibetsuCode, kokuhoShikakuInfo2.get履歴番号());
                 flag = true;
             }
         }
         return flag;
+    }
+
+    /**
+     * 「一覧へ戻る」ボタンの処理
+     *
+     * @param shikibetsuCode shikibetsuCode
+     * @param div FutangendogakuShinseiDiv
+     */
+    public void onClick_btnBack(ShikibetsuCode shikibetsuCode, KokuhoShikakuInfoPanelDiv div) {
+        if (国保資格詳細情報 != null) {
+            前排他制御の解除(shikibetsuCode, 国保資格詳細情報.get履歴番号());
+        } else {
+            前排他制御の解除(shikibetsuCode, new RString("0001"));
+        }
     }
 
     private void setkokuhoShikakuInfo(KokuhoShikakuInfo kokuhoShikakuInfo) {
@@ -173,10 +178,6 @@ public class MainPanelHandler {
         } else {
             kokuhoShikakuInfo.createBuilderForEdit().set登録区分(new RString("0"));
         }
-    }
-
-    private RString edit日付パターン1(FlexibleDate date) {
-        return date == null ? RString.EMPTY : date.wareki().toDateString();
     }
 
     private void 前排他の設定(ShikibetsuCode shikibetsuCode, RString rirekiNo) {

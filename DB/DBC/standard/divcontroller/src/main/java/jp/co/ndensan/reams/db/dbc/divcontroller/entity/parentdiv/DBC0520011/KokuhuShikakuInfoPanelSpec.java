@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
  *
  * @reamsid_L DBD-5730-010 tianyh
  */
-public enum MainPanelDivSpac implements IPredicate<MainPanelDiv> {
+public enum KokuhuShikakuInfoPanelSpec implements IPredicate<KokuhoShikakuInfoPanelDiv> {
 
     資格期間大小関係チェック {
                 /**
@@ -22,7 +22,7 @@ public enum MainPanelDivSpac implements IPredicate<MainPanelDiv> {
                  * @return boolean
                  */
                 @Override
-                public boolean apply(jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0520011.MainPanelDiv div) {
+                public boolean apply(jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0520011.KokuhoShikakuInfoPanelDiv div) {
                     if (div.getMeisaiPanel().getTxtShikakuSoshitsuYMD().getValue() != null && div.getMeisaiPanel().
                     getTxtShikakuShutokuYMD().getValue() != null) {
                         return div.getMeisaiPanel().getTxtShikakuShutokuYMD().getValue().isBeforeOrEquals(div.getMeisaiPanel().
