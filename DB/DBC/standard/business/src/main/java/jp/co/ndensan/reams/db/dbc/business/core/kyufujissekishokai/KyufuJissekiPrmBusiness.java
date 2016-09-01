@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKinkyuShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKyotakuService;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiMeisaiJushochiTokurei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShokujiHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShoteiShikkanShisetsuRyoyo;
@@ -54,7 +53,7 @@ public class KyufuJissekiPrmBusiness implements Serializable {
     private Boolean blnMaxKensuFG;
     private Boolean blnRirekiFG;
     private List<KyufujissekiKihon> csData_A;
-    private List<KyufujissekiMeisai> csData_B;
+    private List<KyufujissekiMeisaiBusiness> csData_B;
     private List<KyufujissekiKinkyuShisetsuRyoyo> csData_C;
     private List<KyufujissekiTokuteiSinryohi> csData_D;
     private List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> csData_J;
