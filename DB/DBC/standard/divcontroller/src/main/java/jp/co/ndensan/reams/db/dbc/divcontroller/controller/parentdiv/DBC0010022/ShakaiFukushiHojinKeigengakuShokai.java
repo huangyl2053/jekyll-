@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010022;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010022.DBC0010022TransitionEventName;
@@ -47,8 +48,11 @@ public class ShakaiFukushiHojinKeigengakuShokai {
                 サービス提供年月,
                 整理番号,
                 識別番号検索キー);
-        getHandler(div).setButton(ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class),
-                KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(サービス提供年月, 識別番号検索キー).records().get(0));
+        List<ShikibetsuNoKanri> 識別番号管理データリスト = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
+                サービス提供年月, 識別番号検索キー).records();
+        if (!識別番号管理データリスト.isEmpty()) {
+            getHandler(div).setButton(サービス提供年月, 識別番号管理データリスト.get(0));
+        }
         getHandler(div).onLoad(給付実績情報照会情報.getCsData_L(), 整理番号, div.getCcdKyufuJissekiHeader().get事業者番号(),
                 div.getCcdKyufuJissekiHeader().get様式番号(), サービス提供年月.toDateString());
         if (div.getDgShakaiFukushiHojinKeigengaku().getDataSource().isEmpty()) {
