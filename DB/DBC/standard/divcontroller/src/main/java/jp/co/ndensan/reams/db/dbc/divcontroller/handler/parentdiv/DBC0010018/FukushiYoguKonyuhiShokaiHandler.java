@@ -64,6 +64,7 @@ public class FukushiYoguKonyuhiShokaiHandler {
             rowList.add(setRowData(給付実績福祉用具販売費));
         }
         div.getDgFukushiYoguKonyuhi().setDataSource(rowList);
+        setGetsuBtn(getサービス提供年月リスト(給付実績福祉用具販売費リスト), new FlexibleYearMonth(サービス提供年月));
     }
 
     private dgFukushiYoguKonyuhi_Row setRowData(KyufujissekiFukushiYoguHanbaihiBusiness 給付実績福祉用具販売費) {
@@ -142,19 +143,21 @@ public class FukushiYoguKonyuhiShokaiHandler {
     /**
      * 前次月ボタン状態設定。
      *
-     * @param 給付実績福祉用具販売費リスト 給付実績福祉用具販売費リスト
+     * @param サービス提供年月リスト サービス提供年月リスト
      * @param サービス提供年月 サービス提供年月
      */
-    public void setGetsuBtn(List<KyufujissekiFukushiYoguHanbaihiBusiness> 給付実績福祉用具販売費リスト, FlexibleYearMonth サービス提供年月) {
-        Collections.sort(給付実績福祉用具販売費リスト, new DateComparatorServiceTeikyoYM());
+    public void setGetsuBtn(List<FlexibleYearMonth> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
 
-        if (サービス提供年月.isBeforeOrEquals(給付実績福祉用具販売費リスト.get(給付実績福祉用具販売費リスト.size() - 1)
-                .get給付実績福祉用具販売費基本情報().getサービス提供年月())) {
+        if (サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
             div.getBtnZengetsu().setDisabled(true);
+        } else {
+            div.getBtnZengetsu().setDisabled(false);
         }
-        if (給付実績福祉用具販売費リスト.get(INT_ZERO).get給付実績福祉用具販売費基本情報().getサービス提供年月()
-                .isBeforeOrEquals(サービス提供年月)) {
+        if (サービス提供年月リスト.get(INT_ZERO).isBeforeOrEquals(サービス提供年月)) {
             div.getBtnJigetsu().setDisabled(true);
+        } else {
+            div.getBtnJigetsu().setDisabled(false);
         }
     }
 
@@ -324,19 +327,20 @@ public class FukushiYoguKonyuhiShokaiHandler {
             FlexibleYearMonth サービス提供年月, RString 整理番号, HihokenshaNo 被保険者番号, NyuryokuShikibetsuNo 識別番号) {
         List<dgFukushiYoguKonyuhi_Row> rowList = new ArrayList<>();
         int index = INT_ZERO;
-        Collections.sort(給付実績福祉用具販売費リスト, new DateComparatorServiceTeikyoYM());
-        for (int i = 0; i < 給付実績福祉用具販売費リスト.size(); i++) {
-            if (サービス提供年月.equals(給付実績福祉用具販売費リスト.get(i).get給付実績福祉用具販売費基本情報().getサービス提供年月())) {
+        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(給付実績福祉用具販売費リスト);
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+        for (int i = 0; i < サービス提供年月リスト.size(); i++) {
+            if (サービス提供年月.equals(サービス提供年月リスト.get(i))) {
                 index = i;
                 break;
             }
         }
         FlexibleYearMonth 今提供年月 = FlexibleYearMonth.EMPTY;
-        if (INT_ZERO < index && index < 給付実績福祉用具販売費リスト.size() - 1) {
+        if (INT_ZERO < index && index < サービス提供年月リスト.size() - 1) {
             if (前月.equals(data)) {
-                今提供年月 = 給付実績福祉用具販売費リスト.get(index - 1).get給付実績福祉用具販売費基本情報().getサービス提供年月();
+                今提供年月 = サービス提供年月リスト.get(index + 1);
             } else {
-                今提供年月 = 給付実績福祉用具販売費リスト.get(index + 1).get給付実績福祉用具販売費基本情報().getサービス提供年月();
+                今提供年月 = サービス提供年月リスト.get(index - 1);
             }
         }
         List<KyufujissekiFukushiYoguHanbaihiBusiness> 給付実績福祉用具販売費等データ取得リスト
@@ -349,7 +353,7 @@ public class FukushiYoguKonyuhiShokaiHandler {
             rowList.add(setRowData(給付実績福祉用具販売費等データ取得));
         }
         div.getDgFukushiYoguKonyuhi().setDataSource(rowList);
-        setGetsuBtn(給付実績福祉用具販売費リスト, 今提供年月);
+        setGetsuBtn(サービス提供年月リスト, 今提供年月);
     }
 
     private RString kinngakuFormat(Decimal date) {
@@ -359,13 +363,24 @@ public class FukushiYoguKonyuhiShokaiHandler {
         return DecimalFormatter.toコンマ区切りRString(date, INT_ZERO);
     }
 
-    private static class DateComparatorServiceTeikyoYM implements Comparator<KyufujissekiFukushiYoguHanbaihiBusiness>, Serializable {
+    private List<FlexibleYearMonth> getサービス提供年月リスト(List<KyufujissekiFukushiYoguHanbaihiBusiness> 給付実績福祉用具販売費リスト) {
+        List<FlexibleYearMonth> 提供年月リスト = new ArrayList<>();
+        for (int i = 0; i < 給付実績福祉用具販売費リスト.size(); i++) {
+            FlexibleYearMonth 提供年月 = 給付実績福祉用具販売費リスト.get(i).get給付実績福祉用具販売費基本情報().getサービス提供年月();
+            if (!提供年月リスト.contains(提供年月)) {
+                提供年月リスト.add(提供年月);
+            }
+        }
+        return 提供年月リスト;
+    }
+
+    private static class DateComparatorServiceTeikyoYM implements Comparator<FlexibleYearMonth>, Serializable {
 
         private static final long serialVersionUID = -300796001015547240L;
 
         @Override
-        public int compare(KyufujissekiFukushiYoguHanbaihiBusiness o1, KyufujissekiFukushiYoguHanbaihiBusiness o2) {
-            return o2.get給付実績福祉用具販売費基本情報().getサービス提供年月().compareTo(o1.get給付実績福祉用具販売費基本情報().getサービス提供年月());
+        public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {
+            return o2.compareTo(o1);
         }
     }
 }
