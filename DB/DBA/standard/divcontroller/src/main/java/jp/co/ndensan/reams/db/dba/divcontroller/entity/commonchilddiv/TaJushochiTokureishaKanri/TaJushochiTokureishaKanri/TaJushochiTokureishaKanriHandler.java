@@ -146,6 +146,9 @@ public class TaJushochiTokureishaKanriHandler {
                 ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
                 break;
             case ShisetuHenko:
+                div.getDgJushochiTokureiRireki().getGridSetting().getColumn(new RString("jotai")).setVisible(false);
+                div.getDgJushochiTokureiRireki().getGridSetting().setIsShowDeleteButtonColumn(false);
+                div.getDgJushochiTokureiRireki().getGridSetting().setIsShowModifyButtonColumn(false);
                 break;
             default:
                 break;
@@ -461,6 +464,7 @@ public class TaJushochiTokureishaKanriHandler {
                     rowList.remove(rireki_Row);
                 }
                  div.getCcdShisetsuJoho().clear();
+                 div.getBtnAdd().setDisabled(false);
               }
             if ((状態_追加.equals(div.getStrate())) || (状態_空白.equals(div.getStrate()))) {
                 rireki_Row.setRowState(RowState.Added);
@@ -511,6 +515,7 @@ public class TaJushochiTokureishaKanriHandler {
             div.getCcdShisetsuJoho().initialize();             
             rireki_Row.setDeleteButtonState(DataGridButtonState.Enabled);
             rireki_Row.setModifyButtonState(DataGridButtonState.Enabled);
+              div.getBtnAdd().setDisabled(true);
             }
             Collections.sort(rowList, new DateComparator());
         } else if (解除モード.equals(親画面状態)) {
@@ -867,6 +872,7 @@ public class TaJushochiTokureishaKanriHandler {
                 div.getPanShisetsuJoho().setDisabled(true);
                 div.getPanSotimotoJyoho().setDisabled(true);
                 div.getBtnKakunin().setDisabled(true);
+                div.getBtnTorikeshi().setDisabled(true);
             }
         } else if (解除モード.equals(親画面状態)) {
             if (kanriMaster.getKaijoYMD() != null

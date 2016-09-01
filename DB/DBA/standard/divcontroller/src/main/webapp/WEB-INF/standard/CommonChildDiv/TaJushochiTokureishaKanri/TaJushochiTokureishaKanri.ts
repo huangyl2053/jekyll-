@@ -86,6 +86,7 @@ module DBA
                   gridSetting.isShowSelectButtonColumn = false;
                   gridSetting.isShowModifyButtonColumn = true;
                   gridSetting.isShowDeleteButtonColumn = true;
+
                   
                   this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
                   //this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
@@ -138,7 +139,6 @@ module DBA
                   this.controls.txtKaijyobi().displayNone=true;
                   this.controls.txtKaijyoTodokedebi().displayNone=true;
                   this.controls.ddlKaijyoJiyo().displayNone=true;
-                  this.controls.btnTorikeshi().disabled = true;
                   this.controls.panSotimotoJyoho().displayNone=false;
                   this.controls.panShisetsuJoho().displayNone=false;
                 }
