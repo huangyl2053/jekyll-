@@ -1251,6 +1251,7 @@ public class IchijiSashitome1GoHandler {
 
     private List<KeyValueDataSource> get控除番号(List<KeyValueDataSource> kojoNoSource,
             ArrayList<ShiharaiHohoHenkoSashitome> shiharaiHohoHenkoSashitomeList, ArrayList<RString> 差止控除番号) {
+        kojoNoSource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         if (!shiharaiHohoHenkoSashitomeList.isEmpty()) {
             for (int i = 0; i < shiharaiHohoHenkoSashitomeList.size(); i++) {
                 if (shiharaiHohoHenkoSashitomeList.get(i).get差止控除番号() != null
@@ -1267,7 +1268,6 @@ public class IchijiSashitome1GoHandler {
                     }
                 });
                 int 最大控除番号 = Integer.parseInt(差止控除番号.get(0).toString());
-                kojoNoSource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
                 kojoNoSource.add(new KeyValueDataSource(new RString(String.valueOf(最大控除番号 + 1)), new RString(String.valueOf(最大控除番号 + 1))));
                 for (int i = 0; i < 差止控除番号.size(); i++) {
                     kojoNoSource.add(new KeyValueDataSource(差止控除番号.get(i), 差止控除番号.get(i)));
