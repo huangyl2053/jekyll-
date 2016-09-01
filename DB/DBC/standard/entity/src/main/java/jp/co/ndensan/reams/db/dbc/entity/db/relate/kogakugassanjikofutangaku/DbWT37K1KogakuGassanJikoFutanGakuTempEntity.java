@@ -29,7 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DbWT37K1KogakuGassanJikoFutanGakuTempEntity extends DbTableEntityBase<DbWT37K1KogakuGassanJikoFutanGakuTempEntity> implements IDbAccessable {
+public class DbWT37K1KogakuGassanJikoFutanGakuTempEntity extends
+        DbTableEntityBase<DbWT37K1KogakuGassanJikoFutanGakuTempEntity> implements IDbAccessable {
 
     @TempTableColumnOrder(1)
     @PrimaryKey

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlist;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.entity.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
@@ -85,11 +84,12 @@ public class KyokaisoKanriMasterListReport extends Report<KyokaisoKanriMasterLis
                 reportSourceWriter.writeLine(builder);
             }
         }
-    }
-
-    private void setwriteBy(KyokaisoKanriMasterListBodyItem item, KyokaisoKanriMasterListBodyTempItem tempItem, int i) {
-        if (!RString.isNullOrEmpty(item.getListUpper_1().get(i))) {
-
+        if (bodyItemList == null || bodyItemList.isEmpty()) {
+            KyokaisoKanriMasterListBodyTempItem tempItem = new KyokaisoKanriMasterListBodyTempItem();
+            IKyokaisoKanriMasterListEditor headerEditor = new KyokaisoKanriMasterListHeaderEditor(headItem);
+            IKyokaisoKanriMasterListEditor bodyEditor = new KyokaisoKanriMasterListBodyEditor(tempItem);
+            IKyokaisoKanriMasterListBuilder builder = new KyokaisoKanriMasterListBuilderImpl(headerEditor, bodyEditor);
+            reportSourceWriter.writeLine(builder);
         }
     }
 }
