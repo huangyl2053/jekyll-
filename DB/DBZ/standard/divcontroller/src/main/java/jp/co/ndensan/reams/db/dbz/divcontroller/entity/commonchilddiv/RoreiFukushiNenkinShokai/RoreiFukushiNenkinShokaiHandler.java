@@ -190,6 +190,7 @@ public class RoreiFukushiNenkinShokaiHandler {
      * 老齢福祉年金情報を設定します。
      *
      * @param eventJotai 状態
+     * @param hasChanged 変更があるかどうか
      */
     public void setDatagridRirekichiran(RString eventJotai, boolean hasChanged) {
         datagridRireki_Row row = new datagridRireki_Row();
@@ -334,8 +335,7 @@ public class RoreiFukushiNenkinShokaiHandler {
     }
 
     /**
-     * 受給期間の重複判定用に、履歴データグリッドの内容をコピーします。
-     * ただし、入力中のデータとキー（開始日）が同じ物は、入力中の内容に設定します。
+     * 受給期間の重複判定用に、履歴データグリッドの内容をコピーします。 ただし、入力中のデータとキー（開始日）が同じ物は、入力中の内容に設定します。
      * また、削除データは無視します。
      *
      * @param list 現在のデータグリッドの全要素
