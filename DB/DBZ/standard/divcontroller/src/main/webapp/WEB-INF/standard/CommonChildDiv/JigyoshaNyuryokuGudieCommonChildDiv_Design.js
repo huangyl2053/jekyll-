@@ -4,6 +4,10 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onBlur_JigyoshaNo = function () {
+                return "onBlur_JigyoshaNo";
+            };
+
             Events.onChange_BtnKenCode = function () {
                 return "onChange_BtnKenCode";
             };
