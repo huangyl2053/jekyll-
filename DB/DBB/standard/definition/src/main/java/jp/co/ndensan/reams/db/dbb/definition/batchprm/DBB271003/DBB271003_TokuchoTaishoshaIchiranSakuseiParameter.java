@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.tokubetsuchoshudoteimidoteiichiran;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB271003;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter extends BatchParameterBase {
+public class DBB271003_TokuchoTaishoshaIchiranSakuseiParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;
     private static final String KEY_SHORINENDO = "shoriNendo";

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.T
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoDouteiListJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoMiDouteiListJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiResult;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB271003.DBB271003_TokuchoTaishoshaIchiranSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbInformationMessages;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbWarningMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002.DBB2710002StateName;
@@ -219,18 +219,18 @@ public class TokuchoTaishoshaIchiran {
      * @param div {@link TokuchoTaishoshaIchiranDiv}
      * @return TokuchoTeishiTaisyosyaDouteiBatchParameterを持つResponseData
      */
-    public ResponseData<TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter>
+    public ResponseData<DBB271003_TokuchoTaishoshaIchiranSakuseiParameter>
             onClick_btnBatchRegister(TokuchoTaishoshaIchiranDiv div) {
         RString 特別徴収開始月 = ViewStateHolder.get(ViewStateKeys.特別徴収開始月, RString.class);
         List<RString> 捕捉月リスト = ViewStateHolder.get(ViewStateKeys.捕捉月リスト, List.class);
-        TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter parameter
+        DBB271003_TokuchoTaishoshaIchiranSakuseiParameter parameter
                 = getHandler(div).getBatchParameter(特別徴収開始月, 捕捉月リスト);
         TokuchoTaishoshaIchiranSakuseiResult result = getHandler(div).同定非同定表示initialize();
         if (result != null) {
             ViewStateHolder.put(ViewStateKeys.特別徴収開始月, result.get特別徴収開始月());
             ViewStateHolder.put(ViewStateKeys.捕捉月リスト, (Serializable) result.get捕捉月リスト());
         }
-        ResponseData<TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter> responseData = new ResponseData<>();
+        ResponseData<DBB271003_TokuchoTaishoshaIchiranSakuseiParameter> responseData = new ResponseData<>();
         responseData.data = parameter;
         return responseData;
     }
