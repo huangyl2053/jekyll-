@@ -23,13 +23,13 @@ public class DBC110140_SogojigyohiKagoMoshitateshoOutParameter extends BatchPara
     private static final String KEY_処理年月 = "処理年月";
     private static final String KEY_再処理区分 = "再処理区分";
     private static final String KEY_出力順ID = "出力順ID";
-    private static final String KEY_送付対象情報の選択値 = "送付対象情報の選択値";
+    private static final String KEY_送付対象情報のｺｰﾄﾞ = "送付対象情報のｺｰﾄﾞ";
     @BatchParameter(key = KEY_処理年月, name = "処理年月")
     private RYearMonth 処理年月;
     @BatchParameter(key = KEY_再処理区分, name = "再処理区分")
     private RString 再処理区分;
     @BatchParameter(key = KEY_出力順ID, name = "出力順ID")
     private RString 出力順ID;
-    @BatchParameter(key = KEY_送付対象情報の選択値, name = "送付対象情報の選択値")
-    private RString 送付対象情報の選択値;
+    @BatchParameter(key = KEY_送付対象情報のｺｰﾄﾞ, name = "送付対象情報のｺｰﾄﾞ")
+    private RString 送付対象情報のｺｰﾄﾞ;
 }

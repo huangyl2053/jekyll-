@@ -35,7 +35,7 @@ public class HanyoListParamKyoufuKannrihyouHandler {
     /**
      * コンストラクタです。
      *
-     * @param div NendoKirikaeDiv
+     * @param div HanyoListParamKyoufuKannrihyouDiv
      */
     public HanyoListParamKyoufuKannrihyouHandler(HanyoListParamKyoufuKannrihyouDiv div) {
         this.div = div;
@@ -85,7 +85,6 @@ public class HanyoListParamKyoufuKannrihyouHandler {
         parameter.set委託先支援事業者名(div.getChushutsuJokenPanel().getCcdItakusakiSienJigyoshaBango().getNyuryokuShisetsuMeisho());
 
         RString key = div.getChushutsuJokenPanel().getRadMeisaigyoSyuturyokuUmu().getSelectedKey();
-        // TODO QA1358
         if (KEY_0.equals(key)) {
             parameter.set明細行出力有無(Kyufukanrihyo_MeisaigyoBango.終端行.get名称());
         } else if (KEY_1.equals(key)) {
@@ -111,7 +110,7 @@ public class HanyoListParamKyoufuKannrihyouHandler {
             parameter.set日付スラッシュ付加(false);
         }
 
-        if (!div.getChushutsuJokenPanel().getCcdHokenshaList().isDisplayNone()) {
+        if (div.getChushutsuJokenPanel().getCcdHokenshaList().isVisible()) {
             parameter.set保険者コード(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード());
         }
 

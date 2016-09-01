@@ -21,6 +21,11 @@ public class SogojigyohiShikakuShogohyoPageBreak extends PageBreaker<Sogojigyohi
     private static final RString 固定改頁項目 = new RString("保険者番号");
     private final List<RString> breakKeys;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param breakKeys List<RString>
+     */
     public SogojigyohiShikakuShogohyoPageBreak(List<RString> breakKeys) {
         this.breakKeys = breakKeys;
     }

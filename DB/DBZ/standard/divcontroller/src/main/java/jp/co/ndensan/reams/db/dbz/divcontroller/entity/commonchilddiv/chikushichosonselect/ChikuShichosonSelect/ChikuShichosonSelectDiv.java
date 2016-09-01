@@ -7,13 +7,15 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chikushic
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * ChikuShichosonSelect のクラスファイルです。
@@ -21,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
  * @reamsid_L DBB-5720-010 xuxin
  */
 public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSelectDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -204,7 +207,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @JsonIgnore
-    public void  setDdlChiku(DropDownList ddlChiku) {
+    public void setDdlChiku(DropDownList ddlChiku) {
         this.getTanitsuShichoson().setDdlChiku(ddlChiku);
     }
 
@@ -214,7 +217,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @JsonIgnore
-    public void  setBtnChoikiGuide(ButtonDialog btnChoikiGuide) {
+    public void setBtnChoikiGuide(ButtonDialog btnChoikiGuide) {
         this.getTanitsuShichoson().setBtnChoikiGuide(btnChoikiGuide);
     }
 
@@ -224,7 +227,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @JsonIgnore
-    public void  setBtnChikuNyuryokuGuide(ButtonDialog btnChikuNyuryokuGuide) {
+    public void setBtnChikuNyuryokuGuide(ButtonDialog btnChikuNyuryokuGuide) {
         this.getTanitsuShichoson().setBtnChikuNyuryokuGuide(btnChikuNyuryokuGuide);
     }
 
@@ -234,7 +237,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @JsonIgnore
-    public void  setSelectedResult(SelectedResultDiv SelectedResult) {
+    public void setSelectedResult(SelectedResultDiv SelectedResult) {
         this.getTanitsuShichoson().setSelectedResult(SelectedResult);
     }
 
@@ -244,7 +247,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @JsonIgnore
-    public void  setDdlCodeList(DataGrid<ddlCodeList_Row> ddlCodeList) {
+    public void setDdlCodeList(DataGrid<ddlCodeList_Row> ddlCodeList) {
         this.getTanitsuShichoson().getSelectedResult().setDdlCodeList(ddlCodeList);
     }
 
@@ -254,7 +257,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @JsonIgnore
-    public void  setDdlShichoson(DropDownList ddlShichoson) {
+    public void setDdlShichoson(DropDownList ddlShichoson) {
         this.getKoikiShichoson().setDdlShichoson(ddlShichoson);
     }
 
@@ -264,19 +267,88 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @JsonIgnore
-    public void  setDdlKyushichosonKoiki(DropDownList ddlKyushichosonKoiki) {
+    public void setDdlKyushichosonKoiki(DropDownList ddlKyushichosonKoiki) {
         this.getKoikiShichoson().setDdlKyushichosonKoiki(ddlKyushichosonKoiki);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @JsonIgnore
+    public ChikuShichosonSelectHandler getHandler() {
+        return new ChikuShichosonSelectHandler(this);
+    }
+
     @Override
     public void initialize() {
         getHandler().init();
     }
 
-    @JsonIgnore
-    public ChikuShichosonSelectHandler getHandler() {
-        return new ChikuShichosonSelectHandler(this);
+    @Override
+    public RString get選択対象() {
+        if (this.getTanitsuShichoson().isDisplayNone()) {
+            return RString.EMPTY;
+        } else {
+            return this.getDdlChiku().getSelectedKey();
+        }
     }
+
+    @Override
+    public Map<RString, RString> get選択結果() {
+        if (this.getTanitsuShichoson().isDisplayNone()) {
+            return null;
+        } else {
+            Map<RString, RString> map = new HashMap();
+            List<ddlCodeList_Row> dataSource = this.getDdlCodeList().getDataSource();
+            if (!dataSource.isEmpty()) {
+                for (ddlCodeList_Row row : dataSource) {
+                    map.put(row.getCode(), row.getName());
+                }
+            }
+            return map;
+        }
+    }
+
+    @Override
+    public RString get市町村コード() {
+        if (this.getKoikiShichoson().isDisplayNone()) {
+            return RString.EMPTY;
+        } else {
+            return this.getDdlShichoson().getSelectedKey();
+        }
+    }
+
+    @Override
+    public RString get市町村名称() {
+        if (this.getKoikiShichoson().isDisplayNone()) {
+            return RString.EMPTY;
+        } else {
+            int length = this.getDdlShichoson().getSelectedValue().length();
+            return this.getDdlShichoson().getSelectedValue().substring(7, length);
+        }
+    }
+
+    @Override
+    public RString get旧市町村コード() {
+        if (this.getKoikiShichoson().isDisplayNone() || this.getDdlKyushichosonKoiki().isDisplayNone()) {
+            return RString.EMPTY;
+        } else {
+            return this.getDdlKyushichosonKoiki().getSelectedKey();
+        }
+    }
+
+    @Override
+    public RString get旧市町村名称() {
+        if (this.getKoikiShichoson().isDisplayNone() || this.getDdlKyushichosonKoiki().isDisplayNone()) {
+            return RString.EMPTY;
+        } else {
+            int length = this.getDdlKyushichosonKoiki().getSelectedValue().length();
+            return this.getDdlKyushichosonKoiki().getSelectedValue().substring(7, length);
+        }
+    }
+
+    @Override
+    public RString get導入形態コード() {
+        return this.getHdnTxtDonyuKeitaiCode();
+    }
+
 }

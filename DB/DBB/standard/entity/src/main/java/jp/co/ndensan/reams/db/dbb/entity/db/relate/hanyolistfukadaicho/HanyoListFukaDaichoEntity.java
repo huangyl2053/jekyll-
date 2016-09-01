@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistfukadaicho;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
@@ -37,4 +38,18 @@ public class HanyoListFukaDaichoEntity {
 
     private boolean 本算定後;
     private RString 特別徴収義務者コード;
+
+    /**
+     * コンストラクタです。
+     */
+    public HanyoListFukaDaichoEntity() {
+        介護賦課 = new DbT2002FukaEntity();
+        調定共通リスト = new ArrayList<>();
+        介護期別リスト = new ArrayList<>();
+        介護徴収方法 = new DbT2001ChoshuHohoEntity();
+        受給者台帳Newest = new DbV4001JukyushaDaichoEntity();
+        被保険者台帳管理Newest = new DbV1001HihokenshaDaichoEntity();
+        宛名 = new UaFt200FindShikibetsuTaishoEntity();
+        宛先 = new UaFt250FindAtesakiEntity();
+    }
 }

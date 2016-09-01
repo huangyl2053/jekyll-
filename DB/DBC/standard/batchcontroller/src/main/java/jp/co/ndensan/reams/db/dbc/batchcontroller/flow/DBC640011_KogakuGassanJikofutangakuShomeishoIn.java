@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc640011.KogakuGassanJikofutangakuShomeishoInProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc640011.KogakuGassanJikofutangakuTempProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoInParamerter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoInProcessParamerter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoFlowEntity;
@@ -24,11 +23,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBC640011_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBase<KogakuGassanJikofutangakuShomeishoInParamerter> {
 
     private static final String CSVファイル取込 = "callReadCsvFileProcess";
-    private static final String 処理結果リスト一時登録 = "callErrorTempInsertProcess";
     private static final Integer INDEX_0 = 0;
     private int 高額合算自己負担額一時TBL登録件数 = 0;
     private int レコード件数合算 = 0;
-    private KogakuGassanJikofutangakuShomeishoFlowEntity returnEntity;
+    private KogakuGassanJikofutangakuShomeishoFlowEntity flowEntity;
     private KogakuGassanJikofutangakuShomeishoInProcessParamerter parameter;
 
     @Override
@@ -39,14 +37,25 @@ public class DBC640011_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
         if (fileNameList != null && !fileNameList.isEmpty()) {
             for (int i = INDEX_0; i < fileNameList.size(); i++) {
                 parameter.setFileName(fileNameList.get(i));
+                if (i == 0) {
+                    parameter.set処理年月(null);
+                    parameter.set連番(0);
+                } else {
+                    parameter.set処理年月(flowEntity.getShoriYM());
+                    parameter.set連番(flowEntity.get連番());
+                }
+                if (i == fileNameList.size() - 1) {
+                    parameter.setさいごファイルフラグ(true);
+                } else {
+                    parameter.setさいごファイルフラグ(false);
+                }
                 executeStep(CSVファイル取込);
-                returnEntity = getResult(KogakuGassanJikofutangakuShomeishoFlowEntity.class, new RString(CSVファイル取込),
+                flowEntity = getResult(KogakuGassanJikofutangakuShomeishoFlowEntity.class, new RString(CSVファイル取込),
                         KogakuGassanJikofutangakuShomeishoInProcess.PARAMETER_OUT_FLOWENTITY);
-                レコード件数合算 = レコード件数合算 + returnEntity.getCodeNum();
-                高額合算自己負担額一時TBL登録件数 = 高額合算自己負担額一時TBL登録件数 + returnEntity.get高額合算自己負担額一時TBL登録件数();
+                レコード件数合算 = レコード件数合算 + flowEntity.getCodeNum();
+                高額合算自己負担額一時TBL登録件数 = flowEntity.get高額合算自己負担額一時TBL登録件数();
             }
         }
-        executeStep(処理結果リスト一時登録);
     }
 
     /**
@@ -57,15 +66,5 @@ public class DBC640011_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
     @Step(CSVファイル取込)
     protected IBatchFlowCommand callReadCsvFileProcess() {
         return loopBatch(KogakuGassanJikofutangakuShomeishoInProcess.class).arguments(parameter).define();
-    }
-
-    /**
-     * 処理結果リスト一時登録です。
-     *
-     * @return DbWT0002KokuhorenTorikomiErrorTempProcess
-     */
-    @Step(処理結果リスト一時登録)
-    protected IBatchFlowCommand callErrorTempInsertProcess() {
-        return loopBatch(KogakuGassanJikofutangakuTempProcess.class).define();
     }
 }

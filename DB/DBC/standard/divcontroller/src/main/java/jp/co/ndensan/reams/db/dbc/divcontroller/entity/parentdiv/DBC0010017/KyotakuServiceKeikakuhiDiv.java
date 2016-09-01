@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010017;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJissekiHeader.IKyufuJissekiHeaderDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJissekiHeader.KyufuJissekiHeaderDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -482,7 +483,7 @@ public class KyotakuServiceKeikakuhiDiv extends Panel {
      * @return ccdKyufuJissekiHeader
      */
     @JsonProperty("ccdKyufuJissekiHeader")
-    public KyufuJissekiHeaderDiv getCcdKyufuJissekiHeader() {
+    public IKyufuJissekiHeaderDiv getCcdKyufuJissekiHeader() {
         return ccdKyufuJissekiHeader;
     }
 

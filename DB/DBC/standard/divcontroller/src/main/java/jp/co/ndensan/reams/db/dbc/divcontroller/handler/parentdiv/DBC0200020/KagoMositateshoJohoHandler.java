@@ -72,7 +72,7 @@ public class KagoMositateshoJohoHandler {
             parameter.set再処理区分(再処理区分);
             parameter.set処理年月(処理年月);
             parameter.set出力順ID(new RString(出力順ID.toString()));
-            parameter.set送付対象情報の選択値(div.getCcdKokuhorenJohoSofu().get送付対象情報());
+            parameter.set送付対象情報のｺｰﾄﾞ(div.getCcdKokuhorenJohoSofu().get送付対象情報のkey());
             return ResponseData.of(parameter).respond();
         }
         return null;

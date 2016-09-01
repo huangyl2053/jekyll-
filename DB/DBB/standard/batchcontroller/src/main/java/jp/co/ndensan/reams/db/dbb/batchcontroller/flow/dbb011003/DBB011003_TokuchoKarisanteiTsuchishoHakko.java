@@ -7,11 +7,12 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb011003;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.DbT2002FukaZennendoTempInsertProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.GetFukaJohoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.InsTsuchishoHakkogoIdoshaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.KarisanteiIkkatsuHakkoTempInsertProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.PrtTokuchoKaishiTsuchishoKarisanteiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.PrintTsuchishoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.SystemTimeKarisanteiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.UpdChoteiGakuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.UpdFukaJohoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.UpdHihokenshaKubunProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteitsuchishohakko.KarisanteiBatchEntity;
@@ -34,11 +35,13 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<Tok
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
     private static final String 仮算定一括発行一時テーブル作成 = "karisanteiShutoku";
     private static final String 前年度賦課情報一時テーブル作成 = "fukaZennendoShutoku";
-    private static final String 賦課情報取得 = "getFukaJoho";
-    private static final String 特徴開始仮算定通知書発行 = "prtTokuchoKaishiTsuchishoKarisantei";
-    private static final String 通知書発行後異動者登録 = "insTsuchishoHakkogoIdosha";
+    private static final String 更新前年度賦課情報 = "updFukaJoho";
+    private static final String 更新特徴調定額 = "updChoteiGaku";
+    private static final String 更新被保険者区分 = "updHihokenshaKubun";
+    private static final String 通知書の発行 = "printTsuchisho";
     private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
-    private static final RString 特別徴収開始通知書仮算定_帳票分類ID = new RString("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
+    private static final RString 特別徴収開始通知書仮算定_帳票分類ID
+            = new RString("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private KarisanteiBatchEntity 出力帳票Entity;
 
     @Override
@@ -54,9 +57,10 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<Tok
             executeStep(計算後情報作成);
             executeStep(仮算定一括発行一時テーブル作成);
             executeStep(前年度賦課情報一時テーブル作成);
-            executeStep(賦課情報取得);
-            executeStep(特徴開始仮算定通知書発行);
-            executeStep(通知書発行後異動者登録);
+            executeStep(更新前年度賦課情報);
+            executeStep(更新特徴調定額);
+            executeStep(更新被保険者区分);
+            executeStep(通知書の発行);
         }
 
     }
@@ -66,7 +70,7 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<Tok
      *
      * @return バッチコマンド
      */
-    @Step(システム日時の取得)
+    @Step (システム日時の取得)
     protected IBatchFlowCommand getSystemDate() {
         return simpleBatch(SystemTimeKarisanteiProcess.class).define();
     }
@@ -76,7 +80,7 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<Tok
      *
      * @return バッチコマンド
      */
-    @Step(計算後情報作成)
+    @Step (計算後情報作成)
     protected IBatchFlowCommand keisangoJohoSakusei() {
         return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課,
                 getKeisangoJohoSakuseiBatchParamter(特別徴収開始通知書仮算定_帳票分類ID)).define();
@@ -87,7 +91,7 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<Tok
      *
      * @return バッチコマンド
      */
-    @Step(仮算定一括発行一時テーブル作成)
+    @Step (仮算定一括発行一時テーブル作成)
     protected IBatchFlowCommand karisanteiShutoku() {
         return loopBatch(KarisanteiIkkatsuHakkoTempInsertProcess.class)
                 .arguments(createProcessParameter())
@@ -99,7 +103,7 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<Tok
      *
      * @return バッチコマンド
      */
-    @Step(前年度賦課情報一時テーブル作成)
+    @Step (前年度賦課情報一時テーブル作成)
     protected IBatchFlowCommand fukaZennendoShutoku() {
         return loopBatch(DbT2002FukaZennendoTempInsertProcess.class)
                 .arguments(createProcessParameter())
@@ -111,33 +115,39 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<Tok
      *
      * @return バッチコマンド
      */
-    @Step(賦課情報取得)
-    protected IBatchFlowCommand getFukaJoho() {
-        return simpleBatch(GetFukaJohoProcess.class)
-                .arguments(createProcessParameter())
-                .define();
+    @Step (更新前年度賦課情報)
+    protected IBatchFlowCommand updFukaJoho() {
+        return simpleBatch(UpdFukaJohoProcess.class).define();
     }
 
     /**
-     * 特徴開始仮算定通知書発行バッチを呼び出す。
+     * 更新特徴調定額作成バッチを呼び出す。
      *
      * @return バッチコマンド
      */
-    @Step(特徴開始仮算定通知書発行)
-    protected IBatchFlowCommand prtTokuchoKaishiTsuchishoKarisantei() {
-        return simpleBatch(PrtTokuchoKaishiTsuchishoKarisanteiProcess.class)
-                .arguments(createProcessParameter())
-                .define();
+    @Step (更新特徴調定額)
+    protected IBatchFlowCommand updChoteiGaku() {
+        return simpleBatch(UpdChoteiGakuProcess.class).define();
     }
 
     /**
-     * 通知書発行後異動者登録バッチを呼び出す。
+     * 更新被保険者区分作成バッチを呼び出す。
      *
      * @return バッチコマンド
      */
-    @Step(通知書発行後異動者登録)
-    protected IBatchFlowCommand insTsuchishoHakkogoIdosha() {
-        return simpleBatch(InsTsuchishoHakkogoIdoshaProcess.class)
+    @Step (更新被保険者区分)
+    protected IBatchFlowCommand updHihokenshaKubun() {
+        return simpleBatch(UpdHihokenshaKubunProcess.class).define();
+    }
+
+    /**
+     * 通知書の発行バッチを呼び出す。
+     *
+     * @return バッチコマンド
+     */
+    @Step (通知書の発行)
+    protected IBatchFlowCommand printTsuchisho() {
+        return loopBatch(PrintTsuchishoProcess.class)
                 .arguments(createProcessParameter())
                 .define();
     }

@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護支援専門員のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-3370-010 yuqingzhang
  */
 public class DbT7064CareManegerDac implements ISaveable<DbT7064CareManegerEntity> {
 
@@ -74,6 +76,18 @@ public class DbT7064CareManegerDac implements ISaveable<DbT7064CareManegerEntity
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * DbT7064CareManegerEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。by yuqingzhang
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int saveOrDeletePhysicalBy(DbT7064CareManegerEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護支援専門員エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 
     /**

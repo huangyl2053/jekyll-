@@ -420,7 +420,23 @@ public enum ReportIdDBC {
     /**
      * 汎用リスト　基準収入額適用情報帳票ＩＤです。
      */
-    DBC701020(new ReportId("DBC701020_HanyoListKijunShunyugakuTekiyo"), new RString("汎用リスト　基準収入額適用情報"));
+    DBC701020(new ReportId("DBC701020_HanyoListKijunShunyugakuTekiyo"), new RString("汎用リスト　基準収入額適用情報")),
+    /**
+     * 汎用リスト 再審査申立情報帳票ＩＤです。
+     */
+    DBC701011(new ReportId("DBC701011_HanyoListSaishinsaMoshitate"), new RString("汎用リスト 再審査申立情報")),
+    /**
+     * 高額合算補正済自己負担額情報送付一覧表
+     */
+    DBC200032(new ReportId("DBC200032_GassanHoseizumiJikofutangakuJohoSofuchiran"), new RString("高額合算補正済自己負担額情報送付一覧表")),
+    /**
+     * 高額合算補正済自己負担額情報未送付一覧表
+     */
+    DBC200033(new ReportId("DBC200033_GassanHoseizumiJikofutangakuJohoMisofuchiran"), new RString("高額合算補正済自己負担額情報未送付一覧表")),
+    /**
+     * 汎用リスト 再審査結果情報帳票ＩＤです。
+     */
+    DBC701012(new ReportId("DBC701012_HanyoListSaishinsaKekka"), new RString("汎用リスト 再審査結果情報"));
 
     private final ReportId reportId;
 

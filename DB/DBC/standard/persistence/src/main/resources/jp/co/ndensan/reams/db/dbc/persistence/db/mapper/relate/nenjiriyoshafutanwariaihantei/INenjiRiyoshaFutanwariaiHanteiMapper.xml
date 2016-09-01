@@ -247,7 +247,7 @@
         "JukyuShaTaichoTempTable"."dbT4001JukyushaDaicho_hihokenshaNo" AS Jukyu_hihokenshaNo,
         "JukyuShaTaichoTempTable"."dbT4001JukyushaDaicho_shikibetsuCode" AS Jukyu_shikibetsuCode,
         "JukyuShaTaichoTempTable"."shichosonCode" AS Jukyu_shichosonCode,
-        "JukyuShaTaichoTempTable"."rirekiNoRString" AS Jukyu_rirekiNoRString,
+        "JukyuShaTaichoTempTable"."rirekiNoRString" AS Jukyu_rirekiNo,
         "JukyuShaTaichoTempTable"."edaban" AS Jukyu_edaban,
         "JukyuShaTaichoTempTable"."jukyuShinseiJiyu" AS Jukyu_jukyuShinseiJiyu,
         "JukyuShaTaichoTempTable"."jukyuShinseiYMD" AS Jukyu_jukyuShinseiYMD,
@@ -267,7 +267,7 @@
         "JukyuShaTaichoTempTable"."setaiCode" AS PSM_setaiCode,
         "JukyuShaTaichoTempTable"."meisho" AS PSM_meisho,
         "JukyuShaTaichoTempTable"."shotokuNendo" AS Kaigo_shotokuNendo,
-        "JukyuShaTaichoTempTable"."rirekiNoInt" AS Kaigo_rirekiNoInt,
+        "JukyuShaTaichoTempTable"."rirekiNoInt" AS Kaigo_rirekino,
         "JukyuShaTaichoTempTable"."kazeiKubun" AS Kaigo_kazeiKubun,
         "JukyuShaTaichoTempTable"."kazeiKubunGemmenGo" AS Kaigo_kazeiKubunGemmenGo,
         "JukyuShaTaichoTempTable"."gokeiShotokuGaku" AS Kaigo_gokeiShotokuGaku,
@@ -294,7 +294,7 @@
          "SogoJigyoTaishoshaTempTable"."setaiCode" AS PSM_setaiCode,
          "SogoJigyoTaishoshaTempTable"."meisho" AS PSM_meisho,
          "SogoJigyoTaishoshaTempTable"."shotokuNendo" AS Kaigo_shotokuNendo,
-         "SogoJigyoTaishoshaTempTable"."rirekiNoInt" AS Kaigo_rirekiNoInt,
+         "SogoJigyoTaishoshaTempTable"."rirekiNoInt" AS Kaigo_rirekino,
          "SogoJigyoTaishoshaTempTable"."kazeiKubun" AS Kaigo_kazeiKubun,
          "SogoJigyoTaishoshaTempTable"."kazeiKubunGemmenGo" AS Kaigo_kazeiKubunGemmenGo,
          "SogoJigyoTaishoshaTempTable"."gokeiShotokuGaku" AS Kaigo_gokeiShotokuGaku,
@@ -315,7 +315,7 @@
             <result property="idoYMD" column="Hihokennsha_idoYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
             <result property="idoJiyuCode" column="Hihokennsha_idoJiyuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
             <result property="shikibetsuCode" column="Hihokennsha_shikibetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-            <result property="shikakuShutokuYMD" column=" Hihokennsha_shikakuShutokuYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+            <result property="shikakuShutokuYMD" column="Hihokennsha_shikakuShutokuYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
             <result property="shikakuShutokuTodokedeYMD" column="Hihokennsha_shikakuShutokuTodokedeYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
             <result property="ichigoShikakuShutokuYMD" column="Hihokennsha_ichigoShikakuShutokuYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
             <result property="hihokennshaKubunCode" column="Hihokennsha_hihokennshaKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -349,7 +349,7 @@
             <result property="dbT1001HihokenshaDaicho_hihokenshaNo" column="Hihokennsha_hihokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
             <result property="idoYMD" column="Hihokennsha_idoYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
             <result property="idoJiyuCode" column="Hihokennsha_idoJiyuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-            <result property="shikakuShutokuYMD" column=" Hihokennsha_shikakuShutokuYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+            <result property="shikakuShutokuYMD" column="Hihokennsha_shikakuShutokuYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
             <result property="shikakuShutokuTodokedeYMD" column="Hihokennsha_shikakuShutokuTodokedeYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
             <result property="ichigoShikakuShutokuYMD" column="Hihokennsha_ichigoShikakuShutokuYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
             <result property="hihokennshaKubunCode" column="Hihokennsha_hihokennshaKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -357,7 +357,7 @@
             <result property="setaiCode" column="PSM_setaiCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler" />
             <result property="meisho" column="PSM_meisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
             <result property="shotokuNendo" column="Kaigo_shotokuNendo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
-            <result property="rirekiNoInt" column="Kaigo_rirekino"   />
+            <result property="rirekiNoInt" column="Kaigo_rirekino" />
             <result property="kazeiKubun" column="Kaigo_kazeiKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
             <result property="kazeiKubunGemmenGo" column="Kaigo_kazeiKubunGemmenGo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
             <result property="gokeiShotokuGaku" column="Kaigo_gokeiShotokuGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />

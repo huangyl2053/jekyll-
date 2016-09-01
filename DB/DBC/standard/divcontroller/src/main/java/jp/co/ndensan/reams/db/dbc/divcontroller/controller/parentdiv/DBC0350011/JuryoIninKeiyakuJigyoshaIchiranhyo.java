@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0350011;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.juryoininkeiyakujigyoshaichiranhyo.JuryoIninKeiyakuJigyoshaIchiranhyoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC010030.DBC010030_JuryoinbinKeiyakuJigyoshaIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0350011.DBC0350011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0350011.JuryoIninKeiyakuJigyoshaIchiranhyoDiv;
@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -58,8 +58,8 @@ public class JuryoIninKeiyakuJigyoshaIchiranhyo {
      * @param div NenjiRiyoshaFutanWariaiHanteiDiv
      * @return ResponseData
      */
-    public ResponseData<JuryoIninKeiyakuJigyoshaIchiranhyoParameter> onClick_BtnPrint(JuryoIninKeiyakuJigyoshaIchiranhyoDiv div) {
-        JuryoIninKeiyakuJigyoshaIchiranhyoParameter parameter = new JuryoIninKeiyakuJigyoshaIchiranhyoParameter();
+    public ResponseData<DBC010030_JuryoinbinKeiyakuJigyoshaIchiranParameter> onClick_BtnPrint(JuryoIninKeiyakuJigyoshaIchiranhyoDiv div) {
+        DBC010030_JuryoinbinKeiyakuJigyoshaIchiranParameter parameter = new DBC010030_JuryoinbinKeiyakuJigyoshaIchiranParameter();
 
         parameter.set契約事業者番号FROM(div.getJuryoininbaraiChushutsuJoken().getTxtKeiyakuBangoFrom().getValue());
         parameter.set契約事業者番号TO(div.getJuryoininbaraiChushutsuJoken().getTxtKeiyakuBangoTo().getValue());
@@ -75,8 +75,7 @@ public class JuryoIninKeiyakuJigyoshaIchiranhyo {
             parameter.set改頁出力順ID(new RString(div.getCcdChohyoShutsuryokujun().getSelected出力順().get出力順ID()));
         }
         parameter.set市町村コード(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード());
-        parameter.set処理日時(RDate.getNowDate());
-        //TODO バッチ処理：帳票発行 未着手
+        parameter.set処理日時(RDateTime.now());
         return ResponseData.of(parameter).respond();
     }
 

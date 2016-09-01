@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.hanyolistfukadaicho.HanyoListFukaDaichoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistfukadaicho.HanyoListFukaDaichoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistfukadaicho.HanyoListFukaDaichoNoRenbanCsvEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistfukadaicho.HanyoListFukaDaichoTmpEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.hanyolistfukadaicho.HanyoListFukaDaichoCsvNoRenbanEditor;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
@@ -38,7 +39,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJok
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -74,7 +75,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBB-1900-030 zhaowei
  */
-public class HanyoListFukaDaichoNoRenbanProcess extends BatchProcessBase<HanyoListFukaDaichoEntity> {
+public class HanyoListFukaDaichoNoRenbanProcess extends BatchKeyBreakBase<HanyoListFukaDaichoTmpEntity> {
 
     private static final RString ID = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
             + "hanyolistfukadaicho.IHanyoListFukaDaichoMapper.getHanyoListFukaDaicho");
@@ -188,13 +189,17 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchProcessBase<HanyoLi
     private YMDHMS システム日時;
     private RString eucFilePath;
 
+    private int flag;
     private HokenryoDankaiSettings hokenryoDankaiSettings;
     private IShikibetsuTaishoPSMSearchKey searchKey;
+    private HanyoListFukaDaichoEntity 賦課台帳;
+    private HanyoListFukaDaichoProcessCore breakProcessCore;
     @BatchWriter
     private CsvWriter<HanyoListFukaDaichoNoRenbanCsvEntity> csvWriter;
 
     @Override
     protected void initialize() {
+        flag = 0;
         システム日時 = YMDHMS.now();
         csvEditor = new HanyoListFukaDaichoCsvNoRenbanEditor();
         personalDataList = new ArrayList<>();
@@ -202,6 +207,8 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchProcessBase<HanyoLi
         hokenryoDankaiSettings = HokenryoDankaiSettings.createInstance();
         保険料段階リスト = hokenryoDankaiSettings.get保険料段階ListIn(processParameter.get賦課年度());
         構成市町村マスタlist = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
+        賦課台帳 = new HanyoListFukaDaichoEntity();
+        breakProcessCore = new HanyoListFukaDaichoProcessCore();
     }
 
     @Override
@@ -237,22 +244,40 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchProcessBase<HanyoLi
     }
 
     @Override
-    protected void process(HanyoListFukaDaichoEntity entity) {
-        if (is出力データ(entity)) {
-            csvWriter.writeLine(csvEditor.editor(entity, processParameter, 保険料段階リスト, 構成市町村マスタlist,
-                    new FlexibleDate(システム日時.getDate().toDateString())));
-            personalDataList.add(toPersonalData(entity));
+    protected void usualProcess(HanyoListFukaDaichoTmpEntity entity) {
+        if (flag == 0) {
+            flag = 1;
         }
     }
 
-    private PersonalData toPersonalData(HanyoListFukaDaichoEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE), 定数_被保険者番号,
-                entity.get被保険者台帳管理Newest().getHihokenshaNo().value());
-        return PersonalData.of(entity.get宛名().getShikibetsuCode(), expandedInfo);
+    @Override
+    protected void keyBreakProcess(HanyoListFukaDaichoTmpEntity entity) {
+        flag = 2;
+        賦課台帳 = breakProcessCore.keyBreakProcess(getBefore(), entity);
+        csvファイル出力();
     }
 
     @Override
     protected void afterExecute() {
+        if (flag == 1) {
+            賦課台帳 = new HanyoListFukaDaichoEntity();
+            賦課台帳.set介護賦課(getBefore().get介護賦課());
+            賦課台帳.get調定共通リスト().add(getBefore().get調定共通());
+            賦課台帳.get介護期別リスト().add(getBefore().get介護期別());
+            賦課台帳.set介護徴収方法(getBefore().get介護徴収方法());
+            賦課台帳.set受給者台帳Newest(getBefore().get受給者台帳Newest());
+            賦課台帳.set被保険者台帳管理Newest(getBefore().get被保険者台帳管理Newest());
+            賦課台帳.set宛名(getBefore().get宛名());
+            賦課台帳.set宛先(getBefore().get宛先());
+            賦課台帳.set特別徴収義務者コード(getBefore().get特別徴収義務者コード());
+            賦課台帳.set本算定後(getBefore().is本算定後());
+            csvファイル出力();
+        }
+        if (flag == 2) {
+            賦課台帳 = breakProcessCore.getFinal賦課台帳();
+            csvファイル出力();
+        }
+
         if ((personalDataList == null || personalDataList.isEmpty()) && processParameter.is項目名付加()) {
             csvWriter.writeLine(new HanyoListFukaDaichoNoRenbanCsvEntity());
         }
@@ -266,6 +291,16 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchProcessBase<HanyoLi
         バッチ出力条件リストの出力();
     }
 
+    private void csvファイル出力() {
+        if (賦課台帳 != null) {
+            if (is出力データ(賦課台帳)) {
+                csvWriter.writeLine(csvEditor.editor(賦課台帳, processParameter, 保険料段階リスト, 構成市町村マスタlist,
+                        new FlexibleDate(システム日時.getDate().toDateString())));
+                personalDataList.add(toPersonalData(賦課台帳));
+            }
+        }
+    }
+
     private boolean is出力データ(HanyoListFukaDaichoEntity entity) {
         if (ChoshuHoho.全て.getコード().equals(processParameter.get徴収方法())
                 || ChoshuHoho.前半普後半特.getコード().equals(processParameter.get徴収方法())) {
@@ -277,10 +312,10 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchProcessBase<HanyoLi
             for (UrT0705ChoteiKyotsuEntity 調定共通 : entity.get調定共通リスト()) {
                 if (介護期別.getChoteiId().compareTo(new Decimal(調定共通.getChoteiId())) == 0) {
                     if (ChoshuHohoKibetsu.特別徴収.getコード().equals(介護期別.getChoshuHouhou())) {
-                        特徴納付額.add(調定共通.getChoteigaku());
+                        特徴納付額 = 特徴納付額.add(調定共通.getChoteigaku());
                     }
                     if (ChoshuHohoKibetsu.普通徴収.getコード().equals(介護期別.getChoshuHouhou())) {
-                        普徴納付額.add(調定共通.getChoteigaku());
+                        普徴納付額 = 普徴納付額.add(調定共通.getChoteigaku());
                     }
                     break;
                 }
@@ -296,6 +331,12 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchProcessBase<HanyoLi
         }
         return ChoshuHoho.併徴者のみ.getコード().equals(processParameter.get徴収方法())
                 && 特徴納付額.compareTo(Decimal.ZERO) > 0 && 普徴納付額.compareTo(Decimal.ZERO) > 0;
+    }
+
+    private PersonalData toPersonalData(HanyoListFukaDaichoEntity entity) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE), 定数_被保険者番号,
+                entity.get被保険者台帳管理Newest().getHihokenshaNo().value());
+        return PersonalData.of(entity.get宛名().getShikibetsuCode(), expandedInfo);
     }
 
     private void バッチ出力条件リストの出力() {

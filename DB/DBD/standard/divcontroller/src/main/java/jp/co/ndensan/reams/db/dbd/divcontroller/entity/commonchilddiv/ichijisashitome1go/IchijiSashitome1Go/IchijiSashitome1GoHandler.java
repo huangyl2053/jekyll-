@@ -301,8 +301,9 @@ public class IchijiSashitome1GoHandler {
                 div.getTxtHokenshoTeishutsuKigenYMD().setValue(支払方法変更差止.get控除通知書発行年月日());
                 if (支払方法変更差止.get差止控除番号() == null) {
                     div.getDdlTorokuKojoNo().setSelectedKey(RString.EMPTY);
+                } else {
+                    div.getDdlTorokuKojoNo().setSelectedKey(支払方法変更差止.get差止控除番号());
                 }
-                div.getDdlTorokuKojoNo().setSelectedKey(支払方法変更差止.get差止控除番号());
                 break;
             default:
                 break;
@@ -313,6 +314,7 @@ public class IchijiSashitome1GoHandler {
         div.getBtnSashitomeOrKojoTorokuKakutei().setDisabled(false);
         div.setPTN(更新PTN);
         償還情報一覧初期表示();
+        DisplayNone_照会用(true);
         div.setButton_Name(登録一覧);
         return pairs;
     }
@@ -397,6 +399,8 @@ public class IchijiSashitome1GoHandler {
             div.getTxtSashitomeTorokuYMD().setReadOnly(true);
             div.getTxtSashitomeTorokuTsuchiHakkoYMD().setReadOnly(true);
             div.getTxtSashitomeNofuKigenYMD().setReadOnly(true);
+            div.getTxtSashitomeKaijoYMD().setDisplayNone(false);
+            div.getTxtSashitomeKaijoYMD().setVisible(true);
             div.getTxtSashitomeKaijoYMD().setDisabled(false);
         } else if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_保険料控除登録)) {
             div.getShokanJoho().setTitle(new RString("控除解除"));
@@ -488,6 +492,12 @@ public class IchijiSashitome1GoHandler {
         TainoHanteiResultKohen 滞納判定結果 = DataPassingConverter.deserialize(div.getTainoHanteiKekka(), TainoHanteiResultKohen.class);
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().validateFor滞納状況情報チェック(pairs, div, 支払方法変更管理業務概念);
+        getValidationHandler().validateFor差止登録日未入力(pairs, div);
+        getValidationHandler().validateFor差止納付期限未入力(pairs, div);
+        getValidationHandler().validateFor差止解除日未入力(pairs, div);
+        getValidationHandler().validateFor控除決定日未入力(pairs, div);
+        getValidationHandler().validateFor控除番号未選択(pairs, div);
+        getValidationHandler().validateFor保険証提出期限未入力(pairs, div);
         if (pairs.iterator().hasNext()) {
             return pairs;
         }
@@ -658,7 +668,12 @@ public class IchijiSashitome1GoHandler {
                 if (支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get情報分類区分().equals(ShiharaiHenkoJohoBunruiKubun.差止情報.getコード())) {
                     row.setSashitome2(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除状態区分());
                     row.setSeiriNo(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止償還整理番号());
-                    row.getTxtTeikyoYM().setValue(new FlexibleDate(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止サービス提供年月().toString()));
+                    FlexibleYearMonth 差止サービス提供年月 = 支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止サービス提供年月();
+                    if (差止サービス提供年月 == null || 差止サービス提供年月.isEmpty()) {
+                        row.getTxtTeikyoYM().setValue(FlexibleDate.EMPTY);
+                    } else {
+                        row.getTxtTeikyoYM().setValue(new FlexibleDate(差止サービス提供年月.toString()));
+                    }
                 }
                 row.setKojoNo(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get差止控除番号());
                 row.getTxtKojoTorokuYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoSashitomeList().get(i).get控除決定年月日());

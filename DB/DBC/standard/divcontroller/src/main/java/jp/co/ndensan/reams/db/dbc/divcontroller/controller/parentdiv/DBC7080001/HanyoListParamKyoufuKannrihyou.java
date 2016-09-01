@@ -20,7 +20,7 @@ public class HanyoListParamKyoufuKannrihyou {
     /**
      * 画面初期化です。
      *
-     * @param div 汎用リスト出力(給付管理票) の画面Div
+     * @param div HanyoListParamKyoufuKannrihyouDiv
      * @return ResponseData<HanyoListParamDiv>
      */
     public ResponseData<HanyoListParamKyoufuKannrihyouDiv> onload(HanyoListParamKyoufuKannrihyouDiv div) {
@@ -31,7 +31,7 @@ public class HanyoListParamKyoufuKannrihyou {
     /**
      * 「実行する」ボタンのメソッドです。
      *
-     * @param div HanyoListParamDiv
+     * @param div HanyoListParamKyoufuKannrihyouDiv
      * @return ResponseData
      */
     public ResponseData<DBC710080_HanyoListKyufuKanriHyoParameter> onclick_btBatch(HanyoListParamKyoufuKannrihyouDiv div) {

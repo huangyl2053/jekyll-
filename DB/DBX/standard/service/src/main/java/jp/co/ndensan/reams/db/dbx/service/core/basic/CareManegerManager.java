@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護支援専門員を管理するクラスです。
+ *
+ * @reamsid_L DBC-3370-010 yuqingzhang
  */
 public class CareManegerManager {
 
@@ -88,6 +90,6 @@ public class CareManegerManager {
         if (!介護支援専門員.hasChanged()) {
             return false;
         }
-        return 1 == dac.save(介護支援専門員.toEntity());
+        return 1 == dac.saveOrDeletePhysicalBy(介護支援専門員.toEntity());
     }
 }

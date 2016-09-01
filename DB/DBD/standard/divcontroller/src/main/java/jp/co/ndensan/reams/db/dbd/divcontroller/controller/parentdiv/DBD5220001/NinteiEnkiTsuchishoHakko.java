@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoChild;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -183,6 +183,7 @@ public class NinteiEnkiTsuchishoHakko {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             NinteiEnkiTsuchishoHakkoValidationHandler validationHandler = getValidationHandler();
             validationHandler.更新対象のデータがないチェック(pairs, div);
+            validationHandler.整合性チェック(pairs, div);
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
@@ -259,7 +260,7 @@ public class NinteiEnkiTsuchishoHakko {
      * @return ResponseData<NinteiEnkiTsuchishoHakkoDiv>
      */
     public ResponseData<NinteiEnkiTsuchishoHakkoDiv> beforeOpen_riyuselect(NinteiEnkiTsuchishoHakkoDiv div) {
-        div.getEnkiTsuchiHakkoTaishosha().setHiddenGyomuCode(SubGyomuCode.DBD介護受給.getColumnValue());
+        div.getEnkiTsuchiHakkoTaishosha().setHiddenGyomuCode(GyomuCode.DB介護保険.getColumnValue());
         div.getEnkiTsuchiHakkoTaishosha().setHiddenGroupCode(グループコード);
         return ResponseData.of(div).respond();
     }

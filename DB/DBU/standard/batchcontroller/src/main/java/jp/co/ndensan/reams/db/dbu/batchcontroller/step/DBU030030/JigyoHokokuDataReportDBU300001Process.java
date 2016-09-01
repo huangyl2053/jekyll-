@@ -5,10 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU030030;
 
+import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbu.business.report.jigyohokokugeppoyoshiki1.JigyohokokuGeppoYoshiki1Report;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNo;
-import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParamter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.reportid.ReportIdDBU;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoyoshiki1.JigyohokokuGeppoYoshiki1Data;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyojokyohokokushiryonemposakuseiiti.JigyoHokokuDataRelateEntity;
@@ -37,7 +38,7 @@ public class JigyoHokokuDataReportDBU300001Process extends BatchProcessBase<Jigy
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyojokyohokokushiryonemposakuseiiti."
             + "IJigyoJokyoHokokuShiryoNempoSakuseiItiMapper.getJigyouHokokuTokeiReportJyoho");
-    private JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParamter processParameter;
+    private JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter processParameter;
 
     private static final ReportId REPORT_DBU300001 = ReportIdDBU.DBU300001.getReportId();
     private static final RString 過去集計分旧市町村区分 = new RString("1");
@@ -83,6 +84,9 @@ public class JigyoHokokuDataReportDBU300001Process extends BatchProcessBase<Jigy
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
+        syukeiNo0200 = new HashMap<>();
+        syukeiNo0301 = new HashMap<>();
+        syukeiNo0302 = new HashMap<>();
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         保険者番号 = 地方公共団体.get地方公共団体コード().value();
         if (過去集計分旧市町村区分.equals(processParameter.get過去集計分旧市町村区分())) {

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220012;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.IPrintContentsSettingDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.PrintContentsSettingDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonReportPublish;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -30,8 +30,8 @@ public class OutputJukyushaIdoRenrakuhyoDiv extends Panel {
     private CheckBoxList chkJukyushaTeiseiRearakuhyoHakkou;
     @JsonProperty("chkJukyushaIdoRenrakuhyo")
     private CheckBoxList chkJukyushaIdoRenrakuhyo;
-    @JsonProperty("btnHakkou")
-    private Button btnHakkou;
+    @JsonProperty("btnReportPublish")
+    private ButtonReportPublish btnReportPublish;
     @JsonProperty("JukyushaIdoRenrakuhyoHenkoPrintSetting")
     private PrintContentsSettingDiv JukyushaIdoRenrakuhyoHenkoPrintSetting;
 
@@ -78,21 +78,21 @@ public class OutputJukyushaIdoRenrakuhyoDiv extends Panel {
     }
 
     /*
-     * getbtnHakkou
-     * @return btnHakkou
+     * getbtnReportPublish
+     * @return btnReportPublish
      */
-    @JsonProperty("btnHakkou")
-    public Button getBtnHakkou() {
-        return btnHakkou;
+    @JsonProperty("btnReportPublish")
+    public ButtonReportPublish getBtnReportPublish() {
+        return btnReportPublish;
     }
 
     /*
-     * setbtnHakkou
-     * @param btnHakkou btnHakkou
+     * setbtnReportPublish
+     * @param btnReportPublish btnReportPublish
      */
-    @JsonProperty("btnHakkou")
-    public void setBtnHakkou(Button btnHakkou) {
-        this.btnHakkou = btnHakkou;
+    @JsonProperty("btnReportPublish")
+    public void setBtnReportPublish(ButtonReportPublish btnReportPublish) {
+        this.btnReportPublish = btnReportPublish;
     }
 
     /*

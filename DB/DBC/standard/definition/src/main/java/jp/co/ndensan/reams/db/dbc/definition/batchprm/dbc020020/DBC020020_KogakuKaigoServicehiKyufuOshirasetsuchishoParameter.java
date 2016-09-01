@@ -31,7 +31,7 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter exten
     @BatchParameter(key = "sakuseibi", name = "作成日")
     private FlexibleDate sakuseibi;
     @BatchParameter(key = "hihokenshaNo", name = "被保険者番号")
-    private HihokenshaNo hihokenshaNo;
+    private RString hihokenshaNo;
     @BatchParameter(key = "isShinseishoHakko", name = "is申請書発行")
     private boolean isShinseishoHakko;
     @BatchParameter(key = "isOshiraseTsuchishoHakko", name = "isお知らせ通知書発行")
@@ -69,7 +69,11 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter exten
      * @return プロセスパラメータ
      */
     public KogakuKaigoServicehiOshiraseHakkoProcessParameter toProcessParameter() {
-        return new KogakuKaigoServicehiOshiraseHakkoProcessParameter(shoriYm, sakuseibi, hihokenshaNo, isShinseishoHakko,
+        HihokenshaNo tmp = HihokenshaNo.EMPTY;
+        if (!RString.isNullOrEmpty(hihokenshaNo)) {
+            tmp = new HihokenshaNo(hihokenshaNo);
+        }
+        return new KogakuKaigoServicehiOshiraseHakkoProcessParameter(shoriYm, sakuseibi, tmp, isShinseishoHakko,
                 isOshiraseTsuchishoHakko, isHakkoIchiranhyoHakko, isKinyuKikanHyoji, shiseibi, uketsukebi, keteibi, shinseishoTeishutsuKigen,
                 chushutsuJoken, menuId, isJutakuAri, shutsuryokujunId, bunshoMojiretsu, ininjoTeishutsusaki, shinseishoTelNoHyoji);
     }

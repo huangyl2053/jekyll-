@@ -65,10 +65,10 @@ public class SogojigyohiKohiJukyushaHeadEditor implements ISogojigyohiKohiJukyus
         RString 作成時 = 作成日時.getTime()
                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
-        source.shinsaYM = 帳票出力対象データ.get審査年月().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+        source.shinsaYM = 帳票出力対象データ.get審査年月().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         source.kokuhorenName = 帳票出力対象データ.get国保連合会名();
-        source.kohiFutanshaNo = 帳票出力対象データ.get公費受給者番号();
+        source.kohiFutanshaNo = 帳票出力対象データ.get公費負担者番号();
         source.kohiFutanshaName = 帳票出力対象データ.get公費負担者名();
         source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);
         source.shutsuryokujun2 = get並び順(KEY_並び順の３件目);

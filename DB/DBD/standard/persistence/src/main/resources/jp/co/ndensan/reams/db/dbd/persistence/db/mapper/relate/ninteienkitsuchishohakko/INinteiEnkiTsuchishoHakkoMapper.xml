@@ -146,10 +146,10 @@
             AND  (A."ninteiShinseiShinseijiKubunCode" = #{申請区分_更新申請} OR A."ninteiShinseiShinseijiKubunCode" = #{申請区分_区分変更申請})
         </if>
         <if test="is発行有無_発行未チェックON">
-            AND  (A."enkiTsuchiHakkoYMD" IS NULL OR A."enkiTsuchiHakkoYMD" = '')
+            AND  (A."enkiTsuchiHakkoYMD" IS NULL)
         </if>
         <if test="is発行有無_発行済チェックON">
-            AND  (A."enkiTsuchiHakkoYMD" IS NOT NULL OR A."enkiTsuchiHakkoYMD" <![CDATA[<>]]> '')
+            AND  (A."enkiTsuchiHakkoYMD" IS NOT NULL)
         </if>
         AND A."minashiNigoEtcTaishoFlag" = #{みなし２号等対象フラグ}
         <if test="is処理見込み日Fromが入力">
@@ -169,7 +169,7 @@
                 AND  (F."ninteichosaKanryoYMD" IS NULL)
             </if>
             <if test="!is単一">
-                T4003."chosaShuryoYMD" IS NULL
+                AND  T4003."chosaShuryoYMD" IS NULL
             </if>
         </if>
         <if test="is認定調査_調査済チェックON">
@@ -177,7 +177,7 @@
                 AND  (F."ninteichosaKanryoYMD" IS NOT NULL)
             </if>
             <if test="!is単一">
-                T4003."chosaShuryoYMD" IS NOT NULL
+                AND  T4003."chosaShuryoYMD" IS NOT NULL
             </if>
         </if>
         <if test="is意見書受領_受領未チェックON">
@@ -185,7 +185,7 @@
                 AND  (F."ikenshoTorokuKanryoYMD" IS NULL)
             </if>
             <if test="!is単一">
-                T4003."ikenshoToriyoseYMD" IS NULL
+                AND  T4003."ikenshoToriyoseYMD" IS NULL
             </if>
         </if>
         <if test="is意見書受領_受領済チェックON">
@@ -193,7 +193,7 @@
                 AND  (F."ikenshoTorokuKanryoYMD" IS NOT NULL)
             </if>
             <if test="!is単一">
-                T4003."ikenshoToriyoseYMD" IS NOT NULL
+                AND  T4003."ikenshoToriyoseYMD" IS NOT NULL
             </if>
         </if>
         <if test="is一次判定_判定未チェックON">
@@ -201,7 +201,7 @@
                 AND  (F."ichijiHanteiKanryoYMD" IS NULL)
             </if>
             <if test="!is単一">
-                T4003."ichijiHanteiYMD" IS NULL
+                AND  T4003."ichijiHanteiYMD" IS NULL
             </if>
         </if>
         <if test="is一次判定_判定済チェックON">
@@ -209,7 +209,7 @@
                 AND  (F."ichijiHanteiKanryoYMD" IS NOT NULL)
             </if>
             <if test="!is単一">
-                T4003."ichijiHanteiYMD" IS NOT NULL
+                AND  T4003."ichijiHanteiYMD" IS NOT NULL
             </if>
         </if>
         <if test="is審査会割付_割付未チェックON">
@@ -217,7 +217,7 @@
                 AND  (F."ninteiShinsakaiWariateKanryoYMD" IS NULL)
             </if>
             <if test="!is単一">
-                T4003."shinsakaiYoteiYMD" IS NULL
+                AND  T4003."shinsakaiYoteiYMD" IS NULL
             </if>
         </if>
         <if test="is審査会割付_割付済チェックON">
@@ -225,7 +225,7 @@
                 AND  (F."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL)
             </if>
             <if test="!is単一">
-                T4003."shinsakaiYoteiYMD" IS NOT NULL
+                AND  T4003."shinsakaiYoteiYMD" IS NOT NULL
             </if>
         </if>
     </sql>

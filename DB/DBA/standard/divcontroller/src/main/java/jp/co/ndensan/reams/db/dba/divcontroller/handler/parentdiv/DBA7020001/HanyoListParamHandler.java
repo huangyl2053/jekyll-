@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolistseikatsuhogojukyu
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolisttashichosonjushochitokureisha.HanyoListTaShichosonJushochiTokureishaBatchParameter;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaBatchParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7020001.HanyoListParamDiv;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.common.CSVSettings;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;

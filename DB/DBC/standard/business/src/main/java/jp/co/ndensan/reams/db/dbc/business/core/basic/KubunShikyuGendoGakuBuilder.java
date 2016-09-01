@@ -81,7 +81,6 @@ public class KubunShikyuGendoGakuBuilder {
      * @return {@link KubunShikyuGendoGakuBuilder}
      */
     public KubunShikyuGendoGakuBuilder set適用終了年月(FlexibleYearMonth 適用終了年月) {
-        requireNonNull(適用終了年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用終了年月"));
         entity.setTekiyoShuryoYM(適用終了年月);
         return this;
     }

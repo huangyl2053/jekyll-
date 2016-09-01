@@ -58,6 +58,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -91,6 +92,7 @@ public class SogojigyohiKohiJukyushaDoIchiranhyoSakuseiProcess extends BatchKeyB
             = new RString("DBC200083_SogojigyohiKohiJukyushaBetsuIchiran.csv");
     private static final RString ダブル引用符 = new RString("\"");
     private int 連番 = 1;
+    private RString 固定改頁項目ID = new RString("0134");
 
     private FileSpoolManager manager;
     private IOutputOrder 出力順情報;
@@ -121,7 +123,7 @@ public class SogojigyohiKohiJukyushaDoIchiranhyoSakuseiProcess extends BatchKeyB
         出力順Map = new HashMap<>();
         pageBreakKeys = new ArrayList<>();
         帳票データの取得Parameter = new KokuhorenIchiranhyoMybatisParameter();
-        pageBreakKeys.add(new RString(SogojigyohiKohiJukyushaSource.ReportSourceFields.kohiFutanshaNo.name()));
+        pageBreakKeys.add(固定改頁項目ID);
         RString orderByStr = MyBatisOrderByClauseCreator.create(SogojigyohiKohiJukyushaOutPutOrder.class, 出力順情報);
         if (RString.isNullOrEmpty(orderByStr)) {
             orderByStr = デフォルト出力順;
@@ -234,7 +236,7 @@ public class SogojigyohiKohiJukyushaDoIchiranhyoSakuseiProcess extends BatchKeyB
         SogojigyohiKohiJukyushaCsvEntity output = new SogojigyohiKohiJukyushaCsvEntity();
         if (連番 == 1) {
             FlexibleYearMonth 審査年月 = entity.get審査年月();
-            output.set審査年月(審査年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+            output.set審査年月(審査年月.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
@@ -261,6 +263,9 @@ public class SogojigyohiKohiJukyushaDoIchiranhyoSakuseiProcess extends BatchKeyB
         output.set公費対象単位数(doカンマ編集(entity.get公費対象単位数()));
         output.set公費負担金額(doカンマ編集(entity.get公費負担金額()));
         output.set公費分本人負担額(doカンマ編集(entity.get公費分本人負担額()));
+        output.set被保険者番号(getColumnValue(entity.get被保険者番号()));
+        output.set被保険者氏名(entity.get宛名名称());
+        output.set証記載保険者番号(getColumnValue(entity.get証記載保険者番号()));
         output.set公費対象単位数集計(RString.EMPTY);
         output.set公費分本人負担額集計(RString.EMPTY);
         output.set公費負担金額集計(RString.EMPTY);
@@ -282,6 +287,9 @@ public class SogojigyohiKohiJukyushaDoIchiranhyoSakuseiProcess extends BatchKeyB
         output.set公費対象単位数(RString.EMPTY);
         output.set公費負担金額(RString.EMPTY);
         output.set公費分本人負担額(RString.EMPTY);
+        output.set被保険者番号(RString.EMPTY);
+        output.set被保険者氏名(RString.EMPTY);
+        output.set証記載保険者番号(RString.EMPTY);
         output.set公費対象単位数集計(doカンマ編集(entity.get公費対象単位数集計()));
         output.set公費分本人負担額集計(doカンマ編集(entity.get公費分本人負担額集計()));
         output.set公費負担金額集計(doカンマ編集(entity.get公費負担金額集計()));
@@ -331,5 +339,12 @@ public class SogojigyohiKohiJukyushaDoIchiranhyoSakuseiProcess extends BatchKeyB
             return RString.EMPTY;
         }
         return 年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString getColumnValue(IDbColumnMappable entity) {
+        if (null != entity) {
+            return entity.getColumnValue();
+        }
+        return RString.EMPTY;
     }
 }

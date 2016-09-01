@@ -15,8 +15,6 @@ import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD52200
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5220001.NinteiEnkiTsuchishoHakkoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5220001.dgHakkotaishosha_Row;
 import jp.co.ndensan.reams.db.dbd.service.core.ninteienkitsuchishohakko.NinteiEnkiTsuchishoHakkoManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBDCodeShubetsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -39,7 +37,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * 認定延期通知発行画面のHandlerクラスです。
@@ -80,13 +77,19 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         if (!経過日数.isNullOrEmpty()) {
             div.getTxtKeikaNissu().setValue(new Decimal(経過日数.toString()));
         }
-        RString 延期理由 = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.消費税率.getコード(),
-                new FlexibleDate(RDate.getNowDate().toDateString())).get(0).getコード名称();
-        CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.消費税率.getコード());
+        List<RString> 延期の理由 = NinteiEnkiTsuchishoHakkoManager.createInstance().get延期の理由();
         List<KeyValueDataSource> 延期の理由DataSource = new ArrayList<>();
-        延期の理由DataSource.add(new KeyValueDataSource(DBDCodeShubetsu.延期理由.getコード().getColumnValue(), 延期理由));
+        int key = 1;
+        for (RString 延期理由 : 延期の理由) {
+            延期の理由DataSource.add(new KeyValueDataSource(new RString(key), 延期理由));
+            key++;
+        }
         div.getDdlEnkiRiyu().setDataSource(延期の理由DataSource);
         div.getDdlEnkiRiyuInput().setDataSource(延期の理由DataSource);
+        if (!延期の理由DataSource.isEmpty()) {
+            div.getDdlEnkiRiyu().setSelectedIndex(0);
+            div.getDdlEnkiRiyuInput().setSelectedIndex(0);
+        }
         RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (!最大表示件数.isNullOrEmpty()) {
             div.getTxtMaxDisp().setValue(new Decimal(最大表示件数.toString()));
@@ -237,10 +240,12 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         for (int index = 0; index < rowList.size(); index++) {
             if (selectedRowList.contains(rowList.get(index))) {
                 rowList.get(index).setEnkiriyu(延期理由);
+                rowList.get(index).setChangeflag(変更フラグ_変更);
             }
         }
         for (int index = 0; index < selectedRowList.size(); index++) {
             selectedRowList.get(index).setEnkiriyu(延期理由);
+            selectedRowList.get(index).setChangeflag(変更フラグ_変更);
         }
         div.getDgHakkotaishosha().setDataSource(rowList);
         div.getDgHakkotaishosha().setSelectedItems(selectedRowList);
@@ -273,18 +278,6 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         for (int index = 0; index < rowList.size(); index++) {
             rowList.get(index).setChangeflag(RString.EMPTY);
         }
-    }
-
-    private boolean isEnkiriyuAri(List<KeyValueDataSource> dataSourceList, RString enkiriyu) {
-        if (dataSourceList.isEmpty()) {
-            return false;
-        }
-        for (KeyValueDataSource dataSource : dataSourceList) {
-            if (enkiriyu.equals(dataSource.getValue())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
@@ -458,12 +451,14 @@ public class NinteiEnkiTsuchishoHakkoHandler {
             dgHakkotaishosha_Row row = rowList.get(index);
             if (clickRow.equals(row)) {
                 row.setEnkiriyu(サンプル文書);
+                row.setChangeflag(変更フラグ_変更);
             }
         }
         for (int index = 0; index < selectedRowList.size(); index++) {
             dgHakkotaishosha_Row row = selectedRowList.get(index);
             if (clickRow.equals(row)) {
                 row.setEnkiriyu(サンプル文書);
+                row.setChangeflag(変更フラグ_変更);
             }
         }
         div.getDgHakkotaishosha().setDataSource(rowList);

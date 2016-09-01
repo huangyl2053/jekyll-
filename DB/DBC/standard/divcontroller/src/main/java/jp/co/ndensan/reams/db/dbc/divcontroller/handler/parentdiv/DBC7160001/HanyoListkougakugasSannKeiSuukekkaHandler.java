@@ -37,17 +37,20 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
     private static final RString すべて = new RString("すべて");
     private static final RString 国保連作成 = new RString("国保連作成");
     private static final RString 保険者作成 = new RString("保険者作成");
+    private static final RString KEY_0 = new RString("key0");
     private static final RString KEY_1 = new RString("key1");
+    private static final RString KEY_2 = new RString("key2");
     private static final RString 通常データ = new RString("通常データ");
     private static final RString 仮算定データ = new RString("仮算定データ");
     private static final RString 項目名付加キー = new RString("項目名付加");
     private static final RString 連番付加キー = new RString("連番付加");
     private static final RString 日付編集キー = new RString("日付編集");
+    private static final int 調定年度を含めて8年分 = 8;
 
     /**
      * コンストラクタです。
      *
-     * @param div HanyoListOutputParamDiv
+     * @param div HanyoListkougakugasSannKeiSuukekkaDiv
      */
     public HanyoListkougakugasSannKeiSuukekkaHandler(HanyoListkougakugasSannKeiSuukekkaDiv div) {
         this.div = div;
@@ -81,29 +84,53 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
         RDate 日付関連_調定年度 = new RDate(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, nowdate, SubGyomuCode.DBB介護賦課).toString());
         List<KeyValueDataSource> datasource = new ArrayList<>();
         datasource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
-        datasource.add(new KeyValueDataSource(日付関連_調定年度.toDateString(), 日付関連_調定年度.wareki().toDateString()));
-        if (日付関連_調定年度.isBefore(日付関連_当初年度)) {
-            RDate 対応日 = 日付関連_調定年度.minusYear(NUM_1);
-            datasource.add(new KeyValueDataSource(対応日.getYear().toDateString(), 対応日.wareki().toDateString()));
+        datasource.add(new KeyValueDataSource(日付関連_調定年度.toDateString(), 日付関連_調定年度.getYear().wareki().toDateString()));
+        for (int i = 0; i < 調定年度を含めて8年分; i++) {
+            if (日付関連_当初年度.isBefore(日付関連_調定年度)) {
+                日付関連_調定年度 = 日付関連_調定年度.minusYear(NUM_1);
+                datasource.add(new KeyValueDataSource(日付関連_調定年度.getYear().toDateString(), 日付関連_調定年度.getYear().wareki().toDateString()));
+            } else {
+                break;
+            }
         }
         div.getChushutsuJokenPanel().getDdlTaishoNendo().setDataSource(datasource);
 
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701016.getReportId());
         div.getCcdShutsuryokuKoumoku().load(ReportIdDBC.DBC701016.getReportId().getColumnValue(), SubGyomuCode.DBC介護給付);
 
+    }
+
+    /**
+     * 抽出条件画面項目の制御のメソッドです。
+     */
+    public void setChange() {
         RString データ区分 = div.getChushutsuJokenPanel().getDdlDetaKubun().getSelectedValue();
         if (すべて.equals(データ区分)) {
+            List<KeyValueDataSource> datasource = new ArrayList<>();
+            datasource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+            div.getChushutsuJokenPanel().getRadDataShurui().setDisabledItem(datasource);
             div.getChushutsuJokenPanel().getRadDataShurui().setDisabled(false);
             div.getChushutsuJokenPanel().getTxtUketoriNengetsu().setDisabled(false);
             div.getChushutsuJokenPanel().getTxtSofuNengetsu().setDisabled(false);
+            div.getChushutsuJokenPanel().getRadDataShurui().clearSelectedItem();
+            div.getChushutsuJokenPanel().getRadDataShurui().setDisabled(false);
         } else if (保険者作成.equals(データ区分)) {
+            List<KeyValueDataSource> datasource = new ArrayList<>();
+            datasource.add(new KeyValueDataSource(KEY_0, すべて));
+            datasource.add(new KeyValueDataSource(KEY_2, 仮算定データ));
+            div.getChushutsuJokenPanel().getRadDataShurui().setDisabledItem(datasource);
             div.getChushutsuJokenPanel().getRadDataShurui().setSelectedKey(KEY_1);
             div.getChushutsuJokenPanel().getTxtUketoriNengetsu().setDisabled(true);
             div.getChushutsuJokenPanel().getTxtSofuNengetsu().setDisabled(false);
         } else if (国保連作成.equals(データ区分)) {
+            List<KeyValueDataSource> datasource = new ArrayList<>();
+            datasource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+            div.getChushutsuJokenPanel().getRadDataShurui().setDisabledItem(datasource);
             div.getChushutsuJokenPanel().getRadDataShurui().setDisabled(false);
             div.getChushutsuJokenPanel().getTxtUketoriNengetsu().setDisabled(false);
             div.getChushutsuJokenPanel().getTxtSofuNengetsu().setDisabled(true);
+            div.getChushutsuJokenPanel().getRadDataShurui().clearSelectedItem();
+            div.getChushutsuJokenPanel().getRadDataShurui().setDisabled(false);
         }
     }
 
@@ -177,8 +204,10 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
         } else {
             parameter.set日付スラッシュ付加(false);
         }
+        if (div.getChushutsuJokenPanel().getCcdHokenshaList().isVisible()) {
+            parameter.set保険者コード(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード());
+        }
 
-        parameter.set保険者コード(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード());
         parameter.set出力順(div.getCcdShutsuryokujun().get出力順ID());
         if (!div.getCcdShutsuryokuKoumoku().isDisabled()) {
             parameter.set出力項目(div.getCcdShutsuryokuKoumoku().get出力項目ID());

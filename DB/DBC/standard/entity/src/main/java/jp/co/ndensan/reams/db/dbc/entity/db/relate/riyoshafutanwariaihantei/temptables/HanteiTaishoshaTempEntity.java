@@ -42,6 +42,7 @@ public class HanteiTaishoshaTempEntity
     private FlexibleDate idobi;
     private RString idoJiyuCode;
     private FlexibleDate shikakuShiyutokiDate;
+    private FlexibleDate shikakuSoshitsuDate;
     private FlexibleDate firstShikakuShiyutokiDate;
     private RString hihokenshaKubunCode;
     private RString cityCode;
@@ -63,4 +64,5 @@ public class HanteiTaishoshaTempEntity
     private Decimal kazeiShotokuGaku;
     private RString gekihenKanwaKubun;
     private FlexibleDate hanteiKijunYMD;
+    private RString dataKubun;
 }

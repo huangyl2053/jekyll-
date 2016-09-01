@@ -12,9 +12,10 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.JukyushaId
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.IPrintContentsSettingDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonReportPublish;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
  * JukyushaTeiseiRenrakuhyoTorokuPanel のクラスファイル
@@ -32,6 +33,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelDiv extends Panel {
      */
     @JsonProperty("OutputJukyushaIdoRenrakuhyo")
     private OutputJukyushaIdoRenrakuhyoDiv OutputJukyushaIdoRenrakuhyo;
+    @JsonProperty("hdnFlag")
+    private TextBox hdnFlag;
     @JsonProperty("JukyushaIdoRenrakuhyo")
     private JukyushaIdoRenrakuhyoDiv JukyushaIdoRenrakuhyo;
     @JsonProperty("ccdKanryoMessage")
@@ -59,6 +62,24 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelDiv extends Panel {
     @JsonProperty("OutputJukyushaIdoRenrakuhyo")
     public void setOutputJukyushaIdoRenrakuhyo(OutputJukyushaIdoRenrakuhyoDiv OutputJukyushaIdoRenrakuhyo) {
         this.OutputJukyushaIdoRenrakuhyo = OutputJukyushaIdoRenrakuhyo;
+    }
+
+    /*
+     * gethdnFlag
+     * @return hdnFlag
+     */
+    @JsonProperty("hdnFlag")
+    public TextBox getHdnFlag() {
+        return hdnFlag;
+    }
+
+    /*
+     * sethdnFlag
+     * @param hdnFlag hdnFlag
+     */
+    @JsonProperty("hdnFlag")
+    public void setHdnFlag(TextBox hdnFlag) {
+        this.hdnFlag = hdnFlag;
     }
 
     /*
@@ -103,13 +124,13 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnHakkou() {
-        return this.getOutputJukyushaIdoRenrakuhyo().getBtnHakkou();
+    public ButtonReportPublish getBtnReportPublish() {
+        return this.getOutputJukyushaIdoRenrakuhyo().getBtnReportPublish();
     }
 
     @JsonIgnore
-    public void setBtnHakkou(Button btnHakkou) {
-        this.getOutputJukyushaIdoRenrakuhyo().setBtnHakkou(btnHakkou);
+    public void setBtnReportPublish(ButtonReportPublish btnReportPublish) {
+        this.getOutputJukyushaIdoRenrakuhyo().setBtnReportPublish(btnReportPublish);
     }
 
     @JsonIgnore

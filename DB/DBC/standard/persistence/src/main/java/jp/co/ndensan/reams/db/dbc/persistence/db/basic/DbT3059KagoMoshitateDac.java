@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -93,5 +94,34 @@ public class DbT3059KagoMoshitateDac implements ISaveable<DbT3059KagoMoshitateEn
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * MAX履歴番号で過誤申立を取得します。
+     *
+     * @param 事業所番号 JigyoshoNo
+     * @param 被保険者番号 HiHokenshaNo
+     * @param サービス提供年月 ServiceTeikyoYM
+     * @return DbT3059KagoMoshitateEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT3059KagoMoshitateEntity getMax履歴番号(
+            JigyoshaNo 事業所番号,
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月) throws NullPointerException {
+        requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業所番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(max(rirekiNo)).
+                table(DbT3059KagoMoshitate.class).
+                where(and(
+                                eq(jigyoshoNo, 事業所番号),
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月))).
+                toObject(DbT3059KagoMoshitateEntity.class);
     }
 }

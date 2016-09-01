@@ -96,14 +96,17 @@ public class SogojigyohiShikakuShogohyoEditor implements ISogojigyohiShikakuShog
                     entity.get要介護区分コード().getColumnValue());
             source.listUpper_8 = 要介護区分.getName();
         }
-        source.listUpper_9 = entity.get認定有効期間_開始年月日().wareki().separator(Separator.PERIOD)
-                .fillType(FillType.BLANK).toDateString();
-        if (null != entity.get認定有効期間_開始年月日() && !entity.get認定有効期間_開始年月日().isEmpty()
-                || null != entity.get認定有効期間_終了年月日() && !entity.get認定有効期間_終了年月日().isEmpty()) {
-            source.listUpper_10 = ティルデ;
+        if (null != entity.get支援事業所番号()) {
+            source.listLower_7 = entity.get支援事業所番号().getColumnValue();
         }
-        source.listUpper_11 = entity.get認定有効期間_終了年月日().wareki().separator(Separator.PERIOD)
-                .fillType(FillType.BLANK).toDateString();
+        set費用と区分(source);
+        set有効期間(source);
+        set合計件数(source);
+
+        return source;
+    }
+
+    private void set費用と区分(SogojigyohiShikakuShogohyoInSource source) {
         source.listUpper_12 = doカンマ編集(entity.get支給限度額());
         if (null != entity.get居宅サービス計画作成区分コード()) {
             source.listUpper_13 = entity.get居宅サービス計画作成区分コード().getColumnValue();
@@ -121,6 +124,19 @@ public class SogojigyohiShikakuShogohyoEditor implements ISogojigyohiShikakuShog
         source.listLower_1 = entity.get宛名名称();
         source.listLower_2 = entity.getサービス種類名();
         source.listLower_3 = entity.get事業所名();
+
+    }
+
+    private void set有効期間(SogojigyohiShikakuShogohyoInSource source) {
+
+        source.listUpper_9 = entity.get認定有効期間_開始年月日().wareki().separator(Separator.PERIOD)
+                .fillType(FillType.BLANK).toDateString();
+        if (null != entity.get認定有効期間_開始年月日() && !entity.get認定有効期間_開始年月日().isEmpty()
+                || null != entity.get認定有効期間_終了年月日() && !entity.get認定有効期間_終了年月日().isEmpty()) {
+            source.listUpper_10 = ティルデ;
+        }
+        source.listUpper_11 = entity.get認定有効期間_終了年月日().wareki().separator(Separator.PERIOD)
+                .fillType(FillType.BLANK).toDateString();
         source.listLower_4 = entity.get限度額適用期間_開始年月日().wareki().separator(Separator.PERIOD)
                 .fillType(FillType.BLANK).toDateString();
         if (null != entity.get限度額適用期間_開始年月日() && !entity.get限度額適用期間_開始年月日().isEmpty()
@@ -129,9 +145,9 @@ public class SogojigyohiShikakuShogohyoEditor implements ISogojigyohiShikakuShog
         }
         source.listLower_6 = entity.get限度額適用期間_終了年月日().wareki().separator(Separator.PERIOD)
                 .fillType(FillType.BLANK).toDateString();
-        if (null != entity.get支援事業所番号()) {
-            source.listLower_7 = entity.get支援事業所番号().getColumnValue();
-        }
+    }
+
+    private void set合計件数(SogojigyohiShikakuShogohyoInSource source) {
         if (flg) {
             source.gokeiKensuTitle = 合計件数タイトル;
             source.gokeiKensu = new RString(合計件数).concat(KEN);
@@ -139,8 +155,6 @@ public class SogojigyohiShikakuShogohyoEditor implements ISogojigyohiShikakuShog
             source.gokeiKensuTitle = RString.EMPTY;
             source.gokeiKensu = RString.EMPTY;
         }
-
-        return source;
     }
 
     private RString doカンマ編集(Decimal number) {

@@ -64,11 +64,11 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
     private static final RString 定数_なし = new RString("なし");
     private static final RString 定数_あり = new RString("あり");
     private static final RString TITLE_抽出対象者 = new RString("【抽出対象者】");
-    private static final RString TITLE_保険者 = new RString("　　　　保険者：");
-    private static final RString TITLE_国保連送付年月 = new RString("　　　　国保連送付年月：");
-    private static final RString TITLE_過誤申立給付区分 = new RString("　　　　過誤申立給付区分：");
-    private static final RString TITLE_サービス提供年月 = new RString("　　　　サービス提供年月：");
-    private static final RString TITLE_事業者 = new RString("　　　　事業者：");
+    private static final RString TITLE_保険者 = new RString("　保険者：");
+    private static final RString TITLE_国保連送付年月 = new RString("　国保連送付年月：");
+    private static final RString TITLE_過誤申立給付区分 = new RString("　過誤申立給付区分：");
+    private static final RString TITLE_サービス提供年月 = new RString("　サービス提供年月：");
+    private static final RString TITLE_事業者 = new RString("　事業者：");
     private static final RString 括弧LEFT = new RString("（");
     private static final RString 括弧RIGHT = new RString("）");
     private static final RString TILDE = new RString("～");
@@ -109,7 +109,7 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
 
     @Override
     protected void createWriter() {
-        spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID,
+        spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(),
                 csvFileName);
@@ -148,7 +148,7 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
 
     @Override
     protected void afterExecute() {
-        AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         csvWriter.close();
         spoolManager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLogUUID);
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
@@ -168,17 +168,15 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
 
     private List<RString> get抽出条件() {
         List<RString> 抽出条件 = new ArrayList<>();
-        RString temp;
         抽出条件.add(TITLE_抽出対象者);
-        //TODO  BP・保険者コード <> 「すべて」
-        if (parameter.get保険者コード() != null) {
+        if (parameter.get保険者コード() != null && !LasdecCode.EMPTY.equals(parameter.get保険者コード())) {
             Association association = AssociationFinderFactory.
                     createInstance().getAssociation(parameter.get保険者コード());
             抽出条件.add(TITLE_保険者.concat(association.get市町村名()));
         }
         if ((parameter.get国保連送付年月From() != null && !FlexibleYearMonth.EMPTY.equals(parameter.get国保連送付年月From()))
                 || (parameter.get国保連送付年月To() != null && !FlexibleYearMonth.EMPTY.equals(parameter.get国保連送付年月To()))) {
-            temp = TITLE_国保連送付年月;
+            RString temp = TITLE_国保連送付年月;
             if (parameter.get国保連送付年月From() != null && !FlexibleYearMonth.EMPTY.equals(parameter.get国保連送付年月From())) {
                 temp = temp.concat(dateFormat(parameter.get国保連送付年月From())).concat(RString.FULL_SPACE);
             }
@@ -188,10 +186,17 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
             }
             抽出条件.add(temp);
         }
-        抽出条件.add(TITLE_過誤申立給付区分.concat(KagoMoshitateHokenshaKubun.toValue(parameter.get過誤申立給付区分()).get名称()));
+        get抽出条件Part2(抽出条件);
+        return 抽出条件;
+    }
+
+    private void get抽出条件Part2(List<RString> 抽出条件) {
+        if (!RString.isNullOrEmpty(parameter.get過誤申立給付区分())) {
+            抽出条件.add(TITLE_過誤申立給付区分.concat(KagoMoshitateHokenshaKubun.toValue(parameter.get過誤申立給付区分()).get名称()));
+        }
         if ((parameter.getサービス提供年月From() != null && !FlexibleYearMonth.EMPTY.equals(parameter.getサービス提供年月From()))
                 || (parameter.getサービス提供年月To() != null && !FlexibleYearMonth.EMPTY.equals(parameter.getサービス提供年月To()))) {
-            temp = TITLE_サービス提供年月;
+            RString temp = TITLE_サービス提供年月;
             if (parameter.getサービス提供年月From() != null && !FlexibleYearMonth.EMPTY.equals(parameter.getサービス提供年月From())) {
                 temp = temp.concat(dateFormat(parameter.getサービス提供年月From())).concat(RString.FULL_SPACE);
             }
@@ -205,7 +210,6 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
             抽出条件.add(TITLE_事業者.concat(括弧LEFT).concat(parameter.get事業者コード()).
                     concat(括弧RIGHT).concat(parameter.get事業者名()));
         }
-        return 抽出条件;
     }
 
     private RString dateFormat(FlexibleYearMonth date) {

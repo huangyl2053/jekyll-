@@ -136,6 +136,10 @@ public enum ReportIdDBB {
      */
     DBB200009(new ReportId("DBB200009_HonsanteiKekkaIcihiran"), new RString("本算定結果一覧表")),
     /**
+     * 特別徴収平準化計算（特別徴収8月分）結果一覧表
+     */
+    DBB200005(new ReportId("DBB200005_TokubetsuChoshuHeijunkaKeisanAugustKekkaIchiran"), new RString("特別徴収平準化計算（特別徴収8月分）結果一覧表")),
+    /**
      * 保険料納入通知書（本算定）【コンビニ角公タイプ】
      */
     DBB100059(new ReportId("DBB100059_NonyuTsuchishoCVSKakuko"), new RString("保険料納入通知書（本算定）【コンビニ角公タイプ】")),
@@ -445,6 +449,10 @@ public enum ReportIdDBB {
      * 納付額一覧表（確定申告用）の帳票ID
      */
     DBB300005(new ReportId("DBB300005_NofugakuIchiran"), new RString("納付額一覧表（確定申告用）")),
+    /**
+     * 所得段階別被保険者数一覧表の帳票ID
+     */
+    DBB300004(new ReportId("DBB300004_ShotokuDankaiBetsuHihokenshasuIchiran"), new RString("所得段階別被保険者数一覧表")),
     /**
      * 保険料納入通知書（仮算定）発行一覧表の帳票ID
      */

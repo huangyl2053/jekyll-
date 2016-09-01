@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710090.HanyoListKagoMoshitateNoRenbanOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710090.HanyoListKagoMoshitateOutputProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710090.DBC710090_HanyoListKagoMoshitateParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710090.HanyoListKagoMoshitateProcessParameter;
@@ -26,17 +27,29 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 public class DBC710090_HanyoListKagoMoshitate extends BatchFlowBase<DBC710090_HanyoListKagoMoshitateParameter> {
 
     private static final String 過誤申立情報 = "HanyoListKagoMoshitateOutputProcess";
+    private static final String 過誤申立情報_連番しない = "HanyoListKagoMoshitateNoRenbanOutputProcess";
     private RDateTime システム日時;
 
     @Override
     protected void defineFlow() {
         システム日時 = RDateTime.now();
-        executeStep(過誤申立情報);
+        if (getParameter().is連番付加()) {
+            executeStep(過誤申立情報);
+        } else {
+            executeStep(過誤申立情報_連番しない);
+        }
     }
 
     @Step(過誤申立情報)
     IBatchFlowCommand hanyoListKagoMoshitateOutputProcess() {
         return loopBatch(HanyoListKagoMoshitateOutputProcess.class)
+                .arguments(getProcessParameter())
+                .define();
+    }
+
+    @Step(過誤申立情報_連番しない)
+    IBatchFlowCommand hanyoListKagoMoshitateNoRenbanOutputProcess() {
+        return loopBatch(HanyoListKagoMoshitateNoRenbanOutputProcess.class)
                 .arguments(getProcessParameter())
                 .define();
     }

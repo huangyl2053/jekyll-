@@ -201,14 +201,37 @@
                             AND #{システム日付} <![CDATA[<=]]> 受給者台帳."ninteiYukoKikanShuryoYMD"
                     )
             </if>
+        ORDER BY 
+                "dbT2002Fuka_choteiNendo", 
+                "dbT2002Fuka_fukaNendo", 
+                "dbT2002Fuka_tsuchishoNo", 
+                "dbT2002Fuka_rirekiNo"
     </sql>
     
     <resultMap id="resultMapHanyoListFukaDaichoEntity" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistfukadaicho.HanyoListFukaDaichoEntity">
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistfukadaicho.HanyoListFukaDaichoTmpEntity">
         <id column="dbT2002Fuka_choteiNendo" />
         <id column="dbT2002Fuka_fukaNendo" />
         <id column="dbT2002Fuka_tsuchishoNo" />
         <id column="dbT2002Fuka_rirekiNo" />
+        <id column="dbT2001ChoshuHoho_fukaNendo" />
+        <id column="dbT2001ChoshuHoho_hihokenshaNo" />
+        <id column="dbT2001ChoshuHoho_rirekiNo" />
+        <id column="dbV4001JukyushaDaicho_shichosonCode" />
+        <id column="dbV4001JukyushaDaicho_hihokenshaNo" />
+        <id column="dbV4001JukyushaDaicho_rirekiNo" />
+        <id column="dbV4001JukyushaDaicho_edaban" />
+        <id column="dbV4001JukyushaDaicho_jukyuShinseiJiyu" />
+        <id column="dbT1001HihokenshaDaicho_hihokenshaNo" />
+        <id column="dbT1001HihokenshaDaicho_idoYMD" />
+        <id column="dbT1001HihokenshaDaicho_edaNo" />
+        <id column="urT0705ChoteiKyotsu_choteiId" />
+        <id column="dbT2003Kibetsu_choteiNendo" />
+        <id column="dbT2003Kibetsu_fukaNendo" />
+        <id column="dbT2003Kibetsu_tsuchishoNo" />
+        <id column="dbT2003Kibetsu_rirekiNo" />
+        <id column="dbT2003Kibetsu_choshuHouhou" />
+        <id column="dbT2003Kibetsu_ki" />
         <result property="本算定後" column="本算定後" />
         <result property="特別徴収義務者コード" column="ueT0511NenkinTokuchoKaifuJoho_dtTokubetsuChoshuGimushaCode" 
                         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -224,11 +247,9 @@
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="宛先"
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
-        <collection property="調定共通リスト" 
-                    ofType="jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity"
+        <association property="調定共通" 
                     resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
-        <collection property="介護期別リスト" 
-                    ofType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity"
+        <association property="介護期別" 
                     resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
     </resultMap>
     

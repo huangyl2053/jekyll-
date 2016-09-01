@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.BatchFuchoKariSanteiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.FuchoKariSanteiFukaEntity;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisantei.FuchoKariSanteiEntity;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisantei.FuchoKarisanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB014003.BatchFuchoKariSanteiEntity;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB014003.DBB014003_FuchoKarisanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -108,7 +108,8 @@ public class FuchoKariSanteiFuka {
     /**
      * 初期化メソッドです。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link FuchoKariSanteiFuka}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link FuchoKariSanteiFuka}のインスタンス
      */
     public static FuchoKariSanteiFuka createInstance() {
         return InstanceProvider.create(FuchoKariSanteiFuka.class);
@@ -148,10 +149,10 @@ public class FuchoKariSanteiFuka {
      * @param entity FuchoKariSanteiFukaEntity
      * @return FuchoKariSanteiFukaParameter
      */
-    public FuchoKarisanteiBatchParameter createFuchoKariSanteiParameter(FuchoKariSanteiFukaEntity entity) {
-        List<FuchoKariSanteiEntity> 出力帳票一覧List = getChohyoIchiran(entity.get出力帳票一覧List(),
+    public DBB014003_FuchoKarisanteiTsuchishoHakkoParameter createFuchoKariSanteiParameter(FuchoKariSanteiFukaEntity entity) {
+        List<BatchFuchoKariSanteiEntity> 出力帳票一覧List = getChohyoIchiran(entity.get出力帳票一覧List(),
                 entity.get調定年度(), entity.get出力期());
-        FuchoKarisanteiBatchParameter resultParameter = new FuchoKarisanteiBatchParameter();
+        DBB014003_FuchoKarisanteiTsuchishoHakkoParameter resultParameter = new DBB014003_FuchoKarisanteiTsuchishoHakkoParameter();
         resultParameter.set調定年度(entity.get調定年度());
         resultParameter.set賦課年度(entity.get賦課年度());
         resultParameter.set出力帳票一覧List(出力帳票一覧List);
@@ -164,15 +165,15 @@ public class FuchoKariSanteiFuka {
         RString 出力期表示方法 = entity.get出力期表示方法();
         if (出力期表示方法 != null && !出力期表示方法.isEmpty()) {
             if (出力期表示方法.endsWith(出力期表示方法_分)) {
-                resultParameter.set出力期表示方法(出力期表示方法_1);
+                resultParameter.set出力期の表示方法(出力期表示方法_1);
             } else if (出力期表示方法.endsWith(出力期表示方法_)) {
-                resultParameter.set出力期表示方法(出力期表示方法_2);
+                resultParameter.set出力期の表示方法(出力期表示方法_2);
             }
         }
         resultParameter.set出力期(entity.get出力期());
-        resultParameter.set対象者フラグ(entity.get対象者());
-        resultParameter.set生活保護者をまとめて先頭に出力フラグ(entity.get生活保護者をまとめて先頭に出力フラグ());
-        resultParameter.setページごとに山分けフラグ(entity.getページごとに山分けフラグ());
+        resultParameter.set対象者(entity.get対象者());
+        resultParameter.set生活保護対象者をまとめて先頭に出力(entity.get生活保護者をまとめて先頭に出力フラグ());
+        resultParameter.setページごとに山分け(entity.getページごとに山分けフラグ());
         resultParameter.set一括発行起動フラグ(entity.is一括発行起動フラグ());
         return resultParameter;
     }
@@ -180,23 +181,23 @@ public class FuchoKariSanteiFuka {
     /**
      * 出力帳票一覧作成する。
      *
-     * @param 出力帳票List FuchoKariSanteiEntity
+     * @param 出力帳票List BatchFuchoKariSanteiEntity
      * @param 調定年度 FlexibleYear
      * @param 算定期 RString
-     * @return バッチ出力帳票リスト List<FuchoKariSanteiEntity>
+     * @return バッチ出力帳票リスト List<BatchFuchoKariSanteiEntity>
      * @throws ApplicationException ApplicationException
      */
-    public List<FuchoKariSanteiEntity> getChohyoIchiran(List<BatchFuchoKariSanteiResult> 出力帳票List,
+    public List<BatchFuchoKariSanteiEntity> getChohyoIchiran(List<BatchFuchoKariSanteiResult> 出力帳票List,
             FlexibleYear 調定年度, RString 算定期) throws ApplicationException {
-        List<FuchoKariSanteiEntity> resultList = new ArrayList<>();
+        List<BatchFuchoKariSanteiEntity> resultList = new ArrayList<>();
         if (出力帳票List == null || 出力帳票List.isEmpty()) {
             return resultList;
         }
         for (BatchFuchoKariSanteiResult 出力帳票entity : 出力帳票List) {
-            FuchoKariSanteiEntity バッチ出力帳票一覧Entity;
+            BatchFuchoKariSanteiEntity バッチ出力帳票一覧Entity;
             ReportId 帳票ID = 出力帳票entity.get帳票ID();
             if (!保険料納入通知書_仮算定_帳票分類ID.equals(帳票ID)) {
-                バッチ出力帳票一覧Entity = new FuchoKariSanteiEntity(
+                バッチ出力帳票一覧Entity = new BatchFuchoKariSanteiEntity(
                         帳票ID,
                         帳票ID,
                         出力帳票entity.get出力順ID()
@@ -220,7 +221,7 @@ public class FuchoKariSanteiFuka {
             if (通知書の帳票ID == null || 通知書の帳票ID.isEmpty()) {
                 throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
             }
-            バッチ出力帳票一覧Entity = new FuchoKariSanteiEntity(
+            バッチ出力帳票一覧Entity = new BatchFuchoKariSanteiEntity(
                     帳票ID,
                     通知書の帳票ID,
                     出力帳票entity.get出力順ID()

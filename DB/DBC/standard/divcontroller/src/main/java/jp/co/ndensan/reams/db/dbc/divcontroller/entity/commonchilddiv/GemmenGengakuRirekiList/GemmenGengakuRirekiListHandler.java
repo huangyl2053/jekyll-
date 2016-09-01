@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.gmmengngakurrekijoho.GemmenGengak
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * GemmenGengakuRirekiList_減免・減額履歴情報のクラスです。
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class GemmenGengakuRirekiListHandler {
 
     private final GemmenGengakuRirekiListDiv div;
+    private static final int NUM_0 = 0;
 
     /**
      * コンストラクタです。
@@ -83,8 +85,8 @@ public class GemmenGengakuRirekiListHandler {
             tRow.getTekiyoKaishiYMD().setValue(entity.get適用開始日());
             tRow.getTekiyoShuryoYMD().setValue(entity.get適用終了日());
             tRow.getKyufuritsuKeigenritsuFutangaku().setValue(
-                    entity.get負担額() == null ? null : new RString(entity.get負担額().toString()));
-
+                    entity.get負担額() == null
+                    ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(entity.get負担額(), NUM_0));
             tRowList.add(tRow);
         }
         for (RiyoshaFutangakuGengakuJyohoEntity entity : riList) {
@@ -93,8 +95,7 @@ public class GemmenGengakuRirekiListHandler {
             tRow.getTekiyoKaishiYMD().setValue(entity.get適用開始日());
             tRow.getTekiyoShuryoYMD().setValue(entity.get適用終了日());
             tRow.getKyufuritsuKeigenritsuFutangaku().setValue(
-                    entity.get給付率() == null ? null : new RString(entity.get給付率().value().toString()));
-
+                    entity.get給付率() == null ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(entity.get給付率().value(), NUM_0));
             tRowList.add(tRow);
         }
         for (ShakaiFukushiHojinRiyoshaFutanKeigenJyohoEntity entity : shList) {

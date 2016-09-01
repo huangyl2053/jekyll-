@@ -37,6 +37,7 @@ public class ShikakuShogohyoJyohoReadCsvFileProcess extends BatchProcessBase<RSt
     private static final RString 帳票レコード種別_D1 = new RString("D1");
     private static final RString カンマ = new RString(",");
     private static final RString レコード種別 = new RString("1");
+    private static final RString レコード種別_3 = new RString("3");
     private static final int INDEX_0 = 0;
     private static final int INDEX_3 = 3;
     private static final int INDEX_1 = 1;
@@ -47,6 +48,9 @@ public class ShikakuShogohyoJyohoReadCsvFileProcess extends BatchProcessBase<RSt
     private ShikakuShogohyoJyohoInDataMeisaiEntity meisaiCsvcsvEntity;
     private KagoKetteiHokenshaInControlCsvEntity controlCsvEntity;
 
+    /**
+     * CSVファイル取込後の返したエンティティ
+     */
     public static final RString PARAMETER_OUT_FLOWENTITY;
 
     static {
@@ -95,7 +99,7 @@ public class ShikakuShogohyoJyohoReadCsvFileProcess extends BatchProcessBase<RSt
     @Override
     protected void process(RString line) {
         List<RString> data = line.split(カンマ.toString());
-        if (data != null && !data.isEmpty()) {
+        if (!レコード種別_3.equals(data.get(INDEX_0))) {
             if (レコード種別.equals(data.get(INDEX_0))) {
                 controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);
             } else if (帳票レコード種別_H1.equals(data.get(INDEX_3))) {

@@ -51,19 +51,28 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
      * @param 履歴番号 int
      * @param 論理削除フラグ boolean
      * @param 異動年月日 FlexibleDate
+     * @param 作成年月日 FlexibleDate
+     * @param 氏名_性別_生年月日を印字す RString
      * @return JukyushaIdoRenrakuhyo
      */
     @Transaction
-    public JukyushaIdoRenrakuhyo editHenkomaeTeiseiJoho(
+    public JukyushaTeiseiRenrakuhyoTorokuFinderResult editHenkomaeTeiseiJoho(
             HihokenshaNo 被保険者番号,
             int 履歴番号,
             boolean 論理削除フラグ,
-            FlexibleDate 異動年月日) {
+            FlexibleDate 異動年月日,
+            FlexibleDate 作成年月日,
+            RString 氏名_性別_生年月日を印字す) {
+        JukyushaTeiseiRenrakuhyoTorokuFinderResult 変更前受給者訂正情報Entity
+                = new JukyushaTeiseiRenrakuhyoTorokuFinderResult();
         DbT3001JukyushaIdoRenrakuhyoEntity entity = 受給者異動送付Dac.selectAllByKey(
                 被保険者番号, 異動年月日, 履歴番号, 論理削除フラグ);
         if (entity != null) {
             entity.initializeMd5();
-            return new JukyushaIdoRenrakuhyo(entity);
+            変更前受給者訂正情報Entity.set作成年月日(作成年月日);
+            変更前受給者訂正情報Entity.set氏名_性別_生年月日を印字する(氏名_性別_生年月日を印字す);
+            変更前受給者訂正情報Entity.set受給者異動送付entity(new JukyushaIdoRenrakuhyo(entity));
+            return 変更前受給者訂正情報Entity;
         }
         return null;
     }
@@ -75,6 +84,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
      * @param 履歴番号 int
      * @param 論理削除フラグ boolean
      * @param 異動年月日 FlexibleDate
+     * @param 作成年月日 FlexibleDate
      * @param 氏名_性別_生年月日を印字する RString
      * @return JukyushaIdoRenrakuhyo
      */
@@ -84,6 +94,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
             int 履歴番号,
             boolean 論理削除フラグ,
             FlexibleDate 異動年月日,
+            FlexibleDate 作成年月日,
             RString 氏名_性別_生年月日を印字する) {
         JukyushaTeiseiRenrakuhyoTorokuFinderResult 変更後受給者訂正情報Entity
                 = new JukyushaTeiseiRenrakuhyoTorokuFinderResult();
@@ -91,6 +102,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
                 被保険者番号, 異動年月日, 履歴番号, 論理削除フラグ);
         if (entity != null) {
             entity.initializeMd5();
+            変更後受給者訂正情報Entity.set作成年月日(作成年月日);
             変更後受給者訂正情報Entity.set受給者異動送付entity(new JukyushaIdoRenrakuhyo(entity));
             変更後受給者訂正情報Entity.set氏名_性別_生年月日を印字する(氏名_性別_生年月日を印字する);
             return 変更後受給者訂正情報Entity;
@@ -110,7 +122,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
     public JukyushaTeiseiRenrakuhyoTorokuFinderResult judgeHenkokasho(
             boolean 論理削除フラグ,
             JukyushaIdoRenrakuhyo 受給者子Div,
-            JukyushaIdoRenrakuhyo 変更前受給者訂正情報Entity,
+            JukyushaTeiseiRenrakuhyoTorokuFinderResult 変更前受給者訂正情報Entity,
             JukyushaTeiseiRenrakuhyoTorokuFinderResult 変更後受給者訂正情報Entity) {
         JukyushaTeiseiRenrakuhyoTorokuFinderResult 出力用受給者訂正情報Entity
                 = new JukyushaTeiseiRenrakuhyoTorokuFinderResult();
@@ -119,21 +131,22 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
                     && 変更前受給者訂正情報Entity != null) {
                 JukyushaIdoRenrakuhyo 変更後Entity = 変更後受給者訂正情報Entity.get受給者異動送付entity();
                 出力用受給者訂正情報Entity.set受給者異動送付entity(get変更後受給者訂正情報修正Entity(
-                        変更前受給者訂正情報Entity, 変更後Entity));
+                        変更前受給者訂正情報Entity.get受給者異動送付entity(), 変更後Entity));
                 出力用受給者訂正情報Entity.set氏名_性別_生年月日を印字する(
                         変更後受給者訂正情報Entity.get氏名_性別_生年月日を印字する());
                 出力用受給者訂正情報Entity.set作成年月日(変更後受給者訂正情報Entity.get作成年月日());
             }
             if (受給者子Div != null && THREE.equals(受給者子Div.get訂正区分コード())
                     && 変更前受給者訂正情報Entity != null && 変更後受給者訂正情報Entity != null) {
-                変更前受給者訂正情報Entity = 変更前受給者訂正情報Entity.
-                        createBuilderForEdit()
+                JukyushaIdoRenrakuhyo 変更前Entity = 変更前受給者訂正情報Entity.get受給者異動送付entity();
+                変更前Entity = 変更前Entity
+                        .createBuilderForEdit()
                         .set訂正区分コード(THREE)
                         .set訂正年月日(FlexibleDate.getNowDate()).build();
-                出力用受給者訂正情報Entity.set受給者異動送付entity(変更前受給者訂正情報Entity);
+                出力用受給者訂正情報Entity.set受給者異動送付entity(変更前Entity);
                 出力用受給者訂正情報Entity.set氏名_性別_生年月日を印字する(
-                        変更後受給者訂正情報Entity.get氏名_性別_生年月日を印字する());
-                出力用受給者訂正情報Entity.set作成年月日(変更後受給者訂正情報Entity.get作成年月日());
+                        変更前受給者訂正情報Entity.get氏名_性別_生年月日を印字する());
+                出力用受給者訂正情報Entity.set作成年月日(変更前受給者訂正情報Entity.get作成年月日());
             }
         } else {
             if (変更後受給者訂正情報Entity != null && 変更前受給者訂正情報Entity != null) {
@@ -142,7 +155,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
                         .set訂正区分コード(TWO)
                         .set訂正年月日(FlexibleDate.getNowDate()).build();
                 出力用受給者訂正情報Entity.set受給者異動送付entity(get変更後受給者訂正情報修正Entity(
-                        変更前受給者訂正情報Entity, 変更後Entity));
+                        変更前受給者訂正情報Entity.get受給者異動送付entity(), 変更後Entity));
                 出力用受給者訂正情報Entity.set氏名_性別_生年月日を印字する(
                         変更後受給者訂正情報Entity.get氏名_性別_生年月日を印字する());
                 出力用受給者訂正情報Entity.set作成年月日(変更後受給者訂正情報Entity.get作成年月日());

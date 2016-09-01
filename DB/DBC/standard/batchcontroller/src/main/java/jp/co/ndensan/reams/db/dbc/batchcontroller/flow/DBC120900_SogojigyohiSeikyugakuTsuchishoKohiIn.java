@@ -50,6 +50,7 @@ public class DBC120900_SogojigyohiSeikyugakuTsuchishoKohiIn
     private static final int NO_NUM = 0;
     private static final RString ファイル格納フォルダ名 = new RString("DBC120900");
     private int 一時TBL登録件数;
+    private int レコード件数の合計;
     private FlexibleYearMonth 処理対象年月;
 
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
@@ -75,7 +76,10 @@ public class DBC120900_SogojigyohiSeikyugakuTsuchishoKohiIn
                 flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
                         SeikyugakuTsuchishoFutanshaInProcess.PARAMETER_OUT_FLOWENTITY);
                 if (flowEntity != null) {
-                    処理対象年月 = flowEntity.getShoriYM();
+                    if (i == NO_NUM) {
+                        処理対象年月 = flowEntity.getShoriYM();
+                    }
+                    レコード件数の合計 = レコード件数の合計 + flowEntity.getCodeNum();
                     一時TBL登録件数 = 一時TBL登録件数 + flowEntity.get明細データ登録件数();
                 }
             }
@@ -141,7 +145,7 @@ public class DBC120900_SogojigyohiSeikyugakuTsuchishoKohiIn
         parameter.set処理年月(getParameter().getShoriYM());
         parameter.set交換情報識別番号(交換情報識別番号);
         parameter.set処理対象年月(処理対象年月);
-        parameter.setレコード件数合計(flowEntity.getCodeNum());
+        parameter.setレコード件数合計(レコード件数の合計);
         parameter.setFileNameList(returnEntity.getFileNameList());
         return simpleBatch(KokuhorenkyoutsuDoInterfaceKanriKousinProcess.class).arguments(parameter).define();
     }

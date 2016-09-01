@@ -1,19 +1,17 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.dgShikyuGendogakuKyotakuService_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShikyuGendogakuKyotakuServiceListPanel のクラスファイル 
- * 
- * @author 自動生成
+ * ShikyuGendogakuKyotakuServiceListPanel のクラスファイル
+ *
+ * @reamsid_L DBC-3410-010 jianglaisheng
  */
 public class ShikyuGendogakuKyotakuServiceListPanelDiv extends Panel {
     /*
@@ -22,6 +20,7 @@ public class ShikyuGendogakuKyotakuServiceListPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("btnAddKubunShikyuGendogaku")
     private Button btnAddKubunShikyuGendogaku;
     @JsonProperty("btnAddShuruiShikyuGendogaku")
@@ -42,7 +41,7 @@ public class ShikyuGendogakuKyotakuServiceListPanelDiv extends Panel {
 
     @JsonProperty("btnAddKubunShikyuGendogaku")
     public void setBtnAddKubunShikyuGendogaku(Button btnAddKubunShikyuGendogaku) {
-        this.btnAddKubunShikyuGendogaku=btnAddKubunShikyuGendogaku;
+        this.btnAddKubunShikyuGendogaku = btnAddKubunShikyuGendogaku;
     }
 
     @JsonProperty("btnAddShuruiShikyuGendogaku")
@@ -52,7 +51,7 @@ public class ShikyuGendogakuKyotakuServiceListPanelDiv extends Panel {
 
     @JsonProperty("btnAddShuruiShikyuGendogaku")
     public void setBtnAddShuruiShikyuGendogaku(Button btnAddShuruiShikyuGendogaku) {
-        this.btnAddShuruiShikyuGendogaku=btnAddShuruiShikyuGendogaku;
+        this.btnAddShuruiShikyuGendogaku = btnAddShuruiShikyuGendogaku;
     }
 
     @JsonProperty("dgShikyuGendogakuKyotakuService")
@@ -62,7 +61,7 @@ public class ShikyuGendogakuKyotakuServiceListPanelDiv extends Panel {
 
     @JsonProperty("dgShikyuGendogakuKyotakuService")
     public void setDgShikyuGendogakuKyotakuService(DataGrid<dgShikyuGendogakuKyotakuService_Row> dgShikyuGendogakuKyotakuService) {
-        this.dgShikyuGendogakuKyotakuService=dgShikyuGendogakuKyotakuService;
+        this.dgShikyuGendogakuKyotakuService = dgShikyuGendogakuKyotakuService;
     }
 
 }
