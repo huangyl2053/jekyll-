@@ -131,7 +131,18 @@ public class TaJushochiTokureishaKanriHandler {
                 div.getDdlKaijyoJiyo().setDataSource(set解除事由());
                 if (最新適用情報 != null) {
                     set他市町村住所地特例情報入力エリア(最新適用情報, 親画面状態);
+                } else {    
+                    div.getTxtTasyobi().setDisabled(true);
+                    div.getTxtKaijyobi().setDisabled(true);
+                    div.getTxtKaijyoTodokedebi().setDisabled(true);
+                    div.getDdlKaijyoJiyo().setDisabled(true);
+                    div.getBtnTorikeshi().setDisabled(true);
+                    div.getBtnKakunin().setDisabled(true);   
                 }
+                div.getTxtTasyobi().clearValue();
+                div.getTxtKaijyobi().clearValue();
+                div.getTxtKaijyoTodokedebi().clearValue();
+                div.getDdlKaijyoJiyo().setSelectedKey(RString.EMPTY);
                 ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
                 break;
             case ShisetuHenko:
@@ -173,6 +184,8 @@ public class TaJushochiTokureishaKanriHandler {
             div.getTxtKaijyobi().setDisabled(false);
             div.getTxtKaijyoTodokedebi().setDisabled(false);
             div.getDdlKaijyoJiyo().setDisabled(false);
+            div.getBtnKakunin().setDisabled(false);
+            div.getBtnTorikeshi().setDisabled(false);
         }
     }
 
@@ -501,43 +514,46 @@ public class TaJushochiTokureishaKanriHandler {
             }
             Collections.sort(rowList, new DateComparator());
         } else if (解除モード.equals(親画面状態)) {
-            if (状態_修正.equals(div.getStrate())) {
-//            dgJushochiTokureiRireki_Row row = new dgJushochiTokureiRireki_Row();
-
-//            if (div.getDgJushochiTokureiRireki().getDataSource() != null
-//                    && !div.getDgJushochiTokureiRireki().getDataSource().isEmpty()) {
-//                row = div.getDgJushochiTokureiRireki().getDataSource().get(0);
-//            }
+            dgJushochiTokureiRireki_Row row = new dgJushochiTokureiRireki_Row();
+            List<dgJushochiTokureiRireki_Row> 解除 = div.getDgJushochiTokureiRireki().getDataSource();
+            row = rireki_Row;
+            if (div.getDgJushochiTokureiRireki().getDataSource() != null
+                    && !div.getDgJushochiTokureiRireki().getDataSource().isEmpty()) {
+                for (dgJushochiTokureiRireki_Row TokureiRireki_Row : 解除) {
+                        if (TokureiRireki_Row.getKaijoYMD() == null || TokureiRireki_Row.getKaijoYMD().getValue() == null) {
+                       row = TokureiRireki_Row;
+                        }
+                    }
+            }
             if (div.getTxtTasyobi().getValue() != null) {
-                rireki_Row.getTaishoYMD().setValue(new RDate(div.getTxtTasyobi().getValue().toString()));
+                row.getTaishoYMD().setValue(new RDate(div.getTxtTasyobi().getValue().toString()));
             }
             if (div.getTxtKaijyobi().getValue() != null) {
-                rireki_Row.getKaijoYMD().setValue(new RDate(div.getTxtKaijyobi().getValue().toString()));
+                row.getKaijoYMD().setValue(new RDate(div.getTxtKaijyobi().getValue().toString()));
             }
             if (div.getTxtKaijyoTodokedebi().getValue() != null) {
-                rireki_Row.getKaijoTodokedeYMD().setValue(new RDate(div.getTxtKaijyoTodokedebi().getValue().toString()));
+                row.getKaijoTodokedeYMD().setValue(new RDate(div.getTxtKaijyoTodokedebi().getValue().toString()));
             }
             if (div.getDdlKaijyoJiyo().getSelectedKey() != null
                     && !div.getDdlKaijyoJiyo().getSelectedKey().isEmpty()) {
-                rireki_Row.setKaijoJiyu(div.getDdlKaijyoJiyo().getSelectedKey());
-                rireki_Row.setKaijoJiyuCode(div.getDdlKaijyoJiyo().getSelectedValue());
+                row.setKaijoJiyu(div.getDdlKaijyoJiyo().getSelectedKey());
+                row.setKaijoJiyuCode(div.getDdlKaijyoJiyo().getSelectedValue());
             } else {
-                rireki_Row.setKaijoJiyuCode(RString.EMPTY);
+                row.setKaijoJiyuCode(RString.EMPTY);
             }
-            RString 変更前枝番 = rireki_Row.getEdaNo();
+            RString 変更前枝番 = row.getEdaNo();
             変更後枝番 = new RString(Integer.parseInt(変更前枝番.trim().toString()) + 1).padZeroToLeft(4);
-            rireki_Row.setHenkouzenEdaNo(変更後枝番);
+            row.setHenkouzenEdaNo(変更後枝番);
             TashichosonJushochiTokurei 住所地特例の識別子
                     = new TashichosonJushochiTokurei(識別コード, new FlexibleDate(div.getTxtKaijyobi().getValue().toString()), 変更後枝番);
             他住所地特例Model.add(住所地特例の識別子);
-            if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
-                rireki_Row.setRowState(RowState.Modified);
-                rireki_Row.setJotai(状態_修正);
+            if (RowState.Unchanged.equals(row.getRowState())) {
+                row.setRowState(RowState.Modified);
+                row.setJotai(状態_修正);
             }
             div.getTxtTasyobi().clearValue();
             div.getTxtKaijyobi().clearValue();
             div.getTxtKaijyoTodokedebi().clearValue();
-            }
             Collections.sort(rowList, new DateComparator());
         }
         div.setStrate(RString.EMPTY);
@@ -853,6 +869,17 @@ public class TaJushochiTokureishaKanriHandler {
                 div.getBtnKakunin().setDisabled(true);
             }
         } else if (解除モード.equals(親画面状態)) {
+            if (kanriMaster.getKaijoYMD() != null
+                    && !kanriMaster.getKaijoYMD().isEmpty()) {
+                div.getTxtTasyobi().setDisabled(true);
+                div.getTxtKaijyobi().setDisabled(true);
+                div.getTxtKaijyoTodokedebi().setDisabled(true);
+                div.getDdlKaijyoJiyo().setDisabled(true);
+                div.getBtnTorikeshi().setDisabled(true);
+                div.getBtnKakunin().setDisabled(true);   
+            } else {
+                div.getBtnTorikeshi().setDisabled(false);
+            }
             if (kanriMaster.getTaishoYMD() != null && !kanriMaster.getTaishoYMD().isEmpty()) {
                 div.getTxtTasyobi().setValue(new RDate(kanriMaster.getTaishoYMD().toString()));
             }
@@ -860,16 +887,6 @@ public class TaJushochiTokureishaKanriHandler {
                 div.getTxtKaijyoTodokedebi().setValue(new RDate(kanriMaster.getKaijoTodokedeYMD().toString()));
             }
             選択解除事由(kanriMaster.getKaijoJiyuCode());
-            if (kanriMaster.getKaijoYMD() != null
-                    && !kanriMaster.getKaijoYMD().isEmpty()) {
-                div.getTxtTasyobi().setDisabled(true);
-                div.getTxtKaijyobi().setDisabled(true);
-                div.getTxtKaijyoTodokedebi().setDisabled(true);
-                div.getDdlKaijyoJiyo().setDisabled(true);
-                div.getBtnKakunin().setDisabled(true);
-                div.getTxtKaijyobi().setValue(new RDate(kanriMaster.getKaijoYMD().toString()));
-                
-            }
         }
     }
 
