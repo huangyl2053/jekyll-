@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0200013;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110080.DBC110080_KogakugassanHoseisumiJikofutangakuOutParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200013.KogakuGassanHoseizumiJikofutangakuJohoDiv;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
@@ -27,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 public class KogakuGassanHoseizumiJikofutangakuJohoHandler {
 
     private final KogakuGassanHoseizumiJikofutangakuJohoDiv div;
-    private static final ReportId 帳票ID = new ReportId("DBC200032_GassanHoseizumiJikofutangakuJohoSofuchiran");
+    private static final ReportId 帳票ID = ReportIdDBC.DBC200032.getReportId();
 
     /**
      * コンストラクタです。
@@ -53,11 +54,10 @@ public class KogakuGassanHoseizumiJikofutangakuJohoHandler {
      *
      * @param 再処理区分 RString
      * @param 処理年月 RYearMonth
-     * @param 外部ＣＳＶファイル名 RString
      * @return ResponseData
      */
     public ResponseData<DBC110080_KogakugassanHoseisumiJikofutangakuOutParameter> setBatchParameter(RString 再処理区分,
-            RYearMonth 処理年月, RString 外部ＣＳＶファイル名) {
+            RYearMonth 処理年月) {
         if (div.getCcdShutsuryokujun().get出力順ID() != null) {
             Long 出力順ID = div.getCcdShutsuryokujun().get出力順ID();
             IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
