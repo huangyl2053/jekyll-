@@ -1,0 +1,36 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbd.business.report.dbd511002;
+
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
+import lombok.Setter;
+
+/**
+ * 通知書発行一覧リストです。
+ *
+ * @reamsid_L DBD-1400-030 b_zhengs
+ */
+@Getter
+@Setter
+public class TonzhiShuIssueEntity {
+
+    private RString 被保険者番号;
+    private RString 被保険者氏名;
+    private RString 要介護度;
+    private RString 受給申請日;
+    private RString 認定日;
+    private RString 認定開始日;
+    private RString 認定終了日;
+    private RString 受給申請事由;
+    private RString 申請区分_申請時;
+    private RString 申請区分_法令;
+    private RString 居宅支援事業者コード;
+    private RString 居宅支援事業者名称;
+    private RString 入所施設事業者コード;
+    private RString 入所施設事業者名称;
+
+}
