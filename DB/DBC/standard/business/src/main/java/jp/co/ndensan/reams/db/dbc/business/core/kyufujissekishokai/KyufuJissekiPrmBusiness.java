@@ -17,8 +17,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShoteiShikkanS
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiTokuteiSinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiTokuteiSinryohi;
-import jp.co.ndensan.reams.db.dbc.business.core.kyotakuservicekeikakuhi.KyotakuServiceKeikakuhiBusiness;
-import jp.co.ndensan.reams.db.dbc.business.core.tokuteinyushoshahi.TokuteiNyushoshahiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -56,11 +54,11 @@ public class KyufuJissekiPrmBusiness implements Serializable {
     private List<KyufujissekiTokuteiSinryohi> csData_D;
     private List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> csData_J;
     private List<KyufujissekiShokujiHiyo> csData_E;
-    private List<KyotakuServiceKeikakuhiBusiness> csData_F;
+    private List<KyufujissekiKyotakuServiceBusiness> csData_F;
     private List<KyufujissekiFukushiYoguHanbaihiBusiness> csData_G;
     private List<KyufujissekiJutakuKaishuhi> csData_H;
     private List<KyufujissekiKogakuKaigoServicehi> csData_I;
-    private List<TokuteiNyushoshahiBusiness> csData_K;
+    private List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> csData_K;
     private List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> csData_L;
     private List<KyufuJissekiCareManagementHiBusiness> csData_M;
     private List<KyufujissekiMeisaiJushochiTokurei> csData_N;
