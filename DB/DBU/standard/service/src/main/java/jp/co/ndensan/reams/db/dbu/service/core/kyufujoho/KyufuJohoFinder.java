@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbu.service.core.kyufujoho;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.kyufujoho.KyufuJohoBusiness;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyufujoho.KounyukingakuParamter;
@@ -158,13 +157,12 @@ public class KyufuJohoFinder {
     @Transaction
     public SearchResult<KyufuJohoBusiness> getサービス利用状況情報(KyufuJohoParamter paramter) {
         IKyufuJohoMapper kyufujohomapper = mapperProvider.create(IKyufuJohoMapper.class);
-        KyufuJohoEntity kyufujoho = kyufujohomapper.getサービス利用状況情報(paramter);
-        if (kyufujoho == null) {
-            return SearchResult.of(Collections.<KyufuJohoBusiness>emptyList(), 0, false);
+        List<KyufuJohoEntity> kyufujohoList = kyufujohomapper.getサービス利用状況情報(paramter);
+        List<KyufuJohoBusiness> サービス利用状況情報 = new ArrayList();
+        for (KyufuJohoEntity entity : kyufujohoList) {
+            サービス利用状況情報.add(new KyufuJohoBusiness(entity));
         }
-        List<KyufuJohoBusiness> kyufujohos = new ArrayList();
-        kyufujohos.add(new KyufuJohoBusiness(kyufujoho));
-        return SearchResult.of(kyufujohos, 0, false);
+        return SearchResult.of(サービス利用状況情報, 0, false);
     }
 
 }
