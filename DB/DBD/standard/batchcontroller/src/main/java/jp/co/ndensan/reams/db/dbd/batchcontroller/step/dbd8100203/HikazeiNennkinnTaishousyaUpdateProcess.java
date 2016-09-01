@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 非課税年金対象者更新_process処理クラスです。
  *
- * @author DBD-4910-050 x_xuliang
+ * @reamsid_L DBD-4910-050 x_xuliang
  */
 public class HikazeiNennkinnTaishousyaUpdateProcess extends BatchProcessBase<HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity> {
 
