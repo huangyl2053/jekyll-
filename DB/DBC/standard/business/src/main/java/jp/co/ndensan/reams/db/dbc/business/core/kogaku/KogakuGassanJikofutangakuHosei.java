@@ -215,5 +215,9 @@ public class KogakuGassanJikofutangakuHosei implements Serializable {
     private Decimal 変更後_合計_補正後_うち70_74歳に係る負担額;
     private Decimal 変更後_合計_補正後_高額介護_予防_サービス費;
     private Decimal 変更後_合計_補正後_実際の自己負担額;
+    private Decimal 変更前_合計_自己負担額;
+    private Decimal 変更前_合計_うち70_74歳に係る負担額;
+    private Decimal 変更前_合計_高額介護_予防_サービス費;
+    private Decimal 変更前_合計_実際の自己負担額;
 
 }
