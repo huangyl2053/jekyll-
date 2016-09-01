@@ -123,11 +123,13 @@ public class TekiyoJogaiRirekiHandler {
                 if (適用除外者情報.isEmpty()) {
                     div.getBtnInputClear().setDisabled(true);
                     div.getBtnKakutei().setDisabled(true);
+                    div.getPanelTekiyoJokaiKaiJyoInput().setDisabled(true);
                 } else {
                     for(TekiyoJogaishaRelate row : 適用除外者情報){
                         if (row.get解除年月日() != null && !row.get解除年月日().isEmpty()) {
                             div.getBtnKakutei().setDisabled(true);
                             div.getBtnInputClear().setDisabled(true);
+                            div.getPanelTekiyoJokaiKaiJyoInput().setDisabled(true);
                         } else {
                             set適用除外者明細エリア_除外者解除();
                             div.getBtnKakutei().setDisabled(false);
