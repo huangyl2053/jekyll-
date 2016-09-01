@@ -109,7 +109,7 @@ public class HihokenshaShisakuPanalHandler {
         get被保区分();
         get所在保険者と措置元保険者(viewState, 資格得喪情報, 識別コード);
         表示と非表示();
-        get旧保険者(viewState, 資格得喪情報, 識別コード);
+        get旧保険者(viewState, 資格得喪情報);
         get喪失事由();
     }
 
@@ -143,8 +143,8 @@ public class HihokenshaShisakuPanalHandler {
         List<KeyValueDataSource> 措置元保険者List = new ArrayList<>();
         if (単一保険者.equals(広域と市町村判断())) {
             if (状態_追加.equals(viewState)) {
-                HihokenshaShisaku business = manager.get宛名情報(識別コード);
-                RString 所在保険者 = business.getGenLasdecCode().getColumnValue();
+                RString 所在保険者 = panelDiv.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+                        .getShikibetsuTaishoHisory().get直近().get現全国地方公共団体コード().getColumnValue();
                 KeyValueDataSource keyValue = new KeyValueDataSource();
                 keyValue.setKey(所在保険者);
                 keyValue.setValue(RString.EMPTY);
@@ -176,7 +176,7 @@ public class HihokenshaShisakuPanalHandler {
         }
     }
 
-    private void get旧保険者(RString viewState, ShikakuRirekiJoho 資格得喪情報, ShikibetsuCode 識別コード) {
+    private void get旧保険者(RString viewState, ShikakuRirekiJoho 資格得喪情報) {
 
         if (!is合併市町村()) {
             if (状態_修正.equals(viewState)) {
@@ -189,7 +189,7 @@ public class HihokenshaShisakuPanalHandler {
             }
         } else {
             if (状態_追加.equals(viewState)) {
-                旧保険者情報の設定(所在保険者の取得(識別コード), RString.EMPTY);
+                旧保険者情報の設定(所在保険者の取得(), RString.EMPTY);
             } else {
                 旧保険者情報の設定(資格得喪情報.getShozaiHokensha(), 資格得喪情報.getSochimotoHokensha());
             }
@@ -218,11 +218,11 @@ public class HihokenshaShisakuPanalHandler {
         }
     }
 
-    private RString 所在保険者の取得(ShikibetsuCode 識別コード) {
+    private RString 所在保険者の取得() {
         RString 所在保険者 = RString.EMPTY;
         if (単一保険者.equals(広域と市町村判断())) {
-            HihokenshaShisaku business = manager.get宛名情報(識別コード);
-            所在保険者 = business.getGenLasdecCode().getColumnValue();
+              所在保険者 = panelDiv.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+                    .getShikibetsuTaishoHisory().get直近().get現全国地方公共団体コード().getColumnValue();
 
         } else if (広域保険者.equals(広域と市町村判断())) {
             KoikiShichosonJohoFinder fider = KoikiShichosonJohoFinder.createInstance();
@@ -357,7 +357,7 @@ public class HihokenshaShisakuPanalHandler {
 
     private void set資格得喪情報設定(RString viewState, ShikibetsuCode 識別コード, ShikakuRirekiJoho 資格得喪情報) {
         if (状態_追加.equals(viewState)) {
-            RString 所在保険者 = 所在保険者の取得(識別コード);
+            RString 所在保険者 = 所在保険者の取得();
             panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuShozaiHokensha().setSelectedKey(
                     所在保険者.isEmpty() ? RString.EMPTY : 所在保険者);
             panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuSochimotoHokensha().setSelectedKey(RString.EMPTY);
