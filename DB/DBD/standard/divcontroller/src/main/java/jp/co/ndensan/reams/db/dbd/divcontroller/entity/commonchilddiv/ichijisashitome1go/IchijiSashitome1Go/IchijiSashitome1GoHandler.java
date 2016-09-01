@@ -220,6 +220,9 @@ public class IchijiSashitome1GoHandler {
         if (pairs.iterator().hasNext()) {
             return pairs;
         }
+        DisplayNone_控除登録用(false);
+        DisplayNone_差止登録用(true);
+        DisplayNone_照会用(true);
         div.getTxtKojoTorokuKubun().setReadOnly(true);
         div.getTxtKojoKetteiYMD().setReadOnly(false);
         div.getTxtKojoKetteiYMD().setDisabled(false);
@@ -377,6 +380,8 @@ public class IchijiSashitome1GoHandler {
         div.getTxtSashitomeTorokuTsuchiHakkoYMD().setValue(支払方法変更差止.get差止通知書発行年月日());
         div.getTxtSashitomeNofuKigenYMD().setValue(支払方法変更差止.get差止納付期限());
         div.getTxtSashitomeKaijoYMD().setValue(支払方法変更差止.get差止解除年月日());
+        DisplayNone_照会用(true);
+        get給付一時差止登録();
     }
 
     /**
@@ -413,6 +418,7 @@ public class IchijiSashitome1GoHandler {
         div.getDgShokanJoho().setDataSource(rowList);
         div.setButton_Name(解除アイコン押下);
         if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_給付一時差止登録)) {
+            get給付一時差止登録();
             div.getShokanJoho().setTitle(new RString("差止解除"));
             div.getTxtSashitomeTorokuKubun().setReadOnly(true);
             div.getTxtSashitomeTorokuYMD().setReadOnly(true);
@@ -430,6 +436,7 @@ public class IchijiSashitome1GoHandler {
             div.getTxtSashitomeNofuKigenYMD().setValue(支払方法変更差止.get差止納付期限());
             div.getTxtSashitomeKaijoYMD().setValue(支払方法変更差止.get差止解除年月日());
         } else if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_保険料控除登録)) {
+            get保険料控除登録();
             div.getShokanJoho().setTitle(new RString("控除解除"));
             div.getTxtKojoTorokuKubun().setReadOnly(true);
             div.getTxtKojoKetteiYMD().setReadOnly(true);
@@ -450,6 +457,7 @@ public class IchijiSashitome1GoHandler {
         div.getBtnSashitomeOrKojoTorokuKakutei().setDisplayNone(false);
         div.getBtnSashitomeOrKojoTorokuTorikeshi().setDisabled(false);
         div.getBtnSashitomeOrKojoTorokuKakutei().setDisabled(false);
+        DisplayNone_照会用(true);
     }
 
     /**
