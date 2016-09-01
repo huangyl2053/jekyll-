@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyushinseitoroku;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -22,7 +21,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShinseishoJohoResult {
 
-    private List<KogakuGassanShinseisho> 高額合算申請書;
+    private KogakuGassanShinseisho 高額合算申請書;
     private AtenaMeisho 被保険者名;
     private ShikibetsuCode 識別コード;
 }

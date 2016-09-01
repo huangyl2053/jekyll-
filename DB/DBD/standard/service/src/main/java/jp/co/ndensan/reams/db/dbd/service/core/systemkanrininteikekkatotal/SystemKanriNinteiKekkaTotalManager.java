@@ -25,10 +25,15 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
  */
 public class SystemKanriNinteiKekkaTotalManager {
 
-    private final Map<RString, RString> UzT0007Code付加情報マップ;
+    private final Map<RString, RString> uzT0007Code付加情報マップ;
 
-    public SystemKanriNinteiKekkaTotalManager(Map<RString, RString> UzT0007CodeDataMap) {
-        this.UzT0007Code付加情報マップ = UzT0007CodeDataMap;
+    /**
+     * コンストラクタです。
+     *
+     * @param uzT0007CodeDataMap uzT0007Code付加情報マップ
+     */
+    public SystemKanriNinteiKekkaTotalManager(Map<RString, RString> uzT0007CodeDataMap) {
+        this.uzT0007Code付加情報マップ = uzT0007CodeDataMap;
     }
 
     /**
@@ -36,7 +41,7 @@ public class SystemKanriNinteiKekkaTotalManager {
      */
     public void uzT0007Codeテーブル更新() {
         List<UzT0007CodeEntity> uzT0007CodeEntityList = new ArrayList<>();
-        Iterator<Map.Entry<RString, RString>> it = UzT0007Code付加情報マップ.entrySet().iterator();
+        Iterator<Map.Entry<RString, RString>> it = uzT0007Code付加情報マップ.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<RString, RString> entry = it.next();
             if (!entry.getValue().equals(getCodeMeiSho(entry.getKey()))) {

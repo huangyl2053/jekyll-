@@ -30,7 +30,7 @@
     </resultMap>
     
      <select resultOrdered="true" id="select被保険者一時TBL" resultMap="resultMap_DbWT1001HihokenshaTempEntity" 
-             parameterType="jp.co.ndensan.reams.db.dbc.definition.batchprm.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetHihokenshaNoProcessParameter" fetchSize="500">
+             parameterType="jp.co.ndensan.reams.db.dbc.definition.batchprm.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetHihokenshaNoBatchParameter" fetchSize="500">
         SELECT *
         FROM "DbWT1001Hihokensha" AS dbWT1001
         WHERE dbWT1001."exServiceTeikyoYm" <![CDATA[<]]> #{年月}
@@ -82,8 +82,8 @@
         SELECT TEMP.*
         FROM "DbWT1001Hihokensha" AS TEMP
         LEFT JOIN ( SELECT D1.* 
-                    FROM "DbT7051KoseiShichosonMaster" AS D1
-                    WHERE NOT EXISTS ( SELECT 'X' FROM "DbT7051KoseiShichosonMaster" AS D2
+                    FROM rgdb."DbT7051KoseiShichosonMaster" AS D1
+                    WHERE NOT EXISTS ( SELECT 'X' FROM rgdb."DbT7051KoseiShichosonMaster" AS D2
                                              WHERE   D1."shoKisaiHokenshaNo" = D2."shoKisaiHokenshaNo" 
                                              AND     D2."kanyuYMD"  <![CDATA[<]]> D1."kanyuYMD" )) AS D3
         ON TEMP."exShoHokenshaNo" = D3."shoKisaiHokenshaNo"
@@ -95,7 +95,7 @@
     <select resultOrdered="true" id="select旧被保険者番号" resultMap="resultMap_HokenshaKyufujissekiOutGetOldHihokenshaEntity" fetchSize="500">
         SELECT *
         FROM "DbWT1001Hihokensha" AS TEMP
-        INNER JOIN "DbT7026ShinKyuHihokenshaNoHenkan" AS DbT7026
+        INNER JOIN rgdb."DbT7026ShinKyuHihokenshaNoHenkan" AS DbT7026
         ON TEMP."exHokenshaNo" = DbT7026."shinNo"
         AND TEMP."henkanFlag" = TRUE
     </select>
@@ -161,11 +161,11 @@
            TEMP.* , dbV1001.* ,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM "DbWT1001Hihokensha" AS TEMP
-        INNER JOIN "DbV1001HihokenshaDaicho" AS dbV1001
+        INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS dbV1001
         ON TEMP."exHihokenshaNo" = dbV1001."hihokenshaNo"
-        INNER JOIN  rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',TRUE,'','','','','','','','','','','',TRUE,         
-        '','','','','','','',TRUE,'','','','','','','','','','','',true,true,true,true,false,false,true,true,true,true,         
-         true,'','','','','','','','',TRUE,'','',TRUE,false,TRUE,'','','','','','','','','','','','','','','','','','','{}') AS  "ShikibetsuTaisho"
+        INNER JOIN  rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',FALSE,'','','','','','','','','','','',FALSE,         
+        '','','','','','','',FALSE,'','','','','','','','','','','',true,true,true,true,false,false,true,true,true,true,         
+         true,'','','','','','','','',FALSE,'','',FALSE,false,FALSE,'','','','','','','','','','','','','','','','','','','{}') AS  "ShikibetsuTaisho"
         ON dbV1001."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
     </select>
     

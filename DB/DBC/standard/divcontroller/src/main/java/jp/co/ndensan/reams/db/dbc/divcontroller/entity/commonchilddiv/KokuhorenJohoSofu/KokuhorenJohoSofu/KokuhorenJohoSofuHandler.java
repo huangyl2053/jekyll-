@@ -93,6 +93,7 @@ public class KokuhorenJohoSofuHandler {
             KeyValueDataSource keyValueData3 = new KeyValueDataSource(NUM_2, KagomoshitateshoSofutaishoKubun.toValue(NUM_2).get名称());
             dateSourceList.add(keyValueData3);
             div.getDdlSofuTaishojoho().setDataSource(dateSourceList);
+            div.getDdlSofuTaishojoho().setSelectedKey(NUM_0);
         }
         div.getShoriJikkoMaekakuninJiko().setVisible(false);
     }

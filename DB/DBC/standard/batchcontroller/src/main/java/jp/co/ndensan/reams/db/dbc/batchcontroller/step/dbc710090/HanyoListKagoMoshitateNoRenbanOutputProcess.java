@@ -64,11 +64,11 @@ public class HanyoListKagoMoshitateNoRenbanOutputProcess extends BatchProcessBas
     private static final RString 定数_なし = new RString("なし");
     private static final RString 定数_あり = new RString("あり");
     private static final RString TITLE_抽出対象者 = new RString("【抽出対象者】");
-    private static final RString TITLE_保険者 = new RString("　　　　保険者：");
-    private static final RString TITLE_国保連送付年月 = new RString("　　　　国保連送付年月：");
-    private static final RString TITLE_過誤申立給付区分 = new RString("　　　　過誤申立給付区分：");
-    private static final RString TITLE_サービス提供年月 = new RString("　　　　サービス提供年月：");
-    private static final RString TITLE_事業者 = new RString("　　　　事業者：");
+    private static final RString TITLE_保険者 = new RString("　保険者：");
+    private static final RString TITLE_国保連送付年月 = new RString("　国保連送付年月：");
+    private static final RString TITLE_過誤申立給付区分 = new RString("　過誤申立給付区分：");
+    private static final RString TITLE_サービス提供年月 = new RString("　サービス提供年月：");
+    private static final RString TITLE_事業者 = new RString("　事業者：");
     private static final RString 括弧LEFT = new RString("（");
     private static final RString 括弧RIGHT = new RString("）");
     private static final RString TILDE = new RString("～");
@@ -109,7 +109,7 @@ public class HanyoListKagoMoshitateNoRenbanOutputProcess extends BatchProcessBas
 
     @Override
     protected void createWriter() {
-        spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID,
+        spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(),
                 csvFileName);
@@ -148,7 +148,7 @@ public class HanyoListKagoMoshitateNoRenbanOutputProcess extends BatchProcessBas
 
     @Override
     protected void afterExecute() {
-        AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         noRenbanCsvWriter.close();
         spoolManager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLogUUID);
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(

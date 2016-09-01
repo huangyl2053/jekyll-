@@ -6,9 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hokenshakyufujissekiout;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetHihokenshaNoProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetHihokenshaNoBatchParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetBeforeKanyuYMDEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetHihokenshaAtenaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetOldHihokenshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
@@ -30,10 +29,10 @@ public interface IHokenshaKyufujissekiOutMapper {
     /**
      * 被保険者一時TBLを取得する。
      *
-     * @param parameter HokenshaKyufujissekiOutGetHihokenshaNoProcessParameter
+     * @param parameter HokenshaKyufujissekiOutGetHihokenshaNoBatchParameter
      * @return 被保険者一時TBLのList
      */
-    List<DbWT1001HihokenshaTempEntity> select被保険者一時TBL(HokenshaKyufujissekiOutGetHihokenshaNoProcessParameter parameter);
+    List<DbWT1001HihokenshaTempEntity> select被保険者一時TBL(HokenshaKyufujissekiOutGetHihokenshaNoBatchParameter parameter);
 
     /**
      * 保険者番号を設定する。
@@ -46,7 +45,7 @@ public interface IHokenshaKyufujissekiOutMapper {
      *
      * @return 処理結果リスト一時TBLのList
      */
-    List<HokenshaKyufujissekiOutGetBeforeKanyuYMDEntity> select広域加入日以前のデータ();
+    List<DbWT1001HihokenshaTempEntity> select広域加入日以前のデータ();
 
     /**
      * 旧被保険者番号を取得する。

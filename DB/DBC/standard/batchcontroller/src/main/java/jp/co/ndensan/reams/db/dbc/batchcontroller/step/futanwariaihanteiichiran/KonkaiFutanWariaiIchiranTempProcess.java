@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KonkaiFutanWariaiIchiranTempProcess extends BatchKeyBreakBase<KonkaiRiyoshaFutanWariaiJohoTempEntity> {
 
-    private static final RString 対象区分 = new RString("3");
+    private static final RString 対象区分 = new RString("1");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaihanteiichiran.IFutanwariaiHanteiIchiranMapper.get今回利用者負担割合判定");
     private static final RString 今回利用者負担割合判定TEMP = new RString("RiyoshaFutanWariaiHanteiTemp");
@@ -50,7 +50,7 @@ public class KonkaiFutanWariaiIchiranTempProcess extends BatchKeyBreakBase<Konka
 
     @Override
     protected void afterExecute() {
-
+        edit利用者負担割合判定();
     }
 
     @Override
@@ -68,19 +68,26 @@ public class KonkaiFutanWariaiIchiranTempProcess extends BatchKeyBreakBase<Konka
             今回利用者負担割合判定List.add(entity);
             return;
         }
+        edit利用者負担割合判定();
+        今回利用者負担割合判定List = new ArrayList<>();
+        今回利用者負担割合判定List.add(entity);
+
+    }
+
+    private void edit利用者負担割合判定() {
         if (今回利用者負担割合判定List.size() == INT_1) {
             RiyoshaFutanWariaiHanteiEntity riyoshaFutanWariaiHanteiEntity = new RiyoshaFutanWariaiHanteiEntity();
-            riyoshaFutanWariaiHanteiEntity.setHihokenshaNo(entity.getHihokenshaNo());
-            riyoshaFutanWariaiHanteiEntity.setFutanWariaiKubun(entity.getFutanWariaiKubun());
-            riyoshaFutanWariaiHanteiEntity.setHonninGoukeiShotokuGaku(entity.getHoninGokeishotokuKingaku());
-            riyoshaFutanWariaiHanteiEntity.setKoseiJiyu(new Code(entity.getKoseiJiyu()));
-            riyoshaFutanWariaiHanteiEntity.setNendo(entity.getNendo());
-            riyoshaFutanWariaiHanteiEntity.setNenkinShunyuGoukei(entity.getNenkinShunyuGoukei());
-            riyoshaFutanWariaiHanteiEntity.setSetaiIchigouHihokenshaSu(entity.getSetaiIchigouHihokenshaSu());
-            riyoshaFutanWariaiHanteiEntity.setSonotanoGoukeiShotokuKingakuGoukei(entity.getSonotaGokeiShotokuKingaku());
+            riyoshaFutanWariaiHanteiEntity.setHihokenshaNo(今回利用者負担割合判定List.get(0).getHihokenshaNo());
+            riyoshaFutanWariaiHanteiEntity.setFutanWariaiKubun(今回利用者負担割合判定List.get(0).getFutanWariaiKubun());
+            riyoshaFutanWariaiHanteiEntity.setHonninGoukeiShotokuGaku(今回利用者負担割合判定List.get(0).getHoninGokeishotokuKingaku());
+            riyoshaFutanWariaiHanteiEntity.setKoseiJiyu(new Code(今回利用者負担割合判定List.get(0).getKoseiJiyu()));
+            riyoshaFutanWariaiHanteiEntity.setNendo(今回利用者負担割合判定List.get(0).getNendo());
+            riyoshaFutanWariaiHanteiEntity.setNenkinShunyuGoukei(今回利用者負担割合判定List.get(0).getNenkinShunyuGoukei());
+            riyoshaFutanWariaiHanteiEntity.setSetaiIchigouHihokenshaSu(今回利用者負担割合判定List.get(0).getSetaiIchigouHihokenshaSu());
+            riyoshaFutanWariaiHanteiEntity.setSonotanoGoukeiShotokuKingakuGoukei(今回利用者負担割合判定List.get(0).getSonotaGokeiShotokuKingaku());
             riyoshaFutanWariaiHanteiEntity.setTaisyouKubun(対象区分);
-            riyoshaFutanWariaiHanteiEntity.setYukoKaishiYMD(entity.getYukoKaishiYMD());
-            riyoshaFutanWariaiHanteiEntity.setYukoShuryoYMD(entity.getYukoShuryoYMD());
+            riyoshaFutanWariaiHanteiEntity.setYukoKaishiYMD(今回利用者負担割合判定List.get(0).getYukoKaishiYMD());
+            riyoshaFutanWariaiHanteiEntity.setYukoShuryoYMD(今回利用者負担割合判定List.get(0).getYukoShuryoYMD());
             tempDbWriter.insert(riyoshaFutanWariaiHanteiEntity);
         } else if (今回利用者負担割合判定List.size() > INT_1) {
             RiyoshaFutanWariaiHanteiEntity riyoshaFutanWariaiHanteiEntity = new RiyoshaFutanWariaiHanteiEntity();
@@ -100,11 +107,8 @@ public class KonkaiFutanWariaiIchiranTempProcess extends BatchKeyBreakBase<Konka
                     .getSonotaGokeiShotokuKingaku());
             riyoshaFutanWariaiHanteiEntity.setTaisyouKubun(対象区分);
             riyoshaFutanWariaiHanteiEntity.setYukoKaishiYMD(今回利用者負担割合判定List.get(今回利用者負担割合判定List.size() - INT_1).getYukoKaishiYMD());
-            riyoshaFutanWariaiHanteiEntity.setYukoShuryoYMD(今回利用者負担割合判定List.get(INT_1).getYukoShuryoYMD());
+            riyoshaFutanWariaiHanteiEntity.setYukoShuryoYMD(今回利用者負担割合判定List.get(0).getYukoShuryoYMD());
             tempDbWriter.insert(riyoshaFutanWariaiHanteiEntity);
         }
-        今回利用者負担割合判定List = new ArrayList<>();
-        今回利用者負担割合判定List.add(entity);
-
     }
 }

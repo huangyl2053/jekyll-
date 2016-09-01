@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1002KokuhorenSakuseiErrorTempEntity;
@@ -63,6 +63,7 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
     private static final RString HEADER_エラー内容 = new RString("エラー内容");
     private static final RString HEADER_備考 = new RString("備考");
     private static int numble_0 = 0;
+    private static int INT_0 = 0;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC900002"));
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
@@ -139,7 +140,7 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
     @Override
     protected void process(DbWT1002KokuhorenSakuseiErrorTempEntity entity) {
         List<RString> outputList = this.getCSVファイル(entity);
-        csvListWriter.writeLine(outputList);
+        csvListWriter.writeLine(this.toBodyList(outputList));
     }
 
     private List<RString> getCSVファイル(DbWT1002KokuhorenSakuseiErrorTempEntity entity) {
@@ -155,6 +156,14 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
             numble_0++;
         } else {
             rStringList.add(RString.EMPTY);
+        }
+        try {
+            KokuhorenJoho_SakuseiErrorKubun.toValue(entity.getErrorKubun());
+            rStringList.add(KokuhorenJoho_SakuseiErrorKubun.get処理名(entity.getErrorKubun()));
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(HokenshaKyufujissekiOutListSakuseiProcess.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BatchInterruptedException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(
+                    MSG_国保連情報作成エラー区分.toString()).toString());
         }
         rStringList.add(getColumnValue(entity.getShoHokanehshaNo()));
         rStringList.add(getColumnValue(entity.getHihokenshaNo()));
@@ -175,15 +184,8 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
         if (this.key_5flag) {
             rStringList.add(entity.getKey5());
         }
+        rStringList.add(KokuhorenJoho_SakuseiErrorKubun.getエラーメッセージ(entity.getErrorKubun()));
         rStringList.add(entity.getBiko());
-        try {
-            rStringList.add(KokuhorenJoho_TorikomiErrorKubun.get処理名(entity.getErrorKubun()));
-            rStringList.add(KokuhorenJoho_TorikomiErrorKubun.getエラーメッセージ(entity.getErrorKubun()));
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(HokenshaKyufujissekiOutListSakuseiProcess.class.getName()).log(Level.SEVERE, null, ex);
-            throw new BatchInterruptedException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(
-                    MSG_国保連情報作成エラー区分.toString()).toString());
-        }
         return rStringList;
     }
 
@@ -197,6 +199,16 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
             return RString.EMPTY;
         }
         return column.getColumnValue();
+    }
+
+    private List<RString> toBodyList(List<RString> bodyList) {
+        for (int i = INT_0; i < bodyList.size(); i++) {
+            if (bodyList.get(i) == null) {
+                bodyList.remove(bodyList.get(i));
+                bodyList.add(i, RString.EMPTY);
+            }
+        }
+        return bodyList;
     }
 
 }

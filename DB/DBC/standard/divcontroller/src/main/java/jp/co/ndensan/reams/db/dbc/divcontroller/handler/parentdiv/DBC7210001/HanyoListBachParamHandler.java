@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7210001;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710210.DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -18,6 +16,7 @@ import jp.co.ndensan.reams.db.dbx.service.core.basic.KaigoDonyuKeitaiManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
@@ -29,15 +28,12 @@ public class HanyoListBachParamHandler {
 
     private final HanyoListParamPanelDiv div;
     private KaigoDonyuKeitaiManager manager;
-    private static final RString 帳票ID = new RString("DBC701021_HanyoListJigyoBunKogakuGassanShikyuKettei");
     private static final RString 項目名付加 = new RString("6");
     private static final RString 連番付加 = new RString("7");
     private static final RString 日付_編集 = new RString("8");
     private static final int 固定 = 2014;
     private static final int 固定_月 = 8;
     private static final RString すべて = new RString("0");
-    private static final RString 単一 = new RString("単一");
-    private static final RString 広域 = new RString("広域");
     private static final RString 窓口払 = new RString("1");
     private static final RString 口座払 = new RString("2");
 
@@ -58,40 +54,25 @@ public class HanyoListBachParamHandler {
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC7210001.getReportId());
         manager = KaigoDonyuKeitaiManager.createInstance();
         List<KaigoDonyuKeitai> list = manager.get介護導入形態By業務分類(GyomuBunrui.介護事務);
-        RString 導入形態コード = RString.EMPTY;
         if (list.get(0).get導入形態コード().is単一()) {
-            導入形態コード = 単一;
+            div.getCcdHokenshaList().setDisplayNone(true);
         }
         if (list.get(0).get導入形態コード().is広域()) {
-            導入形態コード = 広域;
-        }
-        if (単一.equals(導入形態コード)) {
-            div.getCcdHokenshaList().setDisplayNone(true);
-        } else if (広域.equals(導入形態コード)) {
             div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務);
         }
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-
         RDate systemDate = RDate.getNowDate();
-        int year = 0;
+        RYear year;
         if (systemDate.getMonthValue() >= 固定_月) {
-            year = systemDate.getYearValue() + 1;
+            year = systemDate.getYear().plusYear(1);
         } else {
-            year = systemDate.getYearValue();
+            year = systemDate.getYear();
         }
-        for (int i = 0; i < year - 固定; i++) {
+        for (int i = 0; i < year.minusYear(固定).getYearValue(); i++) {
             KeyValueDataSource source = new KeyValueDataSource();
-            source.setKey(new RString(固定 + i));
-            source.setValue(new RDate(固定 + i).getYear().wareki().toDateString());
+            source.setKey(new RString(固定 - i));
+            source.setValue(new RDate(固定 - i).getYear().wareki().toDateString());
             dataSource.add(source);
-        }
-        if (!dataSource.isEmpty()) {
-            Collections.sort(dataSource, new Comparator<KeyValueDataSource>() {
-                @Override
-                public int compare(KeyValueDataSource entity1, KeyValueDataSource entity2) {
-                    return entity2.getKey().compareTo(entity1.getKey());
-                }
-            });
         }
         div.getDdlTaishoNendo().setDataSource(dataSource);
     }
@@ -104,7 +85,7 @@ public class HanyoListBachParamHandler {
     public DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter setBatchParameter() {
         DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter parameter = new DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter();
         // TODO 出力項目ID 改頁出力順ID
-        parameter.set帳票ID(帳票ID);
+        parameter.set帳票ID(ReportIdDBC.DBC7210001.getReportId().value());
 //        parameter.set出力順ID(1);
 //        parameter.set出力順項目ID(RString.EMPTY);
         boolean 項目付加 = false;

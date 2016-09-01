@@ -109,14 +109,11 @@ public class HanyoListParamPanel {
         } else {
             div.getRadSiharaiHohoKubun().setSelectedKey(すべて);
         }
-        RString 金融機関コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("金融機関コード"));
-        if (!RString.isNullOrEmpty(金融機関コード)) {
-            div.getCcdKinyuKikan().set金融機関(null);
-        }
+        //TODO QA1619提出する。
+//        RString 金融機関コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("金融機関コード"));
+//        div.getCcdKinyuKikan().set金融機関(金融機関コード)
         RString 金融機関名 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("金融機関名"));
-        if (!RString.isNullOrEmpty(金融機関名)) {
-            div.getCcdKinyuKikan().set金融機関TextLeftラベル(金融機関名);
-        }
+        div.getCcdKinyuKikan().set金融機関TextLeftラベル(金融機関名);
         RString 対象年度 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("対象年度"));
         if (!RString.isNullOrEmpty(対象年度)) {
             div.getDdlTaishoNendo().setSelectedKey(対象年度);

@@ -114,7 +114,7 @@
             <if test="国保連送付年月To !=null and 国保連送付年月To.toString()!=''" >
                 AND  "DbT3059KagoMoshitate"."kokuhorenSofuYM"  <![CDATA[<=]]> #{国保連送付年月To}    
             </if>
-            <if test="過誤申立給付区分 == '1' or 過誤申立給付区分 == '2' or 過誤申立給付区分 == '3'">
+            <if test="過誤申立給付区分!=null and !過誤申立給付区分.isEmpty()">
                 AND  "DbT3059KagoMoshitate"."moshitateshoKubunCode" = #{過誤申立給付区分}
             </if>    
             <if test="サービス提供年月From !=null and サービス提供年月From.toString()!=''" >

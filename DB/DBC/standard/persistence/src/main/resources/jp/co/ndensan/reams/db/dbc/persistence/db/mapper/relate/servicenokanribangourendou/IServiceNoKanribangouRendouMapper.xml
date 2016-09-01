@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 新総合事業・事業高額決定通知書（単）のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-4760-050 cuilin -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.servicenokanribangourendou.IServiceNoKanribangouRendouMapper">
+
+    <resultMap id="resultMap_ServiceNoKanribangouRendouEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.servicenokanribangourendou.ServiceNoKanribangouRendouEntity" autoMapping="true">
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="決定年月日" column="決定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="本人支払額" column="本人支払額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="審査方法区分" column="審査方法区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受付年月日" column="受付年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="支払方法区分コード" column="支払方法区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支払場所" column="支払場所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支払期間開始年月日" column="支払期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="支払期間終了年月日" column="支払期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="支払窓口開始時間" column="支払窓口開始時間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支払窓口終了時間" column="支払窓口終了時間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="口座ID" column="口座ID" />
+        <result property="通知書番号" column="通知書番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <result property="支給金額" column="支給金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="支給区分コード" column="支給区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="不支給理由" column="不支給理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <!--事業高額介護サービス費支給情報を取得します。-->
+    <select resultOrdered="true" id="get事業高額介護サービス費支給情報" resultMap="resultMap_ServiceNoKanribangouRendouEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicenokanribangourendou.JigyouKetteiTutisyoParameter" fetchSize="500">
+            SELECT
+                T3111."hihokenshaNo" AS 被保険者番号,
+                T3111."ketteiYMD" AS 決定年月日,
+                T3111."honninShiharaiGaku" AS 本人支払額,
+                T3111."shinsaHohoKubun" AS 審査方法区分,
+                T3110."uketsukeYMD" AS 受付年月日,
+                T3110."shiharaiHohoKubunCode" AS 支払方法区分コード,
+                T3110."shiharaiBasho" AS 支払場所,
+                T3110."shiharaiKaishiYMD" AS 支払期間開始年月日,
+                T3110."shiharaiShuryoYMD" AS 支払期間終了年月日,
+                T3110."shiharaiKaishiTime" AS 支払窓口開始時間,
+                T3110."shiharaiShuryoTime" AS 支払窓口終了時間,
+                T3110."kozaID" AS 口座ID,
+                T3112."tsuchishoNo" AS 通知書番号,
+                (CASE 
+                WHEN T3111."shinsaHohoKubun" = '1' 
+                    THEN T3112."jigyoKogakuShikyuGaku"
+                WHEN T3111."shinsaHohoKubun" = '2'
+                    THEN T3111."shiharaiKingaku"
+                ELSE '0'
+                END
+                ) AS 支給金額,
+                (CASE 
+                WHEN T3111."shinsaHohoKubun" = '1' 
+                    THEN T3112."shikyuKubunCode"
+                WHEN T3111."shinsaHohoKubun" = '2'
+                    THEN T3111."shiharaiKubunCode"
+                END
+                ) AS 支給区分コード,
+                (CASE
+                WHEN T3111."shinsaHohoKubun" = '1' AND T3112."shikyuKubunCode" = '2'
+                    THEN T3111."fushikyuRiyu"
+                WHEN T3111."shinsaHohoKubun" = '2' AND T3111."shiharaiKubunCode" = '2'
+                    THEN T3111."fushikyuRiyu"
+                 ELSE ''       
+                 END
+                )AS 不支給理由
+        FROM
+            rgdb."DbT3111JigyoKogakuShikyuHanteiKekka" AS T3111
+        LEFT JOIN
+            rgdb."DbT3112KogakuShikyuShinsaKettei" AS T3112
+        ON
+            T3111."hihokenshaNo" = T3112."hihokenshaNo"
+        AND T3111."serviceTeikyoYM" = T3112."serviceTeikyoYM"
+        AND T3111."rirekiNo" = T3112."rirekiNo"
+        AND T3111."shoKisaiHokenshaNo" = T3112."shoKisaiHokenshaNo"
+        LEFT JOIN
+            rgdb."DbT3110JigyoKogakuShikyuShinsei" AS T3110
+        ON 
+            T3111."hihokenshaNo" = T3110."hihokenshaNo"
+        AND T3111."serviceTeikyoYM" = T3110."serviceTeikyoYM"
+        AND T3111."rirekiNo" = T3110."rirekiNo"
+        AND T3111."shoKisaiHokenshaNo" = T3110."shoKisaiHokenshaNo"
+    WHERE
+            T3111."hihokenshaNo" = #{被保険者番号}
+        AND T3111."serviceTeikyoYM" = #{サービス提供年月}
+        AND T3111."rirekiNo" = #{履歴番号}
+        AND T3111."shoKisaiHokenshaNo" = #{証記載保険者番号}
+    </select>
+    
+    <!-- 事業高額介護サービス費給付対象者明細情報を取得します。-->
+    <select resultOrdered="true" id="get対象者明細情報" 
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3108JigyoKogakuKyufuTaishoshaMeisaiMapper.ResultMap_DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicenokanribangourendou.JigyouKetteiTutisyoParameter" fetchSize="500">
+        SELECT
+            A.*
+        FROM 
+            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3108JigyoKogakuKyufuTaishoshaMeisaiMapper.noDeleted_DbT3108JigyoKogakuKyufuTaishoshaMeisai" />) AS A
+        WHERE
+            A."dbT3108JigyoKogakuKyufuTaishoshaMeisai_hihokenshaNo" = #{被保険者番号}
+        AND A."dbT3108JigyoKogakuKyufuTaishoshaMeisai_serviceTeikyoYM" = #{サービス提供年月}
+        AND A."dbT3108JigyoKogakuKyufuTaishoshaMeisai_rirekiNo" = (
+                SELECT
+                    MAX(B."rirekiNo")
+                FROM
+                    rgdb."DbT3108JigyoKogakuKyufuTaishoshaMeisai" AS B
+                WHERE
+                   B."hihokenshaNo" = #{被保険者番号}
+               AND B."serviceTeikyoYM" = #{サービス提供年月}
+            )
+        ORDER BY
+             A."dbT3108JigyoKogakuKyufuTaishoshaMeisai_serviceShuruiCode"
+    </select>
+</mapper>

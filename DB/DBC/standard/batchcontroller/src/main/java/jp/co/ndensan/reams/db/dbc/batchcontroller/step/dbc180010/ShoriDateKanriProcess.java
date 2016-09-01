@@ -34,7 +34,7 @@ public class ShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDateKanr
     private NenjiRiyoshaFutanwariaiHanteiProcessParameter processParameter;
     private boolean 処理日付管理マスタを登録FLAG = true;
     private Association 市町村コード;
-    private final RString 処理枝番 = new RString("0001");
+    private final RString 処理枝番 = new RString("0000");
     private final RString 年度内連番 = new RString("0001");
     private final RString 理由 = new RString("年次利用者負担割合判定更新");
     private static final RString ONERSTRING = new RString("1");

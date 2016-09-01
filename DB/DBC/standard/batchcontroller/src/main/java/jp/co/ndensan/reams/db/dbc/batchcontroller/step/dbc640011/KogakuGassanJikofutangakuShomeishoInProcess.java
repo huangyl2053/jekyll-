@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_JikofutangakuShomeishoRealHakkoFlag;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_DataSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenDataSaisoFlag;
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoInProcessParamerter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.KagoKetteiHokenshaInControlCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoInCsvEntity;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushom
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoFlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0001HihokenshaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -23,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -47,6 +50,7 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
     private static final RString 高額合算自己負担額一時_TABLE_NAME = new RString("DbWT37H1KogakuGassanaJikofutangaku");
     private static final RString 高額合算自己負担額明細一時_TABLE_NAME = new RString("DbWT37H2KogakuGassanaJikofutangakuMeisai");
     private static final RString 被保険者一時_TABLE_NAME = new RString("DbWT0001Hihokensha");
+    private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
     private static final RString 交換情報識別番号_37H1 = new RString("37H1");
     private static final RString 交換情報識別番号_37J1 = new RString("37J1");
     private static final RString 対象年度420 = new RString("420");
@@ -100,18 +104,18 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
     BatchEntityCreatedTempTableWriter 高額合算自己負担額明細一時tableWriter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 被保険者一時tableWriter;
+    @BatchWriter
+    IBatchTableWriter 処理結果リスト一時tbWriter;
 
     @Override
     protected void initialize() {
+        renban = parameter.get連番();
         csvReaderPath = parameter.getPath().concat(KEY_分離文字).concat(parameter.getFileName());
+        returnEntity = new KogakuGassanJikofutangakuShomeishoFlowEntity();
+        flowEntity = new OutputParameter<>();
         dbWT37H1TempEntity = new DbWT37H1KogakuGassanaJikofutangakuTempEntity();
         dbWT37H2TempEntity = new DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity();
         dbWT0001TempEntity = new DbWT0001HihokenshaEntity();
-    }
-
-    @Override
-    protected IBatchReader createReader() {
-        return new BatchSimpleReader(csvReaderPath);
     }
 
     @Override
@@ -122,6 +126,14 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
                 = new BatchEntityCreatedTempTableWriter(高額合算自己負担額明細一時_TABLE_NAME, DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity.class);
         被保険者一時tableWriter
                 = new BatchEntityCreatedTempTableWriter(被保険者一時_TABLE_NAME, DbWT0001HihokenshaEntity.class);
+        処理結果リスト一時tbWriter
+                = new BatchEntityCreatedTempTableWriter(処理結果リスト一時_TABLE_NAME,
+                        DbWT0002KokuhorenTorikomiErrorEntity.class);
+    }
+
+    @Override
+    protected IBatchReader createReader() {
+        return new BatchSimpleReader(csvReaderPath);
     }
 
     @Override
@@ -157,6 +169,10 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
             FlexibleYearMonth 処理対象年月 = new FlexibleYearMonth(controlCsvEntity.getShoriYM());
             returnEntity.setShoriYM(処理対象年月);
         }
+        if (parameter.isさいごファイルフラグ() && 0 == renban) {
+            処理結果リスト一時に登録();
+        }
+        returnEntity.set連番(renban);
         returnEntity.setCodeNum(レコード件数合算);
         returnEntity.set高額合算自己負担額一時TBL登録件数(renban);
         flowEntity.setValue(returnEntity);
@@ -421,6 +437,22 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
             dbWT37J1TempEntity.setTekiyo(csvEntity.get対象年度4月分_摘要());
             高額合算自己負担額明細一時tableWriter.insert(dbWT37J1TempEntity);
         }
+    }
+
+    private void 処理結果リスト一時に登録() {
+        DbWT0002KokuhorenTorikomiErrorEntity 処理結果リスト一時entity = new DbWT0002KokuhorenTorikomiErrorEntity();
+        処理結果リスト一時entity.setErrorKubun(KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード());
+        処理結果リスト一時entity.setShoHokanehshaNo(ShoKisaiHokenshaNo.EMPTY);
+        処理結果リスト一時entity.setHihokenshaNo(HihokenshaNo.EMPTY);
+        処理結果リスト一時entity.setKey1(RString.EMPTY);
+        処理結果リスト一時entity.setKey2(RString.EMPTY);
+        処理結果リスト一時entity.setKey3(RString.EMPTY);
+        処理結果リスト一時entity.setKey4(RString.EMPTY);
+        処理結果リスト一時entity.setKey5(RString.EMPTY);
+        処理結果リスト一時entity.setHihokenshaKanaShimei(RString.EMPTY);
+        処理結果リスト一時entity.setHihokenshaShimei(RString.EMPTY);
+        処理結果リスト一時entity.setBiko(RString.EMPTY);
+        処理結果リスト一時tbWriter.insert(処理結果リスト一時entity);
     }
 
     private Decimal getDecimal(RString decimal) {

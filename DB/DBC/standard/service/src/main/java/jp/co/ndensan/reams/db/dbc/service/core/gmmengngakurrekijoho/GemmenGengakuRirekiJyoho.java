@@ -37,6 +37,7 @@ public class GemmenGengakuRirekiJyoho {
     private static final RString 減免_減額種類_03 = new RString("03");
     private static final RString 減免_減額種類_04 = new RString("04");
     private static final RString 軽減率_0 = new RString("0");
+    private static final RString スラッシュ = new RString("/");
     private static final RString KEY_被保険者番号 = new RString("被保険者番号");
     private final MapperProvider mapperProvider;
     private final DbT4014RiyoshaFutangakuGengakuDac dbt4014Dac;
@@ -149,9 +150,9 @@ public class GemmenGengakuRirekiJyoho {
                     軽減率 = 軽減率_0;
                 } else if (軽減率_分子 == null) {
                     軽減率_分子 = Decimal.ZERO;
-                    軽減率 = new RString(軽減率_分子.toString().trim() + "/" + 軽減率_分母.toString().trim());
+                    軽減率 = new RString(軽減率_分子.toString().trim() + スラッシュ.toString() + 軽減率_分母.toString().trim());
                 } else {
-                    軽減率 = new RString(軽減率_分子.toString().trim() + "/" + 軽減率_分母.toString().trim());
+                    軽減率 = new RString(軽減率_分子.toString().trim() + スラッシュ.toString() + 軽減率_分母.toString().trim());
                 }
                 entity = new ShakaiFukushiHojinRiyoshaFutanKeigenJyohoEntity(
                         減免_減額種類_04,

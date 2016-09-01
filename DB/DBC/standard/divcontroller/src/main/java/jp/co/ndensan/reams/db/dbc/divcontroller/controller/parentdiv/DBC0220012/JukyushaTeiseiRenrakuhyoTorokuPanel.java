@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -247,13 +248,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
                     return ResponseData.of(div).setState(DBC0220012StateName.完了メッセージ);
                 }
             }
-        } catch (Exception e) {
-            e.toString();
-            div.getCcdKanryoMessage().setMessage(
-                    UrErrorMessages.異常終了,
-                    受給者訂正連絡票登録画面Div.get被保険者番号().value(),
-                    受給者訂正連絡票登録画面Div.get被保険者氏名カナ(), false);
-            return ResponseData.of(div).setState(DBC0220012StateName.完了メッセージ);
+        } catch (SystemException | ApplicationException e) {
+            throw new ApplicationException(e.getMessage());
         }
         return ResponseData.of(div).respond();
     }

@@ -15,11 +15,11 @@ import jp.co.ndensan.reams.db.dbc.service.core.basic.KokiKoreishaInfoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class MainPanel {
 
     /**
-     * 画面初期化のメソッドです。
+     * 画面初期化です。
      *
      * @param div MainPanelDiv
      * @return ResponseData<MainPanelDiv>
@@ -45,6 +45,13 @@ public class MainPanel {
         KokiKoreishaInfo 後期高齢者情報 = manager.get後期高齢者情報(識別コード);
         getHandler(div).onLoad(識別コード, 被保険者番号, 後期高齢者情報);
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
+        RString 履歴番号;
+        if (後期高齢者情報 != null) {
+            履歴番号 = 後期高齢者情報.get履歴番号();
+        } else {
+            履歴番号 = RString.EMPTY;
+        }
+        ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号);
         return ResponseData.of(div).respond();
     }
 
@@ -55,6 +62,8 @@ public class MainPanel {
      * @return ResponseData<MainPanelDiv>
      */
     public ResponseData<MainPanelDiv> onClick_back(MainPanelDiv div) {
+        getHandler(div).前排他キーの解除(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
+                ViewStateHolder.get(ViewStateKeys.履歴番号, RString.class));
         return ResponseData.of(div).forwardWithEventName(DBC0530011TransitionEventName.対象者検索へ戻る).respond();
     }
 
@@ -73,8 +82,7 @@ public class MainPanel {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage("URZQ00010", "保存します。よろしいですか？");
-            return ResponseData.of(div).addMessage(message).respond();
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
@@ -87,30 +95,20 @@ public class MainPanel {
             if (div.getMeisaiPanel().getTxtHokenshaShuryoYMD().getValue() != null) {
                 kokiKoreishaInfo.createBuilderForEdit().set保険者適用終了日(div.getMeisaiPanel().getTxtHokenshaShuryoYMD().
                         getValue().toDateString());
-            } else {
-                kokiKoreishaInfo.createBuilderForEdit().set保険者適用終了日(RString.EMPTY);
             }
             if (!div.getTxtHihokenshaNo().getValue().isNullOrEmpty()) {
                 kokiKoreishaInfo.createBuilderForEdit().set後期高齢被保険者番号(div.getTxtHihokenshaNo().getValue());
-            } else {
-                kokiKoreishaInfo.createBuilderForEdit().set後期高齢被保険者番号(RString.EMPTY);
             }
             if (div.getTxtHokenshaKaishiYMD().getValue() != null) {
                 kokiKoreishaInfo.createBuilderForEdit().set保険者適用開始日(div.getTxtHokenshaKaishiYMD().getValue().toDateString());
-            } else {
-                kokiKoreishaInfo.createBuilderForEdit().set保険者適用開始日(RString.EMPTY);
             }
             if (div.getMeisaiPanel().getTxtShikakuShutokuYMD().getValue() != null) {
                 kokiKoreishaInfo.createBuilderForEdit().set資格取得日(div.getMeisaiPanel().getTxtShikakuShutokuYMD().
                         getValue().toDateString());
-            } else {
-                kokiKoreishaInfo.createBuilderForEdit().set資格取得日(RString.EMPTY);
             }
             if (div.getMeisaiPanel().getTxtShikakuSoshitsuYMD().getValue() != null) {
                 kokiKoreishaInfo.createBuilderForEdit().set資格喪失日(div.getMeisaiPanel().getTxtShikakuSoshitsuYMD().
                         getValue().toDateString());
-            } else {
-                kokiKoreishaInfo.createBuilderForEdit().set資格喪失日(RString.EMPTY);
             }
             kokiKoreishaInfo.createBuilderForEdit().set個人区分コード(div.getMeisaiPanel().getDdlKojinKubunCode().getSelectedKey())
                     .set資格取得事由コード(div.getMeisaiPanel().getDdlShikakuShutokuJiyu().getSelectedKey())
@@ -123,9 +121,6 @@ public class MainPanel {
             kokiKoreishaInfo.createBuilderForEdit().set後期高齢保険者番号_広域(null);
             manager.save後期高齢者情報(kokiKoreishaInfo);
             getHandler(div).前排他キーの解除(識別コード, RString.EMPTY);
-            div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
-                    RString.EMPTY, RString.EMPTY, true);
-            return ResponseData.of(div).setState(DBC0530011StateName.完了);
         } else {
             if (div.getMeisaiPanel().getTxtHokenshaShuryoYMD().getValue() != null) {
                 後期高齢者情報.createBuilderForEdit().set保険者適用終了日(div.getMeisaiPanel().getTxtHokenshaShuryoYMD().
@@ -165,10 +160,10 @@ public class MainPanel {
             }
             manager.save後期高齢者情報(後期高齢者情報);
             getHandler(div).前排他キーの解除(識別コード, div.getMeisaiPanel().getTxtRirekiNo().getValue());
-            div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
-                    RString.EMPTY, RString.EMPTY, true);
-            return ResponseData.of(div).setState(DBC0530011StateName.完了);
         }
+        div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
+                RString.EMPTY, RString.EMPTY, true);
+        return ResponseData.of(div).setState(DBC0530011StateName.完了);
     }
 
     private MainPanelHandler getHandler(MainPanelDiv div) {

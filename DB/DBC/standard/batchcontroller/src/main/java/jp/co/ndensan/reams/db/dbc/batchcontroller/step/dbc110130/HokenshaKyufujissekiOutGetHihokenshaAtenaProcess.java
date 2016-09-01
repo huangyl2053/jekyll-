@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -84,6 +85,9 @@ public class HokenshaKyufujissekiOutGetHihokenshaAtenaProcess extends BatchProce
         if (null != 識別対象.to個人()) {
             dbWT1001.setSeinenYmd((識別対象.to個人().get生年月日().toFlexibleDate()));
             dbWT1001.setSeibetsuCode(識別対象.to個人().get性別().toRString());
+        } else {
+            dbWT1001.setSeinenYmd((FlexibleDate.EMPTY));
+            dbWT1001.setSeibetsuCode(RString.EMPTY);
         }
         return dbWT1001;
     }

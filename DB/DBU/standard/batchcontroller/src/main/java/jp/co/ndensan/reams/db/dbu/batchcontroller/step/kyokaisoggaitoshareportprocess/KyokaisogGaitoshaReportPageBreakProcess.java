@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.kyokaisoggaitoshareportp
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlistchohyodatasakusei.KyokaisoKanriMasterListChohyoDataSakusei;
 import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListBodyItem;
 import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListHeadItem;
 import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReport;
+import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlistchohyodatasakusei.KyokaisoKanriMasterListChohyoDataSakusei;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.kyokaisogaitosha.KyokaisoGaitoshaProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.reportid.ReportIdDBU;
@@ -212,7 +212,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
         if ((登録されて).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIsshokuhiKeiFlag())) {
             出力条件.add((保険料額));
         }
-        出力条件.set(0, 境界層該当内容.concat(出力条件.get(0)));
+        出力条件.set(1, 境界層該当内容.concat(出力条件.get(1)));
         return 出力条件;
     }
 
@@ -222,12 +222,12 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
                         kyokaisokanrimasterList.get市町村コード(), kyokaisokanrimasterList.get市町村名(),
                         new RString(String.valueOf(JobContextHolder.getJobId())),
                         ReportIdDBU.DBA200005.getReportName(),
-                        //                        new RString(String.valueOf(reportSourceWriter.pageCount().value())),
+                        //new RString(String.valueOf(reportSourceWriter.pageCount().value())),
                         new RString(String.valueOf(pageCnt)),
                         なし,
                         RString.EMPTY,
                         contribute());
-        OutputJokenhyoFactory.createInstance(item);
+        OutputJokenhyoFactory.createInstance(item).print();
     }
 
     private KyokaisoKanriMasterListBodyItem setBodyItem(KyokaisoKanriMasterListChohyoDataSakuseiEntity entity) {
@@ -259,7 +259,9 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
         KyokaisoKanriMasterListChohyoDataSakusei 帳票データリスト = new KyokaisoKanriMasterListChohyoDataSakusei();
         List<KyokaisoKanriMasterListChohyoDataSakuseiEntity> 帳票データ = 帳票データリスト.getcreateNenreiToutatsuYoteishaCheckListChohyo(kyokaisokanrimasterList);
         for (KyokaisoKanriMasterListChohyoDataSakuseiEntity dataSakuseiEntity : 帳票データ) {
-            bodyItemList.add(setBodyItem(dataSakuseiEntity));
+            if (dataSakuseiEntity.get被保険者番号() != null) {
+                bodyItemList.add(setBodyItem(dataSakuseiEntity));
+            }
 
             headItem = new KyokaisoKanriMasterListHeadItem(
                     dataSakuseiEntity.get印刷日時(),
@@ -276,7 +278,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
                     dataSakuseiEntity.get改頁4(),
                     dataSakuseiEntity.get改頁5());
         }
-        if (!bodyItemList.isEmpty()) {
+        if (!bodyItemList.isEmpty() || headItem != null) {
             KyokaisoKanriMasterListReport report = KyokaisoKanriMasterListReport.createFrom(headItem, bodyItemList);
             report.writeBy(reportSourceWriter);
             outputJokenhyoFactory(帳票データ.size());

@@ -33,6 +33,7 @@ public class JyutakuKayisyuHiHandler {
 
     private static final RString ZERO = new RString("0");
     private static final RString 前事業者 = new RString("1");
+    private static final RString 前月 = new RString("1");
     private static final RString NI = new RString("2");
     private static final FlexibleYearMonth 平成24年4月 = new FlexibleYearMonth("201204");
     private final JyutakuKayisyuHiDiv div;
@@ -203,6 +204,36 @@ public class JyutakuKayisyuHiHandler {
             setDataGrid(引き継ぎ情報, ヘッダ情報2.get(index + i).getサービス提供年月(),
                     ヘッダ情報2.get(index + i).get事業所番号().value(), ヘッダ情報2.get(index + i).get整理番号(),
                     ヘッダ情報2.get(index + i).get給付実績区分コード(), ヘッダ情報2.get(index + i).get識別番号());
+        }
+    }
+
+    /**
+     * 直近サービス提供年月の取得処理。
+     *
+     * @param 月Flg 月Flg
+     * @param サービス提供年月 サービス提供年月
+     * @param 引き継ぎ情報 引き継ぎ情報
+     * @return サービス提供年月
+     */
+    public FlexibleYearMonth get直近サービス提供年月(RString 月Flg, RDate サービス提供年月, KyufuJissekiPrmBusiness 引き継ぎ情報) {
+        List<KyufujissekiJutakuKaishuhi> 給付実績住宅改修費List = 引き継ぎ情報.getCsData_H();
+        Collections.sort(給付実績住宅改修費List, new DateComparatorServiceTeikyoYM());
+        List<KyufujissekiJutakuKaishuhi> サービス提供年月前 = new ArrayList<>();
+        List<KyufujissekiJutakuKaishuhi> サービス提供年月後 = new ArrayList<>();
+        if (サービス提供年月 != null) {
+            for (KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi : 給付実績住宅改修費List) {
+                if (new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()).isBefore(kyufujissekiJutakuKaishuhi.getサービス提供年月())) {
+                    サービス提供年月前.add(kyufujissekiJutakuKaishuhi);
+                }
+                if (kyufujissekiJutakuKaishuhi.getサービス提供年月().isBefore(new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()))) {
+                    サービス提供年月後.add(kyufujissekiJutakuKaishuhi);
+                }
+            }
+        }
+        if (前月.equals(月Flg)) {
+            return サービス提供年月前.get(0).getサービス提供年月();
+        } else {
+            return サービス提供年月後.get(サービス提供年月後.size() - 1).getサービス提供年月();
         }
     }
 

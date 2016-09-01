@@ -58,9 +58,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- * バッチ設計_DBBBT22002_汎用リスト 賦課台帳CsvEditorのクラス
+ * バッチ設計_DBBBT22002_汎用リスト 賦課台帳CsvEditorのクラスです。
  *
- * @reamsid_L DBB-1901-030 surun
+ * @reamsid_L DBB-1900-030 zhaowei
  */
 public class HanyoListFukaDaichoCsvNoRenbanEditor {
 
@@ -209,16 +209,17 @@ public class HanyoListFukaDaichoCsvNoRenbanEditor {
                     UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
                     new Code(賦課台帳.get特別徴収義務者コード())));
         }
-        if (賦課台帳.get介護徴収方法().getHonNenkinCode() != null
-                && 賦課台帳.get介護徴収方法().getKariNenkinCode() != null) {
+        RString 本徴収年金コード = 賦課台帳.get介護徴収方法().getHonNenkinCode();
+        RString 仮徴収年金コード = 賦課台帳.get介護徴収方法().getKariNenkinCode();
+        if (本徴収年金コード != null && 仮徴収年金コード != null) {
             if (賦課台帳.is本算定後()) {
                 csvEntity.set年金種類(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
                         UEXCodeShubetsu.年金コード.getCodeShubetsu(),
-                        new Code(賦課台帳.get介護徴収方法().getHonNenkinCode())));
+                        new Code(本徴収年金コード.substring(0, INT_THREE))));
             } else {
                 csvEntity.set年金種類(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
                         UEXCodeShubetsu.年金コード.getCodeShubetsu(),
-                        new Code(賦課台帳.get介護徴収方法().getKariNenkinCode())));
+                        new Code(仮徴収年金コード.substring(0, INT_THREE))));
             }
         }
         if (賦課台帳.get介護徴収方法().getHonHosokuM() != null
@@ -229,7 +230,7 @@ public class HanyoListFukaDaichoCsvNoRenbanEditor {
                 csvEntity.set特徴捕捉月(賦課台帳.get介護徴収方法().getKariHosokuM());
             }
         }
-        if (csvEntity.get特徴捕捉月().isNullOrEmpty() && parameter.get調定年度() != null) {
+        if (!csvEntity.get特徴捕捉月().isNullOrEmpty() && parameter.get調定年度() != null) {
             csvEntity.set特徴開始月(特別徴収開始月の判定(csvEntity.get特徴捕捉月()));
         }
         受給者台帳Newestの設定(csvEntity);
@@ -259,7 +260,7 @@ public class HanyoListFukaDaichoCsvNoRenbanEditor {
             特徴開始月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_2月捕捉,
                     RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
             if (捕捉月８月.equals(特徴開始月)) {
-                return new RString(parameter.get賦課年度().getYearValue()).concat(特徴開始月);
+                return new RString(parameter.get賦課年度().plusYear(1).getYearValue()).concat(特徴開始月);
             }
         }
         if (捕捉月４月.equals(特徴捕捉月)) {
@@ -356,17 +357,12 @@ public class HanyoListFukaDaichoCsvNoRenbanEditor {
         }
         if (KozaKubun.口座振替.getコード().equals(介護賦課.getKozaKubun())) {
             csvEntity.set口座対象者(HOSHI);
-        } else {
-            csvEntity.set口座対象者(KozaKubun.toValue(介護賦課.getKozaKubun()).get名称());
         }
         csvEntity.set年金収入額(numToRString(介護賦課.getNenkinShunyuGaku()));
         csvEntity.set生活保護種別(new FujoShuruiCodeValue(介護賦課.getSeihofujoShurui()).getRyakusho());
         if (KyokaisoKubun.該当.getコード().equals(介護賦課.getKyokaisoKubun())) {
             csvEntity.set境界層区分(境界層);
-        } else {
-            csvEntity.set境界層区分(KyokaisoKubun.toValue(介護賦課.getKyokaisoKubun()).get名称());
         }
-
         csvEntity.set調定年度(new RString(介護賦課.getChoteiNendo().getYearValue()));
         csvEntity.set賦課年度(new RString(介護賦課.getFukaNendo().getYearValue()));
         csvEntity.set特徴歳出還付額(numToRString(介護賦課.getTkSaishutsuKampuGaku()));
@@ -560,13 +556,13 @@ public class HanyoListFukaDaichoCsvNoRenbanEditor {
         RString 地区2 = RString.EMPTY;
         RString 地区3 = RString.EMPTY;
         if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku1() != null) {
-            地区1 = 宛名.get行政区画().getChiku1().get名称();
+            地区1 = 宛名.get行政区画().getChiku1().getコード().getColumnValue();
         }
         if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku2() != null) {
-            地区2 = 宛名.get行政区画().getChiku2().get名称();
+            地区2 = 宛名.get行政区画().getChiku2().getコード().getColumnValue();
         }
         if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku3() != null) {
-            地区3 = 宛名.get行政区画().getChiku3().get名称();
+            地区3 = 宛名.get行政区画().getChiku3().getコード().getColumnValue();
         }
         csvEntity.set地区１(地区1);
         csvEntity.set地区２(地区2);
