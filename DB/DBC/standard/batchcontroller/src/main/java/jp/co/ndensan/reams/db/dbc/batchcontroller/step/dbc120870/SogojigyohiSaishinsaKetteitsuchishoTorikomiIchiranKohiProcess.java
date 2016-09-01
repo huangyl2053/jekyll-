@@ -205,6 +205,7 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiProcess
                     true);
             report.writeBy(reportSourceWriter);
         }
+
         SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport report = new SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport(
                 entity,
                 出力順Map,
@@ -333,10 +334,6 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiProcess
 
         }
 
-        if (!personalDataList.isEmpty()) {
-            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-            manager.spool(eucFilePath, accessLogUUID);
-        }
     }
 
     private void clear集計(SogojigyohiSaishinsaCSVEntity output) {
