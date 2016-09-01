@@ -436,7 +436,11 @@ public enum ReportIdDBC {
     /**
      * 汎用リスト 再審査結果情報帳票ＩＤです。
      */
-    DBC701012(new ReportId("DBC701012_HanyoListSaishinsaKekka"), new RString("汎用リスト 再審査結果情報"));
+    DBC701012(new ReportId("DBC701012_HanyoListSaishinsaKekka"), new RString("汎用リスト 再審査結果情報")),
+    /**
+     * 給付管理票総括票帳票ＩＤです。
+     */
+    DBC300001(new ReportId("DBC300001_KyufuKanrihyoSokatsuhyo"), new RString("給付管理票総括票"));
 
     private final ReportId reportId;
 
