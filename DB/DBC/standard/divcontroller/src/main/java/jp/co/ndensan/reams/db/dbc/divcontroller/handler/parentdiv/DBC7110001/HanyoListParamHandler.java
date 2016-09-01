@@ -330,7 +330,7 @@ public class HanyoListParamHandler {
 
     private RString nullToEmpty(RDate obj) {
         if (obj != null) {
-            return obj.wareki().getYearMonth();
+            return obj.toDateString();
         }
         return RString.EMPTY;
     }
