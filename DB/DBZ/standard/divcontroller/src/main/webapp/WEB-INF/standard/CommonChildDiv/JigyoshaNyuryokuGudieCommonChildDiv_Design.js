@@ -64,7 +64,7 @@ var DBZ;
             };
 
             Controls.prototype.txtJIgyoshaNo = function () {
-                return new UZA.TextBox(this.convFiledName("txtJIgyoshaNo"));
+                return new UZA.TextBoxCode(this.convFiledName("txtJIgyoshaNo"));
             };
 
             Controls.prototype.txtYukouKaishibi = function () {

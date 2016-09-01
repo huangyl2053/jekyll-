@@ -323,6 +323,7 @@ public class TaJushochiTokureishaKanriHandler {
                 rireki_Row.setHenkouzenEdaNo(変更後枝番);
                 if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
                     rireki_Row.setRowState(RowState.Modified);
+                    rireki_Row.setJotai(状態_修正);
                 }
                 TashichosonJushochiTokurei 住所地特例の識別子
                         = new TashichosonJushochiTokurei(識別コード,
@@ -334,12 +335,14 @@ public class TaJushochiTokureishaKanriHandler {
             if (状態_削除.equals(div.getStrate())) {
                 if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
                     rireki_Row.setRowState(RowState.Deleted);
+                    rireki_Row.setJotai(状態_削除);
                 } else {
                     rowList.remove(rireki_Row);
                 }
             }
             if (状態_追加.equals(div.getStrate())) {
                 rireki_Row.setRowState(RowState.Added);
+                rireki_Row.setJotai(状態_追加);
                 rireki_Row.setShikibetsuCode(識別コード.getColumnValue());
                 rireki_Row.setIdoYMD(div.getTajushochiTokureiInput().getHiddenInputIdoYMD());
                 変更後枝番 = TaJushochiTokureisyaKanriManager.createInstance().
@@ -422,6 +425,7 @@ public class TaJushochiTokureishaKanriHandler {
                 rireki_Row.setHenkouzenEdaNo(変更後枝番);
                 if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
                     rireki_Row.setRowState(RowState.Modified);
+                    rireki_Row.setJotai(状態_修正);
                 }
                  int 最新履歴番号 = TaJushochiTokureisyaKanriManager.createInstance().get最新履歴番号(識別コード);
             ShisetsuNyutaisho taisho = new ShisetsuNyutaisho(識別コード, 最新履歴番号);
@@ -439,6 +443,7 @@ public class TaJushochiTokureishaKanriHandler {
              if (状態_削除.equals(div.getStrate())) {
                 if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
                     rireki_Row.setRowState(RowState.Deleted);
+                    rireki_Row.setJotai(状態_削除);
                 } else {
                     rowList.remove(rireki_Row);
                 }
@@ -446,6 +451,7 @@ public class TaJushochiTokureishaKanriHandler {
               }
             if ((状態_追加.equals(div.getStrate())) || (状態_空白.equals(div.getStrate()))) {
                 rireki_Row.setRowState(RowState.Added);
+                rireki_Row.setJotai(状態_追加);
                 rireki_Row.setShikibetsuCode(識別コード.getColumnValue());
                 rireki_Row.getTekiyoYMD().setValue(new RDate(div.getTxtTekiyobi().getValue().toString()));
                 rireki_Row.getTekiyoTodokedeYMD().setValue(new RDate(div.getTxtTekiyoTodokedebi().getValue().toString()));
@@ -476,6 +482,7 @@ public class TaJushochiTokureishaKanriHandler {
                 rireki_Row.setHenkouzenEdaNo(変更後枝番);
                 if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
                     rireki_Row.setRowState(RowState.Modified);
+                    rireki_Row.setJotai(状態_修正);
                 }
                  int 最新履歴番号 = TaJushochiTokureisyaKanriManager.createInstance().get最新履歴番号(識別コード);
             ShisetsuNyutaisho taisho = new ShisetsuNyutaisho(識別コード, 最新履歴番号);
@@ -495,34 +502,38 @@ public class TaJushochiTokureishaKanriHandler {
             Collections.sort(rowList, new DateComparator());
         } else if (解除モード.equals(親画面状態)) {
             if (状態_修正.equals(div.getStrate())) {
-            dgJushochiTokureiRireki_Row row = new dgJushochiTokureiRireki_Row();
+//            dgJushochiTokureiRireki_Row row = new dgJushochiTokureiRireki_Row();
 
-            if (div.getDgJushochiTokureiRireki().getDataSource() != null
-                    && !div.getDgJushochiTokureiRireki().getDataSource().isEmpty()) {
-                row = div.getDgJushochiTokureiRireki().getDataSource().get(0);
-            }
+//            if (div.getDgJushochiTokureiRireki().getDataSource() != null
+//                    && !div.getDgJushochiTokureiRireki().getDataSource().isEmpty()) {
+//                row = div.getDgJushochiTokureiRireki().getDataSource().get(0);
+//            }
             if (div.getTxtTasyobi().getValue() != null) {
-                row.getTaishoYMD().setValue(new RDate(div.getTxtTasyobi().getValue().toString()));
+                rireki_Row.getTaishoYMD().setValue(new RDate(div.getTxtTasyobi().getValue().toString()));
             }
             if (div.getTxtKaijyobi().getValue() != null) {
-                row.getKaijoYMD().setValue(new RDate(div.getTxtKaijyobi().getValue().toString()));
+                rireki_Row.getKaijoYMD().setValue(new RDate(div.getTxtKaijyobi().getValue().toString()));
             }
             if (div.getTxtKaijyoTodokedebi().getValue() != null) {
-                row.getKaijoTodokedeYMD().setValue(new RDate(div.getTxtKaijyoTodokedebi().getValue().toString()));
+                rireki_Row.getKaijoTodokedeYMD().setValue(new RDate(div.getTxtKaijyoTodokedebi().getValue().toString()));
             }
             if (div.getDdlKaijyoJiyo().getSelectedKey() != null
                     && !div.getDdlKaijyoJiyo().getSelectedKey().isEmpty()) {
-                row.setKaijoJiyu(div.getDdlKaijyoJiyo().getSelectedKey());
-                row.setKaijoJiyuCode(div.getDdlKaijyoJiyo().getSelectedValue());
+                rireki_Row.setKaijoJiyu(div.getDdlKaijyoJiyo().getSelectedKey());
+                rireki_Row.setKaijoJiyuCode(div.getDdlKaijyoJiyo().getSelectedValue());
             } else {
-                row.setKaijoJiyuCode(RString.EMPTY);
+                rireki_Row.setKaijoJiyuCode(RString.EMPTY);
             }
-            RString 変更前枝番 = row.getEdaNo();
+            RString 変更前枝番 = rireki_Row.getEdaNo();
             変更後枝番 = new RString(Integer.parseInt(変更前枝番.trim().toString()) + 1).padZeroToLeft(4);
-            row.setHenkouzenEdaNo(変更後枝番);
+            rireki_Row.setHenkouzenEdaNo(変更後枝番);
             TashichosonJushochiTokurei 住所地特例の識別子
                     = new TashichosonJushochiTokurei(識別コード, new FlexibleDate(div.getTxtKaijyobi().getValue().toString()), 変更後枝番);
             他住所地特例Model.add(住所地特例の識別子);
+            if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
+                rireki_Row.setRowState(RowState.Modified);
+                rireki_Row.setJotai(状態_修正);
+            }
             div.getTxtTasyobi().clearValue();
             div.getTxtKaijyobi().clearValue();
             div.getTxtKaijyoTodokedebi().clearValue();
@@ -580,19 +591,17 @@ public class TaJushochiTokureishaKanriHandler {
             } else if (適用モード.equals(new RString(div.getMode_DisplayMode().toString()))) {
                 FlexibleDate 適用年月日 = new FlexibleDate(rowList.get(0).getTekiyoYMD().getValue().toString());
                 boolean shikakuSoshitsuCheck = HihokenshashikakusoshitsuManager.createInstance().shikakuSoshitsuCheck(識別コード, HihokenshaNo.EMPTY, 適用年月日);
-                if (!shikakuSoshitsuCheck) {
-                    登録結果 = false;
-                    break;
-                } 
-                FlexibleDate 適用届出年月日 = FlexibleDate.EMPTY;
-                if (rowList.get(0).getTekiyoTodokedeYMD() != null && rowList.get(0).getTekiyoTodokedeYMD().getValue() != null) {
-                    適用届出年月日 = new FlexibleDate(rowList.get(0).getTekiyoTodokedeYMD().getValue().toString());
-                }
-                TaJushochiTokureisyaKanriManager.createInstance().saveHihokenshaSositu(
+                if (shikakuSoshitsuCheck) {
+                    FlexibleDate 適用届出年月日 = FlexibleDate.EMPTY;
+                    if (rowList.get(0).getTekiyoTodokedeYMD() != null && rowList.get(0).getTekiyoTodokedeYMD().getValue() != null) {
+                        適用届出年月日 = new FlexibleDate(rowList.get(0).getTekiyoTodokedeYMD().getValue().toString());
+                    }
+                    TaJushochiTokureisyaKanriManager.createInstance().saveHihokenshaSositu(
                         new KaigoTatokuTekiyoJiyu(rowList.get(0).getTekiyoJiyu()),
                         new FlexibleDate(rowList.get(0).getTekiyoYMD().getValue().toString()),
                         適用届出年月日,
                         識別コード);
+                 } 
                 FlexibleDate 適用異動日 = new FlexibleDate(rowList.get(0).getTekiyoYMD().getValue().toString());
                 dgJushochiTokureiRireki_Row 適用情報 = rowList.get(0);
                 TashichosonJushochiTokureiIdentifier 住所地特例の識別子
@@ -1058,6 +1067,7 @@ public class TaJushochiTokureishaKanriHandler {
     }
 
     private void set他市町村住所地特例情報入力エリア活性の設定() {
+        div.getTxtTasyobi().setDisabled(false);
         div.getTxtNyusyobi().setDisabled(false);
         div.getTxtTekiyobi().setDisabled(false);
         div.getTxtTekiyoTodokedebi().setDisabled(false);

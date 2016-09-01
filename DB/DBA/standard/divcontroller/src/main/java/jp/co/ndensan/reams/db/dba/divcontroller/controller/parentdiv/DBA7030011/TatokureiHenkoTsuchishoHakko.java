@@ -72,6 +72,7 @@ public class TatokureiHenkoTsuchishoHakko {
         createHandler(div).適用情報Gridの設定(tekiyoJohoList == null ? new ArrayList() : tekiyoJohoList);
         createHandler(div).適用情報の名称編集(ReportIdDBA.DBA100006.getReportId());
         createHandler(div).get初期文書番号取得(ReportIdDBA.DBA100006.getReportId());
+        div.getTajutokuTekiyoJohoIchiran().getReportPublish().setIsPublish(true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行ボタン, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行チェックボタン, true);
         return ResponseData.of(div).respond();
@@ -197,8 +198,8 @@ public class TatokureiHenkoTsuchishoHakko {
         item.setBunshoNo(business.get文書番号());
         item.setHokenshaJusho(business.get保険者住所());
         item.setHakkoYMD(business.get発行年月日());
-        item.setHokenshaName(business.get保険者名());
-        item.setTantoBushoName(business.get担当部署名());
+        item.setHokenshaName(business.get保険者名().concat(business.get保険者名敬称()));
+        item.setTantoBushoName(business.get担当部署名().concat(business.get担当部署名敬称()));
         item.setBarcode(business.getバーコード情報());
         item.setMidashi1(business.get見出し());
         item.setHihokenshaNo1(business.get被保険者番号１());
