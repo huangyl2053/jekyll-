@@ -418,6 +418,10 @@ public enum ReportIdDBC {
      */
     DBC7210001(new ReportId("DBC701021_HanyoListJigyoBunKogakuGassanShikyuKettei"), new RString("事業分高額合算支給決定情報")),
     /**
+     * 汎用リスト　高額合算自己負担額情報帳票ＩＤです。
+     */
+    DBC701015(new ReportId("DBC701015_HanyoList_KogakuGassanJikoFutangaku"), new RString("汎用リスト　高額合算自己負担額情報")),
+    /**
      * 汎用リスト　基準収入額適用情報帳票ＩＤです。
      */
     DBC701020(new ReportId("DBC701020_HanyoListKijunShunyugakuTekiyo"), new RString("汎用リスト　基準収入額適用情報")),
