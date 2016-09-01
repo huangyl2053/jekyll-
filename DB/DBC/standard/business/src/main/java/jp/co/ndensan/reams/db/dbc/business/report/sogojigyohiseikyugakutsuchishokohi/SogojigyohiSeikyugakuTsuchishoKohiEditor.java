@@ -63,6 +63,9 @@ public class SogojigyohiSeikyugakuTsuchishoKohiEditor implements ISogojigyohiSei
             source.kanName = 総合計;
         }
 
+        source.kanCode = 請求額通知書情報.get款コード();
+        source.kouCode = 請求額通知書情報.get項コード();
+
         if (!NUM.equals(請求額通知書情報.get項コード())) {
             source.kouName = 請求額通知書情報.get項名();
         } else {
