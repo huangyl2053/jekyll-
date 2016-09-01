@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder._ChohyoShutsury
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 
@@ -69,9 +70,10 @@ public class KogakuGassanHoseizumiJikofutangakuJohoHandler {
                 manager.save前回出力順(iOutputOrder);
             }
             DBC110080_KogakugassanHoseisumiJikofutangakuOutParameter parameter = new DBC110080_KogakugassanHoseisumiJikofutangakuOutParameter();
-            parameter.set再処理区分(再処理区分);
-            parameter.set処理年月(処理年月);
-            parameter.set出力順ID(new RString(出力順ID.toString()));
+            parameter.setSaishoriKubun(再処理区分);
+            FlexibleYearMonth 処理年月Fle = 処理年月 == null ? FlexibleYearMonth.EMPTY : new FlexibleYearMonth(処理年月.toDateString());
+            parameter.setShoriYM(処理年月Fle);
+            parameter.setShutsuryokujunId(new RString(出力順ID.toString()));
             return ResponseData.of(parameter).respond();
         }
         return null;
