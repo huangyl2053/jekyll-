@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisanteitsuchishohakko;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB014003;
 
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 

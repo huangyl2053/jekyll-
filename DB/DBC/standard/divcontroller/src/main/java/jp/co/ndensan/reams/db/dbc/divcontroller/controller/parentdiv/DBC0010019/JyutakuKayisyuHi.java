@@ -56,7 +56,8 @@ public class JyutakuKayisyuHi {
         RDate サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
         KyufuJissekiPrmBusiness 引き継ぎ情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
-        getHandler(div).load共有子Div(引き継ぎ情報, 整理番号, new FlexibleYearMonth(サービス提供年月.toString()).minusMonth(1), new NyuryokuShikibetsuNo(様式番号));
+        FlexibleYearMonth 直近サービス提供年月 = getHandler(div).get直近サービス提供年月(new RString("1"), サービス提供年月, 引き継ぎ情報);
+        getHandler(div).load共有子Div(引き継ぎ情報, 整理番号, 直近サービス提供年月, new NyuryokuShikibetsuNo(様式番号));
         getHandler(div).setデータグリッド(引き継ぎ情報);
         return ResponseData.of(div).respond();
     }
@@ -72,7 +73,8 @@ public class JyutakuKayisyuHi {
         RDate サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
         KyufuJissekiPrmBusiness 引き継ぎ情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
-        getHandler(div).load共有子Div(引き継ぎ情報, 整理番号, new FlexibleYearMonth(サービス提供年月.toString()).plusMonth(1), new NyuryokuShikibetsuNo(様式番号));
+        FlexibleYearMonth 直近サービス提供年月 = getHandler(div).get直近サービス提供年月(new RString("0"), サービス提供年月, 引き継ぎ情報);
+        getHandler(div).load共有子Div(引き継ぎ情報, 整理番号, 直近サービス提供年月, new NyuryokuShikibetsuNo(様式番号));
         getHandler(div).setデータグリッド(引き継ぎ情報);
         return ResponseData.of(div).respond();
     }
