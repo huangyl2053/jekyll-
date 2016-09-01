@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7210001
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710210.DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7210001.HanyoListParamPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7210001.ZigyoubunkougakugassanshikyuuketteJouhouDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7210001.HanyoListBachParamHandler;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  *
  * @reamsid_L DBC-5060-010 wanghui
  */
-public class HanyoListParamPanel {
+public class ZigyoubunkougakugassanshikyuuketteJouhou {
 
     private static final RString 項目付加 = new RString("6");
     private static final RString 連番付加 = new RString("7");
@@ -34,7 +34,7 @@ public class HanyoListParamPanel {
      * @param div 汎用リスト(事業分高額合算支給決定情報)画面のdiv
      * @return 初期化画面
      */
-    public ResponseData<HanyoListParamPanelDiv> onLoad(HanyoListParamPanelDiv div) {
+    public ResponseData<ZigyoubunkougakugassanshikyuuketteJouhouDiv> onLoad(ZigyoubunkougakugassanshikyuuketteJouhouDiv div) {
         getHandler(div).onLoad();
         return ResponseData.of(div).respond();
     }
@@ -45,7 +45,7 @@ public class HanyoListParamPanel {
      * @param div div 汎用リスト(事業分高額合算支給決定情報)画面のdiv
      * @return ResponseData
      */
-    public ResponseData<BatchParameterMap> onClick_btnBatchParameterSave(HanyoListParamPanelDiv div) {
+    public ResponseData<BatchParameterMap> onClick_btnBatchParameterSave(ZigyoubunkougakugassanshikyuuketteJouhouDiv div) {
         DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter parameter = getHandler(div).setBatchParameter();
         ResponseData<BatchParameterMap> responseData = new ResponseData<>();
         responseData.data = new BatchParameterMap(parameter);
@@ -58,7 +58,7 @@ public class HanyoListParamPanel {
      * @param div 汎用リスト(事業分高額合算支給決定情報)画面のdiv
      * @return ResponseData
      */
-    public ResponseData<HanyoListParamPanelDiv> onClick_btnBatchParameterRestore(HanyoListParamPanelDiv div) {
+    public ResponseData<ZigyoubunkougakugassanshikyuuketteJouhouDiv> onClick_btnBatchParameterRestore(ZigyoubunkougakugassanshikyuuketteJouhouDiv div) {
         BatchParameterMap restoreBatchParameterMap = div.getBtnBatchParameterRestore().getRestoreBatchParameterMap();
         // TODO 出力項目ID 改頁出力順ID
 //        RString 帳票ID = restoreBatchParameterMap.getParameterValue(RString.class, new RString("帳票ID"));
@@ -112,13 +112,13 @@ public class HanyoListParamPanel {
         //TODO QA1619提出する。
 //        RString 金融機関コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("金融機関コード"));
 //        div.getCcdKinyuKikan().set金融機関(金融機関コード)
-        RString 金融機関名 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("金融機関名"));
-        div.getCcdKinyuKikan().set金融機関TextLeftラベル(金融機関名);
+//        RString 金融機関名 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("金融機関名"));
+//        div.getCcdKinyuKikan().set金融機関TextLeftラベル(金融機関名);
         RString 対象年度 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("対象年度"));
         if (!RString.isNullOrEmpty(対象年度)) {
             div.getDdlTaishoNendo().setSelectedKey(対象年度);
         }
-        ResponseData<HanyoListParamPanelDiv> response = new ResponseData<>();
+        ResponseData<ZigyoubunkougakugassanshikyuuketteJouhouDiv> response = new ResponseData<>();
         response.data = div;
         return response;
     }
@@ -129,11 +129,11 @@ public class HanyoListParamPanel {
      * @param div 汎用リスト(事業分高額合算支給決定情報)画面のdiv
      * @return respond
      */
-    public ResponseData<DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter> onClick_jiko(HanyoListParamPanelDiv div) {
+    public ResponseData<DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter> onClick_jiko(ZigyoubunkougakugassanshikyuuketteJouhouDiv div) {
         return ResponseData.of(getHandler(div).setBatchParameter()).respond();
     }
 
-    private HanyoListBachParamHandler getHandler(HanyoListParamPanelDiv div) {
+    private HanyoListBachParamHandler getHandler(ZigyoubunkougakugassanshikyuuketteJouhouDiv div) {
         return new HanyoListBachParamHandler(div);
     }
 }

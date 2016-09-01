@@ -31,10 +31,10 @@ public class ChushutsuJokenPanelDiv extends Panel {
     private RadioButton radSiharaiHohoKubun;
     @JsonProperty("ddlTaishoNendo")
     private DropDownList ddlTaishoNendo;
-    @JsonProperty("ccdKinyuKikan")
-    private KinyuKikanInputDiv ccdKinyuKikan;
     @JsonProperty("ccdHokenshaList")
     private HokenshaListDiv ccdHokenshaList;
+    @JsonProperty("ccdKinyuKikan")
+    private KinyuKikanInputDiv ccdKinyuKikan;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -97,21 +97,21 @@ public class ChushutsuJokenPanelDiv extends Panel {
     }
 
     /*
-     * getccdKinyuKikan
-     * @return ccdKinyuKikan
-     */
-    @JsonProperty("ccdKinyuKikan")
-    public IKinyuKikanInputDiv getCcdKinyuKikan() {
-        return ccdKinyuKikan;
-    }
-
-    /*
      * getccdHokenshaList
      * @return ccdHokenshaList
      */
     @JsonProperty("ccdHokenshaList")
     public IHokenshaListDiv getCcdHokenshaList() {
         return ccdHokenshaList;
+    }
+
+    /*
+     * getccdKinyuKikan
+     * @return ccdKinyuKikan
+     */
+    @JsonProperty("ccdKinyuKikan")
+    public IKinyuKikanInputDiv getCcdKinyuKikan() {
+        return ccdKinyuKikan;
     }
 
     // </editor-fold>
