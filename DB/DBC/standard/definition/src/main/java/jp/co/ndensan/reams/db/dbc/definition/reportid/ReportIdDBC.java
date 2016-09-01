@@ -418,9 +418,33 @@ public enum ReportIdDBC {
      */
     DBC7210001(new ReportId("DBC701021_HanyoListJigyoBunKogakuGassanShikyuKettei"), new RString("事業分高額合算支給決定情報")),
     /**
+     * 汎用リスト　高額合算自己負担額情報帳票ＩＤです。
+     */
+    DBC701015(new ReportId("DBC701015_HanyoList_KogakuGassanJikoFutangaku"), new RString("汎用リスト　高額合算自己負担額情報")),
+    /**
      * 汎用リスト　基準収入額適用情報帳票ＩＤです。
      */
-    DBC701020(new ReportId("DBC701020_HanyoListKijunShunyugakuTekiyo"), new RString("汎用リスト　基準収入額適用情報"));
+    DBC701020(new ReportId("DBC701020_HanyoListKijunShunyugakuTekiyo"), new RString("汎用リスト　基準収入額適用情報")),
+    /**
+     * 汎用リスト 再審査申立情報帳票ＩＤです。
+     */
+    DBC701011(new ReportId("DBC701011_HanyoListSaishinsaMoshitate"), new RString("汎用リスト 再審査申立情報")),
+    /**
+     * 高額合算補正済自己負担額情報送付一覧表
+     */
+    DBC200032(new ReportId("DBC200032_GassanHoseizumiJikofutangakuJohoSofuchiran"), new RString("高額合算補正済自己負担額情報送付一覧表")),
+    /**
+     * 高額合算補正済自己負担額情報未送付一覧表
+     */
+    DBC200033(new ReportId("DBC200033_GassanHoseizumiJikofutangakuJohoMisofuchiran"), new RString("高額合算補正済自己負担額情報未送付一覧表")),
+    /**
+     * 汎用リスト 再審査結果情報帳票ＩＤです。
+     */
+    DBC701012(new ReportId("DBC701012_HanyoListSaishinsaKekka"), new RString("汎用リスト 再審査結果情報")),
+    /**
+     * 給付管理票総括票帳票ＩＤです。
+     */
+    DBC300001(new ReportId("DBC300001_KyufuKanrihyoSokatsuhyo"), new RString("給付管理票総括票"));
 
     private final ReportId reportId;
 

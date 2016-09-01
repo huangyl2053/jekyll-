@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7150001;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710150.DBC710150_HanyoListKogakuGassanJikoFutangakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7150001.HanyoListParamKougakuGassanJikoFudanDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7150001.HanyoListParamKougakuGassanJikoFudanHandler;
@@ -14,8 +12,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7150001.Han
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -25,11 +21,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class HanyoListParamKougakuGassanJikoFudan {
 
-    private static final RString すべて = new RString("すべて");
-    private static final RString 国保連取込情報 = new RString("国保連取込情報");
-    private static final RString 証明書計算処理時作成_申請書有 = new RString("証明書計算処理時作成(申請書有)");
-    private static final RString 証明書計算処理時作成_全受給者 = new RString("証明書計算処理時作成(全受給者)");
-    private static final RString KEY1 = new RString("key1");
     private static final ReportId 帳票ID = new ReportId("DBC701015_HanyoList_KogakuGassanJikoFutangaku");
 
     /**
@@ -41,6 +32,7 @@ public class HanyoListParamKougakuGassanJikoFudan {
     public ResponseData<HanyoListParamKougakuGassanJikoFudanDiv> onLoad(HanyoListParamKougakuGassanJikoFudanDiv div) {
         getHandler(div).initialize();
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
+        div.getCcdShutsuryokuKoumoku().load(帳票ID.getColumnValue(), SubGyomuCode.DBC介護給付);
         return createResponse(div);
     }
 
@@ -51,40 +43,7 @@ public class HanyoListParamKougakuGassanJikoFudan {
      * @return 画面
      */
     public ResponseData<HanyoListParamKougakuGassanJikoFudanDiv> onSelect_DdlDetaSakuseiKubunButton(HanyoListParamKougakuGassanJikoFudanDiv div) {
-        if (すべて.equals(div.getDdlDetaSakuseiKubun().getSelectedValue())) {
-            List<KeyValueDataSource> disabledItems = new ArrayList<>();
-            div.getRadDataShurui().setDisabledItem(disabledItems);
-            div.getTxtJikoFutangakuKakunin().setDisabled(false);
-            div.getTxtHoseizumiJikoFutangaku().setDisabled(false);
-            div.getTxtJikoFutanngakuShoumeisho().setDisabled(false);
-        }
-        if (国保連取込情報.equals(div.getDdlDetaSakuseiKubun().getSelectedValue())) {
-            List<KeyValueDataSource> disabledItems = new ArrayList<>();
-            div.getRadDataShurui().setDisabledItem(disabledItems);
-            div.getTxtJikoFutangakuKakunin().setDisabled(false);
-            div.getTxtHoseizumiJikoFutangaku().setDisabled(true);
-            div.getTxtJikoFutanngakuShoumeisho().setDisabled(false);
-        }
-        if (証明書計算処理時作成_申請書有.equals(div.getDdlDetaSakuseiKubun().getSelectedValue())) {
-            List<KeyValueDataSource> disabledItems = new ArrayList<>();
-            disabledItems.add(new KeyValueDataSource(new RString("key0"), new RString("すべて")));
-            disabledItems.add(new KeyValueDataSource(new RString("key2"), new RString("仮算定データ")));
-            div.getRadDataShurui().setDisabledItem(disabledItems);
-            div.getRadDataShurui().setSelectedKey(KEY1);
-            div.getTxtJikoFutangakuKakunin().setDisabled(true);
-            div.getTxtHoseizumiJikoFutangaku().setDisabled(false);
-            div.getTxtJikoFutanngakuShoumeisho().setDisabled(false);
-        }
-        if (証明書計算処理時作成_全受給者.equals(div.getDdlDetaSakuseiKubun().getSelectedValue())) {
-            List<KeyValueDataSource> disabledItems = new ArrayList<>();
-            disabledItems.add(new KeyValueDataSource(new RString("key0"), new RString("すべて")));
-            disabledItems.add(new KeyValueDataSource(new RString("key2"), new RString("仮算定データ")));
-            div.getRadDataShurui().setDisabledItem(disabledItems);
-            div.getRadDataShurui().setSelectedKey(KEY1);
-            div.getTxtJikoFutangakuKakunin().setDisabled(true);
-            div.getTxtHoseizumiJikoFutangaku().setDisabled(false);
-            div.getTxtJikoFutanngakuShoumeisho().setDisabled(true);
-        }
+        getHandler(div).getEditDdlDetaSakuseiKubun();
         return createResponse(div);
     }
 

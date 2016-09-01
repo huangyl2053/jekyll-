@@ -33,8 +33,12 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
@@ -193,6 +197,7 @@ public class HanyoListFukaDaichoProcess extends BatchKeyBreakBase<HanyoListFukaD
     private int flag;
     private HokenryoDankaiSettings hokenryoDankaiSettings;
     private IShikibetsuTaishoPSMSearchKey searchKey;
+    private RString 出力順;
     private HanyoListFukaDaichoEntity 賦課台帳;
     private HanyoListFukaDaichoProcessCore breakProcessCore;
     @BatchWriter
@@ -201,7 +206,7 @@ public class HanyoListFukaDaichoProcess extends BatchKeyBreakBase<HanyoListFukaD
     @Override
     protected void initialize() {
         flag = 0;
-        連番 = Decimal.ONE;
+        出力順 = RString.EMPTY;
         システム日時 = YMDHMS.now();
         csvEditor = new HanyoListFukaDaichoCsvEditor();
         personalDataList = new ArrayList<>();
@@ -215,6 +220,13 @@ public class HanyoListFukaDaichoProcess extends BatchKeyBreakBase<HanyoListFukaD
 
     @Override
     protected IBatchReader createReader() {
+        IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課,
+                processParameter.get帳票ID(), processParameter.get出力順ID());
+        if (outputOrder != null) {
+            出力順 = MyBatisOrderByClauseCreator.create(
+                    HanyoListFukaDaichoProcessCore.DBB200033HanyoListFukaDaichoEnum.class, outputOrder);
+        }
         ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
                 KensakuYusenKubun.住登外優先);
         builder.setデータ取得区分(DataShutokuKubun.直近レコード);
@@ -229,6 +241,7 @@ public class HanyoListFukaDaichoProcess extends BatchKeyBreakBase<HanyoListFukaD
         processParameter.set有効無効区分(YukoMukoKubun.有効.getコード());
         RString 保険者コード = processParameter.get宛名抽出条件().getShichoson_Code().getColumnValue();
         processParameter.set保険者コード(保険者コード);
+        processParameter.set出力順(出力順);
         return new BatchDbReader(ID, processParameter.toMybatisParameter());
     }
 
@@ -621,7 +634,8 @@ public class HanyoListFukaDaichoProcess extends BatchKeyBreakBase<HanyoListFukaD
             builder.append(左記号).append(年齢基準日SHOW);
             RDate 年齢基準日 = processParameter.get宛名抽出条件().getNenreiKijunbi();
             if (年齢基準日 != null) {
-                RString 変数_年齢基準日 = 年齢基準日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                RString 変数_年齢基準日 = 年齢基準日.wareki().eraType(EraType.KANJI)
+                        .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                         .fillType(FillType.BLANK).toDateString();
                 builder.append(変数_年齢基準日).append(右記号);
             } else {
@@ -660,11 +674,13 @@ public class HanyoListFukaDaichoProcess extends BatchKeyBreakBase<HanyoListFukaD
         RString 変数_生年月日From = null;
         RString 変数_生年月日To = null;
         if (生年月日From != null) {
-            変数_生年月日From = 生年月日From.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+            変数_生年月日From = 生年月日From.wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
         }
         if (生年月日To != null) {
-            変数_生年月日To = 生年月日To.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+            変数_生年月日To = 生年月日To.wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
         }
         builder.append(変数_生年月日From).append(LINE).append(変数_生年月日To);

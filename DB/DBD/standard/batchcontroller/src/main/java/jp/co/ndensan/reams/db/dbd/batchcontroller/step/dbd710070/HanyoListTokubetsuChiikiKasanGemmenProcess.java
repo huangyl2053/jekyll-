@@ -1057,8 +1057,8 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
         RString 市町村名 = association.get市町村名();
         RString 出力ページ数 = new RString(String.valueOf(eucCsvWriter.getCount()));
         RString csv出力有無 = new RString("無し");
-        RString 日本語ファイル名 = new RString("汎用リスト　社会福祉法人軽減CSV");
-        RString 英数字ファイル名 = new RString("HanyoList_ShakaiFukushiHojinKeigen.csv");
+        RString 日本語ファイル名 = new RString("汎用リスト 特別地域加算減免CSV");
+        RString 英数字ファイル名 = new RString("HanyoList_TokubetsuChiikiKasanGemmen.csv");
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
         List<RString> 出力条件 = new ArrayList<>();
         出力条件.add(CYUSYUTSUTAISYOSHA);

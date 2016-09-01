@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7160001.Han
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
- * 汎用リスト出力(高額合算計算結果連絡票情報)
+ * 汎用リスト出力(高額合算計算結果連絡票情報)のクラスです。
  *
  * @reamsid_L DBC-3100-010 zhengshenlei
  */

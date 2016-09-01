@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kyufujoho;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyufujoho.KounyukingakuParamter;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyufujoho.KyufuJohoParamter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyufujoho.KyufuJohoEntity;
@@ -33,7 +34,7 @@ public interface IKyufuJohoMapper {
     KyufuJohoEntity get購入金額(KounyukingakuParamter paramter);
 
     /**
-     * 購入金額の取得します。
+     * 保険請求負担額の取得します。
      *
      * @param paramter KounyukingakuParamter
      * @return KyufuJohoEntity
@@ -62,6 +63,6 @@ public interface IKyufuJohoMapper {
      * @param paramter KounyukingakuParamter
      * @return KyufuJohoEntity
      */
-    KyufuJohoEntity getサービス利用状況情報(KyufuJohoParamter paramter);
+    List<KyufuJohoEntity> getサービス利用状況情報(KyufuJohoParamter paramter);
 
 }

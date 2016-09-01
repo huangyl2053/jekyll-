@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetHihokenshaNoBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetHihokenshaNoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -33,8 +34,7 @@ public class HokenshaKyufujissekiOutGetHihokenshaNoProcess extends BatchProcessB
     }
     private OutputParameter<FlowEntity> flowEntity;
     FlowEntity returnEntity;
-
-    private HokenshaKyufujissekiOutGetHihokenshaNoBatchParameter parameter;
+    private HokenshaKyufujissekiOutGetHihokenshaNoProcessParameter parameter;
     private static int numble = 0;
     private static final RString TABLE_NAME = new RString("DbWT1001Hihokensha");
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hokenshakyufujissekiout."
@@ -50,7 +50,9 @@ public class HokenshaKyufujissekiOutGetHihokenshaNoProcess extends BatchProcessB
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(READ_DATA_ID, parameter);
+        HokenshaKyufujissekiOutGetHihokenshaNoBatchParameter para = new HokenshaKyufujissekiOutGetHihokenshaNoBatchParameter();
+        para.set年月(this.parameter.get年月());
+        return new BatchDbReader(READ_DATA_ID, para);
     }
 
     @Override

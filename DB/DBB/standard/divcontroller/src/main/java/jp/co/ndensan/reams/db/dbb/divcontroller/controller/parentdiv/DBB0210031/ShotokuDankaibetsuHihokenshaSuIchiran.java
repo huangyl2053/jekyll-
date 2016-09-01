@@ -102,7 +102,7 @@ public class ShotokuDankaibetsuHihokenshaSuIchiran {
     /**
      * 「実行ボタン押下した時の処理」ボタンのメソッドです。
      *
-     * @param div ShinNendoKanriJohoSakuseiDiv
+     * @param div ShotokuDankaibetsuHihokenshaSuIchiranDiv
      * @return ResponseData
      */
     public ResponseData<ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter> onClick_btn(

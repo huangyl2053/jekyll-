@@ -34,7 +34,7 @@ public class ShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDateKanr
     private NenjiRiyoshaFutanwariaiHanteiProcessParameter processParameter;
     private boolean 処理日付管理マスタを登録FLAG = true;
     private Association 市町村コード;
-    private final RString 処理枝番 = new RString("0001");
+    private final RString 処理枝番 = new RString("0000");
     private final RString 年度内連番 = new RString("0001");
     private final RString 理由 = new RString("年次利用者負担割合判定更新");
     private static final RString ONERSTRING = new RString("1");
@@ -72,7 +72,7 @@ public class ShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDateKanr
         if (処理日付管理マスタを登録FLAG) {
             entity.setSubGyomuCode(SubGyomuCode.DBC介護給付);
             entity.setShichosonCode(市町村コード.get地方公共団体コード());
-            entity.setShoriName(ShoriName.年次負担割合判定.get名称());
+            entity.setShoriName(ShoriName.年次利用者負担割合判定.get名称());
             entity.setShoriEdaban(処理枝番);
             entity.setNendoNaiRenban(年度内連番);
             entity.setNendo(processParameter.get対象年度());

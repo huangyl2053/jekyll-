@@ -65,7 +65,7 @@
             AND "DbT3048"."seiriNo" = "DbT3036"."seiriNo" 
         WHERE
             "DbT3048"."hiHokenshaNo" = #{被保険者番号} 
-             AND #{開始年月} <![CDATA[<=]]> "DbT3048"."serviceTeikyoYM" <![CDATA[>=]]>  
+             AND #{開始年月} <![CDATA[<=]]> "DbT3048"."serviceTeikyoYM"  
              AND "DbT3048"."serviceTeikyoYM" <![CDATA[<=]]> #{終了年月} 
              AND "DbT3036"."shikyuHushikyuKetteiKubun" = #{支給不支給}
         
@@ -188,5 +188,6 @@
             AND #{サービス提供年月}  <![CDATA[<]]> "DbT3033"."serviceTeikyoYM"
             AND "DbT7130"."serviceBunrruicode" in 
          <foreach collection="serviceBunrruicodelist" item="code" open="(" separator="," close=")"> #{code} </foreach>
+         ORDER BY "DbT3033"."serviceTeikyoYM"
     </select>
 </mapper>

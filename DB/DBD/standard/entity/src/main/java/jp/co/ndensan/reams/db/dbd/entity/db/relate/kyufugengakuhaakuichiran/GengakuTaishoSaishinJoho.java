@@ -19,5 +19,5 @@ public class GengakuTaishoSaishinJoho {
 
     private RString 徴収権消滅期間;
     private RString 納付済み期間;
-    private RString 納付額減額期間;
+    private RString 給付額減額期間;
 }

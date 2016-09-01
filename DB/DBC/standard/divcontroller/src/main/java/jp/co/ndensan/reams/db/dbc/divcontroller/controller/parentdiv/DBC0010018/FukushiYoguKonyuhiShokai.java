@@ -57,7 +57,6 @@ public class FukushiYoguKonyuhiShokai {
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
         getHandler(div).setJigyoshaBtn(事業者番号リスト, 整理番号,
                 事業者番号, 様式番号, サービス提供.getYearMonth().toDateString(), 実績区分コード);
-        getHandler(div).setGetsuBtn(給付実績情報照会情報.getCsData_G(), サービス提供年月);
         return ResponseData.of(div).respond();
     }
 
@@ -100,7 +99,7 @@ public class FukushiYoguKonyuhiShokai {
         getHandler(div).change年月(new RString("前月"), 給付実績情報照会情報.getCsData_G(),
                 new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-                ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getKojinKakuteiKey().get被保険者番号(),
+                給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
                 ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
         return ResponseData.of(div).respond();
     }
@@ -116,7 +115,7 @@ public class FukushiYoguKonyuhiShokai {
         getHandler(div).change年月(new RString("次月"), 給付実績情報照会情報.getCsData_G(),
                 new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-                ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getKojinKakuteiKey().get被保険者番号(),
+                給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
                 ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
         return ResponseData.of(div).respond();
     }

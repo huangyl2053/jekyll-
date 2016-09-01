@@ -201,11 +201,14 @@
                             AND #{システム日付} <![CDATA[<=]]> 受給者台帳."ninteiYukoKikanShuryoYMD"
                     )
             </if>
-        ORDER BY 
+<!--        ORDER BY 
                 "dbT2002Fuka_choteiNendo", 
                 "dbT2002Fuka_fukaNendo", 
                 "dbT2002Fuka_tsuchishoNo", 
-                "dbT2002Fuka_rirekiNo"
+                "dbT2002Fuka_rirekiNo",-->
+            <if test="出力順 != null and !出力順.isEmpty()">
+                ${出力順}
+            </if>
     </sql>
     
     <resultMap id="resultMapHanyoListFukaDaichoEntity" autoMapping="true"

@@ -30,7 +30,6 @@ public final class JigyoHokokuNenpoIppanGenbutsuMybatisParamter implements IMyBa
     private static final RString 現物分 = new RString("1");
     private static final RString 償還審査分 = new RString("2");
     private static final RString 償還決定分 = new RString("3");
-    private static final int INDEX = 8;
     private final List<RString> 市町村コードリスト;
     private final RString 集計年月;
     private final List<RString> 集計番号リスト;
