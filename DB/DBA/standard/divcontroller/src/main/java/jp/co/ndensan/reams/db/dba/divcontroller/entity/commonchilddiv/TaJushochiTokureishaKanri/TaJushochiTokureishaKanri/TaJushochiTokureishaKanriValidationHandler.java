@@ -132,7 +132,7 @@ public class TaJushochiTokureishaKanriValidationHandler {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.入所施設の必須チェック));
                 }
             }
-            if (状態_解除.equals(親画面状態)) {
+          if (状態_解除.equals(親画面状態)) {
                 if (div.getTxtKaijyobi().getValue() == null) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.解除日, div.getTxtKaijyobi()));
                 } else {
@@ -140,12 +140,22 @@ public class TaJushochiTokureishaKanriValidationHandler {
                             || div.getDdlKaijyoJiyo().getSelectedKey().isEmpty()) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.解除事由));
                     }
-                    if (最新の適用情報 != null && 最新の適用情報.getKaijoYMD().getValue() != null
-                            && (div.getTxtKaijyobi().getValue().isBefore(最新の適用情報.getKaijoYMD().getValue()))) {
-                        validPairs.add(new ValidationMessageControlPair(RRVMessages.入力値が不正, div.getTxtKaijyobi()));
-                    }
-                }
+                  if ((div.getTxtTasyobi().getValue() == null || 最新の適用情報.getNyushoYMD().getValue() == null)) {
+                   } else {
+                  if (最新の適用情報.getNyushoYMD().getValue().compareTo(div.getTxtTasyobi().getValue()) > 0) {                     
+                      validPairs.add(new ValidationMessageControlPair(
+                              RRVMessages.入所日と退所日の整合性チェック, div.getTxtTasyobi()));
+                    }   
+                  }
+                  if ((div.getTxtKaijyobi().getValue() == null || 最新の適用情報.getTekiyoYMD().getValue() == null)) {
+                   } else {
+                  if (最新の適用情報.getTekiyoYMD().getValue().compareTo(div.getTxtKaijyobi().getValue()) > 0) {                     
+                      validPairs.add(new ValidationMessageControlPair(
+                              RRVMessages.適用日と解除日の整合性日付チェック, div.getTxtKaijyobi()));
+                    }   
+                  }
             }
+        }
         }
         return validPairs;
     }
@@ -157,6 +167,8 @@ public class TaJushochiTokureishaKanriValidationHandler {
         適用事由(UrErrorMessages.必須, "適用事由"),
         解除事由(UrErrorMessages.必須, "解除事由"),
         適用日と解除日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "解除日", メッセージ適用日.toString()),
+        入所日と退所日の整合性チェック(DbzErrorMessages.期間が不正_過去日付不可, "退所日", "入所日"),
+        適用日と解除日の整合性日付チェック(DbzErrorMessages.期間が不正_過去日付不可, "解除日", メッセージ適用日.toString()),
         適用日と最新の適用情報の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, メッセージ適用日.toString(), "最新の適用情報"),
         入所日の必須チェック(DbzErrorMessages.複数必須項目相関チェックエラー, "入所施設", "入所日"),
         入所施設の必須チェック(DbzErrorMessages.複数必須項目相関チェックエラー, "入所日", "入所施設"),
