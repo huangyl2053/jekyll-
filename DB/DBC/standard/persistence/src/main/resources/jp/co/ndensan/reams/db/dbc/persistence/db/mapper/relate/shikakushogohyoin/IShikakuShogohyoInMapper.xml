@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2890-010 wangxingpeng-->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shikakushogohyoin.IShikakuShogohyoInMapper">
+    <select id="getCSVData"
+            resultMap="resultMap_ShikakuShogohyoInEntity" fetchSize="500" resultOrdered="true">
+        SELECT     
+        <include refid="allColumns_ShikakuShogohyoIn"/>
+        FROM "DbWT1211ShikakuShogohyo" AS DbWT1211  
+        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001 
+        ON DbWT1211."renban" = DbWT0001."meisaiRenban"
+        ORDER BY DbWT1211."hokenshaNo" ASC,
+        DbWT0001."hihokenshaNo" ASC,
+        DbWT0001."shoHokenshaNo" ASC,
+        DbWT1211."serviceShuruiCode" ASC,
+        DbWT1211."serviceTeikyoYM" ASC,
+        DbWT1211."jigyoshoNo" ASC,
+        DbWT1211."renban" ASC
+    </select>
+    <resultMap id="resultMap_ShikakuShogohyoInEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shikakushogohyoin.ShikakuShogohyoInEntity"
+               autoMapping="true">
+        <id column="dbWT1211_renban" />
+        <association property="被保険者一時" resultMap="ResultMap_DbWT0001HihokenshaTempEntity"/>
+        <association property="資格照合表一時" resultMap="ResultMap_DbWT1211ShikakuShogohyoTempEntity"/>
+    </resultMap>  
+    <resultMap id="ResultMap_DbWT0001HihokenshaTempEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity"
+               autoMapping="true">
+        <result property="登録被保険者番号" column="dbWT0001_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="証記載保険者番号" column="dbWT0001_shoHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="宛名名称" column="dbWT0001_meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別コード" column="dbWT0001_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>   
+    <resultMap id="ResultMap_DbWT1211ShikakuShogohyoTempEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shikakushogohyojyoho.DbWT1211ShikakuShogohyoTempEntity"
+               autoMapping="true">  
+        <id property="renban" column="dbWT1211_renban"/>
+        <id property="serviceNissuKaisu" column="dbWT1211_serviceNissuKaisu"/>
+        <result property="shinsaYM" column="dbWT1211_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="hokenshaNo" column="dbWT1211_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="hokenshaName" column="dbWT1211_hokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>        
+        <result property="serviceTeikyoYM" column="dbWT1211_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="serviceShuruiCode" column="dbWT1211_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shubetsu" column="dbWT1211_shubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshoNo" column="dbWT1211_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="yokaigoKubunCode" column="dbWT1211_yokaigoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ninteiYukoKikanKaishiYMD" column="dbWT1211_ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiYukoKikanShuryoYMD" column="dbWT1211_ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikyuGendoGaku" column="dbWT1211_shikyuGendoGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kyotakuServicePlanSakuseiKubunCode" column="dbWT1211_kyotakuServicePlanSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="getsuGakuShokujiFutanGaku" column="dbWT1211_getsuGakuShokujiFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shokuhiFutanGendoGaku" column="dbWT1211_shokuhiFutanGendoGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kyojuhiFutanGendoGaku2" column="dbWT1211_kyojuhiFutanGendoGaku2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kyojuhiFutanGendoGaku4" column="dbWT1211_kyojuhiFutanGendoGaku4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tanisuTanka" column="dbWT1211_tanisuTanka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="hokenKyufuRitsu" column="dbWT1211_hokenKyufuRitsu" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenKyufuRitsuTypeHandler"/>
+        <result property="kohi2KyufuRitsu" column="dbWT1211_kohi2KyufuRitsu" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenKyufuRitsuTypeHandler"/>   
+        <result property="serviceTanisu" column="dbWT1211_serviceTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="riyoshaFutanGaku" column="dbWT1211_riyoshaFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="serviceShuruiMei" column="dbWT1211_serviceShuruiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshoMei" column="dbWT1211_jigyoshoMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyusochiTokureiCode" column="dbWT1211_kyusochiTokureiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gendoGakuTekiyoKikanKaishiYMD" column="dbWT1211_gendoGakuTekiyoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="gendoGakuTekiyoKikanShuryoYMD" column="dbWT1211_gendoGakuTekiyoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shienJigyoshoNo" column="dbWT1211_shienJigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="nichiGakuShokujiFutanGaku" column="dbWT1211_nichiGakuShokujiFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kyojuhiFutanGendoGaku1" column="dbWT1211_kyojuhiFutanGendoGaku1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kyojuhiFutanGendoGaku3" column="dbWT1211_kyojuhiFutanGendoGaku3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kyojuhiFutanGendoGaku5" column="dbWT1211_kyojuhiFutanGendoGaku5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kohi1KyufuRitsu" column="dbWT1211_kohi1KyufuRitsu" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenKyufuRitsuTypeHandler"/>
+        <result property="kohi3KyufuRitsu" column="dbWT1211_kohi3KyufuRitsu" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenKyufuRitsuTypeHandler"/>
+        <result property="tokuteiNyushoshaKaigoServiceGaku" column="dbWT1211_tokuteiNyushoshaKaigoServiceGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shokujiFutanGaku" column="dbWT1211_shokujiFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+    <sql id="allColumns_ShikakuShogohyoIn">
+        DbWT1211."shinsaYM" AS dbWT1211_shinsaYM,
+        DbWT1211."hokenshaNo" AS dbWT1211_hokenshaNo,
+        DbWT1211."hokenshaName" AS dbWT1211_hokenshaName,
+        DbWT1211."renban" AS dbWT1211_renban,
+        DbWT1211."serviceTeikyoYM" AS dbWT1211_serviceTeikyoYM,
+        DbWT1211."serviceShuruiCode" AS dbWT1211_serviceShuruiCode,
+        DbWT1211."shubetsu" AS dbWT1211_shubetsu,
+        DbWT1211."jigyoshoNo" AS dbWT1211_jigyoshoNo,
+        DbWT1211."yokaigoKubunCode" AS dbWT1211_yokaigoKubunCode,
+        DbWT1211."ninteiYukoKikanKaishiYMD" AS dbWT1211_ninteiYukoKikanKaishiYMD,
+        DbWT1211."ninteiYukoKikanShuryoYMD" AS dbWT1211_ninteiYukoKikanShuryoYMD,
+        DbWT1211."serviceNissuKaisu" AS dbWT1211_serviceNissuKaisu,
+        DbWT1211."shikyuGendoGaku" AS dbWT1211_shikyuGendoGaku,
+        DbWT1211."kyotakuServicePlanSakuseiKubunCode" AS dbWT1211_kyotakuServicePlanSakuseiKubunCode,
+        DbWT1211."getsuGakuShokujiFutanGaku" AS dbWT1211_getsuGakuShokujiFutanGaku,
+        DbWT1211."shokuhiFutanGendoGaku" AS dbWT1211_shokuhiFutanGendoGaku,
+        DbWT1211."kyojuhiFutanGendoGaku2" AS dbWT1211_kyojuhiFutanGendoGaku2,
+        DbWT1211."kyojuhiFutanGendoGaku4" AS dbWT1211_kyojuhiFutanGendoGaku4,
+        DbWT1211."tanisuTanka" AS dbWT1211_tanisuTanka,
+        DbWT1211."hokenKyufuRitsu" AS dbWT1211_hokenKyufuRitsu,
+        DbWT1211."kohi2KyufuRitsu" AS dbWT1211_kohi2KyufuRitsu,
+        DbWT1211."serviceTanisu" AS dbWT1211_serviceTanisu,
+        DbWT1211."riyoshaFutanGaku" AS dbWT1211_riyoshaFutanGaku,
+        DbWT1211."serviceShuruiMei" AS dbWT1211_serviceShuruiMei,
+        DbWT1211."jigyoshoMei" AS dbWT1211_jigyoshoMei,
+        DbWT1211."kyusochiTokureiCode" AS dbWT1211_kyusochiTokureiCode,
+        DbWT1211."gendoGakuTekiyoKikanKaishiYMD" AS dbWT1211_gendoGakuTekiyoKikanKaishiYMD,
+        DbWT1211."gendoGakuTekiyoKikanShuryoYMD" AS dbWT1211_gendoGakuTekiyoKikanShuryoYMD,
+        DbWT1211."shienJigyoshoNo" AS dbWT1211_shienJigyoshoNo,
+        DbWT1211."nichiGakuShokujiFutanGaku" AS dbWT1211_nichiGakuShokujiFutanGaku,
+        DbWT1211."kyojuhiFutanGendoGaku1" AS dbWT1211_kyojuhiFutanGendoGaku1,
+        DbWT1211."kyojuhiFutanGendoGaku3" AS dbWT1211_kyojuhiFutanGendoGaku3,
+        DbWT1211."kyojuhiFutanGendoGaku5" AS dbWT1211_kyojuhiFutanGendoGaku5,
+        DbWT1211."kohi1KyufuRitsu" AS dbWT1211_kohi1KyufuRitsu,
+        DbWT1211."kohi3KyufuRitsu" AS dbWT1211_kohi3KyufuRitsu,
+        DbWT1211."tokuteiNyushoshaKaigoServiceGaku" AS dbWT1211_tokuteiNyushoshaKaigoServiceGaku,
+        DbWT1211."shokujiFutanGaku" AS dbWT1211_shokujiFutanGaku, 
+        DbWT0001."hihokenshaNo" AS dbWT0001_hihokenshaNo,
+        DbWT0001."shoHokenshaNo" AS dbWT0001_shoHokenshaNo,
+        DbWT0001."meisho" AS dbWT0001_meisho,
+        DbWT0001."shikibetsuCode" AS dbWT0001_shikibetsuCode
+    </sql>
+   
+      
+    
+</mapper>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+
+        
+        
+        
+        
+         
+        
+
+
+
+
+       

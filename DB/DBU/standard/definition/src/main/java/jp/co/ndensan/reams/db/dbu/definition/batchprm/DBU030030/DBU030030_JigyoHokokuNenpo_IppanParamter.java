@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -53,9 +54,9 @@ public class DBU030030_JigyoHokokuNenpo_IppanParamter extends BatchParameterBase
     @BatchParameter(key = SHUKEISHURYOYM, name = "集計終了年月")
     private RString 集計終了年月;
     @BatchParameter(key = SAKUSEIDATE, name = "作成日時")
-    private RString 作成日時;
+    private RDateTime 作成日時;
     @BatchParameter(key = SHORIDATE, name = "処理日時")
-    private RString 処理日時;
+    private RDateTime 処理日時;
     @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
     private RString 市町村コード;
     @BatchParameter(key = KOSEISHICHOSONKBN, name = "構成市町村区分")

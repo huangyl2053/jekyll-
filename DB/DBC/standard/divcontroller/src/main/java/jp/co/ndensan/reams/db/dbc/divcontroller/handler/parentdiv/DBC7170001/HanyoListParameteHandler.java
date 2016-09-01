@@ -144,13 +144,15 @@ public class HanyoListParameteHandler {
         parameter.set対象年度(panel.getDdlTaishoNendo().getSelectedKey());
 
         if (panel.getTxtKetteiJohoUketoriNengetsu().getFromValue() != null) {
-            parameter.set決定情報受取年月From(new FlexibleYearMonth(panel.getTxtKetteiJohoUketoriNengetsu().getFromValue().getYearMonth().toDateString()));
+            parameter.set決定情報受取年月From(new FlexibleYearMonth(panel.getTxtKetteiJohoUketoriNengetsu()
+                    .getFromValue().getYearMonth().toDateString()));
         } else {
             parameter.set決定情報受取年月From(FlexibleYearMonth.EMPTY);
         }
 
         if (panel.getTxtKetteiJohoUketoriNengetsu().getToValue() != null) {
-            parameter.set決定情報受取年月To(new FlexibleYearMonth(panel.getTxtKetteiJohoUketoriNengetsu().getToValue().getYearMonth().toDateString()));
+            parameter.set決定情報受取年月To(new FlexibleYearMonth(panel.getTxtKetteiJohoUketoriNengetsu()
+                    .getToValue().getYearMonth().toDateString()));
         } else {
             parameter.set決定情報受取年月To(FlexibleYearMonth.EMPTY);
         }

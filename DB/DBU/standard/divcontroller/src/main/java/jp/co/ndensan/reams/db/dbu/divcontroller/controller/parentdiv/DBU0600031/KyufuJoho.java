@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyufujoho.KounyukingakuParamter;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyufujoho.KyufuJohoParamter;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600031.DBU0600031TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600031.KyufuJohoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0600031.KyufuJohoHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.kyufujoho.KyufuJohoFinder;
@@ -54,6 +55,16 @@ public class KyufuJoho {
         set住宅改修費情報(div);
         set利用状況情報(div);
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 再検索するボタン押下します。
+     *
+     * @param div KyufuJohoDiv
+     * @return ResponseData<KyufuJohoDiv>
+     */
+    public ResponseData<KyufuJohoDiv> onClick_KensakuModoru(KyufuJohoDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBU0600031TransitionEventName.再検索).respond();
     }
 
     private KyufuJohoHandler getHandler(KyufuJohoDiv div) {

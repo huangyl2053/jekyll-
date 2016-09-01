@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710150;
 
+import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassanjikofutangaku.HanyoListKogakuGassanJikoFutangakuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -90,5 +91,36 @@ public class DBC710150_HanyoListKogakuGassanJikoFutangakuParameter extends Batch
     private Long shutsuryokuju;
     @BatchParameter(key = KEY_SHUTSURYOKU_TOMOKU, name = "出力項目")
     private RString shutsuryokuTomoku;
+
+    /**
+     * mybatisのパラメータを生成します。
+     *
+     * @return mybatisパラメータ
+     */
+    public HanyoListKogakuGassanJikoFutangakuProcessParameter toProcessParam() {
+        return new HanyoListKogakuGassanJikoFutangakuProcessParameter(
+                chushutsuKubun,
+                detaSakuseiKubun,
+                dataShurui,
+                hoseuJokyo,
+                flexibleYear,
+                flexibleDateFrom,
+                flexibleDateTo,
+                shikyuShinseishoSeiriNoFrom,
+                shikyuShinseishoSeiriNoTo,
+                sofuTaishogaiFukumu,
+                jikoFutangakuKakuninFrom,
+                sofuTaishogaiFukumuTo,
+                hoseizumiJikoFutangakuFrom,
+                hoseizumiJikoFutangakuTo,
+                jikoFutanngakuShoumeishoFrom,
+                jikoFutanngakuShoumeishoTo,
+                tomokumeFuka,
+                rebanFuka,
+                slashDate,
+                hokenshaNo,
+                shutsuryokuju,
+                shutsuryokuTomoku);
+    }
 
 }
