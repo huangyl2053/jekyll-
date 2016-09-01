@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorListType;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.hokenshakyufujissekiout.HokenshaKyufujissekiOutListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1002KokuhorenSakuseiErrorTempEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
@@ -43,7 +43,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<DbWT1002KokuhorenSakuseiErrorTempEntity> {
 
-    private KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter parameter;
+    private HokenshaKyufujissekiOutListSakuseiProcessParameter parameter;
     private List<RString> headerList;
     private boolean key_1flag = false;
     private boolean key_2flag = false;
@@ -76,7 +76,7 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
     @Override
     protected void initialize() {
         super.initialize();
-        KokuhorenJoho_TorikomiErrorListType エラーリストタイプ = parameter.getエラーリストタイプ();
+        KokuhorenJoho_SakuseiErrorListType エラーリストタイプ = parameter.getエラーリストタイプ();
         if (null == parameter.getエラーリストタイプ()) {
             throw new BatchInterruptedException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(
                     MSG_国保連情報作成エラーリストタイプ.toString()).toString());
