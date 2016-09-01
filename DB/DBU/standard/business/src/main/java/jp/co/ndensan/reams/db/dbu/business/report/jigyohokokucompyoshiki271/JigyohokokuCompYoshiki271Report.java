@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki271;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNo;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki271.JigyohokokuCompYoshiki271Change;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki271.JigyohokokuCompYoshiki271Data;
@@ -51,20 +52,68 @@ public class JigyohokokuCompYoshiki271Report extends Report<JigyohokokuCompYoshi
     private Iterable<JigyohokokuCompYoshiki271Change> getData() {
         List<JigyohokokuCompYoshiki271Change> dataList = new ArrayList<>();
         List<DbT7021JigyoHokokuTokeiDataEntity> jigyohokokutokeis = data.get事業報告統計データ();
+        List<DbT7021JigyoHokokuTokeiDataEntity> 第五段階 = new ArrayList<>();
+        List<DbT7021JigyoHokokuTokeiDataEntity> 第四段階 = new ArrayList<>();
+        List<DbT7021JigyoHokokuTokeiDataEntity> 第三段階 = new ArrayList<>();
+        List<DbT7021JigyoHokokuTokeiDataEntity> 第二段階 = new ArrayList<>();
+        List<DbT7021JigyoHokokuTokeiDataEntity> 第一段階 = new ArrayList<>();
+        List<DbT7021JigyoHokokuTokeiDataEntity> 合計 = new ArrayList<>();
+        List<DbT7021JigyoHokokuTokeiDataEntity> 再掲利用者負担第三段階 = new ArrayList<>();
+        List<DbT7021JigyoHokokuTokeiDataEntity> 再掲利用者負担第二段階 = new ArrayList<>();
         for (DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei : jigyohokokutokeis) {
-            Decimal 件数世帯合算 = set件数世帯合算(jigyohokokutokei);
-            Decimal 件数その他 = set件数その他(jigyohokokutokei);
-            Decimal 給付額世帯合算 = set給付額世帯合算(jigyohokokutokei);
-            Decimal 給付額その他 = set給付額その他(jigyohokokutokei);
-            dataList.add(new JigyohokokuCompYoshiki271Change(new RString(件数世帯合算.toString()),
-                    new RString(件数その他.toString()),
-                    new RString(set件数計(件数世帯合算, 件数その他).toString()),
-                    new RString(給付額世帯合算.toString()),
-                    new RString(給付額その他.toString()),
-                    new RString(set給付額計(給付額世帯合算, 給付額その他).toString())));
+            if (ShukeiNo.利用者負担第五段階_0700.getコード().equals(jigyohokokutokei.getShukeiNo().value())) {
+                第五段階.add(jigyohokokutokei);
+            }
+            if (ShukeiNo.利用者負担第四段階_0701.getコード().equals(jigyohokokutokei.getShukeiNo().value())) {
+                第四段階.add(jigyohokokutokei);
+            }
+            if (ShukeiNo.利用者負担第三段階_0702.getコード().equals(jigyohokokutokei.getShukeiNo().value())) {
+                第三段階.add(jigyohokokutokei);
+            }
+            if (ShukeiNo.利用者負担第二段階_0703.getコード().equals(jigyohokokutokei.getShukeiNo().value())) {
+                第二段階.add(jigyohokokutokei);
+            }
+            if (ShukeiNo.利用者負担第一段階_0704.getコード().equals(jigyohokokutokei.getShukeiNo().value())) {
+                第一段階.add(jigyohokokutokei);
+            }
+            if (ShukeiNo.合計_07.getコード().equals(jigyohokokutokei.getShukeiNo().value())) {
+                合計.add(jigyohokokutokei);
+            }
+            if (ShukeiNo.利用者負担第三段階_0706.getコード().equals(jigyohokokutokei.getShukeiNo().value())) {
+                再掲利用者負担第三段階.add(jigyohokokutokei);
+            }
+            if (ShukeiNo.利用者負担第二段階_0707.getコード().equals(jigyohokokutokei.getShukeiNo().value())) {
+                再掲利用者負担第二段階.add(jigyohokokutokei);
+            }
         }
-
+        dataList.add(setDataChange(第五段階));
+        dataList.add(setDataChange(第四段階));
+        dataList.add(setDataChange(第三段階));
+        dataList.add(setDataChange(第二段階));
+        dataList.add(setDataChange(第一段階));
+        dataList.add(setDataChange(合計));
+        dataList.add(setDataChange(再掲利用者負担第三段階));
+        dataList.add(setDataChange(再掲利用者負担第二段階));
         return dataList;
+    }
+
+    private JigyohokokuCompYoshiki271Change setDataChange(List<DbT7021JigyoHokokuTokeiDataEntity> entity) {
+        Decimal 件数世帯合算 = Decimal.ZERO;
+        Decimal 件数その他 = Decimal.ZERO;
+        Decimal 給付額世帯合算 = Decimal.ZERO;
+        Decimal 給付額その他 = Decimal.ZERO;
+        for (DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei : entity) {
+            件数世帯合算 = 件数世帯合算.add(set件数世帯合算(jigyohokokutokei));
+            件数その他 = 件数その他.add(set件数その他(jigyohokokutokei));
+            給付額世帯合算 = 給付額世帯合算.add(set給付額世帯合算(jigyohokokutokei));
+            給付額その他 = 給付額その他.add(set給付額その他(jigyohokokutokei));
+        }
+        return new JigyohokokuCompYoshiki271Change(new RString(件数世帯合算.toString()),
+                new RString(件数その他.toString()),
+                new RString(set件数計(件数世帯合算, 件数その他).toString()),
+                new RString(給付額世帯合算.toString()),
+                new RString(給付額その他.toString()),
+                new RString(set給付額計(給付額世帯合算, 給付額その他).toString()));
     }
 
     private Decimal set件数世帯合算(DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei) {
