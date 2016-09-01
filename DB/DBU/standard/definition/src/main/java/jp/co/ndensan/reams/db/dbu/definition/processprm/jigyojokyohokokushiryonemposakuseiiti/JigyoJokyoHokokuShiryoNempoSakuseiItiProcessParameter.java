@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbu.definition.processprm.jigyojokyohokokushiryon
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -27,8 +28,8 @@ public class JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter implements IB
     private final RString 集計年度;
     private final RString 集計開始年月;
     private final RString 集計終了年月;
-    private final RString 作成日時;
-    private final RString 処理日時;
+    private final RDateTime 作成日時;
+    private final RDateTime 処理日時;
     private final RString 市町村コード;
     private final RString 構成市町村区分;
     private final RString 旧市町村区分;
@@ -36,6 +37,7 @@ public class JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter implements IB
     private final List<RString> 旧市町村コードリスト;
     private final List<RString> 過去集計分市町村コードリスト;
     private final RString 過去集計分旧市町村区分;
+    private final RString 日付_FORMAT = new RString("yyyyMMddHHmmss");
 
     /**
      * コンストラクタです。
@@ -64,8 +66,8 @@ public class JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter implements IB
             RString 集計年度,
             RString 集計開始年月,
             RString 集計終了年月,
-            RString 作成日時,
-            RString 処理日時,
+            RDateTime 作成日時,
+            RDateTime 処理日時,
             RString 市町村コード,
             RString 構成市町村区分,
             RString 旧市町村区分,
@@ -119,7 +121,8 @@ public class JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter implements IB
     public JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter toInsertDataMybitisParamter() {
         return JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter.createInsertDataParam(市町村コード,
                 構成市町村区分, 構成市町村コードリスト, 旧市町村区分, 旧市町村コードリスト,
-                プリントコントロール区分, 集計年度, 作成日時, 処理日時);
+                プリントコントロール区分, 集計年度,
+                作成日時.format西暦(日付_FORMAT.toString()), 処理日時.format西暦(日付_FORMAT.toString()));
     }
 
     /**
