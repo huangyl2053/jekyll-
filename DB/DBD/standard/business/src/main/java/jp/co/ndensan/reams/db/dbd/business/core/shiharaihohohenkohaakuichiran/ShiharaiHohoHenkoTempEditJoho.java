@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * DBDMN32001_2_支払方法変更滞納者把握リスト作成サービス2償還未払い情報一時テーブル編集クラスです．
  *
- * @reamsid_L DBD-36500-040 x_lilh
+ * @reamsid_L DBD-3650-040 x_lilh
  */
 public class ShiharaiHohoHenkoTempEditJoho {
 
