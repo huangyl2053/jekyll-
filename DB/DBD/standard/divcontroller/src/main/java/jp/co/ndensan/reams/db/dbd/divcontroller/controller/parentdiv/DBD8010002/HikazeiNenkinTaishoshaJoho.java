@@ -260,8 +260,8 @@ public class HikazeiNenkinTaishoshaJoho {
             ValidationMessageControlPairs newPairs = new ValidationMessageControlPairs();
             getValidationHandler(div).validateFor年次ファイル通知内容(newPairs);
             getValidationHandler(div).validateFor月次ファイル通知内容(newPairs);
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            if (newPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(newPairs).respond();
             }
 
             Message message = getValidationHandler(div).validate作成年月日();
