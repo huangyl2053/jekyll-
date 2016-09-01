@@ -50,7 +50,7 @@ public class KonkaiFutanWariaiIchiranTempProcess extends BatchKeyBreakBase<Konka
 
     @Override
     protected void afterExecute() {
-
+        edit利用者負担割合判定();
     }
 
     @Override
@@ -68,6 +68,13 @@ public class KonkaiFutanWariaiIchiranTempProcess extends BatchKeyBreakBase<Konka
             今回利用者負担割合判定List.add(entity);
             return;
         }
+        edit利用者負担割合判定();
+        今回利用者負担割合判定List = new ArrayList<>();
+        今回利用者負担割合判定List.add(entity);
+
+    }
+
+    private void edit利用者負担割合判定() {
         if (今回利用者負担割合判定List.size() == INT_1) {
             RiyoshaFutanWariaiHanteiEntity riyoshaFutanWariaiHanteiEntity = new RiyoshaFutanWariaiHanteiEntity();
             riyoshaFutanWariaiHanteiEntity.setHihokenshaNo(今回利用者負担割合判定List.get(0).getHihokenshaNo());
@@ -103,8 +110,5 @@ public class KonkaiFutanWariaiIchiranTempProcess extends BatchKeyBreakBase<Konka
             riyoshaFutanWariaiHanteiEntity.setYukoShuryoYMD(今回利用者負担割合判定List.get(0).getYukoShuryoYMD());
             tempDbWriter.insert(riyoshaFutanWariaiHanteiEntity);
         }
-        今回利用者負担割合判定List = new ArrayList<>();
-        今回利用者負担割合判定List.add(entity);
-
     }
 }
