@@ -32,13 +32,8 @@ public final class KoshinShinseiTsuchishoHakkoIchiranhyoReport extends Report<Ko
         this.entity2 = entity2;
     }
 
-    /**
-     * writeBy
-     *
-     * @param writer ReportSourceWriter
-     */
     @Override
-    protected void writeBy(ReportSourceWriter<KoshinShinseiTsuchishoHakkoIchiranhyoReportSource> writer) {
+    public void writeBy(ReportSourceWriter<KoshinShinseiTsuchishoHakkoIchiranhyoReportSource> writer) {
         IKoshinShinseiTsuchishoHakkoIchiranhyoEditor editor = new KoshinShinseiTsuchishoHakkoIchiranhyoEditor(entity1, entity2);
         IKoshinShinseiTsuchishoHakkoIchiranhyoBuilder builder = new KoshinShinseiTsuchishoHakkoIchiranhyoBuilder(editor);
         writer.writeLine(builder);
