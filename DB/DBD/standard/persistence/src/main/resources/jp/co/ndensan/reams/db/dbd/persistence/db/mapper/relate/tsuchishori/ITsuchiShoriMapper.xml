@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-2040-010 chenxin -->
+<!-- 概要： 完了処理・通知書発行画面初期化用XMLです。 -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.tsuchishori.ITsuchiShoriMapper">
+    <select id="初期化データ取得" fetchSize="500" resultOrdered="true" resultMap="完了処理情報">
+        SELECT
+            T4101."shoKisaiHokenshaNo" AS 証記載保険者番号,
+            T7051."shichosonMeisho" AS 市町村名称,
+            T4101."hihokenshaNo" AS 被保険者番号,
+            T4101."hihokenshaName" AS 被保険者氏名,
+            T4101."ninteiShinseiYMD" AS 認定申請年月日,
+            T4101."ninteiShinseiShinseijiKubunCode" AS 認定申請区分申請時コード,
+            T4101."ninteiShinseiHoreiKubunCode" AS 認定申請区分法令コード,
+            T4101."shinseishoKanriNo" AS 申請書管理番号,
+            T4122."tsuchiKanryoYMD" AS 通知完了年月日,
+            T4001."ninteiKekkaTsuchishoHakkoYMD" AS 認定結果通知書発行年月日,
+            T4001."kubunHenkoTsuchishoHakkoYMD" AS 区分変更通知書発行年月日,
+            T4001."serviceHenkoTsuchishoHakkoYMD" AS サービス変更通知書発行年月日,
+            T4001."ninteiKyakkaTsuchishoHakkoYMD" AS 認定却下通知書発行年月日,
+            T4001."ninteiTorikeshiTsuchishoHakkoYMD" AS 認定取消通知書発行年月日
+        FROM
+            rgdb."DbT4101NinteiShinseiJoho" AS T4101
+        INNER JOIN  rgdb."DbT7051KoseiShichosonMaster" AS T7051
+            ON  T7051."shoKisaiHokenshaNo" = T4101."shoKisaiHokenshaNo"
+<!--        TODO-->
+        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS T4105
+            ON  T4105."shinseishoKanriNo" = T4101."shinseishoKanriNo"
+            AND T4105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+            AND T4105."ninteichosaIraiKanryoYMD" IS NOT NULL
+            AND T4105."ninteichosaKanryoYMD" IS NOT NULL
+            AND T4105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+            AND T4105."ikenshoTorokuKanryoYMD" IS NOT NULL
+            AND T4105."ichijiHanteiKanryoYMD" IS NOT NULL
+            AND T4105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
+            AND T4105."ninteiShinsakaiKanryoYMD" IS NOT NULL
+            AND T4105."centerSoshinYMD" IS NOT NULL
+        INNER JOIN  rgdb."DbT4001JukyushaDaicho" AS T4001
+            ON  T4001."shichosonCode" = T7051."shichosonCode"
+            AND T4001."hihokenshaNo" = T4101."hihokenshaNo"
+            AND T4001."rirekiNo" = (SELECT 
+                                        MAX(rgdb."DbT4001JukyushaDaicho"."rirekiNo")
+                                    FROM rgdb."DbT4001JukyushaDaicho" 
+                                    WHERE rgdb."DbT4001JukyushaDaicho"."shichosonCode" = T7051."shichosonCode" 
+                                    AND rgdb."DbT4001JukyushaDaicho"."hihokenshaNo" = T4101."hihokenshaNo")
+            AND T4001."edaban" = (SELECT 
+                                        MAX(rgdb."DbT4001JukyushaDaicho"."edaban")
+                                    FROM rgdb."DbT4001JukyushaDaicho" 
+                                    WHERE rgdb."DbT4001JukyushaDaicho"."shichosonCode" = T7051."shichosonCode" 
+                                    AND rgdb."DbT4001JukyushaDaicho"."hihokenshaNo" = T4101."hihokenshaNo")
+            AND T4001."logicalDeletedFlag" = FALSE
+        LEFT JOIN rgdb."DbT4122TsuchishoHakkoJoho" AS T4122
+            ON  T4122."shinseishoKanriNo"= T4101."shinseishoKanriNo"
+        WHERE
+            T4101."shoriJotaiKubun" = '1'
+        AND T4101."logicalDeletedFlag" = FALSE
+        ORDER BY 被保険者番号,被保険者氏名,認定申請年月日            
+    </select>
+    
+    <resultMap id="完了処理情報" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5030001.TsuchiShoriEntity" autoMapping="true">    
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村名称" column="市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名" column="被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="認定申請年月日" column="認定申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定申請区分申請時コード" column="認定申請区分申請時コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="認定申請区分法令コード" column="認定申請区分法令コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="申請書管理番号" column="申請書管理番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="通知完了年月日" column="通知完了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定結果通知書発行年月日" column="認定結果通知書発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="区分変更通知書発行年月日" column="区分変更通知書発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="サービス変更通知書発行年月日" column="サービス変更通知書発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定却下通知書発行年月日" column="認定却下通知書発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定取消通知書発行年月日" column="認定取消通知書発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>      
+    </resultMap>
+</mapper>
