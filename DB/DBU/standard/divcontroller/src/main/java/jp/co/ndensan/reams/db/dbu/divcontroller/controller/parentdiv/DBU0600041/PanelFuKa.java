@@ -67,8 +67,9 @@ public class PanelFuKa {
             business.set前年の賦課Newest(前年の賦課Newest);
             business.set基準日時(基準日時);
             business.set賦課Newest(賦課Newest);
+            business.set介護徴収方法(介護徴収方法.get(0));
             ViewStateHolder.put(ViewStateKeys.賦課情報, business);
-            getHandler(div).initializtion(賦課年度と調定年度の取得, 賦課Newest, 介護徴収方法.get(0),
+            getHandler(div).initializtion(賦課Newest, 介護徴収方法.get(0),
                     fukaList, 前年の賦課Newest.get(0), 基準日時);
         }
         return ResponseData.of(div).respond();
@@ -87,7 +88,8 @@ public class PanelFuKa {
         List<Fuka> 賦課Newest = business.get賦課Newest();
         List<Fuka> 前年の賦課Newest = business.get前年の賦課Newest();
         RString 通知書番号 = div.getDdlTuutishoBango().getSelectedKey();
-        getHandler(div).select通知書番号DDL(通知書番号, 賦課Newest, 基準日時, 前年の賦課Newest.get(0));
+        getHandler(div).select通知書番号DDL(通知書番号, 賦課Newest, 基準日時,
+                前年の賦課Newest.get(0), business.get介護徴収方法());
         return ResponseData.of(div).respond();
     }
 
