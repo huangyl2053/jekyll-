@@ -229,7 +229,7 @@
         <result property="資格喪失年月日" column="HanteiTaishoshaTemp_shikakuSoshitsuDate" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="認定有効期間開始年月日" column="HanteiTaishoshaTemp_ninteiYukoKaishiDate" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="認定有効期間終了年月日" column="HanteiTaishoshaTemp_ninteiYukoShuryoDate" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="判定対象者識別コード" column="HanteiTaishoshaTemp_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="判定対象者識別コード" column="HanteiTaishoshaTemp_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="課税区分_減免前" column="HanteiTaishoshaTemp_kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="データ区分" column="HanteiTaishoshaTemp_dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="要介護認定状態区分コード" column="HanteiTaishoshaTemp_yoKaigoninteiJoutaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

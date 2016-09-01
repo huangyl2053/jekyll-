@@ -105,10 +105,14 @@ public class FutanWariaiHanteiIchiranEditor implements IFutanWariaiHanteiIchiran
         source.listList3_3 = getWarekiYmd(entity.get今回有効終了日());
         source.listList3_4 = edit更正事由(entity.get今回更正事由().value());
         source.listList3_5 = getWarekiYmd(entity.get前回有効終了日());
-        source.listList3_6 = edit更正事由(entity.get前回更正事由().value());
+        if (entity.get前回更正事由() != null) {
+            source.listList3_6 = edit更正事由(entity.get前回更正事由().value());
+        }
         source.listList3_7 = editその他();
         source.listList4_1 = new RString(entity.get連番()).padZeroToLeft(2);
-        source.listList5_1 = entity.get名称().value();
+        if (entity.get名称() != null) {
+            source.listList5_1 = entity.get名称().value();
+        }
         source.nendo = edit年度();
         source.shori = edit処理名();
         source.shoriYmd = edit処理日(processParameter.get処理日時());
@@ -138,7 +142,7 @@ public class FutanWariaiHanteiIchiranEditor implements IFutanWariaiHanteiIchiran
     }
 
     private RString edit要介護度() {
-        if (entity.get要介護認定状態区分コード() != null) {
+        if (entity.get要介護認定状態区分コード() != null && !entity.get要介護認定状態区分コード().isEmpty()) {
             return YokaigoJotaiKubunSupport.toValue(entity.get認定有効期間開始年月日(),
                     entity.get要介護認定状態区分コード()).getName();
         } else {
@@ -176,7 +180,7 @@ public class FutanWariaiHanteiIchiranEditor implements IFutanWariaiHanteiIchiran
     }
 
     private RString edit減免(RString 給付率) {
-        if (!給付率.isEmpty()) {
+        if (給付率 != null) {
             return 利.concat(給付率).concat(率);
         } else {
             return RString.EMPTY;
