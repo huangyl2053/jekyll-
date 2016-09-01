@@ -33,6 +33,7 @@ public class HanyoListParamForKougaku {
     public ResponseData<HanyoListParamForKougakuDiv> onLoad(HanyoListParamForKougakuDiv div) {
         getHandler(div).initialize();
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
+        div.getCcdShutsuryokuKoumoku().load(帳票ID.getColumnValue(), SubGyomuCode.DBC介護給付);
         return createResponse(div);
     }
 
