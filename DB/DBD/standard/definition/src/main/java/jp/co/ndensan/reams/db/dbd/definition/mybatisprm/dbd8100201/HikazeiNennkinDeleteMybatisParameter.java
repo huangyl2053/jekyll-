@@ -14,7 +14,7 @@ import lombok.Setter;
 /**
  * 非課税年金対象者更新SQLのパラメータクラスです．
  *
- * @author x_xuliang
+ * @reamsid_L DBD-4910-030 x_xuliang
  */
 @Getter
 @Setter

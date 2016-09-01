@@ -212,7 +212,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
         if ((登録されて).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIsshokuhiKeiFlag())) {
             出力条件.add((保険料額));
         }
-        出力条件.set(0, 境界層該当内容.concat(出力条件.get(0)));
+        出力条件.set(1, 境界層該当内容.concat(出力条件.get(1)));
         return 出力条件;
     }
 

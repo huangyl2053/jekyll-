@@ -92,7 +92,8 @@ public class SogojigyohiKohiJukyushaDoIchiranhyoSakuseiProcess extends BatchKeyB
             = new RString("DBC200083_SogojigyohiKohiJukyushaBetsuIchiran.csv");
     private static final RString ダブル引用符 = new RString("\"");
     private int 連番 = 1;
-    private RString 固定改頁項目ID = new RString("0134");
+    private final RString 固定改頁項目ID = new RString("0134");
+    private final RString 固定出力順 = new RString("DbWT6411.\"kohiJukyushaNo\" ASC");
 
     private FileSpoolManager manager;
     private IOutputOrder 出力順情報;
@@ -136,6 +137,7 @@ public class SogojigyohiKohiJukyushaDoIchiranhyoSakuseiProcess extends BatchKeyB
                 }
             }
         }
+        orderByStr = orderByStr.concat(コンマ).concat(固定出力順);
         int i = 0;
         this.改頁リスト = new ArrayList();
         for (ISetSortItem item : 出力順情報.get設定項目リスト()) {

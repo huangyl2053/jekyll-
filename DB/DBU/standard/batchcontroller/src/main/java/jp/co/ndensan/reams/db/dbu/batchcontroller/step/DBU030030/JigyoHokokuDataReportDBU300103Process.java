@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -182,7 +181,7 @@ public class JigyoHokokuDataReportDBU300103Process extends BatchProcessBase<Jigy
     protected void afterExecute() {
         JigyohokokuCompYoshiki300103Data reportData = new JigyohokokuCompYoshiki300103Data();
         reportData.set年報月報区分(年報月報区分);
-        reportData.set処理日時(RDateTime.parse(processParameter.get処理日時()));
+        reportData.set処理日時(processParameter.get処理日時());
         reportData.set保険者名(保険者名);
         reportData.set保険者番号(保険者番号);
         reportData.set集計年度(new FlexibleYear(processParameter.get集計年度()));

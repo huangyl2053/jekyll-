@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710140;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -53,9 +54,9 @@ public class DBC710140_HanyoListKogakuGassanShinseishoJohoParameter extends Batc
     @BatchParameter(key = KEY_SHIKYU_TO, name = "支給申請書整理番号To")
     private RString shikyuShinseishoSeiriNoTo;
     @BatchParameter(key = KEY_FLEXIBLE_FROM, name = "送付年月From")
-    private FlexibleDate flexibleYearMonthFrom;
+    private FlexibleYearMonth flexibleYearMonthFrom;
     @BatchParameter(key = KEY_FLEXIBLE_TO, name = "送付年月To")
-    private FlexibleDate flexibleYearMonthTo;
+    private FlexibleYearMonth flexibleYearMonthTo;
     @BatchParameter(key = KEY_TOMOKUME_FUKA, name = "項目名付加")
     private boolean tomokumeFuka;
     @BatchParameter(key = KEY_REBAN_FUKA, name = "連番付加")

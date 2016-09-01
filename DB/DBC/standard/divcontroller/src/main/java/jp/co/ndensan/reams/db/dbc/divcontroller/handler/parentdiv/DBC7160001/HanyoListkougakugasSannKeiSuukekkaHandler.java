@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 
 /**
- * 汎用リスト出力(高額合算計算結果連絡票情報)
+ * 汎用リスト出力(高額合算計算結果連絡票情報)のクラスです。
  *
  * @reamsid_L DBC-3100-010 zhengshenlei
  */
@@ -80,15 +80,18 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
         keyList.add(日付編集キー);
         div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(keyList);
 
-        RDate 日付関連_当初年度 = new RDate(DbBusinessConfig.get(ConfigNameDBB.日付関連_当初年度, nowdate, SubGyomuCode.DBB介護賦課).toString());
-        RDate 日付関連_調定年度 = new RDate(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, nowdate, SubGyomuCode.DBB介護賦課).toString());
+        RDate 日付関連_当初年度
+                = new RDate(DbBusinessConfig.get(ConfigNameDBB.日付関連_当初年度, nowdate, SubGyomuCode.DBB介護賦課).toString());
+        RDate 日付関連_調定年度
+                = new RDate(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, nowdate, SubGyomuCode.DBB介護賦課).toString());
         List<KeyValueDataSource> datasource = new ArrayList<>();
         datasource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         datasource.add(new KeyValueDataSource(日付関連_調定年度.toDateString(), 日付関連_調定年度.getYear().wareki().toDateString()));
         for (int i = 0; i < 調定年度を含めて8年分; i++) {
             if (日付関連_当初年度.isBefore(日付関連_調定年度)) {
                 日付関連_調定年度 = 日付関連_調定年度.minusYear(NUM_1);
-                datasource.add(new KeyValueDataSource(日付関連_調定年度.getYear().toDateString(), 日付関連_調定年度.getYear().wareki().toDateString()));
+                datasource.add(
+                        new KeyValueDataSource(日付関連_調定年度.getYear().toDateString(), 日付関連_調定年度.getYear().wareki().toDateString()));
             } else {
                 break;
             }
@@ -140,7 +143,8 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
      * @return parameter DBC710160_HanyoListKogakuGassanKeisanKekkaRenrakuHyoParameter
      */
     public DBC710160_HanyoListKogakuGassanKeisanKekkaRenrakuHyoParameter createBatchParameter() {
-        DBC710160_HanyoListKogakuGassanKeisanKekkaRenrakuHyoParameter parameter = new DBC710160_HanyoListKogakuGassanKeisanKekkaRenrakuHyoParameter();
+        DBC710160_HanyoListKogakuGassanKeisanKekkaRenrakuHyoParameter parameter
+                = new DBC710160_HanyoListKogakuGassanKeisanKekkaRenrakuHyoParameter();
         RString 抽出区分 = div.getChushutsuJokenPanel().getRadChushutsuKubun().getSelectedValue();
         if (すべて.equals(抽出区分)) {
             parameter.set抽出区分(null);

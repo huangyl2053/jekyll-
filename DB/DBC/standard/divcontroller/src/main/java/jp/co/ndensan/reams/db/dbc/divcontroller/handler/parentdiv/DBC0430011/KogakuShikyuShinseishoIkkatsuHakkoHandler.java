@@ -208,8 +208,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
                 = new DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter();
         FlexibleYearMonth 処理年月 = FlexibleYearMonth.EMPTY;
         if (!div.getShinseishoHakkoParameters().getRadShinsaYM().getSelectedKey().isEmpty()) {
-            FlexibleDate 年月 = div.getShinseishoHakkoParameters().getTxtShinsaYM().getValue();
-            処理年月 = new FlexibleYearMonth(年月.toString());
+            処理年月 = div.getShinseishoHakkoParameters().getTxtShinsaYM().getValue().getYearMonth();
             parameter.setChushutsuJoken(ShutsuryokuJoken.審査年月);
         } else if (!div.getShinseishoHakkoParameters().getRadHihokenshaNo().getSelectedKey().isEmpty()) {
             RString 年月 = div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedValue();

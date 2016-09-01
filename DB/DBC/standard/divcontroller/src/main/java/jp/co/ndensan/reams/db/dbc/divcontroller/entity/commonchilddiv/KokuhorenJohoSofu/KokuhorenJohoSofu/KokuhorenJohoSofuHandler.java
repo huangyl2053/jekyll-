@@ -113,11 +113,7 @@ public class KokuhorenJohoSofuHandler {
             div.getTxtsaishoriKubun().setValue(SaiShoriKubun.toValue(再処理区分).get名称());
         }
         div.getTxtFileName().setValue(外部ＣＳＶファイル名);
-        RDate 基準日 = RDate.getNowDate();
-        RString 同月審査区分 = DbBusinessConfig.get(ConfigNameDBC.過誤取下げ再請求指示_同月審査区分, 基準日, SubGyomuCode.DBC介護給付);
-        if (同月審査区分 != NUM_1) {
-            div.getDdlSofuTaishojoho().setVisible(false);
-        }
+        div.getDdlSofuTaishojoho().setVisible(false);
         div.getShoriJikkoMaekakuninJiko().setVisible(false);
     }
 
@@ -136,11 +132,7 @@ public class KokuhorenJohoSofuHandler {
             div.getTxtsaishoriKubun().setValue(SaiShoriKubun.toValue(再処理区分).get名称());
         }
         div.getTxtFileName().setValue(外部ＣＳＶファイル名);
-        RDate 基準日 = RDate.getNowDate();
-        RString 同月審査区分 = DbBusinessConfig.get(ConfigNameDBC.過誤取下げ再請求指示_同月審査区分, 基準日, SubGyomuCode.DBC介護給付);
-        if (同月審査区分 != NUM_1) {
-            div.getDdlSofuTaishojoho().setVisible(false);
-        }
+        div.getDdlSofuTaishojoho().setVisible(false);
     }
 
     /**

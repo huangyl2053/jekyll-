@@ -418,6 +418,10 @@ public enum ReportIdDBC {
      */
     DBC7210001(new ReportId("DBC701021_HanyoListJigyoBunKogakuGassanShikyuKettei"), new RString("事業分高額合算支給決定情報")),
     /**
+     * 汎用リスト　高額合算自己負担額情報帳票ＩＤです。
+     */
+    DBC701015(new ReportId("DBC701015_HanyoList_KogakuGassanJikoFutangaku"), new RString("汎用リスト　高額合算自己負担額情報")),
+    /**
      * 汎用リスト　基準収入額適用情報帳票ＩＤです。
      */
     DBC701020(new ReportId("DBC701020_HanyoListKijunShunyugakuTekiyo"), new RString("汎用リスト　基準収入額適用情報")),
@@ -436,7 +440,51 @@ public enum ReportIdDBC {
     /**
      * 汎用リスト 再審査結果情報帳票ＩＤです。
      */
-    DBC701012(new ReportId("DBC701012_HanyoListSaishinsaKekka"), new RString("汎用リスト 再審査結果情報"));
+    DBC701012(new ReportId("DBC701012_HanyoListSaishinsaKekka"), new RString("汎用リスト 再審査結果情報")),
+    /**
+     * 給付管理票総括票帳票ＩＤです。
+     */
+    DBC300001(new ReportId("DBC300001_KyufuKanrihyoSokatsuhyo"), new RString("給付管理票総括票")),
+    /**
+     * 高額合算給付実績情報送付一覧表帳票ＩＤです。
+     */
+    DBC200042(new ReportId("DBC200042_GassanKyufujissekiSofuIchiran"), new RString("高額合算給付実績情報送付一覧表")),
+    /**
+     * 給付実績情報送付一覧表帳票ＩＤです。
+     */
+    DBC200053(new ReportId("DBC200053_KyufuJisekiJohoSofuIchiran"), new RString("給付実績情報送付一覧表")),
+    /**
+     * 給付再審査申立書情報送付一覧表帳票ＩＤです。
+     */
+    DBC200047(new ReportId("DBC200047_KyufuSaishinsaMoshitateshojohoSofuIchiran"), new RString("給付再審査申立書情報送付一覧表")),
+    /**
+     * 償還連絡票送付一覧表帳票ＩＤです。
+     */
+    DBC200025(new ReportId("DBC200025_ShokanRenrakuhyoSofuIchiran"), new RString("償還連絡票送付一覧表")),
+    /**
+     * 高額介護サービス費給付判定結果送付一覧表帳票ＩＤです。
+     */
+    DBC200019(new ReportId("DBC200019_KogakuServicehiKyufuHanteiKekkaSofuIchiran"), new RString("高額介護サービス費給付判定結果送付一覧表")),
+    /**
+     * 高額合算支給額計算結果連絡票情報送付一覧表帳票ＩＤです。
+     */
+    DBC200036(new ReportId("DBC200036_GassanShikyugakuKeisankekkaRanrakuhyoSofuIchiran"), new RString("高額合算支給額計算結果連絡票情報送付一覧表")),
+    /**
+     * 給付管理票送付一覧表帳票ＩＤです。
+     */
+    DBC200009(new ReportId("DBC200009_KyufuKanrihyoSofuIchiran"), new RString("給付管理票送付一覧表")),
+    /**
+     * 給付過誤申立書情報送付一覧表帳票ＩＤです。
+     */
+    DBC200045(new ReportId("DBC200045_KyufuKagoMoshitateshojohoSofuIchiran"), new RString("給付過誤申立書情報送付一覧表")),
+    /**
+     * 総合事業費（経過措置）過誤申立書情報送付一覧表帳票ＩＤです。
+     */
+    DBC200046(new ReportId("DBC200046_SogojigyohiKagoMoshitateshojohoSofuIchiran"), new RString("総合事業費（経過措置）過誤申立書情報送付一覧表")),
+    /**
+     * 介護保険高額サービス費受領委任契約承認（不承認）確認書帳票ＩＤです。
+     */
+    DBC100031(new ReportId("DBC100031_KogakuServiceHiJyuryoItakuKeiyakuKakuninSho"), new RString("介護保険高額サービス費受領委任契約承認（不承認）確認書"));
 
     private final ReportId reportId;
 

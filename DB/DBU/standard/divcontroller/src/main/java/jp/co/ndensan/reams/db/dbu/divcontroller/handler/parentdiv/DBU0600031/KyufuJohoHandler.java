@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyufujoho.KounyukingakuP
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600031.KyufuJohoDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceBunrui;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -27,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class KyufuJohoHandler {
 
     private static final int MONTH_3 = 3;
+    private static final int YEAR_1 = 1;
+    private static final int YEAR_2 = 2;
     private final KyufuJohoDiv div;
 
     /**
@@ -68,11 +71,11 @@ public class KyufuJohoHandler {
      * @param kyufuJoho KyufuJohoBusiness
      */
     public void set前年度情報(KyufuJohoBusiness kyufuJoho) {
-        RDate date = RDate.getNowDate();
+        FlexibleDate date = FlexibleDate.getNowDate();
         if (date.getMonthValue() <= MONTH_3) {
-            div.getTxtMaeNando().setValue(new RString(date.getYearValue() - 2));
+            div.getTxtMaeNando().setValue(new RString(date.getYear().minusYear(YEAR_2).wareki().toDateString().toString()));
         } else {
-            div.getTxtMaeNando().setValue(new RString(date.getYearValue() - 1));
+            div.getTxtMaeNando().setValue(new RString(date.getYear().minusYear(YEAR_1).wareki().toDateString().toString()));
         }
         if (kyufuJoho != null) {
             div.getTxtMaeKingakuGoukei().setValue(カンマ編集(kyufuJoho.get購入金額()));
@@ -89,9 +92,9 @@ public class KyufuJohoHandler {
     public void set今年度情報(KyufuJohoBusiness kyufuJoho) {
         RDate date = RDate.getNowDate();
         if (date.getMonthValue() <= MONTH_3) {
-            div.getTxtKonNando().setValue(new RString(date.getYearValue() - 1));
+            div.getTxtKonNando().setValue(new RString(date.getYear().minusYear(YEAR_2).wareki().toDateString().toString()));
         } else {
-            div.getTxtKonNando().setValue(new RString(date.getYearValue()));
+            div.getTxtKonNando().setValue(new RString(date.getYear().minusYear(YEAR_1).wareki().toDateString().toString()));
         }
         if (kyufuJoho != null) {
             div.getTxtKonKingakuGoukei().setValue(カンマ編集(kyufuJoho.get購入金額()));
@@ -198,19 +201,27 @@ public class KyufuJohoHandler {
     }
 
     private RString set作成区分(KyufuJohoBusiness kyufujoho) {
-        if (kyufujoho.get事業作成区分() != null) {
+        if (!RString.isNullOrEmpty(kyufujoho.get事業作成区分())) {
             div.getTxtKeikakuSakuseiKubun().setValue(kyufujoho.get事業作成区分());
-            div.getTxtTekyouKikan().setFromValue(new RDate(kyufujoho.get事業適用開始().toString()));
-            div.getTxtTekyouKikan().setToValue(new RDate(kyufujoho.get事業適用終了().toString()));
+            if (!RString.isNullOrEmpty(kyufujoho.get事業適用開始())) {
+                div.getTxtTekyouKikan().setFromValue(new RDate(kyufujoho.get事業適用開始().toString()));
+            }
+            if (!RString.isNullOrEmpty(kyufujoho.get事業適用終了())) {
+                div.getTxtTekyouKikan().setToValue(new RDate(kyufujoho.get事業適用終了().toString()));
+            }
             div.getTxtZigyoushaKodo().setValue(kyufujoho.get計画事業所番号());
             if (kyufujoho.get事業者名称() != null) {
                 div.getTxtZigyoushaMesai().setValue(kyufujoho.get事業者名称().get事業者名称().value());
             }
         }
-        if (kyufujoho.get自己計画作成区分() != null) {
+        if (!RString.isNullOrEmpty(kyufujoho.get自己計画作成区分())) {
             div.getTxtKeikakuSakuseiKubun().setValue(kyufujoho.get自己計画作成区分());
-            div.getTxtTekyouKikan().setFromValue(new RDate(kyufujoho.get自己適用開始().toString()));
-            div.getTxtTekyouKikan().setToValue(new RDate(kyufujoho.get自己適用終了().toString()));
+            if (!RString.isNullOrEmpty(kyufujoho.get自己適用開始())) {
+                div.getTxtTekyouKikan().setFromValue(new RDate(kyufujoho.get自己適用開始().toString()));
+            }
+            if (!RString.isNullOrEmpty(kyufujoho.get自己適用終了())) {
+                div.getTxtTekyouKikan().setToValue(new RDate(kyufujoho.get自己適用終了().toString()));
+            }
             div.getTxtZigyoushaKodo().setValue(RString.EMPTY);
             div.getTxtZigyoushaMesai().setValue(RString.EMPTY);
         }
@@ -221,7 +232,7 @@ public class KyufuJohoHandler {
         Decimal 金額カンマ = new Decimal(kegaku);
         RStringBuilder builder = new RStringBuilder();
         builder.append(DecimalFormatter.toコンマ区切りRString(金額カンマ, 0));
-        return new RString(金額カンマ.toString());
+        return new RString(builder.toString());
     }
 
     private RString set最新サービス内容(KyufuJohoBusiness kyufuJoho) {

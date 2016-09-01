@@ -1,13 +1,13 @@
-/// <reference path="../../d.ts/jquery.d.ts" />
-/// <reference path="../../d.ts/UzViewControls.d.ts" />
-/// <reference path="../../d.ts/UzaConverter.d.ts" />
-/// <reference path="./../KaigoNinteiShinseiKihonJohoInput/KaigoNinteiShinseiKihonJohoInput.ts" />
-/// <reference path="./../NinteiShinseiTodokedesha/NinteiShinseiTodokedesha.ts" />
-/// <reference path="./../shujiiIryokikanandshujiiinput/ShujiiIryokikanAndShujiiInput.ts" />
-/// <reference path="./../chosaitakusakiandchosaininput/ChosaItakusakiAndChosainInput.ts" />
-/// <reference path="./../NinteiInput/NinteiInput.ts" />
-/// <reference path="./../ZenkaiNinteiKekkaJoho/ZenkaiNinteiKekkaJoho.ts" />
-/// <reference path="./../ShinseiSonotaJohoInput/ShinseiSonotaJohoInput.ts" />
+/// <reference path="../d.ts/jquery.d.ts" />
+/// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="./KaigoNinteiShinseiKihonJohoInput/KaigoNinteiShinseiKihonJohoInput.ts" />
+/// <reference path="./NinteiShinseiTodokedesha/NinteiShinseiTodokedesha.ts" />
+/// <reference path="./shujiiIryokikanandshujiiinput/ShujiiIryokikanAndShujiiInput.ts" />
+/// <reference path="./chosaitakusakiandchosaininput/ChosaItakusakiAndChosainInput.ts" />
+/// <reference path="./NinteiInput/NinteiInput.ts" />
+/// <reference path="./ZenkaiNinteiKekkaJoho/ZenkaiNinteiKekkaJoho.ts" />
+/// <reference path="./ShinseiSonotaJohoInput/ShinseiSonotaJohoInput.ts" />
 
 module DBZ {
 
@@ -15,12 +15,20 @@ module DBZ {
 
         export class Events {
 
-            public static onOkClose(): string {
-                return "onOkClose";
+            public static onOkClose_btnChosaJokyo(): string {
+                return "onOkClose_btnChosaJokyo";
             }
 
-            public static onCancelClose(): string {
-                return "onCancelClose";
+            public static onBefore_btnChosaJokyo(): string {
+                return "onBefore_btnChosaJokyo";
+            }
+
+            public static onClick_btnKakutei(): string {
+                return "onClick_btnKakutei";
+            }
+
+            public static onClick_btnCancel(): string {
+                return "onClick_btnCancel";
             }
 
         }

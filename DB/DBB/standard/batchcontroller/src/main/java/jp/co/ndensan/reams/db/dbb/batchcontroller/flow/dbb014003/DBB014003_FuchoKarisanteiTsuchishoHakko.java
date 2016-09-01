@@ -11,8 +11,6 @@ import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb014003.FuchoKarisante
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -28,11 +26,10 @@ public class DBB014003_FuchoKarisanteiTsuchishoHakko extends BatchFlowBase<DBB01
     private DBB014003_FuchoKarisanteiTsuchishoHakkoParameter parameter;
     private FuchoKarisanteiTsuchishoHakkoProcessParameter processParameter;
 
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter 異動賦課情報一時tableWriter;
-
+//    @BatchWriter
+//    private BatchEntityCreatedTempTableWriter 異動賦課情報一時tableWriter;
     private static final String 計算後情報作成 = "kiisagoJyohouSakusei";
-    private static final String 異動賦課情報一時テーブル登録 = "insertTmpIdoFukaJoho";
+//    private static final String 異動賦課情報一時テーブル登録 = "insertTmpIdoFukaJoho";
 
     private static final RString KEISANGOJOHOSAKUEEIFLOW_FLOWID = new RString("KeisangoJohoSakuseiFlow");
 

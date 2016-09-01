@@ -53,6 +53,7 @@ public class HanyoListFukaDaichoProcessParameter implements IBatchProcessParamet
     private RString 資格喪失者のみ;
     private RString 受給者のみ;
     private RString 有効無効区分;
+    private RString 出力順;
 
     /**
      * コンストラクタ
@@ -111,7 +112,9 @@ public class HanyoListFukaDaichoProcessParameter implements IBatchProcessParamet
      * @return HanyoListDaichoMybatisParameter
      */
     public HanyoListDaichoMybatisParameter toMybatisParameter() {
-        return new HanyoListDaichoMybatisParameter(調定年度, 賦課年度, 最新状態で抽出, 基準日, 基準日区分, 保険料段階s, 保険者コード, 資格区分, 受給者判定, システム日付,
-                賦課基準日で抽出, 調定日で抽出, 資格取得者のみ, 資格喪失者のみ, 受給者のみ, 有効無効区分, 宛名抽出条件, 宛名検索条件);
+        return new HanyoListDaichoMybatisParameter(調定年度, 賦課年度, 最新状態で抽出,
+                基準日, 基準日区分, 保険料段階s, 保険者コード, 資格区分, 受給者判定, システム日付,
+                賦課基準日で抽出, 調定日で抽出, 資格取得者のみ, 資格喪失者のみ, 受給者のみ,
+                有効無効区分, 宛名抽出条件, 宛名検索条件, 出力順);
     }
 }
