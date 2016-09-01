@@ -129,7 +129,7 @@ public class HanyoListFukaDaichoCsvNoRenbanEditor {
         edit前住所(csvEntity, entity);
         edit宛先(csvEntity, entity);
         edit資格(csvEntity, entity);
-        edit資格Two(csvEntity, entity, 保険料段階リスト, 構成市町村マスタlist);
+        edit資格Two(csvEntity, 保険料段階リスト, 構成市町村マスタlist);
         edit介護賦課(csvEntity, バッチ処理日);
         csvEntity.set翌４月特依頼額(get翌４月特徴額(entity));
         editその他(csvEntity, バッチ処理日);
@@ -753,7 +753,7 @@ public class HanyoListFukaDaichoCsvNoRenbanEditor {
         }
     }
 
-    private void edit資格Two(HanyoListFukaDaichoNoRenbanCsvEntity csvEntity, HanyoListFukaDaichoEntity entity,
+    private void edit資格Two(HanyoListFukaDaichoNoRenbanCsvEntity csvEntity,
             HokenryoDankaiList 保険料段階リスト, List<KoseiShichosonMaster> 構成市町村マスタlist) {
         if (RSTONE.equals(被保険者台帳管理.getKoikinaiJushochiTokureiFlag())) {
             set保険者番号By広住特措置元市町村コード(csvEntity, 構成市町村マスタlist);
@@ -762,10 +762,10 @@ public class HanyoListFukaDaichoCsvNoRenbanEditor {
         }
         csvEntity.set通知書番号(介護賦課.getTsuchishoNo().value());
         csvEntity.set徴収方法(get徴収方法2());
-        if (保険料段階リスト != null && 保険料段階リスト.getBy段階区分(介護賦課.getHokenryoDankai()) != null) {
+        if (保険料段階リスト != null && 介護賦課.getHokenryoDankai() != null) {
             csvEntity.set保険料段階(保険料段階リスト.getBy段階区分(介護賦課.getHokenryoDankai()).get表記());
         }
-        if (保険料段階リスト != null && 保険料段階リスト.getBy段階区分(介護賦課.getHokenryoDankaiKarisanntei()) != null) {
+        if (保険料段階リスト != null && 介護賦課.getHokenryoDankaiKarisanntei() != null) {
             csvEntity.set保険料段階_仮算定時(保険料段階リスト.getBy段階区分(介護賦課.getHokenryoDankaiKarisanntei()).get表記());
         }
     }

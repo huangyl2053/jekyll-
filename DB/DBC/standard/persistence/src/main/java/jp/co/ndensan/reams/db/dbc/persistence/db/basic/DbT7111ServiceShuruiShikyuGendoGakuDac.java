@@ -98,6 +98,19 @@ public class DbT7111ServiceShuruiShikyuGendoGakuDac implements ISaveable<DbT7111
     }
 
     /**
+     * データを物理削除する
+     *
+     * @param entity DbT7112ShokanShuruiShikyuGendoGakuEntity
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public int delete(DbT7111ServiceShuruiShikyuGendoGakuEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類支給限度額エンティティ"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.deletePhysical(entity).execute();
+    }
+
+    /**
      * サービス種類支給限度額を全件返します。
      *
      * @return List<DbT7111ServiceShuruiShikyuGendoGakuEntity>
