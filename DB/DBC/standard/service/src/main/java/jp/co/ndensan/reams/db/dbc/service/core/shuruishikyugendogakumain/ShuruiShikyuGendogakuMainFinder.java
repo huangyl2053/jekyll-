@@ -6,15 +6,15 @@
 package jp.co.ndensan.reams.db.dbc.service.core.shuruishikyugendogakumain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ServiceShuruiShikyuGendoGaku;
 import jp.co.ndensan.reams.db.dbc.business.core.shuruishikyugendogakumain.ShuruiShikyuGendogakuMainResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyugendogaku.KubunShikyuGendogakuYokaigoJotaiKubun;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shuruishikyugendogakumain.ShuruiShikyuGendogakuMainListParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7111ServiceShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shuruishikyugendogakumain.ShuruiShikyuGendogakuMainEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7111ServiceShuruiShikyuGendoGakuDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shuruishikyugendogakumain.IShuruiShikyuGendogakuMainMapper;
-import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
@@ -36,7 +36,6 @@ public class ShuruiShikyuGendogakuMainFinder {
     private final RString numone = new RString("1");
     private final RString numtwo = new RString("2");
     private final RString numthree = new RString("3");
-    private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタです。
@@ -44,7 +43,6 @@ public class ShuruiShikyuGendogakuMainFinder {
     public ShuruiShikyuGendogakuMainFinder() {
         this.種類支給限度額取得Dac = InstanceProvider.create(DbT7111ServiceShuruiShikyuGendoGakuDac.class);
         this.介護サービス種類データ取得Dac = InstanceProvider.create(DbT7130KaigoServiceShuruiDac.class);
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
     /**
@@ -61,12 +59,19 @@ public class ShuruiShikyuGendogakuMainFinder {
      *
      * @return List<ShuruiShikyuGendogakuMainEntity>
      */
-    public List<ShuruiShikyuGendogakuMainResult> get種類支給限度額() {
+    public Map<Object, List> get種類支給限度額() {
 
+        Map<Object, List> map = new HashMap<>();
         List<ShuruiShikyuGendogakuMainResult> resultList
+                = new ArrayList<>();
+        List<ServiceShuruiShikyuGendoGaku> shikyuGendoGakuList
                 = new ArrayList<>();
         List<DbT7111ServiceShuruiShikyuGendoGakuEntity> dbT7111list
                 = 種類支給限度額取得Dac.select種類支給限度額();
+        for (DbT7111ServiceShuruiShikyuGendoGakuEntity entity : dbT7111list) {
+            shikyuGendoGakuList.add(new ServiceShuruiShikyuGendoGaku(entity));
+        }
+        map.put(ServiceShuruiShikyuGendoGaku.class, shikyuGendoGakuList);
         List<ShuruiShikyuGendogakuMainEntity> list = new ArrayList<>();
         for (DbT7111ServiceShuruiShikyuGendoGakuEntity entity : dbT7111list) {
             支給限度額要介護状態区分 = entity.getYoKaigoJotaiKubun();
@@ -119,7 +124,7 @@ public class ShuruiShikyuGendogakuMainFinder {
                         Decimal.ZERO, entity.getShikyuGendoTaniSu()));
             }
         }
-        return getResultList(resultList, list);
+        return getResultMap(map, resultList, list);
     }
 
     private RString getForList(List<ShuruiShikyuGendogakuMainEntity> list,
@@ -202,15 +207,17 @@ public class ShuruiShikyuGendogakuMainFinder {
         return numthree;
     }
 
-    private List<ShuruiShikyuGendogakuMainResult> getResultList(
+    private Map<Object, List> getResultMap(Map<Object, List> map,
             List<ShuruiShikyuGendogakuMainResult> resultList, List<ShuruiShikyuGendogakuMainEntity> list) {
         if (list.isEmpty()) {
-            return resultList;
+            map.put(null, null);
+            return map;
         } else {
             for (ShuruiShikyuGendogakuMainEntity entity : list) {
                 resultList.add(new ShuruiShikyuGendogakuMainResult(entity));
             }
-            return resultList;
+            map.put(ShuruiShikyuGendogakuMainResult.class, resultList);
+            return map;
         }
     }
 
@@ -281,23 +288,6 @@ public class ShuruiShikyuGendogakuMainFinder {
     }
 
     /**
-     * 主キーでサービス種類支給限度額を取得します。
-     *
-     * @param サービス種類コード ServiceShuruiCode
-     * @param 要介護状態区分 YoKaigoJotaiKubun
-     * @param 適用開始年月 TekiyoKaishuYM
-     * @return ShuruiShikyuGendogakuMainResult
-     */
-    public ShuruiShikyuGendogakuMainResult selectByKey(
-            ServiceShuruiCode サービス種類コード,
-            RString 要介護状態区分,
-            FlexibleYearMonth 適用開始年月) {
-        DbT7111ServiceShuruiShikyuGendoGakuEntity entity
-                = 種類支給限度額取得Dac.selectByKey(サービス種類コード, 要介護状態区分, 適用開始年月, 1);
-        return new ShuruiShikyuGendogakuMainResult(entity);
-    }
-
-    /**
      * entityを保存します。
      *
      * @param entity DbT7111ServiceShuruiShikyuGendoGakuEntity
@@ -311,12 +301,12 @@ public class ShuruiShikyuGendogakuMainFinder {
      * entityを保存します。
      *
      * @param サービス種類コード ServiceShuruiCode
-     * @param 要介護状態区分 YoKaigoJotaiKubun
-     * @param 適用開始年月 TekiyoKaishuYM
+     * @param 要介護状態区分 RString
+     * @param 適用開始年月 FlexibleYearMonth
      * @param 支給限度単位数 Decimal
      * @return int
      */
-    public int saveEntitys(ServiceShuruiCode サービス種類コード,
+    public int saveNewEntity(ServiceShuruiCode サービス種類コード,
             RString 要介護状態区分,
             FlexibleYearMonth 適用開始年月,
             Decimal 支給限度単位数) {
@@ -327,14 +317,34 @@ public class ShuruiShikyuGendogakuMainFinder {
         entity.setShikyuGendoTaniSu(支給限度単位数);
         return 種類支給限度額取得Dac.save(entity);
     }
+//
+//    /**
+//     * entityを保存します。
+//     *
+//     * @param サービス種類コード ServiceShuruiCode
+//     * @param 要介護状態区分 YoKaigoJotaiKubun
+//     * @param 適用開始年月 TekiyoKaishuYM
+//     * @param 支給限度単位数 Decimal
+//     * @return int
+//     */
+//    public int saveEntitys(ServiceShuruiCode サービス種類コード,
+//            RString 要介護状態区分,
+//            FlexibleYearMonth 適用開始年月,
+//            Decimal 支給限度単位数) {
+//        DbT7111ServiceShuruiShikyuGendoGakuEntity entity = new DbT7111ServiceShuruiShikyuGendoGakuEntity();
+//        entity.setServiceShuruiCode(サービス種類コード);
+//        entity.setYoKaigoJotaiKubun(要介護状態区分);
+//        entity.setTekiyoKaishiYM(適用開始年月);
+//        entity.setShikyuGendoTaniSu(支給限度単位数);
+//        return 種類支給限度額取得Dac.save(entity);
+//    }
 
     /**
      * entityを削除します。
      *
-     * @param parameter ShuruiShikyuGendogakuMainListParameter
+     * @param entity DbT7111ServiceShuruiShikyuGendoGakuEntity
      */
-    public void deleteEntity(ShuruiShikyuGendogakuMainListParameter parameter) {
-        IShuruiShikyuGendogakuMainMapper mapper = mapperProvider.create(IShuruiShikyuGendogakuMainMapper.class);
-        mapper.deletEntity(parameter);
+    public void deleteEntity(DbT7111ServiceShuruiShikyuGendoGakuEntity entity) {
+        種類支給限度額取得Dac.delete(entity);
     }
 }
