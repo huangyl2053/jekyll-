@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd511002;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5320001.TsutishoHakkoCommonProcess;
 import static jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5320001.TsutishoHakkoCommonProcess.get地方公共団体;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd501001.YokaigoNinteiShinseishoReport;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd501002.ShinseiShoEntity;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd511002.NinshiuUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
@@ -17,12 +17,15 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.NinshiuUpdateEntity
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.RenZhengzheEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.TongzhiShuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.TongzhiShufaxingEntity;
-import jp.co.ndensan.reams.db.dbd.entity.report.dbd501002.YokaigoNinteikbnHenkoShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd501001.YokaigoNinteiShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd511001.KoshinShinseiOshiraseTshuchishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd511002.KoshinShinseiTsuchishoHakkoIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.editedatesaki.EditedAtesakiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
@@ -32,6 +35,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
@@ -44,6 +48,8 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHan
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
@@ -64,10 +70,14 @@ import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -76,17 +86,19 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBD-2030-020 x_miaocl
  */
-public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
+public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> {
 
     private NinshiuUpdateProcessParameter parameter;
     private List<RenZhengzheEntity> oenNinshiEntitys;
-    private List<ShinseiShoEntity> shinseiShoEntity;
     private static final ReportId 帳票ID01 = new ReportId("DBD501001_YokaigoNinteiShinseisho");
     private static final ReportId 帳票ID11 = new ReportId("DBD511001_KoshinShinseiOshiraseTshuchisho");
     private static final ReportId 帳票ID112 = new ReportId("DBD511002_KoshinShinseiTsuchishoHakkoIchiranhyo");
     private static Association association;
     private DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通;
     private List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用;
+    private ChohyoSeigyoHanyo 帳票制御情報;
+    private NinshoshaSource ninshoshaSource;
+    private SofubutsuAtesakiSource 送付物宛先情報;
     private static final RString カラ = new RString("～");
     private static final RString カあ = new RString("-");
     private static final RString まる = new RString("○");
@@ -112,14 +124,18 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
     private static final String 明治 = new String("明治");
     private static final String 昭和 = new String("昭和");
     private static final String 大正 = new String("大正");
-
-    private BatchReportWriter<YokaigoNinteikbnHenkoShinseishoReportSource> batchReportWrite01;
-    private ReportSourceWriter<YokaigoNinteikbnHenkoShinseishoReportSource> reportSourceWriter01;
-    //TODO
-//    private BatchReportWriter<YokaigoNinteikbnHenkoShinseishoReportSource> batchReportWrite11;
-//    private ReportSourceWriter<YokaigoNinteikbnHenkoShinseishoReportSource> reportSourceWriter11;
-//    private BatchReportWriter<YokaigoNinteikbnHenkoShinseishoReportSource> batchReportWrite112;
-//    private ReportSourceWriter<YokaigoNinteikbnHenkoShinseishoReportSource> reportSourceWriter112;
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_8 = 8;
+    private BatchReportWriter<YokaigoNinteiShinseishoReportSource> batchReportWrite01;
+    private ReportSourceWriter<YokaigoNinteiShinseishoReportSource> reportSourceWriter01;
+    private BatchReportWriter<KoshinShinseiOshiraseTshuchishoReportSource> batchReportWrite11;
+    private ReportSourceWriter<KoshinShinseiOshiraseTshuchishoReportSource> reportSourceWriter11;
+    private BatchReportWriter<KoshinShinseiTsuchishoHakkoIchiranhyoReportSource> batchReportWrite112;
+    private ReportSourceWriter<KoshinShinseiTsuchishoHakkoIchiranhyoReportSource> reportSourceWriter112;
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futanngenndogakuninntei."
@@ -146,20 +162,40 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
     protected void createWriter() {
         batchReportWrite01 = BatchReportFactory.createBatchReportWriter(帳票ID01.value()).create();
         reportSourceWriter01 = new ReportSourceWriter<>(batchReportWrite01);
+        batchReportWrite11 = BatchReportFactory.createBatchReportWriter(帳票ID11.value()).create();
+        reportSourceWriter11 = new ReportSourceWriter<>(batchReportWrite11);
+        batchReportWrite112 = BatchReportFactory.createBatchReportWriter(帳票ID112.value()).create();
+        reportSourceWriter112 = new ReportSourceWriter<>(batchReportWrite112);
         dbT4101EntityWriter = new BatchPermanentTableWriter(DbT4101NinteiShinseiJohoEntity.class);
     }
 
     @Override
-    protected void process(NinshiuUpdateEntity t) {
-        if (parameter.get出力対象区分().equals(ZERO)) {
+    protected void process(NinshiuUpdateEntity ninshi) {
+        RenZhengzheEntity entity = new RenZhengzheEntity();
+        TongzhiShufaxingEntity twonin = new TongzhiShufaxingEntity();
+        ShinseiShoEntity entity2 = new ShinseiShoEntity();
+        KoshinShinseNinshi(entity, ninshi);
 
-        } else if (parameter.get出力対象区分().equals(ONE)) {
-            for (ShinseiShoEntity shoEntity : shinseiShoEntity) {
-                YokaigoNinteiShinseishoReport find = YokaigoNinteiShinseishoReport.createReport(shoEntity);
-                //   find.writeBy(reportSourceWriter01);
-            }
-        } else if (parameter.get出力対象区分().equals(TWO)) {
-        }
+//        if (parameter.get出力対象区分().equals(ZERO)) {
+//            KoshinShinseiOshiraseTshuchishoReport find11 = KoshinShinseiOshiraseTshuchishoReport.createReport(KoshinShinseNinshi(entity, ninshi),
+//                    帳票制御共通, 帳票制御汎用, 帳票制御情報, ninshoshaSource, 送付物宛先情報);
+//            find11.writeBy(reportSourceWriter11);
+//            KoshinShinseiTsuchishoHakkoIchiranhyoReport find112 = new KoshinShinseiTsuchishoHakkoIchiranhyoReport(OshiraseNinshi(twonin, ninshi));
+//            find112.writeBy(reportSourceWriter112);
+//        } else if (parameter.get出力対象区分().equals(ONE)) {
+//            YokaigoNinteiShinseishoReport find01 = YokaigoNinteiShinseishoReport.createReport(KoshinShinseNinshi(entity2, ninshi));
+//            find01.writeBy(reportSourceWriter01);
+//            KoshinShinseiTsuchishoHakkoIchiranhyoReport find112 = new KoshinShinseiTsuchishoHakkoIchiranhyoReport(OshiraseNinshi(twonin, ninshi));
+//            find112.writeBy(reportSourceWriter112);
+//        } else if (parameter.get出力対象区分().equals(TWO)) {
+//            YokaigoNinteiShinseishoReport find01 = YokaigoNinteiShinseishoReport.createReport(KoshinShinseNinshi(entity2, ninshi));
+//            find01.writeBy(reportSourceWriter01);
+//            KoshinShinseiTsuchishoHakkoIchiranhyoReport find112 = new KoshinShinseiTsuchishoHakkoIchiranhyoReport(OshiraseNinshi(twonin, ninshi));
+//            find112.writeBy(reportSourceWriter112);
+//            KoshinShinseiOshiraseTshuchishoReport find11 = KoshinShinseiOshiraseTshuchishoReport.createReport(KoshinShinseNinshi(entity, ninshi),
+//                    帳票制御共通, 帳票制御汎用, 帳票制御情報, ninshoshaSource, 送付物宛先情報);
+//            find11.writeBy(reportSourceWriter11);
+//        }
     }
 
     protected void afterProcess(DbT4101NinteiShinseiJohoEntity entity) {
@@ -205,11 +241,14 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
         帳票名称.add(builder.toRString());
         List<RString> 出力ページ = new ArrayList<>();
         if (parameter.get出力対象区分().equals(ZERO)) {
-//TODO
+            builder.append(new RString(String.valueOf(batchReportWrite11.getPageCount())));
+            builder.append(new RString(String.valueOf(batchReportWrite112.getPageCount())));
         } else if (parameter.get出力対象区分().equals(ONE)) {
             builder.append(new RString(String.valueOf(batchReportWrite01.getPageCount())));
         } else if (parameter.get出力対象区分().equals(TWO)) {
-//TODO
+            builder.append(new RString(String.valueOf(batchReportWrite11.getPageCount())));
+            builder.append(new RString(String.valueOf(batchReportWrite112.getPageCount())));
+            builder.append(new RString(String.valueOf(batchReportWrite01.getPageCount())));
         }
         出力ページ.add(builder.toRString());
         バッチ出力条件リスト(帳票, 出力ページ, 帳票名称);
@@ -217,13 +256,16 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
 
     private void バッチ出力条件リスト(List<RString> 出力ページ, List<RString> 帳票, List<RString> 帳票名称) {
         for (RString 帳票ID : 帳票) {
-            for (RString 出力ページ数 : 出力ページ) {
-                for (RString 帳票名 : 帳票名称) {
-                    バッチ出力条件リストの出力(出力ページ数, 帳票名, 帳票ID);
-                }
+            Baqi出力(出力ページ, 帳票名称, 帳票ID);
+        }
+    }
+
+    private void Baqi出力(List<RString> 出力ページ, List<RString> 帳票名称, RString 帳票ID) {
+        for (RString 出力ページ数 : 出力ページ) {
+            for (RString 帳票名 : 帳票名称) {
+                バッチ出力条件リストの出力(出力ページ数, 帳票名, 帳票ID);
             }
         }
-
     }
 
     private void バッチ出力条件リストの出力(RString 出力ページ数, RString 帳票名, RString 帳票ID) {
@@ -264,17 +306,20 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
     /**
      * 2.1
      */
-    private RenZhengzheEntity oenNinshi(RenZhengzheEntity entity, NinshiuUpdateEntity ninshi) {
+    private RenZhengzheEntity KoshinShinseNinshi(RenZhengzheEntity entity, NinshiuUpdateEntity ninshi) {
         ChohyoSeigyoKyotsu 帳票共通情報 = TsutishoHakkoCommonProcess.get帳票共通情報(帳票ID11);
-        ChohyoSeigyoHanyo 帳票制御情報 = TsutishoHakkoCommonProcess.get帳票制御情報(帳票ID11);
-//        NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, 帳票ID11,
-//                FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-//                KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-        SofubutsuAtesakiSource 送付物宛先情報 = TsutishoHakkoCommonProcess.get送付物宛先情報(帳票共通情報);
+        帳票制御情報 = TsutishoHakkoCommonProcess.get帳票制御情報(帳票ID11);
+        ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, 帳票ID11,
+                FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                KenmeiFuyoKubunType.付与なし, reportSourceWriter11);
+        送付物宛先情報 = TsutishoHakkoCommonProcess.get送付物宛先情報(帳票共通情報);
+
         帳票制御共通 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御共通(帳票ID11);
         帳票制御汎用 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御汎用(帳票ID11);
-        TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
-        TsuchishoTeikeibunInfo 通知文1 = manager.get最新適用日(SubGyomuCode.DBD介護受給, 帳票ID11, KamokuCode.EMPTY, 1, 1);
+        Map<Integer, RString> map = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, 帳票ID11,
+                KamokuCode.EMPTY, 1);
+        entity.set通知文1(map.get(1));
+        entity.set通知文2(map.get(2));
         entity.set被保険者氏名フリガナ(ninshi.getHihokenshaKana().getColumnValue());
         entity.set被保険者番号1(ninshi.getHihokenshaNo().substring(ZERO, ONE));
         entity.set被保険者番号2(ninshi.getHihokenshaNo().substring(ONE, TWO));
@@ -287,34 +332,33 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
         entity.set被保険者番号9(ninshi.getHihokenshaNo().substring(EIGHT, NINE));
         entity.set被保険者番号10(ninshi.getHihokenshaNo().substring(NINE, TEN));
         entity.set被保険者氏名(ninshi.getHihokenshaName().getColumnValue());
-        entity.set要介護認定開始日(ninshi.getNinteiYukoKikanKaishiYMD().wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        entity.set要介護認定終了日(ninshi.getNinteiYukoKikanShuryoYMD().wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        ninshi.getYokaigoJotaiKubunCode();
-        if (ninshi.getYokaigoJotaiKubunCode().equals(new Code("99A"))) {
-
-        } else if (ninshi.getYokaigoJotaiKubunCode().equals(new Code("02A"))) {
-
-        } else if (ninshi.getYokaigoJotaiKubunCode().equals(new Code("06A"))) {
-
-        } else if (ninshi.getYokaigoJotaiKubunCode().equals(new Code("09B"))
-                && ninshi.getYokaigoJotaiKubunCode().equals(new Code("09A"))) {
-
+        entity.set要介護認定開始日(ninshi.getNinteiYukoKikanKaishiYMD().wareki().separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        entity.set要介護認定終了日(ninshi.getNinteiYukoKikanShuryoYMD().wareki().separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        if (ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("99A"))) {
+            entity.set要介護状態区分(YokaigoJotaiKubun99.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get略称());
+        } else if (ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("02A"))) {
+            entity.set要介護状態区分(YokaigoJotaiKubun02.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get略称());
+        } else if (ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("06A"))) {
+            entity.set要介護状態区分(YokaigoJotaiKubun06.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get略称());
+        } else if (ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("09B"))
+                && ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("09A"))) {
+            entity.set要介護状態区分(YokaigoJotaiKubun09.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get略称());
         }
-        TsuchishoTeikeibunInfo 通知文2 = manager.get最新適用日(SubGyomuCode.DBD介護受給, 帳票ID11, KamokuCode.EMPTY, 1, 2);
+
         return entity;
     }
 
     /**
      * 2.2
      */
-    private void twoNinshi(TongzhiShuEntity entity, TongzhiShufaxingEntity twonin, NinshiuUpdateEntity ninshi) {
-        List<RString> 抽出対象期間 = new ArrayList<>();
+    private TongzhiShufaxingEntity OshiraseNinshi(TongzhiShufaxingEntity twonin, NinshiuUpdateEntity ninshi) {
         RStringBuilder builder = new RStringBuilder();
         builder.append(parameter.get抽出対象期間_開始().wareki().separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
         builder.append(カラ);
         builder.append(parameter.get抽出対象期間_終了().wareki().separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
-        抽出対象期間.add(builder.toRString());
-        //twonin.set抽出対象期間();
+        twonin.set抽出対象期間(builder.toRString());
         twonin.set市町村コード(ninshi.getShichosonCode().getColumnValue());
         twonin.set市町村名称(ninshi.getShichosonMeisho());
         if (parameter.get出力順().get(ZERO).isNullOrEmpty()) {
@@ -328,16 +372,32 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
         } else if (parameter.get出力順().get(FOUR).isNullOrEmpty()) {
             twonin.set並び順2(parameter.get出力順().get(FOUR));
         }
+        RTime time = RDate.getNowTime();
+        RString hour = new RString(time.toString()).substring(INDEX_0, INDEX_2);
+        RString min = new RString(time.toString()).substring(INDEX_3, INDEX_5);
+        RString sec = new RString(time.toString()).substring(INDEX_6, INDEX_8);
+        RString timeFormat = hour.concat("時").concat(min).concat("分").concat(sec).concat("秒");
+        twonin.set印刷時間(new RString(RDate.getNowDate().wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
+                fillType(FillType.ZERO).toDateString().toString() + timeFormat));
+        set通知書発行一覧(twonin, ninshi);
+        return twonin;
+    }
+
+    private void set通知書発行一覧(TongzhiShufaxingEntity twonin, NinshiuUpdateEntity ninshi) {
+        List<TongzhiShuEntity> entityList = new ArrayList<>();
+        TongzhiShuEntity entity = new TongzhiShuEntity();
         entity.set被保険者番号(ninshi.getHihokenshaNo());
         entity.set被保険者氏名(ninshi.getHihokenshaName().getColumnValue());
-        if (ninshi.getYokaigoJotaiKubunCode().equals(new Code("99A"))) {
-
-        } else if (ninshi.getYokaigoJotaiKubunCode().equals(new Code("02A"))) {
-
-        } else if (ninshi.getYokaigoJotaiKubunCode().equals(new Code("06A"))) {
-
-        } else if (ninshi.getYokaigoJotaiKubunCode().equals(new Code("09B"))
-                && ninshi.getYokaigoJotaiKubunCode().equals(new Code("09A"))) {
+        if (ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("99A"))) {
+            entity.set要介護度(YokaigoJotaiKubun99.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get略称());
+        } else if (ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("02A"))) {
+            entity.set要介護度(YokaigoJotaiKubun02.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get略称());
+        } else if (ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("06A"))) {
+            entity.set要介護度(YokaigoJotaiKubun06.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get略称());
+        } else if (ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("09B"))
+                && ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("09A"))) {
+            entity.set要介護度(YokaigoJotaiKubun09.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get略称());
         }
         entity.set受給申請日(ninshi.getNinteiShinseiYMD().wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         entity.set認定日(ninshi.getNinteiYMD().wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
@@ -350,12 +410,14 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
         entity.set居宅支援事業者名称(ninshi.getJigyoshaMeisho());
         entity.set入所施設事業者コード(ninshi.getNyushoShisetsuCode().getColumnValue());
         entity.set入所施設事業者名称(ninshi.getJigyoshaName().getColumnValue());
+        entityList.add(entity);
+        twonin.setTongzhiShu(entityList);
     }
 
     /**
      * 2.3
      */
-    private ShinseiShoEntity TherrNinshi(ShinseiShoEntity entity, NinshiuUpdateEntity ninshi) {
+    private ShinseiShoEntity KoshinShinseNinshi(ShinseiShoEntity entity, NinshiuUpdateEntity ninshi) {
         entity.set市町村名称(ninshi.getShichosonMeisho());
         entity.set被保険者番号第1桁(ninshi.getHihokenshaNo().substring(ZERO, ONE));
         entity.set被保険者番号第2桁(ninshi.getHihokenshaNo().substring(ONE, TWO));
@@ -417,6 +479,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
         entity.set有効終了年YYYY(ninshi.getNinteiYukoKikanShuryoYMD().wareki().getYear());
         entity.set有効終了月MM(ninshi.getNinteiYukoKikanShuryoYMD().wareki().getMonth());
         entity.set有効終了日DD(ninshi.getNinteiYukoKikanShuryoYMD().wareki().getDay());
+
         return entity;
     }
 
@@ -450,13 +513,13 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
     }
 
     private RString get申請区分_法令(Code code) {
-        if (NinteiShinseiHoreiCode.職権.getコード().equals(code)) {
+        if (code.getColumnValue().equals(NinteiShinseiHoreiCode.職権.getコード())) {
             return 職権;
-        } else if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(code)) {
+        } else if (code.getColumnValue().equals(NinteiShinseiHoreiCode.区分変更申請.getコード())) {
             return 区分変更申請;
-        } else if (NinteiShinseiHoreiCode.新規申請.getコード().equals(code)) {
+        } else if (code.getColumnValue().equals(NinteiShinseiHoreiCode.新規申請.getコード())) {
             return 新規申請;
-        } else if (NinteiShinseiHoreiCode.更新申請.getコード().equals(code)) {
+        } else if (code.getColumnValue().equals(NinteiShinseiHoreiCode.更新申請.getコード())) {
             return 更新申請;
         } else {
             return RString.EMPTY;
@@ -464,21 +527,21 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
     }
 
     private RString get申請区分_申請時(Code code) {
-        if (NinteiShinseiShinseijiKubunCode.職権.getコード().equals(code)) {
+        if (code.getColumnValue().equals(NinteiShinseiShinseijiKubunCode.職権.getコード())) {
             return 職権;
-        } else if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(code)) {
+        } else if (code.getColumnValue().equals(NinteiShinseiShinseijiKubunCode.区分変更申請.getコード())) {
             return 区分変更申請;
-        } else if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(code)) {
+        } else if (code.getColumnValue().equals(NinteiShinseiShinseijiKubunCode.新規申請.getコード())) {
             return 新規申請;
-        } else if (NinteiShinseiShinseijiKubunCode.新規申請_事前.getコード().equals(code)) {
+        } else if (code.getColumnValue().equals(NinteiShinseiShinseijiKubunCode.新規申請_事前.getコード())) {
             return 新規申請_事前;
-        } else if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(code)) {
+        } else if (code.getColumnValue().equals(NinteiShinseiShinseijiKubunCode.更新申請.getコード())) {
             return 更新申請;
-        } else if (NinteiShinseiShinseijiKubunCode.更新申請_事前.getコード().equals(code)) {
+        } else if (code.getColumnValue().equals(NinteiShinseiShinseijiKubunCode.更新申請_事前.getコード())) {
             return 更新申請_事前;
-        } else if (NinteiShinseiShinseijiKubunCode.資格喪失_死亡.getコード().equals(code)) {
+        } else if (code.getColumnValue().equals(NinteiShinseiShinseijiKubunCode.資格喪失_死亡.getコード())) {
             return 資格喪失_死亡;
-        } else if (NinteiShinseiShinseijiKubunCode.転入申請.getコード().equals(code)) {
+        } else if (code.getColumnValue().equals(NinteiShinseiShinseijiKubunCode.転入申請.getコード())) {
             return 転入申請;
         } else {
             return RString.EMPTY;
@@ -486,7 +549,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
     }
 
     private ShinseiShoEntity oneZifang(ShinseiShoEntity entity, Code eCode) {
-        if (eCode.equals(YokaigoJotaiKubun99.要介護1.getコード())) {
+        if (eCode.getColumnValue().equals(YokaigoJotaiKubun99.要介護1.getコード())) {
             entity.set要介護状態区分1(まる);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -494,7 +557,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(RString.EMPTY);
             entity.set要支援状態区分1(RString.EMPTY);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun99.要介護2.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun99.要介護2.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(まる);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -502,7 +565,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(RString.EMPTY);
             entity.set要支援状態区分1(RString.EMPTY);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun99.要介護3.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun99.要介護3.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(まる);
@@ -510,7 +573,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(RString.EMPTY);
             entity.set要支援状態区分1(RString.EMPTY);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun99.要介護4.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun99.要介護4.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -518,7 +581,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(RString.EMPTY);
             entity.set要支援状態区分1(RString.EMPTY);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun99.要介護5.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun99.要介護5.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -531,7 +594,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
     }
 
     private ShinseiShoEntity twoZifang(ShinseiShoEntity entity, Code eCode) {
-        if (eCode.equals(YokaigoJotaiKubun02.要介護1.getコード())) {
+        if (eCode.getColumnValue().equals(YokaigoJotaiKubun02.要介護1.getコード())) {
             entity.set要介護状態区分1(まる);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -539,7 +602,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(RString.EMPTY);
             entity.set要支援状態区分1(RString.EMPTY);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun02.要介護2.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun02.要介護2.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(まる);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -547,7 +610,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(RString.EMPTY);
             entity.set要支援状態区分1(RString.EMPTY);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun02.要介護3.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun02.要介護3.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(まる);
@@ -555,7 +618,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(RString.EMPTY);
             entity.set要支援状態区分1(RString.EMPTY);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun02.要介護4.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun02.要介護4.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -563,7 +626,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(RString.EMPTY);
             entity.set要支援状態区分1(RString.EMPTY);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun02.要介護5.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun02.要介護5.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -576,7 +639,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
     }
 
     private ShinseiShoEntity therrZifang(ShinseiShoEntity entity, Code eCode) {
-        if (eCode.equals(YokaigoJotaiKubun06.要介護1.getコード())) {
+        if (eCode.getColumnValue().equals(YokaigoJotaiKubun06.要介護1.getコード())) {
             entity.set要介護状態区分1(まる);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -584,7 +647,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(RString.EMPTY);
             entity.set要支援状態区分1(RString.EMPTY);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun06.要介護2.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun06.要介護2.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(まる);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -592,7 +655,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(RString.EMPTY);
             entity.set要支援状態区分1(RString.EMPTY);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun06.要介護3.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun06.要介護3.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(まる);
@@ -600,7 +663,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(RString.EMPTY);
             entity.set要支援状態区分1(RString.EMPTY);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun06.要介護4.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun06.要介護4.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -608,7 +671,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(RString.EMPTY);
             entity.set要支援状態区分1(RString.EMPTY);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun06.要介護5.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun06.要介護5.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -616,7 +679,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(まる);
             entity.set要支援状態区分1(RString.EMPTY);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun06.要支援1.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun06.要支援1.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -624,7 +687,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(RString.EMPTY);
             entity.set要支援状態区分1(まる);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun06.要支援2.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun06.要支援2.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -637,7 +700,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
     }
 
     private ShinseiShoEntity fourZifang(ShinseiShoEntity entity, Code eCode) {
-        if (eCode.equals(YokaigoJotaiKubun09.要介護1.getコード())) {
+        if (eCode.getColumnValue().equals(YokaigoJotaiKubun09.要介護1.getコード())) {
             entity.set要介護状態区分1(まる);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -645,7 +708,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(RString.EMPTY);
             entity.set要支援状態区分1(RString.EMPTY);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun09.要介護2.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun09.要介護2.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(まる);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -653,7 +716,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(RString.EMPTY);
             entity.set要支援状態区分1(RString.EMPTY);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun09.要介護3.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun09.要介護3.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(まる);
@@ -661,7 +724,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(RString.EMPTY);
             entity.set要支援状態区分1(RString.EMPTY);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun09.要介護4.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun09.要介護4.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -669,7 +732,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(RString.EMPTY);
             entity.set要支援状態区分1(RString.EMPTY);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun09.要介護5.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun09.要介護5.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -677,7 +740,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(まる);
             entity.set要支援状態区分1(RString.EMPTY);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun09.要支援1.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun09.要支援1.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -685,7 +748,7 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
             entity.set要介護状態区分5(RString.EMPTY);
             entity.set要支援状態区分1(まる);
             entity.set要支援状態区分2(RString.EMPTY);
-        } else if (eCode.equals(YokaigoJotaiKubun09.要支援2.getコード())) {
+        } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun09.要支援2.getコード())) {
             entity.set要介護状態区分1(RString.EMPTY);
             entity.set要介護状態区分2(RString.EMPTY);
             entity.set要介護状態区分3(RString.EMPTY);
@@ -696,4 +759,5 @@ public class NinshiuUpdate extends BatchProcessBase<NinshiuUpdateEntity> {
         }
         return entity;
     }
+
 }

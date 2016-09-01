@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.business.core.sogosyokaifukajyoho;
 
 import java.io.Serializable;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 
@@ -23,4 +24,5 @@ public class FuKaJyoHoBusiness implements Serializable {
     private List<Fuka> 賦課Newest;
     private List<Fuka> 前年の賦課Newest;
     private YMDHMS 基準日時;
+    private ChoshuHoho 介護徴収方法;
 }

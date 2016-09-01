@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002;
+package jp.co.ndensan.reams.db.dbd.business.report.dbd511002;
 
-import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * 通知書発行一覧表Entityです。
+ * 更新申請のお知らせ通知書発行一覧表のEntityです。
  *
- * @reamsid_L DBD-2030-020 x_miaocl
+ * @reamsid_L DBD-1400-030 b_zhengs
  */
-@lombok.Getter
-@lombok.Setter
-@SuppressWarnings("PMD.UnusedPrivateField")
-public class TongzhiShufaxingEntity {
+@Getter
+@Setter
+public class UpdateShenqingEntity {
 
     private RString 抽出対象期間;
     private RString 市町村コード;
@@ -27,6 +27,4 @@ public class TongzhiShufaxingEntity {
     private RString 並び順4;
     private RString 並び順5;
     private RString 印刷時間;
-
-    private List<TongzhiShuEntity> tongzhiShu;
 }
