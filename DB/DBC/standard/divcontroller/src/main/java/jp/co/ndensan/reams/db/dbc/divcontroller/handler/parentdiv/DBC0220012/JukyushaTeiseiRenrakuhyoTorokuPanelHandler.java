@@ -108,9 +108,10 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
             if (処理モード.equals(修正モード_ONE)) {
                 受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.added();
             } else if (処理モード.equals(修正モード_TWO)) {
-                //TODO
+                //TODO QA1429
                 受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.added();
             } else if (処理モード.equals(修正モード_THREE)) {
+                //TODO QA1429
                 受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.added();
             }
             return JukyushaTeiseiRenrakuhyoTorokuManager.createInstance().
