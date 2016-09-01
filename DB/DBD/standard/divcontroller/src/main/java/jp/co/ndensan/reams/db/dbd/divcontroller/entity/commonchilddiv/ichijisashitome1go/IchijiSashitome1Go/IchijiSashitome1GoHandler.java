@@ -399,6 +399,8 @@ public class IchijiSashitome1GoHandler {
             div.getTxtSashitomeTorokuYMD().setReadOnly(true);
             div.getTxtSashitomeTorokuTsuchiHakkoYMD().setReadOnly(true);
             div.getTxtSashitomeNofuKigenYMD().setReadOnly(true);
+            div.getTxtSashitomeKaijoYMD().setDisplayNone(false);
+            div.getTxtSashitomeKaijoYMD().setVisible(true);
             div.getTxtSashitomeKaijoYMD().setDisabled(false);
         } else if (ShoriKubun.toValue(div.getKey_Button()).get名称().equals(_保険料控除登録)) {
             div.getShokanJoho().setTitle(new RString("控除解除"));

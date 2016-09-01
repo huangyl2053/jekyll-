@@ -4,7 +4,7 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hanyolisttokubetsuchiikikasangemmen.IHanyoListTokubetsuChiikiKasanGemmenMapper">
-    <resultMap id="resultMap_HanyoRisutoShakaiFukushiHoujinKeigenEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyolisttokubetsuchiikikasangemmen.TokubetsuChiikiKasanGemmenEntity" autoMapping="true">
+    <resultMap id="resultMap_HanyoListTokubetsuChiikiKasanGemmenEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyolisttokubetsuchiikikasangemmen.TokubetsuChiikiKasanGemmenEntity" autoMapping="true">
         <result property="被保険者台帳管理_市町村コード" column="被保険者台帳管理_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="被保険者台帳管理_広域内住所地特例フラグ" column="被保険者台帳管理_広域内住所地特例フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="被保険者台帳管理_広住特措置元市町村コード" column="被保険者台帳管理_広住特措置元市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -213,7 +213,7 @@
         <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
     </resultMap>
      <select resultOrdered="true" id="get汎用リスト"
-            resultMap="resultMap_HanyoRisutoShakaiFukushiHoujinKeigenEntity"
+            resultMap="resultMap_HanyoListTokubetsuChiikiKasanGemmenEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyolisttokubetsuchiikikasangemmen.TokubetsuChiikiKasanGemmenMybatisParameter"
              fetchSize="500">
      WITH																								

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.kougakugassanshikyuketteitsuchi;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanketteitsuchisho.KogakuGassanShikyuKetteiTsuchishoEntity;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanketteitsuchisho.KogakuGassanShikyuKetteiTsuchishoOutputEntity;
@@ -63,7 +64,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class KougakuGassanShikyuKetteiTsuchi {
 
     private final MapperProvider mapperProvider;
-    private static final ReportId 通知文情報帳票ID = new ReportId("DBC100053_GassanKetteiTsuchisho");
+    private static final ReportId 帳票分類ID = new ReportId("DBC100053_GassanKetteiTsuchisho");
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
@@ -112,10 +113,12 @@ public class KougakuGassanShikyuKetteiTsuchi {
         if (list.isEmpty()) {
             return null;
         }
+        List<RString> 業務固有キーリスト = new ArrayList<>();
+        業務固有キーリスト.add(list.get(0).get業務固有キー());
         IKozaManager iKozaManager = KozaService.createKozaManager();
         IKozaSearchKey iSearchKey = new KozaSearchKeyBuilder().setサブ業務コード(list.get(0).getサブ業務コード())
-                .set業務コード(list.get(0).get業務コード()).set科目コード(list.get(0).get科目コード()).
-                set業務別主キー(list.get(0).get業務固有キー()).set用途区分(list.get(0).get用途区分()).build();
+                .set業務コード(list.get(0).get業務コード()).set科目コード(list.get(0).get科目コード())
+                .set業務固有キーリスト(業務固有キーリスト).set用途区分(list.get(0).get用途区分()).build();
         return iKozaManager.get口座(iSearchKey).isEmpty() ? null : iKozaManager.get口座(iSearchKey).get(0);
     }
 
@@ -159,17 +162,17 @@ public class KougakuGassanShikyuKetteiTsuchi {
         entity.set被保険者氏名(被保険者氏名);
         ChohyoSeigyoHanyoManager manager = new ChohyoSeigyoHanyoManager();
         ChohyoSeigyoHanyo 帳票制御汎用_取り消し線
-                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 取り消し線);
+                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 帳票分類ID, FlexibleYear.MIN, 取り消し線);
         ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル
-                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 帳票タイトル);
+                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 帳票分類ID, FlexibleYear.MIN, 帳票タイトル);
         ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル_抹消線あり１
-                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 帳票タイトル_抹消線あり１);
+                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 帳票分類ID, FlexibleYear.MIN, 帳票タイトル_抹消線あり１);
         ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル_抹消線あり２
-                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 帳票タイトル_抹消線あり２);
+                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 帳票分類ID, FlexibleYear.MIN, 帳票タイトル_抹消線あり２);
         ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル_抹消線あり３
-                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 帳票タイトル_抹消線あり３);
+                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 帳票分類ID, FlexibleYear.MIN, 帳票タイトル_抹消線あり３);
         ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル_抹消線あり４
-                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 帳票タイトル_抹消線あり４);
+                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 帳票分類ID, FlexibleYear.MIN, 帳票タイトル_抹消線あり４);
         if (取り消し線を編集しない.equals(帳票制御汎用_取り消し線.get設定値())) {
             entity.setTitle(帳票制御汎用_帳票タイトル.get設定値());
         } else if (取り消し線を編集する.equals(帳票制御汎用_取り消し線.get設定値())) {
@@ -210,7 +213,7 @@ public class KougakuGassanShikyuKetteiTsuchi {
         builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
         IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(builder.build());
         ChohyoSeigyoKyotsu 帳票共通情報
-                = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 通知文情報帳票ID);
+                = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票分類ID);
         EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(宛先, 地方公共団体, 帳票共通情報);
         SofubutsuAtesakiSource 送付物宛先 = null;
         if (編集後宛先 != null && 編集後宛先.getSofubutsuAtesakiSource() != null) {
@@ -234,7 +237,7 @@ public class KougakuGassanShikyuKetteiTsuchi {
 
     private RString get通知文文章(int パターン番号, int 項目番号) {
         TsuchishoTeikeibunFinder finder = new TsuchishoTeikeibunFinder();
-        TsuchishoTeikeibun tsuchishoTeikeibun = finder.get通知書定型文_最新適用開始日(SubGyomuCode.DBC介護給付, 通知文情報帳票ID,
+        TsuchishoTeikeibun tsuchishoTeikeibun = finder.get通知書定型文_最新適用開始日(SubGyomuCode.DBC介護給付, 帳票分類ID,
                 KamokuCode.EMPTY, パターン番号, 項目番号);
         if (tsuchishoTeikeibun != null) {
             return tsuchishoTeikeibun.get文章();
@@ -251,7 +254,7 @@ public class KougakuGassanShikyuKetteiTsuchi {
         IKozaSearchKey searchKey = new KozaSearchKeyBuilder().setサブ業務コード(SubGyomuCode.DBC介護給付)
                 .set業務コード(GyomuCode.DB介護保険).set識別コード(識別コード).set口座ID(口座情報.get口座ID()).build();
         IKozaManager iKozaManager = KozaService.createKozaManager();
-        if (chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, 通知文情報帳票ID).is口座マスク有無()) {
+        if (chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票分類ID).is口座マスク有無()) {
             口座 = iKozaManager.getマスク済口座(searchKey).isEmpty() ? null : iKozaManager.getマスク済口座(searchKey).get(0);
         } else {
             口座 = iKozaManager.get口座(searchKey).isEmpty() ? null : iKozaManager.get口座(searchKey).get(0);

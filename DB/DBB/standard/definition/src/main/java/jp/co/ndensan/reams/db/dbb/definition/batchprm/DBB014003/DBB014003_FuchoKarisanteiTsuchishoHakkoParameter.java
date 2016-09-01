@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisanteitsuchishohakko;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB014003;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.processprm.fuchokarisanteitsuchishohakko.FuchoKarisanteiTsuchishoHakkoProcessParameter;
+import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb014003.FuchoKarisanteiTsuchishoHakkoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class FuchoKarisanteiTsuchishoHakkoBatchParameter extends BatchParameterBase {
+public class DBB014003_FuchoKarisanteiTsuchishoHakkoParameter extends BatchParameterBase {
 
     private static final String CHOTEINENDO = "調定年度";
     private static final String FUKANENDO = "賦課年度";
@@ -62,11 +62,12 @@ public class FuchoKarisanteiTsuchishoHakkoBatchParameter extends BatchParameterB
     /**
      * processのパラメータを生成します。
      *
+     * @param システム日時 YMDHMS
      * @return processパラメータ
      */
-    public FuchoKarisanteiTsuchishoHakkoProcessParameter toProcessParam() {
+    public FuchoKarisanteiTsuchishoHakkoProcessParameter toProcessParam(YMDHMS システム日時) {
         return new FuchoKarisanteiTsuchishoHakkoProcessParameter(
-                RDate.getNowDateTime(),
+                システム日時,
                 調定年度,
                 賦課年度,
                 出力帳票一覧List,

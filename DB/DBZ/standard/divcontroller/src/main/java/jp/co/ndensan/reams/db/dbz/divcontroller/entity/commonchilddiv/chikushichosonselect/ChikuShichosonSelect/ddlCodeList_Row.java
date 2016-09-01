@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chikushic
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Aug 29 11:36:58 CST 2016
+ * Wed Aug 31 10:28:57 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
