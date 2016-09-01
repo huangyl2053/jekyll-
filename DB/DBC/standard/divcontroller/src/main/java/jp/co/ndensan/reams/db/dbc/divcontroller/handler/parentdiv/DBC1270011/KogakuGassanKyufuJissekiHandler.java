@@ -145,7 +145,7 @@ public class KogakuGassanKyufuJissekiHandler {
         }
         if (!チェックオフデータ.isEmpty()) {
             Collections.sort(チェックオフデータ, new KogakuGassanKyufuJissekiHandler.DateComparator());
-            for (KogakuGassanKyufuJisseki 高額合算給付実績 : 高額合算給付実績情報) {
+            for (KogakuGassanKyufuJisseki 高額合算給付実績 : チェックオフデータ) {
                 if (高額合算給付実績件数 == 0) {
                     最大整理番号 = 高額合算給付実績.get整理番号();
                     チェックオフ.add(高額合算給付実績);
