@@ -18,11 +18,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -87,15 +85,6 @@ public class ShoriDateKanriProcess extends BatchProcessBase<KoseiShichosonMaster
             dbT7022entity.setTaishoKaishiTimestamp(YMDHMS.now());
         } else {
             dbT7022entity.setTaishoKaishiTimestamp(new YMDHMS(RDate.getNowDate(), parameter.get今回抽出開始時分秒()));
-        }
-        if (dbT7022entity.getShichosonCode() == null) {
-            dbT7022entity.setShichosonCode(LasdecCode.EMPTY);
-        }
-        if (dbT7022entity.getNendo() == null) {
-            dbT7022entity.setNendo(FlexibleYear.EMPTY);
-        }
-        if (dbT7022entity.getNendoNaiRenban() == null) {
-            dbT7022entity.setNendoNaiRenban(RString.EMPTY);
         }
         return dbT7022entity;
     }
