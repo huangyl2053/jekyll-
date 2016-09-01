@@ -28,11 +28,6 @@ public final class KoshinShinseiOshiraseTshuchishoReport extends Report<KoshinSh
         this.認定更新お知らせ通知書Entity = 認定更新お知らせ通知書Entity;
     }
 
-    /**
-     * writeBy
-     *
-     * @param writer ReportSourceWriter
-     */
     @Override
     public void writeBy(ReportSourceWriter<KoshinShinseiOshiraseTshuchishoReportSource> writer) {
         IKoshinShinseiOshiraseTshuchishoEditor editor = new KoshinShinseiOshiraseTshuchishoEditor(認定更新お知らせ通知書Entity);
