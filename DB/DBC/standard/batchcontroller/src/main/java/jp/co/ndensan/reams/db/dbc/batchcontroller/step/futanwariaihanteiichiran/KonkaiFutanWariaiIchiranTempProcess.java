@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KonkaiFutanWariaiIchiranTempProcess extends BatchKeyBreakBase<KonkaiRiyoshaFutanWariaiJohoTempEntity> {
 
-    private static final RString 対象区分 = new RString("3");
+    private static final RString 対象区分 = new RString("1");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaihanteiichiran.IFutanwariaiHanteiIchiranMapper.get今回利用者負担割合判定");
     private static final RString 今回利用者負担割合判定TEMP = new RString("RiyoshaFutanWariaiHanteiTemp");

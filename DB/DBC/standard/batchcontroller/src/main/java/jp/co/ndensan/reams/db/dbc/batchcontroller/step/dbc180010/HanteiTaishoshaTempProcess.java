@@ -64,6 +64,7 @@ public class HanteiTaishoshaTempProcess extends BatchProcessBase<JukyushaDaichoT
         hanteiTaishoshaTempEntity.setNinteiYukoShuryoDate(entity.getNinteiYukoKikanShuryoYMD());
         hanteiTaishoshaTempEntity.setNinteiDate(entity.getNinteiYMD());
         hanteiTaishoshaTempEntity.setYoKaigoninteiJoutaiKubunCode(entity.getYokaigoJotaiKubunCode().value());
+        hanteiTaishoshaTempEntity.setKyuSochishaFlag(entity.isKyuSochishaFlag());
         hanteiTaishoshaTempEntity.setShotokuNendo(entity.getShotokuNendo());
         hanteiTaishoshaTempEntity.setShotokuRirekiNo(new RString(entity.getRirekiNoInt()));
         hanteiTaishoshaTempEntity.setKazeiKubun(entity.getKazeiKubun());
