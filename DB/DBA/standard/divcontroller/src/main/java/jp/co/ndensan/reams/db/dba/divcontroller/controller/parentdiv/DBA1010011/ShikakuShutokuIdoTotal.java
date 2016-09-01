@@ -91,6 +91,10 @@ public class ShikakuShutokuIdoTotal {
         ShiKaKuSyuToKuIdouTotalHandler handler = createHandler(div);
         handler.load(ViewStateHolder.get(ViewStateKeys.資格取得異動_状態_被保履歴タブ, RString.class));
 
+        if (!handler.is資格取得可能()) {
+            releaseLock(div);
+            return setNotExecutableAndReturnMessage(div, handler.get資格取得不可時エラーメッセージ());
+        }
         if (handler.is資格取得中()) {
             releaseLock(div);
             return setNotExecutableAndReturnMessage(div, DbzInformationMessages.資格取得済み.getMessage());
@@ -289,25 +293,25 @@ public class ShikakuShutokuIdoTotal {
      */
     public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnKakutei(ShikakuShutokuIdoTotalDiv div) {
         ResponseData<ShikakuShutokuIdoTotalDiv> response = new ResponseData<>();
-        
+
         dgShikakuShutokuRireki_Row row = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridSelectItem();
         List<dgShikakuShutokuRireki_Row> rowList = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
                 .getCcdShikakuTokusoRireki().getDataGridDataSource();
-        
+
         // 入力チェック
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         // 必須チェック
         if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
-                    getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
+                getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(validationErrorMessage.取得日,
-                            div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate()));
+                    div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate()));
         }
         if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
-                    getShikakuShutokuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()) {
+                getShikakuShutokuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(validationErrorMessage.届出日,
-                            div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate()));
+                    div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate()));
         }
-        
+
         if (!rowList.isEmpty()) {
             TextBoxFlexibleDate compareToDate;
             if (row == null) {
@@ -329,7 +333,7 @@ public class ShikakuShutokuIdoTotal {
         if (validPairs.existsError()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        
+
         if (row != null && !RString.isNullOrEmpty(row.getState())) {
             row.getShutokuDate().setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
                     .getShikakuShutokuInput().getTxtShutokuDate().getValue());
@@ -473,8 +477,9 @@ public class ShikakuShutokuIdoTotal {
             return message;
         }
     }
-    
+
     private enum validationErrorMessage implements IValidationMessage {
+
         取得日(UrErrorMessages.必須, "取得日"),
         届出日(UrErrorMessages.必須, "届出日"),
         期間が不正_過去日付不可(DbzErrorMessages.期間が不正_過去日付不可, "取得日", "履歴の喪失日");

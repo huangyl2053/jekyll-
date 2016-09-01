@@ -72,15 +72,19 @@ public class ShikakuSoshitsuIdoTotal {
             return setNotExecutableAndReturnMessage(div, UrInformationMessages.該当データなし.getMessage());
         }
         if (hihokenshaNo == null || hihokenshaNo.isEmpty()) {
-            return setNotExecutableAndReturnMessage(div, UrInformationMessages.該当データなし.getMessage());
+            return setNotExecutableAndReturnMessage(div, UrInformationMessages.該当データなし_データ内容.getMessage().replace("被保険者番号未設定のため、"));
         }
-
+        
         createHandler(div).load(ViewStateHolder.get(ViewStateKeys.資格喪失異動_状態_被保履歴タブ, RString.class));
         if (!RealInitialLocker.tryGetLock(create排他キー())) {
             div.setReadOnly(true);
             throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
         }
 
+        if (!createHandler(div).is資格喪失可能()) {
+            releaseLock(div);
+            return setNotExecutableAndReturnMessage(div, createHandler(div).get資格喪失不可時エラーメッセージ());
+        }
         if (createHandler(div).is資格喪失中()) {
             releaseLock(div);
             return setNotExecutableAndReturnMessage(div, DbzInformationMessages.資格喪失済み.getMessage());
