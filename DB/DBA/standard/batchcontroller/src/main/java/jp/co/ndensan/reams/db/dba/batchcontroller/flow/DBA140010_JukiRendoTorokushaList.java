@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.jyukirendotorokushalist.JyukiRendoJouhouProcess;
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.jyukirendotorokushalist.ShoriDateKanriDBUpdateProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA140010.JyukiRendoJouhouProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA140010.ShoriDateKanriDBUpdateProcess;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA140010.DBA140010_JukiRendoTorokushaListParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

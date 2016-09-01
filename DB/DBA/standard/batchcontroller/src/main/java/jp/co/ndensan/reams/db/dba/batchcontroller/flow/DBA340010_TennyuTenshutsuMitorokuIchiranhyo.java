@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.tennyutenshutsumitorokuichiranhyo.TennyuTenshutsuMiTorokuIchiranhyoProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA340010.TennyuTenshutsuMiTorokuIchiranhyoProcess;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA340010.DBA340010_TennyuTenshutsuMitorokuIchiranhyoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

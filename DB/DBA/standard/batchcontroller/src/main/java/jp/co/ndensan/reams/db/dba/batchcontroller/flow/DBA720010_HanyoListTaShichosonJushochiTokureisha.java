@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.hanyolisttashichosonjushochitokureisha.HanyoListTaShichosonJushochiTokureishaProcess;
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.hanyolisttashichosonjushochitokureisha.HanyoListTaShichosonJushochiTokureishaRenbanProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA720010.HanyoListTaShichosonJushochiTokureishaProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA720010.HanyoListTaShichosonJushochiTokureishaRenbanProcess;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA720010.DBA720010_HanyoListTaShichosonJushochiTokureishaParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

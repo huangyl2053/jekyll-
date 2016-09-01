@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.hihohenshashohakkokanribo.HihokenshashoHakkoKanriboNoRenbanProcess;
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.hihohenshashohakkokanribo.HihokenshashoHakkoKanriboProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA110010.HihokenshashoHakkoKanriboNoRenbanProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA110010.HihokenshashoHakkoKanriboProcess;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA110010.DBA110010_HihokenshashoHakkoKanriboParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dba110010.HihokenshashoHakkoKanriboProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;

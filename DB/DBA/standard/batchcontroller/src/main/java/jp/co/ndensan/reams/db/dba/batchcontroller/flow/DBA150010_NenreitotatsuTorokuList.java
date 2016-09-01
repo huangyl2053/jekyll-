@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.nenreitotatsutorokushalist.NenreiTotatsuTorokushaProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA150010.NenreiTotatsuTorokushaProcess;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA150010.DBA150010_NenreitotatsuTorokuListParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

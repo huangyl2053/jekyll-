@@ -5,13 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.atenasealcreate.JukyuNinteiShinseityuIgaiProcess;
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.atenasealcreate.NenreiTotatsuSenTakuShiNaiProcess;
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.atenasealcreate.NenreiTotatsuSenTakuShiTaProcess;
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.atenasealcreate.NenreiTotatsuSenTakuShiTanoCyouHyouProcess;
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.atenasealcreate.ShikakuShutokuCyouHyouProcess;
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.atenasealcreate.ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiCyouHyouProcess;
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.atenasealcreate.ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA090010.JukyuNinteiShinseityuIgaiProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA090010.NenreiTotatsuSenTakuShiNaiProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA090010.NenreiTotatsuSenTakuShiTaProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA090010.NenreiTotatsuSenTakuShiTanoCyouHyouProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA090010.ShikakuShutokuCyouHyouProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA090010.ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiCyouHyouProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA090010.ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiProcess;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA090010.DBA090010_AtenaSeelParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

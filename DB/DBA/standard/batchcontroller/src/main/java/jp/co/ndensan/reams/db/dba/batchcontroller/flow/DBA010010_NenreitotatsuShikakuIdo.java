@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.nenreitotatsushikakuido.HihokenshaDaichoKoshinProcess;
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.nenreitotatsushikakuido.NenreitotatsuJokenUpdateProcess;
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.nenreitotatsushikakuido.ParameterSetProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA010010.HihokenshaDaichoKoshinProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA010010.NenreitotatsuJokenUpdateProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA010010.ParameterSetProcess;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA010010.DBA010010_NenreitotatsuShikakuIdoParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dba010010.HihokenshaDaichoKoshinProcessParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dba010010.NenreitotatsuJokenUpdateProcessParameter;

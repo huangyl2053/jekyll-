@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.hihokenshadaicho.HihokenshaDaichoHakkoIchiranhyoProcess;
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.hihokenshadaicho.HihokenshaDaichoProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA020010.HihokenshaDaichoHakkoIchiranhyoProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA020010.HihokenshaDaichoProcess;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA020010.DBA020010_HihokenshaDaichoIkkatsuParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

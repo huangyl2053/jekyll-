@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.idochecklist.IdoCheckListReportProcess;
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.idochecklist.UpdShoriDateKanriProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA130010.IdoCheckListReportProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA130010.UpdShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA130010.DBA130010_IdoCheckListParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

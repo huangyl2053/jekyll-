@@ -1,6 +1,6 @@
 package jp.co.ndensan.reams.db.dba.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.nenreitoutatsuyoteisha.NenreiToutatsuYoteishaCheckListProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA120010.NenreiToutatsuYoteishaCheckListProcess;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA120010.DBA120010_NenreitotatsuYoteishaListParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
