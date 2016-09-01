@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsu
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -69,10 +68,7 @@ public class MainPanelHandler {
         }
         LockingKey key = new LockingKey(DBCSHIKIBETSUCODE.concat(shikibetsuCode.getColumnValue()).concat(DBCRIREKINO).
                 concat(履歴番号));
-
-        if (!RealInitialLocker.tryGetLock(key)) {
-            throw new PessimisticLockingException();
-        }
+        RealInitialLocker.lock(key);
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         RString 介護導入形態 = shichosonSecurityJoho.get導入形態コード().value();
         if (介護導入形態.equals(コード111)) {
@@ -149,30 +145,17 @@ public class MainPanelHandler {
 
     private void set資格取得事由() {
         List<KeyValueDataSource> dataSources = new ArrayList<>();
-        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.転入));
-        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.年齢到達));
-        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.外国人));
-        dataSources.add(get資格取得事由(ShikakuShutokuJiyu._２号申請));
-        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.他特例居住));
-        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.除外者居住));
-        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.帰化));
-        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.国籍取得));
-        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.職権取得));
-        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.施行時取得));
-        dataSources.add(get資格取得事由(ShikakuShutokuJiyu.その他));
+        for (ShikakuShutokuJiyu code : ShikakuShutokuJiyu.values()) {
+            dataSources.add(get資格取得事由(code));
+        }
         div.getMeisaiPanel().getDdlShikakuShutokuJiyu().setDataSource(dataSources);
     }
 
     private void set資格喪失事由() {
         List<KeyValueDataSource> dataSources = new ArrayList<>();
-        dataSources.add(get資格喪失事由(ShikakuSoshitsuJiyu.転出));
-        dataSources.add(get資格喪失事由(ShikakuSoshitsuJiyu.死亡));
-        dataSources.add(get資格喪失事由(ShikakuSoshitsuJiyu.除外者));
-        dataSources.add(get資格喪失事由(ShikakuSoshitsuJiyu.自特例解除));
-        dataSources.add(get資格喪失事由(ShikakuSoshitsuJiyu.国籍喪失));
-        dataSources.add(get資格喪失事由(ShikakuSoshitsuJiyu.他特例者));
-        dataSources.add(get資格喪失事由(ShikakuSoshitsuJiyu.職権喪失));
-        dataSources.add(get資格喪失事由(ShikakuSoshitsuJiyu.その他));
+        for (ShikakuSoshitsuJiyu code : ShikakuSoshitsuJiyu.values()) {
+            dataSources.add(get資格喪失事由(code));
+        }
         div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().setDataSource(dataSources);
     }
 
