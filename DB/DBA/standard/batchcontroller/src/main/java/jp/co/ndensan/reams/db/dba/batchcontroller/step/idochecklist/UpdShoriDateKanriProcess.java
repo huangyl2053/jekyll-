@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.step.idochecklist;
 
-import jp.co.ndensan.reams.db.dba.definition.processprm.idochecklist.UpdShoriDataKanriProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.processprm.dba130010.UpdShoriDataKanriProcessParameter;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.idochecklist.IIdoCheckListMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;

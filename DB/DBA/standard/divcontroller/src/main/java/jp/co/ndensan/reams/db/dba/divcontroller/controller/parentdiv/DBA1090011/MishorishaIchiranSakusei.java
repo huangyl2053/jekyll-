@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1090011
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.tennyutensyutsumitorokuichiranhyo.TennyuTensyutsuMiTorokuIchiranhyoBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA340010.DBA340010_TennyuTenshutsuMitorokuIchiranhyoParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1090011.MishorishaIchiranSakuseiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1090011.MishorishaIchiranSakuseiHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1090011.MishorishaIchiranSakuseiValidationHandler;
@@ -65,12 +65,12 @@ public class MishorishaIchiranSakusei {
      * @param div MishorishaIchiranSakuseiDiv
      * @return ResponseData<TennyuTensyutsuMiTorokuIchiranhyoBatchParameter>
      */
-    public ResponseData<TennyuTensyutsuMiTorokuIchiranhyoBatchParameter> onClick_btnBatchRegister(
+    public ResponseData<DBA340010_TennyuTenshutsuMitorokuIchiranhyoParameter> onClick_btnBatchRegister(
             MishorishaIchiranSakuseiDiv div) {
         return ResponseData.of(setParameter(div)).respond();
     }
 
-    private TennyuTensyutsuMiTorokuIchiranhyoBatchParameter setParameter(MishorishaIchiranSakuseiDiv div) {
+    private DBA340010_TennyuTenshutsuMitorokuIchiranhyoParameter setParameter(MishorishaIchiranSakuseiDiv div) {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         RString 導入形態コード = 市町村セキュリティ情報.get導入形態コード().value();
         List<LasdecCode> shichosoncode = new ArrayList<>();
@@ -94,7 +94,7 @@ public class MishorishaIchiranSakusei {
         FlexibleDate kaishinichi = div.getBatchParamterInfo().getTxtZenkaiKaishi().getValue();
         FlexibleDate syuryonichi = div.getBatchParamterInfo().getTxtZenkaiKara().getValue();
         Long cyohyosyutsuryokujyunid = div.getBatchParamterInfo().getCcdChohyoShutsuryokujun().get出力順ID();
-        return new TennyuTensyutsuMiTorokuIchiranhyoBatchParameter(shichosoncode, tensyutsusakuseiJiyucode, tennyusakuseijiyucode, kaishinichi,
+        return new DBA340010_TennyuTenshutsuMitorokuIchiranhyoParameter(shichosoncode, tensyutsusakuseiJiyucode, tennyusakuseijiyucode, kaishinichi,
                 syuryonichi, cyohyosyutsuryokujyunid);
     }
 

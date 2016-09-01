@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.batchcontroller.step.atenasealcreate;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.atenasealcreate.AtenaSealCreateResult;
-import jp.co.ndensan.reams.db.dba.definition.processprm.atenasealcreate.AtenaSealCreateProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.processprm.dba090010.AtenaSealCreateProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.AtenaSealCreateRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.DbTAtenaSealCreateTempTableEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.ShorikekkarisutoichijiTBLEntity;

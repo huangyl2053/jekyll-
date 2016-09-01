@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA6020011;
 
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaDaichoIkkatsuSakusei;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hihokenshadaicho.IkkatsuSakuseiBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA020010.DBA020010_HihokenshaDaichoIkkatsuParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6020011.HihokenshaDaichoIkkatsuHakkoPanelDiv;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
@@ -35,8 +35,8 @@ public class HihokenshaDaichoIkkatsuHakkoPanel {
      * @param div 被保険者台帳発行
      * @return ResponseData<IkkatsuSakuseiBatchParameter>
      */
-    public ResponseData<IkkatsuSakuseiBatchParameter> onClick_btnPublishHihokenshaDaicho(HihokenshaDaichoIkkatsuHakkoPanelDiv div) {
-        IkkatsuSakuseiBatchParameter parameter = HihokenshaDaichoIkkatsuSakusei.createHihokenshaDaichoBatchParameter(
+    public ResponseData<DBA020010_HihokenshaDaichoIkkatsuParameter> onClick_btnPublishHihokenshaDaicho(HihokenshaDaichoIkkatsuHakkoPanelDiv div) {
+        DBA020010_HihokenshaDaichoIkkatsuParameter parameter = HihokenshaDaichoIkkatsuSakusei.createHihokenshaDaichoBatchParameter(
                 div.getHihokenshaDaichoHakkoChushutsuJokenPanel().getRadChushutsuSoshitsusha().getSelectedIndex() == 0,
                 div.getHihokenshaDaichoHakkoListPanel().isIsPublish(),
                 div.getCcdChohyoShutsuryokujun().get出力順ID(),

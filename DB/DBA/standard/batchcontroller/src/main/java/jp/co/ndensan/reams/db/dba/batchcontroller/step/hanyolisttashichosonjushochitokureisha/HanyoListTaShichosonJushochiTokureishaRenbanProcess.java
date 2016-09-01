@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.batchcontroller.step.hanyolisttashichosonjush
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hanyolisttashichosonjushochitokureisha.HanyoListTaShichosonJushochiTokureishaResult;
-import jp.co.ndensan.reams.db.dba.definition.processprm.hanyolisttashichosonjushochitokureisha.HanyoListTaShichosonJushochiTokureishaProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.processprm.dba720010.HanyoListTaShichosonJushochiTokureishaProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisttashichosonjushochitokureisha.HanyoListTaShichosonJushochiTokureishaRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisttashichosonjushochitokureisha.HanyoListTaShichosonJushochiTokureishaRenbanCsvEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.step.nenreitotatsushikakuido;
 
-import jp.co.ndensan.reams.db.dba.definition.processprm.nenreitotatsushikakuido.NenreitotatsuJokenUpdateProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.processprm.dba010010.NenreitotatsuJokenUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaichokoshin.HihokenshaDaichoKoshin;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;

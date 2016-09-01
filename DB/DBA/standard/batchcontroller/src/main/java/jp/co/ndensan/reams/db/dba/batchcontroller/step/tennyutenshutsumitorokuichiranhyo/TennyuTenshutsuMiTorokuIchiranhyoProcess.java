@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dba.business.report.tennyutenshutsumitorokuichiran
 import jp.co.ndensan.reams.db.dba.business.report.tennyutenshutsumitorokuichiranhyo.TennyuTenshutsuMiTorokuIchiranhyoReport;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakuidomishorisha.TennyuSakuseiJiyu;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakuidomishorisha.TenshutsuSakuseiJiyu;
-import jp.co.ndensan.reams.db.dba.definition.processprm.tennyutensyutsumitorokuichiranhyo.TennyuTensyutsuMiTorokuIchiranhyoProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.processprm.dba340010.TennyuTensyutsuMiTorokuIchiranhyoProcessParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshuhosyutaisyosya.TennyuHosyutaiSyosyaEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshuhosyutaisyosya.TennyuTenshutsuMitorokuIchiranhyoEucCsvEntity;
