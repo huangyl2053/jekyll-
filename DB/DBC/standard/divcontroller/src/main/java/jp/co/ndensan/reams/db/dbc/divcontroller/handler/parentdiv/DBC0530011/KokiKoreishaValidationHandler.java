@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0530011;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.MainPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.MainPanelDivSpec;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.KokiKoreishaDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.KokiKoreishaDivSpec;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * @reamsid_L DBD-5740-010 liuyl
  */
-public class MainPanelValidationHandler {
+public class KokiKoreishaValidationHandler {
 
     /**
      * 資格期間大小関係チェック
@@ -30,9 +30,9 @@ public class MainPanelValidationHandler {
      * @param div KoshinShinseishaHaakuListDiv
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs 資格期間大小関係チェック(ValidationMessageControlPairs pairs, MainPanelDiv div) {
+    public ValidationMessageControlPairs 資格期間大小関係チェック(ValidationMessageControlPairs pairs, KokiKoreishaDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(MainPanelDivSpec.資格期間大小関係チェック)
+        messages.add(ValidateChain.validateStart(div).ifNot(KokiKoreishaDivSpec.資格期間大小関係チェック)
                 .thenAdd(NoInputMessages.資格期間大小関係チェック).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.資格期間大小関係チェック, div.getMeisaiPanel().getTxtShikakuShutokuYMD(), div.getMeisaiPanel().
@@ -47,9 +47,9 @@ public class MainPanelValidationHandler {
      * @param div KoshinShinseishaHaakuListDiv
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs 保険者適用期間大小関係チェック(ValidationMessageControlPairs pairs, MainPanelDiv div) {
+    public ValidationMessageControlPairs 保険者適用期間大小関係チェック(ValidationMessageControlPairs pairs, KokiKoreishaDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(MainPanelDivSpec.保険者適用期間大小関係チェック)
+        messages.add(ValidateChain.validateStart(div).ifNot(KokiKoreishaDivSpec.保険者適用期間大小関係チェック)
                 .thenAdd(NoInputMessages.保険者適用期間大小関係チェック).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.保険者適用期間大小関係チェック, div.getMeisaiPanel().getTxtHokenshaKaishiYMD(), div.getMeisaiPanel().

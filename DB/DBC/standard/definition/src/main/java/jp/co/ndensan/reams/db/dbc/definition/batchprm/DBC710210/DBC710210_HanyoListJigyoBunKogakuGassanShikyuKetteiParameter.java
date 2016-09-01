@@ -36,29 +36,29 @@ public class DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter extend
     private static final String KEY_KIKANMEI = "金融機関名";
     private static final String KEY_TAISHONENDO = "対象年度";
 
-    @BatchParameter(key = "KEY_REPORTID", name = "帳票ID")
+    @BatchParameter(key = KEY_REPORTID, name = "帳票ID")
     private RString 帳票ID;
-    @BatchParameter(key = "KEY_SHUTSURYOKUJUNID", name = "出力順ID")
+    @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = "出力順ID")
     private long 出力順ID;
-    @BatchParameter(key = "KEY_SHUTSURYOKUJUNKOMOKUID", name = "出力順項目ID")
+    @BatchParameter(key = KEY_SHUTSURYOKUJUNKOMOKUID, name = "出力順項目ID")
     private RString 出力順項目ID;
-    @BatchParameter(key = "KEY_KOMOUKUMEI", name = "is項目名付加")
+    @BatchParameter(key = KEY_KOMOUKUMEI, name = "is項目名付加")
     private boolean is項目名付加;
-    @BatchParameter(key = "KEY_RENBANFUKA", name = "is連番付加")
+    @BatchParameter(key = KEY_RENBANFUKA, name = "is連番付加")
     private boolean is連番付加;
-    @BatchParameter(key = "KEY_ISDATEEDIT", name = "is日付編集")
+    @BatchParameter(key = KEY_ISDATEEDIT, name = "is日付編集")
     private boolean is日付編集;
-    @BatchParameter(key = "KEY_HONKENSHACODE", name = "保険者コード")
+    @BatchParameter(key = KEY_HONKENSHACODE, name = "保険者コード")
     private RString 保険者コード;
-    @BatchParameter(key = "KEY_SHIKYUKUBUN", name = "支給区分")
+    @BatchParameter(key = KEY_SHIKYUKUBUN, name = "支給区分")
     private List<RString> 支給区分List;
-    @BatchParameter(key = "KEY_SHIHARAIHOHOKUBUN", name = "支払方法区分")
+    @BatchParameter(key = KEY_SHIHARAIHOHOKUBUN, name = "支払方法区分")
     private List<RString> 支払方法区分List;
-    @BatchParameter(key = "KEY_KIKANCODE", name = "金融機関コード")
+    @BatchParameter(key = KEY_KIKANCODE, name = "金融機関コード")
     private RString 金融機関コード;
-    @BatchParameter(key = "KEY_KIKANMEI", name = "金融機関名")
+    @BatchParameter(key = KEY_KIKANMEI, name = "金融機関名")
     private RString 金融機関名;
-    @BatchParameter(key = "KEY_TAISHONENDO", name = "対象年度")
+    @BatchParameter(key = KEY_TAISHONENDO, name = "対象年度")
     private RString 対象年度;
 
     /**
