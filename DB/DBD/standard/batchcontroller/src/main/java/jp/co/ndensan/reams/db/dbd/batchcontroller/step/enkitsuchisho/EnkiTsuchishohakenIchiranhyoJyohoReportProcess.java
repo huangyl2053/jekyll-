@@ -58,7 +58,7 @@ public class EnkiTsuchishohakenIchiranhyoJyohoReportProcess extends BatchKeyBrea
 
     @Override
     protected IBatchReader createReader() {
-        if (!導入形態コード120.equals(ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get導入形態コード().getColumnValue())) {
+        if (導入形態コード120.equals(ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get導入形態コード().getColumnValue())) {
             return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toEnkiTsuchishohakenIchiranhyoJyohoMybatisParameter());
         } else {
             return new BatchDbReader(MYBATIS_SELECT_ID_2, parameter.toEnkiTsuchishohakenIchiranhyoJyohoMybatisParameter());
