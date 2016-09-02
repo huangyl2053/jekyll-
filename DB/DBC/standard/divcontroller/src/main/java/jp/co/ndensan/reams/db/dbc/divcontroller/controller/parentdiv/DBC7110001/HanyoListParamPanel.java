@@ -36,7 +36,7 @@ public class HanyoListParamPanel {
      * 初期化処理です。
      *
      * @param div HanyoListParamPanelDiv
-     * @return ResponseData
+     * @return ResponseData<HanyoListParamPanelDiv>
      */
     public ResponseData<HanyoListParamPanelDiv> onLoad(HanyoListParamPanelDiv div) {
         RString 導入形態 = get導入形態();
@@ -54,7 +54,7 @@ public class HanyoListParamPanel {
      * 再審査申立情報の条件を復元する。
      *
      * @param div HanyoListParamPanelDiv
-     * @return ResponseData
+     * @return ResponseData<HanyoListParamPanelDiv>
      */
     public ResponseData<HanyoListParamPanelDiv> onClick_HanyoListSaishinsaMoshitate(HanyoListParamPanelDiv div) {
         RString 導入形態 = get導入形態();
@@ -66,7 +66,7 @@ public class HanyoListParamPanel {
      * 再審査申立情報の条件を保存する。
      *
      * @param div HanyoListParamPanelDiv
-     * @return responseData
+     * @return ResponseData<BatchParameterMap>
      */
     public ResponseData<BatchParameterMap> onClick_HanyoListSaishinsaMoshitateParamSave(HanyoListParamPanelDiv div) {
         RString 導入形態 = get導入形態();
@@ -79,7 +79,7 @@ public class HanyoListParamPanel {
      * 再審査結果情報の条件を復元する。
      *
      * @param div HanyoListParamPanelDiv
-     * @return ResponseData
+     * @return ResponseData<HanyoListParamPanelDiv>
      */
     public ResponseData<HanyoListParamPanelDiv> onClick_HanyoListSaishinsaKekka(HanyoListParamPanelDiv div) {
         RString 導入形態 = get導入形態();
@@ -91,7 +91,7 @@ public class HanyoListParamPanel {
      * 再審査結果情報の条件を保存する。
      *
      * @param div HanyoListParamPanelDiv
-     * @return ResponseData
+     * @return ResponseData<BatchParameterMap>
      */
     public ResponseData<BatchParameterMap> onClick_HanyoListSaishinsaKekkaParamSave(HanyoListParamPanelDiv div) {
         RString 導入形態 = get導入形態();
@@ -104,7 +104,7 @@ public class HanyoListParamPanel {
      * 再審査申立情報の実行です。
      *
      * @param div HanyoListParamPanelDiv
-     * @return ResponseData
+     * @return ResponseData<DBC710110_HanyoListSaishinsaMoshitateParameter>
      */
     public ResponseData<DBC710110_HanyoListSaishinsaMoshitateParameter> onClick_btnExecuteMoshitate(HanyoListParamPanelDiv div) {
         RString 導入形態 = get導入形態();
@@ -115,7 +115,7 @@ public class HanyoListParamPanel {
      * 再審査結果情報の実行です。
      *
      * @param div HanyoListParamPanelDiv
-     * @return ResponseData
+     * @return ResponseData<DBC710120_HanyoListSaishinsaKekkaParameter>
      */
     public ResponseData<DBC710120_HanyoListSaishinsaKekkaParameter> onClick_btnExecuteKekka(HanyoListParamPanelDiv div) {
         RString 導入形態 = get導入形態();

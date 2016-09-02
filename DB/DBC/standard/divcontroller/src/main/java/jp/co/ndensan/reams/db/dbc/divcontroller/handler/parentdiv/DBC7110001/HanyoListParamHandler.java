@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710120.DBC710120_HanyoL
 import jp.co.ndensan.reams.db.dbc.definition.core.kagomoshitate.KagoMoshitateKekka_HokenshaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7110001.HanyoListParamPanelDiv;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -32,9 +33,6 @@ public class HanyoListParamHandler {
     private static final RString 再審査申立情報 = new RString("再審査申立情報");
     private static final RString 再審査結果情報 = new RString("再審査結果情報");
     private static final RString 保険者区分_経過措置_総合事業費 = new RString("3");
-    private static final RString 項目名付加 = new RString("1");
-    private static final RString 連番付加 = new RString("2");
-    private static final RString 日付編集 = new RString("3");
     private final HanyoListParamPanelDiv div;
 
     /**
@@ -49,8 +47,8 @@ public class HanyoListParamHandler {
     /**
      * 初期化処理です。
      *
-     * @param 導入形態 RString
-     * @param モード RString
+     * @param 導入形態 導入形態
+     * @param モード モード
      */
     public void initialize(RString 導入形態, RString モード) {
         if (単一.equals(導入形態)) {
@@ -84,25 +82,25 @@ public class HanyoListParamHandler {
     /**
      * 再審査申立情報の条件を保存する。
      *
-     * @param 導入形態 RString
-     * @return param
+     * @param 導入形態 導入形態
+     * @return DBC710110_HanyoListSaishinsaMoshitateParameter
      */
     public DBC710110_HanyoListSaishinsaMoshitateParameter hanyoListSaishinsaMoshitateParamSave(RString 導入形態) {
         DBC710110_HanyoListSaishinsaMoshitateParameter param = new DBC710110_HanyoListSaishinsaMoshitateParameter();
         param.setShutsuryokujunId(div.getCcdShutsuryokujun().get出力順ID());
         param.setShutsuryokuKomokuId(div.getCcdShutsuryokuKoumoku().get出力項目ID());
         List<RString> list = div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys();
-        if (list.contains(項目名付加)) {
+        if (list.contains(CSVSettings.項目名付加.getコード())) {
             param.setKomokumeiFuka(true);
         } else {
             param.setKomokumeiFuka(false);
         }
-        if (list.contains(連番付加)) {
+        if (list.contains(CSVSettings.連番付加.getコード())) {
             param.setRenbanFuka(true);
         } else {
             param.setRenbanFuka(false);
         }
-        if (list.contains(日付編集)) {
+        if (list.contains(CSVSettings.日付スラッシュ編集.getコード())) {
             param.setHitsukeHenshu(true);
         } else {
             param.setHitsukeHenshu(false);
@@ -124,7 +122,7 @@ public class HanyoListParamHandler {
     /**
      * 再審査申立情報の条件を復元する。
      *
-     * @param 導入形態 RString
+     * @param 導入形態 導入形態
      */
     public void hanyoListSaishinsaMoshitate(RString 導入形態) {
         BatchParameterMap restoreBatchParameterMap = div.getBtnHanyoListSaishinsaMoshitateParamRestore().getRestoreBatchParameterMap();
@@ -135,15 +133,15 @@ public class HanyoListParamHandler {
         List<RString> 編集方法 = new ArrayList<>();
         boolean is項目名付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("komokumeiFuka"));
         if (is項目名付加) {
-            編集方法.add(項目名付加);
+            編集方法.add(CSVSettings.項目名付加.getコード());
         }
         boolean is連番付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("renbanFuka"));
         if (is連番付加) {
-            編集方法.add(連番付加);
+            編集方法.add(CSVSettings.連番付加.getコード());
         }
         boolean is日付編集 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("hitsukeHenshu"));
         if (is日付編集) {
-            編集方法.add(日付編集);
+            編集方法.add(CSVSettings.日付スラッシュ編集.getコード());
         }
         div.getChkCsvHenshuHoho().setSelectedItemsByKey(編集方法);
         if (広域.equals(導入形態)) {
@@ -155,25 +153,25 @@ public class HanyoListParamHandler {
     /**
      * 再審査結果情報の条件を保存する。
      *
-     * @param 導入形態 RString
-     * @return param
+     * @param 導入形態 導入形態
+     * @return DBC710120_HanyoListSaishinsaKekkaParameter
      */
     public DBC710120_HanyoListSaishinsaKekkaParameter hanyoListSaishinsaKekkaParamSave(RString 導入形態) {
         DBC710120_HanyoListSaishinsaKekkaParameter param = new DBC710120_HanyoListSaishinsaKekkaParameter();
         param.setShutsuryokujunId(div.getCcdShutsuryokujun().get出力順ID());
         param.setShutsuryokuKomokuId(div.getCcdShutsuryokuKoumoku().get出力項目ID());
         List<RString> list = div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys();
-        if (list.contains(項目名付加)) {
+        if (list.contains(CSVSettings.項目名付加.getコード())) {
             param.setKomokumeiFuka(true);
         } else {
             param.setKomokumeiFuka(false);
         }
-        if (list.contains(連番付加)) {
+        if (list.contains(CSVSettings.連番付加.getコード())) {
             param.setRenbanFuka(true);
         } else {
             param.setRenbanFuka(false);
         }
-        if (list.contains(日付編集)) {
+        if (list.contains(CSVSettings.日付スラッシュ編集.getコード())) {
             param.setHitsukeHenshu(true);
         } else {
             param.setHitsukeHenshu(false);
@@ -196,7 +194,7 @@ public class HanyoListParamHandler {
     /**
      * 再審査結果情報の条件を復元する。
      *
-     * @param 導入形態 RString
+     * @param 導入形態 導入形態
      */
     public void hanyoListSaishinsaKekka(RString 導入形態) {
         BatchParameterMap restoreBatchParameterMap = div.getBtnHanyoListSaishinsaKekkaParamRestore().getRestoreBatchParameterMap();
@@ -207,15 +205,15 @@ public class HanyoListParamHandler {
         List<RString> 編集方法 = new ArrayList<>();
         boolean is項目名付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("komokumeiFuka"));
         if (is項目名付加) {
-            編集方法.add(項目名付加);
+            編集方法.add(CSVSettings.項目名付加.getコード());
         }
         boolean is連番付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("renbanFuka"));
         if (is連番付加) {
-            編集方法.add(連番付加);
+            編集方法.add(CSVSettings.連番付加.getコード());
         }
         boolean is日付編集 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("hitsukeHenshu"));
         if (is日付編集) {
-            編集方法.add(日付編集);
+            編集方法.add(CSVSettings.日付スラッシュ編集.getコード());
         }
         div.getChkCsvHenshuHoho().setSelectedItemsByKey(編集方法);
         List<RString> list保険者区分 = new ArrayList<>();
@@ -231,8 +229,8 @@ public class HanyoListParamHandler {
     /**
      * 再審査申立情報の実行です。
      *
-     * @param 導入形態 RString
-     * @return HanyoListSaishinsaMoshitateBatchParameter
+     * @param 導入形態 導入形態
+     * @return DBC710110_HanyoListSaishinsaMoshitateParameter
      */
     public DBC710110_HanyoListSaishinsaMoshitateParameter btnExecuteMoshitate(RString 導入形態) {
         RString 帳票ID = ReportIdDBC.DBC701011.getReportId().value();
@@ -243,13 +241,13 @@ public class HanyoListParamHandler {
         boolean has連番付加 = false;
         boolean has日付編集 = false;
         LasdecCode 保険者コード;
-        if (list.contains(項目名付加)) {
+        if (list.contains(CSVSettings.項目名付加.getコード())) {
             has項目名付加 = true;
         }
-        if (list.contains(連番付加)) {
+        if (list.contains(CSVSettings.連番付加.getコード())) {
             has連番付加 = true;
         }
-        if (list.contains(日付編集)) {
+        if (list.contains(CSVSettings.日付スラッシュ編集.getコード())) {
             has日付編集 = true;
         }
         if (広域.equals(導入形態)) {
@@ -261,7 +259,7 @@ public class HanyoListParamHandler {
         RString 国保連送付年月To = nullToEmpty(div.getTxtKokuhorenSofuNengetu().getToValue());
         RString サービス提供年月From = nullToEmpty(div.getTxtSabisuTeikyoNengetu().getFromValue());
         RString サービス提供年月To = nullToEmpty(div.getTxtSabisuTeikyoNengetu().getToValue());
-        RString 事業者番号 = div.getCcdJigyoshaBango().get施設種類();
+        RString 事業者番号 = div.getCcdJigyoshaBango().getNyuryokuShisetsuKodo();
         return new DBC710110_HanyoListSaishinsaMoshitateParameter(
                 帳票ID,
                 出力順ID,
@@ -280,8 +278,8 @@ public class HanyoListParamHandler {
     /**
      * 再審査結果情報の実行です。
      *
-     * @param 導入形態 RString
-     * @return HanyoListSaishinsaKekkaBatchParameter
+     * @param 導入形態 導入形態
+     * @return DBC710120_HanyoListSaishinsaKekkaParameter
      */
     public DBC710120_HanyoListSaishinsaKekkaParameter btnExecuteKekka(RString 導入形態) {
         RString 帳票ID = ReportIdDBC.DBC701012.getReportId().value();
@@ -292,13 +290,13 @@ public class HanyoListParamHandler {
         boolean has日付編集 = false;
         LasdecCode 保険者コード;
         List<RString> list = div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys();
-        if (list.contains(項目名付加)) {
+        if (list.contains(CSVSettings.項目名付加.getコード())) {
             has項目名付加 = true;
         }
-        if (list.contains(連番付加)) {
+        if (list.contains(CSVSettings.連番付加.getコード())) {
             has連番付加 = true;
         }
-        if (list.contains(日付編集)) {
+        if (list.contains(CSVSettings.日付スラッシュ編集.getコード())) {
             has日付編集 = true;
         }
         if (広域.equals(導入形態)) {
@@ -311,7 +309,7 @@ public class HanyoListParamHandler {
         List<RString> list保険者区分 = div.getChkHokenshaKubun().getSelectedKeys();
         RString サービス提供年月From = nullToEmpty(div.getTxtSabisuTeikyoNengetu().getFromValue());
         RString サービス提供年月To = nullToEmpty(div.getTxtSabisuTeikyoNengetu().getToValue());
-        RString 事業者番号 = div.getCcdJigyoshaBango().get施設種類();
+        RString 事業者番号 = div.getCcdJigyoshaBango().getNyuryokuShisetsuKodo();
         return new DBC710120_HanyoListSaishinsaKekkaParameter(
                 帳票ID,
                 出力順ID,

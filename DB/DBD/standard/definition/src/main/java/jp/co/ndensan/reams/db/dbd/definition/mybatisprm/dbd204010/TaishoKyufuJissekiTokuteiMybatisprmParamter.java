@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd204010;
 
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.tokuchijissekilist.TargetYearMonth;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -40,7 +41,7 @@ public class TaishoKyufuJissekiTokuteiMybatisprmParamter implements IMyBatisPara
      * @param 事業者番号 事業者番号
      */
     public TaishoKyufuJissekiTokuteiMybatisprmParamter(
-            RString 対象年月,
+            TargetYearMonth 対象年月,
             FlexibleYearMonth 年月範囲の開始, FlexibleYearMonth 年月範囲の終了, JigyoshaNo 事業者番号) {
         this.事業者番号 = 事業者番号;
         this.年月範囲の開始 = 年月範囲の開始;
@@ -49,10 +50,10 @@ public class TaishoKyufuJissekiTokuteiMybatisprmParamter implements IMyBatisPara
         edit事業者番号(事業者番号);
     }
 
-    private void edit対象年月(RString 対象年月) {
-        if (対象年月.equals(サービス提供年月)) {
+    private void edit対象年月(TargetYearMonth 対象年月) {
+        if (サービス提供年月.equals(対象年月.getコード())) {
             is対象年月_サービス提供年月 = true;
-        } else if (対象年月.equals(審査年月)) {
+        } else if (審査年月.equals(対象年月.getコード())) {
             is対象年月_審査年月 = true;
         }
     }

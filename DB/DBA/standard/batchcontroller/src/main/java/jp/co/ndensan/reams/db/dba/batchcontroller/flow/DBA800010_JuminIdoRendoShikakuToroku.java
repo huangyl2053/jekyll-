@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.juminidorendoshikakutoroku.JuminIdoRendoShikakuTorokuProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA800010_.JuminIdoRendoShikakuTorokuProcess;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA800010.DBA800010_JuminIdoRendoShikakuTorokuParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

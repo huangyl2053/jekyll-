@@ -482,6 +482,10 @@ public enum ReportIdDBC {
      */
     DBC200046(new ReportId("DBC200046_SogojigyohiKagoMoshitateshojohoSofuIchiran"), new RString("総合事業費（経過措置）過誤申立書情報送付一覧表")),
     /**
+     * 平均利用額統計表帳票ＩＤです。
+     */
+    DBC300004(new ReportId("DBC300004_HeikinRiyoGakuTokeihyo"), new RString("平均利用額統計表")),
+    /**
      * 介護保険高額サービス費受領委任契約承認（不承認）確認書帳票ＩＤです。
      */
     DBC100031(new ReportId("DBC100031_KogakuServiceHiJyuryoItakuKeiyakuKakuninSho"), new RString("介護保険高額サービス費受領委任契約承認（不承認）確認書"));

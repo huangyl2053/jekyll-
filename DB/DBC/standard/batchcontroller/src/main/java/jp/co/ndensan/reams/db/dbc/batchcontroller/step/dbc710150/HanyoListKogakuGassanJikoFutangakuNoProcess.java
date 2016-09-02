@@ -171,6 +171,9 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     private List<PersonalData> personalDataList;
     private IOutputOrder 出力順;
     private RString eucFilePath;
+    private static final RString デフォルト出力順 = new RString("order by 高額合算自己負担額.\"hihokenshaNo\","
+            + "高額合算自己負担額.\"taishoNendo\",高額合算自己負担額.\"hokenshaNo\",高額合算自己負担額.\"shikyuShinseishoSeiriNo\"");
+
     @BatchWriter
     private CsvWriter<HanyoListKogakuGassanJikoFutangakuNoCsvEntity> eucCsvWriter;
 
@@ -192,12 +195,12 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
         if (parameter.get出力順() != null) {
             IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
             出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
-                    ReportIdDBC.DBC701015.getReportId(), parameter.get出力順());
+                    ReportIdDBC.DBC701015.getReportId(), Long.valueOf(parameter.get出力順().toString()));
             if (出力順 != null) {
-                parameter.set出力順(Long.valueOf(MyBatisOrderByClauseCreator.create(
-                        HanyoListKogakuGassanJikoFutangakuProperty.DBC701015HanyoList_KogakuGassanJikoFutangaku.class, 出力順).toString()));
+                parameter.set出力順(MyBatisOrderByClauseCreator.create(
+                        HanyoListKogakuGassanJikoFutangakuProperty.DBC701015HanyoList_KogakuGassanJikoFutangaku.class, 出力順));
             } else {
-                parameter.set出力順(null);
+                parameter.set出力順(デフォルト出力順);
             }
         }
 

@@ -21,7 +21,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KyufuJissekiCareManagementHiBusiness implements Serializable {
 
-    private static final long serialVersionUID = 5343138744350817649L;
+    private static final long serialVersionUID = 2091760678483017573L;
 
     private KyufuJissekiCareManagementHi 給付実績ケアマネジメント費基本情報;
     private RString サービス種類略称;

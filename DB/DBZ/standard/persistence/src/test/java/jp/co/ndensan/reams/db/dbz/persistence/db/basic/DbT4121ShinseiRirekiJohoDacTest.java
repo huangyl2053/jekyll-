@@ -4,22 +4,21 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4121ShinseiRirekiJohoDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4121ShinseiRirekiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4121ShinseiRirekiJohoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4121ShinseiRirekiJohoEntityGenerator.*;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4121ShinseiRirekiJohoEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4121ShinseiRirekiJohoEntityGenerator.DEFAULT_申請管理番号;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestDacBase;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -111,7 +110,7 @@ public class DbT4121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
             DbT4121ShinseiRirekiJohoEntity updateRecord = DbT4121ShinseiRirekiJohoEntityGenerator.createDbT4121ShinseiRirekiJohoEntity();
             updateRecord.setShinseishoKanriNo(NOTFOUND_申請書管理番号);
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             Optional<DbT4121ShinseiRirekiJohoEntity> updatedRecord = sut.selectByKey(
                     NOTFOUND_申請書管理番号);
@@ -130,7 +129,7 @@ public class DbT4121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
 
         @Test
         public void 申請履歴情報エンティティを渡すと_deleteは_申請履歴情報を削除する() {
-            sut.delete(sut.selectByKey(
+            sut.save(sut.selectByKey(
                     DEFAULT_申請管理番号).get());
             assertThat(sut.selectByKey(
                     DEFAULT_申請管理番号).isPresent(), is(false));
@@ -143,7 +142,7 @@ public class DbT4121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
                 ShinseishoKanriNo OTHER_申請書管理番号) {
             DbT4121ShinseiRirekiJohoEntity entity = DbT4121ShinseiRirekiJohoEntityGenerator.createDbT4121ShinseiRirekiJohoEntity();
             entity.setShinseishoKanriNo(OTHER_申請書管理番号);
-            sut.insert(entity);
+            sut.save(entity);
         }
     }
 }

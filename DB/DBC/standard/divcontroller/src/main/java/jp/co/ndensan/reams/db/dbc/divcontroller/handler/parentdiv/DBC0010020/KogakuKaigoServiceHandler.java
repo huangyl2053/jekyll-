@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
- * 画面設計_DBCMN11002_給付実績照会_(DBC0010020)高額介護サービス費のHandlerです
+ * 給付実績照会の高額介護サービス費のHandlerです
  *
  * @reamsid_L DBC-2970-120 guoqilin
  */
@@ -56,15 +56,14 @@ public class KogakuKaigoServiceHandler {
     public void set給付実績高額介護サービス費データ(List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費等, FlexibleYearMonth サービス提供年月) {
         List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費リスト = new ArrayList<>();
         for (KyufujissekiKogakuKaigoServicehi 高額介護サービス費 : 高額介護サービス費等) {
-            if (!RString.isNullOrEmpty(サービス提供年月.toDateString())
-                    && サービス提供年月.compareTo(高額介護サービス費.getサービス提供年月()) == 0) {
+            if (サービス提供年月 != null && サービス提供年月.compareTo(高額介護サービス費.getサービス提供年月()) == 0) {
                 高額介護サービス費リスト.add(高額介護サービス費);
             }
         }
         if (高額介護サービス費リスト.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         } else {
-            div.getCcdKyufuJissekiHeader().setサービス提供年月(new RDate(サービス提供年月.toString()));
+            div.getCcdKyufuJissekiHeader().setサービス提供年月(new RDate(to日期変換(サービス提供年月).toString()));
             this.setGetsuBtn(高額介護サービス費等, サービス提供年月);
             this.setData(高額介護サービス費リスト.get(INT_ZERO));
         }
@@ -174,19 +173,20 @@ public class KogakuKaigoServiceHandler {
     public void change年月(RString data, List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費リスト,
             FlexibleYearMonth サービス提供年月, RString 整理番号, HihokenshaNo 被保険者番号, NyuryokuShikibetsuNo 識別番号) {
         int index = INT_ZERO;
-        Collections.sort(高額介護サービス費リスト, new DateComparatorServiceTeikyoYM());
-        for (int i = 0; i < 高額介護サービス費リスト.size(); i++) {
-            if (サービス提供年月.equals(高額介護サービス費リスト.get(i).getサービス提供年月())) {
+        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(高額介護サービス費リスト);
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+        for (int i = 0; i < サービス提供年月リスト.size(); i++) {
+            if (サービス提供年月.equals(サービス提供年月リスト.get(i))) {
                 index = i;
                 break;
             }
         }
         FlexibleYearMonth 今提供年月;
         if (前月.equals(data)) {
-            今提供年月 = 高額介護サービス費リスト.get(index + 1).getサービス提供年月();
+            今提供年月 = サービス提供年月リスト.get(index + 1);
             div.getBtnJigetsu().setDisabled(false);
         } else {
-            今提供年月 = 高額介護サービス費リスト.get(index - 1).getサービス提供年月();
+            今提供年月 = サービス提供年月リスト.get(index - 1);
             div.getBtnZengetsu().setDisabled(false);
 
         }
@@ -194,13 +194,24 @@ public class KogakuKaigoServiceHandler {
         set給付実績高額介護サービス費データ(高額介護サービス費リスト, 今提供年月);
     }
 
+    private List<FlexibleYearMonth> getサービス提供年月リスト(List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費リスト) {
+        List<FlexibleYearMonth> サービス提供年月リスト = new ArrayList<>();
+        for (int i = 0; i < 高額介護サービス費リスト.size(); i++) {
+            FlexibleYearMonth 提供年月 = 高額介護サービス費リスト.get(i).getサービス提供年月();
+            if (!サービス提供年月リスト.contains(提供年月)) {
+                サービス提供年月リスト.add(提供年月);
+            }
+        }
+        return サービス提供年月リスト;
+    }
+
     private void setGetsuBtn(List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費リスト, FlexibleYearMonth サービス提供年月) {
-        Collections.sort(高額介護サービス費リスト, new DateComparatorServiceTeikyoYM());
-        if (サービス提供年月.isBeforeOrEquals(高額介護サービス費リスト.get(高額介護サービス費リスト.size() - 1).getサービス提供年月())) {
+        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(高額介護サービス費リスト);
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+        if (サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
             div.getBtnZengetsu().setDisabled(true);
         }
-        if (高額介護サービス費リスト.get(INT_ZERO).getサービス提供年月()
-                .isBeforeOrEquals(サービス提供年月)) {
+        if (サービス提供年月リスト.get(INT_ZERO).isBeforeOrEquals(サービス提供年月)) {
             div.getBtnJigetsu().setDisabled(true);
         }
     }
@@ -220,8 +231,12 @@ public class KogakuKaigoServiceHandler {
     }
 
     private RString get金額(int 金額) {
-        Decimal 金額変換 = new Decimal(金額);
-        return DecimalFormatter.toコンマ区切りRString(金額変換, 0);
+        if (金額 == 0) {
+            return RString.EMPTY;
+        } else {
+            Decimal 金額変換 = new Decimal(金額);
+            return DecimalFormatter.toコンマ区切りRString(金額変換, 0);
+        }
     }
 
     private RString get負担番号(RString 負担番号) {
@@ -231,13 +246,13 @@ public class KogakuKaigoServiceHandler {
         return RString.EMPTY;
     }
 
-    private static class DateComparatorServiceTeikyoYM implements Comparator<KyufujissekiKogakuKaigoServicehi>, Serializable {
+    private static class DateComparatorServiceTeikyoYM implements Comparator<FlexibleYearMonth>, Serializable {
 
         private static final long serialVersionUID = -300796001015547240L;
 
         @Override
-        public int compare(KyufujissekiKogakuKaigoServicehi o1, KyufujissekiKogakuKaigoServicehi o2) {
-            return o2.getサービス提供年月().compareTo(o1.getサービス提供年月());
+        public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {
+            return o2.compareTo(o1);
         }
     }
 

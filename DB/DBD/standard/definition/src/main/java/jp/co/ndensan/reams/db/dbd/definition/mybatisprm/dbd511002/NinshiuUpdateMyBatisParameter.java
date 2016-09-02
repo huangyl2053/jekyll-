@@ -20,7 +20,7 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinshiuUpdateMyBatisParameter implements IMyBatisParameter {
 
-    private final RString 申請書管理番号リスト;
+    private final List<RString> 申請書管理番号リスト;
     private final RString 出力対象区分;
     private final FlexibleDate 抽出対象期間_開始;
     private final FlexibleDate 抽出対象期間_終了;
@@ -36,7 +36,7 @@ public class NinshiuUpdateMyBatisParameter implements IMyBatisParameter {
      * @param 通知書発行日 通知書発行日
      * @param 出力順 出力順
      */
-    public NinshiuUpdateMyBatisParameter(RString 申請書管理番号リスト, RString 出力対象区分,
+    public NinshiuUpdateMyBatisParameter(List<RString> 申請書管理番号リスト, RString 出力対象区分,
             FlexibleDate 抽出対象期間_開始, FlexibleDate 抽出対象期間_終了,
             FlexibleDate 通知書発行日, List<RString> 出力順) {
         this.申請書管理番号リスト = 申請書管理番号リスト;

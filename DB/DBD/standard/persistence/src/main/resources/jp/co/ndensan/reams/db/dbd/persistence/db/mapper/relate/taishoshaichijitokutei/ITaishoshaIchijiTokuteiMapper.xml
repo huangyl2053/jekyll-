@@ -25,7 +25,7 @@
         <where>
             1=1
             <if test="旧措置者区分 ==3">
-                AND (受給者台帳."logicalDeletedFlag" = false AND 受給者台帳."kyuSochishaFlag" = false)
+                AND (受給者台帳."logicalDeletedFlag" = false AND 受給者台帳."kyuSochishaFlag" = true)
             </if>
             <if test="旧措置者区分 ==2">
                 AND NOT EXISTS (								

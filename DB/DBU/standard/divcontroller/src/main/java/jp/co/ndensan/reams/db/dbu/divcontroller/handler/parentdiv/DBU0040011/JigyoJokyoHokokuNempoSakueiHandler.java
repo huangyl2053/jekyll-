@@ -543,7 +543,7 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             parameter.set報告開始年月(RString.EMPTY);
             parameter.set報告終了年月(RString.EMPTY);
         }
-        parameter.set処理日時(new RString(RDate.getNowDateTime().toString()));
+//        parameter.set処理日時(new RString(RDate.getNowDateTime().toString()));
         parameter.set旧市町村区分(div.getHiddenGappeiKoseiKubun());
         parameter.set市町村コード(RString.EMPTY);
         parameter.set構成市町村コードリスト(list);

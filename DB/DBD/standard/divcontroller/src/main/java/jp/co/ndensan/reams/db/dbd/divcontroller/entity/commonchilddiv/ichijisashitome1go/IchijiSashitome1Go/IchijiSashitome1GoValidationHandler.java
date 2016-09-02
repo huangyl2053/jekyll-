@@ -79,9 +79,11 @@ public class IchijiSashitome1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor滞納状況情報チェック(ValidationMessageControlPairs pairs, IchijiSashitome1GoDiv div,
             ShiharaiHohoHenko shiharaiHohoHenko) {
-        if ((div.getKey_Button().equals(ShoriKubun.給付一時差止登録.getコード()) || div.getKey_Button().equals(ShoriKubun.保険料控除登録.getコード()))
+        if ((div.getKey_Button().equals(ShoriKubun.給付一時差止登録.getコード())
+                || div.getKey_Button().equals(ShoriKubun.保険料控除登録.getコード()))
                 && (div.getPTN().equals(登録PTN) || div.getPTN().equals(更新PTN))
-                && (shiharaiHohoHenko.getShiharaiHohoHenkoTainoList().isEmpty() && div.getTainoHanteiKekka().isEmpty())) {
+                && (shiharaiHohoHenko.getShiharaiHohoHenkoTainoList().isEmpty()
+                && (div.getTainoHanteiKekka().isEmpty() || div.getTainoHanteiKekka() == null))) {
             pairs.add(new ValidationMessageControlPair(IchijiSashitome1GoMessages.支払方法変更_要滞納状況確定));
         }
         return pairs;

@@ -119,7 +119,7 @@ public class DBC710150_HanyoListKogakuGassanJikoFutangakuParameter extends Batch
                 rebanFuka,
                 slashDate,
                 hokenshaNo,
-                shutsuryokuju,
+                new RString(shutsuryokuju),
                 shutsuryokuTomoku);
     }
 

@@ -170,7 +170,7 @@ public enum ReportIdDBD {
     /**
      * 年齢階級別要介護度状況の帳票ＩＤです。
      */
-    DBD300005(new ReportId("DBD300005_NenreiKaidanbetsuYokaigoduJyokyo"), new RString("年齢階級別要介護度状況")),
+    DBD300005(new ReportId("DBD300005_NenreiKaikyubetsuYokaigodoJokyo"), new RString("年齢階級別要介護度状況")),
     /**
      * 要介護度変更通知書の帳票ＩＤです。
      */
