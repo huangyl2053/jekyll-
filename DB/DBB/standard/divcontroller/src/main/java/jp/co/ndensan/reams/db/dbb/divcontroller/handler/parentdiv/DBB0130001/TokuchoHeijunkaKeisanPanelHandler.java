@@ -145,7 +145,7 @@ public class TokuchoHeijunkaKeisanPanelHandler {
         FlexibleYear 調定年度 = new FlexibleYear(
                 div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtChoteiNendo().getValue());
         boolean is特徴平準化処理状況 = 特徴平準化.getHeijunka8MJyokyo(調定年度);
-        if (!is特徴平準化処理状況) {
+        if (is特徴平準化処理状況) {
             throw new ApplicationException(DbbErrorMessages.処理済み.getMessage().replace("特徴平準化（８月分）"));
         } else {
             get未処理の場合();
@@ -223,15 +223,15 @@ public class TokuchoHeijunkaKeisanPanelHandler {
      * setボタン制御
      */
     public void setボタン制御() {
-        boolean is処理状態 = div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
+        boolean is処理状態1 = div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
                 getDataSource().get(0).getTxtJokyo().equals(済)
                 && div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
-                getDataSource().get(1).getTxtJokyo().equals(済)
+                getDataSource().get(1).getTxtJokyo().equals(済);
+        boolean is処理状態2 = div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
+                getDataSource().get(2).getTxtJokyo().equals(未)
                 && div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
-                getDataSource().get(2).getTxtJokyo().equals(済)
-                && div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
-                getDataSource().get(3).getTxtJokyo().equals(済);
-        if (is処理状態) {
+                getDataSource().get(3).getTxtJokyo().equals(未);
+        if (is処理状態1 && is処理状態2) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(実行するボタン, false);
         }
     }
