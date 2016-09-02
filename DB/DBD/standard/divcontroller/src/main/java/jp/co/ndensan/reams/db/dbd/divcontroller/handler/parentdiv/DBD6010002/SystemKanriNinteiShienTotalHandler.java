@@ -119,10 +119,10 @@ public class SystemKanriNinteiShienTotalHandler {
         RDate 日期 = RDate.getNowDate();
 
         YokaigoInterfaceShurui iF種類 = YokaigoInterfaceShurui.toValue(div.getSystemKanri().getSystemKanriNinteiShien().getDdlIfShurui().getSelectedKey());
-        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_ＩＦ種類, iF種類.get名称(), ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_ＩＦ種類, iF種類.getコード(), ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
         if (!div.getSystemKanri().getSystemKanriNinteiShien().getDdlShujiiChosainJohoTorikomi().isDisplayNone()) {
             YokaigoInterfaceShurui iF医調取込 = YokaigoInterfaceShurui.toValue(div.getSystemKanri().getSystemKanriNinteiShien().getDdlShujiiChosainJohoTorikomi().getSelectedKey());
-            BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_医調取込み, iF医調取込.get名称(), ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+            BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_医調取込み, iF医調取込.getコード(), ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
         }
         RDate 認定ＩＦ改定日 = div.getSystemKanri().getSystemKanriNinteiShien().getTxtNinteiIfKaiteiYMD().getValue();
         BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_認定ＩＦ改定日, 認定ＩＦ改定日.toDateString(), ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
