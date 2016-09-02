@@ -16,14 +16,14 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110080.KogakugassanSou
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110080.KogakugassanSoufuSetteiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110080.UpdateKogakuGassanMiSofuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110080.UpdateKogakuGassanSofuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110080.DBC110080_KogakugassanHoseisumiJikofutangakuOutParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhoreninterface.ConfigKeysKokuhorenSofu;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.hokenshakyufujissekiout.HokenshaKyufujissekiOutListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakugassan.KogakugassanProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -195,9 +195,9 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
      */
     @Step(処理結果リスト作成)
     protected IBatchFlowCommand callKokuhorenkyoutsuDoShoriKekkaListSakuseiProcess() {
-        KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter parameter = new KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter();
-        parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ2);
-        return simpleBatch(KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess.class).arguments(parameter).define();
+        HokenshaKyufujissekiOutListSakuseiProcessParameter parameter = new HokenshaKyufujissekiOutListSakuseiProcessParameter();
+        parameter.setエラーリストタイプ(KokuhorenJoho_SakuseiErrorListType.リストタイプ2);
+        return loopBatch(HokenshaKyufujissekiOutListSakuseiProcess.class).arguments(parameter).define();
     }
 
     private KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter getParam() {
