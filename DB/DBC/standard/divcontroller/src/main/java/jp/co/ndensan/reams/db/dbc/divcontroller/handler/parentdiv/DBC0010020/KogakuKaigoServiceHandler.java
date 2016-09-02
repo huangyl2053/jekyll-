@@ -196,8 +196,8 @@ public class KogakuKaigoServiceHandler {
 
     private List<FlexibleYearMonth> getサービス提供年月リスト(List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費リスト) {
         List<FlexibleYearMonth> サービス提供年月リスト = new ArrayList<>();
-        for (int i = 0; i < 高額介護サービス費リスト.size(); i++) {
-            FlexibleYearMonth 提供年月 = 高額介護サービス費リスト.get(i).getサービス提供年月();
+        for (KyufujissekiKogakuKaigoServicehi 高額介護サービス費 : 高額介護サービス費リスト) {
+            FlexibleYearMonth 提供年月 = 高額介護サービス費.getサービス提供年月();
             if (!サービス提供年月リスト.contains(提供年月)) {
                 サービス提供年月リスト.add(提供年月);
             }
