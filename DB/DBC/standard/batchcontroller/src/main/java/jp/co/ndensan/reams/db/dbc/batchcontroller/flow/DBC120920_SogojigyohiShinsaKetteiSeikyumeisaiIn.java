@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.io.File;
@@ -35,10 +34,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *総合事業費審査決定請求明細表情報取込のバッチ処理フロー
+ * 総合事業費審査決定請求明細表情報取込のバッチ処理フロー
+ *
  * @reamsid_L DBC-2500-012 jiangxiaolong
  */
 public class DBC120920_SogojigyohiShinsaKetteiSeikyumeisaiIn extends BatchFlowBase<KokuhorenKyoutsuBatchParameter> {
+
     private static final String ファイル取得 = "getFile";
     private static final String CSVファイル取込 = "readCsvFile";
     private static final String 国保連インタフェース管理更新 = "doInterfaceKanriKousin";
@@ -50,7 +51,7 @@ public class DBC120920_SogojigyohiShinsaKetteiSeikyumeisaiIn extends BatchFlowBa
 
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
     private FlowEntity flowEntity;
-     private int レコード件数合算;
+    private int レコード件数合算;
     private RString csvFullPath;
     private int 集計件数;
     private int 明細件数;
@@ -68,7 +69,7 @@ public class DBC120920_SogojigyohiShinsaKetteiSeikyumeisaiIn extends BatchFlowBa
             returnEntity
                     = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得),
                             KokuhorenkyoutsuGetFileProcess.PARAMETER_OUT_RETURNENTITY);
-             for (int i = 0; i < returnEntity.getFileNameList().size(); i++) {
+            for (int i = 0; i < returnEntity.getFileNameList().size(); i++) {
                 String filePath = returnEntity.get保存先フォルダのパス() + File.separator
                         + returnEntity.getFileNameList().get(i);
                 File path = new File(filePath);
@@ -76,7 +77,7 @@ public class DBC120920_SogojigyohiShinsaKetteiSeikyumeisaiIn extends BatchFlowBa
                 executeStep(CSVファイル取込);
                 flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
                         SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
-                レコード件数合算 = flowEntity.get明細データ登録件数();
+                レコード件数合算 = flowEntity.getCodeNum();
                 集計件数 = flowEntity.get集計データ登録件数();
                 明細件数 = flowEntity.get明細データ登録件数();
             }
@@ -186,5 +187,5 @@ public class DBC120920_SogojigyohiShinsaKetteiSeikyumeisaiIn extends BatchFlowBa
         parameter.setエントリ情報List(returnEntity.getEntityList());
         return simpleBatch(KokuhorenkyoutsuDeleteReveicedFileProcess.class).arguments(parameter).define();
     }
-    
+
 }
