@@ -172,7 +172,7 @@ public class ShotokuJokyoHandler {
                 row.setAge(年齢);
                 row.setZokugara(item.get続柄());
                 課税区分_住民税減免後 = item.get課税区分_住民税減免後();
-                if (KazeiKubun.課税.get名称().equals(課税区分_住民税減免後)) {
+                if (KazeiKubun.課税.getコード().equals(課税区分_住民税減免後)) {
                     row.setJuminZei(SetaiKazeiKubun.課税.get名称());
                 } else {
                     row.setJuminZei(SetaiKazeiKubun.非課税.get名称());
