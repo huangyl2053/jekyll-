@@ -26,6 +26,7 @@ public class TaJushochiTokureishaKanriValidationHandler {
     private static final RString 状態_適用 = new RString("Tekiyo");
     private static final RString 状態_解除 = new RString("Kaijyo");
     private static final RString 状態_削除 = new RString("削除");
+    private static final RString 状態_追加 = new RString("追加");
     private static final RString メッセージ適用日 = new RString("適用日");
     private final TaJushochiTokureishaKanriDiv div;
 
@@ -56,10 +57,12 @@ public class TaJushochiTokureishaKanriValidationHandler {
                 if (div.getTxtTekiyobi().getValue() == null) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日, div.getTxtTekiyobi()));
                 } else {
+                 if (状態_追加.equals(div.getStrate())) {
                     if (最新の適用情報 != null && 最新の適用情報.getTekiyoYMD().getValue() != null && !RowState.Deleted.equals(最新の適用情報.getRowState())
                             && (!div.getTxtTekiyobi().getValue().isBefore(最新の適用情報.getTekiyoYMD().getValue()))) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日と最新の適用情報の整合性チェック, div.getTxtTekiyobi()));
                     }
+                 }
                 }
                 if (div.getTxtKaijyobi().getValue() != null && (div.getDdlKaijyoJiyo().getSelectedKey() == null
                         || div.getDdlKaijyoJiyo().getSelectedKey().isEmpty())) {
