@@ -62,6 +62,7 @@ public class ShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDateKanr
         entity.setShichosonCode(市町村コード.get地方公共団体コード());
         entity.setNendo(processParameter.get対象年度());
         entity.setKijunTimestamp(processParameter.get処理日時());
+        entity.setKijunYMD(null);
         tableWrite.update(entity);
         処理日付管理マスタを登録FLAG = false;
     }
