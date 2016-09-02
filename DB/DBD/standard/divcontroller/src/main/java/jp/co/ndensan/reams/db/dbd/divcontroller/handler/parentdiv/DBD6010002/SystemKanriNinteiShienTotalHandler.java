@@ -82,6 +82,12 @@ public class SystemKanriNinteiShienTotalHandler {
                 .setSelectedKey(DbBusinessConfig.get(ConfigNameDBD.要介護ＩＦ_ＩＦ種類, 日期, SubGyomuCode.DBD介護受給));
         div.getSystemKanri().getSystemKanriNinteiShien().getDdlShujiiChosainJohoTorikomi()
                 .setSelectedKey(DbBusinessConfig.get(ConfigNameDBD.要介護ＩＦ_医調取込み, 日期, SubGyomuCode.DBD介護受給));
+        div.getSystemKanri().getSystemKanriNinteiShien().getTxtNinteiIfKaiteiYMD()
+                .setValue(new RDate(DbBusinessConfig.get(ConfigNameDBD.要介護ＩＦ_認定ＩＦ改定日, 日期, SubGyomuCode.DBD介護受給).toString()));
+        div.getSystemKanri().getSystemKanriNinteiShien().getRadShinseiKanren()
+                .setSelectedKey(DbBusinessConfig.get(ConfigNameDBD.要介護ＩＦ_類似変換, 日期, SubGyomuCode.DBD介護受給));
+        div.getSystemKanri().getSystemKanriNinteiShien().getRadIkkatsuKoshin()
+                .setSelectedKey(DbBusinessConfig.get(ConfigNameDBD.要介護ＩＦ_一括認定日区分, 日期, SubGyomuCode.DBD介護受給));
         div.getSystemKanri().getSystemKanriNinteiShien().getTxtNinteiKekkaFileOld()
                 .setValue(DbBusinessConfig.get(ConfigNameDBD.要介護ＩＦ_認定結果ＩＦ, 日期, SubGyomuCode.DBD介護受給));
         div.getSystemKanri().getSystemKanriNinteiShien().getTxtShiteiJigyoOutFileOld().
