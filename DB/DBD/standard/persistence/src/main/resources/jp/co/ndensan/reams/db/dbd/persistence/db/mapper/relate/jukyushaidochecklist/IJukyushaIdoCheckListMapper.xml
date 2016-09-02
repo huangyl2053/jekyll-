@@ -90,10 +90,10 @@
             rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
             ON DbT5101."shoKisaiHokenshaNo" = DbT7051."shoKisaiHokenshaNo"
         WHERE 1 = 1
-            <if test="#{今回抽出開始年月日} != ''">
+            <if test="has今回抽出開始年月日">
                 AND #{行挿入日時開始} <![CDATA[<=]]> DbT4001."insertTimestamp"
             </if>
-            <if test="#{今回抽出終了年月日} != ''">
+            <if test="has今回抽出終了年月日">
                 AND DbT4001."insertTimestamp" <![CDATA[<=]]> #{行挿入日時終了}
             </if>
             <if test="is全て">
