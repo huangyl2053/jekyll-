@@ -8,6 +8,10 @@ module DBZ {
 
         export class Events {
 
+            public static onBlur_JigyoshaNo(): string {
+                return "onBlur_JigyoshaNo";
+            }
+
             public static onChange_BtnKenCode(): string {
                 return "onChange_BtnKenCode";
             }
