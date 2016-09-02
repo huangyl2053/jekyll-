@@ -68,9 +68,11 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         if (null != 市町村セキュリティ情報) {
             if (市町村セキュリティ情報.get導入形態コード() != null
                     && 市町村セキュリティ情報.get導入形態コード().is広域()) {
-
+                panel.getCcdHokenshaList().setDisplayNone(false);
                 panel.getCcdHokenshaList().loadHokenshaList();
             } else {
+                panel.getCcdHokenshaList().setDisabled(true);
+                panel.getCcdHokenshaList().setVisible(false);
                 panel.getCcdHokenshaList().setDisplayNone(true);
             }
         }
@@ -170,8 +172,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
             batchparam.setSofuTaishogaiFukumu(true);
         }
         batchparam = setChkCsvHenshuHoho(batchparam);
-        if (null != div.getCcdHokenshaList() && null != div.getCcdHokenshaList().getSelectedItem()
-                && null != div.getCcdHokenshaList().getSelectedItem().get市町村コード()) {
+        if (div.getChushutsuJokenPanel().getCcdHokenshaList().isVisible()) {
             batchparam.setHokenshaNo(div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue());
         }
         if (null != div.getCcdShutsuryokujun().getSelected出力順()) {

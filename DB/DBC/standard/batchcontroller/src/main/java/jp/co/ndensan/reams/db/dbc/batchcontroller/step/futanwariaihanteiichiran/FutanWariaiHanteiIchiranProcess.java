@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.futanwariaihanteiichiran
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.euc.futanwariaihanteiichiran.FutanWariaiHanteiIchiranCsvEntityEditor;
+import jp.co.ndensan.reams.db.dbc.business.report.futanwariaihanteiichiran.FutanWariaiHanteiIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaihanteiichiran.FutanWariaiHanteiIchiranReport;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaihanteiichiran.FutanWariaiHanteiIchiranProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -22,14 +23,13 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -57,7 +57,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBC-4980-031 yuanzhenxia
  */
-public class FutanWariaiHanteiIchiranProcess extends BatchProcessBase<FutanwariaiHanteiIchiranEntity> {
+public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<FutanwariaiHanteiIchiranEntity> {
 
     private static final ReportId ID = ReportIdDBC.DBC200089.getReportId();
     private static final RString MYBATIS_SELECT_ID = new RString(
@@ -85,6 +85,7 @@ public class FutanWariaiHanteiIchiranProcess extends BatchProcessBase<Futanwaria
     private RString 共通_文字コード;
     private FutanWariaiHanteiIchiranProcessParameter processParameter;
     private final List<PersonalData> personalDataList = new ArrayList<>();
+    private final List<RString> rStringList = new ArrayList<>();
     private Association 導入団体クラス;
     private int 連番 = 0;
     @BatchWriter
@@ -101,7 +102,8 @@ public class FutanWariaiHanteiIchiranProcess extends BatchProcessBase<Futanwaria
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value()).create();
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value())
+                .addBreak(new FutanWariaiHanteiIchiranPageBreak(rStringList)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
@@ -126,19 +128,6 @@ public class FutanWariaiHanteiIchiranProcess extends BatchProcessBase<Futanwaria
     @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toFutanwariaiHanteiIchiranMybaticParameter());
-    }
-
-    @Override
-    protected void process(FutanwariaiHanteiIchiranEntity entity) {
-        連番++;
-        entity.set連番(連番);
-        entity.set地方公共団体コード(導入団体クラス.get地方公共団体コード().value());
-        entity.set市町村名(導入団体クラス.get市町村名());
-        FutanWariaiHanteiIchiranReport report = new FutanWariaiHanteiIchiranReport(processParameter, entity);
-        report.writeBy(reportSourceWriter);
-        eucCsvWriter.writeLine(new FutanWariaiHanteiIchiranCsvEntityEditor(entity, processParameter).edit());
-        PersonalData personalData = getPersonalData(entity);
-        personalDataList.add(personalData);
     }
 
     @Override
@@ -189,6 +178,23 @@ public class FutanWariaiHanteiIchiranProcess extends BatchProcessBase<Futanwaria
 
     private PersonalData getPersonalData(FutanwariaiHanteiIchiranEntity entity) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(RSTRING), 被保険者番号, entity.get今回被保険者番号().value());
-        return PersonalData.of(new ShikibetsuCode(entity.get生活保護受給者識別コード()), expandedInfo);
+        return PersonalData.of(entity.get判定対象者識別コード(), expandedInfo);
+    }
+
+    @Override
+    protected void keyBreakProcess(FutanwariaiHanteiIchiranEntity t) {
+    }
+
+    @Override
+    protected void usualProcess(FutanwariaiHanteiIchiranEntity entity) {
+        連番++;
+        entity.set連番(連番);
+        entity.set地方公共団体コード(導入団体クラス.get地方公共団体コード().value());
+        entity.set市町村名(導入団体クラス.get市町村名());
+        FutanWariaiHanteiIchiranReport report = new FutanWariaiHanteiIchiranReport(processParameter, entity);
+        report.writeBy(reportSourceWriter);
+        eucCsvWriter.writeLine(new FutanWariaiHanteiIchiranCsvEntityEditor(entity, processParameter).edit());
+        PersonalData personalData = getPersonalData(entity);
+        personalDataList.add(personalData);
     }
 }

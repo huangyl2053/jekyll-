@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0200015;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110110.DBC110110_KogakugassanKyufujissekiOutParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200015.KyufuJissekiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0200015.KyufuJissekiJohoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0200011.KokuhorenDataSofuViewState;
@@ -31,7 +32,7 @@ public class KyufuJissekiJoho {
     private RString 再処理区分;
     private RString 外部ＣＳＶファイル名;
     private static final RString 状態パターン = new RString("1");
-    private static final ReportId 帳票ID = new ReportId("DBC200053_KyufuJisekiJohoSofuIchiran");
+    private static final ReportId 帳票ID = ReportIdDBC.DBC200053.getReportId();
 
     /**
      * onLoadのメソッドです。
@@ -58,8 +59,8 @@ public class KyufuJissekiJoho {
      * @return ResponseData DBC110110_KogakugassanKyufujissekiOutParameter
      */
     public ResponseData<DBC110110_KogakugassanKyufujissekiOutParameter> onClick_Execute(KyufuJissekiJohoDiv div) {
-        if (getHandler(div).setBatchParameter(再処理区分, 処理年月, 外部ＣＳＶファイル名) != null) {
-            return getHandler(div).setBatchParameter(再処理区分, 処理年月, 外部ＣＳＶファイル名);
+        if (getHandler(div).setBatchParameter(再処理区分, 処理年月) != null) {
+            return getHandler(div).setBatchParameter(再処理区分, 処理年月);
         }
         return ResponseData.of(new DBC110110_KogakugassanKyufujissekiOutParameter()).respond();
     }

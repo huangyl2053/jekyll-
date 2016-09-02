@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -28,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -150,7 +153,9 @@ public class HikazeiNenkinKenJohoHandler {
         FlexibleYear 平成年度 = 平成28年度;
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         while (調定年度.isBeforeOrEquals(平成年度)) {
-            dataSource.add(new KeyValueDataSource(new RString(平成年度.getYearValue()), 平成年度.wareki().eraType(EraType.KANJI).toDateString()));
+            dataSource.add(new KeyValueDataSource(new RString(平成年度.getYearValue()),
+                    平成年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .fillType(FillType.BLANK).toDateString().concat("年度")));
             平成年度 = 平成年度.minusYear(1);
         }
         div.getDdlYear().setDataSource(dataSource);
@@ -476,6 +481,7 @@ public class HikazeiNenkinKenJohoHandler {
      */
     public void 削除解除_登録区分_取込_保存処理(HousholdBusiness 非課税年金対象者一時) {
         HousholdFinder.createIntance().取込_保存処理(非課税年金対象者一時, null, null, ControlDataHolder.getUserId());
+        div.getCcvComplateMsg().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
     }
 
     /**
@@ -485,6 +491,7 @@ public class HikazeiNenkinKenJohoHandler {
      */
     public void 削除解除_登録区分_画面登録_保存処理(HousholdBusiness 非課税年金対象者一時) {
         HousholdFinder.createIntance().削除解除_登録区分_画面登録_保存処理(非課税年金対象者一時, ControlDataHolder.getUserId());
+        div.getCcvComplateMsg().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
     }
 
     /**
@@ -496,6 +503,7 @@ public class HikazeiNenkinKenJohoHandler {
         HousholdFinder.createIntance()
                 .取込_保存処理(非課税年金対象者一時, div.getTbGenkisoNenkinNo().getValue(),
                         div.getCcdKaigoShikaku().get被保険者番号(), ControlDataHolder.getUserId());
+        div.getCcvComplateMsg().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
     }
 
     /**
@@ -522,6 +530,7 @@ public class HikazeiNenkinKenJohoHandler {
         HousholdFinder.createIntance()
                 .修正_登録区分_画面登録_保存処理(非課税年金対象者一時, 月, 現基礎年金番号, 被保番号,
                         作成年月日, 生年月日, 性別, 氏名カナ, 氏名漢字, 住所カナ, 住所漢字, 対象年, 金額, ControlDataHolder.getUserId());
+        div.getCcvComplateMsg().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
     }
 
     /**
@@ -553,6 +562,7 @@ public class HikazeiNenkinKenJohoHandler {
         HousholdFinder.createIntance().新規_保存処理(年度, 月, 基礎年金番号, 現基礎年金番号, 年金コード,
                 被保番号, 年金保険者コード, 作成年月日, 生年月日, 性別, 氏名カナ, 氏名漢字, 住所カナ,
                 住所漢字, 対象年, 訂正区分, 各種区分, 金額, ControlDataHolder.getUserId());
+        div.getCcvComplateMsg().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
     }
 
     private RString get訂正区分() {

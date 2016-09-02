@@ -13,9 +13,11 @@ import jp.co.ndensan.reams.db.dbx.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -51,6 +53,8 @@ public class FutanWariaiHanteiIchiranCsvEntityEditor {
     private static final RString 分 = new RString("分");
     private static final RString 秒 = new RString("秒");
     private static final RString HALFMONTH = new RString("#0");
+    private static final RString 状態区分コード = new RString("06");
+    private static final RString 認定申請中 = new RString("認定申請中");
     private final FutanwariaiHanteiIchiranEntity entity;
     private final FutanWariaiHanteiIchiranProcessParameter processParameter;
     private RString 利用者負担割合判定管理_年度終了月日;
@@ -85,11 +89,11 @@ public class FutanWariaiHanteiIchiranCsvEntityEditor {
                 edit年度(),
                 edit処理名(),
                 edit基準日(entity.get今回年度()),
-                new RString(entity.get連番()).padZeroToLeft(2),
+                new RString(entity.get連番()),
                 entity.get今回被保険者番号().value(),
-                entity.get名称().value(),
+                get名称(entity.get名称()),
                 edit被保険者区分コード(entity.get被保険者区分コード()),
-                new RString(""),
+                edit要介護度(),
                 getWarekiYmd(entity.get資格取得年月日()),
                 getWarekiYmd(entity.get資格喪失年月日()),
                 getWarekiYmd(entity.get認定有効期間開始年月日()),
@@ -101,7 +105,7 @@ public class FutanWariaiHanteiIchiranCsvEntityEditor {
                 new RString(entity.get今回世帯１号被保険者数()),
                 DateConverter.decimalFormat(entity.get今回年金収入合計()),
                 DateConverter.decimalFormat(entity.get今回その他の合計所得金額合計()),
-                edit更正事由(entity.get今回更正事由().value()),
+                edit更正事由(entity.get今回更正事由()),
                 edit負担割合区分(entity.get前回負担割合区分()),
                 getWarekiYmd(entity.get前回有効開始日()),
                 getWarekiYmd(entity.get前回有効終了日()),
@@ -109,12 +113,21 @@ public class FutanWariaiHanteiIchiranCsvEntityEditor {
                 new RString(entity.get前回世帯１号被保険者数()),
                 DateConverter.decimalFormat(entity.get前回年金収入合計()),
                 DateConverter.decimalFormat(entity.get前回その他の合計所得金額合計()),
-                edit更正事由(entity.get前回更正事由().value()),
+                edit更正事由(entity.get前回更正事由()),
                 edit課税区分(entity.get課税区分_減免前()),
                 edit減免(entity.get給付率()),
                 editその他(),
                 edit処理日(processParameter.get処理日時())
         );
+    }
+
+    private RString get名称(RString meisho) {
+        if (meisho == null) {
+            return RString.EMPTY;
+        } else {
+            return meisho;
+        }
+
     }
 
     private RString edit基準日(FlexibleYear year) {
@@ -136,8 +149,22 @@ public class FutanWariaiHanteiIchiranCsvEntityEditor {
             return RString.EMPTY;
         }
     }
-//    private RString edit要介護度(){
-//    }
+
+    private RString edit要介護度() {
+        if (entity.get要介護認定状態区分コード() != null) {
+            return YokaigoJotaiKubunSupport.toValue(entity.get認定有効期間開始年月日(),
+                    entity.get要介護認定状態区分コード()).getName();
+        } else {
+            if (処理区分2.equals(entity.getデータ区分())) {
+                return YokaigoJotaiKubunSupport.toValue(entity.get認定有効期間開始年月日(),
+                        状態区分コード).getName();
+            } else if (処理区分3.equals(entity.getデータ区分())) {
+                return 認定申請中;
+            } else {
+                return RString.EMPTY;
+            }
+        }
+    }
 
     private RString edit負担割合区分(RString code) {
         if (FutanwariaiKubun._１割.getコード().equals(code)) {
@@ -162,23 +189,26 @@ public class FutanWariaiHanteiIchiranCsvEntityEditor {
     }
 
     private RString edit減免(RString 給付率) {
-        if (!給付率.isEmpty()) {
+        if (給付率 != null) {
             return 利.concat(給付率).concat(率);
         } else {
             return RString.EMPTY;
         }
     }
 
-    private RString edit更正事由(RString code) {
-        if (KoseiJiyu.世帯員所得更正.getコード().equals(code)) {
+    private RString edit更正事由(Code code) {
+        if (code == null) {
+            return RString.EMPTY;
+        }
+        if (KoseiJiyu.世帯員所得更正.getコード().equals(code.value())) {
             return KoseiJiyu.世帯員所得更正.get名称();
-        } else if (KoseiJiyu.世帯構成変更.getコード().equals(code)) {
+        } else if (KoseiJiyu.世帯構成変更.getコード().equals(code.value())) {
             return KoseiJiyu.世帯構成変更.get名称();
-        } else if (KoseiJiyu.本人所得更正.getコード().equals(code)) {
+        } else if (KoseiJiyu.本人所得更正.getコード().equals(code.value())) {
             return KoseiJiyu.本人所得更正.get名称();
-        } else if (KoseiJiyu.当初_継続_新規認定.getコード().equals(code)) {
+        } else if (KoseiJiyu.当初_継続_新規認定.getコード().equals(code.value())) {
             return KoseiJiyu.当初_継続_新規認定.get名称();
-        } else if (KoseiJiyu.その他.getコード().equals(code)) {
+        } else if (KoseiJiyu.その他.getコード().equals(code.value())) {
             return KoseiJiyu.その他.get名称();
         } else {
             return RString.EMPTY;
@@ -206,12 +236,11 @@ public class FutanWariaiHanteiIchiranCsvEntityEditor {
 
     private RString edit処理名() {
         if (処理区分1.equals(processParameter.get処理区分())) {
-            return ShoriName.年次負担割合判定.get名称();
+            return ShoriName.年次利用者負担割合判定.get名称();
         } else if (処理区分2.equals(processParameter.get処理区分())) {
-            return ShoriName.異動分負担割合判定.get名称();
+            return ShoriName.年次利用者負担割合判定.get名称();
         } else if (処理区分3.equals(processParameter.get処理区分())) {
-            // TODO 異動分利用者負担割合判定（過年度）なし
-            return ShoriName.異動分負担割合判定.get名称();
+            return ShoriName.異動分利用者負担割合判定_過年度.get名称();
         } else {
             return RString.EMPTY;
         }
@@ -220,9 +249,9 @@ public class FutanWariaiHanteiIchiranCsvEntityEditor {
     private RString edit処理日(RDateTime dateTime) {
         RString wareki = RString.EMPTY;
         if (dateTime != null) {
-            wareki = dateTime.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.ZERO)
+            wareki = dateTime.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK)
                     .getYear().concat(年).concat(dateTime.getDate().wareki().separator(Separator.JAPANESE)
-                            .fillType(FillType.ZERO).getMonthDay())
+                            .fillType(FillType.BLANK).getMonthDay())
                     .concat(new RString(new Decimal(dateTime.getHour()).toString(HALFMONTH.toString()))).concat(時)
                     .concat(new RString(new Decimal(dateTime.getMinute()).toString(HALFMONTH.toString()))).concat(分)
                     .concat(new RString(new Decimal(dateTime.getSecond()).toString(HALFMONTH.toString()))).concat(秒);
@@ -234,8 +263,8 @@ public class FutanWariaiHanteiIchiranCsvEntityEditor {
     private RString getWarekiYmd(FlexibleDate date) {
         RString wareki = RString.EMPTY;
         if (date != null) {
-            wareki = date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.ZERO).getYear()
-                    .concat(年).concat(date.wareki().separator(Separator.JAPANESE).fillType(FillType.ZERO).getMonthDay());
+            wareki = date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear()
+                    .concat(年).concat(date.wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).getMonthDay());
         }
         return wareki;
     }

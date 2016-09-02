@@ -26,4 +26,6 @@ public class TongzhiShufaxingEntity {
     private RString 並び順4;
     private RString 並び順5;
     private RString 印刷時間;
+
+    private TongzhiShuEntity tongzhiShu;
 }

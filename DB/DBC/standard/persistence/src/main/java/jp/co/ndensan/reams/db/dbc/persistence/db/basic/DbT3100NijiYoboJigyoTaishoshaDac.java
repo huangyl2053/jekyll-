@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
@@ -26,11 +27,33 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 二次予防事業対象者のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-2400-010 yuqingzhang
  */
 public class DbT3100NijiYoboJigyoTaishoshaDac implements ISaveable<DbT3100NijiYoboJigyoTaishoshaEntity> {
 
     @InjectSession
     private SqlSession session;
+
+    /**
+     * 被保険者番号で二次予防事業対象者を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return DbT3100NijiYoboJigyoTaishoshaEntityのリスト
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3100NijiYoboJigyoTaishoshaEntity> selectBy被保険者番号(
+            HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3100NijiYoboJigyoTaishosha.class).
+                where(eq(hihokenshaNo, 被保険者番号)).order(by(rirekiNo, Order.DESC)).
+                toList(DbT3100NijiYoboJigyoTaishoshaEntity.class);
+    }
 
     /**
      * 主キーで二次予防事業対象者を取得します。
@@ -84,6 +107,18 @@ public class DbT3100NijiYoboJigyoTaishoshaDac implements ISaveable<DbT3100NijiYo
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * DbT3100NijiYoboJigyoTaishoshaEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int saveOrDeletePhysicalBy(DbT3100NijiYoboJigyoTaishoshaEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("二次予防事業対象者エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 
     /**

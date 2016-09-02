@@ -111,11 +111,11 @@ public class ShakaiFukushiHojinKeigenEditor implements IShakaiFukushiHojinKeigen
             source.list1_10 = new RString("*");
         }
         if (帳票情報.get厚労省IF識別コード() != null && 帳票情報.get要介護状態区分コード() != null) {
-            source.list1_12 = (YokaigoJotaiKubunSupport.toValue(
+            source.list1_11 = (YokaigoJotaiKubunSupport.toValue(
                     KoroshoInterfaceShikibetsuCode.toValue(帳票情報.get厚労省IF識別コード()), 帳票情報.get要介護状態区分コード()).getName());
         }
         if (帳票情報.get認定年月日() != null && !帳票情報.get認定年月日().isEmpty()) {
-            source.list1_13 = 帳票情報.get認定年月日().wareki().toDateString();
+            source.list1_12 = 帳票情報.get認定年月日().wareki().toDateString();
         }
         source.list2_7 = 帳票情報.get入所施設コード();
         setsource_line_up(source);
@@ -248,19 +248,19 @@ public class ShakaiFukushiHojinKeigenEditor implements IShakaiFukushiHojinKeigen
         if (帳票情報.get世帯員リスト().get(listindex).get世帯員宛名() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(帳票情報.get世帯員リスト().get(listindex).get世帯員宛名());
             if (kojin.get名称() != null) {
-                source.list1_14 = kojin.get名称().getName().value();
+                source.list1_13 = kojin.get名称().getName().value();
             }
             if (kojin.get住民状態() != null) {
-                source.list1_15 = kojin.get住民状態().住民状態略称();
+                source.list1_14 = kojin.get住民状態().住民状態略称();
             }
         }
         if (!帳票情報.get世帯員リスト().get(listindex).get本人課税区分().isNullOrEmpty()
                 && 帳票情報.get世帯員リスト().get(listindex).get本人課税区分().equals(new RString("1"))) {
-            source.list1_16 = new RString("課");
+            source.list1_15 = new RString("課");
         }
         if (帳票情報.get世帯員リスト().get(listindex).get課税所得額() != null
                 && 帳票情報.get世帯員リスト().get(listindex).get課税所得額().intValue() <= 0) {
-            source.list1_17 = new RString("課");
+            source.list1_16 = new RString("課");
         }
     }
 

@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.nofugakudatasakusei.NofugakuDataParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.nofugakudatasakusei.NofugakuDataTsushutsuJoken;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB514001.DBB514001_NofugakuDataSakuseiTandokuShichosonParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB514001.NofugakuDataTsushutsuJoken;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB5140001.NoufuGakuDataSakuseiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB5140001.dgKoikiShoriTaishoSelect_Row;
@@ -185,10 +185,10 @@ public class NoufuGakuDataSakuseiHandler {
     /**
      * 単一用バッチパラメータの作成のメソッドです。
      *
-     * @return NofugakuDataParameter
+     * @return DBB514001_NofugakuDataSakuseiTandokuShichosonParameter
      */
-    public NofugakuDataParameter get単一用バッチパラメータ() {
-        NofugakuDataParameter parameter = new NofugakuDataParameter();
+    public DBB514001_NofugakuDataSakuseiTandokuShichosonParameter get単一用バッチパラメータ() {
+        DBB514001_NofugakuDataSakuseiTandokuShichosonParameter parameter = new DBB514001_NofugakuDataSakuseiTandokuShichosonParameter();
         RDate 調定年度 = div.getShoriNaiyo().getTxtTaishoNendo().getValue();
         if (調定年度 != null) {
             parameter.set調定年度(調定年度.getYear());
@@ -224,10 +224,10 @@ public class NoufuGakuDataSakuseiHandler {
     /**
      * 広域用バッチパラメータの作成のメソッドです。
      *
-     * @return NofugakuDataParameter
+     * @return DBB514001_NofugakuDataSakuseiTandokuShichosonParameter
      */
-    public NofugakuDataParameter get広域用バッチパラメータ() {
-        NofugakuDataParameter parameter = new NofugakuDataParameter();
+    public DBB514001_NofugakuDataSakuseiTandokuShichosonParameter get広域用バッチパラメータ() {
+        DBB514001_NofugakuDataSakuseiTandokuShichosonParameter parameter = new DBB514001_NofugakuDataSakuseiTandokuShichosonParameter();
         RDate 調定年度 = div.getShoriNaiyo().getTxtTaishoNendo().getValue();
         if (調定年度 != null) {
             parameter.set調定年度(調定年度.getYear());

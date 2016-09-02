@@ -69,7 +69,7 @@
             );
     </select>
     
-    <update id="insertShoriDateKanri"
+    <insert id="insertShoriDateKanri"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter" >
         SELECT rgdb."DbFx7014ShoriDateKanriUpdate"(
             #{サブ業務コード},
@@ -87,7 +87,7 @@
             #{基準年月日},
             #{基準日時}
             );
-    </update>
+    </insert>
     
     <select id="getJigyouHokokuTokeiReportJyoho"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter" 

@@ -5,11 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC4210011;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ServiceShuruiShikyuGendoGaku;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ServiceShuruiShikyuGendoGakuHolder;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4210011.DBC4210011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4210011.ShuruiShikyuGendogakuMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4220011.DBC4220011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4210011.ShuruiShikyuGendogakuMainHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4210011.ShuruiShikyuGendogakuMainValidationHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -17,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * DBC4210011_種類支給限度額登録のクラスです。
@@ -26,11 +31,11 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ShuruiShikyuGendogakuMain {
 
     private static int state;
-    private final int 標準state = 1;
-    private final int 保存state = 2;
-    private final int 修正state = 3;
-    private final int 追加state = 4;
-    private final int 削除state = 5;
+    private static final int 標準 = 1;
+    private static final int 保存 = 2;
+    private static final int 修正 = 3;
+    private static final int 追加 = 4;
+    private static final int 削除 = 5;
 
     /**
      * 画面初期化のメソッドです。
@@ -40,8 +45,10 @@ public class ShuruiShikyuGendogakuMain {
      * @return ResponseData
      */
     public ResponseData<ShuruiShikyuGendogakuMainDiv> onLoand(ShuruiShikyuGendogakuMainDiv div) {
-        getHandler(div).initialize();
-        state = 標準state;
+        List<ServiceShuruiShikyuGendoGaku> shikyuGendoGakuList = getHandler(div).initialize();
+        ViewStateHolder.put(ViewStateKeys.サービス種類支給限度額,
+                new ServiceShuruiShikyuGendoGakuHolder(shikyuGendoGakuList));
+        state = 標準;
         return ResponseData.of(div).setState(DBC4220011StateName.標準);
     }
 
@@ -73,8 +80,11 @@ public class ShuruiShikyuGendogakuMain {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             ShuruiShikyuGendogakuMainValidationHandler validationHandler = getValidationHandler();
+            List<ServiceShuruiShikyuGendoGaku> shikyuGendoGakuList
+                    = ViewStateHolder.get(ViewStateKeys.サービス種類支給限度額, ServiceShuruiShikyuGendoGakuHolder.class)
+                    .getServiceShuruiShikyuGendoGakuList();
             switch (state) {
-                case 追加state:
+                case 追加:
                     validationHandler.標準適用開始年月チェック(pairs, div);
                     validationHandler.サービス提供期間チェック(pairs, div);
                     validationHandler.種類支給限度額認定対象チェック(pairs, div);
@@ -87,7 +97,7 @@ public class ShuruiShikyuGendogakuMain {
                     }
                     getHandler(div).追加する();
                     break;
-                case 修正state:
+                case 修正:
                     validationHandler.要支援1入力チェック警告(pairs, div);
                     validationHandler.要支援1入力チェックエラー(pairs, div);
                     validationHandler.要支援2入力チェック警告(pairs, div);
@@ -95,16 +105,16 @@ public class ShuruiShikyuGendogakuMain {
                     if (pairs.iterator().hasNext()) {
                         return ResponseData.of(div).addValidationMessages(pairs).respond();
                     }
-                    getHandler(div).update修正();
+                    getHandler(div).update修正(shikyuGendoGakuList);
                     break;
-                case 削除state:
-                    getHandler(div).update削除();
+                case 削除:
+                    getHandler(div).update削除(shikyuGendoGakuList);
                     break;
                 default:
                     break;
             }
             getHandler(div).btnSave();
-            state = 保存state;
+            state = 保存;
             return ResponseData.of(div).setState(DBC4220011StateName.保存完了);
         } else {
             return ResponseData.of(div).respond();
@@ -120,8 +130,10 @@ public class ShuruiShikyuGendogakuMain {
      * @return ResponseData
      */
     public ResponseData<ShuruiShikyuGendogakuMainDiv> onClick_btnContinue(ShuruiShikyuGendogakuMainDiv div) {
-        getHandler(div).btnContinue();
-        state = 標準state;
+        List<ServiceShuruiShikyuGendoGaku> shikyuGendoGakuList = getHandler(div).btnContinue();
+        ViewStateHolder.put(ViewStateKeys.サービス種類支給限度額,
+                new ServiceShuruiShikyuGendoGakuHolder(shikyuGendoGakuList));
+        state = 標準;
         return ResponseData.of(div).setState(DBC4220011StateName.標準);
     }
 
@@ -156,7 +168,7 @@ public class ShuruiShikyuGendogakuMain {
      */
     public ResponseData<ShuruiShikyuGendogakuMainDiv> onClick_btnAddShikyuGendogaku(ShuruiShikyuGendogakuMainDiv div) {
         getHandler(div).btnAddShikyuGendogaku();
-        state = 追加state;
+        state = 追加;
         return ResponseData.of(div).respond();
     }
 
@@ -169,7 +181,7 @@ public class ShuruiShikyuGendogakuMain {
      */
     public ResponseData<ShuruiShikyuGendogakuMainDiv> onClick_modify(ShuruiShikyuGendogakuMainDiv div) {
         getHandler(div).modify();
-        state = 修正state;
+        state = 修正;
         return ResponseData.of(div).respond();
     }
 
@@ -182,7 +194,7 @@ public class ShuruiShikyuGendogakuMain {
      */
     public ResponseData<ShuruiShikyuGendogakuMainDiv> onClick_delete(ShuruiShikyuGendogakuMainDiv div) {
         getHandler(div).delete();
-        state = 削除state;
+        state = 削除;
         return ResponseData.of(div).respond();
     }
 

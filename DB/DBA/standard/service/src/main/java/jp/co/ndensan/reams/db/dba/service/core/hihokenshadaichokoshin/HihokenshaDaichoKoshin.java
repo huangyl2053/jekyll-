@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dba.service.core.hihokenshadaichokoshin;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitotatsushikakuido.NenreitotatsuShikakuIdoBatchFlowParameter;
-import jp.co.ndensan.reams.db.dba.definition.processprm.nenreitotatsushikakuido.HihokenshaDaichoKoshinProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA010010.DBA010010_NenreitotatsuShikakuIdoParameter;
+import jp.co.ndensan.reams.db.dba.definition.processprm.dba010010.HihokenshaDaichoKoshinProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichokoshin.SaishinIdohiDataEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichokoshin.ShikakuIdoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitotatsushikakuido.INenreitotatsuShikakuIdoRelateMapper;
@@ -303,7 +303,7 @@ public class HihokenshaDaichoKoshin {
      * @param param バッチパラメータ
      */
     @Transaction
-    public void updNenreitotatsuJoken(NenreitotatsuShikakuIdoBatchFlowParameter param) {
+    public void updNenreitotatsuJoken(DBA010010_NenreitotatsuShikakuIdoParameter param) {
 
         DbT7022ShoriDateKanriEntity entity = db7022Dac.selectByKey(SubGyomuCode.DBA介護資格, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
 

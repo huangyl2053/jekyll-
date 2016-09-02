@@ -48,7 +48,7 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -492,9 +492,7 @@ public class KijunShunyugakuTekiyo {
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("対象年度："));
-        if (!RString.isNullOrEmpty(processParameter.get対象年度())) {
-            jokenBuilder.append(new FlexibleYear(processParameter.get対象年度()).wareki().eraType(EraType.KANJI).toDateString());
-        }
+        jokenBuilder.append(processParameter.get対象年度());
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("削除された情報："));
@@ -528,12 +526,10 @@ public class KijunShunyugakuTekiyo {
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("申請日："));
-        jokenBuilder.append(get期間(jokenBuilder, processParameter.get申請日From(), processParameter.get申請日To()));
-        出力条件List.add(jokenBuilder.toRString());
+        出力条件List.add(get期間(jokenBuilder, processParameter.get申請日From(), processParameter.get申請日To()));
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("決定日："));
-        jokenBuilder.append(get期間(jokenBuilder, processParameter.get決定日From(), processParameter.get決定日To()));
-        出力条件List.add(jokenBuilder.toRString());
+        出力条件List.add(get期間(jokenBuilder, processParameter.get決定日From(), processParameter.get決定日To()));
         return 出力条件List;
     }
 
@@ -574,7 +570,7 @@ public class KijunShunyugakuTekiyo {
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付));
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
         return KijunShunyugakuTekiyoMybatisParameter.createMybatisParameter(processParameter.get保険者コード(),
-                processParameter.get対象年度(),
+                new RDate(processParameter.get対象年度().toString()).getYear().toDateString(),
                 processParameter.is削除含める(),
                 processParameter.getデータ種別(),
                 processParameter.get抽出区分(),

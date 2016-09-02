@@ -26,6 +26,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 public class TokubetsuChiikiKasanKeigenJisekiKanriIchiran {
 
     private static final RString REPORTID = new RString("DBD200012_TokubetsuChiikiKasanKeigenJisekiKanriIchiran");
+    private static final RString KEY0 = new RString("0");
+    private static final RString KEY1 = new RString("1");
+    private static final RString KEY2 = new RString("2");
 
     /**
      * コンストラクタです。
@@ -42,13 +45,10 @@ public class TokubetsuChiikiKasanKeigenJisekiKanriIchiran {
     public DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriListParameter createParameter(TokubetsuPanelDiv div) {
         DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriListParameter bparameter
                 = new DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriListParameter();
-        div.getCcdHokenshaList().loadHokenshaList();
-        RString radtaishoym = div.getRadTaishoYM().getSelectedKey();
-        if (TargetYearMonth.サービス提供年月.getコード().equals(radtaishoym)) {
-            bparameter.set対象年月(TargetYearMonth.サービス提供年月.getコード());
-        }
-        if (TargetYearMonth.審査年月.getコード().equals(radtaishoym)) {
-            bparameter.set対象年月(TargetYearMonth.審査年月.getコード());
+        if (div.getRadTaishoYM().getSelectedKey().equals(KEY1)) {
+            bparameter.set対象年月(TargetYearMonth.サービス提供年月);
+        } else {
+            bparameter.set対象年月(TargetYearMonth.審査年月);
         }
 
         if (div.getTxtRangeYM().getFromValue() != null) {
@@ -65,23 +65,23 @@ public class TokubetsuChiikiKasanKeigenJisekiKanriIchiran {
             bparameter.set事業者番号(new JigyoshaNo(div.getTxtJigyoshaNo().getValue()));
         }
 
-        RString ddlchikuselect = div.getChushutsuJoken().getDdlChiku().getSelectedKey();
-        if (TargetArea.全て.getコード().equals(ddlchikuselect)) {
-            set地区(bparameter, TargetArea.全て.getコード(), RString.EMPTY, RString.EMPTY);
-        } else if (TargetArea.住所.getコード().equals(ddlchikuselect)) {
-            set地区(bparameter, TargetArea.住所.getコード(),
+        if (div.getDdlChiku().getSelectedKey().equals(KEY0)) {
+            set地区(bparameter, TargetArea.全て, RString.EMPTY, RString.EMPTY);
+        } else if (div.getDdlChiku().getSelectedKey().equals(KEY1)) {
+            set地区(bparameter, TargetArea.住所,
                     div.getChushutsuJoken().getTxtChikuCodeFrom().getValue(),
                     div.getChushutsuJoken().getTxtChikuCodeTo().getValue());
-        } else if (TargetArea.行政区.getコード().equals(ddlchikuselect)) {
-            set地区(bparameter, TargetArea.行政区.getコード(),
+        } else if (div.getDdlChiku().getSelectedKey().equals(KEY2)) {
+            set地区(bparameter, TargetArea.行政区,
                     div.getChushutsuJoken().getTxtChikuCodeFrom().getValue(),
                     div.getChushutsuJoken().getTxtChikuCodeTo().getValue());
-        } else if (TargetArea.地区.getコード().equals(ddlchikuselect)) {
-            set地区(bparameter, TargetArea.地区.getコード(),
+        } else {
+            set地区(bparameter, TargetArea.地区,
                     div.getChushutsuJoken().getTxtChikuCodeFrom().getValue(),
                     div.getChushutsuJoken().getTxtChikuCodeTo().getValue());
         }
 
+        div.getCcdHokenshaList().loadHokenshaList();
         if (div.getCcdHokenshaList().getSelectedItem() != null) {
             bparameter.set市町村コード(div.getCcdHokenshaList().getSelectedItem().get市町村コード());
         }
@@ -93,7 +93,7 @@ public class TokubetsuChiikiKasanKeigenJisekiKanriIchiran {
     }
 
     private void set地区(DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriListParameter bparameter,
-            RString 地区コード種類,
+            TargetArea 地区コード種類,
             RString 開始地区コード,
             RString 終了地区コード) {
         bparameter.set地区コード種類(地区コード種類);

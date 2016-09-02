@@ -8,6 +8,11 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd511001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.RenZhengzheEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd511001.KoshinShinseiOshiraseTshuchishoReportSource;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -18,35 +23,40 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public final class KoshinShinseiOshiraseTshuchishoReport extends Report<KoshinShinseiOshiraseTshuchishoReportSource> {
 
-    private final List<RenZhengzheEntity> 認定更新お知らせ通知書Entityリスト;
+    private final NinshoshaSource ninshoshaSource;
+    private final IAtesaki 宛先;
+    private final ChohyoSeigyoKyotsu 帳票制御共通;
+    private final Association 地方公共団体;
+    private final List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用;
+    private final RenZhengzheEntity 認定更新お知らせ通知書Entity;
 
     /**
      * インスタンスを生成します。
      *
-     * @param 認定更新お知らせ通知書Entityリスト List<RenZhengzheEntity>
-     * @return 認定更新お知らせ通知書
+     * @param ninshoshaSource NinshoshaSource
+     * @param 宛先 IAtesaki
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
+     * @param 地方公共団体 Association
+     * @param 帳票制御汎用 List<DbT7067ChohyoSeigyoHanyoEntity>
+     * @param 認定更新お知らせ通知書Entity RenZhengzheEntity
      */
-    public static KoshinShinseiOshiraseTshuchishoReport createReport(List<RenZhengzheEntity> 認定更新お知らせ通知書Entityリスト) {
-        return new KoshinShinseiOshiraseTshuchishoReport(認定更新お知らせ通知書Entityリスト);
+    public KoshinShinseiOshiraseTshuchishoReport(NinshoshaSource ninshoshaSource, IAtesaki 宛先,
+            ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体, List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用,
+            RenZhengzheEntity 認定更新お知らせ通知書Entity) {
+        this.ninshoshaSource = ninshoshaSource;
+        this.宛先 = 宛先;
+        this.帳票制御共通 = 帳票制御共通;
+        this.地方公共団体 = 地方公共団体;
+        this.帳票制御汎用 = 帳票制御汎用;
+        this.認定更新お知らせ通知書Entity = 認定更新お知らせ通知書Entity;
     }
 
-    private KoshinShinseiOshiraseTshuchishoReport(List<RenZhengzheEntity> 認定更新お知らせ通知書Entityリスト) {
-        this.認定更新お知らせ通知書Entityリスト = 認定更新お知らせ通知書Entityリスト;
-    }
-
-    /**
-     * writeBy
-     *
-     * @param writer ReportSourceWriter
-     */
     @Override
     public void writeBy(ReportSourceWriter<KoshinShinseiOshiraseTshuchishoReportSource> writer) {
-        for (int index = 0; index < 認定更新お知らせ通知書Entityリスト.size(); index++) {
-            IKoshinShinseiOshiraseTshuchishoEditor editor = new KoshinShinseiOshiraseTshuchishoEditor(
-                    認定更新お知らせ通知書Entityリスト, index);
-            IKoshinShinseiOshiraseTshuchishoBuilder builder = new KoshinShinseiOshiraseTshuchishoBuilder(editor);
-            writer.writeLine(builder);
-        }
+        IKoshinShinseiOshiraseTshuchishoEditor editor = new KoshinShinseiOshiraseTshuchishoEditor(
+                ninshoshaSource, 宛先, 帳票制御共通, 地方公共団体, 帳票制御汎用, 認定更新お知らせ通知書Entity);
+        IKoshinShinseiOshiraseTshuchishoBuilder builder = new KoshinShinseiOshiraseTshuchishoBuilder(editor);
+        writer.writeLine(builder);
     }
 
 }

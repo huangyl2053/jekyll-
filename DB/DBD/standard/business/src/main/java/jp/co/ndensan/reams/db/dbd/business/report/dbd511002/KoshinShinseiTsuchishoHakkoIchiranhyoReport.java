@@ -22,19 +22,14 @@ public final class KoshinShinseiTsuchishoHakkoIchiranhyoReport extends Report<Ko
     /**
      * インスタンスを生成します。
      *
-     * @param entity 更新申請のお知らせ通知書発行一覧表
+     * @param entity TongzhiShufaxingEntity
      */
     public KoshinShinseiTsuchishoHakkoIchiranhyoReport(TongzhiShufaxingEntity entity) {
         this.entity = entity;
     }
 
-    /**
-     * writeBy
-     *
-     * @param writer ReportSourceWriter
-     */
     @Override
-    protected void writeBy(ReportSourceWriter<KoshinShinseiTsuchishoHakkoIchiranhyoReportSource> writer) {
+    public void writeBy(ReportSourceWriter<KoshinShinseiTsuchishoHakkoIchiranhyoReportSource> writer) {
         IKoshinShinseiTsuchishoHakkoIchiranhyoEditor editor = new KoshinShinseiTsuchishoHakkoIchiranhyoEditor(entity);
         IKoshinShinseiTsuchishoHakkoIchiranhyoBuilder builder = new KoshinShinseiTsuchishoHakkoIchiranhyoBuilder(editor);
         writer.writeLine(builder);

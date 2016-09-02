@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110080;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_JikofutangakuMeisaiTaishoTsuki;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenSofuKokanJohoShikibetsuBango;
@@ -39,9 +40,13 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -52,7 +57,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<SyuturyokuEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassan."
-            + "IKogakugassanHoseisumiJikofutangakuOutMapper.get高額合算自己負担額データ");
+            + "IKogakugassanHoseisumiJikofutangakuOutMapper.get出力対象データ");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString ファイル名_前 = new RString("10_37K");
@@ -76,7 +81,8 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
     }
 
     private OutputParameter<Integer> outputCount;
-    private OutputParameter<SharedFileDescriptor> outputEntry;
+    private OutputParameter<List> outputEntry;
+    private List<SharedFileDescriptor> entryList;
     private KogakugassanProcessParameter processParameter;
     private int 総出力件数;
     private int レコード番号;
@@ -91,13 +97,14 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
     protected void initialize() {
         outputCount = new OutputParameter<>();
         outputEntry = new OutputParameter<>();
+        entryList = new ArrayList<>();
         総出力件数 = INT_0;
         レコード番号 = INT_0;
         RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         if (国保連送付外字_変換区分_1.equals(国保連送付外字_変換区分)) {
             文字コード = Encode.SJIS;
         } else {
-            // TODO QA90831
+            // TODO QA90831 文字コードがありません。
             文字コード = Encode.UTF_8withBOM;
         }
     }
@@ -144,7 +151,8 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力ファイル名));
         sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
         outputCount.setValue(総出力件数);
-        outputEntry.setValue(sfd);
+        entryList.add(sfd);
+        outputEntry.setValue(entryList);
         eucCsvWriter.close();
     }
 
@@ -174,14 +182,14 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         AtenaKanaMeisho 被保険者氏名カナ = 高額合算自己負担額一時Entity.getHihokenshaShimeiKana();
         RString 被保険者氏名カナR
                 = 被保険者氏名カナ == null || 被保険者氏名カナ.isEmpty() ? RString.EMPTY : 被保険者氏名カナ.getColumnValue().trim();
-        // TODO 25バイト
+        // TODO 25バイト QA1430
         meisaiEntity.set被保険者氏名_カナ(囲み文字(被保険者氏名カナR));
         AtenaMeisho 被保険者氏名_漢字 = 高額合算自己負担額一時Entity.getHihokenshaShimei();
         RString 被保険者氏名_漢字R
                 = 被保険者氏名_漢字 == null || 被保険者氏名_漢字.isEmpty() ? RString.EMPTY : 被保険者氏名_漢字.getColumnValue().trim();
-        // TODO 40バイト
+        // TODO 40バイト QA1430
         meisaiEntity.set被保険者氏名_漢字(囲み文字(被保険者氏名_漢字R));
-        meisaiEntity.set生年月日(trimDate(高額合算自己負担額一時Entity.getUmareYMD()));
+        meisaiEntity.set生年月日(formatDate(高額合算自己負担額一時Entity.getUmareYMD()));
         Code 性別 = 高額合算自己負担額一時Entity.getSeibetsuCode();
         RString 性別R = 性別 == null || 性別.isEmpty() ? RString.EMPTY : 性別.getColumnValue().trim();
         meisaiEntity.set性別(性別R);
@@ -195,12 +203,12 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         meisaiEntity.set突合用国保被保険者個人番号(trimRString(高額合算自己負担額一時Entity.getKokuho_KojinNo()));
         meisaiEntity.set異動区分(trimRString(高額合算自己負担額一時Entity.getIdoKubun()));
         meisaiEntity.set補正済自己負担額送付区分(trimRString(高額合算自己負担額一時Entity.getHoseiZumiSofuKubun()));
-        //        meisaiEntity.set対象年度();
-        //        meisaiEntity.set対象計算期間_開始();
-        //        meisaiEntity.set対象計算期間_終了();
-        //        meisaiEntity.set被保険者期間_開始();
-        //        meisaiEntity.set被保険者期間_終了();
-        //        meisaiEntity.set申請年月日();
+        meisaiEntity.set対象年度(trimYear(高額合算自己負担額一時Entity.getTaishoNendo()));
+        meisaiEntity.set対象計算期間_開始(trimDate(高額合算自己負担額一時Entity.getTaishoKeisanKaishiYMD()));
+        meisaiEntity.set対象計算期間_終了(trimDate(高額合算自己負担額一時Entity.getTaishoKeisanShuryoYMD()));
+        meisaiEntity.set被保険者期間_開始(trimDate(高額合算自己負担額一時Entity.getHihokenshaKaishiYMD()));
+        meisaiEntity.set被保険者期間_終了(trimDate(高額合算自己負担額一時Entity.getHihokenshaShuryoYMD()));
+        meisaiEntity.set申請年月日(trimDate(高額合算自己負担額一時Entity.getShinseiYMD()));
         getMeisaiEntity2(meisaiEntity, entity);
         getMeisaiEntity3(meisaiEntity, entity);
         meisaiEntity.set合計_自己負担額(trimDecimal(高額合算自己負担額一時Entity.getSumi_Gokei_JikoFutanGaku()));
@@ -210,12 +218,12 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
 
         AtenaMeisho 宛先氏名 = 高額合算自己負担額一時Entity.getAtesakiShimei();
         RString 宛先氏名R = 宛先氏名 == null || 宛先氏名.isEmpty() ? RString.EMPTY : 宛先氏名.getColumnValue().trim();
-        // TODO 40バイト
+        // TODO 40バイト QA1430
         meisaiEntity.set宛先氏名(囲み文字(宛先氏名R));
         YubinNo 宛先郵便番号 = 高額合算自己負担額一時Entity.getAtesakiYubinNo();
         RString 宛先郵便番号R = 宛先郵便番号 == null || 宛先郵便番号.isEmpty() ? RString.EMPTY : 宛先郵便番号.getColumnValue().trim();
         meisaiEntity.set宛先郵便番号(宛先郵便番号R);
-        // TODO 128バイト
+        // TODO 128バイト QA1430
         meisaiEntity.set宛先住所(囲み文字(trimRString(高額合算自己負担額一時Entity.getAtesakiJusho())));
         meisaiEntity.set証明書発行年月日(RString.EMPTY);
         meisaiEntity.set証明書発行者名(RString.EMPTY);
@@ -233,10 +241,10 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         meisaiEntity.set計算結果送付先電話番号(RString.EMPTY);
         meisaiEntity.set窓口払対象者判定コード(trimRString(高額合算自己負担額一時Entity.getMadoguchi_TaishoshaHanteiCode()));
         meisaiEntity.set支払場所(囲み文字(trimRString(高額合算自己負担額一時Entity.getShiharaiBasho())));
-//        meisaiEntity.set支払期間開始年月日()
-//        meisaiEntity.set支払期間終了年月日()
-//        meisaiEntity.set支払期間開始年月日_曜日();
-//        meisaiEntity.set支払期間終了年月日_曜日();
+        meisaiEntity.set支払期間開始年月日(trimDate(高額合算自己負担額一時Entity.getShikaraiKaishiYMD()));
+        meisaiEntity.set支払期間終了年月日(trimDate(高額合算自己負担額一時Entity.getShiharaiShuryoYMD()));
+        meisaiEntity.set支払期間開始年月日_曜日(get曜日略称(高額合算自己負担額一時Entity.getShikaraiKaishiYMD()));
+        meisaiEntity.set支払期間終了年月日_曜日(get曜日略称(高額合算自己負担額一時Entity.getShiharaiShuryoYMD()));
         meisaiEntity.set支払期間開始年月日_開始時間(trimRString(高額合算自己負担額一時Entity.getShiharaiKaishiTime()));
         meisaiEntity.set支払期間終了年月日_終了時間(trimRString(高額合算自己負担額一時Entity.getShiharaiShuryoTime()));
         meisaiEntity.set備考欄(囲み文字(trimRString(高額合算自己負担額一時Entity.getBiko())));
@@ -516,6 +524,20 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         return null;
     }
 
+    private RString get曜日略称(FlexibleDate date) {
+        return date == null || date.isEmpty() ? RString.EMPTY : new RString(date.getDayOfWeek().getShortTerm());
+    }
+
+    private RString trimYear(FlexibleYear year) {
+        return year == null || year.isEmpty() ? RString.EMPTY
+                : year.wareki().eraType(EraType.NUMBER).firstYear(FirstYear.GAN_NEN).toDateString();
+    }
+
+    private RString trimDate(FlexibleDate date) {
+        return date == null || date.isEmpty() ? RString.EMPTY
+                : date.wareki().eraType(EraType.NUMBER).firstYear(FirstYear.GAN_NEN).separator(Separator.NONE).toDateString();
+    }
+
     private RString trimDecimal(Decimal dec) {
         return dec == null ? RString.EMPTY : new RString(dec.toString());
     }
@@ -524,7 +546,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         return str == null || str.isEmpty() ? RString.EMPTY : str.trim();
     }
 
-    private RString trimDate(FlexibleDate date) {
+    private RString formatDate(FlexibleDate date) {
         return date == null || date.isEmpty() ? RString.EMPTY : new RString(date.toString()).trim();
     }
 

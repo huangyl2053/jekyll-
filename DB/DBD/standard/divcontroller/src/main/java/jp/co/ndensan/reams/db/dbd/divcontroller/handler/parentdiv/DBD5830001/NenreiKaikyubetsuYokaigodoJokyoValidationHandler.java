@@ -39,8 +39,6 @@ public class NenreiKaikyubetsuYokaigodoJokyoValidationHandler {
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.行政区コード大小関係チェック,
                 div).build().check(messages));
-        div.getCcdGyoseikuStart().get行政区コード();
-        div.getCcsGyoseikuEnd().get行政区コード();
         return pairs;
 
     }
@@ -61,8 +59,6 @@ public class NenreiKaikyubetsuYokaigodoJokyoValidationHandler {
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.組合コード大小関係チェック,
                 div).build().check(messages));
-        div.getCcdChiku2Start().get地区2コード();
-        div.getCcdChiku2End().get地区2コード();
         return pairs;
 
     }
@@ -83,8 +79,6 @@ public class NenreiKaikyubetsuYokaigodoJokyoValidationHandler {
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.住所コード大小関係チェック,
                 div).build().check(messages));
-        div.getCcdChoikiStart().get町域コード();
-        div.getCcdChoikiEnd().get町域コード();
         return pairs;
 
     }

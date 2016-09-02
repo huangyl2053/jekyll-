@@ -64,8 +64,16 @@ public class ShokanShikyuGendogakuMainHandler {
     public void initializeDisplay(List<ShokanShuruiShikyuGendoGaku> 償還list,
             List<UwanoseShokanShuruiShikyuGendoGaku> 上乗せ償還list) {
         List<ShokanShuruiShikyuGendoGakuData> entityList = new ArrayList<>();
-        step1(償還list, entityList);
-        step2(上乗せ償還list, entityList);
+        if (償還list != null) {
+            if (!償還list.isEmpty()) {
+                step1(償還list, entityList);
+            }
+        }
+        if (上乗せ償還list != null) {
+            if (!上乗せ償還list.isEmpty()) {
+                step2(上乗せ償還list, entityList);
+            }
+        }
         if (!entityList.isEmpty()) {
             List<dgShikyuGendogaku_Row> rowList = new ArrayList<>();
 
@@ -88,8 +96,8 @@ public class ShokanShikyuGendogakuMainHandler {
                 rowList.add(row);
             }
             div.getShokanShikyuGendogakuIchiran().getDgShikyuGendogaku().setDataSource(rowList);
-            状態１画面制御();
         }
+        状態１画面制御();
     }
 
     private void step1(List<ShokanShuruiShikyuGendoGaku> 償還list,

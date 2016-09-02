@@ -122,11 +122,10 @@ public class KogakuGassanKyufuJissekiHandler {
             row.setTxtSofuNengetsu(get日期転換(高額合算給付実績.get送付年月()));
             row.setTxtHihokenshaNo(高額合算給付実績.get被保険者番号().value());
             row.setTxtSeiriNo(高額合算給付実績.get整理番号());
-            // TODO QA1628回答まち、文字を赤色で表示する。
             if (div.getChkRirekiHyoji().isAllSelected() && is履歴を抽出チェックオン(get交換情報識別番号(高額合算給付実績.get交換情報識別番号()),
                     高額合算給付実績.get被保険者番号().value(), 高額合算給付実績.get支給申請書整理番号(),
                     高額合算給付実績.get整理番号(), 一覧データ)) {
-                row.setRowBgColor(DataGridCellBgColor.bgColorRed);
+                row.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
             }
             rowList.add(row);
         }
@@ -138,47 +137,47 @@ public class KogakuGassanKyufuJissekiHandler {
         List<KogakuGassanKyufuJisseki> チェックオフ = new ArrayList<>();
         RString 同支給申請書整理番号 = RString.EMPTY;
         RString 最大整理番号 = RString.EMPTY;
-        Collections.sort(高額合算給付実績情報, new KogakuGassanKyufuJissekiHandler.DateComparator());
         int 高額合算給付実績件数 = 0;
         for (KogakuGassanKyufuJisseki 高額合算給付実績 : 高額合算給付実績情報) {
-            if (高額合算給付実績件数 == 0) {
-                最大整理番号 = 高額合算給付実績.get整理番号();
+            if (高額合算給付実績.get処理年月() == null || 高額合算給付実績.get処理年月().isEmpty()) {
                 チェックオフデータ.add(高額合算給付実績);
             }
-            if (!RString.isNullOrEmpty(同支給申請書整理番号) && (!同支給申請書整理番号.equals(高額合算給付実績.get支給申請書整理番号())
-                    || 最大整理番号.equals(高額合算給付実績.get整理番号()))) {
-                最大整理番号 = 高額合算給付実績.get整理番号();
-                チェックオフデータ.add(高額合算給付実績);
-            }
-            同支給申請書整理番号 = 高額合算給付実績.get支給申請書整理番号();
-            高額合算給付実績件数 = 高額合算給付実績件数 + 1;
         }
         if (!チェックオフデータ.isEmpty()) {
-            for (KogakuGassanKyufuJisseki kyufuJisseki : チェックオフデータ) {
-                if (kyufuJisseki.get処理年月() == null || kyufuJisseki.get処理年月().isEmpty()) {
-                    チェックオフ.add(kyufuJisseki);
+            Collections.sort(チェックオフデータ, new KogakuGassanKyufuJissekiHandler.DateComparator());
+            for (KogakuGassanKyufuJisseki 高額合算給付実績 : チェックオフデータ) {
+                if (高額合算給付実績件数 == 0) {
+                    最大整理番号 = 高額合算給付実績.get整理番号();
+                    チェックオフ.add(高額合算給付実績);
                 }
+                if (!RString.isNullOrEmpty(同支給申請書整理番号) && (!同支給申請書整理番号.equals(高額合算給付実績.get支給申請書整理番号())
+                        || 最大整理番号.equals(高額合算給付実績.get整理番号()))) {
+                    最大整理番号 = 高額合算給付実績.get整理番号();
+                    チェックオフ.add(高額合算給付実績);
+                }
+                同支給申請書整理番号 = 高額合算給付実績.get支給申請書整理番号();
+                高額合算給付実績件数 = 高額合算給付実績件数 + 1;
             }
         }
-        FlexibleYearMonth 最大処理年月 = FlexibleYearMonth.EMPTY;
-        RString 整理番号 = RString.EMPTY;
+        最大整理番号 = RString.EMPTY;
         同支給申請書整理番号 = RString.EMPTY;
-        if (!チェックオフデータ.isEmpty() && チェックオフ.isEmpty()) {
-            Collections.sort(チェックオフデータ, new KogakuGassanKyufuJissekiHandler.SyoliDateComparator());
+        FlexibleYearMonth 最大処理年月 = FlexibleYearMonth.EMPTY;
+        if (チェックオフ.isEmpty()) {
+            Collections.sort(高額合算給付実績情報, new KogakuGassanKyufuJissekiHandler.SyoliDateComparator());
             高額合算給付実績件数 = 0;
-            for (KogakuGassanKyufuJisseki kyufuJisseki : チェックオフデータ) {
-                kyufuJisseki.get処理年月();
+            for (KogakuGassanKyufuJisseki kyufuJisseki : 高額合算給付実績情報) {
                 if (高額合算給付実績件数 == 0) {
+                    最大整理番号 = kyufuJisseki.get整理番号();
                     最大処理年月 = kyufuJisseki.get処理年月();
                     チェックオフ.add(kyufuJisseki);
                 }
-                if (!RString.isNullOrEmpty(同支給申請書整理番号) && !RString.isNullOrEmpty(整理番号)
-                        && ((!同支給申請書整理番号.equals(kyufuJisseki.get支給申請書整理番号())
-                        && !整理番号.equals(kyufuJisseki.get整理番号())) || 最大処理年月.equals(kyufuJisseki.get処理年月()))) {
+                if (!RString.isNullOrEmpty(同支給申請書整理番号) && 最大処理年月.equals(kyufuJisseki.get処理年月())
+                        && (!同支給申請書整理番号.equals(kyufuJisseki.get支給申請書整理番号())
+                        || 最大整理番号.equals(kyufuJisseki.get整理番号()))) {
+                    最大整理番号 = kyufuJisseki.get整理番号();
                     最大処理年月 = kyufuJisseki.get処理年月();
                     チェックオフ.add(kyufuJisseki);
                 }
-                整理番号 = kyufuJisseki.get整理番号();
                 同支給申請書整理番号 = kyufuJisseki.get支給申請書整理番号();
                 高額合算給付実績件数 = 高額合算給付実績件数 + 1;
             }
@@ -189,12 +188,12 @@ public class KogakuGassanKyufuJissekiHandler {
     private boolean is履歴を抽出チェックオン(RString 交換情報識別番号, RString 被保険者番号,
             RString 支給申請書整理番号, RString 整理番号, List<dgRireki_Row> rowList) {
         for (dgRireki_Row row : rowList) {
-            if (!交換情報識別番号.equals(row.getTxtKokanShikibetsu()) && !被保険者番号.equals(row.getTxtHihokenshaNo())
-                    && !支給申請書整理番号.equals(row.getTxtShikyuShinseishoSeiriNo()) && !整理番号.equals(row.getTxtSeiriNo())) {
-                return true;
+            if (交換情報識別番号.equals(row.getTxtKokanShikibetsu()) && 被保険者番号.equals(row.getTxtHihokenshaNo())
+                    && 支給申請書整理番号.equals(row.getTxtShikyuShinseishoSeiriNo()) && 整理番号.equals(row.getTxtSeiriNo())) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     private RString get交換情報識別番号(KokanShikibetsuNo 交換情報識別番号) {
@@ -266,11 +265,11 @@ public class KogakuGassanKyufuJissekiHandler {
         public int compare(KogakuGassanKyufuJisseki o1, KogakuGassanKyufuJisseki o2) {
             int 高額合算給付実績 = o2.get支給申請書整理番号().compareTo(o1.get支給申請書整理番号());
             if (高額合算給付実績 == 0) {
-                int 整理番号 = o2.get整理番号().compareTo(o1.get整理番号());
-                if (整理番号 == 0) {
-                    return o2.get処理年月().compareTo(o1.get処理年月());
+                int 処理年月 = o2.get処理年月().compareTo(o1.get処理年月());
+                if (処理年月 == 0) {
+                    return o2.get整理番号().compareTo(o1.get整理番号());
                 }
-                return 整理番号;
+                return 処理年月;
             }
             return 高額合算給付実績;
         }

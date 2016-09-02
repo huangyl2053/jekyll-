@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額合算支給不支給決定を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 chenyadong
  */
 public class KogakuGassanShikyuFushikyuKettei
         extends ModelBase<KogakuGassanShikyuFushikyuKetteiIdentifier, DbT3074KogakuGassanShikyuFushikyuKetteiEntity, KogakuGassanShikyuFushikyuKettei>
@@ -349,6 +351,15 @@ public class KogakuGassanShikyuFushikyuKettei
     }
 
     /**
+     * 口座IDを返します。
+     *
+     * @return 口座ID
+     */
+    public long get口座ID() {
+        return entity.getKozaID();
+    }
+
+    /**
      * 決定通知リアル発行フラグを返します。
      *
      * @return 決定通知リアル発行フラグ
@@ -407,7 +418,7 @@ public class KogakuGassanShikyuFushikyuKettei
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

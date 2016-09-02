@@ -21,12 +21,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinshiuUpdateProcessParameter implements IBatchProcessParameter {
 
-    private final RString 申請書管理番号リスト;
-    private final RString 出力対象区分;
-    private final FlexibleDate 抽出対象期間_開始;
-    private final FlexibleDate 抽出対象期間_終了;
-    private final FlexibleDate 通知書発行日;
-    private final List<RString> 出力順;
+    private List<RString> 申請書管理番号リスト;
+    private RString 出力対象区分;
+    private FlexibleDate 抽出対象期間_開始;
+    private FlexibleDate 抽出対象期間_終了;
+    private FlexibleDate 通知書発行日;
+    private List<RString> 出力順;
 
     /**
      *
@@ -38,7 +38,7 @@ public class NinshiuUpdateProcessParameter implements IBatchProcessParameter {
      * @param 出力順 出力順
      */
     public NinshiuUpdateProcessParameter(
-            RString 申請書管理番号リスト, RString 出力対象区分,
+            List<RString> 申請書管理番号リスト, RString 出力対象区分,
             FlexibleDate 抽出対象期間_開始, FlexibleDate 抽出対象期間_終了,
             FlexibleDate 通知書発行日, List<RString> 出力順) {
         this.申請書管理番号リスト = 申請書管理番号リスト;
@@ -61,7 +61,7 @@ public class NinshiuUpdateProcessParameter implements IBatchProcessParameter {
      * @param 出力順 出力順
      * @return バッチMybatis
      */
-    public NinshiuUpdateMyBatisParameter toNinshiuUpdateMyBatisParameter(RString 申請書管理番号リスト, RString 出力対象区分,
+    public NinshiuUpdateMyBatisParameter toNinshiuUpdateMyBatisParameter(List<RString> 申請書管理番号リスト, RString 出力対象区分,
             FlexibleDate 抽出対象期間_開始, FlexibleDate 抽出対象期間_終了,
             FlexibleDate 通知書発行日, List<RString> 出力順) {
         return new NinshiuUpdateMyBatisParameter(

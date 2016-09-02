@@ -43,6 +43,8 @@ public class KaigoKyufuhiKagoMositateTourokuDiv extends Panel {
     private RString hdnKyuufuKubunn;
     @JsonProperty("hdnKensaku")
     private RString hdnKensaku;
+    @JsonProperty("hdnState")
+    private RString hdnState;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -147,6 +149,24 @@ public class KaigoKyufuhiKagoMositateTourokuDiv extends Panel {
     @JsonProperty("hdnKensaku")
     public void setHdnKensaku(RString hdnKensaku) {
         this.hdnKensaku = hdnKensaku;
+    }
+
+    /*
+     * gethdnState
+     * @return hdnState
+     */
+    @JsonProperty("hdnState")
+    public RString getHdnState() {
+        return hdnState;
+    }
+
+    /*
+     * sethdnState
+     * @param hdnState hdnState
+     */
+    @JsonProperty("hdnState")
+    public void setHdnState(RString hdnState) {
+        this.hdnState = hdnState;
     }
 
     /*

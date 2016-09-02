@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -57,6 +58,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
     private static final RString 履歴番号 = new RString("履歴番号");
     private static final RString 起動 = new RString("1");
     private static final RString 停止 = new RString("0");
+    private static final RString 連絡票を = new RString("btnUpdate");
 
     /**
      * 画面初期化です。
@@ -72,19 +74,25 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
             throw new ApplicationException(
                     DbzErrorMessages.理由付き登録不可.getMessage().replace(引き継ぎ情報なし.toString()));
         }
+        div.setDisabled(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(連絡票を, false);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 引き継ぎ情報.get被保番号());
         if (!getHandler(div).is前排他キーのセット(引き継ぎ情報.get被保番号())) {
             throw new PessimisticLockingException();
         }
         if (!引き継ぎ情報.is論理削除フラグ()) {
             div.getJukyushaIdoRenrakuhyo().initialize(訂正モード, ShikibetsuCode.EMPTY,
-                    引き継ぎ情報.get被保番号(), 引き継ぎ情報.get履歴番号(), false, 引き継ぎ情報.get異動日());
+                    引き継ぎ情報.get被保番号(), 引き継ぎ情報.get履歴番号(),
+                    引き継ぎ情報.is論理削除フラグ(), 引き継ぎ情報.get異動日());
             ViewStateHolder.put(ViewStateKeys.モード, 訂正モード);
         } else {
             div.getJukyushaIdoRenrakuhyo().initialize(照会モード, ShikibetsuCode.EMPTY,
-                    引き継ぎ情報.get被保番号(), 引き継ぎ情報.get履歴番号(), true, 引き継ぎ情報.get異動日());
+                    引き継ぎ情報.get被保番号(), 引き継ぎ情報.get履歴番号(),
+                    引き継ぎ情報.is論理削除フラグ(), 引き継ぎ情報.get異動日());
             ViewStateHolder.put(ViewStateKeys.モード, 照会モード);
         }
+        div.getOutputJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoHenkoPrintSetting().
+                initialize(true, null, true, false, null, false);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         AccessLogger.log(AccessLogType.照会,
                 getHandler(div).toPersonalData(識別コード,
@@ -100,10 +108,20 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
      */
     public ResponseData<JukyushaTeiseiRenrakuhyoTorokuPanelDiv> onClick_btnUpdate(
             JukyushaTeiseiRenrakuhyoTorokuPanelDiv div) {
-        div.getHdnFlag().setValue(起動);
         ValidationMessageControlPairs validPairs = getCheckHandler(div).get入力チェック();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        KyodoJukyushaTaishoshaEntity 引き継ぎ情報 = ViewStateHolder.get(
+                ViewStateKeys.一覧検索キー, KyodoJukyushaTaishoshaEntity.class);
+        JukyushaIdoRenrakuhyo 受給者訂正連絡票登録画面Div = div.getJukyushaIdoRenrakuhyo().get受給者異動送付();
+        JukyushaTeiseiRenrakuhyoTorokuManagerResult result = JukyushaTeiseiRenrakuhyoTorokuManager.
+                createInstance().regJukyushaTeiseiJoho(引き継ぎ情報.get履歴番号(),
+                        引き継ぎ情報.is論理削除フラグ(), 受給者訂正連絡票登録画面Div);
+        if (0 == result.getエラー有無()) {
+            div.getHdnFlag().setValue(起動);
+        } else {
+            div.getHdnFlag().setValue(停止);
         }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
@@ -113,15 +131,11 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            KyodoJukyushaTaishoshaEntity 引き継ぎ情報 = ViewStateHolder.get(
-                    ViewStateKeys.一覧検索キー, KyodoJukyushaTaishoshaEntity.class);
-            JukyushaIdoRenrakuhyo 受給者訂正連絡票登録画面Div = div.getJukyushaIdoRenrakuhyo().get受給者異動送付();
-            JukyushaTeiseiRenrakuhyoTorokuManagerResult result = JukyushaTeiseiRenrakuhyoTorokuManager.
-                    createInstance().regJukyushaTeiseiJoho(引き継ぎ情報.get履歴番号(),
-                            引き継ぎ情報.is論理削除フラグ(), 受給者訂正連絡票登録画面Div);
             if (0 == result.getエラー有無()) {
                 return get更新と状態遷移(div, 受給者訂正連絡票登録画面Div, 引き継ぎ情報);
             } else {
+                HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+                getHandler(div).前排他キーの解除(被保険者番号.getColumnValue());
                 getErrorMessages(result);
                 return ResponseData.of(div).respond();
             }
@@ -263,6 +277,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
                 初期化データ, 受給者訂正連絡票登録画面Div);
         if (TWO.equals(受給者訂正連絡票登録画面Div.get訂正区分コード())) {
             if (!flag) {
+                //TODO QA1429
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
             } else {
                 登録件数 = getHandler(div).save受給者訂正連絡票(
@@ -270,6 +285,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
             }
         } else if (THREE.equals(受給者訂正連絡票登録画面Div.get訂正区分コード())) {
             if (flag) {
+                //TODO QA1429
                 throw new ApplicationException(
                         DbzErrorMessages.理由付き登録不可.getMessage().replace(修正済.toString()));
             } else {
