@@ -73,7 +73,7 @@ var DBA;
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
                     var columns = gridSetting.columns;
 
-                    gridSetting.isShowRowState = true;
+                    gridSetting.isShowRowState = false;
                     gridSetting.isShowSelectButtonColumn = false;
                     gridSetting.isShowModifyButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = true;
@@ -127,7 +127,6 @@ var DBA;
                     this.controls.txtKaijyobi().displayNone = true;
                     this.controls.txtKaijyoTodokedebi().displayNone = true;
                     this.controls.ddlKaijyoJiyo().displayNone = true;
-                    this.controls.btnTorikeshi().disabled = true;
                     this.controls.panSotimotoJyoho().displayNone = false;
                     this.controls.panShisetsuJoho().displayNone = false;
                 };
