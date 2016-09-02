@@ -217,10 +217,9 @@ public class KyotakuServiceKeikakuhiHandler {
      * ボタン状態の設定です。
      *
      * @param サービス提供年月 サービス提供年月
-     * @param 識別番号 NyuryokuShikibetsuNo
      * @param 識別番号管理 ShikibetsuNoKanri
      */
-    public void setButton(FlexibleYearMonth サービス提供年月, NyuryokuShikibetsuNo 識別番号, ShikibetsuNoKanri 識別番号管理) {
+    public void setButton(FlexibleYearMonth サービス提供年月, ShikibetsuNoKanri 識別番号管理) {
 
         if (DISABLED.equals(識別番号管理.get基本設定区分())) {
             div.getBtnKihon().setDisabled(true);
@@ -347,16 +346,16 @@ public class KyotakuServiceKeikakuhiHandler {
         RString 新整理番号;
         NyuryokuShikibetsuNo 新識別番号;
         if (前月.equals(change月)) {
-            年月 = 給付実績居宅サービス計画費list.get(index + 1).get居宅サービス計画費().getサービス提供年月();
-            新事業者番号 = 給付実績居宅サービス計画費list.get(index + 1).get居宅サービス計画費().get事業所番号();
-            新整理番号 = 給付実績居宅サービス計画費list.get(index + 1).get居宅サービス計画費().get整理番号();
-            新識別番号 = 給付実績居宅サービス計画費list.get(index + 1).get居宅サービス計画費().get入力識別番号();
+            年月 = dataToRepeat.get(index + 1).get居宅サービス計画費().getサービス提供年月();
+            新事業者番号 = dataToRepeat.get(index + 1).get居宅サービス計画費().get事業所番号();
+            新整理番号 = dataToRepeat.get(index + 1).get居宅サービス計画費().get整理番号();
+            新識別番号 = dataToRepeat.get(index + 1).get居宅サービス計画費().get入力識別番号();
             div.getBtnJigetsu().setDisabled(false);
         } else {
-            年月 = 給付実績居宅サービス計画費list.get(index - 1).get居宅サービス計画費().getサービス提供年月();
-            新事業者番号 = 給付実績居宅サービス計画費list.get(index - 1).get居宅サービス計画費().get事業所番号();
-            新整理番号 = 給付実績居宅サービス計画費list.get(index - 1).get居宅サービス計画費().get整理番号();
-            新識別番号 = 給付実績居宅サービス計画費list.get(index - 1).get居宅サービス計画費().get入力識別番号();
+            年月 = dataToRepeat.get(index - 1).get居宅サービス計画費().getサービス提供年月();
+            新事業者番号 = dataToRepeat.get(index - 1).get居宅サービス計画費().get事業所番号();
+            新整理番号 = dataToRepeat.get(index - 1).get居宅サービス計画費().get整理番号();
+            新識別番号 = dataToRepeat.get(index - 1).get居宅サービス計画費().get入力識別番号();
             div.getBtnZengetsu().setDisabled(false);
         }
         div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 年月, 新整理番号, 新識別番号);

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kaigokyufuhikagomositatetouroku;
 
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -24,8 +23,8 @@ public final class KaigoKyufuhiParamter {
     private static final RString MENUID_DBCMN91003 = new RString("DBCMN91003");
     private final RString 被保番号;
     private final RString 事業者;
-    private final RDate 提供年月開始;
-    private final RDate 提供年月終了;
+    private final RString 提供年月開始;
+    private final RString 提供年月終了;
     private final LasdecCode 保険者番号;
     private final boolean 申立書作成済みのみフラグ;
     private final RString メニューID;
@@ -43,8 +42,8 @@ public final class KaigoKyufuhiParamter {
 
     private KaigoKyufuhiParamter(RString 被保番号,
             RString 事業者,
-            RDate 提供年月開始,
-            RDate 提供年月終了,
+            RString 提供年月開始,
+            RString 提供年月終了,
             LasdecCode 保険者番号,
             boolean 申立書作成済みのみフラグ,
             RString メニューID,
@@ -93,8 +92,8 @@ public final class KaigoKyufuhiParamter {
      */
     public static KaigoKyufuhiParamter createParem(RString 被保番号,
             RString 事業者,
-            RDate 提供年月開始,
-            RDate 提供年月終了,
+            RString 提供年月開始,
+            RString 提供年月終了,
             LasdecCode 保険者番号,
             boolean 申立書作成済みのみフラグ,
             RString メニューID) {
@@ -107,10 +106,11 @@ public final class KaigoKyufuhiParamter {
                 メニューID,
                 !RString.isNullOrEmpty(被保番号),
                 !RString.isNullOrEmpty(事業者),
-                保険者番号 != null && new RString("000000").equals(保険者番号.value()) && !RString.isNullOrEmpty(保険者番号.value()),
+                保険者番号 != null && new RString("000000").equals(保険者番号.value()),
                 MENUID_DBCMN91001.equals(メニューID),
                 MENUID_DBCMN91002.equals(メニューID),
                 MENUID_DBCMN91003.equals(メニューID),
+                // TODO EUNMなし
                 new RString("1"),
                 new RString("2"),
                 new RString("3"),
