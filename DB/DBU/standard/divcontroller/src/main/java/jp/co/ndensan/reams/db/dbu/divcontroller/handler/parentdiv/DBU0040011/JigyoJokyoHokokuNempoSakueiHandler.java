@@ -11,16 +11,21 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030030.DBU030030_JigyoHokokuNenpo_IppanParamter;
+import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorResult;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030010.DBU030010_JigyoHokokuNenpo_MainParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0040011.JigyoJokyoHokokuNempoSakueiDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.GappeiCityJyoho;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
+import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -41,6 +46,14 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
     private static final int 年度報告月 = 13;
     private static final int INT_ITTI = 1;
     private static final int INT_NI = 2;
+    private static final int INT_ZEO = 0;
+    private static final int INT_GO = 5;
+    private static final int INT_TI = 7;
+    private static final RString 市町村識別ID = new RString("00");
+    private static final RString 選択する = new RString("1");
+    private static final RString 選択無し = new RString("0");
+    private static final RString 審査年月で集計選択する = new RString("2");
+    private static final RString 決定年月で集計選択する = new RString("3");
     private static final RString 合併情報区分_合併あり = new RString("1");
     private static final RString 審査年月で集計 = new RString("1");
     private static final RString 決定年月で集計 = new RString("2");
@@ -522,11 +535,19 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
      *
      * @param 市町村情報 市町村情報
      * @param 引き継ぎデータ 引き継ぎデータ
-     * @return DBU030030_JigyoHokokuNenpo_IppanParamter
+     * @param 市町村識別 市町村識別
+     * @param 現市町村情報 現市町村情報
+     * @param 合併市町村情報 合併市町村情報
+     * @return DBU030010_JigyoHokokuNenpo_MainParameter
      */
-    public DBU030030_JigyoHokokuNenpo_IppanParamter onClick_btnBatchParamSave(KoseiShichosonJoho 市町村情報, ShichosonSelectorModel 引き継ぎデータ) {
-        DBU030030_JigyoHokokuNenpo_IppanParamter parameter = new DBU030030_JigyoHokokuNenpo_IppanParamter();
-        List<RString> list = new ArrayList<>();
+    public DBU030010_JigyoHokokuNenpo_MainParameter onClick_btnBatchParamSave(KoseiShichosonJoho 市町村情報,
+            ShichosonSelectorModel 引き継ぎデータ, List<AuthorityItem> 市町村識別,
+            List<KoikiZenShichosonJoho> 現市町村情報, List<GappeiCityJyoho> 合併市町村情報) {
+        DBU030010_JigyoHokokuNenpo_MainParameter parameter = new DBU030010_JigyoHokokuNenpo_MainParameter();
+        List<RString> 構成市町村コードリスト = new ArrayList<>();
+        RString 市町村コード = RString.EMPTY;
+        parameter.set報告開始年月(RString.EMPTY);
+        parameter.set報告終了年月(RString.EMPTY);
         if (!RString.isNullOrEmpty(div.getRadJikkoTaniShukeiOnly().getSelectedKey())) {
             parameter.setプリントコントロール区分(new RString("1"));
             parameter.set報告年度(div.getDdlHokokuNendo().getSelectedKey());
@@ -540,26 +561,41 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
         } else {
             parameter.setプリントコントロール区分(new RString("3"));
             parameter.set報告年度(div.getDdlKakoHokokuNendo().getSelectedKey());
-            parameter.set報告開始年月(RString.EMPTY);
-            parameter.set報告終了年月(RString.EMPTY);
         }
-//        parameter.set処理日時(new RString(RDate.getNowDateTime().toString()));
+        parameter.set処理日時(RDate.getNowDateTime());
         parameter.set旧市町村区分(div.getHiddenGappeiKoseiKubun());
-        parameter.set市町村コード(RString.EMPTY);
-        parameter.set構成市町村コードリスト(list);
+        parameter.set構成市町村区分(new RString("0"));
         if (DonyuKeitaiCode.事務広域.getCode().equals(div.getHiddenDonyuKeitaiCode())) {
             parameter.set構成市町村区分(new RString("1"));
-            parameter.set構成市町村コードリスト(list);
-        } else {
-            parameter.set構成市町村区分(new RString("0"));
-            if (市町村情報 != null && 市町村情報.get市町村コード() != null) {
-                parameter.set市町村コード(市町村情報.get市町村コード().value());
+        }
+        if (RString.isNullOrEmpty(div.getHiddenKouiki()) && RString.isNullOrEmpty(div.getHiddenGappei())) {
+            if (市町村情報 != null && 市町村情報.get市町村コード() != null && !市町村情報.get市町村コード().isEmpty()) {
+                市町村コード = 市町村情報.get市町村コード().value();
             }
         }
+        parameter.set市町村コード(市町村コード);
+        if (!RString.isNullOrEmpty(div.getHiddenKouiki())) {
+            if (市町村識別ID.equals(市町村識別.get(0).getItemId())) {
+                parameter.set構成市町村コードリスト(get構成市町村コードリスト(現市町村情報));
+            } else {
+                構成市町村コードリスト.add(市町村コード);
+                parameter.set構成市町村コードリスト(構成市町村コードリスト);
+            }
+        }
+        if (!RString.isNullOrEmpty(div.getHiddenGappei())) {
+            parameter.set旧市町村コードリスト(get旧市町村コードリスト(合併市町村情報));
+        }
+        parameter.set旧市町村区分(RString.EMPTY);
+        if (引き継ぎデータ != null) {
+            if (引き継ぎデータ.getList() != null && !引き継ぎデータ.getList().isEmpty()) {
+                parameter.set過去集計分旧市町村区分(
+                        get過去集計分旧市町村区分(引き継ぎデータ.getList().get(0).get市町村コード().value(),
+                                parameter.get旧市町村コードリスト()));
+            }
+            parameter.set過去集計分市町村コードリスト(get過去集計分市町村コードリスト(引き継ぎデータ.getList()));
+        }
 
-        parameter.set過去集計分市町村コードリスト(list);
-
-        return parameter;
+        return set出力区分(parameter);
     }
 
     private void set実行単位選択変更() {
@@ -1038,6 +1074,189 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             年報報告様式.add(new RString("all"));
             div.getCblShutsuryokuTaishoAll().setSelectedItemsByKey(年報報告様式);
         }
+    }
+
+    private DBU030010_JigyoHokokuNenpo_MainParameter set出力区分(DBU030010_JigyoHokokuNenpo_MainParameter parameter) {
+        List<RString> 集計年度 = new ArrayList<>();
+        List<RString> 集計開始年月 = new ArrayList<>();
+        List<RString> 集計終了年月 = new ArrayList<>();
+        List<RDateTime> 作成日時 = new ArrayList<>();
+        List<RString> 出力区分リスト = new ArrayList<>();
+        集計年度.add(RString.EMPTY);
+        集計開始年月.add(RString.EMPTY);
+        集計終了年月.add(RString.EMPTY);
+        作成日時.add(RDateTime.MAX);
+        出力区分リスト.add(RString.EMPTY);
+        if (div.getCblShutsuryokuTaishoYoshiki1().isAllSelected()) {
+            集計年度.add(get集計年度(div.getTxttxtShukeiNendo1().getValue()));
+            集計開始年月.add(get集計年月(div.getTxtShukeiFromYM1().getValue()));
+            集計終了年月.add(get集計年月(div.getTxtShukeiToYM1().getValue()));
+            作成日時.add(get作成日時(div.getTxtSakuseiYMD1().getValue(), div.getTxtSakuseiTime1().getValue()));
+            出力区分リスト.add(選択する);
+        } else {
+            集計年度.add(RString.EMPTY);
+            集計開始年月.add(RString.EMPTY);
+            集計終了年月.add(RString.EMPTY);
+            作成日時.add(RDateTime.MAX);
+            出力区分リスト.add(選択無し);
+        }
+        if (div.getCblShutsuryokuTaishoIppan1to11().isAllSelected()) {
+            集計年度.add(get集計年度(div.getTxtShukeiNendo2().getValue()));
+            集計開始年月.add(get集計年月(div.getTxtShukeiFromYM2().getValue()));
+            集計終了年月.add(get集計年月(div.getTxtShukeiToYM2().getValue()));
+            作成日時.add(get作成日時(div.getTxtSakuseiYMD2().getValue(), div.getTxtSakuseiTime2().getValue()));
+            出力区分リスト.add(選択する);
+        } else {
+            集計年度.add(RString.EMPTY);
+            集計開始年月.add(RString.EMPTY);
+            集計終了年月.add(RString.EMPTY);
+            作成日時.add(RDateTime.MAX);
+            出力区分リスト.add(選択無し);
+        }
+        if (div.getCblShutsuryokuTaishoIppanGembutsu().isAllSelected()) {
+            集計年度.add(get集計年度(div.getTxtShukeiNendo3().getValue()));
+            集計開始年月.add(get集計年月(div.getTxtShukeiFromYM3().getValue()));
+            集計終了年月.add(get集計年月(div.getTxtShukeiToYM3().getValue()));
+            作成日時.add(get作成日時(div.getTxtSakuseiYMD3().getValue(), div.getTxtSakuseiTime3().getValue()));
+            出力区分リスト.add(選択する);
+        } else {
+            集計年度.add(RString.EMPTY);
+            集計開始年月.add(RString.EMPTY);
+            集計終了年月.add(RString.EMPTY);
+            作成日時.add(RDateTime.MAX);
+            出力区分リスト.add(選択無し);
+        }
+        if (div.getCblShutsuryokuTaishoIppanShokan().isAllSelected()) {
+            集計年度.add(get集計年度(div.getTxtShukeiNendo5().getValue()));
+            集計開始年月.add(get集計年月(div.getTxtShukeiFromYM5().getValue()));
+            集計終了年月.add(get集計年月(div.getTxtShukeiToYM5().getValue()));
+            作成日時.add(get作成日時(div.getTxtSakuseiYMD5().getValue(), div.getTxtSakuseiTime5().getValue()));
+            if (審査年月.equals(div.getRadlblShukeiType4().getSelectedKey())) {
+                出力区分リスト.add(審査年月で集計選択する);
+            } else {
+                出力区分リスト.add(決定年月で集計選択する);
+            }
+        } else {
+            集計年度.add(RString.EMPTY);
+            集計開始年月.add(RString.EMPTY);
+            集計終了年月.add(RString.EMPTY);
+            作成日時.add(RDateTime.MAX);
+            出力区分リスト.add(選択無し);
+        }
+        if (div.getCblShutsuryokuTaishoHokenGembutsu().isAllSelected()) {
+            集計年度.add(get集計年度(div.getTxtShukeiNendo4().getValue()));
+            集計開始年月.add(get集計年月(div.getTxtShukeiFromYM4().getValue()));
+            集計終了年月.add(get集計年月(div.getTxtShukeiToYM4().getValue()));
+            作成日時.add(get作成日時(div.getTxtSakuseiYMD4().getValue(), div.getTxtSakuseiTime4().getValue()));
+            出力区分リスト.add(選択する);
+        } else {
+            集計年度.add(RString.EMPTY);
+            集計開始年月.add(RString.EMPTY);
+            集計終了年月.add(RString.EMPTY);
+            作成日時.add(RDateTime.MAX);
+            出力区分リスト.add(選択無し);
+        }
+        if (div.getCblShutsuryokuTaishoHokenShokan().isAllSelected()) {
+            集計年度.add(get集計年度(div.getTxtShukeiNendo6().getValue()));
+            集計開始年月.add(get集計年月(div.getTxtShukeiFromYM6().getValue()));
+            集計終了年月.add(get集計年月(div.getTxtShukeiToYM6().getValue()));
+            作成日時.add(get作成日時(div.getTxtSakuseiYMD6().getValue(), div.getTxtSakuseiTime6().getValue()));
+            if (審査年月.equals(div.getRadlblShukeiType5().getSelectedKey())) {
+                出力区分リスト.add(審査年月で集計選択する);
+            } else {
+                出力区分リスト.add(決定年月で集計選択する);
+            }
+        } else {
+            集計年度.add(RString.EMPTY);
+            集計開始年月.add(RString.EMPTY);
+            集計終了年月.add(RString.EMPTY);
+            作成日時.add(RDateTime.MAX);
+            出力区分リスト.add(選択無し);
+        }
+        if (div.getCblShutsuryokuTaishoHokenKogaku().isAllSelected()) {
+            集計年度.add(get集計年度(div.getTxtShukeiNendo7().getValue()));
+            集計開始年月.add(get集計年月(div.getTxtShukeiFromYM7().getValue()));
+            集計終了年月.add(get集計年月(div.getTxtShukeiToYM7().getValue()));
+            作成日時.add(get作成日時(div.getTxtSakuseiYMD7().getValue(), div.getTxtSakuseiTime7().getValue()));
+            出力区分リスト.add(選択する);
+        } else {
+            集計年度.add(RString.EMPTY);
+            集計開始年月.add(RString.EMPTY);
+            集計終了年月.add(RString.EMPTY);
+            作成日時.add(RDateTime.MAX);
+            出力区分リスト.add(選択無し);
+        }
+        if (div.getCblShutsuryokuTaishoHokenKogakuGassan().isAllSelected()) {
+            集計年度.add(get集計年度(div.getTxtShukeiNendo8().getValue()));
+            集計開始年月.add(get集計年月(div.getTxtShukeiFromYM8().getValue()));
+            集計終了年月.add(get集計年月(div.getTxtShukeiToYM8().getValue()));
+            作成日時.add(get作成日時(div.getTxtSakuseiYMD8().getValue(), div.getTxtSakuseiTime8().getValue()));
+            出力区分リスト.add(選択する);
+        } else {
+            集計年度.add(RString.EMPTY);
+            集計開始年月.add(RString.EMPTY);
+            集計終了年月.add(RString.EMPTY);
+            作成日時.add(RDateTime.MAX);
+            出力区分リスト.add(選択無し);
+        }
+        parameter.set集計年度(集計年度);
+        parameter.set集計開始年月(集計開始年月);
+        parameter.set集計終了年月(集計終了年月);
+        parameter.set作成日時(作成日時);
+        parameter.set出力区分リスト(出力区分リスト);
+        return parameter;
+    }
+
+    private RString get集計年度(FlexibleDate 日期) {
+        if (日期 != null && !日期.isEmpty()) {
+            return new RString(日期.toString().substring(INT_ZEO, INT_GO));
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get集計年月(FlexibleDate 日期) {
+        if (日期 != null && !日期.isEmpty()) {
+            return new RString(日期.toString().substring(INT_ZEO, INT_TI));
+        }
+        return RString.EMPTY;
+    }
+
+    private RDateTime get作成日時(FlexibleDate 作成日, RTime 作成時) {
+        return RDateTime.of(作成日.getYearValue(), 作成日.getMonthValue(),
+                作成日.getDayValue(), 作成時.getHour(), 作成時.getSecond());
+    }
+
+    private List<RString> get構成市町村コードリスト(List<KoikiZenShichosonJoho> 現市町村情報) {
+        List<RString> 構成市町村コードリスト = new ArrayList<>();
+        for (KoikiZenShichosonJoho 現市町村 : 現市町村情報) {
+            構成市町村コードリスト.add(現市町村.get市町村コード().value());
+        }
+        return 構成市町村コードリスト;
+    }
+
+    private List<RString> get旧市町村コードリスト(List<GappeiCityJyoho> 合併市町村情報) {
+        List<RString> 旧市町村コードリスト = new ArrayList<>();
+        for (GappeiCityJyoho 合併市町村 : 合併市町村情報) {
+            旧市町村コードリスト.add(合併市町村.get市町村コード().value());
+        }
+        return 旧市町村コードリスト;
+    }
+
+    private List<RString> get過去集計分市町村コードリスト(List<ShichosonSelectorResult> 市町村選択検索結果) {
+        List<RString> 過去集計分市町村コードリスト = new ArrayList<>();
+        for (ShichosonSelectorResult 市町村選択結果 : 市町村選択検索結果) {
+            過去集計分市町村コードリスト.add(市町村選択結果.get市町村コード().value());
+        }
+        return 過去集計分市町村コードリスト;
+    }
+
+    private RString get過去集計分旧市町村区分(RString 市町村コード, List<RString> 旧市町村コードリスト) {
+        for (RString 旧市町村コード : 旧市町村コードリスト) {
+            if (市町村コード.equals(旧市町村コード)) {
+                return new RString("1");
+            }
+        }
+        return new RString("2");
     }
 
     private static class DateComparator implements Comparator<KeyValueDataSource>, Serializable {
