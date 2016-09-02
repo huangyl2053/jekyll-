@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakuhaakuichiran;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -27,8 +28,24 @@ public class HihokenshaJohoEntity {
     private RString 住所コード;
     private RString 郵便番号;
     private RString 住所;
-    private ShikakuJoho 資格情報;
-    private NinteiJoho 認定情報;
-    private GengakuTaishoSaishinJoho 減額対象最新情報;
+
+    private FlexibleDate 資格取得日;
+    private FlexibleDate 資格喪失日;
+    private RString 喪失事由;
+    private RString 資格区分;
+    private RString 住特フラグ;
+    private boolean 生保フラグ;
+
+    private FlexibleDate 認定有効期間開始年月日;
+    private FlexibleDate 認定有効期間終了年月日;
+    private RString 厚労省IF識別コード;
+    private RString 要介護状態区分コード;
+    private FlexibleDate 認定日;
+    private boolean 申請中フラグ;
+    private FlexibleDate 申請日;
+
+    private RString 徴収権消滅期間;
+    private RString 納付済み期間;
+    private RString 給付額減額期間;
 
 }
