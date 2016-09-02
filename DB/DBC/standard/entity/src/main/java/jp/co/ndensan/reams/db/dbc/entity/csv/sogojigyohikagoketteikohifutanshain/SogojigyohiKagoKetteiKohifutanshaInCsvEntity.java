@@ -55,13 +55,13 @@ public class SogojigyohiKagoKetteiKohifutanshaInCsvEntity {
     private RString 過誤申立事由;
     @CsvField(order = 170, name = "単位数")
     private RString 単位数;
-    @CsvField(order = 180, name = "負担額")
+    @CsvField(order = 180, name = "公費負担額")
     private RString 負担額;
     @CsvField(order = 190, name = "総合事業費・件数")
     private RString 総合事業費_件数;
     @CsvField(order = 200, name = "総合事業費・単位数")
     private RString 総合事業費_単位数;
-    @CsvField(order = 210, name = "総合事業費・負担額")
+    @CsvField(order = 210, name = "総合事業費・公費負担額")
     private RString 総合事業費_負担額;
     
 }

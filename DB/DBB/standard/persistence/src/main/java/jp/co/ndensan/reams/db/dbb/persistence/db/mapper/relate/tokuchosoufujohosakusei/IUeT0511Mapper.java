@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchotaishoshaichiransakusei;
+package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakusei;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter;
-import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 
 /**
- * * ビジネス設計_DBBBZ81003_1_特徴対象者一覧作成
+ * ビジネス設計_DBBBZ84001_3_特徴制度間Ｉ／Ｆ（バッチ）のMapperクラスです。
  *
- * @reamsid_L DBB-1860-030 liuyang
+ * @reamsid_L DBB-1830-050 liuyang
  */
 public interface IUeT0511Mapper {
 

@@ -820,4 +820,24 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 ).
                 toList(DbT1001HihokenshaDaichoEntity.class);
     }
+
+    /**
+     * 資格の情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT1001HihokenshaDaichoEntity
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity select被保険者情報(HihokenshaNo 被保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(logicalDeletedFlag, false)
+                        )).
+                order(by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).
+                limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
 }

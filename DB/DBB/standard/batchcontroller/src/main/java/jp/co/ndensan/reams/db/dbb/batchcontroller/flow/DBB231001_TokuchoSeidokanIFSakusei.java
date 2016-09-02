@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb2310001;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb2310001.NenkinTokuChoKaifuJohoSelectProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb2310001.NenkinTokuChoTaishosyaJohoInsertProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb2310001.ShoriDateKanriUpdateProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb2310001.TokuChoJohoTorikomiRirekiTuikaProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb2310001.TuikaDataSakuseiProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoseidokanifsakusei.TokuchoSeidokanIFSakuseiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb231001.InsKaifuTempProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb231001.InsKaigoNenkinTokuchoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb231001.InsTorikomiRirekiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb231001.InsTsuikaTempProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb231001.UpdShoriDateKanriProcess;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB231001.DBB231001_TokuchoSeidokanIFSakuseiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
  *
  * @reamsid_L DBB-1830-040 liuyang
  */
-public class DBB2310001_TokuchoSeidokanIFSakuseiFlow
-        extends BatchFlowBase<TokuchoSeidokanIFSakuseiBatchParameter> {
+public class DBB231001_TokuchoSeidokanIFSakusei
+        extends BatchFlowBase<DBB231001_TokuchoSeidokanIFSakuseiParameter> {
 
     @Override
     protected void defineFlow() {
@@ -46,7 +46,7 @@ public class DBB2310001_TokuchoSeidokanIFSakuseiFlow
      */
     @Step(年金特徴回付情報の抽出)
     protected IBatchFlowCommand nenkinTokuChoKaifuJohoSelectProcess() {
-        return loopBatch(NenkinTokuChoKaifuJohoSelectProcess.class).arguments(getParameter().
+        return loopBatch(InsKaifuTempProcess.class).arguments(getParameter().
                 toTokuchoSeidokanIFSakuseiDBUpdateProcessParameter()).define();
     }
 
@@ -57,7 +57,7 @@ public class DBB2310001_TokuchoSeidokanIFSakuseiFlow
      */
     @Step(介護特別徴収情報取込履歴追加)
     protected IBatchFlowCommand tokuChoJohoTorikomiRirekiTuikaProcess() {
-        return loopBatch(TokuChoJohoTorikomiRirekiTuikaProcess.class).arguments(getParameter().
+        return simpleBatch(InsTorikomiRirekiProcess.class).arguments(getParameter().
                 toTokuchoSeidokanIFSakuseiDBUpdateProcessParameter()).define();
     }
 
@@ -68,7 +68,7 @@ public class DBB2310001_TokuchoSeidokanIFSakuseiFlow
      */
     @Step(介護保険年金特徴対象者情報追加用データ作成)
     protected IBatchFlowCommand tuikaDataSakuseiProcess() {
-        return loopBatch(TuikaDataSakuseiProcess.class).arguments(getParameter().
+        return loopBatch(InsTsuikaTempProcess.class).arguments(getParameter().
                 toTokuchoSeidokanIFSakuseiDBUpdateProcessParameter()).define();
     }
 
@@ -79,7 +79,7 @@ public class DBB2310001_TokuchoSeidokanIFSakuseiFlow
      */
     @Step(介護保険年金特徴対象者情報登録)
     protected IBatchFlowCommand nenkinTokuChoTaishosyaJohoInsertProcess() {
-        return loopBatch(NenkinTokuChoTaishosyaJohoInsertProcess.class).arguments(getParameter().
+        return loopBatch(InsKaigoNenkinTokuchoProcess.class).arguments(getParameter().
                 toTokuchoSeidokanIFSakuseiDBUpdateProcessParameter()).define();
     }
 
@@ -90,7 +90,7 @@ public class DBB2310001_TokuchoSeidokanIFSakuseiFlow
      */
     @Step(処理日付管理マスタ更新)
     protected IBatchFlowCommand shoriDateKanriUpdateProcess() {
-        return loopBatch(ShoriDateKanriUpdateProcess.class).arguments(getParameter().
+        return simpleBatch(UpdShoriDateKanriProcess.class).arguments(getParameter().
                 toTokuchoSeidokanIFSakuseiDBUpdateProcessParameter()).define();
     }
 }

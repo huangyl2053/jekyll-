@@ -39,7 +39,7 @@ public class CareManagementHandler {
     private static final RString 後 = new RString("後");
     private static final RString 前月 = new RString("前月");
     private final RString 前事業者 = new RString("前事業者");
-    private static final FlexibleYearMonth 平成24年4月 = new FlexibleYearMonth("201607");
+    private static final FlexibleYearMonth 平成24年4月 = new FlexibleYearMonth("201204");
 
     /**
      * コンストラクタです。
@@ -59,14 +59,14 @@ public class CareManagementHandler {
     public void set給付実績ケアマネジメント費データ(List<KyufuJissekiCareManagementHiBusiness> 給付実績ケアマネジメント費データ等, FlexibleYearMonth サービス提供年月) {
         List<KyufuJissekiCareManagementHiBusiness> 給付実績ケアマネジメント費リスト = new ArrayList<>();
         for (KyufuJissekiCareManagementHiBusiness 給付実績ケアマネジメント費 : 給付実績ケアマネジメント費データ等) {
-            if (サービス提供年月.compareTo(給付実績ケアマネジメント費.get給付実績ケアマネジメント費基本情報().getサービス提供年月()) == 0) {
+            if (サービス提供年月 != null && サービス提供年月.compareTo(給付実績ケアマネジメント費.get給付実績ケアマネジメント費基本情報().getサービス提供年月()) == 0) {
                 給付実績ケアマネジメント費リスト.add(給付実績ケアマネジメント費);
             }
         }
         if (給付実績ケアマネジメント費リスト.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         } else {
-            div.getCcdKyufuJissekiHeader().setサービス提供年月(new RDate(サービス提供年月.toString()));
+            div.getCcdKyufuJissekiHeader().setサービス提供年月(new RDate(to日期変換(サービス提供年月).toString()));
             this.get給付実績のデータ(給付実績ケアマネジメント費データ等);
             this.setGetsuBtn(給付実績ケアマネジメント費データ等, サービス提供年月);
         }
@@ -171,8 +171,8 @@ public class CareManagementHandler {
 
     private List<FlexibleYearMonth> getサービス提供年月リスト(List<KyufuJissekiCareManagementHiBusiness> 給付実績ケアマネジメント費データリスト) {
         List<FlexibleYearMonth> サービス提供年月リスト = new ArrayList<>();
-        for (int i = 0; i < 給付実績ケアマネジメント費データリスト.size(); i++) {
-            FlexibleYearMonth 提供年月 = 給付実績ケアマネジメント費データリスト.get(i).get給付実績ケアマネジメント費基本情報().getサービス提供年月();
+        for (KyufuJissekiCareManagementHiBusiness 給付実績ケアマネジメント費 : 給付実績ケアマネジメント費データリスト) {
+            FlexibleYearMonth 提供年月 = 給付実績ケアマネジメント費.get給付実績ケアマネジメント費基本情報().getサービス提供年月();
             if (!サービス提供年月リスト.contains(提供年月)) {
                 サービス提供年月リスト.add(提供年月);
             }

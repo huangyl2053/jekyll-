@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130;
 
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetHihokenshaAtenaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -15,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
@@ -27,12 +29,29 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class HokenshaKyufujissekiOutGetHihokenshaAtenaProcess extends BatchProcessBase<HokenshaKyufujissekiOutGetHihokenshaAtenaEntity> {
 
+    /**
+     * 被保険者・宛名情報取得の取得後の返したエンティティ
+     */
+    public static final RString PARAMETER_OUT_FLOWENTITY;
+
+    static {
+        PARAMETER_OUT_FLOWENTITY = new RString("flowEntity");
+    }
+    private OutputParameter<FlowEntity> flowEntity;
+    FlowEntity returnEntity;
     private static final RString TABLE_NAME = new RString("DbWT1001Hihokensha");
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hokenshakyufujissekiout."
             + "IHokenshaKyufujissekiOutMapper.select被保険者_宛名");
     private static final RString 広域内住所地特例フラグ_1 = new RString("1");
+    private static int numble = 0;
     @BatchWriter
     private BatchEntityCreatedTempTableWriter dbWT0001TableWriter;
+
+    @Override
+    protected void initialize() {
+        super.initialize();
+        returnEntity = new FlowEntity();
+    }
 
     @Override
     protected IBatchReader createReader() {
@@ -49,11 +68,14 @@ public class HokenshaKyufujissekiOutGetHihokenshaAtenaProcess extends BatchProce
     protected void process(HokenshaKyufujissekiOutGetHihokenshaAtenaEntity entity) {
         DbWT1001HihokenshaTempEntity dbWT1001 = this.set被保険者一時TBL(entity);
         dbWT0001TableWriter.update(dbWT1001);
-
+        numble++;
     }
 
     @Override
     protected void afterExecute() {
+        returnEntity.setCodeNum(numble);
+        flowEntity = new OutputParameter<>();
+        flowEntity.setValue(returnEntity);
 
     }
 

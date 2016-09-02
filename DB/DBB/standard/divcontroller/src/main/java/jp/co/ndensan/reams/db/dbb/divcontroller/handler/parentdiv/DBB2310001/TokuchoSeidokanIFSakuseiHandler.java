@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.tokuchosedokaniftanichu.TokuchoSedokanIFTanichuResult;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoseidokanifsakusei.TokuchoSeidokanIFSakuseiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB231001.DBB231001_TokuchoSeidokanIFSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2310001.TokuchoSeidokanIFSakuseiDiv;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchosedokaniftanichu.TokuchoSedokanIFTanichu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
@@ -223,7 +223,7 @@ public class TokuchoSeidokanIFSakuseiHandler {
      * @param div TokuchoSeidokanIFSakuseiDiv
      * @return param TokuchoSeidokanIFSakuseiBatchParameter
      */
-    public TokuchoSeidokanIFSakuseiBatchParameter getbatchparam(TokuchoSeidokanIFSakuseiDiv div) {
+    public DBB231001_TokuchoSeidokanIFSakuseiParameter getbatchparam(TokuchoSeidokanIFSakuseiDiv div) {
         TokuchoSedokanIFTanichuResult result = new TokuchoSedokanIFTanichuResult();
         result.set年度(new FlexibleYear(div.getTxtChoteiNendo().getValue().toString().substring(NUM0, NUM4)));
         result.set特徴開始年月(new RDate(div.getDdlKaishiYM().getSelectedValue().toString()));
