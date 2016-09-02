@@ -465,6 +465,16 @@ public class TaJushochiTokureishaKanriHandler {
                 }
                  div.getCcdShisetsuJoho().clear();
                  div.getBtnAdd().setDisabled(false);
+                div.getTxtNyusyobi().setDisabled(false);
+                div.getTxtTekiyobi().setDisabled(false);
+                div.getTxtTekiyoTodokedebi().setDisabled(false);
+                div.getDdlTekiyoJiyo().setDisabled(false);
+                div.getTxtHihoNo().setDisabled(false);
+                div.getPanShisetsuJoho().setDisabled(false);
+                div.getPanSotimotoJyoho().setDisabled(false);
+                div.getBtnKakunin().setDisabled(false);
+                div.getBtnTorikeshi().setDisabled(false);
+                div.getCcdShisetsuJoho().setDisabled(false);
               }
             if ((状態_追加.equals(div.getStrate())) || (状態_空白.equals(div.getStrate()))) {
                 rireki_Row.setRowState(RowState.Added);
@@ -561,12 +571,15 @@ public class TaJushochiTokureishaKanriHandler {
             div.getTxtKaijyoTodokedebi().clearValue();
             Collections.sort(rowList, new DateComparator());
         }
-        div.setStrate(RString.EMPTY);
+
         div.getDgJushochiTokureiRireki().setDataSource(rowList);
-        set他市町村住所地特例情報入力エリア非活性の設定();
+       if (!状態_削除.equals(div.getStrate())) {
+          set他市町村住所地特例情報入力エリア非活性の設定();
+          div.getBtnKakunin().setDisabled(true);
+          div.getBtnTorikeshi().setDisabled(true);
+       }
+        div.setStrate(RString.EMPTY);
         clear他市町村住所地特例情報入力エリア();
-        div.getBtnKakunin().setDisabled(true);
-        div.getBtnTorikeshi().setDisabled(true);
         ViewStateHolder.put(ViewStateKeys.他住所地特例, 他住所地特例Model);
         ViewStateHolder.put(ViewStateKeys.保険施設入退所, 保険施設入退所Model);
     }
