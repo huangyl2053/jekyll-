@@ -96,7 +96,7 @@
         SELECT *
         FROM "DbWT1001Hihokensha" AS TEMP
         INNER JOIN rgdb."DbT7026ShinKyuHihokenshaNoHenkan" AS DbT7026
-        ON TEMP."exHokenshaNo" = DbT7026."shinNo"
+        ON TEMP."exHihokenshaNo" = DbT7026."shinNo"
         AND TEMP."henkanFlag" = TRUE
     </select>
     
