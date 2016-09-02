@@ -76,7 +76,7 @@ public class KyotakuServiceKeikakuhiHandler {
      */
     public void setDataGrid(List<KyufujissekiKyotakuServiceBusiness> 居宅サービス計画費list, FlexibleYearMonth サービス提供年月) {
 
-        if (サービス提供年月.isBeforeOrEquals(平成21年3月) && (平成18年4月.isBefore(サービス提供年月))) {
+        if (サービス提供年月.isBeforeOrEquals(平成21年3月) && (平成18年4月.isBeforeOrEquals(サービス提供年月))) {
             List<dgServiceKeikakuhiToH2103_Row> to2013rowList = new ArrayList<>();
             for (KyufujissekiKyotakuServiceBusiness 居宅サービス計画費 : 居宅サービス計画費list) {
 
@@ -245,11 +245,6 @@ public class KyotakuServiceKeikakuhiHandler {
                 div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
             }
         }
-        if (DISABLED.equals(識別番号管理.get所定疾患施設療養設定区分())) {
-            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
-        } else {
-            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
-        }
         if (DISABLED.equals(識別番号管理.get食事費用設定区分())) {
             div.getBtnShokuji().setDisabled(true);
         } else {
@@ -390,7 +385,8 @@ public class KyotakuServiceKeikakuhiHandler {
      * @param 事業者番号リスト List<KyufuJissekiHedajyoho2>
      * @param 給付実績居宅サービス計画費list List<KyufujissekiKyotakuServiceBusiness>
      */
-    public void change事業者(RString date, List<KyufuJissekiHedajyoho2> 事業者番号リスト, List<KyufujissekiKyotakuServiceBusiness> 給付実績居宅サービス計画費list) {
+    public void change事業者(RString date, List<KyufuJissekiHedajyoho2> 事業者番号リスト,
+            List<KyufujissekiKyotakuServiceBusiness> 給付実績居宅サービス計画費list) {
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
