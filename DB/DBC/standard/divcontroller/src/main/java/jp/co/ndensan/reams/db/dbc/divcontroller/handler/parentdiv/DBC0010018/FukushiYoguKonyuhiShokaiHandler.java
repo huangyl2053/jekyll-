@@ -376,7 +376,7 @@ public class FukushiYoguKonyuhiShokaiHandler {
 
     private static class DateComparatorServiceTeikyoYM implements Comparator<FlexibleYearMonth>, Serializable {
 
-        private static final long serialVersionUID = -300796001015547240L;
+        private static final long serialVersionUID = 4362402986677492073L;
 
         @Override
         public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {

@@ -65,9 +65,9 @@ public class JigyohokokuGeppoYoshikiBesshiEditor implements IJigyohokokuGeppoYos
         if (new RString("2").equals(data.get年報月報区分())) {
             集計範囲.append("（");
             集計範囲.append(data.get集計年度());
-            集計範囲.append("分）");
+            集計範囲.append("年度分）");
             集計範囲.append(data.get集計期間FROM());
-            集計範囲.append("~");
+            集計範囲.append("～");
             集計範囲.append(data.get集計期間TO());
         }
         return 集計範囲.toRString();

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.core.tokuteinyushoshahi;
+package jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiTokuteiNyushosyaKaigoServiceHiyo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -16,7 +17,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuteiNyushoshahiBusiness {
+public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness implements Serializable {
+
+    private static final long serialVersionUID = 3168905126248018540L;
 
     private KyufujissekiTokuteiNyushosyaKaigoServiceHiyo 特定入所者費用;
     private RString サービス種類略称;

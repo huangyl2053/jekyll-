@@ -5,9 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5180001;
 
+import jp.co.ndensan.reams.db.dbe.business.core.shinsataishodataoutput.ISaikaiObjectOutPutBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5180001.ShinsaTaishoDataDiv;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.shinsataishodata.ShinsaTaishoDataFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -47,6 +50,16 @@ public class ShinsaTaishoDataValidationHandler {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate審査会未選択チェック));
         }
         return validPairs;
+    }
+
+    /**
+     * 審査対象の取得
+     *
+     * @param kaisaiBangou 審査会一覧選択行の介護認定審査会開催番号
+     * @return NijihanteiKekkaTorokuMobileRelateEntity
+     */
+    public ISaikaiObjectOutPutBusiness get審査対象Entity(RString kaisaiBangou) {
+        return ShinsaTaishoDataFinder.createInstance().get審査対象Entity(kaisaiBangou);
     }
 
     private static enum RRVMessages implements IValidationMessage {

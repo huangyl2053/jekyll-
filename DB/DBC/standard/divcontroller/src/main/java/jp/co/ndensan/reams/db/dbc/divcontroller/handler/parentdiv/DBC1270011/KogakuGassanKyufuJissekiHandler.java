@@ -145,7 +145,7 @@ public class KogakuGassanKyufuJissekiHandler {
         }
         if (!チェックオフデータ.isEmpty()) {
             Collections.sort(チェックオフデータ, new KogakuGassanKyufuJissekiHandler.DateComparator());
-            for (KogakuGassanKyufuJisseki 高額合算給付実績 : 高額合算給付実績情報) {
+            for (KogakuGassanKyufuJisseki 高額合算給付実績 : チェックオフデータ) {
                 if (高額合算給付実績件数 == 0) {
                     最大整理番号 = 高額合算給付実績.get整理番号();
                     チェックオフ.add(高額合算給付実績);
@@ -161,18 +161,21 @@ public class KogakuGassanKyufuJissekiHandler {
         }
         最大整理番号 = RString.EMPTY;
         同支給申請書整理番号 = RString.EMPTY;
+        FlexibleYearMonth 最大処理年月 = FlexibleYearMonth.EMPTY;
         if (チェックオフ.isEmpty()) {
             Collections.sort(高額合算給付実績情報, new KogakuGassanKyufuJissekiHandler.SyoliDateComparator());
             高額合算給付実績件数 = 0;
-            for (KogakuGassanKyufuJisseki kyufuJisseki : チェックオフデータ) {
+            for (KogakuGassanKyufuJisseki kyufuJisseki : 高額合算給付実績情報) {
                 if (高額合算給付実績件数 == 0) {
                     最大整理番号 = kyufuJisseki.get整理番号();
+                    最大処理年月 = kyufuJisseki.get処理年月();
                     チェックオフ.add(kyufuJisseki);
                 }
-                if (!RString.isNullOrEmpty(同支給申請書整理番号)
+                if (!RString.isNullOrEmpty(同支給申請書整理番号) && 最大処理年月.equals(kyufuJisseki.get処理年月())
                         && (!同支給申請書整理番号.equals(kyufuJisseki.get支給申請書整理番号())
                         || 最大整理番号.equals(kyufuJisseki.get整理番号()))) {
                     最大整理番号 = kyufuJisseki.get整理番号();
+                    最大処理年月 = kyufuJisseki.get処理年月();
                     チェックオフ.add(kyufuJisseki);
                 }
                 同支給申請書整理番号 = kyufuJisseki.get支給申請書整理番号();
