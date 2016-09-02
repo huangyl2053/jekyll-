@@ -8,17 +8,26 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0040011
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
+import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030010.DBU030010_JigyoHokokuNenpo_MainParameter;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.Syorimei;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0040011.JigyoJokyoHokokuNempoSakueiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0040011.JigyoJokyoHokokuNempoSakueiHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0040011.JigyoJokyoHokokuNempoSakueiValidationHandler;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KanriJoho;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.GappeiCityJyoho;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho.GappeiCityJohoBFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.uz.uza.ILoginInfo;
+import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -35,8 +44,6 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class JigyoJokyoHokokuNempoSakuei {
 
-//    private static final RString 合併情報区分_合併あり = new RString("1");
-//    private static final RString 市町村識別ID = new RString("00");
     private static final RString 年度 = new RString("0099");
     private static final RString 年度内連番 = new RString("0001");
     private static final RString 実行単位選択集計のみ = new RString("ITTI");
@@ -333,44 +340,29 @@ public class JigyoJokyoHokokuNempoSakuei {
         return ResponseData.of(div).respond();
     }
 
-    // TODO QA1607回答まち、バッチパラメータの設定を実装なし。
-//    /**
-//     * 実行するボタンを押下する場合、バッチ起動する。
-//     *
-//     * @param div 画面情報
-//     * @return ResponseData<DBU030030_JigyoHokokuNenpo_IppanParamter>
-//     */
-//    public ResponseData<DBU030030_JigyoHokokuNenpo_IppanParamter> onClick_btnExecute(JigyoJokyoHokokuNempoSakueiDiv div) {
-//        KoseiShichosonJoho 市町村情報 = null;
-//        List<AuthorityItem> 市町村識別 = new ArrayList<>();
-//        List<RString> 構成市町村コードリスト = new ArrayList<>();
-//        List<RString> 旧市町村コードリスト = new ArrayList<>();
-//        ShichosonSelectorModel 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.市町村選択データ, ShichosonSelectorModel.class);
-//        KanriJoho 管理情報 = ShichosonSecurityJoho.getKanriJoho(GyomuBunrui.介護事務);
-//        ILoginInfo iLoginInfo = UrControlDataFactory.createInstance().getLoginInfo();
-//        RString userId = iLoginInfo.getUserId();
-//        if (管理情報 != null) {
-//            市町村情報 = 管理情報.get市町村情報();
-//        }
-//        if (!RString.isNullOrEmpty(div.getHiddenKouiki())) {
-//            市町村識別 = ShichosonSecurityJoho.getShichosonShikibetsuId(userId);
-//            if (市町村識別 != null && !市町村識別.isEmpty()) {
-//                if (市町村識別ID.equals(市町村識別.get(0).getItemId())) {
-//                    List<KoikiZenShichosonJoho> 現市町村情報 = KoikiShichosonJohoFinder.createInstance().
-//                            getGenShichosonJoho().records();
-//                    構成市町村コードリスト = get構成市町村コードリスト(現市町村情報);
-//                } else {
-//                    構成市町村コードリスト.add(市町村情報.get市町村コード().value());
-//                }
-//            }
-//        }
-//        if (!RString.isNullOrEmpty(div.getHiddenGappei())) {
-//            List<GappeiCityJyoho> 合併市町村情報 = GappeiCityJohoBFinder.createInstance().getSennyoukouikigappeijohokensaku(
-//                    HyojiUmu.表示する.getコード(), div.getHiddenDonyuKeitaiCode()).records();
-//            旧市町村コードリスト = get旧市町村コードリスト(合併市町村情報);
-//        }
-//        return ResponseData.of(getHandler(div).onClick_btnBatchParamSave(市町村情報)).respond();
-//    }
+    /**
+     * 実行するボタンを押下する場合、バッチ起動する。
+     *
+     * @param div 画面情報
+     * @return ResponseData<DBU030010_JigyoHokokuNenpo_MainParameter>
+     */
+    public ResponseData<DBU030010_JigyoHokokuNenpo_MainParameter> onClick_btnExecute(JigyoJokyoHokokuNempoSakueiDiv div) {
+        KoseiShichosonJoho 市町村情報 = null;
+        ShichosonSelectorModel 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.市町村選択データ, ShichosonSelectorModel.class);
+        KanriJoho 管理情報 = ShichosonSecurityJoho.getKanriJoho(GyomuBunrui.介護事務);
+        ILoginInfo iLoginInfo = UrControlDataFactory.createInstance().getLoginInfo();
+        RString userId = iLoginInfo.getUserId();
+        if (管理情報 != null) {
+            市町村情報 = 管理情報.get市町村情報();
+        }
+        List<AuthorityItem> 市町村識別 = ShichosonSecurityJoho.getShichosonShikibetsuId(userId);
+        List<KoikiZenShichosonJoho> 現市町村情報 = KoikiShichosonJohoFinder.createInstance().
+                getGenShichosonJoho().records();
+        List<GappeiCityJyoho> 合併市町村情報 = GappeiCityJohoBFinder.createInstance().getSennyoukouikigappeijohokensaku(
+                HyojiUmu.表示する.getコード(), div.getHiddenDonyuKeitaiCode()).records();
+        return ResponseData.of(getHandler(div).onClick_btnBatchParamSave(市町村情報, 引き継ぎデータ, 市町村識別, 現市町村情報, 合併市町村情報)).respond();
+    }
+
     private List<RString> get処理名() {
         List<RString> 処理名リスト = new ArrayList<>();
         for (Syorimei 処理名 : Syorimei.values()) {
@@ -379,21 +371,6 @@ public class JigyoJokyoHokokuNempoSakuei {
         return 処理名リスト;
     }
 
-//    private List<RString> get構成市町村コードリスト(List<KoikiZenShichosonJoho> 現市町村情報) {
-//        List<RString> 構成市町村コードリスト = new ArrayList<>();
-//        for (KoikiZenShichosonJoho 現市町村 : 現市町村情報) {
-//            構成市町村コードリスト.add(現市町村.get市町村コード().value());
-//        }
-//        return 構成市町村コードリスト;
-//    }
-//
-//    private List<RString> get旧市町村コードリスト(List<GappeiCityJyoho> 合併市町村情報) {
-//        List<RString> 旧市町村コードリスト = new ArrayList<>();
-//        for (GappeiCityJyoho 合併市町村 : 合併市町村情報) {
-//            旧市町村コードリスト.add(合併市町村.get市町村コード().value());
-//        }
-//        return 旧市町村コードリスト;
-//    }
     private JigyoJokyoHokokuNempoSakueiHandler getHandler(JigyoJokyoHokokuNempoSakueiDiv div) {
         return new JigyoJokyoHokokuNempoSakueiHandler(div);
     }
