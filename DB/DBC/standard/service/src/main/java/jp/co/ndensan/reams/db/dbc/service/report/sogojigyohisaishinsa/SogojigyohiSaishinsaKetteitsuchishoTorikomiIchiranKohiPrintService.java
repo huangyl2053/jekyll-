@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.report.sogojigyohisaishinsa;
 import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohisaishinsaketteitsuchisho.SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiProperty;
+import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohisaishinsaketteitsuchisho.SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohisaishinsaketteitsuchisho.SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohisaishin.SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiSource;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -44,6 +45,8 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiPrintService 
     private static final RString KEY_並び順の５件目 = new RString("KEY_並び順の５件目");
     private static final RString KEY_並び順の６件目 = new RString("KEY_並び順の６件目");
     private boolean 集計Flag;
+    private boolean データFlag;
+    private int 連番;
 
     /**
      * printメソッド(単一帳票出力用)
@@ -100,8 +103,9 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiPrintService 
                     i = i + 1;
                 }
             }
-//            new SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport(帳票出力対象データ,
-//                    出力順Map, 処理年月, 作成日時, 集計Flag).writeBy(reportSourceWriter);
+            new SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport(帳票出力対象データ,
+                    出力順Map, 処理年月, 作成日時, 集計Flag, 連番, データFlag).writeBy(reportSourceWriter);
+
         }
     }
 
