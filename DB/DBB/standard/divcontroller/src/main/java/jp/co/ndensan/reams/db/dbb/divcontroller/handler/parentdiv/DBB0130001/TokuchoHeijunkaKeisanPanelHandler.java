@@ -34,6 +34,7 @@ public class TokuchoHeijunkaKeisanPanelHandler {
     private static final RString ONE = new RString("1");
     private static final RString ZERO = new RString("0");
     private static final RString TWO = new RString("2");
+    private static final int THREE = 3;
     private static final RString 未 = new RString("未");
     private static final RString 済 = new RString("済");
     private static final RString 当初所得引出 = new RString("当初所得引出");
@@ -230,7 +231,7 @@ public class TokuchoHeijunkaKeisanPanelHandler {
         boolean is処理状態2 = div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
                 getDataSource().get(2).getTxtJokyo().equals(未)
                 && div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
-                getDataSource().get(3).getTxtJokyo().equals(未);
+                getDataSource().get(THREE).getTxtJokyo().equals(未);
         if (is処理状態1 && is処理状態2) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(実行するボタン, false);
         }
