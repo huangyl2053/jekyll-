@@ -59,6 +59,10 @@ public class SystemKanriNinteiShienTotalValidator implements IValidatable {
                 .thenAdd(SystemKanriNinteiShienTotalValidationMessage.新様式_主治医出力ファイルが未入力)
                 .ifNot(SystemKanriNinteiShienTotalSpec.新様式_申請情報出力ファイルが未入力チェック)
                 .thenAdd(SystemKanriNinteiShienTotalValidationMessage.新様式_申請情報出力ファイルが未入力)
+                .ifNot(SystemKanriNinteiShienTotalSpec.新様式_死亡情報ファイルが未入力チェック)
+                .thenAdd(SystemKanriNinteiShienTotalValidationMessage.新様式_死亡情報ファイルが未入力)
+                .ifNot(SystemKanriNinteiShienTotalSpec.新様式_転入死亡ファイルが未入力チェック)
+                .thenAdd(SystemKanriNinteiShienTotalValidationMessage.新様式_転入死亡ファイルが未入力)
                 .ifNot(SystemKanriNinteiShienTotalSpec.対象更新のデータ変更チェック)
                 .thenAdd(SystemKanriNinteiShienTotalValidationMessage.更新対象のデータがない)
                 .messages());

@@ -258,7 +258,11 @@ public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJo
         ZenbuSoshitsuMode("ZenbuSoshitsuMode"),
         IchibuSoshitsuMode("IchibuSoshitsuMode"),
         JukyuShikakushashoMode("JukyuShikakushashoMode"),
-        ShokaiMode("ShokaiMode");
+        ShokaiMode("ShokaiMode"),
+        RirekiSakujoShuseiMode("RirekiSakujoShuseiMode"),
+        RirekiTsuikaMode("RirekiTsuikaMode"),
+        RirekiTsuikaKyakkaMode("RirekiTsuikaKyakkaMode"),
+        ShinseiTorikeshiTsuikaMode("ShinseiTorikeshiTsuikaMode");
 
         private final String name;
 
