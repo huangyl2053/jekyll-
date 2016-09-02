@@ -52,7 +52,6 @@ public class KyotakuServiceKeikakuhi {
         RDate サービス提供 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = 引き継ぎ情報.getCommonHeader().get給付実績ヘッダ情報2();
         getHandler(div).check事業者btn(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供.toDateString(), 実績区分コード);
-        div.getCcdKyufuJissekiHeader().setサービス提供年月(サービス提供);
         List<KyufujissekiKyotakuServiceBusiness> 居宅サービス計画費データ = getHandler(div).get給付実績データ(給付実績居宅サービス計画費list,
                 整理番号, 事業者番号, 様式番号, サービス提供.getYearMonth().toDateString());
         getHandler(div).setDataGrid(居宅サービス計画費データ, サービス提供年月);
