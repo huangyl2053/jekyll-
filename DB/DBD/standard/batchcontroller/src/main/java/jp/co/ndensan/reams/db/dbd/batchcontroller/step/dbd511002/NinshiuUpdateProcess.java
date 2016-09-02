@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5320001.TsutishoHakkoCommonProcess;
-import static jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5320001.TsutishoHakkoCommonProcess.get地方公共団体;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd501002.ShinseiShoEntity;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd511002.NinshiuUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
@@ -23,8 +22,6 @@ import jp.co.ndensan.reams.db.dbd.entity.report.dbd511002.KoshinShinseiTsuchisho
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
-import jp.co.ndensan.reams.db.dbz.business.core.editedatesaki.EditedAtesakiBuilder;
-import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
@@ -99,6 +96,7 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
     private ChohyoSeigyoHanyo 帳票制御情報;
     private NinshoshaSource ninshoshaSource;
     private SofubutsuAtesakiSource 送付物宛先情報;
+    private static IAtesaki 宛先;
     private static final RString カラ = new RString("～");
     private static final RString カあ = new RString("-");
     private static final RString まる = new RString("○");
@@ -178,7 +176,7 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
 
 //        if (parameter.get出力対象区分().equals(ZERO)) {
 //            KoshinShinseiOshiraseTshuchishoReport find11 = KoshinShinseiOshiraseTshuchishoReport.createReport(KoshinShinseNinshi(entity, ninshi),
-//                    帳票制御共通, 帳票制御汎用, 帳票制御情報, ninshoshaSource, 送付物宛先情報);
+//                 association,new ChohyoSeigyoKyotsu(帳票制御共通), 宛先,帳票制御汎用, 帳票制御情報, ninshoshaSource, get送付物宛先情報());
 //            find11.writeBy(reportSourceWriter11);
 //            KoshinShinseiTsuchishoHakkoIchiranhyoReport find112 = new KoshinShinseiTsuchishoHakkoIchiranhyoReport(OshiraseNinshi(twonin, ninshi));
 //            find112.writeBy(reportSourceWriter112);
@@ -193,7 +191,7 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
 //            KoshinShinseiTsuchishoHakkoIchiranhyoReport find112 = new KoshinShinseiTsuchishoHakkoIchiranhyoReport(OshiraseNinshi(twonin, ninshi));
 //            find112.writeBy(reportSourceWriter112);
 //            KoshinShinseiOshiraseTshuchishoReport find11 = KoshinShinseiOshiraseTshuchishoReport.createReport(KoshinShinseNinshi(entity, ninshi),
-//                    帳票制御共通, 帳票制御汎用, 帳票制御情報, ninshoshaSource, 送付物宛先情報);
+//                 association,new ChohyoSeigyoKyotsu(帳票制御共通), 宛先,帳票制御汎用, 帳票制御情報, ninshoshaSource, get送付物宛先情報());
 //            find11.writeBy(reportSourceWriter11);
 //        }
     }
@@ -312,7 +310,6 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
         ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, 帳票ID11,
                 FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                 KenmeiFuyoKubunType.付与なし, reportSourceWriter11);
-        送付物宛先情報 = TsutishoHakkoCommonProcess.get送付物宛先情報(帳票共通情報);
 
         帳票制御共通 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御共通(帳票ID11);
         帳票制御汎用 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御汎用(帳票ID11);
@@ -385,7 +382,6 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
     }
 
     private void set通知書発行一覧(TongzhiShufaxingEntity twonin, NinshiuUpdateEntity ninshi) {
-        List<TongzhiShuEntity> entityList = new ArrayList<>();
         TongzhiShuEntity entity = new TongzhiShuEntity();
         entity.set被保険者番号(ninshi.getHihokenshaNo());
         entity.set被保険者氏名(ninshi.getHihokenshaName().getColumnValue());
@@ -410,8 +406,8 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
         entity.set居宅支援事業者名称(ninshi.getJigyoshaMeisho());
         entity.set入所施設事業者コード(ninshi.getNyushoShisetsuCode().getColumnValue());
         entity.set入所施設事業者名称(ninshi.getJigyoshaName().getColumnValue());
-        entityList.add(entity);
-        twonin.setTongzhiShu(entityList);
+
+        twonin.setTongzhiShu(entity);
     }
 
     /**
@@ -486,10 +482,9 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
     /**
      * 送付物宛先情報の取得。
      *
-     * @param 帳票共通情報 ChohyoSeigyoKyotsu
-     * @return 送付物宛先情報 送付物宛先情報
+     * @return AtesakiPSMSearchKeyBuilder AtesakiPSMSearchKeyBuilder
      */
-    public static SofubutsuAtesakiSource get送付物宛先情報(ChohyoSeigyoKyotsu 帳票共通情報) {
+    public static AtesakiPSMSearchKeyBuilder get送付物宛先情報() {
         IAtesakiGyomuHanteiKey key = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給);
         AtesakiPSMSearchKeyBuilder builder = new AtesakiPSMSearchKeyBuilder(key);
         builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
@@ -499,17 +494,10 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
         builder.set世帯主利用区分(SetainushiRiyoKubun.利用しない);
         builder.set代納人利用区分(DainoRiyoKubun.利用する);
         builder.set法人代表者利用区分(HojinDaihyoshaRiyoKubun.利用しない);
-        IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(builder.build());
+        宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(builder.build());
 
-        EditedAtesaki 編集後宛先 = EditedAtesakiBuilder.create編集後宛先(宛先, get地方公共団体(), 帳票共通情報);
-        SofubutsuAtesakiSource sofubutsuAtesakiSource;
-        try {
-            sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
-        } catch (Exception e) {
-            sofubutsuAtesakiSource = new SofubutsuAtesakiSource();
-        }
+        return builder;
 
-        return sofubutsuAtesakiSource;
     }
 
     private RString get申請区分_法令(Code code) {
