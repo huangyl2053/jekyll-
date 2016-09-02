@@ -202,7 +202,7 @@ public class KogakuGassanShikyuShinseiToroku {
      * @return boolean
      */
     @Transaction
-    public boolean getKogakuKaigoShinseisho(KogakuGassanShinseishoHoji 高額合算申請書保持) {
+    public boolean getKogakuGassanShikyuShinseishoTorokuKoshin(KogakuGassanShinseishoHoji 高額合算申請書保持) {
         if (RString.isNullOrEmpty(高額合算申請書保持.get整理番号())) {
             RString 整理番号New = Saiban.get(SubGyomuCode.DBC介護給付,
                     SaibanHanyokeyName.支給申請書整理番号.getコード()).nextString();
