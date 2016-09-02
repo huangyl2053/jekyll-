@@ -139,8 +139,13 @@ public class JigyoshaService {
             }
             return ResponseData.of(div).setState(DBA2010014StateName.追加状態);
         }else{
-            List<KaigoJigyoshaShiteiService> johoList = get事業者サービス情報取得();
-            getHandler(div).onChange_ChkKihonJunkyoFlag(johoList);
+            if(!div.getJigyoshaServiceKihon().getChkKihonJunkyoFlag().getSelectedKeys().isEmpty()){
+                List<KaigoJigyoshaShiteiService> johoList = get事業者サービス情報取得();
+                getHandler(div).onChange_ChkKihonJunkyoFlag(johoList);
+            }else{
+                div.getJigyoshaServiceKihon().getJigyosha().setDisabled(false);
+                div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNo().setDisabled(true);
+            }
             return ResponseData.of(div).respond();
         }
     }
@@ -152,7 +157,8 @@ public class JigyoshaService {
      * @return ResponseData<JigyoshaServiceDiv>
      */
     public ResponseData<JigyoshaServiceDiv> onBlur_TxtTorokuHokenshaNo(JigyoshaServiceDiv div) {
-        if(div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().getValue().length() != 4 
+        if( !div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().getValue().isNullOrEmpty()
+                && div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().getValue().length() != 4 
                 && div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().getValue().length() != 6 
                 && div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().getValue().length() != 8 ){
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
