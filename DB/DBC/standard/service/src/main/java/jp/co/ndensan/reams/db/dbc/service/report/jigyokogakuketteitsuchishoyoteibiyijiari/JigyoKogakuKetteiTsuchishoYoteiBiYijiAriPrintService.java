@@ -53,6 +53,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiBiYijiAriPrintService {
      * @param entity 決定通知書Entity
      * @param 被保険者番号 HihokenshaNo
      * @param 識別コード ShikibetsuCode
+     * @param 発行日 FlexibleDate
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(JigyouKetteiTutisyoResult entity,
@@ -72,7 +73,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiBiYijiAriPrintService {
             ReportSourceWriter<JigyoKogakuKetteiTsuchishoYoteiBiYijiAriSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
             ChohyoSeigyoKyotsu kyotsu = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票分類ID);
-            NinshoshaSource 認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 帳票分類ID, FlexibleDate.EMPTY,
+            NinshoshaSource 認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 帳票分類ID, 発行日,
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             JigyoKogakuKetteiTsuchishoYoteiBiYijiAriReport.createFrom(entity, 認証者情報, kyotsu).writeBy(reportSourceWriter);
         }

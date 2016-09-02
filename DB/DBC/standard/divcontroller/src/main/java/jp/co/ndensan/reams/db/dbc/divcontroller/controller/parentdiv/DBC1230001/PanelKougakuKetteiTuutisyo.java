@@ -12,13 +12,14 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1230001.Pane
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1230001.PanelKougakuKetteiTuutisyoHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -32,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 新総合事業・事業高額決定通知書（単）クラスです。
@@ -51,22 +53,18 @@ public class PanelKougakuKetteiTuutisyo {
      * @return 画面初期化
      */
     public ResponseData<PanelKougakuKetteiTuutisyoDiv> onLoad(PanelKougakuKetteiTuutisyoDiv div) {
-//        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-//        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-//        LasdecCode 市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class);
-//        SetaiCode 世帯コード = ViewStateHolder.get(ViewStateKeys.世帯コード, SetaiCode.class);
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("0000000003");
-        ShikibetsuCode 識別コード = new ShikibetsuCode("210000000000077");
-        LasdecCode 市町村コード = new LasdecCode("209007");
-        SetaiCode 世帯コード = new SetaiCode("000000000000100");
-//        if (被保険者番号 == null) {
-//            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-//        }
-        List<FlexibleYearMonth> サービス提供年月リスト = getHandler(div).getサービス提供年月リスト(被保険者番号);
+        TaishoshaKey キー = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        if (キー == null || キー.get被保険者番号() == null) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        }
+        List<FlexibleYearMonth> サービス提供年月リスト = getHandler(div).getサービス提供年月リスト(キー.get被保険者番号());
         if (サービス提供年月リスト.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
-        getHandler(div).画面初期化(識別コード, 市町村コード, 世帯コード, 被保険者番号, サービス提供年月リスト);
+        // QAのNo.1437
+        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        LasdecCode 市町村コード = 地方公共団体.getLasdecCode_();
+        getHandler(div).画面初期化(キー.get識別コード(), 市町村コード, キー.get被保険者番号(), サービス提供年月リスト);
         return ResponseData.of(div).respond();
     }
 
@@ -77,9 +75,8 @@ public class PanelKougakuKetteiTuutisyo {
      * @return 画面初期化
      */
     public ResponseData<PanelKougakuKetteiTuutisyoDiv> onChange_ddlServiceYearMonth(PanelKougakuKetteiTuutisyoDiv div) {
-//        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("0000000003");
-        getHandler(div).管理番号と前回発行日の設定(被保険者番号,
+        TaishoshaKey キー = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        getHandler(div).管理番号と前回発行日の設定(キー.get被保険者番号(),
                 new FlexibleYearMonth(new RDate(div.getDdlServiceYearMonth().getSelectedValue().toString()).getYearMonth().toString()));
         return ResponseData.of(div).respond();
     }
@@ -91,9 +88,8 @@ public class PanelKougakuKetteiTuutisyo {
      * @return 画面初期化
      */
     public ResponseData<PanelKougakuKetteiTuutisyoDiv> onChange_ddlKanliBanngou(PanelKougakuKetteiTuutisyoDiv div) {
-//        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("0000000003");
-        getHandler(div).前回発行日の設定(被保険者番号,
+        TaishoshaKey キー = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        getHandler(div).前回発行日の設定(キー.get被保険者番号(),
                 new FlexibleYearMonth(new RDate(div.getDdlServiceYearMonth().getSelectedValue().toString()).getYearMonth().toString()),
                 new Decimal(div.getDdlKanliBanngou().getSelectedValue().toString()));
         return ResponseData.of(div).respond();
@@ -117,13 +113,11 @@ public class PanelKougakuKetteiTuutisyo {
         }
         if (new RString(UrWarningMessages.未入力.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (div.getTxtZennkaiHakkoubi().getValue() != null) {
-                QuestionMessage message = new QuestionMessage(
-                        DbcWarningMessages.発行済み負担額証明書.getMessage().getCode(),
-                        DbcWarningMessages.発行済み負担額証明書.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes && div.getTxtZennkaiHakkoubi().getValue() != null) {
+            QuestionMessage message = new QuestionMessage(
+                    DbcWarningMessages.発行済み負担額証明書.getMessage().getCode(),
+                    DbcWarningMessages.発行済み負担額証明書.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(DbcWarningMessages.発行済み負担額証明書.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode())
@@ -142,11 +136,8 @@ public class PanelKougakuKetteiTuutisyo {
     public ResponseData<SourceDataCollection> onClick_btnHakkou(PanelKougakuKetteiTuutisyoDiv div) {
         RString 支払予定日印字有無 = DbBusinessConfig.get(ConfigNameDBC.事業高額決定通知書_支払予定日印字有無,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-//        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-//        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("0000000003");
-        ShikibetsuCode 識別コード = new ShikibetsuCode("210000000000077");
-        return ResponseData.of(getHandler(div).帳票印刷(被保険者番号, 識別コード, 支払予定日印字有無)).respond();
+        TaishoshaKey キー = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        return ResponseData.of(getHandler(div).帳票印刷(キー.get被保険者番号(), キー.get識別コード(), 支払予定日印字有無)).respond();
     }
 
     /**
@@ -156,11 +147,8 @@ public class PanelKougakuKetteiTuutisyo {
      * @return 画面初期化
      */
     public ResponseData<PanelKougakuKetteiTuutisyoDiv> onClick_btnHakkouAfter(PanelKougakuKetteiTuutisyoDiv div) {
-//        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-//        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("0000000003");
-        ShikibetsuCode 識別コード = new ShikibetsuCode("210000000000077");
-        getHandler(div).after帳票印刷(被保険者番号, 識別コード);
+        TaishoshaKey キー = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        getHandler(div).after帳票印刷(キー.get被保険者番号(), キー.get識別コード());
         return ResponseData.of(div).respond();
     }
 

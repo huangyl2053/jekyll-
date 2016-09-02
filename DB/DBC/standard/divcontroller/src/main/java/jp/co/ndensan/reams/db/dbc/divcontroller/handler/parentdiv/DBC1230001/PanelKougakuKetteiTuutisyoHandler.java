@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1230001;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,7 +24,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -41,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 新総合事業・事業高額決定通知書（単）ハンドラクラスです。
@@ -57,7 +58,7 @@ public final class PanelKougakuKetteiTuutisyoHandler {
     private static final RString 画面_自動償還用様式 = new RString("1");
     private static final RString 支払予定日印字有無_有 = new RString("1");
     private static final RString 排他キー = new RString("DBCHihokenshaNo");
-    private final RString コード_ログコード = new RString("0003");
+    private static final RString コード_ログコード = new RString("0003");
 
     private PanelKougakuKetteiTuutisyoHandler(PanelKougakuKetteiTuutisyoDiv div) {
         this.div = div;
@@ -78,14 +79,13 @@ public final class PanelKougakuKetteiTuutisyoHandler {
      *
      * @param 識別コード ShikibetsuCode
      * @param 市町村コード LasdecCode
-     * @param 世帯コード SetaiCode
      * @param 被保険者番号 HihokenshaNo
      * @param サービス提供年月リスト List<FlexibleYearMonth>
      */
-    public void 画面初期化(ShikibetsuCode 識別コード, LasdecCode 市町村コード, SetaiCode 世帯コード, HihokenshaNo 被保険者番号,
+    public void 画面初期化(ShikibetsuCode 識別コード, LasdecCode 市町村コード, HihokenshaNo 被保険者番号,
             List<FlexibleYearMonth> サービス提供年月リスト) {
         div.getKyoTuuKaigoAtena().initialize(識別コード);
-        div.getKyoTuuKaigoNinnteiSikaku().initialize(市町村コード.value(), 識別コード.value());
+        div.getKyoTuuKaigoNinnteiSikaku().initialize(市町村コード.value(), 被保険者番号.value());
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
         div.getKougakuKetteiTuutisyoBunsho().initialize(帳票ID, システム日付);
         div.getRadSyoukaiSinnsei().setSelectedKey(定数_初回申請用);
@@ -99,6 +99,7 @@ public final class PanelKougakuKetteiTuutisyoHandler {
         List<KeyValueDataSource> サービス提供年月ドロップダウンリスト = new ArrayList<>();
         Set<FlexibleYearMonth> サービス提供年月Set = new HashSet<>(サービス提供年月リスト);
         List<FlexibleYearMonth> 重複排除サービス提供年月リスト = new ArrayList<>(サービス提供年月Set);
+        Collections.sort(重複排除サービス提供年月リスト);
         for (FlexibleYearMonth サービス提供年月 : 重複排除サービス提供年月リスト) {
             サービス提供年月ドロップダウンリスト.add(new KeyValueDataSource(サービス提供年月.toDateString(),
                     サービス提供年月.wareki().firstYear(FirstYear.ICHI_NEN).toDateString()));
@@ -117,7 +118,7 @@ public final class PanelKougakuKetteiTuutisyoHandler {
      * @return サービス提供年月リスト List<FlexibleYearMonth>
      */
     public List<FlexibleYearMonth> getサービス提供年月リスト(HihokenshaNo 被保険者番号) {
-        JigyoKogakuShikyuHanteiKekkaManager manager = new JigyoKogakuShikyuHanteiKekkaManager();
+        JigyoKogakuShikyuHanteiKekkaManager manager = InstanceProvider.create(JigyoKogakuShikyuHanteiKekkaManager.class);
         return manager.getサービス提供年月リスト(被保険者番号);
     }
 
@@ -128,7 +129,7 @@ public final class PanelKougakuKetteiTuutisyoHandler {
      * @param サービス提供年月 FlexibleYearMonth
      */
     public void 管理番号と前回発行日の設定(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
-        JigyoKogakuShikyuHanteiKekkaManager manager = new JigyoKogakuShikyuHanteiKekkaManager();
+        JigyoKogakuShikyuHanteiKekkaManager manager = InstanceProvider.create(JigyoKogakuShikyuHanteiKekkaManager.class);
         List<Decimal> 管理番号リスト = manager.get管理番号リスト(被保険者番号, サービス提供年月);
         List<KeyValueDataSource> 管理番号ドロップダウンリスト = new ArrayList<>();
         Set<Decimal> 管理番号Set = new HashSet<>(管理番号リスト);
@@ -150,7 +151,7 @@ public final class PanelKougakuKetteiTuutisyoHandler {
      * @param 管理番号 Decimal
      */
     public void 前回発行日の設定(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, Decimal 管理番号) {
-        JigyoKogakuShikyuHanteiKekkaManager manager = new JigyoKogakuShikyuHanteiKekkaManager();
+        JigyoKogakuShikyuHanteiKekkaManager manager = InstanceProvider.create(JigyoKogakuShikyuHanteiKekkaManager.class);
         List<FlexibleDate> 前回発行日リスト = manager.get前回発行日リスト(被保険者番号, サービス提供年月, 管理番号);
         if (!前回発行日リスト.isEmpty()) {
             div.getTxtZennkaiHakkoubi().setValue(new RDate(前回発行日リスト.get(0).toString()));
@@ -209,7 +210,8 @@ public final class PanelKougakuKetteiTuutisyoHandler {
         }
         final FlexibleYearMonth サービス提供年月 = new FlexibleDate(div.getDdlServiceYearMonth().getSelectedValue()).getYearMonth();
         final HokenshaNo 証記載保険者番号 = new HokenshaNo(div.getKyoTuuKaigoNinnteiSikaku().getHokensha());
-        JigyoKogakuShikyuHanteiKekkaManager 事業高額介護サービス費支給判定結果Mgr = new JigyoKogakuShikyuHanteiKekkaManager();
+        JigyoKogakuShikyuHanteiKekkaManager 事業高額介護サービス費支給判定結果Mgr = InstanceProvider
+                .create(JigyoKogakuShikyuHanteiKekkaManager.class);
         JigyoKogakuShikyuHanteiKekka 事業高額介護サービス費支給判定結果 = 事業高額介護サービス費支給判定結果Mgr.
                 get事業高額介護サービス費支給判定結果(被保険者番号, サービス提供年月, 証記載保険者番号, Decimal.ZERO);
         事業高額介護サービス費支給判定結果Mgr.save事業高額介護サービス費支給判定結果(事業高額介護サービス費支給判定結果);
