@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0130001;
 
+import jp.co.ndensan.reams.db.dbb.business.core.basic.kaigofukatokuchoheijunka8.HeijunkaKeisanPageJoho;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.kaigofukatokuchoheijunka8.KaigoFukaTokuchoHeijunka8FlowParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130001.TokuchoHeijunkaKeisanPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0130001.TokuchoHeijunkaKeisanPanelHandler;
+import jp.co.ndensan.reams.db.dbb.service.core.kaigofukatokuchoheijunka8.KaigoFukaTokuchoHeijunka8;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -24,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class TokuchoHeijunkaKeisanPanel {
 
     private static final RString 帳票グループコード = new RString("DBB0130001");
-    private final RString 特別徴収平準化計算_特別徴収8月分 = new RString("特別徴収平準化計算（特別徴収8月分）");
+    private final RString 特別徴収平準化計算_特別徴収8月分 = new RString("DBB0130001_特別徴収平準化計算（特別徴収8月分）");
 
     /**
      * onLoadです
@@ -46,7 +48,9 @@ public class TokuchoHeijunkaKeisanPanel {
         getHandler(div).get処理状態();
         getHandler(div).get減額平準化計算方法();
         getHandler(div).get増額平準化計算方法();
+        getHandler(div).setボタン制御();
         div.getTokuchoHeijunkaPanel().getCcdOutputChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 帳票グループコード);
+
         return ResponseData.of(div).respond();
     }
 
@@ -59,17 +63,20 @@ public class TokuchoHeijunkaKeisanPanel {
     public ResponseData<KaigoFukaTokuchoHeijunka8FlowParameter> onClick_btnBatchRegister(TokuchoHeijunkaKeisanPanelDiv div) {
 
         KaigoFukaTokuchoHeijunka8FlowParameter parameter = new KaigoFukaTokuchoHeijunka8FlowParameter();
+        KaigoFukaTokuchoHeijunka8 特徴平準化 = new KaigoFukaTokuchoHeijunka8();
+        HeijunkaKeisanPageJoho pageData = new HeijunkaKeisanPageJoho();
         for (int i = 0, len = div.getTokuchoHeijunkaPanel().getCcdOutputChohyoIchiran().get出力帳票一覧().size(); i < len; i++) {
             if (特別徴収平準化計算_特別徴収8月分.equals(
-                    div.getTokuchoHeijunkaPanel().getCcdOutputChohyoIchiran().get出力帳票一覧().get(i).getChohyoName())) {
-                parameter.set出力順ID(div.getTokuchoHeijunkaPanel().getCcdOutputChohyoIchiran().get出力帳票一覧().
+                    div.getTokuchoHeijunkaPanel().getCcdOutputChohyoIchiran().get出力帳票一覧().get(i).getChohyoID())) {
+                pageData.set出力順ID(div.getTokuchoHeijunkaPanel().getCcdOutputChohyoIchiran().get出力帳票一覧().
                         get(i).getShutsuryokujunID());
             }
         }
-        parameter.set増額平準化方法(div.getHeijunka8KeisanHohoPanel().getTxtKeisanHohoZougaku().getValue());
-        parameter.set減額平準化方法(div.getHeijunka8KeisanHohoPanel().getTxtKeisanHohoGengaku().getValue());
-        parameter.set調定年度(new FlexibleYear(div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtChoteiNendo().getValue()));
-        parameter.set賦課年度(new FlexibleYear(div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtFukaNendo().getValue()));
+        pageData.set増額平準化方法(div.getHeijunka8KeisanHohoPanel().getTxtKeisanHohoZougaku().getValue());
+        pageData.set減額平準化方法(div.getHeijunka8KeisanHohoPanel().getTxtKeisanHohoGengaku().getValue());
+        pageData.set調定年度(new FlexibleYear(div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtChoteiNendo().getValue()));
+        pageData.set賦課年度(new FlexibleYear(div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtFukaNendo().getValue()));
+        特徴平準化.getBatchiPara(pageData);
         return ResponseData.of(parameter).respond();
     }
 
