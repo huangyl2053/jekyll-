@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7160001;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc710160.DBC710160_HanyoListKogakuGassanKeisanKekkaRenrakuHyoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710160.DBC710160_HanyoListKogakuGassanKeisanKekkaRenrakuHyoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7160001.HanyoListkougakugasSannKeiSuukekkaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7160001.HanyoListkougakugasSannKeiSuukekkaHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 public class HanyoListkougakugasSannKeiSuukekka {
 
     /**
-     * 画面初期化のメソッドです。
+     * 画面初期化のメソッドです。s
      *
      * @param div HanyoListkougakugasSannKeiSuukekkaDiv
      * @return ResponseData
