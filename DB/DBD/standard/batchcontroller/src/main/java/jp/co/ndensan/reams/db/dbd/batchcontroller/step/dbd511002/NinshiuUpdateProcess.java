@@ -380,11 +380,13 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
         twonin.set印刷時間(new RString(RDate.getNowDate().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
                 fillType(FillType.ZERO).toDateString().toString() + timeFormat));
-        set通知書発行一覧(twonin, ninshi);
+        int index = 1;
+        set通知書発行一覧(twonin, ninshi, index);
+        index++;
         return twonin;
     }
 
-    private void set通知書発行一覧(TongzhiShufaxingEntity twonin, NinshiuUpdateEntity ninshi) {
+    private void set通知書発行一覧(TongzhiShufaxingEntity twonin, NinshiuUpdateEntity ninshi, int index) {
         TongzhiShuEntity entity = new TongzhiShuEntity();
         entity.set被保険者番号(ninshi.getHihokenshaNo());
         entity.set被保険者氏名(ninshi.getHihokenshaName().getColumnValue());
@@ -409,7 +411,7 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
         entity.set居宅支援事業者名称(ninshi.getJigyoshaMeisho());
         entity.set入所施設事業者コード(ninshi.getNyushoShisetsuCode().getColumnValue());
         entity.set入所施設事業者名称(ninshi.getJigyoshaName().getColumnValue());
-
+        entity.set連番(index);
         twonin.setTongzhiShu(entity);
     }
 
