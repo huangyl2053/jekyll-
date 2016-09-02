@@ -18,5 +18,5 @@ public interface IShunoJohoDiv extends ICommonChildDivBaseProperties {
      * @param 賦課年度 FlexibleYear
      * @param 通知書番号 TsuchishoNo
      */
-    void load(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号);
+    void initialize(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号);
 }
