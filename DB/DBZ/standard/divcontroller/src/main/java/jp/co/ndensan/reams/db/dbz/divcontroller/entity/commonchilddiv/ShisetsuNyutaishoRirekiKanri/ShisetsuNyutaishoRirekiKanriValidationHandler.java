@@ -44,19 +44,13 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs validateForUpdate() {
-
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-
         validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
         validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getShisetsuNyutaishoInput().getTxtTaishoDate()));
-
-        if (div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue() == null
-                || div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.入所日, div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
-        } else {
+        if (!div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
             if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue() != null
-                    && !div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()
-                    && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().
+                && !div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()
+                && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().
                     isBeforeOrEquals(div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue())) {
                 validPairs.add(new ValidationMessageControlPair(
                         RRVMessages.前後関係逆転,
@@ -64,9 +58,7 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
                         div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
             }
         }
-        if (RString.isNullOrEmpty(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo())) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.入所施設コード));
-        }
+
         if (RString.isNullOrEmpty(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類())) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.施設種類));
         }
