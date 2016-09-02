@@ -38,8 +38,6 @@ public class KaigoSienSenmonkaToroku {
 
     private static final LockingKey 前排他ロックキー = new LockingKey("DbT7064CareManeger");
     private static final RString 状態_追加 = new RString("追加");
-    private static final RString 状態_修正 = new RString("修正");
-    private static final RString 状態_削除 = new RString("削除");
 
     private static final RString 事業者入力モード = new RString("事業者入力モード");
 
