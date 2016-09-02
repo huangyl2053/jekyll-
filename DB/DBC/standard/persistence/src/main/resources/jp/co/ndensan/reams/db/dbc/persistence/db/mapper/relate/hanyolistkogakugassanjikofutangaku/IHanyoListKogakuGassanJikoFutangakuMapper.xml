@@ -12,6 +12,17 @@
     <sql id="selectDbT3070KogakuGassanJikoFutanGakuEntity">
     WITH 高額合算自己負担額1 AS (
         SELECT 
+        最新被保台帳."shikibetsuCode" AS 最新被保台帳_識別コード,
+        最新被保台帳."shichosonCode" AS 最新被保台帳_市町村コード,
+        最新被保台帳."hihokenshaNo" AS 最新被保台帳_被保険者番号,
+        最新被保台帳."shikakuShutokuJiyuCode" AS 最新被保台帳_資格取得事由コード,
+        最新被保台帳."shikakuShutokuYMD" AS 最新被保台帳_資格取得年月日,
+        最新被保台帳."shikakuShutokuTodokedeYMD" AS 最新被保台帳_資格取得届出年月日,
+        最新被保台帳."shikakuSoshitsuJiyuCode" AS 最新被保台帳_資格喪失事由コード,
+        最新被保台帳."shikakuSoshitsuYMD" AS 最新被保台帳_資格喪失年月日,
+        最新被保台帳."shikakuSoshitsuTodokedeYMD" AS 最新被保台帳_資格喪失届出年月日,
+        最新被保台帳."hihokennshaKubunCode" AS 最新被保台帳_被保険者区分コード,
+        最新被保台帳."jushochiTokureiFlag" AS 最新被保台帳_住所地特例フラグ,
         高額合算自己負担額."taishoNendo" AS 高額合算自己負担額_対象年度,
         高額合算自己負担額."hokenshaNo" AS 高額合算自己負担額_保険者番号,
         高額合算自己負担額."shikyuShinseishoSeiriNo" AS 高額合算自己負担額_支給申請書整理番号,
@@ -284,6 +295,10 @@
         高額合算自己負担額明細107."rirekiNo" = 高額合算自己負担額."rirekiNo"  AND
         高額合算自己負担額明細107."taishoM" = '107'
         
+        INNER  JOIN
+        rgdb."DbV1001HihokenshaDaicho"   AS   最新被保台帳
+        ON  最新被保台帳."hihokenshaNo" =  高額合算自己負担額."hihokenshaNo"
+        
         LEFT JOIN (
             SELECT *
             FROM ( 
@@ -388,37 +403,23 @@
        </if> 
        )
         SELECT 
-            最新被保台帳."shichosonCode" AS 最新被保台帳_市町村コード,
-            最新被保台帳."hihokenshaNo" AS 最新被保台帳_被保険者番号,
-            最新被保台帳."shikakuShutokuJiyuCode" AS 最新被保台帳_資格取得事由コード,
-            最新被保台帳."shikakuShutokuYMD" AS 最新被保台帳_資格取得年月日,
-            最新被保台帳."shikakuShutokuTodokedeYMD" AS 最新被保台帳_資格取得届出年月日,
-            最新被保台帳."shikakuSoshitsuJiyuCode" AS 最新被保台帳_資格喪失事由コード,
-            最新被保台帳."shikakuSoshitsuYMD" AS 最新被保台帳_資格喪失年月日,
-            最新被保台帳."shikakuSoshitsuTodokedeYMD" AS 最新被保台帳_資格喪失届出年月日,
-            最新被保台帳."hihokennshaKubunCode" AS 最新被保台帳_被保険者区分コード,
-            最新被保台帳."jushochiTokureiFlag" AS 最新被保台帳_住所地特例フラグ,
             高額合算自己負担額.*,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
         
         FROM 高額合算自己負担額1 AS 高額合算自己負担額
        
-        INNER  JOIN
-        rgdb."DbV1001HihokenshaDaicho"   AS   最新被保台帳
-        ON  最新被保台帳."hihokenshaNo" = 高額合算自己負担額_被保険者番号
-
         INNER JOIN
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',
         '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
         '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }')AS "ShikibetsuTaisho"
-        ON "ShikibetsuTaisho"."shikibetsuCode"= 最新被保台帳."shikibetsuCode"
+        ON "ShikibetsuTaisho"."shikibetsuCode"= 最新被保台帳_識別コード
 
         INNER JOIN 
         rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
-        ON "Atesaki"."shikibetsuCode"=最新被保台帳."shikibetsuCode"
+        ON "Atesaki"."shikibetsuCode"= 最新被保台帳_識別コード
        
-       <!--#{出力順}-->
+       <!--${出力順}-->
     </sql>
 
     <resultMap id="resultMap_DbT3070KogakuGassanJikoFutanGakuEntity" autoMapping="true"
