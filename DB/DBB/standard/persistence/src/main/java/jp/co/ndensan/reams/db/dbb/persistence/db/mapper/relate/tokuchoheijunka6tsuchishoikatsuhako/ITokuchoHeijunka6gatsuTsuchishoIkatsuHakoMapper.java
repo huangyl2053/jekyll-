@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6tsuchishoikatsuhako;
 
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 特徴平準化（特徴6月分）通知書一括発行(バッチ)のMapperクラスです。
@@ -22,6 +24,15 @@ public interface ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper {
      * @return 基準日時
      */
     RString get基準日時(TokuchoHeijunka6gatsuMyBatisParameter param);
+
+    /**
+     * 帳票制御共通情報を取得します。
+     *
+     * @param サブ業務コード サブ業務コード
+     * @param 帳票分類ID 帳票分類ID
+     * @return 帳票制御共通情報
+     */
+    DbT7065ChohyoSeigyoKyotsuEntity select帳票制御共通情報(@Param("サブ業務コード") RString サブ業務コード, @Param("帳票分類ID") RString 帳票分類ID);
 
     /**
      * 計算後情報テーブルの更新前後区分が「更正前」のデータにより、仮算定額変更情報一時テーブルの計算後情報「更正前」情報を更新する。
