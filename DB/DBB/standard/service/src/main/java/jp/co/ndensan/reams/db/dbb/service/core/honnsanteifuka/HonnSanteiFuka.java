@@ -1320,8 +1320,8 @@ public class HonnSanteiFuka {
             KibetsuEntity 介護期別Entity = new KibetsuEntity();
             介護期別Entity.set介護期別Entity(kibetsu.toEntity());
             List<UrT0705ChoteiKyotsuEntity> 調定共通EntityList = new ArrayList<>();
-            for (UrT0705ChoteiKyotsuEntity 調定共通Entity : 介護期別Entity.get調定共通Entity()) {
-                調定共通EntityList.add(調定共通Entity);
+            for (ChoteiKyotsu choteiKyotsu : kibetsu.getChoteiKyotsuList()) {
+                調定共通EntityList.add(choteiKyotsu.toEntity());
             }
             介護期別Entity.set調定共通Entity(調定共通EntityList);
             介護期別EntityList.add(介護期別Entity);
