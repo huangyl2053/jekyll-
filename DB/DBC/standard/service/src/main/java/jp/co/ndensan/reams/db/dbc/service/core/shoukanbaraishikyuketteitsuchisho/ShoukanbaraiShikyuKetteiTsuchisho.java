@@ -135,7 +135,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
      *
      * @return DbT1001HihokenshaDaichoEntity
      */
-    private HihokenshaDaicho getShikaku(HihokenshaNo 被保険者番号) {
+    public HihokenshaDaicho getShikaku(HihokenshaNo 被保険者番号) {
         DbT1001HihokenshaDaichoEntity hihokenshaEntity
                 = dbT1001dac.select被保険者情報(被保険者番号);
         if (hihokenshaEntity == null) {
@@ -153,7 +153,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
      *
      * @return ShiharaiHohoHenkoSashitome
      */
-    private SearchResult<ShiharaiHohoHenkoSashitome> getSashitome(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
+    public SearchResult<ShiharaiHohoHenkoSashitome> getSashitome(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
             RString 整理番号) {
         List<ShiharaiHohoHenkoSashitome> sashitomeEntity = new ArrayList();
         List<DbT4024ShiharaiHohoHenkoSashitomeEntity> entitys = dbT4024dac.select支払方法変更差止(被保険者番号, サービス提供年月, 整理番号);
@@ -196,7 +196,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         return iKozaManager.get口座(builder.build()).isEmpty() ? null : iKozaManager.get口座(builder.build()).get(0);
     }
 
-    private KyufuSHurui getKyufuSHurui(HihokenshaNo 被保険者番号, RString 整理番号, FlexibleYearMonth サービス提供年月, RString 差額支給対象者区分) {
+    public KyufuSHurui getKyufuSHurui(HihokenshaNo 被保険者番号, RString 整理番号, FlexibleYearMonth サービス提供年月, RString 差額支給対象者区分) {
         List<DbT7130KaigoServiceShuruiEntity> dbt7130entitys = dbT7130dac.getサービス種類名称List(サービス提供年月);
         List<DbT3053ShokanShukeiEntity> dbt3053entitys = dbT3053dac.get給付の種類(被保険者番号, サービス提供年月, 整理番号);
         List<DbT3045ShokanServicePlan200004Entity> dbt3045entitys = dbT3045dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
@@ -288,7 +288,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
 
     }
 
-    private void set送付物宛先(ShoukanbaraiShikyuketteiTsuuchisho entity, ShikibetsuCode 識別コード, FlexibleDate 発行日) {
+    public void set送付物宛先(ShoukanbaraiShikyuketteiTsuuchisho entity, ShikibetsuCode 識別コード, FlexibleDate 発行日) {
         IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
         AtesakiPSMSearchKeyBuilder builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
         builder.set識別コード(識別コード);
@@ -301,7 +301,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         entity.set送付物宛先(送付物宛先);
     }
 
-    private RString get通知文文章(int パターン番号, int 項目番号) {
+    public RString get通知文文章(int パターン番号, int 項目番号) {
         TsuchishoTeikeibunFinder finder = new TsuchishoTeikeibunFinder();
         TsuchishoTeikeibun tsuchishoTeikeibun = finder.get通知書定型文_最新適用開始日(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002.getReportId(),
                 KamokuCode.EMPTY, パターン番号, 項目番号);
@@ -311,7 +311,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         return RString.EMPTY;
     }
 
-    private void set通知文(ShoukanbaraiShikyuketteiTsuuchisho entity) {
+    public void set通知文(ShoukanbaraiShikyuketteiTsuuchisho entity) {
         entity.set通知文1(get通知文文章(NUM_1, NUM_2));
         entity.set通知文2(get通知文文章(NUM_1, NUM_3));
         entity.set通知文3(get通知文文章(NUM_2, NUM_3));
