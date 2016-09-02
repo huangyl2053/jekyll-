@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -34,6 +36,8 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -94,6 +98,7 @@ public class ShikakuSoshitsuIdoTotal {
             return setNotExecutableAndReturnMessage(div, DbzInformationMessages.適用除外者登録済み.getMessage());
         }
 
+        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().setReadOnly(true);
         return ResponseData.of(div).respond();
     }
 
@@ -250,6 +255,22 @@ public class ShikakuSoshitsuIdoTotal {
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnKakutei(ShikakuSoshitsuIdoTotalDiv div) {
         ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
+        
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().
+                getShikakuSoshitsuInput().getTxtShutokuDate().getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(validationErrorMessage.喪失日,
+                    div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuDate()));
+        }
+        if (div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().
+                getShikakuSoshitsuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(validationErrorMessage.届出日,
+                    div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuTodokedeDate()));
+        }
+        if (validPairs.existsError()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        
         List<dgShikakuShutokuRireki_Row> rowlist = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridDataSource();
         dgShikakuShutokuRireki_Row row = rowlist.get(FIRSTINDEX);
         row.getSoshitsuDate().setValue(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
@@ -280,6 +301,25 @@ public class ShikakuSoshitsuIdoTotal {
         response.data = div;
         return response;
     }
+    
+    /**
+     * 「喪失日」フォーカスアウト処理します。
+     *
+     * @param div ShikakuSoshitsuIdoTotalDiv
+     * @return レスポンス
+     */
+    public ResponseData<ShikakuSoshitsuIdoTotalDiv> onBlur_shutokuDate(ShikakuSoshitsuIdoTotalDiv div) {
+        ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
+        if (!div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuDate().getValue().isEmpty()) {
+            if (div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()) {
+                div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuTodokedeDate()
+                        .setValue(new FlexibleDate(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
+                                .getTxtShutokuDate().getValue().toString()));
+            }
+        }
+        response.data = div;
+        return response;
+    }
 
     private enum ShikakuSoshitsuIdoErrorMessage implements IValidationMessage {
 
@@ -299,5 +339,21 @@ public class ShikakuSoshitsuIdoTotal {
     private ShikakuSoshitsuIdoTotalHandler createHandler(ShikakuSoshitsuIdoTotalDiv div) {
         TaishoshaKey key = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
         return new ShikakuSoshitsuIdoTotalHandler(div, key);
+    }
+    
+    private enum validationErrorMessage implements IValidationMessage {
+
+        喪失日(UrErrorMessages.必須項目, "喪失日"),
+        届出日(UrErrorMessages.必須項目, "届出日");
+        private final Message message;
+
+        private validationErrorMessage(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }
