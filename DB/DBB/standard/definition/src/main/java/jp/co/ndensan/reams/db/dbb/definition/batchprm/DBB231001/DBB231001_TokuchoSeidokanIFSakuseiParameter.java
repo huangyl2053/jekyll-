@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoseidokanifsakusei;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB231001;
 
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoseidokanifsakusei.TokuchoSeidokanIFSakuseiDBUpdateProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -13,14 +13,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * バッチ設計_DBBBT84001_特徴制度間Ｉ／Ｆ
+ * バッチ設計_DBBBT84001_特徴制度間Ｉ／Ｆのバッチパラメタークラスです。
  *
- * @reamsid_L DBB-1830-040 yangchenbing
+ * @reamsid_L DBB-1830-040 liuyang
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuchoSeidokanIFSakuseiBatchParameter extends BatchParameterBase {
+public class DBB231001_TokuchoSeidokanIFSakuseiParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;
     private FlexibleYear 処理年度;
@@ -35,7 +35,7 @@ public class TokuchoSeidokanIFSakuseiBatchParameter extends BatchParameterBase {
      * @param 特別徴収開始年月 RDate
      * @param 遷移元メニュー RString
      */
-    public TokuchoSeidokanIFSakuseiBatchParameter(FlexibleYear 処理年度, RDate 特別徴収開始年月, RString 遷移元メニュー) {
+    public DBB231001_TokuchoSeidokanIFSakuseiParameter(FlexibleYear 処理年度, RDate 特別徴収開始年月, RString 遷移元メニュー) {
         this.処理年度 = 処理年度;
         this.特別徴収開始年月 = 特別徴収開始年月;
         this.遷移元メニュー = 遷移元メニュー;
@@ -44,7 +44,7 @@ public class TokuchoSeidokanIFSakuseiBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      */
-    public TokuchoSeidokanIFSakuseiBatchParameter() {
+    public DBB231001_TokuchoSeidokanIFSakuseiParameter() {
     }
 
     /**

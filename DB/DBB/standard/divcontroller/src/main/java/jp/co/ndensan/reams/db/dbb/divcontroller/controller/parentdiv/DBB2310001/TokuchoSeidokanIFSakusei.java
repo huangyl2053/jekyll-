@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB2310001;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoseidokanifsakusei.TokuchoSeidokanIFSakuseiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB231001.DBB231001_TokuchoSeidokanIFSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2310001.TokuchoSeidokanIFSakuseiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB2310001.TokuchoSeidokanIFSakuseiHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -46,8 +46,8 @@ public class TokuchoSeidokanIFSakusei {
      * @param div TokuchoSeidokanIFSakuseiDiv
      * @return ResponseData<TokuchoSeidokanIFSakuseiBatchParameter>
      */
-    public ResponseData<TokuchoSeidokanIFSakuseiBatchParameter> onClick_btnBatchRegister(TokuchoSeidokanIFSakuseiDiv div) {
-        TokuchoSeidokanIFSakuseiBatchParameter param = getHandler(div).getbatchparam(div);
+    public ResponseData<DBB231001_TokuchoSeidokanIFSakuseiParameter> onClick_btnBatchRegister(TokuchoSeidokanIFSakuseiDiv div) {
+        DBB231001_TokuchoSeidokanIFSakuseiParameter param = getHandler(div).getbatchparam(div);
         return ResponseData.of(param).respond();
     }
 

@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb2310001;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb231001;
 
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.UpdateShorikanriMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoseidokanifsakusei.TokuchoSeidokanIFSakuseiDBUpdateProcessParameter;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakusei.ITokuChoSoufuJohoSakuseiMapper;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -20,8 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-1830-040 liuyang
  */
-public class ShoriDateKanriUpdateProcess extends BatchProcessBase<
-        jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity> {
+public class UpdShoriDateKanriProcess extends SimpleBatchProcessBase {
 
     private static final int NUM2 = 2;
     private static final int NUM4 = 4;
@@ -29,39 +26,23 @@ public class ShoriDateKanriUpdateProcess extends BatchProcessBase<
     private static final int NUM8 = 8;
     private static final int NUM10 = 10;
     private static final int NUM12 = 12;
-    private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic."
-            + "IUeT0511NenkinTokuchoKaifuJohoMapper.selectAllNoDeletedUex");
     private static final RString 年度内年番_0001 = new RString("0001");
     private static final RString 年度内年番_0002 = new RString("0002");
     private static final RString 年度内年番_0003 = new RString("0003");
     private static final RString 年度内年番_0004 = new RString("0004");
     private static final RString 年度内年番_0005 = new RString("0005");
     private static final RString 年度内年番_0006 = new RString("0006");
+    private final RString 日付_FORMAT = new RString("yyyyMMddHHmmss");
     private TokuchoSeidokanIFSakuseiDBUpdateProcessParameter parameter;
-    private RDateTime システム日時;
+    private UpdateShorikanriMyBatisParameter myBatisParam;
 
     @Override
-    protected void beforeExecute() {
-        super.beforeExecute();
-        システム日時 = parameter.getシステム日時();
+    protected void process() {
+        updateShoriDateKanriJunbi();
+        getMapper(ITokuChoSoufuJohoSakuseiMapper.class).updateShoriDateKanri(myBatisParam);
     }
 
-    @Override
-    protected IBatchReader createReader() {
-        return new BatchDbReader(PATH);
-    }
-
-    @Override
-    protected void process(
-            jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity entity) {
-    }
-
-    @Override
-    protected void afterExecute() {
-        updateShoriDateKanriTable();
-    }
-
-    private void updateShoriDateKanriTable() {
+    private void updateShoriDateKanriJunbi() {
         if (parameter.get特別徴収開始年月() == null) {
             return;
         }
@@ -88,9 +69,12 @@ public class ShoriDateKanriUpdateProcess extends BatchProcessBase<
             default:
                 年度内連番 = null;
         }
-        ShoriDateKanriManager manager = new ShoriDateKanriManager();
         RString 処理名 = ShoriName.特別徴収制度間ＩＦ作成.get名称();
-        manager.update基準日時(処理名, 年度内連番, parameter.get処理年度(), new YMDHMS(システム日時));
+        RString 処理年度 = parameter.get処理年度() == null ? RString.EMPTY : parameter.get処理年度().toDateString();
+        RDateTime lastUpdateTimestamp = RDateTime.now();
+        RString 起動時処理日時 = parameter.getシステム日時().format西暦(日付_FORMAT.toString());
+        myBatisParam
+                = new UpdateShorikanriMyBatisParameter(処理名, 処理年度, 年度内連番, lastUpdateTimestamp, 起動時処理日時);
     }
 
 }
