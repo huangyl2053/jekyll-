@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 /**
  * 帳票設計_DBC200084_総合事業費審査決定請求明細表帳票BodyEditor
  *
- * @reamsid_LDBC-2500-032 jiangxiaolong
+ * @reamsid_L DBC-2500-032 jiangxiaolong
  */
 public class SogojigyohiShinsaKetteiSeikyumeisaiInBodyEditor
         implements ISogojigyohiShinsaKetteiSeikyumeisaiInEditor {
@@ -30,7 +30,8 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInBodyEditor
     private final boolean 集計Flag;
 
     /**
-     *  コンストラクタです
+     * コンストラクタです
+     *
      * @param 帳票出力対象データ SogojigyohiShinsaKetteiSeikyumeisaiInEntity
      * @param 集計Flag boolean
      */
@@ -75,6 +76,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInBodyEditor
         source.gokeiRiyoshaFutangaku = doカンマ編集(審査決定請求合計一時TBL.get合計_利用者負担額());
         source.gokeiKohiFutangaku = doカンマ編集(審査決定請求合計一時TBL.get合計_利用者負担額());
     }
+
     private void edit高額(SogojigyohiShinsaKetteiSeikyumeisaihyoSource source) {
         DbWT1612SinsaKetteiSeikyuKogakuEntity 審査決定請求高額一時TBL = 帳票出力対象データ.get審査決定請求高額一時TBL();
         source.kogakuKensu = doカンマ編集(審査決定請求高額一時TBL.get高額_高額該当件数());
@@ -95,7 +97,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInBodyEditor
         }
         return DecimalFormatter.toコンマ区切りRString(number, 0);
     }
-    
+
     private RString getColumnValue(IDbColumnMappable entity) {
         if (null != entity) {
             return entity.getColumnValue();

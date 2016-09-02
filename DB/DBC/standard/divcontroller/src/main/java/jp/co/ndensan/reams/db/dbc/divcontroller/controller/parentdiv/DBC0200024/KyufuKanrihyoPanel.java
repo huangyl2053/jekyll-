@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0200024;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110010.DBC110010_KyufukanrihyoOutParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200024.KyufuKanrihyoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0200024.KyufuKanrihyoPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0200011.KokuhorenDataSofuViewState;
@@ -31,7 +32,7 @@ public class KyufuKanrihyoPanel {
     private RString 再処理区分;
     private RString 外部ＣＳＶファイル名;
     private static final RString 状態パターン = new RString("1");
-    private static final ReportId 帳票ID = new ReportId("DBC200009_KyufuKanrihyoSofuIchiran");
+    private static final ReportId 帳票ID = ReportIdDBC.DBC200009.getReportId();
 
     /**
      * onLoadのメソッドです。
@@ -59,8 +60,8 @@ public class KyufuKanrihyoPanel {
      * @return ResponseData DBC110010_KyufukanrihyoOutParameter
      */
     public ResponseData<DBC110010_KyufukanrihyoOutParameter> onClick_Execute(KyufuKanrihyoPanelDiv div) {
-        if (getHandler(div).setBatchParameter(再処理区分, 処理年月, 外部ＣＳＶファイル名) != null) {
-            return getHandler(div).setBatchParameter(再処理区分, 処理年月, 外部ＣＳＶファイル名);
+        if (getHandler(div).setBatchParameter(再処理区分, 処理年月) != null) {
+            return getHandler(div).setBatchParameter(再処理区分, 処理年月);
         }
         return ResponseData.of(new DBC110010_KyufukanrihyoOutParameter()).respond();
     }

@@ -197,7 +197,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
                 orderBy,
                 Integer.parseInt(processParameter.get対象リスト().toString()),
                 processParameter.get対象年度の開始年月日(),
-                processParameter.get対象年度の開始年月日(),
+                processParameter.get対象年度の終了年月日(),
                 processParameter.get基準日(),
                 shikibetsuTaishoPSMSearchKey
         );

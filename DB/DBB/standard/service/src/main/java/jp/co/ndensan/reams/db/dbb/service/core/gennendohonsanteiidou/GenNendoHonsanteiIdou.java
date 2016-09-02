@@ -152,6 +152,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     private static final int INT_4 = 4;
     private static final int INT_6 = 6;
     private static final int INT_14 = 14;
+    private static final int INT_16 = 16;
     private static final RString ゼロ_0000 = new RString("0000");
     private static final RString 内部帳票ID = new RString("DBB400001_FukaErrorIchitan");
     private static final RString バッチID = new RString("DBBBT44001");
@@ -480,6 +481,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             mapper.insertTmpHonsantei(entity);
         } else {
             int count = 0;
+            int 番号 = 0;
             for (HihokenshaDaicho daicho : 資格の情報) {
                 count = count + INT_1;
                 HonsanteiEntity entity = new HonsanteiEntity();
@@ -488,10 +490,11 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                     entity.setChoteiNendo(賦課の情報.get調定年度());
                     entity.setFukaNendo(賦課の情報.get賦課年度());
                     entity.setTsuchishoNo(賦課の情報.get通知書番号());
+                    番号 = Integer.parseInt(賦課の情報.get通知書番号().getColumnValue().substring(INT_14, INT_16).toString());
                 } else {
                     entity.setChoteiNendo(param.get調定年度());
                     entity.setFukaNendo(param.get賦課年度());
-                    entity.setTsuchishoNo(create通知書番号(daicho.get被保険者番号().getColumnValue(), count));
+                    entity.setTsuchishoNo(create通知書番号(daicho.get被保険者番号().getColumnValue(), count + 番号 - INT_1));
                 }
                 mapper.insertTmpHonsantei(entity);
             }

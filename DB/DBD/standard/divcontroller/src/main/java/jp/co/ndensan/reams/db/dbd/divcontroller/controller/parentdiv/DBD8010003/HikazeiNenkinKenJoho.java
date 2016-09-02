@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD8010003;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.houshold.HousholdBusiness;
 import jp.co.ndensan.reams.db.dbd.definition.core.hikazeinenkin.TorokuKubun;
@@ -31,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -78,6 +80,8 @@ public class HikazeiNenkinKenJoho {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(検索結果一覧へ, true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(再検索する, true);
+            List<KeyValueDataSource> source = new ArrayList<>();
+            div.getDdlYear().setDataSource(source);
         }
         return ResponseData.of(div).setState(Default);
     }
@@ -216,12 +220,12 @@ public class HikazeiNenkinKenJoho {
             if (削除解除モード.equals(div.getHiddenModel())) {
                 return ResponseData.of(div).addMessage(get削除解除Message(div)).respond();
             }
-            if (!handler.画面項目と比較(非課税年金対象者一時)) {
+            if (!新規モード.equals(div.getHiddenModel()) && !handler.画面項目と比較(非課税年金対象者一時)) {
                 throw new ApplicationException(DbdErrorMessages.変更無し.getMessage());
             }
             int 重複チェック = handler.重複チェック();
-            int pk変更 = handler.pk変更チェック(非課税年金対象者一時) ? 0 : 1;
             if (修正モード.equals(div.getHiddenModel())) {
+                int pk変更 = handler.pk変更チェック(非課税年金対象者一時) ? 0 : 1;
                 return ResponseData.of(div).addMessage(get修正モードMessage(div, 重複チェック, pk変更)).respond();
             }
             if (新規モード.equals(div.getHiddenModel())) {

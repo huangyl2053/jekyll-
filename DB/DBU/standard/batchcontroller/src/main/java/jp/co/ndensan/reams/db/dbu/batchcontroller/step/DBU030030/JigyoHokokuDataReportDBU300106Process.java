@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -46,7 +45,7 @@ public class JigyoHokokuDataReportDBU300106Process extends BatchProcessBase<Jigy
     private static final ReportId REPORT_DBU300106 = ReportIdDBU.DBU300106.getReportId();
     private static final RString 過去集計分旧市町村区分 = new RString("1");
     private static final RString 固定文字列_旧 = new RString("（旧）");
-    private static final RString 年報月報区分 = new RString("年報");
+    private static final RString 年報月報区分CODE = new RString("2");
     private static final int 数値_100 = 100;
     private static final Decimal 数値_101 = new Decimal(101);
     private static final Decimal 数値_102 = new Decimal(102);
@@ -172,8 +171,8 @@ public class JigyoHokokuDataReportDBU300106Process extends BatchProcessBase<Jigy
     @Override
     protected void afterExecute() {
         JigyohokokuCompYoshiki151300106Data reportData = new JigyohokokuCompYoshiki151300106Data();
-        reportData.set年報月報区分(年報月報区分);
-        reportData.set処理日時(RDateTime.parse(processParameter.get処理日時()));
+        reportData.set年報月報区分(年報月報区分CODE);
+        reportData.set処理日時(processParameter.get処理日時());
         reportData.set保険者名(保険者名);
         reportData.set保険者番号(保険者番号);
         reportData.set集計年度(new FlexibleYear(processParameter.get集計年度()));

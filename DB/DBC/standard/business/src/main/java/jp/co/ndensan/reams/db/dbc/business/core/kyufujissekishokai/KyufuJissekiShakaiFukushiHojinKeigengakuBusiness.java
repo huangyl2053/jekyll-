@@ -22,6 +22,8 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KyufuJissekiShakaiFukushiHojinKeigengakuBusiness implements Serializable {
 
+    private static final long serialVersionUID = 8313567060587063881L;
+
     private KyufuJissekiShakaiFukushiHojinKeigengaku 給付実績社会福祉法人軽減額情報;
     private RString サービス種類略称;
 }

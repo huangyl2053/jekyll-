@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 結果一覧CSV出力のプロパティです。
  *
- * @author DBD-4910-030 x_miaocl
+ * @reamsid_L DBD-4910-030 x_miaocl
  */
 @lombok.Getter
 @lombok.Setter

@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shikakushutokushafuseigo.ShikakuShutokushaFuseigoListHenSyu;
 import jp.co.ndensan.reams.db.dba.business.report.shikakushutokushafuseigoichiranhyo.ShikakushutokushaFuseigoIchiranhyoReport;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.shikakushutokushafuseigo.ShikakuShutokushaFuseigoMybatisParameter;
-import jp.co.ndensan.reams.db.dba.definition.processprm.shikakushutokushafuseigo.ShikakuShutokushaFuseigoProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.processprm.dba320010.ShikakuShutokushaFuseigoProcessParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.shikakushutokushafuseigoichiranhyo.ShikakuShutokushaFuseigoEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.shikakushutokushafuseigoichiranhyo.ShikakushutokushaFuseigoIchiranCsvDataEntity;

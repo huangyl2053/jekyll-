@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKyotakuService
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKyotakuServiceBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010017.KyotakuServiceKeikakuhiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010017.dgServiceKeikakuhiFromH2104_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010017.dgServiceKeikakuhiToH2103_Row;
@@ -70,14 +71,14 @@ public class KyotakuServiceKeikakuhiHandler {
     /**
      * 画面のデータを初期化する。
      *
-     * @param 居宅サービス計画費list List<KyufujissekiKyotakuService>
+     * @param 居宅サービス計画費list List<KyufujissekiKyotakuServiceBusiness>
      * @param サービス提供年月 FlexibleYearMonth
      */
-    public void setDataGrid(List<KyufujissekiKyotakuService> 居宅サービス計画費list, FlexibleYearMonth サービス提供年月) {
+    public void setDataGrid(List<KyufujissekiKyotakuServiceBusiness> 居宅サービス計画費list, FlexibleYearMonth サービス提供年月) {
 
-        if (サービス提供年月.isBeforeOrEquals(平成21年3月) && (平成18年4月.isBefore(サービス提供年月))) {
+        if (サービス提供年月.isBeforeOrEquals(平成21年3月) && (平成18年4月.isBeforeOrEquals(サービス提供年月))) {
             List<dgServiceKeikakuhiToH2103_Row> to2013rowList = new ArrayList<>();
-            for (KyufujissekiKyotakuService 居宅サービス計画費 : 居宅サービス計画費list) {
+            for (KyufujissekiKyotakuServiceBusiness 居宅サービス計画費 : 居宅サービス計画費list) {
 
                 to2013rowList.add(get2013データ(居宅サービス計画費));
                 to2013rowList.add(get2013後のデータ(居宅サービス計画費));
@@ -85,7 +86,7 @@ public class KyotakuServiceKeikakuhiHandler {
             div.getDgServiceKeikakuhiToH2103().setDataSource(to2013rowList);
         } else {
             List<dgServiceKeikakuhiFromH2104_Row> from2014rowList = new ArrayList<>();
-            for (KyufujissekiKyotakuService 居宅サービス計画費 : 居宅サービス計画費list) {
+            for (KyufujissekiKyotakuServiceBusiness 居宅サービス計画費 : 居宅サービス計画費list) {
 
                 from2014rowList.add(get2014データ(居宅サービス計画費));
                 from2014rowList.add(get2014後のデータ(居宅サービス計画費));
@@ -96,19 +97,20 @@ public class KyotakuServiceKeikakuhiHandler {
 
     }
 
-    private void setGetsuBtn(List<KyufujissekiKyotakuService> 居宅サービス計画費list, FlexibleYearMonth サービス提供年月) {
+    private void setGetsuBtn(List<KyufujissekiKyotakuServiceBusiness> 居宅サービス計画費list, FlexibleYearMonth サービス提供年月) {
         Collections.sort(居宅サービス計画費list, new KyotakuServiceKeikakuhiHandler.DateComparatorServiceTeikyoYM());
-        if (サービス提供年月.isBeforeOrEquals(居宅サービス計画費list.get(居宅サービス計画費list.size() - 1).getサービス提供年月())) {
+        if (サービス提供年月.isBeforeOrEquals(居宅サービス計画費list.get(居宅サービス計画費list.size() - 1).get居宅サービス計画費().getサービス提供年月())) {
             div.getBtnZengetsu().setDisabled(true);
         }
-        if (居宅サービス計画費list.get(0).getサービス提供年月()
+        if (居宅サービス計画費list.get(0).get居宅サービス計画費().getサービス提供年月()
                 .isBeforeOrEquals(サービス提供年月)) {
             div.getBtnJigetsu().setDisabled(true);
         }
     }
 
-    private dgServiceKeikakuhiToH2103_Row get2013データ(KyufujissekiKyotakuService 居宅サービス計画費) {
+    private dgServiceKeikakuhiToH2103_Row get2013データ(KyufujissekiKyotakuServiceBusiness business) {
         dgServiceKeikakuhiToH2103_Row row = new dgServiceKeikakuhiToH2103_Row();
+        KyufujissekiKyotakuService 居宅サービス計画費 = business.get居宅サービス計画費();
         if (居宅サービス計画費.get居宅サービス計画作成依頼届出年月日() != null && !居宅サービス計画費.get居宅サービス計画作成依頼届出年月日().isEmpty()) {
             row.setTxtTodokedeYMD(new RString(居宅サービス計画費.get居宅サービス計画作成依頼届出年月日().toString()));
         }
@@ -137,12 +139,13 @@ public class KyotakuServiceKeikakuhiHandler {
         return row;
     }
 
-    private dgServiceKeikakuhiFromH2104_Row get2014データ(KyufujissekiKyotakuService 居宅サービス計画費) {
+    private dgServiceKeikakuhiFromH2104_Row get2014データ(KyufujissekiKyotakuServiceBusiness business) {
         dgServiceKeikakuhiFromH2104_Row row = new dgServiceKeikakuhiFromH2104_Row();
+        KyufujissekiKyotakuService 居宅サービス計画費 = business.get居宅サービス計画費();
         row.setTxtShiteiKijunGaitoJigyoshoKubun(居宅サービス計画費.get指定_基準該当等事業所区分コード());
         row.setTxtIraiTodokedeYMD(DateConverter.toWarekiHalf_Zero(new RDate(居宅サービス計画費.get居宅サービス計画作成依頼届出年月日().toString())));
         if (!RString.isNullOrEmpty(居宅サービス計画費.getサービスコード().value())) {
-            row.setTxtService(居宅サービス計画費.getサービスコード().value());
+            row.setTxtService(business.getサービス種類略称());
         } else {
             row.setTxtService(RString.EMPTY);
         }
@@ -181,9 +184,10 @@ public class KyotakuServiceKeikakuhiHandler {
         return row;
     }
 
-    private dgServiceKeikakuhiToH2103_Row get2013後のデータ(KyufujissekiKyotakuService 居宅サービス計画費) {
+    private dgServiceKeikakuhiToH2103_Row get2013後のデータ(KyufujissekiKyotakuServiceBusiness business) {
         dgServiceKeikakuhiToH2103_Row row = new dgServiceKeikakuhiToH2103_Row();
         row.setTxtKettei(new RString("後"));
+        KyufujissekiKyotakuService 居宅サービス計画費 = business.get居宅サービス計画費();
         if (居宅サービス計画費.get後_単位数() != null) {
             row.setTxtTanisu(new RString(居宅サービス計画費.get後_単位数().toString()));
         }
@@ -191,8 +195,9 @@ public class KyotakuServiceKeikakuhiHandler {
         return row;
     }
 
-    private dgServiceKeikakuhiFromH2104_Row get2014後のデータ(KyufujissekiKyotakuService 居宅サービス計画費) {
+    private dgServiceKeikakuhiFromH2104_Row get2014後のデータ(KyufujissekiKyotakuServiceBusiness business) {
         dgServiceKeikakuhiFromH2104_Row row = new dgServiceKeikakuhiFromH2104_Row();
+        KyufujissekiKyotakuService 居宅サービス計画費 = business.get居宅サービス計画費();
         row.setTxtKettei(new RString("後"));
         if (居宅サービス計画費.get後_サービス単位数合計() != null) {
             row.setTxtMeisaiGokei(new RString(居宅サービス計画費.get後_サービス単位数合計().toString()));
@@ -212,10 +217,9 @@ public class KyotakuServiceKeikakuhiHandler {
      * ボタン状態の設定です。
      *
      * @param サービス提供年月 サービス提供年月
-     * @param 識別番号 NyuryokuShikibetsuNo
      * @param 識別番号管理 ShikibetsuNoKanri
      */
-    public void setButton(FlexibleYearMonth サービス提供年月, NyuryokuShikibetsuNo 識別番号, ShikibetsuNoKanri 識別番号管理) {
+    public void setButton(FlexibleYearMonth サービス提供年月, ShikibetsuNoKanri 識別番号管理) {
 
         if (DISABLED.equals(識別番号管理.get基本設定区分())) {
             div.getBtnKihon().setDisabled(true);
@@ -239,11 +243,6 @@ public class KyotakuServiceKeikakuhiHandler {
             } else {
                 div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
             }
-        }
-        if (DISABLED.equals(識別番号管理.get所定疾患施設療養設定区分())) {
-            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
-        } else {
-            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
         }
         if (DISABLED.equals(識別番号管理.get食事費用設定区分())) {
             div.getBtnShokuji().setDisabled(true);
@@ -325,18 +324,19 @@ public class KyotakuServiceKeikakuhiHandler {
      * change年月です。
      *
      * @param change月 RString
-     * @param 給付実績居宅サービス計画費list List<KyufujissekiKyotakuService>
+     * @param 給付実績居宅サービス計画費list List<KyufujissekiKyotakuServiceBusiness>
      * @param サービス提供年月 FlexibleYearMonth
      * @param 整理番号 RString
      * @param 被保険者番号 HihokenshaNo
      * @param 識別番号 NyuryokuShikibetsuNo
      */
-    public void change年月(RString change月, List<KyufujissekiKyotakuService> 給付実績居宅サービス計画費list,
+    public void change年月(RString change月, List<KyufujissekiKyotakuServiceBusiness> 給付実績居宅サービス計画費list,
             FlexibleYearMonth サービス提供年月, RString 整理番号, HihokenshaNo 被保険者番号, NyuryokuShikibetsuNo 識別番号) {
         int index = 0;
-        Collections.sort(給付実績居宅サービス計画費list, new DateComparatorServiceTeikyoYM());
-        for (int i = 0; i < 給付実績居宅サービス計画費list.size(); i++) {
-            if (サービス提供年月.equals(給付実績居宅サービス計画費list.get(i).getサービス提供年月())) {
+        List<KyufujissekiKyotakuServiceBusiness> dataToRepeat = getサービス提供年月list(給付実績居宅サービス計画費list);
+        Collections.sort(dataToRepeat, new DateComparatorServiceTeikyoYM());
+        for (int i = 0; i < dataToRepeat.size(); i++) {
+            if (サービス提供年月.equals(dataToRepeat.get(i).get居宅サービス計画費().getサービス提供年月())) {
                 index = i;
                 break;
             }
@@ -346,23 +346,35 @@ public class KyotakuServiceKeikakuhiHandler {
         RString 新整理番号;
         NyuryokuShikibetsuNo 新識別番号;
         if (前月.equals(change月)) {
-            年月 = 給付実績居宅サービス計画費list.get(index + 1).getサービス提供年月();
-            新事業者番号 = 給付実績居宅サービス計画費list.get(index + 1).get事業所番号();
-            新整理番号 = 給付実績居宅サービス計画費list.get(index + 1).get整理番号();
-            新識別番号 = 給付実績居宅サービス計画費list.get(index + 1).get入力識別番号();
+            年月 = dataToRepeat.get(index + 1).get居宅サービス計画費().getサービス提供年月();
+            新事業者番号 = dataToRepeat.get(index + 1).get居宅サービス計画費().get事業所番号();
+            新整理番号 = dataToRepeat.get(index + 1).get居宅サービス計画費().get整理番号();
+            新識別番号 = dataToRepeat.get(index + 1).get居宅サービス計画費().get入力識別番号();
             div.getBtnJigetsu().setDisabled(false);
         } else {
-            年月 = 給付実績居宅サービス計画費list.get(index - 1).getサービス提供年月();
-            新事業者番号 = 給付実績居宅サービス計画費list.get(index - 1).get事業所番号();
-            新整理番号 = 給付実績居宅サービス計画費list.get(index - 1).get整理番号();
-            新識別番号 = 給付実績居宅サービス計画費list.get(index - 1).get入力識別番号();
+            年月 = dataToRepeat.get(index - 1).get居宅サービス計画費().getサービス提供年月();
+            新事業者番号 = dataToRepeat.get(index - 1).get居宅サービス計画費().get事業所番号();
+            新整理番号 = dataToRepeat.get(index - 1).get居宅サービス計画費().get整理番号();
+            新識別番号 = dataToRepeat.get(index - 1).get居宅サービス計画費().get入力識別番号();
             div.getBtnZengetsu().setDisabled(false);
         }
         div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 年月, 新整理番号, 新識別番号);
-        List<KyufujissekiKyotakuService> 居宅サービス計画費list = get給付実績データ(給付実績居宅サービス計画費list,
+        List<KyufujissekiKyotakuServiceBusiness> 居宅サービス計画費list = get給付実績データ(給付実績居宅サービス計画費list,
                 新整理番号, 新事業者番号.value(), 新識別番号.value(), 年月.toDateString());
         setDataGrid(居宅サービス計画費list, 年月);
 
+    }
+
+    private List<KyufujissekiKyotakuServiceBusiness> getサービス提供年月list(List<KyufujissekiKyotakuServiceBusiness> 居宅サービス計画費list) {
+        List<FlexibleYearMonth> サービス提供年月list = new ArrayList<>();
+        List<KyufujissekiKyotakuServiceBusiness> dataToRepeat = new ArrayList<>();
+        for (KyufujissekiKyotakuServiceBusiness date : 居宅サービス計画費list) {
+            if (!サービス提供年月list.contains(date.get居宅サービス計画費().getサービス提供年月())) {
+                サービス提供年月list.add(date.get居宅サービス計画費().getサービス提供年月());
+                dataToRepeat.add(date);
+            }
+        }
+        return dataToRepeat;
     }
 
     /**
@@ -370,9 +382,10 @@ public class KyotakuServiceKeikakuhiHandler {
      *
      * @param date RString
      * @param 事業者番号リスト List<KyufuJissekiHedajyoho2>
-     * @param 給付実績居宅サービス計画費list List<KyufujissekiKyotakuService>
+     * @param 給付実績居宅サービス計画費list List<KyufujissekiKyotakuServiceBusiness>
      */
-    public void change事業者(RString date, List<KyufuJissekiHedajyoho2> 事業者番号リスト, List<KyufujissekiKyotakuService> 給付実績居宅サービス計画費list) {
+    public void change事業者(RString date, List<KyufuJissekiHedajyoho2> 事業者番号リスト,
+            List<KyufujissekiKyotakuServiceBusiness> 給付実績居宅サービス計画費list) {
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
@@ -392,7 +405,7 @@ public class KyotakuServiceKeikakuhiHandler {
         div.getCcdKyufuJissekiHeader().set整理番号(事業者番号リスト.get(index + i).get整理番号());
         div.getCcdKyufuJissekiHeader().set識別番号名称(事業者番号リスト.get(index + i).get識別番号名称());
         div.getCcdKyufuJissekiHeader().set様式番号(事業者番号リスト.get(index + i).get識別番号());
-        List<KyufujissekiKyotakuService> 居宅サービス計画費list = get給付実績データ(給付実績居宅サービス計画費list,
+        List<KyufujissekiKyotakuServiceBusiness> 居宅サービス計画費list = get給付実績データ(給付実績居宅サービス計画費list,
                 事業者番号リスト.get(index + i).get整理番号(),
                 事業者番号リスト.get(index + i).get事業所番号().value(),
                 事業者番号リスト.get(index + i).get識別番号(),
@@ -411,20 +424,20 @@ public class KyotakuServiceKeikakuhiHandler {
     /**
      * 給付実績データです。
      *
-     * @param 給付実績居宅サービス計画費list List<KyufujissekiKyotakuService>
+     * @param 給付実績居宅サービス計画費list List<KyufujissekiKyotakuServiceBusiness>
      * @param 整理番号 RString
      * @param 様式番号 RString
      * @param 事業者番号 RString
      * @param サービス提供年月 RString
-     * @return 緊急時施設療養データ List<KyufujissekiKyotakuService>
+     * @return 緊急時施設療養データ List<KyufujissekiKyotakuServiceBusiness>
      */
-    public List<KyufujissekiKyotakuService> get給付実績データ(List<KyufujissekiKyotakuService> 給付実績居宅サービス計画費list, RString 整理番号, RString 事業者番号, RString 様式番号, RString サービス提供年月) {
-        List<KyufujissekiKyotakuService> 居宅サービス計画費list = new ArrayList<>();
+    public List<KyufujissekiKyotakuServiceBusiness> get給付実績データ(List<KyufujissekiKyotakuServiceBusiness> 給付実績居宅サービス計画費list, RString 整理番号, RString 事業者番号, RString 様式番号, RString サービス提供年月) {
+        List<KyufujissekiKyotakuServiceBusiness> 居宅サービス計画費list = new ArrayList<>();
         for (int index = 0; index < 給付実績居宅サービス計画費list.size(); index++) {
-            if (事業者番号.equals(給付実績居宅サービス計画費list.get(index).get事業所番号().value())
-                    && 整理番号.equals(給付実績居宅サービス計画費list.get(index).get整理番号())
-                    && 様式番号.equals(給付実績居宅サービス計画費list.get(index).get入力識別番号().value())
-                    && サービス提供年月.equals(給付実績居宅サービス計画費list.get(index).getサービス提供年月().toDateString())) {
+            if (事業者番号.equals(給付実績居宅サービス計画費list.get(index).get居宅サービス計画費().get事業所番号().value())
+                    && 整理番号.equals(給付実績居宅サービス計画費list.get(index).get居宅サービス計画費().get整理番号())
+                    && 様式番号.equals(給付実績居宅サービス計画費list.get(index).get居宅サービス計画費().get入力識別番号().value())
+                    && サービス提供年月.equals(給付実績居宅サービス計画費list.get(index).get居宅サービス計画費().getサービス提供年月().toDateString())) {
                 居宅サービス計画費list.add(給付実績居宅サービス計画費list.get(index));
             }
         }
@@ -463,13 +476,13 @@ public class KyotakuServiceKeikakuhiHandler {
         return new RString(Decimal.ZERO.intValue());
     }
 
-    private static class DateComparatorServiceTeikyoYM implements Comparator<KyufujissekiKyotakuService>, Serializable {
+    private static class DateComparatorServiceTeikyoYM implements Comparator<KyufujissekiKyotakuServiceBusiness>, Serializable {
 
         private static final long serialVersionUID = -300796001015547240L;
 
         @Override
-        public int compare(KyufujissekiKyotakuService o1, KyufujissekiKyotakuService o2) {
-            return o2.getサービス提供年月().compareTo(o1.getサービス提供年月());
+        public int compare(KyufujissekiKyotakuServiceBusiness o1, KyufujissekiKyotakuServiceBusiness o2) {
+            return o2.get居宅サービス計画費().getサービス提供年月().compareTo(o1.get居宅サービス計画費().getサービス提供年月());
         }
     }
 }

@@ -31,7 +31,14 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class HanyoListParamKougakuGassanJikoFudanHandler {
 
     private final HanyoListParamKougakuGassanJikoFudanDiv div;
+    private static final RString 国保連取込情報 = new RString("国保連取込情報");
+    private static final RString 証明書計算処理時作成_申請書有 = new RString("証明書計算処理時作成(申請書有)");
+    private static final RString 証明書計算処理時作成_全受給者 = new RString("証明書計算処理時作成(全受給者)");
+    private static final RString KEY0 = new RString("key0");
+    private static final RString KEY1 = new RString("key1");
+    private static final RString KEY2 = new RString("key2");
     private static final RString BLANK = new RString("0");
+    private static final RString 仮算定データ = new RString("仮算定データ");
     private static final RString すべて = new RString("すべて");
     private static final RString 項目名付加 = new RString("1");
     private static final RString 連番付加 = new RString("2");
@@ -75,6 +82,46 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         panel.getDdlDetaSakuseiKubun().setDataSource(getデータ作成区分());
         div.getChushutsuJokenPanel().getDdlDetaSakuseiKubun().setSelectedIndex(INDEX_ゼロ);
         set調定年度();
+    }
+
+    /**
+     * 「選択」ボタンを押すの場合
+     */
+    public void getEditDdlDetaSakuseiKubun() {
+        if (すべて.equals(div.getDdlDetaSakuseiKubun().getSelectedValue())) {
+            List<KeyValueDataSource> disabledItems = new ArrayList<>();
+            div.getRadDataShurui().setDisabledItem(disabledItems);
+            div.getTxtJikoFutangakuKakunin().setDisabled(false);
+            div.getTxtHoseizumiJikoFutangaku().setDisabled(false);
+            div.getTxtJikoFutanngakuShoumeisho().setDisabled(false);
+        }
+        if (国保連取込情報.equals(div.getDdlDetaSakuseiKubun().getSelectedValue())) {
+            List<KeyValueDataSource> disabledItems = new ArrayList<>();
+            div.getRadDataShurui().setDisabledItem(disabledItems);
+            div.getTxtJikoFutangakuKakunin().setDisabled(false);
+            div.getTxtHoseizumiJikoFutangaku().setDisabled(true);
+            div.getTxtJikoFutanngakuShoumeisho().setDisabled(false);
+        }
+        if (証明書計算処理時作成_申請書有.equals(div.getDdlDetaSakuseiKubun().getSelectedValue())) {
+            List<KeyValueDataSource> disabledItems = new ArrayList<>();
+            disabledItems.add(new KeyValueDataSource(KEY0, すべて));
+            disabledItems.add(new KeyValueDataSource(KEY2, 仮算定データ));
+            div.getRadDataShurui().setDisabledItem(disabledItems);
+            div.getRadDataShurui().setSelectedKey(KEY1);
+            div.getTxtJikoFutangakuKakunin().setDisabled(true);
+            div.getTxtHoseizumiJikoFutangaku().setDisabled(false);
+            div.getTxtJikoFutanngakuShoumeisho().setDisabled(false);
+        }
+        if (証明書計算処理時作成_全受給者.equals(div.getDdlDetaSakuseiKubun().getSelectedValue())) {
+            List<KeyValueDataSource> disabledItems = new ArrayList<>();
+            disabledItems.add(new KeyValueDataSource(KEY0, すべて));
+            disabledItems.add(new KeyValueDataSource(KEY2, 仮算定データ));
+            div.getRadDataShurui().setDisabledItem(disabledItems);
+            div.getRadDataShurui().setSelectedKey(KEY1);
+            div.getTxtJikoFutangakuKakunin().setDisabled(true);
+            div.getTxtHoseizumiJikoFutangaku().setDisabled(false);
+            div.getTxtJikoFutanngakuShoumeisho().setDisabled(true);
+        }
     }
 
     /**
@@ -123,12 +170,8 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
             batchparam.setSofuTaishogaiFukumu(true);
         }
         batchparam = setChkCsvHenshuHoho(batchparam);
-        if (null != div.getCcdHokenshaList()) {
-            if (null != div.getCcdHokenshaList().getSelectedItem()) {
-                if (null != div.getCcdHokenshaList().getSelectedItem().get市町村コード()) {
-                    batchparam.setHokenshaNo(div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue());
-                }
-            }
+        if (div.getChushutsuJokenPanel().getCcdHokenshaList().isVisible()) {
+            batchparam.setHokenshaNo(div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue());
         }
         if (null != div.getCcdShutsuryokujun().getSelected出力順()) {
             batchparam.setShutsuryokuju(div.getCcdShutsuryokujun().getSelected出力順().get出力順ID());
@@ -183,7 +226,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         KeyValueDataSource dataSourceBlank = new KeyValueDataSource(BLANK, すべて);
         dataSourceList.add(dataSourceBlank);
-        // TODO QA328
+        // TODO QA1299
 //        for (KaigoGassan_ShinseiJokyoKbn データ作成 : KaigoGassan_ShinseiJokyoKbn.values()) {
 //            KeyValueDataSource dataSource = new KeyValueDataSource(データ作成.getコード(), データ作成.get名称());
 //            dataSourceList.add(dataSource);

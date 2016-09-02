@@ -42,6 +42,7 @@ public class HanyoListDaichoMybatisParameter extends UaFt200FindShikibetsuTaisho
     private final RString 受給者のみ;
     private final RString 有効無効区分;
     private final AtenaSelectBatchParameter 宛名抽出条件;
+    private final RString 出力順;
 
     /**
      * コンストラクタ
@@ -64,6 +65,7 @@ public class HanyoListDaichoMybatisParameter extends UaFt200FindShikibetsuTaisho
      * @param 有効無効区分 RString
      * @param 宛名抽出条件 AtenaSelectBatchParameter
      * @param searchKey IShikibetsuTaishoPSMSearchKey
+     * @param 出力順 RString
      */
     public HanyoListDaichoMybatisParameter(
             FlexibleYear 調定年度,
@@ -83,7 +85,8 @@ public class HanyoListDaichoMybatisParameter extends UaFt200FindShikibetsuTaisho
             RString 受給者のみ,
             RString 有効無効区分,
             AtenaSelectBatchParameter 宛名抽出条件,
-            IShikibetsuTaishoPSMSearchKey searchKey) {
+            IShikibetsuTaishoPSMSearchKey searchKey,
+            RString 出力順) {
         super(searchKey);
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;
@@ -102,5 +105,6 @@ public class HanyoListDaichoMybatisParameter extends UaFt200FindShikibetsuTaisho
         this.受給者のみ = 受給者のみ;
         this.有効無効区分 = 有効無効区分;
         this.宛名抽出条件 = 宛名抽出条件;
+        this.出力順 = 出力順;
     }
 }

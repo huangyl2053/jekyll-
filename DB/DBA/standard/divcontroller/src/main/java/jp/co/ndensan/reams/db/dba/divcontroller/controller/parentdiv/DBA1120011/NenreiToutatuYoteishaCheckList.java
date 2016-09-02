@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1120011
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.jukinentotoroku.DbT7022ShoriDateKanriBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.nenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListBatchParameterSakusei;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitoutatsuyoteisha.INenreiToutatsuYoteishaCheckListBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA120010.DBA120010_NenreitotatsuYoteishaListParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1120011.NenreiToutatuYoteishaCheckListDiv;
 import jp.co.ndensan.reams.db.dba.service.core.nenreitoutatuyoteishachecklist.NenreiToutatuYoteishaCheckListManager;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -65,7 +65,7 @@ public class NenreiToutatuYoteishaCheckList {
      * @param requestDiv NenreiToutatuYoteishaCheckListDiv
      * @return ResponseData<INenreiToutatsuYoteishaCheckListBatchParameter>
      */
-    public ResponseData<INenreiToutatsuYoteishaCheckListBatchParameter> onClick_btnBatchRegister(
+    public ResponseData<DBA120010_NenreitotatsuYoteishaListParameter> onClick_btnBatchRegister(
             NenreiToutatuYoteishaCheckListDiv requestDiv) {
         NenreiToutatsuYoteishaCheckListBatchParameterSakusei batchParameterSakusei
                 = new NenreiToutatsuYoteishaCheckListBatchParameterSakusei();
@@ -76,7 +76,7 @@ public class NenreiToutatuYoteishaCheckList {
         List<RString> 編集方法 = requestDiv.getChkHenshuHoho().getSelectedKeys();
         // TODO 帳票出力順の実装方式は不明です。
         RString 出力順ID = RString.EMPTY;
-        INenreiToutatsuYoteishaCheckListBatchParameter parameter
+        DBA120010_NenreitotatsuYoteishaListParameter parameter
                 = batchParameterSakusei.getNenreiToutatsuYoteishaCheckListBatchParameter(
                         出力対象, 住民種別, 今回開始日, 今回終了日, 編集方法, 出力順ID);
         return ResponseData.of(parameter).respond();

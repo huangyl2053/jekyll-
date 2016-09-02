@@ -82,79 +82,79 @@ public class SystemKanriNinteiShienTotalValidationHandler {
     }
 
     private List<ViewControl> get認定ＩＦ改定日() {
-        List<ViewControl> viewControls = new ArrayList();
+        List<ViewControl> viewControls = new ArrayList<>();
         viewControls.add(div.getSystemKanri().getSystemKanriNinteiShien().getTxtNinteiIfKaiteiYMD());
         return viewControls;
     }
 
     private List<ViewControl> get認定結果ファイル() {
-        List<ViewControl> viewControls = new ArrayList();
+        List<ViewControl> viewControls = new ArrayList<>();
         viewControls.add(div.getSystemKanri().getSystemKanriNinteiShien().getTxtNinteiKekkaFileOld());
         return viewControls;
     }
 
     private List<ViewControl> get指定事業出力ファイル() {
-        List<ViewControl> viewControls = new ArrayList();
+        List<ViewControl> viewControls = new ArrayList<>();
         viewControls.add(div.getSystemKanri().getSystemKanriNinteiShien().getTxtShiteiJigyoOutFileOld());
         return viewControls;
     }
 
     private List<ViewControl> get調査員出力ファイル() {
-        List<ViewControl> viewControls = new ArrayList();
+        List<ViewControl> viewControls = new ArrayList<>();
         viewControls.add(div.getSystemKanri().getSystemKanriNinteiShien().getTxtChosainOutFileOld());
         return viewControls;
     }
 
     private List<ViewControl> get医療機関出力ファイル() {
-        List<ViewControl> viewControls = new ArrayList();
+        List<ViewControl> viewControls = new ArrayList<>();
         viewControls.add(div.getSystemKanri().getSystemKanriNinteiShien().getTxtIryoKikanOutFileOld());
         return viewControls;
     }
 
     private List<ViewControl> get主治医出力ファイル() {
-        List<ViewControl> viewControls = new ArrayList();
+        List<ViewControl> viewControls = new ArrayList<>();
         viewControls.add(div.getSystemKanri().getSystemKanriNinteiShien().getTxtShujiiOutFileOld());
         return viewControls;
     }
 
     private List<ViewControl> get申請情報出力ファイル() {
-        List<ViewControl> viewControls = new ArrayList();
+        List<ViewControl> viewControls = new ArrayList<>();
         viewControls.add(div.getSystemKanri().getSystemKanriNinteiShien().getTxtShinseiJohoOutFileOld());
         return viewControls;
     }
 
     private List<ViewControl> get認定結果ファイル_新() {
-        List<ViewControl> viewControls = new ArrayList();
+        List<ViewControl> viewControls = new ArrayList<>();
         viewControls.add(div.getSystemKanri().getSystemKanriNinteiShien().getTxtNinteiKekkaFileNew());
         return viewControls;
     }
 
     private List<ViewControl> get指定事業出力ファイル_新() {
-        List<ViewControl> viewControls = new ArrayList();
+        List<ViewControl> viewControls = new ArrayList<>();
         viewControls.add(div.getSystemKanri().getSystemKanriNinteiShien().getTxtShiteiJigyoOutFileNew());
         return viewControls;
     }
 
     private List<ViewControl> get調査員出力ファイル_新() {
-        List<ViewControl> viewControls = new ArrayList();
+        List<ViewControl> viewControls = new ArrayList<>();
         viewControls.add(div.getSystemKanri().getSystemKanriNinteiShien().getTxtChosainOutFileNew());
         return viewControls;
     }
 
     private List<ViewControl> get医療機関出力ファイル_新() {
-        List<ViewControl> viewControls = new ArrayList();
+        List<ViewControl> viewControls = new ArrayList<>();
         viewControls.add(div.getSystemKanri().getSystemKanriNinteiShien().getTxtIryoKikanOutFileNew());
         return viewControls;
     }
 
     private List<ViewControl> get主治医出力ファイル_新() {
-        List<ViewControl> viewControls = new ArrayList();
+        List<ViewControl> viewControls = new ArrayList<>();
         viewControls.add(div.getSystemKanri().getSystemKanriNinteiShien().getTxtShujiiOutFileNew());
         return viewControls;
     }
 
     private List<ViewControl> get申請情報出力ファイル_新() {
-        List<ViewControl> viewControls = new ArrayList();
+        List<ViewControl> viewControls = new ArrayList<>();
         viewControls.add(div.getSystemKanri().getSystemKanriNinteiShien().getTxtShinseiJohoOutFileNew());
         return viewControls;
     }

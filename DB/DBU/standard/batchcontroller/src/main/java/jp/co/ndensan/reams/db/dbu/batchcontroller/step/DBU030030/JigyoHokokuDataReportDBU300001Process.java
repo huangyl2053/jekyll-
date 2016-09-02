@@ -23,7 +23,15 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -70,6 +78,10 @@ public class JigyoHokokuDataReportDBU300001Process extends BatchProcessBase<Jigy
     private static final Decimal 数値_16 = new Decimal(16);
     private static final Decimal 数値_25 = new Decimal(25);
     private static final Decimal 数値_26 = new Decimal(26);
+    private static final RString DATE_時 = new RString("時");
+    private static final RString DATE_分 = new RString("分");
+    private static final RString DATE_秒 = new RString("秒");
+    private static final RString 作成 = new RString("作成");
 
     private RString 保険者番号;
     private RString 保険者名;
@@ -122,13 +134,13 @@ public class JigyoHokokuDataReportDBU300001Process extends BatchProcessBase<Jigy
     protected void afterExecute() {
         JigyohokokuGeppoYoshiki1Data reportData = new JigyohokokuGeppoYoshiki1Data();
         reportData.set集計区分(年報月報区分);
-        reportData.set作成日時(processParameter.get処理日時());
+        reportData.set作成日時(get作成日時());
         reportData.set保険者名(保険者名);
         reportData.set保険者番号(保険者番号);
         reportData.set年報月報区分(年報月報区分CODE);
-        reportData.set集計年度(processParameter.get集計年度());
-        reportData.set集計期間FROM(processParameter.get集計開始年月());
-        reportData.set集計期間TO(processParameter.get集計終了年月());
+        reportData.set集計年度(getパターン107(processParameter.get集計年度()));
+        reportData.set集計期間FROM(getパターン62(processParameter.get集計開始年月()));
+        reportData.set集計期間TO(getパターン62(processParameter.get集計終了年月()));
         reportData.set第1号被保険者数_項目標題列1(new RString("前年度末現在"));
         reportData.set第1号被保険者数_項目標題列2(new RString("当年度中増"));
         reportData.set第1号被保険者数_項目標題列3(new RString("当年度中減"));
@@ -191,5 +203,38 @@ public class JigyoHokokuDataReportDBU300001Process extends BatchProcessBase<Jigy
             return new RString(map.get(key).longValue());
         }
         return RString.EMPTY;
+    }
+
+    private RString get作成日時() {
+        RStringBuilder printTimeStamp = new RStringBuilder();
+        RDateTime printdate = processParameter.get処理日時();
+        printTimeStamp.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        printTimeStamp.append(RString.HALF_SPACE);
+        printTimeStamp.append(String.format("%02d", printdate.getHour()));
+        printTimeStamp.append(DATE_時);
+        printTimeStamp.append(String.format("%02d", printdate.getMinute()));
+        printTimeStamp.append(DATE_分);
+        printTimeStamp.append(String.format("%02d", printdate.getSecond()));
+        printTimeStamp.append(DATE_秒);
+        printTimeStamp.append(作成);
+        return printTimeStamp.toRString();
+    }
+
+    private RString getパターン62(RString 年月) {
+        if (RString.isNullOrEmpty(年月)) {
+            return RString.EMPTY;
+        }
+        return new FlexibleYearMonth(年月).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString getパターン107(RString 集計年度) {
+        if (RString.isNullOrEmpty(集計年度)) {
+            return RString.EMPTY;
+        }
+        return new FlexibleYear(集計年度).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .fillType(FillType.BLANK).toDateString();
     }
 }

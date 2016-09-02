@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 受給者IF_有料老人ホーム等同意書の有無。
  *
- * @author DBC-2740-010 fuyanling
+ * @reamsid_L DBC-2740-010 fuyanling
  */
 public enum JukyushaIF_YuryoRojinHomeDoishoUmu {
 

@@ -29,6 +29,10 @@ public class KyodoShoriyoJukyushaIdoJoho {
     private RString 再処理区分;
     private RString 外部ＣＳＶファイル名;
     private RString サイクル区分;
+    private static final RString NUM_1 = new RString("1");
+    private static final RString NUM_2 = new RString("2");
+    private static final RString 月次 = new RString("月次");
+    private static final RString 年次 = new RString("年次");
     private static final RString 状態パターン = new RString("3");
 
     /**
@@ -45,11 +49,11 @@ public class KyodoShoriyoJukyushaIdoJoho {
         RDate 基準日 = RDate.getNowDate();
         外部ＣＳＶファイル名 = DbBusinessConfig.get(ConfigNameDBC.国保連送付媒体_共同異動Ｆ_外部ＣＳＶファイル名, 基準日, SubGyomuCode.DBC介護給付);
         サイクル区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付_共同処理用受給者異動情報_処理サイクル区分, 基準日, SubGyomuCode.DBC介護給付);
-        if (new RString("1").equals(サイクル区分)) {
-            サイクル区分 = new RString("月次");
+        if (NUM_1.equals(サイクル区分)) {
+            サイクル区分 = 月次;
         }
-        if (new RString("2").equals(サイクル区分)) {
-            サイクル区分 = new RString("年次");
+        if (NUM_2.equals(サイクル区分)) {
+            サイクル区分 = 年次;
         }
         div.getCcdKokuhorenJohoSofu().initialize(処理年月, 再処理区分, 外部ＣＳＶファイル名, サイクル区分, 状態パターン);
         return ResponseData.of(div).respond();

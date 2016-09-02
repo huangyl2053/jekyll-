@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.entity.report.dbd511001;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
@@ -106,24 +107,34 @@ public class KoshinShinseiOshiraseTshuchishoReportSource implements IReportSourc
     @ReportItem(name = "hihokenshaNameKana", order = 44)
     public RString hihokenshaNameKana;
     @ReportItem(name = "hihokenshaNo1", length = 1, order = 45)
+    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo1;
     @ReportItem(name = "hihokenshaNo2", length = 1, order = 46)
+    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo2;
     @ReportItem(name = "hihokenshaNo3", length = 1, order = 47)
+    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo3;
     @ReportItem(name = "hihokenshaNo4", length = 1, order = 48)
+    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo4;
     @ReportItem(name = "hihokenshaNo5", length = 1, order = 49)
+    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo5;
     @ReportItem(name = "hihokenshaNo6", length = 1, order = 50)
+    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo6;
     @ReportItem(name = "hihokenshaNo7", length = 1, order = 51)
+    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo7;
     @ReportItem(name = "hihokenshaNo8", length = 1, order = 52)
+    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo8;
     @ReportItem(name = "hihokenshaNo9", length = 1, order = 53)
+    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo9;
     @ReportItem(name = "hihokenshaNo10", length = 1, order = 54)
+    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo10;
     @ReportItem(name = "hihokenshaName", order = 55)
     public RString hihokenshaName;

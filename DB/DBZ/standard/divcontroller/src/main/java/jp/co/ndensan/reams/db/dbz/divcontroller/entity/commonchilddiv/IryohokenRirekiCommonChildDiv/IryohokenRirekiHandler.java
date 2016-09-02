@@ -152,7 +152,11 @@ public class IryohokenRirekiHandler {
                         row.getDefaultDataName9().getValue().intValue());
                 IryohokenKanyuJokyoBuilder builder = kanyuJokyo.createBuilderForEdit();
                 builder.set医療保険加入年月日(new FlexibleDate(new RDate(row.getDefaultDataName3().toString()).toDateString()));
-                builder.set医療保険脱退年月日(new FlexibleDate(new RDate(row.getDefaultDataName4().toString()).toDateString()));
+                if (RString.isNullOrEmpty(row.getDefaultDataName4())) {
+                    builder.set医療保険脱退年月日(FlexibleDate.MAX);
+                } else {
+                    builder.set医療保険脱退年月日(new FlexibleDate(new RDate(row.getDefaultDataName4().toString()).toDateString()));
+                }
                 builder.set医療保険種別コード(row.getDefaultDataName11());
                 builder.set医療保険者番号(row.getDefaultDataName8());
                 builder.set医療保険者名称(row.getDefaultDataName13());
@@ -167,7 +171,11 @@ public class IryohokenRirekiHandler {
                                         row.getDefaultDataName9().getValue().intValue()));
                 IryohokenKanyuJokyoBuilder builder = kanyuJokyo.createBuilderForEdit();
                 builder.set医療保険加入年月日(new FlexibleDate(new RDate(row.getDefaultDataName3().toString()).toDateString()));
-                builder.set医療保険脱退年月日(new FlexibleDate(new RDate(row.getDefaultDataName4().toString()).toDateString()));
+                if (RString.isNullOrEmpty(row.getDefaultDataName4())) {
+                    builder.set医療保険脱退年月日(FlexibleDate.MAX);
+                } else {
+                    builder.set医療保険脱退年月日(new FlexibleDate(new RDate(row.getDefaultDataName4().toString()).toDateString()));
+                }
                 builder.set医療保険種別コード(row.getDefaultDataName11());
                 builder.set医療保険者番号(row.getDefaultDataName8());
                 builder.set医療保険者名称(row.getDefaultDataName13());

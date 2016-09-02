@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd511002;
 
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.TongzhiShuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.TongzhiShufaxingEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd511002.KoshinShinseiTsuchishoHakkoIchiranhyoReportSource;
 
@@ -15,15 +16,18 @@ import jp.co.ndensan.reams.db.dbd.entity.report.dbd511002.KoshinShinseiTsuchisho
  */
 public class KoshinShinseiTsuchishoHakkoIchiranhyoEditor implements IKoshinShinseiTsuchishoHakkoIchiranhyoEditor {
 
-    private final TongzhiShufaxingEntity entity;
+    private final TongzhiShufaxingEntity entity1;
+    private final TongzhiShuEntity entity2;
 
     /**
      * インスタンスを生成します。
      *
-     * @param entity TongzhiShufaxingEntity
+     * @param entity1 TongzhiShufaxingEntity
+     * @param entity2 TongzhiShuEntity
      */
-    public KoshinShinseiTsuchishoHakkoIchiranhyoEditor(TongzhiShufaxingEntity entity) {
-        this.entity = entity;
+    public KoshinShinseiTsuchishoHakkoIchiranhyoEditor(TongzhiShufaxingEntity entity1, TongzhiShuEntity entity2) {
+        this.entity1 = entity1;
+        this.entity2 = entity2;
     }
 
     @Override
@@ -32,7 +36,30 @@ public class KoshinShinseiTsuchishoHakkoIchiranhyoEditor implements IKoshinShins
     }
 
     private KoshinShinseiTsuchishoHakkoIchiranhyoReportSource edit項目(KoshinShinseiTsuchishoHakkoIchiranhyoReportSource source) {
-
+        source.taishoKikan = entity1.get抽出対象期間();
+        source.cityCode = entity1.get市町村コード();
+        source.cityName = entity1.get市町村名称();
+        source.sort1 = entity1.get並び順1();
+        source.sort2 = entity1.get並び順2();
+        source.sort3 = entity1.get並び順3();
+        source.sort4 = entity1.get並び順4();
+        source.sort5 = entity1.get並び順5();
+        source.printTimeStamp = entity1.get印刷時間();
+        //source.listHakkoIchiranhyo_1 = ;
+        source.listHakkoIchiranhyo_2 = entity2.get被保険者番号();
+        source.listHakkoIchiranhyo_3 = entity2.get被保険者氏名();
+        source.listHakkoIchiranhyo_4 = entity2.get要介護度();
+        source.listHakkoIchiranhyo_5 = entity2.get受給申請日();
+        source.listHakkoIchiranhyo_6 = entity2.get認定日();
+        source.listHakkoIchiranhyo_7 = entity2.get認定開始日();
+        source.listHakkoIchiranhyo_8 = entity2.get認定終了日();
+        source.listHakkoIchiranhyo_9 = entity2.get受給申請事由();
+        source.listHakkoIchiranhyo_10 = entity2.get申請区分_申請時();
+        source.listHakkoIchiranhyo_11 = entity2.get申請区分_法令();
+        source.listHakkoIchiranhyo_12 = entity2.get居宅支援事業者コード();
+        source.listHakkoIchiranhyo_13 = entity2.get居宅支援事業者名称();
+        source.listHakkoIchiranhyo_14 = entity2.get入所施設事業者コード();
+        source.listHakkoIchiranhyo_15 = entity2.get入所施設事業者名称();
         return source;
     }
 

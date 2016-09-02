@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd204010;
 
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.tokuchijissekilist.TargetArea;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -60,7 +61,7 @@ public class TokuchiJissekiKanriListSakuseiMybatisParameter implements IMyBatisP
      * @param 出力順 出力順
      */
     public TokuchiJissekiKanriListSakuseiMybatisParameter(
-            RString 地区コード種類, RString 開始地区コード, RString 終了地区コード,
+            TargetArea 地区コード種類, RString 開始地区コード, RString 終了地区コード,
             LasdecCode 市町村コード, RString psmShikibetsuTaisho, RString 出力順) {
         this.開始地区コード = 開始地区コード;
         this.終了地区コード = 終了地区コード;
@@ -72,20 +73,20 @@ public class TokuchiJissekiKanriListSakuseiMybatisParameter implements IMyBatisP
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 
-    private void edit地区コード(RString 地区コード種類) {
-        if (!地区コード種類.isNullOrEmpty()) {
+    private void edit地区コード(TargetArea 地区コード種類) {
+        if (地区コード種類 != null) {
             is地区コード = true;
         }
     }
 
-    private void edit地区コード種類(RString 地区コード種類) {
-        if (地区コード種類.equals(住所)) {
+    private void edit地区コード種類(TargetArea 地区コード種類) {
+        if (地区コード種類.getコード().equals(住所)) {
             is地区_住所 = true;
-        } else if (地区コード種類.equals(行政区)) {
+        } else if (地区コード種類.getコード().equals(行政区)) {
             is地区_行政区 = true;
-        } else if (地区コード種類.equals(地区)) {
+        } else if (地区コード種類.getコード().equals(地区)) {
             is地区_地区 = true;
-        } else if (地区コード種類.equals(全て)) {
+        } else if (地区コード種類.getコード().equals(全て)) {
             is地区_全て = true;
         }
     }

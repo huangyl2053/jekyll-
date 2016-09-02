@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd511001;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.RenZhengzheEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd511001.KoshinShinseiOshiraseTshuchishoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -18,35 +17,22 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public final class KoshinShinseiOshiraseTshuchishoReport extends Report<KoshinShinseiOshiraseTshuchishoReportSource> {
 
-    private final List<RenZhengzheEntity> 認定更新お知らせ通知書Entityリスト;
+    private final RenZhengzheEntity 認定更新お知らせ通知書Entity;
 
     /**
      * インスタンスを生成します。
      *
-     * @param 認定更新お知らせ通知書Entityリスト List<RenZhengzheEntity>
-     * @return 認定更新お知らせ通知書
+     * @param 認定更新お知らせ通知書Entity RenZhengzheEntity
      */
-    public static KoshinShinseiOshiraseTshuchishoReport createReport(List<RenZhengzheEntity> 認定更新お知らせ通知書Entityリスト) {
-        return new KoshinShinseiOshiraseTshuchishoReport(認定更新お知らせ通知書Entityリスト);
+    public KoshinShinseiOshiraseTshuchishoReport(RenZhengzheEntity 認定更新お知らせ通知書Entity) {
+        this.認定更新お知らせ通知書Entity = 認定更新お知らせ通知書Entity;
     }
 
-    private KoshinShinseiOshiraseTshuchishoReport(List<RenZhengzheEntity> 認定更新お知らせ通知書Entityリスト) {
-        this.認定更新お知らせ通知書Entityリスト = 認定更新お知らせ通知書Entityリスト;
-    }
-
-    /**
-     * writeBy
-     *
-     * @param writer ReportSourceWriter
-     */
     @Override
     public void writeBy(ReportSourceWriter<KoshinShinseiOshiraseTshuchishoReportSource> writer) {
-        for (int index = 0; index < 認定更新お知らせ通知書Entityリスト.size(); index++) {
-            IKoshinShinseiOshiraseTshuchishoEditor editor = new KoshinShinseiOshiraseTshuchishoEditor(
-                    認定更新お知らせ通知書Entityリスト, index);
-            IKoshinShinseiOshiraseTshuchishoBuilder builder = new KoshinShinseiOshiraseTshuchishoBuilder(editor);
-            writer.writeLine(builder);
-        }
+        IKoshinShinseiOshiraseTshuchishoEditor editor = new KoshinShinseiOshiraseTshuchishoEditor(認定更新お知らせ通知書Entity);
+        IKoshinShinseiOshiraseTshuchishoBuilder builder = new KoshinShinseiOshiraseTshuchishoBuilder(editor);
+        writer.writeLine(builder);
     }
 
 }

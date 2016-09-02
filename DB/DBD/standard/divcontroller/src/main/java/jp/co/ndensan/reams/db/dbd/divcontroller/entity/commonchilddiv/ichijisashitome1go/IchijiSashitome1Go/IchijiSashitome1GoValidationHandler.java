@@ -32,6 +32,8 @@ public class IchijiSashitome1GoValidationHandler {
 
     private final RString 登録PTN = new RString("登録PTN");
     private final RString 更新PTN = new RString("更新PTN");
+    private final RString 削除アイコン押下 = new RString("削除アイコン押下");
+    private final RString 解除アイコン押下 = new RString("解除アイコン押下");
 
     /**
      * 1号一時差止ダイアログの給付一時差止選択データチェック。
@@ -77,9 +79,11 @@ public class IchijiSashitome1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor滞納状況情報チェック(ValidationMessageControlPairs pairs, IchijiSashitome1GoDiv div,
             ShiharaiHohoHenko shiharaiHohoHenko) {
-        if ((div.getKey_Button().equals(ShoriKubun.給付一時差止登録.getコード()) || div.getKey_Button().equals(ShoriKubun.保険料控除登録.getコード()))
+        if ((div.getKey_Button().equals(ShoriKubun.給付一時差止登録.getコード())
+                || div.getKey_Button().equals(ShoriKubun.保険料控除登録.getコード()))
                 && (div.getPTN().equals(登録PTN) || div.getPTN().equals(更新PTN))
-                && (shiharaiHohoHenko.getShiharaiHohoHenkoTainoList().isEmpty() && div.getTainoHanteiKekka().isEmpty())) {
+                && (shiharaiHohoHenko.getShiharaiHohoHenkoTainoList().isEmpty()
+                && (div.getTainoHanteiKekka().isEmpty() || div.getTainoHanteiKekka() == null))) {
             pairs.add(new ValidationMessageControlPair(IchijiSashitome1GoMessages.支払方法変更_要滞納状況確定));
         }
         return pairs;
@@ -94,7 +98,9 @@ public class IchijiSashitome1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor差止登録日未入力(ValidationMessageControlPairs pairs, IchijiSashitome1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(ShoriKubun.給付一時差止登録.getコード())) {
+        if (div.getKey_Button().equals(ShoriKubun.給付一時差止登録.getコード())
+                && !div.getButton_Name().equals(解除アイコン押下)
+                && !div.getButton_Name().equals(削除アイコン押下)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome1GoDivSpec.差止登録日入力チェック)
                     .thenAdd(IchijiSashitome1GoValidationHandler.IchijiSashitome1GoMessages.差止登録日未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -113,7 +119,9 @@ public class IchijiSashitome1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor差止納付期限未入力(ValidationMessageControlPairs pairs, IchijiSashitome1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(ShoriKubun.給付一時差止登録.getコード())) {
+        if (div.getKey_Button().equals(ShoriKubun.給付一時差止登録.getコード())
+                && !div.getButton_Name().equals(解除アイコン押下)
+                && !div.getButton_Name().equals(削除アイコン押下)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome1GoDivSpec.差止納付期限入力チェック)
                     .thenAdd(IchijiSashitome1GoValidationHandler.IchijiSashitome1GoMessages.差止納付期限未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -132,7 +140,8 @@ public class IchijiSashitome1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor差止解除日未入力(ValidationMessageControlPairs pairs, IchijiSashitome1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (!div.getTxtSashitomeKaijoYMD().isDisabled()) {
+        if (!div.getTxtSashitomeKaijoYMD().isDisplayNone()
+                && !div.getTxtSashitomeKaijoYMD().isDisabled()) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome1GoDivSpec.差止解除日入力チェック)
                     .thenAdd(IchijiSashitome1GoValidationHandler.IchijiSashitome1GoMessages.差止解除日未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -195,7 +204,8 @@ public class IchijiSashitome1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor控除決定日未入力(ValidationMessageControlPairs pairs, IchijiSashitome1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(ShoriKubun.保険料控除登録.getコード())) {
+        if (div.getKey_Button().equals(ShoriKubun.保険料控除登録.getコード())
+                && !div.getButton_Name().equals(解除アイコン押下)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome1GoDivSpec.控除決定日入力チェック)
                     .thenAdd(IchijiSashitome1GoValidationHandler.IchijiSashitome1GoMessages.控除決定日未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -214,7 +224,8 @@ public class IchijiSashitome1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor保険証提出期限未入力(ValidationMessageControlPairs pairs, IchijiSashitome1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(ShoriKubun.保険料控除登録.getコード())) {
+        if (div.getKey_Button().equals(ShoriKubun.保険料控除登録.getコード())
+                && !div.getButton_Name().equals(解除アイコン押下)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome1GoDivSpec.保険証提出期限入力チェック)
                     .thenAdd(IchijiSashitome1GoValidationHandler.IchijiSashitome1GoMessages.保険証提出期限未入力).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -233,7 +244,8 @@ public class IchijiSashitome1GoValidationHandler {
      */
     public ValidationMessageControlPairs validateFor控除番号未選択(ValidationMessageControlPairs pairs, IchijiSashitome1GoDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (div.getKey_Button().equals(ShoriKubun.保険料控除登録.getコード())) {
+        if (div.getKey_Button().equals(ShoriKubun.保険料控除登録.getコード())
+                && !div.getButton_Name().equals(解除アイコン押下)) {
             messages.add(ValidateChain.validateStart(div).ifNot(IchijiSashitome1GoDivSpec.控除番号未選択)
                     .thenAdd(IchijiSashitome1GoValidationHandler.IchijiSashitome1GoMessages.控除番号未選択).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(

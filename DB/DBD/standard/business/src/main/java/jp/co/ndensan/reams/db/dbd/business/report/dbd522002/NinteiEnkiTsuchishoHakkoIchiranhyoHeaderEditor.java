@@ -87,7 +87,7 @@ class NinteiEnkiTsuchishoHakkoIchiranhyoHeaderEditor implements INinteiEnkiTsuch
 
     private void edit市町村コード(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
         if (entity.get市町村コード() != null) {
-            source.cityCode = entity.get市町村コード().code市町村RString();
+            source.cityCode = entity.get市町村コード().value();
         }
     }
 

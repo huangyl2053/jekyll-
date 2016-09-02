@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kaigokyufuhikagomositatetouroku;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KagoMoshitate;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigokyufuhikagomositatetouroku.KaigoKyufuhiKagoMositateTourokuEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -17,7 +18,7 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KaigoKyufuhiKagoMositateTourokuResult {
+public class KaigoKyufuhiKagoMositateTourokuResult implements Serializable {
 
     private final KaigoKyufuhiKagoMositateTourokuEntity entity;
 
