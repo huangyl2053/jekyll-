@@ -817,13 +817,13 @@
         AND T4101."seibetsu" = '2'
     </sql>
     <sql id="条件4">
-        <if test = "#{基準日} != ''">
+        <if test = "has基準日">
             AND ((V4001."yokaigoJotaiKubunCode" = '01' AND V4001."ninteiYMD" <![CDATA[<=]]> #{基準日})
                 OR (V4001."yokaigoJotaiKubunCode" IN('11','12','13','21','22','23','24','25')
                     AND V4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{基準日}
                     AND #{基準日} <![CDATA[<=]]> V4001."ninteiYukoKikanShuryoYMD"))
         </if>
-        <if test = "#{基準年月} != ''">
+        <if test = "has基準年月">
             AND ((V4001."yokaigoJotaiKubunCode" = '01' AND SUBSTRING(V4001."ninteiYMD",0,6) <![CDATA[<=]]> #{基準年月})
                 OR (V4001."yokaigoJotaiKubunCode" IN('11','12','13','21','22','23','24','25')
                     AND SUBSTRING(V4001."ninteiYukoKikanKaishiYMD",0,6) <![CDATA[<=]]> #{基準年月}
@@ -832,32 +832,32 @@
         </if>
     </sql>
     <sql id="条件5">
-        <if test = "#{旧市町村コード} != ''">
+        <if test = "has旧市町村コード">
             AND V1001."kyuShichosonCode" = #{旧市町村コード}
         </if>
     </sql>
     <sql id="条件6">
         <if test= "is住所">
-            <if test = "#{開始地区コード} != ''">
+            <if test = "has開始地区コード">
                 AND #{開始地区コード} <![CDATA[<=]]> B."choikiCode"
             </if>
-            <if test = "#{終了地区コード} != ''">
+            <if test = "has終了地区コード">
                 AND B."choikiCode" <![CDATA[<=]]> #{終了地区コード}
             </if>
         </if>
         <if test = "is行政区">
-            <if test = "#{開始地区コード} != ''">
+            <if test = "has開始地区コード">
                 AND #{開始地区コード} <![CDATA[<=]]> B."gyoseikuCode"
             </if>
-            <if test = "#{終了地区コード} != ''">
+            <if test = "has終了地区コード">
                 AND B."gyoseikuCode" <![CDATA[<=]]> #{終了地区コード}
             </if>
         </if>
         <if test = "is組合">
-            <if test = "#{開始地区コード} != ''">
+            <if test = "has開始地区コード">
                 AND #{開始地区コード} <![CDATA[<=]]> B."chikuCode2"
             </if>
-            <if test = "#{終了地区コード} != ''">
+            <if test = "has終了地区コード">
                 AND B."chikuCode2" <![CDATA[<=]]> #{終了地区コード}
             </if>
         </if>
