@@ -82,7 +82,7 @@ module DBA
                   var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
                   var columns = gridSetting.columns;
                     
-                  gridSetting.isShowRowState = true;
+                  gridSetting.isShowRowState = false;
                   gridSetting.isShowSelectButtonColumn = false;
                   gridSetting.isShowModifyButtonColumn = true;
                   gridSetting.isShowDeleteButtonColumn = true;

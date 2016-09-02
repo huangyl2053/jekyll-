@@ -190,6 +190,13 @@ public class TaJushochiTokureishaKanriHandler {
             div.getBtnKakunin().setDisabled(false);
             div.getBtnTorikeshi().setDisabled(false);
         }
+        RString 画面状態 = new RString(div.getMode_DisplayMode().toString());
+        if ((選択データ.getKaijoYMD().getValue() == null) && (訂正モード.equals(画面状態))) {
+            div.getTxtTasyobi().setDisabled(true);
+            div.getTxtKaijyobi().setDisabled(true);
+            div.getTxtKaijyoTodokedebi().setDisabled(true);
+            div.getDdlKaijyoJiyo().setDisabled(true);
+        }
     }
 
     /**
