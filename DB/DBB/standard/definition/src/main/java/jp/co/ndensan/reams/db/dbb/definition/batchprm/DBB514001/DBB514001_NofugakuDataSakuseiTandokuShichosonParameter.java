@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.nofugakudatasakusei;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB514001;
 
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYear;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NofugakuDataParameter extends BatchParameterBase {
+public class DBB514001_NofugakuDataSakuseiTandokuShichosonParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;
     private static final String KEY_対象年 = "対象年";
