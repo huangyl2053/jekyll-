@@ -9,15 +9,12 @@ import jp.co.ndensan.reams.db.dbu.business.core.ippangenbutsu.KyufuJissekiKonkyo
 import jp.co.ndensan.reams.db.dbu.definition.processprm.ippangenbutsu.JigyoHokokuGeppoIppanGenbutsuProcessParamter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippangenbutsu.IKyufuJissekiKonkyoDBU011200EUCEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippangenbutsu.KyufuJissekiKonkyoRelateEntity;
-import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
-import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -56,14 +53,14 @@ public class JigyoHokokuGeppoDBU011200Process extends BatchProcessBase<KyufuJiss
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("DBU011200.csv"));
-        eucCsvWriter = BatchWriters.csvWriter(IKyufuJissekiKonkyoDBU011200EUCEntity.class)
-                .filePath(eucFilePath)
-                .setDelimiter(コンマ)
-                .setEnclosure(ダブル引用符)
-                .setEncode(Encode.UTF_8withBOM)
-                .setNewLine(NewLine.CRLF)
-                .hasHeader(true)
-                .build();
+//        eucCsvWriter = BatchWriters.csvWriter(IKyufuJissekiKonkyoDBU011200EUCEntity.class)
+//                .filePath(eucFilePath)
+//                .setDelimiter(コンマ)
+//                .setEnclosure(ダブル引用符)
+//                .setEncode(Encode.UTF_8withBOM)
+//                .setNewLine(NewLine.CRLF)
+//                .hasHeader(true)
+//                .build();
     }
 
     @Override
