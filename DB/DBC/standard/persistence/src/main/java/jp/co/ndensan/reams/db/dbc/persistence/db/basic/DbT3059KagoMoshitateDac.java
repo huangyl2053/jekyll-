@@ -124,4 +124,16 @@ public class DbT3059KagoMoshitateDac implements ISaveable<DbT3059KagoMoshitateEn
                                 eq(serviceTeikyoYM, サービス提供年月))).
                 toObject(DbT3059KagoMoshitateEntity.class);
     }
+
+    /**
+     * DbT3059KagoMoshitateEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int saveOrDelete(DbT3059KagoMoshitateEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("過誤申立エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
 }

@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3059KagoMoshitateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -109,6 +110,18 @@ public class KagoMoshitateBuilder {
     public KagoMoshitateBuilder set申立者区分コード(RString 申立者区分コード) {
         requireNonNull(申立者区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("申立者区分コード"));
         entity.setMoshitateshaKubunCode(申立者区分コード);
+        return this;
+    }
+
+    /**
+     * 証記載保険者番号を設定します。
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @return {@link KagoMoshitateBuilder}
+     */
+    public KagoMoshitateBuilder set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+        entity.setShokisaiHokenshaNo(証記載保険者番号);
         return this;
     }
 
