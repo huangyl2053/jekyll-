@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA7020001;
 
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolistroreifukushinenkinjukyusha.HanyoListRoreiFukushiNenkinJukyushaBatchParameter;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolistseikatsuhogojukyusha.HanyoListSeikatsuhogoJukyushaBatchParameter;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolisttashichosonjushochitokureisha.HanyoListTaShichosonJushochiTokureishaBatchParameter;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA740010.DBA740010_HanyoListRoreiFukushiNenkinJukyushaParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA760010.DBA760010_HanyoListSeikatsuHogoJukyushaParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA720010.DBA720010_HanyoListTaShichosonJushochiTokureishaParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA730010.DBA730010_HanyoListTekiyoJogaishaParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7020001.DBA7020001StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7020001.HanyoListParamDiv;
@@ -292,7 +292,7 @@ public class HanyoListParam {
      * @param div HanyoListParamDiv
      * @return ResponseData<HanyoListParamDiv>
      */
-    public ResponseData<HanyoListTekiyoJogaishaBatchParameter> onClick_btnTekiyoBatchRegister(HanyoListParamDiv div) {
+    public ResponseData<DBA730010_HanyoListTekiyoJogaishaParameter> onClick_btnTekiyoBatchRegister(HanyoListParamDiv div) {
         return ResponseData.of(getHandler(div).onClick_btnTekiyoKogakuParamSave()).respond();
     }
 
@@ -302,7 +302,7 @@ public class HanyoListParam {
      * @param div HanyoListParamDiv
      * @return ResponseData<HanyoListParamDiv>
      */
-    public ResponseData<HanyoListTaShichosonJushochiTokureishaBatchParameter> onClick_btnTashichoBatchRegister(HanyoListParamDiv div) {
+    public ResponseData<DBA720010_HanyoListTaShichosonJushochiTokureishaParameter> onClick_btnTashichoBatchRegister(HanyoListParamDiv div) {
         return ResponseData.of(getHandler(div).onClick_btnTashichoKogakuParamSave()).respond();
     }
 
@@ -312,7 +312,7 @@ public class HanyoListParam {
      * @param div HanyoListParamDiv
      * @return ResponseData<HanyoListParamDiv>
      */
-    public ResponseData<HanyoListRoreiFukushiNenkinJukyushaBatchParameter> onClick_btnRoreiBatchRegister(HanyoListParamDiv div) {
+    public ResponseData<DBA740010_HanyoListRoreiFukushiNenkinJukyushaParameter> onClick_btnRoreiBatchRegister(HanyoListParamDiv div) {
         return ResponseData.of(getHandler(div).onClick_btnRoreiKogakuParamSave()).respond();
     }
 
@@ -322,7 +322,7 @@ public class HanyoListParam {
      * @param div HanyoListParamDiv
      * @return ResponseData<HanyoListParamDiv>
      */
-    public ResponseData<HanyoListSeikatsuhogoJukyushaBatchParameter> onClick_btnSeikatsuBatchRegister(HanyoListParamDiv div) {
+    public ResponseData<DBA760010_HanyoListSeikatsuHogoJukyushaParameter> onClick_btnSeikatsuBatchRegister(HanyoListParamDiv div) {
         return ResponseData.of(getHandler(div).onClick_btnSeikatsuKogakuParamSave()).respond();
     }
 

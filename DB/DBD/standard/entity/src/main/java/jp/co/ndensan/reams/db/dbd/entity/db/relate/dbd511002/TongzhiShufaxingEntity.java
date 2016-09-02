@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002;
 
-import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -28,5 +27,5 @@ public class TongzhiShufaxingEntity {
     private RString 並び順5;
     private RString 印刷時間;
 
-    private List<TongzhiShuEntity> tongzhiShu;
+    private TongzhiShuEntity tongzhiShu;
 }

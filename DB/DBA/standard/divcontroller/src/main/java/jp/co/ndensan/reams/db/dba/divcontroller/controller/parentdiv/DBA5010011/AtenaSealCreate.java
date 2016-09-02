@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA5010011;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.atenasealcreate.AtenaSealCreateBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA090010.DBA090010_AtenaSeelParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA5010011.AtenaSealCreateDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA5010011.AtenaSealCreateHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA5010011.AtenaSealCreateValidatisonHandler;
@@ -66,7 +66,7 @@ public class AtenaSealCreate {
      * @param div 審査会委員報酬入力DIV
      * @return ResponseData<AtenaSealCreateBatchParameter>
      */
-    public ResponseData<AtenaSealCreateBatchParameter> onclick_btnjikou(AtenaSealCreateDiv div) {
+    public ResponseData<DBA090010_AtenaSeelParameter> onclick_btnjikou(AtenaSealCreateDiv div) {
         return ResponseData.of(getHandler(div).onclick_btnjikou()).respond();
     }
 

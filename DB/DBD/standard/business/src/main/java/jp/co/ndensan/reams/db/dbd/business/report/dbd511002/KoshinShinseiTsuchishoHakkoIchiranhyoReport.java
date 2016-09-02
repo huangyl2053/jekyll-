@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd511002;
 
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.TongzhiShuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.TongzhiShufaxingEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd511002.KoshinShinseiTsuchishoHakkoIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -18,23 +17,20 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public final class KoshinShinseiTsuchishoHakkoIchiranhyoReport extends Report<KoshinShinseiTsuchishoHakkoIchiranhyoReportSource> {
 
-    private final TongzhiShufaxingEntity entity1;
-    private final TongzhiShuEntity entity2;
+    private final TongzhiShufaxingEntity entity;
 
     /**
      * インスタンスを生成します。
      *
-     * @param entity1 TongzhiShufaxingEntity
-     * @param entity2 TongzhiShuEntity
+     * @param entity TongzhiShufaxingEntity
      */
-    public KoshinShinseiTsuchishoHakkoIchiranhyoReport(TongzhiShufaxingEntity entity1, TongzhiShuEntity entity2) {
-        this.entity1 = entity1;
-        this.entity2 = entity2;
+    public KoshinShinseiTsuchishoHakkoIchiranhyoReport(TongzhiShufaxingEntity entity) {
+        this.entity = entity;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KoshinShinseiTsuchishoHakkoIchiranhyoReportSource> writer) {
-        IKoshinShinseiTsuchishoHakkoIchiranhyoEditor editor = new KoshinShinseiTsuchishoHakkoIchiranhyoEditor(entity1, entity2);
+        IKoshinShinseiTsuchishoHakkoIchiranhyoEditor editor = new KoshinShinseiTsuchishoHakkoIchiranhyoEditor(entity);
         IKoshinShinseiTsuchishoHakkoIchiranhyoBuilder builder = new KoshinShinseiTsuchishoHakkoIchiranhyoBuilder(editor);
         writer.writeLine(builder);
     }

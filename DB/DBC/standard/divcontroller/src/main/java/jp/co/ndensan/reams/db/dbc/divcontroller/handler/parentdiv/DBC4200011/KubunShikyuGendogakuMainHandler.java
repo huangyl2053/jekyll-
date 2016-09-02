@@ -62,11 +62,20 @@ public class KubunShikyuGendogakuMainHandler {
     public void initializeDisplay(List<KubunShikyuGendoGaku> 居宅List,
             List<UwanoseKubunShikyuGendoGaku> 上乗せ居宅List) {
         List<KubunShikyuGendogakuData> entityList = new ArrayList<>();
-        居宅List横並びに(居宅List, entityList);
-        上乗せ居宅List横並びに(上乗せ居宅List, entityList);
+        if (居宅List != null) {
+            if (!居宅List.isEmpty()) {
+                居宅List横並びに(居宅List, entityList);
+            }
+        }
+        if (上乗せ居宅List != null) {
+            if (!上乗せ居宅List.isEmpty()) {
+                上乗せ居宅List横並びに(上乗せ居宅List, entityList);
+            }
+        }
         if (!entityList.isEmpty()) {
             状態１(entityList);
         }
+        状態１画面制御();
     }
 
     private void 居宅List横並びに(List<KubunShikyuGendoGaku> 居宅List, List<KubunShikyuGendogakuData> entityList) {
@@ -221,7 +230,7 @@ public class KubunShikyuGendogakuMainHandler {
             rowList.add(row);
         }
         div.getKubunShikyuGendogakuIchiran().getDgShikyuGendogaku().setDataSource(rowList);
-        状態１画面制御();
+
     }
 
     /**

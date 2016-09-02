@@ -97,13 +97,12 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
     private List<RString> 改頁リスト;
     private List<RString> 並び順リスト;
     private List<RString> pageBreakKeys;
+    private FileSpoolManager eucManager;
     private RString eucFilePath;
     private RString spoolWorkPath;
     private int index;
     private List<PersonalData> personalDataList;
     private Set<ShikibetsuCode> 識別コードset;
-    private FileSpoolManager csvManager;
-    private RString csvFilePath;
     // TODO 実装しない。
     @BatchWriter
     private BatchReportWriter<SeikyugakuTsuchishoKohifutanshabunSource> batchReportWriter;
@@ -132,11 +131,11 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
     protected void createWriter() {
         PageBreaker<JukyushaKoshinKekkaIchiranSource> breakPage
                 = new KogakugassanHoseisumiJikofutangakuOutPageBreak(改頁リスト);
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票ID.getColumnValue(), SubGyomuCode.DBC介護給付).addBreak(breakPage).create();
+        batchReportWriter
+                = BatchReportFactory.createBatchReportWriter(帳票ID.getColumnValue(), SubGyomuCode.DBC介護給付).addBreak(breakPage).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
 
-        // TODO どのパースすで？
-        spoolWorkPath = Path.getTmpDirectoryPath();
+        eucManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .setDelimiter(コンマ)
@@ -146,11 +145,6 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
                 .hasHeader(true)
                 .build();
 
-        csvManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
-                EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString csvSpoolWorkPath = csvManager.getEucOutputDirectry();
-        // TODO 出力ファイル名は指定しない。
-        csvFilePath = Path.combinePath(csvSpoolWorkPath, 出力ファイル名);
     }
 
     @Override
@@ -176,7 +170,7 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
         eucCsvWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-            csvManager.spool(csvFilePath, accessLogUUID);
+            eucManager.spool(eucFilePath, accessLogUUID);
         }
     }
 

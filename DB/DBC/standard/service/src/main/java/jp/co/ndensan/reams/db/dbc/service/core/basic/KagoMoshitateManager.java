@@ -104,4 +104,19 @@ public class KagoMoshitateManager {
         }
         return 1 == dac.save(過誤申立.toEntity());
     }
+
+    /**
+     * 過誤申立{@link KagoMoshitate}を保存します。
+     *
+     * @param 過誤申立 {@link KagoMoshitate}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean saveOrdelete過誤申立(KagoMoshitate 過誤申立) {
+        requireNonNull(過誤申立, UrSystemErrorMessages.値がnull.getReplacedMessage("過誤申立"));
+        if (!過誤申立.hasChanged()) {
+            return false;
+        }
+        return 1 == dac.saveOrDelete(過誤申立.toEntity());
+    }
 }

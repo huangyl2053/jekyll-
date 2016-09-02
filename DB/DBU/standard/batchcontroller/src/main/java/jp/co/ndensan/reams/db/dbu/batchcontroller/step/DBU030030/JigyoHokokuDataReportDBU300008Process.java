@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -108,9 +110,9 @@ public class JigyoHokokuDataReportDBU300008Process extends BatchProcessBase<Jigy
         reportData.set保険者名(保険者名);
         reportData.set保険者番号(保険者番号);
         reportData.set年報月報区分(年報月報区分CODE);
-        reportData.set集計年度(processParameter.get集計年度());
-        reportData.set集計期間FROM(processParameter.get集計開始年月());
-        reportData.set集計期間TO(processParameter.get集計終了年月());
+        reportData.set集計年度(getパターン107(processParameter.get集計年度()));
+        reportData.set集計期間FROM(getパターン62(processParameter.get集計開始年月()));
+        reportData.set集計期間TO(getパターン62(processParameter.get集計終了年月()));
         reportData.set項目標題列1(new RString("前年度末現在"));
         reportData.set項目標題列2(new RString("当年度中増"));
         reportData.set項目標題列3(new RString("当年度中減"));
@@ -145,5 +147,21 @@ public class JigyoHokokuDataReportDBU300008Process extends BatchProcessBase<Jigy
         printTimeStamp.append(DATE_秒);
         printTimeStamp.append(作成);
         return printTimeStamp.toRString();
+    }
+
+    private RString getパターン62(RString 年月) {
+        if (RString.isNullOrEmpty(年月)) {
+            return RString.EMPTY;
+        }
+        return new FlexibleYearMonth(年月).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString getパターン107(RString 集計年度) {
+        if (RString.isNullOrEmpty(集計年度)) {
+            return RString.EMPTY;
+        }
+        return new FlexibleYear(集計年度).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .fillType(FillType.BLANK).toDateString();
     }
 }

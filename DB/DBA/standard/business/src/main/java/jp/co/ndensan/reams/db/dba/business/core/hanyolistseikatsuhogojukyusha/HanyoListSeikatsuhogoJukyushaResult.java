@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HizukeChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.seiho.HaniChushutsubiKubun;
-import jp.co.ndensan.reams.db.dba.definition.processprm.hanyolistseikatsuhogojukyusha.SeikatsuhogoJukyushaProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.processprm.dba760010.SeikatsuhogoJukyushaProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolistseikatsuhogojukyusha.SeikatsuhogoJukyushaCsvEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolistseikatsuhogojukyusha.SeikatsuhogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolistseikatsuhogojukyusha.SeikatsuhogoJukyushaRenbanCsvEntity;

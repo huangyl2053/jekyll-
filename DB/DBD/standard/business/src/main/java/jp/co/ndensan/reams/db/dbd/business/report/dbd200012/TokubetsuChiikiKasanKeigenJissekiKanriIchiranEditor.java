@@ -5,12 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200012;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.KyuhuJissekiHihokensha;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.KyuhuJissekiMeisai;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.TokubetsuChiikiKasanKeigenJissekiKanri;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200012.TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -42,7 +42,7 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
     private final TokubetsuChiikiKasanKeigenJissekiKanri 帳票情報;
     private final Association association;
     private final IOutputOrder iOutputOrder;
-    private final KyuhuJissekiHihokensha 宛名;
+    private final IKojin 宛名;
 
     /**
      * インスタンスを生成します。
@@ -50,10 +50,10 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
      * @param 帳票情報 TokubetsuChiikiKasanKeigenJissekiKanri
      * @param association Association
      * @param iOutputOrder IOutputOrder
-     * @param 宛名 KyuhuJissekiHihokensha
+     * @param 宛名 IKojin
      */
     public TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor(TokubetsuChiikiKasanKeigenJissekiKanri 帳票情報,
-            Association association, IOutputOrder iOutputOrder, KyuhuJissekiHihokensha 宛名) {
+            Association association, IOutputOrder iOutputOrder, IKojin 宛名) {
         this.帳票情報 = 帳票情報;
         this.association = association;
         this.iOutputOrder = iOutputOrder;
@@ -69,8 +69,8 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
     private TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource editSource(
             TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource source) {
         setHeader(source);
-        setListStep1(宛名, source);
-        setListStep2(宛名, source);
+        setListStep1(source);
+        setListStep2(source);
         return source;
     }
 
@@ -81,36 +81,46 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
             source.hokenshaNo = this.association.get地方公共団体コード().value();
             source.hokenshaName = this.association.get市町村名();
         }
-        if (null != iOutputOrder) {
-            List<ISetSortItem> 設定項目リスト = this.iOutputOrder.get設定項目リスト();
-            source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
-            source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
-            source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
-            source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-            source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
-            if (設定項目リスト.get(LISTINDEX_0).is改頁項目()) {
-                source.kaiPege1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
-            }
-            if (設定項目リスト.get(LISTINDEX_1).is改頁項目()) {
-                source.kaiPege2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
-            }
-            if (設定項目リスト.get(LISTINDEX_2).is改頁項目()) {
-                source.kaiPege3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
-            }
-            if (設定項目リスト.get(LISTINDEX_3).is改頁項目()) {
-                source.kaiPege4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-            }
-            if (設定項目リスト.get(LISTINDEX_4).is改頁項目()) {
-                source.kaiPege5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
-            }
+        List<ISetSortItem> list = new ArrayList<>();
+        if (iOutputOrder != null && iOutputOrder.get設定項目リスト() == null) {
+            list = iOutputOrder.get設定項目リスト();
+        }
+        if (list.size() > LISTINDEX_0) {
+            source.shutsuryokujun1 = list.get(LISTINDEX_0).get項目名();
+        }
+        if (list.size() > LISTINDEX_1) {
+            source.shutsuryokujun2 = list.get(LISTINDEX_1).get項目名();
+        }
+        if (list.size() > LISTINDEX_2) {
+            source.shutsuryokujun3 = list.get(LISTINDEX_2).get項目名();
+        }
+        if (list.size() > LISTINDEX_3) {
+            source.shutsuryokujun4 = list.get(LISTINDEX_3).get項目名();
+        }
+        if (list.size() > LISTINDEX_4) {
+            source.shutsuryokujun5 = list.get(LISTINDEX_4).get項目名();
+        }
+        if (list.size() > LISTINDEX_0 && list.get(LISTINDEX_0).is改頁項目()) {
+            source.kaiPege1 = list.get(0).get項目名();
+        }
+        if (list.size() > LISTINDEX_1 && list.get(LISTINDEX_1).is改頁項目()) {
+            source.kaiPege2 = list.get(LISTINDEX_1).get項目名();
+        }
+        if (list.size() > LISTINDEX_2 && list.get(LISTINDEX_2).is改頁項目()) {
+            source.kaiPege3 = list.get(LISTINDEX_2).get項目名();
+        }
+        if (list.size() > LISTINDEX_3 && list.get(LISTINDEX_3).is改頁項目()) {
+            source.kaiPege4 = list.get(LISTINDEX_3).get項目名();
+        }
+        if (list.size() > LISTINDEX_4 && list.get(LISTINDEX_4).is改頁項目()) {
+            source.kaiPege5 = list.get(LISTINDEX_4).get項目名();
         }
     }
 
-    private void setListStep1(KyuhuJissekiHihokensha 宛名, TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource source) {
+    private void setListStep1(TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource source) {
         if (null != 宛名) {
-            IKojin 宛名1 = ShikibetsuTaishoFactory.createKojin(宛名.get宛名());
-            source.list_2 = 宛名1.get住所().get全国住所コード().value();
-            source.list_3 = 宛名1.get住所().get住所();
+            source.list_2 = 宛名.get住所().get全国住所コード().value();
+            source.list_3 = 宛名.get住所().get住所();
         }
         List<KyuhuJissekiHihokensha> 給付実績被保険者リスト = this.帳票情報.get給付実績被保険者リスト();
         for (int hihokenshaIndex = 0; hihokenshaIndex < 給付実績被保険者リスト.size(); hihokenshaIndex++) {
@@ -159,12 +169,11 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
         source.list_18 = DecimalFormatter.toコンマ区切りRString(get保険者助成額合計(), 0);
     }
 
-    private void setListStep2(KyuhuJissekiHihokensha 宛名, TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource source) {
+    private void setListStep2(TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource source) {
         if (null != 宛名) {
-            IKojin 宛名1 = ShikibetsuTaishoFactory.createKojin(宛名.get宛名());
-            source.list_1 = 宛名1.get名称().getName().value();
-            source.list_2 = 宛名1.get行政区画().getGyoseiku().getコード().value();
-            source.list_3 = 宛名1.get行政区画().getGyoseiku().get名称();
+            source.list_1 = 宛名.get名称().getName().value();
+            source.list_2 = 宛名.get行政区画().getGyoseiku().getコード().value();
+            source.list_3 = 宛名.get行政区画().getGyoseiku().get名称();
         }
         List<KyuhuJissekiHihokensha> 給付実績被保険者リスト = this.帳票情報.get給付実績被保険者リスト();
         for (int hihokenshaIndex = 0; hihokenshaIndex < 給付実績被保険者リスト.size(); hihokenshaIndex++) {
@@ -199,5 +208,4 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
         }
         return 保険者助成額合計;
     }
-
 }

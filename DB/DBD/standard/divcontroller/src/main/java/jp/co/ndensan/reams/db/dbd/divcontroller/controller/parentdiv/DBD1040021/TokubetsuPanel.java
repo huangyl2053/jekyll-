@@ -47,18 +47,6 @@ public class TokubetsuPanel {
     }
 
     /**
-     * 実行するボタンを押下のバッチ用パラメータを作成します。
-     *
-     * @param div TokubetsuPanelDiv のクラスファイル
-     * @return ResponseData
-     */
-    public ResponseData<DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriListParameter> onClick_btnBatchRegister(TokubetsuPanelDiv div) {
-        TokubetsuChiikiKasanKeigenJisekiKanriIchiran tokubetsuchiran
-                = new TokubetsuChiikiKasanKeigenJisekiKanriIchiran();
-        return ResponseData.of(tokubetsuchiran.createParameter(div)).respond();
-    }
-
-    /**
      * 実行するボタンを押下のチェック処理します。
      *
      * @param div TokubetsuPanelDiv のクラスファイル
@@ -71,6 +59,18 @@ public class TokubetsuPanel {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         return createResponse(div);
+    }
+
+    /**
+     * 実行するボタンを押下のバッチ用パラメータを作成します。
+     *
+     * @param div TokubetsuPanelDiv のクラスファイル
+     * @return ResponseData
+     */
+    public ResponseData<DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriListParameter> onClick_btnBatchRegister(TokubetsuPanelDiv div) {
+        TokubetsuChiikiKasanKeigenJisekiKanriIchiran tokubetsuchiran
+                = new TokubetsuChiikiKasanKeigenJisekiKanriIchiran();
+        return ResponseData.of(tokubetsuchiran.createParameter(div)).respond();
     }
 
     /**

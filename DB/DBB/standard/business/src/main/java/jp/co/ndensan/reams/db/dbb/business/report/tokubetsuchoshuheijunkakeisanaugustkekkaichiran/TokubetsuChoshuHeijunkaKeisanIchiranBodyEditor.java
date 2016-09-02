@@ -83,6 +83,7 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
         if (特徴平準化結果対象外一覧表 != null) {
             対象外項目編集(特徴平準化結果対象外一覧表, source, 帳票制御共通, association);
         }
+        source.shikibetsuCode = RString.EMPTY;
         return source;
     }
 

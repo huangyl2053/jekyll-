@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD204010;
 
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.tokuchijissekilist.TargetArea;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.tokuchijissekilist.TargetYearMonth;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd204010.TaishoKyufuJissekiTokuteiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd204010.TokuchiJissekiKanriListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -26,11 +28,11 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriListParameter extends BatchParameterBase {
 
-    private RString 対象年月;
+    private TargetYearMonth 対象年月;
     private FlexibleYearMonth 年月範囲の開始;
     private FlexibleYearMonth 年月範囲の終了;
     private JigyoshaNo 事業者番号;
-    private RString 地区コード種類;
+    private TargetArea 地区コード種類;
     private RString 開始地区コード;
     private RString 終了地区コード;
     private LasdecCode 市町村コード;

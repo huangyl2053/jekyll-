@@ -45,7 +45,7 @@ public class JigyoHokokuDataReportDBU300104Process extends BatchProcessBase<Jigy
     private static final ReportId REPORT_DBU300104 = ReportIdDBU.DBU300104.getReportId();
     private static final RString 過去集計分旧市町村区分 = new RString("1");
     private static final RString 固定文字列_旧 = new RString("（旧）");
-    private static final RString 年報月報区分 = new RString("年報");
+    private static final RString 年報月報区分CODE = new RString("2");
     private static final int 数値_100 = 100;
     private static final Decimal 数値_101 = new Decimal(101);
     private static final Decimal 数値_102 = new Decimal(102);
@@ -180,7 +180,7 @@ public class JigyoHokokuDataReportDBU300104Process extends BatchProcessBase<Jigy
     @Override
     protected void afterExecute() {
         JigyohokokuCompYoshiki300103Data reportData = new JigyohokokuCompYoshiki300103Data();
-        reportData.set年報月報区分(年報月報区分);
+        reportData.set年報月報区分(年報月報区分CODE);
         reportData.set処理日時(processParameter.get処理日時());
         reportData.set保険者名(保険者名);
         reportData.set保険者番号(保険者番号);
@@ -274,11 +274,11 @@ public class JigyoHokokuDataReportDBU300104Process extends BatchProcessBase<Jigy
         reportData.set合計_居住費_6(getValue(syukeiNo1010, 数値_710));
 
         reportData.set利用者負担減額_免除認定表の利用者負担_1(getValue(syukeiNo0900, 数値_101));
-        reportData.set利用者負担減額_免除認定表の利用者負担_2(getValue(syukeiNo0900, 数値_102));
-        reportData.set利用者負担減額_免除認定表の利用者負担_3(getValue(syukeiNo0900, 数値_103));
-        reportData.set利用者負担減額_免除認定表の利用者負担_4(getValue(syukeiNo0900, 数値_104));
-        reportData.set利用者負担減額_免除認定表の利用者負担_5(getValue(syukeiNo0900, 数値_105));
-        reportData.set利用者負担減額_免除認定表の利用者負担_6(getValue(syukeiNo0900, 数値_106));
+        reportData.set利用者負担減額_免除認定表の利用者負担_2(getValue(syukeiNo0900, 数値_201));
+        reportData.set利用者負担減額_免除認定表の利用者負担_3(getValue(syukeiNo0900, 数値_301));
+        reportData.set利用者負担減額_免除認定表の利用者負担_4(getValue(syukeiNo0900, 数値_401));
+        reportData.set利用者負担減額_免除認定表の利用者負担_5(getValue(syukeiNo0900, 数値_501));
+        reportData.set利用者負担減額_免除認定表の利用者負担_6(getValue(syukeiNo0900, 数値_601));
 
         reportData.set特定負担限度額の申請件数(getValue(syukeiNo1020, 数値_101));
         reportData.set減免認定表の特定負担限度額_食費_1(getValue(syukeiNo1020, 数値_201));

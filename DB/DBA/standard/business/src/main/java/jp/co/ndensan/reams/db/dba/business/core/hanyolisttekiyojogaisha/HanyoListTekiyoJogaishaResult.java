@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.tekiyojogaisha.HaniChushutsubiKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.tekiyojogaisha.JiyuChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.tekiyojogaisha.KijunbiKubun;
-import jp.co.ndensan.reams.db.dba.definition.processprm.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.processprm.dba730010.HanyoListTekiyoJogaishaProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaCsvEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaRenbanCsvEntity;

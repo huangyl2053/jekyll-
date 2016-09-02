@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 通知書発行一覧リストEntityです。
@@ -31,5 +32,6 @@ public class TongzhiShuEntity {
     private RString 居宅支援事業者名称;
     private RString 入所施設事業者コード;
     private RString 入所施設事業者名称;
+    private Decimal 連番;
 
 }

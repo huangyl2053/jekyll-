@@ -184,10 +184,9 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
      * ボタン状態の設定です。
      *
      * @param サービス提供年月 サービス提供年月
-     * @param 識別番号 NyuryokuShikibetsuNo
      * @param 識別番号管理 ShikibetsuNoKanri
      */
-    public void setButton(FlexibleYearMonth サービス提供年月, NyuryokuShikibetsuNo 識別番号, ShikibetsuNoKanri 識別番号管理) {
+    public void setButton(FlexibleYearMonth サービス提供年月, ShikibetsuNoKanri 識別番号管理) {
 
         if (DISABLED.equals(識別番号管理.get基本設定区分())) {
             div.getBtnKihon().setDisabled(true);
@@ -213,11 +212,6 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
             }
         }
         div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
-        if (DISABLED.equals(識別番号管理.get所定疾患施設療養設定区分())) {
-            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
-        } else {
-            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
-        }
         if (DISABLED.equals(識別番号管理.get食事費用設定区分())) {
             div.getBtnShokuji().setDisabled(true);
         } else {
@@ -423,9 +417,10 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
     public void change年月(RString change月, List<KyufujissekiKinkyuShisetsuRyoyo> 給付実績緊急時施設療養データ取得,
             FlexibleYearMonth サービス提供年月, RString 整理番号, HihokenshaNo 被保険者番号, NyuryokuShikibetsuNo 識別番号) {
         int index = 0;
-        Collections.sort(給付実績緊急時施設療養データ取得, new DateComparatorServiceTeikyoYM());
-        for (int i = 0; i < 給付実績緊急時施設療養データ取得.size(); i++) {
-            if (サービス提供年月.equals(給付実績緊急時施設療養データ取得.get(i).getサービス提供年月())) {
+        List<KyufujissekiKinkyuShisetsuRyoyo> dataToRepeat = getサービス提供年月list(給付実績緊急時施設療養データ取得);
+        Collections.sort(dataToRepeat, new DateComparatorServiceTeikyoYM());
+        for (int i = 0; i < dataToRepeat.size(); i++) {
+            if (サービス提供年月.equals(dataToRepeat.get(i).getサービス提供年月())) {
                 index = i;
                 break;
             }
@@ -435,16 +430,16 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
         RString 新整理番号;
         NyuryokuShikibetsuNo 新識別番号;
         if (前月.equals(change月)) {
-            年月 = 給付実績緊急時施設療養データ取得.get(index + 1).getサービス提供年月();
-            新事業者番号 = 給付実績緊急時施設療養データ取得.get(index + 1).get事業所番号();
-            新整理番号 = 給付実績緊急時施設療養データ取得.get(index + 1).get整理番号();
-            新識別番号 = 給付実績緊急時施設療養データ取得.get(index + 1).get入力識別番号();
+            年月 = dataToRepeat.get(index + 1).getサービス提供年月();
+            新事業者番号 = dataToRepeat.get(index + 1).get事業所番号();
+            新整理番号 = dataToRepeat.get(index + 1).get整理番号();
+            新識別番号 = dataToRepeat.get(index + 1).get入力識別番号();
             div.getBtnJigetsu().setDisabled(false);
         } else {
-            年月 = 給付実績緊急時施設療養データ取得.get(index - 1).getサービス提供年月();
-            新事業者番号 = 給付実績緊急時施設療養データ取得.get(index - 1).get事業所番号();
-            新整理番号 = 給付実績緊急時施設療養データ取得.get(index - 1).get整理番号();
-            新識別番号 = 給付実績緊急時施設療養データ取得.get(index - 1).get入力識別番号();
+            年月 = dataToRepeat.get(index - 1).getサービス提供年月();
+            新事業者番号 = dataToRepeat.get(index - 1).get事業所番号();
+            新整理番号 = dataToRepeat.get(index - 1).get整理番号();
+            新識別番号 = dataToRepeat.get(index - 1).get入力識別番号();
             div.getBtnZengetsu().setDisabled(false);
         }
         div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 年月, 新整理番号, 新識別番号);
@@ -452,6 +447,18 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
         List<KyufujissekiKinkyuShisetsuRyoyo> 実績緊急時施設療養データ = get給付実績データ(給付実績緊急時施設療養データ取得, 新整理番号, 新事業者番号.value(), 新識別番号.value(), 年月.toDateString());
         setDataGrid(実績緊急時施設療養データ);
 
+    }
+
+    private List<KyufujissekiKinkyuShisetsuRyoyo> getサービス提供年月list(List<KyufujissekiKinkyuShisetsuRyoyo> 居宅サービス計画費list) {
+        List<FlexibleYearMonth> サービス提供年月list = new ArrayList<>();
+        List<KyufujissekiKinkyuShisetsuRyoyo> dataToRepeat = new ArrayList<>();
+        for (KyufujissekiKinkyuShisetsuRyoyo date : 居宅サービス計画費list) {
+            if (!サービス提供年月list.contains(date.getサービス提供年月())) {
+                サービス提供年月list.add(date.getサービス提供年月());
+                dataToRepeat.add(date);
+            }
+        }
+        return dataToRepeat;
     }
 
     /**

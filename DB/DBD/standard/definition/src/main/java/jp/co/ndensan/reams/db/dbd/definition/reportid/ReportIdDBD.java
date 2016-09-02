@@ -170,7 +170,7 @@ public enum ReportIdDBD {
     /**
      * 年齢階級別要介護度状況の帳票ＩＤです。
      */
-    DBD300005(new ReportId("DBD300005_NenreiKaidanbetsuYokaigoduJyokyo"), new RString("年齢階級別要介護度状況")),
+    DBD300005(new ReportId("DBD300005_NenreiKaikyubetsuYokaigodoJokyo"), new RString("年齢階級別要介護度状況")),
     /**
      * 要介護度変更通知書の帳票ＩＤです。
      */
@@ -219,6 +219,14 @@ public enum ReportIdDBD {
      * 特別地域加算軽減実績管理リストの帳票ＩＤです。
      */
     DBD200012(new ReportId("DBD200012_TokubetsuChiikiKasanKeigenJissekiKanriIchiran"), new RString("特別地域加算軽減実績管理リスト")),
+    /**
+     * 訪問介護利用者負担額減額認定者リストの帳票ＩＤです。
+     */
+    DBD200014(new ReportId("DBD200014_HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiran"), new RString("訪問介護利用者負担額減額認定者リスト")),
+    /**
+     * 負担限度額認定者リストの帳票ＩＤです。
+     */
+    DBD200016(new ReportId("DBD200016_FutanGendogakuNinteishaIchiran"), new RString("負担限度額認定者リスト")),
     /**
      * 要介護認定通知書一括発行の帳票ＩＤです。
      */

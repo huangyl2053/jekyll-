@@ -52,5 +52,6 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiEntity implem
     private Decimal 総合事業費_調整_単位数;
     private Decimal 総合事業費_調整_負担額;
     private ShikibetsuCode 識別コード;
-    private int 連番;
+    private int 連番コード;
+
 }

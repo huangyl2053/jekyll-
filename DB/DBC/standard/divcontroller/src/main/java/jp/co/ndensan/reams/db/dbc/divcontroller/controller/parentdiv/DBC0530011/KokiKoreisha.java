@@ -14,10 +14,13 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0530011.Kok
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KokiKoreishaInfoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -38,9 +41,12 @@ public class KokiKoreisha {
      * @return ResponseData<MainPanelDiv>
      */
     public ResponseData<KokiKoreishaDiv> onLoad(KokiKoreishaDiv div) {
-//        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(new RString("0000000001"));
-        ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("000000000000010"));
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        if (資格対象者 == null || 資格対象者.get被保険者番号() == null || 資格対象者.get被保険者番号().isEmpty()) {
+            throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace("被保険者番号なし"));
+        }
+        HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
+        ShikibetsuCode 識別コード = 資格対象者.get識別コード();
         KokiKoreishaInfoManager manager = new KokiKoreishaInfoManager();
         KokiKoreishaInfo 後期高齢者情報 = manager.get後期高齢者情報(識別コード);
         getHandler(div).onLoad(識別コード, 被保険者番号, 後期高齢者情報);

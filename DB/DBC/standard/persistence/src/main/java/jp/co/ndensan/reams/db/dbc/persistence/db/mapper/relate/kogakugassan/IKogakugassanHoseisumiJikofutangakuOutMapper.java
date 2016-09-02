@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassan.Kogakugassa
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassan.SyuturyokuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangaku.DbWT37K1KogakuGassanJikoFutanGakuTempEntity;
 
 /**
  * 高額合算補正済自己負担額情報作成のMapperです。
@@ -25,6 +26,13 @@ public interface IKogakugassanHoseisumiJikofutangakuOutMapper {
      * @return 高額合算自己負担額データ
      */
     List<DbT3070KogakuGassanJikoFutanGakuEntity> get高額合算自己負担額データ(KogakugassanMybatisParameter param);
+
+    /**
+     * 高額合算自己負担額明細データの存在確認する。
+     *
+     * @return 高額合算自己負担額明細データの存在確認データ
+     */
+    List<DbWT37K1KogakuGassanJikoFutanGakuTempEntity> get明細データ();
 
     /**
      * 被保険者一時テーブルデータ取得する。
@@ -67,4 +75,18 @@ public interface IKogakugassanHoseisumiJikofutangakuOutMapper {
      * @return 未送付高額合算自己負担額データ
      */
     List<DbT3070KogakuGassanJikoFutanGakuEntity> get未送付高額合算自己負担額データ();
+
+    /**
+     * 未送付高額合算自己負担額データを取得する。
+     *
+     * @return 未送付高額合算自己負担額データ
+     */
+    List<DbWT37K1KogakuGassanJikoFutanGakuTempEntity> getTemp37K();
+
+    /**
+     * 未送付高額合算自己負担額データを取得する。
+     *
+     * @return 未送付高額合算自己負担額データ
+     */
+    List<DbWT1001HihokenshaTempEntity> getTemp1001();
 }

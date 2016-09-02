@@ -5,14 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110080;
 
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanJikoFutanGakuMeisai;
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakugassan.KogakugassanProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1002KokuhorenSakuseiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangaku.DbWT37K1KogakuGassanJikoFutanGakuTempEntity;
-import jp.co.ndensan.reams.db.dbc.service.core.basic.KogakuGassanJikoFutanGakuMeisaiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -40,7 +38,7 @@ public class KogakugassanReadDataProcess extends BatchProcessBase<DbT3070KogakuG
 
     private static final RString 高額合算自己負担額一時NAME = new RString("DbWT37K1KogakuGassanJikoFutanGaku");
     private static final RString 被保険者一時NAME = new RString("DbWT1001Hihokensha");
-    private static final RString 処理結果リスト一時NAME = new RString("DbWT0002KokuhorenTorikomiError");
+    private static final RString 処理結果リスト一時NAME = new RString("DbWT1002KokuhorenSakuseiError");
     private static final RString データがある = new RString("1");
     private static final RString データがない = new RString("0");
     /**
@@ -89,16 +87,6 @@ public class KogakugassanReadDataProcess extends BatchProcessBase<DbT3070KogakuG
         取得データフラグ = false;
         DbWT1001HihokenshaTempEntity dbWT1001Entity = get被保険者一時Entity(entity);
         DbWT37K1KogakuGassanJikoFutanGakuTempEntity dbWT37K1Entity = get高額合算自己負担額一時Enttiy(entity);
-        List<KogakuGassanJikoFutanGakuMeisai> 明細データ
-                = new KogakuGassanJikoFutanGakuMeisaiManager().get対象月除く負担額明細(entity.getHihokenshaNo(),
-                        entity.getTaishoNendo(), entity.getHokenshaNo(), entity.getShikyuShinseishoSeiriNo(), entity.getRirekiNo());
-        if (明細データ.isEmpty()) {
-            DbWT1002KokuhorenSakuseiErrorTempEntity dbWT1002Entity = get処理結果リスト一時Entity(取得データフラグ, entity);
-            dbWT37K1Entity.setSofuJogaiFlag(true);
-            処理結果リスト一時tableWriter.insert(dbWT1002Entity);
-        } else {
-            dbWT37K1Entity.setSofuJogaiFlag(false);
-        }
         被保険者一時tableWriter.insert(dbWT1001Entity);
         高額合算自己負担額一時tableWriter.insert(dbWT37K1Entity);
         renban = renban + 1;
@@ -107,29 +95,20 @@ public class KogakugassanReadDataProcess extends BatchProcessBase<DbT3070KogakuG
     @Override
     protected void afterExecute() {
         if (取得データフラグ) {
-            DbWT1002KokuhorenSakuseiErrorTempEntity dbWT1002Entity = get処理結果リスト一時Entity(取得データフラグ, null);
+            DbWT1002KokuhorenSakuseiErrorTempEntity dbWT1002Entity = get処理結果リスト一時Entity();
             処理結果リスト一時tableWriter.insert(dbWT1002Entity);
             dataFlag.setValue(データがない);
+        } else {
+            dataFlag.setValue(データがある);
         }
-        dataFlag.setValue(データがある);
     }
 
-    private DbWT1002KokuhorenSakuseiErrorTempEntity get処理結果リスト一時Entity(boolean フラグ,
-            DbT3070KogakuGassanJikoFutanGakuEntity entity) {
+    private DbWT1002KokuhorenSakuseiErrorTempEntity get処理結果リスト一時Entity() {
         DbWT1002KokuhorenSakuseiErrorTempEntity 一時Enttiy = new DbWT1002KokuhorenSakuseiErrorTempEntity();
-        if (フラグ) {
-            // TODO DBC.ENUM.国保連情報送付エラー区分提供しない。
-            一時Enttiy.setErrorKubun(new RString("01"));
-            一時Enttiy.setShoHokanehshaNo(ShoKisaiHokenshaNo.EMPTY);
-            一時Enttiy.setHihokenshaNo(HihokenshaNo.EMPTY);
-            一時Enttiy.setKey1(RString.EMPTY);
-        } else {
-            // TODO DBC.ENUM.国保連情報送付エラー区分提供しない。
-            一時Enttiy.setErrorKubun(new RString("06"));
-            一時Enttiy.setShoHokanehshaNo(new ShoKisaiHokenshaNo(entity.getHihokenshaNo().getColumnValue()));
-            一時Enttiy.setHihokenshaNo(entity.getHihokenshaNo());
-            一時Enttiy.setKey1(entity.getShikyuShinseishoSeiriNo());
-        }
+        一時Enttiy.setErrorKubun(KokuhorenJoho_SakuseiErrorKubun.送付対象データなし.getコード());
+        一時Enttiy.setShoHokanehshaNo(ShoKisaiHokenshaNo.EMPTY);
+        一時Enttiy.setHihokenshaNo(HihokenshaNo.EMPTY);
+        一時Enttiy.setKey1(RString.EMPTY);
         一時Enttiy.setKey2(RString.EMPTY);
         一時Enttiy.setKey3(RString.EMPTY);
         一時Enttiy.setKey4(RString.EMPTY);
@@ -238,6 +217,7 @@ public class KogakugassanReadDataProcess extends BatchProcessBase<DbT3070KogakuG
         一時Enttiy.setBatchHoseiJissiYMD(entity.getBatchHoseiJissiYMD());
         一時Enttiy.setRealHoseiJissiYMD(entity.getRealHoseiJissiYMD());
         一時Enttiy.setShoKisaiHokenshaNo(entity.getHokenshaNo());
+        一時Enttiy.setSofuJogaiFlag(false);
         return 一時Enttiy;
     }
 

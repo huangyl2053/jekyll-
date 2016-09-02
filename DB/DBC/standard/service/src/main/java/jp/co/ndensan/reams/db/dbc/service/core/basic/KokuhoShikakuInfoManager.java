@@ -33,6 +33,15 @@ public class KokuhoShikakuInfoManager {
     }
 
     /**
+     * 国保資格詳細情報のビジネスを生成します。
+     *
+     * @return 認定延期通知発行のビジネス
+     */
+    public static KokuhoShikakuInfoManager createInstance() {
+        return InstanceProvider.create(KokuhoShikakuInfoManager.class);
+    }
+
+    /**
      * 主キーに合致する国保資格詳細情報を管理サービスコードを返します。
      *
      * @param 識別コード ShikibetsuCode

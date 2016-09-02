@@ -195,31 +195,40 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiProcess
             集計Flag = true;
         }
         公費負担者番号 = this公費負担者番号;
-        if (集計Flag) {
-            連番 = 1;
-            SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport report = new SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport(
+        if (連番 != 1) {
+            int 連番_1 = 連番 - 1;
+            if (集計Flag) {
+                SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport report
+                        = new SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport(
+                                lastEntity,
+                                出力順Map,
+                                parameter.get処理年月(),
+                                parameter.getシステム日付(),
+                                true,
+                                連番_1,
+                                false
+                        );
+                連番 = 1;
+                report.writeBy(reportSourceWriter);
+            } else {
+                SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport report
+                        = new SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport(
+                                lastEntity,
+                                出力順Map,
+                                parameter.get処理年月(),
+                                parameter.getシステム日付(),
+                                false,
+                                連番_1,
+                                false);
+                report.writeBy(reportSourceWriter);
+            }
+            do帳票のCSVファイル作成(
                     lastEntity,
-                    出力順Map,
                     parameter.get処理年月(),
                     parameter.getシステム日付(),
-                    true);
-            report.writeBy(reportSourceWriter);
+                    集計Flag
+            );
         }
-
-        SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport report = new SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport(
-                entity,
-                出力順Map,
-                parameter.get処理年月(),
-                parameter.getシステム日付(),
-                false);
-        report.writeBy(reportSourceWriter);
-
-        do帳票のCSVファイル作成(
-                entity,
-                parameter.get処理年月(),
-                parameter.getシステム日付(),
-                集計Flag
-        );
         連番++;
         lastEntity = entity;
     }
@@ -231,14 +240,19 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiProcess
 
     @Override
     protected void afterExecute() {
-        SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport report = new SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport(
+        int 連番_2 = 連番 - 1;
+        SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport report;
+        report = new SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiReport(
                 lastEntity,
                 出力順Map,
                 parameter.get処理年月(),
                 parameter.getシステム日付(),
+                false,
+                連番_2,
                 true
         );
         report.writeBy(reportSourceWriter);
+
         do帳票のCSVファイル作成(
                 lastEntity,
                 parameter.get処理年月(),
