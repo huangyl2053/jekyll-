@@ -508,7 +508,11 @@ public enum ReportIdDBC {
     /**
      * 帳票設計_DBC200004_利用状況一覧表帳票ＩＤです。
      */
-    DBC200004(new ReportId("DBC200004_RiyoJokyoIchiran"), new RString("利用状況一覧表"));
+    DBC200004(new ReportId("DBC200004_RiyoJokyoIchiran"), new RString("利用状況一覧表")),
+    /**
+     * 帳票設計_DBC200044_給付費通知発行一覧表ＩＤです。
+     */
+    DBC200044(new ReportId("DBC200044_KyufuhiTuchiHakkoIchiran"), new RString("給付費通知発行一覧表"));
 
     private final ReportId reportId;
 
