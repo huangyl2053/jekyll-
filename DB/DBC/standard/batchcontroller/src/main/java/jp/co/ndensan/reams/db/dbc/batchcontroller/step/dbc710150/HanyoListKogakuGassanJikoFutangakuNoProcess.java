@@ -167,19 +167,17 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     private FileSpoolManager manager;
     private Association 地方公共団体;
     private FlexibleDate システム日付;
-    private Decimal 連番;
     private List<PersonalData> personalDataList;
     private IOutputOrder 出力順;
     private RString eucFilePath;
-    private static final RString デフォルト出力順 = new RString("order by 高額合算自己負担額.\"hihokenshaNo\","
-            + "高額合算自己負担額.\"taishoNendo\",高額合算自己負担額.\"hokenshaNo\",高額合算自己負担額.\"shikyuShinseishoSeiriNo\"");
+    private static final RString デフォルト出力順 = new RString("order by 高額合算自己負担額_被保険者番号,"
+            + "高額合算自己負担額_対象年度,高額合算自己負担額_保険者番号,高額合算自己負担額_支給申請書整理番号");
 
     @BatchWriter
     private CsvWriter<HanyoListKogakuGassanJikoFutangakuNoCsvEntity> eucCsvWriter;
 
     @Override
-    protected void beforeExecute() {
-        連番 = Decimal.ONE;
+    protected IBatchReader createReader() {
         システム日付 = FlexibleDate.getNowDate();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         構成市町村マスタlist = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
@@ -204,10 +202,6 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
             }
         }
 
-    }
-
-    @Override
-    protected IBatchReader createReader() {
         return new BatchDbReader(READ_DATA_ID, parameter.toMybatisParamter());
     }
 
@@ -228,9 +222,25 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     }
 
     @Override
+    protected void beforeExecute() {
+
+        地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        構成市町村マスタlist = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
+        構成市町村Map = new HashMap<>();
+        personalDataList = new ArrayList<>();
+        if (構成市町村マスタlist != null) {
+            for (KoseiShichosonMaster data : 構成市町村マスタlist) {
+                if (data.get市町村コード() != null) {
+                    構成市町村Map.put(data.get市町村コード(), data);
+                }
+            }
+        }
+
+    }
+
+    @Override
     protected void process(HanyoListKogakuGassanJikoFutangakuEntity entity) {
         HanyoListKogakuGassanJikoFutangakuNoCsvEntity eucNoCsvEntity = new HanyoListKogakuGassanJikoFutangakuNoCsvEntity();
-        連番 = 連番.add(Decimal.ONE);
         edit高額合算自己負担額情報ファイル作成(entity, eucNoCsvEntity);
         eucCsvWriter.writeLine(eucNoCsvEntity);
         personalDataList.add(toPersonalData(entity));
