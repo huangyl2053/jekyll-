@@ -107,34 +107,24 @@ public class KoshinShinseiOshiraseTshuchishoReportSource implements IReportSourc
     @ReportItem(name = "hihokenshaNameKana", order = 44)
     public RString hihokenshaNameKana;
     @ReportItem(name = "hihokenshaNo1", length = 1, order = 45)
-    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo1;
     @ReportItem(name = "hihokenshaNo2", length = 1, order = 46)
-    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo2;
     @ReportItem(name = "hihokenshaNo3", length = 1, order = 47)
-    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo3;
     @ReportItem(name = "hihokenshaNo4", length = 1, order = 48)
-    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo4;
     @ReportItem(name = "hihokenshaNo5", length = 1, order = 49)
-    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo5;
     @ReportItem(name = "hihokenshaNo6", length = 1, order = 50)
-    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo6;
     @ReportItem(name = "hihokenshaNo7", length = 1, order = 51)
-    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo7;
     @ReportItem(name = "hihokenshaNo8", length = 1, order = 52)
-    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo8;
     @ReportItem(name = "hihokenshaNo9", length = 1, order = 53)
-    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo9;
     @ReportItem(name = "hihokenshaNo10", length = 1, order = 54)
-    @ReportExpandedInfo(code = "0003", name = "被保険者番号")
     public RString hihokenshaNo10;
     @ReportItem(name = "hihokenshaName", order = 55)
     public RString hihokenshaName;
@@ -151,5 +141,7 @@ public class KoshinShinseiOshiraseTshuchishoReportSource implements IReportSourc
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+    @ReportExpandedInfo(id = "001", code = "003", name = "被保険者番号")
+    public RString 被保険者番号;
 // </editor-fold>
 }
