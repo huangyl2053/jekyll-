@@ -56,6 +56,17 @@ public class GassanHoseizumiJikofutangakuSofuchiranBodyEditor implements IGassan
 
         DbWT1001HihokenshaTempEntity tempEntity = 送付一覧表データ.get被保険者一時Entity();
 
+        source.yubinNo = tempEntity.getYubinNo();
+        source.choikiCode = tempEntity.getChoikiCode();
+        source.gyoseikuCode = tempEntity.getGyoseikuCode();
+        source.shimei50onKana = tempEntity.getShimei50onKana();
+        if (tempEntity.getShichosonCode() != null) {
+            source.shichosonCode = tempEntity.getShichosonCode().value();
+        }
+        if (tempEntity.getExShoHokenshaNo() != null) {
+            source.exShoHokenshaNo = tempEntity.getExShoHokenshaNo().value();
+        }
+
         source.list_5 = tempEntity.getMeisho();
         source.list_6 = entity.getShomeisho_UketoriYM().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
