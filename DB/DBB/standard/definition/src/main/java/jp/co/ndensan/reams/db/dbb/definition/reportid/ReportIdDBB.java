@@ -245,7 +245,7 @@ public enum ReportIdDBB {
     /**
      * 介護保険料額変更兼特別徴収中止通知書【A4縦タイプ（連帳）】
      */
-    DBB100044(new ReportId("DBB100044_KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateRencho"),
+    DBB100044(new ReportId("DBB100044_KaigoHokenHokenryogakuHenkoKenChushiTsuchishoA4TateRn"),
             new RString("介護保険料額変更兼特別徴収中止通知書【A4縦タイプ（連帳）】")),
     /**
      * 特別徴収開始通知書（本算定）【B5横タイプ】
