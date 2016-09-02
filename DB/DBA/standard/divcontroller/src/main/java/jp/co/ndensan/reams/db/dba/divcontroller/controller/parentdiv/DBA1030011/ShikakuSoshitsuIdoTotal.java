@@ -343,8 +343,8 @@ public class ShikakuSoshitsuIdoTotal {
     
     private enum validationErrorMessage implements IValidationMessage {
 
-        喪失日(UrErrorMessages.必須項目, "喪失日"),
-        届出日(UrErrorMessages.必須項目, "届出日");
+        喪失日(UrErrorMessages.必須項目),
+        届出日(UrErrorMessages.必須項目);
         private final Message message;
 
         private validationErrorMessage(IMessageGettable message, String... replacements) {
