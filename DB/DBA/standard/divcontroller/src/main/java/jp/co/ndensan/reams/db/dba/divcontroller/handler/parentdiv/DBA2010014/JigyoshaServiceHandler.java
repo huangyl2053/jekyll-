@@ -89,7 +89,12 @@ public class JigyoshaServiceHandler {
      */
     public void set状態_修正() {
         div.getJigyoshaServiceKihon().getDdlServiceShuruiChiikiMitchaku().setDisabled(false);
-        div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNo().setDisabled(true);
+        if(!div.getJigyoshaServiceKihon().getChkKihonJunkyoFlag().getSelectedKeys().isEmpty()){
+            div.getJigyoshaServiceKihon().getJigyosha().setDisabled(true);
+        }else{
+            div.getJigyoshaServiceKihon().getJigyosha().setDisabled(false);
+            div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNo().setDisabled(true);
+        }
         div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().setDisabled(true);
         div.getJigyoshaServiceShosai().setDisplayNone(true);
     }
@@ -288,7 +293,6 @@ public class JigyoshaServiceHandler {
      * @param johoList 事業者番号、有効開始日に対する介護事業者情報
      */
     public void onChange_ChkKihonJunkyoFlag(List<KaigoJigyoshaShiteiService> johoList) {
-        if (div.getJigyoshaServiceKihon().getChkKihonJunkyoFlag().getSelectedKeys().contains(new RString("0"))) {
             if (!johoList.isEmpty()) {
                 KaigoJigyoshaShiteiService joho = johoList.get(0);
                 div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().setValue(joho.get有効開始日());
@@ -308,53 +312,8 @@ public class JigyoshaServiceHandler {
                 div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaAddress().setValue(joho.get事業者住所() == null ? RString.EMPTY
                         : joho.get事業者住所().getColumnValue());
                 div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaAddressKana().setValue(joho.get事業者住所カナ());
-                div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().setValue(joho.get登録保険者番号());
-                div.getJigyoshaServiceKihon().getTxtTorokuHokenshaName().setValue(get保険者名(joho.get登録保険者番号()));
-                div.getJigyoshaServiceKihon().getRadJuryoininUmu().setSelectedKey(setRadio(joho.get受領委任の有無()));
-                div.getJigyoshaServiceKihon().getTxtTorokuKaishiYMD().setValue(joho.get登録開始日());
-                div.getJigyoshaServiceKihon().getTxtTorokuShuryoYMD().setValue(joho.get登録終了日());
-                div.getJigyoshaServiceKihon().getTxtKanrishaName().setValue(joho.get管理者氏名() == null ? RString.EMPTY
-                        : joho.get管理者氏名().getColumnValue());
-                div.getJigyoshaServiceKihon().getTxtKanrishaNameKana().setValue(joho.get管理者氏名カナ() == null ? RString.EMPTY
-                        : joho.get管理者氏名カナ().getColumnValue());
-                div.getJigyoshaServiceKihon().getTxtKanrishaYubinNo().setValue(joho.get管理者住所郵便番号());
-                div.getJigyoshaServiceKihon().getTxtKanrishaAddress().setValue(joho.get管理者住所() == null ? RString.EMPTY
-                        : joho.get管理者住所().getColumnValue());
-                div.getJigyoshaServiceKihon().getTxtKanrishaAddressKana().setValue(joho.get管理者住所カナ());
-                div.getJigyoshaServiceKihon().getRadShakaiFukushihoujinKeigenjigyouJisshiUumu()
-                        .setSelectedKey(setRadio(joho.get社会福祉法人軽減事業実施の有無()));
-                div.getJigyoshaServiceKihon().getRadSeikatsuhogohouShiteiUmu()
-                        .setSelectedKey(setRadio(joho.get生活保護法による指定の有無()));
+                div.getJigyoshaServiceKihon().getJigyosha().setDisabled(true);
             }
-        } else {
-            div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().clearValue();
-            div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoShuryoYMD().clearValue();
-            div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaName().clearValue();
-            div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNameKana().clearValue();
-            div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoKaishiYMD().clearValue();
-            div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoKyushiYMD().clearValue();
-            div.getJigyoshaServiceKihon().getJigyosha().getTxtJikyoSaikaiYMD().clearValue();
-            div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoHaishiYMD().clearValue();
-            div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaYubinNo().clearValue();
-            div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaTelNo().clearValue();
-            div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaFaxNo().clearValue();
-            div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaAddress().clearValue();
-            div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaAddressKana().clearValue();
-            div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().clearValue();
-            div.getJigyoshaServiceKihon().getTxtTorokuHokenshaName().clearValue();
-            div.getJigyoshaServiceKihon().getRadJuryoininUmu().setSelectedKey(無);
-            div.getJigyoshaServiceKihon().getTxtTorokuKaishiYMD().clearValue();
-            div.getJigyoshaServiceKihon().getTxtTorokuShuryoYMD().clearValue();
-            div.getJigyoshaServiceKihon().getTxtKanrishaName().clearValue();
-            div.getJigyoshaServiceKihon().getTxtKanrishaNameKana().clearValue();
-            div.getJigyoshaServiceKihon().getTxtKanrishaYubinNo().clearValue();
-            div.getJigyoshaServiceKihon().getTxtKanrishaAddress().clearValue();
-            div.getJigyoshaServiceKihon().getTxtKanrishaAddressKana().clearValue();
-            div.getJigyoshaServiceKihon().getRadShakaiFukushihoujinKeigenjigyouJisshiUumu()
-                    .setSelectedKey(無);
-            div.getJigyoshaServiceKihon().getRadSeikatsuhogohouShiteiUmu()
-                    .setSelectedKey(無);
-        }
     }
 
     /**
