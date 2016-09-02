@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010014;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010014.DBC0010014TransitionEventName;
@@ -45,8 +46,11 @@ public class KinkyujiShisetsuRyoyohiShokai {
                 識別番号検索キー);
         getHandler(div).setKinkyujiShisetsuRyoyohi(給付実績情報照会情報.getCsData_P(), 整理番号, div.getCcdKyufuJissekiHeader().get事業者番号(),
                 div.getCcdKyufuJissekiHeader().get様式番号(), サービス提供年月.toDateString());
-        getHandler(div).setButton(KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
-                サービス提供年月, 識別番号検索キー).records().get(0), サービス提供年月);
+        List<ShikibetsuNoKanri> 識別番号管理データリスト = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
+                サービス提供年月, 識別番号検索キー).records();
+        if (!識別番号管理データリスト.isEmpty()) {
+            getHandler(div).setButton(識別番号管理データリスト.get(0), サービス提供年月);
+        }
         div.getKyufuJissekiTekiyoPanel().setIsOpen(false);
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();

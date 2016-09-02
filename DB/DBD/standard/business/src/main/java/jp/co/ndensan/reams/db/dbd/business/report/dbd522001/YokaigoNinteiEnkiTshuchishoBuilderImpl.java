@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 class YokaigoNinteiEnkiTshuchishoBuilderImpl implements IYokaigoNinteiEnkiTshuchishoBuilder {
 
-    private IYokaigoNinteiEnkiTshuchishoEditor editor;
+    private final IYokaigoNinteiEnkiTshuchishoEditor editor;
 
     /**
      * インスタンスを生成します。

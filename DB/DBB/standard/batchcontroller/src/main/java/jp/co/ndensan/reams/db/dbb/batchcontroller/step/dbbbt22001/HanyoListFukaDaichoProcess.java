@@ -206,6 +206,7 @@ public class HanyoListFukaDaichoProcess extends BatchKeyBreakBase<HanyoListFukaD
     @Override
     protected void initialize() {
         flag = 0;
+        連番 = Decimal.ONE;
         出力順 = RString.EMPTY;
         システム日時 = YMDHMS.now();
         csvEditor = new HanyoListFukaDaichoCsvEditor();

@@ -45,6 +45,7 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
     private static final RString 帳票レコード種別_T2 = new RString("T2");
     private static final RString 帳票レコード種別_T3 = new RString("T3");
     private static final RString レコード種別 = new RString("1");
+    private static final RString レコード種別_3 = new RString("3");
     private static final RString 区切り文字 = new RString(",");
     private static final Integer INDEX_0 = 0;
     private static final Integer INDEX_3 = 3;
@@ -106,21 +107,23 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
     protected void process(RString line) {
         List<RString> data = line.split(区切り文字.toString());
         if (data != null && !data.isEmpty()) {
-            if (レコード種別.equals(data.get(INDEX_0))) {
-                controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);
-            } else if (帳票レコード種別_H1.equals(data.get(INDEX_3))) {
-                ヘッダ判断();
-                headCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvHeadEntity.class, data);
-            } else if (帳票レコード種別_D1.equals(data.get(INDEX_3))) {
-                明細判断();
-                meisaiCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvMeisaiEntity.class, data);
-            } else if (帳票レコード種別_T1.equals(data.get(INDEX_3))) {
-                gokeiCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvGokeiEntity.class, data);
-            } else if (帳票レコード種別_T2.equals(data.get(INDEX_3))) {
-                ruikeiCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvRuikeiEntity.class, data);
-            } else if (帳票レコード種別_T3.equals(data.get(INDEX_3))) {
-                tesuuyouCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoCsvFileToreraRecode3Entity.class, data);
-                累計判断();
+            if (!レコード種別_3.equals(data.get(INDEX_0))) {
+                if (レコード種別.equals(data.get(INDEX_0))) {
+                    controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);
+                } else if (帳票レコード種別_H1.equals(data.get(INDEX_3))) {
+                    ヘッダ判断();
+                    headCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvHeadEntity.class, data);
+                } else if (帳票レコード種別_D1.equals(data.get(INDEX_3))) {
+                    明細判断();
+                    meisaiCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvMeisaiEntity.class, data);
+                } else if (帳票レコード種別_T1.equals(data.get(INDEX_3))) {
+                    gokeiCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvGokeiEntity.class, data);
+                } else if (帳票レコード種別_T2.equals(data.get(INDEX_3))) {
+                    ruikeiCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvRuikeiEntity.class, data);
+                } else if (帳票レコード種別_T3.equals(data.get(INDEX_3))) {
+                    tesuuyouCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoCsvFileToreraRecode3Entity.class, data);
+                    累計判断();
+                }
             }
         }
     }

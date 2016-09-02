@@ -43,6 +43,7 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
     private static final RString 今回終了日時 = new RString("今回終了日時");
     private static final RString 画面起動時の今回終了日時 = new RString("画面起動時の今回終了日時");
     private static final RString 実行する = new RString("btnBatchRegister");
+    private static final RString KEY0 = new RString("key0");
     private static final ShoriDateKanriManager MANAGER
             = InstanceProvider.create(ShoriDateKanriManager.class);
 
@@ -72,12 +73,13 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
      * @return RDateTime
      */
     public RDateTime onLoad() {
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する, true);
         List<KeyValueDataSource> list = new ArrayList<>();
         FlexibleDate 現在時刻 = new FlexibleDate(RDate.getNowDate().toDateString());
         FlexibleYear 現在年度 = 現在時刻.getNendo();
         int 現在月 = 現在時刻.getMonthValue();
         FlexibleYear 処理年度;
-        if (現在月 > ななしち月) {
+        if (ななしち月 < 現在月) {
             処理年度 = 現在年度;
         } else {
             処理年度 = 現在年度.minusYear(いち年);
@@ -88,7 +90,6 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
             年次判定年度 = shoriDateKanri.get年度();
         }
         if (年次判定年度 == null || 年次判定年度.isEmpty()) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する, true);
             throw new ApplicationException(DbcErrorMessages.年次判定未処理.getMessage());
         }
         if (処理年度.isBefore(年次判定年度)) {
@@ -103,9 +104,9 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
                     処理年度.toDateString(), 処理年度.wareki().toDateString());
             list.add(keyValueData);
         } else {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する, true);
             throw new ApplicationException(DbcErrorMessages.年次判定未処理.getMessage());
         }
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する, false);
         div.getDdlNendo().setDataSource(list);
         div.getDdlNendo().setSelectedIndex(INDEX_処理年度);
         onChange();
@@ -205,7 +206,7 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
                 RDateTime.convertFrom(
                         div.getTxtKonkaiShuryoDate().getValue(),
                         div.getTxtKonkaiShuryoTime().getValue()));
-        parameter.setTestMode(div.getChkTest().getRequired());
+        parameter.setTestMode(div.getChkTest().getSelectedKeys().contains(KEY0));
         parameter.setNendoShuryoNengappi(new FlexibleDate(画面_年度.plusYear(いち年).toString() + 月日.toString()));
         parameter.setShoriNichiji(RDateTime.now());
         return parameter;

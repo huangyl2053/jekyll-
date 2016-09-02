@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakuhaakuichiran;
 
-import jp.co.ndensan.reams.db.dbd.definition.core.common.TainoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.common.TokuchoFuchoKubun;
+import jp.co.ndensan.reams.db.dbd.definition.core.jikokisanbikanri.JikoKisanbiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -28,9 +28,9 @@ public class ShunoJohoEntity {
     private Decimal 保険料金;
     private FlexibleDate 納期限;
     private Decimal 滞納額;
-    private TainoKubun 滞納区分;
+    private RString 滞納区分;
     private FlexibleDate 時効起算日;
-    private RString 時効起算事由;
+    private JikoKisanbiKubun 時効起算事由;
     private TokuchoFuchoKubun 特徴普徴区分;
     private RString 収納情報なし;
 }

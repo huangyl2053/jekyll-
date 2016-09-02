@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC040050.DBC040050_Kogaku
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_JikoFutanShomeisho_Insho;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.SofuTorikomiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1211011.KogakuGassanShikyuKetteiTsuchishoDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhorenInterfaceKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
@@ -42,11 +43,14 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.YmdKubun;
 public class KogakuGassanShikyuKetteiTsuchishoHandler {
 
     private final KogakuGassanShikyuKetteiTsuchishoDiv div;
-    private static final ReportId 高額合算決定通知書 = new ReportId("DBC100053_GassanKetteiTsuchisho");
+    private static final ReportId 高額合算決定通知書 = ReportIdDBC.DBC100053.getReportId();
     private static final RString 前回対象年月 = new RString("前回対象年月");
     private static final RString 前回対象日 = new RString("前回対象日");
     private static final RString KEY_0 = new RString("key0");
     private static final RString KEY_1 = new RString("key1");
+    private static final RString NUM_0001 = new RString("0001");
+    private static final RString NUM_0002 = new RString("0002");
+    private static final RString NUM_0003 = new RString("0003");
     private FlexibleYearMonth 最新受取年月;
     private FlexibleYearMonth 前回受取年月;
     private FlexibleDate 前回申請年月開始;
@@ -102,31 +106,35 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
      */
     public void 処理日付管理取得() {
         RDate 基準日 = RDate.getNowDate();
-        RString 交換情報識別番号 = DbBusinessConfig.get(ConfigNameDBC.国保連取込_高額合算支給不支給決定通知書情報_交換情報識別番号, 基準日, SubGyomuCode.DBC介護給付);
+        RString 交換情報識別番号 = DbBusinessConfig.get(ConfigNameDBC.国保連取込_高額合算支給不支給決定通知書情報_交換情報識別番号,
+                基準日, SubGyomuCode.DBC介護給付);
         RString 送付取込区分 = SofuTorikomiKubun.取込.getコード();
         RString 処理状態区分 = ShoriJotaiKubun.終了.getコード();
-        KokuhorenInterfaceKanri 国保連インターフェース管理 = new KokuhorenInterfaceKanriManager().get最新の処理年月(交換情報識別番号, 送付取込区分, 処理状態区分);
+        KokuhorenInterfaceKanri 国保連インターフェース管理 = new KokuhorenInterfaceKanriManager().get最新の処理年月(
+                交換情報識別番号, 送付取込区分, 処理状態区分);
         if (!(国保連インターフェース管理 == null)) {
             最新受取年月 = 国保連インターフェース管理.get処理年月();
         }
         市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
-        SubGyomuCode サブ業務コード = new SubGyomuCode("DBC");
         RString 処理名 = new RString(ShoriName.高額合算自己負担額計算登録.toString());
-        RString 処理枝番 = new RString("0001");
+        RString 処理枝番 = NUM_0001;
         FlexibleYear 年度 = new ShoriDateKanriManager().select最大年度().get年度();
         RString 年度内連番 = new ShoriDateKanriManager().select最大年度内連番().get年度内連番();
-        ShoriDateKanri 処理日付管理マスタ = new ShoriDateKanriManager().get処理日付管理マスタ(サブ業務コード, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
+        ShoriDateKanri 処理日付管理マスタ = new ShoriDateKanriManager().get処理日付管理マスタ(SubGyomuCode.DBC介護給付,
+                市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
         if (!(処理日付管理マスタ == null)) {
             前回受取年月 = 処理日付管理マスタ.get対象開始年月日().getYearMonth();
         }
-        処理枝番 = new RString("0002");
-        処理日付管理マスタ = new ShoriDateKanriManager().get処理日付管理マスタ(サブ業務コード, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
+        処理枝番 = NUM_0002;
+        処理日付管理マスタ = new ShoriDateKanriManager().get処理日付管理マスタ(SubGyomuCode.DBC介護給付, 市町村コード,
+                処理名, 処理枝番, 年度, 年度内連番);
         if (!(処理日付管理マスタ == null)) {
             前回申請年月開始 = 処理日付管理マスタ.get対象開始年月日();
             前回申請年月終了 = 処理日付管理マスタ.get対象終了年月日();
         }
-        処理枝番 = new RString("0003");
-        処理日付管理マスタ = new ShoriDateKanriManager().get処理日付管理マスタ(サブ業務コード, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
+        処理枝番 = NUM_0003;
+        処理日付管理マスタ = new ShoriDateKanriManager().get処理日付管理マスタ(SubGyomuCode.DBC介護給付, 市町村コード,
+                処理名, 処理枝番, 年度, 年度内連番);
         if (!(処理日付管理マスタ == null)) {
             前回決定年月開始 = 処理日付管理マスタ.get対象開始年月日();
             前回決定年月終了 = 処理日付管理マスタ.get対象終了年月日();
@@ -249,10 +257,10 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
     public void 決定日一括更新区分() {
         if (div.getRadKetteibiIkkatsuKoshinKBN().getSelectedKey().equals(KEY_0)) {
             div.getTxtKetteiymd().clearValue();
-            div.getTxtKetteiymd().setDisabled(true);
+            div.getTxtKetteiymd().setVisible(false);
         } else if (div.getRadKetteibiIkkatsuKoshinKBN().getSelectedKey().equals(KEY_1)) {
             div.getTxtKetteiymd().clearValue();
-            div.getTxtKetteiymd().setDisabled(false);
+            div.getTxtKetteiymd().setVisible(true);
         }
 
     }
@@ -316,9 +324,10 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
      */
     public RString get支払予定日印字有無() {
         ChohyoSeigyoHanyoManager manager = new ChohyoSeigyoHanyoManager();
-        ChohyoSeigyoHanyo 帳票制御汎用キー = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 高額合算決定通知書, 項目名);
+        ChohyoSeigyoHanyo 帳票制御汎用キー = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付,
+                高額合算決定通知書, 項目名);
         if (帳票制御汎用キー == null) {
-            return null;
+            return NUM_0;
         }
         return 帳票制御汎用キー.get設定値();
     }

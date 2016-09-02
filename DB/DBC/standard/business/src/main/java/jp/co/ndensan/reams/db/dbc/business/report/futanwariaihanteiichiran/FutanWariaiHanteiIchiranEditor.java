@@ -44,7 +44,7 @@ public class FutanWariaiHanteiIchiranEditor implements IFutanWariaiHanteiIchiran
     private static final RString 本人調査中 = new RString("本人調査中");
     private static final RString 本人非課税 = new RString("本人非課税");
     private static final RString 利 = new RString("利");
-    private static final RString 率 = new RString("％");
+    private static final RString 率 = new RString("%");
     private static final RString 生活保護 = new RString("生活保護");
     private static final RString 旧措置 = new RString("旧措置");
     private static final RString 被保険者番号 = new RString("被保険者番号");
@@ -111,7 +111,7 @@ public class FutanWariaiHanteiIchiranEditor implements IFutanWariaiHanteiIchiran
         source.listList3_7 = editその他();
         source.listList4_1 = new RString(entity.get連番()).padZeroToLeft(2);
         if (entity.get名称() != null) {
-            source.listList5_1 = entity.get名称().value();
+            source.listList5_1 = entity.get名称();
         }
         source.nendo = edit年度();
         source.shori = edit処理名();
@@ -237,9 +237,9 @@ public class FutanWariaiHanteiIchiranEditor implements IFutanWariaiHanteiIchiran
     private RString edit処理日(RDateTime dateTime) {
         RString wareki = RString.EMPTY;
         if (dateTime != null) {
-            wareki = dateTime.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.ZERO)
+            wareki = dateTime.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK)
                     .getYear().concat(年).concat(dateTime.getDate().wareki().separator(Separator.JAPANESE)
-                            .fillType(FillType.ZERO).getMonthDay())
+                            .fillType(FillType.BLANK).getMonthDay())
                     .concat(new RString(new Decimal(dateTime.getHour()).toString(HALFMONTH.toString()))).concat(時)
                     .concat(new RString(new Decimal(dateTime.getMinute()).toString(HALFMONTH.toString()))).concat(分)
                     .concat(new RString(new Decimal(dateTime.getSecond()).toString(HALFMONTH.toString()))).concat(秒);
@@ -251,8 +251,8 @@ public class FutanWariaiHanteiIchiranEditor implements IFutanWariaiHanteiIchiran
     private RString getWarekiYmd(FlexibleDate date) {
         RString wareki = RString.EMPTY;
         if (date != null) {
-            wareki = date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.ZERO).getYear()
-                    .concat(年).concat(date.wareki().separator(Separator.JAPANESE).fillType(FillType.ZERO).getMonthDay());
+            wareki = date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear()
+                    .concat(年).concat(date.wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).getMonthDay());
         }
         return wareki;
     }

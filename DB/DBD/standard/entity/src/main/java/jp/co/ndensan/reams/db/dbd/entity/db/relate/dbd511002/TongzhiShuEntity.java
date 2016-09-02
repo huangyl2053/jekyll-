@@ -31,5 +31,6 @@ public class TongzhiShuEntity {
     private RString 居宅支援事業者名称;
     private RString 入所施設事業者コード;
     private RString 入所施設事業者名称;
+    private int 連番;
 
 }

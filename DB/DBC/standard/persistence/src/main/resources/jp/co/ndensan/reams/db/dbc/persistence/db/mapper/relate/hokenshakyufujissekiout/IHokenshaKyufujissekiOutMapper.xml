@@ -49,7 +49,7 @@
         <result property="oldShichosonCode" column="oldShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="sofuHihokenshaNo" column="sofuHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <result property="kannaiKangaiKubun" column="kannaiKangaiKubun" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="kannaiKangaiKubun" column="kannaiKangaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="choikiCode" column="choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="gyoseikuCode" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -96,13 +96,13 @@
         SELECT *
         FROM "DbWT1001Hihokensha" AS TEMP
         INNER JOIN rgdb."DbT7026ShinKyuHihokenshaNoHenkan" AS DbT7026
-        ON TEMP."exHokenshaNo" = DbT7026."shinNo"
+        ON TEMP."exHihokenshaNo" = DbT7026."shinNo"
         AND TEMP."henkanFlag" = TRUE
     </select>
     
     
      <resultMap id="resultMap_HokenshaKyufujissekiOutGetOldHihokenshaEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetOldHihokenshaEntity" autoMapping="true">
-        <id column="exHihokenshaNo"/>
+        <id column="exRenban"/>
          <association property="dbT7026Entity" resultMap="resultMap_DbT7026ShinKyuHihokenshaNoHenkanEntity"/>
         <association property="dbWT1001Entity" resultMap="resultMap_DbWT1001HihokenshaTempEntity"/>
     </resultMap>
@@ -133,7 +133,7 @@
     </select>
     
     <resultMap id="resultMap_HokenshaKyufujissekiOutGetHihokenshaNameEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetHihokenshaNameEntity" autoMapping="true">
-        <id column="exHihokenshaNo"/>
+        <id column="exRenban"/>
         <association property="urT0507Entity" resultMap="resultMap_UrT0507HokenjaEntity"/>
         <association property="dbWT1001Entity" resultMap="resultMap_DbWT1001HihokenshaTempEntity"/>
     </resultMap>

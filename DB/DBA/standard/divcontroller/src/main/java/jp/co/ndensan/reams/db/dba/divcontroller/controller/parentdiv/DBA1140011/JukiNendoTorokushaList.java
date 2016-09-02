@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1140011;
 
 import jp.co.ndensan.reams.db.dba.business.core.jukinentotoroku.DbT7022ShoriDateKanriBusiness;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA140010.DBA140010_JukiRendoTorokushaListParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.BatchParamterInfoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.DBA1140011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.JukiNendoTorokushaListDiv;
@@ -102,8 +102,8 @@ public class JukiNendoTorokushaList {
      * @param div バッチパラメータ情報Div
      * @return 住基連動登録者リスト
      */
-    public ResponseData<JyukiRendoTorokushaListBatchParameter> onClick_btnAction(BatchParamterInfoDiv div) {
-        JyukiRendoTorokushaListBatchParameter parameter = finder.getJukiRendoTorokushaListBatchParameter(
+    public ResponseData<DBA140010_JukiRendoTorokushaListParameter> onClick_btnAction(BatchParamterInfoDiv div) {
+        DBA140010_JukiRendoTorokushaListParameter parameter = finder.getJukiRendoTorokushaListBatchParameter(
                 div.getTxtzenkaikaishi().getValue(),
                 div.getTxtzenkaishuryo().getValue(),
                 div.getTxtkonkaikaishi().getValue(),

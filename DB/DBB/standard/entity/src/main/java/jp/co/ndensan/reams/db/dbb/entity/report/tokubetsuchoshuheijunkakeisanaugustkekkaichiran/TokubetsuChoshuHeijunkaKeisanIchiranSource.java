@@ -3,7 +3,9 @@ package jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanau
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBBPR35002_特別徴収平準化計算（特別徴収8月分）結果一覧表 Source
@@ -75,6 +77,7 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranSource implements IReportSource
     public RString listCenter_3;
     @ReportItem(name = "listCenter_4", length = 12, order = 31)
     public RString listCenter_4;
+    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listLower_1", length = 10, order = 32)
     public RString listLower_1;
     @ReportItem(name = "listLower_2", length = 15, order = 33)
@@ -99,6 +102,9 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranSource implements IReportSource
     public RString listLower_11;
     @ReportItem(name = "listLower_12", length = 7, order = 43)
     public RString listLower_12;
+    @ReportPerson(id = "A")
+    @ReportItem(name = "shikibetsuCode", length = 15)
+    public RString shikibetsuCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

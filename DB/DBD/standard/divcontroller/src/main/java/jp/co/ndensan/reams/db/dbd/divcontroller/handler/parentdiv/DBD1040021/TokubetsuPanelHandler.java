@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class TokubetsuPanelHandler {
 
     private final TokubetsuPanelDiv div;
-    private static final RString 全て = new RString("0");
     private static final RString 住所 = new RString("1");
     private static final RString 行政区 = new RString("2");
     private static final RString 地区 = new RString("3");
@@ -55,6 +54,8 @@ public class TokubetsuPanelHandler {
                 div.getBtnChikuGyoseikuCodeTo().setDisplayNone(true);
                 div.getTxtChikuCodeFrom().setDisabled(true);
                 div.getTxtChikuCodeTo().setDisabled(true);
+                div.getBtnChikuJushoCodeFrom().setDisabled(true);
+                div.getBtnChikuJushoCodeTo().setDisabled(true);
             }
         } else {
             throw new ApplicationException("市町村セキュリティ情報の取得に失敗しました。");
@@ -70,7 +71,7 @@ public class TokubetsuPanelHandler {
      * onChange_ddlChiku
      */
     public void onChange_ddlChiku() {
-        if (住所.equals(div.getChushutsuJoken().getDdlChiku().getSelectedKey())) {
+        if (div.getChushutsuJoken().getDdlChiku().getSelectedKey().equals(住所)) {
             div.getBtnChikuJushoCodeFrom().setDisplayNone(false);
             div.getBtnChikuJushoCodeTo().setDisplayNone(false);
             div.getTxtChikuCodeFrom().setDisabled(false);
@@ -80,7 +81,7 @@ public class TokubetsuPanelHandler {
             div.getBtnChikuJushoCodeFrom().setDisabled(false);
             div.getBtnChikuJushoCodeTo().setDisabled(false);
             clearvalue();
-        } else if (行政区.equals(div.getChushutsuJoken().getDdlChiku().getSelectedKey())) {
+        } else if (div.getChushutsuJoken().getDdlChiku().getSelectedKey().equals(行政区)) {
             div.getBtnChikuJushoCodeFrom().setDisplayNone(true);
             div.getBtnChikuJushoCodeTo().setDisplayNone(true);
             div.getBtnChikuGyoseikuCodeFrom().setDisplayNone(false);
@@ -90,12 +91,12 @@ public class TokubetsuPanelHandler {
             div.getTxtChikuCodeFrom().setDisabled(false);
             div.getTxtChikuCodeTo().setDisabled(false);
             clearvalue();
-        } else if (地区.equals(div.getChushutsuJoken().getDdlChiku().getSelectedKey())) {
+        } else if (div.getChushutsuJoken().getDdlChiku().getSelectedKey().equals(地区)) {
             div.getTxtChikuCodeFrom().setDisabled(false);
             div.getTxtChikuCodeTo().setDisabled(false);
             set活性();
             clearvalue();
-        } else if (全て.equals(div.getChushutsuJoken().getDdlChiku().getSelectedKey())) {
+        } else {
             div.getTxtChikuCodeFrom().setDisabled(true);
             div.getTxtChikuCodeTo().setDisabled(true);
             set活性();

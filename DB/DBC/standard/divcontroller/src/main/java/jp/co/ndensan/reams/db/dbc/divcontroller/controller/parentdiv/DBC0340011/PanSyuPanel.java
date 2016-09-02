@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0340011;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC010020.DBC010020_KogakuServicehiJuryoininKeiyakuShoninKakuninshoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0340011.PanSyuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0340011.PanSyuPanelHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -25,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
  */
 public class PanSyuPanel {
 
-    private static final ReportId 帳票ID = new ReportId("DBC100031_KogakuServiceHiJyuryoItakuKeiyakuKakuninSho");
+    private static final ReportId 帳票ID = ReportIdDBC.DBC100031.getReportId();
     private static final RString 契約申請日の範囲 = new RString("契約申請日の範囲");
     private static final RString 契約決定日の範囲 = new RString("契約決定日の範囲");
     private static final RString 発行する = new RString("Execute");

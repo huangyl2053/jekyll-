@@ -44,7 +44,7 @@
             <result property="総合事業費_調整_単位数" column="dbWT3063_kaigoKyufuhiChoseiTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
             <result property="総合事業費_調整_負担額" column="dbWT3063_kaigoKyufuhiChoseiFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
             <result property="識別コード" column="dbWT0001_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-            <result property="連番" column="row_number" />
+            <result property="連番コード" column="row_number" />
     </resultMap>
     
     <sql id="allColumns_SogojigyohiSaishinsaKetteiTsuchishoChohyo">

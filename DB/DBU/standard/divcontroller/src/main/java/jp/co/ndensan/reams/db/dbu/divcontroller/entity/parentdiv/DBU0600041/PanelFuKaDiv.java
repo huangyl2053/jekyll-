@@ -11,15 +11,19 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatena
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * PanelFuKa のクラスファイル 
- * 
+ * PanelFuKa のクラスファイル
+ *
  * @author 自動生成
  */
 public class PanelFuKaDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -85,7 +89,7 @@ public class PanelFuKaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChouteiNendo(TextBoxDate txtChouteiNendo) {
+    public void setTxtChouteiNendo(TextBoxDate txtChouteiNendo) {
         this.getPanelFukaJoho().getPanelFukaKonkyo().setTxtChouteiNendo(txtChouteiNendo);
     }
 
@@ -95,7 +99,7 @@ public class PanelFuKaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtFukaNendo(TextBoxDate txtFukaNendo) {
+    public void setTxtFukaNendo(TextBoxDate txtFukaNendo) {
         this.getPanelFukaJoho().getPanelFukaKonkyo().setTxtFukaNendo(txtFukaNendo);
     }
 
@@ -105,7 +109,7 @@ public class PanelFuKaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlTuutishoBango(DropDownList ddlTuutishoBango) {
+    public void setDdlTuutishoBango(DropDownList ddlTuutishoBango) {
         this.getPanelFukaJoho().getPanelFukaKonkyo().setDdlTuutishoBango(ddlTuutishoBango);
     }
 
@@ -115,7 +119,7 @@ public class PanelFuKaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNekinBango(TextBox txtNekinBango) {
+    public void setTxtNekinBango(TextBox txtNekinBango) {
         this.getPanelFukaJoho().getPanelFukaKonkyo().setTxtNekinBango(txtNekinBango);
     }
 
@@ -125,7 +129,7 @@ public class PanelFuKaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNekinKodo(TextBox txtNekinKodo) {
+    public void setTxtNekinKodo(TextBox txtNekinKodo) {
         this.getPanelFukaJoho().getPanelFukaKonkyo().setTxtNekinKodo(txtNekinKodo);
     }
 
@@ -135,7 +139,7 @@ public class PanelFuKaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTblFukakonkyoMeisai(tblFukakonkyoMeisaiDiv tblFukakonkyoMeisai) {
+    public void setTblFukakonkyoMeisai(tblFukakonkyoMeisaiDiv tblFukakonkyoMeisai) {
         this.getPanelFukaJoho().getPanelFukaKonkyo().setTblFukakonkyoMeisai(tblFukakonkyoMeisai);
     }
 
@@ -300,7 +304,7 @@ public class PanelFuKaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTblKiwarigaku(tblKiwarigakuDiv tblKiwarigaku) {
+    public void setTblKiwarigaku(tblKiwarigakuDiv tblKiwarigaku) {
         this.getPanelFukaJoho().getPanelKiwarigaku().setTblKiwarigaku(tblKiwarigaku);
     }
 
@@ -860,7 +864,7 @@ public class PanelFuKaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTblKikan1(tblKikan1Div tblKikan1) {
+    public void setTblKikan1(tblKikan1Div tblKikan1) {
         this.getPanelFukaJoho().getKikan().setTblKikan1(tblKikan1);
     }
 

@@ -354,6 +354,7 @@
     </select>
     
     <resultMap id="ResultMap_HihokenshaKanriDataEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoin.HihokenshaKanriDataEntity" autoMapping="true">
+        <id column="dbWT0001HihokenshaTemp_meisaiRenban" />
         <association property="temp" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.resultMap_DbWT0001HihokenshaTempEntity"/>
         <association property="daicho" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
     </resultMap>

@@ -59,8 +59,8 @@ public class HokenshaKyufujissekiOutChangeHihokenshaNoFlow extends BatchFlowBase
             } else {
                 this.splitFlow();
             }
-            executeStep(保険者名の取得);
         }
+        executeStep(保険者名の取得);
 
     }
 

@@ -10,11 +10,22 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kaigoshiensenmoninjouhou.KaigoShienSenmoninJouhouResult;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kaigoshiensenmoninjouhou.KaigoShienSenmoninJouhouParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4520011.DBC4520011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4520011.KaigoSienSenmonkaTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4520011.dgKaigoShienSenmoninIchiran_Row;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.CareManeger;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.CareManegerHolder;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.CareManegerIdentifier;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.service.core.basic.CareManegerManager;
+import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 介護支援専門員登録画面 Handlerクラスです。
@@ -82,7 +93,7 @@ public class KaigoSienSenmonkaTorokuHandler {
     }
 
     private void 検索条件パネルに項目をクリアする() {
-        div.getKensakuJoken().getRadKaigoSienSenmoninBangoKensaku().setSelectedIndex(0);
+        div.getKensakuJoken().getRadKaigoSienSenmoninBangoKensaku().clearSelectedItem();
         div.getKensakuJoken().getRadShozokuJigyoshaBangoKensaku().clearSelectedItem();
         div.getKensakuJoken().getRadKaigoShienSenmoninShimeiKensaku().clearSelectedItem();
         div.getKensakuJoken().getRadYukoKikanKensaku().clearSelectedItem();
@@ -105,6 +116,56 @@ public class KaigoSienSenmonkaTorokuHandler {
      */
     public void onClick_btnSearch(List<KaigoShienSenmoninJouhouResult> resultList) {
         複数件該当する場合は介護支援専門員一覧を表示する(resultList);
+    }
+
+    /**
+     * KaigoShienSenmoninJouhouParameterを返します。
+     *
+     * @return KaigoShienSenmoninJouhouParameter
+     */
+    public KaigoShienSenmoninJouhouParameter getParameter() {
+        KaigoShienSenmoninJouhouParameter param = new KaigoShienSenmoninJouhouParameter();
+        if (RADIOBUTTON_SELECTKEY.equals(div.getKensakuJoken().getRadKaigoSienSenmoninBangoKensaku().getSelectedKey())
+                && (!RString.isNullOrEmpty(div.getKensakuJoken().getTxtKaigoShienSenmoninBango().getValue()))) {
+            param.set介護支援専門員番号(div.getKensakuJoken().getTxtKaigoShienSenmoninBango().getValue());
+        }
+
+        if (RADIOBUTTON_SELECTKEY.equals(div.getKensakuJoken().getRadShozokuJigyoshaBangoKensaku().getSelectedKey())
+                && (!RString.isNullOrEmpty(div.getKensakuJoken().getTxtShozokuJigyoshaBango().getValue()))) {
+            param.set所属事業者番号(div.getKensakuJoken().getTxtShozokuJigyoshaBango().getValue());
+        }
+
+        boolean is介護支援専門員氏名検索_SELECT
+                = RADIOBUTTON_SELECTKEY.equals(div.getKensakuJoken().getRadKaigoShienSenmoninShimeiKensaku().getSelectedKey());
+        if (is介護支援専門員氏名検索_SELECT
+                && (!RString.isNullOrEmpty(div.getKensakuJoken().getTxtKanjiShimei().getValue()))) {
+            param.set漢字氏名(div.getKensakuJoken().getTxtKanjiShimei().getValue());
+        }
+        param.set漢字氏名の前方一致(is介護支援専門員氏名検索_SELECT
+                && RADIOBUTTON_SELECTKEY.equals(div.getKensakuJoken().getChkKanjiShimeiZenpoItchi().getSelectedKeys().isEmpty()
+                        ? RString.EMPTY : div.getKensakuJoken().getChkKanjiShimeiZenpoItchi().getSelectedKeys().get(0)));
+        if (is介護支援専門員氏名検索_SELECT
+                && (!RString.isNullOrEmpty(div.getKensakuJoken().getTxtkanaShimei().getValue()))) {
+            param.setカナ氏名(div.getKensakuJoken().getTxtkanaShimei().getValue());
+        }
+        param.setカナ氏名の前方一致(is介護支援専門員氏名検索_SELECT
+                && RADIOBUTTON_SELECTKEY.equals(div.getKensakuJoken().getChkKanaShimeiZenpoItchi().getSelectedKeys().isEmpty()
+                        ? RString.EMPTY : div.getKensakuJoken().getChkKanaShimeiZenpoItchi().getSelectedKeys().get(0)));
+
+        boolean is有効期間検索_SELECT
+                = RADIOBUTTON_SELECTKEY.equals(div.getKensakuJoken().getRadYukoKikanKensaku().getSelectedKey());
+        if (is有効期間検索_SELECT) {
+            if (null != div.getKensakuJoken().getTxtYukoKikanKensaku().getFromValue()) {
+                param.set有効開始年月日(div.getKensakuJoken().getTxtYukoKikanKensaku().getFromValue().toDateString());
+            }
+            if (null != div.getKensakuJoken().getTxtYukoKikanKensaku().getToValue()) {
+                param.set有効終了年月日(div.getKensakuJoken().getTxtYukoKikanKensaku().getToValue().toDateString());
+            }
+        }
+
+        param.set最大表示件数(RString.isNullOrEmpty(div.getKensakuJoken().getTxtSaidaiHyojiKensu().getText()) ? 0
+                : Integer.parseInt(div.getKensakuJoken().getTxtSaidaiHyojiKensu().getValue().toString()));
+        return param;
     }
 
     private void 複数件該当する場合は介護支援専門員一覧を表示する(List<KaigoShienSenmoninJouhouResult> resultList) {
@@ -226,6 +287,47 @@ public class KaigoSienSenmonkaTorokuHandler {
     }
 
     /**
+     * 介護支援専門員登録情報を保存します。
+     *
+     * @param 介護支援専門員番号 RString
+     * @return boolean
+     */
+    public boolean 介護支援専門員登録情報を保存する(RString 介護支援専門員番号) {
+        AtenaMeisho 介護支援専門員名 = new AtenaMeisho(div.getKaigoSienSenmoninToroku().getTxtKaigoSienSenmoninShimei().getValue());
+        AtenaKanaMeisho 介護支援専門員名カナ
+                = RString.isNullOrEmpty(div.getKaigoSienSenmoninToroku().getTxtKaingoSienSenmoninShimeiKana().getValue())
+                ? AtenaKanaMeisho.EMPTY : new AtenaKanaMeisho(div.getKaigoSienSenmoninToroku().getTxtKaingoSienSenmoninShimeiKana().getValue());
+        JigyoshaNo 所属事業者番号 = new JigyoshaNo(div.getKaigoSienSenmoninToroku().getCcdShozokuJigyosha().getNyuryokuShisetsuKodo());
+        FlexibleDate 有効開始年月日 = null == div.getKaigoSienSenmoninToroku().getTxtYukoKikan().getFromValue() ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getKaigoSienSenmoninToroku().getTxtYukoKikan().getFromValue().toString());
+        FlexibleDate 有効終了年月日 = null == div.getKaigoSienSenmoninToroku().getTxtYukoKikan().getToValue() ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getKaigoSienSenmoninToroku().getTxtYukoKikan().getToValue().toString());
+        CareManegerHolder holder = ViewStateHolder.get(ViewStateHolderName.介護支援専門員登録情報, CareManegerHolder.class);
+        CareManeger careManeger;
+        if (状態_削除.equals(div.getOperateState())) {
+            careManeger = holder.getCareManeger(new CareManegerIdentifier(介護支援専門員番号)).deleted();
+        } else if (状態_修正.equals(div.getOperateState())) {
+            careManeger = holder.getCareManeger(new CareManegerIdentifier(介護支援専門員番号)).createBuilderForEdit()
+                    .set介護支援専門員名(介護支援専門員名)
+                    .set介護支援専門員名カナ(介護支援専門員名カナ)
+                    .set所属事業者番号(所属事業者番号)
+                    .set有効開始年月日(有効開始年月日)
+                    .set有効終了年月日(有効終了年月日)
+                    .build().modified();
+        } else {
+            careManeger = new CareManeger(介護支援専門員番号).createBuilderForEdit()
+                    .set介護支援専門員名(介護支援専門員名)
+                    .set介護支援専門員名カナ(介護支援専門員名カナ)
+                    .set所属事業者番号(所属事業者番号)
+                    .set有効開始年月日(有効開始年月日)
+                    .set有効終了年月日(有効終了年月日)
+                    .build();
+        }
+        CareManegerManager manager = new CareManegerManager();
+        return manager.save介護支援専門員(careManeger);
+    }
+
+    /**
      * 介護完了メッセージパネルを表示します。
      *
      * @param message RString
@@ -235,5 +337,15 @@ public class KaigoSienSenmonkaTorokuHandler {
      */
     public void 介護完了メッセージパネルを表示する(RString message, RString 介護支援専門員番号, RString 介護支援専門員氏名, boolean isSuccess) {
         div.getKanryoMessage().getCcdKanryoMessage().setMessage(message, 介護支援専門員番号, 介護支援専門員氏名, isSuccess);
+    }
+
+    /**
+     * 検索条件パネルにボタンの制御を設定します。
+     *
+     * @param stateName RString
+     */
+    public void onState(RString stateName) {
+        div.getKensakuJoken().getBtnKensaku().setDisabled(!stateName.equals(DBC4520011StateName.検索画面.getName()));
+        div.getKensakuJoken().getBtnKensakuKuria().setDisabled(!stateName.equals(DBC4520011StateName.検索画面.getName()));
     }
 }

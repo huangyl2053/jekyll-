@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710210.DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7210001.HanyoListParamPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7210001.ZigyoubunkougakugassanshikyuuketteJouhouDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.basic.KaigoDonyuKeitaiManager;
@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  */
 public class HanyoListBachParamHandler {
 
-    private final HanyoListParamPanelDiv div;
+    private final ZigyoubunkougakugassanshikyuuketteJouhouDiv div;
     private KaigoDonyuKeitaiManager manager;
     private static final RString 項目名付加 = new RString("6");
     private static final RString 連番付加 = new RString("7");
@@ -42,7 +42,7 @@ public class HanyoListBachParamHandler {
      *
      * @param div 事業分高額合算支給決定情報２
      */
-    public HanyoListBachParamHandler(HanyoListParamPanelDiv div) {
+    public HanyoListBachParamHandler(ZigyoubunkougakugassanshikyuuketteJouhouDiv div) {
         this.div = div;
     }
 

@@ -204,7 +204,7 @@ public class DBC120870_SogojigyohiSaishinsaKetteiKohifutanshaIn
         KokuhorenkyotsuDeleteReveicedFileProcessParameter parameter
                 = new KokuhorenkyotsuDeleteReveicedFileProcessParameter();
         parameter.set処理年月(getParameter().getShoriYM());
-        parameter.set保存先フォルダ(ファイル格納フォルダ名);
+        parameter.set保存先フォルダ(returnEntity.get保存先フォルダのパス().toRString());
         parameter.setエントリ情報List(returnEntity.getEntityList());
         return simpleBatch(KokuhorenkyoutsuDeleteReveicedFileProcess.class).arguments(parameter).define();
 

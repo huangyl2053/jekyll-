@@ -203,7 +203,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
         csvWriter = new CsvWriter.InstanceBuilder(一覧ファイルパス)
                 .setDelimiter(コンマ)
                 .setEnclosure(ダブル引用符)
-                .setEncode(Encode.SJIS)
+                .setEncode(Encode.UTF_8withBOM)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true)
                 .build();

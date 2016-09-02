@@ -157,6 +157,7 @@ public class HonnSanteiFuka {
     private static final int NUM_12 = 12;
     private static final int NUM_13 = 13;
     private static final int NUM_14 = 14;
+    private static final int NUM_16 = 16;
 
     /**
      * コンストラクタです。
@@ -369,6 +370,7 @@ public class HonnSanteiFuka {
             mapper.insert本算定抽出Temp(entity);
         } else {
             int count = 0;
+            int 番号 = 0;
             for (HihokenshaDaicho daicho : 資格の情報) {
                 count = count + NUM_1;
                 HonSanJonTyuShutuTempEntity entity = new HonSanJonTyuShutuTempEntity();
@@ -377,10 +379,11 @@ public class HonnSanteiFuka {
                     entity.setChoteiNendo(賦課の情報.get調定年度());
                     entity.setFukaNendo(賦課の情報.get賦課年度());
                     entity.setTsuchishoNo(賦課の情報.get通知書番号());
+                    番号 = Integer.parseInt(賦課の情報.get通知書番号().getColumnValue().substring(NUM_14, NUM_16).toString());
                 } else {
                     entity.setChoteiNendo(param.get調定年度());
                     entity.setFukaNendo(param.get賦課年度());
-                    entity.setTsuchishoNo(create通知書番号(daicho.get被保険者番号().getColumnValue(), count));
+                    entity.setTsuchishoNo(create通知書番号(daicho.get被保険者番号().getColumnValue(), count + 番号 - NUM_1));
                 }
                 mapper.insert本算定抽出Temp(entity);
             }

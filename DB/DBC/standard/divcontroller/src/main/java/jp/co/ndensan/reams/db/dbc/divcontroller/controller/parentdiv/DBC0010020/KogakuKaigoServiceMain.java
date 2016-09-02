@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 画面設計_DBCMN11002_給付実績照会_(DBC0010020)高額介護サービス費のcontrollerです
+ * 給付実績照会の高額介護サービス費のcontrollerです
  *
  * @reamsid_L DBC-2970-120 guoqilin
  */
@@ -41,9 +41,11 @@ public class KogakuKaigoServiceMain {
         div.getCcdKyufuJissekiHeader().initialize(
                 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(), サービス提供年月,
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class), 識別番号検索キー);
-        ShikibetsuNoKanri 識別番号管理データ = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
-                サービス提供年月, 識別番号検索キー).records().get(0);
-        getHandler(div).clear制御性(識別番号管理データ, サービス提供年月);
+        List<ShikibetsuNoKanri> 識別番号管理データリスト = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
+                サービス提供年月, 識別番号検索キー).records();
+        if (!識別番号管理データリスト.isEmpty()) {
+            getHandler(div).clear制御性(識別番号管理データリスト.get(0), サービス提供年月);
+        }
         List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費 = 給付実績情報照会情報.getCsData_I();
         getHandler(div).set給付実績高額介護サービス費データ(高額介護サービス費, サービス提供年月);
         return createResponse(div);
@@ -63,8 +65,6 @@ public class KogakuKaigoServiceMain {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getKojinKakuteiKey().get被保険者番号();
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
-        div.getCcdKyufuJissekiHeader().initialize(
-                被保険者番号, サービス提供年月, 整理番号, 識別番号検索キー);
         getHandler(div).change年月(new RString("前月"), 高額介護サービス費,
                 サービス提供年月, 整理番号,
                 被保険者番号, 識別番号検索キー);
@@ -85,8 +85,6 @@ public class KogakuKaigoServiceMain {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getKojinKakuteiKey().get被保険者番号();
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
-        div.getCcdKyufuJissekiHeader().initialize(
-                被保険者番号, サービス提供年月, 整理番号, 識別番号検索キー);
         getHandler(div).change年月(new RString("次月"), 高額介護サービス費, サービス提供年月, 整理番号, 被保険者番号, 識別番号検索キー);
         return createResponse(div);
     }
