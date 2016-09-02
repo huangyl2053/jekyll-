@@ -33,15 +33,8 @@ public final class TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport extends
      * @param association Association
      * @param iOutputOrder IOutputOrder
      * @param 宛名 IKojin
-     * @return 特別地域加算軽減実績管理リスト
      */
-    public static TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport createReport(
-            TokubetsuChiikiKasanKeigenJissekiKanri 帳票情報, Association association,
-            IOutputOrder iOutputOrder, IKojin 宛名) {
-        return new TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport(帳票情報, association, iOutputOrder, 宛名);
-    }
-
-    private TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport(
+    public TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport(
             TokubetsuChiikiKasanKeigenJissekiKanri 帳票情報, Association association,
             IOutputOrder iOutputOrder, IKojin 宛名) {
         this.帳票情報 = 帳票情報;
