@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7160001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc710160.DBC710160_HanyoListKogakuGassanKeisanKekkaRenrakuHyoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710160.DBC710160_HanyoListKogakuGassanKeisanKekkaRenrakuHyoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ChushutsuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_DataKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_DataShubetsu;
@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -170,15 +172,14 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
             parameter.setデータ種類(Kaigogassan_DataShubetsu.仮算定.get名称());
         }
 
-        parameter.set対象年度(div.getChushutsuJokenPanel().getDdlTaishoNendo().getSelectedValue());
-
+        parameter.set対象年度(new FlexibleYear(div.getChushutsuJokenPanel().getDdlTaishoNendo().getSelectedValue().toString()));
         TextBoxDateRange 受取年月 = div.getChushutsuJokenPanel().getTxtUketoriNengetsu();
         if (受取年月.isDisabled()) {
             parameter.set受取年月From(null);
             parameter.set受取年月To(null);
         } else {
-            parameter.set受取年月From(受取年月.getMinDate());
-            parameter.set受取年月To(受取年月.getMaxDate());
+            parameter.set受取年月From(new FlexibleYearMonth(受取年月.getMinDate().getYearMonth().toDateString()));
+            parameter.set受取年月To(new FlexibleYearMonth(受取年月.getMaxDate().getYearMonth().toDateString()));
         }
 
         TextBoxDateRange 送付年月 = div.getChushutsuJokenPanel().getTxtSofuNengetsu();
@@ -186,8 +187,8 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
             parameter.set送付年月From(null);
             parameter.set送付年月To(null);
         } else {
-            parameter.set送付年月From(送付年月.getMinDate());
-            parameter.set送付年月To(送付年月.getMaxDate());
+            parameter.set送付年月From(new FlexibleYearMonth(送付年月.getMinDate().getYearMonth().toDateString()));
+            parameter.set送付年月To(new FlexibleYearMonth(送付年月.getMaxDate().getYearMonth().toDateString()));
         }
 
         List<RString> keyList = div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys();

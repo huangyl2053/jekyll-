@@ -23,6 +23,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakugassanShikyuKetteiTsuchiIchiran {
 
+    private RString 支給不支給区分;
     private RString 出力順1;
     private RString 出力順2;
     private RString 出力順3;
@@ -43,6 +44,7 @@ public class KogakugassanShikyuKetteiTsuchiIchiran {
     private FlexibleDate 申請年月日;
     private FlexibleDate 決定年月日;
     private RString 支給区分コード;
+    private Decimal 自己負担総額;
     private Decimal 支給額;
     private RString 支払方法区分;
     private RString 支払場所;
