@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5320001.TsutishoHakkoCommonProcess;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd501001.YokaigoNinteiShinseishoReport;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd501002.ShinseiShoEntity;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd511001.KoshinShinseiOshiraseTshuchishoReport;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd511002.KoshinShinseiTsuchishoHakkoIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd511002.NinshiuUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.NinshiuUpdateEntity;
@@ -174,26 +177,26 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
         ShinseiShoEntity entity2 = new ShinseiShoEntity();
         KoshinShinseNinshi(entity, ninshi);
 
-//        if (parameter.get出力対象区分().equals(ZERO)) {
-//            KoshinShinseiOshiraseTshuchishoReport find11 = KoshinShinseiOshiraseTshuchishoReport.createReport(KoshinShinseNinshi(entity, ninshi),
-//                 association,new ChohyoSeigyoKyotsu(帳票制御共通), 宛先,帳票制御汎用, 帳票制御情報, ninshoshaSource, get送付物宛先情報());
-//            find11.writeBy(reportSourceWriter11);
-//            KoshinShinseiTsuchishoHakkoIchiranhyoReport find112 = new KoshinShinseiTsuchishoHakkoIchiranhyoReport(OshiraseNinshi(twonin, ninshi));
-//            find112.writeBy(reportSourceWriter112);
-//        } else if (parameter.get出力対象区分().equals(ONE)) {
-//            YokaigoNinteiShinseishoReport find01 = YokaigoNinteiShinseishoReport.createReport(KoshinShinseNinshi(entity2, ninshi));
-//            find01.writeBy(reportSourceWriter01);
-//            KoshinShinseiTsuchishoHakkoIchiranhyoReport find112 = new KoshinShinseiTsuchishoHakkoIchiranhyoReport(OshiraseNinshi(twonin, ninshi));
-//            find112.writeBy(reportSourceWriter112);
-//        } else if (parameter.get出力対象区分().equals(TWO)) {
-//            YokaigoNinteiShinseishoReport find01 = YokaigoNinteiShinseishoReport.createReport(KoshinShinseNinshi(entity2, ninshi));
-//            find01.writeBy(reportSourceWriter01);
-//            KoshinShinseiTsuchishoHakkoIchiranhyoReport find112 = new KoshinShinseiTsuchishoHakkoIchiranhyoReport(OshiraseNinshi(twonin, ninshi));
-//            find112.writeBy(reportSourceWriter112);
-//            KoshinShinseiOshiraseTshuchishoReport find11 = KoshinShinseiOshiraseTshuchishoReport.createReport(KoshinShinseNinshi(entity, ninshi),
-//                 association,new ChohyoSeigyoKyotsu(帳票制御共通), 宛先,帳票制御汎用, 帳票制御情報, ninshoshaSource, get送付物宛先情報());
-//            find11.writeBy(reportSourceWriter11);
-//        }
+        if (parameter.get出力対象区分().equals(ZERO)) {
+            KoshinShinseiOshiraseTshuchishoReport find11 = new KoshinShinseiOshiraseTshuchishoReport(ninshoshaSource, 宛先,
+                    new ChohyoSeigyoKyotsu(帳票制御共通), association, 帳票制御汎用, KoshinShinseNinshi(entity, ninshi));
+            find11.writeBy(reportSourceWriter11);
+            KoshinShinseiTsuchishoHakkoIchiranhyoReport find112 = new KoshinShinseiTsuchishoHakkoIchiranhyoReport(OshiraseNinshi(twonin, ninshi));
+            find112.writeBy(reportSourceWriter112);
+        } else if (parameter.get出力対象区分().equals(ONE)) {
+            YokaigoNinteiShinseishoReport find01 = YokaigoNinteiShinseishoReport.createReport(KoshinShinseNinshi(entity2, ninshi));
+            find01.writeBy(reportSourceWriter01);
+            KoshinShinseiTsuchishoHakkoIchiranhyoReport find112 = new KoshinShinseiTsuchishoHakkoIchiranhyoReport(OshiraseNinshi(twonin, ninshi));
+            find112.writeBy(reportSourceWriter112);
+        } else if (parameter.get出力対象区分().equals(TWO)) {
+            YokaigoNinteiShinseishoReport find01 = YokaigoNinteiShinseishoReport.createReport(KoshinShinseNinshi(entity2, ninshi));
+            find01.writeBy(reportSourceWriter01);
+            KoshinShinseiTsuchishoHakkoIchiranhyoReport find112 = new KoshinShinseiTsuchishoHakkoIchiranhyoReport(OshiraseNinshi(twonin, ninshi));
+            find112.writeBy(reportSourceWriter112);
+            KoshinShinseiOshiraseTshuchishoReport find11 = new KoshinShinseiOshiraseTshuchishoReport(ninshoshaSource, 宛先,
+                    new ChohyoSeigyoKyotsu(帳票制御共通), association, 帳票制御汎用, KoshinShinseNinshi(entity, ninshi));
+            find11.writeBy(reportSourceWriter11);
+        }
     }
 
     protected void afterProcess(DbT4101NinteiShinseiJohoEntity entity) {
