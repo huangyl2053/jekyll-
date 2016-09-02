@@ -122,7 +122,7 @@ public class JigyoHokokuGeppoReportDBU300006Process extends BatchProcessBase<Jig
     protected void afterExecute() {
         JigyohokokuGeppoYoshiki1Data reportData = new JigyohokokuGeppoYoshiki1Data();
         reportData.set集計区分(年報月報区分);
-        reportData.set作成日時(processParameter.get処理日時());
+        //reportData.set作成日時(processParameter.get処理日時());
         reportData.set保険者名(保険者名);
         reportData.set保険者番号(保険者番号);
         reportData.set年報月報区分(年報月報区分CODE);
