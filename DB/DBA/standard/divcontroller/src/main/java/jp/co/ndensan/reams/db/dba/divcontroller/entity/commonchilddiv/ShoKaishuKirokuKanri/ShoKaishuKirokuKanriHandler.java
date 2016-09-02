@@ -162,6 +162,8 @@ public class ShoKaishuKirokuKanriHandler {
             div.getDgKoufuKaishu().getGridSetting().setIsShowSelectButtonColumn(false);
             div.getPanelInput().getBtnCancel().setDisabled(true);
             div.getPanelInput().getBtnConfirm().setDisabled(true);
+            
+            div.getPanelInput().setDisabled(true);
         }
     }
 
@@ -265,6 +267,8 @@ public class ShoKaishuKirokuKanriHandler {
         div.getPanelInput().getTxaKaishuRiyu().setValue(dgKoufuKaishuRow.getKaishuRiyu());
         div.getPanelInput().getBtnConfirm().setDisabled(false);
         div.getPanelInput().getBtnCancel().setDisabled(false);
+        
+        div.getPanelInput().setDisabled(false);
 
         if (状態_削除.equals(状態)) {
 
