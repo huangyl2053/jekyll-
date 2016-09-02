@@ -152,9 +152,14 @@ public class JigyoshaService {
      * @return ResponseData<JigyoshaServiceDiv>
      */
     public ResponseData<JigyoshaServiceDiv> onBlur_TxtTorokuHokenshaNo(JigyoshaServiceDiv div) {
-        IHokenjaManager manager = new _HokenjaManager();
-        Hokenja joho = manager.get保険者except介護保険(new HokenjaNo(div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().getValue()));
-        div.getJigyoshaServiceKihon().getTxtTorokuHokenshaName().setValue(joho == null ? RString.EMPTY : joho.get保険者名());
+        if(div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().getValue().length() != 4 
+                && div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().getValue().length() != 6 
+                && div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().getValue().length() != 8 ){
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(new ValidationMessageControlPair(JigyoshaErrorMessage.桁数が不正));
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();            
+        }
+        set登録保険者名称(div);
         return ResponseData.of(div).respond();
     }
 
@@ -546,11 +551,12 @@ public class JigyoshaService {
 
     private enum JigyoshaErrorMessage implements IValidationMessage {
 
-        排他_他のユーザが使用中(UrErrorMessages.排他_他のユーザが使用中);
+        排他_他のユーザが使用中(UrErrorMessages.排他_他のユーザが使用中),
+        桁数が不正(UrErrorMessages.桁数が不正,"登録保険者番号","４桁、６桁、８");
         private final Message message;
 
-        private JigyoshaErrorMessage(IMessageGettable message) {
-            this.message = message.getMessage();
+        private JigyoshaErrorMessage(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
         }
 
         @Override

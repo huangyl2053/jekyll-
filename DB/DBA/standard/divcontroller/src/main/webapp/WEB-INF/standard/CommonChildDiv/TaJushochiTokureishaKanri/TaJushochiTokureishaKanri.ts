@@ -172,13 +172,8 @@ module DBA
                   this.controls.txtTasyobi().displayNone=false;
                   this.controls.txtKaijyobi().displayNone=false;
                   
-                  this.controls.btnTorikeshi().disabled = true;
                   this.controls.txtKaijyoTodokedebi().displayNone=false;
                   this.controls.ddlKaijyoJiyo().displayNone=false;
-                  this.controls.txtTasyobi().disabled=true;
-                  this.controls.txtKaijyobi().disabled=true;
-                  this.controls.txtKaijyoTodokedebi().disabled=true;
-                  this.controls.ddlKaijyoJiyo().disabled=true;
                   this.controls.txtKaijyobi().wrap=false;
                   
                   this.controls.panSotimotoJyoho().displayNone=true;
