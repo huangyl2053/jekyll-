@@ -53,7 +53,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiBiYijiNashiReport extends Report<Jig
     @Override
     public void writeBy(ReportSourceWriter<JigyoKogakuKetteiTsuchishoYoteiBiYijiNashiSource> reportSourceWriter) {
         IJigyoKogakuKetteiTsuchishoYoteiBiYijiNashiEditor editor = new JigyoKogakuKetteiTsuchishoYoteiBiYijiNashiEditor(
-                entity, kyotsu, 認証者情報);
+                entity, 認証者情報, kyotsu);
         IJigyoKogakuKetteiTsuchishoYoteiBiYijiNashiBuilder builder = new JigyoKogakuKetteiTsuchishoYoteiBiYijiNashiBuilder(editor);
         reportSourceWriter.writeLine(builder);
     }
