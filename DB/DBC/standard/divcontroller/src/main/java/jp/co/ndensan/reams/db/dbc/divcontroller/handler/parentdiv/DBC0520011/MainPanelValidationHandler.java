@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0520011;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0520011.KokuhoShikakuInfoPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0520011.MainPanelDivSpec;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0520011.KokuhuShikakuInfoPanelSpec;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
@@ -32,7 +32,7 @@ public class MainPanelValidationHandler {
      */
     public ValidationMessageControlPairs 資格期間大小関係チェック(ValidationMessageControlPairs pairs, KokuhoShikakuInfoPanelDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(MainPanelDivSpec.資格期間大小関係チェック)
+        messages.add(ValidateChain.validateStart(div).ifNot(KokuhuShikakuInfoPanelSpec.資格期間大小関係チェック)
                 .thenAdd(jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0520011.MainPanelValidationHandler.NoInputMessages.資格期間大小関係チェック).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0520011.MainPanelValidationHandler.NoInputMessages.資格期間大小関係チェック, div.getMeisaiPanel().getTxtShikakuShutokuYMD(), div.getMeisaiPanel().
