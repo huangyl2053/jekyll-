@@ -289,7 +289,7 @@ public class KaigoSienSenmonkaTorokuHandler {
     /**
      * 介護支援専門員登録情報を保存します。
      *
-     * @param 介護支援専門員番号
+     * @param 介護支援専門員番号 RString
      * @return boolean
      */
     public boolean 介護支援専門員登録情報を保存する(RString 介護支援専門員番号) {

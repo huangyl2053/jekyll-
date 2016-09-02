@@ -419,7 +419,7 @@
         rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
         ON "Atesaki"."shikibetsuCode"= 最新被保台帳_識別コード
        
-       <!--${出力順}-->
+       ${出力順}
     </sql>
 
     <resultMap id="resultMap_DbT3070KogakuGassanJikoFutanGakuEntity" autoMapping="true"

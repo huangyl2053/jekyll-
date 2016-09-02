@@ -131,6 +131,7 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
     private static final int INDEX_5 = 5;
     private static final int INDEX_6 = 6;
     private static final int INDEX_8 = 8;
+    private int index = 0;
     private BatchReportWriter<YokaigoNinteiShinseishoReportSource> batchReportWrite01;
     private ReportSourceWriter<YokaigoNinteiShinseishoReportSource> reportSourceWriter01;
     private BatchReportWriter<KoshinShinseiOshiraseTshuchishoReportSource> batchReportWrite11;
@@ -380,9 +381,9 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
         twonin.set印刷時間(new RString(RDate.getNowDate().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
                 fillType(FillType.ZERO).toDateString().toString() + timeFormat));
-        int index = 1;
-        set通知書発行一覧(twonin, ninshi, index);
         index++;
+        set通知書発行一覧(twonin, ninshi, index);
+
         return twonin;
     }
 

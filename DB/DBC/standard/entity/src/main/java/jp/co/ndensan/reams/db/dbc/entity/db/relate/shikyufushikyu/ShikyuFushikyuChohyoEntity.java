@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.shikyufushikyu;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT0001HihokenshaIchijiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT38B1KogakuGassanShikyuFushikyuKetteiTempEntity;
 
 /**
@@ -19,6 +19,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT38B1Kogak
 public class ShikyuFushikyuChohyoEntity {
 
     private DbWT38B1KogakuGassanShikyuFushikyuKetteiTempEntity 決定データ;
-    private DbWT0001HihokenshaIchijiEntity 被保険者;
+    private DbWT0001HihokenshaTempEntity 被保険者;
 
 }

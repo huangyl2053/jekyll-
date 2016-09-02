@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.service.core.shoukanbaraishikyuketteitsuchisho;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.shoukanbaraishikyuketteitsuchisho.KyufuSHurui;
 import jp.co.ndensan.reams.db.dbc.business.core.shoukanbaraishikyuketteitsuchisho.ShoukanbaraiShikyuketteiTsuuchisho;
@@ -70,7 +69,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -100,8 +98,9 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
     private static final RString 間 = new RString("、");
     private static final RString その他 = new RString("␣その他");
     private static final RString ワークの文言 = new RString("␣滞納保険料への控除が行われました");
-    private List<RString> 給付の種類Total;
     private int 償還集計データ件数;
+    private RString 給付の種類;
+    private boolean isFirst;
 
     /**
      * コンストラクタです。
@@ -133,7 +132,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
      *
      * @param 被保険者番号 HihokenshaNo
      *
-     * @return DbT1001HihokenshaDaichoEntity
+     * @return HihokenshaDaicho
      */
     public HihokenshaDaicho getShikaku(HihokenshaNo 被保険者番号) {
         DbT1001HihokenshaDaichoEntity hihokenshaEntity
@@ -153,17 +152,13 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
      *
      * @return ShiharaiHohoHenkoSashitome
      */
-    public SearchResult<ShiharaiHohoHenkoSashitome> getSashitome(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
+    public ShiharaiHohoHenkoSashitome getSashitome(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
             RString 整理番号) {
-        List<ShiharaiHohoHenkoSashitome> sashitomeEntity = new ArrayList();
-        List<DbT4024ShiharaiHohoHenkoSashitomeEntity> entitys = dbT4024dac.select支払方法変更差止(被保険者番号, サービス提供年月, 整理番号);
-        if (entitys == null || entitys.isEmpty()) {
-            return SearchResult.of(Collections.<ShiharaiHohoHenkoSashitome>emptyList(), 0, false);
+        DbT4024ShiharaiHohoHenkoSashitomeEntity entity = dbT4024dac.select支払方法変更差止(被保険者番号, サービス提供年月, 整理番号);
+        if (entity == null) {
+            return null;
         }
-        for (DbT4024ShiharaiHohoHenkoSashitomeEntity entity : entitys) {
-            sashitomeEntity.add(new ShiharaiHohoHenkoSashitome(entity));
-        }
-        return SearchResult.of(sashitomeEntity, 0, false);
+        return new ShiharaiHohoHenkoSashitome(entity);
     }
 
     /**
@@ -199,48 +194,78 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
     public KyufuSHurui getKyufuSHurui(HihokenshaNo 被保険者番号, RString 整理番号, FlexibleYearMonth サービス提供年月, RString 差額支給対象者区分) {
         List<DbT7130KaigoServiceShuruiEntity> dbt7130entitys = dbT7130dac.getサービス種類名称List(サービス提供年月);
         List<DbT3053ShokanShukeiEntity> dbt3053entitys = dbT3053dac.get給付の種類(被保険者番号, サービス提供年月, 整理番号);
-        List<DbT3045ShokanServicePlan200004Entity> dbt3045entitys = dbT3045dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
-        List<DbT3046ShokanServicePlan200604Entity> dbt3046entitys = dbT3046dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
-        List<DbT3047ShokanServicePlan200904Entity> dbt3047entitys = dbT3047dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+
         List<DbT3043ShokanShokujiHiyoEntity> dbt3043entitys = dbT3043dac.select償還払請求食事費用(被保険者番号, サービス提供年月, 整理番号);
         List<DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity> dbt3050entitys = dbT3050dac.select償還払請求特定入所者介護サービス費用(被保険者番号, サービス提供年月, 整理番号);
         償還集計データ件数 = 0;
-        給付の種類Total = new ArrayList<>();
+        給付の種類 = RString.EMPTY;
+        isFirst = true;
         RStringBuilder builder = new RStringBuilder();
         if (!dbt3053entitys.isEmpty()) {
             for (DbT3053ShokanShukeiEntity entity3053 : dbt3053entitys) {
                 for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
                     if (entity7130.getServiceShuruiCd().equals(entity3053.getServiceShuruiCode())) {
-                        builder.append(entity7130.getServiceShuruiRyakusho());
-                        builder.append(間);
-                        給付の種類Total.add(builder.toRString());
-                        償還集計データ件数++;
+                        edit給付の種類Total(entity7130.getServiceShuruiRyakusho());
                     }
                 }
             }
         }
-        if (!dbt3047entitys.isEmpty()) {
-            for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
-                if (entity7130.getServiceShuruiCd().equals(固定)) {
-                    builder.append(entity7130.getServiceShuruiRyakusho());
-                    builder.append(間);
-                    給付の種類Total.add(builder.toRString());
-                    償還集計データ件数++;
+        if (サービス提供年月.isBefore(new FlexibleYearMonth("200604"))) {
+            List<DbT3045ShokanServicePlan200004Entity> dbt3045entitys = dbT3045dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+            if (!dbt3045entitys.isEmpty()) {
+                for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
+                    if (entity7130.getServiceShuruiCd().equals(固定)) {
+                        edit給付の種類Total(entity7130.getServiceShuruiRyakusho());
+                    }
+                }
+            }
+        } else if (サービス提供年月.isBefore(new FlexibleYearMonth("200903")) && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)) {
+            List<DbT3046ShokanServicePlan200604Entity> dbt3046entitys = dbT3046dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+            if (!dbt3046entitys.isEmpty()) {
+                for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
+                    if (entity7130.getServiceShuruiCd().equals(固定)) {
+                        edit給付の種類Total(entity7130.getServiceShuruiRyakusho());
+                    }
+                }
+            }
+        } else {
+            List<DbT3047ShokanServicePlan200904Entity> dbt3047entitys = dbT3047dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+            if (!dbt3047entitys.isEmpty()) {
+                for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
+                    if (entity7130.getServiceShuruiCd().equals(固定)) {
+                        edit給付の種類Total(entity7130.getServiceShuruiRyakusho());
+                    }
                 }
             }
         }
+        /* QA 償還払請求食事費用.サービスコードか見つかれません。
+         if (!dbt3043entitys.isEmpty()) {
+         for (DbT3043ShokanShokujiHiyoEntity entity3043 : dbt3043entitys) {
+         for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
+         if (entity7130.getServiceShuruiCd().equals(entity3043)) {
 
+         }
+         }
+         }
+         }*/
         if (!dbt3050entitys.isEmpty()) {
             for (DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity3050 : dbt3050entitys) {
                 for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
                     if (entity7130.getServiceShuruiCd().equals(entity3050.getServiceShuruiCode())) {
-                        builder.append(entity7130.getServiceShuruiRyakusho());
-                        builder.append(間);
-                        給付の種類Total.add(builder.toRString());
+                        if (isFirst) {
+                            給付の種類 = 給付の種類.concat(entity7130.getServiceShuruiRyakusho());
+                            isFirst = false;
+                        } else {
+                            if (給付の種類.indexOf(entity7130.getServiceShuruiRyakusho()) > -1) {
+                                給付の種類 = 給付の種類.concat(間)
+                                        .concat(entity7130.getServiceShuruiRyakusho());
+                            }
+                        }
                     }
                 }
             }
         }
+
         return null;
     }
 
@@ -321,4 +346,18 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         entity.set通知文7(get通知文文章(NUM_4, NUM_4));
     }
 
+    private RString edit給付の種類Total(RString ServiceShuruiRyakusho) {
+        if (isFirst) {
+            給付の種類 = 給付の種類.concat(ServiceShuruiRyakusho);
+            isFirst = false;
+            償還集計データ件数++;
+        } else {
+            if (給付の種類.indexOf(ServiceShuruiRyakusho) > -1) {
+                給付の種類 = 給付の種類.concat(間)
+                        .concat(ServiceShuruiRyakusho);
+                償還集計データ件数++;
+            }
+        }
+        return 給付の種類;
+    }
 }

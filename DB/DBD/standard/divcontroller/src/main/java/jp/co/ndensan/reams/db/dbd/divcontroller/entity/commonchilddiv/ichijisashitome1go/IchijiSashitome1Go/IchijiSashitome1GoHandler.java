@@ -161,13 +161,10 @@ public class IchijiSashitome1GoHandler {
      * 滞納状況ダイアログが確定クローズイベントで閉じられたときにダイアログが完全に閉じた後に実行されるイベントを設定します。
      */
     public void onOkClose_BtnTainoJokyo() {
-        RString 押下ボタン = ShoriKubun.toValue(div.getKey_Button()).get名称();
         TainoHanteiResultKohen 滞納判定結果 = ViewStateHolder.get(ViewStateKeys.滞納判定結果, TainoHanteiResultKohen.class);
         if (滞納判定結果 != null && 滞納判定結果.get滞納情報() != null) {
             div.setTainoHanteiKekka(DataPassingConverter.serialize(滞納判定結果));
-            if (押下ボタン.equals(_給付一時差止登録)) {
-                div.getBtnTainoJokyo().setIconNameEnum(IconName.Check);
-            }
+            div.getBtnTainoJokyo().setIconNameEnum(IconName.Check);
         }
     }
 
