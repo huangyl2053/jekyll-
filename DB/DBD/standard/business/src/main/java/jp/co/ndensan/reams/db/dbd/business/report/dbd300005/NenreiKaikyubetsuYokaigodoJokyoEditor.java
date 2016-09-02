@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd300005;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd583001.ToukeiNinzuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd300005.NenreiKaikyubetsuYokaigodoJokyoReportSource;
@@ -27,33 +28,29 @@ public class NenreiKaikyubetsuYokaigodoJokyoEditor implements INenreiKaikyubetsu
 
     private final RString 市町村番号;
     private final RString 市町村名;
-    private final RDate 基準日;
+    private final RString 基準日;
     private final RString 地区;
-    private final List<RString> 区分リスト1;
-    private final List<RString> 区分リスト2;
     private final List<ToukeiNinzuEntity> 統計人数Entityリスト;
     private final int index;
+    private static final int INDEX16 = 16;
+    private static final int INDEX31 = 31;
 
     /**
      * インスタンスを生成します。
      *
      * @param 市町村番号 RString
      * @param 市町村名 RString
-     * @param 基準日 RDate
+     * @param 基準日 RString
      * @param 地区 RString
-     * @param 区分リスト1 List<RString>
-     * @param 区分リスト2 List<RString>
      * @param 統計人数Entityリスト List<ToukeiNinzuEntity>
      * @param index int
      */
-    public NenreiKaikyubetsuYokaigodoJokyoEditor(RString 市町村番号, RString 市町村名, RDate 基準日, RString 地区,
-            List<RString> 区分リスト1, List<RString> 区分リスト2, List<ToukeiNinzuEntity> 統計人数Entityリスト, int index) {
+    public NenreiKaikyubetsuYokaigodoJokyoEditor(RString 市町村番号, RString 市町村名, RString 基準日, RString 地区,
+            List<ToukeiNinzuEntity> 統計人数Entityリスト, int index) {
         this.市町村番号 = 市町村番号;
         this.市町村名 = 市町村名;
         this.基準日 = 基準日;
         this.地区 = 地区;
-        this.区分リスト1 = 区分リスト1;
-        this.区分リスト2 = 区分リスト2;
         this.統計人数Entityリスト = 統計人数Entityリスト;
         this.index = index;
     }
@@ -64,8 +61,7 @@ public class NenreiKaikyubetsuYokaigodoJokyoEditor implements INenreiKaikyubetsu
     }
 
     private NenreiKaikyubetsuYokaigodoJokyoReportSource edit項目(NenreiKaikyubetsuYokaigodoJokyoReportSource source) {
-        source.kijunbi = 基準日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
-                Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+        source.kijunbi = 基準日;
         source.chiku = 地区;
         source.printTimeStamp = get印刷日時();
         source.shichosonName = 市町村名;
@@ -81,9 +77,16 @@ public class NenreiKaikyubetsuYokaigodoJokyoEditor implements INenreiKaikyubetsu
         source.list3_8 = new RString(統計人数Entityリスト.get(index).get要介護4人数().intValue());
         source.list3_9 = new RString(統計人数Entityリスト.get(index).get要介護5人数().intValue());
         source.list3_10 = new RString(統計人数Entityリスト.get(index).get合計().intValue());
+        edit区分リスト(source);
+        return source;
+    }
+
+    private void edit区分リスト(NenreiKaikyubetsuYokaigodoJokyoReportSource source) {
+        List<RString> 区分リスト1 = new ArrayList<>();
+        List<RString> 区分リスト2 = new ArrayList<>();
+        set区分リスト(区分リスト1, 区分リスト2);
         source.list1_1 = 区分リスト1.get(index / 2);
         source.list2_1 = 区分リスト2.get(index / 2);
-        return source;
     }
 
     private RString get印刷日時() {
@@ -97,6 +100,18 @@ public class NenreiKaikyubetsuYokaigodoJokyoEditor implements INenreiKaikyubetsu
         systemDateTime.append(RString.HALF_SPACE);
         systemDateTime.append(new RString("作成"));
         return systemDateTime.toRString();
+    }
+
+    private void set区分リスト(List<RString> 区分リスト1, List<RString> 区分リスト2) {
+        for (int index1 = 0; index1 <= INDEX31; index1++) {
+            if (index1 < INDEX16) {
+                区分リスト1.add(new RString("人数"));
+                区分リスト2.add(new RString("旧措置"));
+            } else {
+                区分リスト1.add(new RString("男"));
+                区分リスト2.add(new RString("女"));
+            }
+        }
     }
 
 }

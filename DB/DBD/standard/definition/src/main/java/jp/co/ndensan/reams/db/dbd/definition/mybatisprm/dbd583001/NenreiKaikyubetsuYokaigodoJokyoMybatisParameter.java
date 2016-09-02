@@ -32,6 +32,11 @@ public class NenreiKaikyubetsuYokaigodoJokyoMybatisParameter extends UaFt200Find
     private final boolean is住所;
     private final boolean is行政区;
     private final boolean is組合;
+    private boolean has基準日;
+    private boolean has基準年月;
+    private boolean has開始地区コード;
+    private boolean has終了地区コード;
+    private boolean has旧市町村コード;
 
     /**
      * コンストラクタです。
@@ -52,11 +57,28 @@ public class NenreiKaikyubetsuYokaigodoJokyoMybatisParameter extends UaFt200Find
         this.基準年月 = 基準年月;
         this.旧市町村コード = 旧市町村コード;
         this.地区区分 = 地区区分;
+        this.開始地区コード = 開始地区コード;
+        this.終了地区コード = 終了地区コード;
         this.is住所 = new RString("JUSHO").equals(地区区分);
         this.is行政区 = new RString("GYOSEIKU").equals(地区区分);
         this.is組合 = new RString("CHIKU2").equals(地区区分);
-        this.開始地区コード = 開始地区コード;
-        this.終了地区コード = 終了地区コード;
+
+        if (基準日 != null) {
+            this.has基準日 = true;
+        }
+        if (基準年月 != null) {
+            this.has基準年月 = true;
+        }
+        if (開始地区コード != null && !開始地区コード.isEmpty()) {
+            this.has開始地区コード = true;
+        }
+        if (終了地区コード != null && 終了地区コード.isEmpty()) {
+            this.has終了地区コード = true;
+        }
+        if (旧市町村コード != null && 旧市町村コード.isEmpty()) {
+            this.has旧市町村コード = true;
+        }
+
         this.psmShikibetsuTaisho = new UaFt200FindShikibetsuTaishoParam(shikibetsuTaishoPSMSearchKey);
 
     }
