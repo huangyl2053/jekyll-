@@ -486,6 +486,10 @@ public enum ReportIdDBC {
      */
     DBC300004(new ReportId("DBC300004_HeikinRiyoGakuTokeihyo"), new RString("平均利用額統計表")),
     /**
+     * 高額合算給付実績情報取込一覧表帳票ＩＤです。
+     */
+    DBC200041(new ReportId("DBC200041_GassanKyufujissekiTorikomiIchiran"), new RString("高額合算給付実績情報取込一覧表")),
+    /**
      * 介護保険高額サービス費受領委任契約承認（不承認）確認書帳票ＩＤです。
      */
     DBC100031(new ReportId("DBC100031_KogakuServiceHiJyuryoItakuKeiyakuKakuninSho"), new RString("介護保険高額サービス費受領委任契約承認（不承認）確認書"));
