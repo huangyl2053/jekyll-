@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteitsuchisho;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -34,7 +33,7 @@ public class KogakugassanShikyuKetteitsuchisho {
     private RString 改頁3;
     private RString 改頁4;
     private RString 改頁5;
-    private YubinNo 郵便番号;
+    private RString 郵便番号;
     private RString 行政区;
     private RString 住所Text;
     private RString 住所1;
@@ -84,6 +83,7 @@ public class KogakugassanShikyuKetteitsuchisho {
     private Decimal 計算対象期間中の自己負担額合計額;
     private RString 支給額タイトル;
     private Decimal 支給額;
+    private Decimal 自己負担総額;
     private RString 支給区分コード;
     private RString 給付の種類;
     private RString 備考;
@@ -101,6 +101,7 @@ public class KogakugassanShikyuKetteitsuchisho {
     private RString 預金種別;
     private RString 口座番号;
     private RString 口座名義人;
+    private FlexibleDate 支払予定日;
     private RString 文書2;
     private RString 文書3;
     private RString 文書4;

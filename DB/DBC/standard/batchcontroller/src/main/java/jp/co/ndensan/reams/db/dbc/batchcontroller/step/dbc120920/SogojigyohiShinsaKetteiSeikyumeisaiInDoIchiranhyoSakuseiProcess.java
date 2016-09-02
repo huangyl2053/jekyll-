@@ -166,7 +166,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInDoIchiranhyoSakuseiProcess
         sogojigyohiKagoKetteiInCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .setDelimiter(コンマ)
                 .setEnclosure(ダブル引用符)
-                .setEncode(Encode.SJIS)
+                .setEncode(Encode.UTF_8withBOM)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true)
                 .build();
@@ -276,8 +276,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInDoIchiranhyoSakuseiProcess
         output.set公費負担額(doカンマ編集(審査決定請求合計一時TBL.get合計_公費負担額()));
     }
 
-    private void edit高額介護サービス費項目(SogojigyohiShinsaKetteiSeikyumeisaiInEntity entity
-            , SogojigyohiShinsaKetteiSeikyumeisaiInCSVEntity output) {
+    private void edit高額介護サービス費項目(SogojigyohiShinsaKetteiSeikyumeisaiInEntity entity, SogojigyohiShinsaKetteiSeikyumeisaiInCSVEntity output) {
         DbWT1612SinsaKetteiSeikyuKogakuEntity 審査決定請求高額一時TBL = entity.get審査決定請求高額一時TBL();
         setEmpty(output);
         output.set事業者番号(アステリスク);
@@ -329,6 +328,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInDoIchiranhyoSakuseiProcess
         }
         return RString.EMPTY;
     }
+
     private RString パターン56(FlexibleYearMonth 年月) {
         if (null == 年月) {
             return RString.EMPTY;
