@@ -309,4 +309,26 @@ public class DbT7130KaigoServiceShuruiDac {
                 order(by(DbT7130KaigoServiceShurui.serviceShuruiCd, Order.DESC)).
                 toList(DbT7130KaigoServiceShuruiEntity.class);
     }
+
+    /**
+     * サービス種類名称Listを取得します。
+     *
+     * @param サービス提供年月 サービス提供年月
+     * @return List<DbT7130KaigoServiceShuruiEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT7130KaigoServiceShuruiEntity> getサービス種類名称List(
+            FlexibleYearMonth サービス提供年月) throws NullPointerException {
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7130KaigoServiceShurui.class).
+                where(and(
+                                leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, サービス提供年月),
+                                leq(サービス提供年月, DbT7130KaigoServiceShurui.teikyoshuryoYM),
+                                eq(DbT7130KaigoServiceShurui.isDeleted, false)
+                        ))
+                .toList(DbT7130KaigoServiceShuruiEntity.class);
+    }
 }
