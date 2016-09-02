@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -57,6 +58,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
     private static final RString 履歴番号 = new RString("履歴番号");
     private static final RString 起動 = new RString("1");
     private static final RString 停止 = new RString("0");
+    private static final RString 連絡票を = new RString("btnUpdate");
 
     /**
      * 画面初期化です。
@@ -72,19 +74,25 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
             throw new ApplicationException(
                     DbzErrorMessages.理由付き登録不可.getMessage().replace(引き継ぎ情報なし.toString()));
         }
+        div.setDisabled(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(連絡票を, false);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 引き継ぎ情報.get被保番号());
         if (!getHandler(div).is前排他キーのセット(引き継ぎ情報.get被保番号())) {
             throw new PessimisticLockingException();
         }
         if (!引き継ぎ情報.is論理削除フラグ()) {
             div.getJukyushaIdoRenrakuhyo().initialize(訂正モード, ShikibetsuCode.EMPTY,
-                    引き継ぎ情報.get被保番号(), 引き継ぎ情報.get履歴番号(), false, 引き継ぎ情報.get異動日());
+                    引き継ぎ情報.get被保番号(), 引き継ぎ情報.get履歴番号(),
+                    引き継ぎ情報.is論理削除フラグ(), 引き継ぎ情報.get異動日());
             ViewStateHolder.put(ViewStateKeys.モード, 訂正モード);
         } else {
             div.getJukyushaIdoRenrakuhyo().initialize(照会モード, ShikibetsuCode.EMPTY,
-                    引き継ぎ情報.get被保番号(), 引き継ぎ情報.get履歴番号(), true, 引き継ぎ情報.get異動日());
+                    引き継ぎ情報.get被保番号(), 引き継ぎ情報.get履歴番号(),
+                    引き継ぎ情報.is論理削除フラグ(), 引き継ぎ情報.get異動日());
             ViewStateHolder.put(ViewStateKeys.モード, 照会モード);
         }
+        div.getOutputJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoHenkoPrintSetting().
+                initialize(true, null, true, false, null, false);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         AccessLogger.log(AccessLogType.照会,
                 getHandler(div).toPersonalData(識別コード,
