@@ -117,7 +117,7 @@ public class SogojigyohiShikakuDoIchiranhyoSakuseiProcess
         csvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(カンマ).
                 setEnclosure(WRITER_ENCLOSURE).
-                setEncode(Encode.SJIS).
+                setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 hasHeader(true).
                 build();
