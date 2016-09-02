@@ -434,7 +434,12 @@ public class TekiyoJogaiRirekiHandler {
         if (rowList.isEmpty()) {
             return;
         }
-        datagridTekiyoJogai_Row row = div.getDatagridTekiyoJogai().getActiveRow();
+        datagridTekiyoJogai_Row row = new datagridTekiyoJogai_Row();
+        if(div.getDatagridTekiyoJogai().getActiveRow() != null){
+            row = div.getDatagridTekiyoJogai().getActiveRow();
+        }else{
+            row = div.getDatagridTekiyoJogai().getDataSource().get(0);
+        }
 //       for(datagridTekiyoJogai_Row row : rowList){
 //            if(row.getKaijoTodokeDate()==null||row.getKaijoTodokeDate().getText().isNullOrEmpty()){
                 RString 枝番 = new RString(Integer.parseInt(row.getEdaNo().trim().toString()) + 1).padZeroToLeft(PADZERO);
@@ -874,7 +879,7 @@ public class TekiyoJogaiRirekiHandler {
         div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().setDisabled(false);
         div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoTododkDateIn().setDisabled(false);
         div.getPanelTekiyoJokaiKaiJyoInput().getDdlKaijoJiyuInput().setDisabled(false);
-
+        
         div.getPanelTekiyoJokaiKaiJyoInput().getTxtTaisyoDateInput().clearValue();
         div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().clearValue();
         div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoTododkDateIn().clearValue();
@@ -1020,8 +1025,8 @@ public class TekiyoJogaiRirekiHandler {
                 && ((選択データ.getTekiyoTodokeDate().getValue() == null && div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue() == null) 
                     || ((選択データ.getTekiyoTodokeDate().getValue() != null && div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue() != null) 
                     && 選択データ.getTekiyoTodokeDate().getValue().equals(div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue())))
-                && ((選択データ.getTekiyoJiyuCode().isNullOrEmpty() && div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedKey().isNullOrEmpty())
-                    || ((!選択データ.getTekiyoJiyuCode().isNullOrEmpty() && !div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedKey().isNullOrEmpty())
+                && (((選択データ.getTekiyoJiyuCode() == null || 選択データ.getTekiyoJiyuCode().isNullOrEmpty()) && div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedKey().isNullOrEmpty())
+                    || (((選択データ.getTekiyoJiyuCode() != null || !選択データ.getTekiyoJiyuCode().isNullOrEmpty()) && !div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedKey().isNullOrEmpty())
                     && 選択データ.getTekiyoJiyuCode().equals(div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedKey())))
                 && ((選択データ.getKayijoDate().getValue() == null && div.getPanelTekiyoInput().getTxtKayijoDate().getValue() == null) 
                     || ((選択データ.getKayijoDate().getValue() != null && div.getPanelTekiyoInput().getTxtKayijoDate().getValue() != null) 
@@ -1029,8 +1034,8 @@ public class TekiyoJogaiRirekiHandler {
                 && ((選択データ.getKaijoTodokeDate().getValue() == null && div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue() == null)
                     || ((選択データ.getKaijoTodokeDate().getValue() != null && div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue() != null)
                     && 選択データ.getKaijoTodokeDate().getValue().equals(div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue())))
-                && ((選択データ.getKaijoJiyuCode().isNullOrEmpty() && div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey().isNullOrEmpty())
-                    || ((!選択データ.getKaijoJiyuCode().isNullOrEmpty() && !div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey().isNullOrEmpty())
+                && (((選択データ.getKaijoJiyuCode() == null || 選択データ.getKaijoJiyuCode().isNullOrEmpty()) && div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey().isNullOrEmpty())
+                    || (((選択データ.getKaijoJiyuCode() != null || !選択データ.getKaijoJiyuCode().isNullOrEmpty()) && !div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey().isNullOrEmpty())
                     && 選択データ.getKaijoJiyuCode().equals(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey())))) {
                 return false;
             }
@@ -1041,14 +1046,14 @@ public class TekiyoJogaiRirekiHandler {
                 && ((選択データ.getTekiyoTodokeDate().getValue() == null && div.getPanelTekiyoJokaiTekiInput().getTxtTkyoTododkDateIn().getValue() == null) 
                     || ((選択データ.getTekiyoTodokeDate().getValue() != null && div.getPanelTekiyoJokaiTekiInput().getTxtTkyoTododkDateIn().getValue() != null) 
                     && 選択データ.getTekiyoTodokeDate().getValue().equals(div.getPanelTekiyoJokaiTekiInput().getTxtTkyoTododkDateIn().getValue())))
-                && ((選択データ.getTekiyoJiyuCode().isNullOrEmpty() && div.getPanelTekiyoJokaiTekiInput().getDdlTekiyoJiyuInput().getSelectedKey().isNullOrEmpty())
-                    || ((!選択データ.getTekiyoJiyuCode().isNullOrEmpty() && !div.getPanelTekiyoJokaiTekiInput().getDdlTekiyoJiyuInput().getSelectedKey().isNullOrEmpty())
+                && (((選択データ.getTekiyoJiyuCode() == null || 選択データ.getTekiyoJiyuCode().isNullOrEmpty()) && div.getPanelTekiyoJokaiTekiInput().getDdlTekiyoJiyuInput().getSelectedKey().isNullOrEmpty())
+                    || (((選択データ.getTekiyoJiyuCode() != null || !選択データ.getTekiyoJiyuCode().isNullOrEmpty()) && !div.getPanelTekiyoJokaiTekiInput().getDdlTekiyoJiyuInput().getSelectedKey().isNullOrEmpty())
                     && 選択データ.getTekiyoJiyuCode().equals(div.getPanelTekiyoJokaiTekiInput().getDdlTekiyoJiyuInput().getSelectedKey())))
-                && ((選択データ.getNyushoShisetsuCode().isNullOrEmpty() && div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isNullOrEmpty())
-                    || ((!選択データ.getNyushoShisetsuCode().isNullOrEmpty() && !div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isNullOrEmpty())
+                && (((選択データ.getNyushoShisetsuCode() == null || 選択データ.getNyushoShisetsuCode().isNullOrEmpty()) && div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isNullOrEmpty())
+                    || (((選択データ.getNyushoShisetsuCode() != null || !選択データ.getNyushoShisetsuCode().isNullOrEmpty()) && !div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isNullOrEmpty())
                     && 選択データ.getNyushoShisetsuCode().equals(div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo())))
-                && ((選択データ.getNyuShoShisetu().isNullOrEmpty() && div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().getNyuryokuShisetsuMeisho().isNullOrEmpty())
-                    || ((!選択データ.getNyuShoShisetu().isNullOrEmpty() && !div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().getNyuryokuShisetsuMeisho().isNullOrEmpty())
+                && (((選択データ.getNyuShoShisetu() == null || 選択データ.getNyuShoShisetu().isNullOrEmpty()) && div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().getNyuryokuShisetsuMeisho().isNullOrEmpty())
+                    || (((選択データ.getNyuShoShisetu() != null || !選択データ.getNyuShoShisetu().isNullOrEmpty()) && !div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().getNyuryokuShisetsuMeisho().isNullOrEmpty())
                     && 選択データ.getNyuShoShisetu().equals(div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().getNyuryokuShisetsuMeisho())))
                 && ((選択データ.getNyuShoDate().getValue() == null && div.getPanelTekiyoJokaiTekiInput().getTxtNyusyoDateInput().getValue() == null)
                     || ((選択データ.getNyuShoDate().getValue() != null && div.getPanelTekiyoJokaiTekiInput().getTxtNyusyoDateInput().getValue() != null)
@@ -1065,8 +1070,8 @@ public class TekiyoJogaiRirekiHandler {
                 && ((選択データ.getKaijoTodokeDate().getValue() == null && div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoTododkDateIn().getValue() == null)
                     || ((選択データ.getKaijoTodokeDate().getValue() != null && div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoTododkDateIn().getValue() != null)
                     && 選択データ.getKaijoTodokeDate().getValue().equals(div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoTododkDateIn().getValue())))
-                && ((選択データ.getKaijoJiyuCode().isNullOrEmpty() && div.getPanelTekiyoJokaiKaiJyoInput().getDdlKaijoJiyuInput().getSelectedKey().isNullOrEmpty())
-                    || ((!選択データ.getKaijoJiyuCode().isNullOrEmpty() && !div.getPanelTekiyoJokaiKaiJyoInput().getDdlKaijoJiyuInput().getSelectedKey().isNullOrEmpty())
+                && (((選択データ.getKaijoJiyuCode() == null || 選択データ.getKaijoJiyuCode().isNullOrEmpty()) && div.getPanelTekiyoJokaiKaiJyoInput().getDdlKaijoJiyuInput().getSelectedKey().isNullOrEmpty())
+                    || (((選択データ.getKaijoJiyuCode() != null || !選択データ.getKaijoJiyuCode().isNullOrEmpty()) && !div.getPanelTekiyoJokaiKaiJyoInput().getDdlKaijoJiyuInput().getSelectedKey().isNullOrEmpty())
                     && 選択データ.getKaijoJiyuCode().equals(div.getPanelTekiyoJokaiKaiJyoInput().getDdlKaijoJiyuInput().getSelectedKey())))){
                 return false;
             }
