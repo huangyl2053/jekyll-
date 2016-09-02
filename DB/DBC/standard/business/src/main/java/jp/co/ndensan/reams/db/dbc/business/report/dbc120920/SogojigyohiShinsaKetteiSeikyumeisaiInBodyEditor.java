@@ -74,7 +74,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInBodyEditor
         source.gokeiKingaku = doカンマ編集(審査決定請求合計一時TBL.get合計_金額());
         source.gokeiKaigoKyufugaku = doカンマ編集(審査決定請求合計一時TBL.get合計_介護給付費_総合事業費());
         source.gokeiRiyoshaFutangaku = doカンマ編集(審査決定請求合計一時TBL.get合計_利用者負担額());
-        source.gokeiKohiFutangaku = doカンマ編集(審査決定請求合計一時TBL.get合計_利用者負担額());
+        source.gokeiKohiFutangaku = doカンマ編集(審査決定請求合計一時TBL.get合計_公費負担額());
     }
 
     private void edit高額(SogojigyohiShinsaKetteiSeikyumeisaihyoSource source) {
