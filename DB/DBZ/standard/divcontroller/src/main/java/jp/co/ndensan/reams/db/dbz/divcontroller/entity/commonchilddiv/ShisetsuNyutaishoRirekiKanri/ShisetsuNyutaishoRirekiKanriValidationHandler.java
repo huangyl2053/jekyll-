@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuN
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.core.calendar.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -43,7 +44,12 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs validateForUpdate() {
+
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getShisetsuNyutaishoInput().getTxtTaishoDate()));
+
         if (div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue() == null
                 || div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.入所日, div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
@@ -64,7 +70,7 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
         if (RString.isNullOrEmpty(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類())) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.施設種類));
         }
-        
+
         List<dgShisetsuNyutaishoRireki_Row> rowList = div.getDgShisetsuNyutaishoRireki().getDataSource();
         Collections.sort(rowList, new Comparator<dgShisetsuNyutaishoRireki_Row>() {
             @Override
@@ -153,7 +159,7 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
 
                 }
             }
-            
+
             if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()) {
                 if (rowId != 0) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.退所日,
