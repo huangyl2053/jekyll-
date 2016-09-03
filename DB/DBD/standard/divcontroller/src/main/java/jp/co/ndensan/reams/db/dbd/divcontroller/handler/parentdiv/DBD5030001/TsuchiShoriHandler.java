@@ -27,11 +27,8 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
  */
 public class TsuchiShoriHandler {
 
-    private boolean 更新Flag;
-
     /**
-     * ｐ
-     * 画面初期化
+     * 画面初期化です。
      *
      * @return List<dgtsuchishohakko_Row>
      */
@@ -100,6 +97,7 @@ public class TsuchiShoriHandler {
     public void ＤＢ処理(List<dgtsuchishohakko_Row> 画面更新情報) {
         TsuchiShoriManager manager = TsuchiShoriManager.createInstance();
         List<TsuchishoHakkoJoho> tsuchishoHakkoJohoList = manager.通知書発行情報();
+        boolean 更新Flag = false;
         for (dgtsuchishohakko_Row row : 画面更新情報) {
             for (TsuchishoHakkoJoho tsuchishoHakkoJoho : tsuchishoHakkoJohoList) {
                 if (row.getShinseishoKanriNo().equals(tsuchishoHakkoJoho.get申請書管理番号().value())) {
@@ -120,8 +118,9 @@ public class TsuchiShoriHandler {
                         FlexibleDate.EMPTY,
                         FlexibleDate.EMPTY,
                         FlexibleDate.EMPTY,
-                        new FlexibleDate(RDate.getNowDate().toString()));
-                manager.insert(tsuchishoHakkoJoho);
+                        FlexibleDate.getNowDate());
+                tsuchishoHakkoJoho = tsuchishoHakkoJoho.createBuilderForEdit().build().added();
+                manager.save(tsuchishoHakkoJoho);
                 更新Flag = false;
             }
         }

@@ -17,7 +17,6 @@ import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4122TsuchishoHakkoJo
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4122TsuchishoHakkoJoho.tsuchiYMD;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4122TsuchishoHakkoJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -36,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @reamsid_L DBD-9999-010 chenxin
  */
-public class DbT4122TsuchishoHakkoJohoDac implements IModifiable<DbT4122TsuchishoHakkoJohoEntity>, ISaveable<DbT4122TsuchishoHakkoJohoEntity> {
+public class DbT4122TsuchishoHakkoJohoDac implements ISaveable<DbT4122TsuchishoHakkoJohoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -104,27 +103,6 @@ public class DbT4122TsuchishoHakkoJohoDac implements IModifiable<DbT4122Tsuchish
                 toList(DbT4122TsuchishoHakkoJohoEntity.class);
     }
 
-    @Transaction
-    @Override
-    public int insert(DbT4122TsuchishoHakkoJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int update(DbT4122TsuchishoHakkoJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int delete(DbT4122TsuchishoHakkoJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
-    }
-
     /**
      * DbT4122TsuchishoHakkoJohoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
@@ -139,4 +117,5 @@ public class DbT4122TsuchishoHakkoJohoDac implements IModifiable<DbT4122Tsuchish
         //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
 }

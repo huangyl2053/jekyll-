@@ -66,10 +66,6 @@ public class TsuchiShori {
      * @return ResponseData<TsuchiShoriDiv>
      */
     public ResponseData<TsuchiShoriDiv> onClick_btnCsvoutput(TsuchiShoriDiv div) {
-        ValidationMessageControlPairs controlPairs選択行存在チェック = new ValidationMessageControlPairs();
-        if (controlPairs選択行存在チェック.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(controlPairs選択行存在チェック).respond();
-        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
@@ -118,10 +114,6 @@ public class TsuchiShori {
      * @return ResponseData<TsuchiShoriDiv>
      */
     public ResponseData<TsuchiShoriDiv> onClick_btnHakkou(TsuchiShoriDiv div) {
-        ValidationMessageControlPairs controlPairs選択行存在チェック = new ValidationMessageControlPairs();
-        if (controlPairs選択行存在チェック.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(controlPairs選択行存在チェック).respond();
-        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.確認_汎用.getMessage().replace("遷移しますが")).respond();
         }
@@ -138,10 +130,6 @@ public class TsuchiShori {
      * @return ResponseData<TsuchiShoriDiv>
      */
     public ResponseData<TsuchiShoriDiv> onClick_btnKanryo(TsuchiShoriDiv div) {
-        ValidationMessageControlPairs controlPairs選択行存在チェック = new ValidationMessageControlPairs();
-        if (controlPairs選択行存在チェック.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(controlPairs選択行存在チェック).respond();
-        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
@@ -151,9 +139,6 @@ public class TsuchiShori {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().validateFor通知書発行対象者一覧データの存在チェック(pairs, div);
         getValidationHandler().validateFor通知書発行対象者一覧データの行選択チェック(pairs, div);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        }
         getValidationHandler().validateFor通知書発行対象者一覧選択行の完了処理事前チェック(pairs, div);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();

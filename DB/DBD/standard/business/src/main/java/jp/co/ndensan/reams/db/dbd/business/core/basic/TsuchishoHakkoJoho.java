@@ -205,7 +205,18 @@ public class TsuchishoHakkoJoho
     }
 
     /**
-     * 通知書発行情報のみを変更対象とします。<br/>
+     * 保持する通知書発行情報を挿入対象とします。<br/>
+     *
+     * @return added対象処理実施後の{@link TsuchishoHakkoJoho}
+     */
+    public TsuchishoHakkoJoho added() {
+        DbT4122TsuchishoHakkoJohoEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new TsuchishoHakkoJoho(addedEntity, id);
+    }
+
+    /**
+     * 保持する通知書発行情報のみを変更対象とします。<br/>
      * {@link DbT4122TsuchishoHakkoJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link TsuchishoHakkoJoho}

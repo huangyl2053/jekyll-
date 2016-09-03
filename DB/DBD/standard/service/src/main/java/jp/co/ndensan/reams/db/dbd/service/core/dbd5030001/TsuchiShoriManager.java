@@ -32,11 +32,6 @@ public class TsuchiShoriManager {
         this.通知書発行情報dac = InstanceProvider.create(DbT4122TsuchishoHakkoJohoDac.class);
     }
 
-    TsuchiShoriManager(MapperProvider mapperProvider) {
-        this.mapperProvider = mapperProvider;
-        this.通知書発行情報dac = InstanceProvider.create(DbT4122TsuchishoHakkoJohoDac.class);
-    }
-
     /**
      * TsuchiShoriManagerのインスタンス化
      *
@@ -93,6 +88,6 @@ public class TsuchiShoriManager {
      */
     @Transaction
     public void insert(TsuchishoHakkoJoho 画面情報) {
-        通知書発行情報dac.insert(画面情報.toEntity());
+        通知書発行情報dac.save(画面情報.toEntity());
     }
 }
