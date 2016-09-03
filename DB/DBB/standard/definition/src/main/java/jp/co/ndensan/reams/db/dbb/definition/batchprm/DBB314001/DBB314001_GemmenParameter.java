@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB314001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb314001.GemmenProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -23,8 +24,9 @@ import lombok.Setter;
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-
 public class DBB314001_GemmenParameter extends BatchParameterBase {
+
+    private static final long serialVersionUID = 1L;
 
     private static final String KEY_CHOTEINENDO = "choteiNendo";
     private static final String KEY_FUKANENDO = "fukaNendo";
@@ -44,15 +46,15 @@ public class DBB314001_GemmenParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_FUKANENDO, name = "賦課年度")
     private FlexibleYear fukaNendo;
     @BatchParameter(key = KEY_LIST町域コード, name = "list<町域コード>")
-    private List list町域コード;
+    private List<RString> list町域コード;
     @BatchParameter(key = KEY_LIST行政区コード, name = "list<行政区コード>")
-    private List list行政区コード;
+    private List<RString> list行政区コード;
     @BatchParameter(key = KEY_LIST地区1コード, name = "list<地区1コード>")
-    private List list地区1コード;
+    private List<RString> list地区1コード;
     @BatchParameter(key = KEY_LIST地区2コード, name = "list<地区2コード>")
-    private List list地区2コード;
+    private List<RString> list地区2コード;
     @BatchParameter(key = KEY_LIST地区3コード, name = "list<地区3コード>")
-    private List list地区3コード;
+    private List<RString> list地区3コード;
     @BatchParameter(key = KEY_SHINSEIYMD, name = "申請日")
     private FlexibleDate shinseiYMD;
     @BatchParameter(key = KEY_GEMMENJIYUCODE, name = "減免種類")
@@ -63,4 +65,14 @@ public class DBB314001_GemmenParameter extends BatchParameterBase {
     private FlexibleDate ketteiYMD;
     @BatchParameter(key = KEY_GEMMENJIYU, name = "決定理由")
     private RString gemmenJiyu;
+
+    /**
+     * toProcessParameter
+     *
+     * @return GemmenProcessParameter
+     */
+    public GemmenProcessParameter toProcessParameter() {
+        return new GemmenProcessParameter(choteiNendo, fukaNendo, list町域コード, list行政区コード, list地区1コード,
+                list地区2コード, list地区3コード, shinseiYMD, gemmenJiyuCode, shinseiJiyu, ketteiYMD, gemmenJiyu);
+    }
 }
