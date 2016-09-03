@@ -54,7 +54,7 @@ public enum SogojigyohiKagoKetteitsuchishoTorikomiOutPutOrder implements IReport
     /**
      * 取り扱い年月
      */
-    取り扱い年月(new RString("0363"), new RString("toriatsukaiYM"), new RString("DbWT3061.\"toriatsukaiYM\""));
+    取り扱い年月(new RString("0363"), new RString("toriatsukaiYm"), new RString("DbWT3061.\"toriatsukaiYm\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;
