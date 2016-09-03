@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.ShikakuHenkoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.ShikakuHenkoRirekiHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.ShikakuHenkoRirekiValidationHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -197,6 +198,10 @@ public class ShikakuHenkoRireki {
         Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> result = ViewStateHolder.get(ViewStateKeys.被保険者台帳情報, Models.class);
 
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+
+        validationMessages.add(TextBoxFlexibleDateValidator.validate暦上日(henkoRirekiDiv.getHenkoInput().getTxtHenkoDate()));
+        validationMessages.add(TextBoxFlexibleDateValidator.validate暦上日(henkoRirekiDiv.getHenkoInput().getTxtHenkoTodokedeDate()));
+
         HihokenshaDaicho hihokenshaDaicho;
         if (henkoRirekiDiv.getInputMode().equals(ViewExecutionStatus.Add.getValue())) {
             hihokenshaDaicho = getHandler(henkoRirekiDiv).getTsuikaEntity(result);

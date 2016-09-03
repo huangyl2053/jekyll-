@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuN
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -44,10 +45,12 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
      */
     public ValidationMessageControlPairs validateForUpdate() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getShisetsuNyutaishoInput().getTxtTaishoDate()));
         if (!div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
             if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue() != null
-                    && !div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()
-                    && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().
+                && !div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()
+                && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().
                     isBeforeOrEquals(div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue())) {
                 validPairs.add(new ValidationMessageControlPair(
                         RRVMessages.前後関係逆転,
@@ -55,11 +58,11 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
                         div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
             }
         }
-        
+
         if (RString.isNullOrEmpty(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類())) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.施設種類));
         }
-        
+
         List<dgShisetsuNyutaishoRireki_Row> rowList = div.getDgShisetsuNyutaishoRireki().getDataSource();
         Collections.sort(rowList, new Comparator<dgShisetsuNyutaishoRireki_Row>() {
             @Override
@@ -148,7 +151,7 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
 
                 }
             }
-            
+
             if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()) {
                 if (rowId != 0) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.退所日,

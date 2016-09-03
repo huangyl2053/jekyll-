@@ -12,9 +12,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -38,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiNenkinShokaiDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -140,7 +141,8 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
 
     public static enum ModeC implements ICommonChildDivMode {
 
-        init("init");
+        init("init"),
+        update("update");
 
         private final String name;
 
@@ -295,6 +297,13 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
         ViewStateHolder.put(ViewStateKeys.老齢福祉年金情報検索結果一覧, roreiFukushiNenkinJukyusha);
     }
 
+    @Override
+    public void initialize(Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha) {
+        List<RoreiFukushiNenkinJukyusha> rofukuList = new ArrayList<>(roreiFukushiNenkinJukyusha.values());
+        getHandler(this).set老齢福祉年金情報一覧表示グリッド(rofukuList);
+        ViewStateHolder.put(ViewStateKeys.老齢福祉年金情報検索結果一覧, roreiFukushiNenkinJukyusha);
+    }
+
     /**
      * 画面データをデータベースに格納します。
      */
@@ -307,6 +316,11 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
         }
         RoreiFukushiNenkinJukyushaManager manager = getService();
         manager.save老齢福祉年金受給者All(roreiFukushiNenkinJukyusha);
+    }
+
+    @Override
+    public Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> getSaveData() {
+        return ViewStateHolder.get(ViewStateKeys.老齢福祉年金情報検索結果一覧, Models.class);
     }
 
     /**
@@ -347,5 +361,15 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
             }
         }
         return false;
+    }
+
+    @Override
+    public void setShokaiMode() {
+        this.setMode_ModeC(RoreiFukushiNenkinShokaiDiv.ModeC.init);
+    }
+
+    @Override
+    public void setTorokuMode() {
+        this.setMode_ModeC(RoreiFukushiNenkinShokaiDiv.ModeC.update);
     }
 }

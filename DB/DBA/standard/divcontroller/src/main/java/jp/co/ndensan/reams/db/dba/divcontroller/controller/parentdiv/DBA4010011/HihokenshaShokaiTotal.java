@@ -15,7 +15,12 @@ import jp.co.ndensan.reams.db.dba.service.report.hihokenshadaicho.HihokenshaDaic
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import static jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryoHokenRirekiState;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RofukuNenkinState;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoState;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ShoKaishuKirokuState;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -74,8 +79,16 @@ public class HihokenshaShokaiTotal {
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
 
+        div.getHihokenshaShokaiPanel().getCcdShisetsuTokusoRireki().initialize(hihokenshaNo, shikibetsuCode);
+
         div.getKihonJoho().getCcdKaigoAtenaInfo().initialize(shikibetsuCode);
         div.getKihonJoho().getCcdKaigoShikakuKihon().initialize(shikibetsuCode);
+        div.getHihokenshaShokaiPanel().getCcdIryoHokenButton().initialize(hihokenshaNo, shikibetsuCode, IryoHokenRirekiState.照会);
+        div.getHihokenshaShokaiPanel().getCcdRofukuNenkinButton().initialize(hihokenshaNo, shikibetsuCode, RofukuNenkinState.照会);
+        div.getHihokenshaShokaiPanel().getCcdShisetsuNyutaishoButton().initialize(
+                shikibetsuCode, DaichoType.被保険者.getコード(), ShisetsuNyutaishoState.照会);
+        div.getHihokenshaShokaiPanel().getCcdShoKofuKaishuButton().initialize(hihokenshaNo, ShoKaishuKirokuState.照会);
+        div.getHihokenshaShokaiPanel().getCcdSetaiShotokuButton().initialize(shikibetsuCode);
 
         return ResponseData.of(div).respond();
     }
@@ -172,99 +185,4 @@ public class HihokenshaShokaiTotal {
         ViewStateHolder.put(ViewStateKeys.状態, 照会);
         return ResponseData.of(div).forwardWithEventName(DBA4010011TransitionEventName.被保険者詳細).respond();
     }
-
-    /**
-     * 被保険者履歴の初期化を、タブを開いた最初のタイミングで行います。
-     *
-     * @param div 被保険者照会DIV
-     * @return ResponseData<HihokenshaShokaiTotalDiv>
-     */
-    public ResponseData<HihokenshaShokaiTotalDiv> onFirstActive_tplHihokenshaRireki(HihokenshaShokaiTotalDiv div) {
-        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        ShikibetsuCode shikibetsuCode = key.get識別コード();
-        HihokenshaNo hihokenshaNo = key.get被保険者番号();
-
-        div.getHihokenshaShokaiPanel().getCcdShisetsuTokusoRireki().initialize(hihokenshaNo, shikibetsuCode);
-        div.setHihokenshaRirekiFlag(LOAD済み);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 世帯照会情報の初期化を、タブを開いた最初のタイミングで行います。
-     *
-     * @param div 被保険者照会DIV
-     * @return ResponseData<HihokenshaShokaiTotalDiv>
-     */
-    public ResponseData<HihokenshaShokaiTotalDiv> onFirstActive_tplSetaiShokai(HihokenshaShokaiTotalDiv div) {
-        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        ShikibetsuCode shikibetsuCode = key.get識別コード();
-
-        div.getHihokenshaShokaiPanel().getCcdSeitaiIchiran().initialize(shikibetsuCode, FlexibleDate.getNowDate(),
-                FlexibleDate.getNowDate().getNendo(), YMDHMS.now());
-        div.setSetaiShokaiFlag(LOAD済み);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 医療保険履歴の初期化を、タブを開いた最初のタイミングで行います。
-     *
-     * @param div 被保険者照会DIV
-     * @return ResponseData<HihokenshaShokaiTotalDiv>
-     */
-    public ResponseData<HihokenshaShokaiTotalDiv> onFirstActive_tplIryoHoken(HihokenshaShokaiTotalDiv div) {
-        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        ShikibetsuCode shikibetsuCode = key.get識別コード();
-        HihokenshaNo hihoNo = key.get被保険者番号();
-
-        div.getHihokenshaShokaiPanel().getCcdIryoHokenRireki().initialize(照会, shikibetsuCode.value(), hihoNo, LasdecCode.EMPTY);
-        div.setIryoHokenFlag(LOAD済み);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 老齢福祉年金履歴の初期化を、タブを開いた最初のタイミングで行います。
-     *
-     * @param div 被保険者照会DIV
-     * @return ResponseData<HihokenshaShokaiTotalDiv>
-     */
-    public ResponseData<HihokenshaShokaiTotalDiv> onFirstActive_tplRofukuNenkin(HihokenshaShokaiTotalDiv div) {
-        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        ShikibetsuCode shikibetsuCode = key.get識別コード();
-        HihokenshaNo hihokenshaNo = key.get被保険者番号();
-
-        div.getHihokenshaShokaiPanel().getCcdRoreiFukushiNenkinShokai().initialize(shikibetsuCode, hihokenshaNo);
-        div.setRofukuNenkinFlag(LOAD済み);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 施設入退所履歴の初期化を、タブを開いた最初のタイミングで行います。
-     *
-     * @param div 被保険者照会DIV
-     * @return ResponseData<HihokenshaShokaiTotalDiv>
-     */
-    public ResponseData<HihokenshaShokaiTotalDiv> onFirstActive_tplShisetsuNyutaisho(HihokenshaShokaiTotalDiv div) {
-        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        ShikibetsuCode shikibetsuCode = key.get識別コード();
-
-        div.getHihokenshaShokaiPanel().getCcdShisetsuNyutaishoRireki().initialize(shikibetsuCode, new RString("1"));
-        div.setShisetsuNyutaishoFlag(LOAD済み);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 証交付回収履歴の初期化を、タブを開いた最初のタイミングで行います。
-     *
-     * @param div 被保険者照会DIV
-     * @return ResponseData<HihokenshaShokaiTotalDiv>
-     */
-    public ResponseData<HihokenshaShokaiTotalDiv> onFirstActive_tplShoKofuKaishu(HihokenshaShokaiTotalDiv div) {
-        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        HihokenshaNo hihokenshaNo = key.get被保険者番号();
-
-        div.getHihokenshaShokaiPanel().getCcdShoKaishuJokyoList().initialize(照会, hihokenshaNo);
-        div.setShoKofuKaishuFlag(LOAD済み);
-        return ResponseData.of(div).respond();
-    }
-
 }

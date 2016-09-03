@@ -13,10 +13,13 @@ import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * ShisetsuNyutaishoRirekiKanri のクラスファイル
@@ -411,6 +414,11 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
         getHandler().initialize(識別コード, 台帳種別);
     }
 
+    @Override
+    public void initialize(List<dgShisetsuNyutaishoRireki_Row> データソース, Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model) {
+        getHandler().initialize(データソース, 施設入退所情報Model);
+    }
+
     /**
      * 施設入退所履歴の共有子DIVの画面内容から、施設入退所履歴情報をDBに反映します。
      */
@@ -450,8 +458,31 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     @Override
+    public Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> getSaveData() {
+        return getHandler().getSaveData();
+    }
+
+    @Override
     public boolean isSavable() {
         return getHandler().isSavable();
+    }
+
+    @Override
+    public void setShokaiMode() {
+        this.setMode_DisplayMode(DisplayMode.照会);
+        this.setMode_DataGridHeight(DataGridHeight.サイズ300);
+        this.setMode_DataGridWidth(DataGridWidth.モード5);
+        this.setMode_MeisaiMode(MeisaiMode.非表示);
+        this.setMode_Riyou(Riyou.被保険者対象機能);
+    }
+
+    @Override
+    public void setTorokuMode() {
+        this.setMode_DisplayMode(DisplayMode.資格異動);
+        this.setMode_DataGridHeight(DataGridHeight.サイズ300);
+        this.setMode_DataGridWidth(DataGridWidth.モード1);
+        this.setMode_MeisaiMode(MeisaiMode.追加_修正);
+        this.setMode_Riyou(Riyou.他市町村住所地特例者対象機能);
     }
 
 }
