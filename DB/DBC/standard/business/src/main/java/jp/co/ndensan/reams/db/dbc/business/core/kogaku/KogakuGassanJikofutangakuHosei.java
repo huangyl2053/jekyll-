@@ -30,6 +30,7 @@ public class KogakuGassanJikofutangakuHosei implements Serializable {
     private HokenshaNo 保険者番号;
     private RString 支給申請書整理番号;
     private RString 履歴番号;
+    private FlexibleDate 生年月日;
     private RString 算定区分;
     private HokenshaNo 証記載保険者番号;
     private FlexibleYearMonth 受取年月;
