@@ -80,34 +80,36 @@ public class JikoFutangakuJohoHoseiJohoDg {
      */
     public ResponseData<JikoFutangakuJohoHoseiJohoDgDiv> onLoad(JikoFutangakuJohoHoseiJohoDgDiv div) {
         TaishoshaKey 対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        HihokenshaNo 被保険者番号 = 対象者.get被保険者番号();
-        JikoFutangakuJohoHoseiJohoDgHandler handler = getHandler(div);
-        if (対象者 == null || 被保険者番号 == null || 被保険者番号.isEmpty()) {
-            throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace(被保険者番号なし.toString()));
+        if (対象者 != null) {
+            HihokenshaNo 被保険者番号 = 対象者.get被保険者番号();
+            JikoFutangakuJohoHoseiJohoDgHandler handler = getHandler(div);
+            if (被保険者番号 == null || 被保険者番号.isEmpty()) {
+                throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace(被保険者番号なし.toString()));
+            }
+            handler.initializeDisplay(対象者);
+            RString 前排他キー = 排他キー.concat(被保険者番号.getColumnValue());
+            LockingKey key = new LockingKey(前排他キー);
+            if (!RealInitialLocker.tryGetLock(key)) {
+                throw new PessimisticLockingException();
+            }
+            JukyushaDaichoManager 受給者台帳manager = new JukyushaDaichoManager();
+            List<JukyushaDaicho> 受給者台帳List = 受給者台帳manager.get受給者台帳被保険者番号(被保険者番号);
+            SogoJigyoTaishoshaManager 総合事業対象者manager = new SogoJigyoTaishoshaManager();
+            List<SogoJigyoTaishosha> 総合事業対象者List
+                    = 総合事業対象者manager.get総合事業対象者情報(被保険者番号);
+            KogakuGassanJikoFutanGakuManager 高額合算manager = new KogakuGassanJikoFutanGakuManager();
+            List<KogakuGassanJikoFutanGaku> 高額合算List = 高額合算manager.getBy被保険者番号(被保険者番号);
+            if (受給者台帳List.isEmpty() && 総合事業対象者List.isEmpty() && !ResponseHolder.isReRequest()) {
+                throw new ApplicationException(
+                        DbdErrorMessages.受給共通_受給者_事業対象者登録なし.getMessage());
+            }
+            if (高額合算List.isEmpty() && (!ResponseHolder.isReRequest()
+                    || new RString(DbdErrorMessages.受給共通_受給者_事業対象者登録なし
+                            .getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
+                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+            }
+            onClick_chkRirekiHyouji(div);
         }
-        handler.initializeDisplay(対象者);
-        RString 前排他キー = 排他キー.concat(被保険者番号.getColumnValue());
-        LockingKey key = new LockingKey(前排他キー);
-        if (!RealInitialLocker.tryGetLock(key)) {
-            throw new PessimisticLockingException();
-        }
-        JukyushaDaichoManager 受給者台帳manager = new JukyushaDaichoManager();
-        List<JukyushaDaicho> 受給者台帳List = 受給者台帳manager.get受給者台帳被保険者番号(被保険者番号);
-        SogoJigyoTaishoshaManager 総合事業対象者manager = new SogoJigyoTaishoshaManager();
-        List<SogoJigyoTaishosha> 総合事業対象者List
-                = 総合事業対象者manager.get総合事業対象者情報(被保険者番号);
-        KogakuGassanJikoFutanGakuManager 高額合算manager = new KogakuGassanJikoFutanGakuManager();
-        List<KogakuGassanJikoFutanGaku> 高額合算List = 高額合算manager.getBy被保険者番号(被保険者番号);
-        if (受給者台帳List.isEmpty() && 総合事業対象者List.isEmpty() && !ResponseHolder.isReRequest()) {
-            throw new ApplicationException(
-                    DbdErrorMessages.受給共通_受給者_事業対象者登録なし.getMessage());
-        }
-        if (高額合算List.isEmpty() && (!ResponseHolder.isReRequest()
-                || new RString(DbdErrorMessages.受給共通_受給者_事業対象者登録なし
-                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-        }
-        onClick_chkRirekiHyouji(div);
         return ResponseData.of(div).setState(DBC1140011StateName.自己負担額一覧);
     }
 
