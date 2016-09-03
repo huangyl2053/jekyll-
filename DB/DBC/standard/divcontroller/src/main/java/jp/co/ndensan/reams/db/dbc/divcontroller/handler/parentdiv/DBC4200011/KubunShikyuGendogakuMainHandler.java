@@ -647,42 +647,42 @@ public class KubunShikyuGendogakuMainHandler {
                 row.getTekiyoKaishiYM().getValue().getYearMonth().toDateString());
         RString 要介護状態区分 = null;
         RString テーブル区分 = row.getTableKubun();
-        if (div.getKubunShikyuGendogakuShosai().getTxtYokaigo1ShikyuGendogaku().getValue() != null) {
+        if (row.getYokaigo1ShikyuGendogaku().getValue() != null) {
             要介護状態区分 = KubunShikyuGendogakuYokaigoJotaiKubun.要介護1.getコード();
             setUpdateList2(要介護状態区分, テーブル区分, 適用開始年月, 適用終了年月, update居宅List,
                     update上乗せList, 居宅HolderList, 上乗せ居宅HolderList);
         }
-        if (div.getKubunShikyuGendogakuShosai().getTxtYokaigo2ShikyuGendogaku().getValue() != null) {
+        if (row.getYokaigo2ShikyuGendogaku().getValue() != null) {
             要介護状態区分 = KubunShikyuGendogakuYokaigoJotaiKubun.要介護2.getコード();
             setUpdateList2(要介護状態区分, テーブル区分, 適用開始年月, 適用終了年月, update居宅List,
                     update上乗せList, 居宅HolderList, 上乗せ居宅HolderList);
         }
-        if (div.getKubunShikyuGendogakuShosai().getTxtYokaigo3ShikyuGendogaku().getValue() != null) {
+        if (row.getYokaigo3ShikyuGendogaku().getValue() != null) {
             要介護状態区分 = KubunShikyuGendogakuYokaigoJotaiKubun.要介護3.getコード();
             setUpdateList2(要介護状態区分, テーブル区分, 適用開始年月, 適用終了年月, update居宅List,
                     update上乗せList, 居宅HolderList, 上乗せ居宅HolderList);
         }
-        if (div.getKubunShikyuGendogakuShosai().getTxtYokaigo4ShikyuGendogaku().getValue() != null) {
+        if (row.getYokaigo4ShikyuGendogaku().getValue() != null) {
             要介護状態区分 = KubunShikyuGendogakuYokaigoJotaiKubun.要介護4.getコード();
             setUpdateList2(要介護状態区分, テーブル区分, 適用開始年月, 適用終了年月, update居宅List,
                     update上乗せList, 居宅HolderList, 上乗せ居宅HolderList);
         }
-        if (div.getKubunShikyuGendogakuShosai().getTxtYokaigo5ShikyuGendogaku().getValue() != null) {
+        if (row.getYokaigo5ShikyuGendogaku().getValue() != null) {
             要介護状態区分 = KubunShikyuGendogakuYokaigoJotaiKubun.要介護5.getコード();
             setUpdateList2(要介護状態区分, テーブル区分, 適用開始年月, 適用終了年月, update居宅List,
                     update上乗せList, 居宅HolderList, 上乗せ居宅HolderList);
         }
-        if (div.getKubunShikyuGendogakuShosai().getTxtKeikaKaigoShikyuGendogaku().getValue() != null) {
+        if (row.getKeikaKaigoShikyuGendogaku().getValue() != null) {
             要介護状態区分 = KubunShikyuGendogakuYokaigoJotaiKubun.経過介護.getコード();
             setUpdateList2(要介護状態区分, テーブル区分, 適用開始年月, 適用終了年月, update居宅List,
                     update上乗せList, 居宅HolderList, 上乗せ居宅HolderList);
         }
-        if (div.getKubunShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue() != null) {
+        if (row.getYoshien1ShikyuGendogaku().getValue() != null) {
             要介護状態区分 = KubunShikyuGendogakuYokaigoJotaiKubun.要支援1.getコード();
             setUpdateList2(要介護状態区分, テーブル区分, 適用開始年月, 適用終了年月, update居宅List,
                     update上乗せList, 居宅HolderList, 上乗せ居宅HolderList);
         }
-        if (div.getKubunShikyuGendogakuShosai().getTxtYoshien2ShikyuGendogaku().getValue() != null) {
+        if (row.getYoshien2ShikyuGendogaku().getValue() != null) {
             要介護状態区分 = KubunShikyuGendogakuYokaigoJotaiKubun.要支援2.getコード();
             setUpdateList2(要介護状態区分, テーブル区分, 適用開始年月, 適用終了年月, update居宅List,
                     update上乗せList, 居宅HolderList, 上乗せ居宅HolderList);
