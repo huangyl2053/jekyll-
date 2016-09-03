@@ -488,7 +488,9 @@ public class TaJushochiTokureishaKanriHandler {
                 rireki_Row.setJotai(状態_追加);
                 rireki_Row.setShikibetsuCode(識別コード.getColumnValue());
                 rireki_Row.getTekiyoYMD().setValue(new RDate(div.getTxtTekiyobi().getValue().toString()));
-                rireki_Row.getTekiyoTodokedeYMD().setValue(new RDate(div.getTxtTekiyoTodokedebi().getValue().toString()));
+                if (div.getTxtTekiyoTodokedebi().getValue() != null) {
+                   rireki_Row.getTekiyoTodokedeYMD().setValue(new RDate(div.getTxtTekiyoTodokedebi().getValue().toString()));
+                }
                 if (div.getDdlTekiyoJiyo().getSelectedKey() != null) {
                     rireki_Row.setTekiyoJiyu(div.getDdlTekiyoJiyo().getSelectedKey());
                     rireki_Row.setTekiyoJiyuCode(div.getDdlTekiyoJiyo().getSelectedValue());

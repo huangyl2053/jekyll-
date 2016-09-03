@@ -93,8 +93,6 @@ public class TekiyoJogaiRireki {
         datagridTekiyoJogai_Row row = new datagridTekiyoJogai_Row();
         if(requestDiv.getDatagridTekiyoJogai().getActiveRow() != null){
             row = requestDiv.getDatagridTekiyoJogai().getActiveRow();
-        }else{
-            row = requestDiv.getDatagridTekiyoJogai().getDataSource().get(0);
         }
         if (!ResponseHolder.isReRequest() 
                 && getHandler(requestDiv).onClick_Torikeshi_ForChange(row)) {
