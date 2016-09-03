@@ -183,13 +183,13 @@ public class NinteiShienCenterSoshinHandler {
             return 二次判定結果;
         }
         if (A_99.equals(厚労省IF識別コード)) {
-            二次判定結果 = YokaigoJotaiKubun99.toValue(二次判定要介護状態区分コード.value()).get略称();
+            二次判定結果 = YokaigoJotaiKubun99.toValue(二次判定要介護状態区分コード.value()).get名称();
         } else if (A_02.equals(厚労省IF識別コード)) {
-            二次判定結果 = YokaigoJotaiKubun02.toValue(二次判定要介護状態区分コード.value()).get略称();
+            二次判定結果 = YokaigoJotaiKubun02.toValue(二次判定要介護状態区分コード.value()).get名称();
         } else if (A_06.equals(厚労省IF識別コード)) {
-            二次判定結果 = YokaigoJotaiKubun06.toValue(二次判定要介護状態区分コード.value()).get略称();
+            二次判定結果 = YokaigoJotaiKubun06.toValue(二次判定要介護状態区分コード.value()).get名称();
         } else if (A_09.equals(厚労省IF識別コード) || B_09.equals(厚労省IF識別コード)) {
-            二次判定結果 = YokaigoJotaiKubun09.toValue(二次判定要介護状態区分コード.value()).get略称();
+            二次判定結果 = YokaigoJotaiKubun09.toValue(二次判定要介護状態区分コード.value()).get名称();
         }
         return 二次判定結果;
     }

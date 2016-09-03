@@ -338,14 +338,14 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
         entity.set要介護認定終了日(ninshi.getNinteiYukoKikanShuryoYMD().wareki().separator(Separator.JAPANESE).
                 fillType(FillType.BLANK).toDateString());
         if (ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("99A"))) {
-            entity.set要介護状態区分(YokaigoJotaiKubun99.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get略称());
+            entity.set要介護状態区分(YokaigoJotaiKubun99.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get名称());
         } else if (ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("02A"))) {
-            entity.set要介護状態区分(YokaigoJotaiKubun02.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get略称());
+            entity.set要介護状態区分(YokaigoJotaiKubun02.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get名称());
         } else if (ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("06A"))) {
-            entity.set要介護状態区分(YokaigoJotaiKubun06.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get略称());
+            entity.set要介護状態区分(YokaigoJotaiKubun06.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get名称());
         } else if (ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("09B"))
                 && ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("09A"))) {
-            entity.set要介護状態区分(YokaigoJotaiKubun09.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get略称());
+            entity.set要介護状態区分(YokaigoJotaiKubun09.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get名称());
         }
 
         return entity;
@@ -392,14 +392,14 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
         entity.set被保険者番号(ninshi.getHihokenshaNo());
         entity.set被保険者氏名(ninshi.getHihokenshaName().getColumnValue());
         if (ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("99A"))) {
-            entity.set要介護度(YokaigoJotaiKubun99.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get略称());
+            entity.set要介護度(YokaigoJotaiKubun99.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get名称());
         } else if (ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("02A"))) {
-            entity.set要介護度(YokaigoJotaiKubun02.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get略称());
+            entity.set要介護度(YokaigoJotaiKubun02.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get名称());
         } else if (ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("06A"))) {
-            entity.set要介護度(YokaigoJotaiKubun06.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get略称());
+            entity.set要介護度(YokaigoJotaiKubun06.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get名称());
         } else if (ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("09B"))
                 && ninshi.getYokaigoJotaiKubunCode().getColumnValue().equals(new RString("09A"))) {
-            entity.set要介護度(YokaigoJotaiKubun09.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get略称());
+            entity.set要介護度(YokaigoJotaiKubun09.toValue(ninshi.getYokaigoJotaiKubunCode().getColumnValue()).get名称());
         }
         entity.set受給申請日(ninshi.getNinteiShinseiYMD().wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         entity.set認定日(ninshi.getNinteiYMD().wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());

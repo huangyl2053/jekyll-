@@ -153,7 +153,7 @@ public class ShinsakaiJIzenShinsakekkaTorokuHandler {
             return RString.EMPTY;
         } else {
             try {
-                return YokaigoJotaiKubun09.toValue(状態).get略称();
+                return YokaigoJotaiKubun09.toValue(状態).get名称();
             } catch (Exception e) {
                 return RString.EMPTY;
             }
