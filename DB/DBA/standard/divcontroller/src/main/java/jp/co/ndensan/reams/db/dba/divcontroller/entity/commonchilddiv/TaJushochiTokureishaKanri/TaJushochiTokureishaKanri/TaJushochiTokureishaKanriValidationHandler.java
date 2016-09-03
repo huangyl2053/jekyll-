@@ -111,6 +111,10 @@ public class TaJushochiTokureishaKanriValidationHandler {
                 }
             }
             if (状態_適用.equals(親画面状態)) {
+                
+                if (div.getTxtNyusyobi().getValue() == null) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.入所日, div.getTxtNyusyobi()));
+                } 
                 if (div.getTxtTekiyobi().getValue() == null) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日, div.getTxtTekiyobi()));
                 } else {
@@ -119,10 +123,16 @@ public class TaJushochiTokureishaKanriValidationHandler {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
                     }
                 }
+                
+                if (div.getTxtTekiyoTodokedebi().getValue() == null) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.適用届出日, div.getTxtTekiyoTodokedebi()));
+                } 
+                
                 if (div.getDdlTekiyoJiyo().getSelectedKey() == null
                         || div.getDdlTekiyoJiyo().getSelectedKey().isEmpty()) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用事由, div.getDdlTekiyoJiyo()));
                 }
+                
                 if (div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null
                         && !div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isEmpty()
                         && div.getTxtNyusyobi().getValue() == null) {
@@ -168,6 +178,8 @@ public class TaJushochiTokureishaKanriValidationHandler {
         適用日(UrErrorMessages.必須, メッセージ適用日.toString()),
         解除日(UrErrorMessages.必須, "解除日"),
         適用事由(UrErrorMessages.必須, "適用事由"),
+        入所日(UrErrorMessages.必須, "入所日"),
+        適用届出日(UrErrorMessages.必須, "適用届出日"),
         解除事由(UrErrorMessages.必須, "解除事由"),
         適用日と解除日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "解除日", メッセージ適用日.toString()),
         入所日と退所日の整合性チェック(DbzErrorMessages.期間が不正_過去日付不可, "退所日", "入所日"),
