@@ -223,10 +223,10 @@ public class JyutakuKayisyuHiHandler {
         if (サービス提供年月 != null) {
             for (KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi : 給付実績住宅改修費List) {
                 if (new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()).isBefore(kyufujissekiJutakuKaishuhi.getサービス提供年月())) {
-                    サービス提供年月前.add(kyufujissekiJutakuKaishuhi);
+                    サービス提供年月後.add(kyufujissekiJutakuKaishuhi);
                 }
                 if (kyufujissekiJutakuKaishuhi.getサービス提供年月().isBefore(new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()))) {
-                    サービス提供年月後.add(kyufujissekiJutakuKaishuhi);
+                    サービス提供年月前.add(kyufujissekiJutakuKaishuhi);
                 }
             }
         }

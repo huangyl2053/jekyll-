@@ -182,6 +182,8 @@ public class SogojigyohiShikakuShogohyoKeikaSochiInDoIchiranhyoSakuseiProcess ex
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(eucFilePath, accessLogUUID);
+        } else {
+            manager.spool(eucFilePath);
         }
 
     }

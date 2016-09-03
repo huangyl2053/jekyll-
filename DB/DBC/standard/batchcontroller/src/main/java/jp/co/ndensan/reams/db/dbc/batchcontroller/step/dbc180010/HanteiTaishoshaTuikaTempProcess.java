@@ -69,6 +69,7 @@ public class HanteiTaishoshaTuikaTempProcess extends BatchProcessBase<SogoJigyoT
         hanteiTaishoshaTempEntity.setNenkiniShotokuGaku(entity.getNenkiniShotokuGaku());
         hanteiTaishoshaTempEntity.setKazeiShotokuGaku(entity.getKazeiShotokuGaku());
         hanteiTaishoshaTempEntity.setGekihenKanwaKubun(entity.getGekihenKanwaKubun());
+        hanteiTaishoshaTempEntity.setDataKubun(entity.getDataKubun());
         tempDbWriter.insert(hanteiTaishoshaTempEntity);
     }
 }

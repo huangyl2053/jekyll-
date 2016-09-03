@@ -149,16 +149,12 @@ public final class JigyoHokokuNenpoIppanGenbutsuMybatisParamter implements IMyBa
             RString 給付集計区分,
             List<RString> 旧市町村コードリスト) {
         List<RString> 市町村コードリスト = new ArrayList<>();
-        市町村コードリスト.add(市町村コード.concat("1"));
+        市町村コードリスト.add(市町村コード);
         if (市町村区分_構成市町村.equals(構成市町村区分)) {
-            for (RString 構成市町村コード : 構成市町村コードリスト) {
-                市町村コードリスト.add(構成市町村コード.concat("2"));
-            }
+            市町村コードリスト.addAll(構成市町村コードリスト);
         }
         if (市町村区分_旧市町村.equals(旧市町村区分)) {
-            for (RString 旧市町村コード : 旧市町村コードリスト) {
-                市町村コードリスト.add(旧市町村コード.concat("3"));
-            }
+            市町村コードリスト.addAll(旧市町村コードリスト);
         }
         return new JigyoHokokuNenpoIppanGenbutsuMybatisParamter(
                 市町村コードリスト, RString.EMPTY, get集計番号List(), get表番号List(給付集計区分),
@@ -269,7 +265,6 @@ public final class JigyoHokokuNenpoIppanGenbutsuMybatisParamter implements IMyBa
 
     private static List<RString> get集計番号List() {
         List<RString> 集計番号リスト = new ArrayList<>();
-        //TODO QA1615回答待ち ShukeiNoにはCode1300が存在なし。
         集計番号リスト.add(ShukeiNo.一般状況_12_居宅介護_介護予防_サービス受給者数.getコード());
         集計番号リスト.add(ShukeiNo.一般状況_14_施設介護サービス受給者数_介護老人福祉施設.getコード());
         集計番号リスト.add(ShukeiNo.一般状況_15_施設介護サービス受給者数_介護老人保健施設.getコード());

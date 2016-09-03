@@ -184,11 +184,11 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
         dbWT37H1TempEntity.setRenban(renban);
         RString 被保険者番号 = csvEntity.get被保険者_証_番号();
         RString 保険者番号 = csvEntity.get保険者番号();
-        if (保険者番号 != null && !保険者番号.isEmpty()) {
-            dbWT37H1TempEntity.setHokenshaNoIn(new HihokenshaNo(保険者番号));
-        }
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            dbWT37H1TempEntity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(被保険者番号));
+            dbWT37H1TempEntity.setHokenshaNoIn(new HihokenshaNo(被保険者番号));
+        }
+        if (保険者番号 != null && !保険者番号.isEmpty()) {
+            dbWT37H1TempEntity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(保険者番号));
         }
         RDate 対象年度 = new RDate(csvEntity.get対象年度().toString());
         dbWT37H1TempEntity.setTaishoNendo(new FlexibleYear(対象年度.getNendo().toDateString()));
@@ -265,10 +265,10 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
         dbWT37J1TempEntity.setRenban(renban);
         RString 被保険者番号 = csvEntity.get被保険者_証_番号();
         RString 保険者番号 = csvEntity.get保険者番号();
-        if (保険者番号 != null && !保険者番号.isEmpty()) {
+        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
             dbWT37J1TempEntity.setHokenshaNoIn(new HihokenshaNo(保険者番号));
         }
-        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
+        if (保険者番号 != null && !保険者番号.isEmpty()) {
             dbWT37J1TempEntity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(被保険者番号));
         }
         RDate 対象年度 = new RDate(csvEntity.get対象年度().toString());

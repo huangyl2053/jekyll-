@@ -26,10 +26,6 @@ and open the template in the editor.
         A."非課税年金勘案額" as "hikazeinenkinkannangaku"
         FROM
         "taishoShaHanteiYoukonkyoItokiTemp" A
-        INNER JOIN  rgdb."DbV4001JukyushaDaicho" B
-        ON B."hihokenshaNo" = A."被保険者番号"
-        AND B."logicalDeletedFlag" = FALSE
-        AND B."ninteiYMD" <![CDATA[<=]]> #{基準日}
 
         LEFT JOIN
         (  SELECT
@@ -85,10 +81,6 @@ and open the template in the editor.
         A."非課税年金勘案額" as "hikazeinenkinkannangaku"
         FROM
         "taishoShaHanteiYoukonkyoItokiTemp" A
-        INNER JOIN  rgdb."DbV4001JukyushaDaicho" B
-        ON B."hihokenshaNo" = A."被保険者番号"
-        AND B."logicalDeletedFlag" = FALSE
-        AND B."ninteiYMD" <![CDATA[<=]]> #{基準日}
 
         LEFT JOIN
         (  SELECT
@@ -139,10 +131,6 @@ and open the template in the editor.
         A."非課税年金勘案額" as "hikazeinenkinkannangaku"
         FROM
         "taishoShaHanteiYoukonkyoItokiTemp" A
-        INNER JOIN  rgdb."DbV4001JukyushaDaicho" B
-        ON B."hihokenshaNo" = A."被保険者番号"
-        AND B."logicalDeletedFlag" = FALSE
-        AND B."ninteiYMD" <![CDATA[<=]]> #{基準日}
 
         LEFT JOIN
         (  SELECT
@@ -195,10 +183,6 @@ and open the template in the editor.
         A."非課税年金勘案額" as "hikazeinenkinkannangaku"
         FROM
         "taishoShaHanteiYoukonkyoItokiTemp" A
-        INNER JOIN  rgdb."DbV4001JukyushaDaicho" B
-        ON B."hihokenshaNo" = A."被保険者番号"
-        AND B."logicalDeletedFlag" = FALSE
-        AND B."ninteiYMD" <![CDATA[<=]]> #{基準日}
 
         LEFT JOIN
         (  SELECT

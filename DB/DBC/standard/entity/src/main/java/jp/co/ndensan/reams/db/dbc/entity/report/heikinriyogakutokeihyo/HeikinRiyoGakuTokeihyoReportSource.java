@@ -16,9 +16,9 @@ public class HeikinRiyoGakuTokeihyoReportSource implements IReportSource {
     public RString joken1;
     @ReportItem(name = "joken2", length = 40, order = 2)
     public RString joken2;
-    @ReportItem(name = "HokenshaNo", length = 6, order = 3)
+    @ReportItem(name = "hokenshaNo", length = 6, order = 3)
     public RString hokenshaNo;
-    @ReportItem(name = "HokenshaName", length = 12, order = 4)
+    @ReportItem(name = "hokenshaName", length = 12, order = 4)
     public RString hokenshaName;
     @ReportItem(name = "printTimeStamp", length = 21, order = 5)
     public RString printTimeStamp;

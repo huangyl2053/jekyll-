@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 収納情報【共有子Div】のハンドラクラスです。
@@ -40,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class ShunoJohoHandler {
 
     private static final FlexibleYear 平成12年 = new FlexibleYear("2000");
+    private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final RString 徴収方法_1 = new RString("1");
     private static final RString 徴収方法_2 = new RString("2");
@@ -54,6 +56,16 @@ public class ShunoJohoHandler {
      */
     public ShunoJohoHandler(ShunoJohoDiv div) {
         this.div = div;
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     * @param div ShunoJohoDiv
+     * @return ShunoJohoHandler
+     */
+    public static ShunoJohoHandler of(ShunoJohoDiv div) {
+        return new ShunoJohoHandler(div);
     }
 
     /**
@@ -193,6 +205,11 @@ public class ShunoJohoHandler {
                 }
             }
         }
+        set収納情報表示(調定年度, 賦課年度, 通知書番号, 特別徴収List, 普通徴収List);
+    }
+
+    private void set収納情報表示(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号,
+            List<ShunoJohoResult> 特別徴収List, List<ShunoJohoResult> 普通徴収List) {
 
         div.getTxtChoteiNendo().setValue(調定年度.wareki().toDateString());
         div.getTxtFukaNendo().setValue(賦課年度.wareki().toDateString());
@@ -204,14 +221,14 @@ public class ShunoJohoHandler {
             for (ShunoJohoResult result : 特別徴収List) {
                 dgTokucho_Row row = new dgTokucho_Row();
                 row.setTxtKi(new RString(result.get期()));
-                row.setTxtChoteiGaku(new RString(result.get調定額().toString()));
-                row.setTxtShunyuGaku(new RString(result.get収入額().toString()));
-                row.setTxtShunyuYMD(result.get収入日() == null ? null : result.get収入日().toDateString());
-                row.setTxtRyosyuYMD(result.get領収日() == null ? null : result.get領収日().toDateString());
-                row.setTxtTokusokuTesuryo(new RString(result.get督促手数料().toString()));
-                row.setTxtEntaikin(new RString(result.get延滞金().toString()));
-                row.setTxtChoteiYMD(result.get調定日() == null ? null : result.get調定日().toDateString());
-                row.setTxtNokigen(result.get納期限() == null ? null : result.get納期限().toDateString());
+                row.setTxtChoteiGaku(DecimalFormatter.toコンマ区切りRString(result.get調定額(), INT_0));
+                row.setTxtShunyuGaku(DecimalFormatter.toコンマ区切りRString(result.get収入額(), INT_0));
+                row.setTxtShunyuYMD(result.get収入日() == null ? null : result.get収入日().wareki().toDateString());
+                row.setTxtRyosyuYMD(result.get領収日() == null ? null : result.get領収日().wareki().toDateString());
+                row.setTxtTokusokuTesuryo(DecimalFormatter.toコンマ区切りRString(result.get督促手数料(), INT_0));
+                row.setTxtEntaikin(DecimalFormatter.toコンマ区切りRString(result.get延滞金(), INT_0));
+                row.setTxtChoteiYMD(result.get調定日() == null ? null : result.get調定日().wareki().toDateString());
+                row.setTxtNokigen(result.get納期限() == null ? null : result.get納期限().wareki().toDateString());
                 dataSource特別.add(row);
                 調定額合計_特別徴収 = 調定額合計_特別徴収.add(result.get調定額());
                 収入額合計_特別徴収 = 収入額合計_特別徴収.add(result.get収入額());
@@ -232,14 +249,14 @@ public class ShunoJohoHandler {
             for (ShunoJohoResult result : 普通徴収List) {
                 dgFucho_Row row = new dgFucho_Row();
                 row.setTxtKi(new RString(result.get期()));
-                row.setTxtChoteiGaku(new RString(result.get調定額().toString()));
-                row.setTxtShunyuGaku(new RString(result.get収入額().toString()));
-                row.setTxtShunyuYMD(result.get収入日() == null ? null : result.get収入日().toDateString());
-                row.setTxtRyosyuYMD(result.get領収日() == null ? null : result.get領収日().toDateString());
-                row.setTxtTokusokuTesuryo(new RString(result.get督促手数料().toString()));
-                row.setTxtEntaikin(new RString(result.get延滞金().toString()));
-                row.setTxtChoteiYMD(result.get調定日() == null ? null : result.get調定日().toDateString());
-                row.setTxtNokigen(result.get納期限() == null ? null : result.get納期限().toDateString());
+                row.setTxtChoteiGaku(DecimalFormatter.toコンマ区切りRString(result.get調定額(), INT_0));
+                row.setTxtShunyuGaku(DecimalFormatter.toコンマ区切りRString(result.get収入額(), INT_0));
+                row.setTxtShunyuYMD(result.get収入日() == null ? null : result.get収入日().wareki().toDateString());
+                row.setTxtRyosyuYMD(result.get領収日() == null ? null : result.get領収日().wareki().toDateString());
+                row.setTxtTokusokuTesuryo(DecimalFormatter.toコンマ区切りRString(result.get督促手数料(), INT_0));
+                row.setTxtEntaikin(DecimalFormatter.toコンマ区切りRString(result.get延滞金(), INT_0));
+                row.setTxtChoteiYMD(result.get調定日() == null ? null : result.get調定日().wareki().toDateString());
+                row.setTxtNokigen(result.get納期限() == null ? null : result.get納期限().wareki().toDateString());
                 dataSource普通.add(row);
                 調定額合計_普通徴収 = 調定額合計_普通徴収.add(result.get調定額());
                 収入額合計_普通徴収 = 収入額合計_普通徴収.add(result.get収入額());

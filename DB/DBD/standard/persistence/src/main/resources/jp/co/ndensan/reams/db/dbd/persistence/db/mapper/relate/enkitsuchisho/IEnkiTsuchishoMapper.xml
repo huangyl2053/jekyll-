@@ -81,12 +81,12 @@
             T4101."zenYokaigoKubunCode" AS 前回要介護状態区分コード,
             T4101."zenkaiYukoKikanStart" AS 前回認定開始日,
             T4101."zenkaiYukoKikanEnd" AS 前回認定終了日,
-            T5051."shichosonCode" AS 市町村コード,
-            T5051."shichosonMeisho" AS 市町村名称
+            T7051."shichosonCode" AS 市町村コード,
+            T7051."shichosonMeisho" AS 市町村名称
         FROM
             rgdb."DbT4101NinteiShinseiJoho" AS T4101
-        LEFT JOIN   rgdb."DbT5051KoseiShichosonMaster" AS T5051
-            ON  T4101."shoKisaiHokenshaNo" = T5051."shoKisaiHokenshaNo"
+        LEFT JOIN   rgdb."DbT7051KoseiShichosonMaster" AS T7051
+            ON  T4101."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo"
         LEFT JOIN   rgdb."DbT4116IchijiHanteiKekkaJoho" AS T4116
             ON  T4101."shinseishoKanriNo" = T4116."shinseishoKanriNo"
         LEFT JOIN   rgdb."DbT5510IchiGojiHanteiKekkaJoho" AS T5510
@@ -118,7 +118,7 @@
             AND T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
             AND T5105."ninteiShinsakaiKanryoYMD" IS NULL
         ORDER BY
-            T5051."shichosonCode",
+            T7051."shichosonCode",
             T4101."hihokenshaKana",
             T4101."ninteiShinseiYMD"        
     </select>

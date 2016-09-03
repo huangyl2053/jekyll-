@@ -44,7 +44,7 @@ public class FutanWariaiHanteiIchiranEditor implements IFutanWariaiHanteiIchiran
     private static final RString 本人調査中 = new RString("本人調査中");
     private static final RString 本人非課税 = new RString("本人非課税");
     private static final RString 利 = new RString("利");
-    private static final RString 率 = new RString("%");
+    private static final RString 率 = new RString("％");
     private static final RString 生活保護 = new RString("生活保護");
     private static final RString 旧措置 = new RString("旧措置");
     private static final RString 被保険者番号 = new RString("被保険者番号");

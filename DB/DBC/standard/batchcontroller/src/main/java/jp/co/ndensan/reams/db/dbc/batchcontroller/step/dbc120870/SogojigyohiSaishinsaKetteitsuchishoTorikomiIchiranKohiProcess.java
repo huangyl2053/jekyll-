@@ -204,9 +204,9 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiProcess
                                 出力順Map,
                                 parameter.get処理年月(),
                                 parameter.getシステム日付(),
-                                true,
+                                false,
                                 連番_1,
-                                false
+                                true
                         );
                 連番 = 1;
                 report.writeBy(reportSourceWriter);
@@ -263,6 +263,8 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiProcess
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(eucFilePath, accessLogUUID);
+        } else {
+            manager.spool(eucFilePath);
         }
     }
 

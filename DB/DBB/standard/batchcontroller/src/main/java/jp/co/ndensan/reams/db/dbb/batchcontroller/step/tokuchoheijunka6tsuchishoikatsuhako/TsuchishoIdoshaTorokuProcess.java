@@ -4,13 +4,16 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchoheijunka6tsuchishoi
 import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranProperty.DBB100012ShutsuryokujunEnum;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.ShutsuRyokuTaishoShutokuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoIdoshaTorokuProcessParameter;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2017TsuchishoHakkogoIdoshaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -24,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class TsuchishoIdoshaTorokuProcess extends BatchProcessBase<DbT2002FukaTempTableEntity> {
 
     private TsuchishoIdoshaTorokuProcessParameter parameter;
+    @BatchWriter
+    private BatchPermanentTableWriter<DbT2017TsuchishoHakkogoIdoshaEntity> dbT2017Writer;
 
     private int 連番;
     private static final ReportId REPORT_ID_DBB100012 = new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
@@ -42,10 +47,16 @@ public class TsuchishoIdoshaTorokuProcess extends BatchProcessBase<DbT2002FukaTe
     }
 
     @Override
+    protected void createWriter() {
+        dbT2017Writer = new BatchPermanentTableWriter<>(DbT2017TsuchishoHakkogoIdoshaEntity.class);
+    }
+
+    @Override
     protected void process(DbT2002FukaTempTableEntity entity) {
 
         TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko service = TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko.createInstance();
-        service.insTsuchishoHakkogoIdosha(entity, parameter, 連番);
+        DbT2017TsuchishoHakkogoIdoshaEntity dbT2017 = service.insTsuchishoHakkogoIdosha(entity, parameter, 連番);
+        dbT2017Writer.insert(dbT2017);
         連番++;
     }
 

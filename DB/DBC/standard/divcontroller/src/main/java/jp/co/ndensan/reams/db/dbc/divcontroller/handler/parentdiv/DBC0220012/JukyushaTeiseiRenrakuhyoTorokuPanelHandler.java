@@ -42,7 +42,6 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
     private static final RString 修正モード_TWO = new RString("修正モード2");
     private static final RString 修正モード_THREE = new RString("修正モード3");
     private static final RString 被保番号 = new RString("被保険者番号");
-    private static final RString DBCHIHOKENSHANO = new RString("DBCHihokenshaNo");
 
     /**
      * 初期化です。

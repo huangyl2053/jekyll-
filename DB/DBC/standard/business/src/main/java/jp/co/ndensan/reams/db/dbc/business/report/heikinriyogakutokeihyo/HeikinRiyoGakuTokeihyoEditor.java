@@ -132,7 +132,6 @@ public class HeikinRiyoGakuTokeihyoEditor implements IHeikinRiyoGakuTokeihyoEdit
                 separator(Separator.JAPANESE).
                 fillType(FillType.ZERO).toDateString());
         systemDateTime.append(処理時間.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
-        systemDateTime.append(new RString("作成"));
         return systemDateTime.toRString();
     }
 }

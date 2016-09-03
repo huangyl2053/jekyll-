@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kagomoshitate.KagoMoshitateKek
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7100001.ChushutsuJokenPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7100001.HanyoListParameterDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -117,7 +118,7 @@ public class HanyoListParameterHandler {
             parameter.setサービス提供年月To(FlexibleYearMonth.EMPTY);
         }
 
-        parameter.set事業者コード(panel.getCcdJigyoshaBango().getNyuryokuShisetsuKodo());
+        parameter.set事業者コード(new JigyoshaNo(panel.getCcdJigyoshaBango().getNyuryokuShisetsuKodo()));
         parameter.set事業者名(panel.getCcdJigyoshaBango().getNyuryokuShisetsuMeisho());
 
         boolean is項目名付加 = false;

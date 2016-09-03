@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.business.core.tankinyushokakudaigaitosha;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.tankinyushokakudaigaitosha.ChushutsuKubun;
@@ -287,7 +286,9 @@ public class TankiNyushoKakudaiGaitosha {
         List jukyuShinseiJiyuList = new ArrayList();
         RString 受給申請事由 = RString.EMPTY;
         RString 受給申請事由コード = entity.get受給申請事由();
-        jukyuShinseiJiyuList.addAll(Arrays.asList(JukyuShinseiJiyu.values()));
+        for (JukyuShinseiJiyu jukyuShinseiJiyu : JukyuShinseiJiyu.values()) {
+            jukyuShinseiJiyuList.add(jukyuShinseiJiyu.getコード());
+        }
         if (jukyuShinseiJiyuList.contains(受給申請事由コード)) {
             getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, entity.get資格取得事由コード());
         }
@@ -320,7 +321,9 @@ public class TankiNyushoKakudaiGaitosha {
     private RString get受給みなし更新認定(RString みなし要介護区分コード) {
         RString 受給みなし更新認定 = RString.EMPTY;
         List minashiCodeList = new ArrayList();
-        minashiCodeList.addAll(Arrays.asList(MinashiCode.values()));
+        for (MinashiCode minashiCode : MinashiCode.values()) {
+            minashiCodeList.add(minashiCode.getコード());
+        }
         if (minashiCodeList.contains(みなし要介護区分コード) && !MinashiCode.通常の認定.getコード().equals(みなし要介護区分コード)) {
             受給みなし更新認定 = new RString("みなし");
         }

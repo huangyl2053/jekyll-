@@ -201,33 +201,34 @@ public class SogojigyohiKagoKetteiHokenshaDoIchiranhyoSakuseiProcess extends Bat
         }
         証記載保険者番号 = this証記載保険者番号;
         if (lastEntity != null) {
-            SogojigyohiKagoKetteiHokenshaInReport report = new SogojigyohiKagoKetteiHokenshaInReport(lastEntity
-                    , 出力順Map, parameter.get処理年月(), parameter.getシステム日付(), 連番, 集計Flag);
+            SogojigyohiKagoKetteiHokenshaInReport report = new SogojigyohiKagoKetteiHokenshaInReport(lastEntity,
+                    出力順Map, parameter.get処理年月(), parameter.getシステム日付(), 連番, 集計Flag);
             report.writeBy(reportSourceWriter);
-        
-        do帳票のCSVファイル作成(lastEntity, parameter.get処理年月(), parameter.getシステム日付(), 集計Flag);
+
+            do帳票のCSVファイル作成(lastEntity, parameter.get処理年月(), parameter.getシステム日付(), 集計Flag);
         }
         if (null != entity.get識別コード() && !entity.get識別コード().isEmpty()
                 && !識別コードset.contains(entity.get識別コード())) {
             識別コードset.add(entity.get識別コード());
             PersonalData personalData = getPersonalData(entity);
             personalDataList.add(personalData);
-       }
+        }
         連番++;
         lastEntity = entity;
     }
 
     @Override
     protected void afterExecute() {
-        SogojigyohiKagoKetteiHokenshaInReport report = new SogojigyohiKagoKetteiHokenshaInReport(lastEntity
-                , 出力順Map, parameter.get処理年月(), parameter.getシステム日付(), 連番, true);
+        SogojigyohiKagoKetteiHokenshaInReport report = new SogojigyohiKagoKetteiHokenshaInReport(lastEntity,
+                出力順Map, parameter.get処理年月(), parameter.getシステム日付(), 連番, true);
         report.writeBy(reportSourceWriter);
-         do帳票のCSVファイル作成(lastEntity
-                , parameter.get処理年月(), parameter.getシステム日付(), true);
+        do帳票のCSVファイル作成(lastEntity, parameter.get処理年月(), parameter.getシステム日付(), true);
         sogojigyohiKagoKetteiInCsvWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(eucFilePath, accessLogUUID);
+        } else {
+            manager.spool(eucFilePath);
         }
     }
 
@@ -282,6 +283,7 @@ public class SogojigyohiKagoKetteiHokenshaDoIchiranhyoSakuseiProcess extends Bat
         output.set総合事業費_負担額(RString.EMPTY);
         sogojigyohiKagoKetteiInCsvWriter.writeLine(output);
     }
+
     private void csv集計作成(SogojigyohiKagoKetteiHokenshaChohyoEntity entity) {
         SogojigyohiKagoKetteiHokenshaIchiranCSVEntity output = new SogojigyohiKagoKetteiHokenshaIchiranCSVEntity();
         output.set証記載保険者番号(getColumnValue(entity.get証記載保険者番号()));
@@ -309,6 +311,7 @@ public class SogojigyohiKagoKetteiHokenshaDoIchiranhyoSakuseiProcess extends Bat
                 entity.get被保険者番号().getColumnValue());
         return PersonalData.of(entity.get識別コード(), expandedInformations);
     }
+
     private RString doカンマ編集(Decimal number) {
         if (null == number) {
             return RString.EMPTY;
