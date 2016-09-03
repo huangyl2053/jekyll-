@@ -172,14 +172,17 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
             parameter.setデータ種類(Kaigogassan_DataShubetsu.仮算定.get名称());
         }
 
-        parameter.set対象年度(new FlexibleYear(div.getChushutsuJokenPanel().getDdlTaishoNendo().getSelectedValue().toString()));
+        RString 対象年度 = div.getChushutsuJokenPanel().getDdlTaishoNendo().getSelectedValue();
+        parameter.set対象年度(new FlexibleYear(対象年度));
         TextBoxDateRange 受取年月 = div.getChushutsuJokenPanel().getTxtUketoriNengetsu();
         if (受取年月.isDisabled()) {
             parameter.set受取年月From(FlexibleYearMonth.EMPTY);
             parameter.set受取年月To(FlexibleYearMonth.EMPTY);
         } else {
-            parameter.set受取年月From(new FlexibleYearMonth(受取年月.getFromValue().getYearMonth().toDateString()));
-            parameter.set受取年月To(new FlexibleYearMonth(受取年月.getToValue().getYearMonth().toDateString()));
+            RString 年月From = 受取年月.getFromValue().getYearMonth().toDateString();
+            RString 年月To = 受取年月.getToValue().getYearMonth().toDateString();
+            parameter.set受取年月From(new FlexibleYearMonth(年月From));
+            parameter.set受取年月To(new FlexibleYearMonth(年月To));
         }
 
         TextBoxDateRange 送付年月 = div.getChushutsuJokenPanel().getTxtSofuNengetsu();
@@ -187,8 +190,10 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
             parameter.set送付年月From(FlexibleYearMonth.EMPTY);
             parameter.set送付年月To(FlexibleYearMonth.EMPTY);
         } else {
-            parameter.set送付年月From(new FlexibleYearMonth(送付年月.getFromValue().getYearMonth().toDateString()));
-            parameter.set送付年月To(new FlexibleYearMonth(送付年月.getToValue().getYearMonth().toDateString()));
+            RString 送付From = 送付年月.getFromValue().getYearMonth().toDateString();
+            RString 送付To = 送付年月.getToValue().getYearMonth().toDateString();
+            parameter.set送付年月From(new FlexibleYearMonth(送付From));
+            parameter.set送付年月To(new FlexibleYearMonth(送付To));
         }
 
         List<RString> keyList = div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys();
