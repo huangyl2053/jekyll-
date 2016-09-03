@@ -91,7 +91,7 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
     }
 
     private void edit保険者番号(JukyushaIdoCheckListReportSource source) {
-        source.hokenshaNo = upperEntity.get保険者番号().getColumnValue();
+        source.hokenshaNo = upperEntity.get保険者番号() == null ? RString.EMPTY : upperEntity.get保険者番号().value();
     }
 
     private void edit保険者名称(JukyushaIdoCheckListReportSource source) {
@@ -116,24 +116,24 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
     }
 
     private void edit被保険者番号(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_1 = upperEntity.get被保険者番号().getColumnValue();
+        source.listUpper_1 = upperEntity.get被保険者番号() == null ? RString.EMPTY : upperEntity.get被保険者番号().value();
     }
 
     private void edit識別コード(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_2 = upperEntity.get識別コード().getColumnValue();
+        source.listUpper_2 = upperEntity.get識別コード() == null ? RString.EMPTY : upperEntity.get識別コード().value();
 
     }
 
     private void edit住所(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_3 = upperEntity.get住所().getColumnValue();
+        source.listUpper_3 = upperEntity.get住所() == null ? RString.EMPTY : upperEntity.get住所().value();
     }
 
     private void editフリガナ(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_4 = upperEntity.getフリガナ().getColumnValue();
+        source.listUpper_4 = upperEntity.getフリガナ() == null ? RString.EMPTY : upperEntity.getフリガナ().value();
     }
 
     private void edit生年月日(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_5 = new RString(upperEntity.get生年月日().toString());
+        source.listUpper_5 = upperEntity.get生年月日() == null ? RString.EMPTY : new RString(upperEntity.get生年月日().toString());
     }
 
     private void edit異動区分(JukyushaIdoCheckListReportSource source) {
@@ -143,19 +143,19 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
 //    TODO QA 项目位定义 private void edit処理種別(JukyushaIdoCheckListReportSource source) {
 //    }
     private void edit受給申請日(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_8 = new RString(upperEntity.get受給申請日().toString());
+        source.listUpper_8 = upperEntity.get受給申請日() == null ? RString.EMPTY : new RString(upperEntity.get受給申請日().toString());
     }
 
     private void edit認定日(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_9 = new RString(upperEntity.get認定日().toString());
+        source.listUpper_9 = upperEntity.get認定日() == null ? RString.EMPTY : new RString(upperEntity.get認定日().toString());
     }
 
     private void edit認定有効開始日(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_10 = new RString(upperEntity.get認定有効開始日().toString());
+        source.listUpper_10 = upperEntity.get認定有効開始日() == null ? RString.EMPTY : new RString(upperEntity.get認定有効開始日().toString());
     }
 
     private void edit喪失年月日(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_11 = new RString(upperEntity.get喪失年月日().toString());
+        source.listUpper_11 = upperEntity.get喪失年月日() == null ? RString.EMPTY : new RString(upperEntity.get喪失年月日().toString());
     }
 
     private void edit異動事由(JukyushaIdoCheckListReportSource source) {
@@ -167,11 +167,11 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
     }
 
     private void edit住所コード(JukyushaIdoCheckListReportSource source) {
-        source.listLower_1 = lowerEntity.get住所コード().getColumnValue();
+        source.listLower_1 = lowerEntity.get住所コード() == null ? RString.EMPTY : lowerEntity.get住所コード().value();
     }
 
     private void edit行政区コード(JukyushaIdoCheckListReportSource source) {
-        source.listLower_2 = lowerEntity.get行政区コード().getColumnValue();
+        source.listLower_2 = lowerEntity.get行政区コード() == null ? RString.EMPTY : lowerEntity.get行政区コード().value();
     }
 
     private void edit行政区(JukyushaIdoCheckListReportSource source) {
@@ -179,7 +179,7 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
     }
 
     private void edit氏名(JukyushaIdoCheckListReportSource source) {
-        source.listLower_4 = lowerEntity.get氏名().getColumnValue();
+        source.listLower_4 = lowerEntity.get氏名() == null ? RString.EMPTY : lowerEntity.get氏名().value();
     }
 
     private void edit年齢(JukyushaIdoCheckListReportSource source) {
