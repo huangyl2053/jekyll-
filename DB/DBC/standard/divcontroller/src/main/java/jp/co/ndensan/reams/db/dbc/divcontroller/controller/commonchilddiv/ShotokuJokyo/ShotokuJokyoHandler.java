@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Width;
@@ -49,6 +50,7 @@ public class ShotokuJokyoHandler {
     private static final Decimal 年齢_18 = new Decimal("18");
     private static final RString 文字列_識別対象コード = new RString("shikibetsuCode");
     private static final RString メモボタン = new RString("memo");
+    private static final RString コンマ = new RString(",");
     private final ShotokuJokyoDiv div;
 
     /**
@@ -107,6 +109,7 @@ public class ShotokuJokyoHandler {
         KijunShunyugakuDate item;
         RString 氏名 = RString.EMPTY;
         RString 氏名カナ = RString.EMPTY;
+        RDate 生年月日;
         int length;
         for (dgSteaiinShotoku_Row row : div.getDgSteaiinShotoku().getSelectedItems()) {
             item = new KijunShunyugakuDate();
@@ -122,21 +125,23 @@ public class ShotokuJokyoHandler {
             item.set氏名(氏名);
             item.set氏名カナ(氏名カナ);
             item.set生年月日(new FlexibleDate(row.getBirthYMD()));
+            生年月日 = new RDate(row.getBirthYMD().toString());
+            item.set生年月日(new FlexibleDate(生年月日.toDateString()));
             item.set性別(row.getGender());
             item.set年齢(row.getAge());
             item.set続柄(row.getZokugara());
             item.set住民税(row.getJuminZei());
             if (!row.getGokeiShotoku().isNullOrEmpty()) {
-                item.set合計所得金額(new Decimal(row.getGokeiShotoku().toString()));
+                item.set合計所得金額(new Decimal(row.getGokeiShotoku().replace(コンマ, RString.EMPTY).toString()));
             }
             if (!row.getNenkinShunyu().isNullOrEmpty()) {
-                item.set年金等収入(new Decimal(row.getNenkinShunyu().toString()));
+                item.set年金等収入(new Decimal(row.getNenkinShunyu().replace(コンマ, RString.EMPTY).toString()));
             }
             if (!row.getNenkinShotoku().isNullOrEmpty()) {
-                item.set年金等所得(new Decimal(row.getNenkinShotoku().toString()));
+                item.set年金等所得(new Decimal(row.getNenkinShotoku().replace(コンマ, RString.EMPTY).toString()));
             }
             if (!row.getKazeiShotoku().isNullOrEmpty()) {
-                item.set課税所得(new Decimal(row.getKazeiShotoku().toString()));
+                item.set課税所得(new Decimal(row.getKazeiShotoku().replace(コンマ, RString.EMPTY).toString()));
             }
             list.add(item);
         }
