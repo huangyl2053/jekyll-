@@ -134,8 +134,8 @@ public class KokiKoreisha {
             } else {
                 後期高齢者情報.createBuilderForEdit().set保険者適用終了日(RString.EMPTY);
             }
-            if (!div.getTxtHihokenshaNo().getValue().isNullOrEmpty()) {
-                後期高齢者情報.createBuilderForEdit().set後期高齢被保険者番号(div.getTxtHihokenshaNo().getValue());
+            if (div.getTxtHihokenshaNo().getValue() != null) {
+                後期高齢者情報.createBuilderForEdit().set後期高齢被保険者番号(div.getMeisaiPanel().getTxtHihokenshaNo().getValue());
             } else {
                 後期高齢者情報.createBuilderForEdit().set後期高齢被保険者番号(RString.EMPTY);
             }
