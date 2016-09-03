@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -175,7 +176,7 @@ public class ShikakuShutokuIdoTotal {
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             createHandler(div).save();
             releaseLock(div);
             div.getComplete().getCcdComplete().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
@@ -312,6 +313,11 @@ public class ShikakuShutokuIdoTotal {
                     div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate()));
         }
 
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(
+                div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(
+                div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate()));
+
         if (!rowList.isEmpty()) {
             TextBoxFlexibleDate compareToDate;
             if (row == null) {
@@ -413,6 +419,24 @@ public class ShikakuShutokuIdoTotal {
     }
 
     /**
+     * 「取得日」フォーカスアウト処理します。
+     *
+     * @param div ShikakuShutokuIdoTotalDiv
+     * @return レスポンス
+     */
+    public ResponseData<ShikakuShutokuIdoTotalDiv> onBlur_txtShutokuDate(ShikakuShutokuIdoTotalDiv div) {
+        if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                getShikakuShutokuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()) {
+            if (!div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                    .getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
+                div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate().
+                        setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate().getValue());
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 資格得喪履歴グリッドの枝番の降順処理です。
      */
     public static class ComparatorByDaNoSort implements Comparator, Serializable {
@@ -480,8 +504,8 @@ public class ShikakuShutokuIdoTotal {
 
     private enum validationErrorMessage implements IValidationMessage {
 
-        取得日(UrErrorMessages.必須, "取得日"),
-        届出日(UrErrorMessages.必須, "届出日"),
+        取得日(UrErrorMessages.必須項目),
+        届出日(UrErrorMessages.必須項目),
         期間が不正_過去日付不可(DbzErrorMessages.期間が不正_過去日付不可, "取得日", "履歴の喪失日");
         private final Message message;
 
@@ -495,8 +519,10 @@ public class ShikakuShutokuIdoTotal {
         }
     }
 
-    private ShiKaKuSyuToKuIdouTotalHandler createHandler(ShikakuShutokuIdoTotalDiv div) {
+    private ShiKaKuSyuToKuIdouTotalHandler
+            createHandler(ShikakuShutokuIdoTotalDiv div) {
         return new ShiKaKuSyuToKuIdouTotalHandler(div,
-                ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class));
+                ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class
+                ));
     }
 }

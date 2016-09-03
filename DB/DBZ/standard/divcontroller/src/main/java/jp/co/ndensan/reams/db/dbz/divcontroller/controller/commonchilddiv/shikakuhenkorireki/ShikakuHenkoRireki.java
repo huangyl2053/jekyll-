@@ -43,6 +43,7 @@ public class ShikakuHenkoRireki {
         div.getBtnAdd().setDisabled(true);
         ShikakuHenkoRirekiHandler handler = getHandler(div);
         handler.setDisabledMeisaiButtons(false);
+        div.getHenkoInput().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
@@ -63,6 +64,7 @@ public class ShikakuHenkoRireki {
         henkoRirekiDiv.setInputMode(ViewExecutionStatus.Modify.getValue());
 
         ViewStateHolder.put(ViewStateKeys.資格変更入力, handler.get資格変更入力Panel());
+        henkoRirekiDiv.getHenkoInput().setDisabled(false);
         return ResponseData.of(henkoRirekiDiv).respond();
     }
 
@@ -75,13 +77,14 @@ public class ShikakuHenkoRireki {
      */
     public ResponseData<ShikakuHenkoRirekiDiv> onSelectByDeleteButton_dgHenko(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
         ShikakuHenkoRirekiHandler handler = getHandler(henkoRirekiDiv);
+        henkoRirekiDiv.getHenkoInput().setDisabled(false);
         henkoRirekiDiv.getHenkoHokenshaJoho().setReadOnly(true);
         henkoRirekiDiv.getBtnAdd().setDisabled(true);
         handler.set資格変更入力Panel();
-        handler.setDisabledMeisaiButtons(false);
 
         henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.sakujo);
         henkoRirekiDiv.setInputMode(ViewExecutionStatus.Delete.getValue());
+        handler.setDisabledMeisaiButtons(false);
 
         return ResponseData.of(henkoRirekiDiv).respond();
     }
@@ -124,6 +127,21 @@ public class ShikakuHenkoRireki {
         return onSelect_dgHenko(henkoRirekiDiv);
     }
 
+        /**
+     * 明細エリアの変更日を入力された際に実行します。<br/>
+     *
+     * @param henkoRirekiDiv {@link ShikakuHenkoRirekiDiv 資格変更履歴Div}
+     * @return 資格変更履歴Divを持つResponseData
+     */
+    public ResponseData<ShikakuHenkoRirekiDiv> onBlur_txtHenkoDate(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
+        if (henkoRirekiDiv.getHenkoInput().getTxtHenkoTodokedeDate().getValue().isEmpty()) {
+            if (!henkoRirekiDiv.getHenkoInput().getTxtHenkoDate().getValue().isEmpty()) {
+                henkoRirekiDiv.getHenkoInput().getTxtHenkoTodokedeDate().setValue(henkoRirekiDiv.getHenkoInput().getTxtHenkoDate().getValue());
+            }
+        }
+        return ResponseData.of(henkoRirekiDiv).respond();
+    }
+    
     /**
      * 明細エリアの取消ボタンが押下された際に実行します。<br/>
      * 入力した情報を破棄してもよいかの確認メッセージを表示します。
@@ -164,6 +182,8 @@ public class ShikakuHenkoRireki {
             }
         }
         henkoRirekiDiv.getHenkoHokenshaJoho().setReadOnly(false);
+        henkoRirekiDiv.getBtnAdd().setDisabled(false);
+        henkoRirekiDiv.getHenkoInput().setDisabled(true);
         return ResponseData.of(henkoRirekiDiv).respond();
     }
 
@@ -223,6 +243,8 @@ public class ShikakuHenkoRireki {
         }
 
         henkoRirekiDiv.getHenkoHokenshaJoho().setReadOnly(false);
+        henkoRirekiDiv.getBtnAdd().setDisabled(false);
+        henkoRirekiDiv.getHenkoInput().setDisabled(true);
         return ResponseData.of(henkoRirekiDiv).respond();
     }
 
