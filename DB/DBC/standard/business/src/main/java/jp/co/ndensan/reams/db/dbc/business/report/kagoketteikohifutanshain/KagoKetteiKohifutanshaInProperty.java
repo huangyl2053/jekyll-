@@ -47,7 +47,7 @@ public class KagoKetteiKohifutanshaInProperty
         /**
          * 公費負担者番号
          */
-        公費負担者番号(new RString("0134"), new RString("kohiFutanshaNo"), new RString("DbWT3060.\"hdrShoHokenshaNo\"")),
+        公費負担者番号(new RString("0134"), new RString("kohiFutanshaNo"), new RString("DbWT3060.\"shoKisaiHokenshaNo\"")),
         /**
          * 被保険者番号
          */
@@ -55,7 +55,7 @@ public class KagoKetteiKohifutanshaInProperty
         /**
          * サービス提供年月
          */
-        サービス提供年月(new RString("0361"), new RString("listUpper_6"), new RString("DbWT3061.\"serviceTeikyoYm\"")),
+        サービス提供年月(new RString("0361"), new RString("listUpper_6"), new RString("DbWT3061.\"serviceTeikyoYM\"")),
         /**
          * 事業所番号
          */
@@ -63,7 +63,7 @@ public class KagoKetteiKohifutanshaInProperty
         /**
          * 取り扱い年月
          */
-        取り扱い年月(new RString("0363"), new RString("listUpper_2"), new RString("DbWT3061.\"toriatsukaiYm\""));
+        取り扱い年月(new RString("0363"), new RString("listUpper_2"), new RString("DbWT3061.\"toriatsukaiYM\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;
