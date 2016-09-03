@@ -15,8 +15,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
+ * システム管理登録（社会福祉法人確認番号）画面のチェックロジックです。
  *
- * @author tz_sunl
+ * @reamsid_L DBD-3762-010 tz_chengpeng
  */
 public enum SystemKanriShakaiFukushiTotalSpec implements IPredicate<SystemKanriShakaiFukushiTotalDiv> {
 
@@ -26,23 +27,30 @@ public enum SystemKanriShakaiFukushiTotalSpec implements IPredicate<SystemKanriS
     変更有無チェック {
                 @Override
                 public boolean apply(SystemKanriShakaiFukushiTotalDiv div) {
-                    RDate 日期 = new RDate(FlexibleDate.getNowDate().toString());
-                    return !(div.getSystemKanri().getSystemKanriShakaiFukushi().getRadKakuninNo().getSelectedKey()
-                    .equals(DbBusinessConfig.get(ConfigNameDBD.社会福祉法人減免確認番号_使用有無, 日期, SubGyomuCode.DBD介護受給))
-                    && div.getSystemKanri().getSystemKanriShakaiFukushi().getRadSaiban().getSelectedKey()
-                    .equals(DbBusinessConfig.get(ConfigNameDBD.社会福祉法人減免確認番号_採番基準, 日期, SubGyomuCode.DBD介護受給))
-                    && div.getSystemKanri().getSystemKanriShakaiFukushi().getRadNoHikitsugi().getSelectedKey()
-                    .equals(DbBusinessConfig.get(ConfigNameDBD.社会福祉法人減免確認番号_番号引継ぎ, 日期, SubGyomuCode.DBD介護受給))
-                    && div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtYukoKetasu().getValue()
-                    .equals(new Decimal(DbBusinessConfig.get(ConfigNameDBD.社会福祉法人減免確認番号_有効桁数, 日期, SubGyomuCode.DBD介護受給).toString()))
-                    && div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtGenmenRitsu1().getValue()
-                    .equals(new Decimal(DbBusinessConfig.get(ConfigNameDBD.社会福祉法人減免減免率_分子, 日期, SubGyomuCode.DBD介護受給).toString()))
-                    && div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtGenmenRitsu2().getValue()
-                    .equals(new Decimal(DbBusinessConfig.get(ConfigNameDBD.社会福祉法人減免減免率_分母, 日期, SubGyomuCode.DBD介護受給).toString()))
-                    && div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtKeigenRitsu1().getValue()
-                    .equals(new Decimal(DbBusinessConfig.get(ConfigNameDBD.社会福祉法人軽減軽減率_分子, 日期, SubGyomuCode.DBD介護受給).toString()))
-                    && div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtKeigenRitsu2().getValue()
-                    .equals(new Decimal(DbBusinessConfig.get(ConfigNameDBD.社会福祉法人軽減軽減率_分母, 日期, SubGyomuCode.DBD介護受給).toString())));
+                    if (div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtYukoKetasu().getValue() != null
+                    && div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtGenmenRitsu1().getValue() != null
+                    && div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtGenmenRitsu2().getValue() != null
+                    && div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtKeigenRitsu1().getValue() != null
+                    && div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtKeigenRitsu2().getValue() != null) {
+                        RDate 日期 = new RDate(FlexibleDate.getNowDate().toString());
+                        return !(div.getSystemKanri().getSystemKanriShakaiFukushi().getRadKakuninNo().getSelectedKey()
+                        .equals(DbBusinessConfig.get(ConfigNameDBD.社会福祉法人減免確認番号_使用有無, 日期, SubGyomuCode.DBD介護受給))
+                        && div.getSystemKanri().getSystemKanriShakaiFukushi().getRadSaiban().getSelectedKey()
+                        .equals(DbBusinessConfig.get(ConfigNameDBD.社会福祉法人減免確認番号_採番基準, 日期, SubGyomuCode.DBD介護受給))
+                        && div.getSystemKanri().getSystemKanriShakaiFukushi().getRadNoHikitsugi().getSelectedKey()
+                        .equals(DbBusinessConfig.get(ConfigNameDBD.社会福祉法人減免確認番号_番号引継ぎ, 日期, SubGyomuCode.DBD介護受給))
+                        && div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtYukoKetasu().getValue()
+                        .equals(new Decimal(DbBusinessConfig.get(ConfigNameDBD.社会福祉法人減免確認番号_有効桁数, 日期, SubGyomuCode.DBD介護受給).toString()))
+                        && div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtGenmenRitsu1().getValue()
+                        .equals(new Decimal(DbBusinessConfig.get(ConfigNameDBD.社会福祉法人減免減免率_分子, 日期, SubGyomuCode.DBD介護受給).toString()))
+                        && div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtGenmenRitsu2().getValue()
+                        .equals(new Decimal(DbBusinessConfig.get(ConfigNameDBD.社会福祉法人減免減免率_分母, 日期, SubGyomuCode.DBD介護受給).toString()))
+                        && div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtKeigenRitsu1().getValue()
+                        .equals(new Decimal(DbBusinessConfig.get(ConfigNameDBD.社会福祉法人軽減軽減率_分子, 日期, SubGyomuCode.DBD介護受給).toString()))
+                        && div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtKeigenRitsu2().getValue()
+                        .equals(new Decimal(DbBusinessConfig.get(ConfigNameDBD.社会福祉法人軽減軽減率_分母, 日期, SubGyomuCode.DBD介護受給).toString())));
+                    }
+                    return true;
                 }
             },
     /**

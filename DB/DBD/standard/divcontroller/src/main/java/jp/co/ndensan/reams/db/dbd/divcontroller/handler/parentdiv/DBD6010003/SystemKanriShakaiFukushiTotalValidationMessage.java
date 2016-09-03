@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
+ * システム管理登録（社会福祉法人確認番号）画面のメッセージクラスです。
  *
- * @author tz_sunl
+ * @reamsid_L DBD-3762-010 tz_chengpeng
  */
 public enum SystemKanriShakaiFukushiTotalValidationMessage implements IValidationMessage {
 
