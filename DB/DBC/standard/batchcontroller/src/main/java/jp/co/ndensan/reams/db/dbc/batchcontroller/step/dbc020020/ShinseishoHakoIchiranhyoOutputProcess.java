@@ -75,7 +75,7 @@ public class ShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase<Shin
 
         csvFileName = CSV_FILE_NAME.concat(UNDER_LINE).
                 concat(導入団体クラス.get地方公共団体コード().value()).concat(UNDER_LINE).
-                concat(RDate.getNowDate().toDateString()).concat(CSV);
+                concat(parameter.getSakuseibi().toString()).concat(CSV);
         breakItemIds = new ArrayList<>();
         出力順 = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBC介護給付,
                 ReportIdDBC.DBC200017.getReportId(), parameter.getShutsuryokujunId());
