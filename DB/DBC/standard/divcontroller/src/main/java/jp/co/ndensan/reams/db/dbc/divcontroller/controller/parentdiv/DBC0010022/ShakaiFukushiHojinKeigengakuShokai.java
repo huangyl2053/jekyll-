@@ -105,6 +105,7 @@ public class ShakaiFukushiHojinKeigengakuShokai {
     public ResponseData<ShakaiFukushiHojinKeigengakuShokaiDiv> onClick_btnZengetsu(ShakaiFukushiHojinKeigengakuShokaiDiv div) {
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         getHandler(div).change年月(new RString("前月"), 給付実績情報照会情報.getCsData_L(),
+                給付実績情報照会情報.getCommonHeader().get給付実績ヘッダ情報2(),
                 new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
                 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
@@ -121,6 +122,7 @@ public class ShakaiFukushiHojinKeigengakuShokai {
     public ResponseData<ShakaiFukushiHojinKeigengakuShokaiDiv> onClick_btnJigetsu(ShakaiFukushiHojinKeigengakuShokaiDiv div) {
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         getHandler(div).change年月(new RString("次月"), 給付実績情報照会情報.getCsData_L(),
+                給付実績情報照会情報.getCommonHeader().get給付実績ヘッダ情報2(),
                 new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
                 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
