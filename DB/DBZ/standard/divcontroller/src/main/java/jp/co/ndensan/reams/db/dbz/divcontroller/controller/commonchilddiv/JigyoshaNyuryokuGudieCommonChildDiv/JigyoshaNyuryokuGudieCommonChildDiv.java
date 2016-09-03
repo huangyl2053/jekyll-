@@ -67,7 +67,11 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
      * @return ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv>
      */
     public ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv> onclick_BtnClear(JigyoshaNyuryokuGudieCommonChildDivDiv requestDiv) {
-
+        requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYukouKaishibi().setDisabled(false);
+        requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJigyoshamei().setDisabled(false);
+        requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYubinNo().setDisabled(false);
+        requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJusho().setDisabled(false);
+        requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getServiceJigyosha().setDisabled(false);
         JigyoshaMode mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
         createHandlerOf(requestDiv).clear(mode);
         return createResponseData(requestDiv);

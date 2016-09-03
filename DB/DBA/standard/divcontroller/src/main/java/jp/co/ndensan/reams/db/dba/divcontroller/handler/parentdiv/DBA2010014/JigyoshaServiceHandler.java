@@ -131,7 +131,11 @@ public class JigyoshaServiceHandler {
         beforeDiv.setServiceShuruiCode(new ServiceShuruiCode(div.getJigyoshaServiceKihon().getDdlServiceShuruiChiikiMitchaku().getSelectedKey().toString()));
         beforeDiv.setYukoKaishiYMD(div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue());
         beforeDiv.setYukoShuryoYMD(div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoShuryoYMD().getValue());
-        beforeDiv.setKihonJohoJunkyoKubun(div.getJigyoshaServiceKihon().getChkKihonJunkyoFlag().getSelectedKeys().get(0));
+        if(!div.getJigyoshaServiceKihon().getChkKihonJunkyoFlag().getSelectedKeys().isEmpty()){
+            beforeDiv.setKihonJohoJunkyoKubun(div.getJigyoshaServiceKihon().getChkKihonJunkyoFlag().getSelectedKeys().get(0));
+        }else{
+            beforeDiv.setKihonJohoJunkyoKubun(RString.EMPTY);
+        }
         beforeDiv.setJigyoKaishiYMD(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoKaishiYMD().getValue());
         beforeDiv.setJigyoKyushiYMD(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoKyushiYMD().getValue());
         beforeDiv.setJigyoSaikaiYMD(div.getJigyoshaServiceKihon().getJigyosha().getTxtJikyoSaikaiYMD().getValue());
