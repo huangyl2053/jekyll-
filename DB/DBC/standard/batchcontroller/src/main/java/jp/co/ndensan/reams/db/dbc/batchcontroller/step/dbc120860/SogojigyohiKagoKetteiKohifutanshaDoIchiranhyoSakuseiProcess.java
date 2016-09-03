@@ -197,6 +197,7 @@ public class SogojigyohiKagoKetteiKohifutanshaDoIchiranhyoSakuseiProcess extends
             if (!beforeEntity.get証記載保険者番号().equals(帳票出力対象データ.get証記載保険者番号())) {
                 output = 集計項目作成(beforeEntity);
                 csvWriter.writeLine(output);
+                連番 = 連番 + 1;
                 SogojigyohiKagoKetteitsuchishoTorikomiIchiranReport report = new SogojigyohiKagoKetteitsuchishoTorikomiIchiranReport(
                         beforeEntity, 出力順Map, parameter.get処理年月(), parameter.getシステム日付(), true, 連番);
                 report.writeBy(reportSourceWriter);

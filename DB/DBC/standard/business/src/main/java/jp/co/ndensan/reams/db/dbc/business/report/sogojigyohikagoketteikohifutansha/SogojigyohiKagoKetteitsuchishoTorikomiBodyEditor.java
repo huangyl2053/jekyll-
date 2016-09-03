@@ -47,6 +47,7 @@ public class SogojigyohiKagoKetteitsuchishoTorikomiBodyEditor implements ISogoji
     @Override
     public SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource edit(SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource source) {
         if (集計Flag) {
+            edit明細(source);
             edit集計(source);
         } else {
             edit明細(source);
