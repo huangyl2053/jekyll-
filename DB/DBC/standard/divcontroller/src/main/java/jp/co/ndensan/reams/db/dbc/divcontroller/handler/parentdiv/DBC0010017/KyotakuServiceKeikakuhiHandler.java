@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010017.Kyot
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010017.dgServiceKeikakuhiFromH2104_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010017.dgServiceKeikakuhiToH2103_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -71,14 +70,19 @@ public class KyotakuServiceKeikakuhiHandler {
     /**
      * 画面のデータを初期化する。
      *
-     * @param 居宅サービス計画費list List<KyufujissekiKyotakuServiceBusiness>
+     * @param business List<KyufujissekiKyotakuServiceBusiness>
      * @param サービス提供年月 FlexibleYearMonth
      */
-    public void setDataGrid(List<KyufujissekiKyotakuServiceBusiness> 居宅サービス計画費list, FlexibleYearMonth サービス提供年月) {
-
+    public void setDataGrid(List<KyufujissekiKyotakuServiceBusiness> business, FlexibleYearMonth サービス提供年月) {
+        RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
+        RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
+        RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
+        List<KyufujissekiKyotakuServiceBusiness> 特定入所者介護サービス費用list = get給付実績データ(business,
+                整理番号, 事業者番号, 様式番号, サービス提供年月.toDateString());
+        List<KyufujissekiKyotakuServiceBusiness> dataToRepeat = getサービス提供年月list(business);
         if (サービス提供年月.isBeforeOrEquals(平成21年3月) && (平成18年4月.isBeforeOrEquals(サービス提供年月))) {
             List<dgServiceKeikakuhiToH2103_Row> to2013rowList = new ArrayList<>();
-            for (KyufujissekiKyotakuServiceBusiness 居宅サービス計画費 : 居宅サービス計画費list) {
+            for (KyufujissekiKyotakuServiceBusiness 居宅サービス計画費 : 特定入所者介護サービス費用list) {
 
                 to2013rowList.add(get2013データ(居宅サービス計画費));
                 to2013rowList.add(get2013後のデータ(居宅サービス計画費));
@@ -86,14 +90,14 @@ public class KyotakuServiceKeikakuhiHandler {
             div.getDgServiceKeikakuhiToH2103().setDataSource(to2013rowList);
         } else {
             List<dgServiceKeikakuhiFromH2104_Row> from2014rowList = new ArrayList<>();
-            for (KyufujissekiKyotakuServiceBusiness 居宅サービス計画費 : 居宅サービス計画費list) {
+            for (KyufujissekiKyotakuServiceBusiness 居宅サービス計画費 : 特定入所者介護サービス費用list) {
 
                 from2014rowList.add(get2014データ(居宅サービス計画費));
                 from2014rowList.add(get2014後のデータ(居宅サービス計画費));
             }
             div.getDgServiceKeikakuhiFromH2104().setDataSource(from2014rowList);
         }
-        this.setGetsuBtn(居宅サービス計画費list, サービス提供年月);
+        this.setGetsuBtn(dataToRepeat, サービス提供年月);
 
     }
 
@@ -342,26 +346,22 @@ public class KyotakuServiceKeikakuhiHandler {
             }
         }
         FlexibleYearMonth 年月;
-        JigyoshaNo 新事業者番号;
         RString 新整理番号;
         NyuryokuShikibetsuNo 新識別番号;
         if (前月.equals(change月)) {
             年月 = dataToRepeat.get(index + 1).get居宅サービス計画費().getサービス提供年月();
-            新事業者番号 = dataToRepeat.get(index + 1).get居宅サービス計画費().get事業所番号();
             新整理番号 = dataToRepeat.get(index + 1).get居宅サービス計画費().get整理番号();
             新識別番号 = dataToRepeat.get(index + 1).get居宅サービス計画費().get入力識別番号();
             div.getBtnJigetsu().setDisabled(false);
         } else {
             年月 = dataToRepeat.get(index - 1).get居宅サービス計画費().getサービス提供年月();
-            新事業者番号 = dataToRepeat.get(index - 1).get居宅サービス計画費().get事業所番号();
             新整理番号 = dataToRepeat.get(index - 1).get居宅サービス計画費().get整理番号();
             新識別番号 = dataToRepeat.get(index - 1).get居宅サービス計画費().get入力識別番号();
             div.getBtnZengetsu().setDisabled(false);
         }
         div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 年月, 新整理番号, 新識別番号);
-        List<KyufujissekiKyotakuServiceBusiness> 居宅サービス計画費list = get給付実績データ(給付実績居宅サービス計画費list,
-                新整理番号, 新事業者番号.value(), 新識別番号.value(), 年月.toDateString());
-        setDataGrid(居宅サービス計画費list, 年月);
+
+        setDataGrid(dataToRepeat, 年月);
 
     }
 
@@ -405,12 +405,7 @@ public class KyotakuServiceKeikakuhiHandler {
         div.getCcdKyufuJissekiHeader().set整理番号(事業者番号リスト.get(index + i).get整理番号());
         div.getCcdKyufuJissekiHeader().set識別番号名称(事業者番号リスト.get(index + i).get識別番号名称());
         div.getCcdKyufuJissekiHeader().set様式番号(事業者番号リスト.get(index + i).get識別番号());
-        List<KyufujissekiKyotakuServiceBusiness> 居宅サービス計画費list = get給付実績データ(給付実績居宅サービス計画費list,
-                事業者番号リスト.get(index + i).get整理番号(),
-                事業者番号リスト.get(index + i).get事業所番号().value(),
-                事業者番号リスト.get(index + i).get識別番号(),
-                事業者番号リスト.get(index + i).getサービス提供年月().toDateString());
-        setDataGrid(居宅サービス計画費list, new FlexibleYearMonth(サービス提供年月));
+        setDataGrid(給付実績居宅サービス計画費list, new FlexibleYearMonth(サービス提供年月));
         div.getBtnMaeJigyosha().setDisabled(true);
         div.getBtnAtoJigyosha().setDisabled(true);
         if (0 < index + i) {
@@ -421,17 +416,8 @@ public class KyotakuServiceKeikakuhiHandler {
         }
     }
 
-    /**
-     * 給付実績データです。
-     *
-     * @param 給付実績居宅サービス計画費list List<KyufujissekiKyotakuServiceBusiness>
-     * @param 整理番号 RString
-     * @param 様式番号 RString
-     * @param 事業者番号 RString
-     * @param サービス提供年月 RString
-     * @return 緊急時施設療養データ List<KyufujissekiKyotakuServiceBusiness>
-     */
-    public List<KyufujissekiKyotakuServiceBusiness> get給付実績データ(List<KyufujissekiKyotakuServiceBusiness> 給付実績居宅サービス計画費list, RString 整理番号, RString 事業者番号, RString 様式番号, RString サービス提供年月) {
+    private List<KyufujissekiKyotakuServiceBusiness> get給付実績データ(List<KyufujissekiKyotakuServiceBusiness> 給付実績居宅サービス計画費list,
+            RString 整理番号, RString 事業者番号, RString 様式番号, RString サービス提供年月) {
         List<KyufujissekiKyotakuServiceBusiness> 居宅サービス計画費list = new ArrayList<>();
         for (int index = 0; index < 給付実績居宅サービス計画費list.size(); index++) {
             if (事業者番号.equals(給付実績居宅サービス計画費list.get(index).get居宅サービス計画費().get事業所番号().value())

@@ -28,7 +28,7 @@ public class ShunoJoho {
      * @param div ShunoJohoDiv
      * @return ResponseData<ShunoJohoDiv>
      */
-    public ResponseData<ShunoJohoDiv> onLoad(ShunoJohoDiv div) {
+    public ResponseData<ShunoJohoDiv> initialize(ShunoJohoDiv div) {
         getHandler(div).init();
         return ResponseData.of(div).respond();
     }

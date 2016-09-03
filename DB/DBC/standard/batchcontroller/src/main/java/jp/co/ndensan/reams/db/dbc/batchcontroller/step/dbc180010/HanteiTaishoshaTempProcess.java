@@ -76,6 +76,7 @@ public class HanteiTaishoshaTempProcess extends BatchProcessBase<JukyushaDaichoT
         hanteiTaishoshaTempEntity.setNenkiniShotokuGaku(entity.getNenkiniShotokuGaku());
         hanteiTaishoshaTempEntity.setKazeiShotokuGaku(entity.getKazeiShotokuGaku());
         hanteiTaishoshaTempEntity.setGekihenKanwaKubun(entity.getGekihenKanwaKubun());
+        hanteiTaishoshaTempEntity.setDataKubun(entity.getDataKubun());
         tempDbWriter.insert(hanteiTaishoshaTempEntity);
     }
 

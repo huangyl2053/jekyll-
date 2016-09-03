@@ -125,48 +125,50 @@ public class SystemKanriNinteiShienTotalHandler {
         RDate 日期 = RDate.getNowDate();
 
         YokaigoInterfaceShurui iF種類 = YokaigoInterfaceShurui.toValue(div.getSystemKanri().getSystemKanriNinteiShien().getDdlIfShurui().getSelectedKey());
-        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_ＩＦ種類, iF種類.getコード(), ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_ＩＦ種類, iF種類.getコード(), ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         if (!div.getSystemKanri().getSystemKanriNinteiShien().getDdlShujiiChosainJohoTorikomi().isDisplayNone()) {
             YokaigoInterfaceShurui iF医調取込 = YokaigoInterfaceShurui.toValue(div.getSystemKanri().getSystemKanriNinteiShien().getDdlShujiiChosainJohoTorikomi().getSelectedKey());
-            BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_医調取込み, iF医調取込.getコード(), ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+            BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_医調取込み, iF医調取込.getコード(), ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         }
         RDate 認定ＩＦ改定日 = div.getSystemKanri().getSystemKanriNinteiShien().getTxtNinteiIfKaiteiYMD().getValue();
-        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_認定ＩＦ改定日, 認定ＩＦ改定日.toDateString(), ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_認定ＩＦ改定日, 認定ＩＦ改定日.toDateString(), ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         RString 申請関連ＩＦ類字変換 = div.getSystemKanri().getSystemKanriNinteiShien().getRadShinseiKanren().getSelectedKey();
-        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_類似変換, 申請関連ＩＦ類字変換, ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_類似変換, 申請関連ＩＦ類字変換, ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         RString 一括更新認定時のボタン初期値 = div.getSystemKanri().getSystemKanriNinteiShien().getRadIkkatsuKoshin().getSelectedKey();
-        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_一括認定日区分, 一括更新認定時のボタン初期値, ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_一括認定日区分, 一括更新認定時のボタン初期値, ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         RString 旧様式_認定結果ファイル = div.getSystemKanri().getSystemKanriNinteiShien().getTxtNinteiKekkaFileOld().getValue();
-        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_認定結果ＩＦ, 旧様式_認定結果ファイル, ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_認定結果ＩＦ, 旧様式_認定結果ファイル, ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         RString 旧様式_指定事業出力ファイル = div.getSystemKanri().getSystemKanriNinteiShien().getTxtShiteiJigyoOutFileOld().getValue();
-        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_指定事業出力Ｆ, 旧様式_指定事業出力ファイル, ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_指定事業出力Ｆ, 旧様式_指定事業出力ファイル, ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         RString 旧様式_調査員出力ファイル = div.getSystemKanri().getSystemKanriNinteiShien().getTxtChosainOutFileOld().getValue();
-        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_調査員出力Ｆ, 旧様式_調査員出力ファイル, ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_調査員出力Ｆ, 旧様式_調査員出力ファイル, ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         RString 旧様式_医療機関出力ファイル = div.getSystemKanri().getSystemKanriNinteiShien().getTxtIryoKikanOutFileOld().getValue();
-        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_医療機関出力Ｆ, 旧様式_医療機関出力ファイル, ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_医療機関出力Ｆ, 旧様式_医療機関出力ファイル, ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         RString 旧様式_主治医出力ファイル = div.getSystemKanri().getSystemKanriNinteiShien().getTxtShujiiOutFileOld().getValue();
-        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_主治医出力Ｆ, 旧様式_主治医出力ファイル, ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_主治医出力Ｆ, 旧様式_主治医出力ファイル, ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         RString 旧様式_申請情報出力ファイル = div.getSystemKanri().getSystemKanriNinteiShien().getTxtShinseiJohoOutFileOld().getValue();
-        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_申請情報出力Ｆ, 旧様式_申請情報出力ファイル, ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_申請情報出力Ｆ, 旧様式_申請情報出力ファイル, ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         RString 新様式_認定結果ファイル = div.getSystemKanri().getSystemKanriNinteiShien().getTxtNinteiKekkaFileNew().getValue();
-        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_認定結果ＩＦ_新, 新様式_認定結果ファイル, ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_認定結果ＩＦ_新, 新様式_認定結果ファイル, ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         RString 新様式_指定事業出力ファイル = div.getSystemKanri().getSystemKanriNinteiShien().getTxtShiteiJigyoOutFileNew().getValue();
-        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_指定事業出力Ｆ_新, 新様式_指定事業出力ファイル, ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_指定事業出力Ｆ_新, 新様式_指定事業出力ファイル, ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         RString 新様式_調査員出力ファイル = div.getSystemKanri().getSystemKanriNinteiShien().getTxtChosainOutFileNew().getValue();
-        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_調査員出力Ｆ_新, 新様式_調査員出力ファイル, ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_調査員出力Ｆ_新, 新様式_調査員出力ファイル, ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         RString 新様式_医療機関出力ファイル = div.getSystemKanri().getSystemKanriNinteiShien().getTxtIryoKikanOutFileNew().getValue();
-        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_医療機関出力Ｆ_新, 新様式_医療機関出力ファイル, ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_医療機関出力Ｆ_新, 新様式_医療機関出力ファイル, ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         RString 新様式_主治医出力ファイル = div.getSystemKanri().getSystemKanriNinteiShien().getTxtShujiiOutFileNew().getValue();
-        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_主治医出力Ｆ_新, 新様式_主治医出力ファイル, ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_主治医出力Ｆ_新, 新様式_主治医出力ファイル, ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         RString 新様式_申請情報出力ファイル = div.getSystemKanri().getSystemKanriNinteiShien().getTxtShinseiJohoOutFileNew().getValue();
-        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_申請情報出力Ｆ_新, 新様式_申請情報出力ファイル, ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+        BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_申請情報出力Ｆ_新, 新様式_申請情報出力ファイル, ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         if (!div.getSystemKanri().getSystemKanriNinteiShien().getTxtShiboJohoFile().isDisplayNone()) {
             RString 新様式_死亡情報ファイル = div.getSystemKanri().getSystemKanriNinteiShien().getTxtShiboJohoFile().getValue();
-            BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_転入_資格喪失情報出力Ｆ, 新様式_死亡情報ファイル, ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+            BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_転入_資格喪失情報出力Ｆ, 新様式_死亡情報ファイル, ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         }
         if (!div.getSystemKanri().getSystemKanriNinteiShien().getTxtTennyuShiboFile().isDisplayNone()) {
             RString 新様式_転入死亡ファイル = div.getSystemKanri().getSystemKanriNinteiShien().getTxtTennyuShiboFile().getValue();
-            BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_転入_資格喪失情報出力Ｆ, 新様式_転入死亡ファイル, ResponseHolder.getMenuID().concat(new RString("を使用して更新")), new RString(""), 日期);
+            BusinessConfig.update(ConfigNameDBD.要介護ＩＦ_転入_資格喪失情報出力Ｆ, 新様式_転入死亡ファイル, ResponseHolder.getMenuID().concat(変更理由), RString.EMPTY, 日期);
         }
     }
+
+    private static final RString 変更理由 = new RString("を使用して更新");
 }
