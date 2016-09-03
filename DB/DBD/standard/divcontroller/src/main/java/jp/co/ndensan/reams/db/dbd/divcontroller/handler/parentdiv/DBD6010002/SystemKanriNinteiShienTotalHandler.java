@@ -60,13 +60,13 @@ public class SystemKanriNinteiShienTotalHandler {
      * DDL項目の設定
      */
     private void setDDL項目() {
-        List<KeyValueDataSource> iF_種類データソース = new ArrayList();
+        List<KeyValueDataSource> iF_種類データソース = new ArrayList<>();
         for (YokaigoInterfaceShurui iF_種類 : YokaigoInterfaceShurui.values()) {
             iF_種類データソース.add(new KeyValueDataSource(iF_種類.getコード(), iF_種類.get名称()));
         }
         div.getSystemKanri().getSystemKanriNinteiShien().getDdlIfShurui().setDataSource(iF_種類データソース);
 
-        List<KeyValueDataSource> iF_医調取込データソース = new ArrayList();
+        List<KeyValueDataSource> iF_医調取込データソース = new ArrayList<>();
         for (YokaigoInterfaceIchoTorikomi iF_医調取込 : YokaigoInterfaceIchoTorikomi.values()) {
             iF_医調取込データソース.add(new KeyValueDataSource(iF_医調取込.getコード(), iF_医調取込.get名称()));
         }
