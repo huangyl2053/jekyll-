@@ -6,9 +6,16 @@
 package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010020;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.HihokenshaDaichoBirthYMDProcessParameter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.JigyouHoukokuTokeiProcessParameter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.RiyoshaFutangakuKanriJohoSyoriProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.SyotaiJohoSyoriProcessParameter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.TokuteiNyushoshaJohoSyoriProcessParameter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.YokaigoNinteishaJohoSyoriProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -34,16 +41,18 @@ public class DBU010020_JigyoHokokuGeppo_IppanParameter extends BatchParameterBas
     private static final String KYUSHICHOSONLIST = "kyuShichosonList";
     private static final String KAKOSHUKEISHICHOSONLIST = "kakoShukeiShichosonList";
     private static final String KAKOSHUKEIKYUSHICHOSONKBN = "kakoShukeiKyuShichosonKbn";
-//    private static final RDate 処理日時 = RDate.getNowDate();
+    private static final String SAKUSEICSVFILEID = "sakuseiCSVFileID";
+    private static final String SYUTURYOKUCSVFILEPATH = "syuturyokuCSVFilePath";
+    private static final YMDHMS SYORIYMDHMS = YMDHMS.now();
 
     @BatchParameter(key = PRINTCONTROLKBN, name = "プリントコントロール区分")
     private RString printControlKbn;
     @BatchParameter(key = SYUKEIYM, name = "集計年月")
     private FlexibleYearMonth syukeiYM;
-    @BatchParameter(key = HOKOKUYM, name = "報告年度")
-    private RString hokokuYM;
+    @BatchParameter(key = HOKOKUYM, name = "報告年月")
+    private FlexibleYearMonth hokokuYM;
     @BatchParameter(key = NENDO, name = "年度")
-    private RString nendo;
+    private FlexibleYear nendo;
     @BatchParameter(key = SAKUSEIYMD, name = "作成日付")
     private RString sakuseiYMD;
     @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
@@ -60,6 +69,17 @@ public class DBU010020_JigyoHokokuGeppo_IppanParameter extends BatchParameterBas
     private List<RString> kakoShukeiShichosonList;
     @BatchParameter(key = KAKOSHUKEIKYUSHICHOSONKBN, name = "過去集計分旧市町村区分")
     private RString kakoShukeiKyuShichosonKbn;
+    @BatchParameter(key = SAKUSEICSVFILEID, name = "作成CSVファイルID")
+    private RString sakuseiCSVFileID;
+    @BatchParameter(key = SYUTURYOKUCSVFILEPATH, name = "出力CSVファイルPath")
+    private RString csvFilePath;
+
+    /**
+     * コンストラクタです。
+     */
+    public DBU010020_JigyoHokokuGeppo_IppanParameter() {
+
+    }
 
     /**
      * Process用のパラメータを生成します。
@@ -67,6 +87,52 @@ public class DBU010020_JigyoHokokuGeppo_IppanParameter extends BatchParameterBas
      * @return SyotaiJohoSyoriProcessParameter
      */
     public SyotaiJohoSyoriProcessParameter toSyotaiJohoSyoriProcessParameter() {
-        return new SyotaiJohoSyoriProcessParameter(syukeiYM);
+        return new SyotaiJohoSyoriProcessParameter(syukeiYM, csvFilePath);
+    }
+
+    /**
+     * Process用のパラメータを生成します。
+     *
+     * @return HihokenshaDaichoBirthYMDProcessParameter
+     */
+    public HihokenshaDaichoBirthYMDProcessParameter toHihokenshaDaichoBirthYMDProcessParameter() {
+        return new HihokenshaDaichoBirthYMDProcessParameter(SYORIYMDHMS, syukeiYM, sakuseiCSVFileID, csvFilePath);
+    }
+
+    /**
+     * Process用のパラメータを生成します。
+     *
+     * @return RiyoshaFutangakuKanriJohoSyoriProcessParameter
+     */
+    public RiyoshaFutangakuKanriJohoSyoriProcessParameter toRiyoshaFutangakuKanriJohoSyoriProcessParameter() {
+        return new RiyoshaFutangakuKanriJohoSyoriProcessParameter(syukeiYM, sakuseiCSVFileID, csvFilePath);
+    }
+
+    /**
+     * Process用のパラメータを生成します。
+     *
+     * @return TokuteiNyushoshaJohoSyoriProcessParameter
+     */
+    public TokuteiNyushoshaJohoSyoriProcessParameter toTokuteiNyushoshaJohoSyoriProcessParameter() {
+        return new TokuteiNyushoshaJohoSyoriProcessParameter(syukeiYM, sakuseiCSVFileID, csvFilePath);
+    }
+
+    /**
+     * Process用のパラメータを生成します。
+     *
+     * @return TokuteiNyushoshaJohoSyoriProcessParameter
+     */
+    public YokaigoNinteishaJohoSyoriProcessParameter toYokaigoNinteishaJohoSyoriProcessParameter() {
+        return new YokaigoNinteishaJohoSyoriProcessParameter(syukeiYM, sakuseiCSVFileID, csvFilePath);
+    }
+
+    /**
+     * Process用のパラメータを生成します。
+     *
+     * @return JigyouHoukokuTokeiProcessParameter
+     */
+    public JigyouHoukokuTokeiProcessParameter toJigyouHoukokuTokeiProcessParameter() {
+        return new JigyouHoukokuTokeiProcessParameter(hokokuYM, syukeiYM, nendo, shichosonCode,
+                koseiShichosonList, koseiShichosonKbn, kyuShichosonList, kyuShichosonKbn, SYORIYMDHMS, csvFilePath);
     }
 }

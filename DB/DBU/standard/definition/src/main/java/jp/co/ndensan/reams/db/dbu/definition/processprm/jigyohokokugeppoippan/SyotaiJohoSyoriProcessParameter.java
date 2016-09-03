@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.SyotaiJohoSyoriMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
@@ -20,14 +21,17 @@ import lombok.Getter;
 public class SyotaiJohoSyoriProcessParameter implements IBatchProcessParameter {
 
     private final FlexibleYearMonth 集計年月;
+    private final RString 出力ファイルPATH;
 
     /**
      * コンストラクタです。
      *
      * @param 集計年月 FlexibleYearMonth
+     * @param 出力ファイルPATH RString
      */
-    public SyotaiJohoSyoriProcessParameter(FlexibleYearMonth 集計年月) {
+    public SyotaiJohoSyoriProcessParameter(FlexibleYearMonth 集計年月, RString 出力ファイルPATH) {
         this.集計年月 = 集計年月;
+        this.出力ファイルPATH = 出力ファイルPATH;
     }
 
     /**

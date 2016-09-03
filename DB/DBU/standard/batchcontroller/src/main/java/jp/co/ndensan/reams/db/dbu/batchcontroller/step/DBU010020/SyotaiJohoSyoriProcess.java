@@ -13,15 +13,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 世帯情報処理のバッチ処理クラスです。
@@ -32,15 +28,15 @@ public class SyotaiJohoSyoriProcess extends BatchProcessBase<SyotaiJohoCsvEntity
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence."
             + "db.mapper.relate.jigyohokokugeppoippan.IJigyoHokokuGeppoIppanMapper.getShotaiJohoKonkyoCSV");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBU010020"));
+//    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBU010100"));
     private static final RString ファイル名 = new RString("DBU010100.CSV");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
 
     private SyotaiJohoSyoriProcessParameter processParameter;
     private IJigyoHokokuGeppoIppanMapper mapper;
-    private FileSpoolManager manager;
-    private RString filename;
+//    private FileSpoolManager manager;
+//    private RString filename;
 
     @BatchWriter
     private CsvWriter<SyotaiJohoCsvEntity> csvWriterSyotaiJoho;
@@ -48,8 +44,9 @@ public class SyotaiJohoSyoriProcess extends BatchProcessBase<SyotaiJohoCsvEntity
     @Override
     protected void initialize() {
         mapper = getMapper(IJigyoHokokuGeppoIppanMapper.class);
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        filename = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
+//        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+//        filename = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
+        RString filename = Path.combinePath(processParameter.get出力ファイルPATH(), ファイル名);
         csvWriterSyotaiJoho = new CsvWriter.InstanceBuilder(filename).
                 setEncode(Encode.UTF_8withBOM)
                 .canAppend(true)
@@ -76,8 +73,8 @@ public class SyotaiJohoSyoriProcess extends BatchProcessBase<SyotaiJohoCsvEntity
         }
     }
 
-    @Override
-    protected void afterExecute() {
-        manager.spool(filename);
-    }
+//    @Override
+//    protected void afterExecute() {
+//        manager.spool(filename);
+//    }
 }
