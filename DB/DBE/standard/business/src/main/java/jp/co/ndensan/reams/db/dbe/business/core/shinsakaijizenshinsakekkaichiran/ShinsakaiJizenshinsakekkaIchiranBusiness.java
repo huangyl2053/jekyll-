@@ -447,16 +447,16 @@ public class ShinsakaiJizenshinsakekkaIchiranBusiness {
             return RString.EMPTY;
         }
         if (コード99A.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun99.toValue(二次判定要介護状態区分コード).get略称();
+            return YokaigoJotaiKubun99.toValue(二次判定要介護状態区分コード).get名称();
         }
         if (コード02A.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun02.toValue(二次判定要介護状態区分コード).get略称();
+            return YokaigoJotaiKubun02.toValue(二次判定要介護状態区分コード).get名称();
         }
         if (コード06A.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun06.toValue(二次判定要介護状態区分コード).get略称();
+            return YokaigoJotaiKubun06.toValue(二次判定要介護状態区分コード).get名称();
         }
         if (コード09A.equals(厚労省IF識別コード) || コード09B.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun09.toValue(二次判定要介護状態区分コード).get略称();
+            return YokaigoJotaiKubun09.toValue(二次判定要介護状態区分コード).get名称();
         }
         return RString.EMPTY;
     }

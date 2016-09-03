@@ -68,38 +68,56 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
     private JigyoshoMukeShakaiFukushiHojinKeigenReportSource edit項目(JigyoshoMukeShakaiFukushiHojinKeigenReportSource source) {
         source.printTimeStamp = get作成日付();
 
-        source.hokenshaNo = 地方公共団体.get地方公共団体コード().getColumnValue();
+        source.hokenshaNo = 地方公共団体.get地方公共団体コード() == null ? RString.EMPTY : 地方公共団体.get地方公共団体コード().value();
         source.hokenshaName = 地方公共団体.get市町村名();
         if (null != iOutputOrder) {
             setiOutputOrder(source);
+        } else {
+            source.shutsuryokujun1 = RString.EMPTY;
+            source.shutsuryokujun2 = RString.EMPTY;
+            source.shutsuryokujun3 = RString.EMPTY;
+            source.shutsuryokujun4 = RString.EMPTY;
+            source.shutsuryokujun5 = RString.EMPTY;
+            source.kaiPege1 = RString.EMPTY;
+            source.kaiPege2 = RString.EMPTY;
+            source.kaiPege3 = RString.EMPTY;
+            source.kaiPege4 = RString.EMPTY;
+            source.kaiPege5 = RString.EMPTY;
         }
         source.jigyoshaCd = 社福減免対象者情報.get事業所番号();
         source.jigyoshaName = 社福減免対象者情報.get事業者名称();
         source.yubinNo = 社福減免対象者情報.get郵便番号();
-        source.jusho = 社福減免対象者情報.get事業者住所().getColumnValue();
-        source.telNo = 社福減免対象者情報.get電話番号().getColumnValue();
+        source.jusho = 社福減免対象者情報.get事業者住所() == null ? RString.EMPTY : 社福減免対象者情報.get事業者住所().value();
+        source.telNo = 社福減免対象者情報.get電話番号() == null ? RString.EMPTY : 社福減免対象者情報.get電話番号().value();
 
-        source.listHihokenshaNameKana_1 = 社福減免対象者情報.getカナ名称().getColumnValue();
-        source.listHihokenshaName_1 = 社福減免対象者情報.get名称().getColumnValue();
+        source.listHihokenshaNameKana_1 = 社福減免対象者情報.getカナ名称() == null ? RString.EMPTY : 社福減免対象者情報.getカナ名称().value();
+        if (社福減免対象者情報.get名称() == null || 社福減免対象者情報.get名称().isEmpty()) {
+            source.listHihokenshaName_1 = new RString("出力データ　０件");
+        } else {
+            source.listHihokenshaName_1 = 社福減免対象者情報.get名称().value();
+        }
         source.listMeisai_1 = new RString(index);
-        source.listMeisai_2 = 社福減免対象者情報.get被保険者番号().getColumnValue();
+        source.listMeisai_2 = 社福減免対象者情報.get被保険者番号() == null ? RString.EMPTY : 社福減免対象者情報.get被保険者番号().value();
         if (new RString("1").equals(社福減免対象者情報.get住民種別コード())
                 || new RString("3").equals(社福減免対象者情報.get住民種別コード())) {
-            source.listMeisai_3 = 社福減免対象者情報.get生年月日().wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.listMeisai_3 = 社福減免対象者情報.get生年月日() == null ? RString.EMPTY : 社福減免対象者情報.get生年月日().
+                    wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString();
         } else {
-            source.listMeisai_3 = 社福減免対象者情報.get生年月日().seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.listMeisai_3 = 社福減免対象者情報.get生年月日() == null ? RString.EMPTY : 社福減免対象者情報.get生年月日().
+                    seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
         source.listMeisai_4 = Seibetsu.toValue(社福減免対象者情報.get性別コード()).get名称();
         source.listMeisai_5 = YokaigoJotaiKubun.toValue(社福減免対象者情報.get要介護認定状態区分コード().getColumnValue()).get名称();
         source.listMeisai_6 = 社福減免対象者情報.get確認番号();
-        source.listMeisai_7 = 社福減免対象者情報.get適用開始年月日().wareki().eraType(EraType.KANJI).
+        source.listMeisai_7 = 社福減免対象者情報.get適用開始年月日() == null ? RString.EMPTY : 社福減免対象者情報.
+                get適用開始年月日().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        source.listMeisai_8 = 社福減免対象者情報.get適用終了年月日().wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        source.listMeisai_8 = 社福減免対象者情報.get適用終了年月日() == null ? RString.EMPTY : 社福減免対象者情報.get適用終了年月日().
+                wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         source.listMeisai_9 = getサービス限定();
 
-        source.listShohokenshaNo_1 = 社福減免対象者情報.get証記載保険者番号().getColumnValue();
+        source.listShohokenshaNo_1 = 社福減免対象者情報.get証記載保険者番号() == null ? RString.EMPTY : 社福減免対象者情報.get証記載保険者番号().value();
         source.listShohokenshaName_1 = association.get市町村名();
 
         return source;

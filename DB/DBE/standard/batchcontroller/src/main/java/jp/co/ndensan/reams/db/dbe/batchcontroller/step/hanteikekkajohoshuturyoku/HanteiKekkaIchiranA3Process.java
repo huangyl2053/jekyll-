@@ -104,7 +104,7 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
         } else {
             entity.setTb_一次判定結果(RString.EMPTY);
         }
-        entity.setTb_二次判定要介護状態区分(YokaigoJotaiKubun09.toValue(entity.getTb_二次判定要介護状態区分()).get略称());
+        entity.setTb_二次判定要介護状態区分(YokaigoJotaiKubun09.toValue(entity.getTb_二次判定要介護状態区分()).get名称());
         if (一次判定結果_認知症加算_1.equals(entity.get一次判定結果_加算())) {
             entity.set一次判定結果(IchijiHanteiKekkaCode09.toValue(entity.get一次判定結果()).get名称());
         } else if (一次判定結果_認知症加算_2.equals(entity.get一次判定結果_加算())) {
@@ -114,7 +114,7 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
         } else {
             entity.set一次判定結果(RString.EMPTY);
         }
-        entity.set二次判定要介護状態区分(YokaigoJotaiKubun09.toValue(entity.get二次判定要介護状態区分()).get略称());
+        entity.set二次判定要介護状態区分(YokaigoJotaiKubun09.toValue(entity.get二次判定要介護状態区分()).get名称());
         entity.set状態像内容(YokaigoJotaizoReiCode.toValue(entity.get要介護状態像例コード()).get名称());
         entity.set二号特定疾病内容(new RString(TokuteiShippei.toValue(entity.get二号特定疾病コード()).toString()));
         HanteiKekkaIchiranA3Report report = new HanteiKekkaIchiranA3Report(entity);

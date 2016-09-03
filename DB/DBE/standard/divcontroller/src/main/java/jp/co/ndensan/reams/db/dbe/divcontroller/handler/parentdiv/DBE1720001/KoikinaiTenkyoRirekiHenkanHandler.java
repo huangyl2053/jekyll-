@@ -199,7 +199,7 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
     private RString setNijiHanteiYokaigoJotaiKubunCode(Code code) {
         RString kunbuncode = RString.EMPTY;
         if (null != code) {
-            kunbuncode = YokaigoJotaiKubun09.toValue(code.value()).get略称();
+            kunbuncode = YokaigoJotaiKubun09.toValue(code.value()).get名称();
         }
         return kunbuncode;
     }

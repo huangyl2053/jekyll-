@@ -116,14 +116,14 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
                 || 一次判定結果_認知症加算_3.equals(entity.getTb_一次判定結果_加算())) {
             entity.setTb_一次判定結果(IchijiHanteiKekkaNinchishoKasanCode.toValue(entity.getTb_一次判定結果()).get名称());
         }
-        entity.setTb_二次判定要介護状態区分(YokaigoJotaiKubun09.toValue(entity.getTb_二次判定要介護状態区分()).get略称());
+        entity.setTb_二次判定要介護状態区分(YokaigoJotaiKubun09.toValue(entity.getTb_二次判定要介護状態区分()).get名称());
         if (一次判定結果_認知症加算_1.equals(entity.get一次判定結果_加算())) {
             entity.set一次判定結果(IchijiHanteiKekkaCode09.toValue(entity.get一次判定結果()).get名称());
         } else if (一次判定結果_認知症加算_2.equals(entity.get一次判定結果_加算())
                 || 一次判定結果_認知症加算_3.equals(entity.get一次判定結果_加算())) {
             entity.set一次判定結果(IchijiHanteiKekkaNinchishoKasanCode.toValue(entity.get一次判定結果()).get名称());
         }
-        entity.set二次判定要介護状態区分(YokaigoJotaiKubun09.toValue(entity.get二次判定要介護状態区分()).get略称());
+        entity.set二次判定要介護状態区分(YokaigoJotaiKubun09.toValue(entity.get二次判定要介護状態区分()).get名称());
         entity.set二号特定疾病内容(TokuteiShippei.toValue(entity.get二号特定疾病コード()).get名称());
         HanteiKekkaIchiranReport report = new HanteiKekkaIchiranReport(entity);
         report.writeBy(reportSourceWriter);

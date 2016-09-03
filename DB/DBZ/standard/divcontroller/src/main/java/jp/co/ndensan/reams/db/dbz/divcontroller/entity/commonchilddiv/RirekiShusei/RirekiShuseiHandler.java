@@ -560,17 +560,17 @@ public class RirekiShuseiHandler {
     private RString get要介護状態区分名称(RString 厚労省IF識別コード, Code 要介護状態区分コード) {
         RString 要介護度名称 = RString.EMPTY;
         if (new RString("99A").equals(厚労省IF識別コード)) {
-            要介護度名称 = YokaigoJotaiKubun99.toValue(要介護状態区分コード.value()).get略称();
+            要介護度名称 = YokaigoJotaiKubun99.toValue(要介護状態区分コード.value()).get名称();
         }
         if (new RString("02A").equals(厚労省IF識別コード)) {
-            要介護度名称 = YokaigoJotaiKubun02.toValue(要介護状態区分コード.value()).get略称();
+            要介護度名称 = YokaigoJotaiKubun02.toValue(要介護状態区分コード.value()).get名称();
         }
         if (new RString("06A").equals(厚労省IF識別コード)) {
-            要介護度名称 = YokaigoJotaiKubun06.toValue(要介護状態区分コード.value()).get略称();
+            要介護度名称 = YokaigoJotaiKubun06.toValue(要介護状態区分コード.value()).get名称();
         }
         if (new RString("09A").equals(厚労省IF識別コード)
                 || new RString("09B").equals(厚労省IF識別コード)) {
-            要介護度名称 = YokaigoJotaiKubun09.toValue(要介護状態区分コード.value()).get略称();
+            要介護度名称 = YokaigoJotaiKubun09.toValue(要介護状態区分コード.value()).get名称();
         }
         return 要介護度名称;
     }
