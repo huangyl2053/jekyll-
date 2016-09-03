@@ -53,7 +53,11 @@ public class DBC640011_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
                 flowEntity = getResult(KogakuGassanJikofutangakuShomeishoFlowEntity.class, new RString(CSVファイル取込),
                         KogakuGassanJikofutangakuShomeishoInProcess.PARAMETER_OUT_FLOWENTITY);
                 レコード件数合算 = レコード件数合算 + flowEntity.getCodeNum();
-                高額合算自己負担額一時TBL登録件数 = flowEntity.get高額合算自己負担額一時TBL登録件数();
+                if (高額合算自己負担額一時TBL登録件数 == INDEX_0) {
+                    高額合算自己負担額一時TBL登録件数 = 高額合算自己負担額一時TBL登録件数 + flowEntity.get高額合算自己負担額一時TBL登録件数();
+                } else {
+                    高額合算自己負担額一時TBL登録件数 = flowEntity.get高額合算自己負担額一時TBL登録件数();
+                }
             }
         }
     }
