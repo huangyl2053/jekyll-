@@ -167,7 +167,7 @@ public class IryohokenRirekiCommonChildDiv {
             ichiran_Row.setKigoNo(requestDiv.getPnlIryohokenJoho().getTxtKigoBango().getValue());
             RStringBuilder 保険者名 = new RStringBuilder();
             保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
-            if (保険者名.toRString().isEmpty()) {
+            if (!requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue().isEmpty()) {
                 保険者名.append(new RString(":"));
             }
             保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());

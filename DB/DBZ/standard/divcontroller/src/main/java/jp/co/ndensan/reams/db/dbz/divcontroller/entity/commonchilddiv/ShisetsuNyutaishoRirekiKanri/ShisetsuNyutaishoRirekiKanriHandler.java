@@ -124,14 +124,39 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
     }
 
     /**
+     * 施設入退所履歴に初期化を設定します。外部からグリッドに設定するデータと、保存対象のデータを受け取ります。
+     *
+     * @param データソース グリッドに設定するデータソース
+     * @param 施設入退所情報Model 施設入退所情報Model
+     */
+    public void initialize(List<dgShisetsuNyutaishoRireki_Row> データソース, Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model) {
+
+        div.getDgShisetsuNyutaishoRireki().setDataSource(データソース);
+        ViewStateHolder.put(ViewStateKeys.施設入退所情報, 施設入退所情報Model);
+
+        switch (div.getMode_DisplayMode()) {
+            case 照会:
+                break;
+            case 照会選択有:
+                break;
+            case 資格異動:
+                資格異動モード();
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
      * 「追加する」ボタンを押下する場合、施設入退所情報パネルを活性します。
+     *
      * @return ShisetsuNyutaishoRirekiKanriDiv
      */
     public ValidationMessageControlPairs onClick_btnAddShisetsuNyutaisho() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         List<dgShisetsuNyutaishoRireki_Row> rowList = div.getDgShisetsuNyutaishoRireki().getDataSource();
-        
-        for (dgShisetsuNyutaishoRireki_Row row: rowList) {
+
+        for (dgShisetsuNyutaishoRireki_Row row : rowList) {
             if (row.getTaishoDate().getValue().isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(ShisetsuRirekiErrorMessage.履歴退所日));
             }
@@ -336,6 +361,15 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      */
     public List<dgShisetsuNyutaishoRireki_Row> get施設入退所履歴一覧() {
         return div.getDgShisetsuNyutaishoRireki().getDataSource();
+    }
+
+    /**
+     * 施設入退所履歴の一覧を取得します。
+     *
+     * @return List<dgShisetsuNyutaishoRireki_Row> 施設入退所履歴の一覧
+     */
+    public Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> getSaveData() {
+        return ViewStateHolder.get(ViewStateKeys.施設入退所情報, Models.class);
     }
 
     private void 一覧の設定(List<KaigoHohenShisetsuBusiness> 施設入退所情報) {
@@ -577,7 +611,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             newRow.setShisetsuShuruiKey(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類());
         }
     }
-    
+
     public boolean isSavable() {
         List<dgShisetsuNyutaishoRireki_Row> listRow = div.getDgShisetsuNyutaishoRireki().getDataSource();
         for (dgShisetsuNyutaishoRireki_Row row : listRow) {

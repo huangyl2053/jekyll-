@@ -9,11 +9,9 @@ var DBZ;
             ModeController.prototype.ModeA = function () {
                 return new Modes.ModeA(this.controls);
             };
-
             ModeController.prototype.ModeB = function () {
                 return new Modes.ModeB(this.controls);
             };
-
             ModeController.prototype.ModeC = function () {
                 return new Modes.ModeC(this.controls);
             };
@@ -54,25 +52,47 @@ var DBZ;
                     this.controls = controls;
                 }
                 ModeB.prototype.update = function () {
-                    this.controls.panelRireki().displayNone = true;
+                    this.controls.panelRireki().displayNone = false;
                     this.controls.panelInput().displayNone = false;
 
                     this.controls.txtStartDate().readOnly = false;
                     this.controls.txtEndDate().readOnly = false;
+
+                    this.controls.btnAdd().displayNone = false;
+                    this.controls.datagridRireki().gridSetting.isShowSelectButtonColumn = true;
+                    this.controls.datagridRireki().gridSetting.isShowModifyButtonColumn = true;
+                    this.controls.datagridRireki().gridSetting.isShowDeleteButtonColumn = true;
+                    this.controls.datagridRireki()._control.afterPropertiesSet();
                 };
                 return ModeB;
             })();
             Modes.ModeB = ModeB;
+
             var ModeC = (function () {
                 function ModeC(controls) {
                     this.controls = controls;
                 }
                 ModeC.prototype.init = function () {
+                    this.controls.panelRireki().displayNone = false;
                     this.controls.panelInput().displayNone = true;
                     this.controls.btnAdd().displayNone = true;
                     this.controls.datagridRireki().gridSetting.isShowSelectButtonColumn = false;
                     this.controls.datagridRireki().gridSetting.isShowModifyButtonColumn = false;
                     this.controls.datagridRireki().gridSetting.isShowDeleteButtonColumn = false;
+                    this.controls.datagridRireki()._control.afterPropertiesSet();
+                };
+
+                ModeC.prototype.update = function () {
+                    this.controls.panelRireki().displayNone = false;
+                    this.controls.panelInput().displayNone = false;
+
+                    this.controls.txtStartDate().readOnly = false;
+                    this.controls.txtEndDate().readOnly = false;
+
+                    this.controls.btnAdd().displayNone = false;
+                    this.controls.datagridRireki().gridSetting.isShowSelectButtonColumn = true;
+                    this.controls.datagridRireki().gridSetting.isShowModifyButtonColumn = true;
+                    this.controls.datagridRireki().gridSetting.isShowDeleteButtonColumn = true;
                     this.controls.datagridRireki()._control.afterPropertiesSet();
                 };
                 return ModeC;

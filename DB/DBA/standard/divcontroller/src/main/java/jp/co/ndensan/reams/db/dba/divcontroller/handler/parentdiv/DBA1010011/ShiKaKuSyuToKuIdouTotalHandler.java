@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1010011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.exclusivekey.DbaExclusiveKey;
+import jp.co.ndensan.reams.db.dba.business.core.hihokensha.ShikakuTokusoChecker;
 import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.ShikakuRirekiJoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuIdoTotalDiv;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysGappeiJohoKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
@@ -29,6 +31,10 @@ import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichoson
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IHistoryIterator;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -37,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -127,6 +134,39 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
         }
         get被保番号表示有無制御();
         return 状態_被保履歴タブ;
+    }
+
+    /**
+     * 直近の住民種別と住民状態・メニューIDから、対象者が資格取得可能かを判断します。
+     *
+     * @return 資格取得可能と判定出来たらtrue
+     */
+    public boolean is資格取得可能() {
+        IShikibetsuTaisho shikibetsuTaisho = div.getKihonJoho().getCcdKaigoAtenaInfo().getAtenaInfoDiv()
+                .getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近();
+        if (!shikibetsuTaisho.canBe個人()) {
+            return false;
+        }
+        IKojin kojin = shikibetsuTaisho.to個人();
+        RString id = UrControlDataFactory.createInstance().getMenuID();
+        return ShikakuTokusoChecker.is取得可能(kojin, id);
+    }
+
+    /**
+     * 資格取得ができない時のエラーメッセージを返します。
+     *
+     * @return 資格取得可能と判定出来たらtrue
+     */
+    public Message get資格取得不可時エラーメッセージ() {
+        IShikibetsuTaisho shikibetsuTaisho = div.getKihonJoho().getCcdKaigoAtenaInfo().getAtenaInfoDiv()
+                .getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近();
+        if (!shikibetsuTaisho.canBe個人()) {
+            return DbzInformationMessages.住民状態より資格取得不可.getMessage().replace(shikibetsuTaisho.get住民種別().toRString().toString(),
+                    JuminJotai.未定義.住民状態略称().toString());
+        }
+        IKojin kojin = shikibetsuTaisho.to個人();
+        return DbzInformationMessages.住民状態より資格取得不可.getMessage().replace(kojin.get住民種別().toRString().toString(),
+                kojin.get住民状態().住民状態略称().toString());
     }
 
     /**

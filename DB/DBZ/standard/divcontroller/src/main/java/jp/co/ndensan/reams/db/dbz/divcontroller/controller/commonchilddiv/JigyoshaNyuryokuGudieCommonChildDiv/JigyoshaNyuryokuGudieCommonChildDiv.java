@@ -74,6 +74,29 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
     }
 
     /**
+     * 事業者番号の連動。<br/>
+     *
+     * @param requestDiv JigyoshaNyuryokuGudieCommonChildDivDiv
+     * @return ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv>
+     */
+    public ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv> onBlur_JigyoshaNo(JigyoshaNyuryokuGudieCommonChildDivDiv requestDiv) {
+        if(!requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJIgyoshaNo().getValue().isEmpty()){
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYukouKaishibi().setDisabled(true);
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJigyoshamei().setDisabled(true);
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYubinNo().setDisabled(true);
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJusho().setDisabled(true);
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getServiceJigyosha().setDisabled(true);
+        }else{
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYukouKaishibi().setDisabled(false);
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJigyoshamei().setDisabled(false);
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYubinNo().setDisabled(false);
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJusho().setDisabled(false);
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getServiceJigyosha().setDisabled(false);
+        }
+        return createResponseData(requestDiv);
+    }
+    
+    /**
      * 県コードと郡市コードの連動。<br/>
      *
      * @param requestDiv JigyoshaNyuryokuGudieCommonChildDivDiv

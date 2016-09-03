@@ -4,6 +4,10 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onBlur_JigyoshaNo = function () {
+                return "onBlur_JigyoshaNo";
+            };
+
             Events.onChange_BtnKenCode = function () {
                 return "onChange_BtnKenCode";
             };
@@ -64,7 +68,7 @@ var DBZ;
             };
 
             Controls.prototype.txtJIgyoshaNo = function () {
-                return new UZA.TextBox(this.convFiledName("txtJIgyoshaNo"));
+                return new UZA.TextBoxCode(this.convFiledName("txtJIgyoshaNo"));
             };
 
             Controls.prototype.txtYukouKaishibi = function () {

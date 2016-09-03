@@ -114,15 +114,16 @@ public class TekiyoJogaiRirekiValidationHandler {
             result.add(new ValidationMessageControlPair(RRVMessages.適用日_必須,
                     div.getPanelTekiyoInput().getTxtTekiyoDate()));
         } 
-//        else {
-//            if (div.getDatagridTekiyoJogai().getDataSource().size()>1&&最新の適用情報.getTekiyoDate().getValue() != null
-//                && 最新の適用情報.getTekiyoDate().getValue().isBeforeOrEquals(
-//                    div.getPanelTekiyoInput().getTxtTekiyoDate().getValue())) {
-//                result.add(new ValidationMessageControlPair(
-//                        RRVMessages.適用日と直近データの適用日の整合性チェック,
-//                        div.getPanelTekiyoInput().getTxtTekiyoDate()));
-//            }
-//        }
+        else {
+            if (状態_追加.equals(div.getStauts()) && div.getDatagridTekiyoJogai().getDataSource().size() > 0 
+                    && 最新の適用情報.getTekiyoDate().getValue() != null
+                    && 最新の適用情報.getTekiyoDate().getValue().isBeforeOrEquals(
+                    div.getPanelTekiyoInput().getTxtTekiyoDate().getValue())) {
+                result.add(new ValidationMessageControlPair(
+                        RRVMessages.適用日と直近データの適用日の整合性チェック,
+                        div.getPanelTekiyoInput().getTxtTekiyoDate()));
+            }
+        }
         if (div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedKey() == null
             || div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedKey().isEmpty()) {
             result.add(new ValidationMessageControlPair(RRVMessages.適用事由_必須,

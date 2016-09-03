@@ -8,6 +8,10 @@ module DBZ {
 
         export class Events {
 
+            public static onBlur_JigyoshaNo(): string {
+                return "onBlur_JigyoshaNo";
+            }
+
             public static onChange_BtnKenCode(): string {
                 return "onChange_BtnKenCode";
             }
@@ -69,8 +73,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("KennsakuJyokenn"));
             }
 
-            public txtJIgyoshaNo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtJIgyoshaNo"));
+            public txtJIgyoshaNo(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtJIgyoshaNo"));
             }
 
             public txtYukouKaishibi(): UZA.TextBoxDateRange {

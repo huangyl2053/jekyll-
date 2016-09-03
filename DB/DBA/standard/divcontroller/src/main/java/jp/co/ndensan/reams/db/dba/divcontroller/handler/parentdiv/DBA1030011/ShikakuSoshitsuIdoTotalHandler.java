@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1030011;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.hihokensha.ShikakuTokusoChecker;
 import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.ShikakuRirekiJoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.ShikakuSoshitsuIdoTotalDiv;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakusoshitsu.HihokenshashikakusoshitsuManager;
@@ -15,11 +16,17 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.SikakuKikan;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.TokusoRireki;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -384,6 +391,39 @@ public class ShikakuSoshitsuIdoTotalHandler {
         }
         dgShikakuShutokuRireki_Row newestData = dataSource.get(0);
         return !newestData.getShutokuDate().getValue().isEmpty() && !newestData.getSoshitsuDate().getValue().isEmpty();
+    }
+
+    /**
+     * 直近の住民種別と住民状態・メニューIDから、対象者が資格喪失可能かを判断します。
+     *
+     * @return 資格喪失可能と判定出来たらtrue
+     */
+    public boolean is資格喪失可能() {
+        IShikibetsuTaisho shikibetsuTaisho = div.getKihonJoho().getCcdKaigoAtenaInfo().getAtenaInfoDiv()
+                .getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近();
+        if (!shikibetsuTaisho.canBe個人()) {
+            return false;
+        }
+        IKojin kojin = shikibetsuTaisho.to個人();
+        RString id = UrControlDataFactory.createInstance().getMenuID();
+        return ShikakuTokusoChecker.is喪失可能(kojin, id);
+    }
+
+    /**
+     * 資格喪失ができない時のエラーメッセージを返します。
+     *
+     * @return 資格取得可能と判定出来たらtrue
+     */
+    public Message get資格喪失不可時エラーメッセージ() {
+        IShikibetsuTaisho shikibetsuTaisho = div.getKihonJoho().getCcdKaigoAtenaInfo().getAtenaInfoDiv()
+                .getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近();
+        if (!shikibetsuTaisho.canBe個人()) {
+            return DbzInformationMessages.住民状態より資格喪失不可.getMessage().replace(shikibetsuTaisho.get住民種別().toRString().toString(),
+                    JuminJotai.未定義.住民状態略称().toString());
+        }
+        IKojin kojin = shikibetsuTaisho.to個人();
+        return DbzInformationMessages.住民状態より資格喪失不可.getMessage().replace(kojin.get住民種別().toRString().toString(),
+                kojin.get住民状態().住民状態略称().toString());
     }
 
     public boolean isSavable() {

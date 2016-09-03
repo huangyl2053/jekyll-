@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JigyoshaN
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -17,9 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @reamsid_L DBA-0140-010 houtianpeng
  */
 public class KennsakuJyokennDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
-
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,7 +24,7 @@ public class KennsakuJyokennDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtJIgyoshaNo")
-    private TextBox txtJIgyoshaNo;
+    private TextBoxCode txtJIgyoshaNo;
     @JsonProperty("txtYukouKaishibi")
     private TextBoxDateRange txtYukouKaishibi;
     @JsonProperty("txtJigyoshamei")
@@ -52,7 +49,7 @@ public class KennsakuJyokennDiv extends Panel {
      * @return txtJIgyoshaNo
      */
     @JsonProperty("txtJIgyoshaNo")
-    public TextBox getTxtJIgyoshaNo() {
+    public TextBoxCode getTxtJIgyoshaNo() {
         return txtJIgyoshaNo;
     }
 
@@ -61,7 +58,7 @@ public class KennsakuJyokennDiv extends Panel {
      * @param txtJIgyoshaNo txtJIgyoshaNo
      */
     @JsonProperty("txtJIgyoshaNo")
-    public void setTxtJIgyoshaNo(TextBox txtJIgyoshaNo) {
+    public void setTxtJIgyoshaNo(TextBoxCode txtJIgyoshaNo) {
         this.txtJIgyoshaNo = txtJIgyoshaNo;
     }
 
@@ -182,7 +179,7 @@ public class KennsakuJyokennDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlKennCode(DropDownList ddlKennCode) {
+    public void  setDdlKennCode(DropDownList ddlKennCode) {
         this.getServiceJigyosha().setDdlKennCode(ddlKennCode);
     }
 
@@ -192,7 +189,7 @@ public class KennsakuJyokennDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlJigyoshaKubun(DropDownList ddlJigyoshaKubun) {
+    public void  setDdlJigyoshaKubun(DropDownList ddlJigyoshaKubun) {
         this.getServiceJigyosha().setDdlJigyoshaKubun(ddlJigyoshaKubun);
     }
 
@@ -202,7 +199,7 @@ public class KennsakuJyokennDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlGunshiCode(DropDownList ddlGunshiCode) {
+    public void  setDdlGunshiCode(DropDownList ddlGunshiCode) {
         this.getServiceJigyosha().setDdlGunshiCode(ddlGunshiCode);
     }
 
@@ -212,7 +209,7 @@ public class KennsakuJyokennDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlServiceShurui(DropDownList ddlServiceShurui) {
+    public void  setDdlServiceShurui(DropDownList ddlServiceShurui) {
         this.getServiceJigyosha().setDdlServiceShurui(ddlServiceShurui);
     }
 

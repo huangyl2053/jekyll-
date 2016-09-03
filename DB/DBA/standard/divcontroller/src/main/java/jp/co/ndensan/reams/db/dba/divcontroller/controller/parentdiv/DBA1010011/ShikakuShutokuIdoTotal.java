@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureiChe
 import jp.co.ndensan.reams.db.dba.service.core.tekiyojogaisha.TekiyoJogaishaChecker;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -34,8 +35,11 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -87,6 +91,10 @@ public class ShikakuShutokuIdoTotal {
         ShiKaKuSyuToKuIdouTotalHandler handler = createHandler(div);
         handler.load(ViewStateHolder.get(ViewStateKeys.資格取得異動_状態_被保履歴タブ, RString.class));
 
+        if (!handler.is資格取得可能()) {
+            releaseLock(div);
+            return setNotExecutableAndReturnMessage(div, handler.get資格取得不可時エラーメッセージ());
+        }
         if (handler.is資格取得中()) {
             releaseLock(div);
             return setNotExecutableAndReturnMessage(div, DbzInformationMessages.資格取得済み.getMessage());
@@ -289,6 +297,43 @@ public class ShikakuShutokuIdoTotal {
         dgShikakuShutokuRireki_Row row = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridSelectItem();
         List<dgShikakuShutokuRireki_Row> rowList = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
                 .getCcdShikakuTokusoRireki().getDataGridDataSource();
+
+        // 入力チェック
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        // 必須チェック
+        if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(validationErrorMessage.取得日,
+                    div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate()));
+        }
+        if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                getShikakuShutokuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(validationErrorMessage.届出日,
+                    div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate()));
+        }
+
+        if (!rowList.isEmpty()) {
+            TextBoxFlexibleDate compareToDate;
+            if (row == null) {
+                compareToDate = rowList.get(0).getSoshitsuDate();
+            } else {
+                compareToDate = row.getSoshitsuDate();
+            }
+            // 期間重複チェック
+            if (!div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                    getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
+                if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                        getShikakuShutokuInput().getTxtShutokuDate().getValue().compareTo(compareToDate.getValue()) <= 0) {
+                    validPairs.add(new ValidationMessageControlPair(validationErrorMessage.期間が不正_過去日付不可,
+                            div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate()));
+                }
+            }
+        }
+
+        if (validPairs.existsError()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+
         if (row != null && !RString.isNullOrEmpty(row.getState())) {
             row.getShutokuDate().setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
                     .getShikakuShutokuInput().getTxtShutokuDate().getValue());
@@ -425,6 +470,23 @@ public class ShikakuShutokuIdoTotal {
 
         private ShikakuShutokuIdoTotalErrorMessage(IMessageGettable message) {
             this.message = message.getMessage();
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+    }
+
+    private enum validationErrorMessage implements IValidationMessage {
+
+        取得日(UrErrorMessages.必須, "取得日"),
+        届出日(UrErrorMessages.必須, "届出日"),
+        期間が不正_過去日付不可(DbzErrorMessages.期間が不正_過去日付不可, "取得日", "履歴の喪失日");
+        private final Message message;
+
+        private validationErrorMessage(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
         }
 
         @Override

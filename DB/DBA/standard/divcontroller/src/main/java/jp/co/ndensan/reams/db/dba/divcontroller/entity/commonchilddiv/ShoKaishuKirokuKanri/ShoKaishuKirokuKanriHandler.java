@@ -162,7 +162,45 @@ public class ShoKaishuKirokuKanriHandler {
             div.getDgKoufuKaishu().getGridSetting().setIsShowSelectButtonColumn(false);
             div.getPanelInput().getBtnCancel().setDisabled(true);
             div.getPanelInput().getBtnConfirm().setDisabled(true);
+            
+            div.getPanelInput().setDisabled(true);
         }
+    }
+
+    public void initialize(RString 状態, HihokenshaNo 被保険者番号,
+            ArrayList<dgKoufuKaishu_Row> dataSource, Models<ShoKofuKaishuIdentifier, ShoKofuKaishu> 証交付回収情報Model) {
+        ViewStateHolder.put(ViewStateKeys.証交付回収情報_被保番号, 被保険者番号);
+        Models<ShoKofuKaishuIdentifier, ShoKofuKaishu> shoKofuKaishu = 証交付回収情報Model;
+        ViewStateHolder.put(ViewStateKeys.証交付回収情報, shoKofuKaishu);
+        div.getDgKoufuKaishu().setDataSource(dataSource);
+
+        if (状態_照会.equals(状態)) {
+
+            div.getPanelInput().setDisplayNone(false);
+            div.getDgKoufuKaishu().getGridSetting().getColumn(new RString("status")).setVisible(false);
+            div.getDgKoufuKaishu().getGridSetting().setIsShowSelectButtonColumn(true);
+            div.getDgKoufuKaishu().getGridSetting().setIsShowDeleteButtonColumn(false);
+            div.getDgKoufuKaishu().getGridSetting().setIsShowModifyButtonColumn(false);
+        }
+        if (状態_更新.equals(状態)) {
+
+            div.getPanelInput().setDisplayNone(true);
+            div.getDgKoufuKaishu().getGridSetting().getColumn(new RString("status")).setVisible(true);
+            div.getDgKoufuKaishu().getGridSetting().setIsShowSelectButtonColumn(false);
+            div.getDgKoufuKaishu().getGridSetting().setIsShowDeleteButtonColumn(true);
+            div.getDgKoufuKaishu().getGridSetting().setIsShowModifyButtonColumn(true);
+            div.getPanelInput().getBtnCancel().setDisabled(true);
+            div.getPanelInput().getBtnConfirm().setDisabled(true);
+        }
+    }
+
+    private class GridComparator implements Comparator<dgKoufuKaishu_Row> {
+
+        @Override
+        public int compare(dgKoufuKaishu_Row o1, dgKoufuKaishu_Row o2) {
+            return -1 * o1.getKoufuDate().getValue().compareTo(o2.getKoufuDate().getValue());
+        }
+
     }
 
     /**
@@ -238,6 +276,10 @@ public class ShoKaishuKirokuKanriHandler {
         }
     }
 
+    public Models<ShoKofuKaishuIdentifier, ShoKofuKaishu> getSaveData() {
+        return ViewStateHolder.get(ViewStateKeys.証交付回収情報, Models.class);
+    }
+
     /**
      * 証交付回収情報の共有子DIVの画面内容から、状態の修正に反映します。
      *
@@ -265,6 +307,8 @@ public class ShoKaishuKirokuKanriHandler {
         div.getPanelInput().getTxaKaishuRiyu().setValue(dgKoufuKaishuRow.getKaishuRiyu());
         div.getPanelInput().getBtnConfirm().setDisabled(false);
         div.getPanelInput().getBtnCancel().setDisabled(false);
+        
+        div.getPanelInput().setDisabled(false);
 
         if (状態_削除.equals(状態)) {
 
@@ -272,14 +316,5 @@ public class ShoKaishuKirokuKanriHandler {
         } else {
             div.setMode_DisplayMode(ShoKaishuKirokuKanriDiv.DisplayMode.koshin);
         }
-    }
-
-    private class GridComparator implements Comparator<dgKoufuKaishu_Row> {
-
-        @Override
-        public int compare(dgKoufuKaishu_Row o1, dgKoufuKaishu_Row o2) {
-            return -1 * o1.getKoufuDate().getValue().compareTo(o2.getKoufuDate().getValue());
-        }
-
     }
 }
