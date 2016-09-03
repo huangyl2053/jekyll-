@@ -171,6 +171,8 @@ public class KogakugassanGassanSofuReprotProcess extends BatchKeyBreakBase<Syutu
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             eucManager.spool(eucFilePath, accessLogUUID);
+        } else {
+            eucManager.spool(eucFilePath);
         }
     }
 

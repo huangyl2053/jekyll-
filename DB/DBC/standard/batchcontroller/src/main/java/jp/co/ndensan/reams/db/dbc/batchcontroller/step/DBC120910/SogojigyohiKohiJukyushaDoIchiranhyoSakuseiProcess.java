@@ -221,6 +221,8 @@ public class SogojigyohiKohiJukyushaDoIchiranhyoSakuseiProcess extends BatchKeyB
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
             manager.spool(eucFilePath, accessLogUUID);
+        } else {
+            manager.spool(eucFilePath);
         }
     }
 
