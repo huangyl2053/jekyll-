@@ -30,7 +30,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DbWT3811KogakuGassanShikyuGakuKeisanKekkaTempEntity extends DbTableEntityBase<DbWT3811KogakuGassanShikyuGakuKeisanKekkaTempEntity> implements IDbAccessable {
+public class DbWT3811KogakuGassanShikyuGakuKeisanKekkaTempEntity
+        extends DbTableEntityBase<DbWT3811KogakuGassanShikyuGakuKeisanKekkaTempEntity> implements IDbAccessable {
 
     @PrimaryKey
     @TempTableColumnOrder(1)
