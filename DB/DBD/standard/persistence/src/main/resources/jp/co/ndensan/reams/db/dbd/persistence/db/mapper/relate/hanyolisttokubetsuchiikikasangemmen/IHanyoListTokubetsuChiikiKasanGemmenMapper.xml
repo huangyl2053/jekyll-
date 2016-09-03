@@ -769,7 +769,7 @@
 					)																			
 				) AS dbT4020
                               ON 特別地域加算減免."hihokenshaNo" =dbT4020."hihokenshaNo" AND																		
-				 特別地域加算減免."rirekiNo"<![CDATA[<]]>dbT4020."rirekiNo"	
+				 特別地域加算減免."rirekiNo"=dbT4020."rirekiNo"	
                      
                 </if>
                 WHERE 1=1
