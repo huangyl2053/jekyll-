@@ -606,6 +606,15 @@ public class KogakuGassanJikoFutanGaku
     }
 
     /**
+     * バッチ補正実施年月日を返します。
+     *
+     * @return リアル補正実施年月日
+     */
+    public FlexibleDate getバッチ補正実施年月日() {
+        return entity.getBatchHoseiJissiYMD();
+    }
+
+    /**
      * {@link DbT3070KogakuGassanJikoFutanGakuEntity}のクローンを返します。
      *
      * @return {@link DbT3070KogakuGassanJikoFutanGakuEntity}のクローン
