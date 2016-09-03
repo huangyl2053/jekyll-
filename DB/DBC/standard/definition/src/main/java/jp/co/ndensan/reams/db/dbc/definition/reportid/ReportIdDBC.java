@@ -518,6 +518,14 @@ public enum ReportIdDBC {
      */
     DBC200044(new ReportId("DBC200044_KyufuhiTuchiHakkoIchiran"), new RString("給付費通知発行一覧表")),
     /**
+     * 帳票設計_DBCMN32002_受領委任契約承認確認書発行一覧表帳票ＩＤです。
+     */
+    DBC200013(new ReportId("DBC200013_JuryoIninShoninKakuninshoIchiran"), new RString("受領委任契約承認確認書発行一覧表")),
+    /**
+     * 帳票設計_DBCMN32002_介護保険受領委任契約承認（不承認）確認書（事業者用） 帳票ＩＤです。
+     */
+    DBC100030(new ReportId("DBC100030_JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayo"), new RString("介護保険受領委任契約承認（不承認）確認書（事業者用）")),
+    /**
      * 帳票設計_DBC200039_高額合算支給不支給決定通知書情報取込一覧表 ＩＤです。
      */
     DBC200039(new ReportId("DBC200039_GassanShikyuFushikyuKetteiTsuchishoTorikomiIchiran"), new RString("高額合算支給不支給決定通知書情報取込一覧表 "));
