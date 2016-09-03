@@ -126,11 +126,6 @@ public class IryohokenRirekiCommonChildDiv {
      */
     public ResponseData<IryohokenRirekiCommonChildDivDiv> onClick_btnIryohokenKakute(IryohokenRirekiCommonChildDivDiv requestDiv) {
 
-        ValidationMessageControlPairs validationMessage = createValidationHandlerOf(requestDiv).種別と保険者番号と保険者名と称記号番号の有効性チェック();
-        if (validationMessage.iterator().hasNext()) {
-            return ResponseData.of(requestDiv).addValidationMessages(validationMessage).respond();
-        }
-
         if (requestDiv.getPnlIryohokenJoho().getStatus() != null && !requestDiv.getPnlIryohokenJoho().getStatus().equals(RString.EMPTY)) {
             ifelse(requestDiv);
         }

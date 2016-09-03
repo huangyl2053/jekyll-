@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.definition.message.DbaQuestionMessages;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuIdoTotalDiv;
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.dgIryohokenIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -161,21 +163,66 @@ public class ShikakuShutokuIdoTotal {
      * @return レスポンス
      */
     public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnUpdate(ShikakuShutokuIdoTotalDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            if (!isSavable(div)) {
-                throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
+        boolean confirmFlag = false;
+        List<dgShikakuShutokuRireki_Row> rowList = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                .getCcdShikakuTokusoRireki().getDataGridDataSource();
+        // ２号医療保険の情報が未入力確認
+        if (!rowList.isEmpty()) {
+            Collections.sort(rowList, new ShikakuShutokuIdoTotal.ComparatorByShutokuDateSort());
+            RString hihokenshaKubunKey = RString.EMPTY;
+            for (dgShikakuShutokuRireki_Row row : rowList) {
+                if (!row.getHihokenshaKubunKey().isNullOrEmpty()) {
+                    hihokenshaKubunKey = row.getHihokenshaKubunKey();
+                    break;
+                }
             }
-
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            if (new RString("2").equals(hihokenshaKubunKey)) {
+                List<dgIryohokenIchiran_Row> IryoList = div.getShikakuShutokuJoho().getIryoHokenRirekiMain()
+                        .getCcdIryoHokenRireki().getDataGridList();
+                if (IryoList.isEmpty()) {
+                    confirmFlag = true;
+                } else {
+                    if (!IryoList.get(0).getDattaiDate().getValue().isEmpty()) {
+                        confirmFlag = true;
+                    }
+                }
+            }
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            createHandler(div).save();
-            releaseLock(div);
-            div.getComplete().getCcdComplete().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
-            return ResponseData.of(div).setState(DBA1010011StateName.完了状態);
+        
+        if (confirmFlag) {
+            if (!ResponseHolder.isReRequest()) {
+                if (!isSavable(div)) {
+                    throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
+                }
+
+                QuestionMessage message = new QuestionMessage(DbaQuestionMessages.医療保険登録確認.getMessage().getCode(),
+                        DbaQuestionMessages.医療保険登録確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbaQuestionMessages.医療保険登録確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                createHandler(div).save();
+                releaseLock(div);
+                div.getComplete().getCcdComplete().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
+                return ResponseData.of(div).setState(DBA1010011StateName.完了状態);
+            }
+        } else {
+            if (!ResponseHolder.isReRequest()) {
+                if (!isSavable(div)) {
+                    throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
+                }
+
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                        UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                createHandler(div).save();
+                releaseLock(div);
+                div.getComplete().getCcdComplete().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
+                return ResponseData.of(div).setState(DBA1010011StateName.完了状態);
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -289,25 +336,25 @@ public class ShikakuShutokuIdoTotal {
      */
     public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnKakutei(ShikakuShutokuIdoTotalDiv div) {
         ResponseData<ShikakuShutokuIdoTotalDiv> response = new ResponseData<>();
-        
+
         dgShikakuShutokuRireki_Row row = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridSelectItem();
         List<dgShikakuShutokuRireki_Row> rowList = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
                 .getCcdShikakuTokusoRireki().getDataGridDataSource();
-        
+
         // 入力チェック
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         // 必須チェック
         if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
-                    getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
+                getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(validationErrorMessage.取得日,
-                            div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate()));
+                    div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate()));
         }
         if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
-                    getShikakuShutokuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()) {
+                getShikakuShutokuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(validationErrorMessage.届出日,
-                            div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate()));
+                    div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate()));
         }
-        
+
         if (!rowList.isEmpty()) {
             TextBoxFlexibleDate compareToDate;
             if (row == null) {
@@ -325,11 +372,10 @@ public class ShikakuShutokuIdoTotal {
                 }
             }
         }
-
         if (validPairs.existsError()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        
+
         if (row != null && !RString.isNullOrEmpty(row.getState())) {
             row.getShutokuDate().setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
                     .getShikakuShutokuInput().getTxtShutokuDate().getValue());
@@ -409,6 +455,24 @@ public class ShikakuShutokuIdoTotal {
     }
 
     /**
+     * 「取得日」フォーカスアウト処理します。
+     *
+     * @param div ShikakuShutokuIdoTotalDiv
+     * @return レスポンス
+     */
+    public ResponseData<ShikakuShutokuIdoTotalDiv> onBlur_txtShutokuDate(ShikakuShutokuIdoTotalDiv div) {
+        if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                getShikakuShutokuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()) {
+            if (!div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                    .getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
+                div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate().
+                        setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate().getValue());
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 資格得喪履歴グリッドの枝番の降順処理です。
      */
     public static class ComparatorByDaNoSort implements Comparator, Serializable {
@@ -473,10 +537,11 @@ public class ShikakuShutokuIdoTotal {
             return message;
         }
     }
-    
+
     private enum validationErrorMessage implements IValidationMessage {
-        取得日(UrErrorMessages.必須, "取得日"),
-        届出日(UrErrorMessages.必須, "届出日"),
+
+        取得日(UrErrorMessages.必須項目),
+        届出日(UrErrorMessages.必須項目),
         期間が不正_過去日付不可(DbzErrorMessages.期間が不正_過去日付不可, "取得日", "履歴の喪失日");
         private final Message message;
 
