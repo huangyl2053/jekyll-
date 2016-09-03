@@ -124,7 +124,6 @@ public class ShotokuJokyoHandler {
             }
             item.set氏名(氏名);
             item.set氏名カナ(氏名カナ);
-            item.set生年月日(new FlexibleDate(row.getBirthYMD()));
             生年月日 = new RDate(row.getBirthYMD().toString());
             item.set生年月日(new FlexibleDate(生年月日.toDateString()));
             item.set性別(row.getGender());
