@@ -234,6 +234,8 @@ public class SogojigyohiKagoKetteiKohifutanshaDoIchiranhyoSakuseiProcess extends
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
             manager.spool(一覧ファイルパス, accessLogUUID);
+        } else {
+            manager.spool(一覧ファイルパス);
         }
     }
 
