@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -311,6 +312,11 @@ public class ShikakuShutokuIdoTotal {
             validPairs.add(new ValidationMessageControlPair(validationErrorMessage.届出日,
                     div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate()));
         }
+        
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(
+                div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(
+                div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate()));
 
         if (!rowList.isEmpty()) {
             TextBoxFlexibleDate compareToDate;
@@ -411,7 +417,25 @@ public class ShikakuShutokuIdoTotal {
         response.data = div;
         return response;
     }
-
+    
+    /**
+     * 「取得日」フォーカスアウト処理します。
+     *
+     * @param div ShikakuShutokuIdoTotalDiv
+     * @return レスポンス
+     */
+    public ResponseData<ShikakuShutokuIdoTotalDiv> onBlur_txtShutokuDate(ShikakuShutokuIdoTotalDiv div) {
+        if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                getShikakuShutokuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()) {
+            if (!div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                    .getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
+                div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate().
+                        setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate().getValue());
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+    
     /**
      * 資格得喪履歴グリッドの枝番の降順処理です。
      */
@@ -480,8 +504,8 @@ public class ShikakuShutokuIdoTotal {
 
     private enum validationErrorMessage implements IValidationMessage {
 
-        取得日(UrErrorMessages.必須, "取得日"),
-        届出日(UrErrorMessages.必須, "届出日"),
+        取得日(UrErrorMessages.必須項目),
+        届出日(UrErrorMessages.必須項目),
         期間が不正_過去日付不可(DbzErrorMessages.期間が不正_過去日付不可, "取得日", "履歴の喪失日");
         private final Message message;
 
