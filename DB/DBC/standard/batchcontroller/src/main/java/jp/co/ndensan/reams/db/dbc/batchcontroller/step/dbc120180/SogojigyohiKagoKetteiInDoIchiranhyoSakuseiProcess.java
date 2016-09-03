@@ -97,7 +97,7 @@ public class SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess extends BatchKeyB
             = new RString("DBC200075_SogojigyohiKagoKetteiTsuchishoTorikomiIchiran.csv");
     private static final RString ダブル引用符 = new RString("\"");
     private KokuhorenIchiranhyoMybatisParameter 帳票データの取得Parameter;
-    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3060.\"hdrShoHokenshaNo\" ASC ");
+    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3060.\"shoKisaiHokenshaNo\" ASC ");
     private static final RString SAKUSEI = new RString("作成");
     private final Code code = new Code("0003");
     private final RString 被保険者番号 = new RString("被保険者番号");

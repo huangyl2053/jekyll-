@@ -71,7 +71,7 @@ public class KohifutanshaDoIchiranhyoSakuseiProcess extends SimpleBatchProcessBa
             = new RString("DBC200051_KagoKetteitsuchishoTorikomiIchiranKohifutanshaBun.csv");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
     private static final RString キー_出力順 = new RString("出力順");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3060.\"hdrShoHokenshaNo\" ASC ");
+    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3060.\"shoKisaiHokenshaNo\" ASC ");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString 漢字_分 = new RString("分");
