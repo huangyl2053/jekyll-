@@ -47,8 +47,8 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
     private static final int INT_ITTI = 1;
     private static final int INT_NI = 2;
     private static final int INT_ZEO = 0;
-    private static final int INT_GO = 5;
-    private static final int INT_TI = 7;
+    private static final int INT_YOU = 4;
+    private static final int INT_ROKU = 6;
     private static final RString 市町村識別ID = new RString("00");
     private static final RString 選択する = new RString("1");
     private static final RString 選択無し = new RString("0");
@@ -1209,14 +1209,14 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
 
     private RString get集計年度(FlexibleDate 日期) {
         if (日期 != null && !日期.isEmpty()) {
-            return new RString(日期.toString().substring(INT_ZEO, INT_GO));
+            return new RString(日期.toString().substring(INT_ZEO, INT_YOU));
         }
         return RString.EMPTY;
     }
 
     private RString get集計年月(FlexibleDate 日期) {
         if (日期 != null && !日期.isEmpty()) {
-            return new RString(日期.toString().substring(INT_ZEO, INT_TI));
+            return new RString(日期.toString().substring(INT_ZEO, INT_ROKU));
         }
         return RString.EMPTY;
     }
