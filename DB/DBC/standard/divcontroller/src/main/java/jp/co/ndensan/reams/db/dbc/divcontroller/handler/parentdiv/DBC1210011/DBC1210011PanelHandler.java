@@ -249,7 +249,7 @@ public class DBC1210011PanelHandler {
     public void set前回発行日(KogakuGassanShikyuFushikyuKettei shikyuKettei) {
         div.getTxtZenkaiHakkoYMD().setDisabled(true);
         div.getTxtZenkaiHakkoYMD().clearValue();
-        RDate 前回発行日 = shikyuKettei.get決定通知書作成年月日() != null
+        RDate 前回発行日 = (shikyuKettei.get決定通知書作成年月日() != null && !shikyuKettei.get決定通知書作成年月日().isEmpty())
                 ? new RDate(shikyuKettei.get決定通知書作成年月日().toString()) : null;
         if (前回発行日 != null) {
             div.getTxtZenkaiHakkoYMD().setValue(前回発行日);
