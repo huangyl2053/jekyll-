@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashite
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
+import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -247,6 +248,16 @@ public class JigyoshaTouroku {
      * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
      */
     public ResponseData<JigyoshaTourokuDiv> onClick_btnSave(JigyoshaTourokuDiv div) {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getServiceJigyoshaJoho().getTxtJigyoKaishiYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getServiceJigyoshaJoho().getTxtJigyoKyushuYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getServiceJigyoshaJoho().getTxtJigyoSaikaiYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getServiceJigyoshaJoho().getTxtJigyoHaishiYMD()));
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);       
         if (初期_状態 == null || 状態_追加.equals(初期_状態)) {
             RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class);
