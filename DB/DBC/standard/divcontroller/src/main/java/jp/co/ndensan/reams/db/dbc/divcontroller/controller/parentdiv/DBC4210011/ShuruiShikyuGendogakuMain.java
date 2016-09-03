@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4210011.Shu
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -36,6 +38,7 @@ public class ShuruiShikyuGendogakuMain {
     private static final int 修正 = 3;
     private static final int 追加 = 4;
     private static final int 削除 = 5;
+    private static final LockingKey 排他キー = new LockingKey("DBCShikyuGendoGakuTableDbT7111");
 
     /**
      * 画面初期化のメソッドです。
@@ -95,7 +98,7 @@ public class ShuruiShikyuGendogakuMain {
                     if (pairs.iterator().hasNext()) {
                         return ResponseData.of(div).addValidationMessages(pairs).respond();
                     }
-                    getHandler(div).追加する();
+                    getHandler(div).追加する(shikyuGendoGakuList);
                     break;
                 case 修正:
                     validationHandler.要支援1入力チェック警告(pairs, div);
@@ -114,6 +117,8 @@ public class ShuruiShikyuGendogakuMain {
                     break;
             }
             getHandler(div).btnSave();
+            LockingKey key = new LockingKey(排他キー);
+            RealInitialLocker.release(key);
             state = 保存;
             return ResponseData.of(div).setState(DBC4220011StateName.保存完了);
         } else {

@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShurui
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -259,32 +260,13 @@ public class ShuruiShikyuGendogakuMainFinder {
             Decimal 支給限度単位数) {
         DbT7111ServiceShuruiShikyuGendoGakuEntity entity = new DbT7111ServiceShuruiShikyuGendoGakuEntity();
         entity.setServiceShuruiCode(サービス種類コード);
-        entity.setYoKaigoJotaiKubun(numone);
-        entity.setTekiyoKaishiYM(適用終了年月);
+        entity.setYoKaigoJotaiKubun(要介護状態区分);
+        entity.setTekiyoKaishiYM(適用開始年月);
         entity.setRirekiNo(履歴番号);
-        entity.getTekiyoShuryoYM();
+        entity.setTekiyoShuryoYM(適用終了年月);
         entity.setShikyuGendoTaniSu(支給限度単位数);
+        entity.setState(EntityDataState.Added);
         return 種類支給限度額取得Dac.save(entity);
-    }
-
-    /**
-     * pamaでサービス種類支給限度額を取得します。
-     *
-     * @param サービス種類コード ServiceShuruiCode
-     * @param 適用終了年月 FlexibleYearMonth
-     * @return List<ShuruiShikyuGendogakuMainResult>
-     */
-    public List<ShuruiShikyuGendogakuMainResult> selectByPama(
-            ServiceShuruiCode サービス種類コード,
-            FlexibleYearMonth 適用終了年月) {
-        List<DbT7111ServiceShuruiShikyuGendoGakuEntity> list
-                = 種類支給限度額取得Dac.selectByPama(サービス種類コード, 適用終了年月);
-        List<ShuruiShikyuGendogakuMainResult> resultList
-                = new ArrayList<>();
-        for (DbT7111ServiceShuruiShikyuGendoGakuEntity entity : list) {
-            resultList.add(new ShuruiShikyuGendogakuMainResult(entity));
-        }
-        return resultList;
     }
 
     /**
@@ -294,6 +276,7 @@ public class ShuruiShikyuGendogakuMainFinder {
      * @return int
      */
     public int saveEntity(DbT7111ServiceShuruiShikyuGendoGakuEntity entity) {
+        entity.setState(EntityDataState.Modified);
         return 種類支給限度額取得Dac.save(entity);
     }
 
@@ -315,29 +298,10 @@ public class ShuruiShikyuGendogakuMainFinder {
         entity.setYoKaigoJotaiKubun(要介護状態区分);
         entity.setTekiyoKaishiYM(適用開始年月);
         entity.setShikyuGendoTaniSu(支給限度単位数);
+        entity.setRirekiNo(1);
+        entity.setState(EntityDataState.Added);
         return 種類支給限度額取得Dac.save(entity);
     }
-//
-//    /**
-//     * entityを保存します。
-//     *
-//     * @param サービス種類コード ServiceShuruiCode
-//     * @param 要介護状態区分 YoKaigoJotaiKubun
-//     * @param 適用開始年月 TekiyoKaishuYM
-//     * @param 支給限度単位数 Decimal
-//     * @return int
-//     */
-//    public int saveEntitys(ServiceShuruiCode サービス種類コード,
-//            RString 要介護状態区分,
-//            FlexibleYearMonth 適用開始年月,
-//            Decimal 支給限度単位数) {
-//        DbT7111ServiceShuruiShikyuGendoGakuEntity entity = new DbT7111ServiceShuruiShikyuGendoGakuEntity();
-//        entity.setServiceShuruiCode(サービス種類コード);
-//        entity.setYoKaigoJotaiKubun(要介護状態区分);
-//        entity.setTekiyoKaishiYM(適用開始年月);
-//        entity.setShikyuGendoTaniSu(支給限度単位数);
-//        return 種類支給限度額取得Dac.save(entity);
-//    }
 
     /**
      * entityを削除します。
@@ -345,6 +309,7 @@ public class ShuruiShikyuGendogakuMainFinder {
      * @param entity DbT7111ServiceShuruiShikyuGendoGakuEntity
      */
     public void deleteEntity(DbT7111ServiceShuruiShikyuGendoGakuEntity entity) {
+        entity.setState(EntityDataState.Deleted);
         種類支給限度額取得Dac.delete(entity);
     }
 }

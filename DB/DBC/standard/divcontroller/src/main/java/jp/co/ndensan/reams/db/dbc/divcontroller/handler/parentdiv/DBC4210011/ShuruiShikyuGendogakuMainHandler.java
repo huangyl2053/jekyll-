@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -238,8 +237,11 @@ public class ShuruiShikyuGendogakuMainHandler {
 
     /**
      * 「追加する」ボタン押下による入力の場合のinsert追加メソッドです。
+     *
+     * @param shikyuGendoGakuList List<ServiceShuruiShikyuGendoGaku>
+     * shikyuGendoGakuList
      */
-    public void 追加する() {
+    public void 追加する(List<ServiceShuruiShikyuGendoGaku> shikyuGendoGakuList) {
         if (div.getShuruiShikyuGendogakuShosai().getTxtKeikaKaigoShikyuGendogaku().getValue() != null) {
             insert追加(KubunShikyuGendogakuYokaigoJotaiKubun.経過介護.getコード(),
                     div.getShuruiShikyuGendogakuShosai().getTxtKeikaKaigoShikyuGendogaku().getValue());
@@ -272,8 +274,8 @@ public class ShuruiShikyuGendogakuMainHandler {
             insert追加(KubunShikyuGendogakuYokaigoJotaiKubun.要介護5.getコード(),
                     div.getShuruiShikyuGendogakuShosai().getTxtYokaigo5ShikyuGendogaku().getValue());
         }
-        insert追加修正(new ServiceShuruiCode(div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui()
-                .getSelectedKey()), FlexibleYearMonth.EMPTY);
+        insert追加修正(shikyuGendoGakuList, new ServiceShuruiCode(div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui()
+                .getSelectedKey()));
 
     }
 
@@ -430,7 +432,9 @@ public class ShuruiShikyuGendogakuMainHandler {
             dgShikyuGendogaku_Row row = new dgShikyuGendogaku_Row();
             row.setServiceShuruiCode(entity.getEntity().getサービス種類コード().value());
             row.setServiceShurui(ServiceCategoryShurui.toValue(entity.getEntity().getサービス種類コード().getColumnValue()).get略称());
-            row.getTekiyoKaishiYM().setValue(new RDate(entity.getEntity().get適用開始年月().toString()));
+            if (entity.getEntity().get適用開始年月() != null && !entity.getEntity().get適用開始年月().isEmpty()) {
+                row.getTekiyoKaishiYM().setValue(new RDate(entity.getEntity().get適用開始年月().toString()));
+            }
             if (entity.getEntity().get適用終了年月() != null && !entity.getEntity().get適用終了年月().isEmpty()) {
                 row.getTekiyoShuryoYM().setValue(new RDate(entity.getEntity().get適用終了年月().toString()));
             }
@@ -493,20 +497,15 @@ public class ShuruiShikyuGendogakuMainHandler {
                 支給限度単位数);
     }
 
-    private void insert追加修正(ServiceShuruiCode サービス種類コード,
-            FlexibleYearMonth 適用終了年月) {
-        List<ShuruiShikyuGendogakuMainResult> list
-                = ShuruiShikyuGendogakuMainFinder.createInstance().selectByPama(サービス種類コード, 適用終了年月);
-        for (ShuruiShikyuGendogakuMainResult entity : list) {
-            entity.getDbT7111entity().setTekiyoShuryoYM(new FlexibleYearMonth(
-                    div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().getFromValue().minusMonth(1).getYearMonth().toDateString()));
-            ShuruiShikyuGendogakuMainFinder.createInstance().insert追加(
-                    entity.getDbT7111entity().getServiceShuruiCode(),
-                    entity.getDbT7111entity().getYoKaigoJotaiKubun(),
-                    entity.getDbT7111entity().getTekiyoKaishiYM(),
-                    entity.getDbT7111entity().getRirekiNo(),
-                    entity.getDbT7111entity().getTekiyoShuryoYM(),
-                    entity.getDbT7111entity().getShikyuGendoTaniSu());
+    private void insert追加修正(List<ServiceShuruiShikyuGendoGaku> shikyuGendoGakuList, ServiceShuruiCode サービス種類コード) {
+        for (ServiceShuruiShikyuGendoGaku gendoGaku : shikyuGendoGakuList) {
+            ServiceShuruiCode サービス種類コード2 = gendoGaku.getサービス種類コード();
+            if (サービス種類コード2 != null && サービス種類コード2.equals(サービス種類コード)
+                    && gendoGaku.get適用終了年月() != null && gendoGaku.get適用終了年月().isEmpty()) {
+                gendoGaku = gendoGaku.createBuilderForEdit().set適用終了年月(new FlexibleYearMonth(div.getShuruiShikyuGendogakuShosai()
+                        .getTxtTekiyoKikanRange().getFromValue().minusMonth(1).getYearMonth().toDateString())).build();
+                ShuruiShikyuGendogakuMainFinder.createInstance().saveEntity(gendoGaku.toEntity());
+            }
         }
     }
 
@@ -521,7 +520,7 @@ public class ShuruiShikyuGendogakuMainHandler {
                     && 要介護状態区分2.equals(要介護状態区分)
                     && 適用開始年月.equals(new FlexibleYearMonth(div.getShuruiShikyuGendogakuShosai()
                                     .getTxtTekiyoKikanRange().getFromValue().getYearMonth().toDateString()))) {
-                gendoGaku.toEntity().setShikyuGendoTaniSu(支給限度単位数);
+                gendoGaku = gendoGaku.createBuilderForEdit().set支給限度単位数(支給限度単位数).build();
                 ShuruiShikyuGendogakuMainFinder.createInstance().saveEntity(gendoGaku.toEntity());
                 i++;
             }
