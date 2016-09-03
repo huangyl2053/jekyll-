@@ -25,8 +25,8 @@
             )
         ),
         "KyufuKanrihyoUnion"  AS
-        (
-            SELECT 
+        (SELECT  *  FROM 
+            (SELECT 
                 "shinsaYM",
                 "serviceTeikyoYM",
                 "hiHokenshaNo",
@@ -94,7 +94,7 @@
                 "torikomiYM",
                 "isDeleted"
              FROM
-                rgdb."DbT3015KyufuKanrihyo200604"
+                rgdb."DbT3015KyufuKanrihyo200604") AS "KyufuKanrihyo"
         WHERE "isDeleted" =false
         <if test="給付対象年月From!=null">
             AND #{給付対象年月From} <![CDATA[<=]]> "serviceTeikyoYM"
