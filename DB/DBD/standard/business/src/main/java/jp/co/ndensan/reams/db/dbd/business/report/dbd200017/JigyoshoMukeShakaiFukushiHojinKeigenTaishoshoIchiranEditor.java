@@ -5,13 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200017;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd206010.ShafukugemmenTaishoshaJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200017.JigyoshoMukeShakaiFukushiHojinKeigenReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -32,19 +33,30 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
 
     private final ShafukugemmenTaishoshaJohoEntity 社福減免対象者情報;
     private final Association 地方公共団体;
+    private final Association association;
+    private final IOutputOrder iOutputOrder;
     private final int index;
+    private static final int LISTINDEX_0 = 0;
+    private static final int LISTINDEX_1 = 1;
+    private static final int LISTINDEX_2 = 2;
+    private static final int LISTINDEX_3 = 3;
+    private static final int LISTINDEX_4 = 4;
 
     /**
      * インスタンスを生成します。
      *
      * @param 社福減免対象者情報 ShafukugemmenTaishoshaJohoEntity
      * @param 地方公共団体 Association
+     * @param association Association
+     * @param iOutputOrder IOutputOrder
      * @param index int
      */
-    public JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor(
-            ShafukugemmenTaishoshaJohoEntity 社福減免対象者情報, Association 地方公共団体, int index) {
+    public JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor(ShafukugemmenTaishoshaJohoEntity 社福減免対象者情報,
+            Association 地方公共団体, Association association, IOutputOrder iOutputOrder, int index) {
         this.社福減免対象者情報 = 社福減免対象者情報;
         this.地方公共団体 = 地方公共団体;
+        this.association = association;
+        this.iOutputOrder = iOutputOrder;
         this.index = index;
     }
 
@@ -58,17 +70,9 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
 
         source.hokenshaNo = 地方公共団体.get地方公共団体コード().getColumnValue();
         source.hokenshaName = 地方公共団体.get市町村名();
-
-//        source.shutsuryokujun1 =;
-//        source.shutsuryokujun2 =;
-//        source.shutsuryokujun3 =;
-//        source.shutsuryokujun4 =;
-//        source.shutsuryokujun5 =;
-//        source.kaiPege1 =;
-//        source.kaiPege2 =;
-//        source.kaiPege3 =;
-//        source.kaiPege4 =;
-//        source.kaiPege5 =;
+        if (null != iOutputOrder) {
+            setiOutputOrder(source);
+        }
         source.jigyoshaCd = 社福減免対象者情報.get事業所番号();
         source.jigyoshaName = 社福減免対象者情報.get事業者名称();
         source.yubinNo = 社福減免対象者情報.get郵便番号();
@@ -96,8 +100,6 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
         source.listMeisai_9 = getサービス限定();
 
         source.listShohokenshaNo_1 = 社福減免対象者情報.get証記載保険者番号().getColumnValue();
-        Association association = AssociationFinderFactory.createInstance().getAssociation(
-                new LasdecCode(社福減免対象者情報.get証記載保険者番号().getColumnValue()));
         source.listShohokenshaName_1 = association.get市町村名();
 
         return source;
@@ -131,6 +133,42 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
             サービス限定.append(RString.FULL_SPACE);
         }
         return サービス限定.toRString();
+    }
+
+    private void setiOutputOrder(JigyoshoMukeShakaiFukushiHojinKeigenReportSource source) {
+        List<ISetSortItem> 設定項目リスト = this.iOutputOrder.get設定項目リスト();
+        for (int i = 0; i < 設定項目リスト.size(); i++) {
+            if (i == LISTINDEX_0) {
+                source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
+                if (設定項目リスト.get(LISTINDEX_0).is改頁項目()) {
+                    source.kaiPege1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
+                }
+            }
+            if (i == LISTINDEX_1) {
+                source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
+                if (設定項目リスト.get(LISTINDEX_1).is改頁項目()) {
+                    source.kaiPege2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
+                }
+            }
+            if (i == LISTINDEX_2) {
+                source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
+                if (設定項目リスト.get(LISTINDEX_2).is改頁項目()) {
+                    source.kaiPege3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
+                }
+            }
+            if (i == LISTINDEX_3) {
+                source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
+                if (設定項目リスト.get(LISTINDEX_3).is改頁項目()) {
+                    source.kaiPege4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
+                }
+            }
+            if (i == LISTINDEX_4) {
+                source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
+                if (設定項目リスト.get(LISTINDEX_4).is改頁項目()) {
+                    source.kaiPege5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
+                }
+            }
+        }
     }
 
 }
