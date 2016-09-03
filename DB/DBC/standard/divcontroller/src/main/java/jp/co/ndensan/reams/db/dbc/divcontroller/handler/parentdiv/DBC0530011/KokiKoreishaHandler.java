@@ -89,14 +89,14 @@ public class KokiKoreishaHandler {
         set資格喪失事由();
         if (後期高齢者情報 != null) {
             div.getMeisaiPanel().getTxtRirekiNo().setValue(後期高齢者情報.get履歴番号());
-            if (!後期高齢者情報.get後期高齢被保険者番号().isNullOrEmpty()) {
+            if (後期高齢者情報.get後期高齢被保険者番号() != null) {
                 div.getMeisaiPanel().getTxtHihokenshaNo().setValue(後期高齢者情報.get後期高齢被保険者番号());
             }
-            if (!後期高齢者情報.get資格取得日().isNullOrEmpty()) {
+            if (後期高齢者情報.get資格取得日() != null) {
                 div.getMeisaiPanel().getTxtShikakuShutokuYMD().setValue(new RDate(後期高齢者情報.get資格取得日().toString()));
             }
 
-            if (!後期高齢者情報.get資格喪失日().isNullOrEmpty()) {
+            if (後期高齢者情報.get資格喪失日() != null) {
                 div.getMeisaiPanel().getTxtShikakuSoshitsuYMD().setValue(new RDate(後期高齢者情報.get資格喪失日().toString()));
             }
             if (後期高齢者情報.get登録区分().equals(new RString("1"))) {
@@ -104,19 +104,19 @@ public class KokiKoreishaHandler {
                 keys.add(new RString("key0"));
                 div.getMeisaiPanel().getChkTorokuKubun().setSelectedItemsByKey(keys);
             }
-            if (!後期高齢者情報.get保険者適用開始日().isNullOrEmpty()) {
+            if (後期高齢者情報.get保険者適用開始日() != null) {
                 div.getMeisaiPanel().getTxtHokenshaKaishiYMD().setValue(new RDate(後期高齢者情報.get保険者適用開始日().toString()));
             }
-            if (!後期高齢者情報.get保険者適用終了日().isNullOrEmpty()) {
+            if (後期高齢者情報.get保険者適用終了日() != null) {
                 div.getMeisaiPanel().getTxtHokenshaShuryoYMD().setValue(new RDate(後期高齢者情報.get保険者適用終了日().toString()));
             }
-            if (!後期高齢者情報.get資格取得事由コード().isNullOrEmpty()) {
+            if (後期高齢者情報.get資格取得事由コード() != null) {
                 div.getMeisaiPanel().getDdlShikakuShutokuJiyu().setSelectedKey(後期高齢者情報.get資格取得事由コード());
             }
-            if (!後期高齢者情報.get資格喪失事由コード().isNullOrEmpty()) {
+            if (後期高齢者情報.get資格喪失事由コード() != null) {
                 div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().setSelectedKey(後期高齢者情報.get資格喪失事由コード());
             }
-            if (!後期高齢者情報.get個人区分コード().isNullOrEmpty()) {
+            if (後期高齢者情報.get個人区分コード() != null) {
                 div.getMeisaiPanel().getDdlKojinKubunCode().setSelectedKey(後期高齢者情報.get個人区分コード());
             }
         }
