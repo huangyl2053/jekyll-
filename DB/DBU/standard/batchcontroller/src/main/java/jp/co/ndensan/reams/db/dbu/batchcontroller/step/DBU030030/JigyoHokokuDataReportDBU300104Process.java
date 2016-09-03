@@ -294,12 +294,12 @@ public class JigyoHokokuDataReportDBU300104Process extends BatchProcessBase<Jigy
         reportData.set減免認定表の特定負担限度額_居住費_5(getValue(syukeiNo1020, 数値_602));
         reportData.set減免認定表の特定負担限度額_居住費_6(getValue(syukeiNo1020, 数値_702));
 
-        reportData.set免除認定表の利用者負担_1(getValue(syukeiNo1020, 数値_101));
-        reportData.set免除認定表の利用者負担_2(getValue(syukeiNo1020, 数値_201));
-        reportData.set免除認定表の利用者負担_3(getValue(syukeiNo1020, 数値_301));
-        reportData.set免除認定表の利用者負担_4(getValue(syukeiNo1020, 数値_401));
-        reportData.set免除認定表の利用者負担_5(getValue(syukeiNo1020, 数値_501));
-        reportData.set免除認定表の利用者負担_6(getValue(syukeiNo1020, 数値_601));
+        reportData.set免除認定表の利用者負担_1(getValue(syukeiNo1002, 数値_101));
+        reportData.set免除認定表の利用者負担_2(getValue(syukeiNo1002, 数値_201));
+        reportData.set免除認定表の利用者負担_3(getValue(syukeiNo1002, 数値_301));
+        reportData.set免除認定表の利用者負担_4(getValue(syukeiNo1002, 数値_401));
+        reportData.set免除認定表の利用者負担_5(getValue(syukeiNo1002, 数値_501));
+        reportData.set免除認定表の利用者負担_6(getValue(syukeiNo1002, 数値_601));
         JigyohokokuCompYoshiki300103Report report = new JigyohokokuCompYoshiki300103Report(reportData);
         report.writeBy(reportSourceWriter);
     }
