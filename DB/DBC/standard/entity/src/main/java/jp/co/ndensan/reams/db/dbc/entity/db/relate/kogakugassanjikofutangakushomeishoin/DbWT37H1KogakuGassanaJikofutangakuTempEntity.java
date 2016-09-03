@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
@@ -31,14 +32,19 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 public class DbWT37H1KogakuGassanaJikofutangakuTempEntity
         extends DbTableEntityBase<DbWT37H1KogakuGassanaJikofutangakuTempEntity> implements IDbAccessable {
 
+    @PrimaryKey
     @TempTableColumnOrder(1)
     private int renban;
+    @PrimaryKey
     @TempTableColumnOrder(2)
     private HihokenshaNo hokenshaNoIn;
+    @PrimaryKey
     @TempTableColumnOrder(3)
     private FlexibleYear taishoNendo;
+    @PrimaryKey
     @TempTableColumnOrder(4)
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    @PrimaryKey
     @TempTableColumnOrder(5)
     private RString shikyuShinseishoSeiriNo;
     @TempTableColumnOrder(6)
