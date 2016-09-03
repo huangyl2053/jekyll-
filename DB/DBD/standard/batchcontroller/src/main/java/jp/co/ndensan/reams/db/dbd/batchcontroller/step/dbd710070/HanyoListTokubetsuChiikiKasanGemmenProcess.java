@@ -516,9 +516,9 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
             eucCsvEntity.set方書(kojin.get住所().get方書().value());
             eucCsvEntity.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().value());
             eucCsvEntity.set行政区名(kojin.get行政区画().getGyoseiku().get名称());
-            eucCsvEntity.set地区１(kojin.get行政区画().getChiku1().get名称());
-            eucCsvEntity.set地区２(kojin.get行政区画().getChiku2().get名称());
-            eucCsvEntity.set地区３(kojin.get行政区画().getChiku3().get名称());
+            eucCsvEntity.set地区１(kojin.get行政区画().getChiku1().getコード().value());
+            eucCsvEntity.set地区２(kojin.get行政区画().getChiku2().getコード().value());
+            eucCsvEntity.set地区３(kojin.get行政区画().getChiku3().getコード().value());
             eucCsvEntity.set連絡先１(kojin.get連絡先１().value());
             eucCsvEntity.set連絡先２(kojin.get連絡先２().value());
             eucCsvEntity.set登録異動日(set年月日(kojin.get登録異動年月日()));
@@ -543,7 +543,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
         eucCsvEntity.set市町村コード(entity.get被保険者台帳管理_市町村コード());
         eucCsvEntity.set市町村名(get地方公共団体(new LasdecCode(entity.get被保険者台帳管理_市町村コード())).get市町村名());
         eucCsvEntity.set保険者コード(association.get地方公共団体コード().value());
-        eucCsvEntity.set保険者名(association.getShichosonName_());
+        eucCsvEntity.set保険者名(association.get市町村名());
         eucCsvEntity.set空白(RString.EMPTY);
         if (entity.getAtesakiEntity() != null) {
             IAtesaki atesaki = AtesakiFactory.createInstance(entity.getAtesakiEntity());

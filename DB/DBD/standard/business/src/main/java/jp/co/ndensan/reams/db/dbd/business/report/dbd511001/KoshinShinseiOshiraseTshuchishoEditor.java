@@ -5,8 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd511001;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.RenZhengzheEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd511001.KoshinShinseiOshiraseTshuchishoReportSource;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定更新お知らせ通知書Editorです。
@@ -15,14 +25,31 @@ import jp.co.ndensan.reams.db.dbd.entity.report.dbd511001.KoshinShinseiOshiraseT
  */
 public class KoshinShinseiOshiraseTshuchishoEditor implements IKoshinShinseiOshiraseTshuchishoEditor {
 
+    private final NinshoshaSource ninshoshaSource;
+    private final IAtesaki 宛先;
+    private final ChohyoSeigyoKyotsu 帳票制御共通;
+    private final Association 地方公共団体;
+    private final List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用;
     private final RenZhengzheEntity 認定更新お知らせ通知書Entity;
 
     /**
      * インスタンスを生成します。
      *
+     * @param ninshoshaSource NinshoshaSource
+     * @param 宛先 IAtesaki
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
+     * @param 地方公共団体 Association
+     * @param 帳票制御汎用 List<DbT7067ChohyoSeigyoHanyoEntity>
      * @param 認定更新お知らせ通知書Entity RenZhengzheEntity
      */
-    public KoshinShinseiOshiraseTshuchishoEditor(RenZhengzheEntity 認定更新お知らせ通知書Entity) {
+    public KoshinShinseiOshiraseTshuchishoEditor(NinshoshaSource ninshoshaSource, IAtesaki 宛先,
+            ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体, List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用,
+            RenZhengzheEntity 認定更新お知らせ通知書Entity) {
+        this.ninshoshaSource = ninshoshaSource;
+        this.宛先 = 宛先;
+        this.帳票制御共通 = 帳票制御共通;
+        this.地方公共団体 = 地方公共団体;
+        this.帳票制御汎用 = 帳票制御汎用;
         this.認定更新お知らせ通知書Entity = 認定更新お知らせ通知書Entity;
     }
 
@@ -32,50 +59,73 @@ public class KoshinShinseiOshiraseTshuchishoEditor implements IKoshinShinseiOshi
     }
 
     private KoshinShinseiOshiraseTshuchishoReportSource edit項目(KoshinShinseiOshiraseTshuchishoReportSource source) {
-        source.hakkoYMD1 = 認定更新お知らせ通知書Entity.get発行日();
-        source.denshiKoin = 認定更新お知らせ通知書Entity.get電子公印();
-        source.ninshoshaYakushokuMei = 認定更新お知らせ通知書Entity.get認証者役職名();
-        source.ninshoshaYakushokuMei2 = 認定更新お知らせ通知書Entity.get認証者役職名2();
-        source.ninshoshaYakushokuMei1 = 認定更新お知らせ通知書Entity.get認証者役職名1();
-        source.koinMojiretsu = 認定更新お知らせ通知書Entity.get公印文字列();
-        source.ninshoshaShimeiKakeru = 認定更新お知らせ通知書Entity.get認証者氏名_公印に掛ける();
-        source.ninshoshaShimeiKakenai = 認定更新お知らせ通知書Entity.get認証者氏名_公印に掛けない();
-        source.koinShoryaku = 認定更新お知らせ通知書Entity.get公印省略();
+        setCompNinshosha(source);
+        setCompSofubutsuAtesaki(source);
+        setLayer1(source);
+        return source;
+    }
 
-        source.yubinNo = 認定更新お知らせ通知書Entity.get郵便番号();
-        source.gyoseiku = 認定更新お知らせ通知書Entity.get行政区();
-        source.jusho3 = 認定更新お知らせ通知書Entity.get住所3();
-        source.jushoText = 認定更新お知らせ通知書Entity.get住所テキスト();
-        source.jusho1 = 認定更新お知らせ通知書Entity.get住所1();
-        source.jusho2 = 認定更新お知らせ通知書Entity.get住所2();
-        source.katagakiText = 認定更新お知らせ通知書Entity.get方書テキスト();
-        source.katagaki2 = 認定更新お知らせ通知書Entity.get方書2();
-        source.katagakiSmall2 = 認定更新お知らせ通知書Entity.get方書_小_2();
-        source.katagaki1 = 認定更新お知らせ通知書Entity.get方書1();
-        source.katagakiSmall1 = 認定更新お知らせ通知書Entity.get方書_小_1();
-        source.shimei2 = 認定更新お知らせ通知書Entity.get氏名2();
-        source.shimeiSmall2 = 認定更新お知らせ通知書Entity.get氏名_小_2();
-        source.shimeiText = 認定更新お知らせ通知書Entity.get氏名テキスト();
-        source.meishoFuyo2 = 認定更新お知らせ通知書Entity.get名称付与2();
-        source.shimeiSmall1 = 認定更新お知らせ通知書Entity.get氏名_小_1();
-        source.dainoKubunMei = 認定更新お知らせ通知書Entity.get代納区分名();
-        source.shimei1 = 認定更新お知らせ通知書Entity.get氏名1();
-        source.meishoFuyo1 = 認定更新お知らせ通知書Entity.get名称付与1();
-        source.samabunShimeiText = 認定更新お知らせ通知書Entity.get様分氏名テキスト();
-        source.kakkoLeft2 = 認定更新お知らせ通知書Entity.get括弧左2();
-        source.samabunShimei2 = 認定更新お知らせ通知書Entity.get様分氏名2();
-        source.samabunShimeiSmall2 = 認定更新お知らせ通知書Entity.get様分氏名_小_2();
-        source.samaBun2 = 認定更新お知らせ通知書Entity.get様分2();
-        source.kakkoRight2 = 認定更新お知らせ通知書Entity.get括弧右2();
-        source.kakkoLeft1 = 認定更新お知らせ通知書Entity.get括弧左1();
-        source.samabunShimei1 = 認定更新お知らせ通知書Entity.get様分氏名1();
-        source.samaBun1 = 認定更新お知らせ通知書Entity.get様分1();
-        source.kakkoRight1 = 認定更新お知らせ通知書Entity.get括弧右1();
-        source.samabunShimeiSmall1 = 認定更新お知らせ通知書Entity.get様分氏名_小_1();
-        source.customerBarCode = 認定更新お知らせ通知書Entity.getカスタマバーコード();
+    private void setCompNinshosha(KoshinShinseiOshiraseTshuchishoReportSource source) {
+        source.hakkoYMD1 = ninshoshaSource.hakkoYMD;
+        source.denshiKoin = ninshoshaSource.denshiKoin;
+        source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
+        source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
+        source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
+        source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
+        source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
+        source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
+        source.koinShoryaku = ninshoshaSource.koinShoryaku;
+    }
 
+    private void setCompSofubutsuAtesaki(KoshinShinseiOshiraseTshuchishoReportSource source) {
+        EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(this.宛先, this.地方公共団体, this.帳票制御共通);
+        SofubutsuAtesakiSource 送付物宛先情報;
+        try {
+            送付物宛先情報 = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
+        } catch (Exception e) {
+            送付物宛先情報 = new SofubutsuAtesakiSource();
+        }
+        source.yubinNo = 送付物宛先情報.yubinNo;
+        source.gyoseiku = 送付物宛先情報.gyoseiku;
+        source.jusho3 = 送付物宛先情報.jusho3;
+        source.jushoText = 送付物宛先情報.jushoText;
+        source.jusho1 = 送付物宛先情報.jusho1;
+        source.jusho2 = 送付物宛先情報.jusho2;
+        source.katagakiText = 送付物宛先情報.katagakiText;
+        source.katagaki2 = 送付物宛先情報.katagaki2;
+        source.katagakiSmall2 = 送付物宛先情報.katagakiSmall2;
+        source.katagaki1 = 送付物宛先情報.katagaki1;
+        source.katagakiSmall1 = 送付物宛先情報.katagakiSmall1;
+        source.shimei2 = 送付物宛先情報.shimei2;
+        source.shimeiSmall2 = 送付物宛先情報.shimeiSmall2;
+        source.shimeiText = 送付物宛先情報.shimeiText;
+        source.meishoFuyo2 = 送付物宛先情報.meishoFuyo2;
+        source.shimeiSmall1 = 送付物宛先情報.shimeiSmall1;
+        source.dainoKubunMei = 送付物宛先情報.dainoKubunMei;
+        source.shimei1 = 送付物宛先情報.shimei1;
+        source.meishoFuyo1 = 送付物宛先情報.meishoFuyo1;
+        source.samabunShimeiText = 送付物宛先情報.samabunShimeiText;
+        source.kakkoLeft2 = 送付物宛先情報.kakkoLeft2;
+        source.samabunShimei2 = 送付物宛先情報.samabunShimei2;
+        source.samabunShimeiSmall2 = 送付物宛先情報.samabunShimeiSmall2;
+        source.samaBun2 = 送付物宛先情報.samaBun2;
+        source.kakkoRight2 = 送付物宛先情報.kakkoRight2;
+        source.kakkoLeft1 = 送付物宛先情報.kakkoLeft1;
+        source.samabunShimei1 = 送付物宛先情報.samabunShimei1;
+        source.samaBun1 = 送付物宛先情報.samaBun1;
+        source.kakkoRight1 = 送付物宛先情報.kakkoRight1;
+        source.samabunShimeiSmall1 = 送付物宛先情報.samabunShimeiSmall1;
+        source.customerBarCode = 送付物宛先情報.customerBarCode;
+    }
+
+    private void setLayer1(KoshinShinseiOshiraseTshuchishoReportSource source) {
         source.bunshoNo = 認定更新お知らせ通知書Entity.get文書番号();
-        source.title = 認定更新お知らせ通知書Entity.getタイトル();
+        for (DbT7067ChohyoSeigyoHanyoEntity entity : 帳票制御汎用) {
+            if (new RString(ChohyoSeigyoHanyoKeysDBD511001.帳票タイトル.name()).equals(entity.getKomokuName())) {
+                source.title = entity.getKomokuValue();
+                break;
+            }
+        }
         source.tsuchibun1 = 認定更新お知らせ通知書Entity.get通知文1();
         source.hihokenshaNameKana = 認定更新お知らせ通知書Entity.get被保険者氏名フリガナ();
         source.hihokenshaNo1 = 認定更新お知らせ通知書Entity.get被保険者番号1();
@@ -94,7 +144,6 @@ public class KoshinShinseiOshiraseTshuchishoEditor implements IKoshinShinseiOshi
         source.yokaigoJotaiKubun = 認定更新お知らせ通知書Entity.get要介護状態区分();
         source.tsuchibun2 = 認定更新お知らせ通知書Entity.get通知文2();
 
-        return source;
     }
 
 }

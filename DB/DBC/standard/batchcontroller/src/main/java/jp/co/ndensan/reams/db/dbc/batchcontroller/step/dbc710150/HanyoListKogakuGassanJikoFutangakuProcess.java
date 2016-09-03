@@ -172,27 +172,16 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
     private List<PersonalData> personalDataList;
     private IOutputOrder 出力順;
     private RString eucFilePath;
-    private static final RString デフォルト出力順 = new RString("order by 高額合算自己負担額.\"hihokenshaNo\","
-            + "高額合算自己負担額.\"taishoNendo\",高額合算自己負担額.\"hokenshaNo\",高額合算自己負担額.\"shikyuShinseishoSeiriNo\"");
+    private static final RString デフォルト出力順 = new RString("order by 高額合算自己負担額_被保険者番号,"
+            + "高額合算自己負担額_対象年度,高額合算自己負担額_保険者番号,高額合算自己負担額_支給申請書整理番号");
 
     @BatchWriter
     private CsvWriter<HanyoListKogakuGassanJikoFutangakuCsvEntity> eucCsvWriter;
 
     @Override
-    protected void beforeExecute() {
+    protected IBatchReader createReader() {
         連番 = Decimal.ONE;
         システム日付 = FlexibleDate.getNowDate();
-        地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-        構成市町村マスタlist = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
-        構成市町村Map = new HashMap<>();
-        personalDataList = new ArrayList<>();
-        if (構成市町村マスタlist != null) {
-            for (KoseiShichosonMaster data : 構成市町村マスタlist) {
-                if (data.get市町村コード() != null) {
-                    構成市町村Map.put(data.get市町村コード(), data);
-                }
-            }
-        }
         if (parameter.get出力順() != null) {
             IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
             出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
@@ -204,10 +193,7 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
                 parameter.set出力順(デフォルト出力順);
             }
         }
-    }
 
-    @Override
-    protected IBatchReader createReader() {
         return new BatchDbReader(READ_DATA_ID, parameter.toMybatisParamter());
     }
 
@@ -224,6 +210,22 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
                 setNewLine(NewLine.CRLF).
                 hasHeader(parameter.is項目名付加()).
                 build();
+    }
+
+    @Override
+    protected void beforeExecute() {
+
+        地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        構成市町村マスタlist = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
+        構成市町村Map = new HashMap<>();
+        personalDataList = new ArrayList<>();
+        if (構成市町村マスタlist != null) {
+            for (KoseiShichosonMaster data : 構成市町村マスタlist) {
+                if (data.get市町村コード() != null) {
+                    構成市町村Map.put(data.get市町村コード(), data);
+                }
+            }
+        }
     }
 
     @Override

@@ -70,6 +70,14 @@ public enum SystemKanriNinteiShienTotalValidationMessage implements IValidationM
      */
     新様式_申請情報出力ファイルが未入力(UrErrorMessages.必須, "新様式_申請情報出力ファイル"),
     /**
+     * 新様式_死亡情報ファイルが未入力。
+     */
+    新様式_死亡情報ファイルが未入力(UrErrorMessages.必須, "新様式_死亡情報ファイル"),
+    /**
+     * 新様式_転入死亡ファイルが未入力。
+     */
+    新様式_転入死亡ファイルが未入力(UrErrorMessages.必須, "新様式_転入死亡ファイル"),
+    /**
      * 更新対象のデータがない。 メッセージ：「いずれの項目も変更されていません。」
      *
      */

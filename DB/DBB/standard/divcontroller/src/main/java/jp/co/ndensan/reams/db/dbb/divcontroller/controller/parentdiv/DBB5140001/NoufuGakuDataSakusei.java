@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB5140001;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.nofugakudatasakusei.NofugakuDataParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB514001.DBB514001_NofugakuDataSakuseiTandokuShichosonParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB5140001.DBB5140001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB5140001.NoufuGakuDataSakuseiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB5140001.NoufuGakuDataSakuseiHandler;
@@ -73,17 +73,17 @@ public class NoufuGakuDataSakusei {
      * @param div NoufuGakuDataSakuseiDiv
      * @return ResponseData<NofugakuDataParameter>
      */
-    public ResponseData<NofugakuDataParameter>
+    public ResponseData<DBB514001_NofugakuDataSakuseiTandokuShichosonParameter>
             onClick_batch(NoufuGakuDataSakuseiDiv div) {
         RString 画面の状態 = ViewStateHolder.get(ViewStateKeys.画面ステート, RString.class);
         NoufuGakuDataSakuseiHandler handler = getHandler(div);
         if (単一.equals(画面の状態)) {
             handler.単一コンフィグ保存();
-            NofugakuDataParameter parameter = handler.get単一用バッチパラメータ();
+            DBB514001_NofugakuDataSakuseiTandokuShichosonParameter parameter = handler.get単一用バッチパラメータ();
             return ResponseData.of(parameter).respond();
         } else {
             handler.広域コンフィグ保存();
-            NofugakuDataParameter parameter = handler.get広域用バッチパラメータ();
+            DBB514001_NofugakuDataSakuseiTandokuShichosonParameter parameter = handler.get広域用バッチパラメータ();
             return ResponseData.of(parameter).respond();
         }
     }

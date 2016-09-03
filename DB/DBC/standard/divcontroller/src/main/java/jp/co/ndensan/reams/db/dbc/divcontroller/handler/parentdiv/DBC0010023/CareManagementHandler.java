@@ -39,7 +39,7 @@ public class CareManagementHandler {
     private static final RString 後 = new RString("後");
     private static final RString 前月 = new RString("前月");
     private final RString 前事業者 = new RString("前事業者");
-    private static final FlexibleYearMonth 平成24年4月 = new FlexibleYearMonth("201607");
+    private static final FlexibleYearMonth 平成24年4月 = new FlexibleYearMonth("201204");
 
     /**
      * コンストラクタです。

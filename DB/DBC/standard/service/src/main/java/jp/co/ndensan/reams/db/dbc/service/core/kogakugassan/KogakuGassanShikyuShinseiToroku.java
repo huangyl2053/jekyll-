@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -202,7 +203,7 @@ public class KogakuGassanShikyuShinseiToroku {
      * @return boolean
      */
     @Transaction
-    public boolean getKogakuKaigoShinseisho(KogakuGassanShinseishoHoji 高額合算申請書保持) {
+    public boolean getKogakuGassanShikyuShinseishoTorokuKoshin(KogakuGassanShinseishoHoji 高額合算申請書保持) {
         if (RString.isNullOrEmpty(高額合算申請書保持.get整理番号())) {
             RString 整理番号New = Saiban.get(SubGyomuCode.DBC介護給付,
                     SaibanHanyokeyName.支給申請書整理番号.getコード()).nextString();
@@ -298,5 +299,24 @@ public class KogakuGassanShikyuShinseiToroku {
         HihokenshaMeishoSearchParameter meishoParameter = HihokenshaMeishoSearchParameter
                 .createSelectByKeyParam(searchKey, entity.getHihokenshaNo());
         return mapper.select被保険者名(meishoParameter);
+    }
+
+    /**
+     * 最新識別コード取得します。
+     *
+     * @param entity DbT3068KogakuGassanShinseishoEntity
+     * @return ShikibetsuCode
+     */
+    public ShikibetsuCode getShikibetsuCode(DbT3068KogakuGassanShinseishoEntity entity) {
+        IKogakuGassanShikyuShinseiTorokuMapper mapper = this.mapperProvider.create(IKogakuGassanShikyuShinseiTorokuMapper.class);
+        ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
+                KensakuYusenKubun.住登外優先);
+        builder.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
+        builder.set基準日(FlexibleDate.getNowDate());
+        IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
+        HihokenshaMeishoSearchParameter meishoParameter = HihokenshaMeishoSearchParameter
+                .createSelectByKeyParam(searchKey, entity.getHihokenshaNo());
+        UaFt200FindShikibetsuTaishoEntity resultEntity = mapper.select被保険者名(meishoParameter);
+        return resultEntity == null ? null : resultEntity.getShikibetsuCode();
     }
 }

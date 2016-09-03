@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikat
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KariSanteigakuHenkoTsuchishoHakkoIchiranData;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KarisanteiGakuHenkoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2017TsuchishoHakkogoIdoshaDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6tsuchishoikatsuhako.ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
@@ -38,7 +37,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki._Atesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
@@ -71,7 +69,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
@@ -83,8 +80,6 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
 
     private final MapperProvider mapperProvider;
     private final ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper mapper;
-    private final DbT2017TsuchishoHakkogoIdoshaDac dac;
-    private final DbT7065ChohyoSeigyoKyotsuDac dbt7065dac;
 
     private static final ReportId 帳票分類ID_DBB100012 = new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
     private static final ReportId 代行プリント送付票_帳票ID = new ReportId("URU000A10_DaikoPrintCheck");
@@ -131,8 +126,6 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
     TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.mapper = mapperProvider.create(ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper.class);
-        this.dac = InstanceProvider.create(DbT2017TsuchishoHakkogoIdoshaDac.class);
-        this.dbt7065dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
     }
 
     /**
@@ -159,9 +152,9 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
      * @param fukaTemp 介護賦課一時テーブルのエンティティ
      * @param param パラメータ
      * @param 連番 連番
+     * @return 通知書発行後異動者テーブルのエンティティ
      */
-    @Transaction
-    public void insTsuchishoHakkogoIdosha(DbT2002FukaTempTableEntity fukaTemp, TsuchishoIdoshaTorokuProcessParameter param, int 連番) {
+    public DbT2017TsuchishoHakkogoIdoshaEntity insTsuchishoHakkogoIdosha(DbT2002FukaTempTableEntity fukaTemp, TsuchishoIdoshaTorokuProcessParameter param, int 連番) {
 
         DbT2017TsuchishoHakkogoIdoshaEntity entity = new DbT2017TsuchishoHakkogoIdoshaEntity();
         entity.setReportID(new ReportId(param.get帳票ID()));
@@ -173,7 +166,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         entity.setKeisanTimestamp(fukaTemp.getKoseigo_choteiNichiji());
         entity.setGaitoRemban(連番);
         entity.setIdoAriFlag(false);
-        dac.save(entity);
+        return entity;
     }
 
     /**
@@ -182,7 +175,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
      * @return 帳票制御共通情報
      */
     public DbT7065ChohyoSeigyoKyotsuEntity find帳票制御共通情報() {
-        return dbt7065dac.selectByKey(SubGyomuCode.DBB介護賦課, 帳票分類ID_DBB100012);
+        return mapper.select帳票制御共通情報(SubGyomuCode.DBB介護賦課.getColumnValue(), 帳票分類ID_DBB100012.getColumnValue());
     }
 
     /**

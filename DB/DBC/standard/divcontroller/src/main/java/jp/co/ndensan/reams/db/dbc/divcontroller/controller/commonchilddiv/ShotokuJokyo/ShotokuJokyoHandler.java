@@ -149,7 +149,6 @@ public class ShotokuJokyoHandler {
         if (世帯員所得情報リスト.isEmpty()) {
             div.getDgSteaiinShotoku().setDataSource(rowList);
         } else {
-            RString 被保険者番号;
             RString 生年月日 = RString.EMPTY;
             IDateOfBirth dateofbirth;
             RString 年齢;
@@ -160,9 +159,8 @@ public class ShotokuJokyoHandler {
             RString 課税区分_住民税減免後;
             for (SetaiinShotoku item : 世帯員所得情報リスト) {
                 row = new dgSteaiinShotoku_Row();
-                row.setShikibetsuCode(item.get種別コード());
-                被保険者番号 = new RString(item.get被保険者番号().toString());
-                row.setHihokenshaNo(被保険者番号);
+                row.setShikibetsuCode(item.get識別コード().value());
+                row.setHihokenshaNo(item.get被保険者番号().value());
                 row.setName(item.get氏名().concat(改行記号).concat(item.getカナ氏名()));
                 if (null != item.get生年月日() && !item.get生年月日().isEmpty()) {
                     生年月日 = toWarekiHalf_Zero(item.get生年月日());
@@ -174,7 +172,7 @@ public class ShotokuJokyoHandler {
                 row.setAge(年齢);
                 row.setZokugara(item.get続柄());
                 課税区分_住民税減免後 = item.get課税区分_住民税減免後();
-                if (KazeiKubun.課税.get名称().equals(課税区分_住民税減免後)) {
+                if (KazeiKubun.課税.getコード().equals(課税区分_住民税減免後)) {
                     row.setJuminZei(SetaiKazeiKubun.課税.get名称());
                 } else {
                     row.setJuminZei(SetaiKazeiKubun.非課税.get名称());

@@ -293,7 +293,7 @@ public class SogojigyohiKagoKetteiKohifutanshaDoIchiranhyoSakuseiProcess extends
     private PersonalData getPersonalData(SogoKohifutanshaEntity entity) {
         ExpandedInformation expandedInformations = new ExpandedInformation(new Code(CODE), 被保険者番号,
                 getColumnValue(entity.get登録被保険者番号()));
-        return PersonalData.of(new ShikibetsuCode(RString.EMPTY), expandedInformations);
+        return PersonalData.of(new ShikibetsuCode(entity.get識別コード()), expandedInformations);
     }
 
     private static RString doカンマ編集(Decimal number) {

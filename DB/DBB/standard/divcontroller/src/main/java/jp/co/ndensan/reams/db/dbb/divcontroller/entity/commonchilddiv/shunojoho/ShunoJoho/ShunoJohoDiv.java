@@ -5,13 +5,13 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.shunojoho
  * 不正な動作の原因になります。
  */
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 
@@ -199,12 +199,9 @@ public class ShunoJohoDiv extends Panel implements IShunoJohoDiv {
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public void load(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
-        getHandler().load(調定年度, 賦課年度, 通知書番号);
+    @JsonIgnore
+    public void initialize(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
+        ShunoJohoHandler.of(this).load(調定年度, 賦課年度, 通知書番号);
     }
 
-    @JsonIgnore
-    public ShunoJohoHandler getHandler() {
-        return new ShunoJohoHandler(this);
-    }
 }

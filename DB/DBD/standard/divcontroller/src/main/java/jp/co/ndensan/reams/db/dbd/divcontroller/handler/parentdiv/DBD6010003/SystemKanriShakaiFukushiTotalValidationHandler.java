@@ -51,14 +51,7 @@ public class SystemKanriShakaiFukushiTotalValidationHandler {
                 .add(SystemKanriShakaiFukushiTotalValidationMessage.減免率の分母が未入力, get減免率_分母())
                 .add(SystemKanriShakaiFukushiTotalValidationMessage.軽減率の分子が未入力, get軽減率_分子())
                 .add(SystemKanriShakaiFukushiTotalValidationMessage.軽減率の分母が未入力, get軽減率_分母())
-                .add(SystemKanriShakaiFukushiTotalValidationMessage.更新対象のデータがない, get確認番号_使用有無())
-                .add(SystemKanriShakaiFukushiTotalValidationMessage.更新対象のデータがない, get採番基準())
-                .add(SystemKanriShakaiFukushiTotalValidationMessage.更新対象のデータがない, get番号引継ぎ())
-                .add(SystemKanriShakaiFukushiTotalValidationMessage.更新対象のデータがない, get有効桁数())
-                .add(SystemKanriShakaiFukushiTotalValidationMessage.更新対象のデータがない, get減免率_分子())
-                .add(SystemKanriShakaiFukushiTotalValidationMessage.更新対象のデータがない, get減免率_分母())
-                .add(SystemKanriShakaiFukushiTotalValidationMessage.更新対象のデータがない, get軽減率_分子())
-                .add(SystemKanriShakaiFukushiTotalValidationMessage.更新対象のデータがない, get軽減率_分母())
+                .add(SystemKanriShakaiFukushiTotalValidationMessage.更新対象のデータがない, get更新対象())
                 .add(SystemKanriShakaiFukushiTotalValidationMessage.有効桁数入力値が不正, get有効桁数())
                 .add(SystemKanriShakaiFukushiTotalValidationMessage.減免率入力値が不正, get減免率())
                 .add(SystemKanriShakaiFukushiTotalValidationMessage.軽減率の分子入力値が不正, get軽減率_分子())
@@ -66,21 +59,16 @@ public class SystemKanriShakaiFukushiTotalValidationHandler {
                 .build();
     }
 
-    private List<ViewControl> get確認番号_使用有無() {
+    private List<ViewControl> get更新対象() {
         List<ViewControl> viewControls = new ArrayList<>();
         viewControls.add(div.getSystemKanri().getSystemKanriShakaiFukushi().getRadKakuninNo());
-        return viewControls;
-    }
-
-    private List<ViewControl> get採番基準() {
-        List<ViewControl> viewControls = new ArrayList<>();
         viewControls.add(div.getSystemKanri().getSystemKanriShakaiFukushi().getRadSaiban());
-        return viewControls;
-    }
-
-    private List<ViewControl> get番号引継ぎ() {
-        List<ViewControl> viewControls = new ArrayList<>();
         viewControls.add(div.getSystemKanri().getSystemKanriShakaiFukushi().getRadNoHikitsugi());
+        viewControls.add(div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtYukoKetasu());
+        viewControls.add(div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtGenmenRitsu1());
+        viewControls.add(div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtGenmenRitsu2());
+        viewControls.add(div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtKeigenRitsu1());
+        viewControls.add(div.getSystemKanri().getSystemKanriShakaiFukushi().getTxtKeigenRitsu2());
         return viewControls;
     }
 

@@ -71,7 +71,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2001ChoshuHohoDac;
-import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2003KibetsuDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV2001ChoshuHohoAliveDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.UrT0705ChoteiKyotsuDac;
@@ -125,7 +124,6 @@ public class HonnSanteiFuka {
     private final DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac;
     private final DbT2001ChoshuHohoDac 介護徴収方法Dac;
     private final DbT2010FukaErrorListDac 賦課エラーDac;
-    private final DbT2002FukaDac 介護賦課Dac;
     private final DbT7022ShoriDateKanriDac 処理日付管理Dac;
     private static final RString T5 = new RString("T5");
     private static final RString FROMAT = new RString("%02d");
@@ -169,7 +167,6 @@ public class HonnSanteiFuka {
         this.介護徴収方法Dac = InstanceProvider.create(DbT2001ChoshuHohoDac.class);
         this.賦課エラーDac = InstanceProvider.create(DbT2010FukaErrorListDac.class);
         this.帳票制御共通Dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
-        this.介護賦課Dac = InstanceProvider.create(DbT2002FukaDac.class);
     }
 
     /**
@@ -180,7 +177,6 @@ public class HonnSanteiFuka {
      * @param 帳票制御共通Dac DbT7065ChohyoSeigyoKyotsuDac
      * @param 介護徴収方法Dac DbT2001ChoshuHohoDac
      * @param 賦課エラーDac DbT2010FukaErrorListDac
-     * @param 介護賦課Dac DbT2002FukaDac
      * @param 介護期別Dac DbT2003KibetsuDac
      * @param choteiKyotsuDac UrT0705ChoteiKyotsuDac
      */
@@ -189,7 +185,6 @@ public class HonnSanteiFuka {
             DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac,
             DbT2001ChoshuHohoDac 介護徴収方法Dac,
             DbT2010FukaErrorListDac 賦課エラーDac,
-            DbT2002FukaDac 介護賦課Dac,
             DbT2003KibetsuDac 介護期別Dac,
             UrT0705ChoteiKyotsuDac choteiKyotsuDac,
             DbT7022ShoriDateKanriDac 処理日付管理Dac) {
@@ -198,7 +193,6 @@ public class HonnSanteiFuka {
         this.帳票制御共通Dac = 帳票制御共通Dac;
         this.介護徴収方法Dac = 介護徴収方法Dac;
         this.賦課エラーDac = 賦課エラーDac;
-        this.介護賦課Dac = 介護賦課Dac;
         this.処理日付管理Dac = 処理日付管理Dac;
     }
 
@@ -1321,13 +1315,13 @@ public class HonnSanteiFuka {
         }
         FukaJohoRelateEntity relateEntity = new FukaJohoRelateEntity();
         relateEntity.set介護賦課Entity(設定前賦課情報.toEntity());
-        KibetsuEntity 介護期別Entity = new KibetsuEntity();
         List<KibetsuEntity> 介護期別EntityList = new ArrayList<>();
-        List<UrT0705ChoteiKyotsuEntity> 調定共通EntityList = new ArrayList<>();
         for (Kibetsu kibetsu : 設定前賦課情報.getKibetsuList()) {
+            KibetsuEntity 介護期別Entity = new KibetsuEntity();
             介護期別Entity.set介護期別Entity(kibetsu.toEntity());
-            for (UrT0705ChoteiKyotsuEntity 調定共通Entity : 介護期別Entity.get調定共通Entity()) {
-                調定共通EntityList.add(調定共通Entity);
+            List<UrT0705ChoteiKyotsuEntity> 調定共通EntityList = new ArrayList<>();
+            for (ChoteiKyotsu choteiKyotsu : kibetsu.getChoteiKyotsuList()) {
+                調定共通EntityList.add(choteiKyotsu.toEntity());
             }
             介護期別Entity.set調定共通Entity(調定共通EntityList);
             介護期別EntityList.add(介護期別Entity);

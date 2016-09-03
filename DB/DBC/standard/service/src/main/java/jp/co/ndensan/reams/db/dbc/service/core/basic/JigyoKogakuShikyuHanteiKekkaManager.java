@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3111JigyoKogakuShikyuH
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -104,5 +105,53 @@ public class JigyoKogakuShikyuHanteiKekkaManager {
             return false;
         }
         return 1 == dac.save(事業高額介護サービス費支給判定結果.toEntity());
+    }
+
+    /**
+     * 被保険者番号よりサービス提供年月リストを取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return サービス提供年月リスト List<FlexibleYearMonth>
+     */
+    public List<FlexibleYearMonth> getサービス提供年月リスト(HihokenshaNo 被保険者番号) {
+        List<DbT3111JigyoKogakuShikyuHanteiKekkaEntity> サービス費支給判定結果リスト = dac.selectサービス提供年月Bykey(被保険者番号);
+        List<FlexibleYearMonth> サービス提供年月 = new ArrayList<>();
+        for (DbT3111JigyoKogakuShikyuHanteiKekkaEntity entity : サービス費支給判定結果リスト) {
+            サービス提供年月.add(entity.getServiceTeikyoYM());
+        }
+        return サービス提供年月;
+    }
+
+    /**
+     * 被保険者番号とサービス提供年月より管理番号リストを取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return サービス提供年月リスト List<Decimal>
+     */
+    public List<Decimal> get管理番号リスト(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
+        List<DbT3111JigyoKogakuShikyuHanteiKekkaEntity> 管理番号リスト = dac.select管理番号Bykey(被保険者番号, サービス提供年月);
+        List<Decimal> 管理番号 = new ArrayList<>();
+        for (DbT3111JigyoKogakuShikyuHanteiKekkaEntity entity : 管理番号リスト) {
+            管理番号.add(entity.getRirekiNo());
+        }
+        return 管理番号;
+    }
+
+    /**
+     * 被保険者番号とサービス提供年月より前回発行日リストを取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 管理番号 Decimal
+     * @return サービス提供年月リスト List<Decimal>
+     */
+    public List<FlexibleDate> get前回発行日リスト(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, Decimal 管理番号) {
+        List<DbT3111JigyoKogakuShikyuHanteiKekkaEntity> 管理番号リスト = dac.select前回発行日Bykey(被保険者番号, サービス提供年月, 管理番号);
+        List<FlexibleDate> 前回発行日 = new ArrayList<>();
+        for (DbT3111JigyoKogakuShikyuHanteiKekkaEntity entity : 管理番号リスト) {
+            前回発行日.add(entity.getKetteiTsuchishoSakuseiYMD());
+        }
+        return 前回発行日;
     }
 }

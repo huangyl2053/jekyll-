@@ -91,6 +91,14 @@
         AND    A."nendo"=#{調定年度}
         AND    A."shoriName"=#{作成処理名}
     </select>
+    
+    <select resultOrdered="true" id="select帳票制御共通情報"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity" fetchSize="500">
+        SELECT *
+        FROM rgdb."DbT7065ChohyoSeigyoKyotsu"
+        WHERE "subGyomuCode" = #{サブ業務コード}
+        AND "chohyoBunruiID" = #{帳票分類ID}
+    </select>
 
     <select resultOrdered="true" id="select特徴平準化_6月分更新後とリアルのデータ_一括発行起動"
             resultMap="resultMap_KarisanteiGakuHenkoEntity"
@@ -333,11 +341,11 @@
         "koseimae_fuShunyuGaku14" = DbT2015KeisangoJohoTemp."fuShunyuGaku14",
         "koseimaeJohoUmuKubun" = '1'
         <if test="一括発行起動">
-        FROM
+            FROM
             "DbT2015KeisangoJohoTemp"  AS DbT2015KeisangoJohoTemp
         </if>
         <if test="!一括発行起動">
-        FROM
+            FROM
             rgdb."DbT2015KeisangoJoho"  AS DbT2015KeisangoJohoTemp
         </if>
         WHERE

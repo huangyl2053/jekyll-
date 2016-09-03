@@ -17,7 +17,7 @@ public enum ReportIdDBU {
     /**
      * 介護事業状況報告年報（様式2-3）の帳票ＩＤです。
      */
-    DBU300113(new ReportId("DBU300009_JigyohokokuCompYoshiki2_0_1"), new RString("介護事業状況報告年報（様式2-3）")),
+    DBU300113(new ReportId("DBU300113_JigyohokokuNenpoYoshiki2_3of1"), new RString("介護事業状況報告年報（様式2-3）")),
     /**
      * 介護事業状況報告年報・一般状況（様式1-5）の帳票ＩＤです。
      */
@@ -29,7 +29,7 @@ public enum ReportIdDBU {
     /**
      * 介護事業状況報告年報（様式2-3）の帳票ＩＤです。
      */
-    DBU300114(new ReportId("DBU300010_JigyohokokuCompYoshiki2_0_2"), new RString("介護事業状況報告年報（様式2-3）")),
+    DBU300114(new ReportId("DBU300114_JigyohokokuNenpoYoshiki2_3of2"), new RString("介護事業状況報告年報（様式2-3）")),
     /**
      * 介護事業状況報告年報・一般状況（様式1-5）の帳票ＩＤです。
      */
@@ -183,6 +183,18 @@ public enum ReportIdDBU {
      * 介護事業状況報告年報（様式1-4）の帳票ID。
      */
     DBU300105(new ReportId("DBU300105_JigyohokokuNenpoYoshiki1_4"), new RString("介護事業状況報告年報（様式1-4）")),
+    /**
+     * 介護事業状況報告年報（様式2-4）の帳票ID。
+     */
+    DBU300116(new ReportId("DBU300116_JigyohokokuNenpoYoshiki2_4of2"), new RString("介護事業状況報告年報（様式2-4）")),
+    /**
+     * 介護事業状況報告年報（様式2-5）の帳票ID。
+     */
+    DBU300117(new ReportId("DBU300117_JigyohokokuNenpoYoshiki2_5"), new RString("介護事業状況報告年報（様式2-5）")),
+    /**
+     * 介護事業状況報告年報（様式2-6）の帳票ID。
+     */
+    DBU300118(new ReportId("DBU300118_JigyohokokuNenpoYoshiki2_6"), new RString("介護事業状況報告年報（様式2-6）")),
     /**
      * 介護事業状況報告年報（様式1-5）の帳票ID。
      */

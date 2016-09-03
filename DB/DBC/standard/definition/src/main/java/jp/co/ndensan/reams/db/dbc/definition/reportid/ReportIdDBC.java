@@ -486,9 +486,33 @@ public enum ReportIdDBC {
      */
     DBC300004(new ReportId("DBC300004_HeikinRiyoGakuTokeihyo"), new RString("平均利用額統計表")),
     /**
+     * 高額合算給付実績情報取込一覧表帳票ＩＤです。
+     */
+    DBC200041(new ReportId("DBC200041_GassanKyufujissekiTorikomiIchiran"), new RString("高額合算給付実績情報取込一覧表")),
+    /**
      * 介護保険高額サービス費受領委任契約承認（不承認）確認書帳票ＩＤです。
      */
-    DBC100031(new ReportId("DBC100031_KogakuServiceHiJyuryoItakuKeiyakuKakuninSho"), new RString("介護保険高額サービス費受領委任契約承認（不承認）確認書"));
+    DBC100031(new ReportId("DBC100031_KogakuServiceHiJyuryoItakuKeiyakuKakuninSho"), new RString("介護保険高額サービス費受領委任契約承認（不承認）確認書")),
+    /**
+     * 介護保険給付費通知書(２ページ目以降)帳票ＩＤです。
+     */
+    DBC100041(new ReportId("DBC100041_KyufuhiTsuchisho"), new RString("介護保険給付費通知書（２ページ目以降）")),
+    /**
+     * 帳票設計_DBC100043_介護保険給付費通知書（福祉用具貸与品目）帳票ＩＤです。
+     */
+    DBC100043(new ReportId("DBC100043_KyufuhiTsuchishoFukushiYoguTaiyoHinmoku"), new RString("介護保険給付費通知書（福祉用具貸与品目）")),
+    /**
+     * 帳票設計_DBC100043_介護保険給付費通知書（福祉用具貸与品目）帳票ＩＤです。
+     */
+    DBC100042(new ReportId("DBC100042_KyufuhiTsuchishoSealer"), new RString("介護保険給付費通知書(ｼｰﾗﾀｲﾌﾟ)")),
+    /**
+     * 帳票設計_DBC200004_利用状況一覧表帳票ＩＤです。
+     */
+    DBC200004(new ReportId("DBC200004_RiyoJokyoIchiran"), new RString("利用状況一覧表")),
+    /**
+     * 帳票設計_DBC200044_給付費通知発行一覧表ＩＤです。
+     */
+    DBC200044(new ReportId("DBC200044_KyufuhiTuchiHakkoIchiran"), new RString("給付費通知発行一覧表"));
 
     private final ReportId reportId;
 

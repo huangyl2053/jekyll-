@@ -153,11 +153,12 @@ public enum KokuhorenJoho_TorikomiErrorKubun {
     public static RString getエラーメッセージ(RString code) {
         if (KokuhorenJoho_TorikomiErrorKubun.新旧被保険者番号変換エラー.getコード().contains(code)) {
             return new RString("新被保険者番号に変換できません。");
-        } else if ((KokuhorenJoho_TorikomiErrorKubun.被保険者情報取得エラー.getコード().contains(code))
-                || (KokuhorenJoho_TorikomiErrorKubun.宛名取得エラー.getコード().contains(code))) {
+        } else if ((KokuhorenJoho_TorikomiErrorKubun.被保険者情報取得エラー.getコード().contains(code))) {
             return new RString("被保険者台帳が存在しません。");
-        } else if (KokuhorenJoho_TorikomiErrorKubun.世帯集約番号取得エラー.getコード().contains(code)) {
+        } else if (KokuhorenJoho_TorikomiErrorKubun.宛名取得エラー.getコード().contains(code)) {
             return new RString("宛名が存在しません。");
+        } else if (KokuhorenJoho_TorikomiErrorKubun.世帯集約番号取得エラー.getコード().contains(code)) {
+            return new RString("世帯集約番号の取得ができません。");
         } else if (KokuhorenJoho_TorikomiErrorKubun.再処理不可.getコード().contains(code)) {
             return new RString("関連データが登録済のため再処理できません。");
         } else if (KokuhorenJoho_TorikomiErrorKubun.再処理データなし.getコード().contains(code)) {

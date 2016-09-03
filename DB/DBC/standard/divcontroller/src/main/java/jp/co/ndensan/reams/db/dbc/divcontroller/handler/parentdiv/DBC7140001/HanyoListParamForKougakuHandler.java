@@ -60,8 +60,11 @@ public class HanyoListParamForKougakuHandler {
         if (null != 市町村セキュリティ情報) {
             if (市町村セキュリティ情報.get導入形態コード() != null
                     && 市町村セキュリティ情報.get導入形態コード().is広域()) {
+                panel.getCcdHokenshaList().setDisplayNone(false);
                 panel.getCcdHokenshaList().loadHokenshaList();
             } else {
+                panel.getCcdHokenshaList().setDisabled(true);
+                panel.getCcdHokenshaList().setVisible(false);
                 panel.getCcdHokenshaList().setDisplayNone(true);
             }
         }

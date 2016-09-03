@@ -34,7 +34,6 @@ public class HanyoListBatchParamHandler {
     private static final FlexibleYear 固定年度 = new FlexibleYear("2015");
     private static final RString 導入形態_単一 = new RString("0");
     private static final RString 導入形態_広域 = new RString("1");
-    private static final RString KEY = new RString("key0");
     private final HanyoListBatchParamDiv div;
 
     /**
@@ -65,15 +64,11 @@ public class HanyoListBatchParamHandler {
         List<KeyValueDataSource> list = new ArrayList<>();
         if (所得年度 != null && !所得年度.isEmpty()) {
             if (!所得年度.isBefore(固定年度)) {
-                KeyValueDataSource source = new KeyValueDataSource();
-                source.setKey(KEY);
-                source.setValue(所得年度.wareki().toDateString());
-                list.add(source);
-                for (int i = 0; i < 所得年度.getBetweenYears(固定年度); i++) {
+                for (int i = 0; i <= 所得年度.getBetweenYears(固定年度); i++) {
                     KeyValueDataSource dataSource = new KeyValueDataSource();
                     RStringBuilder builder = new RStringBuilder();
                     builder.append("key");
-                    builder.append(i + 1);
+                    builder.append(i);
                     dataSource.setKey(builder.toRString());
                     dataSource.setValue(所得年度.minusYear(i).wareki().toDateString());
                     list.add(dataSource);
@@ -126,9 +121,18 @@ public class HanyoListBatchParamHandler {
         } else {
             parameter.set削除含める(true);
         }
-        parameter.setデータ種別(div.getChushutsuJokenPanel().getDetaShubetsu().getRadDetaShubetsu().getSelectedValue());
-        parameter.set抽出区分(div.getChushutsuJokenPanel().getChushutsuKubun().getRadChushutsuKubun().getSelectedValue());
-        parameter.set基準年月(rDateToRString(div.getChushutsuJokenPanel().getChushutsuKubun().getKijyunbi().getTxtKijyunnNengetsu().getValue()));
+        parameter.setデータ種別(div.getChushutsuJokenPanel().getDetaShubetsu().getRadDetaShubetsu().getSelectedKey());
+        if (new RString("2").equals(div.getChushutsuJokenPanel().getDetaShubetsu().getRadDetaShubetsu().getSelectedKey())) {
+            parameter.set抽出区分(div.getChushutsuJokenPanel().getChushutsuKubun().getRadChushutsuKubun().getSelectedKey());
+        } else {
+            parameter.set抽出区分(RString.EMPTY);
+        }
+
+        if (new RString("2").equals(div.getChushutsuJokenPanel().getChushutsuKubun().getRadChushutsuKubun().getSelectedKey())) {
+            parameter.set基準年月(rDateToRString(div.getChushutsuJokenPanel().getChushutsuKubun().getKijyunbi().getTxtKijyunnNengetsu().getValue()));
+        } else {
+            parameter.set基準年月(RString.EMPTY);
+        }
         parameter.set申請日From(rDateToRString(div.getChushutsuJokenPanel().getTxtSinseibi().getFromValue()));
         parameter.set申請日To(rDateToRString(div.getChushutsuJokenPanel().getTxtSinseibi().getToValue()));
         parameter.set決定日From(rDateToRString(div.getChushutsuJokenPanel().getTxtKetteibi().getFromValue()));
@@ -142,39 +146,39 @@ public class HanyoListBatchParamHandler {
     public void onClick_btnBatchParameterRestore() {
         BatchParameterMap restoreBatchParameterMap = div.getJokenFukugenHozonl().getBtnBatchParameterRestore().getRestoreBatchParameterMap();
         List<RString> 編集方法 = new ArrayList<>();
-        boolean is項目名付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("komoukumei"));
+        boolean is項目名付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("is項目名付加"));
         if (is項目名付加) {
             編集方法.add(CSVSettings.項目名付加.getコード());
         }
-        boolean is連番付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("renbanFuka"));
+        boolean is連番付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("is連番付加"));
         if (is連番付加) {
             編集方法.add(CSVSettings.連番付加.getコード());
         }
-        boolean is日付編集 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("isdateedit"));
+        boolean is日付編集 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("is日付編集"));
         if (is日付編集) {
             編集方法.add(CSVSettings.日付スラッシュ編集.getコード());
         }
         div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(編集方法);
         if (導入形態_広域.equals(div.getHdnDonyuKeitai())) {
             div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(
-                    new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("honkenshaCode"))));
+                    new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("保険者コード"))));
         }
         div.getChushutsuJokenPanel().getDdlTaishoNendo().setSelectedValue(
-                restoreBatchParameterMap.getParameterValue(RString.class, new RString("taishonendo")));
-        if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("isdeleteflag"))) {
+                restoreBatchParameterMap.getParameterValue(RString.class, new RString("対象年度")));
+        if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("is削除含める"))) {
             List<RString> list = new ArrayList<>();
             list.add(new RString("key0"));
             div.getChushutsuJokenPanel().getChkSakujyoDataChushutsu().setSelectedItemsByKey(list);
         }
-        div.getChushutsuJokenPanel().getDetaShubetsu().getRadDetaShubetsu().setSelectedValue(
-                restoreBatchParameterMap.getParameterValue(RString.class, new RString("datashubetsu")));
-        div.getChushutsuJokenPanel().getChushutsuKubun().getRadChushutsuKubun().setSelectedValue(
-                restoreBatchParameterMap.getParameterValue(RString.class, new RString("tyusyutuKubun")));
-        RString 基準年月 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kijunYM"));
-        RString 申請日From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("shinseiYMDFrom"));
-        RString 申請日To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("shinseiYMDTo"));
-        RString 決定日From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kettiYMDFrom"));
-        RString 決定日To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kettiYMDTo"));
+        div.getChushutsuJokenPanel().getDetaShubetsu().getRadDetaShubetsu().setSelectedKey(
+                restoreBatchParameterMap.getParameterValue(RString.class, new RString("データ種別")));
+        div.getChushutsuJokenPanel().getChushutsuKubun().getRadChushutsuKubun().setSelectedKey(
+                restoreBatchParameterMap.getParameterValue(RString.class, new RString("抽出区分")));
+        RString 基準年月 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("基準年月"));
+        RString 申請日From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("申請日From"));
+        RString 申請日To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("申請日To"));
+        RString 決定日From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("決定日From"));
+        RString 決定日To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("決定日To"));
         if (!RString.isNullOrEmpty(基準年月)) {
             div.getChushutsuJokenPanel().getChushutsuKubun().getKijyunbi().getTxtKijyunnNengetsu().setValue(
                     new RDate(基準年月.toString()));
@@ -195,17 +199,21 @@ public class HanyoListBatchParamHandler {
             div.getChushutsuJokenPanel().getTxtKetteibi().setToValue(
                     new RDate(決定日To.toString()));
         }
+        set抽出区分の表示制御();
+        set基準年月の表示制御();
     }
 
     /**
      * データ種別RBTのonChangeを実施します。
      */
     public void set抽出区分の表示制御() {
-        if (DataShubetsu.適用決定データ.get名称().equals(
-                div.getChushutsuJokenPanel().getDetaShubetsu().getRadDetaShubetsu().getSelectedValue())) {
+        if (DataShubetsu.適用決定データ.getコード().equals(
+                div.getChushutsuJokenPanel().getDetaShubetsu().getRadDetaShubetsu().getSelectedKey())) {
             div.getChushutsuJokenPanel().getChushutsuKubun().getRadChushutsuKubun().setDisabled(false);
+            set基準年月の表示制御();
         } else {
             div.getChushutsuJokenPanel().getChushutsuKubun().getRadChushutsuKubun().setDisabled(true);
+            div.getChushutsuJokenPanel().getChushutsuKubun().getKijyunbi().getTxtKijyunnNengetsu().setDisabled(true);
         }
     }
 
@@ -213,8 +221,8 @@ public class HanyoListBatchParamHandler {
      * 抽出区分RBTのonChangeを実施します。
      */
     public void set基準年月の表示制御() {
-        if (ChushutsuKubun.基準年月時点のデータ.get名称().equals(
-                div.getChushutsuJokenPanel().getChushutsuKubun().getRadChushutsuKubun().getSelectedValue())) {
+        if (ChushutsuKubun.基準年月時点のデータ.getコード().equals(
+                div.getChushutsuJokenPanel().getChushutsuKubun().getRadChushutsuKubun().getSelectedKey())) {
             div.getChushutsuJokenPanel().getChushutsuKubun().getKijyunbi().getTxtKijyunnNengetsu().setDisabled(false);
         } else {
             div.getChushutsuJokenPanel().getChushutsuKubun().getKijyunbi().getTxtKijyunnNengetsu().setDisabled(true);

@@ -15,8 +15,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.jukyushateiseirenrakuhyotorokuman
 import jp.co.ndensan.reams.db.dbc.service.report.jukyushateiseirenrakuhyo.JukyushaTeiseiRenrakuhyoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -44,7 +42,6 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
     private static final RString 修正モード_TWO = new RString("修正モード2");
     private static final RString 修正モード_THREE = new RString("修正モード3");
     private static final RString 被保番号 = new RString("被保険者番号");
-    private static final RString DBCHIHOKENSHANO = new RString("DBCHihokenshaNo");
 
     /**
      * 初期化です。
@@ -62,8 +59,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
      * @return Boolean
      */
     public Boolean is前排他キーのセット(HihokenshaNo 被保険者番号) {
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        LockingKey 排他キー = new LockingKey(controlData.getMenuID());
+        LockingKey 排他キー = new LockingKey(被保険者番号);
         return RealInitialLocker.tryGetLock(排他キー);
     }
 
@@ -73,7 +69,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
      * @param 被保険者番号 RString
      */
     public void 前排他キーの解除(RString 被保険者番号) {
-        LockingKey 排他キー = new LockingKey(DBCHIHOKENSHANO.concat(被保険者番号));
+        LockingKey 排他キー = new LockingKey(被保険者番号);
         RealInitialLocker.release(排他キー);
     }
 

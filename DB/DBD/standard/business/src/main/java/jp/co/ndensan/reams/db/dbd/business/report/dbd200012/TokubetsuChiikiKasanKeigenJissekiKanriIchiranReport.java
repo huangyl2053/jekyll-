@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200012;
 
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.KyuhuJissekiHihokensha;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.TokubetsuChiikiKasanKeigenJissekiKanri;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200012.TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -24,7 +24,7 @@ public final class TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport extends
     private final TokubetsuChiikiKasanKeigenJissekiKanri 帳票情報;
     private final Association association;
     private final IOutputOrder iOutputOrder;
-    private final KyuhuJissekiHihokensha 宛名;
+    private final IKojin 宛名;
 
     /**
      * インスタンスを生成します。
@@ -32,18 +32,11 @@ public final class TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport extends
      * @param 帳票情報 TokubetsuChiikiKasanKeigenJissekiKanri
      * @param association Association
      * @param iOutputOrder IOutputOrder
-     * @param 宛名 KyuhuJissekiHihokensha
-     * @return 特別地域加算軽減実績管理リスト
+     * @param 宛名 IKojin
      */
-    public static TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport createReport(
+    public TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport(
             TokubetsuChiikiKasanKeigenJissekiKanri 帳票情報, Association association,
-            IOutputOrder iOutputOrder, KyuhuJissekiHihokensha 宛名) {
-        return new TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport(帳票情報, association, iOutputOrder, 宛名);
-    }
-
-    private TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport(
-            TokubetsuChiikiKasanKeigenJissekiKanri 帳票情報, Association association,
-            IOutputOrder iOutputOrder, KyuhuJissekiHihokensha 宛名) {
+            IOutputOrder iOutputOrder, IKojin 宛名) {
         this.帳票情報 = 帳票情報;
         this.association = association;
         this.iOutputOrder = iOutputOrder;

@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichoson
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -37,6 +36,7 @@ public class NenreiKaikyubetsuYokaigodoJokyoHandler {
     private static final RString キー3 = new RString("key3");
     private static final RString キー4 = new RString("key4");
     private static final RString キー5 = new RString("key5");
+    private static final RString 識別ID = new RString("00");
 
     /**
      * コンストラクタです。
@@ -51,8 +51,7 @@ public class NenreiKaikyubetsuYokaigodoJokyoHandler {
      * 画面初期化処理です。
      */
     public void onLoad() {
-        RDate システム日付 = RDate.getNowDate();
-        div.getTxtKijyunD().setValue(システム日付);
+        div.getTxtKijyunD().setValue(RDate.getNowDate());
         ddlChiku(true, false, false, false, false, true, true, true, true, true, true, true, true);
         div.getTxtKijyunYM().setDisabled(true);
         div.getDdlChiku().setDisabled(true);
@@ -67,14 +66,13 @@ public class NenreiKaikyubetsuYokaigodoJokyoHandler {
      * 基準日と基準年月ラジオを操作です。
      */
     public void onChange_rdoKijyun() {
-        if (div.getRdoKijyun().getSelectedKey().equals(new RString("key0"))) {
+        if (キー0.equals(div.getRdoKijyun().getSelectedKey())) {
             div.getTxtKijyunD().setDisabled(false);
             div.getTxtKijyunYM().setDisabled(true);
         } else {
             div.getTxtKijyunD().setDisabled(true);
             div.getTxtKijyunYM().setDisabled(false);
-            RDate システム年月 = new RDate(RDate.getNowDate().wareki().firstYear(FirstYear.ICHI_NEN).getYearMonth().toString());
-            div.getTxtKijyunYM().setValue(システム年月);
+            div.getTxtKijyunYM().setValue(RDate.getNowDate());
             div.getDdlChiku().setDisabled(false);
             div.getDdlChiku().setReadOnly(false);
         }
@@ -86,25 +84,25 @@ public class NenreiKaikyubetsuYokaigodoJokyoHandler {
     public void onChange_ddlChiku() {
         div.getDdlChiku().setDisabled(false);
         div.getDdlChiku().setReadOnly(false);
-        if (div.getDdlChiku().getSelectedKey().equals(キー0)) {
+        if (キー0.equals(div.getDdlChiku().getSelectedKey())) {
             div.getCcdGyoseikuStart().setDisabled(true);
             div.getCcsGyoseikuEnd().setDisabled(true);
             ddlChiku(true, false, false, false, false, true, true, true, true, true, true, true, true);
-        } else if (div.getDdlChiku().getSelectedKey().equals(キー1)) {
+        } else if (キー1.equals(div.getDdlChiku().getSelectedKey())) {
             div.getCcdChoikiStart().setDisabled(false);
             div.getCcdChoikiEnd().setDisabled(false);
             ddlChiku(true, true, true, true, true, true, true, true, true, false, false, false, false);
-        } else if (div.getDdlChiku().getSelectedKey().equals(キー2)) {
+        } else if (キー2.equals(div.getDdlChiku().getSelectedKey())) {
             div.getCcdGyoseikuStart().setDisabled(false);
             div.getCcsGyoseikuEnd().setDisabled(false);
             ddlChiku(true, false, false, false, false, true, true, true, true, true, true, true, true);
-        } else if (div.getDdlChiku().getSelectedKey().equals(キー3)) {
+        } else if (キー3.equals(div.getDdlChiku().getSelectedKey())) {
             div.getCcdChiku2Start().setDisabled(false);
             div.getCcdChiku2End().setDisabled(false);
             ddlChiku(true, true, true, true, true, false, false, false, false, true, true, true, true);
-        } else if (div.getDdlChiku().getSelectedKey().equals(キー4)) {
+        } else if (キー4.equals(div.getDdlChiku().getSelectedKey())) {
             ddlChiku(false, true, true, true, true, true, true, true, true, true, true, true, true);
-        } else if (div.getDdlChiku().getSelectedKey().equals(キー5)) {
+        } else if (キー5.equals(div.getDdlChiku().getSelectedKey())) {
             ddlChiku(true, true, true, true, true, true, true, true, true, true, true, true, true);
         }
     }
@@ -116,7 +114,7 @@ public class NenreiKaikyubetsuYokaigodoJokyoHandler {
      */
     public NenreiKaikyubetsuYokaigodoJokyoParameter getParameter() {
         NenreiKaikyubetsuYokaigodoJokyoParameter parameter = new NenreiKaikyubetsuYokaigodoJokyoParameter();
-        if (div.getRdoKijyun().getSelectedKey().equals(キー0)) {
+        if (キー0.equals(div.getRdoKijyun().getSelectedKey())) {
             parameter.set基準日(div.getTxtKijyunD().getValue());
         } else {
             parameter.set基準年月(div.getTxtKijyunYM().getValue());
@@ -185,20 +183,22 @@ public class NenreiKaikyubetsuYokaigodoJokyoHandler {
         RString ログインユーザID = ControlDataHolder.getUserId();
         List<AuthorityItem> authorityItemList = ShichosonSecurityJoho.getShichosonShikibetsuId(ログインユーザID);
         RString 市町村識別ID = authorityItemList.get(0).getItemId();
-        if (!市町村識別ID.equals(new RString("00"))) {
+        if (!識別ID.equals(市町村識別ID)) {
             KoseiShichosonJoho 構成市町村情報 = ShichosonSecurityJoho.getKouseiShichosonJoho(市町村識別ID);
             if (構成市町村情報 != null) {
                 dataSourceList.add(new KeyValueDataSource(構成市町村情報.get市町村コード().value(),
                         setValue(構成市町村情報.get市町村コード().value(), 構成市町村情報.get市町村名称())));
+            } else {
+                dataSourceList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
             }
-        } else if (市町村識別ID.equals(new RString("00"))) {
+        } else if (識別ID.equals(市町村識別ID)) {
             List<KoikiZenShichosonJoho> 構成市町村 = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho().records();
             if (構成市町村 != null && !構成市町村.isEmpty()) {
                 dataSourceList.add(new KeyValueDataSource(構成市町村.get(0).get市町村コード().value(),
                         setValue(構成市町村.get(0).get市町村コード().value(), 構成市町村.get(0).get市町村名称())));
+            } else {
+                dataSourceList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
             }
-        } else {
-            dataSourceList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         }
         return dataSourceList;
     }
