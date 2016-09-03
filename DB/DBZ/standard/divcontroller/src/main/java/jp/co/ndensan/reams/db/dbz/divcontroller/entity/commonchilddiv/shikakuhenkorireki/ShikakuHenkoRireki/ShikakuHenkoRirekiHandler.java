@@ -123,12 +123,12 @@ public class ShikakuHenkoRirekiHandler {
             div.getDgHenko().getGridSetting().setIsShowDeleteButtonColumn(false);
             div.getDgHenko().getGridSetting().setIsShowRowState(false);
         } else if (ShikakuHenkoRirekiDiv.DisplayType.toroku.equals(div.getMode_DisplayType())) {
-            div.getBtnAdd().setDisabled(true);
+            div.getBtnAdd().setDisabled(false);
             div.setMode_ShoriNichijiDisplayMode(ShikakuHenkoRirekiDiv.ShoriNichijiDisplayMode.VisibleFalse);
             div.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.toroku);
             for (dgHenko_Row row : div.getDgHenko().getDataSource()) {
-                row.setDeleteButtonState(DataGridButtonState.Disabled);
-                row.setModifyButtonState(DataGridButtonState.Disabled);
+                row.setDeleteButtonState(DataGridButtonState.Enabled);
+                row.setModifyButtonState(DataGridButtonState.Enabled);
             }
         } else if (ShikakuHenkoRirekiDiv.DisplayType.teiseitoroku.equals(div.getMode_DisplayType())) {
             div.setMode_ShoriNichijiDisplayMode(ShikakuHenkoRirekiDiv.ShoriNichijiDisplayMode.VisibleFalse);
@@ -136,6 +136,7 @@ public class ShikakuHenkoRirekiHandler {
             div.getBtnHenkoKakutei().setVisible(true);
             div.getBtnHenkoTorikeshi().setVisible(true);
         }
+        div.getHenkoInput().setDisabled(true);
         div.setInputMode(ViewExecutionStatus.Add.getValue());
     }
 
@@ -604,7 +605,7 @@ public class ShikakuHenkoRirekiHandler {
     }
 
     public void setDisabledMeisaiButtons(boolean isDisable) {
-        div.getBtnHenkoKakutei().setDisabled(isDisable);
-        div.getBtnHenkoTorikeshi().setDisabled(isDisable);
+        div.getHenkoInput().getBtnHenkoKakutei().setDisabled(isDisable);
+        div.getHenkoInput().getBtnHenkoTorikeshi().setDisabled(isDisable);
     }
 }

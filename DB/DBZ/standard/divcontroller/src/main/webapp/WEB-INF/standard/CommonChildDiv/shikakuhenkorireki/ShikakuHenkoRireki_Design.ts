@@ -28,6 +28,10 @@ module DBZ {
                 return "onSelectByDeleteButton_dgHenko";
             }
 
+            public static onBlur_txtHenkoDate(): string {
+                return "onBlur_txtHenkoDate";
+            }
+
             public static onClick_btnHenkoKakutei(): string {
                 return "onClick_btnHenkoKakutei";
             }
