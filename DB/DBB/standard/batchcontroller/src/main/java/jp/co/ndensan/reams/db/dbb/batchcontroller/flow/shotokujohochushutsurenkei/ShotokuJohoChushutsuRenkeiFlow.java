@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.shotokujohochushutsurenkei;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.SystemTimeShutokuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.shotokujohochushutsurenkei.ShotokuJohoChushutsuRenkeiCreateTempProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.shotokujohochushutsurenkei.ShotokuJohoChushutsuRenkeiInsertTempProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.SystemTimeShutokuProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShutokuJohoChushutsuRenkeiBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.shutokujohoshuchutsurenkei.ShutokuJohoShuchutsuRenkeiProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shorikega.ShoriKegaKakunin;
