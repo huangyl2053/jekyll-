@@ -213,17 +213,17 @@ public class JigyoshaService {
     public ResponseData<JigyoshaServiceDiv> onClick_Save(JigyoshaServiceDiv div) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD()));
-        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoShuryoYMD()));
-        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoKaishiYMD()));
-        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoKyushiYMD()));
-        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getJigyoshaServiceKihon().getJigyosha().getTxtJikyoSaikaiYMD()));
-        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoHaishiYMD()));
-        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getJigyoshaServiceKihon().getTxtTorokuKaishiYMD()));
-        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getJigyoshaServiceKihon().getTxtTorokuShuryoYMD()));
-        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getJigyoshaServiceShosai().getTxtShiteiYukoKaishiYMD()));
-        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getJigyoshaServiceShosai().getTxtShiteiYukoShuryoYMD()));
-        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getJigyoshaServiceShosai().getTxtKoryokuTeishiKaishiYMD()));
-        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getJigyoshaServiceShosai().getTxtKoryokuTeishiShuryoYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoShuryoYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoKaishiYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoKyushiYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getJigyoshaServiceKihon().getJigyosha().getTxtJikyoSaikaiYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoHaishiYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getJigyoshaServiceKihon().getTxtTorokuKaishiYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getJigyoshaServiceKihon().getTxtTorokuShuryoYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getJigyoshaServiceShosai().getTxtShiteiYukoKaishiYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getJigyoshaServiceShosai().getTxtShiteiYukoShuryoYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getJigyoshaServiceShosai().getTxtKoryokuTeishiKaishiYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getJigyoshaServiceShosai().getTxtKoryokuTeishiShuryoYMD()));
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }

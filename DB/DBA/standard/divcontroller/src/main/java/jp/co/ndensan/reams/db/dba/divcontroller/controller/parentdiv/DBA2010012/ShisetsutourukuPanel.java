@@ -121,11 +121,11 @@ public class ShisetsutourukuPanel {
     public ResponseData<ShisetsutourukuPanelDiv> onClick_HoZonn(ShisetsutourukuPanelDiv div) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getShisetsuJoho().getTxtShisetsuYukoKaishiYMD()));
-        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getShisetsuJoho().getTxtShisetsuYukoShuryoYMD()));
-        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getShisetsuJoho().getTxtShisetsuJigyoKaishiYMD()));
-        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getShisetsuJoho().getTxtShisetsuJigyoKyushuYMD()));
-        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getShisetsuJoho().getTxtShisetsuJigyoSaikaiYMD()));
-        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getShisetsuJoho().getTxtShisetsuJigyoHaishiYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getShisetsuJoho().getTxtShisetsuYukoShuryoYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getShisetsuJoho().getTxtShisetsuJigyoKaishiYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getShisetsuJoho().getTxtShisetsuJigyoKyushuYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getShisetsuJoho().getTxtShisetsuJigyoSaikaiYMD()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getShisetsuJoho().getTxtShisetsuJigyoHaishiYMD()));
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
