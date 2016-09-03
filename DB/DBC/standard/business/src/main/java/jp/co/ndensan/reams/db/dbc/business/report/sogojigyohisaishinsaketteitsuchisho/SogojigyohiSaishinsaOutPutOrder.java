@@ -82,5 +82,4 @@ public enum SogojigyohiSaishinsaOutPutOrder implements IReportItems {
     public RString getMyBatis項目名() {
         return myBatis項目名;
     }
-
 }
