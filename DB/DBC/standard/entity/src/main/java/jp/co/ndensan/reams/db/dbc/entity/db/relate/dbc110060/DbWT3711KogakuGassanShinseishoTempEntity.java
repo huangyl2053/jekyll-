@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 import lombok.Getter;
@@ -29,7 +31,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DbWT3711KogakuGassanShinseishoTempEntity {
+public class DbWT3711KogakuGassanShinseishoTempEntity extends DbTableEntityBase<DbWT3711KogakuGassanShinseishoTempEntity>
+        implements IDbAccessable {
 
     @PrimaryKey
     @TempTableColumnOrder(1)
