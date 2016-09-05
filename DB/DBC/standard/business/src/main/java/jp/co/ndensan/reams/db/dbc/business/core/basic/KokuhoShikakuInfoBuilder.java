@@ -178,7 +178,7 @@ public class KokuhoShikakuInfoBuilder {
      *
      * @return {@link KokuhoShikakuInfo}のインスタンス
      */
-    public KokuhoShikakuInfoBuilder build() {
-        return new KokuhoShikakuInfoBuilder(entity, id);
+    public KokuhoShikakuInfo build() {
+        return new KokuhoShikakuInfo(entity, id);
     }
 }
