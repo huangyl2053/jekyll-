@@ -133,6 +133,11 @@ public class TokuchoInfoFDownloadHandler {
         return 画面状態;
     }
 
+    /**
+     * 画面初期化のメソッドです。
+     *
+     * @return RString
+     */
     public TokuchoInfoFDownloadInfo getFile() {
         return TokuchoInfoShoriDateKanri.createInstance().getファイル対象().get(0);
     }
@@ -378,10 +383,10 @@ public class TokuchoInfoFDownloadHandler {
             return;
         }
         div.getTokuchoInfoDownloadShoriNaiyo().getDdlShichosonSelect().setDisabled(true);
-        RString 処理対象月 = div.getTokuchoInfoDownloadShoriNaiyo().getDdlTsuki().getSelectedKey();
-        if (RString.isNullOrEmpty(処理対象月)) {
-            return;
-        }
+//        RString 処理対象月 = div.getTokuchoInfoDownloadShoriNaiyo().getDdlTsuki().getSelectedKey();
+//        if (RString.isNullOrEmpty(処理対象月)) {
+//            return;
+//        }
         //TODO
     }
 
@@ -401,6 +406,10 @@ public class TokuchoInfoFDownloadHandler {
         処理対象月切替();
     }
 
+    /**
+     * ダウンロード取得メソッドです。
+     *
+     */
     public void getダウンロードFile() {
     }
 
