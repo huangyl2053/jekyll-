@@ -19,7 +19,7 @@ import lombok.Getter;
 /**
  * 事業状況報告資料（年報）作成　保険給付決定状況のMybatisパラメータクラスです。
  *
- * @reamsid_L DBU-5600-040 lishengli
+ * @reamsid_L DBU-5600-050 lishengli
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
