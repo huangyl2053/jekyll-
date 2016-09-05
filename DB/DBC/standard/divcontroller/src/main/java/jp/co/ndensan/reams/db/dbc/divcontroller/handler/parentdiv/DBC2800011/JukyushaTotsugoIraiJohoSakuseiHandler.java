@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  */
 public class JukyushaTotsugoIraiJohoSakuseiHandler {
 
+    private static final RString RSTRING_1 = new RString("1");
+    private static final RString RSTRING_2 = new RString("2");
     private static final RString RSTRING_3 = new RString("3");
     private static final RString RSTRING_4 = new RString("4");
     private final JukyushaTotsugoIraiJohoSakuseiDiv div;
@@ -43,6 +45,10 @@ public class JukyushaTotsugoIraiJohoSakuseiHandler {
         chuushutuKunbun.addAll(getChuushutuKunbun());
         div.getDdlChushutsuKubun().getDataSource().clear();
         div.getDdlChushutsuKubun().getDataSource().addAll(chuushutuKunbun);
+        div.getDdlChushutsuKubun().setSelectedKey(RSTRING_1);
+        div.getTxtTaishoYM().clearFromValue();
+        div.getTxtTaishoYM().clearToValue();
+        div.getTxtNinteiYM().clearValue();
         div.getTxtTaishoYM().setDisabled(true);
         div.getTxtNinteiYM().setDisabled(false);
     }
@@ -56,8 +62,11 @@ public class JukyushaTotsugoIraiJohoSakuseiHandler {
         if (RSTRING_3.equals(index) || RSTRING_4.equals(index)) {
             div.getTxtTaishoYM().setDisabled(false);
             div.getTxtNinteiYM().setDisabled(true);
+            div.getTxtNinteiYM().clearValue();
         } else {
             div.getTxtTaishoYM().setDisabled(true);
+            div.getTxtTaishoYM().clearFromValue();
+            div.getTxtTaishoYM().clearToValue();
             div.getTxtNinteiYM().setDisabled(false);
         }
     }
@@ -70,12 +79,25 @@ public class JukyushaTotsugoIraiJohoSakuseiHandler {
     public DBC110810_JukyushaTotsugoIraiOutParameter setBatchParameter() {
         DBC110810_JukyushaTotsugoIraiOutParameter batchParameter = new DBC110810_JukyushaTotsugoIraiOutParameter();
         batchParameter.setChuushutuKubun(div.getDdlChushutsuKubun().getSelectedKey());
-        if (div.getTxtNinteiYM().isDisabled()) {
+        RString index = div.getDdlChushutsuKubun().getSelectedKey();
+        if (RSTRING_3.equals(index) || RSTRING_4.equals(index)) {
             batchParameter.setNinteiNengetu(FlexibleDate.EMPTY);
-            batchParameter.setTaishouKaishiNengetu(new FlexibleDate(div.getTxtTaishoYM().getFromValue().toDateString()));
-            batchParameter.setTaishouShuuryouNengetu(new FlexibleDate(div.getTxtTaishoYM().getToValue().toDateString()));
-        } else {
-            batchParameter.setNinteiNengetu(new FlexibleDate(div.getTxtNinteiYM().getValue().toDateString()));
+            if (null == div.getTxtTaishoYM().getFromValue()) {
+                batchParameter.setTaishouKaishiNengetu(FlexibleDate.EMPTY);
+            } else {
+                batchParameter.setTaishouKaishiNengetu(new FlexibleDate(div.getTxtTaishoYM().getFromValue().toDateString()));
+            }
+            if (null == div.getTxtTaishoYM().getToValue()) {
+                batchParameter.setTaishouShuuryouNengetu(FlexibleDate.EMPTY);
+            } else {
+                batchParameter.setTaishouShuuryouNengetu(new FlexibleDate(div.getTxtTaishoYM().getToValue().toDateString()));
+            }
+        } else if (RSTRING_1.equals(index) || RSTRING_2.equals(index)) {
+            if (null == div.getTxtNinteiYM().getValue()) {
+                batchParameter.setNinteiNengetu(FlexibleDate.EMPTY);
+            } else {
+                batchParameter.setNinteiNengetu(new FlexibleDate(div.getTxtNinteiYM().getValue().toDateString()));
+            }
             batchParameter.setTaishouKaishiNengetu(FlexibleDate.EMPTY);
             batchParameter.setTaishouShuuryouNengetu(FlexibleDate.EMPTY);
         }
