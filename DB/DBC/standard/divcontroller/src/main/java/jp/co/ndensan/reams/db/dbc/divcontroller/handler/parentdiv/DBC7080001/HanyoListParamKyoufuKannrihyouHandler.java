@@ -86,7 +86,7 @@ public class HanyoListParamKyoufuKannrihyouHandler {
 
         RString key = div.getChushutsuJokenPanel().getRadMeisaigyoSyuturyokuUmu().getSelectedKey();
         if (KEY_0.equals(key)) {
-            parameter.set明細行出力有無(Kyufukanrihyo_MeisaigyoBango.終端行.get名称());
+            parameter.set明細行出力有無(Kyufukanrihyo_MeisaigyoBango.終端行.getコード());
         } else if (KEY_1.equals(key)) {
             parameter.set明細行出力有無(RString.EMPTY);
         }

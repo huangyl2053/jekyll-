@@ -135,7 +135,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeDac implements ISaveable<DbT4024Sh
                                 eq(johoBunruiKubun, new RString("1")),
                                 eq(sashitomeKojoJotaiKubun, new RString("01")),
                                 eq(sashitome_ShokanSeiriNo, 整理番号),
-                                eq(sashitome_ServiceTeikyoYM, サービス提供年月))).
+                                eq(sashitome_ServiceTeikyoYM, サービス提供年月))).limit(1).
                 toObject(DbT4024ShiharaiHohoHenkoSashitomeEntity.class);
     }
 
