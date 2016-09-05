@@ -509,7 +509,7 @@ public class KubunShikyuGendogakuMainHandler {
                 要介護状態区分 = insert居宅.get要介護状態区分();
                 支給限度単位数 = insert居宅.get支給限度単位数();
                 valueChange(テーブル区分, 要介護状態区分, 適用開始年月, 支給限度単位数, update居宅List,
-                        update上乗せ居宅List, 居宅HoldList, 上乗せ居宅HoldList);
+                        update上乗せ居宅List, 居宅HoldList, 上乗せ居宅HoldList, insert居宅, null);
             }
         }
         if (!insert上乗せ居宅List.isEmpty()) {
@@ -517,7 +517,7 @@ public class KubunShikyuGendogakuMainHandler {
                 要介護状態区分 = insert上乗せ.get要介護状態区分();
                 支給限度単位数 = insert上乗せ.get支給限度単位数();
                 valueChange(テーブル区分, 要介護状態区分, 適用開始年月, 支給限度単位数, update居宅List,
-                        update上乗せ居宅List, 居宅HoldList, 上乗せ居宅HoldList);
+                        update上乗せ居宅List, 居宅HoldList, 上乗せ居宅HoldList, null, insert上乗せ);
             }
         }
 
@@ -618,8 +618,10 @@ public class KubunShikyuGendogakuMainHandler {
             List<KubunShikyuGendoGaku> update居宅List,
             List<UwanoseKubunShikyuGendoGaku> update上乗せ居宅List,
             List<KubunShikyuGendoGaku> 居宅HolderList,
-            List<UwanoseKubunShikyuGendoGaku> 上乗せ居宅HolderList) {
-
+            List<UwanoseKubunShikyuGendoGaku> 上乗せ居宅HolderList,
+            KubunShikyuGendoGaku insert居宅,
+            UwanoseKubunShikyuGendoGaku insert上乗せ) {
+        boolean flag = true;
         if (ShikyuGendogakuTableKubun.標準.get名称().equals(
                 テーブル区分)) {
             for (KubunShikyuGendoGaku 居宅Holder : 居宅HolderList) {
@@ -630,7 +632,11 @@ public class KubunShikyuGendogakuMainHandler {
                             .set支給限度単位数(支給限度単位数)
                             .build();
                     update居宅List.add(居宅Holder);
+                    flag = false;
                 }
+            }
+            if (flag) {
+                update居宅List.add(insert居宅);
             }
         } else {
             for (UwanoseKubunShikyuGendoGaku 上乗せ居宅Holder : 上乗せ居宅HolderList) {
@@ -641,7 +647,11 @@ public class KubunShikyuGendogakuMainHandler {
                             .set支給限度単位数(支給限度単位数)
                             .build();
                     update上乗せ居宅List.add(上乗せ居宅Holder);
+                    flag = false;
                 }
+            }
+            if (flag) {
+                update上乗せ居宅List.add(insert上乗せ);
             }
         }
     }
