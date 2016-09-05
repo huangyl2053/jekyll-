@@ -526,6 +526,10 @@ public enum ReportIdDBC {
      */
     DBC100030(new ReportId("DBC100030_JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayo"), new RString("介護保険受領委任契約承認（不承認）確認書（事業者用）")),
     /**
+     * 事業合算・事業分振込明細書作成（一括）帳票ＩＤです。
+     */
+    DBC100059(new ReportId("DBC100059_FurikomiIraisho"), new RString("事業合算・事業分振込明細書作成（一括）")),
+    /**
      * 帳票設計_DBC200039_高額合算支給不支給決定通知書情報取込一覧表 ＩＤです。
      */
     DBC200039(new ReportId("DBC200039_GassanShikyuFushikyuKetteiTsuchishoTorikomiIchiran"), new RString("高額合算支給不支給決定通知書情報取込一覧表 "));
