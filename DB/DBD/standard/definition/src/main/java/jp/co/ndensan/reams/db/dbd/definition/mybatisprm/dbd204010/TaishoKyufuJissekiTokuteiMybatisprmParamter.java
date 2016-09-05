@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd204010;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.tokuchijissekilist.TargetYearMonth;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,7 +24,7 @@ public class TaishoKyufuJissekiTokuteiMybatisprmParamter implements IMyBatisPara
 
     private FlexibleYearMonth 年月範囲の開始;
     private FlexibleYearMonth 年月範囲の終了;
-    private JigyoshaNo 事業者番号;
+    private RString 事業者番号;
     private boolean is対象年月_サービス提供年月 = false;
     private boolean is対象年月_審査年月 = false;
     private boolean is事業者番号_非空 = false;
@@ -42,7 +41,7 @@ public class TaishoKyufuJissekiTokuteiMybatisprmParamter implements IMyBatisPara
      */
     public TaishoKyufuJissekiTokuteiMybatisprmParamter(
             TargetYearMonth 対象年月,
-            FlexibleYearMonth 年月範囲の開始, FlexibleYearMonth 年月範囲の終了, JigyoshaNo 事業者番号) {
+            FlexibleYearMonth 年月範囲の開始, FlexibleYearMonth 年月範囲の終了, RString 事業者番号) {
         this.事業者番号 = 事業者番号;
         this.年月範囲の開始 = 年月範囲の開始;
         this.年月範囲の終了 = 年月範囲の終了;
@@ -58,8 +57,8 @@ public class TaishoKyufuJissekiTokuteiMybatisprmParamter implements IMyBatisPara
         }
     }
 
-    private void edit事業者番号(JigyoshaNo 事業者番号) {
-        if (!事業者番号.isEmpty()) {
+    private void edit事業者番号(RString 事業者番号) {
+        if (事業者番号 != null && !事業者番号.isEmpty()) {
             is事業者番号_非空 = true;
         }
     }

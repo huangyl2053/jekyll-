@@ -61,7 +61,7 @@ public class TokubetsuPanelHandler {
             throw new ApplicationException("市町村セキュリティ情報の取得に失敗しました。");
         }
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200012.getReportId());
-        div.getCcdHokenshaList().loadHokenshaList();
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務);
         clearvalue();
     }
 
