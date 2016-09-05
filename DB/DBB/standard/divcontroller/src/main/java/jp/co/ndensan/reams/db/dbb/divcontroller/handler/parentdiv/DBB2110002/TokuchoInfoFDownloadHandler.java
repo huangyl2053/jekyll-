@@ -273,8 +273,11 @@ public class TokuchoInfoFDownloadHandler {
         if (KEY0.equals(div.getTokuchoInfoDownloadShoriNaiyo().
                 getRadShichosonSelect().getSelectedKey())) {
             RString 市町村ID = div.getTokuchoInfoDownloadShoriNaiyo().getDdlShichosonSelect().getSelectedKey();
+            List<RString> 処理名List = new ArrayList<>();
+            処理名List.add(ShoriName.特徴異動情報作成.get名称());
+            処理名List.add(ShoriName.特徴依頼情報作成.get名称());
             ShoriDateKanri shoriDateKanri = TokuchoInfoShoriDateKanri.createInstance().
-                    get市町村処理日付(year, new RString(STR_00.toString() + 市町村ID.toString()));
+                    get市町村処理日付(year, new RString(STR_00.toString() + 市町村ID.toString()), 処理名List);
             if (shoriDateKanri == null || shoriDateKanri.get基準日時() == null) {
                 return RString.EMPTY;
             }
@@ -360,9 +363,12 @@ public class TokuchoInfoFDownloadHandler {
         List<dgShoriKakunin_Row> rows = div
                 .getTokuchoInfoDownloadShoriKakunin().getDgShoriKakunin().getDataSource();
         List<dgShoriKakunin_Row> 処理状況Rows = new ArrayList<>();
+        List<RString> 処理名List = new ArrayList<>();
+        処理名List.add(ShoriName.特徴異動情報作成.get名称());
+        処理名List.add(ShoriName.特徴依頼情報作成.get名称());
         for (dgShoriKakunin_Row row : rows) {
             ShoriDateKanri shoriDateKanri = TokuchoInfoShoriDateKanri.createInstance().
-                    get市町村処理日付(year, new RString(STR_00.toString() + 市町村Id.toString()));
+                    get市町村処理日付(year, new RString(STR_00.toString() + 市町村Id.toString()), 処理名List);
             if (shoriDateKanri == null || shoriDateKanri.get基準日時() == null) {
                 continue;
             }
