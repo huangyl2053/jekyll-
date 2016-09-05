@@ -85,8 +85,8 @@ public class NinteiShinseiToroku {
     private final NinteiShinseiTorokuManager manager;
     private final KaigoHokenshaManager dbt7050Manager;
 
-    private static final RString MENUID_DBEMN21001 = new RString("DBEMN21001");
-    private static final RString MENUID_DBEMN21003 = new RString("DBEMN21003");
+    private static final RString MENUID_DBEMN31001 = new RString("DBEMN31001");
+    private static final RString MENUID_DBEMN31003 = new RString("DBEMN31003");
     private static final int ZERO_17 = 17;
     private static final int ZERO_5 = 5;
 
@@ -115,7 +115,7 @@ public class NinteiShinseiToroku {
         if (shichosonSecurity.get導入形態コード().value().equals(new RString("220"))) {
             介護導入形態 = new RString("1");
         }
-        if (MENUID_DBEMN21001.equals(menuID)) {
+        if (MENUID_DBEMN31001.equals(menuID)) {
             ShinseishoKanriNo 管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
             RString 被保険者番号 = manager.get被保険者番号(管理番号);
 
@@ -153,7 +153,7 @@ public class NinteiShinseiToroku {
             }
             return ResponseData.of(div).rootTitle(new RString("審査依頼受付")).respond();
         }
-        if (MENUID_DBEMN21003.equals(menuID)) {
+        if (MENUID_DBEMN31003.equals(menuID)) {
             Minashi2shisaiJoho business = ViewStateHolder.get(ViewStateKeys.みなし2号登録情報, Minashi2shisaiJoho.class);
             if (business != null) {
                 ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
@@ -310,7 +310,7 @@ public class NinteiShinseiToroku {
         RString menuID = ResponseHolder.getMenuID();
         NinteiShinseiBusinessCollection zenkaiJoho = DataPassingConverter.deserialize(div.getHdnRenrakusakiJoho(), NinteiShinseiBusinessCollection.class);
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (MENUID_DBEMN21003.equals(menuID)) {
+        if (MENUID_DBEMN31003.equals(menuID)) {
             validationMessages.add(getValidationHandler(div).データ重複チェック(
                     manager.has要介護認定申請情報(div.getCcdShikakuInfo().getHookenshaCode(),
                             div.getCcdShikakuInfo().getTxtHihokenshaNo().getValue(),
