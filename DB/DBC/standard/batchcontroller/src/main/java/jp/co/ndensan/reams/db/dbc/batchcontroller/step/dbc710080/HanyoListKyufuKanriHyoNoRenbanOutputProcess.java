@@ -197,6 +197,8 @@ public class HanyoListKyufuKanriHyoNoRenbanOutputProcess extends BatchProcessBas
         }
         if (!RString.isNullOrEmpty(parameter.get明細行出力有無())) {
             抽出条件.add(TITLE_明細行出力有無.concat(KyufuKanrihyo_MeisaigyoKubun.toValue(parameter.get明細行出力有無()).get名称()));
+        } else {
+            抽出条件.add(TITLE_明細行出力有無.concat(KyufuKanrihyo_MeisaigyoKubun.明細行含む.get名称()));
         }
         return 抽出条件;
     }
