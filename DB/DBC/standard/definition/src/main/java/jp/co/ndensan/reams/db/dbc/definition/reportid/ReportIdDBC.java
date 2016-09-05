@@ -479,6 +479,10 @@ public enum ReportIdDBC {
      */
     DBC200025(new ReportId("DBC200025_ShokanRenrakuhyoSofuIchiran"), new RString("償還連絡票送付一覧表")),
     /**
+     * 償高額合算自己負担額確認情報取込一覧表帳票ＩＤです。
+     */
+    DBC200028(new ReportId("DBC200028_GassanJikofutangakuKakuninTorikomiIchiran"), new RString("高額合算自己負担額確認情報取込一覧表")),
+    /**
      * 高額介護サービス費給付判定結果送付一覧表帳票ＩＤです。
      */
     DBC200019(new ReportId("DBC200019_KogakuServicehiKyufuHanteiKekkaSofuIchiran"), new RString("高額介護サービス費給付判定結果送付一覧表")),
