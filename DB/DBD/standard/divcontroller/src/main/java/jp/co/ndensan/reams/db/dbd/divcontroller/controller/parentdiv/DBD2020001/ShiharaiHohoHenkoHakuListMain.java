@@ -57,6 +57,7 @@ public class ShiharaiHohoHenkoHakuListMain {
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_radHihokenshaAll(ShiharaiHohoHenkoHakuListMainDiv div) {
         div.getTxtTainoKikanHihokenshaAll().setDisabled(false);
         div.getHihokenshaIgai().setDisabled(true);
+        div.getRadHihokenshaIgaiAll().clearSelectedItem();
 
         return ResponseData.of(div).respond();
     }
@@ -86,6 +87,7 @@ public class ShiharaiHohoHenkoHakuListMain {
         div.getTxtShokanKetteiYMDTo().setDisabled(true);
         div.getTxtTainoKikanShokanKettei().setDisabled(true);
 
+        div.getRadHihokenshaAll().clearSelectedItem();
         return ResponseData.of(div).respond();
     }
 

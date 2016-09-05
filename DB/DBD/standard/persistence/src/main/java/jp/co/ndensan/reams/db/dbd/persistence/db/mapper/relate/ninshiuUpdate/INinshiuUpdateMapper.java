@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.NinshiuUpdateEntity
  *
  * @reamsid_L DBD-2030-020 x_miaocl
  */
-public interface NinshiuUpdateMapper {
+public interface INinshiuUpdateMapper {
 
     List<NinshiuUpdateEntity> get帳票出力用情報取得(NinshiuUpdateMyBatisParameter parameter);
 

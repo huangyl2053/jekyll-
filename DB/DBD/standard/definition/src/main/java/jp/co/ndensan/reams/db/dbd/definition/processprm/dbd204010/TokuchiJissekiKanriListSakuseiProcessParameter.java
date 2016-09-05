@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd204010;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.tokuchijissekilist.TargetArea;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.tokuchijissekilist.TargetYearMonth;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd204010.TokuchiJissekiKanriListSakuseiMybatisParameter;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -32,7 +31,7 @@ public class TokuchiJissekiKanriListSakuseiProcessParameter implements IBatchPro
     private TargetYearMonth 対象年月;
     private FlexibleYearMonth 年月範囲の開始;
     private FlexibleYearMonth 年月範囲の終了;
-    private JigyoshaNo 事業者番号;
+    private RString 事業者番号;
     private TargetArea 地区コード種類;
     private RString 開始地区コード;
     private RString 終了地区コード;
@@ -56,7 +55,7 @@ public class TokuchiJissekiKanriListSakuseiProcessParameter implements IBatchPro
      * @param 帳票ID 帳票ID
      */
     public TokuchiJissekiKanriListSakuseiProcessParameter(TargetYearMonth 対象年月,
-            FlexibleYearMonth 年月範囲の開始, FlexibleYearMonth 年月範囲の終了, JigyoshaNo 事業者番号,
+            FlexibleYearMonth 年月範囲の開始, FlexibleYearMonth 年月範囲の終了, RString 事業者番号,
             TargetArea 地区コード種類, RString 開始地区コード, RString 終了地区コード, LasdecCode 市町村コード, Long 改頁出力順ID, ReportId 帳票ID) {
         this.対象年月 = 対象年月;
         this.年月範囲の開始 = 年月範囲の開始;

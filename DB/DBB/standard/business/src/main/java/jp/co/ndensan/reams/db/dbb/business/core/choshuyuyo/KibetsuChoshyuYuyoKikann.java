@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -22,4 +23,6 @@ public class KibetsuChoshyuYuyoKikann {
     private RString 普徴期別納付額;
     private RString 徴収猶予期間開始;
     private RString 徴収猶予期間終了;
+    private FlexibleDate 徴収猶予期間_開始;
+    private FlexibleDate 徴収猶予期間_終了;
 }

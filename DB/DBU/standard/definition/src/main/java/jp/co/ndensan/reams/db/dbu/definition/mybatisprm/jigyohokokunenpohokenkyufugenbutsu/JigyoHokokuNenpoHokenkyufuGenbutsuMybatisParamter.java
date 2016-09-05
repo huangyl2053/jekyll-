@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.PrintControlKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNoyoshiki2;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.Syorimei;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -19,7 +20,7 @@ import lombok.Getter;
 /**
  * 事業状況報告資料（年報）作成　保険給付決定状況のMybatisパラメータクラスです。
  *
- * @reamsid_L DBU-5600-040 lishengli
+ * @reamsid_L DBU-5600-050 lishengli
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -219,7 +220,7 @@ public final class JigyoHokokuNenpoHokenkyufuGenbutsuMybatisParamter implements 
         }
         return new JigyoHokokuNenpoHokenkyufuGenbutsuMybatisParamter(
                 市町村コードリスト, RString.EMPTY, null, null, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, new RString("DBU"), 処理名,
+                RString.EMPTY, SubGyomuCode.DBU介護統計報告.value(), 処理名,
                 new RString("0099"), 年度, 基準年月日, 基準日時);
     }
 
@@ -270,12 +271,14 @@ public final class JigyoHokokuNenpoHokenkyufuGenbutsuMybatisParamter implements 
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付1総数_単位数.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付1総数_費用額.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付1総数_給付費.getコード());
-        //TODO QA1634回答待ち
+        集計番号リスト.add(ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費1総数_件数.getコード());
+        集計番号リスト.add(ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費1総数_給付費.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付2二割負担被保険者分_再掲_件数.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付2二割負担被保険者分_再掲_単位数.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付2二割負担被保険者分_再掲_費用額.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付2二割負担被保険者分_再掲_給付費.getコード());
-        //TODO QA1634回答待ち
+        集計番号リスト.add(ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費2第２号被保険者分_件数.getコード());
+        集計番号リスト.add(ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費2第２号被保険者分_給付費.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付2第２号被保険者分_再掲_件数.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付2第２号被保険者分_再掲_単位数.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付2第２号被保険者分_再掲_費用額.getコード());

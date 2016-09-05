@@ -348,11 +348,20 @@ public class ShokanShikyuGendogakuMainHandler {
         List<dgShikyuGendogaku_Row> rowList = div.getShokanShikyuGendogakuIchiran().
                 getDgShikyuGendogaku().getDataSource();
         for (dgShikyuGendogaku_Row row : rowList) {
-            if (RS_1.equals(row.getHdnSaishinFlag())
-                    && row.getTekiyoShuryoYM().getValue() == null
-                    && テーブル区分.equals(row.getTableKubun())) {
-                setUpdateList(適用開始年月.minusMonth(INDEX_1), update償還List,
-                        update上乗せList, row, 償還HolderList, 上乗せ償還HolderList);
+            if (ShikyuGendogakuTableKubun.標準.get名称().equals(
+                    テーブル区分)) {
+                if (RS_1.equals(row.getHdnSaishinFlag())
+                        && テーブル区分.equals(row.getTableKubun())) {
+                    setUpdateList(適用開始年月.minusMonth(INDEX_1), update償還List,
+                            update上乗せList, row, 償還HolderList, 上乗せ償還HolderList);
+                }
+            } else {
+                if (RS_1.equals(row.getHdnSaishinFlag())
+                        && row.getTekiyoShuryoYM().getValue() == null
+                        && テーブル区分.equals(row.getTableKubun())) {
+                    setUpdateList(適用開始年月.minusMonth(INDEX_1), update償還List,
+                            update上乗せList, row, 償還HolderList, 上乗せ償還HolderList);
+                }
             }
         }
         ShokanShuruiShikyuGendoGakuManager 償還manager = new ShokanShuruiShikyuGendoGakuManager();

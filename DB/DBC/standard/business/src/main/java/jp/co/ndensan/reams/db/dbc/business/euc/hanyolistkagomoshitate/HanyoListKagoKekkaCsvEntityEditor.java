@@ -267,7 +267,7 @@ public class HanyoListKagoKekkaCsvEntityEditor {
         csvEntity.set世帯コード(kojin.get世帯コード().getColumnValue());
         csvEntity.set世帯主名(kojin.get世帯主名().getColumnValue());
         csvEntity.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
-        csvEntity.set郵便番号(kojin.get住所().get郵便番号().getYubinNo());
+        csvEntity.set郵便番号(kojin.get住所().get郵便番号().getEditedYubinNo());
         if (kojin.get住所().get方書() != null && !kojin.get住所().get方書().isEmpty()) {
             csvEntity.set住所番地方書(kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue())
                     .concat(RString.FULL_SPACE).concat(kojin.get住所().get方書().getColumnValue()));

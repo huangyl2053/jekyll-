@@ -112,7 +112,8 @@ public class GassanShikyugakuKeisankekkaRanrakuhyoSofuProcess extends BatchProce
                 帳票ID, Long.parseLong(processParameter.get出力順ID().toString()));
         if (outputOrder != null) {
 //            出力順 = MyBatisOrderByClauseCreator.create(
-//                    HanyoListFukaDaichoProcessCore.DBB200033HanyoListFukaDaichoEnum.class, outputOrder);
+//                    SofuFileSakuseiProcessCore.DBC200036GassanShikyugakuKeisankekkaRanrakuhyoSofuIchiranEnum.class,
+//                    outputOrder);
         } else {
 //            throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage().replace(
 //                    帳票出力順の取得.toString()).toString());

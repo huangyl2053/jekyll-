@@ -64,7 +64,7 @@
     </resultMap>
     
      <select resultOrdered="true" id="select世帯員把握入力" resultMap="resultMap_SetaiHaakuResultEntity" fetchSize="500"
-                      parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.SetaiShotokuKazeiHanteiMybatisParameter">
+                      parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.fuka.SetaiShotokuKazeiHanteiMybatisParameter">
        SELECT
         B."hihokenshaNo",
         B."setaiInshikibetsuCode",

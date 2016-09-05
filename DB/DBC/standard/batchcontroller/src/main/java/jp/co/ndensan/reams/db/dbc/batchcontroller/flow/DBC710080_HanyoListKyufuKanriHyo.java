@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710080.HanyoListKyufuKanriHyoNoRenbanOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710080.HanyoListKyufuKanriHyoOutputProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc710080.DBC710080_HanyoListKyufuKanriHyoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710080.DBC710080_HanyoListKyufuKanriHyoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710080.HanyoListKyufuKanriHyoProcessParameter;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;

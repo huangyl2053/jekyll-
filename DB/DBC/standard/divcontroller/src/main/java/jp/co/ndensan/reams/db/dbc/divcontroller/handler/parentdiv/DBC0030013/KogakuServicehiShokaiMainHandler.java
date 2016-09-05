@@ -158,8 +158,14 @@ public class KogakuServicehiShokaiMainHandler {
         }
         並べて表示エリア_左側.getDgJudgementResultL().setDataSource(dataSources);
         並べて表示エリア_左側.getTxtBikoL().setValue(高額判定結果_左側.get高額給付根拠());
-        並べて表示エリア_左側.getTxtUketsukeDateL().setValue(new RDate(高額判定結果_左側.get受付年月日().toString()));
-        並べて表示エリア_左側.getTxtKetteiDateL().setValue(new RDate(高額判定結果_左側.get決定年月日().toString()));
+        FlexibleDate 受付年月日 = 高額判定結果_左側.get受付年月日();
+        if (受付年月日 != null && !受付年月日.isEmpty()) {
+            並べて表示エリア_左側.getTxtUketsukeDateL().setValue(new RDate(受付年月日.toString()));
+        }
+        FlexibleDate 決定年月日 = 高額判定結果_左側.get決定年月日();
+        if (決定年月日 != null && !決定年月日.isEmpty()) {
+            並べて表示エリア_左側.getTxtKetteiDateL().setValue(new RDate(決定年月日.toString()));
+        }
         RString 審査方法区分 = 高額判定結果_左側.get審査方法区分();
         if (審査方法区分.isEmpty()) {
             並べて表示エリア_左側.getRadShinsaMethodL().setSelectedIndex(INDEX_ゼロ);
@@ -236,8 +242,14 @@ public class KogakuServicehiShokaiMainHandler {
         }
         並べて表示エリア_右側.getDgJudgementResultR().setDataSource(dataSources);
         並べて表示エリア_右側.getTxtBikoR().setValue(高額判定結果_右側.get高額給付根拠());
-        並べて表示エリア_右側.getTxtUketsukeDateR().setValue(new RDate(高額判定結果_右側.get受付年月日().toString()));
-        並べて表示エリア_右側.getTxtKetteiDateR().setValue(new RDate(高額判定結果_右側.get決定年月日().toString()));
+        FlexibleDate 受付年月日 = 高額判定結果_右側.get受付年月日();
+        if (受付年月日 != null && !受付年月日.isEmpty()) {
+            並べて表示エリア_右側.getTxtUketsukeDateR().setValue(new RDate(受付年月日.toString()));
+        }
+        FlexibleDate 決定年月日 = 高額判定結果_右側.get決定年月日();
+        if (決定年月日 != null && !決定年月日.isEmpty()) {
+            並べて表示エリア_右側.getTxtKetteiDateR().setValue(new RDate(決定年月日.toString()));
+        }
         RString 審査方法区分 = 高額判定結果_右側.get審査方法区分();
         if (審査方法区分.isEmpty()) {
             並べて表示エリア_右側.getRadShinsaMethodR().setSelectedIndex(INDEX_ゼロ);

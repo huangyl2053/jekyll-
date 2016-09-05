@@ -115,12 +115,12 @@ public class NoufuGakuDataSakuseiHandler {
         ShoriDateKanri 処理日付 = NoufuhitaiDataSakusei.createInstance().
                 get抽出条件前回処理日付(市町村セキュリティ情報.get市町村情報().get市町村コード(), 処理枝番);
         YMDHMS 基準日時 = 処理日付.get基準日時();
-        WarekiYearMonth 年月日 = 基準日時.wareki();
+        RDate 年月日 = 基準日時.getDate();
         RTime 時刻 = 基準日時.getRDateTime().getTime();
-        RString 前回処理日時 = new RString(年月日.toDateString().toString() + SPACE
+        RString 前回処理日時 = new RString(年月日.wareki().toDateString().toString() + SPACE
                 + 時刻.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
         抽出条件Row.getTxtZenShoriNichiji().setValue(前回処理日時);
-        抽出条件Row.getTxtZenShoriYMD().setValue(new RDate(年月日.toDateString().toString()));
+        抽出条件Row.getTxtZenShoriYMD().setValue(年月日);
         抽出条件Row.getTxtZenShoriTime().setValue(時刻);
         抽出条件List.add(抽出条件Row);
         div.getDgTanitsuShoriJoken().setDataSource(抽出条件List);

@@ -542,7 +542,8 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         entity.set給付の種類3(kyufuSHurui.get給付の種類3());
         entity.setShikyuHushikyuKetteiKubun(shoukanbaraiShikyuEntity.get償還払支給判定結果().getShikyuHushikyuKetteiKubun());
         entity.setShiharaiKingaku(shoukanbaraiShikyuEntity.get償還払支給判定結果().getShiharaiKingaku());
-        if (一.equals(shoukanbaraiShikyuEntity.get償還払支給判定結果().getShikyuHushikyuKetteiKubun())) {
+        RString shikyuHushikyuKetteiKubun = shoukanbaraiShikyuEntity.get償還払支給判定結果().getShikyuHushikyuKetteiKubun();
+        if (一.equals(shikyuHushikyuKetteiKubun)) {
             entity.set増減の理由Title(new RString("増減の理由"));
         } else {
             entity.set増減の理由Title(new RString("不支給の理由"));
@@ -552,12 +553,13 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         entity.set増減の理由1(zougenFushikyuRiyu.get増減_不支給の理由1());
         entity.set増減の理由2(zougenFushikyuRiyu.get増減_不支給の理由2());
         entity.set増減の理由3(zougenFushikyuRiyu.get増減_不支給の理由3());
-        if (二.equals(shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiHohoKubunCode())) {
+        if (ゼロ.equals(shikyuHushikyuKetteiKubun) || 一.equals(shikyuHushikyuKetteiKubun) && 二.equals(shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiHohoKubunCode())) {
             entity.setTorikeshi1(HOSHI_14);
-            entity.setTorikeshiMochimono1(HOSHI_14);
-            entity.setTorikeshiMochimono2(HOSHI_14);
-            entity.setTorikeshiShiharaibasho(HOSHI_14);
-            entity.setTorikeshiShiharaikikan(HOSHI_14);
+        } else if (ゼロ.equals(shikyuHushikyuKetteiKubun) || 一.equals(shikyuHushikyuKetteiKubun) && 一.equals(shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiHohoKubunCode())) {
+            entity.setTorikeshi2(HOSHI_14);
+        }
+        if (一.equals(shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiHohoKubunCode())) {
+
             entity.setMochimono1(manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 帳票制御汎用キー_持ち物内容文言１).get設定値());
             entity.setMochimono2(manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 帳票制御汎用キー_持ち物内容文言２).get設定値());
             entity.setMochimono3(manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 帳票制御汎用キー_持ち物内容文言３).get設定値());
@@ -592,10 +594,13 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
                 entity.setKaraFugo(KARA);
             }
             entity.setShiharaiEnd(set時間(shiharaiShuryoTime));
-        } else if (一.equals(shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiHohoKubunCode())) {
-            entity.setTorikeshi2(HOSHI_14);
+        } else if (二.equals(shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiHohoKubunCode())) {
+            entity.setTorikeshiMochimono1(HOSHI_14);
+            entity.setTorikeshiMochimono2(HOSHI_14);
+            entity.setTorikeshiShiharaibasho(HOSHI_14);
+            entity.setTorikeshiShiharaikikan(HOSHI_14);
             entity.setBankName(口座情報.get金融機関().get金融機関名称());
-            if (口座情報.isゆうちょ銀行()) {
+            if ((!口座情報.get金融機関コード().value().equals(金融機関コード_郵便局)) || (口座情報.get金融機関コード().value().equals(金融機関コード_郵便局) && 一.equals(帳票制御汎用_ゆうちょ銀行店名表示.get設定値()))) {
                 entity.setBranchBankName(口座情報.get支店().get支店名称());
             }
             if (金融機関コード_郵便局.equals(口座情報.get金融機関コード().value())) {

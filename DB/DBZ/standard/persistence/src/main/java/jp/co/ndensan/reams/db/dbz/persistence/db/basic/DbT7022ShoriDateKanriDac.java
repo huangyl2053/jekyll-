@@ -2091,4 +2091,54 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(shoriName, 処理名))).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
+
+    /**
+     * 市町村処理日付のデータを取得します。
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 処理枝番 RString
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity get特徴市町村処理日付(FlexibleYear 調定年度, RString 処理枝番) throws NullPointerException {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        List<RString> 処理名List = new ArrayList<>();
+        処理名List.add(ShoriName.特徴異動情報作成.get名称());
+        処理名List.add(ShoriName.特徴依頼情報作成.get名称());
+
+        return accessor.selectSpecific(max(kijunTimestamp)).
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(nendo, 調定年度),
+                                eq(shoriEdaban, 処理枝番),
+                                in(shoriName, 処理名List))).
+                limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタから処理状況の情報を取得する。
+     *
+     * @param 年度 FlexibleYear
+     * @param 処理名 RString
+     * @param 年度連番 RString
+     * @param 処理枝番 RString
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select特徴月処理日付(FlexibleYear 年度, RString 処理名, RString 年度連番, RString 処理枝番) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(shoriName, 処理名),
+                                eq(shoriEdaban, 処理枝番),
+                                eq(nendo, 年度),
+                                eq(nendoNaiRenban, 年度連番))).
+                limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
 }
