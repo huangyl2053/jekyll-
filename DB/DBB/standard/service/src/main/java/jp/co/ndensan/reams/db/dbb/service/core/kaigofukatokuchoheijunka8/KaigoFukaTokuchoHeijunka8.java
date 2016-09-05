@@ -66,12 +66,10 @@ public class KaigoFukaTokuchoHeijunka8 {
         DbT7022ShoriDateKanriEntity 当初所得引出 = dbT7022ShoriDateKanriDac.select処理日付管理マスタ_当初所得引出(調定年度);
         if (当初所得引出 != null) {
             shoriList.add(当初所得引出);
-            return shoriList;
         }
         List<DbT7022ShoriDateKanriEntity> 当初所得引出以外 = dbT7022ShoriDateKanriDac.select処理日付管理マスタ_当初所得引出以外(調定年度);
         if (当初所得引出以外 != null) {
             shoriList.addAll(当初所得引出以外);
-            return shoriList;
         }
         return shoriList;
     }
