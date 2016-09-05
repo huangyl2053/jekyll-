@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110070;
 
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc110070.KogakugassanKeisankekkaRenrakuhyoOutProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,4 +30,16 @@ public class DBC110070_KogakugassanKeisankekkaRenrakuhyoOutParameter extends Bat
     private RString 再処理区分;
     @BatchParameter(key = KEY_出力順ID, name = "出力順ID")
     private RString 出力順ID;
+
+    /**
+     * processのパラメータを生成します。
+     *
+     * @return KogakugassanKeisankekkaRenrakuhyoOutProcessParameter
+     */
+    public KogakugassanKeisankekkaRenrakuhyoOutProcessParameter toProcessParameter() {
+        return new KogakugassanKeisankekkaRenrakuhyoOutProcessParameter(
+                処理年月,
+                再処理区分,
+                出力順ID);
+    }
 }

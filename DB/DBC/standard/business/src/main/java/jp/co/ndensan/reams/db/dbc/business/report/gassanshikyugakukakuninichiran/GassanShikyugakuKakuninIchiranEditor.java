@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Width;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -115,8 +116,23 @@ public class GassanShikyugakuKakuninIchiranEditor implements
             source.listLower_9 = DecimalFormatter.toコンマ区切りRString(計算結果entity.getOver70_honninShikyugaku(), 0);
         }
 
+        source.yubinNo = getColumnValue(entity.get帳票用データ().get被保険者entity().getYubinNo());
+        source.choikiCode = getColumnValue(entity.get帳票用データ().get被保険者entity().getChoikiCode());
+        source.gyoseikuCode = getColumnValue(entity.get帳票用データ().get被保険者entity().getGyoseikuCode());
+        source.shimei50onKana = entity.get帳票用データ().get被保険者entity().getShimei50onKana();
+        source.shichosonCode = getColumnValue(entity.get帳票用データ().get被保険者entity().getShichosonCode());
+        source.shoKisaiHokenshaNo = getColumnValue(計算結果entity.getShoKisaiHokenshaNo());
+        source.hihokenshaNo = getColumnValue(計算結果entity.getHihokenshaNoIn());
+
         return source;
 
+    }
+
+    private RString getColumnValue(IDbColumnMappable entity) {
+        if (null != entity) {
+            return entity.getColumnValue();
+        }
+        return RString.EMPTY;
     }
 
     private RString getSakuseiYmhm(RDateTime datetime) {
