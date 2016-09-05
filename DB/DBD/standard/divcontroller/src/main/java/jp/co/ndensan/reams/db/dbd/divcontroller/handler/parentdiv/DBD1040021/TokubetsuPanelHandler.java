@@ -44,7 +44,7 @@ public class TokubetsuPanelHandler {
         ShichosonSecurityJoho shichosonsecurityjoho
                 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (shichosonsecurityjoho != null && shichosonsecurityjoho.get導入形態コード() != null) {
-            if (!shichosonsecurityjoho.get導入形態コード().is広域()) {
+            if (shichosonsecurityjoho.get導入形態コード().is広域()) {
                 div.getChushutsuJoken4().setEraseBorder(true);
                 div.getChushutsuJoken().setVisible(false);
             } else {
