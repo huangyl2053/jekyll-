@@ -50,7 +50,6 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
     private static final RString コロン = new RString(":");
     private static final RString パーセント = new RString("%");
     private static final int 住所最大桁数 = 15;
-    private static final int HUNDRED = 100;
     private final RString 帳票ID;
     private final RString 帳票DBC200006 = new RString("DBC200006_KokuhorenJukyushaDaichoIchiran");
     private final RString 帳票DBC200055 = new RString("DBC200055_JukyushaKoshinkekkaIchiran");
@@ -336,7 +335,6 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
         if (null == number) {
             return RString.EMPTY;
         }
-        number = number.multiply(HUNDRED);
         return DecimalFormatter.toRString(number, 0).concat(パーセント);
     }
 }
