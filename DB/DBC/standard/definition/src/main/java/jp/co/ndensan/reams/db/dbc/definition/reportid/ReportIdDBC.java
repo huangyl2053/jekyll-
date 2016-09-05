@@ -16,6 +16,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBC {
 
     /**
+     * 受給者給付実績一覧表
+     */
+    DBC200002(new ReportId("DBC200002_JukyushaKyufuJissekiIchiran"),
+            new RString("受給者給付実績一覧表")),
+    /**
      * 高額合算支給額計算結果連絡票情報取込一覧表
      */
     DBC200037(new ReportId("DBC200037_GassanShikyugakuKeisankekkaRanrakuhyoTorikomiIchiran"),
