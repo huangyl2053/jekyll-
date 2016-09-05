@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai;
 
+import jp.co.ndensan.reams.db.dbc.definition.core.shikibetsubangokubun.ShikibetsubangoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -23,6 +24,7 @@ public final class KyufuJissekiHeaderJohoMapperParameter {
     private final FlexibleYearMonth サービス提供年月;
     private final RString 整理番号;
     private final RString 識別番号;
+    private final RString 識別番号区分;
     private final JigyoshaNo 事業所番号;
     private final RString psmShikibetsuTaisho;
 
@@ -33,15 +35,17 @@ public final class KyufuJissekiHeaderJohoMapperParameter {
      * @param サービス提供年月 サービス提供年月
      * @param 整理番号 整理番号
      * @param 識別番号 識別番号
+     * @param 識別番号区分 識別番号区分
      * @param 事業所番号 事業所番号
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
      */
     private KyufuJissekiHeaderJohoMapperParameter(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
-            RString 整理番号, RString 識別番号, JigyoshaNo 事業所番号, RString psmShikibetsuTaisho) {
+            RString 整理番号, RString 識別番号, RString 識別番号区分, JigyoshaNo 事業所番号, RString psmShikibetsuTaisho) {
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月 = サービス提供年月;
         this.整理番号 = 整理番号;
         this.識別番号 = 識別番号;
+        this.識別番号区分 = 識別番号区分;
         this.事業所番号 = 事業所番号;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
@@ -58,7 +62,7 @@ public final class KyufuJissekiHeaderJohoMapperParameter {
     public static KyufuJissekiHeaderJohoMapperParameter createParameter_給付実績情報(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号, RString 識別番号) {
         return new KyufuJissekiHeaderJohoMapperParameter(被保険者番号,
-                サービス提供年月, 整理番号, 識別番号, JigyoshaNo.EMPTY, RString.EMPTY);
+                サービス提供年月, 整理番号, 識別番号, RString.EMPTY, JigyoshaNo.EMPTY, RString.EMPTY);
     }
 
     /**
@@ -70,7 +74,7 @@ public final class KyufuJissekiHeaderJohoMapperParameter {
     public static KyufuJissekiHeaderJohoMapperParameter createParameter_宛名情報(RString psmShikibetsuTaisho) {
         return new KyufuJissekiHeaderJohoMapperParameter(
                 HihokenshaNo.EMPTY, FlexibleYearMonth.EMPTY, RString.EMPTY,
-                RString.EMPTY, JigyoshaNo.EMPTY, psmShikibetsuTaisho);
+                RString.EMPTY, RString.EMPTY, JigyoshaNo.EMPTY, psmShikibetsuTaisho);
     }
 
     /**
@@ -83,7 +87,7 @@ public final class KyufuJissekiHeaderJohoMapperParameter {
     public static KyufuJissekiHeaderJohoMapperParameter createParameter_事業者名称(JigyoshaNo 事業所番号,
             FlexibleYearMonth 基準年月) {
         return new KyufuJissekiHeaderJohoMapperParameter(HihokenshaNo.EMPTY,
-                基準年月, RString.EMPTY, RString.EMPTY, 事業所番号, RString.EMPTY);
+                基準年月, RString.EMPTY, RString.EMPTY, RString.EMPTY, 事業所番号, RString.EMPTY);
     }
 
     /**
@@ -96,7 +100,8 @@ public final class KyufuJissekiHeaderJohoMapperParameter {
     public static KyufuJissekiHeaderJohoMapperParameter createParameter_識別番号管理データ(FlexibleYearMonth サービス提供年月,
             RString 識別番号) {
         return new KyufuJissekiHeaderJohoMapperParameter(HihokenshaNo.EMPTY,
-                サービス提供年月, RString.EMPTY, 識別番号, JigyoshaNo.EMPTY, RString.EMPTY);
+                サービス提供年月, RString.EMPTY, 識別番号, ShikibetsubangoKubun.入力識別番号.getコード(),
+                JigyoshaNo.EMPTY, RString.EMPTY);
     }
 
 }
