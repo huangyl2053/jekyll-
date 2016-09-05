@@ -63,6 +63,7 @@ public class JigyohokokuGeppoYoshiki1Editor implements IJigyohokokuGeppoYoshiki1
         集計範囲_SB.append(new RString("("));
         if (new RString("年報").equals(集計区分)) {
             集計範囲_SB.append(集計範囲);
+            集計範囲_SB.append(new RString("年度"));
         } else {
             FlexibleYear 集計範囲_年度 = new FlexibleYear(集計範囲.substring(0, 年度));
             FlexibleYearMonth 集計範囲_Temp = new FlexibleYearMonth(集計範囲);
