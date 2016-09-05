@@ -88,7 +88,6 @@
             );
     </update>
     
-    <!--TODO QA1615回答待ち　rgdb."DbFt7019JigyouHoukokuTokeiTyouhyou"は不正です-->
     <select id="getJigyouHokokuTokeiReportJyoho"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpoippangenbutsu.JigyoHokokuNenpoIppanGenbutsuMybatisParamter" 
             resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokunenpoippangenbutsu.GassanJigyouHoukokuTokeiEntity" resultOrdered="true" fetchSize="500">

@@ -273,10 +273,9 @@ public class JigyoHokokuNenpoReportDBU300117Process extends BatchProcessBase<Gas
 
     @Override
     protected void process(GassanJigyouHoukokuTokeiEntity entity) {
-        //TODO ShukeiNoyoshiki2にＣｏｄｅ「0105と0106」がありません。
-        if (ShukeiNoyoshiki2._1_介護給付_予防給付4第２号被保険者分_再掲_特例分_単位数.getコード().equals(entity.getSyukeiNo().value())) {
+        if (ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費1総数_件数.getコード().equals(entity.getSyukeiNo().value())) {
             syukeiNo0105.put(entity.getYokoNo().multiply(数値_100).add(entity.getTateNo()), entity.getSukeiKekkaAtai());
-        } else if (ShukeiNoyoshiki2._1_介護給付_予防給付4第２号被保険者分_再掲_特例分_単位数.getコード().equals(entity.getSyukeiNo().value())) {
+        } else if (ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費1総数_給付費.getコード().equals(entity.getSyukeiNo().value())) {
             syukeiNo0106.put(entity.getYokoNo().multiply(数値_100).add(entity.getTateNo()), entity.getSukeiKekkaAtai());
         }
     }

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130001.dgHe
 import jp.co.ndensan.reams.db.dbb.service.core.kaigofukatokuchoheijunka8.KaigoFukaTokuchoHeijunka8;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -53,89 +54,101 @@ public class TokuchoHeijunkaKeisanPanelHandler {
         this.div = div;
     }
 
-    private void get未処理の場合() {
+    private void getデータ() {
         RDate nowDate = RDate.getNowDate();
         KaigoFukaTokuchoHeijunka8 特徴平準化 = new KaigoFukaTokuchoHeijunka8();
         FlexibleYear 調定年度 = new FlexibleYear(
                 div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtChoteiNendo().getValue());
-
         List<dgHeijunka8ShoriKakunin1_Row> rowList = new ArrayList<>();
-
-        YMDHMS 処理日時0 = 特徴平準化.getShoriJohkyoList(調定年度).get(0).getKijunTimestamp();
         dgHeijunka8ShoriKakunin1_Row row1 = new dgHeijunka8ShoriKakunin1_Row();
-        row1.setTxtShoriMei(当初所得引出);
-        if (特徴平準化.getShoriJohkyoList(調定年度).get(0).getShoriName().isNullOrEmpty()) {
-            row1.setTxtJokyo(未);
-            row1.setTxtShoriNichiji(get当月処理日時(処理日時0));
-            rowList.add(row1);
-
-        } else {
-            if (DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, nowDate, SubGyomuCode.DBB介護賦課).
-                    equals(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, nowDate, SubGyomuCode.DBB介護賦課))) {
-                row1.setTxtJokyo(済);
-                row1.setTxtShoriNichiji(RString.EMPTY);
-                rowList.add(row1);
-
-            } else {
-                row1.setTxtJokyo(未);
-                row1.setTxtShoriNichiji(RString.EMPTY);
-                rowList.add(row1);
-
-            }
-        }
-        for (int i = 0, len = 特徴平準化.getShoriJohkyoList(調定年度).size(); i < len; i++) {
-            dgHeijunka8ShoriKakunin1_Row row2 = new dgHeijunka8ShoriKakunin1_Row();
+        int len = 特徴平準化.getShoriJohkyoList(調定年度).size();
+        for (int i = 0; i < len; i++) {
             YMDHMS 処理日時 = 特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp();
-            row2.setTxtShoriMei(依頼金額計算);
-            if (特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName().isNullOrEmpty()) {
-                row2.setTxtJokyo(未);
-                row2.setTxtShoriNichiji(RString.EMPTY);
-                rowList.add(row2);
-            } else if (特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp() == null
-                    || 特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp().isEmpty()) {
-                row2.setTxtJokyo(未);
-                row2.setTxtShoriNichiji(RString.EMPTY);
-                rowList.add(row2);
-            } else {
-                row2.setTxtJokyo(済);
-                row2.setTxtShoriNichiji(get当月処理日時(処理日時));
-                rowList.add(row2);
-
+            if (当初所得引出.equals(特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName())) {
+                row1.setTxtShoriMei(当初所得引出);
+                if (!当初所得引出.equals(特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName())) {
+                    row1.setTxtJokyo(未);
+                    row1.setTxtShoriNichiji(RString.EMPTY);
+                    rowList.add(row1);
+                } else {
+                    if (DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, nowDate, SubGyomuCode.DBB介護賦課).
+                            equals(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, nowDate, SubGyomuCode.DBB介護賦課))) {
+                        row1.setTxtJokyo(済);
+                        row1.setTxtShoriNichiji(get当月処理日時(処理日時));
+                        rowList.add(row1);
+                    } else {
+                        row1.setTxtJokyo(未);
+                        row1.setTxtShoriNichiji(RString.EMPTY);
+                        rowList.add(row1);
+                    }
+                }
             }
-            dgHeijunka8ShoriKakunin1_Row row3 = new dgHeijunka8ShoriKakunin1_Row();
-            row3.setTxtShoriMei(本算定賦課);
-            if (特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName().isNullOrEmpty()) {
-                row3.setTxtJokyo(未);
-                row3.setTxtShoriNichiji(RString.EMPTY);
-                rowList.add(row3);
-            } else if (特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp() == null
-                    || 特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp().isEmpty()) {
-                row3.setTxtJokyo(未);
-                row3.setTxtShoriNichiji(RString.EMPTY);
-                rowList.add(row3);
-            } else {
-                row3.setTxtJokyo(済);
-                row3.setTxtShoriNichiji(get当月処理日時(処理日時));
-                rowList.add(row3);
+            if (依頼金額計算.equals(特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName())) {
+                dgHeijunka8ShoriKakunin1_Row row2 = new dgHeijunka8ShoriKakunin1_Row();
+                row2.setTxtShoriMei(依頼金額計算);
+                if (!ShoriName.依頼金額計算.get名称().equals(特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName())) {
+                    row2.setTxtJokyo(未);
+                    row2.setTxtShoriNichiji(RString.EMPTY);
+                    rowList.add(row2);
+                } else if (特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp() == null
+                        || 特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp().isEmpty()) {
+                    row2.setTxtJokyo(未);
+                    row2.setTxtShoriNichiji(RString.EMPTY);
+                    rowList.add(row2);
+                } else {
+                    row2.setTxtJokyo(済);
+                    row2.setTxtShoriNichiji(get当月処理日時(処理日時));
+                    rowList.add(row2);
+                }
             }
-            dgHeijunka8ShoriKakunin1_Row row4 = new dgHeijunka8ShoriKakunin1_Row();
-            row4.setTxtShoriMei(特徴異動情報作成);
-            if (特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName().isNullOrEmpty()) {
-                row4.setTxtJokyo(未);
-                row4.setTxtShoriNichiji(RString.EMPTY);
-                rowList.add(row4);
-            } else if (特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp() == null
-                    || 特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp().isEmpty()) {
-                row4.setTxtJokyo(未);
-                row4.setTxtShoriNichiji(RString.EMPTY);
-                rowList.add(row4);
-            } else {
-                row4.setTxtJokyo(済);
-                row4.setTxtShoriNichiji(get当月処理日時(処理日時));
-                rowList.add(row4);
+            if (本算定賦課.equals(特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName())) {
+                dgHeijunka8ShoriKakunin1_Row row3 = new dgHeijunka8ShoriKakunin1_Row();
+                row3.setTxtShoriMei(本算定賦課);
+                if (!ShoriName.本算定賦課.get名称().equals(特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName())) {
+                    row3.setTxtJokyo(未);
+                    row3.setTxtShoriNichiji(RString.EMPTY);
+                    rowList.add(row3);
+                } else if (特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp() == null
+                        || 特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp().isEmpty()) {
+                    row3.setTxtJokyo(未);
+                    row3.setTxtShoriNichiji(RString.EMPTY);
+                    rowList.add(row3);
+                } else {
+                    row3.setTxtJokyo(済);
+                    row3.setTxtShoriNichiji(get当月処理日時(処理日時));
+                    rowList.add(row3);
+                }
+            }
+            if (特徴異動情報作成.equals(特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName())) {
+                dgHeijunka8ShoriKakunin1_Row row4 = new dgHeijunka8ShoriKakunin1_Row();
+                row4.setTxtShoriMei(特徴異動情報作成);
+                if (!ShoriName.特徴異動情報作成.get名称().equals(特徴平準化.getShoriJohkyoList(調定年度).get(i).getShoriName())) {
+                    row4.setTxtJokyo(未);
+                    row4.setTxtShoriNichiji(RString.EMPTY);
+                    rowList.add(row4);
+                } else if (特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp() == null
+                        || 特徴平準化.getShoriJohkyoList(調定年度).get(i).getKijunTimestamp().isEmpty()) {
+                    row4.setTxtJokyo(未);
+                    row4.setTxtShoriNichiji(RString.EMPTY);
+                    rowList.add(row4);
+                } else {
+                    row4.setTxtJokyo(済);
+                    row4.setTxtShoriNichiji(get当月処理日時(処理日時));
+                    rowList.add(row4);
+                }
             }
         }
         div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().setDataSource(rowList);
+    }
+
+    private void get未処理の場合() {
+        KaigoFukaTokuchoHeijunka8 特徴平準化 = new KaigoFukaTokuchoHeijunka8();
+        FlexibleYear 調定年度 = new FlexibleYear(
+                div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtChoteiNendo().getValue());
+        if (null != 特徴平準化.getShoriJohkyoList(調定年度) && (!特徴平準化.getShoriJohkyoList(調定年度).isEmpty())) {
+            getデータ();
+        }
+
     }
 
     /**
@@ -211,7 +224,7 @@ public class TokuchoHeijunkaKeisanPanelHandler {
     }
 
     private RString get当月処理日時(YMDHMS 当月処理日時) {
-        if (null != 当月処理日時) {
+        if (null != 当月処理日時 && 当月処理日時.isEmpty()) {
             RDate date = 当月処理日時.getDate();
             RTime time = 当月処理日時.getRDateTime().getTime();
             return new RString(new YMDHMS(date, time).toString());
@@ -224,14 +237,14 @@ public class TokuchoHeijunkaKeisanPanelHandler {
      * setボタン制御
      */
     public void setボタン制御() {
-        boolean is処理状態1 = div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
-                getDataSource().get(0).getTxtJokyo().equals(済)
-                && div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
-                getDataSource().get(1).getTxtJokyo().equals(済);
-        boolean is処理状態2 = div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
-                getDataSource().get(2).getTxtJokyo().equals(未)
-                && div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
-                getDataSource().get(THREE).getTxtJokyo().equals(未);
+        boolean is処理状態1 = 済.equals(div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
+                getDataSource().get(0).getTxtJokyo())
+                && 済.equals(div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
+                        getDataSource().get(1).getTxtJokyo());
+        boolean is処理状態2 = 未.equals(div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
+                getDataSource().get(2).getTxtJokyo())
+                && 未.equals(div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
+                        getDataSource().get(THREE).getTxtJokyo());
         if (is処理状態1 && is処理状態2) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(実行するボタン, false);
         }
