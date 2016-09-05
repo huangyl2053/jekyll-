@@ -194,7 +194,7 @@ public class HanyoListKagoKekkaCsvEntityEditor {
         if (entity != null && entity.get介護サービス種類() != null) {
             ServiceShuruiCode サービス種類コード = entity.get過誤決定明細().getServiceShuruiCode();
             if (サービス種類コード != null) {
-                csvEntity.setサービス種類コード(サービス種類コード.getColumnValue());
+                csvEntity.setサービス種類(サービス種類コード.getColumnValue());
             }
             RString 介護サービス種類 = entity.get介護サービス種類().getServiceShuruiRyakusho();
             if (介護サービス種類 != null) {

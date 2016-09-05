@@ -91,8 +91,8 @@
             rgdb."DbT7130KaigoServiceShurui"  AS "DbT7130KaigoServiceShurui"
         ON
             "DbT7130KaigoServiceShurui"."serviceShuruiCd" = "DbT3061KagoKetteiMeisai"."serviceShuruiCode"
-            AND "DbT3061KagoKetteiMeisai"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7130KaigoServiceShurui"."teikyoKaishiYM"
-            AND "DbT7130KaigoServiceShurui"."teikyoshuryoYM" <![CDATA[<=]]> "DbT3061KagoKetteiMeisai"."serviceTeikyoYM"
+            AND "DbT7130KaigoServiceShurui"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3061KagoKetteiMeisai"."serviceTeikyoYM"
+            AND "DbT3061KagoKetteiMeisai"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7130KaigoServiceShurui"."teikyoshuryoYM"
         LEFT JOIN
             "KaigoJigyoshanNewest"  AS "KagoKetteiJukyosha"
         ON
