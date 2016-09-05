@@ -5,12 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc110060;
 
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110060.KogakugassanShikyushinseishoOutMybatisParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.DbWT3711KogakuGassanShinseishoTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.KogakuGassanShinseishoDataEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.KogakuGassanShinseishoInsertKozaEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.KogakuGassanShinseishoSetHokenshameEntity;
-
 /**
  * 高額合算支給申請書情報作成のDB操作です。
  *
@@ -24,34 +18,29 @@ public interface IKogakugassanShikyushinseishoOutMapper {
      * @param parameter KogakugassanShikyushinseishoOutMybatisParameter
      * @return KogakuGassanShinseishoDataEntity
      */
-    KogakuGassanShinseishoDataEntity get高額合算申請書データ(KogakugassanShikyushinseishoOutMybatisParameter parameter);
-
+//    KogakuGassanShinseishoDataEntity get高額合算申請書データ(KogakugassanShikyushinseishoOutMybatisParameter parameter);
     /**
      * 識別コードがないデータを取得する。
      *
      * @return DbWT3711KogakuGassanShinseishoTempEntity
      */
-    DbWT3711KogakuGassanShinseishoTempEntity get識別コードがないデータ();
-
+//    DbWT3711KogakuGassanShinseishoTempEntity get識別コードがないデータ();
     /**
      * 口座情報がないデータを取得する。
      *
      * @return DbWT3711KogakuGassanShinseishoTempEntity
      */
-    KogakuGassanShinseishoInsertKozaEntity get口座情報がないデータ();
-
+//    KogakuGassanShinseishoInsertKozaEntity get口座情報がないデータ();
     /**
      * 導入形態が単一データを取得する。
      *
      * @return KogakuGassanShinseishoSetHokenshameEntity
      */
-    KogakuGassanShinseishoSetHokenshameEntity get導入形態が単一データ();
-
+//    KogakuGassanShinseishoSetHokenshameEntity get導入形態が単一データ();
     /**
      * 導入形態が単一データを取得する。
      *
      * @return KogakuGassanShinseishoSetHokenshameEntity
      */
-    KogakuGassanShinseishoSetHokenshameEntity get導入形態が広域データ();
-
+//    KogakuGassanShinseishoSetHokenshameEntity get導入形態が広域データ();
 }
