@@ -858,6 +858,7 @@ public class ChoshuYuyoJuminKihonHandler {
         param.set徴収猶予取消事由(取消情報パネル.getTxtTorikeshiShurui().getValue());
         // TODO QA1195 labelはTextBoxDateに変換は必要ですが？ 状態定義sheetの281－294行の状態は入力可の設定。
         List<KaigoKibetsuChoshuYuyoParam> 介護期別徴収猶予データ = get介護期別徴収猶予データ();
+        介護期別徴収猶予データ.clear();
         for (int i = ゼロ_定値; i < ジュウヨ_定値; i++) {
             KibetsuChoshyuYuyoKikann 期別徴収猶予期間 = 期別徴収猶予期間リスト.get(i);
             KaigoKibetsuChoshuYuyoParam データ = new KaigoKibetsuChoshuYuyoParam();
