@@ -5,12 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0040011;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.message.DbuErrorMessages;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0040011.JigyoJokyoHokokuNempoSakueiDiv;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -36,6 +39,7 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
     private static final RString 年報報告一般状況償還分KEY = new RString("hokenKyufuShokan");
     private static final RString 年報報告一般状況高額分KEY = new RString("hokenKyufuKogaku");
     private static final RString 年報報告一般状況高額合算分KEY = new RString("hokenKyufuKogakuGassan");
+    private static final RString メッセージ内容 = new RString("事業状況報告（月報）：");
 
     /**
      * コンストラクタです。
@@ -51,10 +55,10 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
      *
      * @param is合併市町村 is合併市町村
      * @param is広域市町村 is広域市町村
+     * @param validPairs validPairs
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateForUpdate(boolean is合併市町村, boolean is広域市町村) {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+    public ValidationMessageControlPairs validateForUpdate(boolean is合併市町村, boolean is広域市町村, ValidationMessageControlPairs validPairs) {
         if (!RString.isNullOrEmpty(div.getRadJikkoTaniShukeiOnly().getSelectedKey())
                 || !RString.isNullOrEmpty(div.getRadJikkoTani2().getSelectedKey())) {
             doチェック(validPairs);
@@ -71,10 +75,42 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
         do保険給付決定状況_高額合算分(validPairs);
         do作成日付チェック(validPairs);
         do出力対象チェック(validPairs);
-        // TODO QA1585回答まち、未処理チェック実装なし。
-//if (未処理チェック){
-//validPairs.add(new ValidationMessageControlPair(RRVMessages.全て月報未処理チェック));
-//}
+        return validPairs;
+    }
+
+    /**
+     * 月報未処理のチックを実行する。
+     *
+     * @param validPairs validPairs
+     * @param 処理日付管理情報 処理日付管理情報
+     * @param 処理名 処理名
+     * @param 報告開始年月 報告開始年月
+     * @param 報告終了年月 報告終了年月
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs check月報未処理(ValidationMessageControlPairs validPairs,
+            List<ShoriDateKanri> 処理日付管理情報, RString 処理名, RString 報告開始年月, RString 報告終了年月) {
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(メッセージ内容).append(処理名).append(new RString("<br>"))
+                .append(報告開始年月).append(new RString(":")).append(報告終了年月);
+        if (処理日付管理情報 == null || 処理日付管理情報.isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(
+                    new IdocheckMessages(DbuErrorMessages.月報全て未処理, builder.toString())));
+        }
+        return validPairs;
+    }
+
+    /**
+     * 月報未処理のチックを実行する。
+     *
+     * @param validPairs validPairs
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs check月報未処理(ValidationMessageControlPairs validPairs) {
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(メッセージ内容).append(new RString("出力対象名（全ての年月）")).append(new RString("<br>"));
+        validPairs.add(new ValidationMessageControlPair(
+                new IdocheckMessages(DbuErrorMessages.月報全て未処理, builder.toString())));
         return validPairs;
     }
 
@@ -229,9 +265,7 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
         作成時刻の必須入力チェック(UrErrorMessages.必須項目_追加メッセージあり, "作成時刻"),
         作成日付の日付チェック(UrErrorMessages.入力値が不正_追加メッセージあり, "作成日付"),
         作成時刻の時刻チェック(UrErrorMessages.入力値が不正_追加メッセージあり, "作成時刻"),
-        出力対象チェック(DbuErrorMessages.出力対象未選択),
-        全て月報未処理チェック(DbuErrorMessages.月報全て未処理, "事業状況報告（月報）：出力対象名（全ての年月）"),
-        一部月報未処理チェック(DbuErrorMessages.月報全て未処理, "事業状況報告（月報）：出力対象名");
+        出力対象チェック(DbuErrorMessages.出力対象未選択);
 
         private final Message message;
 
@@ -244,4 +278,19 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
             return message;
         }
     }
+
+    private static class IdocheckMessages implements IValidationMessage {
+
+        private final Message message;
+
+        public IdocheckMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+    }
+
 }

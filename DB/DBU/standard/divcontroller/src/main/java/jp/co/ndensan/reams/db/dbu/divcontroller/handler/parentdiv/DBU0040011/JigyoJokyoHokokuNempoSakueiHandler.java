@@ -59,7 +59,7 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
     private static final RString 決定年月で集計 = new RString("2");
     private static final RString 審査年月 = new RString("shinsaYM4");
     private static final RString 決定年月 = new RString("keiteiYM4");
-    private static final RString 実行単位選択集計のみ = new RString("ITTI");
+    private static final RString 実行単位選択集計のみ = new RString("ITI");
     private static final RString 実行単位選択集計後に印刷 = new RString("NI");
     private static final RString 実行単位選択過去の集計 = new RString("SAN");
     private static final RString 旧市町村分 = new RString("kyuShichoson");
@@ -568,10 +568,10 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
         if (DonyuKeitaiCode.事務広域.getCode().equals(div.getHiddenDonyuKeitaiCode())) {
             parameter.set構成市町村区分(new RString("1"));
         }
-        if (RString.isNullOrEmpty(div.getHiddenKouiki()) && RString.isNullOrEmpty(div.getHiddenGappei())) {
-            if (市町村情報 != null && 市町村情報.get市町村コード() != null && !市町村情報.get市町村コード().isEmpty()) {
-                市町村コード = 市町村情報.get市町村コード().value();
-            }
+        if (RString.isNullOrEmpty(div.getHiddenKouiki()) && RString.isNullOrEmpty(div.getHiddenGappei())
+                && 市町村情報 != null && 市町村情報.get市町村コード() != null
+                && !市町村情報.get市町村コード().isEmpty()) {
+            市町村コード = 市町村情報.get市町村コード().value();
         }
         parameter.set市町村コード(市町村コード);
         if (!RString.isNullOrEmpty(div.getHiddenKouiki())) {
@@ -669,7 +669,7 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
 
     private List<KeyValueDataSource> get報告年月(RString 報告終了年月) {
         List<KeyValueDataSource> keyValue = new ArrayList<>();
-        for (int i = 0; i < 年度報告月; i++) {
+        for (int i = 1; i < 年度報告月; i++) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
             dataSource.setKey(new RString(i).padZeroToLeft(INT_NI));
             dataSource.setValue(new RString(i).padZeroToLeft(INT_NI));
@@ -954,7 +954,6 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
         if (一般状況1214償還分審査処理日付管理情報 != null && 一般状況1214償還分決定処理日付管理情報 != null) {
             if (審査年月で集計.equals(状況集計方法)) {
                 div.getTxtShukeiNendo5().setValue(new FlexibleDate(一般状況1214償還分審査処理日付管理情報.get年度().toDateString()));
-
                 div.getTxtShukeiFromYM5().setValue(一般状況1214償還分審査処理日付管理情報.get対象開始年月日());
                 div.setHiddenShukeiFromYM5(new RString(一般状況1214償還分審査処理日付管理情報.get対象開始年月日().toString()));
                 div.getTxtShukeiToYM5().setValue(一般状況1214償還分審査処理日付管理情報.get対象終了年月日());
@@ -964,7 +963,6 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
                 div.getRadlblShukeiType4().setSelectedKey(審査年月);
             } else if (決定年月で集計.equals(状況集計方法)) {
                 div.getTxtShukeiNendo5().setValue(new FlexibleDate(一般状況1214償還分決定処理日付管理情報.get年度().toDateString()));
-
                 div.getTxtShukeiFromYM5().setValue(一般状況1214償還分決定処理日付管理情報.get対象開始年月日());
                 div.setHiddenShukeiFromYM5(new RString(一般状況1214償還分決定処理日付管理情報.get対象開始年月日().toString()));
                 div.getTxtShukeiToYM5().setValue(一般状況1214償還分決定処理日付管理情報.get対象終了年月日());
@@ -975,7 +973,6 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             }
         } else if (一般状況1214償還分審査処理日付管理情報 != null && 一般状況1214償還分決定処理日付管理情報 == null) {
             div.getTxtShukeiNendo5().setValue(new FlexibleDate(一般状況1214償還分審査処理日付管理情報.get年度().toDateString()));
-
             div.getTxtShukeiFromYM5().setValue(一般状況1214償還分審査処理日付管理情報.get対象開始年月日());
             div.setHiddenShukeiFromYM5(RString.EMPTY);
             div.getTxtShukeiToYM5().setValue(一般状況1214償還分審査処理日付管理情報.get対象終了年月日());
@@ -985,7 +982,6 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             div.getRadlblShukeiType4().setSelectedKey(審査年月);
         } else if (一般状況1214償還分審査処理日付管理情報 == null && 一般状況1214償還分決定処理日付管理情報 != null) {
             div.getTxtShukeiNendo5().setValue(new FlexibleDate(一般状況1214償還分決定処理日付管理情報.get年度().toDateString()));
-
             div.getTxtShukeiFromYM5().setValue(一般状況1214償還分決定処理日付管理情報.get対象開始年月日());
             div.setHiddenShukeiFromYM5(RString.EMPTY);
             div.getTxtShukeiToYM5().setValue(一般状況1214償還分決定処理日付管理情報.get対象終了年月日());
@@ -996,7 +992,6 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
         if (給付決定償還分審査処理日付管理情報 != null && 給付決定償還分決定処理日付管理情報 != null) {
             if (審査年月で集計.equals(給付集計方法)) {
                 div.getTxtShukeiNendo6().setValue(new FlexibleDate(給付決定償還分審査処理日付管理情報.get年度().toDateString()));
-
                 div.getTxtShukeiFromYM6().setValue(給付決定償還分審査処理日付管理情報.get対象開始年月日());
                 div.setHiddenShukeiFromYM6(new RString(給付決定償還分審査処理日付管理情報.get対象開始年月日().toString()));
                 div.getTxtShukeiToYM6().setValue(給付決定償還分審査処理日付管理情報.get対象終了年月日());
@@ -1006,7 +1001,6 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
                 div.getRadlblShukeiType5().setSelectedKey(審査年月);
             } else if (決定年月で集計.equals(給付集計方法)) {
                 div.getTxtShukeiNendo6().setValue(new FlexibleDate(給付決定償還分決定処理日付管理情報.get年度().toDateString()));
-
                 div.getTxtShukeiFromYM6().setValue(給付決定償還分決定処理日付管理情報.get対象開始年月日());
                 div.setHiddenShukeiFromYM6(new RString(給付決定償還分決定処理日付管理情報.get対象開始年月日().toString()));
                 div.getTxtShukeiToYM6().setValue(給付決定償還分決定処理日付管理情報.get対象終了年月日());
@@ -1017,7 +1011,6 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             }
         } else if (給付決定償還分審査処理日付管理情報 != null && 給付決定償還分決定処理日付管理情報 == null) {
             div.getTxtShukeiNendo6().setValue(new FlexibleDate(給付決定償還分審査処理日付管理情報.get年度().toDateString()));
-
             div.getTxtShukeiFromYM6().setValue(給付決定償還分審査処理日付管理情報.get対象開始年月日());
             div.setHiddenShukeiFromYM6(RString.EMPTY);
             div.getTxtShukeiToYM6().setValue(給付決定償還分審査処理日付管理情報.get対象終了年月日());
@@ -1027,7 +1020,6 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             div.getRadlblShukeiType5().setSelectedKey(審査年月);
         } else if (給付決定償還分審査処理日付管理情報 == null && 給付決定償還分決定処理日付管理情報 != null) {
             div.getTxtShukeiNendo6().setValue(new FlexibleDate(給付決定償還分決定処理日付管理情報.get年度().toDateString()));
-
             div.getTxtShukeiFromYM6().setValue(給付決定償還分決定処理日付管理情報.get対象開始年月日());
             div.setHiddenShukeiFromYM6(RString.EMPTY);
             div.getTxtShukeiToYM6().setValue(給付決定償還分決定処理日付管理情報.get対象終了年月日());
