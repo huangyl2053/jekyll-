@@ -45,7 +45,6 @@ public class HanyoListParamKokurenJyukyujyaJyoho {
      */
     public ResponseData<HanyoListParamKokurenJyukyujyaJyohoDiv> onLoad(HanyoListParamKokurenJyukyujyaJyohoDiv div) {
         RString モード = ResponseHolder.getState();
-        モード = モード3;
         ViewStateHolder.put(ViewStateKeys.モード, モード);
         List<KaigoDonyuKeitai> list = KaigoDonyuKeitaiManager.createInstance().get介護導入形態By業務分類(GyomuBunrui.介護事務);
         if (list.get(0).get導入形態コード().is単一()) {
