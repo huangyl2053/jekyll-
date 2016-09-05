@@ -57,9 +57,9 @@ public class JigyoHokokuGeppoHokenkyufuKogaku {
         eucEntity.set集計単位(entity.getSyukeTani());
         eucEntity.set縦番号(entity.getTateNo());
         eucEntity.set横番号(entity.getYokoNo());
-        eucEntity.set被保険者番号(entity.getHihokenshaNo());
+        eucEntity.set被保険者番号(entity.getHihokenshaNo().value());
         eucEntity.setサービス提供年月(entity.getServiceTeikyoYM());
-        eucEntity.set証記載保険者番号(entity.getShoKisaiHokenshaNo());
+        eucEntity.set証記載保険者番号(entity.getShoKisaiHokenshaNo().value());
         eucEntity.set履歴番号(entity.getRirekiNo());
         eucEntity.set支給区分コード(entity.getShikyuKubunCode());
         eucEntity.set支給金額(entity.getShikyuKingaku());

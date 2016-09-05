@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppohokenkyu
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import lombok.Getter;
 
 /**
@@ -38,7 +39,9 @@ public class JigyoHokokuGeppoHokenkyufuKogakuProcessParamter implements IBatchPr
     private final List<RString> 旧市町村コードリスト;
     private final RString 過去集計分旧市町村区分;
     private final RString バッチID;
+    private final RString csvFilePath;
     private List<RString> 過去集計分市町村コードリスト;
+    private final FileSpoolManager manager;
     private static final RString 区分 = new RString("1");
     private static final int INDEX = 8;
     private static final int 連番_4 = 4;
@@ -60,11 +63,13 @@ public class JigyoHokokuGeppoHokenkyufuKogakuProcessParamter implements IBatchPr
      * @param 過去集計分市町村コードリスト 過去集計分市町村コードリスト
      * @param 過去集計分旧市町村区分 過去集計分旧市町村区分
      * @param バッチID バッチID
+     * @param csvFilePath csvFilePath
+     * @param manager manager
      */
     public JigyoHokokuGeppoHokenkyufuKogakuProcessParamter(RString プリントコントロール区分, RString 集計年月, RString 報告年月,
             RString 年度, RString 作成日時, RString 処理日時, RString 市町村コード, RString 構成市町村区分, RString 旧市町村区分,
             List<RString> 構成市町村コードリスト, List<RString> 旧市町村コードリスト, List<RString> 過去集計分市町村コードリスト,
-            RString 過去集計分旧市町村区分, RString バッチID) {
+            RString 過去集計分旧市町村区分, RString バッチID, RString csvFilePath, FileSpoolManager manager) {
         this.プリントコントロール区分 = プリントコントロール区分;
         this.集計年月 = 集計年月;
         this.報告年月 = 報告年月;
@@ -79,6 +84,8 @@ public class JigyoHokokuGeppoHokenkyufuKogakuProcessParamter implements IBatchPr
         this.過去集計分市町村コードリスト = 過去集計分市町村コードリスト;
         this.過去集計分旧市町村区分 = 過去集計分旧市町村区分;
         this.バッチID = バッチID;
+        this.csvFilePath = csvFilePath;
+        this.manager = manager;
     }
 
     /**
