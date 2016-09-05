@@ -576,6 +576,9 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      * @return 普徴期別金額
      */
     public Decimal get普徴期別金額(int 期) {
+        if (this.get期別金額(期, ChoshuHohoKibetsu.普通徴収.getコード()) == null) {
+            return Decimal.ZERO;
+        }
         return this.get期別金額(期, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
@@ -597,6 +600,19 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     public Long get特別徴収収納ID(int 期) {
         return get収納ID(期, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 特徴期別金額を返します。
+     *
+     * @param 期 期
+     * @return 特徴期別金額
+     */
+    public Decimal get特徴期別金額(int 期) {
+        if (this.get期別金額(期, ChoshuHohoKibetsu.特別徴収.getコード()) == null) {
+            return Decimal.ZERO;
+        }
+        return this.get期別金額(期, ChoshuHohoKibetsu.特別徴収.getコード());
     }
 
     /**
