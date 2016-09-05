@@ -545,8 +545,11 @@ public enum ReportIdDBC {
     /**
      * 帳票設計_DBC200039_高額合算支給不支給決定通知書情報取込一覧表 ＩＤです。
      */
-    DBC200039(new ReportId("DBC200039_GassanShikyuFushikyuKetteiTsuchishoTorikomiIchiran"), new RString("高額合算支給不支給決定通知書情報取込一覧表 "));
-
+    DBC200039(new ReportId("DBC200039_GassanShikyuFushikyuKetteiTsuchishoTorikomiIchiran"), new RString("高額合算支給不支給決定通知書情報取込一覧表 ")),
+    /**
+     * 帳票設計_DBC200035_高額合算自己負担額証明書発行一覧表 ＩＤです。
+     */
+    DBC200035(new ReportId("DBC200035_GassanJikofutangakushomeishoHakkoIchiran"), new RString("高額合算自己負担額証明書発行一覧表 "));
     private final ReportId reportId;
 
     private final RString reportName;
