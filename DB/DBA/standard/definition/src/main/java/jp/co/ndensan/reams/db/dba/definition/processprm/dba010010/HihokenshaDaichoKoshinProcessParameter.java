@@ -5,17 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.processprm.dba010010;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido.AtenaMybatisParameter;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 資格異動対象者情報取得_バッチ用のパラメータです。
+ * 資格異動対象者情報取得_プロセス用のパラメータです。
  *
  * @reamsid_L DBA-0330-010 xuyue
  */
@@ -26,17 +24,15 @@ public class HihokenshaDaichoKoshinProcessParameter implements IBatchProcessPara
 
     private FlexibleDate 開始日;
     private FlexibleDate 終了日;
+    private boolean is通常運用時;
 
     /**
      * 抽出条件の生成のMybatisパラメータを作成します。
      *
      * @param shikibetsuTaishoPSMSearchKey 宛名識別対象PSM検索キー
-     * @param shikibetsuCode 識別コード
      * @return 抽出条件の生成のMybatisパラメータ
      */
-    public AtenaMybatisParameter toAtenaMybatisParameter(IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey,
-            List<ShikibetsuCode> shikibetsuCode) {
-
-        return new AtenaMybatisParameter(shikibetsuTaishoPSMSearchKey, shikibetsuCode);
+    public AtenaMybatisParameter toAtenaMybatisParameter(IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey) {
+        return new AtenaMybatisParameter(shikibetsuTaishoPSMSearchKey);
     }
 }
