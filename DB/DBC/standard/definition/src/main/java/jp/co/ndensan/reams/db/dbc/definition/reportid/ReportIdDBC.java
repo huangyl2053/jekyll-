@@ -517,7 +517,7 @@ public enum ReportIdDBC {
     /**
      * 介護保険給付費通知書(２ページ目以降)帳票ＩＤです。
      */
-    DBC100041(new ReportId("DBC100041_KyufuhiTsuchisho"), new RString("介護保険給付費通知書（２ページ目以降）")),
+    DBC100041_２ページ目以降(new ReportId("DBC100041_KyufuhiTsuchisho"), new RString("介護保険給付費通知書（２ページ目以降）")),
     /**
      * 帳票設計_DBC100043_介護保険給付費通知書（福祉用具貸与品目）帳票ＩＤです。
      */
@@ -569,7 +569,11 @@ public enum ReportIdDBC {
     /**
      * 汎用リスト 国保連受給者情報帳票ＩＤです。
      */
-    DBC701004(new ReportId("DBC701004_HanyoListKokuhorenJukyusha"), new RString("汎用リスト 国保連受給者情報"));
+    DBC701004(new ReportId("DBC701004_HanyoListKokuhorenJukyusha"), new RString("汎用リスト 国保連受給者情報")),
+    /**
+     * 帳票設計_DBC100041_介護保険給付費通知書 ＩＤです。
+     */
+    DBC100041(new ReportId("DBC100041_KyufuhiTsuchisho"), new RString("介護保険給付費通知書"));
     private final ReportId reportId;
 
     private final RString reportName;
