@@ -67,6 +67,14 @@ public enum ReportIdDBC {
      */
     DBC100057(new ReportId("DBC100057_ServiceRiyohyoBeppyo"), new RString("介護保険サービス利用票（兼居宅サービス計画）・別表 ")),
     /**
+     * 高額サービス等支給（不支給）決定通知書（単）帳票ＩＤです。
+     */
+    DBC100107(new ReportId("DBC100107_KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashi"), new RString("高額サービス等支給（不支給）決定通知書（単）")),
+    /**
+     * 高額サービス等支給（不支給）決定通知書(支払予定日あり）（単）帳票ＩＤです。
+     */
+    DBC100108(new ReportId("DBC100108_KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAri"), new RString("高額サービス等支給（不支給）決定通知書(支払予定日あり）（単）")),
+    /**
      * 総合事業費過再審査定通知書情報
      */
     DBC200080(new ReportId("DBC200080_SogojigyohiSaishinsaKetteiTsuchishoTorikomiIchiran"), new RString("総合事業費過再審査定通知書情報")),
