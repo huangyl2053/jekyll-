@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBU-5580-030 zhangzhiming -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokugeppohokenkyufukogaku.IJigyoHokokuGeppoHokenkyufuKogakuMapper">
+    <insert id="insertKougakuData"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppohokenkyufukogaku.JigyoHokokuGeppoHokenkyufuKogakuMybatisParamter">
+        SELECT rgdb."DbFx7018KougakuDataInsert"(#{集計年月});
+    </insert>
+    
+    <select id="getJigyoHokokuDataCsv"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppohokenkyufukogaku.JigyoHokokuGeppoHokenkyufuKogakuMybatisParamter" 
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohokenkyufukogaku.JigyoHokokuDataCsvRelateEntity" resultOrdered="true" fetchSize="500">
+        SELECT * from rgdb."DbFt7015KougakuKonkyouCSV"(#{集計年月});
+    </select>
+    
+    <select id="getShoriKekkaKakuninListReport"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppohokenkyufukogaku.JigyoHokokuGeppoHokenkyufuKogakuMybatisParamter" 
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohokenkyufukogaku.ShoriKekkaKakuninListRelateEntity" resultOrdered="true" fetchSize="500">
+        SELECT * from rgdb."DbFt7017KougakuSyoriKakuninList"(
+            ARRAY<foreach  
+                    collection="旧市町村コードリスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>
+            );
+    </select>
+    
+    <select id="getJigyohokokuCompYoshiki271Report"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppohokenkyufukogaku.JigyoHokokuGeppoHokenkyufuKogakuMybatisParamter" 
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohokenkyufukogaku.JigyoJoukyouHoukokuDataRelateEntity" resultOrdered="true" fetchSize="500">
+        SELECT * from rgdb."DbFt7019JigyouHoukokuTokeiTyouhyou"(
+            ARRAY<foreach  
+                    collection="市町村コードリスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>,
+            #{集計年月},
+            ARRAY<foreach  
+                    collection="集計番号リスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>,
+            ARRAY<foreach  
+                    collection="表番号リスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>
+            );
+    </select>
+    
+    <select id="getJigyoHokokuDataToroku"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppohokenkyufukogaku.JigyoHokokuGeppoHokenkyufuKogakuMybatisParamter" 
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohokenkyufukogaku.JigyoJoukyouHoukokuDataRelateEntity" resultOrdered="true" fetchSize="500">
+        SELECT * from rgdb."DbFt7016KougakuJigyouHoukokuTokei"(
+            #{集計年月},
+            ARRAY<foreach  
+                    collection="集計番号リスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>,
+            ARRAY<foreach  
+                    collection="市町村コードリスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code}
+                 </foreach>);
+    </select>
+    
+    <update id="insertShoriDateKanri"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppohokenkyufukogaku.JigyoHokokuGeppoHokenkyufuKogakuMybatisParamter" >
+        SELECT rgdb."DbFx7014ShoriDateKanriUpdate"(
+            #{サブ業務コード},
+            ARRAY<foreach  
+                    collection="市町村コードリスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>,
+            #{処理名},
+            #{集計年月},
+            #{年度},
+            #{基準年月日},
+            #{基準日時}
+            );
+    </update>
+    
+    <delete id="deleteJigyoHokokuDataToroku"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppohokenkyufukogaku.JigyoHokokuGeppoHokenkyufuKogakuMybatisParamter" >
+        SELECT rgdb."DbFx7020JigyouHoukokuTokeiDelete"(
+            ARRAY<foreach  
+                    collection="市町村コードリスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>,
+                 #{集計年月},
+            ARRAY<foreach  
+                    collection="集計番号リスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>,
+            ARRAY<foreach  
+                    collection="表番号リスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>
+            );
+    </delete>
+    
+    <select id="selectAll" resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity" resultOrdered="true" fetchSize="500">
+    SELECT
+         <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.basic.IDbT7021JigyoHokokuTokeiDataMapper.allColumns_DbT7021JigyoHokokuTokeiData" />
+     FROM
+         rgdb."DbT7021JigyoHokokuTokeiData"
+     limit(1)
+    </select>
+</mapper>

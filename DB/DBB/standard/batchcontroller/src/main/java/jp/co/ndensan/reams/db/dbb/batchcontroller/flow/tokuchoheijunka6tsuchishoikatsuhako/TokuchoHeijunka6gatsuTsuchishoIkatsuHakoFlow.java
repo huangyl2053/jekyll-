@@ -6,24 +6,21 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchisho
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.HihokenshaKubunTo4gatsuKaishiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.HihokenshaKubunTo6gatsuKaishiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.KeizokuHihokenshaKubunUpdateProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.SystemTimeShutokuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoA4TypeProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoB5TypeProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoIdoshaTorokuProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012003.DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.FukaJohoShutokuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoIdoshaTorokuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6tsuchishoikatsuhako.ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -34,8 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter> {
 
-    private RDateTime バッチ起動時処理日時_年月日時分秒;
-    private RString 基準日時;
+    private static final String 基準日時とシステム日時の取得 = "getSystemDate";
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
     private static final String 仮算定額変更情報一時テーブル作成 = "fukaJohoShutoku";
     private static final String 仮算定額変更情報一時テーブル作成_一括発行 = "fukaJohoShutokuForIkatsuHako";
@@ -52,11 +48,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
     @Override
     protected void defineFlow() {
 
-        ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper mapper = getMapper(ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper.class);
-        基準日時 = mapper.get基準日時(new TokuchoHeijunka6gatsuMyBatisParameter(
-                false, getParameter().get調定年度(), null, null, ShoriName.特徴平準化計算_6月分.get名称(), null, null, null, null));
-        バッチ起動時処理日時_年月日時分秒 = RDate.getNowDateTime();
-
+        executeStep(基準日時とシステム日時の取得);
         if (getParameter().is一括発行フラグ()) {
             executeStep(計算後情報作成);
             executeStep(仮算定額変更情報一時テーブル作成_一括発行);
@@ -69,6 +61,18 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
         executeStep(被保険者区分6月開始);
         executeStep(通知書の発行);
         executeStep(通知書発行後異動者の登録);
+    }
+
+    /**
+     * システム日時の取得を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(基準日時とシステム日時の取得)
+    protected IBatchFlowCommand getSystemDate() {
+        return simpleBatch(SystemTimeShutokuProcess.class)
+                .arguments(createFukaJohoShutokuParameter())
+                .define();
     }
 
     /**
@@ -192,7 +196,9 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
 
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
         KeisangoJohoSakuseiBatchParamter parameter = new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度().toDateString(),
-                getParameter().get賦課年度().toDateString(), 基準日時, null, 帳票分類ID);
+                getParameter().get賦課年度().toDateString(),
+                getResult(RString.class, new RString(基準日時とシステム日時の取得), SystemTimeShutokuProcess.KIJUN_TIME),
+                null, 帳票分類ID);
         return parameter;
     }
 
@@ -207,7 +213,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
     private TsuchishoIdoshaTorokuProcessParameter createTsuchishoIdoshaTorokuProcessParameter() {
 
         TsuchishoIdoshaTorokuProcessParameter parameter = new TsuchishoIdoshaTorokuProcessParameter();
-        parameter.set帳票作成日時(バッチ起動時処理日時_年月日時分秒);
+        parameter.set帳票作成日時(getResult(RDateTime.class, new RString(基準日時とシステム日時の取得), SystemTimeShutokuProcess.SYSTEM_TIME));
 
         for (OutputChohyoIchiran order : getParameter().get出力帳票一覧List()) {
             if (帳票分類ID.equals(order.get帳票分類ID())) {
@@ -229,7 +235,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
         param.set賦課年度(getParameter().get賦課年度());
         param.set出力対象区分(Integer.valueOf(getParameter().get出力対象().toString()));
         param.set発行日(getParameter().get発行日());
-        param.set帳票作成日時(バッチ起動時処理日時_年月日時分秒);
+        param.set帳票作成日時(getResult(RDateTime.class, new RString(基準日時とシステム日時の取得), SystemTimeShutokuProcess.SYSTEM_TIME));
         param.set出力順ID(出力帳票entity.get出力順ID());
         param.set帳票ID(出力帳票entity.get帳票ID());
         param.set一括発行フラグ(getParameter().is一括発行フラグ());

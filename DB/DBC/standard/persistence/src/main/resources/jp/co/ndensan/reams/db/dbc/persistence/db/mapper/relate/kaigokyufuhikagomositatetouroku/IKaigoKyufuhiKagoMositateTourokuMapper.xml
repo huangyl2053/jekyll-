@@ -3,9 +3,25 @@
 <!-- @reamsid_L DBC-2220-030 dongyabin -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kaigokyufuhikagomositatetouroku.IKaigoKyufuhiKagoMositateTourokuMapper">
     
+    <resultMap id="resultMap_KaigoKyufuhiKagoMositateTourokuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigokyufuhikagomositatetouroku.KaigoKyufuhiKagoMositateTourokuEntity" autoMapping="true">
+        <id property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <id property="事業所番号" column="事業所番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="様式番号" column="様式番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="サービス提供年月" column="サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="審査年月" column="審査年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="給付実績作成区分コード" column="給付実績作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="給付区分" column="給付区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="行番号" column="行番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="事業者名" column="事業者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="dbT3059" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3059KagoMoshitateMapper.ResultMap_DbT3059KagoMoshitateEntity"/>
+    </resultMap>
+    
     <select resultOrdered="true" id = "get給付実績一覧" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kaigokyufuhikagomositatetouroku.KaigoKyufuhiParamter"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigokyufuhikagomositatetouroku.KaigoKyufuhiKagoMositateTourokuEntity"
+            resultMap="resultMap_KaigoKyufuhiKagoMositateTourokuEntity"
             fetchSize="500">
         WITH master AS ( 
         SELECT
@@ -47,13 +63,13 @@
                   AND 基本."serviceTeikyoYM" <![CDATA[<]]>   識別番号."tekiyoShuryoYM"
                   AND 識別番号."kagoMoshitateYoshikiNo" IS NOT NULL
                   <if test="meunID_91001">
-                      AND 識別番号.給付分類区分 IN (#{介護給付}, #{予防給付}, #{介護給付と予防給付})
+                      AND 識別番号."kyufuBunruiKubun" IN (#{介護給付}, #{予防給付}, #{介護給付と予防給付})
                   </if>
                   <if test="meunID_91002">
-                      AND 識別番号.給付分類区分 = #{総合事業_経過措置}
+                      AND 識別番号."kyufuBunruiKubun" = #{総合事業_経過措置}
                   </if>
 		  <if test="meunID_91003">
-                      AND 識別番号.給付分類区分 = #{総合事業}
+                      AND 識別番号."kyufuBunruiKubun" = #{総合事業}
                   </if>
               ) AS 給付実績情報1 
             WHERE

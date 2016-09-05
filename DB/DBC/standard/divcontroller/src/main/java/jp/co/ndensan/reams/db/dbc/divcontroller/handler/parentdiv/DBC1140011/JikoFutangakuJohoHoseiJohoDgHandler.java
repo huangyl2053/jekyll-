@@ -585,36 +585,36 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
                             .build();
                     businessList.add(item);
                     break;
-                case "101":
-                    item = item.createBuilderForEdit()
-                            .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_1月分())
-                            .set補正済_70_74自己負担額_内数(
-                                    自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_1月分())
-                            .set補正済_70未満高額支給額(
-                                    自己負担額保持.get変更後_補正後_高額介護_予防_サービス費_1月分())
-                            .build();
-                    businessList.add(item);
-                    break;
-                case "102":
-                    item = item.createBuilderForEdit()
-                            .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_2月分())
-                            .set補正済_70_74自己負担額_内数(
-                                    自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_2月分())
-                            .set補正済_70未満高額支給額(
-                                    自己負担額保持.get変更後_補正後_高額介護_予防_サービス費_2月分())
-                            .build();
-                    businessList.add(item);
-                    break;
-                case "103":
-                    item = item.createBuilderForEdit()
-                            .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_3月分())
-                            .set補正済_70_74自己負担額_内数(
-                                    自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_3月分())
-                            .set補正済_70未満高額支給額(
-                                    自己負担額保持.get変更後_補正後_高額介護_予防_サービス費_3月分())
-                            .build();
-                    businessList.add(item);
-                    break;
+//                case "101":
+//                    item = item.createBuilderForEdit()
+//                            .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_1月分())
+//                            .set補正済_70_74自己負担額_内数(
+//                                    自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_1月分())
+//                            .set補正済_70未満高額支給額(
+//                                    自己負担額保持.get変更後_補正後_高額介護_予防_サービス費_1月分())
+//                            .build();
+//                    businessList.add(item);
+//                    break;
+//                case "102":
+//                    item = item.createBuilderForEdit()
+//                            .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_2月分())
+//                            .set補正済_70_74自己負担額_内数(
+//                                    自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_2月分())
+//                            .set補正済_70未満高額支給額(
+//                                    自己負担額保持.get変更後_補正後_高額介護_予防_サービス費_2月分())
+//                            .build();
+//                    businessList.add(item);
+//                    break;
+//                case "103":
+//                    item = item.createBuilderForEdit()
+//                            .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_3月分())
+//                            .set補正済_70_74自己負担額_内数(
+//                                    自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_3月分())
+//                            .set補正済_70未満高額支給額(
+//                                    自己負担額保持.get変更後_補正後_高額介護_予防_サービス費_3月分())
+//                            .build();
+//                    businessList.add(item);
+//                    break;
                 case "104":
                     item = item.createBuilderForEdit()
                             .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_4月分())

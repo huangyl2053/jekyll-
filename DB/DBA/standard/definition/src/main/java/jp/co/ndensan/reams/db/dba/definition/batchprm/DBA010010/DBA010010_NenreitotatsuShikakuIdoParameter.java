@@ -60,15 +60,16 @@ public class DBA010010_NenreitotatsuShikakuIdoParameter extends BatchParameterBa
     }
 
     /**
-     * 認定調査督促対象者一覧表作成のパラメータを作成します。
+     * 資格異動対象者情報取得プロセスのパラメータを作成します。
      *
-     * @return 認定調査督促対象者一覧表作成のパラメータ
+     * @return 資格異動対象者情報取得プロセスのパラメータ
      */
     public HihokenshaDaichoKoshinProcessParameter toShikakuIdoTaishoshaShutokuProcessParameter() {
 
         HihokenshaDaichoKoshinProcessParameter parameter = new HihokenshaDaichoKoshinProcessParameter();
         parameter.set開始日(kaishiYMD);
         parameter.set終了日(shuryoYMD);
+        parameter.set通常運用時(false);
         return parameter;
     }
 }

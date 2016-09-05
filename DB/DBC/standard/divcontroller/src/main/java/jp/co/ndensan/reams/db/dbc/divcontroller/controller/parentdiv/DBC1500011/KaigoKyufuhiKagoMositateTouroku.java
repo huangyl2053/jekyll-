@@ -17,20 +17,25 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1500011.Kai
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1500011.KaigoKyufuhiKagoMositateTourokuValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KagoMoshitateManager;
 import jp.co.ndensan.reams.db.dbc.service.core.kaigokyufuhikagomositatetouroku.KaigoKyufuhiKagoMositateTourokuFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -60,7 +65,7 @@ public class KaigoKyufuhiKagoMositateTouroku {
         RString menuID = controlData.getMenuID();
         RString loginUserId = controlData.getLoginInfo().getUserId();
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務, loginUserId);
-        if (DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().value())) {
+        if (is単一()) {
             div.getHokenshalist().setVisible(true);
             div.getHokenshalist().loadHokenshaList(GyomuBunrui.介護事務);
         } else {
@@ -87,12 +92,19 @@ public class KaigoKyufuhiKagoMositateTouroku {
     public ResponseData<KaigoKyufuhiKagoMositateTourokuDiv> onClick_BtnSearch(KaigoKyufuhiKagoMositateTourokuDiv div) {
         if (RString.isNullOrEmpty(div.getTxtJigyoshaNo().getValue())
                 || RString.isNullOrEmpty(div.getTxtHihoNo().getValue())) {
-            return ResponseData.of(div).addValidationMessages(getValidation().check必須項目を入力()).respond();
+            return ResponseData.of(div).addValidationMessages(getValidation(div).check必須項目を入力(new RString("被保番号、支援事業者番号"))).respond();
         }
-        // TODO 提供年月開始、提供年月終了の比較
+        if (div.getTxtTeikyoYMRange().getFromValue() == null
+                || div.getTxtTeikyoYMRange().getToValue() == null) {
+            return ResponseData.of(div).addValidationMessages(getValidation(div).check必須項目を入力(new RString("提供年月開始、提供年月終了"))).respond();
+        }
+        if (div.getTxtTeikyoYMRange().getToValue().isBefore(div.getTxtTeikyoYMRange().getFromValue())) {
+            return ResponseData.of(div).addValidationMessages(getValidation(div).check終了日が開始日以前()).respond();
+        }
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString loginUserId = controlData.getLoginInfo().getUserId();
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務, loginUserId);
+        div.setHdnKensaku(再検索フラグ);
         get給付実績一覧(div, controlData, 市町村セキュリティ情報);
         return ResponseData.of(div).setState(DBC1500011StateName.search);
     }
@@ -133,13 +145,13 @@ public class KaigoKyufuhiKagoMositateTouroku {
      */
     public ResponseData<KaigoKyufuhiKagoMositateTourokuDiv> onClick_BtnSave(KaigoKyufuhiKagoMositateTourokuDiv div) {
         if (is申立日の年月と提供年月の関連チェック(div)) {
-            return ResponseData.of(div).addValidationMessages(getValidation().check申立日エラー()).respond();
+            return ResponseData.of(div).addValidationMessages(getValidation(div).check申立日エラー()).respond();
         }
         if (is同月審査用と申立理由の関連チェック(div)) {
-            return ResponseData.of(div).addValidationMessages(getValidation().check同月審査申立理由整合性エラー()).respond();
+            return ResponseData.of(div).addValidationMessages(getValidation(div).check同月審査申立理由整合性エラー()).respond();
         }
         if (is送付済みチェック(div)) {
-            return ResponseData.of(div).addValidationMessages(getValidation().check送付済みチェック()).respond();
+            return ResponseData.of(div).addValidationMessages(getValidation(div).check送付済みチェック()).respond();
         }
         int index = div.getKyufuJissekiGaitoshaListPanel().getDgHihokenshaSearchGaitosha().getClickedRowId();
         KaigoKyufuhiKagoMositateTourokuResult 給付実績情報 = ViewStateHolder
@@ -149,7 +161,7 @@ public class KaigoKyufuhiKagoMositateTouroku {
                 new FlexibleYearMonth(給付実績情報.getサービス提供年月()));
         KagoMoshitate data = getHandler(div).setDB出力データ(給付実績情報, 最大履歴番号);
         KagoMoshitateManager service = new KagoMoshitateManager();
-        service.save過誤申立(data);
+        service.saveOrdelete過誤申立(data);
         return ResponseData.of(div).setState(DBC1500011StateName.kanryoumessage);
     }
 
@@ -182,11 +194,36 @@ public class KaigoKyufuhiKagoMositateTouroku {
         int index = div.getKyufuJissekiGaitoshaListPanel().getDgHihokenshaSearchGaitosha().getClickedRowId();
         List<KaigoKyufuhiKagoMositateTourokuResult> resultList = ViewStateHolder
                 .get(ViewStateKeys.給付実績一覧, KagoMoshitateCollect.class).get給付実績情報List();
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+        KaigoKyufuhiKagoMositateTourokuResult 給付実績情報 = resultList.get(index);
+        ShikibetsuCode 識別コード = 給付実績情報.get識別コード();
         div.getCommonKaigpAtenainfoChildDiv1().initialize(識別コード);
         div.getCommonKaigoshikakuKihonChildDiv2().initialize(識別コード);
-        KaigoKyufuhiKagoMositateTourokuResult 給付実績情報 = resultList.get(index);
         getHandler(div).set給付実績明細(給付実績情報);
+        set証記載保険者名(div);
+    }
+
+    private void set証記載保険者名(KaigoKyufuhiKagoMositateTourokuDiv div) {
+        RString 証記載保険者名;
+        RString 証記載保険者番号 = div.getTxtMeisaiShokisaiHokenshaNo().getValue();
+        if (is単一()) {
+            if (DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).equals(証記載保険者番号)) {
+                証記載保険者名 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+            } else {
+                証記載保険者名 = getService().get旧市町村名称(証記載保険者番号);
+            }
+        } else {
+            証記載保険者名 = getService().get市町村名称(証記載保険者番号);
+        }
+        div.getTxtMeisaiShokisaiHokenshaName().setValue(証記載保険者名);
+    }
+
+    private boolean is単一() {
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        RString loginUserId = controlData.getLoginInfo().getUserId();
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務, loginUserId);
+        return DonyuKeitaiCode.事務単一.getCode().equals(市町村セキュリティ情報.get導入形態コード().value())
+                || DonyuKeitaiCode.認定単一.getCode().equals(市町村セキュリティ情報.get導入形態コード().value())
+                || DonyuKeitaiCode.事務構成市町村.getCode().equals(市町村セキュリティ情報.get導入形態コード().value());
     }
 
     private void get給付実績一覧(KaigoKyufuhiKagoMositateTourokuDiv div, IUrControlData controlData, ShichosonSecurityJoho 市町村セキュリティ情報) {
@@ -201,8 +238,10 @@ public class KaigoKyufuhiKagoMositateTouroku {
         if (再検索フラグ.equals(div.getHdnKensaku())) {
             div.getTxtTeikyoYMRange().getFromValue();
             div.getHokenshalist().getSelectedItem().get市町村コード();
-            RString 提供年月開始 = div.getTxtTeikyoYMRange().getFromValue().seireki().toDateString().substring(0, 提供年月);
-            RString 提供年月終了 = div.getTxtTeikyoYMRange().getToValue().seireki().toDateString().substring(0, 提供年月);
+            RString 提供年月開始 = div.getTxtTeikyoYMRange().getFromValue().seireki().separator(Separator.NONE).fillType(FillType.NONE)
+                    .toDateString().substring(0, 提供年月);
+            RString 提供年月終了 = div.getTxtTeikyoYMRange().getToValue().seireki().separator(Separator.NONE).fillType(FillType.NONE)
+                    .toDateString().substring(0, 提供年月);
             KaigoKyufuhiParamter param = KaigoKyufuhiParamter.createParem(div.getTxtHihoNo().getValue(),
                     div.getTxtJigyoshaNo().getValue(),
                     提供年月開始,
@@ -223,7 +262,7 @@ public class KaigoKyufuhiKagoMositateTouroku {
         return new KaigoKyufuhiKagoMositateTourokuHandler(div);
     }
 
-    private KaigoKyufuhiKagoMositateTourokuValidationHandler getValidation() {
-        return new KaigoKyufuhiKagoMositateTourokuValidationHandler();
+    private KaigoKyufuhiKagoMositateTourokuValidationHandler getValidation(KaigoKyufuhiKagoMositateTourokuDiv div) {
+        return new KaigoKyufuhiKagoMositateTourokuValidationHandler(div);
     }
 }
