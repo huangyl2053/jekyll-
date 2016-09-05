@@ -6,7 +6,10 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120120;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import jp.co.ndensan.reams.db.dbc.business.report.gassanshikyugakutorikomiichiran.GassanShikyugakuTorikomiIchiranReport;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakugassan.KogakuGassanShikyugakuKeisanKekkaIn;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakugassan.KogakuGassanShikyugakuKeisanKekkaInOutputOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakugassan.KogakuGassanTorikomiIchiranPageBreak;
@@ -19,7 +22,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120120.DbWT3861KogakuGassa
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120120.KogakuGassanShikyugakuKeisanKekkaInCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120120.KogakuGassanShikyugakuKeisanKekkaInfoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120120.TempDbWT0001HihokenshaEntity;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.jukyushakoshinkekkaichiran.JukyushaKoshinKekkaIchiranSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.gassanshikyugakutorikomiichiran.GassanShikyugakuTorikomiIchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -31,8 +34,11 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsury
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -47,7 +53,12 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -71,9 +82,14 @@ public class PntKogakuGassanTorikomiIchiranProcess extends BatchKeyBreakBase<Kog
     private static final RString 定数_作成 = new RString("作成");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200037");
     private static final RString 出力ファイル名 = new RString("DBC200037_GassanShikyugakuKeisankekkaRanrakuhyoTorikomiIchiran.csv");
+    private final Code code = new Code("0003");
+    private final RString 被保険者番号 = new RString("被保険者番号");
     private KogakuGassanShikyugakuKeisanKekkaInParameter processPrm;
     private FileSpoolManager manager;
     private KogakuGassanShikyugakuKeisanKekkaInfoEntity entityTemp;
+    private Set<ShikibetsuCode> 識別コードset;
+    private List<PersonalData> personalDataList;
+    private RString path;
 
     private IOutputOrder 出力順情報;
     private List<RString> 改頁リスト;
@@ -83,30 +99,28 @@ public class PntKogakuGassanTorikomiIchiranProcess extends BatchKeyBreakBase<Kog
     private RString 保険者番号;
     private RString 保険者名;
 
-//    @BatchWriter
-//    private BatchReportWriter<JukyushaKoshinKekkaIchiranSource> batchReportWriter;
-//    private ReportSourceWriter<JukyushaKoshinKekkaIchiranSource> reportSourceWriter;
-    @BatchWriter
+    private BatchReportWriter<GassanShikyugakuTorikomiIchiranSource> reportWriter;
+    private ReportSourceWriter<GassanShikyugakuTorikomiIchiranSource> reportSourceWriter;
     private CsvWriter csvWriter;
 
     @Override
     protected void initialize() {
 
         get出力順();
-
+        識別コードset = new HashSet();
+        personalDataList = new ArrayList<>();
         保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         保険者名 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
     }
 
     @Override
     protected void createWriter() {
-        //TODO JukyushaKoshinKekkaIchiranSource修正
-        PageBreaker<JukyushaKoshinKekkaIchiranSource> breaker = new KogakuGassanTorikomiIchiranPageBreak(pageBreakKeys);
-        //batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200038.getReportId().value()).addBreak(breaker).create();
-        //reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        PageBreaker<GassanShikyugakuTorikomiIchiranSource> breaker = new KogakuGassanTorikomiIchiranPageBreak(pageBreakKeys);
+        reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200037.getReportId().value()).addBreak(breaker).create();
+        reportSourceWriter = new ReportSourceWriter<>(reportWriter);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
-        RString path = Path.combinePath(spoolWorkPath, 出力ファイル名);
+        path = Path.combinePath(spoolWorkPath, 出力ファイル名);
         csvWriter = new CsvWriter.InstanceBuilder(path)
                 .setDelimiter(コンマ)
                 .setEnclosure(ダブル引用符)
@@ -140,7 +154,13 @@ public class PntKogakuGassanTorikomiIchiranProcess extends BatchKeyBreakBase<Kog
 
         publish一覧表(entityTemp, true);
 
-        //TODO QA1367 アクセスログ出力仕様確認
+        if (!personalDataList.isEmpty()) {
+            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+            manager.spool(path, accessLogUUID);
+        }
+        csvWriter.close();
+        reportWriter.close();
+
     }
 
     private void get出力順() {
@@ -182,7 +202,8 @@ public class PntKogakuGassanTorikomiIchiranProcess extends BatchKeyBreakBase<Kog
         確認リスト帳票用データ.set計算結果登録件数(processPrm.get計算結果登録件数());
         確認リスト帳票用データ.set計算結果明細登録件数(processPrm.get計算結果明細登録件数());
         確認リスト帳票用データ.set最終頁flg(最終頁flg);
-        //report未実装
+        GassanShikyugakuTorikomiIchiranReport report = new GassanShikyugakuTorikomiIchiranReport(確認リスト帳票用データ);
+        report.writeBy(reportSourceWriter);
 
         KogakuGassanShikyugakuKeisanKekkaInCsvEntity csvEntity = get一覧表CSV項目(entity);
         csvWriter.writeLine(csvEntity);
@@ -237,7 +258,22 @@ public class PntKogakuGassanTorikomiIchiranProcess extends BatchKeyBreakBase<Kog
         csvEntity.set按分後支給額(get金額(計算結果entity.getHonninShikyugaku()));
         csvEntity.set按分後支給額_うち70歳以上分(get金額(計算結果entity.getOver70_honninShikyugaku()));
         csvEntity.set備考(getRString(計算結果entity.getBiko()));
+
+        if (被保険者entity.getShikibetsuCode() != null && !被保険者entity.getShikibetsuCode().isEmpty()) {
+            if (!this.識別コードset.contains(被保険者entity.getShikibetsuCode())) {
+                this.識別コードset.add(被保険者entity.getShikibetsuCode());
+                PersonalData personalData = getPersonalData(被保険者entity);
+                this.personalDataList.add(personalData);
+            }
+        }
+
         return csvEntity;
+    }
+
+    private PersonalData getPersonalData(TempDbWT0001HihokenshaEntity entity) {
+        ExpandedInformation expandedInformations = new ExpandedInformation(code, 被保険者番号,
+                getColumnValue(entity.getHihokenshaNo()));
+        return PersonalData.of(entity.getShikibetsuCode(), expandedInformations);
     }
 
     private static RString get金額(Decimal 金額) {
