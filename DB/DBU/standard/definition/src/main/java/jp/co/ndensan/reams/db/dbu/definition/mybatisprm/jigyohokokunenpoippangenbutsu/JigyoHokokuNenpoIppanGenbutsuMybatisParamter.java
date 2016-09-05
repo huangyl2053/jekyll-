@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.PrintControlKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNo;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.Syorimei;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -219,7 +220,7 @@ public final class JigyoHokokuNenpoIppanGenbutsuMybatisParamter implements IMyBa
         }
         return new JigyoHokokuNenpoIppanGenbutsuMybatisParamter(
                 市町村コードリスト, RString.EMPTY, null, null, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, new RString("DBU"), 処理名,
+                RString.EMPTY, SubGyomuCode.DBU介護統計報告.value(), 処理名,
                 new RString("0099"), 年度, 基準年月日, 基準日時);
     }
 

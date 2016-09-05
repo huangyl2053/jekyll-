@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.PrintControlKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNo;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.Syorimei;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -202,7 +203,7 @@ public final class JigyoHokokuNenpoHokenkyufuKogakuMybatisParamter implements IM
         }
         return new JigyoHokokuNenpoHokenkyufuKogakuMybatisParamter(
                 市町村コードリスト, RString.EMPTY, null, null, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, new RString("DBU"), Syorimei.年報報告保険給付決定高額分.get名称(),
+                RString.EMPTY, SubGyomuCode.DBU介護統計報告.value(), Syorimei.年報報告保険給付決定高額分.get名称(),
                 new RString("0099"), 年度, 基準年月日, 基準日時);
     }
 
