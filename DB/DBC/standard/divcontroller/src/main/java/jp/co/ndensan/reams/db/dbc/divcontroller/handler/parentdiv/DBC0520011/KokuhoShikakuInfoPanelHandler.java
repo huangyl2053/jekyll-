@@ -79,29 +79,24 @@ public class KokuhoShikakuInfoPanelHandler {
             if (国保資格詳細情報.get国保個人番号() != null && !国保資格詳細情報.get国保個人番号().isEmpty()) {
                 div.getMeisaiPanel().getTxtKokuhoKojinNo().setValue(国保資格詳細情報.get国保個人番号());
             }
-            div.getMeisaiPanel().getTxtShikakuShutokuYMD().setValue(
-                    new RDate(国保資格詳細情報.get資格取得日().toString()));
-            div.getMeisaiPanel().getTxtShikakuSoshitsuYMD().setValue(
-                    new RDate(国保資格詳細情報.get資格喪失日().toString()));
+            if (国保資格詳細情報.get資格取得日() != null) {
+                div.getMeisaiPanel().getTxtShikakuShutokuYMD().setValue(
+                        new RDate(国保資格詳細情報.get資格取得日().toString()));
+            }
+            if (国保資格詳細情報.get資格喪失日() != null) {
+                div.getMeisaiPanel().getTxtShikakuSoshitsuYMD().setValue(
+                        new RDate(国保資格詳細情報.get資格喪失日().toString()));
+            }
             div.getMeisaiPanel().getTxtKokuhoNo().setValue(国保資格詳細情報.get国保番号());
             List<RString> keys = new ArrayList<>();
             if (TorokuKubun.取込.getコード().equals(国保資格詳細情報.get登録区分())) {
                 keys.add(new RString("key0"));
             }
             div.getMeisaiPanel().getChkTorokuKubun().setSelectedItemsByKey(keys);
-            RString 文字コード = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_国保ＩＦ種類, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-            if (new RString("2").equals(文字コード)) {
-                div.getMeisaiPanel().getTxtTaishokuGaitoYMD().setValue(
-                        new RDate(国保資格詳細情報.get退職該当日().toString()));
-                div.getMeisaiPanel().getTxtTaishokuHigaitoYMD().setValue(
-                        new RDate(国保資格詳細情報.get退職非該当日().toString()));
-                div.getMeisaiPanel().getDdlKojinKubunCode().setSelectedKey(国保資格詳細情報.get個人区分コード());
-            } else {
-                div.getMeisaiPanel().getTxtTaishokuGaitoYMD().setDisplayNone(true);
-                div.getMeisaiPanel().getTxtTaishokuHigaitoYMD().setDisplayNone(true);
-                div.getMeisaiPanel().getDdlKojinKubunCode().setDisplayNone(true);
-            }
+            set文字コード();
             前排他の設定(shikibetsuCode, 国保資格詳細情報.get履歴番号());
+        } else {
+            前排他の設定(shikibetsuCode, RString.EMPTY);
         }
     }
 
@@ -141,42 +136,61 @@ public class KokuhoShikakuInfoPanelHandler {
         if (国保資格詳細情報 != null) {
             前排他制御の解除(shikibetsuCode, 国保資格詳細情報.get履歴番号());
         } else {
-            前排他制御の解除(shikibetsuCode, new RString("0001"));
+            前排他制御の解除(shikibetsuCode, RString.EMPTY);
+        }
+    }
+
+    private void set文字コード() {
+        RString 文字コード = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_国保ＩＦ種類, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        if (new RString("2").equals(文字コード)) {
+            if (国保資格詳細情報.get退職該当日() != null) {
+                div.getMeisaiPanel().getTxtTaishokuGaitoYMD().setValue(
+                        new RDate(国保資格詳細情報.get退職該当日().toString()));
+            }
+            if (国保資格詳細情報.get退職非該当日() != null) {
+                div.getMeisaiPanel().getTxtTaishokuHigaitoYMD().setValue(
+                        new RDate(国保資格詳細情報.get退職非該当日().toString()));
+            }
+            div.getMeisaiPanel().getDdlKojinKubunCode().setSelectedKey(国保資格詳細情報.get個人区分コード());
+        } else {
+            div.getMeisaiPanel().getTxtTaishokuGaitoYMD().setDisplayNone(true);
+            div.getMeisaiPanel().getTxtTaishokuHigaitoYMD().setDisplayNone(true);
+            div.getMeisaiPanel().getDdlKojinKubunCode().setDisplayNone(true);
         }
     }
 
     private void setkokuhoShikakuInfo(KokuhoShikakuInfo kokuhoShikakuInfo) {
         if (div.getTxtKokuhoHokenshoNo().getValue() != null) {
-            kokuhoShikakuInfo.createBuilderForEdit().set国保保険証番号(new RString(div.getTxtKokuhoHokenshoNo().getValue().toString()));
+            kokuhoShikakuInfo.createBuilderForEdit().set国保保険証番号(new RString(div.getTxtKokuhoHokenshoNo().getValue().toString())).build();
         }
 //        if (!div.getDdlKokuhoHokenshaNo().getSelectedValue().isNullOrEmpty()) {
-//            kokuhoShikakuInfo.createBuilderForEdit().set国保保険者番号(div.getDdlKokuhoHokenshaNo().getSelectedValue());
+//            kokuhoShikakuInfo.createBuilderForEdit().set国保保険者番号(div.getDdlKokuhoHokenshaNo().getSelectedValue()).build();
 //        }
         if (!div.getTxtKokuhoKojinNo().getValue().isNullOrEmpty()) {
-            kokuhoShikakuInfo.createBuilderForEdit().set国保個人番号(div.getTxtKokuhoKojinNo().getValue());
+            kokuhoShikakuInfo.createBuilderForEdit().set国保個人番号(div.getTxtKokuhoKojinNo().getValue()).build();
         }
         if (!div.getTxtKokuhoNo().getValue().isNullOrEmpty()) {
-            kokuhoShikakuInfo.createBuilderForEdit().set国保番号(div.getTxtKokuhoNo().getValue());
+            kokuhoShikakuInfo.createBuilderForEdit().set国保番号(div.getTxtKokuhoNo().getValue()).build();
         }
         if (div.getTxtShikakuShutokuYMD().getValue() != null) {
-            kokuhoShikakuInfo.createBuilderForEdit().set資格取得日(div.getTxtShikakuShutokuYMD().getValue().toDateString());
+            kokuhoShikakuInfo.createBuilderForEdit().set資格取得日(div.getTxtShikakuShutokuYMD().getValue().toDateString()).build();
         }
         if (div.getTxtShikakuSoshitsuYMD().getValue() != null) {
-            kokuhoShikakuInfo.createBuilderForEdit().set資格喪失日(div.getTxtShikakuShutokuYMD().getValue().toDateString());
+            kokuhoShikakuInfo.createBuilderForEdit().set資格喪失日(div.getTxtShikakuShutokuYMD().getValue().toDateString()).build();
         }
         if (div.getTxtTaishokuGaitoYMD().getValue() != null) {
-            kokuhoShikakuInfo.createBuilderForEdit().set退職該当日(div.getTxtTaishokuGaitoYMD().getValue().toDateString());
+            kokuhoShikakuInfo.createBuilderForEdit().set退職該当日(div.getTxtTaishokuGaitoYMD().getValue().toDateString()).build();
         }
         if (div.getTxtTaishokuHigaitoYMD().getValue() != null) {
-            kokuhoShikakuInfo.createBuilderForEdit().set退職非該当日(div.getTxtTaishokuHigaitoYMD().getValue().toDateString());
+            kokuhoShikakuInfo.createBuilderForEdit().set退職非該当日(div.getTxtTaishokuHigaitoYMD().getValue().toDateString()).build();
         }
         if (!div.getDdlKojinKubunCode().getSelectedValue().isNullOrEmpty()) {
-            kokuhoShikakuInfo.createBuilderForEdit().set個人区分コード(div.getDdlKojinKubunCode().getSelectedValue());
+            kokuhoShikakuInfo.createBuilderForEdit().set個人区分コード(div.getDdlKojinKubunCode().getSelectedValue()).build();
         }
         if (div.getChkTorokuKubun().getSelectedKeys().size() > 0) {
-            kokuhoShikakuInfo.createBuilderForEdit().set登録区分(new RString("1"));
+            kokuhoShikakuInfo.createBuilderForEdit().set登録区分(new RString("1")).build();
         } else {
-            kokuhoShikakuInfo.createBuilderForEdit().set登録区分(new RString("0"));
+            kokuhoShikakuInfo.createBuilderForEdit().set登録区分(new RString("0")).build();
         }
     }
 

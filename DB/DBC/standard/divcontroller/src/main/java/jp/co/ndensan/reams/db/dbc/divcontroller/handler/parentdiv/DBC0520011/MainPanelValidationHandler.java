@@ -27,7 +27,7 @@ public class MainPanelValidationHandler {
      * 資格期間大小関係チェック
      *
      * @param pairs バリデーションコントロール
-     * @param div MainPanelDiv
+     * @param div KokuhoShikakuInfoPanelDiv
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs 資格期間大小関係チェック(ValidationMessageControlPairs pairs, KokuhoShikakuInfoPanelDiv div) {
