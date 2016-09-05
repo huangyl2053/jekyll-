@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBU-5600-060 lishengli -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokunenpohokenkyufukogaku.IJigyoHokokuNenpoHokenkyufuKogakuMapper">
+
+    <delete id="deleteJigyouHokokuTokei"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpohokenkyufukogaku.JigyoHokokuNenpoHokenkyufuKogakuMybatisParamter">
+        SELECT rgdb."DbFx7020JigyouHoukokuTokeiDelete"(
+            ARRAY<foreach  
+                    collection="市町村コードリスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>,
+                 #{集計年月},
+            ARRAY<foreach  
+                    collection="集計番号リスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>,
+            ARRAY<foreach  
+                    collection="表番号リスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>
+            );
+    </delete>
+
+    <select id="getJigyouHokokuTokeiJyoho"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpohokenkyufukogaku.JigyoHokokuNenpoHokenkyufuKogakuMybatisParamter" 
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokunenpoippangenbutsu.GassanJigyouHoukokuTokeiEntity" resultOrdered="true" fetchSize="500">
+        SELECT * from rgdb."DbFt7044JigyouHoukokuTokeiNenppou"(
+            #{集計区分},
+            #{集計開始年月},
+            #{集計終了年月},
+            ARRAY<foreach  
+                    collection="市町村コードリスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>,
+            ARRAY<foreach  
+                    collection="集計番号リスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>,
+            ARRAY<foreach  
+                    collection="表番号リスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>
+            );
+    </select>
+    
+    <update id="insertShoriDateKanri"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpohokenkyufukogaku.JigyoHokokuNenpoHokenkyufuKogakuMybatisParamter">
+        SELECT rgdb."DbFx7014ShoriDateKanriUpdate"(
+            #{サブ業務コード},
+            ARRAY<foreach  
+                    collection="市町村コードリスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>,
+            #{処理名},
+            #{処理枝番},
+            #{年度},
+            #{基準年月日},
+            #{基準日時}
+            );
+    </update>
+    
+    <select id="getJigyouHokokuTokeiReportJyoho"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpohokenkyufukogaku.JigyoHokokuNenpoHokenkyufuKogakuMybatisParamter" 
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokunenpoippangenbutsu.GassanJigyouHoukokuTokeiEntity" resultOrdered="true" fetchSize="500">
+        SELECT * from rgdb."DbFt7019JigyouHoukokuTokeiTyouhyou"(
+            ARRAY<foreach  
+                    collection="市町村コードリスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>,
+            #{集計年月},
+            ARRAY<foreach  
+                    collection="集計番号リスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>,
+            ARRAY<foreach  
+                    collection="表番号リスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>
+            );
+    </select>
+    
+</mapper>
