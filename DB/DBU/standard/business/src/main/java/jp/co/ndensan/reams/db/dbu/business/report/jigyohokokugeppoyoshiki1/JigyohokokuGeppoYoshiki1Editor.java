@@ -70,8 +70,9 @@ public class JigyohokokuGeppoYoshiki1Editor implements IJigyohokokuGeppoYoshiki1
             集計範囲_SB.append(集計範囲_年度.wareki().eraType(EraType.KANJI).getYear());
             集計範囲_SB.append(new RString("年度"));
             集計範囲_SB.append(集計範囲_Temp.wareki().separator(Separator.JAPANESE).fillType(FillType.ZERO).getMonth());
+            集計範囲_SB.append(new RString("分"));
         }
-        集計範囲_SB.append(new RString("分)"));
+        集計範囲_SB.append(new RString(")"));
         return 集計範囲_SB.toRString();
     }
 }
