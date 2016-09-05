@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGeng
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuServiceMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3105SogoJigyoTaishoshaDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3114RiyoshaFutanWariaiMeisaiMapper;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.riyoshafutangengaku.IRiyoshaFutangakuGengakuMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
@@ -42,6 +43,7 @@ public class RiyoshaFutangakuGengakuService {
 
     private final MapperProvider mapperProvider;
     private final DbT4001JukyushaDaichoDac dac;
+    private final DbT3105SogoJigyoTaishoshaDac dbT3105Dac;
     private final RiyoshaFutangakuGengakuManager manager;
     private static final int INDEX_2 = 2;
     private static final int INDEX_4 = 4;
@@ -52,6 +54,7 @@ public class RiyoshaFutangakuGengakuService {
     RiyoshaFutangakuGengakuService() {
         mapperProvider = InstanceProvider.create(MapperProvider.class);
         dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
+        dbT3105Dac = InstanceProvider.create(DbT3105SogoJigyoTaishoshaDac.class);
         manager = RiyoshaFutangakuGengakuManager.createInstance();
     }
 
@@ -148,13 +151,16 @@ public class RiyoshaFutangakuGengakuService {
      *
      * @param 被保険者番号 被保険者番号
      * @param 適用日 適用日
-     * @return 判断結果(検索結果は存在する場合、true を返却する。検索結果は存在しない場合、falseを返却する。)
+     * @return 判断結果(指定日時点でこの減免の利用者となれるかどうかを判定して返却します true:利用者)
      */
     @Transaction
     public boolean canBe利用者(HihokenshaNo 被保険者番号, FlexibleDate 適用日) {
 
-        List<DbT4001JukyushaDaichoEntity> list = dac.select受給者台帳情報By適用日(被保険者番号, 適用日);
-        return !list.isEmpty();
+        List<DbT4001JukyushaDaichoEntity> dbT4001EntityList = dac.select受給者台帳情報By適用日(被保険者番号, 適用日);
+        if (!dbT4001EntityList.isEmpty()) {
+            return true;
+        }
+        return !dbT3105Dac.selectFor総合事業対象者の判定(被保険者番号, 適用日).isEmpty();
     }
 
     /**
