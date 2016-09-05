@@ -553,7 +553,23 @@ public enum ReportIdDBC {
     /**
      * 帳票設計_DBC200035_高額合算自己負担額証明書発行一覧表 ＩＤです。
      */
-    DBC200035(new ReportId("DBC200035_GassanJikofutangakushomeishoHakkoIchiran"), new RString("高額合算自己負担額証明書発行一覧表 "));
+    DBC200035(new ReportId("DBC200035_GassanJikofutangakushomeishoHakkoIchiran"), new RString("高額合算自己負担額証明書発行一覧表 ")),
+    /**
+     * 汎用リスト 共同処理用受給者情報（基本）帳票ＩＤです。
+     */
+    DBC701005(new ReportId("DBC701005_HanyoListKyodoJukyushaKihon"), new RString("汎用リスト 共同処理用受給者情報（基本）")),
+    /**
+     * 汎用リスト 共同処理用受給者情報（償還）帳票ＩＤです。
+     */
+    DBC701007(new ReportId("DBC701007_HanyoListKyodoJukyushaShokan"), new RString("汎用リスト 共同処理用受給者情報（償還）")),
+    /**
+     * 汎用リスト 共同処理用受給者情報（高額）帳票ＩＤです。
+     */
+    DBC701006(new ReportId("DBC701006_HanyoListKyodoJukyushaKogaku"), new RString("汎用リスト 共同処理用受給者情報（高額）")),
+    /**
+     * 汎用リスト 国保連受給者情報帳票ＩＤです。
+     */
+    DBC701004(new ReportId("DBC701004_HanyoListKokuhorenJukyusha"), new RString("汎用リスト 国保連受給者情報"));
     private final ReportId reportId;
 
     private final RString reportName;
