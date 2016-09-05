@@ -138,7 +138,7 @@ public enum SystemKanriNinteiShienTotalSpec implements IPredicate<SystemKanriNin
                 @Override
                 public boolean apply(SystemKanriNinteiShienTotalDiv div) {
                     RString 新様式_医療機関出力ファイル = div.getSystemKanri().getSystemKanriNinteiShien().
-                    getTxtChosainOutFileNew().getValue();
+                    getTxtIryoKikanOutFileNew().getValue();
                     return !新様式_医療機関出力ファイル.isNullOrEmpty();
                 }
             },
