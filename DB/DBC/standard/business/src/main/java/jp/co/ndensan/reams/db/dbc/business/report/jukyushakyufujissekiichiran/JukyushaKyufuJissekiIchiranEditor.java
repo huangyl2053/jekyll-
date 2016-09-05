@@ -1,6 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To data this license header, choose License Headers in Project Properties.
+ * To data this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package jp.co.ndensan.reams.db.dbc.business.report.jukyushakyufujissekiichiran;
@@ -44,8 +44,8 @@ public class JukyushaKyufuJissekiIchiranEditor implements IJukyushaKyufuJissekiI
 
     private JukyushaKyufuJissekiIchiranReportSource editSource(JukyushaKyufuJissekiIchiranReportSource source) {
         source.printTimeStamp = set作成日時(data.get作成日時());
-        source.hokenshaName = data.get保険者氏名();
-        source.hokenshaNo = data.get保険者番号();
+        source.hokenshaName = data.get市町村名();
+        source.hokenshaNo = data.get市町村コード();
         source.shutsuryokujun1 = data.get出力順1();
         source.shutsuryokujun2 = data.get出力順2();
         source.shutsuryokujun3 = data.get出力順3();
@@ -56,6 +56,48 @@ public class JukyushaKyufuJissekiIchiranEditor implements IJukyushaKyufuJissekiI
         source.kaiPege3 = data.get改頁3();
         source.kaiPege4 = data.get改頁4();
         source.kaiPege5 = data.get改頁5();
+        source.listUpper_1 = data.get被保険者番号();
+        source.listUpper_2 = data.get被保険者氏名();
+        source.listUpper_3 = data.get要介護度();
+        source.listUpper_4 = set年月(data.getサービス提供年月());
+        source.listUpper_5 = data.get公費負担者1();
+        source.listUpper_6 = data.get公費受給者1();
+        source.listUpper_7 = data.getサービス単位数_保険();
+        source.listUpper_8 = data.getサービス単位数_公費1();
+        source.listUpper_9 = data.get請求額_保険();
+        source.listUpper_10 = data.get請求額_公費1();
+        source.listUpper_11 = data.get負担額_利用者();
+        source.listUpper_12 = data.get負担額_公費本人1();
+        source.listUpper_13 = data.get緊急時施設療養請求合計額_保険();
+        source.listUpper_14 = data.get緊急時施設療養請求合計額_公費1();
+        source.listUpper_15 = data.get特定診療請求合計額_保険();
+        source.listUpper_16 = data.get特定診療請求合計額_公費1();
+        source.listUpper_17 = data.get特定入所者介護費等請求額_保険();
+        source.listUpper_18 = data.get特定入所者介護費等請求額_公費1();
+        source.listCenter_1 = data.get識別コード();
+        source.listCenter_2 = data.get住所();
+        source.listCenter_3 = data.get様式();
+        source.listCenter_4 = data.get公費負担者2();
+        source.listCenter_5 = data.get公費受給者2();
+        source.listCenter_6 = data.getサービス単位数_公費2();
+        source.listCenter_7 = data.get請求額_公費2();
+        source.listCenter_8 = data.get負担額_公費本人2();
+        source.listCenter_9 = data.get緊急時施設療養請求合計額_公費2();
+        source.listCenter_10 = data.get特定診療請求合計額_公費2();
+        source.listCenter_11 = data.get特定入所者介護費等請求額_公費2();
+        source.listCenter_12 = set年月(data.get審査年月());
+        source.listLower_1 = data.get世帯コード();
+        source.listLower_2 = data.get事業者番号();
+        source.listLower_3 = data.get事業者名称();
+        source.listLower_4 = data.get実績区分();
+        source.listLower_5 = data.get公費負担者3();
+        source.listLower_6 = data.get公費受給者3();
+        source.listLower_7 = data.getサービス単位数_公費3();
+        source.listLower_8 = data.get請求額_公費3();
+        source.listLower_9 = data.get負担額_公費本人3();
+        source.listLower_10 = data.get緊急時施設療養請求合計額_公費3();
+        source.listLower_11 = data.get特定診療請求合計額_公費3();
+        source.listLower_12 = data.get特定入所者介護費等請求額_公費3();
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         if (data.get被保険者番号() != null) {
             source.hihokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), data.get被保険者番号());
@@ -78,4 +120,10 @@ public class JukyushaKyufuJissekiIchiranEditor implements IJukyushaKyufuJissekiI
         return hakkoYMD.toRString();
     }
 
+    private RString set年月(RDateTime dateTime) {
+        dateTime = RDateTime.now();
+        RStringBuilder hakkoYMD = new RStringBuilder();
+        hakkoYMD.append(dateTime.getDate().wareki().firstYear(FirstYear.ICHI_NEN).getYearMonth());
+        return hakkoYMD.toRString();
+    }
 }
