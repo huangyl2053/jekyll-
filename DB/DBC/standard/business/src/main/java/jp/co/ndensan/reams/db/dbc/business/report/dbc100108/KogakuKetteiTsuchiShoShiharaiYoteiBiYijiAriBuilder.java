@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbc.entity.report.dbc100108.KogakuKetteiTsuchiShoS
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
+ * 高額サービス等支給（不支給）決定通知書(支払予定日あり)のBuilderです。
  *
- * @author LDNS donghj
+ * @reamsid_L DBC-5160-040 donghj
  */
 public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriBuilder implements
         IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriBuilder {

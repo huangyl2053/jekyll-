@@ -150,7 +150,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor implements IKogak
         source.bangoTitle = 決定通知書Entity.get番号ﾀｲﾄﾙ();
         source.kouzaNo = 決定通知書Entity.get口座番号();
         source.kouzaMeigi = 決定通知書Entity.get口座名義人();
-//        TODO sihaYoYmdはReportSourceにありません。 source.sihaYoYmd = 決定通知書Entity.get支払予定日();
+        source.sihaYoYmd = 決定通知書Entity.get支払予定日();
         source.tsuchiNo = 決定通知書Entity.get通知書番号() == null ? RString.EMPTY : 決定通知書Entity.get通知書番号().value();
         source.remban = 決定通知書Entity.get連番();
         source.title2_1 = 決定通知書Entity.getﾀｲﾄﾙ_2_1_取消し線用();
