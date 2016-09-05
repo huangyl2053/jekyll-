@@ -208,7 +208,8 @@ public enum SystemKanriNinteiShienTotalSpec implements IPredicate<SystemKanriNin
 
                     RString ＩＦ種類_変更データ = div.getSystemKanri().getSystemKanriNinteiShien().getDdlIfShurui().getSelectedKey();
                     RString 医調取込み_変更データ = div.getSystemKanri().getSystemKanriNinteiShien().getDdlShujiiChosainJohoTorikomi().getSelectedKey();
-                    RString 認定ＩＦ改定日_変更データ = div.getSystemKanri().getSystemKanriNinteiShien().getTxtNinteiIfKaiteiYMD().getValue().toDateString();
+                    RDate 認定ＩＦ改定日 = div.getSystemKanri().getSystemKanriNinteiShien().getTxtNinteiIfKaiteiYMD().getValue();
+                    RString 認定ＩＦ改定日_変更データ = 認定ＩＦ改定日 != null ? 認定ＩＦ改定日.toDateString() : null;
                     RString 類似変換_変更データ = div.getSystemKanri().getSystemKanriNinteiShien().getRadShinseiKanren().getSelectedKey();
                     RString 一括認定日区分_変更データ = div.getSystemKanri().getSystemKanriNinteiShien().getRadIkkatsuKoshin().getSelectedKey();
 
