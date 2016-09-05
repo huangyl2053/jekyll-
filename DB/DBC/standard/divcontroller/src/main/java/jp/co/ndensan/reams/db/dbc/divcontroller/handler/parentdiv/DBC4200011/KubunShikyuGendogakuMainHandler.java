@@ -24,8 +24,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
+ * 区分支給限度額登録のHandlerクラスです。
  *
- * @author lifei
+ * @reamsid_L DBC-3410-010 jianglaisheng
  */
 public class KubunShikyuGendogakuMainHandler {
 
