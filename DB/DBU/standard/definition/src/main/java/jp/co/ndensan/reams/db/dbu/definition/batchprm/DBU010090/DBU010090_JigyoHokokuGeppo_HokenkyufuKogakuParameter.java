@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppohokenkyu
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 
 /**
  * 事業状況報告資料（月報）作成 保険給付決定情報（高額介護サービス費）のバッチのパラメータです。
@@ -35,6 +36,8 @@ public class DBU010090_JigyoHokokuGeppo_HokenkyufuKogakuParameter extends BatchP
     private static final String KAKOSHUKEISHICHOSONLIST = "kakoShukeiShichosonList";
     private static final String KAKOSHUKEIKYUSHICHOSONKBN = "kakoShukeiKyuShichosonKbn";
     private static final String BATCHID = "batchid";
+    private static final String SYUTURYOKUCSVFILEPATH = "syuturyokuCSVFilePath";
+    private static final String MANAGER = "manager";
     private static final long serialVersionUID = -3583581895977881896L;
 
     @BatchParameter(key = PRINTCONTROLKBN, name = "プリントコントロール区分")
@@ -65,6 +68,10 @@ public class DBU010090_JigyoHokokuGeppo_HokenkyufuKogakuParameter extends BatchP
     private RString 過去集計分旧市町村区分;
     @BatchParameter(key = BATCHID, name = "バッチID")
     private RString バッチID;
+    @BatchParameter(key = SYUTURYOKUCSVFILEPATH, name = "出力CSVファイルPath")
+    private RString csvFilePath;
+    @BatchParameter(key = MANAGER, name = "manager")
+    private FileSpoolManager manager;
 
     /**
      * Process用のパラメータを生成します。
@@ -86,6 +93,8 @@ public class DBU010090_JigyoHokokuGeppo_HokenkyufuKogakuParameter extends BatchP
                 旧市町村コードリスト,
                 過去集計分市町村コードリスト,
                 過去集計分旧市町村区分,
-                バッチID);
+                バッチID,
+                csvFilePath,
+                manager);
     }
 }
