@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1500011;
 
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1500011.KaigoKyufuhiKagoMositateTourokuDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
@@ -22,16 +23,35 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class KaigoKyufuhiKagoMositateTourokuValidationHandler {
 
+    private final KaigoKyufuhiKagoMositateTourokuDiv div;
+
+    /**
+     * コンストラクタです。
+     *
+     * @param div 画面情報
+     */
+    public KaigoKyufuhiKagoMositateTourokuValidationHandler(KaigoKyufuhiKagoMositateTourokuDiv div) {
+        this.div = div;
+    }
+
     /**
      * 必須項目を入力チェックを行う。
      *
+     * @param msg メッセージの引数
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs check必須項目を入力() {
+    public ValidationMessageControlPairs check必須項目を入力(RString msg) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(new KaigoKyufuhiKagoMositateTourokuValidationHandler.CheckMessages(
-                UrErrorMessages.必須項目_追加メッセージあり,
-                "被保番号、支援事業者番号")));
+        if (new RString("被保番号、支援事業者番号").equals(msg)) {
+            validationMessages.add(new ValidationMessageControlPair(new KaigoKyufuhiKagoMositateTourokuValidationHandler.CheckMessages(
+                    UrErrorMessages.必須項目_追加メッセージあり,
+                    msg.toString()), div.getTxtJigyoshaNo(), div.getTxtHihoNo()));
+        } else {
+            validationMessages.add(new ValidationMessageControlPair(new KaigoKyufuhiKagoMositateTourokuValidationHandler.CheckMessages(
+                    UrErrorMessages.必須項目_追加メッセージあり,
+                    msg.toString()), div.getTxtTeikyoYMRange()));
+        }
+
         return validationMessages;
     }
 
@@ -56,7 +76,8 @@ public class KaigoKyufuhiKagoMositateTourokuValidationHandler {
     public ValidationMessageControlPairs check申立日エラー() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         validationMessages.add(new ValidationMessageControlPair(new KaigoKyufuhiKagoMositateTourokuValidationHandler.CheckMessages(
-                DbcErrorMessages.申立日エラー)));
+                DbcErrorMessages.申立日エラー), div.getTxtMeisaiMoshitateDate(), div.getTxtMeisaiTeikyoYM())
+        );
         return validationMessages;
     }
 
@@ -68,7 +89,7 @@ public class KaigoKyufuhiKagoMositateTourokuValidationHandler {
     public ValidationMessageControlPairs check同月審査申立理由整合性エラー() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         validationMessages.add(new ValidationMessageControlPair(new KaigoKyufuhiKagoMositateTourokuValidationHandler.CheckMessages(
-                DbcErrorMessages.同月審査申立理由整合性エラー)));
+                DbcErrorMessages.同月審査申立理由整合性エラー), div.getDdlMeisaiKagoMoshitateRiyu()));
         return validationMessages;
     }
 
@@ -80,7 +101,7 @@ public class KaigoKyufuhiKagoMositateTourokuValidationHandler {
     public ValidationMessageControlPairs check送付済みチェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         validationMessages.add(new ValidationMessageControlPair(new KaigoKyufuhiKagoMositateTourokuValidationHandler.CheckMessages(
-                SoufuzumiMSG.送付済みチェック)));
+                SoufuzumiMSG.送付済みチェック), div.getTxtMeisaiSendYM()));
         return validationMessages;
     }
 

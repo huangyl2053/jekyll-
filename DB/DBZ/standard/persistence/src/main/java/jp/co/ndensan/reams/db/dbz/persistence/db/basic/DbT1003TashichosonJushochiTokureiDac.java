@@ -67,9 +67,9 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
         return accessor.select().
                 table(DbT1003TashichosonJushochiTokurei.class).
                 where(and(
-                                eq(shikibetsuCode, 識別コード),
-                                eq(idoYMD, 異動日),
-                                eq(edaNo, 枝番))).
+                        eq(shikibetsuCode, 識別コード),
+                        eq(idoYMD, 異動日),
+                        eq(edaNo, 枝番))).
                 toObject(DbT1003TashichosonJushochiTokureiEntity.class);
     }
 
@@ -127,8 +127,8 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
         return accessor.selectSpecific(max(edaNo)).
                 table(DbT1003TashichosonJushochiTokurei.class).
                 where(and(
-                                eq(shikibetsuCode, 識別コード),
-                                eq(idoYMD, 異動日))).
+                        eq(shikibetsuCode, 識別コード),
+                        eq(idoYMD, 異動日))).
                 toObject(DbT1003TashichosonJushochiTokureiEntity.class);
     }
 
@@ -171,37 +171,9 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
         return accessor.select().
                 table(DbT1003TashichosonJushochiTokurei.class).
                 where(and(
-                                eq(shikibetsuCode, 識別コード),
-                                eq(DbT1003TashichosonJushochiTokurei.tekiyoYMD, 適用年月日),
-                                eq(DbT1003TashichosonJushochiTokurei.isDeleted, false))).
-                toList(DbT1003TashichosonJushochiTokureiEntity.class);
-    }
-
-    /**
-     * 他市町村住所地特例を取得します。
-     *
-     * @param 識別コード ShikibetsuCode
-     * @param 年齢到達日 年齢到達日
-     * @return List<DbT1003TashichosonJushochiTokureiEntity>
-     * @throws NullPointerException 引数のいずれかがnullの場合
-     */
-    @Transaction
-    public List<DbT1003TashichosonJushochiTokureiEntity> select他市町村住所地特例(
-            ShikibetsuCode 識別コード,
-            FlexibleDate 年齢到達日) throws NullPointerException {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード_TMP.toString()));
-        requireNonNull(年齢到達日, UrSystemErrorMessages.値がnull.getReplacedMessage("年齢到達日"));
-
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        return accessor.select().
-                table(DbT1003TashichosonJushochiTokurei.class).
-                where(and(
-                                eq(shikibetsuCode, 識別コード),
-                                (or(
-                                        and(leq(tekiyoYMD, 年齢到達日), leq(年齢到達日, kaijoYMD)),
-                                        and(leq(tekiyoYMD, 年齢到達日), leq(kaijoYMD, null)))),
-                                eq(logicalDeletedFlag, false))).
+                        eq(shikibetsuCode, 識別コード),
+                        eq(DbT1003TashichosonJushochiTokurei.tekiyoYMD, 適用年月日),
+                        eq(DbT1003TashichosonJushochiTokurei.isDeleted, false))).
                 toList(DbT1003TashichosonJushochiTokureiEntity.class);
     }
 
@@ -222,9 +194,9 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
                 table(DbT1003TashichosonJushochiTokurei.class).
                 where(
                         or(and(eq(shikibetsuCode, 識別コード),
-                                        leq(tekiyoYMD, 登録異動年月日),
-                                        lt(登録異動年月日, kaijoYMD),
-                                        eq(logicalDeletedFlag, false)),
+                                leq(tekiyoYMD, 登録異動年月日),
+                                lt(登録異動年月日, kaijoYMD),
+                                eq(logicalDeletedFlag, false)),
                                 and(eq(shikibetsuCode, 識別コード),
                                         leq(tekiyoYMD, 登録異動年月日),
                                         isNULL(kaijoYMD),

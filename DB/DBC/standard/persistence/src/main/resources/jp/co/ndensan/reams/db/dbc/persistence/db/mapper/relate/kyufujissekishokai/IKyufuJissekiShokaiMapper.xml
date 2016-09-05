@@ -82,21 +82,19 @@
         AND rgdb."DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" IN ('43', '46')
     </select>
     
-<!--    <select resultOrdered="true" id="get識別番号管理データ" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7063KaigoJigyoshaShiteiServiceMapper.ResultMap_DbT7063KaigoJigyoshaShiteiServiceEntity" 
+    <select resultOrdered="true" id="get識別番号管理データ" resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiHeaderJohoMapperParameter" fetchSize="500">
-        SELECT
-            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7063KaigoJigyoshaShiteiServiceMapper.allColumns_DbT7063KaigoJigyoshaShiteiService" />
+        SELECT *
         FROM
-            rgdb."DbT7063KaigoJigyoshaShiteiService"
+            rgdb."DbT3118ShikibetsuNoKanri"
         WHERE
-            rgdb."DbT7063KaigoJigyoshaShiteiService"."isDeleted" = FALSE
+            rgdb."DbT3118ShikibetsuNoKanri"."shikibetsuNo" = #{識別番号}
         AND
-            rgdb."DbT7063KaigoJigyoshaShiteiService"."jigyoshaNo" = #{事業所番号}
-        AND (((SUBSTR(rgdb."DbT7063KaigoJigyoshaShiteiService"."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> #{サービス提供年月}) 
-                AND (#{サービス提供年月} <![CDATA[<=]]> SUBSTR(rgdb."DbT7063KaigoJigyoshaShiteiService"."yukoShuryoYMD", 1, 6)))
-        OR  ((SUBSTR(rgdb."DbT7063KaigoJigyoshaShiteiService"."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> #{サービス提供年月}) 
-                AND rgdb."DbT7063KaigoJigyoshaShiteiService"."yukoShuryoYMD" IS NULL))
-        AND rgdb."DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" IN ('43', '46')
-    </select>-->
+            rgdb."DbT3118ShikibetsuNoKanri"."shikibetsuNoKubon" = #{識別番号区分}
+        AND rgdb."DbT3118ShikibetsuNoKanri"."tekiyoKaishiYM" <![CDATA[<=]]> #{サービス提供年月} 
+        AND (rgdb."DbT3118ShikibetsuNoKanri"."tekiyoShuryoYM" IS NULL 
+            OR (rgdb."DbT3118ShikibetsuNoKanri"."tekiyoShuryoYM" IS NOT NULL AND #{サービス提供年月} <![CDATA[<=]]> rgdb."DbT3118ShikibetsuNoKanri"."tekiyoShuryoYM"))
+        ORDER BY rgdb."DbT3118ShikibetsuNoKanri"."tekiyoKaishiYM" DESC
+    </select>
     
 </mapper>

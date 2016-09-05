@@ -26,12 +26,14 @@ import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -94,7 +96,10 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
         KagoMoshitateCollect data = new KagoMoshitateCollect();
         List<dgHihokenshaSearchGaitosha_Row> rowList = new ArrayList<>();
         for (KaigoKyufuhiKagoMositateTourokuResult result : resultList) {
-
+            RString 給付区分 = RString.EMPTY;
+            if (!RString.isNullOrEmpty(result.get給付区分())) {
+                給付区分 = KyufubunruiKubun.toValue(result.get給付区分()).get名称();
+            }
             dgHihokenshaSearchGaitosha_Row row = new dgHihokenshaSearchGaitosha_Row(result.get過誤申立情報() != null,
                     result.get事業所番号(),
                     result.get事業者名(),
@@ -104,7 +109,7 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
                     deteFormat(result.getサービス提供年月()),
                     // TODO EUNMなし
                     result.get給付実績作成区分コード(),
-                    KyufubunruiKubun.toValue(result.get給付区分()).get名称(),
+                    給付区分,
                     deteFormat(result.get審査年月()));
             rowList.add(row);
         }
@@ -127,9 +132,7 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
         div.getTxtMeisaiJigyoshaName().setValue(給付実績情報.get事業所番号());
         div.getTxtMeisaiMoshitateshaKubun().setValue(KagoMoshitate_MoshitateshaKubun.保険者申立.get名称());
         div.getTxtMeisaiShokisaiHokenshaNo().setValue(給付実績情報.get証記載保険者番号());
-        // TODO QA 1621
-        // div.getTxtMeisaiJigyoshaName().setValue(給付実績情報.get事業所番号());
-        if (RString.isNullOrEmpty(給付実績情報.getサービス提供年月())) {
+        if (!RString.isNullOrEmpty(給付実績情報.getサービス提供年月())) {
             div.getTxtMeisaiTeikyoYM().setValue(new RDate(給付実績情報.getサービス提供年月().toString()));
         }
         div.getTxtMeisaiKagoForm().setValue(set様式(給付実績情報));
@@ -168,7 +171,7 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
         } else if (給付区分_3.equals(給付区分)) {
             コード種別 = DBCCodeShubetsu.総合事業過誤申立事由_様式.getコード();
         }
-        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBE認定支援, コード種別, FlexibleDate.getNowDate());
+        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBC介護給付, コード種別, FlexibleDate.getNowDate());
         for (UzT0007CodeEntity entity : codeList) {
             RStringBuilder 申立理由 = new RStringBuilder();
             申立理由.append(entity.getコード().value());
@@ -207,7 +210,7 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
 
     private KagoMoshitate set修正DB出力データ(KagoMoshitate data) {
         data = data.createBuilderForEdit().set申立年月日(new FlexibleDate(div.getTxtMeisaiMoshitateDate().getValue()
-                .seireki().toDateString())).build();
+                .seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString())).build();
         data = data.createBuilderForEdit().set申立事由コード(div.getTxtMeisaiKagoForm()
                 .getValue().substring(0, 2).concat(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())).build();
         return data;
@@ -215,7 +218,7 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
 
     private KagoMoshitate set新規DB出力データ(KagoMoshitate data) {
         data = data.createBuilderForEdit().set申立年月日(new FlexibleDate(div.getTxtMeisaiMoshitateDate().getValue()
-                .seireki().toDateString())).build();
+                .seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString())).build();
         RString 申立者区分コード = RString.EMPTY;
         RString 申立者区分 = div.getTxtMeisaiMoshitateshaKubun().getValue();
         for (KagoMoshitate_MoshitateshaKubun 申立者区分_ENUM : KagoMoshitate_MoshitateshaKubun.values()) {

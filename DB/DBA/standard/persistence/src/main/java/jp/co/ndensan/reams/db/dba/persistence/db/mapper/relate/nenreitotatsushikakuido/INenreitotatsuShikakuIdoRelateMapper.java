@@ -6,9 +6,15 @@
 package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitotatsushikakuido;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido.AtenaMybatisParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichokoshin.ShikakuIdoTaishoshaEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * ６５歳年齢到達資格異動のマッパーインタフェースです。
@@ -18,19 +24,56 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 public interface INenreitotatsuShikakuIdoRelateMapper {
 
     /**
-     * 識別コードを取得します。
+     * 通常運用時（スケジューラ機能による毎朝一日１回の起動）、バッチ内で抽出条件を生成します。
      *
-     * @param parameter 検索条件
-     * @return List<UaFt200FindShikibetsuTaishoEntity>
+     * @return 処理日付管理マスタテーブルのエンティティ
      */
-    List<UaFt200FindShikibetsuTaishoEntity> select識別コード(AtenaMybatisParameter parameter);
+    DbT7022ShoriDateKanriEntity selectバッチ内で抽出条件();
 
     /**
-     * 資格異動対象者のデータを取得します。
+     * 被保険者台帳管理By論理削除フラグAnd識別コードを取得します。
      *
-     * @param parameter 検索条件
-     * @return 資格異動対象者リスト
+     * @param 識別コード 識別コード
+     * @return 被保険者台帳管理テーブルのエンティティ
      */
-    List<ShikakuIdoTaishoshaEntity> select資格異動対象者(AtenaMybatisParameter parameter);
+    DbT1001HihokenshaDaichoEntity select被保険者台帳管理By論理削除フラグAnd識別コード(@Param("識別コード") ShikibetsuCode 識別コード);
+
+    /**
+     * 他市町村住所地特例のデータを取得します。
+     *
+     * @param 識別コード 識別コード
+     * @param 年齢到達日 年齢到達日
+     * @return 他市町村住所地特例のデータ
+     */
+    List<DbT1003TashichosonJushochiTokureiEntity> select他市町村住所地特例(
+            @Param("識別コード") ShikibetsuCode 識別コード,
+            @Param("年齢到達日") FlexibleDate 年齢到達日);
+
+    /**
+     * 適用除外者のデータを取得します。
+     *
+     * @param 識別コード 識別コード
+     * @param 年齢到達日 年齢到達日
+     * @return 適用除外者のデータ
+     */
+    List<DbT1002TekiyoJogaishaEntity> select適用除外者(
+            @Param("識別コード") ShikibetsuCode 識別コード,
+            @Param("年齢到達日") FlexibleDate 年齢到達日);
+
+    /**
+     * 資格取得除外者のデータを取得します。
+     *
+     * @param 識別コード 識別コード
+     * @return 資格取得除外者のデータ
+     */
+    List<DbT1009ShikakuShutokuJogaishaEntity> select資格取得除外者(@Param("識別コード") ShikibetsuCode 識別コード);
+
+    /**
+     * 転入保留対象者のデータを取得します。
+     *
+     * @param 識別コード 識別コード
+     * @return 転入保留対象者のデータ
+     */
+    List<DbT1010TennyushutsuHoryuTaishoshaEntity> select転入保留対象者(@Param("識別コード") ShikibetsuCode 識別コード);
 
 }
