@@ -71,7 +71,8 @@ public class NoufuGakuDataSakusei {
      * 「実行する」ボタンを押下のメソッドです。
      *
      * @param div NoufuGakuDataSakuseiDiv
-     * @return ResponseData<NofugakuDataParameter>
+     * @return
+     * ResponseData<DBB514001_NofugakuDataSakuseiTandokuShichosonParameter>
      */
     public ResponseData<DBB514001_NofugakuDataSakuseiTandokuShichosonParameter>
             onClick_batch(NoufuGakuDataSakuseiDiv div) {
