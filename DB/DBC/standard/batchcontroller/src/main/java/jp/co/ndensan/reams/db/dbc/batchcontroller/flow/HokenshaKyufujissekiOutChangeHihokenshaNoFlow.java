@@ -67,16 +67,16 @@ public class HokenshaKyufujissekiOutChangeHihokenshaNoFlow extends BatchFlowBase
     private void splitFlow() {
         if (導入形態コード.is単一()) {
             executeStep(旧被保険者番号の取得);
-            flowEntity = (FlowEntity) getResult(FlowEntity.class, new RString(旧被保険者番号の取得),
-                    HokenshaKyufujissekiOutGetOldHihokenshaNoProcess.PARAMETER_OUT_FLOWENTITY);
-            if (0 == flowEntity.getCodeNum()) {
-                executeStep(保険者番号の設定);
-            }
+            executeStep(保険者番号の設定);
+
         } else {
             executeStep(広域加入日以前のデータを取得);
             flowEntity = (FlowEntity) getResult(FlowEntity.class, new RString(広域加入日以前のデータを取得),
                     HokenshaKyufujissekiOutGetBeforeKanyuYMDProcess.PARAMETER_OUT_FLOWENTITY);
             if (0 == flowEntity.getCodeNum()) {
+                executeStep(保険者番号の設定);
+            } else {
+                executeStep(旧被保険者番号の取得);
                 executeStep(保険者番号の設定);
             }
         }
