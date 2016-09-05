@@ -39,7 +39,7 @@
                  ) AS T1
                  WHERE T1.rank_number = 1
              ) AS shikibetsuNoA
-         ON  DbT3017."seiriNo" = shikibetsuNoA."shikibetsuNo"
+         ON  DbT3017."inputShikibetsuNo" = shikibetsuNoA."shikibetsuNo"
          WHERE DbT3017."isDeleted" = FALSE
          AND   DbT3017."hokenshaHoyuKyufujissekiJohoSakujoFlag" = FALSE
          AND   DbT3017."serviceTeikyoYM" = #{サービス提供年月}
