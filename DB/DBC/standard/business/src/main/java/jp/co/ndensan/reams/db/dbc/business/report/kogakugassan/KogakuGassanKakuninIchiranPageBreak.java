@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.kogakugassan;
 
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.jukyushakoshinkekkaichiran.JukyushaKoshinKekkaIchiranSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.gassanshikyugakukakuninichiran.GassanShikyugakuKakuninIchiranSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
  *
  * @reamsid_L DBC-2680-010 xicongwang
  */
-public class KogakuGassanKakuninIchiranPageBreak extends PageBreaker<JukyushaKoshinKekkaIchiranSource> {
+public class KogakuGassanKakuninIchiranPageBreak extends PageBreaker<GassanShikyugakuKakuninIchiranSource> {
 
     private final List<RString> breakKeysList;
 
@@ -35,8 +35,8 @@ public class KogakuGassanKakuninIchiranPageBreak extends PageBreaker<JukyushaKos
     }
 
     @Override
-    public boolean isBreak(ReportLineRecord<JukyushaKoshinKekkaIchiranSource> currentSource,
-            ReportLineRecord<JukyushaKoshinKekkaIchiranSource> nextSource) {
+    public boolean isBreak(ReportLineRecord<GassanShikyugakuKakuninIchiranSource> currentSource,
+            ReportLineRecord<GassanShikyugakuKakuninIchiranSource> nextSource) {
 
         if (this.breakKeysList.contains(KogakuGassanShikyugakuKeisanKekkaInOutputOrder.郵便番号.get項目ID())
                 && !currentSource.getSource().yubinNo.equals(nextSource.getSource().yubinNo)) {
@@ -54,16 +54,16 @@ public class KogakuGassanKakuninIchiranPageBreak extends PageBreaker<JukyushaKos
                 && !currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
             return true;
         } else if (this.breakKeysList.contains(KogakuGassanShikyugakuKeisanKekkaInOutputOrder.証記載保険者番号.get項目ID())
-                && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
+                && !currentSource.getSource().shoKisaiHokenshaNo.equals(nextSource.getSource().shoKisaiHokenshaNo)) {
             return true;
         } else if (this.breakKeysList.contains(KogakuGassanShikyugakuKeisanKekkaInOutputOrder.被保険者番号.get項目ID())
-                && !currentSource.getSource().listList1_4.equals(nextSource.getSource().listList1_4)) {
+                && !currentSource.getSource().hihokenshaNo.equals(nextSource.getSource().hihokenshaNo)) {
             return true;
         } else if (this.breakKeysList.contains(KogakuGassanShikyugakuKeisanKekkaInOutputOrder.対象年度.get項目ID())
-                && !currentSource.getSource().listList1_4.equals(nextSource.getSource().listList1_4)) {
+                && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
             return true;
         } else if (this.breakKeysList.contains(KogakuGassanShikyugakuKeisanKekkaInOutputOrder.申請書整理番号.get項目ID())
-                && !currentSource.getSource().listList1_4.equals(nextSource.getSource().listList1_4)) {
+                && !currentSource.getSource().listUpper_4.equals(nextSource.getSource().listUpper_4)) {
             return true;
         }
         return false;
