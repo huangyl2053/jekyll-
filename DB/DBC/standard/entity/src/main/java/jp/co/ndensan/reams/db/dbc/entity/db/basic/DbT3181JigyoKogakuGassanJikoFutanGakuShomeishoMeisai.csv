@@ -1,0 +1,12 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+taishoNendo,UDD012YSeireki,FlexibleYear,,,,,対象年度,A
+hokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,証記載保険者番号,A
+shikyuShinseishoSeiriNo,varchar,RString,,,,,支給申請書整理番号,A
+tennyumaeHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,転入前保険者番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+taishoM,varchar,RString,,,,,対象月,A
+jikoFutanGaku,numeric,Decimal,,,,,自己負担額,A
+uchisu_70_74JikoFutanGaku,numeric,Decimal,,,,,70-74自己負担額（内数）,A
+under_70KogakuShikyuGaku,numeric,Decimal,,,,,70未満高額支給額,A
+over_70_74KogakuShikyuGaku,numeric,Decimal,,,,,70-74高額支給額,A
+tekiyo,varchar,RString,,,,,摘要,A
