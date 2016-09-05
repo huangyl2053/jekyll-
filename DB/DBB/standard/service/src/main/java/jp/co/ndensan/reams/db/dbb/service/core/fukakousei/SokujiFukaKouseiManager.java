@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.ca.cax.business.core.shunokanri.shunokanri.ShunoKanri
 import jp.co.ndensan.reams.ca.cax.service.core.shuno.ShunoService;
 import jp.co.ndensan.reams.ca.cax.service.core.shuno.shuno.ShunoManager;
 import jp.co.ndensan.reams.ca.cax.service.saiban.ChoteiSaiban;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.Gemmen;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
