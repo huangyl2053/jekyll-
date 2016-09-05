@@ -244,7 +244,7 @@ public class KagoMoshitate extends ModelBase<KagoMoshitateIdentifier, DbT3059Kag
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

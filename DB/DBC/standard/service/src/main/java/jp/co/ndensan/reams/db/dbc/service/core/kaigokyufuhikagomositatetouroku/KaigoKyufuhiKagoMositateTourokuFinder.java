@@ -16,7 +16,12 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kaigokyufuhikagom
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7056GappeiShichosonDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -28,24 +33,36 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class KaigoKyufuhiKagoMositateTourokuFinder {
 
     private final MapperProvider mapperProvider;
-    private final DbT3059KagoMoshitateDac dac;
+    private final DbT3059KagoMoshitateDac dbT3059dac;
+    private final DbT7051KoseiShichosonMasterDac dbT7051dac;
+    private final DbT7056GappeiShichosonDac dbT7056dac;
 
     /**
      * コンストラクタです。
      */
     KaigoKyufuhiKagoMositateTourokuFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.dac = InstanceProvider.create(DbT3059KagoMoshitateDac.class);
+        this.dbT3059dac = InstanceProvider.create(DbT3059KagoMoshitateDac.class);
+        this.dbT7051dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
+        this.dbT7056dac = InstanceProvider.create(DbT7056GappeiShichosonDac.class);
     }
 
     /**
      * コンストラクタです。
      *
-     * @param mapperProvider MapperProvider
+     * @param mapperProvide mapperProvide
+     * @param dbT3059dac dac
+     * @param dbT7051dac dbT7051dac
+     * @param dbT7056dac dbT7056dac
      */
-    KaigoKyufuhiKagoMositateTourokuFinder(MapperProvider mapperProvide, DbT3059KagoMoshitateDac dac) {
+    KaigoKyufuhiKagoMositateTourokuFinder(MapperProvider mapperProvide,
+            DbT3059KagoMoshitateDac dbT3059dac,
+            DbT7051KoseiShichosonMasterDac dbT7051dac,
+            DbT7056GappeiShichosonDac dbT7056dac) {
         this.mapperProvider = mapperProvide;
-        this.dac = dac;
+        this.dbT3059dac = dbT3059dac;
+        this.dbT7051dac = dbT7051dac;
+        this.dbT7056dac = dbT7056dac;
     }
 
     /**
@@ -68,7 +85,7 @@ public class KaigoKyufuhiKagoMositateTourokuFinder {
     public int selectKyufuKanrihyoList(JigyoshaNo 事業所番号,
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月) {
-        DbT3059KagoMoshitateEntity entity = dac.getMax履歴番号(事業所番号, 被保険者番号, サービス提供年月);
+        DbT3059KagoMoshitateEntity entity = dbT3059dac.getMax履歴番号(事業所番号, 被保険者番号, サービス提供年月);
         if (entity != null) {
             return entity.getRirekiNo();
         }
@@ -86,8 +103,37 @@ public class KaigoKyufuhiKagoMositateTourokuFinder {
         IKaigoKyufuhiKagoMositateTourokuMapper mapper = mapperProvider.create(IKaigoKyufuhiKagoMositateTourokuMapper.class);
         List<KaigoKyufuhiKagoMositateTourokuEntity> entityList = mapper.get給付実績一覧(param);
         for (KaigoKyufuhiKagoMositateTourokuEntity entity : entityList) {
+            entity.initializeMd5ToEntities();
             result.add(new KaigoKyufuhiKagoMositateTourokuResult(entity));
         }
         return SearchResult.of(result, 0, false);
+    }
+
+    /**
+     * 保険者が単一保険者の場合の証記載保険者名の取得します。
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @return 旧市町村名称
+     */
+    public RString get旧市町村名称(RString 証記載保険者番号) {
+        List<DbT7056GappeiShichosonEntity> entityList = dbT7056dac.get旧市町村名称(証記載保険者番号);
+        if (!entityList.isEmpty()) {
+            return entityList.get(0).getKyuShichosonMeisho();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 保険者が広域保険者の場合、証記載保険者名の取得します。
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @return 市町村名称
+     */
+    public RString get市町村名称(RString 証記載保険者番号) {
+        List<DbT7051KoseiShichosonMasterEntity> entityList = dbT7051dac.get市町村名称(証記載保険者番号);
+        if (!entityList.isEmpty()) {
+            return entityList.get(0).getShichosonMeisho();
+        }
+        return RString.EMPTY;
     }
 }
