@@ -151,25 +151,25 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
         if (すべて.equals(抽出区分)) {
             parameter.set抽出区分(null);
         } else {
-            parameter.set抽出区分(Kaigogassan_ChushutsuKubun.直近.get名称());
+            parameter.set抽出区分(Kaigogassan_ChushutsuKubun.直近.getコード());
         }
 
         RString データ区分 = div.getChushutsuJokenPanel().getDdlDetaKubun().getSelectedValue();
         if (すべて.equals(データ区分)) {
             parameter.setデータ区分(null);
         } else if (国保連作成.equals(データ区分)) {
-            parameter.setデータ区分(Kaigogassan_DataKubun.国保連作成.get名称());
+            parameter.setデータ区分(Kaigogassan_DataKubun.国保連作成.getコード());
         } else if (保険者作成.equals(データ区分)) {
-            parameter.setデータ区分(Kaigogassan_DataKubun.保険者作成.get名称());
+            parameter.setデータ区分(Kaigogassan_DataKubun.保険者作成.getコード());
         }
 
         RString データ種類 = div.getChushutsuJokenPanel().getRadDataShurui().getSelectedValue();
         if (すべて.equals(データ種類)) {
             parameter.setデータ種類(null);
         } else if (通常データ.equals(データ種類)) {
-            parameter.setデータ種類(Kaigogassan_DataShubetsu.通常.get名称());
+            parameter.setデータ種類(Kaigogassan_DataShubetsu.通常.getコード());
         } else if (仮算定データ.equals(データ種類)) {
-            parameter.setデータ種類(Kaigogassan_DataShubetsu.仮算定.get名称());
+            parameter.setデータ種類(Kaigogassan_DataShubetsu.仮算定.getコード());
         }
 
         RString 対象年度 = div.getChushutsuJokenPanel().getDdlTaishoNendo().getSelectedValue();
