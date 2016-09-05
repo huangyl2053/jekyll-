@@ -455,11 +455,19 @@ public class KubunShikyuGendogakuMainHandler {
         List<dgShikyuGendogaku_Row> rowList = div.getKubunShikyuGendogakuIchiran()
                 .getDgShikyuGendogaku().getDataSource();
         for (dgShikyuGendogaku_Row row : rowList) {
-            if (RS_1.equals(row.getHdnSaishinFlag())
-                    && row.getTekiyoShuryoYm().getValue() == null
-                    && テーブル区分.equals(row.getTableKubun())) {
-                setUpdateList(適用開始年月.minusMonth(INDEX_1), update居宅List,
-                        update上乗せ居宅List, row, 居宅HoldList, 上乗せ居宅HoldList);
+            if (ShikyuGendogakuTableKubun.標準.get名称().equals(テーブル区分)) {
+                if (RS_1.equals(row.getHdnSaishinFlag())
+                        && テーブル区分.equals(row.getTableKubun())) {
+                    setUpdateList(適用開始年月.minusMonth(INDEX_1), update居宅List,
+                            update上乗せ居宅List, row, 居宅HoldList, 上乗せ居宅HoldList);
+                }
+            } else {
+                if (RS_1.equals(row.getHdnSaishinFlag())
+                        && row.getTekiyoShuryoYm().getValue() == null
+                        && テーブル区分.equals(row.getTableKubun())) {
+                    setUpdateList(適用開始年月.minusMonth(INDEX_1), update居宅List,
+                            update上乗せ居宅List, row, 居宅HoldList, 上乗せ居宅HoldList);
+                }
             }
         }
         KubunShikyuGendoGakuManager 居宅manager = new KubunShikyuGendoGakuManager();
