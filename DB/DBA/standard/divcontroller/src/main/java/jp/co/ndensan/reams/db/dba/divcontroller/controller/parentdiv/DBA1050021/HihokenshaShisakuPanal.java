@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.shichoson.Shichoson;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
@@ -105,6 +106,10 @@ public class HihokenshaShisakuPanal {
      */
     public ResponseData<HihokenshaShisakuPanalDiv> onClick_btnSave(HihokenshaShisakuPanalDiv div) {
         if (!ResponseHolder.isReRequest()) {
+            ValidationMessageControlPairs pairs = is暦上日(div);
+            if (pairs.existsError()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
@@ -122,6 +127,15 @@ public class HihokenshaShisakuPanal {
         manager.checkShikakuTorukuList(資格訂正情報, get当該識別対象の生年月日(div));
         資格訂正処理(資格訂正情報);
         div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
+    }
+
+    private ValidationMessageControlPairs is暦上日(HihokenshaShisakuPanalDiv div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtShutokuDate()));
+        pairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtShutokuTodokedeDate()));
+        pairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getTxtSoshitsuDate()));
+        pairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getTxtSoshitsuTodokedeDate()));
+        return pairs;
     }
 
     private void 施設入退所履歴期間重複チェック処理(HihokenshaShisakuPanalDiv div) {

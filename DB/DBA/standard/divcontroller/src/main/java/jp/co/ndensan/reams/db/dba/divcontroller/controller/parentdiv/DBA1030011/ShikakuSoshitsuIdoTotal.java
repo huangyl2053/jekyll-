@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -27,13 +28,13 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
@@ -78,7 +79,7 @@ public class ShikakuSoshitsuIdoTotal {
         if (hihokenshaNo == null || hihokenshaNo.isEmpty()) {
             return setNotExecutableAndReturnMessage(div, UrInformationMessages.該当データなし_データ内容.getMessage().replace("被保険者番号未設定のため、"));
         }
-        
+
         createHandler(div).load(ViewStateHolder.get(ViewStateKeys.資格喪失異動_状態_被保履歴タブ, RString.class));
         if (!RealInitialLocker.tryGetLock(create排他キー())) {
             div.setReadOnly(true);
@@ -259,22 +260,25 @@ public class ShikakuSoshitsuIdoTotal {
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnKakutei(ShikakuSoshitsuIdoTotalDiv div) {
         ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
-        
+
+        TextBoxFlexibleDate soshitsuDate = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuDate();
+        TextBoxFlexibleDate soshitsuTodokedeDate = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuTodokedeDate();
+
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().
-                getShikakuSoshitsuInput().getTxtShutokuDate().getValue().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(validationErrorMessage.喪失日,
-                    div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuDate()));
+        if (soshitsuDate.getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(validationErrorMessage.喪失日, soshitsuDate));
         }
-        if (div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().
-                getShikakuSoshitsuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(validationErrorMessage.届出日,
-                    div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuTodokedeDate()));
+        if (soshitsuTodokedeDate.getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(validationErrorMessage.届出日, soshitsuTodokedeDate));
         }
+
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(soshitsuDate));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(soshitsuTodokedeDate));
+
         if (validPairs.existsError()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        
+
         List<dgShikakuShutokuRireki_Row> rowlist = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridDataSource();
         dgShikakuShutokuRireki_Row row = rowlist.get(FIRSTINDEX);
         row.getSoshitsuDate().setValue(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
@@ -305,7 +309,7 @@ public class ShikakuSoshitsuIdoTotal {
         response.data = div;
         return response;
     }
-    
+
     /**
      * 「喪失日」フォーカスアウト処理します。
      *
@@ -318,7 +322,7 @@ public class ShikakuSoshitsuIdoTotal {
             if (div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()) {
                 div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuTodokedeDate()
                         .setValue(new FlexibleDate(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
-                                .getTxtShutokuDate().getValue().toString()));
+                                        .getTxtShutokuDate().getValue().toString()));
             }
         }
         response.data = div;
@@ -344,7 +348,7 @@ public class ShikakuSoshitsuIdoTotal {
         TaishoshaKey key = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
         return new ShikakuSoshitsuIdoTotalHandler(div, key);
     }
-    
+
     private enum validationErrorMessage implements IValidationMessage {
 
         喪失日(UrErrorMessages.必須項目),
