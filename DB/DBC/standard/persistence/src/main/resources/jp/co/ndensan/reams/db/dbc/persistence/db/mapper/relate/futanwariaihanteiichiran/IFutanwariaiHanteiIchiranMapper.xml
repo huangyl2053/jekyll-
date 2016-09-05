@@ -114,7 +114,7 @@
             前回利用者負担割合判定Temp."honninGoukeiShotokuGaku" as maeHonninGoukeiShotokuGaku,
             前回利用者負担割合判定Temp."setaiIchigouHihokenshaSu" as maeSetaiIchiGouHihokenshaSu,
             前回利用者負担割合判定Temp."yukoKaishiYMD" as maeYukoKaishiYMD,
-            前回利用者負担割合判定Temp."yukoShuryoYMD" as maeYukoShuryuYMD,
+            前回利用者負担割合判定Temp."yukoShuryoYMD" as maeYukoShuryoYMD,
             前回利用者負担割合判定Temp."nenkinShunyuGoukei" as maeNenkinShunyuGoukei,
             前回利用者負担割合判定Temp."sonotanoGoukeiShotokuKingakuGoukei" as maeSonotanoGoukeiShotokuKingakuGoukei,
             判定対象者Temp."hihokenshaKubunCode" as HanteiTaishoshaTemp_hihokenshaKubunCode,
@@ -216,7 +216,7 @@
         <result property="今回有効終了日" column="yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="今回年金収入合計" column="nenkinShunyuGoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="今回その他の合計所得金額合計" column="sonotanoGoukeiShotokuKingakuGoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="前回更正事由" column="maeKoseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回更正事由" column="maeKoseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="前回負担割合区分" column="maeFutanWariaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="前回本人合計所得金額" column="maeHonninGoukeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="前回世帯１号被保険者数" column="maeSetaiIchigouHihokenshaSu" />
