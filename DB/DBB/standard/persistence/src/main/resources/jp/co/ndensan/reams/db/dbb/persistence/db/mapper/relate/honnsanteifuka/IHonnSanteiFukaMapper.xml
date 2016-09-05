@@ -722,7 +722,7 @@
   
     <!--賦課情報一時テーブルを作成します。-->
     <insert id="createDbT2002FukaJohoTemp">
-        CREATE TEMP TABLE "DbT2002FukaJohoTemp"
+        CREATE TABLE rgdb."DbT2002FukaJohoTemp"
         (
         "choteiNendo" rshare."UDD012YSeireki",
         "fukaNendo" rshare."UDD012YSeireki",
@@ -799,7 +799,7 @@
     <!--賦課の情報一時テーブルを登録します。 -->
     <insert id="insert賦課の情報一時テーブル" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity">
         INSERT INTO 
-        "DbT2002FukaJohoTemp"
+        rgdb."DbT2002FukaJohoTemp"
         VALUES
         (#{choteiNendo},
         #{fukaNendo},

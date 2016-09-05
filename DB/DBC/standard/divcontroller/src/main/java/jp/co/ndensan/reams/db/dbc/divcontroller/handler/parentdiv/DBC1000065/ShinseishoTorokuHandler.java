@@ -165,9 +165,9 @@ public class ShinseishoTorokuHandler {
         DBC190030_KijunsyunygetsujiParameter parameter = new DBC190030_KijunsyunygetsujiParameter();
         FlexibleDate 世帯員把握基準日2 = new FlexibleDate(div.getTxtSetaiinHaakuKijunYMD()
                 .getValue().getYear().minusYear(1).toString().concat(十二月三十一.toString()));
-        parameter.set抽出対象(div.getRadChushutsuJoken().getSelectedKey());
+        parameter.set抽出条件(div.getRadChushutsuTaisho().getSelectedKey());
         if (div.getRadChushutsuTaisho().getSelectedKey() != null) {
-            parameter.set抽出条件(div.getRadChushutsuTaisho().getSelectedKey());
+            parameter.set抽出対象(div.getRadChushutsuJoken().getSelectedKey());
         }
         parameter.set処理年度(new FlexibleYear(div.getTxtShoriNendo().getValue().toString().substring(0, INDEX_4)));
         if (div.getTxtHihokenshaNo().getValue() != null) {
