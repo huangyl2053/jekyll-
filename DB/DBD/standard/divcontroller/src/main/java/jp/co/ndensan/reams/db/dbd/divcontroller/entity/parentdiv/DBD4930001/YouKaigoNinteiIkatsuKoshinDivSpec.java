@@ -10,12 +10,12 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
- *要介護認定一括更新のバリデーションクラスです
- * @author x_liuwei
+ *要介護認定一括更新のバリデーションクラスです。
+ * @reamsid_L DBD-2120-010 x_liuwei
  */
 public enum YouKaigoNinteiIkatsuKoshinDivSpec implements IPredicate<YouKaigoNinteiIkatsuKoshinDiv>{
     /**
-     * 認定日チェック
+     * 認定日チェック。
      */
     認定日チェック {
         @Override

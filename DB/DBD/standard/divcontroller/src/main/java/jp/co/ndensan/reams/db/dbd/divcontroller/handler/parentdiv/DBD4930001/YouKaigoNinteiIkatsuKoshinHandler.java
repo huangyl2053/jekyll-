@@ -13,14 +13,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *要介護認定一括更新のHandlerです
- * @author x_liuwei
+ * 要介護認定一括更新のHandlerです。
+ * @reamsid_L DBD-2120-010 x_liuwei
  */
 public class YouKaigoNinteiIkatsuKoshinHandler {
     private final YouKaigoNinteiIkatsuKoshinDiv div;
+    private FlexibleDate FlexibleDate;
     
     /**
-     * コンストラクタです。
+     * コンストラクターです。
      *
      * @param div YouKaigoNinteiIkatsuKoshinDiv
      */
@@ -29,7 +30,7 @@ public class YouKaigoNinteiIkatsuKoshinHandler {
     }
     
     /**
-     * 画面初期化
+     * 画面初期化。
      */
     public void initialize(){
         div.getTxtNinteibi().setValue(RDate.getNowDate());
@@ -39,11 +40,11 @@ public class YouKaigoNinteiIkatsuKoshinHandler {
     }
     
     /**
-     * ラジオボタンを選択する時
+     * ラジオボタンを選択する時。
      */
     public void changeTxtNinTeiBi(){
-        boolean isDisabled = div.getTxtNinteibi().isDisabled();
-        if(isDisabled){
+        RString key = div.getRadSetteiHoushiki().getSelectedKey();
+        if("1".endsWith(key.toString())){
             div.getTxtNinteibi().setDisabled(false);
             div.getTxtNinteibi().setValue(RDate.getNowDate());
         }else{
@@ -53,17 +54,16 @@ public class YouKaigoNinteiIkatsuKoshinHandler {
     }
     
     /**
-     * 認定日パラメータを設定する
-     * @return 
+     * 認定日パラメータを設定する。
+     * @return DBD560001Parameter
      */
     public DBD560001Parameter setBatchParameter(){
             DBD560001Parameter parameter = new DBD560001Parameter();
             if(div.getTxtNinteibi().isDisabled()){
-                parameter.set認定日(new FlexibleDate(""));
+                parameter.set認定日(FlexibleDate.EMPTY);
             }else{
                 parameter.set認定日(new FlexibleDate(div.getTxtNinteibi().getValue().toDateString()));
             }
-           
             return parameter;
         }
         
