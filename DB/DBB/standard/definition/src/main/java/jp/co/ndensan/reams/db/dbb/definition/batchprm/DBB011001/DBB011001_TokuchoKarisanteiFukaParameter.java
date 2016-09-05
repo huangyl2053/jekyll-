@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteifuka;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku.FukaJohoTorokuBatchParameter;
@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuchoKarisanteiFukaBatchParameter extends BatchParameterBase {
+public class DBB011001_TokuchoKarisanteiFukaParameter extends BatchParameterBase {
 
     private static final int NUM0 = 0;
     private static final String KEY_調定年度 = "調定年度";

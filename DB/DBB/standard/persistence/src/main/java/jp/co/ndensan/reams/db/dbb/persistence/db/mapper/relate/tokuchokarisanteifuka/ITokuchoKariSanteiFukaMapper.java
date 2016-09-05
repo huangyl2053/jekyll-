@@ -6,9 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchokarisanteifuka;
 
 import java.util.List;
-import java.util.Map;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteifuka.TokuchoKarisanteiFukaMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.FukaJohoLokukatuRelateEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.FukaJohoTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.FukaJohokeizokuRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.SikakuSaisinnsikiRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.TokuchoKarisanteiKekkaIchiranEntity;
@@ -30,31 +29,7 @@ public interface ITokuchoKariSanteiFukaMapper {
      * @param parameter Map
      * @return List
      */
-    List<TokutyoukariSannteiTyuushutuResultEntity> select特徴継続者(Map<String, Object> parameter);
-
-    /**
-     * 特徴仮算定抽出Tempを作成する。
-     */
-    void creat特徴仮算定抽出Temp();
-
-    /**
-     * 特徴仮算定抽出Tempをinset
-     *
-     * @param entity TokutyoukariSannteiTyuushutuEntity
-     */
-    void inset特徴仮算定抽出Temp(TokutyoukariSannteiTyuushutuEntity entity);
-
-    /**
-     * 前年度賦課Tempを作成する。
-     */
-    void create前年度賦課Temp();
-
-    /**
-     * inset前年度賦課Temp
-     *
-     * @param entity ZennNenndoFukaTempEntity
-     */
-    void inset前年度賦課Temp(ZennNenndoFukaTempEntity entity);
+    List<TokutyoukariSannteiTyuushutuResultEntity> select特徴継続者(TokuchoKarisanteiFukaMyBatisParameter parameter);
 
     /**
      * 特徴6月開始者を取得
@@ -62,7 +37,7 @@ public interface ITokuchoKariSanteiFukaMapper {
      * @param parameter Map<String, Object>
      * @return List
      */
-    List<TokutyoukariSannteiTyuushutuResultEntity> select特徴6月開始者(Map<String, Object> parameter);
+    List<TokutyoukariSannteiTyuushutuResultEntity> select特徴6月開始者(TokuchoKarisanteiFukaMyBatisParameter parameter);
 
     /**
      * 前年度賦課を取得
@@ -70,7 +45,7 @@ public interface ITokuchoKariSanteiFukaMapper {
      * @param parameter Map
      * @return List
      */
-    List<ZennNenndoFukaTempEntity> select前年度賦課(Map<String, Object> parameter);
+    List<ZennNenndoFukaTempEntity> select前年度賦課(TokuchoKarisanteiFukaMyBatisParameter parameter);
 
     /**
      * 最新履歴以外のデータを削除する。
@@ -90,31 +65,20 @@ public interface ITokuchoKariSanteiFukaMapper {
     List<TokutyoukariSannteiTyuushutuEntity> select不整合データ();
 
     /**
-     * delete特徴仮算定抽出Temp
+     * 資格等最新化（４月開始）情報を取得
      *
-     * @param entity TokutyoukariSannteiTyuushutuEntity
+     * @param parameter TokuchoKarisanteiFukaMyBatisParameter
+     * @return List<SikakuSaisinnsikiRelateEntity>
      */
-    void delete特徴仮算定抽出Temp(TokutyoukariSannteiTyuushutuEntity entity);
+    List<SikakuSaisinnsikiRelateEntity> select資格等最新化_４月開始登録(TokuchoKarisanteiFukaMyBatisParameter parameter);
 
     /**
      * 資格等最新化（４月開始）情報を取得
      *
-     * @param parameter Map<String, Object>
-     * @return List<SikakuSaisinnsiki>
+     * @param parameter TokuchoKarisanteiFukaMyBatisParameter
+     * @return List<SikakuSaisinnsikiRelateEntity>
      */
-    List<SikakuSaisinnsikiRelateEntity> select資格等最新化_４月開始(Map<String, Object> parameter);
-
-    /**
-     * create賦課の情報一時テーブル
-     */
-    void create賦課の情報一時テーブル();
-
-    /**
-     * inset賦課の情報一時テーブル
-     *
-     * @param entity 賦課の情報一時Entity
-     */
-    void inset賦課の情報一時テーブル(FukaJohoTempEntity entity);
+    List<SikakuSaisinnsikiRelateEntity> select資格等最新化_４月開更新(TokuchoKarisanteiFukaMyBatisParameter parameter);
 
     /**
      * 賦課情報_継続を取得
@@ -122,11 +86,6 @@ public interface ITokuchoKariSanteiFukaMapper {
      * @return 賦課情報の計算登録（継続）entity
      */
     List<FukaJohokeizokuRelateEntity> select賦課情報_継続();
-
-    /**
-     * clear賦課の情報一時テーブル
-     */
-    void clear賦課の情報一時テーブル();
 
     /**
      * select賦課情報_6月開始
@@ -138,17 +97,31 @@ public interface ITokuchoKariSanteiFukaMapper {
     /**
      * 特徴仮算定結果情報を取得
      *
-     * @param parameter Map<String, Object>
+     * @param parameter TokuchoKarisanteiFukaMyBatisParameter
      * @return 特徴仮算定結果情報
      */
-    List<TokuchoKarisanteiKekkaIchiranEntity> select特徴仮算定結果情報(Map<String, Object> parameter);
+    List<TokuchoKarisanteiKekkaIchiranEntity> select特徴仮算定結果情報(TokuchoKarisanteiFukaMyBatisParameter parameter);
 
     /**
      * 特徴仮算定計算後賦課情報Entity (特徴停止)を取得
      *
-     * @param parameter Map<String, Object>
+     * @param parameter TokuchoKarisanteiFukaMyBatisParameter
      * @return 特徴仮算定計算後賦課情報Entity (特徴停止)
      */
-    List<TokuchoKarisanteiKekkaIchiranTeisiEntity> select特徴仮算定計算後賦課情報_特徴停止(Map<String, Object> parameter);
+    List<TokuchoKarisanteiKekkaIchiranTeisiEntity> select特徴仮算定計算後賦課情報_特徴停止(TokuchoKarisanteiFukaMyBatisParameter parameter);
+
+    /**
+     * 処理日付管理テーブルの更新
+     *
+     * @param parameter TokuchoKarisanteiFukaMyBatisParameter
+     */
+    void update処理日付管理テーブル_特徴仮算定賦課(TokuchoKarisanteiFukaMyBatisParameter parameter);
+
+    /**
+     * 処理日付管理テーブルの更新
+     *
+     * @param parameter TokuchoKarisanteiFukaMyBatisParameter
+     */
+    void update処理日付管理テーブル_依頼金額計算(TokuchoKarisanteiFukaMyBatisParameter parameter);
 
 }

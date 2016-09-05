@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteifuka;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011001;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * バッチ設計_DBBBT33001_特徴仮算定賦課のparameter
@@ -20,5 +21,5 @@ public class ShuturyokuTyoutuke implements Serializable {
 
     private ReportId 帳票ID;
     private ReportId 帳票分類ID;
-    private Long 出力順ID;
+    private RString 出力順ID;
 }

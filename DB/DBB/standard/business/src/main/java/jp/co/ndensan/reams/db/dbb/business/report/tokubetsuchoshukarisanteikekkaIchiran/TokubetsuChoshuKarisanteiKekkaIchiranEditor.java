@@ -69,7 +69,7 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
      *
      * @param 市町村コード RString
      * @param 市町村名称 RString
-     * @param 特徴仮算定計算後賦課情報Entity TokuchoKariKeisangoFukaEntity
+     * @param 特徴仮算定計算後賦課情報Entity TokuchoKariKeisangoFukaTempEntity
      * @param 調定年度 FlexibleYear
      * @param 調定日時 YMDHMS
      * @param 並び順List List<RString>
@@ -144,6 +144,8 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         }
         if (特徴仮算定計算後賦課情報Entity.get世帯コード() != null) {
             source.listLower_2 = 特徴仮算定計算後賦課情報Entity.get世帯コード().value();
+        } else {
+            source.listLower_2 = RString.EMPTY;
         }
         AtenaMeisho 漢字氏名 = 特徴仮算定計算後賦課情報Entity.get宛名().getKanjiShimei();
         if (漢字氏名 != null) {
