@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd204010;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.tokuchijissekilist.TargetYearMonth;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd204010.TaishoKyufuJissekiTokuteiMybatisprmParamter;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,7 +26,7 @@ public class TaishoKyufuJissekiTokuteiProcessParameter implements IBatchProcessP
     private TargetYearMonth 対象年月;
     private FlexibleYearMonth 年月範囲の開始;
     private FlexibleYearMonth 年月範囲の終了;
-    private JigyoshaNo 事業者番号;
+    private RString 事業者番号;
 
     /**
      * 対象者一次特定の引数を返します。
@@ -37,7 +37,7 @@ public class TaishoKyufuJissekiTokuteiProcessParameter implements IBatchProcessP
      * @param 事業者番号 事業者番号
      */
     public TaishoKyufuJissekiTokuteiProcessParameter(TargetYearMonth 対象年月,
-            FlexibleYearMonth 年月範囲の開始, FlexibleYearMonth 年月範囲の終了, JigyoshaNo 事業者番号) {
+            FlexibleYearMonth 年月範囲の開始, FlexibleYearMonth 年月範囲の終了, RString 事業者番号) {
         this.対象年月 = 対象年月;
         this.年月範囲の開始 = 年月範囲の開始;
         this.年月範囲の終了 = 年月範囲の終了;

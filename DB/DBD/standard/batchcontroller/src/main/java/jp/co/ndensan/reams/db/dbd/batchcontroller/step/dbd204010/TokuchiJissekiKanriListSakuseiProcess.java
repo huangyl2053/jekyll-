@@ -7,12 +7,15 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd204010;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd200012.TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200012.TokuchiJissekiKanriListSakuseiOrderKey;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd204010.TokuchiJissekiKanriListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd204010.TokubetsuChiikiKasanKeigenJissekiKanriListEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.TokubetsuChiikiKasanKeigenJissekiKanri;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200012.TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
@@ -47,7 +50,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBD-3880-030 jinge
  */
-public class TokuchiJissekiKanriListSakuseiProcess extends BatchProcessBase<TokubetsuChiikiKasanKeigenJissekiKanriListEntity> {
+public class TokuchiJissekiKanriListSakuseiProcess extends BatchProcessBase<TokubetsuChiikiKasanKeigenJissekiKanri> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.tokubetsuchiikikasankeigenlist."
@@ -68,10 +71,12 @@ public class TokuchiJissekiKanriListSakuseiProcess extends BatchProcessBase<Toku
     private static final RString 出力 = new RString("【出力順】 ");
     private static IOutputOrder outputOrder;
     private static final RString より = new RString("＞");
+    private RString 出力順;
 
     @Override
     protected void initialize() {
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        出力順 = RString.EMPTY;
     }
 
     @BatchWriter
@@ -89,7 +94,9 @@ public class TokuchiJissekiKanriListSakuseiProcess extends BatchProcessBase<Toku
         RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
                 parameter.get帳票ID(), reamsLoginID, parameter.get改頁出力順ID());
-        RString 出力順 = MyBatisOrderByClauseCreator.create(TokuchiJissekiKanriListSakuseiOrderKey.class, outputOrder);
+        if (outputOrder != null) {
+            出力順 = MyBatisOrderByClauseCreator.create(TokuchiJissekiKanriListSakuseiOrderKey.class, outputOrder);
+        }
         return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toTokuchiJissekiKanriListSakuseiMybatisParameter(psmShikibetsuTaisho, 出力順));
     }
 
@@ -100,9 +107,10 @@ public class TokuchiJissekiKanriListSakuseiProcess extends BatchProcessBase<Toku
     }
 
     @Override
-    protected void process(TokubetsuChiikiKasanKeigenJissekiKanriListEntity t) {
-        //TODO  TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport reportSource = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport();
-        //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected void process(TokubetsuChiikiKasanKeigenJissekiKanri t) {
+        IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.get宛名());
+        TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport finder = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport(t, 地方公共団体, outputOrder, kojin);
+        finder.writeBy(reportSourceWriter);
     }
 
     @Override
