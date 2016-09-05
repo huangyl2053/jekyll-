@@ -21,17 +21,14 @@ public class JigyohokokuGeppoYoshikiBesshiData {
 
     private RString 集計区分;
     private RString 作成日時;
-    private RString 年報月報区分;
-    private RString 集計期間FROM;
-    private RString 集計期間TO;
-    private RString 集計年月;
-    private RString 集計年度;
+    private RString 集計範囲;
     private RString 保険者番号;
     private RString 保険者名;
     private RString 項目標題列1;
     private RString 項目標題列2;
     private RString 項目標題列3;
     private RString 項目標題列4;
+
     private RString 前月末現在の集計結果値_1;
     private RString 当月中増の集計結果値_1;
     private RString 当月中減の集計結果値_1;

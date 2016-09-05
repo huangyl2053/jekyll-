@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -52,7 +51,6 @@ public class JigyoHokokuDataReportDBU300001Process extends BatchProcessBase<Jigy
     private static final RString 過去集計分旧市町村区分 = new RString("1");
     private static final RString 固定文字列_旧 = new RString("（旧）");
     private static final RString 年報月報区分 = new RString("年報");
-    private static final RString 年報月報区分CODE = new RString("2");
     private static final int 数値_10 = 10;
     private static final Decimal 数値_11 = new Decimal(11);
     private static final Decimal 数値_21 = new Decimal(21);
@@ -137,10 +135,7 @@ public class JigyoHokokuDataReportDBU300001Process extends BatchProcessBase<Jigy
         reportData.set作成日時(get作成日時());
         reportData.set保険者名(保険者名);
         reportData.set保険者番号(保険者番号);
-        reportData.set年報月報区分(年報月報区分CODE);
-        reportData.set集計年度(getパターン107(processParameter.get集計年度()));
-        reportData.set集計期間FROM(getパターン62(processParameter.get集計開始年月()));
-        reportData.set集計期間TO(getパターン62(processParameter.get集計終了年月()));
+        reportData.set集計範囲(getパターン107(processParameter.get集計年度()));
         reportData.set第1号被保険者数_項目標題列1(new RString("前年度末現在"));
         reportData.set第1号被保険者数_項目標題列2(new RString("当年度中増"));
         reportData.set第1号被保険者数_項目標題列3(new RString("当年度中減"));
@@ -220,14 +215,6 @@ public class JigyoHokokuDataReportDBU300001Process extends BatchProcessBase<Jigy
         printTimeStamp.append(DATE_秒);
         printTimeStamp.append(作成);
         return printTimeStamp.toRString();
-    }
-
-    private RString getパターン62(RString 年月) {
-        if (RString.isNullOrEmpty(年月)) {
-            return RString.EMPTY;
-        }
-        return new FlexibleYearMonth(年月).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private RString getパターン107(RString 集計年度) {
