@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -536,8 +535,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             入所年月日 = div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue();
             施設入退所情報.set入所処理年月日(入所処理年月日).set入所年月日(入所年月日);
         }
-        if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue() != null
-                && !div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()) {
+        if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue() != null) {
             退所処理年月日 = new FlexibleDate(RDate.getNowDate().toString());
             退所年月日 = div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue();
             施設入退所情報.set退所処理年月日(退所処理年月日).set退所年月日(退所年月日);

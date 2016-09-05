@@ -97,7 +97,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
             }
             return ResponseData.of(div).setState(DBA2040011StateName.追加解除);
         } else if (メニューID_施設変更により変更.equals(menuId)) {
-           RString 台帳種別 = new RString(DaichoType.他市町村住所地特例者.getコード().toString());
+            RString 台帳種別 = new RString(DaichoType.他市町村住所地特例者.getコード().toString());
             div.getCddShisetsuNyutaishoRirekiKanri().initialize(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード(), 台帳種別);
             return ResponseData.of(div).setState(DBA2040011StateName.追加変更);
         }
