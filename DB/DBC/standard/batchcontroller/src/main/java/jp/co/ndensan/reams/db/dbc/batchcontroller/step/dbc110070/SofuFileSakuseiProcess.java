@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1002Kok
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110070.KogakuGassanKeisanKekkaRenrakuJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110070.KogakuGassanKeisanKekkaRenrakuJohoTmpEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc110070.IKogakugassanKeisankekkaRenrakuhyoOutMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -92,7 +93,7 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
     private int 総出力件数;
     private int レコード番号;
     private int flag;
-    private BatchDbReader reader;
+    private RString 出力用レコード件数;
     private Encode 文字コード;
     private RString eucFilePath;
     private RString 出力ファイル名;
@@ -126,12 +127,12 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
         }
         保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        出力用レコード件数 = getレコード件数();
     }
 
     @Override
     protected IBatchReader createReader() {
-        reader = new BatchDbReader(ID);
-        return reader;
+        return new BatchDbReader(ID);
     }
 
     @Override
@@ -230,7 +231,7 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
         controlEntity.setレコード種別(RecordShubetsu.コントロールレコード.getコード());
         controlEntity.setレコード番号_連番(new RString(レコード番号));
         controlEntity.setボリュ_ム通番(RSTRING_0);
-        controlEntity.setレコード件数(new RString(reader.getCount()));
+        controlEntity.setレコード件数(出力用レコード件数);
         controlEntity.setデータ種別(ConfigKeysKokuhorenSofu.高額合算計算結果連絡票情報.getコード());
         controlEntity.set福祉事務所特定番号(RSTRING_0);
         controlEntity.set保険者番号(保険者番号);
@@ -425,6 +426,26 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
         endEntity.setレコード種別(RecordShubetsu.エンドレコード.getコード());
         endEntity.setレコード番号_連番(new RString(レコード番号));
         eucCsvWriter.writeLine(endEntity);
+    }
+
+    private RString getレコード件数() {
+        int 計算結果レコード件数 = 0;
+        int 明細レコード件数 = 0;
+        IKogakugassanKeisankekkaRenrakuhyoOutMapper mapper = getMapper(IKogakugassanKeisankekkaRenrakuhyoOutMapper.class);
+        List<KogakuGassanKeisanKekkaRenrakuJohoTmpEntity> tmpEntityList
+                = mapper.get送付ファイル作成データ();
+        if (tmpEntityList != null && !tmpEntityList.isEmpty()) {
+            明細レコード件数 = tmpEntityList.size();
+            List<Integer> 連番List = new ArrayList<>();
+            for (KogakuGassanKeisanKekkaRenrakuJohoTmpEntity tmpEntity : tmpEntityList) {
+                if (!連番List.contains(tmpEntity.get高額合算支給額計算結果一時().getRenban())) {
+                    連番List.add(tmpEntity.get高額合算支給額計算結果一時().getRenban());
+                }
+            }
+            計算結果レコード件数 = 連番List.size();
+        }
+
+        return new RString(計算結果レコード件数 * INT_2 + 明細レコード件数);
     }
 
     private RString trimDecimal(Decimal dec) {

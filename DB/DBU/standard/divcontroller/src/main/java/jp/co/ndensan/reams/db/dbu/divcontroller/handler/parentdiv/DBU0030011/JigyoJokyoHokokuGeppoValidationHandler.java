@@ -62,8 +62,8 @@ public class JigyoJokyoHokokuGeppoValidationHandler {
         if (model != null) {
             list = model.getList();
         }
-        if (new RString("gappei").equals(div.getJikkoTanni().getRadHokenshaKyuShichoson().getSelectedKey())
-                || new RString("koseiShichoson").equals(div.getJikkoTanni().getRadKoikiKoseiShichoson().getSelectedKey())
+        if ((new RString("kyuShichoson").equals(div.getJikkoTanni().getRadHokenshaKyuShichoson().getSelectedKey())
+                || new RString("koseiShichoson").equals(div.getJikkoTanni().getRadKoikiKoseiShichoson().getSelectedKey()))
                 && list.isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(JigyoJokyoHokokuGeppoValidationHandler.JigyoJokyoHokokuMessages.市町村チェック));
         }

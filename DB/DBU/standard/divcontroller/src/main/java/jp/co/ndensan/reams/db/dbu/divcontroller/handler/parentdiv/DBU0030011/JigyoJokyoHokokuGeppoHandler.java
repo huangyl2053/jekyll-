@@ -376,14 +376,12 @@ public class JigyoJokyoHokokuGeppoHandler {
     }
 
     private void setCblGassan1() {
-        if (div.getTxtShukeiYM2().getValue() != null && !div.getTxtShukeiYM2().getValue().isEmpty()) {
-            div.getCblIppanGembutsu().setDisabled(false);
+        if (!div.getTxtShukeiYM2().isDisabled()) {
             一般状況14_現物分.clear();
             一般状況14_現物分.add(new RString("ippan12_14Genbutsu"));
             div.getCblIppanGembutsu().setSelectedItemsByKey(一般状況14_現物分);
         }
-        if (div.getTxtShukeiYM3().getValue() != null && !div.getTxtShukeiYM3().getValue().isEmpty()) {
-            div.getCblIppanShokan().setDisabled(false);
+        if (!div.getTxtShukeiYM3().isDisabled()) {
             一般状況14_償還分.clear();
             一般状況14_償還分.add(new RString("ippan12_14Genbutsu"));
             div.getCblIppanShokan().setSelectedItemsByKey(一般状況14_償還分);
@@ -391,12 +389,12 @@ public class JigyoJokyoHokokuGeppoHandler {
     }
 
     private void setCblGassan2() {
-        if (div.getTxtShukeiYM4().getValue() != null && !div.getTxtShukeiYM4().getValue().isEmpty()) {
+        if (!div.getTxtShukeiYM4().isDisabled()) {
             保険給付決定状況_現物分.clear();
             保険給付決定状況_現物分.add(new RString("hokenKyufuGenbutsu"));
             div.getCblHokenKyufuGembutsu().setSelectedItemsByKey(保険給付決定状況_現物分);
         }
-        if (div.getTxtShukeiYM5().getValue() != null && !div.getTxtShukeiYM5().getValue().isEmpty()) {
+        if (!div.getTxtShukeiYM5().isDisabled()) {
             決定状況合算_償還分.clear();
             決定状況合算_償還分.add(決定状況償還分);
             div.getCblHokenKyufuShokan().setSelectedItemsByKey(決定状況合算_償還分);
@@ -481,22 +479,19 @@ public class JigyoJokyoHokokuGeppoHandler {
      * チェックボックスの初期選択処理です。
      */
     public void setShutsuryoku() {
-        if (div.getTxtShukeiYM1().getValue() != null && !div.getTxtShukeiYM1().getValue().isEmpty()) {
-            div.getCblIppan1to10().setDisabled(false);
+        if (!div.getTxtShukeiYM1().isDisabled()) {
             一般状況10.clear();
             一般状況10.add(new RString("ippan1_11"));
             div.getCblIppan1to10().setSelectedItemsByKey(一般状況10);
         }
-        if (div.getTxtShukeiYM2().getValue() == null || div.getTxtShukeiYM2().getValue().isEmpty()
-                && div.getTxtShukeiYM3().getValue() == null || div.getTxtShukeiYM3().getValue().isEmpty()) {
+        if (div.getCblGassan1().isDisabled()) {
             setCblGassan1();
         } else {
             一般状況_合算.clear();
             一般状況_合算.add(ALL);
             div.getCblGassan1().setSelectedItemsByKey(一般状況_合算);
         }
-        if (div.getTxtShukeiYM4().getValue() == null || div.getTxtShukeiYM4().getValue().isEmpty()
-                && div.getTxtShukeiYM5().getValue() == null || div.getTxtShukeiYM5().getValue().isEmpty()) {
+        if (div.getCblGassan2().isDisabled()) {
             setCblGassan2();
         } else {
             決定状況合算.clear();
@@ -521,9 +516,10 @@ public class JigyoJokyoHokokuGeppoHandler {
     /**
      * 実行ボタン処理です
      *
+     * @param div 様式別連携情報Div
      * @return HoshuShiharaiJunbiBatchParameter
      */
-    public JigyoHokokuRenkeiBatchParameter onClick_btnJikko() {
+    public JigyoHokokuRenkeiBatchParameter onClick_btnJikko(JigyoJokyoHokokuGeppoDiv div) {
         ShichosonSelectorModel model = DataPassingConverter.deserialize(div.getKyuShichoson(), ShichosonSelectorModel.class);
         List<ShichosonSelectorResult> list = new ArrayList<>();
         if (model != null) {
@@ -535,7 +531,9 @@ public class JigyoJokyoHokokuGeppoHandler {
                 市町村コードリスト.add(result.get市町村コード().value());
             }
         }
-        市町村コードリスト.add(new RString("123401"));
+        if (市町村コードリスト.isEmpty()) {
+            市町村コードリスト.add(div.getShichosonCode());
+        }
         JigyoHokokuRenkeiBatchParameter batchParameter = new JigyoHokokuRenkeiBatchParameter(
                 div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedKey(),
                 dateToRString(div.getTblShutsuryokuTaisho().getTxtShukeiYM1().getValue()),

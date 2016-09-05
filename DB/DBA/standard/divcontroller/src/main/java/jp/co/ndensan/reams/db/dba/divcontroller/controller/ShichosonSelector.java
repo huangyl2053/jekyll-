@@ -1,6 +1,8 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorResult;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonSelector.shichosonSelector.ShichosonSelectorDiv;
@@ -79,14 +81,14 @@ public class ShichosonSelector {
     public ResponseData<ShichosonSelectorDiv> onClick_btnSentaku(ShichosonSelectorDiv div) {
         ResponseData<ShichosonSelectorDiv> response = new ResponseData<>();
         ShichosonSelectorModel model = new ShichosonSelectorModel();
-        SearchResult<ShichosonSelectorResult> resultList = SearchResult.of(Collections.<ShichosonSelectorResult>emptyList(), 0, false);
+        List<ShichosonSelectorResult> resultList = new ArrayList<>();
         for (dgShichoson_Row row : div.getDgShichoson().getSelectedItems()) {
             ShichosonSelectorResult result = new ShichosonSelectorResult();
             result.set市町村コード(new LasdecCode(row.getTxtShichosonCode()));
             result.set市町村名(row.getTxtShichosonName());
-            resultList.records().add(result);
+            resultList.add(result);
         }
-        model.setList(resultList.records());
+        model.setList(resultList);
         div.setKyuShichoson(DataPassingConverter.serialize(model));
         response.data = div;
         return response;
