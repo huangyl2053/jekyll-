@@ -140,7 +140,7 @@ public class NenreiKaikyubetsuYokaigodoJokyoProcess extends BatchProcessBase<Tou
                 市町村番号, 市町村名, 基準日, 地区, 統計人数Entityリスト);
         report.writeBy(reportSourceWriter);
         OutputJokenhyo outputJokenhyo = new OutputJokenhyo();
-        outputJokenhyo.outputJokenhyoFactory();
+        outputJokenhyo.outputJokenhyoFactory(parameter);
 
     }
 
