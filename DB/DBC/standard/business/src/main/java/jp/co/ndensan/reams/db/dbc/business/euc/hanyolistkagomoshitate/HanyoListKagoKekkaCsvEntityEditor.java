@@ -186,7 +186,7 @@ public class HanyoListKagoKekkaCsvEntityEditor {
         csvEntity.set取扱年月(format日付項目(entity.get過誤決定明細().getToriatsukaiYM()));
         if (entity.get過誤決定明細() != null) {
             if (!RString.isNullOrEmpty(entity.get過誤決定明細().getHokenshaKubun())) {
-                csvEntity.set保険者区分(KagoMoshitateKekka_HokenshaKubun.toValue(entity.get過誤決定明細().getHokenshaKubun()).get名称());
+                csvEntity.set保険者区分(KagoMoshitateKekka_HokenshaKubun.toValue(entity.get過誤決定明細().getHokenshaKubun()).get略称());
             }
             csvEntity.set過誤事業者名(entity.get過誤決定事業者().getJigyoshaName().getColumnValue());
             csvEntity.set過誤事業者番号(entity.get過誤決定明細().getJigyoshoNo().getColumnValue());
