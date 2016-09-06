@@ -135,7 +135,7 @@ public class KubunShikyuGendoGakuManager {
                 requireNonNull(居宅サービス区分,
                         UrSystemErrorMessages.値がnull.getReplacedMessage(定値_居宅サービス区分支給限度額.toString()));
                 if (!居宅サービス区分.hasChanged()) {
-                    return;
+                    continue;
                 }
                 dac.save(居宅サービス区分.toEntity());
             }
