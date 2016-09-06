@@ -19,22 +19,22 @@ public class KogakuShikyuFushikyuKetteishaIchiranSource implements IReportSource
 
     @ReportItem(name = "printTimeStamp", length = 34, order = 1)
     public RString printTimeStamp;
-    @ReportItem(name = "kokuhorenName", length = 15, order = 2)
-    public RString kokuhorenName;
-    @ReportItem(name = "hokenshaName", length = 20, order = 3)
-    public RString hokenshaName;
-    @ReportItem(name = "hokenshaNo", length = 6, order = 4)
-    public RString hokenshaNo;
-    @ReportItem(name = "shutsuryokujun1", length = 10, order = 5)
+    @ReportItem(name = "shoKisaiHokenshaName", length = 20, order = 2)
+    public RString shoKisaiHokenshaName;
+    @ReportItem(name = "shoKisaiHokenshaNo", length = 6, order = 3)
+    public RString shoKisaiHokenshaNo;
+    @ReportItem(name = "shutsuryokujun1", length = 10, order = 4)
     public RString shutsuryokujun1;
-    @ReportItem(name = "shutsuryokujun2", length = 10, order = 6)
+    @ReportItem(name = "shutsuryokujun2", length = 10, order = 5)
     public RString shutsuryokujun2;
-    @ReportItem(name = "shutsuryokujun3", length = 10, order = 7)
+    @ReportItem(name = "shutsuryokujun3", length = 10, order = 6)
     public RString shutsuryokujun3;
-    @ReportItem(name = "shutsuryokujun4", length = 10, order = 8)
+    @ReportItem(name = "shutsuryokujun4", length = 10, order = 7)
     public RString shutsuryokujun4;
-    @ReportItem(name = "shutsuryokujun5", length = 10, order = 9)
+    @ReportItem(name = "shutsuryokujun5", length = 10, order = 8)
     public RString shutsuryokujun5;
+    @ReportItem(name = "kokuhorenName", length = 15, order = 9)
+    public RString kokuhorenName;
     @ReportItem(name = "kaipage4", length = 20, order = 10)
     public RString kaipage4;
     @ReportItem(name = "kaipage1", length = 20, order = 11)
