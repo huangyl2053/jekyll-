@@ -383,9 +383,12 @@ public class ShokanShikyuGendogakuMainHandler {
         FlexibleYearMonth 適用開始年月 = new FlexibleYearMonth(
                 div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().getFromValue().
                 getYearMonth().toString());
-        FlexibleYearMonth 適用終了年月 = new FlexibleYearMonth(
-                div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().getToValue().
-                getYearMonth().toString());
+        FlexibleYearMonth 適用終了年月 = FlexibleYearMonth.EMPTY;
+        if (div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().getToValue() != null) {
+            適用終了年月 = new FlexibleYearMonth(
+                    div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().getToValue().
+                    getYearMonth().toString());
+        }
         Decimal 支給限度単位数 = null;
         RString テーブル区分 = div.getShokanShikyuGendogakuShosai().getRadTableKubun().getSelectedValue();
 
@@ -540,7 +543,7 @@ public class ShokanShikyuGendogakuMainHandler {
                         && !RS_1.equals(row.getHdnSaishinFlag())
                         && 適用開始年月.minusMonth(INDEX_1).toDateString().equals(
                                 row.getTekiyoShuryoYM().getValue().getYearMonth().toDateString())) {
-                    setUpdateList(null, update償還List, update上乗せList, row,
+                    setUpdateList(FlexibleYearMonth.EMPTY, update償還List, update上乗せList, row,
                             償還HolderList, 上乗せ償還HolderList);
                 }
             }

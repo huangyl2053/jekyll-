@@ -52,8 +52,6 @@ public class TokubetsuPanelHandler {
                 div.getShichosonPanel().setVisible(false);
                 div.getBtnChikuGyoseikuCodeFrom().setDisplayNone(true);
                 div.getBtnChikuGyoseikuCodeTo().setDisplayNone(true);
-                div.getTxtChikuCodeFrom().setDisabled(true);
-                div.getTxtChikuCodeTo().setDisabled(true);
                 div.getBtnChikuJushoCodeFrom().setDisabled(true);
                 div.getBtnChikuJushoCodeTo().setDisabled(true);
             }
@@ -97,8 +95,6 @@ public class TokubetsuPanelHandler {
             set活性();
             clearvalue();
         } else {
-            div.getTxtChikuCodeFrom().setDisabled(true);
-            div.getTxtChikuCodeTo().setDisabled(true);
             set活性();
             clearvalue();
         }

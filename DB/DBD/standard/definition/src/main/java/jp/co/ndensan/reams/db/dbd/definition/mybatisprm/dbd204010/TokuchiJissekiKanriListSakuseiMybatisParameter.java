@@ -92,7 +92,7 @@ public class TokuchiJissekiKanriListSakuseiMybatisParameter implements IMyBatisP
     }
 
     private void edit市町村コード(LasdecCode 市町村コード) {
-        if (!市町村コード.isEmpty()) {
+        if (市町村コード != null && !市町村コード.isEmpty()) {
             is市町村コード_非空 = true;
         }
     }
