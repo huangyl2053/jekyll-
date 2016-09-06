@@ -65,7 +65,7 @@ public class HanyoListKagoKekkaNoRenbanOutputProcess extends BatchProcessBase<Ha
     private static final RString TITLE_抽出対象者 = new RString("【抽出対象者】");
     private static final RString TITLE_保険者 = new RString("　保険者：");
     private static final RString TITLE_国保連取扱年月 = new RString("　国保連取扱年月：");
-    private static final RString TITLE_保险者区分 = new RString("　保险者区分：");
+    private static final RString TITLE_保険者区分 = new RString("　保険者区分：");
     private static final RString TITLE_サービス提供年月 = new RString("　サービス提供年月：");
     private static final RString TITLE_事業者 = new RString("　事業者：");
     private static final RString 分 = new RString("分");
@@ -196,7 +196,7 @@ public class HanyoListKagoKekkaNoRenbanOutputProcess extends BatchProcessBase<Ha
 
     private void get抽出条件Part2(List<RString> 抽出条件) {
         if (!RString.isNullOrEmpty(parameter.get保険者区分())) {
-            抽出条件.add(TITLE_保险者区分.concat(KagoMoshitateKekka_HokenshaKubun.toValue(parameter.get保険者区分()).get名称()).concat(分));
+            抽出条件.add(TITLE_保険者区分.concat(KagoMoshitateKekka_HokenshaKubun.toValue(parameter.get保険者区分()).get名称()).concat(分));
         }
         if ((parameter.getサービス提供年月From() != null && !FlexibleYearMonth.EMPTY.equals(parameter.getサービス提供年月From()))
                 || (parameter.getサービス提供年月To() != null && !FlexibleYearMonth.EMPTY.equals(parameter.getサービス提供年月To()))) {
