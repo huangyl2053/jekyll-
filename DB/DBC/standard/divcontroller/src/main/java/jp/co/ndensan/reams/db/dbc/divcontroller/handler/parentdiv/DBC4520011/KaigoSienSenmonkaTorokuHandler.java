@@ -261,7 +261,7 @@ public class KaigoSienSenmonkaTorokuHandler {
     private void 介護支援専門員登録パネルに項目を設定する() {
         dgKaigoShienSenmoninIchiran_Row row = div.getKaigoShienSenmoninIchiran().getDgKaigoShienSenmoninIchiran().getClickedItem();
         div.getKaigoSienSenmoninToroku().getTxtKaigoSienSenmoninBango().setValue(row.getKaigoShienSenmoninNo());
-        div.getKaigoSienSenmoninToroku().getTxtKaigoSienSenmoninShimei().setValue(row.getShozokuJigyoshaMei());
+        div.getKaigoSienSenmoninToroku().getTxtKaigoSienSenmoninShimei().setValue(row.getKaigoShienSenmoninMei());
         div.getKaigoSienSenmoninToroku().getTxtKaingoSienSenmoninShimeiKana().setValue(row.getKaigoShienSenmoninMeiKana());
         RDate yukoKaishiDate = row.getYukoKaishiDate().getValue();
         if (null != yukoKaishiDate) {
@@ -277,6 +277,7 @@ public class KaigoSienSenmonkaTorokuHandler {
         }
         div.getKaigoSienSenmoninToroku().getCcdShozokuJigyosha().initialize();
         div.getKaigoSienSenmoninToroku().getCcdShozokuJigyosha().setNyuryokuShisetsuKodo(row.getShozokuJigyoshaNo());
+        div.getKaigoSienSenmoninToroku().getCcdShozokuJigyosha().setShisetsuMeisho(row.getShozokuJigyoshaMei());
     }
 
     /**

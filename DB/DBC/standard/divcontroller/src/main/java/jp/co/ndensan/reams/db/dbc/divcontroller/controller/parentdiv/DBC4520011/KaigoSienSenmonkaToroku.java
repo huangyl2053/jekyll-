@@ -156,6 +156,9 @@ public class KaigoSienSenmonkaToroku {
         RString 介護支援専門員番号 = div.getKaigoSienSenmoninToroku().getTxtKaigoSienSenmoninBango().getValue();
         RString 介護支援専門員氏名 = div.getKaigoSienSenmoninToroku().getTxtKaigoSienSenmoninShimei().getValue();
         boolean isSuccess = getHandler(div).介護支援専門員登録情報を保存する(介護支援専門員番号);
+        if (isSuccess) {
+            onClick_btnSearch(div);
+        }
         RString 完了メッセージ = isSuccess ? new RString(UrInformationMessages.保存終了.getMessage().evaluate())
                 : new RString(UrErrorMessages.異常終了.getMessage().evaluate());
         getHandler(div).介護完了メッセージパネルを表示する(完了メッセージ, 介護支援専門員番号, 介護支援専門員氏名, true);
