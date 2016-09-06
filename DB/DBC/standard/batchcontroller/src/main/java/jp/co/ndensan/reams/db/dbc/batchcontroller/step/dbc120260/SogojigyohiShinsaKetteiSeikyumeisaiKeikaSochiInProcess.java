@@ -223,6 +223,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInProcess extends Batc
         output = this.get帳票のCSVファイル作成(this.exEtntity, parameter.getシステム日付(), true);
         seikyugakuTsuchishoInCsvWriter.writeLine(output);
         seikyugakuTsuchishoInCsvWriter.close();
+        seikyugakuTsuchishoInManager.spool(SubGyomuCode.DBC介護給付, seikyugakuEucFilePath);
     }
 
     private SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInCsvEntity get帳票のCSVファイル作成(SogojigyohiShinsaKetteiSeikyumeisaihyoEntity entity,
