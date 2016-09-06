@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class JukyushaKyufuJissekiIchiranEditor implements IJukyushaKyufuJissekiIchiranEditor {
 
     private final JukyushaKyufuJissekiIchiranData data;
+    private static final RString 三角 = new RString("△");
 
     /**
      * インスタンスを生成します。
@@ -106,24 +108,23 @@ public class JukyushaKyufuJissekiIchiranEditor implements IJukyushaKyufuJissekiI
     }
 
     private RString set作成日時(RDateTime dateTime) {
-        dateTime = RDateTime.now();
         RStringBuilder hakkoYMD = new RStringBuilder();
         hakkoYMD.append(dateTime.getDate().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
                 fillType(FillType.ZERO).toDateString());
-        hakkoYMD.append("△");
+        hakkoYMD.append(三角);
         hakkoYMD.append(RString.HALF_SPACE);
         hakkoYMD.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
-        hakkoYMD.append("△");
+        hakkoYMD.append(三角);
         hakkoYMD.append("作成");
         return hakkoYMD.toRString();
     }
 
-    private RString set年月(RDateTime dateTime) {
-        dateTime = RDateTime.now();
+    private RString set年月(FlexibleYearMonth dateTime) {
         RStringBuilder hakkoYMD = new RStringBuilder();
-        hakkoYMD.append(dateTime.getDate().wareki().firstYear(FirstYear.ICHI_NEN).getYearMonth());
+        hakkoYMD.append(dateTime.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
+                separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString());
         return hakkoYMD.toRString();
     }
 }
