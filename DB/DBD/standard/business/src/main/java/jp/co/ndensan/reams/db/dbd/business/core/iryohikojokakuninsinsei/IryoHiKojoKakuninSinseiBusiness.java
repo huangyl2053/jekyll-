@@ -10,7 +10,7 @@ package jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei;
  *
  * @reamsid_L DBD_5770_030 tz_chengpeng
  */
-public class IryoHiKojoKakuninSinsei {
+public class IryoHiKojoKakuninSinseiBusiness {
 
     /**
      * 受給者判定
