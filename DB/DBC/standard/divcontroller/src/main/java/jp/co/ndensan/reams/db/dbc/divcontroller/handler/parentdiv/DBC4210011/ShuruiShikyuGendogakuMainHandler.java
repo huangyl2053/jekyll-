@@ -60,7 +60,10 @@ public class ShuruiShikyuGendogakuMainHandler {
             throw new PessimisticLockingException();
         } else {
             div.getShuruiShikyuGendogakuIchiran().setDisabled(false);
-            set初期化状態(map.get(ShuruiShikyuGendogakuMainResult.class));
+            if (map.get(ShuruiShikyuGendogakuMainResult.class) != null
+                    && !map.get(ShuruiShikyuGendogakuMainResult.class).isEmpty()) {
+                set初期化状態(map.get(ShuruiShikyuGendogakuMainResult.class));
+            }
             return map.get(ServiceShuruiShikyuGendoGaku.class);
         }
     }
