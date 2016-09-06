@@ -32,6 +32,7 @@ public class KyufuSaishinsaMoshitateshojohoSofuIchiranHeaderEditor implements IK
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
     private final SaishinsaMoshitateIchiranhyoTaisyoEntity 送付一覧表データ;
     private final List<RString> 出力順リスト;
     private final List<RString> 改頁リスト;
@@ -83,19 +84,27 @@ public class KyufuSaishinsaMoshitateshojohoSofuIchiranHeaderEditor implements IK
     }
 
     private void set並び順(KyufuSaishinsaMoshitateshojohoSofuIchiranSource source) {
-        source.shutsuryokujun1 = 出力順リスト.get(INDEX_0);
-        source.shutsuryokujun2 = 出力順リスト.get(INDEX_1);
-        source.shutsuryokujun3 = 出力順リスト.get(INDEX_2);
-        source.shutsuryokujun4 = 出力順リスト.get(INDEX_3);
-        source.shutsuryokujun5 = 出力順リスト.get(INDEX_4);
+        source.shutsuryokujun1 = get並び順(INDEX_0);
+        source.shutsuryokujun2 = get並び順(INDEX_1);
+        source.shutsuryokujun3 = get並び順(INDEX_2);
+        source.shutsuryokujun4 = get並び順(INDEX_3);
+        source.shutsuryokujun5 = get並び順(INDEX_4);
     }
 
     private void set改頁(KyufuSaishinsaMoshitateshojohoSofuIchiranSource source) {
-        source.kaipage1 = 改頁リスト.get(INDEX_0);
-        source.kaipage2 = 改頁リスト.get(INDEX_1);
-        source.kaipage3 = 改頁リスト.get(INDEX_2);
-        source.kaipage4 = 改頁リスト.get(INDEX_3);
-        source.kaipage5 = 改頁リスト.get(INDEX_4);
+        source.kaipage1 = get改頁(INDEX_1);
+        source.kaipage2 = get改頁(INDEX_2);
+        source.kaipage3 = get改頁(INDEX_3);
+        source.kaipage4 = get改頁(INDEX_4);
+        source.kaipage5 = get改頁(INDEX_5);
+    }
+
+    private RString get並び順(int index) {
+        return index < 出力順リスト.size() ? 出力順リスト.get(index) : RString.EMPTY;
+    }
+
+    private RString get改頁(int index) {
+        return index < 改頁リスト.size() ? 改頁リスト.get(index) : RString.EMPTY;
     }
 
     private RString get印刷日時(RDateTime datetime) {
