@@ -15,7 +15,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  *
  * @reamsid_L DBC-5160-040 donghj
  */
-public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriProperty extends ReportPropertyBase<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriSource> {
+public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriProperty extends
+        ReportPropertyBase<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriSource> {
 
     /**
      * コンストラクタです。

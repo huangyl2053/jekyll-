@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokugeppohokenkyufukogaku;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
@@ -41,11 +39,11 @@ public class JigyoHokokuGeppoHokenEUCEntity implements IJigyoHokokuGeppoHokenEUC
     @CsvField(order = 7, name = "横番号")
     private RString 横番号;
     @CsvField(order = 8, name = "被保険者番号")
-    private HihokenshaNo 被保険者番号;
+    private RString 被保険者番号;
     @CsvField(order = 9, name = "サービス提供年月")
     private FlexibleYearMonth サービス提供年月;
     @CsvField(order = 10, name = "証記載保険者番号")
-    private HokenshaNo 証記載保険者番号;
+    private RString 証記載保険者番号;
     @CsvField(order = 11, name = "履歴番号")
     private int 履歴番号;
     @CsvField(order = 12, name = "支給区分コード")

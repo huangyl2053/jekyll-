@@ -16,18 +16,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 public class JukyushaKyufuJissekiIchiranBuilder implements IJukyushaKyufuJissekiIchiranBuilder {
 
     private final IJukyushaKyufuJissekiIchiranEditor editor;
-    private final IJukyushaKyufuJissekiIchiranEditor bodyEditor;
 
     /**
      * インスタンスを生成します。
      *
      * @param editor {@link JukyushaKyufuJissekiIchiranEditor}
-     * @param bodyEditor {@link JukyushaKyufuJissekiIchiranBodyEditor}
      */
-    protected JukyushaKyufuJissekiIchiranBuilder(IJukyushaKyufuJissekiIchiranEditor editor,
-            IJukyushaKyufuJissekiIchiranEditor bodyEditor) {
+    protected JukyushaKyufuJissekiIchiranBuilder(IJukyushaKyufuJissekiIchiranEditor editor) {
         this.editor = editor;
-        this.bodyEditor = bodyEditor;
     }
 
     /**
@@ -37,6 +33,6 @@ public class JukyushaKyufuJissekiIchiranBuilder implements IJukyushaKyufuJisseki
      */
     @Override
     public JukyushaKyufuJissekiIchiranReportSource build() {
-        return ReportEditorJoiner.from(new JukyushaKyufuJissekiIchiranReportSource()).join(editor).join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new JukyushaKyufuJissekiIchiranReportSource()).join(editor).buildSource();
     }
 }

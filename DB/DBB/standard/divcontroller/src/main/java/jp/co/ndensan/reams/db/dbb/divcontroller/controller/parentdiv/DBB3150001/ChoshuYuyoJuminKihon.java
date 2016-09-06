@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB3150001;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.KibetsuChoshyuYuyoKikann;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choshuyuyojoho.ChoshuYuyoJoho;
@@ -126,7 +126,7 @@ public class ChoshuYuyoJuminKihon {
         ViewStateHolder.put(ViewStateKeys.猶予種類コード, 減免種類コード);
         handler.load決定情報パネル(徴収猶予の情報);
         List<KibetsuChoshyuYuyoKikann> 期別徴収猶予期間リスト = handler.load普通徴収猶予情報パネル(徴収猶予の情報);
-        ViewStateHolder.put(ViewStateKeys.期別徴収猶予期間リスト, (ArrayList<KibetsuChoshyuYuyoKikann>) 期別徴収猶予期間リスト);
+        ViewStateHolder.put(ViewStateKeys.期別徴収猶予期間リスト, (Serializable) 期別徴収猶予期間リスト);
         handler.loadパネル状態1(状況, 徴収猶予の情報);
     }
 

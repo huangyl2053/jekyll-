@@ -320,6 +320,12 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
                             ? 支給額計算結果連絡先名称2.substring(0, INT_20) : 支給額計算結果連絡先名称2));
         }
         headEntity.set通知年月日(trimDate(entity.get高額合算支給額計算結果一時().getTsuchiYMD()));
+        setヘッダーレコード(headEntity, entity);
+        eucCsvWriter.writeLine(headEntity);
+    }
+
+    private void setヘッダーレコード(KogakuGassanKeisanKekkaRenrakuJohoHeadEntity headEntity,
+            KogakuGassanKeisanKekkaRenrakuJohoRelateEntity entity) {
         AtenaMeisho 連絡票発行者名 = entity.get高額合算支給額計算結果一時().getRenrakuhyoHakkoshaMei();
         if (連絡票発行者名 != null && !連絡票発行者名.isEmpty()) {
             headEntity.set連絡票発行者名(
@@ -361,8 +367,6 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
                 = 問い合わせ先電話番号 == null || 問い合わせ先電話番号.isEmpty()
                 ? RString.EMPTY : 問い合わせ先電話番号.getColumnValue().trim();
         headEntity.set問い合わせ先電話番号(囲み文字(問い合わせ先電話番号R));
-
-        eucCsvWriter.writeLine(headEntity);
     }
 
     private void データレコード出力(KogakuGassanKeisanKekkaRenrakuJohoRelateEntity entity) {

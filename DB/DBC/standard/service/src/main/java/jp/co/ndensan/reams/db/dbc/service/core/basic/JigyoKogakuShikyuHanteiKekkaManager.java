@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -93,6 +94,36 @@ public class JigyoKogakuShikyuHanteiKekkaManager {
     }
 
     /**
+     * 主キーに合致する事業高額介護サービス費支給判定結果を返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 ServiceTeikyoYM
+     * @param 履歴番号 RirekiNo
+     * @return List<JigyoKogakuShikyuHanteiKekka>
+     */
+    @Transaction
+    public List<JigyoKogakuShikyuHanteiKekka> getサービス費支給判定結果(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            Decimal 履歴番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+
+        List<DbT3111JigyoKogakuShikyuHanteiKekkaEntity> entityList = dac.selectサービス費支給判定結果ByKey(
+                被保険者番号,
+                サービス提供年月,
+                履歴番号);
+        List<JigyoKogakuShikyuHanteiKekka> businessList = new ArrayList<>();
+        for (DbT3111JigyoKogakuShikyuHanteiKekkaEntity entity : entityList) {
+            entity.initializeMd5();
+            businessList.add(new JigyoKogakuShikyuHanteiKekka(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
      * 事業高額介護サービス費支給判定結果{@link JigyoKogakuShikyuHanteiKekka}を保存します。
      *
      * @param 事業高額介護サービス費支給判定結果 {@link JigyoKogakuShikyuHanteiKekka}
@@ -153,5 +184,18 @@ public class JigyoKogakuShikyuHanteiKekkaManager {
             前回発行日.add(entity.getKetteiTsuchishoSakuseiYMD());
         }
         return 前回発行日;
+    }
+
+    /**
+     * 事業高額介護サービス費支給判定結果{@link JigyoKogakuShikyuHanteiKekka}を保存します。
+     *
+     * @param 事業高額介護サービス費支給判定結果 {@link JigyoKogakuShikyuHanteiKekka}
+     */
+    @Transaction
+    public void update事業高額介護サービス費支給判定結果(JigyoKogakuShikyuHanteiKekka 事業高額介護サービス費支給判定結果) {
+        requireNonNull(事業高額介護サービス費支給判定結果, UrSystemErrorMessages.値がnull.getReplacedMessage("事業高額介護サービス費支給判定結果"));
+        DbT3111JigyoKogakuShikyuHanteiKekkaEntity entity = 事業高額介護サービス費支給判定結果.toEntity();
+        entity.setState(EntityDataState.Modified);
+        dac.save(entity);
     }
 }

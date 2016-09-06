@@ -2097,15 +2097,14 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
      *
      * @param 調定年度 FlexibleYear
      * @param 処理枝番 RString
+     * @param 処理名List List<RString>
      * @return DbT7022ShoriDateKanriEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT7022ShoriDateKanriEntity get特徴市町村処理日付(FlexibleYear 調定年度, RString 処理枝番) throws NullPointerException {
+    public DbT7022ShoriDateKanriEntity get市町村処理日付(FlexibleYear 調定年度,
+            RString 処理枝番, List<RString> 処理名List) throws NullPointerException {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        List<RString> 処理名List = new ArrayList<>();
-        処理名List.add(ShoriName.特徴異動情報作成.get名称());
-        処理名List.add(ShoriName.特徴依頼情報作成.get名称());
 
         return accessor.selectSpecific(max(kijunTimestamp)).
                 table(DbT7022ShoriDateKanri.class).

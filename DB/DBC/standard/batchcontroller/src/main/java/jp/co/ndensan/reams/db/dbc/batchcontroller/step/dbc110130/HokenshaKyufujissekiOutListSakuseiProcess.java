@@ -63,7 +63,7 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
     private static final RString HEADER_エラー内容 = new RString("エラー内容");
     private static final RString HEADER_備考 = new RString("備考");
     private static int numble_0 = 0;
-    private static int INT_0 = 0;
+    private static final int INT_0 = 0;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC900002"));
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
@@ -132,7 +132,7 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
         csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(コンマ)
                 .setEnclosure(ダブル引用符)
-                .setEncode(Encode.SJIS)
+                .setEncode(Encode.UTF_8withBOM)
                 .hasHeader(true).setHeader(headerList)
                 .build();
     }

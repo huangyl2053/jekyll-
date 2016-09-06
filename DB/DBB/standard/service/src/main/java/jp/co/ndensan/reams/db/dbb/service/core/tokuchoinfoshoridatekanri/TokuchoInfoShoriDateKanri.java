@@ -76,12 +76,13 @@ public class TokuchoInfoShoriDateKanri {
      *
      * @param 処理枝番 RString
      * @param 調定年度 FlexibleYear
+     * @param 処理名List List<RString>
      *
      * @return ShoriDateKanri
      *
      */
-    public ShoriDateKanri get市町村処理日付(FlexibleYear 調定年度, RString 処理枝番) {
-        DbT7022ShoriDateKanriEntity entity = dbt7022Dac.get特徴市町村処理日付(調定年度, 処理枝番);
+    public ShoriDateKanri get市町村処理日付(FlexibleYear 調定年度, RString 処理枝番, List<RString> 処理名List) {
+        DbT7022ShoriDateKanriEntity entity = dbt7022Dac.get市町村処理日付(調定年度, 処理枝番, 処理名List);
         if (entity != null) {
             return new ShoriDateKanri(entity);
         }

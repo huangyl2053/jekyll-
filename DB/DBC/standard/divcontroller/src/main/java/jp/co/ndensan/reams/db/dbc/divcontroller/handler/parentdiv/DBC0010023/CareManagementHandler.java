@@ -193,7 +193,7 @@ public class CareManagementHandler {
             if (0 < index) {
                 div.getBtnMaeJigyosha().setDisabled(false);
             }
-            if (index + 1 < 事業者番号リスト.size()) {
+            if (index != 0 && index + 1 < 事業者番号リスト.size()) {
                 div.getBtnAtoJigyosha().setDisabled(false);
             }
         }
@@ -356,10 +356,9 @@ public class CareManagementHandler {
     private RString get金額(int 金額) {
         if (金額 == 0) {
             return RString.EMPTY;
-        } else {
-            Decimal 金額変換 = new Decimal(金額);
-            return DecimalFormatter.toコンマ区切りRString(金額変換, 0);
         }
+        Decimal 金額変換 = new Decimal(金額);
+        return DecimalFormatter.toコンマ区切りRString(金額変換, 0);
     }
 
     private static class DateComparatorServiceTeikyoYM implements Comparator<FlexibleYearMonth>, Serializable {

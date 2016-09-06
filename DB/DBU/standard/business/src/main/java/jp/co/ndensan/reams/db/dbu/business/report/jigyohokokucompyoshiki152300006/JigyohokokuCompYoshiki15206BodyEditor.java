@@ -31,7 +31,7 @@ public class JigyohokokuCompYoshiki15206BodyEditor implements IJigyohokokuCompYo
         source.list1_2 = item.getListList1_2();
         source.list1_3 = item.getListList1_3();
         source.list1_4 = item.getListList1_4();
-        source.list1_5 = item.getListList1_6();
+        source.list1_5 = item.getListList1_5();
         source.list1_6 = item.getListList1_6();
         source.list1_7 = item.getListList1_7();
         source.list1_8 = item.getListList1_8();
@@ -42,7 +42,7 @@ public class JigyohokokuCompYoshiki15206BodyEditor implements IJigyohokokuCompYo
         source.list2_2 = item.getListList2_2();
         source.list2_3 = item.getListList2_3();
         source.list2_4 = item.getListList2_4();
-        source.list2_5 = item.getListList2_6();
+        source.list2_5 = item.getListList2_5();
         source.list2_6 = item.getListList2_6();
         source.list2_7 = item.getListList2_7();
         source.list2_8 = item.getListList2_8();

@@ -71,9 +71,10 @@ public class KyufuSaishinsaMoshitateshojohoSofuIchiranReport extends Report<Kyuf
                 改頁リスト,
                 処理年月,
                 作成日時);
-        IKyufuSaishinsaMoshitateshojohoSofuIchiranEditor BodyEditor = new KyufuSaishinsaMoshitateshojohoSofuIchiranBodyEditor(送付一覧表データ, 連番, 合計フラグ, 合計件数);
+        IKyufuSaishinsaMoshitateshojohoSofuIchiranEditor bodyEditor
+                = new KyufuSaishinsaMoshitateshojohoSofuIchiranBodyEditor(送付一覧表データ, 連番, 合計フラグ, 合計件数);
 
-        IKyufuSaishinsaMoshitateshojohoSofuIchiranBuilder builder = new KyufuSaishinsaMoshitateshojohoSofuIchiranBuilder(headerEditor, BodyEditor);
+        IKyufuSaishinsaMoshitateshojohoSofuIchiranBuilder builder = new KyufuSaishinsaMoshitateshojohoSofuIchiranBuilder(headerEditor, bodyEditor);
 
         writer.writeLine(builder);
     }
