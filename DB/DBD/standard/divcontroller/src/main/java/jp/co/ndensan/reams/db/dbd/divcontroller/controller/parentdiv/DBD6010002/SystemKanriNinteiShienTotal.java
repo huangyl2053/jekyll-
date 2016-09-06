@@ -55,6 +55,11 @@ public class SystemKanriNinteiShienTotal {
         } else {
             div.getSystemKanri().getSystemKanriNinteiShien().getTxtShiboJohoFile().setDisplayNone(true);
         }
+        if (YokaigoInterfaceShurui.ＮＥＣ.getコード().equals(iF_種類項目)) {
+            div.getSystemKanri().getSystemKanriNinteiShien().getTxtTennyuShiboFile().setDisplayNone(false);
+        } else {
+            div.getSystemKanri().getSystemKanriNinteiShien().getTxtTennyuShiboFile().setDisplayNone(true);
+        }
         return ResponseData.of(div).respond();
     }
 
