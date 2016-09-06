@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 償還払支給決定通知書OutputEntityクラスです。
  *
- * @reamsid_L DBC-4850-030 chenyadong
+ * @reamsid_L DBC-5310-030 jinge
  */
 @lombok.Getter
 @lombok.Setter
