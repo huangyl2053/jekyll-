@@ -163,10 +163,12 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
                 separator(Separator.PERIOD).fillType(FillType.BLANK).
                 toDateString());
         sakuseiYMD.append(接続文字);
-        sakuseiYMD.append(shuryoYMD.wareki().
-                eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).fillType(FillType.BLANK).
-                toDateString());
+        if (shuryoYMD != null && !shuryoYMD.isEmpty()) {
+            sakuseiYMD.append(shuryoYMD.wareki().
+                    eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.PERIOD).fillType(FillType.BLANK).
+                    toDateString());
+        }
 
         return sakuseiYMD.toRString();
     }
