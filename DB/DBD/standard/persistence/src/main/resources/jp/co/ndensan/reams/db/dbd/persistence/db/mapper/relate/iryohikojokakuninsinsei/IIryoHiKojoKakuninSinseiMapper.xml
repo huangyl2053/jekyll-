@@ -6,16 +6,20 @@ and open the template in the editor.
 -->
 <!-- 概要：ビジネス設計医療費控除確認申請用XMLです-->
 
-<!-- @reamsid_L CA-0040-020 x_zhaowen -->
+<!-- @reamsid_L DBD-5770-030 x_zhaowen -->
 
-<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.iryohikojyokakuninshinsei.IIryoHiKojoKakuninSinseiMapper">
-<!--    <select resultOrdered="true" id="受給者台帳抽出" parameterType="jp.co.ndensan.reams.ca.cab.definition.mybatisprm.kobaiyokokushohakko.ZaisanJohoMapperParameter"
-            resultMap="resultMap_ZaisanJohoEntity" fetchSize="500">
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.iryohikojokakuninsinsei.IIryoHiKojoKakuninSinseiMapper">
+    <select resultOrdered="true" id="受給者台帳抽出" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            resultMap="Integer" fetchSize="500">
         SELECT
-            COUNT()
+            COUNT(DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_hihokenshaNo")
         FROM
-            
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.noDeleted_DbT4001JukyushaDaicho" />) AS DbT4001JukyushaDaicho
         WHERE
-        
-    </select>-->
+            DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_hihokenshaNo" = #{被保険者番号}
+        AND
+            DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_yukoMukoKubun" = '1'
+        AND
+            DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_logicalDeletedFlag" = false
+    </select>
 </mapper>
