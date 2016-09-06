@@ -188,7 +188,7 @@ public class TokuchoHeijunkaKeisanPanelHandler {
         FlexibleYear 調定年度 = new FlexibleYear(
                 div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtChoteiNendo().getValue());
         boolean is特徴平準化処理状況 = 特徴平準化.getHeijunka8MJyokyo(調定年度);
-        if (!is特徴平準化処理状況) {
+        if (is特徴平準化処理状況) {
             throw new ApplicationException(DbbErrorMessages.処理済み.getMessage().replace("特徴平準化（８月分）"));
         } else {
             get未処理の場合();
