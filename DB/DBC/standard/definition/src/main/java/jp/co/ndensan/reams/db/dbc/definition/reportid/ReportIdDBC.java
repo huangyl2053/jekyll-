@@ -597,7 +597,23 @@ public enum ReportIdDBC {
     /**
      * 請求明細・給付管理票返戻（保留）一覧表帳票ＩＤです。
      */
-    DBC200001(new ReportId("DBC200001_SeikyumeisaiKyufukanrihyoHenreiHoryuIchiran"), new RString("請求明細・給付管理票返戻（保留）一覧表"));
+    DBC200001(new ReportId("DBC200001_SeikyumeisaiKyufukanrihyoHenreiHoryuIchiran"), new RString("請求明細・給付管理票返戻（保留）一覧表")),
+    /**
+     * 汎用リスト出力(総合事業費情報)帳票ＩＤです。
+     */
+    DBC701018(new ReportId("DBC701018_HanyoList_SogoJigyoHi"), new RString("汎用リスト出力(総合事業費情報)")),
+    /**
+     * 汎用リスト出力(総合事業費情報)帳票ＩＤです。
+     */
+    DBC701022(new ReportId("DBC701022_HanyoList_SogoJigyoHi_Meisai"), new RString("汎用リスト出力(総合事業費情報)")),
+    /**
+     * 汎用リスト出力(総合事業費情報)帳票ＩＤです。
+     */
+    DBC701023(new ReportId("DBC701023_HanyoList_SogoJigyoHi_Syukei"), new RString("汎用リスト出力(総合事業費情報)")),
+    /**
+     * 汎用リスト出力(総合事業費情報)帳票ＩＤです。
+     */
+    DBC701024(new ReportId("DBC701024_HanyoList_SogoJigyoHi_Care"), new RString("汎用リスト出力(総合事業費情報)"));
     private final ReportId reportId;
 
     private final RString reportName;

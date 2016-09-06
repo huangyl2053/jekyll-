@@ -66,10 +66,8 @@ public class TokubetsuChiikiKasanKeigenJisekiKanriIchiran {
         set地区バッチパラメター(div);
 
         div.getCcdHokenshaList().loadHokenshaList();
-        if (div.getShichosonPanel().isVisible()) {
-            if (div.getCcdHokenshaList().getSelectedItem() != null) {
-                bparameter.set市町村コード(div.getCcdHokenshaList().getSelectedItem().get市町村コード());
-            }
+        if (div.getShichosonPanel().isVisible() && div.getCcdHokenshaList().getSelectedItem() != null) {
+            bparameter.set市町村コード(div.getCcdHokenshaList().getSelectedItem().get市町村コード());
         }
 
         ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200012.getReportId());
