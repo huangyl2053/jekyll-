@@ -172,8 +172,8 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
             parameter.setデータ種類(Kaigogassan_DataShubetsu.仮算定.getコード());
         }
 
-        RString 対象年度 = div.getChushutsuJokenPanel().getDdlTaishoNendo().getSelectedValue();
-        parameter.set対象年度(new FlexibleYear(対象年度));
+        RString 年度 = div.getChushutsuJokenPanel().getDdlTaishoNendo().getSelectedValue();
+        parameter.set対象年度(new FlexibleYear(年度));
         TextBoxDateRange 受取年月 = div.getChushutsuJokenPanel().getTxtUketoriNengetsu();
         if (受取年月.isDisabled()) {
             parameter.set受取年月From(FlexibleYearMonth.EMPTY);
