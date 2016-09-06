@@ -577,7 +577,11 @@ public enum ReportIdDBC {
     /**
      * 帳票設計_DBC100041_介護保険給付費通知書 ＩＤです。
      */
-    DBC100041(new ReportId("DBC100041_KyufuhiTsuchisho"), new RString("介護保険給付費通知書"));
+    DBC100041(new ReportId("DBC100041_KyufuhiTsuchisho"), new RString("介護保険給付費通知書")),
+    /**
+     * 請求明細・給付管理票返戻（保留）一覧表帳票ＩＤです。
+     */
+    DBC200001(new ReportId("DBC200001_SeikyumeisaiKyufukanrihyoHenreiHoryuIchiran"), new RString("請求明細・給付管理票返戻（保留）一覧表"));
     private final ReportId reportId;
 
     private final RString reportName;
