@@ -286,13 +286,13 @@ public class HanyoListKagoKekkaCsvEntityEditor {
         csvEntity.set連絡先１(kojin.get連絡先１().getColumnValue());
         csvEntity.set連絡先２(kojin.get連絡先２().getColumnValue());
         csvEntity.set登録異動日(format日付項目(kojin.get登録異動年月日()));
-        csvEntity.set登録事由(kojin.get登録事由().get異動事由正式名称());
+        csvEntity.set登録事由(kojin.get登録事由() != null ? kojin.get登録事由().get異動事由略称() : RString.EMPTY);
         csvEntity.set登録届出日(format日付項目(kojin.get登録届出年月日()));
         csvEntity.set住定異動日(format日付項目(kojin.get住定異動年月日()));
-        csvEntity.set住定事由(kojin.get住定事由().get異動事由正式名称());
+        csvEntity.set住定事由(kojin.get住定事由() != null ? kojin.get住定事由().get異動事由略称() : RString.EMPTY);
         csvEntity.set住定届出日(format日付項目(kojin.get住定届出年月日()));
         csvEntity.set消除異動日(format日付項目(kojin.get消除異動年月日()));
-        csvEntity.set消除事由(kojin.get消除事由().get異動事由正式名称());
+        csvEntity.set消除事由(kojin.get消除事由() != null ? kojin.get消除事由().get異動事由略称() : RString.EMPTY);
         csvEntity.set消除届出日(format日付項目(kojin.get消除届出年月日()));
         csvEntity.set転出入理由(RString.EMPTY);
         csvEntity.set前住所郵便番号(kojin.get転入前().get郵便番号().getEditedYubinNo());

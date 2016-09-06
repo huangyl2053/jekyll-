@@ -76,17 +76,4 @@ public interface IKogakugassanHoseisumiJikofutangakuOutMapper {
      */
     List<DbT3070KogakuGassanJikoFutanGakuEntity> get未送付高額合算自己負担額データ();
 
-    /**
-     * 未送付高額合算自己負担額データを取得する。
-     *
-     * @return 未送付高額合算自己負担額データ
-     */
-    List<DbWT37K1KogakuGassanJikoFutanGakuTempEntity> getTemp37K();
-
-    /**
-     * 未送付高額合算自己負担額データを取得する。
-     *
-     * @return 未送付高額合算自己負担額データ
-     */
-    List<DbWT1001HihokenshaTempEntity> getTemp1001();
 }

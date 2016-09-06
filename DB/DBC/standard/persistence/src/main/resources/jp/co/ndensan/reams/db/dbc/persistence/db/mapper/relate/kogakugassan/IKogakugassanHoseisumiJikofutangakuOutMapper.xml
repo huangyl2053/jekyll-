@@ -3,22 +3,6 @@
 <!-- @reamsid_L DBC-2660-030 gongliang -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassan.IKogakugassanHoseisumiJikofutangakuOutMapper">
 
-    <select resultOrdered="true" id="getTemp37K" fetchSize="500"
-            resultMap="ResultMap_DbWT37K1KogakuGassanJikoFutanGakuTempEntity">
-        SELECT
-            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassan.IKogakugassanHoseisumiJikofutangakuOutMapper.allColumns_DbWT37K1KogakuGassanJikoFutanGaku" />
-        FROM
-            "DbWT37K1KogakuGassanJikoFutanGaku"
-    </select>
-
-    <select resultOrdered="true" id="getTemp1001" fetchSize="500"
-            resultMap="ResultMap_DbWT1001HihokenshaTempEntity">
-        SELECT
-            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassan.IKogakugassanHoseisumiJikofutangakuOutMapper.allColumns_DbWT1001Hihokensha" />
-        FROM
-            "DbWT1001Hihokensha"
-    </select>
-
     <select resultOrdered="true" id="get高額合算自己負担額データ"
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.ResultMap_DbT3070KogakuGassanJikoFutanGakuEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassan.KogakugassanMybatisParameter" fetchSize="500">
@@ -36,7 +20,7 @@
                 "DbT3070"."dataSakuseiKubun" IN ('1', '3')
             AND "DbT3070"."isDeleted" = FALSE) AS "DbT3070KogakuGassanJikoFutanGaku"
         WHERE
-        "DbT3070KogakuGassanJikoFutanGaku".rowNum = 1
+            "DbT3070KogakuGassanJikoFutanGaku".rowNum = 1
         AND "DbT3070KogakuGassanJikoFutanGaku"."sofuTaishoGaiFlag" <![CDATA[!=]]> '1'
         AND ("DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" IS NULL OR "DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" = ''
             OR "DbT3070KogakuGassanJikoFutanGaku"."saisoFlag" = '1'
