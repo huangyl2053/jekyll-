@@ -5,8 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710170;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassanshikyugakukettei.HanyoListKogakuGassanShikyugakuKetteiProcessParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -23,6 +27,10 @@ import lombok.Setter;
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBC710170_HanyoListKogakuGassanShikyugakuKetteiParameter extends BatchParameterBase {
+
+    private IKozaSearchKey searchkey;
+    private List<KamokuCode> list;
+    private RString reamsLoginId;
 
     @BatchParameter(key = "支給区分", name = "支給区分")
     private RString 支給区分;
@@ -50,4 +58,29 @@ public class DBC710170_HanyoListKogakuGassanShikyugakuKetteiParameter extends Ba
     private RString 出力順;
     @BatchParameter(key = "出力項目", name = "出力項目")
     private RString 出力項目;
+
+    /**
+     * mybatisのパラメータを生成します。
+     *
+     * @return mybatisパラメータ
+     */
+    public HanyoListKogakuGassanShikyugakuKetteiProcessParameter toProcessParam() {
+        return new HanyoListKogakuGassanShikyugakuKetteiProcessParameter(
+                支給区分,
+                支払方法区分,
+                金融機関コード,
+                金融機関名称,
+                対象年度,
+                決定情報受取年月From,
+                決定情報受取年月To,
+                項目名付加,
+                連番付加,
+                日付スラッシュ付加,
+                保険者コード,
+                出力順,
+                出力項目,
+                searchkey,
+                list,
+                reamsLoginId);
+    }
 }
