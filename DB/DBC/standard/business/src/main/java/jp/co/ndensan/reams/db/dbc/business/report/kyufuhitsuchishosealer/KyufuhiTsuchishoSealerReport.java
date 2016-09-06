@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kyufuhitsuchishosealer;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.kyufuhitsuchishosealer.KyufuhiTsuchishoSealerEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kyufuhitsuchishosealer.KyufuhiTsuchishoSealerReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -18,17 +17,17 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class KyufuhiTsuchishoSealerReport extends Report<KyufuhiTsuchishoSealerReportSource> {
 
-    private final List<KyufuhiTsuchishoSealerEntity> entityList;
+    private final KyufuhiTsuchishoSealerEntity entity;
     private int index;
 
     /**
      * インスタンスを生成します。
      *
-     * @param entityList 介護保険給付費通知書(ｼｰﾗﾀｲﾌﾟ)のITEMリスト
+     * @param entity 介護保険給付費通知書(ｼｰﾗﾀｲﾌﾟ)のITEM
      */
     public KyufuhiTsuchishoSealerReport(
-            List<KyufuhiTsuchishoSealerEntity> entityList) {
-        this.entityList = entityList;
+            KyufuhiTsuchishoSealerEntity entity) {
+        this.entity = entity;
     }
 
     /**
@@ -38,11 +37,9 @@ public class KyufuhiTsuchishoSealerReport extends Report<KyufuhiTsuchishoSealerR
      */
     @Override
     public void writeBy(ReportSourceWriter<KyufuhiTsuchishoSealerReportSource> reportSourceWriter) {
-        for (KyufuhiTsuchishoSealerEntity entity : entityList) {
-            index = index + 1;
-            IKyufuhiTsuchishoSealerEditor editor = new KyufuhiTsuchishoSealerEditor(entity, index);
-            IKyufuhiTsuchishoSealerBuilder builder = new KyufuhiTsuchishoSealerBuilder(editor);
-            reportSourceWriter.writeLine(builder);
-        }
+        index = index + 1;
+        IKyufuhiTsuchishoSealerEditor editor = new KyufuhiTsuchishoSealerEditor(entity, index);
+        IKyufuhiTsuchishoSealerBuilder builder = new KyufuhiTsuchishoSealerBuilder(editor);
+        reportSourceWriter.writeLine(builder);
     }
 }
