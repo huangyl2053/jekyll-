@@ -18,7 +18,13 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 社会福祉法人軽減認定者リストEditorです。
@@ -37,6 +43,7 @@ public class ShakaiFukushiHojinKeigenEditor implements IShakaiFukushiHojinKeigen
     private static final RString 居住費食費のみ = new RString("居住費・食費のみ");
     private static final RString 旧措ユ個のみ = new RString("旧措ユ個のみ");
     private static final RString POINT = new RString("、");
+    private static final RString 作成 = new RString("作成");
     private static final int NO_0 = 0;
     private static final int NO_1 = 1;
     private final ShakaiFukushiHojinKeigenGaitoshaIchiranEntity 帳票情報;
@@ -73,6 +80,18 @@ public class ShakaiFukushiHojinKeigenEditor implements IShakaiFukushiHojinKeigen
     }
 
     private void setsource(ShakaiFukushiHojinReportSourse source) {
+        RDateTime yinsatsubi = RDateTime.now();
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(帳票作成日時.getDate()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
+                .append(yinsatsubi.getTime().getHour())
+                .append(new RString("時"))
+                .append(yinsatsubi.getTime().getMinute())
+                .append(new RString("分"))
+                .append(yinsatsubi.getTime().getSecond())
+                .append(new RString("秒"))
+                .append(作成);
+
         source.printTimeStamp = 帳票作成日時.toDateString();
         source.title = 帳票タイトル;
         if (null != association) {

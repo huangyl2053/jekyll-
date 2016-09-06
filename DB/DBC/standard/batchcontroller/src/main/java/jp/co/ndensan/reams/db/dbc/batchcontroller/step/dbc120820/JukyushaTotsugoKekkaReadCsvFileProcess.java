@@ -59,6 +59,7 @@ public class JukyushaTotsugoKekkaReadCsvFileProcess extends BatchProcessBase<RSt
     private JukyushaKekkaJohoCsvMeisaiEntity dataEntity;
     private final RString レコード種別_コントロール = new RString("1");
     private final RString レコード種別_データ = new RString("2");
+    private final RString レコード種別_エンド = new RString("3");
     private static final RString カンマ = new RString(",");
     private static final Integer INDEX_0 = 0;
 
@@ -106,6 +107,9 @@ public class JukyushaTotsugoKekkaReadCsvFileProcess extends BatchProcessBase<RSt
     protected void process(RString line) {
         List<RString> data = line.split(カンマ.toString());
         if (data != null && !data.isEmpty()) {
+            if (レコード種別_エンド.equals(data.get(INDEX_0))) {
+                return;
+            }
             if (レコード種別_コントロール.equals(data.get(INDEX_0))) {
                 controlCsvEntity = ListToObjectMappingHelper.toObject(JukyushaKekkaJohoControlCsvEntity.class, data);
                 処理対象年月 = controlCsvEntity.get処理対象年月();

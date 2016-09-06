@@ -55,6 +55,7 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
     private static final String 処理結果リスト作成 = "kokuhorenkyoutsuDoShoriKekkaListSakuseiProcess";
 
     private static final RString データがある = new RString("1");
+//    private static final int INT_4 = 4;
     private static final RString 被保険者_宛名情報取得BATCHID = new RString("HokenshaKyufujissekiOutHihokenshaAtenaFlow");
 
     private KogakugassanProcessParameter processParameter;
@@ -70,8 +71,8 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
         processParameter.set保険者情報_保険者番号(保険者情報_保険者番号);
         processParameter.set保険者情報_保険者名称(保険者情報_保険者名称);
         executeStep(送付対象データ取得);
-        executeStep(高額合算自己負担額明細データの存在確認);
         if (データがある.equals((getResult(RString.class, new RString(送付対象データ取得), KogakugassanReadDataProcess.PARAMETER_OUT_FLOWFLAG)))) {
+            executeStep(高額合算自己負担額明細データの存在確認);
             executeStep(宛名情報取得);
             executeStep(送付除外区分設定);
             executeStep(送付ファイル作成);
@@ -211,8 +212,9 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
             param.setFileNameList(Collections.EMPTY_LIST);
         } else {
             for (SharedFileDescriptor entry : エントリ情報List) {
-                // TODO エントリ情報Listの1件目のファイル名
+                // TODO QA1149 value too long for type character varying(20)
                 list.add(entry.getSharedFileName().toRString());
+//                list.add(entry.getSharedFileName().toRString().substring(INT_4));
                 param.setFileNameList(list);
             }
         }

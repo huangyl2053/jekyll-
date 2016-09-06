@@ -5,32 +5,6 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kougakugassanshikyuketteitsuchi.IKougakuGassanShikyuKetteiTsuchiMapper">
   
-    <select id="getKozaJyoho" resultOrdered="true"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakugassanshikyuketteitsuchi.KougakuGassanShikyuKetteiTsuchiParameter"
-            resultMap="resultMap_KozaJyoho" fetchSize="500">
-        SELECT
-            GyomubetsuPrimaryKey."gyomuCode" as "gyomuCode",
-            GyomubetsuPrimaryKey."subGyomuCode" as "subGyomuCode",
-            GyomubetsuPrimaryKey."kamokuCode" as "kamokuCode",
-            Koza."gyomuKoyuKey"  as "gyomuKoyuKey",
-            Koza."yotoKubun" as "yotoKubun"
-        FROM
-            rgua."UaT0310Koza" AS Koza
-            LEFT JOIN 
-            rgua."UaT0100GyomubetsuPrimaryKey" AS GyomubetsuPrimaryKey
-            ON Koza."gyomubetsuPrimaryKey" = GyomubetsuPrimaryKey."gyomubetsuPrimaryKey"
-        WHERE 
-            Koza."kozaId" = #{口座ID}
-    </select>
-     
-    <resultMap id="resultMap_KozaJyoho" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakugassanshikyuketteitsuchi.KozaKogakuGassanEntity" autoMapping="true">
-        <result property="業務コード"              column="gyomuCode"              typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler"/>
-        <result property="サブ業務コード"          column="subGyomuCode"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
-        <result property="科目コード"              column="kamokuCode"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KamokuCodeTypeHandler"/>
-        <result property="業務固有キー"            column="gyomuKoyuKey"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="用途区分"                column="yotoKubun"              typeHandler="jp.co.ndensan.reams.ua.uax.entity.typehandlers.KozaYotoKubunCodeValueTypeHandler"/>        
-    </resultMap>
-   
    <select id="select高額合算" resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakugassanshikyuketteitsuchi.KougakuGassanShikyuKetteiTsuchiParameter"
             resultMap="resultMap_KogakuGassanEntity" fetchSize="500">

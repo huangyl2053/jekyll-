@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd583001;
 
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd583001.NenreiKaikyubetsuYokaigodoJokyoMybatisParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -50,6 +52,13 @@ public class NenreiKaikyubetsuYokaigodoJokyoProcessParameter implements IBatchPr
         this.終了地区コード = 終了地区コード;
         this.旧市町村コード = 旧市町村コード;
         this.旧市町村名称 = 旧市町村名称;
+    }
+
+    public NenreiKaikyubetsuYokaigodoJokyoMybatisParameter toNenreiKaikyubetsuYokaigodoJokyoMybatisParameter(
+            IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey) {
+        return new NenreiKaikyubetsuYokaigodoJokyoMybatisParameter(基準日, 基準年月,
+                地区区分, 開始地区コード, 終了地区コード,
+                旧市町村コード, shikibetsuTaishoPSMSearchKey);
     }
 
 }

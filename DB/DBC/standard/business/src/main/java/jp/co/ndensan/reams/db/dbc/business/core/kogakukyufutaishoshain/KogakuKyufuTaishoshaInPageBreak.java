@@ -39,7 +39,7 @@ public class KogakuKyufuTaishoshaInPageBreak extends PageBreaker<KogakuKyufuTais
     @Override
     public boolean isBreak(ReportLineRecord<KogakuKyufuTaishoshaIchiranSource> currentSource,
             ReportLineRecord<KogakuKyufuTaishoshaIchiranSource> nextSource) {
-        if (!currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
+        if (!currentSource.getSource().shoKisaiHokenshaNo.equals(nextSource.getSource().shoKisaiHokenshaNo)) {
             return true;
         }
         if (null == nowSource) {

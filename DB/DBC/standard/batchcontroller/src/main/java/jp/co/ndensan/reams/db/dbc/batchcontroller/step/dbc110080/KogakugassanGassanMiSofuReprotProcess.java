@@ -9,20 +9,21 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import jp.co.ndensan.reams.db.dbc.business.report.gassanhoseizumijikofutangakusofuchiran.GassanHoseizumiJikofutangakuSofuchiranReport;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakugassan.KogakugassanHoseisumiJikofutangakuOutPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakugassan.KogakugassanHoseisumiJikofutangakuOutputOrder;
-import jp.co.ndensan.reams.db.dbc.business.report.seikyugakutsuchishokohifutanshabun.SeikyugakuTsuchishoKohifutanshabunReport;
+import jp.co.ndensan.reams.db.dbc.definition.core.chohyoseigyohanyo.ChohyoSeigyoHanyoKomokuMei;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenDataSaisoFlag;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassan.KogakugassanMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakugassan.KogakugassanProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
-import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.DbWT1511SeikyugakuTsuchishoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakugassan.KogakugassanSoufuFairuSakuseiCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassan.SyuturyokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangaku.DbWT37K1KogakuGassanJikoFutanGakuTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.report.seikyugakutsuchishokohifutanshabun.SeikyugakuTsuchishoKohifutanshabunSource;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.jukyushakoshinkekkaichiran.JukyushaKoshinKekkaIchiranSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.gassanhoseizumijikofutangakusofuchiran.GassanHoseizumiJikofutangakuSofuchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
@@ -90,6 +91,7 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200033");
     private static final Code コード = new Code("0003");
     private static final RString 漢字_被保険者番号 = new RString("被保険者番号");
+    private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
 
     private KogakugassanProcessParameter processParameter;
     private KogakugassanMybatisParameter mybatisParam;
@@ -101,12 +103,13 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
     private RString eucFilePath;
     private RString spoolWorkPath;
     private int index;
+    private RString 設定値;
     private List<PersonalData> personalDataList;
     private Set<ShikibetsuCode> 識別コードset;
     // TODO 実装しない。
     @BatchWriter
-    private BatchReportWriter<SeikyugakuTsuchishoKohifutanshabunSource> batchReportWriter;
-    private ReportSourceWriter<SeikyugakuTsuchishoKohifutanshabunSource> reportSourceWriter;
+    private BatchReportWriter<GassanHoseizumiJikofutangakuSofuchiranSource> batchReportWriter;
+    private ReportSourceWriter<GassanHoseizumiJikofutangakuSofuchiranSource> reportSourceWriter;
     @BatchWriter
     private CsvWriter<KogakugassanSoufuFairuSakuseiCsvEntity> eucCsvWriter;
 
@@ -115,6 +118,7 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
         識別コードset = new HashSet<>();
         personalDataList = new ArrayList<>();
         index = INT_1;
+        get設定値();
         super.initialize();
         get出力順();
     }
@@ -129,13 +133,14 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
 
     @Override
     protected void createWriter() {
-        PageBreaker<JukyushaKoshinKekkaIchiranSource> breakPage
+        PageBreaker<GassanHoseizumiJikofutangakuSofuchiranSource> breakPage
                 = new KogakugassanHoseisumiJikofutangakuOutPageBreak(改頁リスト);
         batchReportWriter
                 = BatchReportFactory.createBatchReportWriter(帳票ID.getColumnValue(), SubGyomuCode.DBC介護給付).addBreak(breakPage).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
 
         eucManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        spoolWorkPath = eucManager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .setDelimiter(コンマ)
@@ -149,9 +154,9 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
 
     @Override
     protected void usualProcess(SyuturyokuEntity entity) {
-        // TODO 帳票設計_DBC200032_高額合算補正済自己負担額情報送付一覧表 実装しない。
-        SeikyugakuTsuchishoKohifutanshabunReport report
-                = new SeikyugakuTsuchishoKohifutanshabunReport(new DbWT1511SeikyugakuTsuchishoTempEntity(), RDateTime.now());
+        GassanHoseizumiJikofutangakuSofuchiranReport report
+                = new GassanHoseizumiJikofutangakuSofuchiranReport(
+                        entity, 出力順情報, processParameter.getShoriYM(), processParameter.getNow().getRDateTime(), index, 設定値);
         report.writeBy(reportSourceWriter);
         KogakugassanSoufuFairuSakuseiCsvEntity csvEntity = getCsvEntity(index, entity);
 
@@ -166,7 +171,6 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
 
     @Override
     protected void afterExecute() {
-        batchReportWriter.close();
         eucCsvWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
@@ -248,6 +252,16 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
         sakuseiYMD.append(RString.HALF_SPACE);
         sakuseiYMD.append(作成R);
         return sakuseiYMD.toRString();
+    }
+
+    private void get設定値() {
+        ChohyoSeigyoHanyo hanyoResult = ChohyoSeigyoHanyoManager.createInstance()
+                .get帳票制御汎用(SubGyomuCode.DBC介護給付, 帳票ID, 管理年度, ChohyoSeigyoHanyoKomokuMei.帳票タイトル.get名称());
+        if (hanyoResult != null) {
+            設定値 = hanyoResult.get設定値();
+        } else {
+            設定値 = RString.EMPTY;
+        }
     }
 
     private void get出力順() {

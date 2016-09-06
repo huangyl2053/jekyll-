@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 public class SystemKanriNinteiKekkaTotalHandler {
 
     private static final RString コードマスタ_コード01 = new RString("01");
-    private static final RString コードマスタ_コード02 = new RString("02");
+    private static final RString コードマスタ_コード11 = new RString("11");
     private static final RString コードマスタ_コード12 = new RString("12");
     private static final RString コードマスタ_コード13 = new RString("13");
     private static final RString コードマスタ_コード21 = new RString("21");
@@ -66,7 +66,7 @@ public class SystemKanriNinteiKekkaTotalHandler {
         付加情報_コンテキスト = div.getSystemKanri().getSystemKanriNinteiKekka().getTplSystemKanri().getTxtFukaJoho1().getValue();
         uzT0007CodeFuKaJoHoMap.put(コードマスタ_コード01, 付加情報_コンテキスト);
         付加情報_コンテキスト = div.getSystemKanri().getSystemKanriNinteiKekka().getTplSystemKanri().getTxtFukaJoho2().getValue();
-        uzT0007CodeFuKaJoHoMap.put(コードマスタ_コード02, 付加情報_コンテキスト);
+        uzT0007CodeFuKaJoHoMap.put(コードマスタ_コード11, 付加情報_コンテキスト);
         付加情報_コンテキスト = div.getSystemKanri().getSystemKanriNinteiKekka().getTplSystemKanri().getTxtFukaJoho3().getValue();
         uzT0007CodeFuKaJoHoMap.put(コードマスタ_コード12, 付加情報_コンテキスト);
         付加情報_コンテキスト = div.getSystemKanri().getSystemKanriNinteiKekka().getTplSystemKanri().getTxtFukaJoho4().getValue();
@@ -93,7 +93,7 @@ public class SystemKanriNinteiKekkaTotalHandler {
         div.getSystemKanri().getSystemKanriNinteiKekka().getTplSystemKanri().getTxtFukaJoho1().setValue(
                 getCodeMeiSho(コードマスタ_コード01));
         div.getSystemKanri().getSystemKanriNinteiKekka().getTplSystemKanri().getTxtFukaJoho2().setValue(
-                getCodeMeiSho(コードマスタ_コード02));
+                getCodeMeiSho(コードマスタ_コード11));
         div.getSystemKanri().getSystemKanriNinteiKekka().getTplSystemKanri().getTxtFukaJoho3().setValue(
                 getCodeMeiSho(コードマスタ_コード12));
         div.getSystemKanri().getSystemKanriNinteiKekka().getTplSystemKanri().getTxtFukaJoho4().setValue(

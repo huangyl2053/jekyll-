@@ -53,11 +53,6 @@ public class ShiharaiHohoHenkoKanriIchiranReport extends Report<ShiharaiHohoHenk
         this.支払方法変更リストEntity_下 = 支払方法変更リストEntity_下;
     }
 
-    /**
-     * 帳票ソースファイルの「永続化処理の定義」を行います
-     *
-     * @param reportSourceWriter 社会福祉法人等利用者負担軽減対象確認申請書情報
-     */
     @Override
     public void writeBy(ReportSourceWriter<ShiharaiHohoHenkoKanriIchiranReportSource> reportSourceWriter) {
         for (int 行数 = 1; 行数 <= 行数17; 行数++) {

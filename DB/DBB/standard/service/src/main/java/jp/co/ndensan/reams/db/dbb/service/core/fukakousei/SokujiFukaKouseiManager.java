@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.ca.cax.business.core.shunokanri.shunokanri.ShunoKanri
 import jp.co.ndensan.reams.ca.cax.service.core.shuno.ShunoService;
 import jp.co.ndensan.reams.ca.cax.service.core.shuno.shuno.ShunoManager;
 import jp.co.ndensan.reams.ca.cax.service.saiban.ChoteiSaiban;
+import jp.co.ndensan.reams.ca.cax.service.saiban.ShunoSaiban;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Gemmen;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsuIdentifier;
@@ -148,22 +149,23 @@ public class SokujiFukaKouseiManager {
         }
         介護期別 = 介護期別.modifiedModel();
         long 調定ID = ChoteiSaiban.getNumbering調定ID();
+        long 収納ID = ShunoSaiban.getNumbering収納ID();
         ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(介護期別.get調定ID().longValue());
         ChoteiKyotsu choteiKyotsu = 介護期別.getChoteiKyotsu(identifier);
         IShunoKamoku 科目 = shunoKamokuManager.get科目(介護期別.get徴収方法().equals(ChoshuHohoKibetsu.普通徴収.getコード())
                 ? ShunoKamokuShubetsu.介護保険料_普通徴収 : ShunoKamokuShubetsu.介護保険料_特別徴収);
-        収納Manager.save調定(get収納管理(介護賦課, 科目, 介護期別.get期()),
-                get調定クラス(調定ID, choteiKyotsu));
+        収納Manager.save調定(get収納管理(収納ID, 介護賦課, 科目, 介護期別.get期()),
+                get調定クラス(調定ID, 収納ID, choteiKyotsu));
         return 1 == 介護期別Dac.save(介護期別.createBuilderForEdit().set調定ID(new Decimal(調定ID)).build().toEntity());
     }
 
-    private Chotei get調定クラス(long 調定ID, ChoteiKyotsu choteiKyotsu) {
+    private Chotei get調定クラス(long 調定ID, long 収納ID, ChoteiKyotsu choteiKyotsu) {
         ChoteiKyotsuBuilder builder = new Chotei(調定ID, 調定ID).createBuilderForEdit();
         // TODO 処理年度、処理番号 NOT NULL
         ChoteiJokyo choteiJokyo = new ChoteiJokyo(調定ID).createBuilderForEdit().
                 set処理年度(choteiKyotsu.get会計年度())
                 .set処理番号(0).build();
-        builder.set収納ID(0L);
+        builder.set収納ID(収納ID);
         builder.set会計年度(choteiKyotsu.get会計年度());
         builder.set調定年月日(choteiKyotsu.get調定年月日());
         builder.set調定事由コード(choteiKyotsu.get調定事由コード());
@@ -177,9 +179,9 @@ public class SokujiFukaKouseiManager {
         return builder.build();
     }
 
-    private ShunoKanri get収納管理(FukaJoho 介護賦課, IShunoKamoku 科目, int 期) {
+    private ShunoKanri get収納管理(long 収納ID, FukaJoho 介護賦課, IShunoKamoku 科目, int 期) {
         UrT0700ShunoKanriEntity entity = new UrT0700ShunoKanriEntity();
-        entity.setShunoId(0L);
+        entity.setShunoId(収納ID);
         entity.setKamokuCode(科目.getコード());
         entity.setKamokuEdabanCode(科目.get枝番コード());
         entity.setKamokuCode(KamokuCode.EMPTY);

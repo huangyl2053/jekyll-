@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kogaku;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseishoKanyureki;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -18,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KogakuGassanShinseishoKanyurekiResult {
+public class KogakuGassanShinseishoKanyurekiResult implements Serializable {
 
     private RString 状態;
     private KogakuGassanShinseishoKanyureki 高額合算申請書加入歴;

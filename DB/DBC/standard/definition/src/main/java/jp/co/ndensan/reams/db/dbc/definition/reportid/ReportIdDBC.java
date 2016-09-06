@@ -571,6 +571,10 @@ public enum ReportIdDBC {
      */
     DBC701004(new ReportId("DBC701004_HanyoListKokuhorenJukyusha"), new RString("汎用リスト 国保連受給者情報")),
     /**
+     * 事業合算・事業分振込明細書作成（一括）帳票ＩＤです。
+     */
+    DBC100060(new ReportId("DBC100060_FurikomiTsuchisho"), new RString("事業合算・事業分振込明細書作成（一括）")),
+    /**
      * 帳票設計_DBC100041_介護保険給付費通知書 ＩＤです。
      */
     DBC100041(new ReportId("DBC100041_KyufuhiTsuchisho"), new RString("介護保険給付費通知書"));
