@@ -37,7 +37,7 @@ public class GassanJikofutangakuKeisanKekkaIchiranEntity implements Serializable
     private Decimal 自己負担額_内数;
     private RString 備考_資格期間不正;
     private RString 備考_高額支給額確認データ;
-    private RString 宛名ﾃﾞｰﾀ種別;
+    private RString 宛名データ種別;
     private RString 一覧用確認区分;
     private RString 一覧用確認区分２;
 }
