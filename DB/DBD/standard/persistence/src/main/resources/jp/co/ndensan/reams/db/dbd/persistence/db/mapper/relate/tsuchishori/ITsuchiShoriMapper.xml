@@ -35,7 +35,7 @@
             AND T4105."ichijiHanteiKanryoYMD" IS NOT NULL
             AND T4105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
             AND T4105."ninteiShinsakaiKanryoYMD" IS NOT NULL
-            AND T4105."centerSoshinYMD" IS NOT NULL
+            AND T4105."centerSoshinYMD" IS NULL
         INNER JOIN  rgdb."DbT4001JukyushaDaicho" AS T4001
             ON  T4001."shichosonCode" = T7051."shichosonCode"
             AND T4001."hihokenshaNo" = T4101."hihokenshaNo"
