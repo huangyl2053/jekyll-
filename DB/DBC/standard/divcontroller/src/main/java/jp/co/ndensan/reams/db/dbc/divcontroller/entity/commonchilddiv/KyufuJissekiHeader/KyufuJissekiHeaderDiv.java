@@ -495,4 +495,14 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     public void set様式番号(RString 様式番号) {
         getHandler().set様式番号(様式番号);
     }
+
+    /**
+     * 要介護度を取得します。
+     *
+     * @return 要介護度 要介護度
+     */
+    @Override
+    public RString get要介護度() {
+        return getHandler().get要介護度();
+    }
 }
