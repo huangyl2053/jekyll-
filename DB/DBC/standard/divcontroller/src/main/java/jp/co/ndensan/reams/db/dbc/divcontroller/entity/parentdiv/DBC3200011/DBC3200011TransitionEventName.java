@@ -1,25 +1,24 @@
-package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5030001;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC3200011;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * このコードはツールによって生成されました。</br>
  * このファイルへの変更は、再生成時には損失するため</br>
  * 不正な動作の原因になります。</br>
- * DBD5030001のイベント名定義クラスです</br>
+ * DBC3200011のイベント名定義クラスです</br>
  *
- * @author 自動生成
+ * @reamsid_L DBC-2920-040 lihang
  */
-public enum DBD5030001TransitionEventName implements IContainerEvents {
+public enum DBC3200011TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    通知書発行("通知書発行"),
-    完了("完了");
+    実行("実行");
 
     private final RString name;
 
-    private DBD5030001TransitionEventName(String name) {
+    private DBC3200011TransitionEventName(String name) {
         this.name = new RString(name);
     }
 
