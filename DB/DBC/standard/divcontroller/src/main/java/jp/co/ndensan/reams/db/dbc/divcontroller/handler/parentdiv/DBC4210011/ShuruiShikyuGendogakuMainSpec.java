@@ -35,7 +35,7 @@ public enum ShuruiShikyuGendogakuMainSpec implements IPredicate<ShuruiShikyuGend
                     int i = 0;
                     for (dgShikyuGendogaku_Row row : div.getShuruiShikyuGendogakuIchiran().getDgShikyuGendogaku().getDataSource()) {
                         if (row.getServiceShuruiCode().equals(div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().getSelectedKey())
-                        && row.getTekiyoShuryoYM().getValue() != null && !(row.getTekiyoKaishiYM().getValue().isBeforeOrEquals(
+                        && row.getTekiyoShuryoYM().getValue() == null && !(row.getTekiyoKaishiYM().getValue().isBeforeOrEquals(
                                 div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().getFromValue()))) {
                             i++;
                         }

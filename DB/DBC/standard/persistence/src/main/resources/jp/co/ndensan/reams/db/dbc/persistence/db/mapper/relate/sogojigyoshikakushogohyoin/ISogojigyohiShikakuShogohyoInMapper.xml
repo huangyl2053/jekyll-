@@ -26,7 +26,7 @@
     <resultMap id="resultMap_SogojigyohiShikakuShogohyoInEntity"
                 type="jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyoshikakushogohyoin.SogojigyohiShikakuShogohyoInEntity"
                 autoMapping="true">
-        <result property="連番" column="DbWT1211_renban" />
+        <id property="連番" column="DbWT1211_renban" />
         <result property="サービス種類コード" column="DbWT1211_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
         <result property="サービス種類名" column="DbWT1211_serviceShuruiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="サービス提供年月" column="DbWT1211_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
@@ -94,7 +94,7 @@
     </resultMap>
 
     <sql id="allColumns_SogojigyohiShikakuShogohyoIn">
-        ROW_NUMBER() OVER() AS DbWT1211_renban,
+        DbWT1211."renban" AS DbWT1211_renban,
         DbWT1211."serviceShuruiCode" AS DbWT1211_serviceShuruiCode,
         DbWT1211."serviceShuruiMei" AS DbWT1211_serviceShuruiMei,
         DbWT1211."serviceTeikyoYM" AS DbWT1211_serviceTeikyoYM,

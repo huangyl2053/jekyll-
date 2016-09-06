@@ -86,11 +86,7 @@ public class GassanShikyugakuTorikomiIchiranEditor implements
 
         source.listLower_2 = 計算結果entity.getJikoFutanSeiriNo();
 
-        FlexibleDate kaishiYMD = 計算結果entity.getTaishoKeisanKaishiYMD();
-        FlexibleDate shuryoYMD = 計算結果entity.getTaishoKeisanShuryoYMD();
-        if (shuryoYMD != null && !shuryoYMD.isEmpty()) {
-            source.listUpper_5 = getlistUpper_5(kaishiYMD, shuryoYMD);
-        }
+        source.listUpper_5 = getlistUpper_5(計算結果entity.getTaishoKeisanKaishiYMD(), 計算結果entity.getTaishoKeisanShuryoYMD());
 
         source.listLower_3 = KaigoGassan_ShotokuKbn.toValue(計算結果entity.getShotokuKubun()).get名称();
         source.listLower_4 = KaigoGassan_Over70_ShotokuKbn.toValue(計算結果entity.getOver70_ShotokuKubun()).get名称();
@@ -171,11 +167,12 @@ public class GassanShikyugakuTorikomiIchiranEditor implements
                 separator(Separator.PERIOD).fillType(FillType.BLANK).
                 toDateString());
         sakuseiYMD.append(接続文字);
-        sakuseiYMD.append(shuryoYMD.wareki().
-                eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).fillType(FillType.BLANK).
-                toDateString());
-
+        if (shuryoYMD != null && !shuryoYMD.isEmpty()) {
+            sakuseiYMD.append(shuryoYMD.wareki().
+                    eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.PERIOD).fillType(FillType.BLANK).
+                    toDateString());
+        }
         return sakuseiYMD.toRString();
     }
 
