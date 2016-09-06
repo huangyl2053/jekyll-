@@ -30,7 +30,7 @@ public class ServiceShuruiShikyuGendoGakuHolder implements Serializable {
     /**
      * ServiceShuruiShikyuGendoGakuHolderのobj作成です。
      *
-     * @param ServiceShuruiShikyuGendoGakuList
+     * @param serviceShuruiShikyuGendoGakuList
      * List<ServiceShuruiShikyuGendoGaku>
      */
     public ServiceShuruiShikyuGendoGakuHolder(List<ServiceShuruiShikyuGendoGaku> serviceShuruiShikyuGendoGakuList) {
@@ -40,7 +40,7 @@ public class ServiceShuruiShikyuGendoGakuHolder implements Serializable {
     /**
      * ServiceShuruiShikyuGendoGakuHolderのobj作成です。
      *
-     * @param ServiceShuruiShikyuGendoGakuList
+     * @param serviceShuruiShikyuGendoGakuList
      * List<ServiceShuruiShikyuGendoGaku>
      * Models<ServiceShuruiShikyuGendoGakuIdentifier,
      * ServiceShuruiShikyuGendoGaku>

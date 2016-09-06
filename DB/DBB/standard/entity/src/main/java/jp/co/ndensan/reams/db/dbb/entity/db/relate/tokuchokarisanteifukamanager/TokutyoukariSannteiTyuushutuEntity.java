@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * DB出力(特徴仮算定抽出Temp)
@@ -22,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokutyoukariSannteiTyuushutuEntity implements Serializable {
+public class TokutyoukariSannteiTyuushutuEntity implements IDbAccessable, Serializable {
 
     private FlexibleYear fukaNendo;
     private HihokenshaNo hihokenshaNo;

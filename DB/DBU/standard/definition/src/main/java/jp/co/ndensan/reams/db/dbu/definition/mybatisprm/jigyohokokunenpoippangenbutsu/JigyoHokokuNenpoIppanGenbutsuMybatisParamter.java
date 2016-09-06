@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.PrintControlKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNo;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.Syorimei;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -210,16 +211,16 @@ public final class JigyoHokokuNenpoIppanGenbutsuMybatisParamter implements IMyBa
         if (PrintControlKubun.集計のみ.getコード().equals(プリントコントロール区分)
                 || PrintControlKubun.集計後印刷.getコード().equals(プリントコントロール区分)) {
             基準年月日 = 処理日時.getDate().toDateString();
-            基準日時 = 処理日時.getDate().toDateString().concat(new RString(処理日時.getHour())).
-                    concat(new RString(処理日時.getMinute())).concat(new RString(処理日時.getSecond()));
+            基準日時 = 処理日時.getDate().toDateString().concat(getDate(処理日時.getHour())).
+                    concat(getDate(処理日時.getMinute())).concat(getDate(処理日時.getSecond()));
         } else if (PrintControlKubun.過去分の印刷.getコード().equals(プリントコントロール区分)) {
             基準年月日 = 作成日時.getDate().toDateString();
-            基準日時 = 作成日時.getDate().toDateString().concat(new RString(作成日時.getHour())).
-                    concat(new RString(作成日時.getMinute())).concat(new RString(作成日時.getSecond()));
+            基準日時 = 作成日時.getDate().toDateString().concat(getDate(作成日時.getHour())).
+                    concat(getDate(作成日時.getMinute())).concat(getDate(作成日時.getSecond()));
         }
         return new JigyoHokokuNenpoIppanGenbutsuMybatisParamter(
                 市町村コードリスト, RString.EMPTY, null, null, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, new RString("DBU"), 処理名,
+                RString.EMPTY, SubGyomuCode.DBU介護統計報告.value(), 処理名,
                 new RString("0099"), 年度, 基準年月日, 基準日時);
     }
 
@@ -286,5 +287,9 @@ public final class JigyoHokokuNenpoIppanGenbutsuMybatisParamter implements IMyBa
             表番号リスト.add(HyoNo.償還_決定年月_一般状況_旧市町村.getコード());
         }
         return 表番号リスト;
+    }
+
+    private static RString getDate(int 時間) {
+        return new RString(時間).padZeroToLeft(2);
     }
 }

@@ -22,20 +22,25 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- *要介護認定一括更新のValidationHandlerです
- * @author x_liuwei
+ * 要介護認定一括更新のValidationHandlerです。
+ * @reamsid_L DBD-2120-010 x_liuwei
  */
 public class YouKaigoNinteiIkatsuKoshinValidationHandler {
     private final YouKaigoNinteiIkatsuKoshinDiv div;
     
+    /**
+     * コンストラクターです。
+     *
+     * @param div YouKaigoNinteiIkatsuKoshinValidationHandler
+     */
     public YouKaigoNinteiIkatsuKoshinValidationHandler(YouKaigoNinteiIkatsuKoshinDiv div){
         this.div = div;
     }
     
     /**
-     * 認定日チェック
-     * @param pairs
-     * @return 
+     * 認定日チェック。
+     * @param pairs ValidationMessageControlPairs
+     * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs validateFor認定日(ValidationMessageControlPairs pairs){
         IValidationMessages messages = ValidationMessagesFactory.createInstance();

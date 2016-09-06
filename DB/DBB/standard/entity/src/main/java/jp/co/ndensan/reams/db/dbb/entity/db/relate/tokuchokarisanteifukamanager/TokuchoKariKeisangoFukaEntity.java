@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 特徴仮算定計算後賦課情報Entity
+ * 特徴仮算定計算後賦課情報Entityクラスです。
  *
  * @reamsid_L DBB-0700-030 xuhao
  */

@@ -18,14 +18,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- * 要介護認定一括更新画面
- * @author x_liuwei
+ * 要介護認定一括更新画面のDivControllerです。
+ * @reamsid_L DBD-2120-010 x_liuwei
  */
 public class YouKaigoNinteiIkatsuKoshin {
     /**
-     * 画面初期化
-     * @param div
-     * @return 
+     * 画面初期化。
+     * @param div　YouKaigoNinteiIkatsuKoshinDiv
+     * @return ResponseData<YouKaigoNinteiIkatsuKoshinDiv>
      */
     public ResponseData<YouKaigoNinteiIkatsuKoshinDiv> onLoad(YouKaigoNinteiIkatsuKoshinDiv div) {
         getHandler(div).initialize();
@@ -33,9 +33,9 @@ public class YouKaigoNinteiIkatsuKoshin {
     }
     
     /**
-     * ラジオボタンを選択する時
-     * @param div
-     * @return 
+     * 選択する時の処理です。
+     * @param div　YouKaigoNinteiIkatsuKoshinDiv
+     * @return ResponseData<YouKaigoNinteiIkatsuKoshinDiv>
      */
     public ResponseData<YouKaigoNinteiIkatsuKoshinDiv> onChange(YouKaigoNinteiIkatsuKoshinDiv div) {
         getHandler(div).changeTxtNinTeiBi();
@@ -43,9 +43,9 @@ public class YouKaigoNinteiIkatsuKoshin {
     }
      
     /**
-     * 認定日チェック
-     * @param div
-     * @return 
+     * 認定日チェック。
+     * @param div　YouKaigoNinteiIkatsuKoshinDiv
+     * @return ResponseData<YouKaigoNinteiIkatsuKoshinDiv>
      */ 
     public ResponseData<YouKaigoNinteiIkatsuKoshinDiv> onClickCheck(YouKaigoNinteiIkatsuKoshinDiv div){
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
@@ -57,9 +57,9 @@ public class YouKaigoNinteiIkatsuKoshin {
     }
     
     /**
-     * バッチを呼び出す
-     * @param div
-     * @return 
+     * バッチを呼び出す。
+     * @param div　YouKaigoNinteiIkatsuKoshinDiv
+     * @return ResponseData<DBD560001Parameter>
      */ 
     public ResponseData<DBD560001Parameter> onClickNext(YouKaigoNinteiIkatsuKoshinDiv div){
         

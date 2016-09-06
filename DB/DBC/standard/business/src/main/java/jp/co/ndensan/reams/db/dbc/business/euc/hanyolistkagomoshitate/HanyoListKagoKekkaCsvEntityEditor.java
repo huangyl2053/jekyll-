@@ -183,7 +183,7 @@ public class HanyoListKagoKekkaCsvEntityEditor {
     }
 
     private void edit_part2(HanyoListKagoKekkaCsvEntity csvEntity) {
-        csvEntity.set取扱年月(entity.get過誤決定明細().getToriatsukaiYM().toDateString());
+        csvEntity.set取扱年月(format日付項目(entity.get過誤決定明細().getToriatsukaiYM()));
         if (entity.get過誤決定明細() != null) {
             if (!RString.isNullOrEmpty(entity.get過誤決定明細().getHokenshaKubun())) {
                 csvEntity.set保険者区分(KagoMoshitateKekka_HokenshaKubun.toValue(entity.get過誤決定明細().getHokenshaKubun()).get名称());
@@ -194,7 +194,7 @@ public class HanyoListKagoKekkaCsvEntityEditor {
         if (entity != null && entity.get介護サービス種類() != null) {
             ServiceShuruiCode サービス種類コード = entity.get過誤決定明細().getServiceShuruiCode();
             if (サービス種類コード != null) {
-                csvEntity.setサービス種類コード(サービス種類コード.getColumnValue());
+                csvEntity.setサービス種類(サービス種類コード.getColumnValue());
             }
             RString 介護サービス種類 = entity.get介護サービス種類().getServiceShuruiRyakusho();
             if (介護サービス種類 != null) {
@@ -235,7 +235,8 @@ public class HanyoListKagoKekkaCsvEntityEditor {
             } else {
                 csvEntity.set受給旧措置(RString.EMPTY);
             }
-            if (entity.get受給者台帳().getMinashiCode() != null && (MinashiCode.みなし認定_旧措置入所者.getコード().equals(entity.get受給者台帳().getMinashiCode().getColumnValue())
+            if (entity.get受給者台帳().getMinashiCode() != null && (MinashiCode.みなし認定_旧措置入所者
+                    .getコード().equals(entity.get受給者台帳().getMinashiCode().getColumnValue())
                     || MinashiCode.やむを得ない事由.getコード().equals(entity.get受給者台帳().getMinashiCode().getColumnValue()))) {
                 csvEntity.set受給みなし更新認定(定数_みなし);
             } else {
@@ -267,7 +268,7 @@ public class HanyoListKagoKekkaCsvEntityEditor {
         csvEntity.set世帯コード(kojin.get世帯コード().getColumnValue());
         csvEntity.set世帯主名(kojin.get世帯主名().getColumnValue());
         csvEntity.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
-        csvEntity.set郵便番号(kojin.get住所().get郵便番号().getYubinNo());
+        csvEntity.set郵便番号(kojin.get住所().get郵便番号().getEditedYubinNo());
         if (kojin.get住所().get方書() != null && !kojin.get住所().get方書().isEmpty()) {
             csvEntity.set住所番地方書(kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue())
                     .concat(RString.FULL_SPACE).concat(kojin.get住所().get方書().getColumnValue()));
@@ -348,7 +349,7 @@ public class HanyoListKagoKekkaCsvEntityEditor {
     }
 
     private void noRenbanEdit_part2(HanyoListKagoKekkaNoRebanCsvEntity csvEntity) {
-        csvEntity.set取扱年月(entity.get過誤決定明細().getToriatsukaiYM().toDateString());
+        csvEntity.set取扱年月(format日付項目(entity.get過誤決定明細().getToriatsukaiYM()));
         if (!RString.isNullOrEmpty(entity.get過誤決定明細().getHokenshaKubun())) {
             csvEntity.set保険者区分(KagoMoshitateKekka_HokenshaKubun.toValue(entity.get過誤決定明細().getHokenshaKubun()).get名称());
         }

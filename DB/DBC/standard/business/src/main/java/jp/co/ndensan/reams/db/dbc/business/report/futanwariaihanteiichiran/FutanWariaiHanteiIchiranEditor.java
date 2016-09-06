@@ -109,7 +109,7 @@ public class FutanWariaiHanteiIchiranEditor implements IFutanWariaiHanteiIchiran
             source.listList3_6 = edit更正事由(entity.get前回更正事由().value());
         }
         source.listList3_7 = editその他();
-        source.listList4_1 = new RString(entity.get連番()).padZeroToLeft(2);
+        source.listList4_1 = new RString(entity.get連番());
         if (entity.get名称() != null) {
             source.listList5_1 = entity.get名称();
         }

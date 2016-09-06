@@ -37,6 +37,7 @@ public class ShakaiFukushiHojinKeigengakuShokaiHandler {
     private static final FlexibleYearMonth 平成24年4月 = new FlexibleYearMonth("201204");
     private static final RString 前事業者 = new RString("前事業者");
     private static final RString 前月 = new RString("前月");
+    private static final RString 次月 = new RString("次月");
 
     /**
      * コンストラクタです。
@@ -59,12 +60,16 @@ public class ShakaiFukushiHojinKeigengakuShokaiHandler {
     public void onLoad(List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> 給付実績社会福祉法人軽減額リスト,
             RString 整理番号, RString 事業者番号, RString 様式番号, RString サービス提供年月) {
         List<dgShakaiFukushiHojinKeigengaku_Row> rowList = new ArrayList<>();
+        List<dgShakaiFukushiHojinKeigengaku_Row> rowListKo = new ArrayList<>();
         List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> 給付実績社会福祉法人軽減額データ
                 = get給付実績のデータ(給付実績社会福祉法人軽減額リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月);
         for (KyufuJissekiShakaiFukushiHojinKeigengakuBusiness 給付実績社会福祉法人軽減額 : 給付実績社会福祉法人軽減額データ) {
             rowList.add(setEmptyRowData(給付実績社会福祉法人軽減額));
-            rowList.add(setKoRowData(給付実績社会福祉法人軽減額));
         }
+        for (KyufuJissekiShakaiFukushiHojinKeigengakuBusiness 給付実績社会福祉法人軽減額 : 給付実績社会福祉法人軽減額データ) {
+            rowListKo.add(setKoRowData(給付実績社会福祉法人軽減額));
+        }
+        rowList.addAll(rowListKo);
         div.getDgShakaiFukushiHojinKeigengaku().setDataSource(rowList);
         setGetsuBtn(getサービス提供年月リスト(給付実績社会福祉法人軽減額リスト), new FlexibleYearMonth(サービス提供年月));
     }
@@ -127,7 +132,7 @@ public class ShakaiFukushiHojinKeigengakuShokaiHandler {
             List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> 給付実績社会福祉法人軽減額リスト,
             RString 整理番号, RString 事業者番号, RString 様式番号, RString サービス提供年月) {
         List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> 給付実績社会福祉法人軽減額データ = new ArrayList<>();
-        for (KyufuJissekiShakaiFukushiHojinKeigengakuBusiness 給付実績社会福祉法人軽減額 : 給付実績社会福祉法人軽減額データ) {
+        for (KyufuJissekiShakaiFukushiHojinKeigengakuBusiness 給付実績社会福祉法人軽減額 : 給付実績社会福祉法人軽減額リスト) {
             if (事業者番号.equals(給付実績社会福祉法人軽減額.get給付実績社会福祉法人軽減額情報().get事業所番号().value())
                     && 整理番号.equals(給付実績社会福祉法人軽減額.get給付実績社会福祉法人軽減額情報().get整理番号())
                     && 様式番号.equals(給付実績社会福祉法人軽減額.get給付実績社会福祉法人軽減額情報().get入力識別番号().value())
@@ -174,7 +179,8 @@ public class ShakaiFukushiHojinKeigengakuShokaiHandler {
      * @param 実績区分コード RString
      * @return index index
      */
-    public int get事業者番号index(List<KyufuJissekiHedajyoho2> 事業者番号リスト, RString 整理番号, RString 事業者番号, RString 様式番号, RString サービス提供年月, RString 実績区分コード) {
+    public int get事業者番号index(List<KyufuJissekiHedajyoho2> 事業者番号リスト, RString 整理番号, RString 事業者番号,
+            RString 様式番号, RString サービス提供年月, RString 実績区分コード) {
         for (int index = 0; index < 事業者番号リスト.size(); index++) {
             if (事業者番号.equals(事業者番号リスト.get(index).get事業所番号().value())
                     && 整理番号.equals(事業者番号リスト.get(index).get整理番号())
@@ -226,6 +232,7 @@ public class ShakaiFukushiHojinKeigengakuShokaiHandler {
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
         div.getBtnAtoJigyosha().setDisabled(true);
         div.getBtnMaeJigyosha().setDisabled(true);
+        事業者番号リスト = get事業者番号リスト(事業者番号リスト, new FlexibleYearMonth(サービス提供年月));
         int index = get事業者番号index(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月, 実績区分コード);
         int i;
         if (前事業者.equals(date)) {
@@ -240,14 +247,24 @@ public class ShakaiFukushiHojinKeigengakuShokaiHandler {
             div.getCcdKyufuJissekiHeader().set識別番号名称(事業者番号リスト.get(index + i).get識別番号名称());
             div.getCcdKyufuJissekiHeader().set事業者番号(事業者番号リスト.get(index + i).get事業所番号().value());
             div.getCcdKyufuJissekiHeader().set様式番号(事業者番号リスト.get(index + i).get識別番号());
-            List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> 給付実績福祉用具販売費等データ取得リスト
+            List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> 給付実績福祉用具販売データ取得リスト
+                    = new ArrayList<>();
+            for (KyufuJissekiShakaiFukushiHojinKeigengakuBusiness 給付実績社会福祉法人軽減額 : 給付実績社会福祉法人軽減額リスト) {
+                if (div.getCcdKyufuJissekiHeader().get事業者番号()
+                        .equals(給付実績社会福祉法人軽減額.get給付実績社会福祉法人軽減額情報().get事業所番号().value())) {
+                    給付実績福祉用具販売データ取得リスト.add(給付実績社会福祉法人軽減額);
+                }
+            }
+            List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(給付実績福祉用具販売データ取得リスト);
+            setGetsuBtn(サービス提供年月リスト, new FlexibleYearMonth(サービス提供年月));
+            List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> 給付実績社会福祉法人軽減額データ取得リスト
                     = get給付実績のデータ(給付実績社会福祉法人軽減額リスト, 事業者番号リスト.get(index + i).get整理番号(),
                             事業者番号リスト.get(index + i).get事業所番号().value(),
                             事業者番号リスト.get(index + i).get識別番号(),
                             事業者番号リスト.get(index + i).getサービス提供年月().toDateString());
-            for (KyufuJissekiShakaiFukushiHojinKeigengakuBusiness 給付実績福祉用具販売費等データ取得 : 給付実績福祉用具販売費等データ取得リスト) {
-                rowList.add(setEmptyRowData(給付実績福祉用具販売費等データ取得));
-                rowList.add(setKoRowData(給付実績福祉用具販売費等データ取得));
+            for (KyufuJissekiShakaiFukushiHojinKeigengakuBusiness 給付実績社会福祉法人軽減額データ取得 : 給付実績社会福祉法人軽減額データ取得リスト) {
+                rowList.add(setEmptyRowData(給付実績社会福祉法人軽減額データ取得));
+                rowList.add(setKoRowData(給付実績社会福祉法人軽減額データ取得));
             }
         }
         div.getDgShakaiFukushiHojinKeigengaku().setDataSource(rowList);
@@ -259,21 +276,41 @@ public class ShakaiFukushiHojinKeigengakuShokaiHandler {
         }
     }
 
+    private List<KyufuJissekiHedajyoho2> get事業者番号リスト(List<KyufuJissekiHedajyoho2> 事業者番号リスト, FlexibleYearMonth サービス提供年月) {
+        List<KyufuJissekiHedajyoho2> 今事業者番号リスト = new ArrayList<>();
+        for (KyufuJissekiHedajyoho2 事業者番号 : 事業者番号リスト) {
+            if (事業者番号.getサービス提供年月().equals(サービス提供年月)) {
+                今事業者番号リスト.add(事業者番号);
+            }
+        }
+        return 今事業者番号リスト;
+    }
+
     /**
      * change年月です。
      *
      * @param data RString
      * @param 給付実績社会福祉法人軽減額リスト List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness>
+     * @param 事業者番号リスト List<KyufuJissekiHedajyoho2>
      * @param サービス提供年月 FlexibleYearMonth
      * @param 整理番号 RString
      * @param 被保険者番号 HihokenshaNo
      * @param 識別番号 NyuryokuShikibetsuNo
      */
     public void change年月(RString data, List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> 給付実績社会福祉法人軽減額リスト,
-            FlexibleYearMonth サービス提供年月, RString 整理番号, HihokenshaNo 被保険者番号, NyuryokuShikibetsuNo 識別番号) {
+            List<KyufuJissekiHedajyoho2> 事業者番号リスト, FlexibleYearMonth サービス提供年月, RString 整理番号,
+            HihokenshaNo 被保険者番号, NyuryokuShikibetsuNo 識別番号) {
         List<dgShakaiFukushiHojinKeigengaku_Row> rowList = new ArrayList<>();
         int index = INT_ZERO;
-        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(給付実績社会福祉法人軽減額リスト);
+        List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> 給付実績福祉用具販売データ取得リスト
+                = new ArrayList<>();
+        for (KyufuJissekiShakaiFukushiHojinKeigengakuBusiness 給付実績社会福祉法人軽減額 : 給付実績社会福祉法人軽減額リスト) {
+            if (div.getCcdKyufuJissekiHeader().get事業者番号()
+                    .equals(給付実績社会福祉法人軽減額.get給付実績社会福祉法人軽減額情報().get事業所番号().value())) {
+                給付実績福祉用具販売データ取得リスト.add(給付実績社会福祉法人軽減額);
+            }
+        }
+        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(給付実績福祉用具販売データ取得リスト);
         Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
         for (int i = 0; i < サービス提供年月リスト.size(); i++) {
             if (サービス提供年月.equals(サービス提供年月リスト.get(i))) {
@@ -281,14 +318,12 @@ public class ShakaiFukushiHojinKeigengakuShokaiHandler {
                 break;
             }
         }
-        FlexibleYearMonth 今提供年月 = FlexibleYearMonth.EMPTY;
-        if (INT_ZERO < index && index < サービス提供年月リスト.size() - 1) {
-            if (前月.equals(data)) {
+        FlexibleYearMonth 今提供年月 = サービス提供年月;
+        if (INT_ZERO <= index && index <= サービス提供年月リスト.size() - 1) {
+            if (前月.equals(data) && index != サービス提供年月リスト.size() - 1) {
                 今提供年月 = サービス提供年月リスト.get(index + 1);
-                div.getBtnJigetsu().setDisabled(false);
-            } else {
+            } else if (次月.equals(data) && INT_ZERO != index) {
                 今提供年月 = サービス提供年月リスト.get(index - 1);
-                div.getBtnZengetsu().setDisabled(false);
             }
         }
         List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> 給付実績福祉用具販売費等データ取得リスト
@@ -303,12 +338,18 @@ public class ShakaiFukushiHojinKeigengakuShokaiHandler {
         }
         div.getDgShakaiFukushiHojinKeigengaku().setDataSource(rowList);
         setGetsuBtn(サービス提供年月リスト, 今提供年月);
+        RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
+        RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
+        RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
+        事業者番号リスト = get事業者番号リスト(事業者番号リスト, 今提供年月);
+        setJigyoshaBtn(事業者番号リスト, div.getCcdKyufuJissekiHeader().get整理番号(),
+                事業者番号, 様式番号, 今提供年月.toDateString(), 実績区分コード);
     }
 
     private List<FlexibleYearMonth> getサービス提供年月リスト(List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> 給付実績社会福祉法人軽減額リスト) {
         List<FlexibleYearMonth> 提供年月リスト = new ArrayList<>();
-        for (int i = 0; i < 給付実績社会福祉法人軽減額リスト.size(); i++) {
-            FlexibleYearMonth 提供年月 = 給付実績社会福祉法人軽減額リスト.get(i).get給付実績社会福祉法人軽減額情報().getサービス提供年月();
+        for (KyufuJissekiShakaiFukushiHojinKeigengakuBusiness 給付実績社会福祉法人軽減額 : 給付実績社会福祉法人軽減額リスト) {
+            FlexibleYearMonth 提供年月 = 給付実績社会福祉法人軽減額.get給付実績社会福祉法人軽減額情報().getサービス提供年月();
             if (!提供年月リスト.contains(提供年月)) {
                 提供年月リスト.add(提供年月);
             }
@@ -337,6 +378,7 @@ public class ShakaiFukushiHojinKeigengakuShokaiHandler {
         if (NI.equals(識別番号管理.get所定疾患施設療養設定区分())
                 && 平成24年4月.isBeforeOrEquals(サービス提供年月)) {
             div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(false);
+            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(false);
             div.getBtnKinkyujiShisetsuRyoyo().setDisplayNone(true);
         } else {
             div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(true);
@@ -388,11 +430,7 @@ public class ShakaiFukushiHojinKeigengakuShokaiHandler {
         } else {
             div.getBtnCareManagement().setDisabled(false);
         }
-        if (ZERO.equals(識別番号管理.get社会福祉法人軽減設定区分())) {
-            div.getBtnShafukuKeigen().setDisabled(true);
-        } else {
-            div.getBtnShafukuKeigen().setDisabled(false);
-        }
+        div.getBtnShafukuKeigen().setDisabled(true);
     }
 
     private RString kinngakuFormat(Decimal date) {

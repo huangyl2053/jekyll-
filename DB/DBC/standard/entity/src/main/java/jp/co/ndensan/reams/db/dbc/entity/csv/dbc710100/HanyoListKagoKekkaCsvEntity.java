@@ -146,8 +146,8 @@ public class HanyoListKagoKekkaCsvEntity {
     private RString 過誤事業者番号;
     @CsvField(order = 63, name = "過誤事業者名")
     private RString 過誤事業者名;
-    @CsvField(order = 64, name = "サービス種類コード")
-    private RString サービス種類コード;
+    @CsvField(order = 64, name = "サービス種類")
+    private RString サービス種類;
     @CsvField(order = 65, name = "サービス種類名")
     private RString サービス種類名;
     @CsvField(order = 66, name = "申立事由コード")

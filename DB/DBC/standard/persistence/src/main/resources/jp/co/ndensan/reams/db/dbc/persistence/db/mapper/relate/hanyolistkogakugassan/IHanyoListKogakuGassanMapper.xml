@@ -97,7 +97,7 @@
           INNER JOIN
           rgdb."DbT3072KogakuGassanShikyuGakuKeisanKekka" AS DbT3072KogakuGassanShikyu
           ON DbT4001Jukyu."hihokenshaNo" = DbT3072KogakuGassanShikyu."hihokenshaNo") AS DbT4001JukyushaDaicho_最大)
-        <if test="!抽出区分.isEmpty()">  
+        <if test="抽出区分!=null and !抽出区分.isEmpty()">  
         INNER JOIN
           (SELECT 
             DbT3072KogakuGassanShikyuGakuKei."hihokenshaNo",

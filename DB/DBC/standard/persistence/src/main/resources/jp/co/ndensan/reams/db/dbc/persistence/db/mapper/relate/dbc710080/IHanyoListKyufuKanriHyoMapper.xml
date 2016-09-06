@@ -25,8 +25,8 @@
             )
         ),
         "KyufuKanrihyoUnion"  AS
-        (
-            SELECT 
+        (SELECT  *  FROM 
+            (SELECT 
                 "shinsaYM",
                 "serviceTeikyoYM",
                 "hiHokenshaNo",
@@ -94,7 +94,7 @@
                 "torikomiYM",
                 "isDeleted"
              FROM
-                rgdb."DbT3015KyufuKanrihyo200604"
+                rgdb."DbT3015KyufuKanrihyo200604") AS "KyufuKanrihyo"
         WHERE "isDeleted" =false
         <if test="給付対象年月From!=null">
             AND #{給付対象年月From} <![CDATA[<=]]> "serviceTeikyoYM"
@@ -304,7 +304,7 @@
      <resultMap id="ResultMap_JukyushaDaicho" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710080.JukyushaDaichoKyufuKanriHyoEntity" autoMapping="true">
         <result property="shinsaYM"                     column="JukyushaDaicho_shinsaYM"                              typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="serviceTeikyoYM"              column="JukyushaDaicho_serviceTeikyoYM"                         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="kyufuKanrihyoShubetsuKubunCode"    column="JukyushaDaicho_kyufuKanrihyoShubetsuKubunCode"                            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kyufuKanrihyoShubetsuKubunCode"    column="JukyushaDaicho_kyufuKanrihyoShubetsuKubunCode"                            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kyufuKanrihyoMeisaiLineNo"                     column="JukyushaDaicho_kyufuKanrihyoMeisaiLineNo"                   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shichosonCode"                column="JukyushaDaicho_shichosonCode"                           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="hihokenshaNo"                 column="JukyushaDaicho_hihokenshaNo"                            typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>

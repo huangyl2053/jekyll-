@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7080001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc710080.DBC710080_HanyoListKyufuKanriHyoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.kyufukanrihyo.Kyufukanrihyo_MeisaigyoBango;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710080.DBC710080_HanyoListKyufuKanriHyoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufukanrihyo.KyufuKanrihyo_MeisaigyoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7080001.HanyoListParamKyoufuKannrihyouDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
@@ -86,7 +86,7 @@ public class HanyoListParamKyoufuKannrihyouHandler {
 
         RString key = div.getChushutsuJokenPanel().getRadMeisaigyoSyuturyokuUmu().getSelectedKey();
         if (KEY_0.equals(key)) {
-            parameter.set明細行出力有無(Kyufukanrihyo_MeisaigyoBango.終端行.get名称());
+            parameter.set明細行出力有無(KyufuKanrihyo_MeisaigyoKubun.集計行のみ.getコード());
         } else if (KEY_1.equals(key)) {
             parameter.set明細行出力有無(RString.EMPTY);
         }

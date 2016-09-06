@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.kaigokyufuhikagomositatetouroku
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KagoMoshitate;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigokyufuhikagomositatetouroku.KaigoKyufuhiKagoMositateTourokuEntity;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -29,6 +30,15 @@ public class KaigoKyufuhiKagoMositateTourokuResult implements Serializable {
      */
     public KaigoKyufuhiKagoMositateTourokuResult(KaigoKyufuhiKagoMositateTourokuEntity entity) {
         this.entity = entity;
+    }
+
+    /**
+     * 識別コードを取得します。
+     *
+     * @return 識別コード
+     */
+    public ShikibetsuCode get識別コード() {
+        return entity.get識別コード();
     }
 
     /**
@@ -136,6 +146,9 @@ public class KaigoKyufuhiKagoMositateTourokuResult implements Serializable {
      * @return 過誤申立情報
      */
     public KagoMoshitate get過誤申立情報() {
+        if (entity.getDbT3059() == null) {
+            return null;
+        }
         return new KagoMoshitate(entity.getDbT3059());
     }
 }

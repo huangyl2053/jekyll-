@@ -89,6 +89,20 @@ public class GassanShikyugakuTorikomiIchiranSource implements IReportSource {
     public RString meisaiKensuTitle;
     @ReportItem(name = "meisaiKensu", length = 9, order = 36)
     public RString meisaiKensu;
+    @ReportItem(name = "yubinNo", length = 13, order = 37)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 20, order = 38)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 20, order = 39)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana", length = 30, order = 40)
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode", length = 13, order = 41)
+    public RString shichosonCode;
+    @ReportItem(name = "shoKisaiHokenshaNo", length = 13, order = 42)
+    public RString shoKisaiHokenshaNo;
+    @ReportItem(name = "hihokenshaNo", length = 15, order = 43)
+    public RString hihokenshaNo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

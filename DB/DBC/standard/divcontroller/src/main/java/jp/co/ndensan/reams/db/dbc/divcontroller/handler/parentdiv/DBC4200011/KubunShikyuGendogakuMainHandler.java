@@ -24,8 +24,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
+ * 区分支給限度額登録のHandlerクラスです。
  *
- * @author lifei
+ * @reamsid_L DBC-3410-010 jianglaisheng
  */
 public class KubunShikyuGendogakuMainHandler {
 
@@ -455,11 +456,19 @@ public class KubunShikyuGendogakuMainHandler {
         List<dgShikyuGendogaku_Row> rowList = div.getKubunShikyuGendogakuIchiran()
                 .getDgShikyuGendogaku().getDataSource();
         for (dgShikyuGendogaku_Row row : rowList) {
-            if (RS_1.equals(row.getHdnSaishinFlag())
-                    && row.getTekiyoShuryoYm().getValue() == null
-                    && テーブル区分.equals(row.getTableKubun())) {
-                setUpdateList(適用開始年月.minusMonth(INDEX_1), update居宅List,
-                        update上乗せ居宅List, row, 居宅HoldList, 上乗せ居宅HoldList);
+            if (ShikyuGendogakuTableKubun.標準.get名称().equals(テーブル区分)) {
+                if (RS_1.equals(row.getHdnSaishinFlag())
+                        && テーブル区分.equals(row.getTableKubun())) {
+                    setUpdateList(適用開始年月.minusMonth(INDEX_1), update居宅List,
+                            update上乗せ居宅List, row, 居宅HoldList, 上乗せ居宅HoldList);
+                }
+            } else {
+                if (RS_1.equals(row.getHdnSaishinFlag())
+                        && row.getTekiyoShuryoYm().getValue() == null
+                        && テーブル区分.equals(row.getTableKubun())) {
+                    setUpdateList(適用開始年月.minusMonth(INDEX_1), update居宅List,
+                            update上乗せ居宅List, row, 居宅HoldList, 上乗せ居宅HoldList);
+                }
             }
         }
         KubunShikyuGendoGakuManager 居宅manager = new KubunShikyuGendoGakuManager();
@@ -500,7 +509,7 @@ public class KubunShikyuGendogakuMainHandler {
                 要介護状態区分 = insert居宅.get要介護状態区分();
                 支給限度単位数 = insert居宅.get支給限度単位数();
                 valueChange(テーブル区分, 要介護状態区分, 適用開始年月, 支給限度単位数, update居宅List,
-                        update上乗せ居宅List, 居宅HoldList, 上乗せ居宅HoldList);
+                        update上乗せ居宅List, 居宅HoldList, 上乗せ居宅HoldList, insert居宅, null);
             }
         }
         if (!insert上乗せ居宅List.isEmpty()) {
@@ -508,7 +517,7 @@ public class KubunShikyuGendogakuMainHandler {
                 要介護状態区分 = insert上乗せ.get要介護状態区分();
                 支給限度単位数 = insert上乗せ.get支給限度単位数();
                 valueChange(テーブル区分, 要介護状態区分, 適用開始年月, 支給限度単位数, update居宅List,
-                        update上乗せ居宅List, 居宅HoldList, 上乗せ居宅HoldList);
+                        update上乗せ居宅List, 居宅HoldList, 上乗せ居宅HoldList, null, insert上乗せ);
             }
         }
 
@@ -609,8 +618,10 @@ public class KubunShikyuGendogakuMainHandler {
             List<KubunShikyuGendoGaku> update居宅List,
             List<UwanoseKubunShikyuGendoGaku> update上乗せ居宅List,
             List<KubunShikyuGendoGaku> 居宅HolderList,
-            List<UwanoseKubunShikyuGendoGaku> 上乗せ居宅HolderList) {
-
+            List<UwanoseKubunShikyuGendoGaku> 上乗せ居宅HolderList,
+            KubunShikyuGendoGaku insert居宅,
+            UwanoseKubunShikyuGendoGaku insert上乗せ) {
+        boolean flag = true;
         if (ShikyuGendogakuTableKubun.標準.get名称().equals(
                 テーブル区分)) {
             for (KubunShikyuGendoGaku 居宅Holder : 居宅HolderList) {
@@ -621,7 +632,11 @@ public class KubunShikyuGendogakuMainHandler {
                             .set支給限度単位数(支給限度単位数)
                             .build();
                     update居宅List.add(居宅Holder);
+                    flag = false;
                 }
+            }
+            if (flag) {
+                update居宅List.add(insert居宅);
             }
         } else {
             for (UwanoseKubunShikyuGendoGaku 上乗せ居宅Holder : 上乗せ居宅HolderList) {
@@ -632,7 +647,11 @@ public class KubunShikyuGendogakuMainHandler {
                             .set支給限度単位数(支給限度単位数)
                             .build();
                     update上乗せ居宅List.add(上乗せ居宅Holder);
+                    flag = false;
                 }
+            }
+            if (flag) {
+                update上乗せ居宅List.add(insert上乗せ);
             }
         }
     }

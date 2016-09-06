@@ -305,15 +305,20 @@ public class ChoshuYuyoJuminKihonHandler {
                 期別徴収猶予期間.set普徴期別納付額(空);
             }
             FlexibleDate 徴収猶予期間開始 = get徴収猶予期間開始(期_普徴, 徴収猶予の情報);
-            if (徴収猶予期間開始 != null) {
+            if (徴収猶予期間開始 != null && !徴収猶予期間開始.isEmpty()) {
+                // TODO QA1195 labelはTextBoxDateに変換は必要ですが？ 状態定義sheetの281－294行の状態は入力可の設定。
+                期別徴収猶予期間.set徴収猶予_開始(徴収猶予期間開始);
                 期別徴収猶予期間.set徴収猶予期間開始(徴収猶予期間開始.wareki().toDateString());
             } else {
+                期別徴収猶予期間.set徴収猶予_開始(null);
                 期別徴収猶予期間.set徴収猶予期間開始(空);
             }
             FlexibleDate 徴収猶予期間終了 = get徴収猶予期間終了(期_普徴, 徴収猶予の情報);
-            if (徴収猶予期間開始 != null) {
+            if (徴収猶予期間終了 != null && !徴収猶予期間終了.isEmpty()) {
+                期別徴収猶予期間.set徴収猶予_終了(徴収猶予期間終了);
                 期別徴収猶予期間.set徴収猶予期間終了(徴収猶予期間終了.wareki().toDateString());
             } else {
+                期別徴収猶予期間.set徴収猶予_終了(null);
                 期別徴収猶予期間.set徴収猶予期間終了(空);
             }
             期別徴収猶予期間リスト.add(期別徴収猶予期間);
@@ -442,9 +447,9 @@ public class ChoshuYuyoJuminKihonHandler {
      * 普通徴収猶予情報パネルの初期化メソッドです。
      *
      * @param 徴収猶予の情報 ChoshuYuyoJoho
-     * @return 普通徴収_合計 Decimal
+     * @return 期別徴収猶予期間リスト List<KibetsuChoshyuYuyoKikann>
      */
-    public Decimal load普通徴収猶予情報パネル(ChoshuYuyoJoho 徴収猶予の情報) {
+    public List<KibetsuChoshyuYuyoKikann> load普通徴収猶予情報パネル(ChoshuYuyoJoho 徴収猶予の情報) {
         FuchoTablePanelDiv 普通徴収猶予情報パネル = div.getChoshuYuyoMain().getFuchoTablePanel();
         RString 期_4月 = 普徴期月リスト.get月の期(Tsuki._4月).get期();
         RString 期_5月 = 普徴期月リスト.get月の期(Tsuki._5月).get期();
@@ -536,7 +541,7 @@ public class ChoshuYuyoJuminKihonHandler {
         RString 普通徴収_合計R = 期別徴収猶予期間15.get普徴期別納付額();
         Decimal 普通徴収_合計 = new Decimal(普通徴収_合計R.toString());
         普通徴収猶予情報パネル.getLblFuchoNofuGakuTotal().setText(DecimalFormatter.toコンマ区切りRString(普通徴収_合計, ゼロ_定値));
-        return 普通徴収_合計;
+        return 期別徴収猶予期間リスト;
     }
 
     private RString get期(RString 期) {
@@ -825,9 +830,11 @@ public class ChoshuYuyoJuminKihonHandler {
      * @param 徴収猶予の情報 ChoshuYuyoJoho
      * @param 猶予種類コード Code
      * @param 取消種類コード Code
+     * @param 期別徴収猶予期間リスト List<KibetsuChoshyuYuyoKikann>
      * @return 画面情報param KaigoFukaChoshuYuyoParam
      */
-    public KaigoFukaChoshuYuyoParam get画面情報param(ChoshuYuyoJoho 徴収猶予の情報, Code 猶予種類コード, Code 取消種類コード) {
+    public KaigoFukaChoshuYuyoParam get画面情報param(
+            ChoshuYuyoJoho 徴収猶予の情報, Code 猶予種類コード, Code 取消種類コード, List<KibetsuChoshyuYuyoKikann> 期別徴収猶予期間リスト) {
         ShinseiJohoDiv 申請情報パネル = div.getChoshuYuyoMain().getShinseiJoho();
         KetteiJohoDiv 決定情報パネル = div.getChoshuYuyoMain().getKetteiJoho();
         TorikeshiJohoDiv 取消情報パネル = div.getChoshuYuyoMain().getTorikeshiJoho();
@@ -849,7 +856,17 @@ public class ChoshuYuyoJuminKihonHandler {
         param.set徴収猶予事由(申請情報パネル.getTxtYuyoShurui().getValue());
         param.set徴収猶予取消種類コード(取消種類コード);
         param.set徴収猶予取消事由(取消情報パネル.getTxtTorikeshiShurui().getValue());
+        // TODO QA1195 labelはTextBoxDateに変換は必要ですが？ 状態定義sheetの281－294行の状態は入力可の設定。
         List<KaigoKibetsuChoshuYuyoParam> 介護期別徴収猶予データ = get介護期別徴収猶予データ();
+        介護期別徴収猶予データ.clear();
+        for (int i = ゼロ_定値; i < ジュウヨ_定値; i++) {
+            KibetsuChoshyuYuyoKikann 期別徴収猶予期間 = 期別徴収猶予期間リスト.get(i);
+            KaigoKibetsuChoshuYuyoParam データ = new KaigoKibetsuChoshuYuyoParam();
+            データ.set期(Integer.valueOf(期別徴収猶予期間.get普徴期().toString()));
+            データ.set徴収猶予開始日(期別徴収猶予期間.get徴収猶予_開始());
+            データ.set徴収猶予終了日(期別徴収猶予期間.get徴収猶予_終了());
+            介護期別徴収猶予データ.add(データ);
+        }
         param.set介護期別徴収猶予データ(介護期別徴収猶予データ);
         return param;
     }
