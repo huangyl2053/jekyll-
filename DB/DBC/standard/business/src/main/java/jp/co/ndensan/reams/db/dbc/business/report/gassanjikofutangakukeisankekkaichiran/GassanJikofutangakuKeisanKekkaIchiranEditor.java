@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.gassanjikofutangakukeisankekk
 
 import jp.co.ndensan.reams.db.dbc.entity.report.gassanjikofutangakukeisankekkaichiran.GassanJikofutangakuKeisanKekkaIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.gassanjikofutangakukeisankekkaichiran.GassanJikofutangakuKeisanKekkaIchiranSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -40,10 +41,6 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
     private final RString 改頁5;
     private static final RString 種別日本人 = new RString("１x");
     private static final RString 種別外国人 = new RString("２x");
-    private static final RString INDEX_ONE = new RString("1");
-    private static final RString INDEX_TWO = new RString("2");
-    private static final RString MAN = new RString("男");
-    private static final RString WOMAN = new RString("女");
     private static final RString LINE = new RString(" ～ ");
 
     /**
@@ -105,42 +102,40 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
             RString 調定時 = 作成日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
             source.printTimeStamp = 調定日.concat(RString.HALF_SPACE).concat(調定時).concat(RString.HALF_SPACE);
         }
-        if (高額合算自己負担額計算結果一覧表 != null && 高額合算自己負担額計算結果一覧表.get被保険者番号() != null) {
-            source.list_1 = 高額合算自己負担額計算結果一覧表.get被保険者番号().getColumnValue();
-        }
         if (高額合算自己負担額計算結果一覧表 != null) {
+            if (高額合算自己負担額計算結果一覧表.get被保険者番号() != null) {
+                source.list_1 = 高額合算自己負担額計算結果一覧表.get被保険者番号().getColumnValue();
+            }
             source.list_2 = 高額合算自己負担額計算結果一覧表.get被保険者氏名();
+            if (高額合算自己負担額計算結果一覧表.get生年月日() != null
+                    && 種別日本人.equals(高額合算自己負担額計算結果一覧表.get宛名ﾃﾞｰﾀ種別())) {
+                source.list_3 = 高額合算自己負担額計算結果一覧表.get生年月日().wareki().toDateString();
+            } else if (高額合算自己負担額計算結果一覧表.get生年月日() != null
+                    && 種別外国人.equals(高額合算自己負担額計算結果一覧表.get宛名ﾃﾞｰﾀ種別())) {
+                source.list_3 = 高額合算自己負担額計算結果一覧表.get生年月日().seireki().toDateString();
+            }
+            editTwo(source);
+            editThree(source);
         }
-        if (高額合算自己負担額計算結果一覧表 != null && 高額合算自己負担額計算結果一覧表.get生年月日() != null
-                && 種別日本人.equals(高額合算自己負担額計算結果一覧表.get宛名ﾃﾞｰﾀ種別())) {
-            source.list_3 = 高額合算自己負担額計算結果一覧表.get生年月日().wareki().toDateString();
-        } else if (高額合算自己負担額計算結果一覧表 != null && 高額合算自己負担額計算結果一覧表.get生年月日() != null
-                && 種別外国人.equals(高額合算自己負担額計算結果一覧表.get宛名ﾃﾞｰﾀ種別())) {
-            source.list_3 = 高額合算自己負担額計算結果一覧表.get生年月日().seireki().toDateString();
-        }
-        editTwo(source);
-        editThree(source);
         return source;
     }
 
     private void editTwo(GassanJikofutangakuKeisanKekkaIchiranSource source) {
-        if (高額合算自己負担額計算結果一覧表 != null && INDEX_ONE.equals(高額合算自己負担額計算結果一覧表.get性別())) {
-            source.list_4 = MAN;
-        } else if (高額合算自己負担額計算結果一覧表 != null && INDEX_TWO.equals(高額合算自己負担額計算結果一覧表.get性別())) {
-            source.list_4 = WOMAN;
+        if (Seibetsu.男.getコード().equals(高額合算自己負担額計算結果一覧表.get性別())) {
+            source.list_4 = Seibetsu.男.get名称();
+        } else if (Seibetsu.女.getコード().equals(高額合算自己負担額計算結果一覧表.get性別())) {
+            source.list_4 = Seibetsu.女.get名称();
         }
-        if (高額合算自己負担額計算結果一覧表 != null) {
-            source.list_5 = 高額合算自己負担額計算結果一覧表.get申請書整理番号();
-        }
-        if (高額合算自己負担額計算結果一覧表 != null && 高額合算自己負担額計算結果一覧表.get申請年月日() != null) {
+        source.list_5 = 高額合算自己負担額計算結果一覧表.get申請書整理番号();
+        if (高額合算自己負担額計算結果一覧表.get申請年月日() != null) {
             source.list_6 = 高額合算自己負担額計算結果一覧表.get申請年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
-        if (高額合算自己負担額計算結果一覧表 != null && 高額合算自己負担額計算結果一覧表.get申請対象年度() != null) {
+        if (高額合算自己負担額計算結果一覧表.get申請対象年度() != null) {
             source.list_7 = 高額合算自己負担額計算結果一覧表.get申請対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
-        if (高額合算自己負担額計算結果一覧表 != null && 高額合算自己負担額計算結果一覧表.get介護加入期間開始() != null
+        if (高額合算自己負担額計算結果一覧表.get介護加入期間開始() != null
                 && 高額合算自己負担額計算結果一覧表.get介護加入期間終了() != null) {
             RString 介護加入期間開始 = 高額合算自己負担額計算結果一覧表.get介護加入期間開始().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -151,24 +146,20 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
     }
 
     private void editThree(GassanJikofutangakuKeisanKekkaIchiranSource source) {
-        if (高額合算自己負担額計算結果一覧表 != null && 高額合算自己負担額計算結果一覧表.get自己負担額() != null) {
+        if (高額合算自己負担額計算結果一覧表.get自己負担額() != null) {
             source.list_9 = DecimalFormatter.toコンマ区切りRString(高額合算自己負担額計算結果一覧表.get自己負担額(), 0);
         }
-        if (高額合算自己負担額計算結果一覧表 != null && 高額合算自己負担額計算結果一覧表.get高額支給額() != null) {
+        if (高額合算自己負担額計算結果一覧表.get高額支給額() != null) {
             source.list_10 = DecimalFormatter.toコンマ区切りRString(高額合算自己負担額計算結果一覧表.get高額支給額(), 0);
         }
-        if (高額合算自己負担額計算結果一覧表 != null && 高額合算自己負担額計算結果一覧表.getOneTwo() != null) {
+        if (高額合算自己負担額計算結果一覧表.getOneTwo() != null) {
             source.list_11 = DecimalFormatter.toコンマ区切りRString(高額合算自己負担額計算結果一覧表.getOneTwo(), 0);
         }
-        if (高額合算自己負担額計算結果一覧表 != null && 高額合算自己負担額計算結果一覧表.get自己負担額内数() != null) {
+        if (高額合算自己負担額計算結果一覧表.get自己負担額内数() != null) {
             source.list_12 = DecimalFormatter.toコンマ区切りRString(高額合算自己負担額計算結果一覧表.get自己負担額内数(), 0);
         }
-        if (高額合算自己負担額計算結果一覧表 != null) {
-            source.list_13 = 高額合算自己負担額計算結果一覧表.get備考資格期間不正();
-        }
-        if (高額合算自己負担額計算結果一覧表 != null) {
-            source.list_15 = 高額合算自己負担額計算結果一覧表.get備考高額支給額確認データ();
-        }
+        source.list_13 = 高額合算自己負担額計算結果一覧表.get備考資格期間不正();
+        source.list_15 = 高額合算自己負担額計算結果一覧表.get備考高額支給額確認データ();
     }
 
 }
