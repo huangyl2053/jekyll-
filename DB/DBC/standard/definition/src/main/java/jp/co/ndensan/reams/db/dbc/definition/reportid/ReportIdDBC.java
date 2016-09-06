@@ -103,6 +103,10 @@ public enum ReportIdDBC {
      */
     DBC200055(new ReportId("DBC200055_JukyushaKoshinkekkaIchiran"), new RString("受給者情報更新結果一覧表")),
     /**
+     * 共同処理用受給者情報一覧表
+     */
+    DBC200057(new ReportId("DBC200057_KyodoJukyushaIchiran"), new RString("共同処理用受給者情報一覧表")),
+    /**
      * 受給者情報突合結果一覧表
      */
     DBC200058(new ReportId("DBC200058_JukyushaTotsugokekkaIchiran"), new RString("受給者情報突合結果一覧表")),
@@ -575,9 +579,25 @@ public enum ReportIdDBC {
      */
     DBC100060(new ReportId("DBC100060_FurikomiTsuchisho"), new RString("事業合算・事業分振込明細書作成（一括）")),
     /**
+     * 帳票設計_DBCMNF1001_1_受給者異動連絡票情報送付対象者リスト帳票ＩＤです。
+     */
+    DBC200010(new ReportId("DBC200010_JukyushaIdorenrakuhyoSofuTaishoshachiran"), new RString("受給者異動連絡票情報送付対象者リスト")),
+    /**
+     * 帳票設計_DBCMNF1001_1_国保連送付データエラーリスト帳票ＩＤです。
+     */
+    DBC200095(new ReportId("DBC200095_KokuhorenSofuDataErrorIchiran"), new RString("国保連送付データエラーリスト")),
+    /**
+     * 帳票設計_DBCMNF1001_1_国保連受給者異動情報履歴訂正リスト帳票ＩＤです。
+     */
+    DBC200074(new ReportId("DBC200074_JukyushaIdoRirekiTeiseiIchiran"), new RString("国保連受給者異動情報履歴訂正リスト")),
+    /**
      * 帳票設計_DBC100041_介護保険給付費通知書 ＩＤです。
      */
-    DBC100041(new ReportId("DBC100041_KyufuhiTsuchisho"), new RString("介護保険給付費通知書"));
+    DBC100041(new ReportId("DBC100041_KyufuhiTsuchisho"), new RString("介護保険給付費通知書")),
+    /**
+     * 請求明細・給付管理票返戻（保留）一覧表帳票ＩＤです。
+     */
+    DBC200001(new ReportId("DBC200001_SeikyumeisaiKyufukanrihyoHenreiHoryuIchiran"), new RString("請求明細・給付管理票返戻（保留）一覧表"));
     private final ReportId reportId;
 
     private final RString reportName;

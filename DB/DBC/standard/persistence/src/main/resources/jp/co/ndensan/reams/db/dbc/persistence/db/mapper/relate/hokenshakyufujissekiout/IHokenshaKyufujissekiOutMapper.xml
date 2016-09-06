@@ -142,7 +142,8 @@
     
     <select resultOrdered="true" id="select被保険者_宛名" resultMap="resultMap_HokenshaKyufujissekiOutGetHihokenshaAtenaEntity" fetchSize="500">
         SELECT 
-           TEMP.* , HIHOKENSHA.* ,
+           TEMP.* ,
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukyufutaishosha.IKogakuKyufuTaishoshaMapper.allColumns_DbV1001HihokenshaDaicho" />,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM "DbWT1001Hihokensha" AS TEMP
         INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS HIHOKENSHA

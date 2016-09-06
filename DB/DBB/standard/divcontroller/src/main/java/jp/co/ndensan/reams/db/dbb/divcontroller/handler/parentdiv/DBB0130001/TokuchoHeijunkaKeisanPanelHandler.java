@@ -109,6 +109,7 @@ public class TokuchoHeijunkaKeisanPanelHandler {
                 rowList.add(row2);
             }
         } else {
+            row2.setTxtShoriMei(依頼金額計算);
             row2.setTxtJokyo(未);
             row2.setTxtShoriNichiji(RString.EMPTY);
             rowList.add(row2);
@@ -129,40 +130,41 @@ public class TokuchoHeijunkaKeisanPanelHandler {
                 row3.setTxtShoriNichiji(RString.EMPTY);
                 rowList.add(row3);
             } else {
-                row3.setTxtShoriMei(本算定賦課);
                 row3.setTxtJokyo(済);
                 YMDHMS 処理日時 = 特徴平準化.getShoriJohkyoList(調定年度).get(j).getEntity().getKijunTimestamp();
                 row3.setTxtShoriNichiji(get当月処理日時(処理日時));
                 rowList.add(row3);
             }
         } else {
+            row3.setTxtShoriMei(本算定賦課);
             row3.setTxtJokyo(未);
             row3.setTxtShoriNichiji(RString.EMPTY);
             rowList.add(row3);
         }
         dgHeijunka8ShoriKakunin1_Row row4 = new dgHeijunka8ShoriKakunin1_Row();
-        if (処理状況名リスト.contains(本算定賦課)) {
+        if (処理状況名リスト.contains(特徴異動情報作成)) {
             int j = 0;
             for (int i = 0; i < 処理状況名リスト.size(); i++) {
-                if (本算定賦課.equals(処理状況名リスト.get(i))) {
+                if (特徴異動情報作成.equals(処理状況名リスト.get(i))) {
                     j = i;
                     break;
                 }
             }
-            row4.setTxtShoriMei(本算定賦課);
+            row4.setTxtShoriMei(特徴異動情報作成);
             if (特徴平準化.getShoriJohkyoList(調定年度).get(j).getEntity().getKijunTimestamp() == null
                     || 特徴平準化.getShoriJohkyoList(調定年度).get(j).getEntity().getKijunTimestamp().isEmpty()) {
                 row4.setTxtJokyo(未);
                 row4.setTxtShoriNichiji(RString.EMPTY);
                 rowList.add(row4);
             } else {
-                row4.setTxtShoriMei(本算定賦課);
+                row4.setTxtShoriMei(特徴異動情報作成);
                 row4.setTxtJokyo(済);
                 YMDHMS 処理日時 = 特徴平準化.getShoriJohkyoList(調定年度).get(j).getEntity().getKijunTimestamp();
                 row4.setTxtShoriNichiji(get当月処理日時(処理日時));
                 rowList.add(row4);
             }
         } else {
+            row4.setTxtShoriMei(特徴異動情報作成);
             row4.setTxtJokyo(未);
             row4.setTxtShoriNichiji(RString.EMPTY);
             rowList.add(row4);
@@ -188,7 +190,7 @@ public class TokuchoHeijunkaKeisanPanelHandler {
         FlexibleYear 調定年度 = new FlexibleYear(
                 div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtChoteiNendo().getValue());
         boolean is特徴平準化処理状況 = 特徴平準化.getHeijunka8MJyokyo(調定年度);
-        if (is特徴平準化処理状況) {
+        if (!is特徴平準化処理状況) {
             throw new ApplicationException(DbbErrorMessages.処理済み.getMessage().replace("特徴平準化（８月分）"));
         } else {
             get未処理の場合();

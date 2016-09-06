@@ -118,7 +118,7 @@ public class SogojigyohiShikakuShogohyoEditor implements ISogojigyohiShikakuShog
         source.listUpper_16 = do給付率編集(entity.get公費１給付率());
         source.listUpper_17 = do給付率編集(entity.get公費２給付率());
         source.listUpper_18 = do給付率編集(entity.get公費３給付率());
-        source.listUpper_19 = new RString(entity.getサービス日数_回数());
+        source.listUpper_19 = doカンマ編集(new Decimal(entity.getサービス日数_回数()));
         source.listUpper_20 = doカンマ編集(entity.getサービス単位数());
         source.listUpper_21 = doカンマ編集(entity.get利用者負担額());
         source.listLower_1 = entity.get宛名名称();
@@ -129,28 +129,36 @@ public class SogojigyohiShikakuShogohyoEditor implements ISogojigyohiShikakuShog
 
     private void set有効期間(SogojigyohiShikakuShogohyoInSource source) {
 
-        source.listUpper_9 = entity.get認定有効期間_開始年月日().wareki().separator(Separator.PERIOD)
-                .fillType(FillType.BLANK).toDateString();
+        if (null != entity.get認定有効期間_開始年月日()) {
+            source.listUpper_9 = entity.get認定有効期間_開始年月日().wareki().separator(Separator.PERIOD)
+                    .fillType(FillType.BLANK).toDateString();
+        }
         if (null != entity.get認定有効期間_開始年月日() && !entity.get認定有効期間_開始年月日().isEmpty()
                 || null != entity.get認定有効期間_終了年月日() && !entity.get認定有効期間_終了年月日().isEmpty()) {
             source.listUpper_10 = ティルデ;
         }
-        source.listUpper_11 = entity.get認定有効期間_終了年月日().wareki().separator(Separator.PERIOD)
-                .fillType(FillType.BLANK).toDateString();
-        source.listLower_4 = entity.get限度額適用期間_開始年月日().wareki().separator(Separator.PERIOD)
-                .fillType(FillType.BLANK).toDateString();
+        if (null != entity.get認定有効期間_終了年月日()) {
+            source.listUpper_11 = entity.get認定有効期間_終了年月日().wareki().separator(Separator.PERIOD)
+                    .fillType(FillType.BLANK).toDateString();
+        }
+        if (null != entity.get限度額適用期間_開始年月日()) {
+            source.listLower_4 = entity.get限度額適用期間_開始年月日().wareki().separator(Separator.PERIOD)
+                    .fillType(FillType.BLANK).toDateString();
+        }
         if (null != entity.get限度額適用期間_開始年月日() && !entity.get限度額適用期間_開始年月日().isEmpty()
                 || null != entity.get限度額適用期間_終了年月日() && !entity.get限度額適用期間_終了年月日().isEmpty()) {
             source.listLower_5 = ティルデ;
         }
-        source.listLower_6 = entity.get限度額適用期間_終了年月日().wareki().separator(Separator.PERIOD)
-                .fillType(FillType.BLANK).toDateString();
+        if (null != entity.get限度額適用期間_終了年月日()) {
+            source.listLower_6 = entity.get限度額適用期間_終了年月日().wareki().separator(Separator.PERIOD)
+                    .fillType(FillType.BLANK).toDateString();
+        }
     }
 
     private void set合計件数(SogojigyohiShikakuShogohyoInSource source) {
         if (flg) {
             source.gokeiKensuTitle = 合計件数タイトル;
-            source.gokeiKensu = new RString(合計件数).concat(KEN);
+            source.gokeiKensu = doカンマ編集(new Decimal(合計件数)).concat(KEN);
         } else {
             source.gokeiKensuTitle = RString.EMPTY;
             source.gokeiKensu = RString.EMPTY;
@@ -161,14 +169,14 @@ public class SogojigyohiShikakuShogohyoEditor implements ISogojigyohiShikakuShog
         if (null == number) {
             return RString.EMPTY;
         }
-        return DecimalFormatter.toRString(number, 0);
+        return DecimalFormatter.toコンマ区切りRString(number, 0);
     }
 
     private RString do給付率編集(HokenKyufuRitsu number) {
         if (null == number) {
             return RString.EMPTY;
         }
-        return doカンマ編集(number.getColumnValue());
+        return DecimalFormatter.toRString(number.getColumnValue(), 0);
     }
 
 }

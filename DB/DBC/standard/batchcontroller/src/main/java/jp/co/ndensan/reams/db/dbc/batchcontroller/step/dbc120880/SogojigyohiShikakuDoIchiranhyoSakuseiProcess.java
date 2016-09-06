@@ -157,11 +157,13 @@ public class SogojigyohiShikakuDoIchiranhyoSakuseiProcess
     @Override
     protected void afterExecute() {
 
-        csvWriter.close();
         if (null != lastEntity) {
             SogojigyohiShikakuShogohyoReport report = new SogojigyohiShikakuShogohyoReport(lastEntity,
                     市町村セキュリティ.get導入形態コード(), システム日付, true, 合計件数);
             report.writeBy(reportSourceWriter);
+        }
+        csvWriter.close();
+        if (null != personalDataList) {
             AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(eucFilePath, log);
         } else {

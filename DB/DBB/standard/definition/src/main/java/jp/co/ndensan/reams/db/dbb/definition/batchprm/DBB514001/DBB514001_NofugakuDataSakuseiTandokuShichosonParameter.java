@@ -28,7 +28,7 @@ public class DBB514001_NofugakuDataSakuseiTandokuShichosonParameter extends Batc
     private static final String KEY_IS非課税年金のみ作成フラグ = "is非課税年金のみ作成フラグ";
     private static final String KEY_出力順ID = "出力順ID";
     @BatchParameter(key = KEY_対象年, name = "対象年")
-    private RYear 調定年度;
+    private RYear 対象年;
     @BatchParameter(key = KEY_抽出条件LIST, name = "抽出条件List")
     private List<NofugakuDataTsushutsuJoken> 抽出条件List;
     @BatchParameter(key = KEY_IS非課税年金のみ作成フラグ, name = "is非課税年金のみ作成フラグ")
