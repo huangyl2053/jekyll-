@@ -184,21 +184,7 @@ public class IchijiSashitome1GoHandler {
         DisplayNone_控除登録用(true);
         DisplayNone_差止登録用(false);
         DisplayNone_照会用(true);
-        div.getTxtSashitomeTorokuKubun().setDisabled(true);
-        div.getTxtSashitomeTorokuYMD().setReadOnly(false);
-        div.getTxtSashitomeTorokuYMD().setDisabled(false);
-        div.getTxtSashitomeTorokuTsuchiHakkoYMD().setReadOnly(true);
-        div.getTxtSashitomeNofuKigenYMD().setReadOnly(false);
-        div.getTxtSashitomeNofuKigenYMD().setDisabled(false);
-        div.getTxtSashitomeKaijoYMD().setDisplayNone(true);
-        div.getBtnTainoJokyo().setDisabled(false);
-        div.getBtnSashitomeOrKojoJokyoShokaiClose().setDisplayNone(true);
-        div.getBtnSashitomeOrKojoTorokuTorikeshi().setDisabled(false);
-        div.getBtnSashitomeOrKojoTorokuKakutei().setDisabled(false);
-        div.getTxtSashitomeTorokuKubun().setValue(ShiharaiHenkoSashitomeKojoJotaiKubun.登録.get名称());
-        div.getTxtSashitomeTorokuYMD().setValue(FlexibleDate.EMPTY);
-        div.getTxtSashitomeTorokuTsuchiHakkoYMD().setValue(FlexibleDate.EMPTY);
-        div.getTxtSashitomeNofuKigenYMD().setValue(FlexibleDate.EMPTY);
+        get差止登録();
         div.getShokanJoho().setTitle(差止登録);
         div.setButton_Name(差止登録);
         div.setPTN(登録PTN);
@@ -221,23 +207,7 @@ public class IchijiSashitome1GoHandler {
         DisplayNone_控除登録用(false);
         DisplayNone_差止登録用(true);
         DisplayNone_照会用(true);
-        div.getTxtKojoTorokuKubun().setReadOnly(true);
-        div.getTxtKojoKetteiYMD().setReadOnly(false);
-        div.getTxtKojoKetteiYMD().setDisabled(false);
-        div.getTxtKojoTorokuTsuchiHakkoYMD().setReadOnly(true);
-        div.getTxtHokenshoTeishutsuKigenYMD().setReadOnly(false);
-        div.getTxtHokenshoTeishutsuKigenYMD().setDisabled(false);
-        div.getDdlTorokuKojoNo().setReadOnly(false);
-        div.getDdlTorokuKojoNo().setDisabled(false);
-        div.getBtnTainoJokyo().setDisabled(false);
-        div.getBtnSashitomeOrKojoJokyoShokaiClose().setDisplayNone(true);
-        div.getBtnSashitomeOrKojoTorokuTorikeshi().setDisabled(false);
-        div.getBtnSashitomeOrKojoTorokuKakutei().setDisabled(false);
-        div.getTxtKojoTorokuKubun().setValue(ShiharaiHenkoSashitomeKojoJotaiKubun.登録.get名称());
-        div.getTxtKojoKetteiYMD().setValue(FlexibleDate.EMPTY);
-        div.getTxtKojoTorokuTsuchiHakkoYMD().setValue(FlexibleDate.EMPTY);
-        div.getTxtHokenshoTeishutsuKigenYMD().setValue(FlexibleDate.EMPTY);
-        div.getDdlTorokuKojoNo().setSelectedKey(RString.EMPTY);
+        get控除登録();
         div.setButton_Name(控除登録);
         div.setPTN(登録PTN);
         div.getShokanJoho().setTitle(new RString("控除登録"));
@@ -526,7 +496,24 @@ public class IchijiSashitome1GoHandler {
      *
      */
     public void onClick_SashitomeToRokuToRiKeShi() {
-        onClick_KaijoItem();
+        if (div.getButton_Name().equals(差止登録)) {
+            div.getTxtSashitomeTorokuKubun().setValue(ShiharaiHenkoSashitomeKojoJotaiKubun.登録.get名称());
+            div.getTxtSashitomeTorokuYMD().setValue(FlexibleDate.EMPTY);
+            div.getTxtSashitomeTorokuTsuchiHakkoYMD().setValue(FlexibleDate.EMPTY);
+            div.getTxtSashitomeNofuKigenYMD().setValue(FlexibleDate.EMPTY);
+        } else if (div.getButton_Name().equals(控除登録)) {
+            div.getTxtKojoTorokuKubun().setValue(ShiharaiHenkoSashitomeKojoJotaiKubun.登録.get名称());
+            div.getTxtKojoKetteiYMD().setValue(FlexibleDate.EMPTY);
+            div.getTxtKojoTorokuTsuchiHakkoYMD().setValue(FlexibleDate.EMPTY);
+            div.getTxtHokenshoTeishutsuKigenYMD().setValue(FlexibleDate.EMPTY);
+            div.getDdlTorokuKojoNo().setSelectedKey(RString.EMPTY);
+        } else if (div.getButton_Name().equals(削除アイコン押下)) {
+            onClick_DeleteItem();
+        } else if (div.getButton_Name().equals(解除アイコン押下)) {
+            onClick_KaijoItem();
+        } else if (div.getButton_Name().equals(登録一覧)) {
+            onClick_SelectedItem();
+        }
     }
 
     /**
@@ -856,6 +843,44 @@ public class IchijiSashitome1GoHandler {
         div.getBtnSashitomeOrKojoJokyoShokaiClose().setDisplayNone(true);
         div.getBtnSashitomeOrKojoTorokuTorikeshi().setDisabled(true);
         div.getBtnSashitomeOrKojoTorokuKakutei().setDisabled(true);
+    }
+
+    private void get差止登録() {
+        div.getTxtSashitomeTorokuKubun().setDisabled(true);
+        div.getTxtSashitomeTorokuYMD().setReadOnly(false);
+        div.getTxtSashitomeTorokuYMD().setDisabled(false);
+        div.getTxtSashitomeTorokuTsuchiHakkoYMD().setReadOnly(true);
+        div.getTxtSashitomeNofuKigenYMD().setReadOnly(false);
+        div.getTxtSashitomeNofuKigenYMD().setDisabled(false);
+        div.getTxtSashitomeKaijoYMD().setDisplayNone(true);
+        div.getBtnTainoJokyo().setDisabled(false);
+        div.getBtnSashitomeOrKojoJokyoShokaiClose().setDisplayNone(true);
+        div.getBtnSashitomeOrKojoTorokuTorikeshi().setDisabled(false);
+        div.getBtnSashitomeOrKojoTorokuKakutei().setDisabled(false);
+        div.getTxtSashitomeTorokuKubun().setValue(ShiharaiHenkoSashitomeKojoJotaiKubun.登録.get名称());
+        div.getTxtSashitomeTorokuYMD().setValue(FlexibleDate.EMPTY);
+        div.getTxtSashitomeTorokuTsuchiHakkoYMD().setValue(FlexibleDate.EMPTY);
+        div.getTxtSashitomeNofuKigenYMD().setValue(FlexibleDate.EMPTY);
+    }
+
+    private void get控除登録() {
+        div.getTxtKojoTorokuKubun().setReadOnly(true);
+        div.getTxtKojoKetteiYMD().setReadOnly(false);
+        div.getTxtKojoKetteiYMD().setDisabled(false);
+        div.getTxtKojoTorokuTsuchiHakkoYMD().setReadOnly(true);
+        div.getTxtHokenshoTeishutsuKigenYMD().setReadOnly(false);
+        div.getTxtHokenshoTeishutsuKigenYMD().setDisabled(false);
+        div.getDdlTorokuKojoNo().setReadOnly(false);
+        div.getDdlTorokuKojoNo().setDisabled(false);
+        div.getBtnTainoJokyo().setDisabled(false);
+        div.getBtnSashitomeOrKojoJokyoShokaiClose().setDisplayNone(true);
+        div.getBtnSashitomeOrKojoTorokuTorikeshi().setDisabled(false);
+        div.getBtnSashitomeOrKojoTorokuKakutei().setDisabled(false);
+        div.getTxtKojoTorokuKubun().setValue(ShiharaiHenkoSashitomeKojoJotaiKubun.登録.get名称());
+        div.getTxtKojoKetteiYMD().setValue(FlexibleDate.EMPTY);
+        div.getTxtKojoTorokuTsuchiHakkoYMD().setValue(FlexibleDate.EMPTY);
+        div.getTxtHokenshoTeishutsuKigenYMD().setValue(FlexibleDate.EMPTY);
+        div.getDdlTorokuKojoNo().setSelectedKey(RString.EMPTY);
     }
 
     private void UPD001() {
