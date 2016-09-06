@@ -100,7 +100,8 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
         if (item.get識別コード() != null) {
             source.listUpper_2 = item.get識別コード().value();
         }
-        final UaFt200FindShikibetsuTaishoEntity 宛名の情報 = item.get宛名の情報();
+
+        UaFt200FindShikibetsuTaishoEntity 宛名の情報 = item.get宛名の情報();
 
         if (宛名の情報 != null) {
             GyoseikuCode 行政区コード = 宛名の情報.getGyoseikuCode();
@@ -121,16 +122,16 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
             }
         }
 
-        final RString 特別徴収業務者コード = item.get特別徴収業務者コード();
+        RString 特別徴収業務者コード = item.get特別徴収業務者コード();
         if (特別徴収業務者コード != null) {
             source.listUpper_5 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
                     UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
                     new Code(特別徴収業務者コード), FlexibleDate.getNowDate());
         }
 
-        source.listUpper_6 = RString.EMPTY;
-        source.listUpper_7 = RString.EMPTY;
-        source.listUpper_8 = RString.EMPTY;
+        source.listUpper_6 = new RString(item.get変更前特徴額_１期().toString());
+        source.listUpper_7 = new RString(item.get変更前特徴額_２期().toString());
+        source.listUpper_8 = new RString(item.get変更前特徴額_３期().toString());
 
         if (item.get普徴期期別金額01() != null) {
             source.listUpper_9 = doカンマ編集(item.get普徴期期別金額01());
@@ -208,7 +209,7 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
         if (item.get識別コード() != null) {
             source.listUpper_2 = item.get識別コード().value();
         }
-        final UaFt200FindShikibetsuTaishoEntity 宛名の情報 = item.get宛名の情報();
+        UaFt200FindShikibetsuTaishoEntity 宛名の情報 = item.get宛名の情報();
 
         if (宛名の情報 != null) {
             GyoseikuCode 行政区コード = 宛名の情報.getGyoseikuCode();
@@ -229,7 +230,7 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
             }
         }
 
-        final RString 特別徴収業務者コード = item.get特別徴収業務者コード();
+        RString 特別徴収業務者コード = item.get特別徴収業務者コード();
         if (特別徴収業務者コード != null) {
             source.listUpper_5 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
                     UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),

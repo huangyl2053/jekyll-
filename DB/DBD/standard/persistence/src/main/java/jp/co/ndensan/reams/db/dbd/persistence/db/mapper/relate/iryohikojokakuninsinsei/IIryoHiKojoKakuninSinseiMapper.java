@@ -5,10 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.iryohikojokakuninsinsei;
 
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 /**
- *
- * @author x_zhaowen
+ * 
+ * @reamsid_L DBD-5770-030 x_zhaowen
  */
 public interface IIryoHiKojoKakuninSinseiMapper {
-    Integer 受給者台帳抽出();
+    /**
+     * 受給者判定
+     * @param 被保険者番号 RString
+     * @return Integer
+     */
+    Integer 受給者台帳抽出(RString 被保険者番号);
 }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekiichiran;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -37,7 +38,7 @@ public class JukyushaKyufuJissekiIchiranData {
     private RString 被保険者番号;
     private RString 被保険者氏名;
     private RString 要介護度;
-    private RDateTime サービス提供年月;
+    private FlexibleYearMonth サービス提供年月;
     private RString 公費負担者1;
     private RString 公費受給者1;
     private RString サービス単位数_保険;
@@ -63,7 +64,7 @@ public class JukyushaKyufuJissekiIchiranData {
     private RString 緊急時施設療養請求合計額_公費2;
     private RString 特定診療請求合計額_公費2;
     private RString 特定入所者介護費等請求額_公費2;
-    private RDateTime 審査年月;
+    private FlexibleYearMonth 審査年月;
     private RString 世帯コード;
     private RString 事業者番号;
     private RString 事業者名称;

@@ -63,6 +63,7 @@ public class SogojigyohiShikakuDoIchiranhyoSakuseiProcess
     private static final Code EXPANDED_CODE = new Code("0003");
     private static final RString EXPANDED_NAME = new RString("被保険者番号");
     private static final RString 固定改頁項目 = new RString("保険者番号");
+    private static final int INDEX_1 = 1;
 
     private ShichosonSecurityJoho 市町村セキュリティ;
     private FileSpoolManager manager;
@@ -74,6 +75,7 @@ public class SogojigyohiShikakuDoIchiranhyoSakuseiProcess
     private int 合計件数;
     private SogojigyohiShikakuShogohyoInEntity lastEntity;
     private RDateTime システム日付;
+    private int 連番;
 
     @BatchWriter
     private CsvWriter<SogojigyohiShikakuShogohyoInCsvEntity> csvWriter;
@@ -84,7 +86,8 @@ public class SogojigyohiShikakuDoIchiranhyoSakuseiProcess
     @Override
     protected void initialize() {
 
-        合計件数 = 1;
+        合計件数 = INDEX_1;
+        連番 = INDEX_1;
         システム日付 = RDateTime.now();
         pageBreakKeys = new ArrayList<>();
         識別コードset = new HashSet<>();
@@ -133,6 +136,7 @@ public class SogojigyohiShikakuDoIchiranhyoSakuseiProcess
 
         SogojigyohiShikakuShogohyoInEntity beforeEntity = getBefore();
         if (null != beforeEntity) {
+            beforeEntity.set連番(連番 - INDEX_1);
             if (!beforeEntity.get資格照合_保険者番号().equals(entity.get資格照合_保険者番号())) {
                 SogojigyohiShikakuShogohyoReport report = new SogojigyohiShikakuShogohyoReport(beforeEntity,
                         市町村セキュリティ.get導入形態コード(), システム日付, true, 合計件数);
@@ -145,8 +149,10 @@ public class SogojigyohiShikakuDoIchiranhyoSakuseiProcess
                 合計件数 = 合計件数 + 1;
             }
         }
+        entity.set連番(連番);
         lastEntity = entity;
         csvWriter.writeLine(service.getCsvEntity(entity, システム日付, 市町村セキュリティ));
+        連番 = 連番 + INDEX_1;
         if (null != entity.get識別コード() && !entity.get識別コード().isEmpty()
                 && !識別コードset.contains(entity.get識別コード())) {
             識別コードset.add(entity.get識別コード());

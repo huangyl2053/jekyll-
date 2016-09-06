@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kaigokyufuhikagomositatetouroku.
 import jp.co.ndensan.reams.db.dbc.business.core.kaigokyufuhikagomositatetouroku.KaigoKyufuhiKagoMositateTourokuResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.kagomoshitate.KagoMoshitate_MoshitateshaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kagomoshitate.KagoMoshitate_MoshitateshoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_KyufuJissekiSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufubunruikubun.KyufubunruiKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1500011.KaigoKyufuhiKagoMositateTourokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1500011.dgHihokenshaSearchGaitosha_Row;
@@ -107,8 +108,7 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
                     result.get氏名(),
                     set様式(result),
                     deteFormat(result.getサービス提供年月()),
-                    // TODO EUNMなし
-                    result.get給付実績作成区分コード(),
+                    KaigoGassan_KyufuJissekiSakuseiKubun.toValue(result.get給付実績作成区分コード()).get名称(),
                     給付区分,
                     deteFormat(result.get審査年月()));
             rowList.add(row);

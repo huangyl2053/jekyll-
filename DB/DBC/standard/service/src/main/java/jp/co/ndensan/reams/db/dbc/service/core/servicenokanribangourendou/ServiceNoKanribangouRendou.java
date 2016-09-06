@@ -63,7 +63,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.lang.Width;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -87,13 +86,11 @@ public class ServiceNoKanribangouRendou {
     private static final RString 括弧全角_R = new RString("）");
     private static final RString 定値_決定通知書 = new RString("決定通知書");
     private static final RString 定値_決定通知書調整用 = new RString("決定通知書　調整用");
-    private static final RString 定値_未設定 = new RString("未設定");
     private static final RString 定値_0 = new RString("0");
     private static final RString 定値_1 = new RString("1");
     private static final RString 定値_2 = new RString("2");
     private static final RString 定値_3 = new RString("3");
     private static final RString 定値_4 = new RString("4");
-    private static final RString 定値_円 = new RString("円");
     private static final RString 全角のコンマ = new RString("，");
     private static final RString 定値_する = new RString("する");
     private static final RString 定値_しない = new RString("しない");
@@ -212,25 +209,25 @@ public class ServiceNoKanribangouRendou {
 
         決定通知書Entity.set文書番号(文書番号);
         決定通知書Entity.set作成年月日(発行日 == null || 発行日.isEmpty() ? RString.EMPTY : 発行日.wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
         決定通知書Entity.set被保険者氏名(氏名 == null ? RString.EMPTY
                 : (氏名.length() <= NUM_30 ? 氏名 : 氏名.substring(1, NUM_30)));
         決定通知書Entity.set対象年月(サービス提供年月 == null || サービス提供年月.isEmpty() ? RString.EMPTY
                 : サービス提供年月.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
+                .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
         set被保険者番号(決定通知書Entity, 被保険者番号);
         if (事業高額介護サービス費支給情報 != null) {
             if (定値_0.equals(様式) && 事業高額介護サービス費支給情報.get受付年月日() != null
                     && !事業高額介護サービス費支給情報.get受付年月日().isEmpty()) {
                 決定通知書Entity.set受付年月日(事業高額介護サービス費支給情報.get受付年月日().wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
+                        .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
             } else if (定値_1.equals(様式)) {
                 決定通知書Entity.set受付年月日(RString.EMPTY);
             }
             決定通知書Entity.set決定年月日(事業高額介護サービス費支給情報.get決定年月日().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
             if (事業高額介護サービス費支給情報.get本人支払額() != null) {
-                決定通知書Entity.set本人支払額(formatDecimal(事業高額介護サービス費支給情報.get本人支払額()));
+                決定通知書Entity.set本人支払額(toDecimal(事業高額介護サービス費支給情報.get本人支払額()));
             }
             set給付の種類(決定通知書Entity, 事業高額介護サービス費支給情報.get審査方法区分(), param);
             if (ShikyuKubun.支給.getコード().equals(事業高額介護サービス費支給情報.get支給区分コード())) {
@@ -245,7 +242,7 @@ public class ServiceNoKanribangouRendou {
             } else {
                 決定通知書Entity.set支給金額ﾀｲﾄﾙ(定値_決定額);
             }
-            決定通知書Entity.set支給金額(formatDecimal(事業高額介護サービス費支給情報.get支給金額()));
+            決定通知書Entity.set支給金額(toDecimal(事業高額介護サービス費支給情報.get支給金額()));
             決定通知書Entity.set通知書番号(事業高額介護サービス費支給情報.get通知書番号());
 
             set理由(決定通知書Entity, 事業高額介護サービス費支給情報.get不支給理由());
@@ -265,11 +262,6 @@ public class ServiceNoKanribangouRendou {
             決定通知書Entity.set持ち物2_取り消し用(定値_アスタリスク１２桁);
             決定通知書Entity.set支払場所_取り消し用(定値_アスタリスク１２桁);
             決定通知書Entity.set支払期間_取り消し用(定値_アスタリスク１２桁);
-        } else {
-            決定通知書Entity.set持ち物1_取り消し用(定値_未設定);
-            決定通知書Entity.set持ち物2_取り消し用(定値_未設定);
-            決定通知書Entity.set支払場所_取り消し用(定値_未設定);
-            決定通知書Entity.set支払期間_取り消し用(定値_未設定);
         }
         JigyouKetteiTutisyoResult result = new JigyouKetteiTutisyoResult();
         result.set決定通知書Entity(決定通知書Entity);
@@ -344,32 +336,18 @@ public class ServiceNoKanribangouRendou {
     private void setﾀｲﾄﾙ(JigyouKetteiTutisyoEntity 決定通知書Entity, ServiceNoKanribangouRendouEntity 事業高額介護サービス費支給情報) {
         RString 取り消し線 = DbBusinessConfig.get(ConfigNameDBC.事業高額決定通知書_取り消し線,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        RString ﾀｲﾄﾙ = RString.EMPTY;
         if (取り消し線あり.equals(取り消し線) && 事業高額介護サービス費支給情報 != null) {
             if (Decimal.ZERO.compareTo(nullToZero(事業高額介護サービス費支給情報.get支給金額())) <= 0) {
+                決定通知書Entity.setﾀｲﾄﾙ_2_1_取消し線用(ﾀｲﾄﾙ_2_1);
                 setﾀｲﾄﾙ_取消し線用(決定通知書Entity, 事業高額介護サービス費支給情報);
             } else if (Decimal.ZERO.compareTo(nullToZero(事業高額介護サービス費支給情報.get支給金額())) > 0) {
+                決定通知書Entity.setﾀｲﾄﾙ_3_1_取消し線用_調整用(ﾀｲﾄﾙ_3_1);
                 setﾀｲﾄﾙ_取消し線用_調整用(決定通知書Entity, 事業高額介護サービス費支給情報);
             }
-        } else {
-            if (取り消し線ない.equals(取り消し線)) {
-                ﾀｲﾄﾙ = DbBusinessConfig.get(ConfigNameDBC.事業高額決定通知書_DF6101, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-            }
-            決定通知書Entity.setﾀｲﾄﾙ_2_2_1_取消し線用(定値_未設定);
-            決定通知書Entity.setﾀｲﾄﾙ_2_2_2_取消し線用(定値_未設定);
-            決定通知書Entity.setﾀｲﾄﾙ_2_3_1_取消し線用(定値_未設定);
-            決定通知書Entity.setﾀｲﾄﾙ_2_3_2_取消し線用(定値_未設定);
-            決定通知書Entity.setﾀｲﾄﾙ_2_4_取消し線用(定値_未設定);
-            決定通知書Entity.setﾀｲﾄﾙ_3_2_1_取消し線用_調整用(定値_未設定);
-            決定通知書Entity.setﾀｲﾄﾙ_3_2_2_取消し線用_調整用(定値_未設定);
-            決定通知書Entity.setﾀｲﾄﾙ_3_3_1_取消し線用_調整用(定値_未設定);
-            決定通知書Entity.setﾀｲﾄﾙ_3_3_2_取消し線用_調整用(定値_未設定);
-            決定通知書Entity.setﾀｲﾄﾙ_3_4_取消し線用_調整用(定値_未設定);
+        } else if (取り消し線ない.equals(取り消し線)) {
+            RString ﾀｲﾄﾙ = DbBusinessConfig.get(ConfigNameDBC.事業高額決定通知書_DF6101, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+            決定通知書Entity.setﾀｲﾄﾙ(ﾀｲﾄﾙ);
         }
-        決定通知書Entity.setﾀｲﾄﾙ(ﾀｲﾄﾙ);
-        決定通知書Entity.setﾀｲﾄﾙ_2_1_取消し線用(ﾀｲﾄﾙ_2_1);
-        決定通知書Entity.setﾀｲﾄﾙ_3_1_取消し線用_調整用(ﾀｲﾄﾙ_3_1);
-
     }
 
     private void set被保険者番号(JigyouKetteiTutisyoEntity 決定通知書Entity, HihokenshaNo 被保険者番号) {
@@ -590,7 +568,7 @@ public class ServiceNoKanribangouRendou {
                     || ShiharaiHohoKubun.窓口払.getコード().equals(事業高額介護サービス費支給情報.get支払方法区分コード())) {
                 決定通知書Entity.set支払予定日(支払予定日 == null || 支払予定日.isEmpty() ? RString.EMPTY
                         : 支払予定日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                        .fillType(FillType.ZERO).width(Width.FULL).toDateString());
+                        .fillType(FillType.ZERO).toDateString());
             }
         }
         決定通知書Entity.set持物１(RString.EMPTY);
@@ -697,10 +675,6 @@ public class ServiceNoKanribangouRendou {
         return 括弧全角_L.concat(rst).concat(括弧全角_R);
     }
 
-    private RString formatDecimal(Decimal decimal) {
-        return toDecimal(decimal).concat(定値_円);
-    }
-
     private RString toDecimal(Decimal decimal) {
         return DecimalFormatter.toコンマ区切りRString(decimal, 0);
     }
@@ -723,12 +697,6 @@ public class ServiceNoKanribangouRendou {
             決定通知書Entity.setﾀｲﾄﾙ_2_3_1_取消し線用(addカッコ(ShikyuKubun.不支給.get名称()));
             決定通知書Entity.setﾀｲﾄﾙ_2_3_2_取消し線用(RString.EMPTY);
             決定通知書Entity.setﾀｲﾄﾙ_2_4_取消し線用(定値_決定通知書);
-        } else {
-            決定通知書Entity.setﾀｲﾄﾙ_2_2_1_取消し線用(定値_未設定);
-            決定通知書Entity.setﾀｲﾄﾙ_2_2_2_取消し線用(定値_未設定);
-            決定通知書Entity.setﾀｲﾄﾙ_2_3_1_取消し線用(定値_未設定);
-            決定通知書Entity.setﾀｲﾄﾙ_2_3_2_取消し線用(定値_未設定);
-            決定通知書Entity.setﾀｲﾄﾙ_2_4_取消し線用(定値_未設定);
         }
     }
 
@@ -740,12 +708,6 @@ public class ServiceNoKanribangouRendou {
             決定通知書Entity.setﾀｲﾄﾙ_3_3_1_取消し線用_調整用(RString.EMPTY);
             決定通知書Entity.setﾀｲﾄﾙ_3_3_2_取消し線用_調整用(addカッコ(ShikyuKubun.不支給.get名称()));
             決定通知書Entity.setﾀｲﾄﾙ_3_4_取消し線用_調整用(定値_決定通知書調整用);
-        } else {
-            決定通知書Entity.setﾀｲﾄﾙ_3_2_1_取消し線用_調整用(定値_未設定);
-            決定通知書Entity.setﾀｲﾄﾙ_3_2_2_取消し線用_調整用(定値_未設定);
-            決定通知書Entity.setﾀｲﾄﾙ_3_3_1_取消し線用_調整用(定値_未設定);
-            決定通知書Entity.setﾀｲﾄﾙ_3_3_2_取消し線用_調整用(定値_未設定);
-            決定通知書Entity.setﾀｲﾄﾙ_3_4_取消し線用_調整用(定値_未設定);
         }
     }
 
