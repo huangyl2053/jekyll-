@@ -74,15 +74,25 @@ public enum SystemKanriNinteiKekkaTotalSpec implements IPredicate<SystemKanriNin
                     .getTxtFukaJoho9().getValue();
 
                     return !付加情報1_データ.equals(CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.結果通知理由.getコード(),
-                                    new Code(new RString("01")), FlexibleDate.getNowDate())) || !付加情報2_データ.equals(CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.結果通知理由.getコード(),
-                                    new Code(new RString("02")), FlexibleDate.getNowDate())) || !付加情報3_データ.equals(CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.結果通知理由.getコード(),
-                                    new Code(new RString("12")), FlexibleDate.getNowDate())) || !付加情報4_データ.equals(CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.結果通知理由.getコード(),
-                                    new Code(new RString("13")), FlexibleDate.getNowDate())) || !付加情報5_データ.equals(CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.結果通知理由.getコード(),
-                                    new Code(new RString("21")), FlexibleDate.getNowDate())) || !付加情報6_データ.equals(CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.結果通知理由.getコード(),
-                                    new Code(new RString("22")), FlexibleDate.getNowDate())) || !付加情報7_データ.equals(CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.結果通知理由.getコード(),
-                                    new Code(new RString("23")), FlexibleDate.getNowDate())) || !付加情報8_データ.equals(CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.結果通知理由.getコード(),
-                                    new Code(new RString("24")), FlexibleDate.getNowDate())) || !付加情報9_データ.equals(CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.結果通知理由.getコード(),
-                                    new Code(new RString("25")), FlexibleDate.getNowDate()));
+                                    コード01, FlexibleDate.getNowDate())) || !付加情報2_データ.equals(CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.結果通知理由.getコード(),
+                                    コード11, FlexibleDate.getNowDate())) || !付加情報3_データ.equals(CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.結果通知理由.getコード(),
+                                    コード12, FlexibleDate.getNowDate())) || !付加情報4_データ.equals(CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.結果通知理由.getコード(),
+                                    コード13, FlexibleDate.getNowDate())) || !付加情報5_データ.equals(CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.結果通知理由.getコード(),
+                                    コード21, FlexibleDate.getNowDate())) || !付加情報6_データ.equals(CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.結果通知理由.getコード(),
+                                    コード22, FlexibleDate.getNowDate())) || !付加情報7_データ.equals(CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.結果通知理由.getコード(),
+                                    コード23, FlexibleDate.getNowDate())) || !付加情報8_データ.equals(CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.結果通知理由.getコード(),
+                                    コード24, FlexibleDate.getNowDate())) || !付加情報9_データ.equals(CodeMaster.getCodeMeisho(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.結果通知理由.getコード(),
+                                    コード25, FlexibleDate.getNowDate()));
                 }
-            },
+            };
+
+    private static final Code コード01 = new Code(new RString("01"));
+    private static final Code コード11 = new Code(new RString("11"));
+    private static final Code コード12 = new Code(new RString("12"));
+    private static final Code コード13 = new Code(new RString("13"));
+    private static final Code コード21 = new Code(new RString("21"));
+    private static final Code コード22 = new Code(new RString("22"));
+    private static final Code コード23 = new Code(new RString("23"));
+    private static final Code コード24 = new Code(new RString("24"));
+    private static final Code コード25 = new Code(new RString("25"));
 }
