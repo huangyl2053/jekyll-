@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
@@ -44,12 +43,10 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -204,11 +201,6 @@ public class KogakuGassanShikyuShinseiToroku {
      */
     @Transaction
     public boolean getKogakuGassanShikyuShinseishoTorokuKoshin(KogakuGassanShinseishoHoji 高額合算申請書保持) {
-        if (RString.isNullOrEmpty(高額合算申請書保持.get整理番号())) {
-            RString 整理番号New = Saiban.get(SubGyomuCode.DBC介護給付,
-                    SaibanHanyokeyName.支給申請書整理番号.getコード()).nextString();
-            高額合算申請書保持.set整理番号(整理番号New);
-        }
         for (KogakuGassanShinseishoResult item : 高額合算申請書保持.get高額合算申請書()) {
             if (追加.equals(item.get状態()) || 修正.equals(item.get状態())
                     || 削除.equals(item.get状態())) {

@@ -35,18 +35,10 @@
         AND A."shinseiYMD" = #{申請日}
         </if>
         <if test="介護支給申請書整理番号 != null and !介護支給申請書整理番号.isEmpty()">
-        AND A."shikyuShinseishoSeiriNo" IN 
-            <foreach item="介護支給申請書整理番号" index="index" collection="介護支給申請書整理番号"
-                open="(" separator="," close=")">
-                #{介護支給申請書整理番号}
-            </foreach>
+        AND A."shikyuShinseishoSeiriNo" = #{介護支給申請書整理番号}
         </if>
         <if test="医療支給申請書整理番号 != null and 医療支給申請書整理番号">
-        AND A."kokuhoShikyuShinseishoSeiriNo" IN 
-            <foreach item="医療支給申請書整理番号" index="index" collection="医療支給申請書整理番号"
-                open="(" separator="," close=")">
-                #{医療支給申請書整理番号}
-            </foreach>
+        AND A."kokuhoShikyuShinseishoSeiriNo" = #{医療支給申請書整理番号}
         </if>
         <if test="申請基本情報検索有無 != null and 申請基本情報検索有無 == true
             and 申請代表者氏名 != null and !申請代表者氏名.isEmpty()">
