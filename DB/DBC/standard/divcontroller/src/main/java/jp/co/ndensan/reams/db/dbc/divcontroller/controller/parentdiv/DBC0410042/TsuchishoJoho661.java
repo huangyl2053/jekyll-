@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410042;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorendatatorikomi.KokuhorenDataTorikomiBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120860.DBC120860_SogojigyohiKagoKetteiKohifutanshaInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410042.DBC0410042TransitionEventName;
@@ -52,11 +52,11 @@ public class TsuchishoJoho661 {
      * @param div TsuchishoJoho661Div
      * @return ResponseData
      */
-    public ResponseData<KokuhorenDataTorikomiBatchParameter> onClick_btnExcute(TsuchishoJoho661Div div) {
+    public ResponseData<DBC120860_SogojigyohiKagoKetteiKohifutanshaInParameter> onClick_btnExcute(TsuchishoJoho661Div div) {
         if (setBatchParameter(div) != null) {
             return ResponseData.of(setBatchParameter(div)).respond();
         }
-        return ResponseData.of(new KokuhorenDataTorikomiBatchParameter()).respond();
+        return ResponseData.of(new DBC120860_SogojigyohiKagoKetteiKohifutanshaInParameter()).respond();
     }
 
     /**
@@ -65,7 +65,7 @@ public class TsuchishoJoho661 {
      * @param div TsuchishoJoho661Div
      * @return DBC120860_SogojigyohiSaishinsaKetteiHokenshaInParameter
      */
-    private KokuhorenDataTorikomiBatchParameter setBatchParameter(TsuchishoJoho661Div div) {
+    private DBC120860_SogojigyohiKagoKetteiKohifutanshaInParameter setBatchParameter(TsuchishoJoho661Div div) {
         if (div.getCcdKokurenJohoTorikomi().get出力順ID() != null) {
             long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
             IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
@@ -77,7 +77,7 @@ public class TsuchishoJoho661 {
                 IChohyoShutsuryokujunManager manager = new _ChohyoShutsuryokujunManager();
                 manager.save前回出力順(iOutputOrder);
             }
-            KokuhorenDataTorikomiBatchParameter parameter = new KokuhorenDataTorikomiBatchParameter();
+            DBC120860_SogojigyohiKagoKetteiKohifutanshaInParameter parameter = new DBC120860_SogojigyohiKagoKetteiKohifutanshaInParameter();
             RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
             SaiShoriKubun 再処理区分 = null;
             if (SaiShoriKubun.再処理.get名称().equals(div.getCcdKokurenJohoTorikomi().get再処理区分())) {
