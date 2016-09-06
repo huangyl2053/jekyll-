@@ -125,28 +125,4 @@ public class TsuchiShoriHandler {
             }
         }
     }
-
-    /**
-     * CsvEntityを作成する。
-     *
-     * @param row dgtsuchishohakko_Row
-     * @return TsuchiShoHakkouCsvEntity
-     */
-    public TsuchiShoHakkouCsvEntity converterDataSourceFromToCsvEntity(dgtsuchishohakko_Row row) {
-        TsuchiShoHakkouCsvEntity csvEntity = new TsuchiShoHakkouCsvEntity();
-        csvEntity.set保険者(row.getHokensha());
-        csvEntity.set被保険者番号(row.getHihoNumber());
-        csvEntity.set氏名(row.getHihoShimei());
-        csvEntity.set認定申請日(row.getNinteiShinseiDay().getValue().wareki().toDateString());
-        csvEntity.set申請区分申請時(row.getShinseiKubunShinseiji());
-        csvEntity.set申請区分法令(row.getShinseiKubunHorei());
-        csvEntity.set通知完了日(row.getTsuchiKanryobi().getValue().wareki().toDateString());
-        csvEntity.set認定結果通知書発行日(row.getNinteitsuchishobi().getValue().wareki().toDateString());
-        csvEntity.set区分変更通知書発行日(row.getKubunhenkotsuchishobi().getValue().wareki().toDateString());
-        csvEntity.setサービス変更通知書発行日(row.getServicehenkotsuchishobi().getValue().wareki().toDateString());
-        csvEntity.set認定却下通知書発行日(row.getNinteikyakatsuchishobi().getValue().wareki().toDateString());
-        csvEntity.set認定取消通知書発行日(row.getNinteitorikeshitsuchishobi().getValue().wareki().toDateString());
-        return csvEntity;
-    }
-
 }

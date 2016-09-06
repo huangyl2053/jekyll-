@@ -63,11 +63,13 @@ public class JigyoBunKogakuGassanShikyuKetteiProcess extends BatchProcessBase<Ji
     private RString 市町村名;
     private Map<RString, KoseiShichosonMaster> 市町村名MasterMap;
     private JigyoBunKogakuGassanShikyuKettei business;
+    private boolean flag;
     @BatchWriter
     private CsvWriter<IJigyoBunKogakuGassanShikyuKetteiEUCEntity> eucCsvWriter;
 
     @Override
     protected void initialize() {
+        flag = false;
         business = new JigyoBunKogakuGassanShikyuKettei(processParameter);
         get市町村名();
     }
@@ -93,6 +95,7 @@ public class JigyoBunKogakuGassanShikyuKetteiProcess extends BatchProcessBase<Ji
 
     @Override
     protected void process(JigyoBunKogakuGassanShikyuKetteiRelateEntity entity) {
+        flag = true;
         TokuteiKozaRelateEntity 口座Entity = entity.get口座Entity();
         IKoza iKoza = null;
         if (口座Entity != null && 口座Entity.getUaT0310KozaEntity().getKozaId() != 0L) {
@@ -108,7 +111,15 @@ public class JigyoBunKogakuGassanShikyuKetteiProcess extends BatchProcessBase<Ji
 
     @Override
     protected void afterExecute() {
-        manager.spool(eucFilePath);
+        if (!flag) {
+            if (processParameter.is連番付加()) {
+                eucCsvWriter.writeLine(business.set連番ありEUCEntity());
+            } else {
+                eucCsvWriter.writeLine(business.set連番なしEUCEntity());
+            }
+        }
+        eucCsvWriter.close();
+        manager.spool(eucFilePath, business.getアクセスログ());
         outputJokenhyoFactory();
     }
 

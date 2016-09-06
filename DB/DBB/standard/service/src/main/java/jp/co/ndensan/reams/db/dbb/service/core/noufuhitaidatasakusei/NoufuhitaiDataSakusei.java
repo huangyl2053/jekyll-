@@ -56,7 +56,7 @@ public class NoufuhitaiDataSakusei {
      *
      */
     public ShoriDateKanri get抽出条件前回処理日付(LasdecCode 市町村コード, RString 処理枝番) {
-        DbT7022ShoriDateKanriEntity entity = dbt7022Dac.select(SubGyomuCode.DBB介護賦課, 市町村コード, 処理名, 処理枝番);
+        DbT7022ShoriDateKanriEntity entity = dbt7022Dac.select抽出条件前回処理日付(SubGyomuCode.DBB介護賦課, 市町村コード, 処理名, 処理枝番);
         if (entity != null) {
             return new ShoriDateKanri(entity);
         }

@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 public class HanyoListParamRenbanariEUCEntity {
 
     @CsvField(order = 1, name = "連番")
-    private int 連番;
+    private RString 連番;
     @CsvField(order = 2, name = "識別コード")
     private ShikibetsuCode 識別コード;
     @CsvField(order = 3, name = "住民種別")
@@ -180,9 +180,9 @@ public class HanyoListParamRenbanariEUCEntity {
     @CsvField(order = 76, name = "宛先印字対象者")
     private RString 宛先印字対象者;
     @CsvField(order = 77, name = "年少扶養控除１６歳未満")
-    private int 年少扶養控除16歳未満;
+    private RString 年少扶養控除16歳未満;
     @CsvField(order = 78, name = "年少扶養控除１６～１８歳")
-    private int 年少扶養控除16_18歳;
+    private RString 年少扶養控除16_18歳;
     @CsvField(order = 79, name = "世帯員の総収入額")
     private Decimal 世帯員の総収入額;
     @CsvField(order = 80, name = "世帯主区分")

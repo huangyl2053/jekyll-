@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShichosonJohoShutoku;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShutokuJohoChushutsuRenkeiBatchParameter;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -38,6 +40,7 @@ public class ShotokuJohoChushutsuRenkeitanitu {
     private static final RString 所得情報抽出_連携異動 = new RString("DBBMN51010");
     private static final RString 当初_単一 = new RString("3");
     private static final RString 異動_単一 = new RString("4");
+    private static final RString 枝番 = new RString("0001");
 
     ShotokuJohoChushutsuRenkeitanitu() {
         this.処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
@@ -72,28 +75,28 @@ public class ShotokuJohoChushutsuRenkeitanitu {
     public RString getShoriKubun(RString 市町村識別ID, RString 遷移区分, FlexibleYear 年度) {
         RString 処理区分 = RString.EMPTY;
         YMDHMS 基準日時;
-        DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity;
+        List<DbT7022ShoriDateKanriEntity> 処理日付管理異動情報EntityList
+                = 処理日付管理Dac.selectBySomeKeys(SubGyomuCode.DBB介護賦課, ShoriName.当初所得引出.get名称(), 枝番, 年度, 枝番);
         if (遷移区分_0.equals(遷移区分)) {
-            処理日付管理異動情報Entity = 処理日付管理Dac.select処理日付管理マスタ_当初所得情報抽出(年度);
-            if (処理日付管理異動情報Entity == null) {
+            if (0 == 処理日付管理異動情報EntityList.size()) {
                 処理区分 = 処理日付管理マスタ無し;
             } else {
-                基準日時 = 処理日付管理異動情報Entity.getKijunTimestamp();
+                基準日時 = 処理日付管理異動情報EntityList.get(0).getKijunTimestamp();
                 処理区分 = 基準日時1(基準日時);
             }
             return 処理区分;
         }
         if (遷移区分_1.equals(遷移区分)) {
-            処理日付管理異動情報Entity = 処理日付管理Dac.select処理日付管理マスタ_当初所得情報抽出(年度);
-            if (処理日付管理異動情報Entity == null) {
+            if (0 == 処理日付管理異動情報EntityList.size()) {
                 処理区分 = 不可;
                 return 処理区分;
             } else {
-                基準日時 = 処理日付管理異動情報Entity.getKijunTimestamp();
+                基準日時 = 処理日付管理異動情報EntityList.get(0).getKijunTimestamp();
                 基準日時2(基準日時);
-                以降の判定処理を行わない判別(処理日付管理異動情報Entity, 年度, 処理区分);
+                以降の判定処理を行わない判別(年度, 処理区分);
             }
-            処理日付管理異動情報Entity = 処理日付管理Dac.select処理日付管理マスタ_異動所得情報抽出(年度);
+            DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity
+                    = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課, ShoriName.所得引出.get名称(), 枝番, 年度);
             if (処理日付管理異動情報Entity == null) {
                 処理区分 = 不可;
             } else {
@@ -149,18 +152,19 @@ public class ShotokuJohoChushutsuRenkeitanitu {
         return 処理区分;
     }
 
-    private RString 以降の判定処理を行わない判別(DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity,
-            FlexibleYear 年度, RString 処理区分) {
+    private RString 以降の判定処理を行わない判別(FlexibleYear 年度, RString 処理区分) {
+        RString 戻り値_処理区分 = RString.EMPTY;
         if (!不可.equals(処理区分)) {
-            処理日付管理異動情報Entity = 処理日付管理Dac.select処理日付管理マスタ_異動所得情報抽出(年度);
+            DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity
+                    = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課, ShoriName.所得引出.get名称(), 枝番, 年度);
             if (処理日付管理異動情報Entity == null) {
-                処理区分 = 不可;
+                戻り値_処理区分 = 不可;
             } else {
-                処理区分 = 可;
+                戻り値_処理区分 = 可;
             }
-            return 処理区分;
+            return 戻り値_処理区分;
         } else {
-            return 処理区分;
+            return 戻り値_処理区分;
         }
     }
 }
