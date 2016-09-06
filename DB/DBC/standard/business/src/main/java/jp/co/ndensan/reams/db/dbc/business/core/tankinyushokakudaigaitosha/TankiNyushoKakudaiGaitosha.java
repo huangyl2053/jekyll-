@@ -50,6 +50,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import lombok.Getter;
@@ -66,6 +67,7 @@ public class TankiNyushoKakudaiGaitosha {
 
     private final TankiNyushoKakudaiGaitoshaProcessParameter processParameter;
     private static final RString 文字1 = new RString("1");
+    private List<PersonalData> personalDataList;
 
     /**
      * コンストラクタです。
@@ -74,6 +76,7 @@ public class TankiNyushoKakudaiGaitosha {
      */
     public TankiNyushoKakudaiGaitosha(TankiNyushoKakudaiGaitoshaProcessParameter processParameter) {
         this.processParameter = processParameter;
+        personalDataList = new ArrayList<>();
     }
 
     /**
@@ -92,8 +95,8 @@ public class TankiNyushoKakudaiGaitosha {
         if (宛名Entity != null) {
             IShikibetsuTaisho iShikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(宛名Entity);
             IKojin iKojin = iShikibetsuTaisho.to個人();
-            getアクセスログ(entity.get被保険者番号(), iKojin.get識別コード());
-            eucEntity.set連番(連番);
+            personalDataList.add(toPersonalData(entity.get被保険者番号(), iKojin.get識別コード()));
+            eucEntity.set連番(new RString(連番));
             eucEntity.set識別コード(iKojin.get識別コード());
             eucEntity.set住民種別(iKojin.get住民状態());
             eucEntity.set氏名(iKojin.get名称().getName());
@@ -171,12 +174,93 @@ public class TankiNyushoKakudaiGaitosha {
             }
             eucEntity.set有効開始年月(entity.get有効開始年月());
             eucEntity.set有効終了年月(entity.get有効終了年月());
-            eucEntity.set拡大倍数(entity.get拡大倍数());
+            eucEntity.set拡大倍数(new RString(entity.get拡大倍数()));
             eucEntity.set拡大支給限度額(entity.get切り分け単位数());
             eucEntity.set限度額管理期間数(entity.get限度額管理期間数());
             eucEntity.set登録年月日(set日付編集(entity.get登録年月日()));
             eucEntity.set変更年月日(set日付編集(entity.get変更年月日()));
         }
+        return eucEntity;
+    }
+
+    /**
+     * TankiNyushoKakudaiGaitoshaReibanAriEUCEntityの設定クラスです。
+     *
+     * @return JigyoBunKogakuGassanShikyuKetteibanAriEUCEntity
+     */
+    public TankiNyushoKakudaiGaitoshaReibanAriEUCEntity set連番ありEUCEntity() {
+        TankiNyushoKakudaiGaitoshaReibanAriEUCEntity eucEntity = new TankiNyushoKakudaiGaitoshaReibanAriEUCEntity();
+        eucEntity.set連番(null);
+        eucEntity.set識別コード(null);
+        eucEntity.set住民種別(null);
+        eucEntity.set氏名(null);
+        eucEntity.set氏名カナ(null);
+        eucEntity.set生年月日(null);
+        eucEntity.set年齢(null);
+        eucEntity.set性別(null);
+        eucEntity.set続柄コード(null);
+        eucEntity.set世帯コード(null);
+        eucEntity.set世帯主名(null);
+        eucEntity.set住所コード(null);
+        eucEntity.set郵便番号(null);
+        eucEntity.set住所_番地_方書(null);
+        eucEntity.set住所(null);
+        eucEntity.set番地(null);
+        eucEntity.set方書(null);
+        eucEntity.set行政区コード(null);
+        eucEntity.set行政区名(null);
+        eucEntity.set地区１(null);
+        eucEntity.set地区２(null);
+        eucEntity.set地区３(null);
+        eucEntity.set連絡先１(null);
+        eucEntity.set連絡先２(null);
+        eucEntity.set登録異動日(null);
+        eucEntity.set登録事由(null);
+        eucEntity.set登録届出日(null);
+        eucEntity.set住定異動日(null);
+        eucEntity.set住定事由(null);
+        eucEntity.set住定届出日(null);
+        eucEntity.set消除異動日(null);
+        eucEntity.set消除事由(null);
+        eucEntity.set消除届出日(null);
+        eucEntity.set転出入理由(null);
+        eucEntity.set前住所郵便番号(null);
+        eucEntity.set前住所_番地_方書(null);
+        eucEntity.set前住所(null);
+        eucEntity.set前住所番地(null);
+        eucEntity.set前住所方書(null);
+        eucEntity.set市町村コード(null);
+        eucEntity.set市町村名(null);
+        eucEntity.set保険者コード(null);
+        eucEntity.set保険者名(null);
+        eucEntity.set空白(null);
+        eucEntity.set被保険者番号(null);
+        eucEntity.set資格取得事由(null);
+        eucEntity.set資格取得日(null);
+        eucEntity.set資格取得届出日(null);
+        eucEntity.set喪失事由(null);
+        eucEntity.set資格喪失日(null);
+        eucEntity.set資格喪失届日(null);
+        eucEntity.set資格区分(null);
+        eucEntity.set住所地特例状態(null);
+        eucEntity.set資格_証記載保険者番号(null);
+        eucEntity.set有効開始年月(null);
+        eucEntity.set有効終了年月(null);
+        eucEntity.set拡大倍数(null);
+        eucEntity.set拡大支給限度額(null);
+        eucEntity.set限度額管理期間数(null);
+        eucEntity.set登録年月日(null);
+        eucEntity.set変更年月日(null);
+        eucEntity.set受給申請事由(null);
+        eucEntity.set受給申請日(null);
+        eucEntity.set受給要介護度(null);
+        eucEntity.set受給認定開始日(null);
+        eucEntity.set受給認定終了日(null);
+        eucEntity.set受給認定日(null);
+        eucEntity.set受給旧措置(null);
+        eucEntity.set受給みなし更新認定(null);
+        eucEntity.set受給直近事由(null);
+
         return eucEntity;
     }
 
@@ -195,7 +279,7 @@ public class TankiNyushoKakudaiGaitosha {
         if (宛名Entity != null) {
             IShikibetsuTaisho iShikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(宛名Entity);
             IKojin iKojin = iShikibetsuTaisho.to個人();
-            getアクセスログ(entity.get被保険者番号(), iKojin.get識別コード());
+            personalDataList.add(toPersonalData(entity.get被保険者番号(), iKojin.get識別コード()));
             eucEntity.set識別コード(iKojin.get識別コード());
             eucEntity.set住民種別(iKojin.get住民状態());
             eucEntity.set氏名(iKojin.get名称().getName());
@@ -273,12 +357,91 @@ public class TankiNyushoKakudaiGaitosha {
             }
             eucEntity.set有効開始年月(entity.get有効開始年月());
             eucEntity.set有効終了年月(entity.get有効終了年月());
-            eucEntity.set拡大倍数(entity.get拡大倍数());
+            eucEntity.set拡大倍数(new RString(entity.get拡大倍数()));
             eucEntity.set拡大支給限度額(entity.get切り分け単位数());
             eucEntity.set限度額管理期間数(entity.get限度額管理期間数());
             eucEntity.set登録年月日(set日付編集(entity.get登録年月日()));
             eucEntity.set変更年月日(set日付編集(entity.get変更年月日()));
         }
+        return eucEntity;
+    }
+
+    /**
+     * TankiNyushoKakudaiGaitoshaReibanNashiEUCEntityの設定クラスです。
+     *
+     * @return TankiNyushoKakudaiGaitoshaReibanNashiEUCEntity
+     */
+    public TankiNyushoKakudaiGaitoshaReibanNashiEUCEntity set連番なしEUCEntity() {
+        TankiNyushoKakudaiGaitoshaReibanNashiEUCEntity eucEntity = new TankiNyushoKakudaiGaitoshaReibanNashiEUCEntity();
+        eucEntity.set識別コード(null);
+        eucEntity.set住民種別(null);
+        eucEntity.set氏名(null);
+        eucEntity.set氏名カナ(null);
+        eucEntity.set生年月日(null);
+        eucEntity.set年齢(null);
+        eucEntity.set性別(null);
+        eucEntity.set続柄コード(null);
+        eucEntity.set世帯コード(null);
+        eucEntity.set世帯主名(null);
+        eucEntity.set住所コード(null);
+        eucEntity.set郵便番号(null);
+        eucEntity.set住所_番地_方書(null);
+        eucEntity.set住所(null);
+        eucEntity.set番地(null);
+        eucEntity.set方書(null);
+        eucEntity.set行政区コード(null);
+        eucEntity.set行政区名(null);
+        eucEntity.set地区１(null);
+        eucEntity.set地区２(null);
+        eucEntity.set地区３(null);
+        eucEntity.set連絡先１(null);
+        eucEntity.set連絡先２(null);
+        eucEntity.set登録異動日(null);
+        eucEntity.set登録事由(null);
+        eucEntity.set登録届出日(null);
+        eucEntity.set住定異動日(null);
+        eucEntity.set住定事由(null);
+        eucEntity.set住定届出日(null);
+        eucEntity.set消除異動日(null);
+        eucEntity.set消除事由(null);
+        eucEntity.set消除届出日(null);
+        eucEntity.set転出入理由(null);
+        eucEntity.set前住所郵便番号(null);
+        eucEntity.set前住所_番地_方書(null);
+        eucEntity.set前住所(null);
+        eucEntity.set前住所番地(null);
+        eucEntity.set前住所方書(null);
+        eucEntity.set市町村コード(null);
+        eucEntity.set市町村名(null);
+        eucEntity.set保険者コード(null);
+        eucEntity.set保険者名(null);
+        eucEntity.set空白(null);
+        eucEntity.set被保険者番号(null);
+        eucEntity.set資格取得事由(null);
+        eucEntity.set資格取得日(null);
+        eucEntity.set資格取得届出日(null);
+        eucEntity.set喪失事由(null);
+        eucEntity.set資格喪失日(null);
+        eucEntity.set資格喪失届日(null);
+        eucEntity.set資格区分(null);
+        eucEntity.set住所地特例状態(null);
+        eucEntity.set資格_証記載保険者番号(null);
+        eucEntity.set有効開始年月(null);
+        eucEntity.set有効終了年月(null);
+        eucEntity.set拡大倍数(null);
+        eucEntity.set拡大支給限度額(null);
+        eucEntity.set限度額管理期間数(null);
+        eucEntity.set登録年月日(null);
+        eucEntity.set変更年月日(null);
+        eucEntity.set受給申請事由(null);
+        eucEntity.set受給申請日(null);
+        eucEntity.set受給要介護度(null);
+        eucEntity.set受給認定開始日(null);
+        eucEntity.set受給認定終了日(null);
+        eucEntity.set受給認定日(null);
+        eucEntity.set受給旧措置(null);
+        eucEntity.set受給みなし更新認定(null);
+        eucEntity.set受給直近事由(null);
         return eucEntity;
     }
 
@@ -290,7 +453,7 @@ public class TankiNyushoKakudaiGaitosha {
             jukyuShinseiJiyuList.add(jukyuShinseiJiyu.getコード());
         }
         if (jukyuShinseiJiyuList.contains(受給申請事由コード)) {
-            getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, entity.get資格取得事由コード());
+            受給申請事由 = getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, entity.get資格取得事由コード());
         }
         return 受給申請事由;
     }
@@ -389,11 +552,10 @@ public class TankiNyushoKakudaiGaitosha {
     /**
      * アクセスログを出力するメッソドです。
      *
-     * @param 被保険者番号 被保険者番号
-     * @param 識別コード 識別コード
+     * @return AccessLogUUID
      */
-    public void getアクセスログ(RString 被保険者番号, ShikibetsuCode 識別コード) {
-        AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, toPersonalData(被保険者番号, 識別コード));
+    public AccessLogUUID getアクセスログ() {
+        return AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
     }
 
     private PersonalData toPersonalData(RString 被保険者番号, ShikibetsuCode 識別コード) {
