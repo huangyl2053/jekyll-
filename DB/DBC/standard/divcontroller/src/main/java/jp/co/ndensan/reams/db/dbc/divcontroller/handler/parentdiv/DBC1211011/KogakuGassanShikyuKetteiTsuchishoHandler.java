@@ -98,6 +98,8 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         if (支払予定日印字有無.equals(NUM_1)) {
             div.getTxtShiharaiYoteiYMD().setVisible(true);
         }
+        RDate 基準日 = RDate.getNowDate();
+        div.getTxtHakkoYMD().setValue(基準日);
     }
 
     /**
