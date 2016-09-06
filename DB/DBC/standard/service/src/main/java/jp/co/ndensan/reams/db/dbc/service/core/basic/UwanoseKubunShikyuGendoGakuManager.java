@@ -137,7 +137,7 @@ public class UwanoseKubunShikyuGendoGakuManager {
                 requireNonNull(上乗せ居宅サービス区分,
                         UrSystemErrorMessages.値がnull.getReplacedMessage(定値_上乗せ居宅サービス.toString()));
                 if (!上乗せ居宅サービス区分.hasChanged()) {
-                    return;
+                    continue;
                 }
                 dac.save(上乗せ居宅サービス区分.toEntity());
             }

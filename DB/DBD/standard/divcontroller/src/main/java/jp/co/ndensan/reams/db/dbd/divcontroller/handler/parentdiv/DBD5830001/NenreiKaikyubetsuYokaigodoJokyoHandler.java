@@ -120,7 +120,7 @@ public class NenreiKaikyubetsuYokaigodoJokyoHandler {
             parameter.set基準年月(div.getTxtKijyunYM().getValue());
         }
         for (ChikuKubun chikuKubun : ChikuKubun.values()) {
-            if (div.getDdlChiku().getSelectedValue().equals(chikuKubun.get漢字名称())) {
+            if (chikuKubun.get漢字名称().equals(div.getDdlChiku().getSelectedValue())) {
                 parameter.set地区区分(chikuKubun.get名称());
             }
         }
@@ -130,19 +130,19 @@ public class NenreiKaikyubetsuYokaigodoJokyoHandler {
     }
 
     private void set地区(NenreiKaikyubetsuYokaigodoJokyoParameter parameter) {
-        if (div.getDdlChiku().getSelectedValue().equals(ChikuKubun.住所.get漢字名称())) {
+        if (ChikuKubun.住所.get漢字名称().equals(div.getDdlChiku().getSelectedValue())) {
             setパラメータ(parameter, new Code(div.getCcdChoikiStart().get町域コード().getColumnValue()),
                     new Code(div.getCcdChoikiEnd().get町域コード().getColumnValue()), RString.EMPTY, RString.EMPTY);
-        } else if (div.getDdlChiku().getSelectedValue().equals(ChikuKubun.行政区.get漢字名称())) {
+        } else if (ChikuKubun.行政区.get漢字名称().equals(div.getDdlChiku().getSelectedValue())) {
             setパラメータ(parameter, new Code(div.getCcdGyoseikuStart().get行政区コード().getColumnValue()),
                     new Code(div.getCcsGyoseikuEnd().get行政区コード().getColumnValue()), RString.EMPTY, RString.EMPTY);
-        } else if (div.getDdlChiku().getSelectedValue().equals(ChikuKubun.組合.get漢字名称())) {
+        } else if (ChikuKubun.組合.get漢字名称().equals(div.getDdlChiku().getSelectedValue())) {
             setパラメータ(parameter, new Code(div.getCcdChiku2Start().get地区2コード().getColumnValue()),
                     new Code(div.getCcdChiku2End().get地区2コード().getColumnValue()), RString.EMPTY, RString.EMPTY);
-        } else if (div.getDdlChiku().getSelectedValue().equals(ChikuKubun.旧市町村_個別.get漢字名称())) {
+        } else if (ChikuKubun.旧市町村_個別.get漢字名称().equals(div.getDdlChiku().getSelectedValue())) {
             setパラメータ(parameter, Code.EMPTY, Code.EMPTY, div.getDdlShichoson().getSelectedKey(),
                     div.getDdlShichoson().getSelectedValue());
-        } else if (div.getDdlChiku().getSelectedValue().equals(ChikuKubun.旧市町村_全て.get漢字名称())) {
+        } else if (ChikuKubun.旧市町村_全て.get漢字名称().equals(div.getDdlChiku().getSelectedValue())) {
             setパラメータ(parameter, Code.EMPTY, Code.EMPTY, RString.EMPTY, new RString("全市町村"));
         } else {
             setパラメータ(parameter, Code.EMPTY, Code.EMPTY, RString.EMPTY, RString.EMPTY);

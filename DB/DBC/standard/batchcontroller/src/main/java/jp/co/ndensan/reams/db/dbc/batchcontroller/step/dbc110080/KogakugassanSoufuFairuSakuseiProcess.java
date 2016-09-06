@@ -209,8 +209,8 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         meisaiEntity.set被保険者期間_開始(trimDate(高額合算自己負担額一時Entity.getHihokenshaKaishiYMD()));
         meisaiEntity.set被保険者期間_終了(trimDate(高額合算自己負担額一時Entity.getHihokenshaShuryoYMD()));
         meisaiEntity.set申請年月日(trimDate(高額合算自己負担額一時Entity.getShinseiYMD()));
-        getMeisaiEntity2(meisaiEntity, entity);
-        getMeisaiEntity3(meisaiEntity, entity);
+        meisaiEntity = getMeisaiEntity2(meisaiEntity, entity);
+        meisaiEntity = getMeisaiEntity3(meisaiEntity, entity);
         meisaiEntity.set合計_自己負担額(trimDecimal(高額合算自己負担額一時Entity.getSumi_Gokei_JikoFutanGaku()));
         meisaiEntity.set合計_うち70_74歳の者に係る負担額(trimDecimal(高額合算自己負担額一時Entity.getSumi_Gokei_70_74JikoFutanGaku()));
         meisaiEntity.set合計_70歳未満高額療養費支給額(trimDecimal(高額合算自己負担額一時Entity.getSumi_Gokei_Under70KogakuShikyuGaku()));
@@ -251,7 +251,8 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         return meisaiEntity;
     }
 
-    private void getMeisaiEntity2(KogakugassanSoufuFairuSakuseiMeisaiEntity meisaiEntity, SyuturyokuEntity entity) {
+    private KogakugassanSoufuFairuSakuseiMeisaiEntity getMeisaiEntity2(
+            KogakugassanSoufuFairuSakuseiMeisaiEntity meisaiEntity, SyuturyokuEntity entity) {
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_4月分
                 = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度4月.getコード(), entity);
         if (明細_4月分 != null) {
@@ -395,9 +396,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
             meisaiEntity.set月分12_70_74歳高額療養費支給額(RString.EMPTY);
             meisaiEntity.set月分12_摘要(RString.EMPTY);
         }
+        return meisaiEntity;
     }
 
-    private void getMeisaiEntity3(KogakugassanSoufuFairuSakuseiMeisaiEntity meisaiEntity, SyuturyokuEntity entity) {
+    private KogakugassanSoufuFairuSakuseiMeisaiEntity getMeisaiEntity3(
+            KogakugassanSoufuFairuSakuseiMeisaiEntity meisaiEntity, SyuturyokuEntity entity) {
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_翌年1月分
                 = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年1月.getコード(), entity);
         if (明細_翌年1月分 != null) {
@@ -509,6 +512,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
             meisaiEntity.set月分翌年7_70_74歳高額療養費支給額(RString.EMPTY);
             meisaiEntity.set月分翌年7_摘要(RString.EMPTY);
         }
+        return meisaiEntity;
     }
 
     private DbT3071KogakuGassanJikoFutanGakuMeisaiEntity get高額合算自己負担額明細(RString 対象月, SyuturyokuEntity entity) {

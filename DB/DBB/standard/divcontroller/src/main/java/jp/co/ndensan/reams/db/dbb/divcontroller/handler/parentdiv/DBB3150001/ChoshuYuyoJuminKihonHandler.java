@@ -565,6 +565,7 @@ public class ChoshuYuyoJuminKihonHandler {
         申請情報パネル.getTxtFukaNendo().setReadOnly(true);
         申請情報パネル.getTxtYuyoShurui().setReadOnly(true);
         KetteiJohoDiv 決定情報パネル = div.getChoshuYuyoMain().getKetteiJoho();
+        決定情報パネル.setDisplayNone(false);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存ボタン, false);
         // TODO QA1195 labelはTextBoxDateに変換は必要ですが？ 状態定義sheetの61－88行の状態は入力可の設定。
 //        FuchoTablePanelDiv 普通徴収猶予情報パネル = div.getChoshuYuyoMain().getFuchoTablePanel();

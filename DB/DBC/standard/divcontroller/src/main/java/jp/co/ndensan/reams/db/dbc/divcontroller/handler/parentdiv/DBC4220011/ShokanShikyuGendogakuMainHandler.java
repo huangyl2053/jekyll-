@@ -439,8 +439,7 @@ public class ShokanShikyuGendogakuMainHandler {
                 テーブル区分)) {
             for (ShokanShuruiShikyuGendoGaku 償還Holder : 償還HolderList) {
                 if (サービス種類コード.equals(償還Holder.getサービス種類コード())
-                        && 適用開始年月.equals(償還Holder.get適用開始年月())
-                        && !支給限度単位数.equals(償還Holder.get支給限度単位数())) {
+                        && 適用開始年月.equals(償還Holder.get適用開始年月())) {
                     償還Holder = 償還Holder.createBuilderForEdit()
                             .set支給限度単位数(支給限度単位数)
                             .build();
@@ -464,8 +463,7 @@ public class ShokanShikyuGendogakuMainHandler {
         } else {
             for (UwanoseShokanShuruiShikyuGendoGaku 上乗せ償還Holder : 上乗せ償還HolderList) {
                 if (サービス種類コード.equals(上乗せ償還Holder.getサービス種類コード())
-                        && 適用開始年月.equals(上乗せ償還Holder.get適用開始年月())
-                        && !支給限度単位数.equals(上乗せ償還Holder.get支給限度単位数())) {
+                        && 適用開始年月.equals(上乗せ償還Holder.get適用開始年月())) {
                     上乗せ償還Holder = 上乗せ償還Holder.createBuilderForEdit()
                             .set支給限度単位数(支給限度単位数)
                             .build();

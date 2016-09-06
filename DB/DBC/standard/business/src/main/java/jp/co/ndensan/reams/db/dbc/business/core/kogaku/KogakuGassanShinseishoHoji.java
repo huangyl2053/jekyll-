@@ -7,9 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.kogaku;
 
 import java.io.Serializable;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseisho;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseishoIdentifier;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseishoKanyureki;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseishoKanyurekiIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -45,12 +43,12 @@ public class KogakuGassanShinseishoHoji implements Serializable {
      * 高額合算申請書取得のメソッドです。
      *
      * @param identifier KogakuGassanShinseishoIdentifier
-     * @return KogakuGassanShinseisho
+     * @return KogakuGassanShinseishoResult
      */
-    public KogakuGassanShinseisho get高額合算申請書(KogakuGassanShinseishoIdentifier identifier) {
+    public KogakuGassanShinseishoResult get高額合算申請書(KogakuGassanShinseishoIdentifier identifier) {
         for (KogakuGassanShinseishoResult item : this.高額合算申請書) {
             if (item.get高額合算申請書().identifier().toString().equals(identifier.toString())) {
-                return item.get高額合算申請書();
+                return item;
             }
         }
         return null;
@@ -60,12 +58,12 @@ public class KogakuGassanShinseishoHoji implements Serializable {
      * 加入歴取得のメソッドです。
      *
      * @param identifier KogakuGassanShinseishoKanyurekiIdentifier
-     * @return KogakuGassanShinseishoKanyureki
+     * @return KogakuGassanShinseishoKanyurekiResult
      */
-    public KogakuGassanShinseishoKanyureki get加入歴(KogakuGassanShinseishoKanyurekiIdentifier identifier) {
+    public KogakuGassanShinseishoKanyurekiResult get加入歴(KogakuGassanShinseishoKanyurekiIdentifier identifier) {
         for (KogakuGassanShinseishoKanyurekiResult item : this.加入歴) {
             if (item.get高額合算申請書加入歴().identifier().toString().equals(identifier.toString())) {
-                return item.get高額合算申請書加入歴();
+                return item;
             }
         }
         return null;

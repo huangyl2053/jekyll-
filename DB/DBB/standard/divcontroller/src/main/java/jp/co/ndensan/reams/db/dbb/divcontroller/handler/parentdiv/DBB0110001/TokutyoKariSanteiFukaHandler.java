@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchokarisanteifuka.Fuka
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchokarisanteifuka.TokuchoKariSanteiEntity;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011001.ShuturyokuTyoutuke;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011001.DBB011001_TokuchoKarisanteiFukaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011001.ShuturyokuTyoutuke;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoIraikingakuKeisanHoho6Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoNengakuKijunNendo6Gatsu;
@@ -259,7 +259,7 @@ public final class TokutyoKariSanteiFukaHandler {
                 continue;
             }
             ShuturyokuTyoutuke shuturyokutyoutuke = new ShuturyokuTyoutuke();
-            shuturyokutyoutuke.set出力順ID(RString.isNullOrEmpty(result.get出力順ID()) ? null : Long.parseLong(result.get出力順ID().toString()));
+            shuturyokutyoutuke.set出力順ID(RString.isNullOrEmpty(result.get出力順ID()) ? null : result.get出力順ID());
             shuturyokutyoutuke.set帳票ID(result.get帳票ID());
             shuturyokutyoutuke.set帳票分類ID(result.get帳票分類ID());
             出力帳票一覧.add(shuturyokutyoutuke);

@@ -626,8 +626,7 @@ public class KubunShikyuGendogakuMainHandler {
                 テーブル区分)) {
             for (KubunShikyuGendoGaku 居宅Holder : 居宅HolderList) {
                 if (要介護状態区分.equals(居宅Holder.get要介護状態区分())
-                        && 適用開始年月.equals(居宅Holder.get適用開始年月())
-                        && !支給限度単位数.equals(居宅Holder.get支給限度単位数())) {
+                        && 適用開始年月.equals(居宅Holder.get適用開始年月())) {
                     居宅Holder = 居宅Holder.createBuilderForEdit()
                             .set支給限度単位数(支給限度単位数)
                             .build();
@@ -641,8 +640,7 @@ public class KubunShikyuGendogakuMainHandler {
         } else {
             for (UwanoseKubunShikyuGendoGaku 上乗せ居宅Holder : 上乗せ居宅HolderList) {
                 if (要介護状態区分.equals(上乗せ居宅Holder.get要介護状態区分())
-                        && 適用開始年月.equals(上乗せ居宅Holder.get適用開始年月())
-                        && !支給限度単位数.equals(上乗せ居宅Holder.get支給限度単位数())) {
+                        && 適用開始年月.equals(上乗せ居宅Holder.get適用開始年月())) {
                     上乗せ居宅Holder = 上乗せ居宅Holder.createBuilderForEdit()
                             .set支給限度単位数(支給限度単位数)
                             .build();

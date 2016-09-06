@@ -9,19 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.dbd583001.NenreiKaikyubetsuYokaigodoJokyo;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd300005.NenreiKaikyubetsuYokaigodoJokyoReport;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd583001.NenreiKaikyubetsuYokaigodoJokyoMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd583001.NenreiKaikyubetsuYokaigodoJokyoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd583001.ToukeiNinzuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd300005.NenreiKaikyubetsuYokaigodoJokyoReportSource;
+import jp.co.ndensan.reams.db.dbd.service.report.dbd583001.OutputJokenhyo;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -48,7 +43,6 @@ public class NenreiKaikyubetsuYokaigodoJokyoProcess extends BatchProcessBase<Tou
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper."
             + "relate.nenreikaidanbetsuyokaigodujyokyo.INenreiKaikyubetsuYokaigodoJokyoMapper.get人数");
     private NenreiKaikyubetsuYokaigodoJokyoProcessParameter parameter;
-    private static final int SUBSTRING_9 = 9;
     private static final int FLAG10 = 10;
     private static final int FLAG16 = 16;
     private static final int FLAG18 = 18;
@@ -70,7 +64,10 @@ public class NenreiKaikyubetsuYokaigodoJokyoProcess extends BatchProcessBase<Tou
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, toNenreiKaikyubetsuYokaigodoJokyoMybatisParameter());
+        ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(
+                GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
+        IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toNenreiKaikyubetsuYokaigodoJokyoMybatisParameter(shikibetsuTaishoPSMSearchKey));
     }
 
     @Override
@@ -92,7 +89,7 @@ public class NenreiKaikyubetsuYokaigodoJokyoProcess extends BatchProcessBase<Tou
         flag = flag + 1;
         if (flag == FLAG10 || flag == FLAG42) {
             for (int index = flag - FLAG10; index < flag; index = index + 2) {
-                setToukeiNinzuEntity(index, toukeiNinzuEntity1, toukeiNinzuEntity2);
+                business.setToukeiNinzuEntity(index, toukeiNinzuEntity1, toukeiNinzuEntity2, 統計人数Entityリスト);
             }
             統計人数Entityリスト.add(toukeiNinzuEntity1);
             統計人数Entityリスト.add(toukeiNinzuEntity2);
@@ -100,7 +97,7 @@ public class NenreiKaikyubetsuYokaigodoJokyoProcess extends BatchProcessBase<Tou
         }
         if (flag == FLAG28 || flag == FLAG60) {
             for (int index = flag - FLAG16; index < flag; index = index + 2) {
-                setToukeiNinzuEntity(index, toukeiNinzuEntity1, toukeiNinzuEntity2);
+                business.setToukeiNinzuEntity(index, toukeiNinzuEntity1, toukeiNinzuEntity2, 統計人数Entityリスト);
             }
             統計人数Entityリスト.add(toukeiNinzuEntity1);
             統計人数Entityリスト.add(toukeiNinzuEntity2);
@@ -109,7 +106,7 @@ public class NenreiKaikyubetsuYokaigodoJokyoProcess extends BatchProcessBase<Tou
             business.setToukeiNinzuEntityZero(toukeiNinzuEntity3);
             business.setToukeiNinzuEntityZero(toukeiNinzuEntity4);
             for (int index = flag - FLAG18; index < flag + 1; index = index + FLAG18) {
-                setToukeiNinzuEntity(index, toukeiNinzuEntity3, toukeiNinzuEntity4);
+                business.setToukeiNinzuEntity(index, toukeiNinzuEntity3, toukeiNinzuEntity4, 統計人数Entityリスト);
             }
             統計人数Entityリスト.add(toukeiNinzuEntity3);
             統計人数Entityリスト.add(toukeiNinzuEntity4);
@@ -130,83 +127,21 @@ public class NenreiKaikyubetsuYokaigodoJokyoProcess extends BatchProcessBase<Tou
             基準日 = parameter.get基準年月().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
                     Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         }
-        RString 地区 = parameter.get開始地区コード().getColumnValue().concat("～").concat(parameter.get終了地区コード().getColumnValue());
-
+        RString 地区開始コード = RString.EMPTY;
+        RString 地区終了コード = RString.EMPTY;
+        if (parameter.get開始地区コード() != null && parameter.get開始地区コード().isEmpty()) {
+            地区開始コード = parameter.get開始地区コード().getColumnValue();
+        }
+        if (parameter.get終了地区コード() != null && parameter.get終了地区コード().isEmpty()) {
+            地区終了コード = parameter.get終了地区コード().getColumnValue();
+        }
+        RString 地区 = 地区開始コード.concat("～").concat(地区終了コード);
         NenreiKaikyubetsuYokaigodoJokyoReport report = new NenreiKaikyubetsuYokaigodoJokyoReport(
                 市町村番号, 市町村名, 基準日, 地区, 統計人数Entityリスト);
         report.writeBy(reportSourceWriter);
-        outputJokenhyoFactory();
+        OutputJokenhyo outputJokenhyo = new OutputJokenhyo();
+        outputJokenhyo.outputJokenhyoFactory();
 
-    }
-
-    private void outputJokenhyoFactory() {
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                REPORT_DBD300005.getColumnValue().substring(0, SUBSTRING_9),
-                association.getLasdecCode_().getColumnValue(),
-                association.get市町村名(),
-                new RString(String.valueOf(JobContextHolder.getJobId())),
-                ReportIdDBD.DBD300005.getReportName(),
-                new RString("2ページ"),
-                new RString("なし"),
-                new RString("なし"),
-                contribute());
-        OutputJokenhyoFactory.createInstance(item).print();
-    }
-
-    private List<RString> contribute() {
-        List<RString> 出力条件 = new ArrayList<>();
-        if (parameter.get基準日() != null) {
-            出力条件.add(new RString("【基準日】　").concat(parameter.get基準日().wareki().toDateString()));
-        }
-        if (parameter.get基準年月() != null) {
-            出力条件.add(new RString("【基準年月】　").concat(parameter.get基準年月().wareki().firstYear(FirstYear.ICHI_NEN).getYearMonth()));
-        }
-        if (parameter.get地区区分() != null) {
-            出力条件.add(new RString("【地区区分】　").concat(parameter.get地区区分()));
-        }
-        if (parameter.get開始地区コード() != null) {
-            出力条件.add(new RString("【開始地区コード】　").concat(parameter.get開始地区コード().value()));
-        }
-        if (parameter.get終了地区コード() != null) {
-            出力条件.add(new RString("【終了地区コード】　").concat(parameter.get終了地区コード().value()));
-        }
-        if (parameter.get旧市町村コード() != null) {
-            出力条件.add(new RString("【旧市町村コード】　").concat(parameter.get旧市町村コード()));
-        }
-        return 出力条件;
-    }
-
-    private NenreiKaikyubetsuYokaigodoJokyoMybatisParameter toNenreiKaikyubetsuYokaigodoJokyoMybatisParameter() {
-        ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(
-                GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
-        IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
-        return new NenreiKaikyubetsuYokaigodoJokyoMybatisParameter(parameter.get基準日(), parameter.get基準年月(),
-                parameter.get地区区分(), parameter.get開始地区コード(), parameter.get終了地区コード(),
-                parameter.get旧市町村コード(), shikibetsuTaishoPSMSearchKey);
-    }
-
-    private void setToukeiNinzuEntity(int index, ToukeiNinzuEntity toukeiNinzuEntity1, ToukeiNinzuEntity toukeiNinzuEntity2) {
-        toukeiNinzuEntity1.set自立人数(統計人数Entityリスト.get(index).get自立人数().add(toukeiNinzuEntity1.get自立人数()));
-        toukeiNinzuEntity2.set自立人数(統計人数Entityリスト.get(index + 1).get自立人数().add(toukeiNinzuEntity2.get自立人数()));
-        toukeiNinzuEntity1.set経過介護人数(統計人数Entityリスト.get(index).get経過介護人数().add(toukeiNinzuEntity1.get経過介護人数()));
-        toukeiNinzuEntity2.set経過介護人数(統計人数Entityリスト.get(index + 1).get経過介護人数().add(toukeiNinzuEntity2.get経過介護人数()));
-        toukeiNinzuEntity1.set要支援1人数(統計人数Entityリスト.get(index).get要支援1人数().add(toukeiNinzuEntity1.get要支援1人数()));
-        toukeiNinzuEntity2.set要支援1人数(統計人数Entityリスト.get(index + 1).get要支援1人数().add(toukeiNinzuEntity2.get要支援1人数()));
-        toukeiNinzuEntity1.set要支援2人数(統計人数Entityリスト.get(index).get要支援2人数().add(toukeiNinzuEntity1.get要支援2人数()));
-        toukeiNinzuEntity2.set要支援2人数(統計人数Entityリスト.get(index + 1).get要支援2人数().add(toukeiNinzuEntity2.get要支援2人数()));
-        toukeiNinzuEntity1.set要介護1人数(統計人数Entityリスト.get(index).get要介護1人数().add(toukeiNinzuEntity1.get要介護1人数()));
-        toukeiNinzuEntity2.set要介護1人数(統計人数Entityリスト.get(index + 1).get要介護1人数().add(toukeiNinzuEntity2.get要介護1人数()));
-        toukeiNinzuEntity1.set要介護2人数(統計人数Entityリスト.get(index).get要介護2人数().add(toukeiNinzuEntity1.get要介護2人数()));
-        toukeiNinzuEntity2.set要介護2人数(統計人数Entityリスト.get(index + 1).get要介護2人数().add(toukeiNinzuEntity2.get要介護2人数()));
-        toukeiNinzuEntity1.set要介護3人数(統計人数Entityリスト.get(index).get要介護3人数().add(toukeiNinzuEntity1.get要介護3人数()));
-        toukeiNinzuEntity2.set要介護3人数(統計人数Entityリスト.get(index + 1).get要介護3人数().add(toukeiNinzuEntity2.get要介護3人数()));
-        toukeiNinzuEntity1.set要介護4人数(統計人数Entityリスト.get(index).get要介護4人数().add(toukeiNinzuEntity1.get要介護4人数()));
-        toukeiNinzuEntity2.set要介護4人数(統計人数Entityリスト.get(index + 1).get要介護4人数().add(toukeiNinzuEntity2.get要介護4人数()));
-        toukeiNinzuEntity1.set要介護5人数(統計人数Entityリスト.get(index).get要介護5人数().add(toukeiNinzuEntity1.get要介護5人数()));
-        toukeiNinzuEntity2.set要介護5人数(統計人数Entityリスト.get(index + 1).get要介護5人数().add(toukeiNinzuEntity2.get要介護5人数()));
-        toukeiNinzuEntity1.set合計(統計人数Entityリスト.get(index).get合計().add(toukeiNinzuEntity1.get合計()));
-        toukeiNinzuEntity2.set合計(統計人数Entityリスト.get(index + 1).get合計().add(toukeiNinzuEntity2.get合計()));
     }
 
 }

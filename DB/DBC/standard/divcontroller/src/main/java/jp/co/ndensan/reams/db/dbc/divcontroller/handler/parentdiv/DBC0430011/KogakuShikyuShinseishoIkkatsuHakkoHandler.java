@@ -69,6 +69,8 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
     private static final RString 項目名_提出期限初期 = new RString("提出期限初期");
     private static final RString 項目名_電話番号表示 = new RString("電話番号表示");
     private static final RString 項目名_委任状提出先 = new RString("委任状提出先");
+    private static final int BEGININDEX = 0;
+    private static final int ENDINDEX = 6;
 
     /**
      * コンストラクタです。
@@ -208,11 +210,12 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
                 = new DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter();
         FlexibleYearMonth 処理年月 = FlexibleYearMonth.EMPTY;
         if (!div.getShinseishoHakkoParameters().getRadShinsaYM().getSelectedKey().isEmpty()) {
-            処理年月 = div.getShinseishoHakkoParameters().getTxtShinsaYM().getValue().getYearMonth();
+            FlexibleDate 処理年月日 = div.getShinseishoHakkoParameters().getTxtShinsaYM().getValue();
+            処理年月 = new FlexibleYearMonth(処理年月日.toString().substring(BEGININDEX, ENDINDEX));
             parameter.setChushutsuJoken(ShutsuryokuJoken.審査年月);
         } else if (!div.getShinseishoHakkoParameters().getRadHihokenshaNo().getSelectedKey().isEmpty()) {
             RString 年月 = div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedValue();
-            処理年月 = new FlexibleYearMonth(年月.toString());
+            処理年月 = new FlexibleYearMonth(年月.toString().substring(BEGININDEX, ENDINDEX));
             parameter.setChushutsuJoken(ShutsuryokuJoken.被保険者番号);
         } else if (!div.getShinseishoHakkoParameters().getRadHakushiInsatsu().getSelectedKey().isEmpty()) {
             処理年月 = FlexibleYearMonth.EMPTY;

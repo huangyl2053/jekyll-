@@ -157,7 +157,7 @@ public class ShokanShuruiShikyuGendoGakuManager {
             for (ShokanShuruiShikyuGendoGaku 償還 : 償還List) {
                 requireNonNull(償還, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_償還払い給付種類支給限度額.toString()));
                 if (!償還.hasChanged()) {
-                    return;
+                    continue;
                 }
                 dac.save(償還.toEntity());
             }

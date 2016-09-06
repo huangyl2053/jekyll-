@@ -158,7 +158,7 @@ public class UwanoseShokanShuruiShikyuGendoGakuManager {
                 requireNonNull(上乗せ,
                         UrSystemErrorMessages.値がnull.getReplacedMessage(定値_上乗せ償還払い給付種類支給限度額.toString()));
                 if (!上乗せ.hasChanged()) {
-                    return;
+                    continue;
                 }
                 dac.save(上乗せ.toEntity());
             }
