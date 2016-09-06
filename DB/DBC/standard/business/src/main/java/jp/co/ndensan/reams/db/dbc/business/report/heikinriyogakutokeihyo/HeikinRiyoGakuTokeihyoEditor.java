@@ -79,7 +79,7 @@ public class HeikinRiyoGakuTokeihyoEditor implements IHeikinRiyoGakuTokeihyoEdit
         source.List3_7 = entity.get平均額明細_要介護４();
         source.List3_8 = entity.get平均額明細_要介護５();
         source.List3_9 = entity.get平均額明細_合計();
-        getサービス種類名称(source, entity.getサービス種類名称1());
+        getサービス種類名称(source, entity.getサービス種類名称());
         source.ninzu6 = entity.get人数６();
         source.shotoku6 = entity.get所得段階６();
         source.hiyosogaku6 = entity.get費用総額６();
