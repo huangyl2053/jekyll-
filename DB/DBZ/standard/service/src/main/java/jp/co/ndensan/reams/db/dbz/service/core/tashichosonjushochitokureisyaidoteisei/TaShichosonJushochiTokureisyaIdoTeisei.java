@@ -48,7 +48,8 @@ public class TaShichosonJushochiTokureisyaIdoTeisei {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TaShichosonJushochiTokureisyaIdoTeisei}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link TaShichosonJushochiTokureisyaIdoTeisei}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link TaShichosonJushochiTokureisyaIdoTeisei}のインスタンス
      */
     public static TaShichosonJushochiTokureisyaIdoTeisei createInstance() {
         return InstanceProvider.create(TaShichosonJushochiTokureisyaIdoTeisei.class);
@@ -78,7 +79,9 @@ public class TaShichosonJushochiTokureisyaIdoTeisei {
         for (TekiyouJouhou tekiyou : paramter.get適用情報グリッド()) {
             int count = 0;
             for (ShisetsuNyutaishoData dbT1004 : paramter.get入退所データリスト()) {
-                if (rStringTOFlexStart(tekiyou.get適用日()).isBeforeOrEquals(dbT1004.get退所日())
+                FlexibleDate tekiyoDate = rStringTOFlexStart(tekiyou.get適用日());
+                if (tekiyoDate == null || tekiyoDate.isEmpty() || dbT1004.get退所日() == null || dbT1004.get退所日().isEmpty()) {
+                } else if (tekiyoDate.isBeforeOrEquals(dbT1004.get退所日())
                         && dbT1004.get入所日().isBeforeOrEquals(rStringTOFlexEnd(tekiyou.get解除日()))) {
                     count++;
                 }

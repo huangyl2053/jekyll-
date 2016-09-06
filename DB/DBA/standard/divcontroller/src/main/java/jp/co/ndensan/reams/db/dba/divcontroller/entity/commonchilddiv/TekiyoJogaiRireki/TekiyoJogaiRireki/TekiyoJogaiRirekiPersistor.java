@@ -26,9 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 適用除外者を保存します。
- * 通常、このような実装は推奨されません。
- * （serviceパッケージのクラスからトランザクションを貼るのが推奨です。）
+ * 適用除外者を保存します。 通常、このような実装は推奨されません。 （serviceパッケージのクラスからトランザクションを貼るのが推奨です。）
  */
 class TekiyoJogaiRirekiPersistor {
 
@@ -36,8 +34,7 @@ class TekiyoJogaiRirekiPersistor {
     }
 
     /**
-     * インスタンスを生成します。
-     * このメソッドからインスタンスを生成した場合のみ、正常にトランザクション処理が実施されます。
+     * インスタンスを生成します。 このメソッドからインスタンスを生成した場合のみ、正常にトランザクション処理が実施されます。
      */
     static TekiyoJogaiRirekiPersistor createInstance() {
         return InstanceProvider.create(TekiyoJogaiRirekiPersistor.class);
@@ -65,31 +62,53 @@ class TekiyoJogaiRirekiPersistor {
             FlexibleDate 変更後異動日 = new FlexibleDate(row.getHenkougoIdoYMD());
             RString 変更前枝番 = row.getHenkoumaeEdaNo();
             RString 変更後枝番 = row.getHenkougoEdaNo();
+
+//            //共有子Divモードで行っていた施設情報の登録を外だし。
+            ShisetsuNyutaishoIdentifier taishoTarget;
+            if (row.getRirekiNo() == null || row.getRirekiNo().isEmpty()) {
+                taishoTarget = new ShisetsuNyutaishoIdentifier(ShikibetsuCode.EMPTY, 0);
+            } else {
+                taishoTarget = new ShisetsuNyutaishoIdentifier(識別コード, Integer.parseInt(row.getRirekiNo().toString()));
+            }
+//            TekiyoJogaishaManager.createInstance().updateKaigoJogaiTokureiTaishoShisetsu(
+//                    set適用状態介護保険施設入退所(保険施設入退所Model.get(taishoTarget), row).toEntity()
+//            );
+
+            //TODO n8178 城間 共有子Divのモードでのデータ反映を一時廃止し、状態を参照するデータの修正のみでデータ更新を行う。
             switch (div.getMode_DisplayMode()) {
                 case 適用登録モード:
-                    TekiyoJogaishaIdentifier torokuTarget
-                            = new TekiyoJogaishaIdentifier(識別コード, 変更後異動日, 変更後枝番);
-                    ShisetsuNyutaishoIdentifier taishoTarget
-                            = new ShisetsuNyutaishoIdentifier(識別コード, Integer.parseInt(row.getRirekiNo().toString()));
-                    TekiyoJogaishaManager.createInstance().saveTekiyoJogaisha適用登録(
-                            set適用状態適用除外者情報(適用除外者Model.get(torokuTarget), row).toEntity(),
-                            set適用状態介護保険施設入退所(保険施設入退所Model.get(taishoTarget), row).toEntity(),
-                            識別コード);
-                    Collections.sort(rowList, new TekiyoJogaiRirekiHandler.DateComparator());
+
+//                    TekiyoJogaishaIdentifier torokuTarget
+//                            = new TekiyoJogaishaIdentifier(識別コード, 変更後異動日, 変更後枝番);
+//                    ShisetsuNyutaishoIdentifier taishoTarget
+//                            = new ShisetsuNyutaishoIdentifier(識別コード, Integer.parseInt(row.getRirekiNo().toString()));
+//                    TekiyoJogaishaManager.createInstance().saveTekiyoJogaisha適用登録(
+//                            set適用状態適用除外者情報(適用除外者Model.get(torokuTarget), row).toEntity(),
+//                            set適用状態介護保険施設入退所(保険施設入退所Model.get(taishoTarget), row).toEntity(),
+//                            識別コード);
+//                    Collections.sort(rowList, new TekiyoJogaiRirekiHandler.DateComparator());
+//
+                    TekiyoJogaishaManager.createInstance().updateKaigoJogaiTokureiTaishoShisetsu(
+                            set適用状態介護保険施設入退所(保険施設入退所Model.get(taishoTarget), row).toEntity()
+                    );
                     break;
                 case 解除モード:
-                    TekiyoJogaishaIdentifier beforeIdentifier
-                            = new TekiyoJogaishaIdentifier(識別コード, 変更前異動日, 変更前枝番);
-                    TekiyoJogaishaIdentifier afterIdentifiier
-                            = new TekiyoJogaishaIdentifier(識別コード, 変更後異動日, 変更後枝番);
-                    ShisetsuNyutaishoIdentifier taisho = new ShisetsuNyutaishoIdentifier(
-                            識別コード, Integer.parseInt(row.getRirekiNo().toString()));
-                    TekiyoJogaishaManager.createInstance().saveTekiyoJogaisha解除(
-                            適用除外者Model.get(beforeIdentifier).createBuilderForEdit().set論理削除フラグ(true).build().toEntity(),
-                            set解除状態適用除外者情報(適用除外者Model.get(afterIdentifiier), row).toEntity(),
-                            set解除状態介護保険施設入退所(保険施設入退所Model.get(taisho), row).toEntity(), 識別コード);
-            }
+//                    TekiyoJogaishaIdentifier beforeIdentifier
+//                            = new TekiyoJogaishaIdentifier(識別コード, 変更前異動日, 変更前枝番);
+//                    TekiyoJogaishaIdentifier afterIdentifiier
+//                            = new TekiyoJogaishaIdentifier(識別コード, 変更後異動日, 変更後枝番);
+//
+//                    ShisetsuNyutaishoIdentifier taisho = new ShisetsuNyutaishoIdentifier(
+//                            識別コード, Integer.parseInt(row.getRirekiNo().toString()));
+//                    TekiyoJogaishaManager.createInstance().saveTekiyoJogaisha解除(
+//                            適用除外者Model.get(beforeIdentifier).createBuilderForEdit().set論理削除フラグ(true).build().toEntity(),
+//                            set解除状態適用除外者情報(適用除外者Model.get(afterIdentifiier), row).toEntity(),
+//                            set解除状態介護保険施設入退所(保険施設入退所Model.get(taisho), row).toEntity(), 識別コード);
 
+                    TekiyoJogaishaManager.createInstance().updateKaigoJogaiTokureiTaishoShisetsu(
+                            set解除状態介護保険施設入退所(保険施設入退所Model.get(taishoTarget), row).toEntity()
+                    );
+            }
             if (RowState.Added.equals(row.getRowState())) {
                 TekiyoJogaishaManager.createInstance()
                         .regTekiyoJogaisha(

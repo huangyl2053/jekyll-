@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1002TekiyoJogaishaDac;
-import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dba.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
@@ -430,12 +430,12 @@ public class TekiyoJogaishaManager {
             FlexibleDate 解除年月日 = 最新データ.get解除年月日();
             FlexibleDate 異動日 = 最新データ.get異動日();
             if (資格取得年月日 != null && !資格取得年月日.isEmpty() && (資格喪失年月日 == null || 資格喪失年月日.isEmpty())
-                && !(適用年月日 != null && !適用年月日.isEmpty() && (解除年月日 == null || 解除年月日.isEmpty()))
-                && 異動日.isBeforeOrEquals(基準日)) {
+                    && !(適用年月日 != null && !適用年月日.isEmpty() && (解除年月日 == null || 解除年月日.isEmpty()))
+                    && 異動日.isBeforeOrEquals(基準日)) {
                 登録可否判定 = 登録可能で資格喪失必要;
             }
             if (資格取得年月日 != null && !資格取得年月日.isEmpty() && 資格喪失年月日 != null && !資格喪失年月日.isEmpty()
-                && 異動日.isBeforeOrEquals(基準日)) {
+                    && 異動日.isBeforeOrEquals(基準日)) {
                 登録可否判定 = 登録可能で資格喪失不要;
             }
         } else {

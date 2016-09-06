@@ -89,9 +89,10 @@ public class TekiyoJogaishaIdoTeisei {
                         DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
             }
         } else {
-            if (is履歴期間重複(div)) {
-                throw new ApplicationException(UrErrorMessages.期間が不正_追加メッセージあり２.getMessage().replace("適用日", "解除日"));
-            }
+            //TODO n8178 城間 適用除外の履歴が正しく生成されるかを確認するために、施設入退所と適用除外の比較チェックを一時除外
+//            if (is履歴期間重複(div)) {
+//                throw new ApplicationException(UrErrorMessages.期間が不正_追加メッセージあり２.getMessage().replace("適用日", "解除日"));
+//            }
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                         UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -129,10 +130,10 @@ public class TekiyoJogaishaIdoTeisei {
             TekiyoJogaishaIdoTeiseiBusiness entity = new TekiyoJogaishaIdoTeiseiBusiness(new RString(row.getRowState().toString()),
                     row.getTekiyoDate().getValue() == null ? FlexibleDate.EMPTY : new FlexibleDate(row.getTekiyoDate().getValue().toDateString()),
                     row.getKayijoDate().getValue() == null ? FlexibleDate.EMPTY : new FlexibleDate(row.getKayijoDate().getValue().toDateString())
-                    );
+            );
             entitylist.add(entity);
         }
-        return finder.checkTekiyoJogaiKikanByTeiseiMode(entitylist);
+        return !finder.checkTekiyoJogaiKikanByTeiseiMode(entitylist);
     }
 
     private boolean is適用情報一覧変更(TekiyoJogaishaIdoTeiseiDiv div) {
