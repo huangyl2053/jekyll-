@@ -259,12 +259,14 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
      *
      * @param rowList List<dgKihonInfo_Row>
      * @param 被保険者番号 HihokenshaNo
+     * @param holder NijiYoboJigyoTaishoshaHolder
      */
     public void 二次予防情報対象一覧のデータを保存する(List<dgKihonInfo_Row> rowList,
             HihokenshaNo 被保険者番号, NijiYoboJigyoTaishoshaHolder holder) {
-        int 履歴番号MAX = Integer.parseInt(rowList.get(0).getRirekiNo().toString());
+        int 履歴番号MAX = 0;
         for (dgKihonInfo_Row row : rowList) {
-            if ((!追加.equals(row.getJoutai())) && 履歴番号MAX < Integer.parseInt(row.getRirekiNo().toString())) {
+            if ((!追加.equals(row.getJoutai())) && (!RString.isNullOrEmpty(row.getRirekiNo()))
+                    && 履歴番号MAX < Integer.parseInt(row.getRirekiNo().toString())) {
                 履歴番号MAX = Integer.parseInt(row.getRirekiNo().toString());
             }
         }

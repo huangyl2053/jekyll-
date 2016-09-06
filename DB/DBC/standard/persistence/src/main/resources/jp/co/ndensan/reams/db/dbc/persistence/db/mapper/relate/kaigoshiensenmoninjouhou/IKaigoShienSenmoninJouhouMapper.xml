@@ -34,13 +34,13 @@
             AND "DbT7064CareManeger"."kaigoShienSenmoninMeiKana" = #{カナ氏名}
         </if>
         <if test="カナ氏名 != null and isカナ氏名の前方一致">
-            AND "DbT7064CareManeger"."kaigoShienSenmoninMeiKana" LIKE #{カナ氏名%}
+            AND "DbT7064CareManeger"."kaigoShienSenmoninMeiKana" LIKE #{カナ氏名} || '%'
         </if>
         <if test="漢字氏名 != null and !is漢字氏名の前方一致">
             AND "DbT7064CareManeger"."kaigoShienSenmoninMei" = #{漢字氏名}
         </if>
         <if test="漢字氏名 != null and is漢字氏名の前方一致">
-            AND "DbT7064CareManeger"."kaigoShienSenmoninMei" LIKE #{漢字氏名%}
+            AND "DbT7064CareManeger"."kaigoShienSenmoninMei" LIKE #{漢字氏名} || '%'
         </if>
         <if test="有効開始年月日 != null">
             AND "DbT7064CareManeger"."yukoKaishiDate" <![CDATA[>=]]> #{有効開始年月日}
