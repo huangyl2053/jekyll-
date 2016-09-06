@@ -25,12 +25,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class OutputJokenhyo {
 
     private static final int SUBSTRING_9 = 9;
-    private NenreiKaikyubetsuYokaigodoJokyoProcessParameter parameter;
 
     /**
      * 帳票出力条件リストの出力
+     *
+     * @param parameter NenreiKaikyubetsuYokaigodoJokyoProcessParameter
      */
-    public void outputJokenhyoFactory() {
+    public void outputJokenhyoFactory(NenreiKaikyubetsuYokaigodoJokyoProcessParameter parameter) {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBD.DBD300005.getReportId().getColumnValue().substring(0, SUBSTRING_9),
@@ -41,11 +42,11 @@ public class OutputJokenhyo {
                 new RString("2ページ"),
                 new RString("なし"),
                 new RString("なし"),
-                contribute());
+                contribute(parameter));
         OutputJokenhyoFactory.createInstance(item).print();
     }
 
-    private List<RString> contribute() {
+    private List<RString> contribute(NenreiKaikyubetsuYokaigodoJokyoProcessParameter parameter) {
         List<RString> 出力条件 = new ArrayList<>();
         if (parameter.get基準日() != null) {
             出力条件.add(new RString("【基準日】　").concat(parameter.get基準日().wareki().toDateString()));
