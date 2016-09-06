@@ -335,7 +335,6 @@ public class IchijiSashitome1GoHandler {
         div.getTxtSashitomeTorokuYMD().setReadOnly(true);
         div.getTxtSashitomeTorokuTsuchiHakkoYMD().setReadOnly(true);
         div.getTxtSashitomeNofuKigenYMD().setReadOnly(true);
-        div.getTxtSashitomeKaijoYMD().setDisplayNone(true);
         div.getBtnSashitomeOrKojoTorokuTorikeshi().setDisplayNone(false);
         div.getBtnSashitomeOrKojoTorokuKakutei().setDisplayNone(false);
         div.getBtnSashitomeOrKojoTorokuTorikeshi().setDisabled(false);
@@ -350,7 +349,8 @@ public class IchijiSashitome1GoHandler {
         div.getTxtSashitomeNofuKigenYMD().setValue(支払方法変更差止.get差止納付期限());
         div.getTxtSashitomeKaijoYMD().setValue(支払方法変更差止.get差止解除年月日());
         DisplayNone_照会用(true);
-        get給付一時差止登録();
+        DisplayNone_差止登録用(false);
+        div.getTxtSashitomeKaijoYMD().setDisplayNone(true);
     }
 
     /**
