@@ -43,9 +43,9 @@
                     ON F."kinyuKikanCode" =A."kinyuKikanCode" 
                     AND F."kinyuKikanShitenCode" = A."shitenCode"      
         WHERE  A."keiyakuJigyoshaNo" <![CDATA[<=]]> #{契約事業者番号TO}
-        AND    A."keiyakuJigyoshaNo" <![CDATA[>=]]> #{契約事業者番号FROM}
+        AND    #{契約事業者番号FROM} <![CDATA[<=]]> A."keiyakuJigyoshaNo"
         AND    A."kaishiYMD" <![CDATA[<=]]> #{契約日TO}
-        AND    A."kaishiYMD" <![CDATA[>=]]> #{契約日FROM}
+        AND    #{契約日FROM} <![CDATA[<=]]> A."kaishiYMD"
         <if test="契約種別 == 0">
         AND (A."keiyakuShurui"='01'
         OR A."keiyakuShurui" ='02'
@@ -60,9 +60,6 @@
         <if test="契約種別 == 3">
         AND A."keiyakuShurui" ='03' 
         </if>
-        <if test="契約期間終了事業者 == 0"> 
-            
-        </if> 
         <if test="契約期間終了事業者 == 1">
             AND A."shuryoYMD" ='99999999' 
         </if> 

@@ -30,68 +30,32 @@ public class JuryoIninJigyoshaIchiranBodyEditor implements IJuryoIninJigyoshaIch
 
     @Override
     public JuryoIninJigyoshaIchiranSource edit(JuryoIninJigyoshaIchiranSource source) {
-        if (RString.isNullOrEmpty(帳票出力対象データ.get事業者番号())) {
-            source.listUpper_1 = RString.EMPTY;
-        } else {
-            source.listUpper_1 = 帳票出力対象データ.get事業者番号();
-        }
-        if (RString.isNullOrEmpty(帳票出力対象データ.get事業者名称カナ().getColumnValue())) {
-            source.listUpper_2 = RString.EMPTY;
-        } else {
+        source.listUpper_1 = 帳票出力対象データ.get事業者番号();
+        if (帳票出力対象データ.get事業者名称カナ() != null) {
             source.listUpper_2 = 帳票出力対象データ.get事業者名称カナ().getColumnValue();
         }
-        if (RString.isNullOrEmpty(帳票出力対象データ.get所在地郵便番号().getColumnValue())) {
-            source.listUpper_3 = RString.EMPTY;
-        } else {
+        if (帳票出力対象データ.get所在地郵便番号() != null) {
             source.listUpper_3 = 帳票出力対象データ.get所在地郵便番号().getColumnValue();
         }
-        if (RString.isNullOrEmpty(帳票出力対象データ.get所在地上段().getColumnValue())) {
-            source.listUpper_4 = RString.EMPTY;
-        } else {
+        if (帳票出力対象データ.get所在地上段() != null) {
             source.listUpper_4 = 帳票出力対象データ.get所在地上段().getColumnValue();
         }
-        if (RString.isNullOrEmpty(new RString(帳票出力対象データ.get契約開始日().toString()))) {
-            source.listUpper_5 = RString.EMPTY;
-        } else {
+        if (帳票出力対象データ.get契約開始日() != null) {
             source.listUpper_5 = new RString(帳票出力対象データ.get契約開始日().toString());
         }
-        if (RString.isNullOrEmpty(帳票出力対象データ.get振込先金融機関())) {
-            source.listUpper_6 = RString.EMPTY;
-        } else {
-            source.listUpper_6 = 帳票出力対象データ.get振込先金融機関();
-        }
-        if (RString.isNullOrEmpty(帳票出力対象データ.get振込先口座番号())) {
-            source.listUpper_7 = RString.EMPTY;
-        } else {
-            source.listUpper_7 = 帳票出力対象データ.get振込先口座番号();
-        }
-        if (RString.isNullOrEmpty(帳票出力対象データ.get事業者名称().getColumnValue())) {
-            source.listLower_1 = RString.EMPTY;
-        } else {
+        source.listUpper_6 = 帳票出力対象データ.get振込先金融機関();
+        source.listUpper_7 = 帳票出力対象データ.get振込先口座番号();
+        if (帳票出力対象データ.get事業者名称() != null) {
             source.listLower_1 = 帳票出力対象データ.get事業者名称().getColumnValue();
         }
-        if (RString.isNullOrEmpty(帳票出力対象データ.get所在地下段().getColumnValue())) {
-            source.listLower_2 = RString.EMPTY;
-        } else {
+        if (帳票出力対象データ.get所在地下段() != null) {
             source.listLower_2 = 帳票出力対象データ.get所在地下段().getColumnValue();
         }
-        if (RString.isNullOrEmpty(帳票出力対象データ.get契約種別())) {
-            source.listLower_3 = RString.EMPTY;
-        } else {
-            source.listLower_3 = 帳票出力対象データ.get契約種別();
-        }
-        if (RString.isNullOrEmpty(帳票出力対象データ.get振込先支店名())) {
-            source.listLower_4 = RString.EMPTY;
-        } else {
-            source.listLower_4 = 帳票出力対象データ.get振込先支店名();
-        }
-        if (RString.isNullOrEmpty(帳票出力対象データ.get振込先名義人名().getColumnValue())) {
-            source.listLower_5 = RString.EMPTY;
-        } else {
+        source.listLower_3 = 帳票出力対象データ.get契約種別();
+        source.listLower_4 = 帳票出力対象データ.get振込先支店名();
+        if (帳票出力対象データ.get振込先名義人名() != null) {
             source.listLower_5 = 帳票出力対象データ.get振込先名義人名().getColumnValue();
         }
-
         return source;
     }
-
 }
