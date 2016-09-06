@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoKarisanteiPageBreak;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariB5RenchoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariB5Report;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateReport;
@@ -100,6 +101,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
@@ -142,6 +144,7 @@ public class PrintTsuchishoProcess extends BatchProcessBase<TsuchishoDataTempEnt
     private RString 出力順;
     private ChohyoSeigyoKyotsu 帳票制御共通;
     private ChohyoSeigyoHanyo 帳票制御汎用;
+    private Ninshosha 認証者;
     private KarisanteiBatchEntity 出力帳票一覧Entity;
     private Association 地方公共団体;
     private List<RString> 出力項目リスト;
@@ -176,7 +179,7 @@ public class PrintTsuchishoProcess extends BatchProcessBase<TsuchishoDataTempEnt
     private BatchPermanentTableWriter 通知書発行後異動者tableWriter;
 
     @Override
-    protected void beforeExecute() {
+    protected void initialize() {
         出力flag = false;
         総ページ数 = 0;
         連番 = 1;
@@ -207,9 +210,17 @@ public class PrintTsuchishoProcess extends BatchProcessBase<TsuchishoDataTempEnt
     }
 
     @Override
+    protected void beforeExecute() {
+
+    }
+
+    @Override
     protected void createWriter() {
+        initialize特徴開始通知書();
         通知書発行後異動者tableWriter = new BatchPermanentTableWriter(DbT2017TsuchishoHakkogoIdoshaEntity.class);
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200001.getReportId().value()).create();
+        PageBreaker<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> breaker = new TokuchoKaishiTsuchishoKarisanteiPageBreak(改頁項目リスト);
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200001.getReportId().value())
+                .addBreak(breaker).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
@@ -284,6 +295,7 @@ public class PrintTsuchishoProcess extends BatchProcessBase<TsuchishoDataTempEnt
 
     @Override
     protected void afterExecute() {
+        colseWriter();
         eucCsvWriter.close();
         spoolManager.spool(SubGyomuCode.DBB介護賦課, 特別徴収_EUCファイル名);
         List<RString> 出力条件リスト = manager.get出力条件リスト(processParameter.get発行日(), processParameter.get出力対象(),
@@ -366,26 +378,13 @@ public class PrintTsuchishoProcess extends BatchProcessBase<TsuchishoDataTempEnt
 
     }
 
-    private int publish特徴開始通知書(KarisanteiBatchEntity 出力帳票一覧Entity,
-            KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
-            RString 宛名連番, KariSanteiTsuchiShoKyotsu 仮算定通知書情報) {
-
+    private void initialize特徴開始通知書() {
         FlexibleDate 開始年月日 = FlexibleDate.getNowDate();
-        if (仮算定通知書情報.get発行日() != null) {
-            開始年月日 = 仮算定通知書情報.get発行日();
+        if (processParameter.get発行日() != null) {
+            開始年月日 = processParameter.get発行日();
         }
-        Ninshosha 認証者 = NinshoshaFinderFactory.createInstance()
+        認証者 = NinshoshaFinderFactory.createInstance()
                 .get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), 開始年月日);
-        boolean is公印に掛ける = false;
-        boolean is公印を省略 = false;
-        if (帳票制御共通 != null && 定値_1.equals(帳票制御共通.get首長名印字位置())) {
-            is公印に掛ける = true;
-        }
-        if (帳票制御共通 != null && !帳票制御共通.is電子公印印字有無()) {
-            is公印を省略 = true;
-        }
-        EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
-                仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
         ICheckListInfo info = CheckListInfoFactory.createInstance(SubGyomuCode.DBB介護賦課,
                 地方公共団体.getLasdecCode_(), 地方公共団体.get市町村名());
         if (ReportIdDBB.DBB100003.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
@@ -400,18 +399,7 @@ public class PrintTsuchishoProcess extends BatchProcessBase<TsuchishoDataTempEnt
                     .reportId(processParameter.get出力帳票一覧Entity().get帳票ID())
                     .build();
             dbb100003ReportSourceWriter = new ReportSourceWriter<>(dbb100003reportWriter);
-            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
-                    認証者,
-                    地方公共団体,
-                    dbb100003ReportSourceWriter.getImageFolderPath(),
-                    new RDate(仮算定通知書情報.get発行日().toString()),
-                    is公印に掛ける,
-                    is公印を省略,
-                    KenmeiFuyoKubunType.付与なし).buildSource();
-            new TokubetsuChoshuKaishiTsuchishoKariB5Report(編集後宛先, sourceBuilder,
-                    仮算定特徴開始通知書情報, 宛名連番).writeBy(dbb100003ReportSourceWriter);
-            dbb100003reportWriter.close();
-            return dbb100003ReportSourceWriter.pageCount().value();
+
         } else if (ReportIdDBB.DBB100004.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
 
             CheckListLineItemSet pairs = CheckListLineItemSet.
@@ -424,18 +412,7 @@ public class PrintTsuchishoProcess extends BatchProcessBase<TsuchishoDataTempEnt
                     .reportId(processParameter.get出力帳票一覧Entity().get帳票ID())
                     .build();
             dbb100004ReportSourceWriter = new ReportSourceWriter<>(dbb100004reportWriter);
-            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
-                    認証者,
-                    地方公共団体,
-                    dbb100004ReportSourceWriter.getImageFolderPath(),
-                    new RDate(仮算定通知書情報.get発行日().toString()),
-                    is公印に掛ける,
-                    is公印を省略,
-                    KenmeiFuyoKubunType.付与なし).buildSource();
-            new TokubetsuChoshuKaishiTsuchishoKariB5RenchoReport(編集後宛先, sourceBuilder,
-                    仮算定特徴開始通知書情報, 宛名連番).writeBy(dbb100004ReportSourceWriter);
-            dbb100004reportWriter.close();
-            return dbb100004ReportSourceWriter.pageCount().value();
+
         } else if (ReportIdDBB.DBB100005.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
 
             CheckListLineItemSet pairs = CheckListLineItemSet.
@@ -448,18 +425,7 @@ public class PrintTsuchishoProcess extends BatchProcessBase<TsuchishoDataTempEnt
                     .reportId(processParameter.get出力帳票一覧Entity().get帳票ID())
                     .build();
             dbb100005ReportSourceWriter = new ReportSourceWriter<>(dbb100005reportWriter);
-            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
-                    認証者,
-                    地方公共団体,
-                    dbb100005ReportSourceWriter.getImageFolderPath(),
-                    new RDate(仮算定通知書情報.get発行日().toString()),
-                    is公印に掛ける,
-                    is公印を省略,
-                    KenmeiFuyoKubunType.付与なし).buildSource();
-            new TokubetsuChoshuKaishiTsuchishoKariSealerReport(編集後宛先, sourceBuilder,
-                    仮算定特徴開始通知書情報).writeBy(dbb100005ReportSourceWriter);
-            dbb100005reportWriter.close();
-            return dbb100005ReportSourceWriter.pageCount().value();
+
         } else if (ReportIdDBB.DBB100006.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
 
             CheckListLineItemSet pairs = CheckListLineItemSet.
@@ -472,30 +438,8 @@ public class PrintTsuchishoProcess extends BatchProcessBase<TsuchishoDataTempEnt
                     .reportId(processParameter.get出力帳票一覧Entity().get帳票ID())
                     .build();
             dbb100006ReportSourceWriter = new ReportSourceWriter<>(dbb100006reportWriter);
-            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
-                    認証者,
-                    地方公共団体,
-                    dbb100006ReportSourceWriter.getImageFolderPath(),
-                    new RDate(仮算定通知書情報.get発行日().toString()),
-                    is公印に掛ける,
-                    is公印を省略,
-                    KenmeiFuyoKubunType.付与なし).buildSource();
-            new TokubetsuChoshuKaishiTsuchishoKariSealerRenchoReport(編集後宛先, sourceBuilder,
-                    仮算定特徴開始通知書情報).writeBy(dbb100006ReportSourceWriter);
-            dbb100006reportWriter.close();
-            return dbb100006ReportSourceWriter.pageCount().value();
-        }
-        return publish特徴開始通知書_その他(出力帳票一覧Entity, 仮算定特徴開始通知書情報,
-                仮算定通知書情報, 編集後宛先,
-                認証者, is公印に掛ける, is公印を省略, info);
-    }
 
-    private int publish特徴開始通知書_その他(KarisanteiBatchEntity 出力帳票一覧Entity,
-            KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
-            KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
-            EditedAtesaki 編集後宛先, Ninshosha 認証者, boolean is公印に掛ける,
-            boolean is公印を省略, ICheckListInfo info) {
-        if (ReportIdDBB.DBB100008.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
+        } else if (ReportIdDBB.DBB100008.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
 
             CheckListLineItemSet pairs = CheckListLineItemSet.
                     of(PrintTsuchishoProcess.特定項目5.class,
@@ -507,6 +451,91 @@ public class PrintTsuchishoProcess extends BatchProcessBase<TsuchishoDataTempEnt
                     .reportId(processParameter.get出力帳票一覧Entity().get帳票ID())
                     .build();
             dbb100008ReportSourceWriter = new ReportSourceWriter<>(dbb100008reportWriter);
+
+        } else if (ReportIdDBB.DBB100009.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
+
+            CheckListLineItemSet pairs = CheckListLineItemSet.
+                    of(PrintTsuchishoProcess.特定項目6.class,
+                            PrintTsuchishoProcess.チェック項目6.class);
+            dbb100009reportWriter = BatchWriters
+                    .batchReportWriterWithCheckList(TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource.class)
+                    .checkListInfo(info)
+                    .checkListLineItemSet(pairs)
+                    .reportId(processParameter.get出力帳票一覧Entity().get帳票ID())
+                    .build();
+            dbb100009ReportSourceWriter = new ReportSourceWriter<>(dbb100009reportWriter);
+
+        }
+
+    }
+
+    private int publish特徴開始通知書(KarisanteiBatchEntity 出力帳票一覧Entity,
+            KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
+            RString 宛名連番, KariSanteiTsuchiShoKyotsu 仮算定通知書情報) {
+
+        boolean is公印に掛ける = false;
+        boolean is公印を省略 = false;
+        if (帳票制御共通 != null && 定値_1.equals(帳票制御共通.get首長名印字位置())) {
+            is公印に掛ける = true;
+        }
+        if (帳票制御共通 != null && !帳票制御共通.is電子公印印字有無()) {
+            is公印を省略 = true;
+        }
+        EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
+                仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
+        if (ReportIdDBB.DBB100003.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
+            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                    認証者,
+                    地方公共団体,
+                    dbb100003ReportSourceWriter.getImageFolderPath(),
+                    new RDate(仮算定通知書情報.get発行日().toString()),
+                    is公印に掛ける,
+                    is公印を省略,
+                    KenmeiFuyoKubunType.付与なし).buildSource();
+            new TokubetsuChoshuKaishiTsuchishoKariB5Report(編集後宛先, sourceBuilder,
+                    仮算定特徴開始通知書情報, 宛名連番).writeBy(dbb100003ReportSourceWriter);
+            return dbb100003ReportSourceWriter.pageCount().value();
+        } else if (ReportIdDBB.DBB100004.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
+
+            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                    認証者,
+                    地方公共団体,
+                    dbb100004ReportSourceWriter.getImageFolderPath(),
+                    new RDate(仮算定通知書情報.get発行日().toString()),
+                    is公印に掛ける,
+                    is公印を省略,
+                    KenmeiFuyoKubunType.付与なし).buildSource();
+            new TokubetsuChoshuKaishiTsuchishoKariB5RenchoReport(編集後宛先, sourceBuilder,
+                    仮算定特徴開始通知書情報, 宛名連番).writeBy(dbb100004ReportSourceWriter);
+            return dbb100004ReportSourceWriter.pageCount().value();
+        } else if (ReportIdDBB.DBB100005.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
+
+            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                    認証者,
+                    地方公共団体,
+                    dbb100005ReportSourceWriter.getImageFolderPath(),
+                    new RDate(仮算定通知書情報.get発行日().toString()),
+                    is公印に掛ける,
+                    is公印を省略,
+                    KenmeiFuyoKubunType.付与なし).buildSource();
+            new TokubetsuChoshuKaishiTsuchishoKariSealerReport(編集後宛先, sourceBuilder,
+                    仮算定特徴開始通知書情報).writeBy(dbb100005ReportSourceWriter);
+            return dbb100005ReportSourceWriter.pageCount().value();
+        } else if (ReportIdDBB.DBB100006.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
+
+            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                    認証者,
+                    地方公共団体,
+                    dbb100006ReportSourceWriter.getImageFolderPath(),
+                    new RDate(仮算定通知書情報.get発行日().toString()),
+                    is公印に掛ける,
+                    is公印を省略,
+                    KenmeiFuyoKubunType.付与なし).buildSource();
+            new TokubetsuChoshuKaishiTsuchishoKariSealerRenchoReport(編集後宛先, sourceBuilder,
+                    仮算定特徴開始通知書情報).writeBy(dbb100006ReportSourceWriter);
+            return dbb100006ReportSourceWriter.pageCount().value();
+        } else if (ReportIdDBB.DBB100008.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
+
             NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
                     認証者,
                     地方公共団体,
@@ -520,20 +549,9 @@ public class PrintTsuchishoProcess extends BatchProcessBase<TsuchishoDataTempEnt
             CompKaigoToiawasesakiSource toiawasesakiSource = 介護問合せ先ソースビルダー.buildSource();
             new TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateReport(編集後宛先, sourceBuilder, toiawasesakiSource,
                     仮算定特徴開始通知書情報, 通知書定型文1).writeBy(dbb100008ReportSourceWriter);
-            dbb100008reportWriter.close();
             return dbb100008ReportSourceWriter.pageCount().value();
         } else if (ReportIdDBB.DBB100009.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
 
-            CheckListLineItemSet pairs = CheckListLineItemSet.
-                    of(PrintTsuchishoProcess.特定項目6.class,
-                            PrintTsuchishoProcess.チェック項目6.class);
-            dbb100009reportWriter = BatchWriters
-                    .batchReportWriterWithCheckList(TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource.class)
-                    .checkListInfo(info)
-                    .checkListLineItemSet(pairs)
-                    .reportId(processParameter.get出力帳票一覧Entity().get帳票ID())
-                    .build();
-            dbb100009ReportSourceWriter = new ReportSourceWriter<>(dbb100009reportWriter);
             NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
                     認証者,
                     地方公共団体,
@@ -548,10 +566,32 @@ public class PrintTsuchishoProcess extends BatchProcessBase<TsuchishoDataTempEnt
             new TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoReport(編集後宛先, sourceBuilder, toiawasesakiSource,
                     仮算定特徴開始通知書情報, 通知書定型文1, 通知書定型文2)
                     .writeBy(dbb100009ReportSourceWriter);
-            dbb100009reportWriter.close();
             return dbb100009ReportSourceWriter.pageCount().value();
         }
         return 0;
+
+    }
+
+    private void colseWriter() {
+        if (ReportIdDBB.DBB100003.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
+            dbb100003reportWriter.close();
+
+        } else if (ReportIdDBB.DBB100004.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
+
+            dbb100004reportWriter.close();
+        } else if (ReportIdDBB.DBB100005.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
+
+            dbb100005reportWriter.close();
+        } else if (ReportIdDBB.DBB100006.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
+
+            dbb100006reportWriter.close();
+        } else if (ReportIdDBB.DBB100008.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
+
+            dbb100008reportWriter.close();
+        } else if (ReportIdDBB.DBB100009.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
+
+            dbb100009reportWriter.close();
+        }
 
     }
 
@@ -897,7 +937,7 @@ public class PrintTsuchishoProcess extends BatchProcessBase<TsuchishoDataTempEnt
             if (i <= INT_5) {
                 出力順項目List.add(setSortItem.get項目名());
                 if (setSortItem.is改頁項目()) {
-                    改ページ項目List.add(setSortItem.get項目名());
+                    改ページ項目List.add(setSortItem.get項目ID());
                 }
             }
             i = i + INT_1;
