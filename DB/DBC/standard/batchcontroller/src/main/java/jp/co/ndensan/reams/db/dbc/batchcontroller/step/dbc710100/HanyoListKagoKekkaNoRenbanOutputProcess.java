@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710100.HanyoListKagoK
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc710100.HanyoListKagoKekkaNoRebanCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710100.HanyoListKagoKekkaEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -210,7 +211,7 @@ public class HanyoListKagoKekkaNoRenbanOutputProcess extends BatchProcessBase<Ha
             }
             抽出条件.add(temp);
         }
-        if (parameter.get事業者コード() != null) {
+        if (parameter.get事業者コード() != null && parameter.get事業者コード() != JigyoshaNo.EMPTY) {
             抽出条件.add(TITLE_事業者.concat(括弧LEFT).concat(parameter.get事業者コード().getColumnValue()).
                     concat(括弧RIGHT).concat(parameter.get事業者名()));
         }
