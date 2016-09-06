@@ -88,7 +88,7 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
     public void initialize() {
         作成条件受取年月();
         div.getRadKetteibiIkkatsuKoshinKBN().setSelectedKey(KEY_0);
-        div.getTxtKetteiymd().setDisabled(true);
+        決定日一括更新区分();
         div.getDdlInsho().setSelectedKey(KEY_0);
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, 高額合算決定通知書);
         RString 支払予定日印字有無 = get支払予定日印字有無();
@@ -116,10 +116,10 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
             最新受取年月 = 国保連インターフェース管理.get処理年月();
         }
         市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
-        RString 処理名 = new RString(ShoriName.高額合算自己負担額計算登録.toString());
+        RString 処理名 = ShoriName.高額合算自己負担額計算登録.get名称();
         RString 処理枝番 = NUM_0001;
         FlexibleYear 年度 = new ShoriDateKanriManager().select最大年度().get年度();
-        RString 年度内連番 = new ShoriDateKanriManager().select最大年度内連番().get年度内連番();
+        RString 年度内連番 = new ShoriDateKanriManager().select最大年度の最大年度内連番(年度).get年度内連番();
         ShoriDateKanri 処理日付管理マスタ = new ShoriDateKanriManager().get処理日付管理マスタ(SubGyomuCode.DBC介護給付,
                 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
         if (!(処理日付管理マスタ == null)) {
@@ -156,6 +156,8 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         div.getRadShinseiYMD().setRequired(false);
         div.getLblZenkaiHizuke().setText(前回対象年月);
         div.getTxtUketoriYM().setVisible(true);
+        div.getTxtZenkaiKaishiYMD().clearValue();
+        div.getTxtZenkaiShuryoYMD().clearValue();
         if (!(前回受取年月 == null || 前回受取年月.isEmpty())) {
             div.getTxtZenkaiKaishiYMD().setYmdKubunEnum(YmdKubun.年月);
             div.getTxtZenkaiKaishiYMD().setValue(new RDate(前回受取年月.toString()));
@@ -186,6 +188,8 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         div.getRadShinseiYMD().setRequired(true);
         div.getLblZenkaiHizuke().setText(前回対象日);
         div.getTxtZenkaiKaishiYMD().setYmdKubunEnum(YmdKubun.年月日);
+        div.getTxtZenkaiKaishiYMD().clearValue();
+        div.getTxtZenkaiShuryoYMD().clearValue();
         if (前回申請年月開始 == null || 前回申請年月開始.isEmpty()) {
             div.getTxtZenkaiKaishiYMD().setValue(null);
         } else {
@@ -224,6 +228,8 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         div.getRadKetteiYMD().setRequired(true);
         div.getRadShinseiYMD().setRequired(false);
         div.getLblZenkaiHizuke().setText(前回対象日);
+        div.getTxtZenkaiKaishiYMD().clearValue();
+        div.getTxtZenkaiShuryoYMD().clearValue();
         div.getTxtZenkaiKaishiYMD().setYmdKubunEnum(YmdKubun.年月日);
         if (前回決定年月開始 == null || 前回決定年月開始.isEmpty()) {
             div.getTxtZenkaiKaishiYMD().setValue(null);
