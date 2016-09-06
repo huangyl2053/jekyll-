@@ -5,11 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shoukanbaraishikyuketteitsuchisho;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shoukanbaraishikyuketteitsuchisho.ShoukanbaraiShikyuKetteiTsuchishoParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakugassanshikyuketteitsuchisho.KozaJyohoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shoukanbaraishikyuketteitsuchisho.HihokenshaJyohoTaishoPSMFuka;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shoukanbaraishikyuketteitsuchisho.KozaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shoukanbaraishikyuketteitsuchisho.ShoukanbaraiShikyuEntity;
 
 /**
@@ -20,18 +17,10 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shoukanbaraishikyuketteitsuch
 public interface IShoukanbaraiShikyuKetteiTsuchishoMapper {
 
     /**
-     * 口座情報取得です。
-     *
-     * @param param param
-     * @return {@link List<KozaEntity>}
-     */
-    List<KozaEntity> getKozaJyoho(ShoukanbaraiShikyuKetteiTsuchishoParameter param);
-
-    /**
      * 償還払支給情報取得です。
      *
      * @param param param
-     * @return {@link List<KozaJyohoEntity>}
+     * @return {@link ShoukanbaraiShikyuEntity}
      */
     ShoukanbaraiShikyuEntity select償還払支給(ShoukanbaraiShikyuKetteiTsuchishoParameter param);
 

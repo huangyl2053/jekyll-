@@ -112,6 +112,9 @@ public class NoufuGakuDataSakuseiHandler {
                 適用基準日, SubGyomuCode.DBB介護賦課);
         RString 抽出期間開始補正 = DbBusinessConfig.get(ConfigNameDBB.納付額データ_抽出期間補正,
                 適用基準日.plusYear(SUBCONTRACT_1), SubGyomuCode.DBB介護賦課);
+        抽出条件Row.setTxtCityCode(市町村セキュリティ情報.get市町村情報().get市町村コード().getColumnValue());
+        抽出条件Row.setTxtCityName(市町村セキュリティ情報.get市町村情報().get市町村名称());
+        抽出条件Row.setTxtCityShikibetsuId(市町村セキュリティ情報.get市町村情報().get市町村識別ID());
         抽出条件Row.getTxtKikanStHosei().setValue(抽出期間開始補正);
         抽出条件Row.getTxtKikanEdHosei().setValue(抽出期間終了補正);
         RString 処理枝番 = new RString(STR_00.toString() + 市町村セキュリティ情報.get市町村情報().get市町村識別ID().toString());
@@ -280,7 +283,7 @@ public class NoufuGakuDataSakuseiHandler {
     public void 単一コンフィグ保存() {
         List<dgTanitsuShoriJoken_Row> 抽出条件Rows = div.getChushutsuKikan().getDgTanitsuShoriJoken().getDataSource();
         RString 抽出終了補正 = 抽出条件Rows.get(0).getTxtKikanEdHosei().getValue();
-        RString 市町村コード = new RString(STR_00 + 抽出条件Rows.get(0).getTxtCityCode().toString());
+        RString 市町村コード = new RString(STR_00 + 抽出条件Rows.get(0).getTxtCityShikibetsuId().toString());
         BusinessConfig.update(ConfigNameDBB.納付額データ_抽出期間補正, 抽出終了補正,
                 変更理由, 市町村コード, RDate.getNowDate());
     }
@@ -300,7 +303,7 @@ public class NoufuGakuDataSakuseiHandler {
         }
         if (処理対象 != null) {
             RString 抽出終了補正 = 処理対象.getTxtKikanEdHosei().getValue();
-            RString 市町村コード = new RString(STR_00 + 処理対象.getTxtCityCode().toString());
+            RString 市町村コード = new RString(STR_00 + 処理対象.getTxtCityShikibetsuId().toString());
             BusinessConfig.update(ConfigNameDBB.納付額データ_抽出期間補正, 抽出終了補正,
                     変更理由, 市町村コード, RDate.getNowDate());
         }

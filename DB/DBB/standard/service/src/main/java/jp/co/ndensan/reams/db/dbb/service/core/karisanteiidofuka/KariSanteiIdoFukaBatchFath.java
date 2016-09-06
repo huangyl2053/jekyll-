@@ -672,16 +672,16 @@ public class KariSanteiIdoFukaBatchFath {
     }
 
     private void 調定事由編集(KarisanteiIdoKekkaIchiranCSVEntity entity, KeisanjohoAtenaKozaKouseizengoEntity 更正前後Entity) {
-        if (更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由1() != null) {
+        if (!RString.isNullOrEmpty(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由1())) {
             entity.set調定事由1(ChoteiJiyuCode.toValue(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由1()).get名称());
         }
-        if (更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由2() != null) {
+        if (!RString.isNullOrEmpty(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由2())) {
             entity.set調定事由2(ChoteiJiyuCode.toValue(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由2()).get名称());
         }
-        if (更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由3() != null) {
+        if (!RString.isNullOrEmpty(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由3())) {
             entity.set調定事由3(ChoteiJiyuCode.toValue(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由3()).get名称());
         }
-        if (更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由4() != null) {
+        if (!RString.isNullOrEmpty(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由4())) {
             entity.set調定事由4(ChoteiJiyuCode.toValue(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由4()).get名称());
         }
     }
