@@ -92,7 +92,6 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
     @Override
     protected void initialize() {
         //TODO  QA1397 出力順の補正
-        parameter.toMybatisParameter();
         構成市町村マスタ = new HashMap<>();
         連番 = 0;
         csv出力Flag = 定数_なし;
