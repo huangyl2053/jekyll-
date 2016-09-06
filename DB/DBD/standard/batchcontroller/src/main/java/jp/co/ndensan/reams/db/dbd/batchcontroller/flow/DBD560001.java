@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd560001;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd560001.NinteidetaikkatsukousinKoukiProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd560001.NinteidetaikkatsukousinTanitsuProcess;
@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSe
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定データ一括更新のバッチフロークラスです。
@@ -24,14 +25,18 @@ public class DBD560001 extends BatchFlowBase<DBD560001Parameter> {
 
     private static final String 導入形態コードは211場合 = "update認定データ一括211場合";
     private static final String 導入形態コードは220以外の場合 = "update認定データ一括220以外の場合";
+    private RString code;
+
+    @Override
+    protected void initialize() {
+        code = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定).get導入形態コード().value();
+    }
 
     @Override
     protected void defineFlow() {
-        if (ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定).get導入形態コード().value().
-                equals(DonyuKeitaiCode.認定広域.getCode())) {
+        if (DonyuKeitaiCode.認定広域.getCode().equals(code)) {
             executeStep(導入形態コードは211場合);
-        } else if (ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定).get導入形態コード().value().
-                equals(DonyuKeitaiCode.認定単一.getCode())) {
+        } else if (DonyuKeitaiCode.認定単一.getCode().equals(code)) {
             executeStep(導入形態コードは220以外の場合);
         }
     }
