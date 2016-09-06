@@ -38,6 +38,7 @@ public class HanyoListKogakuGassanKeisanProcessParameter implements IBatchProces
     private LasdecCode 保険者コード;
     private Long 出力順;
     private RString 出力項目;
+    private RString 介護合算_仮算定データ;
 
     /**
      * コンストラクタです
@@ -116,6 +117,7 @@ public class HanyoListKogakuGassanKeisanProcessParameter implements IBatchProces
                 日付スラッシュ付加,
                 保険者コード,
                 出力順,
-                出力項目);
+                出力項目,
+                介護合算_仮算定データ);
     }
 }

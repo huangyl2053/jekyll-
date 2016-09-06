@@ -38,6 +38,7 @@ public class HanyoListKogakuGassanKeisanMybatisParameter
     private final LasdecCode 保険者コード;
     private final Long 出力順;
     private final RString 出力項目;
+    private final RString 介護合算_仮算定データ;
 
     /**
      *
@@ -57,6 +58,7 @@ public class HanyoListKogakuGassanKeisanMybatisParameter
      * @param 保険者コード LasdecCode
      * @param 出力順 Long
      * @param 出力項目 RString
+     * @param 介護合算_仮算定データ RString
      */
     public HanyoListKogakuGassanKeisanMybatisParameter(
             RString 抽出区分,
@@ -72,7 +74,8 @@ public class HanyoListKogakuGassanKeisanMybatisParameter
             boolean 日付スラッシュ付加,
             LasdecCode 保険者コード,
             Long 出力順,
-            RString 出力項目
+            RString 出力項目,
+            RString 介護合算_仮算定データ
     ) {
         this.抽出区分 = 抽出区分;
         this.データ区分 = データ区分;
@@ -88,5 +91,6 @@ public class HanyoListKogakuGassanKeisanMybatisParameter
         this.保険者コード = 保険者コード;
         this.出力順 = 出力順;
         this.出力項目 = 出力項目;
+        this.介護合算_仮算定データ = 介護合算_仮算定データ;
     }
 }
