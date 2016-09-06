@@ -74,6 +74,7 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
     private static final Integer INDEX_1 = 1;
     private static final Integer INDEX_2 = 2;
     private static final RString レコード種別 = new RString("1");
+    private final RString エンドレコード種別 = new RString("3");
     private static final RString KEY_分離文字 = new RString("\\");
     private final RString 区切り文字 = new RString(",");
     private int renban;
@@ -141,6 +142,9 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
         csvEntity = null;
         List<RString> data = line.split(区切り文字.toString());
         if (data != null && !data.isEmpty()) {
+            if (エンドレコード種別.equals(data.get(INDEX_0))) {
+                return;
+            }
             if (レコード種別.equals(data.get(INDEX_0))) {
                 controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);
             } else if (交換情報識別番号_37H1.equals(data.get(INDEX_2))) {
