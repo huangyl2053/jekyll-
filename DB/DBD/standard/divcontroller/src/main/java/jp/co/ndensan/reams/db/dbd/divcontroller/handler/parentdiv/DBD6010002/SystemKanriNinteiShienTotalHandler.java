@@ -47,10 +47,9 @@ public class SystemKanriNinteiShienTotalHandler {
         if (!YokaigoInterfaceShurui.厚労省.getコード().equals(iF種類)) {
             if (YokaigoInterfaceShurui.ＢＳＮ.getコード().equals(iF種類) || YokaigoInterfaceShurui.ＦＮＳ.getコード().equals(iF種類)) {
                 div.getSystemKanri().getSystemKanriNinteiShien().getTxtShiboJohoFile().setDisplayNone(false);
+            } else if (YokaigoInterfaceShurui.ＮＥＣ.getコード().equals(iF種類)) {
+                div.getSystemKanri().getSystemKanriNinteiShien().getTxtTennyuShiboFile().setDisplayNone(false);
             }
-//            else if (YokaigoInterfaceShurui.ＮＥＣ.getコード().equals(iF種類)) {
-//            div.getSystemKanri().getSystemKanriNinteiShien().getTxtShiboJohoFile().setDisplayNone(true);
-//            }
         } else {
             div.getSystemKanri().getSystemKanriNinteiShien().getDdlShujiiChosainJohoTorikomi().setDisplayNone(false);
         }
