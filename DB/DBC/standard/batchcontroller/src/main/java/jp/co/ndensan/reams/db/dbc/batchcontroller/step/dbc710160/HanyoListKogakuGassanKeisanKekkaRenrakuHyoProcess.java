@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Shotok
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ChushutsuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_DataKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_DataShubetsu;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_KarisanteiData;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassan.HanyoListKogakuGassanKeisanProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hanyolistkogakugassan.HanyoListKogakuGassanKeisanCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
@@ -181,6 +182,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
 
     @Override
     protected IBatchReader createReader() {
+        parameter.set介護合算_仮算定データ(Kaigogassan_KarisanteiData.仮算定データ.getコード());
         return new BatchDbReader(READ_DATA_ID, parameter.toMybatisParam());
     }
 
