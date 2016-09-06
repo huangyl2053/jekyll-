@@ -129,10 +129,10 @@
         </if>
         <if test="データ種類!=null and !データ種類.isEmpty()">
             <if test="データ種類 == 1">
-            AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."kekkaRenrakusakiYubinNo" <![CDATA[<>]]> '1'
+            AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."kekkaRenrakusakiYubinNo" <![CDATA[<>]]> #{介護合算_仮算定データ}
             </if>
             <if test="データ種類 == 2">
-            AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."kekkaRenrakusakiYubinNo" = '2'
+            AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."kekkaRenrakusakiYubinNo" = #{介護合算_仮算定データ}
             </if>
         </if>
         <if test="対象年度!=null and !対象年度.isEmpty()">
