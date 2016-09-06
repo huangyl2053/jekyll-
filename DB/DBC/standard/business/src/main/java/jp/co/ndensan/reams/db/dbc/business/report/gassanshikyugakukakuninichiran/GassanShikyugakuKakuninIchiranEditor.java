@@ -37,8 +37,9 @@ public class GassanShikyugakuKakuninIchiranEditor implements
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
+    private static final RString 日時作成 = new RString("作成");
+    private static final RString 接続文字 = new RString("～");
     private final KogakuGassanShikyugakuKeisanKekkaIn entity;
-    private static final RString 作成 = new RString("作成");
 
     /**
      * コンストラクタです
@@ -59,29 +60,26 @@ public class GassanShikyugakuKakuninIchiranEditor implements
                 firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         source.hokenshaNo = entity.get保険者番号();
         source.hokenshaName = entity.get保険者名();
-        source.shutsuryokujun1 = entity.get並び順リスト().get(NUM_0);
-        source.shutsuryokujun2 = entity.get並び順リスト().get(NUM_1);
-        source.shutsuryokujun3 = entity.get並び順リスト().get(NUM_2);
-        source.shutsuryokujun4 = entity.get並び順リスト().get(NUM_3);
-        source.shutsuryokujun5 = entity.get並び順リスト().get(NUM_4);
-        source.kaipage1 = entity.get改頁リスト().get(NUM_0);
-        source.kaipage2 = entity.get改頁リスト().get(NUM_1);
-        source.kaipage3 = entity.get改頁リスト().get(NUM_2);
-        source.kaipage4 = entity.get改頁リスト().get(NUM_3);
-        source.kaipage5 = entity.get改頁リスト().get(NUM_4);
+        source.shutsuryokujun1 = get並び順(NUM_0);
+        source.shutsuryokujun2 = get並び順(NUM_1);
+        source.shutsuryokujun3 = get並び順(NUM_2);
+        source.shutsuryokujun4 = get並び順(NUM_3);
+        source.shutsuryokujun5 = get並び順(NUM_4);
+        source.kaipage1 = get改頁(NUM_0);
+        source.kaipage2 = get改頁(NUM_1);
+        source.kaipage3 = get改頁(NUM_2);
+        source.kaipage4 = get改頁(NUM_3);
+        source.kaipage5 = get改頁(NUM_4);
         source.listUpper_1 = new RString(entity.get連番());
         source.listUpper_2 = 計算結果entity.getTaishoNendo().wareki().firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString();
         source.listUpper_3 = entity.get帳票用データ().get被保険者entity().getHihokenshaNo().value();
         source.listLower_1 = entity.get帳票用データ().get被保険者entity().getMeisho();
         source.listUpper_4 = 計算結果entity.getShikyuShinseishoSeiriNo();
-
-        if (計算結果entity.getJikoFutanSeiriNo() != null) {
-            source.listLower_2 = 計算結果entity.getJikoFutanSeiriNo();
-        }
+        source.listLower_2 = 計算結果entity.getJikoFutanSeiriNo();
 
         FlexibleDate kaishiYMD = 計算結果entity.getTaishoKeisanKaishiYMD();
         FlexibleDate shuryoYMD = 計算結果entity.getTaishoKeisanShuryoYMD();
-        if (kaishiYMD != null && shuryoYMD != null) {
+        if (shuryoYMD != null && !shuryoYMD.isEmpty()) {
             source.listUpper_5 = getlistUpper_5(kaishiYMD, shuryoYMD);
         }
 
@@ -147,7 +145,7 @@ public class GassanShikyugakuKakuninIchiranEditor implements
         sakuseiYMD.append(RString.HALF_SPACE);
         sakuseiYMD.append(datetime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         sakuseiYMD.append(RString.HALF_SPACE);
-        sakuseiYMD.append(作成);
+        sakuseiYMD.append(日時作成);
         return sakuseiYMD.toRString();
     }
 
@@ -159,12 +157,20 @@ public class GassanShikyugakuKakuninIchiranEditor implements
                 eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).fillType(FillType.BLANK).
                 toDateString());
-        sakuseiYMD.append(new RString("～"));
+        sakuseiYMD.append(接続文字);
         sakuseiYMD.append(shuryoYMD.wareki().
                 eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).fillType(FillType.BLANK).
                 toDateString());
 
         return sakuseiYMD.toRString();
+    }
+
+    private RString get改頁(int index) {
+        return index < entity.get改頁リスト().size() ? entity.get改頁リスト().get(index) : RString.EMPTY;
+    }
+
+    private RString get並び順(int index) {
+        return index < entity.get並び順リスト().size() ? entity.get並び順リスト().get(index) : RString.EMPTY;
     }
 }
