@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.JukyushaDaichoManager;
-import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -453,16 +452,15 @@ public class DBC1210011PanelHandler {
             KogakuGassanShikyuFushikyuKettei 高額合算支給不支給決定, ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号,
             RString 支払予定日印字有無) {
         KogakuGassanShikyuKetteiTsuchiParameter parameter = new KogakuGassanShikyuKetteiTsuchiParameter();
-        Koza koza = KougakuGassanShikyuKetteiTsuchi.createInstance().getKozaJyoho(高額合算支給不支給決定.get口座ID());
         ReportId reportId;
         if (RSTRING_0.equals(支払予定日印字有無)) {
             reportId = ReportIdDBC.DBC100053.getReportId();
         } else {
             reportId = ReportIdDBC.DBC100054.getReportId();
         }
-        RString 連絡票整理番号 = div.getDdlRearakuhyoSeiriNO().getSelectedKey();
-        parameter.set対象年度(new FlexibleYear(div.getDdlTaishoNendo().getSelectedKey()));
-        parameter.set履歴番号(Integer.parseInt(div.getDdlRirekiNO().getSelectedKey().toString()));
+        parameter.set口座ID(高額合算支給不支給決定.get口座ID());
+        parameter.set対象年度(高額合算支給不支給決定.get対象年度());
+        parameter.set履歴番号(高額合算支給不支給決定.get履歴番号());
         parameter.set帳票ID(reportId);
         parameter.set支払予定日(div.getTxtShiharaiYoteiYMD().getValue() != null
                 ? new FlexibleDate(div.getTxtShiharaiYoteiYMD().getValue().toDateString()) : FlexibleDate.EMPTY);
@@ -471,9 +469,9 @@ public class DBC1210011PanelHandler {
                 ? new FlexibleDate(div.getTxtHakkouYMD().getValue().toDateString()) : FlexibleDate.EMPTY);
         parameter.set被保険者番号(被保険者番号);
         parameter.set識別コード(識別コード);
-        parameter.set連絡票整理番号(連絡票整理番号);
+        parameter.set連絡票整理番号(高額合算支給不支給決定.get支給申請書整理番号());
         KogakuGassanShikyuKetteiTsuchishoOutputEntity outputEntity = KougakuGassanShikyuKetteiTsuchi.createInstance()
-                .editKougakugassanShikyuketteiTsuuchisho(parameter, koza);
+                .editKougakugassanShikyuketteiTsuuchisho(parameter);
         return outputEntity;
     }
 

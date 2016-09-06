@@ -5,15 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.kougakugassanshikyuketteitsuchi;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanketteitsuchisho.KogakuGassanShikyuKetteiTsuchishoEntity;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanketteitsuchisho.KogakuGassanShikyuKetteiTsuchishoOutputEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakugassanshikyuketteitsuchi.KogakuGassanShikyuKetteiTsuchiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakugassanshikyuketteitsuchi.KougakuGassanShikyuKetteiTsuchiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakugassanshikyuketteitsuchi.KogakuGassanEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakugassanshikyuketteitsuchi.KozaKogakuGassanEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kougakugassanshikyuketteitsuchi.IKougakuGassanShikyuKetteiTsuchiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
@@ -25,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
-import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
@@ -97,40 +93,13 @@ public class KougakuGassanShikyuKetteiTsuchi {
     }
 
     /**
-     * 口座情報取得です。
-     *
-     * @param 口座ID 口座ID
-     * @return {@link Koza}
-     */
-    public Koza getKozaJyoho(long 口座ID) {
-        IShikibetsuTaishoPSMSearchKey searchKey = new ShikibetsuTaishoPSMSearchKeyBuilder(
-                GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先).
-                build();
-        KougakuGassanShikyuKetteiTsuchiParameter param = new KougakuGassanShikyuKetteiTsuchiParameter(searchKey);
-        param.set口座ID(口座ID);
-        IKougakuGassanShikyuKetteiTsuchiMapper mapper = mapperProvider.create(IKougakuGassanShikyuKetteiTsuchiMapper.class);
-        List<KozaKogakuGassanEntity> list = mapper.getKozaJyoho(param);
-        if (list.isEmpty()) {
-            return null;
-        }
-        List<RString> 業務固有キーリスト = new ArrayList<>();
-        業務固有キーリスト.add(list.get(0).get業務固有キー());
-        IKozaManager iKozaManager = KozaService.createKozaManager();
-        IKozaSearchKey iSearchKey = new KozaSearchKeyBuilder().setサブ業務コード(list.get(0).getサブ業務コード())
-                .set業務コード(list.get(0).get業務コード()).set科目コード(list.get(0).get科目コード())
-                .set業務固有キーリスト(業務固有キーリスト).set用途区分(list.get(0).get用途区分()).build();
-        return iKozaManager.get口座(iSearchKey).isEmpty() ? null : iKozaManager.get口座(iSearchKey).get(0);
-    }
-
-    /**
      * 事業高額合算情報取得です。
      *
      * @param kogakuParam KogakuGassanShikyuKetteiTsuchiParameter
-     * @param 口座情報 Koza
      * @return {@link KogakuGassanShikyuKetteiTsuchisho}
      */
     public KogakuGassanShikyuKetteiTsuchishoOutputEntity editKougakugassanShikyuketteiTsuuchisho(
-            KogakuGassanShikyuKetteiTsuchiParameter kogakuParam, Koza 口座情報) {
+            KogakuGassanShikyuKetteiTsuchiParameter kogakuParam) {
         KogakuGassanShikyuKetteiTsuchishoOutputEntity target = new KogakuGassanShikyuKetteiTsuchishoOutputEntity();
         RString データ有無 = データ有無ある;
         IShikibetsuTaishoPSMSearchKey searchKey = new ShikibetsuTaishoPSMSearchKeyBuilder(
@@ -196,7 +165,7 @@ public class KougakuGassanShikyuKetteiTsuchi {
         entity.set文書番号(kogakuParam.get文書番号());
         entity.set発行日(kogakuParam.get発行日());
         entity.set被保険者番号(kogakuParam.get被保険者番号());
-        setKoza(entity, 口座情報, kogakuParam.get識別コード());
+        setKoza(entity, kogakuParam.get口座ID(), kogakuParam.get識別コード());
         set通知文(entity);
         set送付物宛先(entity, kogakuParam.get識別コード());
         target.set高額合算支給決定通知書(entity);
@@ -245,14 +214,14 @@ public class KougakuGassanShikyuKetteiTsuchi {
         return RString.EMPTY;
     }
 
-    private void setKoza(KogakuGassanShikyuKetteiTsuchishoEntity entity, Koza 口座情報, ShikibetsuCode 識別コード) {
-        if (口座情報 == null) {
+    private void setKoza(KogakuGassanShikyuKetteiTsuchishoEntity entity, long 口座ID, ShikibetsuCode 識別コード) {
+        if (String.valueOf(口座ID) == null) {
             return;
         }
         IKoza 口座;
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
         IKozaSearchKey searchKey = new KozaSearchKeyBuilder().setサブ業務コード(SubGyomuCode.DBC介護給付)
-                .set業務コード(GyomuCode.DB介護保険).set識別コード(識別コード).set口座ID(口座情報.get口座ID()).build();
+                .set業務コード(GyomuCode.DB介護保険).set識別コード(識別コード).set口座ID(口座ID).build();
         IKozaManager iKozaManager = KozaService.createKozaManager();
         if (chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票分類ID).is口座マスク有無()) {
             口座 = iKozaManager.getマスク済口座(searchKey).isEmpty() ? null : iKozaManager.getマスク済口座(searchKey).get(0);

@@ -31,5 +31,5 @@ public class KogakuGassanShikyuKetteiTsuchiParameter {
     private RString 文書番号;
     private FlexibleDate 発行日;
     private FlexibleDate 支払予定日;
-
+    private long 口座ID;
 }
