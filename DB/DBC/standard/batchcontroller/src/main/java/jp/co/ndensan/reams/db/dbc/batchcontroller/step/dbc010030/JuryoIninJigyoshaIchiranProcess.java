@@ -12,7 +12,6 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.report.kaigojuryoininkeiyakujigyoshaichirahyo.JuryoIninJigyoshaIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.kaigojuryoininkeiyakujigyoshaichirahyo.JuryoIninJigyoshaIchiranReport;
 import jp.co.ndensan.reams.db.dbc.business.report.kaigojuryoininkeiyakujigyoshaichirahyo.KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC010030.DBC010030_JuryoinbinKeiyakuJigyoshaIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kaigojuryoininkeiyaku.KaigoJuryoininKeiyakuMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.juryoininjigyoshaichiran.JuryoIninJigyoshaIchiranGetIdProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -23,10 +22,12 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
@@ -52,38 +53,34 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJuryoininKeiyakuJigyoshaIchirahyoEntity> {
 
     private JuryoIninJigyoshaIchiranGetIdProcessParameter parameter;
-    private RString 並び順;
-    private boolean データFlag = false;
+    private KaigoJuryoininKeiyakuMybatisParameter 一覧表の取得Parameter;
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kaigojuryoininkeiyaku."
                     + "IKaigoJuryoininKeiyakuMapper.select受領委任契約事業者");
     private static final ReportId 帳票ID = ReportIdDBC.DBC200012.getReportId();
-    private KaigoJuryoininKeiyakuMybatisParameter 一覧表の取得Parameter;
     private static final RString 最小番号 = new RString("0000000000");
     private static final RString 最大番号 = new RString("9999999999");
-    private final RString csv出力有無_なし = new RString("なし");
-    private final RString csvファイル名_なし = new RString("なし");
-    private List<RString> 改頁項目;
-    private Association 地方公共団体;
-    private AtenaMeisho 事業者名称;
-    private List<RString> pageBreakKeys;
-    private Map<RString, RString> 出力順Map;
-    private final RString 契約事業者番号 = new RString("【契約事業者番号␣␣】:");
-    private final RString 契約開始日 = new RString("【契約開始日␣␣␣␣】：");
-    private final RString 契約種別 = new RString("【契約種別␣␣␣␣␣】:");
-    private final RString 契約期間終了事業者 = new RString("【契約期間終了事業者】：");
-    private final RString fugou = new RString("～");
-    private final RString 契約_0 = new RString("0");
-    private final RString 契約_1 = new RString("1");
-    private final RString 契約_2 = new RString("2");
-    private final RString 住宅改修 = new RString("住宅改修");
-    private final RString 福祉用具 = new RString("福祉用具");
-    private final RString sonnzai = new RString("住宅改修/福祉用具");
-    private final RString 事業者を含む = new RString("契約期間終了事業者を含む");
-    private final RString 事業者を含まない = new RString("契約期間終了事業者を含まない");
-    private final RString 事業者のみ = new RString("契約期間終了事業者のみ");
-    private final RString 事業者_0 = new RString("0");
-    private final RString 事業者_1 = new RString("1");
+    private static final RString CSV出力有無_なし = new RString("なし");
+    private static final RString CSVファイル名_なし = new RString("なし");
+    private static final AtenaMeisho 事業者名称 = new AtenaMeisho("＊＊　対象データは存在しません　＊＊");
+    private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
+    private static final RString 契約事業者番号 = new RString("【契約事業者番号␣␣】:");
+    private static final RString 契約開始日 = new RString("【契約開始日␣␣␣␣】：");
+    private static final RString 契約種別 = new RString("【契約種別␣␣␣␣␣】:");
+    private static final RString 契約期間終了事業者 = new RString("【契約期間終了事業者】：");
+    private static final RString FUGOU = new RString("～");
+    private static final RString 契約_0 = new RString("0");
+    private static final RString 契約_1 = new RString("1");
+    private static final RString 契約_2 = new RString("2");
+    private static final RString 全て = new RString("全て");
+    private static final RString 住宅改修 = new RString("住宅改修");
+    private static final RString 福祉用具 = new RString("福祉用具");
+    private static final RString SONNZAI = new RString("住宅改修/福祉用具");
+    private static final RString 事業者を含む = new RString("契約期間終了事業者を含む");
+    private static final RString 事業者を含まない = new RString("契約期間終了事業者を含まない");
+    private static final RString 事業者のみ = new RString("契約期間終了事業者のみ");
+    private static final RString 事業者_0 = new RString("0");
+    private static final RString 事業者_1 = new RString("1");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -94,6 +91,13 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
     private static final RString KEY_並び順の３件目 = new RString("KEY_並び順の３件目");
     private static final RString KEY_並び順の４件目 = new RString("KEY_並び順の４件目");
     private static final RString KEY_並び順の５件目 = new RString("KEY_並び順の５件目");
+
+    private RString 並び順;
+    private boolean データFlag = false;
+    private List<RString> 改頁項目;
+    private Association 地方公共団体;
+    private List<RString> pageBreakKeys;
+    private Map<RString, RString> 出力順Map;
 
     @BatchWriter
     private BatchReportWriter<JuryoIninJigyoshaIchiranSource> batchReportWriter_一覧表;
@@ -106,60 +110,58 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
         出力順Map = new HashMap<>();
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         IOutputOrder 出力順クラス = finder.get出力順(SubGyomuCode.DBC介護給付, 帳票ID, parameter.get帳票出力順ID());
+        if (null == 出力順クラス) {
+            throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
+                    .replace(実行不可MESSAGE.toString()).toString());
+        }
         並び順 = MyBatisOrderByClauseCreator.create(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.class, 出力順クラス);
-        DBC010030_JuryoinbinKeiyakuJigyoshaIchiranParameter ワーク = new DBC010030_JuryoinbinKeiyakuJigyoshaIchiranParameter();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        一覧表の取得Parameter = new KaigoJuryoininKeiyakuMybatisParameter();
         if (RString.isNullOrEmpty(parameter.get契約事業者番号FROM())) {
-            ワーク.set契約事業者番号FROM(最小番号);
+            一覧表の取得Parameter.set契約事業者番号FROM(最小番号);
         } else {
-            ワーク.set契約事業者番号FROM(parameter.get契約事業者番号FROM());
+            一覧表の取得Parameter.set契約事業者番号FROM(parameter.get契約事業者番号FROM());
         }
         if (RString.isNullOrEmpty(parameter.get契約事業者番号TO())) {
-            ワーク.set契約事業者番号TO(最大番号);
+            一覧表の取得Parameter.set契約事業者番号TO(最大番号);
         } else {
-            ワーク.set契約事業者番号TO(parameter.get契約事業者番号TO());
+            一覧表の取得Parameter.set契約事業者番号TO(parameter.get契約事業者番号TO());
         }
         if (parameter.get契約日FROM().isEmpty()) {
-            ワーク.set契約日FROM(FlexibleDate.MIN);
+            一覧表の取得Parameter.set契約日FROM(FlexibleDate.MIN);
         } else {
-            ワーク.set契約日FROM(parameter.get契約日FROM());
+            一覧表の取得Parameter.set契約日FROM(parameter.get契約日FROM());
         }
         if (parameter.get契約日TO().isEmpty()) {
-            ワーク.set契約日TO(FlexibleDate.MAX);
+            一覧表の取得Parameter.set契約日TO(FlexibleDate.MAX);
         } else {
-            ワーク.set契約日TO(parameter.get契約日TO());
+            一覧表の取得Parameter.set契約日TO(parameter.get契約日TO());
         }
-        一覧表の取得Parameter = new KaigoJuryoininKeiyakuMybatisParameter();
-        一覧表の取得Parameter.set契約事業者番号FROM(ワーク.get契約事業者番号FROM());
-        一覧表の取得Parameter.set契約事業者番号TO(ワーク.get契約事業者番号TO());
-        一覧表の取得Parameter.set契約日FROM(ワーク.get契約日FROM());
-        一覧表の取得Parameter.set契約日TO(ワーク.get契約日TO());
+
         一覧表の取得Parameter.set並び順(並び順);
         一覧表の取得Parameter.set契約種別(parameter.get契約種別());
         一覧表の取得Parameter.set契約期間終了事業者(parameter.get契約期間終了事業者());
-        if (null != 出力順クラス) {
-            int i = 0;
-            改頁項目 = new ArrayList();
-            for (ISetSortItem item : 出力順クラス.get設定項目リスト()) {
-                if (item.is改頁項目()) {
-                    改頁項目.add(item.get項目名());
-                    pageBreakKeys.add(item.get項目ID());
-                }
-                if (i == INDEX_0) {
-                    出力順Map.put(KEY_並び順の1件目, item.get項目名());
-                } else if (i == INDEX_1) {
-                    出力順Map.put(KEY_並び順の２件目, item.get項目名());
-                } else if (i == INDEX_2) {
-                    出力順Map.put(KEY_並び順の３件目, item.get項目名());
-                } else if (i == INDEX_3) {
-                    出力順Map.put(KEY_並び順の４件目, item.get項目名());
-                } else if (i == INDEX_4) {
-                    出力順Map.put(KEY_並び順の５件目, item.get項目名());
-                }
-                i = i + 1;
-            }
-        }
 
+        int i = 0;
+        改頁項目 = new ArrayList();
+        for (ISetSortItem item : 出力順クラス.get設定項目リスト()) {
+            if (item.is改頁項目()) {
+                改頁項目.add(item.get項目名());
+                pageBreakKeys.add(item.get項目ID());
+            }
+            if (i == INDEX_0) {
+                出力順Map.put(KEY_並び順の1件目, item.get項目名());
+            } else if (i == INDEX_1) {
+                出力順Map.put(KEY_並び順の２件目, item.get項目名());
+            } else if (i == INDEX_2) {
+                出力順Map.put(KEY_並び順の３件目, item.get項目名());
+            } else if (i == INDEX_3) {
+                出力順Map.put(KEY_並び順の４件目, item.get項目名());
+            } else if (i == INDEX_4) {
+                出力順Map.put(KEY_並び順の５件目, item.get項目名());
+            }
+            i = i + 1;
+        }
     }
 
     @Override
@@ -196,7 +198,6 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
     @Override
     protected void afterExecute() {
         if (!データFlag) {
-            事業者名称 = new AtenaMeisho("＊＊　対象データは存在しません　＊＊");
             KaigoJuryoininKeiyakuJigyoshaIchirahyoEntity entity = new KaigoJuryoininKeiyakuJigyoshaIchirahyoEntity();
             entity.set事業者名称(事業者名称);
             JuryoIninJigyoshaIchiranReport report = new JuryoIninJigyoshaIchiranReport(
@@ -215,8 +216,8 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBC.DBC200012.getReportName(),
                 new RString(reportSourceWriter.getPageGroupCount()),
-                csv出力有無_なし,
-                csvファイル名_なし,
+                CSV出力有無_なし,
+                CSVファイル名_なし,
                 出力条件);
         OutputJokenhyoFactory.createInstance(item).print();
 
@@ -226,11 +227,11 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
         List<RString> 出力条件 = new ArrayList();
         RStringBuilder builder = new RStringBuilder();
         builder.append(契約事業者番号.concat(RString.HALF_SPACE)
-                .concat(parameter.get契約事業者番号FROM()).concat(fugou).concat(parameter.get契約事業者番号TO()));
+                .concat(parameter.get契約事業者番号FROM()).concat(FUGOU).concat(parameter.get契約事業者番号TO()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(契約開始日.concat(RString.HALF_SPACE)
-                .concat(parameter.get契約日FROM().toString().concat(fugou.toString()).concat(parameter.get契約日TO().toString())));
+                .concat(parameter.get契約日FROM().toString().concat(FUGOU.toString()).concat(parameter.get契約日TO().toString())));
         出力条件.add(builder.toRString());
         builder = get契約種別();
         出力条件.add(builder.toRString());
@@ -246,7 +247,7 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
             return builder;
         }
         if (契約_0.equals(parameter.get契約種別())) {
-            builder.append(住宅改修.concat(RString.HALF_SPACE).concat(福祉用具).concat(RString.HALF_SPACE).concat(sonnzai));
+            builder.append(全て);
             return builder;
         } else if (契約_1.equals(parameter.get契約種別())) {
             builder.append(住宅改修);
@@ -255,7 +256,7 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
             builder.append(福祉用具);
             return builder;
         } else {
-            builder.append(sonnzai);
+            builder.append(SONNZAI);
             return builder;
         }
     }
