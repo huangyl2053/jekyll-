@@ -183,7 +183,7 @@ public class HanyoListKagoKekkaCsvEntityEditor {
     }
 
     private void edit_part2(HanyoListKagoKekkaCsvEntity csvEntity) {
-        csvEntity.set取扱年月(entity.get過誤決定明細().getToriatsukaiYM().toDateString());
+        csvEntity.set取扱年月(format日付項目(entity.get過誤決定明細().getToriatsukaiYM()));
         if (entity.get過誤決定明細() != null) {
             if (!RString.isNullOrEmpty(entity.get過誤決定明細().getHokenshaKubun())) {
                 csvEntity.set保険者区分(KagoMoshitateKekka_HokenshaKubun.toValue(entity.get過誤決定明細().getHokenshaKubun()).get名称());
@@ -235,7 +235,8 @@ public class HanyoListKagoKekkaCsvEntityEditor {
             } else {
                 csvEntity.set受給旧措置(RString.EMPTY);
             }
-            if (entity.get受給者台帳().getMinashiCode() != null && (MinashiCode.みなし認定_旧措置入所者.getコード().equals(entity.get受給者台帳().getMinashiCode().getColumnValue())
+            if (entity.get受給者台帳().getMinashiCode() != null && (MinashiCode.みなし認定_旧措置入所者
+                    .getコード().equals(entity.get受給者台帳().getMinashiCode().getColumnValue())
                     || MinashiCode.やむを得ない事由.getコード().equals(entity.get受給者台帳().getMinashiCode().getColumnValue()))) {
                 csvEntity.set受給みなし更新認定(定数_みなし);
             } else {
@@ -348,7 +349,7 @@ public class HanyoListKagoKekkaCsvEntityEditor {
     }
 
     private void noRenbanEdit_part2(HanyoListKagoKekkaNoRebanCsvEntity csvEntity) {
-        csvEntity.set取扱年月(entity.get過誤決定明細().getToriatsukaiYM().toDateString());
+        csvEntity.set取扱年月(format日付項目(entity.get過誤決定明細().getToriatsukaiYM()));
         if (!RString.isNullOrEmpty(entity.get過誤決定明細().getHokenshaKubun())) {
             csvEntity.set保険者区分(KagoMoshitateKekka_HokenshaKubun.toValue(entity.get過誤決定明細().getHokenshaKubun()).get名称());
         }
