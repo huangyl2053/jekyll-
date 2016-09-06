@@ -38,7 +38,6 @@ public class ShokujiHiyoShokaiHandler {
 
     private final ShokujiHiyoShokaiDiv div;
     private final FlexibleYearMonth 提供年月;
-    private final RString 年月;
     private final RString 前 = new RString("前");
     private final RString 後 = new RString("後");
     private final RString 公費１ = new RString("公費１");
@@ -61,7 +60,7 @@ public class ShokujiHiyoShokaiHandler {
      * @param div ShokujiHiyoShokaiDiv
      */
     public ShokujiHiyoShokaiHandler(ShokujiHiyoShokaiDiv div) {
-        this.年月 = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_介護給付費見直し,
+        RString 年月 = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_介護給付費見直し,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).substringEmptyOnError(INT_ZERO, INT_SEX);
         this.提供年月 = new FlexibleYearMonth(年月);
         this.div = div;
