@@ -47,6 +47,7 @@ public class ShokanShikyuKetteiJohoManager {
 
     private final MapperProvider mapperProvider;
     private final RString レコード種別 = new RString("1");
+    private final RString エンドレコード種別 = new RString("3");
     private final RString 帳票レコード種別_H1 = new RString("H1");
     private final RString 帳票レコード種別_D1 = new RString("D1");
     private static final RString カンマ = new RString(",");
@@ -258,6 +259,9 @@ public class ShokanShikyuKetteiJohoManager {
                 while (true) {
                     List<RString> data = csvReader.readLine();
                     if (data != null && !data.isEmpty()) {
+                        if (エンドレコード種別.equals(data.get(INDEX_0))) {
+                            continue;
+                        }
                         if (レコード種別.equals(data.get(INDEX_0))) {
                             controlCsvEntity = ListToObjectMappingHelper.
                                     toObject(ShokanShikyuKetteiJohoControlCsvEntity.class, data);
