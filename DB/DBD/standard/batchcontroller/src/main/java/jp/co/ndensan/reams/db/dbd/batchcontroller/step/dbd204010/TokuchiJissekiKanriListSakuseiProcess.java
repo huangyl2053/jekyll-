@@ -109,8 +109,10 @@ public class TokuchiJissekiKanriListSakuseiProcess extends BatchProcessBase<Toku
     @Override
     protected void process(TokubetsuChiikiKasanKeigenJissekiKanri t) {
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.get宛名());
-        TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport finder = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport(t, 地方公共団体, outputOrder, kojin);
-        finder.writeBy(reportSourceWriter);
+        if (outputOrder != null) {
+            TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport finder = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport(t, 地方公共団体, outputOrder, kojin);
+            finder.writeBy(reportSourceWriter);
+        }
     }
 
     @Override

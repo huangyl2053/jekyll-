@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.shoukanbaraishikyuketteitsuchisho;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.shoukanbaraishikyuketteitsuchisho.KyufuSHurui;
 import jp.co.ndensan.reams.db.dbc.business.core.shoukanbaraishikyuketteitsuchisho.ShoukanbaraiShikyuketteiTsuuchisho;
@@ -18,7 +17,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shoukanbaraishikyuketteitsuchisho.HihokenshaJyohoTaishoPSMFuka;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shoukanbaraishikyuketteitsuchisho.KozaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shoukanbaraishikyuketteitsuchisho.ShoukanbaraiShikyuEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3043ShokanShokujiHiyoDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3045ShokanServicePlan200004Dac;
@@ -33,33 +31,38 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashit
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3053ShokanShukeiDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4024ShiharaiHohoHenkoSashitomeDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
-import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiEditorBuilder;
-import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiSourceBuilder;
-import jp.co.ndensan.reams.ua.uax.business.report.parts.util.atesaki.ReportAtesakiEditor;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.service.core.koza.IKozaManager;
 import jp.co.ndensan.reams.ua.uax.service.core.koza.KozaService;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibun;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunFinder;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -112,15 +115,19 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
     private static final RString その他 = new RString(" その他");
     private static final RString ワークの文言 = new RString(" 滞納保険料への控除が行われました");
     private int 償還計画費データ件数;
+    private int 償還集計データ件数;
     private RString 給付の種類;
     private boolean isFirst;
+    private static final int NUM_17 = 17;
+    private static final int NUM_21 = 21;
     private static final int NUM_38 = 38;
+    private static final int NUM_40 = 40;
     private static final int NUM_76 = 76;
     private static final int NUM_114 = 114;
     private static final RString ゼロ = new RString("0");
     private static final RString 一 = new RString("1");
     private static final RString 二 = new RString("2");
-    private static final ReportId 通知文情報帳票ID = new ReportId("DBC100002_ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashi");
+    private static final ReportId 通知文情報帳票ID = new ReportId("DBC100002_ShokanKetteiTsuchiSho");
     private static final RString 項目名_取り消し線 = new RString("取り消し線");
     private static final RString 項目名_帳票タイトル = new RString("帳票タイトル");
     private static final RString 項目名_ゆうちょ銀行店名表示 = new RString("ゆうちょ銀行店名表示");
@@ -204,35 +211,15 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
     }
 
     /**
-     * 口座情報取得です。
+     * 給付の種類設定です。
      *
-     * @param 口座ID 口座ID
-     * @return {@link Koza}
+     * @param 被保険者番号 被保険者番号
+     * @param 整理番号 整理番号
+     * @param 差額支給対象者区分 差額支給対象者区分
+     * @param サービス提供年月 サービス提供年月
+     *
+     * @return {@link KyufuSHurui}
      */
-    public Koza getKozaJyoho(long 口座ID) {
-        IShikibetsuTaishoPSMSearchKey searchKey = new ShikibetsuTaishoPSMSearchKeyBuilder(
-                GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先).
-                build();
-        ShoukanbaraiShikyuKetteiTsuchishoParameter param = new ShoukanbaraiShikyuKetteiTsuchishoParameter(searchKey);
-        param.set口座ID(口座ID);
-        IShoukanbaraiShikyuKetteiTsuchishoMapper mapper = mapperProvider.create(IShoukanbaraiShikyuKetteiTsuchishoMapper.class);
-        List<KozaEntity> list = mapper.getKozaJyoho(param);
-        if (list.isEmpty()) {
-            return null;
-        }
-        KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
-        List<RString> 業務固有キーリスト = new ArrayList<>();
-        業務固有キーリスト.add(list.get(0).get業務固有キー());
-        builder.setサブ業務コード(list.get(0).getサブ業務コード());
-        builder.set業務コード(list.get(0).get業務コード());
-        builder.set科目コード(list.get(0).get科目コード());
-        builder.set業務固有キーリスト(業務固有キーリスト);
-        builder.set用途区分(list.get(0).get用途区分());
-        builder.set基準日(null);
-        IKozaManager iKozaManager = KozaService.createKozaManager();
-        return iKozaManager.get口座(builder.build()).isEmpty() ? null : iKozaManager.get口座(builder.build()).get(0);
-    }
-
     public KyufuSHurui getKyufuSHurui(HihokenshaNo 被保険者番号, RString 整理番号, FlexibleYearMonth サービス提供年月, RString 差額支給対象者区分) {
         List<DbT7130KaigoServiceShuruiEntity> dbt7130entitys = dbT7130dac.getサービス種類名称List(サービス提供年月);
         List<DbT3053ShokanShukeiEntity> dbt3053entitys = dbT3053dac.get給付の種類(被保険者番号, サービス提供年月, 整理番号);
@@ -240,96 +227,41 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         List<DbT3043ShokanShokujiHiyoEntity> dbt3043entitys = dbT3043dac.select償還払請求食事費用(被保険者番号, サービス提供年月, 整理番号);
         List<DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity> dbt3050entitys = dbT3050dac.select償還払請求特定入所者介護サービス費用(被保険者番号, サービス提供年月, 整理番号);
         償還計画費データ件数 = 0;
-        int 償還集計データ件数 = 0;
+        償還集計データ件数 = 0;
         給付の種類 = RString.EMPTY;
         isFirst = true;
         if (!dbt3053entitys.isEmpty()) {
             for (DbT3053ShokanShukeiEntity entity3053 : dbt3053entitys) {
                 for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
                     if (entity7130.getServiceShuruiCd().equals(entity3053.getServiceShuruiCode())) {
-                        if (isFirst) {
-                            給付の種類 = 給付の種類.concat(entity7130.getServiceShuruiRyakusho());
-                            isFirst = false;
-                            償還集計データ件数++;
-                        } else {
-                            if (給付の種類.indexOf(entity7130.getServiceShuruiRyakusho()) > -1) {
-                                給付の種類 = 給付の種類.concat(間)
-                                        .concat(entity7130.getServiceShuruiRyakusho());
-                                償還集計データ件数++;
-                            }
-                        }
+                        edit給付の種類(entity7130.getServiceShuruiRyakusho());
                     }
                 }
             }
         }
-        if (サービス提供年月.isBefore(new FlexibleYearMonth("200604"))) {
-            List<DbT3045ShokanServicePlan200004Entity> dbt3045entitys = dbT3045dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
-            if (!dbt3045entitys.isEmpty()) {
-                for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
-                    if (entity7130.getServiceShuruiCd().equals(固定)) {
-                        edit給付の種類Total(entity7130.getServiceShuruiRyakusho());
-                    }
-                }
-            }
-        } else if (サービス提供年月.isBefore(new FlexibleYearMonth("200903")) && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)) {
-            List<DbT3046ShokanServicePlan200604Entity> dbt3046entitys = dbT3046dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
-            if (!dbt3046entitys.isEmpty()) {
-                for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
-                    if (entity7130.getServiceShuruiCd().equals(固定)) {
-                        edit給付の種類Total(entity7130.getServiceShuruiRyakusho());
-                    }
-                }
-            }
-        } else {
-            List<DbT3047ShokanServicePlan200904Entity> dbt3047entitys = dbT3047dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
-            if (!dbt3047entitys.isEmpty()) {
-                for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
-                    if (entity7130.getServiceShuruiCd().equals(固定)) {
-                        edit給付の種類Total(entity7130.getServiceShuruiRyakusho());
-                    }
+        edit償還払請求サービス計画検索(dbt7130entitys, 被保険者番号, サービス提供年月, 整理番号);
+        if (!dbt3043entitys.isEmpty()) {
+            for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
+                if (entity7130.getServiceShuruiCd().equals(固定)) {
+                    edit給付種類(entity7130.getServiceShuruiRyakusho());
                 }
             }
         }
-        /* QA 償還払請求食事費用.サービスコードか見つかれません。
-         if (!dbt3043entitys.isEmpty()) {
-         for (DbT3043ShokanShokujiHiyoEntity entity3043 : dbt3043entitys) {
-         for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
-         if (entity7130.getServiceShuruiCd().equals(entity3043)) {
-
-         }
-         }
-         }
-         }*/
         if (!dbt3050entitys.isEmpty()) {
             for (DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity3050 : dbt3050entitys) {
                 for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
                     if (entity7130.getServiceShuruiCd().equals(entity3050.getServiceShuruiCode())) {
-                        if (isFirst) {
-                            給付の種類 = 給付の種類.concat(entity7130.getServiceShuruiRyakusho());
-                            isFirst = false;
-                        } else {
-                            if (給付の種類.indexOf(entity7130.getServiceShuruiRyakusho()) > -1) {
-                                給付の種類 = 給付の種類.concat(間)
-                                        .concat(entity7130.getServiceShuruiRyakusho());
-                            }
-                        }
+                        edit給付種類(entity7130.getServiceShuruiRyakusho());
                     }
                 }
             }
         }
-        if (給付の種類.length() > NUM_114) {
-            給付の種類 = 給付の種類.substring(0, 110);
-            給付の種類.concat(その他);
-        }
         if (給付の種類.length() <= NUM_38) {
             kyufuSHurui.set給付の種類1(給付の種類);
-            kyufuSHurui.set給付の種類2(RString.EMPTY);
-            kyufuSHurui.set給付の種類3(RString.EMPTY);
         } else {
             kyufuSHurui.set給付の種類1(給付の種類.substring(0, NUM_38));
             if (給付の種類.length() <= NUM_76) {
                 kyufuSHurui.set給付の種類2(給付の種類.substring(NUM_38, 給付の種類.length()));
-                kyufuSHurui.set給付の種類3(RString.EMPTY);
             } else {
                 kyufuSHurui.set給付の種類2(給付の種類.substring(NUM_38, NUM_76));
                 kyufuSHurui.set給付の種類3(給付の種類.length() <= NUM_114
@@ -337,108 +269,75 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
             }
         }
         if (差額支給対象者区分.equals(一)) {
-            if (kyufuSHurui.get給付の種類1().isNullOrEmpty()) {
-                kyufuSHurui.set給付の種類1(ワークの文言);
-            }
-            if (kyufuSHurui.get給付の種類2().isNullOrEmpty()) {
-                if (kyufuSHurui.get給付の種類1().trim().length() <= 21) {
-                    kyufuSHurui.get給付の種類1().trim().concat(ワークの文言);
-                } else {
-                    kyufuSHurui.set給付の種類2(ワークの文言);
-                }
-            }
-            if (kyufuSHurui.get給付の種類3().isNullOrEmpty()) {
-                if (kyufuSHurui.get給付の種類2().trim().length() <= 21) {
-                    kyufuSHurui.get給付の種類2().trim().concat(ワークの文言);
-                } else {
-                    kyufuSHurui.set給付の種類3(ワークの文言);
-                }
-            }
-            if (!kyufuSHurui.get給付の種類3().isNullOrEmpty()) {
-                if (kyufuSHurui.get給付の種類3().trim().length() <= 21) {
-                    kyufuSHurui.get給付の種類3().trim().concat(ワークの文言);
-                } else {
-                    RString ワーク文言 = その他.concat(ワークの文言);
-                    if (kyufuSHurui.get給付の種類3().trim().indexOf(間) > -1) {
-                        kyufuSHurui.set給付の種類3(ワーク文言);
-                    } else {
-                        int i = 30;
-                        while (i > 17) {
-                            i = kyufuSHurui.get給付の種類3().trim().lastIndexOf(間);
-                            kyufuSHurui.set給付の種類3(kyufuSHurui.get給付の種類3().trim().substring(0, i));
-                        }
-                        kyufuSHurui.get給付の種類3().trim().concat(ワーク文言);
-                    }
-                }
-            }
+            edit出力給付の種類(kyufuSHurui);
         }
         kyufuSHurui.set償還計画費データ件数(償還計画費データ件数);
         kyufuSHurui.set償還集計データ件数(償還集計データ件数);
         return kyufuSHurui;
     }
 
-    private ZougenFushikyuRiyu getZougenFushikyuRiyu(HihokenshaNo 被保険者番号, RString 整理番号, FlexibleYearMonth サービス提供年月, RString 支給不支給決定区分, int 償還計画費データ件数, int 償還集計データ件数) {
+    private ZougenFushikyuRiyu getZougenFushikyuRiyu(HihokenshaNo 被保険者番号, RString 整理番号, FlexibleYearMonth サービス提供年月,
+            RString 支給不支給決定区分, int 償還計画費データ件数, int 償還集計データ件数) {
         ZougenFushikyuRiyu zougenFushikyuRiyu = new ZougenFushikyuRiyu();
         RString 増減_不支給の理由 = RString.EMPTY;
         RString 増減理由 = RString.EMPTY;
         zougenFushikyuRiyu.set増減_不支給の理由1(RString.EMPTY);
         zougenFushikyuRiyu.set増減_不支給の理由2(RString.EMPTY);
         zougenFushikyuRiyu.set増減_不支給の理由3(RString.EMPTY);
-        if (支給不支給決定区分.equals(一)) {
-            if (償還計画費データ件数 > 0) {
-                if (サービス提供年月.isBefore(new FlexibleYearMonth("200604"))) {
-                    List<DbT3045ShokanServicePlan200004Entity> dbt3045entitys = dbT3045dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
-                    増減_不支給の理由 = 増減_不支給の理由.concat(dbt3045entitys.get(0).getZougenRiyu());
-                } else if (サービス提供年月.isBefore(new FlexibleYearMonth("200903")) && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)) {
-                    List<DbT3046ShokanServicePlan200604Entity> dbt3046entitys = dbT3046dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
-                    増減_不支給の理由 = 増減_不支給の理由.concat(dbt3046entitys.get(0).getZougenRiyu());
-                } else {
-                    List<DbT3047ShokanServicePlan200904Entity> dbt3047entitys = dbT3047dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
-                    増減_不支給の理由 = 増減_不支給の理由.concat(dbt3047entitys.get(0).getZougenRiyu());
-                }
-
-                if (償還集計データ件数 > 0) {
-                    List<DbT3053ShokanShukeiEntity> dbt3053entitys = dbT3053dac.select償還払請求集計(被保険者番号, サービス提供年月, 整理番号);
-                    増減理由 = 増減理由.concat(dbt3053entitys.get(0).getZougenRiyu());
-                }
-                if (増減_不支給の理由.isNullOrEmpty()) {
-                    zougenFushikyuRiyu.set増減_不支給の理由1(増減理由);
-                } else if (増減_不支給の理由.length() <= NUM_38) {
-                    zougenFushikyuRiyu.set増減_不支給の理由1(増減_不支給の理由);
-                    zougenFushikyuRiyu.set増減_不支給の理由2(増減理由);
-                } else {
-                    zougenFushikyuRiyu.set増減_不支給の理由1(増減_不支給の理由.substring(0, NUM_38));
-                    zougenFushikyuRiyu.set増減_不支給の理由2(増減_不支給の理由.substring(NUM_38, 増減_不支給の理由.length()));
-                    zougenFushikyuRiyu.set増減_不支給の理由3(増減理由);
-                }
+        if (支給不支給決定区分.equals(一) && 償還計画費データ件数 > 0) {
+            if (サービス提供年月.isBefore(new FlexibleYearMonth("200604"))) {
+                List<DbT3045ShokanServicePlan200004Entity> dbt3045entitys = dbT3045dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+                増減_不支給の理由 = 増減_不支給の理由.concat(dbt3045entitys.get(0).getZougenRiyu());
+            } else if (サービス提供年月.isBefore(new FlexibleYearMonth("200903")) && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)) {
+                List<DbT3046ShokanServicePlan200604Entity> dbt3046entitys = dbT3046dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+                増減_不支給の理由 = 増減_不支給の理由.concat(dbt3046entitys.get(0).getZougenRiyu());
+            } else {
+                List<DbT3047ShokanServicePlan200904Entity> dbt3047entitys = dbT3047dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+                増減_不支給の理由 = 増減_不支給の理由.concat(dbt3047entitys.get(0).getZougenRiyu());
             }
-        } else if (支給不支給決定区分.equals(二)) {
-            if (償還計画費データ件数 > 0) {
-                if (サービス提供年月.isBefore(new FlexibleYearMonth("200604"))) {
-                    List<DbT3045ShokanServicePlan200004Entity> dbt3045entitys = dbT3045dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
-                    増減_不支給の理由 = 増減_不支給の理由.concat(dbt3045entitys.get(0).getFushikyuRiyu());
-                } else if (サービス提供年月.isBefore(new FlexibleYearMonth("200903")) && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)) {
-                    List<DbT3046ShokanServicePlan200604Entity> dbt3046entitys = dbT3046dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
-                    増減_不支給の理由 = 増減_不支給の理由.concat(dbt3046entitys.get(0).getFushikyuRiyu());
-                } else {
-                    List<DbT3047ShokanServicePlan200904Entity> dbt3047entitys = dbT3047dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
-                    増減_不支給の理由 = 増減_不支給の理由.concat(dbt3047entitys.get(0).getFushikyuRiyu());
-                }
-
-                if (償還集計データ件数 > 0) {
-                    List<DbT3053ShokanShukeiEntity> dbt3053entitys = dbT3053dac.select償還払請求集計(被保険者番号, サービス提供年月, 整理番号);
-                    増減理由 = 増減理由.concat(dbt3053entitys.get(0).getHushikyuRiyu());
-                }
-                if (増減_不支給の理由.isNullOrEmpty()) {
-                    zougenFushikyuRiyu.set増減_不支給の理由1(増減理由);
-                } else if (増減_不支給の理由.length() <= NUM_38) {
-                    zougenFushikyuRiyu.set増減_不支給の理由1(増減_不支給の理由);
-                    zougenFushikyuRiyu.set増減_不支給の理由2(増減理由);
-                } else {
-                    zougenFushikyuRiyu.set増減_不支給の理由1(増減_不支給の理由.substring(0, NUM_38));
-                    zougenFushikyuRiyu.set増減_不支給の理由2(増減_不支給の理由.substring(NUM_38, 増減_不支給の理由.length()));
-                    zougenFushikyuRiyu.set増減_不支給の理由3(増減理由);
-                }
+            zougenFushikyuRiyu.set増減_不支給の理由1(増減_不支給の理由.substring(0, NUM_38));
+            zougenFushikyuRiyu.set増減_不支給の理由2(増減_不支給の理由.substring(NUM_38, NUM_40));
+        }
+        if (支給不支給決定区分.equals(一) && 償還集計データ件数 > 0) {
+            List<DbT3053ShokanShukeiEntity> dbt3053entitys = dbT3053dac.select償還払請求集計(被保険者番号, サービス提供年月, 整理番号);
+            増減理由 = 増減理由.concat(dbt3053entitys.get(0).getZougenRiyu());
+            if (増減_不支給の理由.isNullOrEmpty()) {
+                zougenFushikyuRiyu.set増減_不支給の理由1(増減理由);
+            } else if (増減_不支給の理由.length() <= NUM_38) {
+                zougenFushikyuRiyu.set増減_不支給の理由1(増減_不支給の理由);
+                zougenFushikyuRiyu.set増減_不支給の理由2(増減理由);
+            } else {
+                zougenFushikyuRiyu.set増減_不支給の理由1(増減_不支給の理由.substring(0, NUM_38));
+                zougenFushikyuRiyu.set増減_不支給の理由2(増減_不支給の理由.substring(NUM_38, 増減_不支給の理由.length()));
+                zougenFushikyuRiyu.set増減_不支給の理由3(増減理由);
+            }
+        }
+        if (支給不支給決定区分.equals(二) && 償還計画費データ件数 > 0) {
+            if (サービス提供年月.isBefore(new FlexibleYearMonth("200604"))) {
+                List<DbT3045ShokanServicePlan200004Entity> dbt3045entitys = dbT3045dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+                増減_不支給の理由 = 増減_不支給の理由.concat(dbt3045entitys.get(0).getFushikyuRiyu());
+            } else if (サービス提供年月.isBefore(new FlexibleYearMonth("200903")) && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)) {
+                List<DbT3046ShokanServicePlan200604Entity> dbt3046entitys = dbT3046dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+                増減_不支給の理由 = 増減_不支給の理由.concat(dbt3046entitys.get(0).getFushikyuRiyu());
+            } else {
+                List<DbT3047ShokanServicePlan200904Entity> dbt3047entitys = dbT3047dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+                増減_不支給の理由 = 増減_不支給の理由.concat(dbt3047entitys.get(0).getFushikyuRiyu());
+            }
+            zougenFushikyuRiyu.set増減_不支給の理由1(増減_不支給の理由.substring(0, NUM_38));
+            zougenFushikyuRiyu.set増減_不支給の理由2(増減_不支給の理由.substring(NUM_38, NUM_40));
+        }
+        if (支給不支給決定区分.equals(二) && 償還集計データ件数 > 0) {
+            List<DbT3053ShokanShukeiEntity> dbt3053entitys = dbT3053dac.select償還払請求集計(被保険者番号, サービス提供年月, 整理番号);
+            増減理由 = 増減理由.concat(dbt3053entitys.get(0).getHushikyuRiyu());
+            if (増減_不支給の理由.isNullOrEmpty()) {
+                zougenFushikyuRiyu.set増減_不支給の理由1(増減理由);
+            } else if (増減_不支給の理由.length() <= NUM_38) {
+                zougenFushikyuRiyu.set増減_不支給の理由1(増減_不支給の理由);
+                zougenFushikyuRiyu.set増減_不支給の理由2(増減理由);
+            } else {
+                zougenFushikyuRiyu.set増減_不支給の理由1(増減_不支給の理由.substring(0, NUM_38));
+                zougenFushikyuRiyu.set増減_不支給の理由2(増減_不支給の理由.substring(NUM_38, 増減_不支給の理由.length()));
+                zougenFushikyuRiyu.set増減_不支給の理由3(増減理由);
             }
         }
         return zougenFushikyuRiyu;
@@ -456,21 +355,20 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
      * @param 文書番号 文書番号
      * @param 発行日 発行日
      * @param 支払予定日 支払予定日
-     * @param 口座情報 口座情報
-     * @param 支給不支給決定区分
-     * @param 差額支給対象者区分
-     * @return {@link ShoukanbaraiShikyuketteiTsuuchisho}
+     * @param 口座ID 口座ID
+     * @param 支給不支給決定区分 支給不支給決定区分
+     * @param 差額支給対象者区分 差額支給対象者区分
+     * @return {@link ShoukanbaraiShikyuketteiTsuuchishoOutputEntity}
      */
-    public ShoukanbaraiShikyuketteiTsuuchishoOutputEntity editShoukanbaraiShikyuketteiTsuuchisho(ShikibetsuCode 識別コード,
-            HihokenshaNo 被保険者番号, ReportId 帳票ID, FlexibleYearMonth サービス提供年月, RString 整理番号, RString 文書番号,
-            FlexibleDate 発行日, FlexibleDate 支払予定日, Koza 口座情報, RString 支給不支給決定区分, RString 差額支給対象者区分) {
+    public ShoukanbaraiShikyuketteiTsuuchishoOutputEntity editShoukanbaraiShikyuketteiTsuuchisho(
+            ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, ReportId 帳票ID, FlexibleYearMonth サービス提供年月, RString 整理番号,
+            RString 文書番号, FlexibleDate 発行日, FlexibleDate 支払予定日, long 口座ID, RString 支給不支給決定区分, RString 差額支給対象者区分) {
         ShoukanbaraiShikyuketteiTsuuchishoOutputEntity target = new ShoukanbaraiShikyuketteiTsuuchishoOutputEntity();
         RString データ有無 = あり;
         IShikibetsuTaishoPSMSearchKey searchKey = new ShikibetsuTaishoPSMSearchKeyBuilder(
                 GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先).
                 setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード).
-                set基準日(発行日).
-                build();
+                set基準日(発行日).build();
         ShoukanbaraiShikyuKetteiTsuchishoParameter param = new ShoukanbaraiShikyuKetteiTsuchishoParameter(searchKey);
         param.setサービス提供年月(サービス提供年月);
         param.set整理番号(整理番号);
@@ -483,42 +381,13 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
             target.setデータ有無(なし);
             return target;
         }
-
         if (hihokenshaJyohoTaishoPSMFuka != null && hihokenshaJyohoTaishoPSMFuka.getKanjiShimei() != null) {
             entity.set被保険者氏名(hihokenshaJyohoTaishoPSMFuka.getKanjiShimei().getColumnValue());
         }
         ChohyoSeigyoHanyoManager manager = new ChohyoSeigyoHanyoManager();
-        ChohyoSeigyoHanyo 帳票制御汎用_取り消し線
-                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 項目名_取り消し線);
-        ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル
-                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 項目名_帳票タイトル);
-        ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル_抹消線あり１
-                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 項目名_帳票タイトル_抹消線あり１);
-        ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル_抹消線あり２
-                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 項目名_帳票タイトル_抹消線あり２);
-        ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル_抹消線あり３
-                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 項目名_帳票タイトル_抹消線あり３);
-        ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル_抹消線あり４
-                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 項目名_帳票タイトル_抹消線あり４);
         ChohyoSeigyoHanyo 帳票制御汎用_ゆうちょ銀行店名表示
                 = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 項目名_ゆうちょ銀行店名表示);
-        if (ゼロ.equals(帳票制御汎用_取り消し線.get設定値())) {
-            entity.setTitle(帳票制御汎用_帳票タイトル.get設定値());
-        } else if (一.equals(帳票制御汎用_取り消し線.get設定値())) {
-            entity.setTitle2(帳票制御汎用_帳票タイトル_抹消線あり１.get設定値());
-            entity.setTitle24(帳票制御汎用_帳票タイトル_抹消線あり４.get設定値());
-            if (一.equals(shoukanbaraiShikyuEntity.get償還払支給判定結果().getShikyuHushikyuKetteiKubun())) {
-                entity.setTitle221(帳票制御汎用_帳票タイトル_抹消線あり２.get設定値());
-                entity.setTitle222(RString.EMPTY);
-                entity.setTitle231(RString.EMPTY);
-                entity.setTitle232(帳票制御汎用_帳票タイトル_抹消線あり３.get設定値());
-            } else if (ゼロ.equals(shoukanbaraiShikyuEntity.get償還払支給判定結果().getShikyuHushikyuKetteiKubun())) {
-                entity.setTitle221(RString.EMPTY);
-                entity.setTitle222(帳票制御汎用_帳票タイトル_抹消線あり２.get設定値());
-                entity.setTitle231(帳票制御汎用_帳票タイトル_抹消線あり３.get設定値());
-                entity.setTitle232(RString.EMPTY);
-            }
-        }
+        setタイトル(entity, shoukanbaraiShikyuEntity);
         set通知文(entity);
         RString temp_被保険者番号 = 被保険者番号.value();
         temp_被保険者番号 = temp_被保険者番号.padRight(NUM_10);
@@ -548,71 +417,46 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         } else {
             entity.set増減の理由Title(new RString("不支給の理由"));
         }
-        set送付物宛先(entity, 識別コード, 発行日);
-        ZougenFushikyuRiyu zougenFushikyuRiyu = getZougenFushikyuRiyu(被保険者番号, 整理番号, サービス提供年月, 支給不支給決定区分, kyufuSHurui.get償還計画費データ件数(), kyufuSHurui.get償還集計データ件数());
+        set送付物宛先(entity, 識別コード);
+        ZougenFushikyuRiyu zougenFushikyuRiyu = getZougenFushikyuRiyu(被保険者番号, 整理番号, サービス提供年月,
+                支給不支給決定区分, kyufuSHurui.get償還計画費データ件数(), kyufuSHurui.get償還集計データ件数());
         entity.set増減の理由1(zougenFushikyuRiyu.get増減_不支給の理由1());
         entity.set増減の理由2(zougenFushikyuRiyu.get増減_不支給の理由2());
         entity.set増減の理由3(zougenFushikyuRiyu.get増減_不支給の理由3());
-        if (ゼロ.equals(shikyuHushikyuKetteiKubun) || 一.equals(shikyuHushikyuKetteiKubun) && 二.equals(shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiHohoKubunCode())) {
+        if (ゼロ.equals(shikyuHushikyuKetteiKubun) || 一.equals(shikyuHushikyuKetteiKubun)
+                && 二.equals(shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiHohoKubunCode())) {
             entity.setTorikeshi1(HOSHI_14);
-        } else if (ゼロ.equals(shikyuHushikyuKetteiKubun) || 一.equals(shikyuHushikyuKetteiKubun) && 一.equals(shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiHohoKubunCode())) {
+        } else if (ゼロ.equals(shikyuHushikyuKetteiKubun) || 一.equals(shikyuHushikyuKetteiKubun)
+                && 一.equals(shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiHohoKubunCode())) {
             entity.setTorikeshi2(HOSHI_14);
         }
+        setKoza(entity, 口座ID, 識別コード);
         if (一.equals(shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiHohoKubunCode())) {
-
             entity.setMochimono1(manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 帳票制御汎用キー_持ち物内容文言１).get設定値());
             entity.setMochimono2(manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 帳票制御汎用キー_持ち物内容文言２).get設定値());
             entity.setMochimono3(manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 帳票制御汎用キー_持ち物内容文言３).get設定値());
             entity.setShiharaiBasho(shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiBasho());
-
-            FlexibleDate shiharaiKaishiYMD = shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiKaishiYMD();
-            FlexibleDate shiharaiShuryoYMD = shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiShuryoYMD();
-            RString shiharaiKaishiTime = shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiKaishiTime();
-            RString shiharaiShuryoTime = shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiShuryoTime();
-            if (shiharaiKaishiYMD != null) {
-                entity.setShiharaiStartYMD(shiharaiKaishiYMD.wareki().
-                        eraType(EraType.KANJI).
-                        firstYear(FirstYear.GAN_NEN).
-                        separator(Separator.JAPANESE).
-                        fillType(FillType.BLANK).toDateString().concat(KARA));
-            } else if (shiharaiKaishiYMD == null && shiharaiShuryoYMD != null) {
-                entity.setShiharaiStartYMD(KARA.concat(shiharaiShuryoYMD.wareki().
-                        eraType(EraType.KANJI).
-                        firstYear(FirstYear.GAN_NEN).
-                        separator(Separator.JAPANESE).
-                        fillType(FillType.BLANK).toDateString()));
-            }
-            if (shiharaiKaishiYMD != null && shiharaiShuryoYMD != null) {
-                entity.setShiharaiEndYMD(shiharaiShuryoYMD.wareki().
-                        eraType(EraType.KANJI).
-                        firstYear(FirstYear.GAN_NEN).
-                        separator(Separator.JAPANESE).
-                        fillType(FillType.BLANK).toDateString());
-            }
-            entity.setShiharaiStart(set時間(shiharaiKaishiTime));
-            if ((shiharaiKaishiYMD != null || shiharaiShuryoYMD != null) && (shiharaiKaishiTime != null || shiharaiShuryoTime != null)) {
-                entity.setKaraFugo(KARA);
-            }
-            entity.setShiharaiEnd(set時間(shiharaiShuryoTime));
+            edit支払期間(entity, shoukanbaraiShikyuEntity);
         } else if (二.equals(shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiHohoKubunCode())) {
             entity.setTorikeshiMochimono1(HOSHI_14);
             entity.setTorikeshiMochimono2(HOSHI_14);
             entity.setTorikeshiShiharaibasho(HOSHI_14);
             entity.setTorikeshiShiharaikikan(HOSHI_14);
-            entity.setBankName(口座情報.get金融機関().get金融機関名称());
-            if ((!口座情報.get金融機関コード().value().equals(金融機関コード_郵便局)) || (口座情報.get金融機関コード().value().equals(金融機関コード_郵便局) && 一.equals(帳票制御汎用_ゆうちょ銀行店名表示.get設定値()))) {
-                entity.setBranchBankName(口座情報.get支店().get支店名称());
+            entity.setBankName(entity.get口座情報().get金融機関().get金融機関名称());
+            if ((!entity.get口座情報().get金融機関コード().value().equals(金融機関コード_郵便局))
+                    || (entity.get口座情報().get金融機関コード().value().equals(金融機関コード_郵便局) && 一.equals(帳票制御汎用_ゆうちょ銀行店名表示.get設定値()))) {
+                entity.setBranchBankName(entity.get口座情報().get支店().get支店名称());
             }
-            if (金融機関コード_郵便局.equals(口座情報.get金融機関コード().value())) {
+            if (金融機関コード_郵便局.equals(entity.get口座情報().get金融機関コード().value())) {
                 entity.setShumokuTitle(種別タイトル_店番);
-                entity.setKouzaShu(口座情報.get支店コード().value());
+                entity.setKouzaShu(entity.get口座情報().get支店コード().value());
             } else {
                 entity.setShumokuTitle(種別タイトル_口座種別);
-                entity.setKouzaShu(口座情報.get預金種別().get預金種別コード());
+                entity.setKouzaShu(entity.get口座情報().get預金種別().get預金種別名称());
             }
             entity.setBangoTitle(番号タイトル_口座番号);
-            entity.setKouzaNo(口座情報.get口座番号());
-            entity.setKouzaMeigi(口座情報.get口座名義人().value());
+            entity.setKouzaNo(entity.get口座情報().get口座番号());
+            entity.setKouzaMeigi(entity.get口座情報().get口座名義人().value());
         }
         entity.set文書番号(文書番号);
         entity.set発行日(発行日);
@@ -621,53 +465,75 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         target.setデータ有無(データ有無);
         target.set償還払支給決定通知書(entity);
         return target;
-
     }
 
-    public void set送付物宛先(ShoukanbaraiShikyuketteiTsuuchisho entity, ShikibetsuCode 識別コード, FlexibleDate 発行日) {
+    /**
+     * 送付物宛先取得です。
+     *
+     * @param entity ShoukanbaraiShikyuketteiTsuuchisho
+     * @param 識別コード 識別コード
+     *
+     */
+    private void set送付物宛先(ShoukanbaraiShikyuketteiTsuuchisho entity, ShikibetsuCode 識別コード) {
+        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
         AtesakiPSMSearchKeyBuilder builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
         builder.set識別コード(識別コード);
-        builder.set基準日(発行日);
+        builder.set基準日(FlexibleDate.getNowDate());
         builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
-        builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
         IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(builder.build());
-        ReportAtesakiEditor reportAtesakiEditor = new SofubutsuAtesakiEditorBuilder(宛先).build();
-        SofubutsuAtesakiSource 送付物宛先 = new SofubutsuAtesakiSourceBuilder(reportAtesakiEditor).buildSource();
+        ChohyoSeigyoKyotsu 帳票共通情報
+                = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 通知文情報帳票ID);
+        EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(宛先, 地方公共団体, 帳票共通情報);
+        SofubutsuAtesakiSource 送付物宛先 = null;
+        if (編集後宛先 != null && 編集後宛先.getSofubutsuAtesakiSource() != null) {
+            送付物宛先 = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
+        }
+        if (送付物宛先 != null) {
+            送付物宛先.customerBarCode = ReportUtil.getCustomerBarCode(送付物宛先.yubinNo, 送付物宛先.jusho1);
+            entity.setYubinNo(送付物宛先.yubinNo);
+            entity.setGyoseiku2(送付物宛先.gyoseiku);
+            entity.setJusho4(送付物宛先.jusho1);
+            entity.setJushoText(送付物宛先.jushoText);
+            entity.setJusho5(送付物宛先.jusho2);
+            entity.setJusho6(送付物宛先.jusho3);
+            entity.setKatagakiText(送付物宛先.katagakiText);
+            entity.setKatagaki3(送付物宛先.katagaki1);
+            entity.setKatagaki4(送付物宛先.katagaki2);
+            entity.setKatagakiSmall2(送付物宛先.katagakiSmall2);
+            entity.setKatagakiSmall1(送付物宛先.katagakiSmall1);
+            entity.setShimeiSmall2(送付物宛先.shimeiSmall2);
+            entity.setShimeiText(送付物宛先.shimeiText);
+            entity.setMeishoFuyo2(送付物宛先.meishoFuyo2);
+            entity.setShimeiSmall1(送付物宛先.shimeiSmall1);
+            entity.setDainoKubunMei(送付物宛先.dainoKubunMei);
+            entity.setShimei5(送付物宛先.shimei1);
+            entity.setShimei6(送付物宛先.shimei2);
+            entity.setMeishoFuyo1(送付物宛先.meishoFuyo1);
+            entity.setSamabunShimeiText(送付物宛先.samabunShimeiText);
+            entity.setSamaBun2(送付物宛先.samaBun2);
+            entity.setKakkoLeft2(送付物宛先.kakkoLeft2);
+            entity.setSamabunShimei2(送付物宛先.samabunShimei2);
+            entity.setSamabunShimeiSmall2(送付物宛先.samabunShimeiSmall2);
+            entity.setKakkoRight2(送付物宛先.kakkoRight2);
+            entity.setKakkoLeft1(送付物宛先.kakkoLeft1);
+            entity.setSamabunShimei1(送付物宛先.samabunShimei1);
+            entity.setSamaBun1(送付物宛先.samaBun1);
+            entity.setKakkoRight1(送付物宛先.kakkoRight1);
+            entity.setSamabunShimeiSmall1(送付物宛先.samabunShimeiSmall1);
+            entity.setCustomerBarCode(送付物宛先.customerBarCode);
+        }
         entity.set送付物宛先(送付物宛先);
-        entity.setYubinNo(送付物宛先.yubinNo);
-        entity.setGyoseiku2(送付物宛先.gyoseiku);
-        entity.setJusho4(送付物宛先.jusho1);
-        entity.setJushoText(送付物宛先.jushoText);
-        entity.setJusho5(送付物宛先.jusho2);
-        entity.setJusho6(送付物宛先.jusho3);
-        entity.setKatagakiText(送付物宛先.katagakiText);
-        entity.setKatagaki3(送付物宛先.katagaki1);
-        entity.setKatagaki4(送付物宛先.katagaki2);
-        entity.setKatagakiSmall2(送付物宛先.katagakiSmall2);
-        entity.setKatagakiSmall1(送付物宛先.katagakiSmall1);
-        entity.setShimeiSmall2(送付物宛先.shimeiSmall2);
-        entity.setShimeiText(送付物宛先.shimeiText);
-        entity.setMeishoFuyo2(送付物宛先.meishoFuyo2);
-        entity.setShimeiSmall1(送付物宛先.shimeiSmall1);
-        entity.setDainoKubunMei(送付物宛先.dainoKubunMei);
-        entity.setShimei5(送付物宛先.shimei1);
-        entity.setShimei6(送付物宛先.shimei2);
-        entity.setMeishoFuyo1(送付物宛先.meishoFuyo1);
-        entity.setSamabunShimeiText(送付物宛先.samabunShimeiText);
-        entity.setSamaBun2(送付物宛先.samaBun2);
-        entity.setKakkoLeft2(送付物宛先.kakkoLeft2);
-        entity.setSamabunShimei2(送付物宛先.samabunShimei2);
-        entity.setSamabunShimeiSmall2(送付物宛先.samabunShimeiSmall2);
-        entity.setKakkoRight2(送付物宛先.kakkoRight2);
-        entity.setKakkoLeft1(送付物宛先.kakkoLeft1);
-        entity.setSamabunShimei1(送付物宛先.samabunShimei1);
-        entity.setSamaBun1(送付物宛先.samaBun1);
-        entity.setKakkoRight1(送付物宛先.kakkoRight1);
-        entity.setSamabunShimeiSmall1(送付物宛先.samabunShimeiSmall1);
-        entity.setCustomerBarCode(送付物宛先.customerBarCode);
     }
 
+    /**
+     * 通知文文章です。
+     *
+     * @param パターン番号 パターン番号
+     * @param 項目番号 項目番号
+     * @return RString RString
+     *
+     */
     public RString get通知文文章(int パターン番号, int 項目番号) {
         TsuchishoTeikeibunFinder finder = new TsuchishoTeikeibunFinder();
         TsuchishoTeikeibun tsuchishoTeikeibun = finder.get通知書定型文_最新適用開始日(SubGyomuCode.DBC介護給付, 通知文情報帳票ID,
@@ -678,29 +544,138 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         return RString.EMPTY;
     }
 
+    /**
+     * 通知文文章です。
+     *
+     * @param entity ShoukanbaraiShikyuketteiTsuuchisho
+     */
     public void set通知文(ShoukanbaraiShikyuketteiTsuuchisho entity) {
-        entity.set通知文1(get通知文文章(NUM_1, NUM_2));
-        entity.set通知文2(get通知文文章(NUM_1, NUM_3));
-        entity.set通知文3(get通知文文章(NUM_2, NUM_3));
-        entity.set通知文4(get通知文文章(NUM_3, NUM_3));
-        entity.set通知文5(get通知文文章(NUM_3, NUM_4));
-        entity.set通知文6(get通知文文章(NUM_4, NUM_3));
-        entity.set通知文7(get通知文文章(NUM_4, NUM_4));
+        entity.set通知文1(get通知文文章(NUM_1, NUM_1));
+        entity.set通知文2(get通知文文章(NUM_1, NUM_2));
+        entity.set通知文3(get通知文文章(NUM_2, NUM_2));
+        entity.set通知文4(get通知文文章(NUM_3, NUM_2));
+        entity.set通知文5(get通知文文章(NUM_3, NUM_3));
+        entity.set通知文6(get通知文文章(NUM_4, NUM_2));
+        entity.set通知文7(get通知文文章(NUM_4, NUM_3));
     }
 
-    private RString edit給付の種類Total(RString ServiceShuruiRyakusho) {
+    /**
+     * タイトルです。
+     *
+     * @param entity ShoukanbaraiShikyuketteiTsuuchisho
+     * @param shoukanbaraiShikyuEntity ShoukanbaraiShikyuEntity
+     */
+    public void setタイトル(ShoukanbaraiShikyuketteiTsuuchisho entity, ShoukanbaraiShikyuEntity shoukanbaraiShikyuEntity) {
+        ChohyoSeigyoHanyoManager manager = new ChohyoSeigyoHanyoManager();
+        ChohyoSeigyoHanyo 帳票制御汎用_取り消し線
+                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 項目名_取り消し線);
+        ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル
+                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 項目名_帳票タイトル);
+        ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル_抹消線あり１
+                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 項目名_帳票タイトル_抹消線あり１);
+        ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル_抹消線あり２
+                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 項目名_帳票タイトル_抹消線あり２);
+        ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル_抹消線あり３
+                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 項目名_帳票タイトル_抹消線あり３);
+        ChohyoSeigyoHanyo 帳票制御汎用_帳票タイトル_抹消線あり４
+                = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 通知文情報帳票ID, FlexibleYear.MIN, 項目名_帳票タイトル_抹消線あり４);
+        if (ゼロ.equals(帳票制御汎用_取り消し線.get設定値())) {
+            entity.setTitle(帳票制御汎用_帳票タイトル.get設定値());
+        } else if (一.equals(帳票制御汎用_取り消し線.get設定値())) {
+            entity.setTitle2(帳票制御汎用_帳票タイトル_抹消線あり１.get設定値());
+            entity.setTitle24(帳票制御汎用_帳票タイトル_抹消線あり４.get設定値());
+            if (一.equals(shoukanbaraiShikyuEntity.get償還払支給判定結果().getShikyuHushikyuKetteiKubun())) {
+                entity.setTitle221(帳票制御汎用_帳票タイトル_抹消線あり２.get設定値());
+                entity.setTitle222(RString.EMPTY);
+                entity.setTitle231(RString.EMPTY);
+                entity.setTitle232(帳票制御汎用_帳票タイトル_抹消線あり３.get設定値());
+            } else if (ゼロ.equals(shoukanbaraiShikyuEntity.get償還払支給判定結果().getShikyuHushikyuKetteiKubun())) {
+                entity.setTitle221(RString.EMPTY);
+                entity.setTitle222(帳票制御汎用_帳票タイトル_抹消線あり２.get設定値());
+                entity.setTitle231(帳票制御汎用_帳票タイトル_抹消線あり３.get設定値());
+                entity.setTitle232(RString.EMPTY);
+            }
+        }
+    }
+
+    private RString edit給付の種類Total(RString serviceShuruiRyakusho) {
         if (isFirst) {
-            給付の種類 = 給付の種類.concat(ServiceShuruiRyakusho);
+            給付の種類 = 給付の種類.concat(serviceShuruiRyakusho);
             isFirst = false;
             償還計画費データ件数++;
         } else {
-            if (給付の種類.indexOf(ServiceShuruiRyakusho) > -1) {
+            if (給付の種類.indexOf(serviceShuruiRyakusho) > -1) {
                 給付の種類 = 給付の種類.concat(間)
-                        .concat(ServiceShuruiRyakusho);
+                        .concat(serviceShuruiRyakusho);
                 償還計画費データ件数++;
             }
         }
         return 給付の種類;
+    }
+
+    private RString edit給付の種類(RString serviceShuruiRyakusho) {
+        if (isFirst) {
+            給付の種類 = 給付の種類.concat(serviceShuruiRyakusho);
+            isFirst = false;
+            償還集計データ件数++;
+        } else {
+            if (給付の種類.indexOf(serviceShuruiRyakusho) > -1) {
+                給付の種類 = 給付の種類.concat(間)
+                        .concat(serviceShuruiRyakusho);
+                償還集計データ件数++;
+            }
+        }
+        return 給付の種類;
+    }
+
+    private RString edit給付種類(RString serviceShuruiRyakusho) {
+        if (isFirst) {
+            給付の種類 = 給付の種類.concat(serviceShuruiRyakusho);
+            isFirst = false;
+        } else {
+            if (給付の種類.indexOf(serviceShuruiRyakusho) > -1) {
+                給付の種類 = 給付の種類.concat(間)
+                        .concat(serviceShuruiRyakusho);
+            }
+        }
+        return 給付の種類;
+    }
+
+    private void edit出力給付の種類(KyufuSHurui kyufuSHurui) {
+        if (kyufuSHurui.get給付の種類1().isNullOrEmpty()) {
+            kyufuSHurui.set給付の種類1(ワークの文言);
+        }
+        if (kyufuSHurui.get給付の種類2().isNullOrEmpty() && kyufuSHurui.get給付の種類1().trim().length() <= NUM_21) {
+            kyufuSHurui.get給付の種類1().trim().concat(ワークの文言);
+        } else {
+            kyufuSHurui.set給付の種類2(ワークの文言);
+        }
+        if (kyufuSHurui.get給付の種類3().isNullOrEmpty() && kyufuSHurui.get給付の種類2().trim().length() <= NUM_21) {
+            kyufuSHurui.get給付の種類2().trim().concat(ワークの文言);
+        } else {
+            kyufuSHurui.set給付の種類3(ワークの文言);
+        }
+        if (!kyufuSHurui.get給付の種類3().isNullOrEmpty()) {
+            edit出力給付種類(kyufuSHurui);
+        }
+    }
+
+    private void edit出力給付種類(KyufuSHurui kyufuSHurui) {
+        if (kyufuSHurui.get給付の種類3().trim().length() <= NUM_21) {
+            kyufuSHurui.get給付の種類3().trim().concat(ワークの文言);
+        } else {
+            RString ワーク文言 = その他.concat(ワークの文言);
+            if (kyufuSHurui.get給付の種類3().trim().indexOf(間) > -1) {
+                kyufuSHurui.set給付の種類3(ワーク文言);
+            } else {
+                int i = NUM_38;
+                while (i > NUM_17) {
+                    i = kyufuSHurui.get給付の種類3().trim().lastIndexOf(間);
+                    kyufuSHurui.set給付の種類3(kyufuSHurui.get給付の種類3().trim().substring(0, i));
+                }
+                kyufuSHurui.get給付の種類3().trim().concat(ワーク文言);
+            }
+        }
     }
 
     private RString set時間(RString time) {
@@ -719,5 +694,95 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
             時間 = 時間.concat(mm).concat(分);
         }
         return 時間;
+    }
+
+    private void setKoza(ShoukanbaraiShikyuketteiTsuuchisho entity, long 口座ID, ShikibetsuCode 識別コード) {
+        IKoza 口座;
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        IKozaSearchKey searchKey = new KozaSearchKeyBuilder().setサブ業務コード(SubGyomuCode.DBC介護給付)
+                .set業務コード(GyomuCode.DB介護保険).set識別コード(識別コード).set口座ID(口座ID).build();
+        IKozaManager iKozaManager = KozaService.createKozaManager();
+        if (chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, 通知文情報帳票ID).is口座マスク有無()) {
+            口座 = iKozaManager.getマスク済口座(searchKey).isEmpty() ? null : iKozaManager.getマスク済口座(searchKey).get(0);
+        } else {
+            口座 = iKozaManager.get口座(searchKey).isEmpty() ? null : iKozaManager.get口座(searchKey).get(0);
+        }
+        entity.set口座情報(口座);
+    }
+
+    private void edit償還払請求サービス計画検索(List<DbT7130KaigoServiceShuruiEntity> dbt7130entitys, HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月, RString 整理番号) {
+        List<DbT3045ShokanServicePlan200004Entity> dbt3045entitys = dbT3045dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+        List<DbT3046ShokanServicePlan200604Entity> dbt3046entitys = dbT3046dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+        List<DbT3047ShokanServicePlan200904Entity> dbt3047entitys = dbT3047dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+        if (サービス提供年月.isBefore(new FlexibleYearMonth("200604")) && !dbt3045entitys.isEmpty()) {
+            for (DbT3045ShokanServicePlan200004Entity entity3045 : dbt3045entitys) {
+                for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
+                    ServiceCode code = entity3045.getServiceCode();
+                    if (code != null) {
+                        editServiceCode(entity7130, code);
+                    }
+                }
+            }
+        } else if (サービス提供年月.isBefore(new FlexibleYearMonth("200903")) && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)
+                && !dbt3046entitys.isEmpty()) {
+            for (DbT3046ShokanServicePlan200604Entity entity3046 : dbt3046entitys) {
+                for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
+                    ServiceCode code = entity3046.getServiceCode();
+                    if (code != null) {
+                        editServiceCode(entity7130, code);
+                    }
+                }
+            }
+        } else {
+            if (!dbt3047entitys.isEmpty()) {
+                for (DbT3047ShokanServicePlan200904Entity entity3047 : dbt3047entitys) {
+                    for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
+                        ServiceCode code = entity3047.getServiceCode();
+                        if (code != null) {
+                            editServiceCode(entity7130, code);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void editServiceCode(DbT7130KaigoServiceShuruiEntity entity7130, ServiceCode serviceCode) {
+        if (entity7130.getServiceShuruiCd().value().equals(serviceCode.value().substring(NUM_0, NUM_2))) {
+            edit給付の種類Total(entity7130.getServiceShuruiRyakusho());
+        }
+    }
+
+    private void edit支払期間(ShoukanbaraiShikyuketteiTsuuchisho entity, ShoukanbaraiShikyuEntity shoukanbaraiShikyuEntity) {
+        FlexibleDate shiharaiKaishiYMD = shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiKaishiYMD();
+        FlexibleDate shiharaiShuryoYMD = shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiShuryoYMD();
+        RString shiharaiKaishiTime = shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiKaishiTime();
+        RString shiharaiShuryoTime = shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiShuryoTime();
+        if (shiharaiKaishiYMD != null) {
+            entity.setShiharaiStartYMD(shiharaiKaishiYMD.wareki().
+                    eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString().concat(shiharaiKaishiYMD.getDayOfWeek().toString()).concat(KARA));
+        } else if (shiharaiShuryoYMD != null) {
+            entity.setShiharaiStartYMD(KARA.concat(shiharaiShuryoYMD.wareki().
+                    eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString()).concat(shiharaiShuryoYMD.getDayOfWeek().toString()));
+        }
+        if (shiharaiKaishiYMD != null && shiharaiShuryoYMD != null) {
+            entity.setShiharaiEndYMD(shiharaiShuryoYMD.wareki().
+                    eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString().concat(shiharaiShuryoYMD.getDayOfWeek().toString()));
+        }
+        entity.setShiharaiStart(set時間(shiharaiKaishiTime));
+        if ((shiharaiKaishiYMD != null || shiharaiShuryoYMD != null) && (shiharaiKaishiTime != null || shiharaiShuryoTime != null)) {
+            entity.setKaraFugo(KARA);
+        }
+        entity.setShiharaiEnd(set時間(shiharaiShuryoTime));
     }
 }

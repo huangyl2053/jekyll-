@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5720001;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -14,29 +13,24 @@ import jp.co.ndensan.reams.db.dbd.business.core.dbd5720011.JyukyushaDaichoIdoChe
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200037.JukyushaIdoCheckListItem;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200037.JukyushaIdoCheckListProperty.DBD200037_JukyushaIdoCheckListEnum;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200037.JukyushaIdoCheckListReport;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5720001.JyukyushaDaichoIdoCheckListMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5720001.JyukyushaDaichoIdoCheckListProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5720001.JyukyushaDaichoIdoCheckListEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5720001.LowerEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5720001.UpperEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200037.JukyushaIdoCheckListReportSource;
+import jp.co.ndensan.reams.db.dbd.service.report.dbd5720001.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
-import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -49,7 +43,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -57,7 +50,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * バッチ設計_受給者台帳異動チェックリストのprocess処理クラスです。
@@ -100,8 +92,13 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
 
     @Override
     protected IBatchReader createReader() {
-        JyukyushaDaichoIdoCheckListMybatisParameter mybatisPrm = toJyukyushaDaichoIdoCheckListMybatisParameter();
-        return new BatchDbReader(MYBATIS_SELECT_ID, mybatisPrm);
+        ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(
+                GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
+        IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
+        YMDHMS 行挿入日時開始 = new YMDHMS(parameter.get今回抽出開始年月日(), parameter.get今回抽出開始時分秒());
+        YMDHMS 行挿入日時終了 = new YMDHMS(parameter.get今回抽出終了年月日(), parameter.get今回抽出終了時分秒());
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toJyukyushaDaichoIdoCheckListMybatisParameter(
+                shikibetsuTaishoPSMSearchKey, 行挿入日時開始.getRDateTime(), 行挿入日時終了.getRDateTime(), get出力順()));
     }
 
     @Override
@@ -127,7 +124,8 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
 
     @Override
     protected void afterExecute() {
-        outputJokenhyoFactory();
+        OutputJokenhyoFactory outputJokenhyo = new OutputJokenhyoFactory();
+        outputJokenhyo.outputJokenhyoFactory(reportSourceWriter, parameter);
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
                 new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), new RString("申請書管理番号")));
         AccessLogger.log(AccessLogType.照会, personalData);
@@ -203,64 +201,6 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
             改頁5 = 改頁Map.get(INT4);
         }
 
-    }
-
-    private RDateTime get行挿入日時1() {
-        YMDHMS 行挿入日時開始 = new YMDHMS(parameter.get今回抽出開始年月日(), parameter.get今回抽出開始時分秒());
-        return 行挿入日時開始.getRDateTime();
-    }
-
-    private RDateTime get行挿入日時2() {
-        YMDHMS 行挿入日時終了 = new YMDHMS(parameter.get今回抽出終了年月日(), parameter.get今回抽出終了時分秒());
-        return 行挿入日時終了.getRDateTime();
-    }
-
-    private JyukyushaDaichoIdoCheckListMybatisParameter toJyukyushaDaichoIdoCheckListMybatisParameter() {
-        ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(
-                GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
-        IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
-        return new JyukyushaDaichoIdoCheckListMybatisParameter(parameter.get今回抽出開始年月日(),
-                get行挿入日時1(), parameter.get今回抽出終了年月日(), get行挿入日時2(),
-                parameter.get出力対象(), get出力順(), shikibetsuTaishoPSMSearchKey);
-    }
-
-    private void outputJokenhyoFactory() {
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        RString ページ数 = new RString(reportSourceWriter.pageCount().value());
-        ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                REPORT_DBD200037.getColumnValue(),
-                association.getLasdecCode_().getColumnValue(),
-                association.get市町村名(),
-                new RString(String.valueOf(JobContextHolder.getJobId())),
-                ReportIdDBD.DBD200037.getReportName(),
-                ページ数,
-                new RString("無し"),
-                RString.EMPTY,
-                contribute());
-        OutputJokenhyoFactory.createInstance(item).print();
-
-    }
-
-    private List<RString> contribute() {
-        List<RString> 出力条件 = new ArrayList<>();
-
-        if (parameter.get今回抽出開始年月日() != null) {
-            出力条件.add(new RString("【今回抽出開始年月日】　").concat(parameter.get今回抽出開始年月日().wareki().toDateString()));
-        }
-        if (parameter.get今回抽出開始時分秒() != null) {
-            出力条件.add(new RString("【今回抽出開始時分秒】　").concat(parameter.get今回抽出開始時分秒().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
-        }
-        if (parameter.get今回抽出終了年月日() != null) {
-            出力条件.add(new RString("【今回抽出終了年月日】　").concat(parameter.get今回抽出終了年月日().wareki().toDateString()));
-        }
-        if (parameter.get今回抽出終了時分秒() != null) {
-            出力条件.add(new RString("【今回抽出終了時分秒】　").concat(parameter.get今回抽出終了時分秒().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
-        }
-        if (parameter.get出力対象() != null) {
-            出力条件.add(new RString("【出力対象】　").concat(parameter.get出力対象()));
-        }
-
-        return 出力条件;
     }
 
 }

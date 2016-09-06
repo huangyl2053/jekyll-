@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -17,8 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KyuhuJissekiMeisai {
 
-    private RString サービス種類コード;
-    private RString サービス項目コード;
+    private ServiceShuruiCode サービス種類コード;
+    private ServiceKomokuCode サービス項目コード;
     private RString サービス名称;
     private int 単位数;
     private int 日数回数;

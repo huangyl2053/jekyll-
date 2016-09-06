@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kyufuhituchihakkoichiran;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.kyufuhituchihakkoichiran.KyufuhiTuchiHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kyufuhituchihakkoichiran.KyufuhiTuchiHakkoIchiranReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -18,16 +17,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class KyufuhiTuchiHakkoIchiranReport extends Report<KyufuhiTuchiHakkoIchiranReportSource> {
 
-    private final List<KyufuhiTuchiHakkoIchiranEntity> entityList;
+    private final KyufuhiTuchiHakkoIchiranEntity entity;
 
     /**
      * インスタンスを生成します。
      *
-     * @param entityList 給付費通知発行一覧表のITEMリスト
+     * @param entity 給付費通知発行一覧表のITEM
      */
     public KyufuhiTuchiHakkoIchiranReport(
-            List<KyufuhiTuchiHakkoIchiranEntity> entityList) {
-        this.entityList = entityList;
+            KyufuhiTuchiHakkoIchiranEntity entity) {
+        this.entity = entity;
     }
 
     /**
@@ -37,10 +36,8 @@ public class KyufuhiTuchiHakkoIchiranReport extends Report<KyufuhiTuchiHakkoIchi
      */
     @Override
     public void writeBy(ReportSourceWriter<KyufuhiTuchiHakkoIchiranReportSource> reportSourceWriter) {
-        for (KyufuhiTuchiHakkoIchiranEntity entity : entityList) {
-            IKyufuhiTuchiHakkoIchiranEditor editor = new KyufuhiTuchiHakkoIchiranEditor(entity);
-            IKyufuhiTuchiHakkoIchiranBuilder builder = new KyufuhiTuchiHakkoIchiranBuilder(editor);
-            reportSourceWriter.writeLine(builder);
-        }
+        IKyufuhiTuchiHakkoIchiranEditor editor = new KyufuhiTuchiHakkoIchiranEditor(entity);
+        IKyufuhiTuchiHakkoIchiranBuilder builder = new KyufuhiTuchiHakkoIchiranBuilder(editor);
+        reportSourceWriter.writeLine(builder);
     }
 }

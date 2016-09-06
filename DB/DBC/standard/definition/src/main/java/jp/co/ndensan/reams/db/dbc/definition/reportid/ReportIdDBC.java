@@ -433,7 +433,7 @@ public enum ReportIdDBC {
     /**
      * 事業分高額合算支給決定情報
      */
-    DBC7210001(new ReportId("DBC701021_HanyoListJigyoBunKogakuGassanShikyuKettei"), new RString("事業分高額合算支給決定情報")),
+    DBC701021(new ReportId("DBC701021_HanyoListJigyoBunKogakuGassanShikyuKettei"), new RString("事業分高額合算支給決定情報")),
     /**
      * 汎用リスト　高額合算申請書情報帳票ＩＤです。
      */
