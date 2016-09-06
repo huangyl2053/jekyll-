@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
+import jp.co.ndensan.reams.db.dbc.business.core.sogojigyotaishoshatoroku.SogoJigyoTaishoshaToJotai;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3105SogoJigyoTaishoshaDac;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -24,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class SogoJigyoTaishoshaManager {
 
     private final DbT3105SogoJigyoTaishoshaDac dac;
+    private final RString 状態_削除 = new RString("削除");
 
     /**
      * コンストラクタです。
@@ -131,5 +134,45 @@ public class SogoJigyoTaishoshaManager {
             businessList.add(new SogoJigyoTaishosha(entity));
         }
         return businessList;
+    }
+
+    /**
+     * 被保険者番号より、総合事業対象者一覧を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return 総合事業対象者一覧
+     */
+    @Transaction
+    public List<SogoJigyoTaishosha> get総合事業対象者一覧By被保険者番号(
+            HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        List<DbT3105SogoJigyoTaishoshaEntity> entityList
+                = dac.select総合事業対象者一覧By被保険者番号(被保険者番号);
+        List<SogoJigyoTaishosha> 総合事業対象者一覧 = new ArrayList<>();
+        for (DbT3105SogoJigyoTaishoshaEntity entity : entityList) {
+            総合事業対象者一覧.add(new SogoJigyoTaishosha(entity));
+        }
+        return 総合事業対象者一覧;
+    }
+
+    /**
+     * 総合事業対象者一覧を保存します。
+     *
+     * @param 一覧情報 一覧情報
+     */
+    @Transaction
+    public void save総合事業対象者(List<SogoJigyoTaishoshaToJotai> 一覧情報) {
+        requireNonNull(一覧情報, UrSystemErrorMessages.値がnull.getReplacedMessage("一覧情報"));
+
+        for (SogoJigyoTaishoshaToJotai 情報 : 一覧情報) {
+            SogoJigyoTaishosha 総合事業対象者 = 情報.get総合事業対象();
+            if (状態_削除.equals(情報.get状態())) {
+                dac.saveOrDeletePhysicalBy(総合事業対象者.deleted().toEntity());
+            } else {
+                dac.save(総合事業対象者.toEntity());
+            }
+        }
+
     }
 }

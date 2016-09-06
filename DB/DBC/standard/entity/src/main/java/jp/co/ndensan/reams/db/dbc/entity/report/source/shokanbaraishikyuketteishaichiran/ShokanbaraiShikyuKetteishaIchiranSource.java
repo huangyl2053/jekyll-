@@ -16,10 +16,10 @@ public class ShokanbaraiShikyuKetteishaIchiranSource implements IReportSource {
     public RString printTimeStamp;
     @ReportItem(name = "kokuhorenName", length = 15, order = 2)
     public RString kokuhorenName;
-    @ReportItem(name = "shoHokenshaNo", length = 6, order = 3)
-    public RString shoHokenshaNo;
-    @ReportItem(name = "shoHokenshaName", length = 20, order = 4)
-    public RString shoHokenshaName;
+    @ReportItem(name = "shoKisaiHokenshaNo", length = 6, order = 3)
+    public RString shoKisaiHokenshaNo;
+    @ReportItem(name = "shoKisaiHokenshaName", length = 20, order = 4)
+    public RString shoKisaiHokenshaName;
     @ReportItem(name = "shutsuryokujun1", length = 10, order = 5)
     public RString shutsuryokujun1;
     @ReportItem(name = "shutsuryokujun2", length = 10, order = 6)

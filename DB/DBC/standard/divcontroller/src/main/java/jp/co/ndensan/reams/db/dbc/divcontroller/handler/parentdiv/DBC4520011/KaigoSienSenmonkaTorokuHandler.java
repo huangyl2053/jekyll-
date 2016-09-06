@@ -170,41 +170,43 @@ public class KaigoSienSenmonkaTorokuHandler {
 
     private void 複数件該当する場合は介護支援専門員一覧を表示する(List<KaigoShienSenmoninJouhouResult> resultList) {
         List<dgKaigoShienSenmoninIchiran_Row> rowList = new ArrayList<>();
-        for (KaigoShienSenmoninJouhouResult result : resultList) {
-            dgKaigoShienSenmoninIchiran_Row newRow = new dgKaigoShienSenmoninIchiran_Row();
-            newRow.setKaigoShienSenmoninNo(result.getCareManeger().get介護支援専門員番号());
-            if (null != result.getCareManeger().get介護支援専門員名()) {
-                newRow.setKaigoShienSenmoninMei(result.getCareManeger().get介護支援専門員名().getColumnValue());
-            } else {
-                newRow.setKaigoShienSenmoninMei(RString.EMPTY);
+        if (null != resultList && (!resultList.isEmpty())) {
+            for (KaigoShienSenmoninJouhouResult result : resultList) {
+                dgKaigoShienSenmoninIchiran_Row newRow = new dgKaigoShienSenmoninIchiran_Row();
+                newRow.setKaigoShienSenmoninNo(result.getCareManeger().get介護支援専門員番号());
+                if (null != result.getCareManeger().get介護支援専門員名()) {
+                    newRow.setKaigoShienSenmoninMei(result.getCareManeger().get介護支援専門員名().getColumnValue());
+                } else {
+                    newRow.setKaigoShienSenmoninMei(RString.EMPTY);
+                }
+                if (null != result.getCareManeger().get介護支援専門員名カナ()) {
+                    newRow.setKaigoShienSenmoninMeiKana(result.getCareManeger().get介護支援専門員名カナ().getColumnValue());
+                } else {
+                    newRow.setKaigoShienSenmoninMeiKana(RString.EMPTY);
+                }
+                if (!RString.isNullOrEmpty(result.get所属事業者番号())) {
+                    newRow.setShozokuJigyoshaNo(result.get所属事業者番号());
+                } else {
+                    newRow.setShozokuJigyoshaNo(RString.EMPTY);
+                }
+                if (!RString.isNullOrEmpty(result.get事業者名称())) {
+                    newRow.setShozokuJigyoshaMei(result.get事業者名称());
+                } else {
+                    newRow.setShozokuJigyoshaMei(RString.EMPTY);
+                }
+                FlexibleDate yukoKaishiDate = result.getCareManeger().get有効開始年月日();
+                if (null != yukoKaishiDate && (!FlexibleDate.EMPTY.equals(yukoKaishiDate))) {
+                    newRow.getYukoKaishiDate().setValue(new RDate(yukoKaishiDate.toString()));
+                }
+                FlexibleDate yukoShuryoDate = result.getCareManeger().get有効終了年月日();
+                if (null != yukoShuryoDate && (!FlexibleDate.EMPTY.equals(yukoShuryoDate))) {
+                    newRow.getYukoShuryoDate().setValue(new RDate(yukoShuryoDate.toString()));
+                }
+                rowList.add(newRow);
             }
-            if (null != result.getCareManeger().get介護支援専門員名カナ()) {
-                newRow.setKaigoShienSenmoninMeiKana(result.getCareManeger().get介護支援専門員名カナ().getColumnValue());
-            } else {
-                newRow.setKaigoShienSenmoninMeiKana(RString.EMPTY);
+            if ((!rowList.isEmpty()) && 1 < rowList.size()) {
+                sortDg介護支援専門員一覧(rowList);
             }
-            if (!RString.isNullOrEmpty(result.get所属事業者番号())) {
-                newRow.setShozokuJigyoshaNo(result.get所属事業者番号());
-            } else {
-                newRow.setShozokuJigyoshaNo(RString.EMPTY);
-            }
-            if (!RString.isNullOrEmpty(result.get事業者名称())) {
-                newRow.setShozokuJigyoshaMei(result.get事業者名称());
-            } else {
-                newRow.setShozokuJigyoshaMei(RString.EMPTY);
-            }
-            FlexibleDate yukoKaishiDate = result.getCareManeger().get有効開始年月日();
-            if (null != yukoKaishiDate && (!FlexibleDate.EMPTY.equals(yukoKaishiDate))) {
-                newRow.getYukoKaishiDate().setValue(new RDate(yukoKaishiDate.toString()));
-            }
-            FlexibleDate yukoShuryoDate = result.getCareManeger().get有効終了年月日();
-            if (null != yukoShuryoDate && (!FlexibleDate.EMPTY.equals(yukoShuryoDate))) {
-                newRow.getYukoShuryoDate().setValue(new RDate(yukoShuryoDate.toString()));
-            }
-            rowList.add(newRow);
-        }
-        if ((!rowList.isEmpty()) && 1 < rowList.size()) {
-            sortDg介護支援専門員一覧(rowList);
         }
         div.getKaigoShienSenmoninIchiran().getDgKaigoShienSenmoninIchiran().setDataSource(rowList);
     }

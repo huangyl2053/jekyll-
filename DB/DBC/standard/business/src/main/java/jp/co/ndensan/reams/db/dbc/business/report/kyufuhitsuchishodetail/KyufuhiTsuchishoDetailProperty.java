@@ -21,7 +21,7 @@ public class KyufuhiTsuchishoDetailProperty extends ReportPropertyBase<KyufuhiTs
      * コンストラクタです。
      */
     public KyufuhiTsuchishoDetailProperty() {
-        super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100041.getReportId());
+        super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100041_２ページ目以降.getReportId());
     }
 
 }

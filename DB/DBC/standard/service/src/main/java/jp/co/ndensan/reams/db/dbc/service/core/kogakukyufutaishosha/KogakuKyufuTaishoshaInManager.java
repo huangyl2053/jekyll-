@@ -78,6 +78,7 @@ public class KogakuKyufuTaishoshaInManager {
     private List<KogakuKyufuTaishoshaGroupCsvEntity> groupList;
     private List<KogakuKyufuTaishoshaMeisaiCsvEntity> meisaiList;
     private final RString レコード種別 = new RString("1");
+    private final RString エンドレコード種別 = new RString("3");
     private final RString 帳票レコード種別_H1 = new RString("H1");
     private final RString 帳票レコード種別_D1 = new RString("D1");
     private final RString 帳票レコード種別_T1 = new RString("T1");
@@ -361,6 +362,9 @@ public class KogakuKyufuTaishoshaInManager {
                 while (true) {
                     List<RString> data = csvReader.readLine();
                     if (data != null && !data.isEmpty()) {
+                        if (エンドレコード種別.equals(data.get(INDEX_0))) {
+                            continue;
+                        }
                         if (レコード種別.equals(data.get(INDEX_0))) {
                             controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);
                         } else if (帳票レコード種別_H1.equals(data.get(INDEX_3))) {

@@ -307,18 +307,18 @@ public class ChoshuYuyoJuminKihonHandler {
             FlexibleDate 徴収猶予期間開始 = get徴収猶予期間開始(期_普徴, 徴収猶予の情報);
             if (徴収猶予期間開始 != null && !徴収猶予期間開始.isEmpty()) {
                 // TODO QA1195 labelはTextBoxDateに変換は必要ですが？ 状態定義sheetの281－294行の状態は入力可の設定。
-                期別徴収猶予期間.set徴収猶予期間_開始(徴収猶予期間開始);
+                期別徴収猶予期間.set徴収猶予_開始(徴収猶予期間開始);
                 期別徴収猶予期間.set徴収猶予期間開始(徴収猶予期間開始.wareki().toDateString());
             } else {
-                期別徴収猶予期間.set徴収猶予期間_開始(null);
+                期別徴収猶予期間.set徴収猶予_開始(null);
                 期別徴収猶予期間.set徴収猶予期間開始(空);
             }
             FlexibleDate 徴収猶予期間終了 = get徴収猶予期間終了(期_普徴, 徴収猶予の情報);
             if (徴収猶予期間終了 != null && !徴収猶予期間終了.isEmpty()) {
-                期別徴収猶予期間.set徴収猶予期間_終了(徴収猶予期間終了);
+                期別徴収猶予期間.set徴収猶予_終了(徴収猶予期間終了);
                 期別徴収猶予期間.set徴収猶予期間終了(徴収猶予期間終了.wareki().toDateString());
             } else {
-                期別徴収猶予期間.set徴収猶予期間_終了(null);
+                期別徴収猶予期間.set徴収猶予_終了(null);
                 期別徴収猶予期間.set徴収猶予期間終了(空);
             }
             期別徴収猶予期間リスト.add(期別徴収猶予期間);
@@ -565,6 +565,7 @@ public class ChoshuYuyoJuminKihonHandler {
         申請情報パネル.getTxtFukaNendo().setReadOnly(true);
         申請情報パネル.getTxtYuyoShurui().setReadOnly(true);
         KetteiJohoDiv 決定情報パネル = div.getChoshuYuyoMain().getKetteiJoho();
+        決定情報パネル.setDisplayNone(false);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存ボタン, false);
         // TODO QA1195 labelはTextBoxDateに変換は必要ですが？ 状態定義sheetの61－88行の状態は入力可の設定。
 //        FuchoTablePanelDiv 普通徴収猶予情報パネル = div.getChoshuYuyoMain().getFuchoTablePanel();
@@ -863,8 +864,8 @@ public class ChoshuYuyoJuminKihonHandler {
             KibetsuChoshyuYuyoKikann 期別徴収猶予期間 = 期別徴収猶予期間リスト.get(i);
             KaigoKibetsuChoshuYuyoParam データ = new KaigoKibetsuChoshuYuyoParam();
             データ.set期(Integer.valueOf(期別徴収猶予期間.get普徴期().toString()));
-            データ.set徴収猶予開始日(期別徴収猶予期間.get徴収猶予期間_開始());
-            データ.set徴収猶予終了日(期別徴収猶予期間.get徴収猶予期間_終了());
+            データ.set徴収猶予開始日(期別徴収猶予期間.get徴収猶予_開始());
+            データ.set徴収猶予終了日(期別徴収猶予期間.get徴収猶予_終了());
             介護期別徴収猶予データ.add(データ);
         }
         param.set介護期別徴収猶予データ(介護期別徴収猶予データ);

@@ -102,8 +102,8 @@ public class KaigoSienSenmonkaToroku {
                 careManagerList.add(result.getCareManeger());
             }
             ViewStateHolder.put(ViewStateHolderName.介護支援専門員登録情報, new CareManegerHolder(careManagerList));
-            getHandler(div).onClick_btnSearch(resultList);
         }
+        getHandler(div).onClick_btnSearch(resultList);
         return ResponseData.of(div).respond();
     }
 

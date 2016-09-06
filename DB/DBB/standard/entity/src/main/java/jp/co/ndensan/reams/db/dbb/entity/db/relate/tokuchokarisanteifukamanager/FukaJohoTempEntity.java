@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
@@ -26,13 +28,16 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class FukaJohoTempEntity {
+public class FukaJohoTempEntity implements IDbAccessable {
 
     @TempTableColumnOrder(1)
+    @PrimaryKey
     private FlexibleYear choteiNendo;
     @TempTableColumnOrder(2)
+    @PrimaryKey
     private FlexibleYear fukaNendo;
     @TempTableColumnOrder(3)
+    @PrimaryKey
     private TsuchishoNo tsuchishoNo;
     @TempTableColumnOrder(4)
     private int rirekiNo;

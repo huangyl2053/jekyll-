@@ -58,6 +58,7 @@ public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<RS
     private JukyushaJohoDataCsvEntity 受給者情報;
     private final RString レコード種別_コントロール = new RString("1");
     private final RString レコード種別_データ = new RString("2");
+    private final RString レコード種別_エンド = new RString("3");
     private static final RString カンマ = new RString(",");
     private static final Integer INDEX_0 = 0;
 
@@ -101,6 +102,9 @@ public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<RS
     protected void process(RString line) {
         List<RString> data = line.split(カンマ.toString());
         if (data != null && !data.isEmpty()) {
+            if (レコード種別_エンド.equals(data.get(INDEX_0))) {
+                return;
+            }
             if (レコード種別_コントロール.equals(data.get(INDEX_0))) {
                 コントロールレコード = ListToObjectMappingHelper.toObject(JukyushaJohoControlCsvEntity.class, data);
                 処理対象年月 = コントロールレコード.getShoriYM();

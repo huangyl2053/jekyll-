@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110070;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc110070.KogakugassanKeisankekkaRenrakuhyoOutProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc110070.DbWT3811KogakuGassanShikyuGakuKeisanKekkaTempEntity;
@@ -54,6 +56,7 @@ public class SofuTaishoDataShutokuProcess extends BatchProcessBase<KogakuGassanS
     private boolean 取得データフラグ = true;
     private KogakugassanKeisankekkaRenrakuhyoOutProcessParameter processParameter;
     private OutputParameter<RString> dataFlag;
+    private List<DbWT1002KokuhorenSakuseiErrorTempEntity> 処理結果リスト;
 
     @BatchWriter
     BatchEntityCreatedTempTableWriter dbWT3811TableWriter;
@@ -66,6 +69,7 @@ public class SofuTaishoDataShutokuProcess extends BatchProcessBase<KogakuGassanS
     protected void initialize() {
         dataFlag = new OutputParameter<>();
         renban = 1;
+        処理結果リスト = new ArrayList<>();
     }
 
     @Override
@@ -89,7 +93,11 @@ public class SofuTaishoDataShutokuProcess extends BatchProcessBase<KogakuGassanS
         DbWT3811KogakuGassanShikyuGakuKeisanKekkaTempEntity dbWT3811Entity;
         if (entity.get高額合算支給額計算結果明細() == null) {
             dbWT3811Entity = get高額合算支給額計算結果一時Enttiy(entity.get高額合算支給額計算結果(), true);
-            dbWT1002TableWriter.insert(get処理結果リスト一時Entity(取得データフラグ, entity.get高額合算支給額計算結果()));
+            DbWT1002KokuhorenSakuseiErrorTempEntity 処理結果リスト一時Entity
+                    = get処理結果リスト一時Entity(取得データフラグ, entity.get高額合算支給額計算結果());
+            if (is処理結果リスト一時出力対象(処理結果リスト一時Entity)) {
+                dbWT1002TableWriter.insert(処理結果リスト一時Entity);
+            }
         } else {
             dbWT3811Entity = get高額合算支給額計算結果一時Enttiy(entity.get高額合算支給額計算結果(), false);
             dbWT1001TableWriter.insert(get被保険者一時Entity(entity.get高額合算支給額計算結果()));
@@ -221,5 +229,26 @@ public class SofuTaishoDataShutokuProcess extends BatchProcessBase<KogakuGassanS
         一時Enttiy.setSikyugakuKeisanKekkaRenrakuhyoSakuseiYMD(entity.getSikyugakuKeisanKekkaRenrakuhyoSakuseiYMD());
         一時Enttiy.setSofuJogaiFlag(送付除外フラグ);
         return 一時Enttiy;
+    }
+
+    private boolean is処理結果リスト一時出力対象(DbWT1002KokuhorenSakuseiErrorTempEntity 処理結果リスト一時Entity) {
+        if (処理結果リスト.isEmpty()) {
+            処理結果リスト.add(処理結果リスト一時Entity);
+            return true;
+        }
+        for (DbWT1002KokuhorenSakuseiErrorTempEntity 処理結果一時 : 処理結果リスト) {
+            if (KokuhorenJoho_SakuseiErrorKubun.明細情報取得エラー.getコード().equals(処理結果一時.getErrorKubun())
+                    && 処理結果一時.getShoHokanehshaNo().equals(処理結果リスト一時Entity.getShoHokanehshaNo())
+                    && 処理結果一時.getHihokenshaNo().equals(処理結果リスト一時Entity.getHihokenshaNo())
+                    && 処理結果一時.getKey1().equals(処理結果リスト一時Entity.getKey1())
+                    && 処理結果一時.getKey2().equals(処理結果リスト一時Entity.getKey2())
+                    && 処理結果一時.getKey3().equals(処理結果リスト一時Entity.getKey3())
+                    && 処理結果一時.getKey4().equals(処理結果リスト一時Entity.getKey4())
+                    && 処理結果一時.getKey5().equals(処理結果リスト一時Entity.getKey5())) {
+                return false;
+            }
+        }
+        処理結果リスト.add(処理結果リスト一時Entity);
+        return true;
     }
 }

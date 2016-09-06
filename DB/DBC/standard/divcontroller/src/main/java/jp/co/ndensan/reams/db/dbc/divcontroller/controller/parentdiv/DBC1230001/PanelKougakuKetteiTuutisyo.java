@@ -29,8 +29,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -42,7 +44,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class PanelKougakuKetteiTuutisyo {
 
-    private static final RString 支払予定日印字有無_有 = new RString("1");
     private static final RString 支払予定日 = new RString("支払予定日");
     private static final RString 排他キー = new RString("DBCHihokenshaNo");
 
@@ -102,21 +103,30 @@ public class PanelKougakuKetteiTuutisyo {
      * @return 画面初期化
      */
     public ResponseData<PanelKougakuKetteiTuutisyoDiv> onClick_btnHakkouValidate(PanelKougakuKetteiTuutisyoDiv div) {
-        RString 支払予定日印字有無 = DbBusinessConfig.get(ConfigNameDBC.事業高額決定通知書_支払予定日印字有無,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        if (!ResponseHolder.isReRequest() && 支払予定日印字有無_有.equals(支払予定日印字有無)
-                && div.getTxtSiharaiYoteibi().getValue() == null) {
-            QuestionMessage message = new QuestionMessage(
-                    UrWarningMessages.未入力.getMessage().getCode(),
-                    UrWarningMessages.未入力.getMessage().evaluate()).replace(支払予定日.toString());
-            return ResponseData.of(div).addMessage(message).respond();
+        if (!ResponseHolder.isReRequest()) {
+            if (div.getTxtSiharaiYoteibi().isVisible()
+                    && div.getTxtSiharaiYoteibi().getValue() == null) {
+                WarningMessage message = new WarningMessage(
+                        UrWarningMessages.未入力.getMessage().getCode(),
+                        UrWarningMessages.未入力.getMessage().replace(支払予定日.toString()).evaluate(),
+                        ButtonSelectPattern.OKCancel);
+                return ResponseData.of(div).addMessage(message).respond();
+            } else if (div.getTxtZennkaiHakkoubi().getValue() != null) {
+                WarningMessage message = new WarningMessage(
+                        DbcWarningMessages.発行済み負担額証明書.getMessage().getCode(),
+                        DbcWarningMessages.発行済み負担額証明書.getMessage().evaluate(),
+                        ButtonSelectPattern.OKCancel);
+                return ResponseData.of(div).addMessage(message).respond();
+            }
         }
         if (new RString(UrWarningMessages.未入力.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes && div.getTxtZennkaiHakkoubi().getValue() != null) {
-            QuestionMessage message = new QuestionMessage(
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && div.getTxtZennkaiHakkoubi().getValue() != null) {
+            WarningMessage message = new WarningMessage(
                     DbcWarningMessages.発行済み負担額証明書.getMessage().getCode(),
-                    DbcWarningMessages.発行済み負担額証明書.getMessage().evaluate());
+                    DbcWarningMessages.発行済み負担額証明書.getMessage().evaluate(),
+                    ButtonSelectPattern.OKCancel);
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(DbcWarningMessages.発行済み負担額証明書.getMessage().getCode()).equals(

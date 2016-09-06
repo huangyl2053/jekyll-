@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710100.HanyoListKagoK
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc710100.HanyoListKagoKekkaCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710100.HanyoListKagoKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc710100.IHanyoListKagoKekkaMapper;
-import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
@@ -48,7 +47,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 汎用リスト出力(過誤結果情報)のバッチ用パラメータフロークラスです。
@@ -94,8 +92,6 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
     protected void initialize() {
         //TODO  QA1397 出力順の補正
         parameter.toMybatisParameter();
-        mapper = InstanceProvider.create(MapperProvider.class).create(IHanyoListKagoKekkaMapper.class);
-        List<HanyoListKagoKekkaEntity> entity1001 = mapper.select過誤結果情報(parameter.toMybatisParameter());
         構成市町村マスタ = new HashMap<>();
         連番 = 0;
         csv出力Flag = 定数_なし;

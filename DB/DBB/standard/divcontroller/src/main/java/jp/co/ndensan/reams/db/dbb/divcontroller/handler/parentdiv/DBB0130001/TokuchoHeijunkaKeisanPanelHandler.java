@@ -224,7 +224,7 @@ public class TokuchoHeijunkaKeisanPanelHandler {
     }
 
     private RString get当月処理日時(YMDHMS 当月処理日時) {
-        if (null != 当月処理日時 && 当月処理日時.isEmpty()) {
+        if (null != 当月処理日時 && !当月処理日時.isEmpty()) {
             RDate date = 当月処理日時.getDate();
             RTime time = 当月処理日時.getRDateTime().getTime();
             return new RString(new YMDHMS(date, time).toString());

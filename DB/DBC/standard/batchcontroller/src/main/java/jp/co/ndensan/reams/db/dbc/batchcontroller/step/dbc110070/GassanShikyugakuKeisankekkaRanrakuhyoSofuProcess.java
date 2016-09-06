@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import jp.co.ndensan.reams.db.dbc.business.report.gassanshikyugakukeisankekkasofuichiran.GassanShikyugakuKeisankekkaSofuIchiranOutputOrder;
+import jp.co.ndensan.reams.db.dbc.business.report.gassanshikyugakukeisankekkasofuichiran.GassanShikyugakuKeisankekkaSofuIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanshikyugakukeisankekkasofuichiran.GassanShikyugakuKeisankekkaSofuIchiranReport;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
@@ -24,8 +26,12 @@ import jp.co.ndensan.reams.db.dbc.entity.report.gassanshikyugakukeisankekkasofui
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -56,6 +62,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
@@ -93,6 +100,7 @@ public class GassanShikyugakuKeisankekkaRanrakuhyoSofuProcess extends BatchProce
 
     private Set<ShikibetsuCode> 識別コードset;
     private List<PersonalData> personalDataList;
+    private List<RString> pageBreakKeys;
 
     @BatchWriter
     private CsvWriter eucCsvWriter;
@@ -105,20 +113,9 @@ public class GassanShikyugakuKeisankekkaRanrakuhyoSofuProcess extends BatchProce
         システム日付 = YMDHMS.now();
         識別コードset = new HashSet<>();
         personalDataList = new ArrayList<>();
+        pageBreakKeys = new ArrayList<>();
         連番 = 0;
-        RString 出力順 = RString.EMPTY;
-        IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課,
-                帳票ID, Long.parseLong(processParameter.get出力順ID().toString()));
-        if (outputOrder != null) {
-//            出力順 = MyBatisOrderByClauseCreator.create(
-//                    SofuFileSakuseiProcessCore.DBC200036GassanShikyugakuKeisankekkaRanrakuhyoSofuIchiranEnum.class,
-//                    outputOrder);
-        } else {
-//            throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage().replace(
-//                    帳票出力順の取得.toString()).toString());
-        }
-        processParameter.set出力順(出力順.replace(ORDER_BY, RString.EMPTY));
+        get出力順();
     }
 
     @Override
@@ -139,7 +136,10 @@ public class GassanShikyugakuKeisankekkaRanrakuhyoSofuProcess extends BatchProce
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(false)
                 .build();
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200036.getReportId().value()).create();
+        PageBreaker<GassanShikyugakuKeisankekkaSofuIchiranSource> breaker
+                = new GassanShikyugakuKeisankekkaSofuIchiranPageBreak(pageBreakKeys);
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(
+                ReportIdDBC.DBC200036.getReportId().value()).addBreak(breaker).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
@@ -229,6 +229,26 @@ public class GassanShikyugakuKeisankekkaRanrakuhyoSofuProcess extends BatchProce
         headEntity.set保険者名(
                 DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         eucCsvWriter.writeLine(headEntity);
+    }
+
+    private void get出力順() {
+        RString 出力順 = RString.EMPTY;
+        IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
+        outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課,
+                帳票ID, Long.parseLong(processParameter.get出力順ID().toString()));
+        if (outputOrder != null) {
+            出力順 = MyBatisOrderByClauseCreator.create(
+                    GassanShikyugakuKeisankekkaSofuIchiranOutputOrder.class, outputOrder);
+            for (ISetSortItem item : outputOrder.get設定項目リスト()) {
+                if (item.is改頁項目()) {
+                    pageBreakKeys.add(item.get項目ID());
+                }
+            }
+        } else {
+            throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage().replace(
+                    帳票出力順の取得.toString()).toString());
+        }
+        processParameter.set出力順(出力順.replace(ORDER_BY, RString.EMPTY));
     }
 
     private void アクセスログ対象追加(GassanShikyugakuKeisankekkaRanrakuhyoSofuEntity entity) {

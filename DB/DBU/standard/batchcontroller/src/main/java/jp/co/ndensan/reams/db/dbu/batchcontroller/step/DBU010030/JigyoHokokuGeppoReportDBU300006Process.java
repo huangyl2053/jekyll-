@@ -125,10 +125,10 @@ public class JigyoHokokuGeppoReportDBU300006Process extends BatchProcessBase<Jig
         //reportData.set作成日時(processParameter.get処理日時());
         reportData.set保険者名(保険者名);
         reportData.set保険者番号(保険者番号);
-        reportData.set年報月報区分(年報月報区分CODE);
-        reportData.set集計年度(processParameter.get集計年度());
-        reportData.set集計期間FROM(processParameter.get集計開始年月());
-        reportData.set集計期間TO(processParameter.get集計終了年月());
+//        reportData.set年報月報区分(年報月報区分CODE);
+//        reportData.set集計年度(processParameter.get集計年度());
+//        reportData.set集計期間FROM(processParameter.get集計開始年月());
+//        reportData.set集計期間TO(processParameter.get集計終了年月());
         reportData.set第1号被保険者数_項目標題列1(new RString("前年度末現在"));
         reportData.set第1号被保険者数_項目標題列2(new RString("当年度中増"));
         reportData.set第1号被保険者数_項目標題列3(new RString("当年度中減"));

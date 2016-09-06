@@ -813,7 +813,6 @@ public class ShokujiHiyoShokaiHandler {
                 div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
             }
         }
-        div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(true);
         if (ZERO.equals(識別番号管理.get福祉用具購入費設定区分())) {
             div.getBtnFukushiYoguKonyu().setDisabled(true);
         } else {

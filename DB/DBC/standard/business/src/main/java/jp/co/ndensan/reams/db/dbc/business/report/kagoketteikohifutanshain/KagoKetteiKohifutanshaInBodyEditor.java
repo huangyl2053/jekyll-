@@ -49,12 +49,12 @@ public class KagoKetteiKohifutanshaInBodyEditor implements IKagoKetteiKohifutans
     private void edit明細(KagoKetteiKohifutanshaInSource source) {
         source.listUpper_1 = new RString(帳票出力対象データ.getNo());
         source.listUpper_2 = doパターン54(帳票出力対象データ.get取扱年月());
-        source.listUpper_3 = 帳票出力対象データ.get事業者番号().getColumnValue();
+        source.listUpper_3 = 帳票出力対象データ.get過誤申立事由コード().getColumnValue();
         source.listUpper_4 = 帳票出力対象データ.get公費受給者番号();
         source.listUpper_5 = 帳票出力対象データ.get公費受給者名();
         source.listUpper_6 = doパターン54(帳票出力対象データ.getサービ提供年月());
         source.listUpper_7 = 帳票出力対象データ.getサービス種類コード().getColumnValue();
-        source.listUpper_8 = 帳票出力対象データ.get過誤申立事由コード().getColumnValue();
+        source.listUpper_8 = 帳票出力対象データ.get事業者番号().getColumnValue();
         source.listUpper_9 = DecimalFormatter.toコンマ区切りRString(帳票出力対象データ.get単位数(), 0);
         source.listLower_1 = 帳票出力対象データ.get事業者名();
         source.listLower_2 = 帳票出力対象データ.get被保険者番号().getColumnValue();

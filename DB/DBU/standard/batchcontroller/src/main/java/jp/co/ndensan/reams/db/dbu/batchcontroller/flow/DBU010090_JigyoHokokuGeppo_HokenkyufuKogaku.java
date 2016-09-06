@@ -22,6 +22,10 @@ import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.PrintControlKubun;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
+import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 事業状況報告資料（月報）作成 保険給付決定情報（高額介護サービス費）_バッチフロークラスです
@@ -42,9 +46,16 @@ public class DBU010090_JigyoHokokuGeppo_HokenkyufuKogaku extends BatchFlowBase<D
     private static final String CSV作成_ファイル出力_07 = "CSV作成_ファイル出力_07";
     private static final String 事業報告統計データ = "事業報告統計データ";
     private static final String 帳票出力_保険給付決定状況_高額介護サービス費分 = "帳票出力_保険給付決定状況_高額介護サービス費分";
+    private DBU010090_JigyoHokokuGeppo_HokenkyufuKogakuParameter parameter;
+    private FileSpoolManager manager;
 
     @Override
     protected void defineFlow() {
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc,
+                new EucEntityId("DBU060700"), UzUDE0831EucAccesslogFileType.Csv);
+        parameter = getParameter();
+        parameter.setCsvFilePath(manager.getEucOutputDirectry());
+        parameter.setManager(manager);
         if (PrintControlKubun.集計のみ.getコード().equals(getParameter().getプリントコントロール区分())
                 || PrintControlKubun.集計後印刷.getコード().equals(getParameter().getプリントコントロール区分())) {
             executeStep(事業状況報告統計元データ作成);

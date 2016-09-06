@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0110001;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteifuka.TokuchoKarisanteiFukaBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011001.DBB011001_TokuchoKarisanteiFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0110001.TokutyoKariSanteiFukaDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0110001.TokutyoKariSanteiFukaHandler;
@@ -52,8 +52,8 @@ public class TokutyoKariSanteiFuka {
      * @return レスポンスデータ
      *
      */
-    public ResponseData<TokuchoKarisanteiFukaBatchParameter> onClick_btnTsuchishoSakusei(TokutyoKariSanteiFukaDiv div) {
-        TokuchoKarisanteiFukaBatchParameter param = getHandler(div).特徴仮算定賦課BatchParam(div);
+    public ResponseData<DBB011001_TokuchoKarisanteiFukaParameter> onClick_btnTsuchishoSakusei(TokutyoKariSanteiFukaDiv div) {
+        DBB011001_TokuchoKarisanteiFukaParameter param = getHandler(div).特徴仮算定賦課BatchParam(div);
         return ResponseData.of(param).respond();
     }
 

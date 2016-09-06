@@ -59,12 +59,16 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
     public void setKinkyujiShisetsuRyoyohi(List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データリスト,
             RString 整理番号, RString 事業者番号, RString 様式番号, RString サービス提供年月) {
         List<dgKinkyujiShisetsuRyoyohi_Row> rowList = new ArrayList<>();
+        List<dgKinkyujiShisetsuRyoyohi_Row> rowListKo = new ArrayList<>();
         List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データ
                 = get給付実績データ(所定疾患施設療養費等データリスト, 整理番号, 事業者番号, 様式番号, サービス提供年月);
         for (KyufujissekiShoteiShikkanShisetsuRyoyo 所定疾患施設療養費等 : 所定疾患施設療養費等データ) {
             rowList.add(setRow(所定疾患施設療養費等));
-            rowList.add(setRow_後(所定疾患施設療養費等));
         }
+        for (KyufujissekiShoteiShikkanShisetsuRyoyo 所定疾患施設療養費等 : 所定疾患施設療養費等データ) {
+            rowListKo.add(setRow_後(所定疾患施設療養費等));
+        }
+        rowList.addAll(rowListKo);
         div.getDgKinkyujiShisetsuRyoyohi().setDataSource(rowList);
         setGetsuBtn(getサービス提供年月リスト(所定疾患施設療養費等データリスト), new FlexibleYearMonth(サービス提供年月));
     }
@@ -226,6 +230,7 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
         if (NI.equals(識別番号管理.get所定疾患施設療養設定区分())
                 && 平成24年4月.isBeforeOrEquals(サービス提供年月)) {
             div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(false);
+            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(true);
             div.getBtnKinkyujiShisetsuRyoyo().setDisplayNone(true);
         } else {
             div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(true);
@@ -545,10 +550,10 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
         }
     }
 
-    private List<FlexibleYearMonth> getサービス提供年月リスト(List<KyufujissekiShoteiShikkanShisetsuRyoyo> 給付実績福祉用具販売費リスト) {
+    private List<FlexibleYearMonth> getサービス提供年月リスト(List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データ取得リスト) {
         List<FlexibleYearMonth> 提供年月リスト = new ArrayList<>();
-        for (int i = 0; i < 給付実績福祉用具販売費リスト.size(); i++) {
-            FlexibleYearMonth 提供年月 = 給付実績福祉用具販売費リスト.get(i).getサービス提供年月();
+        for (KyufujissekiShoteiShikkanShisetsuRyoyo 所定疾患施設療養費等データ取得 : 所定疾患施設療養費等データ取得リスト) {
+            FlexibleYearMonth 提供年月 = 所定疾患施設療養費等データ取得.getサービス提供年月();
             if (!提供年月リスト.contains(提供年月)) {
                 提供年月リスト.add(提供年月);
             }
