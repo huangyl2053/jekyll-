@@ -61,7 +61,8 @@ public class ShoriDateKanriManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShoriDateKanriManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShoriDateKanriManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShoriDateKanriManager}のインスタンス
      */
     public static ShoriDateKanriManager createInstance() {
         return InstanceProvider.create(ShoriDateKanriManager.class);
@@ -767,11 +768,13 @@ public class ShoriDateKanriManager {
     /**
      * 処理日付管理マスタから直近の年次負担割合判定処理のデータを取得する。
      *
+     * @param 年度 FlexibleYear
      * @return ShoriDateKanri
      */
     @Transaction
-    public ShoriDateKanri select最大年度内連番() {
-        DbT7022ShoriDateKanriEntity entity = dac.select最大年度内連番();
+    public ShoriDateKanri select最大年度の最大年度内連番(FlexibleYear 年度) {
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
+        DbT7022ShoriDateKanriEntity entity = dac.select最大年度の最大年度内連番(年度);
         if (entity == null) {
             return null;
         }

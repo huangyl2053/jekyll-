@@ -1998,6 +1998,24 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     }
 
     /**
+     * 処理日付管理マスタテーブルから、最大年度の最大年度内連番を取得する。
+     *
+     * @param 年度 FlexibleYear
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select最大年度の最大年度内連番(FlexibleYear 年度) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(max(nendoNaiRenban)).
+                table(DbT7022ShoriDateKanri.class).
+                where(
+                        eq(nendo, 年度)).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
      * 処理日付管理マスタテーブルから、最大年度内連番を取得する。
      *
      * @return DbT7022ShoriDateKanriEntity
