@@ -10,16 +10,21 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishosha;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishosha.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishosha.isDeleted;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishosha.rirekiNo;
+import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishosha.tekiyoKaishiYMD;
+import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishosha.tekiyoShuryoYMD;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -33,6 +38,8 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
 
     @InjectSession
     private SqlSession session;
+    private static final RString KEY_被保険者番号 = new RString("被保険者番号");
+    private static final RString KEY_世帯基準日 = new RString("世帯基準日");
 
     /**
      * 主キーで総合事業対象者を取得します。
@@ -160,6 +167,32 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
                 table(DbT3105SogoJigyoTaishosha.class).
                 where(eq(hihokenshaNo, 被保険者番号)).
                 order(by(hihokenshaNo, DESC), by(rirekiNo, DESC)).
+                toList(DbT3105SogoJigyoTaishoshaEntity.class);
+    }
+
+    /**
+     * 事業対象の取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 世帯基準日 FlexibleDate
+     * @return DbT3105SogoJigyoTaishoshaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3105SogoJigyoTaishoshaEntity> get事業対象(
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 世帯基準日) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_被保険者番号.toString()));
+        requireNonNull(世帯基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_世帯基準日.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3105SogoJigyoTaishosha.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                leq(tekiyoKaishiYMD, 世帯基準日),
+                                leq(世帯基準日, tekiyoShuryoYMD))).
                 toList(DbT3105SogoJigyoTaishoshaEntity.class);
     }
 }

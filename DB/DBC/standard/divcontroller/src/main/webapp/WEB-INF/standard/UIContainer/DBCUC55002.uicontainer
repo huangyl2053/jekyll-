@@ -5,25 +5,11 @@
  "steps": [
   {
    "id": 1,
-   "name": "基準収入額適用申請書発行",
+   "name": "基準収入額適用申請登録",
    "transitionList": [
     {
      "id": "1",
      "type": "start",
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC1000064",
-     "toLayoutTitle": "基準収入額適用申請書発行",
-     "toState": "shoki"
-    },
-    {
-     "id": "2",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC1000064",
-     "layoutTitle": "基準収入額適用申請書発行",
-     "eventName": "対象者検索",
-     "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
@@ -31,7 +17,7 @@
      "toState": "検索条件"
     },
     {
-     "id": "3",
+     "id": "2",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBZ",
      "layoutName": "DBZ0200001",
@@ -40,22 +26,50 @@
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC1000064",
-     "toLayoutTitle": "基準収入額適用申請書発行",
-     "toState": "shoki"
+     "toLayoutName": "DBC1000062",
+     "toLayoutTitle": "基準収入額適用申請登録",
+     "toState": "一覧"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1000062",
+     "layoutTitle": "基準収入額適用申請登録",
+     "eventName": "再検索",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
     },
     {
      "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1000062",
+     "layoutTitle": "基準収入額適用申請登録",
+     "eventName": "検索結果一覧",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
+    },
+    {
+     "id": "5",
      "type": "end",
      "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC1000064",
-     "layoutTitle": "基準収入額適用申請書発行",
+     "layoutName": "DBC1000062",
+     "layoutTitle": "基準収入額適用申請登録",
      "eventName": "完了",
      "destroy": false,
      "condition": ""
     },
     {
-     "id": "5",
+     "id": "6",
      "type": "end",
      "layoutSubGyomuCode": "DBZ",
      "layoutName": "DBZ0200001",
