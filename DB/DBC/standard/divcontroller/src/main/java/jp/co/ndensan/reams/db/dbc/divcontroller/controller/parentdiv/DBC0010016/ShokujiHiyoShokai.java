@@ -36,10 +36,9 @@ public class ShokujiHiyoShokai {
    
     private static final int ZERO_INT = 0;
     private static final int SEX_INT = 6;
-    private final RString 年月 = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_介護給付費見直し,
-                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).substringEmptyOnError(ZERO_INT, SEX_INT);
-    private final FlexibleYearMonth 提供年月 = new FlexibleYearMonth(年月);
-    private final FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
+    private RString 年月;
+    private FlexibleYearMonth 提供年月;
+    private FlexibleYearMonth サービス提供年月;
     
     /**
      * 画面の初期化です。
@@ -50,6 +49,10 @@ public class ShokujiHiyoShokai {
     public ResponseData<ShokujiHiyoShokaiDiv> onLoad(ShokujiHiyoShokaiDiv div) {
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         NyuryokuShikibetsuNo 識別番号検索キー = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class);
+        this.年月 = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_介護給付費見直し,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).substringEmptyOnError(ZERO_INT, SEX_INT);
+        this.提供年月 = new FlexibleYearMonth(年月);
+        this.サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         div.getCcdKyufuJissekiHeader().initialize(
                 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(), サービス提供年月,
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class), 識別番号検索キー);
@@ -126,6 +129,10 @@ public class ShokujiHiyoShokai {
                 = ViewStateHolder.get(ViewStateKeys.資格対象者, KyufuJissekiPrmBusiness.class).getCsData_B();
         List<KyufujissekiShokujiHiyo> 給付実績食事費用1503
                 = ViewStateHolder.get(ViewStateKeys.資格対象者, KyufuJissekiPrmBusiness.class).getCsData_E();
+        this.年月 = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_介護給付費見直し,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).substringEmptyOnError(ZERO_INT, SEX_INT);
+        this.提供年月 = new FlexibleYearMonth(年月);
+        this.サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         if (提供年月.isBeforeOrEquals(サービス提供年月)) {
             getHandler(div).change食費1504年月(new RString("前月"), 給付実績食事費用1504,
                 new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
@@ -161,6 +168,10 @@ public class ShokujiHiyoShokai {
                 = ViewStateHolder.get(ViewStateKeys.資格対象者, KyufuJissekiPrmBusiness.class).getCsData_B();
         List<KyufujissekiShokujiHiyo> 給付実績食事費用1503
                 = ViewStateHolder.get(ViewStateKeys.資格対象者, KyufuJissekiPrmBusiness.class).getCsData_E();
+        this.年月 = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_介護給付費見直し,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).substringEmptyOnError(ZERO_INT, SEX_INT);
+        this.提供年月 = new FlexibleYearMonth(年月);
+        this.サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         if (提供年月.isBeforeOrEquals(サービス提供年月)) {
             getHandler(div).change食費1504年月(new RString("次月"), 給付実績食事費用1504,
                 new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
