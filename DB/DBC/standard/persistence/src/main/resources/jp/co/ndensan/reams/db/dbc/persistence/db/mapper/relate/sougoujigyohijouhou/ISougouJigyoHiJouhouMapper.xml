@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 汎用リスト出力(総合事業費情報)用XMLです。 -->
+<!-- @reamsid_L DBC-3107-010 wanghuafeng -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.sougoujigyohijouhou.ISougouJigyoHiJouhouMapper">
+
+    <resultMap id="sougoujigyohijouhouentity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.sougoujigyohijouhou.SougouJigyoHiJouhouEntity" autoMapping="true">
+        <result property="サービス種類コード" column="サービス種類コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス種類名称" column="サービス種類名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス種類コード_最新" column="サービス種類コード_最新" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <select id="getサービス種類" resultMap="sougoujigyohijouhouentity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.sougoujigyohijouhou.SougouJigyoHiJouhouParameter" fetchSize="500" resultOrdered="true">
+         SELECT
+             "A"."サービス種類コード" AS "サービス種類コード"
+             , "A"."サービス種類名称" AS "サービス種類名称"
+             , "A"."サービス種類コード_最新" AS "サービス種類コード_最新" 
+         FROM
+         ( 
+             SELECT
+                 "DbT7130"."serviceShuruiCd" AS "サービス種類コード"
+                , "DbT7130"."serviceShuruiMeisho" AS "サービス種類名称"
+                , "DbT7130"."serviceBunrruicode" AS "サービス分類コード"
+                , ROW_NUMBER() OVER ( 
+                     PARTITION BY
+                     "DbT7130"."serviceShuruiCd" 
+                      ORDER BY
+                     "DbT7130"."teikyoKaishiYM" DESC
+                ) AS "サービス種類コード_最新" 
+             FROM
+             rgdb."DbT7130KaigoServiceShurui" AS "DbT7130"
+             ) AS "A" 
+         WHERE
+             "A"."サービス種類コード_最新" = '1' 
+             AND ( 
+             "A"."サービス分類コード" = #{jigyoManejiKeika} 
+             OR "A"."サービス分類コード" = #{jigyoManeji}
+             ) 
+         ORDER BY
+             "A"."サービス種類コード"
+    </select>
+</mapper>
