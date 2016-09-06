@@ -103,8 +103,12 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
                 source.listMeisai_3 = 社福減免対象者情報.get生年月日() == null ? RString.EMPTY : 社福減免対象者情報.get生年月日().
                         seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             }
-            source.listMeisai_4 = Seibetsu.toValue(社福減免対象者情報.get性別コード()).get名称();
-            source.listMeisai_5 = YokaigoJotaiKubun.toValue(社福減免対象者情報.get要介護認定状態区分コード().getColumnValue()).get名称();
+            if (社福減免対象者情報.get性別コード() != null && 社福減免対象者情報.get性別コード().isEmpty()) {
+                source.listMeisai_4 = Seibetsu.toValue(社福減免対象者情報.get性別コード()).get名称();
+            }
+            if (社福減免対象者情報.get要介護認定状態区分コード() != null && 社福減免対象者情報.get要介護認定状態区分コード().isEmpty()) {
+                source.listMeisai_5 = YokaigoJotaiKubun.toValue(社福減免対象者情報.get要介護認定状態区分コード().getColumnValue()).get名称();
+            }
             source.listMeisai_6 = 社福減免対象者情報.get確認番号();
             source.listMeisai_7 = 社福減免対象者情報.get適用開始年月日() == null ? RString.EMPTY : 社福減免対象者情報.
                     get適用開始年月日().wareki().eraType(EraType.KANJI).
