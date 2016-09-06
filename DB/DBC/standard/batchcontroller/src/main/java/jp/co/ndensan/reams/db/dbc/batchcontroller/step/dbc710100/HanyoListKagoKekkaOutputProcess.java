@@ -213,7 +213,7 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
             }
             抽出条件.add(temp);
         }
-        if (!RString.isNullOrEmpty(parameter.get事業者コード().getColumnValue())) {
+        if (!RString.isNullOrEmpty(parameter.get事業者コード())) {
             抽出条件.add(TITLE_事業者.concat(括弧LEFT).concat(parameter.get事業者コード().getColumnValue()).
                     concat(括弧RIGHT).concat(parameter.get事業者名()));
         }
