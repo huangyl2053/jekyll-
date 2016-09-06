@@ -52,6 +52,7 @@ public class KyufuJissekiKoshinReadCsvFileProcess extends BatchProcessBase<RStri
     }
 
     private final RString レコード種別 = new RString("1");
+    private final RString エンドレコード種別 = new RString("3");
     private final RString 交換情報識別番号_1141 = new RString("1141");
     private final RString 交換情報識別番号_1142 = new RString("1142");
     private final RString 交換情報識別番号_1143 = new RString("1143");
@@ -117,6 +118,9 @@ public class KyufuJissekiKoshinReadCsvFileProcess extends BatchProcessBase<RStri
     @Override
     protected void process(RString line) {
         List<RString> data = line.split(カンマ.toString());
+        if (エンドレコード種別.equals(data.get(INDEX_0))) {
+            return;
+        }
         if (レコード種別.equals(data.get(INDEX_0))) {
             controlCsvEntity = ListToObjectMappingHelper.
                     toObject(KyufuJissekiKoshinJohoControlCSVEntity.class, data);

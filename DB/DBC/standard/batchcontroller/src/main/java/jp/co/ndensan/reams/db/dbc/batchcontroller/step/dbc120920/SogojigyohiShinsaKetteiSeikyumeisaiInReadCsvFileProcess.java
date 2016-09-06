@@ -69,6 +69,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess extends Bat
     private static final RString 審査決定請求合計一時_TABLE_NAME = new RString("DbWT1613SinsaKetteiSeikyuGokei");
     private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
     private final RString レコード種別 = new RString("1");
+    private final RString エンドレコード種別 = new RString("3");
     private final RString 帳票レコード種別_H1 = new RString("H1");
     private final RString 帳票レコード種別_D1 = new RString("D1");
     private final RString 帳票レコード種別_T1 = new RString("T1");
@@ -127,6 +128,9 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess extends Bat
     protected void process(RString line) {
         List<RString> data = line.split(区切り文字.toString());
         if (data != null && !data.isEmpty()) {
+            if (エンドレコード種別.equals(data.get(INDEX_0))) {
+                return;
+            }
             if (レコード種別.equals(data.get(INDEX_0))) {
                 controlCsvEntity = new KagoKetteiHokenshaInControlCsvEntity();
                 controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);
