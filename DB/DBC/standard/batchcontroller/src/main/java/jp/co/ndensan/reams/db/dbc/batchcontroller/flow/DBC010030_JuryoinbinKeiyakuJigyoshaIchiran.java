@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.juryoininjigyoshaichiran
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 受領委任契約事業者一覧のバッチ処理フロー
@@ -37,10 +39,26 @@ public class DBC010030_JuryoinbinKeiyakuJigyoshaIchiran extends BatchFlowBase<DB
     protected IBatchFlowCommand doIchiranhyoSakusei() {
         JuryoIninJigyoshaIchiranGetIdProcessParameter parameter
                 = new JuryoIninJigyoshaIchiranGetIdProcessParameter();
-        parameter.set契約事業者番号FROM(getParameter().get契約事業者番号FROM());
-        parameter.set契約事業者番号TO(getParameter().get契約事業者番号TO());
-        parameter.set契約日FROM(getParameter().get契約日FROM());
-        parameter.set契約日TO(getParameter().get契約日TO());
+        if (RString.isNullOrEmpty(getParameter().get契約事業者番号FROM())) {
+            parameter.set契約事業者番号FROM(RString.EMPTY);
+        } else {
+            parameter.set契約事業者番号FROM(getParameter().get契約事業者番号FROM());
+        }
+        if (RString.isNullOrEmpty(getParameter().get契約事業者番号TO())) {
+            parameter.set契約事業者番号TO(RString.EMPTY);
+        } else {
+            parameter.set契約事業者番号TO(getParameter().get契約事業者番号TO());
+        }
+        if (getParameter().get契約日FROM() == null) {
+            parameter.set契約日FROM(FlexibleDate.EMPTY);
+        } else {
+            parameter.set契約日FROM(getParameter().get契約日FROM());
+        }
+        if (getParameter().get契約日TO() == null) {
+            parameter.set契約日TO(FlexibleDate.EMPTY);
+        } else {
+            parameter.set契約日TO(getParameter().get契約日TO());
+        }
         parameter.set契約種別(getParameter().get契約種別());
         parameter.set契約期間終了事業者(getParameter().get契約期間終了事業者());
         parameter.set帳票出力順ID(Long.parseLong(getParameter().get改頁出力順ID().toString()));
