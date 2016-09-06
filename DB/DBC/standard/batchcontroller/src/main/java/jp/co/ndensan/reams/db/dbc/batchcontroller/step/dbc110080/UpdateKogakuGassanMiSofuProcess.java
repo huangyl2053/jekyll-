@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class UpdateKogakuGassanMiSofuProcess extends BatchProcessBase<DbT3070KogakuGassanJikoFutanGakuEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassan."
-            + "IKogakugassanHoseisumiJikofutangakuOutMapper.get未送付一覧表出力対象データ");
+            + "IKogakugassanHoseisumiJikofutangakuOutMapper.get未送付高額合算自己負担額データ");
     @BatchWriter
     BatchPermanentTableWriter 高額合算自己負担額3070tableWriter;
 
