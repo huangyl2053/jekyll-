@@ -153,7 +153,7 @@ public class SogojigyohiShikakuShogohyoDoSakuseiService {
         resultEntity.set公費1給付率(do給付率編集(entity.get公費１給付率()));
         resultEntity.set公費2給付率(do給付率編集(entity.get公費２給付率()));
         resultEntity.set公費3給付率(do給付率編集(entity.get公費３給付率()));
-        resultEntity.setサービス日数_回数(new RString(Integer.toString(entity.getサービス日数_回数())));
+        resultEntity.setサービス日数_回数(doカンマ編集(new Decimal(entity.getサービス日数_回数())));
         resultEntity.setサービス単位数(doカンマ編集(entity.getサービス単位数()));
         resultEntity.set利用者負担額(doカンマ編集(entity.get利用者負担額()));
     }
@@ -162,13 +162,13 @@ public class SogojigyohiShikakuShogohyoDoSakuseiService {
         if (null == number) {
             return RString.EMPTY;
         }
-        return DecimalFormatter.toRString(number, 0);
+        return DecimalFormatter.toコンマ区切りRString(number, 0);
     }
 
     private RString do給付率編集(HokenKyufuRitsu number) {
         if (null == number) {
             return RString.EMPTY;
         }
-        return doカンマ編集(number.getColumnValue());
+        return DecimalFormatter.toRString(number.getColumnValue(), 0);
     }
 }
