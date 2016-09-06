@@ -33,7 +33,11 @@ public enum YokaigoInterfaceShurui {
     /**
      * コード:8 名称:ＦＮＳ 略称:定義なし
      */
-    ＦＮＳ("8", "ＦＮＳ");
+    ＦＮＳ("8", "ＦＮＳ"),
+    /**
+     * コード:9 名称:ＮＥＣ 略称:定義なし
+     */
+    ＮＥＣ("9", "ＮＥＣ");
 
     private final RString code;
     private final RString fullName;
