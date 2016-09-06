@@ -15,7 +15,11 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.Breakers;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 償還払支給決定者一覧表帳票のプロパティです。
@@ -90,6 +94,26 @@ public class ShokanbaraiShikyuKetteishaIchiranProperty
         if (!改頁６.isEmpty()) {
             pageBreakKeys.add(改頁６);
         }
+    }
+
+    @Override
+    public Breakers<ShokanbaraiShikyuKetteishaIchiranSource> defineBreakers(
+            Breakers<ShokanbaraiShikyuKetteishaIchiranSource> breakers,
+            BreakerCatalog<ShokanbaraiShikyuKetteishaIchiranSource> catalog) {
+        return breakers.add(catalog.new SimplePageBreaker(
+
+            pageBreakKeys) {
+            @Override
+            public ReportLineRecord<ShokanbaraiShikyuKetteishaIchiranSource> occuredBreak(
+                    ReportLineRecord<ShokanbaraiShikyuKetteishaIchiranSource> currentRecord,
+                    ReportLineRecord<ShokanbaraiShikyuKetteishaIchiranSource> nextRecord,
+                    ReportDynamicChart dynamicChart) {
+                if (nextRecord == ReportLineRecord.LAST_RECORD) {
+                    return currentRecord;
+                }
+                return currentRecord;
+            }
+        }).fixed();
     }
 
     private RString to帳票物理名(RString 項目ID) {
