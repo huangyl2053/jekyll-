@@ -242,6 +242,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
 
     private RiyoshaFutanGakuGengakuEucCsvEntity setBlank() {
         RiyoshaFutanGakuGengakuEucCsvEntity eucCsvEntity = new RiyoshaFutanGakuGengakuEucCsvEntity();
+        eucCsvEntity.set連番(RString.EMPTY);
         eucCsvEntity.set識別コード(RString.EMPTY);
         eucCsvEntity.set住民種別(RString.EMPTY);
         eucCsvEntity.set氏名(RString.EMPTY);
@@ -489,6 +490,9 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
     }
 
     private void setEucCsvEntity(RiyoshaFutanGakuGengakuEucCsvEntity eucCsvEntity, RiyoshaFutanGakuGengakuEntity entity) {
+        if (processParamter.isCsvrenbanfuka()) {
+            eucCsvEntity.set連番(new RString(String.valueOf(++i)));
+        }
         if (entity.getPsmEntity() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
             eucCsvEntity.set識別コード(kojin.get識別コード().value());

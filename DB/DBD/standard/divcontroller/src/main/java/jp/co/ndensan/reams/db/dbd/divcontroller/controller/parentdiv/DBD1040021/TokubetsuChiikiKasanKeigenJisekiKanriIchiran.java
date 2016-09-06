@@ -24,8 +24,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
  */
 public class TokubetsuChiikiKasanKeigenJisekiKanriIchiran {
 
-    private final DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriListParameter bparameter
-            = new DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriListParameter();
     private static final RString REPORTID = new RString("DBD200012_TokubetsuChiikiKasanKeigenJisekiKanriIchiran");
     private static final RString KEY0 = new RString("0");
     private static final RString KEY1 = new RString("1");
@@ -44,6 +42,8 @@ public class TokubetsuChiikiKasanKeigenJisekiKanriIchiran {
      * @return 特別地域加算軽減実績管理リスト（画面）バッチパラメター
      */
     public DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriListParameter createParameter(TokubetsuPanelDiv div) {
+        DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriListParameter bparameter
+                = new DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriListParameter();
         if (div.getRadTaishoYM().getSelectedKey().equals(KEY1)) {
             bparameter.set対象年月(TargetYearMonth.サービス提供年月);
         } else {
@@ -63,44 +63,31 @@ public class TokubetsuChiikiKasanKeigenJisekiKanriIchiran {
         if (!div.getTxtJigyoshaNo().getValue().isNullOrEmpty()) {
             bparameter.set事業者番号(div.getTxtJigyoshaNo().getValue());
         }
-        set地区バッチパラメター(div);
 
-        div.getCcdHokenshaList().loadHokenshaList();
-        if (div.getShichosonPanel().isVisible() && div.getCcdHokenshaList().getSelectedItem() != null) {
-            bparameter.set市町村コード(div.getCcdHokenshaList().getSelectedItem().get市町村コード());
+        if (div.getDdlChiku().getSelectedKey().equals(KEY0)) {
+            set地区(bparameter, TargetArea.全て, RString.EMPTY, RString.EMPTY);
+        } else if (div.getDdlChiku().getSelectedKey().equals(KEY1)) {
+            set地区(bparameter, TargetArea.住所,
+                    div.getChushutsuJoken().getTxtChikuCodeFrom().getValue(),
+                    div.getChushutsuJoken().getTxtChikuCodeTo().getValue());
+        } else if (div.getDdlChiku().getSelectedKey().equals(KEY2)) {
+            set地区(bparameter, TargetArea.行政区,
+                    div.getChushutsuJoken().getTxtChikuCodeFrom().getValue(),
+                    div.getChushutsuJoken().getTxtChikuCodeTo().getValue());
+        } else {
+            set地区(bparameter, TargetArea.地区,
+                    div.getChushutsuJoken().getTxtChikuCodeFrom().getValue(),
+                    div.getChushutsuJoken().getTxtChikuCodeTo().getValue());
         }
 
+        div.getCcdHokenshaList().loadHokenshaList();
+        if (div.getCcdHokenshaList().getSelectedItem() != null) {
+            bparameter.set市町村コード(div.getCcdHokenshaList().getSelectedItem().get市町村コード());
+        }
         ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200012.getReportId());
         bparameter.set改頁出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
 
         bparameter.set帳票ID(new ReportId(REPORTID));
-        return bparameter;
-    }
-
-    /**
-     * 地区バッチパラメターを取得します．
-     *
-     * @param div TokubetsuPanelDiv
-     * @return 特別地域加算軽減実績管理リスト（画面）バッチパラメター
-     */
-    public DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriListParameter set地区バッチパラメター(TokubetsuPanelDiv div) {
-        if (div.getChushutsuJoken().isVisible()) {
-            if (div.getDdlChiku().getSelectedKey().equals(KEY0)) {
-                set地区(bparameter, TargetArea.全て, RString.EMPTY, RString.EMPTY);
-            } else if (div.getDdlChiku().getSelectedKey().equals(KEY1)) {
-                set地区(bparameter, TargetArea.住所,
-                        div.getChushutsuJoken().getTxtChikuCodeFrom().getValue(),
-                        div.getChushutsuJoken().getTxtChikuCodeTo().getValue());
-            } else if (div.getDdlChiku().getSelectedKey().equals(KEY2)) {
-                set地区(bparameter, TargetArea.行政区,
-                        div.getChushutsuJoken().getTxtChikuCodeFrom().getValue(),
-                        div.getChushutsuJoken().getTxtChikuCodeTo().getValue());
-            } else {
-                set地区(bparameter, TargetArea.地区,
-                        div.getChushutsuJoken().getTxtChikuCodeFrom().getValue(),
-                        div.getChushutsuJoken().getTxtChikuCodeTo().getValue());
-            }
-        }
         return bparameter;
     }
 

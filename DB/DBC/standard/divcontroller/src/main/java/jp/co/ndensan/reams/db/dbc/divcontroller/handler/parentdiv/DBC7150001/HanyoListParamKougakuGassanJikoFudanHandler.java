@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7150001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710150.DBC710150_HanyoListKogakuGassanJikoFutangakuParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_DataSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7150001.ChushutsuJokenPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7150001.HanyoListParamKougakuGassanJikoFudanDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
@@ -229,10 +228,11 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         KeyValueDataSource dataSourceBlank = new KeyValueDataSource(BLANK, すべて);
         dataSourceList.add(dataSourceBlank);
-        for (Kaigogassan_DataSakuseiKubun データ作成 : Kaigogassan_DataSakuseiKubun.values()) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(データ作成.getコード(), データ作成.get名称());
-            dataSourceList.add(dataSource);
-        }
+        // TODO QA1299
+//        for (KaigoGassan_ShinseiJokyoKbn データ作成 : KaigoGassan_ShinseiJokyoKbn.values()) {
+//            KeyValueDataSource dataSource = new KeyValueDataSource(データ作成.getコード(), データ作成.get名称());
+//            dataSourceList.add(dataSource);
+//    }
         return dataSourceList;
     }
 

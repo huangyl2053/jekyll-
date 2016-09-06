@@ -70,6 +70,7 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
     private static final RString TITLE_保険者区分 = new RString("　保険者区分：");
     private static final RString TITLE_サービス提供年月 = new RString("　サービス提供年月：");
     private static final RString TITLE_事業者 = new RString("　事業者：");
+    private static final RString 分 = new RString("分");
     private static final RString 括弧LEFT = new RString("（");
     private static final RString 括弧RIGHT = new RString("）");
     private static final RString TILDE = new RString("～");
@@ -92,6 +93,7 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
     @Override
     protected void initialize() {
         //TODO  QA1397 出力順の補正
+        parameter.toMybatisParameter();
         構成市町村マスタ = new HashMap<>();
         連番 = 0;
         csv出力Flag = 定数_なし;
@@ -198,7 +200,7 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
 
     private void get抽出条件Part2(List<RString> 抽出条件) {
         if (!RString.isNullOrEmpty(parameter.get保険者区分())) {
-            抽出条件.add(TITLE_保険者区分.concat(KagoMoshitateKekka_HokenshaKubun.toValue(parameter.get保険者区分()).get略称()));
+            抽出条件.add(TITLE_保険者区分.concat(KagoMoshitateKekka_HokenshaKubun.toValue(parameter.get保険者区分()).get名称()).concat(分));
         }
         if ((parameter.getサービス提供年月From() != null && !FlexibleYearMonth.EMPTY.equals(parameter.getサービス提供年月From()))
                 || (parameter.getサービス提供年月To() != null && !FlexibleYearMonth.EMPTY.equals(parameter.getサービス提供年月To()))) {

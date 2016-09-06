@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2800011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110810.DBC110810_JukyushaTotsugoIraiOutParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JyukyusyaIF_TotugoIraiJyohoTyusyutuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_ShinseiShubetsuCode;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2800011.JukyushaTotsugoIraiJohoSakuseiDiv;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -106,9 +106,10 @@ public class JukyushaTotsugoIraiJohoSakuseiHandler {
     }
 
     private List<KeyValueDataSource> getChuushutuKunbun() {
+        //TODO:DBC.Enum.受給者IF_突合依頼情報抽出区分
         List<KeyValueDataSource> list = new ArrayList<>();
-        for (JyukyusyaIF_TotugoIraiJyohoTyusyutuKubun code : JyukyusyaIF_TotugoIraiJyohoTyusyutuKubun.values()) {
-            JyukyusyaIF_TotugoIraiJyohoTyusyutuKubun kubuncode = JyukyusyaIF_TotugoIraiJyohoTyusyutuKubun.toValue(code.getコード());
+        for (JukyushaIF_ShinseiShubetsuCode code : JukyushaIF_ShinseiShubetsuCode.values()) {
+            JukyushaIF_ShinseiShubetsuCode kubuncode = JukyushaIF_ShinseiShubetsuCode.toValue(code.getコード());
             KeyValueDataSource dataSource = new KeyValueDataSource(kubuncode.getコード(), kubuncode.get名称());
             list.add(dataSource);
         }

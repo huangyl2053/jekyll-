@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyojokyohokokushiryon
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.HyoNo;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.PrintControlKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNo;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.Syorimei;
@@ -241,14 +240,11 @@ public final class JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter implemen
         集計番号リスト.add(ShukeiNo.一般状況_1_第1号被保険者数.getコード());
         集計番号リスト.add(ShukeiNo.一般状況_2_第1号被保険者増減内訳_当月中増.getコード());
         集計番号リスト.add(ShukeiNo.一般状況_2_第2号被保険者増減内訳_当月中減.getコード());
-        集計番号リスト.add(ShukeiNo.一般状況_4_所得段階別第１号被保険者数.getコード());
-        集計番号リスト.add(ShukeiNo.一般状況_5_標準負担減額認定.getコード());
+        // TODO     0400,0500
         集計番号リスト.add(ShukeiNo.一般状況_4_利用者負担減額_免除認定_総数.getコード());
-        集計番号リスト.add(ShukeiNo.一般状況_7_特定標準負担_旧措置.getコード());
-        集計番号リスト.add(ShukeiNo.一般状況_5_介護老人福祉施設旧措置入所者に係る減額_免除認定_総数_利用者負担.getコード());
-        集計番号リスト.add(ShukeiNo.一般状況_8_標準負担減額認定_第２号.getコード());
+        集計番号リスト.add(ShukeiNo.利用者負担第四段階_0701.getコード());
+        集計番号リスト.add(ShukeiNo.利用者負担第三段階_0702.getコード());
         集計番号リスト.add(ShukeiNo.一般状況_7_利用者負担減額_免除認定_再掲_第2号被保険者分.getコード());
-        集計番号リスト.add(ShukeiNo.一般状況_10_特定標準負担_旧措置_第２号.getコード());
         集計番号リスト.add(ShukeiNo.一般状況_8_介護老人福祉施設旧措置入所者に係る減額_免除認定_再掲_第2号被保険者分_利用者負担.getコード());
         集計番号リスト.add(ShukeiNo.一般状況_11_要介護_要支援_認定者数.getコード());
         集計番号リスト.add(ShukeiNo.一般状況_3_食費_居住費に係る負担限度額認定_総数.getコード());
@@ -262,8 +258,8 @@ public final class JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter implemen
 
     private static List<RString> get表番号List() {
         List<RString> 表番号リスト = new ArrayList<>();
-        表番号リスト.add(HyoNo.現物_一般状況.getコード());
-        表番号リスト.add(HyoNo.現物_一般状況_旧市町村.getコード());
+        表番号リスト.add(new RString("01"));
+        表番号リスト.add(new RString("11"));
         return 表番号リスト;
     }
 }

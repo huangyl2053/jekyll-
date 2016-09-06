@@ -91,7 +91,7 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
             source.jusho = 社福減免対象者情報.get事業者住所() == null ? RString.EMPTY : 社福減免対象者情報.get事業者住所().value();
             source.telNo = 社福減免対象者情報.get電話番号() == null ? RString.EMPTY : 社福減免対象者情報.get電話番号().value();
             source.listHihokenshaNameKana_1 = 社福減免対象者情報.getカナ名称() == null ? RString.EMPTY : 社福減免対象者情報.getカナ名称().value();
-            source.listHihokenshaName_1 = 社福減免対象者情報.get名称() == null ? RString.EMPTY : 社福減免対象者情報.get名称().value();
+            source.listHihokenshaName_1 = 社福減免対象者情報.get名称().value();
             source.listMeisai_1 = new RString(index);
             source.listMeisai_2 = 社福減免対象者情報.get被保険者番号() == null ? RString.EMPTY : 社福減免対象者情報.get被保険者番号().value();
             if (new RString("1").equals(社福減免対象者情報.get住民種別コード())
@@ -103,10 +103,10 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
                 source.listMeisai_3 = 社福減免対象者情報.get生年月日() == null ? RString.EMPTY : 社福減免対象者情報.get生年月日().
                         seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             }
-            if (社福減免対象者情報.get性別コード() != null && !社福減免対象者情報.get性別コード().isEmpty()) {
+            if (社福減免対象者情報.get性別コード() != null && 社福減免対象者情報.get性別コード().isEmpty()) {
                 source.listMeisai_4 = Seibetsu.toValue(社福減免対象者情報.get性別コード()).get名称();
             }
-            if (社福減免対象者情報.get要介護認定状態区分コード() != null && !社福減免対象者情報.get要介護認定状態区分コード().isEmpty()) {
+            if (社福減免対象者情報.get要介護認定状態区分コード() != null && 社福減免対象者情報.get要介護認定状態区分コード().isEmpty()) {
                 source.listMeisai_5 = YokaigoJotaiKubun.toValue(社福減免対象者情報.get要介護認定状態区分コード().getColumnValue()).get名称();
             }
             source.listMeisai_6 = 社福減免対象者情報.get確認番号();

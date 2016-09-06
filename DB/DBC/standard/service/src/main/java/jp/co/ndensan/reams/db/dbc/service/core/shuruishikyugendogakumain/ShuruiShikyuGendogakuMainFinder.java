@@ -80,49 +80,49 @@ public class ShuruiShikyuGendogakuMainFinder {
                     && getForList(list, entity).equals(numthree)) {
                 list.add(new ShuruiShikyuGendogakuMainEntity(entity.getTekiyoKaishiYM(), entity.getTekiyoShuryoYM(),
                         entity.getServiceShuruiCode(), entity.getShikyuGendoTaniSu(),
-                        null, null, null, null, null, null, null));
+                        Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO));
             } else if (KubunShikyuGendogakuYokaigoJotaiKubun.要支援1.getコード().equals(支給限度額要介護状態区分)
                     && getForList(list, entity).equals(numthree)) {
                 list.add(new ShuruiShikyuGendogakuMainEntity(entity.getTekiyoKaishiYM(), entity.getTekiyoShuryoYM(),
                         entity.getServiceShuruiCode(),
-                        null, entity.getShikyuGendoTaniSu(), null, null, null,
-                        null, null, null));
+                        Decimal.ZERO, entity.getShikyuGendoTaniSu(), Decimal.ZERO, Decimal.ZERO, Decimal.ZERO,
+                        Decimal.ZERO, Decimal.ZERO, Decimal.ZERO));
             } else if (KubunShikyuGendogakuYokaigoJotaiKubun.要支援2.getコード().equals(支給限度額要介護状態区分)
                     && getForList(list, entity).equals(numthree)) {
                 list.add(new ShuruiShikyuGendogakuMainEntity(entity.getTekiyoKaishiYM(), entity.getTekiyoShuryoYM(),
                         entity.getServiceShuruiCode(),
-                        null, null, entity.getShikyuGendoTaniSu(), null, null,
-                        null, null, null));
+                        Decimal.ZERO, Decimal.ZERO, entity.getShikyuGendoTaniSu(), Decimal.ZERO, Decimal.ZERO,
+                        Decimal.ZERO, Decimal.ZERO, Decimal.ZERO));
             } else if (KubunShikyuGendogakuYokaigoJotaiKubun.要介護1.getコード().equals(支給限度額要介護状態区分)
                     && getForList(list, entity).equals(numthree)) {
                 list.add(new ShuruiShikyuGendogakuMainEntity(entity.getTekiyoKaishiYM(), entity.getTekiyoShuryoYM(),
                         entity.getServiceShuruiCode(),
-                        null, null, null, entity.getShikyuGendoTaniSu(), null,
-                        null, null, null));
+                        Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, entity.getShikyuGendoTaniSu(), Decimal.ZERO,
+                        Decimal.ZERO, Decimal.ZERO, Decimal.ZERO));
             } else if (KubunShikyuGendogakuYokaigoJotaiKubun.要介護2.getコード().equals(支給限度額要介護状態区分)
                     && getForLists(list, entity).equals(numthree)) {
                 list.add(new ShuruiShikyuGendogakuMainEntity(entity.getTekiyoKaishiYM(), entity.getTekiyoShuryoYM(),
                         entity.getServiceShuruiCode(),
-                        null, null, null, null, entity.getShikyuGendoTaniSu(),
-                        null, null, null));
+                        Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, entity.getShikyuGendoTaniSu(),
+                        Decimal.ZERO, Decimal.ZERO, Decimal.ZERO));
             } else if (KubunShikyuGendogakuYokaigoJotaiKubun.要介護3.getコード().equals(支給限度額要介護状態区分)
                     && getForLists(list, entity).equals(numthree)) {
                 list.add(new ShuruiShikyuGendogakuMainEntity(entity.getTekiyoKaishiYM(), entity.getTekiyoShuryoYM(),
                         entity.getServiceShuruiCode(),
-                        null, null, null, null, null,
-                        entity.getShikyuGendoTaniSu(), null, null));
+                        Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO,
+                        entity.getShikyuGendoTaniSu(), Decimal.ZERO, Decimal.ZERO));
             } else if (KubunShikyuGendogakuYokaigoJotaiKubun.要介護4.getコード().equals(支給限度額要介護状態区分)
                     && getForLists(list, entity).equals(numthree)) {
                 list.add(new ShuruiShikyuGendogakuMainEntity(entity.getTekiyoKaishiYM(), entity.getTekiyoShuryoYM(),
                         entity.getServiceShuruiCode(),
-                        null, null, null, null, null, null,
-                        entity.getShikyuGendoTaniSu(), null));
+                        Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO,
+                        entity.getShikyuGendoTaniSu(), Decimal.ZERO));
             } else if (KubunShikyuGendogakuYokaigoJotaiKubun.要介護5.getコード().equals(支給限度額要介護状態区分)
                     && getForLists(list, entity).equals(numthree)) {
                 list.add(new ShuruiShikyuGendogakuMainEntity(entity.getTekiyoKaishiYM(), entity.getTekiyoShuryoYM(),
                         entity.getServiceShuruiCode(),
-                        null, null, null, null, null, null,
-                        null, entity.getShikyuGendoTaniSu()));
+                        Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO,
+                        Decimal.ZERO, entity.getShikyuGendoTaniSu()));
             }
         }
         return getResultMap(map, resultList, list);
@@ -134,7 +134,7 @@ public class ShuruiShikyuGendogakuMainFinder {
             if (KubunShikyuGendogakuYokaigoJotaiKubun.経過介護.getコード().equals(entity.getYoKaigoJotaiKubun())
                     && kuMainEntity.get適用開始年月().equals(entity.getTekiyoKaishiYM())
                     && kuMainEntity.getサービス種類コード().equals(entity.getServiceShuruiCode())) {
-                if (kuMainEntity.get経過介護支給限度額() == null) {
+                if (kuMainEntity.get経過介護支給限度額().equals(Decimal.ZERO)) {
                     kuMainEntity.set経過介護支給限度額(entity.getShikyuGendoTaniSu());
                     return numone;
                 }
@@ -142,7 +142,7 @@ public class ShuruiShikyuGendogakuMainFinder {
             } else if (KubunShikyuGendogakuYokaigoJotaiKubun.要支援1.getコード().equals(entity.getYoKaigoJotaiKubun())
                     && kuMainEntity.get適用開始年月().equals(entity.getTekiyoKaishiYM())
                     && kuMainEntity.getサービス種類コード().equals(entity.getServiceShuruiCode())) {
-                if (kuMainEntity.get要支援１支給限度額() == null) {
+                if (kuMainEntity.get要支援１支給限度額().equals(Decimal.ZERO)) {
                     kuMainEntity.set要支援１支給限度額(entity.getShikyuGendoTaniSu());
                     return numone;
                 }
@@ -150,7 +150,7 @@ public class ShuruiShikyuGendogakuMainFinder {
             } else if (KubunShikyuGendogakuYokaigoJotaiKubun.要支援2.getコード().equals(entity.getYoKaigoJotaiKubun())
                     && kuMainEntity.get適用開始年月().equals(entity.getTekiyoKaishiYM())
                     && kuMainEntity.getサービス種類コード().equals(entity.getServiceShuruiCode())) {
-                if (kuMainEntity.get要支援2支給限度額() == null) {
+                if (kuMainEntity.get要支援2支給限度額().equals(Decimal.ZERO)) {
                     kuMainEntity.set要支援2支給限度額(entity.getShikyuGendoTaniSu());
                     return numone;
                 }
@@ -158,7 +158,7 @@ public class ShuruiShikyuGendogakuMainFinder {
             } else if (KubunShikyuGendogakuYokaigoJotaiKubun.要介護1.getコード().equals(entity.getYoKaigoJotaiKubun())
                     && kuMainEntity.get適用開始年月().equals(entity.getTekiyoKaishiYM())
                     && kuMainEntity.getサービス種類コード().equals(entity.getServiceShuruiCode())) {
-                if (kuMainEntity.get要介護１支給限度額() == null) {
+                if (kuMainEntity.get要介護１支給限度額().equals(Decimal.ZERO)) {
                     kuMainEntity.set要介護１支給限度額(entity.getShikyuGendoTaniSu());
                     return numone;
                 }
@@ -174,7 +174,7 @@ public class ShuruiShikyuGendogakuMainFinder {
             if (KubunShikyuGendogakuYokaigoJotaiKubun.要介護2.getコード().equals(entity.getYoKaigoJotaiKubun())
                     && kuMainEntity.get適用開始年月().equals(entity.getTekiyoKaishiYM())
                     && kuMainEntity.getサービス種類コード().equals(entity.getServiceShuruiCode())) {
-                if (kuMainEntity.get要介護２支給限度額() == null) {
+                if (kuMainEntity.get要介護２支給限度額().equals(Decimal.ZERO)) {
                     kuMainEntity.set要介護２支給限度額(entity.getShikyuGendoTaniSu());
                     return numone;
                 }
@@ -182,7 +182,7 @@ public class ShuruiShikyuGendogakuMainFinder {
             } else if (KubunShikyuGendogakuYokaigoJotaiKubun.要介護3.getコード().equals(entity.getYoKaigoJotaiKubun())
                     && kuMainEntity.get適用開始年月().equals(entity.getTekiyoKaishiYM())
                     && kuMainEntity.getサービス種類コード().equals(entity.getServiceShuruiCode())) {
-                if (kuMainEntity.get要介護３支給限度額() == null) {
+                if (kuMainEntity.get要介護３支給限度額().equals(Decimal.ZERO)) {
                     kuMainEntity.set要介護３支給限度額(entity.getShikyuGendoTaniSu());
                     return numone;
                 }
@@ -190,7 +190,7 @@ public class ShuruiShikyuGendogakuMainFinder {
             } else if (KubunShikyuGendogakuYokaigoJotaiKubun.要介護4.getコード().equals(entity.getYoKaigoJotaiKubun())
                     && kuMainEntity.get適用開始年月().equals(entity.getTekiyoKaishiYM())
                     && kuMainEntity.getサービス種類コード().equals(entity.getServiceShuruiCode())) {
-                if (kuMainEntity.get要介護４支給限度額() == null) {
+                if (kuMainEntity.get要介護４支給限度額().equals(Decimal.ZERO)) {
                     kuMainEntity.set要介護４支給限度額(entity.getShikyuGendoTaniSu());
                     return numone;
                 }
@@ -198,7 +198,7 @@ public class ShuruiShikyuGendogakuMainFinder {
             } else if (KubunShikyuGendogakuYokaigoJotaiKubun.要介護5.getコード().equals(entity.getYoKaigoJotaiKubun())
                     && kuMainEntity.get適用開始年月().equals(entity.getTekiyoKaishiYM())
                     && kuMainEntity.getサービス種類コード().equals(entity.getServiceShuruiCode())) {
-                if (kuMainEntity.get要介護５支給限度額() == null) {
+                if (kuMainEntity.get要介護５支給限度額().equals(Decimal.ZERO)) {
                     kuMainEntity.set要介護５支給限度額(entity.getShikyuGendoTaniSu());
                     return numone;
                 }

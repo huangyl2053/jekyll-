@@ -11,19 +11,14 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0520011.Koku
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0520011.KokuhoShikakuInfoPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0520011.MainPanelValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 国保資格情報登録
@@ -39,14 +34,14 @@ public class KokuhoShikakuInfoPanel {
      * @return ResponseData<mainPanelDiv>
      */
     public ResponseData<KokuhoShikakuInfoPanelDiv> onMainLoad(KokuhoShikakuInfoPanelDiv mainPanelDiv) {
-        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        if (taishoshaKey == null || taishoshaKey.get被保険者番号() == null || taishoshaKey.get被保険者番号().isEmpty()) {
-            throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace("被保険者番号なし"));
-        }
-        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
-//        HihokenshaNo 被保険者番号 = new HihokenshaNo(new RString("6000000010"));
-//        ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("000000000000010"));
+//        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+//        if (taishoshaKey == null || taishoshaKey.get被保険者番号() == null || taishoshaKey.get被保険者番号().isEmpty()) {
+//            throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace("被保険者番号なし"));
+//        }
+//        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+//        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(new RString("6000000010"));
+        ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("000000000000010"));
         getHandler(mainPanelDiv).initialize(識別コード, 被保険者番号);
         return ResponseData.of(mainPanelDiv).respond();
     }

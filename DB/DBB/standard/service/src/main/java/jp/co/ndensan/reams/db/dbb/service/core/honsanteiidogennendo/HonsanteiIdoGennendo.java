@@ -866,7 +866,7 @@ public class HonsanteiIdoGennendo {
      * @return 処理日付管理entity
      */
     public ShoriDateKanri getMax基準日時(FlexibleYear 調定年度, RString 処理名) {
-        DbT7022ShoriDateKanriEntity shoriDateKanri = 処理日付管理Dac.select最大基準日時(SubGyomuCode.DBB介護賦課, 処理名, 処理_枝番, 調定年度);
+        DbT7022ShoriDateKanriEntity shoriDateKanri = 処理日付管理Dac.selectMax基準日(調定年度, 処理名);
         return new ShoriDateKanri(shoriDateKanri);
     }
 

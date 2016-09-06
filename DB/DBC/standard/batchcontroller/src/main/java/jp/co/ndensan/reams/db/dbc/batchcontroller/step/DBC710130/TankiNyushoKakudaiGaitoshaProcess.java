@@ -58,13 +58,11 @@ public class TankiNyushoKakudaiGaitoshaProcess extends BatchProcessBase<TankiNyu
     private RString 市町村名;
     private Map<RString, KoseiShichosonMaster> 市町村名MasterMap;
     private TankiNyushoKakudaiGaitosha business;
-    private boolean flag;
     @BatchWriter
     private CsvWriter<ITankiNyushoKakudaiGaitoshaEUCEntity> eucCsvWriter;
 
     @Override
     protected void initialize() {
-        flag = false;
         business = new TankiNyushoKakudaiGaitosha(processParameter);
         get市町村名();
     }
@@ -90,7 +88,6 @@ public class TankiNyushoKakudaiGaitoshaProcess extends BatchProcessBase<TankiNyu
 
     @Override
     protected void process(TankiNyushoKakudaiGaitoshaRelateEntity entity) {
-        flag = true;
         if (processParameter.is連番付加()) {
             eucCsvWriter.writeLine(business.set連番ありEUCEntity(entity, 市町村名MasterMap, 市町村名, 連番++));
         } else {
@@ -100,15 +97,8 @@ public class TankiNyushoKakudaiGaitoshaProcess extends BatchProcessBase<TankiNyu
 
     @Override
     protected void afterExecute() {
-        if (!flag) {
-            if (processParameter.is連番付加()) {
-                eucCsvWriter.writeLine(business.set連番ありEUCEntity());
-            } else {
-                eucCsvWriter.writeLine(business.set連番なしEUCEntity());
-            }
-        }
         eucCsvWriter.close();
-        manager.spool(eucFilePath, business.getアクセスログ());
+        manager.spool(eucFilePath);
         outputJokenhyoFactory();
     }
 

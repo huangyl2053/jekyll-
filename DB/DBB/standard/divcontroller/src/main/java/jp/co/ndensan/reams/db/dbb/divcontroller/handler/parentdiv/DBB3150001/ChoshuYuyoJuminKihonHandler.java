@@ -330,7 +330,7 @@ public class ChoshuYuyoJuminKihonHandler {
     }
 
     private FlexibleDate get徴収猶予期間終了(RString 期, ChoshuYuyoJoho 徴収猶予の情報) {
-        if (定値_ゼロ.equals(期)) {
+        if (期 == null || 期.isEmpty()) {
             return null;
         }
         switch (Integer.valueOf(期.toString())) {
@@ -368,7 +368,7 @@ public class ChoshuYuyoJuminKihonHandler {
     }
 
     private FlexibleDate get徴収猶予期間開始(RString 期, ChoshuYuyoJoho 徴収猶予の情報) {
-        if (定値_ゼロ.equals(期)) {
+        if (期 == null || 期.isEmpty()) {
             return null;
         }
         switch (Integer.valueOf(期.toString())) {
@@ -862,9 +862,6 @@ public class ChoshuYuyoJuminKihonHandler {
         介護期別徴収猶予データ.clear();
         for (int i = ゼロ_定値; i < ジュウヨ_定値; i++) {
             KibetsuChoshyuYuyoKikann 期別徴収猶予期間 = 期別徴収猶予期間リスト.get(i);
-            if (定値_ゼロ.equals(期別徴収猶予期間.get普徴期())) {
-                continue;
-            }
             KaigoKibetsuChoshuYuyoParam データ = new KaigoKibetsuChoshuYuyoParam();
             データ.set期(Integer.valueOf(期別徴収猶予期間.get普徴期().toString()));
             データ.set徴収猶予開始日(期別徴収猶予期間.get徴収猶予_開始());

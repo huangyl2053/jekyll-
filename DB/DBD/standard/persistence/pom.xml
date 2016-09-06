@@ -18,6 +18,8 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbdDefinition</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

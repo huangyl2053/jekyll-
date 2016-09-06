@@ -43,8 +43,6 @@ public class GassanShikyugakuKeisankekkaSofuIchiranHeaderEditor implements IGass
     private final YMDHMS 作成日時;
 
     /**
-     * コンストラクタです
-     *
      * @param 出力順情報 IOutputOrder
      * @param 処理年月 RYearMonth
      * @param 作成日時 YMDHMS

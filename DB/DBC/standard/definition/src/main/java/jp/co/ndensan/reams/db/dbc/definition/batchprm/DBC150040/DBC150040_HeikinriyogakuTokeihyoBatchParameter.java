@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150040;
 
-import java.util.Map;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.heikinriyogakuyokeihyo.HeikinriyogakuTokeihyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -51,8 +51,8 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
     private RString shuryoYM;
     @BatchParameter(key = CHIKUSHITEI, name = "地区指定")
     private RString chikuShitei;
-    @BatchParameter(key = SELECTORCHIKULIST, name = "選択地区Map")
-    private Map<RString, RString> 選択地区Map;
+    @BatchParameter(key = SELECTORCHIKULIST, name = "選択地区リス")
+    private List<RString> selectorChikulist;
     @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
     private RString shichosonCode;
     @BatchParameter(key = SHICHOSONMEI, name = "市町村名称")
@@ -96,7 +96,7 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
      * @param kaishiYM 開始年月
      * @param shuryoYM 終了年月
      * @param chikuShitei 地区指定
-     * @param 選択結果Map 選択地区リス
+     * @param selectorChikulist 選択地区リス
      * @param shichosonCode 市町村コード
      * @param shichosonMei 市町村名称
      * @param kyuShichosonCode 旧市町村コード
@@ -117,7 +117,7 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
             RString kaishiYM,
             RString shuryoYM,
             RString chikuShitei,
-            Map<RString, RString> 選択結果Map,
+            List<RString> selectorChikulist,
             RString shichosonCode,
             RString shichosonMei,
             RString kyuShichosonCode,
@@ -136,7 +136,7 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
         this.kaishiYM = kaishiYM;
         this.shuryoYM = shuryoYM;
         this.chikuShitei = chikuShitei;
-        this.選択地区Map = 選択地区Map;
+        this.selectorChikulist = selectorChikulist;
         this.shichosonCode = shichosonCode;
         this.shichosonMei = shichosonMei;
         this.kyuShichosonCode = kyuShichosonCode;
@@ -164,7 +164,7 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
                 kaishiYM,
                 shuryoYM,
                 chikuShitei,
-                選択地区Map,
+                selectorChikulist,
                 shichosonCode,
                 shichosonMei,
                 kyuShichosonCode,

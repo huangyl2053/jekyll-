@@ -180,10 +180,7 @@ public class JuminIdoRendoShikakuToroku {
         if (isShoriTaisho(住民異動情報)) {
             List<DbV1001HihokenshaDaichoEntity> dbv1001EntityList = dbv1001dac
                     .selectBy識別コード(住民異動情報.getShikibetsuCode());
-            DbV1001HihokenshaDaichoEntity dbv1001Entity = null;
-            if (!dbv1001EntityList.isEmpty()) {
-                dbv1001Entity = dbv1001EntityList.get(0);
-            }
+            DbV1001HihokenshaDaichoEntity dbv1001Entity = dbv1001EntityList.get(0);
             if (転入.equals(異動事由コード)) {
                 tennyuEntity = tennyu(住民異動情報, dbv1001Entity,
                         介護保険施行日, 第２号被保険者到達基準年齢, 広域システム構成, 自動資格異動連動区分);

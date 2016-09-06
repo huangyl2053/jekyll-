@@ -31,13 +31,12 @@ public class GassanShikyugakuKeisankekkaSofuIchiranBodyEditor implements IGassan
     private final RString 対象年度 = new RString("年度");
     private static final int LENGTH_TWENTY = 20;
     private static final int LENGTH_ZERO = 0;
+    private static final int LENGTH_NINETEEN = 19;
     private static final RString 接続文字 = new RString("～");
     private final GassanShikyugakuKeisankekkaRanrakuhyoSofuEntity 送付一覧表データ;
     private final int 連番;
 
     /**
-     * コンストラクタです
-     *
      * @param 送付一覧表データ GassanShikyugakuKeisankekkaRanrakuhyoSofuEntity
      * @param 連番 int
      */
@@ -59,7 +58,7 @@ public class GassanShikyugakuKeisankekkaSofuIchiranBodyEditor implements IGassan
         if (tempEntity.getMeisho().length() <= LENGTH_TWENTY) {
             source.listUpper_3 = tempEntity.getMeisho();
         } else {
-            source.listUpper_3 = tempEntity.getMeisho().substring(LENGTH_ZERO, LENGTH_TWENTY);
+            source.listUpper_3 = tempEntity.getMeisho().substring(LENGTH_ZERO, LENGTH_NINETEEN);
         }
 
         if (高額合算Entity.getTaishoNendo() != null) {

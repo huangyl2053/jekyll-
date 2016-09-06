@@ -33,8 +33,6 @@ public class GassanHoseizumiJikofutangakuSofuchiranBodyEditor implements IGassan
     private final int 連番;
 
     /**
-     * コンストラクタです
-     *
      * @param 送付一覧表データ SyuturyokuEntity
      * @param 連番 int
      */

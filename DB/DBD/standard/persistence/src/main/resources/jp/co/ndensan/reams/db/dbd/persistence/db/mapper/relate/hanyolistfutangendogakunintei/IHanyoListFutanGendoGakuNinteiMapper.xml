@@ -538,7 +538,7 @@
 			) AS 医療保険加入状況																					
 			ON  医療保険加入状況."shikibetsuCode" = 最新被保台帳."shikibetsuCode"																					
 																								
-		INNER JOIN																						
+		LEFT OUTER JOIN																						
 			rgdb."DbT4101NinteiShinseiJoho" AS 今回申請																					
 			ON 今回申請."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																					
 																								
@@ -831,16 +831,16 @@
                     AND 介護保険負担限度額認定."ketteiYMD" <![CDATA[<=]]> #{hitsukehanito}
                 </if>
                 <if test="shiteinyushoshakyusochisha and shiteinyushoshafutankeigensha and !shiteinyushoshasonota">
-                    AND 介護保険負担限度額認定."kyusochishaKubun"='1'
-                    OR 介護保険負担限度額認定."kyusochishaKubun"='2'
+                    AND (介護保険負担限度額認定."kyusochishaKubun"='1'
+                    OR 介護保険負担限度額認定."kyusochishaKubun"='2')
                 </if>
                 <if test="shiteinyushoshakyusochisha and !shiteinyushoshafutankeigensha and shiteinyushoshasonota">
-                    AND 介護保険負担限度額認定."kyusochishaKubun"='1'
-                    OR 介護保険負担限度額認定."kyusochishaKubun"='3'
+                    AND (介護保険負担限度額認定."kyusochishaKubun"='1'
+                    OR 介護保険負担限度額認定."kyusochishaKubun"='3')
                 </if>
                 <if test="!shiteinyushoshakyusochisha and shiteinyushoshafutankeigensha and shiteinyushoshasonota">
-                    AND 介護保険負担限度額認定."kyusochishaKubun"='2'
-                    OR 介護保険負担限度額認定."kyusochishaKubun"='3'
+                    AND (介護保険負担限度額認定."kyusochishaKubun"='2'
+                    OR 介護保険負担限度額認定."kyusochishaKubun"='3')
                 </if>
                 <if test="shiteinyushoshakyusochisha and !shiteinyushoshafutankeigensha and !shiteinyushoshasonota">
                     AND 介護保険負担限度額認定."kyusochishaKubun"='1'
@@ -852,53 +852,53 @@
                     AND 介護保険負担限度額認定."kyusochishaKubun"='3'
                 </if>
                 <if test="shiteinyushoshadaiichidankai and shiteinyushoshadainidankai and shiteinyushoshadaisandankai and !shiteinyushoshakazeisou">
-                    AND 介護保険負担限度額認定."riyoshaFutanDankai"='1'
+                    AND (介護保険負担限度額認定."riyoshaFutanDankai"='1'
                     OR  介護保険負担限度額認定."riyoshaFutanDankai"='2'
-                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='3'   
+                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='3')
                 </if>
                 <if test="shiteinyushoshadaiichidankai and shiteinyushoshadainidankai and !shiteinyushoshadaisandankai and shiteinyushoshakazeisou">
-                    AND 介護保険負担限度額認定."riyoshaFutanDankai"='1'
+                    AND (介護保険負担限度額認定."riyoshaFutanDankai"='1'
                     OR  介護保険負担限度額認定."riyoshaFutanDankai"='2'
-                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='4'   
+                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='4')  
                 </if>
                 <if test="shiteinyushoshadaiichidankai and shiteinyushoshadainidankai and !shiteinyushoshadaisandankai and shiteinyushoshakazeisou">
-                    AND 介護保険負担限度額認定."riyoshaFutanDankai"='1'
+                    AND (介護保険負担限度額認定."riyoshaFutanDankai"='1'
                     OR  介護保険負担限度額認定."riyoshaFutanDankai"='2'
-                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='4'   
+                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='4')   
                 </if>
                 <if test="shiteinyushoshadaiichidankai and !shiteinyushoshadainidankai and shiteinyushoshadaisandankai and shiteinyushoshakazeisou">
-                    AND 介護保険負担限度額認定."riyoshaFutanDankai"='1'
+                    AND (介護保険負担限度額認定."riyoshaFutanDankai"='1'
                     OR  介護保険負担限度額認定."riyoshaFutanDankai"='3'
-                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='4'   
+                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='4')   
                 </if>
                 <if test="!shiteinyushoshadaiichidankai and shiteinyushoshadainidankai and shiteinyushoshadaisandankai and shiteinyushoshakazeisou">
-                    AND 介護保険負担限度額認定."riyoshaFutanDankai"='2'
+                    AND (介護保険負担限度額認定."riyoshaFutanDankai"='2'
                     OR  介護保険負担限度額認定."riyoshaFutanDankai"='3'
-                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='4'   
+                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='4')   
                 </if>
                 <if test="shiteinyushoshadaiichidankai and shiteinyushoshadainidankai and !shiteinyushoshadaisandankai and !shiteinyushoshakazeisou">
-                    AND 介護保険負担限度額認定."riyoshaFutanDankai"='1'
-                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='2' 
+                    AND (介護保険負担限度額認定."riyoshaFutanDankai"='1'
+                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='2')
                 </if>
                 <if test="shiteinyushoshadaiichidankai and !shiteinyushoshadainidankai and shiteinyushoshadaisandankai and !shiteinyushoshakazeisou">
-                    AND 介護保険負担限度額認定."riyoshaFutanDankai"='1'
-                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='3'
+                    AND (介護保険負担限度額認定."riyoshaFutanDankai"='1'
+                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='3')
                 </if>
                 <if test="shiteinyushoshadaiichidankai and !shiteinyushoshadainidankai and !shiteinyushoshadaisandankai and shiteinyushoshakazeisou">
-                    AND 介護保険負担限度額認定."riyoshaFutanDankai"='1'
-                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='4'
+                    AND (介護保険負担限度額認定."riyoshaFutanDankai"='1'
+                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='4')
                 </if>
                 <if test="!shiteinyushoshadaiichidankai and shiteinyushoshadainidankai and shiteinyushoshadaisandankai and !shiteinyushoshakazeisou">
-                    AND 介護保険負担限度額認定."riyoshaFutanDankai"='2'
-                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='3'
+                    AND (介護保険負担限度額認定."riyoshaFutanDankai"='2'
+                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='3')
                 </if>
                 <if test="!shiteinyushoshadaiichidankai and shiteinyushoshadainidankai and !shiteinyushoshadaisandankai and shiteinyushoshakazeisou">
-                    AND 介護保険負担限度額認定."riyoshaFutanDankai"='2'
-                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='4'
+                    AND (介護保険負担限度額認定."riyoshaFutanDankai"='2'
+                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='4')
                 </if>
                  <if test="!shiteinyushoshadaiichidankai and !shiteinyushoshadainidankai and shiteinyushoshadaisandankai and shiteinyushoshakazeisou">
-                    AND 介護保険負担限度額認定."riyoshaFutanDankai"='3'
-                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='4'
+                    AND (介護保険負担限度額認定."riyoshaFutanDankai"='3'
+                    OR  介護保険負担限度額認定."riyoshaFutanDankai"='4')
                 </if>
                 <if test="shiteinyushoshadaiichidankai and !shiteinyushoshadainidankai and !shiteinyushoshadaisandankai and !shiteinyushoshakazeisou">
                     AND 介護保険負担限度額認定."riyoshaFutanDankai"='1'

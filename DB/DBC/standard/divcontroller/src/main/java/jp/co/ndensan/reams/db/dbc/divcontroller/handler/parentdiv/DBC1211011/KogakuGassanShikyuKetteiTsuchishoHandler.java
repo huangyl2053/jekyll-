@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -119,21 +120,23 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
         RString 処理名 = ShoriName.高額合算自己負担額計算登録.get名称();
         RString 処理枝番 = NUM_0001;
+        FlexibleYear 年度 = new ShoriDateKanriManager().select最大年度().get年度();
+        RString 年度内連番 = new ShoriDateKanriManager().select最大年度の最大年度内連番(年度).get年度内連番();
         ShoriDateKanri 処理日付管理マスタ = new ShoriDateKanriManager().get処理日付管理マスタ(SubGyomuCode.DBC介護給付,
-                市町村コード, 処理名, 処理枝番);
+                市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
         if (!(処理日付管理マスタ == null)) {
             前回受取年月 = 処理日付管理マスタ.get対象開始年月日().getYearMonth();
         }
         処理枝番 = NUM_0002;
         処理日付管理マスタ = new ShoriDateKanriManager().get処理日付管理マスタ(SubGyomuCode.DBC介護給付, 市町村コード,
-                処理名, 処理枝番);
+                処理名, 処理枝番, 年度, 年度内連番);
         if (!(処理日付管理マスタ == null)) {
             前回申請年月開始 = 処理日付管理マスタ.get対象開始年月日();
             前回申請年月終了 = 処理日付管理マスタ.get対象終了年月日();
         }
         処理枝番 = NUM_0003;
         処理日付管理マスタ = new ShoriDateKanriManager().get処理日付管理マスタ(SubGyomuCode.DBC介護給付, 市町村コード,
-                処理名, 処理枝番);
+                処理名, 処理枝番, 年度, 年度内連番);
         if (!(処理日付管理マスタ == null)) {
             前回決定年月開始 = 処理日付管理マスタ.get対象開始年月日();
             前回決定年月終了 = 処理日付管理マスタ.get対象終了年月日();

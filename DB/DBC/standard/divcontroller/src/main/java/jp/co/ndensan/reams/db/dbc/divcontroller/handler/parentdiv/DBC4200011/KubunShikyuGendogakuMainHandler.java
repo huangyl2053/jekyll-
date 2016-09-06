@@ -575,7 +575,7 @@ public class KubunShikyuGendogakuMainHandler {
                         && !RS_1.equals(row.getHdnSaishinFlag())
                         && 適用開始年月.minusMonth(INDEX_1).toDateString().equals(
                                 row.getTekiyoShuryoYm().getValue().getYearMonth().toDateString())) {
-                    setUpdateList(FlexibleYearMonth.EMPTY, update居宅List, update上乗せ居宅List,
+                    setUpdateList(null, update居宅List, update上乗せ居宅List,
                             row, 居宅HolderList, 上乗せ居宅HolderList);
                 }
             }

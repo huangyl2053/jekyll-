@@ -48,8 +48,6 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
     private static final RString 連番付加キー = new RString("連番付加");
     private static final RString 日付編集キー = new RString("日付編集");
     private static final int 調定年度を含めて8年分 = 8;
-    private static final int BEGININDEX = 0;
-    private static final int ENDINDEX = 6;
 
     /**
      * コンストラクタです。
@@ -175,7 +173,7 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
         }
 
         RString 年度 = div.getChushutsuJokenPanel().getDdlTaishoNendo().getSelectedValue();
-        parameter.set対象年度(new FlexibleYear(年度.substring(BEGININDEX, ENDINDEX)));
+        parameter.set対象年度(new FlexibleYear(年度));
         TextBoxDateRange 受取年月 = div.getChushutsuJokenPanel().getTxtUketoriNengetsu();
         if (受取年月.isDisabled()) {
             parameter.set受取年月From(FlexibleYearMonth.EMPTY);

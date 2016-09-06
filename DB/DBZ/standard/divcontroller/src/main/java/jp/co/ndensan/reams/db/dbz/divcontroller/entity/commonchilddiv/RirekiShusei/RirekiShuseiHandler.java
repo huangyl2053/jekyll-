@@ -102,7 +102,7 @@ public class RirekiShuseiHandler {
         RirekiShuseiDataPass konkai = DataPassingConverter.deserialize(div.getHdnKonkaiJohoSerialized(),
                 RirekiShuseiDataPass.class);
         if (konkai != null) {
-            if (!RString.isNullOrEmpty(deleteKey)) {
+            if (RString.isNullOrEmpty(deleteKey)) {
                 div.getCcdKaigoNinteiShinseiKihonJohoInput().setInputMode(SHOKAI_MODE);
                 div.getCcdNinteiShinseiTodokedesha().set状態(SHOKAI_MODE);
                 div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.ShokaiMode);
@@ -111,7 +111,7 @@ public class RirekiShuseiHandler {
                 div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.TokushuSakujyoMode);
                 div.setHdnDisplayModeKey(new RString("1"));
                 div.getBtnKakutei().setDisabled(false);
-            } else if (!(konkai.get削除事由コード() != null && !konkai.get削除事由コード().isEmpty())) {
+            } else if (konkai.get削除事由コード() == null) {
                 div.getCcdKaigoNinteiShinseiKihonJohoInput().setInputMode(new RString("RirekiShuseiMode"));
                 div.getCcdNinteiShinseiTodokedesha().set状態(SHOKAI_MODE);
                 div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.ShokaiMode);
@@ -121,20 +121,18 @@ public class RirekiShuseiHandler {
                 div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.TokushuRirekiShuseiMode);
                 div.setHdnDisplayModeKey(new RString("2"));
                 div.getBtnKakutei().setDisabled(false);
+            } else if (konkai.getデータ区分().value().equals(new RString("00"))) {
+                div.getCcdKaigoNinteiShinseiKihonJohoInput().setInputMode(new RString("RirekiShuseiMode"));
+                div.getCcdNinteiShinseiTodokedesha().set状態(INPUT_MODE);
+                div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.SimpleShokaiMode);
+                div.getCcdChosaItakusakiAndChosainInput().setMode_ShoriType(ChosaItakusakiAndChosainInputDiv.ShoriType.SimpleShokaiMode);
+                div.getCcdNinteiJohoInput().set状態(new RString("TokushuShuseiMode"));
+                // TODO
+                div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.TokushuRirekiShuseiMode);
+                div.setHdnDisplayModeKey(new RString("2"));
+                div.getBtnKakutei().setDisabled(false);
             } else {
-                if (konkai.getデータ区分() != null && konkai.getデータ区分().value().equals(new RString("00"))) {
-                    div.getCcdKaigoNinteiShinseiKihonJohoInput().setInputMode(new RString("RirekiShuseiMode"));
-                    div.getCcdNinteiShinseiTodokedesha().set状態(INPUT_MODE);
-                    div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.SimpleShokaiMode);
-                    div.getCcdChosaItakusakiAndChosainInput().setMode_ShoriType(ChosaItakusakiAndChosainInputDiv.ShoriType.SimpleShokaiMode);
-                    div.getCcdNinteiJohoInput().set状態(new RString("TokushuShuseiMode"));
-                    // TODO
-                    div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.TokushuRirekiShuseiMode);
-                    div.setHdnDisplayModeKey(new RString("2"));
-                    div.getBtnKakutei().setDisabled(false);
-                } else {
-                    set状態(konkai.getデータ区分().value());
-                }
+                set状態(konkai.getデータ区分().value());
             }
 
             set介護認定申請基本情報入力(konkai);
@@ -143,20 +141,11 @@ public class RirekiShuseiHandler {
             dataPass.setカナ氏名(konkai.getカナ氏名());
             dataPass.set事業者区分(konkai.get事業者区分());
             dataPass.set住所(konkai.get住所());
-            if (konkai.get事業者番号() != null) {
-                dataPass.set申請届出代行事業者番号(konkai.get事業者番号().value());
-            }
-            if (konkai.get届出代行区分() != null) {
-                dataPass.set申請届出代行区分コード(konkai.get届出代行区分().value());
-            }
+            dataPass.set申請届出代行事業者番号(konkai.get事業者番号().value());
+            dataPass.set申請届出代行区分コード(konkai.get届出代行区分().value());
             dataPass.set続柄(konkai.get本人との関係性());
-            if (konkai.get郵便番号() != null) {
-                dataPass.set郵便番号(konkai.get郵便番号().value());
-            }
-            if (konkai.get電話番号() != null) {
-                dataPass.set電話番号(konkai.get電話番号().value());
-            }
-            dataPass.set氏名(konkai.get氏名());
+            dataPass.set郵便番号(konkai.get郵便番号().value());
+            dataPass.set電話番号(konkai.get電話番号().value());
             div.getCcdNinteiShinseiTodokedesha().initialize(dataPass);
 
             div.getCcdShujiiIryokikanAndShujiiInput().initialize(konkai.get市町村コード(),
@@ -277,6 +266,7 @@ public class RirekiShuseiHandler {
         rsb.append(inputNaiyo.get有効開始年月日());
         rsb.append(inputNaiyo.get有効終了年月日());
         rsb.append(inputNaiyo.get審査会意見());
+
         List<dgServiceIchiran_Row> serviceCodeList = div.getCcdNinteiJohoInput().getServiceRow();
         for (dgServiceIchiran_Row row : serviceCodeList) {
             rsb.append(row.getCode());
@@ -495,9 +485,7 @@ public class RirekiShuseiHandler {
 
     private void set申請その他情報(RirekiShuseiDataPass konkai) {
         div.getCcdShinseiSonotaJohoInput().initialize();
-        if (konkai.get削除事由コード() != null && !konkai.get削除事由コード().isEmpty()) {
-            div.getCcdShinseiSonotaJohoInput().set削除事由(konkai.get削除事由コード().value());
-        }
+        div.getCcdShinseiSonotaJohoInput().set削除事由(konkai.get削除事由コード().value());
         div.getCcdShinseiSonotaJohoInput().set理由(konkai.get異動理由());
         div.getCcdShinseiSonotaJohoInput().set取消日(konkai.get取下年月日());
         div.getCcdShinseiSonotaJohoInput().set喪失日(konkai.get喪失年月日());
@@ -505,9 +493,7 @@ public class RirekiShuseiHandler {
         div.getCcdShinseiSonotaJohoInput().set発行日１(konkai.get受給資格証明書発行年月日１());
         div.getCcdShinseiSonotaJohoInput().set当初認定期間From(konkai.get当初認定有効開始年月日());
         div.getCcdShinseiSonotaJohoInput().set当初認定期間To(konkai.get当初認定有効終了年月日());
-        if (konkai.getデータ区分() != null && !konkai.getデータ区分().isEmpty()) {
-            div.getCcdShinseiSonotaJohoInput().set異動事由(konkai.getデータ区分().value());
-        }
+        div.getCcdShinseiSonotaJohoInput().set異動事由(konkai.getデータ区分().value());
     }
 
     private void set前回情報(RirekiShuseiDataPass konkai) {
@@ -551,15 +537,9 @@ public class RirekiShuseiHandler {
                 konkai.get認定申請年月日().getMonthValue(), konkai.get認定申請年月日().getDayValue()));
         div.getCcdKaigoNinteiShinseiKihonJohoInput().setTxtShinseiJokyo(konkai.get申請状況区分());
         div.getCcdKaigoNinteiShinseiKihonJohoInput().setRadShinseishoKubun(konkai.get要介護申請_要支援申請の区分());
-        if (konkai.get受給申請事由() != null && !konkai.get受給申請事由().isEmpty()) {
-            div.getCcdKaigoNinteiShinseiKihonJohoInput().setShinseiShubetsu(JukyuShinseiJiyu.toValue(konkai.get受給申請事由().value()));
-        }
-        if (konkai.get認定申請区分_申請時_コード() != null && !konkai.get認定申請区分_申請時_コード().isEmpty()) {
-            div.getCcdKaigoNinteiShinseiKihonJohoInput().setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(konkai.get認定申請区分_申請時_コード().value()));
-        }
-        if (konkai.get認定申請区分_法令_コード() != null && !konkai.get認定申請区分_法令_コード().isEmpty()) {
-            div.getCcdKaigoNinteiShinseiKihonJohoInput().setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(konkai.get認定申請区分_法令_コード().value()));
-        }
+        div.getCcdKaigoNinteiShinseiKihonJohoInput().setShinseiShubetsu(JukyuShinseiJiyu.toValue(konkai.get受給申請事由().value()));
+        div.getCcdKaigoNinteiShinseiKihonJohoInput().setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(konkai.get認定申請区分_申請時_コード().value()));
+        div.getCcdKaigoNinteiShinseiKihonJohoInput().setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(konkai.get認定申請区分_法令_コード().value()));
         div.getCcdKaigoNinteiShinseiKihonJohoInput().setShisho(new ShishoCode(konkai.get支所コード()));
         if (konkai.is旧措置フラグ()) {
             List<RString> keyList = new ArrayList<>();
@@ -572,26 +552,24 @@ public class RirekiShuseiHandler {
             keyList.add(KEY_0);
             div.getCcdKaigoNinteiShinseiKihonJohoInput().setChkShikakuShutokuMae(keyList);
         }
-        if (konkai.get二号特定疾病コード() != null && !konkai.get二号特定疾病コード().isEmpty()) {
-            div.getCcdKaigoNinteiShinseiKihonJohoInput().setTokuteiShippei(TokuteiShippei.toValue(konkai.get二号特定疾病コード().value()));
-        }
+        div.getCcdKaigoNinteiShinseiKihonJohoInput().setTokuteiShippei(TokuteiShippei.toValue(konkai.get二号特定疾病コード().value()));
         div.getCcdKaigoNinteiShinseiKihonJohoInput().setNinteiShinseRiyuTeikeibun(konkai.get認定申請理由());
 
     }
 
     private RString get要介護状態区分名称(RString 厚労省IF識別コード, Code 要介護状態区分コード) {
         RString 要介護度名称 = RString.EMPTY;
-        if (new RString("99A").equals(厚労省IF識別コード) && 要介護状態区分コード != null && !要介護状態区分コード.isEmpty()) {
+        if (new RString("99A").equals(厚労省IF識別コード)) {
             要介護度名称 = YokaigoJotaiKubun99.toValue(要介護状態区分コード.value()).get名称();
         }
-        if (new RString("02A").equals(厚労省IF識別コード) && 要介護状態区分コード != null && !要介護状態区分コード.isEmpty()) {
+        if (new RString("02A").equals(厚労省IF識別コード)) {
             要介護度名称 = YokaigoJotaiKubun02.toValue(要介護状態区分コード.value()).get名称();
         }
-        if (new RString("06A").equals(厚労省IF識別コード) && 要介護状態区分コード != null && !要介護状態区分コード.isEmpty()) {
+        if (new RString("06A").equals(厚労省IF識別コード)) {
             要介護度名称 = YokaigoJotaiKubun06.toValue(要介護状態区分コード.value()).get名称();
         }
-        if ((new RString("09A").equals(厚労省IF識別コード)
-                || new RString("09B").equals(厚労省IF識別コード)) && 要介護状態区分コード != null && !要介護状態区分コード.isEmpty()) {
+        if (new RString("09A").equals(厚労省IF識別コード)
+                || new RString("09B").equals(厚労省IF識別コード)) {
             要介護度名称 = YokaigoJotaiKubun09.toValue(要介護状態区分コード.value()).get名称();
         }
         return 要介護度名称;

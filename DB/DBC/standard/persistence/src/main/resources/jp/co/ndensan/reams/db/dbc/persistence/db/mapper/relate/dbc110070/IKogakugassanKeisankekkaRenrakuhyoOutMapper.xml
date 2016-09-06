@@ -507,7 +507,7 @@
     </resultMap>
     
     <resultMap id="ResultMap_DbWT3811KogakuGassanShikyuGakuKeisanKekkaTmpEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.dbc110070.DbWT3811KogakuGassanShikyuGakuKeisanKekkaTempEntity" autoMapping="true">
-        <id property="renban" column="dbWT3811_renban" />
+        <id property="rirekiNo" column="dbWT3811_renban" />
         <result property="hihokenshaNo" column="dbWT3811_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="taishoNendo" column="dbWT3811_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="shoKisaiHokenshaNo" column="dbWT3811_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>

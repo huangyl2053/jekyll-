@@ -136,8 +136,8 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
             List<KyuhuJissekiMeisai> 給付実績明細リスト = 給付実績被保険者Entity.get給付実績明細リスト();
             for (int meisaiIndex = 0; meisaiIndex < 給付実績明細リスト.size(); meisaiIndex++) {
                 KyuhuJissekiMeisai 給付実績明細Entity = 給付実績被保険者Entity.get給付実績明細リスト().get(meisaiIndex);
-                source.list_7 = 給付実績明細Entity.getサービス種類コード().value();
-                source.list_8 = 給付実績明細Entity.getサービス項目コード().value();
+                source.list_7 = 給付実績明細Entity.getサービス種類コード();
+                source.list_8 = 給付実績明細Entity.getサービス項目コード();
                 source.list_9 = 給付実績明細Entity.getサービス名称();
                 source.list_10 = new RString(String.valueOf(給付実績明細Entity.get単位数()));
                 source.list_11 = new RString(String.valueOf(給付実績明細Entity.get日数回数()));
@@ -145,20 +145,20 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
             }
             source.list_9 = new RString("計");
             source.list_13 = DecimalFormatter.toコンマ区切りRString(Decimal.valueOf(
-                    Long.parseLong(給付実績被保険者Entity.get給付実績集計Entity().get保険請求額().toString())), 0);
+                    Long.parseLong(給付実績被保険者Entity.get給付実績集計().get保険請求額().toString())), 0);
             source.list_14 = DecimalFormatter.toコンマ区切りRString(Decimal.valueOf(
-                    Long.parseLong(String.valueOf(給付実績被保険者Entity.get給付実績集計Entity().get利用者負担額()))), 0);
+                    Long.parseLong(String.valueOf(給付実績被保険者Entity.get給付実績集計().get利用者負担額()))), 0);
             if (給付実績被保険者Entity.isExists社福軽減給付実績()) {
                 source.list_15 = new RString("*");
             } else {
                 source.list_15 = RString.EMPTY;
             }
             source.list_16 = DecimalFormatter.toコンマ区切りRString(Decimal.valueOf(Long.parseLong(
-                    String.valueOf(給付実績被保険者Entity.get給付実績集計Entity().get助成後利用者負担額()))), 0);
+                    String.valueOf(給付実績被保険者Entity.get給付実績集計().get助成後利用者負担額()))), 0);
             source.list_17 = DecimalFormatter.toコンマ区切りRString(Decimal.valueOf(Long.parseLong(
-                    String.valueOf(給付実績被保険者Entity.get給付実績集計Entity().get助成額()))), 0);
+                    String.valueOf(給付実績被保険者Entity.get給付実績集計().get助成額()))), 0);
             source.list_18 = DecimalFormatter.toコンマ区切りRString(Decimal.valueOf(Long.parseLong(
-                    String.valueOf(給付実績被保険者Entity.get給付実績集計Entity().get保険者助成額()))), 0);
+                    String.valueOf(給付実績被保険者Entity.get給付実績集計().get保険者助成額()))), 0);
         }
         source.list_9 = new RString("事業所計");
         source.list_13 = RString.EMPTY;
@@ -195,7 +195,7 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
         Decimal 助成額合計 = Decimal.ZERO;
         List<KyuhuJissekiHihokensha> 給付実績被保険者リスト = this.帳票情報.get給付実績被保険者リスト();
         for (KyuhuJissekiHihokensha 給付実績被保険者 : 給付実績被保険者リスト) {
-            助成額合計 = 助成額合計.add(給付実績被保険者.get給付実績集計Entity().get助成額());
+            助成額合計 = 助成額合計.add(給付実績被保険者.get給付実績集計().get助成額());
         }
         return 助成額合計;
     }
@@ -204,7 +204,7 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
         Decimal 保険者助成額合計 = Decimal.ZERO;
         List<KyuhuJissekiHihokensha> 給付実績被保険者リスト = this.帳票情報.get給付実績被保険者リスト();
         for (KyuhuJissekiHihokensha 給付実績被保険者 : 給付実績被保険者リスト) {
-            保険者助成額合計 = 保険者助成額合計.add(給付実績被保険者.get給付実績集計Entity().get保険者助成額());
+            保険者助成額合計 = 保険者助成額合計.add(給付実績被保険者.get給付実績集計().get保険者助成額());
         }
         return 保険者助成額合計;
     }

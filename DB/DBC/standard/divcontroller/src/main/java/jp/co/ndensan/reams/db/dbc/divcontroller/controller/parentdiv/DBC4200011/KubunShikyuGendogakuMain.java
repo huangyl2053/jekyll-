@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -40,7 +39,6 @@ public class KubunShikyuGendogakuMain {
     private static final RString 排他キー = new RString("DBCShikyuGendoGakuTableDbT7109");
     private static final RString 完了メッセージメイン = new RString("区分支給限度額の登録が完了しました。。");
     private static final RString 省略_空 = new RString("");
-    private static final RString 共通ボタン = new RString("btnUpdate");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -173,7 +171,7 @@ public class KubunShikyuGendogakuMain {
     /**
      * 支給限度額テーブル区分onChangeの事件です。
      *
-     * @param div KubunShikyuGendogakuMainDiv
+     * @param div ShokanShikyuGendogakuMainDiv
      * @return ResponseData
      */
     public ResponseData<KubunShikyuGendogakuMainDiv> onChange_Kubun(
@@ -186,20 +184,6 @@ public class KubunShikyuGendogakuMain {
         if (ShikyuGendogakuTableKubun.上乗せ後.get名称().equals(
                 div.getKubunShikyuGendogakuShosai().getRadTableKubun().getSelectedValue())) {
             div.getKubunShikyuGendogakuShosai().getTxtTekiyoKikanRange().setToDisabled(false);
-        }
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 状態遷移の事件です。
-     *
-     * @param div KubunShikyuGendogakuMainDiv
-     * @return ResponseData
-     */
-    public ResponseData<KubunShikyuGendogakuMainDiv> onStateTransition(
-            KubunShikyuGendogakuMainDiv div) {
-        if (CommonButtonHolder.isVisible(共通ボタン)) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
         }
         return ResponseData.of(div).respond();
     }

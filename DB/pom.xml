@@ -30,10 +30,10 @@
             <name>r5 maven repository</name>
             <url>http://zrtechwiki.ndensan.co.jp/mvn/repo/</url>
             <releases>
-                <updatePolicy>always</updatePolicy>
+                <updatePolicy>daily</updatePolicy>
             </releases>
             <snapshots>
-                <updatePolicy>always</updatePolicy>
+                <updatePolicy>daily</updatePolicy>
             </snapshots>
         </repository>
     </repositories>

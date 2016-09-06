@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -119,8 +118,8 @@ public class HonsanteiIdoKanendo {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(定数調定年度.toString()));
         List<DbT7022ShoriDateKanriEntity> entityList = new ArrayList<>();
         List<ShoriDateKanri> kanriList = new ArrayList<>();
-        DbT7022ShoriDateKanriEntity shentity = 処理日付管理Dac.selectByFourKeys(
-                SubGyomuCode.DBB介護賦課, ShoriName.過年度賦課.get名称(), new RString("0001"), 調定年度);
+        DbT7022ShoriDateKanriEntity shentity = 処理日付管理Dac.
+                select処理状況_本算定異動_過年度(調定年度);
         if (shentity == null) {
             return new ArrayList<>();
         }

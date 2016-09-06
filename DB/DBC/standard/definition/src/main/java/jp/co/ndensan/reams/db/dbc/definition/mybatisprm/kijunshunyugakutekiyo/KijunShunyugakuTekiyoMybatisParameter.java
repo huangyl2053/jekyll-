@@ -42,7 +42,6 @@ public final class KijunShunyugakuTekiyoMybatisParameter implements IMyBatisPara
     private final boolean is決定日ToNULL;
     private final RString psmShikibetsuTaisho;
     private final RString psmAtesaki;
-    private final RString 出力順;
 
     /**
      * コンストラクタです。
@@ -57,7 +56,6 @@ public final class KijunShunyugakuTekiyoMybatisParameter implements IMyBatisPara
      * @param 申請日To 申請日To
      * @param 決定日From 決定日From
      * @param 決定日To 決定日To
-     * @param 出力順 出力順
      */
     private KijunShunyugakuTekiyoMybatisParameter(
             RString 保険者コード,
@@ -81,8 +79,7 @@ public final class KijunShunyugakuTekiyoMybatisParameter implements IMyBatisPara
             RString 決定日To,
             boolean is決定日ToNULL,
             RString psmShikibetsuTaisho,
-            RString psmAtesaki,
-            RString 出力順) {
+            RString psmAtesaki) {
         this.保険者コード = 保険者コード;
         this.is保険者コード = is保険者コード;
         this.対象年度 = 対象年度;
@@ -105,7 +102,6 @@ public final class KijunShunyugakuTekiyoMybatisParameter implements IMyBatisPara
         this.is決定日ToNULL = is決定日ToNULL;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.psmAtesaki = psmAtesaki;
-        this.出力順 = 出力順;
     }
 
     /**
@@ -123,7 +119,6 @@ public final class KijunShunyugakuTekiyoMybatisParameter implements IMyBatisPara
      * @param 決定日To 決定日To
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
      * @param psmAtesaki psmAtesaki
-     * @param 出力順 出力順
      * @return KijunShunyugakuTekiyoMybatisParameter
      */
     public static KijunShunyugakuTekiyoMybatisParameter createMybatisParameter(RString 保険者コード,
@@ -137,8 +132,7 @@ public final class KijunShunyugakuTekiyoMybatisParameter implements IMyBatisPara
             RString 決定日From,
             RString 決定日To,
             RString psmShikibetsuTaisho,
-            RString psmAtesaki,
-            RString 出力順) {
+            RString psmAtesaki) {
         boolean is保険者コード = false;
         boolean is対象年度 = false;
         boolean isデータ種別_適用 = false;
@@ -184,8 +178,7 @@ public final class KijunShunyugakuTekiyoMybatisParameter implements IMyBatisPara
                 決定日To,
                 isnull(決定日To),
                 psmShikibetsuTaisho,
-                psmAtesaki,
-                出力順);
+                psmAtesaki);
     }
 
     private static boolean isnull(RString value) {

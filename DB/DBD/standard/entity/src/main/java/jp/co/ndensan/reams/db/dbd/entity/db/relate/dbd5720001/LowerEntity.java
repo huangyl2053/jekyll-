@@ -31,6 +31,5 @@ public class LowerEntity {
     private FlexibleDate 認定有効終了日;
     private RString 旧措置者;
     private RString 処理内容;
-    private RString 備考;
 
 }

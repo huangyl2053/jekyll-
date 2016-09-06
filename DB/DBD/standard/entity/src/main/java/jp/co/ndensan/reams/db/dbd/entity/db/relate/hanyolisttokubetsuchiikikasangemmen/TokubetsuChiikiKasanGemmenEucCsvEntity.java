@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TokubetsuChiikiKasanGemmenEucCsvEntity {
 
+    @CsvField(order = 10, name = "連番")
+    private RString 連番;
     @CsvField(order = 20, name = "識別コード")
     private RString 識別コード;
     @CsvField(order = 30, name = "住民種別")

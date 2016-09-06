@@ -9,21 +9,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.kijunshunyugakutekiyo.KijunShunyugakuTekiyo;
-import jp.co.ndensan.reams.db.dbc.business.core.kijunshunyugakutekiyo.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunshunyugakutekiyo.KijunShunyugakuTekiyoProcessParameter;
-import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistparam.HanyoListParamRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistparam.HanyoListParamRenbanariEUCEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -31,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -64,20 +58,18 @@ public class KijunShunyugakuTekiyoRenbanariProcess extends BatchProcessBase<Hany
     private RString 市町村名;
     private Map<RString, KoseiShichosonMaster> 市町村名MasterMap;
     private KijunShunyugakuTekiyo kijunShunyugakuTekiyo;
-    private boolean flag;
     @BatchWriter
     private CsvWriter<HanyoListParamRenbanariEUCEntity> eucCsvWriter;
 
     @Override
     protected void initialize() {
-        flag = false;
         kijunShunyugakuTekiyo = new KijunShunyugakuTekiyo(processParameter);
         get市町村名();
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, kijunShunyugakuTekiyo.createMybatisParameter(get出力順()));
+        return new BatchDbReader(MYBATIS_SELECT_ID, kijunShunyugakuTekiyo.createMybatisParameter());
     }
 
     @Override
@@ -96,17 +88,13 @@ public class KijunShunyugakuTekiyoRenbanariProcess extends BatchProcessBase<Hany
 
     @Override
     protected void process(HanyoListParamRelateEntity entity) {
-        flag = true;
         eucCsvWriter.writeLine(kijunShunyugakuTekiyo.setRenbanariEUCEntity(entity, 市町村名MasterMap, 市町村名, 連番++));
     }
 
     @Override
     protected void afterExecute() {
-        if (!flag) {
-            eucCsvWriter.writeLine(kijunShunyugakuTekiyo.setRenbanariEUCEntity());
-        }
         eucCsvWriter.close();
-        manager.spool(eucFilePath, kijunShunyugakuTekiyo.getアクセスログ());
+        manager.spool(eucFilePath);
         outputJokenhyoFactory();
     }
 
@@ -148,14 +136,4 @@ public class KijunShunyugakuTekiyoRenbanariProcess extends BatchProcessBase<Hany
         }
     }
 
-    private RString get出力順() {
-        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder = finder.get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701020.getReportId(), processParameter.get出力順ID());
-        RString 出力順 = RString.EMPTY;
-        if (outputOrder != null) {
-            出力順 = MyBatisOrderByClauseCreator.
-                    create(KijunShunyugakuTekiyo.ShutsuryokujunEnum.class, outputOrder);
-        }
-        return 出力順;
-    }
 }

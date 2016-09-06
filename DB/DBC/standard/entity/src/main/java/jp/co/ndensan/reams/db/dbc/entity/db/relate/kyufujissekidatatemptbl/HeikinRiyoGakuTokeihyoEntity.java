@@ -23,7 +23,9 @@ public class HeikinRiyoGakuTokeihyoEntity {
     private RString 印刷日時;
     private RString 条件1;
     private RString 条件2;
-    private RString サービス種類名称;
+    private RString サービス種類名称1;
+    private RString サービス種類名称2;
+    private RString サービス種類名称3;
     private RString 所得段階６;
     private RString 所得段階７;
     private RString 所得段階８;

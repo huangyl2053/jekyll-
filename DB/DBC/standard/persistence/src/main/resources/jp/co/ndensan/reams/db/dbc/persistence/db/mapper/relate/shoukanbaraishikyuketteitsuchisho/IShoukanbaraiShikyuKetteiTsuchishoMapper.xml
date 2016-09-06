@@ -4,7 +4,32 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shoukanbaraishikyuketteitsuchisho.IShoukanbaraiShikyuKetteiTsuchishoMapper">
-     
+  
+    <select id="getKozaJyoho" resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shoukanbaraishikyuketteitsuchisho.ShoukanbaraiShikyuKetteiTsuchishoParameter"
+            resultMap="resultMap_KozaJyoho" fetchSize="500">
+        SELECT  DISTINCT
+            業務別主キー."gyomuCode" AS 業務コード,
+            業務別主キー."subGyomuCode" AS サブ業務コード,
+            業務別主キー."kamokuCode" AS 科目コード,
+            口座."gyomuKoyuKey"  as 業務固有キー,
+            口座."yotoKubun" as 用途区分
+        FROM
+            rgua."UaT0310Koza" AS 口座
+        LEFT JOIN 
+            rgua."UaT0100GyomubetsuPrimaryKey" AS 業務別主キー
+            ON 口座."gyomubetsuPrimaryKey" = 業務別主キー."gyomubetsuPrimaryKey"
+        WHERE 
+            口座."kozaId" = #{口座ID}
+    </select>
+    <resultMap id="resultMap_KozaJyoho" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shoukanbaraishikyuketteitsuchisho.KozaEntity" autoMapping="true">
+        <result property="業務コード" column="業務コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler"/>
+        <result property="サブ業務コード" column="サブ業務コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
+        <result property="科目コード" column="科目コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KamokuCodeTypeHandler"/>
+        <result property="業務固有キー" column="業務固有キー" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="用途区分" column="用途区分" typeHandler="jp.co.ndensan.reams.ua.uax.entity.typehandlers.KozaYotoKubunCodeValueTypeHandler"/>        
+    </resultMap>   
+    
     <select id="select償還払支給" resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shoukanbaraishikyuketteitsuchisho.ShoukanbaraiShikyuKetteiTsuchishoParameter"
             resultMap="resultMap_ShoukanbaraiShikyu" fetchSize="500">

@@ -62,6 +62,7 @@ public class KaigoKyufuhiKagoMositateTourokuValidationHandler {
      */
     public ValidationMessageControlPairs check終了日が開始日以前() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        // TODO QA 1621
         validationMessages.add(new ValidationMessageControlPair(new KaigoKyufuhiKagoMositateTourokuValidationHandler.CheckMessages(
                 UrErrorMessages.終了日が開始日以前)));
         return validationMessages;

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100030;
 
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -85,18 +84,4 @@ public class JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoEntity {
     private RString タイトル;
     private RString 通知文1;
     private RString 通知文2;
-
-    private RString 出力順1;
-    private RString 出力順2;
-    private RString 出力順3;
-    private RString 出力順4;
-    private RString 出力順5;
-    private RString 改頁1;
-    private RString 改頁2;
-    private RString 改頁3;
-    private RString 改頁4;
-    private RString 改頁5;
-    private RDateTime 作成日時;
-    private RString 市町村コード;
-    private RString 市町村名称;
 }

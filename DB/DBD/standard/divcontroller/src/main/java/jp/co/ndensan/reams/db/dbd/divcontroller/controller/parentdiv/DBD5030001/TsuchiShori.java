@@ -5,21 +5,29 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5030001;
 
-import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.core.dbd5030001.DgTsuchishoHakkoBussiness;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5030001.DBD5030001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5030001.DBD5030001TransitionEventName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5030001.TsuchiShoriDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5030001.dgtsuchishohakko_Row;
+import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5030001.TsuchiShoHakkouCsvEntity;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5030001.TsuchiShoriHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5030001.TsuchiShoriValidationHandler;
-import jp.co.ndensan.reams.db.dbd.service.core.dbd5030001.TsuchiShoriManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -36,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class TsuchiShori {
 
     private static final RString CSVファイル名 = new RString("通知書発行対象者一覧.csv");
+    private static final RString CSV_WRITER_DELIMITER = new RString(",");
 
     /**
      * 画面初期化
@@ -81,25 +90,19 @@ public class TsuchiShori {
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(TsuchiShoriDiv div, IDownLoadServletResponse response) {
         List<dgtsuchishohakko_Row> 画面更新情報 = div.getDgtsuchishohakko().getSelectedItems();
-        List<DgTsuchishoHakkoBussiness> 画面更新情報ビジネス = new ArrayList<>();
-        for (dgtsuchishohakko_Row row : 画面更新情報) {
-            DgTsuchishoHakkoBussiness business = new DgTsuchishoHakkoBussiness();
-            business.setHokensha(row.getHokensha());
-            business.setHihoNumber(row.getHihoNumber());
-            business.setHihoShimei(row.getHihoShimei());
-            business.setNinteiShinseiDay(row.getNinteiShinseiDay());
-            business.setShinseiKubunShinseiji(row.getShinseiKubunShinseiji());
-            business.setShinseiKubunHorei(row.getShinseiKubunHorei());
-            business.setTsuchiKanryobi(row.getTsuchiKanryobi());
-            business.setNinteitsuchishobi(row.getNinteitsuchishobi());
-            business.setKubunhenkotsuchishobi(row.getKubunhenkotsuchishobi());
-            business.setServicehenkotsuchishobi(row.getServicehenkotsuchishobi());
-            business.setNinteikyakatsuchishobi(row.getNinteikyakatsuchishobi());
-            business.setNinteitorikeshitsuchishobi(row.getNinteitorikeshitsuchishobi());
-            画面更新情報ビジネス.add(business);
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
+        try (CsvWriter<TsuchiShoHakkouCsvEntity> csvWriter
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(true).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+            for (dgtsuchishohakko_Row row : 画面更新情報) {
+                csvWriter.writeLine(getHandler().converterDataSourceFromToCsvEntity(row));
+            }
+            csvWriter.close();
         }
-        TsuchiShoriManager manager = TsuchiShoriManager.createInstance();
-        SharedFileEntryDescriptor entry = manager.CSVファイル出力(画面更新情報ビジネス);
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSVファイル名));
+        sfd = SharedFile.defineSharedFile(sfd);
+        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
+        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
         AccessLogger.log(AccessLogType.照会, getHandler().アクセスログ情報(画面更新情報));
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
     }

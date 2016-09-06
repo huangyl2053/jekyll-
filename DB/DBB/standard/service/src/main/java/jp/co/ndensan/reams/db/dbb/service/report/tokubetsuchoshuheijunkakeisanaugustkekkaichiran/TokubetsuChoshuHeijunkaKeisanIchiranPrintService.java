@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranReport;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiIchiran;
@@ -14,7 +15,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -35,26 +35,24 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranPrintService {
     /**
      * 帳票設計_DBBPR35002_特別徴収平準化計算（特別徴収8月分）結果一覧表 (単一帳票出力用)
      *
-     * @param 特徴平準化結果対象者一覧表 TokuchoHeijunkaRokuBatchTaishoshaIchiran
-     * @param 特徴平準化結果対象外一覧表 TokuchoHeijunkaRokuBatchTaishogaiIchiran
+     * @param 特徴平準化結果対象者一覧表リスト List<TokuchoHeijunkaRokuBatchTaishoshaIchiran>
+     * @param 特徴平準化結果対象外一覧表リスト List<TokuchoHeijunkaRokuBatchTaishogaiIchiran>
      * @param 調定日時 YMDHMS
      * @param 調定年度 FlexibleYear
      * @param association Association
      * @param outputOrder IOutputOrder
-     * @param title RString
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(
-            TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者一覧表,
-            TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外一覧表,
+            List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト,
+            List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト,
             YMDHMS 調定日時,
             FlexibleYear 調定年度,
             Association association,
-            IOutputOrder outputOrder,
-            RString title) {
+            IOutputOrder outputOrder) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(特徴平準化結果対象者一覧表, 特徴平準化結果対象外一覧表, 調定日時, 調定年度, association, outputOrder, title, reportManager);
+            print(特徴平準化結果対象者一覧表リスト, 特徴平準化結果対象外一覧表リスト, 調定日時, 調定年度, association, outputOrder, reportManager);
             collection = reportManager.publish();
         }
         return collection;
@@ -63,23 +61,21 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranPrintService {
     /**
      * 帳票設計_DBBPR35002_特別徴収平準化計算（特別徴収8月分）結果一覧表 (複数帳票出力用)。
      *
-     * @param 特徴平準化結果対象者一覧表 TokuchoHeijunkaRokuBatchTaishoshaIchiran
-     * @param 特徴平準化結果対象外一覧表 TokuchoHeijunkaRokuBatchTaishogaiIchiran
+     * @param 特徴平準化結果対象者一覧表リスト List<TokuchoHeijunkaRokuBatchTaishoshaIchiran>
+     * @param 特徴平準化結果対象外一覧表リスト List<TokuchoHeijunkaRokuBatchTaishogaiIchiran>
      * @param 調定日時 YMDHMS
      * @param 調定年度 FlexibleYear
      * @param association Association
      * @param outputOrder IOutputOrder
-     * @param title RString
      * @param reportManager ReportManager
      */
     public void print(
-            TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者一覧表,
-            TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外一覧表,
+            List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト,
+            List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト,
             YMDHMS 調定日時,
             FlexibleYear 調定年度,
             Association association,
             IOutputOrder outputOrder,
-            RString title,
             ReportManager reportManager) {
         TokubetsuChoshuHeijunkaKeisanIchiranProperty property = new TokubetsuChoshuHeijunkaKeisanIchiranProperty();
 
@@ -87,13 +83,12 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranPrintService {
             ReportSourceWriter<TokubetsuChoshuHeijunkaKeisanIchiranSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
             new TokubetsuChoshuHeijunkaKeisanIchiranReport(
-                    特徴平準化結果対象者一覧表,
-                    特徴平準化結果対象外一覧表,
+                    特徴平準化結果対象者一覧表リスト,
+                    特徴平準化結果対象外一覧表リスト,
                     調定日時,
                     調定年度,
                     association,
-                    outputOrder,
-                    title).writeBy(reportSourceWriter);
+                    outputOrder).writeBy(reportSourceWriter);
         }
     }
 

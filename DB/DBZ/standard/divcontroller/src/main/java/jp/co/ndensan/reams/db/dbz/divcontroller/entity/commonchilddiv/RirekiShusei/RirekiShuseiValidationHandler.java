@@ -47,7 +47,7 @@ public class RirekiShuseiValidationHandler {
         FlexibleDate fromValue = div.getCcdNinteiJohoInput().getNaiyo().get有効開始年月日();
         FlexibleDate toValue = div.getCcdNinteiJohoInput().getNaiyo().get有効終了年月日();
         RString 要介護度 = div.getCcdNinteiJohoInput().getNaiyo().get要介護度コード();
-        if (isNullOrEmpty(ninteiValue)) {
+        if (ninteiValue == null) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.必須,
                             "認定日")));
@@ -57,17 +57,17 @@ public class RirekiShuseiValidationHandler {
                     new IdocheckMessages(UrErrorMessages.必須,
                             "要介護度")));
         }
-        if (isNullOrEmpty(fromValue)) {
+        if (fromValue == null) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrWarningMessages.未入力,
                             "開始日")));
         }
-        if (isNullOrEmpty(toValue)) {
+        if (toValue == null) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrWarningMessages.未入力,
                             "終了日")));
         }
-        if (!isNullOrEmpty(fromValue) && !isNullOrEmpty(toValue) && toValue.isBefore(fromValue)) {
+        if (fromValue != null && toValue != null && toValue.compareTo(fromValue) < 0) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.期間が不正_追加メッセージあり１,
                             "開始日", "終了日")));
@@ -88,13 +88,13 @@ public class RirekiShuseiValidationHandler {
         RirekiShuseiDataPass jikai = DataPassingConverter.deserialize(div.getHdnJikaiJohoSerialized(),
                 RirekiShuseiDataPass.class);
 
-        if (!isNullOrEmpty(konkaiFromValue) && !isNullOrEmpty(zenkaiToValue) && konkaiFromValue.isBefore(zenkaiToValue)) {
+        if (konkaiFromValue != null && zenkaiToValue != null && konkaiFromValue.compareTo(zenkaiToValue) < 0) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.期間が不正_追加メッセージあり１,
                             "前回の有効終了日", "今回の有効開始日")));
         }
-        if (jikai != null && !isNullOrEmpty(jikai.get認定有効開始年月日())
-                && !isNullOrEmpty(konkaiToValue) && jikai.get認定有効開始年月日().isBefore(konkaiToValue)) {
+        if (jikai != null && jikai.get認定有効開始年月日() != null
+                && konkaiToValue != null && jikai.get認定有効開始年月日().compareTo(konkaiToValue) < 0) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.期間が不正_追加メッセージあり１,
                             "今回の有効終了日", "次回の有効開始日")));
@@ -136,10 +136,6 @@ public class RirekiShuseiValidationHandler {
                             "削除事由")));
         }
         return validPairs;
-    }
-
-    private boolean isNullOrEmpty(FlexibleDate flexDate) {
-        return !(flexDate != null && !flexDate.isEmpty());
     }
 
     private static class IdocheckMessages implements IValidationMessage {

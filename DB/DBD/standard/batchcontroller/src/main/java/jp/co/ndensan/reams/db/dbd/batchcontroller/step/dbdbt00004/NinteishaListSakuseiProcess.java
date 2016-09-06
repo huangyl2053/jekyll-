@@ -327,6 +327,30 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
 
     @Override
     protected void process(ShakaiFukushiHojinKeigenGaitoshaIchiranEntity entity) {
+        if (entity.get認定情報() == null && entity.get総合事業対象者情報() != null) {
+            entity.set要介護状態区分コード(new RString("06"));
+        } else if (entity.get認定情報().getYokaigoJotaiKubunCode() != null && !entity.get認定情報().getYokaigoJotaiKubunCode().isEmpty()) {
+            entity.set要介護状態区分コード(new RString(entity.get認定情報().getYokaigoJotaiKubunCode().toString()));
+        }
+
+        if (entity.get認定情報() == null && entity.get総合事業対象者情報() != null) {
+            entity.set認定年月日(entity.get総合事業対象者情報().getChecklistJisshiYMD());
+        } else {
+            entity.set認定年月日(entity.get認定情報().getNinteiYMD());
+        }
+
+        if (entity.get認定情報() == null && entity.get総合事業対象者情報() != null) {
+            entity.set認定有効期間開始日(entity.get総合事業対象者情報().getTekiyoKaishiYMD());
+        } else {
+            entity.set認定有効期間開始日(entity.get認定情報().getNinteiYukoKikanKaishiYMD());
+        }
+
+        if (entity.get認定情報() == null && entity.get総合事業対象者情報() != null) {
+            entity.set認定有効期間終了日(entity.get総合事業対象者情報().getTekiyoShuryoYMD());
+        } else {
+            entity.set認定有効期間終了日(entity.get認定情報().getNinteiYukoKikanShuryoYMD());
+        }
+
         RString 帳票タイトル;
         if (processParameter.get対象リスト().equals(認定者)) {
             帳票タイトル = new RString("社会福祉法人軽減認定者リスト");

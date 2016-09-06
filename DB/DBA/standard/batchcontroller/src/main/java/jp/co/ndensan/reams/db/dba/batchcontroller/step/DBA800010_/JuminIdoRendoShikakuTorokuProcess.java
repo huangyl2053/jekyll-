@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA800010_;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.aa.aax.business.core.ido.IIdoData;
-import jp.co.ndensan.reams.aa.aax.service.managers.JukiIdoFlowParameterFinderFactory;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.juminidorendoshikakutoroku.JuminIdoRendoShikakuTorokuMybatisParameter;
 import jp.co.ndensan.reams.db.dba.entity.euc.juminidorendoshikakutoroku.FuseigoListCsvEntity;
 import jp.co.ndensan.reams.db.dba.service.core.juminidorendoshikakutoroku.JuminIdoRendoShikakuToroku;
@@ -25,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -52,7 +49,7 @@ public class JuminIdoRendoShikakuTorokuProcess extends BatchProcessBase<UaFt200F
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.juminidorendoshikakutoroku."
             + "IJuminIdoRendoShikakuTorokuMapper.getShikibetsuTaishoPsm");
-    private IIdoData idoData;
+//    private IIdoData idoData;
     private FileSpoolManager manager;
     private RString filePath;
     @BatchWriter
@@ -60,7 +57,7 @@ public class JuminIdoRendoShikakuTorokuProcess extends BatchProcessBase<UaFt200F
 
     @Override
     protected void initialize() {
-        idoData = JukiIdoFlowParameterFinderFactory.createInstance().find異動情報();
+//        idoData = JukiIdoFlowParameterFinderFactory.createInstance().find異動情報();
     }
 
     @Override
@@ -68,12 +65,9 @@ public class JuminIdoRendoShikakuTorokuProcess extends BatchProcessBase<UaFt200F
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
+        // TODO  内部QA：1599  Redmine：#98306(識別コードリストの取得方法)
+//        key.set識別コードリスト(idoData.get異動世帯情報().get(this).get識別コードs());
         List<ShikibetsuCode> 識別コードリスト = new ArrayList<>();
-        if (idoData != null) {
-            for (SetaiCode setaiCode : idoData.get世帯コードs()) {
-                識別コードリスト.addAll(idoData.get異動世帯情報().get(setaiCode).get識別コードs());
-            }
-        }
         key.set識別コードリスト(識別コードリスト);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());

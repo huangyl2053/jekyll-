@@ -51,7 +51,7 @@ public class HanyoListBachParamHandler {
      *
      */
     public void onLoad() {
-        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701021.getReportId());
+        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC7210001.getReportId());
         manager = KaigoDonyuKeitaiManager.createInstance();
         List<KaigoDonyuKeitai> list = manager.get介護導入形態By業務分類(GyomuBunrui.介護事務);
         if (list.get(0).get導入形態コード().is単一()) {
@@ -70,17 +70,11 @@ public class HanyoListBachParamHandler {
         }
         for (int i = 0; i < year.minusYear(固定).getYearValue(); i++) {
             KeyValueDataSource source = new KeyValueDataSource();
-            source.setKey(new RString(year.getYearValue() - i));
-            source.setValue(new RDate(year.getYearValue() - i).getYear().wareki().toDateString());
+            source.setKey(new RString(固定 - i));
+            source.setValue(new RDate(固定 - i).getYear().wareki().toDateString());
             dataSource.add(source);
         }
         div.getDdlTaishoNendo().setDataSource(dataSource);
-        List<KeyValueDataSource> sourceLsit = new ArrayList<>();
-        KeyValueDataSource datesource = new KeyValueDataSource();
-        datesource.setKey(項目名付加);
-        datesource.setKey(日付_編集);
-        sourceLsit.add(datesource);
-        div.getChkCsvHenshuHoho().setSelectedItems(sourceLsit);
     }
 
     /**
@@ -114,24 +108,24 @@ public class HanyoListBachParamHandler {
         if (!div.getCcdHokenshaList().isDisplayNone()) {
             parameter.set保険者コード(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value());
         }
-        List<RString> 支給区分list = new ArrayList<>();
-        if (すべて.equals(div.getRadShikyuKubun().getSelectedKey())) {
-            支給区分list.add(すべて);
-            支給区分list.add(窓口払);
-            支給区分list.add(口座払);
-        } else {
-            支給区分list.add(div.getRadShikyuKubun().getSelectedKey());
-        }
-        parameter.set支給区分List(支給区分list);
         List<RString> 支払方法区分list = new ArrayList<>();
-        if (すべて.equals(div.getRadSiharaiHohoKubun().getSelectedKey())) {
+        if (すべて.equals(div.getRadShikyuKubun().getSelectedKey())) {
             支払方法区分list.add(すべて);
             支払方法区分list.add(窓口払);
             支払方法区分list.add(口座払);
         } else {
-            支払方法区分list.add(div.getRadSiharaiHohoKubun().getSelectedKey());
+            支払方法区分list.add(div.getRadShikyuKubun().getSelectedKey());
         }
         parameter.set支払方法区分List(支払方法区分list);
+        List<RString> 支給区分list = new ArrayList<>();
+        if (すべて.equals(div.getRadSiharaiHohoKubun().getSelectedKey())) {
+            支給区分list.add(すべて);
+            支給区分list.add(窓口払);
+            支給区分list.add(口座払);
+        } else {
+            支給区分list.add(div.getRadSiharaiHohoKubun().getSelectedKey());
+        }
+        parameter.set支給区分List(支給区分list);
         parameter.set金融機関コード(div.getCcdKinyuKikan().getKinyuKikanCode().value());
         parameter.set金融機関名(div.getCcdKinyuKikan().get金融機関名());
         parameter.set対象年度(div.getDdlTaishoNendo().getSelectedKey());

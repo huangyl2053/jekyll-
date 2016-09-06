@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kyufuhitsuchishocover;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.kyufuhitsuchishocover.KyufuhiTsuchishoCoverEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kyufuhitsuchishocover.KyufuhiTsuchishoCoverReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -17,17 +18,17 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class KyufuhiTsuchishoCoverReport extends Report<KyufuhiTsuchishoCoverReportSource> {
 
-    private final KyufuhiTsuchishoCoverEntity entity;
+    private final List<KyufuhiTsuchishoCoverEntity> entityList;
     private int index;
 
     /**
      * インスタンスを生成します。
      *
-     * @param entity 介護保険給付費通知書のITEM
+     * @param entityList 介護保険給付費通知書のITEMリスト
      */
     public KyufuhiTsuchishoCoverReport(
-            KyufuhiTsuchishoCoverEntity entity) {
-        this.entity = entity;
+            List<KyufuhiTsuchishoCoverEntity> entityList) {
+        this.entityList = entityList;
     }
 
     /**
@@ -37,9 +38,11 @@ public class KyufuhiTsuchishoCoverReport extends Report<KyufuhiTsuchishoCoverRep
      */
     @Override
     public void writeBy(ReportSourceWriter<KyufuhiTsuchishoCoverReportSource> reportSourceWriter) {
-        index = index + 1;
-        IKyufuhiTsuchishoCoverEditor editor = new KyufuhiTsuchishoCoverEditor(entity, index);
-        IKyufuhiTsuchishoCoverBuilder builder = new KyufuhiTsuchishoCoverBuilder(editor);
-        reportSourceWriter.writeLine(builder);
+        for (KyufuhiTsuchishoCoverEntity entity : entityList) {
+            index = index + 1;
+            IKyufuhiTsuchishoCoverEditor editor = new KyufuhiTsuchishoCoverEditor(entity, index);
+            IKyufuhiTsuchishoCoverBuilder builder = new KyufuhiTsuchishoCoverBuilder(editor);
+            reportSourceWriter.writeLine(builder);
+        }
     }
 }

@@ -13,9 +13,13 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0320011.Jur
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -33,6 +37,12 @@ public class JuryoIninKeiyakuShoninKakuninsho {
      */
     public ResponseData<JuryoIninKeiyakuShoninKakuninshoDiv> onLoad(JuryoIninKeiyakuShoninKakuninshoDiv div) {
 
+        RString メニューID = ResponseHolder.getMenuID();
+        LockingKey 前排他キー = new LockingKey(メニューID);
+        if (!RealInitialLocker.tryGetLock(前排他キー)) {
+            throw new PessimisticLockingException();
+        }
+        RealInitialLocker.release(前排他キー);
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100029.getReportId());
         return ResponseData.of(div).setState(DBC0320011StateName.承認確認書作成);
     }

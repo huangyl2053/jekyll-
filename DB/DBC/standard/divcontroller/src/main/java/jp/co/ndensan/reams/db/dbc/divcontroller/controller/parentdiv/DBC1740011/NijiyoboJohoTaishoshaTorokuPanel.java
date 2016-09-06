@@ -16,14 +16,11 @@ import jp.co.ndensan.reams.db.dbc.service.core.basic.NijiYoboJigyoTaishoshaManag
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -144,20 +141,16 @@ public class NijiyoboJohoTaishoshaTorokuPanel {
      * @return 画面
      */
     public ResponseData<NijiyoboJohoTaishoshaTorokuPanelDiv> onClick_btnUpdate(NijiyoboJohoTaishoshaTorokuPanelDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
+
+        LockingKey 前排他キー = new LockingKey(排他キー_前.concat(div.get被保険者番号()));
+        if (!RealInitialLocker.tryGetLock(前排他キー)) {
+            throw new PessimisticLockingException();
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            LockingKey 前排他キー = new LockingKey(排他キー_前.concat(div.get被保険者番号()));
-            if (!RealInitialLocker.tryGetLock(前排他キー)) {
-                throw new PessimisticLockingException();
-            }
-            NijiYoboJigyoTaishoshaHolder holder = ViewStateHolder.get(ViewStateHolderName.二次予防情報対象情報, NijiYoboJigyoTaishoshaHolder.class);
-            getHandler(div).二次予防情報対象一覧のデータを保存する(div.getKihonnInfo().getDgKihonInfo().getDataSource(),
-                    new HihokenshaNo(div.get被保険者番号()), holder);
-            RealInitialLocker.release(前排他キー);
-            onLoad(div);
-        }
+        NijiYoboJigyoTaishoshaHolder holder = ViewStateHolder.get(ViewStateHolderName.二次予防情報対象情報, NijiYoboJigyoTaishoshaHolder.class);
+        getHandler(div).二次予防情報対象一覧のデータを保存する(div.getKihonnInfo().getDgKihonInfo().getDataSource(),
+                new HihokenshaNo(div.get被保険者番号()), holder);
+        RealInitialLocker.release(前排他キー);
+        onLoad(div);
         return ResponseData.of(div).respond();
     }
 

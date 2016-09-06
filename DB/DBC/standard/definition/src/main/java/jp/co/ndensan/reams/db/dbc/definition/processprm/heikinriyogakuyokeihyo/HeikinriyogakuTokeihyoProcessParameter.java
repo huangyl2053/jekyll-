@@ -5,9 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.processprm.heikinriyogakuyokeihyo;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.heikinriyogakuyokeihyo.HeikinriyogakuTokeihyoMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -37,7 +35,7 @@ public class HeikinriyogakuTokeihyoProcessParameter implements IBatchProcessPara
     private RString kaishiYM;
     private RString shuryoYM;
     private RString chikuShitei;
-    private Map<RString, RString> 選択地区Map;
+    private List<RString> selectorChikulist;
     private RString shichosonCode;
     private RString shichosonMei;
     private RString kyuShichosonCode;
@@ -60,7 +58,7 @@ public class HeikinriyogakuTokeihyoProcessParameter implements IBatchProcessPara
      * @param kaishiYM 開始年月
      * @param shuryoYM 終了年月
      * @param chikuShitei 地区指定
-     * @param 選択地区Map 選択地区Map
+     * @param selectorChikulist 選択地区リス
      * @param shichosonCode 市町村コード
      * @param shichosonMei 市町村名称
      * @param kyuShichosonCode 旧市町村コード
@@ -81,7 +79,7 @@ public class HeikinriyogakuTokeihyoProcessParameter implements IBatchProcessPara
             RString kaishiYM,
             RString shuryoYM,
             RString chikuShitei,
-            Map<RString, RString> 選択地区Map,
+            List<RString> selectorChikulist,
             RString shichosonCode,
             RString shichosonMei,
             RString kyuShichosonCode,
@@ -100,7 +98,7 @@ public class HeikinriyogakuTokeihyoProcessParameter implements IBatchProcessPara
         this.kaishiYM = kaishiYM;
         this.shuryoYM = shuryoYM;
         this.chikuShitei = chikuShitei;
-        this.選択地区Map = 選択地区Map;
+        this.selectorChikulist = selectorChikulist;
         this.shichosonCode = shichosonCode;
         this.shichosonMei = shichosonMei;
         this.kyuShichosonCode = kyuShichosonCode;
@@ -129,7 +127,7 @@ public class HeikinriyogakuTokeihyoProcessParameter implements IBatchProcessPara
                 kaishiYM,
                 shuryoYM,
                 chikuShitei,
-                setselectorChikulist(),
+                selectorChikulist,
                 shichosonCode,
                 shichosonMei,
                 kyuShichosonCode,
@@ -210,13 +208,5 @@ public class HeikinriyogakuTokeihyoProcessParameter implements IBatchProcessPara
             is地区2 = false;
             is地区3 = false;
         }
-    }
-
-    private List<RString> setselectorChikulist() {
-        List<RString> selectorChikulist = new ArrayList<>();
-        for (RString 選択結果 : 選択地区Map.keySet()) {
-            selectorChikulist.add(選択結果);
-        }
-        return selectorChikulist;
     }
 }

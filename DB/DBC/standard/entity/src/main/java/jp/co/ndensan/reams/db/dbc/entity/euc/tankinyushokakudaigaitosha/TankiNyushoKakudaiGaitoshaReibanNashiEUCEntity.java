@@ -138,7 +138,7 @@ public class TankiNyushoKakudaiGaitoshaReibanNashiEUCEntity implements ITankiNyu
     @CsvField(order = 55, name = "有効終了年月")
     private RString 有効終了年月;
     @CsvField(order = 56, name = "拡大倍数")
-    private RString 拡大倍数;
+    private int 拡大倍数;
     @CsvField(order = 57, name = "拡大支給限度額")
     private Decimal 拡大支給限度額;
     @CsvField(order = 58, name = "限度額管理期間数")

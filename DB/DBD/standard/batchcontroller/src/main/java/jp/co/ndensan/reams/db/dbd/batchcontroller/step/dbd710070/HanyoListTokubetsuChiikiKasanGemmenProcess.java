@@ -241,6 +241,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
 
     private TokubetsuChiikiKasanGemmenEucCsvEntity setBlank() {
         TokubetsuChiikiKasanGemmenEucCsvEntity eucCsvEntity = new TokubetsuChiikiKasanGemmenEucCsvEntity();
+        eucCsvEntity.set連番(RString.EMPTY);
         eucCsvEntity.set識別コード(RString.EMPTY);
         eucCsvEntity.set住民種別(RString.EMPTY);
         eucCsvEntity.set氏名(RString.EMPTY);
@@ -489,7 +490,9 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
     }
 
     private void setEucCsvEntity(TokubetsuChiikiKasanGemmenEucCsvEntity eucCsvEntity, TokubetsuChiikiKasanGemmenEntity entity) {
-
+        if (processParamter.isCsvrenbanfuka()) {
+            eucCsvEntity.set連番(new RString(String.valueOf(++i)));
+        }
         if (entity.getPsmEntity() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
             eucCsvEntity.set識別コード(kojin.get識別コード().value());

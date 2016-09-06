@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kaigokyufuhikagomositatetouroku;
 
-import jp.co.ndensan.reams.db.dbc.definition.core.kyufubunruikubun.KyufubunruiKubun;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -111,10 +110,11 @@ public final class KaigoKyufuhiParamter {
                 !RString.isNullOrEmpty(被保番号),
                 !RString.isNullOrEmpty(事業者),
                 保険者番号 != null && new RString("000000").equals(保険者番号.value()),
-                KyufubunruiKubun.介護給付.getコード(),
-                KyufubunruiKubun.予防給付.getコード(),
-                KyufubunruiKubun.介護給付と予防給付.getコード(),
-                KyufubunruiKubun.総合事業_経過措置.getコード(),
-                KyufubunruiKubun.総合事業.getコード());
+                // TODO EUNMなし
+                new RString("1"),
+                new RString("2"),
+                new RString("3"),
+                new RString("4"),
+                new RString("5"));
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd204010.TaishoKyufuJissekiTokuteiMybatisprmParamter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd204010.TokuchiJissekiKanriListSakuseiMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd204010.KyufujissekiKihonEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.TokubetsuChiikiKasanKeigenJissekiKanri;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd204010.TokubetsuChiikiKasanKeigenJissekiKanriListEntity;
 
 /**
  * 審査年月最大の給付実績基本レコードを取得
@@ -32,5 +32,5 @@ public interface ITokubetsuChiikiKasanKeigenListMapper {
      * @param parameter 給付実績参照キー作成情報パラメター
      * @return 給付実績参照キー作成情報
      */
-    List<TokubetsuChiikiKasanKeigenJissekiKanri> select特別地域加算軽減実績管理情報(TokuchiJissekiKanriListSakuseiMybatisParameter parameter);
+    List<TokubetsuChiikiKasanKeigenJissekiKanriListEntity> select特別地域加算軽減実績管理情報(TokuchiJissekiKanriListSakuseiMybatisParameter parameter);
 }

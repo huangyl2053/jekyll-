@@ -78,6 +78,12 @@
                     AND(
                         総合事業対象者."tekiyoKaishiYMD"<![CDATA[<=]]>#{課税判定等基準日}
                         AND #{課税判定等基準日}<![CDATA[<=]]> 総合事業対象者."tekiyoShuryoYMD"
+                        AND NOT(
+                            受給者台帳."ninteiYukoKikanKaishiYMD"<![CDATA[<=]]>#{課税判定等基準日}
+                            AND #{課税判定等基準日}<![CDATA[<=]]>受給者台帳."ninteiYukoKikanShuryoYMD"
+                            AND 受給者台帳."logicalDeletedFlag"= false
+                            AND 受給者台帳."yukoMukoKubun"='1'
+                        )
                      )                      
                 </if>
             </if>

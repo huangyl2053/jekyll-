@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.DbT2002FukaZennendoTempInsertProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.KarisanteiIkkatsuHakkoTempInsertProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.PrintTsuchishoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.SystemTimeKarisanteiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.UpdChoteiGakuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.UpdFukaJohoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.UpdHihokenshaKubunProcess;
@@ -30,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<TokuchoKaishiTsuchishoBatchParameter> {
 
+    private static final String システム日時の取得 = "getSystemDate";
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
     private static final String 仮算定一括発行一時テーブル作成 = "karisanteiShutoku";
     private static final String 前年度賦課情報一時テーブル作成 = "fukaZennendoShutoku";
@@ -41,16 +43,11 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<Tok
     private static final RString 特別徴収開始通知書仮算定_帳票分類ID
             = new RString("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private KarisanteiBatchEntity 出力帳票Entity;
-    private YMDHMS システム日時;
-
-    @Override
-    protected void initialize() {
-        システム日時 = YMDHMS.now();
-    }
 
     @Override
     protected void defineFlow() {
 
+        executeStep(システム日時の取得);
         List<KarisanteiBatchEntity> 出力帳票一覧List = getParameter().get出力帳票一覧();
         for (KarisanteiBatchEntity 出力帳票一覧 : 出力帳票一覧List) {
             if (!特別徴収開始通知書仮算定_帳票分類ID.equals(出力帳票一覧.get帳票分類ID().getColumnValue())) {
@@ -66,6 +63,16 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<Tok
             executeStep(通知書の発行);
         }
 
+    }
+
+    /**
+     * システム日時の取得を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step (システム日時の取得)
+    protected IBatchFlowCommand getSystemDate() {
+        return simpleBatch(SystemTimeKarisanteiProcess.class).define();
     }
 
     /**
@@ -158,7 +165,7 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<Tok
         parameter.set出力対象(getParameter().get出力対象());
         parameter.set出力帳票一覧Entity(出力帳票Entity);
         parameter.set発行日(getParameter().get発行日());
-        parameter.set帳票作成日時(システム日時);
+        parameter.set帳票作成日時(getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeKarisanteiProcess.SYSTEM_TIME));
         parameter.set一括発行起動フラグ(getParameter().is一括発行起動フラグ());
         return parameter;
     }

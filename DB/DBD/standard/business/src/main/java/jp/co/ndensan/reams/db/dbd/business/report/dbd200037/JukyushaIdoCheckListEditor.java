@@ -65,7 +65,7 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
         editフリガナ(source);
         edit生年月日(source);
         edit異動区分(source);
-        edit処理種別(source);
+//        TODO edit処理種別(source);
         edit受給申請日(source);
         edit認定日(source);
         edit認定有効開始日(source);
@@ -82,7 +82,7 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
         edit認定有効終了日(source);
         edit旧措置者(source);
         edit処理内容(source);
-        edit備考(source);
+//    TODO    edit備考(source);
         return source;
     }
 
@@ -99,25 +99,20 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
     }
 
     private void edit出力順(JukyushaIdoCheckListReportSource source) {
-        if (item != null) {
-            source.shutsuryokujun1 = item.getShutsuryokujun1();
-            source.shutsuryokujun2 = item.getShutsuryokujun2();
-            source.shutsuryokujun3 = item.getShutsuryokujun3();
-            source.shutsuryokujun4 = item.getShutsuryokujun4();
-            source.shutsuryokujun5 = item.getShutsuryokujun5();
-        }
+        source.shutsuryokujun1 = item.getShutsuryokujun1();
+        source.shutsuryokujun2 = item.getShutsuryokujun2();
+        source.shutsuryokujun3 = item.getShutsuryokujun3();
+        source.shutsuryokujun4 = item.getShutsuryokujun4();
+        source.shutsuryokujun5 = item.getShutsuryokujun5();
 
     }
 
     private void edit改頁(JukyushaIdoCheckListReportSource source) {
-        if (item != null) {
-            source.kaipage1 = item.getKaipage1();
-            source.kaipage2 = item.getKaipage2();
-            source.kaipage3 = item.getKaipage3();
-            source.kaipage4 = item.getKaipage4();
-            source.kaipage5 = item.getKaipage5();
-        }
-
+        source.kaipage1 = item.getKaipage1();
+        source.kaipage2 = item.getKaipage2();
+        source.kaipage3 = item.getKaipage3();
+        source.kaipage4 = item.getKaipage4();
+        source.kaipage5 = item.getKaipage5();
     }
 
     private void edit被保険者番号(JukyushaIdoCheckListReportSource source) {
@@ -145,10 +140,8 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
         source.listUpper_6 = upperEntity.get異動区分();
     }
 
-    private void edit処理種別(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_7 = upperEntity.get処理種別();
-    }
-
+//    TODO QA 项目位定义 private void edit処理種別(JukyushaIdoCheckListReportSource source) {
+//    }
     private void edit受給申請日(JukyushaIdoCheckListReportSource source) {
         source.listUpper_8 = upperEntity.get受給申請日() == null ? RString.EMPTY : new RString(upperEntity.get受給申請日().toString());
     }
@@ -213,10 +206,8 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
         source.listLower_10 = lowerEntity.get処理内容();
     }
 
-    private void edit備考(JukyushaIdoCheckListReportSource source) {
-        source.listLower_11 = lowerEntity.get備考();
-    }
-
+//    TODO QA 项目位定义 private void edit備考(JukyushaIdoCheckListReportSource source) {
+//    }
     private RString get印刷日時() {
         RStringBuilder systemDateTime = new RStringBuilder();
         RDateTime datetime = RDate.getNowDateTime();

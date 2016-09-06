@@ -17,8 +17,7 @@ public enum DBC1100012TransitionEventName implements IContainerEvents {
     初期表示("初期表示"),
     完了("完了"),
     変更("変更"),
-    取下げ("取下げ"),
-    支給申請登録へ("支給申請登録へ");
+    取下げ("取下げ");
 
     private final RString name;
 
