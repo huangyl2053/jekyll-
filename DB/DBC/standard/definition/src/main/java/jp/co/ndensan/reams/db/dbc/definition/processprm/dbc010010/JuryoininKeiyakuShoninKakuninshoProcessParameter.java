@@ -35,6 +35,13 @@ public class JuryoininKeiyakuShoninKakuninshoProcessParameter implements IBatchP
     private LasdecCode 市町村コード;
     private RDateTime 処理日時;
 
+    private RString 利用者向けタイトル;
+    private RString 利用者向け通知文1;
+    private RString 利用者向け通知文2;
+    private RString 事業者用タイトル;
+    private RString 事業者用通知文1;
+    private RString 事業者用通知文2;
+
     /**
      * コンストラクタです.
      *
