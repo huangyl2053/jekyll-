@@ -91,8 +91,7 @@ public class ShakaiFukushiHojinKeigenEditor implements IShakaiFukushiHojinKeigen
                 .append(yinsatsubi.getTime().getSecond())
                 .append(new RString("秒"))
                 .append(作成);
-
-        source.printTimeStamp = 帳票作成日時.toDateString();
+        source.printTimeStamp = builder.toRString();
         source.title = 帳票タイトル;
         if (null != association) {
             source.hokenshaNo = this.association.get地方公共団体コード().value();
