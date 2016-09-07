@@ -98,7 +98,7 @@ public class KyufuTsuchiGenmenHoseiHandler {
             if (value.contains("全市町村")) {
                 List<KeyValueDataSource> 市町村コードList = div.getKyufuTsuchiGenmenHoseiListSakusei().getDdlShichoson().getDataSource();
                 for (KeyValueDataSource source : 市町村コードList) {
-                    保険者番号List.addAll(set全市町村の保険者番号(保険者番号List, source));
+                    保険者番号List.addAll(set全市町村の保険者番号(source));
                 }
             } else {
                 RString key = div.getKyufuTsuchiGenmenHoseiListSakusei().getDdlShichoson().getSelectedKey();
@@ -116,7 +116,8 @@ public class KyufuTsuchiGenmenHoseiHandler {
         return paramter;
     }
 
-    private List<RString> set全市町村の保険者番号(List<RString> 保険者番号List, KeyValueDataSource source) {
+    private List<RString> set全市町村の保険者番号(KeyValueDataSource source) {
+        List<RString> 保険者番号List = new ArrayList<>();
         if (!RString.isNullOrEmpty(source.getValue())) {
             保険者番号List.add(source.getKey());
         }
