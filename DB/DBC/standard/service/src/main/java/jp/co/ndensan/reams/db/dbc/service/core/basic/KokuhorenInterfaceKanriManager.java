@@ -229,4 +229,17 @@ public class KokuhorenInterfaceKanriManager {
         entity.initializeMd5();
         return new KokuhorenInterfaceKanri(entity);
     }
+
+    /**
+     * 国保連インターフェース管理{@link KokuhorenInterfaceKanri}を保存します。
+     *
+     * @param 国保連インターフェース管理 {@link KokuhorenInterfaceKanri}
+     *
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean save(KokuhorenInterfaceKanri 国保連インターフェース管理) {
+        requireNonNull(国保連インターフェース管理, UrSystemErrorMessages.値がnull.getReplacedMessage("国保連インターフェース管理"));
+        return 1 == dac.save(国保連インターフェース管理.toEntity());
+    }
 }

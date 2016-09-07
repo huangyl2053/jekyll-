@@ -45,13 +45,7 @@ public class HanyoListParamKokurenJyukyujyaJyoho {
      */
     public ResponseData<HanyoListParamKokurenJyukyujyaJyohoDiv> onLoad(HanyoListParamKokurenJyukyujyaJyohoDiv div) {
         RString モード = ResponseHolder.getState();
-        ViewStateHolder.put(ViewStateKeys.モード, モード);
         List<KaigoDonyuKeitai> list = KaigoDonyuKeitaiManager.createInstance().get介護導入形態By業務分類(GyomuBunrui.介護事務);
-        if (list.get(0).get導入形態コード().is単一()) {
-            div.getChushutsuJokenPanel().getCcdHokenshaList().setDisplayNone(true);
-        } else if (list.get(0).get導入形態コード().is広域()) {
-            div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
-        }
         getHandler(div).onLoad(list);
         if (モード1.equals(モード)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701005.getReportId());

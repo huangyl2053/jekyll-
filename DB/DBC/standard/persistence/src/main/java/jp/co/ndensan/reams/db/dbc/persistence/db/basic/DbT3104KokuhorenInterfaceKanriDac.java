@@ -9,11 +9,39 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.SofuTorikomiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.chushutsuKaishiTimestamp;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.chushutsuShuryoTimestamp;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.ctrlRecordKensu;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.ctrlShoriYM;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.fileKensu1;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.fileKensu2;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.fileKensu3;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.fileKensu4;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.fileKensu5;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.fileName1;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.fileName2;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.fileName3;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.fileName4;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.fileName5;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.insertContextId;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.insertDantaiCd;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.insertReamsLoginId;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.insertTimestamp;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.isDeleted;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.jissekiDataShinsaYM;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.kagoCtrlRecordKensu;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.kagoCtrlShoriYM;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.kokanShikibetsuNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.lastUpdateReamsLoginId;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.lastUpdateTimestamp;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.saiShoriFukaKubun;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.saiShoriKanoKubun;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.shoriJikkoKaisu;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.shoriJisshiTimestamp;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.shoriJotaiKubun;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.shoriYM;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.sofuTorikomiKubun;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.updateCount;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -48,6 +76,9 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
     private static final RString KEY_交換情報識別番号 = new RString("交換情報識別番号");
     private static final RString KEY_送付取込区分 = new RString("送付取込区分");
     private static final RString KEY_TYPE = new RString("type");
+    private static final RString MSG_処理年月 = new RString("処理年月");
+    private static final RString 送付取込区分_送付 = new RString("1");
+    private static final RString 送付取込区分_取込 = new RString("2");
 
     /**
      * 主キーで国保連インターフェース管理を取得します(論理削除行ではない)。
@@ -341,5 +372,95 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
                                 eq(isDeleted, 論理削除フラグ))).
                 order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.DESC)).limit(1).
                 toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
+
+    /**
+     * 国保連連携スケジュール設定のスケジュール履歴情報初期_送付 取得返します。
+     *
+     * @return List<DbT3104KokuhorenInterfaceKanriEntity>
+     */
+    @Transaction
+    public List<DbT3104KokuhorenInterfaceKanriEntity> getスケジュール履歴情報初期_送付() {
+        //TODO QA1148
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(insertDantaiCd, insertTimestamp, insertReamsLoginId, insertContextId, isDeleted,
+                updateCount, lastUpdateTimestamp, lastUpdateReamsLoginId, max(shoriYM), kokanShikibetsuNo,
+                sofuTorikomiKubun, shoriJotaiKubun, shoriJisshiTimestamp, chushutsuKaishiTimestamp,
+                chushutsuShuryoTimestamp, saiShoriKanoKubun, shoriJikkoKaisu, fileName1, fileName2,
+                fileName3, fileName4, fileName5, fileKensu1, fileKensu2, fileKensu3, fileKensu4,
+                fileKensu5, saiShoriFukaKubun, ctrlRecordKensu, ctrlShoriYM, kagoCtrlRecordKensu,
+                kagoCtrlShoriYM, jissekiDataShinsaYM).
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(
+                        eq(sofuTorikomiKubun, 送付取込区分_送付)).
+                groupBy(kokanShikibetsuNo, shoriYM, shoriJotaiKubun,
+                        shoriJisshiTimestamp, chushutsuKaishiTimestamp, chushutsuShuryoTimestamp).
+                order(by(shoriYM, Order.DESC)).
+                toList(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
+
+    /**
+     * 国保連連携スケジュール設定のスケジュール履歴情報初期_取込 取得返します。
+     *
+     * @return List<DbT3104KokuhorenInterfaceKanriEntity>
+     */
+    @Transaction
+    public List<DbT3104KokuhorenInterfaceKanriEntity> getスケジュール履歴情報初期_取込() {
+        //TODO QA1148
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(insertDantaiCd, insertTimestamp, insertReamsLoginId, insertContextId, isDeleted,
+                updateCount, lastUpdateTimestamp, lastUpdateReamsLoginId, max(shoriYM), kokanShikibetsuNo,
+                sofuTorikomiKubun, shoriJotaiKubun, shoriJisshiTimestamp, chushutsuKaishiTimestamp,
+                chushutsuShuryoTimestamp, saiShoriKanoKubun, shoriJikkoKaisu, fileName1, fileName2,
+                fileName3, fileName4, fileName5, fileKensu1, fileKensu2, fileKensu3, fileKensu4,
+                fileKensu5, saiShoriFukaKubun, ctrlRecordKensu, ctrlShoriYM, kagoCtrlRecordKensu,
+                kagoCtrlShoriYM, jissekiDataShinsaYM).
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(
+                        eq(sofuTorikomiKubun, 送付取込区分_取込)).
+                groupBy(kokanShikibetsuNo, shoriYM, shoriJotaiKubun,
+                        shoriJisshiTimestamp, chushutsuKaishiTimestamp, chushutsuShuryoTimestamp).
+                order(by(shoriYM, Order.DESC)).
+                toList(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
+
+    /**
+     * 国保連連携スケジュール設定のスケジュール履歴情報_送付 取得返します。
+     *
+     * @param 処理年月 FlexibleYearMonth
+     *
+     * @return List<DbT3104KokuhorenInterfaceKanriEntity>
+     */
+    @Transaction
+    public List<DbT3104KokuhorenInterfaceKanriEntity> getスケジュール履歴情報_送付(FlexibleYearMonth 処理年月) {
+        requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_処理年月.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(and(
+                                eq(shoriYM, 処理年月),
+                                eq(sofuTorikomiKubun, 送付取込区分_送付))).
+                order(by(shoriYM, Order.DESC)).
+                toList(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
+
+    /**
+     * 国保連連携スケジュール設定のスケジュール履歴情報_取込 取得返します。
+     *
+     * @param 処理年月 FlexibleYearMonth
+     *
+     * @return List<DbT3104KokuhorenInterfaceKanriEntity>
+     */
+    @Transaction
+    public List<DbT3104KokuhorenInterfaceKanriEntity> getスケジュール履歴情報_取込(FlexibleYearMonth 処理年月) {
+        requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_処理年月.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(and(
+                                eq(shoriYM, 処理年月),
+                                eq(sofuTorikomiKubun, 送付取込区分_取込))).
+                order(by(shoriYM, Order.DESC)).
+                toList(DbT3104KokuhorenInterfaceKanriEntity.class);
     }
 }

@@ -4,18 +4,16 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * Heijunka8ShoriNaiyo のクラスファイル
- *
- * @reamsid_L DBB-0860-010 lihang
+ * Heijunka8ShoriNaiyo のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class Heijunka8ShoriNaiyoDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]

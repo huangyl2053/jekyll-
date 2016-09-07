@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 障がい者控除対象者认定のハンドラクラスです。
+ * 障がい者控除対象者認定のハンドラクラスです。
  *
  * @reamsid_L DBD-3850-010 liuwei2
  */
@@ -33,7 +33,7 @@ public class DBD4010011Handler {
     /**
      * バッチ用パラメータを作成します。
      *
-     * @return ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter 障がい者控除対象者认定_バッチ用のパラメータです。
+     * @return ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter 障がい者控除対象者認定_バッチ用のパラメータです。
      */
     public ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter getParameter() {
         ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter parameter = new ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter();

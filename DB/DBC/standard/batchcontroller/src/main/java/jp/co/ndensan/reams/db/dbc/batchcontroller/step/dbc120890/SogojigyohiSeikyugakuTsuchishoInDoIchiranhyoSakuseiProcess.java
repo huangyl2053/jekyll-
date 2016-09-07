@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -121,6 +122,7 @@ public class SogojigyohiSeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends 
     @Override
     protected void afterExecute() {
         sogojigyohiCsvWriter.close();
+        manager.spool(SubGyomuCode.DBC介護給付, sogojigyohiEucFilePath);
     }
 
     @Override

@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 public class TankiNyushoKakudaiGaitoshaReibanAriEUCEntity implements ITankiNyushoKakudaiGaitoshaEUCEntity {
 
     @CsvField(order = 1, name = "連番")
-    private int 連番;
+    private RString 連番;
     @CsvField(order = 2, name = "識別コード")
     private ShikibetsuCode 識別コード;
     @CsvField(order = 3, name = "住民種別")
@@ -53,7 +53,7 @@ public class TankiNyushoKakudaiGaitoshaReibanAriEUCEntity implements ITankiNyush
     private ZenkokuJushoCode 住所コード;
     @CsvField(order = 13, name = "郵便番号")
     private RString 郵便番号;
-    @CsvField(order = 14, name = "住所_番地_方書")
+    @CsvField(order = 14, name = "住所＋番地＋方書")
     private RString 住所_番地_方書;
     @CsvField(order = 15, name = "住所")
     private RString 住所;
@@ -97,7 +97,7 @@ public class TankiNyushoKakudaiGaitoshaReibanAriEUCEntity implements ITankiNyush
     private RString 転出入理由;
     @CsvField(order = 35, name = "前住所郵便番号")
     private RString 前住所郵便番号;
-    @CsvField(order = 36, name = "前住所_番地_方書")
+    @CsvField(order = 36, name = "前住所+番地+方書")
     private RString 前住所_番地_方書;
     @CsvField(order = 37, name = "前住所")
     private RString 前住所;
@@ -133,14 +133,14 @@ public class TankiNyushoKakudaiGaitoshaReibanAriEUCEntity implements ITankiNyush
     private RString 資格区分;
     @CsvField(order = 53, name = "住所地特例状態")
     private RString 住所地特例状態;
-    @CsvField(order = 54, name = "資格_証記載保険者番号")
+    @CsvField(order = 54, name = "（資格）証記載保険者番号")
     private RString 資格_証記載保険者番号;
     @CsvField(order = 55, name = "有効開始年月")
     private RString 有効開始年月;
     @CsvField(order = 56, name = "有効終了年月")
     private RString 有効終了年月;
     @CsvField(order = 57, name = "拡大倍数")
-    private int 拡大倍数;
+    private RString 拡大倍数;
     @CsvField(order = 58, name = "拡大支給限度額")
     private Decimal 拡大支給限度額;
     @CsvField(order = 59, name = "限度額管理期間数")

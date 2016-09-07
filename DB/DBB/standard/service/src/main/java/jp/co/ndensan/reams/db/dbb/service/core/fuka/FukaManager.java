@@ -104,27 +104,27 @@ public class FukaManager {
             ShunoKamokuFinder shunoKamokuManager,
             ShunoManager shunoManager,
             FukaNokiResearcher 納期) {
-        if (Decimal.ZERO.compareTo(介護賦課.get特徴期別金額01()) < 0) {
+        if (介護賦課.get特徴期別金額01() != null && Decimal.ZERO.compareTo(介護賦課.get特徴期別金額01()) < 0) {
             save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
                     介護賦課.get特徴期別金額01(), 納期.get特徴納期(1).get納期限(), 1);
         }
-        if (Decimal.ZERO.compareTo(介護賦課.get特徴期別金額02()) < 0) {
+        if (介護賦課.get特徴期別金額02() != null && Decimal.ZERO.compareTo(介護賦課.get特徴期別金額02()) < 0) {
             save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
                     介護賦課.get特徴期別金額02(), 納期.get特徴納期(納期_2).get納期限(), 納期_2);
         }
-        if (Decimal.ZERO.compareTo(介護賦課.get特徴期別金額03()) < 0) {
+        if (介護賦課.get特徴期別金額03() != null && Decimal.ZERO.compareTo(介護賦課.get特徴期別金額03()) < 0) {
             save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
                     介護賦課.get特徴期別金額03(), 納期.get特徴納期(納期_3).get納期限(), 納期_3);
         }
-        if (Decimal.ZERO.compareTo(介護賦課.get特徴期別金額04()) < 0) {
+        if (介護賦課.get特徴期別金額04() != null && Decimal.ZERO.compareTo(介護賦課.get特徴期別金額04()) < 0) {
             save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
                     介護賦課.get特徴期別金額04(), 納期.get特徴納期(納期_4).get納期限(), 納期_4);
         }
-        if (Decimal.ZERO.compareTo(介護賦課.get特徴期別金額05()) < 0) {
+        if (介護賦課.get特徴期別金額05() != null && Decimal.ZERO.compareTo(介護賦課.get特徴期別金額05()) < 0) {
             save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
                     介護賦課.get特徴期別金額05(), 納期.get特徴納期(納期_5).get納期限(), 納期_5);
         }
-        if (Decimal.ZERO.compareTo(介護賦課.get特徴期別金額06()) < 0) {
+        if (介護賦課.get特徴期別金額06() != null && Decimal.ZERO.compareTo(介護賦課.get特徴期別金額06()) < 0) {
             save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
                     介護賦課.get特徴期別金額06(), 納期.get特徴納期(納期_6).get納期限(), 納期_6);
         }

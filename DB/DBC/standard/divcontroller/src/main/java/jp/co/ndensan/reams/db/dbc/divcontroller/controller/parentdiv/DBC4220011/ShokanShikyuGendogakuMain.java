@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.UwanoseShokanShuruiShikyuG
 import jp.co.ndensan.reams.db.dbc.business.core.basic.UwanoseShokanShuruiShikyuGendoGakuHolder;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyugendogaku.ShikyuGendogakuTableKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4220011.DBC4220011StateName;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4220011.DBC4220011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4220011.ShokanShikyuGendogakuMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4220011.ShokanShikyuGendogakuMainHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4220011.ShokanShikyuGendogakuMainValidationHandler;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -39,6 +41,7 @@ public class ShokanShikyuGendogakuMain {
     private static final RString 排他キー = new RString("DBCShikyuGendoGakuTableDbT7112");
     private static final RString 完了メッセージメイン = new RString("償還支給限度額の登録が完了しました。");
     private static final RString 省略_空 = new RString("");
+    private static final RString 共通ボタン = new RString("btnUpdate");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -94,7 +97,7 @@ public class ShokanShikyuGendogakuMain {
             ShokanShikyuGendogakuMainDiv div) {
         ShokanShikyuGendogakuMainHandler handler = getHandler(div);
         handler.状態３();
-        return ResponseData.of(div).setState(DBC4220011StateName.標準);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -195,6 +198,32 @@ public class ShokanShikyuGendogakuMain {
             div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().setToDisabled(false);
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 状態遷移の事件です。
+     *
+     * @param div ShokanShikyuGendogakuMainDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuGendogakuMainDiv> onStateTransition(
+            ShokanShikyuGendogakuMainDiv div) {
+        if (CommonButtonHolder.isVisible(共通ボタン)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 状態遷移の事件です。
+     *
+     * @param div ShokanShikyuGendogakuMainDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuGendogakuMainDiv> btn_Complete(
+            ShokanShikyuGendogakuMainDiv div) {
+        return ResponseData.of(div).forwardWithEventName(
+                DBC4220011TransitionEventName.完了状態).respond();
     }
 
     private ShokanShikyuGendogakuMainHandler getHandler(ShokanShikyuGendogakuMainDiv div) {

@@ -9,7 +9,16 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kijunshunyugakutekiyoshinseishohakkoichiran.KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoshinseishohakkoichiran.KijunShunyugakuTekiyoShinseishoHakkoIchiranSource;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.lang.Width;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 帳票設計_DBC200088_基準収入額適用申請書一覧表 Editorクラスです。
@@ -18,7 +27,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijunShunyugakuTekiyoShinseishoHakkoIchiranEditor {
 
-    private final List<KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity> 発行対象者リスト;
+    private final KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 発行対象者;
+    private static final RString 年度作成 = new RString("年度");
+    private static final RString 日時作成 = new RString("作成");
     private final RString 市町村番号;
     private final RString 市町村名;
     private final List<RString> 出力順リスト;
@@ -28,24 +39,23 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijun
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
-    private static final RString 該当データなし = new RString("該当データなし");
 
     /**
      * コンストラクタです。
      *
-     * @param 発行対象者リスト List<KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity>
+     * @param 発行対象者 KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity
      * @param 市町村番号 RString
      * @param 市町村名 RString
      * @param 出力順リスト List<RString>
      * @param 改頁リスト List<RString>
      */
     public KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor(
-            List<KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity> 発行対象者リスト,
+            KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 発行対象者,
             RString 市町村番号,
             RString 市町村名,
             List<RString> 出力順リスト,
             List<RString> 改頁リスト) {
-        this.発行対象者リスト = 発行対象者リスト;
+        this.発行対象者 = 発行対象者;
         this.市町村番号 = 市町村番号;
         this.市町村名 = 市町村名;
         this.出力順リスト = 出力順リスト;
@@ -55,61 +65,85 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijun
 
     @Override
     public KijunShunyugakuTekiyoShinseishoHakkoIchiranSource edit(KijunShunyugakuTekiyoShinseishoHakkoIchiranSource source) {
-        source.printTimeStamp = YMDHMS.now().toDateString();
+        source.printTimeStamp = get印刷日時(YMDHMS.now());
+        source.nendo = 発行対象者.get年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().concat(年度作成);
         source.hokenshaNo = 市町村番号;
         source.hokenshaName = 市町村名;
         edit出力順(source);
         edit改ページ(source);
 
-        if (0 < 発行対象者リスト.size()) {
-            for (KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity entity : 発行対象者リスト) {
-
-                source.listIchiran_1 = entity.get通番();
-                source.listIchiran_2 = entity.get世帯番号();
-                source.listIchiran_3 = entity.get世帯課税();
-                source.listIchiran_4 = entity.get総合計();
-                source.listIchiran_5 = entity.get被保番号();
-                source.listIchiran_6 = entity.get氏名();
-                source.listIchiran_7 = entity.get年齢();
-                source.listIchiran_9 = entity.get課税所得();
-                source.listIchiran_10 = entity.get課税所得_控除後();
-                source.listIchiran_11 = entity.get年金収入();
-                source.listIchiran_12 = entity.getその他合計所得();
-                source.listIchiran_13 = entity.get合計();
-                source.listIchiran_14 = entity.get要介護度();
-                if (entity.get生年月日() != null) {
-                    source.listIchiran_8 = new RString(entity.get生年月日().toString());
-                }
-                if (entity.get認定開始日() != null) {
-                    source.listIchiran_15 = new RString(entity.get認定開始日().toString());
-                }
-                if (entity.get認定終了日() != null) {
-                    source.listIchiran_16 = new RString(entity.get認定終了日().toString());
-                }
-                if (entity.get識別コード() != null) {
-                    source.shikibetsuCode = entity.get識別コード().value();
-                }
-            }
-        } else {
-            source.listIchiran_6 = 該当データなし;
+        source.listIchiran_1 = 発行対象者.get通番();
+        source.listIchiran_2 = 発行対象者.get世帯番号();
+        source.listIchiran_3 = 発行対象者.get世帯課税();
+        source.listIchiran_4 = doカンマ編集(発行対象者.get総合計());
+        source.listIchiran_5 = 発行対象者.get被保番号();
+        source.listIchiran_6 = 発行対象者.get氏名();
+        source.listIchiran_7 = 発行対象者.get年齢();
+        source.listIchiran_9 = doカンマ編集(発行対象者.get課税所得());
+        source.listIchiran_10 = doカンマ編集(発行対象者.get課税所得_控除後());
+        source.listIchiran_11 = doカンマ編集(発行対象者.get年金収入());
+        source.listIchiran_12 = doカンマ編集(発行対象者.getその他合計所得());
+        source.listIchiran_13 = doカンマ編集(発行対象者.get合計());
+        source.listIchiran_14 = 発行対象者.get要介護度();
+        if (発行対象者.get生年月日() != null) {
+            source.listIchiran_8 = 発行対象者.get生年月日().wareki().toDateString();
         }
-
+        if (発行対象者.get認定開始日() != null) {
+            source.listIchiran_15 = 発行対象者.get認定開始日().wareki().toDateString();
+        }
+        if (発行対象者.get認定終了日() != null) {
+            source.listIchiran_16 = 発行対象者.get認定終了日().wareki().toDateString();
+        }
+        if (発行対象者.get識別コード() != null) {
+            source.shikibetsuCode = 発行対象者.get識別コード().value();
+        }
         return source;
     }
 
     private void edit出力順(KijunShunyugakuTekiyoShinseishoHakkoIchiranSource source) {
-        source.shutsuryokujun1 = 出力順リスト.get(NUM_0);
-        source.shutsuryokujun2 = 出力順リスト.get(NUM_1);
-        source.shutsuryokujun3 = 出力順リスト.get(NUM_2);
-        source.shutsuryokujun4 = 出力順リスト.get(NUM_3);
-        source.shutsuryokujun5 = 出力順リスト.get(NUM_4);
+        source.shutsuryokujun1 = get並び順(NUM_0);
+        source.shutsuryokujun2 = get並び順(NUM_1);
+        source.shutsuryokujun3 = get並び順(NUM_2);
+        source.shutsuryokujun4 = get並び順(NUM_3);
+        source.shutsuryokujun5 = get並び順(NUM_4);
     }
 
     private void edit改ページ(KijunShunyugakuTekiyoShinseishoHakkoIchiranSource source) {
-        source.kaipage1 = 改頁リスト.get(NUM_0);
-        source.kaipage2 = 改頁リスト.get(NUM_1);
-        source.kaipage3 = 改頁リスト.get(NUM_2);
-        source.kaipage4 = 改頁リスト.get(NUM_3);
-        source.kaipage5 = 改頁リスト.get(NUM_4);
+        source.kaipage1 = get改頁(NUM_0);
+        source.kaipage2 = get改頁(NUM_1);
+        source.kaipage3 = get改頁(NUM_2);
+        source.kaipage4 = get改頁(NUM_3);
+        source.kaipage5 = get改頁(NUM_4);
+    }
+
+    private RString get並び順(int index) {
+        return index < 出力順リスト.size() ? 出力順リスト.get(index) : RString.EMPTY;
+    }
+
+    private RString get改頁(int index) {
+        return index < 改頁リスト.size() ? 改頁リスト.get(index) : RString.EMPTY;
+    }
+
+    private RString doカンマ編集(Decimal decimal) {
+        if (null != decimal) {
+            return DecimalFormatter.toコンマ区切りRString(decimal, 0);
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get印刷日時(YMDHMS datetime) {
+
+        RStringBuilder sakuseiYMD = new RStringBuilder();
+
+        sakuseiYMD.append(datetime.getDate().wareki().
+                eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.NONE).
+                width(Width.HALF).toDateString());
+        sakuseiYMD.append(RString.HALF_SPACE);
+        sakuseiYMD.append(datetime.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
+        sakuseiYMD.append(RString.HALF_SPACE);
+        sakuseiYMD.append(日時作成);
+        return sakuseiYMD.toRString();
     }
 }

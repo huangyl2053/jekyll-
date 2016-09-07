@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010020;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.HihokenshaDaichoBirthYMDProcessParameter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.JigyoHokokuGeppoIppanReportProcessParameter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.JigyoHokokuGeppoShoriKekkaKakuninListProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.JigyouHoukokuTokeiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.RiyoshaFutangakuKanriJohoSyoriProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.SyotaiJohoSyoriProcessParameter;
@@ -44,6 +46,7 @@ public class DBU010020_JigyoHokokuGeppo_IppanParameter extends BatchParameterBas
     private static final String SAKUSEICSVFILEID = "sakuseiCSVFileID";
     private static final String SYUTURYOKUCSVFILEPATH = "syuturyokuCSVFilePath";
     private static final YMDHMS SYORIYMDHMS = YMDHMS.now();
+    private static final RString BATCHID = new RString("DBU010020_JigyoHokokuGeppo_Ippan");
 
     @BatchParameter(key = PRINTCONTROLKBN, name = "プリントコントロール区分")
     private RString printControlKbn;
@@ -134,5 +137,25 @@ public class DBU010020_JigyoHokokuGeppo_IppanParameter extends BatchParameterBas
     public JigyouHoukokuTokeiProcessParameter toJigyouHoukokuTokeiProcessParameter() {
         return new JigyouHoukokuTokeiProcessParameter(hokokuYM, syukeiYM, nendo, shichosonCode,
                 koseiShichosonList, koseiShichosonKbn, kyuShichosonList, kyuShichosonKbn, SYORIYMDHMS, csvFilePath);
+    }
+
+    /**
+     * Process用のパラメータを生成します。
+     *
+     * @return JigyoHokokuGeppoIppanReportProcessParameter
+     */
+    public JigyoHokokuGeppoIppanReportProcessParameter toJigyoHokokuGeppoIppanReportProcessParameter() {
+        return new JigyoHokokuGeppoIppanReportProcessParameter(syukeiYM, kakoShukeiShichosonList,
+                shichosonCode, printControlKbn, SYORIYMDHMS, kakoShukeiKyuShichosonKbn);
+    }
+
+    /**
+     * Process用のパラメータを生成します。
+     *
+     * @return JigyoHokokuGeppoShoriKekkaKakuninListProcessParameter
+     */
+    public JigyoHokokuGeppoShoriKekkaKakuninListProcessParameter toJigyoHokokuGeppoShoriKekkaKakuninListProcessParameter() {
+        return new JigyoHokokuGeppoShoriKekkaKakuninListProcessParameter(BATCHID, kakoShukeiKyuShichosonKbn,
+                koseiShichosonKbn, kyuShichosonKbn, syukeiYM, koseiShichosonList, kyuShichosonList, SYORIYMDHMS);
     }
 }

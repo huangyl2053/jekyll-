@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.service.core.kaigofukatokuchoheijunka8;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.kaigofukatokuchoheijunka8.HeijunkaKeisanPageJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.kaigofukatokuchoheijunka8.ShoriDateKanriEntityResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.kaigofukatokuchoheijunka8.KaigoFukaTokuchoHeijunka8FlowParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -61,15 +62,21 @@ public class KaigoFukaTokuchoHeijunka8 {
      * @param 調定年度 調定年度
      * @return 処理状況リスト<処理日付管理entity>
      */
-    public List<DbT7022ShoriDateKanriEntity> getShoriJohkyoList(FlexibleYear 調定年度) {
-        List<DbT7022ShoriDateKanriEntity> shoriList = new ArrayList<>();
+    public List<ShoriDateKanriEntityResult> getShoriJohkyoList(FlexibleYear 調定年度) {
+        List<ShoriDateKanriEntityResult> shoriList = new ArrayList<>();
         DbT7022ShoriDateKanriEntity 当初所得引出 = dbT7022ShoriDateKanriDac.select処理日付管理マスタ_当初所得引出(調定年度);
         if (当初所得引出 != null) {
-            shoriList.add(当初所得引出);
+            ShoriDateKanriEntityResult result = new ShoriDateKanriEntityResult();
+            result.setEntity(当初所得引出);
+            shoriList.add(result);
         }
         List<DbT7022ShoriDateKanriEntity> 当初所得引出以外 = dbT7022ShoriDateKanriDac.select処理日付管理マスタ_当初所得引出以外(調定年度);
         if (当初所得引出以外 != null) {
-            shoriList.addAll(当初所得引出以外);
+            for (DbT7022ShoriDateKanriEntity entity : 当初所得引出以外) {
+                ShoriDateKanriEntityResult result = new ShoriDateKanriEntityResult();
+                result.setEntity(entity);
+                shoriList.add(result);
+            }
         }
         return shoriList;
     }

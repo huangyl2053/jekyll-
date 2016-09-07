@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 public class JigyoBunKogakuGassanShikyuKetteibanAriEUCEntity implements IJigyoBunKogakuGassanShikyuKetteiEUCEntity {
 
     @CsvField(order = 1, name = "連番")
-    private int 連番;
+    private RString 連番;
     @CsvField(order = 2, name = "識別コード")
     private ShikibetsuCode 識別コード;
     @CsvField(order = 3, name = "住民種別")
@@ -54,7 +54,7 @@ public class JigyoBunKogakuGassanShikyuKetteibanAriEUCEntity implements IJigyoBu
     private ZenkokuJushoCode 住所コード;
     @CsvField(order = 13, name = "郵便番号")
     private RString 郵便番号;
-    @CsvField(order = 14, name = "住所_番地_方書")
+    @CsvField(order = 14, name = "住所＋番地＋方書")
     private RString 住所_番地_方書;
     @CsvField(order = 15, name = "住所")
     private RString 住所;
@@ -124,7 +124,7 @@ public class JigyoBunKogakuGassanShikyuKetteibanAriEUCEntity implements IJigyoBu
     private RString 送付先住所コード;
     @CsvField(order = 48, name = "送付先郵便番号")
     private RString 送付先郵便番号;
-    @CsvField(order = 49, name = "送付先住所_番地_方書")
+    @CsvField(order = 49, name = "送付先住所+番地+方書")
     private RString 送付先住所_番地_方書;
     @CsvField(order = 50, name = "送付先住所")
     private RString 送付先住所;
@@ -182,9 +182,9 @@ public class JigyoBunKogakuGassanShikyuKetteibanAriEUCEntity implements IJigyoBu
     private RString 履歴番号;
     @CsvField(order = 77, name = "自己負担額証明書整理番号")
     private RString 自己負担額証明書整理番号;
-    @CsvField(order = 78, name = "対象計算期間_開始")
+    @CsvField(order = 78, name = "対象計算期間（開始）")
     private RString 対象計算期間_開始;
-    @CsvField(order = 79, name = "対象計算期間_終了")
+    @CsvField(order = 79, name = "対象計算期間（終了）")
     private RString 対象計算期間_終了;
     @CsvField(order = 80, name = "申請日")
     private RString 申請日;
@@ -208,13 +208,13 @@ public class JigyoBunKogakuGassanShikyuKetteibanAriEUCEntity implements IJigyoBu
     private RString 支払期間開始日;
     @CsvField(order = 90, name = "支払期間終了日")
     private RString 支払期間終了日;
-    @CsvField(order = 91, name = "支払期間開始日_曜日")
+    @CsvField(order = 91, name = "支払期間開始日(曜日)")
     private RString 支払期間開始日_曜日;
-    @CsvField(order = 92, name = "支払期間終了日_曜日")
+    @CsvField(order = 92, name = "支払期間終了日(曜日)")
     private RString 支払期間終了日_曜日;
-    @CsvField(order = 93, name = "支払期間開始日_時間")
+    @CsvField(order = 93, name = "支払期間開始日(時間)")
     private RString 支払期間開始日_時間;
-    @CsvField(order = 94, name = "支払期間終了日_時間")
+    @CsvField(order = 94, name = "支払期間終了日(時間)")
     private RString 支払期間終了日_時間;
     @CsvField(order = 95, name = "金融機関コード")
     private KinyuKikanCode 金融機関コード;
@@ -228,7 +228,7 @@ public class JigyoBunKogakuGassanShikyuKetteibanAriEUCEntity implements IJigyoBu
     private RString 口座種目名;
     @CsvField(order = 100, name = "口座番号")
     private RString 口座番号;
-    @CsvField(order = 101, name = "口座名義人_カナ")
+    @CsvField(order = 101, name = "口座名義人（カナ）")
     private AtenaKanaMeisho 口座名義人_カナ;
     @CsvField(order = 102, name = "決定通知書作成日")
     private RString 決定通知書作成日;
@@ -236,11 +236,11 @@ public class JigyoBunKogakuGassanShikyuKetteibanAriEUCEntity implements IJigyoBu
     private RString 振込通知書作成日;
     @CsvField(order = 104, name = "受取年月")
     private RString 受取年月;
-    @CsvField(order = 105, name = "給付の種類_短")
+    @CsvField(order = 105, name = "給付の種類(短)")
     private RString 給付の種類_短;
-    @CsvField(order = 106, name = "不支給理由_短")
+    @CsvField(order = 106, name = "不支給理由(短)")
     private RString 不支給理由_短;
-    @CsvField(order = 107, name = "支払場所_短")
+    @CsvField(order = 107, name = "支払場所(短)")
     private RString 支払場所_短;
 
 }

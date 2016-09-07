@@ -391,7 +391,7 @@ public class TokuteiShinryohiInfoPanelHandler {
 
     /**
      *
-     * 制御性设定
+     * 制御性設定です。
      *
      * @param 識別番号管理データ 識別番号管理データ
      * @param サービス提供年月 FlexibleYearMonth

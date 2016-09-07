@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.UwanoseKubunShikyuGendoGak
 import jp.co.ndensan.reams.db.dbc.business.core.basic.UwanoseKubunShikyuGendoGakuHolder;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyugendogaku.ShikyuGendogakuTableKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.DBC4200011StateName;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.DBC4200011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.KubunShikyuGendogakuMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4200011.KubunShikyuGendogakuMainHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4200011.KubunShikyuGendogakuMainValidationHandler;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -39,6 +41,7 @@ public class KubunShikyuGendogakuMain {
     private static final RString 排他キー = new RString("DBCShikyuGendoGakuTableDbT7109");
     private static final RString 完了メッセージメイン = new RString("区分支給限度額の登録が完了しました。。");
     private static final RString 省略_空 = new RString("");
+    private static final RString 共通ボタン = new RString("btnUpdate");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -171,7 +174,7 @@ public class KubunShikyuGendogakuMain {
     /**
      * 支給限度額テーブル区分onChangeの事件です。
      *
-     * @param div ShokanShikyuGendogakuMainDiv
+     * @param div KubunShikyuGendogakuMainDiv
      * @return ResponseData
      */
     public ResponseData<KubunShikyuGendogakuMainDiv> onChange_Kubun(
@@ -186,6 +189,32 @@ public class KubunShikyuGendogakuMain {
             div.getKubunShikyuGendogakuShosai().getTxtTekiyoKikanRange().setToDisabled(false);
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 状態遷移の事件です。
+     *
+     * @param div KubunShikyuGendogakuMainDiv
+     * @return ResponseData
+     */
+    public ResponseData<KubunShikyuGendogakuMainDiv> onStateTransition(
+            KubunShikyuGendogakuMainDiv div) {
+        if (CommonButtonHolder.isVisible(共通ボタン)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 状態遷移の事件です。
+     *
+     * @param div KubunShikyuGendogakuMainDiv
+     * @return ResponseData
+     */
+    public ResponseData<KubunShikyuGendogakuMainDiv> btn_Complete(
+            KubunShikyuGendogakuMainDiv div) {
+        return ResponseData.of(div).forwardWithEventName(
+                DBC4200011TransitionEventName.完了状態).respond();
     }
 
     private KubunShikyuGendogakuMainHandler getHandler(KubunShikyuGendogakuMainDiv div) {

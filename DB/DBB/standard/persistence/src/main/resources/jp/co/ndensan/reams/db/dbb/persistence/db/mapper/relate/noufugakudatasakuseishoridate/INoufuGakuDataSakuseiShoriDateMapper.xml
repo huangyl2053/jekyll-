@@ -31,7 +31,7 @@
                  executionDateMaster1."taishoShuryoTimestamp",
                  row_number() OVER (
                    PARTITION BY executionDateMaster1."shichosonCode"
-                   ORDER BY executionDateMaster1."kijunYMD" DESC, executionDateMaster1."kijunYMD" DESC
+                   ORDER BY executionDateMaster1."kijunYMD" DESC, executionDateMaster1."kijunTimestamp" DESC
                 ) AS rrkno
             FROM (
                 SELECT

@@ -7,17 +7,21 @@ package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokugeppo
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.HihokenshaDaichoBirthYMDMybatisParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.JigyoHokokuGeppoIppanReportMybatisParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.JigyoHokokuGeppoShoriKekkaKakuninListMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.JigyouHoukokuTokeiMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.RiyoshaFutangakuKanriJohoSyoriMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.SyotaiJohoSyoriMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.TokuteiNyushoshaJohoSyoriMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.YokaigoNinteishaJohoSyoriMybatisParameter;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohokenkyufukogaku.ShoriKekkaKakuninListRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.IchigoHihokenshaJohoKonkyoCSVEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.IppanJokyoJigyouHoukokuTokeiEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.RiyoshaFutangakuGemmenJohoKonkyoCSVEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.SyotaiJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.TokuteiNyushoshaGengakuNinteiJohoCSVEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.YokaigoNinteishaJohoKonkyoCSVEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyojokyohokokushiryonemposakuseiiti.JigyoHokokuDataRelateEntity;
 
 /**
  * 事業報告月報_一般状況のMapperクラスです。
@@ -121,4 +125,52 @@ public interface IJigyoHokokuGeppoIppanMapper {
      * @param paramter JigyouHoukokuTokeiMybatisParameter
      */
     void exeShoriDateKanriUpdate(JigyouHoukokuTokeiMybatisParameter paramter);
+
+    /**
+     * 事業報告統計データを取得します。
+     *
+     * @param paramter JigyoHokokuGeppoIppanReportMybatisParameter
+     * @return List<JigyoHokokuDataRelateEntity>
+     */
+    List<JigyoHokokuDataRelateEntity> getJigyouHoukokuTokeiTyouhyou(JigyoHokokuGeppoIppanReportMybatisParameter paramter);
+
+    /**
+     * 世帯情報処理の確認リストを取得します。
+     *
+     * @param paramter JigyoHokokuGeppoShoriKekkaKakuninListMybatisParameter
+     * @return List<ShoriKekkaKakuninListRelateEntity>
+     */
+    List<ShoriKekkaKakuninListRelateEntity> getHihokenshaDaichoSyoriKakuninRisuto(JigyoHokokuGeppoShoriKekkaKakuninListMybatisParameter paramter);
+
+    /**
+     * 被保台帳生年月日情報の確認リストを取得します。
+     *
+     * @param paramter JigyoHokokuGeppoShoriKekkaKakuninListMybatisParameter
+     * @return List<ShoriKekkaKakuninListRelateEntity>
+     */
+    List<ShoriKekkaKakuninListRelateEntity> getIchigoHihokenshaSyoriKakuninRisuto(JigyoHokokuGeppoShoriKekkaKakuninListMybatisParameter paramter);
+
+    /**
+     * 利用者負担減額管理情報の確認リストを取得します。
+     *
+     * @param paramter JigyoHokokuGeppoShoriKekkaKakuninListMybatisParameter
+     * @return List<ShoriKekkaKakuninListRelateEntity>
+     */
+    List<ShoriKekkaKakuninListRelateEntity> getRiyoshaFutangakuGemmenHihokenshaDaichoSyoriKakuninRisuto(
+            JigyoHokokuGeppoShoriKekkaKakuninListMybatisParameter paramter);
+
+    /**
+     * 特定入所者管理情報または標準負担額減免情報の確認リストを取得します。
+     *
+     * @return List<ShoriKekkaKakuninListRelateEntity>
+     */
+    List<ShoriKekkaKakuninListRelateEntity> getTokuteiNyushoshaGengakuNinteiSyoriKakuninRisuto();
+
+    /**
+     * 受給者台帳情報の確認リストを取得します。
+     *
+     * @param paramter JigyoHokokuGeppoShoriKekkaKakuninListMybatisParameter
+     * @return List<ShoriKekkaKakuninListRelateEntity>
+     */
+    List<ShoriKekkaKakuninListRelateEntity> getYokaigoNinteishaSyoriKakuninRisuto(JigyoHokokuGeppoShoriKekkaKakuninListMybatisParameter paramter);
 }

@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -125,6 +126,7 @@ public class SogojigyohiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<
     @Override
     protected void afterExecute() {
         sogojigyohiSeiCsvEntityWriter.close();
+        manager.spool(SubGyomuCode.DBC介護給付, sogojigyohiSeiFilePath);
     }
 
     private SogojigyohiSeiCsvEntity get帳票のCSVファイル作成(DbWT1511SeikyugakuTsuchishoTempEntity entity,

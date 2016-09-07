@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC060010.DBC060010_Kyufuh
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1310011.KyufuTsuchiGenmenHoseiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
@@ -86,34 +85,43 @@ public class KyufuTsuchiGenmenHoseiHandler {
     /**
      * 給付費通知減免補正一覧表のバッチ用パラメータです。
      *
-     * @return DBC060010_KyufuhiTsuchiGenmenHoseiIchiranhyoParameter 給付費通知減免補正一覧表のバッチ用パラメータ
+     * @return DBC060010_KyufuhiTsuchiGenmenHoseiIchiranhyoParameter
+     * 給付費通知減免補正一覧表のバッチ用パラメータ
      */
     public DBC060010_KyufuhiTsuchiGenmenHoseiIchiranhyoParameter btnPulish() {
         DBC060010_KyufuhiTsuchiGenmenHoseiIchiranhyoParameter paramter = new DBC060010_KyufuhiTsuchiGenmenHoseiIchiranhyoParameter();
         RString サービス開始年月 = div.getKyufuTsuchiGenmenHoseiListSakusei().getTxtServiceYM().getFromValue().getYearMonth().toDateString();
         RString サービス終了年月 = div.getKyufuTsuchiGenmenHoseiListSakusei().getTxtServiceYM().getToValue().getYearMonth().toDateString();
-        List<HokenshaNo> 保険者番号List = new ArrayList<>();
+        List<RString> 保険者番号List = new ArrayList<>();
         if (is広域()) {
             RString value = div.getKyufuTsuchiGenmenHoseiListSakusei().getDdlShichoson().getSelectedValue();
             if (value.contains("全市町村")) {
                 List<KeyValueDataSource> 市町村コードList = div.getKyufuTsuchiGenmenHoseiListSakusei().getDdlShichoson().getDataSource();
                 for (KeyValueDataSource source : 市町村コードList) {
-                    保険者番号List.add(new HokenshaNo(source.getKey()));
+                    保険者番号List.addAll(set全市町村の保険者番号(source));
                 }
             } else {
                 RString key = div.getKyufuTsuchiGenmenHoseiListSakusei().getDdlShichoson().getSelectedKey();
-                保険者番号List.add(new HokenshaNo(key));
+                保険者番号List.add(key);
             }
         }
         if (is単一()) {
             LasdecCode 市町村コード = AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_();
-            保険者番号List.add(new HokenshaNo(市町村コード.value()));
+            保険者番号List.add(市町村コード.value());
         }
         paramter.setサービス開始年月(new FlexibleYearMonth(サービス開始年月));
         paramter.setサービス終了年月(new FlexibleYearMonth(サービス終了年月));
         paramter.set市町村コードList(保険者番号List);
         paramter.set帳票出力順ID(RString.EMPTY);
         return paramter;
+    }
+
+    private List<RString> set全市町村の保険者番号(KeyValueDataSource source) {
+        List<RString> 保険者番号List = new ArrayList<>();
+        if (!RString.isNullOrEmpty(source.getValue())) {
+            保険者番号List.add(source.getKey());
+        }
+        return 保険者番号List;
     }
 
     private boolean is単一() {

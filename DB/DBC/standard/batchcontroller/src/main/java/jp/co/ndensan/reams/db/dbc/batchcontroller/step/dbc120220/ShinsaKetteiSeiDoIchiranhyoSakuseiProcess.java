@@ -218,6 +218,7 @@ public class ShinsaKetteiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase
             kyufuhiShinsaKettei合計InReport.writeBy(reportSourceWriter);
         }
         kyufuhiShinsaCsvEntityWriter.close();
+        manager.spool(SubGyomuCode.DBC介護給付, kyufuhiShinsaFilePath);
     }
 
     private KyufuhiShinsaKetteiCsvEntity get帳票のCSVファイル作成(KyufuhiShinsaKetteiSeikyuMeisaihyoEntity entity, boolean 集計, boolean 合計) {

@@ -18,7 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JukyushaTeiseiRenrakuhyoTorokuManagerResult {
 
     private RString エラーメッセージコード;
-    private RString 警告メッセージコード;
+    private RString 警告メッセージコード_新規;
+    private RString 警告メッセージコード_終了;
     private int エラー有無;
 
 }

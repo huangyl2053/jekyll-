@@ -35,6 +35,7 @@ public final class TankiNyushoKakudaiGaitoshaMybatisParameter implements IMyBati
     private final RString 限度額管理期間数;
     private final boolean is入力済みを含む;
     private final RString psmShikibetsuTaisho;
+    private final RString 出力順;
 
     /**
      * コンストラクタです。
@@ -54,7 +55,8 @@ public final class TankiNyushoKakudaiGaitoshaMybatisParameter implements IMyBati
             boolean is適用終了年月ToNULL,
             RString 限度額管理期間数,
             boolean is入力済みを含む,
-            RString psmShikibetsuTaisho) {
+            RString psmShikibetsuTaisho,
+            RString 出力順) {
         this.保険者コード = 保険者コード;
         this.is保険者コード = is保険者コード;
         this.抽出区分 = 抽出区分;
@@ -70,6 +72,7 @@ public final class TankiNyushoKakudaiGaitoshaMybatisParameter implements IMyBati
         this.限度額管理期間数 = 限度額管理期間数;
         this.is入力済みを含む = is入力済みを含む;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
+        this.出力順 = 出力順;
     }
 
     /**
@@ -83,6 +86,7 @@ public final class TankiNyushoKakudaiGaitoshaMybatisParameter implements IMyBati
      * @param 適用終了年月To 適用終了年月To
      * @param 限度額管理期間数 限度額管理期間数
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
+     * @param 出力順 出力順
      * @return KijunShunyugakuTekiyoMybatisParameter
      */
     public static TankiNyushoKakudaiGaitoshaMybatisParameter createMybatisParameter(RString 保険者コード,
@@ -92,7 +96,8 @@ public final class TankiNyushoKakudaiGaitoshaMybatisParameter implements IMyBati
             RString 適用終了年月From,
             RString 適用終了年月To,
             RString 限度額管理期間数,
-            RString psmShikibetsuTaisho) {
+            RString psmShikibetsuTaisho,
+            RString 出力順) {
         boolean is保険者コード = false;
         boolean is抽出区分_直近 = false;
         boolean is入力済みを含む = false;
@@ -120,7 +125,8 @@ public final class TankiNyushoKakudaiGaitoshaMybatisParameter implements IMyBati
                 isnull(適用終了年月To),
                 限度額管理期間数,
                 is入力済みを含む,
-                psmShikibetsuTaisho);
+                psmShikibetsuTaisho,
+                出力順);
     }
 
     private static boolean isnull(RString value) {

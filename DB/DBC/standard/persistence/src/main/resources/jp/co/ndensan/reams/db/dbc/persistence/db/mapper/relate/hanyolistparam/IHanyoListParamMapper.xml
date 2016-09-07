@@ -296,6 +296,7 @@
         ON
         基準収入額適用情報."shikibetsuCode" =
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.as_Atesaki" />."shikibetsuCode"
+        ${出力順}
     </select>
 
 </mapper>

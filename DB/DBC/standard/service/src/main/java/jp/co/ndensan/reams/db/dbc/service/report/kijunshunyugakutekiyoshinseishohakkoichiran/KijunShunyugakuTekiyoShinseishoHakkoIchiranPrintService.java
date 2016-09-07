@@ -31,7 +31,7 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranPrintService {
     /**
      * 帳票設計_DBCMN81002_受給者訂正連絡票（紙媒体）(単一帳票出力用)
      *
-     * @param 発行対象者リスト List<KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity>
+     * @param 発行対象者 KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity
      * @param 市町村番号 RString
      * @param 市町村名 RString
      * @param 出力順リスト List<RString>
@@ -39,14 +39,14 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranPrintService {
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(
-            List<KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity> 発行対象者リスト,
+            KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 発行対象者,
             RString 市町村番号,
             RString 市町村名,
             List<RString> 出力順リスト,
             List<RString> 改頁リスト) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(発行対象者リスト, 市町村番号, 市町村名, 出力順リスト, 改頁リスト, reportManager);
+            print(発行対象者, 市町村番号, 市町村名, 出力順リスト, 改頁リスト, reportManager);
             collection = reportManager.publish();
         }
         return collection;
@@ -55,7 +55,7 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranPrintService {
     /**
      * 帳票設計_DBCMN81002_受給者訂正連絡票（紙媒体）(複数帳票出力用)。
      *
-     * @param 発行対象者リスト List<KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity>
+     * @param 発行対象者 KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity
      * @param 市町村番号 RString
      * @param 市町村名 RString
      * @param 出力順リスト List<RString>
@@ -63,7 +63,7 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranPrintService {
      * @param reportManager ReportManager
      */
     public void print(
-            List<KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity> 発行対象者リスト,
+            KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 発行対象者,
             RString 市町村番号,
             RString 市町村名,
             List<RString> 出力順リスト,
@@ -75,7 +75,7 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranPrintService {
             ReportSourceWriter<KijunShunyugakuTekiyoShinseishoHakkoIchiranSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
 
-            new KijunShunyugakuTekiyoShinseishoHakkoIchiranReport(発行対象者リスト, 市町村番号, 市町村名, 出力順リスト, 改頁リスト).writeBy(reportSourceWriter);
+            new KijunShunyugakuTekiyoShinseishoHakkoIchiranReport(発行対象者, 市町村番号, 市町村名, 出力順リスト, 改頁リスト).writeBy(reportSourceWriter);
         }
     }
 

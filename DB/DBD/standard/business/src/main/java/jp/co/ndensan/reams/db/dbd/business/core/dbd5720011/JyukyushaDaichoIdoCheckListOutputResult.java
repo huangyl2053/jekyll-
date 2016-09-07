@@ -47,7 +47,7 @@ public class JyukyushaDaichoIdoCheckListOutputResult {
         年月日(entity, upper);
         宛名(entity, upper);
         区分(entity, upper);
-
+        upper.set処理種別(RString.EMPTY);
         return upper;
     }
 
@@ -64,7 +64,7 @@ public class JyukyushaDaichoIdoCheckListOutputResult {
         コード(entity, lower);
         名称(entity, lower);
         受給申請事由(entity, lower);
-
+        lower.set備考(RString.EMPTY);
         return lower;
     }
 

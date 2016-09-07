@@ -14,14 +14,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- * 障がい者控除対象者认定のDivControllerです。
+ * 障がい者控除対象者認定のDivControllerです。
  *
  * @reamsid_L DBD-3850-010 liuwei2
  */
 public class DBD4010011 {
 
     /**
-     * 障がい者控除対象者认定の初期化。(オンロード)<br/>
+     * 障がい者控除対象者認定の初期化。(オンロード)<br/>
      *
      * @param div コントロールdiv
      * @return レスポンスデータ
