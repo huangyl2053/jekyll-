@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1211011;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC040050.DBC040050_KogakugassanShikyuKetteitsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_JikoFutanShomeisho_Insho;
@@ -32,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.YmdKubun;
 
 /**
@@ -88,9 +91,20 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         作成条件受取年月();
         div.getRadKetteibiIkkatsuKoshinKBN().setSelectedKey(KEY_0);
         決定日一括更新区分();
-        div.getDdlInsho().setSelectedKey(KEY_0);
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, 高額合算決定通知書);
         RString 支払予定日印字有無 = get支払予定日印字有無();
+        List<KeyValueDataSource> list = new ArrayList<>();
+        KeyValueDataSource 単票発行分を除く = new KeyValueDataSource(KaigoGassan_JikoFutanShomeisho_Insho.単票発行分を除く.getコード(),
+                KaigoGassan_JikoFutanShomeisho_Insho.単票発行分を除く.get名称());
+        KeyValueDataSource 単票発行分も含める = new KeyValueDataSource(KaigoGassan_JikoFutanShomeisho_Insho.単票発行分も含める.getコード(),
+                KaigoGassan_JikoFutanShomeisho_Insho.単票発行分も含める.get名称());
+        KeyValueDataSource 未発行分のみ = new KeyValueDataSource(KaigoGassan_JikoFutanShomeisho_Insho.未発行分のみ.getコード(),
+                KaigoGassan_JikoFutanShomeisho_Insho.未発行分のみ.get名称());
+        list.add(単票発行分を除く);
+        list.add(単票発行分も含める);
+        list.add(未発行分のみ);
+        div.getDdlInsho().setDataSource(list);
+        div.getDdlInsho().setSelectedKey(KaigoGassan_JikoFutanShomeisho_Insho.単票発行分を除く.getコード());
         if (支払予定日印字有無.equals(NUM_0)) {
             div.getTxtShiharaiYoteiYMD().setDisplayNone(true);
         }
@@ -203,10 +217,10 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         }
         div.getTxtUketoriYM().setDisabled(true);
         div.getTxtShinseiYMD().setDisabled(false);
-        if (前回申請年月開始 == null || 前回申請年月開始.isEmpty()) {
+        if (前回申請年月終了 == null || 前回申請年月終了.isEmpty()) {
             div.getTxtShinseiYMD().setFromValue(null);
         } else {
-            div.getTxtShinseiYMD().setFromValue(new RDate(前回申請年月開始.toString()).plusDay(1));
+            div.getTxtShinseiYMD().setFromValue(new RDate(前回申請年月終了.toString()).plusDay(1));
         }
         RDate システム日付 = RDate.getNowDate();
         div.getTxtShinseiYMD().setToValue(システム日付);
@@ -246,10 +260,10 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         div.getTxtShinseiYMD().setDisabled(true);
         div.getTxtKetteiYMD().setDisabled(false);
         div.getRadKetteiYMD().setSelectedKey(KEY_0);
-        if (前回決定年月開始 == null || 前回決定年月開始.isEmpty()) {
+        if (前回決定年月終了 == null || 前回決定年月終了.isEmpty()) {
             div.getTxtKetteiYMD().setFromValue(null);
         } else {
-            div.getTxtKetteiYMD().setFromValue(new RDate(前回決定年月開始.toString()).plusDay(1));
+            div.getTxtKetteiYMD().setFromValue(new RDate(前回決定年月終了.toString()).plusDay(1));
         }
         RDate システム日付 = RDate.getNowDate();
         div.getTxtKetteiYMD().setToValue(システム日付);
@@ -283,7 +297,7 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         RDate 申請終了年月日 = div.getTxtShinseiYMD().getToValue();
         RDate 決定開始年月日 = div.getTxtKetteiYMD().getFromValue();
         RDate 決定終了年月日 = div.getTxtKetteiYMD().getToValue();
-        RString 印書 = div.getDdlInsho().getSelectedValue();
+        RString 印書 = div.getDdlInsho().getSelectedKey();
         Long 出力順 = div.getCcdChohyoShutsuryokujun().get出力順ID();
         RDate 発行日 = div.getTxtHakkoYMD().getValue();
         RDate 支払予定日 = div.getTxtShiharaiYoteiYMD().getValue();
@@ -303,8 +317,7 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         }
         parameter.set決定開始年月日(決定開始年月日);
         parameter.set決定終了年月日(決定終了年月日);
-        RString 印書区分 = KaigoGassan_JikoFutanShomeisho_Insho.valueOf(印書.toString()).getコード();
-        parameter.set印書区分(印書区分);
+        parameter.set印書区分(印書);
         if (出力順 != null) {
             parameter.set改頁出力順ID(new RString(出力順.toString()));
         }
