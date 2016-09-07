@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbb.business.report.shotokudankaibetsuhihokenshasu
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbbbt21004.DankaibetuHihokensyasuIchiranhyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt21004.DankaibetuHihokensyasuIchiranhyoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbb.entity.csv.DankaibeHihokensixyaCSVEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibehihokensixya.DankaibeHihokensixyaForReport;
 import jp.co.ndensan.reams.db.dbb.entity.report.shotokudankaibetsuhihokenshasuichiran.ShotokuDankaiBetsuHihokenshasuIchiranSource;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
@@ -25,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -45,7 +43,6 @@ public class ReportProcess extends BatchKeyBreakBase<DankaibeHihokensixyaForRepo
     private static final RString READ_DATA_ID
             = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate"
                     + ".dankaibetsuhihokenshasuichiranhyosakusei.IDankaibetsuHihokenshasuIchiranhyoSakuseiMapper.select帳票出力対象データ");
-    private CsvWriter<DankaibeHihokensixyaCSVEntity> dankaibeHihokensixyaWriter;
     @BatchWriter
     private BatchReportWriter<ShotokuDankaiBetsuHihokenshasuIchiranSource> batchReportWriter;
     private ReportSourceWriter<ShotokuDankaiBetsuHihokenshasuIchiranSource> reportSourceWriter;
