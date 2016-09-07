@@ -204,8 +204,15 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
     }
 
     private RString get適用日有効期限() {
-        RString 適用日 = this.帳票情報.get適用日().wareki().toDateString();
-        RString 有効期限 = this.帳票情報.get有効期限().wareki().toDateString();
+        RString 適用日 = RString.EMPTY;
+        RString 有効期限 = RString.EMPTY;
+
+        if (this.帳票情報.get適用日() != null) {
+            適用日 = this.帳票情報.get適用日().wareki().toDateString();
+        }
+        if (this.帳票情報.get有効期限() != null) {
+            有効期限 = this.帳票情報.get有効期限().wareki().toDateString();
+        }
         return 適用日.concat(new RString("~")).concat(有効期限);
     }
 }
