@@ -21,6 +21,7 @@ public class JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoReport
     private final JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoEntity 帳票出力対象データ;
 
     /**
+     * コンストラクタです。
      *
      * @param 帳票出力対象データ JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoEntity
      */
