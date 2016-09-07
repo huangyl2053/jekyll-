@@ -187,7 +187,10 @@
         ON DbT1001."hihokenshaNo" = 抽出対象."hihokenshaNo"
         AND DbT1001."logicalDeletedFlag" = false
         AND 抽出対象."yukoKaishiYM"||'31' <![CDATA[<=]]> DbT1001."shikakuShutokuYMD"
-        <!--        OR 被保険者台帳管理.資格喪失年月日 >= (DbT3055_all.サービス提供年月 || '01')-->
+        AND(
+        DbT1001."shikakuSoshitsuYMD" = ''
+        OR DbT1001."shikakuSoshitsuYMD" IS NULL
+        OR DbT1001."shikakuSoshitsuYMD" >= (抽出対象."yukoKaishiYM" || '01'))
         ) AS 有効履歴
         WHERE
         有効履歴.番号 = 1)被保険者台帳管理
@@ -224,7 +227,7 @@
         AND DbT4001."logicalDeletedFlag" = false
         AND DbT4001."yukoMukoKubun" = '1'
         AND 抽出対象."yukoKaishiYM"||'31' <![CDATA[<=]]> DbT4001."ninteiYukoKikanKaishiYMD"
-        <!--        OR 被保険者台帳管理.資格喪失年月日 >= (DbT3055_all.サービス提供年月 || '01')-->
+        AND DbT4001."ninteiYukoKikanShuryoYMD" >= (抽出対象."yukoKaishiYM" || '01')
         ) AS 有効履歴
         WHERE
         有効履歴.番号 = 1)受給者台帳
@@ -236,5 +239,6 @@
         ON
         短期入所拡大該当者."shikibetsuCode" =
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+        ${出力順}
     </select>
 </mapper>
