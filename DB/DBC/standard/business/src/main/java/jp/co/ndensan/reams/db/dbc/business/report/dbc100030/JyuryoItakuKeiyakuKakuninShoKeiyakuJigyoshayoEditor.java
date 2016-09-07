@@ -42,9 +42,9 @@ public class JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoEditor
         source.jusho4 = entity.get住所1();
         source.jusho5 = entity.get住所2();
         source.jusho6 = entity.get住所3();
-        source.katagakiText = entity.get方書1();
-        source.katagaki3 = entity.get方書2();
-        //source.katagaki4 = entity.get方書3();
+        source.katagakiText = entity.get方書Text();
+        source.katagaki3 = entity.get方書1();
+        source.katagaki4 = entity.get方書2();
         source.katagakiSmall1 = entity.get方書Small1();
         source.katagakiSmall2 = entity.get方書Small2();
         source.dainoKubunMei = entity.get代納人区分();
