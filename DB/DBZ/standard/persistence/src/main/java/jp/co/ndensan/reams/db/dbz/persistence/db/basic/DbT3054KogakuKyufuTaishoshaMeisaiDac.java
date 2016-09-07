@@ -4,9 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import static com.ctc.wstx.sax.WstxSAXParserFactory.main;
-import static com.oracle.util.Checksums.update;
-import com.sun.swing.internal.plaf.basic.resources.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisai;
@@ -20,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import static jp.co.ndensan.reams.uz.uza.report.util._ReportSourceDataType.DB;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -29,8 +25,6 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-import static org.joda.time.format.ISOPeriodFormat.standard;
-import static sun.java2d.opengl.OGLRenderQueue.sync;
 
 /**
  * 高額介護サービス費給付対象者明細のデータアクセスクラスです。

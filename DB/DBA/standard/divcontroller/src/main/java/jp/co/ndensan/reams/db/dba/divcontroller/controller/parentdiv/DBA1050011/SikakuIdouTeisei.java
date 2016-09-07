@@ -90,7 +90,7 @@ public class SikakuIdouTeisei {
      * @return ResponseData<SikakuIdouTeiseiDiv>
      */
     public ResponseData<SikakuIdouTeiseiDiv> onClick_Add(SikakuIdouTeiseiDiv div) {
-        RealInitialLocker.release(前排他ロックキー);
+//        RealInitialLocker.release(前排他ロックキー);
         setParam(getKey(), 状態_追加);
         ViewStateHolder.put(ViewStateKeys.資格得喪情報, getHandler(div).setパラメータ(状態_追加));
         return ResponseData.of(div).forwardWithEventName(DBA1050011TransitionEventName.追加).respond();
@@ -103,7 +103,7 @@ public class SikakuIdouTeisei {
      * @return ResponseData<SikakuIdouTeiseiDiv>
      */
     public ResponseData<SikakuIdouTeiseiDiv> onClick_Update(SikakuIdouTeiseiDiv div) {
-        RealInitialLocker.release(前排他ロックキー);
+//        RealInitialLocker.release(前排他ロックキー);
         setParam(getKey(), 状態_修正);
         ViewStateHolder.put(ViewStateKeys.資格得喪情報, getHandler(div).setパラメータ(状態_修正));
         return ResponseData.of(div).forwardWithEventName(DBA1050011TransitionEventName.修正).respond();
@@ -116,7 +116,7 @@ public class SikakuIdouTeisei {
      * @return ResponseData<SikakuIdouTeiseiDiv>
      */
     public ResponseData<SikakuIdouTeiseiDiv> onClick_Delete_bak(SikakuIdouTeiseiDiv div) {
-        RealInitialLocker.release(前排他ロックキー);
+//        RealInitialLocker.release(前排他ロックキー);
         setParam(getKey(), 状態_削除);
         ViewStateHolder.put(ViewStateKeys.資格得喪情報, getHandler(div).setパラメータ(状態_削除));
         return ResponseData.of(div).forwardWithEventName(DBA1050011TransitionEventName.削除).respond();
@@ -129,7 +129,7 @@ public class SikakuIdouTeisei {
      * @return ResponseData<SikakuIdouTeiseiDiv>
      */
     public ResponseData<SikakuIdouTeiseiDiv> onClick_Syoukai(SikakuIdouTeiseiDiv div) {
-        RealInitialLocker.release(前排他ロックキー);
+//        RealInitialLocker.release(前排他ロックキー);
         setParam(getKey(), 状態_照会);
         ViewStateHolder.put(ViewStateKeys.資格得喪情報, getHandler(div).setパラメータ(状態_照会));
         return ResponseData.of(div).forwardWithEventName(DBA1050011TransitionEventName.詳細).respond();
@@ -149,7 +149,7 @@ public class SikakuIdouTeisei {
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).save(getKey().get識別コード(), joho);
             RealInitialLocker.release(create排他キー());
             div.getComplete().getCcdComplete().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));

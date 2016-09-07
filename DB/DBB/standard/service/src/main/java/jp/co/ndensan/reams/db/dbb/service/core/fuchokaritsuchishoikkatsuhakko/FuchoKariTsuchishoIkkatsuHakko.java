@@ -557,14 +557,14 @@ public class FuchoKariTsuchishoIkkatsuHakko {
                 表示コード編集(編集後本算定通知書共通情報.get表示コード２名(), bodyList);
                 表示コード編集(編集後本算定通知書共通情報.get表示コード３名(), bodyList);
                 bodyList.add(isNull(編集後本算定通知書共通情報.get通知書番号())
-                        ? RString.EMPTY : 編集後本算定通知書共通情報.get通知書番号().getColumnValue());
+                             ? RString.EMPTY : 編集後本算定通知書共通情報.get通知書番号().getColumnValue());
                 bodyList.add(isNull(編集後本算定通知書共通情報.get被保険者番号())
-                        ? RString.EMPTY : 編集後本算定通知書共通情報.get被保険者番号().getColumnValue());
+                             ? RString.EMPTY : 編集後本算定通知書共通情報.get被保険者番号().getColumnValue());
                 if (isNull(編集後本算定通知書共通情報.get編集後個人())) {
                     bodyList.add(RString.EMPTY);
                 } else {
                     bodyList.add(isNull(編集後本算定通知書共通情報.get編集後個人().get世帯コード())
-                            ? RString.EMPTY : 編集後本算定通知書共通情報.get編集後個人().get世帯コード().getColumnValue());
+                                 ? RString.EMPTY : 編集後本算定通知書共通情報.get編集後個人().get世帯コード().getColumnValue());
                 }
                 表示コード編集(編集後本算定通知書共通情報.get表示コード1(), bodyList);
                 表示コード編集(編集後本算定通知書共通情報.get表示コード２(), bodyList);
@@ -578,12 +578,12 @@ public class FuchoKariTsuchishoIkkatsuHakko {
                     bodyList.add(RString.EMPTY);
                 } else {
                     bodyList.add(isNull(編集後本算定通知書共通情報.get更正後().get保険料率())
-                            ? RString.EMPTY : new RString(編集後本算定通知書共通情報.get更正後().get保険料率().toString()));
+                                 ? RString.EMPTY : new RString(編集後本算定通知書共通情報.get更正後().get保険料率().toString()));
                 }
                 //TODO 当期: 　出力期より編集後本算定通知書共通情報.普徴期別金額リストに対応した期別金額
                 if (isNull(編集後本算定通知書共通情報.get編集後宛先())
-                        || isNull(編集後本算定通知書共通情報.get編集後宛先().get宛先種別())
-                        || (!AtesakiShubetsu.本人.equals(編集後本算定通知書共通情報.get編集後宛先().get宛先種別()))) {
+                    || isNull(編集後本算定通知書共通情報.get編集後宛先().get宛先種別())
+                    || (!AtesakiShubetsu.本人.equals(編集後本算定通知書共通情報.get編集後宛先().get宛先種別()))) {
                     bodyList.add(RString.EMPTY);
                 } else {
                     bodyList.add(編集後本算定通知書共通情報.get編集後宛先().get宛先名称().getName().value());
@@ -595,7 +595,7 @@ public class FuchoKariTsuchishoIkkatsuHakko {
                     bodyList.add(編集後本算定通知書共通情報.get更正後().get生保開始日_西暦());
                 }
                 if (isNull(編集後本算定通知書共通情報.get更正後())
-                        || RString.isNullOrEmpty(編集後本算定通知書共通情報.get更正後().get生活保護扶助種類())) {
+                    || RString.isNullOrEmpty(編集後本算定通知書共通情報.get更正後().get生活保護扶助種類())) {
                     bodyList.add(RString.EMPTY);
                 } else {
                     RString 生活保護扶助名称 = CodeMaster.getCodeMeisho(SubGyomuCode.URZ業務共通_共通系,
@@ -612,7 +612,7 @@ public class FuchoKariTsuchishoIkkatsuHakko {
                     bodyList.add(RString.EMPTY);
                 } else {
                     bodyList.add(isNull(編集後本算定通知書共通情報.get編集後宛先().get本人名称())
-                            ? RString.EMPTY : 編集後本算定通知書共通情報.get編集後宛先().get本人名称().getName().value());
+                                 ? RString.EMPTY : 編集後本算定通知書共通情報.get編集後宛先().get本人名称().getName().value());
                     bodyList.add(編集後本算定通知書共通情報.get編集後宛先().get郵便番号());
                     bodyList.add(編集後本算定通知書共通情報.get編集後宛先().get編集後住所());
                     bodyList.add(編集後本算定通知書共通情報.get編集後宛先().get町域());
@@ -624,7 +624,7 @@ public class FuchoKariTsuchishoIkkatsuHakko {
                     bodyList.add(編集後本算定通知書共通情報.get更正後().get保険料段階());
                 }
                 bodyList.add(isNull(編集後本算定通知書共通情報.get今後納付すべき額())
-                        ? RString.EMPTY : new RString(編集後本算定通知書共通情報.get今後納付すべき額().toString()));
+                             ? RString.EMPTY : new RString(編集後本算定通知書共通情報.get今後納付すべき額().toString()));
                 set次期以降(編集後本算定通知書共通情報, 出力期, bodyList);
                 bodyList.add(get口座情報(編集後本算定通知書共通情報));
                 csvListWriter.writeLine(bodyList);
@@ -636,14 +636,14 @@ public class FuchoKariTsuchishoIkkatsuHakko {
     private void set次期以降(EditedKariSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報, int 出力期, List<RString> bodyList) {
 
         if (isNull(編集後本算定通知書共通情報.get更正後()) || isNull(編集後本算定通知書共通情報.get更正後().get更正後普徴期別金額リスト())
-                || 編集後本算定通知書共通情報.get更正後().get更正後普徴期別金額リスト().isEmpty()) {
+            || 編集後本算定通知書共通情報.get更正後().get更正後普徴期別金額リスト().isEmpty()) {
             bodyList.add(RString.EMPTY);
         } else {
             List<UniversalPhase> 普徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get更正後普徴期別金額リスト();
             for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
                 if (出力期 == (普徴期別金額.get期() + NUM_1)) {
                     bodyList.add(isNull(普徴期別金額.get金額()) ? RString.EMPTY
-                            : DecimalFormatter.toコンマ区切りRString(普徴期別金額.get金額(), 0));
+                                 : DecimalFormatter.toコンマ区切りRString(普徴期別金額.get金額(), 0));
                     break;
                 }
             }
@@ -1207,15 +1207,15 @@ public class FuchoKariTsuchishoIkkatsuHakko {
     private RString 帳票タイプを取得する(ReportId 帳票ID) {
         RString 帳票タイプ = RString.EMPTY;
         if (ReportIdDBB.DBB100014.getReportId().equals(帳票ID) || ReportIdDBB.DBB100015.getReportId().equals(帳票ID)
-                || ReportIdDBB.DBB100028.getReportId().equals(帳票ID) || ReportIdDBB.DBB100029.getReportId().equals(帳票ID)) {
+            || ReportIdDBB.DBB100028.getReportId().equals(帳票ID) || ReportIdDBB.DBB100029.getReportId().equals(帳票ID)) {
             帳票タイプ = 帳票タイプ_期毎タイプ;
         } else if (ReportIdDBB.DBB100018.getReportId().equals(帳票ID) || ReportIdDBB.DBB100019.getReportId().equals(帳票ID)) {
             帳票タイプ = 帳票タイプ_銀振タイプ;
         } else if (ReportIdDBB.DBB100021.getReportId().equals(帳票ID) || ReportIdDBB.DBB100023.getReportId().equals(帳票ID)
-                || ReportIdDBB.DBB100020.getReportId().equals(帳票ID) || ReportIdDBB.DBB100022.getReportId().equals(帳票ID)) {
+                   || ReportIdDBB.DBB100020.getReportId().equals(帳票ID) || ReportIdDBB.DBB100022.getReportId().equals(帳票ID)) {
             帳票タイプ = 帳票タイプ_ブックタイプ;
         } else if (ReportIdDBB.DBB100026.getReportId().equals(帳票ID) || ReportIdDBB.DBB100027.getReportId().equals(帳票ID)
-                || ReportIdDBB.DBB100024.getReportId().equals(帳票ID) || ReportIdDBB.DBB100025.getReportId().equals(帳票ID)) {
+                   || ReportIdDBB.DBB100024.getReportId().equals(帳票ID) || ReportIdDBB.DBB100025.getReportId().equals(帳票ID)) {
             帳票タイプ = 帳票タイプ_コンビニタイプ;
         }
         return 帳票タイプ;

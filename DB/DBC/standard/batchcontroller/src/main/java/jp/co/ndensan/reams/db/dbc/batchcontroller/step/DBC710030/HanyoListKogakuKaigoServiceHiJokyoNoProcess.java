@@ -72,10 +72,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @reamsid_L DBC-3092-020 sunhui
  */
+//TODO sync-24ブランチマージ時 暫定対応 - クラスを移動せずに一旦そのまま残す。
 public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBase<HanyouRisutoSyuturyokuEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "hanyolistkogakuservicehi.IHanyoListKogakuServiceHiMapper.selectAllデータ");
+                                                            + "hanyolistkogakuservicehi.IHanyoListKogakuServiceHiMapper.selectAllデータ");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC701003"));
     private static final ReportId EUC_ID = new ReportId("DBC701003");
     private static final RString ジョブ番号 = new RString("【ジョブ番号】");
@@ -244,27 +245,27 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
         builder = new RStringBuilder();
         builder.append(処理状況);
         builder.append(null == parameter.getShoriJokyo() || parameter.getShoriJokyo().isEmpty()
-                ? RString.EMPTY : ShoriJokyo.toValue(parameter.getShoriJokyo()));
+                       ? RString.EMPTY : ShoriJokyo.toValue(parameter.getShoriJokyo()));
         出力条件.add(builder.toRString());
 
         builder = new RStringBuilder();
         builder.append(審査方法);
         builder.append(null == parameter.getShinsaHoho() || parameter.getShinsaHoho().isEmpty()
-                ? RString.EMPTY : ShinsaHoho.toValue(parameter.getShinsaHoho()));
+                       ? RString.EMPTY : ShinsaHoho.toValue(parameter.getShinsaHoho()));
         出力条件.add(builder.toRString());
 
         builder = new RStringBuilder();
         builder.append(算定基準);
         builder.append(null == parameter.getSanteiKijun()
-                || parameter.getSanteiKijun().isEmpty()
-                ? RString.EMPTY : SanteiKijun.toValue(parameter.getSanteiKijun()));
+                       || parameter.getSanteiKijun().isEmpty()
+                       ? RString.EMPTY : SanteiKijun.toValue(parameter.getSanteiKijun()));
         出力条件.add(builder.toRString());
 
         builder = new RStringBuilder();
         builder.append(国保連不一致);
         builder.append(null == parameter.getKokuhorenFuicchi()
-                || parameter.getKokuhorenFuicchi().isEmpty()
-                ? RString.EMPTY : KokuhorenFuicchi.toValue(parameter.getKokuhorenFuicchi()));
+                       || parameter.getKokuhorenFuicchi().isEmpty()
+                       ? RString.EMPTY : KokuhorenFuicchi.toValue(parameter.getKokuhorenFuicchi()));
         出力条件.add(builder.toRString());
 
         出力条件 = get対象者TO金融機関の出力条件(出力条件);
@@ -277,22 +278,22 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
         RStringBuilder builder = new RStringBuilder();
         builder.append(対象者);
         builder.append(null == parameter.getTaishosha()
-                || parameter.getTaishosha().isEmpty()
-                ? RString.EMPTY : Taishosha.toValue(parameter.getTaishosha()));
+                       || parameter.getTaishosha().isEmpty()
+                       ? RString.EMPTY : Taishosha.toValue(parameter.getTaishosha()));
         出力条件.add(builder.toRString());
 
         builder = new RStringBuilder();
         builder.append(申請区分);
         builder.append(null == parameter.getShinseiKubun()
-                || parameter.getShinseiKubun().isEmpty()
-                ? RString.EMPTY : ShinseiKubun.toValue(parameter.getShinseiKubun()));
+                       || parameter.getShinseiKubun().isEmpty()
+                       ? RString.EMPTY : ShinseiKubun.toValue(parameter.getShinseiKubun()));
         出力条件.add(builder.toRString());
 
         builder = new RStringBuilder();
         builder.append(支払先);
         builder.append(null == parameter.getShiharaiSaki()
-                || parameter.getShiharaiSaki().isEmpty()
-                ? RString.EMPTY : ShiharaiSaki.toValue(parameter.getShiharaiSaki()));
+                       || parameter.getShiharaiSaki().isEmpty()
+                       ? RString.EMPTY : ShiharaiSaki.toValue(parameter.getShiharaiSaki()));
         出力条件.add(builder.toRString());
 
         builder = get金融機関();
@@ -307,7 +308,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
             return builder;
         }
         builder.append(parameter.getKiyuKikanCode() == null || parameter.getKiyuKikanCode().isEmpty()
-                ? RString.EMPTY : 左記号.concat(parameter.getKiyuKikanCode())
+                       ? RString.EMPTY : 左記号.concat(parameter.getKiyuKikanCode())
                 .concat(右記号).concat(parameter.getKiyuKikanCode()));
         return builder;
     }

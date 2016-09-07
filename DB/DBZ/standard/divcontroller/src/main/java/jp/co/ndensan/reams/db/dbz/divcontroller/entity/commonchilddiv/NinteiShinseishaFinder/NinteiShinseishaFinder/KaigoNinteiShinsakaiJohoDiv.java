@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -14,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class KaigoNinteiShinsakaiJohoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -26,7 +28,7 @@ public class KaigoNinteiShinsakaiJohoDiv extends Panel {
     @JsonProperty("txtNinteiYukoKikan")
     private TextBox txtNinteiYukoKikan;
     @JsonProperty("txtCheckDay")
-    private TextBoxDate txtCheckDay;
+    private TextBox/*Date*/ txtCheckDay;
     @JsonProperty("txtNinteiYukoKaishiDateFrom")
     private TextBoxFlexibleDate txtNinteiYukoKaishiDateFrom;
     @JsonProperty("lblNinteiYukoKaishiDate")
@@ -107,7 +109,7 @@ public class KaigoNinteiShinsakaiJohoDiv extends Panel {
      * @return txtCheckDay
      */
     @JsonProperty("txtCheckDay")
-    public TextBoxDate getTxtCheckDay() {
+    public TextBox/*sync Date*/ getTxtCheckDay() {
         return txtCheckDay;
     }
 
@@ -116,7 +118,7 @@ public class KaigoNinteiShinsakaiJohoDiv extends Panel {
      * @param txtCheckDay txtCheckDay
      */
     @JsonProperty("txtCheckDay")
-    public void setTxtCheckDay(TextBoxDate txtCheckDay) {
+    public void setTxtCheckDay(TextBox/*sync Date*/ txtCheckDay) {
         this.txtCheckDay = txtCheckDay;
     }
 

@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * @author n8300 姜井図
  */
+//TODO syncブランチで1.12.0削除クラスに対応した物があるので、その修正を反映する（あくまでもこのクラスが必要な場合。）
 public final class TaishoshaSearchValidationHelper {
 
     private TaishoshaSearchValidationHelper() {

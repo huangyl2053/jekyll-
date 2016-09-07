@@ -67,7 +67,7 @@ public final class FukaShokaiController {
     }
 
     public static void clearFukaTaishoshaKeyAndFukaShokaiKey() {
-        ViewStateHolder.remove(ViewStateKey.賦課対象者.toString());
+        ViewStateHolder.remove(ViewStateKeys.賦課対象者.toString());
         ViewStateHolder.remove(ViewStateKeys.賦課照会キー.toString());
     }
 

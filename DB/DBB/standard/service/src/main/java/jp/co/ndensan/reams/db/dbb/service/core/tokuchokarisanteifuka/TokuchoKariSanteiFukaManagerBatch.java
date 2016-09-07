@@ -60,7 +60,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
-import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariOutput;
+//TODO DZX利用可能後、コメント解除
+//import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariOutput;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
@@ -575,7 +576,7 @@ public class TokuchoKariSanteiFukaManagerBatch {
         if (徴収方法の情報_徴収方法4月 != 特別徴収_厚生労働省 && 徴収方法の情報_徴収方法4月 != 特別徴収_地共済) {
             賦課の情報一時Entity.setChoteiJiyu1(徴収方法の情報_４月開始.get特別徴収停止事由コード());
             if (徴収方法の情報_４月開始.get特別徴収停止事由コード() != null
-                    && !徴収方法の情報_４月開始.get特別徴収停止事由コード().equals(賦課の情報_更正前.get調定事由1())) {
+                && !徴収方法の情報_４月開始.get特別徴収停止事由コード().equals(賦課の情報_更正前.get調定事由1())) {
                 賦課の情報一時Entity.setFalg(true);
             }
             賦課の情報一時Entity.setChoteiJiyu2(RString.EMPTY);
@@ -1058,13 +1059,15 @@ public class TokuchoKariSanteiFukaManagerBatch {
                         .get保険料段階ListIn(調定年度);
                 保険料率 = set保険料率2(賦課情報, 保険料率, 前年度の保険料段階リスト);
             }
-            TokuchoKarisanteiKiwariOutput 特徴仮算定期割 = get特徴仮算定期割(調定年度, 保険料率);
+//TODO DZX利用可能後、コメント解除
+//            TokuchoKarisanteiKiwariOutput 特徴仮算定期割 = get特徴仮算定期割(調定年度, 保険料率);
             Decimal 特徴期別金額01 = Decimal.ZERO;
             Decimal 特徴期別金額02 = Decimal.ZERO;
             Decimal 特徴期別金額03 = Decimal.ZERO;
-            特徴期別金額01 = set特徴期別金額01(特徴仮算定期割, 特徴期別金額01);
-            特徴期別金額02 = set特徴期別金額02(特徴仮算定期割, 特徴期別金額02);
-            特徴期別金額03 = set特徴期別金額03(特徴仮算定期割, 特徴期別金額03);
+//TODO DZX利用可能後、コメント解除
+//            特徴期別金額01 = set特徴期別金額01(特徴仮算定期割, 特徴期別金額01);
+//            特徴期別金額02 = set特徴期別金額02(特徴仮算定期割, 特徴期別金額02);
+//            特徴期別金額03 = set特徴期別金額03(特徴仮算定期割, 特徴期別金額03);
             FukaJohoTempEntity 賦課の情報一時Entity = create賦課の情報一時Entity(賦課情報, 特徴期別金額01, 特徴期別金額02, 特徴期別金額03);
             mapper.inset賦課の情報一時テーブル(賦課の情報一時Entity);
         }
@@ -1083,27 +1086,27 @@ public class TokuchoKariSanteiFukaManagerBatch {
         }
         return 保険料率;
     }
-
-    private Decimal set特徴期別金額03(TokuchoKarisanteiKiwariOutput 特徴仮算定期割, Decimal 特徴期別金額03) {
-        if (特徴仮算定期割 != null && 特徴仮算定期割.get特徴期別額() != null && 整数_3 <= 特徴仮算定期割.get特徴期別額().size()) {
-            特徴期別金額03 = 特徴仮算定期割.get特徴期別額().get(整数_2);
-        }
-        return 特徴期別金額03;
-    }
-
-    private Decimal set特徴期別金額02(TokuchoKarisanteiKiwariOutput 特徴仮算定期割, Decimal 特徴期別金額02) {
-        if (特徴仮算定期割 != null && 特徴仮算定期割.get特徴期別額() != null && 整数_2 <= 特徴仮算定期割.get特徴期別額().size()) {
-            特徴期別金額02 = 特徴仮算定期割.get特徴期別額().get(整数_1);
-        }
-        return 特徴期別金額02;
-    }
-
-    private Decimal set特徴期別金額01(TokuchoKarisanteiKiwariOutput 特徴仮算定期割, Decimal 特徴期別金額01) {
-        if (特徴仮算定期割 != null && 特徴仮算定期割.get特徴期別額() != null && 整数_1 <= 特徴仮算定期割.get特徴期別額().size()) {
-            特徴期別金額01 = 特徴仮算定期割.get特徴期別額().get(整数_0);
-        }
-        return 特徴期別金額01;
-    }
+//TODO DZX利用可能後、コメント解除
+//    private Decimal set特徴期別金額03(TokuchoKarisanteiKiwariOutput 特徴仮算定期割, Decimal 特徴期別金額03) {
+//        if (特徴仮算定期割 != null && 特徴仮算定期割.get特徴期別額() != null && 整数_3 <= 特徴仮算定期割.get特徴期別額().size()) {
+//            特徴期別金額03 = 特徴仮算定期割.get特徴期別額().get(整数_2);
+//        }
+//        return 特徴期別金額03;
+//    }
+//
+//    private Decimal set特徴期別金額02(TokuchoKarisanteiKiwariOutput 特徴仮算定期割, Decimal 特徴期別金額02) {
+//        if (特徴仮算定期割 != null && 特徴仮算定期割.get特徴期別額() != null && 整数_2 <= 特徴仮算定期割.get特徴期別額().size()) {
+//            特徴期別金額02 = 特徴仮算定期割.get特徴期別額().get(整数_1);
+//        }
+//        return 特徴期別金額02;
+//    }
+//
+//    private Decimal set特徴期別金額01(TokuchoKarisanteiKiwariOutput 特徴仮算定期割, Decimal 特徴期別金額01) {
+//        if (特徴仮算定期割 != null && 特徴仮算定期割.get特徴期別額() != null && 整数_1 <= 特徴仮算定期割.get特徴期別額().size()) {
+//            特徴期別金額01 = 特徴仮算定期割.get特徴期別額().get(整数_0);
+//        }
+//        return 特徴期別金額01;
+//    }
 
     private void set被保険者番号Map(Map<HihokenshaNo, Integer> 被保険者番号Map, FukaJoho 賦課情報) throws NumberFormatException {
         if (被保険者番号Map.containsKey(賦課情報.get被保険者番号())) {
@@ -1815,7 +1818,7 @@ public class TokuchoKariSanteiFukaManagerBatch {
                 return 昇降順_性別(昇降順, 性別1, 性別2);
             }
         } else if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.通知書番号.getフォームフィールド名().equals(項目名)
-                && SortOrder.ASCENDING.equals(昇降順)) {
+                   && SortOrder.ASCENDING.equals(昇降順)) {
             return o1.get通知書番号().compareTo(o2.get通知書番号());
         }
         return o2.get通知書番号().compareTo(o1.get通知書番号());
@@ -1967,9 +1970,9 @@ public class TokuchoKariSanteiFukaManagerBatch {
             処理日付管理Dac.save(entity);
         }
     }
-
-    private TokuchoKarisanteiKiwariOutput get特徴仮算定期割(FlexibleYear 調定年度, Decimal 保険料率) {
-        TokuchoKariSanteiFukaManager manager = new TokuchoKariSanteiFukaManager();
-        return manager.get特徴仮算定期割(調定年度, 保険料率);
-    }
+//TODO DZX利用可能後、コメント解除
+//    private TokuchoKarisanteiKiwariOutput get特徴仮算定期割(FlexibleYear 調定年度, Decimal 保険料率) {
+//        TokuchoKariSanteiFukaManager manager = new TokuchoKariSanteiFukaManager();
+//        return manager.get特徴仮算定期割(調定年度, 保険料率);
+//    }
 }

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320001;
 
 import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
@@ -21,6 +20,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.FukaMiscManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.relate.KiwarigakuManager;
+import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuka.SanteiState;
