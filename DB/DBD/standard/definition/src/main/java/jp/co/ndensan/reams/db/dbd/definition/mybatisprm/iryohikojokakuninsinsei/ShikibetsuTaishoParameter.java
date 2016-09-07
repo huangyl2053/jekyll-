@@ -11,14 +11,14 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
- * 宛名識別対象PSM_DB検索用のパラメータです。
+ * 宛名情報PSM_DB検索用のパラメータです。
  *
- * @reamsid_L DBD_5770_030 tz_chengpeng
+ * @reamsid_L DBD-5770-030 tz_chengpeng
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class IryoHiKojoKakuninSinseiParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
+public class ShikibetsuTaishoParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
     private ShikibetsuCode 識別コード;
 
@@ -27,7 +27,7 @@ public class IryoHiKojoKakuninSinseiParameter extends UaFt200FindShikibetsuTaish
      *
      * @param shikibetsuTaishoPSMSearchKey 宛名識別対象PSM検索キー
      */
-    public IryoHiKojoKakuninSinseiParameter(IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey) {
+    public ShikibetsuTaishoParameter(IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey) {
         super(shikibetsuTaishoPSMSearchKey);
     }
 }

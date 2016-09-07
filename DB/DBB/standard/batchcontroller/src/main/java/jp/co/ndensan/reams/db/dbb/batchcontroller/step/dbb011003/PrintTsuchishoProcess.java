@@ -439,7 +439,14 @@ public class PrintTsuchishoProcess extends BatchProcessBase<TsuchishoDataTempEnt
                     .reportId(processParameter.get出力帳票一覧Entity().get帳票ID())
                     .build();
             dbb100004ReportSourceWriter = new ReportSourceWriter<>(dbb100004reportWriter);
-
+            dbb100004SourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                    認証者,
+                    地方公共団体,
+                    dbb100004ReportSourceWriter.getImageFolderPath(),
+                    new RDate(processParameter.get発行日().toString()),
+                    is公印に掛ける,
+                    is公印を省略,
+                    KenmeiFuyoKubunType.付与なし).buildSource();
         } else if (ReportIdDBB.DBB100005.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
 
             CheckListLineItemSet pairs = CheckListLineItemSet.

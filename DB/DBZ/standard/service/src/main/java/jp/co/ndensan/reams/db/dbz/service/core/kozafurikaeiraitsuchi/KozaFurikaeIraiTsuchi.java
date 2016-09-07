@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.kozafurikaeiraitsuchi;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -43,10 +44,8 @@ public class KozaFurikaeIraiTsuchi {
      */
     public Boolean getGetsujiShoriJokyo(FlexibleYearMonth 口座振替年月) {
 
-        Boolean is確定処理完了;
-        DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.get月次処理状況(口座振替年月);
-        is確定処理完了 = entity != null;
-        return is確定処理完了;
+        List<DbT7022ShoriDateKanriEntity> entityList = 処理日付管理Dac.get月次処理状況(口座振替年月);
+        return entityList != null && !entityList.isEmpty();
     }
 
 }

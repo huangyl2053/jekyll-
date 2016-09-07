@@ -129,12 +129,12 @@ public class JigyouHoukokuTokeiReportDBU300001Process extends BatchProcessBase<J
         reportData.set保険者名(get保険者名(association.get市町村名()));
         reportData.set保険者番号(association.get地方公共団体コード().value());
         reportData.set集計範囲(getパターン62(processParameter.get集計年月()));
-        reportData.set第1号被保険者数_項目標題列1(new RString("前年度末現在"));
-        reportData.set第1号被保険者数_項目標題列2(new RString("当年度中増"));
-        reportData.set第1号被保険者数_項目標題列3(new RString("当年度中減"));
-        reportData.set第1号被保険者数_項目標題列4(new RString("当年度末現在"));
-        reportData.set第1号被保険者増減内訳_項目標題行1(new RString("当年度中増"));
-        reportData.set第1号被保険者増減内訳_項目標題行2(new RString("当年度中減"));
+        reportData.set第1号被保険者数_項目標題列1(new RString("前月末現在"));
+        reportData.set第1号被保険者数_項目標題列2(new RString("当月中増"));
+        reportData.set第1号被保険者数_項目標題列3(new RString("当月中減"));
+        reportData.set第1号被保険者数_項目標題列4(new RString("当月末現在"));
+        reportData.set第1号被保険者増減内訳_項目標題行1(new RString("当月中増"));
+        reportData.set第1号被保険者増減内訳_項目標題行2(new RString("当月中減"));
 
         reportData.set前月末現在_1(getValue(syukeiNo0200, 数値_11));
         reportData.set前月末現在_2(getValue(syukeiNo0200, 数値_21));

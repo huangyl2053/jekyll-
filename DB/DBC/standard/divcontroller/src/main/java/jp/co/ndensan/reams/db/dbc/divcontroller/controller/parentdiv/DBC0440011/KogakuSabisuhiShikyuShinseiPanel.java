@@ -140,7 +140,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
                 ViewStateHolder.put(ViewStateKeys.画面モード, 送付済モード);
             }
             if (支給区分フラグ) {
-                RString 画面モード = get支給区分场合のモード(被保険者番号, サービス年月, 証記載保険者番号);
+                RString 画面モード = get支給区分モード(被保険者番号, サービス年月, 証記載保険者番号);
                 ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード);
                 getHandler(div).initialize高額詳細内容(画面モード, メニューID,
                         被保険者番号, サービス年月, 証記載保険者番号, 履歴番号, 識別コード);
@@ -210,7 +210,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         return ResponseData.of(div).setState(DBC0440011StateName.対象者情報登録);
     }
 
-    private RString get支給区分场合のモード(HihokenshaNo 被保険者番号,
+    private RString get支給区分モード(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月, HokenshaNo 証記載保険者番号) {
         KyufujissekiKogakuKaigoServicehi 給付実績entity = KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().
                 dealKyufujissekiDataShutoku(被保険者番号, サービス年月, 証記載保険者番号);

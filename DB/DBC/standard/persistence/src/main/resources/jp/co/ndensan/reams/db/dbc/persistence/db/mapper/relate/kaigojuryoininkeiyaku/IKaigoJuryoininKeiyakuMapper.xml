@@ -16,7 +16,7 @@
                 A."keiyakuJigyoshaName" As "keiyakuJigyoshaName",
                 A."keiyakuJigyoshaJusho" As "keiyakuJigyoshaJusho",
                 A."keiyakuShurui" As "keiyakuShurui",
-                F."name" AS "name",
+                F."name" AS "rsname",
                 A."kozaMeiginin" As "kozaMeiginin"     
         FROM  rgdb."DbT3077JuryoininKeiyakuJigyosha"  AS  A
               LEFT JOIN(
@@ -79,7 +79,7 @@
           <result property="事業者名称"            column="keiyakuJigyoshaName"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
           <result property="所在地下段"            column="keiyakuJigyoshaJusho"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
           <result property="契約種別"            column="keiyakuShurui"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-          <result property="振込先支店名"            column="name"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+          <result property="振込先支店名"            column="rsname"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
           <result property="振込先名義人名"            column="kozaMeiginin"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
   </resultMap>
 </mapper>

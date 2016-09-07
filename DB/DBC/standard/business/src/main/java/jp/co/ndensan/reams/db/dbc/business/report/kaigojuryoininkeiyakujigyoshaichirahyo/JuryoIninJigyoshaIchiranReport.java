@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kaigojuryoininkeiyakujigyoshaichirahyo;
 
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigojuryoininkeiyakujigyoshaichirahyo.KaigoJuryoininKeiyakuJigyoshaIchirahyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.juryoininjigyoshaichiran.JuryoIninJigyoshaIchiranSource;
@@ -26,6 +27,7 @@ public class JuryoIninJigyoshaIchiranReport extends Report<JuryoIninJigyoshaIchi
     private final LasdecCode 市町村コード;
     private final RString 市町村名称;
     private final RDateTime 処理日時;
+    private final List<RString> 改頁項目;
 
     /**
      * インスタンスを生成します。
@@ -35,19 +37,22 @@ public class JuryoIninJigyoshaIchiranReport extends Report<JuryoIninJigyoshaIchi
      * @param 市町村名称 RString
      * @param 出力順Map Map<RString, RString>
      * @param 処理日時 RDateTime
+     * @param 改頁項目 List<RString>
      */
     public JuryoIninJigyoshaIchiranReport(
             KaigoJuryoininKeiyakuJigyoshaIchirahyoEntity 帳票出力対象データ,
             LasdecCode 市町村コード,
             RString 市町村名称,
             RDateTime 処理日時,
-            Map<RString, RString> 出力順Map
+            Map<RString, RString> 出力順Map,
+            List<RString> 改頁項目
     ) {
         this.帳票出力対象データ = 帳票出力対象データ;
         this.市町村コード = 市町村コード;
         this.市町村名称 = 市町村名称;
         this.処理日時 = 処理日時;
         this.出力順Map = 出力順Map;
+        this.改頁項目 = 改頁項目;
 
     }
 
@@ -56,7 +61,7 @@ public class JuryoIninJigyoshaIchiranReport extends Report<JuryoIninJigyoshaIchi
     ) {
 
         IJuryoIninJigyoshaIchiranEditor headerEditor = new JuryoIninJigyoshaIchiranHeaderEditor(
-                市町村コード, 市町村名称, 処理日時, 出力順Map);
+                市町村コード, 市町村名称, 処理日時, 出力順Map, 改頁項目);
         IJuryoIninJigyoshaIchiranEditor bodyEditor = new JuryoIninJigyoshaIchiranBodyEditor(
                 帳票出力対象データ);
         IJuryoIninJigyoshaIchiranBuilder builder = new JuryoIninJigyoshaIchiranBuilder(

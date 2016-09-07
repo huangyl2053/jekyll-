@@ -43,7 +43,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -68,10 +67,8 @@ public class RiyoshaFutangakuGengakuHandler {
 
     private final RiyoshaFutangakuGengakuPanelDiv div;
 
-    private final RString 申請メニュー = new RString("DBDMN21002");
-    private final RString 承認メニュー = new RString("DBDMN22002");
-    private final RString 申請メニュー_タイトル = new RString("利用者負担額減額申請");
-    private final RString 承認メニュー_タイトル = new RString("利用者負担額減額申請承認");
+    private static final RString 申請メニュー = new RString("DBDMN21002");
+    private static final RString 承認メニュー = new RString("DBDMN22002");
     private static final RString BTNUPDATE_FIELDNAME = new RString("btnUpdate");
     private static final RString 申請情報を = new RString("申請情報を");
     private static final RString 承認情報を = new RString("承認情報を");
@@ -108,7 +105,6 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getCcdShinseiJoho().initialize(識別コード);
         div.getCcdKaigoKihon().initialize(被保険者番号);
         if (ResponseHolder.getMenuID().equals(申請メニュー)) {
-            ResponseData.of(div).rootTitle(申請メニュー_タイトル);
             div.getBtnInputNew().setText(申請情報を追加する);
             div.getRiyoshaFutangakuGengakuShinseiDetail().setTitle(申請情報);
             CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(BTNUPDATE_FIELDNAME, 申請情報を.toString());
@@ -116,7 +112,6 @@ public class RiyoshaFutangakuGengakuHandler {
             div.getRadKetteiKubun().setSelectedKey(承認する_KEY);
 
         } else if (ResponseHolder.getMenuID().equals(承認メニュー)) {
-            ResponseData.of(div).rootTitle(承認メニュー_タイトル);
             div.getBtnInputNew().setText(承認情報を追加する);
             div.getRiyoshaFutangakuGengakuShinseiDetail().setTitle(承認情報);
             CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(BTNUPDATE_FIELDNAME, 承認情報を.toString());

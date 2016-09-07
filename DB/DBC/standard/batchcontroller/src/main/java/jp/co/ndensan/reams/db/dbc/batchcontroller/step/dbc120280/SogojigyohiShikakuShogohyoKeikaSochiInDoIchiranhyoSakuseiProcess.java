@@ -206,7 +206,8 @@ public class SogojigyohiShikakuShogohyoKeikaSochiInDoIchiranhyoSakuseiProcess ex
         RString 審査年月 = entity.get資格照合表一時().getShinsaYM().wareki().eraType(EraType.KANJI_RYAKU)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         csvEntity.set審査年月(審査年月);
-        if (作成日時 != null) {
+        if (parameter.getシステム日付() != null) {
+            作成日時 = parameter.getシステム日付();
             RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
             RString 作成時 = 作成日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)

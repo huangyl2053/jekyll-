@@ -111,7 +111,42 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
      */
     public void onClick_chkRirekiHyouji(List<KogakuGassanJikoFutanGaku> resultList, HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         List<dgJohoIchiran_Row> rowList = new ArrayList();
-        List<PersonalData> personalDataList = new ArrayList<>();
+        for (KogakuGassanJikoFutanGaku result : resultList) {
+            dgJohoIchiran_Row row = new dgJohoIchiran_Row();
+            row.setTxtTaishoNendo(result.get対象年度().toDateString());
+            row.setTxtSanteiKubun(set算定区分(result.get異動区分()));
+            row.setTxtHokenshaNo(result.get保険者番号().getColumnValue());
+            row.setTxtShikyuShinseishoSeiriNo(result.get支給申請書整理番号());
+            row.setTxtIdoKubun(result.get異動区分() == null ? RString.EMPTY
+                    : KaigoGassan_Idokubun.toValue(result.get異動区分()).get名称());
+            row.setTxtRirekiNo(new RString(result.get履歴番号()));
+            row.setTxtUketoriNengetsu(result.get自己負担額証明書情報受取年月() == null ? RString.EMPTY
+                    : result.get自己負担額証明書情報受取年月().toDateString());
+            row.setTxtHoseiYMDTan(result.getバッチ補正実施年月日() == null ? RString.EMPTY
+                    : DateConverter.toWarekiHalf_Zero(
+                            new RDate(result.getバッチ補正実施年月日().toString())));
+            row.setTxtHoseiYMDTan(result.getリアル補正実施年月日() == null ? RString.EMPTY
+                    : DateConverter.toWarekiHalf_Zero(
+                            new RDate(result.getリアル補正実施年月日().toString())));
+            row.setTxtSofuNengetsu(result.get補正済自己負担額情報送付年月() == null ? RString.EMPTY
+                    : new RString(result.get補正済自己負担額情報送付年月().toString()));
+            row.setTxtDataKBN(result.getデータ作成区分() == null ? RString.EMPTY
+                    : result.getデータ作成区分());
+            rowList.add(row);
+        }
+        div.getJikoFutangakuHoseiList().getDgJohoIchiran().setDataSource(rowList);
+    }
+
+    /**
+     * onLoad時アクセスログ出力します。
+     *
+     * @param resultList List<KogakuGassanJikoFutanGaku>
+     * @param 識別コード 識別コード
+     * @param 被保険者番号 被保険者番号
+     */
+    public void 履歴を表示printLog(List<KogakuGassanJikoFutanGaku> resultList, ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+        List<dgJohoIchiran_Row> rowList = new ArrayList();
+        List<PersonalData> personalDataList = new ArrayList();
         for (KogakuGassanJikoFutanGaku result : resultList) {
             dgJohoIchiran_Row row = new dgJohoIchiran_Row();
             row.setTxtTaishoNendo(result.get対象年度().toDateString());
@@ -314,7 +349,6 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
             detailDiv.getTxtUketoriYM().setValue(new RDate(
                     result.get自己負担額証明書情報受取年月().toString()));
         }
-        //TODO 不确定checkbox 能否实现
         List<RString> 再送フラグList = new ArrayList();
         if (ZERO.equals(result.get再送フラグ())) {
             再送フラグList.add(KEY_ZERO);
@@ -585,36 +619,36 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
                             .build();
                     businessList.add(item);
                     break;
-//                case "101":
-//                    item = item.createBuilderForEdit()
-//                            .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_1月分())
-//                            .set補正済_70_74自己負担額_内数(
-//                                    自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_1月分())
-//                            .set補正済_70未満高額支給額(
-//                                    自己負担額保持.get変更後_補正後_高額介護_予防_サービス費_1月分())
-//                            .build();
-//                    businessList.add(item);
-//                    break;
-//                case "102":
-//                    item = item.createBuilderForEdit()
-//                            .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_2月分())
-//                            .set補正済_70_74自己負担額_内数(
-//                                    自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_2月分())
-//                            .set補正済_70未満高額支給額(
-//                                    自己負担額保持.get変更後_補正後_高額介護_予防_サービス費_2月分())
-//                            .build();
-//                    businessList.add(item);
-//                    break;
-//                case "103":
-//                    item = item.createBuilderForEdit()
-//                            .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_3月分())
-//                            .set補正済_70_74自己負担額_内数(
-//                                    自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_3月分())
-//                            .set補正済_70未満高額支給額(
-//                                    自己負担額保持.get変更後_補正後_高額介護_予防_サービス費_3月分())
-//                            .build();
-//                    businessList.add(item);
-//                    break;
+                case "101":
+                    item = item.createBuilderForEdit()
+                            .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_翌年1月分())
+                            .set補正済_70_74自己負担額_内数(
+                                    自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_翌年1月分())
+                            .set補正済_70未満高額支給額(
+                                    自己負担額保持.get変更後_補正後_高額介護_予防_サービス費_翌年1月分())
+                            .build();
+                    businessList.add(item);
+                    break;
+                case "102":
+                    item = item.createBuilderForEdit()
+                            .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_翌年2月分())
+                            .set補正済_70_74自己負担額_内数(
+                                    自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_翌年2月分())
+                            .set補正済_70未満高額支給額(
+                                    自己負担額保持.get変更後_補正後_高額介護_予防_サービス費_翌年2月分())
+                            .build();
+                    businessList.add(item);
+                    break;
+                case "103":
+                    item = item.createBuilderForEdit()
+                            .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_翌年3月分())
+                            .set補正済_70_74自己負担額_内数(
+                                    自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_翌年3月分())
+                            .set補正済_70未満高額支給額(
+                                    自己負担額保持.get変更後_補正後_高額介護_予防_サービス費_翌年3月分())
+                            .build();
+                    businessList.add(item);
+                    break;
                 case "104":
                     item = item.createBuilderForEdit()
                             .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_4月分())

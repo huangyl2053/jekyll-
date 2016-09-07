@@ -51,9 +51,8 @@ public class SentoEntity {
     private RString 地区コード2;
     private RString 地区コード3;
     private RString 医療種別;
-    //TODO 上記と同じ、違うと思います
-//    private RString 保険者番号;
-//    private RString 保険者名称;
+    private RString 医療保険者番号;
+    private RString 医療保険者名称;
     private RString 記号番号;
     private Decimal 直近管理票;
     private Decimal 直近実績;

@@ -49,7 +49,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryo
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -157,7 +156,6 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     private static final RString 左記号 = new RString("(");
     private static final RString 右記号 = new RString(")");
     private static final RString 送付対象外データを含める = new RString("送付対象外データを含める：");
-    private static final RString ジョブ番号 = new RString("【ジョブ番号】");
     private static final RString 日本語ファイル名 = new RString("汎用リスト　高額合算自己負担額情報CSV");
     private static final RString 出力ファイル名 = new RString("HanyoListKogakuGassanJikoFutangaku.csv");
     private static final RString CSV出力有無 = new RString("");
@@ -266,7 +264,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
             ShikibetsuCode 識別コード = 宛名.get識別コード();
             csvEntity.set識別コード(識別コード != null
                     ? 識別コード.getColumnValue() : RString.EMPTY);
-            csvEntity.set住民種別(宛名.get住民状態().コード());
+            csvEntity.set住民種別(宛名.get住民状態().住民状態略称());
             AtenaMeisho 氏名 = 宛名.get名称().getName();
             csvEntity.set氏名(氏名 != null
                     ? 氏名.getColumnValue() : RString.EMPTY);
@@ -742,7 +740,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
                 EUC_ID.value(),
                 導入団体コード,
                 市町村名,
-                ジョブ番号.concat(String.valueOf(JobContextHolder.getJobId())),
+                RString.EMPTY,
                 日本語ファイル名,
                 出力件数,
                 CSV出力有無,
