@@ -74,6 +74,12 @@ public class NoufuhitaiDataSakusei {
      */
     public List<ShoriDateKanri> get処理対象前回処理日付(List<LasdecCode> 市町村コードList,
             List<RString> 処理枝番List) {
+        if (市町村コードList == null || 市町村コードList.isEmpty()) {
+            return new ArrayList<>();
+        }
+        if (処理枝番List == null || 処理枝番List.isEmpty()) {
+            return new ArrayList<>();
+        }
         INoufuGakuDataSakuseiShoriDateMapper mapper = mapperProvider.create(INoufuGakuDataSakuseiShoriDateMapper.class);
         NoufuGakuDataSakuseiShoriDateParameter param = new NoufuGakuDataSakuseiShoriDateParameter();
         param.set処理枝番List(処理枝番List);
