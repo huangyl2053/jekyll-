@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 /**
  * 特別地域加算軽減実績管理リスト(画面）のビジネスクラスです。
  *
- * @reamsid_L DBD-3880-010 xuejm
+ * @reamsid_L DBD-3880-040 xuejm
  */
 public class TokubetsuChiikiKasanKeigenJisekiKanriIchiran {
 

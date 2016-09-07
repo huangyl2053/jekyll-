@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1070021;
 
 import java.util.ArrayList;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaJukyushaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD202010.DBD202010_HomonKaigoRiyoshaFutanGakuNinteishaListParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaJukyushaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.HihokenshaKeizaiJokyo;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
 /**
  * 訪問介護利用者負担額減額認定者リスト画面バッチ用パラメータクラスを作成する
  *
- * @reamsid_L DBD-3970-010 xuejm
+ * @reamsid_L DBD-3970-040 xuejm
  */
 public class HomonKaigoRiyoshaFutangakuGengakuNinteishaList {
 
