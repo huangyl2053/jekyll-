@@ -74,7 +74,7 @@ public class ShotokuDankaiBetsuHihokenshasuIchiranBodyEditor implements IShotoku
         if (!this.保険者設定段階別被保険者数合計entity.get市町村名称().isNullOrEmpty()) {
             source.hokenshaName = this.保険者設定段階別被保険者数合計entity.get市町村名称();
         }
-        if (null != this.hokenryoDankaiList) {
+        if (null != this.hokenryoDankaiList && null != this.保険者設定段階別被保険者数合計entity.get保険者設定段階()) {
             source.list_1 = this.hokenryoDankaiList.getBy段階区分(this.保険者設定段階別被保険者数合計entity.get保険者設定段階()).get表記();
         }
         if (null != this.保険者設定段階別被保険者数合計entity.get保険者設定人数()) {
