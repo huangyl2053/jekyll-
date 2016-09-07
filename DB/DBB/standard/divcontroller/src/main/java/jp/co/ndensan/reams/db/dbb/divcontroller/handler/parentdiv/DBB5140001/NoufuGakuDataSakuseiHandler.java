@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.lang.WarekiYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
@@ -120,14 +119,16 @@ public class NoufuGakuDataSakuseiHandler {
         RString 処理枝番 = new RString(STR_00.toString() + 市町村セキュリティ情報.get市町村情報().get市町村識別ID().toString());
         ShoriDateKanri 処理日付 = NoufuhitaiDataSakusei.createInstance().
                 get抽出条件前回処理日付(市町村セキュリティ情報.get市町村情報().get市町村コード(), 処理枝番);
-        YMDHMS 基準日時 = 処理日付.get基準日時();
-        RDate 年月日 = 基準日時.getDate();
-        RTime 時刻 = 基準日時.getRDateTime().getTime();
-        RString 前回処理日時 = new RString(年月日.wareki().toDateString().toString() + SPACE
-                + 時刻.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
-        抽出条件Row.getTxtZenShoriNichiji().setValue(前回処理日時);
-        抽出条件Row.getTxtZenShoriYMD().setValue(年月日);
-        抽出条件Row.getTxtZenShoriTime().setValue(時刻);
+        if (処理日付 != null && 処理日付.get基準日時() != null) {
+            YMDHMS 基準日時 = 処理日付.get基準日時();
+            RDate 年月日 = 基準日時.getDate();
+            RTime 時刻 = 基準日時.getRDateTime().getTime();
+            RString 前回処理日時 = new RString(年月日.wareki().toDateString().toString() + SPACE
+                    + 時刻.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
+            抽出条件Row.getTxtZenShoriNichiji().setValue(前回処理日時);
+            抽出条件Row.getTxtZenShoriYMD().setValue(年月日);
+            抽出条件Row.getTxtZenShoriTime().setValue(時刻);
+        }
         抽出条件List.add(抽出条件Row);
         div.getDgTanitsuShoriJoken().setDataSource(抽出条件List);
     }
@@ -169,17 +170,17 @@ public class NoufuGakuDataSakuseiHandler {
             RString 抽出期間終了補正 = DbBusinessConfig.get(ConfigNameDBB.納付額データ_抽出期間補正,
                     適用基準日, SubGyomuCode.DBB介護賦課, 構成市町村.get市町村識別ID());
             RString 抽出期間開始補正 = DbBusinessConfig.get(ConfigNameDBB.納付額データ_抽出期間補正,
-                    適用基準日.plusYear(SUBCONTRACT_1), SubGyomuCode.DBB介護賦課);
+                    適用基準日.plusYear(SUBCONTRACT_1), SubGyomuCode.DBB介護賦課, 構成市町村.get市町村識別ID());
             処理対象.getTxtKikanStHosei().setValue(抽出期間開始補正);
             処理対象.getTxtKikanEdHosei().setValue(抽出期間終了補正);
             RString key = new RString(構成市町村.get市町村コード().getColumnValue().toString()
                     + STR_00 + 構成市町村.get市町村識別ID().toString());
-            if (処理日付Map.containsKey(key)) {
-                ShoriDateKanri 処理日付 = 処理日付Map.get(key);
+            ShoriDateKanri 処理日付 = 処理日付Map.get(key);
+            if (処理日付 != null && 処理日付.get基準日時() != null) {
                 YMDHMS 基準日時 = 処理日付.get基準日時();
-                WarekiYearMonth 年月日 = 基準日時.wareki();
+                RDate 年月日 = 基準日時.getDate();
                 RTime 時刻 = 基準日時.getRDateTime().getTime();
-                RString 前回処理日時 = new RString(年月日.toDateString().toString() + SPACE
+                RString 前回処理日時 = new RString(年月日.wareki().toDateString().toString() + SPACE
                         + 時刻.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
                 処理対象.getTxtZenShoriNichiji().setValue(前回処理日時);
                 処理対象.getTxtZenShoriYMD().setValue(new RDate(年月日.toDateString().toString()));
@@ -293,17 +294,13 @@ public class NoufuGakuDataSakuseiHandler {
      *
      */
     public void 広域コンフィグ保存() {
-        List<dgKoikiShoriTaishoSelect_Row> 処理対象Rows = div.getKoikiShori().getDgKoikiShoriTaishoSelect().getDataSource();
-        dgKoikiShoriTaishoSelect_Row 処理対象 = null;
+        List<dgKoikiShoriTaishoSelect_Row> 処理対象Rows = div.getKoikiShori().getDgKoikiShoriTaishoSelect().getSelectedItems();
         for (dgKoikiShoriTaishoSelect_Row row : 処理対象Rows) {
-            if (row.getTxtKikanEdHosei().getValue() != null) {
-                処理対象 = row;
-                break;
+            if (row.getTxtKikanEdHosei().getValue() == null) {
+                continue;
             }
-        }
-        if (処理対象 != null) {
-            RString 抽出終了補正 = 処理対象.getTxtKikanEdHosei().getValue();
-            RString 市町村コード = new RString(STR_00 + 処理対象.getTxtCityShikibetsuId().toString());
+            RString 抽出終了補正 = row.getTxtKikanEdHosei().getValue();
+            RString 市町村コード = new RString(STR_00 + row.getTxtCityShikibetsuId().toString());
             BusinessConfig.update(ConfigNameDBB.納付額データ_抽出期間補正, 抽出終了補正,
                     変更理由, 市町村コード, RDate.getNowDate());
         }
