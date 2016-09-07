@@ -49,7 +49,7 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
     private static final RString 日付編集キー = new RString("日付編集");
     private static final int 調定年度を含めて8年分 = 8;
     private static final int BEGININDEX = 0;
-    private static final int ENDINDEX = 6;
+    private static final int ENDINDEX = 4;
 
     /**
      * コンストラクタです。
