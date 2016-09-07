@@ -31,7 +31,6 @@ public class ShinseishoHakkoHandler {
     private final ShinseishoHakkoDiv div;
     private static final int INDEX_4 = 4;
     private static final int INDEX_8 = 8;
-    private static final int INDEX_5 = 5;
     private static final int INDEX_101 = 101;
     private static final int INDEX_731 = 731;
     private static final int INDEX_801 = 801;
@@ -56,10 +55,10 @@ public class ShinseishoHakkoHandler {
     public void set初期化処理() {
         div.getRadChushutsuJoken().setDataSource(get申請書発行_抽出条件());
         set抽出条件表示制御処理();
-        if (INDEX_101 < Integer.valueOf((RDate.getNowDate().toString().substring(INDEX_5, INDEX_8)))
-                && Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_5, INDEX_8)) < INDEX_731) {
+        if (INDEX_101 < Integer.valueOf((RDate.getNowDate().toString().substring(INDEX_4, INDEX_8)))
+                && Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_4, INDEX_8)) < INDEX_731) {
             div.getTxtShoriNendo().setValue(FlexibleDate.getNowDate().minusYear(1));
-        } else if (INDEX_801 < Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_5, INDEX_8))
+        } else if (INDEX_801 < Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_4, INDEX_8))
                 && Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_4, INDEX_8)) < INDEX_1231) {
             div.getTxtShoriNendo().setValue(FlexibleDate.getNowDate());
         }

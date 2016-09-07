@@ -50,11 +50,6 @@ public class ShinseishoHakkoValidationHandler {
                             UrErrorMessages.項目に対する制約, 処理年度.toString(), 平成27年度以降.toString()),
                     div.getChushutsuJoken2().getTxtShoriNendo()));
         }
-        if (div.getCcdChohyoShutsuryokujun().get出力順ID() == null) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new ShinseishoHakkoValidationHandler.ShinseishoHakkoValidationMessages(
-                            UrErrorMessages.未指定, 出力順を.toString())));
-        }
         return validPairs;
     }
 
