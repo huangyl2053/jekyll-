@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200017.JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport;
+import jp.co.ndensan.reams.db.dbd.definition.core.iryohikojo.ShikakuSoshitsushaSentaku;
+import jp.co.ndensan.reams.db.dbd.definition.core.shafugemmentaisyousyalist.JigyoshaSentaku;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd206010.DBD206010TyohyoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd206010.ShafukugemmenTaishoshaJohoEntity;
@@ -239,20 +241,19 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
         出力条件.add(new RString("基 準 日：").concat(processParameter.get基準日().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString()));
 
-        //TODO Enum
-        if (processParameter.get資格喪失者選択().equals(new RString("1"))) {
+        if (ShikakuSoshitsushaSentaku.出力する.getコード().equals(processParameter.get資格喪失者選択())) {
             出力条件.add(new RString("資格喪失者：出力する"));
         }
-        if (!processParameter.get資格喪失者選択().equals(new RString("1"))) {
+        if (!ShikakuSoshitsushaSentaku.出力する.getコード().equals(processParameter.get資格喪失者選択())) {
             出力条件.add(new RString("資格喪失者：出力しない"));
         }
-        if (processParameter.get事業者選択().equals(new RString("1"))) {
+        if (JigyoshaSentaku.計画事業者.getコード().equals(processParameter.get事業者選択())) {
             出力条件.add(new RString("事業者選択：計画事業者"));
         }
-        if (processParameter.get事業者選択().equals(new RString("2"))) {
+        if (JigyoshaSentaku.サービス事業者.getコード().equals(processParameter.get事業者選択())) {
             出力条件.add(new RString("事業者選択：サービス事業者"));
         }
-        if (processParameter.get事業者選択().equals(new RString("3"))) {
+        if (JigyoshaSentaku.計画事業者とサービス事業者.getコード().equals(processParameter.get事業者選択())) {
             出力条件.add(new RString("事業者選択：計画事業者＋サービス事業者"));
         }
         if (processParameter.get事業者番号() != null && !processParameter.get事業者番号().isEmpty()) {
