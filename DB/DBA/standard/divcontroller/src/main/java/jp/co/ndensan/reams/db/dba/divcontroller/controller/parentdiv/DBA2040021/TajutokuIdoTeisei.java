@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -80,9 +81,7 @@ public class TajutokuIdoTeisei {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            set登録処理(requestDiv);
-            RealInitialLocker.release(LOCKINGKEY);
-            return ResponseData.of(requestDiv).setState(DBA2040021StateName.完了状態);
+            return set登録処理(requestDiv);
         }
         return ResponseData.of(requestDiv).respond();
     }
@@ -113,10 +112,11 @@ public class TajutokuIdoTeisei {
         TaShichosonJushochiTokureisyaIdoTeiseiParamter paramter = new TaShichosonJushochiTokureisyaIdoTeiseiParamter(
                 入退所データリスト,
                 適用情報グリッド);
-        TaShichosonJushochiTokureisyaIdoTeisei.createInstance().is適用状態のチェック(paramter);
+        //TaShichosonJushochiTokureisyaIdoTeisei.createInstance().is適用状態のチェック(paramter);
         requestDiv.getTajutokuIdoTeiseiIdoJoho().getCcdTaJushochiTokureishaKanri().saveTaJushochiTokurei(
                 ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
         requestDiv.getTajutokuIdoTeiseiIdoJoho().getShisetsuIdoJoho().getCcdShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
+        requestDiv.getTajutokuIdoTeiseiComplete().getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
         RealInitialLocker.release(LOCKINGKEY);
         return ResponseData.of(requestDiv).setState(DBA2040021StateName.完了状態);
     }

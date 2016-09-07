@@ -79,6 +79,15 @@ var DBZ;
                     this.controls.datagridRireki().gridSetting.isShowSelectButtonColumn = false;
                     this.controls.datagridRireki().gridSetting.isShowModifyButtonColumn = false;
                     this.controls.datagridRireki().gridSetting.isShowDeleteButtonColumn = false;
+
+                    var columns = this.controls.datagridRireki().gridSetting.columns;
+                    for (var i = 0; i < columns.length; i++) {
+                        if (columns[i].dataName === 'jotai') {
+                            columns[i].visible = false;
+                        }
+                    }
+                    this.controls.datagridRireki().gridSetting.columns = columns;
+
                     this.controls.datagridRireki()._control.afterPropertiesSet();
                 };
 
@@ -93,6 +102,15 @@ var DBZ;
                     this.controls.datagridRireki().gridSetting.isShowSelectButtonColumn = true;
                     this.controls.datagridRireki().gridSetting.isShowModifyButtonColumn = true;
                     this.controls.datagridRireki().gridSetting.isShowDeleteButtonColumn = true;
+
+                    var columns = this.controls.datagridRireki().gridSetting.columns;
+                    for (var i = 0; i < columns.length; i++) {
+                        if (columns[i].dataName === 'jotai') {
+                            columns[i].visible = true;
+                        }
+                    }
+                    this.controls.datagridRireki().gridSetting.columns = columns;
+
                     this.controls.datagridRireki()._control.afterPropertiesSet();
                 };
                 return ModeC;

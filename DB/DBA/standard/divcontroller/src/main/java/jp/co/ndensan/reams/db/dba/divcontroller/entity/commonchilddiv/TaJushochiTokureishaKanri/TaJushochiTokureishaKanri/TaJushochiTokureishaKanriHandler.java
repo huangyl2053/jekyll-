@@ -820,12 +820,17 @@ public class TaJushochiTokureishaKanriHandler {
             } else {
                 div.getTxtKaijyoTodokedebi().clearValue();
             }
+
             選択解除事由(kanriMaster.getKaijoJiyu());
             div.getTajushochiTokureiInput().setHiddenInputShikibetsuCode(kanriMaster.getShikibetsuCode());
             div.getTajushochiTokureiInput().setHiddenInputIdoYMD(kanriMaster.getIdoYMD());
             div.getTajushochiTokureiInput().setHiddenInputEdaNo(kanriMaster.getEdaNo());
             div.getTxtHihoNo().setValue(kanriMaster.getSochiHihokenshaNo());
             div.getCcdHokensha().setHokenjaNo(kanriMaster.getSochiHokensha());
+
+            div.getCcdShisetsuJoho().set施設種類(kanriMaster.getNyushoShisetsuShurui());
+            div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(kanriMaster.getNyushoShisetsu());
+
             if (!RString.isNullOrEmpty(kanriMaster.getSochiHokenshaNo())) {
                 div.getCcdHokensha().setHokenjaName(kanriMaster.getSochiHokenshaNo());
             }
@@ -1013,15 +1018,22 @@ public class TaJushochiTokureishaKanriHandler {
             編集Builder.set適用受付年月日(更新前データ.get適用受付年月日());
         }
         return 編集Builder
-                .set異動事由コード(row.getTekiyoJiyu())
+                .set異動事由コード(row.getIdoJiyuCode())
                 .set市町村コード(new LasdecCode(row.getShichosonCode()))
                 .set他市町村住所地特例適用事由コード(row.getTekiyoJiyu())
-                .set適用年月日(new FlexibleDate(row.getTekiyoYMD().getValue().toDateString()))
-                .set適用届出年月日(new FlexibleDate(row.getTekiyoTodokedeYMD().getValue().toDateString()))
+                .set適用年月日(row.getTekiyoYMD().getValue() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(row.getTekiyoYMD().getValue().toDateString()))
+                .set適用届出年月日(row.getTekiyoTodokedeYMD().getValue() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(row.getTekiyoTodokedeYMD().getValue().toDateString()))
+                .set適用受付年月日(row.getTekiyoTodokedeYMD().getValue() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(row.getTekiyoTodokedeYMD().getValue().toDateString()))
                 .set他市町村住所地特例解除事由コード(row.getKaijoJiyu())
-                .set解除年月日(new FlexibleDate(row.getKaijoYMD().getValue().toDateString()))
-                .set解除届出年月日(new FlexibleDate(row.getKaijoTodokedeYMD().getValue().toDateString()))
-                .set解除受付年月日(new FlexibleDate(row.getKaijoTodokedeYMD().getValue().toDateString()))
+                .set解除年月日(row.getKaijoYMD().getValue() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(row.getKaijoYMD().getValue().toDateString()))
+                .set解除届出年月日(row.getKaijoTodokedeYMD().getValue() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(row.getKaijoTodokedeYMD().getValue().toDateString()))
+                .set解除受付年月日(row.getKaijoTodokedeYMD().getValue() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(row.getKaijoTodokedeYMD().getValue().toDateString()))
                 .set論理削除フラグ(false)
                 .build();
     }
