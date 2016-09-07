@@ -7,20 +7,27 @@ package jp.co.ndensan.reams.db.dbd.service.core.iryohikojokakuninsinsei;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.IryoHiKojoKakuninSinseiParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.AtesakiParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.ShikibetsuTaishoParameter;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.iryohikojokakuninsinsei.IIryoHiKojoKakuninSinseiMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -51,14 +58,14 @@ public class IryoHiKojoKakuninSinsei {
 
     /**
      * 受給者判定
-     * 
+     *
      * @param 被保険者番号 RString
      * @return boolean
      */
     public boolean checkuJukyusha(RString 被保険者番号) {
-       IIryoHiKojoKakuninSinseiMapper mapper = mapperProvider.create(IIryoHiKojoKakuninSinseiMapper.class);
-       Integer レコード数 = mapper.受給者台帳抽出(被保険者番号);
-       return レコード数 > 0;
+        IIryoHiKojoKakuninSinseiMapper mapper = mapperProvider.create(IIryoHiKojoKakuninSinseiMapper.class);
+        Integer レコード数 = mapper.受給者台帳抽出(被保険者番号);
+        return レコード数 > 0;
     }
 
     /**
@@ -120,18 +127,29 @@ public class IryoHiKojoKakuninSinsei {
         juminJotaiList.add(JuminJotai.死亡者);
         key.set住民状態(juminJotaiList);
         IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
-        IryoHiKojoKakuninSinseiParameter param = new IryoHiKojoKakuninSinseiParameter(shikibetsuTaishoPSMSearchKey);
+        ShikibetsuTaishoParameter param = new ShikibetsuTaishoParameter(shikibetsuTaishoPSMSearchKey);
         param.set識別コード(識別コード);
 
-        UaFt200FindShikibetsuTaishoEntity 宛名情報 = mapper.select宛名情報(param, 識別コード);
+        UaFt200FindShikibetsuTaishoEntity 宛名情報 = mapper.select宛名情報(param);
 
         return ShikibetsuTaishoFactory.createKojin(宛名情報);
     }
 
     /**
      * 宛先取得
+     *
+     * @param 識別コード
+     * @return IAtesaki
      */
-    public void getAtesaki_Iryohikojyo() {
+    public IAtesaki getAtesaki_Iryohikojyo(ShikibetsuCode 識別コード) {
+        IIryoHiKojoKakuninSinseiMapper mapper = mapperProvider.create(IIryoHiKojoKakuninSinseiMapper.class);
 
+        AtesakiPSMSearchKeyBuilder key = new AtesakiPSMSearchKeyBuilder(
+                AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給));
+        AtesakiParameter param = new AtesakiParameter(key.build());
+        param.set識別コード(識別コード);
+
+        UaFt250FindAtesakiEntity 宛先情報 = mapper.select宛先情報(param);
+        return AtesakiFactory.createInstance(宛先情報);
     }
 }

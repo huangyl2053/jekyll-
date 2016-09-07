@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--@reamsid_L DBD_5770_030 tz_chengpeng-->
+<!--@reamsid_L DBD-5770-030 tz_chengpeng-->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.iryohikojokakuninsinsei.IIryoHiKojoKakuninSinseiMapper">
     <select resultOrdered="true" id="受給者台帳抽出"
@@ -19,7 +19,7 @@
 
     <select resultOrdered="true" id="select宛名情報"
             resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.IryoHiKojoKakuninSinseiParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.ShikibetsuTaishoParameter"
             fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
@@ -28,4 +28,17 @@
         WHERE
         "shikibetsuCode" = #{識別コード}
     </select>
+
+    <select resultOrdered="true" id="select宛先情報"
+            resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.AtesakiParameter"
+            fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
+        FROM
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" />
+        WHERE
+        "shikibetsuCode" = #{識別コード}
+    </select>
+
 </mapper>
