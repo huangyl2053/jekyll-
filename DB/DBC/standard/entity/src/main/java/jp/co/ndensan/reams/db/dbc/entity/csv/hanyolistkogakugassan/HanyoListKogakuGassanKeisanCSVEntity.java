@@ -208,16 +208,18 @@ public class HanyoListKogakuGassanKeisanCSVEntity {
     private RString 負担額合計_70歳未満;
     @CsvField(order = 950, name = "負担額の合計額")
     private RString 負担額の合計額;
-    @CsvField(order = 960, name = "支給額合計額")
+    @CsvField(order = 960, name = "70歳未満支給額合計")
+    private RString 未満支給額合計_70歳;
+    @CsvField(order = 970, name = "支給額合計額")
     private RString 支給額合計額;
-    @CsvField(order = 970, name = "データ区分")
+    @CsvField(order = 980, name = "データ区分")
     private RString データ区分;
-    @CsvField(order = 980, name = "受取年月")
+    @CsvField(order = 990, name = "受取年月")
     private RString 受取年月;
-    @CsvField(order = 990, name = "送付年月")
+    @CsvField(order = 1000, name = "送付年月")
     private RString 送付年月;
-    @CsvField(order = 1000, name = "支給額計算結果連絡票作成年月日")
+    @CsvField(order = 1010, name = "支給額計算結果連絡票作成年月日")
     private RString 支給額計算結果連絡票作成年月日;
-    @CsvField(order = 1010, name = "データ種類")
+    @CsvField(order = 1020, name = "データ種類")
     private RString データ種類;
 }

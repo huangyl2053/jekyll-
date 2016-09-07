@@ -48,6 +48,7 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
     private static final RString 公費負担_なし = new RString("key1");
     private static final RString 公費負担_あり生保 = new RString("key2");
     private static final RString 利用者_適用なし = new RString("0");
+    private static final RString 特定_適用なし = new RString("0");
     private static final RString 適用なし_記号 = new RString("*");
     private static final RString 適用なしEMPTY = new RString("");
     private final HanyoListParamKokurenJyukyujyaJyohoDiv div;
@@ -75,6 +76,10 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
             div.setHdnDonyuKeitai(導入形態_広域);
         }
         div.getRadChushutsuHaniSentaku().setSelectedKey(すべて);
+        List<RString> csvHenshu = new ArrayList<>();
+        csvHenshu.add(CSVSettings.項目名付加.getコード());
+        csvHenshu.add(CSVSettings.日付スラッシュ編集.getコード());
+        div.getChkCsvHenshuHoho().setSelectedItemsByKey(csvHenshu);
         set範囲Disable();
     }
 
@@ -82,9 +87,8 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
      * 日付抽出区分のonChange事件です。
      */
     public void onChange_HaniSentaku() {
-        if (すべて.equals(div.getRadChushutsuHaniSentaku().getSelectedKey())) {
-            set範囲Disable();
-        } else if (最新履歴のみ.equals(div.getRadChushutsuHaniSentaku().getSelectedKey())) {
+        if (すべて.equals(div.getRadChushutsuHaniSentaku().getSelectedKey())
+                || 最新履歴のみ.equals(div.getRadChushutsuHaniSentaku().getSelectedKey())) {
             set範囲Disable();
         } else if (範囲指定.equals(div.getRadChushutsuHaniSentaku().getSelectedKey())) {
             set範囲unDisable();
@@ -336,12 +340,7 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
         parameter.setShoriTaishoNengetsuTo(rDateToRString(div.getTxtShoriTaishoNengetsu().getToValue()));
         parameter.setIdoNengetsuFrom(rDateToRString(div.getTxtIdoNengetsu().getFromValue()));
         parameter.setIdoNengetsuTo(rDateToRString(div.getTxtIdoNengetsu().getToValue()));
-        List<RString> kakuidozukinoSaishinNomi = div.getChkIdotukiSaisinJohoChushutsu().getSelectedKeys();
-        boolean isSelectNomi = false;
-        if (!kakuidozukinoSaishinNomi.isEmpty()) {
-            isSelectNomi = true;
-        }
-        parameter.setKakuidozukinoSaishinNomi(isSelectNomi);
+        parameter.setKakuidozukinoSaishinNomi(!div.getChkIdotukiSaisinJohoChushutsu().getSelectedKeys().isEmpty());
         parameter.setIdoKubun(div.getChkIdokubunKodo3().getSelectedKeys());
         parameter.setMinashiYokaigoKubun(div.getChkMinashiYoKaigoKubun().getSelectedKeys());
         parameter.setJigyoshaBanggo(setJigyoshaNo(div.getCcdkyotakuSienJigyoshaBango().getNyuryokuShisetsuKodo()));
@@ -376,12 +375,7 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
             }
         }
         parameter.setTokuteiNyushoshaSabisuKubun(tokuteiNyushoshaSabisuKubun);
-        List<RString> sakujyoMeru = div.getChkSakujyoDataChushutsu().getSelectedKeys();
-        boolean isSelectSakujyoMeru = false;
-        if (!sakujyoMeru.isEmpty()) {
-            isSelectSakujyoMeru = true;
-        }
-        parameter.setSakujyoMeru(isSelectSakujyoMeru);
+        parameter.setSakujyoMeru(!div.getChkSakujyoDataChushutsu().getSelectedKeys().isEmpty());
         return parameter;
     }
 
@@ -524,7 +518,7 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
         List<RString> riyoshaFutanKubuns = new ArrayList<>();
         for (Object riyoshaFutanKubun : restoreBatchParameterMap.getParameterValue(List.class, new RString("riyoshaFutanKubun"))) {
             if (適用なし_記号.equals(new RString(riyoshaFutanKubun.toString()))) {
-                riyoshaFutanKubuns.add(new RString(riyoshaFutanKubun.toString()));
+                riyoshaFutanKubuns.add(利用者_適用なし);
             } else if (JukyushaIF_RiyoshaFutanKubunCode.利用者負担.getコード().equals(new RString(riyoshaFutanKubun.toString()))
                     || JukyushaIF_RiyoshaFutanKubunCode.旧措置入所者利用者負担.getコード().equals(new RString(riyoshaFutanKubun.toString()))) {
                 riyoshaFutanKubuns.add(new RString(riyoshaFutanKubun.toString()));
@@ -535,7 +529,7 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
         for (Object tokuteiNyushoshaSabisuKubun : restoreBatchParameterMap.getParameterValue(List.class,
                 new RString("tokuteiNyushoshaSabisuKubun"))) {
             if (適用なし_記号.equals(new RString(tokuteiNyushoshaSabisuKubun.toString()))) {
-                tokuteiNyushoshaSabisuKubuns.add(new RString(tokuteiNyushoshaSabisuKubun.toString()));
+                tokuteiNyushoshaSabisuKubuns.add(特定_適用なし);
             } else if (JukyushaIF_ServiceKubunCode.通常の受給者.getコード().equals(new RString(tokuteiNyushoshaSabisuKubun.toString()))
                     || JukyushaIF_ServiceKubunCode.旧措置入所者.getコード().equals(
                             new RString(tokuteiNyushoshaSabisuKubun.toString()))) {

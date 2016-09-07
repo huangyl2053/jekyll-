@@ -23,8 +23,11 @@
 	AND 償還払支給判定結果."seiriNo" = 償還払支給申請."seiriNo"
    </select>  
    <resultMap id="resultMap_ShoukanbaraiShikyu" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shoukanbaraishikyuketteitsuchisho.ShoukanbaraiShikyuEntity" autoMapping="true">
-        <association property="償還払支給判定結果" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.resultMap_DbT3036ShokanHanteiKekkaEntity"/>
-        <association property="償還払支給申請" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>    
+       <id property="償還払支給判定結果.hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+       <id property="償還払支給判定結果.serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+       <id property="償還払支給判定結果.seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="償還払支給判定結果" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.ResultMap_DbT3036ShokanHanteiKekkaEntity"/>
+        <association property="償還払支給申請" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>  
     </resultMap>
     
     <select id="select被保険者宛名情報" resultOrdered="true"

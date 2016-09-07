@@ -13,11 +13,12 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000064.Shi
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -34,6 +35,7 @@ public class ShinseishoHakko {
 
     private static final ReportId 帳票ID = new ReportId("DBC100064_KijunShunyugakuTekiyoShinseisho");
     private static final RString 十二月三十一 = new RString("1231");
+    private static final RString 出力順を = new RString("出力順を");
 
     /**
      * onLoadです。
@@ -88,7 +90,7 @@ public class ShinseishoHakko {
      * @return ResponseData
      */
     public ResponseData<ShinseishoHakkoDiv> onChange_SakuseiYMD(ShinseishoHakkoDiv div) {
-        FlexibleDate 作成日 = new FlexibleDate(YMDHMS.now().getDate().toDateString());
+        FlexibleDate 作成日 = div.getTxtSakuseiYMD().getValue();
         div.getCcdBunshoBangoInput().initialize(帳票ID, 作成日);
         return ResponseData.of(div).respond();
     }
@@ -104,6 +106,9 @@ public class ShinseishoHakko {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).get入力チェック();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        if (div.getCcdChohyoShutsuryokujun().get出力順ID() == null) {
+            throw new ApplicationException(UrErrorMessages.未指定.getMessage().replace(出力順を.toString()));
         }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(

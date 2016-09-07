@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * バッチ設計_DBU030000_事業状況報告資料（年報）作成(親)のバッチフロークラスです。
  *
- * @reamsid_L DBU-5600-010 linghuhang
+ * @reamsid_L DBU-5600-290 lishengli
  */
 public class DBU030010_JigyoHokokuNenpo_Main extends BatchFlowBase<DBU030010_JigyoHokokuNenpo_MainParameter> {
 

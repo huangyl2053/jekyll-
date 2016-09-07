@@ -80,7 +80,7 @@ public class ShotokuDankaiBetsuHihokenshasuIchiranBodyEditor implements IShotoku
         if (null != this.保険者設定段階別被保険者数合計entity.get保険者設定人数()) {
             source.list_2 = doカンマ編集(this.保険者設定段階別被保険者数合計entity.get保険者設定人数());
         }
-        if (!this.標準設定段階別被保険者数合計entity.get保険者設定段階().isNullOrEmpty()) {
+        if (null != this.標準設定段階別被保険者数合計entity.get保険者設定段階()) {
             source.list_3
                     = 文字列_第.concat(this.標準設定段階別被保険者数合計entity.get保険者設定段階().replace(ゼロ, RString.EMPTY)).concat(文字列_段階);
         }

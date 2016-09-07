@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 障がい者控除対象者认定のDivControllerのバッチパラメタークラスです。
+ * 障がい者控除対象者認定のDivControllerのバッチパラメタークラスです。
  *
  * @reamsid_L DBD-3850-010 liuwei2
  */

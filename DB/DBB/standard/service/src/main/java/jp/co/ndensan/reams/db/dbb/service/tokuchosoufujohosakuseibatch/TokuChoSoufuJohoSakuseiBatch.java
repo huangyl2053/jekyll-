@@ -10,6 +10,8 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchosoufujohosakusei.TokuChoSoufuJohoSakuseiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakusei.TokuChoSoufuJohoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakusei.ITokuChoSoufuJohoSakuseiMapper;
+import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
@@ -24,8 +26,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.CountedItem;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -78,15 +78,15 @@ public class TokuChoSoufuJohoSakuseiBatch {
     private static final RString 本算定賦課 = new RString("本算定賦課");
     private static final RString 金額あり = new RString("1");
     private static final RString 金額なし = new RString("2");
-    private static final RString GENERICKEY = new RString("UeT1704KaigoTokuchoTorikomiRireki_renban");
-    private final FlexibleYear 年度 = new FlexibleYear("0000");
     private final DbT7022ShoriDateKanriDac 処理日付管理マスタdac;
+    private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタです。
      */
     TokuChoSoufuJohoSakuseiBatch() {
         処理日付管理マスタdac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
     /**
@@ -100,6 +100,16 @@ public class TokuChoSoufuJohoSakuseiBatch {
     }
 
     /**
+     * 介護特別徴収情報取込履歴の最大の連番を取得する。
+     *
+     * @return int
+     */
+    public int get最大の連番() {
+        ITokuChoSoufuJohoSakuseiMapper mapper = mapperProvider.create(ITokuChoSoufuJohoSakuseiMapper.class);
+        return mapper.selectMaxRenbanUeT1704() + 1;
+    }
+
+    /**
      * １回の特徴制度間IF作成処理につき、１件のレコードを追加する。
      *
      * @param 特徴開始月 RDate
@@ -110,8 +120,7 @@ public class TokuChoSoufuJohoSakuseiBatch {
      */
     public UeT1704KaigoTokuchoTorikomiRirekiEntity intTokuChoJohoTorikomiRireki(FlexibleYear 処理年度, RDate 特徴開始月, RString 遷移元メニュー, RDateTime 処理日時) {
         UeT1704KaigoTokuchoTorikomiRirekiEntity 介護特別徴収情報取込履歴entity = new UeT1704KaigoTokuchoTorikomiRirekiEntity();
-        CountedItem countedItem = Saiban.get(SubGyomuCode.UEA特別徴収分配集約, GENERICKEY, 年度);
-        int 連番 = (int) countedItem.next();
+        int 連番 = get最大の連番();
         if (特徴制度間IF作成.equals(遷移元メニュー)) {
             YMDHMS 基準日時 = chkTokuchoIraikinKeisan(特徴開始月, 処理年度);
             介護特別徴収情報取込履歴entity.setRenban(連番);

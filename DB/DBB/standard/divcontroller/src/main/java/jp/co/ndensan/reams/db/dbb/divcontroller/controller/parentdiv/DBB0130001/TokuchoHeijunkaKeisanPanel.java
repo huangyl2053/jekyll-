@@ -38,9 +38,9 @@ public class TokuchoHeijunkaKeisanPanel {
 
         RDate nowDate = RDate.getNowDate();
         RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, nowDate, SubGyomuCode.DBB介護賦課);
-        RString 賦課年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, nowDate, SubGyomuCode.DBB介護賦課);
-        div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtChoteiNendo().setValue(調定年度);
-        div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtFukaNendo().setValue(賦課年度);
+        RString 年度 = (new RDate(調定年度.toString())).getYear().wareki().toDateString();
+        div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtChoteiNendo().setValue(年度);
+        div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtFukaNendo().setValue(年度);
         div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtChoteiNendo().setDisabled(true);
         div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtFukaNendo().setDisabled(true);
         div.getHeijunka8KeisanHohoPanel().getTxtKeisanHohoGengaku().setDisabled(true);
@@ -74,8 +74,9 @@ public class TokuchoHeijunkaKeisanPanel {
         }
         pageData.set増額平準化方法(div.getHeijunka8KeisanHohoPanel().getTxtKeisanHohoZougaku().getValue());
         pageData.set減額平準化方法(div.getHeijunka8KeisanHohoPanel().getTxtKeisanHohoGengaku().getValue());
-        pageData.set調定年度(new FlexibleYear(div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtChoteiNendo().getValue()));
-        pageData.set賦課年度(new FlexibleYear(div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtFukaNendo().getValue()));
+        RDate 年度 = new RDate(div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtChoteiNendo().getValue().toString());
+        pageData.set調定年度(new FlexibleYear(年度.getYear().toDateString()));
+        pageData.set賦課年度(new FlexibleYear(年度.getYear().toDateString()));
         特徴平準化.getBatchiPara(pageData);
         return ResponseData.of(parameter).respond();
     }

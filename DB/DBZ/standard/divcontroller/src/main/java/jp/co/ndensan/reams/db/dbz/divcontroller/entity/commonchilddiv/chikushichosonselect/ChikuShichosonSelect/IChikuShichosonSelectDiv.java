@@ -26,4 +26,12 @@ public interface IChikuShichosonSelectDiv extends ICommonChildDivBaseProperties 
     RString get旧市町村名称();
 
     RString get導入形態コード();
+
+    void set選択対象(RString 選択対象);
+
+    void set選択結果(Map<RString, RString> 選択結果);
+
+    void set市町村コード(RString 市町村コード);
+
+    void set旧市町村コード(RString 旧市町村コード);
 }

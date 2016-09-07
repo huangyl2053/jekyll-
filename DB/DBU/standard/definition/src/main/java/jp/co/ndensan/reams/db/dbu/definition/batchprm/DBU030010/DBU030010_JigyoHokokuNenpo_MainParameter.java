@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 事業状況報告資料（年報）作成のパラメータクラスです。
  *
- * @reamsid_L DBU-5600-010 linghuhang
+ * @reamsid_L DBU-5600-290 lishengli
  */
 @lombok.Getter
 @lombok.Setter

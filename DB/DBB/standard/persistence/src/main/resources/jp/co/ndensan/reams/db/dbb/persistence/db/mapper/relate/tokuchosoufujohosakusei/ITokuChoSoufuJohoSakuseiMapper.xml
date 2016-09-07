@@ -44,7 +44,9 @@
             AND
                 "DbT7022ShoriDateKanri"."nendoNaiRenban"=#{年度内連番}
     </update>
-
+    <select resultOrdered="true" id="selectMaxRenbanUeT1704" resultType="java.lang.Integer">
+        SELECT MAX(renban) FROM rgue."UeT1704KaigoTokuchoTorikomiRireki"
+    </select>
     <select resultOrdered="true" id="selectUe10122T0511NenkinTokuchoKaifuJohotemp" resultMap ="resultMap_TokuChoSoufuJohoSakuseiEntity">
          SELECT
             <include refid="allColumns_UeT0511NenkinTokuchoKaifuJoho" />,

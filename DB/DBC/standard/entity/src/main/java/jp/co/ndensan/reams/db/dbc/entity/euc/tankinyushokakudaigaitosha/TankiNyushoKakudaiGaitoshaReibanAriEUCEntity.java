@@ -53,7 +53,7 @@ public class TankiNyushoKakudaiGaitoshaReibanAriEUCEntity implements ITankiNyush
     private ZenkokuJushoCode 住所コード;
     @CsvField(order = 13, name = "郵便番号")
     private RString 郵便番号;
-    @CsvField(order = 14, name = "住所_番地_方書")
+    @CsvField(order = 14, name = "住所＋番地＋方書")
     private RString 住所_番地_方書;
     @CsvField(order = 15, name = "住所")
     private RString 住所;
@@ -97,7 +97,7 @@ public class TankiNyushoKakudaiGaitoshaReibanAriEUCEntity implements ITankiNyush
     private RString 転出入理由;
     @CsvField(order = 35, name = "前住所郵便番号")
     private RString 前住所郵便番号;
-    @CsvField(order = 36, name = "前住所_番地_方書")
+    @CsvField(order = 36, name = "前住所+番地+方書")
     private RString 前住所_番地_方書;
     @CsvField(order = 37, name = "前住所")
     private RString 前住所;
@@ -133,7 +133,7 @@ public class TankiNyushoKakudaiGaitoshaReibanAriEUCEntity implements ITankiNyush
     private RString 資格区分;
     @CsvField(order = 53, name = "住所地特例状態")
     private RString 住所地特例状態;
-    @CsvField(order = 54, name = "資格_証記載保険者番号")
+    @CsvField(order = 54, name = "（資格）証記載保険者番号")
     private RString 資格_証記載保険者番号;
     @CsvField(order = 55, name = "有効開始年月")
     private RString 有効開始年月;

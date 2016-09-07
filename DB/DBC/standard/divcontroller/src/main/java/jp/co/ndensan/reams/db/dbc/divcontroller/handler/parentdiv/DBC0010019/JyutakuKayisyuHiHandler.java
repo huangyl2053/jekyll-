@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiP
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010019.JyutakuKayisyuHiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010019.dgJutakuKaishuhi_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -32,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class JyutakuKayisyuHiHandler {
 
     private static final RString ZERO = new RString("0");
-    private static final RString 前事業者 = new RString("1");
+    private static final RString 前事業者 = new RString("0");
     private static final RString 前月 = new RString("1");
     private static final RString NI = new RString("2");
     private static final FlexibleYearMonth 平成24年4月 = new FlexibleYearMonth("201204");
@@ -76,7 +78,6 @@ public class JyutakuKayisyuHiHandler {
         div.getBtnKogakuKaigoService().setDisabled(false);
         div.getBtnTokuteiShinryo().setDisabled(false);
         div.getBtnKyotakuServiceKeikaku().setDisabled(false);
-        div.getBtnJutakuKaishu().setDisabled(false);
         div.getBtnCareManagement().setDisabled(false);
         div.getBtnShafukuKeigen().setDisabled(false);
         if (shikibetsuNoKanriList != null && !shikibetsuNoKanriList.isEmpty()) {
@@ -107,9 +108,6 @@ public class JyutakuKayisyuHiHandler {
             }
             if (ZERO.equals(識別番号管理.get居宅計画費設定区分())) {
                 div.getBtnKyotakuServiceKeikaku().setDisabled(true);
-            }
-            if (ZERO.equals(識別番号管理.get住宅改修費設定区分())) {
-                div.getBtnJutakuKaishu().setDisabled(true);
             }
             if (ZERO.equals(識別番号管理.getケアマネジメント設定区分())) {
                 div.getBtnCareManagement().setDisabled(true);
@@ -152,14 +150,14 @@ public class JyutakuKayisyuHiHandler {
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
         for (KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi : 給付実績住宅改修費List) {
             if (kyufujissekiJutakuKaishuhi.getサービス提供年月().equals(new FlexibleYearMonth(サービス提供年月.getYearMonth().toString()))
-                    && 事業者番号.equals(kyufujissekiJutakuKaishuhi.get事業所番号().value())
-                    && 整理番号.equals(kyufujissekiJutakuKaishuhi.get整理番号())
-                    && 様式番号.equals(kyufujissekiJutakuKaishuhi.get入力識別番号().value())) {
+                    && check事業所番号Null(kyufujissekiJutakuKaishuhi.get事業所番号()).equals(事業者番号)
+                    && nullToEMPTY(kyufujissekiJutakuKaishuhi.get整理番号()).equals(整理番号)
+                    && check入力識別番号Null(kyufujissekiJutakuKaishuhi.get入力識別番号()).equals(様式番号)) {
                 dgJutakuKaishuhi_Row row = new dgJutakuKaishuhi_Row();
-                row.setTxtService(kyufujissekiJutakuKaishuhi.getサービスコード().value());
+                row.setTxtService(checkサービスコード(kyufujissekiJutakuKaishuhi.getサービスコード()));
                 row.setTxtChakkoYMD(getパターン1(kyufujissekiJutakuKaishuhi.get住宅改修着工年月日()));
-                row.setTxtJigyoshaName(kyufujissekiJutakuKaishuhi.get住宅改修事業者名());
-                row.setTxtJusho(kyufujissekiJutakuKaishuhi.get住宅改修住宅住所());
+                row.setTxtJigyoshaName(nullToEMPTY(kyufujissekiJutakuKaishuhi.get住宅改修事業者名()));
+                row.setTxtJusho(nullToEMPTY(kyufujissekiJutakuKaishuhi.get住宅改修住宅住所()));
                 row.setTxtHiyo(DecimalFormatter.toコンマ区切りRString(kyufujissekiJutakuKaishuhi.get改修金額(), 0));
                 row.setTxtShinsaYM(getパターン51(kyufujissekiJutakuKaishuhi.get審査年月()));
                 rowList.add(row);
@@ -199,10 +197,10 @@ public class JyutakuKayisyuHiHandler {
             div.getCcdKyufuJissekiHeader().set実績区分(ヘッダ情報2.get(index + i).get給付実績区分コード());
             div.getCcdKyufuJissekiHeader().set整理番号(ヘッダ情報2.get(index + i).get整理番号());
             div.getCcdKyufuJissekiHeader().set識別番号名称(ヘッダ情報2.get(index + i).get識別番号名称());
-            div.getCcdKyufuJissekiHeader().set事業者番号(ヘッダ情報2.get(index + i).get事業所番号().value());
+            div.getCcdKyufuJissekiHeader().set事業者番号(check事業所番号Null(ヘッダ情報2.get(index + i).get事業所番号()));
             div.getCcdKyufuJissekiHeader().set様式番号(ヘッダ情報2.get(index + i).get識別番号());
             setDataGrid(引き継ぎ情報, ヘッダ情報2.get(index + i).getサービス提供年月(),
-                    ヘッダ情報2.get(index + i).get事業所番号().value(), ヘッダ情報2.get(index + i).get整理番号(),
+                    check事業所番号Null(ヘッダ情報2.get(index + i).get事業所番号()), ヘッダ情報2.get(index + i).get整理番号(),
                     ヘッダ情報2.get(index + i).get給付実績区分コード(), ヘッダ情報2.get(index + i).get識別番号());
         }
     }
@@ -263,11 +261,11 @@ public class JyutakuKayisyuHiHandler {
 
     private int get事業者番号index(List<KyufuJissekiHedajyoho2> 事業者番号リスト, RString 整理番号, RString 事業者番号, RString 様式番号, RString サービス提供年月, RString 実績区分コード) {
         for (int index = 0; index < 事業者番号リスト.size(); index++) {
-            if (事業者番号.equals(事業者番号リスト.get(index).get事業所番号().value())
-                    && 整理番号.equals(事業者番号リスト.get(index).get整理番号())
-                    && 様式番号.equals(事業者番号リスト.get(index).get識別番号())
-                    && サービス提供年月.equals(事業者番号リスト.get(index).getサービス提供年月().toDateString())
-                    && 実績区分コード.equals(事業者番号リスト.get(index).get給付実績区分コード())) {
+            if (check事業所番号Null(事業者番号リスト.get(index).get事業所番号()).equals(事業者番号)
+                    && nullToEMPTY(事業者番号リスト.get(index).get整理番号()).equals(整理番号)
+                    && nullToEMPTY(事業者番号リスト.get(index).get識別番号()).equals(様式番号)
+                    && 事業者番号リスト.get(index).getサービス提供年月().toDateString().equals(サービス提供年月)
+                    && nullToEMPTY(事業者番号リスト.get(index).get給付実績区分コード()).equals(実績区分コード)) {
                 return index;
             }
         }
@@ -304,14 +302,14 @@ public class JyutakuKayisyuHiHandler {
         List<dgJutakuKaishuhi_Row> rowList = new ArrayList<>();
         for (KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi : 給付実績住宅改修費List) {
             if (kyufujissekiJutakuKaishuhi.getサービス提供年月().equals(サービス提供年月)
-                    && 事業者番号.equals(kyufujissekiJutakuKaishuhi.get事業所番号().value())
-                    && 整理番号.equals(kyufujissekiJutakuKaishuhi.get整理番号())
-                    && 様式番号.equals(kyufujissekiJutakuKaishuhi.get入力識別番号().value())) {
+                    && check事業所番号Null(kyufujissekiJutakuKaishuhi.get事業所番号()).equals(事業者番号)
+                    && nullToEMPTY(kyufujissekiJutakuKaishuhi.get整理番号()).equals(整理番号)
+                    && check入力識別番号Null(kyufujissekiJutakuKaishuhi.get入力識別番号()).equals(様式番号)) {
                 dgJutakuKaishuhi_Row row = new dgJutakuKaishuhi_Row();
-                row.setTxtService(kyufujissekiJutakuKaishuhi.getサービスコード().value());
+                row.setTxtService(checkサービスコード(kyufujissekiJutakuKaishuhi.getサービスコード()));
                 row.setTxtChakkoYMD(getパターン1(kyufujissekiJutakuKaishuhi.get住宅改修着工年月日()));
-                row.setTxtJigyoshaName(kyufujissekiJutakuKaishuhi.get住宅改修事業者名());
-                row.setTxtJusho(kyufujissekiJutakuKaishuhi.get住宅改修住宅住所());
+                row.setTxtJigyoshaName(nullToEMPTY(kyufujissekiJutakuKaishuhi.get住宅改修事業者名()));
+                row.setTxtJusho(nullToEMPTY(kyufujissekiJutakuKaishuhi.get住宅改修住宅住所()));
                 row.setTxtHiyo(DecimalFormatter.toコンマ区切りRString(kyufujissekiJutakuKaishuhi.get改修金額(), 0));
                 row.setTxtShinsaYM(getパターン51(kyufujissekiJutakuKaishuhi.get審査年月()));
                 rowList.add(row);
@@ -322,5 +320,33 @@ public class JyutakuKayisyuHiHandler {
         set前月と次月の状態(給付実績住宅改修費List, サービス提供年月);
         List<KyufuJissekiHedajyoho2> ヘッダ情報2 = 引き継ぎ情報.getCommonHeader().get給付実績ヘッダ情報2();
         set前事業者と後事業者の状態(ヘッダ情報2, サービス提供年月, 事業者番号, 実績区分コード, 整理番号, 様式番号);
+    }
+
+    private RString nullToEMPTY(RString 項目) {
+        if (!RString.isNullOrEmpty(項目)) {
+            return 項目;
+        }
+        return RString.EMPTY;
+    }
+
+    private RString check事業所番号Null(JigyoshaNo 事業所番号) {
+        if (事業所番号 != null && !事業所番号.isEmpty()) {
+            return 事業所番号.value();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString check入力識別番号Null(NyuryokuShikibetsuNo 入力識別番号) {
+        if (入力識別番号 != null && !入力識別番号.isEmpty()) {
+            return 入力識別番号.value();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString checkサービスコード(ServiceCode サービスコード) {
+        if (サービスコード != null && !サービスコード.isEmpty()) {
+            return サービスコード.value();
+        }
+        return RString.EMPTY;
     }
 }
