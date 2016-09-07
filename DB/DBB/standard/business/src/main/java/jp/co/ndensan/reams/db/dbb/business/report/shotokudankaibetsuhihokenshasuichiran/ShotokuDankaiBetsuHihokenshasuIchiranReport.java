@@ -61,7 +61,7 @@ public class ShotokuDankaiBetsuHihokenshasuIchiranReport extends Report<ShotokuD
         IShotokuDankaiBetsuHihokenshasuIchiranEditor bodyEditor
                 = new ShotokuDankaiBetsuHihokenshasuIchiranBodyEditor(保険者設定段階別被保険者数合計entity,
                         標準設定段階別被保険者数合計entity, 作成日時, 年度, hokenryoDankaiList);
-        ShotokuDankaiBetsuHihokenshasuIchiranBuilder builder = new ShotokuDankaiBetsuHihokenshasuIchiranBuilder(headerEditor, bodyEditor);
+        IShotokuDankaiBetsuHihokenshasuIchiranBuilder builder = new ShotokuDankaiBetsuHihokenshasuIchiranBuilder(headerEditor, bodyEditor);
         writer.writeLine(builder);
     }
 
