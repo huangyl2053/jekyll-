@@ -16,9 +16,11 @@ public enum DBC1100011StateName implements IStateEnumerations {
 
     NoChange(""),
     Default("default"),
-    申請情報("申請情報"),
+    申請登録("申請登録"),
+    変更取下げ("変更取下げ"),
     申請登録加入履歴一覧("申請登録加入履歴一覧"),
-    申請登録加入履歴情報("申請登録加入履歴情報");
+    申請登録加入履歴情報("申請登録加入履歴情報"),
+    処理完了("処理完了");
 
     private final RString name;
 
