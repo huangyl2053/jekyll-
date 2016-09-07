@@ -13,6 +13,10 @@ package jp.co.ndensan.reams.db.dbx.definition.core.viewstate;
 public enum ViewStateKeys {
 
     /**
+     * 場合
+     */
+    場合,
+    /**
      * 最新の処理年月
      */
     最新の処理年月,
