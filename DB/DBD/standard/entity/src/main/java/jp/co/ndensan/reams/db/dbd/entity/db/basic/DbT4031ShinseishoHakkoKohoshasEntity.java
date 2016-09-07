@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
  * <br/> 申請書把握処理で候補者として判断された情報を保持する。
  */
 public class DbT4031ShinseishoHakkoKohoshasEntity extends DbTableEntityBase<DbT4031ShinseishoHakkoKohoshasEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4031ShinseishoHakkoKohoshas");
 
@@ -45,6 +45,7 @@ public class DbT4031ShinseishoHakkoKohoshasEntity extends DbTableEntityBase<DbT4
     private RString riyoshaFutanDankai;
     private Decimal gokeiShotokuKingaku;
     private Decimal nenkinShunyuGaku;
+    private Decimal hikazeinenkinKananGaku;
     private JigyoshaNo jigyoshaNo;
 
     /**
@@ -294,6 +295,29 @@ public class DbT4031ShinseishoHakkoKohoshasEntity extends DbTableEntityBase<DbT4
     }
 
     /**
+     * 非課税年金勘案額のgetメソッドです。
+     * <br/>
+     * <br/>減免減額申請書発行用対象者把握時に把握された、非課税年金対象者テーブルから引用する金額
+     * 
+     * @return 非課税年金勘案額
+     */
+    @CheckForNull
+    public Decimal getHikazeinenkinKananGaku() {
+        return hikazeinenkinKananGaku;
+    }
+
+    /**
+     * 非課税年金勘案額のsetメソッドです。
+     * <br/>
+     * <br/>減免減額申請書発行用対象者把握時に把握された、非課税年金対象者テーブルから引用する金額
+     * 
+     * @param hikazeinenkinKananGaku 非課税年金勘案額
+     */
+    public void setHikazeinenkinKananGaku(Decimal hikazeinenkinKananGaku) {
+        this.hikazeinenkinKananGaku = hikazeinenkinKananGaku;
+    }
+
+    /**
      * 事業者番号のgetメソッドです。
      * 
      * @return 事業者番号
@@ -349,6 +373,7 @@ public class DbT4031ShinseishoHakkoKohoshasEntity extends DbTableEntityBase<DbT4
         this.riyoshaFutanDankai = entity.riyoshaFutanDankai;
         this.gokeiShotokuKingaku = entity.gokeiShotokuKingaku;
         this.nenkinShunyuGaku = entity.nenkinShunyuGaku;
+        this.hikazeinenkinKananGaku = entity.hikazeinenkinKananGaku;
         this.jigyoshaNo = entity.jigyoshaNo;
     }
 
@@ -358,8 +383,9 @@ public class DbT4031ShinseishoHakkoKohoshasEntity extends DbTableEntityBase<DbT4
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(haakuShoriID, hihokenshaNo, willBeRenewed, shikibetsuCode, setaiKazeiKubun, honninKazeiKubun, isRoreiFukushiNenkinJukyusha, isSeikatsuHogoJukyusha, riyoshaFutanDankai, gokeiShotokuKingaku, nenkinShunyuGaku, jigyoshaNo);
+        return super.toMd5(haakuShoriID, hihokenshaNo, willBeRenewed, shikibetsuCode, setaiKazeiKubun, honninKazeiKubun, isRoreiFukushiNenkinJukyusha, isSeikatsuHogoJukyusha, riyoshaFutanDankai, gokeiShotokuKingaku, nenkinShunyuGaku, hikazeinenkinKananGaku, jigyoshaNo);
     }
 
 // </editor-fold>
+
 }

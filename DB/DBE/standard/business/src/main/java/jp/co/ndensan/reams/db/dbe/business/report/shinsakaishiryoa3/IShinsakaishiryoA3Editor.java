@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa3.Shinsak
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 事務局用介護認定審査対象者一覧表A3ヘッダエディターのインターフェースクラスです。
+ * 介護認定審査対象者一覧表A3ヘッダエディターのインターフェースクラスです。
  *
- * @reamsid_L DBE-0150-020 lishengli
+ * @reamsid_L DBE-0150-230 lishengli
  */
 interface IShinsakaishiryoA3Editor extends IReportEditor<ShinsakaishiryoA3ReportSource> {
 

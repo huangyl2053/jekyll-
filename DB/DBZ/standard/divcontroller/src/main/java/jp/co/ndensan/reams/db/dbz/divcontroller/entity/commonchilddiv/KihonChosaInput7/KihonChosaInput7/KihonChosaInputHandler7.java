@@ -11,8 +11,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
+import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaSpecial;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
+import jp.co.ndensan.reams.db.dbz.service.core.kihonchosainput.KihonChosaInputFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -71,6 +73,8 @@ public class KihonChosaInputHandler7 {
         KihonChosaInput 障害高齢者認定調査基本情報 = 認定調査基本情報リスト.get(0);
         KihonChosaInput 認知症高齢者認定調査基本情報 = 認定調査基本情報リスト.get(1);
         KihonChosaInput new障害高齢者認定調査基本情報 = new KihonChosaInput(
+                障害高齢者認定調査基本情報.get申請書管理番号(),
+                障害高齢者認定調査基本情報.get認定調査依頼履歴番号(),
                 障害高齢者認定調査基本情報.get認知症高齢者自立度(),
                 get日常生活自立度(障害高齢者の日常生活自立度_寝たきり度Key),
                 障害高齢者認定調査基本情報.get調査連番(),
@@ -79,12 +83,10 @@ public class KihonChosaInputHandler7 {
                 障害高齢者認定調査基本情報.get前回障害高齢者自立度(),
                 障害高齢者認定調査基本情報.get前回調査連番(),
                 障害高齢者認定調査基本情報.get前回調査項目(),
-                障害高齢者認定調査基本情報.get認定調査特記事項番号(),
-                障害高齢者認定調査基本情報.get認定調査特記事項連番(),
-                障害高齢者認定調査基本情報.get原本マスク区分(),
-                障害高齢者認定調査基本情報.get特記事項(),
                 障害高齢者認定調査基本情報.is特記事項有無());
         KihonChosaInput new認知症高齢者認定調査基本情報 = new KihonChosaInput(
+                認知症高齢者認定調査基本情報.get申請書管理番号(),
+                認知症高齢者認定調査基本情報.get認定調査依頼履歴番号(),
                 get日常生活自立度(認知症高齢者の日常生活自立度Key),
                 認知症高齢者認定調査基本情報.get障害高齢者自立度(),
                 認知症高齢者認定調査基本情報.get調査連番(),
@@ -93,10 +95,6 @@ public class KihonChosaInputHandler7 {
                 認知症高齢者認定調査基本情報.get前回障害高齢者自立度(),
                 認知症高齢者認定調査基本情報.get前回調査連番(),
                 認知症高齢者認定調査基本情報.get前回調査項目(),
-                認知症高齢者認定調査基本情報.get認定調査特記事項番号(),
-                認知症高齢者認定調査基本情報.get認定調査特記事項連番(),
-                認知症高齢者認定調査基本情報.get原本マスク区分(),
-                認知症高齢者認定調査基本情報.get特記事項(),
                 認知症高齢者認定調査基本情報.is特記事項有無());
         認定調査基本情報リスト.clear();
         認定調査基本情報リスト.add(new障害高齢者認定調査基本情報);
@@ -147,59 +145,61 @@ public class KihonChosaInputHandler7 {
         if (!this.認定調査前回結果表示.equals(認定調査前回結果表示)) {
             div.getZenkaiHyojiTeiji().setDisplayNone(true);
         }
+        List<RString> 認定調査特記情報List = get特記事項番号List(申請書管理番号);
+        ArrayList<RString> 認定調査特記情報ArrayList = new ArrayList<>(認定調査特記情報List);
+        div.getJiritsudo().setNinteichosaTokkijikoNoList(DataPassingConverter.serialize(認定調査特記情報ArrayList));
         onLoad第七群自立度(認定調査基本情報リスト, 認定調査前回結果表示);
+    }
+
+    private List<RString> get特記事項番号List(ShinseishoKanriNo 申請書管理番号) {
+        KihonChosaInputFinder finder = KihonChosaInputFinder.createInstance();
+        List<KihonChosaSpecial> 認定調査特記情報List = finder.get認定調査特記情報(申請書管理番号);
+        List<RString> 特記事項番号List = new ArrayList<>();
+        for (KihonChosaSpecial 認定調査特記情報 : 認定調査特記情報List) {
+            特記事項番号List.add(認定調査特記情報.get認定調査特記事項番号());
+        }
+        return 特記事項番号List;
     }
 
     private void onLoad第七群自立度(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
         List<RString> 障害高齢者の日常生活自立度_寝たきり度Keys = new ArrayList<>();
         List<RString> 前回障害高齢者の日常生活自立度_寝たきり度Keys = new ArrayList<>();
-        List<RString> 障害高齢者特記事項番号 = new ArrayList<>();
         List<RString> 認知症高齢者の日常生活自立度Keys = new ArrayList<>();
         List<RString> 前回認知症高齢者の日常生活自立度Keys = new ArrayList<>();
-        List<RString> 認知症高齢者特記事項番号 = new ArrayList<>();
         KihonChosaInput 障害高齢者認定調査基本情報 = 認定調査基本情報リスト.get(0);
         KihonChosaInput 認知症高齢者認定調査基本情報 = 認定調査基本情報リスト.get(1);
         div.getBtnShogaiKoreisha().setDisabled(!障害高齢者認定調査基本情報.is特記事項有無());
         div.getBtnNinchishaJiritsudo().setDisabled(!認知症高齢者認定調査基本情報.is特記事項有無());
         set障害高齢者の日常生活自立度_寝たきり度Keys(障害高齢者の日常生活自立度_寝たきり度Keys,
-                前回障害高齢者の日常生活自立度_寝たきり度Keys, 障害高齢者認定調査基本情報, 障害高齢者特記事項番号);
+                前回障害高齢者の日常生活自立度_寝たきり度Keys, 障害高齢者認定調査基本情報);
         set認知症高齢者の日常生活自立度Keys(認知症高齢者の日常生活自立度Keys,
-                前回認知症高齢者の日常生活自立度Keys, 認知症高齢者認定調査基本情報, 認知症高齢者特記事項番号);
+                前回認知症高齢者の日常生活自立度Keys, 認知症高齢者認定調査基本情報);
         障害高齢者の日常生活自立度_寝たきり度画面表示(障害高齢者の日常生活自立度_寝たきり度Keys,
-                前回障害高齢者の日常生活自立度_寝たきり度Keys, 認定調査前回結果表示, 障害高齢者特記事項番号);
+                前回障害高齢者の日常生活自立度_寝たきり度Keys, 認定調査前回結果表示);
         認知症高齢者の日常生活自立度画面表示(認知症高齢者の日常生活自立度Keys,
-                前回認知症高齢者の日常生活自立度Keys, 認定調査前回結果表示, 認知症高齢者特記事項番号);
+                前回認知症高齢者の日常生活自立度Keys, 認定調査前回結果表示);
     }
 
     private void set認知症高齢者の日常生活自立度Keys(List<RString> 認知症高齢者の日常生活自立度Keys,
-            List<RString> 前回認知症高齢者の日常生活自立度Keys, KihonChosaInput 認定調査基本情報, List<RString> 認知症高齢者特記事項番号) {
+            List<RString> 前回認知症高齢者の日常生活自立度Keys, KihonChosaInput 認定調査基本情報) {
         RString 認知症高齢者自立度RString = 認定調査基本情報.get認知症高齢者自立度().getColumnValue();
         RString 前回認知症高齢者自立度RString = 認定調査基本情報.get前回認知症高齢者自立度().getColumnValue();
-        RString 特記事項番号 = 認定調査基本情報.get認定調査特記事項番号();
         if (NinchishoNichijoSeikatsuJiritsudoCode.自立.getコード().equals(認知症高齢者自立度RString)) {
             認知症高齢者の日常生活自立度Keys.add(KEY0);
-            認知症高齢者特記事項番号.add(特記事項番号);
         } else if (NinchishoNichijoSeikatsuJiritsudoCode.Ⅰ.getコード().equals(認知症高齢者自立度RString)) {
             認知症高齢者の日常生活自立度Keys.add(KEY1);
-            認知症高齢者特記事項番号.add(特記事項番号);
         } else if (NinchishoNichijoSeikatsuJiritsudoCode.Ⅱa.getコード().equals(認知症高齢者自立度RString)) {
             認知症高齢者の日常生活自立度Keys.add(KEY2);
-            認知症高齢者特記事項番号.add(特記事項番号);
         } else if (NinchishoNichijoSeikatsuJiritsudoCode.Ⅱb.getコード().equals(認知症高齢者自立度RString)) {
             認知症高齢者の日常生活自立度Keys.add(KEY3);
-            認知症高齢者特記事項番号.add(特記事項番号);
         } else if (NinchishoNichijoSeikatsuJiritsudoCode.Ⅲa.getコード().equals(認知症高齢者自立度RString)) {
             認知症高齢者の日常生活自立度Keys.add(KEY4);
-            認知症高齢者特記事項番号.add(特記事項番号);
         } else if (NinchishoNichijoSeikatsuJiritsudoCode.Ⅲb.getコード().equals(認知症高齢者自立度RString)) {
             認知症高齢者の日常生活自立度Keys.add(KEY5);
-            認知症高齢者特記事項番号.add(特記事項番号);
         } else if (NinchishoNichijoSeikatsuJiritsudoCode.Ⅳ.getコード().equals(認知症高齢者自立度RString)) {
             認知症高齢者の日常生活自立度Keys.add(KEY6);
-            認知症高齢者特記事項番号.add(特記事項番号);
         } else if (NinchishoNichijoSeikatsuJiritsudoCode.M.getコード().equals(認知症高齢者自立度RString)) {
             認知症高齢者の日常生活自立度Keys.add(KEY7);
-            認知症高齢者特記事項番号.add(特記事項番号);
         }
         if (NinchishoNichijoSeikatsuJiritsudoCode.自立.getコード().equals(前回認知症高齢者自立度RString)) {
             前回認知症高齢者の日常生活自立度Keys.add(KEY0);
@@ -221,10 +221,8 @@ public class KihonChosaInputHandler7 {
     }
 
     private void 認知症高齢者の日常生活自立度画面表示(List<RString> 認知症高齢者の日常生活自立度Keys,
-            List<RString> 前回認知症高齢者の日常生活自立度Keys, RString 認定調査前回結果表示, List<RString> 認知症高齢者特記事項番号) {
+            List<RString> 前回認知症高齢者の日常生活自立度Keys, RString 認定調査前回結果表示) {
         if (!認知症高齢者の日常生活自立度Keys.isEmpty()) {
-            div.getNinchishaJiritsudo().setNinchishaJiritsudoShinseishoKanriNo(
-                    DataPassingConverter.serialize(new ArrayList<>(認知症高齢者特記事項番号)));
             div.getRadNinchishaJiritsudo().setSelectedKey(認知症高齢者の日常生活自立度Keys.get(0));
         }
         if (this.認定調査前回結果表示.equals(認定調査前回結果表示)) {
@@ -265,37 +263,27 @@ public class KihonChosaInputHandler7 {
     }
 
     private void set障害高齢者の日常生活自立度_寝たきり度Keys(List<RString> 障害高齢者の日常生活自立度_寝たきり度Keys,
-            List<RString> 前回障害高齢者の日常生活自立度_寝たきり度Keys, KihonChosaInput 認定調査基本情報, List<RString> 障害高齢者特記事項番号) {
+            List<RString> 前回障害高齢者の日常生活自立度_寝たきり度Keys, KihonChosaInput 認定調査基本情報) {
         RString 障害高齢者自立度RString = 認定調査基本情報.get障害高齢者自立度().getColumnValue();
         RString 前回障害高齢者自立度RString = 認定調査基本情報.get前回障害高齢者自立度().getColumnValue();
-        RString 特記事項番号 = 認定調査基本情報.get認定調査特記事項番号();
         if (ShogaiNichijoSeikatsuJiritsudoCode.自立.getコード().equals(障害高齢者自立度RString)) {
             障害高齢者の日常生活自立度_寝たきり度Keys.add(KEY0);
-            障害高齢者特記事項番号.add(特記事項番号);
         } else if (ShogaiNichijoSeikatsuJiritsudoCode.J1.getコード().equals(障害高齢者自立度RString)) {
             障害高齢者の日常生活自立度_寝たきり度Keys.add(KEY1);
-            障害高齢者特記事項番号.add(特記事項番号);
         } else if (ShogaiNichijoSeikatsuJiritsudoCode.J2.getコード().equals(障害高齢者自立度RString)) {
             障害高齢者の日常生活自立度_寝たきり度Keys.add(KEY2);
-            障害高齢者特記事項番号.add(特記事項番号);
         } else if (ShogaiNichijoSeikatsuJiritsudoCode.A1.getコード().equals(障害高齢者自立度RString)) {
             障害高齢者の日常生活自立度_寝たきり度Keys.add(KEY3);
-            障害高齢者特記事項番号.add(特記事項番号);
         } else if (ShogaiNichijoSeikatsuJiritsudoCode.A2.getコード().equals(障害高齢者自立度RString)) {
             障害高齢者の日常生活自立度_寝たきり度Keys.add(KEY4);
-            障害高齢者特記事項番号.add(特記事項番号);
         } else if (ShogaiNichijoSeikatsuJiritsudoCode.B1.getコード().equals(障害高齢者自立度RString)) {
             障害高齢者の日常生活自立度_寝たきり度Keys.add(KEY5);
-            障害高齢者特記事項番号.add(特記事項番号);
         } else if (ShogaiNichijoSeikatsuJiritsudoCode.B2.getコード().equals(障害高齢者自立度RString)) {
             障害高齢者の日常生活自立度_寝たきり度Keys.add(KEY6);
-            障害高齢者特記事項番号.add(特記事項番号);
         } else if (ShogaiNichijoSeikatsuJiritsudoCode.C1.getコード().equals(障害高齢者自立度RString)) {
             障害高齢者の日常生活自立度_寝たきり度Keys.add(KEY7);
-            障害高齢者特記事項番号.add(特記事項番号);
         } else if (ShogaiNichijoSeikatsuJiritsudoCode.C2.getコード().equals(障害高齢者自立度RString)) {
             障害高齢者の日常生活自立度_寝たきり度Keys.add(KEY8);
-            障害高齢者特記事項番号.add(特記事項番号);
         }
         if (ShogaiNichijoSeikatsuJiritsudoCode.自立.getコード().equals(前回障害高齢者自立度RString)) {
             前回障害高齢者の日常生活自立度_寝たきり度Keys.add(KEY0);
@@ -319,9 +307,8 @@ public class KihonChosaInputHandler7 {
     }
 
     private void 障害高齢者の日常生活自立度_寝たきり度画面表示(List<RString> 障害高齢者の日常生活自立度_寝たきり度Keys,
-            List<RString> 前回障害高齢者の日常生活自立度_寝たきり度Keys, RString 認定調査前回結果表示, List<RString> 障害高齢者特記事項番号) {
+            List<RString> 前回障害高齢者の日常生活自立度_寝たきり度Keys, RString 認定調査前回結果表示) {
         if (!障害高齢者の日常生活自立度_寝たきり度Keys.isEmpty()) {
-            div.getShogaiKoreisha().setShogaiKoreishaShinseishoKanriNo(DataPassingConverter.serialize(new ArrayList<>(障害高齢者特記事項番号)));
             div.getRadShogaiKoreisha().setSelectedKey(障害高齢者の日常生活自立度_寝たきり度Keys.get(0));
         }
         if (this.認定調査前回結果表示.equals(認定調査前回結果表示)) {

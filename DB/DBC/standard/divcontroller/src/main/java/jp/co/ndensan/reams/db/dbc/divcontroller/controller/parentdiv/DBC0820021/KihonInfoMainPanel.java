@@ -9,23 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.DBC0820021StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.DBC0820021TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.KihonInfoMainPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820021.KihonInfoMainPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820021.KihonInfoMainPanelValidationHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.SikibetuNokennsakuki;
+import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
-import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -74,7 +74,7 @@ public class KihonInfoMainPanel {
      */
     public ResponseData<KihonInfoMainPanelDiv> onLoad(KihonInfoMainPanelDiv div) {
 
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.明細検索キー,
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
@@ -93,9 +93,9 @@ public class KihonInfoMainPanel {
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             ShoukanharaihishinseimeisaikensakuParameter parameter = new ShoukanharaihishinseimeisaikensakuParameter(
                     被保険者番号, サービス年月, 申請日, 整理番号, 事業者番号, 様式番号, 固定明細番号);
-            ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, parameter);
+            ViewStateHolder.put(ViewStateKeys.明細検索キー, parameter);
         }
-        ShoukanharaihishinseikensakuParameter 償還払費申請検索 = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+        ShoukanharaihishinseikensakuParameter 償還払費申請検索 = ViewStateHolder.get(ViewStateKeys.申請検索キー,
                 ShoukanharaihishinseikensakuParameter.class);
         SikibetuNokennsakuki sikibetuKey = new SikibetuNokennsakuki(償還払費申請検索.getYoshikiNo(),
                 償還払費申請検索.getServiceTeikyoYM());
@@ -119,7 +119,7 @@ public class KihonInfoMainPanel {
                 throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
             }
             getHandler(div).set基本情報(shokanKihon, サービス年月, list, 様式番号);
-            ViewStateHolder.put(ViewStateKeys.償還払請求基本データ, shokanKihon);
+            ViewStateHolder.put(ViewStateKeys.基本データ, shokanKihon);
         }
 
         SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
@@ -128,7 +128,7 @@ public class KihonInfoMainPanel {
         if (entity == null) {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         } else {
-            ShoukanharaihishinseimeisaikensakuParameter 明細検索キー = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+            ShoukanharaihishinseimeisaikensakuParameter 明細検索キー = ViewStateHolder.get(ViewStateKeys.明細検索キー,
                     ShoukanharaihishinseimeisaikensakuParameter.class);
             getHandler(div).getボタンを制御(entity, 明細検索キー);
         }
@@ -156,7 +156,7 @@ public class KihonInfoMainPanel {
             return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.一覧に戻る).respond();
         }
         boolean flag = getHandler(div).get内容変更状態(
-                ViewStateHolder.get(ViewStateKeys.償還払請求基本データ, ShokanKihon.class),
+                ViewStateHolder.get(ViewStateKeys.基本データ, ShokanKihon.class),
                 ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
                 ViewStateHolder.get(ViewStateKeys.様式番号List, List.class),
                 ViewStateHolder.get(ViewStateKeys.様式番号, RString.class));
@@ -188,7 +188,7 @@ public class KihonInfoMainPanel {
             List<RString> 様式番号List = ViewStateHolder.get(ViewStateKeys.様式番号List, List.class);
             FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
             RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-            boolean flag = getHandler(div).get内容変更状態(ViewStateHolder.get(ViewStateKeys.償還払請求基本データ, ShokanKihon.class),
+            boolean flag = getHandler(div).get内容変更状態(ViewStateHolder.get(ViewStateKeys.基本データ, ShokanKihon.class),
                     サービス年月,
                     様式番号List,
                     様式番号);
@@ -213,9 +213,9 @@ public class KihonInfoMainPanel {
         try {
             if (!ResponseHolder.isReRequest()) {
                 getHandler(div).保存処理(
-                        ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                        ViewStateHolder.get(ViewStateKeys.明細検索キー,
                                 ShoukanharaihishinseimeisaikensakuParameter.class),
-                        ViewStateHolder.get(ViewStateKeys.償還払請求基本データ, ShokanKihon.class),
+                        ViewStateHolder.get(ViewStateKeys.基本データ, ShokanKihon.class),
                         ViewStateHolder.get(ViewStateKeys.処理モード, RString.class),
                         ViewStateHolder.get(ViewStateKeys.様式番号List, List.class));
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
@@ -295,9 +295,9 @@ public class KihonInfoMainPanel {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             RString 明細番号 = getHandler(div).保存処理(
-                    ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                    ViewStateHolder.get(ViewStateKeys.明細検索キー,
                             ShoukanharaihishinseimeisaikensakuParameter.class),
-                    ViewStateHolder.get(ViewStateKeys.償還払請求基本データ, ShokanKihon.class),
+                    ViewStateHolder.get(ViewStateKeys.基本データ, ShokanKihon.class),
                     ViewStateHolder.get(ViewStateKeys.処理モード, RString.class),
                     ViewStateHolder.get(ViewStateKeys.様式番号List, List.class));
             getHandler(div).set明細番号(明細番号);
@@ -309,9 +309,9 @@ public class KihonInfoMainPanel {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() != MessageDialogSelectedResult.No) {
             RString 明細番号 = getHandler(div).保存処理(
-                    ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                    ViewStateHolder.get(ViewStateKeys.明細検索キー,
                             ShoukanharaihishinseimeisaikensakuParameter.class),
-                    ViewStateHolder.get(ViewStateKeys.償還払請求基本データ, ShokanKihon.class),
+                    ViewStateHolder.get(ViewStateKeys.基本データ, ShokanKihon.class),
                     ViewStateHolder.get(ViewStateKeys.処理モード, RString.class),
                     ViewStateHolder.get(ViewStateKeys.様式番号List, List.class));
             getHandler(div).set明細番号(明細番号);
@@ -491,7 +491,7 @@ public class KihonInfoMainPanel {
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
                 ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class));
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
+        ViewStateHolder.put(ViewStateKeys.申請検索キー, paramter);
     }
 
     private KihonInfoMainPanelHandler getHandler(KihonInfoMainPanelDiv div) {

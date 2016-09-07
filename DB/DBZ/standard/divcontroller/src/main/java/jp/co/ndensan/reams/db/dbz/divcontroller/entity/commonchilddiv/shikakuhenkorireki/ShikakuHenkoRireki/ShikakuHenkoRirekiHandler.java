@@ -70,7 +70,6 @@ public class ShikakuHenkoRirekiHandler {
     private static final RString MENUID_DBAMN52003 = new RString("DBAMN52003");
     private static final RString MENUID_DBAMN52004 = new RString("DBAMN52004");
     private static final RString MENUID_DBAMN52002 = new RString("DBAMN52002");
-
     private static final RString MENUID_DBAMN23001 = new RString("DBAMN23001");
     private static final RString MENUID_DBAMN23002 = new RString("DBAMN23002");
     private static final RString MENUID_DBAMN23003 = new RString("DBAMN23003");
@@ -132,12 +131,13 @@ public class ShikakuHenkoRirekiHandler {
             }
         } else if (ShikakuHenkoRirekiDiv.DisplayType.teiseitoroku.equals(div.getMode_DisplayType())) {
             div.setMode_ShoriNichijiDisplayMode(ShikakuHenkoRirekiDiv.ShoriNichijiDisplayMode.VisibleFalse);
-            div.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.toroku);
-            div.getBtnHenkoKakutei().setVisible(true);
-            div.getBtnHenkoTorikeshi().setVisible(true);
+            div.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.shokai);
         }
+//      <<<<<<< HEAD
         div.getHenkoInput().setDisabled(true);
         div.setInputMode(ViewExecutionStatus.Add.getValue());
+//      =======
+//      >>>>>>> origin / sync
     }
 
     /**
@@ -179,6 +179,8 @@ public class ShikakuHenkoRirekiHandler {
     public void clear資格変更入力Panel() {
         div.getTxtHenkoDate().clearValue();
         div.getTxtHenkoTodokedeDate().clearValue();
+//      <<<<<<< HEAD
+
         div.getDdlHenkoJiyu().setSelectedIndex(0);
 
         RString menuId = ResponseHolder.getMenuID();
@@ -192,6 +194,21 @@ public class ShikakuHenkoRirekiHandler {
             div.setDdlHenkoJiyu(ShikakuHenkoJiyu.その他.getコード(), false);
         }
 
+//        =======
+//        RString menuID = ResponseHolder.getMenuID();
+//        if (MENUID_DBAMN23001.equals(menuID)) {
+//            div.getDdlHenkoJiyu().setSelectedKey(ShikakuHenkoJiyu.転居.getコード());
+//            div.getDdlHenkoJiyu().setDisabled(true);
+//        } else if (MENUID_DBAMN23002.equals(menuID)) {
+//            div.getDdlHenkoJiyu().setSelectedKey(ShikakuHenkoJiyu.氏名変更.getコード());
+//            div.getDdlHenkoJiyu().setDisabled(true);
+//        } else if (MENUID_DBAMN23003.equals(menuID)) {
+//            div.getDdlHenkoJiyu().setSelectedKey(ShikakuHenkoJiyu.その他.getコード());
+//            div.getDdlHenkoJiyu().setDisabled(false);
+//        } else {
+//            div.getDdlHenkoJiyu().setSelectedIndex(0);
+//        }
+//        >>>>>>> origin/sync
         div.getDdlHenkoSochimotoHokensha().setSelectedIndex(0);
         div.getDdlHenkoKyuHokensha().setSelectedIndex(0);
         div.getDdlJuminJoho().setSelectedIndex(0);
@@ -587,8 +604,8 @@ public class ShikakuHenkoRirekiHandler {
     public boolean checkInputNewData() {
         for (dgHenko_Row row : div.getDgHenko().getDataSource()) {
             if (row.getState().equals(追加状態)
-                    || row.getState().equals(修正状態)
-                    || row.getState().equals(削除状態)) {
+                || row.getState().equals(修正状態)
+                || row.getState().equals(削除状態)) {
                 return true;
             }
         }

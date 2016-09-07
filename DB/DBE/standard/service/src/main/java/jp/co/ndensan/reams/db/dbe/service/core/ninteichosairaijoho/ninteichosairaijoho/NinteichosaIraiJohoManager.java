@@ -38,6 +38,15 @@ public class NinteichosaIraiJohoManager {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link NinteichosaIraiJohoManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link NinteichosaIraiJohoManager}のインスタンス
+     */
+    public static NinteichosaIraiJohoManager createInstance() {
+        return InstanceProvider.create(NinteichosaIraiJohoManager.class);
+    }
+
+    /**
      * 認定調査依頼情報{@link NinteichosaIraiJoho}を保存します。
      *
      * @param 認定調査依頼情報 {@link NinteichosaIraiJoho}

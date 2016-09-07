@@ -122,7 +122,6 @@ public class KyodoShoriyoJukyushaIdoShokanSofuBuilder {
      * @return {@link KyodoShoriyoJukyushaIdoShokanSofuBuilder}
      */
     public KyodoShoriyoJukyushaIdoShokanSofuBuilder set保険給付支払一時差止開始年月日(FlexibleDate 保険給付支払一時差止開始年月日) {
-        requireNonNull(保険給付支払一時差止開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("保険給付支払一時差止開始年月日"));
         entity.setHokenKyufuIchijiSashitomeKaishiYMD(保険給付支払一時差止開始年月日);
         return this;
     }
@@ -134,7 +133,6 @@ public class KyodoShoriyoJukyushaIdoShokanSofuBuilder {
      * @return {@link KyodoShoriyoJukyushaIdoShokanSofuBuilder}
      */
     public KyodoShoriyoJukyushaIdoShokanSofuBuilder set保険給付支払一時差止終了年月日(FlexibleDate 保険給付支払一時差止終了年月日) {
-        requireNonNull(保険給付支払一時差止終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("保険給付支払一時差止終了年月日"));
         entity.setHokenKyufuIchijiSashitomeShuryoYMD(保険給付支払一時差止終了年月日);
         return this;
     }
@@ -157,7 +155,6 @@ public class KyodoShoriyoJukyushaIdoShokanSofuBuilder {
      * @return {@link KyodoShoriyoJukyushaIdoShokanSofuBuilder}
      */
     public KyodoShoriyoJukyushaIdoShokanSofuBuilder set保険給付支払一時差止金額(Decimal 保険給付支払一時差止金額) {
-        requireNonNull(保険給付支払一時差止金額, UrSystemErrorMessages.値がnull.getReplacedMessage("保険給付支払一時差止金額"));
         entity.setHokenkyufuIchijiSashitomeKingaku(保険給付支払一時差止金額);
         return this;
     }
@@ -181,7 +178,6 @@ public class KyodoShoriyoJukyushaIdoShokanSofuBuilder {
      * @return {@link KyodoShoriyoJukyushaIdoShokanSofuBuilder}
      */
     public KyodoShoriyoJukyushaIdoShokanSofuBuilder set送付年月(FlexibleYearMonth 送付年月) {
-        requireNonNull(送付年月, UrSystemErrorMessages.値がnull.getReplacedMessage("送付年月"));
         entity.setSofuYM(送付年月);
         return this;
     }

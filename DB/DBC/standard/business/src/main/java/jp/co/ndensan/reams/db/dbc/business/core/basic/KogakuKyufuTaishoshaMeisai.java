@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額介護サービス費給付対象者明細を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-040 quxiaodong
  */
 public class KogakuKyufuTaishoshaMeisai
         extends ModelBase<KogakuKyufuTaishoshaMeisaiIdentifier, DbT3054KogakuKyufuTaishoshaMeisaiEntity, KogakuKyufuTaishoshaMeisai>
@@ -168,6 +169,15 @@ public class KogakuKyufuTaishoshaMeisai
     }
 
     /**
+     * 対象者受取年月を返します。
+     *
+     * @return 高額給付根拠
+     */
+    public FlexibleYearMonth get対象者受取年月() {
+        return entity.getTaishoshaUketoriYM();
+    }
+
+    /**
      * {@link DbT3054KogakuKyufuTaishoshaMeisaiEntity}のクローンを返します。
      *
      * @return {@link DbT3054KogakuKyufuTaishoshaMeisaiEntity}のクローン
@@ -196,13 +206,32 @@ public class KogakuKyufuTaishoshaMeisai
     @Override
     public KogakuKyufuTaishoshaMeisai deleted() {
         DbT3054KogakuKyufuTaishoshaMeisaiEntity deletedEntity = this.toEntity();
-        if (deletedEntity.getState() != EntityDataState.Added) {
-            deletedEntity.setState(EntityDataState.Deleted);
-        } else {
-            //TODO メッセージの検討
-            throw new IllegalStateException(UrErrorMessages.不正.toString());
-        }
+        deletedEntity.setState(EntityDataState.Deleted);
         return new KogakuKyufuTaishoshaMeisai(deletedEntity, id);
+    }
+
+    /**
+     * add KogakuKyufuTaishoshaMeisai
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public KogakuKyufuTaishoshaMeisai added() {
+        DbT3054KogakuKyufuTaishoshaMeisaiEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        //TODO メッセージの検討
+        return new KogakuKyufuTaishoshaMeisai(addedEntity, id);
+    }
+
+    /**
+     * 修正KogakuKyufuTaishoshaMeisai
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public KogakuKyufuTaishoshaMeisai modified() {
+        DbT3054KogakuKyufuTaishoshaMeisaiEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        //TODO メッセージの検討
+        return new KogakuKyufuTaishoshaMeisai(modifiedEntity, id);
     }
 
     /**

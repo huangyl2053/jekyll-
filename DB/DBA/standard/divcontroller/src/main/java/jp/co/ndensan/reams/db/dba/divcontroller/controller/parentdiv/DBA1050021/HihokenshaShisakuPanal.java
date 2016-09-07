@@ -125,7 +125,7 @@ public class HihokenshaShisakuPanal {
         施設入退所履歴期間重複チェック処理(div);
         List<HihokenshaDaicho> 資格訂正情報 = 資格訂正登録リスト取得処理(div);
         manager.checkShikakuTorukuList(資格訂正情報, get当該識別対象の生年月日(div));
-        資格訂正処理(資格訂正情報);
+        資格訂正処理(div, 資格訂正情報);
         div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
     }
 
@@ -183,10 +183,25 @@ public class HihokenshaShisakuPanal {
         return 資格訂正登録リスト;
     }
 
-    private void 資格訂正処理(List<HihokenshaDaicho> 資格訂正情報) {
+    private void 資格訂正処理(HihokenshaShisakuPanalDiv div, List<HihokenshaDaicho> 資格訂正情報) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        FlexibleDate 取得日 = ViewStateHolder.get(ViewStateKeys.資格得喪情報, ShikakuRirekiJoho.class).getShutokuDate();
-        FlexibleDate 喪失日 = ViewStateHolder.get(ViewStateKeys.資格得喪情報, ShikakuRirekiJoho.class).getSoshitsuDate();
+        FlexibleDate 取得日 = null;
+        FlexibleDate 喪失日 = null;
+        RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        if (状態_追加.equals(初期_状態)) {
+            TextBoxFlexibleDate shutokuDate = div.getShikakuShosai().getTxtShutokuDate();
+            TextBoxFlexibleDate soshitsuDate = div.getShikakuShosai().getTxtSoshitsuDate();
+            if (shutokuDate != null) {
+                取得日 = div.getShikakuShosai().getTxtShutokuDate().getValue();
+            }
+            if (soshitsuDate != null) {
+                喪失日 = div.getShikakuShosai().getTxtSoshitsuDate().getValue();
+            }
+        }
+        if (状態_修正.equals(初期_状態)) {
+            取得日 = ViewStateHolder.get(ViewStateKeys.資格得喪情報, ShikakuRirekiJoho.class).getShutokuDate();
+            喪失日 = ViewStateHolder.get(ViewStateKeys.資格得喪情報, ShikakuRirekiJoho.class).getSoshitsuDate();
+        }
         manager.saveHihokenshaShikakuTeisei(被保険者番号, 取得日, 喪失日, 資格訂正情報);
     }
 

@@ -8,13 +8,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.helper;
 import jp.co.ndensan.reams.db.dbc.business.core.KokuhorenJohoTorikomiValidator;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionary;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -33,9 +33,10 @@ public final class KokuhorenJohoTorikomiValidationHelper {
      */
     public static ValidationMessageControlPairs validate(CheckBoxList 同月過誤分, CheckBoxList 通常分, IChohyoShutsuryokujunDiv 出力順) {
         // チェックした際にメッセージが返された際に、該当するコントロールを メッセージとコントロールのペアとしてあらかじめ登録する。
-        ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionary(
-                new ValidationMessageControlPair(KokuhorenJohoTorikomiValiationMessage.選択されていない, 通常分, 同月過誤分),
-                new ValidationMessageControlPair(KokuhorenJohoTorikomiValiationMessage.出力順序を指定));
+        ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionaryBuilder()
+                .add(KokuhorenJohoTorikomiValiationMessage.選択されていない, 通常分, 同月過誤分)
+                .add(KokuhorenJohoTorikomiValiationMessage.出力順序を指定)
+                .build();
 
         // ビジネスパッケージクラスなどでコントロールの値チェックを行い、結果メッセージを受け取る
         IValidationMessages messages = (new KokuhorenJohoTorikomiValidator(同月過誤分, 通常分, 出力順.get出力順ID())).validate();

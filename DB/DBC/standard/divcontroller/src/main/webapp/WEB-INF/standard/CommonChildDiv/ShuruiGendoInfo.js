@@ -1,32 +1,32 @@
 var DBC;
 (function (DBC) {
-    (function (ShuruiGendoInfoCommonChildDiv) {
+    (function (ShuruiGendoInfo) {
         var ModeController = (function () {
             function ModeController(fieldName) {
                 this.fieldName = fieldName;
-                this.controls = new ShuruiGendoInfoCommonChildDiv.Controls(fieldName);
+                this.controls = new ShuruiGendoInfo.Controls(fieldName);
             }
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
 
             ModeController.prototype.PublicProperties = function () {
-                return new ShuruiGendoInfoCommonChildDiv.PublicProperties(this.fieldName);
+                return new ShuruiGendoInfo.PublicProperties(this.fieldName);
             };
             return ModeController;
         })();
-        ShuruiGendoInfoCommonChildDiv.ModeController = ModeController;
-    })(DBC.ShuruiGendoInfoCommonChildDiv || (DBC.ShuruiGendoInfoCommonChildDiv = {}));
-    var ShuruiGendoInfoCommonChildDiv = DBC.ShuruiGendoInfoCommonChildDiv;
+        ShuruiGendoInfo.ModeController = ModeController;
+    })(DBC.ShuruiGendoInfo || (DBC.ShuruiGendoInfo = {}));
+    var ShuruiGendoInfo = DBC.ShuruiGendoInfo;
 })(DBC || (DBC = {}));
 
 var DBC;
 (function (DBC) {
-    (function (ShuruiGendoInfoCommonChildDiv) {
+    (function (ShuruiGendoInfo) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
                 this.fieldName = fieldName;
-                this.controls = new ShuruiGendoInfoCommonChildDiv.Controls(fieldName);
+                this.controls = new ShuruiGendoInfo.Controls(fieldName);
             }
             PublicProperties.prototype.getEditTypes = function () {
                 var editTypes = new UZA.EditTypeForPublicProperty();
@@ -35,7 +35,7 @@ var DBC;
             };
             return PublicProperties;
         })();
-        ShuruiGendoInfoCommonChildDiv.PublicProperties = PublicProperties;
-    })(DBC.ShuruiGendoInfoCommonChildDiv || (DBC.ShuruiGendoInfoCommonChildDiv = {}));
-    var ShuruiGendoInfoCommonChildDiv = DBC.ShuruiGendoInfoCommonChildDiv;
+        ShuruiGendoInfo.PublicProperties = PublicProperties;
+    })(DBC.ShuruiGendoInfo || (DBC.ShuruiGendoInfo = {}));
+    var ShuruiGendoInfo = DBC.ShuruiGendoInfo;
 })(DBC || (DBC = {}));

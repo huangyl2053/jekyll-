@@ -7,15 +7,15 @@ package jp.co.ndensan.reams.db.dbb.service.core.shotokujohotyushuturenkeitanitu;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeitanitu.ShotokuJohoBatchresultTanituParameter;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeitanitu.ShotokuJohoTyushutuRenkeiTanituParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.shichoson.ShichosonJohoEntity;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShichosonJohoShutoku;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShutokuJohoChushutsuRenkeiBatchParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -33,6 +33,11 @@ public class ShotokuJohoChushutsuRenkeitanitu {
     private static final RString 不可 = new RString("2");
     private static final RString 可 = new RString("1");
     private static final RString 共有ファイル名 = new RString("BBKAIGO");
+    private static final RString 共有ファイルID = new RString("C:\\Users\\LDNS\\shared\\sharedFiles");
+    private static final RString 所得情報抽出_連携当初 = new RString("DBBMN51009");
+    private static final RString 所得情報抽出_連携異動 = new RString("DBBMN51010");
+    private static final RString 当初_単一 = new RString("3");
+    private static final RString 異動_単一 = new RString("4");
 
     ShotokuJohoChushutsuRenkeitanitu() {
         this.処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
@@ -105,17 +110,22 @@ public class ShotokuJohoChushutsuRenkeitanitu {
      * @param parameter ShotokuJohoTyushutuRenkeiKoikiParameter
      * @return ShotokuJohoBatchresultParameter createShotokuJohoParameter
      */
-    public ShotokuJohoBatchresultTanituParameter createShotokuJohoParameter(
-            ShotokuJohoTyushutuRenkeiTanituParameter parameter) {
-        ShotokuJohoBatchresultTanituParameter result = new ShotokuJohoBatchresultTanituParameter();
-        List<ShichosonJohoEntity> 市町村情報List = new ArrayList<>();
+    public ShutokuJohoChushutsuRenkeiBatchParameter createShotokuJohoParameter(
+            ShutokuJohoChushutsuRenkeiBatchParameter parameter) {
+        ShutokuJohoChushutsuRenkeiBatchParameter result = new ShutokuJohoChushutsuRenkeiBatchParameter();
+        List<ShichosonJohoShutoku> 市町村情報List = new ArrayList<>();
         result.set処理年度(parameter.get処理年度());
         result.set市町村情報List(市町村情報List);
         result.set出力順ID(parameter.get出力順ID());
         result.set帳票ID(new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran"));
         result.set共有ファイル名(共有ファイル名);
-        result.set共有ファイルID(parameter.get共有ファイルID());
-        result.set処理区分(parameter.get処理区分());
+        result.set共有ファイルID(共有ファイルID);
+        RString メニューID = ResponseHolder.getMenuID();
+        if (所得情報抽出_連携当初.equals(メニューID)) {
+            result.set処理区分(当初_単一);
+        } else if (所得情報抽出_連携異動.equals(メニューID)) {
+            result.set処理区分(異動_単一);
+        }
         return result;
     }
 

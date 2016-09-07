@@ -570,6 +570,36 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
     }
 
     /**
+     * 普徴期別金額を返します。
+     *
+     * @param 期 期
+     * @return 普徴期別金額
+     */
+    public Decimal get普徴期別金額(int 期) {
+        return this.get期別金額(期, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 収納IDを返します。
+     *
+     * @param 期 期
+     * @return 収納ID
+     */
+    public Long get普通徴収収納ID(int 期) {
+        return get収納ID(期, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 収納IDを返します。
+     *
+     * @param 期 期
+     * @return 収納ID
+     */
+    public Long get特別徴収収納ID(int 期) {
+        return get収納ID(期, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
      * 特徴期別金額01を返します。
      *
      * @return 特徴期別金額01
@@ -1052,7 +1082,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      * @return 収納ID12
      */
     public Long get収納ID12() {
-        return get収納ID(INT_10, ChoshuHohoKibetsu.普通徴収.getコード());
+        return get収納ID(INT_12, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
     /**
@@ -1061,7 +1091,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      * @return 収納ID13
      */
     public Long get収納ID13() {
-        return get収納ID(INT_10, ChoshuHohoKibetsu.普通徴収.getコード());
+        return get収納ID(INT_13, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
     /**

@@ -43,8 +43,8 @@ public class NinteichosaKekkaNyushuValidationHandler {
      */
     public ValidationMessageControlPairs 入力チェック_btnChosakekkaOutput() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (!(!RString.isNullOrEmpty(div.getCcdTaskList().一览件数())
-                && Integer.parseInt(div.getCcdTaskList().一览件数().toString()) > 0)) {
+        if (!(!RString.isNullOrEmpty(div.getCcdTaskList().一覧件数())
+                && Integer.parseInt(div.getCcdTaskList().一覧件数().toString()) > 0)) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.データが存在しない));
         } else if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
@@ -73,8 +73,8 @@ public class NinteichosaKekkaNyushuValidationHandler {
      */
     public ValidationMessageControlPairs 入力チェック_btnKekkaTouroku() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (!(!RString.isNullOrEmpty(div.getCcdTaskList().一览件数())
-                && Integer.parseInt(div.getCcdTaskList().一览件数().toString()) > 0)) {
+        if (!(!RString.isNullOrEmpty(div.getCcdTaskList().一覧件数())
+                && Integer.parseInt(div.getCcdTaskList().一覧件数().toString()) > 0)) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.データが存在しない));
         } else {
             if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
@@ -93,8 +93,8 @@ public class NinteichosaKekkaNyushuValidationHandler {
      */
     public ValidationMessageControlPairs 入力チェック_btnChousaResultKanryo() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (!(!RString.isNullOrEmpty(div.getCcdTaskList().一览件数())
-                && Integer.parseInt(div.getCcdTaskList().一览件数().toString()) > 0)) {
+        if (!(!RString.isNullOrEmpty(div.getCcdTaskList().一覧件数())
+                && Integer.parseInt(div.getCcdTaskList().一覧件数().toString()) > 0)) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.データが存在しない));
         } else if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));

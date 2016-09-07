@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskigoto;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskigoto.NonyuTsuchishoCVSKigotoRenchoSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBB-9110-130 huangh
  */
-public class NonyuTsuchishoCVSKigotoRenchoReport extends INonyuTsuchisho<NonyuTsuchishoCVSKigotoRenchoSource> {
+public class NonyuTsuchishoCVSKigotoRenchoReport extends NonyuTsuchisho<NonyuTsuchishoCVSKigotoRenchoSource> {
 
     private final HonSanteiNonyuTsuchiShoJoho item;
     private final NinshoshaSource ninshoshaSource;
@@ -40,14 +40,14 @@ public class NonyuTsuchishoCVSKigotoRenchoReport extends INonyuTsuchisho<NonyuTs
     @Override
     public void writeBy(ReportSourceWriter<NonyuTsuchishoCVSKigotoRenchoSource> reportSourceWriter) {
 
-        INonyuTsuchishoCVSKigotoRenchoEditor coverEditor = new NonyuTsuchishoCVSKigotoRenchoEditor(item, ninshoshaSource, 1);
+        INonyuTsuchishoCVSKigotoRenchoEditor coverEditor = new NonyuTsuchishoCVSKigotoRenchoEditor(item, ninshoshaSource);
         INonyuTsuchishoCVSKigotoRenchoBuilder builder = new NonyuTsuchishoCVSKigotoRenchoBuilder(coverEditor);
         reportSourceWriter.writeLine(builder);
     }
 
     @Override
-    public List<INonyuTsuchisho> devidedByPage() {
-        List<INonyuTsuchisho> nonyuTsuchishoList = new ArrayList<>();
+    public List<NonyuTsuchisho<NonyuTsuchishoCVSKigotoRenchoSource>> devidedByPage() {
+        List<NonyuTsuchisho<NonyuTsuchishoCVSKigotoRenchoSource>> nonyuTsuchishoList = new ArrayList<>();
         NonyuTsuchishoCVSKigotoRenchoReport report
                 = new NonyuTsuchishoCVSKigotoRenchoReport(item, ninshoshaSource);
         nonyuTsuchishoList.add(report);

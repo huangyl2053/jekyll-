@@ -20,13 +20,16 @@ public final class YokaigoNinteiJohoTeiParameter {
     private final RString 被保険者番号;
     private final RString 証記載保険者番号;
     private final RString 支所コード;
+    private final boolean shishoKengenuser;
     private final RString 通常 = ShoriJotaiKubun.通常.getコード();
     private final RString 延期 = ShoriJotaiKubun.延期.getコード();
 
-    private YokaigoNinteiJohoTeiParameter(RString 被保険者番号, RString 証記載保険者番号, RString 支所コード) {
+    private YokaigoNinteiJohoTeiParameter(RString 被保険者番号, RString 証記載保険者番号, RString 支所コード,
+            boolean shishoKengenuser) {
         this.被保険者番号 = 被保険者番号;
         this.証記載保険者番号 = 証記載保険者番号;
         this.支所コード = 支所コード;
+        this.shishoKengenuser = shishoKengenuser;
     }
 
     /**
@@ -35,9 +38,15 @@ public final class YokaigoNinteiJohoTeiParameter {
      * @param 被保険者番号 被保険者番号
      * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
+     * @param shishoKengenuser 支所条件
      * @return 被保険者情報パラメータ
      */
-    public static YokaigoNinteiJohoTeiParameter createParameter(RString 被保険者番号, RString 証記載保険者番号, RString 支所コード) {
-        return new YokaigoNinteiJohoTeiParameter(被保険者番号, 証記載保険者番号, 支所コード);
+    public static YokaigoNinteiJohoTeiParameter createParameter(RString 被保険者番号, RString 証記載保険者番号,
+            RString 支所コード, boolean shishoKengenuser) {
+        shishoKengenuser = false;
+        if (!RString.isNullOrEmpty(支所コード)) {
+            shishoKengenuser = true;
+        }
+        return new YokaigoNinteiJohoTeiParameter(被保険者番号, 証記載保険者番号, 支所コード, shishoKengenuser);
     }
 }

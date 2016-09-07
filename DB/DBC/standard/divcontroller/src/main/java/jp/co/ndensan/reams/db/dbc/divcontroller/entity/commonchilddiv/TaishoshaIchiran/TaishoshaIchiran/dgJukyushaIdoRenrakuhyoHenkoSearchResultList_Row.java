@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Taishosha
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 28 16:35:11 CST 2016
+ * Wed Jul 06 20:56:28 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;

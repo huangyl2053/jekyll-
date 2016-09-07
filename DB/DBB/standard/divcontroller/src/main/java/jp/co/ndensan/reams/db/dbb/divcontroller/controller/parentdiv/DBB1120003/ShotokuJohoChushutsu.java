@@ -7,15 +7,15 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1120003
 
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120003.ShotokuJohoChushutsuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120003.ShotokuJohoChushutsuHandler;
+import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120003.ShotokuJohoChushutsuValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 画面設計_DBBGM51005_所得情報アップロード
@@ -26,8 +26,6 @@ public class ShotokuJohoChushutsu {
 
     private static final RString 定値_他社 = new RString("3");
     private static final RString 定値_REAMS = new RString("1");
-    private static final RString 定値_ファイルを指定してください = new RString("ファイルを指定してください");
-    private static final int NUM0 = 0;
 
     /**
      * onLoad処理です。
@@ -67,9 +65,9 @@ public class ShotokuJohoChushutsu {
      */
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<ShotokuJohoChushutsuDiv> onClick_btnUpload(ShotokuJohoChushutsuDiv div, FileData[] files) {
-        if (files == null || files.length == NUM0) {
-            throw new ApplicationException(UrErrorMessages.指定ファイルが存在しない.getMessage().replace(
-                    定値_ファイルを指定してください.toString()));
+        ValidationMessageControlPairs validPairs = getValidationHandler().ファイルチェック(files);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         getHandler(div).upLoad(files);
         return ResponseData.of(div).respond();
@@ -77,5 +75,9 @@ public class ShotokuJohoChushutsu {
 
     private ShotokuJohoChushutsuHandler getHandler(ShotokuJohoChushutsuDiv div) {
         return new ShotokuJohoChushutsuHandler(div);
+    }
+
+    private ShotokuJohoChushutsuValidationHandler getValidationHandler() {
+        return new ShotokuJohoChushutsuValidationHandler();
     }
 }

@@ -6,16 +6,15 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTas
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
 import java.util.HashSet;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * YokaigoNinteiTaskList のクラスファイル
@@ -167,13 +166,13 @@ public class YokaigoNinteiTaskListDiv extends Panel implements IYokaigoNinteiTas
     }
 
     /**
-     * 一览件数を取得します。
+     * 一覧件数を取得します。
      *
-     * @return 一览件数
+     * @return 一覧件数
      */
     @Override
-    public RString 一览件数() {
-        return getHandler().一览件数();
+    public RString 一覧件数() {
+        return getHandler().一覧件数();
     }
 
     /**
@@ -184,5 +183,15 @@ public class YokaigoNinteiTaskListDiv extends Panel implements IYokaigoNinteiTas
     @Override
     public List<dgNinteiTaskList_Row> getCheckbox() {
         return getHandler().getCheckbox();
+    }
+
+    /**
+     * 一览にデータを取得します。
+     *
+     * @return 一览のデータ
+     */
+    @Override
+    public List<dgNinteiTaskList_Row> getDataSource() {
+        return getHandler().getDataSource();
     }
 }

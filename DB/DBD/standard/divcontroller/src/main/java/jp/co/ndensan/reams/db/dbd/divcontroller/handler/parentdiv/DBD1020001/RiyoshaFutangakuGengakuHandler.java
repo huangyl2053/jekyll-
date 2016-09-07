@@ -646,7 +646,10 @@ public class RiyoshaFutangakuGengakuHandler {
         gemmenGengakuShinseiBuilder.set申請届出者氏名(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者氏名());
         gemmenGengakuShinseiBuilder.set申請届出者氏名カナ(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者氏名カナ());
         gemmenGengakuShinseiBuilder.set申請届出者続柄(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者続柄());
-        gemmenGengakuShinseiBuilder.set申請届出代行事業者番号(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行事業者番号());
+        JigyoshaNo 事業者番号 = div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行事業者番号();
+        if (!事業者番号.isEmpty()) {
+            gemmenGengakuShinseiBuilder.set申請届出代行事業者番号(事業者番号);
+        }
         if (div.getCcdShinseiJoho().get減免減額申請情報().get事業者区分() != null) {
             gemmenGengakuShinseiBuilder.set事業者区分(div.getCcdShinseiJoho().get減免減額申請情報().get事業者区分().getCode());
         } else {
@@ -922,7 +925,6 @@ public class RiyoshaFutangakuGengakuHandler {
      * @return 証記載保険者番号
      */
     public ShoKisaiHokenshaNo get証記載保険者番号(FlexibleDate 申請日) {
-
         HokenshaListLoader loader = HokenshaListLoader.createInstance();
         HokenshaList hokenshaList = loader.getShichosonCodeNameList(GyomuBunrui.介護事務);
 

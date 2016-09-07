@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
@@ -72,6 +73,7 @@ public class TokuchoSeidokanIFSakuseiHandler {
     public void initialize() {
         List<TokuchoSedokanIFTanichuResult> results = tokuchosedokaniftanichu.getTokuchoKaishiYMList();
         List<KeyValueDataSource> dataSourceList = new ArrayList();
+        FlexibleYear 年度 = FlexibleYear.MIN;
         if (results.isEmpty()) {
             throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().
                     replace(MESSAGE_特徴対象者同定が終了しない.toString(), MESSAGE_特徴制度間F処理.toString()));
@@ -86,6 +88,9 @@ public class TokuchoSeidokanIFSakuseiHandler {
         int i = NUM0;
         for (TokuchoSedokanIFTanichuResult result : results) {
             if (result.get特徴開始年月() != null) {
+                if (i == 0) {
+                    年度 = result.get年度();
+                }
                 KeyValueDataSource datasource = new KeyValueDataSource();
                 datasource.setKey(KEY.concat(new RString(i)));
                 datasource.setValue(result.get特徴開始年月().getYearMonth().wareki().toDateString());
@@ -95,7 +100,72 @@ public class TokuchoSeidokanIFSakuseiHandler {
         }
         div.getDdlKaishiYM().setDataSource(dataSourceList);
         div.getDdlKaishiYM().setSelectedKey(KEY0);
-        onChange_特別徴収開始年月();
+        if (!FlexibleYear.MIN.equals(年度)) {
+            div.getTxtChoteiNendo().setValue(new RDate(年度.toString()));
+        }
+        onChange_特別徴収開始年月(年度);
+    }
+
+    /**
+     * onChange_特別徴収開始年月の方法です。
+     *
+     * @param 処理年度 FlexibleYear
+     */
+    public void onChange_特別徴収開始年月(RYear 処理年度) {
+        if (処理年度 == null) {
+            return;
+        }
+        onChange_特別徴収開始年月(new FlexibleYear(処理年度.toDateString()));
+    }
+
+    /**
+     * onChange_特別徴収開始年月の方法です。
+     *
+     * @param 処理年度 FlexibleYear
+     */
+    private void onChange_特別徴収開始年月(FlexibleYear 処理年度) {
+        RString 選択値 = div.getDdlKaishiYM().getSelectedValue();
+        RDate 特別徴収開始年月 = new RDate(選択値.toString());
+        int 選択値の月 = 特別徴収開始年月.getMonthValue();
+        RString 年度内連番;
+        switch (選択値の月) {
+            case NUM8:
+                年度内連番 = 年度内連番_0001;
+                break;
+            case NUM10:
+                年度内連番 = 年度内連番_0002;
+                break;
+            case NUM12:
+                年度内連番 = 年度内連番_0003;
+                break;
+            case NUM2:
+                年度内連番 = 年度内連番_0004;
+                break;
+            case NUM4:
+                年度内連番 = 年度内連番_0005;
+                break;
+            case NUM6:
+                年度内連番 = 年度内連番_0006;
+                break;
+            default:
+                年度内連番 = RString.EMPTY;
+        }
+        List<ShoriDateKanri> shoridatekanriList = tokuchosedokaniftanichu.getSyoriKanrenJoho(処理年度, 年度内連番);
+        if (shoridatekanriList == null || shoridatekanriList.isEmpty() || shoridatekanriList.get(0).get基準日時() == null
+                || shoridatekanriList.get(0).get基準日時().isEmpty()) {
+            div.getTxtShoriJotai().setValue(未処理);
+            div.getTxtZenKaiShoriYMD().clearValue();
+            div.getTxtZenKaiShoriYMD().setPlaceHolder(RString.EMPTY);
+            div.getTxtZenKaiShoriTime().clearValue();
+            div.getTxtZenKaiShoriTime().setPlaceHolder(RString.EMPTY);
+        } else {
+            div.getTxtShoriJotai().setValue(処理済);
+            YMDHMS 基準日時 = shoridatekanriList.get(NUM0).get基準日時();
+            if (基準日時 != null) {
+                div.getTxtZenKaiShoriYMD().setValue(基準日時.getDate());
+                div.getTxtZenKaiShoriTime().setValue(new RTime(new RString(基準日時.toString().substring(NUM8))));
+            }
+        }
     }
 
     /**
@@ -104,7 +174,6 @@ public class TokuchoSeidokanIFSakuseiHandler {
     public void onChange_特別徴収開始年月() {
         RString 選択値 = div.getDdlKaishiYM().getSelectedValue();
         RDate 特別徴収開始年月 = new RDate(選択値.toString());
-        div.getTxtChoteiNendo().setValue(特別徴収開始年月);
         int 選択値の月 = 特別徴収開始年月.getMonthValue();
         RString 年度内連番;
         switch (選択値の月) {

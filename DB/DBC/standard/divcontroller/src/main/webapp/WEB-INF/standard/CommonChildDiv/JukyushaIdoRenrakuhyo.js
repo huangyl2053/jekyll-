@@ -29,15 +29,15 @@ var DBC;
                     this.controls.txtIdoYMD().disabled = false;
                     this.controls.radIdoKubun().disabled = false;
                     this.controls.ddlJukyushaIdoJiyu().disabled = false;
-                    this.controls.txtHiHokenshaNo().disabled = false;
+                    this.controls.txtHiHokenshaNo().disabled = true;
                     this.controls.txtHiHokenshaNameKana().disabled = false;
                     this.controls.txtUmareYMD().disabled = false;
                     this.controls.radSeibetsu().disabled = false;
                     this.controls.txtShikakuShutokuYMD().disabled = false;
                     this.controls.txtShikakuSoshitsuYMD().disabled = false;
                     this.controls.txtShoKisaiHokenshaNo().disabled = false;
-                    this.controls.txtKoikiHokenshaNo().disabled = false;
-                    this.controls.txtSofuYM().disabled = false;
+                    this.controls.txtKoikiHokenshaNo().disabled = true;
+                    this.controls.txtSofuYM().disabled = true;
 
                     this.controls.JukyushaIdoRenrakuhyoTeisei().visible = false;
 
@@ -57,7 +57,7 @@ var DBC;
                     this.controls.btnKyotakuServiceRireki().disabled = false;
                     this.controls.radKyotakuServiceSakuseiKubun().disabled = false;
                     this.controls.txtKyotakuKaigoShienJigyoshoNo().disabled = false;
-                    this.controls.txtKyotakuKaigoShienJigyoshoName().disabled = false;
+                    this.controls.txtKyotakuKaigoShienJigyoshoName().disabled = true;
                     this.controls.txtKyotakuServiceTekiyoYMD().disabled = false;
                     this.controls.radShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().disabled = false;
 
@@ -77,13 +77,13 @@ var DBC;
 
                     this.controls.btnKyufuSeigenRireki().disabled = false;
                     this.controls.radKohiFutanJogenGengakuAriFlag().disabled = false;
-                    this.controls.txtShokanbaraikaYMD().disabled = false;
-                    this.controls.txtKyufuritsuHikisage().disabled = false;
+                    this.controls.txtShokanbaraikaYMD().disabled = true;
+                    this.controls.txtKyufuritsuHikisage().disabled = true;
 
                     this.controls.txtRiyosyaFutanWariaiYukoYMD().disabled = false;
 
                     this.controls.radNijiyoboJigyoKubun().disabled = false;
-                    this.controls.txtNijiyoboJigyoYukoDateRange().disabled = false;
+                    this.controls.txtNijiyoboJigyoYukoDateRange().disabled = true;
 
                     this.controls.txtRojinHokenShichosonNo().disabled = false;
                     this.controls.txtRojinHokenJukyushaNo().disabled = false;
@@ -91,18 +91,18 @@ var DBC;
                 };
 
                 DisplayMode.prototype.teisei = function () {
-                    this.controls.txtIdoYMD().disabled = false;
+                    this.controls.txtIdoYMD().disabled = true;
                     this.controls.radIdoKubun().disabled = false;
                     this.controls.ddlJukyushaIdoJiyu().disabled = false;
-                    this.controls.txtHiHokenshaNo().disabled = false;
+                    this.controls.txtHiHokenshaNo().disabled = true;
                     this.controls.txtHiHokenshaNameKana().disabled = false;
                     this.controls.txtUmareYMD().disabled = false;
                     this.controls.radSeibetsu().disabled = false;
                     this.controls.txtShikakuShutokuYMD().disabled = false;
                     this.controls.txtShikakuSoshitsuYMD().disabled = false;
                     this.controls.txtShoKisaiHokenshaNo().disabled = false;
-                    this.controls.txtKoikiHokenshaNo().disabled = false;
-                    this.controls.txtSofuYM().disabled = false;
+                    this.controls.txtKoikiHokenshaNo().disabled = true;
+                    this.controls.txtSofuYM().disabled = true;
 
                     this.controls.JukyushaIdoRenrakuhyoTeisei().disabled = false;
                     this.controls.txtTeiseiYMD().disabled = false;
@@ -124,7 +124,7 @@ var DBC;
                     this.controls.btnKyotakuServiceRireki().disabled = false;
                     this.controls.radKyotakuServiceSakuseiKubun().disabled = false;
                     this.controls.txtKyotakuKaigoShienJigyoshoNo().disabled = false;
-                    this.controls.txtKyotakuKaigoShienJigyoshoName().disabled = false;
+                    this.controls.txtKyotakuKaigoShienJigyoshoName().disabled = true;
                     this.controls.txtKyotakuServiceTekiyoYMD().disabled = false;
                     this.controls.radShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().disabled = false;
 
@@ -144,8 +144,8 @@ var DBC;
 
                     this.controls.btnKyufuSeigenRireki().disabled = false;
                     this.controls.radKohiFutanJogenGengakuAriFlag().disabled = false;
-                    this.controls.txtShokanbaraikaYMD().disabled = false;
-                    this.controls.txtKyufuritsuHikisage().disabled = false;
+                    this.controls.txtShokanbaraikaYMD().disabled = true;
+                    this.controls.txtKyufuritsuHikisage().disabled = true;
 
                     this.controls.txtRiyosyaFutanWariaiYukoYMD().disabled = false;
 

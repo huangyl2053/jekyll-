@@ -8,12 +8,12 @@ package jp.co.ndensan.reams.db.dbe.business.core.basic;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5031NinteiChosaHoshuTankaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link NinteiChosaHoshuTanka}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-021 dingyi
  */
 public class NinteiChosaHoshuTankaBuilder {
 
@@ -34,56 +34,6 @@ public class NinteiChosaHoshuTankaBuilder {
         this.entity = entity.clone();
         this.id = id;
 
-    }
-
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 調査区分を設定します。
-     *
-     * @param 調査区分 調査区分
-     * @return {@link NinteiChosaHoshuTankaBuilder}
-     */
-    public NinteiChosaHoshuTankaBuilder set調査区分(Code 調査区分) {
-        requireNonNull(調査区分, UrSystemErrorMessages.値がnull.getReplacedMessage("調査区分"));
-        entity.setChosaKubun(調査区分);
-        return this;
-    }
-
-    /**
-     * 訪問種別を設定します。
-     *
-     * @param 訪問種別 訪問種別
-     * @return {@link NinteiChosaHoshuTankaBuilder}
-     */
-    public NinteiChosaHoshuTankaBuilder set訪問種別(Code 訪問種別) {
-        requireNonNull(訪問種別, UrSystemErrorMessages.値がnull.getReplacedMessage("訪問種別"));
-        entity.setHomonShubetsu(訪問種別);
-        return this;
-    }
-
-    /**
-     * 開始年月を設定します。
-     *
-     * @param 開始年月 開始年月
-     * @return {@link NinteiChosaHoshuTankaBuilder}
-     */
-    public NinteiChosaHoshuTankaBuilder set開始年月(FlexibleYearMonth 開始年月) {
-        requireNonNull(開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("開始年月"));
-        entity.setKaishiYM(開始年月);
-        return this;
-    }
-
-    /**
-     * 終了年月を設定します。
-     *
-     * @param 終了年月 終了年月
-     * @return {@link NinteiChosaHoshuTankaBuilder}
-     */
-    public NinteiChosaHoshuTankaBuilder set終了年月(FlexibleYearMonth 終了年月) {
-        requireNonNull(終了年月, UrSystemErrorMessages.値がnull.getReplacedMessage("終了年月"));
-        entity.setShuryoYM(終了年月);
-        return this;
     }
 
     /**

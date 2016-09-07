@@ -34,4 +34,11 @@ public interface ITsukiShorkiKubun {
      * @return 名称
      */
     RString getName();
+
+    /**
+     * コードを返します。
+     *
+     * @return コード
+     */
+    RString get区分();
 }

@@ -94,6 +94,8 @@ public class DBD1030001 {
                         .rootTitle(申請メニューID.equals(ResponseHolder.getMenuID()) ? ROOTTITLE_申請メニュ : ROOTTITLE_承認メニュ)
                         .addMessage(message).respond();
             }
+            div.setHiddenHihokenshaNo(被保険者番号.getColumnValue());
+            div.setHiddenShikibetsuCode(識別コード.getColumnValue());
             DBD1030001Handler handler = getHandler(div);
             List<ShakaifukuRiyoshaFutanKeigen> 申請一覧情報 = handler.申請一覧データ準備(被保険者番号);
             ArrayList<ShakaifukuRiyoshaFutanKeigen> 最初申請一覧情報 = new ArrayList<>(申請一覧情報);

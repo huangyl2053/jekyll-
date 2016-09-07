@@ -28,10 +28,10 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
-import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.gyosekukaku.IGyoseiKukaku;
@@ -236,8 +236,7 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
         EditedAtesaki 編集後宛先 = null;
         if (isNotNull(徴収猶予取消通知書情報.get宛先()) && isNotNull(徴収猶予取消通知書情報.get地方公共団体())
                 && isNotNull(徴収猶予取消通知書情報.get宛先())) {
-            JushoHenshu jushoHenshu = JushoHenshu.createInstance();
-            編集後宛先 = jushoHenshu.create編集後宛先(徴収猶予取消通知書情報.get宛先(),
+            編集後宛先 = JushoHenshu.create編集後宛先(徴収猶予取消通知書情報.get宛先(),
                     徴収猶予取消通知書情報.get地方公共団体(), 徴収猶予取消通知書情報.get帳票制御共通());
         }
         return 編集後宛先;

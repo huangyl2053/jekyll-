@@ -48,11 +48,13 @@ public final class KoikinaiTenkyoRirekiHenkanMapperParameter {
     private static final RString KEY_2 = new RString("key2");
     private static final RString KEY_3 = new RString("key3");
     private static final RString SELECTKEY_空白 = RString.EMPTY;
-    private static final RString TRUE = new RString("True");
-    private final RString みなしキー;
+    private final boolean みなしキー;
     private final RString 申請区分キー;
     private final List<RString> 性別キー;
     private final boolean 最大表示件数フラグ;
+    private final RString 処理状態区分_通常;
+    private final RString 処理状態区分_延期;
+    private final boolean 性別フラグ;
     private final Decimal 最大表示件数;
 
     private KoikinaiTenkyoRirekiHenkanMapperParameter(
@@ -64,7 +66,7 @@ public final class KoikinaiTenkyoRirekiHenkanMapperParameter {
             FlexibleDate 生年月日To,
             Code 申請区分,
             RString 被保険者氏名キー,
-            RString みなしキー,
+            boolean みなしキー,
             RString 申請区分キー,
             List<RString> 性別キー,
             Decimal 最大表示件数,
@@ -73,7 +75,6 @@ public final class KoikinaiTenkyoRirekiHenkanMapperParameter {
             boolean is完全一致,
             boolean is部分一致,
             boolean is後方一致,
-            boolean isみなし,
             boolean is認定申請日From,
             boolean is認定申請日To,
             boolean is生年月日From,
@@ -81,13 +82,16 @@ public final class KoikinaiTenkyoRirekiHenkanMapperParameter {
             boolean is申請区分,
             boolean is男,
             boolean is女,
+            RString 処理状態区分_通常,
+            RString 処理状態区分_延期,
+            boolean 性別フラグ,
             boolean is最大表示件数) {
         this.被保険者番号フラグ = is被保険者番号;
         this.前方一致フラグ = is前方一致;
         this.完全一致フラグ = is完全一致;
         this.部分一致フラグ = is部分一致;
         this.後方一致フラグ = is後方一致;
-        this.みなしフラグ = isみなし;
+        this.みなしフラグ = みなしキー;
         this.認定申請日Fromフラグ = is認定申請日From;
         this.認定申請日Toフラグ = is認定申請日To;
         this.生年月日Fromフラグ = is生年月日From;
@@ -107,6 +111,9 @@ public final class KoikinaiTenkyoRirekiHenkanMapperParameter {
         this.申請区分キー = 申請区分キー;
         this.性別キー = 性別キー;
         this.最大表示件数 = 最大表示件数;
+        this.処理状態区分_通常 = 処理状態区分_通常;
+        this.処理状態区分_延期 = 処理状態区分_延期;
+        this.性別フラグ = 性別フラグ;
         this.最大表示件数フラグ = is最大表示件数;
     }
 
@@ -124,6 +131,8 @@ public final class KoikinaiTenkyoRirekiHenkanMapperParameter {
      * @param みなしキー みなしキー
      * @param 申請区分キー 申請区分キー
      * @param 性別キー 性別キー
+     * @param 処理状態区分_通常 処理状態区分_通常
+     * @param 処理状態区分_延期 処理状態区分_通常
      * @param 最大表示件数 最大表示件数
      * @return 広域内転居使用ことのパラメータ
      */
@@ -136,10 +145,25 @@ public final class KoikinaiTenkyoRirekiHenkanMapperParameter {
             FlexibleDate 生年月日To,
             Code 申請区分,
             RString 被保険者氏名キー,
-            RString みなしキー,
+            boolean みなしキー,
             RString 申請区分キー,
             List<RString> 性別キー,
+            RString 処理状態区分_通常,
+            RString 処理状態区分_延期,
             Decimal 最大表示件数) {
+        boolean 男 = false;
+        boolean 女 = false;
+        boolean 性別 = false;
+        if (性別キー.contains(KEY_0) && 性別キー.contains(KEY_1)) {
+            性別 = true;
+        } else {
+            if (性別キー.contains(KEY_0)) {
+                男 = true;
+            }
+            if (性別キー.contains(KEY_1)) {
+                女 = true;
+            }
+        }
         return new KoikinaiTenkyoRirekiHenkanMapperParameter(
                 被保険者番号,
                 被保険者氏名,
@@ -158,14 +182,16 @@ public final class KoikinaiTenkyoRirekiHenkanMapperParameter {
                 (null != 被保険者氏名 && !被保険者氏名.isEmpty()) && KEY_1.equals(被保険者氏名キー),
                 (null != 被保険者氏名 && !被保険者氏名.isEmpty()) && KEY_2.equals(被保険者氏名キー),
                 (null != 被保険者氏名 && !被保険者氏名.isEmpty()) && KEY_3.equals(被保険者氏名キー),
-                TRUE.equals(みなしキー),
                 null != 認定申請日From && !認定申請日From.isEmpty(),
                 null != 認定申請日To && !認定申請日To.isEmpty(),
                 null != 生年月日From && !生年月日From.isEmpty(),
                 null != 生年月日To && !生年月日To.isEmpty(),
                 !SELECTKEY_空白.equals(申請区分キー),
-                性別キー.contains(KEY_0),
-                性別キー.contains(KEY_1),
+                男,
+                女,
+                処理状態区分_通常,
+                処理状態区分_延期,
+                性別,
                 最大表示件数 != null
         );
     }

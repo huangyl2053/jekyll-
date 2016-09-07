@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3036ShokanHanteiKekkaマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3036ShokanHanteiKekka">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.allColumns_DbT3036ShokanHanteiKekka" />
+     FROM
+         rgdb."DbT3036ShokanHanteiKekka"
+     WHERE
+         rgdb."DbT3036ShokanHanteiKekka"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3036ShokanHanteiKekka">
+         "DbT3036ShokanHanteiKekka"."hiHokenshaNo" as "dbT3036ShokanHanteiKekka_hiHokenshaNo",
+         "DbT3036ShokanHanteiKekka"."serviceTeikyoYM" as "dbT3036ShokanHanteiKekka_serviceTeikyoYM",
+         "DbT3036ShokanHanteiKekka"."seiriNo" as "dbT3036ShokanHanteiKekka_seiriNo",
+         "DbT3036ShokanHanteiKekka"."insertDantaiCd" as "dbT3036ShokanHanteiKekka_insertDantaiCd",
+         "DbT3036ShokanHanteiKekka"."insertTimestamp" as "dbT3036ShokanHanteiKekka_insertTimestamp",
+         "DbT3036ShokanHanteiKekka"."insertReamsLoginId" as "dbT3036ShokanHanteiKekka_insertReamsLoginId",
+         "DbT3036ShokanHanteiKekka"."insertContextId" as "dbT3036ShokanHanteiKekka_insertContextId",
+         "DbT3036ShokanHanteiKekka"."isDeleted" as "dbT3036ShokanHanteiKekka_isDeleted",
+         "DbT3036ShokanHanteiKekka"."updateCount" as "dbT3036ShokanHanteiKekka_updateCount",
+         "DbT3036ShokanHanteiKekka"."lastUpdateTimestamp" as "dbT3036ShokanHanteiKekka_lastUpdateTimestamp",
+         "DbT3036ShokanHanteiKekka"."lastUpdateReamsLoginId" as "dbT3036ShokanHanteiKekka_lastUpdateReamsLoginId",
+         "DbT3036ShokanHanteiKekka"."shoKisaiHokenshaNo" as "dbT3036ShokanHanteiKekka_shoKisaiHokenshaNo",
+         "DbT3036ShokanHanteiKekka"."ketteiYMD" as "dbT3036ShokanHanteiKekka_ketteiYMD",
+         "DbT3036ShokanHanteiKekka"."shikyuHushikyuKetteiKubun" as "dbT3036ShokanHanteiKekka_shikyuHushikyuKetteiKubun",
+         "DbT3036ShokanHanteiKekka"."shiharaiKingaku" as "dbT3036ShokanHanteiKekka_shiharaiKingaku",
+         "DbT3036ShokanHanteiKekka"."shiharaiKingakuUchiwakeRiyoshabun" as "dbT3036ShokanHanteiKekka_shiharaiKingakuUchiwakeRiyoshabun",
+         "DbT3036ShokanHanteiKekka"."ketteiIchiranTorikomiYM" as "dbT3036ShokanHanteiKekka_ketteiIchiranTorikomiYM",
+         "DbT3036ShokanHanteiKekka"."zenkaiShiharaiKingaku" as "dbT3036ShokanHanteiKekka_zenkaiShiharaiKingaku",
+         "DbT3036ShokanHanteiKekka"."sagakuKingakuGokei" as "dbT3036ShokanHanteiKekka_sagakuKingakuGokei",
+         "DbT3036ShokanHanteiKekka"."ketteiTsuchishoSakuseiYMD" as "dbT3036ShokanHanteiKekka_ketteiTsuchishoSakuseiYMD",
+         "DbT3036ShokanHanteiKekka"."ketteiTsuchiNo" as "dbT3036ShokanHanteiKekka_ketteiTsuchiNo",
+         "DbT3036ShokanHanteiKekka"."furikomiMeisaishoSakuseiYMD" as "dbT3036ShokanHanteiKekka_furikomiMeisaishoSakuseiYMD",
+         "DbT3036ShokanHanteiKekka"."ketteiTsuchiHakkoKubun" as "dbT3036ShokanHanteiKekka_ketteiTsuchiHakkoKubun"
+    </sql>
+
+
+    <!--テーブルDbT3036ShokanHanteiKekkaの項目をDbT3036ShokanHanteiKekkaEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3036ShokanHanteiKekkaEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity" autoMapping="true">
+        <id property="hiHokenshaNo" column="dbT3036ShokanHanteiKekka_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="serviceTeikyoYM" column="dbT3036ShokanHanteiKekka_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="seiriNo" column="dbT3036ShokanHanteiKekka_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3036ShokanHanteiKekka_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3036ShokanHanteiKekka_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3036ShokanHanteiKekka_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3036ShokanHanteiKekka_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3036ShokanHanteiKekka_isDeleted" />
+        <result property="updateCount" column="dbT3036ShokanHanteiKekka_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3036ShokanHanteiKekka_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3036ShokanHanteiKekka_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoKisaiHokenshaNo" column="dbT3036ShokanHanteiKekka_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="ketteiYMD" column="dbT3036ShokanHanteiKekka_ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikyuHushikyuKetteiKubun" column="dbT3036ShokanHanteiKekka_shikyuHushikyuKetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiharaiKingaku" column="dbT3036ShokanHanteiKekka_shiharaiKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shiharaiKingakuUchiwakeRiyoshabun" column="dbT3036ShokanHanteiKekka_shiharaiKingakuUchiwakeRiyoshabun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="ketteiIchiranTorikomiYM" column="dbT3036ShokanHanteiKekka_ketteiIchiranTorikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="zenkaiShiharaiKingaku" column="dbT3036ShokanHanteiKekka_zenkaiShiharaiKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sagakuKingakuGokei" column="dbT3036ShokanHanteiKekka_sagakuKingakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="ketteiTsuchishoSakuseiYMD" column="dbT3036ShokanHanteiKekka_ketteiTsuchishoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ketteiTsuchiNo" column="dbT3036ShokanHanteiKekka_ketteiTsuchiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="furikomiMeisaishoSakuseiYMD" column="dbT3036ShokanHanteiKekka_furikomiMeisaishoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ketteiTsuchiHakkoKubun" column="dbT3036ShokanHanteiKekka_ketteiTsuchiHakkoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>

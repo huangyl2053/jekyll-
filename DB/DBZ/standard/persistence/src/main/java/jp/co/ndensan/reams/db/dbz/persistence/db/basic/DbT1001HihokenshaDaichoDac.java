@@ -4,9 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
+import static java.lang.Boolean.FALSE;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.edaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.hihokennshaKubunCode;
@@ -31,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
@@ -62,6 +65,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
     private static final RString メッセージ_被保険者番号 = new RString("被保険者番号");
     private static final RString メッセージ_サービス年月 = new RString("サービス年月");
     private static final RString メッセージ_異動日 = new RString("異動日");
+    private static final RString 数字１ = new RString("1");
     private static final int 開始桁 = 1;
     private static final int 終了桁 = 6;
     @InjectSession
@@ -130,7 +134,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
                                 leq(substr(idoYMD, 開始桁, 終了桁), サービス年月),
-                                not(eq(logicalDeletedFlag, false))
+                                eq(logicalDeletedFlag, false)
                         )).
                 order(by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
                 limit(1).
@@ -157,7 +161,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
                                 lt(サービス年月, substr(idoYMD, 開始桁, 終了桁)),
-                                not(eq(logicalDeletedFlag, false))
+                                eq(logicalDeletedFlag, false)
                         )).
                 order(by(DbT1001HihokenshaDaicho.idoYMD, Order.ASC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
                 limit(1).
@@ -727,5 +731,93 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 order(by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 資格の異動情報を取得します。
+     *
+     * @param 抽出開始日時 RDateTime
+     * @param 抽出終了日時 RDateTime
+     * @return List<DbT1001HihokenshaDaichoEntity>
+     */
+    @Transaction
+    public List<DbT1001HihokenshaDaichoEntity> get資格の異動(RDateTime 抽出開始日時, RDateTime 抽出終了日時) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokennshaKubunCode, ShikakuKubun._１号.getコード()),
+                                eq(logicalDeletedFlag, FALSE),
+                                leq(抽出開始日時, lastUpdateTimestamp),
+                                leq(lastUpdateTimestamp, 抽出終了日時)
+                        )).toList(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 資格喪失者を取得する。
+     *
+     * @param 抽出開始日時 抽出開始日時
+     * @param 抽出終了日時 抽出終了日時
+     * @param 普徴仮算定賦課処理日時 普徴仮算定賦課処理日時
+     * @return List<DbT1001HihokenshaDaichoEntity>
+     */
+    @Transaction
+    public List<DbT1001HihokenshaDaichoEntity> get資格喪失者(RDateTime 抽出開始日時,
+            RDateTime 抽出終了日時, RDateTime 普徴仮算定賦課処理日時) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        FlexibleDate 抽出開始日時の日付 = new FlexibleDate(抽出開始日時.getDate().toString());
+        FlexibleDate 抽出終了日時の日付 = new FlexibleDate(抽出終了日時.getDate().toString());
+        FlexibleDate 普徴仮算定賦課処理日時の日付 = new FlexibleDate(抽出開始日時.getDate().toString());
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokennshaKubunCode, 数字１),
+                                not(isNULL(shikakuSoshitsuYMD)),
+                                not(eq(shikakuSoshitsuYMD, FlexibleDate.EMPTY)),
+                                or(
+                                        and(leq(抽出開始日時の日付, shikakuSoshitsuYMD),
+                                                leq(shikakuSoshitsuYMD, 抽出終了日時の日付)),
+                                        and(leq(抽出開始日時, lastUpdateTimestamp),
+                                                leq(lastUpdateTimestamp, 抽出終了日時),
+                                                leq(普徴仮算定賦課処理日時の日付, shikakuSoshitsuYMD),
+                                                leq(shikakuSoshitsuYMD, 抽出終了日時の日付))
+                                ),
+                                eq(logicalDeletedFlag, false))
+                ).
+                toList(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 資格取得者を取得する。
+     *
+     * @param 抽出開始日時 抽出開始日時
+     * @param 抽出終了日時 抽出終了日時
+     * @param 普徴仮算定賦課処理日時 普徴仮算定賦課処理日時
+     * @return List<DbT1001HihokenshaDaichoEntity>
+     */
+    @Transaction
+    public List<DbT1001HihokenshaDaichoEntity> get資格取得者(RDateTime 抽出開始日時,
+            RDateTime 抽出終了日時, RDateTime 普徴仮算定賦課処理日時) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        FlexibleDate 抽出開始日時の日付 = new FlexibleDate(抽出開始日時.getDate().toString());
+        FlexibleDate 抽出終了日時の日付 = new FlexibleDate(抽出終了日時.getDate().toString());
+        FlexibleDate 普徴仮算定賦課処理日時の日付 = new FlexibleDate(抽出開始日時.getDate().toString());
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokennshaKubunCode, 数字１),
+                                or(isNULL(shikakuSoshitsuYMD),
+                                        eq(shikakuSoshitsuYMD, FlexibleDate.EMPTY)),
+                                or(
+                                        and(leq(抽出開始日時の日付, ichigoShikakuShutokuYMD),
+                                                leq(ichigoShikakuShutokuYMD, 抽出終了日時の日付)),
+                                        and(leq(抽出開始日時, lastUpdateTimestamp),
+                                                leq(lastUpdateTimestamp, 抽出終了日時),
+                                                leq(普徴仮算定賦課処理日時の日付, ichigoShikakuShutokuYMD),
+                                                leq(ichigoShikakuShutokuYMD, 抽出終了日時の日付))
+                                ),
+                                eq(logicalDeletedFlag, false))
+                ).
+                toList(DbT1001HihokenshaDaichoEntity.class);
     }
 }

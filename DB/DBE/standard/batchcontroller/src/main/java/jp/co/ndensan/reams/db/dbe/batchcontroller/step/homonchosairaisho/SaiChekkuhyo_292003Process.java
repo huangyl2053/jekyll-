@@ -38,7 +38,7 @@ public class SaiChekkuhyo_292003Process extends BatchProcessBase<HomonChosaIrais
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper."
             + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get認定調査結果");
-    private static final ReportId 帳票ID = ReportIdDBE.DBE292001.getReportId();
+    private static final ReportId 帳票ID = ReportIdDBE.DBE292003.getReportId();
 
     private static final RString IFSHIKIBETSUCODE99A = new RString("99A");
     private static final RString IFSHIKIBETSUCODE02A = new RString("02A");
@@ -70,7 +70,6 @@ public class SaiChekkuhyo_292003Process extends BatchProcessBase<HomonChosaIrais
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-//        内部QA：614　Redmine：＃75422　排他制限の確認
         getcheckEntityList(entity);
     }
 

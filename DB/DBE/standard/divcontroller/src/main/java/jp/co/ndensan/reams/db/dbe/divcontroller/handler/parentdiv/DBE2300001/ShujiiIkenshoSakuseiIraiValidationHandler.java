@@ -160,7 +160,7 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
                                 UrErrorMessages.未指定, 受診予定終了日.toString()), div.getMeireisho().getTxtJyushinKikan()));
             }
             if (div.getMeireisho().getTxtJyushinKikan().getFromValue() != null
-                    && div.getMeireisho().getTxtJyushinKikan().getToValue() == null
+                    && div.getMeireisho().getTxtJyushinKikan().getToValue() != null
                     && div.getMeireisho().getTxtJyushinKikan().getToValue().isBefore(div.getMeireisho().getTxtJyushinKikan().getFromValue())) {
                 validationMessages.add(new ValidationMessageControlPair(
                         new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(

@@ -33,8 +33,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 弁明登録情報の処理を行うです。
  *
- * @reamsid_L DBU-1080-030  lijia
- * 
+ * @reamsid_L DBU-1080-030 lijia
+ *
  */
 public class BenmeiTorokuManager {
 
@@ -143,7 +143,7 @@ public class BenmeiTorokuManager {
         }
         return new BemmeiNaiyo(entity);
     }
-    
+
     /**
      * 弁明者情報の取得処理を行うです。
      *
@@ -185,7 +185,7 @@ public class BenmeiTorokuManager {
 
     private boolean getFufukuMoshitateINS(FufukuMoshitate fufukuMoshitate) {
         DbT7001FufukuMoshitateEntity fufukuMoshitateEntity = fufukuMoshitate.toEntity();
-        fufukuMoshitateEntity.setState(EntityDataState.Added);
+        fufukuMoshitateEntity.setState(EntityDataState.Modified);
         int 戻る値 = dbT7001FufukuMoshitateDac.save(fufukuMoshitateEntity);
         return 戻る値 == 1;
     }
@@ -222,7 +222,7 @@ public class BenmeiTorokuManager {
 
     private boolean getFufukuMoshitateDEL(FufukuMoshitate fufukuMoshitate) {
         DbT7001FufukuMoshitateEntity dbT7001FufukuMoshitateEntity = fufukuMoshitate.toEntity();
-        dbT7001FufukuMoshitateEntity.setState(EntityDataState.Deleted);
+        dbT7001FufukuMoshitateEntity.setState(EntityDataState.Modified);
         int 戻る値 = dbT7001FufukuMoshitateDac.saveOrDeletePhysicalBy(dbT7001FufukuMoshitateEntity);
         return 戻る値 == 1;
     }

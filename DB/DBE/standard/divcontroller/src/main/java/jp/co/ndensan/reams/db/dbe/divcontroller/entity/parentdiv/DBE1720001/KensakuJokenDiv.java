@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KensakuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -47,8 +47,8 @@ public class KensakuJokenDiv extends Panel {
     private DropDownList ddlShinseijiShinseiKubun;
     @JsonProperty("chkSeibetsu")
     private CheckBoxList chkSeibetsu;
-    @JsonProperty("txtMaxCount")
-    private TextBox txtMaxCount;
+    @JsonProperty("TextBoxNum")
+    private TextBoxNum TextBoxNum;
     @JsonProperty("btnKyufuJissekiSearchClear")
     private Button btnKyufuJissekiSearchClear;
     @JsonProperty("btnKensaku")
@@ -295,21 +295,21 @@ public class KensakuJokenDiv extends Panel {
     }
 
     /*
-     * gettxtMaxCount
-     * @return txtMaxCount
+     * getTextBoxNum
+     * @return TextBoxNum
      */
-    @JsonProperty("txtMaxCount")
-    public TextBox getTxtMaxCount() {
-        return txtMaxCount;
+    @JsonProperty("TextBoxNum")
+    public TextBoxNum getTextBoxNum() {
+        return TextBoxNum;
     }
 
     /*
-     * settxtMaxCount
-     * @param txtMaxCount txtMaxCount
+     * setTextBoxNum
+     * @param TextBoxNum TextBoxNum
      */
-    @JsonProperty("txtMaxCount")
-    public void setTxtMaxCount(TextBox txtMaxCount) {
-        this.txtMaxCount = txtMaxCount;
+    @JsonProperty("TextBoxNum")
+    public void setTextBoxNum(TextBoxNum TextBoxNum) {
+        this.TextBoxNum = TextBoxNum;
     }
 
     /*

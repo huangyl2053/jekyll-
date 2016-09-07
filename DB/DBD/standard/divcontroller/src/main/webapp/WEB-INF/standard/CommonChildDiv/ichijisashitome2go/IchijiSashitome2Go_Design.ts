@@ -8,6 +8,14 @@ module DBD {
 
         export class Events {
 
+            public static onClick_BtnKakutei(): string {
+                return "onClick_BtnKakutei";
+            }
+
+            public static onClick_BtnTorikeshi(): string {
+                return "onClick_BtnTorikeshi";
+            }
+
         }
 
         export class Controls {

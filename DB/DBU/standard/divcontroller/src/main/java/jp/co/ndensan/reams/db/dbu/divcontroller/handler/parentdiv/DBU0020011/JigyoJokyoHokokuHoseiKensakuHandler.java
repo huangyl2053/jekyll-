@@ -13,14 +13,12 @@ import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokugeppohoseihako.Shicho
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020011.JigyoJokyoHokokuHoseiKensakuDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020011.dgHoseitaishoYoshiki_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
-import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.JigyohokokuGeppoHoseiHyoji;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 事業報告（月報）補正発行検索。
@@ -100,9 +98,10 @@ public final class JigyoJokyoHokokuHoseiKensakuHandler {
     /**
      * ParameterをViewStateに書き込みます。
      *
-     * @param 状態 状態
+     * @param map Map
+     * @return 事業報告基本
      */
-    public void putViewStateHolder(RString 状態) {
+    public JigyoHokokuGeppoParameter putViewStateHolder(Map<RString, ShichosonCodeResult> map) {
         dgHoseitaishoYoshiki_Row row = div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getClickedItem();
         JigyoHokokuGeppoParameter parameter = new JigyoHokokuGeppoParameter();
         parameter.set行報告年(new RString(row.getTxtHokokuYM().getValue().seireki().getYear().toString()));
@@ -125,12 +124,10 @@ public final class JigyoJokyoHokokuHoseiKensakuHandler {
             parameter.set市町村名称(市町村.get(1));
             parameter.set選択した市町村コード(市町村.get(0));
             LasdecCode 市町村コード = new LasdecCode(市町村.get(0));
-            Map<RString, ShichosonCodeResult> map = ViewStateHolder.get(ViewStateKeys.市町村Entiyリスト, Map.class);
             ShichosonCodeResult codeResult = map.get(市町村コード.value());
             parameter.set保険者コード(codeResult.get保険者コード());
         }
-        ViewStateHolder.put(ViewStateKeys.事業報告基本, parameter);
-        ViewStateHolder.put(ViewStateKeys.状態, 状態);
+        return parameter;
     }
 
     /**

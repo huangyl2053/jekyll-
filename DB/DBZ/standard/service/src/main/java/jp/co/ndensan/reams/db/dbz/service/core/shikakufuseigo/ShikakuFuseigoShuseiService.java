@@ -6,9 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo;
 
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -28,8 +25,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.TashichosonJushochiTokureiM
 import jp.co.ndensan.reams.db.dbz.service.core.basic.TekiyoJogaishaManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -204,8 +199,9 @@ public class ShikakuFuseigoShuseiService {
      * @return Map<RString, DbzErrorMessages>
      */
     public Map<RString, DbzErrorMessages> validate被保台帳整合(IKojin 個人情報, HihokenshaDaicho 資格の情報) {
-        RString 保険者構成 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者構成, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        if (HokenshaKosei.広域市町村.getコード().equals(保険者構成)) {
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        RString 導入形態コード = shichosonSecurityJoho.get導入形態コード().value();
+        if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード)) {
             KoikiShikakuJukiValidator validator = KoikiShikakuJukiValidator.createInstance();
             return validator.validate(個人情報, 資格の情報, dbt1001manager.get資格の情報For資格不整合(
                     資格の情報.get被保険者番号(), 資格の情報.get識別コード(), 資格の情報.get異動日()));

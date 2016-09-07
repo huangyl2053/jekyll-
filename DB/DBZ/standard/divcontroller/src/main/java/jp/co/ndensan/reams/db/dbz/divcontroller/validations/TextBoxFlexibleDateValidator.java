@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.validations;
 
 import java.util.Objects;
-import javax.servlet.jsp.tagext.ValidationMessage;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;

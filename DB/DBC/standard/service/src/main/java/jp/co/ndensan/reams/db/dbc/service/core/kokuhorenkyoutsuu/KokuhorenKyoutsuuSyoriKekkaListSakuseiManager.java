@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.entity.csv.SyoriKekkaListItijiCSVEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.SyoriKekkaListItijiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -116,11 +117,11 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
         headerList.add(HEADER_備考);
 
         IKokuhorenKyoutsuuMapper mapper = mapperProvider.create(IKokuhorenKyoutsuuMapper.class);
-        List<SyoriKekkaListItijiEntity> entityList = mapper.select処理結果リスト一時TBL();
+        List<DbWT0002KokuhorenTorikomiErrorTempEntity> entityList = mapper.select処理結果リスト一時TBL();
         if (null != entityList && !entityList.isEmpty()) {
             List<SyoriKekkaListItijiCSVEntity> csvEntityList = new ArrayList<>();
             boolean isFirst = true;
-            for (SyoriKekkaListItijiEntity data : entityList) {
+            for (DbWT0002KokuhorenTorikomiErrorTempEntity data : entityList) {
                 SyoriKekkaListItijiCSVEntity entity = new SyoriKekkaListItijiCSVEntity();
                 if (isFirst) {
                     YMDHMS currentTime = YMDHMS.now();
@@ -130,8 +131,8 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
                     entity.set作成日時(new RString(年月日.concat(時刻.toString()).toString()));
                     isFirst = false;
                 }
-                entity.set証記載保険者番号(data.get証記載保険者番号().getColumnValue());
-                entity.set被保険者番号(data.get被保険者番号().getColumnValue());
+                entity.set証記載保険者番号(getColumnValue(data.get証記載保険者番号()));
+                entity.set被保険者番号(getColumnValue(data.get被保険者番号()));
                 entity.set被保険者カナ氏名(data.get被保険者カナ氏名());
                 entity.set被保険者氏名(data.get被保険者氏名());
                 entity.setキー1(data.getキー1());
@@ -185,7 +186,7 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
                 if (!RString.isNullOrEmpty(key5)) {
                     rList.add(getNotNull(data.getキー5()));
                 }
-                rList.add(data.getエラー内容());
+                rList.add(getNotNull(data.getエラー内容()));
                 rList.add(getNotNull(data.get備考()));
                 csvListWriter.writeLine(rList);
             }
@@ -196,6 +197,13 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
 
     private RString getNotNull(RString rstring) {
         return RString.isNullOrEmpty(rstring) ? RString.EMPTY : rstring;
+    }
+
+    private RString getColumnValue(IDbColumnMappable column) {
+        if (null == column) {
+            return RString.EMPTY;
+        }
+        return column.getColumnValue();
     }
 
 }

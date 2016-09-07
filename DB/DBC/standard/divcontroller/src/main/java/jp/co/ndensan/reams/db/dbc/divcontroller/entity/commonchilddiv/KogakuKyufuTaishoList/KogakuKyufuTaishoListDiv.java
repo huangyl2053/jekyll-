@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyu
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -13,9 +14,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -33,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBC-2020-030 quxiaodong
  */
 public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaishoListDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -48,14 +51,14 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     private MeisaiGokeiHenshuPanelDiv MeisaiGokeiHenshuPanel;
     @JsonProperty("rowId")
     private TextBoxNum rowId;
-    @JsonProperty("jigyoshaCode")
-    private RString jigyoshaCode;
-    @JsonProperty("jigyoshaMeisho ")
-    private RString jigyoshaMeisho ;
-    @JsonProperty("serviceCode")
-    private RString serviceCode;
-    @JsonProperty("serviceMeisho")
-    private RString serviceMeisho;
+    @JsonProperty("JigyoshaMode")
+    private RString JigyoshaMode;
+    @JsonProperty("hdnServiceType")
+    private RString hdnServiceType;
+    @JsonProperty("hdnServiceTypeName")
+    private RString hdnServiceTypeName;
+    @JsonProperty("hdnServiceRyakusho")
+    private RString hdnServiceRyakusho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -136,75 +139,75 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     /*
-     * getjigyoshaCode
-     * @return jigyoshaCode
+     * getJigyoshaMode
+     * @return JigyoshaMode
      */
-    @JsonProperty("jigyoshaCode")
-    public RString getJigyoshaCode() {
-        return jigyoshaCode;
+    @JsonProperty("JigyoshaMode")
+    public RString getJigyoshaMode() {
+        return JigyoshaMode;
     }
 
     /*
-     * setjigyoshaCode
-     * @param jigyoshaCode jigyoshaCode
+     * setJigyoshaMode
+     * @param JigyoshaMode JigyoshaMode
      */
-    @JsonProperty("jigyoshaCode")
-    public void setJigyoshaCode(RString jigyoshaCode) {
-        this.jigyoshaCode = jigyoshaCode;
+    @JsonProperty("JigyoshaMode")
+    public void setJigyoshaMode(RString JigyoshaMode) {
+        this.JigyoshaMode = JigyoshaMode;
     }
 
     /*
-     * getjigyoshaMeisho 
-     * @return jigyoshaMeisho 
+     * gethdnServiceType
+     * @return hdnServiceType
      */
-    @JsonProperty("jigyoshaMeisho ")
-    public RString getJigyoshaMeisho () {
-        return jigyoshaMeisho ;
+    @JsonProperty("hdnServiceType")
+    public RString getHdnServiceType() {
+        return hdnServiceType;
     }
 
     /*
-     * setjigyoshaMeisho 
-     * @param jigyoshaMeisho  jigyoshaMeisho 
+     * sethdnServiceType
+     * @param hdnServiceType hdnServiceType
      */
-    @JsonProperty("jigyoshaMeisho ")
-    public void setJigyoshaMeisho (RString jigyoshaMeisho ) {
-        this.jigyoshaMeisho  = jigyoshaMeisho ;
+    @JsonProperty("hdnServiceType")
+    public void setHdnServiceType(RString hdnServiceType) {
+        this.hdnServiceType = hdnServiceType;
     }
 
     /*
-     * getserviceCode
-     * @return serviceCode
+     * gethdnServiceTypeName
+     * @return hdnServiceTypeName
      */
-    @JsonProperty("serviceCode")
-    public RString getServiceCode() {
-        return serviceCode;
+    @JsonProperty("hdnServiceTypeName")
+    public RString getHdnServiceTypeName() {
+        return hdnServiceTypeName;
     }
 
     /*
-     * setserviceCode
-     * @param serviceCode serviceCode
+     * sethdnServiceTypeName
+     * @param hdnServiceTypeName hdnServiceTypeName
      */
-    @JsonProperty("serviceCode")
-    public void setServiceCode(RString serviceCode) {
-        this.serviceCode = serviceCode;
+    @JsonProperty("hdnServiceTypeName")
+    public void setHdnServiceTypeName(RString hdnServiceTypeName) {
+        this.hdnServiceTypeName = hdnServiceTypeName;
     }
 
     /*
-     * getserviceMeisho
-     * @return serviceMeisho
+     * gethdnServiceRyakusho
+     * @return hdnServiceRyakusho
      */
-    @JsonProperty("serviceMeisho")
-    public RString getServiceMeisho() {
-        return serviceMeisho;
+    @JsonProperty("hdnServiceRyakusho")
+    public RString getHdnServiceRyakusho() {
+        return hdnServiceRyakusho;
     }
 
     /*
-     * setserviceMeisho
-     * @param serviceMeisho serviceMeisho
+     * sethdnServiceRyakusho
+     * @param hdnServiceRyakusho hdnServiceRyakusho
      */
-    @JsonProperty("serviceMeisho")
-    public void setServiceMeisho(RString serviceMeisho) {
-        this.serviceMeisho = serviceMeisho;
+    @JsonProperty("hdnServiceRyakusho")
+    public void setHdnServiceRyakusho(RString hdnServiceRyakusho) {
+        this.hdnServiceRyakusho = hdnServiceRyakusho;
     }
 
     /*
@@ -248,6 +251,43 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
 
     public void setMode_DisplayMode( DisplayMode value ) {
         _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
+    }
+
+    public static enum MeisaiGokeiKubunMode implements ICommonChildDivMode {
+
+        Meisai("Meisai"),
+        Gokei("Gokei");
+
+        private final String name;
+
+        private MeisaiGokeiKubunMode(final String name) {
+            this.name = name;
+        }
+
+        public static MeisaiGokeiKubunMode getEnum(String str) {
+            MeisaiGokeiKubunMode[] enumArray = MeisaiGokeiKubunMode.values();
+
+            for (MeisaiGokeiKubunMode enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public MeisaiGokeiKubunMode getMode_MeisaiGokeiKubunMode() {
+        return (MeisaiGokeiKubunMode) _CommonChildDivModeUtil.getMode( this.modes, MeisaiGokeiKubunMode.class );
+    }
+
+    public void setMode_MeisaiGokeiKubunMode( MeisaiGokeiKubunMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, MeisaiGokeiKubunMode.class , value );
     }
 
     /*
@@ -344,23 +384,43 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
+    public GokeiPanelDiv getGokeiPanel() {
+        return this.getMeisaiGokeiHenshuPanel().getGokeiPanel();
+    }
+
+    @JsonIgnore
+    public void  setGokeiPanel(GokeiPanelDiv GokeiPanel) {
+        this.getMeisaiGokeiHenshuPanel().setGokeiPanel(GokeiPanel);
+    }
+
+    @JsonIgnore
     public TextBoxNum getTxtSanteiKijunGaku() {
-        return this.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku();
+        return this.getMeisaiGokeiHenshuPanel().getGokeiPanel().getTxtSanteiKijunGaku();
     }
 
     @JsonIgnore
     public void  setTxtSanteiKijunGaku(TextBoxNum txtSanteiKijunGaku) {
-        this.getMeisaiGokeiHenshuPanel().setTxtSanteiKijunGaku(txtSanteiKijunGaku);
+        this.getMeisaiGokeiHenshuPanel().getGokeiPanel().setTxtSanteiKijunGaku(txtSanteiKijunGaku);
     }
 
     @JsonIgnore
     public TextBoxNum getTxtSiharaiZumiGaku() {
-        return this.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku();
+        return this.getMeisaiGokeiHenshuPanel().getGokeiPanel().getTxtSiharaiZumiGaku();
     }
 
     @JsonIgnore
     public void  setTxtSiharaiZumiGaku(TextBoxNum txtSiharaiZumiGaku) {
-        this.getMeisaiGokeiHenshuPanel().setTxtSiharaiZumiGaku(txtSiharaiZumiGaku);
+        this.getMeisaiGokeiHenshuPanel().getGokeiPanel().setTxtSiharaiZumiGaku(txtSiharaiZumiGaku);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtKogakuShikyuGaku() {
+        return this.getMeisaiGokeiHenshuPanel().getGokeiPanel().getTxtKogakuShikyuGaku();
+    }
+
+    @JsonIgnore
+    public void  setTxtKogakuShikyuGaku(TextBoxNum txtKogakuShikyuGaku) {
+        this.getMeisaiGokeiHenshuPanel().getGokeiPanel().setTxtKogakuShikyuGaku(txtKogakuShikyuGaku);
     }
 
     @JsonIgnore
@@ -374,73 +434,83 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
+    public KogakuKyufuKonkyoPanelDiv getKogakuKyufuKonkyoPanel() {
+        return this.getMeisaiGokeiHenshuPanel().getKogakuKyufuKonkyoPanel();
+    }
+
+    @JsonIgnore
+    public void  setKogakuKyufuKonkyoPanel(KogakuKyufuKonkyoPanelDiv KogakuKyufuKonkyoPanel) {
+        this.getMeisaiGokeiHenshuPanel().setKogakuKyufuKonkyoPanel(KogakuKyufuKonkyoPanel);
+    }
+
+    @JsonIgnore
     public RadioButton getRdbTsukiOkure() {
-        return this.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure();
+        return this.getMeisaiGokeiHenshuPanel().getKogakuKyufuKonkyoPanel().getRdbTsukiOkure();
     }
 
     @JsonIgnore
     public void  setRdbTsukiOkure(RadioButton rdbTsukiOkure) {
-        this.getMeisaiGokeiHenshuPanel().setRdbTsukiOkure(rdbTsukiOkure);
+        this.getMeisaiGokeiHenshuPanel().getKogakuKyufuKonkyoPanel().setRdbTsukiOkure(rdbTsukiOkure);
     }
 
     @JsonIgnore
     public RadioButton getRabSetaiShotokuKubun() {
-        return this.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun();
+        return this.getMeisaiGokeiHenshuPanel().getKogakuKyufuKonkyoPanel().getRabSetaiShotokuKubun();
     }
 
     @JsonIgnore
     public void  setRabSetaiShotokuKubun(RadioButton rabSetaiShotokuKubun) {
-        this.getMeisaiGokeiHenshuPanel().setRabSetaiShotokuKubun(rabSetaiShotokuKubun);
+        this.getMeisaiGokeiHenshuPanel().getKogakuKyufuKonkyoPanel().setRabSetaiShotokuKubun(rabSetaiShotokuKubun);
     }
 
     @JsonIgnore
     public RadioButton getRdbShotokuKubun() {
-        return this.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun();
+        return this.getMeisaiGokeiHenshuPanel().getKogakuKyufuKonkyoPanel().getRdbShotokuKubun();
     }
 
     @JsonIgnore
     public void  setRdbShotokuKubun(RadioButton rdbShotokuKubun) {
-        this.getMeisaiGokeiHenshuPanel().setRdbShotokuKubun(rdbShotokuKubun);
+        this.getMeisaiGokeiHenshuPanel().getKogakuKyufuKonkyoPanel().setRdbShotokuKubun(rdbShotokuKubun);
     }
 
     @JsonIgnore
     public RadioButton getRdbGassan() {
-        return this.getMeisaiGokeiHenshuPanel().getRdbGassan();
+        return this.getMeisaiGokeiHenshuPanel().getKogakuKyufuKonkyoPanel().getRdbGassan();
     }
 
     @JsonIgnore
     public void  setRdbGassan(RadioButton rdbGassan) {
-        this.getMeisaiGokeiHenshuPanel().setRdbGassan(rdbGassan);
+        this.getMeisaiGokeiHenshuPanel().getKogakuKyufuKonkyoPanel().setRdbGassan(rdbGassan);
     }
 
     @JsonIgnore
     public RadioButton getRdbRoreiFukushiNenkin() {
-        return this.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin();
+        return this.getMeisaiGokeiHenshuPanel().getKogakuKyufuKonkyoPanel().getRdbRoreiFukushiNenkin();
     }
 
     @JsonIgnore
     public void  setRdbRoreiFukushiNenkin(RadioButton rdbRoreiFukushiNenkin) {
-        this.getMeisaiGokeiHenshuPanel().setRdbRoreiFukushiNenkin(rdbRoreiFukushiNenkin);
+        this.getMeisaiGokeiHenshuPanel().getKogakuKyufuKonkyoPanel().setRdbRoreiFukushiNenkin(rdbRoreiFukushiNenkin);
     }
 
     @JsonIgnore
     public RadioButton getRdbRiyoshafutanDai2dankai() {
-        return this.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai();
+        return this.getMeisaiGokeiHenshuPanel().getKogakuKyufuKonkyoPanel().getRdbRiyoshafutanDai2dankai();
     }
 
     @JsonIgnore
     public void  setRdbRiyoshafutanDai2dankai(RadioButton rdbRiyoshafutanDai2dankai) {
-        this.getMeisaiGokeiHenshuPanel().setRdbRiyoshafutanDai2dankai(rdbRiyoshafutanDai2dankai);
+        this.getMeisaiGokeiHenshuPanel().getKogakuKyufuKonkyoPanel().setRdbRiyoshafutanDai2dankai(rdbRiyoshafutanDai2dankai);
     }
 
     @JsonIgnore
     public RadioButton getRdbGekihenkanwaKubun() {
-        return this.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun();
+        return this.getMeisaiGokeiHenshuPanel().getKogakuKyufuKonkyoPanel().getRdbGekihenkanwaKubun();
     }
 
     @JsonIgnore
     public void  setRdbGekihenkanwaKubun(RadioButton rdbGekihenkanwaKubun) {
-        this.getMeisaiGokeiHenshuPanel().setRdbGekihenkanwaKubun(rdbGekihenkanwaKubun);
+        this.getMeisaiGokeiHenshuPanel().getKogakuKyufuKonkyoPanel().setRdbGekihenkanwaKubun(rdbGekihenkanwaKubun);
     }
 
     @JsonIgnore
@@ -472,12 +542,187 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
      * @param 画面モード RString
      * @param 被保険者番号 HihokenshaNo
      * @param サービス提供年月 FlexibleYearMonth
-     * @param 履歴番号 RString
+     * @param 履歴番号 int
      */
     @Override
     public void initialize(RString メニューID, RString 画面モード, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス提供年月, RString 履歴番号) {
+            FlexibleYearMonth サービス提供年月, int 履歴番号) {
         KogakuKyufuTaishoListHandler.of(this).画面初期化(メニューID, 画面モード, 被保険者番号, サービス提供年月, 履歴番号);
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, サービス提供年月);
+    }
+
+    @Override
+    public void clear画面内容() {
+        KogakuKyufuTaishoListHandler.of(this).clear高額明細合計データ編集エリア();
+    }
+
+    /**
+     * 給付対象一覧を取得します。
+     *
+     * @return List<dgTaishoshaIchiran_Row>
+     */
+    @Override
+    public List<dgTaishoshaIchiran_Row> get給付対象一覧() {
+        return KogakuKyufuTaishoListHandler.of(this).get給付対象一覧();
+    }
+
+    /**
+     * 明細合計区分を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get明細合計区分() {
+        return KogakuKyufuTaishoListHandler.of(this).get明細合計区分();
+    }
+
+    /**
+     * 事業者コードを取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get事業者コード() {
+        return KogakuKyufuTaishoListHandler.of(this).get事業者コード();
+    }
+
+    /**
+     * 事業者名称を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get事業者名称() {
+        return KogakuKyufuTaishoListHandler.of(this).get事業者名称();
+    }
+
+    /**
+     * サービス種類を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString getサービス種類() {
+        return KogakuKyufuTaishoListHandler.of(this).getサービス種類();
+    }
+
+    /**
+     * サービス種類名称を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString getサービス種類名称() {
+        return KogakuKyufuTaishoListHandler.of(this).getサービス種類名称();
+    }
+
+    /**
+     * サービス費用合計を取得します。
+     *
+     * @return Decimal
+     */
+    @Override
+    public Decimal getサービス費用合計() {
+        return KogakuKyufuTaishoListHandler.of(this).getサービス費用合計();
+    }
+
+    /**
+     * 利用者負担合計を取得します。
+     *
+     * @return Decimal
+     */
+    @Override
+    public Decimal get利用者負担合計() {
+        return KogakuKyufuTaishoListHandler.of(this).get利用者負担合計();
+    }
+
+    /**
+     * 算定基準額を取得します。
+     *
+     * @return Decimal
+     */
+    @Override
+    public Decimal get算定基準額() {
+        return KogakuKyufuTaishoListHandler.of(this).get算定基準額();
+    }
+
+    /**
+     * 支払済額を取得します。
+     *
+     * @return Decimal
+     */
+    @Override
+    public Decimal get支払済額() {
+        return KogakuKyufuTaishoListHandler.of(this).get支払済額();
+    }
+
+    /**
+     * 月遅れ区分を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get月遅れ区分() {
+        return KogakuKyufuTaishoListHandler.of(this).get月遅れ区分();
+    }
+
+    /**
+     * 世帯所得区分を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get世帯所得区分() {
+        return KogakuKyufuTaishoListHandler.of(this).get世帯所得区分();
+    }
+
+    /**
+     * 本人所得区分を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get本人所得区分() {
+        return KogakuKyufuTaishoListHandler.of(this).get本人所得区分();
+    }
+
+    /**
+     * 合算区分を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get合算区分() {
+        return KogakuKyufuTaishoListHandler.of(this).get合算区分();
+    }
+
+    /**
+     * 老齢福祉年金を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get老齢福祉年金() {
+        return KogakuKyufuTaishoListHandler.of(this).get老齢福祉年金();
+    }
+
+    /**
+     * 利用者負担第２段階を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get利用者負担第２段階() {
+        return KogakuKyufuTaishoListHandler.of(this).get利用者負担第２段階();
+    }
+
+    /**
+     * 利用者負担第２段階を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get激変緩和区分() {
+        return KogakuKyufuTaishoListHandler.of(this).get激変緩和区分();
     }
 }

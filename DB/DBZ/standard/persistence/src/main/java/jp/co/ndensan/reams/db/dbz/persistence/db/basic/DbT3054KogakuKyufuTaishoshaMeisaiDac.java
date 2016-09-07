@@ -4,6 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
+import static com.ctc.wstx.sax.WstxSAXParserFactory.main;
+import static com.oracle.util.Checksums.update;
+import com.sun.swing.internal.plaf.basic.resources.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisai;
@@ -17,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import static jp.co.ndensan.reams.uz.uza.report.util._ReportSourceDataType.DB;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -25,9 +29,13 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
+import static org.joda.time.format.ISOPeriodFormat.standard;
+import static sun.java2d.opengl.OGLRenderQueue.sync;
 
 /**
  * 高額介護サービス費給付対象者明細のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 quxiaodong
  */
 public class DbT3054KogakuKyufuTaishoshaMeisaiDac implements ISaveable<DbT3054KogakuKyufuTaishoshaMeisaiEntity> {
 
@@ -86,6 +94,30 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiDac implements ISaveable<DbT3054Ko
     }
 
     /**
+     * 主キーで高額介護サービス費給付対象者明細を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 ServiceTeikyoYM
+     * @return DbT3054KogakuKyufuTaishoshaMeisaiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3054KogakuKyufuTaishoshaMeisaiEntity> selectAllByKey(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3054KogakuKyufuTaishoshaMeisai.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月))).
+                toList(DbT3054KogakuKyufuTaishoshaMeisaiEntity.class);
+    }
+
+    /**
      * DbT3054KogakuKyufuTaishoshaMeisaiEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
      * @param entity entity
@@ -129,5 +161,18 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiDac implements ISaveable<DbT3054Ko
                 order(by(hihokenshaNo, Order.DESC), by(serviceTeikyoYM, Order.DESC), by(rirekiNo, Order.DESC)).
                 limit(1).
                 toObject(DbT3054KogakuKyufuTaishoshaMeisaiEntity.class);
+    }
+
+    /**
+     * DbT3054KogakuKyufuTaishoshaMeisaiEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    //TODO Javadocのみなおし
+    @Transaction
+    public int delete(DbT3054KogakuKyufuTaishoshaMeisaiEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費給付対象者明細エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 }

@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 /**
  * HokenryoRitsuDai3Dankai のクラスファイル
  *
- * @reamsid_L DBB-1770-010 zhangrui
+ * @reamsid_L DBB-1770-010 wangkanglei
  */
 public class HokenryoRitsuDai3DankaiDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

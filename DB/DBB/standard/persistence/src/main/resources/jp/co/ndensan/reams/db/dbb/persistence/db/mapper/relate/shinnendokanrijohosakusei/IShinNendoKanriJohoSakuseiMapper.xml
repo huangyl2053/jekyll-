@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--@reamsid_L DBB-5721-010 chenyadong-->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.shinnendokanrijohosakusei.IShinNendoKanriJohoSakuseiMapper">
+    <select resultOrdered="true" id="selectカスタムコンフィグByKey"
+            resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.shinnendokanrijohosakusei.ShinNendoKanriJohoSakuseiEntity"
+            parameterType="java.util.Map">
+        SELECT
+        "schemaName",
+        "subGyomuCode",
+        "configName",
+        "optionKeyword",
+        "effectiveDate",
+        "configValue",
+        "changeLog",
+        "insertTimestamp",
+        "lasdecCode"
+        FROM rgdb."UzT0002CustomConfig" 
+        WHERE "effectiveDate" = #{effectiveDate}
+        AND "subGyomuCode"  = 'DBB'
+    </select>
+    
+    <insert id="insertカスタムコンフィグByKey" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.shinnendokanrijohosakusei.ShinNendoKanriJohoSakuseiEntity">
+        INSERT INTO rgdb."UzT0002CustomConfig"(
+        "schemaName",
+        "subGyomuCode",
+        "configName",
+        "optionKeyword",
+        "effectiveDate",
+        "configValue",
+        "changeLog",
+        "insertTimestamp",
+        "lasdecCode")
+        VALUES 
+        (
+        #{schemaName},
+        #{subGyomuCode},
+        #{configName},
+        #{optionKeyword},
+        #{effectiveDate},
+        #{configValue},
+        #{changeLog},
+        #{insertTimestamp},
+        #{lasdecCode}
+        )
+    </insert> 
+</mapper>

@@ -39,77 +39,9 @@
      "eventName": "完了",
      "destroy": false,
      "condition": ""
-    }
-   ]
-  },
-  {
-   "id": 2,
-   "name": "審査依頼受付",
-   "transitionList": [
-    {
-     "id": "1",
-     "type": "start",
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE0100001",
-     "toLayoutTitle": "要介護認定申請検索",
-     "toState": "検索結果一覧"
-    },
-    {
-     "id": "2",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE0100001",
-     "layoutTitle": "要介護認定申請検索",
-     "eventName": "審査依頼受付へ",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE1010001",
-     "toLayoutTitle": "要介護認定申請（みなし２号）登録",
-     "toState": "default"
-    },
-    {
-     "id": "3",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE1010001",
-     "layoutTitle": "要介護認定申請（みなし２号）登録",
-     "eventName": "一覧に戻る",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE0100001",
-     "toLayoutTitle": "要介護認定申請検索",
-     "toState": "検索結果一覧"
     },
     {
      "id": "4",
-     "type": "end",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE1010001",
-     "layoutTitle": "要介護認定申請（みなし２号）登録",
-     "eventName": "完了",
-     "destroy": false,
-     "condition": ""
-    }
-   ]
-  },
-  {
-   "id": 3,
-   "name": "みなし２号被保険者検索",
-   "transitionList": [
-    {
-     "id": "1",
-     "type": "start",
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE1020001",
-     "toLayoutTitle": "みなし2号等登録",
-     "toState": "default"
-    },
-    {
-     "id": "2",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE1020001",
@@ -123,7 +55,7 @@
      "toState": "初期表示"
     },
     {
-     "id": "3",
+     "id": "5",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBZ",
      "layoutName": "DBZ5100001",
@@ -135,16 +67,6 @@
      "toLayoutName": "DBE1020001",
      "toLayoutTitle": "みなし2号等登録",
      "toState": "default"
-    },
-    {
-     "id": "4",
-     "type": "end",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE1020001",
-     "layoutTitle": "みなし2号等登録",
-     "eventName": "申請情報入力へ",
-     "destroy": false,
-     "condition": ""
     }
    ]
   }

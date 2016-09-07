@@ -1,0 +1,340 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBC&quot;,&quot;controlName&quot;:&quot;KogakuKyufuTaishoList&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCloseEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;100px&quot;,&quot;minHeight&quot;:&quot;200px&quot;,&quot;widthPercent&quot;:&quot;80&quot;,&quot;heightPercent&quot;:&quot;80&quot;,&quot;enterKeyAssignedControl&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBC.KogakuKyufuTaishoList"><div class="StateChangable UzPanel JSControl FloatLeft marginTop-Default marginBottom-Default marginLeft-Default marginRight-Default UzCommonChildDivPanel Width-G1 UzCompositeChild" id="KogakuKyufuTaishoList" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KogakuKyufuTaishoList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;KogakuKyufuTaishoList&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KogakuKyufuTaishoList&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;onActive&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;onClick_btnTsuika&quot;,&quot;requestUrl&quot;:&quot;dbc/db/dbc/KogakuKyufuTaishoList/onClick_btnTsuika&quot;},{&quot;eventName&quot;:&quot;onClick_modify&quot;,&quot;requestUrl&quot;:&quot;dbc/db/dbc/KogakuKyufuTaishoList/onClick_modify&quot;},{&quot;eventName&quot;:&quot;onClick_delete&quot;,&quot;requestUrl&quot;:&quot;dbc/db/dbc/KogakuKyufuTaishoList/onClick_delete&quot;},{&quot;eventName&quot;:&quot;onBeforeOpenDialog_btnJgyosha&quot;,&quot;requestUrl&quot;:&quot;dbc/db/dbc/KogakuKyufuTaishoList/onBeforeOpenDialog_btnJgyosha&quot;},{&quot;eventName&quot;:&quot;onOkClose_btnJgyosha&quot;,&quot;requestUrl&quot;:&quot;dbc/db/dbc/KogakuKyufuTaishoList/onOkClose_btnJgyosha&quot;},{&quot;eventName&quot;:&quot;onBeforeOpenDialog_btnServiceSyurui&quot;,&quot;requestUrl&quot;:&quot;dbc/db/dbc/KogakuKyufuTaishoList/onBeforeOpenDialog_btnServiceSyurui&quot;},{&quot;eventName&quot;:&quot;onOkClose_btnServiceSyurui&quot;,&quot;requestUrl&quot;:&quot;dbc/db/dbc/KogakuKyufuTaishoList/onOkClose_btnServiceSyurui&quot;},{&quot;eventName&quot;:&quot;onClick_btnTorikeshi&quot;,&quot;requestUrl&quot;:&quot;dbc/db/dbc/KogakuKyufuTaishoList/onClick_btnTorikeshi&quot;},{&quot;eventName&quot;:&quot;onClick_btnkakutei&quot;,&quot;requestUrl&quot;:&quot;dbc/db/dbc/KogakuKyufuTaishoList/onClick_btnkakutei&quot;}],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;JigyoshaMode&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;hdnServiceType&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;hdnServiceTypeName&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;hdnServiceRyakusho&quot;,&quot;value&quot;:&quot;&quot;}],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KogakuKyufuTaishoList_panel_header_area" style="display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content ui-droppable ui-sortable panelPaddingDelete Panel-EraseBoder" id="KogakuKyufuTaishoList_panel_body_area"><button class="UzButton JSControl controlMargin-M heightTextBoxMatchesFlag heightTextBoxMatches FloatLeft marginRight-XS UzCompositeChild" id="btnTsuika" style="width: 70px; padding-top: 3px; margin-left: 10px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnTsuika&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;70px&quot;,&quot;marginLeft&quot;:&quot;10px&quot;,&quot;selectControlID&quot;:&quot;btnTsuika&quot;,&quot;text&quot;:&quot;追加する&quot;,&quot;onClick&quot;:&quot;onClick_btnTsuika&quot;,&quot;heightTextBoxMatches&quot;:true}"><span>追加する</span></button><div title="" class="UzDataGrid JSControl FloatLeft controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="dgTaishoshaIchiran" style="width: 1080px; height: 191px; display: block;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgTaishoshaIchiran&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;1080px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;dgTaishoshaIchiran&quot;,&quot;height&quot;:&quot;191px&quot;,&quot;dataSource&quot;:[],&quot;gridSetting&quot;:{&quot;rowHeight&quot;:27,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowClearSortButton&quot;:false,&quot;isShowSelectedRowCount&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowRowState&quot;:false,&quot;columns&quot;:[{&quot;columnName&quot;:&quot;状態&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;data0&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;data0&quot;},{&quot;columnName&quot;:&quot;事業者番号&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;data1&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;data1&quot;},{&quot;columnName&quot;:&quot;事業者名&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;data2&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:250,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;data2&quot;},{&quot;columnName&quot;:&quot;サービス<br>種類&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;data3&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;data3&quot;},{&quot;columnName&quot;:&quot;サービス<br>費用&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;data4&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:5,&quot;cellDetails&quot;:{&quot;cellType&quot;:5,&quot;disabled&quot;:false,&quot;readOnly&quot;:true,&quot;required&quot;:false,&quot;maxLength&quot;:&quot;100000000&quot;,&quot;minLength&quot;:&quot;0&quot;,&quot;maxValue&quot;:&quot;1.7976931348623157e+308&quot;,&quot;minValue&quot;:&quot;0&quot;,&quot;isCurrency&quot;:false,&quot;isComma&quot;:true,&quot;decimalPointLength&quot;:&quot;0&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;placeHolder&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;data4&quot;},{&quot;columnName&quot;:&quot;利用者<br>負担&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;data5&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:5,&quot;cellDetails&quot;:{&quot;cellType&quot;:5,&quot;disabled&quot;:false,&quot;readOnly&quot;:true,&quot;required&quot;:false,&quot;maxLength&quot;:&quot;100000000&quot;,&quot;minLength&quot;:&quot;0&quot;,&quot;maxValue&quot;:&quot;1.7976931348623157e+308&quot;,&quot;minValue&quot;:&quot;0&quot;,&quot;isCurrency&quot;:false,&quot;isComma&quot;:true,&quot;decimalPointLength&quot;:&quot;0&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;placeHolder&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;data5&quot;},{&quot;columnName&quot;:&quot;算定<br>基準額&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;data6&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:5,&quot;cellDetails&quot;:{&quot;cellType&quot;:5,&quot;disabled&quot;:false,&quot;readOnly&quot;:true,&quot;required&quot;:false,&quot;maxLength&quot;:&quot;100000000&quot;,&quot;minLength&quot;:&quot;0&quot;,&quot;maxValue&quot;:&quot;1.7976931348623157e+308&quot;,&quot;minValue&quot;:&quot;0&quot;,&quot;isCurrency&quot;:false,&quot;isComma&quot;:true,&quot;decimalPointLength&quot;:&quot;0&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;placeHolder&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;data6&quot;},{&quot;columnName&quot;:&quot;支払<br>済額&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;data7&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:5,&quot;cellDetails&quot;:{&quot;cellType&quot;:5,&quot;disabled&quot;:false,&quot;readOnly&quot;:true,&quot;required&quot;:false,&quot;maxLength&quot;:&quot;100000000&quot;,&quot;minLength&quot;:&quot;0&quot;,&quot;maxValue&quot;:&quot;1.7976931348623157e+308&quot;,&quot;minValue&quot;:&quot;0&quot;,&quot;isCurrency&quot;:false,&quot;isComma&quot;:true,&quot;decimalPointLength&quot;:&quot;0&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;placeHolder&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;data7&quot;},{&quot;columnName&quot;:&quot;高額<br>支給額&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;data8&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:5,&quot;cellDetails&quot;:{&quot;cellType&quot;:5,&quot;disabled&quot;:false,&quot;readOnly&quot;:true,&quot;required&quot;:false,&quot;maxLength&quot;:&quot;100000000&quot;,&quot;minLength&quot;:&quot;0&quot;,&quot;maxValue&quot;:&quot;1.7976931348623157e+308&quot;,&quot;minValue&quot;:&quot;0&quot;,&quot;isCurrency&quot;:false,&quot;isComma&quot;:true,&quot;decimalPointLength&quot;:&quot;0&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;placeHolder&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;data8&quot;},{&quot;columnName&quot;:&quot;高額判定根拠&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;data9&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:200,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;data9&quot;},{&quot;columnName&quot;:&quot;明細合計区分&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;data10&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:0,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;data10&quot;},{&quot;columnName&quot;:&quot;サービス種類コード&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;data11&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:0,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;data11&quot;}],&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;data3&quot;,&quot;headerHeight&quot;:1,&quot;groupHeaderHeight&quot;:0},&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:true,&quot;isShowDeleteButtonColumn&quot;:true,&quot;isShowCancelButtonColumn&quot;:false,&quot;isErrorAndWarningColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;cancelButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;onSelectByModifyButton&quot;:&quot;onClick_modify&quot;,&quot;onSelectByDeleteButton&quot;:&quot;onClick_delete&quot;,&quot;onMultiRows&quot;:&quot;onMulti_dgKyufuJissekiMeisaiList&quot;,&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgTaishoshaIchiran_grid_table" role="" style="width: 1080px; height: 166px; position: relative;"></div><div id="dgTaishoshaIchiran_footer" style="width: 1080px; height: 25px;"></div></div><div class="StateChangable UzPanel JSControl FloatLeft marginLeft-XS marginRight-XS UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M UzCompositeChild" id="MeisaiGokeiHenshuPanel" style="width: 1020px; margin-top: 0px; margin-bottom: 0px; position: relative;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;MeisaiGokeiHenshuPanel&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1020px&quot;,&quot;selectControlID&quot;:&quot;MeisaiGokeiHenshuPanel&quot;,&quot;title&quot;:&quot;高額明細合計データ編集&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:1,&quot;canPost&quot;:false}"><div class="UzPanelHeader clearBackground" id="MeisaiGokeiHenshuPanel_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">高額明細合計データ編集</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable Panel-GroupBox" id="MeisaiGokeiHenshuPanel_panel_body_area"><div title="" class="UzRadioButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS ClearFloat UzCompositeChild" id="rdbMisaiGkeiKbun" style="width: 327px; height: 25px; display: block;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;rdbMisaiGkeiKbun&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;170px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;rdbMisaiGkeiKbun_core&quot;,&quot;labelLText&quot;:&quot;明細合計区分&quot;,&quot;labelLWidth&quot;:&quot;150px&quot;,&quot;icon&quot;:[],&quot;selectedItem&quot;:&quot;1&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;1&quot;,&quot;value&quot;:&quot;明細&quot;},{&quot;key&quot;:&quot;2&quot;,&quot;value&quot;:&quot;合計&quot;}],&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right" id="rdbMisaiGkeiKbun_labelL" style="width: 150px;"><span>明細合計区分</span></span><span class="buttonSpan FloatLeft" id="rdbMisaiGkeiKbun_core" style="width: 170px;"><input class="verticalSpace-M" id="rdbMisaiGkeiKbun_1" type="radio" value="明細" data-key="1"><label for="rdbMisaiGkeiKbun_1" data-key="1">明細</label><input class="spaceSize-M verticalSpace-M" id="rdbMisaiGkeiKbun_2" type="radio" value="合計" data-key="2"><label for="rdbMisaiGkeiKbun_2" data-key="2">合計</label></span></div><div title="" class="WithLabel TextBoxOuterDiv JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS ClearFloat UzCompositeChild" id="txtJgyoshaCode" style="width: 187px; height: 20px; display: block; position: relative;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtJgyoshaCode&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;100px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtJgyoshaCode_core&quot;,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;事業者&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtJgyoshaCode_labelL" style="width: 80px;"><span>事業者</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtJgyoshaCode_core" style="width: 100px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><input class="UzButtonDialog JSControl FloatLeft controlMargin-M marginRight-XS heightTextBoxMatchesFlag HeightTextBoxMatchesForImage UzCompositeChild" id="btnJgyosha" style="width: 20px; height: 20px; margin-left: 0px; display: block;" type="image" alt="image" src="/uz/uza/image/UZ_Search.png" data-control-type="ButtonDialog" data-obj="{&quot;fieldName&quot;:&quot;btnJgyosha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;ButtonDialog&quot;,&quot;width&quot;:&quot;S&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;btnJgyosha&quot;,&quot;text&quot;:&quot;ButtonDialog1&quot;,&quot;appearance&quot;:2,&quot;imageFileUrl&quot;:&quot;/uz/uza/image/UZ_Search.png&quot;,&quot;heightTextBoxMatches&quot;:true,&quot;displayChildDivName&quot;:&quot;DBZ.JigyoshaNyuryokuGudieCommonChildDiv&quot;,&quot;dataPassing&quot;:[{&quot;key&quot;:&quot;jigyoshaMode&quot;,&quot;controlName&quot;:&quot;KogakuKyufuTaishoList.JigyoshaMode&quot;}],&quot;onOkClose&quot;:&quot;onOkClose_btnJgyosha&quot;,&quot;onBeforeOpenDialog&quot;:&quot;onBeforeOpenDialog_btnJgyosha&quot;}"><div title="" class="WithLabel TextBoxOuterDiv JSControl FloatLeft controlMargin-M UzCompositeChild" id="txtJgyoshaName" style="width: 505px; height: 20px; margin-right: 0px; margin-left: 0px; position: relative;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtJgyoshaName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;500px&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtJgyoshaName_core&quot;,&quot;readOnly&quot;:true,&quot;maxLength&quot;:&quot;100&quot;,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;0px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;}"><input tabindex="-1" class="UzTextBox CoreElement readonlyColor text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtJgyoshaName_core" style="width: 500px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode JSControl FloatLeft controlMargin-M marginLeft-XS ClearFloat marginRight-XS UzCompositeChild" id="txtServiceSyurui" style="width: 187px; height: 20px; position: relative;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtServiceSyurui&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;30px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtServiceSyurui_core&quot;,&quot;maxLength&quot;:&quot;2&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;サービス種類&quot;,&quot;labelLWidth&quot;:&quot;150px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtServiceSyurui_labelL" style="width: 150px;"><span>サービス種類</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input" id="txtServiceSyurui_core" style="width: 30px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><input class="UzButtonDialog JSControl FloatLeft controlMargin-M marginRight-XS heightTextBoxMatchesFlag HeightTextBoxMatchesForImage UzCompositeChild" id="btnServiceSyurui" style="width: 20px; height: 20px; margin-left: 0px;" type="image" alt="image" src="/uz/uza/image/UZ_Search.png" data-control-type="ButtonDialog" data-obj="{&quot;fieldName&quot;:&quot;btnServiceSyurui&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;ButtonDialog&quot;,&quot;width&quot;:&quot;S&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;btnServiceSyurui&quot;,&quot;text&quot;:&quot;ButtonDialog1&quot;,&quot;appearance&quot;:2,&quot;imageFileUrl&quot;:&quot;/uz/uza/image/UZ_Search.png&quot;,&quot;heightTextBoxMatches&quot;:true,&quot;displayChildDivName&quot;:&quot;DBZ.ServiceTypeCommonChildDiv&quot;,&quot;dataPassing&quot;:[{&quot;key&quot;:&quot;serviceType&quot;,&quot;controlName&quot;:&quot;KogakuKyufuTaishoList.hdnServiceType&quot;},{&quot;key&quot;:&quot;serviceTypeName&quot;,&quot;controlName&quot;:&quot;KogakuKyufuTaishoList.hdnServiceTypeName&quot;},{&quot;key&quot;:&quot;serviceRyakusho&quot;,&quot;controlName&quot;:&quot;KogakuKyufuTaishoList.hdnServiceRyakusho&quot;}],&quot;onOkClose&quot;:&quot;onOkClose_btnServiceSyurui&quot;,&quot;onBeforeOpenDialog&quot;:&quot;onBeforeOpenDialog_btnServiceSyurui&quot;}"><div title="" class="WithLabel TextBoxOuterDiv JSControl FloatLeft controlMargin-M UzCompositeChild" id="txtServiceSyuruiName" style="width: 505px; height: 20px; margin-right: 0px; margin-left: 0px; display: block; position: relative;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtServiceSyuruiName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;500px&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtServiceSyuruiName_core&quot;,&quot;readOnly&quot;:true,&quot;maxLength&quot;:&quot;100&quot;,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;0px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;}"><input tabindex="-1" class="UzTextBox CoreElement readonlyColor text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtServiceSyuruiName_core" style="width: 500px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS ClearFloat UzCompositeChild" id="txtHyoGkei" style="width: 257px; height: 20px; display: block; position: relative;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtHyoGkei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;100px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtHyoGkei_core&quot;,&quot;required&quot;:true,&quot;maxLength&quot;:&quot;9&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;サービス費用合計&quot;,&quot;labelLWidth&quot;:&quot;150px&quot;,&quot;isComma&quot;:true,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHyoGkei_labelL" style="width: 150px;"><span class="requireMark">*</span><span>サービス費用合計</span></span><input class="UzTextBox CoreElement required text-align-right ime-mode-Off ui-autocomplete-input" id="txtHyoGkei_core" style="width: 100px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtRiyoshafutanGokei" style="width: 279px; height: 20px; display: block;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtRiyoshafutanGokei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;100px&quot;,&quot;selectControlID&quot;:&quot;txtRiyoshafutanGokei_core&quot;,&quot;required&quot;:true,&quot;maxLength&quot;:&quot;9&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;利用者負担合計&quot;,&quot;labelLWidth&quot;:&quot;172px&quot;,&quot;isComma&quot;:true,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtRiyoshafutanGokei_labelL" style="width: 172px;"><span class="requireMark">*</span><span>利用者負担合計</span></span><input class="UzTextBox CoreElement required text-align-right ime-mode-Off ui-autocomplete-input" id="txtRiyoshafutanGokei_core" style="width: 100px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div class="StateChangable UzPanel JSControl FloatLeft marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M Width-G1 UzCompositeChild" id="GokeiPanel" style="margin: 0px; width: auto; position: relative;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;GokeiPanel&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;GokeiPanel&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="GokeiPanel_panel_header_area" style="display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content ui-droppable ui-sortable panelPaddingDelete Panel-EraseBoder" id="GokeiPanel_panel_body_area"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS ClearFloat UzCompositeChild" id="txtSanteiKijunGaku" style="width: 257px; height: 20px; position: relative;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtSanteiKijunGaku&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;100px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtSanteiKijunGaku_core&quot;,&quot;maxLength&quot;:&quot;9&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;算定基準額&quot;,&quot;labelLWidth&quot;:&quot;150px&quot;,&quot;isComma&quot;:true,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSanteiKijunGaku_labelL" style="width: 150px;"><span>算定基準額</span></span><input class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input" id="txtSanteiKijunGaku_core" style="width: 100px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSiharaiZumiGaku" style="width: 279px; height: 20px; display: block; position: relative;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtSiharaiZumiGaku&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;100px&quot;,&quot;selectControlID&quot;:&quot;txtSiharaiZumiGaku_core&quot;,&quot;maxLength&quot;:&quot;9&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;支払済額&quot;,&quot;labelLWidth&quot;:&quot;172px&quot;,&quot;isComma&quot;:true,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSiharaiZumiGaku_labelL" style="width: 172px;"><span>支払済額</span></span><input class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input" id="txtSiharaiZumiGaku_core" style="width: 100px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtKogakuShikyuGaku" style="width: 279px; height: 20px; position: relative;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtKogakuShikyuGaku&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;100px&quot;,&quot;selectControlID&quot;:&quot;txtKogakuShikyuGaku_core&quot;,&quot;maxLength&quot;:&quot;9&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;高額支給額&quot;,&quot;labelLWidth&quot;:&quot;172px&quot;,&quot;isComma&quot;:true,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtKogakuShikyuGaku_labelL" style="width: 172px;"><span>高額支給額</span></span><input class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input" id="txtKogakuShikyuGaku_core" style="width: 100px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></div><div title="" class="UzHorizontalLine JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="lin1" data-control-type="HorizontalLine" data-obj="{&quot;fieldName&quot;:&quot;lin1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;HorizontalLine&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;lin1&quot;,&quot;size&quot;:&quot;1000px&quot;}"></div><div class="StateChangable UzPanel JSControl FloatLeft marginLeft-XS marginRight-XS marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M Width-G1 UzCompositeChild" id="KogakuKyufuKonkyoPanel" style="width: auto; margin-top: 0px; margin-bottom: 0px; position: relative;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KogakuKyufuKonkyoPanel&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;selectControlID&quot;:&quot;KogakuKyufuKonkyoPanel&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;focusPositionID&quot;:&quot;KogakuKyufuTaishoList_panel_body_area&quot;,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="KogakuKyufuKonkyoPanel_panel_header_area" style="display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content ui-droppable ui-sortable panelPaddingDelete Panel-EraseBoder" id="KogakuKyufuKonkyoPanel_panel_body_area"><div title="" class="UzRadioButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="rdbTsukiOkure" style="width: 457px; height: 25px; display: block;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;rdbTsukiOkure&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;300px&quot;,&quot;selectControlID&quot;:&quot;rdbTsukiOkure_core&quot;,&quot;labelLText&quot;:&quot;月遅れ区分&quot;,&quot;labelLWidth&quot;:&quot;150px&quot;,&quot;icon&quot;:[],&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;月遅れあり&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;月遅れなし&quot;}],&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right" id="rdbTsukiOkure_labelL" style="width: 150px;"><span>月遅れ区分</span></span><span class="buttonSpan FloatLeft" id="rdbTsukiOkure_core" style="width: 300px;"><input class="verticalSpace-M" id="rdbTsukiOkure_key0" type="radio" value="月遅れあり" data-key="key0"><label for="rdbTsukiOkure_key0" data-key="key0">月遅れあり</label><input class="spaceSize-M verticalSpace-M" id="rdbTsukiOkure_key1" type="radio" value="月遅れなし" data-key="key1"><label for="rdbTsukiOkure_key1" data-key="key1">月遅れなし</label></span></div><div title="" class="UzRadioButton JSControl FloatLeft controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="rabSetaiShotokuKubun" style="width: 707px; height: 25px; display: block;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;rabSetaiShotokuKubun&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;550px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;rabSetaiShotokuKubun_core&quot;,&quot;labelLText&quot;:&quot;世帯所得区分&quot;,&quot;labelLWidth&quot;:&quot;150px&quot;,&quot;icon&quot;:[],&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;一般&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;市町村民税世帯非課税者等&quot;},{&quot;key&quot;:&quot;key2&quot;,&quot;value&quot;:&quot;生活保護&quot;},{&quot;key&quot;:&quot;key3&quot;,&quot;value&quot;:&quot;現役並み所得相当&quot;}],&quot;newLineItemNumber&quot;:4,&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right" id="rabSetaiShotokuKubun_labelL" style="width: 150px;"><span>世帯所得区分</span></span><span class="buttonSpan FloatLeft" id="rabSetaiShotokuKubun_core" style="width: 550px;"><input class="verticalSpace-M" id="rabSetaiShotokuKubun_key0" type="radio" value="一般" data-key="key0"><label for="rabSetaiShotokuKubun_key0" data-key="key0">一般</label><input class="spaceSize-M verticalSpace-M" id="rabSetaiShotokuKubun_key1" type="radio" value="市町村民税世帯非課税者等" data-key="key1"><label for="rabSetaiShotokuKubun_key1" data-key="key1">市町村民税世帯非課税者等</label><input class="spaceSize-M verticalSpace-M" id="rabSetaiShotokuKubun_key2" type="radio" value="生活保護" data-key="key2"><label for="rabSetaiShotokuKubun_key2" data-key="key2">生活保護</label><input class="spaceSize-M verticalSpace-M" id="rabSetaiShotokuKubun_key3" type="radio" value="現役並み所得相当" data-key="key3"><label for="rabSetaiShotokuKubun_key3" data-key="key3">現役並み所得相当</label></span></div><div title="" class="UzRadioButton JSControl FloatLeft controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="rdbShotokuKubun" style="width: 707px; height: 25px;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;rdbShotokuKubun&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;550px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;rdbShotokuKubun_core&quot;,&quot;labelLText&quot;:&quot;本人所得区分&quot;,&quot;labelLWidth&quot;:&quot;150px&quot;,&quot;icon&quot;:[],&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;一般&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;市町村民税世帯非課税者等&quot;},{&quot;key&quot;:&quot;key2&quot;,&quot;value&quot;:&quot;生活保護&quot;},{&quot;key&quot;:&quot;key3&quot;,&quot;value&quot;:&quot;現役並み所得相当&quot;}],&quot;newLineItemNumber&quot;:4,&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right" id="rdbShotokuKubun_labelL" style="width: 150px;"><span>本人所得区分</span></span><span class="buttonSpan FloatLeft" id="rdbShotokuKubun_core" style="width: 550px;"><input class="verticalSpace-M" id="rdbShotokuKubun_key0" type="radio" value="一般" data-key="key0"><label for="rdbShotokuKubun_key0" data-key="key0">一般</label><input class="spaceSize-M verticalSpace-M" id="rdbShotokuKubun_key1" type="radio" value="市町村民税世帯非課税者等" data-key="key1"><label for="rdbShotokuKubun_key1" data-key="key1">市町村民税世帯非課税者等</label><input class="spaceSize-M verticalSpace-M" id="rdbShotokuKubun_key2" type="radio" value="生活保護" data-key="key2"><label for="rdbShotokuKubun_key2" data-key="key2">生活保護</label><input class="spaceSize-M verticalSpace-M" id="rdbShotokuKubun_key3" type="radio" value="現役並み所得相当" data-key="key3"><label for="rdbShotokuKubun_key3" data-key="key3">現役並み所得相当</label></span></div><div title="" class="UzRadioButton JSControl FloatLeft controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="rdbGassan" style="width: 457px; height: 25px; display: block;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;rdbGassan&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;300px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;rdbGassan_core&quot;,&quot;labelLText&quot;:&quot;合算区分&quot;,&quot;labelLWidth&quot;:&quot;150px&quot;,&quot;icon&quot;:[],&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;被保険者単独&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;世帯合算&quot;}],&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right" id="rdbGassan_labelL" style="width: 150px;"><span>合算区分</span></span><span class="buttonSpan FloatLeft" id="rdbGassan_core" style="width: 300px;"><input class="verticalSpace-M" id="rdbGassan_key0" type="radio" value="被保険者単独" data-key="key0"><label for="rdbGassan_key0" data-key="key0">被保険者単独</label><input class="spaceSize-M verticalSpace-M" id="rdbGassan_key1" type="radio" value="世帯合算" data-key="key1"><label for="rdbGassan_key1" data-key="key1">世帯合算</label></span></div><div title="" class="UzRadioButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="rdbRoreiFukushiNenkin" style="width: 457px; height: 25px; display: block;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;rdbRoreiFukushiNenkin&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;300px&quot;,&quot;selectControlID&quot;:&quot;rdbRoreiFukushiNenkin_core&quot;,&quot;labelLText&quot;:&quot;老齢福祉年金&quot;,&quot;labelLWidth&quot;:&quot;150px&quot;,&quot;icon&quot;:[],&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;受給あり&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;受給なし&quot;}],&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right" id="rdbRoreiFukushiNenkin_labelL" style="width: 150px;"><span>老齢福祉年金</span></span><span class="buttonSpan FloatLeft" id="rdbRoreiFukushiNenkin_core" style="width: 300px;"><input class="verticalSpace-M" id="rdbRoreiFukushiNenkin_key0" type="radio" value="受給あり" data-key="key0"><label for="rdbRoreiFukushiNenkin_key0" data-key="key0">受給あり</label><input class="spaceSize-M verticalSpace-M" id="rdbRoreiFukushiNenkin_key1" type="radio" value="受給なし" data-key="key1"><label for="rdbRoreiFukushiNenkin_key1" data-key="key1">受給なし</label></span></div><div title="" class="UzRadioButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="rdbRiyoshafutanDai2dankai" style="width: 457px; height: 25px; display: block;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;rdbRiyoshafutanDai2dankai&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;300px&quot;,&quot;selectControlID&quot;:&quot;rdbRiyoshafutanDai2dankai_core&quot;,&quot;labelLText&quot;:&quot;利用者負担第２段階&quot;,&quot;labelLWidth&quot;:&quot;150px&quot;,&quot;icon&quot;:[],&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;該当あり&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;該当なし&quot;}],&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right" id="rdbRiyoshafutanDai2dankai_labelL" style="width: 150px;"><span>利用者負担第２段階</span></span><span class="buttonSpan FloatLeft" id="rdbRiyoshafutanDai2dankai_core" style="width: 300px;"><input class="verticalSpace-M" id="rdbRiyoshafutanDai2dankai_key0" type="radio" value="該当あり" data-key="key0"><label for="rdbRiyoshafutanDai2dankai_key0" data-key="key0">該当あり</label><input class="spaceSize-M verticalSpace-M" id="rdbRiyoshafutanDai2dankai_key1" type="radio" value="該当なし" data-key="key1"><label for="rdbRiyoshafutanDai2dankai_key1" data-key="key1">該当なし</label></span></div><div title="" class="UzRadioButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="rdbGekihenkanwaKubun" style="width: 457px; height: 25px;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;rdbGekihenkanwaKubun&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;300px&quot;,&quot;selectControlID&quot;:&quot;rdbGekihenkanwaKubun_core&quot;,&quot;labelLText&quot;:&quot;激変緩和区分&quot;,&quot;labelLWidth&quot;:&quot;150px&quot;,&quot;icon&quot;:[],&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;該当無し&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;第1段階&quot;},{&quot;key&quot;:&quot;key2&quot;,&quot;value&quot;:&quot;第2段階&quot;}],&quot;newLineItemNumber&quot;:3,&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right" id="rdbGekihenkanwaKubun_labelL" style="width: 150px;"><span>激変緩和区分</span></span><span class="buttonSpan FloatLeft" id="rdbGekihenkanwaKubun_core" style="width: 300px;"><input class="verticalSpace-M" id="rdbGekihenkanwaKubun_key0" type="radio" value="該当無し" data-key="key0"><label for="rdbGekihenkanwaKubun_key0" data-key="key0">該当無し</label><input class="spaceSize-M verticalSpace-M" id="rdbGekihenkanwaKubun_key1" type="radio" value="第1段階" data-key="key1"><label for="rdbGekihenkanwaKubun_key1" data-key="key1">第1段階</label><input class="spaceSize-M verticalSpace-M" id="rdbGekihenkanwaKubun_key2" type="radio" value="第2段階" data-key="key2"><label for="rdbGekihenkanwaKubun_key2" data-key="key2">第2段階</label></span></div></div></div><button class="UzButton JSControl controlMargin-M heightTextBoxMatchesFlag heightTextBoxMatches ClearFloat FloatRight marginRight-XS UzCompositeChild" id="btnTorikeshi" style="width: 70px; padding-top: 3px; margin-left: 0px; display: block;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnTorikeshi&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;70px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;btnTorikeshi&quot;,&quot;text&quot;:&quot;取消する&quot;,&quot;onClick&quot;:&quot;onClick_btnTorikeshi&quot;,&quot;heightTextBoxMatches&quot;:true}"><span>取消する</span></button><button class="UzButton JSControl controlMargin-M heightTextBoxMatchesFlag heightTextBoxMatches FloatRight marginRight-XS UzCompositeChild" id="btnkakutei" style="width: 70px; padding-top: 3px; margin-left: 0px; display: block;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnkakutei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;70px&quot;,&quot;float&quot;:2,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;btnkakutei&quot;,&quot;text&quot;:&quot;確定する&quot;,&quot;onClick&quot;:&quot;onClick_btnkakutei&quot;,&quot;heightTextBoxMatches&quot;:true,&quot;isClientValidate&quot;:true}"><span>確定する</span></button></div></div><div class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="rowId" style="width: 52px; height: 20px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;rowId&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;visible&quot;:false,&quot;selectControlID&quot;:&quot;rowId_core&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><input class="UzTextBox CoreElement Width-XS ime-mode-Off text-align-right" id="rowId_core" type="text" placeholder=""></div></div></div>                
+         
+   
+     
+   
+       
+   
+   
+   
+   
+     
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+       
+   
+   
+   
+   
+   
+   
+   
+                     <script class="RamlConvert" type="text/javascript">
+var DBC= DBC? DBC: {};
+DBC['KOGAKUKYUFUTAISHOLIST'] = {};
+DBC['KOGAKUKYUFUTAISHOLIST'].KogakuKyufuTaishoListRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KogakuKyufuTaishoList').getProperty();parameter0.btnTsuika = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnTsuika').getProperty();parameter0.dgTaishoshaIchiran = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgTaishoshaIchiran').getProperty();parameter0.MeisaiGokeiHenshuPanel = Uz.JSControlUtil.getJSControl(parentFieldName + '_MeisaiGokeiHenshuPanel').getProperty();parameter0.MeisaiGokeiHenshuPanel.rdbMisaiGkeiKbun = Uz.JSControlUtil.getJSControl(parentFieldName + '_rdbMisaiGkeiKbun').getProperty();parameter0.MeisaiGokeiHenshuPanel.txtJgyoshaCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtJgyoshaCode').getProperty();parameter0.MeisaiGokeiHenshuPanel.btnJgyosha = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnJgyosha').getProperty();parameter0.MeisaiGokeiHenshuPanel.txtJgyoshaName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtJgyoshaName').getProperty();parameter0.MeisaiGokeiHenshuPanel.txtServiceSyurui = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtServiceSyurui').getProperty();parameter0.MeisaiGokeiHenshuPanel.btnServiceSyurui = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnServiceSyurui').getProperty();parameter0.MeisaiGokeiHenshuPanel.txtServiceSyuruiName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtServiceSyuruiName').getProperty();parameter0.MeisaiGokeiHenshuPanel.txtHyoGkei = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHyoGkei').getProperty();parameter0.MeisaiGokeiHenshuPanel.txtRiyoshafutanGokei = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtRiyoshafutanGokei').getProperty();parameter0.MeisaiGokeiHenshuPanel.GokeiPanel = Uz.JSControlUtil.getJSControl(parentFieldName + '_GokeiPanel').getProperty();parameter0.MeisaiGokeiHenshuPanel.GokeiPanel.txtSanteiKijunGaku = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSanteiKijunGaku').getProperty();parameter0.MeisaiGokeiHenshuPanel.GokeiPanel.txtSiharaiZumiGaku = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSiharaiZumiGaku').getProperty();parameter0.MeisaiGokeiHenshuPanel.GokeiPanel.txtKogakuShikyuGaku = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKogakuShikyuGaku').getProperty();parameter0.MeisaiGokeiHenshuPanel.lin1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_lin1').getProperty();parameter0.MeisaiGokeiHenshuPanel.KogakuKyufuKonkyoPanel = Uz.JSControlUtil.getJSControl(parentFieldName + '_KogakuKyufuKonkyoPanel').getProperty();parameter0.MeisaiGokeiHenshuPanel.KogakuKyufuKonkyoPanel.rdbTsukiOkure = Uz.JSControlUtil.getJSControl(parentFieldName + '_rdbTsukiOkure').getProperty();parameter0.MeisaiGokeiHenshuPanel.KogakuKyufuKonkyoPanel.rabSetaiShotokuKubun = Uz.JSControlUtil.getJSControl(parentFieldName + '_rabSetaiShotokuKubun').getProperty();parameter0.MeisaiGokeiHenshuPanel.KogakuKyufuKonkyoPanel.rdbShotokuKubun = Uz.JSControlUtil.getJSControl(parentFieldName + '_rdbShotokuKubun').getProperty();parameter0.MeisaiGokeiHenshuPanel.KogakuKyufuKonkyoPanel.rdbGassan = Uz.JSControlUtil.getJSControl(parentFieldName + '_rdbGassan').getProperty();parameter0.MeisaiGokeiHenshuPanel.KogakuKyufuKonkyoPanel.rdbRoreiFukushiNenkin = Uz.JSControlUtil.getJSControl(parentFieldName + '_rdbRoreiFukushiNenkin').getProperty();parameter0.MeisaiGokeiHenshuPanel.KogakuKyufuKonkyoPanel.rdbRiyoshafutanDai2dankai = Uz.JSControlUtil.getJSControl(parentFieldName + '_rdbRiyoshafutanDai2dankai').getProperty();parameter0.MeisaiGokeiHenshuPanel.KogakuKyufuKonkyoPanel.rdbGekihenkanwaKubun = Uz.JSControlUtil.getJSControl(parentFieldName + '_rdbGekihenkanwaKubun').getProperty();parameter0.MeisaiGokeiHenshuPanel.btnTorikeshi = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnTorikeshi').getProperty();parameter0.MeisaiGokeiHenshuPanel.btnkakutei = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnkakutei').getProperty();parameter0.rowId = Uz.JSControlUtil.getJSControl(parentFieldName + '_rowId').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBC;
+(function (DBC) {
+    (function (KogakuKyufuTaishoList) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnTsuika = function () {
+                return "onClick_btnTsuika";
+            };
+
+            Events.onClick_modify = function () {
+                return "onClick_modify";
+            };
+
+            Events.onClick_delete = function () {
+                return "onClick_delete";
+            };
+
+            Events.onMulti_dgKyufuJissekiMeisaiList = function () {
+                return "onMulti_dgKyufuJissekiMeisaiList";
+            };
+
+            Events.onOkClose_btnJgyosha = function () {
+                return "onOkClose_btnJgyosha";
+            };
+
+            Events.onBeforeOpenDialog_btnJgyosha = function () {
+                return "onBeforeOpenDialog_btnJgyosha";
+            };
+
+            Events.onOkClose_btnServiceSyurui = function () {
+                return "onOkClose_btnServiceSyurui";
+            };
+
+            Events.onBeforeOpenDialog_btnServiceSyurui = function () {
+                return "onBeforeOpenDialog_btnServiceSyurui";
+            };
+
+            Events.onClick_btnTorikeshi = function () {
+                return "onClick_btnTorikeshi";
+            };
+
+            Events.onClick_btnkakutei = function () {
+                return "onClick_btnkakutei";
+            };
+            return Events;
+        })();
+        KogakuKyufuTaishoList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KogakuKyufuTaishoList";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBC.KogakuKyufuTaishoList.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBC.KogakuKyufuTaishoList.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KogakuKyufuTaishoList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnTsuika = function () {
+                return new UZA.Button(this.convFiledName("btnTsuika"));
+            };
+
+            Controls.prototype.dgTaishoshaIchiran = function () {
+                return new UZA.DataGrid(this.convFiledName("dgTaishoshaIchiran"));
+            };
+
+            Controls.prototype.MeisaiGokeiHenshuPanel = function () {
+                return new UZA.Panel(this.convFiledName("MeisaiGokeiHenshuPanel"));
+            };
+
+            Controls.prototype.rdbMisaiGkeiKbun = function () {
+                return new UZA.RadioButton(this.convFiledName("rdbMisaiGkeiKbun"));
+            };
+
+            Controls.prototype.txtJgyoshaCode = function () {
+                return new UZA.TextBox(this.convFiledName("txtJgyoshaCode"));
+            };
+
+            Controls.prototype.btnJgyosha = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnJgyosha"));
+            };
+
+            Controls.prototype.txtJgyoshaName = function () {
+                return new UZA.TextBox(this.convFiledName("txtJgyoshaName"));
+            };
+
+            Controls.prototype.txtServiceSyurui = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtServiceSyurui"));
+            };
+
+            Controls.prototype.btnServiceSyurui = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnServiceSyurui"));
+            };
+
+            Controls.prototype.txtServiceSyuruiName = function () {
+                return new UZA.TextBox(this.convFiledName("txtServiceSyuruiName"));
+            };
+
+            Controls.prototype.txtHyoGkei = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtHyoGkei"));
+            };
+
+            Controls.prototype.txtRiyoshafutanGokei = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtRiyoshafutanGokei"));
+            };
+
+            Controls.prototype.GokeiPanel = function () {
+                return new UZA.Panel(this.convFiledName("GokeiPanel"));
+            };
+
+            Controls.prototype.txtSanteiKijunGaku = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtSanteiKijunGaku"));
+            };
+
+            Controls.prototype.txtSiharaiZumiGaku = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtSiharaiZumiGaku"));
+            };
+
+            Controls.prototype.txtKogakuShikyuGaku = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtKogakuShikyuGaku"));
+            };
+
+            Controls.prototype.lin1 = function () {
+                return new UZA.HorizontalLine(this.convFiledName("lin1"));
+            };
+
+            Controls.prototype.KogakuKyufuKonkyoPanel = function () {
+                return new UZA.Panel(this.convFiledName("KogakuKyufuKonkyoPanel"));
+            };
+
+            Controls.prototype.rdbTsukiOkure = function () {
+                return new UZA.RadioButton(this.convFiledName("rdbTsukiOkure"));
+            };
+
+            Controls.prototype.rabSetaiShotokuKubun = function () {
+                return new UZA.RadioButton(this.convFiledName("rabSetaiShotokuKubun"));
+            };
+
+            Controls.prototype.rdbShotokuKubun = function () {
+                return new UZA.RadioButton(this.convFiledName("rdbShotokuKubun"));
+            };
+
+            Controls.prototype.rdbGassan = function () {
+                return new UZA.RadioButton(this.convFiledName("rdbGassan"));
+            };
+
+            Controls.prototype.rdbRoreiFukushiNenkin = function () {
+                return new UZA.RadioButton(this.convFiledName("rdbRoreiFukushiNenkin"));
+            };
+
+            Controls.prototype.rdbRiyoshafutanDai2dankai = function () {
+                return new UZA.RadioButton(this.convFiledName("rdbRiyoshafutanDai2dankai"));
+            };
+
+            Controls.prototype.rdbGekihenkanwaKubun = function () {
+                return new UZA.RadioButton(this.convFiledName("rdbGekihenkanwaKubun"));
+            };
+
+            Controls.prototype.btnTorikeshi = function () {
+                return new UZA.Button(this.convFiledName("btnTorikeshi"));
+            };
+
+            Controls.prototype.btnkakutei = function () {
+                return new UZA.Button(this.convFiledName("btnkakutei"));
+            };
+
+            Controls.prototype.rowId = function () {
+                return new UZA.TextBoxNum(this.convFiledName("rowId"));
+            };
+            return Controls;
+        })();
+        KogakuKyufuTaishoList.Controls = Controls;
+    })(DBC.KogakuKyufuTaishoList || (DBC.KogakuKyufuTaishoList = {}));
+    var KogakuKyufuTaishoList = DBC.KogakuKyufuTaishoList;
+})(DBC || (DBC = {}));
+var DBC;
+(function (DBC) {
+    (function (KogakuKyufuTaishoList) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KogakuKyufuTaishoList.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new KogakuKyufuTaishoList.PublicProperties(this.fieldName);
+            };
+
+            ModeController.prototype.priorities = function () {
+                return [
+                    "DisplayMode",
+                    "MeisaiGokeiKubunMode"
+                ];
+            };
+
+            ModeController.prototype.DisplayMode = function () {
+                return new Modes.DisplayMode(this.controls);
+            };
+            ModeController.prototype.MeisaiGokeiKubunMode = function () {
+                return new Modes.MeisaiGokeiKubunMode(this.controls);
+            };
+            return ModeController;
+        })();
+        KogakuKyufuTaishoList.ModeController = ModeController;
+
+        (function (Modes) {
+            var DisplayMode = (function () {
+                function DisplayMode(controls) {
+                    this.controls = controls;
+                }
+                DisplayMode.prototype.shokai = function () {
+                    this.controls.btnTsuika().visible = false;
+                    this.controls.MeisaiGokeiHenshuPanel().visible = false;
+
+                    var gridSetting = this.controls.dgTaishoshaIchiran().gridSetting;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.isShowDeleteButtonColumn = false;
+                    gridSetting.columns[0].visible = false;
+
+                    this.controls.dgTaishoshaIchiran().gridSetting = gridSetting;
+                    this.controls.dgTaishoshaIchiran()._control.afterPropertiesSet();
+                };
+
+                DisplayMode.prototype.toroku = function () {
+                    this.controls.btnTsuika().visible = true;
+                    this.controls.MeisaiGokeiHenshuPanel().visible = true;
+
+                    var gridSetting = this.controls.dgTaishoshaIchiran().gridSetting;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
+                    gridSetting.columns[0].visible = true;
+
+                    this.controls.dgTaishoshaIchiran().gridSetting = gridSetting;
+                    this.controls.dgTaishoshaIchiran()._control.afterPropertiesSet();
+                };
+                return DisplayMode;
+            })();
+            Modes.DisplayMode = DisplayMode;
+
+            var MeisaiGokeiKubunMode = (function () {
+                function MeisaiGokeiKubunMode(controls) {
+                    this.controls = controls;
+                }
+                MeisaiGokeiKubunMode.prototype.Meisai = function () {
+                    this.controls.GokeiPanel().displayNone = true;
+                    this.controls.KogakuKyufuKonkyoPanel().displayNone = false;
+                };
+
+                MeisaiGokeiKubunMode.prototype.Gokei = function () {
+                    this.controls.GokeiPanel().displayNone = false;
+                    this.controls.KogakuKyufuKonkyoPanel().displayNone = true;
+                };
+                return MeisaiGokeiKubunMode;
+            })();
+            Modes.MeisaiGokeiKubunMode = MeisaiGokeiKubunMode;
+        })(KogakuKyufuTaishoList.Modes || (KogakuKyufuTaishoList.Modes = {}));
+        var Modes = KogakuKyufuTaishoList.Modes;
+    })(DBC.KogakuKyufuTaishoList || (DBC.KogakuKyufuTaishoList = {}));
+    var KogakuKyufuTaishoList = DBC.KogakuKyufuTaishoList;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (KogakuKyufuTaishoList) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KogakuKyufuTaishoList.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        KogakuKyufuTaishoList.PublicProperties = PublicProperties;
+    })(DBC.KogakuKyufuTaishoList || (DBC.KogakuKyufuTaishoList = {}));
+    var KogakuKyufuTaishoList = DBC.KogakuKyufuTaishoList;
+})(DBC || (DBC = {}));
+</script></div>

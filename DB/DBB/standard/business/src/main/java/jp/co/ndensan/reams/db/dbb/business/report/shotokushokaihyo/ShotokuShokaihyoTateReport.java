@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 帳票設計_DBBPR51002_所得照会票
+ * 帳票設計_DBBPR51002_所得照会票のクラスです。
  *
  * @reamsid_L DBB-1710-030 xuhao
  */
@@ -51,12 +51,10 @@ public class ShotokuShokaihyoTateReport extends Report<ShotokuShokaihyoTateSourc
     @Override
     public void writeBy(ReportSourceWriter<ShotokuShokaihyoTateSource> reportSourceWriter) {
         List<List<SetaiInn>> 世帯員リスト = createList(所得照会票.get世帯員リスト(), INT_4);
-        int 連番 = INT_0;
         for (int i = INT_0; i < 世帯員リスト.size(); i++) {
-            連番 = 連番 + INT_1;
             所得照会票.set世帯員リスト(世帯員リスト.get(i));
             IShotokuShokaihyoTateEditor editor = new ShotokuShokaihyoTateEditor(所得照会票, sourceBuilder,
-                    連番, 文書タイトル, 送付先担当課名称);
+                    文書タイトル, 送付先担当課名称);
             IShotokuShokaihyoTateBuilder builder = new ShotokuShokaihyoTateBuilder(editor);
             reportSourceWriter.writeLine(builder);
         }

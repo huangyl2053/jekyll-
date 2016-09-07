@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBA-1580-030 xuyannan -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hanyolistseikatsuhogojukyusha.IHanyoListSeikatsuhogoJukyushaMapper">
+    <resultMap id="resultMap_getSeikatsuHogoJukyusha" type="jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolistseikatsuhogojukyusha.SeikatsuhogoJukyushaRelateEntity" autoMapping="true">
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格取得事由" column="shikakuShutokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格取得日" column="shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="資格取得届出日" column="shikakuShutokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="喪失事由" column="shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格喪失日" column="shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="資格喪失届日" column="shikakuSoshitsuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="資格区分" column="hihokennshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住所地特例状態" column="jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="広域内住所地特例フラグ" column="koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="広住特措置元市町村コード" column="koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="老齢福祉年金開始日" column="dbT7006_jukyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="老齢福祉年金終了日" column="dbT7006_jukyuHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="識別コード" column="urT0508_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="業務コード" column="urT0508_gyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="生活保護開始日" column="urT0508_jukyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="生活保護終了日" column="urT0508_jukyuHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="生活保護種別" column="fujoShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="医療保険種別" column="iryoHokenShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="医療保険番号" column="iryoHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="医療保険者名" column="iryoHokenshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="医療保険記号番号" column="iryoHokenKigoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="getSeikatsuHogoJukyusha" resultMap="resultMap_getSeikatsuHogoJukyusha"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hanyolistseikatsuhogojukyusha.SeikatsuhogoJukyushaMybatisParameter"
+            fetchSize="500">
+        SELECT
+            dbV1001."shichosonCode" AS shichosonCode
+            ,dbV1001."hihokenshaNo" AS hihokenshaNo
+            ,dbV1001."shikakuShutokuJiyuCode" AS shikakuShutokuJiyuCode
+            ,dbV1001."shikakuShutokuYMD" AS shikakuShutokuYMD
+            ,dbV1001."shikakuShutokuTodokedeYMD" AS shikakuShutokuTodokedeYMD
+            ,dbV1001."shikakuSoshitsuJiyuCode" AS shikakuSoshitsuJiyuCode
+            ,dbV1001."shikakuSoshitsuYMD" AS shikakuSoshitsuYMD
+            ,dbV1001."shikakuSoshitsuTodokedeYMD" AS shikakuSoshitsuTodokedeYMD
+            ,dbV1001."hihokennshaKubunCode" AS hihokennshaKubunCode
+            ,dbV1001."jushochiTokureiFlag" AS jushochiTokureiFlag
+            ,dbV1001."koikinaiJushochiTokureiFlag" AS koikinaiJushochiTokureiFlag
+            ,dbV1001."koikinaiTokureiSochimotoShichosonCode" AS koikinaiTokureiSochimotoShichosonCode
+            ,dbT7006."jukyuKaishiYMD" AS dbT7006_jukyuKaishiYMD
+            ,dbT7006."jukyuHaishiYMD" AS dbT7006_jukyuHaishiYMD
+            ,urT0508."shikibetsuCode" AS urT0508_shikibetsuCode
+            ,urT0508."gyomuCode" AS urT0508_gyomuCode
+            ,urT0508."jukyuKaishiYMD" AS urT0508_jukyuKaishiYMD
+            ,urT0508."jukyuHaishiYMD" AS urT0508_jukyuHaishiYMD
+            ,urT0526."fujoShuruiCode" AS fujoShuruiCode
+            ,dbT1008."iryoHokenShubetsuCode" AS iryoHokenShubetsuCode
+            ,dbT1008."iryoHokenshaNo" AS iryoHokenshaNo
+            ,dbT1008."iryoHokenshaMeisho" AS iryoHokenshaMeisho
+            ,dbT1008."iryoHokenKigoNo" AS iryoHokenKigoNo
+            ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+            ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
+        FROM
+            rgur."UrT0508SeikatsuHogoJukyusha" AS urT0508
+        LEFT JOIN
+            rgur."UrT0526SeikatsuHogoFujoShurui" AS urT0526
+            ON urT0526."shikibetsuCode" = urT0508."shikibetsuCode"
+            AND urT0526."gyomuCode" = urT0508."gyomuCode"
+            AND urT0526."jukyuKaishiYMD" = urT0508."jukyuKaishiYMD"
+        INNER  JOIN
+            rgdb."DbV1001HihokenshaDaicho" AS dbV1001
+            ON dbV1001."shikibetsuCode" = urT0508."shikibetsuCode"
+        INNER JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
+            ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = dbV1001."shikibetsuCode"
+             <if test="is年齢">
+                <if test="has年齢範囲開始">
+                    AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" <![CDATA[<=]]> #{生年月日範囲終了}
+                </if>
+                <if test="has年齢範囲終了">
+                    AND  #{生年月日範囲開始} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD"
+                </if>
+            </if>
+            <if test="is生年月日">
+                <if test="has生年月日範囲開始">
+                    AND  #{生年月日範囲開始} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD"
+                </if>
+                <if test="has生年月日範囲終了">
+                    AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" <![CDATA[<=]]> #{生年月日範囲終了}
+                </if>
+            </if>
+        INNER JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
+            ON "Atesaki"."shikibetsuCode" = dbV1001."shikibetsuCode"
+        LEFT JOIN (
+            SELECT
+                I."shikibetsuCode"
+                ,I."iryoHokenShubetsuCode"
+                ,I."iryoHokenshaNo"
+                ,I."iryoHokenshaMeisho"
+                ,I."iryoHokenKigoNo"
+            FROM
+                rgdb."DbT1008IryohokenKanyuJokyo" AS I
+            WHERE
+                NOT EXISTS (
+                    SELECT 1
+                    FROM
+                        rgdb."DbT1008IryohokenKanyuJokyo" AS I2
+                    WHERE
+                        I."shikibetsuCode" = I2."shikibetsuCode"
+                    AND I."rirekiNo" <![CDATA[<]]> I2."rirekiNo"
+                )
+            ) AS dbT1008
+            ON dbT1008."shikibetsuCode" = dbV1001."shikibetsuCode"
+        LEFT JOIN (
+            SELECT
+                R."shikibetsuCode"
+                ,R."jukyuKaishiYMD"
+                ,R."jukyuHaishiYMD"
+            FROM
+                rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS R
+            WHERE
+                NOT EXISTS (
+                    SELECT 1
+                    FROM
+                        rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS R2
+                    WHERE
+                        R."shikibetsuCode" = R2."shikibetsuCode"
+                    AND R."jukyuKaishiYMD" <![CDATA[<]]> R2."jukyuKaishiYMD"
+                )
+            ) AS dbT7006
+            ON dbT7006."shikibetsuCode" = dbV1001."shikibetsuCode"
+        WHERE
+            urT0508."gyomuCode" = 'DB'
+            <if test="isFujoShuruiFlag">
+                AND urT0526."fujoShuruiCode" IN
+                <foreach collection="fujoShurui" item="shurui" open="(" separator="," close=")"> #{shurui} </foreach>
+            </if>
+            <if test="isChokkinFlag">
+                AND NOT EXISTS (
+                    SELECT 1
+                    FROM rgur."UrT0508SeikatsuHogoJukyusha" AS urT0508_2
+                    WHERE
+                            urT0508."shikibetsuCode" = urT0508_2."shikibetsuCode"
+                        AND urT0508."gyomuCode" = urT0508_2."gyomuCode"
+                        AND urT0508."jukyuKaishiYMD" <![CDATA[<]]> urT0508_2."jukyuKaishiYMD"
+                )
+            </if>
+            <if test="isKijunYMDFlag">
+                AND urT0508."jukyuKaishiYMD" <![CDATA[<=]]> #{kijunYMD}
+                AND #{kijunYMD} <![CDATA[<=]]> urT0508."jukyuHaishiYMD"
+            </if>
+            <if test="isHaniFlag">
+                <if test="isKaishiYMDFlag">
+                    <if test="isFromFlag">
+                        AND #{chushutsunichiFrom} <![CDATA[<=]]> urT0508."jukyuKaishiYMD"
+                    </if>
+                    <if test="isToFlag">
+                        AND urT0508."jukyuKaishiYMD" <![CDATA[<=]]> #{chushutsunichiTo}
+                    </if>
+                </if>
+                <if test="isShuryoYMDFlag">
+                    <if test="isFromFlag">
+                        AND #{chushutsunichiFrom} <![CDATA[<=]]> urT0508."jukyuHaishiYMD"
+                    </if>
+                    <if test="isToFlag">
+                        AND urT0508."jukyuHaishiYMD" <![CDATA[<=]]> #{chushutsunichiTo}
+                    </if>
+                </if>
+            </if>
+        ORDER BY
+             urT0508."shikibetsuCode"
+            ,urT0508."gyomuCode"
+            ,urT0508."jukyuKaishiYMD"
+    </select>
+</mapper>

@@ -10,8 +10,6 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteitsuchishoikkatsuhakko.DecideKetteiHenkoTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteitsuchishoikkatsuhakko.PrtNonyuTsuchishoParameter;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteitsuchishoikkatsuhakko.TsuchishoHakkogoIdoshaInsertParameter;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteitsuchishoikkatsuhakko.TsuchishoHakkogoIdoshaNonyuInsertParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoTempEntity;
 
 /**
@@ -22,6 +20,11 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteitsuchishoikkatsuhakk
 public interface IHonsanteiTsuchishoIkkatsuHakkoMapper {
 
     /**
+     * 計算後情報中間一時テーブル削除メソッドです。
+     */
+    void drop計算後情報中間一時();
+
+    /**
      * creat本算定通知書一時テーブルメソッドです。
      */
     void creat本算定通知書一時();
@@ -30,6 +33,11 @@ public interface IHonsanteiTsuchishoIkkatsuHakkoMapper {
      * 本算定通知書一時テーブルをクリアするメソッドです。
      */
     void clear本算定通知書一時();
+
+    /**
+     * 計算後情報一時テーブル削除メソッドです。
+     */
+    void drop計算後情報一時();
 
     /**
      * 計算後情報を利用するが、本算定通知書一時テーブルに登録する
@@ -114,27 +122,4 @@ public interface IHonsanteiTsuchishoIkkatsuHakkoMapper {
      */
     List<HonsanteiTsuchishoTempEntity> select納入通知書(PrtNonyuTsuchishoParameter parameter);
 
-    /**
-     * 納入通知書発行後異動者登録するデータを抽出メソッドです。
-     *
-     * @param parameter TsuchishoHakkogoIdoshaNonyuInsertParameter
-     * @return List<HonsanteiTsuchishoTempEntity> 対象データ
-     */
-    List<HonsanteiTsuchishoTempEntity> select納入通知書発行後異動者(TsuchishoHakkogoIdoshaNonyuInsertParameter parameter);
-
-    /**
-     * 特徴開始通知書発行後異動者登録するデータを抽出メソッドです。
-     *
-     * @param parameter TsuchishoHakkogoIdoshaInsertParameter
-     * @return List<HonsanteiTsuchishoTempEntity> 対象データ
-     */
-    List<HonsanteiTsuchishoTempEntity> select特徴開始通知書発行後異動者(TsuchishoHakkogoIdoshaInsertParameter parameter);
-
-    /**
-     * 決定変更通知書発行後異動者登録するデータを抽出メソッドです。
-     *
-     * @param parameter TsuchishoHakkogoIdoshaInsertParameter
-     * @return List<HonsanteiTsuchishoTempEntity> 対象データ
-     */
-    List<HonsanteiTsuchishoTempEntity> select決定変更通知書発行後異動者(TsuchishoHakkogoIdoshaInsertParameter parameter);
 }

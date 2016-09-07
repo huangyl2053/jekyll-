@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dba.service.report.shisetsuhenkotsuchisho.Shisetsu
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiIdentifier;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -59,10 +58,10 @@ public class TatokureiHenkoTsuchishoHakko {
      * @return ResponseData<TatokureiHenkoTsuchishoHakkoDiv>
      */
     public ResponseData<TatokureiHenkoTsuchishoHakkoDiv> onLoad(TatokureiHenkoTsuchishoHakkoDiv div) {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード();
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
         div.getCcdKaigoAtenaInfo().initialize(識別コード);
-        div.getCcdKaigoShikakuJoho().initialize(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号());
-        List<TaJushochiTokureisyaKanriMaster> tekiyoJohoList = get適用情報(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
+        div.getCcdKaigoShikakuJoho().initialize(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号());
+        List<TaJushochiTokureisyaKanriMaster> tekiyoJohoList = get適用情報(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
         if (tekiyoJohoList != null && !tekiyoJohoList.isEmpty()) {
             TashichosonBusiness 住所地特例Model = TaJushochiTokureisyaKanriManager.createInstance().get他市町村住所地特例(識別コード);
             ViewStateHolder.put(ViewStateKeys.他住所地特例, Models.create(住所地特例Model.get住所地特例List()));
@@ -116,7 +115,7 @@ public class TatokureiHenkoTsuchishoHakko {
      */
     public ResponseData<SourceDataCollection> btnPrint(TatokureiHenkoTsuchishoHakkoDiv div) {
 
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード();
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
         Models<TashichosonJushochiTokureiIdentifier, TashichosonJushochiTokurei> 他市町村住所地特例
                 = ViewStateHolder.get(ViewStateKeys.他住所地特例, Models.class);
         TatokuKanrenChohyoShijiData business = 帳票発行指示データ作成(div, false);
@@ -181,8 +180,8 @@ public class TatokureiHenkoTsuchishoHakko {
                                 : div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtTantokamei().getValue(),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtSam() == null ? RString.EMPTY
                                 : div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtSam().getValue(),
-                                ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード() == null
-                                ? ShikibetsuCode.EMPTY : ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード(),
+                                ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード() == null
+                                ? ShikibetsuCode.EMPTY : ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード(),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().get措置保険者番号(),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo() == null ? FlexibleDate.EMPTY
                                 : new FlexibleDate(div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().get異動日()),

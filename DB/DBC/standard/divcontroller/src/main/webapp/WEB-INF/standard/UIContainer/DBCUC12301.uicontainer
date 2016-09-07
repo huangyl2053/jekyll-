@@ -5,19 +5,47 @@
  "steps": [
   {
    "id": 1,
-   "name": "総合事業高額サービス費支給決定通知書作成",
+   "name": "事業高額決定通知書（単）",
    "transitionList": [
     {
      "id": "1",
      "type": "start",
      "condition": "",
-     "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC1230001",
-     "toLayoutTitle": "事業高額決定通知書（単）",
-     "toState": "default"
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
     },
     {
      "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0200001",
+     "layoutTitle": "対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC1230001",
+     "toLayoutTitle": "事業高額決定通知書（単）",
+     "toState": "発行"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1230001",
+     "layoutTitle": "事業高額決定通知書（単）",
+     "eventName": "対象者検索へ戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
+    },
+    {
+     "id": "4",
      "type": "end",
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC1230001",
@@ -25,6 +53,20 @@
      "eventName": "完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1230001",
+     "layoutTitle": "事業高額決定通知書（単）",
+     "eventName": "再検索",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
     }
    ]
   }

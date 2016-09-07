@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KogakuGassanJikoFutanGakuMeisai}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-4800-010 huzongcheng
  */
 public class KogakuGassanJikoFutanGakuMeisaiBuilder {
 
@@ -119,7 +121,6 @@ public class KogakuGassanJikoFutanGakuMeisaiBuilder {
      * @return {@link KogakuGassanJikoFutanGakuMeisaiBuilder}
      */
     public KogakuGassanJikoFutanGakuMeisaiBuilder set自己負担額(Decimal 自己負担額) {
-        requireNonNull(自己負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("自己負担額"));
         entity.setJikoFutanGaku(自己負担額);
         return this;
     }
@@ -131,7 +132,6 @@ public class KogakuGassanJikoFutanGakuMeisaiBuilder {
      * @return {@link KogakuGassanJikoFutanGakuMeisaiBuilder}
      */
     public KogakuGassanJikoFutanGakuMeisaiBuilder set70_74自己負担額_内数(Decimal 自己負担額_内数_70_74) {
-        requireNonNull(自己負担額_内数_70_74, UrSystemErrorMessages.値がnull.getReplacedMessage("70_74自己負担額_内数"));
         entity.setUchisu_70_74JikoFutanGaku(自己負担額_内数_70_74);
         return this;
     }
@@ -143,7 +143,6 @@ public class KogakuGassanJikoFutanGakuMeisaiBuilder {
      * @return {@link KogakuGassanJikoFutanGakuMeisaiBuilder}
      */
     public KogakuGassanJikoFutanGakuMeisaiBuilder set70未満高額支給額(Decimal 高額支給額_70未満) {
-        requireNonNull(高額支給額_70未満, UrSystemErrorMessages.値がnull.getReplacedMessage("70未満高額支給額"));
         entity.setUnder_70KogakuShikyuGaku(高額支給額_70未満);
         return this;
     }
@@ -155,7 +154,6 @@ public class KogakuGassanJikoFutanGakuMeisaiBuilder {
      * @return {@link KogakuGassanJikoFutanGakuMeisaiBuilder}
      */
     public KogakuGassanJikoFutanGakuMeisaiBuilder set70_74高額支給額(Decimal 高額支給額70_74) {
-        requireNonNull(高額支給額70_74, UrSystemErrorMessages.値がnull.getReplacedMessage("70_74高額支給額"));
         entity.setOver_70_74KogakuShikyuGaku(高額支給額70_74);
         return this;
     }
@@ -167,7 +165,6 @@ public class KogakuGassanJikoFutanGakuMeisaiBuilder {
      * @return {@link KogakuGassanJikoFutanGakuMeisaiBuilder}
      */
     public KogakuGassanJikoFutanGakuMeisaiBuilder set摘要(RString 摘要) {
-        requireNonNull(摘要, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要"));
         entity.setTekiyo(摘要);
         return this;
     }
@@ -179,7 +176,6 @@ public class KogakuGassanJikoFutanGakuMeisaiBuilder {
      * @return {@link KogakuGassanJikoFutanGakuMeisaiBuilder}
      */
     public KogakuGassanJikoFutanGakuMeisaiBuilder set補正済_自己負担額(Decimal 補正済_自己負担額) {
-        requireNonNull(補正済_自己負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("補正済_自己負担額"));
         entity.setSumi_JikoFutanGaku(補正済_自己負担額);
         return this;
     }
@@ -191,7 +187,6 @@ public class KogakuGassanJikoFutanGakuMeisaiBuilder {
      * @return {@link KogakuGassanJikoFutanGakuMeisaiBuilder}
      */
     public KogakuGassanJikoFutanGakuMeisaiBuilder set補正済_70_74自己負担額_内数(Decimal 補正済_70_74自己負担額_内数) {
-        requireNonNull(補正済_70_74自己負担額_内数, UrSystemErrorMessages.値がnull.getReplacedMessage("補正済_70_74自己負担額_内数"));
         entity.setSumi_70_74JikoFutanGaku(補正済_70_74自己負担額_内数);
         return this;
     }
@@ -203,7 +198,6 @@ public class KogakuGassanJikoFutanGakuMeisaiBuilder {
      * @return {@link KogakuGassanJikoFutanGakuMeisaiBuilder}
      */
     public KogakuGassanJikoFutanGakuMeisaiBuilder set補正済_70未満高額支給額(Decimal 補正済_70未満高額支給額) {
-        requireNonNull(補正済_70未満高額支給額, UrSystemErrorMessages.値がnull.getReplacedMessage("補正済_70未満高額支給額"));
         entity.setSumi_under_70KogakuShikyuGaku(補正済_70未満高額支給額);
         return this;
     }
@@ -215,7 +209,6 @@ public class KogakuGassanJikoFutanGakuMeisaiBuilder {
      * @return {@link KogakuGassanJikoFutanGakuMeisaiBuilder}
      */
     public KogakuGassanJikoFutanGakuMeisaiBuilder set補正済_70_74高額支給額(Decimal 補正済_70_74高額支給額) {
-        requireNonNull(補正済_70_74高額支給額, UrSystemErrorMessages.値がnull.getReplacedMessage("補正済_70_74高額支給額"));
         entity.setSumi_70_74KogakuShikyuGaku(補正済_70_74高額支給額);
         return this;
     }
@@ -227,7 +220,6 @@ public class KogakuGassanJikoFutanGakuMeisaiBuilder {
      * @return {@link KogakuGassanJikoFutanGakuMeisaiBuilder}
      */
     public KogakuGassanJikoFutanGakuMeisaiBuilder set補正済_摘要(RString 補正済_摘要) {
-        requireNonNull(補正済_摘要, UrSystemErrorMessages.値がnull.getReplacedMessage("補正済_摘要"));
         entity.setSumi_Tekiyo(補正済_摘要);
         return this;
     }

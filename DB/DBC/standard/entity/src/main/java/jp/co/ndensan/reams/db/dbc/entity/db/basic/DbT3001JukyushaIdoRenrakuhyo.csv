@@ -1,7 +1,6 @@
-﻿sofuYM,UDD014YM,FlexibleYearMonth,,,,,送付年月,A
-hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
-rirekiNo,int2,int,,,,,履歴番号,A
+﻿hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 idoYMD,UDD015YMD,FlexibleDate,,,,,異動年月日,A
+rirekiNo,int2,int,,,,,履歴番号,A
 idoKubunCode,varchar,RString,,,,,異動区分コード,A
 jukyushaIdoJiyu,varchar,RString,,,,,受給者異動事由,A
 shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
@@ -69,6 +68,7 @@ nijiyoboJigyoKubunCode,varchar,RString,,,,,二次予防事業区分コード,A
 nijiyoboJigyoYukoKikanKaishiYMD,UDD015YMD,FlexibleDate,,,,,二次予防事業有効期間開始年月日,A
 nijiyoboJigyoYukoKikanShuryoYMD,UDD015YMD,FlexibleDate,,,,,二次予防事業有効期間終了年月日,A
 teiseiRenrakuhyoFlag,bool,boolean,,,,,訂正連絡票フラグ,A
+sofuYM,UDD014YM,FlexibleYearMonth,,,,,送付年月,A
 jushochiTokureiTaishoshaKubunCode,varchar,RString,,,,,住所地特例対象者区分コード,A
 shisetsuShozaiHokenjaNo,varchar,RString,,,,,施設所在保険者番号,A
 jushochiTokureiTekiyoKaishiYMD,varchar,RString,,,,,住所地特例適用開始日,A

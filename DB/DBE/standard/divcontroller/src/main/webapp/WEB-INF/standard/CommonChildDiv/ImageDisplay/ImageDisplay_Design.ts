@@ -8,6 +8,18 @@ module DBE {
 
         export class Events {
 
+            public static onClick_btnBefore(): string {
+                return "onClick_btnBefore";
+            }
+
+            public static onClick_btnBack(): string {
+                return "onClick_btnBack";
+            }
+
+            public static onClick_btnAfterImg(): string {
+                return "onClick_btnAfterImg";
+            }
+
         }
 
         export class Controls {
@@ -53,12 +65,12 @@ module DBE {
                 return new UZA.Button(this.convFiledName("btnBefore"));
             }
 
-            public btnAfterImg(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnAfterImg"));
-            }
-
             public btnBack(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnBack"));
+            }
+
+            public btnAfterImg(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnAfterImg"));
             }
 
         }

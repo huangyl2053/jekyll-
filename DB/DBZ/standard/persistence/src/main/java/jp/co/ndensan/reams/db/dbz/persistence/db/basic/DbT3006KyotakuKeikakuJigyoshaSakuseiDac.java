@@ -12,6 +12,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJi
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakusei.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakusei.taishoYM;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -25,7 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 居宅給付計画事業者作成のデータアクセスクラスです。
  */
-public class DbT3006KyotakuKeikakuJigyoshaSakuseiDac implements ISaveable<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity> {
+public class DbT3006KyotakuKeikakuJigyoshaSakuseiDac implements ISaveable<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity>,
+        IDeletable<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -84,5 +86,18 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiDac implements ISaveable<DbT300
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * DbT3006KyotakuKeikakuJigyoshaSakuseiEntityを物理削除します。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Override
+    public int delete(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅給付計画事業者作成エンティティ"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.deletePhysical(entity).execute();
     }
 }

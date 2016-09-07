@@ -9,7 +9,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.dgJutoku_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
-import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionary;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -38,7 +39,7 @@ public final class ShikakuShosaiValidationHelper {
      */
     public static ValidationMessageControlPairs validate画面起動時(HihokenshaDaicho target, IItemList<HihokenshaDaicho> daichoList,
             TextBoxFlexibleDate 適用日, TextBoxFlexibleDate 解除日, DataGrid<dgJutoku_Row> 住所地特例grid, JushochiTokureiExecutionStatus status) {
-        ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionary();
+        ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionaryBuilder().build();
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance(); //createValidationMessagesInstance();
         return dictionary.check(messages);
@@ -56,7 +57,7 @@ public final class ShikakuShosaiValidationHelper {
      */
     public static ValidationMessageControlPairs validate保存前(HihokenshaDaicho target, IItemList<HihokenshaDaicho> daichoList,
             TextBoxFlexibleDate 適用日, TextBoxFlexibleDate 解除日, DataGrid<dgJutoku_Row> 住所地特例grid, JushochiTokureiExecutionStatus status) {
-        ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionary();
+        ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionaryBuilder().build();
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance(); //createValidationMessagesInstance();
         return dictionary.check(messages);

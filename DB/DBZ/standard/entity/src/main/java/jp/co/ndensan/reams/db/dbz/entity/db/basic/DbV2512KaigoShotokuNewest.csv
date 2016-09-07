@@ -1,0 +1,14 @@
+﻿shotokuNendo,UDD012YSeireki,FlexibleYear,,,,,shotokuNendo,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,shikibetsuCode,A
+rirekiNo,int8,long,,,,,rirekiNo,A
+kazeiKubun,varchar,RString,,,,,kazeiKubun,A
+kazeiKubunGemmenGo,varchar,RString,,,,,kazeiKubunGemmenGo,A
+gokeiShotokuGaku,numeric,Decimal,,,,,gokeiShotokuGaku,A
+nenkiniShunyuGaku,numeric,Decimal,,,,,nenkiniShunyuGaku,A
+nenkiniShotokuGaku,numeric,Decimal,,,,,nenkiniShotokuGaku,A
+kazeiShotokuGaku,numeric,Decimal,,,,,kazeiShotokuGaku,A
+gekihenKanwaKubun,varchar,RString,,,,,gekihenKanwaKubun,A
+yusenKubun,varchar,RString,,,,,yusenKubun,A
+shoriTimeStamp,UDD018YMDHMS,YMDHMS,,,,,shoriTimeStamp,A
+motoRirekiNo,int2,int,,,,,motoRirekiNo,A
+torokuGyomu,unknown,unknown,,,,,torokuGyomu,A

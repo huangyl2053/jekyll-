@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.Shin
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsakaishukeihyoHanteiBetsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.SinsakaiHanteiJyokyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.CsvKenHokokuShiryoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.CsvKenHokokuShiryoSakuseiHeaderEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.JigyoJyokyoHokokuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.JigyoJyokyoHokokuHeaderEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.JisshiJokyoTokeiEntity;
@@ -139,14 +138,6 @@ public interface IHokokuShiryoSakuSeiMapper {
      * @return ShinsakaiShukeihyoGenzaiEntity
      */
     List<ShinsakaiShukeihyoGenzaiEntity> getShinsakaiShukeiGenzainojokyo(ShinsakaiShukeiGenzainojokyoMyBatisParameter parameter);
-
-    /**
-     * 県報告用資料情報ヘッダ情報リストを取得します。
-     *
-     * @param parameter CsvKenHokokuShiryoSakuseiMyBatisParameter
-     * @return CsvKenHokokuShiryoSakuseiHeaderEntity
-     */
-    List<CsvKenHokokuShiryoSakuseiHeaderEntity> getCsvKenHokokuShiryoSakuseiHeader(CsvKenHokokuShiryoSakuseiMyBatisParameter parameter);
 
     /**
      * 県報告用資料情報ヘッダ情報リストを取得します。

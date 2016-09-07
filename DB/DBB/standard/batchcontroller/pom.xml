@@ -48,6 +48,10 @@
             <artifactId>DbzBatchController</artifactId>
         </dependency>
         <!-- 公開系 -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+            <artifactId>UexBatchController</artifactId>
+        </dependency>
         <!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
@@ -57,10 +61,18 @@
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzPersistence</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzPersistence</artifactId>
+        </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ca.cax</groupId>
             <artifactId>CaxBusiness</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ca.cax</groupId>
+            <artifactId>CaxBatchController</artifactId>
             <type>jar</type>
         </dependency>
         <dependency>

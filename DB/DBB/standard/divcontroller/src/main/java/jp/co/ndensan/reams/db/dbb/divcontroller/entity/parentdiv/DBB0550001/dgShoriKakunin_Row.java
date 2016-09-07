@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 /**
  * dgShoriKakunin_Row のクラスファイル
  *
- * @reamsid_L DBB-1760-010 quxiaodong
+ * @reamsid_L DBB-0920-010 quxiaodong
  */
 public class dgShoriKakunin_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">

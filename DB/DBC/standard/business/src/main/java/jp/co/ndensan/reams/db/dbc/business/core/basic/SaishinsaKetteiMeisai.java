@@ -48,7 +48,7 @@ extends ModelBase<SaishinsaKetteiMeisaiIdentifier,
         this.entity = new DbT3064SaishinsaKetteiMeisaiEntity();
         this.entity.setToriatsukaiYM(取扱年月);
         this.entity.setHokenshaKubun(保険者区分);
-        this.entity.setRirekiNo(履歴番号);
+        this.entity.setRirekiNo(履歴番号.intValue());
         this.id = new SaishinsaKetteiMeisaiIdentifier(
                 取扱年月,
                 保険者区分,
@@ -67,7 +67,7 @@ extends ModelBase<SaishinsaKetteiMeisaiIdentifier,
         this.id = new SaishinsaKetteiMeisaiIdentifier(
                 entity.getToriatsukaiYM(),
                 entity.getHokenshaKubun(),
-                entity.getRirekiNo());
+                new Decimal(entity.getRirekiNo()));
     }
 
     /**
@@ -109,7 +109,7 @@ extends ModelBase<SaishinsaKetteiMeisaiIdentifier,
      * @return 履歴番号
      */
     public Decimal get履歴番号() {
-        return entity.getRirekiNo();
+        return new Decimal(entity.getRirekiNo());
     }
 
     /**

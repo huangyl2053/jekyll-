@@ -11,7 +11,6 @@ import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3064SaishinsaKet
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -196,7 +195,7 @@ public class DbT3064SaishinsaKetteiMeisaiDacTest extends DbcTestDacBase {
         public static void insert(
                 FlexibleYearMonth 取扱年月,
                 RString 保険者区分,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3064SaishinsaKetteiMeisaiEntity entity = DbT3064SaishinsaKetteiMeisaiEntityGenerator.createDbT3064SaishinsaKetteiMeisaiEntity();
             entity.setToriatsukaiYM(取扱年月);
             entity.setHokenshaKubun(保険者区分);

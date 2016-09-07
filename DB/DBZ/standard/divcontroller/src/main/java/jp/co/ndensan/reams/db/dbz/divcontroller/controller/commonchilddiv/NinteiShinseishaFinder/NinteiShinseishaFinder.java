@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.Ninte
 
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
+import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.KanryoInfoPhase;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderHandler;
@@ -170,6 +171,7 @@ public class NinteiShinseishaFinder {
      */
     public ResponseData<NinteiShinseishaFinderDiv> onChange_ddlNowPhase(NinteiShinseishaFinderDiv div) {
         RString nowPhase = div.getDdlNowPhase().getSelectedKey();
+        getHandler(div).clearChk();
         if (RString.isNullOrEmpty(nowPhase)) {
             div.getChkShoriJotai().setDisabled(true);
             div.getChkKoshinTaishoChushutsu().setDisabled(true);
@@ -186,7 +188,7 @@ public class NinteiShinseishaFinder {
             div.getChkGetsureiShori().setDisabled(false);
         } else {
             div.getChkShoriJotai().setDisabled(false);
-            div.getChkKoshinTaishoChushutsu().setDisabled(true);
+
             div.getChkIchijiHantei().setDisabled(true);
             div.getChkShinseiUketsuke().setDisabled(true);
             div.getChkMasking().setDisabled(true);
@@ -195,9 +197,41 @@ public class NinteiShinseishaFinder {
             div.getChkIkenshoIrai().setDisabled(true);
             div.getChkNijiHantei().setDisabled(true);
             div.getChkChosaNyushu().setDisabled(true);
-            div.getChkTsuchiShori().setDisabled(true);
             div.getChkIkenshoNyushu().setDisabled(true);
             div.getChkGetsureiShori().setDisabled(true);
+
+            div.getChkKoshinTaishoChushutsu().setDisabled(false);
+            if (KanryoInfoPhase.一次判定.getコード().equals(nowPhase)) {
+                div.getChkIchijiHantei().setDisabled(false);
+            }
+            if (KanryoInfoPhase.申請受付.getコード().equals(nowPhase)) {
+                div.getChkShinseiUketsuke().setDisabled(false);
+            }
+            if (KanryoInfoPhase.マスキング.getコード().equals(nowPhase)) {
+                div.getChkMasking().setDisabled(false);
+            }
+            if (KanryoInfoPhase.調査依頼.getコード().equals(nowPhase)) {
+                div.getChkChosaIrai().setDisabled(false);
+            }
+            if (KanryoInfoPhase.審査会登録.getコード().equals(nowPhase)) {
+                div.getChkShinsakaiToroku().setDisabled(false);
+            }
+            if (KanryoInfoPhase.意見書依頼.getコード().equals(nowPhase)) {
+                div.getChkIkenshoIrai().setDisabled(false);
+            }
+            if (KanryoInfoPhase.二次判定.getコード().equals(nowPhase)) {
+                div.getChkNijiHantei().setDisabled(false);
+            }
+            if (KanryoInfoPhase.調査入手.getコード().equals(nowPhase)) {
+                div.getChkChosaNyushu().setDisabled(false);
+            }
+            div.getChkTsuchiShori().setDisabled(false);
+            if (KanryoInfoPhase.意見書入手.getコード().equals(nowPhase)) {
+                div.getChkIkenshoNyushu().setDisabled(false);
+            }
+            if (KanryoInfoPhase.月例処理.getコード().equals(nowPhase)) {
+                div.getChkGetsureiShori().setDisabled(false);
+            }
         }
         return ResponseData.of(div).respond();
     }

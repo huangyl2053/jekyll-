@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 事業報告（年報）補正、発行_検索を表示するDivControllerです。
  *
- * @reamsid_L DBU-1060-010  lijia
+ * @reamsid_L DBU-1060-010 lijia
  *
  */
 public class PanelBase {
@@ -52,7 +52,7 @@ public class PanelBase {
     private static final int 集計番号_0100 = 100;
     private static final int 集計番号_0200 = 200;
     private static final int 保険者区分_るく = 6;
-    private static final int 保険者区分_なな = 6;
+    private static final int 保険者区分_なな = 7;
     private List<JigyoHokokuNenpoResult> 事業報告集計一覧データリスト;
 
     /**

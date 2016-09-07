@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMast
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -111,6 +112,7 @@ public class KoikinaiTenkyoRirekiHenkanFinder {
         List<NinteiShinseiJoho> updateDataList = new ArrayList<>();
 
         for (DbT5101NinteiShinseiJohoEntity entity : relateEntity) {
+            entity.initializeMd5();
             updateDataList.add(new NinteiShinseiJoho(entity));
         }
         return SearchResult.of(updateDataList, 0, false);
@@ -136,10 +138,8 @@ public class KoikinaiTenkyoRirekiHenkanFinder {
         for (int index = 0; index < entitylist.size(); index++) {
             if (!entitylist.get(index).getShoKisaiHokenshaNo().isEmpty()) {
                 KeyValueDataSource keyvaule = new KeyValueDataSource();
-                RString key = RString.EMPTY;
-                RString value = RString.EMPTY;
-                key = entitylist.get(index).getShoKisaiHokenshaNo().value();
-                value = entitylist.get(index).getShichosonMeisho();
+                RString key = entitylist.get(index).getShoKisaiHokenshaNo().value();
+                RString value = entitylist.get(index).getShichosonMeisho();
                 keyvaule.setKey(key);
                 RStringBuilder rstBuilder = new RStringBuilder();
                 rstBuilder.append(key);
@@ -159,7 +159,11 @@ public class KoikinaiTenkyoRirekiHenkanFinder {
      * @return ShinseishoKanriNo
      */
     public ShinseishoKanriNo getZenkaiShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
-        ShinseiRirekiJoho shinseirireki = new ShinseiRirekiJoho(dacDbT5121.selectByKey(shinseishoKanriNo));
+        DbT5121ShinseiRirekiJohoEntity entity = dacDbT5121.selectByKey(shinseishoKanriNo);
+        if (entity == null) {
+            return null;
+        }
+        ShinseiRirekiJoho shinseirireki = new ShinseiRirekiJoho(entity);
         return shinseirireki.get前回申請管理番号();
     }
 }

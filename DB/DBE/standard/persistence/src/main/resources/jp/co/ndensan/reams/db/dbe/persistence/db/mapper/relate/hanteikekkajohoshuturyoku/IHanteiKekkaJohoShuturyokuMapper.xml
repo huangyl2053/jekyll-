@@ -108,12 +108,10 @@
                 LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
                     ON dbT5102."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo"
                 WHERE
-                    dbT5502."shinsakaiKaisaiNo" IN
-                    <foreach collection="kaisaiBangou" item="code" open="(" separator="," close=")"> #{code} </foreach>
+                    dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
                     ) AS TB ON TB."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
             WHERE
-                dbT5502."shinsakaiKaisaiNo" IN
-                <foreach collection="kaisaiBangou" item="code" open="(" separator="," close=")"> #{code} </foreach>
+                dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
             <if test="isShoKisaiHokenshaNoFlag">
                 AND dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
             </if>                  
@@ -152,12 +150,10 @@
                 LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
                     ON dbT5102."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo"
                 WHERE
-                    dbT5502."shinsakaiKaisaiNo" IN
-                    <foreach collection="kaisaiBangou" item="code" open="(" separator="," close=")"> #{code} </foreach>
+                    dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
                 ) AS TB ON TB."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
             WHERE
-                dbT5502."shinsakaiKaisaiNo" IN
-                <foreach collection="kaisaiBangou" item="code" open="(" separator="," close=")"> #{code} </foreach>
+                dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
             <if test="isShoKisaiHokenshaNoFlag">
                 AND dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
             </if>
@@ -297,13 +293,11 @@
                     LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102 
                       ON dbT5102."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo" 
                   WHERE
-                    dbT5502."shinsakaiKaisaiNo" IN
-                    <foreach collection="kaisaiBangou" item="code" open="(" separator="," close=")"> #{code} </foreach>
+                    dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
                 ) AS TB 
                   ON TB."shinseishoKanriNo" = dbT5502."shinseishoKanriNo" 
               WHERE
-                dbT5502."shinsakaiKaisaiNo" IN
-                <foreach collection="kaisaiBangou" item="code" open="(" separator="," close=")"> #{code} </foreach>
+                dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
               ORDER BY
                 dbT5502."shinsakaiOrder") AS A 
           LEFT JOIN ( 
@@ -343,13 +337,11 @@
                     LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102 
                       ON dbT5102."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo" 
                   WHERE
-                    dbT5502."shinsakaiKaisaiNo" IN
-                    <foreach collection="kaisaiBangou" item="code" open="(" separator="," close=")"> #{code} </foreach>
+                    dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
                 ) AS TB 
                   ON TB."shinseishoKanriNo" = dbT5502."shinseishoKanriNo" 
               WHERE
-                dbT5502."shinsakaiKaisaiNo" IN
-                <foreach collection="kaisaiBangou" item="code" open="(" separator="," close=")"> #{code} </foreach>
+                dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
               GROUP BY
                 dbT5502."shinsakaiKaisaiNo") AS B 
           ON A.shinsakaiKaisaiNo = B.shinsakaiKaisaiNo
@@ -368,8 +360,7 @@
         FROM
         rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS dbT5511
         WHERE
-        dbT5511."shinsakaiKaisaiNo" IN
-        <foreach collection="kaisaiBangou" item="code" open="(" separator="," close=")"> #{code} </foreach>
+        dbT5511."shinsakaiKaisaiNo" = #{kaisaiBangou}
     </select>
     <resultMap id="resultMap_getShinsakaiIinJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.IinJohoRelateEntity" autoMapping="true">
         <result property="shinsakaiIinShimei" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -389,8 +380,7 @@
         rgdb."DbT5594ShinsakaiIinJoho" DbT5594
         ON DbT5503."shinsakaiIinCode" = DbT5594."shinsakaiIinCode"
         WHERE
-        DbT5503."shinsakaiKaisaiNo" IN
-        <foreach collection="kaisaiBangou" item="code" open="(" separator="," close=")"> #{code} </foreach>
+        DbT5503."shinsakaiKaisaiNo" = #{kaisaiBangou}
         ORDER BY
         DbT5503."kaigoninteiShinsakaiGichoKubunCode" DESC
     </select>
@@ -419,8 +409,7 @@
         LEFT JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" DbT5592
         ON DbT5511."shinsakaiKaisaiBashoCode" = DbT5592."shinsakaiKaisaiBashoCode"
         WHERE
-        DbT5511."shinsakaiKaisaiNo" IN
-        <foreach collection="kaisaiBangou" item="code" open="(" separator="," close=")"> #{code} </foreach>
+        DbT5511."shinsakaiKaisaiNo" = #{kaisaiBangou}
         GROUP BY
         DbT5511."shinsakaiKaisaiNo"
     </select>
@@ -433,8 +422,7 @@
         INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
         ON DbT5511."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
         WHERE
-        DbT5511."shinsakaiKaisaiNo" IN
-        <foreach collection="kaisaiBangou" item="code" open="(" separator="," close=")"> #{code} </foreach>
+        DbT5511."shinsakaiKaisaiNo" = #{kaisaiBangou}
         AND
         (DbT5502."hanteiKekkaCode" <![CDATA[<>]]>  '01'
         AND DbT5502."hanteiKekkaCode" <![CDATA[<>]]>  '11')
@@ -449,8 +437,7 @@
         INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
         ON DbT5511."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
         WHERE
-        DbT5511."shinsakaiKaisaiNo" IN
-        <foreach collection="kaisaiBangou" item="code" open="(" separator="," close=")"> #{code} </foreach>
+        DbT5511."shinsakaiKaisaiNo" = #{kaisaiBangou}
         AND DbT5502."hanteiKekkaCode" = '11'
     </select>
     <select resultOrdered="true" id="getItiDoHanteiHenkoKensu" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
@@ -464,8 +451,7 @@
         INNER JOIN rgdb."DbT5510IchiGojiHanteiKekkaJoho" DbT5510
         ON DbT5510."shinseishoKanriNo" = DbT5502."shinseishoKanriNo"
         WHERE
-        DbT5511."shinsakaiKaisaiNo" IN
-        <foreach collection="kaisaiBangou" item="code" open="(" separator="," close=")"> #{code} </foreach>
+        DbT5511."shinsakaiKaisaiNo" = #{kaisaiBangou}
     </select>
     <select resultOrdered="true" id="getSinSakaiIkenTukeKensu" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
             resultType="int">
@@ -478,10 +464,8 @@
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" DbT5102
         ON DbT5102."shinseishoKanriNo" = DbT5502."shinseishoKanriNo"
         WHERE
-        DbT5511."shinsakaiKaisaiNo" IN
-        <foreach collection="kaisaiBangou" item="code" open="(" separator="," close=")"> #{code} </foreach>
-        AND (DbT5102."shinsakaiIken" <![CDATA[<>]]> ''
-        AND DbT5102."shinsakaiIken" <![CDATA[<>]]> NULL)
+        DbT5511."shinsakaiKaisaiNo" = #{kaisaiBangou}
+        AND DbT5102."shinsakaiIken" IS NOT NULL
     </select>
     <resultMap id="resultMap_getShinsakaiKekkaJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiKekkaJohoRelateEntity" autoMapping="true">
         <result property="新規申請_状態区分変更件数" column="新規申請_状態区分変更件数"/>
@@ -922,8 +906,7 @@
         ON
         DbT5502."shinseishoKanriNo" = DbT5116."shinseishoKanriNo"
         WHERE
-        DbT5502."shinsakaiKaisaiNo" IN
-        <foreach collection="kaisaiBangou" item="code" open="(" separator="," close=")"> #{code} </foreach>) TB
+        DbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}) TB
         GROUP BY TB."介護認定審査会開催番号"
     </select>
     <resultMap id="resultMap_KekkatsuchiIchiran" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.kekkatsuchiichiranhyo.KekkatsuchiIchiranhyoEntity" autoMapping="true">
@@ -968,7 +951,7 @@
         ON dbT5511."shinsakaiKaisaiNo" = dbT5102."shinsakaiKaisaiNo"
         WHERE
         dbT5102."shinsakaiKaisaiNo" IN
-        <foreach collection="kaisaiBangou" item="code" open="(" separator="," close=")"> #{code} </foreach>
+        <foreach collection="kaisaiBangouList" item="code" open="(" separator="," close=")"> #{code} </foreach>
         ORDER BY
         dbT5102."shinsakaiKaisaiNo"
         ,dbT5101."ninteiShinseiYMD"

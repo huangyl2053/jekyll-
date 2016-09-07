@@ -20,7 +20,7 @@ public final class DbT3064SaishinsaKetteiMeisaiEntityGenerator {
 
     public static final FlexibleYearMonth DEFAULT_取扱年月 = new FlexibleYearMonth("199001");
     public static final RString DEFAULT_保険者区分 = new RString("Data");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 0;
     public static final JigyoshaNo DEFAULT_事業所番号 = new JigyoshaNo("1");
     public static final RString DEFAULT_事業所名 = new RString("Data");
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");

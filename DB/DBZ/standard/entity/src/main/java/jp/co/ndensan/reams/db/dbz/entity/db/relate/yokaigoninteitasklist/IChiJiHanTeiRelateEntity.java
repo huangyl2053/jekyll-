@@ -34,6 +34,7 @@ public class IChiJiHanTeiRelateEntity {
     private RString shichosonMeisho;
     private FlexibleDate johoTorokuKanryoYMD;
     private FlexibleDate ichijiHanteiYMD;
+    private FlexibleDate ichijiHanteiKanryoYMD;
     private Code ichijiHanteiKekkaCode;
     private RString ichijiHnateiKeikokuCode;
     private boolean kariIchijiHanteiKubun;

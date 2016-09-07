@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020003.Futs
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020003.dgGenNendoKibetsuJoho_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020003.dgKaNendoKibetsuJoho_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.FukinitsuNokiKanriManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -33,9 +34,9 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSe
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.db.dbz.service.core.kyushichosoncode.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.kyushichosoncode.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.core.kyushichosoncode.KyuShichosonCodeJoho;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
@@ -45,7 +46,6 @@ import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -89,7 +89,6 @@ public final class FutsuChoshuTotalHandler {
     private static final RString 納期_至 = new RString("納期（至）");
     private static final RString 納期限_自 = new RString("納期限（自）");
     private static final RString 納期限_至 = new RString("納期限（至）");
-    private static final RString コード種別 = new RString("0002");
     private static final FlexibleYear 平成12年 = new FlexibleYear("2000");
     private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
@@ -105,6 +104,7 @@ public final class FutsuChoshuTotalHandler {
     private static final int 数字_５ = 5;
     private static final int 数字_４ = 4;
     private static final int 数字_３ = 3;
+    private static final int 数字_２ = 2;
     private static final int 数字_１ = 1;
     private static final RString 月の期_00 = new RString("00");
     private static final RString 第４月 = new RString("04");
@@ -384,7 +384,7 @@ public final class FutsuChoshuTotalHandler {
         div.getFutsuChoshu().getDdlFukaHoho().setDataSource(set賦課方法ddl());
         div.getFutsuChoshu().getDdlFukaHoho().setSelectedKey(DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法,
                 システム日時, SubGyomuCode.DBB介護賦課));
-        RString 賦課方法説明 = CodeMaster.getCode(SubGyomuCode.DBB介護賦課, new CodeShubetsu(コード種別),
+        RString 賦課方法説明 = CodeMaster.getCode(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.普徴暫定賦課方法.getコード(),
                 new Code(div.getFutsuChoshu().getZanteiKeisanHoho().getDdlFukaHoho().getSelectedKey()),
                 new FlexibleDate(システム日時.toDateString())).getコード名称();
         div.getFutsuChoshu().getZanteiKeisanHoho().getTxtFukaHohoHelp().setValue(賦課方法説明);
@@ -612,7 +612,7 @@ public final class FutsuChoshuTotalHandler {
      * 暫定計算方法の「賦課方法」変更時の処理
      */
     public void set賦課方法変更() {
-        RString 賦課方法説明 = CodeMaster.getCode(SubGyomuCode.DBB介護賦課, new CodeShubetsu(コード種別),
+        RString 賦課方法説明 = CodeMaster.getCode(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.普徴暫定賦課方法.getコード(),
                 new Code(div.getFutsuChoshu().getZanteiKeisanHoho().getDdlFukaHoho().getSelectedKey()),
                 new FlexibleDate(システム日時.toDateString())).getコード名称();
         div.getFutsuChoshu().getZanteiKeisanHoho().getTxtFukaHohoHelp().setValue(賦課方法説明);
@@ -976,10 +976,8 @@ public final class FutsuChoshuTotalHandler {
     }
 
     private void update(RString value, Enum key, RString 理由) {
-        if (!value.equals(DbBusinessConfig.get(key, システム日時, SubGyomuCode.DBB介護賦課))) {
-            BusinessConfig.update(SubGyomuCode.DBB介護賦課, key, value, 理由,
-                    RString.EMPTY, システム日時);
-        }
+        BusinessConfig.update(SubGyomuCode.DBB介護賦課, key, value, 理由,
+                RString.EMPTY, システム日時);
     }
 
     private List<Enum> create過年度期情報_口座対象者プリント条件() {
@@ -1427,7 +1425,8 @@ public final class FutsuChoshuTotalHandler {
     private List<KeyValueDataSource> setＣＶＳカット印字位置ddl() {
         List<KeyValueDataSource> ＣＶＳカット印字位置 = new ArrayList<>();
         for (int i = 1; i < 数字_１３; i = i + 1) {
-            ＣＶＳカット印字位置.add(new KeyValueDataSource(new RString(String.valueOf(i)), new RString(String.valueOf(i))));
+            ＣＶＳカット印字位置.add(new KeyValueDataSource(new RString(String.valueOf(i)).padZeroToLeft(数字_２),
+                    new RString(String.valueOf(i))));
         }
         return ＣＶＳカット印字位置;
     }
@@ -1435,7 +1434,8 @@ public final class FutsuChoshuTotalHandler {
     private List<KeyValueDataSource> setＣＶＳカット印字位置ddl_過年度() {
         List<KeyValueDataSource> ＣＶＳカット印字位置 = new ArrayList<>();
         for (int i = 1; i < 数字_５; i = i + 1) {
-            ＣＶＳカット印字位置.add(new KeyValueDataSource(new RString(String.valueOf(i)), new RString(String.valueOf(i))));
+            ＣＶＳカット印字位置.add(new KeyValueDataSource(new RString(String.valueOf(i)).padZeroToLeft(数字_２),
+                    new RString(String.valueOf(i))));
         }
         return ＣＶＳカット印字位置;
     }
@@ -1443,7 +1443,8 @@ public final class FutsuChoshuTotalHandler {
     private List<KeyValueDataSource> setＣＶＳ連帳印字位置ddl() {
         List<KeyValueDataSource> ＣＶＳ連帳印字位置 = new ArrayList<>();
         for (int i = 1; i < 数字_１３; i = i + 1) {
-            ＣＶＳ連帳印字位置.add(new KeyValueDataSource(new RString(String.valueOf(i)), new RString(String.valueOf(i))));
+            ＣＶＳ連帳印字位置.add(new KeyValueDataSource(new RString(String.valueOf(i)).padZeroToLeft(数字_２),
+                    new RString(String.valueOf(i))));
         }
         return ＣＶＳ連帳印字位置;
     }
@@ -1451,7 +1452,8 @@ public final class FutsuChoshuTotalHandler {
     private List<KeyValueDataSource> setＣＶＳ連帳印字位置ddl_過年度() {
         List<KeyValueDataSource> ＣＶＳ連帳印字位置 = new ArrayList<>();
         for (int i = 1; i < 数字_７; i = i + 1) {
-            ＣＶＳ連帳印字位置.add(new KeyValueDataSource(new RString(String.valueOf(i)), new RString(String.valueOf(i))));
+            ＣＶＳ連帳印字位置.add(new KeyValueDataSource(new RString(String.valueOf(i)).padZeroToLeft(数字_２),
+                    new RString(String.valueOf(i))));
         }
         return ＣＶＳ連帳印字位置;
     }
@@ -1459,7 +1461,8 @@ public final class FutsuChoshuTotalHandler {
     private List<KeyValueDataSource> setブック開始位置ddl() {
         List<KeyValueDataSource> ブック開始位置 = new ArrayList<>();
         for (int i = 1; i < 数字_６; i = i + 1) {
-            ブック開始位置.add(new KeyValueDataSource(new RString(String.valueOf(i)), new RString(String.valueOf(i))));
+            ブック開始位置.add(new KeyValueDataSource(new RString(String.valueOf(i)).padZeroToLeft(数字_２),
+                    new RString(String.valueOf(i))));
         }
         return ブック開始位置;
     }

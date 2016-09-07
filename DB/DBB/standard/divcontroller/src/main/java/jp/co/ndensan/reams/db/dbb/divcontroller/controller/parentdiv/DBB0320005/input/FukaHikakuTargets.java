@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
+import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
 import static jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey.Items.調定年度;
 import static jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey.Items.賦課年度;

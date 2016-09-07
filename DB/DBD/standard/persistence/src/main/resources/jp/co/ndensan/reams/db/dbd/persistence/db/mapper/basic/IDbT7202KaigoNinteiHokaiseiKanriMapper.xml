@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT7202KaigoNinteiHokaiseiKanriMapper">
+    <resultMap id="ResultMap_DbT7202KaigoNinteiHokaiseiKanriEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7202KaigoNinteiHokaiseiKanriEntity" autoMapping="true">
+       <result property="koroshoIfShikibetsuCode" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+    </resultMap>
+    <select resultOrdered="true" id="get厚労省IF識別コード" resultMap="ResultMap_DbT7202KaigoNinteiHokaiseiKanriEntity">
+        SELECT 
+            "koroshoIfShikibetsuCode" AS koroshoIfShikibetsuCode
+        FROM  
+             rgdb."DbT7202KaigoNinteiHokaiseiKanri" AS DbT7202KaigoNinteiHokaiseiKanri 
+        WHERE 
+             DbT7202KaigoNinteiHokaiseiKanri."hokaiseiShikoYMD" <![CDATA[<=]]>#{システム日付}
+        ORDER  BY  
+             DbT7202KaigoNinteiHokaiseiKanri."hokaiseiShikoYMD"  DESC 
+        LIMIT  1
+    </select>
+</mapper>

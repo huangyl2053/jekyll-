@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbb.business.core.nushijuminjoho;
 
 import java.util.List;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,11 +32,11 @@ public class NushiJuminJohoResult {
     private RString 住所_下段;
     private RString 役所_役場名_上段;
     private RString 役所_役場名_下段;
-    private RString 生年月日;
+    private FlexibleDate 生年月日;
     private RString 転入前住所;
     private RString 転出先住所;
     private RString 氏名;
-    private RString 世帯コード;
+    private SetaiCode 世帯コード;
     private RString 前住所;
     private RString 現住所;
     private RString 住民状態コード;

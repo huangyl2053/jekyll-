@@ -61,7 +61,7 @@ public class JutakuKaishuRiyushoTesuryoShukeiManager {
         DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity entity = dac.selectByKey(
                 証記載保険者番号,
                 集計開始年月,
-                履歴番号);
+                履歴番号.intValue());
         if (entity == null) {
             return null;
         }

@@ -85,17 +85,17 @@
         <include refid="allColumns_DbT5301ShujiiIkenshoIraiJoho" />
         FROM
         rgdb."DbT5301ShujiiIkenshoIraiJoho"
-</select>
+    </select>
 
-    <update id="update主治医意見書依頼情報BY申請書管理番号" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.ShujiiUpdateMybatisParameter">
-        update rgdb."DbT5301ShujiiIkenshoIraiJoho"
-        SET "ikenshoSakuseiTokusokuYMD" = #{temp_督促日},
-        "ikenshoSakuseiTokusokuHoho" = #{temp_督促方法},
-        "ikenshoTokusokuKaisu" = coalesce("ikenshoTokusokuKaisu",0) + 1,
-        "ikenshoTokusokuMemo" = #{temp_督促メモ}
+    <select resultOrdered="true" id="get主治医意見書依頼情報BY申請書管理番号" resultMap="ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.ShujiiUpdateMybatisParameter" >
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.allColumns_DbT5301ShujiiIkenshoIraiJoho" />
+        FROM
+            rgdb."DbT5301ShujiiIkenshoIraiJoho"
         WHERE "shinseishoKanriNo" = #{申請書管理番号}
-    </update>
-
+    </select>
+    
     <select resultOrdered="true" id="getListForProcess" resultType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="1" >
         SELECT
         '被保険者台帳リスト取得'

@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020011.Jigy
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020011.dgHoseitaishoYoshiki_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020011.JigyoJokyoHokokuHoseiKensakuHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
-import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -137,10 +137,12 @@ public class JigyoJokyoHokokuHoseiKensaku {
 
     private ResponseData<JigyoJokyoHokokuHoseiKensakuDiv> 様式種類(JigyoJokyoHokokuHoseiKensakuDiv div,
             RString 状態) {
+        Map<RString, ShichosonCodeResult> map = ViewStateHolder.get(ViewStateKeys.市町村Entiyリスト, Map.class);
         dgHoseitaishoYoshiki_Row row = div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getClickedItem();
         RString 画面モード_1 = getHandler(div).画面1の様式種類(row.getHdnYoshikiCode());
         if (画面の様式種類_1.equals(画面モード_1)) {
-            getHandler(div).putViewStateHolder(状態);
+            ViewStateHolder.put(ViewStateKeys.事業報告基本, (Serializable) getHandler(div).putViewStateHolder(map));
+            ViewStateHolder.put(ViewStateKeys.状態, 状態);
             if (更新.equals(状態)) {
                 return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
                         .parameter(new RString("様式1-2"));
@@ -153,7 +155,8 @@ public class JigyoJokyoHokokuHoseiKensaku {
         RString 画面モード_2 = getHandler(div).画面2の様式種類(row.getHdnYoshikiCode());
         RString 画面モード_2_1 = getHandler(div).画面2の様式種類の1(row.getHdnYoshikiCode());
         if (画面の様式種類_2.equals(画面モード_2) || 画面の様式種類_2.equals(画面モード_2_1)) {
-            getHandler(div).putViewStateHolder(状態);
+            ViewStateHolder.put(ViewStateKeys.事業報告基本, (Serializable) getHandler(div).putViewStateHolder(map));
+            ViewStateHolder.put(ViewStateKeys.状態, 状態);
             if (更新.equals(状態)) {
                 return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
                         .parameter(new RString("様式1-5"));
@@ -167,7 +170,8 @@ public class JigyoJokyoHokokuHoseiKensaku {
         RString 画面モード_3 = getHandler(div).画面3の様式種類(row.getHdnYoshikiCode());
         RString 画面モード_3_1 = getHandler(div).画面3の様式種類の1(row.getHdnYoshikiCode());
         if (画面の様式種類_3.equals(画面モード_3) || 画面の様式種類_3.equals(画面モード_3_1)) {
-            getHandler(div).putViewStateHolder(状態);
+            ViewStateHolder.put(ViewStateKeys.事業報告基本, (Serializable) getHandler(div).putViewStateHolder(map));
+            ViewStateHolder.put(ViewStateKeys.状態, 状態);
             if (更新.equals(状態)) {
                 return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
                         .parameter(new RString("様式2"));
@@ -179,7 +183,8 @@ public class JigyoJokyoHokokuHoseiKensaku {
 
         RString 画面モード_4 = getHandler(div).画面4の様式種類(row.getHdnYoshikiCode());
         if (画面の様式種類_4.equals(画面モード_4)) {
-            getHandler(div).putViewStateHolder(状態);
+            ViewStateHolder.put(ViewStateKeys.事業報告基本, (Serializable) getHandler(div).putViewStateHolder(map));
+            ViewStateHolder.put(ViewStateKeys.状態, 状態);
             if (更新.equals(状態)) {
                 return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
                         .parameter(new RString("様式2-5"));
@@ -191,7 +196,8 @@ public class JigyoJokyoHokokuHoseiKensaku {
 
         RString 画面モード_5 = getHandler(div).画面5の様式種類(row.getHdnYoshikiCode());
         if (画面の様式種類_5.equals(画面モード_5)) {
-            getHandler(div).putViewStateHolder(状態);
+            ViewStateHolder.put(ViewStateKeys.事業報告基本, (Serializable) getHandler(div).putViewStateHolder(map));
+            ViewStateHolder.put(ViewStateKeys.状態, 状態);
             if (更新.equals(状態)) {
                 return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
                         .parameter(new RString("様式1-4"));
@@ -201,7 +207,8 @@ public class JigyoJokyoHokokuHoseiKensaku {
             }
         }
         if (画面の様式種類_6.equals(画面モード_5)) {
-            getHandler(div).putViewStateHolder(状態);
+            ViewStateHolder.put(ViewStateKeys.事業報告基本, (Serializable) getHandler(div).putViewStateHolder(map));
+            ViewStateHolder.put(ViewStateKeys.状態, 状態);
             if (更新.equals(状態)) {
                 return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
                         .parameter(new RString("様式2-7"));
@@ -211,7 +218,8 @@ public class JigyoJokyoHokokuHoseiKensaku {
             }
         }
         if (画面の様式種類_7.equals(画面モード_5)) {
-            getHandler(div).putViewStateHolder(状態);
+            ViewStateHolder.put(ViewStateKeys.事業報告基本, (Serializable) getHandler(div).putViewStateHolder(map));
+            ViewStateHolder.put(ViewStateKeys.状態, 状態);
             if (更新.equals(状態)) {
                 return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
                         .parameter(new RString("様式1別紙"));
@@ -221,7 +229,8 @@ public class JigyoJokyoHokokuHoseiKensaku {
             }
         }
         if (画面の様式種類_8.equals(画面モード_5)) {
-            getHandler(div).putViewStateHolder(状態);
+            ViewStateHolder.put(ViewStateKeys.事業報告基本, (Serializable) getHandler(div).putViewStateHolder(map));
+            ViewStateHolder.put(ViewStateKeys.状態, 状態);
             if (更新.equals(状態)) {
                 return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
                         .parameter(new RString("様式1"));

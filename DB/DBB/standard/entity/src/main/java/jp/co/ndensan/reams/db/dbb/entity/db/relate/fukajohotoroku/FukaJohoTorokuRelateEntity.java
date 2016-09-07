@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -21,5 +21,5 @@ public class FukaJohoTorokuRelateEntity {
     private DbT2002FukaJohoTempTableEntity 賦課情報一時Entity;
     private Decimal 調定ID;
     private int 期;
-    private RString 科目コード;
+    private KamokuCode 科目コード;
 }

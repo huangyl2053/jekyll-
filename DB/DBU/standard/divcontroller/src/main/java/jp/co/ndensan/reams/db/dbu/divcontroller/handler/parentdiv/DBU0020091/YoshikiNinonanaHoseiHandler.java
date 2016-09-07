@@ -322,53 +322,11 @@ public class YoshikiNinonanaHoseiHandler {
     /**
      * 引き継ぎデータより、データ削除する。
      *
-     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
-     * @param 様式種類 RString
-     * @return boolean DB操作結果
+     * @param 引き継ぎデータ List<JigyoHokokuTokeiData>
      */
-    public boolean delete(JigyoHokokuGeppoParameter 引き継ぎデータ, RString 様式種類) {
-        if (様式種類.equalsIgnoreCase(様式種類_039)
-                || 様式種類.equalsIgnoreCase(様式種類_139)
-                || 様式種類.equalsIgnoreCase(様式種類_239)) {
-            int row = deleteByParameter(引き継ぎデータ, 集計番号_0701);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0702);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0703);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0704);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0705);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0706);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0707);
-            return 0 < row;
-        } else {
-            int row = deleteByParameter(引き継ぎデータ, 集計番号_0801);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0802);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0803);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0804);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0805);
-            return 0 < row;
-        }
-    }
-
-    /**
-     * 削除のメソッドます。
-     *
-     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
-     * @param 集計番号 Code
-     * @return 削除件数
-     */
-    public int deleteByParameter(JigyoHokokuGeppoParameter 引き継ぎデータ,
-            Code 集計番号) {
+    public void delete(List<JigyoHokokuTokeiData> 引き継ぎデータ) {
         JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
-        JigyoHokokuGeppoDetalSearchParameter parameter
-                = JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
-                        new FlexibleYear(引き継ぎデータ.get行報告年()),
-                        引き継ぎデータ.get行報告月(),
-                        new FlexibleYear(引き継ぎデータ.get行集計対象年()),
-                        引き継ぎデータ.get行集計対象月(),
-                        引き継ぎデータ.get行統計対象区分(),
-                        new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                        new Code(引き継ぎデータ.get行表番号()),
-                        集計番号);
-        return finder.deleteJigyoHokokuGeppoData(parameter);
+        finder.deleteJigyoHokokuGeppoData(引き継ぎデータ);
     }
 
     /**
@@ -392,28 +350,39 @@ public class YoshikiNinonanaHoseiHandler {
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
      * @param 様式種類 RString
+     * @param 利用者負担第四段階 List<JigyoHokokuTokeiData>
+     * @param 利用者負担第三段階 List<JigyoHokokuTokeiData>
+     * @param 利用者負担第二段階 List<JigyoHokokuTokeiData>
+     * @param 利用者負担第一段階 List<JigyoHokokuTokeiData>
+     * @param 高額介護_合計 List<JigyoHokokuTokeiData>
+     * @param 再掲利用者負担第三段階 List<JigyoHokokuTokeiData>
+     * @param 再掲利用者負担第二段階 List<JigyoHokokuTokeiData>
+     * @param 現役並み所得者 List<JigyoHokokuTokeiData>
+     * @param 一般 List<JigyoHokokuTokeiData>
+     * @param 低所得者Ⅱ List<JigyoHokokuTokeiData>
+     * @param 低所得者Ⅰ List<JigyoHokokuTokeiData>
+     * @param 高額医療合算介護_合計 List<JigyoHokokuTokeiData>
      * @return List<JigyoHokokuTokeiData>
      */
     public List<JigyoHokokuTokeiData> get修正データリスト(
-            JigyoHokokuGeppoParameter 引き継ぎデータ, RString 様式種類) {
+            JigyoHokokuGeppoParameter 引き継ぎデータ,
+            RString 様式種類,
+            List<JigyoHokokuTokeiData> 利用者負担第四段階,
+            List<JigyoHokokuTokeiData> 利用者負担第三段階,
+            List<JigyoHokokuTokeiData> 利用者負担第二段階,
+            List<JigyoHokokuTokeiData> 利用者負担第一段階,
+            List<JigyoHokokuTokeiData> 高額介護_合計,
+            List<JigyoHokokuTokeiData> 再掲利用者負担第三段階,
+            List<JigyoHokokuTokeiData> 再掲利用者負担第二段階,
+            List<JigyoHokokuTokeiData> 現役並み所得者,
+            List<JigyoHokokuTokeiData> 一般,
+            List<JigyoHokokuTokeiData> 低所得者Ⅱ,
+            List<JigyoHokokuTokeiData> 低所得者Ⅰ,
+            List<JigyoHokokuTokeiData> 高額医療合算介護_合計) {
         List<JigyoHokokuTokeiData> 修正データリスト = new ArrayList<>();
         List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト = new ArrayList<>();
         if (様式種類.equals(様式種類_039) || 様式種類.equals(様式種類_139) || 様式種類.equals(様式種類_239)) {
 
-            List<JigyoHokokuTokeiData> 利用者負担第四段階 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 集計番号_0701);
-            List<JigyoHokokuTokeiData> 利用者負担第三段階 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 集計番号_0702);
-            List<JigyoHokokuTokeiData> 利用者負担第二段階 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 集計番号_0703);
-            List<JigyoHokokuTokeiData> 利用者負担第一段階 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 集計番号_0704);
-            List<JigyoHokokuTokeiData> 高額介護_合計 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 集計番号_0705);
-            List<JigyoHokokuTokeiData> 再掲利用者負担第三段階 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 集計番号_0706);
-            List<JigyoHokokuTokeiData> 再掲利用者負担第二段階 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 集計番号_0707);
             事業報告月報詳細データリスト.addAll(利用者負担第四段階);
             事業報告月報詳細データリスト.addAll(利用者負担第三段階);
             事業報告月報詳細データリスト.addAll(利用者負担第二段階);
@@ -423,16 +392,6 @@ public class YoshikiNinonanaHoseiHandler {
             事業報告月報詳細データリスト.addAll(再掲利用者負担第二段階);
             修正データリスト = get高額介護修正リスト(事業報告月報詳細データリスト, 修正データリスト);
         } else if (様式種類.equals(様式種類_040) || 様式種類.equals(様式種類_140) || 様式種類.equals(様式種類_240)) {
-            List<JigyoHokokuTokeiData> 現役並み所得者 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 集計番号_0801);
-            List<JigyoHokokuTokeiData> 一般 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 集計番号_0802);
-            List<JigyoHokokuTokeiData> 低所得者Ⅱ = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 集計番号_0803);
-            List<JigyoHokokuTokeiData> 低所得者Ⅰ = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 集計番号_0804);
-            List<JigyoHokokuTokeiData> 高額医療合算介護_合計 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 集計番号_0805);
             事業報告月報詳細データリスト.addAll(現役並み所得者);
             事業報告月報詳細データリスト.addAll(一般);
             事業報告月報詳細データリスト.addAll(低所得者Ⅱ);
@@ -1044,7 +1003,14 @@ public class YoshikiNinonanaHoseiHandler {
         }
     }
 
-    private List<JigyoHokokuTokeiData> get事業報告月報詳細データリスト(
+    /**
+     * 事業報告月報詳細データリストを取得します。
+     *
+     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
+     * @param 集計番号 Code
+     * @return List<JigyoHokokuTokeiData>
+     */
+    public List<JigyoHokokuTokeiData> get事業報告月報詳細データリスト(
             JigyoHokokuGeppoParameter 引き継ぎデータ, Code 集計番号) {
         JigyoHokokuGeppoHoseiHako finder = new JigyoHokokuGeppoHoseiHako();
         JigyoHokokuGeppoDetalSearchParameter parameter

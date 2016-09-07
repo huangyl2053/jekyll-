@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishokigoto;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishokigoto.HokenryoNonyuTsuchishoKigotoRenchoSource;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBB-9110-080 huangh
  */
-public class HokenryoNonyuTsuchishoKigotoRenchoReport extends INonyuTsuchisho<HokenryoNonyuTsuchishoKigotoRenchoSource> {
+public class HokenryoNonyuTsuchishoKigotoRenchoReport extends NonyuTsuchisho<HokenryoNonyuTsuchishoKigotoRenchoSource> {
 
     private final HonSanteiNonyuTsuchiShoJoho item;
     private final NinshoshaSource ninshoshaSource;
@@ -42,23 +42,21 @@ public class HokenryoNonyuTsuchishoKigotoRenchoReport extends INonyuTsuchisho<Ho
             本算定納入通知書情報 = new HonSanteiNonyuTsuchiShoJoho();
         }
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 本算定納入通知書情報.get納入通知書期情報リスト();
-        int 連番 = 1;
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
             if (納入通知書期情報.get納付額() == null
                     || (納入通知書期情報.get納付額() != null && 納入通知書期情報.get納付額().intValue() <= 0)) {
                 continue;
             }
             IHokenryoNonyuTsuchishoKigotoRenchoEditor editor
-                    = new HokenryoNonyuTsuchishoKigotoRenchoEditor(item, 納入通知書期情報, ninshoshaSource, 連番);
+                    = new HokenryoNonyuTsuchishoKigotoRenchoEditor(item, 納入通知書期情報, ninshoshaSource);
             IHokenryoNonyuTsuchishoKigotoRenchoBuilder builder = new HokenryoNonyuTsuchishoKigotoRenchoBuilder(editor);
             writer.writeLine(builder);
-            連番++;
         }
     }
 
     @Override
-    public List<INonyuTsuchisho> devidedByPage() {
-        List<INonyuTsuchisho> nonyuTsuchishoList = new ArrayList<>();
+    public List<NonyuTsuchisho<HokenryoNonyuTsuchishoKigotoRenchoSource>> devidedByPage() {
+        List<NonyuTsuchisho<HokenryoNonyuTsuchishoKigotoRenchoSource>> nonyuTsuchishoList = new ArrayList<>();
 
         HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報 = item;
         if (null == 本算定納入通知書情報) {
@@ -88,6 +86,7 @@ public class HokenryoNonyuTsuchishoKigotoRenchoReport extends INonyuTsuchisho<Ho
         本算定納入通知書情報.set編集後本算定通知書共通情報(this.item.get編集後本算定通知書共通情報());
         本算定納入通知書情報.set編集範囲区分(this.item.get編集範囲区分());
         本算定納入通知書情報.set納入通知書期情報リスト(納入通知書期情報リスト);
+        本算定納入通知書情報.set連番(item.get連番());
         return new HokenryoNonyuTsuchishoKigotoRenchoReport(本算定納入通知書情報, ninshoshaSource);
     }
 }

@@ -110,9 +110,7 @@ public class NinteichosahyoTokkijikoManager {
         if (entiy == null) {
             return null;
         } else {
-            NinteichosahyoTokkijiko ninteichosahyoTokkijiko = new NinteichosahyoTokkijiko(entiy);
-            return ninteichosahyoTokkijiko;
+            return new NinteichosahyoTokkijiko(entiy);
         }
-
     }
 }

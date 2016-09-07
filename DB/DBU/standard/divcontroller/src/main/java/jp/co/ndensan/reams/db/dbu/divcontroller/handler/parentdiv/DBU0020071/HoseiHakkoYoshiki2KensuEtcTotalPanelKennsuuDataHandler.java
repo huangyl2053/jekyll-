@@ -8,13 +8,8 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020071;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
-import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020071.HoseiHakkoYoshiki2KensuEtcTotalPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
-import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -79,11 +74,6 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
     private static final RString 件数第２号被保険者分再掲 = new RString("02");
     private static final RString 件数総数特例分 = new RString("03");
     private static final RString 件数第２号被保険者分再掲特例分 = new RString("04");
-    private static final Code 集計番号_0101 = new Code("0101");
-    private static final Code 集計番号_0201 = new Code("0201");
-    private static final Code 集計番号_0301 = new Code("0301");
-    private static final Code 集計番号_0401 = new Code("0401");
-
     private final HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div;
 
     /**
@@ -1135,41 +1125,26 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
         return !経過的要介護.add(要会護１).add(要介護２).add(要会護３).add(要介護４).add(要会護５).equals(要介護計);
     }
 
-    private List<JigyoHokokuTokeiData> get事業報告月報詳細データリスト(
-            JigyoHokokuGeppoParameter 引き継ぎデータ, Code 集計番号) {
-        JigyoHokokuGeppoHoseiHako finder = new JigyoHokokuGeppoHoseiHako();
-        JigyoHokokuGeppoDetalSearchParameter parameter
-                = JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
-                        new FlexibleYear(引き継ぎデータ.get行報告年()),
-                        引き継ぎデータ.get行報告月(),
-                        new FlexibleYear(引き継ぎデータ.get行集計対象年()),
-                        引き継ぎデータ.get行集計対象月(),
-                        引き継ぎデータ.get行統計対象区分(),
-                        new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                        new Code(引き継ぎデータ.get行表番号()),
-                        集計番号);
-        return finder.getJigyoHokokuGeppoDetal(parameter);
-    }
-
     /**
      * 修正データリストを取得のメソッドます。
      *
-     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
+     * @param 件数引き継ぎデータ List<JigyoHokokuTokeiData>
+     * @param 事業報告基本データ JigyoHokokuGeppoParameter
      * @return List<JigyoHokokuTokeiData>
      */
-    public List<JigyoHokokuTokeiData> get件数修正データリスト(JigyoHokokuGeppoParameter 引き継ぎデータ) {
+    public List<JigyoHokokuTokeiData> get件数修正データリスト(List<JigyoHokokuTokeiData> 件数引き継ぎデータ,
+            JigyoHokokuGeppoParameter 事業報告基本データ) {
 
         List<JigyoHokokuTokeiData> 修正データリスト = new ArrayList<>();
         List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト = new ArrayList<>();
-
-        if (引き継ぎデータ.get行集計番号().startsWith(件数総数.toString())) {
-            事業報告月報詳細データリスト = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_0101);
-        } else if (引き継ぎデータ.get行集計番号().startsWith(件数第２号被保険者分再掲.toString())) {
-            事業報告月報詳細データリスト = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_0201);
-        } else if (引き継ぎデータ.get行集計番号().startsWith(件数総数特例分.toString())) {
-            事業報告月報詳細データリスト = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_0301);
-        } else if (引き継ぎデータ.get行集計番号().startsWith(件数第２号被保険者分再掲特例分.toString())) {
-            事業報告月報詳細データリスト = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_0401);
+        if (事業報告基本データ.get行集計番号().startsWith(件数総数)) {
+            事業報告月報詳細データリスト = 件数引き継ぎデータ;
+        } else if (事業報告基本データ.get行集計番号().startsWith(件数第２号被保険者分再掲)) {
+            事業報告月報詳細データリスト = 件数引き継ぎデータ;
+        } else if (事業報告基本データ.get行集計番号().startsWith(件数総数特例分)) {
+            事業報告月報詳細データリスト = 件数引き継ぎデータ;
+        } else if (事業報告基本データ.get行集計番号().startsWith(件数第２号被保険者分再掲特例分)) {
+            事業報告月報詳細データリスト = 件数引き継ぎデータ;
         }
         修正データリスト = get事業報告修正データリスト(事業報告月報詳細データリスト, 修正データリスト);
         return 修正データリスト;

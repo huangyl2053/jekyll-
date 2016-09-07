@@ -43,6 +43,11 @@ public class KarisanteiHenjunkaHenkoTsuchishoA4TateReport extends Report<Karisan
     private final NinshoshaSource ninshoshaSource;
     private final CompKaigoToiawasesakiSource kaigoToiawasesakiSource;
     private final List<KarisanteiHenjunkaHenkoTsuchishoA4TateItem> outputItemList;
+    private static final int NUM3 = 3;
+    private static final int NUM4 = 4;
+    private static final int NUM8 = 8;
+    private static final int NUM12 = 12;
+    private static final int NUM16 = 16;
 
     /**
      * コンストラクタです。
@@ -92,8 +97,20 @@ public class KarisanteiHenjunkaHenkoTsuchishoA4TateReport extends Report<Karisan
         if (特徴納期情報リスト != null && !特徴納期情報リスト.isEmpty()) {
             行 = 特徴納期情報リスト.size();
         }
+        if (行 > NUM3) {
+            行 = NUM3;
+        }
         if (普徴納期情報リスト != null && 普徴納期情報リスト.size() > 行) {
             行 = 普徴納期情報リスト.size();
+        }
+        if (行 < NUM4) {
+            行 = NUM4;
+        } else if (行 > NUM4 && 行 < NUM8) {
+            行 = NUM8;
+        } else if (行 > NUM8 && 行 < NUM12) {
+            行 = NUM12;
+        } else if (行 > NUM12 && 行 < NUM16) {
+            行 = NUM16;
         }
 
         for (int index = 0; index < 行; index++) {
@@ -250,12 +267,12 @@ public class KarisanteiHenjunkaHenkoTsuchishoA4TateReport extends Report<Karisan
             更正後普徴期別金額リスト = new ArrayList<>();
         }
         for (UniversalPhase 期別金額 : 更正前普徴期別金額リスト) {
-            if (new RString(期別金額.get期()).equals(期別)) {
+            if (new RString(期別金額.get期()).padZeroToLeft(2).equals(期別.padZeroToLeft(2))) {
                 更正前期別金額 = 期別金額.get金額();
             }
         }
         for (UniversalPhase 期別金額 : 更正後普徴期別金額リスト) {
-            if (new RString(期別金額.get期()).equals(期別)) {
+            if (new RString(期別金額.get期()).padZeroToLeft(2).equals(期別.padZeroToLeft(2))) {
                 更正後期別金額 = 期別金額.get金額();
             }
         }

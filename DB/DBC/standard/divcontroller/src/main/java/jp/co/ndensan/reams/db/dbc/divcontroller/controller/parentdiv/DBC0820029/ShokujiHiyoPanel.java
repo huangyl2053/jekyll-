@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.ShokujiHiyoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.dgdShokuji_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820029.ShokujiHiyoPanelHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820029.ShokujiHiyoPanelValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.SikibetuNokennsakuki;
@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.Shokanbar
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -38,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -64,7 +66,7 @@ public class ShokujiHiyoPanel {
      * @return ResponseData<ShokujiHiyoPanelDiv>
      */
     public ResponseData<ShokujiHiyoPanelDiv> onLoad(ShokujiHiyoPanelDiv div) {
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.明細検索キー,
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス提供年月 = meisaiPar.getサービス年月();
@@ -77,7 +79,7 @@ public class ShokujiHiyoPanel {
         ViewStateHolder.put(ViewStateKeys.様式番号, 様式番号);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
-        ShoukanharaihishinseikensakuParameter 償還払費申請検索 = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+        ShoukanharaihishinseikensakuParameter 償還払費申請検索 = ViewStateHolder.get(ViewStateKeys.申請検索キー,
                 ShoukanharaihishinseikensakuParameter.class);
         SikibetuNokennsakuki sikibetuKey = new SikibetuNokennsakuki(償還払費申請検索.getYoshikiNo(),
                 償還払費申請検索.getServiceTeikyoYM());
@@ -104,7 +106,7 @@ public class ShokujiHiyoPanel {
             if (!shokanShokujiHiyoList.isEmpty()) {
                 getHandler(div).set食事費用登録エリア１(shokanShokujiHiyoList.get(0));
             }
-            ViewStateHolder.put(ViewStateKeys.償還払請求食事費用データ, (Serializable) shokanShokujiHiyoList);
+            ViewStateHolder.put(ViewStateKeys.食事費用データ, (Serializable) shokanShokujiHiyoList);
         }
         if (平成１５年３月.isBefore(サービス提供年月)
                 && サービス提供年月.isBeforeOrEquals(平成17年９月)) {
@@ -124,7 +126,7 @@ public class ShokujiHiyoPanel {
             if (!shokanShokujiHiyoList.isEmpty()) {
                 getHandler(div).set食事費用合計設定(shokanShokujiHiyoList.get(0));
             }
-            ViewStateHolder.put(ViewStateKeys.償還払請求食事費用データ, (Serializable) shokanShokujiHiyoList);
+            ViewStateHolder.put(ViewStateKeys.食事費用データ, (Serializable) shokanShokujiHiyoList);
         }
         SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー,
                 SikibetuNokennsakuki.class);
@@ -133,7 +135,7 @@ public class ShokujiHiyoPanel {
         if (shikibetsuNoKanri == null) {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         } else {
-            ShoukanharaihishinseimeisaikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+            ShoukanharaihishinseimeisaikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.明細検索キー,
                     ShoukanharaihishinseimeisaikensakuParameter.class);
             getHandler(div).getボタンを制御(shikibetsuNoKanri, paramter);
         }
@@ -176,7 +178,7 @@ public class ShokujiHiyoPanel {
                             明細番号,
                             null);
             getHandler(div).set食事費用一覧グリッド(shokanMeisaiList, shokanShokujiHiyoList);
-            ViewStateHolder.put(ViewStateKeys.償還払請求食事費用データ, (Serializable) shokanShokujiHiyoList);
+            ViewStateHolder.put(ViewStateKeys.食事費用データ, (Serializable) shokanShokujiHiyoList);
         } else {
             Decimal 標準負担額_日額 = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
                     .getHyojyunfutangaku(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
@@ -198,7 +200,7 @@ public class ShokujiHiyoPanel {
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnTorikeshi(ShokujiHiyoPanelDiv div) {
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         List<ShokanShokujiHiyo> shokanShokujiHiyoList = ViewStateHolder.get(
-                ViewStateKeys.償還払請求食事費用データ, List.class);
+                ViewStateKeys.食事費用データ, List.class);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.一覧に戻る).respond();
         }
@@ -233,14 +235,15 @@ public class ShokujiHiyoPanel {
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnDelete(ShokujiHiyoPanelDiv div) {
         try {
-            ShoukanharaihishinseimeisaikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+            ShoukanharaihishinseimeisaikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.明細検索キー,
                     ShoukanharaihishinseimeisaikensakuParameter.class);
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ViewStateHolder
-                    .get(ViewStateKeys.償還払請求食事費用データ, List.class);
+                    .get(ViewStateKeys.食事費用データ, List.class);
             List<ShokanMeisai> shokanMeisaiList = ViewStateHolder.get(
                     ViewStateKeys.償還払請求食事費用, List.class);
+            RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
             if (!ResponseHolder.isReRequest()) {
-                getHandler(div).保存処理(paramter, shokanShokujiHiyoList, shokanMeisaiList);
+                getHandler(div).保存処理(paramter, shokanShokujiHiyoList, shokanMeisaiList, 処理モード);
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了
                         .getMessage().replace(削除.toString())).respond();
             }
@@ -264,15 +267,16 @@ public class ShokujiHiyoPanel {
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnSave(ShokujiHiyoPanelDiv div) {
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         List<ShokanShokujiHiyo> shokanShokujiHiyoList = ViewStateHolder
-                .get(ViewStateKeys.償還払請求食事費用データ, List.class);
-        ShoukanharaihishinseimeisaikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                .get(ViewStateKeys.食事費用データ, List.class);
+        ShoukanharaihishinseimeisaikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.明細検索キー,
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         List<ShokanMeisai> shokanMeisaiList = ViewStateHolder.get(
                 ViewStateKeys.償還払請求食事費用, List.class);
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         try {
             Boolean flag = getHandler(div).get内容変更状態(サービス提供年月, shokanShokujiHiyoList);
             if (flag) {
-                return save(div, paramter, shokanShokujiHiyoList, shokanMeisaiList);
+                return save(div, paramter, shokanShokujiHiyoList, shokanMeisaiList, 処理モード, サービス提供年月);
             } else {
                 return noChange(div);
             }
@@ -285,9 +289,15 @@ public class ShokujiHiyoPanel {
     private ResponseData<ShokujiHiyoPanelDiv> save(ShokujiHiyoPanelDiv div,
             ShoukanharaihishinseimeisaikensakuParameter paramter,
             List<ShokanShokujiHiyo> shokanShokujiHiyoList,
-            List<ShokanMeisai> shokanMeisaiList) {
+            List<ShokanMeisai> shokanMeisaiList,
+            RString 処理モード,
+            FlexibleYearMonth サービス提供年月) {
         if (!ResponseHolder.isReRequest()) {
-            getHandler(div).保存処理(paramter, shokanShokujiHiyoList, shokanMeisaiList);
+            if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
+                ValidationMessageControlPairs validPairs = getValidationHandler(div).check食事費用登録エリア１必須入力();
+                validationCheck(validPairs, div);
+            }
+            getHandler(div).保存処理(paramter, shokanShokujiHiyoList, shokanMeisaiList, 処理モード);
             return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
                     replace(登録.toString())).respond();
         }
@@ -304,6 +314,14 @@ public class ShokujiHiyoPanel {
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return createResponse(div);
+        }
+        return createResponse(div);
+    }
+
+    private ResponseData<ShokujiHiyoPanelDiv> validationCheck(ValidationMessageControlPairs validPairs,
+            ShokujiHiyoPanelDiv div) {
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         return createResponse(div);
     }
@@ -432,12 +450,17 @@ public class ShokujiHiyoPanel {
      * @return ResponseData<ShokujiHiyoPanelDiv>
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnConfirm2(ShokujiHiyoPanelDiv div) {
-        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        if (状態.equals(登録)) {
             dgdShokuji_Row row = new dgdShokuji_Row();
-            getHandler(div).confirm(row);
+            getHandler(div).confirm(row, 状態);
         } else {
             dgdShokuji_Row row = getHandler(div).selectRow();
-            getHandler(div).confirm(row);
+            getHandler(div).confirm(row, 状態);
+        }
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).check食事費用登録エリア２必須入力();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         getHandler(div).clear食事費用登録エリア2();
         div.getPanelShokuji().getPanelDetail2().setVisible(false);
@@ -581,6 +604,10 @@ public class ShokujiHiyoPanel {
         return new ShokujiHiyoPanelHandler(div);
     }
 
+    private ShokujiHiyoPanelValidationHandler getValidationHandler(ShokujiHiyoPanelDiv div) {
+        return new ShokujiHiyoPanelValidationHandler(div);
+    }
+
     private ResponseData<ShokujiHiyoPanelDiv> createResponse(ShokujiHiyoPanelDiv div) {
         return ResponseData.of(div).respond();
     }
@@ -589,6 +616,6 @@ public class ShokujiHiyoPanel {
         ShoukanharaihishinseikensakuParameter paramter = getHandler(div).putViewState(
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class));
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
+        ViewStateHolder.put(ViewStateKeys.申請検索キー, paramter);
     }
 }

@@ -61,16 +61,13 @@ public class KaigoNinteiAtenaInfoManager {
     public SearchResult<KaigoNinteiAtenaInfoBusiness> getKaigoNinteiAtenaInfo(KaigoNinteiAtenaInfoParameter parametere) {
         List<KaigoNinteiAtenaInfoBusiness> kojinJokyoShokaiList = new ArrayList();
         IKaigoNinteiAtenaInfoMapper mapper = mapperProvider.create(IKaigoNinteiAtenaInfoMapper.class);
-        if (parametere.get識別コード().isNullOrEmpty() && parametere.get申請書管理番号().isNullOrEmpty()) {
-            List<KaigoNinteiAtenaInfoRelateEntity> 介護認定宛名情報リスト = mapper.getKaigoNinteiAtenaInfoList(parametere);
-            if (介護認定宛名情報リスト == null || 介護認定宛名情報リスト.isEmpty()) {
-                return SearchResult.of(Collections.<KaigoNinteiAtenaInfoBusiness>emptyList(), 0, false);
-            }
-            for (KaigoNinteiAtenaInfoRelateEntity entity : 介護認定宛名情報リスト) {
-                kojinJokyoShokaiList.add(new KaigoNinteiAtenaInfoBusiness(entity));
-            }
+        List<KaigoNinteiAtenaInfoRelateEntity> 介護認定宛名情報リスト = mapper.getKaigoNinteiAtenaInfoList(parametere);
+        if (介護認定宛名情報リスト == null || 介護認定宛名情報リスト.isEmpty()) {
+            return SearchResult.of(Collections.<KaigoNinteiAtenaInfoBusiness>emptyList(), 0, false);
         }
-
+        for (KaigoNinteiAtenaInfoRelateEntity entity : 介護認定宛名情報リスト) {
+            kojinJokyoShokaiList.add(new KaigoNinteiAtenaInfoBusiness(entity));
+        }
         return SearchResult.of(kojinJokyoShokaiList, 0, false);
     }
 

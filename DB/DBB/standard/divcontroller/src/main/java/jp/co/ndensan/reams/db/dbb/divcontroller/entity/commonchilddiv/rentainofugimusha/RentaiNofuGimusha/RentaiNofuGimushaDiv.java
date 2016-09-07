@@ -9,13 +9,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.commonchilddiv.rentainofugimusha.RentaiNofuGimushaHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * RentaiNofuGimusha のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBB-5700-010 chenaoqi
  */
 public class RentaiNofuGimushaDiv extends Panel implements IRentaiNofuGimushaDiv {
 

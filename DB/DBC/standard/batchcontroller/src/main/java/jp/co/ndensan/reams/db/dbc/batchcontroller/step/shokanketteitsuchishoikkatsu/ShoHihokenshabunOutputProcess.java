@@ -58,6 +58,9 @@ public class ShoHihokenshabunOutputProcess extends BatchProcessBase<ShokanKettei
 
     @Override
     protected void afterExecute() {
+        if (帳票データリスト.isEmpty()) {
+            return;
+        }
         ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke sbsktr = ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke.createInstance();
         List<ShokanKetteiTsuchiShoHihokenshabunItem> itemList
                 = sbsktr.shokanBaraiShikyuKetteiTsuchishoRiyoshamuke(帳票データリスト, batchPram, reportSourceWriter);

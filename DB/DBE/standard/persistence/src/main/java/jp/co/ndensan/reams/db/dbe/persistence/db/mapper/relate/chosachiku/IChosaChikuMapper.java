@@ -30,13 +30,4 @@ public interface IChosaChikuMapper {
      * @return List<ChosaChikuEntity>
      */
     List<ChosaChikuEntity> select認定調査員一覧(ChosaChikuMapperParameter paramer);
-
-    /**
-     * 地区認定調査員情報の削除処理する。
-     *
-     * @param paramer ChosaChikuMapperParameter
-     * @return int
-     */
-    int delete認定調査員情報(ChosaChikuMapperParameter paramer);
-
 }

@@ -34,8 +34,6 @@ public class SeikatsuhogoDetailHandler {
     private static final RString 該当 = new RString("gaito");
     private static final RString 非該当 = new RString("higaito");
     private static final RString 入退所区分_未該当 = new RString("未該当");
-    private static final RString 入退所区分_入所 = new RString("入所");
-    private static final RString 入退所区分_退所 = new RString("退所");
     private static final RString 状態 = new RString("txtJotai");
     private static final RString 受給停止開始日 = new RString("txtTeishiKaishiYMD");
     private static final RString 受給停止終了日 = new RString("txtTeishiShuryoYMD");
@@ -72,11 +70,7 @@ public class SeikatsuhogoDetailHandler {
                 div.getRadNyutaishoKubun().setSelectedValue(生活保護受給Object.get入退所区分());
             }
         }
-        if (生活保護受給Object.get入所日() == null || RString.isNullOrEmpty(生活保護受給Object.get入所日().toDateString())) {
-            div.getTxtNyutaishoYMD().setValue(生活保護受給Object.get退所日());
-        } else {
-            div.getTxtNyutaishoYMD().setValue(生活保護受給Object.get入所日());
-        }
+        div.getTxtNyutaishoYMD().setValue(生活保護受給Object.get入所日());
         RString 扶助種類コード = 生活保護受給Object.get扶助種類コード();
         if (!RString.isNullOrEmpty(扶助種類コード)) {
             List<RString> 無連結扶助種類コード = 扶助種類コード.split(連結);
@@ -167,11 +161,7 @@ public class SeikatsuhogoDetailHandler {
         dataModel.set納付区分(div.getRadDairinofuKubun().getSelectedValue());
         dataModel.set納付年月(div.getTxtDainoNofuYM().getValue());
         dataModel.set入退所区分(div.getRadNyutaishoKubun().getSelectedValue());
-        if (入退所区分_入所.equals(div.getRadNyutaishoKubun().getSelectedValue())) {
-            dataModel.set入所日(div.getTxtNyutaishoYMD().getValue());
-        } else if (入退所区分_退所.equals(div.getRadNyutaishoKubun().getSelectedValue())) {
-            dataModel.set退所日(div.getTxtNyutaishoYMD().getValue());
-        }
+        dataModel.set入所日(div.getTxtNyutaishoYMD().getValue());
         RStringBuilder shuruiCode = new RStringBuilder();
         RStringBuilder shurui = new RStringBuilder();
         for (KeyValueDataSource dataSource : div.getChkFujoShurui().getSelectedItems()) {
@@ -191,6 +181,7 @@ public class SeikatsuhogoDetailHandler {
     public void onbtn_Cancel() {
         div.getTxtTeishiKaishiYMD().clearValue();
         div.getTxtTeishiShuryoYMD().clearValue();
+        div.getTeishiKikanInput().setDisabled(true);
     }
 
     /**

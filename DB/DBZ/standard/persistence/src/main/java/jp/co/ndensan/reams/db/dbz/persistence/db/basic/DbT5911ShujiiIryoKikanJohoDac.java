@@ -168,4 +168,24 @@ public class DbT5911ShujiiIryoKikanJohoDac implements ISaveable<DbT5911ShujiiIry
                                 eq(DbT5911ShujiiIryoKikanJoho.jokyoFlag, true)))
                 .toList(DbT5911ShujiiIryoKikanJohoEntity.class);
     }
+
+    /**
+     * 主治医医療機関コードで主治医医療機関情報を取得します。
+     *
+     * @param 主治医医療機関コード 主治医医療機関コード
+     * @return List<DbT5911ShujiiIryoKikanJohoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5911ShujiiIryoKikanJohoEntity> selectBy主治医医療機関コード(
+            RString 主治医医療機関コード) throws NullPointerException {
+        requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage(主治医医療機関コードMSG.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5911ShujiiIryoKikanJoho.class).
+                where(eq(shujiiIryokikanCode, 主治医医療機関コード)).
+                toList(DbT5911ShujiiIryoKikanJohoEntity.class);
+    }
 }

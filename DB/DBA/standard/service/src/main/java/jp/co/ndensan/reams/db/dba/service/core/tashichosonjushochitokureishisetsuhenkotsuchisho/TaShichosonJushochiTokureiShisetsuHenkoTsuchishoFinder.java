@@ -292,10 +292,14 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
                 outEntity.set性別(Seibetsu.女.get名称());
             }
 
-            if (entity.get転入前郵便番号() != null) {
-                outEntity.set郵便番号(entity.get転入前郵便番号().getEditedYubinNo());
+            if (!inBusiness.is住所出力不要フラグ()) {
+                YubinNo 転入前郵便番号 = entity.get転入前郵便番号();
+                outEntity.set郵便番号(転入前郵便番号 == null ? RString.EMPTY : 転入前郵便番号.getEditedYubinNo());
+                outEntity.set住所(entity.get転入前住所());
+            } else {
+                outEntity.set郵便番号(RString.EMPTY);
+                outEntity.set住所(RString.EMPTY);
             }
-            outEntity.set住所(entity.get転入前住所());
             outEntity.set転入年月日(entity.get登録異動年月日().
                     wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());

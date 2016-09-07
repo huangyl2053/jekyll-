@@ -19,7 +19,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -34,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006RoreiFukushiNenkinJukyushaEntity> {
 
     private static final RString MSG_識別コード = new RString("識別コード");
+    private static final RString MSG_被保険者番号 = new RString("被保険者番号");
     @InjectSession
     private SqlSession session;
 
@@ -163,6 +166,25 @@ public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006Ro
                 table(DbT7006RoreiFukushiNenkinJukyusha.class).
                 where(eq(shikibetsuCode, 識別コード)).
                 toList(DbT7006RoreiFukushiNenkinJukyushaEntity.class);
+    }
+
+    /**
+     * 入力被保険者番号で老齢福祉年金履歴情報を取得します。
+     *
+     * @param 被保険者番号 hihokenshaNo
+     * @return List<DbT7006RoreiFukushiNenkinJukyushaEntity>
+     *
+     */
+    @Transaction
+    public DbT7006RoreiFukushiNenkinJukyushaEntity select老齢福祉年金受給者(
+            HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_被保険者番号.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7006RoreiFukushiNenkinJukyusha.class).
+                where(eq(hihokenshaNo, 被保険者番号)).order(by(jukyuKaishiYMD, Order.DESC)).
+                limit(1).toObject(DbT7006RoreiFukushiNenkinJukyushaEntity.class);
     }
 
     /**

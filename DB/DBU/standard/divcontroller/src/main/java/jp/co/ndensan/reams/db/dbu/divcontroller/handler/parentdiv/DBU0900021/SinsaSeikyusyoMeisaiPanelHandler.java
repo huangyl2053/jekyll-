@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -104,30 +105,32 @@ public class SinsaSeikyusyoMeisaiPanelHandler {
      *
      */
     public void 初期画面値の保持() {
-        RString 修正前の値 = div.getMeisaiPanel().getTxtdateTodokedebi().getValue() == null
-                ? RString.EMPTY : div.getMeisaiPanel().getTxtdateTodokedebi().getValue().toDateString()
-                .concat(div.getSinsaSeikyuninJohoPanel().getTxtYubinNo().getValue().value())
-                .concat(div.getSinsaSeikyuninJohoPanel().getTxtJusho().getDomain().value())
-                .concat(div.getSinsaSeikyuninJohoPanel().getTxtShinsaSeikyuJinShimei().getDomain().value())
-                .concat(div.getSinsaSeikyuninJohoPanel().getTxtTelNo().getDomain().value())
-                .concat(div.getSinsaSeikyuninJohoPanel().getDdlHihokenyakanko().getSelectedValue())
-                .concat(div.getSinsaSeikyuninJohoPanel().getTxtHihokensyatonokanken().getValue())
-                .concat(div.getDaiiniJohoPanel().getTxtDairiYubinNo().getValue().value())
-                .concat(div.getDaiiniJohoPanel().getTxtDairiJusho().getDomain().value())
-                .concat(div.getDaiiniJohoPanel().getTxtDairiJinJohoShimei().getDomain().value())
-                .concat(div.getDaiiniJohoPanel().getTxtDairiTelNo().getDomain().value())
-                .concat(div.getSyobunJohoPanel().getTxtShobubi().getValue() == null
-                        ? RString.EMPTY : div.getSyobunJohoPanel().getTxtShobubi().getValue().toDateString())
-                .concat(div.getSyobunJohoPanel().getTxtShobucho().getValue())
-                .concat(div.getSyobunJohoPanel().getDdlShobuShurui().getSelectedValue())
-                .concat(div.getSyobunJohoPanel().getTxtShobuShitaNichi().getValue() == null
-                        ? RString.EMPTY : div.getSyobunJohoPanel().getTxtShobuShitaNichi().getValue().toDateString())
-                .concat(div.getMeisaiPanel().getTxtShinsaSeikyuRiyu().getValue())
-                .concat(div.getMeisaiPanel().getTxtKyoshiNaiyo().getValue())
-                .concat(div.getRadTenpuShorui().getSelectedValue())
-                .concat(div.getTxtShinsaSeikyuTorisage().getValue() == null
-                        ? RString.EMPTY : div.getTxtShinsaSeikyuTorisage().getValue().toDateString());
-        div.set修正前の値(DataPassingConverter.serialize(修正前の値));
+        RStringBuilder rstringBuilder = new RStringBuilder();
+
+        rstringBuilder.append(div.getMeisaiPanel().getTxtdateTodokedebi().getValue() == null
+                ? RString.EMPTY : div.getMeisaiPanel().getTxtdateTodokedebi().getValue().toDateString());
+        rstringBuilder.append(div.getSinsaSeikyuninJohoPanel().getTxtYubinNo().getValue().value());
+        rstringBuilder.append(div.getSinsaSeikyuninJohoPanel().getTxtJusho().getDomain().value());
+        rstringBuilder.append(div.getSinsaSeikyuninJohoPanel().getTxtShinsaSeikyuJinShimei().getDomain().value());
+        rstringBuilder.append(div.getSinsaSeikyuninJohoPanel().getTxtTelNo().getDomain().value());
+        rstringBuilder.append(div.getSinsaSeikyuninJohoPanel().getDdlHihokenyakanko().getSelectedValue());
+        rstringBuilder.append(div.getSinsaSeikyuninJohoPanel().getTxtHihokensyatonokanken().getValue());
+        rstringBuilder.append(div.getDaiiniJohoPanel().getTxtDairiYubinNo().getValue().value());
+        rstringBuilder.append(div.getDaiiniJohoPanel().getTxtDairiJusho().getDomain().value());
+        rstringBuilder.append(div.getDaiiniJohoPanel().getTxtDairiJinJohoShimei().getDomain().value());
+        rstringBuilder.append(div.getDaiiniJohoPanel().getTxtDairiTelNo().getDomain().value());
+        rstringBuilder.append(div.getSyobunJohoPanel().getTxtShobubi().getValue() == null
+                ? RString.EMPTY : div.getSyobunJohoPanel().getTxtShobubi().getValue().toDateString());
+        rstringBuilder.append(div.getSyobunJohoPanel().getTxtShobucho().getValue());
+        rstringBuilder.append(div.getSyobunJohoPanel().getDdlShobuShurui().getSelectedValue());
+        rstringBuilder.append(div.getSyobunJohoPanel().getTxtShobuShitaNichi().getValue() == null
+                ? RString.EMPTY : div.getSyobunJohoPanel().getTxtShobuShitaNichi().getValue().toDateString());
+        rstringBuilder.append(div.getMeisaiPanel().getTxtShinsaSeikyuRiyu().getValue());
+        rstringBuilder.append(div.getMeisaiPanel().getTxtKyoshiNaiyo().getValue());
+        rstringBuilder.append(div.getRadTenpuShorui().getSelectedValue());
+        rstringBuilder.append(div.getTxtShinsaSeikyuTorisage().getValue() == null
+                ? RString.EMPTY : div.getTxtShinsaSeikyuTorisage().getValue().toDateString());
+        div.set修正前の値(DataPassingConverter.serialize(rstringBuilder.toRString()));
     }
 
     /**
@@ -136,29 +139,31 @@ public class SinsaSeikyusyoMeisaiPanelHandler {
      * @return 修正後の値
      */
     public RString 修正後の値() {
-        return div.getMeisaiPanel().getTxtdateTodokedebi().getValue() == null
-                ? RString.EMPTY : div.getMeisaiPanel().getTxtdateTodokedebi().getValue().toDateString()
-                .concat(div.getSinsaSeikyuninJohoPanel().getTxtYubinNo().getValue().value())
-                .concat(div.getSinsaSeikyuninJohoPanel().getTxtJusho().getDomain().value())
-                .concat(div.getSinsaSeikyuninJohoPanel().getTxtShinsaSeikyuJinShimei().getDomain().value())
-                .concat(div.getSinsaSeikyuninJohoPanel().getTxtTelNo().getDomain().value())
-                .concat(div.getSinsaSeikyuninJohoPanel().getDdlHihokenyakanko().getSelectedValue())
-                .concat(div.getSinsaSeikyuninJohoPanel().getTxtHihokensyatonokanken().getValue())
-                .concat(div.getDaiiniJohoPanel().getTxtDairiYubinNo().getValue().value())
-                .concat(div.getDaiiniJohoPanel().getTxtDairiJusho().getDomain().value())
-                .concat(div.getDaiiniJohoPanel().getTxtDairiJinJohoShimei().getDomain().value())
-                .concat(div.getDaiiniJohoPanel().getTxtDairiTelNo().getDomain().value())
-                .concat(div.getSyobunJohoPanel().getTxtShobubi().getValue() == null
-                        ? RString.EMPTY : div.getSyobunJohoPanel().getTxtShobubi().getValue().toDateString())
-                .concat(div.getSyobunJohoPanel().getTxtShobucho().getValue())
-                .concat(div.getSyobunJohoPanel().getDdlShobuShurui().getSelectedValue())
-                .concat(div.getSyobunJohoPanel().getTxtShobuShitaNichi().getValue() == null
-                        ? RString.EMPTY : div.getSyobunJohoPanel().getTxtShobuShitaNichi().getValue().toDateString())
-                .concat(div.getMeisaiPanel().getTxtShinsaSeikyuRiyu().getValue())
-                .concat(div.getMeisaiPanel().getTxtKyoshiNaiyo().getValue())
-                .concat(div.getRadTenpuShorui().getSelectedValue())
-                .concat(div.getTxtShinsaSeikyuTorisage().getValue() == null
-                        ? RString.EMPTY : div.getTxtShinsaSeikyuTorisage().getValue().toDateString());
+        RStringBuilder rstringBuilder = new RStringBuilder();
+        rstringBuilder.append(div.getMeisaiPanel().getTxtdateTodokedebi().getValue() == null
+                ? RString.EMPTY : div.getMeisaiPanel().getTxtdateTodokedebi().getValue().toDateString());
+        rstringBuilder.append(div.getSinsaSeikyuninJohoPanel().getTxtYubinNo().getValue().value());
+        rstringBuilder.append(div.getSinsaSeikyuninJohoPanel().getTxtJusho().getDomain().value());
+        rstringBuilder.append(div.getSinsaSeikyuninJohoPanel().getTxtShinsaSeikyuJinShimei().getDomain().value());
+        rstringBuilder.append(div.getSinsaSeikyuninJohoPanel().getTxtTelNo().getDomain().value());
+        rstringBuilder.append(div.getSinsaSeikyuninJohoPanel().getDdlHihokenyakanko().getSelectedValue());
+        rstringBuilder.append(div.getSinsaSeikyuninJohoPanel().getTxtHihokensyatonokanken().getValue());
+        rstringBuilder.append(div.getDaiiniJohoPanel().getTxtDairiYubinNo().getValue().value());
+        rstringBuilder.append(div.getDaiiniJohoPanel().getTxtDairiJusho().getDomain().value());
+        rstringBuilder.append(div.getDaiiniJohoPanel().getTxtDairiJinJohoShimei().getDomain().value());
+        rstringBuilder.append(div.getDaiiniJohoPanel().getTxtDairiTelNo().getDomain().value());
+        rstringBuilder.append(div.getSyobunJohoPanel().getTxtShobubi().getValue() == null
+                ? RString.EMPTY : div.getSyobunJohoPanel().getTxtShobubi().getValue().toDateString());
+        rstringBuilder.append(div.getSyobunJohoPanel().getTxtShobucho().getValue());
+        rstringBuilder.append(div.getSyobunJohoPanel().getDdlShobuShurui().getSelectedValue());
+        rstringBuilder.append(div.getSyobunJohoPanel().getTxtShobuShitaNichi().getValue() == null
+                ? RString.EMPTY : div.getSyobunJohoPanel().getTxtShobuShitaNichi().getValue().toDateString());
+        rstringBuilder.append(div.getMeisaiPanel().getTxtShinsaSeikyuRiyu().getValue());
+        rstringBuilder.append(div.getMeisaiPanel().getTxtKyoshiNaiyo().getValue());
+        rstringBuilder.append(div.getRadTenpuShorui().getSelectedValue());
+        rstringBuilder.append(div.getTxtShinsaSeikyuTorisage().getValue() == null
+                ? RString.EMPTY : div.getTxtShinsaSeikyuTorisage().getValue().toDateString());
+        return rstringBuilder.toRString();
     }
 
     /**

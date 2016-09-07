@@ -90,7 +90,10 @@ public class ShinsakaiToroku {
      */
     public ResponseData<ShinsakaiTorokuDiv> onClick_btnRyooutputBoffer(ShinsakaiTorokuDiv div) {
         ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
-        ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック(存在チェック結果);
+        if (存在チェック結果.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
+        }
+        ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック();
         if (validation.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         }
@@ -142,8 +145,14 @@ public class ShinsakaiToroku {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
-            ValidationMessageControlPairs 選択チェック = getValidationHandler(div).選択チェック(存在チェック結果);
-            ValidationMessageControlPairs validation = getValidationHandler(div).割付可能チェック(選択チェック);
+            if (存在チェック結果.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
+            }
+            ValidationMessageControlPairs 選択チェック = getValidationHandler(div).選択チェック();
+            if (選択チェック.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(選択チェック).respond();
+            }
+            ValidationMessageControlPairs validation = getValidationHandler(div).割付可能チェック();
             if (validation.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validation).respond();
             } else {
@@ -173,8 +182,14 @@ public class ShinsakaiToroku {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
-            ValidationMessageControlPairs 選択チェック = getValidationHandler(div).選択チェック(存在チェック結果);
-            ValidationMessageControlPairs 完了処理事前チェック = getValidationHandler(div).完了処理事前チェック(選択チェック);
+            if (存在チェック結果.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
+            }
+            ValidationMessageControlPairs 選択チェック = getValidationHandler(div).選択チェック();
+            if (選択チェック.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(選択チェック).respond();
+            }
+            ValidationMessageControlPairs 完了処理事前チェック = getValidationHandler(div).完了処理事前チェック();
             ValidationMessageControlPairs 完了済みデータチェック = getValidationHandler(div).完了済みデータチェック(完了処理事前チェック);
             ValidationMessageControlPairs validation = getValidationHandler(div).マスキング完了チェック(完了済みデータチェック);
             if (validation.iterator().hasNext()) {

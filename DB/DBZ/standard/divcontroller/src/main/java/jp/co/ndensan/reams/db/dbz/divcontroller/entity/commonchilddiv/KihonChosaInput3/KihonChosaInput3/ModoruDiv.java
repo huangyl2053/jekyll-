@@ -4,12 +4,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 
 /**
  * Modoru のクラスファイル
@@ -17,8 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
  * @author 自動生成
  */
 public class ModoruDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,8 +25,6 @@ public class ModoruDiv extends Panel {
     private ButtonDialog btnModoru;
     @JsonProperty("radModoru")
     private RadioButton radModoru;
-    @JsonProperty("ModoruShinseishoKanriNo")
-    private RString ModoruShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -72,24 +66,6 @@ public class ModoruDiv extends Panel {
     @JsonProperty("radModoru")
     public void setRadModoru(RadioButton radModoru) {
         this.radModoru = radModoru;
-    }
-
-    /*
-     * getModoruShinseishoKanriNo
-     * @return ModoruShinseishoKanriNo
-     */
-    @JsonProperty("ModoruShinseishoKanriNo")
-    public RString getModoruShinseishoKanriNo() {
-        return ModoruShinseishoKanriNo;
-    }
-
-    /*
-     * setModoruShinseishoKanriNo
-     * @param ModoruShinseishoKanriNo ModoruShinseishoKanriNo
-     */
-    @JsonProperty("ModoruShinseishoKanriNo")
-    public void setModoruShinseishoKanriNo(RString ModoruShinseishoKanriNo) {
-        this.ModoruShinseishoKanriNo = ModoruShinseishoKanriNo;
     }
 
     // </editor-fold>

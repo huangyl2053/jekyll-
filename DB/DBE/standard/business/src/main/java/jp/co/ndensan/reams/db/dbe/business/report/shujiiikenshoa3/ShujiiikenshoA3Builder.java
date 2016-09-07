@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.Shujiiike
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 委員用主治医意見書A3Builderクラスです。
+ * 主治医意見書A3Builderクラスです。
  *
- * @reamsid_L DBE-0150-140 lishengli
+ * @reamsid_L DBE-0150-240 lishengli
  */
 class ShujiiikenshoA3Builder implements IShujiiikenshoA3Builder {
 

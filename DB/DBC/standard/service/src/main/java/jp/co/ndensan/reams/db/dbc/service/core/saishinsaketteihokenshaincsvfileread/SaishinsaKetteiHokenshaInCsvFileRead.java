@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.saishinsaketteihokenshaincsvfile
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
@@ -65,7 +66,6 @@ public class SaishinsaKetteiHokenshaInCsvFileRead {
     private static final RString カンマ = new RString(",");
     private static final Integer INDEX_0 = 0;
     private static final Integer INDEX_3 = 3;
-    private static final RString NUM = new RString("99");
 
     /**
      * コンストラクタです。
@@ -118,13 +118,18 @@ public class SaishinsaKetteiHokenshaInCsvFileRead {
         DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
         FlowEntity getEntity = バッチフロ(csvlist);
         int レコード件数合算 = getEntity.getCodeNum();
-        errorTempentity.setエラー区分(NUM);
-        if (レコード件数合算 == INDEX_0) {
-            mapper.処理結果リスト一時TBLに登録(errorTempentity);
-        } else {
-            再審査決定集計一時TBLに登録(処理年月, csvlist);
-            再審査決定明細一時TBLに登録(処理年月, csvlist);
+        int 集計データ登録件数 = INDEX_0;
+        int 明細データ登録件数 = INDEX_0;
+        errorTempentity.setエラー区分(KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード());
+        if (レコード件数合算 != INDEX_0) {
+            集計データ登録件数 = 再審査決定集計一時TBLに登録(処理年月, csvlist);
+            明細データ登録件数 = 再審査決定明細一時TBLに登録(処理年月, csvlist);
         }
+        if ((レコード件数合算 == INDEX_0) || (集計データ登録件数 + 明細データ登録件数) == INDEX_0) {
+            mapper.処理結果リスト一時TBLに登録(errorTempentity);
+        }
+        getEntity.set集計データ登録件数(集計データ登録件数);
+        getEntity.set明細データ登録件数(明細データ登録件数);
         return getEntity;
 
     }
@@ -150,7 +155,7 @@ public class SaishinsaKetteiHokenshaInCsvFileRead {
     }
 
     @Transaction
-    private void 再審査決定集計一時TBLに登録(FlexibleYearMonth 処理年月, List<SaishinsaKetteiHokenshaInCsvEntity> csvlist) {
+    private int 再審査決定集計一時TBLに登録(FlexibleYearMonth 処理年月, List<SaishinsaKetteiHokenshaInCsvEntity> csvlist) {
         ISaishinsaKetteiHokenshaInCsvFileReadMapper mapper = this.mapperProvider.create(ISaishinsaKetteiHokenshaInCsvFileReadMapper.class);
         int 連番 = INDEX_0;
         for (int i = INDEX_0; i < csvlist.size(); i++) {
@@ -200,6 +205,7 @@ public class SaishinsaKetteiHokenshaInCsvFileRead {
             }
 
         }
+        return 連番;
     }
 
     private void set件数と単位数と費用額(DbWT3063SaishinsaKetteiShukeiTempEntity shukeiTempentity, SaishinsaKetteiHokenshaInDataEntity dataEntity) {
@@ -257,7 +263,7 @@ public class SaishinsaKetteiHokenshaInCsvFileRead {
     }
 
     @Transaction
-    private void 再審査決定明細一時TBLに登録(FlexibleYearMonth 処理年月, List<SaishinsaKetteiHokenshaInCsvEntity> csvlist) {
+    private int 再審査決定明細一時TBLに登録(FlexibleYearMonth 処理年月, List<SaishinsaKetteiHokenshaInCsvEntity> csvlist) {
         ISaishinsaKetteiHokenshaInCsvFileReadMapper mapper = this.mapperProvider.create(ISaishinsaKetteiHokenshaInCsvFileReadMapper.class);
         int 連番 = INDEX_0;
         int 履歴番号 = INDEX_0;
@@ -309,6 +315,7 @@ public class SaishinsaKetteiHokenshaInCsvFileRead {
             }
 
         }
+        return 連番;
     }
 
     private void setサービスと申立(DbWT3064SaishinsaKetteiMeisaiTempEntity meisaiTempentity, SaishinsaKetteiHokenshaInCsvMeisaiEntity meisaiEntity) {
@@ -381,8 +388,8 @@ public class SaishinsaKetteiHokenshaInCsvFileRead {
         }
         hihokenshaTempentity.set市町村コード(LasdecCode.EMPTY);
         hihokenshaTempentity.set管内管外区分(RString.EMPTY);
-        hihokenshaTempentity.set郵便番号(RString.EMPTY);
-        hihokenshaTempentity.set町域コード(RString.EMPTY);
+        hihokenshaTempentity.set郵便番号(null);
+        hihokenshaTempentity.set町域コード(null);
         hihokenshaTempentity.set行政区コード(RString.EMPTY);
         hihokenshaTempentity.set行政区名(RString.EMPTY);
         hihokenshaTempentity.set住所(RString.EMPTY);

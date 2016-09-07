@@ -11,13 +11,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum HomonShubetsu {
 
     /**
-     * コード:1 名称: 略称:定義なし
+     * コード:1 名称:在宅 略称:定義なし
      */
-    _1("1", ""),
+    在宅("1", "在宅"),
     /**
-     * コード:2 名称: 略称:定義なし
+     * コード:2 名称:施設 略称:定義なし
      */
-    _2("2", "");
+    施設("2", "施設");
 
     private final RString code;
     private final RString fullName;

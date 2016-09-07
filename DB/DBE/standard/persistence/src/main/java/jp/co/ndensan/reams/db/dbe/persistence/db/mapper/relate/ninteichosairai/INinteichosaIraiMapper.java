@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosairai;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairai.ChosaKekkaNyuryokuMobileChosainRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairai.ChosaKekkaNyuryokuMobileRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
@@ -73,5 +74,12 @@ public interface INinteichosaIraiMapper {
      * @return 調査結果入力用データ
      */
     List<ChosaKekkaNyuryokuMobileRelateEntity> select調査結果入力用データ(NinteichosaIraiParameter parameter);
+
+    /**
+     * 選択された行の申請書管理番号条件として、調査結果入力用調査員データを取得します。
+     *
+     * @return 調査結果入力用調査員データ
+     */
+    List<ChosaKekkaNyuryokuMobileChosainRelateEntity> select調査結果入力用調査員データ();
 
 }

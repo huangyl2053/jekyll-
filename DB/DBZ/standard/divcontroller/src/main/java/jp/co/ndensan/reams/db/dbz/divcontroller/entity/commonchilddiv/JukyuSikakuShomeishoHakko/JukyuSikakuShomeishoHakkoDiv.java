@@ -4,9 +4,10 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JukyuSika
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter;
@@ -22,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
@@ -33,8 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
  * @reamsid_L DBA-1090-010 wangkun
  */
 public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuShomeishoHakkoDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -97,7 +96,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void setTxtKofubi(TextBox txtKofubi) {
+    public void  setTxtKofubi(TextBox txtKofubi) {
         this.getPnlJukyushaJoho1().setTxtKofubi(txtKofubi);
     }
 
@@ -107,7 +106,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void setTxtIdoYotebi(TextBox txtIdoYotebi) {
+    public void  setTxtIdoYotebi(TextBox txtIdoYotebi) {
         this.getPnlJukyushaJoho1().setTxtIdoYotebi(txtIdoYotebi);
     }
 
@@ -117,7 +116,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void setTxtYokaigoJotaiKubun(TextBox txtYokaigoJotaiKubun) {
+    public void  setTxtYokaigoJotaiKubun(TextBox txtYokaigoJotaiKubun) {
         this.getPnlJukyushaJoho1().setTxtYokaigoJotaiKubun(txtYokaigoJotaiKubun);
     }
 
@@ -127,7 +126,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void setTxtShinsebi(TextBox txtShinsebi) {
+    public void  setTxtShinsebi(TextBox txtShinsebi) {
         this.getPnlJukyushaJoho1().setTxtShinsebi(txtShinsebi);
     }
 
@@ -137,7 +136,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void setTxtdrYukokikan(TextBoxDateRange txtdrYukokikan) {
+    public void  setTxtdrYukokikan(TextBoxDateRange txtdrYukokikan) {
         this.getPnlJukyushaJoho1().setTxtdrYukokikan(txtdrYukokikan);
     }
 
@@ -147,7 +146,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void setTxtfutanWariaiKubun(TextBox txtfutanWariaiKubun) {
+    public void  setTxtfutanWariaiKubun(TextBox txtfutanWariaiKubun) {
         this.getPnlJukyushaJoho1().setTxtfutanWariaiKubun(txtfutanWariaiKubun);
     }
 
@@ -157,7 +156,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void setTxtfutanWariai(TextBox txtfutanWariai) {
+    public void  setTxtfutanWariai(TextBox txtfutanWariai) {
         this.getPnlJukyushaJoho1().setTxtfutanWariai(txtfutanWariai);
     }
 
@@ -167,7 +166,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void setCblInji(CheckBoxList cblInji) {
+    public void  setCblInji(CheckBoxList cblInji) {
         this.getPnlJukyushaJoho1().setCblInji(cblInji);
     }
 
@@ -177,7 +176,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void setLblShinsakaiYikan(Label lblShinsakaiYikan) {
+    public void  setLblShinsakaiYikan(Label lblShinsakaiYikan) {
         this.getPnlJukyushaJoho2().setLblShinsakaiYikan(lblShinsakaiYikan);
     }
 
@@ -187,7 +186,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void setTbmShinsakaiYikan(TextBoxMultiLine tbmShinsakaiYikan) {
+    public void  setTbmShinsakaiYikan(TextBoxMultiLine tbmShinsakaiYikan) {
         this.getPnlJukyushaJoho2().setTbmShinsakaiYikan(tbmShinsakaiYikan);
     }
 
@@ -197,7 +196,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void setLblBiko(Label lblBiko) {
+    public void  setLblBiko(Label lblBiko) {
         this.getPnlJukyushaJoho2().setLblBiko(lblBiko);
     }
 
@@ -207,7 +206,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void setTbmBiko(TextBoxMultiLine tbmBiko) {
+    public void  setTbmBiko(TextBoxMultiLine tbmBiko) {
         this.getPnlJukyushaJoho2().setTbmBiko(tbmBiko);
     }
 

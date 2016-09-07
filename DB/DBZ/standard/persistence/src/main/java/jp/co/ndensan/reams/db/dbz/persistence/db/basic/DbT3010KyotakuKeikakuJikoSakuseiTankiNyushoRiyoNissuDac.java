@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu.rirekiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu.riyoYM;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu.taishoYM;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -90,6 +91,18 @@ public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuDac implements
     }
 
     /**
+     * DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntityを削除します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int delete(DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅給付計画自己作成短期入所利用日数エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * 居宅給付計画自己作成短期入所利用日数を取得します。
      *
      * @param 被保険者番号 HihokenshaNo
@@ -107,5 +120,37 @@ public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuDac implements
                 table(DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu.class).
                 where(eq(hihokenshaNo, 被保険者番号)).
                 toList(DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity.class);
+    }
+
+    /**
+     * 居宅給付計画自己作成短期入所利用日数を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年月 TaishoYM
+     * @param 履歴番号 RirekiNo
+     * @param 利用年月 RiyoYM
+     * @return DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity select居宅短期入所情報(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth 対象年月,
+            int 履歴番号,
+            FlexibleYearMonth 利用年月) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("利用年月"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(taishoYM, 対象年月),
+                                eq(rirekiNo, 履歴番号),
+                                eq(riyoYM, 利用年月))).
+                toObject(DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity.class);
     }
 }

@@ -7,8 +7,8 @@ import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC03000
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012TransitionEventName.検索に戻る;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.PnlTotalRegisterDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0300012.PnlTotalRegisterHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.report.jyuryoitakuatukaijigyoshatorokutsuchisho.JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -49,9 +49,9 @@ public class PnlTotalRegister {
             return ResponseData.of(div).respond();
         }
         JuryoininKeiyakuJigyosha data = ViewStateHolder
-                .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
+                .get(ViewStateKeys.詳細データ, JuryoininKeiyakuJigyosha.class);
         JuryoininKeiyakuJigyosha record = handler.getRecord(data);
-        ViewStateHolder.put(ViewStateKeys.受領委任契約事業者詳細データ, record);
+        ViewStateHolder.put(ViewStateKeys.詳細データ, record);
 
         handler.set初期データ(処理モード, record);
 
@@ -68,7 +68,7 @@ public class PnlTotalRegister {
         PnlTotalRegisterHandler handler = getHandler(div);
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         JuryoininKeiyakuJigyosha data = ViewStateHolder
-                .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
+                .get(ViewStateKeys.詳細データ, JuryoininKeiyakuJigyosha.class);
         if (削除.equals(処理モード) || 登録.equals(処理モード)) {
             int result = handler.save画面データ(処理モード, data);
             handler.set保存完了(処理モード, result);
@@ -108,7 +108,7 @@ public class PnlTotalRegister {
         PnlTotalRegisterHandler handler = getHandler(div);
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         JuryoininKeiyakuJigyosha data = ViewStateHolder
-                .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
+                .get(ViewStateKeys.詳細データ, JuryoininKeiyakuJigyosha.class);
         boolean changeFlg = handler.has画面変更有無(処理モード, data);
         if (changeFlg) {
             if (!ResponseHolder.isReRequest()) {
@@ -153,7 +153,7 @@ public class PnlTotalRegister {
             契約事業者番号 = ViewStateHolder.get(ViewStateKeys.契約事業者番号, RString.class);
         } else {
             JuryoininKeiyakuJigyosha data = ViewStateHolder
-                    .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
+                    .get(ViewStateKeys.詳細データ, JuryoininKeiyakuJigyosha.class);
             契約事業者番号 = data.get契約事業者番号();
         }
         HokenJuryoIninHaraiToriatsukaiResult result = getHandler(div).get発行データ(契約事業者番号);

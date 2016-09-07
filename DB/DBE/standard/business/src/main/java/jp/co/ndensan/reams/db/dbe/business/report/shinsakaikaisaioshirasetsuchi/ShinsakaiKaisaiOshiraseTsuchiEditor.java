@@ -42,8 +42,7 @@ class ShinsakaiKaisaiOshiraseTsuchiEditor implements IShinsakaiKaisaiOshiraseTsu
     /**
      *
      * @param source 介護認定審査会開催のお知らせReportSourceクラス
-     * @return ShinsakaiKaisaiOshiraseTsuchiReportSource
-     * 介護認定審査会開催のお知らせReportSourceクラス
+     * @return ShinsakaiKaisaiOshiraseTsuchiReportSource 介護認定審査会開催のお知らせReportSourceクラス
      */
     @Override
     public ShinsakaiKaisaiOshiraseTsuchiReportSource edit(ShinsakaiKaisaiOshiraseTsuchiReportSource source) {
@@ -97,7 +96,11 @@ class ShinsakaiKaisaiOshiraseTsuchiEditor implements IShinsakaiKaisaiOshiraseTsu
     private RString get開催番号() {
         RStringBuilder 開催番号 = new RStringBuilder();
         開催番号.append(new RString("第"));
-        開催番号.append(Integer.valueOf(item.get開催番号().substring(item.get開催番号().length() - INT_4).toString()));
+        if (item.get開催番号().length() > INT_4) {
+            開催番号.append(Integer.valueOf(item.get開催番号().substring(item.get開催番号().length() - INT_4).toString()));
+        } else {
+            開催番号.append(Integer.valueOf(item.get開催番号().toString()));
+        }
         開催番号.append(new RString("回"));
         return 開催番号.toRString();
     }

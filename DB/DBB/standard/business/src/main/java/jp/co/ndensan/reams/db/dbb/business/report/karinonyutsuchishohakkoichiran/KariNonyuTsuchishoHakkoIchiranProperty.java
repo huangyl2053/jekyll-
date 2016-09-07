@@ -49,16 +49,16 @@ public class KariNonyuTsuchishoHakkoIchiranProperty extends ReportPropertyBase<K
     /**
      * 帳票分類ID「DBB100014_arisanteiHokenryoNonyuTsuchishoDaihyo」（仮算定額変更通知書(平準化)）出力順設定可能項目です。
      */
-    public enum DBB100014KarisanteiNonyuTsuchishoEnum implements IReportItems {
+    public enum DBB100014NonyuTsuchishoEnum implements IReportItems {
 
         /**
          * 郵便番号
          */
-        郵便番号(new RString("0001"), new RString(""), ENCLOSURE.concat(new RString("atena_yubinNo").concat(ENCLOSURE))),
+        郵便番号(new RString("0001"), new RString(""), ENCLOSURE.concat(new RString("ShikibetsuTaisho_yubinNo").concat(ENCLOSURE))),
         /**
          * 町域コード
          */
-        町域コード(new RString("0002"), new RString(""), ENCLOSURE.concat(new RString("atena_choikiCode").concat(ENCLOSURE))),
+        町域コード(new RString("0002"), new RString(""), ENCLOSURE.concat(new RString("ShikibetsuTaisho_choikiCode").concat(ENCLOSURE))),
         /**
          * 番地コード
          */
@@ -66,28 +66,28 @@ public class KariNonyuTsuchishoHakkoIchiranProperty extends ReportPropertyBase<K
         /**
          * 行政区コード
          */
-        行政区コード(new RString("0004"), new RString(""), ENCLOSURE.concat(new RString("atena_gyoseikuCode").concat(ENCLOSURE))),
+        行政区コード(new RString("0004"), new RString(""), ENCLOSURE.concat(new RString("ShikibetsuTaisho_gyoseikuCode").concat(ENCLOSURE))),
         /**
          * 地区１
          */
-        地区１(new RString("0005"), new RString(""), ENCLOSURE.concat(new RString("atesaki_chiku1").concat(ENCLOSURE))),
+        地区１(new RString("0005"), new RString(""), ENCLOSURE.concat(new RString("ShikibetsuTaisho_chikuCode1").concat(ENCLOSURE))),
         /**
          * 地区２
          */
-        地区２(new RString("0006"), new RString(""), ENCLOSURE.concat(new RString("atesaki_chiku2").concat(ENCLOSURE))),
+        地区２(new RString("0006"), new RString(""), ENCLOSURE.concat(new RString("ShikibetsuTaisho_chikuCode2").concat(ENCLOSURE))),
         /**
          * 地区３
          */
-        地区３(new RString("0007"), new RString(""), ENCLOSURE.concat(new RString("atesaki_chiku3").concat(ENCLOSURE))),
+        地区３(new RString("0007"), new RString(""), ENCLOSURE.concat(new RString("ShikibetsuTaisho_chikuCode3").concat(ENCLOSURE))),
         /**
          * 世帯コード
          */
-        世帯コード(new RString("0008"), new RString(""), ENCLOSURE.concat(new RString("atena_setaiCode").concat(
+        世帯コード(new RString("0008"), new RString(""), ENCLOSURE.concat(new RString("dbT2015KeisangoJoho_setaiCode").concat(
                 ENCLOSURE))),
         /**
          * 識別コード
          */
-        識別コード(new RString("0009"), new RString(""), ENCLOSURE.concat(new RString("atena_shikibetsuCode").concat(ENCLOSURE))),
+        識別コード(new RString("0009"), new RString(""), ENCLOSURE.concat(new RString("dbT2015KeisangoJoho_shikibetsuCode").concat(ENCLOSURE))),
         /**
          * 氏名５０音カナ
          */
@@ -95,11 +95,11 @@ public class KariNonyuTsuchishoHakkoIchiranProperty extends ReportPropertyBase<K
         /**
          * 生年月日
          */
-        生年月日(new RString("0012"), new RString(""), ENCLOSURE.concat(new RString("atena_seinengappiYMD").concat(ENCLOSURE))),
+        生年月日(new RString("0012"), new RString(""), ENCLOSURE.concat(new RString("ShikibetsuTaisho_seinengappiYMD").concat(ENCLOSURE))),
         /**
          * 性別
          */
-        性別(new RString("0013"), new RString(""), ENCLOSURE.concat(new RString("").concat(ENCLOSURE))),
+        性別(new RString("0013"), new RString(""), ENCLOSURE.concat(new RString("ShikibetsuTaisho_seibetsuCode").concat(ENCLOSURE))),
         /**
          * 市町村コード
          */
@@ -107,7 +107,7 @@ public class KariNonyuTsuchishoHakkoIchiranProperty extends ReportPropertyBase<K
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString(""), ENCLOSURE.concat(new RString("koseigo_hihokenshaNo").concat(ENCLOSURE))),
+        被保険者番号(new RString("0104"), new RString(""), ENCLOSURE.concat(new RString("dbT2015KeisangoJoho_hihokenshaNo").concat(ENCLOSURE))),
         /**
          * 生活保護種別
          */
@@ -128,13 +128,13 @@ public class KariNonyuTsuchishoHakkoIchiranProperty extends ReportPropertyBase<K
          * 納組コード
          */
         納組コード(new RString("0208"), new RString(""), ENCLOSURE.concat(
-                new RString("caT0714SeikyuHoho_nokumiCode").concat(ENCLOSURE)));
+                new RString("CaT0714nokumiCode").concat(ENCLOSURE)));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;
         private final RString myBatis項目名;
 
-        private DBB100014KarisanteiNonyuTsuchishoEnum(
+        private DBB100014NonyuTsuchishoEnum(
                 RString 項目ID, RString フォームフィールド名, RString myBatis項目名) {
             this.項目ID = 項目ID;
             this.フォームフィールド名 = フォームフィールド名;

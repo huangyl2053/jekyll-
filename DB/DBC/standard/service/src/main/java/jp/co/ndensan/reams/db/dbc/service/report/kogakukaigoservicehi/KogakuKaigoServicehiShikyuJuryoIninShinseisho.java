@@ -20,11 +20,14 @@ import jp.co.ndensan.reams.db.dbz.business.core.tokuteifutangendogakushinseisho.
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
-import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilders.ReportSourceBuilders;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -95,10 +98,11 @@ public class KogakuKaigoServicehiShikyuJuryoIninShinseisho {
                     = createAssembler(property, reportManager)) {
                 ReportSourceWriter<KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReportSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
-                INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
-                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                        null, reportSourceWriter.getImageFolderPath());
+                Ninshosha nishosha = NinshoshaFinderFactory.createInstance().get帳票認証者(
+                        GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
+                Association association = AssociationFinderFactory.createInstance().getAssociation();
+                INinshoshaSourceBuilder ninshoshaSourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                        nishosha, association, reportSourceWriter.getImageFolderPath(), RDate.getNowDate());
                 for (KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReport report : toReports(get被保険者基本情報取得(識別コード, 被保険者番号),
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
 
@@ -113,10 +117,10 @@ public class KogakuKaigoServicehiShikyuJuryoIninShinseisho {
             HihokenshaKihonBusiness business, RString ninshoshaYakushokuMei) {
         List<KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReport> list = new ArrayList<>();
         if (JuminShubetsu.日本人.getCode().equals(business.get住民種別コード())
-                || JuminShubetsu.住登外個人_日本人.getCode().equals(business.get住民種別コード())) {
+            || JuminShubetsu.住登外個人_日本人.getCode().equals(business.get住民種別コード())) {
             生年月日 = パターン12(business.get生年月日());
         } else if (JuminShubetsu.外国人.getCode().equals(business.get住民種別コード())
-                || JuminShubetsu.住登外個人_外国人.getCode().equals(business.get住民種別コード())) {
+                   || JuminShubetsu.住登外個人_外国人.getCode().equals(business.get住民種別コード())) {
             生年月日 = get生年月日_外国人(business);
         }
         RString 郵便番号 = business.get郵便番号();

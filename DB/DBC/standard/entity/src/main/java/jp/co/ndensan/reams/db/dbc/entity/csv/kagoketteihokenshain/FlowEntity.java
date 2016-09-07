@@ -21,4 +21,6 @@ public class FlowEntity {
 
     private FlexibleYearMonth shoriYM;
     private int codeNum;
+    private int 集計データ登録件数;
+    private int 明細データ登録件数;
 }

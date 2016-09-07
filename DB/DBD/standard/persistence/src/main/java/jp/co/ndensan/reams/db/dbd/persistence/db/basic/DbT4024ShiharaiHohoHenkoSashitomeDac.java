@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -135,5 +136,43 @@ public class DbT4024ShiharaiHohoHenkoSashitomeDac implements ISaveable<DbT4024Sh
                                 eq(sashitome_ShokanSeiriNo, 整理番号),
                                 eq(sashitome_ServiceTeikyoYM, サービス提供年月))).
                 toObject(DbT4024ShiharaiHohoHenkoSashitomeEntity.class);
+    }
+
+    /**
+     * 支払方法変更差止を更新。
+     *
+     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
+     * @param hihokenshaNo hihokenshaNo
+     * @param kanriKubun kanriKubun
+     * @param rirekiNo rirekiNo
+     * @param johoBunruiKubun johoBunruiKubun
+     * @param renNo renNo
+     * @param sashitomeTsuchiHakkoYMD sashitomeTsuchiHakkoYMD
+     */
+    @Transaction
+    public void updateSashitomeTsuchiHakkoYMD(ShoKisaiHokenshaNo shoKisaiHokenshaNo, HihokenshaNo hihokenshaNo, RString kanriKubun,
+            int rirekiNo, RString johoBunruiKubun, int renNo, FlexibleDate sashitomeTsuchiHakkoYMD) {
+        DbT4024ShiharaiHohoHenkoSashitomeEntity entity = selectByKey(shoKisaiHokenshaNo, hihokenshaNo, kanriKubun, rirekiNo, johoBunruiKubun, renNo);
+        entity.setSashitome_TsuchiHakkoYMD(sashitomeTsuchiHakkoYMD);
+        save(entity);
+    }
+
+    /**
+     * 支払方法変更差止を更新。
+     *
+     * @param shoKisaiHokenshaNo 証記載保険者番号
+     * @param hihokenshaNo 被保険者番号
+     * @param kanriKubun 管理区分
+     * @param rirekiNo 履歴番号
+     * @param johoBunruiKubun 情報分類区分
+     * @param renNo 連番
+     * @param kojoTsuchiHakkoYMD kojoTsuchiHakkoYMD
+     */
+    @Transaction
+    public void updateKojoTsuchiHakkoYMD(ShoKisaiHokenshaNo shoKisaiHokenshaNo, HihokenshaNo hihokenshaNo, RString kanriKubun,
+            int rirekiNo, RString johoBunruiKubun, int renNo, FlexibleDate kojoTsuchiHakkoYMD) {
+        DbT4024ShiharaiHohoHenkoSashitomeEntity entity = selectByKey(shoKisaiHokenshaNo, hihokenshaNo, kanriKubun, rirekiNo, johoBunruiKubun, renNo);
+        entity.setKojo_TsuchiHakkoYMD(kojoTsuchiHakkoYMD);
+        save(entity);
     }
 }

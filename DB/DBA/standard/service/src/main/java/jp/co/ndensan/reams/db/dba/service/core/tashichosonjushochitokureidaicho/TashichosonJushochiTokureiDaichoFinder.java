@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureidaicho
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureidaicho.OtherAddressLedgerBusiness;
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.atena.OtherAddressInformationRecipientNameMybatisParam;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.otheraddressledger.OtherAddressInformationParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.otheraddressledger.OtherAddressInfEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.otheraddressledger.OtherAddressInfFromDBEntity;
@@ -23,13 +23,13 @@ import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
-import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -146,7 +147,6 @@ public class TashichosonJushochiTokureiDaichoFinder {
     private void set他市町村住所地特例者台帳情報(OtherAddressLedgerEntity 他市町村住所地特例者台帳情報,
             OtherAddressInfEntity 他市町村住所地特例者情報, UaFt200FindShikibetsuTaishoEntity 宛名識別対象取得PSM,
             RString 市町村名称, LasdecCode 市町村コード, int ページ目) {
-        JushoHenshu jushoHenshu = JushoHenshu.createInstance();
         他市町村住所地特例者台帳情報.set印刷日時(dateTimeEdit(RDate.getNowDateTime()));
         他市町村住所地特例者台帳情報.setページ目(ページ目);
         if (市町村コード != null) {
@@ -173,12 +173,12 @@ public class TashichosonJushochiTokureiDaichoFinder {
         他市町村住所地特例者台帳情報.set地区タイトル3(宛名識別対象取得PSM.getChikuName3());
         IShikibetsuTaisho 宛名情報 = ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名識別対象取得PSM);
         ChohyoSeigyoKyotsu 帳票共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100011.getReportId());
-        他市町村住所地特例者台帳情報.set住所1(jushoHenshu.editJusho(帳票共通情報, 宛名情報));
+        他市町村住所地特例者台帳情報.set住所1(JushoHenshu.editJusho(帳票共通情報, 宛名情報, AssociationFinderFactory.createInstance().getAssociation()));
         他市町村住所地特例者台帳情報.set住所タイトル1(住所);
-        他市町村住所地特例者台帳情報.set住所コード(jushoHenshu.get住所コード(宛名識別対象取得PSM));
+        他市町村住所地特例者台帳情報.set住所コード(JushoHenshu.get住所コード(宛名識別対象取得PSM));
         他市町村住所地特例者台帳情報.set行政区タイトル(行政区);
         他市町村住所地特例者台帳情報.set行政区コード(宛名識別対象取得PSM.getGyoseikuCode());
-        他市町村住所地特例者台帳情報.set住所2(jushoHenshu.editJusho2(
+        他市町村住所地特例者台帳情報.set住所2(JushoHenshu.editJusho2(
                 宛名識別対象取得PSM.getTennyumaeJusho(), 宛名識別対象取得PSM.getTennyumaeBanchi(), 宛名識別対象取得PSM.getTennyumaeKatagaki()));
         他市町村住所地特例者台帳情報.set住所タイトル2(前住所);
         他市町村住所地特例者台帳情報.set前住所コード(宛名識別対象取得PSM.getTennyumaeZenkokuJushoCode());

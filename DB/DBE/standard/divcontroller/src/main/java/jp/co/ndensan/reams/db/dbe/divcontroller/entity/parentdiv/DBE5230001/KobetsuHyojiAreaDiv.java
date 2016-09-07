@@ -77,7 +77,7 @@ public class KobetsuHyojiAreaDiv extends Panel {
     @JsonProperty("btnToroku")
     private Button btnToroku;
     @JsonProperty("btnIchigoHantei")
-    private Button btnIchigoHantei;
+    private ButtonDialog btnIchigoHantei;
     @JsonProperty("hasData")
     private RString hasData;
 
@@ -578,7 +578,7 @@ public class KobetsuHyojiAreaDiv extends Panel {
      * @return btnIchigoHantei
      */
     @JsonProperty("btnIchigoHantei")
-    public Button getBtnIchigoHantei() {
+    public ButtonDialog getBtnIchigoHantei() {
         return btnIchigoHantei;
     }
 
@@ -587,7 +587,7 @@ public class KobetsuHyojiAreaDiv extends Panel {
      * @param btnIchigoHantei btnIchigoHantei
      */
     @JsonProperty("btnIchigoHantei")
-    public void setBtnIchigoHantei(Button btnIchigoHantei) {
+    public void setBtnIchigoHantei(ButtonDialog btnIchigoHantei) {
         this.btnIchigoHantei = btnIchigoHantei;
     }
 

@@ -4,17 +4,18 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020041;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
 
 /**
- * tbp9 のクラスファイル 
- * 
- * @author 自動生成
+ * tbp9 のクラスファイル
+ *
+ * @reamsid_L DBU-1100-040 yebangqiang
  */
 public class tbp9Div extends TablePanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -75,9 +76,10 @@ public class tbp9Div extends TablePanel {
 
     // </editor-fold>
 }
+
 /**
- * cell111 のクラスファイル 
- * 
+ * cell111 のクラスファイル
+ *
  * @author 自動生成
  */
 class cell111Attbp9 extends TableCell {
@@ -85,9 +87,10 @@ class cell111Attbp9 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cell131 のクラスファイル 
- * 
+ * cell131 のクラスファイル
+ *
  * @author 自動生成
  */
 class cell131Attbp9 extends TableCell {

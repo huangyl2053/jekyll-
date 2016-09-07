@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshal
 
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
 /**
@@ -35,4 +36,11 @@ public interface IHokenshaListDiv extends ICommonChildDivBaseProperties {
      * @return 画面で指定されている保険者名の保険者の情報を持った{@link HokenshaSummary}
      */
     HokenshaSummary getSelectedItem();
+
+    /**
+     * 指定の市町村コードの市町村を選択肢に持つ場合、選択値として設定します。
+     *
+     * @param 市町村コード 市町村コード
+     */
+    void setSelectedShichosonIfExist(LasdecCode 市町村コード);
 }

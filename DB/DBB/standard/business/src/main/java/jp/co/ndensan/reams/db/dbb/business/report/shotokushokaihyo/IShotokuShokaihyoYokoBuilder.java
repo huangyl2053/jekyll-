@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.shotokushokaihyo.ShotokuShokaihy
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 帳票設計_DBBPR51002_所得照会票
+ * 帳票設計_DBBPR51002_所得照会票のクラスです。
  *
  * @reamsid_L DBB-1710-030 xuhao
  */

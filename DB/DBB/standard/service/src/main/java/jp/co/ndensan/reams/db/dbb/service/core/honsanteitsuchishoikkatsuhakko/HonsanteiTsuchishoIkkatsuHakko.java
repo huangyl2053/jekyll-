@@ -9,15 +9,16 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoInfo;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoTempResult;
+import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.PrtTokuchoKaishiTsuchishoHonsanteiResult;
 import jp.co.ndensan.reams.db.dbb.business.report.henkokenchushitsuchisho.KaigoHokenryogakuHenkoKenChushiTsuchishoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuProperty.OutputOrderEnum;
 import jp.co.ndensan.reams.db.dbb.business.report.ketteitsuchisho.KaigoHokenHokenryogakuKetteiTsuchishoJoho;
@@ -33,13 +34,10 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NokiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.TokuchoKaishiTsuhishoHoniOutputJoken;
-import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.TsuchishoKozaShutsuryokuTaisho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NotsuKozaShutsuryokuTaisho;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteitsuchishoikkatsuhakko.DecideKetteiHenkoTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteitsuchishoikkatsuhakko.PrtNonyuTsuchishoParameter;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteitsuchishoikkatsuhakko.TsuchishoHakkogoIdoshaInsertParameter;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteitsuchishoikkatsuhakko.TsuchishoHakkogoIdoshaNonyuInsertParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2014TsuchishoUchiwakeJokenEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
@@ -54,8 +52,8 @@ import jp.co.ndensan.reams.db.dbb.service.report.henkokenchushitsuchisho.KaigoHo
 import jp.co.ndensan.reams.db.dbb.service.report.kaigohokenryogaku.KaigoHokenryogakuPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.ketteitsuchisho.KaigoHokenHokenryogakuKetteiTsuchishoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranPrintService;
-import jp.co.ndensan.reams.db.dbb.service.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.tsuchisho.notsu.NonyuTsuchiShoJohoFactory;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
@@ -70,6 +68,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
@@ -86,8 +85,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryo
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
-import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -105,6 +102,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
+import jp.co.ndensan.reams.uz.uza.report.SourceData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -144,9 +142,11 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
     private static final RString CSV出力有無_なし = new RString("なし");
     private static final RString CSV出力有無_あり = new RString("あり");
     private static final RString CSVファイル名 = new RString("-");
+    private static final RString CSVファイル名_なし = new RString("なし");
     private static final RString CSVファイル名_一覧表 = new RString("特別徴収開始通知書発行一覧表");
     private static final RString CSVファイル名_決定一覧表 = new RString("介護保険料額決定通知書発行一覧表");
     private static final RString CSVファイル名_変更一覧表 = new RString("介護保険料額変更知書発行一覧表");
+    private static final RString CSVファイル名_納入一覧表 = new RString("保険料納入通知書（本算定）発行一覧表");
     private static final RString 定数_出力条件 = new RString("出力条件");
     private static final RString 定数_賦課年度 = new RString("賦課年度");
     private static final RString 定数_調定年度 = new RString("調定年度");
@@ -163,6 +163,7 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
     private static final RString 定数_選択現金口座 = new RString("getSelectGenkinKoza");
     private static final RString 定数_選択通知書 = new RString("getSelectTsuchisho");
     private static final RString 定数_出力順グループ名 = new RString("getSortGroupName");
+    private static final ReportId 代行プリント送付票_帳票ID = new ReportId("URU000A10_DaikoPrintCheck");
     private static final ReportId 特別徴収開始通知書本算定_帳票分類ID = new ReportId("DBB100032_TokubetsuChoshuKaishiTsuchishoDaihyo");
     private static final ReportId 決定変更通知書_帳票分類ID = new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
     private static final ReportId 納入通知書_帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
@@ -206,6 +207,10 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
     private static final RString FORMAT = new RString("\"");
     private static final RString 定値_する = new RString("する");
     private static final RString 定値_しない = new RString("しない");
+    private static final FlexibleYear 定値_管理年度 = new FlexibleYear("0000");
+    private static final RString 定値_項目名 = new RString("宛名連番印字");
+    private static final RString 定値_宛名連番 = new RString("*000001#");
+    private static final RString 定値_印字する = new RString("1");
     private final MapperProvider mapperProvider;
     private final DbT7022ShoriDateKanriDac 処理日付管理Dac;
     private final DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac;
@@ -263,8 +268,8 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         rStringBuilder.append(RIGHT_FORMAT);
         RString 科目コード = rStringBuilder.toRString();
         RString 処理日 = new RString(FlexibleDate.getNowDate().toString());
-        HonsanteiTsuchishoIkkatsuHakkoParameter parameter
-                = HonsanteiTsuchishoIkkatsuHakkoParameter.createSelectByKeyParam(調定年度, 賦課年度, 処理日, kozaSearchKey, list, 科目コード);
+        HonsanteiTsuchishoIkkatsuHakkoParameter parameter = HonsanteiTsuchishoIkkatsuHakkoParameter
+                .createSelectByKeyParam(調定年度, 賦課年度, 処理日, kozaSearchKey, list, 科目コード, 最新調定日時);
         if (!一括発行起動フラグ) {
             mapper.insert本算定通知書一時(parameter);
             mapper.update本算定通知書一時_計算後情報更正前();
@@ -305,10 +310,11 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
      * @param 出力順ID RString
      * @param 帳票ID ReportId
      * @param 出力対象 RString
+     * @return PrtTokuchoKaishiTsuchishoHonsanteiResult 特徴開始通知書(本算定）の発行用引数
      * @throws java.lang.reflect.InvocationTargetException 賦課情報が取得できない場合、Exception
      */
-    public void prtTokuchoKaishiTsuchishoHonsantei(FlexibleYear 調定年度, RDate 発行日, RDateTime 帳票作成日時,
-            RString 出力順ID, ReportId 帳票ID, RString 出力対象) throws InvocationTargetException {
+    public PrtTokuchoKaishiTsuchishoHonsanteiResult prtTokuchoKaishiTsuchishoHonsantei(FlexibleYear 調定年度,
+            RDate 発行日, RDateTime 帳票作成日時, RString 出力順ID, ReportId 帳票ID, RString 出力対象) throws InvocationTargetException {
 
         RString 出力順 = get出力順(特別徴収開始通知書本算定_帳票分類ID, 出力順ID);
 
@@ -329,8 +335,10 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         builder = new RStringBuilder();
         builder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder
-                = fider.get出力順(SubGyomuCode.DBB介護賦課, 特別徴収開始通知書本算定_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        IOutputOrder outputOrder = null;
+        if (!RString.isNullOrEmpty(出力順ID)) {
+            outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 特別徴収開始通知書本算定_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        }
         if (outputOrder != null) {
             List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
             for (ISetSortItem iSetSortItem : iSetSortItemList) {
@@ -351,56 +359,51 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         RString 帳票名 = get帳票名_特徴(帳票ID.getColumnValue());
         if (entityList == null || entityList.isEmpty() || entityList.get(INT_0).get計算後情報_更正後() == null) {
             loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 定値_ゼロ, CSV出力有無_なし, CSVファイル名, 帳票名);
-            return;
+            return null;
         }
         ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(特別徴収開始通知書本算定_帳票分類ID);
-        RString 通知書定型文 = RString.EMPTY;
-        if (帳票制御共通 != null && !nullTOEmpty(帳票制御共通.get定型文文字サイズ()).isEmpty()) {
-            int パターン番号 = Integer.parseInt(nullTOEmpty(帳票制御共通.get定型文文字サイズ()).toString());
-            FlexibleDate システム日付 = FlexibleDate.getNowDate();
-            TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
-            TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo
-                    = manager.get通知書定形文検索(SubGyomuCode.DBB介護賦課, 特別徴収開始通知書本算定_帳票分類ID,
-                            KamokuCode.EMPTY, パターン番号, INT_1, システム日付);
-            if (tsuchishoTeikeibunInfo != null && tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
-                通知書定型文 = tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
-            }
+        int 定型文文字サイズ = 0;
+        if (帳票制御共通 != null && !RString.isNullOrEmpty(帳票制御共通.get定型文文字サイズ())) {
+            定型文文字サイズ = Integer.parseInt(帳票制御共通.get定型文文字サイズ().toString());
+        }
+        RString 通知書定型文 = ReportUtil.get通知文(SubGyomuCode.DBB介護賦課,
+                特別徴収開始通知書本算定_帳票分類ID, KamokuCode.EMPTY, 定型文文字サイズ, INT_1, FlexibleDate.getNowDate());
+        RString 宛名連番 = RString.EMPTY;
+        ChohyoSeigyoHanyo 帳票制御 = load帳票制御汎用ByKey(特別徴収開始通知書本算定_帳票分類ID, 定値_管理年度, 定値_項目名);
+        if (帳票制御 != null && 定値_印字する.equals(帳票制御.get設定値())) {
+            宛名連番 = 定値_宛名連番;
         }
         List<HonsanteiTsuchishoTempResult> tmpResultList = get賦課情報(entityList);
-        HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
-        List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List = new ArrayList<>();
-        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-        SourceDataCollection sourceDataCollection;
-        try (ReportManager reportManager = new ReportManager()) {
-            for (HonsanteiTsuchishoTempResult tmpResult : tmpResultList) {
-                HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
-                本算定通知書情報.set発行日(発行日);
-                本算定通知書情報.set帳票分類ID(特別徴収開始通知書本算定_帳票分類ID);
-                本算定通知書情報.set帳票ID(帳票ID);
-                本算定通知書情報.set処理区分(ShoriKubun.バッチ);
-                本算定通知書情報.set地方公共団体(地方公共団体);
-                本算定通知書情報.set賦課の情報_更正前(tmpResult.get賦課の情報_更正前());
-                本算定通知書情報.set賦課の情報_更正後(tmpResult.get賦課の情報_更正後());
-                本算定通知書情報.set納組情報(tmpResult.get納組情報());
-                本算定通知書情報.set宛先情報(tmpResult.get宛先情報());
-                本算定通知書情報.set口座情報(tmpResult.get口座情報());
-                本算定通知書情報.set徴収方法情報_更正前(tmpResult.get徴収方法情報_更正前());
-                本算定通知書情報.set徴収方法情報_更正後(tmpResult.get徴収方法情報_更正後());
-                本算定通知書情報.set対象者_追加含む_情報_更正前(tmpResult.get対象者_追加含む_情報_更正前());
-                本算定通知書情報.set対象者_追加含む_情報_更正後(tmpResult.get対象者_追加含む_情報_更正後());
-                本算定通知書情報.set収入情報(tmpResult.get収入情報());
-                本算定通知書情報.set帳票制御共通(帳票制御共通);
-                EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 本算定共通情報作成.create本算定通知書共通情報(本算定通知書情報);
-                new TokubetsuChoshuKaishiTsuchishoPrintService().print(編集後本算定通知書共通情報, 通知書定型文, 本算定通知書情報, reportManager);
-                編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報);
-            }
-            sourceDataCollection = reportManager.publish();
-        }
-        publish特別徴収開始通知書発行一覧表(調定年度, 帳票作成日時, 編集後本算定通知書共通情報List);
+        PrtTokuchoKaishiTsuchishoHonsanteiResult result = new PrtTokuchoKaishiTsuchishoHonsanteiResult();
+        result.set特徴開始通知書ResultList(tmpResultList);
+        result.set調定年度(調定年度);
+        result.set発行日(発行日);
+        result.set帳票作成日時(帳票作成日時);
+        result.set出力順ID(出力順ID);
+        result.set出力条件リスト(出力条件リスト);
+        result.set帳票ID(帳票ID);
+        result.set帳票名(帳票名);
+        result.set宛名連番(宛名連番);
+        result.set通知書定型文(通知書定型文);
+        result.set帳票制御共通(帳票制御共通);
+        return result;
+    }
+
+    /**
+     * 特徴開始通知書(本算定）の発行メソッドです。
+     *
+     * @param result PrtTokuchoKaishiTsuchishoHonsanteiResult
+     * @param 編集後本算定通知書共通情報List List<EditedHonSanteiTsuchiShoKyotsu>
+     * @param 総ページ数 int
+     */
+    public void publishTokuchoKaishiTsuchishoHonsantei(PrtTokuchoKaishiTsuchishoHonsanteiResult result,
+            List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List, int 総ページ数) {
+
+        publish特別徴収開始通知書発行一覧表(result.get調定年度(), result.get帳票作成日時(), 編集後本算定通知書共通情報List);
         new TokubetsuChoshuKaishiPrintService().printSingle(編集後本算定通知書共通情報List,
-                調定年度, Long.parseLong(出力順ID.toString()), 帳票作成日時);
-        RString 出力ページ数 = new RString(sourceDataCollection.iterator().next().getPageCount());
-        loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_あり, CSVファイル名_一覧表, 帳票名);
+                result.get調定年度(), result.get出力順ID(), result.get帳票作成日時());
+        loadバッチ出力条件リスト(result.get出力条件リスト(), result.get帳票ID(), new RString(総ページ数),
+                CSV出力有無_あり, CSVファイル名_一覧表, result.get帳票名());
     }
 
     /**
@@ -415,10 +418,11 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
             RString 出力順ID, ReportId 帳票ID) {
 
         RString 出力順 = get出力順(特別徴収開始通知書本算定_帳票分類ID, 出力順ID);
+        Map<String, Object> parameter = new HashMap<>();
+        parameter.put(キー_出力対象.toString(), 出力対象区分);
+        parameter.put(キー_出力順.toString(), 出力順);
         IHonsanteiTsuchishoIkkatsuHakkoMapper mapper = mapperProvider.create(IHonsanteiTsuchishoIkkatsuHakkoMapper.class);
-        TsuchishoHakkogoIdoshaInsertParameter parameter
-                = TsuchishoHakkogoIdoshaInsertParameter.createSelectByKeyParam(出力対象区分, 帳票作成日時, 出力順, 帳票ID);
-        List<HonsanteiTsuchishoTempEntity> entityList = mapper.select特徴開始通知書発行後異動者(parameter);
+        List<HonsanteiTsuchishoTempEntity> entityList = mapper.select本算定通知書(parameter);
         insert通知書発行後異動者(帳票作成日時, 帳票ID, entityList);
     }
 
@@ -499,16 +503,19 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         builder.append(定数_出力条件);
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append(FORMAT_LEFT.concat(定数_発行日).concat(FORMAT_RIGHT).concat(発行日.wareki().toDateString()));
+        builder.append(FORMAT_LEFT.concat(定数_発行日).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE).concat(発行日.wareki().toDateString()));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append(FORMAT_LEFT.concat(定数_文書番号).concat(FORMAT_RIGHT).concat(RString.isNullOrEmpty(文書番号) ? RString.EMPTY : 文書番号));
+        builder.append(FORMAT_LEFT.concat(定数_文書番号).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
+                .concat(RString.isNullOrEmpty(文書番号) ? RString.EMPTY : 文書番号));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT));
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder
-                = fider.get出力順(SubGyomuCode.DBB介護賦課, 決定変更通知書_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        IOutputOrder outputOrder = null;
+        if (!RString.isNullOrEmpty(出力順ID)) {
+            outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 決定変更通知書_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        }
         if (outputOrder != null) {
             List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
             for (ISetSortItem iSetSortItem : iSetSortItemList) {
@@ -539,18 +546,12 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
             return;
         }
         ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(決定変更通知書_帳票分類ID);
-        RString 通知書定型文 = RString.EMPTY;
-        if (帳票制御共通 != null && !nullTOEmpty(帳票制御共通.get定型文文字サイズ()).isEmpty()) {
-            int パターン番号 = Integer.parseInt(nullTOEmpty(帳票制御共通.get定型文文字サイズ()).toString());
-            FlexibleDate システム日付 = FlexibleDate.getNowDate();
-            TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
-            TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo
-                    = manager.get通知書定形文検索(SubGyomuCode.DBB介護賦課, 決定変更通知書_帳票分類ID,
-                            KamokuCode.EMPTY, パターン番号, INT_1, システム日付);
-            if (tsuchishoTeikeibunInfo != null && tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
-                通知書定型文 = tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
-            }
+        int 定型文文字サイズ = 0;
+        if (帳票制御共通 != null && !RString.isNullOrEmpty(帳票制御共通.get定型文文字サイズ())) {
+            定型文文字サイズ = Integer.parseInt(帳票制御共通.get定型文文字サイズ().toString());
         }
+        RString 通知書定型文 = ReportUtil.get通知文(SubGyomuCode.DBB介護賦課,
+                特別徴収開始通知書本算定_帳票分類ID, KamokuCode.EMPTY, 定型文文字サイズ, INT_1, FlexibleDate.getNowDate());
         List<HonsanteiTsuchishoTempResult> tmpResultList = get賦課情報(entityList);
         HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
         List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List = new ArrayList<>();
@@ -592,13 +593,11 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
                 KaigoHokenHokenryogakuKetteiTsuchishoJoho 介護保険料額決定通知書 = new KaigoHokenHokenryogakuKetteiTsuchishoJoho();
                 介護保険料額決定通知書.set文書番号(文書番号);
                 介護保険料額決定通知書.set本算定決定通知書情報(本算定決定通知書情報);
-                //TODO 仕様なし
-                介護保険料額決定通知書.set調定事由リスト(null);
                 介護保険料額決定通知書.set通知書定型文(通知書定型文);
                 entities.add(介護保険料額決定通知書);
                 if (ReportIdDBB.DBB100039.getReportId().equals(帳票ID)) {
                     new KaigoHokenHokenryogakuKetteiTsuchishoPrintService().printB5Yoko(entities, reportManager);
-                } else {
+                } else if (ReportIdDBB.DBB100040.getReportId().equals(帳票ID)) {
                     new KaigoHokenHokenryogakuKetteiTsuchishoPrintService().printA4Tate(entities, reportManager);
                 }
                 編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報);
@@ -606,9 +605,8 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
             sourceDataCollection = reportManager.publish();
         }
         publish決定変更通知書発行一覧表(帳票作成日時, 編集後本算定通知書共通情報List, 決定_EUC_ENTITY_ID, 決定_EUCファイル名);
-        new KaigoHokenryogakuPrintService().printSingle(編集後本算定通知書共通情報List,
-                帳票作成日時, Long.parseLong(出力順ID.toString()), 定値_タイトル);
-        RString 出力ページ数 = new RString(sourceDataCollection.iterator().next().getPageCount());
+        new KaigoHokenryogakuPrintService().printSingle(編集後本算定通知書共通情報List, 帳票作成日時, 出力順ID, 定値_タイトル);
+        RString 出力ページ数 = get出力ページ数(sourceDataCollection);
         loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_あり, CSVファイル名_決定一覧表, 帳票名);
     }
 
@@ -630,9 +628,10 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         }
         出力順 = orderByClause.toRString();
         IHonsanteiTsuchishoIkkatsuHakkoMapper mapper = mapperProvider.create(IHonsanteiTsuchishoIkkatsuHakkoMapper.class);
-        TsuchishoHakkogoIdoshaInsertParameter parameter
-                = TsuchishoHakkogoIdoshaInsertParameter.createSelectByKeyParam(定値_決定区分, 帳票作成日時, 出力順, 帳票ID);
-        List<HonsanteiTsuchishoTempEntity> entityList = mapper.select決定変更通知書発行後異動者(parameter);
+        Map<String, Object> parameter = new HashMap<>();
+        parameter.put(キー_出力順.toString(), 出力順);
+        parameter.put(キー_決定変更区分.toString(), 定値_決定区分);
+        List<HonsanteiTsuchishoTempEntity> entityList = mapper.select決定変更通知書(parameter);
         insert通知書発行後異動者(帳票作成日時, 帳票ID, entityList);
     }
 
@@ -647,11 +646,10 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
      * @param 帳票ID ReportId
      * @param 一括発行起動フラグ boolean
      * @param 打分け条件 RString
-     * @param 出力対象 RString
      * @throws java.lang.reflect.InvocationTargetException 賦課情報が取得できない場合、Exception
      */
     public void prtHenkoTsuchisho(FlexibleYear 調定年度, RDate 発行日, RString 文書番号, RDateTime 帳票作成日時,
-            RString 出力順ID, ReportId 帳票ID, boolean 一括発行起動フラグ, RString 打分け条件, RString 出力対象) throws InvocationTargetException {
+            RString 出力順ID, ReportId 帳票ID, boolean 一括発行起動フラグ, RString 打分け条件) throws InvocationTargetException {
 
         RString 出力順 = get出力順(決定変更通知書_帳票分類ID, 出力順ID);
 
@@ -664,20 +662,19 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         builder.append(定数_出力条件);
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append(FORMAT_LEFT.concat(定数_発行日).concat(FORMAT_RIGHT).concat(発行日.wareki().toDateString()));
+        builder.append(FORMAT_LEFT.concat(定数_発行日).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE).concat(発行日.wareki().toDateString()));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append(FORMAT_LEFT.concat(定数_文書番号).concat(FORMAT_RIGHT).concat(RString.isNullOrEmpty(文書番号) ? RString.EMPTY : 文書番号));
+        builder.append(FORMAT_LEFT.concat(定数_文書番号).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
+                .concat(RString.isNullOrEmpty(文書番号) ? RString.EMPTY : 文書番号));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append(FORMAT_LEFT.concat(定数_出力対象).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
-                .concat(RString.isNullOrEmpty(出力対象) ? RString.EMPTY : TsuchishoKozaShutsuryokuTaisho.toValue(出力対象).get名称()));
-        出力条件リスト.add(builder.toRString());
-        builder = new RStringBuilder();
-        builder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT));
+        builder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder
-                = fider.get出力順(SubGyomuCode.DBB介護賦課, 決定変更通知書_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        IOutputOrder outputOrder = null;
+        if (!RString.isNullOrEmpty(出力順ID)) {
+            outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 決定変更通知書_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        }
         if (outputOrder != null) {
             List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
             for (ISetSortItem iSetSortItem : iSetSortItemList) {
@@ -711,56 +708,57 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
         List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List = new ArrayList<>();
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-        for (HonsanteiTsuchishoTempResult tmpResult : tmpResultList) {
-            HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
-            本算定通知書情報.set発行日(発行日);
-            本算定通知書情報.set帳票分類ID(決定変更通知書_帳票分類ID);
-            本算定通知書情報.set帳票ID(帳票ID);
-            本算定通知書情報.set処理区分(ShoriKubun.バッチ);
-            本算定通知書情報.set地方公共団体(地方公共団体);
-            本算定通知書情報.set賦課の情報_更正前(tmpResult.get賦課の情報_更正前());
-            本算定通知書情報.set賦課の情報_更正後(tmpResult.get賦課の情報_更正後());
-            本算定通知書情報.set納組情報(tmpResult.get納組情報());
-            本算定通知書情報.set普徴納期情報リスト(通知書共通情報entity.get普徴納期情報リスト());
-            本算定通知書情報.set特徴納期情報リスト(通知書共通情報entity.get特徴納期情報リスト());
-            本算定通知書情報.set宛先情報(tmpResult.get宛先情報());
-            本算定通知書情報.set口座情報(tmpResult.get口座情報());
-            本算定通知書情報.set徴収方法情報_更正前(tmpResult.get徴収方法情報_更正前());
-            本算定通知書情報.set徴収方法情報_更正後(tmpResult.get徴収方法情報_更正後());
-            本算定通知書情報.set対象者_追加含む_情報_更正前(tmpResult.get対象者_追加含む_情報_更正前());
-            本算定通知書情報.set対象者_追加含む_情報_更正後(tmpResult.get対象者_追加含む_情報_更正後());
-            本算定通知書情報.set収入情報(tmpResult.get収入情報());
-            本算定通知書情報.set帳票制御共通(帳票制御共通);
-            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 本算定共通情報作成.create本算定通知書共通情報(本算定通知書情報);
-            HonSanteiKetteiTsuchiShoJoho 本算定変更通知書情報 = new HonSanteiKetteiTsuchiShoJoho();
-            本算定変更通知書情報.set現年度_過年度区分(GennenKanen.現年度);
-            本算定変更通知書情報.set発行日(発行日);
-            本算定変更通知書情報.set帳票分類ID(決定変更通知書_帳票分類ID);
-            本算定変更通知書情報.set帳票ID(帳票ID);
-            本算定変更通知書情報.set編集後本算定通知書共通情報(編集後本算定通知書共通情報);
-            本算定変更通知書情報.set宛先情報(tmpResult.get宛先情報());
-            本算定変更通知書情報.set処理区分(ShoriKubun.バッチ);
-            本算定変更通知書情報.set地方公共団体(地方公共団体);
-            try (ReportManager reportManager = new ReportManager()) {
+        SourceDataCollection sourceDataCollection;
+        try (ReportManager reportManager = new ReportManager()) {
+            for (HonsanteiTsuchishoTempResult tmpResult : tmpResultList) {
+                HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
+                本算定通知書情報.set発行日(発行日);
+                本算定通知書情報.set帳票分類ID(決定変更通知書_帳票分類ID);
+                本算定通知書情報.set帳票ID(帳票ID);
+                本算定通知書情報.set処理区分(ShoriKubun.バッチ);
+                本算定通知書情報.set地方公共団体(地方公共団体);
+                本算定通知書情報.set賦課の情報_更正前(tmpResult.get賦課の情報_更正前());
+                本算定通知書情報.set賦課の情報_更正後(tmpResult.get賦課の情報_更正後());
+                本算定通知書情報.set納組情報(tmpResult.get納組情報());
+                本算定通知書情報.set普徴納期情報リスト(通知書共通情報entity.get普徴納期情報リスト());
+                本算定通知書情報.set特徴納期情報リスト(通知書共通情報entity.get特徴納期情報リスト());
+                本算定通知書情報.set宛先情報(tmpResult.get宛先情報());
+                本算定通知書情報.set口座情報(tmpResult.get口座情報());
+                本算定通知書情報.set徴収方法情報_更正前(tmpResult.get徴収方法情報_更正前());
+                本算定通知書情報.set徴収方法情報_更正後(tmpResult.get徴収方法情報_更正後());
+                本算定通知書情報.set対象者_追加含む_情報_更正前(tmpResult.get対象者_追加含む_情報_更正前());
+                本算定通知書情報.set対象者_追加含む_情報_更正後(tmpResult.get対象者_追加含む_情報_更正後());
+                本算定通知書情報.set収入情報(tmpResult.get収入情報());
+                本算定通知書情報.set帳票制御共通(帳票制御共通);
+                EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 本算定共通情報作成.create本算定通知書共通情報(本算定通知書情報);
+                HonSanteiKetteiTsuchiShoJoho 本算定変更通知書情報 = new HonSanteiKetteiTsuchiShoJoho();
+                本算定変更通知書情報.set現年度_過年度区分(GennenKanen.現年度);
+                本算定変更通知書情報.set発行日(発行日);
+                本算定変更通知書情報.set帳票分類ID(決定変更通知書_帳票分類ID);
+                本算定変更通知書情報.set帳票ID(帳票ID);
+                本算定変更通知書情報.set編集後本算定通知書共通情報(編集後本算定通知書共通情報);
+                本算定変更通知書情報.set宛先情報(tmpResult.get宛先情報());
+                本算定変更通知書情報.set処理区分(ShoriKubun.バッチ);
+                本算定変更通知書情報.set地方公共団体(地方公共団体);
+
                 List<KaigoHokenryogakuHenkoKenChushiTsuchishoJoho> entities = new ArrayList<>();
                 KaigoHokenryogakuHenkoKenChushiTsuchishoJoho 通知書情報 = new KaigoHokenryogakuHenkoKenChushiTsuchishoJoho();
                 通知書情報.set文書番号(文書番号);
                 通知書情報.set本算定決定通知書情報(本算定変更通知書情報);
-                //TODO 仕様なし
-                通知書情報.set調定事由リスト(null);
                 entities.add(通知書情報);
                 if (ReportIdDBB.DBB100042.getReportId().equals(帳票ID)) {
                     new KaigoHokenryogakuHenkoKenChushiTsuchishoPrintService().printB5Yoko(entities, reportManager);
                 } else {
                     new KaigoHokenryogakuHenkoKenChushiTsuchishoPrintService().printA4Tate(entities, reportManager);
+
                 }
+                編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報);
             }
-            編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報);
+            sourceDataCollection = reportManager.publish();
         }
         publish決定変更通知書発行一覧表(帳票作成日時, 編集後本算定通知書共通情報List, 変更_EUC_ENTITY_ID, 変更_EUCファイル名);
-        SourceDataCollection sourceDataCollection = new KaigoHokenryogakuPrintService().printSingle(編集後本算定通知書共通情報List,
-                帳票作成日時, Long.parseLong(出力順ID.toString()), 定値_タイトル);
-        RString 出力ページ数 = new RString(sourceDataCollection.iterator().next().getPageCount());
+        new KaigoHokenryogakuPrintService().printSingle(編集後本算定通知書共通情報List, 帳票作成日時, 出力順ID, 定値_タイトル);
+        RString 出力ページ数 = get出力ページ数(sourceDataCollection);
         loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_あり, CSVファイル名_変更一覧表, 帳票名);
     }
 
@@ -782,9 +780,10 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         }
         出力順 = orderByClause.toRString();
         IHonsanteiTsuchishoIkkatsuHakkoMapper mapper = mapperProvider.create(IHonsanteiTsuchishoIkkatsuHakkoMapper.class);
-        TsuchishoHakkogoIdoshaInsertParameter parameter
-                = TsuchishoHakkogoIdoshaInsertParameter.createSelectByKeyParam(定値_変更区分, 帳票作成日時, 出力順, 帳票ID);
-        List<HonsanteiTsuchishoTempEntity> entityList = mapper.select決定変更通知書発行後異動者(parameter);
+        Map<String, Object> parameter = new HashMap<>();
+        parameter.put(キー_出力順.toString(), 出力順);
+        parameter.put(キー_決定変更区分.toString(), 定値_変更区分);
+        List<HonsanteiTsuchishoTempEntity> entityList = mapper.select決定変更通知書(parameter);
         insert通知書発行後異動者(帳票作成日時, 帳票ID, entityList);
     }
 
@@ -816,7 +815,7 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
         KitsukiList 本算定期間 = 期月リスト_普徴.filtered本算定期間();
         int 出力期AsInt = Integer.parseInt(出力期.toString());
-        List<Kitsuki> 期月List = get期月リスト(調定年度, 別々に出力区分, 帳票タイプ, 期月リスト_普徴, 本算定期間, 出力期AsInt);
+        List<NokiJoho> 期月List = get期月リスト(調定年度, 別々に出力区分, 帳票タイプ, 期月リスト_普徴, 本算定期間, 出力期AsInt);
         HonsanteiTsuchishoInfo 通知書共通情報entity = get通知書共通情報(調定年度, 出力期);
         NonyuTsuchiShoSeigyoJohoLoaderFinder finder = NonyuTsuchiShoSeigyoJohoLoaderFinder.createInstance(調定年度);
         HonSanteiNonyuTsuchiShoSeigyoJoho 本算定納入通知書制御情報 = finder.get本算定納入通知書制御情報();
@@ -832,12 +831,12 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         Map<String, RString> 普徴期情報 = get普徴期情報(出力期);
 
         RStringBuilder orderByClause = new RStringBuilder(ソート);
-        if (定値区分_1.equals(生活保護者先頭出力区分)) {
+        if (定値区分_0.equals(生活保護者先頭出力区分)) {
             orderByClause.append(RString.HALF_SPACE.concat(FORMAT).concat(定値_生活保護区分).concat(FORMAT).concat(RString.HALF_SPACE)
                     .concat(ソート順_降順).concat(カンマ)
                     .concat(RString.HALF_SPACE).concat(FORMAT).concat(口座区分).concat(FORMAT)
                     .concat(RString.HALF_SPACE).concat(ソート順_昇順));
-        } else if (定値区分_0.equals(生活保護者先頭出力区分)) {
+        } else if (定値区分_1.equals(生活保護者先頭出力区分)) {
             orderByClause.append(RString.HALF_SPACE.concat(FORMAT).concat(口座区分).concat(FORMAT)
                     .concat(RString.HALF_SPACE).concat(ソート順_昇順));
         }
@@ -854,59 +853,65 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         List<HonsanteiTsuchishoTempEntity> entityList = mapper.select納入通知書(parameter);
         RString 帳票名 = get帳票名_納入(帳票ID.getColumnValue());
         if (entityList == null || entityList.isEmpty() || entityList.get(INT_0).get計算後情報_更正後() == null) {
-            //TODO CSV出力有無 CSVファイル名
-            loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 定値_ゼロ, RString.EMPTY, RString.EMPTY, 帳票名);
+            loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 定値_ゼロ, CSV出力有無_なし, CSVファイル名_なし, 帳票名);
             return;
         }
 
+        //TO QA913
         int 山分け用スプール数 = get山分け用スプール数(帳票タイプ, 期月List, 本算定期間, 出力期AsInt, 山分け区分);
+        checkStyle(山分け用スプール数);
+        if (定値区分_1.equals(山分け区分)) {
+            通知書共通情報entity.set普徴納期情報リスト(期月List);
+        }
 
         ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(納入通知書_帳票分類ID);
         List<HonsanteiTsuchishoTempResult> tmpResultList = get賦課情報(entityList);
         NonyuTsuchiShoJohoFactory nonyuTsuchiShoJohoFactory = InstanceProvider.create(NonyuTsuchiShoJohoFactory.class);
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List = new ArrayList<>();
-        for (HonsanteiTsuchishoTempResult tmpResult : tmpResultList) {
-            HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
-            本算定通知書情報.set発行日(発行日);
-            本算定通知書情報.set帳票分類ID(納入通知書_帳票分類ID);
-            本算定通知書情報.set帳票ID(帳票ID);
-            本算定通知書情報.set処理区分(ShoriKubun.バッチ);
-            本算定通知書情報.set地方公共団体(地方公共団体);
-            本算定通知書情報.set賦課の情報_更正前(tmpResult.get賦課の情報_更正前());
-            本算定通知書情報.set賦課の情報_更正後(tmpResult.get賦課の情報_更正後());
-            本算定通知書情報.set納組情報(tmpResult.get納組情報());
-            本算定通知書情報.set普徴納期情報リスト(通知書共通情報entity.get普徴納期情報リスト());
-            本算定通知書情報.set特徴納期情報リスト(通知書共通情報entity.get特徴納期情報リスト());
-            本算定通知書情報.set宛先情報(tmpResult.get宛先情報());
-            本算定通知書情報.set口座情報(tmpResult.get口座情報());
-            本算定通知書情報.set徴収方法情報_更正前(tmpResult.get徴収方法情報_更正前());
-            本算定通知書情報.set徴収方法情報_更正後(tmpResult.get徴収方法情報_更正後());
-            本算定通知書情報.set対象者_追加含む_情報_更正前(tmpResult.get対象者_追加含む_情報_更正前());
-            本算定通知書情報.set対象者_追加含む_情報_更正後(tmpResult.get対象者_追加含む_情報_更正後());
-            本算定通知書情報.set収入情報(tmpResult.get収入情報());
-            本算定通知書情報.set帳票制御共通(帳票制御共通);
-            List<Kitsuki> 出力期リスト = get出力期リスト(出力期);
-            IName 代納人氏名 = tmpResult.get宛先代納() != null ? tmpResult.get宛先代納().get宛先名称() : null;
-            HonSanteiNonyuTsuchiShoJoho 編集後本算定通知書共通情報
-                    = nonyuTsuchiShoJohoFactory.create本算定納入通知書情報(本算定通知書情報, 本算定納入通知書制御情報, 出力期リスト, 代納人氏名);
-            if (編集後本算定通知書共通情報 != null) {
+        SourceDataCollection sourceDataCollection;
+        try (ReportManager reportManager = new ReportManager()) {
+            for (HonsanteiTsuchishoTempResult tmpResult : tmpResultList) {
+                HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
+                本算定通知書情報.set発行日(発行日);
+                本算定通知書情報.set帳票分類ID(納入通知書_帳票分類ID);
+                本算定通知書情報.set帳票ID(帳票ID);
+                本算定通知書情報.set処理区分(ShoriKubun.バッチ);
+                本算定通知書情報.set地方公共団体(地方公共団体);
+                本算定通知書情報.set賦課の情報_更正前(tmpResult.get賦課の情報_更正前());
+                本算定通知書情報.set賦課の情報_更正後(tmpResult.get賦課の情報_更正後());
+                本算定通知書情報.set納組情報(tmpResult.get納組情報());
+                本算定通知書情報.set普徴納期情報リスト(通知書共通情報entity.get普徴納期情報リスト());
+                本算定通知書情報.set特徴納期情報リスト(通知書共通情報entity.get特徴納期情報リスト());
+                本算定通知書情報.set宛先情報(tmpResult.get宛先情報());
+                本算定通知書情報.set口座情報(tmpResult.get口座情報());
+                本算定通知書情報.set徴収方法情報_更正前(tmpResult.get徴収方法情報_更正前());
+                本算定通知書情報.set徴収方法情報_更正後(tmpResult.get徴収方法情報_更正後());
+                本算定通知書情報.set対象者_追加含む_情報_更正前(tmpResult.get対象者_追加含む_情報_更正前());
+                本算定通知書情報.set対象者_追加含む_情報_更正後(tmpResult.get対象者_追加含む_情報_更正後());
+                本算定通知書情報.set収入情報(tmpResult.get収入情報());
+                本算定通知書情報.set帳票制御共通(帳票制御共通);
+                List<Kitsuki> 出力期リスト = get出力期リスト(出力期);
+                IName 代納人氏名 = tmpResult.get宛先代納() != null ? tmpResult.get宛先代納().get宛先名称() : null;
+                HonSanteiNonyuTsuchiShoJoho 編集後本算定通知書共通情報
+                        = nonyuTsuchiShoJohoFactory.create本算定納入通知書情報(本算定通知書情報, 本算定納入通知書制御情報, 出力期リスト, 代納人氏名);
+                //TO QA913
+                //publish納入通知書本算定(帳票ID, 編集後本算定通知書共通情報, reportManager);
                 編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報.get編集後本算定通知書共通情報());
             }
+            sourceDataCollection = reportManager.publish();
         }
         publish納入通知書発行一覧表(帳票作成日時, 賦課年度, 出力期, 編集後本算定通知書共通情報List, 納入_EUC_ENTITY_ID, 納入_EUCファイル名);
-        new NonyuTsuchIchiranPrintService().printSingle(編集後本算定通知書共通情報List, 帳票作成日時,
-                出力期AsInt, Long.parseLong(出力順ID.toString()));
-        //TODO 通知書出力ページ数
-        RString 出力ページ数 = RString.EMPTY;
+        new NonyuTsuchIchiranPrintService().printSingle(編集後本算定通知書共通情報List, 帳票作成日時, 出力期AsInt, 出力順ID);
+        RString 出力ページ数 = get出力ページ数(sourceDataCollection);
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 納入通知書_帳票分類ID, Long.parseLong(出力順ID.toString()));
-        //TODO 帳票のページ数
-        RString 帳票のページ数 = RString.EMPTY;
-        load代行プリント送付票(調定年度, 賦課年度, 帳票ID, 発行日, 出力期, 納入通知書対象者, 生活保護者先頭出力区分, 山分け区分,
-                帳票制御共通 == null ? null : 帳票制御共通.toEntity(), 地方公共団体, outputOrder, new Decimal(帳票のページ数.toString()));
-        //TODO CSV出力有無 CSVファイル名
-        loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, RString.EMPTY, RString.EMPTY, 帳票名);
+        IOutputOrder outputOrder = null;
+        if (!RString.isNullOrEmpty(出力順ID)) {
+            outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 納入通知書_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        }
+        load代行プリント送付票(調定年度, 賦課年度, 代行プリント送付票_帳票ID, 発行日, 出力期, 納入通知書対象者, 生活保護者先頭出力区分, 山分け区分,
+                帳票制御共通 == null ? null : 帳票制御共通.toEntity(), 地方公共団体, outputOrder, new Decimal(出力ページ数.toString()));
+        loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_あり, CSVファイル名_納入一覧表, 帳票名);
     }
 
     /**
@@ -924,12 +929,12 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
 
         RString 出力順 = get出力順(納入通知書_帳票分類ID, 出力順ID);
         RStringBuilder orderByClause = new RStringBuilder(ソート);
-        if (定値区分_1.equals(生活保護者先頭出力区分)) {
+        if (定値区分_0.equals(生活保護者先頭出力区分)) {
             orderByClause.append(RString.HALF_SPACE.concat(FORMAT).concat(定値_生活保護区分).concat(FORMAT).concat(RString.HALF_SPACE)
                     .concat(ソート順_降順).concat(カンマ)
                     .concat(RString.HALF_SPACE).concat(FORMAT).concat(口座区分).concat(FORMAT)
                     .concat(RString.HALF_SPACE).concat(ソート順_昇順));
-        } else if (定値区分_0.equals(生活保護者先頭出力区分)) {
+        } else if (定値区分_1.equals(生活保護者先頭出力区分)) {
             orderByClause.append(RString.HALF_SPACE.concat(FORMAT).concat(口座区分).concat(FORMAT)
                     .concat(RString.HALF_SPACE).concat(ソート順_昇順));
         }
@@ -949,15 +954,14 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         }
         Map<String, RString> 普徴期情報 = get普徴期情報(出力期);
         IHonsanteiTsuchishoIkkatsuHakkoMapper mapper = mapperProvider.create(IHonsanteiTsuchishoIkkatsuHakkoMapper.class);
-        TsuchishoHakkogoIdoshaNonyuInsertParameter parameter
-                = TsuchishoHakkogoIdoshaNonyuInsertParameter.createSelectByKeyParam(出力期AsInt, 計算後情報_口座区分,
-                        普徴期情報.get(キー_処理対象.toString()), 普徴期情報.get(キー_通知書プリント条件.toString()), 出力順, 帳票作成日時, 帳票ID);
-        List<HonsanteiTsuchishoTempEntity> entityList = mapper.select納入通知書発行後異動者(parameter);
+        PrtNonyuTsuchishoParameter parameter = PrtNonyuTsuchishoParameter.createSelectByKeyParam(出力期AsInt, 計算後情報_口座区分,
+                普徴期情報.get(キー_処理対象.toString()), 普徴期情報.get(キー_通知書プリント条件.toString()), 出力順);
+        List<HonsanteiTsuchishoTempEntity> entityList = mapper.select納入通知書(parameter);
         insert通知書発行後異動者(帳票作成日時, 帳票ID, entityList);
     }
 
     /**
-     * 発行日を取得メソッドです。
+     * 出力期リストを取得メソッドです。
      *
      * @param 出力期 RString
      * @return 出力期リスト List<Kitsuki>
@@ -1003,45 +1007,39 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         builder.append(定数_出力条件);
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append(定数_発行日);
-        builder.append(FORMAT_LEFT.concat(定数_発行日).concat(FORMAT_RIGHT).concat(発行日.wareki().toDateString()));
+        builder.append(FORMAT_LEFT.concat(定数_発行日).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE).concat(発行日.wareki().toDateString()));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append(定数_出力期);
-        builder.append(FORMAT_LEFT.concat(定数_出力期).concat(FORMAT_RIGHT).concat(RString.isNullOrEmpty(出力期) ? RString.EMPTY : 出力期));
+        builder.append(FORMAT_LEFT.concat(定数_出力期).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
+                .concat(RString.isNullOrEmpty(出力期) ? RString.EMPTY : 出力期));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append(定数_対象者);
-        builder.append(FORMAT_LEFT.concat(定数_対象者).concat(FORMAT_RIGHT)
+        builder.append(FORMAT_LEFT.concat(定数_対象者).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
                 .concat(NotsuKozaShutsuryokuTaisho.toValue(納入通知書対象者).get名称()));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append(定数_生活保護対象者をまとめて先頭に出力);
-        //TODO 仕様確認 :生活保護対象者をまとめて先頭に出力
         if (定値区分_0.equals(生活保護者先頭出力区分)) {
             builder.append(FORMAT_LEFT.concat(定数_生活保護対象者をまとめて先頭に出力).concat(FORMAT_RIGHT)
-                    .concat(定値_する));
+                    .concat(RString.FULL_SPACE).concat(定値_する));
         } else if (定値区分_1.equals(生活保護者先頭出力区分)) {
             builder.append(FORMAT_LEFT.concat(定数_生活保護対象者をまとめて先頭に出力).concat(FORMAT_RIGHT)
-                    .concat(定値_しない));
+                    .concat(RString.FULL_SPACE).concat(定値_しない));
         }
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append(定数_ページごとに山分け);
-        //TODO 仕様確認 :ページごとに山分け
         if (定値区分_0.equals(山分け区分)) {
             builder.append(FORMAT_LEFT.concat(定数_ページごとに山分け).concat(FORMAT_RIGHT)
-                    .concat(定値_する));
+                    .concat(RString.FULL_SPACE).concat(定値_する));
         } else if (定値区分_1.equals(山分け区分)) {
             builder.append(FORMAT_LEFT.concat(定数_ページごとに山分け).concat(FORMAT_RIGHT)
-                    .concat(定値_しない));
+                    .concat(RString.FULL_SPACE).concat(定値_しない));
         }
         出力条件リスト.add(builder.toRString());
 
         return 出力条件リスト;
     }
 
-    private List<Kitsuki> get期月リスト(FlexibleYear 調定年度, RString 別々に出力区分, RString 帳票タイプ,
+    private List<NokiJoho> get期月リスト(FlexibleYear 調定年度, RString 別々に出力区分, RString 帳票タイプ,
             KitsukiList 期月リスト_普徴, KitsukiList 本算定期間, int 出力期AsInt) {
 
         ChohyoSeigyoHanyo 当初出力_中期開始期 = load帳票制御汎用ByKey(納入通知書_帳票分類ID, 調定年度, 項目名出力期_中期);
@@ -1071,22 +1069,29 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         }
         KitsukiList 期月リスト = 期月リスト_普徴.subListBy期(出力期AsInt, 最終期);
         List<Kitsuki> 期月List = 期月リスト.toList();
+        List<NokiJoho> 普徴納期情報リスト = new ArrayList<>();
         for (Kitsuki 期月 : 期月List) {
-            boolean 区分 = false;
-            for (Noki 普徴納期 : 普徴納期List) {
-                if (期月.get期AsInt() == 普徴納期.get期別()) {
-                    区分 = true;
-                    break;
-                }
-            }
-            if (!区分) {
-                期月List.remove(期月);
-            }
+            NokiJoho 普徴納期情報 = new NokiJoho();
+            普徴納期情報.set期月(期月);
+            普徴納期情報.set納期(get納期By期月(期月, 普徴納期List));
+            普徴納期情報リスト.add(普徴納期情報);
         }
-        return 期月List;
+        return 普徴納期情報リスト;
     }
 
-    private int get山分け用スプール数(RString 帳票タイプ, List<Kitsuki> 期月List, KitsukiList 本算定期間,
+    private Noki get納期By期月(Kitsuki 期月, List<Noki> 賦課納期) {
+        if (null == 賦課納期 || null == 期月) {
+            return null;
+        }
+        for (Noki 納期 : 賦課納期) {
+            if (期月.get期AsInt() == 納期.get期別()) {
+                return 納期;
+            }
+        }
+        return null;
+    }
+
+    private int get山分け用スプール数(RString 帳票タイプ, List<NokiJoho> 期月List, KitsukiList 本算定期間,
             int 出力期AsInt, RString 山分け区分) {
 
         int 山分け用スプール数 = 0;
@@ -1106,13 +1111,10 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         return 山分け用スプール数;
     }
 
-    private int get山分け用スプール数_銀振型(List<Kitsuki> 期月List, KitsukiList 本算定期間) {
+    private int get山分け用スプール数_銀振型(List<NokiJoho> 期月List, KitsukiList 本算定期間) {
         int 山分け用スプール数 = 0;
-        //TODO filtered本算定期間()でフィルタした銀振計算期月リストを取得する?
         List<Kitsuki> 銀振計算期月リスト = 本算定期間.toList();
         int 最初の月 = 銀振計算期月リスト.get(銀振計算期月リスト.size() - INT_1).get月AsInt();
-        //TODO 仕様確認
-        int 最後の月 = 銀振計算期月リスト.get(INT_0).get月AsInt();
         RString 印字位置 = get印字位置(最初の月);
         boolean is昇順 = false;
         if (定値区分_1.equals(印字位置)) {
@@ -1120,22 +1122,22 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         } else if (INT_1 < Integer.parseInt(印字位置.toString())) {
             is昇順 = false;
         }
-        for (Kitsuki 期月 : 期月List) {
-            if (定値区分_0.equals(get印字位置(期月.get月AsInt()))) {
+        for (NokiJoho 期月 : 期月List) {
+            if (定値区分_0.equals(get印字位置(期月.get期月().get月AsInt()))) {
                 期月List.remove(期月);
             }
         }
         if (is昇順) {
             for (int i = 0; i < 期月List.size() - 1; i++) {
-                if (Integer.parseInt(get印字位置(期月List.get(i).get月AsInt()).toString())
-                        < Integer.parseInt(get印字位置(期月List.get(i + INT_1).get月AsInt()).toString())) {
+                if (Integer.parseInt(get印字位置(期月List.get(i).get期月().get月AsInt()).toString())
+                        < Integer.parseInt(get印字位置(期月List.get(i + INT_1).get期月().get月AsInt()).toString())) {
                     山分け用スプール数 = 山分け用スプール数 + 1;
                 }
             }
         } else {
             for (int i = 期月List.size() - 1; 0 < i; i--) {
-                if (Integer.parseInt(get印字位置(期月List.get(i).get月AsInt()).toString())
-                        < Integer.parseInt(get印字位置(期月List.get(i - INT_1).get月AsInt()).toString())) {
+                if (Integer.parseInt(get印字位置(期月List.get(i).get期月().get月AsInt()).toString())
+                        < Integer.parseInt(get印字位置(期月List.get(i - INT_1).get期月().get月AsInt()).toString())) {
                     山分け用スプール数 = 山分け用スプール数 + 1;
                 }
             }
@@ -1143,12 +1145,12 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         return 山分け用スプール数;
     }
 
-    private int get山分け用スプール数_ブック(int 出力期AsInt, List<Kitsuki> 期月List) {
+    private int get山分け用スプール数_ブック(int 出力期AsInt, List<NokiJoho> 期月List) {
 
         int ブック開始位置 = 0;
-        for (Kitsuki 期月 : 期月List) {
-            if (出力期AsInt == 期月.get期AsInt()) {
-                ブック開始位置 = Integer.parseInt(getブック開始位置(期月.get月AsInt()).toString());
+        for (NokiJoho 期月 : 期月List) {
+            if (出力期AsInt == 期月.get期月().get期AsInt()) {
+                ブック開始位置 = Integer.parseInt(getブック開始位置(期月.get期月().get月AsInt()).toString());
             }
         }
         int 出力期リスト_サイズ = 期月List.size();
@@ -1183,12 +1185,12 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         }
     }
 
-    private int get山分け用スプール数_コンビニ(int 出力期AsInt, List<Kitsuki> 期月List) {
+    private int get山分け用スプール数_コンビニ(int 出力期AsInt, List<NokiJoho> 期月List) {
         int 山分け用スプール数 = 0;
         int コンビニカット印字位置 = 0;
-        for (Kitsuki 期月 : 期月List) {
-            if (出力期AsInt == 期月.get期AsInt()) {
-                コンビニカット印字位置 = Integer.parseInt(getコンビニカット印字位置(期月.get月AsInt()).toString());
+        for (NokiJoho 期月 : 期月List) {
+            if (出力期AsInt == 期月.get期月().get期AsInt()) {
+                コンビニカット印字位置 = Integer.parseInt(getコンビニカット印字位置(期月.get期月().get月AsInt()).toString());
             }
         }
         if (コンビニカット印字位置 == 1) {
@@ -1240,40 +1242,40 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         RString 設定値 = RString.EMPTY;
         RDate 運用日 = RDate.getNowDate();
         switch (月) {
-            case INT_1:
+            case INT_4:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置1, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_2:
+            case INT_5:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置2, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_3:
+            case INT_6:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置3, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_4:
+            case INT_7:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置4, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_5:
+            case INT_8:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置5, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_6:
+            case INT_9:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置6, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_7:
+            case INT_10:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置7, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_8:
+            case INT_11:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置8, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_9:
+            case INT_12:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置9, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_10:
+            case INT_1:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置10, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_11:
+            case INT_2:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置11, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_12:
+            case INT_3:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置12, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case INT_14:
@@ -1293,40 +1295,40 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         RString 設定値 = RString.EMPTY;
         RDate 運用日 = RDate.getNowDate();
         switch (月) {
-            case INT_1:
+            case INT_4:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置1, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_2:
+            case INT_5:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置2, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_3:
+            case INT_6:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置3, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_4:
+            case INT_7:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置4, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_5:
+            case INT_8:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置5, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_6:
+            case INT_9:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置6, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_7:
+            case INT_10:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置7, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_8:
+            case INT_11:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置8, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_9:
+            case INT_12:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置9, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_10:
+            case INT_1:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置10, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_11:
+            case INT_2:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置11, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_12:
+            case INT_3:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置12, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case INT_14:
@@ -1483,7 +1485,9 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
             Decimal 更正後_特徴本算定額, RString 徴収方法更正前_特別徴収停止事由コード) {
 
         if (賦課の情報_更正後.get資格喪失日() == null || 賦課の情報_更正後.get資格喪失日().isEmpty()) {
-            if (更正前_普徴特徴仮算定額合計 == 賦課の情報_更正後.get減免前介護保険料_年額()) {
+            if ((更正前_普徴特徴仮算定額合計 == null && 賦課の情報_更正後.get減免前介護保険料_年額() == null)
+                    || (更正前_普徴特徴仮算定額合計 != null
+                    && 更正前_普徴特徴仮算定額合計.equals(賦課の情報_更正後.get減免前介護保険料_年額()))) {
                 return INT_1;
             }
             if (更正前_普徴特徴仮算定額合計 != null && 賦課の情報_更正後.get減免前介護保険料_年額() != null
@@ -1491,18 +1495,27 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
                     && 定値区分_1.equals(get判定結果(賦課の情報_更正後.get減免前介護保険料_年額()))) {
                 return INT_2;
             }
-        } else {
-            if (更正前_普徴特徴仮算定額合計 == 賦課の情報_更正後.get減免前介護保険料_年額()) {
-                return INT_3;
-            }
-            if (更正前_普徴特徴仮算定額合計 != null && 賦課の情報_更正後.get減免前介護保険料_年額() != null
-                    && (更正前_普徴特徴仮算定額合計.compareTo(賦課の情報_更正後.get減免前介護保険料_年額()) == INT_1)
-                    && 定値区分_1.equals(get判定結果(賦課の情報_更正後.get減免前介護保険料_年額()))) {
-                return INT_4;
-            }
-            if (賦課の情報_更正後.get減免前介護保険料_年額() == Decimal.ZERO) {
-                return INT_5;
-            }
+        }
+
+        return get選択通知書No_部分1(賦課の情報_更正後, 更正前_普徴特徴仮算定額合計, 更正前_特徴仮算定額,
+                更正後_特徴本算定額, 徴収方法更正前_特別徴収停止事由コード);
+    }
+
+    private int get選択通知書No_部分1(FukaJoho 賦課の情報_更正後, Decimal 更正前_普徴特徴仮算定額合計, Decimal 更正前_特徴仮算定額,
+            Decimal 更正後_特徴本算定額, RString 徴収方法更正前_特別徴収停止事由コード) {
+
+        if ((更正前_普徴特徴仮算定額合計 == null && 賦課の情報_更正後.get減免前介護保険料_年額() == null)
+                || (更正前_普徴特徴仮算定額合計 != null
+                && 更正前_普徴特徴仮算定額合計.equals(賦課の情報_更正後.get減免前介護保険料_年額()))) {
+            return INT_3;
+        }
+        if (更正前_普徴特徴仮算定額合計 != null && 賦課の情報_更正後.get減免前介護保険料_年額() != null
+                && (更正前_普徴特徴仮算定額合計.compareTo(賦課の情報_更正後.get減免前介護保険料_年額()) == INT_1)
+                && 定値区分_1.equals(get判定結果(賦課の情報_更正後.get減免前介護保険料_年額()))) {
+            return INT_4;
+        }
+        if (Decimal.ZERO.equals(賦課の情報_更正後.get減免前介護保険料_年額())) {
+            return INT_5;
         }
         if (定値区分_1.equals(get判定結果(更正前_特徴仮算定額)) && 定値区分_1.equals(get判定結果(更正後_特徴本算定額))) {
             if (!定値_特別徴収停止事由コード.equals(徴収方法更正前_特別徴収停止事由コード)) {
@@ -1511,7 +1524,7 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
                 return INT_7;
             }
         }
-        return 0;
+        return INT_0;
     }
 
     private int get選択通知書No_部分(FukaJoho 賦課の情報_更正後, Decimal 更正前_特徴仮算定額, Decimal 更正前_普徴仮算定額,
@@ -1609,40 +1622,40 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         RString 設定値 = RString.EMPTY;
         RDate 運用日 = RDate.getNowDate();
         switch (月) {
-            case INT_1:
+            case INT_4:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置1, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_2:
+            case INT_5:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置2, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_3:
+            case INT_6:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置3, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_4:
+            case INT_7:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置4, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_5:
+            case INT_8:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置5, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_6:
+            case INT_9:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置6, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_7:
+            case INT_10:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置7, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_8:
+            case INT_11:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置8, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_9:
+            case INT_12:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置9, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_10:
+            case INT_1:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置10, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_11:
+            case INT_2:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置11, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_12:
+            case INT_3:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置12, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case INT_14:
@@ -1747,6 +1760,19 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
                 出力条件リスト);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();
+    }
+
+    private RString get出力ページ数(SourceDataCollection sourceDataCollection) {
+        if (!sourceDataCollection.iterator().hasNext()) {
+            return 定値区分_0;
+        }
+        int pageCount = 0;
+        Iterator<SourceData> sourceDataList = sourceDataCollection.iterator();
+        while (sourceDataList.hasNext()) {
+            SourceData sourceData = sourceDataList.next();
+            pageCount = pageCount + sourceData.getPageCount();
+        }
+        return new RString(pageCount);
     }
 
     private RString get帳票名_特徴(RString 帳票ID) {
@@ -1939,11 +1965,10 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         return 出力順グループ名;
     }
 
-    private RString nullTOEmpty(RString 項目) {
-        if (項目 == null || 項目.isEmpty()) {
-            return RString.EMPTY;
+    private int checkStyle(int 山分け用スプール数) {
+        if (山分け用スプール数 == 0) {
+            return INT_1;
         }
-        return 項目;
+        return 山分け用スプール数;
     }
-
 }

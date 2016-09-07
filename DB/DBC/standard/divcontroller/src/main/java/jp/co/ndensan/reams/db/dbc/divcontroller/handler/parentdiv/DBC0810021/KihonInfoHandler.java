@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0810021;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.KaigoJigyoshaReturnEntity;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810021.KihonInfoDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
@@ -96,7 +96,7 @@ public class KihonInfoHandler {
         if (設定不可.equals(entity.get明細住所地特例設定区分())) {
             div.getPanelTwo().getBtnKyufuhiMeisaiJutoku().setDisabled(true);
         }
-        if (設定可_任意.equals(entity.get特定疾患施設療養設定区分())
+        if (設定可_任意.equals(entity.get所定疾患施設療養設定区分())
                 && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
             div.getPanelTwo().getBtnKinkyujiShoteiShokan().setDisplayNone(false);
             div.getPanelTwo().getBtnKinkyujiShoteiShokan().setVisible(true);

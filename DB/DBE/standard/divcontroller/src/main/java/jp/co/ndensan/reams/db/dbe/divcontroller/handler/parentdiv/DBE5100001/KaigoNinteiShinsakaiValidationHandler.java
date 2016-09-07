@@ -55,7 +55,7 @@ public class KaigoNinteiShinsakaiValidationHandler {
      */
     public ValidationMessageControlPairs 審査会未選択チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (div.getCcdShinsakaiItiran().get開催番号List().isEmpty()) {
+        if (0 < div.getCcdShinsakaiItiran().get一覧件数() && div.getCcdShinsakaiItiran().get開催番号List().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(
                     new KaigoNinteiShinsakaiValidationHandler.KaigoNinteiShinsakaiMessages(UrErrorMessages.選択されていない, 審査会)));
         }

@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -163,7 +164,7 @@ public class Honsanteifuka {
         if (区分_ゼロ.equals(遷移元区分)) {
             entityList = 処理日付管理Dac.select処理状況_賦課(調定年度);
         } else if (区分_イチ.equals(遷移元区分)) {
-            entityList = 処理日付管理Dac.select処理状況_通知書作成(調定年度);
+            entityList = 処理日付管理Dac.select処理状況_通知書作成(調定年度, ShoriName.本算定賦課.get名称());
         }
         if (entityList == null || entityList.isEmpty()) {
             return new ArrayList<>();
@@ -278,24 +279,20 @@ public class Honsanteifuka {
         for (TyouhyouParameter parameter : parameterList) {
             if (特徴開始通知書_帳票分類ID.equals(parameter.get帳票分類ID())) {
                 BatchTyouhyouResult 特徴開始通知書_帳票ID = get特徴開始通知書_帳票ID(parameter);
-                if (特徴開始通知書_帳票ID != null) {
-                    resultList.add(特徴開始通知書_帳票ID);
-                }
+                resultList.add(特徴開始通知書_帳票ID);
             } else if (決定変更通知書_帳票分類ID.equals(parameter.get帳票分類ID())) {
                 BatchTyouhyouResult 決定通知書_帳票ID = get決定通知書_帳票ID(調定年度, parameter);
-                if (決定通知書_帳票ID != null) {
-                    resultList.add(決定通知書_帳票ID);
-                }
+                resultList.add(決定通知書_帳票ID);
                 BatchTyouhyouResult 変更通知書_帳票ID = get変更通知書_帳票ID(調定年度, parameter);
-                if (変更通知書_帳票ID != null) {
-                    resultList.add(変更通知書_帳票ID);
-                }
+                resultList.add(変更通知書_帳票ID);
             } else if (納入通知書_帳票分類ID.equals(parameter.get帳票分類ID())) {
                 BatchTyouhyouEntity 納入通知書 = get納入通知書_帳票ID(調定年度, 算定期, parameter);
                 if (納入通知書 == null) {
                     throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
                 }
                 resultList.add(new BatchTyouhyouResult(納入通知書));
+            } else {
+                resultList.add(new BatchTyouhyouResult(new BatchTyouhyouEntity(parameter.get帳票分類ID(), null, parameter.get出力順ID())));
             }
         }
         return resultList;

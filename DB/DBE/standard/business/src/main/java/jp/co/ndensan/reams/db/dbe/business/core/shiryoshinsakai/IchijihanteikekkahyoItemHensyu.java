@@ -17,6 +17,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IchijihanteikekkahyoItemHensyu {
 
+    private RString 認知症高齢者の日常生活自立度;
+    private RString 短期記憶;
+    private RString 日常の意思決定を行うための認知能力;
+    private RString 自分の意思の伝達能力;
+    private RString 食事行為;
+    private RString 前回の認知症高齢者の日常生活自立度;
+    private RString 前回の短期記憶;
+    private RString 前回の日常の意思決定を行うための認知能力;
+    private RString 前回の自分の意思の伝達能力;
+    private RString 前回の食事行為;
     private RString 調査結果_麻痺_左_上肢;
     private RString 調査結果_麻痺_右_上肢;
     private RString 調査結果_麻痺_左_下肢;

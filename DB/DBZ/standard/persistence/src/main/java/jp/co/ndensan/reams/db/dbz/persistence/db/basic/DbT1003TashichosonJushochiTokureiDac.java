@@ -26,6 +26,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.lt;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -57,7 +58,7 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
             ShikibetsuCode 識別コード,
             FlexibleDate 異動日,
             RString 枝番) throws NullPointerException {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード_TMP.toString()));
         requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
         requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
 
@@ -139,7 +140,7 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
      */
     @Transaction
     public DbT1003TashichosonJushochiTokureiEntity selectMaxByKey(ShikibetsuCode 識別コード) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード_TMP.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -188,7 +189,7 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
     public List<DbT1003TashichosonJushochiTokureiEntity> select他市町村住所地特例(
             ShikibetsuCode 識別コード,
             FlexibleDate 年齢到達日) throws NullPointerException {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード_TMP.toString()));
         requireNonNull(年齢到達日, UrSystemErrorMessages.値がnull.getReplacedMessage("年齢到達日"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -202,6 +203,56 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
                                         (or(and(leq(tekiyoYMD, 年齢到達日), isNULL(kaijoYMD)),
                                                 and(leq(tekiyoYMD, 年齢到達日), eq(kaijoYMD, ""))))
                                 )),
+                                eq(logicalDeletedFlag, false))).
+                toList(DbT1003TashichosonJushochiTokureiEntity.class);
+    }
+
+    /**
+     * 他特例者チェック１を返します。
+     *
+     * @param 識別コード 識別コード
+     * @param 登録異動年月日 登録異動年月日
+     * @return List<DbT1003TashichosonJushochiTokureiEntity>
+     */
+    @Transaction
+    public List<DbT1003TashichosonJushochiTokureiEntity> select他特例者チェック1(FlexibleDate 登録異動年月日, ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード_TMP.toString()));
+        requireNonNull(登録異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("登録異動年月日"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1003TashichosonJushochiTokurei.class).
+                where(
+                        or(and(eq(shikibetsuCode, 識別コード),
+                                        leq(tekiyoYMD, 登録異動年月日),
+                                        lt(登録異動年月日, kaijoYMD),
+                                        eq(logicalDeletedFlag, false)),
+                                and(eq(shikibetsuCode, 識別コード),
+                                        leq(tekiyoYMD, 登録異動年月日),
+                                        isNULL(kaijoYMD),
+                                        eq(logicalDeletedFlag, false))
+                        )).
+                toList(DbT1003TashichosonJushochiTokureiEntity.class);
+    }
+
+    /**
+     * 他特例者チェック2を返します。
+     *
+     * @param 識別コード 識別コード
+     * @param 登録異動年月日 登録異動年月日
+     * @return List<DbT1003TashichosonJushochiTokureiEntity>
+     */
+    @Transaction
+    public List<DbT1003TashichosonJushochiTokureiEntity> select他特例者チェック2(FlexibleDate 登録異動年月日, ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード_TMP.toString()));
+        requireNonNull(登録異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("登録異動年月日"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1003TashichosonJushochiTokurei.class).
+                where(
+                        and(eq(shikibetsuCode, 識別コード),
+                                lt(登録異動年月日, tekiyoYMD),
                                 eq(logicalDeletedFlag, false))).
                 toList(DbT1003TashichosonJushochiTokureiEntity.class);
     }

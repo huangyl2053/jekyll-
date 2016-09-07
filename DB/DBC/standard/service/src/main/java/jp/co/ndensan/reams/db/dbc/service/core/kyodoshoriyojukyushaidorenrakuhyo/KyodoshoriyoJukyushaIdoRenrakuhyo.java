@@ -37,14 +37,21 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 共同処理用受給者異動連絡票のビジネス
@@ -94,8 +101,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KyodoshoriyoJukyushaIdoRenrakuhyo}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KyodoshoriyoJukyushaIdoRenrakuhyo}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KyodoshoriyoJukyushaIdoRenrakuhyo}のインスタンス
      */
     public static KyodoshoriyoJukyushaIdoRenrakuhyo createInstance() {
         return InstanceProvider.create(KyodoshoriyoJukyushaIdoRenrakuhyo.class);
@@ -148,8 +154,12 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
         KyoutuuEntity 共通項目Entity = new KyoutuuEntity();
-        if (DonyuKeitaiCode.事務単一.getCode().equals(市町村セキュリティ情報.get導入形態コード().value())
-                || DonyuKeitaiCode.事務構成市町村.getCode().equals(市町村セキュリティ情報.get導入形態コード().value())) {
+        Code 導入形態 = 市町村セキュリティ情報.get導入形態コード();
+        if (導入形態 == null) {
+            return null;
+        }
+        if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態.value())
+                || DonyuKeitaiCode.事務構成市町村.getCode().equals(導入形態.value())) {
             SearchResult<KoikiZenShichosonJoho> result = finder.koseiShichosonJoho();
             if (result.records() == null || result.records().isEmpty()) {
                 return null;
@@ -188,8 +198,9 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
 
         DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity 基本情報Entity = new DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
         if (宛名 != null) {
-            if (宛名.get名称().getName() != null && !宛名.get名称().getName().isEmpty()) {
-                基本情報Entity.setHiHokenshaName(宛名.get名称().getName().value());
+            AtenaMeisho name = 宛名.get名称().getName();
+            if (name != null && !name.isEmpty()) {
+                基本情報Entity.setHiHokenshaName(name.value());
             }
             基本情報Entity.setTelNo(宛名.get連絡先１());
             基本情報Entity.setYubinNo(宛名.get住所().get郵便番号());
@@ -245,50 +256,199 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
             共通項目Entity.set異動事由(dbT3004Entity.getJukyushaIdoJiyu());
         }
         entity.set共通項目Entity(共通項目Entity);
-
         if (dbT3002Entity != null) {
-            DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity 基本情報Entity = new DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
-            基本情報Entity.setIdoYMD(dbT3002Entity.getIdoYMD());
-            基本情報Entity.setRirekiNo(dbT3002Entity.getRirekiNo());
-            基本情報Entity.setHiHokenshaName(dbT3002Entity.getHiHokenshaName());
-            基本情報Entity.setTelNo(dbT3002Entity.getTelNo());
-            基本情報Entity.setYubinNo(dbT3002Entity.getYubinNo());
-            基本情報Entity.setAddress(dbT3002Entity.getAddress());
-            基本情報Entity.setDdressKana(dbT3002Entity.getDdressKana());
-            基本情報Entity.setChohyoOutputJunjyoCode(dbT3002Entity.getChohyoOutputJunjyoCode());
-            基本情報Entity.setTeiseiKubunCode(dbT3002Entity.getTeiseiKubunCode());
-            基本情報Entity.setTeiseiYMD(dbT3002Entity.getTeiseiYMD());
-
-            KyodoShoriyoJukyushaIdoKihonSofu 基本情報 = new KyodoShoriyoJukyushaIdoKihonSofu(基本情報Entity);
+            KyodoShoriyoJukyushaIdoKihonSofu 基本情報 = new KyodoShoriyoJukyushaIdoKihonSofu(dbT3002Entity);
             entity.set基本情報Entity(基本情報);
         }
-
         if (dbT3003Entity != null) {
-            DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity 償還情報Entity = new DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity();
-            償還情報Entity.setIdoYMD(dbT3003Entity.getIdoYMD());
-            償還情報Entity.setRirekiNo(dbT3003Entity.getRirekiNo());
-            償還情報Entity.setHokenKyufuIchijiSashitomeKaishiYMD(dbT3003Entity.getHokenKyufuIchijiSashitomeKaishiYMD());
-            償還情報Entity.setHokenKyufuIchijiSashitomeShuryoYMD(dbT3003Entity.getHokenKyufuIchijiSashitomeShuryoYMD());
-            償還情報Entity.setHokenkyufuIchijiSashitomeKubunCode(dbT3003Entity.getHokenkyufuIchijiSashitomeKubunCode());
-            償還情報Entity.setHokenkyufuIchijiSashitomeKingaku(dbT3003Entity.getHokenkyufuIchijiSashitomeKingaku());
-            KyodoShoriyoJukyushaIdoShokanSofu 償還情報 = new KyodoShoriyoJukyushaIdoShokanSofu(償還情報Entity);
+            KyodoShoriyoJukyushaIdoShokanSofu 償還情報 = new KyodoShoriyoJukyushaIdoShokanSofu(dbT3003Entity);
             entity.set償還情報Entity(償還情報);
         }
-
         if (dbT3004Entity != null) {
-            DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity 高額情報Entity = new DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity();
-            高額情報Entity.setIdoYMD(dbT3004Entity.getIdoYMD());
-            高額情報Entity.setRirekiNo(dbT3004Entity.getRirekiNo());
-            高額情報Entity.setSetaiShuyakuNo(dbT3004Entity.getSetaiShuyakuNo());
-            高額情報Entity.setSetaiShotokuKubunCode(dbT3004Entity.getSetaiShotokuKubunCode());
-            高額情報Entity.setShotokuKubunCode(dbT3004Entity.getShotokuKubunCode());
-            高額情報Entity.setRiyoshaFutan2DankaiAriFlag(dbT3004Entity.getRiyoshaFutan2DankaiAriFlag());
-            高額情報Entity.setRoureiFukushiNenkinJukyuAriFlag(dbT3004Entity.getRoureiFukushiNenkinJukyuAriFlag());
-            高額情報Entity.setShikyuShinseishoOutputAriFlag(dbT3004Entity.getShikyuShinseishoOutputAriFlag());
-            KyodoShoriyoJukyushaIdoKogakuSofu 高額情報 = new KyodoShoriyoJukyushaIdoKogakuSofu(高額情報Entity);
+            KyodoShoriyoJukyushaIdoKogakuSofu 高額情報 = new KyodoShoriyoJukyushaIdoKogakuSofu(dbT3004Entity);
             entity.set高額情報Entity(高額情報);
         }
 
         return entity;
+    }
+
+    /**
+     * 識別コードを取得です。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return 識別コード
+     */
+    public ShikibetsuCode get識別コード(HihokenshaNo 被保険者番号) {
+        ShikibetsuCode 識別コード = ShikibetsuCode.EMPTY;
+        DbV1001HihokenshaDaichoEntity entity = 被保険者台帳管理Dac.get最新の被保険者台帳情報(被保険者番号);
+        if (entity != null) {
+            識別コード = entity.getShikibetsuCode();
+        }
+        return 識別コード;
+    }
+
+    /**
+     * 基本送付情報を追加するチェックボックスがチェックONの場合
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 FlexibleDate
+     * @return int
+     */
+    public int 基本送付情報の異動日チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        return dbT3002dac.select基本送付情報の異動日Count(被保険者番号, 異動日);
+    }
+
+    /**
+     * 償還送付情報を追加するチェックボックスがチェックONの場合
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 FlexibleDate
+     * @return int
+     */
+    public int 償還送付情報の異動日チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        return dbT3003dac.select償還送付情報の異動日Count(被保険者番号, 異動日);
+    }
+
+    /**
+     * 高額送付情報を追加するチェックボックスがチェックONの場合
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 FlexibleDate
+     * @return int
+     */
+    public int 高額送付情報の異動日チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        return dbT3004dac.select高額送付情報の異動日Count(被保険者番号, 異動日);
+    }
+
+    /**
+     * 基本送付情報を追加するチェックボックスがチェックONの場合
+     *
+     * @param 異動日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動区分コード RString
+     * @return int
+     */
+    public int 基本送付情報の異動区分チェック(HihokenshaNo 被保険者番号, RString 異動区分コード, FlexibleDate 異動日) {
+        return dbT3002dac.select基本送付情報の異動区分Count(被保険者番号, 異動区分コード, 異動日);
+    }
+
+    /**
+     * 償還送付情報を追加するチェックボックスがチェックONの場合
+     *
+     * @param 異動日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動区分コード RString
+     * @return int
+     */
+    public int 償還送付情報の異動区分チェック(HihokenshaNo 被保険者番号, RString 異動区分コード, FlexibleDate 異動日) {
+        return dbT3003dac.select償還送付情報の異動区分Count(被保険者番号, 異動区分コード, 異動日);
+    }
+
+    /**
+     * 高額送付情報を追加するチェックボックスがチェックONの場合
+     *
+     * @param 異動日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動区分コード RString
+     * @return int
+     */
+    public int 高額送付情報の異動区分チェック(HihokenshaNo 被保険者番号, RString 異動区分コード, FlexibleDate 異動日) {
+        return dbT3004dac.select高額送付情報の異動区分Count(被保険者番号, 異動区分コード, 異動日);
+    }
+
+    /**
+     * 基本送付情報を追加するチェックボックスがチェックONの場合で、<br>
+     * 画面．基本送付情報エリア．異動日と同一日のデータが共同処理用受給者異動基本送付テーブルにないこと
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 FlexibleDate
+     * @return int
+     */
+    public int 基本送付情報の履歴番号チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        return dbT3002dac.get基本送付情報の履歴番号Max(被保険者番号, 異動日).getRirekiNo();
+    }
+
+    /**
+     * 償還送付情報を追加するチェックボックスがチェックONの場合で、<br>
+     * 画面．償還送付情報エリア．異動日と同一日のデータが共同処理用受給者異動償還送付テーブルにないこと
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 FlexibleDate
+     * @return int
+     */
+    public int 償還送付情報の履歴番号チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        return dbT3003dac.get償還送付情報の履歴番号Max(被保険者番号, 異動日).getRirekiNo();
+    }
+
+    /**
+     * 高額送付情報を追加するチェックボックスがチェックONの場合で、<br>
+     * 画面．高額送付情報エリア．異動日と同一日のデータが共同処理用受給者異動高額送付テーブルにないこと
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 FlexibleDate
+     * @return int
+     */
+    public int 高額送付情報の履歴番号チェック(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        return dbT3004dac.get高額送付情報の履歴番号Max(被保険者番号, 異動日).getRirekiNo();
+    }
+
+    /**
+     * 異動情報の登録のンメソッドます。
+     *
+     * @param 異動基本送付Entity KyodoShoriyoJukyushaIdoKihonSofu
+     * @param 異動償還送付Entity KyodoShoriyoJukyushaIdoShokanSofu
+     * @param 異動高額送付Entity KyodoShoriyoJukyushaIdoKogakuSofu
+     * @throws SystemException 保存処理に失敗した場合
+     * @throws ApplicationException 保存処理に失敗した場合
+     */
+    @Transaction
+    public void save異動情報(KyodoShoriyoJukyushaIdoKihonSofu 異動基本送付Entity,
+            KyodoShoriyoJukyushaIdoShokanSofu 異動償還送付Entity,
+            KyodoShoriyoJukyushaIdoKogakuSofu 異動高額送付Entity) throws SystemException, ApplicationException {
+        if (異動基本送付Entity != null) {
+            DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity dbT3002Entity = 異動基本送付Entity.toEntity();
+            dbT3002Entity.setState(EntityDataState.Added);
+            dbT3002dac.save(dbT3002Entity);
+        }
+        if (異動償還送付Entity != null) {
+            DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity dbT3003Entity = 異動償還送付Entity.toEntity();
+            dbT3003Entity.setState(EntityDataState.Added);
+            dbT3003dac.save(dbT3003Entity);
+        }
+        if (異動高額送付Entity != null) {
+            DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity dbT3004Entity = 異動高額送付Entity.toEntity();
+            dbT3004Entity.setState(EntityDataState.Added);
+            dbT3004dac.save(dbT3004Entity);
+        }
+    }
+
+    /**
+     * 異動情報の更新のンメソッドます。
+     *
+     * @param 異動基本送付Entity KyodoShoriyoJukyushaIdoKihonSofu
+     * @param 異動償還送付Entity KyodoShoriyoJukyushaIdoShokanSofu
+     * @param 異動高額送付Entity KyodoShoriyoJukyushaIdoKogakuSofu
+     * @throws SystemException 保存処理に失敗した場合
+     * @throws ApplicationException 保存処理に失敗した場合
+     */
+    @Transaction
+    public void update異動情報(KyodoShoriyoJukyushaIdoKihonSofu 異動基本送付Entity,
+            KyodoShoriyoJukyushaIdoShokanSofu 異動償還送付Entity,
+            KyodoShoriyoJukyushaIdoKogakuSofu 異動高額送付Entity) throws SystemException, ApplicationException {
+        if (異動基本送付Entity != null) {
+            DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity dbT3002Entity = 異動基本送付Entity.toEntity();
+            dbT3002Entity.setState(EntityDataState.Modified);
+            dbT3002dac.save(dbT3002Entity);
+        }
+        if (異動償還送付Entity != null) {
+            DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity dbT3003Entity = 異動償還送付Entity.toEntity();
+            dbT3003Entity.setState(EntityDataState.Modified);
+            dbT3003dac.save(dbT3003Entity);
+        }
+        if (異動高額送付Entity != null) {
+            DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity dbT3004Entity = 異動高額送付Entity.toEntity();
+            dbT3004Entity.setState(EntityDataState.Modified);
+            dbT3004dac.save(dbT3004Entity);
+        }
     }
 }

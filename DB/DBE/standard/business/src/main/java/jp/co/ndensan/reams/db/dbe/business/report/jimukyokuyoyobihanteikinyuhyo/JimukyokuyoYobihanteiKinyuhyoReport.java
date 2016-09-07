@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.jimukyokuyoyobihanteikinyuhyo;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.jimukyokuyoyobihanteikinyuhyo.JimukyokuyoYobihanteiKinyuhyoEntity;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuYobihanteiKinyuhyoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyoyobihanteikinyuhyo.JimukyokuyoYobihanteiKinyuhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,21 +17,21 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class JimukyokuyoYobihanteiKinyuhyoReport extends Report<JimukyokuyoYobihanteiKinyuhyoReportSource> {
 
-    private final JimukyokuyoYobihanteiKinyuhyoEntity data;
+    private final JimuYobihanteiKinyuhyoBusiness business;
 
     /**
      * インスタンスを生成します。
      *
-     * @param data 申請に関する帳票発行のdata
+     * @param business 申請に関する帳票発行
      */
-    public JimukyokuyoYobihanteiKinyuhyoReport(JimukyokuyoYobihanteiKinyuhyoEntity data) {
-        this.data = data;
+    public JimukyokuyoYobihanteiKinyuhyoReport(JimuYobihanteiKinyuhyoBusiness business) {
+        this.business = business;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<JimukyokuyoYobihanteiKinyuhyoReportSource> reportSourceWriter) {
 
-        IJimukyokuyoYobihanteiKinyuhyoEditor editor = new JimukyokuyoYobihanteiKinyuhyoEditor(data);
+        IJimukyokuyoYobihanteiKinyuhyoEditor editor = new JimukyokuyoYobihanteiKinyuhyoEditor(business);
         IJimukyokuyoYobihanteiKinyuhyoBuilder builder = new JimukyokuyoYobihanteiKinyuhyoBuilder(editor);
         reportSourceWriter.writeLine(builder);
 

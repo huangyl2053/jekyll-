@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosatokkiimage.NinteiChosaTokkiImageReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.yokaigoninteijohoteikyo.YokaigoBatchProcessParamter;
-import jp.co.ndensan.reams.db.dbe.entity.db.ninteichosatokkiimage.NinteiChosaTokkiImageEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokkiimage.NinteiChosaTokkiImageEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.NinteichosaRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.YokaigoninteiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosatokkiimage.NinteiChosaTokkiImageReportSource;
@@ -67,7 +67,6 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
     private ReportSourceWriter<NinteiChosaTokkiImageReportSource> reportSourceWriter;
     private static final RString CSV出力有無 = new RString("なし");
     private static final RString CSVファイル名 = new RString("-");
-    private static final RString ジョブ番号 = new RString("【ジョブ番号】");
     private static final RString フラグ = new RString("1");
     private static final RString 認定調査票チェックフラグ = new RString("【認定調査票チェックフラグ】");
     private static final RString 特記事項チェックフラグ = new RString("【特記事項チェックフラグ】");
@@ -778,13 +777,13 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
             if (フラグ.equals(processPrm.getRadTokkiJikoMasking())) {
                 imagePath = getFilePath(イメージID, fileName);
             } else {
-                imagePath = getFilePath(イメージID, fileName.replace(".png", "_BAK.png"));
+                imagePath = getFilePathBak(イメージID, fileName.replace(".png", "_BAK.png"));
             }
         }
         return imagePath;
     }
 
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+    private RString getFilePathBak(RDateTime sharedFileId, RString sharedFileName) {
         RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
@@ -792,10 +791,27 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         try {
             SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
         } catch (Exception e) {
-            ReadOnlySharedFileEntryDescriptor descriptor_BAK
-                    = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName.replace(".png", "_BAK.png")), sharedFileId);
-            SharedFile.copyToLocal(descriptor_BAK, new FilesystemPath(imagePath));
-            return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName.replace(".png", "_BAK.png"));
+            return RString.EMPTY;
+        }
+        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
+    }
+
+    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
+        ReadOnlySharedFileEntryDescriptor descriptor
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
+                        sharedFileId);
+        ReadOnlySharedFileEntryDescriptor descriptor_BAK
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName.replace(".png", "_BAK.png")), sharedFileId);
+        try {
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        } catch (Exception e) {
+            try {
+                SharedFile.copyToLocal(descriptor_BAK, new FilesystemPath(imagePath));
+                return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName.replace(".png", "_BAK.png"));
+            } catch (Exception ex) {
+                return RString.EMPTY;
+            }
         }
         return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
     }
@@ -805,23 +821,23 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         if (連番 < 特記事項区分.size()) {
             if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
                     && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(bodyItem.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku09B.toValue(特記事項区分.get(連番).get特記事項番号()).get名称();
+                名称 = NinteichosaKomoku09B.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
             }
             if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
                     && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(bodyItem.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku09A.toValue(特記事項区分.get(連番).get特記事項番号()).get名称();
+                名称 = NinteichosaKomoku09A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
             }
             if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
                     && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(bodyItem.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku06A.toValue(特記事項区分.get(連番).get特記事項番号()).get名称();
+                名称 = NinteichosaKomoku06A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
             }
             if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
                     && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(bodyItem.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku02A.toValue(特記事項区分.get(連番).get特記事項番号()).get名称();
+                名称 = NinteichosaKomoku02A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
             }
             if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
                     && KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(bodyItem.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku99A.toValue(特記事項区分.get(連番).get特記事項番号()).get名称();
+                名称 = NinteichosaKomoku99A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
             }
         }
         return 名称;
@@ -956,7 +972,7 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
                         ReportIdDBE.DBE091003.getReportId().value(),
                         association.getLasdecCode_().getColumnValue(),
                         association.get市町村名(),
-                        ジョブ番号.concat(String.valueOf(JobContextHolder.getJobId())),
+                        new RString(JobContextHolder.getJobId()),
                         ReportInfo.getReportName(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE091003.getReportId().value()),
                         new RString(String.valueOf(reportSourceWriter.pageCount().value())),
                         CSV出力有無,

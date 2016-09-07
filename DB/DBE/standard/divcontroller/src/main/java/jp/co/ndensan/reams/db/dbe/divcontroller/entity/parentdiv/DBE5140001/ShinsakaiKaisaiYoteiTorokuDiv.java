@@ -4,17 +4,26 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * ShinsakaiKaisaiYoteiToroku のクラスファイル 
- * 
+ * ShinsakaiKaisaiYoteiToroku のクラスファイル
+ *
  * @author 自動生成
+ * ShinsakaiKaisaiYoteiToroku のクラスファイル。
  */
 public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -28,6 +37,8 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     private ShinsakaiKaisaiGogitaiJohoIchranDiv ShinsakaiKaisaiGogitaiJohoIchran;
     @JsonProperty("ShinsakaiKaisaiGogitaiJoho")
     private ShinsakaiKaisaiGogitaiJohoDiv ShinsakaiKaisaiGogitaiJoho;
+    @JsonProperty("ccdKanryoMessege")
+    private KanryoMessageDiv ccdKanryoMessege;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -90,6 +101,15 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     /*
+     * getccdKanryoMessege
+     * @return ccdKanryoMessege
+     */
+    @JsonProperty("ccdKanryoMessege")
+    public IKanryoMessageDiv getCcdKanryoMessege() {
+        return ccdKanryoMessege;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -98,7 +118,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblHyojiMonth(Label lblHyojiMonth) {
+    public void setLblHyojiMonth(Label lblHyojiMonth) {
         this.getShinsakaiKaisaiYoteiIchiran().setLblHyojiMonth(lblHyojiMonth);
     }
 
@@ -108,7 +128,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnMonthBefore(Button btnMonthBefore) {
+    public void setBtnMonthBefore(Button btnMonthBefore) {
         this.getShinsakaiKaisaiYoteiIchiran().setBtnMonthBefore(btnMonthBefore);
     }
 
@@ -118,7 +138,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblMonth2(Label lblMonth2) {
+    public void setLblMonth2(Label lblMonth2) {
         this.getShinsakaiKaisaiYoteiIchiran().setLblMonth2(lblMonth2);
     }
 
@@ -128,7 +148,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnRight(Button btnRight) {
+    public void setBtnRight(Button btnRight) {
         this.getShinsakaiKaisaiYoteiIchiran().setBtnRight(btnRight);
     }
 
@@ -138,7 +158,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblMonth(Label lblMonth) {
+    public void setLblMonth(Label lblMonth) {
         this.getShinsakaiKaisaiYoteiIchiran().setLblMonth(lblMonth);
     }
 
@@ -148,7 +168,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgShinsakaiKaisaiYoteiIchiran(DataGrid<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaiKaisaiYoteiIchiran) {
+    public void setDgShinsakaiKaisaiYoteiIchiran(DataGrid<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaiKaisaiYoteiIchiran) {
         this.getShinsakaiKaisaiYoteiIchiran().setDgShinsakaiKaisaiYoteiIchiran(dgShinsakaiKaisaiYoteiIchiran);
     }
 
@@ -158,7 +178,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtCopyFrom(TextBox txtCopyFrom) {
+    public void setTxtCopyFrom(TextBox txtCopyFrom) {
         this.getShinsakaiKaisaiYoteiIchiran().setTxtCopyFrom(txtCopyFrom);
     }
 
@@ -168,7 +188,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblCopyFrom(Label lblCopyFrom) {
+    public void setLblCopyFrom(Label lblCopyFrom) {
         this.getShinsakaiKaisaiYoteiIchiran().setLblCopyFrom(lblCopyFrom);
     }
 
@@ -178,7 +198,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtCopyTo(TextBox txtCopyTo) {
+    public void setTxtCopyTo(TextBox txtCopyTo) {
         this.getShinsakaiKaisaiYoteiIchiran().setTxtCopyTo(txtCopyTo);
     }
 
@@ -188,7 +208,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblCopyTo(Label lblCopyTo) {
+    public void setLblCopyTo(Label lblCopyTo) {
         this.getShinsakaiKaisaiYoteiIchiran().setLblCopyTo(lblCopyTo);
     }
 
@@ -198,7 +218,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnWeekCopy(Button btnWeekCopy) {
+    public void setBtnWeekCopy(Button btnWeekCopy) {
         this.getShinsakaiKaisaiYoteiIchiran().setBtnWeekCopy(btnWeekCopy);
     }
 
@@ -208,7 +228,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKaisaiBangoFuban(Button btnKaisaiBangoFuban) {
+    public void setBtnKaisaiBangoFuban(Button btnKaisaiBangoFuban) {
         this.getShinsakaiKaisaiYoteiIchiran().setBtnKaisaiBangoFuban(btnKaisaiBangoFuban);
     }
 
@@ -218,7 +238,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgShinsakaiKaisaiGogitaiJoho(DataGrid<dgShinsakaiKaisaiGogitaiJoho_Row> dgShinsakaiKaisaiGogitaiJoho) {
+    public void setDgShinsakaiKaisaiGogitaiJoho(DataGrid<dgShinsakaiKaisaiGogitaiJoho_Row> dgShinsakaiKaisaiGogitaiJoho) {
         this.getShinsakaiKaisaiGogitaiJohoIchran().setDgShinsakaiKaisaiGogitaiJoho(dgShinsakaiKaisaiGogitaiJoho);
     }
 
@@ -228,7 +248,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSeteibi(TextBoxDate txtSeteibi) {
+    public void setTxtSeteibi(TextBoxDate txtSeteibi) {
         this.getShinsakaiKaisaiGogitaiJoho().setTxtSeteibi(txtSeteibi);
     }
 
@@ -238,7 +258,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnDayBefore(Button btnDayBefore) {
+    public void setBtnDayBefore(Button btnDayBefore) {
         this.getShinsakaiKaisaiGogitaiJoho().setBtnDayBefore(btnDayBefore);
     }
 
@@ -248,7 +268,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnDayAfter(Button btnDayAfter) {
+    public void setBtnDayAfter(Button btnDayAfter) {
         this.getShinsakaiKaisaiGogitaiJoho().setBtnDayAfter(btnDayAfter);
     }
 
@@ -258,7 +278,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgKaisaiYoteiNyuryokuran(DataGrid<dgKaisaiYoteiNyuryokuran_Row> dgKaisaiYoteiNyuryokuran) {
+    public void setDgKaisaiYoteiNyuryokuran(DataGrid<dgKaisaiYoteiNyuryokuran_Row> dgKaisaiYoteiNyuryokuran) {
         this.getShinsakaiKaisaiGogitaiJoho().setDgKaisaiYoteiNyuryokuran(dgKaisaiYoteiNyuryokuran);
     }
 
@@ -268,7 +288,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnToroku(Button btnToroku) {
+    public void setBtnToroku(Button btnToroku) {
         this.getShinsakaiKaisaiGogitaiJoho().setBtnToroku(btnToroku);
     }
 
@@ -278,7 +298,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnClear(Button btnClear) {
+    public void setBtnClear(Button btnClear) {
         this.getShinsakaiKaisaiGogitaiJoho().setBtnClear(btnClear);
     }
 
@@ -288,7 +308,7 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnShinsakaiIinWaritsuke(Button btnShinsakaiIinWaritsuke) {
+    public void setBtnShinsakaiIinWaritsuke(Button btnShinsakaiIinWaritsuke) {
         this.getShinsakaiKaisaiGogitaiJoho().setBtnShinsakaiIinWaritsuke(btnShinsakaiIinWaritsuke);
     }
 

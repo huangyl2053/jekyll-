@@ -14,10 +14,12 @@ import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7115UwanoseShokanShu
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7115UwanoseShokanShuruiShikyuGendoGaku.tekiyoShuryoYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -35,10 +37,16 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @reamsid_L DBC-9999-012 xicongwang
  */
-public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements ISaveable<DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity> {
+public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements
+        ISaveable<DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity>, IDeletable<DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity> {
 
     @InjectSession
     private SqlSession session;
+    private static final RString 定値_サービス種類コード = new RString("サービス種類コード");
+    private static final RString 定値_適用開始年月 = new RString("適用開始年月");
+    private static final RString 定値_履歴番号 = new RString("履歴番号");
+    private static final RString 定値_上乗せ償還払い給付種類支給限度額エンティティ = new RString("上乗せ償還払い給付種類支給限度額エンティティ");
+    private static final RString 定値_サービス提供年月 = new RString("サービス提供年月");
 
     /**
      * 主キーで上乗せ償還払い給付種類支給限度額を取得します。
@@ -54,9 +62,9 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements ISaveable<D
             ServiceShuruiCode サービス種類コード,
             FlexibleYearMonth 適用開始年月,
             int 履歴番号) throws NullPointerException {
-        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
-        requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_サービス種類コード.toString()));
+        requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_適用開始年月.toString()));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_履歴番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -66,6 +74,31 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements ISaveable<D
                                 eq(serviceShuruiCode, サービス種類コード),
                                 eq(tekiyoKaishiYM, 適用開始年月),
                                 eq(rirekiNo, 履歴番号))).
+                toObject(DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity.class);
+    }
+
+    /**
+     * キーで上乗せ償還払い給付種類支給限度額を取得します。
+     *
+     * @param サービス種類コード ServiceShuruiCode
+     * @param 適用開始年月 TekiyoKaishiYM
+     * @return DbT7112ShokanShuruiShikyuGendoGakuEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity selectByValue(
+            ServiceShuruiCode サービス種類コード,
+            FlexibleYearMonth 適用開始年月) throws NullPointerException {
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_サービス種類コード.toString()));
+        requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_適用開始年月.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7115UwanoseShokanShuruiShikyuGendoGaku.class).
+                where(and(
+                                eq(serviceShuruiCode, サービス種類コード),
+                                eq(tekiyoKaishiYM, 適用開始年月))).
                 toObject(DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity.class);
     }
 
@@ -84,6 +117,22 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements ISaveable<D
     }
 
     /**
+     * 上乗せ償還払い給付種類支給限度額を全件返します。
+     *
+     * @return List<DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity>
+     */
+    @Transaction
+    public List<DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity> selectAllOrder() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7115UwanoseShokanShuruiShikyuGendoGaku.class).order(
+                        by(tekiyoKaishiYM, Order.DESC),
+                        by(serviceShuruiCode, Order.ASC)).
+                toList(DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity.class);
+    }
+
+    /**
      * DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
      * @param entity entity
@@ -92,7 +141,7 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements ISaveable<D
     @Transaction
     @Override
     public int save(DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("上乗せ償還払い給付種類支給限度額エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_上乗せ償還払い給付種類支給限度額エンティティ.toString()));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
@@ -107,8 +156,8 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements ISaveable<D
      */
     @Transaction
     public DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity select支給限度単位数(ServiceShuruiCode サービス種類コード, FlexibleYearMonth サービス提供年月) {
-        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_サービス種類コード.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_サービス提供年月.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -147,5 +196,18 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements ISaveable<D
                                                 leq(サービス提供年月, tekiyoShuryoYM))))).
                 order(by(tekiyoKaishiYM, Order.DESC), by(rirekiNo, Order.DESC)).
                 toList(DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity.class);
+    }
+
+    /**
+     * データを物理削除する
+     *
+     * @param entity DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Override
+    public int delete(DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_上乗せ償還払い給付種類支給限度額エンティティ.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.deletePhysical(entity).execute();
     }
 }

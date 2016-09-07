@@ -42,10 +42,11 @@ public class SanteiIdoGennen {
     private RString 納入_口座振替者;
     private FlexibleDate 納入_発行日;
     private RString 納入_出力方法;
-    private FlexibleDate 納入_出力期;
+    private RString 納入_出力期;
     private RString 納入_生活保護対象者;
     private RString 納入_ページごとに山分け;
     private boolean 一括発行起動フラグ;
     private boolean 随時フラグ;
     private RString 算定期;
+    private boolean 画面移動フラグ;
 }

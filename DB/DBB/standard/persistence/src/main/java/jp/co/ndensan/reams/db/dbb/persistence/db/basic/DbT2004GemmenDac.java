@@ -100,6 +100,18 @@ public class DbT2004GemmenDac implements ISaveable<DbT2004GemmenEntity> {
     }
 
     /**
+     * DbT2004GemmenEntityを削除します。物理削除する。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int delete(DbT2004GemmenEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護賦課減免エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * 主キーで介護賦課減免を取得します。
      *
      * @param 調定年度 ChoteiNendo

@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -25,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護予防・日常生活支援総合事業区分支給限度額のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-3363-010 xuxin
  */
 public class DbT7117SogoJigyoKubunShikyuGendoGakuDac implements ISaveable<DbT7117SogoJigyoKubunShikyuGendoGakuEntity> {
 
@@ -75,6 +79,21 @@ public class DbT7117SogoJigyoKubunShikyuGendoGakuDac implements ISaveable<DbT711
     }
 
     /**
+     * 介護予防・日常生活支援総合事業区分支給限度額適用開始日の降順を全件返します。
+     *
+     * @return List<DbT7117SogoJigyoKubunShikyuGendoGakuEntity>
+     */
+    @Transaction
+    public List<DbT7117SogoJigyoKubunShikyuGendoGakuEntity> selectAllDesc() {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7117SogoJigyoKubunShikyuGendoGaku.class).
+                order(by(DbT7117SogoJigyoKubunShikyuGendoGaku.tekiyoKaishiYM, Order.DESC)).
+                toList(DbT7117SogoJigyoKubunShikyuGendoGakuEntity.class);
+    }
+
+    /**
      * DbT7117SogoJigyoKubunShikyuGendoGakuEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
      * @param entity entity
@@ -86,6 +105,6 @@ public class DbT7117SogoJigyoKubunShikyuGendoGakuDac implements ISaveable<DbT711
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護予防・日常生活支援総合事業区分支給限度額エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
-        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 }

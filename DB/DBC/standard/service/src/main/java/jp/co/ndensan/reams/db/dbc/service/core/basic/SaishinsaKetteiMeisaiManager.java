@@ -61,7 +61,7 @@ public class SaishinsaKetteiMeisaiManager {
         DbT3064SaishinsaKetteiMeisaiEntity entity = dac.selectByKey(
                 取扱年月,
                 保険者区分,
-                履歴番号);
+                履歴番号.intValue());
         if (entity == null) {
             return null;
         }

@@ -10,8 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho1.ShujiiikenshoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.yokaigoninteijohoteikyo.YokaigoBatchProcessParamter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujikensho.ShujiiikenshoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.YokaigoninteiEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.shujiiikensho.ShujiiikenshoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho1.ShujiiikenshoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteijohoteikyo.IYokaigoNinteiJohoTeikyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -63,7 +63,6 @@ public class ChkShujiiIkenshoProcess extends BatchProcessBase<YokaigoninteiEntit
     private static final RString フラグ = new RString("1");
     private static final RString CSV出力有無 = new RString("なし");
     private static final RString CSVファイル名 = new RString("-");
-    private static final RString ジョブ番号 = new RString("【ジョブ番号】");
     private static final RString 認定調査票チェックフラグ = new RString("【認定調査票チェックフラグ】");
     private static final RString 特記事項チェックフラグ = new RString("【特記事項チェックフラグ】");
     private static final RString 主治医意見書チェックフラグ = new RString("【主治医意見書チェックフラグ】");
@@ -151,7 +150,7 @@ public class ChkShujiiIkenshoProcess extends BatchProcessBase<YokaigoninteiEntit
             if (フラグ.equals(processPrm.getRadShujii())) {
                 imagePath = getFilePath(イメージID, FILENAME);
             } else {
-                imagePath = getFilePath(イメージID, FILENAME_BAK);
+                imagePath = getFilePathBak(イメージID, FILENAME_BAK);
             }
         }
         return imagePath;
@@ -163,13 +162,13 @@ public class ChkShujiiIkenshoProcess extends BatchProcessBase<YokaigoninteiEntit
             if (フラグ.equals(processPrm.getRadShujii())) {
                 imagePath = getFilePath(イメージID, FILENAME02);
             } else {
-                imagePath = getFilePath(イメージID, FILENAME_BAK02);
+                imagePath = getFilePathBak(イメージID, FILENAME_BAK02);
             }
         }
         return imagePath;
     }
 
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+    private RString getFilePathBak(RDateTime sharedFileId, RString sharedFileName) {
         RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
@@ -177,10 +176,27 @@ public class ChkShujiiIkenshoProcess extends BatchProcessBase<YokaigoninteiEntit
         try {
             SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
         } catch (Exception e) {
-            ReadOnlySharedFileEntryDescriptor descriptor_BAK
-                    = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName.replace(".png", "_BAK.png")), sharedFileId);
-            SharedFile.copyToLocal(descriptor_BAK, new FilesystemPath(imagePath));
-            return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName.replace(".png", "_BAK.png"));
+            return RString.EMPTY;
+        }
+        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
+    }
+
+    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
+        ReadOnlySharedFileEntryDescriptor descriptor
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
+                        sharedFileId);
+        ReadOnlySharedFileEntryDescriptor descriptor_BAK
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName.replace(".png", "_BAK.png")), sharedFileId);
+        try {
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        } catch (Exception e) {
+            try {
+                SharedFile.copyToLocal(descriptor_BAK, new FilesystemPath(imagePath));
+                return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName.replace(".png", "_BAK.png"));
+            } catch (Exception ex) {
+                return RString.EMPTY;
+            }
         }
         return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
     }
@@ -217,7 +233,7 @@ public class ChkShujiiIkenshoProcess extends BatchProcessBase<YokaigoninteiEntit
                         ReportIdDBE.DBE517151.getReportId().value(),
                         association.getLasdecCode_().getColumnValue(),
                         association.get市町村名(),
-                        ジョブ番号.concat(String.valueOf(JobContextHolder.getJobId())),
+                        new RString(JobContextHolder.getJobId()),
                         ReportInfo.getReportName(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517151.getReportId().value()),
                         new RString(String.valueOf(reportSourceWriter.pageCount().value())),
                         CSV出力有無,

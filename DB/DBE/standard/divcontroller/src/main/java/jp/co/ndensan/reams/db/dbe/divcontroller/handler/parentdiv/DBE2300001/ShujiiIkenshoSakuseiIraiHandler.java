@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -95,9 +96,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             if (申請者.getTemp_被保険者氏名() != null) {
                 row.setHihokennshaShimei(申請者.getTemp_被保険者氏名().value());
             }
-            if (申請者.getTemp_性別() != null) {
-                row.setSeibetsu(Seibetsu.toValue(申請者.getTemp_性別().value()).get名称());
-            }
+            row.setSeibetsu(Seibetsu.toValue(申請者.getTemp_性別().value()).get名称());
             if (申請者.getTemp_認定申請日() != null) {
                 row.getShinseiDay().setValue(new RDate(申請者.getTemp_認定申請日().toString()));
             }
@@ -153,6 +152,8 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             row.setAge(new RString(String.valueOf(申請者.getTemp_年齢())));
             row.setIryoKikanFaxNo(申請者.getTemp_医療機関所FAX());
             row.setShichosonCode(申請者.getTemp_市町村コード() == null ? RString.EMPTY : 申請者.getTemp_市町村コード().value());
+            row.setIryoKikanYubinNo(申請者.getTemp_医療機関郵便番号() == null ? RString.EMPTY : 申請者.getTemp_医療機関郵便番号().value());
+            row.setDaihyoshaName(申請者.getTemp_代表者名());
             申請者一覧.add(row);
         }
         div.getShinseishaIchiran().setIsOpen(true);
@@ -222,12 +223,13 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             parameter.setUseNijiHanteiNinteiYukoKikan(true);
             useNinteiKekkaJoho = true;
         }
-        RString 認定有効な申請時点 = finderDiv.getTxtCheckDay().getValue();
-        if (!RString.isNullOrEmpty(認定有効な申請時点)) {
-            parameter.setYokaiYMD(認定有効な申請時点);
-            parameter.setUseYokaiYMD(true);
-            useNinteiKekkaJoho = true;
-        }
+//TODO sync-24ブランチマージ時 暫定対応
+//        RDate 認定有効な申請時点 = finderDiv.getTxtCheckDay().getValue();
+//        if (認定有効な申請時点 != null) {
+//            parameter.setYokaiYMD(認定有効な申請時点.toDateString());
+//            parameter.setUseYokaiYMD(true);
+//            useNinteiKekkaJoho = true;
+//        }
         FlexibleDate 認定有効開始日FROM = finderDiv.getTxtNinteiYukoKaishiDateFrom().getValue();
         if (認定有効開始日FROM != null && !FlexibleDate.EMPTY.equals(認定有効開始日FROM)) {
             parameter.setNinteiYukoKaishiYMDFrom(認定有効開始日FROM);
@@ -346,9 +348,15 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             useZenkaiNinteiShinseiJoho = true;
         }
         parameter.setUseZenkaiNinteiShinseiJoho(useZenkaiNinteiShinseiJoho);
+//<<<<<<< HEAD
         RString 原因疾患 = finderDiv.getCcdGeninShikkan().getCode().value();
         if (!RString.isNullOrEmpty(原因疾患)) {
             parameter.setGeninShikkanCode(原因疾患);
+//=======
+//        Code 原因疾患 = finderDiv.getCdlGeninShikkanCode().getCode();
+//        if (原因疾患 != null && !原因疾患.isEmpty()) {
+//            parameter.setGeninShikkanCode(原因疾患.value());
+//>>>>>>> origin/sync
             parameter.setUseGeninShikkanCode(true);
             parameter.setUseGeninShikkan(true);
         }
@@ -773,6 +781,8 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             parameter.setNowPhaseNijiHantei(true);
         } else if (KanryoInfoPhase.月例処理.getコード().equals(現在のフェーズ)) {
             parameter.setNowPhaseGetsureiShori(true);
+        } else if (KanryoInfoPhase.調査入手.getコード().equals(現在のフェーズ)) {
+            parameter.setNowPhaseChosaNyushu(true);
         }
     }
 

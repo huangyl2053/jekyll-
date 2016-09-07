@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT3033KyufujissekiShukei implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */
@@ -107,7 +107,7 @@ public enum DbT3033KyufujissekiShukei implements IColumnDefinition {
     /**
      * 保険・単位数単価
      */
-    hokenTanisuTani(6, 0),
+    hokenTanisuTani(4, 0),
     /**
      * 保険・請求額
      */

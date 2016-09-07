@@ -16,7 +16,8 @@ public enum DBD5510001TransitionEventName implements IContainerEvents {
 
     区分変更通知書を発行("区分変更通知書を発行"),
     サービス変更通知書を発行("サービス変更通知書を発行"),
-    一覧へ戻る("一覧へ戻る");
+    一覧へ戻る("一覧へ戻る"),
+    完了("完了");
 
     private final RString name;
 

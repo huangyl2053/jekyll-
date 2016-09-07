@@ -8,6 +8,22 @@ module DBD {
 
         export class Events {
 
+            public static onOkClose_BtnTainoJokyo(): string {
+                return "onOkClose_BtnTainoJokyo";
+            }
+
+            public static onBeforeOpenDialog_BtnTainoJokyo(): string {
+                return "onBeforeOpenDialog_BtnTainoJokyo";
+            }
+
+            public static onClick_BtnKakutei(): string {
+                return "onClick_BtnKakutei";
+            }
+
+            public static onClick_BtnTorikeshi(): string {
+                return "onClick_BtnTorikeshi";
+            }
+
         }
 
         export class Controls {

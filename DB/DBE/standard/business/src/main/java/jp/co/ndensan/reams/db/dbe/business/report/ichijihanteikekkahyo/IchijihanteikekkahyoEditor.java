@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ichijihanteikekkahyo;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.ichijihanteikekkahyoa4.IchijihanteikekkahyoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyoa4.IchijihanteikekkahyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa4.IchijihanteikekkahyoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -32,7 +32,7 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link ShujiiikenshoEntity}
+     * @param item {@link IchijihanteikekkahyoEntity}
      * @param index Index
      */
     protected IchijihanteikekkahyoEditor(IchijihanteikekkahyoEntity item, int index) {

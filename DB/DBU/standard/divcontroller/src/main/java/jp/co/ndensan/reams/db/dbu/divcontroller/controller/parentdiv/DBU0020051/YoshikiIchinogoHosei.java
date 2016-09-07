@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020051.Yosh
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020051.YoshikiIchinogoHoseiCheckHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020051.YoshikiIchinogoHoseiHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
-import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -217,13 +217,26 @@ public class YoshikiIchinogoHosei {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(
                 ViewStateKeys.事業報告基本, JigyoHokokuGeppoParameter.class);
+        List<JigyoHokokuTokeiData> 要介護データリスト = ViewStateHolder.
+                get(ViewStateKeys.要介護データリスト, List.class);
+        List<JigyoHokokuTokeiData> 居宅介護データリスト = ViewStateHolder
+                .get(ViewStateKeys.居宅介護データリスト, List.class);
+        List<JigyoHokokuTokeiData> 地域密着型データリスト = ViewStateHolder
+                .get(ViewStateKeys.地域密着型データリスト, List.class);
+        List<JigyoHokokuTokeiData> 施設介護1データリスト = ViewStateHolder
+                .get(ViewStateKeys.施設介護1データリスト, List.class);
+        List<JigyoHokokuTokeiData> 施設介護2データリスト = ViewStateHolder
+                .get(ViewStateKeys.施設介護2データリスト, List.class);
+        List<JigyoHokokuTokeiData> 施設介護3データリスト = ViewStateHolder
+                .get(ViewStateKeys.施設介護3データリスト, List.class);
         if (削除状態.equals(状態)) {
             if (!ResponseHolder.isReRequest()) {
-                List<RString> 様式種類List11 = ViewStateHolder.get(ViewStateKeys.様式種類_11, List.class);
-                List<RString> 様式種類List21 = ViewStateHolder.get(ViewStateKeys.様式種類_21, List.class);
-                List<RString> 様式種類List31 = ViewStateHolder.get(ViewStateKeys.様式種類_31, List.class);
-                List<RString> 様式種類List41 = ViewStateHolder.get(ViewStateKeys.様式種類_41, List.class);
-                getHandler(div).delete(引き継ぎデータ, 様式種類List11, 様式種類List21, 様式種類List31, 様式種類List41);
+                getHandler(div).delete(要介護データリスト);
+                getHandler(div).delete(居宅介護データリスト);
+                getHandler(div).delete(地域密着型データリスト);
+                getHandler(div).delete(施設介護1データリスト);
+                getHandler(div).delete(施設介護2データリスト);
+                getHandler(div).delete(施設介護3データリスト);
                 div.getPnlKanryo().getCcdKanryoMessage().setSuccessMessage(new RString(
                         UrInformationMessages.正常終了.getMessage().replace(削除状態.toString()).evaluate()));
                 return ResponseData.of(div).setState(DBU0020051StateName.完了状態);
@@ -237,18 +250,6 @@ public class YoshikiIchinogoHosei {
         List<RString> 様式種類List21 = ViewStateHolder.get(ViewStateKeys.様式種類_21, List.class);
         List<RString> 様式種類List31 = ViewStateHolder.get(ViewStateKeys.様式種類_31, List.class);
         List<RString> 様式種類List41 = ViewStateHolder.get(ViewStateKeys.様式種類_41, List.class);
-        List<JigyoHokokuTokeiData> 要介護データリスト = ViewStateHolder.
-                get(ViewStateKeys.要介護データリスト, List.class);
-        List<JigyoHokokuTokeiData> 居宅介護データリスト = ViewStateHolder
-                .get(ViewStateKeys.居宅介護データリスト, List.class);
-        List<JigyoHokokuTokeiData> 地域密着型データリスト = ViewStateHolder
-                .get(ViewStateKeys.地域密着型データリスト, List.class);
-        List<JigyoHokokuTokeiData> 施設介護1データリスト = ViewStateHolder
-                .get(ViewStateKeys.施設介護1データリスト, List.class);
-        List<JigyoHokokuTokeiData> 施設介護2データリスト = ViewStateHolder
-                .get(ViewStateKeys.施設介護2データリスト, List.class);
-        List<JigyoHokokuTokeiData> 施設介護3データリスト = ViewStateHolder
-                .get(ViewStateKeys.施設介護3データリスト, List.class);
         List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データリスト(
                 引き継ぎデータ, 様式種類List11, 様式種類List21, 様式種類List31, 様式種類List41,
                 要介護データリスト, 居宅介護データリスト, 地域密着型データリスト,
@@ -313,6 +314,7 @@ public class YoshikiIchinogoHosei {
                             UrQuestionMessages.処理実行の確認.getMessage().evaluate())).respond();
         }
 
+        ダイアログいいえチェック(予防要支援結果チェック, div, 介護要支援結果チェック, 合計要支援結果チェック);
         if (!ResponseHolder.isReRequest() && !修正データ.isEmpty()) {
             return ResponseData.of(div).addMessage(
                     new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
@@ -327,6 +329,25 @@ public class YoshikiIchinogoHosei {
             return ResponseData.of(div).setState(DBU0020051StateName.完了状態);
         } else {
             return ResponseData.of(div).respond();
+        }
+    }
+
+    private void ダイアログいいえチェック(boolean 予防要支援結果チェック, YoshikiIchinogoHoseiDiv div,
+            boolean 介護要支援結果チェック, boolean 合計要支援結果チェック) {
+        if ((new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No)
+                || (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
+                        ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No)) {
+            if (予防要支援結果チェック) {
+                div.set要支援計(RString.EMPTY);
+            }
+            if (介護要支援結果チェック) {
+                div.set要介護計(RString.EMPTY);
+            }
+            if (合計要支援結果チェック) {
+                div.set合計(RString.EMPTY);
+            }
         }
     }
 

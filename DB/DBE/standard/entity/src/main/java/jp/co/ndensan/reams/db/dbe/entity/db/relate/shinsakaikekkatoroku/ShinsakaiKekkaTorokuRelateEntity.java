@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku;
 
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -27,7 +28,7 @@ public class ShinsakaiKekkaTorokuRelateEntity {
     private int 介護認定審査会実施人数;
     private RString 進捗状況;
     private RString 介護認定審査会開催場所名称;
-    private RString 地区コード;
+    private Code 地区コード;
     private FlexibleDate 開催日;
     private RString 開催開始時間;
     private RString 開催終了時間;

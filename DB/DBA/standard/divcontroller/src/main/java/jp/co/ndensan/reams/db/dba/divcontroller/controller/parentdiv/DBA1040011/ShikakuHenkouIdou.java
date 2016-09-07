@@ -105,17 +105,26 @@ public class ShikakuHenkouIdou {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+            && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             saveGamenData(div);
             RealInitialLocker.release(create排他キー());
             div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(DBA1040011StateName.完了状態);
         }
+//<<<<<<< HEAD
         return ResponseData.of(div).respond();
     }
 
     private boolean isSavable(ShikakuHenkouIdouDiv div) {
         return getHandler(div).isSavable();
+//=======
+//        if (ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
+//            return ResponseData.of(div).respond();
+//        }
+//        RealInitialLocker.release(前排他ロックキー);
+//        div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
+//        return ResponseData.of(div).setState(DBA1040011StateName.完了状態);
+//>>>>>>> origin/sync
     }
 
     /**
@@ -125,7 +134,14 @@ public class ShikakuHenkouIdou {
      * @return ResponseData<ShikakuHenkouIdouDiv>
      */
     public ResponseData<ShikakuHenkouIdouDiv> onClick_btnReSearch(ShikakuHenkouIdouDiv div) {
+//<<<<<<< HEAD
         RealInitialLocker.release(create排他キー());
+//=======
+//        RealInitialLocker.release(前排他ロックキー);
+//        if (new RString("DBAMN61002").equals(ResponseHolder.getMenuID())) {
+//            return ResponseData.of(div).forwardWithEventName(DBA1040011TransitionEventName.再検索).parameter(new RString("広域内転居"));
+//        }
+//>>>>>>> origin/sync
         return ResponseData.of(div).forwardWithEventName(DBA1040011TransitionEventName.再検索).respond();
     }
 

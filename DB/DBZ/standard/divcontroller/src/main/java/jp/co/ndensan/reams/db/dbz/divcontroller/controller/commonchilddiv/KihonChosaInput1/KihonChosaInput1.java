@@ -26,6 +26,17 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KihonChosaInput1 {
 
+    private static final int 整数1 = 1;
+    private static final int 整数2 = 2;
+    private static final int 整数3 = 3;
+    private static final int 整数4 = 4;
+    private static final int 整数5 = 5;
+    private static final int 整数6 = 6;
+    private static final int 整数7 = 7;
+    private static final int 整数8 = 8;
+    private static final int 整数9 = 9;
+    private static final int 整数11 = 11;
+
     /**
      * 画面初期化
      *
@@ -55,6 +66,7 @@ public class KihonChosaInput1 {
             ArrayList<KihonChosaInput> 認定調査基本情報リスト = ViewStateHolder.get(ViewStateKeys.第一群認定調査基本情報リスト, ArrayList.class);
             ArrayList<KihonChosaInput> new認定調査基本情報リスト = getHandler(div).onClick_btnConfirm(認定調査基本情報リスト);
             ViewStateHolder.put(ViewStateKeys.第一群認定調査基本情報リスト, new認定調査基本情報リスト);
+            必須入力チェック(new認定調査基本情報リスト);
             return ResponseData.of(div).dialogOKClose();
         }
         return ResponseData.of(div).respond();
@@ -94,5 +106,22 @@ public class KihonChosaInput1 {
 
     private KihonChosaInputHandler1 getHandler(KihonChosaInput1Div div) {
         return new KihonChosaInputHandler1(div);
+    }
+
+    private void 必須入力チェック(ArrayList<KihonChosaInput> new認定調査基本情報リスト) {
+        int size = 0;
+        int 連番;
+        for (KihonChosaInput joho : new認定調査基本情報リスト) {
+            連番 = joho.get調査連番();
+            if (連番 != 整数1 && 連番 != 整数2 && 連番 != 整数3 && 連番 != 整数4 && 連番 != 整数5
+                    && 連番 != 整数6 && 連番 != 整数7 && 連番 != 整数8 && 連番 != 整数9) {
+                size++;
+            }
+        }
+        if (size == 整数11) {
+            ViewStateHolder.put(ViewStateKeys.基本調査の入力状況, new RString("1"));
+        } else {
+            ViewStateHolder.put(ViewStateKeys.基本調査の入力状況, new RString("0"));
+        }
     }
 }

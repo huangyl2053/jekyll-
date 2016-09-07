@@ -176,7 +176,12 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
                 = this.mapperProvider.create(ITaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper.class);
         getEntity = mapper1.selectTaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatis(params);
         if (getEntity != null) {
-            this.郵便番号と住所を編集する(outEntity);
+            if (!inBusiness.is住所出力不要フラグ()) {
+                this.郵便番号と住所を編集する(outEntity);
+            } else {
+                outEntity.set郵便番号(RString.EMPTY);
+                outEntity.set住所(RString.EMPTY);
+            }
 
             outEntity.set対象者名カナ(getEntity.getカナ名称());
             outEntity.set対象者名(getEntity.get名称());

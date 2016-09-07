@@ -1,0 +1,16 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,hihokenshaNo,A
+serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,serviceTeikyoYM,A
+shoKisaiHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,shoKisaiHokenshaNo,A
+rirekiNo,int2,int,,,,,rirekiNo,A
+ketteiYMD,UDD015YMD,FlexibleDate,,,,,ketteiYMD,A
+honninShiharaiGaku,numeric,Decimal,,,,,honninShiharaiGaku,A
+shikyuKubunCode,varchar,RString,,,,,shikyuKubunCode,A
+shikyuKingaku,numeric,Decimal,,,,,shikyuKingaku,A
+fushikyuRiyu,varchar,RString,,,,,fushikyuRiyu,A
+shinsaHohoKubun,varchar,RString,,,,,shinsaHohoKubun,A
+hanteiKekkaSofuYM,UDD014YM,FlexibleYearMonth,,,,,hanteiKekkaSofuYM,A
+saiSofuFlag,bool,boolean,,,,,saiSofuFlag,A
+hanteiKekkaSofuFuyoFlag,bool,boolean,,,,,hanteiKekkaSofuFuyoFlag,A
+shinsaKekkaHaneiKubun,varchar,RString,,,,,shinsaKekkaHaneiKubun,A
+ketteiTsuchishoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,ketteiTsuchishoSakuseiYMD,A
+furikomiMeisaishoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,furikomiMeisaishoSakuseiYMD,A

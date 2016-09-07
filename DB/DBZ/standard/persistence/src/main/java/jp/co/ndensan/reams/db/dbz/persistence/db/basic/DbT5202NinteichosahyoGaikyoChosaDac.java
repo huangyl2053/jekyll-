@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbT5202NinteichosahyoGaikyoChosaDac implements ISaveable<DbT5202NinteichosahyoGaikyoChosaEntity> {
 
+    private static final RString 申請書管理番号_TMP = new RString("申請書管理番号");
     @InjectSession
     private SqlSession session;
 
@@ -44,7 +45,7 @@ public class DbT5202NinteichosahyoGaikyoChosaDac implements ISaveable<DbT5202Nin
             ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
             RString 概況調査テキストイメージ区分) throws NullPointerException {
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_TMP.toString()));
         requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
         requireNonNull(概況調査テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("概況調査テキストイメージ区分"));
 
@@ -86,5 +87,30 @@ public class DbT5202NinteichosahyoGaikyoChosaDac implements ISaveable<DbT5202Nin
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 認定調査票（概況調査）（子）を取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @return DbT5202NinteichosahyoGaikyoChosaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5202NinteichosahyoGaikyoChosaEntity> select認定調査票(
+            ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号) throws NullPointerException {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_TMP.toString()));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5202NinteichosahyoGaikyoChosa.class).
+                where(and(
+                                eq(shinseishoKanriNo, 申請書管理番号),
+                                eq(ninteichosaRirekiNo, 認定調査依頼履歴番号))).
+                toList(DbT5202NinteichosahyoGaikyoChosaEntity.class);
     }
 }

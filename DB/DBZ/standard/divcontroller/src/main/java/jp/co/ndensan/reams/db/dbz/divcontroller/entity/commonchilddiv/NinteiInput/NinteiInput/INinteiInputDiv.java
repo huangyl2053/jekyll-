@@ -5,6 +5,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputDataPassM
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputNaiyo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /*
@@ -48,4 +49,18 @@ public interface INinteiInputDiv extends ICommonChildDivBaseProperties {
      * @return dgServiceIchiran_Row
      */
     public List<dgServiceIchiran_Row> getServiceRow();
+
+    /**
+     * NinteiJohoDivを取得。
+     *
+     * @return NinteiJohoDiv
+     */
+    public NinteiJohoDiv getNinteiJoho();
+
+    /**
+     * txtShinsakaiIkenを取得。
+     *
+     * @return TextBoxMultiLine
+     */
+    public TextBoxMultiLine getTxtShinsakaiIken();
 }

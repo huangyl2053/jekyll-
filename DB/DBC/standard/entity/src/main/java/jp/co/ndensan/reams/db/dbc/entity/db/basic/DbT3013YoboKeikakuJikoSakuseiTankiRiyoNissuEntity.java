@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -18,7 +19,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
  * 予防給付計画自己作成短期利用日数テーブルのエンティティクラスです。
  */
 public class DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity extends DbTableEntityBase<DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu");
 
@@ -41,6 +42,9 @@ public class DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity extends DbTableEn
     private Decimal zenkaiRiyoNissu;
     private Decimal konkaiKeikakuRiyoNissu;
     private RString zanteiKubun;
+    private RString koshinKubun;
+    private FlexibleDate koshinYMD;
+    private FlexibleYearMonth sofuYM;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -218,6 +222,67 @@ public class DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity extends DbTableEn
     }
 
     /**
+     * 更新区分のgetメソッドです。
+     * <br/>
+     * <br/>DBC.Enum.給付管理表情報作成区分コード
+     * 
+     * @return 更新区分
+     */
+    @CheckForNull
+    public RString getKoshinKubun() {
+        return koshinKubun;
+    }
+
+    /**
+     * 更新区分のsetメソッドです。
+     * <br/>
+     * <br/>DBC.Enum.給付管理表情報作成区分コード
+     * 
+     * @param koshinKubun 更新区分
+     */
+    public void setKoshinKubun(RString koshinKubun) {
+        this.koshinKubun = koshinKubun;
+    }
+
+    /**
+     * 更新年月日のgetメソッドです。
+     * 
+     * @return 更新年月日
+     */
+    @CheckForNull
+    public FlexibleDate getKoshinYMD() {
+        return koshinYMD;
+    }
+
+    /**
+     * 更新年月日のsetメソッドです。
+     * 
+     * @param koshinYMD 更新年月日
+     */
+    public void setKoshinYMD(FlexibleDate koshinYMD) {
+        this.koshinYMD = koshinYMD;
+    }
+
+    /**
+     * 送付年月のgetメソッドです。
+     * 
+     * @return 送付年月
+     */
+    @CheckForNull
+    public FlexibleYearMonth getSofuYM() {
+        return sofuYM;
+    }
+
+    /**
+     * 送付年月のsetメソッドです。
+     * 
+     * @param sofuYM 送付年月
+     */
+    public void setSofuYM(FlexibleYearMonth sofuYM) {
+        this.sofuYM = sofuYM;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
@@ -256,6 +321,9 @@ public class DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity extends DbTableEn
         this.zenkaiRiyoNissu = entity.zenkaiRiyoNissu;
         this.konkaiKeikakuRiyoNissu = entity.konkaiKeikakuRiyoNissu;
         this.zanteiKubun = entity.zanteiKubun;
+        this.koshinKubun = entity.koshinKubun;
+        this.koshinYMD = entity.koshinYMD;
+        this.sofuYM = entity.sofuYM;
     }
 
     /**
@@ -264,9 +332,10 @@ public class DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity extends DbTableEn
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hihokenshaNo, taishoYM, rirekiNo, riyoYM, zenkaiRiyoNissu, konkaiKeikakuRiyoNissu, zanteiKubun);
+        return super.toMd5(hihokenshaNo, taishoYM, rirekiNo, riyoYM, zenkaiRiyoNissu, konkaiKeikakuRiyoNissu, zanteiKubun, koshinKubun, koshinYMD, sofuYM);
     }
 
 // </editor-fold>
+
 
 }

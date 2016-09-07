@@ -373,7 +373,7 @@
             AND
             DbT3036ShokanHanteiKekka."ketteiYMD" <![CDATA[<=]]> #{dataTo}
         </if>
-        <if test="chusyutuKetteiFlag">
+        <if test="chusyutuKetteiShaUketsukeFlag">
             AND
             DbT3036ShokanHanteiKekka."ketteiIchiranTorikomiYM" = #{ketteishaUketsukeYM}
         </if>
@@ -440,9 +440,7 @@
         SELECT
         <include refid="selectKetteiTsuchiSho" />
         ,DbT3043ShokanShokujiHiyo."yoshikiNo" AS "yoshikiNo"
-        <!-- TODO QA1178確認中-->
-        --,DbT3043ShokanShokujiHiyo.サービスコード AS "serviceCode"
-        ,'' AS "serviceCode"
+        ,'500000' AS "serviceCode"
         ,DbT3043ShokanShokujiHiyo."tensuKingaku" AS "kaishuKingaku"
         ,'' AS "zougenRiyu"
         ,'' AS "kinyuKikanCodeName"
@@ -795,11 +793,11 @@
     </select>
     <select resultOrdered="true" id="get償還払支給判定結果情報"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanHanteiKekkaUpdataParameter"
-            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.ResultMap_DbT3036ShokanHanteiKekkaEntity"
+            resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.ResultMap_DbT3036ShokanHanteiKekkaEntity"
             fetchSize="500">
         SELECT
         DISTINCT
-        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.allColumns_DbT3036ShokanHanteiKekka" />
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.allColumns_DbT3036ShokanHanteiKekka" />
         FROM
         rgdb."DbT3036ShokanHanteiKekka" AS "DbT3036ShokanHanteiKekka"
         <if test="chusyutuUketsukeFlag">

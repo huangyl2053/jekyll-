@@ -19,11 +19,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護予防・日常生活支援総合事業種類支給限度額を管理するクラスです。
+ *
+ * @reamsid_L DBC-3364-010 xuxin
  */
-public class SogoJigyoShuruiShikyuGendoGaku 
-extends ModelBase<SogoJigyoShuruiShikyuGendoGakuIdentifier, 
-        DbT7118SogoJigyoShuruiShikyuGendoGakuEntity, 
-        SogoJigyoShuruiShikyuGendoGaku> implements Serializable {
+public class SogoJigyoShuruiShikyuGendoGaku extends
+        ModelBase<SogoJigyoShuruiShikyuGendoGakuIdentifier, DbT7118SogoJigyoShuruiShikyuGendoGakuEntity, SogoJigyoShuruiShikyuGendoGaku> implements
+        Serializable {
 
     private final DbT7118SogoJigyoShuruiShikyuGendoGakuEntity entity;
     private final SogoJigyoShuruiShikyuGendoGakuIdentifier id;
@@ -155,8 +156,7 @@ extends ModelBase<SogoJigyoShuruiShikyuGendoGakuIdentifier,
     /**
      * 介護予防・日常生活支援総合事業種類支給限度額の識別子{@link SogoJigyoShuruiShikyuGendoGakuIdentifier}を返します。
      *
-     * @return
-     * 介護予防・日常生活支援総合事業種類支給限度額の識別子{@link SogoJigyoShuruiShikyuGendoGakuIdentifier}
+     * @return 介護予防・日常生活支援総合事業種類支給限度額の識別子{@link SogoJigyoShuruiShikyuGendoGakuIdentifier}
      */
     @Override
     public SogoJigyoShuruiShikyuGendoGakuIdentifier identifier() {
@@ -182,6 +182,42 @@ extends ModelBase<SogoJigyoShuruiShikyuGendoGakuIdentifier,
     }
 
     /**
+     * 保持する介護予防・日常生活支援総合事業種類支給限度額を削除対象とします。<br/>
+     * {@link DbT7118SogoJigyoShuruiShikyuGendoGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     *
+     * @return 削除対象処理実施後の{@link SogoJigyoShuruiShikyuGendoGaku}
+     */
+    public SogoJigyoShuruiShikyuGendoGaku deleted改() {
+        DbT7118SogoJigyoShuruiShikyuGendoGakuEntity deletedEntity = this.toEntity();
+        deletedEntity.setState(EntityDataState.Deleted);
+        return new SogoJigyoShuruiShikyuGendoGaku(deletedEntity, id);
+    }
+
+    /**
+     * 保持する介護予防・日常生活支援総合事業種類支給限度額を登録対象とします。<br/>
+     * {@link DbT7118SogoJigyoShuruiShikyuGendoGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば登録状態にします。
+     *
+     * @return 登録対象処理実施後の{@link SogoJigyoShuruiShikyuGendoGaku}
+     */
+    public SogoJigyoShuruiShikyuGendoGaku added() {
+        DbT7118SogoJigyoShuruiShikyuGendoGakuEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new SogoJigyoShuruiShikyuGendoGaku(addedEntity, id);
+    }
+
+    /**
+     * 保持する介護予防・日常生活支援総合事業種類支給限度額を修正対象とします。<br/>
+     * {@link DbT7118SogoJigyoShuruiShikyuGendoGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば修正状態にします。
+     *
+     * @return 修正対象処理実施後の{@link SogoJigyoShuruiShikyuGendoGaku}
+     */
+    public SogoJigyoShuruiShikyuGendoGaku modified() {
+        DbT7118SogoJigyoShuruiShikyuGendoGakuEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        return new SogoJigyoShuruiShikyuGendoGaku(modifiedEntity, id);
+    }
+
+    /**
      * {@link SogoJigyoShuruiShikyuGendoGaku}のシリアライズ形式を提供します。
      *
      * @return {@link SogoJigyoShuruiShikyuGendoGaku}のシリアライズ形式
@@ -193,7 +229,7 @@ extends ModelBase<SogoJigyoShuruiShikyuGendoGakuIdentifier,
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

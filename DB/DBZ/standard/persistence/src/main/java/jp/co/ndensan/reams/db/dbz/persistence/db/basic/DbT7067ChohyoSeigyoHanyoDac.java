@@ -183,6 +183,25 @@ public class DbT7067ChohyoSeigyoHanyoDac implements ISaveable<DbT7067ChohyoSeigy
     }
 
     /**
+     * 帳票制御汎用をキーから取得します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 管理年度 FlexibleYear
+     * @return List<DbT7067ChohyoSeigyoHanyoEntity>
+     */
+    @Transaction
+    public List<DbT7067ChohyoSeigyoHanyoEntity> get帳票制御汎用(
+            SubGyomuCode サブ業務コード, FlexibleYear 管理年度) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7067ChohyoSeigyoHanyo.class).
+                where(and(eq(subGyomuCode, サブ業務コード), eq(kanriNendo, 管理年度))).
+                toList(DbT7067ChohyoSeigyoHanyoEntity.class);
+    }
+
+    /**
      * 帳票制御汎用のデータkomokuvalueを取得します。
      *
      * @param 出力条件 komokuname
@@ -215,5 +234,70 @@ public class DbT7067ChohyoSeigyoHanyoDac implements ISaveable<DbT7067ChohyoSeigy
                                 eq(henkoKahi, true))).
                 order(by(komokuName, Order.ASC)).
                 toList(DbT7067ChohyoSeigyoHanyoEntity.class);
+    }
+
+    /**
+     * 帳票制御汎用を取得します。
+     *
+     * @param 帳票分類ID ChohyoBunruiID
+     * @param 項目名 KomokuName
+     * @return DbT7067ChohyoSeigyoHanyoEntity
+     */
+    @Transaction
+    public DbT7067ChohyoSeigyoHanyoEntity get帳票制御汎用(ReportId 帳票分類ID,
+            RString 項目名) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7067ChohyoSeigyoHanyo.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(chohyoBunruiID, 帳票分類ID),
+                                eq(komokuName, 項目名))).
+                toObject(DbT7067ChohyoSeigyoHanyoEntity.class);
+    }
+
+    /**
+     * 帳票制御汎用をキーから取得します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 帳票分類ID ChohyoBunruiID
+     * @return List<DbT7067ChohyoSeigyoHanyoEntity>
+     */
+    @Transaction
+    public List<DbT7067ChohyoSeigyoHanyoEntity> get帳票制御汎用一覧(SubGyomuCode サブ業務コード,
+            ReportId 帳票分類ID) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7067ChohyoSeigyoHanyo.class).
+                where(and(
+                                eq(subGyomuCode, サブ業務コード),
+                                eq(chohyoBunruiID, 帳票分類ID))).
+                toList(DbT7067ChohyoSeigyoHanyoEntity.class);
+    }
+
+    /**
+     * 帳票制御汎用を取得します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 帳票分類ID ChohyoBunruiID
+     * @param 項目名 KomokuName
+     * @return DbT7067ChohyoSeigyoHanyoEntity
+     */
+    @Transaction
+    public DbT7067ChohyoSeigyoHanyoEntity get帳票制御汎用(SubGyomuCode サブ業務コード, ReportId 帳票分類ID,
+            RString 項目名) {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サブ業務コード"));
+        requireNonNull(帳票分類ID, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票分類ID"));
+        requireNonNull(項目名, UrSystemErrorMessages.値がnull.getReplacedMessage("項目名"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7067ChohyoSeigyoHanyo.class).
+                where(and(
+                                eq(subGyomuCode, サブ業務コード),
+                                eq(chohyoBunruiID, 帳票分類ID),
+                                eq(komokuName, 項目名))).
+                toObject(DbT7067ChohyoSeigyoHanyoEntity.class);
     }
 }

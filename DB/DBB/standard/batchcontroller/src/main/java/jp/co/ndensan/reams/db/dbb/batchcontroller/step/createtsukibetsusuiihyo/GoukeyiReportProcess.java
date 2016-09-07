@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.createtsukibetsusuiihyo.ReportDateHensyu;
+import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.report.tsukibetsusuiihyo.TsukibetsuSuiihyoReport;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoProcessParameter;
@@ -15,6 +16,7 @@ import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tsukibetsusuiihyo.TsukibetsuSuiihyoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.source.tsukibetsusuiihyo.TsukibetsuSuiihyoReportSource;
+import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -39,6 +41,7 @@ public class GoukeyiReportProcess extends BatchProcessBase<KoumokuGoukey> {
             + "relate.createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper.get合計帳票データの取得");
     private static final ReportId 帳票ID = ReportIdDBB.DBB300002.getReportId();
     private List<KoumokuGoukey> koumokuGoukeyList;
+    private List<RString> 表記List;
     private CreateTsukibetsuSuiihyoProcessParameter processPrm;
     private CreateTsukibetsuSuiihyoMyBatisParameter mybatisPrm;
     @BatchWriter
@@ -48,6 +51,9 @@ public class GoukeyiReportProcess extends BatchProcessBase<KoumokuGoukey> {
     @Override
     protected void initialize() {
         mybatisPrm = processPrm.toCreateTsukibetsuSuiihyoMyBatisParameter();
+        HokenryoDankaiSettings hokenryoDankaiSettings = new HokenryoDankaiSettings();
+        HokenryoDankaiList hokenryoDankaiList = hokenryoDankaiSettings.get保険料段階ListIn(processPrm.getChoteiNendo());
+        表記List = hokenryoDankaiList.to表記List();
         koumokuGoukeyList = new ArrayList<>();
     }
 
@@ -81,6 +87,6 @@ public class GoukeyiReportProcess extends BatchProcessBase<KoumokuGoukey> {
                 mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().substring(2),
                 new RString("合計"),
                 AssociationFinderFactory.createInstance().getAssociation().get市町村名(),
-                AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_().getColumnValue());
+                AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_().getColumnValue(), 表記List);
     }
 }

@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput;
 
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv.ShoriType;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
@@ -76,4 +77,25 @@ public interface IChosaItakusakiAndChosainInputDiv extends ICommonChildDivBasePr
      * 共有子Div内の項目に設定された値をすべてクリアします。
      */
     void clear();
+
+    /**
+     * ShoriTypeの設定
+     *
+     * @param value ShoriType
+     */
+    void setMode_ShoriType(ShoriType value);
+
+    /**
+     * 調査員への連絡事項を取得します。
+     *
+     * @return RString
+     */
+    RString getChosainRenrakuJiko();
+
+    /**
+     * 調査員への連絡事項を設定します。
+     *
+     * @param chosainRenrakuJiko 調査員への連絡事項
+     */
+    void setChosainRenrakuJiko(RString chosainRenrakuJiko);
 }

@@ -383,6 +383,126 @@ public class YokaigoNinteiTaskListFinder {
         shinSaKaiBusiness.set要介護認定完了情報Lsit(要介護認定完了情報Lsit);
     }
 
+    /**
+     * 前月例処理リストを取得します。
+     *
+     * @param parameter YokaigoNinteiTaskListParameter
+     * @return 他住所地特例者管理 他住所地特例者管理
+     */
+    @Transaction
+    public ShinSaKaiBusiness get前月例処理(YokaigoNinteiTaskListParameter parameter) {
+        ShinSaKaiBusiness shinSaKaiBusiness = new ShinSaKaiBusiness();
+        IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
+        List<ShinSaKaiToRoKuRelate> entityList = mapper.get前月例処理(parameter);
+        for (ShinSaKaiToRoKuRelate shinSaKaiToRoKuRelate : entityList) {
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報 = shinSaKaiToRoKuRelate.get要介護認定完了情報EntityLsit();
+            set前月例処理(要介護認定完了情報, shinSaKaiBusiness);
+        }
+        return shinSaKaiBusiness;
+    }
+
+    private void set前月例処理(
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
+            ShinSaKaiBusiness shinSaKaiBusiness) {
+
+        List<NinteiKanryoJoho> 要介護認定完了情報Lsit = new ArrayList();
+        for (DbT5105NinteiKanryoJohoEntity entity : 要介護認定完了情報) {
+            entity.initializeMd5();
+            要介護認定完了情報Lsit.add(new NinteiKanryoJoho(entity));
+        }
+        shinSaKaiBusiness.set要介護認定完了情報Lsit(要介護認定完了情報Lsit);
+    }
+
+    /**
+     * 前審査受付リストを取得します。
+     *
+     * @param parameter YokaigoNinteiTaskListParameter
+     * @return 他住所地特例者管理 他住所地特例者管理
+     */
+    @Transaction
+    public ShinSaKaiBusiness get前審査受付(YokaigoNinteiTaskListParameter parameter) {
+        ShinSaKaiBusiness shinSaKaiBusiness = new ShinSaKaiBusiness();
+        IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
+        List<ShinSaKaiToRoKuRelate> entityList = mapper.get前審査受付(parameter);
+        for (ShinSaKaiToRoKuRelate shinSaKaiToRoKuRelate : entityList) {
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報 = shinSaKaiToRoKuRelate.get要介護認定完了情報EntityLsit();
+            set前審査受付(要介護認定完了情報, shinSaKaiBusiness);
+        }
+        return shinSaKaiBusiness;
+    }
+
+    private void set前審査受付(
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
+            ShinSaKaiBusiness shinSaKaiBusiness) {
+
+        List<NinteiKanryoJoho> 要介護認定完了情報Lsit = new ArrayList();
+        for (DbT5105NinteiKanryoJohoEntity entity : 要介護認定完了情報) {
+            entity.initializeMd5();
+            要介護認定完了情報Lsit.add(new NinteiKanryoJoho(entity));
+        }
+        shinSaKaiBusiness.set要介護認定完了情報Lsit(要介護認定完了情報Lsit);
+    }
+
+    /**
+     * 前一次判定リストを取得します。
+     *
+     * @param parameter YokaigoNinteiTaskListParameter
+     * @return 他住所地特例者管理 他住所地特例者管理
+     */
+    @Transaction
+    public ShinSaKaiBusiness get前一次判定(YokaigoNinteiTaskListParameter parameter) {
+        ShinSaKaiBusiness shinSaKaiBusiness = new ShinSaKaiBusiness();
+        IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
+        List<ShinSaKaiToRoKuRelate> entityList = mapper.get前一次判定(parameter);
+        for (ShinSaKaiToRoKuRelate shinSaKaiToRoKuRelate : entityList) {
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報 = shinSaKaiToRoKuRelate.get要介護認定完了情報EntityLsit();
+            set前一次判定(要介護認定完了情報, shinSaKaiBusiness);
+        }
+        return shinSaKaiBusiness;
+    }
+
+    private void set前一次判定(
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
+            ShinSaKaiBusiness shinSaKaiBusiness) {
+
+        List<NinteiKanryoJoho> 要介護認定完了情報Lsit = new ArrayList();
+        for (DbT5105NinteiKanryoJohoEntity entity : 要介護認定完了情報) {
+            entity.initializeMd5();
+            要介護認定完了情報Lsit.add(new NinteiKanryoJoho(entity));
+        }
+        shinSaKaiBusiness.set要介護認定完了情報Lsit(要介護認定完了情報Lsit);
+    }
+
+    /**
+     * 前マスキングリストを取得します。
+     *
+     * @param parameter YokaigoNinteiTaskListParameter
+     * @return 他住所地特例者管理 他住所地特例者管理
+     */
+    @Transaction
+    public ShinSaKaiBusiness get前マスキング(YokaigoNinteiTaskListParameter parameter) {
+        ShinSaKaiBusiness shinSaKaiBusiness = new ShinSaKaiBusiness();
+        IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
+        List<ShinSaKaiToRoKuRelate> entityList = mapper.get前マスキング(parameter);
+        for (ShinSaKaiToRoKuRelate shinSaKaiToRoKuRelate : entityList) {
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報 = shinSaKaiToRoKuRelate.get要介護認定完了情報EntityLsit();
+            set前マスキング(要介護認定完了情報, shinSaKaiBusiness);
+        }
+        return shinSaKaiBusiness;
+    }
+
+    private void set前マスキング(
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
+            ShinSaKaiBusiness shinSaKaiBusiness) {
+
+        List<NinteiKanryoJoho> 要介護認定完了情報Lsit = new ArrayList();
+        for (DbT5105NinteiKanryoJohoEntity entity : 要介護認定完了情報) {
+            entity.initializeMd5();
+            要介護認定完了情報Lsit.add(new NinteiKanryoJoho(entity));
+        }
+        shinSaKaiBusiness.set要介護認定完了情報Lsit(要介護認定完了情報Lsit);
+    }
+
     private void set前意見書入手(
             List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
             ShinSaKaiBusiness shinSaKaiBusiness) {

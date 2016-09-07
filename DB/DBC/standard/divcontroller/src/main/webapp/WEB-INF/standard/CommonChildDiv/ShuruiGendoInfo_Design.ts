@@ -4,9 +4,13 @@
 
 module DBC {
 
-     export module ShuruiGendoInfoCommonChildDiv {
+     export module ShuruiGendoInfo {
 
         export class Events {
+
+            public static onClick_btnClose(): string {
+                return "onClick_btnClose";
+            }
 
         }
 
@@ -14,7 +18,7 @@ module DBC {
             private _myName: string;
 
             public static myType(): string {
-                return "ShuruiGendoInfoCommonChildDiv";
+                return "ShuruiGendoInfo";
             }
 
             constructor(fieldName: string) {
@@ -22,14 +26,14 @@ module DBC {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBC.ShuruiGendoInfoCommonChildDiv.Controls.myType();
+                return this._myName + "_" + DBC.ShuruiGendoInfo.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBC.ShuruiGendoInfoCommonChildDiv.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBC.ShuruiGendoInfo.Controls.myType() + "_" + fieldName;
             }
 
-            public ShuruiGendoInfoCommonChildDiv(): UZA.Panel {
+            public ShuruiGendoInfo(): UZA.Panel {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
@@ -39,10 +43,6 @@ module DBC {
 
             public btnClose(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnClose"));
-            }
-
-            public Button1(): UZA.Button {
-                return new UZA.Button(this.convFiledName("Button1"));
             }
 
         }

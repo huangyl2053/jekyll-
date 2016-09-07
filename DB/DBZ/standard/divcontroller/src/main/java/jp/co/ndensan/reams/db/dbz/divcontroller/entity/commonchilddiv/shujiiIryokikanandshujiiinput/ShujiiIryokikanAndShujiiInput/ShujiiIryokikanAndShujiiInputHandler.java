@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIry
 import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputResult;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv.ShoriType;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,6 +47,11 @@ public class ShujiiIryokikanAndShujiiInputHandler {
         div.setHdnShichosonCode(shichosonCode.value());
         div.setHdnShinseishoKanriNo(shinseishoKanriNo.value());
         div.setHdnSubGyomuModel(gyomuCode.value());
+        if (ShoriType.InputMode == div.getMode_ShoriType() && !RString.isNullOrEmpty(shinseishoKanriNo.value())) {
+            div.getBtnZenkaiIrokikanJoho().setDisabled(false);
+        } else {
+            div.getBtnZenkaiIrokikanJoho().setDisabled(true);
+        }
     }
 
     /**
@@ -69,6 +75,11 @@ public class ShujiiIryokikanAndShujiiInputHandler {
         div.setHdnShichosonCode(shichosonCode.value());
         div.setHdnShinseishoKanriNo(shinseishoKanriNo.value());
         div.setHdnSubGyomuModel(gyomuCode.value());
+        if (ShoriType.InputMode == div.getMode_ShoriType() && !RString.isNullOrEmpty(shinseishoKanriNo.value())) {
+            div.getBtnZenkaiIrokikanJoho().setDisabled(false);
+        } else {
+            div.getBtnZenkaiIrokikanJoho().setDisabled(true);
+        }
     }
 
     /**

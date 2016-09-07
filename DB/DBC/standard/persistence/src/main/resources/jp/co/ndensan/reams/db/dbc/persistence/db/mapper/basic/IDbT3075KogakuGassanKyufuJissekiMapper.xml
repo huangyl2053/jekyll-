@@ -17,10 +17,6 @@
     </sql>
 
     <sql id="allColumns_DbT3075KogakuGassanKyufuJisseki">
-         "DbT3075KogakuGassanKyufuJisseki"."kokanJohoShikibetsuNo" as "dbT3075KogakuGassanKyufuJisseki_kokanJohoShikibetsuNo",
-         "DbT3075KogakuGassanKyufuJisseki"."hihokenshaNo" as "dbT3075KogakuGassanKyufuJisseki_hihokenshaNo",
-         "DbT3075KogakuGassanKyufuJisseki"."shikyuShinseiSeiriNo" as "dbT3075KogakuGassanKyufuJisseki_shikyuShinseiSeiriNo",
-         "DbT3075KogakuGassanKyufuJisseki"."seiriNo" as "dbT3075KogakuGassanKyufuJisseki_seiriNo",
          "DbT3075KogakuGassanKyufuJisseki"."insertDantaiCd" as "dbT3075KogakuGassanKyufuJisseki_insertDantaiCd",
          "DbT3075KogakuGassanKyufuJisseki"."insertTimestamp" as "dbT3075KogakuGassanKyufuJisseki_insertTimestamp",
          "DbT3075KogakuGassanKyufuJisseki"."insertReamsLoginId" as "dbT3075KogakuGassanKyufuJisseki_insertReamsLoginId",
@@ -29,6 +25,10 @@
          "DbT3075KogakuGassanKyufuJisseki"."updateCount" as "dbT3075KogakuGassanKyufuJisseki_updateCount",
          "DbT3075KogakuGassanKyufuJisseki"."lastUpdateTimestamp" as "dbT3075KogakuGassanKyufuJisseki_lastUpdateTimestamp",
          "DbT3075KogakuGassanKyufuJisseki"."lastUpdateReamsLoginId" as "dbT3075KogakuGassanKyufuJisseki_lastUpdateReamsLoginId",
+         "DbT3075KogakuGassanKyufuJisseki"."kokanJohoShikibetsuNo" as "dbT3075KogakuGassanKyufuJisseki_kokanJohoShikibetsuNo",
+         "DbT3075KogakuGassanKyufuJisseki"."hihokenshaNo" as "dbT3075KogakuGassanKyufuJisseki_hihokenshaNo",
+         "DbT3075KogakuGassanKyufuJisseki"."shikyuShinseiSeiriNo" as "dbT3075KogakuGassanKyufuJisseki_shikyuShinseiSeiriNo",
+         "DbT3075KogakuGassanKyufuJisseki"."seiriNo" as "dbT3075KogakuGassanKyufuJisseki_seiriNo",
          "DbT3075KogakuGassanKyufuJisseki"."jikoFutanSeiriNo" as "dbT3075KogakuGassanKyufuJisseki_jikoFutanSeiriNo",
          "DbT3075KogakuGassanKyufuJisseki"."hokenSeidoCode" as "dbT3075KogakuGassanKyufuJisseki_hokenSeidoCode",
          "DbT3075KogakuGassanKyufuJisseki"."kyufuJissekiSakuseiKubunCode" as "dbT3075KogakuGassanKyufuJisseki_kyufuJissekiSakuseiKubunCode",
@@ -47,10 +47,6 @@
 
     <!--テーブルDbT3075KogakuGassanKyufuJissekiの項目をDbT3075KogakuGassanKyufuJissekiEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT3075KogakuGassanKyufuJissekiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJissekiEntity" autoMapping="true">
-        <id property="kokanJohoShikibetsuNo" column="dbT3075KogakuGassanKyufuJisseki_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
-        <id property="hihokenshaNo" column="dbT3075KogakuGassanKyufuJisseki_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="shikyuShinseiSeiriNo" column="dbT3075KogakuGassanKyufuJisseki_shikyuShinseiSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="seiriNo" column="dbT3075KogakuGassanKyufuJisseki_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertDantaiCd" column="dbT3075KogakuGassanKyufuJisseki_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT3075KogakuGassanKyufuJisseki_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT3075KogakuGassanKyufuJisseki_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -59,6 +55,10 @@
         <result property="updateCount" column="dbT3075KogakuGassanKyufuJisseki_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT3075KogakuGassanKyufuJisseki_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT3075KogakuGassanKyufuJisseki_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokanJohoShikibetsuNo" column="dbT3075KogakuGassanKyufuJisseki_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
+        <result property="hihokenshaNo" column="dbT3075KogakuGassanKyufuJisseki_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shikyuShinseiSeiriNo" column="dbT3075KogakuGassanKyufuJisseki_shikyuShinseiSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seiriNo" column="dbT3075KogakuGassanKyufuJisseki_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jikoFutanSeiriNo" column="dbT3075KogakuGassanKyufuJisseki_jikoFutanSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hokenSeidoCode" column="dbT3075KogakuGassanKyufuJisseki_hokenSeidoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kyufuJissekiSakuseiKubunCode" column="dbT3075KogakuGassanKyufuJisseki_kyufuJissekiSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

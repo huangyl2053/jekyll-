@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShu
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
-import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
@@ -181,7 +181,7 @@ public class ShakaiFukushiHojinKeigenService {
         List<SetaiinShotoku> 世帯員所得情報List = setaiinShotokuJohoFinder.get世帯員所得情報(識別コード, 所得年度, null);
         for (SetaiinShotoku 世帯員所得情報 : 世帯員所得情報List) {
             if (識別コード.equals(世帯員所得情報.get識別コード())
-                    && KazeiKubun.課税.getコード().equals(世帯員所得情報.get課税区分_住民税減免前())) {
+                    && !KazeiKubun.課税.getコード().equals(世帯員所得情報.get課税区分_住民税減免前())) {
                 return GemmenKubun.非課税_老年受給;
             }
         }

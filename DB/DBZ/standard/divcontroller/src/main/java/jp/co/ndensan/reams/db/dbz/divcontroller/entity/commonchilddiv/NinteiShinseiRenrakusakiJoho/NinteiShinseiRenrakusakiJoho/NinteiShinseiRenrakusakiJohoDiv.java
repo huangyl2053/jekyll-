@@ -4,20 +4,20 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
-
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.IDialogDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
  * @reamsid_L DBZ-1300-100 dongyabin
  */
 public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShinseiRenrakusakiJohoDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
@@ -246,7 +247,7 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
             ShoriType[] enumArray = ShoriType.values();
 
             for (ShoriType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -261,11 +262,11 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     public ShoriType getMode_ShoriType() {
-        return (ShoriType) _CommonChildDivModeUtil.getMode( this.modes, ShoriType.class );
+        return (ShoriType) _CommonChildDivModeUtil.getMode(this.modes, ShoriType.class);
     }
 
-    public void setMode_ShoriType( ShoriType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, ShoriType.class , value );
+    public void setMode_ShoriType(ShoriType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, ShoriType.class, value);
     }
 
     /*
@@ -277,7 +278,7 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     @JsonIgnore
-    public void  setBtnShinkiTsuika(Button btnShinkiTsuika) {
+    public void setBtnShinkiTsuika(Button btnShinkiTsuika) {
         this.getRenrakusakiIchiran().setBtnShinkiTsuika(btnShinkiTsuika);
     }
 
@@ -287,7 +288,7 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     @JsonIgnore
-    public void  setBtnFukushaTsuika(Button btnFukushaTsuika) {
+    public void setBtnFukushaTsuika(Button btnFukushaTsuika) {
         this.getRenrakusakiIchiran().setBtnFukushaTsuika(btnFukushaTsuika);
     }
 
@@ -297,7 +298,7 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     @JsonIgnore
-    public void  setBtnZenkaiFukusha(Button btnZenkaiFukusha) {
+    public void setBtnZenkaiFukusha(Button btnZenkaiFukusha) {
         this.getRenrakusakiIchiran().setBtnZenkaiFukusha(btnZenkaiFukusha);
     }
 
@@ -307,7 +308,7 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     @JsonIgnore
-    public void  setDgRenrakusakiIchiran(DataGrid<dgRenrakusakiIchiran_Row> dgRenrakusakiIchiran) {
+    public void setDgRenrakusakiIchiran(DataGrid<dgRenrakusakiIchiran_Row> dgRenrakusakiIchiran) {
         this.getRenrakusakiIchiran().setDgRenrakusakiIchiran(dgRenrakusakiIchiran);
     }
 
@@ -317,7 +318,7 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     @JsonIgnore
-    public void  setTxtRenban(TextBoxCode txtRenban) {
+    public void setTxtRenban(TextBoxCode txtRenban) {
         this.getRenrakusakiNyuryoku().setTxtRenban(txtRenban);
     }
 
@@ -327,7 +328,7 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     @JsonIgnore
-    public void  setDdlRenrakusakiKubun(DropDownList ddlRenrakusakiKubun) {
+    public void setDdlRenrakusakiKubun(DropDownList ddlRenrakusakiKubun) {
         this.getRenrakusakiNyuryoku().setDdlRenrakusakiKubun(ddlRenrakusakiKubun);
     }
 
@@ -337,7 +338,7 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     @JsonIgnore
-    public void  setDdlShisho(DropDownList ddlShisho) {
+    public void setDdlShisho(DropDownList ddlShisho) {
         this.getRenrakusakiNyuryoku().setDdlShisho(ddlShisho);
     }
 
@@ -347,7 +348,7 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     @JsonIgnore
-    public void  setTxtShimei(TextBox txtShimei) {
+    public void setTxtShimei(TextBox txtShimei) {
         this.getRenrakusakiNyuryoku().setTxtShimei(txtShimei);
     }
 
@@ -357,7 +358,7 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     @JsonIgnore
-    public void  setTxtKanaShimei(TextBox txtKanaShimei) {
+    public void setTxtKanaShimei(TextBox txtKanaShimei) {
         this.getRenrakusakiNyuryoku().setTxtKanaShimei(txtKanaShimei);
     }
 
@@ -367,7 +368,7 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     @JsonIgnore
-    public void  setDdlTsuzukigara(DropDownList ddlTsuzukigara) {
+    public void setDdlTsuzukigara(DropDownList ddlTsuzukigara) {
         this.getRenrakusakiNyuryoku().setDdlTsuzukigara(ddlTsuzukigara);
     }
 
@@ -377,7 +378,7 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     @JsonIgnore
-    public void  setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
+    public void setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
         this.getRenrakusakiNyuryoku().setTxtYubinNo(txtYubinNo);
     }
 
@@ -387,7 +388,7 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     @JsonIgnore
-    public void  setTxtJusho(TextBox txtJusho) {
+    public void setTxtJusho(TextBox txtJusho) {
         this.getRenrakusakiNyuryoku().setTxtJusho(txtJusho);
     }
 
@@ -397,7 +398,7 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     @JsonIgnore
-    public void  setTxtTelNo(TextBoxTelNo txtTelNo) {
+    public void setTxtTelNo(TextBoxTelNo txtTelNo) {
         this.getRenrakusakiNyuryoku().setTxtTelNo(txtTelNo);
     }
 
@@ -407,7 +408,7 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     @JsonIgnore
-    public void  setBtnToroku(Button btnToroku) {
+    public void setBtnToroku(Button btnToroku) {
         this.getRenrakusakiNyuryoku().setBtnToroku(btnToroku);
     }
 
@@ -417,7 +418,7 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     @JsonIgnore
-    public void  setTxtMobileNo(TextBoxTelNo txtMobileNo) {
+    public void setTxtMobileNo(TextBoxTelNo txtMobileNo) {
         this.getRenrakusakiNyuryoku().setTxtMobileNo(txtMobileNo);
     }
 
@@ -427,11 +428,10 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     @JsonIgnore
-    public void  setTxtYusenJuni(TextBoxCode txtYusenJuni) {
+    public void setTxtYusenJuni(TextBoxCode txtYusenJuni) {
         this.getRenrakusakiNyuryoku().setTxtYusenJuni(txtYusenJuni);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-
 }

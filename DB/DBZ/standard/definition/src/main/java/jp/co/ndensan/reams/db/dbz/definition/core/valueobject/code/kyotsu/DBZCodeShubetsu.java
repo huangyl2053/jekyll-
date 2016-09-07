@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ChoteiJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.util.code.ICodeShubetsu;

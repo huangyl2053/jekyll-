@@ -15,7 +15,10 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
  * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class NinteiShinseiJohoMapperParameter {
+
+    private final ShinseishoKanriNo shinseishoKanriNo;
 
     /**
      * コンストラクタです。
@@ -26,6 +29,8 @@ public final class NinteiShinseiJohoMapperParameter {
     private NinteiShinseiJohoMapperParameter(
             @lombok.NonNull ShinseishoKanriNo shinseishoKanriNo) {
         requireNonNull(shinseishoKanriNo, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+
+        this.shinseishoKanriNo = shinseishoKanriNo;
 
     }
 

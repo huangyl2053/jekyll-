@@ -40,7 +40,9 @@ public class KarisanteiNonyuTsuchishoCVSKakukoRenchoProperty extends ReportPrope
             Breakers<KarisanteiNonyuTsuchishoCVSKakukoRenchoSource> breakers,
             BreakerCatalog<KarisanteiNonyuTsuchishoCVSKakukoRenchoSource> catalog) {
 
-        return breakers.add(catalog.new SimplePageBreaker(
+        return breakers.add(catalog.new SimpleLayoutBreaker(
+
+
 
 
 

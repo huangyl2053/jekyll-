@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 /**
  * 介護宛先住所設定Handlerクラスです。
  *
- * @reamsid_L　DBU-3990-030　wanghui
+ * @reamsid_L DBU-3990-030 wanghui
  */
 public class KaigoAtesakiJushoSetteiHandler {
 
@@ -84,6 +84,26 @@ public class KaigoAtesakiJushoSetteiHandler {
         宛先住所編集書式();
         div.setHdnサブ業務コード(サブ業務コード);
         div.setHdn帳票分類ID(帳票分類ID);
+    }
+
+    public void initialize_systemKanri(boolean 住所設定使用可, boolean 宛先住所編集ボタン使用可,
+            RString 都道府県名称表示有無, RString 郡名称表示有無, RString 市町村名称表示有無, RString 住所編集方法, RString 方書表示有無) {
+        if (宛先住所編集ボタン使用可) {
+            div.getRadJushoSettei().setSelectedKey(帳票独自);
+        } else {
+            div.getRadJushoSettei().setSelectedKey(市町村共通);
+        }
+        if (住所設定使用可) {
+            div.getRadJushoSettei().setDisabled(false);
+        } else {
+            div.getRadJushoSettei().setDisabled(true);
+        }
+        div.setHdnChohyoDokujiTodofukenMei(都道府県名称表示有無);
+        div.setHdnChohyoDokujiGunMei(郡名称表示有無);
+        div.setHdnChohyoDokujiShichosonMei(市町村名称表示有無);
+        div.setHdnChohyoDokujiHensyuHoho(住所編集方法);
+        div.setHdnChohyoDokujiKatagaki(方書表示有無);
+        宛先住所編集書式();
     }
 
     /**

@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBU-0490-050 wangchao-->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokurenkei.IJigyoHokokuRenkeiMapper">
+    <select id="get事業報告統計情報の取得"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokurenkei.JigyoHokokuRenkeiParameter" resultOrdered="true">
+        SELECT
+        *
+        FROM
+        rgdb."DbT7021JigyoHokokuTokeiData" AS DbT7021
+        WHERE
+        DbT7021."hokokuYSeireki" = #{過去集計年月_年}
+        AND DbT7021."hokokuM" = #{過去集計年月_月}
+        AND DbT7021."shukeiTaishoYSeireki" = #{一般状況1_10集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{一般状況1_10集計年月_月}
+        AND DbT7021."toukeiTaishoKubun" = #{統計対象区分}
+        AND
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            DbT7021."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7021."hyoNo" = #{表番号}
+        AND DbT7021."shukeiNo" IN ('0200','0301','0302','0600','0702','0710','0720','0900','1002','1010','1020','1030','1040')
+        ORDER BY
+        DbT7021."shichosonCode",
+        DbT7021."shukeiNo"
+    </select>
+    
+    <select id="get事業報告統計現物分情報の取得"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokurenkei.JigyoHokokuRenkeiParameter" resultOrdered="true">
+        SELECT
+        *
+        FROM
+        rgdb."DbT7021JigyoHokokuTokeiData" AS DbT7021
+        WHERE
+        (DbT7021."hokokuYSeireki" = #{過去集計年月_年}
+        AND DbT7021."hokokuM" = #{過去集計年月_月}
+        AND DbT7021."shukeiTaishoYSeireki" = #{一般状況1_10集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{一般状況1_10集計年月_月}
+        AND DbT7021."toukeiTaishoKubun" = #{統計対象区分}
+        AND
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            DbT7021."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7021."hyoNo" = #{表番号}
+        AND DbT7021."shukeiNo" = '1100'
+        )
+        OR
+        (DbT7021."hokokuYSeireki" = #{過去集計年月_年}
+        AND DbT7021."hokokuM" = #{過去集計年月_月}
+        AND DbT7021."shukeiTaishoYSeireki" = #{一般状況11_14現物分_集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{一般状況11_14現物分_集計年月_月}
+        AND DbT7021."toukeiTaishoKubun" = #{統計対象区分}
+        AND
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            DbT7021."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7021."hyoNo" = #{表番号}
+        AND DbT7021."shukeiNo" IN ('1200','1391','1392','1393','1400'))
+        ORDER BY
+        DbT7021."shichosonCode",
+        DbT7021."shukeiNo"
+    </select>
+    
+    <select id="get事業報告統計償還分審査年月情報の取得"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokurenkei.JigyoHokokuRenkeiParameter" resultOrdered="true">
+        SELECT
+        *
+        FROM
+        rgdb."DbT7021JigyoHokokuTokeiData" AS DbT7021
+        WHERE
+        (DbT7021."hokokuYSeireki" = #{過去集計年月_年}
+        AND DbT7021."hokokuM" = #{過去集計年月_月}
+        AND DbT7021."shukeiTaishoYSeireki" = #{一般状況1_10集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{一般状況1_10集計年月_月}
+        AND DbT7021."toukeiTaishoKubun" = #{統計対象区分}
+        AND
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            DbT7021."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7021."hyoNo" = #{表番号}
+        AND DbT7021."shukeiNo" = '1100'
+        )
+        OR
+        (DbT7021."hokokuYSeireki" = #{過去集計年月_年}
+        AND DbT7021."hokokuM" = #{過去集計年月_月}
+        AND DbT7021."shukeiTaishoYSeireki" = #{一般状況11_14現物分_集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{一般状況11_14現物分_集計年月_月}
+        AND DbT7021."toukeiTaishoKubun" = #{統計対象区分}
+        AND
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            DbT7021."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7021."hyoNo" = #{審査_表番号}
+        AND DbT7021."shukeiNo" IN ('1200','1391','1392','1393','1400'))
+        ORDER BY
+        DbT7021."shichosonCode",
+        DbT7021."shukeiNo"
+    </select>
+    <select id="get事業報告統計償還分決定年月情報の取得"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokurenkei.JigyoHokokuRenkeiParameter" resultOrdered="true">
+        SELECT
+        *
+        FROM
+        rgdb."DbT7021JigyoHokokuTokeiData" AS DbT7021
+        WHERE
+        (DbT7021."hokokuYSeireki" = #{過去集計年月_年}
+        AND DbT7021."hokokuM" = #{過去集計年月_月}
+        AND DbT7021."shukeiTaishoYSeireki" = #{一般状況1_10集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{一般状況1_10集計年月_月}
+        AND DbT7021."toukeiTaishoKubun" = #{統計対象区分}
+        AND
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            DbT7021."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7021."hyoNo" = #{表番号}
+        AND DbT7021."shukeiNo" = '1100'
+        )
+        OR
+        (DbT7021."hokokuYSeireki" = #{過去集計年月_年}
+        AND DbT7021."hokokuM" = #{過去集計年月_月}
+        AND DbT7021."shukeiTaishoYSeireki" = #{一般状況11_14現物分_集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{一般状況11_14現物分_集計年月_月}
+        AND DbT7021."toukeiTaishoKubun" = #{統計対象区分}
+        AND
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            DbT7021."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7021."hyoNo" = #{決定_表番号}
+        AND DbT7021."shukeiNo" IN ('1200','1391','1392','1393','1400'))
+        ORDER BY
+        DbT7021."shichosonCode",
+        DbT7021."shukeiNo"
+    </select>
+    
+    <select id="get事業報告統計合算分審査年月情報の取得"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokurenkei.JigyoHokokuRenkeiParameter" resultOrdered="true">
+        SELECT
+        *
+        FROM
+        rgdb."DbT7021JigyoHokokuTokeiData" AS DbT7021
+        WHERE
+        (DbT7021."hokokuYSeireki" = #{過去集計年月_年}
+        AND DbT7021."hokokuM" = #{過去集計年月_月}
+        AND DbT7021."shukeiTaishoYSeireki" = #{一般状況1_10集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{一般状況1_10集計年月_月}
+        AND DbT7021."toukeiTaishoKubun" = #{統計対象区分}
+        AND
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            DbT7021."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7021."hyoNo" = #{表番号}
+        AND DbT7021."shukeiNo" = '1100'
+        )
+        OR
+        (DbT7021."hokokuYSeireki" = #{過去集計年月_年}
+        AND DbT7021."hokokuM" = #{過去集計年月_月}
+        AND
+        (
+        (DbT7021."hyoNo" = #{表番号}
+        AND DbT7021."shukeiTaishoYSeireki" = #{一般状況11_14現物分_集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{一般状況11_14現物分_集計年月_月})
+        OR
+        (DbT7021."hyoNo" = #{審査_表番号}
+        AND DbT7021."shukeiTaishoYSeireki" = #{一般状況11_14償還分_集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{一般状況11_14償還分_集計年月_月})
+        )
+        AND DbT7021."toukeiTaishoKubun" = #{統計対象区分}
+        AND
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            DbT7021."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7021."shukeiNo" IN ('1200','1391','1392','1393','1400'))
+        ORDER BY
+        DbT7021."shichosonCode",
+        DbT7021."shukeiNo"
+    </select>
+    <select id="get事業報告統計合算分決定年月情報の取得"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokurenkei.JigyoHokokuRenkeiParameter" resultOrdered="true">
+        SELECT
+        *
+        FROM
+        rgdb."DbT7021JigyoHokokuTokeiData" AS DbT7021
+        WHERE
+        (DbT7021."hokokuYSeireki" = #{過去集計年月_年}
+        AND DbT7021."hokokuM" = #{過去集計年月_月}
+        AND DbT7021."shukeiTaishoYSeireki" = #{一般状況1_10集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{一般状況1_10集計年月_月}
+        AND DbT7021."toukeiTaishoKubun" = #{統計対象区分}
+        AND
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            DbT7021."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7021."hyoNo" = #{表番号}
+        AND DbT7021."shukeiNo" = '1100'
+        )
+        OR
+        (DbT7021."hokokuYSeireki" = #{過去集計年月_年}
+        AND DbT7021."hokokuM" = #{過去集計年月_月}AND
+        (
+        (DbT7021."hyoNo" = #{表番号}
+        AND DbT7021."shukeiTaishoYSeireki" = #{一般状況11_14現物分_集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{一般状況11_14現物分_集計年月_月})
+        OR
+        (DbT7021."hyoNo" = #{決定_表番号}
+        AND DbT7021."shukeiTaishoYSeireki" = #{一般状況11_14償還分_集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{一般状況11_14償還分_集計年月_月})
+        )
+        AND DbT7021."toukeiTaishoKubun" = #{統計対象区分}
+        AND
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            DbT7021."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7021."shukeiNo" IN ('1200','1391','1392','1393','1400'))
+        ORDER BY
+        DbT7021."shichosonCode",
+        DbT7021."shukeiNo"
+    </select>
+    
+    <select id="get保険給付決定状況現物分情報の取得"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokurenkei.JigyoHokokuRenkeiParameter" resultOrdered="true">
+        SELECT
+        *
+        FROM
+        rgdb."DbT7021JigyoHokokuTokeiData" AS DbT7021
+        WHERE
+        DbT7021."hokokuYSeireki" = #{過去集計年月_年}
+        AND DbT7021."hokokuM" = #{過去集計年月_月}
+        AND DbT7021."shukeiTaishoYSeireki" = #{保険給付決定状況現物分_集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{保険給付決定状況現物分_集計年月_月}
+        AND DbT7021."toukeiTaishoKubun" = #{統計対象区分}
+        AND
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            DbT7021."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7021."hyoNo" = #{保険給付決定_表番号}
+        AND DbT7021."shukeiNo" IN ('0101','0102','0103','0104','0201','0202','0203','0204',
+        '0301','0302','0303','0304','0401','0402','0403','0404','0105',
+        '0106','0205','0206','0701','0702','0703','0704','0705','0706','0707')
+        ORDER BY
+        DbT7021."shichosonCode",
+        DbT7021."shukeiNo"
+    </select>
+    
+    <select id="get保険給付決定状況償還分審査年月情報の取得"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokurenkei.JigyoHokokuRenkeiParameter" resultOrdered="true">
+        SELECT
+        *
+        FROM
+        rgdb."DbT7021JigyoHokokuTokeiData" AS DbT7021
+        WHERE
+        DbT7021."hokokuYSeireki" = #{過去集計年月_年}
+        AND DbT7021."hokokuM" = #{過去集計年月_月}
+        AND DbT7021."shukeiTaishoYSeireki" = #{保険給付決定状況償還分_集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{保険給付決定状況償還分_集計年月_月}
+        AND DbT7021."toukeiTaishoKubun" = #{統計対象区分}
+        AND
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            DbT7021."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7021."hyoNo" = #{保険給付決定_審査_表番号}
+        AND DbT7021."shukeiNo" IN ('0101','0102','0103','0104','0201','0202','0203','0204',
+        '0301','0302','0303','0304','0401','0402','0403','0404','0105',
+        '0106','0205','0206','0701','0702','0703','0704','0705','0706','0707')
+        ORDER BY
+        DbT7021."shichosonCode",
+        DbT7021."shukeiNo"
+    </select>
+    
+    <select id="get保険給付決定状況償還分決定年月情報の取得"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokurenkei.JigyoHokokuRenkeiParameter" resultOrdered="true">
+        SELECT
+        *
+        FROM
+        rgdb."DbT7021JigyoHokokuTokeiData" AS DbT7021
+        WHERE
+        (DbT7021."hokokuYSeireki" = #{過去集計年月_年}
+        AND DbT7021."hokokuM" = #{過去集計年月_月}
+        AND DbT7021."shukeiTaishoYSeireki" = #{保険給付決定状況償還分_集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{保険給付決定状況償還分_集計年月_月}
+        AND DbT7021."toukeiTaishoKubun" = #{統計対象区分}
+        AND
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            DbT7021."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7021."hyoNo" = #{保険給付決定_決定_表番号}
+        AND DbT7021."shukeiNo" IN ('0101','0102','0103','0104','0201','0202','0203','0204',
+        '0301','0302','0303','0304','0401','0402','0403','0404','0105',
+        '0106','0205','0206','0701','0702','0703','0704','0705','0706','0707'))
+        OR
+        (DbT7021."hokokuYSeireki" = #{過去集計年月_年}
+        AND DbT7021."hokokuM" = #{過去集計年月_月}
+        AND DbT7021."shukeiTaishoYSeireki" = #{保険給付決定状況償還分_集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{保険給付決定状況償還分_集計年月_月}
+        AND DbT7021."toukeiTaishoKubun" = #{統計対象区分}
+        AND
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            DbT7021."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7021."hyoNo" = #{保険給付決定_決定2_表番号}
+        AND DbT7021."shukeiNo" IN ('0801','0802','0803','0804','0805'))
+        ORDER BY
+        DbT7021."shichosonCode",
+        DbT7021."shukeiNo"
+    </select>
+    
+    <select id="get保険給付決定状況合算分審査年月情報の取得"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokurenkei.JigyoHokokuRenkeiParameter" resultOrdered="true">
+        SELECT
+        *
+        FROM
+        rgdb."DbT7021JigyoHokokuTokeiData" AS DbT7021
+        WHERE
+        DbT7021."hokokuYSeireki" = #{過去集計年月_年}
+        AND DbT7021."hokokuM" = #{過去集計年月_月}
+        AND
+        (
+        (DbT7021."hyoNo" = #{保険給付決定_表番号}
+        AND DbT7021."shukeiTaishoYSeireki" = #{保険給付決定状況現物分_集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{保険給付決定状況現物分_集計年月_月})
+        OR
+        (DbT7021."hyoNo" = #{保険給付決定_審査_表番号}
+        AND DbT7021."shukeiTaishoYSeireki" = #{保険給付決定状況償還分_集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{保険給付決定状況償還分_集計年月_月})
+        )
+        AND DbT7021."toukeiTaishoKubun" = #{統計対象区分}
+        AND
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            DbT7021."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7021."shukeiNo" IN ('0101','0102','0103','0104','0201','0202','0203','0204',
+        '0301','0302','0303','0304','0401','0402','0403','0404','0105',
+        '0106','0205','0206','0701','0702','0703','0704','0705','0706','0707')
+        ORDER BY
+        DbT7021."shichosonCode",
+        DbT7021."shukeiNo"
+    </select>
+    
+    <select id="get保険給付決定状況合算分決定年月情報の取得"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokurenkei.JigyoHokokuRenkeiParameter" resultOrdered="true">
+        SELECT
+        *
+        FROM
+        rgdb."DbT7021JigyoHokokuTokeiData" AS DbT7021
+        WHERE
+        (DbT7021."hokokuYSeireki" = #{過去集計年月_年}
+        AND DbT7021."hokokuM" = #{過去集計年月_月}
+        AND
+        (
+        (DbT7021."hyoNo" = #{保険給付決定_表番号}
+        AND DbT7021."shukeiTaishoYSeireki" = #{保険給付決定状況現物分_集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{保険給付決定状況現物分_集計年月_月})
+        OR
+        (DbT7021."hyoNo" = #{保険給付決定_決定_表番号}
+        AND DbT7021."shukeiTaishoYSeireki" = #{保険給付決定状況償還分_集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{保険給付決定状況償還分_集計年月_月})
+        )
+        AND DbT7021."toukeiTaishoKubun" = #{統計対象区分}
+        AND
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            DbT7021."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7021."shukeiNo" IN ('0101','0102','0103','0104','0201','0202','0203','0204',
+        '0301','0302','0303','0304','0401','0402','0403','0404','0105',
+        '0106','0205','0206','0701','0702','0703','0704','0705','0706','0707'))
+        OR
+        (DbT7021."hokokuYSeireki" = #{過去集計年月_年}
+        AND DbT7021."hokokuM" = #{過去集計年月_月}
+        AND DbT7021."shukeiTaishoYSeireki" = #{保険給付決定状況償還分_集計年月_年}
+        AND DbT7021."shukeiTaishoM" = #{保険給付決定状況償還分_集計年月_月}
+        AND DbT7021."toukeiTaishoKubun" = #{統計対象区分}
+        AND
+        <foreach  
+            collection="市町村コードリスト"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+            DbT7021."shichosonCode" = #{item}
+        </foreach>
+        AND DbT7021."hyoNo" = #{保険給付決定_決定2_表番号}
+        AND DbT7021."shukeiNo" IN ('0801','0802','0803','0804','0805'))
+        ORDER BY
+        DbT7021."shichosonCode",
+        DbT7021."shukeiNo"
+    </select>
+</mapper>

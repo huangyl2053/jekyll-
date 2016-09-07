@@ -26,6 +26,14 @@ public interface IFukaJohoRelateMapper {
     FukaJohoRelateEntity select賦課の情報ByKey(FukaJohoRelateMapperParameter 賦課の情報検索条件);
 
     /**
+     * 最新賦課の情報情報をキー検索で１件取得します。
+     *
+     * @param 賦課の情報検索条件 賦課の情報検索条件
+     * @return FukaJohoRelateEntity
+     */
+    List<FukaJohoRelateEntity> select最新賦課の情報ByKey(FukaJohoRelateMapperParameter 賦課の情報検索条件);
+
+    /**
      * 賦課の情報情報をキー検索で１件取得します。
      *
      * @param parameter 賦課の情報検索条件
@@ -56,4 +64,20 @@ public interface IFukaJohoRelateMapper {
      * @return List<FukaJohoRelateEntity>
      */
     List<FukaJohoRelateEntity> get平準化後の賦課の情報(HeinjunkaAfterParameter parameter);
+
+    /**
+     * 履歴番号最大の賦課の情報をキー検索で１件取得します。
+     *
+     * @param 賦課の情報検索条件 賦課の情報検索条件
+     * @return FukaJohoRelateEntity
+     */
+    List<FukaJohoRelateEntity> select履歴番号最大の賦課の情報(FukaJohoRelateMapperParameter 賦課の情報検索条件);
+
+    /**
+     * 履歴番号最大の賦課の情報をキー検索で１件取得します。
+     *
+     * @param 賦課の情報検索条件 賦課の情報検索条件
+     * @return FukaJohoRelateEntity
+     */
+    FukaJohoRelateEntity select賦課の情報_最新(FukaJohoRelateMapperParameter 賦課の情報検索条件);
 }

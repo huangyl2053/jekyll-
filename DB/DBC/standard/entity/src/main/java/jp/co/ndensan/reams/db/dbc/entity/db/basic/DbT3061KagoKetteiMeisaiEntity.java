@@ -2,7 +2,6 @@ package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -10,7 +9,6 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -22,7 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
  * 過誤決定明細テーブルのエンティティクラスです。
  */
 public class DbT3061KagoKetteiMeisaiEntity extends DbTableEntityBase<DbT3061KagoKetteiMeisaiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3061KagoKetteiMeisai");
 
@@ -34,11 +32,8 @@ public class DbT3061KagoKetteiMeisaiEntity extends DbTableEntityBase<DbT3061Kago
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
-    @PrimaryKey
     private FlexibleYearMonth toriatsukaiYM;
-    @PrimaryKey
     private RString hokenshaKubun;
-    @PrimaryKey
     private int rirekiNo;
     private JigyoshaNo jigyoshoNo;
     private RString jigyoshoName;
@@ -442,15 +437,6 @@ public class DbT3061KagoKetteiMeisaiEntity extends DbTableEntityBase<DbT3061Kago
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.toriatsukaiYM, other.toriatsukaiYM)) {
-            return false;
-        }
-        if (!Objects.equals(this.hokenshaKubun, other.hokenshaKubun)) {
-            return false;
-        }
-        if (this.rirekiNo != other.rirekiNo) {
-            return false;
-        }
         return true;
     }
 
@@ -487,5 +473,6 @@ public class DbT3061KagoKetteiMeisaiEntity extends DbTableEntityBase<DbT3061Kago
     }
 
 // </editor-fold>
+
 
 }

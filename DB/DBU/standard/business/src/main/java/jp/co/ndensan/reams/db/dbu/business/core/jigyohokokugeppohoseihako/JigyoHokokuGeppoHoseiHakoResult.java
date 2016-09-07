@@ -6,19 +6,22 @@
 package jp.co.ndensan.reams.db.dbu.business.core.jigyohokokugeppohoseihako;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import lombok.Setter;
 
 /**
  * 事業報告集計一覧データResultクラスです。
  *
  * @reamsid_L DBU-1100-100 cuilin
  */
+@Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class JigyoHokokuGeppoHoseiHakoResult {
 
     private final JigyoHokokuGeppoHoseiHakoEntity entity;
@@ -32,6 +35,15 @@ public class JigyoHokokuGeppoHoseiHakoResult {
     public JigyoHokokuGeppoHoseiHakoResult(JigyoHokokuGeppoHoseiHakoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(業報告統計データ情報メッセージ.toString()));
         this.entity = entity;
+    }
+
+    /**
+     * getJigyoHokokuGeppoHoseiHakoEntity
+     *
+     * @return JigyoHokokuGeppoHoseiHakoEntity
+     */
+    public JigyoHokokuGeppoHoseiHakoEntity getJigyoHokokuGeppoHoseiHakoEntity() {
+        return entity;
     }
 
     /**

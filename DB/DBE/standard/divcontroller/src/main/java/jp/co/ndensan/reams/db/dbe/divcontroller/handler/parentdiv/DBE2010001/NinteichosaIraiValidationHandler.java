@@ -43,8 +43,8 @@ public class NinteichosaIraiValidationHandler {
      */
     public ValidationMessageControlPairs 入力チェック_btnDataOutput() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (!(!RString.isNullOrEmpty(div.getCcdTaskList().一览件数())
-                && Integer.parseInt(div.getCcdTaskList().一览件数().toString()) > 0)) {
+        if (!(!RString.isNullOrEmpty(div.getCcdTaskList().一覧件数())
+                && Integer.parseInt(div.getCcdTaskList().一覧件数().toString()) > 0)) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
         } else if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
@@ -60,8 +60,8 @@ public class NinteichosaIraiValidationHandler {
     public ValidationMessageControlPairs 入力チェック_btnIraiAuto() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         List<dgNinteiTaskList_Row> 選択されたデータ = div.getCcdTaskList().getCheckbox();
-        if (!(!RString.isNullOrEmpty(div.getCcdTaskList().一览件数())
-                && Integer.parseInt(div.getCcdTaskList().一览件数().toString()) > 0)) {
+        if (!(!RString.isNullOrEmpty(div.getCcdTaskList().一覧件数())
+                && Integer.parseInt(div.getCcdTaskList().一覧件数().toString()) > 0)) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
         } else if (選択されたデータ == null || 選択されたデータ.isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
@@ -83,8 +83,8 @@ public class NinteichosaIraiValidationHandler {
      */
     public ValidationMessageControlPairs 入力チェック_btnWaritukeShudo() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (!(!RString.isNullOrEmpty(div.getCcdTaskList().一览件数())
-                && Integer.parseInt(div.getCcdTaskList().一览件数().toString()) > 0)) {
+        if (!(!RString.isNullOrEmpty(div.getCcdTaskList().一覧件数())
+                && Integer.parseInt(div.getCcdTaskList().一覧件数().toString()) > 0)) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
         } else if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
@@ -106,8 +106,8 @@ public class NinteichosaIraiValidationHandler {
      */
     public ValidationMessageControlPairs 入力チェック_btnChousaIraiKanryo() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (!(!RString.isNullOrEmpty(div.getCcdTaskList().一览件数())
-                && Integer.parseInt(div.getCcdTaskList().一览件数().toString()) > 0)) {
+        if (!(!RString.isNullOrEmpty(div.getCcdTaskList().一覧件数())
+                && Integer.parseInt(div.getCcdTaskList().一覧件数().toString()) > 0)) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
         } else if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));

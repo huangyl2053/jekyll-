@@ -3,21 +3,17 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Jul 09 09:05:47 JST 2016 
+ * Sat Jul 09 09:05:47 JST 2016
  */
-
-
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
-
 /**
- * dgRenrakusakiIchiran_Row のクラスファイル 
- * 
+ * dgRenrakusakiIchiran_Row のクラスファイル
+ *
  * @author 自動生成
  */
-
 public class dgRenrakusakiIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
 
@@ -32,6 +28,7 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
     private RString sisyo;
     private RString kanaShimei;
     private RString yuubinBango;
+    private RString shinseishoKanriNo;
 
     public dgRenrakusakiIchiran_Row() {
         super();
@@ -46,6 +43,7 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
         this.sisyo = RString.EMPTY;
         this.kanaShimei = RString.EMPTY;
         this.yuubinBango = RString.EMPTY;
+        this.shinseishoKanriNo = RString.EMPTY;
         this.setOriginalData("renban", renban);
         this.setOriginalData("shimei", shimei);
         this.setOriginalData("tsuzukigara", tsuzukigara);
@@ -57,9 +55,10 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
         this.setOriginalData("sisyo", sisyo);
         this.setOriginalData("kanaShimei", kanaShimei);
         this.setOriginalData("yuubinBango", yuubinBango);
+        this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
     }
 
-    public dgRenrakusakiIchiran_Row(RString renban, RString shimei, RString tsuzukigara, RString jusho, RString telNo, RString mobileNo, RString yusenJuni, RString renrakusakiKuBun, RString sisyo, RString kanaShimei, RString yuubinBango) {
+    public dgRenrakusakiIchiran_Row(RString renban, RString shimei, RString tsuzukigara, RString jusho, RString telNo, RString mobileNo, RString yusenJuni, RString renrakusakiKuBun, RString sisyo, RString kanaShimei, RString yuubinBango, RString shinseishoKanriNo) {
         super();
         this.setOriginalData("renban", renban);
         this.setOriginalData("shimei", shimei);
@@ -72,6 +71,7 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
         this.setOriginalData("sisyo", sisyo);
         this.setOriginalData("kanaShimei", kanaShimei);
         this.setOriginalData("yuubinBango", yuubinBango);
+        this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.renban = renban;
         this.shimei = shimei;
         this.tsuzukigara = tsuzukigara;
@@ -83,6 +83,7 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
         this.sisyo = sisyo;
         this.kanaShimei = kanaShimei;
         this.yuubinBango = yuubinBango;
+        this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     public RString getRenban() {
@@ -127,6 +128,10 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
 
     public RString getYuubinBango() {
         return yuubinBango;
+    }
+
+    public RString getShinseishoKanriNo() {
+        return shinseishoKanriNo;
     }
 
     public void setRenban(RString renban) {
@@ -182,6 +187,11 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
     public void setYuubinBango(RString yuubinBango) {
         this.setOriginalData("yuubinBango", yuubinBango);
         this.yuubinBango = yuubinBango;
+    }
+
+    public void setShinseishoKanriNo(RString shinseishoKanriNo) {
+        this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
+        this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     // </editor-fold>

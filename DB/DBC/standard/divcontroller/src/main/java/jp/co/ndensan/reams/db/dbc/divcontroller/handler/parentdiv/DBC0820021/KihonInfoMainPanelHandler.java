@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.KihonInfoMainPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
@@ -751,9 +751,9 @@ public class KihonInfoMainPanelHandler {
 
     private void set緊急時_所定疾患ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月, RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        if (設定不可.equals(shikibetsuNoKanri.get特定疾患施設療養設定区分())) {
+        if (設定不可.equals(shikibetsuNoKanri.get所定疾患施設療養設定区分())) {
             div.getPanelTwo().getBtnKinkyujiShoteiShikan().setDisabled(true);
-        } else if (設定可必須.equals(shikibetsuNoKanri.get特定疾患施設療養設定区分())) {
+        } else if (設定可必須.equals(shikibetsuNoKanri.get所定疾患施設療養設定区分())) {
             int count7 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShoteiShikkanShisetsuRyoyo(
                     被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
             if (count7 != 0) {
@@ -761,7 +761,7 @@ public class KihonInfoMainPanelHandler {
             } else {
                 div.getPanelTwo().getBtnKinkyujiShoteiShikan().setIconNameEnum(IconName.Complete);
             }
-        } else if (設定可任意.equals(shikibetsuNoKanri.get特定疾患施設療養設定区分())) {
+        } else if (設定可任意.equals(shikibetsuNoKanri.get所定疾患施設療養設定区分())) {
             div.getPanelTwo().getBtnKinkyujiShoteiShikan().setIconNameEnum(IconName.NONE);
         }
     }

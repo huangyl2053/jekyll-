@@ -73,7 +73,11 @@ public enum DBACodeShubetsu implements ICodeShubetsu {
     /**
      * 介護資格住特解除。 クラスは未実装
      */
-    介護資格住特解除("0015", IryoHokenShurui.class);
+    介護資格住特解除("0015", IryoHokenShurui.class),
+    /**
+     * 介護資格住特解除。 クラスは未実装
+     */
+    負担割合証交付事由("0016", IryoHokenShurui.class);
 
     private final SubGyomuCode subGyomuCode = SubGyomuCode.DBA介護資格;
     private final CodeShubetsu codeShubetsu;

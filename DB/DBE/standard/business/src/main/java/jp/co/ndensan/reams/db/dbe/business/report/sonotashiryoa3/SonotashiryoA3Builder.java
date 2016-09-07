@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryoa3.Sonotashir
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 事務局用その他資料のBuilderクラスです。
+ * その他資料（A3版）のBuilderクラスです。
  *
- * @reamsid_L DBE-0150-080 wangrenze
+ * @reamsid_L DBE-0150-250 wangrenze
  */
 public class SonotashiryoA3Builder implements ISonotashiryoA3Builder {
 

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
+import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaSpecial;
+import jp.co.ndensan.reams.db.dbz.service.core.kihonchosainput.KihonChosaInputFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -108,11 +110,11 @@ public class KihonChosaInputHandler3 {
         for (KihonChosaInput 認定調査基本情報 : 認定調査基本情報リスト) {
             if (連番 == 認定調査基本情報.get調査連番()) {
                 if (!get調査項目By単項Key(単項Key).equals(認定調査基本情報.get調査項目())) {
-                    KihonChosaInput new認定調査基本情報 = new KihonChosaInput(認定調査基本情報.get認知症高齢者自立度(),
+                    KihonChosaInput new認定調査基本情報 = new KihonChosaInput(認定調査基本情報.get申請書管理番号(),
+                            認定調査基本情報.get認定調査依頼履歴番号(), 認定調査基本情報.get認知症高齢者自立度(),
                             認定調査基本情報.get障害高齢者自立度(), 認定調査基本情報.get調査連番(), get調査項目By単項Key(単項Key),
                             認定調査基本情報.get前回認知症高齢者自立度(), 認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(),
-                            認定調査基本情報.get前回調査項目(), 認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(),
-                            認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項(), 認定調査基本情報.is特記事項有無());
+                            認定調査基本情報.get前回調査項目(), 認定調査基本情報.is特記事項有無());
                     remove認定調査基本情報リスト.add(認定調査基本情報);
                     add認定調査基本情報リスト.add(new認定調査基本情報);
                 }
@@ -124,8 +126,8 @@ public class KihonChosaInputHandler3 {
             認定調査基本情報リスト.addAll(add認定調査基本情報リスト);
         }
         if (is連番対応認定調査基本情報なし) {
-            認定調査基本情報リスト.add(new KihonChosaInput(Code.EMPTY, Code.EMPTY, 連番, get調査項目By単項Key(単項Key), Code.EMPTY, Code.EMPTY,
-                    0, RString.EMPTY, RString.EMPTY, 0, Code.EMPTY, RString.EMPTY, false));
+            認定調査基本情報リスト.add(new KihonChosaInput(ShinseishoKanriNo.EMPTY, 0, Code.EMPTY, Code.EMPTY,
+                    連番, get調査項目By単項Key(単項Key), Code.EMPTY, Code.EMPTY, 0, RString.EMPTY, false));
         }
     }
 
@@ -163,7 +165,20 @@ public class KihonChosaInputHandler3 {
         if (!this.認定調査前回結果表示.equals(認定調査前回結果表示)) {
             div.getZenkaiHyojiTeiji().setDisplayNone(true);
         }
+        List<RString> 認定調査特記情報List = get特記事項番号List(申請書管理番号);
+        ArrayList<RString> 認定調査特記情報ArrayList = new ArrayList<>(認定調査特記情報List);
+        div.getNinchiKinou().setNinteichosaTokkijikoNoList(DataPassingConverter.serialize(認定調査特記情報ArrayList));
         onLoad第三群認知機能(認定調査基本情報リスト, 認定調査前回結果表示);
+    }
+
+    private List<RString> get特記事項番号List(ShinseishoKanriNo 申請書管理番号) {
+        KihonChosaInputFinder finder = KihonChosaInputFinder.createInstance();
+        List<KihonChosaSpecial> 認定調査特記情報List = finder.get認定調査特記情報(申請書管理番号);
+        List<RString> 特記事項番号List = new ArrayList<>();
+        for (KihonChosaSpecial 認定調査特記情報 : 認定調査特記情報List) {
+            特記事項番号List.add(認定調査特記情報.get認定調査特記事項番号());
+        }
+        return 特記事項番号List;
     }
 
     private void onLoad第三群認知機能(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
@@ -216,8 +231,6 @@ public class KihonChosaInputHandler3 {
         if (連番 == 整数41) {
             div.getBtnModoru().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(外出すると戻れないKeys, 調査項目, false, false);
-            div.getModoru().setModoruShinseishoKanriNo(
-                    DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
         }
         if (前回連番 == 整数41) {
             setKeyBy調査項目(前回外出すると戻れないKeys, 前回調査項目, false, false);
@@ -247,8 +260,6 @@ public class KihonChosaInputHandler3 {
         if (連番 == 整数40) {
             div.getBtnHaikai().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(徘徊Keys, 調査項目, false, false);
-            div.getHaikai().setHaikaiShinseishoKanriNo(
-                    DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
         }
         if (前回連番 == 整数40) {
             setKeyBy調査項目(前回徘徊Keys, 前回調査項目, false, false);
@@ -278,8 +289,6 @@ public class KihonChosaInputHandler3 {
         if (連番 == 整数39) {
             div.getBtnBasho().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目が2(場所の理解Keys, 調査項目);
-            div.getBasho().setBashoShinseishoKanriNo(
-                    DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
         }
         if (前回連番 == 整数39) {
             setKeyBy調査項目が2(前回場所の理解Keys, 前回調査項目);
@@ -311,8 +320,6 @@ public class KihonChosaInputHandler3 {
         if (連番 == 整数38) {
             div.getBtnKisetsu().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目が2(今の季節を理解するKeys, 調査項目);
-            div.getKisetsu().setKisetsuShinseishoKanriNo(
-                    DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
         }
         if (前回連番 == 整数38) {
             setKeyBy調査項目が2(前回今の季節を理解するKeys, 前回調査項目);
@@ -343,8 +350,6 @@ public class KihonChosaInputHandler3 {
         if (連番 == 整数37) {
             div.getBtnNameInfo().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目が2(自分の名前を言うKeys, 調査項目);
-            div.getNameInfo().setNameInfoShinseishoKanriNo(
-                    DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
         }
         if (前回連番 == 整数37) {
             setKeyBy調査項目が2(前回自分の名前を言うKeys, 前回調査項目);
@@ -374,8 +379,6 @@ public class KihonChosaInputHandler3 {
         if (連番 == 整数36) {
             div.getBtnDankiKioku().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目が2(短期記憶Keys, 調査項目);
-            div.getDankiKioku().setDankiKiokuShinseishoKanriNo(
-                    DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
         }
         if (前回連番 == 整数36) {
             setKeyBy調査項目が2(前回短期記憶Keys, 前回調査項目);
@@ -406,8 +409,6 @@ public class KihonChosaInputHandler3 {
         if (連番 == 整数35) {
             div.getBtnInfo().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目が2(生年月日や年齢を言うKeys, 調査項目);
-            div.getInfo().setInfoShinseishoKanriNo(
-                    DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
         }
         if (前回連番 == 整数35) {
             setKeyBy調査項目が2(前回生年月日や年齢を言うKeys, 前回調査項目);
@@ -438,8 +439,6 @@ public class KihonChosaInputHandler3 {
         if (連番 == 整数34) {
             div.getBtnNikka().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目が2(毎日の日課を理解Keys, 調査項目);
-            div.getNikka().setNikkaShinseishoKanriNo(
-                    DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
         }
         if (前回連番 == 整数34) {
             setKeyBy調査項目が2(前回毎日の日課を理解Keys, 前回調査項目);
@@ -469,8 +468,6 @@ public class KihonChosaInputHandler3 {
         if (連番 == 整数33) {
             div.getBtnIshiDentatsu().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(意思の伝達Keys, 調査項目, true, false);
-            div.getIshiDentatsu().setIshiDentatsuShinseishoKanriNo(
-                    DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
         }
         if (前回連番 == 整数33) {
             setKeyBy調査項目(前回意思の伝達Keys, 前回調査項目, true, false);
@@ -514,14 +511,6 @@ public class KihonChosaInputHandler3 {
         } else if (調査項目2.equals(調査項目)) {
             keys.add(KEY1);
         }
-    }
-
-    private ArrayList<RString> get認定調査特記事項番号List(KihonChosaInput 認定調査基本情報) {
-        ArrayList<RString> list = new ArrayList<>();
-        if (認定調査基本情報 != null) {
-            list.add(認定調査基本情報.get認定調査特記事項番号());
-        }
-        return list;
     }
 
     private List<ListControlTextIcon> getListControlTextIcon(List<RString> 前回Keys) {

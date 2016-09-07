@@ -33,13 +33,14 @@ public class NinteichosaTokusokujyoFlow extends BatchFlowBase<NinteichosaTokusok
     @Override
     protected void defineFlow() {
 
+        List<RString> 申請書管理番号 = new ArrayList<>();
         if (要介護認定調査督促状_選択された.equals(getParameter().getTemp_要介護認定調査督促状().toString())) {
             executeStep(要介護認定調査督促状の作成);
+            申請書管理番号 = getResult(List.class, new RString(要介護認定調査督促状の作成), NinteiChosaTokusokujoReportProcess.OUT_SHINSEISHO_KANRINO_LIST);
         }
         if (認定調査督促対象者一覧表_選択された.equals(getParameter().getTemp_認定調査督促対象者一覧表().toString())) {
             executeStep(認定調査督促対象者一覧表の作成);
         }
-        List 申請書管理番号 = getResult(List.class, new RString(要介護認定調査督促状の作成), NinteiChosaTokusokujoReportProcess.OUT_SHINSEISHO_KANRINO_LIST);
         if (申請書管理番号 != null && !申請書管理番号.isEmpty()) {
             executeStep(認定調査督促対象者一覧表の更新);
         }

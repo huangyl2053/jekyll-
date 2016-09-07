@@ -5,6 +5,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
 /*
@@ -65,10 +66,35 @@ public interface IFukaRirekiAllDiv extends ICommonChildDivBaseProperties {
      */
     FukaRireki get賦課履歴();
 
+//<<<<<<< HEAD
     /**
      * 賦課履歴を取得して保持している場合は{@code true}を返します。
      *
      * @return 賦課履歴を取得して保持している場合は{@code true}.
      */
     boolean hasLoaded();
+//=======
+
+    /**
+     * 選択されている行の通知書番号を返します。
+     *
+     * @return 通知書番号 TsuchishoNo
+     */
+    TsuchishoNo getClicked通知書番号();
+
+    /**
+     * 選択されている行の調定年度を返します。
+     *
+     * @return 調定年度 FlexibleYear
+     */
+    FlexibleYear getClicked調定年度();
+
+    /**
+     * 選択されている行の賦課年度を返します。
+     *
+     * @return 賦課年度 FlexibleYear
+     */
+    FlexibleYear getClicked賦課年度();
+
+//    >>>>>>> origin/sync
 }

@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC81001",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "広域用非課税年金対象者情報アップロード",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD8010001",
+     "toLayoutTitle": "非課税年金対象者情報アップロード",
+     "toState": "アップロード画面"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD8010001",
+     "layoutTitle": "非課税年金対象者情報アップロード",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

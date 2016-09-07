@@ -69,13 +69,35 @@ public class HonsanteiIdoValidationHandler {
         IValidationMessages messages = new ControlValidator(div).必須チェックのValidate(特徴開始通知書Flag,
                 決定変更通知書Flag,
                 納入通知書Flag);
-        return createDictionary().check(messages);
+        return create必須チェックDictionary().check(messages);
     }
 
     private ValidationDictionary createDictionary() {
         return new ValidationDictionaryBuilder()
                 .add(HonsanteiIdoValidationMessages.処理対象と出力期の一致チェック,
                         div.getHonsanteiIdoChohyoHakko().getHonSanteiIdoTsuchiKobetsuJoho().getDdlNotsuShuturyokuki())
+                .build();
+    }
+
+    private ValidationDictionary create必須チェックDictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(HonsanteiIdoValidationMessages.処理対象チェック,
+                        div.getHonsanteiIdoShoriNaiyo().getDdlShoritsuki())
+                .add(HonsanteiIdoValidationMessages.特徴開始通知書の発行日チェック,
+                        div.getHonSanteiIdoTsuchiKobetsuJoho().getTxtTokuchoKaishiTsuchishoHakkoYMD())
+                .add(HonsanteiIdoValidationMessages.通知書チェックボックスチェック,
+                        div.getHonSanteiIdoTsuchiKobetsuJoho().getChkKetteiTsuchi(),
+                        div.getHonSanteiIdoTsuchiKobetsuJoho().getChkHenkoTsuchi())
+                .add(HonsanteiIdoValidationMessages.決定通知書の発行日チェック,
+                        div.getHonSanteiIdoTsuchiKobetsuJoho().getTxtKetteiTsuchiHakkoYMD())
+                .add(HonsanteiIdoValidationMessages.変更通知書の対象者チェック,
+                        div.getHonSanteiIdoTsuchiKobetsuJoho().getChkHenkoTsuchiTaishosha())
+                .add(HonsanteiIdoValidationMessages.変更通知書の発行日チェック,
+                        div.getHonSanteiIdoTsuchiKobetsuJoho().getTxtHenkoTsuchiHakkoYMD())
+                .add(HonsanteiIdoValidationMessages.納入通知書の対象者チェック,
+                        div.getHonSanteiIdoTsuchiKobetsuJoho().getChkNotsuTaishoSha())
+                .add(HonsanteiIdoValidationMessages.納入通知書の発行日チェック,
+                        div.getHonSanteiIdoTsuchiKobetsuJoho().getTxtNotsuHakkoYMD())
                 .build();
     }
 

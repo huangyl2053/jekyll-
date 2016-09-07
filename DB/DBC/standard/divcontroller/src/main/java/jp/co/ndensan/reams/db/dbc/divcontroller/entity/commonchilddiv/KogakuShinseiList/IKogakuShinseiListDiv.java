@@ -19,4 +19,25 @@ public interface IKogakuShinseiListDiv extends ICommonChildDivBaseProperties {
      * @param 導入形態コード RString
      */
     public void initialize(RString メニューID, HihokenshaNo 被保険者番号, RString 導入形態コード);
+
+    /**
+     * 審査決定フラグ
+     *
+     * @return boolean
+     */
+    public boolean is審査決定フラグ();
+
+    /**
+     * 決定情報フラグ
+     *
+     * @return boolean
+     */
+    public boolean is決定情報フラグ();
+
+    /**
+     * 支給区分フラグ
+     *
+     * @return boolean
+     */
+    public boolean is支給区分フラグ();
 }

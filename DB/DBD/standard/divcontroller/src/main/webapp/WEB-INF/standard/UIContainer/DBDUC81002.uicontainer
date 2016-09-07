@@ -1,0 +1,41 @@
+﻿{
+ "uiContainerName": "DBDUC81002",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "非課税年金対象者情報取込",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "非課税年金対象者情報取込",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD8010002",
+     "toLayoutTitle": "処理タイトル名",
+     "toState": "非課税年金対象者情報_単一用"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD8010002",
+     "layoutTitle": "処理タイトル名",
+     "eventName": "実行_非課税年金対象者情報取込",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "3",
+     "type": "start",
+     "condition": "遡及非課税年金対象者同定",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD8010002",
+     "toLayoutTitle": "処理タイトル名",
+     "toState": "遡及非課税年金対象者同定"
+    }
+   ]
+  }
+ ]
+}

@@ -24,11 +24,14 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
-import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilders.ReportSourceBuilders;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -110,10 +113,11 @@ public class TokuteifutanGendogakuShinseisho {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokuteiFutangendogakuShinseishoReportSource> assembler = createAssembler(proerty, reportManager)) {
                 ReportSourceWriter<TokuteiFutangendogakuShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
-                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                        null, reportSourceWriter.getImageFolderPath());
+                Ninshosha nishosha = NinshoshaFinderFactory.createInstance().get帳票認証者(
+                        GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
+                Association association = AssociationFinderFactory.createInstance().getAssociation();
+                INinshoshaSourceBuilder ninshoshaSourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                        nishosha, association, reportSourceWriter.getImageFolderPath(), RDate.getNowDate());
                 for (TokuteiFutangendogakuShinseishoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei, 識別コード)) {
                     report.writeBy(reportSourceWriter);
@@ -128,10 +132,10 @@ public class TokuteifutanGendogakuShinseisho {
         List<TokuteiFutangendogakuShinseishoReport> list = new ArrayList<>();
         RString 生年月日 = RString.EMPTY;
         if (JuminShubetsu.日本人.getCode().equals(entity.get住民種別コード())
-                || JuminShubetsu.住登外個人_日本人.getCode().equals(entity.get住民種別コード())) {
+            || JuminShubetsu.住登外個人_日本人.getCode().equals(entity.get住民種別コード())) {
             生年月日 = set生年月日_日本人(entity);
         } else if (JuminShubetsu.外国人.getCode().equals(entity.get住民種別コード())
-                || JuminShubetsu.住登外個人_外国人.getCode().equals(entity.get住民種別コード())) {
+                   || JuminShubetsu.住登外個人_外国人.getCode().equals(entity.get住民種別コード())) {
             生年月日 = set生年月日(entity);
         }
         List<RString> 施設情報 = get施設情報(get施設情報の取得(識別コード));
@@ -224,13 +228,13 @@ public class TokuteifutanGendogakuShinseisho {
                 DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyoshaEntity = get介護事業者_事業者情報の取得(dbT1004ShisetsuNyutaishoEntity
                         .getNyushoShisetsuCode().value());
                 施設郵便番号 = dbT7060KaigoJigyoshaEntity == null
-                        ? RString.EMPTY : getYubinNoValue(dbT7060KaigoJigyoshaEntity.getYubinNo());
+                         ? RString.EMPTY : getYubinNoValue(dbT7060KaigoJigyoshaEntity.getYubinNo());
                 施設電話番号 = dbT7060KaigoJigyoshaEntity == null
-                        ? RString.EMPTY : getTelNoValue(dbT7060KaigoJigyoshaEntity.getTelNo());
+                         ? RString.EMPTY : getTelNoValue(dbT7060KaigoJigyoshaEntity.getTelNo());
                 施設住所 = dbT7060KaigoJigyoshaEntity == null
-                        ? RString.EMPTY : getAtenaJushoValue(dbT7060KaigoJigyoshaEntity.getJigyoshaAddress());
+                       ? RString.EMPTY : getAtenaJushoValue(dbT7060KaigoJigyoshaEntity.getJigyoshaAddress());
                 施設名称 = dbT7060KaigoJigyoshaEntity == null
-                        ? RString.EMPTY : getAtenaMeishoValue(dbT7060KaigoJigyoshaEntity.getJigyoshaName());
+                       ? RString.EMPTY : getAtenaMeishoValue(dbT7060KaigoJigyoshaEntity.getJigyoshaName());
             }
             if (ShisetsuType.住所地特例対象施設.getコード().equals(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuShurui())) {
                 DbT1005KaigoJogaiTokureiTaishoShisetsuEntity dbT1005Entity

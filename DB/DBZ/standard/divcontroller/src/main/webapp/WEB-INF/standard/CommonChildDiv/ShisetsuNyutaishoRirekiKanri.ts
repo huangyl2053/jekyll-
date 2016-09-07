@@ -117,7 +117,7 @@ module DBZ {
                     this.controls.btnAddShisetsuNyutaisho().displayNone = true;
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
-					gridSetting.isShowSelectButtonColumn = true;
+                    gridSetting.isShowSelectButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = false;
                     gridSetting.isShowModifyButtonColumn = false;
                     var columns = gridSetting.columns;
@@ -297,8 +297,8 @@ module DBZ {
                 }
 
 				  public 台帳種別表示機能(): void {
-					// 台帳種別表示
-					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
+                    // 台帳種別表示
+                    var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
                     for (var i = 0; i < columns.length; i++) {
@@ -312,9 +312,9 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-					this.controls.ccdShisetsuJoho().State().DaichoShubetsuAriMode();
+                    this.controls.ccdShisetsuJoho().State().DaichoShubetsuAriMode();
 
-					//施設種類表示
+					//施設種類表示、転出先保険者番号表示
 					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
@@ -322,11 +322,15 @@ module DBZ {
                         if (columns[i].dataName === 'shisetsuShurui') {
                             columns[i].visible = true;
                         }
+                        if (columns[i].dataName === 'txtTenshutsusakiHokenshaBango') {
+                            columns[i].visible = true;
+                        }
                     }
                     gridSetting.columns = columns;
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    this.controls.TenshutsusakiJohoPanel().displayNone = false;
 
                 }
 
@@ -347,9 +351,9 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-					this.controls.ccdShisetsuJoho().State().DaichoShubetsuNashiMode();
+                    this.controls.ccdShisetsuJoho().State().DaichoShubetsuNashiMode();
 
-					//施設種類表示
+					//施設種類表示、転出先保険者番号表示
 					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
@@ -357,11 +361,15 @@ module DBZ {
                         if (columns[i].dataName === 'shisetsuShurui') {
                             columns[i].visible = true;
                         }
+                        if (columns[i].dataName === 'txtTenshutsusakiHokenshaBango') {
+                            columns[i].visible = true;
+                        }
                     }
                     gridSetting.columns = columns;
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    this.controls.TenshutsusakiJohoPanel().displayNone = false;
 
 					}
 
@@ -381,9 +389,9 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-					this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
+                    this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
 
-					//施設種類表示
+					//施設種類表示、転出先保険者番号表示
 					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
@@ -391,10 +399,14 @@ module DBZ {
                         if (columns[i].dataName === 'shisetsuShurui') {
                             columns[i].visible = true;
                         }
+                        if (columns[i].dataName === 'txtTenshutsusakiHokenshaBango') {
+                            columns[i].visible = true;
+                        }
                     }
                     gridSetting.columns = columns;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    this.controls.TenshutsusakiJohoPanel().displayNone = false;
                 }
 
 					public 他市町村住所地特例者対象機能(): void {
@@ -412,9 +424,9 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-					this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
+                    this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
 
-					//施設種類表示
+					//施設種類表示、転出先保険者番号非表示
 					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
@@ -422,17 +434,21 @@ module DBZ {
                         if (columns[i].dataName === 'shisetsuShurui') {
                             columns[i].visible = true;
                         }
+                        if (columns[i].dataName === 'txtTenshutsusakiHokenshaBango') {
+                            columns[i].visible = false;
+                        }
                     }
                     gridSetting.columns = columns;
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    this.controls.TenshutsusakiJohoPanel().displayNone = true;
 
                 	}
 
                	 public 適用除外者対象機能(): void {
-					// 台帳種別非表示
-				   var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
+                    // 台帳種別非表示
+                    var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
                     for (var i = 0; i < columns.length; i++) {
@@ -445,14 +461,17 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-					this.controls.ccdShisetsuJoho().State().TekiyoJogaiMode();
+                    this.controls.ccdShisetsuJoho().State().TekiyoJogaiMode();
 
-					//施設種類非表示
-					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
+                    //施設種類、転出先保険者番号非表示
+                    var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
                     for (var i = 0; i < columns.length; i++) {
                         if (columns[i].dataName === 'shisetsuShurui') {
+                            columns[i].visible = false;
+                        }
+                        if (columns[i].dataName === 'txtTenshutsusakiHokenshaBango') {
                             columns[i].visible = false;
                         }
                     }
@@ -460,6 +479,7 @@ module DBZ {
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    this.controls.TenshutsusakiJohoPanel().displayNone = true;
 
 
                 }

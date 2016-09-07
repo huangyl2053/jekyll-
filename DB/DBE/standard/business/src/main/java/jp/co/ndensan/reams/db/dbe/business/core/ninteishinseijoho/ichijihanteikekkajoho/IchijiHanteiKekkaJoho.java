@@ -71,6 +71,33 @@ public class IchijiHanteiKekkaJoho
     }
 
     /**
+     * 要介護認定一次判定年月日を返します。
+     *
+     * @return 要介護認定一次判定年月日
+     */
+    public FlexibleDate get要介護認定一次判定年月日() {
+        return entity.getIchijiHanteiYMD();
+    }
+
+    /**
+     * 要介護認定一次判定結果コード_認知症加算を返します。
+     *
+     * @return 要介護認定一次判定結果コード_認知症加算
+     */
+    public Code get要介護認定一次判定結果コード_認知症加算() {
+        return entity.getIchijiHanteiKekkaNinchishoKasanCode();
+    }
+
+    /**
+     * 要介護認定一次判定結果コードを返します。
+     *
+     * @return 要介護認定一次判定結果コード
+     */
+    public Code get要介護認定一次判定結果コード() {
+        return entity.getIchijiHanteiKekkaCode();
+    }
+
+    /**
      * 要介護認定等基準時間を返します。
      *
      * @return 要介護認定等基準時間
@@ -406,7 +433,8 @@ public class IchijiHanteiKekkaJoho
     }
 
     /**
-     * 要介護認定一次判定結果情報のみを変更対象とします。<br/> {@link DbT5116IchijiHanteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 要介護認定一次判定結果情報のみを変更対象とします。<br/>
+     * {@link DbT5116IchijiHanteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link IchijiHanteiKekkaJoho}
      */
@@ -420,7 +448,8 @@ public class IchijiHanteiKekkaJoho
     }
 
     /**
-     * 保持する要介護認定一次判定結果情報を削除対象とします。<br/> {@link DbT5116IchijiHanteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する要介護認定一次判定結果情報を削除対象とします。<br/>
+     * {@link DbT5116IchijiHanteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link IchijiHanteiKekkaJoho}
      */

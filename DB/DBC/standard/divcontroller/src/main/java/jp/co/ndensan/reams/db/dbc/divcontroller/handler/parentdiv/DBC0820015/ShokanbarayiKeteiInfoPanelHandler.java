@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikett
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.dgSyokanbaraikete_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820015.ShokanbarayiKeteiInfoPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -25,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い費支給申請決定_償還払決定情報
@@ -239,11 +237,11 @@ public class ShokanbarayiKeteiInfoPanelHandler {
     /**
      * get内容変更状態
      *
-     * @return flag
+     * @param 償還払決定一覧 Map
+     * @param 決定情報 KetteJoho
+     * @return Boolean
      */
-    public Boolean get内容変更状態() {
-        Map<RString, Integer> 償還払決定一覧 = ViewStateHolder.get(ViewStateKeys.決定情報登録_償還払決定一覧, Map.class);
-        KetteJoho 決定情報 = ViewStateHolder.get(ViewStateKeys.決定情報登録_決定情報, KetteJoho.class);
+    public Boolean get内容変更状態(Map<RString, Integer> 償還払決定一覧, KetteJoho 決定情報) {
         boolean flag = false;
         RDate 決定日 = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getTxtKetebi().getValue();
         if (決定日 != null) {
@@ -291,14 +289,14 @@ public class ShokanbarayiKeteiInfoPanelHandler {
 
     /**
      * 削除Save
+     *
+     * @param paramter ShoukanharaihishinseikensakuParameter
+     * @param 識別コード ShikibetsuCode
      */
-    public void 削除Save() {
-        ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
-                ShoukanharaihishinseikensakuParameter.class);
+    public void 削除Save(ShoukanharaihishinseikensakuParameter paramter, ShikibetsuCode 識別コード) {
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
         FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
         RString 整理番号 = paramter.getSeiriNp();
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         SyokanbaraihiShikyuShinseiKetteManager.createInstance().delDbT3034ShokanShinsei(被保険者番号,
                 サービス年月, 整理番号, 識別コード);
     }
@@ -306,11 +304,13 @@ public class ShokanbarayiKeteiInfoPanelHandler {
     /**
      * 登録Save
      *
+     * @param paramter ShoukanharaihishinseikensakuParameter
      * @param 支払金額合計初期 Decimal
+     * @param 画面モード RString
+     * @param 識別コード ShikibetsuCode
      */
-    public void 登録Save(Decimal 支払金額合計初期) {
-        ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
-                ShoukanharaihishinseikensakuParameter.class);
+    public void 登録Save(ShoukanharaihishinseikensakuParameter paramter, Decimal 支払金額合計初期,
+            RString 画面モード, ShikibetsuCode 識別コード) {
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
         FlexibleYearMonth サービス提供年月 = paramter.getServiceTeikyoYM();
         RString 整理番号 = paramter.getSeiriNp();
@@ -330,8 +330,6 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 .getShokanbaraiketteiJohoDiv().getTxtFushikyuriyu2().getValue();
         int 増減単位 = div.getCcdShokanbaraiketteiJoho()
                 .getShokanbaraiketteiJohoDiv().getTxtZogentani().getValue().intValue();
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         List<SyokanbaraihiShikyuShinseiKetteEntity> entityList = new ArrayList<>();
         List<dgSyokanbaraikete_Row> rowList = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv()
                 .getDgSyokanbaraikete().getDataSource();

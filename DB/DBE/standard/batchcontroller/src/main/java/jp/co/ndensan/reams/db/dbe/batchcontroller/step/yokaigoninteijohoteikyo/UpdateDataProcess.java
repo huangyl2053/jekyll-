@@ -7,9 +7,13 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoninteijohoteikyo;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.yokaigoninteijohoteikyo.YokaigoBatchProcessParamter;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteijohoteikyo.IYokaigoNinteiJohoTeikyoMapper;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -24,10 +28,17 @@ public class UpdateDataProcess extends BatchProcessBase<RString> {
             + "getListForProcess");
     private YokaigoBatchProcessParamter processParameter;
     private IYokaigoNinteiJohoTeikyoMapper mapper;
+    @BatchWriter
+    private BatchPermanentTableWriter<DbT5101NinteiShinseiJohoEntity> dbT5101Temp;
 
     @Override
     protected void initialize() {
         mapper = getMapper(IYokaigoNinteiJohoTeikyoMapper.class);
+    }
+
+    @Override
+    protected void createWriter() {
+        dbT5101Temp = new BatchPermanentTableWriter<>(DbT5101NinteiShinseiJohoEntity.class);
     }
 
     @Override
@@ -42,6 +53,8 @@ public class UpdateDataProcess extends BatchProcessBase<RString> {
 
     @Override
     protected void afterExecute() {
-        mapper.update要介護認定申請(processParameter.toYokaigoBatchMybitisParamter());
+        DbT5101NinteiShinseiJohoEntity entity = mapper.get要介護認定申請情報(processParameter.toYokaigoBatchMybitisParamter());
+        entity.setJohoteikyoSiryoOutputYMD(FlexibleDate.getNowDate());
+        dbT5101Temp.update(entity);
     }
 }

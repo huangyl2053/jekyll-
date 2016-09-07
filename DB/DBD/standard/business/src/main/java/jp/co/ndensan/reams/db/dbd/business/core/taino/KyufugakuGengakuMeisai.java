@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.core.taino;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KyufugakuGengakuMeisai {
+public class KyufugakuGengakuMeisai implements Serializable {
 
     private final FlexibleYear 調定年度;
     private final Decimal 時効到来未納額;

@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbe.business.core.seikatsuhogotoroku;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.business.core.gyosekukaku.Gyoseiku;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
@@ -45,10 +45,11 @@ public class Minashi2shisaiJoho implements Serializable {
     private RString 世帯コード;
     private RString 行政区コード;
     private RString 行政区名称;
-    private RString 住民種別;
     private SubGyomuCode サブ業務コード;
     private RDate 生年月日;
     private RString 性別コード;
+    private RString 支所コード;
+    private ShinseishoKanriNo 前回申請書管理番号;
 
     /**
      * 保険者を設定します。
@@ -168,15 +169,6 @@ public class Minashi2shisaiJoho implements Serializable {
     }
 
     /**
-     * 住民種別を設定します。
-     *
-     * @param 住民種別 住民種別
-     */
-    public void set住民種別(RString 住民種別) {
-        this.住民種別 = 住民種別;
-    }
-
-    /**
      * サブ業務コードを設定します。
      *
      * @param サブ業務コード サブ業務コード
@@ -201,6 +193,42 @@ public class Minashi2shisaiJoho implements Serializable {
      */
     public void set性別コード(RString 性別コード) {
         this.性別コード = 性別コード;
+    }
+
+    /**
+     * 支所コードを設定します。
+     *
+     * @param 支所コード 支所コード
+     */
+    public void set支所コード(RString 支所コード) {
+        this.支所コード = 支所コード;
+    }
+
+    /**
+     * 前回申請書管理番号を設定します。
+     *
+     * @param 前回申請書管理番号 前回申請書管理番号
+     */
+    public void set前回申請書管理番号(ShinseishoKanriNo 前回申請書管理番号) {
+        this.前回申請書管理番号 = 前回申請書管理番号;
+    }
+
+    /**
+     * 前回申請書管理番号を取得します。
+     *
+     * @return 前回申請書管理番号
+     */
+    public ShinseishoKanriNo get前回申請書管理番号() {
+        return 前回申請書管理番号;
+    }
+
+    /**
+     * 支所コードを取得します。
+     *
+     * @return 支所コード
+     */
+    public RString get支所コード() {
+        return 支所コード;
     }
 
     /**
@@ -336,14 +364,5 @@ public class Minashi2shisaiJoho implements Serializable {
      */
     public SubGyomuCode getサブ業務コード() {
         return サブ業務コード;
-    }
-
-    /**
-     * 住民種別を取得します。
-     *
-     * @return 住民種別
-     */
-    public JuminShubetsu get住民種別() {
-        return JuminShubetsu.toValue(住民種別);
     }
 }

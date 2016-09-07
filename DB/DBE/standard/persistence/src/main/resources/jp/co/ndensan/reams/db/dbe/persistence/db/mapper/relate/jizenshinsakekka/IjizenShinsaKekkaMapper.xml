@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBE-1630-020 xuyongchao -->
+<!-- 事前審査結果登録データ作成 -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.jizenshinsakekka.IjizenShinsaKekkaMapper">
+    <select resultOrdered="true" id="getJizenShinsaKekka"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.jizenshinsakekka.JizenShinsakekkaMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.jizenshinsakekka.JizenShinsaKekkaRelateEntity" fetchSize="500">
+            SELECT 
+                    DbT5501."shinsakaiKaisaiNo" AS "shinsakaiKaisaiNo",
+                    DbT5502."shinseishoKanriNo" AS "shinseishoKanriNo",
+                    DbT5502."shinsakaiOrder" AS "shinsakaiOrder",
+                    DbT5503."shinsakaiIinCode" AS "shinsakaiIinCode",
+                    DbT5101."koroshoIfShikibetsuCode" AS "koroshoIfShikibetsuCode"
+             FROM 
+                    rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS DbT5501
+                    JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS DbT5502
+                      ON DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
+                    JOIN rgdb."DbT5503ShinsakaiWariateIinJoho" AS DbT5503
+                      ON DbT5501."shinsakaiKaisaiNo" = DbT5503."shinsakaiKaisaiNo"
+                    JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+                      ON DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+             WHERE 
+                    DbT5501."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+             ORDER BY 
+                    DbT5503."shinsakaiIinCode", 
+                    DbT5502."shinsakaiOrder"
+    </select>
+    
+    <select resultOrdered="true" id="getShinsakaiKaisaiYoteiJoho"  
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity" fetchSize="500">
+        SELECT 
+            *
+        FROM 
+            rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS DbT5501
+        WHERE 
+            DbT5501."shinsakaiKaisaiNo" = #{介護認定審査会開催番号}
+    </select>
+</mapper>

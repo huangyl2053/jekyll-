@@ -40,7 +40,8 @@ public class NonyuTsuchishoCVSMultiRenchoProperty extends ReportPropertyBase<Non
             Breakers<NonyuTsuchishoCVSMultiRenchoSource> breakers,
             BreakerCatalog<NonyuTsuchishoCVSMultiRenchoSource> catalog) {
 
-        return breakers.add(catalog.new SimplePageBreaker(
+        return breakers.add(catalog.new SimpleLayoutBreaker(
+
 
 
 

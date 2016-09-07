@@ -1,6 +1,6 @@
 /**
- * To change this license header, choose License Headers in Project Properties. To change this template file, choose Tools | Templates and open the
- * template in the editor.
+ * To change this license header, choose License Headers in Project Properties. To change this template file, choose
+ * Tools | Templates and open the template in the editor.
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0600031;
 
@@ -10,21 +10,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanFukushiYoguHanbaihi;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.FukushiYoguKonyuhiShikyuShiseiKetteDivEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
+import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.ShokanbaraiketteiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.dgSyokanbaraikete_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600031.DBC0600031StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600031.DBC0600031TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600031.PnlKeteiJohoMsgDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0600031.PnlKeteiJohoMsgHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -34,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -89,14 +91,13 @@ public class PnlKeteiJohoMsg {
         }
         List<dgSyokanbaraikete_Row> 決定情報登録_償還払決定一覧 = div.getCcdKetteiList().
                 getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete().getDataSource();
-        KetteJoho 決定情報登録_決定情報 = ViewStateHolder.get(
-                jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.決定情報, KetteJoho.class);
+        KetteJoho 決定情報登録_決定情報 = ViewStateHolder.get(ViewStateKeys.決定情報, KetteJoho.class);
         Map<RString, Integer> map_Row = new HashMap<>();
         for (dgSyokanbaraikete_Row list : 決定情報登録_償還払決定一覧) {
             map_Row.put(list.getNo(), list.getSagakuKingaku().getValue().intValue());
         }
-        ViewStateHolder.put(ViewStateKeys.決定情報登録_償還払決定一覧, (Serializable) map_Row);
-        ViewStateHolder.put(ViewStateKeys.決定情報登録_決定情報, 決定情報登録_決定情報);
+        ViewStateHolder.put(ViewStateKeys.償還払決定一覧情報, (Serializable) map_Row);
+        ViewStateHolder.put(ViewStateKeys.登録用決定情報, 決定情報登録_決定情報);
         return ResponseData.of(div).respond();
     }
 
@@ -107,8 +108,8 @@ public class PnlKeteiJohoMsg {
      * @return 福祉用具購入費支給申請一覧画面へ遷移
      */
     public ResponseData<PnlKeteiJohoMsgDiv> onClick_btnFree(PnlKeteiJohoMsgDiv div) {
-        Map<RString, Integer> 決定情報登録_償還払決定一覧 = ViewStateHolder.get(ViewStateKeys.決定情報登録_償還払決定一覧, Map.class);
-        KetteJoho 決定情報登録_決定情報 = ViewStateHolder.get(ViewStateKeys.決定情報登録_決定情報, KetteJoho.class);
+        Map<RString, Integer> 決定情報登録_償還払決定一覧 = ViewStateHolder.get(ViewStateKeys.償還払決定一覧情報, Map.class);
+        KetteJoho 決定情報登録_決定情報 = ViewStateHolder.get(ViewStateKeys.登録用決定情報, KetteJoho.class);
         if (モード_削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))
                 || モード_参照.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             return ResponseData.of(div).forwardWithEventName(DBC0600031TransitionEventName.一覧に戻る).respond();
@@ -189,8 +190,8 @@ public class PnlKeteiJohoMsg {
      * @return 福祉用具購入費支給申請_明細登録へ遷移す
      */
     private ResponseData<PnlKeteiJohoMsgDiv> 登録修正Update(PnlKeteiJohoMsgDiv div) {
-        Map<RString, Integer> 決定情報登録_償還払決定一覧 = ViewStateHolder.get(ViewStateKeys.決定情報登録_償還払決定一覧, Map.class);
-        KetteJoho 決定情報登録_決定情報 = ViewStateHolder.get(ViewStateKeys.決定情報登録_決定情報, KetteJoho.class);
+        Map<RString, Integer> 決定情報登録_償還払決定一覧 = ViewStateHolder.get(ViewStateKeys.償還払決定一覧情報, Map.class);
+        KetteJoho 決定情報登録_決定情報 = ViewStateHolder.get(ViewStateKeys.登録用決定情報, KetteJoho.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
@@ -200,6 +201,11 @@ public class PnlKeteiJohoMsg {
         ShokanbaraiketteiJohoDiv adiv = (ShokanbaraiketteiJohoDiv) div.getCcdKetteiList();
         if (adiv.getTxtKetebi().getValue() == null) {
             return ResponseData.of(div).addValidationMessages(getHandler(div).getCheckMessage()).respond();
+        }
+        if (ShikyuFushikyuKubun.支給.getコード().equals(adiv.getRdoShikyukubun().getSelectedKey())
+                && (adiv.getTxtShiharaikingakugoke().getValue() == null
+                || adiv.getTxtShiharaikingakugoke().getValue().equals(Decimal.ZERO))) {
+            return ResponseData.of(div).addValidationMessages(getHandler(div).getCheck支払金額合計Message()).respond();
         }
         boolean flag = getHandler(div).is内容変更状態(決定情報登録_償還払決定一覧, 決定情報登録_決定情報);
         if (!flag) {

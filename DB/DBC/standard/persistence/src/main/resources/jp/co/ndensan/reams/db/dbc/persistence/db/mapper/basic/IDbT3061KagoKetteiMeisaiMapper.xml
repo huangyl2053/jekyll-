@@ -17,9 +17,6 @@
     </sql>
 
     <sql id="allColumns_DbT3061KagoKetteiMeisai">
-         "DbT3061KagoKetteiMeisai"."toriatsukaiYM" as "dbT3061KagoKetteiMeisai_toriatsukaiYM",
-         "DbT3061KagoKetteiMeisai"."hokenshaKubun" as "dbT3061KagoKetteiMeisai_hokenshaKubun",
-         "DbT3061KagoKetteiMeisai"."rirekiNo" as "dbT3061KagoKetteiMeisai_rirekiNo",
          "DbT3061KagoKetteiMeisai"."insertDantaiCd" as "dbT3061KagoKetteiMeisai_insertDantaiCd",
          "DbT3061KagoKetteiMeisai"."insertTimestamp" as "dbT3061KagoKetteiMeisai_insertTimestamp",
          "DbT3061KagoKetteiMeisai"."insertReamsLoginId" as "dbT3061KagoKetteiMeisai_insertReamsLoginId",
@@ -28,6 +25,9 @@
          "DbT3061KagoKetteiMeisai"."updateCount" as "dbT3061KagoKetteiMeisai_updateCount",
          "DbT3061KagoKetteiMeisai"."lastUpdateTimestamp" as "dbT3061KagoKetteiMeisai_lastUpdateTimestamp",
          "DbT3061KagoKetteiMeisai"."lastUpdateReamsLoginId" as "dbT3061KagoKetteiMeisai_lastUpdateReamsLoginId",
+         "DbT3061KagoKetteiMeisai"."toriatsukaiYM" as "dbT3061KagoKetteiMeisai_toriatsukaiYM",
+         "DbT3061KagoKetteiMeisai"."hokenshaKubun" as "dbT3061KagoKetteiMeisai_hokenshaKubun",
+         "DbT3061KagoKetteiMeisai"."rirekiNo" as "dbT3061KagoKetteiMeisai_rirekiNo",
          "DbT3061KagoKetteiMeisai"."jigyoshoNo" as "dbT3061KagoKetteiMeisai_jigyoshoNo",
          "DbT3061KagoKetteiMeisai"."jigyoshoName" as "dbT3061KagoKetteiMeisai_jigyoshoName",
          "DbT3061KagoKetteiMeisai"."hiHokenshaNo" as "dbT3061KagoKetteiMeisai_hiHokenshaNo",
@@ -46,9 +46,6 @@
 
     <!--テーブルDbT3061KagoKetteiMeisaiの項目をDbT3061KagoKetteiMeisaiEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT3061KagoKetteiMeisaiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3061KagoKetteiMeisaiEntity" autoMapping="true">
-        <id property="toriatsukaiYM" column="dbT3061KagoKetteiMeisai_toriatsukaiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="hokenshaKubun" column="dbT3061KagoKetteiMeisai_hokenshaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="rirekiNo" column="dbT3061KagoKetteiMeisai_rirekiNo" />
         <result property="insertDantaiCd" column="dbT3061KagoKetteiMeisai_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT3061KagoKetteiMeisai_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT3061KagoKetteiMeisai_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -57,6 +54,9 @@
         <result property="updateCount" column="dbT3061KagoKetteiMeisai_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT3061KagoKetteiMeisai_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT3061KagoKetteiMeisai_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="toriatsukaiYM" column="dbT3061KagoKetteiMeisai_toriatsukaiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="hokenshaKubun" column="dbT3061KagoKetteiMeisai_hokenshaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="rirekiNo" column="dbT3061KagoKetteiMeisai_rirekiNo" />
         <result property="jigyoshoNo" column="dbT3061KagoKetteiMeisai_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="jigyoshoName" column="dbT3061KagoKetteiMeisai_jigyoshoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hiHokenshaNo" column="dbT3061KagoKetteiMeisai_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>

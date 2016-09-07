@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5115Imageマスタとエンティティのマッピング用XMLです。 -->
+<!-- @reamsid_L DBE-1360-010 suguangjun -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosaimaster.INinteichosaMasterMapper">
+    <resultMap id="resultMap_SonotaKikanJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5914SonotaKikanJohoEntity" autoMapping="true">
+        <id property="shoKisaiHokenshaNo" column="dbT5914SonotaKi_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="sonotaKikanCode" column="dbT5914SonotaKi_sonotaKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="kikanMeisho" column="dbT5914SonotaKi_kikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kikanMeishoKana" column="dbT5914SonotaKi_kikanMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="yubinNo" column="dbT5914SonotaKi_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="jusho" column="dbT5914SonotaKi_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jushoKana" column="dbT5914SonotaKi_jushoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="telNo" column="dbT5914SonotaKi_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+        <result property="chosaItakuKubun" column="dbT5914SonotaKi_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="waritsukeTeiin" column="dbT5914SonotaKi_waritsukeTeiin" />
+        <result property="waritsukeChiku" column="dbT5914SonotaKi_waritsukeChiku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler"/>
+        <result property="kikanKubun" column="dbT5914SonotaKi_kikanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="haishiFlag" column="dbT5914SonotaKi_haishiFlag"/>
+    </resultMap>
+
+    <select resultOrdered="true" id="selectSonotaKikanichiranList"
+            resultMap="resultMap_SonotaKikanJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakimaster.NinteichosaMasterMapperParameter" fetchSize="500">
+             SELECT	
+                dbT5914SonotaKi."shoKisaiHokenshaNo" AS "dbT5914SonotaKi_shoKisaiHokenshaNo",
+                dbT5914SonotaKi."sonotaKikanCode" AS "dbT5914SonotaKi_sonotaKikanCode",
+                dbT5914SonotaKi."kikanMeisho" AS "dbT5914SonotaKi_kikanMeisho",
+                dbT5914SonotaKi."kikanMeishoKana" AS "dbT5914SonotaKi_kikanMeishoKana",
+                dbT5914SonotaKi."yubinNo" AS "dbT5914SonotaKi_yubinNo",
+                dbT5914SonotaKi.jusho AS "dbT5914SonotaKi_jusho" ,
+                dbT5914SonotaKi."jushoKana" AS "dbT5914SonotaKi_jushoKana",
+                dbT5914SonotaKi."telNo" AS "dbT5914SonotaKi_telNo",
+                dbT5914SonotaKi."chosaItakuKubun" AS "dbT5914SonotaKi_chosaItakuKubun",
+                dbT5914SonotaKi."waritsukeTeiin" AS "dbT5914SonotaKi_waritsukeTeiin",
+                dbT5914SonotaKi."waritsukeChiku" AS "dbT5914SonotaKi_waritsukeChiku",
+                dbT5914SonotaKi."kikanKubun" AS "dbT5914SonotaKi_kikanKubun",
+                dbT5914SonotaKi."haishiFlag" AS "dbT5914SonotaKi_haishiFlag"
+            FROM	
+                rgdb."DbT5914SonotaKikanJoho" AS dbT5914SonotaKi	
+         <where>
+            <if test="廃止フラグ">
+                AND
+                dbT5914SonotaKi."haishiFlag" = false
+            </if>
+            <if test="!廃止フラグ">
+                AND
+                dbT5914SonotaKi."haishiFlag" = true
+            </if>
+            <if test="user保険者">
+                AND
+                dbT5914SonotaKi."shoKisaiHokenshaNo" = #{保険者}
+            </if>
+            <if test="user機関コードFrom">
+                AND
+              #{機関コードFrom} <![CDATA[<=]]> dbT5914SonotaKi."sonotaKikanCode"
+            </if>
+            <if test="user機関コードTo">
+                AND
+                dbT5914SonotaKi."sonotaKikanCode" <![CDATA[<=]]> #{機関コードTo}
+            </if>
+            <if test="user機関名称">
+                    AND
+                    dbT5914SonotaKi."kikanMeisho"  LIKE '%' || #{機関名称} || '%'
+            </if>
+            <if test="user機関カナ名称">
+                    AND
+                    dbT5914SonotaKi."kikanMeishoKana"  LIKE '%' || #{機関カナ名称} || '%'
+            </if>
+            <if test="user調査委託区分">
+                    AND
+                    dbT5914SonotaKi."chosaItakuKubun"  LIKE '%' || #{調査委託区分} || '%'
+            </if>
+            <if test="user機関の区分">
+                    AND
+                    dbT5914SonotaKi."kikanKubun"  LIKE '%' || #{機関の区分} || '%'
+            </if>
+        </where>
+        ORDER BY	
+                dbT5914SonotaKi."shoKisaiHokenshaNo",
+                dbT5914SonotaKi."sonotaKikanCode"
+        <if test="user最大表示件数">
+            LIMIT #{最大表示件数}
+        </if>
+    </select>
+    
+    <select resultOrdered="true" id="selectSonotaKikanJohoList"
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5914SonotaKikanJohoMapper.ResultMap_DbT5914SonotaKikanJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakimaster.NinteichosaMasterMapperParameter" fetchSize="500">
+             SELECT
+                DbT5914SonotaKikanJoho.*	
+            FROM	
+                (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5914SonotaKikanJohoMapper.noDeleted_DbT5914SonotaKikanJoho" />) AS DbT5914SonotaKikanJoho
+         <where>
+            <if test="廃止フラグ">
+                AND
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_haishiFlag" = false
+            </if>
+            <if test="!廃止フラグ">
+                AND
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_haishiFlag" = true
+            </if>
+            <if test="user保険者">
+                AND
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_shoKisaiHokenshaNo" = #{保険者}
+            </if>
+            <if test="user機関コードFrom">
+                AND
+              #{機関コードFrom} <![CDATA[<=]]> DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_sonotaKikanCode"
+            </if>
+            <if test="user機関コードTo">
+                AND
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_sonotaKikanCode" <![CDATA[<=]]> #{機関コードTo}
+            </if>
+            <if test="user機関名称">
+                    AND
+                    DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_kikanMeisho"  LIKE '%' || #{機関名称} || '%'
+            </if>
+            <if test="user機関カナ名称">
+                    AND
+                    DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_kikanMeishoKana"  LIKE '%' || #{機関カナ名称} || '%'
+            </if>
+            <if test="user調査委託区分">
+                    AND
+                    DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_chosaItakuKubun"  LIKE '%' || #{調査委託区分} || '%'
+            </if>
+            <if test="user機関の区分">
+                    AND
+                    DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_kikanKubun"  LIKE '%' || #{機関の区分} || '%'
+            </if>
+        </where>
+        ORDER BY	
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_shoKisaiHokenshaNo",
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_sonotaKikanCode"
+        <if test="user最大表示件数">
+            LIMIT #{最大表示件数}
+        </if>
+    </select>
+    
+    <!--その他機関情報の重複チェック-->
+    <select resultOrdered="true" id="selectSonotaKikanJohoCount"
+            resultType="int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakimaster.NinteichosaMasterSearchParameter" fetchSize="500">
+        SELECT
+        COUNT(0)
+        FROM
+        rgdb."DbT5914SonotaKikanJoho" AS dbT5914SonotaKi
+        WHERE
+        dbT5914SonotaKi."shoKisaiHokenshaNo" = #{保険者番号}
+        AND
+        dbT5914SonotaKi."sonotaKikanCode" = #{その他機関コード}
+    </select>
+
+    <!-- その他機関情報の削除処理-->
+    <select resultOrdered="true" id="selectKaigoNinteiShinsakaiCount"
+            resultType="int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakimaster.NinteichosaMasterSearchParameter">
+        SELECT
+        COUNT(0)
+        FROM
+        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" AS dbT5595Kaigo
+        WHERE
+        dbT5595Kaigo."shoKisaiHokenshaNo" = #{保険者番号}
+        AND
+        dbT5595Kaigo."sonotaKikanCode" = #{その他機関コード}
+    </select>
+
+</mapper>

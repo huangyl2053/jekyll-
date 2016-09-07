@@ -38,7 +38,7 @@
         <result property="updateCount" column="updateCount" />
     </resultMap>
     <select resultOrdered="true" id="getSyokanbaraiketteFukushiList"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter"
             resultMap="resultMap_SyokanbaraiketeJohoEntity" fetchSize="500">
         SELECT
         DbT3048ShokanFukushiYoguHanbaihi."jigyoshaNo"
@@ -73,7 +73,7 @@
         DbT3048ShokanFukushiYoguHanbaihi."yoshikiNo"
     </select>
     <select resultOrdered="true" id="getSyokanbaraiketteJyutakuList"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter"
             resultMap="resultMap_SyokanbaraiketeJohoEntity" fetchSize="500">
         SELECT
         DbT3049ShokanJutakuKaishu."jigyoshaNo"
@@ -115,7 +115,7 @@
         DbT3049ShokanJutakuKaishu."yoshikiNo"
     </select>
     <select resultOrdered="true" id="getSyukeiJohoList"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter"
             resultMap="resultMap_SyokanbaraiketeJohoEntity" fetchSize="500">
         SELECT
         償還払決定情報."jigyoshaNo"
@@ -202,7 +202,7 @@
 
     </select>
     <select resultOrdered="true" id="get集計情報決定データ"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter"
             resultMap="resultMap_SyokanbaraiketeJohoDekidakaEntity" fetchSize="500">
         SELECT
         DbT3053ShokanShukei."jigyoshaNo"

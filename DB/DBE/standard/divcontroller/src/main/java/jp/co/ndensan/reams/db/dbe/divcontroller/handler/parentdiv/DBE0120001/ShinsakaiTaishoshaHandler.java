@@ -68,7 +68,11 @@ public class ShinsakaiTaishoshaHandler {
             div.getTxtGogitaiNumber().setValue(予定情報.getGogitaiMei());
             div.getTxtYoteiTeiin().setValue(new Decimal(予定情報.getShinsakaiYoteiTeiin()));
             div.getTxtWaritsukeNinzu().setValue(new Decimal(予定情報.getShinsakaiWariateZumiNinzu()));
-            div.getTxtStatus().setValue(ShinsakaiShinchokuJokyo.toValue(予定情報.getShinsakaiShinchokuJokyo().getColumnValue()).get名称());
+            try {
+                div.getTxtStatus().setValue(ShinsakaiShinchokuJokyo.toValue(予定情報.getShinsakaiShinchokuJokyo().getColumnValue()).get名称());
+            } catch (IllegalArgumentException e) {
+                div.getTxtStatus().setValue(RString.EMPTY);
+            }
             div.getTxtShinsakaiKaijo().setValue(予定情報.getShinsakaiKaisaiBashoName());
             div.getTxtShinsakaiChiku().setValue(予定情報.getShinsakaiKaisaiBashoCode());
             if (予定情報.getShinsakaiKaisaiChikuCode() != null) {
@@ -104,19 +108,44 @@ public class ShinsakaiTaishoshaHandler {
             row.setNo(new RString(String.valueOf(shinsakaiTai.getShinsakaiOrder())));
             row.setHokenshaNo(shinsakaiTai.getShoKisaiHokenshaNo());
             row.setHokenshaName(shinsakaiTai.getShichosonMeisho());
+
             row.setHihokenshaNumber(shinsakaiTai.getHihokenshaNo());
             row.setShimei(shinsakaiTai.getHihokenshaName().getColumnValue());
-            row.setSeibetsu(Seibetsu.toValue(shinsakaiTai.getSeibetsu().getColumnValue()).get名称());
-            row.setHihokenshaKubun(HihokenshaKubunCode.toValue(shinsakaiTai.getHihokenshaKubunCode()).get名称());
-            row.setSihinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(
-                    shinsakaiTai.getNinteiShinseiShinseijiKubunCode().getColumnValue()).get名称());
+            try {
+                row.setSeibetsu(Seibetsu.toValue(shinsakaiTai.getSeibetsu().getColumnValue()).get名称());
+            } catch (IllegalArgumentException e) {
+                row.setSeibetsu(RString.EMPTY);
+            }
+            try {
+                row.setHihokenshaKubun(HihokenshaKubunCode.toValue(shinsakaiTai.getHihokenshaKubunCode()).get名称());
+            } catch (IllegalArgumentException e) {
+                row.setHihokenshaKubun(RString.EMPTY);
+            }
+            try {
+                row.setSihinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(
+                        shinsakaiTai.getNinteiShinseiShinseijiKubunCode().getColumnValue()).get名称());
+            } catch (IllegalArgumentException e) {
+                row.setSihinseiKubunShinseiji(RString.EMPTY);
+            }
             row.getShinseiDay().setValue(shinsakaiTai.getNinteiShinseiYMD());
-            row.setKonkaiIchijiHantei(IchijiHanteiKekkaCode09.toValue(shinsakaiTai.getIchijiHanteiKekkaCode().getColumnValue()).get名称());
-            row.setKonkaiNijiHantei(YokaigoJotaiKubun09.toValue(
-                    shinsakaiTai.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue()).get名称());
+            try {
+                row.setKonkaiIchijiHantei(IchijiHanteiKekkaCode09.toValue(shinsakaiTai.getIchijiHanteiKekkaCode().getColumnValue()).get名称());
+            } catch (IllegalArgumentException e) {
+                row.setKonkaiIchijiHantei(RString.EMPTY);
+            }
+            try {
+                row.setKonkaiNijiHantei(YokaigoJotaiKubun09.toValue(
+                        shinsakaiTai.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue()).get名称());
+            } catch (IllegalArgumentException e) {
+                row.setKonkaiNijiHantei(RString.EMPTY);
+            }
             if (shinsakaiTai.getNinchishoNichijoSeikatsuJiritsudoCode() != null) {
-                row.setChosahyoNetakirido(NinchishoNichijoSeikatsuJiritsudoCode.toValue(
-                        shinsakaiTai.getNinchishoNichijoSeikatsuJiritsudoCode().getColumnValue()).get名称());
+                try {
+                    row.setChosahyoNetakirido(NinchishoNichijoSeikatsuJiritsudoCode.toValue(
+                            shinsakaiTai.getNinchishoNichijoSeikatsuJiritsudoCode().getColumnValue()).get名称());
+                } catch (IllegalArgumentException e) {
+                    row.setChosahyoNetakirido(RString.EMPTY);
+                }
             }
             row.setChosahyoNinchido(shinsakaiTai.getJigyoshaMeisho());
             row.setChosaKikan(shinsakaiTai.getChosainShimei());
@@ -126,8 +155,12 @@ public class ShinsakaiTaishoshaHandler {
             row.setShujii(shinsakaiTai.getShujiiName());
             row.getSaiSakuseiIraiKaisu().setValue(new Decimal(shinsakaiTai.getSaiSakuseiIraiKaisu()));
             if (shinsakaiTai.getShogaiNichijoSeikatsuJiritsudoCode() != null) {
-                row.setChosahyoNetakirido(ShogaiNichijoSeikatsuJiritsudoCode.toValue(
-                        shinsakaiTai.getShogaiNichijoSeikatsuJiritsudoCode().getColumnValue()).get名称());
+                try {
+                    row.setChosahyoNetakirido(ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+                            shinsakaiTai.getShogaiNichijoSeikatsuJiritsudoCode().getColumnValue()).get名称());
+                } catch (IllegalArgumentException e) {
+                    row.setChosahyoNetakirido(RString.EMPTY);
+                }
             }
             row.setShinseishoKanriNo(shinsakaiTai.getShinseishoKanriNo().getColumnValue());
             listRow.add(row);

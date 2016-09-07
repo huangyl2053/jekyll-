@@ -39,7 +39,7 @@
         dbT1013KyokaisoSochiShinsei."riyoshaFutanSetaiGassanGaku_GengakuJokofutanGetsugaku" AS dbT1013KyokaisoSochiShinsei_riyoshaFutanSetaiGassanGaku,
         dbT1013KyokaisoSochiShinsei."hokenryoGengaku_GengakuJikofutanGetsugaku" AS dbT1013KyokaisoSochiShinsei_hokenryoGengaku,
         dbT1013KyokaisoSochiShinsei."gengakuJikofutanGetsugakuGokeigaku" AS dbT1013KyokaisoSochiShinsei_gengakuJikofutanGetsugakuGokeigaku
-        , dbT1007KyokaisoHokenryo.dbT1007_gengakuGoHokenryoDankai AS dbT1007KyokaisoHokenryoDankai_gengakuGoHokenryoDankai
+        , HokenryoDankai.dbT1007_gengakuGoHokenryoDankai AS dbT1007KyokaisoHokenryoDankai_gengakuGoHokenryoDankai
         FROM
         rgdb."DbT1006KyokaisoGaitosha" AS dbT1006KyokaisoGaitosha
         LEFT OUTER JOIN
@@ -49,24 +49,34 @@
         AND dbT1006KyokaisoGaitosha."linkNo" = dbT1013KyokaisoSochiShinsei."linkNo"
         AND dbT1013KyokaisoSochiShinsei."logicalDeletedFlag" = FALSE
         LEFT OUTER JOIN
-        (
-        SELECT
-        MAX(dbT1007KyokaisoHokenryoDankai."tekiyoKaishiYM")
-        , dbT1007KyokaisoHokenryoDankai."hihokenshaNo" AS dbT1007_hihokenshaNo
-        , dbT1007KyokaisoHokenryoDankai."linkNo" AS dbT1007_linkNo
-        , dbT1007KyokaisoHokenryoDankai."gengakuGoHokenryoDankai" AS dbT1007_gengakuGoHokenryoDankai
-        FROM
-        rgdb."DbT1007KyokaisoHokenryoDankai" AS dbT1007KyokaisoHokenryoDankai
-        WHERE
-        dbT1007KyokaisoHokenryoDankai."logicalDeletedFlag" = FALSE
-        GROUP BY
-        dbT1007KyokaisoHokenryoDankai."hihokenshaNo"
-        ,dbT1007KyokaisoHokenryoDankai."linkNo"
-        , dbT1007KyokaisoHokenryoDankai."gengakuGoHokenryoDankai"
-        ) dbT1007KyokaisoHokenryo
+(SELECT
+	dbt1007."gengakuGoHokenryoDankai" AS dbt1007_gengakuGoHokenryoDankai,
+	dbt1007."hihokenshaNo" AS dbt1007_hihokenshaNo,
+	dbt1007."linkNo" AS dbt1007_linkNo
+FROM
+	rgdb."DbT1007KyokaisoHokenryoDankai" AS dbt1007
+INNER JOIN 
+	(
+		SELECT
+			MAX(dbt1007Kyokaiso."tekiyoKaishiYM") AS dbt1007Kyokaiso_tekiyoKaishiYM,
+			dbt1007Kyokaiso."hihokenshaNo" AS dbt1007Kyokaiso_hihokenshaNo,
+			dbt1007Kyokaiso."linkNo" AS dbt1007Kyokaiso_linkNo
+		FROM
+			rgdb."DbT1007KyokaisoHokenryoDankai" AS dbt1007Kyokaiso
+		WHERE
+			dbt1007Kyokaiso."logicalDeletedFlag" = FALSE
+		GROUP BY
+			dbt1007Kyokaiso."hihokenshaNo",
+			dbt1007Kyokaiso."linkNo"
+	) AS dbt1007K
+ON
+	dbt1007."hihokenshaNo" = dbt1007K.dbt1007Kyokaiso_hihokenshaNo
+AND dbt1007."linkNo" = dbt1007K.dbt1007Kyokaiso_linkNo
+AND	dbt1007."tekiyoKaishiYM" = dbt1007K.dbt1007Kyokaiso_tekiyoKaishiYM
+) AS HokenryoDankai
         ON
-        dbT1006KyokaisoGaitosha."hihokenshaNo" = dbT1007KyokaisoHokenryo.dbT1007_hihokenshaNo
-        AND dbT1006KyokaisoGaitosha."linkNo" = dbT1007KyokaisoHokenryo.dbT1007_linkNo
+        dbT1006KyokaisoGaitosha."hihokenshaNo" = HokenryoDankai.dbt1007_hihokenshaNo
+        AND dbT1006KyokaisoGaitosha."linkNo" = HokenryoDankai.dbT1007_linkNo
         WHERE
         dbT1006KyokaisoGaitosha."hihokenshaNo" = #{被保険者番号}
         AND dbT1006KyokaisoGaitosha."logicalDeletedFlag" = FALSE
@@ -86,24 +96,34 @@
         AND dbT1006KyokaisoGaitosha."linkNo" = dbT1013KyokaisoSochiShinsei."linkNo"
         AND dbT1013KyokaisoSochiShinsei."logicalDeletedFlag" = FALSE
         LEFT OUTER JOIN
-        (
-        SELECT
-        MAX(dbT1007KyokaisoHokenryoDankai."tekiyoKaishiYM")
-        , dbT1007KyokaisoHokenryoDankai."hihokenshaNo" AS dbT1007_hihokenshaNo
-        , dbT1007KyokaisoHokenryoDankai."linkNo" AS dbT1007_linkNo
-        , dbT1007KyokaisoHokenryoDankai."gengakuGoHokenryoDankai" AS dbT1007_gengakuGoHokenryoDankai
-        FROM
-        rgdb."DbT1007KyokaisoHokenryoDankai" AS dbT1007KyokaisoHokenryoDankai
-        WHERE
-        dbT1007KyokaisoHokenryoDankai."logicalDeletedFlag" = FALSE
-        GROUP BY
-        dbT1007KyokaisoHokenryoDankai."hihokenshaNo"
-        ,dbT1007KyokaisoHokenryoDankai."linkNo"
-        , dbT1007KyokaisoHokenryoDankai."gengakuGoHokenryoDankai"
-        ) dbT1007KyokaisoHokenryo
+(SELECT
+	dbt1007."gengakuGoHokenryoDankai" AS dbt1007_gengakuGoHokenryoDankai,
+	dbt1007."hihokenshaNo" AS dbt1007_hihokenshaNo,
+	dbt1007."linkNo" AS dbt1007_linkNo
+FROM
+	rgdb."DbT1007KyokaisoHokenryoDankai" AS dbt1007
+INNER JOIN 
+	(
+		SELECT
+			MAX(dbt1007Kyokaiso."tekiyoKaishiYM") AS dbt1007Kyokaiso_tekiyoKaishiYM,
+			dbt1007Kyokaiso."hihokenshaNo" AS dbt1007Kyokaiso_hihokenshaNo,
+			dbt1007Kyokaiso."linkNo" AS dbt1007Kyokaiso_linkNo
+		FROM
+			rgdb."DbT1007KyokaisoHokenryoDankai" AS dbt1007Kyokaiso
+		WHERE
+			dbt1007Kyokaiso."logicalDeletedFlag" = FALSE
+		GROUP BY
+			dbt1007Kyokaiso."hihokenshaNo",
+			dbt1007Kyokaiso."linkNo"
+	) AS dbt1007K
+ON
+	dbt1007."hihokenshaNo" = dbt1007K.dbt1007Kyokaiso_hihokenshaNo
+AND dbt1007."linkNo" = dbt1007K.dbt1007Kyokaiso_linkNo
+AND	dbt1007."tekiyoKaishiYM" = dbt1007K.dbt1007Kyokaiso_tekiyoKaishiYM
+) AS HokenryoDankai
         ON
-        dbT1006KyokaisoGaitosha."hihokenshaNo" = dbT1007KyokaisoHokenryo.dbT1007_hihokenshaNo
-        AND dbT1006KyokaisoGaitosha."linkNo" = dbT1007KyokaisoHokenryo.dbT1007_linkNo
+        dbT1006KyokaisoGaitosha."hihokenshaNo" = HokenryoDankai.dbt1007_hihokenshaNo
+        AND dbT1006KyokaisoGaitosha."linkNo" = HokenryoDankai.dbT1007_linkNo
         WHERE
         dbT1006KyokaisoGaitosha."hihokenshaNo" = #{被保険者番号}
         AND dbT1006KyokaisoGaitosha."logicalDeletedFlag" = FALSE

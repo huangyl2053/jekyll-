@@ -451,7 +451,7 @@ public class PnlTotalPanelHandler {
         if (div.getPnlCommon().getPnlDetail().getTxtKeyakushinseuketukebi().getValue() == null) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(契約申請受付日.toString()).evaluate());
         }
-        if (div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue() != null) {
+        if (div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue() == null) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(契約申請日.toString()).evaluate());
         }
         if (div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue().isEmpty()) {
@@ -461,8 +461,8 @@ public class PnlTotalPanelHandler {
                 && div.getPnlCommon().getPnlDetail().getRdoKettekubun().getSelectedKey().isEmpty()) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(決定区分.toString()).evaluate());
         }
-        if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
-                .getRdoKettekubun().getSelectedKey())) {
+        if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() != null
+                && ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail().getRdoKettekubun().getSelectedKey())) {
             if (div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().getSelectedKey().isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(年度.toString()).evaluate());
             }

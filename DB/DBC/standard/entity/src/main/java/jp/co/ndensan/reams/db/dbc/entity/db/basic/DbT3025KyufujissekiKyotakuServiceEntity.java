@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode
  *
  */
 public class DbT3025KyufujissekiKyotakuServiceEntity extends DbTableEntityBase<DbT3025KyufujissekiKyotakuServiceEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3025KyufujissekiKyotakuService");
 
@@ -759,6 +759,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity extends DbTableEntityBase<D
     }
 
 // </editor-fold>
+
 
 
 }

@@ -162,19 +162,17 @@
             DbT5101."shujiiIryokikanCode",
             DbT5101."shujiiCode"
     </select>
-    
-    <update id="update主治医意見書作成依頼情報" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity">
-        UPDATE rgdb."DbT5301ShujiiIkenshoIraiJoho"
-        SET
-            "iraishoShutsuryokuYMD" = #{iraishoShutsuryokuYMD},
-            "ikenshoShutsuryokuYMD" = #{ikenshoShutsuryokuYMD}
-        <if test="ikenshoSakuseiKigenYMD !=null">
-            ,"ikenshoSakuseiKigenYMD" = #{ikenshoSakuseiKigenYMD}
-        </if>
-        WHERE
-            "shinseishoKanriNo" = #{shinseishoKanriNo}
-        AND "ikenshoIraiRirekiNo" = #{ikenshoIraiRirekiNo}
-        AND "logicalDeletedFlag" = #{logicalDeletedFlag}
-      </update>
       
+      <select resultOrdered="true" id="get主治医意見書作成依頼情報" 
+              resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"
+          parameterType="jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity" fetchSize="500">
+       SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.allColumns_DbT5301ShujiiIkenshoIraiJoho" />
+        FROM
+        rgdb."DbT5301ShujiiIkenshoIraiJoho"
+        WHERE
+           "shinseishoKanriNo" = #{申請書管理番号}
+        AND "ikenshoIraiRirekiNo" = #{最大依頼履歴番号}
+        AND "logicalDeletedFlag" = false
+    </select>   
 </mapper>

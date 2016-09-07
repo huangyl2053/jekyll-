@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.kanendononyutsuchishocvskigot
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.kanendononyutsuchishocvskigoto.KanendoNonyuTsuchishoCVSKigotoSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBB-9110-190 huangh
  */
-public class KanendoNonyuTsuchishoCVSKigotoReport extends INonyuTsuchisho<KanendoNonyuTsuchishoCVSKigotoSource> {
+public class KanendoNonyuTsuchishoCVSKigotoReport extends NonyuTsuchisho<KanendoNonyuTsuchishoCVSKigotoSource> {
 
     private final HonSanteiNonyuTsuchiShoJoho item;
     private final NinshoshaSource ninshoshaSource;
@@ -40,14 +40,14 @@ public class KanendoNonyuTsuchishoCVSKigotoReport extends INonyuTsuchisho<Kanend
     @Override
     public void writeBy(ReportSourceWriter<KanendoNonyuTsuchishoCVSKigotoSource> reportSourceWriter) {
 
-        IKanendoNonyuTsuchishoCVSKigotoEditor coverEditor = new KanendoNonyuTsuchishoCVSKigotoEditor(item, ninshoshaSource, 1);
+        IKanendoNonyuTsuchishoCVSKigotoEditor coverEditor = new KanendoNonyuTsuchishoCVSKigotoEditor(item, ninshoshaSource);
         IKanendoNonyuTsuchishoCVSKigotoBuilder builder = new KanendoNonyuTsuchishoCVSKigotoBuilder(coverEditor);
         reportSourceWriter.writeLine(builder);
     }
 
     @Override
-    public List<INonyuTsuchisho> devidedByPage() {
-        List<INonyuTsuchisho> nonyuTsuchishoList = new ArrayList<>();
+    public List<NonyuTsuchisho<KanendoNonyuTsuchishoCVSKigotoSource>> devidedByPage() {
+        List<NonyuTsuchisho<KanendoNonyuTsuchishoCVSKigotoSource>> nonyuTsuchishoList = new ArrayList<>();
         KanendoNonyuTsuchishoCVSKigotoReport report
                 = new KanendoNonyuTsuchishoCVSKigotoReport(item, ninshoshaSource);
         nonyuTsuchishoList.add(report);

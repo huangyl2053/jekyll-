@@ -5,10 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.message;
 
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 
 /**
  * DBDの質問メッセージ定義列挙型です。
@@ -19,15 +21,19 @@ public enum DbdQuestionMessages implements IMessageGettable {
 
     負担限度額一括認定_テスト結果承認確認(1, "表示中のテスト結果を認定結果として登録します。よろしいですか？"),
     負担限度額一括認定_修正反映確認(2, "修正した内容を認定結果として登録します。よろしいですか？"),
-    受給者台帳異動チェックリスト出力確認(3, "?より前のデータをすべて発行してもよろしいでしょうか？"),
-    //受給者台帳異動チェックリスト出力確認(4, "?より後のデータをすべて発行してもよろしいでしょうか？"),
-    //受給者台帳異動チェックリスト出力確認(5, "全件発行処理してもよろしいでしょうか？"),
+    受給者台帳異動チェックリスト_以前出力確認(3, "?より前のデータをすべて発行してもよろしいでしょうか？", ButtonSelectPattern.OKCancel),
+    受給者台帳異動チェックリスト_以後出力確認(4, "?より後のデータをすべて発行してもよろしいでしょうか？", ButtonSelectPattern.OKCancel),
+    受給者台帳異動チェックリスト_全件出力確認(5, "全件発行処理してもよろしいでしょうか？", ButtonSelectPattern.OKCancel),
     編集破棄確認(6, "編集されています。\\n未更新の情報は反映されませんが、よろしいですか？"),
     新規登録確認(7, "被保険者に関連付け済みの情報のため、「検索」から指定してください。"
             + "\\n他市町村からの照会結果など、同一年金について新規登録の必要がある場合登録してください。新規登録しますか？"),
-    被保険者関連解除確認(8, "非課税年金対象者情報の、表示中の被保険者との関連づけを解除します。よろしいですか？");
-
-    private final Message message;
+    被保険者関連解除確認(8, "非課税年金対象者情報の、表示中の被保険者との関連づけを解除します。よろしいですか？"),
+    非課税年金再処理確認(9, "\"再処理前\"に変更される処理月があります。再処理前に設定後、再処理を実行すると、"
+            + "取込済みの年月の非課税年金対象者情報は全て初期化されます。再処理前に設定してよろしいですか？"),
+    処理実行の確認(50, "処理を実行してもよろしいですか？", ButtonSelectPattern.OKCancel);
+    private final RString message;
+    private final int no;
+    private final ButtonSelectPattern buttonSelectPattern;
 
     /**
      * コンストラクタです。
@@ -36,11 +42,29 @@ public enum DbdQuestionMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbdQuestionMessages(int no, String message) {
-        this.message = new QuestionMessage(toCode("DBDQ", no), message);
+        this.no = no;
+        this.message = new RString(message);
+        this.buttonSelectPattern = ButtonSelectPattern.YesNo;
+    }
+
+    private DbdQuestionMessages(int no, String message, ButtonSelectPattern buttonSelectPattern) {
+        this.no = no;
+        this.message = new RString(message);
+        this.buttonSelectPattern = buttonSelectPattern;
     }
 
     @Override
     public Message getMessage() {
-        return message;
+        return new QuestionMessage(toCode("DBDQ", no), message.toString(), buttonSelectPattern);
+    }
+
+    /**
+     * 選択可能ボタンを指定してメッセージを返します。
+     *
+     * @param pattern ボタンセレクトパターン
+     * @return メッセージ
+     */
+    public Message getMessage(ButtonSelectPattern pattern) {
+        return new QuestionMessage(toCode("Q", no).toString(), message.toString(), pattern);
     }
 }

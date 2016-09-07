@@ -119,7 +119,6 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-//        内部QA：614　Redmine：＃75422　排他制限の確認
         getcheckEntityList(entity);
         update認定調査依頼情報(entity);
     }

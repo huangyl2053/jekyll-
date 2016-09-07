@@ -16,12 +16,12 @@
         ShikibetsuTaisho."meisho" AS "氏名",
         ShikibetsuTaisho."shikibetsuCode" AS 識別コード
         FROM
-        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.noDeleted_DbT3038ShokanKihon" />) AS dbT3038ShokanKihon
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.noDeleted_DbT3038ShokanKihon" />) AS dbT3038ShokanKihon
         INNER JOIN (SELECT "hihokenshaNo","shikibetsuCode",MAX("idoYMD" || "edaNo") FROM rgdb."DbT1001HihokenshaDaicho" 
         GROUP BY "hihokenshaNo","shikibetsuCode")AS temp1
         ON "dbT3038ShokanKihon_hiHokenshaNo" = temp1."hihokenshaNo"
         INNER JOIN 
-        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.noDeleted_DbT3034ShokanShinsei" />) AS dbT3034ShokanShinsei
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.noDeleted_DbT3034ShokanShinsei" />) AS dbT3034ShokanShinsei
         ON  "dbT3038ShokanKihon_hiHokenshaNo" = "dbT3034ShokanShinsei_hiHokenshaNo"
         AND "dbT3038ShokanKihon_serviceTeikyoYM" = "dbT3034ShokanShinsei_serviceTeikyoYM"
         AND "dbT3038ShokanKihon_seiriNo" = "dbT3034ShokanShinsei_seiriNo"
@@ -64,9 +64,9 @@
         <result property="識別コード" column="shikibetsuCode"
             typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <association property="償還払請求基本Entity" 
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.ResultMap_DbT3038ShokanKihonEntity"/>
+                     resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.ResultMap_DbT3038ShokanKihonEntity"/>
         <association property="償還払支給申請Entity"
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>
+                     resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>
     </resultMap> 
     
     <resultMap id="resultMap_HihokenshaNo" autoMapping="true"

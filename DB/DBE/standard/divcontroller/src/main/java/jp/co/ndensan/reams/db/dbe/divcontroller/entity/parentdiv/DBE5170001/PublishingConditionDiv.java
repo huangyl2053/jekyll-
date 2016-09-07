@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class PublishingConditionDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -193,16 +193,6 @@ public class PublishingConditionDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBoxNum getTxtCopyNumForJimukyoku1() {
-        return this.getPublishingConditionForJimukyoku().getTxtCopyNumForJimukyoku1();
-    }
-
-    @JsonIgnore
-    public void  setTxtCopyNumForJimukyoku1(TextBoxNum txtCopyNumForJimukyoku1) {
-        this.getPublishingConditionForJimukyoku().setTxtCopyNumForJimukyoku1(txtCopyNumForJimukyoku1);
-    }
-
-    @JsonIgnore
     public CheckBoxList getChkPrintChoyoJimu() {
         return this.getPublishingConditionForJimukyoku().getChkPrintChoyoJimu();
     }
@@ -233,13 +223,23 @@ public class PublishingConditionDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtCopyNumForShinsakaiIin1() {
-        return this.getPublishingConditionForShinsakaiIin().getTxtCopyNumForShinsakaiIin1();
+    public Space getSpSpace3() {
+        return this.getPublishingConditionForJimukyoku().getSpSpace3();
     }
 
     @JsonIgnore
-    public void  setTxtCopyNumForShinsakaiIin1(TextBoxNum txtCopyNumForShinsakaiIin1) {
-        this.getPublishingConditionForShinsakaiIin().setTxtCopyNumForShinsakaiIin1(txtCopyNumForShinsakaiIin1);
+    public void  setSpSpace3(Space spSpace3) {
+        this.getPublishingConditionForJimukyoku().setSpSpace3(spSpace3);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkPrintChoyoJimu2() {
+        return this.getPublishingConditionForJimukyoku().getChkPrintChoyoJimu2();
+    }
+
+    @JsonIgnore
+    public void  setChkPrintChoyoJimu2(CheckBoxList chkPrintChoyoJimu2) {
+        this.getPublishingConditionForJimukyoku().setChkPrintChoyoJimu2(chkPrintChoyoJimu2);
     }
 
     @JsonIgnore
@@ -270,6 +270,26 @@ public class PublishingConditionDiv extends Panel {
     @JsonIgnore
     public void  setChkPrintChohyoShinsakaiIin(CheckBoxList chkPrintChohyoShinsakaiIin) {
         this.getPublishingConditionForShinsakaiIin().setChkPrintChohyoShinsakaiIin(chkPrintChohyoShinsakaiIin);
+    }
+
+    @JsonIgnore
+    public Space getSpSpace4() {
+        return this.getPublishingConditionForShinsakaiIin().getSpSpace4();
+    }
+
+    @JsonIgnore
+    public void  setSpSpace4(Space spSpace4) {
+        this.getPublishingConditionForShinsakaiIin().setSpSpace4(spSpace4);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkPrintChohyoIin2() {
+        return this.getPublishingConditionForShinsakaiIin().getChkPrintChohyoIin2();
+    }
+
+    @JsonIgnore
+    public void  setChkPrintChohyoIin2(CheckBoxList chkPrintChohyoIin2) {
+        this.getPublishingConditionForShinsakaiIin().setChkPrintChohyoIin2(chkPrintChohyoIin2);
     }
 
     // </editor-fold>

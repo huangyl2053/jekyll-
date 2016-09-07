@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
- * 帳票設計_DBBPR51002_所得照会票
+ * 所得照会票のクラスです。
  *
  * @reamsid_L DBB-1710-030 xuhao
  */
@@ -43,7 +43,7 @@ public class ShotokuShokaihyoPrintSercive {
     private static final RString 種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
 
     /**
-     * printＡ４横
+     * printＡ４横のメソッドです。
      *
      * @param 所得照会票 NushiJuminJohoResult
      * @param 文書タイトル RString
@@ -62,7 +62,7 @@ public class ShotokuShokaihyoPrintSercive {
     }
 
     /**
-     * printＡ４横
+     * printＡ４横のメソッドです。
      *
      * @param 所得照会票 NushiJuminJohoResult
      * @param 文書タイトル RString
@@ -86,13 +86,14 @@ public class ShotokuShokaihyoPrintSercive {
                     assembler.getImageFolderPath(), 所得照会票.get発行日()).buildSource();
             ReportSourceWriter<ShotokuShokaihyoYokoSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
-            new ShotokuShokaihyoYokoReport(所得照会票, sourceBuilder, 文書タイトル, 送付先担当課名称).writeBy(reportSourceWriter);
+            new ShotokuShokaihyoYokoReport(所得照会票, sourceBuilder, 文書タイトル, 送付先担当課名称)
+                    .writeBy(reportSourceWriter);
         }
 
     }
 
     /**
-     * printＡ４縦
+     * printＡ４縦のメソッドです。
      *
      * @param 所得照会票 NushiJuminJohoResult
      * @param 文書タイトル RString
@@ -111,7 +112,7 @@ public class ShotokuShokaihyoPrintSercive {
     }
 
     /**
-     * printＡ４縦
+     * printＡ４縦のメソッドです。
      *
      * @param 所得照会票 NushiJuminJohoResult
      * @param 文書タイトル RString

@@ -5,11 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako;
 
-import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -23,12 +19,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TsuchishoIdoshaTorokuProcessParameter implements IBatchProcessParameter {
 
-    private RString 出力対象区分;
-    private FlexibleYear 調定年度;
-    private FlexibleYear 賦課年度;
-    private FlexibleDate 発行日;
+    private int 出力対象区分;
     private RDateTime 帳票作成日時;
-    private RString 基準日時;
-    private List<OutputChohyoIchiran> 出力帳票entity;
+    private RString 帳票ID;
+    private RString 出力順ID;
 
 }

@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
+import jp.co.ndensan.reams.db.dbx.business.core.choteikyotsu.ChoteiKyotsu;
+import jp.co.ndensan.reams.db.dbx.business.core.kibetsu.Kibetsu;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

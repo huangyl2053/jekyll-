@@ -45,7 +45,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranProperty
      * @param outputOrder IOutputOrder
      */
     public TokubetsuChoshuIraikingakuMeisaiIchiranProperty(IOutputOrder outputOrder) {
-        super(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB100003.getReportId());
+        super(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200023.getReportId());
 
         pageBreakKeys = new ArrayList<>();
 
@@ -55,25 +55,27 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranProperty
         RString 改頁４ = RString.EMPTY;
         RString 改頁５ = RString.EMPTY;
 
-        List<ISetSortItem> list = outputOrder.get設定項目リスト();
-        if (list == null) {
-            list = new ArrayList<>();
-        }
+        if (outputOrder != null) {
+            List<ISetSortItem> list = outputOrder.get設定項目リスト();
+            if (list == null) {
+                list = new ArrayList<>();
+            }
 
-        if (INDEX_0 < list.size() && list.get(INDEX_0).is改頁項目()) {
-            改頁１ = to帳票物理名(list.get(0).get項目ID());
-        }
-        if (INDEX_1 < list.size() && list.get(INDEX_1).is改頁項目()) {
-            改頁２ = to帳票物理名(list.get(INDEX_1).get項目ID());
-        }
-        if (INDEX_2 < list.size() && list.get(INDEX_2).is改頁項目()) {
-            改頁３ = to帳票物理名(list.get(INDEX_2).get項目ID());
-        }
-        if (INDEX_3 < list.size() && list.get(INDEX_3).is改頁項目()) {
-            改頁４ = to帳票物理名(list.get(INDEX_3).get項目ID());
-        }
-        if (INDEX_4 < list.size() && list.get(INDEX_4).is改頁項目()) {
-            改頁５ = to帳票物理名(list.get(INDEX_4).get項目ID());
+            if (INDEX_0 < list.size() && list.get(INDEX_0).is改頁項目()) {
+                改頁１ = to帳票物理名(list.get(0).get項目ID());
+            }
+            if (INDEX_1 < list.size() && list.get(INDEX_1).is改頁項目()) {
+                改頁２ = to帳票物理名(list.get(INDEX_1).get項目ID());
+            }
+            if (INDEX_2 < list.size() && list.get(INDEX_2).is改頁項目()) {
+                改頁３ = to帳票物理名(list.get(INDEX_2).get項目ID());
+            }
+            if (INDEX_3 < list.size() && list.get(INDEX_3).is改頁項目()) {
+                改頁４ = to帳票物理名(list.get(INDEX_3).get項目ID());
+            }
+            if (INDEX_4 < list.size() && list.get(INDEX_4).is改頁項目()) {
+                改頁５ = to帳票物理名(list.get(INDEX_4).get項目ID());
+            }
         }
 
         if (!改頁１.isEmpty()) {
@@ -98,12 +100,6 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranProperty
             Breakers<TokubetsuChoshuIraikingakuMeisaiIchiranSource> breakers,
             BreakerCatalog<TokubetsuChoshuIraikingakuMeisaiIchiranSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
-
-
-
-
-
-
 
 
             pageBreakKeys) {

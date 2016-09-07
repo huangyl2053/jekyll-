@@ -7,18 +7,21 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaisha;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaisha.*;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaisha.edaNo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaisha.idoYMD;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaisha.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
-import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import jp.co.ndensan.reams.uz.uza.util.db.OrderBy;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -29,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbV1002TekiyoJogaishaAliveDac {
 
+    private static final int 件数_1 = 1;
     @InjectSession
     private SqlSession session;
 
@@ -107,5 +111,24 @@ public class DbV1002TekiyoJogaishaAliveDac {
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 適用除外者台帳管理Aliveを全件返します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return DbT1002TekiyoJogaishaEntity
+     */
+    @Transaction
+    public DbV1002TekiyoJogaishaEntity get適用除外者情報(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV1002TekiyoJogaisha.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                order(by(shikibetsuCode, Order.DESC)).
+                limit(件数_1).
+                toObject(DbV1002TekiyoJogaishaEntity.class);
     }
 }

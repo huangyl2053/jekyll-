@@ -13,14 +13,16 @@ import jp.co.ndensan.reams.db.dbe.business.report.syujiyikenshosakuseyiraihakou.
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoSakuseiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoSakuseiRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.syujiyikensho.IkenshoSakuseiIraiHakkoIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -29,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0080-150 duanzhanli
  */
-public class ShujiiIkenshoSakuseiProcess extends BatchProcessBase<ShujiiIkenshoSakuseiRelateEntity> {
+public class ShujiiIkenshoSakuseiProcess extends BatchKeyBreakBase<ShujiiIkenshoSakuseiRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoSakuseiMapper."
@@ -37,6 +39,13 @@ public class ShujiiIkenshoSakuseiProcess extends BatchProcessBase<ShujiiIkenshoS
     private static final RString 帳票ID = ReportIdDBE.DBE230003.getReportId().value();
     private List<SyujiyikenshosakuseyiraihakouBodyItem> bodyItemList;
     private ShujiiIkenshoSakuseiProcessParamter processParamter;
+    private static final List<RString> PAGE_BREAK_KEYS = new ArrayList<>();
+
+    static {
+        PAGE_BREAK_KEYS.add(new RString("joken3"));
+        PAGE_BREAK_KEYS.add(new RString("joken4"));
+        PAGE_BREAK_KEYS.add(new RString("cityCode"));
+    }
     @BatchWriter
     private BatchReportWriter<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> batchWriter;
     private ReportSourceWriter<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> reportSourceWriter;
@@ -53,24 +62,43 @@ public class ShujiiIkenshoSakuseiProcess extends BatchProcessBase<ShujiiIkenshoS
 
     @Override
     protected void createWriter() {
-        batchWriter = BatchReportFactory.createBatchReportWriter(帳票ID).create();
+        batchWriter = BatchReportFactory.createBatchReportWriter(帳票ID).
+                addBreak(new BreakerCatalog<IkenshoSakuseiIraiIchiranhyoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchWriter);
     }
 
     @Override
-    protected void process(ShujiiIkenshoSakuseiRelateEntity entity) {
+    protected void keyBreakProcess(ShujiiIkenshoSakuseiRelateEntity current) {
+        if (hasBrek(getBefore(), current)) {
+            SyujiyikenshosakuseyiraihakouReport report = SyujiyikenshosakuseyiraihakouReport.createFrom(setHeaderItem(), bodyItemList);
+            report.writeBy(reportSourceWriter);
+            bodyItemList = new ArrayList<>();
+        }
+    }
+
+    private boolean hasBrek(ShujiiIkenshoSakuseiRelateEntity before, ShujiiIkenshoSakuseiRelateEntity current) {
+        return !RString.isNullOrEmpty(before.get依頼書作成日()) && !before.get依頼書作成日().equals(current.get依頼書作成日())
+                && !before.get依頼書提出期限().equals(current.get依頼書提出期限())
+                && !before.get市町村コード().equals(current.get市町村コード());
+    }
+
+    @Override
+    protected void usualProcess(ShujiiIkenshoSakuseiRelateEntity entity) {
         bodyItemList.add(setBodyItem(entity));
     }
 
     @Override
     protected void afterExecute() {
         if (bodyItemList != null && !bodyItemList.isEmpty()) {
-            SyujiyikenshosakuseyiraihakouHeadItem headItem = new SyujiyikenshosakuseyiraihakouHeadItem(processParamter.getIraiFromYMD(),
-                    processParamter.getIraiToYMD(),
-                    processParamter.getShujiiIkenshoSakuseiIraisho());
-            SyujiyikenshosakuseyiraihakouReport report = SyujiyikenshosakuseyiraihakouReport.createFrom(headItem, bodyItemList);
+            SyujiyikenshosakuseyiraihakouReport report = SyujiyikenshosakuseyiraihakouReport.createFrom(setHeaderItem(), bodyItemList);
             report.writeBy(reportSourceWriter);
         }
+    }
+
+    private SyujiyikenshosakuseyiraihakouHeadItem setHeaderItem() {
+        return new SyujiyikenshosakuseyiraihakouHeadItem(processParamter.getIraiFromYMD(),
+                processParamter.getIraiToYMD(),
+                processParamter.getShujiiIkenshoSakuseiIraisho());
     }
 
     private SyujiyikenshosakuseyiraihakouBodyItem setBodyItem(ShujiiIkenshoSakuseiRelateEntity entity) {

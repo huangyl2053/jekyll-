@@ -122,7 +122,7 @@ public enum HonsanteiIdoSpec implements IPredicate<HonsanteiIdoDiv> {
                     .getChkKetteiTsuchi().getSelectedKeys();
             List<RString> 変更通知書チェックボックス = div.getHonsanteiIdoChohyoHakko().getHonSanteiIdoTsuchiKobetsuJoho()
                     .getChkHenkoTsuchi().getSelectedKeys();
-            return !決定通知書チェックボックス.isEmpty() && !変更通知書チェックボックス.isEmpty();
+            return !決定通知書チェックボックス.isEmpty() || !変更通知書チェックボックス.isEmpty();
         }
 
         public static boolean is決定通知書の発行日(HonsanteiIdoDiv div) {

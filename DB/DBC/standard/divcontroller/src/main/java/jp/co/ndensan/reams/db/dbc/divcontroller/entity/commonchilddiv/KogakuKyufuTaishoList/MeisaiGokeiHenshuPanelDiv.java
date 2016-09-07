@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyu
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBC-2020-030 quxiaodong
  */
 public class MeisaiGokeiHenshuPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -39,26 +40,12 @@ public class MeisaiGokeiHenshuPanelDiv extends Panel {
     private TextBoxNum txtHyoGkei;
     @JsonProperty("txtRiyoshafutanGokei")
     private TextBoxNum txtRiyoshafutanGokei;
-    @JsonProperty("txtSanteiKijunGaku")
-    private TextBoxNum txtSanteiKijunGaku;
-    @JsonProperty("txtSiharaiZumiGaku")
-    private TextBoxNum txtSiharaiZumiGaku;
+    @JsonProperty("GokeiPanel")
+    private GokeiPanelDiv GokeiPanel;
     @JsonProperty("lin1")
     private HorizontalLine lin1;
-    @JsonProperty("rdbTsukiOkure")
-    private RadioButton rdbTsukiOkure;
-    @JsonProperty("rabSetaiShotokuKubun")
-    private RadioButton rabSetaiShotokuKubun;
-    @JsonProperty("rdbShotokuKubun")
-    private RadioButton rdbShotokuKubun;
-    @JsonProperty("rdbGassan")
-    private RadioButton rdbGassan;
-    @JsonProperty("rdbRoreiFukushiNenkin")
-    private RadioButton rdbRoreiFukushiNenkin;
-    @JsonProperty("rdbRiyoshafutanDai2dankai")
-    private RadioButton rdbRiyoshafutanDai2dankai;
-    @JsonProperty("rdbGekihenkanwaKubun")
-    private RadioButton rdbGekihenkanwaKubun;
+    @JsonProperty("KogakuKyufuKonkyoPanel")
+    private KogakuKyufuKonkyoPanelDiv KogakuKyufuKonkyoPanel;
     @JsonProperty("btnTorikeshi")
     private Button btnTorikeshi;
     @JsonProperty("btnkakutei")
@@ -233,39 +220,21 @@ public class MeisaiGokeiHenshuPanelDiv extends Panel {
     }
 
     /*
-     * gettxtSanteiKijunGaku
-     * @return txtSanteiKijunGaku
+     * getGokeiPanel
+     * @return GokeiPanel
      */
-    @JsonProperty("txtSanteiKijunGaku")
-    public TextBoxNum getTxtSanteiKijunGaku() {
-        return txtSanteiKijunGaku;
+    @JsonProperty("GokeiPanel")
+    public GokeiPanelDiv getGokeiPanel() {
+        return GokeiPanel;
     }
 
     /*
-     * settxtSanteiKijunGaku
-     * @param txtSanteiKijunGaku txtSanteiKijunGaku
+     * setGokeiPanel
+     * @param GokeiPanel GokeiPanel
      */
-    @JsonProperty("txtSanteiKijunGaku")
-    public void setTxtSanteiKijunGaku(TextBoxNum txtSanteiKijunGaku) {
-        this.txtSanteiKijunGaku = txtSanteiKijunGaku;
-    }
-
-    /*
-     * gettxtSiharaiZumiGaku
-     * @return txtSiharaiZumiGaku
-     */
-    @JsonProperty("txtSiharaiZumiGaku")
-    public TextBoxNum getTxtSiharaiZumiGaku() {
-        return txtSiharaiZumiGaku;
-    }
-
-    /*
-     * settxtSiharaiZumiGaku
-     * @param txtSiharaiZumiGaku txtSiharaiZumiGaku
-     */
-    @JsonProperty("txtSiharaiZumiGaku")
-    public void setTxtSiharaiZumiGaku(TextBoxNum txtSiharaiZumiGaku) {
-        this.txtSiharaiZumiGaku = txtSiharaiZumiGaku;
+    @JsonProperty("GokeiPanel")
+    public void setGokeiPanel(GokeiPanelDiv GokeiPanel) {
+        this.GokeiPanel = GokeiPanel;
     }
 
     /*
@@ -287,129 +256,21 @@ public class MeisaiGokeiHenshuPanelDiv extends Panel {
     }
 
     /*
-     * getrdbTsukiOkure
-     * @return rdbTsukiOkure
+     * getKogakuKyufuKonkyoPanel
+     * @return KogakuKyufuKonkyoPanel
      */
-    @JsonProperty("rdbTsukiOkure")
-    public RadioButton getRdbTsukiOkure() {
-        return rdbTsukiOkure;
+    @JsonProperty("KogakuKyufuKonkyoPanel")
+    public KogakuKyufuKonkyoPanelDiv getKogakuKyufuKonkyoPanel() {
+        return KogakuKyufuKonkyoPanel;
     }
 
     /*
-     * setrdbTsukiOkure
-     * @param rdbTsukiOkure rdbTsukiOkure
+     * setKogakuKyufuKonkyoPanel
+     * @param KogakuKyufuKonkyoPanel KogakuKyufuKonkyoPanel
      */
-    @JsonProperty("rdbTsukiOkure")
-    public void setRdbTsukiOkure(RadioButton rdbTsukiOkure) {
-        this.rdbTsukiOkure = rdbTsukiOkure;
-    }
-
-    /*
-     * getrabSetaiShotokuKubun
-     * @return rabSetaiShotokuKubun
-     */
-    @JsonProperty("rabSetaiShotokuKubun")
-    public RadioButton getRabSetaiShotokuKubun() {
-        return rabSetaiShotokuKubun;
-    }
-
-    /*
-     * setrabSetaiShotokuKubun
-     * @param rabSetaiShotokuKubun rabSetaiShotokuKubun
-     */
-    @JsonProperty("rabSetaiShotokuKubun")
-    public void setRabSetaiShotokuKubun(RadioButton rabSetaiShotokuKubun) {
-        this.rabSetaiShotokuKubun = rabSetaiShotokuKubun;
-    }
-
-    /*
-     * getrdbShotokuKubun
-     * @return rdbShotokuKubun
-     */
-    @JsonProperty("rdbShotokuKubun")
-    public RadioButton getRdbShotokuKubun() {
-        return rdbShotokuKubun;
-    }
-
-    /*
-     * setrdbShotokuKubun
-     * @param rdbShotokuKubun rdbShotokuKubun
-     */
-    @JsonProperty("rdbShotokuKubun")
-    public void setRdbShotokuKubun(RadioButton rdbShotokuKubun) {
-        this.rdbShotokuKubun = rdbShotokuKubun;
-    }
-
-    /*
-     * getrdbGassan
-     * @return rdbGassan
-     */
-    @JsonProperty("rdbGassan")
-    public RadioButton getRdbGassan() {
-        return rdbGassan;
-    }
-
-    /*
-     * setrdbGassan
-     * @param rdbGassan rdbGassan
-     */
-    @JsonProperty("rdbGassan")
-    public void setRdbGassan(RadioButton rdbGassan) {
-        this.rdbGassan = rdbGassan;
-    }
-
-    /*
-     * getrdbRoreiFukushiNenkin
-     * @return rdbRoreiFukushiNenkin
-     */
-    @JsonProperty("rdbRoreiFukushiNenkin")
-    public RadioButton getRdbRoreiFukushiNenkin() {
-        return rdbRoreiFukushiNenkin;
-    }
-
-    /*
-     * setrdbRoreiFukushiNenkin
-     * @param rdbRoreiFukushiNenkin rdbRoreiFukushiNenkin
-     */
-    @JsonProperty("rdbRoreiFukushiNenkin")
-    public void setRdbRoreiFukushiNenkin(RadioButton rdbRoreiFukushiNenkin) {
-        this.rdbRoreiFukushiNenkin = rdbRoreiFukushiNenkin;
-    }
-
-    /*
-     * getrdbRiyoshafutanDai2dankai
-     * @return rdbRiyoshafutanDai2dankai
-     */
-    @JsonProperty("rdbRiyoshafutanDai2dankai")
-    public RadioButton getRdbRiyoshafutanDai2dankai() {
-        return rdbRiyoshafutanDai2dankai;
-    }
-
-    /*
-     * setrdbRiyoshafutanDai2dankai
-     * @param rdbRiyoshafutanDai2dankai rdbRiyoshafutanDai2dankai
-     */
-    @JsonProperty("rdbRiyoshafutanDai2dankai")
-    public void setRdbRiyoshafutanDai2dankai(RadioButton rdbRiyoshafutanDai2dankai) {
-        this.rdbRiyoshafutanDai2dankai = rdbRiyoshafutanDai2dankai;
-    }
-
-    /*
-     * getrdbGekihenkanwaKubun
-     * @return rdbGekihenkanwaKubun
-     */
-    @JsonProperty("rdbGekihenkanwaKubun")
-    public RadioButton getRdbGekihenkanwaKubun() {
-        return rdbGekihenkanwaKubun;
-    }
-
-    /*
-     * setrdbGekihenkanwaKubun
-     * @param rdbGekihenkanwaKubun rdbGekihenkanwaKubun
-     */
-    @JsonProperty("rdbGekihenkanwaKubun")
-    public void setRdbGekihenkanwaKubun(RadioButton rdbGekihenkanwaKubun) {
-        this.rdbGekihenkanwaKubun = rdbGekihenkanwaKubun;
+    @JsonProperty("KogakuKyufuKonkyoPanel")
+    public void setKogakuKyufuKonkyoPanel(KogakuKyufuKonkyoPanelDiv KogakuKyufuKonkyoPanel) {
+        this.KogakuKyufuKonkyoPanel = KogakuKyufuKonkyoPanel;
     }
 
     /*
@@ -446,6 +307,109 @@ public class MeisaiGokeiHenshuPanelDiv extends Panel {
     @JsonProperty("btnkakutei")
     public void setBtnkakutei(Button btnkakutei) {
         this.btnkakutei = btnkakutei;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public TextBoxNum getTxtSanteiKijunGaku() {
+        return this.getGokeiPanel().getTxtSanteiKijunGaku();
+    }
+
+    @JsonIgnore
+    public void  setTxtSanteiKijunGaku(TextBoxNum txtSanteiKijunGaku) {
+        this.getGokeiPanel().setTxtSanteiKijunGaku(txtSanteiKijunGaku);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtSiharaiZumiGaku() {
+        return this.getGokeiPanel().getTxtSiharaiZumiGaku();
+    }
+
+    @JsonIgnore
+    public void  setTxtSiharaiZumiGaku(TextBoxNum txtSiharaiZumiGaku) {
+        this.getGokeiPanel().setTxtSiharaiZumiGaku(txtSiharaiZumiGaku);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtKogakuShikyuGaku() {
+        return this.getGokeiPanel().getTxtKogakuShikyuGaku();
+    }
+
+    @JsonIgnore
+    public void  setTxtKogakuShikyuGaku(TextBoxNum txtKogakuShikyuGaku) {
+        this.getGokeiPanel().setTxtKogakuShikyuGaku(txtKogakuShikyuGaku);
+    }
+
+    @JsonIgnore
+    public RadioButton getRdbTsukiOkure() {
+        return this.getKogakuKyufuKonkyoPanel().getRdbTsukiOkure();
+    }
+
+    @JsonIgnore
+    public void  setRdbTsukiOkure(RadioButton rdbTsukiOkure) {
+        this.getKogakuKyufuKonkyoPanel().setRdbTsukiOkure(rdbTsukiOkure);
+    }
+
+    @JsonIgnore
+    public RadioButton getRabSetaiShotokuKubun() {
+        return this.getKogakuKyufuKonkyoPanel().getRabSetaiShotokuKubun();
+    }
+
+    @JsonIgnore
+    public void  setRabSetaiShotokuKubun(RadioButton rabSetaiShotokuKubun) {
+        this.getKogakuKyufuKonkyoPanel().setRabSetaiShotokuKubun(rabSetaiShotokuKubun);
+    }
+
+    @JsonIgnore
+    public RadioButton getRdbShotokuKubun() {
+        return this.getKogakuKyufuKonkyoPanel().getRdbShotokuKubun();
+    }
+
+    @JsonIgnore
+    public void  setRdbShotokuKubun(RadioButton rdbShotokuKubun) {
+        this.getKogakuKyufuKonkyoPanel().setRdbShotokuKubun(rdbShotokuKubun);
+    }
+
+    @JsonIgnore
+    public RadioButton getRdbGassan() {
+        return this.getKogakuKyufuKonkyoPanel().getRdbGassan();
+    }
+
+    @JsonIgnore
+    public void  setRdbGassan(RadioButton rdbGassan) {
+        this.getKogakuKyufuKonkyoPanel().setRdbGassan(rdbGassan);
+    }
+
+    @JsonIgnore
+    public RadioButton getRdbRoreiFukushiNenkin() {
+        return this.getKogakuKyufuKonkyoPanel().getRdbRoreiFukushiNenkin();
+    }
+
+    @JsonIgnore
+    public void  setRdbRoreiFukushiNenkin(RadioButton rdbRoreiFukushiNenkin) {
+        this.getKogakuKyufuKonkyoPanel().setRdbRoreiFukushiNenkin(rdbRoreiFukushiNenkin);
+    }
+
+    @JsonIgnore
+    public RadioButton getRdbRiyoshafutanDai2dankai() {
+        return this.getKogakuKyufuKonkyoPanel().getRdbRiyoshafutanDai2dankai();
+    }
+
+    @JsonIgnore
+    public void  setRdbRiyoshafutanDai2dankai(RadioButton rdbRiyoshafutanDai2dankai) {
+        this.getKogakuKyufuKonkyoPanel().setRdbRiyoshafutanDai2dankai(rdbRiyoshafutanDai2dankai);
+    }
+
+    @JsonIgnore
+    public RadioButton getRdbGekihenkanwaKubun() {
+        return this.getKogakuKyufuKonkyoPanel().getRdbGekihenkanwaKubun();
+    }
+
+    @JsonIgnore
+    public void  setRdbGekihenkanwaKubun(RadioButton rdbGekihenkanwaKubun) {
+        this.getKogakuKyufuKonkyoPanel().setRdbGekihenkanwaKubun(rdbGekihenkanwaKubun);
     }
 
     // </editor-fold>

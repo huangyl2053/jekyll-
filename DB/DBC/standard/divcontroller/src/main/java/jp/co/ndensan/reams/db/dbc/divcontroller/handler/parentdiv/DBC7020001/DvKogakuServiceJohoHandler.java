@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.Taishosha
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoBatchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuChushutsuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuServiceJohoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
@@ -31,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 汎用リスト_高額介護サービス費状況
@@ -160,11 +158,12 @@ public class DvKogakuServiceJohoHandler {
     /**
      * 「実行する」ボタンを押下バッチ実行、バッチパラメータ作成をします。
      *
-     * @return HanyoListKogakuKaigoBatchParameter 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
+     * @param 市町村判定 RString
+     * @return HanyoListKogakuKaigoBatchParameter
+     * 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
      */
-    public HanyoListKogakuKaigoBatchParameter getBatchParamter() {
+    public HanyoListKogakuKaigoBatchParameter getBatchParamter(RString 市町村判定) {
         HanyoListKogakuKaigoBatchParameter batchparam = new HanyoListKogakuKaigoBatchParameter();
-        RString 市町村判定 = ViewStateHolder.get(ViewStateKeys.市町村判定, RString.class);
         if (事務広域.equals(市町村判定)) {
             HokenshaSummary 保険者DDLSelected = div.getDvKogakuChushutsuJoken().getCcdHokenshaList().getSelectedItem();
             if (!全市町村.equals(保険者DDLSelected.get市町村名称())) {

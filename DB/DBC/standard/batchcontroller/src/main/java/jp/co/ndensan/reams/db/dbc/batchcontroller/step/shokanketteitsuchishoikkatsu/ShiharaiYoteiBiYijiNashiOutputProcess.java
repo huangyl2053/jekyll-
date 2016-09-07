@@ -60,6 +60,9 @@ public class ShiharaiYoteiBiYijiNashiOutputProcess extends BatchProcessBase<Shok
 
     @Override
     protected void afterExecute() {
+        if (帳票データリスト.isEmpty()) {
+            return;
+        }
 
         List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiItem> itemList = new ArrayList<>();
         if (FLAG_FALSE.equals(batchPram.get受領委任者向け決定通知書フラグ())) {

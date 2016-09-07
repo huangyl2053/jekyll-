@@ -15,12 +15,13 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.NinteiCh
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.NinteiChosaIraiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaihakkoichiranhyo.ChosaIraiHakkoIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -29,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0080-160 duanzhanli
  */
-public class NinteiChosaIraiProcess extends BatchProcessBase<NinteiChosaIraiRelateEntity> {
+public class NinteiChosaIraiProcess extends BatchKeyBreakBase<NinteiChosaIraiRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.INinteiChosaIraiMapper."
@@ -37,6 +38,13 @@ public class NinteiChosaIraiProcess extends BatchProcessBase<NinteiChosaIraiRela
     private static final RString 帳票ID = ReportIdDBE.DBE220003.getReportId().value();
     private List<ChosaIraiHakkoIchiranhyoBodyItem> bodyItemList;
     private NinteiChosaIraiProcessParamter processParamter;
+    private static final List<RString> PAGE_BREAK_KEYS = new ArrayList<>();
+
+    static {
+        PAGE_BREAK_KEYS.add(new RString("joken4"));
+        PAGE_BREAK_KEYS.add(new RString("joken5"));
+        PAGE_BREAK_KEYS.add(new RString("cityCode"));
+    }
     @BatchWriter
     private BatchReportWriter<ChosaIraiHakkoIchiranhyoReportSource> batchWriter;
     private ReportSourceWriter<ChosaIraiHakkoIchiranhyoReportSource> reportSourceWriter;
@@ -53,12 +61,29 @@ public class NinteiChosaIraiProcess extends BatchProcessBase<NinteiChosaIraiRela
 
     @Override
     protected void createWriter() {
-        batchWriter = BatchReportFactory.createBatchReportWriter(帳票ID).create();
+        batchWriter = BatchReportFactory.createBatchReportWriter(帳票ID).
+                addBreak(new BreakerCatalog<ChosaIraiHakkoIchiranhyoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchWriter);
     }
 
     @Override
-    protected void process(NinteiChosaIraiRelateEntity entity) {
+    protected void keyBreakProcess(NinteiChosaIraiRelateEntity current) {
+        if (hasBrek(getBefore(), current)) {
+            ChosaIraiHakkoIchiranhyoReport report = ChosaIraiHakkoIchiranhyoReport.createFrom(setHeadItem(), bodyItemList);
+            report.writeBy(reportSourceWriter);
+            bodyItemList = new ArrayList<>();
+        }
+    }
+
+    private boolean hasBrek(NinteiChosaIraiRelateEntity before, NinteiChosaIraiRelateEntity current) {
+        return !RString.isNullOrEmpty(before.getIraishoShutsuryokuYMD()) && !RString.isNullOrEmpty(before.getNinteichosaKigenYMD())
+                && !before.getIraishoShutsuryokuYMD().equals(current.getIraishoShutsuryokuYMD())
+                && !before.getNinteichosaKigenYMD().equals(current.getNinteichosaKigenYMD())
+                && !before.getShichosonCode().equals(current.getShichosonCode());
+    }
+
+    @Override
+    protected void usualProcess(NinteiChosaIraiRelateEntity entity) {
         bodyItemList.add(setBodyItem(entity));
     }
 
@@ -74,7 +99,7 @@ public class NinteiChosaIraiProcess extends BatchProcessBase<NinteiChosaIraiRela
         ChosaIraiHakkoIchiranhyoHeadItem headItem = new ChosaIraiHakkoIchiranhyoHeadItem();
         headItem.set認定調査依頼書FLG(processParamter.getNinteiChosaIraisyo());
         headItem.set依頼日From(processParamter.getIraiFromYMD());
-        headItem.set依頼日From(processParamter.getIraiToYMD());
+        headItem.set依頼日To(processParamter.getIraiToYMD());
         return headItem;
     }
 

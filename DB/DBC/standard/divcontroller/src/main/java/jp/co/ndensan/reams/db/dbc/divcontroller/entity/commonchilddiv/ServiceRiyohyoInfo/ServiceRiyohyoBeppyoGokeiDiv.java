@@ -10,12 +10,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ServiceRiyohyoBeppyoGokei のクラスファイル 
- * 
- * @author 自動生成
+ * ServiceRiyohyoBeppyoGokei のクラスファイル
+ *
+ * @reamsid_L DBC-1930-050 cuilin
  */
 public class ServiceRiyohyoBeppyoGokeiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -343,16 +343,6 @@ public class ServiceRiyohyoBeppyoGokeiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnCalcGokei() {
-        return this.getServiceRiyohyoBeppyoGokeiFooter().getBtnCalcGokei();
-    }
-
-    @JsonIgnore
-    public void  setBtnCalcGokei(Button btnCalcGokei) {
-        this.getServiceRiyohyoBeppyoGokeiFooter().setBtnCalcGokei(btnCalcGokei);
-    }
-
-    @JsonIgnore
     public Button getBtnCancelGokeiInput() {
         return this.getServiceRiyohyoBeppyoGokeiFooter().getBtnCancelGokeiInput();
     }
@@ -360,6 +350,16 @@ public class ServiceRiyohyoBeppyoGokeiDiv extends Panel {
     @JsonIgnore
     public void  setBtnCancelGokeiInput(Button btnCancelGokeiInput) {
         this.getServiceRiyohyoBeppyoGokeiFooter().setBtnCancelGokeiInput(btnCancelGokeiInput);
+    }
+
+    @JsonIgnore
+    public Button getBtnCalcGokei() {
+        return this.getServiceRiyohyoBeppyoGokeiFooter().getBtnCalcGokei();
+    }
+
+    @JsonIgnore
+    public void  setBtnCalcGokei(Button btnCalcGokei) {
+        this.getServiceRiyohyoBeppyoGokeiFooter().setBtnCalcGokei(btnCalcGokei);
     }
 
     // </editor-fold>

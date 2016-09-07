@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Mar 18 10:28:31 CST 2016
+ * Thu Aug 04 10:01:56 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * @reamsid_L DBC-2130-010 cuilin
  */
 public class dgKeyakusya_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private RString txtKeiyakuNo;
     private RString txtServiceShurui;
@@ -26,6 +26,7 @@ public class dgKeyakusya_Row extends DataRow {
     private TextBoxDate txtKeiyakuKeteibi;
     private RString txtKeiyakuJigyoshaNo;
     private RString txtKeiyakuJigyoshamei;
+    private RString txtShikibetsuCode;
 
     public dgKeyakusya_Row() {
         super();
@@ -37,6 +38,7 @@ public class dgKeyakusya_Row extends DataRow {
         this.txtKeiyakuKeteibi = new TextBoxDate();
         this.txtKeiyakuJigyoshaNo = RString.EMPTY;
         this.txtKeiyakuJigyoshamei = RString.EMPTY;
+        this.txtShikibetsuCode = RString.EMPTY;
         this.setOriginalData("txtKeiyakuNo", txtKeiyakuNo);
         this.setOriginalData("txtServiceShurui", txtServiceShurui);
         this.setOriginalData("txtHihoNo", txtHihoNo);
@@ -45,9 +47,10 @@ public class dgKeyakusya_Row extends DataRow {
         this.setOriginalData("txtKeiyakuKeteibi", txtKeiyakuKeteibi);
         this.setOriginalData("txtKeiyakuJigyoshaNo", txtKeiyakuJigyoshaNo);
         this.setOriginalData("txtKeiyakuJigyoshamei", txtKeiyakuJigyoshamei);
+        this.setOriginalData("txtShikibetsuCode", txtShikibetsuCode);
     }
 
-    public dgKeyakusya_Row(RString txtKeiyakuNo, RString txtServiceShurui, RString txtHihoNo, RString txtShimei, TextBoxDate txtKeiyakuShenseibi, TextBoxDate txtKeiyakuKeteibi, RString txtKeiyakuJigyoshaNo, RString txtKeiyakuJigyoshamei) {
+    public dgKeyakusya_Row(RString txtKeiyakuNo, RString txtServiceShurui, RString txtHihoNo, RString txtShimei, TextBoxDate txtKeiyakuShenseibi, TextBoxDate txtKeiyakuKeteibi, RString txtKeiyakuJigyoshaNo, RString txtKeiyakuJigyoshamei, RString txtShikibetsuCode) {
         super();
         this.setOriginalData("txtKeiyakuNo", txtKeiyakuNo);
         this.setOriginalData("txtServiceShurui", txtServiceShurui);
@@ -57,6 +60,7 @@ public class dgKeyakusya_Row extends DataRow {
         this.setOriginalData("txtKeiyakuKeteibi", txtKeiyakuKeteibi);
         this.setOriginalData("txtKeiyakuJigyoshaNo", txtKeiyakuJigyoshaNo);
         this.setOriginalData("txtKeiyakuJigyoshamei", txtKeiyakuJigyoshamei);
+        this.setOriginalData("txtShikibetsuCode", txtShikibetsuCode);
         this.txtKeiyakuNo = txtKeiyakuNo;
         this.txtServiceShurui = txtServiceShurui;
         this.txtHihoNo = txtHihoNo;
@@ -65,6 +69,7 @@ public class dgKeyakusya_Row extends DataRow {
         this.txtKeiyakuKeteibi = txtKeiyakuKeteibi;
         this.txtKeiyakuJigyoshaNo = txtKeiyakuJigyoshaNo;
         this.txtKeiyakuJigyoshamei = txtKeiyakuJigyoshamei;
+        this.txtShikibetsuCode = txtShikibetsuCode;
     }
 
     public RString getTxtKeiyakuNo() {
@@ -97,6 +102,10 @@ public class dgKeyakusya_Row extends DataRow {
 
     public RString getTxtKeiyakuJigyoshamei() {
         return txtKeiyakuJigyoshamei;
+    }
+
+    public RString getTxtShikibetsuCode() {
+        return txtShikibetsuCode;
     }
 
     public void setTxtKeiyakuNo(RString txtKeiyakuNo) {
@@ -137,6 +146,11 @@ public class dgKeyakusya_Row extends DataRow {
     public void setTxtKeiyakuJigyoshamei(RString txtKeiyakuJigyoshamei) {
         this.setOriginalData("txtKeiyakuJigyoshamei", txtKeiyakuJigyoshamei);
         this.txtKeiyakuJigyoshamei = txtKeiyakuJigyoshamei;
+    }
+
+    public void setTxtShikibetsuCode(RString txtShikibetsuCode) {
+        this.setOriginalData("txtShikibetsuCode", txtShikibetsuCode);
+        this.txtShikibetsuCode = txtShikibetsuCode;
     }
 
     // </editor-fold>

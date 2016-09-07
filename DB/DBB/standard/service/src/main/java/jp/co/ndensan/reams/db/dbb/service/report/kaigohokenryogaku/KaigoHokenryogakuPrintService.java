@@ -10,13 +10,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
-import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class KaigoHokenryogakuPrintService {
 
+    private static final ReportId 決定変更通知書_帳票分類ID = new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -49,12 +50,12 @@ public class KaigoHokenryogakuPrintService {
      *
      * @param 編集後本算定通知書共通情報List List<EditedHonSanteiTsuchiShoKyotsu>
      * @param 帳票作成日時 RDateTime
-     * @param 出力順ID Long
+     * @param 出力順ID RString
      * @param タイトル RString
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List, RDateTime 帳票作成日時,
-            Long 出力順ID, RString タイトル) {
+            RString 出力順ID, RString タイトル) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             printタイプ(編集後本算定通知書共通情報List, 帳票作成日時, 出力順ID, reportManager, タイトル);
@@ -68,14 +69,17 @@ public class KaigoHokenryogakuPrintService {
      *
      * @param 編集後本算定通知書共通情報List List<EditedHonSanteiTsuchiShoKyotsu>
      * @param 帳票作成日時 RDateTime
-     * @param 出力順ID Long
+     * @param 出力順ID RString
      * @param reportManager ReportManager
      * @param タイトル RString
      */
     public void printタイプ(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List, RDateTime 帳票作成日時,
-            Long 出力順ID, ReportManager reportManager, RString タイトル) {
-        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB100039.getReportId(), 出力順ID);
+            RString 出力順ID, ReportManager reportManager, RString タイトル) {
+        IOutputOrder 並び順 = null;
+        if (!RString.isNullOrEmpty(出力順ID)) {
+            並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                    .get出力順(SubGyomuCode.DBB介護賦課, 決定変更通知書_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        }
         KaigoHokenryogakuProperty property = new KaigoHokenryogakuProperty();
         try (ReportAssembler<KaigoHokenryogakuSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<KaigoHokenryogakuSource> reportSourceWriter

@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 汎用リスト受給者台帳２のMyBatis用パラメータクラスです。
@@ -22,7 +21,6 @@ import lombok.Setter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-@Setter
 public class HanyoRisutoJyukyusyaDaichoMybatisParameter implements IMyBatisParameter {
 
     private final boolean isShinseikeshidetacyusyutsu;

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskigoto;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskigoto.NonyuTsuchishoCVSKigotoSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBB-9110-130 huangh
  */
-public class NonyuTsuchishoCVSKigotoReport extends INonyuTsuchisho<NonyuTsuchishoCVSKigotoSource> {
+public class NonyuTsuchishoCVSKigotoReport extends NonyuTsuchisho<NonyuTsuchishoCVSKigotoSource> {
 
     private final HonSanteiNonyuTsuchiShoJoho item;
     private final NinshoshaSource ninshoshaSource;
@@ -40,14 +40,14 @@ public class NonyuTsuchishoCVSKigotoReport extends INonyuTsuchisho<NonyuTsuchish
     @Override
     public void writeBy(ReportSourceWriter<NonyuTsuchishoCVSKigotoSource> reportSourceWriter) {
 
-        INonyuTsuchishoCVSKigotoEditor coverEditor = new NonyuTsuchishoCVSKigotoEditor(item, ninshoshaSource, 1);
+        INonyuTsuchishoCVSKigotoEditor coverEditor = new NonyuTsuchishoCVSKigotoEditor(item, ninshoshaSource);
         INonyuTsuchishoCVSKigotoBuilder builder = new NonyuTsuchishoCVSKigotoBuilder(coverEditor);
         reportSourceWriter.writeLine(builder);
     }
 
     @Override
-    public List<INonyuTsuchisho> devidedByPage() {
-        List<INonyuTsuchisho> nonyuTsuchishoList = new ArrayList<>();
+    public List<NonyuTsuchisho<NonyuTsuchishoCVSKigotoSource>> devidedByPage() {
+        List<NonyuTsuchisho<NonyuTsuchishoCVSKigotoSource>> nonyuTsuchishoList = new ArrayList<>();
         NonyuTsuchishoCVSKigotoReport report
                 = new NonyuTsuchishoCVSKigotoReport(item, ninshoshaSource);
         nonyuTsuchishoList.add(report);

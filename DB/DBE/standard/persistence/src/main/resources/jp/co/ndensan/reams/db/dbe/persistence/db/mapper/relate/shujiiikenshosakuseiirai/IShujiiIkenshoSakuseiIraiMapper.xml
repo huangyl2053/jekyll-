@@ -32,6 +32,8 @@
         "DbT5911ShujiiIryoKikanJoho"."jusho" AS "iryoKikanJusho",
         "DbT5911ShujiiIryoKikanJoho"."telNo"  AS "iryoKikanTelNo",
         "DbT5911ShujiiIryoKikanJoho"."faxNo" AS "iryoKikanFaxNo",
+        "DbT5911ShujiiIryoKikanJoho"."yubinNo" AS "iryoKikanYubinNo",
+        "DbT5911ShujiiIryoKikanJoho"."daihyoshaName",
         "DbT5912ShujiiJoho"."shujiiName",
         "DbT5301ShujiiIkenshoIraiJoho"."ikenshoSakuseiIraiYMD",
         "DbT5301ShujiiIkenshoIraiJoho"."iraishoShutsuryokuYMD",
@@ -326,13 +328,19 @@
         <if test="useIkenshoJuryoYMDTo">
             AND DbT5302ShujiiIkenshoJoho."ikenshoJuryoYMD" <![CDATA[<=]]> #{ikenshoJuryoYMDTo}
         </if>
-        <if test="useIkenItem13">
+        <if test="useIkenItem13 and !useIkenItem14">
             AND DbT5304ShujiiIkenshoIkenItem."remban" = 13
             AND DbT5304ShujiiIkenshoIkenItem."ikenItem" = #{ikenItem13}
         </if>
-        <if test="useIkenItem14">
+        <if test="!useIkenItem13 and useIkenItem14">
             AND DbT5304ShujiiIkenshoIkenItem."remban" = 14
             AND DbT5304ShujiiIkenshoIkenItem."ikenItem" = #{ikenItem14}
+        </if>
+        <if test="useIkenItem13 and useIkenItem14">
+            AND ((DbT5304ShujiiIkenshoIkenItem."remban" = 13
+            AND DbT5304ShujiiIkenshoIkenItem."ikenItem" = #{ikenItem13})
+            OR (DbT5304ShujiiIkenshoIkenItem."remban" = 14
+            AND DbT5304ShujiiIkenshoIkenItem."ikenItem" = #{ikenItem14}))
         </if>
         <if test="useIchijiHanteiYMDFrom">
             AND DbT5116IchijiHanteiKekkaJoho."ichijiHanteiYMD" <![CDATA[>=]]> #{ichijiHanteiYMDFrom}
@@ -600,6 +608,8 @@
         <result property="rirekiNo" column="rirekiNo"/>
         <result property="preRirekiNo" column="preRirekiNo"/>
         <result property="shisetsuNyushoFlag" column="shisetsuNyushoFlag"/>
+        <result property="iryoKikanYubinNo" column="iryoKikanYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="daihyoshaName" column="daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <resultMap id="resultMap_ShujiiIraiAtena" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshosakuseiirai.ShujiiIraiAtenaJohoRelateEntity" autoMapping="true">
         <result property="atenaKikanMeisho" column="atenaKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

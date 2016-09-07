@@ -55,6 +55,7 @@ public class KihonChosaInput7 {
             ArrayList<KihonChosaInput> 認定調査基本情報リスト = ViewStateHolder.get(ViewStateKeys.第七群認定調査基本情報リスト, ArrayList.class);
             ArrayList<KihonChosaInput> new認定調査基本情報リスト = getHandler(div).onClick_btnConfirm(認定調査基本情報リスト);
             ViewStateHolder.put(ViewStateKeys.第七群認定調査基本情報リスト, new認定調査基本情報リスト);
+            必須入力チェック(new認定調査基本情報リスト);
             ResponseData.of(div).dialogOKClose();
         }
         return ResponseData.of(div).respond();
@@ -72,6 +73,24 @@ public class KihonChosaInput7 {
      */
     public ResponseData<KihonChosaInput7Div> onClick_btnBack(KihonChosaInput7Div div) {
         return ResponseData.of(div).dialogOKClose();
+    }
+
+    private void 必須入力チェック(ArrayList<KihonChosaInput> new認定調査基本情報リスト) {
+        boolean 障害高齢者の日常生活自立度_選択 = false;
+        boolean 認知症高齢者の日常生活自立度_選択 = false;
+        for (KihonChosaInput joho : new認定調査基本情報リスト) {
+            if (!joho.get認知症高齢者自立度().isEmpty()) {
+                障害高齢者の日常生活自立度_選択 = true;
+            }
+            if (!joho.get障害高齢者自立度().isEmpty()) {
+                認知症高齢者の日常生活自立度_選択 = true;
+            }
+        }
+        if (障害高齢者の日常生活自立度_選択 && 認知症高齢者の日常生活自立度_選択) {
+            ViewStateHolder.put(ViewStateKeys.基本調査の入力状況, new RString("1"));
+        } else {
+            ViewStateHolder.put(ViewStateKeys.基本調査の入力状況, new RString("0"));
+        }
     }
 
 }

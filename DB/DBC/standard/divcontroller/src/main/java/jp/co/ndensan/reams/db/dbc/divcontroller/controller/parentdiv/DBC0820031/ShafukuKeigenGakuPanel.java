@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031.DBC0820031TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031.ShafukuKeigenGakuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820031.ShafukuKeigenGakuPanelHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.SikibetuNokennsakuki;
@@ -23,6 +22,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.S
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShakaiFukushiHojinRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -61,7 +61,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onLoad(ShafukuKeigenGakuPanelDiv div) {
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.明細検索キー,
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
@@ -73,7 +73,7 @@ public class ShafukuKeigenGakuPanel {
         ViewStateHolder.put(ViewStateKeys.サービス年月, サービス年月);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
-        ShoukanharaihishinseikensakuParameter 償還払費申請検索 = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+        ShoukanharaihishinseikensakuParameter 償還払費申請検索 = ViewStateHolder.get(ViewStateKeys.申請検索キー,
                 ShoukanharaihishinseikensakuParameter.class);
         SikibetuNokennsakuki sikibetuKey = new SikibetuNokennsakuki(償還払費申請検索.getYoshikiNo(),
                 償還払費申請検索.getServiceTeikyoYM());
@@ -90,7 +90,7 @@ public class ShafukuKeigenGakuPanel {
                 = (ArrayList<ShokanShakaiFukushiHojinKeigengakuResult>) ShokanbaraiJyokyoShokai.createInstance()
                 .getSeikyuShakaifukushiHoujinKeigengaku(
                         被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-        ViewStateHolder.put(ViewStateKeys.情報, hojinKeigengakuEntityList);
+        ViewStateHolder.put(ViewStateKeys.社福軽減額一覧情報, hojinKeigengakuEntityList);
         getHandler(div).initialize(hojinKeigengakuEntityList);
         div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki().toDateString().toString()));
         div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
@@ -278,7 +278,7 @@ public class ShafukuKeigenGakuPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                List<ShokanShakaiFukushiHojinKeigengakuResult> list = ViewStateHolder.get(ViewStateKeys.情報, List.class);
+                List<ShokanShakaiFukushiHojinKeigengakuResult> list = ViewStateHolder.get(ViewStateKeys.社福軽減額一覧情報, List.class);
                 getHandler(div).内容の破棄(list);
                 return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.一覧に戻る).respond();
             }
@@ -299,10 +299,10 @@ public class ShafukuKeigenGakuPanel {
         try {
             if (flag) {
                 if (!ResponseHolder.isReRequest()) {
-                    ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                    ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.明細検索キー,
                             ShoukanharaihishinseimeisaikensakuParameter.class);
                     List<ShokanShakaiFukushiHojinKeigengakuResult> hojinKeigengakuEntityList = ViewStateHolder.get(
-                            ViewStateKeys.情報, List.class);
+                            ViewStateKeys.社福軽減額一覧情報, List.class);
                     getHandler(div).登録Save(meisaiPar, hojinKeigengakuEntityList);
                     return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
                             .replace(登録.toString())).respond();
@@ -337,7 +337,7 @@ public class ShafukuKeigenGakuPanel {
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_CommonDelete(ShafukuKeigenGakuPanelDiv div) {
         try {
             if (!ResponseHolder.isReRequest()) {
-                ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.明細検索キー,
                         ShoukanharaihishinseimeisaikensakuParameter.class);
                 getHandler(div).削除Save(meisaiPar);
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
@@ -489,6 +489,6 @@ public class ShafukuKeigenGakuPanel {
                 div.getPanelHead().getTxtShomeisho().getValue(),
                 div.getPanelHead().getTxtMeisaiBango().getValue(),
                 null);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
+        ViewStateHolder.put(ViewStateKeys.申請検索キー, paramter);
     }
 }

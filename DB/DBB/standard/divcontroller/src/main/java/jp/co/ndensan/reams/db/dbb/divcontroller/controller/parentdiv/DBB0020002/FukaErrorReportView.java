@@ -19,35 +19,41 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0020002.Fuk
 import jp.co.ndensan.reams.db.dbb.service.core.fukaerror.FukaErrorListService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReport;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportCommon;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportCommon;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportShoriKubun;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.InternalReportKihon.IInternalReportKihonDiv;
 import jp.co.ndensan.reams.ur.urz.service.core.internalreportoutput.InternalReportServiceFactory;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.euc.cooperation.EucDownload;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
+import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
+import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -67,7 +73,24 @@ public class FukaErrorReportView {
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString CSV_WRITER_LINE = new RString("_");
     private static final RString CSV = new RString(".csv");
+    private static final RString DBBMN33004 = new RString("DBBMN33004");
+    private static final RString DBBMN34004 = new RString("DBBMN34004");
+    private static final RString DBBMN36004 = new RString("DBBMN36004");
+    private static final RString DBBMN35006 = new RString("DBBMN35006");
+    private static final RString DBBMN43004 = new RString("DBBMN43004");
+    private static final RString DBBMN44004 = new RString("DBBMN44004");
+    private static final RString DBBMN45004 = new RString("DBBMN45004");
+    private static final RString 特徴仮算定賦課 = new RString("特徴仮算定賦課");
+    private static final RString 普徴仮算定賦課 = new RString("普徴仮算定賦課");
+    private static final RString 仮算定異動賦課 = new RString("仮算定異動賦課");
+    private static final RString 特徴平準化計算_8月分 = new RString("特徴平準化計算_8月分");
+    private static final RString 本算定賦課 = new RString("本算定賦課");
+    private static final RString 異動賦課 = new RString("異動賦課");
+    private static final RString 過年度賦課 = new RString("過年度賦課");
     private static final int TWO = 2;
+    private static final RString 個人番号_利用有無名称 = new RString("個人番号利用有無");
+    private static final RString 法人番号_利用有無名称 = new RString("法人番号利用有無");
+    private static final RString 無し = new RString("無し");
 
     /**
      * 画面初期化処理です。
@@ -76,8 +99,19 @@ public class FukaErrorReportView {
      * @return 賦課エラー一覧Divを持つResponseData
      */
     public ResponseData onLoad(FukaErrorReportViewDiv div) {
-
-        RString batchID = FlowParameterAccessor.get().get(BATCHID_FUKAERROR, RString.class);
+        RString batchID = RString.EMPTY;
+        RDateTime 基準日時 = RDateTime.MIN;
+        RString menuId = getMenuId();
+        if (!RString.isNullOrEmpty(menuId)) {
+            ShoriDateKanri shori = FukaErrorListService.createInstance().getFukaBatchID(menuId);
+            if (shori != null) {
+                batchID = getバッチID変換(shori);
+                基準日時 = shori.get基準日時().getRDateTime();
+            }
+        } else {
+            batchID = FlowParameterAccessor.get().get(BATCHID_FUKAERROR, RString.class);
+            基準日時 = FlowParameterAccessor.get().get(BATCHSTARTINGDATETIME, RDateTime.class);
+        }
         IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
         List<FukaErrorList> リスト作成日時 = FukaErrorListService.createInstance().getCreationDateTimeList(batchID).records();
         if (!リスト作成日時.isEmpty()) {
@@ -87,7 +121,7 @@ public class FukaErrorReportView {
                     .setInternalReportId(REPORTID_FUKAERROR)
                     .setInternalReportCreationDateTime(最新リスト作成日時)
                     .setBatchId(batchID)
-                    .setBatchStartingDateTime(FlowParameterAccessor.get().get(BATCHSTARTINGDATETIME, RDateTime.class))
+                    .setBatchStartingDateTime(基準日時)
                     .build();
             IInternalReportCommon fukaError = InternalReportServiceFactory.getInternalReportComponentsProvider().
                     createInternalReportCommonForReport(fukaErrorBaseData);
@@ -96,6 +130,11 @@ public class FukaErrorReportView {
             kihonDiv.setKihonDataAndCreationDateTime(fukaError);
             createHandler(div).initialize(賦課エラー情報);
             ViewStateHolder.put(ViewStateKeys.賦課エラー一覧, Models.create(賦課エラー情報));
+            List<PersonalData> personalDataList = new ArrayList<>();
+            for (FukaErrorList errorList : 賦課エラー情報) {
+                personalDataList.add(toPersonalData(errorList.get識別コード()));
+            }
+            AccessLogger.log(AccessLogType.照会, personalDataList);
         } else {
             createHandler(div).initialize(new ArrayList<FukaErrorList>());
         }
@@ -112,6 +151,7 @@ public class FukaErrorReportView {
         List<FukaErrorList> 賦課エラー情報 = FukaErrorListService.createInstance().
                 getFukaErrorList(div.getCcdFukaErrorCommon().getSelectedListCreationDateTime()).records();
         createHandler(div).initialize(賦課エラー情報);
+        ViewStateHolder.put(ViewStateKeys.賦課エラー一覧, Models.create(賦課エラー情報));
         return ResponseData.of(div).respond();
     }
 
@@ -134,20 +174,27 @@ public class FukaErrorReportView {
         fileName.append(CSV_WRITER_LINE).append(dateString);
         fileName.append(CSV_WRITER_LINE).append(timeString);
         fileName.append(CSV);
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), fileName.toRString());
-        try (CsvWriter<FukaErrorListCsvItem> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
+        FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+                new EucEntityId(internalReport.get内部帳票Id()), UzUDE0831EucAccesslogFileType.Csv);
+        RString spoolWorkPath = manager.getEucOutputDirectry();
+        RString eucFilePath = Path.combinePath(spoolWorkPath, fileName.toRString());
+        List<PersonalData> personalDataList = new ArrayList<>();
+        try (EucCsvWriter writer = new EucCsvWriter.InstanceBuilder(eucFilePath, new EucEntityId(internalReport.get内部帳票Id()))
+                .setDelimiter(CSV_WRITER_DELIMITER)
+                .setEncode(Encode.SJIS)
+                .setEnclosure(RString.EMPTY)
+                .hasHeader(false)
+                .build()) {
             for (FukaErrorListCsvItem item : reportItem) {
-                csvWriter.writeLine(item);
+                writer.writeLine(item);
+                personalDataList.add(toPersonalData(new ShikibetsuCode(item.get識別コード())));
             }
-            csvWriter.close();
         }
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(fileName.toRString()));
-        sfd = SharedFile.defineSharedFile(sfd);
-        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
-        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
-        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, fileName.toRString()), response);
+        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        manager.spool(eucFilePath, log);
+        return EucDownload.directAccessDownload(
+                SubGyomuCode.DBB介護賦課, manager.getSharedFileName(), manager.getSharedFileId(), response);
+
     }
 
     /**
@@ -178,6 +225,8 @@ public class FukaErrorReportView {
 
         FukaErrorList fukaErrorList = ViewStateHolder.get(ViewStateKeys.賦課エラー情報, FukaErrorList.class);
         if (InternalReportShoriKubun.未処理.getCode().getKey().equals(fukaErrorList.get処理区分コード().value())) {
+            ViewStateHolder.put(ViewStateKeys.資格対象者,
+                    new TaishoshaKey(fukaErrorList.get被保険者番号(), fukaErrorList.get識別コード(), SetaiCode.EMPTY));
             return ResponseData.of(div).forwardWithEventName(DBB0020002TransitionEventName.資格不整合修正).
                     parameter(DBB0020002TransitionEventName.資格不整合修正.getName());
         } else {
@@ -191,7 +240,7 @@ public class FukaErrorReportView {
     }
 
     /**
-     * 資格不整合処理へ遷移するボタンをクリックした際に実行されるイベントです。
+     * 即時賦課更正処理へ遷移するボタンをクリックした際に実行されるイベントです。
      *
      * @param div 賦課エラー一覧Div
      * @return 賦課エラー一覧Divを持つResponseData
@@ -201,6 +250,8 @@ public class FukaErrorReportView {
         FukaErrorList fukaErrorList = ViewStateHolder.get(ViewStateKeys.賦課エラー情報, FukaErrorList.class);
         if (InternalReportShoriKubun.未処理.getCode().getKey().equals(fukaErrorList.get処理区分コード().value())) {
 
+            ViewStateHolder.put(ViewStateKeys.資格対象者,
+                    new TaishoshaKey(fukaErrorList.get被保険者番号(), fukaErrorList.get識別コード(), SetaiCode.EMPTY));
             return ResponseData.of(div).forwardWithEventName(DBB0020002TransitionEventName.即時賦課更正).
                     parameter(DBB0020002TransitionEventName.即時賦課更正.getName());
         } else {
@@ -224,7 +275,10 @@ public class FukaErrorReportView {
         FukaErrorList errorList = ViewStateHolder.get(ViewStateKeys.賦課エラー情報, FukaErrorList.class);
         FukaErrorListService service = FukaErrorListService.createInstance();
         service.saveAs処理済み(errorList);
-        createHandler(div).initialize(service.getFukaErrorList(errorList.get内部帳票作成日時()).records());
+        List<FukaErrorList> 賦課エラー情報
+                = FukaErrorListService.createInstance().getFukaErrorList(errorList.get内部帳票作成日時()).records();
+        createHandler(div).initialize(賦課エラー情報);
+        ViewStateHolder.put(ViewStateKeys.賦課エラー一覧, Models.create(賦課エラー情報));
         return ResponseData.of(div).respond();
     }
 
@@ -249,5 +303,61 @@ public class FukaErrorReportView {
         builder.append("-").append(minute.padZeroToLeft(TWO))
                 .append("-").append(second.padZeroToLeft(TWO));
         return builder.toRString();
+    }
+
+    private RString getバッチID変換(ShoriDateKanri shori) {
+        if (特徴仮算定賦課.equals(shori.get処理名())) {
+            return new RString("DBB011001_TokuchoKarisanteiFuka");
+        }
+        if (普徴仮算定賦課.equals(shori.get処理名())) {
+            return new RString("DBB014001_FuchoKarisanteiFuka");
+        }
+        if (仮算定異動賦課.equals(shori.get処理名())) {
+            return new RString("DBB015001_KarisanteiIdoFuka");
+        }
+        if (特徴平準化計算_8月分.equals(shori.get処理名())) {
+            return new RString("DBB013001_TokuchoHeinjunka8Gatsu");
+        }
+        if (本算定賦課.equals(shori.get処理名())) {
+            return new RString("DBB031001_HonsanteiFuka");
+        }
+        if (異動賦課.equals(shori.get処理名())) {
+            return new RString("DBB051001_GennendoIdoFuka");
+        }
+        if (過年度賦課.equals(shori.get処理名())) {
+            return new RString("DBB055001_KanendoIdoFuka");
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getMenuId() {
+        if (ResponseHolder.getMenuID().equals(DBBMN33004)) {
+            return 特徴仮算定賦課;
+        }
+        if (ResponseHolder.getMenuID().equals(DBBMN34004)) {
+            return 普徴仮算定賦課;
+        }
+        if (ResponseHolder.getMenuID().equals(DBBMN36004)) {
+            return 仮算定異動賦課;
+        }
+        if (ResponseHolder.getMenuID().equals(DBBMN35006)) {
+            return 特徴平準化計算_8月分;
+        }
+        if (ResponseHolder.getMenuID().equals(DBBMN43004)) {
+            return 本算定賦課;
+        }
+        if (ResponseHolder.getMenuID().equals(DBBMN44004)) {
+            return 異動賦課;
+        }
+        if (ResponseHolder.getMenuID().equals(DBBMN45004)) {
+            return 過年度賦課;
+        }
+        return RString.EMPTY;
+    }
+
+    private PersonalData toPersonalData(ShikibetsuCode 識別コード) {
+        ExpandedInformation expandedInfo1 = new ExpandedInformation(new Code("0001"), 個人番号_利用有無名称, 無し);
+        ExpandedInformation expandedInfo2 = new ExpandedInformation(new Code("0002"), 法人番号_利用有無名称, 無し);
+        return PersonalData.of(識別コード, expandedInfo1, expandedInfo2);
     }
 }

@@ -1,6 +1,6 @@
-/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
-/// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="../../d.ts/jquery.d.ts" />
+/// <reference path="../../d.ts/UzViewControls.d.ts" />
+/// <reference path="../../d.ts/UzaConverter.d.ts" />
 
 module DBC {
 
@@ -121,6 +121,10 @@ module DBC {
                 return new UZA.TextBoxNum(this.convFiledName("txtRiyoshafutanGokei"));
             }
 
+            public GokeiPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("GokeiPanel"));
+            }
+
             public txtSanteiKijunGaku(): UZA.TextBoxNum {
                 return new UZA.TextBoxNum(this.convFiledName("txtSanteiKijunGaku"));
             }
@@ -129,8 +133,24 @@ module DBC {
                 return new UZA.TextBoxNum(this.convFiledName("txtSiharaiZumiGaku"));
             }
 
+            public txtKogakuShikyuGaku(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtKogakuShikyuGaku"));
+            }
+
+            public txtSetaiSyuyakuBango(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtSetaiSyuyakuBango"));
+            }
+
+            public rdbKogakuJidoSyokanTaisyo(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("rdbKogakuJidoSyokanTaisyo"));
+            }
+
             public lin1(): UZA.HorizontalLine {
                 return new UZA.HorizontalLine(this.convFiledName("lin1"));
+            }
+
+            public KogakuKyufuKonkyoPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KogakuKyufuKonkyoPanel"));
             }
 
             public rdbTsukiOkure(): UZA.RadioButton {

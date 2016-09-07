@@ -58,7 +58,7 @@
         "kagomoushitateJiyu",
         "tanisu",
         "hokenshaFutangaku",
-        "torikomiYm"
+        "torikomiYM"
         )
         SELECT
             TEMP."toriatsukaiYm",

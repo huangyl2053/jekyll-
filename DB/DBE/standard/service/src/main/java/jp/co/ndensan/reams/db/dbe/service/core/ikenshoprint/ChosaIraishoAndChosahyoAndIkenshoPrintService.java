@@ -56,7 +56,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyotokkijiko.C
 import jp.co.ndensan.reams.db.dbe.entity.report.source.saichekkuhyo.SaiChekkuhyoReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho.ShujiiIkenshoSakuseiIraishoReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -99,7 +101,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
         try (ReportAssembler<ChosaIraishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<ChosaIraishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220001.getReportId(),
-                    FlexibleDate.getNowDate(), reportSourceWriter);
+                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             List<ChosaIraishoHeadItem> 要介護認定調査依頼書 = new ArrayList<>();
             for (ChosaIraishoHeadItem item : 要介護認定調査依頼書List) {
                 item = new ChosaIraishoHeadItem(
@@ -167,7 +169,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
         try (ReportAssembler<ChosaIraiIchiranhyoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<ChosaIraiIchiranhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220002.getReportId(),
-                    FlexibleDate.getNowDate(), reportSourceWriter);
+                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             List<ChosaIraiIchiranhyoBodyItem> itemList = new ArrayList<>();
             for (ChosaIraiIchiranhyoBodyItem item : bodyItems) {
                 itemList.add(new ChosaIraiIchiranhyoBodyItem(
@@ -283,11 +285,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
     }
 
     /**
-     * 要介護認定調査票差異チェック票を出力します。
+     * 要介護認定調査票差異チェック票_片面を出力します。
      *
      * @param チェック票List 要介護認定調査票差異チェック票List
      */
-    public void print要介護認定調査票差異チェック票(List<SaiChekkuhyoItem> チェック票List) {
+    public void print要介護認定調査票差異チェック票_片面(List<SaiChekkuhyoItem> チェック票List) {
         List<SaiChekkuhyoReport> saiChekkuhyoReportList = new ArrayList<>();
         if (!チェック票List.isEmpty()) {
             saiChekkuhyoReportList.add(SaiChekkuhyoReport.createFrom(チェック票List));
@@ -299,10 +301,34 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
                 report.writeBy(reportSourceWriter);
             }
         }
+    }
 
+    /**
+     * 要介護認定調査票差異チェック票_両面右を出力します。
+     *
+     * @param チェック票List 要介護認定調査票差異チェック票List
+     */
+    public void print要介護認定調査票差異チェック票_両面右(List<SaiChekkuhyoItem> チェック票List) {
         List<SaiChekkuhyoRyoumenReport> ryoumenReportList = new ArrayList<>();
         ryoumenReportList.add(SaiChekkuhyoRyoumenReport.createFrom(チェック票List));
-        SaiChekkuhyoRyoumenProperty ryoumenproperty = new SaiChekkuhyoRyoumenProperty();
+        SaiChekkuhyoRyoumenProperty ryoumenproperty = new SaiChekkuhyoRyoumenProperty(ReportIdDBE.DBE292002.getReportId());
+        try (ReportAssembler<SaiChekkuhyoReportSource> assembler = createAssembler(ryoumenproperty, reportManager)) {
+            for (SaiChekkuhyoRyoumenReport report : ryoumenReportList) {
+                ReportSourceWriter<SaiChekkuhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                report.writeBy(reportSourceWriter);
+            }
+        }
+    }
+
+    /**
+     * 要介護認定調査票差異チェック票_両面左を出力します。
+     *
+     * @param チェック票List 要介護認定調査票差異チェック票List
+     */
+    public void print要介護認定調査票差異チェック票_両面左(List<SaiChekkuhyoItem> チェック票List) {
+        List<SaiChekkuhyoRyoumenReport> ryoumenReportList = new ArrayList<>();
+        ryoumenReportList.add(SaiChekkuhyoRyoumenReport.createFrom(チェック票List));
+        SaiChekkuhyoRyoumenProperty ryoumenproperty = new SaiChekkuhyoRyoumenProperty(ReportIdDBE.DBE292003.getReportId());
         try (ReportAssembler<SaiChekkuhyoReportSource> assembler = createAssembler(ryoumenproperty, reportManager)) {
             for (SaiChekkuhyoRyoumenReport report : ryoumenReportList) {
                 ReportSourceWriter<SaiChekkuhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
@@ -332,7 +358,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
         try (ReportAssembler<ShujiiIkenshoSakuseiIraishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<ShujiiIkenshoSakuseiIraishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230001.getReportId(),
-                    FlexibleDate.getNowDate(), reportSourceWriter);
+                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             int i = 1;
             for (ShujiiIkenshoSakuseiIraishoItem item : itemlist) {
                 item.setDenshiKoin(ninshoshaSource.denshiKoin);
@@ -363,7 +389,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
         try (ReportAssembler<IkenshoSakuseiIraiIchiranhyoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<IkenshoSakuseiIraiIchiranhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230002.getReportId(),
-                    FlexibleDate.getNowDate(), reportSourceWriter);
+                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             for (IkenshoSakuseiIraiIchiranhyoItem item : itemlist) {
                 item.setDenshiKoin(ninshoshaSource.denshiKoin);
                 item.setHakkoYMD(ninshoshaSource.hakkoYMD);
@@ -418,7 +444,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
         try (ReportAssembler<KaigohokenShindanMeireishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<KaigohokenShindanMeireishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230002.getReportId(),
-                    FlexibleDate.getNowDate(), reportSourceWriter);
+                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             for (KaigohokenShindanMeireishoHeaderItem item : itemlist) {
                 item.setDenshiKoin(ninshoshaSource.denshiKoin);
                 item.setHakkoYMD(ninshoshaSource.hakkoYMD);

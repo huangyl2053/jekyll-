@@ -26,7 +26,7 @@ public class KaigoNinteiShinsakaiJohoDiv extends Panel {
     @JsonProperty("txtNinteiYukoKikan")
     private TextBox txtNinteiYukoKikan;
     @JsonProperty("txtCheckDay")
-    private TextBox txtCheckDay;
+    private TextBoxDate txtCheckDay;
     @JsonProperty("txtNinteiYukoKaishiDateFrom")
     private TextBoxFlexibleDate txtNinteiYukoKaishiDateFrom;
     @JsonProperty("lblNinteiYukoKaishiDate")
@@ -107,7 +107,7 @@ public class KaigoNinteiShinsakaiJohoDiv extends Panel {
      * @return txtCheckDay
      */
     @JsonProperty("txtCheckDay")
-    public TextBox getTxtCheckDay() {
+    public TextBoxDate getTxtCheckDay() {
         return txtCheckDay;
     }
 
@@ -116,7 +116,7 @@ public class KaigoNinteiShinsakaiJohoDiv extends Panel {
      * @param txtCheckDay txtCheckDay
      */
     @JsonProperty("txtCheckDay")
-    public void setTxtCheckDay(TextBox txtCheckDay) {
+    public void setTxtCheckDay(TextBoxDate txtCheckDay) {
         this.txtCheckDay = txtCheckDay;
     }
 

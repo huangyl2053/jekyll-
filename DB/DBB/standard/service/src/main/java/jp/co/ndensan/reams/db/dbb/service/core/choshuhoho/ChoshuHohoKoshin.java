@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysHizuke;
@@ -115,7 +115,7 @@ public class ChoshuHohoKoshin {
         特徴停止月List.add(configs.get(ConfigKeysHizuke.日付関連_月別テーブル12));
         特徴停止月List.add(configs.get(ConfigKeysHizuke.日付関連_月別テーブル13));
         特徴停止月List.add(configs.get(ConfigKeysHizuke.日付関連_月別テーブル14));
-        if (!特別徴収停止日時.isEmpty()) {
+        if (特別徴収停止日時 != null && !特別徴収停止日時.isEmpty()) {
             if (特別徴収停止日時.getMonthValue() % 2 == 0) {
                 特徴停止月 = 特別徴収停止日時.getMonthValue();
             } else {
@@ -137,11 +137,11 @@ public class ChoshuHohoKoshin {
             } else {
                 徴収方法の情報 = get特徴停止月が2月以外(徴収方法の情報, 特徴停止月, 特徴停止月Idx);
             }
-
+            ChoshuHoho 徴収方法情報 = 徴収方法の情報;
             int 履歴番号 = 徴収方法の情報.get履歴番号() + 1;
-            徴収方法の情報.toEntity().setRirekiNo(履歴番号);
+            徴収方法の情報 = 徴収方法の情報.createBuilderForEdit().set履歴番号(履歴番号).build();
             RString 特別徴収停止事由コード = ChoteiJiyuCode.年金保険者からの通知.getコード();
-            徴収方法の情報.toEntity().setTokuchoTeishiJiyuCode(特別徴収停止事由コード);
+            徴収方法の情報 = 徴収方法の情報.createBuilderForEdit().set特別徴収停止事由コード(特別徴収停止事由コード).build();
 
             if (資格取得日 == null || 資格喪失日 == null || 資格取得日.isEmpty() || 資格喪失日.isEmpty()) {
                 return 徴収方法の情報;
@@ -150,11 +150,11 @@ public class ChoshuHohoKoshin {
             資格喪失月Idx = get資格喪失月Idx(資格喪失日, 特徴停止月List);
             徴収方法の情報 = get徴収方法の変更(徴収方法の情報, 資格取得月Idx, 資格喪失月Idx);
 
-            int 履歴番号の変更 = 徴収方法の情報.get履歴番号() + 1;
-            徴収方法の情報.toEntity().setRirekiNo(履歴番号の変更);
+            int 履歴番号の変更 = 徴収方法情報.get履歴番号() + 1;
+            徴収方法の情報 = 徴収方法の情報.createBuilderForEdit().set履歴番号(履歴番号の変更).build();
             if (!資格喪失日.isEmpty() && (!最大の日.equals(資格喪失日))) {
                 RString 特別徴収停止事由コードの変更 = ChoteiJiyuCode.資格喪失特徴中止.getコード();
-                徴収方法の情報.toEntity().setTokuchoTeishiJiyuCode(特別徴収停止事由コードの変更);
+                徴収方法の情報 = 徴収方法の情報.createBuilderForEdit().set特別徴収停止事由コード(特別徴収停止事由コードの変更).build();
             }
             return 徴収方法の情報;
         } else {
@@ -162,8 +162,8 @@ public class ChoshuHohoKoshin {
             for (int intIdx = 資格取得月Idx; intIdx <= 数字_18; intIdx++) {
                 徴収方法の情報 = set徴収方法の情報(徴収方法の情報, intIdx, new RString("3"));
             }
+            return 徴収方法の情報;
         }
-        return 徴収方法の情報;
     }
 
     private ChoshuHoho get徴収方法の変更(ChoshuHoho 徴収方法の情報, int 資格取得月Idx, int 資格喪失月Idx) {

@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7037ShoKofuKaishuDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 証交付回収を管理するクラスです。
+ *
+ * @reamsid_L DBC-5010-011 zhaowei
  */
 public class ShoKofuKaishuManager {
 
@@ -99,4 +101,30 @@ public class ShoKofuKaishuManager {
         }
         return 1 == dac.save(証交付回収.toEntity());
     }
+
+    /**
+     * 主キーに合致する証交付回収を返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 交付証種類 KofuShoShurui
+     * @return ShoKofuKaishu
+     */
+    @Transaction
+    public ShoKofuKaishu get証交付回収(
+            HihokenshaNo 被保険者番号,
+            RString 交付証種類) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage("交付証種類"));
+
+        DbT7037ShoKofuKaishuEntity entity = dac.selectByKey(
+                被保険者番号,
+                交付証種類
+        );
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new ShoKofuKaishu(entity);
+    }
+
 }

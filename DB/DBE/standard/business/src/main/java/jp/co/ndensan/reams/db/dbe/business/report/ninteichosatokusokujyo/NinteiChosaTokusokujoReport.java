@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class NinteiChosaTokusokujoReport extends Report<NinteiChosaTokusokujoReportSource> {
 
-    private DbT5101NinteiShinseiJohoEntity entity;
+    private final DbT5101NinteiShinseiJohoEntity entity;
     private final NinshoshaSource ninshoshaSource;
     private final RString 文書番号;
     private final Map<Integer, RString> 通知文;

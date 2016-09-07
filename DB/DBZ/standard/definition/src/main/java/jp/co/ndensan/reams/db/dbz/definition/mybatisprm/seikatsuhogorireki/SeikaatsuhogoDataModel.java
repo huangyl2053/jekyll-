@@ -29,7 +29,6 @@ public class SeikaatsuhogoDataModel implements Serializable {
     private RDate 納付年月;
     private RString 入退所区分;
     private RDate 入所日;
-    private RDate 退所日;
     private RString 扶助種類コード;
     private RString 扶助種類;
     private RString 表示モード;

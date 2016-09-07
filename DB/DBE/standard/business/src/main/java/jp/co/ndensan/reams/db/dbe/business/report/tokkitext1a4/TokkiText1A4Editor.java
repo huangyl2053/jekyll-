@@ -6,9 +6,10 @@
 package jp.co.ndensan.reams.db.dbe.business.report.tokkitext1a4;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.tokkitext1a4.TokkiText1A4Entity;
-import jp.co.ndensan.reams.db.dbe.entity.db.tokkitext1a4.TokkiTextEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext1a4.TokkiText1A4Entity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext1a4.TokkiTextEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkitext1a4.TokkiText1ReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -21,7 +22,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 public class TokkiText1A4Editor implements ITokkiText1A4Editor {
 
     private final TokkiText1A4Entity entity;
-    private static final RString ONE = new RString("1");
+    private final List<RString> list;
+    private final int count;
     private static final int 連番_0 = 0;
     private static final int 連番_1 = 1;
     private static final int 連番_2 = 2;
@@ -42,9 +44,13 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
      * インスタンスを生成します。
      *
      * @param entity TokkiText1A4Entity
+     * @param list List<RString>
+     * @param count int
      */
-    protected TokkiText1A4Editor(TokkiText1A4Entity entity) {
+    protected TokkiText1A4Editor(TokkiText1A4Entity entity, List<RString> list, int count) {
         this.entity = entity;
+        this.list = list;
+        this.count = count;
     }
 
     @Override
@@ -54,7 +60,7 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
 
     private TokkiText1ReportSource editSource(TokkiText1ReportSource source) {
         source.tokkiImg = entity.get特記事項イメージ();
-        if (entity.get特記事項リスト() != null) {
+        if (entity.get特記事項リスト() != null && !entity.get特記事項リスト().isEmpty()) {
             RStringBuilder builder = new RStringBuilder();
             for (TokkiTextEntity tokkiTextEntity : entity.get特記事項リスト()) {
                 builder.append(tokkiTextEntity.get特記事項番号());
@@ -63,41 +69,12 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
                 builder.append(tokkiTextEntity.get特記事項名称());
                 builder.append("　　");
                 builder.append(tokkiTextEntity.get特記事項());
-                builder.append("\n");
+                builder.append(System.lineSeparator());
             }
             source.tokkiText = builder.toRString();
         }
-        if (entity.get特記事項イメージリスト() != null) {
-            source.tokkiText1 = getイメージ01(entity.get特記事項イメージリスト(), 連番_0);
-            source.tokkiText2 = getイメージ01(entity.get特記事項イメージリスト(), 連番_1);
-            source.tokkiText3 = getイメージ01(entity.get特記事項イメージリスト(), 連番_2);
-            source.tokkiText4 = getイメージ01(entity.get特記事項イメージリスト(), 連番_3);
-            source.tokkiText5 = getイメージ01(entity.get特記事項イメージリスト(), 連番_4);
-            source.tokkiText6 = getイメージ01(entity.get特記事項イメージリスト(), 連番_5);
-            source.tokkiText7 = getイメージ01(entity.get特記事項イメージリスト(), 連番_6);
-            source.tokkiText8 = getイメージ01(entity.get特記事項イメージリスト(), 連番_7);
-            source.tokkiText9 = getイメージ01(entity.get特記事項イメージリスト(), 連番_8);
-            source.tokkiText10 = getイメージ01(entity.get特記事項イメージリスト(), 連番_9);
-            source.tokkiText11 = getイメージ01(entity.get特記事項イメージリスト(), 連番_10);
-            source.tokkiText12 = getイメージ01(entity.get特記事項イメージリスト(), 連番_11);
-            source.tokkiText13 = getイメージ01(entity.get特記事項イメージリスト(), 連番_12);
-            source.tokkiText14 = getイメージ01(entity.get特記事項イメージリスト(), 連番_13);
-            source.tokkiText15 = getイメージ01(entity.get特記事項イメージリスト(), 連番_14);
-            source.tokkiText1 = getイメージ02(entity.get特記事項イメージリスト(), 連番_0);
-            source.tokkiText2 = getイメージ02(entity.get特記事項イメージリスト(), 連番_1);
-            source.tokkiText3 = getイメージ02(entity.get特記事項イメージリスト(), 連番_2);
-            source.tokkiText4 = getイメージ02(entity.get特記事項イメージリスト(), 連番_3);
-            source.tokkiText5 = getイメージ02(entity.get特記事項イメージリスト(), 連番_4);
-            source.tokkiText6 = getイメージ02(entity.get特記事項イメージリスト(), 連番_5);
-            source.tokkiText7 = getイメージ02(entity.get特記事項イメージリスト(), 連番_6);
-            source.tokkiText8 = getイメージ02(entity.get特記事項イメージリスト(), 連番_7);
-            source.tokkiText9 = getイメージ02(entity.get特記事項イメージリスト(), 連番_8);
-            source.tokkiText10 = getイメージ02(entity.get特記事項イメージリスト(), 連番_9);
-            source.tokkiText11 = getイメージ02(entity.get特記事項イメージリスト(), 連番_10);
-            source.tokkiText12 = getイメージ02(entity.get特記事項イメージリスト(), 連番_11);
-            source.tokkiText13 = getイメージ02(entity.get特記事項イメージリスト(), 連番_12);
-            source.tokkiText14 = getイメージ02(entity.get特記事項イメージリスト(), 連番_13);
-            source.tokkiText15 = getイメージ02(entity.get特記事項イメージリスト(), 連番_14);
+        if (entity.get特記事項イメージリスト() != null && !entity.get特記事項イメージリスト().isEmpty()) {
+            source.listChosa_1 = getイメージ01();
             source.tokkiImg1 = getイメージ03(entity.get特記事項イメージリスト(), 連番_0);
             source.tokkiImg2 = getイメージ03(entity.get特記事項イメージリスト(), 連番_1);
             source.tokkiImg3 = getイメージ03(entity.get特記事項イメージリスト(), 連番_2);
@@ -114,37 +91,34 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
             source.tokkiImg14 = getイメージ03(entity.get特記事項イメージリスト(), 連番_13);
             source.tokkiImg15 = getイメージ03(entity.get特記事項イメージリスト(), 連番_14);
         }
-        List<RString> 番号 = new ArrayList<>();
+        if (entity.get特記事項番号リスト() != null && !entity.get特記事項番号リスト().isEmpty()) {
+            source.listChosa1_1 = getイメージ02();
+        }
         List<RString> 特記事項 = new ArrayList<>();
-        RString first特記事項 = RString.EMPTY;
         RStringBuilder 特記事項builder = new RStringBuilder();
+        RString new番号 = RString.EMPTY;
+        RString old番号 = RString.EMPTY;
         int index = 0;
-        boolean first = false;
         for (TokkiTextEntity tokkiTextEntity : entity.get特記事項番号リスト()) {
-            if (ONE.equals(tokkiTextEntity.get特記事項連番())) {
-                番号.add(tokkiTextEntity.get特記事項番号());
-                first特記事項 = tokkiTextEntity.get特記事項();
-                if (first) {
+            new番号 = tokkiTextEntity.get特記事項番号();
+            if (!new番号.equals(old番号)) {
+                if (!RString.isNullOrEmpty(特記事項builder.toRString())) {
                     特記事項.add(特記事項builder.toRString());
                 }
+                特記事項builder = new RStringBuilder();
+                特記事項builder.append(tokkiTextEntity.get特記事項());
             } else {
-                first = true;
-                特記事項builder.append(first特記事項);
-                特記事項builder.append("\n");
+                特記事項builder.append(System.lineSeparator());
                 特記事項builder.append(tokkiTextEntity.get特記事項());
             }
+            old番号 = new番号;
+        }
+        if (new番号.equals(old番号)) {
+            特記事項.add(特記事項builder.toRString());
         }
         for (RString 事項 : 特記事項) {
             set特記事項List(事項, index, source);
             index = index + 1;
-        }
-        int i = 0;
-        RStringBuilder 番号と名称 = new RStringBuilder();
-        for (RString 特記事項番号 : 番号) {
-            番号と名称.append(特記事項番号);
-            番号と名称.append("\n");
-            番号と名称.append(entity.get特記事項リスト().get(i).get特記事項名称());
-            i = i + 1;
         }
         return source;
     }
@@ -198,23 +172,29 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
         }
     }
 
+    private RString getイメージ01() {
+        if (count < list.size()) {
+            return list.get(count);
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getイメージ02() {
+        List<RString> result = new ArrayList<>();
+        for (RString rString : list) {
+            if (Collections.frequency(result, rString) < 1) {
+                result.add(rString);
+            }
+        }
+        if (count < result.size()) {
+            return result.get(count);
+        }
+        return RString.EMPTY;
+    }
+
     private RString getイメージ03(List<TokkiTextEntity> 特記事項イメージリスト, int 連番) {
         if (連番 < 特記事項イメージリスト.size()) {
             return 特記事項イメージリスト.get(連番).get特記事項イメージ();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString getイメージ02(List<TokkiTextEntity> 特記事項イメージリスト, int 連番) {
-        if (連番 < 特記事項イメージリスト.size()) {
-            return 特記事項イメージリスト.get(連番).get特記事項番号();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString getイメージ01(List<TokkiTextEntity> 特記事項イメージリスト, int 連番) {
-        if (連番 < 特記事項イメージリスト.size()) {
-            return 特記事項イメージリスト.get(連番).get特記事項名称();
         }
         return RString.EMPTY;
     }

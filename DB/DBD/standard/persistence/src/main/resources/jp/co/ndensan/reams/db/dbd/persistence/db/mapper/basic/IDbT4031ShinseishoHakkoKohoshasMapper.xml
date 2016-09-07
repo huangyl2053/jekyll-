@@ -36,6 +36,7 @@
          "DbT4031ShinseishoHakkoKohoshas"."riyoshaFutanDankai" as "dbT4031ShinseishoHakkoKohoshas_riyoshaFutanDankai",
          "DbT4031ShinseishoHakkoKohoshas"."gokeiShotokuKingaku" as "dbT4031ShinseishoHakkoKohoshas_gokeiShotokuKingaku",
          "DbT4031ShinseishoHakkoKohoshas"."nenkinShunyuGaku" as "dbT4031ShinseishoHakkoKohoshas_nenkinShunyuGaku",
+         "DbT4031ShinseishoHakkoKohoshas"."hikazeinenkinKananGaku" as "dbT4031ShinseishoHakkoKohoshas_hikazeinenkinKananGaku",
          "DbT4031ShinseishoHakkoKohoshas"."jigyoshaNo" as "dbT4031ShinseishoHakkoKohoshas_jigyoshaNo"
     </sql>
 
@@ -61,6 +62,7 @@
         <result property="riyoshaFutanDankai" column="dbT4031ShinseishoHakkoKohoshas_riyoshaFutanDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="gokeiShotokuKingaku" column="dbT4031ShinseishoHakkoKohoshas_gokeiShotokuKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="nenkinShunyuGaku" column="dbT4031ShinseishoHakkoKohoshas_nenkinShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="hikazeinenkinKananGaku" column="dbT4031ShinseishoHakkoKohoshas_hikazeinenkinKananGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="jigyoshaNo" column="dbT4031ShinseishoHakkoKohoshas_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
     </resultMap>
 

@@ -19,10 +19,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 上乗せ償還払い給付種類支給限度額を管理するクラスです。
  */
-public class UwanoseShokanShuruiShikyuGendoGaku 
-extends ModelBase<UwanoseShokanShuruiShikyuGendoGakuIdentifier, 
-        DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity, 
-        UwanoseShokanShuruiShikyuGendoGaku> implements Serializable {
+public class UwanoseShokanShuruiShikyuGendoGaku
+        extends
+        ModelBase<UwanoseShokanShuruiShikyuGendoGakuIdentifier, DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity, UwanoseShokanShuruiShikyuGendoGaku>
+        implements Serializable {
 
     private final DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity entity;
     private final UwanoseShokanShuruiShikyuGendoGakuIdentifier id;
@@ -178,7 +178,7 @@ extends ModelBase<UwanoseShokanShuruiShikyuGendoGakuIdentifier,
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -208,5 +208,4 @@ extends ModelBase<UwanoseShokanShuruiShikyuGendoGakuIdentifier,
         return new UwanoseShokanShuruiShikyuGendoGakuBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

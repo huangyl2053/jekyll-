@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.nushijuminjoho;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -19,10 +21,10 @@ public class SetaiInn {
 
     private RString 住民状態コード;
     private RString 住民種別コード;
-    private RString 転出日;
-    private RString 転入異動日;
-    private RString 識別コード;
+    private FlexibleDate 転出日;
+    private FlexibleDate 転入異動日;
+    private ShikibetsuCode 識別コード;
     private RString カナ氏名;
     private RString 氏名;
-    private RString 生年月日;
+    private FlexibleDate 生年月日;
 }

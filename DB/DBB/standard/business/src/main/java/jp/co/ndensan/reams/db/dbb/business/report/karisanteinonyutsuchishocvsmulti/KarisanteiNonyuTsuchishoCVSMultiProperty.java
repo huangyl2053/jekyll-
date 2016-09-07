@@ -40,7 +40,8 @@ public class KarisanteiNonyuTsuchishoCVSMultiProperty extends ReportPropertyBase
             Breakers<KarisanteiNonyuTsuchishoCVSMultiSource> breakers,
             BreakerCatalog<KarisanteiNonyuTsuchishoCVSMultiSource> catalog) {
 
-        return breakers.add(catalog.new SimplePageBreaker(
+        return breakers.add(catalog.new SimpleLayoutBreaker(
+
 
             LAYOUT_BREAK_KEYS) {
             @Override

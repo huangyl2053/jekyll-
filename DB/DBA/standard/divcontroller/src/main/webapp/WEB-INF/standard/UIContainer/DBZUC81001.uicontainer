@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBZUC81001",
+ "displayWizard": false,
+ "subGyomuCode": "DBZ",
+ "steps": [
+  {
+   "id": 1,
+   "name": "整合性チェックリスト作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ8100001",
+     "toLayoutTitle": "整合性チェックリスト作成",
+     "toState": "整合性チェックリスト作成"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ8100001",
+     "layoutTitle": "整合性チェックリスト作成",
+     "eventName": "実行",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

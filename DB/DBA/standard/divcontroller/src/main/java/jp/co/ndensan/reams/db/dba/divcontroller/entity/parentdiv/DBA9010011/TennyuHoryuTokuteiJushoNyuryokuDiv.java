@@ -22,21 +22,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TennyuHoryuTokuteiJushoNyuryokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdShichousonInputGuide")
-    private ShichosonInputDiv ccdShichousonInputGuide;
+    @JsonProperty("ccdSisetuInputGuide")
+    private ShisetsuJohoCommonChildDivDiv ccdSisetuInputGuide;
     @JsonProperty("ccdJushoInputGuide")
     private ChoikiInputDiv ccdJushoInputGuide;
     @JsonProperty("ccdBunchiInput")
     private BanchiInputDiv ccdBunchiInput;
-    @JsonProperty("ccdSisetuInputGuide")
-    private ShisetsuJohoCommonChildDivDiv ccdSisetuInputGuide;
+    @JsonProperty("ccdShichousonInputGuide")
+    private ShichosonInputDiv ccdShichousonInputGuide;
     @JsonProperty("txtJotai")
     private RString txtJotai;
 
@@ -47,12 +47,12 @@ public class TennyuHoryuTokuteiJushoNyuryokuDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdShichousonInputGuide
-     * @return ccdShichousonInputGuide
+     * getccdSisetuInputGuide
+     * @return ccdSisetuInputGuide
      */
-    @JsonProperty("ccdShichousonInputGuide")
-    public IShichosonInputDiv getCcdShichousonInputGuide() {
-        return ccdShichousonInputGuide;
+    @JsonProperty("ccdSisetuInputGuide")
+    public IShisetsuJohoCommonChildDiv getCcdSisetuInputGuide() {
+        return ccdSisetuInputGuide;
     }
 
     /*
@@ -74,12 +74,12 @@ public class TennyuHoryuTokuteiJushoNyuryokuDiv extends Panel {
     }
 
     /*
-     * getccdSisetuInputGuide
-     * @return ccdSisetuInputGuide
+     * getccdShichousonInputGuide
+     * @return ccdShichousonInputGuide
      */
-    @JsonProperty("ccdSisetuInputGuide")
-    public IShisetsuJohoCommonChildDiv getCcdSisetuInputGuide() {
-        return ccdSisetuInputGuide;
+    @JsonProperty("ccdShichousonInputGuide")
+    public IShichosonInputDiv getCcdShichousonInputGuide() {
+        return ccdShichousonInputGuide;
     }
 
     /*

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.karinonyutsuchishohakkoichira
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsuAfterCorrection;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
 import jp.co.ndensan.reams.db.dbb.entity.report.karinonyutsuchishohakkoichiran.KariNonyuTsuchishoHakkoIchiranSource;
@@ -15,11 +16,14 @@ import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AtesakiShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 保険料納入通知書（仮算定）発行一覧表帳票クラスです。
@@ -39,18 +43,19 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
     private static final int NUM_7 = 7;
     private static final RString ゆうちょ銀行 = new RString("9900");
     private static final RString HYPHEN = new RString("-");
+    private final Association association;
 
     protected KariNonyuTsuchishoHakkoIchiranBodyEditor(List<KariSanteiNonyuTsuchiShoJoho> entityList,
-            List<RString> 並び順List, int 出力期) {
+            List<RString> 並び順List, int 出力期, Association association) {
         this.entityList = entityList;
         this.並び順List = 並び順List;
         this.出力期 = 出力期;
+        this.association = association;
     }
 
     @Override
     public KariNonyuTsuchishoHakkoIchiranSource edit(KariNonyuTsuchishoHakkoIchiranSource source) {
         int 連番 = 1;
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
         source.hokenshaNo = association.get地方公共団体コード().value();
         source.hokenshaName = association.get市町村名();
         for (KariSanteiNonyuTsuchiShoJoho item : entityList) {
@@ -71,8 +76,9 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
                 if (isNull(編集後仮算定通知書共通情報.get編集後個人())
                         || isNull(編集後仮算定通知書共通情報.get編集後個人().get世帯コード())) {
                     source.listUpper_4 = RString.EMPTY;
+                } else {
+                    source.listUpper_4 = 編集後仮算定通知書共通情報.get編集後個人().get世帯コード().value();
                 }
-                source.listUpper_4 = 編集後仮算定通知書共通情報.get編集後個人().get世帯コード().value();
                 source.listUpper_5 = 表示コード編集(編集後仮算定通知書共通情報.get表示コード1());
                 source.listUpper_6 = 表示コード編集(編集後仮算定通知書共通情報.get表示コード２());
                 source.listUpper_7 = 表示コード編集(編集後仮算定通知書共通情報.get表示コード３());
@@ -81,32 +87,13 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
                     source.listUpper_12 = RString.EMPTY;
                     source.listUpper_13 = RString.EMPTY;
                     source.listLower_5 = RString.EMPTY;
+                } else {
+                    編集後仮算定通知書共通情報設定(source, 編集後仮算定通知書共通情報);
+                    編集後宛先相関項目編集(編集後仮算定通知書共通情報, source);
+                    source.listLower_4 = isNull(編集後仮算定通知書共通情報.get前年度情報()) ? RString.EMPTY
+                            : 編集後仮算定通知書共通情報.get前年度情報().get前年度保険料段階();
+                    set編集後口座(編集後仮算定通知書共通情報, source);
                 }
-                source.listUpper_9 = 編集後仮算定通知書共通情報.get更正後().get保険料率();
-                List<UniversalPhase> 普徴期別金額リスト = 編集後仮算定通知書共通情報.get更正後()
-                        .get更正後普徴期別金額リスト();
-                if (普徴期別金額リスト != null) {
-                    当期編集(普徴期別金額リスト, source);
-                }
-                編集後宛先相関項目編集(編集後仮算定通知書共通情報, source);
-                source.listUpper_12 = 編集後仮算定通知書共通情報.get更正後().get生保開始日_西暦();
-                source.listUpper_13 = RString.EMPTY;
-                if (!RString.isNullOrEmpty(編集後仮算定通知書共通情報.get更正後().get生活保護扶助種類())) {
-                    source.listUpper_13 = CodeMaster.getCodeMeisho(SubGyomuCode.URZ業務共通_共通系,
-                            URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
-                            new Code(編集後仮算定通知書共通情報.get更正後().get生活保護扶助種類()));
-                }
-                source.listLower_4 = isNull(編集後仮算定通知書共通情報.get前年度情報()) ? RString.EMPTY
-                        : 編集後仮算定通知書共通情報.get前年度情報().get前年度保険料段階();
-                if (isNull(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計())) {
-                    source.listLower_5 = RString.EMPTY;
-                }
-                source.listLower_5 = new RString(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計().
-                        toString());
-                if (普徴期別金額リスト != null) {
-                    次期以降編集(source, 普徴期別金額リスト);
-                }
-                set編集後口座(編集後仮算定通知書共通情報, source);
             } else {
                 source.hdrTytle1 = RString.EMPTY;
                 source.hdrTytle2 = RString.EMPTY;
@@ -137,7 +124,37 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
         return source;
     }
 
-    private void 編集後宛先相関項目編集(final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報, KariNonyuTsuchishoHakkoIchiranSource source) {
+    private void 編集後仮算定通知書共通情報設定(KariNonyuTsuchishoHakkoIchiranSource source,
+            final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報) {
+        final EditedKariSanteiTsuchiShoKyotsuAfterCorrection 更正後 = 編集後仮算定通知書共通情報.get更正後();
+        if (更正後.get保険料率() != null) {
+            source.listUpper_9 = DecimalFormatter.toコンマ区切りRString(new Decimal(更正後.get保険料率().toString()), 0);
+        }
+        List<UniversalPhase> 普徴期別金額リスト = 更正後.get更正後普徴期別金額リスト();
+        if (普徴期別金額リスト != null) {
+            当期編集(普徴期別金額リスト, source);
+        }
+        if (更正後.get生保開始日_西暦() != null) {
+            source.listUpper_12 = new FlexibleDate(new RDate(更正後.get生保開始日_西暦().toString()).toDateString()).wareki().toDateString();
+        }
+        source.listUpper_13 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(更正後.get生活保護扶助種類())) {
+            source.listUpper_13 = CodeMaster.getCodeMeisho(SubGyomuCode.URZ業務共通_共通系,
+                    URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
+                    new Code(更正後.get生活保護扶助種類()));
+        }
+        if (isNull(更正後.get更正後特徴期別金額合計())) {
+            source.listLower_5 = RString.EMPTY;
+        } else {
+            source.listLower_5 = DecimalFormatter.toコンマ区切りRString(更正後.get更正後特徴期別金額合計(), 0);
+        }
+        if (普徴期別金額リスト != null) {
+            次期以降編集(source, 普徴期別金額リスト);
+        }
+    }
+
+    private void 編集後宛先相関項目編集(final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報,
+            KariNonyuTsuchishoHakkoIchiranSource source) {
         final EditedAtesaki 編集後宛先 = 編集後仮算定通知書共通情報.get編集後宛先();
         if (isNull(編集後宛先)) {
             source.listUpper_11 = RString.EMPTY;
@@ -172,7 +189,7 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
     private void 当期編集(List<UniversalPhase> 普徴期別金額リスト, KariNonyuTsuchishoHakkoIchiranSource source) {
         for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
             if (出力期 == 普徴期別金額.get期()) {
-                source.listUpper_10 = new RString(普徴期別金額.get金額().toString());
+                source.listUpper_10 = DecimalFormatter.toコンマ区切りRString(普徴期別金額.get金額(), 0);
                 break;
             }
         }
@@ -185,7 +202,7 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
             for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
                 if ((出力期 + 1) == 普徴期別金額.get期()) {
                     source.listLower_6 = isNull(普徴期別金額.get金額()) ? new RString(0)
-                            : new RString(普徴期別金額.get金額().toString());
+                            : DecimalFormatter.toコンマ区切りRString(普徴期別金額.get金額(), 0);
                     break;
                 }
             }

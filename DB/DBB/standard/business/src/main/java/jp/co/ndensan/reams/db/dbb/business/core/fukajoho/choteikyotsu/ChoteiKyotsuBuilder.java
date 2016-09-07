@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -48,6 +48,18 @@ public class ChoteiKyotsuBuilder {
     public ChoteiKyotsuBuilder set収納ID(Long 収納ID) {
         requireNonNull(収納ID, UrSystemErrorMessages.値がnull.getReplacedMessage("収納ID"));
         entity.setShunoId(収納ID);
+        return this;
+    }
+
+    /**
+     * 履歴番号を設定します。
+     *
+     * @param 履歴番号 履歴番号
+     * @return {@link ChoteiKyotsuBuilder}
+     */
+    public ChoteiKyotsuBuilder set履歴番号(int 履歴番号) {
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        entity.setRirekiNo(履歴番号);
         return this;
     }
 

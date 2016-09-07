@@ -61,7 +61,7 @@ public class JutakuKaishuRiyushoTesuryoMeisaiManager {
         DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity entity = dac.selectByKey(
                 証記載保険者番号,
                 被保険者番号,
-                履歴番号);
+                履歴番号.intValue());
         if (entity == null) {
             return null;
         }

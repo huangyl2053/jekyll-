@@ -1,6 +1,8 @@
 package jp.co.ndensan.reams.db.dbc.service.core.kokuhorenkyoutsuu;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import java.util.logging.Level;
@@ -18,10 +20,12 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -41,6 +45,15 @@ public class KokuhorenKyoutsuuFileReceivedDeleteManager {
     private static final RString MESSAGE_エントリ情報LIST = new RString("エントリ情報List");
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link KokuhorenKyoutsuuFileReceivedDeleteManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link KokuhorenKyoutsuuFileReceivedDeleteManager}のインスタンス
+     */
+    public static KokuhorenKyoutsuuFileReceivedDeleteManager createInstance() {
+        return InstanceProvider.create(KokuhorenKyoutsuuFileReceivedDeleteManager.class);
+    }
+
+    /**
      * 国保連情報取込共通処理（取込済ファイル削除）
      *
      * @param 処理年月 FlexibleYearMonth
@@ -53,8 +66,11 @@ public class KokuhorenKyoutsuuFileReceivedDeleteManager {
         requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGE_処理年月.toString()));
         requireNonNull(保存先フォルダ, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGE_保存先フォルダ.toString()));
         requireNonNull(エントリ情報List, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGE_エントリ情報LIST.toString()));
-        for (SharedFileEntryDescriptor エントリ情報 : エントリ情報List) {
-            RString ファイル名_拡張子あり = エントリ情報.getName();
+        List<RString> fileNameList = new ArrayList<>();
+        Collections.addAll(fileNameList, Directory.getFiles(保存先フォルダ));
+        List<File> toList = new ArrayList<>();
+        for (RString fileName : fileNameList) {
+            RString ファイル名_拡張子あり = fileName;
             RString 拡張子 = ファイル名_拡張子あり.substring(ファイル名_拡張子あり.lastIndexOf(ドット));
             RString ファイル名 = ファイル名_拡張子あり.substring(0, ファイル名_拡張子あり.lastIndexOf(ドット));
             RString 主要部分 = ファイル名.substring(ファイル名.indexOf(アンダーライン));
@@ -62,27 +78,33 @@ public class KokuhorenKyoutsuuFileReceivedDeleteManager {
             新ファイル名.append(主要部分);
             新ファイル名.append(処理年月.toString());
             新ファイル名.append(拡張子);
-            File from = new File(保存先フォルダ + File.separator + エントリ情報.getName());
+            File from = new File(保存先フォルダ + File.separator + fileName);
             File to = new File(保存先フォルダ + File.separator + 新ファイル名.toString());
             if (!from.renameTo(to)) {
                 throw new BatchInterruptedException(UrErrorMessages.ファイルWRITEエラー.getMessage().
                         replace(新ファイル名.toString()).toString());
             }
-            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(新ファイル名.toString()));
-            sfd = SharedFile.defineSharedFile(sfd);
-            RString 保管日数 = DbBusinessConfig.get(ConfigNameDBC.国保連取込_取込ファイル_保管日数, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-            RDate 自動削除日 = RDate.getNowDate().plusDay(Integer.valueOf(保管日数.toString()));
-            CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(true).dateToDelete(自動削除日);
-            SharedFile.copyToSharedFile(sfd, new FilesystemPath(保存先フォルダ), opts);
+            toList.add(to);
+        }
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険,
+                FilesystemName.fromString(アンダーライン.concat(new File(保存先フォルダ.toString()).getName())));
+        sfd = SharedFile.defineSharedFile(sfd);
+        RString 保管日数 = DbBusinessConfig.get(ConfigNameDBC.国保連取込_取込ファイル_保管日数,
+                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        RDate 自動削除日 = RDate.getNowDate().plusDay(Integer.valueOf(保管日数.toString()));
+        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(true).dateToDelete(自動削除日);
+        SharedFile.copyToSharedFile(sfd, new FilesystemPath(保存先フォルダ), opts);
+        for (SharedFileEntryDescriptor エントリ情報 : エントリ情報List) {
             try {
                 SharedFile.deleteEntry(エントリ情報);
             } catch (SystemException ex) {
                 Logger.getLogger(KokuhorenKyoutsuuInterfaceKanriKousinManager.class.getName()).log(Level.SEVERE, null, ex);
                 return false;
-            } finally {
-                if (!to.delete()) {
-                    to.deleteOnExit();
-                }
+            }
+        }
+        for (File to : toList) {
+            if (!to.delete()) {
+                to.deleteOnExit();
             }
         }
         return true;

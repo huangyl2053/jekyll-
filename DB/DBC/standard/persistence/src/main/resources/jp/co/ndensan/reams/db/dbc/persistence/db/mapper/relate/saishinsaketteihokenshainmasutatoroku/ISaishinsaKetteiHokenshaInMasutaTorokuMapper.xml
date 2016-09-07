@@ -11,17 +11,17 @@
     </select>
     <sql id="selectSaiShinsaKetteiMeisaiTempEntity" >
         SELECT DISTINCT
-        "DbWT3064SaishinsaKetteiMeisai"."toriatsukaiYm" as 取扱年月,
+        "DbWT3064SaishinsaKetteiMeisai"."toriatsukaiYM" as 取扱年月,
         "DbWT3064SaishinsaKetteiMeisai"."rirekiNo" as 履歴番号,
         "DbWT3064SaishinsaKetteiMeisai"."renban" as 決定明細連番,
         "DbWT3064SaishinsaKetteiMeisai"."jigyoshoNo" as 事業所番号,
-        "DbWT3064SaishinsaKetteiMeisai"."jigyoshoMei" as 事業所名,
+        "DbWT3064SaishinsaKetteiMeisai"."jigyoshoName" as 事業所名,
         "DbWT3064SaishinsaKetteiMeisai"."kohiFutanshaNo" as 公費負担者番号,
         "DbWT3064SaishinsaKetteiMeisai"."kohiJukyushaNo" as 公費受給者番号,
         "DbWT3064SaishinsaKetteiMeisai"."kohiShokisaiHokenshaNo" as 公費証記載保険者番号,
-        "DbWT3064SaishinsaKetteiMeisai"."serviceTeikyoYm" as サービス提供年月,
+        "DbWT3064SaishinsaKetteiMeisai"."serviceTeikyoYM" as サービス提供年月,
         "DbWT3064SaishinsaKetteiMeisai"."serviceShuruiCode" as サービス種類コード,
-        "DbWT3064SaishinsaKetteiMeisai"."serviceShuruiName" as サービス種類名,
+        "DbWT3064SaishinsaKetteiMeisai"."serviceShuruiMei" as サービス種類名,
         "DbWT3064SaishinsaKetteiMeisai"."kagomoushitateJiyuCode" as 申立事由コード,
         "DbWT3064SaishinsaKetteiMeisai"."kagomoushitateJiyu" as 申立事由,
         "DbWT3064SaishinsaKetteiMeisai"."saishinsaResultCode" as 再審査結果コード,
@@ -31,7 +31,7 @@
         "DbWT3064SaishinsaKetteiMeisai"."ketteiTanisu" as 決定単位数,
         "DbWT3064SaishinsaKetteiMeisai"."choseiTanisu" as 調整単位数,
         "DbWT3064SaishinsaKetteiMeisai"."hokenshaFutangaku" as 保険者負担額,
-        "DbWT3064SaishinsaKetteiMeisai"."torikomiYm" as 取込年月,
+        "DbWT3064SaishinsaKetteiMeisai"."torikomiYM" as 取込年月,
         "DbWT0001Hihokensha"."meisaiRenban" as 被保険者連番,
         "DbWT0001Hihokensha"."shoHokenshaNo" as 証記載保険者番号,
         "DbWT0001Hihokensha"."orgHihokenshaNo" as 被保険者番号,
@@ -42,7 +42,7 @@
         "DbWT0001Hihokensha"."henkanHihokenshaNo" as 変換被保険者番号,
         "DbWT0001Hihokensha"."hihokenshaNo" as 登録被保険者番号,
         "DbWT0001Hihokensha"."shichosonCode" as 市町村コード,
-        "DbWT0001Hihokensha"."KannaiKangaiKubun" as 管内管外区分,
+        "DbWT0001Hihokensha"."kannaiKangaiKubun" as 管内管外区分,
         "DbWT0001Hihokensha"."yubinNo" as 郵便番号,
         "DbWT0001Hihokensha"."choikiCode" as 町域コード,
         "DbWT0001Hihokensha"."gyoseikuCode" as 行政区コード,
@@ -68,7 +68,7 @@
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshainmasutatoroku.SaiShinsaKetteiMeisaiTempEntity">
         
         <result property="取扱年月" column="取扱年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="履歴番号" column="履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="履歴番号" column="履歴番号" />
         <result property="決定明細連番" column="決定明細連番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="事業所番号" column="事業所番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="事業所名" column="事業所名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -100,7 +100,7 @@
         <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="管内管外区分" column="管内管外区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
-        <result property="町域コード" column="町域コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="町域コード" column="町域コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler"/>
         <result property="行政区コード" column="行政区コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="行政区名" column="行政区名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -124,13 +124,13 @@
     </select>
     <sql id="selectSaiShinsaKetteiShukeiTempEntity" >
         SELECT DISTINCT
-        "DbWT3063SaishinsaKetteiShukei"."hdrToriatsukaiYm" as 取扱年月,
+        "DbWT3063SaishinsaKetteiShukei"."hdrToriatsukaiYM" as 取扱年月,
         "DbWT3063SaishinsaKetteiShukei"."hdrRirekiNo" as 履歴番号,
-        "DbWT3063SaishinsaKetteiShukei"."hdrShoHokenshaNo" as 証記載保険者番号,
-        "DbWT3063SaishinsaKetteiShukei"."hdrShoHokenshaMei" as 証記載保険者名,
-        "DbWT3063SaishinsaKetteiShukei"."sakuseiYmd" as 作成年月日,
-        "DbWT3063SaishinsaKetteiShukei"."kokuhoRengokaiName" as 国保連合会名,
-        "DbWT3063SaishinsaKetteiShukei"."sinsaiinkaiName" as 審査委員会名,
+        "DbWT3063SaishinsaKetteiShukei"."shoKisaiHokenshaNo" as 証記載保険者番号,
+        "DbWT3063SaishinsaKetteiShukei"."shoKisaiHokenshaName" as 証記載保険者名,
+        "DbWT3063SaishinsaKetteiShukei"."sakuseiYMD" as 作成年月日,
+        "DbWT3063SaishinsaKetteiShukei"."kokuhorenName" as 国保連合会名,
+        "DbWT3063SaishinsaKetteiShukei"."shinsakaiName" as 審査委員会名,
         "DbWT3063SaishinsaKetteiShukei"."kaigoKyufuhiSeikyuKensu" as 介護給付費_請求_件数,
         "DbWT3063SaishinsaKetteiShukei"."kaigoKyufuhiSeikyuTanisu" as 介護給付費_請求_単位数,
         "DbWT3063SaishinsaKetteiShukei"."kaigoKyufuhiSeikyuFutangaku" as 介護給付費_請求_保険者負担額,
@@ -149,9 +149,9 @@
         "DbWT3063SaishinsaKetteiShukei"."kogakuKaigoServicehiChoseiKensu" as 高額介護サービス費_調整_件数,
         "DbWT3063SaishinsaKetteiShukei"."kogakuKaigoServicehiChoseiTanisu" as 高額介護サービス費_調整_単位数,
         "DbWT3063SaishinsaKetteiShukei"."kogakuKaigoServicehiChoseiFutangaku" as 高額介護サービス費_調整_保険者負担額,
-        "DbWT3063SaishinsaKetteiShukei"."torikomiYm" as 取込年月,
+        "DbWT3063SaishinsaKetteiShukei"."hdrTorikomiYM" as 取込年月,
         "DbWT3063SaishinsaKetteiShukei"."hokenshaNo" as 保険者番号,
-        "DbWT3063SaishinsaKetteiShukei"."hokenshaMei" as 保険者名
+        "DbWT3063SaishinsaKetteiShukei"."hokenshaName" as 保険者名
         FROM
         "DbWT3063SaishinsaKetteiShukei"
     </sql>
@@ -191,13 +191,13 @@
     <!--再審査決定集計一時テーブルを作成します--> 
     <insert id="createTmpDbWT3063SaishinsaKetteiShukei">
         CREATE TEMP TABLE "DbWT3063SaishinsaKetteiShukei"
-        ("hdrToriatsukaiYm" rshare."UDD014YM",
+        ("hdrToriatsukaiYM" rshare."UDD014YM",
         "hdrRirekiNo" integer,
-        "hdrShoHokenshaNo" character varying,
-        "hdrShoHokenshaMei" character varying,
-        "sakuseiYmd"rshare."UDD015YMD",
-        "kokuhoRengokaiName" character varying,
-        "sinsaiinkaiName" character varying(15),
+        "shoKisaiHokenshaNo" character varying,
+        "shoKisaiHokenshaName" character varying,
+        "sakuseiYMD"rshare."UDD015YMD",
+        "kokuhorenName" character varying,
+        "shinsakaiName" character varying(15),
         "kaigoKyufuhiSeikyuKensu" integer,
         "kaigoKyufuhiSeikyuTanisu" numeric(12,0),
         "kaigoKyufuhiSeikyuFutangaku" numeric(12,0),
@@ -216,26 +216,26 @@
         "kogakuKaigoServicehiChoseiKensu" integer,
         "kogakuKaigoServicehiChoseiTanisu" numeric(13,0),
         "kogakuKaigoServicehiChoseiFutangaku" numeric(13,0),
-        "torikomiYm" rshare."UDD014YM",
+        "hdrTorikomiYM" rshare."UDD014YM",
         "hokenshaNo" character varying,
-        "hokenshaMei" character varying
+        "hokenshaName" character varying
         )
     </insert>
     
     <!-- 再審査決定明細一時テーブルを作成します -->
     <insert id="createTmpDbWT3064SaishinsaKetteiMeisai">
         CREATE TEMP TABLE "DbWT3064SaishinsaKetteiMeisai"
-        ("toriatsukaiYm" rshare."UDD014YM",
+        ("toriatsukaiYM" rshare."UDD014YM",
         "rirekiNo" integer,
         "renban" integer,
         "jigyoshoNo" rgdb."DbUDD003HokenshaNo", 
-        "jigyoshoMei" character varying,
+        "jigyoshoName" character varying,
         "kohiFutanshaNo" character varying(8),
         "kohiJukyushaNo" character varying,
         "kohiShokisaiHokenshaNo" rgdb."DbUDD003HokenshaNo", 
-        "serviceTeikyoYm" rshare."UDD014YM",
+        "serviceTeikyoYM" rshare."UDD014YM",
         "serviceShuruiCode" rgdb."DbUDD005ServiceShuruiCode",
-        "serviceShuruiName" character varying(12),
+        "serviceShuruiMei" character varying(12),
         "kagomoushitateJiyuCode" character varying,
         "kagomoushitateJiyu" character varying,
         "saishinsaResultCode" character varying,
@@ -245,7 +245,7 @@
         "ketteiTanisu" numeric,
         "choseiTanisu" numeric,
         "hokenshaFutangaku" numeric,
-        "torikomiYm" rshare."UDD014YM"
+        "torikomiYM" rshare."UDD014YM"
         )
     </insert>
      
@@ -262,7 +262,7 @@
         "henkanHihokenshaNo" rgdb."DbUDD002HihokenshaNo",
         "hihokenshaNo" rgdb."DbUDD002HihokenshaNo",
         "shichosonCode" character varying,
-        "KannaiKangaiKubun" character varying,
+        "kannaiKangaiKubun" character varying,
         "yubinNo" rshare."UDD003YubinNo",
         "choikiCode" rshare."UDD023LasdecCode",
         "gyoseikuCode" character varying,

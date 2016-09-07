@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 年金特徴回付情報テーブルのエンティティクラスです。
+ *
+ * @reamsid_L DBZ-9999-022 yangchenbing
  */
 public class UeT0511NenkinTokuchoKaifuJohoEntity extends DbTableEntityBase<UeT0511NenkinTokuchoKaifuJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">

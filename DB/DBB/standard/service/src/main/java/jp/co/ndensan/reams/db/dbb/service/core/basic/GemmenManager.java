@@ -91,6 +91,33 @@ public class GemmenManager {
     }
 
     /**
+     * 主キーに合致する介護賦課減免を返します。
+     *
+     * @param 調定年度 ChoteiNendo
+     * @param 賦課年度 FukaNendo
+     * @param 通知書番号 TsuchishoNo
+     * @return Gemmen
+     */
+    public Gemmen get介護賦課減免(
+            FlexibleYear 調定年度,
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号) {
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+
+        DbT2004GemmenEntity entity = dac.get減免の情報(
+                調定年度,
+                賦課年度,
+                通知書番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new Gemmen(entity);
+    }
+
+    /**
      * 介護賦課減免{@link Gemmen}を保存します。
      *
      * @param 介護賦課減免 {@link Gemmen}

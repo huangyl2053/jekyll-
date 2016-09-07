@@ -60,7 +60,7 @@ public class HihokenshashoA4BodyEditor implements IHihokenshashoA4Editor {
         source.umareDd = item.getUmareDd();
         source.seibetsu = item.getSeibetsu();
         RString kofuymd = item.getKofuymd();
-        if (kofuymd != null) {
+        if (!RString.isNullOrEmpty(kofuymd)) {
             FillTypeFormatted kofuymdFormat = new RDate(kofuymd.toString()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK);
             source.kofuymdGengo = kofuymdFormat.getEra();

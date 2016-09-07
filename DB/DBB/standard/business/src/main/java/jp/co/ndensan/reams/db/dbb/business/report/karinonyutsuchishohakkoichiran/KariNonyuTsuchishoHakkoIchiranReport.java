@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.karinonyutsuchishohakkoichira
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.karinonyutsuchishohakkoichiran.KariNonyuTsuchishoHakkoIchiranSource;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -26,6 +27,7 @@ public class KariNonyuTsuchishoHakkoIchiranReport extends Report<KariNonyuTsuchi
     private final List<RString> 並び順List;
     private final YMDHMS 帳票作成日時;
     private final int 出力期;
+    private final Association association;
 
     /**
      * コンストラクタです。
@@ -34,13 +36,15 @@ public class KariNonyuTsuchishoHakkoIchiranReport extends Report<KariNonyuTsuchi
      * @param 並び順List List<RString>
      * @param 帳票作成日時 YMDHMS
      * @param 出力期 int
+     * @param association Association
      */
     public KariNonyuTsuchishoHakkoIchiranReport(List<KariSanteiNonyuTsuchiShoJoho> entityList,
-            List<RString> 並び順List, YMDHMS 帳票作成日時, int 出力期) {
+            List<RString> 並び順List, YMDHMS 帳票作成日時, int 出力期, Association association) {
         this.entityList = entityList;
         this.並び順List = 並び順List;
         this.帳票作成日時 = 帳票作成日時;
         this.出力期 = 出力期;
+        this.association = association;
     }
 
     /**
@@ -50,19 +54,20 @@ public class KariNonyuTsuchishoHakkoIchiranReport extends Report<KariNonyuTsuchi
      * @param 並び順List List<RString>
      * @param 帳票作成日時 YMDHMS
      * @param 出力期 int
+     * @param association Association
      * @return KariNonyuTsuchishoHakkoIchiranReport
      */
     public static KariNonyuTsuchishoHakkoIchiranReport createForm(
             @NonNull List<KariSanteiNonyuTsuchiShoJoho> 仮算定納入通知書情報EntityList, List<RString> 並び順List,
-            YMDHMS 帳票作成日時, int 出力期) {
-        return new KariNonyuTsuchishoHakkoIchiranReport(仮算定納入通知書情報EntityList, 並び順List, 帳票作成日時, 出力期);
+            YMDHMS 帳票作成日時, int 出力期, Association association) {
+        return new KariNonyuTsuchishoHakkoIchiranReport(仮算定納入通知書情報EntityList, 並び順List, 帳票作成日時, 出力期, association);
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KariNonyuTsuchishoHakkoIchiranSource> writer) {
         IKariNonyuTsuchishoHakkoIchiranEditor headerEditor = new KariNonyuTsuchishoHakkoIchiranHeaderEditor(帳票作成日時);
         IKariNonyuTsuchishoHakkoIchiranEditor bodyEditor = new KariNonyuTsuchishoHakkoIchiranBodyEditor(entityList,
-                並び順List, 出力期);
+                並び順List, 出力期, association);
         IKariNonyuTsuchishoHakkoIchiranBuilder builder = new KariNonyuTsuchishoHakkoIchiranBuilder(
                 headerEditor, bodyEditor);
         writer.writeLine(builder);

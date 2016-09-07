@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBE-1950-010 zhengsongling -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinhoshunyuryoku.IShinsakaiIinHoshuNyuryokuMapper">
+    <resultMap id="ResultMap_ShinsakaiIinHoshuNyuryokuEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuEntity" autoMapping="true">
+    </resultMap>
+    <select resultOrdered="true" id="getShinsakaiIin"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuMapperParameter"
+            resultMap="ResultMap_ShinsakaiIinHoshuNyuryokuEntity" 
+            fetchSize="500">
+    SELECT
+        "shinsakaiIinCode",
+        "shinsakaiIinKaishiYMD",
+        "shinsakaiIinShuryoYMD",
+        "shinsakaiIinShimei",
+        "shinsakaiIinKanaShimei",
+        "shinsakaiIinShikakuCode",
+        "haishiFlag"
+    FROM
+        rgdb."DbT5594ShinsakaiIinJoho"
+    WHERE
+        <if test="is前方一致">
+            rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShimei" LIKE #{介護認定審査会委員氏名} || '%'
+        </if>
+        <if test="is後方一致">
+            rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShimei" LIKE '%' || #{介護認定審査会委員氏名}
+        </if>
+        <if test="is完全一致">
+             rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShimei" LIKE #{介護認定審査会委員氏名}
+        </if>
+        <if test="is部分一致">
+             rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShimei" LIKE '%' || #{介護認定審査会委員氏名} || '%'
+        </if>
+        ORDER BY
+        rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" DESC
+            limit #{最大表示件数}
+    </select>
+    
+<select resultOrdered="true" id="getdgShinsakaiJisseki" resultMap="ResultMap_ShinsakaiIinHoshuNyuryokuEntity"
+parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuMapperParameter" 
+        fetchSize="500">
+    SELECT
+        T1."gogitaiNo" AS "gogitaiNo",
+        T1."shinsakaiKaisaiNo" AS "shinsakaiKaisaiNo",
+        T4."remban" AS "remban",
+        T4."shinsakaiKaisaiYMD" AS "shinsakaiKaisaiYMD",
+        T4."shinsakaiIinHoshuKubun" AS "shinsakaiIinHoshuKubun",
+        T4."shinsakaiHoshu" AS "shinsakaiHoshu",
+        T4."shinsakaiSonotaHoshu" AS "shinsakaiSonotaHoshu",
+        T4."shinsakaiHoshuGokei" AS "shinsakaiHoshuGokei",
+        T4."shinsakaiHoshuZeiritsu" AS "shinsakaiHoshuZeiritsu",
+        T4."shinsakaiKotsuhi" AS "shinsakaiKotsuhi",
+        T4."shinsakaiKojoZeigaku" AS "shinsakaiKojoZeigaku",
+        T4."hoshuShiharaiMemo" AS "hoshuShiharaiMemo",
+        T4."ginkoFurikomiShutsuryokuFlag" AS "ginkoFurikomiShutsuryokuFlag",
+        T2."shussekiFlag" AS "shussekiFlag",
+        T2."shussekiTime" AS "shussekiTime",
+        T2."taisekiTime" AS "taisekiTime",
+        T3."gogitaichoKubunCode" AS "gogitaichoKubunCode"
+    FROM
+        rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS T1
+    INNER JOIN
+        rgdb."DbT5503ShinsakaiWariateIinJoho" AS T2
+    ON T1."shinsakaiKaisaiNo" = T2."shinsakaiKaisaiNo"
+    INNER JOIN
+        rgdb."DbT5593GogitaiWariateIinJoho" AS T3
+    ON T1."gogitaiNo" = T3."gogitaiNo"
+    AND T2."shinsakaiIinCode"  = T3."shinsakaiIinCode"
+    AND T3."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]>t1."shinsakaiKaisaiYMD"
+    AND T1."shinsakaiKaisaiYMD"<![CDATA[<=]]>T3."gogitaiYukoKikanShuryoYMD"
+    LEFT JOIN         
+        rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T4
+    ON  T2."shinsakaiKaisaiNo" = T4."shinsakaiKaisaiNo"
+    AND T2."shinsakaiIinCode" = t4."shinsakaiIinCode"
+    WHERE
+        T2."shinsakaiIinCode" = #{コード}
+    <if test="hasFromDate">
+        AND #{fromDate} <![CDATA[<=]]> substring(T2."shinsakaiKaisaiYMD",1,6)
+    </if>
+    <if test="hasToDate">
+        AND substring(T2."shinsakaiKaisaiYMD",1,6) <![CDATA[<=]]> #{toDate}
+    </if>
+    ORDER BY  
+        T4."shinsakaiIinCode" DESC,       
+        T4."shinsakaiIinHoshuKubun" DESC,         
+        T4."shinsakaiKaisaiYMD" DESC,         
+        T4."remban" DESC
+    </select>
+    
+    <select resultOrdered="true" id="getremban" resultType="int"
+parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuMapperParameter" 
+        fetchSize="500">
+        SELECT 
+        coalesce(MAX("remban"), 0)+1
+        FROM 
+            rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" 
+        WHERE 
+            "shinsakaiKaisaiYMD" = #{実施日}
+        AND 
+            "shinsakaiIinCode"=#{コード}
+        AND 
+            "shinsakaiIinHoshuKubun" =#{kuBun}
+    </select>
+</mapper>

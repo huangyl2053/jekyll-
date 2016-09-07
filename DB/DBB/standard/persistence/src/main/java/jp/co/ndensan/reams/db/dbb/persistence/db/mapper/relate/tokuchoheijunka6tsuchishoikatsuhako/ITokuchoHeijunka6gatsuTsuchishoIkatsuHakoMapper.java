@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6
 
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * 特徴平準化（特徴6月分）通知書一括発行(バッチ)のMapperクラスです。
@@ -25,11 +24,17 @@ public interface ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper {
     RString get基準日時(TokuchoHeijunka6gatsuMyBatisParameter param);
 
     /**
-     * 前年度特徴期別金額06を取得します。
+     * 計算後情報テーブルの更新前後区分が「更正前」のデータにより、仮算定額変更情報一時テーブルの計算後情報「更正前」情報を更新する。
      *
-     * @param 徴収方法 徴収方法
-     * @return 前年度特徴期別金額06
+     * @param param パラメータ
      */
-    RString select前年度特徴期別金額06(@Param("徴収方法") RString 徴収方法);
+    void update計算後情報更正前(TokuchoHeijunka6gatsuMyBatisParameter param);
+
+    /**
+     * 前年度・特徴期別金額06を更新する。
+     *
+     * @param param パラメータ
+     */
+    void update前年度特徴期別金額06(TokuchoHeijunka6gatsuMyBatisParameter param);
 
 }

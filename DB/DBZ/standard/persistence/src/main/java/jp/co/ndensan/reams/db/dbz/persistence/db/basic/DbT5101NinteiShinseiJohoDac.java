@@ -8,16 +8,24 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.ninteiChosaItakusakiCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.ninteiChosainCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.ninteiShinseiShinseijiKubunCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.ninteiShinseiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.nyushoShisetsuCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.shinseishoKanriNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.shoKisaiHokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.shujiiCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.shujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -92,6 +100,30 @@ public class DbT5101NinteiShinseiJohoDac implements ISaveable<DbT5101NinteiShins
         return accessor.selectSpecific(ninteiChosaItakusakiCode, ninteiChosainCode, shujiiIryokikanCode, shujiiCode, nyushoShisetsuCode).
                 table(DbT5101NinteiShinseiJoho.class).
                 where(eq(shinseishoKanriNo, 申請書管理番号)).
+                toObject(DbT5101NinteiShinseiJohoEntity.class);
+    }
+
+    /**
+     * 「証記載保険者番号、被保険者番号、認定申請年月日、認定申請区分_申請時_コード」を指定し、要介護認定申請情報を取得します。
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 被保険者番号 被保険者番号
+     * @param 認定申請年月日 認定申請年月日
+     * @param 認定申請区分_申請時_コード 認定申請区分_申請時_コード
+     * @return DbT5101NinteiShinseiJohoEntity
+     */
+    @Transaction
+    public DbT5101NinteiShinseiJohoEntity get要介護認定申請情報ForCheck(RString 証記載保険者番号, RString 被保険者番号,
+            FlexibleDate 認定申請年月日, Code 認定申請区分_申請時_コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5101NinteiShinseiJoho.class).
+                where(and(
+                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(ninteiShinseiYMD, 認定申請年月日),
+                                eq(ninteiShinseiShinseijiKubunCode, 認定申請区分_申請時_コード))).
                 toObject(DbT5101NinteiShinseiJohoEntity.class);
     }
 }

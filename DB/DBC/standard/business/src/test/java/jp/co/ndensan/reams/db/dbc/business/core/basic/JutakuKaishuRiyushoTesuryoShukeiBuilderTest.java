@@ -29,7 +29,7 @@ public class JutakuKaishuRiyushoTesuryoShukeiBuilderTest extends DbcTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static HokenshaNo 主キー名1;
     private static FlexibleYearMonth 主キー名2;
-    private static Decimal 主キー名3;
+    private static int 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
@@ -70,8 +70,8 @@ public class JutakuKaishuRiyushoTesuryoShukeiBuilderTest extends DbcTestBase {
 
         @Test
         public void 戻り値の履歴番号は_設定した値と同じ履歴番号を返す() {
-            business = sut.set履歴番号(DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_履歴番号).build();
-            assertThat(business.get履歴番号(), is(DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_履歴番号));
+            business = sut.set履歴番号(new Decimal(DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_履歴番号)).build();
+            assertThat(business.get履歴番号(), is(new Decimal(DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_履歴番号)));
         }
 
         @Test
@@ -104,17 +104,17 @@ public class JutakuKaishuRiyushoTesuryoShukeiBuilderTest extends DbcTestBase {
             assertThat(business.get介護住宅改修理由書作成請求金額(), is(DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_介護住宅改修理由書作成請求金額));
         }
 
-        @Test
-        public void 戻り値の介護住宅改修理由書作成申請年月日は_設定した値と同じ介護住宅改修理由書作成申請年月日を返す() {
-            business = sut.set介護住宅改修理由書作成申請年月日(DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_介護住宅改修理由書作成申請年月日).build();
-            assertThat(business.get介護住宅改修理由書作成申請年月日(), is(DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_介護住宅改修理由書作成申請年月日));
-        }
-
-        @Test
-        public void 戻り値の介護住宅改修理由書作成受付年月日は_設定した値と同じ介護住宅改修理由書作成受付年月日を返す() {
-            business = sut.set介護住宅改修理由書作成受付年月日(DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_介護住宅改修理由書作成受付年月日).build();
-            assertThat(business.get介護住宅改修理由書作成受付年月日(), is(DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_介護住宅改修理由書作成受付年月日));
-        }
+//        @Test
+//        public void 戻り値の介護住宅改修理由書作成申請年月日は_設定した値と同じ介護住宅改修理由書作成申請年月日を返す() {
+//            business = sut.set介護住宅改修理由書作成申請年月日(DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_介護住宅改修理由書作成申請年月日).build();
+//            assertThat(business.get介護住宅改修理由書作成申請年月日(), is(DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_介護住宅改修理由書作成申請年月日));
+//        }
+//
+//        @Test
+//        public void 戻り値の介護住宅改修理由書作成受付年月日は_設定した値と同じ介護住宅改修理由書作成受付年月日を返す() {
+//            business = sut.set介護住宅改修理由書作成受付年月日(DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_介護住宅改修理由書作成受付年月日).build();
+//            assertThat(business.get介護住宅改修理由書作成受付年月日(), is(DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_介護住宅改修理由書作成受付年月日));
+//        }
 
         @Test
         public void 戻り値の介護支払方法区分は_設定した値と同じ介護支払方法区分を返す() {

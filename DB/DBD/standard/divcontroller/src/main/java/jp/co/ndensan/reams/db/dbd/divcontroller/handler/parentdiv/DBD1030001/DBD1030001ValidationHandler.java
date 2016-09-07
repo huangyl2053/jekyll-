@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1030001DivSpec;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urd.service.core.seikatsuhogo.SeikatsuhogoManagerFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -30,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -401,20 +399,16 @@ public class DBD1030001ValidationHandler {
     }
 
     private boolean is対象の被保険者が生活保護(DBD1030001Div div) {
+        ShikibetsuCode 識別コード = ShikibetsuCode.EMPTY;
+        if (div.getHiddenShikibetsuCode() != null) {
+            識別コード = new ShikibetsuCode(div.getHiddenShikibetsuCode());
+        }
         return SeikatsuhogoManagerFactory.createInstance().get生活保護(
-                get識別コードFromViewState(), GyomuCode.DB介護保険, div.getTxtShinseiYMD().getValue()) == null;
+                識別コード, GyomuCode.DB介護保険, div.getTxtShinseiYMD().getValue()) == null;
     }
 
     private boolean is入力内容がある(List<RString> 入力内容) {
         return 入力内容 != null && !入力内容.isEmpty();
-    }
-
-    private ShikibetsuCode get識別コードFromViewState() {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        if (null == 識別コード) {
-            識別コード = ShikibetsuCode.EMPTY;
-        }
-        return 識別コード;
     }
 
     private boolean isすべてがチェックオフ(DBD1030001Div div) {

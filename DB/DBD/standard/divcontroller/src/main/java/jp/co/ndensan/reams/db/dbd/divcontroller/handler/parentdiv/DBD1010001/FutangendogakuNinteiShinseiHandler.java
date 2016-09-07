@@ -815,7 +815,7 @@ public class FutangendogakuNinteiShinseiHandler {
                     SELECT_EMPTYKEY.equals(futanGendogakuNintei.get利用者負担段階())
                     ? RString.EMPTY : RiyoshaFutanDankai.toValue(futanGendogakuNintei.get利用者負担段階()).get略称(),
                     SELECT_EMPTYKEY.equals(futanGendogakuNintei.get居室種別())
-                    ? RString.EMPTY : KyoshitsuShubetsu.toValue(futanGendogakuNintei.get居室種別()).get略称(),
+                    ? RString.EMPTY : KyoshitsuShubetsu.toValue(futanGendogakuNintei.get居室種別()).get名称(),
                     futanGendogakuNintei.is境界層該当者区分(),
                     futanGendogakuNintei.is激変緩和措置対象者区分(),
                     食費負担限度額,

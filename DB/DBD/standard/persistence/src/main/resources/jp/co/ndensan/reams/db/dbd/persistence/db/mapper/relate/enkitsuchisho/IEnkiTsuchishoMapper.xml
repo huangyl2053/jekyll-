@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-1410-020 chenxin -->
+<!-- 概要： 要介護認定延期通知書発行一覧表出力用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.enkitsuchisho.IEnkiTsuchishoMapper">
+    <select id="get延期通知書発行一覧表情報" 
+        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.enkitsuchisho.EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter"
+        resultMap="ResultMap_EnkiTsuchishoHakkenichiranhyoJyohoEntity" 
+        fetchSize="500" resultOrdered="true">
+        SELECT
+            rgdb."DbT4101NinteiShinseiJoho"."koroshoIfShikibetsuCode" AS 厚労省IF識別コード,
+            rgdb."DbT4101NinteiShinseiJoho"."hihokenshaNo" AS 被保番号,
+            rgdb."DbT4101NinteiShinseiJoho"."hihokenshaName" AS 氏名,
+            rgdb."DbT4101NinteiShinseiJoho"."hihokenshaKana" AS 氏名カナ,
+            rgdb."DbT4101NinteiShinseiJoho"."jusho" AS 住所,
+            rgdb."DbT4101NinteiShinseiJoho"."ninteiShinseiYMD" AS 申請日,
+            rgdb."DbT4101NinteiShinseiJoho"."ninteiShinseiRiyu" AS 申請理由,
+            rgdb."DbT4116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" AS 一次判定年月日,
+            rgdb."DbT4116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaCode" AS  一次判定結果コード,
+            rgdb."DbT5510IchiGojiHanteiKekkaJoho"."ichiGojiHanteiKekkaCode" AS 一五次判定結果コード,
+            rgdb."DbT5502ShinsakaiWariateJoho"."shinsakaiShiryoSakuseiYMD" AS 資料作成日,
+            rgdb."DbT5502ShinsakaiWariateJoho"."shinsakaiKaisaiYMD" AS 審査会予定日,
+            rgdb."DbT4101NinteiShinseiJoho"."enkiTsuchiHakkoKaisu" AS 延期通知発行回数,
+            rgdb."DbT4101NinteiShinseiJoho"."zenYokaigoKubunCode" AS 前回要介護状態区分コード,
+            rgdb."DbT4101NinteiShinseiJoho"."zenkaiYukoKikanStart" AS 前回認定開始日,
+            rgdb."DbT4101NinteiShinseiJoho"."zenkaiYukoKikanEnd" AS 前回認定終了日,
+            rgdb."DbT5051KoseiShichosonMaster"."shichosonCode" AS 市町村コード,
+            rgdb."DbT5051KoseiShichosonMaster"."shichosonMeisho" AS 市町村名称
+  
+        FROM
+            rgdb."DbT4101NinteiShinseiJoho"
+        LEFT JOIN   rgdb."DbT5051KoseiShichosonMaster"
+            ON  rgdb."DbT4101NinteiShinseiJoho"."shoKisaiHokenshaNo" = rgdb."DbT5051KoseiShichosonMaster"."shoKisaiHokenshaNo"
+        LEFT JOIN   rgdb."DbT4116IchijiHanteiKekkaJoho"
+            ON  rgdb."DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = rgdb."DbT4116IchijiHanteiKekkaJoho"."shinseishoKanriNo"
+        LEFT JOIN   rgdb."DbT5510IchiGojiHanteiKekkaJoho" 
+            ON  rgdb."DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = rgdb."DbT5510IchiGojiHanteiKekkaJoho"."shinseishoKanriNo"
+        LEFT JOIN  rgdb."DbT5502ShinsakaiWariateJoho"
+            ON  rgdb."DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = rgdb."DbT5502ShinsakaiWariateJoho"."shinseishoKanriNo"
+        
+        <where>
+   
+            <if test="tsuchishohakkonbi != null and !tsuchishohakkonbi.isEmpty()">
+             rgdb."DbT4101NinteiShinseiJoho"."enkiTsuchiHakkoYMD" = #{tsuchishohakkonbi}
+            </if>
+            <if test="tsuchishohakkonbi == null or tsuchishohakkonbi.isEmpty()">
+                rgdb."DbT4101NinteiShinseiJoho"."enkiTsuchiHakkoYMD" IS NULL
+            </if>
+            <if test="shorimikomibiFrom != null and !shorimikomibiFrom.isEmpty()">
+                AND #{shorimikomibiFrom} <![CDATA[<=]]>  rgdb."DbT4101NinteiShinseiJoho"."enkiKetteiYMD"
+            </if>
+            <if test="shorimikomibiTo != null and !shorimikomibiTo.isEmpty()" >
+                AND rgdb."DbT4101NinteiShinseiJoho"."enkiKetteiYMD" <![CDATA[<=]]> #{shorimikomibiTo}
+            </if>
+        </where>
+        
+        AND rgdb."DbT4101NinteiShinseiJoho"."shinseishoKanriNo" NOT IN(
+            SELECT 
+                rgdb."DbT4102NinteiKekkaJoho"."shinseishoKanriNo"
+            FROM 
+                rgdb."DbT4102NinteiKekkaJoho"
+        )
+        AND rgdb."DbT4101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE
+<!--        TODO DBにこの二つコメントなし-->
+        <!--        AND rgdb."DbT4101NinteiShinseiJoho".
+        AND rgdb."DbT4101NinteiShinseiJoho".-->
+        
+        ORDER BY
+            rgdb."DbT5051KoseiShichosonMaster"."shichosonCode",
+            rgdb."DbT4101NinteiShinseiJoho"."hihokenshaKana",
+            rgdb."DbT4101NinteiShinseiJoho"."ninteiShinseiYMD"        
+    </select>
+    
+    <resultMap id="ResultMap_EnkiTsuchishoHakkenichiranhyoJyohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.enkitsuchisho.EnkiTsuchishoEntity" autoMapping="true">
+        <result property="厚労省IF識別コード" column="厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="被保番号" column="被保番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="氏名カナ" column="氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="申請日" column="申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="申請理由" column="申請理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="一次判定年月日" column="一次判定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="一次判定結果コード" column="一次判定結果コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="一五次判定結果コード" column="一五次判定結果コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="資料作成日" column="資料作成日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="審査会予定日" column="審査会予定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="延期通知発行回数" column="延期通知発行回数" />
+        <result property="前回要介護状態区分コード" column="前回要介護状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="前回認定開始日" column="前回認定開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="前回認定終了日" column="前回認定終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="市町村名称" column="市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <select id ="selectBy申請書管理番号リスト"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.enkitsuchisho.EnkiTsuchishoJyohoMybatisParameter"
+            fetchSize="500" resultOrdered="true">
+        SELECT
+            A.*
+        FROM
+            rgdb."DbT4101NinteiShinseiJoho" AS A
+        WHERE
+            A."shinseishoKanriNo" IN
+            <foreach item="shinseishokanribangorisuto" index="index" collection="shinseishokanribangorisuto" open="(" separator="," close=")">
+                #{shinseishokanribangorisuto}
+            </foreach>  
+            AND A."logicalDeletedFlag" = False
+        ORDER BY
+            A."hihokenshaKana",
+            A."ninteiShinseiYMD"
+    </select>
+</mapper>

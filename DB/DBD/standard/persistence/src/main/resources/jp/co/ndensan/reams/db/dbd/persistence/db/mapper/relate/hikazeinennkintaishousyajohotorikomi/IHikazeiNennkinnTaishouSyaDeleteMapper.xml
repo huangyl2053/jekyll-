@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @author DBD-4910-030 x_xuliang -->
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hikazeinennkintaishousyajohotorikomi.IHikazeiNennkinnTaishouSyaDeleteMapper">
+    <delete id="getBP_処理状態削除する">
+        DELETE
+        FROM
+        rgdb."DbT4037HikazeNenkinTaishosha"
+        WHERE
+        "nendo" = #{処理年度}
+        AND "shorikubun" = #{処理区分}
+        AND "taishom" = #{対象月}
+        AND "torokukubun" = '1'
+    </delete>
+    <select resultOrdered="true" id="get非課税年金対象者同定結果情報一時のデータ情報"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable.HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity"
+            fetchSize="500">
+        SELECT
+        "douteiResultKubun",
+        "fuicchiJiyu",
+        "gaitouJiyu",
+        "fuicchiItem",
+        "kisoNennkinnNoHennkou",
+        "hihokenshaNo",
+        "atenaKanaShimei",
+        "atenaSeinenngappi",
+        "atenaSeibetsu",
+        "shikibetsuCode",
+        "shotaiCode",
+        "nendo",
+        "shoriKubunn",
+        "taishoMonth",
+        "kisoNennkinnNo",
+        "genKisoNennkinnNo",
+        "nennkinnCode",
+        "tourokuKubunn",
+        "dtRekoDoKubunn",
+        "dtShichosonCode",
+        "dtNennkinnHokenshaCode",
+        "dtTsuuchiContentCode",
+        "dtYobi1",
+        "dtSeidoCode",
+        "dtCreateYMD",
+        "dtKisoNennkinnNo",
+        "dtNennkinnCode",
+        "dtYobi2",
+        "dtSeinenngappi",
+        "dtSeibetsu",
+        "dtKanaShimei",
+        "dtShifutoCode1",
+        "dtKanjiShimei",
+        "dtShifutoCode2",
+        "dtYubinNo",
+        "dtKanajusyo",
+        "dtShifutoCode3",
+        "dtKanjijusyo",
+        "dtShifutoCode4",
+        "dtTaisyoYear",
+        "dtTeiseiHyouji",
+        "dtKakushuKubun",
+        "dtShoriResult",
+        "dtYobi3",
+        "dtYobi4",
+        "dtkinngaku1",
+        "dtKinngakuYobi1",
+        "dtKinngakuYobi2",
+        "dtYobi5",
+        "dtKyousaiNennkinnShoushoKigouNo"
+        FROM
+        "HikazeNenkinTaishoshaDouteiResultJohoTempTable"
+    </select>
+</mapper>

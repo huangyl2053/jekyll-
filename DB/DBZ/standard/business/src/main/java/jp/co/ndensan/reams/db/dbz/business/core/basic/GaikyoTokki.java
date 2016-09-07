@@ -7,18 +7,18 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5206GaikyoTokkiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査票_概況特記を管理するクラスです。
  */
-public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoTokkiEntity, GaikyoTokki> implements Serializable {
+public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoTokkiEntity, GaikyoTokki> implements Serializable {
 
     private final DbT5206GaikyoTokkiEntity entity;
     private final GaikyoTokkiIdentifier id;
@@ -148,7 +148,6 @@ public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206G
 //    public RDateTime get概況特記_主訴_イメージ共有ファイルID() {
 //        return entity.getShusoImageSharedFileId();
 //    }
-
     /**
      * 概況特記_主訴_マスキングイメージ共有ファイルIDを返します。
      *
@@ -157,7 +156,6 @@ public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206G
 //    public RDateTime get概況特記_主訴_マスキングイメージ共有ファイルID() {
 //        return entity.getShusoMaskingImageSharedFileId();
 //    }
-
     /**
      * 概況特記事項_家族状況を返します。
      *
@@ -175,7 +173,6 @@ public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206G
 //    public RDateTime get概況特記_家族状況_イメージ共有ファイルID() {
 //        return entity.getKazokuJokyoImageSharedFileId();
 //    }
-
     /**
      * 概況特記_家族状況_マスキングイメージ共有ファイルIDを返します。
      *
@@ -184,7 +181,6 @@ public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206G
 //    public RDateTime get概況特記_家族状況_マスキングイメージ共有ファイルID() {
 //        return entity.getKazokuJokyoMaskingImageSharedFileId();
 //    }
-
     /**
      * 概況特記事項_居住環境を返します。
      *
@@ -202,7 +198,6 @@ public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206G
 //    public RDateTime get概況特記_居住環境_イメージ共有ファイルID() {
 //        return entity.getKyojuKankyoImageSharedFileId();
 //    }
-
     /**
      * 概況特記_居住環境_マスキングイメージ共有ファイルIDを返します。
      *
@@ -211,7 +206,6 @@ public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206G
 //    public RDateTime get概況特記_居住環境_マスキングイメージ共有ファイルID() {
 //        return entity.getKyojuKankyoMaskingImageSharedFileId();
 //    }
-
     /**
      * 概況特記事項_機器_器械を返します。
      *
@@ -229,7 +223,6 @@ public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206G
 //    public RDateTime get概況特記_機器_器械_イメージ共有ファイルID() {
 //        return entity.getKikaiKikiImageSharedFileId();
 //    }
-
     /**
      * 概況特記_機器_器械_マスキングイメージ共有ファイルIDを返します。
      *
@@ -238,7 +231,6 @@ public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206G
 //    public RDateTime get概況特記_機器_器械_マスキングイメージ共有ファイルID() {
 //        return entity.getKikaiKikiMaskingImageSharedFileId();
 //    }
-
     /**
      * {@link DbT5206GaikyoTokkiEntity}のクローンを返します。
      *
@@ -265,7 +257,6 @@ public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206G
      *
      * @return 変更対象処理実施後の{@link GaikyoTokki}
      */
-    @Override
     public GaikyoTokki modifiedModel() {
         DbT5206GaikyoTokkiEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
@@ -305,7 +296,7 @@ public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206G
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

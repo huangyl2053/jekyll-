@@ -7,19 +7,19 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0820014
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ServiceTeikyoShomeishoResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.DBC0820014TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.ServiceTeikyoShomeishoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.dgdServiceTeikyoShomeisyo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820014.ServiceTeikyoShomeishoPanelHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -48,19 +48,19 @@ public class ServiceTeikyoShomeishoPanel {
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onLoad(ServiceTeikyoShomeishoPanelDiv div) {
 
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
-                ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月, RString.class).
+                ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
                 toString())).getYearMonth().toDateString());
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ServiceTeikyoShomeishoPanelHandler handler = getHandler(div);
 
         List<ShikibetsuNoKanri> 証明書リスト = SyokanbaraihiShikyuShinseiKetteManager
                 .createInstance().getShikibetsuNoKanri(サービス年月);
-        RDate 申請日 = new RDate(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_申請日, RString.class).toString());
+        RDate 申請日 = new RDate(ViewStateHolder.get(ViewStateKeys.申請日, RString.class).toString());
         ShokanShinsei 償還払支給申請 = handler.get償還払支給申請(被保険者番号, サービス年月, 整理番号);
-        ViewStateHolder.put(ViewStateKeys.償還払支給申請詳細データ, 償還払支給申請);
+        ViewStateHolder.put(ViewStateKeys.詳細データ, 償還払支給申請);
         List<ServiceTeikyoShomeishoResult> 証明書一覧情報 = ShokanbaraiJyokyoShokai
                 .createInstance().getServiceTeikyoShomeishoList(被保険者番号, サービス年月, 整理番号);
 
@@ -94,11 +94,11 @@ public class ServiceTeikyoShomeishoPanel {
      */
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_btnKouzaInfo(ServiceTeikyoShomeishoPanelDiv div) {
         ServiceTeikyoShomeishoPanelHandler handler = getHandler(div);
-        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
-                ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月, RString.class).
+                ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
                 toString())).getYearMonth().toDateString());
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         handler.申請既存チェック(整理番号, サービス年月, 被保険者番号);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         putViewState(画面モード, div);
@@ -113,11 +113,11 @@ public class ServiceTeikyoShomeishoPanel {
      */
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_btnShokanKeteiInfo(ServiceTeikyoShomeishoPanelDiv div) {
         ServiceTeikyoShomeishoPanelHandler handler = getHandler(div);
-        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
-                ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月, RString.class).
+                ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
                 toString())).getYearMonth().toDateString());
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         handler.申請既存チェック(整理番号, サービス年月, 被保険者番号);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         putViewState(画面モード, div);
@@ -132,11 +132,11 @@ public class ServiceTeikyoShomeishoPanel {
      */
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_btnAdd(ServiceTeikyoShomeishoPanelDiv div) {
         ServiceTeikyoShomeishoPanelHandler handler = getHandler(div);
-        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
-                ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月, RString.class).
+                ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
                 toString())).getYearMonth().toDateString());
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         handler.証明書選択チェック();
         handler.事業者番号チェック();
         handler.サービス提供証明書の存在チェック(整理番号, サービス年月, 被保険者番号);
@@ -168,13 +168,13 @@ public class ServiceTeikyoShomeishoPanel {
 
     private void putViewState(RString 画面モード, ServiceTeikyoShomeishoPanelDiv div) {
         ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder
-                .get(ViewStateKeys.償還払費申請検索キー, ShoukanharaihishinseikensakuParameter.class);
+                .get(ViewStateKeys.申請検索キー, ShoukanharaihishinseikensakuParameter.class);
         FlexibleYearMonth サービス年月 = null;
         if (div.getPanelTwo().getTxtServiceTeikyoYM().getValue() != null) {
             サービス年月 = new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().getYearMonth().toString());
         }
         RString 整理番号 = div.getPanelTwo().getTxtSeiriBango().getValue();
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         if (parameter == null) {
             ShoukanharaihishinseikensakuParameter par = new ShoukanharaihishinseikensakuParameter(
                     被保険者番号,
@@ -185,7 +185,7 @@ public class ServiceTeikyoShomeishoPanel {
                     null,
                     null
             );
-            ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
+            ViewStateHolder.put(ViewStateKeys.申請検索キー, par);
         } else {
             ShoukanharaihishinseikensakuParameter par = new ShoukanharaihishinseikensakuParameter(
                     被保険者番号,
@@ -195,18 +195,18 @@ public class ServiceTeikyoShomeishoPanel {
                     parameter.getYoshikiNo(),
                     parameter.getMeisaiNo(),
                     parameter.getKyufuritsu());
-            ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
+            ViewStateHolder.put(ViewStateKeys.申請検索キー, par);
         }
         ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード);
     }
 
     private void putViewStateDown(RString 処理モード, ServiceTeikyoShomeishoPanelDiv div) {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
-                ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月, RString.class).
+                ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
                 toString())).getYearMonth().toDateString());
         RDate 申請日 = div.getPanelShinseiNaiyo().getTxtShinseibi().getValue();
-        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         dgdServiceTeikyoShomeisyo_Row row = div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getActiveRow();
         JigyoshaNo 事業者番号 = JigyoshaNo.EMPTY;
         RString 事業者番号_入力 = div.getPanelShinseiNaiyo().getCcdShisetsuJoho().getNyuryokuShisetsuKodo();
@@ -230,8 +230,8 @@ public class ServiceTeikyoShomeishoPanel {
         ShoukanharaihishinseikensakuParameter 償還払費申請検索 = new ShoukanharaihishinseikensakuParameter(
                 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
         ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, 償還払費申請検索);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, parameter);
+        ViewStateHolder.put(ViewStateKeys.申請検索キー, 償還払費申請検索);
+        ViewStateHolder.put(ViewStateKeys.明細検索キー, parameter);
     }
 
     private ServiceTeikyoShomeishoPanelHandler getHandler(ServiceTeikyoShomeishoPanelDiv div) {

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

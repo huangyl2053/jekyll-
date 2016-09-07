@@ -55,6 +55,7 @@
         rgdb."DbT5912ShujiiJoho"  AS  DbT5912ShujiiJoho
         ON  DbT5912ShujiiJoho."shichosonCode" = DbT5911ShujiiIryoKikanJoho."shichosonCode"
         AND  DbT5912ShujiiJoho."shujiiIryokikanCode" = DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode"
+        AND  DbT5912ShujiiJoho."shujiiCode" = DbT5101NinteiShinseiJoho."shujiiCode"
         INNER JOIN
         (
         SELECT
@@ -164,6 +165,8 @@
         INNER JOIN
         rgdb."DbT5912ShujiiJoho" AS DbT5912ShujiiJoho
         ON DbT5912ShujiiJoho."shichosonCode" = DbT5911ShujiiIryoKikanJoho."shichosonCode"
+        AND  DbT5912ShujiiJoho."shujiiIryokikanCode" = DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode"
+        AND  DbT5912ShujiiJoho."shujiiCode" = DbT5101NinteiShinseiJoho."shujiiCode"
         INNER JOIN
         (
         SELECT

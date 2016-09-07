@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkanMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1720001.DBE1720001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1720001.KoikinaiTenkyoRirekiHenkanDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1720001.dgShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1720001.KoikinaiTenkyoRirekiHenkanHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1720001.KoikinaiTenkyoRirekiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkanFinder;
@@ -16,18 +17,14 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoIdentifier;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -44,8 +41,6 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class KoikinaiTenkyoRirekiHenkan {
 
     private static final RString TRUE = new RString("True");
-    private static final RString FALSE = new RString("False");
-    private static final RString SHINSEISHOKANRINO = new RString("ShinseishoKanriNo");
     private static final RString 状態_更新 = new RString("更新");
 
     /**
@@ -55,11 +50,6 @@ public class KoikinaiTenkyoRirekiHenkan {
      * @return ResponseData<KoikinaiTenkyoRirekiHenkanDiv>
      */
     public ResponseData<KoikinaiTenkyoRirekiHenkanDiv> onLoad(KoikinaiTenkyoRirekiHenkanDiv div) {
-        if (!前排他キーのセット(SHINSEISHOKANRINO)) {
-            ErrorMessage errorMessage = new ErrorMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode(),
-                    UrErrorMessages.排他_他のユーザが使用中.getMessage().evaluate());
-            throw new ApplicationException(errorMessage);
-        }
         getHandler(div).setOnLoad();
         return ResponseData.of(div).respond();
     }
@@ -87,7 +77,6 @@ public class KoikinaiTenkyoRirekiHenkan {
      * @return <KoikinaiTenkyoRirekiHenkanDiv>
      */
     public ResponseData<KoikinaiTenkyoRirekiHenkanDiv> onClick_Sentaku(KoikinaiTenkyoRirekiHenkanDiv div) {
-
         getHandler(div).onClick_btnSentaku(createListFromDbT7051KoseiShichosonMaster());
         return ResponseData.of(div).respond();
     }
@@ -118,16 +107,15 @@ public class KoikinaiTenkyoRirekiHenkan {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            前排他キーの解除(SHINSEISHOKANRINO);
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             updateDbT5101NinteiShinseiJoho(div);
-            前排他キーの解除(SHINSEISHOKANRINO);
+            div.getShinsakaiMessage().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
+                    .replace("更新").evaluate()), RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE1720001StateName.完了);
         }
-        前排他キーの解除(SHINSEISHOKANRINO);
         return ResponseData.of(div).respond();
     }
 
@@ -152,10 +140,12 @@ public class KoikinaiTenkyoRirekiHenkan {
                 div.getTxtBirthDateTo().getValue(),
                 new Code(div.getDdlShinseijiShinseiKubun().getSelectedKey()),
                 div.getDdlHihokenshaNameMatchType().getSelectedKey(),
-                div.getChkMinashiFlag().getSelectedKeys().contains(TRUE) ? TRUE : FALSE,
+                div.getChkMinashiFlag().getSelectedKeys().contains(TRUE),
                 div.getDdlShinseijiShinseiKubun().getSelectedKey(),
                 div.getChkSeibetsu().getSelectedKeys(),
-                new Decimal(div.getTxtMaxCount().getValue().toString())
+                ShoriJotaiKubun.通常.getコード(),
+                ShoriJotaiKubun.延期.getコード(),
+                div.getTextBoxNum().getValue()
         );
         KoikinaiTenkyoRirekiHenkanFinder koikinaitenkyofinder = KoikinaiTenkyoRirekiHenkanFinder.createInstance();
         List<jp.co.ndensan.reams.db.dbe.business.core.basic.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkan> 申請者一覧情報List
@@ -175,35 +165,28 @@ public class KoikinaiTenkyoRirekiHenkan {
         return new KoikinaiTenkyoRirekiValidationHandler(div);
     }
 
-    private boolean 前排他キーのセット(RString 申請書管理番号) {
-        LockingKey 排他キー = new LockingKey(申請書管理番号);
-        return RealInitialLocker.tryGetLock(排他キー);
-    }
-
-    private void 前排他キーの解除(RString 申請書管理番号) {
-        LockingKey 排他キー = new LockingKey(申請書管理番号);
-        RealInitialLocker.release(排他キー);
-    }
-
     private List<KeyValueDataSource> createListFromDbT7051KoseiShichosonMaster() {
         KoikinaiTenkyoRirekiHenkanFinder koikinaitenkyofinder = KoikinaiTenkyoRirekiHenkanFinder.createInstance();
         return koikinaitenkyofinder.creatListFromDbT7051().records();
     }
 
     private void updateDbT5101NinteiShinseiJoho(KoikinaiTenkyoRirekiHenkanDiv div) {
+        List<dgShinseishaIchiran_Row> dataGridList = div.getDgShinseishaIchiran().getDataSource();
         for (int index = 0; index < div.getDgShinseishaIchiran().getTotalRecords(); index++) {
-            RString state = div.getDgShinseishaIchiran().getDataSource().get(index).getColumnState();
+            RString state = dataGridList.get(index).getColumnState();
             KoikinaiTenkyoRirekiHenkanFinder finder = KoikinaiTenkyoRirekiHenkanFinder.createInstance();
             ShinseishoKanriNo shinseishoKanriNo = new ShinseishoKanriNo(
-                    div.getDgShinseishaIchiran().getDataSource().get(index).getShinseishoKanriNo());
-            RString shokisaihokenshaNo = div.getDgShinseishaIchiran().getDataSource().get(index).getShoKisaiHokenshaNo();
+                    dataGridList.get(index).getShinseishoKanriNo());
+            RString shokisaihokenshaNo = dataGridList.get(index).getShoKisaiHokenshaNo();
             boolean flag = true;
-            if (finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo).isEmpty()) {
+            if (finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo) == null) {
                 flag = false;
             }
             if (状態_更新.equals(state)) {
                 upDateNinteiShinseiJoho(shinseishoKanriNo, shokisaihokenshaNo, false);
-                upDateNinteiShinseiJoho(finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo), shokisaihokenshaNo, flag);
+                if (flag) {
+                    upDateNinteiShinseiJoho(finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo), shokisaihokenshaNo, flag);
+                }
             }
         }
     }
@@ -219,7 +202,7 @@ public class KoikinaiTenkyoRirekiHenkan {
         } else {
             for (NinteiShinseiJoho ninteiShinseiJoho : models) {
                 if (ninteiShinseiJoho.get申請書管理番号().equals(shinseishoKanriNo)) {
-                    manager.save広域内要介護認定申請情報(ninteiShinseiJoho.createBuilderForEdit().set証記載保険者番号(shokisaihokenshaNo).build());
+                    manager.save要介護認定申請情報(ninteiShinseiJoho.createBuilderForEdit().set証記載保険者番号(shokisaihokenshaNo).build().modifiedModel());
                 }
             }
         }

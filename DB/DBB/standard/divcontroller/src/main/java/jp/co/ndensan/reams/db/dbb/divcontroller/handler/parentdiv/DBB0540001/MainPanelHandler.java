@@ -9,10 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuhoho.ChoshuHohoResult;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho;
-import jp.co.ndensan.reams.db.dbb.definition.core.choteijiyu.ChoteiJiyuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.MainPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.choshuHouhou_Row;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
@@ -29,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
@@ -55,7 +53,6 @@ public class MainPanelHandler {
     private static final int 整数_9 = 9;
     private static final int 整数_10 = 10;
     private static final int 整数_11 = 11;
-    private static final int 整数_12 = 12;
     private static final int 現在の月_1 = 1;
     private static final int 現在の月_2 = 2;
     private static final int 現在の月_3 = 3;
@@ -312,10 +309,13 @@ public class MainPanelHandler {
      * @param 賦課年度 賦課年度
      * @param 被保険者番号 被保険者番号
      * @param 徴収方法データ ChoshuHoho
+     * @param 停止日時 YMDHMS
+     * @param 停止事由コード RString
      */
     public void saveボタンを押下(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号,
-            jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法データ) {
-        dataSaveEdit(賦課年度, 被保険者番号, 徴収方法データ);
+            jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho 徴収方法データ,
+            YMDHMS 停止日時, RString 停止事由コード) {
+        dataSaveEdit(賦課年度, 被保険者番号, 徴収方法データ, 停止日時, 停止事由コード);
     }
 
     private DataGridCellBgColor setBgColor(RString コード) {
@@ -672,14 +672,15 @@ public class MainPanelHandler {
     }
 
     private void dataSaveEdit(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号,
-            jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法データ) {
+            jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho 徴収方法データ,
+            YMDHMS 停止日時, RString 停止事由コード) {
         int 現在の月;
         final int three = 3;
         YMDHMS 特別徴収停止日時 = null;
         RString 特別徴収停止事由コード = null;
         RDate システム日付 = RDate.getNowDate();
-        jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法_変更後
-                = new jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho(
+        jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho 徴収方法_変更後
+                = new jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho(
                         賦課年度, 被保険者番号, 徴収方法データ.get履歴番号() + 1);
         RStringBuilder builder = new RStringBuilder(賦課年度.plusYear(1).toString());
         RString 賦課年度日付 = builder.append(RSTR_0331).toRString();
@@ -742,8 +743,8 @@ public class MainPanelHandler {
                 特別徴収停止事由コード = ChoteiJiyuCode.徴収方法修正.getコード();
                 break;
             } else {
-                特別徴収停止日時 = ViewStateHolder.get(ViewStateKeys.特別徴収停止日時, YMDHMS.class);
-                特別徴収停止事由コード = ViewStateHolder.get(ViewStateKeys.特別徴収停止事由コード, RString.class);
+                特別徴収停止日時 = 停止日時;
+                特別徴収停止事由コード = 停止事由コード;
             }
 
         }

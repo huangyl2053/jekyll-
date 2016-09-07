@@ -80,7 +80,7 @@ public interface IChosaIraishoAndChosahyoAndIkenshoPrintMapper {
      * @param parameter ChosaIraishoAndChosahyoAndIkenshoPrintParameter
      * @return 認定調査票差異チェック票情報
      */
-    ChosaIraishoAndChosahyoAndIkenshoPrintEntity select認定調査票差異チェック票(ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter);
+    List<ChosaIraishoAndChosahyoAndIkenshoPrintEntity> select認定調査票差異チェック票(ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter);
 
     /**
      * 意見書作成依頼書票情報を検索します。

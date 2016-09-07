@@ -33,8 +33,11 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KyodoIdoRenrakuhyoTorokuMain {
 
+    private static final RString 起動 = new RString("1");
+    private static final RString 停止 = new RString("0");
+
     /**
-     * 画面初期化のメソッドます。
+     * 画面初期化のメソッドです。
      *
      * @param div KyodoIdoRenrakuhyoTorokuMainDiv
      * @return ResponseData
@@ -50,18 +53,29 @@ public class KyodoIdoRenrakuhyoTorokuMain {
     }
 
     /**
-     * 「連絡票を保存する」ボタンのメソッドます。
+     * 「連絡票を保存する」ボタンのメソッドです。
      *
      * @param div KyodoIdoRenrakuhyoTorokuMainDiv
      * @return ResponseData
      */
     public ResponseData<KyodoIdoRenrakuhyoTorokuMainDiv> onClick_btnSave(KyodoIdoRenrakuhyoTorokuMainDiv div) {
-        // TODO 入力チェック
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        div.getHdnFlag().setValue(起動);
+        boolean 保存の確認flag = new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode());
+        ValidationMessageControlPairs pairs = div.getKyodoIdoRenrakuhyoTorokuInfo().get一時差止日の入力チェック();
+        pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().get一時差止日の関連チェック());
+        pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().基本送付情報の異動日チェック());
+        pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().償還送付情報の異動日チェック());
+        pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().高額送付情報の異動日チェック());
+        if (!ResponseHolder.isReRequest() && !保存の確認flag) {
+            pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().基本送付情報の異動区分チェック());
+            pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().償還送付情報の異動区分チェック());
+            pairs.add(div.getKyodoIdoRenrakuhyoTorokuInfo().高額送付情報の異動区分チェック());
+        }
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        if (!ResponseHolder.isReRequest()) {
+        if (!保存の確認flag) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
@@ -87,33 +101,45 @@ public class KyodoIdoRenrakuhyoTorokuMain {
     }
 
     /**
-     * 「発行」ボタンのメソッドます。
+     * 「発行」ボタンのメソッドです。
      *
      * @param div KyodoIdoRenrakuhyoTorokuMainDiv
      * @return ResponseData
      */
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(KyodoIdoRenrakuhyoTorokuMainDiv div) {
-        getHandler(div).set更新完了メッセージ();
-        return ResponseData.of(getHandler(div).to帳票発行処理()).setState(DBC0250011StateName.更新完了);
+        return ResponseData.of(getHandler(div).to帳票発行処理()).respond();
     }
 
     /**
-     * 「検索結果一覧へ」ボタンのメソッドます。
+     * 「発行」ボタンを更新完了に状態遷移のメソッドです。
+     *
+     * @param div 画面Div
+     * @return ResponseData
+     */
+    public ResponseData<KyodoIdoRenrakuhyoTorokuMainDiv> toAfterPrint(KyodoIdoRenrakuhyoTorokuMainDiv div) {
+        getHandler(div).set更新完了メッセージ();
+        return ResponseData.of(div).setState(DBC0250011StateName.更新完了);
+    }
+
+    /**
+     * 「検索結果一覧へ」ボタンのメソッドです。
      *
      * @param div KyodoIdoRenrakuhyoTorokuMainDiv
      * @return ResponseData
      */
     public ResponseData<KyodoIdoRenrakuhyoTorokuMainDiv> onClick_btnSearchResult(KyodoIdoRenrakuhyoTorokuMainDiv div) {
+        div.getHdnFlag().setValue(停止);
         return getCheckMessage(div, DBC0250011TransitionEventName.検索結果一覧);
     }
 
     /**
-     * 「再検索する」ボタンのメソッドます。
+     * 「再検索する」ボタンのメソッドです。
      *
      * @param div KyodoIdoRenrakuhyoTorokuMainDiv
      * @return ResponseData
      */
     public ResponseData<KyodoIdoRenrakuhyoTorokuMainDiv> onClick_btnResearch(KyodoIdoRenrakuhyoTorokuMainDiv div) {
+        div.getHdnFlag().setValue(停止);
         return getCheckMessage(div, DBC0250011TransitionEventName.再検索);
     }
 
@@ -141,7 +167,7 @@ public class KyodoIdoRenrakuhyoTorokuMain {
     }
 
     /**
-     * 「完了する」ボタンのメソッドます。
+     * 「完了する」ボタンのメソッドです。
      *
      * @param div KyodoIdoRenrakuhyoTorokuMainDiv
      * @return ResponseData

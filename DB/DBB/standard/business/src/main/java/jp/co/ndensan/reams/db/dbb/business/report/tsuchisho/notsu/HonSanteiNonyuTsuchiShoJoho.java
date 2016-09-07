@@ -36,5 +36,6 @@ public class HonSanteiNonyuTsuchiShoJoho {
     private List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト;
     private List<Kitsuki> 出力期リスト;
     private HenshuHaniKubun 編集範囲区分;
+    private int 連番;
 
 }

@@ -192,7 +192,7 @@
 
     <select id="get償還払支給申請"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiKey"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity"  fetchSize="500" resultOrdered="true">
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity"  fetchSize="500" resultOrdered="true">
         SELECT *
         FROM rgdb."DbT3034ShokanShinsei" AS "a"
         LEFT JOIN

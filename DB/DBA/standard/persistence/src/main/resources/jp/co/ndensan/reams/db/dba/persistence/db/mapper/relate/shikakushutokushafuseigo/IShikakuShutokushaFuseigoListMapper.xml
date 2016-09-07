@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBU-4020-030 lishengli -->
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.shikakushutokushafuseigo.IShikakuShutokushaFuseigoListMapper">
+
+    <select resultOrdered="true" id="get重複者以外" parameterType = "jp.co.ndensan.reams.db.dba.definition.mybatisprm.shikakushutokushafuseigo.ShikakuShutokushaFuseigoMybatisParameter"
+            resultType = "jp.co.ndensan.reams.db.dba.entity.db.relate.shikakushutokushafuseigoichiranhyo.ShikakuShutokushaFuseigoEntity" fetchSize="500">
+        SELECT
+            dbV1001."hihokenshaNo" AS hihokenshaNo,
+            dbV1001."shikibetsuCode" AS shikibetsuCode,
+            dbV1001."shichosonCode" AS shichosonCode,
+            dbV1001."hihokennshaKubunCode" AS hihokennshaKubunCode,
+            dbV1001."jushochiTokureiFlag" AS jushochiTokureiFlag,
+            psm."kanaMeisho" AS kanaMeisho,
+            psm."meisho" AS meisho,
+            psm."seinengappiYMD" AS seinengappiYMD,
+            psm."tennyumaeJusho" AS tennyumaeJusho,
+            psm."tennyumaeBanchi" AS tennyumaeBanchi,
+            psm."tennyumaeKatagaki" AS tennyumaeKatagaki,
+            psm."jusho" AS jusho,
+            psm."banchi" AS banchi,
+            psm."katagaki" AS katagaki,
+            '02' AS 不整合情報
+        FROM (SELECT t1001."hihokenshaNo" AS "hihokenshaNo",
+                     t1001."shikibetsuCode" AS "shikibetsuCode",
+                     t1001."shichosonCode" AS "shichosonCode",
+                     t1001."hihokennshaKubunCode" AS "hihokennshaKubunCode",
+                     t1001."jushochiTokureiFlag" AS "jushochiTokureiFlag"
+                FROM rgdb."DbV1001HihokenshaDaicho" AS t1001
+              INNER JOIN rgdb."DbT1011TenshutsuHoryuTaishosha" AS dbT1011
+                    ON dbT1011."shikibetsuCode" = t1001."shikibetsuCode"
+                ) AS dbV1001,
+             rgua.${psmShikibetsuTaisho} AS psm
+        WHERE psm."shikibetsuCode" = dbV1001."shikibetsuCode"
+        ORDER BY psm."kanaMeisho", psm."seinengappiYMD", dbV1001."hihokenshaNo"
+    </select>
+    
+    <select resultOrdered="true" id="get資格重複者" parameterType = "jp.co.ndensan.reams.db.dba.definition.mybatisprm.shikakushutokushafuseigo.ShikakuShutokushaFuseigoMybatisParameter"
+            resultType = "jp.co.ndensan.reams.db.dba.entity.db.relate.shikakushutokushafuseigoichiranhyo.ShikakuShutokushaFuseigoEntity" fetchSize="500">
+        SELECT
+            dbV1001."hihokenshaNo" AS hihokenshaNo,
+            dbV1001."shikibetsuCode" AS shikibetsuCode,
+            dbV1001."shichosonCode" AS shichosonCode,
+            dbV1001."hihokennshaKubunCode" AS hihokennshaKubunCode,
+            dbV1001."jushochiTokureiFlag" AS jushochiTokureiFlag,
+            宛名情報."kanaMeisho" AS kanaMeisho,
+            宛名情報."meisho" AS meisho,
+            宛名情報."seinengappiYMD" AS seinengappiYMD,
+            宛名情報."tennyumaeJusho" AS tennyumaeJusho,
+            宛名情報."tennyumaeBanchi" AS tennyumaeBanchi,
+            宛名情報."tennyumaeKatagaki" AS tennyumaeKatagaki,
+            宛名情報."jusho" AS jusho,
+            宛名情報."banchi" AS banchi,
+            宛名情報."katagaki" AS katagaki,
+            '01' AS 不整合情報
+        FROM rgdb."DbV1001HihokenshaDaicho" AS dbV1001
+        INNER JOIN(SELECT
+                        psm."kanaMeisho" AS "kanaMeisho",
+                        psm."meisho" AS "meisho",
+                        psm."seinengappiYMD" AS "seinengappiYMD",
+                        psm."tennyumaeJusho" AS "tennyumaeJusho",
+                        psm."tennyumaeBanchi" AS "tennyumaeBanchi",
+                        psm."tennyumaeKatagaki" AS "tennyumaeKatagaki",
+                        psm."jusho" AS "jusho",
+                        psm."banchi" AS "banchi",
+                        psm."katagaki" AS "katagaki",
+                        psm."shikibetsuCode" AS "shikibetsuCode"
+                    FROM rgua.${psmShikibetsuTaisho} AS psm
+                   INNER JOIN(SELECT psmJyohou."kanaMeisho",
+                                     psmJyohou."seinengappiYMD",
+                                     psmJyohou."seibetsuCode"
+                               FROM rgua.${psmShikibetsuTaisho} AS psmJyohou
+                              GROUP BY psmJyohou."kanaMeisho",
+                                       psmJyohou."seinengappiYMD",
+                                       psmJyohou."seibetsuCode"
+                              HAVING count(*)>1) AS countPSM
+                        ON countPSM."kanaMeisho" = psm."kanaMeisho"
+                        AND countPSM."seinengappiYMD" = psm."seinengappiYMD"
+                        AND countPSM."seibetsuCode" = psm."seibetsuCode"
+                   ORDER BY psm."shikibetsuCode") AS 宛名情報
+                ON 宛名情報."shikibetsuCode" = dbV1001."shikibetsuCode"
+        ORDER BY 宛名情報."kanaMeisho", 宛名情報."seinengappiYMD", dbV1001."hihokenshaNo"
+    </select>
+</mapper>

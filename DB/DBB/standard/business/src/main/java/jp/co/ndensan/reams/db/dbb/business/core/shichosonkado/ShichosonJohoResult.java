@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.shichosonkado;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.shichoson.ShichosonJohoEntity;
-
 /**
  * 市町村情報entity ShichosonKado
  *
@@ -17,14 +15,14 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.shichoson.ShichosonJohoEntity
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShichosonJohoResult {
 
-    private final ShichosonJohoEntity entity;
+    private final ShichosonJoho entity;
 
     /**
      * コンストラクタです。
      *
      * @param entity ShichosonJohoResult
      */
-    public ShichosonJohoResult(ShichosonJohoEntity entity) {
+    public ShichosonJohoResult(ShichosonJoho entity) {
         this.entity = entity;
     }
 }

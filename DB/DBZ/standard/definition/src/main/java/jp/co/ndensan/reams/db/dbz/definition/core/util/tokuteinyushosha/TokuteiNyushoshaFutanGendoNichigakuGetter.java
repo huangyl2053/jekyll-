@@ -1291,7 +1291,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
     public RString get食費１(FlexibleDate 基準日, Code 旧措置区分) {
         requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_基準日.toString()));
         requireNonNull(旧措置区分, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_旧措置区分.toString()));
-        if (旧措置.equals(旧措置区分)) {
+        if (旧措置区分.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (旧措置.equals(旧措置区分)) {
             return get旧措置食費１(基準日);
         } else {
             return get食費１(基準日);
@@ -1308,7 +1310,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
     public RString get食費２(FlexibleDate 基準日, Code 旧措置区分) {
         requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_基準日.toString()));
         requireNonNull(旧措置区分, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_旧措置区分.toString()));
-        if (旧措置.equals(旧措置区分)) {
+        if (旧措置区分.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (旧措置.equals(旧措置区分)) {
             return get旧措置食費２(基準日);
         } else {
             return get食費２(基準日);
@@ -1325,7 +1329,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
     public RString get食費３(FlexibleDate 基準日, Code 旧措置区分) {
         requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_基準日.toString()));
         requireNonNull(旧措置区分, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_旧措置区分.toString()));
-        if (旧措置.equals(旧措置区分)) {
+        if (旧措置区分.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (旧措置.equals(旧措置区分)) {
             return get旧措置食費３(基準日);
         } else {
             return get食費３(基準日);
@@ -1342,7 +1348,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
     public RString getユニット型個室１(FlexibleDate 基準日, Code 旧措置区分) {
         requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_基準日.toString()));
         requireNonNull(旧措置区分, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_旧措置区分.toString()));
-        if (旧措置.equals(旧措置区分)) {
+        if (旧措置区分.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (旧措置.equals(旧措置区分)) {
             return get旧措置ユニット型個室１(基準日);
         } else {
             return getユニット型個室１(基準日);
@@ -1359,7 +1367,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
     public RString getユニット型個室２(FlexibleDate 基準日, Code 旧措置区分) {
         requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_基準日.toString()));
         requireNonNull(旧措置区分, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_旧措置区分.toString()));
-        if (旧措置.equals(旧措置区分)) {
+        if (旧措置区分.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (旧措置.equals(旧措置区分)) {
             return get旧措置ユニット型個室２(基準日);
         } else {
             return getユニット型個室２(基準日);
@@ -1376,7 +1386,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
     public RString getユニット型個室３(FlexibleDate 基準日, Code 旧措置区分) {
         requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_基準日.toString()));
         requireNonNull(旧措置区分, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_旧措置区分.toString()));
-        if (旧措置.equals(旧措置区分)) {
+        if (旧措置区分.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (旧措置.equals(旧措置区分)) {
             return get旧措置ユニット型個室３(基準日);
         } else {
             return getユニット型個室３(基準日);
@@ -1393,7 +1405,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
     public RString getユニット型準個室１(FlexibleDate 基準日, Code 旧措置区分) {
         requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_基準日.toString()));
         requireNonNull(旧措置区分, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_旧措置区分.toString()));
-        if (旧措置.equals(旧措置区分)) {
+        if (旧措置区分.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (旧措置.equals(旧措置区分)) {
             return get旧措置ユニット型準個室１(基準日);
         } else {
             return getユニット型準個室１(基準日);
@@ -1410,7 +1424,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
     public RString getユニット型準個室２(FlexibleDate 基準日, Code 旧措置区分) {
         requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_基準日.toString()));
         requireNonNull(旧措置区分, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_旧措置区分.toString()));
-        if (旧措置.equals(旧措置区分)) {
+        if (旧措置区分.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (旧措置.equals(旧措置区分)) {
             return get旧措置ユニット型準個室２(基準日);
         } else {
             return getユニット型準個室２(基準日);
@@ -1427,7 +1443,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
     public RString getユニット型準個室３(FlexibleDate 基準日, Code 旧措置区分) {
         requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_基準日.toString()));
         requireNonNull(旧措置区分, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_旧措置区分.toString()));
-        if (旧措置.equals(旧措置区分)) {
+        if (旧措置区分.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (旧措置.equals(旧措置区分)) {
             return get旧措置ユニット型準個室３(基準日);
         } else {
             return getユニット型準個室３(基準日);
@@ -1444,7 +1462,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
     public RString get従個特養１(FlexibleDate 基準日, Code 旧措置区分) {
         requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_基準日.toString()));
         requireNonNull(旧措置区分, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_旧措置区分.toString()));
-        if (旧措置.equals(旧措置区分)) {
+        if (旧措置区分.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (旧措置.equals(旧措置区分)) {
             return get旧措置従個特養１(基準日);
         } else {
             return get従個特養１(基準日);
@@ -1461,7 +1481,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
     public RString get従個特養２(FlexibleDate 基準日, Code 旧措置区分) {
         requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_基準日.toString()));
         requireNonNull(旧措置区分, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_旧措置区分.toString()));
-        if (旧措置.equals(旧措置区分)) {
+        if (旧措置区分.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (旧措置.equals(旧措置区分)) {
             return get旧措置従個特養２(基準日);
         } else {
             return get従個特養２(基準日);
@@ -1478,7 +1500,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
     public RString get従個特養３(FlexibleDate 基準日, Code 旧措置区分) {
         requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_基準日.toString()));
         requireNonNull(旧措置区分, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_旧措置区分.toString()));
-        if (旧措置.equals(旧措置区分)) {
+        if (旧措置区分.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (旧措置.equals(旧措置区分)) {
             return get旧措置従個特養３(基準日);
         } else {
             return get従個特養３(基準日);
@@ -1495,7 +1519,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
     public RString get多床室１(FlexibleDate 基準日, Code 旧措置区分) {
         requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_基準日.toString()));
         requireNonNull(旧措置区分, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_旧措置区分.toString()));
-        if (旧措置.equals(旧措置区分)) {
+        if (旧措置区分.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (旧措置.equals(旧措置区分)) {
             return get旧措置多床室１(基準日);
         } else {
             return get多床室１(基準日);
@@ -1512,7 +1538,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
     public RString get多床室２(FlexibleDate 基準日, Code 旧措置区分) {
         requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_基準日.toString()));
         requireNonNull(旧措置区分, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_旧措置区分.toString()));
-        if (旧措置.equals(旧措置区分)) {
+        if (旧措置区分.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (旧措置.equals(旧措置区分)) {
             return get旧措置多床室２(基準日);
         } else {
             return get多床室２(基準日);
@@ -1529,7 +1557,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
     public RString get多床室３(FlexibleDate 基準日, Code 旧措置区分) {
         requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_基準日.toString()));
         requireNonNull(旧措置区分, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGES_旧措置区分.toString()));
-        if (旧措置.equals(旧措置区分)) {
+        if (旧措置区分.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (旧措置.equals(旧措置区分)) {
             return get旧措置多床室３(基準日);
         } else {
             return get多床室３(基準日);

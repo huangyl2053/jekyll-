@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.service.report.nonyutsuchishocvskakuko;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoRenchoProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoRenchoReport;
@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class NonyuTsuchishoCVSKakukoPrintService {
 
-    private final ReportId 帳票分類ID = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
+    private final ReportId 帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
     private final RString 帳票IDの先頭_DBB100059 = new RString("DBB100059");
     private final RString 帳票IDの先頭_DBB100060 = new RString("DBB100060");
 
@@ -175,9 +175,9 @@ public class NonyuTsuchishoCVSKakukoPrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-                List<INonyuTsuchisho> reportList
+                List<NonyuTsuchisho<NonyuTsuchishoCVSKakukoSource>> reportList
                         = new NonyuTsuchishoCVSKakukoReport(本算定納入通知書情報, ninshoshaSource).devidedByPage();
-                for (INonyuTsuchisho report : reportList) {
+                for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
             }
@@ -194,9 +194,9 @@ public class NonyuTsuchishoCVSKakukoPrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-                List<INonyuTsuchisho> reportList
+                List<NonyuTsuchisho<NonyuTsuchishoCVSKakukoRenchoSource>> reportList
                         = new NonyuTsuchishoCVSKakukoRenchoReport(本算定納入通知書情報, ninshoshaSource).devidedByPage();
-                for (INonyuTsuchisho report : reportList) {
+                for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
             }

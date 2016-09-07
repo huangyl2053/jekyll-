@@ -23,7 +23,7 @@ public final class IdoCheckListParameter {
     private final FlexibleDate 今回開始日時FROM;
     private final FlexibleDate 今回終了日時TO;
     private final List<RString> 対象List;
-    private final long 出力順ID;
+    private final Long 出力順ID;
     private final boolean すべて選択;
 
     private IdoCheckListParameter(
@@ -32,7 +32,7 @@ public final class IdoCheckListParameter {
             FlexibleDate 今回開始日時FROM,
             FlexibleDate 今回終了日時TO,
             List<RString> 対象List,
-            long 出力順ID,
+            Long 出力順ID,
             boolean すべて選択) {
         this.今回終了日時TO = 今回終了日時TO;
         this.前回開始日時FROM = 前回開始日時FROM;
@@ -62,7 +62,7 @@ public final class IdoCheckListParameter {
             FlexibleDate 今回開始日時FROM,
             FlexibleDate 今回終了日時TO,
             List<RString> 対象List,
-            long 出力順ID,
+            Long 出力順ID,
             boolean すべて選択) {
         return new IdoCheckListParameter(前回開始日時FROM, 前回終了日時TO,
                 今回開始日時FROM, 今回終了日時TO, 対象List, 出力順ID, すべて選択);

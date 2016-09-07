@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2110001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.IOutputChohyoIchiranDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.OutputChohyoIchiranDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Icon;
@@ -31,6 +33,8 @@ public class TokuchoSofuJohoSakuseiDiv extends PanelBatchParameter {
     private DropDownList ddlFukaNendo;
     @JsonProperty("tbldgTokuchoIdoJoho")
     private tbldgTokuchoIdoJohoDiv tbldgTokuchoIdoJoho;
+    @JsonProperty("ccdOutputChohyoIchiran")
+    private OutputChohyoIchiranDiv ccdOutputChohyoIchiran;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -72,6 +76,15 @@ public class TokuchoSofuJohoSakuseiDiv extends PanelBatchParameter {
     @JsonProperty("tbldgTokuchoIdoJoho")
     public void setTbldgTokuchoIdoJoho(tbldgTokuchoIdoJohoDiv tbldgTokuchoIdoJoho) {
         this.tbldgTokuchoIdoJoho = tbldgTokuchoIdoJoho;
+    }
+
+    /*
+     * getccdOutputChohyoIchiran
+     * @return ccdOutputChohyoIchiran
+     */
+    @JsonProperty("ccdOutputChohyoIchiran")
+    public IOutputChohyoIchiranDiv getCcdOutputChohyoIchiran() {
+        return ccdOutputChohyoIchiran;
     }
 
     /*

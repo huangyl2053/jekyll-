@@ -56,7 +56,7 @@ public final class IdoTaishoshaIchiranHandler {
     public void set作成日時(Map<ReportId, List<YMDHMS>> map) {
         RString select帳票ID = div.getDdlTsuchishoMeisho().getSelectedKey();
         List<YMDHMS> 作成日時List = map.get(new ReportId(select帳票ID));
-        if (作成日時List != null && 作成日時List.isEmpty()) {
+        if (作成日時List != null && !作成日時List.isEmpty()) {
             Comparator<YMDHMS> comparator = new Comparator<YMDHMS>() {
                 @Override
                 public int compare(YMDHMS s1, YMDHMS s2) {

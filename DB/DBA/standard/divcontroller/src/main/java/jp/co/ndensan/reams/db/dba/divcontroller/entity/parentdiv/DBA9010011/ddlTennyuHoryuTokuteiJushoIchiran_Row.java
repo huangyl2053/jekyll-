@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA9010011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Apr 25 10:48:30 CST 2016 
+ * Mon Jul 11 19:33:48 CST 2016 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class ddlTennyuHoryuTokuteiJushoIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private RString txtKanriNo;
     private RString txtShichosonCode;
@@ -30,6 +30,7 @@ public class ddlTennyuHoryuTokuteiJushoIchiran_Row extends DataRow {
     private RString txtBanchiCode2;
     private RString txtBanchiCode3;
     private RString txtBanchi;
+    private RString txtShisetsuName;
     private RString txtShisetsuShurui;
     private RString txtShisetsuJoho;
 
@@ -44,6 +45,7 @@ public class ddlTennyuHoryuTokuteiJushoIchiran_Row extends DataRow {
         this.txtBanchiCode2 = RString.EMPTY;
         this.txtBanchiCode3 = RString.EMPTY;
         this.txtBanchi = RString.EMPTY;
+        this.txtShisetsuName = RString.EMPTY;
         this.txtShisetsuShurui = RString.EMPTY;
         this.txtShisetsuJoho = RString.EMPTY;
         this.setOriginalData("txtKanriNo", txtKanriNo);
@@ -55,11 +57,12 @@ public class ddlTennyuHoryuTokuteiJushoIchiran_Row extends DataRow {
         this.setOriginalData("txtBanchiCode2", txtBanchiCode2);
         this.setOriginalData("txtBanchiCode3", txtBanchiCode3);
         this.setOriginalData("txtBanchi", txtBanchi);
+        this.setOriginalData("txtShisetsuName", txtShisetsuName);
         this.setOriginalData("txtShisetsuShurui", txtShisetsuShurui);
         this.setOriginalData("txtShisetsuJoho", txtShisetsuJoho);
     }
 
-    public ddlTennyuHoryuTokuteiJushoIchiran_Row(RString txtKanriNo, RString txtShichosonCode, RString txtShichosonName, RString txtJushoCode, RString txtJusho, RString txtBanchiCode1, RString txtBanchiCode2, RString txtBanchiCode3, RString txtBanchi, RString txtShisetsuShurui, RString txtShisetsuJoho) {
+    public ddlTennyuHoryuTokuteiJushoIchiran_Row(RString txtKanriNo, RString txtShichosonCode, RString txtShichosonName, RString txtJushoCode, RString txtJusho, RString txtBanchiCode1, RString txtBanchiCode2, RString txtBanchiCode3, RString txtBanchi, RString txtShisetsuName, RString txtShisetsuShurui, RString txtShisetsuJoho) {
         super();
         this.setOriginalData("txtKanriNo", txtKanriNo);
         this.setOriginalData("txtShichosonCode", txtShichosonCode);
@@ -70,6 +73,7 @@ public class ddlTennyuHoryuTokuteiJushoIchiran_Row extends DataRow {
         this.setOriginalData("txtBanchiCode2", txtBanchiCode2);
         this.setOriginalData("txtBanchiCode3", txtBanchiCode3);
         this.setOriginalData("txtBanchi", txtBanchi);
+        this.setOriginalData("txtShisetsuName", txtShisetsuName);
         this.setOriginalData("txtShisetsuShurui", txtShisetsuShurui);
         this.setOriginalData("txtShisetsuJoho", txtShisetsuJoho);
         this.txtKanriNo = txtKanriNo;
@@ -81,6 +85,7 @@ public class ddlTennyuHoryuTokuteiJushoIchiran_Row extends DataRow {
         this.txtBanchiCode2 = txtBanchiCode2;
         this.txtBanchiCode3 = txtBanchiCode3;
         this.txtBanchi = txtBanchi;
+        this.txtShisetsuName = txtShisetsuName;
         this.txtShisetsuShurui = txtShisetsuShurui;
         this.txtShisetsuJoho = txtShisetsuJoho;
     }
@@ -119,6 +124,10 @@ public class ddlTennyuHoryuTokuteiJushoIchiran_Row extends DataRow {
 
     public RString getTxtBanchi() {
         return txtBanchi;
+    }
+
+    public RString getTxtShisetsuName() {
+        return txtShisetsuName;
     }
 
     public RString getTxtShisetsuShurui() {
@@ -172,6 +181,11 @@ public class ddlTennyuHoryuTokuteiJushoIchiran_Row extends DataRow {
     public void setTxtBanchi(RString txtBanchi) {
         this.setOriginalData("txtBanchi", txtBanchi);
         this.txtBanchi = txtBanchi;
+    }
+
+    public void setTxtShisetsuName(RString txtShisetsuName) {
+        this.setOriginalData("txtShisetsuName", txtShisetsuName);
+        this.txtShisetsuName = txtShisetsuName;
     }
 
     public void setTxtShisetsuShurui(RString txtShisetsuShurui) {

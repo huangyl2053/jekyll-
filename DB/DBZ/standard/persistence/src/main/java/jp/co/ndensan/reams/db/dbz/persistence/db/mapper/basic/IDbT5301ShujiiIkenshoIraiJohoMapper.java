@@ -30,7 +30,7 @@ public interface IDbT5301ShujiiIkenshoIraiJohoMapper {
      * @param 主治医意見書依頼情報 主治医意見書依頼情報
      * @return 更新件数
      */
-    int update主治医意見書依頼情報BY申請書管理番号(ShujiiUpdateMybatisParameter 主治医意見書依頼情報);
+    DbT5301ShujiiIkenshoIraiJohoEntity get主治医意見書依頼情報BY申請書管理番号(ShujiiUpdateMybatisParameter 主治医意見書依頼情報);
 
     /**
      * バッチプロセス用。

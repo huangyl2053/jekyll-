@@ -5,23 +5,22 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoates
  * 不正な動作の原因になります。
  */
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
-import java.util.HashSet;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * KaigoAtesakiJushoSettei のクラスファイル
  *
- * @reamsid_L　DBU-3990-030　wanghui
+ * @reamsid_L DBU-3990-030 wanghui
  */
 public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJushoSetteiDiv {
 
@@ -292,38 +291,56 @@ public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJu
 
     @Override
     @JsonIgnore
-    public void is帳票独自() {
-        createHandler().is帳票独自();
+    public boolean is帳票独自() {
+        return createHandler().is帳票独自();
     }
 
     @Override
     @JsonIgnore
-    public void is都道府県名表示() {
-        createHandler().is都道府県名表示();
+    public boolean is都道府県名表示() {
+        return createHandler().is都道府県名表示();
     }
 
     @Override
     @JsonIgnore
-    public void is郡名表示() {
-        createHandler().is郡名表示();
+    public boolean is郡名表示() {
+        return createHandler().is郡名表示();
     }
 
     @Override
     @JsonIgnore
-    public void is市町村名表示() {
-        createHandler().is市町村名表示();
+    public boolean is市町村名表示() {
+        return createHandler().is市町村名表示();
     }
 
     @Override
     @JsonIgnore
-    public void get町域編集方法() {
-        createHandler().get町域編集方法();
+    public RString get町域編集方法() {
+        return createHandler().get町域編集方法();
     }
 
     @Override
     @JsonIgnore
-    public void is方書表示() {
-        createHandler().is方書表示();
+    public boolean is方書表示() {
+        return createHandler().is方書表示();
+    }
+
+    @Override
+    @JsonIgnore
+    public void initialize_systemKanri(boolean 住所設定使用可,
+            boolean 宛先住所編集ボタン使用可,
+            RString 都道府県名称表示有無,
+            RString 郡名称表示有無,
+            RString 市町村名称表示有無,
+            RString 住所編集方法,
+            RString 方書表示有無) {
+        createHandler().initialize_systemKanri(住所設定使用可,
+                宛先住所編集ボタン使用可,
+                都道府県名称表示有無,
+                郡名称表示有無,
+                市町村名称表示有無,
+                住所編集方法,
+                方書表示有無);
     }
 
     @JsonIgnore

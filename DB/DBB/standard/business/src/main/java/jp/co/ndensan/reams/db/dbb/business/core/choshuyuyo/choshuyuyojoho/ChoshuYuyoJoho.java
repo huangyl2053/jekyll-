@@ -11,6 +11,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.chochuyuyo.ChoshuYuyo;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.chochuyuyo.ChoshuYuyoIdentifier;
+import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choteikyotsu.ChoteiKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choteikyotsu.ChoteiKyotsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsu.KibetsuIdentifier;
@@ -19,9 +20,11 @@ import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.ChoshuYuyoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.ChoshuYuyoJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.KibetsuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -1166,6 +1169,32 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     }
 
     /**
+     * 賦課の情報が保持する賦課の情報RelateEntityをリストで返します。
+     *
+     * @return 賦課の情報RelateEntity
+     */
+    public FukaJohoRelateEntity get賦課の情報RelateEntity() {
+        List<jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity> 介護期別RelateEntityList = new ArrayList<>();
+        List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
+        for (Kibetsu 介護期別 : 介護期別List) {
+            jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity 介護期別RelateEntity
+                    = new jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity();
+            介護期別RelateEntity.set介護期別Entity(介護期別.toEntity());
+            List<UrT0705ChoteiKyotsuEntity> 調定共通RelateEntityList = new ArrayList<>();
+            List<ChoteiKyotsu> 調定共通EntityList = 介護期別.getChoteiKyotsuList();
+            for (ChoteiKyotsu 調定共通 : 調定共通EntityList) {
+                調定共通RelateEntityList.add(調定共通.toEntity());
+            }
+            介護期別RelateEntity.set調定共通Entity(調定共通RelateEntityList);
+            介護期別RelateEntityList.add(介護期別RelateEntity);
+        }
+        FukaJohoRelateEntity 賦課の情報RelateEntity = new FukaJohoRelateEntity();
+        賦課の情報RelateEntity.set介護期別RelateEntity(介護期別RelateEntityList);
+        賦課の情報RelateEntity.set介護賦課Entity(entity);
+        return 賦課の情報RelateEntity;
+    }
+
+    /**
      * 期別金額を返します。
      *
      * @param 期 int
@@ -1264,7 +1293,8 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     /**
      * 徴収猶予の情報配下の要素を削除対象とします。<br/>
      * {@link ChoshuYuyoJohoRelateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 徴収猶予の情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link ChoshuYuyoJoho}を返します。
+     * 徴収猶予の情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
+     * 削除処理結果となる{@link ChoshuYuyoJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link ChoshuYuyoJoho}
      * @throws IllegalStateException ChoshuYuyoJohoRelateEntityのデータ状態が変更の場合
@@ -1288,7 +1318,8 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     }
 
     /**
-     * 徴収猶予の情報のみを変更対象とします。<br/> {@link ChoshuYuyoJohoRelateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 徴収猶予の情報のみを変更対象とします。<br/>
+     * {@link ChoshuYuyoJohoRelateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ChoshuYuyoJoho}
      */

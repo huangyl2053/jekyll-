@@ -160,7 +160,7 @@ public class NinteiChosaHoshuTankaManagerTest {
             DbT5031NinteiChosaHoshuTankaEntity entity = DbT5031NinteiChosaHoshuTankaEntityGenerator.createDbT5031NinteiChosaHoshuTankaEntity();
             entity.initializeMd5();
             NinteiChosaHoshuTanka 認定調査報酬単価 = new NinteiChosaHoshuTanka(entity);
-            認定調査報酬単価 = 認定調査報酬単価.createBuilderForEdit().set調査区分(new Code("3")).build();
+//            認定調査報酬単価 = 認定調査報酬単価.createBuilderForEdit().set調査区分(new Code("3")).build();
 
             assertThat(sut.save認定調査報酬単価(認定調査報酬単価), is(true));
         }
@@ -172,7 +172,7 @@ public class NinteiChosaHoshuTankaManagerTest {
             DbT5031NinteiChosaHoshuTankaEntity entity = DbT5031NinteiChosaHoshuTankaEntityGenerator.createDbT5031NinteiChosaHoshuTankaEntity();
             entity.initializeMd5();
             NinteiChosaHoshuTanka 認定調査報酬単価 = new NinteiChosaHoshuTanka(entity);
-            認定調査報酬単価 = 認定調査報酬単価.createBuilderForEdit().set調査区分(new Code("3")).build();
+//            認定調査報酬単価 = 認定調査報酬単価.createBuilderForEdit().set調査区分(new Code("3")).build();
 
             assertThat(sut.save認定調査報酬単価(認定調査報酬単価), is(false));
         }

@@ -10,11 +10,12 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.KozaSearchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 算定通知書一時テーブルに登録する用パラメータクラスです。
+ * 本算定通知書一時テーブルに登録する用パラメータクラスです。
  *
  * @reamsid_L DBB-0780-060 xicongwang
  */
@@ -28,6 +29,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoParameter extends KozaSearchParameter
     private final FlexibleYear 賦課年度;
     private final RString 処理日;
     private final RString 科目コード;
+    private final YMDHMS 最新調定日時;
 
     /**
      * コンストラクタです。
@@ -38,6 +40,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoParameter extends KozaSearchParameter
      * @param searchkey IKozaSearchKey
      * @param list List<KamokuCode>
      * @param 科目コード RString
+     * @param 最新調定日時 YMDHMS
      */
     public HonsanteiTsuchishoIkkatsuHakkoParameter(
             FlexibleYear 調定年度,
@@ -45,12 +48,14 @@ public class HonsanteiTsuchishoIkkatsuHakkoParameter extends KozaSearchParameter
             RString 処理日,
             IKozaSearchKey searchkey,
             List<KamokuCode> list,
-            RString 科目コード) {
+            RString 科目コード,
+            YMDHMS 最新調定日時) {
         super(searchkey, list);
         this.科目コード = 科目コード;
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;
         this.処理日 = 処理日;
+        this.最新調定日時 = 最新調定日時;
     }
 
     /**
@@ -62,6 +67,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoParameter extends KozaSearchParameter
      * @param searchkey IKozaSearchKey
      * @param list List<KamokuCode>
      * @param 科目コード RString
+     * @param 最新調定日時 YMDHMS
      * @return パラメータ
      */
     public static HonsanteiTsuchishoIkkatsuHakkoParameter createSelectByKeyParam(
@@ -70,7 +76,8 @@ public class HonsanteiTsuchishoIkkatsuHakkoParameter extends KozaSearchParameter
             RString 処理日,
             IKozaSearchKey searchkey,
             List<KamokuCode> list,
-            RString 科目コード) {
-        return new HonsanteiTsuchishoIkkatsuHakkoParameter(調定年度, 賦課年度, 処理日, searchkey, list, 科目コード);
+            RString 科目コード,
+            YMDHMS 最新調定日時) {
+        return new HonsanteiTsuchishoIkkatsuHakkoParameter(調定年度, 賦課年度, 処理日, searchkey, list, 科目コード, 最新調定日時);
     }
 }

@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode
  * 給付実績ケアマネジメント費テーブルのエンティティクラスです。
  */
 public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase<DbT3031KyufuJissekiCareManagementHiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3031KyufuJissekiCareManagementHi");
 
@@ -771,6 +771,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
     }
 
 // </editor-fold>
+
 
 
 }

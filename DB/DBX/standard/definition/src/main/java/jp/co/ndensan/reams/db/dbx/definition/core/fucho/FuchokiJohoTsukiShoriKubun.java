@@ -148,4 +148,14 @@ public enum FuchokiJohoTsukiShoriKubun implements ITsukiShorkiKubun {
     public RString getName() {
         return fullName;
     }
+
+    /**
+     * 普徴期情報月処理区分のコードを返します。
+     *
+     * @return 普徴期情報月処理区分のコード
+     */
+    @Override
+    public RString get区分() {
+        return code;
+    }
 }

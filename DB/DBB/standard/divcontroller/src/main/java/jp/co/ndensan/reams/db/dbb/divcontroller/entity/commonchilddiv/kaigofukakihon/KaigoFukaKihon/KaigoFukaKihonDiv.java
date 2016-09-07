@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
@@ -229,6 +230,15 @@ public class KaigoFukaKihonDiv extends Panel implements IKaigoFukaKihonDiv {
             return HihokenshaNo.EMPTY;
         }
         return new HihokenshaNo(被保番号RString);
+    }
+
+    @Override
+    public TsuchishoNo get通知書番号() {
+        RString 通知書番号RString = this.getTxtTsuchishoNo().getValue();
+        if (null == 通知書番号RString || 通知書番号RString.isEmpty()) {
+            return TsuchishoNo.EMPTY;
+        }
+        return new TsuchishoNo(通知書番号RString);
     }
 
     @JsonIgnore

@@ -31,7 +31,12 @@
          "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shikyu_FushikyuKetteiYMD" as "dbT3094JutakuKaishuRiyushoTesuryoKettei_shikyu_FushikyuKetteiYMD",
          "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shikyu_FushikyuKubun" as "dbT3094JutakuKaishuRiyushoTesuryoKettei_shikyu_FushikyuKubun",
          "DbT3094JutakuKaishuRiyushoTesuryoKettei"."fushikyuRiyu" as "dbT3094JutakuKaishuRiyushoTesuryoKettei_fushikyuRiyu",
-         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."tesuryoShiharaiYoteiYMD" as "dbT3094JutakuKaishuRiyushoTesuryoKettei_tesuryoShiharaiYoteiYMD"
+         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."tesuryoShiharaiYoteiYMD" as "dbT3094JutakuKaishuRiyushoTesuryoKettei_tesuryoShiharaiYoteiYMD",
+         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shukeiNo" as "dbT3094JutakuKaishuRiyushoTesuryoKettei_shukeiNo",
+         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."ketteiTsuchiSakuseiYMD" as "dbT3094JutakuKaishuRiyushoTesuryoKettei_ketteiTsuchiSakuseiYMD",
+         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."furikomiTsuchiSakuseiYMD" as "dbT3094JutakuKaishuRiyushoTesuryoKettei_furikomiTsuchiSakuseiYMD",
+         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."uketoriYM" as "dbT3094JutakuKaishuRiyushoTesuryoKettei_uketoriYM",
+         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."kozaID" as "dbT3094JutakuKaishuRiyushoTesuryoKettei_kozaID"
     </sql>
 
 
@@ -39,7 +44,7 @@
     <resultMap id="ResultMap_DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity" autoMapping="true">
         <id property="riyushoSakuseiJigyoshaNo" column="dbT3094JutakuKaishuRiyushoTesuryoKettei_riyushoSakuseiJigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <id property="ketteiYMD" column="dbT3094JutakuKaishuRiyushoTesuryoKettei_ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <id property="rirekiNo" column="dbT3094JutakuKaishuRiyushoTesuryoKettei_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <id property="rirekiNo" column="dbT3094JutakuKaishuRiyushoTesuryoKettei_rirekiNo" />
         <result property="insertDantaiCd" column="dbT3094JutakuKaishuRiyushoTesuryoKettei_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT3094JutakuKaishuRiyushoTesuryoKettei_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT3094JutakuKaishuRiyushoTesuryoKettei_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -52,6 +57,11 @@
         <result property="shikyu_FushikyuKubun" column="dbT3094JutakuKaishuRiyushoTesuryoKettei_shikyu_FushikyuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="fushikyuRiyu" column="dbT3094JutakuKaishuRiyushoTesuryoKettei_fushikyuRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tesuryoShiharaiYoteiYMD" column="dbT3094JutakuKaishuRiyushoTesuryoKettei_tesuryoShiharaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shukeiNo" column="dbT3094JutakuKaishuRiyushoTesuryoKettei_shukeiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ketteiTsuchiSakuseiYMD" column="dbT3094JutakuKaishuRiyushoTesuryoKettei_ketteiTsuchiSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="furikomiTsuchiSakuseiYMD" column="dbT3094JutakuKaishuRiyushoTesuryoKettei_furikomiTsuchiSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="uketoriYM" column="dbT3094JutakuKaishuRiyushoTesuryoKettei_uketoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="kozaID" column="dbT3094JutakuKaishuRiyushoTesuryoKettei_kozaID" />
     </resultMap>
 
 </mapper>

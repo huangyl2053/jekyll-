@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -197,7 +196,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiDacTest extends DbcTestDacBa
         public static void insert(
                 JigyoshaNo 介護住宅改修理由書作成事業者番号,
                 FlexibleDate 決定年月日,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity entity = DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.createDbT3094JutakuKaishuRiyushoTesuryoKetteiEntity();
             entity.setRiyushoSakuseiJigyoshaNo(介護住宅改修理由書作成事業者番号);
             entity.setKetteiYMD(決定年月日);

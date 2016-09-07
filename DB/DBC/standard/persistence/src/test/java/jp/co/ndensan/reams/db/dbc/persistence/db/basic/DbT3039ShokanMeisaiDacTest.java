@@ -5,9 +5,15 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3039ShokanMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3039ShokanMeisaiEntityGenerator;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3039ShokanMeisaiEntityGenerator.*;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3039ShokanMeisaiEntityGenerator.DEFAULT_サービス提供年月;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3039ShokanMeisaiEntityGenerator.DEFAULT_事業者番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3039ShokanMeisaiEntityGenerator.DEFAULT_整理番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3039ShokanMeisaiEntityGenerator.DEFAULT_明細番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3039ShokanMeisaiEntityGenerator.DEFAULT_様式番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3039ShokanMeisaiEntityGenerator.DEFAULT_被保険者番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3039ShokanMeisaiEntityGenerator.DEFAULT_連番;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3039ShokanMeisaiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
@@ -18,11 +24,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 

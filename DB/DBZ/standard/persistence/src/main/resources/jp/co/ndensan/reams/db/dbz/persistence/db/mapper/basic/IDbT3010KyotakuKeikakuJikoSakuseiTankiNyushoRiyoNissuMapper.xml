@@ -31,7 +31,10 @@
          "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."lastUpdateReamsLoginId" as "dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_lastUpdateReamsLoginId",
          "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."zenkaiRiyoNissu" as "dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_zenkaiRiyoNissu",
          "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."konkaiKeikakuRiyoNissu" as "dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_konkaiKeikakuRiyoNissu",
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."zanteiKubun" as "dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_zanteiKubun"
+         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."zanteiKubun" as "dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_zanteiKubun",
+         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."koshinKubun" as "dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_koshinKubun",
+         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."koshinYMD" as "dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_koshinYMD",
+         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."sofuYM" as "dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_sofuYM"
     </sql>
 
 
@@ -52,6 +55,9 @@
         <result property="zenkaiRiyoNissu" column="dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_zenkaiRiyoNissu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="konkaiKeikakuRiyoNissu" column="dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_konkaiKeikakuRiyoNissu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="zanteiKubun" column="dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_zanteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koshinKubun" column="dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_koshinKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koshinYMD" column="dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_koshinYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="sofuYM" column="dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_sofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
     </resultMap>
 
 </mapper>

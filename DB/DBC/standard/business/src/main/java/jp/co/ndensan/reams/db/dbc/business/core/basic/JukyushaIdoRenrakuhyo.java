@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 受給者異動送付を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 quxiaodong
  */
 public class JukyushaIdoRenrakuhyo
         extends ModelBase<JukyushaIdoRenrakuhyoIdentifier, DbT3001JukyushaIdoRenrakuhyoEntity, JukyushaIdoRenrakuhyo>
@@ -821,6 +823,33 @@ public class JukyushaIdoRenrakuhyo
     }
 
     /**
+     * 論理削除フラグを返します。
+     *
+     * @return 論理削除フラグ
+     */
+    public boolean is論理削除フラグ() {
+        return entity.getLogicalDeletedFlag();
+    }
+
+    /**
+     * 訂正年月日を返します。
+     *
+     * @return 訂正年月日
+     */
+    public FlexibleDate get訂正年月日() {
+        return entity.getTeiseiYMD();
+    }
+
+    /**
+     * 訂正区分コードを返します。
+     *
+     * @return 訂正区分コード
+     */
+    public RString get訂正区分コード() {
+        return entity.getTeiseiKubunCode();
+    }
+
+    /**
      * {@link DbT3001JukyushaIdoRenrakuhyoEntity}のクローンを返します。
      *
      * @return {@link DbT3001JukyushaIdoRenrakuhyoEntity}のクローン
@@ -859,6 +888,18 @@ public class JukyushaIdoRenrakuhyo
     }
 
     /**
+     * add KogakuShikyuHanteiKekka
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public JukyushaIdoRenrakuhyo added() {
+        DbT3001JukyushaIdoRenrakuhyoEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        //TODO メッセージの検討
+        return new JukyushaIdoRenrakuhyo(addedEntity, id);
+    }
+
+    /**
      * {@link JukyushaIdoRenrakuhyo}のシリアライズ形式を提供します。
      *
      * @return {@link JukyushaIdoRenrakuhyo}のシリアライズ形式
@@ -870,7 +911,7 @@ public class JukyushaIdoRenrakuhyo
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

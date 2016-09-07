@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 高額サービス費給付お知らせ通知書作成 -->
+<!-- @reamsid_L DBC-4770-030 zhujun -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.idoriyoshafutanwariaihentei.IIdoRiyoshaFutanwariaiHanteiMapper">
+    <select  resultOrdered="true" id="selectMaxRenban" 
+             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity" 
+             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.idoriyoshafutanwariaihentei.IdoRiyoshaFutanwariaiHanteiMybatisParameter" 
+             fetchSize="500">
+        SELECT 
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
+        FROM (
+        SELECT
+        rgdb."DbT7022ShoriDateKanri".*,
+        row_number() over (PARTITION BY "shoriName", "nendo" ORDER BY "nendoNaiRenban" DESC ) AS rowNo 
+        FROM
+        rgdb."DbT7022ShoriDateKanri"
+        WHERE
+        rgdb."DbT7022ShoriDateKanri"."isDeleted" = FALSE
+        and rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBC'
+        AND rgdb."DbT7022ShoriDateKanri"."shoriName" = #{ 処理名 }
+        AND rgdb."DbT7022ShoriDateKanri"."nendo" = #{ 対象年度 }
+        ) as "DbT7022ShoriDateKanri" 
+        WHERE "DbT7022ShoriDateKanri".rowNo = 1
+    </select>
+</mapper>

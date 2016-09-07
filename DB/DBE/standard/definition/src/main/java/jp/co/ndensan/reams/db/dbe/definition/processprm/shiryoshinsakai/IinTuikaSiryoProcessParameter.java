@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai;
 
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTuutishoMyBatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuTuutishoMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 委員用追加資料鑑情報のProcessParameterです。
@@ -23,7 +23,6 @@ public class IinTuikaSiryoProcessParameter implements IBatchProcessParameter {
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuSutairu;
     private RString printHou;
-    private Decimal chohyoIinHusu;
 
     /**
      * コンストラクタです。
@@ -31,17 +30,14 @@ public class IinTuikaSiryoProcessParameter implements IBatchProcessParameter {
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      * @param shuturyokuSutairu 出力スタイル
      * @param printHou 印刷方法
-     * @param chohyoIinHusu 審査会委員用部数
      */
     public IinTuikaSiryoProcessParameter(
             RString shinsakaiKaisaiNo,
             RString shuturyokuSutairu,
-            RString printHou,
-            Decimal chohyoIinHusu) {
+            RString printHou) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuSutairu = shuturyokuSutairu;
         this.printHou = printHou;
-        this.chohyoIinHusu = chohyoIinHusu;
     }
 
     /**
@@ -51,5 +47,14 @@ public class IinTuikaSiryoProcessParameter implements IBatchProcessParameter {
      */
     public IinTuutishoMyBatisParameter toIinTuutishoMyBatisParameter() {
         return new IinTuutishoMyBatisParameter(shinsakaiKaisaiNo);
+    }
+
+    /**
+     * 事務局追加資料鑑情報のMyBatisParameterに転換します。
+     *
+     * @return IinTuutishoMyBatisParameter
+     */
+    public JimuTuutishoMyBatisParameter toJimuTuutishoMyBatisParameter() {
+        return new JimuTuutishoMyBatisParameter(shinsakaiKaisaiNo);
     }
 }

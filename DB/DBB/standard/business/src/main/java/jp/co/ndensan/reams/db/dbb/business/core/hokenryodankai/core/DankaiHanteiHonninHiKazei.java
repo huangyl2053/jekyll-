@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core;
 
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
-import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 
 /**
  * 段階判定_本人非課税というクラスです。

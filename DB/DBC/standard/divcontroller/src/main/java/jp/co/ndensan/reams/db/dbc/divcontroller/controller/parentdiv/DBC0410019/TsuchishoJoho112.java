@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410019;
 
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorenkyoutsu.KokuhorenKyoutsuBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410019.TsuchishoJoho112Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
@@ -13,6 +15,8 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoBunruiKanriManager;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -44,9 +48,21 @@ public class TsuchishoJoho112 {
      * @param div TsuchishoJoho112Div
      * @return ResponseData
      */
-    public ResponseData<TsuchishoJoho112Div> onClick_btnExcute(TsuchishoJoho112Div div) {
-        // TODO QA471 パラメータ作成ビジネスを呼び出して、バッチを起動する
-        return ResponseData.of(div).respond();
+    public ResponseData<KokuhorenKyoutsuBatchParameter> onClick_btnExcute(TsuchishoJoho112Div div) {
+        KokuhorenKyoutsuBatchParameter parameter = new KokuhorenKyoutsuBatchParameter();
+        RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
+        Long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
+        RString 再処理区分 = div.getCcdKokurenJohoTorikomi().get再処理区分();
+        parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
+        if (出力順ID != null) {
+            parameter.setShutsuryokujunId(new RString(出力順ID.toString()));
+        }
+        if (SaiShoriKubun.再処理.get名称().equals(再処理区分)) {
+            parameter.setSaishoriKubun(SaiShoriKubun.再処理);
+        } else if (SaiShoriKubun.空白.get名称().equals(再処理区分)) {
+            parameter.setSaishoriKubun(SaiShoriKubun.空白);
+        }
+        return ResponseData.of(parameter).respond();
     }
 
 }

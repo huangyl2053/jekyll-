@@ -5,18 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0540001;
 
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuhoho.ChoshuHohoResult;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.DBB0540001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.MainPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0540001.MainPanelHandler;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.ChosyuHohoHenko;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -42,7 +42,7 @@ public class MainPanel {
      */
     public ResponseData<MainPanelDiv> onLoad(MainPanelDiv div) {
 
-        FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
+        FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
         ShikibetsuCode 識別コード = 賦課対象者.get識別コード();
         HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
         FlexibleYear 賦課年度 = 賦課対象者.get賦課年度();
@@ -79,14 +79,16 @@ public class MainPanel {
      * @return ResponseData
      */
     public ResponseData<MainPanelDiv> onClick_btnUpdate(MainPanelDiv div) {
-        FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
+        FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
         MainPanelHandler handler = new MainPanelHandler(div);
         FlexibleYear 賦課年度 = 賦課対象者.get賦課年度();
         HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
         try {
             ChoshuHoho 徴収方法データ = ViewStateHolder.
                     get(ViewStateKeys.徴収方法データ, ChoshuHoho.class);
-            handler.saveボタンを押下(賦課年度, 被保険者番号, 徴収方法データ);
+            YMDHMS 停止日時 = ViewStateHolder.get(ViewStateKeys.特別徴収停止日時, YMDHMS.class);
+            RString 停止事由コード = ViewStateHolder.get(ViewStateKeys.特別徴収停止事由コード, RString.class);
+            handler.saveボタンを押下(賦課年度, 被保険者番号, 徴収方法データ, 停止日時, 停止事由コード);
             div.getKanryoMessage().getCcdKaigoKanryoMessage().setMessage(処理名,
                     賦課対象者.get識別コード().value(),
                     div.getAtenaInfo().getKiagoAtenaInfo().get氏名漢字(), true);

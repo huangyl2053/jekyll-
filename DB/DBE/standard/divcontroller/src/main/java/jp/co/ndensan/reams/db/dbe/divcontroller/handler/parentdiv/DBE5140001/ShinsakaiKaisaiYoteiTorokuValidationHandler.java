@@ -15,8 +15,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -36,9 +38,12 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
+    private static final int INDEX_6 = 6;
     private static final RString 未開催 = new RString("1");
     private static final RString 分割 = new RString("-");
     private static final RString FUNN = new RString(":");
+    private static final RString NENNDO = new RString("年");
+    private static final RString GETSU = new RString("月");
     private final ShinsakaiKaisaiYoteiTorokuDiv div;
 
     /**
@@ -205,29 +210,60 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 週コピーから日チェック() {
-        return new ValidationMessageControlPairs();
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        RStringBuilder date = new RStringBuilder();
+        if (div.getTxtCopyFrom().getValue() == null || !FlexibleDate.canConvert(date.append(getLblMonth(div.getLblMonth().getText()))
+                .append(div.getTxtCopyFrom().getValue().padZeroToLeft(INDEX_2)).toRString())
+                || !new FlexibleDate(date.toRString()).isValid()) {
+            validationMessages.add(new ValidationMessageControlPair(
+                    new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(UrErrorMessages.入力値が不正_追加メッセージあり, "週コピーから日"),
+                    div.getTxtCopyFrom()));
+        }
+        return validationMessages;
     }
 
     /**
      *
      * 週コピー開始日をチェックします。
      *
-     * @param validationMessages validationMessages
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 週コピー開始日チェック(ValidationMessageControlPairs validationMessages) {
-        return new ValidationMessageControlPairs();
+    public ValidationMessageControlPairs 週コピー開始日チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        RStringBuilder date = new RStringBuilder();
+        if (div.getTxtCopyTo().getValue() == null  || !FlexibleDate.canConvert(date.append(getLblMonth(div.getLblMonth().getText()))
+                        .append(div.getTxtCopyTo().getValue().padZeroToLeft(INDEX_2)).toRString()) || !new FlexibleDate(date.toRString()).isValid()) {
+            validationMessages.add(new ValidationMessageControlPair(
+                    new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(UrErrorMessages.入力値が不正_追加メッセージあり, "週コピー開始日"),
+                    div.getTxtCopyTo()));
+            return validationMessages;
+        }
+        date = new RStringBuilder();
+        FlexibleDate 週コピーから日 = new FlexibleDate(date.append(
+                getLblMonth(div.getLblMonth().getText())).append(div.getTxtCopyFrom().getValue().padZeroToLeft(INDEX_2)).toRString());
+        date = new RStringBuilder();
+        FlexibleDate 週コピー開始日 = new FlexibleDate(date.append(
+                getLblMonth(div.getLblMonth().getText())).append(div.getTxtCopyTo().getValue().padZeroToLeft(INDEX_2)).toRString());
+        if (週コピー開始日.isBeforeOrEquals(週コピーから日.plusDay(INDEX_6))) {
+            validationMessages.add(new ValidationMessageControlPair(
+                    new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(UrErrorMessages.入力値が不正_追加メッセージあり, "週コピー開始日"),
+                    div.getTxtCopyTo()));
+        }
+        return validationMessages;
     }
 
     /**
      *
      * 週コピー開始日以降予定をチェックします。
      *
-     * @param validationMessages validationMessages
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 週コピー開始日以降予定チェック(ValidationMessageControlPairs validationMessages) {
-        return new ValidationMessageControlPairs();
+    public ValidationMessageControlPairs 週コピー開始日以降予定チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(new ValidationMessageControlPair(
+                new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(DbeErrorMessages.週コピー不可),
+                div.getTxtCopyFrom(), div.getTxtCopyTo()));
+        return validationMessages;
     }
 
     /**
@@ -237,6 +273,12 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 合議体未選択チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (div.getDgShinsakaiKaisaiYoteiIchiran().getSelectedItems().isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(
+                    new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(
+                            UrErrorMessages.選択されていない, "開催合議体"), div.getDgKaisaiYoteiNyuryokuran()));
+        }
         return new ValidationMessageControlPairs();
     }
 
@@ -355,6 +397,10 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
                         div.getDgKaisaiYoteiNyuryokuran()));
             }
         }
+    }
+
+    private RString getLblMonth(RString formatMonth) {
+        return formatMonth.replace(NENNDO, RString.EMPTY).replace(GETSU, RString.EMPTY);
     }
 
     private static final class ValidationMessage implements IValidationMessage {

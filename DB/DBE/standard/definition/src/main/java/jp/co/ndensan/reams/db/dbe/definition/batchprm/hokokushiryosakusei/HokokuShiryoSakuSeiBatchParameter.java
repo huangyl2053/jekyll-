@@ -405,6 +405,7 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
     public CsvKenHokokuShiryoSakuseiProcessParameter toCsvKenHokokuShiryoSakuseiProcessParameter() {
 
         return new CsvKenHokokuShiryoSakuseiProcessParameter(
+                shutsuryokuFairu,
                 RString.isNullOrEmpty(hokensyaNo),
                 hokensyaNo,
                 hiHokensyaKubun,

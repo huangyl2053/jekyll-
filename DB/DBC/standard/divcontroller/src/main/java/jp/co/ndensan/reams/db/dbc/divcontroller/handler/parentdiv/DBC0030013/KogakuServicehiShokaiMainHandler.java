@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030013.dgJu
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030013.dgJudgementResultR_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0030011.KogakuServiceData;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakushokaihanteikekka.KogakuShokaiHanteiKekkaFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -62,7 +64,10 @@ public class KogakuServicehiShokaiMainHandler {
      * @param 引き継ぎ情報 KogakuServiceData
      */
     public void load共有子Div(KogakuServiceData 引き継ぎ情報) {
-        ShikibetsuCode 識別コード = 引き継ぎ情報.get識別コード();
+        // TODO 上の画面の識別コードの取得は問題があります。Redmine#89690
+//        ShikibetsuCode 識別コード = 引き継ぎ情報.get識別コード();
+        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
+
         HihokenshaNo 被保険者番号 = 引き継ぎ情報.get被保険者番号();
         FlexibleYearMonth サービス提供年月 = 引き継ぎ情報.getサービス提供年月();
         div.getSetaiInfo().getCcdKaigoAtenaInfo().initialize(識別コード);
@@ -100,6 +105,7 @@ public class KogakuServicehiShokaiMainHandler {
         List<SetaiinShotoku> 世帯員所得Selected = div.getSetaiInfoPanel().getCcdSetaiShotokuIchiran().get世帯員所得Selected();
         操作可否確認(世帯員所得Selected);
         RString メニューID = ResponseHolder.getMenuID();
+        clear並べて表示エリア();
         ShowResultTwoDiv 並べて表示エリア = div.getShowResultTwo();
         FlexibleYearMonth サービス提供年月 = 引き継ぎ情報.getサービス提供年月();
         並べて表示エリア.getTxtTeikyoYMShowTwo().setValue(サービス提供年月 == null ? null : new RDate(サービス提供年月.toString()));
@@ -112,39 +118,24 @@ public class KogakuServicehiShokaiMainHandler {
         KogakuShokaiHanteiKekkaResult 高額判定結果_左側 = finder.get支給判定結果(parameter);
 
         HanteiKekkaLDiv 並べて表示エリア_左側 = 並べて表示エリア.getSetaiinL().getHanteiKekkaL();
-        if (高額判定結果_左側 == null) {
-            List<dgJudgementResultL_Row> dataSources = new ArrayList<>();
-            並べて表示エリア_左側.getDgJudgementResultL().setDataSource(dataSources);
-            並べて表示エリア_左側.getRadShinsaMethodL().setSelectedIndex(INDEX_ゼロ);
-            並べて表示エリア_左側.getRadShikyuKubunL().setSelectedIndex(INDEX_ゼロ);
-            並べて表示エリア_左側.getRadKogakuAutoShokanL().setSelectedKey(JidoShokanTaishoKubun.あり.getコード());
-            return;
-        }
-        並べて表示エリア.getTxtSetaiShuyakuNo().setValue(高額判定結果_左側.get世帯集約番号());
         並べて表示エリア_左側.getHanteiKekkaDetailL().getTxtHihoNoL().setValue(世帯員所得Selected.get(0).get被保険者番号().getColumnValue());
+        // TODO QA911 氏名はEMPTYです。
         並べて表示エリア_左側.getHanteiKekkaDetailL().getTxtHihoNameR().setValue(世帯員所得Selected.get(0).get氏名());
-        set並べて表示エリア_左側(高額判定結果_左側, 並べて表示エリア_左側);
+        if (高額判定結果_左側 != null) {
+            並べて表示エリア.getTxtSetaiShuyakuNo().setValue(高額判定結果_左側.get世帯集約番号());
+            set並べて表示エリア_左側(高額判定結果_左側, 並べて表示エリア_左側);
+        }
+
         HanteiKekkaRDiv 並べて表示エリア_右側 = 並べて表示エリア.getSetaiinR().getHanteiKekkaR();
         if (INDEX_イチ < 世帯員所得Selected.size()) {
             parameter.set被保険者番号(世帯員所得Selected.get(1).get被保険者番号());
             KogakuShokaiHanteiKekkaResult 高額判定結果_右側 = finder.get支給判定結果(parameter);
-            if (高額判定結果_右側 == null) {
-                List<dgJudgementResultR_Row> dataSources = new ArrayList<>();
-                並べて表示エリア_右側.getDgJudgementResultR().setDataSource(dataSources);
-                並べて表示エリア_右側.getRadShinsaMethodR().setSelectedIndex(INDEX_ゼロ);
-                並べて表示エリア_右側.getRadShikyuKubunR().setSelectedIndex(INDEX_ゼロ);
-                並べて表示エリア_右側.getRadKogakuAutoShokanR().setSelectedKey(JidoShokanTaishoKubun.あり.getコード());
-                return;
-            }
             並べて表示エリア_右側.getHanteiKekkaDetailR().getTxtHihoNoR().setValue(世帯員所得Selected.get(1).get被保険者番号().getColumnValue());
+            // TODO QA911 氏名はEMPTYです。
             並べて表示エリア_右側.getHanteiKekkaDetailR().getTxtHihoNameL().setValue(世帯員所得Selected.get(1).get氏名());
-            set並べて表示エリア_右側(高額判定結果_右側, 並べて表示エリア_右側);
-        } else {
-            List<dgJudgementResultR_Row> dataSources = new ArrayList<>();
-            並べて表示エリア_右側.getDgJudgementResultR().setDataSource(dataSources);
-            並べて表示エリア_右側.getRadShinsaMethodR().setSelectedIndex(INDEX_ゼロ);
-            並べて表示エリア_右側.getRadShikyuKubunR().setSelectedIndex(INDEX_ゼロ);
-            並べて表示エリア_右側.getRadKogakuAutoShokanR().setSelectedKey(JidoShokanTaishoKubun.あり.getコード());
+            if (高額判定結果_右側 != null) {
+                set並べて表示エリア_右側(高額判定結果_右側, 並べて表示エリア_右側);
+            }
         }
     }
 
@@ -153,8 +144,11 @@ public class KogakuServicehiShokaiMainHandler {
         List<ShikyuMeisaiResult> 支給明細list = 高額判定結果_左側.get支給明細list();
         for (ShikyuMeisaiResult 支給明細entity : 支給明細list) {
             dgJudgementResultL_Row row = new dgJudgementResultL_Row();
-            row.setTxtJigyosha(支給明細entity.get事業者番号().getColumnValue());
-            row.setTxtServiceShurui(支給明細entity.getサービス種類コード().getColumnValue());
+            row.setTxtJigyosha(支給明細entity.get事業者名称().getColumnValue());
+            ServiceShuruiCode サービス種類コード = 支給明細entity.getサービス種類コード();
+            if (サービス種類コード != null && !サービス種類コード.isEmpty()) {
+                row.setTxtServiceShurui(ServiceCategoryShurui.toValue(サービス種類コード.getColumnValue()).get略称());
+            }
             row.getTxtServiceHiyoGokeigaku().setValue(支給明細entity.getサービス費用合計());
             row.getTxtRiyoshaFutangaku().setValue(支給明細entity.get利用者負担額());
             row.getTxtSanteiKijungaku().setValue(支給明細entity.get算定基準額());
@@ -189,13 +183,50 @@ public class KogakuServicehiShokaiMainHandler {
         }
     }
 
+    private void clear並べて表示エリア() {
+        ShowResultTwoDiv 並べて表示エリア = div.getShowResultTwo();
+        並べて表示エリア.getTxtTeikyoYMShowTwo().clearValue();
+        並べて表示エリア.getTxtSetaiShuyakuNo().clearValue();
+        HanteiKekkaLDiv 並べて表示エリア_左側 = 並べて表示エリア.getSetaiinL().getHanteiKekkaL();
+        HanteiKekkaRDiv 並べて表示エリア_右側 = 並べて表示エリア.getSetaiinR().getHanteiKekkaR();
+        List<dgJudgementResultL_Row> dataSourcesL = new ArrayList<>();
+        並べて表示エリア_左側.getDgJudgementResultL().setDataSource(dataSourcesL);
+        並べて表示エリア_左側.getRadShinsaMethodL().setSelectedIndex(INDEX_ゼロ);
+        並べて表示エリア_左側.getRadShikyuKubunL().setSelectedIndex(INDEX_ゼロ);
+        並べて表示エリア_左側.getRadKogakuAutoShokanL().setSelectedKey(JidoShokanTaishoKubun.あり.getコード());
+        並べて表示エリア_左側.getHanteiKekkaDetailL().getTxtHihoNoL().clearValue();
+        並べて表示エリア_左側.getHanteiKekkaDetailL().getTxtHihoNameR().clearValue();
+        並べて表示エリア_左側.getTxtBikoL().clearValue();
+        並べて表示エリア_左側.getTxtUketsukeDateL().clearValue();
+        並べて表示エリア_左側.getTxtKetteiDateL().clearValue();
+        並べて表示エリア_左側.getTxtShiharaiAmountL().clearValue();
+        並べて表示エリア_左側.getTxtShikyuAmountL().clearValue();
+        並べて表示エリア_左側.getTxtFushikyuRiyuL().clearValue();
+        List<dgJudgementResultR_Row> dataSources = new ArrayList<>();
+        並べて表示エリア_右側.getDgJudgementResultR().setDataSource(dataSources);
+        並べて表示エリア_右側.getRadShinsaMethodR().setSelectedIndex(INDEX_ゼロ);
+        並べて表示エリア_右側.getRadShikyuKubunR().setSelectedIndex(INDEX_ゼロ);
+        並べて表示エリア_右側.getRadKogakuAutoShokanR().setSelectedKey(JidoShokanTaishoKubun.あり.getコード());
+        並べて表示エリア_右側.getHanteiKekkaDetailR().getTxtHihoNoR().clearValue();
+        並べて表示エリア_右側.getHanteiKekkaDetailR().getTxtHihoNameL().clearValue();
+        並べて表示エリア_右側.getTxtBikoR().clearValue();
+        並べて表示エリア_右側.getTxtUketsukeDateR().clearValue();
+        並べて表示エリア_右側.getTxtKetteiDateR().clearValue();
+        並べて表示エリア_右側.getTxtShiharaiAmountR().clearValue();
+        並べて表示エリア_右側.getTxtShikyuAmountR().clearValue();
+        並べて表示エリア_右側.getTxtFushikyuRiyuR().clearValue();
+    }
+
     private void set並べて表示エリア_右側(KogakuShokaiHanteiKekkaResult 高額判定結果_右側, HanteiKekkaRDiv 並べて表示エリア_右側) {
         List<dgJudgementResultR_Row> dataSources = new ArrayList<>();
         List<ShikyuMeisaiResult> 支給明細list = 高額判定結果_右側.get支給明細list();
         for (ShikyuMeisaiResult 支給明細entity : 支給明細list) {
             dgJudgementResultR_Row row = new dgJudgementResultR_Row();
-            row.setTxtJigyosha(支給明細entity.get事業者番号().getColumnValue());
-            row.setTxtServiceShurui(支給明細entity.getサービス種類コード().getColumnValue());
+            row.setTxtJigyosha(支給明細entity.get事業者名称().getColumnValue());
+            ServiceShuruiCode サービス種類コード = 支給明細entity.getサービス種類コード();
+            if (サービス種類コード != null && !サービス種類コード.isEmpty()) {
+                row.setTxtServiceShurui(ServiceCategoryShurui.toValue(サービス種類コード.getColumnValue()).get略称());
+            }
             row.getTxtServiceHiyoGokeigaku().setValue(支給明細entity.getサービス費用合計());
             row.getTxtRiyoshaFutangaku().setValue(支給明細entity.get利用者負担額());
             row.getTxtSanteiKijungaku().setValue(支給明細entity.get算定基準額());

@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
-import jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvsmulti.NonyuTsuchishoCVSMultiRenchoReport;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
@@ -18,6 +17,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.HenshuHaniKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoRenchoSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -25,10 +25,11 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBB-9110-120 huangh
  */
-public class NonyuTsuchishoCVSKakukoRenchoReport extends INonyuTsuchisho<NonyuTsuchishoCVSKakukoRenchoSource> {
+public class NonyuTsuchishoCVSKakukoRenchoReport extends NonyuTsuchisho<NonyuTsuchishoCVSKakukoRenchoSource> {
 
     private final HonSanteiNonyuTsuchiShoJoho item;
     private final NinshoshaSource ninshoshaSource;
+    private final List<NonyuTsuchisho<NonyuTsuchishoCVSKakukoRenchoSource>> nonyuTsuchishoList = new ArrayList<>();
 
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
@@ -56,44 +57,23 @@ public class NonyuTsuchishoCVSKakukoRenchoReport extends INonyuTsuchisho<NonyuTs
     @Override
     public void writeBy(ReportSourceWriter<NonyuTsuchishoCVSKakukoRenchoSource> reportSourceWriter) {
 
-        boolean 作成フラグ = true;
-
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : item.get納入通知書期情報リスト()) {
-            if (Integer.valueOf(納入通知書期情報.get納付書納付額欄().toString()) > 0) {
-                作成フラグ = false;
+            if (納入通知書期情報.get納付額().compareTo(Decimal.ZERO) > 0) {
+                this.writeLine(reportSourceWriter);
                 break;
             }
-        }
-        if (!作成フラグ) {
-            this.writeLine(reportSourceWriter);
         }
     }
 
     private void writeLine(ReportSourceWriter<NonyuTsuchishoCVSKakukoRenchoSource> reportSourceWriter) {
 
-        if (item.get編集後本算定通知書共通情報() != null
-                && item.get編集後本算定通知書共通情報().get更正後() != null
-                && item.get本算定納入通知書制御情報() != null
-                && item.get本算定納入通知書制御情報().get納入通知書制御情報() != null
-                && KozaKubun.口座振替.equals(item.get編集後本算定通知書共通情報().get更正後().get口座区分())
-                && HyojiUmu.表示しない.equals(item.get本算定納入通知書制御情報().get納入通知書制御情報().getコンビニ_ブック口座用納付書表示())) {
-            item.set編集範囲区分(HenshuHaniKubun.Coverのみ);
-        }
-
-        HenshuHaniKubun 編集範囲区分 = item.get編集範囲区分();
-        if (HenshuHaniKubun.Coverのみ.equals(編集範囲区分)) {
-            INonyuTsuchishoCVSKakukoRenchoCoverEditor renchoCoverEditor
-                    = new NonyuTsuchishoCVSKakukoRenchoCoverEditor(item, ninshoshaSource, 1);
-            INonyuTsuchishoCVSKakukoRenchoCoverBuilder builder
-                    = new NonyuTsuchishoCVSKakukoRenchoCoverBuilder(renchoCoverEditor);
-            reportSourceWriter.writeLine(builder);
-        }
-        if (!HenshuHaniKubun.Detailのみ.equals(編集範囲区分) && !HenshuHaniKubun.全てのレイアウト.equals(編集範囲区分)) {
+        this.set準備データ(reportSourceWriter);
+        if (!HenshuHaniKubun.Detailのみ.equals(item.get編集範囲区分()) && !HenshuHaniKubun.全てのレイアウト.equals(item.get編集範囲区分())) {
             return;
         }
 
         INonyuTsuchishoCVSKakukoRenchoCoverEditor renchoCoverEditor
-                = new NonyuTsuchishoCVSKakukoRenchoCoverEditor(item, ninshoshaSource, 1);
+                = new NonyuTsuchishoCVSKakukoRenchoCoverEditor(item, ninshoshaSource);
         INonyuTsuchishoCVSKakukoRenchoCoverBuilder builder
                 = new NonyuTsuchishoCVSKakukoRenchoCoverBuilder(renchoCoverEditor);
         reportSourceWriter.writeLine(builder);
@@ -102,7 +82,26 @@ public class NonyuTsuchishoCVSKakukoRenchoReport extends INonyuTsuchisho<NonyuTs
         Map<Integer, NonyuTsuchiShoKiJoho> 納入通知書期情報Map1 = new HashMap<>();
         Map<Integer, NonyuTsuchiShoKiJoho> 納入通知書期情報Map2 = new HashMap<>();
 
-        this.納入通知書期情報Map作成(納入通知書期情報リスト, 納入通知書期情報Map1, 納入通知書期情報Map2);
+        for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
+
+            if (納入通知書期情報.getコンビニ連帳印字位置() == INT_3) {
+                納入通知書期情報Map1.put(INT_3, 納入通知書期情報);
+            } else if (納入通知書期情報.getコンビニ連帳印字位置() == INT_4) {
+                納入通知書期情報Map1.put(INT_4, 納入通知書期情報);
+            } else if (納入通知書期情報.getコンビニ連帳印字位置() == INT_5) {
+                納入通知書期情報Map1.put(INT_5, 納入通知書期情報);
+            } else if (納入通知書期情報.getコンビニ連帳印字位置() == INT_6) {
+                納入通知書期情報Map1.put(INT_6, 納入通知書期情報);
+            } else if (納入通知書期情報.getコンビニ連帳印字位置() == INT_7) {
+                納入通知書期情報Map2.put(INT_7, 納入通知書期情報);
+            } else if (納入通知書期情報.getコンビニ連帳印字位置() == INT_8) {
+                納入通知書期情報Map2.put(INT_8, 納入通知書期情報);
+            } else if (納入通知書期情報.getコンビニ連帳印字位置() == INT_9) {
+                納入通知書期情報Map2.put(INT_9, 納入通知書期情報);
+            } else if (納入通知書期情報.getコンビニ連帳印字位置() == INT_10) {
+                納入通知書期情報Map2.put(INT_10, 納入通知書期情報);
+            }
+        }
 
         if (!納入通知書期情報Map1.isEmpty()) {
             INonyuTsuchishoCVSKakukoRenchoNofushoEditor renchoNofushoEditor
@@ -122,29 +121,47 @@ public class NonyuTsuchishoCVSKakukoRenchoReport extends INonyuTsuchisho<NonyuTs
     }
 
     @Override
-    public List<INonyuTsuchisho> devidedByPage() {
-        List<INonyuTsuchisho> nonyuTsuchishoList = new ArrayList<>();
+    public List<NonyuTsuchisho<NonyuTsuchishoCVSKakukoRenchoSource>> devidedByPage() {
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = item.get納入通知書期情報リスト();
 
         if (HenshuHaniKubun.Coverのみ.equals(item.get編集範囲区分())) {
-            editCover(nonyuTsuchishoList, 納入通知書期情報リスト);
+            editCover(納入通知書期情報リスト);
         } else if (HenshuHaniKubun.Detailのみ.equals(item.get編集範囲区分())) {
-            editDetail(nonyuTsuchishoList, 納入通知書期情報リスト);
+            editDetail(納入通知書期情報リスト);
         } else if (HenshuHaniKubun.全てのレイアウト.equals(item.get編集範囲区分())) {
-            editCover(nonyuTsuchishoList, 納入通知書期情報リスト);
-            editDetail(nonyuTsuchishoList, 納入通知書期情報リスト);
+            editCover(納入通知書期情報リスト);
+            editDetail(納入通知書期情報リスト);
         }
         return nonyuTsuchishoList;
     }
 
-    private void editCover(List<INonyuTsuchisho> nonyuTsuchishoList, List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストCover) {
+    private void set準備データ(ReportSourceWriter<NonyuTsuchishoCVSKakukoRenchoSource> reportSourceWriter) {
+        if (item.get編集後本算定通知書共通情報() != null
+                && item.get編集後本算定通知書共通情報().get更正後() != null
+                && item.get本算定納入通知書制御情報() != null
+                && item.get本算定納入通知書制御情報().get納入通知書制御情報() != null
+                && KozaKubun.口座振替.equals(item.get編集後本算定通知書共通情報().get更正後().get口座区分())
+                && HyojiUmu.表示しない.equals(item.get本算定納入通知書制御情報().get納入通知書制御情報().getコンビニ_ブック口座用納付書表示())) {
+            item.set編集範囲区分(HenshuHaniKubun.Coverのみ);
+        }
+
+        if (HenshuHaniKubun.Coverのみ.equals(item.get編集範囲区分())) {
+            INonyuTsuchishoCVSKakukoRenchoCoverEditor renchoCoverEditor
+                    = new NonyuTsuchishoCVSKakukoRenchoCoverEditor(item, ninshoshaSource);
+            INonyuTsuchishoCVSKakukoRenchoCoverBuilder builder
+                    = new NonyuTsuchishoCVSKakukoRenchoCoverBuilder(renchoCoverEditor);
+            reportSourceWriter.writeLine(builder);
+        }
+    }
+
+    private void editCover(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストCover) {
         HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報Cover = getNew本算定納入通知書情報(HenshuHaniKubun.Coverのみ, 納入通知書期情報リストCover);
-        NonyuTsuchishoCVSMultiRenchoReport reportCover
-                = new NonyuTsuchishoCVSMultiRenchoReport(本算定納入通知書情報Cover, ninshoshaSource);
+        NonyuTsuchishoCVSKakukoRenchoReport reportCover
+                = new NonyuTsuchishoCVSKakukoRenchoReport(本算定納入通知書情報Cover, ninshoshaSource);
         nonyuTsuchishoList.add(reportCover);
     }
 
-    private void editDetail(List<INonyuTsuchisho> nonyuTsuchishoList, List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト) {
+    private void editDetail(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト) {
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストDetail1 = new ArrayList<>();
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストDetail2 = new ArrayList<>();
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
@@ -171,42 +188,16 @@ public class NonyuTsuchishoCVSKakukoRenchoReport extends INonyuTsuchisho<NonyuTs
         if (納入通知書期情報リストDetail1 != null && !納入通知書期情報リストDetail1.isEmpty()) {
             HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報Detail1
                     = getNew本算定納入通知書情報(HenshuHaniKubun.Detailのみ, 納入通知書期情報リストDetail1);
-            NonyuTsuchishoCVSMultiRenchoReport reportDetail1
-                    = new NonyuTsuchishoCVSMultiRenchoReport(本算定納入通知書情報Detail1, ninshoshaSource);
+            NonyuTsuchishoCVSKakukoRenchoReport reportDetail1
+                    = new NonyuTsuchishoCVSKakukoRenchoReport(本算定納入通知書情報Detail1, ninshoshaSource);
             nonyuTsuchishoList.add(reportDetail1);
-        } else if (納入通知書期情報リストDetail2 != null && !納入通知書期情報リストDetail2.isEmpty()) {
+        }
+        if (納入通知書期情報リストDetail2 != null && !納入通知書期情報リストDetail2.isEmpty()) {
             HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報Detail2
                     = getNew本算定納入通知書情報(HenshuHaniKubun.Detailのみ, 納入通知書期情報リストDetail2);
-            NonyuTsuchishoCVSMultiRenchoReport reportDetail2
-                    = new NonyuTsuchishoCVSMultiRenchoReport(本算定納入通知書情報Detail2, ninshoshaSource);
+            NonyuTsuchishoCVSKakukoRenchoReport reportDetail2
+                    = new NonyuTsuchishoCVSKakukoRenchoReport(本算定納入通知書情報Detail2, ninshoshaSource);
             nonyuTsuchishoList.add(reportDetail2);
-        }
-    }
-
-    private void 納入通知書期情報Map作成(
-            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
-            Map<Integer, NonyuTsuchiShoKiJoho> 納入通知書期情報Map1,
-            Map<Integer, NonyuTsuchiShoKiJoho> 納入通知書期情報Map2) {
-
-        for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
-
-            if (納入通知書期情報.getコンビニ連帳印字位置() == INT_3) {
-                納入通知書期情報Map1.put(INT_3, 納入通知書期情報);
-            } else if (納入通知書期情報.getコンビニ連帳印字位置() == INT_4) {
-                納入通知書期情報Map1.put(INT_4, 納入通知書期情報);
-            } else if (納入通知書期情報.getコンビニ連帳印字位置() == INT_5) {
-                納入通知書期情報Map1.put(INT_5, 納入通知書期情報);
-            } else if (納入通知書期情報.getコンビニ連帳印字位置() == INT_6) {
-                納入通知書期情報Map1.put(INT_6, 納入通知書期情報);
-            } else if (納入通知書期情報.getコンビニ連帳印字位置() == INT_7) {
-                納入通知書期情報Map2.put(INT_7, 納入通知書期情報);
-            } else if (納入通知書期情報.getコンビニ連帳印字位置() == INT_8) {
-                納入通知書期情報Map2.put(INT_8, 納入通知書期情報);
-            } else if (納入通知書期情報.getコンビニ連帳印字位置() == INT_9) {
-                納入通知書期情報Map2.put(INT_9, 納入通知書期情報);
-            } else if (納入通知書期情報.getコンビニ連帳印字位置() == INT_10) {
-                納入通知書期情報Map2.put(INT_10, 納入通知書期情報);
-            }
         }
     }
 
@@ -225,6 +216,7 @@ public class NonyuTsuchishoCVSKakukoRenchoReport extends INonyuTsuchisho<NonyuTs
         new本算定納入通知書情報.set編集後本算定通知書共通情報(item.get編集後本算定通知書共通情報());
         new本算定納入通知書情報.set納入通知書期情報リスト(納入通知書期情報リスト);
         new本算定納入通知書情報.set編集範囲区分(編集範囲区分);
+        new本算定納入通知書情報.set連番(item.get連番());
         return new本算定納入通知書情報;
     }
 }

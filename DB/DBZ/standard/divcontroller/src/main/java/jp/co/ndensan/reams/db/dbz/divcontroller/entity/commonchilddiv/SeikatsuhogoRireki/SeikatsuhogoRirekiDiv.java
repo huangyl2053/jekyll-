@@ -19,15 +19,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  * @reamsid_L DBZ-4520-010 zhangzhiming
  */
 public class SeikatsuhogoRirekiDiv extends Panel implements ISeikatsuhogoRirekiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnAddRow")
-    private ButtonDialog btnAddRow;
+    @JsonProperty("btnRirekiAdd")
+    private ButtonDialog btnRirekiAdd;
     @JsonProperty("dgSeikatsuhogoRireki")
     private DataGrid<dgSeikatsuhogoRireki_Row> dgSeikatsuhogoRireki;
     @JsonProperty("hdnDataPass")
@@ -40,21 +40,21 @@ public class SeikatsuhogoRirekiDiv extends Panel implements ISeikatsuhogoRirekiD
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getbtnAddRow
-     * @return btnAddRow
+     * getbtnRirekiAdd
+     * @return btnRirekiAdd
      */
-    @JsonProperty("btnAddRow")
-    public ButtonDialog getBtnAddRow() {
-        return btnAddRow;
+    @JsonProperty("btnRirekiAdd")
+    public ButtonDialog getBtnRirekiAdd() {
+        return btnRirekiAdd;
     }
 
     /*
-     * setbtnAddRow
-     * @param btnAddRow btnAddRow
+     * setbtnRirekiAdd
+     * @param btnRirekiAdd btnRirekiAdd
      */
-    @JsonProperty("btnAddRow")
-    public void setBtnAddRow(ButtonDialog btnAddRow) {
-        this.btnAddRow = btnAddRow;
+    @JsonProperty("btnRirekiAdd")
+    public void setBtnRirekiAdd(ButtonDialog btnRirekiAdd) {
+        this.btnRirekiAdd = btnRirekiAdd;
     }
 
     /*

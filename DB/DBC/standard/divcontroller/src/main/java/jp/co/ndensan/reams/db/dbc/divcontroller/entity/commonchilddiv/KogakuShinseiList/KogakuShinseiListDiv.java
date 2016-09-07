@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuShi
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -341,5 +341,35 @@ public class KogakuShinseiListDiv extends Panel implements IKogakuShinseiListDiv
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.導入形態コード, 導入形態コード);
         ViewStateHolder.put(ViewStateKeys.メニューID, メニューID);
+    }
+
+    /**
+     * 審査決定フラグ
+     *
+     * @return boolean
+     */
+    @Override
+    public boolean is審査決定フラグ() {
+        return KogakuShinseiListDivHandler.of(this).is審査決定フラグ();
+    }
+
+    /**
+     * 決定情報フラグ
+     *
+     * @return boolean
+     */
+    @Override
+    public boolean is決定情報フラグ() {
+        return KogakuShinseiListDivHandler.of(this).is決定情報フラグ();
+    }
+
+    /**
+     * 支給区分フラグ
+     *
+     * @return boolean
+     */
+    @Override
+    public boolean is支給区分フラグ() {
+        return KogakuShinseiListDivHandler.of(this).is支給区分フラグ();
     }
 }

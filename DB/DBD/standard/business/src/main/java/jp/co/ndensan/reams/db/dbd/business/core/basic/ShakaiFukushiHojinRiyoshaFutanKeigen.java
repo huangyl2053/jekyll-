@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -80,6 +81,60 @@ public class ShakaiFukushiHojinRiyoshaFutanKeigen
     }
 
 //TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
+    /**
+     * 申請年月日を返します。
+     *
+     * @return 申請年月日
+     */
+    public FlexibleDate get申請年月日() {
+        return entity.getShinseiYMD();
+    }
+
+    /**
+     * 決定年月日を返します。
+     *
+     * @return 決定年月日
+     */
+    public FlexibleDate get決定年月日() {
+        return entity.getKetteiYMD();
+    }
+
+    /**
+     * 適用開始年月日を返します。
+     *
+     * @return 適用開始年月日
+     */
+    public FlexibleDate get適用開始年月日() {
+        return entity.getTekiyoKaishiYMD();
+    }
+
+    /**
+     * 適用終了年月日を返します。
+     *
+     * @return 適用終了年月日
+     */
+    public FlexibleDate get適用終了年月日() {
+        return entity.getTekiyoShuryoYMD();
+    }
+
+    /**
+     * 決定区分を返します。
+     *
+     * @return 決定区分
+     */
+    public RString get決定区分() {
+        return entity.getKetteiKubun();
+    }
+
+    /**
+     * 非承認理由を返します。
+     *
+     * @return 非承認理由
+     */
+    public RString get非承認理由() {
+        return entity.getHiShoninRiyu();
+    }
+
     /**
      * 証記載保険者番号を返します。
      *

@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshadotei.DoteiIchijiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshadotei.TokuchoTaishoshaDoteiCombineEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2001ChoshuHohoDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchotaishoshadotei.ITokuchoTaishoshaDoteiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -243,11 +243,11 @@ public class TokuchoTaishoshaDoteiIkatsu {
         if (null != tokurei && null != tokurei.getShikibetsuCode()) {
             FlexibleDate 解除年月日 = tokurei.getKaijoYMD();
             return (null == 解除年月日 || 解除年月日.equals(FlexibleDate.EMPTY))
-                    ? DoteiFuitchiRiyu.資格なし : DoteiFuitchiRiyu.その他;
+                    ? DoteiFuitchiRiyu.その他 : DoteiFuitchiRiyu.資格なし;
         } else if (null != jogaisha && null != jogaisha.getShikibetsuCode()) {
             FlexibleDate 解除年月日 = jogaisha.getKaijoYMD();
             return (null == 解除年月日 || 解除年月日.equals(FlexibleDate.EMPTY))
-                    ? DoteiFuitchiRiyu.資格なし : DoteiFuitchiRiyu.その他;
+                    ? DoteiFuitchiRiyu.その他 : DoteiFuitchiRiyu.資格なし;
         } else if (被保険者台帳があるFlag) {
             return DoteiFuitchiRiyu.資格喪失;
         }
@@ -380,9 +380,9 @@ public class TokuchoTaishoshaDoteiIkatsu {
             徴収方法Entity.setChoshuHohoYoku7gatsu(徴収方法);
             徴収方法Entity.setChoshuHohoYoku8gatsu(徴収方法);
             徴収方法Entity.setChoshuHohoYoku9gatsu(徴収方法);
-            徴収方法Entity.setKariNenkinNo(同定情報temp.getDtKisoNenkinNo());
-            徴収方法Entity.setKariNenkinCode(同定情報temp.getDtNenkinCode());
-            徴収方法Entity.setKariHosokuM(同定情報temp.getHosokuTsuki());
+            徴収方法Entity.setHonNenkinNo(同定情報temp.getDtKisoNenkinNo());
+            徴収方法Entity.setHonNenkinCode(同定情報temp.getDtNenkinCode());
+            徴収方法Entity.setHonHosokuM(同定情報temp.getHosokuTsuki());
         } else if (徴収種類_翌年度仮徴収.equals(徴収種類)) {
             if (開始月_04.equals(開始月)) {
                 徴収方法Entity.setChoshuHoho4gatsu(徴収方法);

@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC13100",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "給付費通知減免補正一覧表作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC1310011",
+     "toLayoutTitle": "給付費通知減免補正一覧表作成",
+     "toState": "帳票発行"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1310011",
+     "layoutTitle": "給付費通知減免補正一覧表作成",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

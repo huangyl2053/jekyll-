@@ -1,13 +1,15 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -89,6 +91,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @param txtIryoKikanCode txtIryoKikanCode
      */
     @JsonProperty("txtIryoKikanCode")
+    @Override
     public void setTxtIryoKikanCode(TextBoxCode txtIryoKikanCode) {
         this.txtIryoKikanCode = txtIryoKikanCode;
     }
@@ -125,6 +128,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @param txtIryoKikanName txtIryoKikanName
      */
     @JsonProperty("txtIryoKikanName")
+    @Override
     public void setTxtIryoKikanName(TextBox txtIryoKikanName) {
         this.txtIryoKikanName = txtIryoKikanName;
     }
@@ -179,6 +183,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @param txtShujiiCode txtShujiiCode
      */
     @JsonProperty("txtShujiiCode")
+    @Override
     public void setTxtShujiiCode(TextBoxCode txtShujiiCode) {
         this.txtShujiiCode = txtShujiiCode;
     }
@@ -215,6 +220,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @param txtShujiiName txtShujiiName
      */
     @JsonProperty("txtShujiiName")
+    @Override
     public void setTxtShujiiName(TextBox txtShujiiName) {
         this.txtShujiiName = txtShujiiName;
     }
@@ -405,6 +411,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
         return (ShoriType) _CommonChildDivModeUtil.getMode(this.modes, ShoriType.class);
     }
 
+    @Override
     public void setMode_ShoriType(ShoriType value) {
         _CommonChildDivModeUtil.setMode(this.modes, ShoriType.class, value);
     }
@@ -455,8 +462,22 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
     }
 
     @Override
+    public void setRenrakuJiko(RString renrakuJiko) {
+        this.hdnShujiiRenrakuJiko = renrakuJiko;
+    }
+
+    @Override
     public boolean hasShiteii() {
         return this.getChkShiteii().getSelectedKeys().contains(new RString("key0"));
+    }
+
+    @Override
+    public void setShiteii(boolean isChecked) {
+        List<RString> keys = new ArrayList<>();
+        if (isChecked) {
+            keys.add(new RString("key0"));
+        }
+        this.getChkShiteii().setSelectedItemsByKey(keys);
     }
 
     @Override

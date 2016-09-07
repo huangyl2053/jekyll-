@@ -40,13 +40,15 @@ public interface IKaigoNinteiShinseiKihonJohoInputDiv extends ICommonChildDivBas
 
     void setHihokenshaKubun(HihokenshaKubunCode value);
 
-    void setHihokenshaKubun(List<RString> selectedKeys);
+    void setChkShikakuShutokuMae(List<RString> selectedKeys);
 
     void setTokuteiShippei(TokuteiShippei value);
 
     void setServiceSakujoTeikeibun(RString teikeibun);
 
     void setNinteiShinseRiyuTeikeibun(RString teikeibun);
+
+    void setRequiredForDdlTokuteiShippei(boolean isRequired);
 
     KaigoNinteiShinseiKihonJohoInputDiv getKaigoNinteiShinseiKihonJohoInputDiv();
 }

@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.IkenshoImageJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.IkenshoImageJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5305IkenshoImageJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5305IkenshoImageJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 要介護認定意見書イメージ情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 chengsanyuan
  */
 public class IkenshoImageJohoManager {
 
@@ -39,6 +41,16 @@ public class IkenshoImageJohoManager {
      */
     IkenshoImageJohoManager(DbT5305IkenshoImageJohoDac dac) {
         this.dac = dac;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link IkenshoImageJohoManager}のインスタンスを返します。
+     *
+     *
+     * @return IkenshoImageJohoManager
+     */
+    public static IkenshoImageJohoManager createInstance() {
+        return InstanceProvider.create(IkenshoImageJohoManager.class);
     }
 
     /**

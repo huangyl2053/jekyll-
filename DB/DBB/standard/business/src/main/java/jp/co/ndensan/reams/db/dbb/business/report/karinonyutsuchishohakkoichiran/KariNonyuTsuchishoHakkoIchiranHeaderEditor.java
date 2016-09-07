@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 class KariNonyuTsuchishoHakkoIchiranHeaderEditor implements IKariNonyuTsuchishoHakkoIchiranEditor {
 
     private final YMDHMS 帳票作成日時;
-    private static final RString HALF_SPACE = new RString(" ");
     private static final RString 作成 = new RString("作成");
 
     protected KariNonyuTsuchishoHakkoIchiranHeaderEditor(YMDHMS 帳票作成日時) {
@@ -34,7 +33,7 @@ class KariNonyuTsuchishoHakkoIchiranHeaderEditor implements IKariNonyuTsuchishoH
         RString 帳票作成年月日 = 帳票作成日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 帳票作成時 = 帳票作成日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-        source.printTimeStamp = 帳票作成年月日.concat(HALF_SPACE).concat(帳票作成時).concat(HALF_SPACE).concat(作成);
+        source.printTimeStamp = 帳票作成年月日.concat(RString.HALF_SPACE).concat(帳票作成時).concat(RString.HALF_SPACE).concat(作成);
         return source;
     }
 }

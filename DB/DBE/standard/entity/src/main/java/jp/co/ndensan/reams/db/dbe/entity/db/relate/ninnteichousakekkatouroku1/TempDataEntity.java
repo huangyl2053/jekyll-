@@ -30,5 +30,10 @@ public class TempDataEntity {
     private RString temp_特記;
     private RString temp_認定調査回数;
     private RString temp_認定調査委託区分コード;
+    private RString temp_調査実施場所コード;
+    private RString temp_調査実施場所名称;
+    private RString temp_調査委託先コード;
+    private RString temp_調査員コード;
+    private RString temp_調査実施年月日;
 
 }

@@ -68,7 +68,7 @@ public class KarisanteihokenryononyutsuchishoginfuriPrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 KarisanteiHokenryoNonyuTsuchishoGinfuriReport report
-                        = KarisanteiHokenryoNonyuTsuchishoGinfuriReport.createFrom(仮算定納入通知書情報, ninshoshaSource);
+                        = new KarisanteiHokenryoNonyuTsuchishoGinfuriReport(仮算定納入通知書情報, ninshoshaSource);
                 report.writeBy(reportSourceWriter);
             }
             return reportManager.publish();
@@ -84,7 +84,7 @@ public class KarisanteihokenryononyutsuchishoginfuriPrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoReport report
-                        = KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoReport.createFrom(仮算定納入通知書情報, ninshoshaSource);
+                        = new KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoReport(仮算定納入通知書情報, ninshoshaSource);
                 report.writeBy(reportSourceWriter);
             }
             return reportManager.publish();
@@ -117,7 +117,7 @@ public class KarisanteihokenryononyutsuchishoginfuriPrintService {
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             KarisanteiHokenryoNonyuTsuchishoGinfuriReport report
-                    = KarisanteiHokenryoNonyuTsuchishoGinfuriReport.createFrom(仮算定納入通知書情報, ninshoshaSource);
+                    = new KarisanteiHokenryoNonyuTsuchishoGinfuriReport(仮算定納入通知書情報, ninshoshaSource);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -130,7 +130,7 @@ public class KarisanteihokenryononyutsuchishoginfuriPrintService {
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoReport report
-                    = KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoReport.createFrom(仮算定納入通知書情報, ninshoshaSource);
+                    = new KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoReport(仮算定納入通知書情報, ninshoshaSource);
             report.writeBy(reportSourceWriter);
         }
     }

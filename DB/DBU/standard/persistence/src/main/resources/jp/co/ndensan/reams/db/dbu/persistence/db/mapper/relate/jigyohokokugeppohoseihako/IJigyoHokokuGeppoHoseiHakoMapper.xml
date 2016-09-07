@@ -4,7 +4,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokugeppohoseihako.IJigyoHokokuGeppoHoseiHakoMapper">
 
     <resultMap id="resultMap_JigyoHokokuGeppoHoseiHakoEntity"
-               type="jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity"
+               type="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity"
                autoMapping="true">
         <result property="yoshiCode" column="yoshiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shichosonName" column="shichosonName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

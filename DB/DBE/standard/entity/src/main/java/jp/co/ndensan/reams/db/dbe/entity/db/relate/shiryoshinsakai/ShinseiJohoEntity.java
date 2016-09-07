@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -27,8 +28,13 @@ public class ShinseiJohoEntity {
     private AtenaMeisho hihokenshaName;
     private Code seibetsu;
     private int age;
+    private Code koroshoCode;
+    private Code nijiHanteiCode;
+    private int nijiHanteiKikan;
+    private FlexibleDate nijiHanteiKaishiYMD;
+    private FlexibleDate nijiHanteiShuryoYMD;
     private Code ichijiHanteiKekkaCode;
     private RString ichijiHnateiKeikokuCode;
     private int kijunJikan;
-    private Code jotaiKubunCode;
+    private Code ichijiHanteiKasanCode;
 }

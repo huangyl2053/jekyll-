@@ -3,25 +3,21 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJog
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Aug 11 16:19:46 JST 2016 
+ * Thu Aug 11 16:19:46 JST 2016
  */
-
-
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
-
 /**
- * datagridTekiyoJogai_Row のクラスファイル 
- * 
+ * datagridTekiyoJogai_Row のクラスファイル
+ *
  * @author 自動生成
  */
-
 public class datagridTekiyoJogai_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     private RString jotai;
     private TextBoxDate tekiyoDate;
     private TextBoxDate tekiyoTodokeDate;
@@ -33,8 +29,8 @@ public class datagridTekiyoJogai_Row extends DataRow {
     private RString kaijoJiyu;
     private TextBoxDate nyuShoDate;
     private TextBoxDate taiShoDate;
-    private RString nyushoShisetsuCode;
     private RString nyuShoShisetu;
+    private RString nyushoShisetsuCode;
     private RString daichoShubetsu;
     private RString shisetsuShurui;
     private RString rirekiNo;
@@ -65,8 +61,8 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.kaijoJiyu = RString.EMPTY;
         this.nyuShoDate = new TextBoxDate();
         this.taiShoDate = new TextBoxDate();
-        this.nyushoShisetsuCode = RString.EMPTY;
         this.nyuShoShisetu = RString.EMPTY;
+        this.nyushoShisetsuCode = RString.EMPTY;
         this.daichoShubetsu = RString.EMPTY;
         this.shisetsuShurui = RString.EMPTY;
         this.rirekiNo = RString.EMPTY;
@@ -94,8 +90,8 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.setOriginalData("kaijoJiyu", kaijoJiyu);
         this.setOriginalData("nyuShoDate", nyuShoDate);
         this.setOriginalData("taiShoDate", taiShoDate);
-        this.setOriginalData("nyushoShisetsuCode", nyushoShisetsuCode);
         this.setOriginalData("nyuShoShisetu", nyuShoShisetu);
+        this.setOriginalData("nyushoShisetsuCode", nyushoShisetsuCode);
         this.setOriginalData("daichoShubetsu", daichoShubetsu);
         this.setOriginalData("shisetsuShurui", shisetsuShurui);
         this.setOriginalData("rirekiNo", rirekiNo);
@@ -127,8 +123,8 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.setOriginalData("kaijoJiyu", kaijoJiyu);
         this.setOriginalData("nyuShoDate", nyuShoDate);
         this.setOriginalData("taiShoDate", taiShoDate);
-        this.setOriginalData("nyushoShisetsuCode", nyushoShisetsuCode);
         this.setOriginalData("nyuShoShisetu", nyuShoShisetu);
+        this.setOriginalData("nyushoShisetsuCode", nyushoShisetsuCode);
         this.setOriginalData("daichoShubetsu", daichoShubetsu);
         this.setOriginalData("shisetsuShurui", shisetsuShurui);
         this.setOriginalData("rirekiNo", rirekiNo);
@@ -156,8 +152,8 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.kaijoJiyu = kaijoJiyu;
         this.nyuShoDate = nyuShoDate;
         this.taiShoDate = taiShoDate;
-        this.nyushoShisetsuCode = nyushoShisetsuCode;
         this.nyuShoShisetu = nyuShoShisetu;
+        this.nyushoShisetsuCode = nyushoShisetsuCode;
         this.daichoShubetsu = daichoShubetsu;
         this.shisetsuShurui = shisetsuShurui;
         this.rirekiNo = rirekiNo;
@@ -220,12 +216,12 @@ public class datagridTekiyoJogai_Row extends DataRow {
         return taiShoDate;
     }
 
-    public RString getNyushoShisetsuCode() {
-        return nyushoShisetsuCode;
-    }
-
     public RString getNyuShoShisetu() {
         return nyuShoShisetu;
+    }
+
+    public RString getNyushoShisetsuCode() {
+        return nyushoShisetsuCode;
     }
 
     public RString getDaichoShubetsu() {
@@ -347,14 +343,14 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.taiShoDate = taiShoDate;
     }
 
-    public void setNyushoShisetsuCode(RString nyushoShisetsuCode) {
-        this.setOriginalData("nyushoShisetsuCode", nyushoShisetsuCode);
-        this.nyushoShisetsuCode = nyushoShisetsuCode;
-    }
-
     public void setNyuShoShisetu(RString nyuShoShisetu) {
         this.setOriginalData("nyuShoShisetu", nyuShoShisetu);
         this.nyuShoShisetu = nyuShoShisetu;
+    }
+
+    public void setNyushoShisetsuCode(RString nyushoShisetsuCode) {
+        this.setOriginalData("nyushoShisetsuCode", nyushoShisetsuCode);
+        this.nyushoShisetsuCode = nyushoShisetsuCode;
     }
 
     public void setDaichoShubetsu(RString daichoShubetsu) {

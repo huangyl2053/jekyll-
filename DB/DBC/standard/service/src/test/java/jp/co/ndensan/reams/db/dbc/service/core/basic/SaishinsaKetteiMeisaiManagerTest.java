@@ -51,14 +51,14 @@ public class SaishinsaKetteiMeisaiManagerTest {
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             RString 主キー2 = DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_保険者区分;
-            Decimal 主キー3 = DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー3 = new Decimal(DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_履歴番号);
             sut.get再審査決定明細(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleYearMonth 主キー1 = DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_取扱年月;
-            Decimal 主キー3 = DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー3 = new Decimal(DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_履歴番号);
             sut.get再審査決定明細(主キー1, null, 主キー3);
         }
 
@@ -72,10 +72,10 @@ public class SaishinsaKetteiMeisaiManagerTest {
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(FlexibleYearMonth.class), any(RString.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(FlexibleYearMonth.class), any(RString.class), any(int.class))).thenReturn(null);
             FlexibleYearMonth 主キー1 = DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_取扱年月;
             RString 主キー2 = DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_保険者区分;
-            Decimal 主キー3 = DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー3 = new Decimal(DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_履歴番号);
             SaishinsaKetteiMeisai result = sut.get再審査決定明細(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
@@ -84,10 +84,10 @@ public class SaishinsaKetteiMeisaiManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3064SaishinsaKetteiMeisaiEntity entity = DbT3064SaishinsaKetteiMeisaiEntityGenerator.createDbT3064SaishinsaKetteiMeisaiEntity();
-            when(dac.selectByKey(any(FlexibleYearMonth.class), any(RString.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(FlexibleYearMonth.class), any(RString.class), any(int.class))).thenReturn(entity);
             FlexibleYearMonth 主キー1 = DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_取扱年月;
             RString 主キー2 = DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_保険者区分;
-            Decimal 主キー3 = DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_履歴番号;
+            Decimal 主キー3 = new Decimal(DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_履歴番号);
             SaishinsaKetteiMeisai result = sut.get再審査決定明細(主キー1, 主キー2, 主キー3);
 
             assertThat(result.get取扱年月().toDateString(), is(DbT3064SaishinsaKetteiMeisaiEntityGenerator.DEFAULT_取扱年月.toDateString()));

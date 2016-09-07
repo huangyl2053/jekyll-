@@ -125,6 +125,51 @@ public class TempData {
     }
 
     /**
+     * 調査実施場所コードを取得します。
+     *
+     * @return 調査実施場所コード
+     */
+    public RString getTemp_調査実施場所コード() {
+        return entity.getTemp_調査実施場所コード();
+    }
+
+    /**
+     * 調査実施場所名称を取得します。
+     *
+     * @return 調査実施場所名称
+     */
+    public RString getTemp_調査実施場所名称() {
+        return entity.getTemp_調査実施場所名称();
+    }
+
+    /**
+     * 調査委託先コードを取得します。
+     *
+     * @return 調査委託先コード
+     */
+    public RString getTemp_調査委託先コード() {
+        return entity.getTemp_調査委託先コード();
+    }
+
+    /**
+     * 調査員コードを取得します。
+     *
+     * @return 調査員コード
+     */
+    public RString getTemp_調査員コード() {
+        return entity.getTemp_調査員コード();
+    }
+
+    /**
+     * 調査実施年月日を取得します。
+     *
+     * @return 調査実施年月日
+     */
+    public RString getTemp_調査実施年月日() {
+        return entity.getTemp_調査実施年月日();
+    }
+
+    /**
      * temp_厚労省IF識別コードを設定します。
      *
      * @param temp_厚労省IF識別コード temp_厚労省IF識別コード
@@ -221,5 +266,50 @@ public class TempData {
      */
     public void setTemp_認定調査委託区分コード(RString temp_認定調査委託区分コード) {
         entity.setTemp_認定調査委託区分コード(temp_認定調査委託区分コード);
+    }
+
+    /**
+     * temp_調査実施場所コードを設定します。
+     *
+     * @param temp_調査実施場所コード temp_調査実施場所コード
+     */
+    public void setTemp_調査実施場所コード(RString temp_調査実施場所コード) {
+        entity.setTemp_調査実施場所コード(temp_調査実施場所コード);
+    }
+
+    /**
+     * temp_調査実施場所名称を設定します。
+     *
+     * @param temp_調査実施場所名称 temp_調査実施場所名称
+     */
+    public void setTemp_調査実施場所名称(RString temp_調査実施場所名称) {
+        entity.setTemp_調査実施場所名称(temp_調査実施場所名称);
+    }
+
+    /**
+     * temp_調査委託先コードを設定します。
+     *
+     * @param temp_調査委託先コード temp_調査委託先コード
+     */
+    public void setTemp_調査委託先コード(RString temp_調査委託先コード) {
+        entity.setTemp_調査委託先コード(temp_調査委託先コード);
+    }
+
+    /**
+     * temp_調査員コードを設定します。
+     *
+     * @param temp_調査員コード temp_調査員コード
+     */
+    public void setTemp_調査員コード(RString temp_調査員コード) {
+        entity.setTemp_調査員コード(temp_調査員コード);
+    }
+
+    /**
+     * temp_調査実施年月日を設定します。
+     *
+     * @param temp_調査実施年月日 temp_調査実施年月日
+     */
+    public void setTemp_調査実施年月日(RString temp_調査実施年月日) {
+        entity.setTemp_調査実施年月日(temp_調査実施年月日);
     }
 }

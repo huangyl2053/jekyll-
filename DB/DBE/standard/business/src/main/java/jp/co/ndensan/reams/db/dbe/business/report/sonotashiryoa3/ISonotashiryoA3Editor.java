@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryoa3.Sonotashir
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 事務局用その他資料Editorのインターフェースクラスです。
+ * その他資料（A3版）Editorのインターフェースクラスです。
  *
- * @reamsid_L DBE-0150-080 wangrenze
+ * @reamsid_L DBE-0150-250 wangrenze
  */
 public interface ISonotashiryoA3Editor extends IReportEditor<SonotashiryoA3ReportSource> {
 

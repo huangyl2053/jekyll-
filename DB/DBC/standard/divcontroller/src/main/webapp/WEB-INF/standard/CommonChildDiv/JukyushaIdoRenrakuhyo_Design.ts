@@ -8,8 +8,20 @@ module DBC {
 
         export class Events {
 
-            public static onBlur_txtHokenshaNo(): string {
-                return "onBlur_txtHokenshaNo";
+            public static onBlur_txtIdoYMD(): string {
+                return "onBlur_txtIdoYMD";
+            }
+
+            public static onClick_radKyotakuServiceSakuseiKubun(): string {
+                return "onClick_radKyotakuServiceSakuseiKubun";
+            }
+
+            public static onBlur_txtKyotakuKaigoShienJigyoshoNo(): string {
+                return "onBlur_txtKyotakuKaigoShienJigyoshoNo";
+            }
+
+            public static onBlur_txtShisetsuShozaiHokenjaNo(): string {
+                return "onBlur_txtShisetsuShozaiHokenjaNo";
             }
 
             public static onOkClose_btnSearch(): string {
@@ -18,6 +30,10 @@ module DBC {
 
             public static onBeforeOpenDialog_btnSearch(): string {
                 return "onBeforeOpenDialog_btnSearch";
+            }
+
+            public static onClick_radNijiyoboJigyoKubun(): string {
+                return "onClick_radNijiyoboJigyoKubun";
             }
 
         }
@@ -129,8 +145,8 @@ module DBC {
                 return new UZA.RadioButton(this.convFiledName("radShinseiShubetsu"));
             }
 
-            public btnYokaigoninteiRireki(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnYokaigoninteiRireki"));
+            public btnYokaigoninteiRireki(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnYokaigoninteiRireki"));
             }
 
             public ddlYokaigoJotaiKubun(): UZA.DropDownList {
@@ -185,8 +201,8 @@ module DBC {
                 return new UZA.RadioButton(this.convFiledName("radKyotakuServiceSakuseiKubun"));
             }
 
-            public btnKyotakuServiceRireki(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKyotakuServiceRireki"));
+            public btnKyotakuServiceRireki(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnKyotakuServiceRireki"));
             }
 
             public txtKyotakuKaigoShienJigyoshoNo(): UZA.TextBoxCode {
@@ -237,12 +253,12 @@ module DBC {
                 return new UZA.Panel(this.convFiledName("GemmenGengakuPanel"));
             }
 
-            public radGemmenShinseichuKubun(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radGemmenShinseichuKubun"));
+            public btnGemmenGengakuRireki(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnGemmenGengakuRireki"));
             }
 
-            public btnGemmenGengakuRireki(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnGemmenGengakuRireki"));
+            public radGemmenShinseichuKubun(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radGemmenShinseichuKubun"));
             }
 
             public JukyushaIdoRenrakuhyoGemmenGengakuSub(): UZA.Panel {
@@ -393,12 +409,12 @@ module DBC {
                 return new UZA.Panel(this.convFiledName("KyufuSeigenPanel"));
             }
 
-            public radKohiFutanJogenGengakuAriFlag(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radKohiFutanJogenGengakuAriFlag"));
+            public btnKyufuSeigenRireki(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnKyufuSeigenRireki"));
             }
 
-            public btnKyufuSeigenRireki(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKyufuSeigenRireki"));
+            public radKohiFutanJogenGengakuAriFlag(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKohiFutanJogenGengakuAriFlag"));
             }
 
             public txtShokanbaraikaYMD(): UZA.TextBoxDateRange {

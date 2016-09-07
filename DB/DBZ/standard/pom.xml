@@ -12,6 +12,8 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath>../../</relativePath>
     </parent>
+    <properties>
+    </properties>
     <modules>
         <module>entity</module>
         <module>business</module>

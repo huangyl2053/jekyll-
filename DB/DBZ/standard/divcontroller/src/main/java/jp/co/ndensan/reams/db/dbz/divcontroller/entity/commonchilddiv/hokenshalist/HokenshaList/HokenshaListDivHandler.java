@@ -46,6 +46,7 @@ public class HokenshaListDivHandler {
                 .getShichosonCodeNameList(業務分類)
                 .getAll()
         );
+        hokenshaList.removeAll(Collections.singleton(null));
 
         Collections.sort(hokenshaList, new Comparator<HokenshaSummary>() {
             @Override
@@ -62,7 +63,6 @@ public class HokenshaListDivHandler {
 
         Map<RString, HokenshaSummary> map = new HashMap<>();
         for (HokenshaSummary s : hokenshaList) {
-            //RString key = s.get市町村コード().value();
             RString key = new RString(UUID.randomUUID().toString());
             list.add(new KeyValueDataSource(key, create表示名(s)));
             map.put(key, s);
@@ -70,6 +70,25 @@ public class HokenshaListDivHandler {
 
         div.getDdlHokenshaList().setDataSource(list);
         ShichosonListHolder.putTo(div, map);
+    }
+
+    /**
+     * 指定の市町村コードに該当する要素を保持する場合、その市町村をDDLの選択値とします。
+     *
+     * @param lasdecCode 市町村コード
+     */
+    void setSelectedShichsonIfExist(LasdecCode lasdecCode) {
+        if (!ShichosonListHolder.hasShichosonList(div)) {
+            return;
+        }
+        if (lasdecCode == null) {
+            return;
+        }
+        for (Map.Entry<RString, HokenshaSummary> entry : ShichosonListHolder.getFrom(div).entrySet()) {
+            if (Objects.equals(entry.getValue().get市町村コード(), lasdecCode)) {
+                div.getDdlHokenshaList().setSelectedKey(entry.getKey());
+            }
+        }
     }
 
     private RString create表示名(HokenshaSummary s) {

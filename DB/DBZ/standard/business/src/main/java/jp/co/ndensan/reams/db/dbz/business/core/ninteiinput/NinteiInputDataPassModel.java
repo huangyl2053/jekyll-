@@ -32,4 +32,5 @@ public class NinteiInputDataPassModel implements Serializable {
     private ShinseishoKanriNo 申請書管理番号;
     private RString subGyomuCode;
     private RString 厚労省IFコード;
+    private List<RString> サービス一覧リスト;
 }

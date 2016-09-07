@@ -46,8 +46,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoToroku {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KyodoshoriyoJukyushaIdoRenrakuhyoToroku}のインスタンスを返します。
      *
-     * @return // *
-     * {@link InstanceProvider#create}にて生成した{@link KyodoshoriyoJukyushaIdoRenrakuhyoToroku}のインスタンス
+     * @return // * {@link InstanceProvider#create}にて生成した{@link KyodoshoriyoJukyushaIdoRenrakuhyoToroku}のインスタンス
      */
     public static KyodoshoriyoJukyushaIdoRenrakuhyoToroku createInstance() {
         return InstanceProvider.create(KyodoshoriyoJukyushaIdoRenrakuhyoToroku.class);
@@ -109,21 +108,33 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoToroku {
      * @param 異動基本送付Entity KyodoShoriyoJukyushaIdoKihonSofu
      * @param 異動償還送付Entity KyodoShoriyoJukyushaIdoShokanSofu
      * @param 異動高額送付 KyodoShoriyoJukyushaIdoKogakuSofu
+     * @param 基本送付情報チェックボックス boolean
+     * @param 償還送付情報チェックボックス boolean
+     * @param 高額送付情報チェックボックス boolean
      * @throws SystemException 保存処理に失敗した場合
      * @throws ApplicationException 保存処理に失敗した場合
      */
     @Transaction
     public void save異動情報(KyodoShoriyoJukyushaIdoKihonSofu 異動基本送付Entity,
             KyodoShoriyoJukyushaIdoShokanSofu 異動償還送付Entity,
-            KyodoShoriyoJukyushaIdoKogakuSofu 異動高額送付) throws SystemException, ApplicationException {
-        DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity dbT3002Entity = 異動基本送付Entity.toEntity();
-        dbT3002Entity.setState(EntityDataState.Added);
-        dbT3002Dac.save(dbT3002Entity);
-        DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity dbT300Entity = 異動償還送付Entity.toEntity();
-        dbT300Entity.setState(EntityDataState.Added);
-        dbT3003Dac.save(dbT300Entity);
-        DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity dbT3004Entity = 異動高額送付.toEntity();
-        dbT3004Entity.setState(EntityDataState.Added);
-        dbT3004Dac.save(dbT3004Entity);
+            KyodoShoriyoJukyushaIdoKogakuSofu 異動高額送付,
+            boolean 基本送付情報チェックボックス,
+            boolean 償還送付情報チェックボックス,
+            boolean 高額送付情報チェックボックス) throws SystemException, ApplicationException {
+        if (基本送付情報チェックボックス) {
+            DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity dbT3002Entity = 異動基本送付Entity.toEntity();
+            dbT3002Entity.setState(EntityDataState.Added);
+            dbT3002Dac.save(dbT3002Entity);
+        }
+        if (償還送付情報チェックボックス) {
+            DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity dbT3003Entity = 異動償還送付Entity.toEntity();
+            dbT3003Entity.setState(EntityDataState.Added);
+            dbT3003Dac.save(dbT3003Entity);
+        }
+        if (高額送付情報チェックボックス) {
+            DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity dbT3004Entity = 異動高額送付.toEntity();
+            dbT3004Entity.setState(EntityDataState.Added);
+            dbT3004Dac.save(dbT3004Entity);
+        }
     }
 }

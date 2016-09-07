@@ -14,13 +14,13 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.DBB8110001TransitionEventName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.KakushuTsuchishoSakuseiKobetsuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB8110001.KakushuTsuchishoSakuseiKobetsuHandler;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.idotaishoshaichiranparameter.IdoTaishoshaIchiranparameter;
 import jp.co.ndensan.reams.db.dbb.service.core.fukajoho.fukajoho.FukaJohoManager;
 import jp.co.ndensan.reams.db.dbb.service.report.kakushutsuchishosakusei.KakushuTsuchishoSakusei;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -67,12 +67,13 @@ public class KakushuTsuchishoSakuseiKobetsu {
         FlexibleYear 賦課年度;
         LasdecCode 市町村コード;
         ShikibetsuCode 識別コード;
+        HihokenshaNo 被保険者番号;
         if (即時賦課更正.equals(ResponseHolder.getMenuID())) {
-            // TODO この画面が実装できない。
-            通知書番号 = null;
-            賦課年度 = null;
-            市町村コード = null;
-            識別コード = null;
+            通知書番号 = ViewStateHolder.get(ViewStateKeys.通知書番号, TsuchishoNo.class);
+            賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
+            市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class);
+            識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+            被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(再検索する, true);
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索結果一覧へ, true);
         } else if (通知書発行後異動把握_仮算定.equals(ResponseHolder.getMenuID())
@@ -83,23 +84,26 @@ public class KakushuTsuchishoSakuseiKobetsu {
                 List<IdoTaishoshaIchiranparameter> listPar = ViewStateHolder.get(ViewStateKeys.異動者一覧Par, List.class);
                 通知書番号 = listPar.get(0).getTsuchishoNo();
                 賦課年度 = listPar.get(0).getFukaNendo();
-                市町村コード = null;
+                市町村コード = LasdecCode.EMPTY;
                 識別コード = listPar.get(0).getShikibetsuCode();
+                被保険者番号 = HihokenshaNo.EMPTY;
             } else {
                 // TODO この画面が実装できない。
-                通知書番号 = null;
-                賦課年度 = null;
-                市町村コード = null;
-                識別コード = null;
+                通知書番号 = TsuchishoNo.EMPTY;
+                賦課年度 = FlexibleYear.EMPTY;
+                市町村コード = LasdecCode.EMPTY;
+                識別コード = ShikibetsuCode.EMPTY;
+                被保険者番号 = HihokenshaNo.EMPTY;
             }
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(再検索する, true);
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索結果一覧へ, true);
         } else {
-            FukaTaishoshaKey key = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
+            FukaTaishoshaKey key = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
             通知書番号 = key.get通知書番号();
             賦課年度 = key.get賦課年度();
             市町村コード = key.get市町村コード();
             識別コード = key.get識別コード();
+            被保険者番号 = key.get被保険者番号();
             if (フラグ_1.equals(ViewStateHolder.get(ViewStateKeys.各種通知書作成フラグ, RString.class))) {
                 CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索結果一覧へ, true);
             }
@@ -109,7 +113,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
         KaigoFukaKihonSearchKey searchKey = new KaigoFukaKihonSearchKey.Builder(
                 通知書番号, 賦課年度, 市町村コード, 識別コード).build();
 
-        getHandler(div).setヘッダパネル(識別コード, searchKey);
+        getHandler(div).setヘッダパネル(識別コード, searchKey, 被保険者番号);
         Map<String, Object> parameter = new HashMap<>();
         parameter.put(賦課年度KEY.toString(), 賦課年度);
         parameter.put(通知書番号KEY.toString(), 通知書番号);
@@ -125,6 +129,8 @@ public class KakushuTsuchishoSakuseiKobetsu {
         } else {
             getHandler(div).set初期化();
         }
+        ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         return ResponseData.of(div).respond();
     }
 
@@ -196,7 +202,9 @@ public class KakushuTsuchishoSakuseiKobetsu {
             KakushuTsuchishoSakuseiKobetsuDiv div) {
         Map<RString, FukaJoho> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
         Map<RString, RString> 帳票Map = ViewStateHolder.get(ViewStateKeys.発行する帳票リスト, Map.class);
-        SourceDataCollection dataCollection = getHandler(div).to発行処理(map, 帳票Map);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        SourceDataCollection dataCollection = getHandler(div).to発行処理(map, 帳票Map, 被保険者番号, 識別コード);
         return ResponseData.of(dataCollection).respond();
     }
 

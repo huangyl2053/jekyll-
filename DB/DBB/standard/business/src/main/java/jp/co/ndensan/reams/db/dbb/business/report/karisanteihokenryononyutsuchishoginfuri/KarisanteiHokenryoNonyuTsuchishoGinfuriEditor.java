@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchishoginfuri;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.NotsuReportEditorUtil;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
@@ -42,17 +43,15 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
      *
      * @param 仮算定納入通知書情報 仮算定納入通知書情報
      * @param 納入通知書期情報リスト 納入通知書期情報リスト
-     * @param 連番 連番
      */
     protected KarisanteiHokenryoNonyuTsuchishoGinfuriEditor(
             KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報,
-            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
-            int 連番) {
+            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト) {
         this.仮算定納入通知書情報 = 仮算定納入通知書情報;
         this.編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報.get編集後仮算定通知書共通情報()
                 ? new EditedKariSanteiTsuchiShoKyotsu() : 仮算定納入通知書情報.get編集後仮算定通知書共通情報();
         this.納入通知書期情報リスト = 納入通知書期情報リスト;
-        this.連番 = 連番;
+        this.連番 = 仮算定納入通知書情報.get連番();
     }
 
     @Override
@@ -178,10 +177,11 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     }
 
     private void editHokenryoGaku(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        if (null == 編集後仮算定通知書共通情報.get更正後() || null == 編集後仮算定通知書共通情報.get更正後().get更正後介護保険料仮徴収額合計()) {
+        if (null == 編集後仮算定通知書共通情報.get更正後()) {
             return;
         }
-        source.hokenryoGaku = new RString(編集後仮算定通知書共通情報.get更正後().get更正後介護保険料仮徴収額合計().toString());
+        source.hokenryoGaku = NotsuReportEditorUtil
+                .get共通ポリシー金額1(編集後仮算定通知書共通情報.get更正後().get更正後介護保険料仮徴収額合計());
     }
 
     private void editSanteiKisoNendo1(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
@@ -189,7 +189,9 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     }
 
     private void editSanteiKisoShutokuDankai(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.santeiKisoShutokuDankai = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get前年度情報().get前年度保険料段階());
+        if (編集後仮算定通知書共通情報.get前年度情報().get前年度保険料段階() != null) {
+            source.santeiKisoShutokuDankai = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get前年度情報().get前年度保険料段階());
+        }
     }
 
     private void editSanteiKisoNendo2(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
@@ -245,17 +247,19 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     }
 
     private void editSanteiKisoGenmenGaku(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        if (null == 編集後仮算定通知書共通情報.get更正後() || null == 編集後仮算定通知書共通情報.get更正後().get更正後介護保険料減免額()) {
+        if (null == 編集後仮算定通知書共通情報.get更正後()) {
             return;
         }
-        source.santeiKisoGenmenGaku = new RString(編集後仮算定通知書共通情報.get更正後().get更正後介護保険料減免額().toString());
+        source.santeiKisoGenmenGaku = NotsuReportEditorUtil
+                .get共通ポリシー金額1(編集後仮算定通知書共通情報.get更正後().get更正後介護保険料減免額());
     }
 
     private void editSanteiKisoTokuchoKariGokeiGaku(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        if (null == 編集後仮算定通知書共通情報.get更正後() || null == 編集後仮算定通知書共通情報.get更正後().get更正後普徴期別金額合計()) {
+        if (null == 編集後仮算定通知書共通情報.get更正後()) {
             return;
         }
-        source.santeiKisoGenmenGaku = new RString(編集後仮算定通知書共通情報.get更正後().get更正後普徴期別金額合計().toString());
+        source.santeiKisoTokuchoKariGokeiGaku = NotsuReportEditorUtil
+                .get共通ポリシー金額1(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計());
     }
 
     private void editSanteiKisoKiTitle1(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
@@ -450,12 +454,12 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     }
 
     private void editTsuchiKaishiKi(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        int 最小期 = 0;
-        RString 最小の期 = RString.EMPTY;
         List<Kitsuki> 出力期リスト = 仮算定納入通知書情報.get出力期リスト();
         if (null == 出力期リスト) {
             return;
         }
+        int 最小期 = 出力期リスト.get(0).get期AsInt();
+        RString 最小の期 = 出力期リスト.get(0).get期();
         for (Kitsuki 出力期 : 出力期リスト) {
             if (最小期 > 出力期.get期AsInt()) {
                 最小期 = 出力期.get期AsInt();
@@ -466,14 +470,14 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     }
 
     private void editTsuchiShuryoKi(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        int 最大期 = 0;
-        RString 最大の期 = RString.EMPTY;
         List<Kitsuki> 出力期リスト = 仮算定納入通知書情報.get出力期リスト();
         if (null == 出力期リスト) {
             return;
         }
+        int 最大期 = 出力期リスト.get(0).get期AsInt();
+        RString 最大の期 = 出力期リスト.get(0).get期();
         for (Kitsuki 出力期 : 出力期リスト) {
-            if (最大期 > 出力期.get期AsInt()) {
+            if (最大期 < 出力期.get期AsInt()) {
                 最大期 = 出力期.get期AsInt();
                 最大の期 = 出力期.get期();
             }
@@ -488,9 +492,10 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     private void editRenban(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
         RString 連番 = new RString(String.valueOf(this.連番));
         if (ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分())) {
-            連番.padLeft(連番, INT6);
+            source.renban = 連番.padLeft("0", INT6);
+        } else {
+            source.renban = RString.EMPTY;
         }
-        source.renban = 連番;
     }
 
     private RString get金額(List<UniversalPhase> 更正後普徴期別金額リスト, int 期) {
@@ -499,7 +504,7 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
         }
         for (UniversalPhase 更正後普徴期別金額 : 更正後普徴期別金額リスト) {
             if (期 == 更正後普徴期別金額.get期()) {
-                return new RString(更正後普徴期別金額.get金額().toString());
+                return NotsuReportEditorUtil.get共通ポリシー金額1(更正後普徴期別金額.get金額());
             }
         }
         return RString.EMPTY;

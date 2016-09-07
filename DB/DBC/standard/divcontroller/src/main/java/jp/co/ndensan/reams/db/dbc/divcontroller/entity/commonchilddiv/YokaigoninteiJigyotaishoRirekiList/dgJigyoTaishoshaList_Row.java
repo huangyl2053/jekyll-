@@ -3,23 +3,19 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Yokaigoni
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri May 20 13:25:31 JST 2016 
+ * Wed Jul 27 19:25:41 CST 2016
  */
-
-
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
-
 /**
- * dgJigyoTaishoshaList_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgJigyoTaishoshaList_Row のクラスファイル
+ *
+ * @reamsid_L DBC-4350-010 wangxingpeng
  */
-
 public class dgJigyoTaishoshaList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private TextBoxFlexibleDate tekiyoKaishiYMD;
     private TextBoxFlexibleDate tekiyoShuryoYMD;

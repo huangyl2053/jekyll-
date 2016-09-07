@@ -4,16 +4,8 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onOkClose_btnZenkaiShosai = function () {
-                return "onOkClose_btnZenkaiShosai";
-            };
-
             Events.onBefore_Dialog = function () {
                 return "onBefore_Dialog";
-            };
-
-            Events.onCancelClose_btnZenkaiShosai = function () {
-                return "onCancelClose_btnZenkaiShosai";
             };
             return Events;
         })();

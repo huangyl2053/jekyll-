@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 介護保険負担限度額認定テーブルの項目定義クラスです。
  */
 public enum DbT4018KaigoHokenFutanGendogakuNintei implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */
@@ -212,7 +212,17 @@ public enum DbT4018KaigoHokenFutanGendogakuNintei implements IColumnDefinition {
      * 一括認定バッチ処理日時
      * <br/>バッチによる一括認定時に、バッチの処理日時を設定
      */
-    ninteiBatchExecutedTimestamp(2147483647, 0);
+    ninteiBatchExecutedTimestamp(2147483647, 0),
+    /**
+     * 遺族年金受給フラグ
+     * <br/>tureの場合、申告有り。
+     */
+    izokuNenkinJukyuFlag(1, 0),
+    /**
+     * 障害年金受給フラグ
+     * <br/>tureの場合、申告有り。
+     */
+    shogaiNenkinJukyuFlag(1, 0);
 
     private final int maxLength;
     private final int scale;

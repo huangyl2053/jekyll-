@@ -41,7 +41,7 @@
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE2240001",
-     "toLayoutTitle": "認定調査結果取込み（OCR）",
+     "toLayoutTitle": "認定調査結果取込（OCR）",
      "toState": "初期表示"
     },
     {
@@ -63,9 +63,9 @@
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE2240001",
-     "layoutTitle": "認定調査結果取込み（OCR）",
+     "layoutTitle": "認定調査結果取込（OCR）",
      "eventName": "認定調査結果戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE2060001",

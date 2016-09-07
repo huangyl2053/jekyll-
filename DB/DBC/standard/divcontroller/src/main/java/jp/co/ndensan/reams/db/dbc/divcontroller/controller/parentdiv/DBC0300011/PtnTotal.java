@@ -8,8 +8,8 @@ import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC03000
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.PtnTotalDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.dgKeiyakuJigyosya_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0300011.PtnTotalHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.JuryoininKeiyakuJigyoshaManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -48,10 +48,10 @@ public class PtnTotal {
         ResponseData<PtnTotalDiv> responseData = new ResponseData<>();
         PtnTotalHandler handler = getHandler(div);
         JuryoininKeiyakuJigyoshaParameter searchKey = ViewStateHolder
-                .get(ViewStateKeys.受領委任契約事業者検索キー, JuryoininKeiyakuJigyoshaParameter.class);
+                .get(ViewStateKeys.検索キー, JuryoininKeiyakuJigyoshaParameter.class);
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         Decimal 最大取得件数 = ViewStateHolder
-                .get(ViewStateKeys.受領委任契約事業者検索最大件数, Decimal.class);
+                .get(ViewStateKeys.最大件数, Decimal.class);
         if (searchKey == null) {
             handler.set初期化状態(true, 状態, 最大取得件数);
             responseData.data = div;
@@ -162,7 +162,7 @@ public class PtnTotal {
         PtnTotalHandler handler = getHandler(div);
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         Decimal 最大取得件数 = ViewStateHolder
-                .get(ViewStateKeys.受領委任契約事業者検索最大件数, Decimal.class);
+                .get(ViewStateKeys.最大件数, Decimal.class);
         handler.set初期化状態(true, 状態, 最大取得件数);
 
         responseData.data = div;
@@ -319,7 +319,7 @@ public class PtnTotal {
                 keiyakuJigyoshaJusho,
                 sameJusho);
 
-        ViewStateHolder.put(ViewStateKeys.受領委任契約事業者検索キー, parameter);
+        ViewStateHolder.put(ViewStateKeys.検索キー, parameter);
         List<JuryoininKeiyakuJigyosha> dataList = JuryoininKeiyakuJigyoshaManager.createInstance()
                 .getJuryoininKeiyakuJigyoshaList(parameter);
         List<dgKeiyakuJigyosya_Row> data = new ArrayList<>();
@@ -334,8 +334,8 @@ public class PtnTotal {
         } else {
             count = dataList.size();
         }
-        ViewStateHolder.put(ViewStateKeys.受領委任契約事業者一覧データ, (ArrayList<JuryoininKeiyakuJigyosha>) dataList);
-        ViewStateHolder.put(ViewStateKeys.受領委任契約事業者検索最大件数, div.getPnlCondition().getTxtMaxCount().getValue());
+        ViewStateHolder.put(ViewStateKeys.一覧データ, (ArrayList<JuryoininKeiyakuJigyosha>) dataList);
+        ViewStateHolder.put(ViewStateKeys.最大件数, div.getPnlCondition().getTxtMaxCount().getValue());
 
         PtnTotalHandler handler = getHandler(div);
         handler.setGrid(count, dataList);
@@ -346,11 +346,11 @@ public class PtnTotal {
      */
     private void setSelectedRow(PtnTotalDiv div) {
         ArrayList<JuryoininKeiyakuJigyosha> allData
-                = ViewStateHolder.get(ViewStateKeys.受領委任契約事業者一覧データ, ArrayList.class);
+                = ViewStateHolder.get(ViewStateKeys.一覧データ, ArrayList.class);
         for (JuryoininKeiyakuJigyosha tmp : allData) {
             if (tmp.get契約事業者番号().equals(
                     div.getPnlData().getDgKeiyakuJigyosya().getSelectedItems().get(0).getTxtKeiyakuJigyoshaNo())) {
-                ViewStateHolder.put(ViewStateKeys.受領委任契約事業者詳細データ, tmp);
+                ViewStateHolder.put(ViewStateKeys.詳細データ, tmp);
             }
         }
     }

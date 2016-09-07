@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotoku;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotoku.rirekino;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotoku.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotoku.shikibetsuCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotoku.shoriTimeStamp;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotoku.shotokuNendo;
@@ -18,15 +18,20 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護所得のデータアクセスクラスです。
+ *
+ * @reamsid_L DBB-9999-021 lijunjun
  */
 public class DbV2502KaigoShotokuAliveDac implements ISaveable<DbV2502KaigoShotokuEntity> {
 
@@ -58,7 +63,7 @@ public class DbV2502KaigoShotokuAliveDac implements ISaveable<DbV2502KaigoShotok
                 where(and(
                                 eq(shotokuNendo, 所得年度),
                                 eq(shikibetsuCode, 識別コード),
-                                eq(rirekino, 履歴番号))).
+                                eq(rirekiNo, 履歴番号))).
                 toObject(DbV2502KaigoShotokuEntity.class);
     }
 
@@ -117,5 +122,26 @@ public class DbV2502KaigoShotokuAliveDac implements ISaveable<DbV2502KaigoShotok
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 介護所得を取得します。
+     *
+     * @param 所得年度 FlexibleYear
+     * @return List<DbV2502KaigoShotokuEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbV2502KaigoShotokuEntity> select介護所得(
+            FlexibleYear 所得年度) throws NullPointerException {
+        requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage("所得年度"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(max(rirekiNo)).
+                table(DbV2502KaigoShotoku.class).
+                where(eq(shotokuNendo, 所得年度)).groupBy(shotokuNendo, shikibetsuCode)
+                .order(by(shotokuNendo, Order.ASC), by(shikibetsuCode, Order.ASC)).
+                toList(DbV2502KaigoShotokuEntity.class);
     }
 }

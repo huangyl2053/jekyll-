@@ -21,8 +21,8 @@ import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC07000
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.DBC0700011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.JutakuKaishuJizenShinseiTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0700011.JutakuKaishuJizenShinseiTorokuDivHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
@@ -285,7 +285,7 @@ public class JutakuKaishuJizenShinseiToroku {
         HihokenshaNo hihokenshaNo = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ShiharaiKekkaResult 前回までの支払結果 = ViewStateHolder.get(ViewStateKeys.前回までの支払結果, ShiharaiKekkaResult.class);
         ViewStateHolder.put(ViewStateKeys.住宅改修データ, handler.過去の住宅改修費取得(hihokenshaNo, 前回までの支払結果));
-        ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧データ, (Serializable) handler.to住宅改修データを画面メモリに保存());
+        ViewStateHolder.put(ViewStateKeys.一覧データ, (Serializable) handler.to住宅改修データを画面メモリに保存());
         return ResponseData.of(div).respond();
     }
 
@@ -376,7 +376,7 @@ public class JutakuKaishuJizenShinseiToroku {
         }
         handler.支払結果の設定(hihokenshaNo);
         ViewStateHolder.put(ViewStateKeys.限度額リセット値, (Serializable) handler.住宅改修データと限度額リセット値の保存());
-        ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧データ, (Serializable) handler.to住宅改修データを画面メモリに保存());
+        ViewStateHolder.put(ViewStateKeys.一覧データ, (Serializable) handler.to住宅改修データを画面メモリに保存());
         return ResponseData.of(div).respond();
     }
 
@@ -472,7 +472,7 @@ public class JutakuKaishuJizenShinseiToroku {
         if (!処理モード.contains(state)) {
 
             確認対象変更有無チェック結果 = handler.確認対象変更有無チェック(
-                    ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧データ, Map.class),
+                    ViewStateHolder.get(ViewStateKeys.一覧データ, Map.class),
                     ViewStateHolder.get(ViewStateKeys.限度額リセット値, List.class));
         }
         if (確認対象変更有無チェック結果) {

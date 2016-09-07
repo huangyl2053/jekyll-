@@ -24,10 +24,10 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
-import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.gyosekukaku.IGyoseiKukaku;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
@@ -185,11 +185,10 @@ public class GenmenKetteiTsuchiShoPrintService {
                     減免決定通知書情報.get納組情報() != null
                     ? 減免決定通知書情報.get納組情報().getNokumi().getNokumiCode() : RString.EMPTY);
         }
-        JushoHenshu jushoHenshu = new JushoHenshu();
         EditedAtesaki 編集後宛先 = null;
         if (減免決定通知書情報.get宛先() != null && 減免決定通知書情報.get地方公共団体() != null
                 && 減免決定通知書情報.get帳票制御共通() != null) {
-            編集後宛先 = jushoHenshu.create編集後宛先(減免決定通知書情報.get宛先(),
+            編集後宛先 = JushoHenshu.create編集後宛先(減免決定通知書情報.get宛先(),
                     減免決定通知書情報.get地方公共団体(),
                     減免決定通知書情報.get帳票制御共通());
         }
@@ -228,11 +227,10 @@ public class GenmenKetteiTsuchiShoPrintService {
                     減免決定通知書情報.get納組情報() != null
                     ? 減免決定通知書情報.get納組情報().getNokumi().getNokumiCode() : RString.EMPTY);
         }
-        JushoHenshu jushoHenshu = new JushoHenshu();
         EditedAtesaki 編集後宛先 = null;
         if (減免決定通知書情報.get宛先() != null && 減免決定通知書情報.get地方公共団体() != null
                 && 減免決定通知書情報.get帳票制御共通() != null) {
-            編集後宛先 = jushoHenshu.create編集後宛先(減免決定通知書情報.get宛先(),
+            編集後宛先 = JushoHenshu.create編集後宛先(減免決定通知書情報.get宛先(),
                     減免決定通知書情報.get地方公共団体(),
                     減免決定通知書情報.get帳票制御共通());
         }

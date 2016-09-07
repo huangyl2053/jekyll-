@@ -18,12 +18,12 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020001.DBB0
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020001.IdoTaishoshaIchiranDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020001.dgIdoTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0020001.IdoTaishoshaIchiranHandler;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.idotaishoshaichiranparameter.IdoTaishoshaIchiranparameter;
 import jp.co.ndensan.reams.db.dbb.service.report.hakkogoidotaishoshaichiran.HakkogoIdoTaishoshaIchiranPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.tsuchishohakkogoidosha.TsuchiShoHakkogoIdoHaaku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -225,18 +225,14 @@ public class IdoTaishoshaIchiran {
     }
 
     private void putViewState(IdoTaishoshaIchiranDiv div) {
-        List<IdoTaishoshaIchiranparameter> listPar = new ArrayList<>();
-        List<dgIdoTaishoshaIchiran_Row> rowList = div.getDgIdoTaishoshaIchiran().getDataSource();
-        for (dgIdoTaishoshaIchiran_Row row : rowList) {
-            IdoTaishoshaIchiranparameter par = new IdoTaishoshaIchiranparameter(
-                    new FlexibleYear(row.getTexYSeireki().toString()),
-                    new HihokenshaNo(row.getTxtHihoNo().toString()),
-                    new TsuchishoNo(row.getTxtTsuchishoNo().toString()),
-                    new ShikibetsuCode(row.getTxtShikibetsuCode().toString())
-            );
-            listPar.add(par);
-        }
-        ViewStateHolder.put(ViewStateKeys.異動者一覧Par, (Serializable) listPar);
+        dgIdoTaishoshaIchiran_Row row = div.getDgIdoTaishoshaIchiran().getClickedItem();
+        IdoTaishoshaIchiranparameter par = new IdoTaishoshaIchiranparameter(
+                new FlexibleYear(row.getTexYSeireki().toString()),
+                new HihokenshaNo(row.getTxtHihoNo().toString()),
+                new TsuchishoNo(row.getTxtTsuchishoNo().toString()),
+                new ShikibetsuCode(row.getTxtShikibetsuCode().toString())
+        );
+        ViewStateHolder.put(ViewStateKeys.異動者一覧Par, par);
     }
 
 }

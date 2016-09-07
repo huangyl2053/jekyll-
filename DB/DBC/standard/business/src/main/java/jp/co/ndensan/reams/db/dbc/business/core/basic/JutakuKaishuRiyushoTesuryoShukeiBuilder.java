@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -74,7 +73,7 @@ public class JutakuKaishuRiyushoTesuryoShukeiBuilder {
      */
     public JutakuKaishuRiyushoTesuryoShukeiBuilder set履歴番号(Decimal 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
+        entity.setRirekiNo(履歴番号.intValue());
         return this;
     }
 
@@ -144,11 +143,11 @@ public class JutakuKaishuRiyushoTesuryoShukeiBuilder {
      * @param 介護住宅改修理由書作成申請年月日 介護住宅改修理由書作成申請年月日
      * @return {@link JutakuKaishuRiyushoTesuryoShukeiBuilder}
      */
-    public JutakuKaishuRiyushoTesuryoShukeiBuilder set介護住宅改修理由書作成申請年月日(FlexibleDate 介護住宅改修理由書作成申請年月日) {
-        requireNonNull(介護住宅改修理由書作成申請年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("介護住宅改修理由書作成申請年月日"));
-        entity.setRiyushoSakuseiShinseiYMD(介護住宅改修理由書作成申請年月日);
-        return this;
-    }
+//    public JutakuKaishuRiyushoTesuryoShukeiBuilder set介護住宅改修理由書作成申請年月日(FlexibleDate 介護住宅改修理由書作成申請年月日) {
+//        requireNonNull(介護住宅改修理由書作成申請年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("介護住宅改修理由書作成申請年月日"));
+//        entity.setRiyushoSakuseiShinseiYMD(介護住宅改修理由書作成申請年月日);
+//        return this;
+//    }
 
     /**
      * 介護住宅改修理由書作成受付年月日を設定します。
@@ -156,11 +155,11 @@ public class JutakuKaishuRiyushoTesuryoShukeiBuilder {
      * @param 介護住宅改修理由書作成受付年月日 介護住宅改修理由書作成受付年月日
      * @return {@link JutakuKaishuRiyushoTesuryoShukeiBuilder}
      */
-    public JutakuKaishuRiyushoTesuryoShukeiBuilder set介護住宅改修理由書作成受付年月日(FlexibleDate 介護住宅改修理由書作成受付年月日) {
-        requireNonNull(介護住宅改修理由書作成受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("介護住宅改修理由書作成受付年月日"));
-        entity.setRiyushoSakuseiUketsukeYMD(介護住宅改修理由書作成受付年月日);
-        return this;
-    }
+//    public JutakuKaishuRiyushoTesuryoShukeiBuilder set介護住宅改修理由書作成受付年月日(FlexibleDate 介護住宅改修理由書作成受付年月日) {
+//        requireNonNull(介護住宅改修理由書作成受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("介護住宅改修理由書作成受付年月日"));
+//        entity.setRiyushoSakuseiUketsukeYMD(介護住宅改修理由書作成受付年月日);
+//        return this;
+//    }
 
     /**
      * 介護支払方法区分を設定します。

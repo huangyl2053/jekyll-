@@ -34,7 +34,7 @@ public class JutakuKaishuRiyushoTesuryoKetteiTest extends DbcTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static JigyoshaNo 主キー名1;
     private static FlexibleDate 主キー名2;
-    private static Decimal 主キー名3;
+    private static int 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
@@ -58,24 +58,24 @@ public class JutakuKaishuRiyushoTesuryoKetteiTest extends DbcTestBase {
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new JutakuKaishuRiyushoTesuryoKettei(null, 主キー名2, 主キー名3);
+            sut = new JutakuKaishuRiyushoTesuryoKettei(null, 主キー名2, new Decimal(主キー名3));
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new JutakuKaishuRiyushoTesuryoKettei(主キー名1, null, 主キー名3);
+            sut = new JutakuKaishuRiyushoTesuryoKettei(主キー名1, null, new Decimal(主キー名3));
         }
 
         @Test
         public void 指定したキーが保持するDbT3094JutakuKaishuRiyushoTesuryoKetteiEntityにセットされている() {
-            sut = new JutakuKaishuRiyushoTesuryoKettei(主キー名1, 主キー名2, 主キー名3);
+            sut = new JutakuKaishuRiyushoTesuryoKettei(主キー名1, 主キー名2, new Decimal(主キー名3));
             assertThat(sut.get介護住宅改修理由書作成事業者番号(), is(主キー名1));
             assertThat(sut.get決定年月日(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するJutakuKaishuRiyushoTesuryoKetteiIdentifierにセットされている() {
-            sut = new JutakuKaishuRiyushoTesuryoKettei(主キー名1, 主キー名2, 主キー名3);
+            sut = new JutakuKaishuRiyushoTesuryoKettei(主キー名1, 主キー名2, new Decimal(主キー名3));
             assertThat(sut.identifier().get介護住宅改修理由書作成事業者番号(), is(主キー名1));
             assertThat(sut.identifier().get決定年月日(), is(主キー名2));
         }
@@ -132,7 +132,7 @@ public class JutakuKaishuRiyushoTesuryoKetteiTest extends DbcTestBase {
 
         @Test
         public void get履歴番号は_entityが持つ履歴番号を返す() {
-            assertThat(sut.get履歴番号(), is(JutakuKaishuRiyushoTesuryoKetteiEntity.getRirekiNo()));
+            assertThat(sut.get履歴番号(), is(new Decimal(JutakuKaishuRiyushoTesuryoKetteiEntity.getRirekiNo())));
         }
 
         @Test

@@ -12,10 +12,10 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0510001.DBB0
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0510001.HonsanteiIdoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0510001.HonsanteiIdoHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0510001.HonsanteiIdoValidationHandler;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteiidogennendo.HonsanteiIdoGennendo;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -57,7 +57,7 @@ public class HonsanteiIdo {
     }
 
     /**
-     * 「実行する」ボタンの必須チェックのメソッドます。
+     * 「実行する」ボタンの必須チェックのメソッドです。
      *
      * @param div コントロールdiv
      * @return ResponseData
@@ -79,7 +79,7 @@ public class HonsanteiIdo {
     }
 
     /**
-     * 「実行する」ボタンをクリックのメソッドます。
+     * 現年度異動賦課「実行する」ボタンをクリックのメソッドです。
      *
      * @param div コントロールdiv
      * @return ResponseData
@@ -91,21 +91,31 @@ public class HonsanteiIdo {
     }
 
     /**
-     * 「実行する」ボタンを設定する。
+     * 現年度異動賦課通知書作成「実行する」ボタンをクリックのメソッドです。
+     *
+     * @param div コントロールdiv
+     * @return ResponseData
+     */
+    public ResponseData<CreateHonsanteiIdoBatchParameter> onClick_btnTsuchishoRegister(HonsanteiIdoDiv div) {
+        SanteiIdoGennen paramter = getHandler(div).setParamter();
+        CreateHonsanteiIdoBatchParameter batchParamter = HonsanteiIdoGennendo.createInstance().createBatchParam(paramter);
+        return ResponseData.of(batchParamter).respond();
+    }
+
+    /**
+     * 「実行する」ボタン表示制御を設定です。
      *
      * @param div HonsanteiIdoDiv
      * @return ResponseData
      */
     public ResponseData<HonsanteiIdoDiv> onStateTransition(HonsanteiIdoDiv div) {
-        if (現年度異動賦課.equals(ResponseHolder.getMenuID())) {
-            boolean falg = ViewStateHolder.get(ViewStateKeys.実行フラグ, Boolean.class);
-            getHandler(div).set実行ボタン(falg);
-        }
+        boolean falg = ViewStateHolder.get(ViewStateKeys.実行フラグ, Boolean.class);
+        getHandler(div).set実行ボタン(falg);
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 抽出条件のメソッドます。
+     * 抽出条件のメソッドです。
      *
      * @param div HonsanteiIdoDiv
      * @return ResponseData
@@ -114,6 +124,18 @@ public class HonsanteiIdo {
         RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課);
         getHandler(div).set抽出条件(new FlexibleYear(調定年度));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「処理対象」コンボボックスのメソッドます。
+     *
+     * @param div KarisanteiIdoFukaPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<HonsanteiIdoDiv> onChange_ddlShoritsuki(HonsanteiIdoDiv div) {
+        RDate date = RDate.getNowDate();
+        getHandler(div).set帳票グループ(date);
         return ResponseData.of(div).respond();
     }
 

@@ -35,8 +35,8 @@ var DBZ;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.btnAddRow = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnAddRow"));
+            Controls.prototype.btnRirekiAdd = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnRirekiAdd"));
             };
 
             Controls.prototype.dgSeikatsuhogoRireki = function () {

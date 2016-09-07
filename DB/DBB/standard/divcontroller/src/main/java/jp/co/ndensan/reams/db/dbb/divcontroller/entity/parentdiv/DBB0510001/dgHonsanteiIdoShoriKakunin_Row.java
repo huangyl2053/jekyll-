@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0510001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 03 13:44:40 CST 2016
+ * Mon Jul 04 19:12:40 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
  * @reamsid_L DBB-0880-010 wangkanglei
  */
 public class dgHonsanteiIdoShoriKakunin_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private RString txtShoriMei;
     private RString txtJokyo;

@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
@@ -14,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 
 /**
@@ -23,8 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
  * @reamsid_L DBE-3000-096 wangjie2
  */
 public class KihonChosaInput7Div extends Panel implements IKihonChosaInput7Div {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -127,7 +127,7 @@ public class KihonChosaInput7Div extends Panel implements IKihonChosaInput7Div {
     }
 
     @JsonIgnore
-    public void setShogaiKoreisha(ShogaiKoreishaDiv ShogaiKoreisha) {
+    public void  setShogaiKoreisha(ShogaiKoreishaDiv ShogaiKoreisha) {
         this.getJiritsudo().setShogaiKoreisha(ShogaiKoreisha);
     }
 
@@ -137,7 +137,7 @@ public class KihonChosaInput7Div extends Panel implements IKihonChosaInput7Div {
     }
 
     @JsonIgnore
-    public void setBtnShogaiKoreisha(ButtonDialog btnShogaiKoreisha) {
+    public void  setBtnShogaiKoreisha(ButtonDialog btnShogaiKoreisha) {
         this.getJiritsudo().getShogaiKoreisha().setBtnShogaiKoreisha(btnShogaiKoreisha);
     }
 
@@ -147,7 +147,7 @@ public class KihonChosaInput7Div extends Panel implements IKihonChosaInput7Div {
     }
 
     @JsonIgnore
-    public void setRadShogaiKoreisha(RadioButton radShogaiKoreisha) {
+    public void  setRadShogaiKoreisha(RadioButton radShogaiKoreisha) {
         this.getJiritsudo().getShogaiKoreisha().setRadShogaiKoreisha(radShogaiKoreisha);
     }
 
@@ -157,7 +157,7 @@ public class KihonChosaInput7Div extends Panel implements IKihonChosaInput7Div {
     }
 
     @JsonIgnore
-    public void setNinchishaJiritsudo(NinchishaJiritsudoDiv NinchishaJiritsudo) {
+    public void  setNinchishaJiritsudo(NinchishaJiritsudoDiv NinchishaJiritsudo) {
         this.getJiritsudo().setNinchishaJiritsudo(NinchishaJiritsudo);
     }
 
@@ -167,7 +167,7 @@ public class KihonChosaInput7Div extends Panel implements IKihonChosaInput7Div {
     }
 
     @JsonIgnore
-    public void setBtnNinchishaJiritsudo(ButtonDialog btnNinchishaJiritsudo) {
+    public void  setBtnNinchishaJiritsudo(ButtonDialog btnNinchishaJiritsudo) {
         this.getJiritsudo().getNinchishaJiritsudo().setBtnNinchishaJiritsudo(btnNinchishaJiritsudo);
     }
 
@@ -177,7 +177,7 @@ public class KihonChosaInput7Div extends Panel implements IKihonChosaInput7Div {
     }
 
     @JsonIgnore
-    public void setRadNinchishaJiritsudo(RadioButton radNinchishaJiritsudo) {
+    public void  setRadNinchishaJiritsudo(RadioButton radNinchishaJiritsudo) {
         this.getJiritsudo().getNinchishaJiritsudo().setRadNinchishaJiritsudo(radNinchishaJiritsudo);
     }
 

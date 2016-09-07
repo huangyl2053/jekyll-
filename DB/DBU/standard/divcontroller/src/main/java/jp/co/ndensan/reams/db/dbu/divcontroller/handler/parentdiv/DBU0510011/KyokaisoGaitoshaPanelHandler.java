@@ -229,6 +229,11 @@ public class KyokaisoGaitoshaPanelHandler {
         div.getTxtHohenryoNofuFromDate().clearValue();
         div.getTxtHohenryoNofuToDate().clearValue();
         div.getDdlTekiyouSuruShutokuDankai().setSelectedKey(RString.EMPTY);
+        div.getTxtHohenryoNofuFromDate().setDisabled(true);
+        div.getTxtHohenryoNofuToDate().setDisabled(true);
+        div.getDdlTekiyouSuruShutokuDankai().setDisabled(true);
+        div.getBtnCancel().setDisabled(true);
+        div.getBtnKakutei().setDisabled(true);
     }
 
     /**

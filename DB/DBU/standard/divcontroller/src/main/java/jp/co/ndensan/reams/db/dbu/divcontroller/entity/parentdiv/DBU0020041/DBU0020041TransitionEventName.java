@@ -14,7 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum DBU0020041TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    補正発行検索に戻る("補正発行検索に戻る");
+    補正発行検索に戻る("補正発行検索に戻る"),
+    完了("完了");
 
     private final RString name;
 

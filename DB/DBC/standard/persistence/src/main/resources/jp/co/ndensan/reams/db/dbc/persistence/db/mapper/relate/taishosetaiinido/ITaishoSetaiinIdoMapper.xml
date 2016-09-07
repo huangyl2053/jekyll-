@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--@reamsid_L DBC-4640-080 liuxiaoyu-->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.taishosetaiinido.ITaishoSetaiinIdoMapper">
+ <select resultOrdered="true" id="select基準収入額適用管理"
+         resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.taishosetaiinido.TaishoSetaiinIdoEntity"
+         parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.taishosetaiinido.TaishoSetaiinIdoMybatisParameter">
+         SELECT A."hihokenshaNo",
+                A."shinseishoSakuseiSetaiKijunYMD",
+                A."rirekiNo"
+        FROM
+          (SELECT B."hihokenshaNo" AS "hihokenshaNo",
+                  B."shinseishoSakuseiSetaiKijunYMD" AS "shinseishoSakuseiSetaiKijunYMD",
+                  B."rirekiNo" AS "rirekiNo",
+                  row_number() OVER (PARTITION BY B."hihokenshaNo"
+                             ORDER BY B."rirekiNo" DESC) AS rirekiNo
+           FROM rgdb."DbT3116KijunShunyugakuTekiyoKanri" AS B
+           WHERE B."setaiCode" = #{世帯コード}
+             AND B."nendo" = #{処理年度}) AS A
+</select>
+</mapper>

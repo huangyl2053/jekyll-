@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.tsuikashiryokagamia4.Tsui
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 追加資料鑑のEditorのインターフェースクラスです。
+ * 追加資料鑑（A4版）のEditorのインターフェースクラスです。
  *
- * @reamsid_L DBE-0150-180 wangrenze
+ * @reamsid_L DBE-0150-420 wangrenze
  */
 public interface ITsuikashiryokagamiA4Editor extends IReportEditor<TsuikashiryokagamiA4ReportSource> {
 

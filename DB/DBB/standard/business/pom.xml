@@ -70,12 +70,11 @@
             <artifactId>DbzService</artifactId>
             <type>jar</type>
         </dependency>
-        <dependency>
+        <dependency> 
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxEntity</artifactId>
-            <version>${jp.co.ndensan.reams.dbxVersion}</version>
             <scope>test</scope>
-            <classifier>tests</classifier>
+            <type>test-jar</type>
         </dependency>
     </dependencies>
 </project>

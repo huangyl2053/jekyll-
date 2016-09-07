@@ -89,8 +89,10 @@ public class KyodoShoriJukyushaIdoRenrakuhyoEditor implements IKyodoShoriJukyush
         source.telNo = 電話番号 != null ? 電話番号.value() : RString.EMPTY;
         YubinNo 郵便番号 = targets.get郵便番号();
         source.yubinNo = get郵便番号(郵便番号);
-        source.ichiSashiKingaku = DecimalFormatter
-                .toコンマ区切りRString(targets.get一時差止金額(), 0);
+        if (targets.get一時差止金額() != null) {
+            source.ichiSashiKingaku = DecimalFormatter
+                    .toコンマ区切りRString(targets.get一時差止金額(), 0);
+        }
         HihokenshaNo 世帯主被保険者番号 = targets.get世帯主被保険者番号();
         source.setainushiHihokenshaNo = 世帯主被保険者番号 != null ? 世帯主被保険者番号.value() : RString.EMPTY;
 
@@ -207,7 +209,6 @@ public class KyodoShoriJukyushaIdoRenrakuhyoEditor implements IKyodoShoriJukyush
     }
 
     private void set利用者負担(KyodoShoriJukyushaIdoRenrakuhyoSource source) {
-        // QA:865
         if (!targets.is利用者負担第２段階()) {
             source.riyoshaFutan1 = FORMAT_MARU;
         } else {

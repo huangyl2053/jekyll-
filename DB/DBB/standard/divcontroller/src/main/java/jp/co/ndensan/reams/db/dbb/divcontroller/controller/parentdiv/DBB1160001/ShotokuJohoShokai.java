@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1160001
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1160001.ShotokuJohoShokaiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -39,7 +39,7 @@ public class ShotokuJohoShokai {
      * @return div
      */
     public ResponseData<ShotokuJohoShokaiDiv> onLoad(ShotokuJohoShokaiDiv div) {
-        FukaTaishoshaKey viewStateData = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
+        FukaTaishoshaKey viewStateData = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
         TsuchishoNo 通知書番号 = viewStateData.get通知書番号();
         FlexibleYear 賦課年度 = viewStateData.get賦課年度();
         LasdecCode 市町村コード = viewStateData.get市町村コード();

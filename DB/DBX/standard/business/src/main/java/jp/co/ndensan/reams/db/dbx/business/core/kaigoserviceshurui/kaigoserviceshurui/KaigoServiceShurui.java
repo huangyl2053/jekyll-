@@ -149,6 +149,42 @@ public class KaigoServiceShurui
     }
 
     /**
+     * 限度額区分を返します。
+     *
+     * @return 限度額区分
+     */
+    public RString get限度額区分() {
+        return entity.getGendogakuKubun();
+    }
+
+    /**
+     * 居宅サービス区分を返します。
+     *
+     * @return 居宅サービス区分
+     */
+    public RString get居宅サービス区分() {
+        return entity.getKyotakuServiceKubun();
+    }
+
+    /**
+     * 指定サービス区分を返します。
+     *
+     * @return 指定サービス区分
+     */
+    public RString get指定サービス区分() {
+        return entity.getShiteiServiceKubun();
+    }
+
+    /**
+     * 基準該当サービス区分を返します。
+     *
+     * @return 基準該当サービス区分
+     */
+    public RString get基準該当サービス区分() {
+        return entity.getKijunGaitoServiceKubun();
+    }
+
+    /**
      * {@link DbT7130KaigoServiceShuruiEntity}のクローンを返します。
      *
      * @return {@link DbT7130KaigoServiceShuruiEntity}のクローン
@@ -169,7 +205,8 @@ public class KaigoServiceShurui
     }
 
     /**
-     * 介護サービス種類配下の要素を削除対象とします。<br/> {@link DbT7130KaigoServiceShuruiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 介護サービス種類配下の要素を削除対象とします。<br/>
+     * {@link DbT7130KaigoServiceShuruiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      * 介護サービス種類配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link KaigoServiceShurui}を返します。
      *
      * @return 削除対象処理実施後の{@link KaigoServiceShurui}
@@ -194,7 +231,8 @@ public class KaigoServiceShurui
     }
 
     /**
-     * 介護サービス種類のみを変更対象とします。<br/> {@link DbT7130KaigoServiceShuruiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護サービス種類のみを変更対象とします。<br/>
+     * {@link DbT7130KaigoServiceShuruiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link KaigoServiceShurui}
      */

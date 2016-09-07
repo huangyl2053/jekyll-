@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBE-1620-010 chengsanyuan -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.imagejohomasking.IImageJohoMaskingMapper">
+    <sql id="selectImageJoho">
+        SELECT
+          C.* 
+        FROM
+          ( 
+            SELECT
+              T5101."shoKisaiHokenshaNo"
+              , T5101."hihokenshaNo"
+              , T5101."hihokenshaName"
+              , T5101."ninteiShinseiYMD"
+              , T5101."ninteiShinseiShinseijiKubunCode"
+              , T5501."shinsakaiKaisaiYoteiYMD"
+              , T5302."ikenshoJuryoYMD"
+              , T5202."ninteichosaJuryoYMD"
+              , T5116."ichijiHanteiYMD"
+              , T5201."ninteichosaIraiRirekiNo"
+              , T5301."ikenshoIraiRirekiNo"
+              , T5101."shinseishoKanriNo"
+              , T7051."shichosonCode"
+              , T5205."ninteichosaTokkijikoNo"
+              , T5205."ninteichosaTokkijikoRemban"
+              , NULL AS "ChoyoID"
+              , NULL AS "torikomiPageNo"
+              , NULL AS "ninteiShinseiNen"
+              , T5115."imageSharedFileId"
+              , T5205."genponMaskKubun" AS "maskKubun"
+              , '特記事項' AS "imageKubun"
+              , T5205."tokkiJiko" 
+            FROM
+              rgdb."DbT5205NinteichosahyoTokkijiko" T5205 
+              INNER JOIN rgdb."DbT5115Image" T5115 
+                ON T5115."shinseishoKanriNo" = T5205."shinseishoKanriNo" 
+              INNER JOIN rgdb."DbT5101NinteiShinseiJoho" T5101 
+                ON T5101."shinseishoKanriNo" = T5205."shinseishoKanriNo" 
+                AND T5101."shoriJotaiKubun" IN( #{取下} , #{延期} )
+                AND T5101."logicalDeletedFlag" = False 
+              INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" T5301 
+                ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo" 
+                AND T5301."logicalDeletedFlag" = FALSE 
+                AND NOT EXISTS ( 
+                  SELECT
+                    'X' 
+                  FROM
+                    rgdb."DbT5301ShujiiIkenshoIraiJoho" AS A 
+                  WHERE
+                    T5301."shinseishoKanriNo" = A."shinseishoKanriNo" 
+                    AND A."logicalDeletedFlag" = False 
+                    AND T5301."ikenshoIraiRirekiNo" <![CDATA[<]]> A."ikenshoIraiRirekiNo"
+                ) 
+              INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" T5302 
+                ON T5302."shinseishoKanriNo" = T5301."shinseishoKanriNo" 
+                AND T5302."ikenshoIraiRirekiNo" = T5301."ikenshoIraiRirekiNo" 
+              INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" T5201 
+                ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo" 
+                AND T5201."logicalDeletedFlag" = FALSE 
+                AND NOT EXISTS ( 
+                  SELECT
+                    'X' 
+                  FROM
+                    rgdb."DbT5201NinteichosaIraiJoho" AS B 
+                  WHERE
+                    T5201."shinseishoKanriNo" = B."shinseishoKanriNo" 
+                    AND B."logicalDeletedFlag" = False 
+                    AND T5201."ninteichosaIraiRirekiNo" <![CDATA[<]]> B."ninteichosaIraiRirekiNo"
+                ) 
+              INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" T5202 
+                ON T5202."shinseishoKanriNo" = T5201."shinseishoKanriNo" 
+                AND T5202."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo" 
+              INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051 
+                ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo" 
+              INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" T5116 
+                ON T5101."shinseishoKanriNo" = T5116."shinseishoKanriNo" 
+              INNER JOIN rgdb."DbT5105NinteiKanryoJoho" T5105 
+                ON T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo" 
+                AND T5101."logicalDeletedFlag" = False 
+                AND T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
+                AND T5105."ninteichosaIraiKanryoYMD" IS NOT NULL 
+                AND T5105."ninteichosaKanryoYMD" IS NOT NULL 
+                AND T5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL 
+                AND T5105."ikenshoTorokuKanryoYMD" IS NOT NULL 
+                AND T5105."ichijiHanteiKanryoYMD" IS NOT NULL 
+                AND T5105."ninteiShinsakaiWariateKanryoYMD" IS NULL 
+                AND T5105."ninteiShinsakaiKanryoYMD" IS NULL 
+                AND T5105."centerSoshinYMD" IS NULL 
+              LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" T5502 
+                ON T5101."shinseishoKanriNo" = T5502."shinseishoKanriNo" 
+              LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" T5501 
+                ON T5501."shinsakaiKaisaiNo" = T5502."shinsakaiKaisaiNo" 
+            WHERE
+              T5205."tokkijikoTextImageKubun" = #{イメージ区分}
+              <if test = "is用紙タイプ"> 
+              AND T5205."ninteichosaTokkijikoNo" = #{事項番号} 
+              </if> 
+            UNION 
+            SELECT
+              T5101."shoKisaiHokenshaNo"
+              , T5101."hihokenshaNo"
+              , T5101."hihokenshaName"
+              , T5101."ninteiShinseiYMD"
+              , T5101."ninteiShinseiShinseijiKubunCode"
+              , T5501."shinsakaiKaisaiYoteiYMD"
+              , T5302."ikenshoJuryoYMD"
+              , T5202."ninteichosaJuryoYMD"
+              , T5116."ichijiHanteiYMD"
+              , T5201."ninteichosaIraiRirekiNo"
+              , T5301."ikenshoIraiRirekiNo"
+              , T5101."shinseishoKanriNo"
+              , T7051."shichosonCode"
+              , NULL AS "ninteichosaTokkijikoNo"
+              , NULL AS "ninteichosaTokkijikoRemban"
+              , T5305."ChoyoID"
+              , T5305."torikomiPageNo"
+              , T5305."ninteiShinseiNen"
+              , T5115."imageSharedFileId"
+              , T5305."maskDataKubun" AS "maskKubun"
+              , '意見書' AS "imageKubun"
+              , NULL AS "tokkiJiko" 
+            FROM
+              rgdb."DbT5305IkenshoImageJoho" T5305 
+              INNER JOIN rgdb."DbT5115Image" T5115 
+                ON T5115."shinseishoKanriNo" = T5305."shinseishoKanriNo" 
+              INNER JOIN rgdb."DbT5101NinteiShinseiJoho" T5101 
+                ON T5101."shinseishoKanriNo" = T5305."shinseishoKanriNo" 
+                AND T5101."shoriJotaiKubun" IN( #{取下} , #{延期} )
+                AND T5101."logicalDeletedFlag" = False 
+              INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" T5301 
+                ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo" 
+                AND T5301."logicalDeletedFlag" = FALSE 
+                AND NOT EXISTS ( 
+                  SELECT
+                    'X' 
+                  FROM
+                    rgdb."DbT5301ShujiiIkenshoIraiJoho" AS A 
+                  WHERE
+                    T5301."shinseishoKanriNo" = A."shinseishoKanriNo" 
+                    AND A."logicalDeletedFlag" = False 
+                    AND T5301."ikenshoIraiRirekiNo" <![CDATA[<]]> A."ikenshoIraiRirekiNo"
+                ) 
+              INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" T5302 
+                ON T5302."shinseishoKanriNo" = T5301."shinseishoKanriNo" 
+                AND T5302."ikenshoIraiRirekiNo" = T5301."ikenshoIraiRirekiNo" 
+              INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" T5201 
+                ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo" 
+                AND T5201."logicalDeletedFlag" = FALSE 
+                AND NOT EXISTS ( 
+                  SELECT
+                    'X' 
+                  FROM
+                    rgdb."DbT5201NinteichosaIraiJoho" AS B 
+                  WHERE
+                    T5201."shinseishoKanriNo" = B."shinseishoKanriNo" 
+                    AND B."logicalDeletedFlag" = False 
+                    AND T5201."ninteichosaIraiRirekiNo" <![CDATA[<]]> B."ninteichosaIraiRirekiNo"
+                ) 
+              INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" T5202 
+                ON T5202."shinseishoKanriNo" = T5201."shinseishoKanriNo" 
+                AND T5202."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo" 
+              INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051 
+                ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo" 
+              INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" T5116 
+                ON T5101."shinseishoKanriNo" = T5116."shinseishoKanriNo" 
+              INNER JOIN rgdb."DbT5105NinteiKanryoJoho" T5105 
+                ON T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo" 
+                AND T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
+                AND T5105."ninteichosaIraiKanryoYMD" IS NOT NULL 
+                AND T5105."ninteichosaKanryoYMD" IS NOT NULL 
+                AND T5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL 
+                AND T5105."ikenshoTorokuKanryoYMD" IS NOT NULL 
+                AND T5105."ichijiHanteiKanryoYMD" IS NOT NULL 
+                AND T5105."ninteiShinsakaiWariateKanryoYMD" IS NULL 
+                AND T5105."ninteiShinsakaiKanryoYMD" IS NULL 
+                AND T5105."centerSoshinYMD" IS NULL 
+              LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" T5502 
+                ON T5101."shinseishoKanriNo" = T5502."shinseishoKanriNo" 
+              LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" T5501 
+                ON T5501."shinsakaiKaisaiNo" = T5502."shinsakaiKaisaiNo"
+          ) AS C
+        WHERE 1 = 1                                                         
+        <if test="is画面">                                                                                
+        AND C."shinseishoKanriNo"  IN 
+            <foreach collection="申請書管理番号リスト" item="item" open="(" separator="," close=")">  
+                    #{item}  
+            </foreach>                                                         
+        </if>                                                                                 
+        <if test="isメニュー">  
+            <if test="is保険者">                                                                             
+                AND C."shichosonCode" = #{市町村コード}                                                          
+            </if>                                                                          
+            <if test="is審査会開催予定日">
+                <if test="is日付範囲開始">
+                    AND #{日付範囲開始} <![CDATA[<=]]> C."shinsakaiKaisaiYoteiYMD"
+                </if>    
+                <if test="is日付範囲終了">  
+                    AND C."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> #{日付範囲終了}
+                </if>
+            </if>   
+            <if test="is一次判定日">
+                <if test="is日付範囲開始">
+                    AND #{日付範囲開始} <![CDATA[<=]]> C."ichijiHanteiYMD"
+                </if>    
+                <if test="is日付範囲終了">  
+                    AND C."ichijiHanteiYMD" <![CDATA[<=]]> #{日付範囲終了}
+                </if>
+            </if> 
+            <if test="is主治医意見書受領日">
+                <if test="is日付範囲開始">
+                    AND #{日付範囲開始} <![CDATA[<=]]> C."ikenshoJuryoYMD"
+                </if>    
+                <if test="is日付範囲終了">  
+                    AND C."ikenshoJuryoYMD" <![CDATA[<=]]> #{日付範囲終了}
+                </if>
+            </if> 
+            <if test="is認定調査結果受領日">
+                <if test="is日付範囲開始">
+                    AND #{日付範囲開始} <![CDATA[<=]]> C."ninteichosaJuryoYMD"
+                </if>    
+                <if test="is日付範囲終了">  
+                    AND C."ninteichosaJuryoYMD" <![CDATA[<=]]> #{日付範囲終了}
+                </if>
+            </if> 
+            <if test="is申請日">
+                <if test="is日付範囲開始">
+                    AND #{日付範囲開始} <![CDATA[<=]]> C."ninteiShinseiYMD"
+                </if>    
+                <if test="is日付範囲終了">  
+                    AND C."ninteiShinseiYMD" <![CDATA[<=]]> #{日付範囲終了}
+                </if>
+            </if>                                                                          
+        </if>                                                                                
+        ORDER BY C."shinseishoKanriNo"  
+    </sql>    
+    <select resultOrdered="true" id="getDataForLoad" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imagejohomasking.ImageJohoMaskingParameter" resultMap="resultMap_ImageJohoMaskingRelateEntity" fetchSize="500">
+        <include refid="selectImageJoho" />
+    </select>
+    <resultMap id="resultMap_ImageJohoMaskingRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.imagejohomasking.ImageJohoMaskingRelateEntity" autoMapping="true">
+        <result property="証記載保険者番号" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="認定申請年月日" column="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定申請区分_申請時コード" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="介護認定審査会開催予定年月日" column="shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="主治医意見書受領年月日" column="ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定調査受領年月日" column="ninteichosaJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="要介護認定一次判定年月日" column="ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定調査依頼履歴番号" column="ninteichosaIraiRirekiNo"/>
+        <result property="主治医意見書作成依頼履歴番号" column="ikenshoIraiRirekiNo"/>
+        <result property="申請書管理番号" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="認定調査特記事項番号" column="ninteichosaTokkijikoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査特記事項連番" column="ninteichosaTokkijikoRemban"/>
+        <result property="帳票ID" column="ChoyoID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="取込みページ番号" column="torikomiPageNo"/>
+        <result property="認定申請年" column="ninteiShinseiNen"/>
+        <result property="イメージ共有ファイルID" column="imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="マスク区分" column="maskKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="イメージ区分" column="imageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特記事項" column="tokkiJiko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+</mapper>

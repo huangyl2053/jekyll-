@@ -9,20 +9,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.report.iinYobihanteiKinyuhyo.IinYobihanteiKinyuhyoItem;
-import jp.co.ndensan.reams.db.dbe.business.report.iinYobihanteiKinyuhyo.IinYobihanteiKinyuhyoReport;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IinYobihanteiKinyuhyoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.report.iinyobihanteikinyuhyo.IinYobihanteiKinyuhyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.HanteiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.iinYobihanteiKinyuhyoReportSource.IinYobihanteiKinyuhyoReportSource;
-import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.iinyobihanteikinyuhyo.IinYobihanteiKinyuhyoReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -35,16 +29,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 委員用予備判定記入表情報バッチクラスです。
@@ -57,11 +45,12 @@ public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoE
             + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getHanteiJoho");
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
             new RString(IinYobihanteiKinyuhyoReportSource.ReportSourceFields.shinsakaiKaisaiNo.name())));
+    private static final int 満ページ件数 = 10;
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
-    private IinYobihanteiKinyuhyoItem item;
+    private IinYobihanteiKinyuhyoBusiness business;
     private int データ件数;
-    private static final int 満ページ件数 = 10;
+
     @BatchWriter
     private BatchReportWriter<IinYobihanteiKinyuhyoReportSource> batchWrite;
     private ReportSourceWriter<IinYobihanteiKinyuhyoReportSource> reportSourceWriter;
@@ -71,8 +60,10 @@ public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoE
         データ件数 = 0;
         myBatisParameter = paramter.toIinTokkiJikouItiziHanteiMyBatisParameter();
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
-        myBatisParameter.setIsShoriJotaiKubun0(ShoriJotaiKubun.通常.getコード());
-        myBatisParameter.setIsShoriJotaiKubun3(ShoriJotaiKubun.延期.getコード());
+        List<RString> shoriJotaiKubunList = new ArrayList<>();
+        shoriJotaiKubunList.add(ShoriJotaiKubun.通常.getコード());
+        shoriJotaiKubunList.add(ShoriJotaiKubun.延期.getコード());
+        myBatisParameter.setShoriJotaiKubunList(shoriJotaiKubunList);
     }
 
     @Override
@@ -82,8 +73,8 @@ public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoE
 
     @Override
     protected void usualProcess(HanteiJohoEntity entity) {
-        set項目(entity);
-        IinYobihanteiKinyuhyoReport report = IinYobihanteiKinyuhyoReport.createFrom(item);
+        business = new IinYobihanteiKinyuhyoBusiness(entity, paramter);
+        IinYobihanteiKinyuhyoReport report = IinYobihanteiKinyuhyoReport.createFrom(business);
         データ件数 = データ件数 + 1;
         report.writeBy(reportSourceWriter);
     }
@@ -103,46 +94,9 @@ public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoE
     @Override
     protected void keyBreakProcess(HanteiJohoEntity t) {
         if (データ件数 % 満ページ件数 == 0) {
-            IinYobihanteiKinyuhyoReport report = IinYobihanteiKinyuhyoReport.createFrom(item);
+            IinYobihanteiKinyuhyoReport report = IinYobihanteiKinyuhyoReport.createFrom(business);
             report.writeBy(reportSourceWriter);
         }
-    }
-
-    private void set項目(HanteiJohoEntity entity) {
-        item = new IinYobihanteiKinyuhyoItem(作成年月日(),
-                paramter.getShinsakaiKaisaiNo(),
-                new RString(entity.getShinsakaiOrder()),
-                entity.getShinseijiKubunCode() == null || entity.getShinseijiKubunCode().isEmpty() ? RString.EMPTY
-                : NinteiShinseiShinseijiKubunCode.toValue(
-                        entity.getShinseijiKubunCode().getColumnValue()).get名称(),
-                HihokenshaKubunCode.toValue(entity.getHihokenshaKubunCode()).get名称(),
-                entity.getSeibetsu() == null || entity.getSeibetsu().isEmpty() ? RString.EMPTY
-                : Seibetsu.toValue(entity.getSeibetsu().getColumnValue()).get名称(),
-                new RString(entity.getAge()),
-                entity.getYokaigoJotaiKubunCode() == null || entity.getYokaigoJotaiKubunCode().isEmpty() ? RString.EMPTY
-                : YokaigoJotaiKubun09.toValue(entity.getYokaigoJotaiKubunCode().getColumnValue()).get名称(),
-                new RString(entity.getHanteiNinteiYukoKikan()),
-                entity.getIchijiHanteiKekkaCode() == null || entity.getIchijiHanteiKekkaCode().isEmpty() ? RString.EMPTY
-                : IchijiHanteiKekkaCode09.toValue(entity.getIchijiHanteiKekkaCode().getColumnValue()).get名称(),
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                entity.getNigoTokuteiShippeiCode() == null || entity.getNigoTokuteiShippeiCode().isEmpty() ? RString.EMPTY
-                : entity.getNigoTokuteiShippeiCode().getColumnValue(),
-                entity.getNigoTokuteiShippeiCode() == null || entity.getNigoTokuteiShippeiCode().isEmpty() ? RString.EMPTY
-                : TokuteiShippei.toValue(entity.getNigoTokuteiShippeiCode().getColumnValue()).get名称(),
-                RString.EMPTY, RString.EMPTY);
-    }
-
-    private RString 作成年月日() {
-        RStringBuilder builder = new RStringBuilder();
-        return builder.append(RDate.getNowDate().wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString())
-                .append(" ")
-                .append(RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).toString())
-                .append(" ")
-                .append("作成")
-                .toRString();
     }
 
     private void outputJokenhyoFactory() {
@@ -165,11 +119,21 @@ public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoE
 
     private List<RString> 出力条件() {
         List<RString> list = new ArrayList<>();
-        RStringBuilder builder = new RStringBuilder();
-        builder.append("【介護認定審査会開催番号】")
+        RStringBuilder builder1 = new RStringBuilder();
+        builder1.append("【合議体番号】")
+                .append(" ")
+                .append(paramter.getGogitaiNo());
+        RStringBuilder builder2 = new RStringBuilder();
+        builder2.append("【介護認定審査会開催予定年月日】")
+                .append(" ")
+                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString());
+        RStringBuilder builder3 = new RStringBuilder();
+        builder3.append("【介護認定審査会開催番号】")
                 .append(" ")
                 .append(paramter.getShinsakaiKaisaiNo());
-        list.add(builder.toRString());
+        list.add(builder1.toRString());
+        list.add(builder2.toRString());
+        list.add(builder3.toRString());
         return list;
     }
 }

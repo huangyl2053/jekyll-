@@ -61,7 +61,7 @@ public class JutakuKaishuRiyushoTesuryoKetteiManager {
         DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity entity = dac.selectByKey(
                 介護住宅改修理由書作成事業者番号,
                 決定年月日,
-                履歴番号);
+                履歴番号.intValue());
         if (entity == null) {
             return null;
         }

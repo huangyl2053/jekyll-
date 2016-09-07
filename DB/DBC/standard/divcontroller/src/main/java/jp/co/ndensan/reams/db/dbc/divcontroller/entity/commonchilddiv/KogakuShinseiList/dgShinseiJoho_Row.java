@@ -3,18 +3,22 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuShi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 21 17:53:27 CST 2016
+ * Tue Jul 19 14:23:46 CST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
+
 /**
- * 画面設計_DBCKD00005_高額申請一覧共有子Div
- *
- * @reamsid_L DBC-2020-010 quxiaodong
+ * dgShinseiJoho_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgShinseiJoho_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 

@@ -6,10 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyodojukyushataishosha;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoIdoRenrakuhyoTaishoshaKensakuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoJukyushaTaishoshaParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
 /**
  * 共同処理用受給者訂正連絡票登録（対象者検索）のMapperクラスです。
@@ -50,4 +52,11 @@ public interface IKyodoJukyushaTaishoshaFinderMapper {
      */
     List<DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity> get被保険者氏名(KyodoJukyushaTaishoshaParameter parameter);
 
+    /**
+     * 被保険者情報取得する。
+     *
+     * @param parameter KyodoIdoRenrakuhyoTaishoshaKensakuParameter
+     * @return 被保険者情報
+     */
+    List<UaFt200FindShikibetsuTaishoEntity> get被保険者情報(KyodoIdoRenrakuhyoTaishoshaKensakuParameter parameter);
 }

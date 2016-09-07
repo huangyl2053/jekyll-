@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT3025KyufujissekiKyotakuService implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */
@@ -84,7 +84,7 @@ public enum DbT3025KyufujissekiKyotakuService implements IColumnDefinition {
     /**
      * 単位数単価
      */
-    tanisuTanka(6, 0),
+    tanisuTanka(4, 0),
     /**
      * 居宅サービス計画作成依頼届出年月日
      */

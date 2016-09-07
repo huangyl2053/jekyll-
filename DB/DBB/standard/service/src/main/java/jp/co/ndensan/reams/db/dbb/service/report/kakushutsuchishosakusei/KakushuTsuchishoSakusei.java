@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ca.cax.entity.db.relate.TotalShunyuRelateEntity;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choshuyuyojoho.ChoshuYuyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukadaichodatahenshu.FukaDaichoInfo;
@@ -73,12 +72,18 @@ import jp.co.ndensan.reams.db.dbb.service.report.fukadaicho.FukaDaichoPrintServi
 import jp.co.ndensan.reams.db.dbb.service.report.gemmen.GenmenKetteiTsuchiShoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.gemmentorikesitsuchisho.GemmenTorikesiTsuchiShoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.henkokenchushitsuchisho.KaigoHokenryogakuHenkoKenChushiTsuchishoPrintService;
-import jp.co.ndensan.reams.db.dbb.service.report.hokenryononyutsuchishobook.NonyuTsuchishoBookFuriKaePrintService;
+import jp.co.ndensan.reams.db.dbb.service.report.hokenryononyutsuchishobook.HokenryoNonyuTsuchishoBookPrintService;
+import jp.co.ndensan.reams.db.dbb.service.report.hokenryononyutsuchishoginfuri.HokenryoNonyuTsuchishoGinfuriPrintService;
+import jp.co.ndensan.reams.db.dbb.service.report.hokenryononyutsuchishokigoto.HokenryoNonyuTsuchishoKigotoPrintService;
+import jp.co.ndensan.reams.db.dbb.service.report.kanendohokenryononyutsuchishoginfuri.KanendoHokenryoNonyuTsuchishoGinfuriPrintService;
+import jp.co.ndensan.reams.db.dbb.service.report.kanendohokenryononyutsuchishokigoto.KanendoHokenryoNonyuTsuchishoKigotoPrintService;
+import jp.co.ndensan.reams.db.dbb.service.report.kanendononyutsuchishobookfurikae.KanendoNonyuTsuchishoBookFuriKaePrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.kanendononyutsuchishocvskakuko.KanendoNonyuTsuchishoCVSKakukoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.kanendononyutsuchishocvskigoto.KanendoNonyuTsuchishoCVSKigotoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.kanendononyutsuchishocvsmulti.KanendoNonyuTsuchishoCVSMultiPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.karisanteifukadaicho.KarisanteiFukaDaichoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.karisanteihenkotsuchisho.KarisanteiHenkoTsuchishoPrintService;
+import jp.co.ndensan.reams.db.dbb.service.report.karisanteihokenryononyutsuchishobook.NonyuTsuchishoBookFuriKaePrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.karisanteihokenryononyutsuchishoginfuri.KarisanteihokenryononyutsuchishoginfuriPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.karisanteihokenryononyutsuchishokigoto.KarisanteiHokenryoNonyuTsuchishoKigotoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoPrintService;
@@ -92,6 +97,7 @@ import jp.co.ndensan.reams.db.dbb.service.report.nonyutsuchishocvsmulti.NonyuTsu
 import jp.co.ndensan.reams.db.dbb.service.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.tsuchisho.notsu.NonyuTsuchiShoJohoFactory;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
@@ -180,7 +186,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
     private static final ReportId 特別徴収開始通知書仮算定_帳票分類ID = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private static final ReportId 仮算定額変更通知書_帳票分類ID = new ReportId("DBB100010_KarisanteiHenkoTsuchishoDaihyo");
     private static final ReportId 保険料納入通知書仮算定_帳票分類ID = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
-    private static final ReportId 賦課台帳仮算定_帳票分類ID = new ReportId("DBB100031_KarisanteiFukaDaicho");
+    private static final ReportId 賦課台帳仮算定_帳票分類ID = new ReportId("DBB100031_FukaDaichoDaihyo");
     private static final ReportId 特別徴収開始通知書本算定_帳票分類ID = new ReportId("DBB100032_TokubetsuChoshuKaishiTsuchishoDaihyo");
     private static final ReportId 保険料納入通知書_帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
     private static final ReportId 決定通知書_帳票分類ID = new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
@@ -192,7 +198,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
             = new ReportId("DBB100081_KaigoHokenHokenryoChoshuyoyoKetteiTsuchishoDaihyo");
     private static final ReportId 介護保険料徴収猶予取消通知書_帳票分類ID
             = new ReportId("DBB100083_KaigoHokenHokenryoChoshuyoyoTorikeshiTsuchishoDaihyo");
-    private static final ReportId 賦課台帳本算定_帳票分類ID = new ReportId("DBB100065_FukaDaicho");
+    private static final ReportId 賦課台帳本算定_帳票分類ID = new ReportId("DBB100031_FukaDaichoDaihyo");
     private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
     private static final RString 項目名 = new RString("通知書タイプ");
     private static final RString 通知書タイプ_B5横 = new RString("001");
@@ -733,7 +739,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
             new KarisanteiNonyuTsuchishoCVSMultiPrintService().print(仮算定納入通知書情報, reportManager);
         } else if (ReportIdDBB.DBB100024.getReportId().equals(帳票ID)) {
             new KarisanteiNonyuTsuchishoCVSKakukoPrintService().print(仮算定納入通知書情報, reportManager);
-        } else {
+        } else if (ReportIdDBB.DBB100028.getReportId().equals(帳票ID)) {
             new KarisanteiNonyuTsuchishoCVSKigotoPrintService().print(仮算定納入通知書情報, reportManager);
         }
 
@@ -1039,7 +1045,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
 
         List<KaigoHokenryogakuHenkoKenChushiTsuchishoJoho> entities = new ArrayList<>();
         KaigoHokenryogakuHenkoKenChushiTsuchishoJoho 決定通知書情報 = new KaigoHokenryogakuHenkoKenChushiTsuchishoJoho();
-        決定通知書情報.set文書番号(parameter.get決定通知書_文書番号());
+        決定通知書情報.set文書番号(parameter.get変更通知書_文書番号());
         決定通知書情報.set本算定決定通知書情報(本算定決定通知書情報);
         List<RString> 調定事由リスト = new ArrayList<>();
         if (parameter.get調定事由List() != null) {
@@ -1154,52 +1160,38 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
 
     private void publish納入通知書本算定(ReportId 帳票ID, HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, ReportManager reportManager) {
 
-//        if (ReportIdDBB.DBB100045.getReportId().equals(帳票ID)) {
-//            return;
-//            //sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariB5Source>().spool(property, report);
-//        } else if (ReportIdDBB.DBB100053.getReportId().equals(帳票ID)) {
-//            return;
-//            //sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariSealerSource>().spool(property, report);
-//        } else if (ReportIdDBB.DBB100051.getReportId().equals(帳票ID)) {
-//            return;
-//            //sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource>().spool(property, report);
-//        } else if (ReportIdDBB.DBB100056.getReportId().equals(帳票ID)) {
-//            return;
-//            //sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource>().spool(property, report);
-//        } else if (ReportIdDBB.DBB100055.getReportId().equals(帳票ID)) {
-//            return;
-        //sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource>().spool(property, report);
-        if (ReportIdDBB.DBB100061.getReportId().equals(帳票ID)) {
+        if (ReportIdDBB.DBB100045.getReportId().equals(帳票ID)) {
+            new HokenryoNonyuTsuchishoKigotoPrintService().print(本算定納入通知書情報, reportManager);
+        } else if (ReportIdDBB.DBB100051.getReportId().equals(帳票ID)
+                || ReportIdDBB.DBB100053.getReportId().equals(帳票ID)) {
+            new HokenryoNonyuTsuchishoGinfuriPrintService().print(本算定納入通知書情報, reportManager);
+        } else if (ReportIdDBB.DBB100055.getReportId().equals(帳票ID)
+                || ReportIdDBB.DBB100056.getReportId().equals(帳票ID)) {
+            new HokenryoNonyuTsuchishoBookPrintService().print(本算定納入通知書情報, reportManager);
+        } else if (ReportIdDBB.DBB100061.getReportId().equals(帳票ID)) {
             new NonyuTsuchishoCVSMultiPrintService().print(本算定納入通知書情報, reportManager);
         } else if (ReportIdDBB.DBB100059.getReportId().equals(帳票ID)) {
             new NonyuTsuchishoCVSKakukoPrintService().print(本算定納入通知書情報, reportManager);
-        } else {
+        } else if (ReportIdDBB.DBB100063.getReportId().equals(帳票ID)) {
             new NonyuTsuchishoCVSKigotoPrintService().print(本算定納入通知書情報, reportManager);
         }
     }
 
     private void publish納入通知書過年度(ReportId 帳票ID, HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, ReportManager reportManager) {
 
-//        if (ReportIdDBB.DBB100066.getReportId().equals(帳票ID)) {
-//            return;
-//            //sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariB5Source>().spool(property, report);
-//        } else if (ReportIdDBB.DBB100070.getReportId().equals(帳票ID)) {
-//            return;
-//            //sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariSealerSource>().spool(property, report);
-//        } else if (ReportIdDBB.DBB100069.getReportId().equals(帳票ID)) {
-//            return;
-//            //sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource>().spool(property, report);
-//        } else if (ReportIdDBB.DBB100072.getReportId().equals(帳票ID)) {
-//            return;
-//            //sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource>().spool(property, report);
-//        } else if (ReportIdDBB.DBB100071.getReportId().equals(帳票ID)) {
-//            return;
-//            //sourceDataCollection = new Printer<TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource>().spool(property, report);
-        if (ReportIdDBB.DBB100075.getReportId().equals(帳票ID)) {
+        if (ReportIdDBB.DBB100066.getReportId().equals(帳票ID)) {
+            new KanendoHokenryoNonyuTsuchishoKigotoPrintService().print(本算定納入通知書情報, reportManager);
+        } else if (ReportIdDBB.DBB100069.getReportId().equals(帳票ID)
+                || ReportIdDBB.DBB100070.getReportId().equals(帳票ID)) {
+            new KanendoHokenryoNonyuTsuchishoGinfuriPrintService().print(本算定納入通知書情報, reportManager);
+        } else if (ReportIdDBB.DBB100071.getReportId().equals(帳票ID)
+                || ReportIdDBB.DBB100072.getReportId().equals(帳票ID)) {
+            new KanendoNonyuTsuchishoBookFuriKaePrintService().print(本算定納入通知書情報, reportManager);
+        } else if (ReportIdDBB.DBB100075.getReportId().equals(帳票ID)) {
             new KanendoNonyuTsuchishoCVSMultiPrintService().print(本算定納入通知書情報, reportManager);
         } else if (ReportIdDBB.DBB100073.getReportId().equals(帳票ID)) {
             new KanendoNonyuTsuchishoCVSKakukoPrintService().print(本算定納入通知書情報, reportManager);
-        } else {
+        } else if (ReportIdDBB.DBB100076.getReportId().equals(帳票ID)) {
             new KanendoNonyuTsuchishoCVSKigotoPrintService().print(本算定納入通知書情報, reportManager);
         }
     }

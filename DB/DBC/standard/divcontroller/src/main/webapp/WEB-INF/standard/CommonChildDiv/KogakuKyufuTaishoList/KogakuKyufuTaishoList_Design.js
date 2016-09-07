@@ -115,6 +115,10 @@ var DBC;
                 return new UZA.TextBoxNum(this.convFiledName("txtRiyoshafutanGokei"));
             };
 
+            Controls.prototype.GokeiPanel = function () {
+                return new UZA.Panel(this.convFiledName("GokeiPanel"));
+            };
+
             Controls.prototype.txtSanteiKijunGaku = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtSanteiKijunGaku"));
             };
@@ -123,8 +127,24 @@ var DBC;
                 return new UZA.TextBoxNum(this.convFiledName("txtSiharaiZumiGaku"));
             };
 
+            Controls.prototype.txtKogakuShikyuGaku = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtKogakuShikyuGaku"));
+            };
+
+            Controls.prototype.txtSetaiSyuyakuBango = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtSetaiSyuyakuBango"));
+            };
+
+            Controls.prototype.rdbKogakuJidoSyokanTaisyo = function () {
+                return new UZA.RadioButton(this.convFiledName("rdbKogakuJidoSyokanTaisyo"));
+            };
+
             Controls.prototype.lin1 = function () {
                 return new UZA.HorizontalLine(this.convFiledName("lin1"));
+            };
+
+            Controls.prototype.KogakuKyufuKonkyoPanel = function () {
+                return new UZA.Panel(this.convFiledName("KogakuKyufuKonkyoPanel"));
             };
 
             Controls.prototype.rdbTsukiOkure = function () {

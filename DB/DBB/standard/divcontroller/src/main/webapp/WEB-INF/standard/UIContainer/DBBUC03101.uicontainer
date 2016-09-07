@@ -22,7 +22,7 @@
      "layoutSubGyomuCode": "DBB",
      "layoutName": "DBB0310001",
      "layoutTitle": "本算定賦課計算",
-     "eventName": "打分け方法確認画面へ",
+     "eventName": "打ち分け方法確認",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBB",

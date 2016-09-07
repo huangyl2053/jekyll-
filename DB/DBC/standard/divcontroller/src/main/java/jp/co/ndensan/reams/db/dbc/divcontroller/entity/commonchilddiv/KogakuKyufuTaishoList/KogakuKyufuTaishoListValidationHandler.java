@@ -7,13 +7,27 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyu
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigoserviceshurui.KaigoServiceShuruiMapperParameter;
+import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiManager;
+import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceJigyoshaInputGuide;
+import jp.co.ndensan.reams.db.dbz.definition.core.kaigojigyoshano.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jigyosha.JigyoshaInputGuideParameter;
+import jp.co.ndensan.reams.db.dbz.service.core.jigyosha.JigyoshaInputGuideFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 画面設計_DBCKD00006_高額給付対象一覧共有子Div
@@ -54,14 +68,23 @@ public class KogakuKyufuTaishoListValidationHandler {
      */
     public ValidationMessageControlPairs 確定チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue() == null
-                || div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue().equals(RString.EMPTY)) {
+        SearchResult<ServiceJigyoshaInputGuide> Jigyosha = JigyoshaInputGuideFinder.
+                createInstance().getServiceJigyoshaInputGuide(
+                        JigyoshaInputGuideParameter.createParam_ServiceJigyoshaInputGuide(new KaigoJigyoshaNo(
+                                        div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue()),
+                                FlexibleDate.EMPTY, FlexibleDate.EMPTY, new AtenaMeisho(RString.EMPTY),
+                                new YubinNo(RString.EMPTY), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                                RString.EMPTY, FlexibleDate.getNowDate(), RString.EMPTY, 0));
+        if (Jigyosha.records().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(
                     new KogakuKyufuTaishoListValidationHandler.IdocheckMessages(
                             UrErrorMessages.存在しない, 事業者番号.toString())));
         }
-        if (div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue() == null
-                || div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue().equals(RString.EMPTY)) {
+        SearchResult<KaigoServiceShurui> kalist = KaigoServiceShuruiManager.createInstance().
+                getServiceTypeList(KaigoServiceShuruiMapperParameter.createSelectByKeyParam(
+                                new ServiceShuruiCode(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue()),
+                                new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString())));
+        if (kalist.records().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(
                     new KogakuKyufuTaishoListValidationHandler.IdocheckMessages(UrErrorMessages.コードマスタなし)));
         }

@@ -21,8 +21,10 @@ public interface ITaishoshaIchiranDiv extends ICommonChildDivBaseProperties {
      * @param 異動日From FlexibleDate
      * @param 異動日To FlexibleDate
      * @param 表示モード RString
+     * @param 削除データ検索 RString
      * @param 対象者一覧情報 List<KyodoJukyushaTaishoshaEntity>
      */
     public void initialize(RString メニューID, HihokenshaNo 被保険者番号, FlexibleDate 異動日From,
-            FlexibleDate 異動日To, RString 表示モード, List<KyodoJukyushaTaishoshaEntity> 対象者一覧情報);
+            FlexibleDate 異動日To, RString 表示モード, RString 削除データ検索,
+            List<KyodoJukyushaTaishoshaEntity> 対象者一覧情報);
 }

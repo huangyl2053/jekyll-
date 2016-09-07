@@ -29,6 +29,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class ChohyoSeigyoHanyoManager {
 
     private final DbT7067ChohyoSeigyoHanyoDac dac;
+    private static final RString KEY_サブ業務コード = new RString("サブ業務コード");
+    private static final RString KEY_帳票分類ID = new RString("帳票分類ID");
+    private static final RString KEY_管理年度 = new RString("管理年度");
+    private static final RString KEY_項目名 = new RString("項目名");
+    private static final RString KEY_帳票制御汎用 = new RString("帳票制御汎用");
+    private static final RString KEY_帳票分類IDLIST = new RString("帳票分類IDList");
 
     /**
      * コンストラクタです。
@@ -70,10 +76,10 @@ public class ChohyoSeigyoHanyoManager {
             ReportId 帳票分類ID,
             FlexibleYear 管理年度,
             RString 項目名) {
-        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サブ業務コード"));
-        requireNonNull(帳票分類ID, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票分類ID"));
-        requireNonNull(管理年度, UrSystemErrorMessages.値がnull.getReplacedMessage("管理年度"));
-        requireNonNull(項目名, UrSystemErrorMessages.値がnull.getReplacedMessage("項目名"));
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_サブ業務コード.toString()));
+        requireNonNull(帳票分類ID, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_帳票分類ID.toString()));
+        requireNonNull(管理年度, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_管理年度.toString()));
+        requireNonNull(項目名, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_項目名.toString()));
 
         DbT7067ChohyoSeigyoHanyoEntity entity = dac.selectByKey(
                 サブ業務コード,
@@ -112,7 +118,7 @@ public class ChohyoSeigyoHanyoManager {
      */
     @Transaction
     public boolean save帳票制御汎用(ChohyoSeigyoHanyo 帳票制御汎用) {
-        requireNonNull(帳票制御汎用, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御汎用"));
+        requireNonNull(帳票制御汎用, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_帳票制御汎用.toString()));
         if (!帳票制御汎用.hasChanged()) {
             return false;
         }
@@ -134,10 +140,10 @@ public class ChohyoSeigyoHanyoManager {
             List<ReportId> 帳票分類IDList,
             FlexibleYear 管理年度,
             RString 項目名) {
-        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サブ業務コード"));
-        requireNonNull(帳票分類IDList, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票分類IDList"));
-        requireNonNull(管理年度, UrSystemErrorMessages.値がnull.getReplacedMessage("管理年度"));
-        requireNonNull(項目名, UrSystemErrorMessages.値がnull.getReplacedMessage("項目名"));
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_サブ業務コード.toString()));
+        requireNonNull(帳票分類IDList, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_帳票分類IDLIST.toString()));
+        requireNonNull(管理年度, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_管理年度.toString()));
+        requireNonNull(項目名, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_項目名.toString()));
 
         List<DbT7067ChohyoSeigyoHanyoEntity> entityList = dac.get表示制御に必要な情報(
                 サブ業務コード,
@@ -154,13 +160,36 @@ public class ChohyoSeigyoHanyoManager {
     }
 
     /**
+     * 帳票制御汎用リスト{@link ChohyoSeigyoHanyo}を取得します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 管理年度 FlexibleYear
+     * @return businessList
+     */
+    @Transaction
+    public List<ChohyoSeigyoHanyo> get帳票制御汎用(
+            SubGyomuCode サブ業務コード, FlexibleYear 管理年度) {
+        requireNonNull(管理年度, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_管理年度.toString()));
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_サブ業務コード.toString()));
+        List<DbT7067ChohyoSeigyoHanyoEntity> entityList = dac.get帳票制御汎用(サブ業務コード,
+                管理年度);
+        List<ChohyoSeigyoHanyo> businessList = new ArrayList<>();
+
+        for (DbT7067ChohyoSeigyoHanyoEntity entity : entityList) {
+            entity.initializeMd5();
+            businessList.add(new ChohyoSeigyoHanyo(entity));
+        }
+        return businessList;
+    }
+
+    /**
      * 帳票制御汎用リスト{@link ChohyoSeigyoHanyo}を更新します。
      *
      * @param 帳票制御汎用リスト 帳票制御汎用リスト
      */
     @Transaction
     public void update帳票制御汎用(List<ChohyoSeigyoHanyo> 帳票制御汎用リスト) {
-        requireNonNull(帳票制御汎用リスト, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御汎用"));
+        requireNonNull(帳票制御汎用リスト, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_帳票制御汎用.toString()));
         for (ChohyoSeigyoHanyo 帳票制御汎用 : 帳票制御汎用リスト) {
             DbT7067ChohyoSeigyoHanyoEntity entity = 帳票制御汎用.toEntity();
             entity.setState(EntityDataState.Modified);
@@ -184,5 +213,56 @@ public class ChohyoSeigyoHanyoManager {
             businessList.add(new ChohyoSeigyoHanyo(entity));
         }
         return SearchResult.of(businessList, 0, false);
+    }
+
+    /**
+     * 帳票制御汎用リスト{@link ChohyoSeigyoHanyo}を取得します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 帳票分類ID ChohyoBunruiID
+     * @return businessList
+     */
+    @Transaction
+    public List<ChohyoSeigyoHanyo> get帳票制御汎用一覧(
+            SubGyomuCode サブ業務コード, ReportId 帳票分類ID) {
+        requireNonNull(帳票分類ID, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_帳票分類ID.toString()));
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_サブ業務コード.toString()));
+        List<DbT7067ChohyoSeigyoHanyoEntity> entityList = dac.get帳票制御汎用一覧(サブ業務コード,
+                帳票分類ID);
+        List<ChohyoSeigyoHanyo> businessList = new ArrayList<>();
+
+        for (DbT7067ChohyoSeigyoHanyoEntity entity : entityList) {
+            entity.initializeMd5();
+            businessList.add(new ChohyoSeigyoHanyo(entity));
+        }
+        return businessList;
+    }
+
+    /**
+     * 帳票制御汎用リスト{@link ChohyoSeigyoHanyo}を取得します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 帳票分類ID ChohyoBunruiID
+     * @param 項目名 KomokuName
+     * @return ChohyoSeigyoHanyo
+     */
+    @Transaction
+    public ChohyoSeigyoHanyo get帳票制御汎用(
+            SubGyomuCode サブ業務コード,
+            ReportId 帳票分類ID,
+            RString 項目名) {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_サブ業務コード.toString()));
+        requireNonNull(帳票分類ID, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_帳票分類ID.toString()));
+        requireNonNull(項目名, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_項目名.toString()));
+
+        DbT7067ChohyoSeigyoHanyoEntity entity = dac.get帳票制御汎用(
+                サブ業務コード,
+                帳票分類ID,
+                項目名);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new ChohyoSeigyoHanyo(entity);
     }
 }

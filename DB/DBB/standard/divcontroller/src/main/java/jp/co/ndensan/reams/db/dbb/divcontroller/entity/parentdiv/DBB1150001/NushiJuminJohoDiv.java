@@ -4,20 +4,22 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1150001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukakihon.KaigoFukaKihon.IKaigoFukaKihonDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukakihon.KaigoFukaKihon.KaigoFukaKihonDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * NushiJuminJoho のクラスファイル 
- * 
- * @author 自動生成
+ * NushiJuminJoho のクラスファイル
+ *
+ * @reamsid_L DBB-1710-010 xuhao
  */
 public class NushiJuminJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,10 +32,10 @@ public class NushiJuminJohoDiv extends Panel {
     private ShotokuShokaihyoShuseiNyuryokuPanelDiv ShotokuShokaihyoShuseiNyuryokuPanel;
     @JsonProperty("HakkoKakuninPanel")
     private HakkoKakuninPanelDiv HakkoKakuninPanel;
-    @JsonProperty("ccdKaigoFukaKihon")
-    private KaigoFukaKihonDiv ccdKaigoFukaKihon;
     @JsonProperty("ccdKaigoAtenaInfo")
     private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
+    @JsonProperty("ccdKaigoFukaKihon")
+    private KaigoFukaKihonDiv ccdKaigoFukaKihon;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -96,21 +98,21 @@ public class NushiJuminJohoDiv extends Panel {
     }
 
     /*
-     * getccdKaigoFukaKihon
-     * @return ccdKaigoFukaKihon
-     */
-    @JsonProperty("ccdKaigoFukaKihon")
-    public IKaigoFukaKihonDiv getCcdKaigoFukaKihon() {
-        return ccdKaigoFukaKihon;
-    }
-
-    /*
      * getccdKaigoAtenaInfo
      * @return ccdKaigoAtenaInfo
      */
     @JsonProperty("ccdKaigoAtenaInfo")
     public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
         return ccdKaigoAtenaInfo;
+    }
+
+    /*
+     * getccdKaigoFukaKihon
+     * @return ccdKaigoFukaKihon
+     */
+    @JsonProperty("ccdKaigoFukaKihon")
+    public IKaigoFukaKihonDiv getCcdKaigoFukaKihon() {
+        return ccdKaigoFukaKihon;
     }
 
     // </editor-fold>

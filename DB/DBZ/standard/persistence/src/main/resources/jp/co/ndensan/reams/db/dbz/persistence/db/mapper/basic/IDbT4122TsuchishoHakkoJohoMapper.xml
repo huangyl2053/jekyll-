@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4122TsuchishoHakkoJohoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4122TsuchishoHakkoJohoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4122TsuchishoHakkoJoho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4122TsuchishoHakkoJohoMapper.allColumns_DbT4122TsuchishoHakkoJoho" />
+     FROM
+         rgdb."DbT4122TsuchishoHakkoJoho"
+     WHERE
+         rgdb."DbT4122TsuchishoHakkoJoho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4122TsuchishoHakkoJoho">
+         "DbT4122TsuchishoHakkoJoho"."shinseishoKanriNo" as "dbT4122TsuchishoHakkoJoho_shinseishoKanriNo",
+         "DbT4122TsuchishoHakkoJoho"."insertDantaiCd" as "dbT4122TsuchishoHakkoJoho_insertDantaiCd",
+         "DbT4122TsuchishoHakkoJoho"."insertTimestamp" as "dbT4122TsuchishoHakkoJoho_insertTimestamp",
+         "DbT4122TsuchishoHakkoJoho"."insertReamsLoginId" as "dbT4122TsuchishoHakkoJoho_insertReamsLoginId",
+         "DbT4122TsuchishoHakkoJoho"."insertContextId" as "dbT4122TsuchishoHakkoJoho_insertContextId",
+         "DbT4122TsuchishoHakkoJoho"."isDeleted" as "dbT4122TsuchishoHakkoJoho_isDeleted",
+         "DbT4122TsuchishoHakkoJoho"."updateCount" as "dbT4122TsuchishoHakkoJoho_updateCount",
+         "DbT4122TsuchishoHakkoJoho"."lastUpdateTimestamp" as "dbT4122TsuchishoHakkoJoho_lastUpdateTimestamp",
+         "DbT4122TsuchishoHakkoJoho"."lastUpdateReamsLoginId" as "dbT4122TsuchishoHakkoJoho_lastUpdateReamsLoginId",
+         "DbT4122TsuchishoHakkoJoho"."tsuchiKubun" as "dbT4122TsuchishoHakkoJoho_tsuchiKubun",
+         "DbT4122TsuchishoHakkoJoho"."tsuchiRiyu" as "dbT4122TsuchishoHakkoJoho_tsuchiRiyu",
+         "DbT4122TsuchishoHakkoJoho"."tsuchiYMD" as "dbT4122TsuchishoHakkoJoho_tsuchiYMD",
+         "DbT4122TsuchishoHakkoJoho"."tsuchiKaishiYMD" as "dbT4122TsuchishoHakkoJoho_tsuchiKaishiYMD",
+         "DbT4122TsuchishoHakkoJoho"."tsuchiShuryoYMD" as "dbT4122TsuchishoHakkoJoho_tsuchiShuryoYMD",
+         "DbT4122TsuchishoHakkoJoho"."tsuchiKubunKigenYMD" as "dbT4122TsuchishoHakkoJoho_tsuchiKubunKigenYMD",
+         "DbT4122TsuchishoHakkoJoho"."tsuchiKanryoYMD" as "dbT4122TsuchishoHakkoJoho_tsuchiKanryoYMD"
+    </sql>
+
+
+    <!--テーブルDbT4122TsuchishoHakkoJohoの項目をDbT4122TsuchishoHakkoJohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4122TsuchishoHakkoJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4122TsuchishoHakkoJohoEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT4122TsuchishoHakkoJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT4122TsuchishoHakkoJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4122TsuchishoHakkoJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4122TsuchishoHakkoJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4122TsuchishoHakkoJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4122TsuchishoHakkoJoho_isDeleted" />
+        <result property="updateCount" column="dbT4122TsuchishoHakkoJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4122TsuchishoHakkoJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4122TsuchishoHakkoJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tsuchiKubun" column="dbT4122TsuchishoHakkoJoho_tsuchiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="tsuchiRiyu" column="dbT4122TsuchishoHakkoJoho_tsuchiRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tsuchiYMD" column="dbT4122TsuchishoHakkoJoho_tsuchiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tsuchiKaishiYMD" column="dbT4122TsuchishoHakkoJoho_tsuchiKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tsuchiShuryoYMD" column="dbT4122TsuchishoHakkoJoho_tsuchiShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tsuchiKubunKigenYMD" column="dbT4122TsuchishoHakkoJoho_tsuchiKubunKigenYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tsuchiKanryoYMD" column="dbT4122TsuchishoHakkoJoho_tsuchiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+
+</mapper>

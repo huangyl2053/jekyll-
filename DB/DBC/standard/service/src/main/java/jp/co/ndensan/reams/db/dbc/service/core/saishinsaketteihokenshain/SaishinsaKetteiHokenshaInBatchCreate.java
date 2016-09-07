@@ -55,7 +55,7 @@ public class SaishinsaKetteiHokenshaInBatchCreate {
         if (明細Entity == null) {
             meisaiEntity.setRirekiNo(連番.intValue());
         } else {
-            meisaiEntity.setRirekiNo(明細Entity.getRirekiNo().add(連番).intValue());
+            meisaiEntity.setRirekiNo(new Decimal(明細Entity.getRirekiNo()).add(連番).intValue());
         }
         meisaiEntity.setJigyoshoNo(new JigyoshaNo(trim囲み文字(csvMeisaiEntity.get事業所番号())));
         meisaiEntity.setJigyoshoName(trim囲み文字(csvMeisaiEntity.get事業所名()));

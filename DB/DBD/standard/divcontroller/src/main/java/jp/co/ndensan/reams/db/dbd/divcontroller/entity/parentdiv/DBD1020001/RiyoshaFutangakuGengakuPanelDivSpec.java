@@ -8,18 +8,15 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuService;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
-import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 利用者負担額減額申請バリデーションクラスです。
@@ -113,9 +110,7 @@ public enum RiyoshaFutangakuGengakuPanelDivSpec implements IPredicate<RiyoshaFut
                     Decimal 給付率_91 = new Decimal(91);
                     Decimal 給付率_100 = new Decimal(100);
 
-                    TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-                    HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-
+                    HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getCcdKaigoKihon().get被保険者番号());
                     RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
 
                     FutanwariaiKubun 負担割合区分 = service.get利用者負担割合(被保険者番号, div.getTxtShinseiYmd().getValue());
@@ -199,9 +194,7 @@ public enum RiyoshaFutangakuGengakuPanelDivSpec implements IPredicate<RiyoshaFut
                 public boolean apply(RiyoshaFutangakuGengakuPanelDiv div) {
                     RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
 
-                    TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-                    HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-
+                    HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getCcdKaigoKihon().get被保険者番号());
                     FlexibleDate 適用日 = div.getTxtTekiyoYmd().getValue();
 
                     boolean 利用者 = service.canBe利用者(被保険者番号, 適用日);
@@ -224,7 +217,7 @@ public enum RiyoshaFutangakuGengakuPanelDivSpec implements IPredicate<RiyoshaFut
 
                     List<ddlShinseiIchiran_Row> list = div.getDdlShinseiIchiran().getDataSource();
                     if (list == null || list.isEmpty()) {
-                        return false;
+                        return true;
                     }
                     FlexibleDate 適用日１;
                     FlexibleDate 適用日２;

@@ -8,6 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekka;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekka.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekka.isDeleted;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekka.rirekiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekka.shikyuShinseishoSeiriNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekka.shoKisaiHokenshaNo;
@@ -21,7 +22,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -84,6 +87,41 @@ public class DbT3072KogakuGassanShikyuGakuKeisanKekkaDac implements ISaveable<Db
         return accessor.select().
                 table(DbT3072KogakuGassanShikyuGakuKeisanKekka.class).
                 toList(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity.class);
+    }
+
+    /**
+     * 主キーで高額合算支給額計算結果を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年度 TaishoNendo
+     * @param 証記載保険者番号 ShoKisaiHokenshaNo
+     * @param 支給申請書整理番号 ShikyuShinseishoSeiriNo
+     * @return DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity> selectByKey(
+            HihokenshaNo 被保険者番号,
+            FlexibleYear 対象年度,
+            HokenshaNo 証記載保険者番号,
+            RString 支給申請書整理番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3072KogakuGassanShikyuGakuKeisanKekka.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(taishoNendo, 対象年度),
+                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
+                                eq(shikyuShinseishoSeiriNo, 支給申請書整理番号),
+                                eq(isDeleted, false))).
+                order(by(taishoNendo, Order.DESC), by(shikyuShinseishoSeiriNo, Order.DESC), by(rirekiNo, Order.DESC))
+                .toList(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity.class);
     }
 
     /**

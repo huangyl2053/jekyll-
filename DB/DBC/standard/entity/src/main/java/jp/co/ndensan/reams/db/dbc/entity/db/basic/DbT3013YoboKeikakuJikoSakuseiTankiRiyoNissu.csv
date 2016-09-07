@@ -5,3 +5,6 @@ riyoYM,UDD014YM,FlexibleYearMonth,,,,,利用年月,A
 zenkaiRiyoNissu,numeric,Decimal,,,,,前回迄利用日数,A
 konkaiKeikakuRiyoNissu,numeric,Decimal,,,,,今回計画利用日数,A
 zanteiKubun,varchar,RString,,,,,暫定区分,A
+koshinKubun,varchar,RString,,,,,更新区分,A
+koshinYMD,UDD015YMD,FlexibleDate,,,,,更新年月日,A
+sofuYM,UDD014YM,FlexibleYearMonth,,,,,送付年月,A

@@ -98,12 +98,12 @@ public class ShotokuShokaihyoTateSource implements IReportSource {
     public RString birthYMD4;
     @ReportItem(name = "denshiKoin", order = 43)
     public RString denshiKoin;
-    @ReportItem(name = "shomeiHakkoYMD", length = 22, order = 44)
-    public RString shomeiHakkoYMD;
-    @ReportItem(name = "shuchoMei", length = 14, order = 45)
-    public RString shuchoMei;
-    @ReportItem(name = "shichosonMei", length = 40, order = 46)
-    public RString shichosonMei;
+    @ReportItem(name = "hakkoYMD", length = 12, order = 44)
+    public RString hakkoYMD;
+    @ReportItem(name = "ninshoshaYakushokuMei", length = 15, order = 45)
+    public RString ninshoshaYakushokuMei;
+    @ReportItem(name = "ninshoshaShimeiKakenai", length = 14, order = 46)
+    public RString ninshoshaShimeiKakenai;
     @ReportItem(name = "koinShoryaku", length = 15, order = 47)
     public RString koinShoryaku;
     @ReportItem(name = "bushoName", length = 20, order = 48)
@@ -120,8 +120,6 @@ public class ShotokuShokaihyoTateSource implements IReportSource {
     public RString yubinBango;
     @ReportItem(name = "telNo", length = 35, order = 54)
     public RString telNo;
-    @ReportItem(name = "pageCount", length = 1, order = 55)
-    public RString pageCount;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

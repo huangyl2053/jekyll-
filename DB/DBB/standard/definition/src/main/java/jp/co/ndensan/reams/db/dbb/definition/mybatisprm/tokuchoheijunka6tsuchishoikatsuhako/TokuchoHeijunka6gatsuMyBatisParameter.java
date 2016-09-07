@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchis
 
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -23,7 +24,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class TokuchoHeijunka6gatsuMyBatisParameter implements IMyBatisParameter {
 
     private boolean 一括発行起動;
-    private SubGyomuCode 業務コード;
+    private SubGyomuCode サブ業務コード;
+    private GyomuCode 業務コード;
     private FlexibleYear 調定年度minus1;
     private FlexibleYear 調定年度;
     private List<RString> 通知内容コード;
@@ -53,7 +55,8 @@ public class TokuchoHeijunka6gatsuMyBatisParameter implements IMyBatisParameter 
             RString 更正前後区分, RString 作成処理名, RString 徴収方法, RString 被保険者区分, RString 特別徴収_厚生労働省,
             RString 特別徴収_地共済) {
 
-        this.業務コード = SubGyomuCode.DBB介護賦課;
+        this.サブ業務コード = SubGyomuCode.DBB介護賦課;
+        this.業務コード = GyomuCode.DB介護保険;
         this.調定年度 = 調定年度;
         if (調定年度 != null) {
             this.調定年度minus1 = 調定年度.minusYear(1);

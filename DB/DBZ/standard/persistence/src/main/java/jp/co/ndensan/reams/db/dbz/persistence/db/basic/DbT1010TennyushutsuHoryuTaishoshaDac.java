@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -114,5 +115,23 @@ public class DbT1010TennyushutsuHoryuTaishoshaDac implements ISaveable<DbT1010Te
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.deletePhysical(entity).execute();
+    }
+
+    /**
+     * 転入保留対象者の履歴番号の取得。
+     *
+     * @param 識別コード 識別コード
+     * @return int
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT1010TennyushutsuHoryuTaishoshaEntity get転入保留対象者の履歴番号Max(ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(max(rirekiNo)).
+                table(DbT1010TennyushutsuHoryuTaishosha.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                toObject(DbT1010TennyushutsuHoryuTaishoshaEntity.class);
     }
 }

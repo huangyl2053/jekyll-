@@ -10,7 +10,9 @@ import jp.co.ndensan.reams.db.dba.business.report.hihokenshashoa4.HihokenshashoA
 import jp.co.ndensan.reams.db.dba.business.report.hihokenshashoa4.HihokenshashoA4Proerty;
 import jp.co.ndensan.reams.db.dba.business.report.hihokenshashoa4.HihokenshashoA4Report;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashoa4.HihokenshashoA4ReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -45,6 +47,8 @@ public class HihokenshashoA4PrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBA介護資格,
                         property.reportId(),
                         FlexibleDate.getNowDate(),
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                        KenmeiFuyoKubunType.付与なし,
                         reportSourceWriter);
                 for (HihokenshashoA4BodyItem item : hihokenshashoA4Joho.getBodyItem()) {
                     item.setImageField1(ninshoshaSource.denshiKoin);

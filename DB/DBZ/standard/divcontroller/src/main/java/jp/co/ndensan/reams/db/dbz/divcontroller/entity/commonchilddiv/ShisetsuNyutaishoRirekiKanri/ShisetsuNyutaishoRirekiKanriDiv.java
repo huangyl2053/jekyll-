@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuN
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuNyutaishoRirekiKanriDiv {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -49,6 +51,8 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     private RString shichosonCode;
     @JsonProperty("shikibetsuCode")
     private RString shikibetsuCode;
+    @JsonProperty("syokikaMode")
+    private RString syokikaMode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -180,6 +184,24 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     @JsonProperty("shikibetsuCode")
     public void setShikibetsuCode(RString shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
+    }
+
+    /*
+     * getsyokikaMode
+     * @return syokikaMode
+     */
+    @JsonProperty("syokikaMode")
+    public RString getSyokikaMode() {
+        return syokikaMode;
+    }
+
+    /*
+     * setsyokikaMode
+     * @param syokikaMode syokikaMode
+     */
+    @JsonProperty("syokikaMode")
+    public void setSyokikaMode(RString syokikaMode) {
+        this.syokikaMode = syokikaMode;
     }
 
     /*

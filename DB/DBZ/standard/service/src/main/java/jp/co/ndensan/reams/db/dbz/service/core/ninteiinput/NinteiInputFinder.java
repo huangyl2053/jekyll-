@@ -26,8 +26,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4101NinteiShinseiJohoD
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4102NinteiKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5102NinteiKekkaJohoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7202KaigoNinteiHokaiseiKanriMapper;
-import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7202KaigoNinteiHokaiseiKanriDac;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -44,7 +43,7 @@ public class NinteiInputFinder {
     private final DbT5101NinteiShinseiJohoDac dbT5101dac;
     private final DbT5102NinteiKekkaJohoDac dbT5102dac;
     private final DbT4001JukyushaDaichoDac dbT4001dac;
-    private final MapperProvider mapperProvider;
+    private final DbT7202KaigoNinteiHokaiseiKanriDac dbt7202dac;
 
     /**
      * コンストラクタ
@@ -55,7 +54,7 @@ public class NinteiInputFinder {
         this.dbT5101dac = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
         this.dbT5102dac = InstanceProvider.create(DbT5102NinteiKekkaJohoDac.class);
         this.dbT4001dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
-        mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.dbt7202dac = InstanceProvider.create(DbT7202KaigoNinteiHokaiseiKanriDac.class);
     }
 
     /**
@@ -73,13 +72,13 @@ public class NinteiInputFinder {
             DbT5101NinteiShinseiJohoDac dbT5101dac,
             DbT5102NinteiKekkaJohoDac dbT5102dac,
             DbT4001JukyushaDaichoDac dbT4001dac,
-            MapperProvider mapperProvider) {
+            DbT7202KaigoNinteiHokaiseiKanriDac dbt7202dac) {
         this.dbT4101dac = dbT4101dac;
         this.dbT4102dac = dbT4102dac;
         this.dbT5101dac = dbT5101dac;
         this.dbT5102dac = dbT5102dac;
         this.dbT4001dac = dbT4001dac;
-        this.mapperProvider = mapperProvider;
+        this.dbt7202dac = dbt7202dac;
     }
 
     /**
@@ -176,8 +175,7 @@ public class NinteiInputFinder {
      */
     @Transaction
     public DbT7202KaigoNinteiHokaiseiKanriBusiness get最古法改正施行年月日() {
-        IDbT7202KaigoNinteiHokaiseiKanriMapper mapper = mapperProvider.create(IDbT7202KaigoNinteiHokaiseiKanriMapper.class);
-        DbT7202KaigoNinteiHokaiseiKanriEntity entity = mapper.get最古法改正施行年月日();
+        DbT7202KaigoNinteiHokaiseiKanriEntity entity = dbt7202dac.get最古法改正施行年月日();
         if (entity != null) {
             return new DbT7202KaigoNinteiHokaiseiKanriBusiness(entity);
         }

@@ -194,41 +194,56 @@ public final class YoshikiIchiBesshiHandler {
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
      * @return List<JigyoHokokuTokeiData>
      */
-    public List<JigyoHokokuTokeiData> get修正データ(JigyoHokokuGeppoParameter 引き継ぎデータ) {
+    public List<JigyoHokokuTokeiData> get修正データ(List<JigyoHokokuTokeiData> 引き継ぎデータ) {
         List<JigyoHokokuTokeiData> 修正データリスト = new ArrayList<>();
-        List<JigyoHokokuTokeiData> 更新前データリスト = get更新前データリスト(引き継ぎデータ);
-        for (JigyoHokokuTokeiData entity : 更新前データリスト) {
-            if (entity.get横番号().equals(DATA_ONE) && entity.get縦番号().equals(DATA_ONE)
-                    && entity.get集計番号().equals(DATA)
-                    && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi()
-                            .getTxtZengetsumatsugenzai().getValue())) {
+        for (JigyoHokokuTokeiData entity : 引き継ぎデータ) {
+            if (isdata_ONE(entity)) {
                 entity = entity.createBuilderForEdit().set集計結果値(
                         div.getYoshikiIchiBesshiIchi().getTxtZengetsumatsugenzai().getValue()).build();
                 修正データリスト.add(entity);
             }
-            if (entity.get横番号().equals(DATA_TWO) && entity.get縦番号().equals(DATA_ONE)
-                    && entity.get集計番号().equals(DATA)
-                    && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi().getTxtTogetsuChuzo().getValue())) {
+            if (isdata_TWO(entity)) {
                 entity = entity.createBuilderForEdit().set集計結果値(
                         div.getYoshikiIchiBesshiIchi().getTxtTogetsuChuzo().getValue()).build();
                 修正データリスト.add(entity);
             }
-            if (entity.get横番号().equals(DATA_THREE) && entity.get縦番号().equals(DATA_ONE)
-                    && entity.get集計番号().equals(DATA)
-                    && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi()
-                            .getTxtTogetsuChugen().getValue())) {
+            if (isdata_THREE(entity)) {
                 entity = entity.createBuilderForEdit().set集計結果値(
                         div.getYoshikiIchiBesshiIchi().getTxtTogetsuChugen().getValue()).build();
                 修正データリスト.add(entity);
             }
-            if (entity.get横番号().equals(DATA_FOUR) && entity.get縦番号().equals(DATA_ONE)
-                    && entity.get集計番号().equals(DATA)
-                    && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi().getTxtTogetsumatsugenzai().getValue())) {
+            if (isdata_FOUR(entity)) {
                 entity = entity.createBuilderForEdit().set集計結果値(
                         div.getYoshikiIchiBesshiIchi().getTxtTogetsumatsugenzai().getValue()).build();
                 修正データリスト.add(entity);
             }
         }
         return 修正データリスト;
+    }
+
+    private boolean isdata_FOUR(JigyoHokokuTokeiData entity) {
+        return entity.get横番号().equals(DATA_FOUR) && entity.get縦番号().equals(DATA_ONE)
+                && entity.get集計番号().equals(DATA)
+                && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi().getTxtTogetsumatsugenzai().getValue());
+    }
+
+    private boolean isdata_THREE(JigyoHokokuTokeiData entity) {
+        return entity.get横番号().equals(DATA_THREE) && entity.get縦番号().equals(DATA_ONE)
+                && entity.get集計番号().equals(DATA)
+                && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi()
+                        .getTxtTogetsuChugen().getValue());
+    }
+
+    private boolean isdata_TWO(JigyoHokokuTokeiData entity) {
+        return entity.get横番号().equals(DATA_TWO) && entity.get縦番号().equals(DATA_ONE)
+                && entity.get集計番号().equals(DATA)
+                && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi().getTxtTogetsuChuzo().getValue());
+    }
+
+    private boolean isdata_ONE(JigyoHokokuTokeiData entity) {
+        return entity.get横番号().equals(DATA_ONE) && entity.get縦番号().equals(DATA_ONE)
+                && entity.get集計番号().equals(DATA)
+                && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi()
+                        .getTxtZengetsumatsugenzai().getValue());
     }
 }

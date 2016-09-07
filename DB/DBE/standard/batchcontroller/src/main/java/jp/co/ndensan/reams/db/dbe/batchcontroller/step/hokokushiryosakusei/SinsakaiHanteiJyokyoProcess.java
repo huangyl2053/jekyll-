@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsahanteijokyo.ShinsaHanteiJokyoItem;
-import jp.co.ndensan.reams.db.dbe.business.report.shinsahanteijokyo.ShinsaHanteiJokyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.yokaigonintei.shinsei.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.SinsakaiHanteiJyokyoMyBatisParameter;
@@ -144,8 +143,8 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
 
     @Override
     protected void afterExecute() {
-        ShinsaHanteiJokyoReport report = ShinsaHanteiJokyoReport.createFrom(itemList);
-        report.writeBy(reportSourceWriter);
+        //ShinsaHanteiJokyoReport report = ShinsaHanteiJokyoReport.createFrom(itemList);
+        //report.writeBy(reportSourceWriter);
         outputJokenhyo();
     }
 
@@ -860,15 +859,28 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
         int 二次判定要介護4計 = Integer.parseInt(合計.getListHantei_8().toString());
         int 二次判定要介護5計 = Integer.parseInt(合計.getListHantei_9().toString());
         int 合計計 = Integer.parseInt(合計.getListHantei_10().toString());
+        RString shichosonCode;
+        RString shichosonName;
+        if (RString.isNullOrEmpty(paramter.getShichosonCode().value())) {
+            shichosonCode = 全市町村コード;
+            shichosonName = 全市町村;
+        } else {
+            shichosonCode = paramter.getShichosonCode().value();
+            shichosonName = paramter.getShichosonName();
+        }
         ShinsaHanteiJokyoItem 割合Item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
                 paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
                 get対象開始年月日(),
                 get対象終了年月日(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
+                //<<<<<<< HEAD
                 to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
+                //=======
+                //                shichosonCode,
+                //>>>>>>> origin/sync
                 RDate.getNowDate().toDateString(),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
+                shichosonName,
                 非該当,
                 要支援1,
                 要支援2,

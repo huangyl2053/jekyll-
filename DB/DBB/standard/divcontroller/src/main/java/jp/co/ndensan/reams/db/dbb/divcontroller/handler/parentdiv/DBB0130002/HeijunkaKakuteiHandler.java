@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -120,7 +121,7 @@ public class HeijunkaKakuteiHandler {
         if (処理日付管理 != null) {
             基準日時 = 処理日付管理.get基準日時();
         }
-        div.getHeijunkaKakuteiShoriNaiyo().getTxtFukaNendo().setValue(調定年度);
+        div.getHeijunkaKakuteiShoriNaiyo().getTxtFukaNendo().setDomain(new RYear(調定年度.toString()));
 
         if (基準日時 != null) {
             RString 年月日 = 基準日時.getRDateTime().getDate().wareki().toDateString();
@@ -238,7 +239,7 @@ public class HeijunkaKakuteiHandler {
      * @param 処理日付管理 ShoriDateKanri
      */
     public void 更新賦課処理状況更新(ShoriDateKanri 処理日付管理) {
-        RString 調定年度 = div.getHeijunkaKakuteiShoriNaiyo().getTxtFukaNendo().getValue();
+        RYear 調定年度 = div.getHeijunkaKakuteiShoriNaiyo().getTxtFukaNendo().getDomain();
         FlexibleYear 賦課年度 = new FlexibleYear(調定年度.toString());
         TokuchoHeijunkaKakutei.createInstance().updateFukaShoriJokyo(賦課年度, 処理日付管理.get基準日時());
         ShoriDateKanriManager manager = new ShoriDateKanriManager();
@@ -267,7 +268,7 @@ public class HeijunkaKakuteiHandler {
         for (dgHeijunkaKakutei_Row row : rowList) {
             差額Map.put(row.getTxtDankaiKubun(), row.getTxtSagaku().getValue());
         }
-        RString 賦課年度 = div.getHeijunkaKakuteiShoriNaiyo().getTxtFukaNendo().getValue();
+        RYear 賦課年度 = div.getHeijunkaKakuteiShoriNaiyo().getTxtFukaNendo().getDomain();
         TokuchoHeijunkaKakuteiBatchParameter parameter = TokuchoHeijunkaKakutei.createInstance()
                 .createTokuchoHeijunkaKakuteiParameter(差額Map, new FlexibleYear(賦課年度.toString()),
                         new FlexibleYear(賦課年度.toString()), 調定日時, 遷移区分);

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Mar 15 17:23:51 CST 2016
+ * Fri Jun 24 09:42:46 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
@@ -15,10 +15,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 /**
  * dgHokenryoDankai_Row のクラスファイル
  *
- * @reamsid_L DBB-1770-010 zhangrui
+ * @reamsid_L DBB-1770-010 wangkanglei
  */
 public class dgHokenryoDankai_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private TextBox txtHokenryoDankaiIndex;
     private DropDownList ddlHokenryoDankai;

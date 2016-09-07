@@ -18,14 +18,29 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyufuJikoSakuseiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.TankiNyushoResult;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * ServiceRiyohyoInfo のクラスファイル 
- * 
- * @author 自動生成
+ * ServiceRiyohyoInfo のクラスファイル
+ *
+ * @reamsid_L DBC-1930-050 cuilin
  */
 public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -51,7 +66,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     @JsonProperty("txtSofuYM")
     private TextBoxDate txtSofuYM;
     @JsonProperty("btnShowShuruiGendogaku")
-    private Button btnShowShuruiGendogaku;
+    private ButtonDialog btnShowShuruiGendogaku;
     @JsonProperty("btnZengetsuCopy")
     private Button btnZengetsuCopy;
     @JsonProperty("ServiceRiyohyoBeppyoRiyoNissu")
@@ -240,7 +255,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
      * @return btnShowShuruiGendogaku
      */
     @JsonProperty("btnShowShuruiGendogaku")
-    public Button getBtnShowShuruiGendogaku() {
+    public ButtonDialog getBtnShowShuruiGendogaku() {
         return btnShowShuruiGendogaku;
     }
 
@@ -249,7 +264,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
      * @param btnShowShuruiGendogaku btnShowShuruiGendogaku
      */
     @JsonProperty("btnShowShuruiGendogaku")
-    public void setBtnShowShuruiGendogaku(Button btnShowShuruiGendogaku) {
+    public void setBtnShowShuruiGendogaku(ButtonDialog btnShowShuruiGendogaku) {
         this.btnShowShuruiGendogaku = btnShowShuruiGendogaku;
     }
 
@@ -480,6 +495,16 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
+    public Button getBtnKakutei() {
+        return this.getServiceRiyohyoBeppyoJigyoshaServiceInput().getBtnKakutei();
+    }
+
+    @JsonIgnore
+    public void  setBtnKakutei(Button btnKakutei) {
+        this.getServiceRiyohyoBeppyoJigyoshaServiceInput().setBtnKakutei(btnKakutei);
+    }
+
+    @JsonIgnore
     public Button getBtnBeppyoMeisaiKakutei() {
         return this.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnBeppyoMeisaiKakutei();
     }
@@ -530,16 +555,6 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     }
 
     @JsonIgnore
-    public Button getBtnCalcGokei() {
-        return this.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCalcGokei();
-    }
-
-    @JsonIgnore
-    public void  setBtnCalcGokei(Button btnCalcGokei) {
-        this.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().setBtnCalcGokei(btnCalcGokei);
-    }
-
-    @JsonIgnore
     public Button getBtnCancelGokeiInput() {
         return this.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCancelGokeiInput();
     }
@@ -547,6 +562,16 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     @JsonIgnore
     public void  setBtnCancelGokeiInput(Button btnCancelGokeiInput) {
         this.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().setBtnCancelGokeiInput(btnCancelGokeiInput);
+    }
+
+    @JsonIgnore
+    public Button getBtnCalcGokei() {
+        return this.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCalcGokei();
+    }
+
+    @JsonIgnore
+    public void  setBtnCalcGokei(Button btnCalcGokei) {
+        this.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().setBtnCalcGokei(btnCalcGokei);
     }
 
     @JsonIgnore
@@ -571,5 +596,153 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    /**
+     * 画面初期化メソッドです。
+     *
+     * @param 表示モード RString
+     * @param 利用年月 FlexibleYearMonth
+     * @param 対象年月 FlexibleYearMonth
+     * @param 被保険者番号 HihokenshaNo
+     * @param 居宅総合事業区分 RString
+     * @param 履歴番号 int
+     */
+    @Override
+    public void initialize(RString 表示モード, FlexibleYearMonth 利用年月, FlexibleYearMonth 対象年月,
+            HihokenshaNo 被保険者番号, RString 居宅総合事業区分, int 履歴番号) {
+        ServiceRiyohyoInfoDivHandler.of(this).init(表示モード, 利用年月, 対象年月, 被保険者番号, 居宅総合事業区分, 履歴番号);
+    }
 
+    /**
+     * 届出日をセットします。
+     *
+     * @param 届出日 RDate
+     */
+    @Override
+    public void setTodokedeYMD(RDate 届出日) {
+        ServiceRiyohyoInfoDivHandler.of(this).setTodokedeYMD(届出日);
+    }
+
+    /**
+     * 適用期間開始日をセットします。
+     *
+     * @param 適用期間開始日 RDate
+     */
+    @Override
+    public void setTekiyoKikanFrom(RDate 適用期間開始日) {
+        ServiceRiyohyoInfoDivHandler.of(this).setTekiyoKikanFrom(適用期間開始日);
+    }
+
+    /**
+     * 適用期間終日をセットします。
+     *
+     * @param 適用期間終日 RDate
+     */
+    @Override
+    public void setTekiyoKikanTo(RDate 適用期間終日) {
+        ServiceRiyohyoInfoDivHandler.of(this).setTekiyoKikanTo(適用期間終日);
+    }
+
+    /**
+     * 暫定区分を取得します。
+     *
+     * @return boolean
+     */
+    @Override
+    public boolean isChkZanteiKubunAllSelected() {
+        return this.getChkZanteiKubun().isAllSelected();
+    }
+
+    /**
+     * 送付年月を取得します。
+     *
+     * @return RDate
+     */
+    @Override
+    public RDate getSofuYM() {
+        return this.getTxtSofuYM().getValue();
+    }
+
+    /**
+     * 更新区分を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString getKoshinKbn() {
+        return this.getDdlKoshinKbn().getSelectedKey();
+    }
+
+    /**
+     * 利用年月を取得します。
+     *
+     * @return RDate
+     */
+    @Override
+    public RDate getRiyoYM() {
+        return this.getTxtRiyoYM().getValue();
+    }
+
+    /**
+     * DB追加処理メソッドです。
+     *
+     * @param 居宅総合事業区分 RString
+     * @param 短期入所情報 TankiNyushoResult
+     */
+    @Override
+    public void DB追加処理(RString 居宅総合事業区分, TankiNyushoResult 短期入所情報) {
+        ServiceRiyohyoInfoDivHandler.of(this).DB追加処理(居宅総合事業区分, 短期入所情報);
+    }
+
+    /**
+     * DB修正処理メソッドです。
+     *
+     * @param 居宅総合事業区分 RString
+     * @param 短期入所情報 TankiNyushoResult
+     */
+    @Override
+    public void DB修正処理(RString 居宅総合事業区分, TankiNyushoResult 短期入所情報) {
+        ServiceRiyohyoInfoDivHandler.of(this).DB修正処理(居宅総合事業区分, 短期入所情報);
+    }
+
+    /**
+     * データ整合性チェックします。
+     *
+     * @param サービス利用票情報 List<KyufuJikoSakuseiResult>
+     */
+    @Override
+    public void データ整合性チェック(List<KyufuJikoSakuseiResult> サービス利用票情報) {
+        ServiceRiyohyoInfoDivHandler.of(this).データ整合性チェック(サービス利用票情報);
+    }
+
+    /**
+     * 保存処理メソッドです。
+     *
+     * @param 居宅総合事業区分 RString
+     * @param サービス利用票情報 List<KyufuJikoSakuseiResult>
+     */
+    @Override
+    public void init保存処理(RString 居宅総合事業区分, List<KyufuJikoSakuseiResult> サービス利用票情報) {
+        ServiceRiyohyoInfoDivHandler.of(this).init保存処理(居宅総合事業区分, サービス利用票情報);
+    }
+
+    /**
+     * 削除処理メソッドです。
+     *
+     * @param 居宅総合事業区分 RString
+     * @param 短期入所情報 TankiNyushoResult
+     */
+    @Override
+    public void DB削除処理(RString 居宅総合事業区分, TankiNyushoResult 短期入所情報) {
+        ServiceRiyohyoInfoDivHandler.of(this).DB削除処理(居宅総合事業区分, 短期入所情報);
+    }
+
+    /**
+     * サービス利用票情報取得メソッドです。
+     *
+     * @return List<KyufuJikoSakuseiResult>
+     */
+    @Override
+    public List<KyufuJikoSakuseiResult> getサービス利用票情報() {
+        return ServiceRiyohyoInfoDivHandler.of(this).getサービス利用票情報();
+    }
 }

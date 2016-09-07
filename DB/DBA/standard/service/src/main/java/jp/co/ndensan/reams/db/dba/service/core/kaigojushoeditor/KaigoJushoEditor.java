@@ -116,7 +116,7 @@ public class KaigoJushoEditor {
         RString 管内住所編集_市町村名付与有無 = 表示なし;
         RString 管内住所編集_編集方法 = 表示なし;
         RString 住所編集_方書表示有無 = 表示なし;
-        if (帳票独自.equals(帳票制御共通.getJushoHenshuKubun())) {
+        if (帳票制御共通 != null && 帳票独自.equals(帳票制御共通.getJushoHenshuKubun())) {
             if (帳票制御共通.getJushoHenshuTodoufukenMeiHyojiUmu()) {
                 管内住所編集_都道府県名付与有無 = 表示する;
             }
@@ -131,7 +131,7 @@ public class KaigoJushoEditor {
                 住所編集_方書表示有無 = 表示する;
             }
         }
-        if (市町村共通.equals(帳票制御共通.getJushoHenshuKubun())) {
+        if (帳票制御共通 != null && 市町村共通.equals(帳票制御共通.getJushoHenshuKubun())) {
             管内住所編集_都道府県名付与有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, RDate.getNowDate(),
                     SubGyomuCode.DBU介護統計報告);
             管内住所編集_郡名付与有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);

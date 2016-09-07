@@ -47,12 +47,26 @@
      "layoutName": "DBU0900011",
      "layoutTitle": "審査請求書登録",
      "eventName": "登録画面に遷移",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0900031",
      "toLayoutTitle": "弁明登録",
      "toState": ""
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0900031",
+     "layoutTitle": "弁明登録",
+     "eventName": "弁明登録一覧画面に遷移",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0900011",
+     "toLayoutTitle": "審査請求書登録",
+     "toState": "default"
     }
    ]
   }

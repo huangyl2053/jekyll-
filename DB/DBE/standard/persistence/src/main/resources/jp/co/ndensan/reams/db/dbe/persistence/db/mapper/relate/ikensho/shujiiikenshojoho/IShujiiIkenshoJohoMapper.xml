@@ -32,7 +32,7 @@
          ON 
          DbT5302ShujiiIkenshoJoho."dbT5302ShujiiIkenshoJoho_shinseishoKanriNo" = DbT5303ShujiiIkenshoKinyuItem."dbT5303ShujiiIkenshoKinyuItem_shinseishoKanriNo"
          AND DbT5302ShujiiIkenshoJoho."dbT5302ShujiiIkenshoJoho_ikenshoIraiRirekiNo" = DbT5303ShujiiIkenshoKinyuItem."dbT5303ShujiiIkenshoKinyuItem_ikenshoIraiRirekiNo"
-         INNER JOIN
+         LEFT JOIN
          (
          SELECT
          <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5304ShujiiIkenshoIkenItemMapper.allColumns_DbT5304ShujiiIkenshoIkenItem" />

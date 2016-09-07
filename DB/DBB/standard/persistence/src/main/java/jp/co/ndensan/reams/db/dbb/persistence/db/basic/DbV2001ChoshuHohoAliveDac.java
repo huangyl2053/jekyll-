@@ -6,12 +6,11 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHoho;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHoho.fukaNendo;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHoho.hihokenshaNo;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHoho.rirekiNo;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.fukaNendo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.rirekiNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -89,7 +88,7 @@ public class DbV2001ChoshuHohoAliveDac implements ISaveable<DbV2001ChoshuHohoEnt
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
-
+    
     /**
      * 被保険者徴収方法情報の取得。
      *
@@ -112,29 +111,5 @@ public class DbV2001ChoshuHohoAliveDac implements ISaveable<DbV2001ChoshuHohoEnt
                                 eq(fukaNendo, 賦課年度),
                                 eq(hihokenshaNo, 被保険者番号))).
                 toObject(DbV2001ChoshuHohoEntity.class);
-    }
-
-    /**
-     * 最新介護徴収方法情報の取得。
-     *
-     * @param 賦課年度 FukaNendo
-     * @param 被保険者番号 HihokenshaNo
-     * @return DbT2001ChoshuHohoEntity
-     * @throws NullPointerException 引数のいずれかがnullの場合
-     */
-    @Transaction
-    public DbT2001ChoshuHohoEntity select最新介護徴収方法(
-            FlexibleYear 賦課年度,
-            HihokenshaNo 被保険者番号) throws NullPointerException {
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        return accessor.select().
-                table(DbV2001ChoshuHoho.class).
-                where(and(
-                                eq(fukaNendo, 賦課年度),
-                                eq(hihokenshaNo, 被保険者番号))).
-                toObject(DbT2001ChoshuHohoEntity.class);
     }
 }

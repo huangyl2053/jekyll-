@@ -9,16 +9,16 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.JuchochiTokureiKaijoValidator;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.JuchochiTokureiTekiyoValidator;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.JushochiTokureiValidator;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.business.core.validation.JushochiTokureiValidationMessage;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.dgJutoku_Row;
-import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionary;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -44,23 +44,16 @@ public final class JushochiTokureiRirekiListValidationHelper {
      */
     public static ValidationMessageControlPairs validate住所地特例(HihokenshaDaicho target, IItemList<HihokenshaDaicho> daichoList,
             TextBoxFlexibleDate 適用日, TextBoxFlexibleDate 解除日, DataGrid<dgJutoku_Row> 住所地特例grid, JushochiTokureiExecutionStatus status) {
-        ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionary(
-                new ValidationMessageControlPair(
-                        JushochiTokureiValidationMessage.住所地特例適用日が_最新履歴の取得日_変更日_住所地特例解除日より前, 適用日),
-                new ValidationMessageControlPair(
-                        JushochiTokureiValidationMessage.住特適用日が資格取得日より前, 適用日),
-                new ValidationMessageControlPair(
-                        JushochiTokureiValidationMessage.住特適用日が資格喪失日以降, 適用日),
-                new ValidationMessageControlPair(
-                        JushochiTokureiValidationMessage.住所地特例解除日が_最新履歴の取得日_変更日_住所地特例適用日より前, 解除日),
-                new ValidationMessageControlPair(
-                        JushochiTokureiValidationMessage.住特解除日が資格取得日より前, 解除日),
-                new ValidationMessageControlPair(
-                        JushochiTokureiValidationMessage.住特解除日が資格喪失日以降, 解除日),
-                new ValidationMessageControlPair(
-                        JushochiTokureiValidationMessage.住所地特例期間と他市町村住所地特例期間が重複する履歴がある, 住所地特例grid),
-                new ValidationMessageControlPair(
-                        JushochiTokureiValidationMessage.住所地特例期間と適用除外期間が重複する履歴がある, 住所地特例grid));
+        ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionaryBuilder()
+                .add(JushochiTokureiValidationMessage.住所地特例適用日が_最新履歴の取得日_変更日_住所地特例解除日より前, 適用日)
+                .add(JushochiTokureiValidationMessage.住特適用日が資格取得日より前, 適用日)
+                .add(JushochiTokureiValidationMessage.住特適用日が資格喪失日以降, 適用日)
+                .add(JushochiTokureiValidationMessage.住所地特例解除日が_最新履歴の取得日_変更日_住所地特例適用日より前, 解除日)
+                .add(JushochiTokureiValidationMessage.住特解除日が資格取得日より前, 解除日)
+                .add(JushochiTokureiValidationMessage.住特解除日が資格喪失日以降, 解除日)
+                .add(JushochiTokureiValidationMessage.住所地特例期間と他市町村住所地特例期間が重複する履歴がある, 住所地特例grid)
+                .add(JushochiTokureiValidationMessage.住所地特例期間と適用除外期間が重複する履歴がある, 住所地特例grid)
+                .build();
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
 

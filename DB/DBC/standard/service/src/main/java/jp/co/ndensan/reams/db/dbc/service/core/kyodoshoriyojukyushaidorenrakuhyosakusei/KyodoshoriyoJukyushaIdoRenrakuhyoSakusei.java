@@ -6,8 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.service.core.kyodoshoriyojukyushaidorenrakuhyosakusei;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoKihonSofu;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoKogakuSofu;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoShokanSofu;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity;
-import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyodoshoriyoJukyushaIdoRenrakuhyoSakuseiParam;
+import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyodoshoriyoJukyushaIdoRenrakuhyoParam;
+import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyoutuuEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodoshoriyojukyushaidorenrakuhyo.param.KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity;
@@ -75,37 +79,49 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoSakusei {
      * @return 共同処理用受給者異動連絡票Entity
      */
     public KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity editKyodoshoriyoJukyushaIdoRenrakuhyo(
-            KyodoshoriyoJukyushaIdoRenrakuhyoSakuseiParam divEntity) {
+            KyodoshoriyoJukyushaIdoRenrakuhyoParam divEntity) {
         if (divEntity == null) {
             return null;
         }
         KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity 共同処理用受給者異動連絡票Entity = new KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity();
-        共同処理用受給者異動連絡票Entity.set作成年月日(divEntity.get日付());
-        共同処理用受給者異動連絡票Entity.set証記載保険者番号(divEntity.get証記載保険者番号());
-        共同処理用受給者異動連絡票Entity.set被保険者番号(divEntity.get被保険者番号());
-        共同処理用受給者異動連絡票Entity.set異動区分(divEntity.get異動区分コード());
-        共同処理用受給者異動連絡票Entity.set異動事由(divEntity.get異動事由コード());
-        共同処理用受給者異動連絡票Entity.set基本送付情報_異動年月日(divEntity.get基本送付情報エリアの異動年月日());
-        共同処理用受給者異動連絡票Entity.set氏名(divEntity.get被保険者氏名());
-        共同処理用受給者異動連絡票Entity.set電話番号(divEntity.get電話番号());
-        共同処理用受給者異動連絡票Entity.set郵便番号(divEntity.get郵便番号());
-        共同処理用受給者異動連絡票Entity.set住所(divEntity.get住所());
-        共同処理用受給者異動連絡票Entity.set住所カナ(divEntity.get住所カナ());
-        共同処理用受給者異動連絡票Entity.set帳票出力順序コード(divEntity.get帳票出力順序コード());
-        共同処理用受給者異動連絡票Entity.set訂正区分(divEntity.get訂正区分());
-        共同処理用受給者異動連絡票Entity.set訂正年月日(divEntity.get訂正年月日());
-        共同処理用受給者異動連絡票Entity.set償還送付情報_異動年月日(divEntity.get償還送付情報エリアの異動年月日());
-        共同処理用受給者異動連絡票Entity.set開始年月日(divEntity.get一時差止開始年月日());
-        共同処理用受給者異動連絡票Entity.set終了年月日(divEntity.get一時差止終了年月日());
-        共同処理用受給者異動連絡票Entity.set区分(divEntity.get一時差止区分());
-        共同処理用受給者異動連絡票Entity.set一時差止金額(divEntity.get一時差止金額());
-        共同処理用受給者異動連絡票Entity.set高額送付情報_異動年月日(divEntity.get高額送付情報エリアの異動年月日());
-        共同処理用受給者異動連絡票Entity.set世帯主被保険者番号(divEntity.get世帯集約番号());
-        共同処理用受給者異動連絡票Entity.set世帯所得区分(divEntity.get世帯所得区分());
-        共同処理用受給者異動連絡票Entity.set所得区分(divEntity.get所得区分());
-        共同処理用受給者異動連絡票Entity.set利用者負担第２段階(divEntity.is利用者負担第２段階());
-        共同処理用受給者異動連絡票Entity.set老齢福祉年金受給の有無(divEntity.is老齢福祉年金());
-        共同処理用受給者異動連絡票Entity.set支給申請書出力の有無(divEntity.is支給申請書出力());
+        KyoutuuEntity 共通項目 = divEntity.get共通項目Entity();
+        KyodoShoriyoJukyushaIdoKihonSofu 基本情報 = divEntity.get基本情報Entity();
+        KyodoShoriyoJukyushaIdoShokanSofu 償還情報 = divEntity.get償還情報Entity();
+        KyodoShoriyoJukyushaIdoKogakuSofu 高額情報 = divEntity.get高額情報Entity();
+        if (共通項目 != null) {
+            共同処理用受給者異動連絡票Entity.set作成年月日(FlexibleDate.getNowDate());
+            共同処理用受給者異動連絡票Entity.set証記載保険者番号(共通項目.get証記載保険者番号());
+            共同処理用受給者異動連絡票Entity.set被保険者番号(共通項目.get被保険者番号());
+            共同処理用受給者異動連絡票Entity.set異動区分(共通項目.get異動区分());
+            共同処理用受給者異動連絡票Entity.set異動事由(共通項目.get異動事由());
+            共同処理用受給者異動連絡票Entity.set訂正区分(共通項目.get訂正区分());
+            共同処理用受給者異動連絡票Entity.set訂正年月日(共通項目.get訂正年月日());
+        }
+        if (基本情報 != null) {
+            共同処理用受給者異動連絡票Entity.set氏名(基本情報.get被保険者氏名());
+            共同処理用受給者異動連絡票Entity.set基本送付情報_異動年月日(基本情報.get異動年月日());
+            共同処理用受給者異動連絡票Entity.set電話番号(基本情報.get電話番号());
+            共同処理用受給者異動連絡票Entity.set郵便番号(基本情報.get郵便番号());
+            共同処理用受給者異動連絡票Entity.set住所(基本情報.get住所());
+            共同処理用受給者異動連絡票Entity.set住所カナ(基本情報.get住所カナ());
+            共同処理用受給者異動連絡票Entity.set帳票出力順序コード(基本情報.get帳票出力順序コード());
+        }
+        if (償還情報 != null) {
+            共同処理用受給者異動連絡票Entity.set償還送付情報_異動年月日(償還情報.get異動年月日());
+            共同処理用受給者異動連絡票Entity.set開始年月日(償還情報.get保険給付支払一時差止開始年月日());
+            共同処理用受給者異動連絡票Entity.set終了年月日(償還情報.get保険給付支払一時差止終了年月日());
+            共同処理用受給者異動連絡票Entity.set区分(償還情報.get保険給付支払一時差止区分コード());
+            共同処理用受給者異動連絡票Entity.set一時差止金額(償還情報.get保険給付支払一時差止金額());
+        }
+        if (高額情報 != null) {
+            共同処理用受給者異動連絡票Entity.set高額送付情報_異動年月日(高額情報.get異動年月日());
+            共同処理用受給者異動連絡票Entity.set世帯主被保険者番号(高額情報.get世帯集約番号());
+            共同処理用受給者異動連絡票Entity.set世帯所得区分(高額情報.get世帯所得区分コード());
+            共同処理用受給者異動連絡票Entity.set所得区分(高額情報.get所得区分コード());
+            共同処理用受給者異動連絡票Entity.set利用者負担第２段階(高額情報.is利用者負担第２段階有フラグ());
+            共同処理用受給者異動連絡票Entity.set老齢福祉年金受給の有無(高額情報.is老齢福祉年金受給有フラグ());
+            共同処理用受給者異動連絡票Entity.set支給申請書出力の有無(高額情報.is支給申請書出力有フラグ());
+        }
 
         return 共同処理用受給者異動連絡票Entity;
     }
@@ -117,7 +133,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoSakusei {
      * @return 出力用共同処理用受給者訂正情報Entity
      */
     public KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity editKyodoshoriyoJukyushaTeiseiRenrakuhyo(
-            KyodoshoriyoJukyushaIdoRenrakuhyoSakuseiParam divEntity) {
+            KyodoshoriyoJukyushaIdoRenrakuhyoParam divEntity) {
 
         if (divEntity == null) {
             return null;
@@ -260,7 +276,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoSakusei {
 
     }
 
-    private KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity get変更前訂正情報(KyodoshoriyoJukyushaIdoRenrakuhyoSakuseiParam divEntity) {
+    private KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity get変更前訂正情報(KyodoshoriyoJukyushaIdoRenrakuhyoParam divEntity) {
 
         KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity 変更前訂正情報Entity = new KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity();
         DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity 基本送付訂正情報Entity = get基本送付訂正情報(divEntity);
@@ -275,8 +291,8 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoSakusei {
         if (高額送付訂正情報Entity == null) {
             return null;
         }
-        変更前訂正情報Entity.set作成年月日(divEntity.get日付());
-        変更前訂正情報Entity.set帳票出力順序コード(divEntity.get帳票出力順序コード());
+        変更前訂正情報Entity.set作成年月日(FlexibleDate.getNowDate());
+        変更前訂正情報Entity.set帳票出力順序コード(基本送付訂正情報Entity.getChohyoOutputJunjyoCode());
         変更前訂正情報Entity.set証記載保険者番号(基本送付訂正情報Entity.getShoKisaiHokenshaNo());
         変更前訂正情報Entity.set被保険者番号(基本送付訂正情報Entity.getHiHokenshaNo());
         変更前訂正情報Entity.set異動区分(基本送付訂正情報Entity.getIdoKubunCode());
@@ -304,41 +320,55 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoSakusei {
         return 変更前訂正情報Entity;
     }
 
-    private KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity get変更後訂正情報(KyodoshoriyoJukyushaIdoRenrakuhyoSakuseiParam divEntity) {
+    private KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity get変更後訂正情報(KyodoshoriyoJukyushaIdoRenrakuhyoParam divEntity) {
 
         KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity 変更後訂正情報Entity = new KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity();
-        変更後訂正情報Entity.set作成年月日(divEntity.get日付());
-        変更後訂正情報Entity.set証記載保険者番号(divEntity.get証記載保険者番号());
-        変更後訂正情報Entity.set被保険者番号(divEntity.get被保険者番号());
-        変更後訂正情報Entity.set異動区分(divEntity.get異動区分コード());
-        変更後訂正情報Entity.set異動事由(divEntity.get異動事由コード());
-        変更後訂正情報Entity.set基本送付情報_異動年月日(divEntity.get基本送付情報エリアの異動年月日());
-        変更後訂正情報Entity.set氏名(divEntity.get被保険者氏名());
-        変更後訂正情報Entity.set電話番号(divEntity.get電話番号());
-        変更後訂正情報Entity.set郵便番号(divEntity.get郵便番号());
-        変更後訂正情報Entity.set住所(divEntity.get住所());
-        変更後訂正情報Entity.set住所カナ(divEntity.get住所カナ());
-        変更後訂正情報Entity.set帳票出力順序コード(divEntity.get帳票出力順序コード());
-        変更後訂正情報Entity.set訂正区分(divEntity.get訂正区分());
-        変更後訂正情報Entity.set訂正年月日(divEntity.get訂正年月日());
-        変更後訂正情報Entity.set償還送付情報_異動年月日(divEntity.get償還送付情報エリアの異動年月日());
-        変更後訂正情報Entity.set開始年月日(divEntity.get一時差止開始年月日());
-        変更後訂正情報Entity.set終了年月日(divEntity.get一時差止終了年月日());
-        変更後訂正情報Entity.set区分(divEntity.get一時差止区分());
-        変更後訂正情報Entity.set一時差止金額(divEntity.get一時差止金額());
-        変更後訂正情報Entity.set高額送付情報_異動年月日(divEntity.get高額送付情報エリアの異動年月日());
-        変更後訂正情報Entity.set世帯主被保険者番号(divEntity.get世帯集約番号());
-        変更後訂正情報Entity.set世帯所得区分(divEntity.get世帯所得区分());
-        変更後訂正情報Entity.set所得区分(divEntity.get所得区分());
-        変更後訂正情報Entity.set利用者負担第２段階(divEntity.is利用者負担第２段階());
-        変更後訂正情報Entity.set老齢福祉年金受給の有無(divEntity.is老齢福祉年金());
-        変更後訂正情報Entity.set支給申請書出力の有無(divEntity.is支給申請書出力());
+        KyoutuuEntity 共通項目 = divEntity.get共通項目Entity();
+        KyodoShoriyoJukyushaIdoKihonSofu 基本情報 = divEntity.get基本情報Entity();
+        KyodoShoriyoJukyushaIdoShokanSofu 償還情報 = divEntity.get償還情報Entity();
+        KyodoShoriyoJukyushaIdoKogakuSofu 高額情報 = divEntity.get高額情報Entity();
+        if (共通項目 != null) {
+            変更後訂正情報Entity.set作成年月日(FlexibleDate.getNowDate());
+            変更後訂正情報Entity.set証記載保険者番号(共通項目.get証記載保険者番号());
+            変更後訂正情報Entity.set被保険者番号(共通項目.get被保険者番号());
+            変更後訂正情報Entity.set異動区分(共通項目.get異動区分());
+            変更後訂正情報Entity.set異動事由(共通項目.get異動事由());
+            変更後訂正情報Entity.set訂正区分(共通項目.get訂正区分());
+            変更後訂正情報Entity.set訂正年月日(共通項目.get訂正年月日());
+        }
+        if (基本情報 != null) {
+            変更後訂正情報Entity.set氏名(基本情報.get被保険者氏名());
+            変更後訂正情報Entity.set基本送付情報_異動年月日(基本情報.get異動年月日());
+            変更後訂正情報Entity.set電話番号(基本情報.get電話番号());
+            変更後訂正情報Entity.set郵便番号(基本情報.get郵便番号());
+            変更後訂正情報Entity.set住所(基本情報.get住所());
+            変更後訂正情報Entity.set住所カナ(基本情報.get住所カナ());
+            変更後訂正情報Entity.set帳票出力順序コード(基本情報.get帳票出力順序コード());
+        }
+        if (償還情報 != null) {
+            変更後訂正情報Entity.set償還送付情報_異動年月日(償還情報.get異動年月日());
+            変更後訂正情報Entity.set開始年月日(償還情報.get保険給付支払一時差止開始年月日());
+            変更後訂正情報Entity.set終了年月日(償還情報.get保険給付支払一時差止終了年月日());
+            変更後訂正情報Entity.set区分(償還情報.get保険給付支払一時差止区分コード());
+            変更後訂正情報Entity.set一時差止金額(償還情報.get保険給付支払一時差止金額());
+        }
+        if (高額情報 != null) {
+            変更後訂正情報Entity.set高額送付情報_異動年月日(高額情報.get異動年月日());
+            変更後訂正情報Entity.set世帯主被保険者番号(高額情報.get世帯集約番号());
+            変更後訂正情報Entity.set世帯所得区分(高額情報.get世帯所得区分コード());
+            変更後訂正情報Entity.set所得区分(高額情報.get所得区分コード());
+            変更後訂正情報Entity.set利用者負担第２段階(高額情報.is利用者負担第２段階有フラグ());
+            変更後訂正情報Entity.set老齢福祉年金受給の有無(高額情報.is老齢福祉年金受給有フラグ());
+            変更後訂正情報Entity.set支給申請書出力の有無(高額情報.is支給申請書出力有フラグ());
+        }
+
         return 変更後訂正情報Entity;
     }
 
-    private DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity get基本送付訂正情報(KyodoshoriyoJukyushaIdoRenrakuhyoSakuseiParam divEntity) {
-        List<DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity> 基本送付訂正情報List = 異動基本送付Dac.selectByKey(divEntity.get被保険者番号(),
-                divEntity.get基本送付情報エリアの異動年月日());
+    private DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity get基本送付訂正情報(KyodoshoriyoJukyushaIdoRenrakuhyoParam divEntity) {
+        KyodoShoriyoJukyushaIdoKihonSofu 基本情報 = divEntity.get基本情報Entity();
+        List<DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity> 基本送付訂正情報List = 異動基本送付Dac.selectByKey(基本情報.get被保険者番号(),
+                基本情報.get異動年月日());
         if (基本送付訂正情報List == null || 基本送付訂正情報List.isEmpty() || 基本送付訂正情報List.size() == 1) {
             return null;
         }
@@ -347,9 +377,11 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoSakusei {
 
     }
 
-    private DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity get償還送付訂正情報(KyodoshoriyoJukyushaIdoRenrakuhyoSakuseiParam divEntity) {
-        List<DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity> 償還送付訂正情報List = 異動償還送付Dac.selectByKey(divEntity.get被保険者番号(),
-                divEntity.get基本送付情報エリアの異動年月日());
+    private DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity get償還送付訂正情報(KyodoshoriyoJukyushaIdoRenrakuhyoParam divEntity) {
+        KyodoShoriyoJukyushaIdoShokanSofu 償還情報 = divEntity.get償還情報Entity();
+
+        List<DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity> 償還送付訂正情報List = 異動償還送付Dac.selectByKey(償還情報.get被保険者番号(),
+                償還情報.get異動年月日());
         if (償還送付訂正情報List == null || 償還送付訂正情報List.isEmpty() || 償還送付訂正情報List.size() == 1) {
             return null;
         }
@@ -358,9 +390,10 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoSakusei {
 
     }
 
-    private DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity get高額送付訂正情報(KyodoshoriyoJukyushaIdoRenrakuhyoSakuseiParam divEntity) {
-        List<DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity> 高額送付訂正情報List = 異動高額送付Dac.selectByKey(divEntity.get被保険者番号(),
-                divEntity.get基本送付情報エリアの異動年月日());
+    private DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity get高額送付訂正情報(KyodoshoriyoJukyushaIdoRenrakuhyoParam divEntity) {
+        KyodoShoriyoJukyushaIdoKogakuSofu 高額情報 = divEntity.get高額情報Entity();
+        List<DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity> 高額送付訂正情報List = 異動高額送付Dac.selectByKey(高額情報.get被保険者番号(),
+                高額情報.get異動年月日());
         if (高額送付訂正情報List == null || 高額送付訂正情報List.isEmpty() || 高額送付訂正情報List.size() == 1) {
             return null;
         }

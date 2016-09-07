@@ -102,7 +102,7 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiHenshu {
                 DbT3064SaishinsaKetteiMeisaiEntity entity = new DbT3064SaishinsaKetteiMeisaiEntity();
                 entity.setToriatsukaiYM(明細Entity.getToriatsukaiYM());
                 entity.setHokenshaKubun(保険者区分);
-                entity.setRirekiNo(new Decimal(明細Entity.getRirekiNo()));
+                entity.setRirekiNo(明細Entity.getRirekiNo());
                 entity.setJigyoshoNo(明細Entity.getJigyoshoNo());
                 entity.setJigyoshoName(明細Entity.getJigyoshoName());
                 entity.setHiHokenshaNo(明細Entity.getHiHokenshaNo());

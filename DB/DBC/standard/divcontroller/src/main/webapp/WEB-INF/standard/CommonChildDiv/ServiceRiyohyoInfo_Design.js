@@ -4,6 +4,117 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onBlur_txtRiyoYM = function () {
+                return "onBlur_txtRiyoYM";
+            };
+
+            Events.onClick_btnShowShuruiGendogaku = function () {
+                return "onClick_btnShowShuruiGendogaku";
+            };
+
+            Events.onClick_btnZengetsuCopy = function () {
+                return "onClick_btnZengetsuCopy";
+            };
+
+            Events.onBlur_txtZengetsuRiyoNissu = function () {
+                return "onBlur_txtZengetsuRiyoNissu";
+            };
+
+            Events.onBlur_txtTogetsuRiyoNissu = function () {
+                return "onBlur_txtTogetsuRiyoNissu";
+            };
+
+            Events.onClick_btnBeppyoMeisaiNew = function () {
+                return "onClick_btnBeppyoMeisaiNew";
+            };
+
+            Events.onClick_btnBeppyoGokeiNew = function () {
+                return "onClick_btnBeppyoGokeiNew";
+            };
+
+            Events.onClick_btnSelect = function () {
+                return "onClick_btnSelect";
+            };
+
+            Events.onClick_btnModify = function () {
+                return "onClick_btnModify";
+            };
+
+            Events.onClick_btnDelete = function () {
+                return "onClick_btnDelete";
+            };
+
+            Events.onClick_btnSave = function () {
+                return "onClick_btnSave";
+            };
+
+            Events.onBlur_txtTani = function () {
+                return "onBlur_txtTani";
+            };
+
+            Events.onBlur_txtWaribikigoRitsu = function () {
+                return "onBlur_txtWaribikigoRitsu";
+            };
+
+            Events.onBlur_txtKaisu = function () {
+                return "onBlur_txtKaisu";
+            };
+
+            Events.onClick_btnBeppyoMeisaiKakutei = function () {
+                return "onClick_btnBeppyoMeisaiKakutei";
+            };
+
+            Events.onClick_btnCalcMeisaiGokei = function () {
+                return "onClick_btnCalcMeisaiGokei";
+            };
+
+            Events.onClick_btnCancelMeisaiInput = function () {
+                return "onClick_btnCancelMeisaiInput";
+            };
+
+            Events.onClick_btnCalcMeisai = function () {
+                return "onClick_btnCalcMeisai";
+            };
+
+            Events.onBlur_txtShuruiGendoChokaTani = function () {
+                return "onBlur_txtShuruiGendoChokaTani";
+            };
+
+            Events.onBlur_txtShuruiGendonaiTani = function () {
+                return "onBlur_txtShuruiGendonaiTani";
+            };
+
+            Events.onBlur_txtTanisuTanka = function () {
+                return "onBlur_txtTanisuTanka";
+            };
+
+            Events.onBlur_txtKubunGendoChokaTani = function () {
+                return "onBlur_txtKubunGendoChokaTani";
+            };
+
+            Events.onBlur_txtKubunGendonaiTani = function () {
+                return "onBlur_txtKubunGendonaiTani";
+            };
+
+            Events.onBlur_txtKyufuritsu = function () {
+                return "onBlur_txtKyufuritsu";
+            };
+
+            Events.onClick_btnBeppyoGokeiKakutei = function () {
+                return "onClick_btnBeppyoGokeiKakutei";
+            };
+
+            Events.onClick_btnCancelGokeiInput = function () {
+                return "onClick_btnCancelGokeiInput";
+            };
+
+            Events.onClick_btnGokeiKeisan = function () {
+                return "onClick_btnGokeiKeisan";
+            };
+
+            Events.onClick_btnBackRiyoNengetsuIchiran = function () {
+                return "onClick_btnBackRiyoNengetsuIchiran";
+            };
             return Events;
         })();
         ServiceRiyohyoInfo.Events = Events;
@@ -65,7 +176,7 @@ var DBC;
             };
 
             Controls.prototype.btnShowShuruiGendogaku = function () {
-                return new UZA.Button(this.convFiledName("btnShowShuruiGendogaku"));
+                return new UZA.ButtonDialog(this.convFiledName("btnShowShuruiGendogaku"));
             };
 
             Controls.prototype.btnZengetsuCopy = function () {
@@ -108,6 +219,10 @@ var DBC;
                 return new UZA.Panel(this.convFiledName("ServiceRiyohyoBeppyoJigyoshaServiceInput"));
             };
 
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
+            };
+
             Controls.prototype.ServiceRiyohyoBeppyoMeisai = function () {
                 return new UZA.Panel(this.convFiledName("ServiceRiyohyoBeppyoMeisai"));
             };
@@ -146,6 +261,14 @@ var DBC;
 
             Controls.prototype.txtTeigakuRiyoushaFutangaku = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtTeigakuRiyoushaFutangaku"));
+            };
+
+            Controls.prototype.txtHdnGendogakuTaishogaiFlg = function () {
+                return new UZA.TextBox(this.convFiledName("txtHdnGendogakuTaishogaiFlg"));
+            };
+
+            Controls.prototype.txtHdnRiyoshaFutanTeiritsuTeigakuKbn = function () {
+                return new UZA.TextBox(this.convFiledName("txtHdnRiyoshaFutanTeiritsuTeigakuKbn"));
             };
 
             Controls.prototype.ServiceRiyohyoBeppyoMeisaiFooter = function () {
@@ -236,12 +359,12 @@ var DBC;
                 return new UZA.Button(this.convFiledName("btnBeppyoGokeiKakutei"));
             };
 
-            Controls.prototype.btnCalcGokei = function () {
-                return new UZA.Button(this.convFiledName("btnCalcGokei"));
-            };
-
             Controls.prototype.btnCancelGokeiInput = function () {
                 return new UZA.Button(this.convFiledName("btnCancelGokeiInput"));
+            };
+
+            Controls.prototype.btnCalcGokei = function () {
+                return new UZA.Button(this.convFiledName("btnCalcGokei"));
             };
 
             Controls.prototype.ServiceRiyohyoBeppyoFooter = function () {

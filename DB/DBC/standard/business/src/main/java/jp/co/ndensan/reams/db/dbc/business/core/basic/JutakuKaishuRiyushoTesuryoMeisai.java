@@ -49,7 +49,7 @@ public class JutakuKaishuRiyushoTesuryoMeisai
         this.entity = new DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity();
         this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
         this.entity.setHihokenshaNo(被保険者番号);
-        this.entity.setRirekiNo(履歴番号);
+        this.entity.setRirekiNo(履歴番号.intValue());
         this.id = new JutakuKaishuRiyushoTesuryoMeisaiIdentifier(
                 証記載保険者番号,
                 被保険者番号,
@@ -68,7 +68,7 @@ public class JutakuKaishuRiyushoTesuryoMeisai
         this.id = new JutakuKaishuRiyushoTesuryoMeisaiIdentifier(
                 entity.getShoKisaiHokenshaNo(),
                 entity.getHihokenshaNo(),
-                entity.getRirekiNo());
+                new Decimal(entity.getRirekiNo()));
     }
 
     /**
@@ -110,7 +110,7 @@ public class JutakuKaishuRiyushoTesuryoMeisai
      * @return 履歴番号
      */
     public Decimal get履歴番号() {
-        return entity.getRirekiNo();
+        return new Decimal(entity.getRirekiNo());
     }
 
     /**
@@ -208,9 +208,9 @@ public class JutakuKaishuRiyushoTesuryoMeisai
      *
      * @return 介護住宅改修理由書作成者資格
      */
-    public RString get介護住宅改修理由書作成者資格() {
-        return entity.getRiyushoSakuseishaShikaku();
-    }
+//    public RString get介護住宅改修理由書作成者資格() {
+//        return entity.getRiyushoSakuseishaShikaku();
+//    }
 
     /**
      * 介護住宅改修理由書作成申請年月日を返します。

@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class SonotaJohoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -23,8 +25,13 @@ public class SonotaJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+//<<<<<<< HEAD
     @JsonProperty("ccdGeninShikkan")
     private CodeInputDiv ccdGeninShikkan;
+//=======
+//    @JsonProperty("cdlGeninShikkanCode")
+//    private CodeInputDiv cdlGeninShikkanCode;
+//>>>>>>> origin/sync
     @JsonProperty("txtShinseiKeikaNissu")
     private TextBoxNumRange txtShinseiKeikaNissu;
 
@@ -35,12 +42,21 @@ public class SonotaJohoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
+     <<<<<<< HEAD
      * getccdGeninShikkan
      * @return ccdGeninShikkan
      */
     @JsonProperty("ccdGeninShikkan")
     public ICodeInputDiv getCcdGeninShikkan() {
         return ccdGeninShikkan;
+//=======
+//     * getcdlGeninShikkanCode
+//     * @return cdlGeninShikkanCode
+//     */
+//    @JsonProperty("cdlGeninShikkanCode")
+//    public ICodeInputDiv getCdlGeninShikkanCode() {
+//        return cdlGeninShikkanCode;
+//>>>>>>> origin/sync
     }
 
     /*

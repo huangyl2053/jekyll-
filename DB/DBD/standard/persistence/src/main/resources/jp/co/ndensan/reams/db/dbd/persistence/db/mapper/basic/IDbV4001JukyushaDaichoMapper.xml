@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbV4001JukyushaDaichoマスタとエンティティのマッピング用XMLです。 -->
+<!-- @reamsid_L DBD-1530-010 lit -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbV4001JukyushaDaichoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbV4001JukyushaDaicho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbV4001JukyushaDaichoMapper.allColumns_DbV4001JukyushaDaicho" />
+     FROM
+         rgdb."DbV4001JukyushaDaicho"
+     WHERE
+         rgdb."DbV4001JukyushaDaicho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbV4001JukyushaDaicho">
+         "DbV4001JukyushaDaicho"."shichosonCode" as "dbV4001JukyushaDaicho_shichosonCode",
+         "DbV4001JukyushaDaicho"."hihokenshaNo" as "dbV4001JukyushaDaicho_hihokenshaNo",
+         "DbV4001JukyushaDaicho"."rirekiNo" as "dbV4001JukyushaDaicho_rirekiNo",
+         "DbV4001JukyushaDaicho"."edaban" as "dbV4001JukyushaDaicho_edaban",
+         "DbV4001JukyushaDaicho"."jukyuShinseiJiyu" as "dbV4001JukyushaDaicho_jukyuShinseiJiyu",
+         "DbV4001JukyushaDaicho"."shinseishoKanriNo" as "dbV4001JukyushaDaicho_shinseishoKanriNo",
+         "DbV4001JukyushaDaicho"."shinseiJokyoKubun" as "dbV4001JukyushaDaicho_shinseiJokyoKubun",
+         "DbV4001JukyushaDaicho"."shishoCode" as "dbV4001JukyushaDaicho_shishoCode",
+         "DbV4001JukyushaDaicho"."chokkinFlag" as "dbV4001JukyushaDaicho_chokkinFlag",
+         "DbV4001JukyushaDaicho"."shikibetsuCode" as "dbV4001JukyushaDaicho_shikibetsuCode",
+         "DbV4001JukyushaDaicho"."shinseiRiyu" as "dbV4001JukyushaDaicho_shinseiRiyu",
+         "DbV4001JukyushaDaicho"."shinseishaKankeiCode" as "dbV4001JukyushaDaicho_shinseishaKankeiCode",
+         "DbV4001JukyushaDaicho"."homninKankei" as "dbV4001JukyushaDaicho_homninKankei",
+         "DbV4001JukyushaDaicho"."jukyuShinseiYMD" as "dbV4001JukyushaDaicho_jukyuShinseiYMD",
+         "DbV4001JukyushaDaicho"."nigoTokuteiShippeiCode" as "dbV4001JukyushaDaicho_nigoTokuteiShippeiCode",
+         "DbV4001JukyushaDaicho"."shinsakaiIraiYMD" as "dbV4001JukyushaDaicho_shinsakaiIraiYMD",
+         "DbV4001JukyushaDaicho"."yokaigoJotaiKubunCode" as "dbV4001JukyushaDaicho_yokaigoJotaiKubunCode",
+         "DbV4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD" as "dbV4001JukyushaDaicho_ninteiYukoKikanKaishiYMD",
+         "DbV4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD" as "dbV4001JukyushaDaicho_ninteiYukoKikanShuryoYMD",
+         "DbV4001JukyushaDaicho"."ninteiYMD" as "dbV4001JukyushaDaicho_ninteiYMD",
+         <!--"DbV4001JukyushaDaicho"."minashiCode" as "dbV4001JukyushaDaicho_minashiCode",-->
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui01" as "dbV4001JukyushaDaicho_shiteiServiceShurui01",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui02" as "dbV4001JukyushaDaicho_shiteiServiceShurui02",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui03" as "dbV4001JukyushaDaicho_shiteiServiceShurui03",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui04" as "dbV4001JukyushaDaicho_shiteiServiceShurui04",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui05" as "dbV4001JukyushaDaicho_shiteiServiceShurui05",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui06" as "dbV4001JukyushaDaicho_shiteiServiceShurui06",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui07" as "dbV4001JukyushaDaicho_shiteiServiceShurui07",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui08" as "dbV4001JukyushaDaicho_shiteiServiceShurui08",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui09" as "dbV4001JukyushaDaicho_shiteiServiceShurui09",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui10" as "dbV4001JukyushaDaicho_shiteiServiceShurui10",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui11" as "dbV4001JukyushaDaicho_shiteiServiceShurui11",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui12" as "dbV4001JukyushaDaicho_shiteiServiceShurui12",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui13" as "dbV4001JukyushaDaicho_shiteiServiceShurui13",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui14" as "dbV4001JukyushaDaicho_shiteiServiceShurui14",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui15" as "dbV4001JukyushaDaicho_shiteiServiceShurui15",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui16" as "dbV4001JukyushaDaicho_shiteiServiceShurui16",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui17" as "dbV4001JukyushaDaicho_shiteiServiceShurui17",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui18" as "dbV4001JukyushaDaicho_shiteiServiceShurui18",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui19" as "dbV4001JukyushaDaicho_shiteiServiceShurui19",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui20" as "dbV4001JukyushaDaicho_shiteiServiceShurui20",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui21" as "dbV4001JukyushaDaicho_shiteiServiceShurui21",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui22" as "dbV4001JukyushaDaicho_shiteiServiceShurui22",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui23" as "dbV4001JukyushaDaicho_shiteiServiceShurui23",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui24" as "dbV4001JukyushaDaicho_shiteiServiceShurui24",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui25" as "dbV4001JukyushaDaicho_shiteiServiceShurui25",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui26" as "dbV4001JukyushaDaicho_shiteiServiceShurui26",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui27" as "dbV4001JukyushaDaicho_shiteiServiceShurui27",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui28" as "dbV4001JukyushaDaicho_shiteiServiceShurui28",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui29" as "dbV4001JukyushaDaicho_shiteiServiceShurui29",
+         "DbV4001JukyushaDaicho"."shiteiServiceShurui30" as "dbV4001JukyushaDaicho_shiteiServiceShurui30",
+         "DbV4001JukyushaDaicho"."soshitsuYMD" as "dbV4001JukyushaDaicho_soshitsuYMD",
+         "DbV4001JukyushaDaicho"."chokkinIdoYMD" as "dbV4001JukyushaDaicho_chokkinIdoYMD",
+         "DbV4001JukyushaDaicho"."chokkinIdoJiyuCode" as "dbV4001JukyushaDaicho_chokkinIdoJiyuCode",
+         "DbV4001JukyushaDaicho"."yukoMukoKubun" as "dbV4001JukyushaDaicho_yukoMukoKubun",
+         "DbV4001JukyushaDaicho"."dataKubun" as "dbV4001JukyushaDaicho_dataKubun",
+         "DbV4001JukyushaDaicho"."remban" as "dbV4001JukyushaDaicho_remban",
+         "DbV4001JukyushaDaicho"."idoRiyu" as "dbV4001JukyushaDaicho_idoRiyu",
+         "DbV4001JukyushaDaicho"."shinseishoKubun" as "dbV4001JukyushaDaicho_shinseishoKubun",
+         "DbV4001JukyushaDaicho"."sakujoJiyuCode" as "dbV4001JukyushaDaicho_sakujoJiyuCode",
+         "DbV4001JukyushaDaicho"."yoshienshaNinteiShinseiFlag" as "dbV4001JukyushaDaicho_yoshienshaNinteiShinseiFlag",
+         "DbV4001JukyushaDaicho"."shikyuGendoTanisu" as "dbV4001JukyushaDaicho_shikyuGendoTanisu",
+         "DbV4001JukyushaDaicho"."shikyuGendoKaishiYMD" as "dbV4001JukyushaDaicho_shikyuGendoKaishiYMD",
+         "DbV4001JukyushaDaicho"."shikyuGendoShuryoYMD" as "dbV4001JukyushaDaicho_shikyuGendoShuryoYMD",
+         "DbV4001JukyushaDaicho"."tankiSikyuGendoNissu" as "dbV4001JukyushaDaicho_tankiSikyuGendoNissu",
+         "DbV4001JukyushaDaicho"."tankiShikyuGendoKaishiYMD" as "dbV4001JukyushaDaicho_tankiShikyuGendoKaishiYMD",
+         "DbV4001JukyushaDaicho"."tankiShikyuGendoShuryoYMD" as "dbV4001JukyushaDaicho_tankiShikyuGendoShuryoYMD",
+         "DbV4001JukyushaDaicho"."toshoNinteiYukoKaishiYMD" as "dbV4001JukyushaDaicho_toshoNinteiYukoKaishiYMD",
+         "DbV4001JukyushaDaicho"."toshoNinteiYukoShuryoYMD" as "dbV4001JukyushaDaicho_toshoNinteiYukoShuryoYMD",
+         "DbV4001JukyushaDaicho"."jukyuShikakuShomeishoHakkoYMD1" as "dbV4001JukyushaDaicho_jukyuShikakuShomeishoHakkoYMD1",
+         "DbV4001JukyushaDaicho"."jukyuShikakuShomeishoHakkoYMD2" as "dbV4001JukyushaDaicho_jukyuShikakuShomeishoHakkoYMD2",
+         "DbV4001JukyushaDaicho"."shindanMeireishoHakkoYMD" as "dbV4001JukyushaDaicho_shindanMeireishoHakkoYMD",
+         "DbV4001JukyushaDaicho"."nigoShinseiJuriTsuchishoHakkoYMD" as "dbV4001JukyushaDaicho_nigoShinseiJuriTsuchishoHakkoYMD",
+         "DbV4001JukyushaDaicho"."ninteiKekkaTsuchishoHakkoYMD" as "dbV4001JukyushaDaicho_ninteiKekkaTsuchishoHakkoYMD",
+         "DbV4001JukyushaDaicho"."kubunHenkoTsuchishoHakkoYMD" as "dbV4001JukyushaDaicho_kubunHenkoTsuchishoHakkoYMD",
+         "DbV4001JukyushaDaicho"."serviceHenkoTsuchishoHakkoYMD" as "dbV4001JukyushaDaicho_serviceHenkoTsuchishoHakkoYMD",
+         "DbV4001JukyushaDaicho"."ninteiKyakkaTsuchishoHakkoYMD" as "dbV4001JukyushaDaicho_ninteiKyakkaTsuchishoHakkoYMD",
+         "DbV4001JukyushaDaicho"."ninteiTorikeshiTsuchishoHakkoYMD" as "dbV4001JukyushaDaicho_ninteiTorikeshiTsuchishoHakkoYMD",
+         "DbV4001JukyushaDaicho"."shikakuShutokuMaeShinseiFlag" as "dbV4001JukyushaDaicho_shikakuShutokuMaeShinseiFlag",
+         "DbV4001JukyushaDaicho"."kyuSochishaFlag" as "dbV4001JukyushaDaicho_kyuSochishaFlag",
+         "DbV4001JukyushaDaicho"."logicalDeletedFlag" as "dbV4001JukyushaDaicho_logicalDeletedFlag"
+    </sql>
+
+
+    <!--テーブルDbV4001JukyushaDaichoの項目をDbV4001JukyushaDaichoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbV4001JukyushaDaichoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity" autoMapping="true">
+        <id property="shichosonCode" column="dbV4001JukyushaDaicho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="hihokenshaNo" column="dbV4001JukyushaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="rirekiNo" column="dbV4001JukyushaDaicho_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="edaban" column="dbV4001JukyushaDaicho_edaban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="jukyuShinseiJiyu" column="dbV4001JukyushaDaicho_jukyuShinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shinseishoKanriNo" column="dbV4001JukyushaDaicho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="shinseiJokyoKubun" column="dbV4001JukyushaDaicho_shinseiJokyoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shishoCode" column="dbV4001JukyushaDaicho_shishoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chokkinFlag" column="dbV4001JukyushaDaicho_chokkinFlag" />
+        <result property="shikibetsuCode" column="dbV4001JukyushaDaicho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="shinseiRiyu" column="dbV4001JukyushaDaicho_shinseiRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseishaKankeiCode" column="dbV4001JukyushaDaicho_shinseishaKankeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="homninKankei" column="dbV4001JukyushaDaicho_homninKankei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jukyuShinseiYMD" column="dbV4001JukyushaDaicho_jukyuShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nigoTokuteiShippeiCode" column="dbV4001JukyushaDaicho_nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shinsakaiIraiYMD" column="dbV4001JukyushaDaicho_shinsakaiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="yokaigoJotaiKubunCode" column="dbV4001JukyushaDaicho_yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ninteiYukoKikanKaishiYMD" column="dbV4001JukyushaDaicho_ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiYukoKikanShuryoYMD" column="dbV4001JukyushaDaicho_ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiYMD" column="dbV4001JukyushaDaicho_ninteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <!-- TODO. <result property="minashiCode" column="dbV4001JukyushaDaicho_minashiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>-->
+        <result property="shiteiServiceShurui01" column="dbV4001JukyushaDaicho_shiteiServiceShurui01" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui02" column="dbV4001JukyushaDaicho_shiteiServiceShurui02" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui03" column="dbV4001JukyushaDaicho_shiteiServiceShurui03" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui04" column="dbV4001JukyushaDaicho_shiteiServiceShurui04" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui05" column="dbV4001JukyushaDaicho_shiteiServiceShurui05" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui06" column="dbV4001JukyushaDaicho_shiteiServiceShurui06" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui07" column="dbV4001JukyushaDaicho_shiteiServiceShurui07" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui08" column="dbV4001JukyushaDaicho_shiteiServiceShurui08" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui09" column="dbV4001JukyushaDaicho_shiteiServiceShurui09" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui10" column="dbV4001JukyushaDaicho_shiteiServiceShurui10" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui11" column="dbV4001JukyushaDaicho_shiteiServiceShurui11" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui12" column="dbV4001JukyushaDaicho_shiteiServiceShurui12" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui13" column="dbV4001JukyushaDaicho_shiteiServiceShurui13" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui14" column="dbV4001JukyushaDaicho_shiteiServiceShurui14" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui15" column="dbV4001JukyushaDaicho_shiteiServiceShurui15" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui16" column="dbV4001JukyushaDaicho_shiteiServiceShurui16" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui17" column="dbV4001JukyushaDaicho_shiteiServiceShurui17" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui18" column="dbV4001JukyushaDaicho_shiteiServiceShurui18" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui19" column="dbV4001JukyushaDaicho_shiteiServiceShurui19" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui20" column="dbV4001JukyushaDaicho_shiteiServiceShurui20" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui21" column="dbV4001JukyushaDaicho_shiteiServiceShurui21" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui22" column="dbV4001JukyushaDaicho_shiteiServiceShurui22" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui23" column="dbV4001JukyushaDaicho_shiteiServiceShurui23" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui24" column="dbV4001JukyushaDaicho_shiteiServiceShurui24" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui25" column="dbV4001JukyushaDaicho_shiteiServiceShurui25" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui26" column="dbV4001JukyushaDaicho_shiteiServiceShurui26" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui27" column="dbV4001JukyushaDaicho_shiteiServiceShurui27" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui28" column="dbV4001JukyushaDaicho_shiteiServiceShurui28" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui29" column="dbV4001JukyushaDaicho_shiteiServiceShurui29" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="shiteiServiceShurui30" column="dbV4001JukyushaDaicho_shiteiServiceShurui30" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="soshitsuYMD" column="dbV4001JukyushaDaicho_soshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="chokkinIdoYMD" column="dbV4001JukyushaDaicho_chokkinIdoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="chokkinIdoJiyuCode" column="dbV4001JukyushaDaicho_chokkinIdoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="yukoMukoKubun" column="dbV4001JukyushaDaicho_yukoMukoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="dataKubun" column="dbV4001JukyushaDaicho_dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="remban" column="dbV4001JukyushaDaicho_remban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="idoRiyu" column="dbV4001JukyushaDaicho_idoRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseishoKubun" column="dbV4001JukyushaDaicho_shinseishoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="sakujoJiyuCode" column="dbV4001JukyushaDaicho_sakujoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="yoshienshaNinteiShinseiFlag" column="dbV4001JukyushaDaicho_yoshienshaNinteiShinseiFlag" />
+        <result property="shikyuGendoTanisu" column="dbV4001JukyushaDaicho_shikyuGendoTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shikyuGendoKaishiYMD" column="dbV4001JukyushaDaicho_shikyuGendoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikyuGendoShuryoYMD" column="dbV4001JukyushaDaicho_shikyuGendoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tankiSikyuGendoNissu" column="dbV4001JukyushaDaicho_tankiSikyuGendoNissu" />
+        <result property="tankiShikyuGendoKaishiYMD" column="dbV4001JukyushaDaicho_tankiShikyuGendoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tankiShikyuGendoShuryoYMD" column="dbV4001JukyushaDaicho_tankiShikyuGendoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="toshoNinteiYukoKaishiYMD" column="dbV4001JukyushaDaicho_toshoNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="toshoNinteiYukoShuryoYMD" column="dbV4001JukyushaDaicho_toshoNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jukyuShikakuShomeishoHakkoYMD1" column="dbV4001JukyushaDaicho_jukyuShikakuShomeishoHakkoYMD1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jukyuShikakuShomeishoHakkoYMD2" column="dbV4001JukyushaDaicho_jukyuShikakuShomeishoHakkoYMD2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shindanMeireishoHakkoYMD" column="dbV4001JukyushaDaicho_shindanMeireishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nigoShinseiJuriTsuchishoHakkoYMD" column="dbV4001JukyushaDaicho_nigoShinseiJuriTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiKekkaTsuchishoHakkoYMD" column="dbV4001JukyushaDaicho_ninteiKekkaTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kubunHenkoTsuchishoHakkoYMD" column="dbV4001JukyushaDaicho_kubunHenkoTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="serviceHenkoTsuchishoHakkoYMD" column="dbV4001JukyushaDaicho_serviceHenkoTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiKyakkaTsuchishoHakkoYMD" column="dbV4001JukyushaDaicho_ninteiKyakkaTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiTorikeshiTsuchishoHakkoYMD" column="dbV4001JukyushaDaicho_ninteiTorikeshiTsuchishoHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuShutokuMaeShinseiFlag" column="dbV4001JukyushaDaicho_shikakuShutokuMaeShinseiFlag" />
+        <result property="kyuSochishaFlag" column="dbV4001JukyushaDaicho_kyuSochishaFlag" />
+        <result property="logicalDeletedFlag" column="dbV4001JukyushaDaicho_logicalDeletedFlag" />
+    </resultMap>
+
+</mapper>

@@ -4,19 +4,24 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.IOutputChohyoIchiranDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.OutputChohyoIchiranDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * TokuchoTaishoshaIchiranBatchParameter のクラスファイル 
- * 
- * @author 自動生成
+ * TokuchoTaishoshaIchiranBatchParameter のクラスファイル <br/>
+ *
+ * 画面設計_DBBGM81003_1_特徴対象者一覧作成
+ *
+ * @reamsid_L DBB-1860-010 yangchenbing
  */
 public class TokuchoTaishoshaIchiranBatchParameterDiv extends PanelBatchParameter {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -91,7 +96,7 @@ public class TokuchoTaishoshaIchiranBatchParameterDiv extends PanelBatchParamete
     }
 
     @JsonIgnore
-    public void  setTxtTokuchoGimusha(TextBox txtTokuchoGimusha) {
+    public void setTxtTokuchoGimusha(TextBox txtTokuchoGimusha) {
         this.getKonkaiShorinaiyoPanel().setTxtTokuchoGimusha(txtTokuchoGimusha);
     }
 
@@ -101,7 +106,7 @@ public class TokuchoTaishoshaIchiranBatchParameterDiv extends PanelBatchParamete
     }
 
     @JsonIgnore
-    public void  setChkShutsuryokuTaisho(CheckBoxList chkShutsuryokuTaisho) {
+    public void setChkShutsuryokuTaisho(CheckBoxList chkShutsuryokuTaisho) {
         this.getShutsuryokuTaishoPanel().setChkShutsuryokuTaisho(chkShutsuryokuTaisho);
     }
 

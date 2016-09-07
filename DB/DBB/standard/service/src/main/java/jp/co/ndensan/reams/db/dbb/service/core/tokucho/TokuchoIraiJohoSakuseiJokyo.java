@@ -138,10 +138,10 @@ public class TokuchoIraiJohoSakuseiJokyo {
      */
     public List<ShoriDateKanri> find年度内処理状況() {
         FlexibleYear 調定年度 = FlexibleDate.getNowDate().getYear();
-        List<RString> 処理名 = new ArrayList<>();
-        処理名.add(ShoriName.特徴依頼情報作成.get名称());
-        処理名.add(ShoriName.特徴異動情報作成.get名称());
-        List<DbT7022ShoriDateKanriEntity> entityList = dac.select処理状況(調定年度, 処理名);
+        List<RString> 処理名リスト = new ArrayList<>();
+        処理名リスト.add(ShoriName.特徴依頼情報作成.get名称());
+        処理名リスト.add(ShoriName.特徴異動情報作成.get名称());
+        List<DbT7022ShoriDateKanriEntity> entityList = dac.select処理状況(調定年度, 処理名リスト, SubGyomuCode.DBB介護賦課);
         List<ShoriDateKanri> 年度内処理状況 = new ArrayList<>();
         for (DbT7022ShoriDateKanriEntity entity : entityList) {
             年度内処理状況.add(new ShoriDateKanri(entity));

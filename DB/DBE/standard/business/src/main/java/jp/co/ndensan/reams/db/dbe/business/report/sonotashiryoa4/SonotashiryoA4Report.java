@@ -5,26 +5,26 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.sonotashiryoa4;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.sonotashiryo.SonotashiryoEntity;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryoa4.SonotashiryoA4ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 事務局用その他資料のReportです。
+ * その他資料（A4版）のReportです。
  *
- * @reamsid_L DBE-0150-080 wangrenze
+ * @reamsid_L DBE-0150-270 wangrenze
  */
 public class SonotashiryoA4Report extends Report<SonotashiryoA4ReportSource> {
 
-    private final SonotashiryoEntity data;
+    private final JimuSonotashiryoBusiness data;
 
     /**
      * インスタンスを生成します。
      *
      * @param data 申請に関する帳票発行のdata
      */
-    public SonotashiryoA4Report(SonotashiryoEntity data) {
+    public SonotashiryoA4Report(JimuSonotashiryoBusiness data) {
         this.data = data;
     }
 

@@ -4,13 +4,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 
 /**
  * SeikatsuKinou のクラスファイル
@@ -18,8 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
  * @author 自動生成
  */
 public class SeikatsuKinouDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -54,6 +51,8 @@ public class SeikatsuKinouDiv extends Panel {
     private RString shinseishoKanriNo;
     @JsonProperty("recordNumber")
     private RString recordNumber;
+    @JsonProperty("ninteichosaTokkijikoNoList")
+    private RString ninteichosaTokkijikoNoList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -314,6 +313,24 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     /*
+     * getninteichosaTokkijikoNoList
+     * @return ninteichosaTokkijikoNoList
+     */
+    @JsonProperty("ninteichosaTokkijikoNoList")
+    public RString getNinteichosaTokkijikoNoList() {
+        return ninteichosaTokkijikoNoList;
+    }
+
+    /*
+     * setninteichosaTokkijikoNoList
+     * @param ninteichosaTokkijikoNoList ninteichosaTokkijikoNoList
+     */
+    @JsonProperty("ninteichosaTokkijikoNoList")
+    public void setNinteichosaTokkijikoNoList(RString ninteichosaTokkijikoNoList) {
+        this.ninteichosaTokkijikoNoList = ninteichosaTokkijikoNoList;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -322,7 +339,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnIjyo(ButtonDialog btnIjyo) {
+    public void  setBtnIjyo(ButtonDialog btnIjyo) {
         this.getIjyo().setBtnIjyo(btnIjyo);
     }
 
@@ -332,7 +349,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadIjyo(RadioButton radIjyo) {
+    public void  setRadIjyo(RadioButton radIjyo) {
         this.getIjyo().setRadIjyo(radIjyo);
     }
 
@@ -342,7 +359,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnIdou(ButtonDialog btnIdou) {
+    public void  setBtnIdou(ButtonDialog btnIdou) {
         this.getIdou().setBtnIdou(btnIdou);
     }
 
@@ -352,7 +369,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadIdou(RadioButton radIdou) {
+    public void  setRadIdou(RadioButton radIdou) {
         this.getIdou().setRadIdou(radIdou);
     }
 
@@ -362,7 +379,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnEnka(ButtonDialog btnEnka) {
+    public void  setBtnEnka(ButtonDialog btnEnka) {
         this.getEnka().setBtnEnka(btnEnka);
     }
 
@@ -372,7 +389,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadEnka(RadioButton radEnka) {
+    public void  setRadEnka(RadioButton radEnka) {
         this.getEnka().setRadEnka(radEnka);
     }
 
@@ -382,7 +399,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnShokuji(ButtonDialog btnShokuji) {
+    public void  setBtnShokuji(ButtonDialog btnShokuji) {
         this.getShokuji().setBtnShokuji(btnShokuji);
     }
 
@@ -392,7 +409,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadShokuji(RadioButton radShokuji) {
+    public void  setRadShokuji(RadioButton radShokuji) {
         this.getShokuji().setRadShokuji(radShokuji);
     }
 
@@ -402,7 +419,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnHainyo(ButtonDialog btnHainyo) {
+    public void  setBtnHainyo(ButtonDialog btnHainyo) {
         this.getHainyo().setBtnHainyo(btnHainyo);
     }
 
@@ -412,7 +429,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadHainyo(RadioButton radHainyo) {
+    public void  setRadHainyo(RadioButton radHainyo) {
         this.getHainyo().setRadHainyo(radHainyo);
     }
 
@@ -422,7 +439,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnHaiben(ButtonDialog btnHaiben) {
+    public void  setBtnHaiben(ButtonDialog btnHaiben) {
         this.getHaiben().setBtnHaiben(btnHaiben);
     }
 
@@ -432,7 +449,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadHaiben(RadioButton radHaiben) {
+    public void  setRadHaiben(RadioButton radHaiben) {
         this.getHaiben().setRadHaiben(radHaiben);
     }
 
@@ -442,7 +459,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnKokou(ButtonDialog btnKokou) {
+    public void  setBtnKokou(ButtonDialog btnKokou) {
         this.getKokou().setBtnKokou(btnKokou);
     }
 
@@ -452,7 +469,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadKokou(RadioButton radKokou) {
+    public void  setRadKokou(RadioButton radKokou) {
         this.getKokou().setRadKokou(radKokou);
     }
 
@@ -462,7 +479,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnSengan(ButtonDialog btnSengan) {
+    public void  setBtnSengan(ButtonDialog btnSengan) {
         this.getSengan().setBtnSengan(btnSengan);
     }
 
@@ -472,7 +489,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadSengan(RadioButton radSengan) {
+    public void  setRadSengan(RadioButton radSengan) {
         this.getSengan().setRadSengan(radSengan);
     }
 
@@ -482,7 +499,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnSeihatsu(ButtonDialog btnSeihatsu) {
+    public void  setBtnSeihatsu(ButtonDialog btnSeihatsu) {
         this.getSeihatsu().setBtnSeihatsu(btnSeihatsu);
     }
 
@@ -492,7 +509,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadSeihatsu(RadioButton radSeihatsu) {
+    public void  setRadSeihatsu(RadioButton radSeihatsu) {
         this.getSeihatsu().setRadSeihatsu(radSeihatsu);
     }
 
@@ -502,7 +519,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnUwagi(ButtonDialog btnUwagi) {
+    public void  setBtnUwagi(ButtonDialog btnUwagi) {
         this.getUwagi().setBtnUwagi(btnUwagi);
     }
 
@@ -512,7 +529,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadUwagi(RadioButton radUwagi) {
+    public void  setRadUwagi(RadioButton radUwagi) {
         this.getUwagi().setRadUwagi(radUwagi);
     }
 
@@ -522,7 +539,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnZubon(ButtonDialog btnZubon) {
+    public void  setBtnZubon(ButtonDialog btnZubon) {
         this.getZubon().setBtnZubon(btnZubon);
     }
 
@@ -532,7 +549,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadZubon(RadioButton radZubon) {
+    public void  setRadZubon(RadioButton radZubon) {
         this.getZubon().setRadZubon(radZubon);
     }
 
@@ -542,7 +559,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnHindo(ButtonDialog btnHindo) {
+    public void  setBtnHindo(ButtonDialog btnHindo) {
         this.getHindo().setBtnHindo(btnHindo);
     }
 
@@ -552,7 +569,7 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadHindo(RadioButton radHindo) {
+    public void  setRadHindo(RadioButton radHindo) {
         this.getHindo().setRadHindo(radHindo);
     }
 

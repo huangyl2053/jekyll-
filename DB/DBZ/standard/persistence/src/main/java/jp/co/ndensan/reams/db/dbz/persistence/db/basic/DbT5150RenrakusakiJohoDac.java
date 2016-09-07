@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護連絡先情報のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 chengsanyuan
  */
 public class DbT5150RenrakusakiJohoDac implements ISaveable<DbT5150RenrakusakiJohoEntity> {
 
@@ -85,6 +87,19 @@ public class DbT5150RenrakusakiJohoDac implements ISaveable<DbT5150RenrakusakiJo
     }
 
     /**
+     * DbT5150RenrakusakiJohoEntityを物理削除
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int deletePhysical(DbT5150RenrakusakiJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護連絡先情報"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.deletePhysical(entity).execute();
+    }
+
+    /**
      * 介護連絡先情報を1件返します。
      *
      * @param 申請書管理番号 申請書管理番号
@@ -101,7 +116,7 @@ public class DbT5150RenrakusakiJohoDac implements ISaveable<DbT5150RenrakusakiJo
                 order(by(priority, Order.ASC)).limit(1).
                 toObject(DbT5150RenrakusakiJohoEntity.class);
     }
-    
+
     /**
      * 介護連絡先情報（認定）を取得します。
      *
@@ -115,6 +130,22 @@ public class DbT5150RenrakusakiJohoDac implements ISaveable<DbT5150RenrakusakiJo
         return accessor.select().
                 table(DbT5150RenrakusakiJoho.class).
                 where(eq(shinseishoKanriNo, 申請書管理番号)).
+                toList(DbT5150RenrakusakiJohoEntity.class);
+    }
+
+    /**
+     * 申請書管理番号により、介護連絡先情報（認定）を取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return List<DbT5150RenrakusakiJohoEntity>
+     */
+    @Transaction
+    public List<DbT5150RenrakusakiJohoEntity> getRenrakusakiJohoBy申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT5150RenrakusakiJoho.class).
+                where(eq(shinseishoKanriNo, 申請書管理番号)).
+                order(by(renban, Order.DESC)).
                 toList(DbT5150RenrakusakiJohoEntity.class);
     }
 }

@@ -60,6 +60,9 @@ public class ShokanKetteiTsuchiShoSealer2OutputProcess extends BatchProcessBase<
 
     @Override
     protected void afterExecute() {
+        if (帳票データリスト.isEmpty()) {
+            return;
+        }
         ShokanBaraiShikyuKetteiTsuchishoSealerType1 ichiranhyo = new ShokanBaraiShikyuKetteiTsuchishoSealerType1();
         TensoData data
                 = ichiranhyo.createChoHyoData(帳票データリスト, batchPram, reportSourceWriter);

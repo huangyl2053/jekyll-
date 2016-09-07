@@ -23,6 +23,8 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("KanryoMessagePanel")
+    private KanryoMessagePanelDiv KanryoMessagePanel;
     @JsonProperty("KyotsuHyojiArea")
     private KyotsuHyojiAreaDiv KyotsuHyojiArea;
     @JsonProperty("ShinseishaIchiran")
@@ -44,6 +46,24 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getKanryoMessagePanel
+     * @return KanryoMessagePanel
+     */
+    @JsonProperty("KanryoMessagePanel")
+    public KanryoMessagePanelDiv getKanryoMessagePanel() {
+        return KanryoMessagePanel;
+    }
+
+    /*
+     * setKanryoMessagePanel
+     * @param KanryoMessagePanel KanryoMessagePanel
+     */
+    @JsonProperty("KanryoMessagePanel")
+    public void setKanryoMessagePanel(KanryoMessagePanelDiv KanryoMessagePanel) {
+        this.KanryoMessagePanel = KanryoMessagePanel;
+    }
+
     /*
      * getKyotsuHyojiArea
      * @return KyotsuHyojiArea
@@ -574,12 +594,12 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnIchigoHantei() {
+    public ButtonDialog getBtnIchigoHantei() {
         return this.getKobetsuHyojiArea().getBtnIchigoHantei();
     }
 
     @JsonIgnore
-    public void  setBtnIchigoHantei(Button btnIchigoHantei) {
+    public void  setBtnIchigoHantei(ButtonDialog btnIchigoHantei) {
         this.getKobetsuHyojiArea().setBtnIchigoHantei(btnIchigoHantei);
     }
 

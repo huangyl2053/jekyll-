@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 不正な動作の原因になります。</br>
  * DBE5140002のイベント名定義クラスです</br>
  *
+ * @reamsid_L DBE-0130-020 xuyannan
  */
 public enum DBE5140002TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">

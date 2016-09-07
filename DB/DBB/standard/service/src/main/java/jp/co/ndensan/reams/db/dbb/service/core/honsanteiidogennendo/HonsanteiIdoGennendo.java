@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidogennen.SanteiIdoGenn
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidogennen.Shoriku;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.CreateHonsanteiIdoBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
@@ -57,74 +58,22 @@ public class HonsanteiIdoGennendo {
     private final RString zFourRS = new RString("0004");
     private final RString zFiveRS = new RString("0005");
     private final RString zSixRS = new RString("0006");
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_7 = 7;
+    private static final int INDEX_8 = 8;
+    private static final int INDEX_9 = 9;
+    private static final int INDEX_10 = 10;
+    private static final int INDEX_11 = 11;
+    private static final int INDEX_12 = 12;
+    private static final int INDEX_13 = 13;
+    private static final int INDEX_14 = 14;
     private final RString 追加候補者用通知書タイプ = new RString("追加候補者用通知書タイプ");
     private final RString 追加候補者用連帳区分 = new RString("追加候補者用連帳区分");
-    private final RString tokubetsuB5RenchoRS
-            = new RString("DBB100004_TokubetsuChoshuKaishiTsuchishoKariB5Rencho");
-    private final RString tokubetsuKairiBRS
-            = new RString("DBB100003_TokubetsuChoshuKaishiTsuchishoKariB5");
-    private final RString tokubetsuOverlayB5YokoRS
-            = new RString("DBB100009_TokubetsuChoshuKaishiTsuchishoKariOverlayB5Yoko");
-    private final RString tokubetsuOverlayA4TateRS
-            = new RString("DBB100008_TokubetsuChoshuKaishiTsuchishoKariOverlayA4Tate");
-    private final RString tokubetsuSealerRenchoRS
-            = new RString("DBB100006_TokubetsuChoshuKaishiTsuchishoKariSealerRencho");
-    private final RString tokubetsushoKairiSealerRS
-            = new RString("DBB100005_TokubetsuChoshuKaishiTsuchishoKariSealer");
-    private final RString tokubetsuTsuchishoB5YokoRS
-            = new RString("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoB5Yoko");
-    private final RString hokenryoYokoRS
-            = new RString("DBB100042_KaigoHokenHokenryogakuHenkoKenChushiTsuchishoB5Yoko");
-    private final RString tokubetsuTsuTsuchishoA4TateRS
-            = new RString("DBB100043_KaigoHokenHokenryogakuHenkoKenChushiTsuchishoA4Tate");
-    private final RString kaigoHokenTsuchishoA4TateRS
-            = new RString("DBB100040_KaigoHokenHokenryogakuKetteiTsuchishoA4Tate");
-    private final RString tokubetsushoB5RenchoRS
-            = new RString("DBB100033_TokubetsuChoshuKaishiTsuchishoB5Rencho");
-    private final RString tokubetsuTsuchishoB5RS
-            = new RString("DBB100032_TokubetsuChoshuKaishiTsuchishoB5");
-    private final RString tokubetsuTsuchishoB52RenchoRS
-            = new RString("DBB100037_TokubetsuChoshuKaishiTsuchishoB52Rencho");
-    private final RString tokubetsuTsuTsuchishoB52RS
-            = new RString("DBB100036_TokubetsuChoshuKaishiTsuchishoB52");
-    private final RString tokubetsushoKairiA4TateRS
-            = new RString("DBB100038_TokubetsuChoshuKaishiTsuchishoKariA4Tate");
-    private final RString tokubetSealerRenchoRS
-            = new RString("DBB100035_TokubetsuChoshuKaishiTsuchishoSealerRencho");
-    private final RString tokubetTsuchishoSealerRS
-            = new RString("DBB100034_TokubetsuChoshuKaishiTsuchishoSealer");
-    private final RString hokenryoNonyuRS
-            = new RString("DBB100045_HokenryoNonyuTsuchishoKigoto");
-    private final RString hokenryoNonyuTsuchRS
-            = new RString("DBB100046_HokenryoNonyuTsuchishoKigotoRencho");
-    private final RString hokenryoNonyuTsuchFiveKiRS
-            = new RString("DBB100053_HokenryoNonyuTsuchishoGinfuriFiveKi");
-    private final RString hokenryoNonyuTsuchFiveRS
-            = new RString("DBB100054_HokenryoNonyuTsuchishoGinfuriFiveKiRencho");
-    private final RString hokenryoNonyuGinfuriFiveRS
-            = new RString("DBB100051_HokenryoNonyuTsuchishoGinfuriFourKi");
-    private final RString hokenryoNonyuGinfuriRenchoRS
-            = new RString("DBB100052_HokenryoNonyuTsuchishoGinfuriFourKiRencho");
-    private final RString hokenryoNonyuNashi
-            = new RString("DBB100056_HokenryoNonyuTsuchishoBookFuriKaeNashi");
-    private final RString hokenryoNonyuRencho
-            = new RString("DBB100058_HokenryoNonyuTsuchishoBookFuriKaeNashiRencho");
-    private final RString hokenryoNonyuAri
-            = new RString("DBB100055_NonyuTsuchishoBookFuriKaeAri");
-    private final RString hokenryoNonyuAriRencho
-            = new RString("DBB100057_NonyuTsuchishoBookFuriKaeAriRencho");
-    private final RString hokenryoNonyuMulti
-            = new RString("DBB100061_NonyuTsuchishoCVSMulti");
-    private final RString hokenryoNonyuMultiRencho
-            = new RString("DBB100062_NonyuTsuchishoCVSMultiRencho");
-    private final RString hokenryoNonyuKakuko
-            = new RString("DBB100059_NonyuTsuchishoCVSKakuko");
-    private final RString hokenryoNonyuKakukoRencho
-            = new RString("DBB100060_NonyuTsuchishoCVSKakukoRencho");
-    private final RString hokenryoNonyuKigoto
-            = new RString("DBB100063_NonyuTsuchishoCVSKigoto");
-    private final RString hokenryoNonyuKigotoRencho
-            = new RString("DBB100064_NonyuTsuchishoCVSKigotoRencho");
     private final RString 通知書タイプ = new RString("通知書タイプ");
     private final RString 期毎納入通知書タイプ = new RString("期毎納入通知書タイプ");
     private final RString 銀振納入通知書タイプ = new RString("銀振納入通知書タイプ");
@@ -135,9 +84,10 @@ public class HonsanteiIdoGennendo {
     private final ReportId 特徴開始通知書_仮算定 = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private final ReportId 決定通知書_変更通知書 = new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
     private final ReportId 納入通知書 = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
-    private final RString 特徴開始者_12月 = new RString("12月特徴開始者");
-    private final RString 特徴開始者_2月 = new RString("2月特徴開始者");
-    private final RString 特徴開始者_4月 = new RString("4月特徴開始者");
+    private final ReportId 本算定異動_現年度_結果一覧表 = new ReportId("DBB200015_HonsanteiIdouKekkaIchiran");
+    private final RString 特徴開始者_12月 = new RString("12月特徴開始者のみ");
+    private final RString 特徴開始者_2月 = new RString("2月特徴開始者のみ");
+    private final RString 特徴開始者_4月 = new RString("4月特徴開始者のみ");
     private final RString すべて選択 = new RString("（すべて選択）");
     private final RString 現金納付者 = new RString("現金納付者");
     private final RString 口座振替者 = new RString("口座振替者");
@@ -228,13 +178,14 @@ public class HonsanteiIdoGennendo {
      * @return ShoriDateKanri
      */
     public ShoriDateKanri getChushutsuKaishiNichiji(FlexibleYear 調定年度) {
-        DbT7022ShoriDateKanriEntity kanriEntity;
-        kanriEntity = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課,
+        DbT7022ShoriDateKanriEntity kanriEntity = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課,
                 ShoriName.異動賦課.get名称(), 処理_枝番, 調定年度);
         if (kanriEntity == null) {
-            kanriEntity = 処理日付管理Dac.selectBySomeKeysLimits(SubGyomuCode.DBB介護賦課,
-                    ShoriName.本算定賦課.get名称(), 処理_枝番,
-                    調定年度, 処理_枝番);
+            List<DbT7022ShoriDateKanriEntity> kanriEntityList = 処理日付管理Dac
+                    .selectBySomeKeys(SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), 処理_枝番, 調定年度, 処理_枝番);
+            if (kanriEntityList != null) {
+                return new ShoriDateKanri(kanriEntityList.get(0));
+            }
         }
         return new ShoriDateKanri(kanriEntity);
     }
@@ -378,26 +329,26 @@ public class HonsanteiIdoGennendo {
         switch (帳票タイプを.get設定値().toString() + 連帳区分を.get設定値().toString()) {
             case "0011":
                 return new ChohyoResult(帳票分類ID,
-                        tokubetsushoB5RenchoRS, 出力順ID);
+                        ReportIdDBB.DBB100033.getReportId().value(), 出力順ID);
             case "0010":
                 return new ChohyoResult(帳票分類ID,
-                        tokubetsuTsuchishoB5RS, 出力順ID);
+                        ReportIdDBB.DBB100032.getReportId().value(), 出力順ID);
             case "0021":
                 return new ChohyoResult(帳票分類ID,
-                        tokubetsuTsuchishoB52RenchoRS, 出力順ID);
+                        ReportIdDBB.DBB100037.getReportId().value(), 出力順ID);
             case "0020":
                 return new ChohyoResult(帳票分類ID,
-                        tokubetsuTsuTsuchishoB52RS, 出力順ID);
+                        ReportIdDBB.DBB100036.getReportId().value(), 出力順ID);
             case "0031":
             case "0030":
                 return new ChohyoResult(帳票分類ID,
-                        tokubetsushoKairiA4TateRS, 出力順ID);
+                        ReportIdDBB.DBB100038.getReportId().value(), 出力順ID);
             case "1011":
                 return new ChohyoResult(帳票分類ID,
-                        tokubetSealerRenchoRS, 出力順ID);
+                        ReportIdDBB.DBB100035.getReportId().value(), 出力順ID);
             case "1010":
                 return new ChohyoResult(帳票分類ID,
-                        tokubetTsuchishoSealerRS, 出力順ID);
+                        ReportIdDBB.DBB100034.getReportId().value(), 出力順ID);
             default:
                 return null;
         }
@@ -418,24 +369,24 @@ public class HonsanteiIdoGennendo {
         switch (帳票タイプを.get設定値().toString() + 連帳区分を.get設定値().toString()) {
             case "0011":
                 return new ChohyoResult(帳票分類ID,
-                        tokubetsuB5RenchoRS, 出力順ID);
+                        ReportIdDBB.DBB100004.getReportId().value(), 出力順ID);
             case "0010":
                 return new ChohyoResult(帳票分類ID,
-                        tokubetsuKairiBRS, 出力順ID);
+                        ReportIdDBB.DBB100003.getReportId().value(), 出力順ID);
             case "0021":
             case "0020":
                 return new ChohyoResult(帳票分類ID,
-                        tokubetsuOverlayB5YokoRS, 出力順ID);
+                        ReportIdDBB.DBB100009.getReportId().value(), 出力順ID);
             case "0031":
             case "0030":
                 return new ChohyoResult(帳票分類ID,
-                        tokubetsuOverlayA4TateRS, 出力順ID);
+                        ReportIdDBB.DBB100008.getReportId().value(), 出力順ID);
             case "1011":
                 return new ChohyoResult(帳票分類ID,
-                        tokubetsuSealerRenchoRS, 出力順ID);
+                        ReportIdDBB.DBB100006.getReportId().value(), 出力順ID);
             case "1010":
                 return new ChohyoResult(帳票分類ID,
-                        tokubetsushoKairiSealerRS, 出力順ID);
+                        ReportIdDBB.DBB100005.getReportId().value(), 出力順ID);
             default:
                 return null;
         }
@@ -455,10 +406,10 @@ public class HonsanteiIdoGennendo {
         switch (帳票タイプを.get設定値().toString()) {
             case "001":
                 return new ChohyoResult(帳票分類ID,
-                        tokubetsuTsuchishoB5YokoRS, 出力順ID);
+                        ReportIdDBB.DBB100039.getReportId().value(), 出力順ID);
             case "002":
                 return new ChohyoResult(帳票分類ID,
-                        kaigoHokenTsuchishoA4TateRS, 出力順ID);
+                        ReportIdDBB.DBB100040.getReportId().value(), 出力順ID);
             default:
                 return null;
         }
@@ -478,10 +429,10 @@ public class HonsanteiIdoGennendo {
         switch (帳票タイプを.get設定値().toString()) {
             case "001":
                 return new ChohyoResult(帳票分類ID,
-                        hokenryoYokoRS, 出力順ID);
+                        ReportIdDBB.DBB100042.getReportId().value(), 出力順ID);
             case "002":
                 return new ChohyoResult(帳票分類ID,
-                        tokubetsuTsuTsuchishoA4TateRS, 出力順ID);
+                        ReportIdDBB.DBB100043.getReportId().value(), 出力順ID);
             default:
                 return null;
         }
@@ -495,47 +446,48 @@ public class HonsanteiIdoGennendo {
      */
     public RString get納付書の型(RString 算定期) {
         RString 設定値;
-        switch (算定期.toString()) {
-            case "1":
+        int case_算定期 = Integer.valueOf(算定期.toString());
+        switch (case_算定期) {
+            case INDEX_1:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型1, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",1");
-            case "2":
+            case INDEX_2:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型2, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",2");
-            case "3":
+            case INDEX_3:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型3, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",3");
-            case "4":
+            case INDEX_4:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型4, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",4");
-            case "5":
+            case INDEX_5:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型5, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",5");
-            case "6":
+            case INDEX_6:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型6, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",6");
-            case "7":
+            case INDEX_7:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型7, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",7");
-            case "8":
+            case INDEX_8:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型8, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",8");
-            case "9":
+            case INDEX_9:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型9, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",9");
-            case "10":
+            case INDEX_10:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型10, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",10");
-            case "11":
+            case INDEX_11:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型11, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",11");
-            case "12":
+            case INDEX_12:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型12, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",12");
-            case "13":
+            case INDEX_13:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型13, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",13");
-            case "14":
+            case INDEX_14:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型14, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",14");
             default:
@@ -552,47 +504,48 @@ public class HonsanteiIdoGennendo {
      */
     public RString get納通連帳区分(RString 納通連帳区分) {
         RString 設定値;
-        switch (納通連帳区分.toString()) {
-            case "1":
+        int case_納通連帳区分 = Integer.valueOf(納通連帳区分.toString());
+        switch (case_納通連帳区分) {
+            case INDEX_1:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分1, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return 設定値;
-            case "2":
+            case INDEX_2:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分2, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return 設定値;
-            case "3":
+            case INDEX_3:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分3, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return 設定値;
-            case "4":
+            case INDEX_4:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分4, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return 設定値;
-            case "5":
+            case INDEX_5:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分5, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return 設定値;
-            case "6":
+            case INDEX_6:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分6, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return 設定値;
-            case "7":
+            case INDEX_7:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分7, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return 設定値;
-            case "8":
+            case INDEX_8:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分8, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return 設定値;
-            case "9":
+            case INDEX_9:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分9, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return 設定値;
-            case "10":
+            case INDEX_10:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分10, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return 設定値;
-            case "11":
+            case INDEX_11:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分11, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return 設定値;
-            case "12":
+            case INDEX_12:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分12, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return 設定値;
-            case "13":
+            case INDEX_13:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分13, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return 設定値;
-            case "14":
+            case INDEX_14:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分14, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return 設定値;
             default:
@@ -613,9 +566,9 @@ public class HonsanteiIdoGennendo {
     public ChohyoResult get期毎タイプ(ChohyoSeigyoHanyo 帳票タイプを, ReportId 帳票分類ID, RString 出力順ID, RString 型N) {
         RString 設定値 = this.get納通連帳区分(型N);
         if (zOneRS.equals(帳票タイプを.get設定値()) && zeroRS.equals(設定値)) {
-            return new ChohyoResult(帳票分類ID, hokenryoNonyuRS, 出力順ID);
+            return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100045.getReportId().value(), 出力順ID);
         } else if (zOneRS.equals(帳票タイプを.get設定値()) && oneRS.equals(設定値)) {
-            return new ChohyoResult(帳票分類ID, hokenryoNonyuTsuchRS, 出力順ID);
+            return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100046.getReportId().value(), 出力順ID);
         }
         return null;
     }
@@ -632,9 +585,9 @@ public class HonsanteiIdoGennendo {
     public ChohyoResult get銀振型5期タイプ(ChohyoSeigyoHanyo 帳票タイプを, ReportId 帳票分類ID, RString 出力順ID, RString 型N) {
         RString 設定値 = this.get納通連帳区分(型N);
         if (zOneRS.equals(帳票タイプを.get設定値()) && zeroRS.equals(設定値)) {
-            return new ChohyoResult(帳票分類ID, hokenryoNonyuTsuchFiveKiRS, 出力順ID);
+            return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100001.getReportId().value(), 出力順ID);
         } else if (zOneRS.equals(帳票タイプを.get設定値()) && oneRS.equals(設定値)) {
-            return new ChohyoResult(帳票分類ID, hokenryoNonyuTsuchFiveRS, 出力順ID);
+            return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100054.getReportId().value(), 出力順ID);
         }
         return null;
     }
@@ -651,9 +604,9 @@ public class HonsanteiIdoGennendo {
     public ChohyoResult get銀振型４期タイプ(ChohyoSeigyoHanyo 帳票タイプを, ReportId 帳票分類ID, RString 出力順ID, RString 型N) {
         RString 設定値 = this.get納通連帳区分(型N);
         if (zOneRS.equals(帳票タイプを.get設定値()) && zeroRS.equals(設定値)) {
-            return new ChohyoResult(帳票分類ID, hokenryoNonyuGinfuriFiveRS, 出力順ID);
+            return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100051.getReportId().value(), 出力順ID);
         } else if (zOneRS.equals(帳票タイプを.get設定値()) && oneRS.equals(設定値)) {
-            return new ChohyoResult(帳票分類ID, hokenryoNonyuGinfuriRenchoRS, 出力順ID);
+            return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100052.getReportId().value(), 出力順ID);
         }
         return null;
     }
@@ -673,13 +626,13 @@ public class HonsanteiIdoGennendo {
         RString 設定値 = this.get納通連帳区分(型N);
         if (zOneRS.equals(帳票タイプを.get設定値())) {
             if (zeroRS.equals(帳票_口座振替依頼.get設定値()) && zeroRS.equals(設定値)) {
-                return new ChohyoResult(帳票分類ID, hokenryoNonyuNashi, 出力順ID);
+                return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100056.getReportId().value(), 出力順ID);
             } else if (zeroRS.equals(帳票_口座振替依頼.get設定値()) && oneRS.equals(設定値)) {
-                return new ChohyoResult(帳票分類ID, hokenryoNonyuRencho, 出力順ID);
+                return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100058.getReportId().value(), 出力順ID);
             } else if (oneRS.equals(帳票_口座振替依頼.get設定値()) && zeroRS.equals(設定値)) {
-                return new ChohyoResult(帳票分類ID, hokenryoNonyuAri, 出力順ID);
+                return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100055.getReportId().value(), 出力順ID);
             } else if (oneRS.equals(帳票_口座振替依頼.get設定値()) && oneRS.equals(設定値)) {
-                return new ChohyoResult(帳票分類ID, hokenryoNonyuAriRencho, 出力順ID);
+                return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100057.getReportId().value(), 出力順ID);
             }
         }
         return null;
@@ -700,20 +653,20 @@ public class HonsanteiIdoGennendo {
         RString 設定値 = this.get納通連帳区分(型N);
         if (twlZRS.equals(帳票タイプを.get設定値())) {
             if (zeroRS.equals(帳票_コンビニ期毎出力.get設定値()) && zeroRS.equals(設定値)) {
-                return new ChohyoResult(帳票分類ID, hokenryoNonyuMulti, 出力順ID);
+                return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100061.getReportId().value(), 出力順ID);
             } else if (zeroRS.equals(帳票_コンビニ期毎出力.get設定値()) && oneRS.equals(設定値)) {
-                return new ChohyoResult(帳票分類ID, hokenryoNonyuMultiRencho, 出力順ID);
+                return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100062.getReportId().value(), 出力順ID);
             }
         } else if (twlTRS.equals(帳票タイプを.get設定値())) {
             if (zeroRS.equals(帳票_コンビニ期毎出力.get設定値()) && zeroRS.equals(設定値)) {
-                return new ChohyoResult(帳票分類ID, hokenryoNonyuKakuko, 出力順ID);
+                return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100059.getReportId().value(), 出力順ID);
             } else if (zeroRS.equals(帳票_コンビニ期毎出力.get設定値()) && oneRS.equals(設定値)) {
-                return new ChohyoResult(帳票分類ID, hokenryoNonyuKakukoRencho, 出力順ID);
+                return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100060.getReportId().value(), 出力順ID);
             }
         } else if (oneRS.equals(帳票_コンビニ期毎出力.get設定値()) && zeroRS.equals(設定値)) {
-            return new ChohyoResult(帳票分類ID, hokenryoNonyuKigoto, 出力順ID);
+            return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100063.getReportId().value(), 出力順ID);
         } else if (oneRS.equals(帳票_コンビニ期毎出力.get設定値()) && oneRS.equals(設定値)) {
-            return new ChohyoResult(帳票分類ID, hokenryoNonyuKigotoRencho, 出力順ID);
+            return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100064.getReportId().value(), 出力順ID);
         }
         return null;
     }
@@ -733,26 +686,27 @@ public class HonsanteiIdoGennendo {
         ChohyoSeigyoHanyo 帳票タイプを;
         RString 設定値 = new RString(this.get納付書の型(算定期).toString().split(",")[0]);
         RString 型N = new RString(this.get納付書の型(算定期).toString().split(",")[1]);
-        switch (設定値.toString()) {
-            case "1":
+        int case_設定値 = Integer.valueOf(設定値.toString());
+        switch (case_設定値) {
+            case INDEX_1:
                 項目名 = 期毎納入通知書タイプ;
                 帳票タイプを = this.getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
                 return this.get期毎タイプ(帳票タイプを, 帳票分類ID, 出力順ID, 型N);
-            case "2":
+            case INDEX_2:
                 項目名 = 銀振納入通知書タイプ;
                 帳票タイプを = this.getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
                 return this.get銀振型5期タイプ(帳票タイプを, 帳票分類ID, 出力順ID, 型N);
-            case "4":
+            case INDEX_4:
                 項目名 = 銀振納入通知書タイプ;
                 帳票タイプを = this.getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
                 return this.get銀振型４期タイプ(帳票タイプを, 帳票分類ID, 出力順ID, 型N);
-            case "5":
+            case INDEX_5:
                 項目名 = その他納入通知書タイプ;
                 アイテムとして = ブック口座振替依頼表示;
                 帳票タイプを = this.getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
                 ChohyoSeigyoHanyo 帳票_口座振替依頼 = this.getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, アイテムとして);
                 return this.getブックタイプ(帳票タイプを, 帳票_口座振替依頼, 帳票分類ID, 出力順ID, 型N);
-            case "6":
+            case INDEX_6:
                 項目名 = その他納入通知書タイプ;
                 アイテムとして = コンビニ期毎出力;
                 帳票タイプを = this.getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
@@ -815,6 +769,12 @@ public class HonsanteiIdoGennendo {
                 } else {
                     resultList.add(result);
                 }
+            }
+            if (本算定異動_現年度_結果一覧表.equals(choParameter.get帳票分類ID())) {
+                result = new ChohyoResult();
+                result.set帳票分類ID(choParameter.get帳票分類ID());
+                result.set出力順ID(choParameter.get出力順ID());
+                resultList.add(result);
             }
         }
         return resultList;
@@ -894,6 +854,7 @@ public class HonsanteiIdoGennendo {
         }
         result.set一括発行起動フラグ(parameter.is一括発行起動フラグ());
         result.set随時フラグ(parameter.is随時フラグ());
+        result.set画面移動フラグ(parameter.is画面移動フラグ());
         return result;
     }
 
@@ -907,5 +868,22 @@ public class HonsanteiIdoGennendo {
     public ShoriDateKanri getMax基準日時(FlexibleYear 調定年度, RString 処理名) {
         DbT7022ShoriDateKanriEntity shoriDateKanri = 処理日付管理Dac.selectMax基準日(調定年度, 処理名);
         return new ShoriDateKanri(shoriDateKanri);
+    }
+
+    /**
+     * 帳票制御汎用キー取得
+     *
+     * @param 帳票分類ID 帳票分類ID
+     * @param 項目名 項目名
+     * @return ChohyoSeigyoHanyo
+     */
+    public ChohyoSeigyoHanyo get帳票制御汎用(ReportId 帳票分類ID, RString 項目名) {
+        DbT7067ChohyoSeigyoHanyoEntity entity
+                = 帳票制御汎用Dac.get帳票制御汎用(帳票分類ID, 項目名);
+        if (entity == null) {
+            return null;
+        } else {
+            return new ChohyoSeigyoHanyo(entity);
+        }
     }
 }

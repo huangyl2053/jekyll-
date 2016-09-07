@@ -8,6 +8,50 @@ module DBD {
 
         export class Events {
 
+            public static onClick_SashitomeToRoku(): string {
+                return "onClick_SashitomeToRoku";
+            }
+
+            public static onClick_KaijoToRoku(): string {
+                return "onClick_KaijoToRoku";
+            }
+
+            public static onClick_SashitomeKojo(): string {
+                return "onClick_SashitomeKojo";
+            }
+
+            public static onClick_SelectedItem(): string {
+                return "onClick_SelectedItem";
+            }
+
+            public static onClick_DeleteItem(): string {
+                return "onClick_DeleteItem";
+            }
+
+            public static onOkClose_BtnTainoJokyo(): string {
+                return "onOkClose_BtnTainoJokyo";
+            }
+
+            public static onBeforeOpenDialog_BtnTainoJokyo(): string {
+                return "onBeforeOpenDialog_BtnTainoJokyo";
+            }
+
+            public static onClick_SashitomeToRokuKaKuTei(): string {
+                return "onClick_SashitomeToRokuKaKuTei";
+            }
+
+            public static onClick_SashitomeToRokuToRiKeShi(): string {
+                return "onClick_SashitomeToRokuToRiKeShi";
+            }
+
+            public static onClick_BtnKakutei(): string {
+                return "onClick_BtnKakutei";
+            }
+
+            public static onClick_BtnTorikeshi(): string {
+                return "onClick_BtnTorikeshi";
+            }
+
         }
 
         export class Controls {

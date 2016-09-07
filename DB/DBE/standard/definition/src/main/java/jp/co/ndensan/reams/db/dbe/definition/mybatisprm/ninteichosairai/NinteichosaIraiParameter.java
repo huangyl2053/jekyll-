@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai;
 
-import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -25,7 +23,6 @@ public class NinteichosaIraiParameter {
     private RString 概況調査テキストイメージ区分;
     private RString 処理状態区分通常;
     private RString 処理状態区分延期;
-    private List<ShinseishoKanriNo> 申請書管理番号リスト;
 
     /**
      * コンストラクタです。
@@ -36,7 +33,6 @@ public class NinteichosaIraiParameter {
      * @param 概況調査テキストイメージ区分 概況調査テキストイメージ区分
      * @param 処理状態区分通常 処理状態区分通常
      * @param 処理状態区分延期 処理状態区分延期
-     * @param 申請書管理番号リスト 申請書管理番号リスト
      */
     public NinteichosaIraiParameter(
             RString 保険者番号,
@@ -44,15 +40,13 @@ public class NinteichosaIraiParameter {
             RString 申請書管理番号,
             RString 概況調査テキストイメージ区分,
             RString 処理状態区分通常,
-            RString 処理状態区分延期,
-            List<ShinseishoKanriNo> 申請書管理番号リスト) {
+            RString 処理状態区分延期) {
         this.保険者番号 = 保険者番号;
         this.地区コード = 地区コード;
         this.申請書管理番号 = 申請書管理番号;
         this.概況調査テキストイメージ区分 = 概況調査テキストイメージ区分;
         this.処理状態区分通常 = 処理状態区分通常;
         this.処理状態区分延期 = 処理状態区分延期;
-        this.申請書管理番号リスト = 申請書管理番号リスト;
     }
 
 }

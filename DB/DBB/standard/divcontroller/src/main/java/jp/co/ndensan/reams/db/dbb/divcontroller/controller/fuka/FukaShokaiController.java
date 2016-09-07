@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka;
 
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.business.core.viewstate.MaeRirekiKey;
@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.ExceptionSuppliers;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -55,7 +54,7 @@ public final class FukaShokaiController {
      * @return 賦課対象者キー
      */
     public static FukaTaishoshaKey getFukaTaishoshaKeyInViewState() {
-        return ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
+        return ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
     }
 
     /**
