@@ -180,7 +180,7 @@ public class KogakuGassanJikofutangakuKakunDoIchiranhyoSakuseiProcess extends Ba
         gassanJikofutangakuKakuninCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .setDelimiter(コンマ)
                 .setEnclosure(ダブル引用符)
-                .setEncode(Encode.UTF_8withBOM)
+                .setEncode(Encode.UTF_8)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true)
                 .build();

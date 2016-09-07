@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120110.DBC120110_KogakuGassanJikofutangakuKakuninInBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120110.DBC120110_KogakuGassanJikofutangakuKakuninInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc120110.KogakuGassanJikofutangakuDoMasterTorokuProcessParameter;
@@ -46,7 +46,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2650-010 chenjie
  */
-public class DBC120110_KogakuGassanJikofutangakuKakuninIn extends BatchFlowBase<DBC120110_KogakuGassanJikofutangakuKakuninInBatchParameter> {
+public class DBC120110_KogakuGassanJikofutangakuKakuninIn extends BatchFlowBase<DBC120110_KogakuGassanJikofutangakuKakuninInParameter> {
 
     private static final String ファイル取得 = "getFile";
     private static final String CSVファイル取込 = "readCsvFile";
