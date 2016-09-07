@@ -6,12 +6,14 @@
 package jp.co.ndensan.reams.db.dbc.service.core.sougoujigyohijouhou;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.sougoujigyohijouhou.SougouJigyoHiJouhouBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.sougoujigyohijouhou.SougouJigyoHiJouhouParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sougoujigyohijouhou.SougouJigyoHiJouhouEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.sougoujigyohijouhou.ISougouJigyoHiJouhouMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -45,13 +47,16 @@ public class SougouJigyoHiJouhouFinder {
      * @param parameter SougouJigyoHiJouhouParameter
      * @return List<ShuruiShikyuGendogakuMainResult>
      */
-    public List<SougouJigyoHiJouhouBusiness> getサービス種類(SougouJigyoHiJouhouParameter parameter) {
+    public SearchResult<SougouJigyoHiJouhouBusiness> getサービス種類(SougouJigyoHiJouhouParameter parameter) {
         ISougouJigyoHiJouhouMapper mapper = mapperProvider.create(ISougouJigyoHiJouhouMapper.class);
         List<SougouJigyoHiJouhouEntity> entityList = mapper.getサービス種類(parameter);
         List<SougouJigyoHiJouhouBusiness> list = new ArrayList<>();
+        if (entityList == null || entityList.isEmpty()) {
+            return SearchResult.of(Collections.<SougouJigyoHiJouhouBusiness>emptyList(), 0, false);
+        }
         for (SougouJigyoHiJouhouEntity entity : entityList) {
             list.add(new SougouJigyoHiJouhouBusiness(entity));
         }
-        return list;
+        return SearchResult.of(list, 0, false);
     }
 }

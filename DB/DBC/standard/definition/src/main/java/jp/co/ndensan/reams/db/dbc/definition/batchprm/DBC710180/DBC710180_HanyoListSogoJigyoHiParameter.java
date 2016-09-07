@@ -15,7 +15,7 @@ import lombok.Setter;
 /**
  * 汎用リスト_総合事業費情報のバッチ用パラメータクラスです。
  *
- * @reamsid_L DBC-3107-010 wanghuafeng
+ * @reamsid_L DBC-3107-020 wanghuafeng
  */
 @Getter
 @Setter

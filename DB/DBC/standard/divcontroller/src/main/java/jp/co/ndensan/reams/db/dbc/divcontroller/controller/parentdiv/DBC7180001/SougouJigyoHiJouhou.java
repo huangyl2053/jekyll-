@@ -41,8 +41,9 @@ public class SougouJigyoHiJouhou {
     public ResponseData<SougouJigyoHiJouhouDiv> onLoad(SougouJigyoHiJouhouDiv div) {
         ShichosonSecurityJoho shichosonsecurityjoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         getHandler(div).onLoad(shichosonsecurityjoho);
-        List<SougouJigyoHiJouhouBusiness> sougoujigyohijouhous = SougouJigyoHiJouhouFinder.createInstance().getサービス種類(SougouJigyoHiJouhouParameter.creatParameter(
-                ServiceBunrui.総合事業_経過措置.getコード(), ServiceBunrui.総合事業.getコード()));
+        List<SougouJigyoHiJouhouBusiness> sougoujigyohijouhous = SougouJigyoHiJouhouFinder.createInstance().getサービス種類(
+                SougouJigyoHiJouhouParameter.creatParameter(ServiceBunrui.総合事業_経過措置.getコード(),
+                        ServiceBunrui.総合事業.getコード())).records();
         getHandler(div).setサービス種類DDL(KEY0, sougoujigyohijouhous);
         return ResponseData.of(div).respond();
     }
@@ -96,15 +97,15 @@ public class SougouJigyoHiJouhou {
     }
 
     private void set作成区分(SougouJigyoHiJouhouDiv div) {
-        List<SougouJigyoHiJouhouBusiness> sougoujigyohijouhous = new ArrayList();
+        List<SougouJigyoHiJouhouBusiness> sougoujigyohijouhous = new ArrayList<>();
         if (KEY1.equals(div.getRadSakuseiKubun().getSelectedKey())
                 || KEY2.equals(div.getRadSakuseiKubun().getSelectedKey())
                 || KEY0.equals(div.getRadSakuseiKubun().getSelectedKey())) {
             sougoujigyohijouhous = SougouJigyoHiJouhouFinder.createInstance().getサービス種類(SougouJigyoHiJouhouParameter.
-                    creatParameter(ServiceBunrui.総合事業_経過措置.getコード(), ServiceBunrui.総合事業.getコード()));
+                    creatParameter(ServiceBunrui.総合事業_経過措置.getコード(), ServiceBunrui.総合事業.getコード())).records();
         } else if (KEY3.equals(div.getRadSakuseiKubun().getSelectedKey())) {
             sougoujigyohijouhous = SougouJigyoHiJouhouFinder.createInstance().getサービス種類(SougouJigyoHiJouhouParameter.
-                    creatParameter(ServiceBunrui.ケアマネジメント_経過措置.getコード(), ServiceBunrui.ケアマネジメント.getコード()));
+                    creatParameter(ServiceBunrui.ケアマネジメント_経過措置.getコード(), ServiceBunrui.ケアマネジメント.getコード())).records();
         }
         getHandler(div).setサービス種類DDL(div.getRadSakuseiKubun().getSelectedKey(), sougoujigyohijouhous);
     }
