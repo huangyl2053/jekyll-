@@ -6,10 +6,11 @@
 package jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4910NinteichosaItakusakiJohoEntity;
@@ -44,6 +45,7 @@ public class YokaigoNinteiJohoBuilder {
     private final DbT4102NinteiKekkaJohoEntity 要介護認定結果情報Entity;
     private final DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity;
     private final DbT4001JukyushaDaichoEntity 登録用受給者台帳Entity;
+    private final DbT7051KoseiShichosonMasterEntity 構成市町村マスタEntity;
 
     /**
      * {@link HomonKaigoRiyoshaFutangakuGengaku}の編集用Builderクラスを生成します。
@@ -73,7 +75,8 @@ public class YokaigoNinteiJohoBuilder {
             DbT4913ChosainJohoEntity 調査員情報Entity,
             DbT4102NinteiKekkaJohoEntity 要介護認定結果情報Entity,
             DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity,
-            DbT4001JukyushaDaichoEntity 登録用受給者台帳Entity
+            DbT4001JukyushaDaichoEntity 登録用受給者台帳Entity,
+            DbT7051KoseiShichosonMasterEntity 構成市町村マスタEntity
     ) {
         this.要介護認定申請情報認定Entity = 要介護認定申請情報認定Entity.clone();
         this.主治医医療機関情報認定Entity = 主治医医療機関情報認定Entity.clone();
@@ -87,6 +90,7 @@ public class YokaigoNinteiJohoBuilder {
         this.要介護認定結果情報Entity = 要介護認定結果情報Entity.clone();
         this.要介護認定インターフェース情報Entity = 要介護認定インターフェース情報Entity.clone();
         this.登録用受給者台帳Entity = 登録用受給者台帳Entity.clone();
+        this.構成市町村マスタEntity = 構成市町村マスタEntity.clone();
     }
 
     /**
@@ -1343,6 +1347,7 @@ public class YokaigoNinteiJohoBuilder {
                 調査員情報Entity,
                 要介護認定結果情報Entity,
                 要介護認定インターフェース情報Entity,
-                登録用受給者台帳Entity);
+                登録用受給者台帳Entity,
+                構成市町村マスタEntity);
     }
 }
