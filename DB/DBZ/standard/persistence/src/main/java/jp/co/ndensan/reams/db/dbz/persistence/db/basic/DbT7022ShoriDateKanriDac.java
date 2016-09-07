@@ -2043,11 +2043,11 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
      * 月次処理状況の取得です。
      *
      * @param 口座振替年月 FlexibleYearMonth
-     * @return DbT7022ShoriDateKanriEntity
+     * @return List<DbT7022ShoriDateKanriEntity>
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT7022ShoriDateKanriEntity get月次処理状況(FlexibleYearMonth 口座振替年月) throws NullPointerException {
+    public List<DbT7022ShoriDateKanriEntity> get月次処理状況(FlexibleYearMonth 口座振替年月) throws NullPointerException {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.selectSpecific(kijunTimestamp).
@@ -2059,7 +2059,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                         ShoriName.本算定賦課確定.get名称(),
                                         ShoriName.異動賦課確定.get名称(),
                                         ShoriName.過年度賦課確定.get名称()))).
-                toObject(DbT7022ShoriDateKanriEntity.class);
+                toList(DbT7022ShoriDateKanriEntity.class);
     }
 
 }
