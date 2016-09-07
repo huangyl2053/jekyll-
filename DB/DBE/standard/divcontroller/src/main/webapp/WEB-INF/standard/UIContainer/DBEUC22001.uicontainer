@@ -5,24 +5,24 @@
  "steps": [
   {
    "id": 1,
-   "name": "認定調査依頼",
+   "name": "認定調査データ出力（モバイル）",
    "transitionList": [
     {
      "id": "1",
      "type": "start",
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE2200001",
-     "toLayoutTitle": "認定調査依頼",
-     "toState": "初期表示"
+     "toLayoutName": "DBE2270001",
+     "toLayoutTitle": "認定調査データ出力（モバイル）",
+     "toState": "データ一覧"
     },
     {
      "id": "2",
      "type": "end",
      "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE2200001",
-     "layoutTitle": "認定調査依頼",
-     "eventName": "処理完了",
+     "layoutName": "DBE2270001",
+     "layoutTitle": "認定調査データ出力（モバイル）",
+     "eventName": "終了処理",
      "destroy": false,
      "condition": ""
     }
