@@ -41,6 +41,8 @@ public class DBC010010_JuryoininKeiyakuShoninKakuninshoParameter extends BatchPa
     private RString 改頁出力順ID;
     @BatchParameter(key = "市町村コード", name = "市町村コード")
     private LasdecCode 市町村コード;
+    @BatchParameter(key = "市町村名称", name = "市町村名称")
+    private RString 市町村名称;
     @BatchParameter(key = "処理日時", name = "処理日時")
     private RDateTime 処理日時;
 
@@ -67,6 +69,7 @@ public class DBC010010_JuryoininKeiyakuShoninKakuninshoParameter extends BatchPa
             契約決定終了日 = 契約決定日終了;
         }
         return new JuryoininKeiyakuShoninKakuninshoProcessParameter(契約申請開始日, 契約申請終了日, 契約決定開始日, 契約決定終了日, 発行済,
-                通知日, 文書番号, 改頁出力順ID, 市町村コード, 処理日時);
+                通知日, 文書番号, 改頁出力順ID, 市町村コード, 市町村名称, 処理日時
+        );
     }
 }

@@ -26,8 +26,9 @@ public class DBC010010_JuryoininKeiyakuShoninKakuninsho extends BatchFlowBase<DB
     }
 
     @Step(介護保険受領委任契約承認確認書)
-    IBatchFlowCommand creatJukyushaTaichoTemp() {
+    IBatchFlowCommand editJuryoininKeiyakuShoninKakuninsho() {
         return loopBatch(JuryoininKeiyakuShoninKakuninshoProcess.class).arguments(getParameter().
-                toJuryoininKeiyakuShoninKakuninshoProcessParameter()).define();
+                toJuryoininKeiyakuShoninKakuninshoProcessParameter())
+                .define();
     }
 }

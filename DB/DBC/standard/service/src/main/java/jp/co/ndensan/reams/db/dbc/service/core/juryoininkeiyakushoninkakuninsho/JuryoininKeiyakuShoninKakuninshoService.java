@@ -38,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
 /**
  * 介護保険受領委任契約承認（不承認）確認書ビジネス
  *
- * @reamsid_L DBC-1910-030 yuanzhenxia
+ * @reamsid_L DBC-1910-060 yuanzhenxia
  */
 public class JuryoininKeiyakuShoninKakuninshoService {
 
