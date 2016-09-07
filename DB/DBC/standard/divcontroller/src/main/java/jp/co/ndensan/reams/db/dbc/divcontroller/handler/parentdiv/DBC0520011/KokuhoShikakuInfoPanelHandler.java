@@ -137,7 +137,7 @@ public class KokuhoShikakuInfoPanelHandler {
                 kokuhoShikakuInfo1.createBuilderForEdit().set退職非該当日(div.getTxtTaishokuHigaitoYMD().getValue().toDateString());
             }
             if (!div.getDdlKojinKubunCode().getSelectedValue().isNullOrEmpty()) {
-                kokuhoShikakuInfo1.createBuilderForEdit().set個人区分コード(div.getDdlKojinKubunCode().getSelectedValue());
+                kokuhoShikakuInfo1.createBuilderForEdit().set個人区分コード(div.getDdlKojinKubunCode().getSelectedKey());
             }
             if (div.getChkTorokuKubun().getSelectedKeys().size() > 0) {
                 kokuhoShikakuInfo1.createBuilderForEdit().set登録区分(new RString("1"));
