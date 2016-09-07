@@ -190,16 +190,16 @@ public class ShuruiShikyuGendogakuMainHandler {
         div.getShuruiShikyuGendogakuShosai().getTxtYokaigo1ShikyuGendogaku().setValue(
                 div.getShuruiShikyuGendogakuIchiran().getDgShikyuGendogaku().getClickedItem().getYokaigo1ShikyuGendogaku().getValue());
         div.getShuruiShikyuGendogakuShosai().getTxtYokaigo2ShikyuGendogaku().setDisabled(true);
-        div.getShuruiShikyuGendogakuShosai().getTxtYokaigo1ShikyuGendogaku().setValue(
+        div.getShuruiShikyuGendogakuShosai().getTxtYokaigo2ShikyuGendogaku().setValue(
                 div.getShuruiShikyuGendogakuIchiran().getDgShikyuGendogaku().getClickedItem().getYokaigo2ShikyuGendogaku().getValue());
         div.getShuruiShikyuGendogakuShosai().getTxtYokaigo3ShikyuGendogaku().setDisabled(true);
-        div.getShuruiShikyuGendogakuShosai().getTxtYokaigo1ShikyuGendogaku().setValue(
+        div.getShuruiShikyuGendogakuShosai().getTxtYokaigo3ShikyuGendogaku().setValue(
                 div.getShuruiShikyuGendogakuIchiran().getDgShikyuGendogaku().getClickedItem().getYokaigo3ShikyuGendogaku().getValue());
         div.getShuruiShikyuGendogakuShosai().getTxtYokaigo4ShikyuGendogaku().setDisabled(true);
-        div.getShuruiShikyuGendogakuShosai().getTxtYokaigo1ShikyuGendogaku().setValue(
+        div.getShuruiShikyuGendogakuShosai().getTxtYokaigo4ShikyuGendogaku().setValue(
                 div.getShuruiShikyuGendogakuIchiran().getDgShikyuGendogaku().getClickedItem().getYokaigo4ShikyuGendogaku().getValue());
         div.getShuruiShikyuGendogakuShosai().getTxtYokaigo5ShikyuGendogaku().setDisabled(true);
-        div.getShuruiShikyuGendogakuShosai().getTxtYokaigo1ShikyuGendogaku().setValue(
+        div.getShuruiShikyuGendogakuShosai().getTxtYokaigo5ShikyuGendogaku().setValue(
                 div.getShuruiShikyuGendogakuIchiran().getDgShikyuGendogaku().getClickedItem().getYokaigo5ShikyuGendogaku().getValue());
         div.getShuruiShikyuGendogakuShosai().getBtnCancel().setDisabled(true);
         div.getCcdKanryoMessage().setVisible(true);

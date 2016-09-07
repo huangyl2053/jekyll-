@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4210011;
 
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4210011.ShuruiShikyuGendogakuMainDiv;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
@@ -155,7 +154,7 @@ public class ShuruiShikyuGendogakuMainValidationHandler {
         種類支給限度額_認定可能対象外(DbcErrorMessages.種類支給限度額_認定可能対象外.getMessage()),
         要支援1未入力(UrWarningMessages.未入力, 要支援1.toString()),
         要支援1入力チェックエラー(DbcErrorMessages.種類支給限度額_要介護状態区分入力不可.getMessage(), 要支援1.toString()),
-        要支援2必須(UrErrorMessages.必須, 要支援2.toString()),
+        要支援2必須(UrWarningMessages.未入力, 要支援2.toString()),
         要支援2入力チェックエラー(DbcErrorMessages.種類支給限度額_要介護状態区分入力不可.getMessage(), 要支援2.toString());
         private final Message message;
 
