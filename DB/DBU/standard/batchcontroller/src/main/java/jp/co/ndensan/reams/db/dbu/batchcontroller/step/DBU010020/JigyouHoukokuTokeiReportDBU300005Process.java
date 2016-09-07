@@ -155,7 +155,7 @@ public class JigyouHoukokuTokeiReportDBU300005Process extends BatchProcessBase<J
     protected void afterExecute() {
         JigyohokokuCompYoshiki151Data reportData = new JigyohokokuCompYoshiki151Data();
         reportData.set作成日時(getNowDate(processParameter.get処理日時().getRDateTime()));
-        reportData.set集計範囲(getパターン62(processParameter.get集計年月()));
+        reportData.set集計範囲(processParameter.get集計年月().toDateString());
         reportData.set集計区分(集計区分_月報);
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         reportData.set保険者名(get保険者名(association.get市町村名()));
@@ -312,14 +312,6 @@ public class JigyouHoukokuTokeiReportDBU300005Process extends BatchProcessBase<J
         printTimeStamp.append(RString.HALF_SPACE);
         printTimeStamp.append(DATE_作成);
         return printTimeStamp.toRString();
-    }
-
-    private RString getパターン62(FlexibleYearMonth 集計年月) {
-        if (集計年月 == null || 集計年月.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return 集計年月.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private void setMybatisParameter() {

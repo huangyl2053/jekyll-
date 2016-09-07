@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -128,7 +127,7 @@ public class JigyouHoukokuTokeiReportDBU300001Process extends BatchProcessBase<J
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         reportData.set保険者名(get保険者名(association.get市町村名()));
         reportData.set保険者番号(association.get地方公共団体コード().value());
-        reportData.set集計範囲(getパターン62(processParameter.get集計年月()));
+        reportData.set集計範囲(processParameter.get集計年月().toDateString());
         reportData.set第1号被保険者数_項目標題列1(new RString("前月末現在"));
         reportData.set第1号被保険者数_項目標題列2(new RString("当月中増"));
         reportData.set第1号被保険者数_項目標題列3(new RString("当月中減"));
@@ -202,14 +201,6 @@ public class JigyouHoukokuTokeiReportDBU300001Process extends BatchProcessBase<J
         printTimeStamp.append(RString.HALF_SPACE);
         printTimeStamp.append(DATE_作成);
         return printTimeStamp.toRString();
-    }
-
-    private RString getパターン62(FlexibleYearMonth 集計年月) {
-        if (集計年月 == null || 集計年月.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return 集計年月.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private void setMybatisParameter() {
