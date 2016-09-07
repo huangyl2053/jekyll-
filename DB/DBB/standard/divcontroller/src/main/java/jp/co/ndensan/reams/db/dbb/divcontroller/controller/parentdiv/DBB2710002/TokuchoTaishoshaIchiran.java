@@ -451,7 +451,7 @@ public class TokuchoTaishoshaIchiran {
 
     /**
      * 「同定する」ボタン押下処理<br/>
-     * 特別徴収同定候補者一覧·
+     * 特別徴収同定候補者一覧の場合
      *
      * @param div {@link TokuchoTaishoshaIchiranDiv }
      * @return を持つResponseData
@@ -523,7 +523,7 @@ public class TokuchoTaishoshaIchiran {
 
     /**
      * 「同定対象外確認済」ボタン押下処理<br/>
-     * 特別徴収同定候補者一覧·
+     * 特別徴収同定候補者一覧の場合
      *
      * @param div {@link TokuchoTaishoshaIchiranDiv }
      * @return を持つResponseData
