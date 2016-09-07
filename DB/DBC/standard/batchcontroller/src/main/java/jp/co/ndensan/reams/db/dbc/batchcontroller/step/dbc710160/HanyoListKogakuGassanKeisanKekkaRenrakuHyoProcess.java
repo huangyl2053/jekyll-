@@ -455,8 +455,8 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
         output.set未満支給額合計_70歳(doカンマ編集(高額合算支給額計算結果.getUnder70_ShikyugakuGokei()));
         output.set負担額の合計額(doカンマ編集(高額合算支給額計算結果.getFutangakuGokei()));
         if (高額合算支給額計算結果.getDataKubun() != null) {
-            Kaigogassan_DataKubun データ区分 = Kaigogassan_DataKubun.toValue(高額合算支給額計算結果.getDataKubun());
-            output.setデータ区分(データ区分 != null ? データ区分.get名称() : RString.EMPTY);
+            Kaigogassan_DataKubun データ区分名称 = Kaigogassan_DataKubun.toValue(高額合算支給額計算結果.getDataKubun());
+            output.setデータ区分(データ区分名称 != null ? データ区分名称.get名称() : RString.EMPTY);
         }
         output.set受取年月(get日付項目(高額合算支給額計算結果.getUketoriYM()));
         output.set送付年月(get日付項目(高額合算支給額計算結果.getSofuYM()));
@@ -542,7 +542,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
     private RString get日付項目(FlexibleYearMonth date) {
         RString temp = getパターン32(date);
         if (!parameter.is日付スラッシュ付加() && !RString.isNullOrEmpty(temp)) {
-            temp = temp.replace(new RString("/"), RString.EMPTY);
+            temp = temp.replace(斜線, RString.EMPTY);
         }
         return temp;
     }

@@ -153,6 +153,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
     private static final RString 波線 = new RString("～");
     private static final RString 左記号 = new RString("(");
     private static final RString 右記号 = new RString(")");
+    private static final RString 斜線 = new RString("/");
 //    private static final RString ORDERBY = new RString("ORDER BY ");
 //    private static final RString 出力順_被保険者番号 = new RString("被保険者番号");
 //    private static final RString 出力順_対象年度 = new RString("対象年度");
@@ -579,7 +580,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
     private RString get日付項目(FlexibleDate date) {
         RString temp = getパターン32(date);
         if (!parameter.is日付スラッシュ付加() && !RString.isNullOrEmpty(temp)) {
-            temp = temp.replace(new RString("/"), RString.EMPTY);
+            temp = temp.replace(斜線, RString.EMPTY);
         }
         return temp;
     }
@@ -587,7 +588,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
     private RString get日付項目(FlexibleYearMonth date) {
         RString temp = getパターン32(date);
         if (!parameter.is日付スラッシュ付加() && !RString.isNullOrEmpty(temp)) {
-            temp = temp.replace(new RString("/"), RString.EMPTY);
+            temp = temp.replace(斜線, RString.EMPTY);
         }
         return temp;
     }

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -19,5 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KokuhorenIchiranhyoMybatisParameter implements IMyBatisParameter {
 
     private RString 出力順;
-
+    private RString 処理区分;
+    private FlexibleYearMonth 処理年月;
 }
