@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC040050;
 
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -64,5 +65,5 @@ public class DBC040050_KogakugassanShikyuKetteitsuchishoParameter extends BatchP
     @BatchParameter(key = KEY_文書番号, name = "文書番号")
     private RString 文書番号;
     @BatchParameter(key = KEY_処理日時, name = "処理日時")
-    private RDate 処理日時;
+    private YMDHMS 処理日時;
 }
