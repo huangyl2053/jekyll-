@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushada
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 標準負担減額情報Entity
@@ -25,6 +24,6 @@ public class HyojunFutanGengakuJohoEntity {
     private FlexibleDate 減免決定日;
     private FlexibleDate 減免開始日;
     private FlexibleDate 減免終了日;
-    private Decimal 負担額;
+    private RString 負担額;
 
 }

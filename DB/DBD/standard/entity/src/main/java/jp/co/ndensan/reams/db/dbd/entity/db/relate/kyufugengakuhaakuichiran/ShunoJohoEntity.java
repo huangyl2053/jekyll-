@@ -5,12 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakuhaakuichiran;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.core.common.TokuchoFuchoKubun;
-import jp.co.ndensan.reams.db.dbd.definition.core.jikokisanbikanri.JikoKisanbiKubun;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 収納情報Entity
@@ -22,15 +20,10 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShunoJohoEntity {
 
+    private List<ShunoKibetsuEntity> 期別情報;
     private FlexibleYear 賦課年度;
     private FlexibleYear 調定年度;
-    private RString 期別;
-    private Decimal 保険料金;
-    private FlexibleDate 納期限;
-    private Decimal 滞納額;
-    private RString 滞納区分;
-    private FlexibleDate 時効起算日;
-    private JikoKisanbiKubun 時効起算事由;
     private TokuchoFuchoKubun 特徴普徴区分;
     private RString 収納情報なし;
+
 }
