@@ -9,12 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkagomoshitate.HanyoListKagoKekkaCsvEntityEditor;
+import jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkagokekka.HanyoListKagoKekkaCsvEntityEditor;
 import jp.co.ndensan.reams.db.dbc.definition.core.kagomoshitate.KagoMoshitateKekka_HokenshaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710100.HanyoListKagoKekkaProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc710100.HanyoListKagoKekkaCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710100.HanyoListKagoKekkaEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc710100.IHanyoListKagoKekkaMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
@@ -85,7 +84,6 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
     private int 連番;
     private RString csv出力Flag;
     FileSpoolManager spoolManager;
-    private IHanyoListKagoKekkaMapper mapper;
     @BatchWriter
     private CsvWriter<HanyoListKagoKekkaCsvEntity> csvWriter;
 
