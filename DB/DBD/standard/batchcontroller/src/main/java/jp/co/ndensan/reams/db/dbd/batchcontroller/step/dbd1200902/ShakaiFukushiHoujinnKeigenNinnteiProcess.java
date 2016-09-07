@@ -149,12 +149,17 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
 
         List<RString> 出力条件 = new ArrayList<>();
         出力条件.add(単票発行区分.concat(processParamter.get単票発行区分().get名称()));
-        出力条件.add(年度.concat(processParamter.get年度開始日().toString())
-                .concat(カラ)
-                .concat(processParamter.get年度終了日().toString()));
-        出力条件.add(決定日期間.concat(processParamter.get決定日FROM().toString())
-                .concat(カラ)
-                .concat(processParamter.get決定日TO().toString()));
+        if (processParamter.get年度開始日() != null && processParamter.get年度終了日() != null) {
+            出力条件.add(年度.concat(processParamter.get年度開始日().toString())
+                    .concat(カラ)
+                    .concat(processParamter.get年度終了日().toString()));
+        }
+        if (processParamter.get決定日FROM() != null && processParamter.get決定日TO() != null) {
+            出力条件.add(決定日期間.concat(processParamter.get決定日FROM().toString())
+                    .concat(カラ)
+                    .concat(processParamter.get決定日TO().toString()));
+        }
+
         RString 設定項目 = RString.EMPTY;
         if (outputOrder != null) {
             for (ISetSortItem item : outputOrder.get設定項目リスト()) {
