@@ -210,19 +210,20 @@ public class FukaManager {
             int 期) {
         IShunoKamoku 科目 = shunoKamokuManager.get科目(徴収種別.equals(ChoshuHohoKibetsu.普通徴収)
                 ? ShunoKamokuShubetsu.介護保険料_普通徴収 : ShunoKamokuShubetsu.介護保険料_特別徴収);
+        long id = Saiban.get(SubGyomuCode.CAX収滞公開, new RString(SaibanKeysChotei.調定ID.name())).next();
         shunoManager.save調定(get収納キークラス(介護賦課, 科目, 期),
-                get調定クラス(介護賦課.get調定年度(), 調定額, 納期限, 科目));
+                get調定クラス(介護賦課.get調定年度(), 調定額, 納期限, 科目, id));
         介護期別Manager.save介護期別(new Kibetsu(介護賦課.get調定年度(), 介護賦課.get賦課年度(),
-                介護賦課.get通知書番号(), 介護賦課.get履歴番号(), 徴収種別.getコード(), 期));
+                介護賦課.get通知書番号(), 介護賦課.get履歴番号(), 徴収種別.getコード(), 期)
+                .createBuilderForEdit().set調定ID(new Decimal(id)).build());
     }
 
     private ShunoKey get収納キークラス(FukaJoho 介護賦課, IShunoKamoku 科目, int 期) {
         return new ShunoKey(get収納管理(介護賦課, 科目, 期), 科目, get納期月(科目, 期));
     }
 
-    private Chotei get調定クラス(FlexibleYear 調定年度, Decimal 調定額, RDate 納期限, IShunoKamoku 科目) {
+    private Chotei get調定クラス(FlexibleYear 調定年度, Decimal 調定額, RDate 納期限, IShunoKamoku 科目, long id) {
         Chotei.Builder builder = Chotei.newBuilder();
-        long id = Saiban.get(SubGyomuCode.CAX収滞公開, new RString(SaibanKeysChotei.調定ID.name())).next();
         builder.set調定ID(id);
         builder.set調定状況ID(id);
         builder.set科目コード(科目.getコード());
