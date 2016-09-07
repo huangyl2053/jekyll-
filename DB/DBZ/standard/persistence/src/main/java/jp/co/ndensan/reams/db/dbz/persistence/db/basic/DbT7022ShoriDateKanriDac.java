@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -43,6 +44,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -89,6 +91,8 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     private static final RString INDEX_111 = new RString("111");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
+    private static final int 開始桁数 = 1;
+    private static final int LENGTH = 6;
 
     /**
      * 主キーで処理日付管理マスタを取得します。
@@ -2034,4 +2038,28 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                         by(DbT7022ShoriDateKanri.kijunTimestamp, Order.DESC)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
+
+    /**
+     * 月次処理状況の取得です。
+     *
+     * @param 口座振替年月 FlexibleYearMonth
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity get月次処理状況(FlexibleYearMonth 口座振替年月) throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(kijunTimestamp).
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(substr(kijunTimestamp, 開始桁数, LENGTH), 口座振替年月),
+                                in(shoriName, ShoriName.普徴仮算定賦課確定.get名称(),
+                                        ShoriName.仮算定異動賦課確定.get名称(),
+                                        ShoriName.本算定賦課確定.get名称(),
+                                        ShoriName.異動賦課確定.get名称(),
+                                        ShoriName.過年度賦課確定.get名称()))).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
 }
