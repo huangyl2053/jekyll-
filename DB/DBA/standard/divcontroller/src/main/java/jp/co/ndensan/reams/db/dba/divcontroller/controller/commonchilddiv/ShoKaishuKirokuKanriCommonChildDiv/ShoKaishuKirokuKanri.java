@@ -99,6 +99,16 @@ public class ShoKaishuKirokuKanri {
     public ResponseData<ShoKaishuKirokuKanriDiv> onClick_ModifyButton(ShoKaishuKirokuKanriDiv requestDiv) {
         ViewStateHolder.put(ViewStateKeys.状態, 状態_修正);
         createHandlerOf(requestDiv).状態の修正(状態_修正);
+            requestDiv.getPanelInput().getTxtKoufuDate().setDisabled(false);
+            requestDiv.getPanelInput().getTxtYukouKigen().setDisabled(false);
+            requestDiv.getPanelInput().getDdlKoufuJiyu().setDisabled(false);
+            requestDiv.getPanelInput().getTxaKoufuRiyu().setDisabled(false);
+            requestDiv.getPanelInput().getTxtKaisyuDate().setDisabled(false);
+            requestDiv.getPanelInput().getDdlKaisyuJiyu().setDisabled(false);
+            requestDiv.getPanelInput().getTxaKaishuRiyu().setDisabled(false);
+            requestDiv.getPanelInput().getTxtKoufuType().setDisabled(true);
+            requestDiv.getPanelInput().getBtnConfirm().setDisabled(false);
+            requestDiv.getPanelInput().getBtnCancel().setDisabled(false);
         return createResponseData(requestDiv);
     }
 
@@ -170,6 +180,14 @@ public class ShoKaishuKirokuKanri {
             shoKaishuDiv.getPanelInput().getTxtKaisyuDate().clearValue();
             shoKaishuDiv.getPanelInput().getDdlKaisyuJiyu().setSelectedValue(RString.EMPTY);
             shoKaishuDiv.getPanelInput().getTxaKaishuRiyu().clearValue();
+            shoKaishuDiv.getPanelInput().getTxtKoufuDate().setDisabled(true);
+            shoKaishuDiv.getPanelInput().getTxtYukouKigen().setDisabled(true);
+            shoKaishuDiv.getPanelInput().getDdlKoufuJiyu().setDisabled(true);
+            shoKaishuDiv.getPanelInput().getTxaKoufuRiyu().setDisabled(true);
+            shoKaishuDiv.getPanelInput().getTxtKaisyuDate().setDisabled(true);
+            shoKaishuDiv.getPanelInput().getDdlKaisyuJiyu().setDisabled(true);
+            shoKaishuDiv.getPanelInput().getTxaKaishuRiyu().setDisabled(true);
+            shoKaishuDiv.getPanelInput().getTxtKoufuType().setDisabled(true);
             shoKaishuDiv.getPanelInput().getBtnConfirm().setDisabled(true);
             shoKaishuDiv.getPanelInput().getBtnCancel().setDisabled(true);
         }
