@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
  * 介護保険年金特徴対象者情報追加用データ作成のプロセスクラスです。
@@ -90,7 +89,7 @@ public class InsTsuikaTempProcess extends BatchKeyBreakBase<TokuChoSoufuJohoSaku
         特徴開始月_6月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, nowDate, SubGyomuCode.DBB介護賦課);
         特徴開始月_8月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_8月捕捉, nowDate, SubGyomuCode.DBB介護賦課);
         基準日時 = sakuseiBatch.chkTokuchoIraikinKeisan(parameter.get特別徴収開始年月(), parameter.get処理年度());
-        連番 = (int) Saiban.get(SubGyomuCode.UEA特別徴収分配集約, GENERICKEY, 年度).next();
+        連番 = sakuseiBatch.get最大の連番();
         システム日時 = parameter.getシステム日時();
     }
 

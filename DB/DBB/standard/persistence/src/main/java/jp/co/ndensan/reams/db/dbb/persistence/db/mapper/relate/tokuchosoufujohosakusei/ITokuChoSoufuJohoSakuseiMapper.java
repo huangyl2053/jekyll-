@@ -43,6 +43,13 @@ public interface ITokuChoSoufuJohoSakuseiMapper {
     void updateShoriDateKanri(UpdateShorikanriMyBatisParameter parameter);
 
     /**
+     * 介護特別徴収情報取込履歴の最大の連番を取得する。
+     *
+     * @return Integer
+     */
+    Integer selectMaxRenbanUeT1704();
+
+    /**
      * 特徴開始月が10月 or 12月 or 2月の場合<br/>
      * 取得された年金特徴回付情報を元に最新の被保険者情報、最新の賦課情報、最新の徴収方法情報を取得する<br/>
      *

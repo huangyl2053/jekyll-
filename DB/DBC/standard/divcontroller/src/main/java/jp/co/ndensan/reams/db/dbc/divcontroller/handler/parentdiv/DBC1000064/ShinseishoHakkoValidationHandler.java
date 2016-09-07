@@ -25,7 +25,6 @@ public class ShinseishoHakkoValidationHandler {
     private final ShinseishoHakkoDiv div;
     private static final RString 処理年度 = new RString("処理年度");
     private static final RString 平成27年度以降 = new RString("平成27年度以降");
-    private static final RString 出力順を = new RString("出力順を");
     private static final FlexibleDate 年度 = new FlexibleDate("2015");
 
     /**
@@ -49,11 +48,6 @@ public class ShinseishoHakkoValidationHandler {
                     new ShinseishoHakkoValidationHandler.ShinseishoHakkoValidationMessages(
                             UrErrorMessages.項目に対する制約, 処理年度.toString(), 平成27年度以降.toString()),
                     div.getChushutsuJoken2().getTxtShoriNendo()));
-        }
-        if (div.getCcdChohyoShutsuryokujun().get出力順ID() == null) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new ShinseishoHakkoValidationHandler.ShinseishoHakkoValidationMessages(
-                            UrErrorMessages.未指定, 出力順を.toString())));
         }
         return validPairs;
     }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBD_5770_030 tz_chengpeng-->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.iryohikojokakuninsinsei.IIryoHiKojoKakuninSinseiMapper">
+    <select resultOrdered="true" id="受給者台帳抽出"
+            resultType="Integer" fetchSize="500">
+        SELECT
+            COUNT(DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_hihokenshaNo")
+        FROM
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.noDeleted_DbT4001JukyushaDaicho" />) AS DbT4001JukyushaDaicho
+        WHERE
+            DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_hihokenshaNo" = #{被保険者番号}
+        AND
+            DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_yukoMukoKubun" = '1'
+        AND
+            DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_logicalDeletedFlag" = false
+    </select>
+    
+    <select resultOrdered="true" id="select宛名情報"
+            resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido.AtenaMybatisParameter"
+            fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+        WHERE
+        "shikibetsuCode" = #{識別コード}
+    </select>
+</mapper>

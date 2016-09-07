@@ -80,14 +80,16 @@ public class TokuchiJissekiKanriListSakuseiMybatisParameter implements IMyBatisP
     }
 
     private void edit地区コード種類(TargetArea 地区コード種類) {
-        if (地区コード種類.getコード().equals(住所)) {
-            is地区_住所 = true;
-        } else if (地区コード種類.getコード().equals(行政区)) {
-            is地区_行政区 = true;
-        } else if (地区コード種類.getコード().equals(地区)) {
-            is地区_地区 = true;
-        } else if (地区コード種類.getコード().equals(全て)) {
-            is地区_全て = true;
+        if (地区コード種類 != null) {
+            if (地区コード種類.getコード().equals(住所)) {
+                is地区_住所 = true;
+            } else if (地区コード種類.getコード().equals(行政区)) {
+                is地区_行政区 = true;
+            } else if (地区コード種類.getコード().equals(地区)) {
+                is地区_地区 = true;
+            } else if (地区コード種類.getコード().equals(全て)) {
+                is地区_全て = true;
+            }
         }
     }
 

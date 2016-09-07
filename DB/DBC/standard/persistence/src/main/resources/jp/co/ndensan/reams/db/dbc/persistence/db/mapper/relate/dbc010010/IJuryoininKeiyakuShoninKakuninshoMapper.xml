@@ -7,13 +7,13 @@
    <select id="get受領委任データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc010010.JuryoininKeiyakuShoninKakuninshoMybatisParameter"
            resultMap="受領委任データResultMap" resultOrdered="true" fetchSize="500">
        SELECT 
-           <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3078ShokanJuryoininKeiyakushaMapper.allColumns_DbT3078ShokanJuryoininKeiyakusha" />,
-           <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3077JuryoininKeiyakuJigyoshaMapper.allColumns_DbT3077JuryoininKeiyakuJigyosha" />,
+           償還受領委任契約者.*,
+           受領委任契約事業者.*,
            被保険者台帳管理NEWEST."shichosonCode",
            被保険者台帳管理NEWEST."shikibetsuCode",
            宛名PSM."meisho",
            宛名PSM."kanaMeisho",
-           宛名PSM."seiengappiYMD",
+           宛名PSM."seinengappiYMD",
            宛名PSM."seibetsuCode",
            宛名PSM."yubinNo",
            宛名PSM."zenkokuJushoCode",
@@ -22,9 +22,9 @@
            宛名PSM."jusho",
            宛先取得PSM.*
        FROM
-            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3078ShokanJuryoininKeiyakushaMapper.noDeleted_DbT3078ShokanJuryoininKeiyakusha" /> AS 償還受領委任契約者
+            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3078ShokanJuryoininKeiyakushaMapper.noDeleted_DbT3078ShokanJuryoininKeiyakusha" />) AS 償還受領委任契約者
        LEFT JOIN
-           <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3077JuryoininKeiyakuJigyoshaMapper.noDeleted_DbT3077JuryoininKeiyakuJigyosha" /> AS 受領委任契約事業者
+           (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3077JuryoininKeiyakuJigyoshaMapper.noDeleted_DbT3077JuryoininKeiyakuJigyosha" />) AS 受領委任契約事業者
        ON 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_keiyakuJigyoshaNo" = 受領委任契約事業者."dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaNo"
        LEFT JOIN 
            rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳管理NEWEST
@@ -42,19 +42,18 @@
        AND 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shinseiYMD" <![CDATA[<=]]> #{契約申請日終了}
        AND #{契約決定日開始} <![CDATA[<=]]> 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD"
        AND 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" <![CDATA[<=]]> #{契約決定日終了}
-       AND 
-           <if test="発行済 = '2'">
-               AND (
-                  償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSakuseiYMD" = ''
-                 OR (
-                      償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSakuseiYMD" != ''
-                  AND 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSaiHakkoKubun" = '1'
-                  )
-               )
-           </if>
-       AND  償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" !=null
-       ORDER BY
+       <if test="発行済 = '2'">
+            AND (
+                償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSakuseiYMD" = ''
+                OR (
+                償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSakuseiYMD"  <![CDATA[<>]]> ''
+                AND 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSaiHakkoKubun" = '1'
+                )
+             )
+       </if>
+       AND  償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" <![CDATA[<>]]> ''
            <if test="改頁出力順 != null">
+            ORDER BY
              ${出力順項目}
            </if>
    </select>
