@@ -38,10 +38,12 @@ public class DBD206010_JigyoshoMukeShakaFukushiHojinKeigenTaishoshaIchiranHakko
     @Override
     protected void defineFlow() {
 
-        if (JigyoshaSentaku.計画事業者.getコード().equals(getParameter().get事業者選択()) || JigyoshaSentaku.計画事業者とサービス事業者.getコード().equals(getParameter().get事業者選択())) {
+        if (JigyoshaSentaku.計画事業者.getコード().equals(getParameter().get事業者選択())
+                || JigyoshaSentaku.計画事業者とサービス事業者.getコード().equals(getParameter().get事業者選択())) {
             executeStep(計画事業者データの取得格納);
         }
-        if (JigyoshaSentaku.サービス事業者.getコード().equals(getParameter().get事業者選択()) || JigyoshaSentaku.計画事業者とサービス事業者.getコード().equals(getParameter().get事業者選択())) {
+        if (JigyoshaSentaku.サービス事業者.getコード().equals(getParameter().get事業者選択())
+                || JigyoshaSentaku.計画事業者とサービス事業者.getコード().equals(getParameter().get事業者選択())) {
             executeStep(サービス事業者データの取得格納);
         }
         executeStep(帳票出力を行う);
