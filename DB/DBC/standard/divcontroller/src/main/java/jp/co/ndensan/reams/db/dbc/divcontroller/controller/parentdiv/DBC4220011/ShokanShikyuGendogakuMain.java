@@ -38,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ShokanShikyuGendogakuMain {
 
-    private static final LockingKey 排他キー = new LockingKey("DBCShikyuGendoGakuTableDbT7112");
+    private static final RString 排他キー = new RString("DBCShikyuGendoGakuTableDbT7112");
     private static final RString 完了メッセージメイン = new RString("償還支給限度額の登録が完了しました。");
     private static final RString 省略_空 = new RString("");
     private static final RString 共通ボタン = new RString("btnUpdate");
@@ -175,7 +175,8 @@ public class ShokanShikyuGendogakuMain {
             handler.deleteAndUpdate(償還list, 上乗せ償還list);
         }
         div.getCcdKanryoMessage().setMessage(完了メッセージメイン, 省略_空, 省略_空, true);
-        RealInitialLocker.release(排他キー);
+        LockingKey key = new LockingKey(排他キー);
+        RealInitialLocker.release(key);
         return ResponseData.of(div).setState(DBC4220011StateName.保存完了);
     }
 

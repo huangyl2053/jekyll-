@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC4210011
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ServiceShuruiShikyuGendoGaku;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ServiceShuruiShikyuGendoGakuHolder;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4210011.DBC4210011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4210011.DBC4210011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4210011.ShuruiShikyuGendogakuMainDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4220011.DBC4220011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4210011.ShuruiShikyuGendogakuMainHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4210011.ShuruiShikyuGendogakuMainValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -52,7 +52,7 @@ public class ShuruiShikyuGendogakuMain {
         ViewStateHolder.put(ViewStateKeys.サービス種類支給限度額,
                 new ServiceShuruiShikyuGendoGakuHolder(shikyuGendoGakuList));
         state = 標準;
-        return ResponseData.of(div).setState(DBC4220011StateName.標準);
+        return ResponseData.of(div).setState(DBC4210011StateName.標準);
     }
 
     /**
@@ -117,10 +117,9 @@ public class ShuruiShikyuGendogakuMain {
                     break;
             }
             getHandler(div).btnSave();
-            LockingKey key = new LockingKey(排他キー);
-            RealInitialLocker.release(key);
+            RealInitialLocker.release(排他キー);
             state = 保存;
-            return ResponseData.of(div).setState(DBC4220011StateName.保存完了);
+            return ResponseData.of(div).setState(DBC4210011StateName.保存完了);
         } else {
             return ResponseData.of(div).respond();
         }
@@ -139,7 +138,7 @@ public class ShuruiShikyuGendogakuMain {
         ViewStateHolder.put(ViewStateKeys.サービス種類支給限度額,
                 new ServiceShuruiShikyuGendoGakuHolder(shikyuGendoGakuList));
         state = 標準;
-        return ResponseData.of(div).setState(DBC4220011StateName.標準);
+        return ResponseData.of(div).setState(DBC4210011StateName.標準);
     }
 
     /**
