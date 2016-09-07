@@ -25,7 +25,6 @@ public class ShinseishoHakkoValidationHandler {
     private final ShinseishoHakkoDiv div;
     private static final RString 処理年度 = new RString("処理年度");
     private static final RString 平成27年度以降 = new RString("平成27年度以降");
-    private static final RString 出力順を = new RString("出力順を");
     private static final FlexibleDate 年度 = new FlexibleDate("2015");
 
     /**
