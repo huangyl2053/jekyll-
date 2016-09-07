@@ -43,6 +43,7 @@ public class IkkatsuGenmenHandler {
         div.getTxtKetteiYMD().setValue(new FlexibleDate(RDate.getNowDate().toString()));
         div.getTxtUketsukeiYMD().setVisible(false);
         div.getTxtGenmenRitsu().setDisplayNone(true);
+        div.getCcdChikuShichosonSelect().initialize();
     }
 
 }
