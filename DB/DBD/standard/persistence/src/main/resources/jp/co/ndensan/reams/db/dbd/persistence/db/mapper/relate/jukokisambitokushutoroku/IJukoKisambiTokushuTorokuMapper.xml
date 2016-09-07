@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBD-3820-010 huangh-->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukokisambitokushutoroku.IJukoKisambiTokushuTorokuMapper">
+    <resultMap id="ResultMap_DbT4023JikoKisambiKanriEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4023JikoKisambiKanriEntity" autoMapping="true"/>
+    <select id="get時効起算日管理" fetchSize="500" resultMap="ResultMap_DbT4023JikoKisambiKanriEntity" resultOrdered="true" >
+        SELECT
+        A.*
+        FROM
+        rgdb."DbT4023JikoKisambiKanri" AS A
+        WHERE
+        (A."shoKisaiHokenshaNo", A."hihokenshaNo", A."choteiNendo", A."fukaNendo", A."tokucho_FuchoKubun", A."tsuchishoNo", A."shuno_Ki_Tsuki", A."rirekiNo")IN (
+        SELECT
+        B."shoKisaiHokenshaNo"
+        ,B."hihokenshaNo"
+        ,B."choteiNendo"
+        ,B."fukaNendo"
+        ,B."tokucho_FuchoKubun"
+        ,B."tsuchishoNo"
+        ,B."shuno_Ki_Tsuki"
+        ,MAX(B."rirekiNo")
+        FROM
+        rgdb."DbT4023JikoKisambiKanri" AS B
+        WHERE
+        B."hihokenshaNo" = #{被保険者番号}
+        AND B."choteiNendo" = #{調定年度}
+        AND B."logicalDeletedFlag" = FALSE
+        GROUP BY
+        B."shoKisaiHokenshaNo"
+        ,B."hihokenshaNo"
+        ,B."choteiNendo"
+        ,B."fukaNendo"
+        ,B."tokucho_FuchoKubun"
+        ,B."tsuchishoNo"
+        ,B."shuno_Ki_Tsuki"
+        )
+    </select>
+</mapper>
