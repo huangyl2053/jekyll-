@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.UwanoseKubunShikyuGendoGak
 import jp.co.ndensan.reams.db.dbc.business.core.basic.UwanoseKubunShikyuGendoGakuHolder;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyugendogaku.ShikyuGendogakuTableKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.DBC4200011StateName;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.DBC4200011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.KubunShikyuGendogakuMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4200011.KubunShikyuGendogakuMainHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4200011.KubunShikyuGendogakuMainValidationHandler;
@@ -202,6 +203,18 @@ public class KubunShikyuGendogakuMain {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 状態遷移の事件です。
+     *
+     * @param div KubunShikyuGendogakuMainDiv
+     * @return ResponseData
+     */
+    public ResponseData<KubunShikyuGendogakuMainDiv> btn_Complete(
+            KubunShikyuGendogakuMainDiv div) {
+        return ResponseData.of(div).forwardWithEventName(
+                DBC4200011TransitionEventName.完了状態).respond();
     }
 
     private KubunShikyuGendogakuMainHandler getHandler(KubunShikyuGendogakuMainDiv div) {
