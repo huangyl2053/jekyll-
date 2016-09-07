@@ -64,9 +64,9 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
     private static final RString CSVファイル名_なし = new RString("なし");
     private static final AtenaMeisho 事業者名称 = new AtenaMeisho("＊＊　対象データは存在しません　＊＊");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
-    private static final RString 契約事業者番号 = new RString("【契約事業者番号␣␣】:");
-    private static final RString 契約開始日 = new RString("【契約開始日␣␣␣␣】：");
-    private static final RString 契約種別 = new RString("【契約種別␣␣␣␣␣】:");
+    private static final RString 契約事業者番号 = new RString("【契約事業者番号  】:");
+    private static final RString 契約開始日 = new RString("【契約開始日    】：");
+    private static final RString 契約種別 = new RString("【契約種別     】:");
     private static final RString 契約期間終了事業者 = new RString("【契約期間終了事業者】：");
     private static final RString FUGOU = new RString("～");
     private static final RString 契約_0 = new RString("0");
@@ -106,7 +106,6 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
     @Override
     protected void initialize() {
         pageBreakKeys = new ArrayList<>();
-        改頁項目 = new ArrayList<>();
         出力順Map = new HashMap<>();
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         IOutputOrder 出力順クラス = finder.get出力順(SubGyomuCode.DBC介護給付, 帳票ID, parameter.get帳票出力順ID());
@@ -172,7 +171,7 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
     @Override
     protected void createWriter() {
         PageBreaker<JuryoIninJigyoshaIchiranSource> breaker
-                = new JuryoIninJigyoshaIchiranPageBreak(改頁項目);
+                = new JuryoIninJigyoshaIchiranPageBreak(pageBreakKeys);
         batchReportWriter_一覧表 = BatchReportFactory.createBatchReportWriter(
                 帳票ID.value()).addBreak(breaker).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter_一覧表);
@@ -186,7 +185,8 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
                 parameter.get市町村コード(),
                 地方公共団体.get市町村名(),
                 parameter.get処理日時(),
-                出力順Map
+                出力順Map,
+                改頁項目
         );
         report.writeBy(reportSourceWriter);
     }
@@ -205,7 +205,8 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
                     parameter.get市町村コード(),
                     地方公共団体.get市町村名(),
                     parameter.get処理日時(),
-                    出力順Map);
+                    出力順Map,
+                    改頁項目);
             report.writeBy(reportSourceWriter);
         }
         List<RString> 出力条件 = get出力条件();
