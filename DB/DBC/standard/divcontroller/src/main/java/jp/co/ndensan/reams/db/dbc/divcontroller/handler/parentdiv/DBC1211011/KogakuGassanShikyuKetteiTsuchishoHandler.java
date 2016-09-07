@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -303,8 +304,8 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         RDate 支払予定日 = div.getTxtShiharaiYoteiYMD().getValue();
         RDate 決定日 = div.getTxtKetteiymd().getValue();
         RString 文書番号 = div.getCcdBunshoBangoInput().get文書番号();
-        RDate 処理日時 = RDate.getNowDate();
-        RString 日付選択区分 = div.getDdlInsho().getSelectedValue();
+        YMDHMS 処理日時 = YMDHMS.now();
+        RString 日付選択区分 = div.getDdlInsho().getSelectedKey();
         parameter.set日付選択区分(日付選択区分);
         parameter.set受取年月(受取年月);
         if (申請開始年月日 == null) {
