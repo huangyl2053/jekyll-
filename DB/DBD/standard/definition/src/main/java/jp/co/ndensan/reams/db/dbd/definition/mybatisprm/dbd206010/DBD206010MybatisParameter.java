@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd206010;
 
+import jp.co.ndensan.reams.db.dbd.definition.core.iryohikojo.ShikakuSoshitsushaSentaku;
+import jp.co.ndensan.reams.db.dbd.definition.core.shafugemmentaisyousyalist.JigyoshaSentaku;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -34,8 +36,8 @@ public class DBD206010MybatisParameter implements IMyBatisParameter {
     private RString 事業者名;
     private RString 出力順;
     private YMDHMS 処理日時;
-    private static final RString CODE_出力しない = new RString("2");
-    private static final RString CODE_事業者選択3 = new RString("3");
+    private static final RString CODE_出力しない = ShikakuSoshitsushaSentaku.出力しない.getコード();
+    private static final RString CODE_事業者選択3 = JigyoshaSentaku.計画事業者とサービス事業者.getコード();
 
     /**
      *
