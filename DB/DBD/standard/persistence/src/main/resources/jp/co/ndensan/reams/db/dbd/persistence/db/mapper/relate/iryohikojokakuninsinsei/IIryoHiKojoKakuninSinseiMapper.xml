@@ -6,20 +6,20 @@
     <select resultOrdered="true" id="受給者台帳抽出"
             resultType="Integer" fetchSize="500">
         SELECT
-            COUNT(DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_hihokenshaNo")
+        COUNT(DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_hihokenshaNo")
         FROM
-            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.noDeleted_DbT4001JukyushaDaicho" />) AS DbT4001JukyushaDaicho
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.noDeleted_DbT4001JukyushaDaicho" />) AS DbT4001JukyushaDaicho
         WHERE
-            DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_hihokenshaNo" = #{被保険者番号}
+        DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_hihokenshaNo" = #{被保険者番号}
         AND
-            DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_yukoMukoKubun" = '1'
+        DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_yukoMukoKubun" = '1'
         AND
-            DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_logicalDeletedFlag" = false
+        DbT4001JukyushaDaicho."dbT4001JukyushaDaicho_logicalDeletedFlag" = false
     </select>
-    
+
     <select resultOrdered="true" id="select宛名情報"
             resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido.AtenaMybatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.IryoHiKojoKakuninSinseiParameter"
             fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
