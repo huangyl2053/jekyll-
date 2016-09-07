@@ -152,4 +152,36 @@ public class HomonKaigoRiyoshaFutangakuGengakuManager {
         relateEntity.initializeMd5ToEntities();
         return new HomonKaigoRiyoshaFutangakuGengaku(relateEntity);
     }
+
+    /**
+     * 訪問介護利用者負担額減額{@link ShogaishaKoujo}を保存します。
+     *
+     * @param 訪問介護利用者負担額減額情報 {@link HomonKaigoRiyoshaFutangakuGengaku}
+     * @param 減免減額種類 減免減額種類
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean delete訪問介護利用者負担額減額情報By減免減額種類(
+            HomonKaigoRiyoshaFutangakuGengaku 訪問介護利用者負担額減額情報, RString 減免減額種類) {
+        requireNonNull(訪問介護利用者負担額減額情報, UrSystemErrorMessages.値がnull.getReplacedMessage("訪問介護利用者負担額減額"));
+        requireNonNull(減免減額種類, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額種類"));
+        List<GemmenGengakuShinsei> 減免減額申請リスト = 訪問介護利用者負担額減額情報.getGemmenGengakuShinseiList();
+        List<GemmenGengakuShinsei> 削除減免減額申請リスト = new ArrayList<>();
+        for (GemmenGengakuShinsei 減免減額申請 : 減免減額申請リスト) {
+            if (!減免減額種類.equals(減免減額申請.get減免減額種類())) {
+                削除減免減額申請リスト.add(減免減額申請);
+            }
+        }
+        if (!削除減免減額申請リスト.isEmpty()) {
+            減免減額申請リスト.removeAll(削除減免減額申請リスト);
+        }
+        delete減免減額申請リスト(減免減額申請リスト);
+        return 1 == 訪問介護利用者負担額減額Dac.delete(訪問介護利用者負担額減額情報.toEntity());
+    }
+
+    private void delete減免減額申請リスト(List<GemmenGengakuShinsei> 減免減額申請List) {
+        for (GemmenGengakuShinsei 減免減額申請 : 減免減額申請List) {
+            減免減額申請Manager.delete減免減額申請(減免減額申請);
+        }
+    }
 }
