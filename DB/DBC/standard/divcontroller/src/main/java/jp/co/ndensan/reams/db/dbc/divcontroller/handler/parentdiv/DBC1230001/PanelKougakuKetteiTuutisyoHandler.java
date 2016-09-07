@@ -196,7 +196,7 @@ public final class PanelKougakuKetteiTuutisyoHandler {
         }
         FlexibleDate 発行日 = new FlexibleDate(div.getTxtHakkoubi().getValue().toDateString());
         ServiceNoKanribangouRendou 帳票情報Mgr = ServiceNoKanribangouRendou.createInstance();
-        final HokenshaNo 証記載保険者番号 = new HokenshaNo(div.getKyoTuuKaigoNinnteiSikaku().getHokensha());
+        final HokenshaNo 証記載保険者番号 = new HokenshaNo(div.getKyoTuuKaigoNinnteiSikaku().getHookenshaCode());
         final FlexibleYearMonth サービス提供年月 = new FlexibleDate(div.getDdlServiceYearMonth().getSelectedValue()).getYearMonth();
         JigyouKetteiTutisyoResult 帳票情報Entity = 帳票情報Mgr.selectKougakuJigyouKetteiTutisyo(
                 div.getKougakuKetteiTuutisyoBunsho().get文書番号(), 発行日, 被保険者番号, サービス提供年月, 様式,
