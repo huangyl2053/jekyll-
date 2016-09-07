@@ -105,7 +105,7 @@ public class KijunShunyugakuTekiyoRenbannashiProcess extends BatchProcessBase<Ha
             eucCsvWriter.writeLine(kijunShunyugakuTekiyo.setRenbannashiEUCEntity());
         }
         eucCsvWriter.close();
-        manager.spool(eucFilePath);
+        manager.spool(eucFilePath, kijunShunyugakuTekiyo.getアクセスログ());
         outputJokenhyoFactory();
     }
 
