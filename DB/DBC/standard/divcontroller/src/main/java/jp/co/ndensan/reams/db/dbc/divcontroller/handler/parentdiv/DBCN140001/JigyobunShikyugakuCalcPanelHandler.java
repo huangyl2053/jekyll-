@@ -43,7 +43,7 @@ public class JigyobunShikyugakuCalcPanelHandler {
     private static final RString TAISHOSHASEARCH = new RString("taishoshaSearch");
     private static final RString HIHOKENSHANOSHTEI = new RString("hihokenshaNoShitei");
     private static final ReportId 帳票ID = new ReportId("DBC200204_GassanJigyobunShikyugakuKeisanKekkaIchiran");
-    private static final int SEVEN = 7;
+    private static final int INT_SEVEN = 7;
     private static final FlexibleYear 定値_2014 = new FlexibleYear("2014");
 
     /**
@@ -78,7 +78,7 @@ public class JigyobunShikyugakuCalcPanelHandler {
                     new FlexibleDate(国保連管理データ.get処理年月().toDateString()));
         }
         FlexibleYear 処理年度 = new FlexibleYear(RDate.getNowDate().getYear().toDateString());
-        if (RDate.getNowDate().getMonthValue() < SEVEN && 1 < RDate.getNowDate().getMonthValue()) {
+        if (RDate.getNowDate().getMonthValue() < INT_SEVEN && 1 < RDate.getNowDate().getMonthValue()) {
             処理年度 = 処理年度.minusYear(1);
         }
         div.getDdlNendo().setDataSource(createDropDownList(処理年度, 定値_2014));
@@ -197,5 +197,4 @@ public class JigyobunShikyugakuCalcPanelHandler {
                 && !div.getChushutsuJoken().getTxtZenkaiUketoriDate().getValue().isEmpty())
                 && (div.getChushutsuJoken().getTxtZenkaiUketoriTime().getValue() != null));
     }
-
 }
