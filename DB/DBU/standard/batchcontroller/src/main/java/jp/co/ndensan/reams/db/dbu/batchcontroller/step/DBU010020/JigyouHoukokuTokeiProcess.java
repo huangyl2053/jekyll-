@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 
 /**
- * 世帯情報処理のバッチ処理クラスです。
+ * 事業報告統計データのバッチ処理クラスです。
  *
  * @reamsid_L DBU-5530-030 wangxiaodong
  */
