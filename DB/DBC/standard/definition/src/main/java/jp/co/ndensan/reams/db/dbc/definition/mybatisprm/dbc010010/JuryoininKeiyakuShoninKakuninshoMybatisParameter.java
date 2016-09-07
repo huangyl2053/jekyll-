@@ -28,7 +28,7 @@ public class JuryoininKeiyakuShoninKakuninshoMybatisParameter implements IMyBati
     private FlexibleDate 契約決定日終了;
     private RString 発行済;
     private RString 改頁出力順;
-    private RDate 処理年月日;
+    private RString 処理年月日;
 
     /**
      * コンストラクタです。
@@ -49,7 +49,7 @@ public class JuryoininKeiyakuShoninKakuninshoMybatisParameter implements IMyBati
         this.契約決定日終了 = 契約決定日終了;
         this.発行済 = 発行済;
         this.改頁出力順 = 改頁出力順;
-        this.処理年月日 = 処理年月日;
+        this.処理年月日 = 処理年月日.toDateString();
     }
 
 }
