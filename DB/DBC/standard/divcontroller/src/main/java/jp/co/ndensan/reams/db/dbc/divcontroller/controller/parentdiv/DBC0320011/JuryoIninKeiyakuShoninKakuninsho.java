@@ -80,6 +80,7 @@ public class JuryoIninKeiyakuShoninKakuninsho {
             parameter.set改頁出力順ID(new RString(div.getCcdChohyoShutsuryokujun().getSelected出力順().get出力順ID()));
         }
         parameter.set市町村コード(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード());
+        parameter.set市町村名称(AssociationFinderFactory.createInstance().getAssociation().get市町村名());
         parameter.set処理日時(RDateTime.now());
         return ResponseData.of(parameter).respond();
     }

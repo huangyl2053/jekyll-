@@ -122,12 +122,6 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
         }
         償還受領委任契約者 = new BatchPermanentTableWriter(DbT3078ShokanJuryoininKeiyakusha.class);
         breakProcessCore = new JuryoininKeiyakuShoninKakuninshoProcessCore(出力順);
-        利用者向け認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 利用者向け帳票ID,
-                new FlexibleDate(proParameter.get処理日時().getDate().toString()), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                KenmeiFuyoKubunType.付与なし, 利用者向けSourceWriter);
-        事業者用認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 事業者用帳票ID,
-                new FlexibleDate(proParameter.get処理日時().getDate().toString()), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                KenmeiFuyoKubunType.付与なし, 事業者用SourceWriter);
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
         利用者向け帳票タイトル = get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_帳票タイトル, 利用者向け帳票ID);
         事業者帳票タイトル = get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_帳票タイトル, 事業者用帳票ID);
@@ -156,17 +150,21 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
         JyuryoItakuKeiyakuKakuninShoReport 利用者向けReport = new JyuryoItakuKeiyakuKakuninShoReport(
                 breakProcessCore.edit利用者向けEntity(businessEntity, 利用者向け認証者情報, proParameter));
         利用者向けReport.writeBy(利用者向けSourceWriter);
+
         JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoReport 事業者Report = new JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoReport(
                 breakProcessCore.edit事業者用Entity(businessEntity, 事業者用認証者情報, proParameter));
         事業者Report.writeBy(事業者用SourceWriter);
+
         JuryoIninShoninKakuninshoIchiranReport 一覧表Report = new JuryoIninShoninKakuninshoIchiranReport(
                 breakProcessCore.edit一覧表Entity(businessEntity.get一覧表Entity(), proParameter));
         一覧表Report.writeBy(一覧表SourceWriter);
+
         償還受領委任契約者Entity.setShoninKekkaTsuchiSakuseiYMD(proParameter.get通知日());
         if (ONE.equals(償還受領委任契約者Entity.getShoninKekkaTsuchiSaiHakkoKubun())) {
             償還受領委任契約者Entity.setShoninKekkaTsuchiSaiHakkoKubun(RString.EMPTY);
         }
         償還受領委任契約者.update(償還受領委任契約者Entity);
+
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE), 被保険者番号, entity.get識別コード().value());
         AccessLogger.log(AccessLogType.照会, PersonalData.of(entity.get識別コード(), expandedInfo));
     }
@@ -186,7 +184,7 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 利用者向け帳票ID.value(),
                 proParameter.get市町村コード().value(),
-                proParameter.get市町村コード().code市町村RString(),
+                proParameter.get市町村名称(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 帳票名,
                 new RString(String.valueOf(利用者向けSourceWriter.pageCount().value())),
@@ -218,7 +216,6 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
                     new JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoPageBreak(breakProcessCore.改頁項())).create();
         }
         事業者用SourceWriter = new ReportSourceWriter<>(事業者用ReportWriter);
-
         if (!breakProcessCore.is改頁()) {
             一覧表ReportWriter = BatchReportFactory.createBatchReportWriter(一覧表帳票ID.value()).create();
         } else {
@@ -226,6 +223,12 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
                     new JuryoIninShoninKakuninshoIchiranPageBreak(breakProcessCore.改頁項())).create();
         }
         一覧表SourceWriter = new ReportSourceWriter<>(一覧表ReportWriter);
+        利用者向け認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 利用者向け帳票ID,
+                new FlexibleDate(proParameter.get処理日時().getDate().toString()), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                KenmeiFuyoKubunType.付与なし, 利用者向けSourceWriter);
+        事業者用認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 事業者用帳票ID,
+                new FlexibleDate(proParameter.get処理日時().getDate().toString()), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                KenmeiFuyoKubunType.付与なし, 事業者用SourceWriter);
     }
 
     /**
