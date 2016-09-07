@@ -61,8 +61,7 @@ public class ShoriDateKanriManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShoriDateKanriManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShoriDateKanriManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShoriDateKanriManager}のインスタンス
      */
     public static ShoriDateKanriManager createInstance() {
         return InstanceProvider.create(ShoriDateKanriManager.class);
@@ -122,6 +121,29 @@ public class ShoriDateKanriManager {
                 サブ業務コード,
                 市町村コード,
                 処理名);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new ShoriDateKanri(entity);
+    }
+
+    /**
+     * 主キーに合致する処理日付管理マスタを返します。
+     *
+     * @param 処理枝番 RString
+     * @param 処理名 ShoriName
+     * @return ShoriDateKanri
+     */
+    @Transaction
+    public ShoriDateKanri get処理日付管理マスタ(RString 処理名, RString 処理枝番) {
+
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
+
+        DbT7022ShoriDateKanriEntity entity = dac.select(
+                処理名,
+                処理枝番);
         if (entity == null) {
             return null;
         }
