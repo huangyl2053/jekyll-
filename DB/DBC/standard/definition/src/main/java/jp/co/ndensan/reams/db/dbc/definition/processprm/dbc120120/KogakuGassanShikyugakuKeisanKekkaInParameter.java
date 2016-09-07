@@ -25,5 +25,6 @@ public class KogakuGassanShikyugakuKeisanKekkaInParameter implements IBatchProce
     private FlexibleYearMonth 処理年月;
     private int 計算結果登録件数;
     private int 計算結果明細登録件数;
+    private RString 処理区分;
 
 }
