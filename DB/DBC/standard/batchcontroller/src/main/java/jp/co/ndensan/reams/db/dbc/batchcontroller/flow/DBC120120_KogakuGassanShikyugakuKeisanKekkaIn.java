@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.io.File;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120120.KogakuGassanDeleteKeisanKekkaMeisaiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120120.KogakuGassanDeleteKeisanKekkaProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120120.KogakuGassanInsertMasterMeisaiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120120.KogakuGassanInsertMasterProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120120.KogakuGassanRirekiNoKakuninProcess;
@@ -21,6 +23,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120120.DBC120120_KogakuGassanShikyugakuKeisanKekkaInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
+import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc120120.KogakuGassanShikyugakuKeisanKekkaInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuCsvFileReadProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDeleteReveicedFileProcessParameter;
@@ -48,7 +51,8 @@ public class DBC120120_KogakuGassanShikyugakuKeisanKekkaIn extends BatchFlowBase
     private static final String ファイル取得 = "loadFileProcess";
     private static final String CSVファイル取込 = "readCsvToTempTableProcess";
     private static final String 被保険者関連処理 = "doHihokenshaKanrenProcess";
-    private static final String DB登録_再処理準備 = "kogakuGassanSaiSyoriJumbiProcess";
+    private static final String DB登録_再処理準備_計算結果削除 = "kogakuGassanDeleteKeisanKekkaProcess";
+    private static final String DB登録_再処理準備_計算結果明細削除 = "kogakuGassanDeleteKeisanKekkaMeisaiProcess";
     private static final String DB登録_履歴番号確認 = "kogakuGassanRirekiNoKakuninProcess";
     private static final String 計算結果_マスタ登録 = "kogakuGassanInsertMasterProcess";
     private static final String 計算結果明細_マスタ登録 = "kogakuGassanInsertMasterMeisaiProcess";
@@ -104,8 +108,10 @@ public class DBC120120_KogakuGassanShikyugakuKeisanKekkaIn extends BatchFlowBase
                 executeStep(処理結果リスト作成);
             } else {
                 executeStep(被保険者関連処理);
-                //TODO 未実装 (QA1366 仕様確認)
-                //executeStep(DB登録_再処理準備);
+                if (SaiShoriKubun.再処理.equals(getParameter().get再処理区分())) {
+                    executeStep(DB登録_再処理準備_計算結果削除);
+                    executeStep(DB登録_再処理準備_計算結果明細削除);
+                }
                 executeStep(DB登録_履歴番号確認);
                 executeStep(計算結果_マスタ登録);
                 executeStep(計算結果明細_マスタ登録);
@@ -163,14 +169,29 @@ public class DBC120120_KogakuGassanShikyugakuKeisanKekkaIn extends BatchFlowBase
     }
 
     /**
-     * DB登録_再処理準備メソッドです。
+     * DB登録_再処理準備_計算結果削除するメソッドです。
      *
      * @return バッチコマンド
      */
-    @Step(DB登録_再処理準備)
-    protected IBatchFlowCommand kogakuGassanSaiSyoriJumbiProcess() {
-        //TODO QA1366 仕様確認
-        return null;
+    @Step(DB登録_再処理準備_計算結果削除)
+    protected IBatchFlowCommand kogakuGassanDeleteKeisanKekkaProcess() {
+        KogakuGassanShikyugakuKeisanKekkaInParameter parameter = new KogakuGassanShikyugakuKeisanKekkaInParameter();
+        parameter.set処理年月(getParameter().get処理年月());
+        parameter.set処理区分(getParameter().get処理区分());
+        return loopBatch(KogakuGassanDeleteKeisanKekkaProcess.class).arguments(parameter).define();
+    }
+
+    /**
+     * DB登録_再処理準備_計算結果明細削除するメソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(DB登録_再処理準備_計算結果明細削除)
+    protected IBatchFlowCommand kogakuGassanDeleteKeisanKekkaMeisaiProcess() {
+        KogakuGassanShikyugakuKeisanKekkaInParameter parameter = new KogakuGassanShikyugakuKeisanKekkaInParameter();
+        parameter.set処理年月(getParameter().get処理年月());
+        parameter.set処理区分(getParameter().get処理区分());
+        return loopBatch(KogakuGassanDeleteKeisanKekkaMeisaiProcess.class).arguments(parameter).define();
     }
 
     /**
