@@ -1,10 +1,9 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.source.dbc120110;
 
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
-import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 高額合算自己負担額確認情報取込一覧表Source。
@@ -24,6 +23,7 @@ public class GassanJikofutangakuKakuninSource implements IReportSource {
     public RString hokenshaName;
     @ReportItem(name = "shoKisaiHokenshaName", length = 20, order = 5)
     public RString shoKisaiHokenshaName;
+    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "shoKisaiHokenshaNo", length = 8, order = 6)
     public RString shoKisaiHokenshaNo;
     @ReportItem(name = "shutsuryokujun1", length = 20, order = 7)
@@ -72,8 +72,6 @@ public class GassanJikofutangakuKakuninSource implements IReportSource {
     public RString list_12;
     @ReportItem(name = "list_13", length = 13, order = 29)
     public RString list_13;
-    @ReportPerson(id = "X")
-    public ShikibetsuCode 識別コード;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

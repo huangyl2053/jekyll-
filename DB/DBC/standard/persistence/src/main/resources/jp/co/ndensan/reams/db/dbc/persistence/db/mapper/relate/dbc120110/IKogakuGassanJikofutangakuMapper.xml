@@ -21,9 +21,6 @@
         <if test="処理区分 != null">
             AND DbT3070."koki_KokuhoShoriKubun" = #{処理区分}
         </if>
-        <if test="処理区分 == null">
-            AND DbT3070."koki_KokuhoShoriKubun" is NULL
-        </if>
     </select>
     
     <select id="select高額合算自己負担額と一時データ"
