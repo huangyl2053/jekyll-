@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.service.core.sogojigyoshikakushogohyoin;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KeikakuSakuseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.ShikakuShogohyoKeikokuShubetsu;
 import jp.co.ndensan.reams.db.dbc.entity.csv.sogojigyoshikakushogohyoin.SogojigyohiShikakuShogohyoInCsvEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.sogojigyoshikakushogohyoin.SogojigyohiShikakuShogohyoInCsvTanitsuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyoshikakushogohyoin.SogojigyohiShikakuShogohyoInEntity;
-import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
@@ -50,11 +50,10 @@ public class SogojigyohiShikakuShogohyoDoSakuseiService {
      *
      * @param entity SogojigyohiShikakuShogohyoInEntity
      * @param システム日付 RDateTime
-     * @param 市町村セキュリティ ShichosonSecurityJoho
      * @return SogojigyohiShikakuShogohyoInCsvEntity
      */
     public SogojigyohiShikakuShogohyoInCsvEntity getCsvEntity(SogojigyohiShikakuShogohyoInEntity entity,
-            RDateTime システム日付, ShichosonSecurityJoho 市町村セキュリティ) {
+            RDateTime システム日付) {
         SogojigyohiShikakuShogohyoInCsvEntity resultEntity
                 = new SogojigyohiShikakuShogohyoInCsvEntity();
         if (entity.get連番() == 1) {
@@ -104,14 +103,55 @@ public class SogojigyohiShikakuShogohyoDoSakuseiService {
         }
         set有効期間(entity, resultEntity);
         set費用と区分(entity, resultEntity);
-        if (市町村セキュリティ.get導入形態コード().is広域()) {
-            if (null != entity.get証記載保険者番号()) {
-                resultEntity.set証記載保険者番号(entity.get証記載保険者番号().getColumnValue());
-            } else {
-                resultEntity.set証記載保険者番号(RString.EMPTY);
-            }
+        if (null != entity.get証記載保険者番号()) {
+            resultEntity.set証記載保険者番号(entity.get証記載保険者番号().getColumnValue());
         }
         return resultEntity;
+    }
+
+    /**
+     * 単一の場合CSVファイル出力データを作成する。
+     *
+     * @param entity SogojigyohiShikakuShogohyoInEntity
+     * @param システム日付 RDateTime
+     * @return SogojigyohiShikakuShogohyoInCsvTanitsuEntity
+     */
+    public SogojigyohiShikakuShogohyoInCsvTanitsuEntity get単一CsvEntity(SogojigyohiShikakuShogohyoInEntity entity,
+            RDateTime システム日付) {
+        SogojigyohiShikakuShogohyoInCsvTanitsuEntity csvEntity = new SogojigyohiShikakuShogohyoInCsvTanitsuEntity();
+        SogojigyohiShikakuShogohyoInCsvEntity 広域Entity = getCsvEntity(entity, システム日付);
+        csvEntity.set審査年月(広域Entity.get審査年月());
+        csvEntity.set作成日時(広域Entity.get作成日時());
+        csvEntity.set連番(広域Entity.get連番());
+        csvEntity.set保険者番号(広域Entity.get保険者番号());
+        csvEntity.set保険者名(広域Entity.get保険者名());
+        csvEntity.set被保険者番号(広域Entity.get被保険者番号());
+        csvEntity.set被保険者氏名(広域Entity.get被保険者氏名());
+        csvEntity.setサービス種類コード(広域Entity.getサービス種類コード());
+        csvEntity.setサービス種類名(広域Entity.getサービス種類名());
+        csvEntity.setサービス提供年月(広域Entity.getサービス提供年月());
+        csvEntity.set警告種別(広域Entity.get警告種別());
+        csvEntity.set事業者番号(広域Entity.get事業者番号());
+        csvEntity.set事業者名(広域Entity.get事業者名());
+        csvEntity.set要介護区分コード(広域Entity.get要介護区分コード());
+        csvEntity.set要介護度(広域Entity.get要介護度());
+        csvEntity.set認定有効期間_開始(広域Entity.get認定有効期間_開始());
+        csvEntity.set認定有効期間_終了(広域Entity.get認定有効期間_終了());
+        csvEntity.set限度額適用期間_開始(広域Entity.get限度額適用期間_開始());
+        csvEntity.set限度額適用期間_終了(広域Entity.get限度額適用期間_終了());
+        csvEntity.set支給限度額(広域Entity.get支給限度額());
+        csvEntity.set居宅サービス計画作成区分コード(広域Entity.get居宅サービス計画作成区分コード());
+        csvEntity.set居宅サービス計画作成区分(広域Entity.get居宅サービス計画作成区分());
+        csvEntity.set支援事業者番号(広域Entity.get支援事業者番号());
+        csvEntity.set単位数単価(広域Entity.get単位数単価());
+        csvEntity.set保険給付率(広域Entity.get保険給付率());
+        csvEntity.set公費1給付率(広域Entity.get公費1給付率());
+        csvEntity.set公費2給付率(広域Entity.get公費2給付率());
+        csvEntity.set公費3給付率(広域Entity.get公費3給付率());
+        csvEntity.setサービス日数_回数(広域Entity.getサービス日数_回数());
+        csvEntity.setサービス単位数(広域Entity.getサービス単位数());
+        csvEntity.set利用者負担額(広域Entity.get利用者負担額());
+        return csvEntity;
     }
 
     private void set有効期間(SogojigyohiShikakuShogohyoInEntity entity, SogojigyohiShikakuShogohyoInCsvEntity resultEntity) {

@@ -12,7 +12,6 @@ import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.report.sogojigyoshikakushogohyoin.SogojigyohiShikakuShogohyoPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.sogojigyoshikakushogohyoin.SogojigyohiShikakuShogohyoReport;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
-import jp.co.ndensan.reams.db.dbc.entity.csv.sogojigyoshikakushogohyoin.SogojigyohiShikakuShogohyoInCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyoshikakushogohyoin.SogojigyohiShikakuShogohyoInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.sogojigyoshikakushogohyoin.SogojigyohiShikakuShogohyoInSource;
 import jp.co.ndensan.reams.db.dbc.service.core.sogojigyoshikakushogohyoin.SogojigyohiShikakuShogohyoDoSakuseiService;
@@ -78,7 +77,7 @@ public class SogojigyohiShikakuDoIchiranhyoSakuseiProcess
     private int 連番;
 
     @BatchWriter
-    private CsvWriter<SogojigyohiShikakuShogohyoInCsvEntity> csvWriter;
+    private CsvWriter csvWriter;
     @BatchWriter
     private BatchReportWriter<SogojigyohiShikakuShogohyoInSource> batchReportWriter;
     private ReportSourceWriter<SogojigyohiShikakuShogohyoInSource> reportSourceWriter;
@@ -151,7 +150,12 @@ public class SogojigyohiShikakuDoIchiranhyoSakuseiProcess
         }
         entity.set連番(連番);
         lastEntity = entity;
-        csvWriter.writeLine(service.getCsvEntity(entity, システム日付, 市町村セキュリティ));
+        if (市町村セキュリティ.get導入形態コード().is広域()) {
+            csvWriter.writeLine(service.getCsvEntity(entity, システム日付));
+        } else {
+            csvWriter.writeLine(service.get単一CsvEntity(entity, システム日付));
+        }
+
         連番 = 連番 + INDEX_1;
         if (null != entity.get識別コード() && !entity.get識別コード().isEmpty()
                 && !識別コードset.contains(entity.get識別コード())) {

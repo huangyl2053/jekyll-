@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd206010;
 
-import jp.co.ndensan.reams.db.dbd.definition.core.iryohikojo.ShikakuSoshitsushaSentaku;
+import jp.co.ndensan.reams.db.dbd.definition.core.shafugemmentaisyousyalist.ShikakuSoshitsushaSentaku;
 import jp.co.ndensan.reams.db.dbd.definition.core.shafugemmentaisyousyalist.JigyoshaSentaku;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;

@@ -20,6 +20,7 @@ public class JuryoIninShoninKakuninshoIchiranReport
     private final JuryoIninShoninKakuninshoIchiranParameter parameter;
 
     /**
+     * コンストラクタです。
      *
      * @param parameter JuryoIninShoninKakuninshoIchiranParameter
      */

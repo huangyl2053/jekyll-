@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd583001;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd583001.NenreiKaikyubetsuYokaigodoJokyoProcessParameter;
+import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -23,12 +24,19 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NenreiKaikyubetsuYokaigodoJokyoParameter extends BatchParameterBase {
 
+    @BatchParameter(key = "基準日", name = "基準日")
     private RDate 基準日;
+    @BatchParameter(key = "基準年月", name = "基準年月")
     private RDate 基準年月;
+    @BatchParameter(key = "地区区分", name = "地区区分")
     private RString 地区区分;
+    @BatchParameter(key = "開始地区コード", name = "開始地区コード")
     private Code 開始地区コード;
+    @BatchParameter(key = "終了地区コード", name = "終了地区コード")
     private Code 終了地区コード;
+    @BatchParameter(key = "旧市町村コード", name = "旧市町村コード")
     private RString 旧市町村コード;
+    @BatchParameter(key = "旧市町村名称", name = "旧市町村名称")
     private RString 旧市町村名称;
 
     /**

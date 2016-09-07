@@ -14,8 +14,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1140012.Jik
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1140012.JikoFutangakuHosei2Handler2;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1140012.JikoFutangakuHosei2Handler3;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1140012.JikoFutangakuHosei2Handler4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -55,15 +53,6 @@ public class JikoFutangakuHosei2Panel {
         KogakuGassanJikofutangakuHosei 高額合算自己負担額補正保持Entity = new KogakuGassanJikofutangakuHosei();
         高額合算自己負担額補正保持Entity = ViewStateHolder
                 .get(ViewStateKeys.高額合算自己負担額補正保持Entity, KogakuGassanJikofutangakuHosei.class);
-        // test
-        高額合算自己負担額補正保持Entity = new KogakuGassanJikofutangakuHosei();
-        高額合算自己負担額補正保持Entity.set被保険者番号(new HihokenshaNo("123"));
-        高額合算自己負担額補正保持Entity.set対象年度(new FlexibleYear("2016"));
-        高額合算自己負担額補正保持Entity.set保険者番号(new HokenshaNo("456"));
-        高額合算自己負担額補正保持Entity.set支給申請書整理番号(new RString("789"));
-        高額合算自己負担額補正保持Entity.set履歴番号(new RString("1"));
-        高額合算自己負担額補正保持Entity.set生年月日(new FlexibleDate("19430101"));
-        高額合算自己負担額補正保持Entity.set呼び出しフラグ(文字列_0);
 
         FlexibleYear 対象年度 = 高額合算自己負担額補正保持Entity.get対象年度();
 

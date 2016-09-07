@@ -41,8 +41,7 @@ public class SougouJigyoHiJouhou {
     public ResponseData<SougouJigyoHiJouhouDiv> onLoad(SougouJigyoHiJouhouDiv div) {
         ShichosonSecurityJoho shichosonsecurityjoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         getHandler(div).onLoad(shichosonsecurityjoho);
-        List<SougouJigyoHiJouhouBusiness> sougoujigyohijouhous = new ArrayList();
-        sougoujigyohijouhous = SougouJigyoHiJouhouFinder.createInstance().getサービス種類(SougouJigyoHiJouhouParameter.creatParameter(
+        List<SougouJigyoHiJouhouBusiness> sougoujigyohijouhous = SougouJigyoHiJouhouFinder.createInstance().getサービス種類(SougouJigyoHiJouhouParameter.creatParameter(
                 ServiceBunrui.総合事業_経過措置.getコード(), ServiceBunrui.総合事業.getコード()));
         getHandler(div).setサービス種類DDL(KEY0, sougoujigyohijouhous);
         return ResponseData.of(div).respond();
@@ -103,11 +102,10 @@ public class SougouJigyoHiJouhou {
                 || KEY0.equals(div.getRadSakuseiKubun().getSelectedKey())) {
             sougoujigyohijouhous = SougouJigyoHiJouhouFinder.createInstance().getサービス種類(SougouJigyoHiJouhouParameter.
                     creatParameter(ServiceBunrui.総合事業_経過措置.getコード(), ServiceBunrui.総合事業.getコード()));
-            getHandler(div).setサービス種類DDL(div.getRadSakuseiKubun().getSelectedKey(), sougoujigyohijouhous);
         } else if (KEY3.equals(div.getRadSakuseiKubun().getSelectedKey())) {
             sougoujigyohijouhous = SougouJigyoHiJouhouFinder.createInstance().getサービス種類(SougouJigyoHiJouhouParameter.
                     creatParameter(ServiceBunrui.ケアマネジメント_経過措置.getコード(), ServiceBunrui.ケアマネジメント.getコード()));
-            getHandler(div).setサービス種類DDL(div.getRadSakuseiKubun().getSelectedKey(), sougoujigyohijouhous);
         }
+        getHandler(div).setサービス種類DDL(div.getRadSakuseiKubun().getSelectedKey(), sougoujigyohijouhous);
     }
 }
