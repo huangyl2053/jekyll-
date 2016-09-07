@@ -45,9 +45,6 @@ public class TokuchoKaishiTsuchishoKarisanteiPageBreak
         } else if (this.breakKeysList.contains(KaishiTsuchishoKariHakkoIchiranProperty.BreakerFieldsEnum.世帯コード.get項目ID())
                 && !currentSource.getSource().listLower_2.equals(nextSource.getSource().listLower_2)) {
             flg = true;
-        } else if (this.breakKeysList.contains(KaishiTsuchishoKariHakkoIchiranProperty.BreakerFieldsEnum.生年月日.get項目ID())
-                && !currentSource.getSource().listUpper_5.equals(nextSource.getSource().listUpper_5)) {
-            flg = true;
         }
         return flg;
     }
