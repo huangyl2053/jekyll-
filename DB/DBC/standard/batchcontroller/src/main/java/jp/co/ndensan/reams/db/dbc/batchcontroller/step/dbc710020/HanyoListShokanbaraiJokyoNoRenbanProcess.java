@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710020;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710020;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +63,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<HanyoListShokanbaraiJokyoEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "hanyolistshokanbaraijokyo.IHanyoListShokanbaraiJokyoMapper.getCSVData");
+                                                            + "hanyolistshokanbaraijokyo.IHanyoListShokanbaraiJokyoMapper.getCSVData");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC701002");
     private static final RString CSV出力有無 = new RString("");
     private static final RString ITEM = new RString("～");
@@ -179,7 +179,7 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
             }
             for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
                 if (kinyuKikanEntity.get預金種別パターンEntity() != null
-                        && preEntity.get口座情報Entity() != null && preEntity.get口座情報Entity().getKinyuKikanEntity() != null) {
+                    && preEntity.get口座情報Entity() != null && preEntity.get口座情報Entity().getKinyuKikanEntity() != null) {
                     kinyuKikanEntity.get預金種別パターンEntity().addAll(lstUat0301Entity);
                     preEntity.get口座情報Entity().getKinyuKikanEntity().add(kinyuKikanEntity);
                 }
@@ -212,7 +212,7 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
         }
         for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
             if (kinyuKikanEntity.get預金種別パターンEntity() != null
-                    && preEntity.get口座情報Entity() != null && preEntity.get口座情報Entity().getKinyuKikanEntity() != null) {
+                && preEntity.get口座情報Entity() != null && preEntity.get口座情報Entity().getKinyuKikanEntity() != null) {
                 kinyuKikanEntity.get預金種別パターンEntity().addAll(lstUat0301Entity);
                 preEntity.get口座情報Entity().getKinyuKikanEntity().add(kinyuKikanEntity);
             }
@@ -410,7 +410,7 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
             return builder;
         }
         builder.append(parameter.get保険者コード() == null || parameter.get保険者コード().isEmpty()
-                ? RString.EMPTY : 左記号.concat(parameter.get保険者コード())
+                       ? RString.EMPTY : 左記号.concat(parameter.get保険者コード())
                 .concat(右記号).concat(parameter.get保険者名()));
         return builder;
     }
@@ -422,7 +422,7 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
             return builder;
         }
         builder.append(parameter.get金融機関コード() == null || parameter.get金融機関コード().isEmpty()
-                ? RString.EMPTY : 左記号.concat(parameter.get金融機関コード())
+                       ? RString.EMPTY : 左記号.concat(parameter.get金融機関コード())
                 .concat(右記号).concat(parameter.get金融機関名称()));
         return builder;
     }
@@ -483,7 +483,7 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
         builder.append(サービス提供年月);
         RString serviceTeikyoYM = RString.EMPTY;
         if ((parameter.getサービス提供年月From() == null || parameter.getサービス提供年月From().isEmpty())
-                && (parameter.getサービス提供年月To() == null || parameter.getサービス提供年月To().isEmpty())) {
+            && (parameter.getサービス提供年月To() == null || parameter.getサービス提供年月To().isEmpty())) {
             return builder;
         }
         serviceTeikyoYM = monthToRString(parameter.getサービス提供年月From())
@@ -498,7 +498,7 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
         builder.append(申請日);
         RString shinseiYMD = RString.EMPTY;
         if ((parameter.get申請日From() == null || parameter.get申請日From().isEmpty())
-                && (parameter.get申請日To() == null || parameter.get申請日To().isEmpty())) {
+            && (parameter.get申請日To() == null || parameter.get申請日To().isEmpty())) {
             return builder;
         }
         shinseiYMD = dataToRString(parameter.get申請日From())
@@ -513,7 +513,7 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
         builder.append(住宅改修支給届出日);
         RString kaishuYM = RString.EMPTY;
         if ((parameter.get住宅改修支給届出日From() == null || parameter.get住宅改修支給届出日From().isEmpty())
-                && (parameter.get住宅改修支給届出日To() == null || parameter.get住宅改修支給届出日To().isEmpty())) {
+            && (parameter.get住宅改修支給届出日To() == null || parameter.get住宅改修支給届出日To().isEmpty())) {
             return builder;
         }
         kaishuYM = dataToRString(parameter.get住宅改修支給届出日From())
@@ -528,7 +528,7 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
         builder.append(決定日);
         RString ketteiYMD = RString.EMPTY;
         if ((parameter.get決定日From() == null || parameter.get決定日From().isEmpty())
-                && (parameter.get決定日To() == null || parameter.get決定日To().isEmpty())) {
+            && (parameter.get決定日To() == null || parameter.get決定日To().isEmpty())) {
             return builder;
         }
 
@@ -544,7 +544,7 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
         builder.append(国保連送付年月);
         RString kokuhorenYM = RString.EMPTY;
         if ((parameter.get国保連送付年月From() == null || parameter.get国保連送付年月From().isEmpty())
-                && (parameter.get国保連送付年月To() == null || parameter.get国保連送付年月To().isEmpty())) {
+            && (parameter.get国保連送付年月To() == null || parameter.get国保連送付年月To().isEmpty())) {
             return builder;
         }
         kokuhorenYM = monthToRString(parameter.get国保連送付年月From())
