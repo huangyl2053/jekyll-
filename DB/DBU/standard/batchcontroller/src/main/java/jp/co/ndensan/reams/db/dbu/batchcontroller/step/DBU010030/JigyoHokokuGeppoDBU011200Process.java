@@ -31,8 +31,8 @@ public class JigyoHokokuGeppoDBU011200Process extends BatchProcessBase<KyufuJiss
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippangenbutsu."
             + "IJigyoHokokuGeppoIppanGenbutsuMapper.getResultKyufuJisseki");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBU011200");
-    private static final RString コンマ = new RString(",");
-    private static final RString ダブル引用符 = new RString("\"");
+//    private static final RString コンマ = new RString(",");
+//    private static final RString ダブル引用符 = new RString("\"");
     private JigyoHokokuGeppoIppanGenbutsuProcessParamter processParameter;
     private FileSpoolManager manager;
     private RString eucFilePath;
