@@ -18,9 +18,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
-import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.ShikakuShutokuJiyuHihokensha;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.ShikakuSositsuJiyuHihokensha;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -167,7 +167,7 @@ public class HanyoListKagoMoshitateCsvEntityEditor {
         csvEntity.set資格喪失日(format日付項目(entity.get最新被保台帳().getShikakuSoshitsuYMD()));
         csvEntity.set資格喪失届日(format日付項目(entity.get最新被保台帳().getShikakuSoshitsuTodokedeYMD()));
         if (!RString.isNullOrEmpty(entity.get最新被保台帳().getHihokennshaKubunCode())) {
-            csvEntity.set資格区分(ShikakuKubun.toValue(entity.get最新被保台帳().getHihokennshaKubunCode()).get名称());
+            csvEntity.set資格区分(HihokenshaKubunCode.toValue(entity.get最新被保台帳().getHihokennshaKubunCode()).get名称());
         }
         if (定数_1.equals(entity.get最新被保台帳().getJushochiTokureiFlag())) {
             csvEntity.set住所地特例状態(定数_住特);
@@ -312,7 +312,7 @@ public class HanyoListKagoMoshitateCsvEntityEditor {
         csvEntity.set資格喪失日(format日付項目(entity.get最新被保台帳().getShikakuSoshitsuYMD()));
         csvEntity.set資格喪失届日(format日付項目(entity.get最新被保台帳().getShikakuSoshitsuTodokedeYMD()));
         if (!RString.isNullOrEmpty(entity.get最新被保台帳().getHihokennshaKubunCode())) {
-            csvEntity.set資格区分(ShikakuKubun.toValue(entity.get最新被保台帳().getHihokennshaKubunCode()).get名称());
+            csvEntity.set資格区分(HihokenshaKubunCode.toValue(entity.get最新被保台帳().getHihokennshaKubunCode()).get名称());
         }
         if (定数_1.equals(entity.get最新被保台帳().getJushochiTokureiFlag())) {
             csvEntity.set住所地特例状態(定数_住特);

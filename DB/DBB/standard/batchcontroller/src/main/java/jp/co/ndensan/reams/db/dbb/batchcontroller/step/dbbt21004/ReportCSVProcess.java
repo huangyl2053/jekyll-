@@ -87,6 +87,7 @@ public class ReportCSVProcess extends BatchKeyBreakBase<DankaibeHihokensixyaEnti
 
     private DankaibetuHihokensyasuIchiranhyoMyBatisParameter toMyBatisParameter() {
         DankaibetuHihokensyasuIchiranhyoMyBatisParameter parameter = new DankaibetuHihokensyasuIchiranhyoMyBatisParameter();
+        parameter.set市町村コード(false);
         if (市町村コード.equals(processParameter.get市町村コード複数())) {
             parameter.set市町村コード(true);
             parameter.set市町村コード複数(processParameter.get市町村コード複数());

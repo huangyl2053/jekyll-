@@ -89,6 +89,7 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
     private DankaibetuHihokensyasuIchiranhyoMyBatisParameter toMyBatisParameter() {
         DankaibetuHihokensyasuIchiranhyoMyBatisParameter parameter = new DankaibetuHihokensyasuIchiranhyoMyBatisParameter();
         parameter.set資格基準日(processParameter.get資格基準日());
+        parameter.set市町村コード(false);
         if (市町村コード.equals(processParameter.get市町村コード複数())) {
             parameter.set市町村コード(true);
             parameter.set市町村コード複数(processParameter.get市町村コード複数());

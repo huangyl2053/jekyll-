@@ -37,7 +37,9 @@ public class ShuruiShikyuGendogakuMainHandler {
     private static final LockingKey 前排他ロックキー = new LockingKey("DBCShikyuGendoGakuTableDbT7111");
     private static final RString 種類支給限度額登録完了 = new RString("種類支給限度額の登録が完了しました。");
     private static final RString 更新 = new RString("btnUpdate");
+    private static final RString 保存 = new RString("btnComplete");
     private static final RString 一 = new RString("1");
+    private static final int ゼロ = 0;
 
     /**
      * コンストラクタです。
@@ -211,7 +213,7 @@ public class ShuruiShikyuGendogakuMainHandler {
     public void btnCancel() {
         div.getShuruiShikyuGendogakuShosai().setDisabled(true);
         div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().setDisabled(true);
-        div.getShuruiShikyuGendogakuShosai().setDdlServiceShurui(null);
+        div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().setSelectedIndex(ゼロ);
         div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().setFromDisabled(true);
         div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().clearFromValue();
         div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().setToDisabled(true);
@@ -453,7 +455,7 @@ public class ShuruiShikyuGendogakuMainHandler {
         }
         div.getShuruiShikyuGendogakuIchiran().getDgShikyuGendogaku().setDataSource(rowList);
         for (dgShikyuGendogaku_Row row : div.getShuruiShikyuGendogakuIchiran().getDgShikyuGendogaku().getDataSource()) {
-            if (row.getTekiyoShuryoYM().toString().isEmpty()) {
+            if (row.getTekiyoShuryoYM().getValue() != null) {
                 row.setDeleteButtonState(DataGridButtonState.Disabled);
             } else {
                 row.setDeleteButtonState(DataGridButtonState.Enabled);
@@ -488,6 +490,7 @@ public class ShuruiShikyuGendogakuMainHandler {
         div.getShuruiShikyuGendogakuShosai().getTxtYokaigo5ShikyuGendogaku().clearValue();
         div.getCcdKanryoMessage().setVisible(false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(更新, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存, true);
     }
 
     private int insert追加(RString 要介護状態区分, Decimal 支給限度単位数) {

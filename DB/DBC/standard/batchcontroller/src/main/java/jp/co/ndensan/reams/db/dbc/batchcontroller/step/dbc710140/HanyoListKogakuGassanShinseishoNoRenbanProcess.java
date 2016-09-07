@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryo
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -79,7 +78,6 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC701014");
     private static final RString CSV出力有無 = new RString("");
     private static final RString ITEM = new RString("～");
-    private static final RString ジョブ番号 = new RString("【ジョブ番号】");
     private static final RString 日本語ファイル名 = new RString("汎用リスト　高額合算申請書情報CSV");
     private static final RString 英数字ファイル名 = new RString("HanyoList_KogakuGassanShinseishoJoho.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
@@ -199,7 +197,7 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
                 EUC_ENTITY_ID.toRString(),
                 導入団体コード,
                 市町村名,
-                ジョブ番号.concat(String.valueOf(JobContextHolder.getJobId())),
+                RString.EMPTY,
                 日本語ファイル名,
                 出力件数,
                 CSV出力有無,

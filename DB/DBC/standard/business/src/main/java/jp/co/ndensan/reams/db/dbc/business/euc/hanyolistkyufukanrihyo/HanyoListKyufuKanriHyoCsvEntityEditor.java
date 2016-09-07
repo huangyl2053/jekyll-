@@ -16,14 +16,15 @@ import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMas
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikaku.KyotakuservicekeikakuSakuseikubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.ShikakuShutokuJiyuHihokensha;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.ShikakuSositsuJiyuHihokensha;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -109,7 +110,10 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
         } else {
             csvEntity.set計画事業者名(entity.get計画事業者().getJigyoshaName().getColumnValue());
         }
-        csvEntity.set保険者番号(entity.get給付管理票().getHiHokenshaNo().getColumnValue());
+        HokenshaNo hokenshaNo = entity.get給付管理票().getHokenshaNo();
+        if (hokenshaNo != null) {
+            csvEntity.set保険者番号(hokenshaNo.getColumnValue());
+        }
         csvEntity.set管理票作成日(format日付項目(entity.get給付管理票().getKyufuSakuseiYMD()));
         if (!RString.isNullOrEmpty(entity.get給付管理票().getKyufuSakuseiKubunCode())) {
             csvEntity.set管理票作成区分(KyufukanrihyoSakuseiKubun.toValue(
@@ -178,7 +182,7 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
             csvEntity.set連番(new RString(連番));
         }
         csvEntity.set識別コード(kojin.get識別コード().getColumnValue());
-        csvEntity.set住民種別(kojin.get住民種別().toRString());
+        csvEntity.set住民種別(kojin.get住民状態().住民状態略称());
         csvEntity.set氏名(kojin.get名称().getName().getColumnValue());
         csvEntity.set氏名カナ(kojin.get名称().getKana().getColumnValue());
         csvEntity.set生年月日(format日付項目(kojin.get生年月日().toFlexibleDate()));
@@ -269,7 +273,7 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
         csvEntity.set資格喪失日(format日付項目(entity.get最新被保台帳().getShikakuSoshitsuYMD()));
         csvEntity.set資格喪失届日(format日付項目(entity.get最新被保台帳().getShikakuSoshitsuTodokedeYMD()));
         if (!RString.isNullOrEmpty(entity.get最新被保台帳().getHihokennshaKubunCode())) {
-            csvEntity.set資格区分(ShikakuKubun.toValue(entity.get最新被保台帳().getHihokennshaKubunCode()).get名称());
+            csvEntity.set資格区分(HihokenshaKubunCode.toValue(entity.get最新被保台帳().getHihokennshaKubunCode()).get名称());
         }
         if (定数_1.equals(entity.get最新被保台帳().getJushochiTokureiFlag())) {
             csvEntity.set住所地特例状態(定数_住特);
@@ -305,7 +309,10 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
         } else {
             csvEntity.set計画事業者名(entity.get計画事業者().getJigyoshaName().getColumnValue());
         }
-        csvEntity.set保険者番号(entity.get給付管理票().getHiHokenshaNo().getColumnValue());
+        HokenshaNo hokenshaNo = entity.get給付管理票().getHokenshaNo();
+        if (hokenshaNo != null) {
+            csvEntity.set保険者番号(hokenshaNo.getColumnValue());
+        }
         csvEntity.set管理票作成日(format日付項目(entity.get給付管理票().getKyufuSakuseiYMD()));
         if (!RString.isNullOrEmpty(entity.get給付管理票().getKyufuSakuseiKubunCode())) {
             csvEntity.set管理票作成区分(KyufukanrihyoSakuseiKubun.toValue(
@@ -371,7 +378,7 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
     private void noRenbanEdit_part2(HanyoListKyufuKanriHyoNoRenbanCsvEntity csvEntity) {
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
         csvEntity.set識別コード(kojin.get識別コード().getColumnValue());
-        csvEntity.set住民種別(kojin.get住民種別().toRString());
+        csvEntity.set住民種別(kojin.get住民状態().住民状態略称());
         csvEntity.set氏名(kojin.get名称().getName().getColumnValue());
         csvEntity.set氏名カナ(kojin.get名称().getKana().getColumnValue());
         csvEntity.set生年月日(format日付項目(kojin.get生年月日().toFlexibleDate()));
@@ -382,7 +389,7 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
         csvEntity.set世帯主名(kojin.get世帯主名().getColumnValue());
         csvEntity.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
         csvEntity.set郵便番号(kojin.get住所().get郵便番号().getEditedYubinNo());
-        if (kojin.get住所().get方書().getColumnValue() != null) {
+        if (kojin.get住所().get方書() != null && !kojin.get住所().get方書().isEmpty()) {
             csvEntity.set住所番地方書(kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue())
                     .concat(RString.FULL_SPACE).concat(kojin.get住所().get方書().getColumnValue()));
         } else {
@@ -409,7 +416,7 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
         csvEntity.set消除届出日(format日付項目(kojin.get消除届出年月日()));
         csvEntity.set転出入理由(RString.EMPTY);
         csvEntity.set前住所郵便番号(kojin.get転入前().get郵便番号().getEditedYubinNo());
-        if (kojin.get転入前().get方書() != null) {
+        if (kojin.get転入前().get方書() != null && !kojin.get転入前().get方書().isEmpty()) {
             csvEntity.set前住所番地方書(kojin.get転入前().get住所().concat(kojin.get転入前().get番地().getBanchi().getColumnValue()).
                     concat(RString.FULL_SPACE).concat(kojin.get転入前().get方書().getColumnValue()));
         } else {
@@ -462,7 +469,7 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
         csvEntity.set資格喪失日(format日付項目(entity.get最新被保台帳().getShikakuSoshitsuYMD()));
         csvEntity.set資格喪失届日(format日付項目(entity.get最新被保台帳().getShikakuSoshitsuTodokedeYMD()));
         if (!RString.isNullOrEmpty(entity.get最新被保台帳().getHihokennshaKubunCode())) {
-            csvEntity.set資格区分(ShikakuKubun.toValue(entity.get最新被保台帳().getHihokennshaKubunCode()).get名称());
+            csvEntity.set資格区分(HihokenshaKubunCode.toValue(entity.get最新被保台帳().getHihokennshaKubunCode()).get名称());
         }
         if (定数_1.equals(entity.get最新被保台帳().getJushochiTokureiFlag())) {
             csvEntity.set住所地特例状態(定数_住特);
