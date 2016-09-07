@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.banchi.Banchi;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -628,9 +629,10 @@ public class TankiNyushoKakudaiGaitosha {
     /**
      * MybatisParameterを設定するメッソドです。
      *
+     * @param 出力順 出力順
      * @return KijunShunyugakuTekiyoMybatisParameter
      */
-    public TankiNyushoKakudaiGaitoshaMybatisParameter createMybatisParameter() {
+    public TankiNyushoKakudaiGaitoshaMybatisParameter createMybatisParameter(RString 出力順) {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
@@ -648,6 +650,81 @@ public class TankiNyushoKakudaiGaitosha {
                 processParameter.get適用終了年月From(),
                 processParameter.get適用終了年月To(),
                 processParameter.get限度額管理期間数(),
-                new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
+                new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
+                出力順);
     }
+
+    /**
+     * 帳票分類ID「DBC701013_HanyoListTankiNyushoKakudaiGaitosha」（汎用リスト_短期入所拡大該当者）出力順設定可能項目です。
+     */
+    public enum ShutsuryokujunEnum implements IReportItems {
+
+        /**
+         * 行政区コード
+         */
+        行政区コード(new RString("0004"), new RString(""), new RString("ShikibetsuTaisho_gyoseikuCode")),
+        /**
+         * 世帯コード
+         */
+        世帯コード(new RString("0008"), new RString(""), new RString("ShikibetsuTaisho_setaiCode")),
+        /**
+         * 識別コード
+         */
+        識別コード(new RString("0009"), new RString(""), new RString("ShikibetsuTaisho_shikibetsuCode")),
+        /**
+         * 氏名５０音カナ
+         */
+        氏名５０音カナ(new RString("0010"), new RString(""), new RString("ShikibetsuTaisho_kanaShimei")),
+        /**
+         * 市町村コード
+         */
+        市町村コード(new RString("0016"), new RString(""), new RString("shichosonCode")),
+        /**
+         * 証記載保険者番号
+         */
+        証記載保険者番号(new RString("0103"), new RString(""), new RString("koseigo_hihokenshaNo")),
+        /**
+         * 被保険者番号
+         */
+        被保険者番号(new RString("0104"), new RString(""), new RString("hihokenshaNo")),
+        /**
+         * 要介護度
+         */
+        要介護度(new RString("0403"), new RString(""), new RString("yokaigoJotaiKubunCode")),
+        /**
+         * 認定開始日
+         */
+        認定開始日(new RString("0411"), new RString(""), new RString("caT0714SeikyuHoho_nokumiCode")),
+        /**
+         * 有効開始年月
+         */
+        有効開始年月(new RString("0502"), new RString(""), new RString("yukoKaishiYM"));
+
+        private final RString 項目ID;
+        private final RString フォームフィールド名;
+        private final RString myBatis項目名;
+
+        private ShutsuryokujunEnum(RString 項目ID, RString フォームフィールド名, RString myBatis項目名) {
+            this.項目ID = 項目ID;
+            this.フォームフィールド名 = フォームフィールド名;
+            this.myBatis項目名 = myBatis項目名;
+        }
+
+        @Override
+        public RString get項目ID() {
+            return 項目ID;
+        }
+
+        @Override
+        public RString getフォームフィールド名() {
+            return フォームフィールド名;
+        }
+
+        @Override
+        public RString getMyBatis項目名() {
+            return myBatis項目名;
+        }
+
+    }
+
 }

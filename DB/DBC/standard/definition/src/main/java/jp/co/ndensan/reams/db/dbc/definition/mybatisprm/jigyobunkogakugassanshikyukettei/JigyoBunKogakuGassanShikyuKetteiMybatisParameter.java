@@ -31,6 +31,7 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements I
     private final RString psmShikibetsuTaisho;
     private final RString psmAtesaki;
     private final IKozaSearchKey key;
+    private final RString 出力順;
 
     /**
      * コンストラクタです。
@@ -46,7 +47,8 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements I
             boolean is金融機関コードNULL,
             RString psmShikibetsuTaisho,
             RString psmAtesaki,
-            IKozaSearchKey key) {
+            IKozaSearchKey key,
+            RString 出力順) {
         this.保険者コード = 保険者コード;
         this.is保険者コード = is保険者コード;
         this.対象年度 = 対象年度;
@@ -58,6 +60,7 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements I
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.psmAtesaki = psmAtesaki;
         this.key = key;
+        this.出力順 = 出力順;
     }
 
     /**
@@ -71,6 +74,7 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements I
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
      * @param psmAtesaki psmAtesaki
      * @param key key
+     * @param 出力順 出力順
      * @return JigyoBunKogakuGassanShikyuKetteiMybatisParameter
      */
     public static JigyoBunKogakuGassanShikyuKetteiMybatisParameter createMybatisParameter(RString 保険者コード,
@@ -80,7 +84,8 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements I
             RString 金融機関コード,
             RString psmShikibetsuTaisho,
             RString psmAtesaki,
-            IKozaSearchKey key) {
+            IKozaSearchKey key,
+            RString 出力順) {
         boolean is保険者コード = false;
         if (!RString.isNullOrEmpty(保険者コード) && !new RString("000000").equals(保険者コード)) {
             is保険者コード = true;
@@ -96,7 +101,8 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements I
                 isnull(金融機関コード),
                 psmShikibetsuTaisho,
                 psmAtesaki,
-                key);
+                key,
+                出力順);
     }
 
     private static boolean isnull(RString value) {

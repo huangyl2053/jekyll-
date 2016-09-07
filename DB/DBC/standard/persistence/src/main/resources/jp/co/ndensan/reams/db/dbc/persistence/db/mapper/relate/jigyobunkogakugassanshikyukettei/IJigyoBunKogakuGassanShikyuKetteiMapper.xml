@@ -270,5 +270,6 @@
         ON
         事業高額合算情報."shikibetsuCode" =
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.as_Atesaki" />."shikibetsuCode"
+        ${出力順}
     </select>
 </mapper>

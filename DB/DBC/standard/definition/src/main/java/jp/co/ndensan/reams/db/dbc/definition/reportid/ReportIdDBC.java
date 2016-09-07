@@ -16,6 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBC {
 
     /**
+     * 利用状況統計表
+     */
+    DBC300005(new ReportId("DBC300005_RiyoJokyoTokeihyo"), new RString("利用状況統計表")),
+    /**
      * 受給者給付実績一覧表
      */
     DBC200002(new ReportId("DBC200002_JukyushaKyufuJissekiIchiran"),
@@ -451,6 +455,10 @@ public enum ReportIdDBC {
      */
     DBC701020(new ReportId("DBC701020_HanyoListKijunShunyugakuTekiyo"), new RString("汎用リスト　基準収入額適用情報")),
     /**
+     * 汎用リスト_短期入所拡大該当者帳票ＩＤです。
+     */
+    DBC701013(new ReportId("DBC701013_HanyoListTankiNyushoKakudaiGaitosha"), new RString("汎用リスト_短期入所拡大該当者")),
+    /**
      * 汎用リスト 再審査申立情報帳票ＩＤです。
      */
     DBC701011(new ReportId("DBC701011_HanyoListSaishinsaMoshitate"), new RString("汎用リスト 再審査申立情報")),
@@ -617,7 +625,11 @@ public enum ReportIdDBC {
     /**
      * 汎用リスト出力(総合事業費情報)帳票ＩＤです。
      */
-    DBC701024(new ReportId("DBC701024_HanyoList_SogoJigyoHi_Care"), new RString("汎用リスト出力(総合事業費情報)"));
+    DBC701024(new ReportId("DBC701024_HanyoList_SogoJigyoHi_Care"), new RString("汎用リスト出力(総合事業費情報)")),
+    /**
+     * 介護給付費公費受給者別一覧表帳票ＩＤです。
+     */
+    DBC200008(new ReportId("DBC200008_KohijukyushaBetsuIchiran"), new RString("介護給付費公費受給者別一覧表"));
     private final ReportId reportId;
 
     private final RString reportName;
