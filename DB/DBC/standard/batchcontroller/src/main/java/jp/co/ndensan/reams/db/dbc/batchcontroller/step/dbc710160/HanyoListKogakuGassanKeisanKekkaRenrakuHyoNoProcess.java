@@ -266,7 +266,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
         output.set世帯主名(getColumnValue(kojin.get世帯主名()));
         if (kojin.get住所() != null) {
             output.set住所コード(getColumnValue(kojin.get住所().get全国住所コード()));
-            output.set郵便番号(getColumnValue(kojin.get住所().get郵便番号()));
+            output.set郵便番号(kojin.get住所().get郵便番号().getEditedYubinNo());
             if (kojin.get住所().get住所() != null
                     && kojin.get住所().get番地() != null
                     && kojin.get住所().get方書() != null) {
