@@ -99,16 +99,21 @@ public class JikoFutangakuJohoHoseiJohoDg {
                     = 総合事業対象者manager.get総合事業対象者情報(被保険者番号);
             KogakuGassanJikoFutanGakuManager 高額合算manager = new KogakuGassanJikoFutanGakuManager();
             List<KogakuGassanJikoFutanGaku> 高額合算List = 高額合算manager.getBy被保険者番号(被保険者番号);
-            if (受給者台帳List.isEmpty() && 総合事業対象者List.isEmpty() && !ResponseHolder.isReRequest()) {
+            if (受給者台帳List.isEmpty() || 総合事業対象者List.isEmpty()) {
                 throw new ApplicationException(
                         DbdErrorMessages.受給共通_受給者_事業対象者登録なし.getMessage());
             }
-            if (高額合算List.isEmpty() && (!ResponseHolder.isReRequest()
-                    || new RString(DbdErrorMessages.受給共通_受給者_事業対象者登録なし
-                            .getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
+            if (高額合算List.isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
-            onClick_chkRirekiHyouji(div);
+            ViewStateHolder.put(ViewStateKeys.一覧データ, CODE_ZERO);
+            JikoFutangakuHoseiFinder finder = JikoFutangakuHoseiFinder.createInstance();
+            List<KogakuGassanJikoFutanGaku> resultList = finder.selectJyutakukaisyuList(被保険者番号).records();
+            ViewStateHolder.put(ViewStateKeys.高額合算自己負担額情報,
+                    new KogakuGassanJikoFutanGakuHolder(resultList));
+            if (resultList != null) {
+                handler.履歴を表示printLog(resultList, 対象者.get識別コード(), 被保険者番号);
+            }
         }
         return ResponseData.of(div).setState(DBC1140011StateName.自己負担額一覧);
     }
@@ -154,7 +159,6 @@ public class JikoFutangakuJohoHoseiJohoDg {
         JikoFutangakuJohoHoseiJohoDgHandler handler = getHandler(div);
         dgJohoIchiran_Row row = div.getDgJohoIchiran().getClickedItem();
         boolean flg = handler.isCheckPass(対象者.get被保険者番号(), row);
-        JigyouGassan_ShoumeishoyouDataKubun.証明書用.get名称().equals(row.getTxtDataKBN());
         if (!(flg && JigyouGassan_ShoumeishoyouDataKubun.証明書用.get名称().equals(row.getTxtDataKBN()))
                 && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(
@@ -267,6 +271,8 @@ public class JikoFutangakuJohoHoseiJohoDg {
         if (自己負担額保持 == null) {
             自己負担額保持 = new KogakuGassanJikofutangakuHosei();
             自己負担額保持 = set自己負担額保持回目１(自己負担額保持, result);
+        } else {
+            自己負担額保持.set呼び出しフラグ(CODE_ONE);
         }
         ViewStateHolder.put(ViewStateKeys.高額合算自己負担額補正保持Entity, 自己負担額保持);
         return ResponseData.of(div).forwardWithEventName(DBC1140011TransitionEventName.自己負担額入力へ).respond();
@@ -280,6 +286,8 @@ public class JikoFutangakuJohoHoseiJohoDg {
         自己負担額保持.set保険者番号(result.get保険者番号());
         自己負担額保持.set支給申請書整理番号(result.get支給申請書整理番号());
         自己負担額保持.set履歴番号(new RString(result.get履歴番号()));
+        自己負担額保持.set生年月日(result.get生年月日());
+        自己負担額保持.set呼び出しフラグ(CODE_ZERO);
         return 自己負担額保持;
     }
 
