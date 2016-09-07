@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710100.HanyoListKagoKe
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710100.HanyoListKagoKekkaOutputProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710100.DBC710100_HanyoListKagoKekkaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710100.HanyoListKagoKekkaProcessParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
@@ -61,7 +62,7 @@ public class DBC710100_HanyoListKagoKekka extends BatchFlowBase<DBC710100_HanyoL
         param.set保険者区分(getParameter().get保険者区分());
         param.setサービス提供年月From(getParameter().getサービス提供年月From());
         param.setサービス提供年月To(getParameter().getサービス提供年月To());
-        param.set事業者コード(getParameter().get事業者コード());
+        param.set事業者コード(new JigyoshaNo(getParameter().get事業者コード()));
         param.set事業者名(getParameter().get事業者名());
         param.set項目名付加(getParameter().is項目名付加());
         param.set連番付加(getParameter().is連番付加());
