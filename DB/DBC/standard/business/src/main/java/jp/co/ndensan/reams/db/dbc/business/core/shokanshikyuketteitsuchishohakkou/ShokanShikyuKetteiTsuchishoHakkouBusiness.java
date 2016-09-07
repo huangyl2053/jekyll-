@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 /**
  * 償還払い支給（不支給）決定通知書の情報インターフェースです。
  *
- * @reamsid_L DBD-5740-010 liuyl
+ * @reamsid_L DBD-5310-010 liuyl
  */
 public class ShokanShikyuKetteiTsuchishoHakkouBusiness {
 

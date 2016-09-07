@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 償還払支給不支給決定情報取込共通処理。
  *
- * @reamsid_L DBD-5740-010 liuyl
+ * @reamsid_L DBD-5310-010 liuyl
  */
 public class ShokanShikyuKetteiTsuchishoHakkouFinder {
 
