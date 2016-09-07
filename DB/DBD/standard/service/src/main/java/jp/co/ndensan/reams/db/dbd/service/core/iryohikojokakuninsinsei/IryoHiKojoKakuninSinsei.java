@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -50,9 +51,14 @@ public class IryoHiKojoKakuninSinsei {
 
     /**
      * 受給者判定
+     * 
+     * @param 被保険者番号 RString
+     * @return boolean
      */
-    public void checkuJukyusha() {
-
+    public boolean checkuJukyusha(RString 被保険者番号) {
+       IIryoHiKojoKakuninSinseiMapper mapper = mapperProvider.create(IIryoHiKojoKakuninSinseiMapper.class);
+       Integer レコード数 = mapper.受給者台帳抽出(被保険者番号);
+       return レコード数 > 0;
     }
 
     /**
