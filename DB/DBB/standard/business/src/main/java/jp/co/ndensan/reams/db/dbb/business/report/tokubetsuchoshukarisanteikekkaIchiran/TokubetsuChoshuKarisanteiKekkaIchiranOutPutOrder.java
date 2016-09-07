@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 特別徴収仮算定結果一覧表ののPageBreakenumクラスです。
  *
- * @reamsid_L @reamsid_L DBB-0700-010 xuhao
+ * @reamsid_L DBB-0700-010 xuhao
  */
 public enum TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder implements IReportItems {
 
