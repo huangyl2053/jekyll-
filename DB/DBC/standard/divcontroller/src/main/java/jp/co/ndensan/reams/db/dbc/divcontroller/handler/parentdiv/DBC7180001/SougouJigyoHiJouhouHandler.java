@@ -62,9 +62,6 @@ public class SougouJigyoHiJouhouHandler {
             div.setHdnDonyuKeitai(導入形態_広域);
             div.getChushutsuJokenPanel().setDisplayNone(false);
             div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
-        } else if (導入形態コード_120.equals(shichosonsecurityjoho.get導入形態コード().getColumnValue())) {
-            div.setHdnDonyuKeitai(導入形態_単一);
-            div.getChushutsuJokenPanel().getCcdHokenshaList().setDisplayNone(true);
         } else {
             div.setHdnDonyuKeitai(導入形態_単一);
             div.getChushutsuJokenPanel().getCcdHokenshaList().setDisplayNone(true);
