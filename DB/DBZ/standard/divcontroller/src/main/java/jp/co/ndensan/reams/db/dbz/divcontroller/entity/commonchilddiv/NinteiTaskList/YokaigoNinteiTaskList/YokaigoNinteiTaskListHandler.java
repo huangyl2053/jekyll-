@@ -1248,7 +1248,7 @@ public class YokaigoNinteiTaskListHandler {
     }
 
     /**
-     * 一览に選択のデータを取得します。
+     * 一覧に選択のデータを取得します。
      *
      * @return 選択のデータ
      */
@@ -1258,9 +1258,9 @@ public class YokaigoNinteiTaskListHandler {
     }
 
     /**
-     * 一览にデータを取得します。
+     * 一覧にデータを取得します。
      *
-     * @return 一览のデータ
+     * @return 一覧のデータ
      */
     public List<dgNinteiTaskList_Row> getDataSource() {
         return div.getDgNinteiTaskList().getDataSource();
