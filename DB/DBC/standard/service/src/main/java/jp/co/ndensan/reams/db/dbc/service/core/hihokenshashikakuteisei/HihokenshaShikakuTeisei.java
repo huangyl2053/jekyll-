@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.hihokenshashikakuteisei.SukejuruRirekiJohoListEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3104KokuhorenInterfaceKanriDac;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3104KokuhorenInterfaceKanriMapper;
+import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -22,12 +24,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class HihokenshaShikakuTeisei {
 
     private final DbT3104KokuhorenInterfaceKanriDac dbT3104Dac;
+    private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタです。
      */
     public HihokenshaShikakuTeisei() {
         this.dbT3104Dac = InstanceProvider.create(DbT3104KokuhorenInterfaceKanriDac.class);
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
     /**
@@ -46,9 +50,10 @@ public class HihokenshaShikakuTeisei {
      * @return スケジュール履歴情報初期 SukejuruRirekiJohoListEntity
      */
     public SukejuruRirekiJohoListEntity getSukejuruRirekiShokiJoho() {
+        IDbT3104KokuhorenInterfaceKanriMapper mapper = mapperProvider.create(IDbT3104KokuhorenInterfaceKanriMapper.class);
         SukejuruRirekiJohoListEntity entity = new SukejuruRirekiJohoListEntity();
-        List<DbT3104KokuhorenInterfaceKanriEntity> 送付List = dbT3104Dac.getスケジュール履歴情報初期_送付();
-        List<DbT3104KokuhorenInterfaceKanriEntity> 取込List = dbT3104Dac.getスケジュール履歴情報初期_取込();
+        List<DbT3104KokuhorenInterfaceKanriEntity> 送付List = mapper.getスケジュール履歴情報初期_送付();
+        List<DbT3104KokuhorenInterfaceKanriEntity> 取込List = mapper.getスケジュール履歴情報初期_取込();
         entity.setスケジュール履歴情報_送付List(changeList(送付List));
         entity.setスケジュール履歴情報_取込List(changeList(取込List));
         return entity;
