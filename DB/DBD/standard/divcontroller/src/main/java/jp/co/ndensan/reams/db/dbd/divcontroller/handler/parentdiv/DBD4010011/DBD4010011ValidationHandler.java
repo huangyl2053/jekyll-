@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- * 障がい者控除対象者认定のバリデーションハンドラークラスです。です。
+ * 障がい者控除対象者認定のバリデーションハンドラークラスです。です。
  *
  * @reamsid_L DBD-3850-010 liuwei2
  */

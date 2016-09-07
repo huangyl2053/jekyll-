@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbd.definition.core.shafugemmentaisyousyalist.JigyoshaSentaku;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd206010.DBD206010ProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd206010.KeikakuJigyoshaJohoEntity;
@@ -120,7 +121,7 @@ public class KeikakuJigyoshaJohoProcess extends BatchProcessBase<KeikakuJigyosha
         tempTable.setKeikakuJigyoshaNo(entity.get計画事業者番号());
         tempTable.setInputShikibetsuNo(NyuryokuShikibetsuNo.EMPTY);
         tempTable.setShinsaYM(FlexibleYearMonth.EMPTY);
-        tempTable.setEditPattern(new RString("1"));
+        tempTable.setEditPattern(JigyoshaSentaku.計画事業者.getコード());
     }
 
     private static <T extends Enum<T> & IReportItems> RString createOrderSqlStr(Class<T> clazz, IOutputOrder outputOrder) {
