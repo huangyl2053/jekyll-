@@ -58,8 +58,7 @@ public class NenreiKaikyubetsuYokaigodoJokyoHandler {
         div.getCcdGyoseikuStart().setDisabled(true);
         div.getCcsGyoseikuEnd().setDisabled(true);
         div.getDdlShichoson().setDataSource(setDdlShichosonDataSource());
-        div.getCcdGyoseikuStart().initialize();
-        div.getCcsGyoseikuEnd().initialize();
+
     }
 
     /**
@@ -89,14 +88,20 @@ public class NenreiKaikyubetsuYokaigodoJokyoHandler {
             div.getCcsGyoseikuEnd().setDisabled(true);
             ddlChiku(true, false, false, false, false, true, true, true, true, true, true, true, true);
         } else if (キー1.equals(div.getDdlChiku().getSelectedKey())) {
+            div.getCcdChoikiStart().initialize();
+            div.getCcdChoikiEnd().initialize();
             div.getCcdChoikiStart().setDisabled(false);
             div.getCcdChoikiEnd().setDisabled(false);
             ddlChiku(true, true, true, true, true, true, true, true, true, false, false, false, false);
         } else if (キー2.equals(div.getDdlChiku().getSelectedKey())) {
+            div.getCcdGyoseikuStart().initialize();
+            div.getCcsGyoseikuEnd().initialize();
             div.getCcdGyoseikuStart().setDisabled(false);
             div.getCcsGyoseikuEnd().setDisabled(false);
             ddlChiku(true, false, false, false, false, true, true, true, true, true, true, true, true);
         } else if (キー3.equals(div.getDdlChiku().getSelectedKey())) {
+            div.getCcdChiku2Start().initialize();
+            div.getCcdChiku2End().initialize();
             div.getCcdChiku2Start().setDisabled(false);
             div.getCcdChiku2End().setDisabled(false);
             ddlChiku(true, true, true, true, true, false, false, false, false, true, true, true, true);
