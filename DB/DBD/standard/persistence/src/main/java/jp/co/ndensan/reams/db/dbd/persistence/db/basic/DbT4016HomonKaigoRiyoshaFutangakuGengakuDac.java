@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
@@ -119,6 +120,19 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuDac implements ISaveable<Db
                                 not(eq(ketteiKubun, RString.EMPTY)))).
                 getCount();
 
+    }
+
+    /**
+     * DbT4016HomonKaigoRiyoshaFutangakuGengakuEntityを物理削除します。
+     *
+     * @param entity entity
+     * @return 物理削除件数
+     */
+    @Transaction
+    public int delete(DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("訪問介護利用者負担額減額エンティティ"));
+        entity.setState(EntityDataState.Deleted);
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 
     /**

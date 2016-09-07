@@ -9,11 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengaku;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengakuBuilder;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengakuIdentifier;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengakuToJotai;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiBuilder;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.homonkaigogemmen.HobetsuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.shakaifukushihojinkeigen.ShakaiFukushiHojinKeigenParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengakuEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3105SogoJigyoTaishoshaDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.homonkaigogemmen.IHomonKaigoRiryoshaFutangakuGengakuMapper;
+import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengakuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
@@ -25,7 +31,12 @@ import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,6 +57,9 @@ public class HomonKaigoRiryoshaFutangakuGengakuService {
     private static final int 給付率_97 = 97;
     private static final int 給付率_100 = 100;
     private static final int 減免期限_年 = 2003;
+    private final RString 状態_追加 = new RString("追加");
+    private final RString 状態_修正 = new RString("修正");
+    private final RString 状態_削除 = new RString("削除");
 
     /**
      * コンストラクタです。
@@ -187,6 +201,183 @@ public class HomonKaigoRiryoshaFutangakuGengakuService {
         }
         DbT3105SogoJigyoTaishoshaDac dbT3105Dac = InstanceProvider.create(DbT3105SogoJigyoTaishoshaDac.class);
         return !dbT3105Dac.selectFor総合事業対象者の判定(被保険者番号, 適用日).isEmpty();
+    }
+
+    /**
+     * 更新処理です。
+     *
+     * @param 情報と状態ArrayList 情報と状態
+     * @param is申請メニューID is申請メニューID
+     * @param 最初申請一覧情報 最初申請一覧情報
+     */
+    @Transaction
+    public void 更新処理(ArrayList<HomonKaigoRiyoshaFutangakuGengakuToJotai> 情報と状態ArrayList,
+            boolean is申請メニューID, List<HomonKaigoRiyoshaFutangakuGengaku> 最初申請一覧情報) {
+        boolean isすべて履歴番号変更 = false;
+        if (!is申請メニューID && !情報と状態ArrayList.isEmpty()) {
+            HomonKaigoRiyoshaFutangakuGengakuToJotai 情報と状態 = 情報と状態ArrayList.get(情報と状態ArrayList.size() - 1);
+            if (!情報と状態.get状態().isEmpty() && 情報と状態.get新履歴番号() == 0) {
+                isすべて履歴番号変更 = true;
+            }
+        }
+        RString 訪問介護利用者負担額減額コード = GemmenGengakuShurui.訪問介護利用者負担額減額.getコード();
+        HomonKaigoRiyoshaFutangakuGengakuManager manager = HomonKaigoRiyoshaFutangakuGengakuManager.createInstance();
+        for (HomonKaigoRiyoshaFutangakuGengakuToJotai 情報と状態 : 情報と状態ArrayList) {
+            RString 状態 = 情報と状態.get状態();
+            HomonKaigoRiyoshaFutangakuGengaku 訪問介護利用者負担額減額情報 = 情報と状態.get訪問介護利用者負担額減額情報();
+            int 履歴番号 = 情報と状態.get新履歴番号();
+            if (isすべて履歴番号変更) {
+                履歴番号 = 履歴番号 + 1;
+                if (状態_削除.equals(状態)) {
+                    manager.delete訪問介護利用者負担額減額情報By減免減額種類(
+                            get最初情報(最初申請一覧情報, 訪問介護利用者負担額減額情報), 訪問介護利用者負担額減額コード);
+                } else if (状態_追加.equals(状態)) {
+                    manager.save(get訪問介護利用者負担額減額情報ByChange履歴番号(訪問介護利用者負担額減額情報, 履歴番号, null));
+                } else if (状態_修正.equals(状態)) {
+                    manager.delete訪問介護利用者負担額減額情報By減免減額種類(
+                            get最初情報(最初申請一覧情報, 訪問介護利用者負担額減額情報), 訪問介護利用者負担額減額コード);
+                    manager.save(get訪問介護利用者負担額減額情報ByChange履歴番号(訪問介護利用者負担額減額情報, 履歴番号, null));
+                } else {
+                    manager.delete訪問介護利用者負担額減額情報By減免減額種類(
+                            get最初情報(最初申請一覧情報, 訪問介護利用者負担額減額情報), 訪問介護利用者負担額減額コード);
+                    manager.save(get訪問介護利用者負担額減額情報ByChange履歴番号(訪問介護利用者負担額減額情報,
+                            履歴番号, get最初情報(最初申請一覧情報, 訪問介護利用者負担額減額情報)));
+                }
+                continue;
+            }
+            if (状態_削除.equals(状態)) {
+                manager.delete訪問介護利用者負担額減額情報By減免減額種類(
+                        get最初情報(最初申請一覧情報, 訪問介護利用者負担額減額情報), 訪問介護利用者負担額減額コード);
+            } else if (状態_修正.equals(状態)) {
+                if (履歴番号 == 訪問介護利用者負担額減額情報.get履歴番号()) {
+                    manager.save(訪問介護利用者負担額減額情報.updateModel());
+                } else {
+                    manager.delete訪問介護利用者負担額減額情報By減免減額種類(
+                            get最初情報(最初申請一覧情報, 訪問介護利用者負担額減額情報), 訪問介護利用者負担額減額コード);
+                    manager.save(get訪問介護利用者負担額減額情報ByChange履歴番号(訪問介護利用者負担額減額情報, 履歴番号, null));
+                }
+            } else if (状態_追加.equals(状態)) {
+                manager.save(get訪問介護利用者負担額減額情報ByChange履歴番号(訪問介護利用者負担額減額情報, 履歴番号, null));
+            } else if (履歴番号 != 訪問介護利用者負担額減額情報.get履歴番号()) {
+                manager.delete訪問介護利用者負担額減額情報By減免減額種類(
+                        get最初情報(最初申請一覧情報, 訪問介護利用者負担額減額情報), 訪問介護利用者負担額減額コード);
+                manager.save(get訪問介護利用者負担額減額情報ByChange履歴番号(訪問介護利用者負担額減額情報,
+                        履歴番号, get最初情報(最初申請一覧情報, 訪問介護利用者負担額減額情報)));
+            }
+        }
+    }
+
+    private HomonKaigoRiyoshaFutangakuGengaku get最初情報(List<HomonKaigoRiyoshaFutangakuGengaku> 最初申請一覧情報,
+            HomonKaigoRiyoshaFutangakuGengaku 訪問介護利用者負担額減額情報) {
+        HomonKaigoRiyoshaFutangakuGengakuIdentifier id = 訪問介護利用者負担額減額情報.identifier();
+        for (HomonKaigoRiyoshaFutangakuGengaku 最初申請情報 : 最初申請一覧情報) {
+            if (id.equals(最初申請情報.identifier())) {
+                return 最初申請情報;
+            }
+        }
+        return null;
+    }
+
+    private HomonKaigoRiyoshaFutangakuGengaku get訪問介護利用者負担額減額情報ByChange履歴番号(
+            HomonKaigoRiyoshaFutangakuGengaku 訪問介護利用者負担額減額情報, int 履歴番号, HomonKaigoRiyoshaFutangakuGengaku 最初申請情報) {
+        HomonKaigoRiyoshaFutangakuGengaku new訪問介護利用者負担額減額情報
+                = new HomonKaigoRiyoshaFutangakuGengaku(訪問介護利用者負担額減額情報.get証記載保険者番号(),
+                        訪問介護利用者負担額減額情報.get被保険者番号(), 履歴番号);
+        HomonKaigoRiyoshaFutangakuGengakuBuilder builder = new訪問介護利用者負担額減額情報.createBuilderForEdit();
+        if (null == 最初申請情報 || !最初申請情報.getGemmenGengakuShinseiList().isEmpty()) {
+            GemmenGengakuShinsei 減免減額申請 = 訪問介護利用者負担額減額情報.getGemmenGengakuShinseiList().get(0);
+            GemmenGengakuShinsei new減免減額申請 = new GemmenGengakuShinsei(減免減額申請.get証記載保険者番号(),
+                    減免減額申請.get被保険者番号(), GemmenGengakuShurui.訪問介護利用者負担額減額.getコード(), 履歴番号);
+            GemmenGengakuShinseiBuilder 減免減額申請builder = new減免減額申請.createBuilderForEdit();
+            set減免減額申請(減免減額申請builder, 減免減額申請);
+            builder.setGemmenGengakuShinsei(減免減額申請builder.build());
+        }
+        if (訪問介護利用者負担額減額情報.get決定年月日() != null) {
+            builder.set決定年月日(訪問介護利用者負担額減額情報.get決定年月日());
+        }
+        builder.set申請年月日(訪問介護利用者負担額減額情報.get申請年月日());
+        if (訪問介護利用者負担額減額情報.get適用終了年月日() != null) {
+            builder.set適用終了年月日(訪問介護利用者負担額減額情報.get適用終了年月日());
+        }
+        if (訪問介護利用者負担額減額情報.get適用開始年月日() != null) {
+            builder.set適用開始年月日(訪問介護利用者負担額減額情報.get適用開始年月日());
+        }
+        if (訪問介護利用者負担額減額情報.get決定区分() != null) {
+            builder.set決定区分(訪問介護利用者負担額減額情報.get決定区分());
+        }
+        if (訪問介護利用者負担額減額情報.get申請事由() != null) {
+            builder.set申請事由(訪問介護利用者負担額減額情報.get申請事由());
+        }
+        builder.set給付率(訪問介護利用者負担額減額情報.get給付率());
+        if (訪問介護利用者負担額減額情報.get非承認理由() != null) {
+            builder.set非承認理由(訪問介護利用者負担額減額情報.get非承認理由());
+        }
+        if (訪問介護利用者負担額減額情報.get法別区分() != null) {
+            builder.set法別区分(訪問介護利用者負担額減額情報.get法別区分());
+        }
+        if (訪問介護利用者負担額減額情報.get公費受給者番号() != null) {
+            builder.set公費受給者番号(訪問介護利用者負担額減額情報.get公費受給者番号());
+        }
+        if (訪問介護利用者負担額減額情報.get公費負担者番号() != null) {
+            builder.set公費負担者番号(訪問介護利用者負担額減額情報.get公費負担者番号());
+        }
+        builder.set障害者手帳有無(訪問介護利用者負担額減額情報.is障害者手帳有無());
+        if (訪問介護利用者負担額減額情報.get障害者手帳交付年月日() != null) {
+            builder.set障害者手帳交付年月日(訪問介護利用者負担額減額情報.get障害者手帳交付年月日());
+        }
+        if (訪問介護利用者負担額減額情報.get障害者手帳番号() != null) {
+            builder.set障害者手帳番号(訪問介護利用者負担額減額情報.get障害者手帳番号());
+        }
+        if (訪問介護利用者負担額減額情報.get障害者手帳等級() != null) {
+            builder.set障害者手帳等級(訪問介護利用者負担額減額情報.get障害者手帳等級());
+        }
+        return builder.build();
+    }
+
+    private void set減免減額申請(GemmenGengakuShinseiBuilder builder, GemmenGengakuShinsei 減免減額申請) {
+        if (減免減額申請.get事業者区分() != null) {
+            builder.set事業者区分(減免減額申請.get事業者区分());
+        } else {
+            builder.set事業者区分(RString.EMPTY);
+        }
+        if (減免減額申請.get申請届出代行事業者番号() != null && !減免減額申請.get申請届出代行事業者番号().isEmpty()) {
+            builder.set申請届出代行事業者番号(減免減額申請.get申請届出代行事業者番号());
+        }
+        if (減免減額申請.get申請届出代行区分() != null) {
+            builder.set申請届出代行区分(減免減額申請.get申請届出代行区分());
+        } else {
+            builder.set申請届出代行区分(RString.EMPTY);
+        }
+        if (減免減額申請.get申請届出者住所() != null) {
+            builder.set申請届出者住所(減免減額申請.get申請届出者住所());
+        } else {
+            builder.set申請届出者住所(AtenaJusho.EMPTY);
+        }
+        if (減免減額申請.get申請届出者氏名() != null) {
+            builder.set申請届出者氏名(減免減額申請.get申請届出者氏名());
+        } else {
+            builder.set申請届出者氏名(AtenaMeisho.EMPTY);
+        }
+        if (減免減額申請.get申請届出者氏名カナ() != null) {
+            builder.set申請届出者氏名カナ(減免減額申請.get申請届出者氏名カナ());
+        } else {
+            builder.set申請届出者氏名カナ(AtenaKanaMeisho.EMPTY);
+        }
+        if (減免減額申請.get申請届出者続柄() != null) {
+            builder.set申請届出者続柄(減免減額申請.get申請届出者続柄());
+        } else {
+            builder.set申請届出者続柄(RString.EMPTY);
+        }
+        if (減免減額申請.get申請届出者郵便番号() != null) {
+            builder.set申請届出者郵便番号(減免減額申請.get申請届出者郵便番号());
+        } else {
+            builder.set申請届出者郵便番号(YubinNo.EMPTY);
+        }
+        if (減免減額申請.get申請届出者電話番号() != null) {
+            builder.set申請届出者電話番号(減免減額申請.get申請届出者電話番号());
+        } else {
+            builder.set申請届出者電話番号(TelNo.EMPTY);
+        }
     }
 
 }
