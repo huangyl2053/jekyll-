@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710100;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -49,7 +48,7 @@ public class DBC710100_HanyoListKagoKekkaParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_サービス提供年月TO, name = "サービス提供年月To")
     private FlexibleYearMonth サービス提供年月To;
     @BatchParameter(key = KEY_事業者コード, name = "事業者コード")
-    private JigyoshaNo 事業者コード;
+    private RString 事業者コード;
     @BatchParameter(key = KEY_事業者名, name = "事業者名")
     private RString 事業者名;
     @BatchParameter(key = KEY_項目名付加, name = "項目名付加")
