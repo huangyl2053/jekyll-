@@ -80,14 +80,53 @@ public class TokuteiNyushoshahiHandler {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         } else {
             List<dgTokuteiNyushoshaKaigoServicehi_Row> rowList = new ArrayList<>();
+            Decimal 費用額合計 = Decimal.ZERO;
+            Decimal 保険分請求額合計 = Decimal.ZERO;
+            Decimal 利用者負担額合計 = Decimal.ZERO;
+            Decimal 公費１_負担額合計 = Decimal.ZERO;
+            Decimal 公費２_負担額合計 = Decimal.ZERO;
+            Decimal 公費３_負担額合計 = Decimal.ZERO;
             for (KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness 特定入所者介護サービス費用 : 特定入所者介護サービス費用list) {
                 rowList.add(getデータ(特定入所者介護サービス費用));
-                rowList.add(get合計(特定入所者介護サービス費用));
+                費用額合計.add(特定入所者介護サービス費用.get特定入所者費用().get費用額合計());
+                保険分請求額合計.add(特定入所者介護サービス費用.get特定入所者費用().get保険分請求額合計());
+                利用者負担額合計.add(特定入所者介護サービス費用.get特定入所者費用().get利用者負担額合計());
+                公費１_負担額合計.add(特定入所者介護サービス費用.get特定入所者費用().get公費１_負担額合計());
+                公費２_負担額合計.add(特定入所者介護サービス費用.get特定入所者費用().get公費２_負担額合計());
+                公費３_負担額合計.add(特定入所者介護サービス費用.get特定入所者費用().get公費３_負担額合計());
             }
+            dgTokuteiNyushoshaKaigoServicehi_Row 合計row = new dgTokuteiNyushoshaKaigoServicehi_Row();
+            合計row.setTxtMeisaiGokei(new RString("合計"));
+            合計row.setTxtHiyogaku(get金額(費用額合計));
+            合計row.setTxtSeikyugaku(get金額(保険分請求額合計));
+            合計row.setTxtRiyoshaFutangaku(get金額(利用者負担額合計));
+            合計row.setTxtKohi2Futangaku(get金額(公費１_負担額合計));
+            合計row.setTxtKohi2Futangaku(get金額(公費２_負担額合計));
+            合計row.setTxtKohi2Futangaku(get金額(公費３_負担額合計));
+            rowList.add(合計row);
+            Decimal 後_費用額合計 = Decimal.ZERO;
+            Decimal 後_保険分請求額合計 = Decimal.ZERO;
+            Decimal 後_利用者負担額合計 = Decimal.ZERO;
+            Decimal 後_公費１_負担額合計 = Decimal.ZERO;
+            Decimal 後_公費２_負担額合計 = Decimal.ZERO;
+            Decimal 後_公費３_負担額合計 = Decimal.ZERO;
             for (KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness 特定入所者介護サービス費用 : 特定入所者介護サービス費用list) {
                 rowList.add(get後のデータ(特定入所者介護サービス費用));
-                rowList.add(get後_合計(特定入所者介護サービス費用));
+                後_費用額合計.add(特定入所者介護サービス費用.get特定入所者費用().get後_費用額合計());
+                後_保険分請求額合計.add(特定入所者介護サービス費用.get特定入所者費用().get後_保険分請求額合計());
+                後_利用者負担額合計.add(特定入所者介護サービス費用.get特定入所者費用().get後_利用者負担額合計());
+                後_公費１_負担額合計.add(特定入所者介護サービス費用.get特定入所者費用().get後_公費１_負担額合計());
+                後_公費２_負担額合計.add(特定入所者介護サービス費用.get特定入所者費用().get後_公費２_負担額合計());
+                後_公費３_負担額合計.add(特定入所者介護サービス費用.get特定入所者費用().get後_公費３_負担額合計());
             }
+            dgTokuteiNyushoshaKaigoServicehi_Row 後_合計row = new dgTokuteiNyushoshaKaigoServicehi_Row();
+            後_合計row.setTxtMeisaiGokei(new RString("合計"));
+            後_合計row.setTxtHiyogaku(get金額(後_費用額合計));
+            後_合計row.setTxtSeikyugaku(get金額(後_保険分請求額合計));
+            後_合計row.setTxtRiyoshaFutangaku(get金額(後_利用者負担額合計));
+            後_合計row.setTxtKohi2Futangaku(get金額(後_公費１_負担額合計));
+            後_合計row.setTxtKohi2Futangaku(get金額(後_公費２_負担額合計));
+            後_合計row.setTxtKohi2Futangaku(get金額(後_公費３_負担額合計));
             div.getDgTokuteiNyushoshaKaigoServicehi().setDataSource(rowList);
             setGetsuBtn(dataToRepeat, new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().toDateString()));
         }
@@ -133,18 +172,6 @@ public class TokuteiNyushoshahiHandler {
         return row;
     }
 
-    private dgTokuteiNyushoshaKaigoServicehi_Row get合計(KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness 特定入所者介護サービス費用) {
-        dgTokuteiNyushoshaKaigoServicehi_Row row = new dgTokuteiNyushoshaKaigoServicehi_Row();
-        row.setTxtMeisaiGokei(new RString("合計"));
-        row.setTxtHiyogaku(get金額(特定入所者介護サービス費用.get特定入所者費用().get費用額合計()));
-        row.setTxtSeikyugaku(get金額(特定入所者介護サービス費用.get特定入所者費用().get保険分請求額合計()));
-        row.setTxtRiyoshaFutangaku(get金額(特定入所者介護サービス費用.get特定入所者費用().get利用者負担額合計()));
-        row.setTxtKohi2Futangaku(get金額(特定入所者介護サービス費用.get特定入所者費用().get公費１_負担額合計()));
-        row.setTxtKohi2Futangaku(get金額(特定入所者介護サービス費用.get特定入所者費用().get公費２_負担額合計()));
-        row.setTxtKohi2Futangaku(get金額(特定入所者介護サービス費用.get特定入所者費用().get公費３_負担額合計()));
-        return row;
-    }
-
     private dgTokuteiNyushoshaKaigoServicehi_Row get後のデータ(KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness 特定入所者介護サービス費用) {
         dgTokuteiNyushoshaKaigoServicehi_Row row = new dgTokuteiNyushoshaKaigoServicehi_Row();
         row.setTxtKettei(new RString("後"));
@@ -169,19 +196,6 @@ public class TokuteiNyushoshahiHandler {
         return row;
     }
 
-    private dgTokuteiNyushoshaKaigoServicehi_Row get後_合計(KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness 特定入所者介護サービス費用) {
-        dgTokuteiNyushoshaKaigoServicehi_Row row = new dgTokuteiNyushoshaKaigoServicehi_Row();
-        row.setTxtKettei(new RString("後"));
-        row.setTxtMeisaiGokei(new RString("合計"));
-        row.setTxtHiyogaku(get金額(特定入所者介護サービス費用.get特定入所者費用().get後_費用額合計()));
-        row.setTxtSeikyugaku(get金額(特定入所者介護サービス費用.get特定入所者費用().get後_保険分請求額合計()));
-        row.setTxtRiyoshaFutangaku(get金額(特定入所者介護サービス費用.get特定入所者費用().get後_利用者負担額合計()));
-        row.setTxtKohi2Futangaku(get金額(特定入所者介護サービス費用.get特定入所者費用().get後_公費１_負担額合計()));
-        row.setTxtKohi2Futangaku(get金額(特定入所者介護サービス費用.get特定入所者費用().get後_公費２_負担額合計()));
-        row.setTxtKohi2Futangaku(get金額(特定入所者介護サービス費用.get特定入所者費用().get後_公費３_負担額合計()));
-        return row;
-    }
-
     /**
      * ボタン状態の設定です。
      *
@@ -189,7 +203,6 @@ public class TokuteiNyushoshahiHandler {
      * @param 識別番号管理 ShikibetsuNoKanri
      */
     public void setButton(FlexibleYearMonth サービス提供年月, ShikibetsuNoKanri 識別番号管理) {
-
         if (DISABLED.equals(識別番号管理.get基本設定区分())) {
             div.getBtnKihon().setDisabled(true);
         } else {
@@ -218,13 +231,11 @@ public class TokuteiNyushoshahiHandler {
         } else {
             div.getBtnShokuji().setDisabled(false);
         }
-
         if (DISABLED.equals(識別番号管理.get福祉用具購入費設定区分())) {
             div.getBtnFukushiYoguKonyu().setDisabled(true);
         } else {
             div.getBtnFukushiYoguKonyu().setDisabled(false);
         }
-
         add(識別番号管理);
     }
 
@@ -251,18 +262,15 @@ public class TokuteiNyushoshahiHandler {
         } else {
             div.getBtnJutakuKaishu().setDisabled(false);
         }
-
         if (DISABLED.equals(識別番号管理.getケアマネジメント設定区分())) {
             div.getBtnCareManagement().setDisabled(true);
         } else {
             div.getBtnCareManagement().setDisabled(false);
         }
-
         if (DISABLED.equals(識別番号管理.get社会福祉法人軽減設定区分())) {
             div.getBtnShafukuKeigen().setDisabled(true);
         } else {
             div.getBtnShafukuKeigen().setDisabled(false);
-
         }
     }
 
@@ -326,7 +334,6 @@ public class TokuteiNyushoshahiHandler {
             div.getBtnZengetsu().setDisabled(false);
         }
         div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 年月, 新整理番号, 新識別番号);
-
         setDataGrid(dataToRepeat);
 
     }
@@ -391,7 +398,6 @@ public class TokuteiNyushoshahiHandler {
                 特定入所者介護サービス費用list.add(給付実績特定入所者介護サービス費用list.get(index));
             }
         }
-
         return 特定入所者介護サービス費用list;
     }
 
