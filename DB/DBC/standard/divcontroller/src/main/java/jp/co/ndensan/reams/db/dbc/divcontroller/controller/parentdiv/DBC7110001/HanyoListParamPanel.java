@@ -13,11 +13,13 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7110001.Hany
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7110001.HanyoListParamHandler;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.basic.KaigoDonyuKeitaiManager;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -31,6 +33,8 @@ public class HanyoListParamPanel {
     private static final RString 広域 = new RString("広域");
     private static final RString 再審査申立情報 = new RString("再審査申立情報");
     private static final RString 再審査結果情報 = new RString("再審査結果情報");
+    private static final RString 事業者入力モード = new RString("事業者入力モード");
+    private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
 
     /**
      * 初期化処理です。
@@ -41,6 +45,9 @@ public class HanyoListParamPanel {
     public ResponseData<HanyoListParamPanelDiv> onLoad(HanyoListParamPanelDiv div) {
         RString 導入形態 = get導入形態();
         RString モード = ResponseHolder.getState();
+        ViewStateHolder.put(ViewStateKeys.事業者入力モード, 事業者入力モード);
+        ViewStateHolder.put(ViewStateKeys.台帳種別表示, 台帳種別表示無し);
+        div.getCcdJigyoshaBango().initialize();
         getHandler(div).initialize(導入形態, モード);
         if (再審査申立情報.equals(モード)) {
             return ResponseData.of(div).setState(DBC7110001StateName.再審査申立情報);

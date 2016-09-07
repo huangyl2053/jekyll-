@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710110;
 
+import jp.co.ndensan.reams.db.dbc.definition.processprm.saishinsamoshitate.SaishinsamoshitateProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -107,5 +109,29 @@ public class DBC710110_HanyoListSaishinsaMoshitateParameter extends BatchParamet
         this.severteikyounengetsufrom = severteikyounengetsufrom;
         this.severteikyounengetsuto = severteikyounengetsuto;
         this.jigyoushabangou = jigyoushabangou;
+    }
+
+    /**
+     * 汎用リスト 再審査申立情報のパラメータを作成します。
+     *
+     * @param date date
+     * @return SaishinsamoshitateProcessParameter
+     */
+    public SaishinsamoshitateProcessParameter toSaishinsamoshitateProcessParameterr(RDate date) {
+        return new SaishinsamoshitateProcessParameter(
+                chohyoId,
+                shutsuryokujunId,
+                shutsuryokuKomokuId,
+                komokumeiFuka,
+                renbanFuka,
+                hitsukeHenshu,
+                hokenshacode,
+                kokuhorensouhunengetsufrom,
+                kokuhorensouhunengetsuto,
+                severteikyounengetsufrom,
+                severteikyounengetsuto,
+                jigyoushabangou,
+                date
+        );
     }
 }
