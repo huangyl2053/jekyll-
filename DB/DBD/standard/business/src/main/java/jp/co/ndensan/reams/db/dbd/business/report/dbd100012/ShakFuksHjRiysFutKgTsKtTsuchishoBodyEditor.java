@@ -170,12 +170,14 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
             source.kakuninNo10 = RString.EMPTY;
             source.shoninNg = 決定区分_承認;
 
-            List<RString> 非承認理由 = 社会福祉法人等利用者負担軽減.get非承認理由().split(折り返す符号.toString());
-            source.riyu1 = get非承認理由List(INDEX_0, 非承認理由);
-            source.riyu2 = get非承認理由List(INDEX_1, 非承認理由);
-            source.riyu3 = get非承認理由List(INDEX_2, 非承認理由);
-            source.riyu4 = get非承認理由List(INDEX_3, 非承認理由);
-            source.riyu5 = get非承認理由List(INDEX_4, 非承認理由);
+            if (社会福祉法人等利用者負担軽減.get非承認理由() != null) {
+                List<RString> 非承認理由 = 社会福祉法人等利用者負担軽減.get非承認理由().split(折り返す符号.toString());
+                source.riyu1 = get非承認理由List(INDEX_0, 非承認理由);
+                source.riyu2 = get非承認理由List(INDEX_1, 非承認理由);
+                source.riyu3 = get非承認理由List(INDEX_2, 非承認理由);
+                source.riyu4 = get非承認理由List(INDEX_3, 非承認理由);
+                source.riyu5 = get非承認理由List(INDEX_4, 非承認理由);
+            }
         }
         if (TeikeibunMojiSize.フォント小.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
             set連絡先他(source);
