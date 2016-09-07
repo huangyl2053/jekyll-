@@ -21,4 +21,5 @@ public interface ISyoriHidukeKanriMasterUpdateMapper {
      * @return 処理日付管理マスタを更新する
      */
     List<DbT7022ShoriDateKanriEntity> get処理日付管理マスタを更新する();
+
 }

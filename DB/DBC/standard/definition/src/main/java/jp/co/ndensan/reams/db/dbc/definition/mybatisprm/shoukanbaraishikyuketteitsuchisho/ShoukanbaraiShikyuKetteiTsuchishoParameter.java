@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShoukanbaraiShikyuKetteiTsuchishoParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
-    private long 口座ID;
     private HihokenshaNo 被保険者番号;
     private FlexibleYearMonth サービス提供年月;
     private RString 整理番号;

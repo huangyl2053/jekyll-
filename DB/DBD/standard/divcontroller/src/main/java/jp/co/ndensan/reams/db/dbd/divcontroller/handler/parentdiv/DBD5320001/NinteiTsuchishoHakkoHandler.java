@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.yokaigoninteijoho
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5320001.NinteiTsuchishoHakkoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5320001.dgTaishoshaIchiran_Row;
+import jp.co.ndensan.reams.db.dbd.service.core.yokaigoninteijoho.YokaigoNinteiJohoManager;
 import jp.co.ndensan.reams.db.dbd.service.core.yokaigoninteijoho.YokaigoNinteiTsutishoManager;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd532001.YokaigoNinteiKekkaTshuchishoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd550001.YokaigoNinteiKyakkaTshuchishoPrintService;
@@ -1253,11 +1254,9 @@ public class NinteiTsuchishoHakkoHandler {
         if (null == データ) {
             return new RString("0000");
         }
-//        return YokaigoNinteiJohoManager.createInstance()
-//                .getMax履歴番号ByKey(データ.get市町村コード(), データ.get被保険者番号受給者台帳(),
-//                        データ.get受給申請事由受給者台帳(), データ.get申請書管理番号受給者台帳());
-
-        return new RString("0000");
+        return YokaigoNinteiJohoManager.createInstance()
+                .getMax履歴番号ByKey(データ.get市町村コード(), データ.get被保険者番号受給者台帳(),
+                        データ.get受給申請事由受給者台帳(), データ.get申請書管理番号受給者台帳());
     }
 
     private RString getサービス種類(YokaigoNinteiTsutisho 受給者台帳情報) {

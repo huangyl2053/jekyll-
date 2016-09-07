@@ -35,12 +35,8 @@ public class KyufuSaishinsaMoshitateshojohoSofuIchiranBodyEditor implements IKyu
     private static final RString 件数 = new RString("件");
     private static final int LENGTH_ZERO = 0;
     private static final int LENGTH_TWENTY = 20;
-    private static final int LENGTH_NINETEEN = 19;
-    private static final int LENGTH_THIRTYNINE = 39;
     private static final int LENGTH_FORTY = 40;
-    private static final int LENGTH_THIRTEEN = 13;
     private static final int LENGTH_FOURTEEN = 14;
-    private static final int LENGTH_TWENTYSEVEN = 27;
     private static final int LENGTH_TWENTYEIGHT = 28;
     private final int 連番;
     private final boolean 合計フラグ;
@@ -82,11 +78,11 @@ public class KyufuSaishinsaMoshitateshojohoSofuIchiranBodyEditor implements IKyu
             source.listUpper_3 = 事業者名;
             source.listLower_1 = RString.EMPTY;
         } else if (LENGTH_TWENTY < 事業者名.length() && 事業者名.length() <= LENGTH_FORTY) {
-            source.listUpper_3 = 事業者名.substring(LENGTH_ZERO, LENGTH_NINETEEN);
-            source.listLower_1 = 事業者名.substring(LENGTH_TWENTY, 事業者名.length() - 1);
+            source.listUpper_3 = 事業者名.substring(LENGTH_ZERO, LENGTH_TWENTY);
+            source.listLower_1 = 事業者名.substring(LENGTH_TWENTY, 事業者名.length());
         } else {
-            source.listUpper_3 = 事業者名.substring(LENGTH_ZERO, LENGTH_NINETEEN);
-            source.listLower_1 = 事業者名.substring(LENGTH_TWENTY, LENGTH_THIRTYNINE);
+            source.listUpper_3 = 事業者名.substring(LENGTH_ZERO, LENGTH_TWENTY);
+            source.listLower_1 = 事業者名.substring(LENGTH_TWENTY, LENGTH_FORTY);
         }
 
         RString サービス名称 = 送付一覧表データ.get再審査申立_サービス名称();
@@ -95,11 +91,11 @@ public class KyufuSaishinsaMoshitateshojohoSofuIchiranBodyEditor implements IKyu
             source.listUpper_8 = サービス名称;
             source.listLower_3 = RString.EMPTY;
         } else if (LENGTH_FOURTEEN < サービス名称.length() && サービス名称.length() <= LENGTH_TWENTYEIGHT) {
-            source.listUpper_8 = サービス名称.substring(LENGTH_ZERO, LENGTH_THIRTEEN);
-            source.listLower_3 = サービス名称.substring(LENGTH_FOURTEEN, サービス名称.length() - 1);
+            source.listUpper_8 = サービス名称.substring(LENGTH_ZERO, LENGTH_FOURTEEN);
+            source.listLower_3 = サービス名称.substring(LENGTH_FOURTEEN, サービス名称.length());
         } else {
-            source.listUpper_8 = サービス名称.substring(LENGTH_ZERO, LENGTH_THIRTEEN);
-            source.listLower_3 = サービス名称.substring(LENGTH_FOURTEEN, LENGTH_TWENTYSEVEN);
+            source.listUpper_8 = サービス名称.substring(LENGTH_ZERO, LENGTH_FOURTEEN);
+            source.listLower_3 = サービス名称.substring(LENGTH_FOURTEEN, LENGTH_TWENTYEIGHT);
         }
 
         if (送付一覧表データ.get再審査申立_被保険者番号() != null) {

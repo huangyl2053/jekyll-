@@ -12,7 +12,7 @@
      "type": "start",
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZU020001",
+     "toLayoutName": "DBZ0200001",
      "toLayoutTitle": "対象者検索",
      "toState": "対象者検索"
     },
@@ -20,7 +20,7 @@
      "id": "2",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBZ",
-     "layoutName": "DBZU020001",
+     "layoutName": "DBZ0200001",
      "layoutTitle": "対象者検索",
      "eventName": "対象者特定",
      "destroy": false,
@@ -40,7 +40,7 @@
      "destroy": true,
      "condition": "対象者検索",
      "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZU020001",
+     "toLayoutName": "DBZ0200001",
      "toLayoutTitle": "対象者検索",
      "toState": "対象者検索"
     },
@@ -54,7 +54,7 @@
      "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZU020001",
+     "toLayoutName": "DBZ0200001",
      "toLayoutTitle": "対象者検索",
      "toState": "該当者一覧"
     },

@@ -72,18 +72,17 @@
    </select>
    
    <resultMap id="resultMap_KyuufuJiqsekiShuukeiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.KyuhuJissekiShukei" autoMapping="true">
-        <id property="集計サービス種類コード" column="集計サービス種類コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler" />
+        <id property="サービス種類コード" column="集計サービス種類コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler" />
         <result property="保険請求額" column="保険請求額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="保険利用者負担額" column="保険利用者負担額" />    
+        <result property="利用者負担額" column="保険利用者負担額" />    
    </resultMap>
    <resultMap id="resultMap_KyuufuJiqsekiDetailListEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.KyuhuJissekiMeisai" autoMapping="true">
-        <id property="明細サービス種類コード" column="明細サービス種類コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <id property="サービス種類コード" column="明細サービス種類コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
         <id property="サービス項目コード" column="サービス項目コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceKomokuCodeTypeHandler" />
         <result property="サービス名称" column="サービス名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="後単位数" column="後単位数" />
-        <result property="後日数回数" column="後日数回数" />
-        <result property="後サービス単位数" column="後サービス単位数" />
-        <association property="給付実績集計Entity" resultMap="resultMap_KyuufuJiqsekiShuukeiEntity"/>
+        <result property="単位数" column="後単位数" />
+        <result property="日数回数" column="後日数回数" />
+        <result property="サービス単位数" column="後サービス単位数" />
    </resultMap>
    
     <resultMap id="resultMap_KyuufuJiqsekiHihokenshaListEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.KyuhuJissekiHihokensha" autoMapping="true">
@@ -92,7 +91,8 @@
         <result property="審査年月" column="審査年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
         <result property="給付区分" column="給付実績情報作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="exists社福軽減給付実績" column="exists社福軽減給付実績" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
-        <result property="exists有効特地減免" column="exists有効特地減免" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" /> 
+        <result property="exists有効特地減免" column="exists有効特地減免" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+         <association property="給付実績集計Entity" resultMap="resultMap_KyuufuJiqsekiShuukeiEntity"/>
         <collection property="給付実績明細リスト" resultMap="resultMap_KyuufuJiqsekiDetailListEntity"/>
     </resultMap>
 
@@ -100,7 +100,8 @@
         <id property="事業者番号" column="事業者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/> 
         <result property="事業者名称" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
-        <collection property="給付実績被保険者Entity" resultMap="resultMap_KyuufuJiqsekiHihokenshaListEntity"/>
+       
+        <collection property="給付実績被保険者リスト" resultMap="resultMap_KyuufuJiqsekiHihokenshaListEntity"/>
        <!-- <result property="入力識別番号" column="入力識別番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler" />
         <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler" />
         <result property="通し番号" column="通し番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />-->

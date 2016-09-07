@@ -41,6 +41,5 @@ public class ShakaiFukushiHojinKeigenGaitoshaIchiranEntity {
     private RString 計画事業者名;
     private boolean is自己作成;
     private List<Setaiinshotokujoho> 世帯員リスト;
-    private NinteiJoho 認定情報;
-    private SogoJigyoTaishoshaJoho 総合事業対象者情報;
+
 }

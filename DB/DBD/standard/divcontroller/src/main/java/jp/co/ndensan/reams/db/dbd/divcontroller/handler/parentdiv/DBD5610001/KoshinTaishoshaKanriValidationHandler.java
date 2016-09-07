@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 更新申請対象者管理リスト作成画面のバリデーションハンドラークラスです。
  *
- * @reamsid_L DBD-1460-020 liuyl
+ * @reamsid_L DBD-1460-010 liuyl
  */
 public class KoshinTaishoshaKanriValidationHandler {
 

@@ -37,10 +37,13 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
-    private static final RString 支給 = new RString("1");
+    private static final RString 支給 = new RString("0");
     private static final RString 窓口払 = new RString("1");
     private static final RString 口座払 = new RString("2");
-    private static final RString 作成 = new RString("作成");
+    private static final RString 日時作成 = new RString("作成");
+    private static final RString 接続文字 = new RString("～");
+    private static final RString 左カッコ = new RString("(");
+    private static final RString 右カッコ = new RString(")");
     private static final RString KEY_並び順の１件目 = new RString("KEY_並び順の１件目");
     private static final RString KEY_並び順の２件目 = new RString("KEY_並び順の２件目");
     private static final RString KEY_並び順の３件目 = new RString("KEY_並び順の３件目");
@@ -70,17 +73,17 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
         source.hokenshaNo = entity.get保険者番号();
         source.hokenshaName = entity.get保険者名();
 
-        source.shutsuryokujun1 = entity.get出力順Map().get(KEY_並び順の１件目);
-        source.shutsuryokujun2 = entity.get出力順Map().get(KEY_並び順の２件目);
-        source.shutsuryokujun3 = entity.get出力順Map().get(KEY_並び順の３件目);
-        source.shutsuryokujun4 = entity.get出力順Map().get(KEY_並び順の４件目);
-        source.shutsuryokujun5 = entity.get出力順Map().get(KEY_並び順の５件目);
+        source.shutsuryokujun1 = get並び順(KEY_並び順の１件目);
+        source.shutsuryokujun2 = get並び順(KEY_並び順の２件目);
+        source.shutsuryokujun3 = get並び順(KEY_並び順の３件目);
+        source.shutsuryokujun4 = get並び順(KEY_並び順の４件目);
+        source.shutsuryokujun5 = get並び順(KEY_並び順の５件目);
 
-        source.kaipage1 = entity.get改頁リスト().get(NUM_0);
-        source.kaipage2 = entity.get改頁リスト().get(NUM_1);
-        source.kaipage3 = entity.get改頁リスト().get(NUM_2);
-        source.kaipage4 = entity.get改頁リスト().get(NUM_3);
-        source.kaipage5 = entity.get改頁リスト().get(NUM_4);
+        source.kaipage1 = get改頁(NUM_0);
+        source.kaipage2 = get改頁(NUM_1);
+        source.kaipage3 = get改頁(NUM_2);
+        source.kaipage4 = get改頁(NUM_3);
+        source.kaipage5 = get改頁(NUM_4);
 
         source.listCenter_1 = new RString(entity.get連番());
 
@@ -146,7 +149,7 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
         sakuseiYMD.append(RString.HALF_SPACE);
         sakuseiYMD.append(datetime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         sakuseiYMD.append(RString.HALF_SPACE);
-        sakuseiYMD.append(作成);
+        sakuseiYMD.append(日時作成);
 
         return sakuseiYMD.toRString();
     }
@@ -159,11 +162,13 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
                 eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).fillType(FillType.BLANK).
                 toDateString());
-        sakuseiYMD.append(new RString("～"));
-        sakuseiYMD.append(shuryoYMD.wareki().
-                eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).fillType(FillType.BLANK).
-                toDateString());
+        sakuseiYMD.append(接続文字);
+        if (shuryoYMD != null && !shuryoYMD.isEmpty()) {
+            sakuseiYMD.append(shuryoYMD.wareki().
+                    eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.PERIOD).fillType(FillType.BLANK).
+                    toDateString());
+        }
 
         return sakuseiYMD.toRString();
     }
@@ -187,22 +192,23 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
                 eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).fillType(FillType.BLANK).
                 toDateString());
-        sakuseiYMD.append(new RString("("));
+        sakuseiYMD.append(左カッコ);
         sakuseiYMD.append(kaishiYMD.getDayOfWeek().getShortTerm());
-        sakuseiYMD.append(new RString(")"));
+        sakuseiYMD.append(右カッコ);
         sakuseiYMD.append(RString.HALF_SPACE);
         sakuseiYMD.append(kaishiTime.toFormattedTimeString(DisplayTimeFormat.HH_mm));
-        sakuseiYMD.append(new RString("～"));
-        sakuseiYMD.append(shuryoYMD.wareki().
-                eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).fillType(FillType.BLANK).
-                toDateString());
-        sakuseiYMD.append(new RString("("));
-        sakuseiYMD.append(shuryoYMD.getDayOfWeek().getShortTerm());
-        sakuseiYMD.append(new RString(")"));
-        sakuseiYMD.append(RString.HALF_SPACE);
-        sakuseiYMD.append(shuryoTime.toFormattedTimeString(DisplayTimeFormat.HH_mm));
-
+        sakuseiYMD.append(接続文字);
+        if (shuryoYMD != null && !shuryoYMD.isEmpty()) {
+            sakuseiYMD.append(shuryoYMD.wareki().
+                    eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.PERIOD).fillType(FillType.BLANK).
+                    toDateString());
+            sakuseiYMD.append(左カッコ);
+            sakuseiYMD.append(shuryoYMD.getDayOfWeek().getShortTerm());
+            sakuseiYMD.append(右カッコ);
+            sakuseiYMD.append(RString.HALF_SPACE);
+            sakuseiYMD.append(shuryoTime.toFormattedTimeString(DisplayTimeFormat.HH_mm));
+        }
         return sakuseiYMD.toRString();
     }
 
@@ -229,5 +235,13 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
         sakuseiYMD.append(katagaki);
 
         return sakuseiYMD.toRString();
+    }
+
+    private RString get改頁(int index) {
+        return index < entity.get改頁リスト().size() ? entity.get改頁リスト().get(index) : RString.EMPTY;
+    }
+
+    private RString get並び順(RString 並び順Key) {
+        return entity.get出力順Map().containsKey(並び順Key) ? entity.get出力順Map().get(並び順Key) : RString.EMPTY;
     }
 }

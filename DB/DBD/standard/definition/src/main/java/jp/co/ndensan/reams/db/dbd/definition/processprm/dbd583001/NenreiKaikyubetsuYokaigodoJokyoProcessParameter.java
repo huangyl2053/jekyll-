@@ -54,6 +54,12 @@ public class NenreiKaikyubetsuYokaigodoJokyoProcessParameter implements IBatchPr
         this.旧市町村名称 = 旧市町村名称;
     }
 
+    /**
+     * コンストラクタです。
+     *
+     * @param shikibetsuTaishoPSMSearchKey IShikibetsuTaishoPSMSearchKey
+     * @return NenreiKaikyubetsuYokaigodoJokyoMybatisParameter
+     */
     public NenreiKaikyubetsuYokaigodoJokyoMybatisParameter toNenreiKaikyubetsuYokaigodoJokyoMybatisParameter(
             IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey) {
         return new NenreiKaikyubetsuYokaigodoJokyoMybatisParameter(基準日, 基準年月,

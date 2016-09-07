@@ -148,60 +148,62 @@ public class ShunoJohoHandler {
                 ShunoJohoResult 特別徴収 = new ShunoJohoResult();
                 ShunoJohoResult 普通徴収 = new ShunoJohoResult();
                 Decimal 調定ID = 介護期別情報.get調定ID();
-                if (徴収方法_1.equals(介護期別情報.get徴収方法())) {
-                    特別徴収.set期(介護期別情報.get期());
-                    特別徴収.set調定ID(調定ID);
-                }
-                if (徴収方法_2.equals(介護期別情報.get徴収方法())) {
-                    普通徴収.set期(介護期別情報.get期());
-                    普通徴収.set調定ID(調定ID);
-                }
+                if (調定ID != null) {
+                    if (徴収方法_1.equals(介護期別情報.get徴収方法())) {
+                        特別徴収.set期(介護期別情報.get期());
+                        特別徴収.set調定ID(調定ID);
+                    }
+                    if (徴収方法_2.equals(介護期別情報.get徴収方法())) {
+                        普通徴収.set期(介護期別情報.get期());
+                        普通徴収.set調定ID(調定ID);
+                    }
 
-                ChoteiKyotsu 調定共通情報 = 調定共通Manager.get調定共通情報(調定ID);
-                Decimal 調定額 = 調定共通情報.get調定額();
-                RDate 調定日 = 調定共通情報.get調定年月日();
-                RDate 納期限 = 調定共通情報.get納期限();
-                if (調定ID.equals(特別徴収.get調定ID())) {
-                    特別徴収.set調定額(調定額);
-                    特別徴収.set調定日(調定日);
-                    特別徴収.set納期限(納期限);
-                }
-                if (調定ID.equals(普通徴収.get調定ID())) {
-                    普通徴収.set調定額(調定額);
-                    普通徴収.set調定日(調定日);
-                    普通徴収.set納期限(納期限);
-                }
+                    ChoteiKyotsu 調定共通情報 = 調定共通Manager.get調定共通情報(調定ID);
+                    Decimal 調定額 = 調定共通情報.get調定額();
+                    RDate 調定日 = 調定共通情報.get調定年月日();
+                    RDate 納期限 = 調定共通情報.get納期限();
+                    if (調定ID.equals(特別徴収.get調定ID())) {
+                        特別徴収.set調定額(調定額);
+                        特別徴収.set調定日(調定日);
+                        特別徴収.set納期限(納期限);
+                    }
+                    if (調定ID.equals(普通徴収.get調定ID())) {
+                        普通徴収.set調定額(調定額);
+                        普通徴収.set調定日(調定日);
+                        普通徴収.set納期限(納期限);
+                    }
 
-                Long 収納ID = 調定共通情報.get収納ID();
-                Shuno 収納情報 = ShunoManager.createInstance().get収納(収納ID);
-                ShunyuCollection 収入明細 = 収納情報.get収入明細();
-                Boolean 速報考慮 = false;
-                RString 速報考慮r = getConfig値(ConfigNameDBB.収納状況照会_速報取込区分, RDate.getNowDate());
-                if (取り込む.equals(速報考慮r)) {
-                    速報考慮 = true;
-                }
-                Shunyu 収入情報 = 収入明細.get収入(速報考慮);
-                IShunoKingakuComponentSupply 収納金額 = 収入情報.get金額();
-                RDate 収入日 = 収入情報.get直近収入年月日();
-                RDate 領収日 = 収入情報.get直近領収年月日();
-                Decimal 収入額 = 収納金額.get本税();
-                Decimal 督促手数料 = 収納金額.get督促手数料();
-                Decimal 延滞金 = 収納金額.get延滞金();
-                if (調定ID.equals(特別徴収.get調定ID())) {
-                    特別徴収.set収入日(収入日);
-                    特別徴収.set領収日(領収日);
-                    特別徴収.set収入額(収入額);
-                    特別徴収.set督促手数料(督促手数料);
-                    特別徴収.set延滞金(延滞金);
-                    特別徴収List.add(特別徴収);
-                }
-                if (調定ID.equals(普通徴収.get調定ID())) {
-                    普通徴収.set収入日(収入日);
-                    普通徴収.set領収日(領収日);
-                    普通徴収.set収入額(収入額);
-                    普通徴収.set督促手数料(督促手数料);
-                    普通徴収.set延滞金(延滞金);
-                    普通徴収List.add(普通徴収);
+                    Long 収納ID = 調定共通情報.get収納ID();
+                    Shuno 収納情報 = ShunoManager.createInstance().get収納(収納ID);
+                    ShunyuCollection 収入明細 = 収納情報.get収入明細();
+                    Boolean 速報考慮 = false;
+                    RString 速報考慮r = getConfig値(ConfigNameDBB.収納状況照会_速報取込区分, RDate.getNowDate());
+                    if (取り込む.equals(速報考慮r)) {
+                        速報考慮 = true;
+                    }
+                    Shunyu 収入情報 = 収入明細.get収入(速報考慮);
+                    IShunoKingakuComponentSupply 収納金額 = 収入情報.get金額();
+                    RDate 収入日 = 収入情報.get直近収入年月日();
+                    RDate 領収日 = 収入情報.get直近領収年月日();
+                    Decimal 収入額 = 収納金額.get本税();
+                    Decimal 督促手数料 = 収納金額.get督促手数料();
+                    Decimal 延滞金 = 収納金額.get延滞金();
+                    if (調定ID.equals(特別徴収.get調定ID())) {
+                        特別徴収.set収入日(収入日);
+                        特別徴収.set領収日(領収日);
+                        特別徴収.set収入額(収入額);
+                        特別徴収.set督促手数料(督促手数料);
+                        特別徴収.set延滞金(延滞金);
+                        特別徴収List.add(特別徴収);
+                    }
+                    if (調定ID.equals(普通徴収.get調定ID())) {
+                        普通徴収.set収入日(収入日);
+                        普通徴収.set領収日(領収日);
+                        普通徴収.set収入額(収入額);
+                        普通徴収.set督促手数料(督促手数料);
+                        普通徴収.set延滞金(延滞金);
+                        普通徴収List.add(普通徴収);
+                    }
                 }
             }
         }

@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4040011;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shogaishakoujo.ShogaishaKoujo;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shogaishakoujo.NinteiNaiyoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shogaishakoujo.Ninteikubun;
@@ -70,11 +72,11 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoHandler {
                 div.getShogaishaKojoNinteishoHakko().getShogaishaKojoTaishoshaDetail().getTxtShougaishaJiritsudo().setValue(
                         ShogaiNichijoSeikatsuJiritsudoCode.toValue(shogaishaKoujo.get障害高齢者自立度().getColumnValue()).get名称());
             }
-//            if (shogaishaKoujo.is障がい者手帳あり()) {
-//                List checkedItemList = new ArrayList<>();
-//                checkedItemList.add(new RString("key0"));
-//                div.getShogaishaKojoNinteishoHakko().getChkTechoAri().setSelectedItemsByKey(checkedItemList);
-//            }
+            if (shogaishaKoujo.is障がい者手帳あり()) {
+                List checkedItemList = new ArrayList<>();
+                checkedItemList.add(new RString("key0"));
+                div.getShogaishaKojoNinteishoHakko().getChkTechoAri().setSelectedItemsByKey(checkedItemList);
+            }
 
         } else {
 

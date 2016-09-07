@@ -228,6 +228,10 @@ public enum ReportIdDBD {
      */
     DBD200016(new ReportId("DBD200016_FutanGendogakuNinteishaIchiran"), new RString("負担限度額認定者リスト")),
     /**
+     * 事業所向け社会福祉法人軽減対象者一覧表の帳票ＩＤです。
+     */
+    DBD200017(new ReportId("DBD200017_JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiran"), new RString("事業所向け社会福祉法人軽減対象者一覧表")),
+    /**
      * 要介護認定通知書一括発行の帳票ＩＤです。
      */
     DBD532999(new ReportId("DBD532999_YokaigoTshuchishoIkkatsu"), new RString("要介護認定通知書一括発行")),

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1000062;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KijunShunyugakuTekiyoKanri;
@@ -69,7 +70,7 @@ public class KijunShunyuShinseiTouroku {
         getHandler(div).set画面のdataSource();
         Map<RString, List<KijunShunyugakuTekiyoKanri>> 基準収入Map = getHandler(div).initialize(
                 被保険者番号, 識別コード, 世帯コード);
-//        ViewStateHolder.put(ViewStateKeys.基準収入額適用管理情報, (Serializable) 基準収入Map);
+        ViewStateHolder.put(ViewStateKeys.基準収入額適用管理情報, (Serializable) 基準収入Map);
         return ResponseData.of(div).setState(DBC1000062StateName.一覧);
     }
 
@@ -138,12 +139,12 @@ public class KijunShunyuShinseiTouroku {
      * @return ResponseData
      */
     public ResponseData<KijunShunyuShinseiTourokuDiv> onClick_btnCommonUpdate(KijunShunyuShinseiTourokuDiv div) {
-//        Map<RString, List<KijunShunyugakuTekiyoKanri>> 基準収入Map = ViewStateHolder.get(
-//                ViewStateKeys.基準収入額適用管理情報, Map.class);
+        Map<RString, List<KijunShunyugakuTekiyoKanri>> 基準収入Map = ViewStateHolder.get(
+                ViewStateKeys.基準収入額適用管理情報, Map.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         try {
-//            getHandler(div).to保存(基準収入Map);
+            getHandler(div).to保存(基準収入Map);
         } catch (SystemException | ApplicationException e) {
             throw new ApplicationException(e.getMessage());
         }
