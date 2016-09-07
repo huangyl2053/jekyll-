@@ -230,7 +230,6 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
         RString 異動事由コード = entity.get異動事由コード();
         csvEntity.setIdoJiyuCode(異動事由コード);
         bodyItem.set異動事由コード(異動事由コード);
-        // TODO QA1013  Redmine：   (異動事由の取得用方法)
         RString 異動事由 = RString.isNullOrEmpty(異動事由コード) ? RString.EMPTY : JukiIdoJiyu.toValue(異動事由コード).get異動事由略称();
         csvEntity.setIdoJiyu(異動事由);
         bodyItem.set異動事由(異動事由);
@@ -313,7 +312,6 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
         RString 異動事由コード = entity.get異動事由コード();
         csvEntity.setIdoJiyuCode(異動事由コード);
         bodyItem.set異動事由コード(異動事由コード);
-        // TODO QA1013  Redmine：   (異動事由の取得用方法)
         RString 異動事由 = RString.isNullOrEmpty(異動事由コード) ? RString.EMPTY : JukiIdoJiyu.toValue(異動事由コード).get異動事由略称();
         csvEntity.setIdoJiyu(異動事由);
         bodyItem.set異動事由(異動事由);
