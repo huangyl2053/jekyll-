@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- @reamsid_L DBC-5060-030 duanzhanli -->
+<!-- @reamsid_L DBC-3111-020 duanzhanli -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.tankinyushokakudaigaitosha.ITankiNyushoKakudaiGaitoshaMapper">
 
     <resultMap id="get短期入所拡大該当者Result" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.tankinyushokakudaigaitosha.TankiNyushoKakudaiGaitoshaRelateEntity">
