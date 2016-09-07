@@ -6,13 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150030;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * サービスコード別利用状況作成Flowクラスです。
+ * サービスコード別利用状況作成BatchParamterクラスです。
  *
  * @reamsid_L DBC-3340-030 jiangxiaolong
  */
@@ -44,10 +43,10 @@ public class DBC150030_ServicecodeRiyojokyoParameter extends BatchParameterBase 
     @BatchParameter(key = KEY_選択対象, name = "選択対象")
     private RString 選択対象;
     @BatchParameter(key = KEY_対象コードリスト, name = "対象コードリスト")
-    private List<KoseiShichosonMaster> 対象コードリスト;
+    private List<RString> 対象コードリスト;
     @BatchParameter(key = KEY_市町村情報, name = "市町村情報")
-    private List<KoseiShichosonMaster> 市町村情報;
+    private List<RString> 市町村情報;
     @BatchParameter(key = KEY_旧市町村情報, name = "旧市町村情報")
-    private List<KoseiShichosonMaster> 旧市町村情報;
+    private List<RString> 旧市町村情報;
 
 }
