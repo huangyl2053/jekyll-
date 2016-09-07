@@ -384,4 +384,209 @@
         #{kijunTimestamp});
     </update>
 
+    <select id="getJigyouHoukokuTokeiTyouhyou"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.JigyoHokokuGeppoIppanReportMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyojokyohokokushiryonemposakuseiiti.JigyoHokokuDataRelateEntity"
+            fetchSize="500">
+        SELECT
+        "syukeiYM"
+        , "shichosonCode"
+        , "toukeiTaishoKubun"
+        , "hyoNo"
+        , "syukeiNo"
+        , "syukeiTani"
+        , "tateNo"
+        , "yokoNo"
+        , "sukeiKekkaAtai"
+        , "tateKomokuCode"
+        , "yokoKomokuCode"
+        FROM
+        rgdb."DbFt7019JigyouHoukokuTokeiTyouhyou"(
+        ARRAY<foreach
+            collection="shichosoncodeList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>,
+        #{syukeiYM},
+        ARRAY<foreach
+            collection="shukeinoList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>,
+        ARRAY<foreach
+            collection="hyonoList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>);
+    </select>
+
+    <select id="getHihokenshaDaichoSyoriKakuninRisuto"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.JigyoHokokuGeppoShoriKekkaKakuninListMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohokenkyufukogaku.ShoriKekkaKakuninListRelateEntity"
+            fetchSize="500">
+        SELECT
+        "komokuNo1"
+        , "komokuNo2"
+        , "komokuNo3"
+        , "komokuNo4"
+        , "programId"
+        , "syoriMeisyou"
+        , "komoku1"
+        , "komoku2"
+        , "komoku3"
+        , "komoku4"
+        , "naiYou1"
+        , "naiYou2"
+        FROM
+        rgdb."DbFt7023HihokenshaDaichoSyoriKakuninRisuto"(
+        ARRAY<foreach
+            collection="koseiShichosonList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>,
+        ARRAY<foreach
+            collection="kyuShichosonList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>);
+    </select>
+
+    <select id="getIchigoHihokenshaSyoriKakuninRisuto"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.JigyoHokokuGeppoShoriKekkaKakuninListMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohokenkyufukogaku.ShoriKekkaKakuninListRelateEntity"
+            fetchSize="500">
+        SELECT
+        "komokuNo1"
+        , "komokuNo2"
+        , "komokuNo3"
+        , "komokuNo4"
+        , "programId"
+        , "syoriMeisyou"
+        , "komoku1"
+        , "komoku2"
+        , "komoku3"
+        , "komoku4"
+        , "naiYou1"
+        , "naiYou2"
+        FROM
+        rgdb."DbFt7026IchigoHihokenshaSyoriKakuninRisuto"(#{syukeiYM},
+        ARRAY<foreach
+            collection="kyuShichosonList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>);
+    </select>
+
+    <select id="getRiyoshaFutangakuGemmenHihokenshaDaichoSyoriKakuninRisuto"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.JigyoHokokuGeppoShoriKekkaKakuninListMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohokenkyufukogaku.ShoriKekkaKakuninListRelateEntity"
+            fetchSize="500">
+        SELECT
+        "komokuNo1"
+        , "komokuNo2"
+        , "komokuNo3"
+        , "komokuNo4"
+        , "programId"
+        , "syoriMeisyou"
+        , "komoku1"
+        , "komoku2"
+        , "komoku3"
+        , "komoku4"
+        , "naiYou1"
+        , "naiYou2"
+        FROM
+        rgdb."DbFt7029RiyoshaFutangakuGemmenSyoriKakuninRisuto"(
+        ARRAY<foreach
+            collection="koseiShichosonList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>,
+        ARRAY<foreach
+            collection="kyuShichosonList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>,
+        #{syukeiYM});
+    </select>
+
+    <select id="getTokuteiNyushoshaGengakuNinteiSyoriKakuninRisuto"
+            resultOrdered="true"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohokenkyufukogaku.ShoriKekkaKakuninListRelateEntity"
+            fetchSize="500">
+        SELECT
+        "komokuNo1"
+        , "komokuNo2"
+        , "komokuNo3"
+        , "komokuNo4"
+        , "programId"
+        , "syoriMeisyou"
+        , "komoku1"
+        , "komoku2"
+        , "komoku3"
+        , "komoku4"
+        , "naiYou1"
+        , "naiYou2"
+        FROM
+        rgdb."DbFt7032TokuteiNyushoshaGengakuNinteiSyoriKakuninList"();
+    </select>
+
+    <select id="getYokaigoNinteishaSyoriKakuninRisuto"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.JigyoHokokuGeppoShoriKekkaKakuninListMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohokenkyufukogaku.ShoriKekkaKakuninListRelateEntity"
+            fetchSize="500">
+        SELECT
+        "komokuNo1"
+        , "komokuNo2"
+        , "komokuNo3"
+        , "komokuNo4"
+        , "programId"
+        , "syoriMeisyou"
+        , "komoku1"
+        , "komoku2"
+        , "komoku3"
+        , "komoku4"
+        , "naiYou1"
+        , "naiYou2"
+        FROM
+        rgdb."DbFt7035YokaigoNinteishaSyoriKakuninRisuto"(
+        ARRAY<foreach
+            collection="kyuShichosonList"
+            item="code"
+            open="["
+            separator=","
+            close="]">
+            #{code}
+        </foreach>,
+        #{syukeiYM});
+    </select>
+
 </mapper>
