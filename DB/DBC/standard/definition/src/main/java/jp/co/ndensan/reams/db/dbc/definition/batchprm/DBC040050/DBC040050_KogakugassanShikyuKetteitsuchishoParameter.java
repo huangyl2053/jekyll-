@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 
 /**
  * 画面設計_DBCMN63004_高額合算支給決定通知書（一括）
@@ -39,7 +40,7 @@ public class DBC040050_KogakugassanShikyuKetteitsuchishoParameter extends BatchP
     @BatchParameter(key = KEY_日付選択区分, name = "日付選択区分")
     private RString 日付選択区分;
     @BatchParameter(key = KEY_受取年月, name = "受取年月")
-    private RDate 受取年月;
+    private RYearMonth 受取年月;
     @BatchParameter(key = KEY_申請開始年月日, name = "申請開始年月日")
     private RDate 申請開始年月日;
     @BatchParameter(key = KEY_申請終了年月日, name = "申請終了年月日")

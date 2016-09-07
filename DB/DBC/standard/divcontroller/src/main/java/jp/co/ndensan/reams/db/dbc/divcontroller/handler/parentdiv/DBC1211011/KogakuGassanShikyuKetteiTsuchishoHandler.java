@@ -63,6 +63,8 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
     private LasdecCode 市町村コード;
     private static final RString NUM_0 = new RString("0");
     private static final RString NUM_1 = new RString("1");
+    private static final RString NUM_2 = new RString("2");
+    private static final RString NUM_3 = new RString("3");
     private static final RString 項目名 = new RString("支払予定日印字有無");
 
     /**
@@ -305,9 +307,17 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         RDate 決定日 = div.getTxtKetteiymd().getValue();
         RString 文書番号 = div.getCcdBunshoBangoInput().get文書番号();
         YMDHMS 処理日時 = YMDHMS.now();
-        RString 日付選択区分 = div.getDdlInsho().getSelectedKey();
-        parameter.set日付選択区分(日付選択区分);
-        parameter.set受取年月(受取年月);
+        if (div.getRadUketoriYM().getSelectedKey().equals(KEY_0)) {
+            parameter.set日付選択区分(NUM_1);
+        }
+        if (div.getRadShinseiYMD().getSelectedKey().equals(KEY_0)) {
+            parameter.set日付選択区分(NUM_2);
+        } else {
+            parameter.set日付選択区分(NUM_3);
+        }
+        if (受取年月 != null) {
+            parameter.set受取年月(受取年月.getYearMonth());
+        }
         if (申請開始年月日 == null) {
             申請開始年月日 = RDate.MIN;
         }
