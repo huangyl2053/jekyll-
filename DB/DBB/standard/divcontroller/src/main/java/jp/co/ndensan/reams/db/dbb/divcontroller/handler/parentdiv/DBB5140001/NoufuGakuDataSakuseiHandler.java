@@ -107,10 +107,12 @@ public class NoufuGakuDataSakuseiHandler {
         } else if (STR_3.equals(集計日区分)) {
             抽出条件Row.getTxtShukeibiKbn().setValue(収入日);
         }
+        RString 市町村識別ID = new RString(STR_00.toString()
+                + 市町村セキュリティ情報.get市町村情報().get市町村識別ID().toString());
         RString 抽出期間終了補正 = DbBusinessConfig.get(ConfigNameDBB.納付額データ_抽出期間補正,
-                適用基準日, SubGyomuCode.DBB介護賦課);
+                適用基準日, SubGyomuCode.DBB介護賦課, 市町村識別ID);
         RString 抽出期間開始補正 = DbBusinessConfig.get(ConfigNameDBB.納付額データ_抽出期間補正,
-                適用基準日.plusYear(SUBCONTRACT_1), SubGyomuCode.DBB介護賦課);
+                適用基準日.plusYear(SUBCONTRACT_1), SubGyomuCode.DBB介護賦課, 市町村識別ID);
         抽出条件Row.setTxtCityCode(市町村セキュリティ情報.get市町村情報().get市町村コード().getColumnValue());
         抽出条件Row.setTxtCityName(市町村セキュリティ情報.get市町村情報().get市町村名称());
         抽出条件Row.setTxtCityShikibetsuId(市町村セキュリティ情報.get市町村情報().get市町村識別ID());
@@ -168,9 +170,10 @@ public class NoufuGakuDataSakuseiHandler {
                 処理対象.getTxtShukeibiKbn().setValue(収入日);
             }
             RString 抽出期間終了補正 = DbBusinessConfig.get(ConfigNameDBB.納付額データ_抽出期間補正,
-                    適用基準日, SubGyomuCode.DBB介護賦課, 構成市町村.get市町村識別ID());
+                    適用基準日, SubGyomuCode.DBB介護賦課, new RString(STR_00 + 構成市町村.get市町村識別ID().toString()));
             RString 抽出期間開始補正 = DbBusinessConfig.get(ConfigNameDBB.納付額データ_抽出期間補正,
-                    適用基準日.plusYear(SUBCONTRACT_1), SubGyomuCode.DBB介護賦課, 構成市町村.get市町村識別ID());
+                    適用基準日.plusYear(SUBCONTRACT_1), SubGyomuCode.DBB介護賦課,
+                    new RString(STR_00 + 構成市町村.get市町村識別ID().toString()));
             処理対象.getTxtKikanStHosei().setValue(抽出期間開始補正);
             処理対象.getTxtKikanEdHosei().setValue(抽出期間終了補正);
             RString key = new RString(構成市町村.get市町村コード().getColumnValue().toString()

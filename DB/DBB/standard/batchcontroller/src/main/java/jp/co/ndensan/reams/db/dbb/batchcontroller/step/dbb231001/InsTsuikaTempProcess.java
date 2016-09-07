@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -47,8 +46,6 @@ public class InsTsuikaTempProcess extends BatchKeyBreakBase<TokuChoSoufuJohoSaku
     private static final RString SQLPATH101202 = new RString("selectUe10122T0511NenkinTokuchoKaifuJohotemp");
     private static final RString SQLPATH0406 = new RString("select46UeT0511NenkinTokuchoKaifuJohotemp");
     private static final RString SQLPATH08 = new RString("select8UeT0511NenkinTokuchoKaifuJohotemp");
-    private static final RString GENERICKEY = new RString("UeT1704KaigoTokuchoTorikomiRireki_renban");
-    private final FlexibleYear 年度 = new FlexibleYear("0000");
     private TokuchoSeidokanIFSakuseiDBUpdateProcessParameter parameter;
     private RDateTime システム日時;
     private int 特徴開始月数;
