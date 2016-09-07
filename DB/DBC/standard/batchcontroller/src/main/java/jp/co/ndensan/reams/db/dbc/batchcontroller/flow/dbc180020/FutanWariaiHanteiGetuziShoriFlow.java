@@ -51,7 +51,7 @@ public class FutanWariaiHanteiGetuziShoriFlow
         service = RiyoshaFutanWariaiHantei.createInstance();
         util = new RiyoshaFutanWariaiHanteiUtil();
         RYear nendo = util.getFlexibleYearRYear(getParameter().getTaishoNendo());
-        getParameter().setHanteiKijunbi(service.getHanteiKijunbi(
+        getParameter().setHanteiKijunbi(service.getHanteiKijunbiNoEmpty(
                 util.getFlexibleDateString(getParameter().getKijunbi())));
         getParameter().setTaishoGetsu(service.initializeTaishoGetsu());
         getParameter().set対象開始日(service.getTaishoKaishibi(nendo));
