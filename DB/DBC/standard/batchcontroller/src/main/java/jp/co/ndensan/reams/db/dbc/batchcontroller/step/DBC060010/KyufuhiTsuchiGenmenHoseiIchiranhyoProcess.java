@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060010;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -48,12 +49,14 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC060010"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final RString 広域の全市町村_KEY = new RString("000000");
     private KyufuTsuchiGenmenHoseiProcessParameter processParameter;
     private FileSpoolManager manager;
     private RString eucFilePath;
     private RString spoolWorkPath;
     private RString 市町村コード = RString.EMPTY;
     private List<RString> 市町村コードList;
+    private RString 地方公共団体コード;
     @BatchWriter
     private CsvWriter<KyufuTsuchiGenmenHoseiCsvEntity> eucCsvWriter;
     private BatchReportWriter<KyufuhiTuchiGenmenhoseiIchiranReportSource> reportWriter;
@@ -71,6 +74,7 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
             }
         });
         市町村コード = 市町村コードList.get(0);
+        地方公共団体コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().value();
         RStringBuilder filePath = new RStringBuilder();
         filePath.append("KyufuhiTuchiGenmenhoseiIchiran_");
         filePath.append(市町村コードList.get(0));
@@ -90,7 +94,7 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.UTF_8).
                 setNewLine(NewLine.CRLF).
-                hasHeader(true).
+                hasHeader(false).
                 build();
         reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200043.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter<>(reportWriter);
@@ -111,13 +115,16 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
 
     private void get給付費通知減免補正一覧表のCSV出力(KyufuTsuchiGenmenHoseiEntity entity) {
         RStringBuilder filePath = new RStringBuilder();
-        if (!市町村コード.equals(entity.getShokisaiHokenshaNo().value())) {
+        if (is広域の全市町村()) {
+            if (広域の全市町村_KEY.equals(市町村コード)) {
+                市町村コード = 地方公共団体コード;
+                eucCsvWriter.close();
+                setCreateCSV(filePath);
+            }
+        } else if (!市町村コード.equals(entity.getShokisaiHokenshaNo().value())) {
             市町村コード = entity.getShokisaiHokenshaNo().value();
             eucCsvWriter.close();
-            filePath.append("KyufuhiTuchiGenmenhoseiIchiran_");
-            filePath.append(entity.getHiHokenshaNo().value());
-            filePath.append(".csv");
-            setFilePath(filePath);
+            setCreateCSV(filePath);
         }
         eucCsvWriter.writeLine(
                 new KyufuTsuchiGenmenHoseiCsvEntity(
@@ -131,6 +138,21 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
                         entity.getRiyoshaFutangaku(),
                         entity.getServiceShuruiMeisho())
         );
+    }
+
+    private void setCreateCSV(RStringBuilder filePath) {
+        filePath.append("KyufuhiTuchiGenmenhoseiIchiran_");
+        filePath.append(市町村コード);
+        filePath.append(".csv");
+        boolean delFlag = true;
+        File tmpfile = new File("KyufuhiTuchiGenmenhoseiIchiran_000000.csv");
+        if (tmpfile.exists()) {
+            delFlag = tmpfile.delete();
+        }
+        delFlag = true;
+        if (delFlag) {
+            setFilePath(filePath);
+        }
     }
 
     private void setFilePath(RStringBuilder filePath) {
@@ -151,5 +173,13 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
         KyufuhiTuchiGenmenhoseiIchiranEntity reportEntity = business.get給付費通知減免補正一覧表の帳票情報(entity, 保険者コード, 保険者名);
         KyufuhiTuchiGenmenhoseiIchiranReport report = new KyufuhiTuchiGenmenhoseiIchiranReport(reportEntity);
         report.writeBy(reportSourceWriter);
+    }
+
+    private boolean is広域の全市町村() {
+        if (広域の全市町村_KEY.equals(市町村コードList.get(0))) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
