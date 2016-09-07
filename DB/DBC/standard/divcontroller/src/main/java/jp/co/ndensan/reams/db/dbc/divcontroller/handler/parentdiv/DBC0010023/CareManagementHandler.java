@@ -259,7 +259,7 @@ public class CareManagementHandler {
 
     /**
      *
-     * 制御性设定
+     * 制御性設定です。
      *
      * @param 識別番号管理データ 識別番号
      * @param サービス提供年月 サービス提供年月
