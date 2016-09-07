@@ -714,8 +714,8 @@ public class DBD1030001Handler {
     }
 
     private ShakaifukuRiyoshaFutanKeigen get社会福祉法人等利用者負担軽減申請の情報From画面(
-            boolean is新规, int 履歴番号, RString 決定区分, ShoKisaiHokenshaNo 証記載保険者番号, Integer 追加履歴番号, HihokenshaNo 被保険者番号) {
-        if (is新规 && (null == 追加履歴番号 || 追加履歴番号 == 0)) {
+            boolean is新規, int 履歴番号, RString 決定区分, ShoKisaiHokenshaNo 証記載保険者番号, Integer 追加履歴番号, HihokenshaNo 被保険者番号) {
+        if (is新規 && (null == 追加履歴番号 || 追加履歴番号 == 0)) {
             追加履歴番号 = -1;
         } else {
             追加履歴番号 = 履歴番号;
