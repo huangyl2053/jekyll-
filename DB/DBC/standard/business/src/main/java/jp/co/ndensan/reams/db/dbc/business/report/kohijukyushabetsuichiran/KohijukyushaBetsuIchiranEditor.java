@@ -54,7 +54,7 @@ public class KohijukyushaBetsuIchiranEditor implements IKohijukyushaBetsuIchiran
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), business.get被保険者番号());
         source.printTimeStamp = get印刷日時(business.get作成日時());
-        if (business.get審査年月() != null) {
+        if (!RString.isNullOrEmpty(business.get審査年月())) {
             source.shinsaYM = new FlexibleDate(business.get審査年月()).wareki().eraType(EraType.KANJI_RYAKU)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).getYearMonth();
         }
@@ -63,19 +63,19 @@ public class KohijukyushaBetsuIchiranEditor implements IKohijukyushaBetsuIchiran
         source.kohiFutanshaName = business.get公費負担者名();
         set並び順と改頁(source);
         source.listUpper_1 = business.get公費受給者番号();
-        if (business.getサービス提供年月() != null) {
+        if (!RString.isNullOrEmpty(business.getサービス提供年月())) {
             source.listUpper_2 = new FlexibleDate(business.getサービス提供年月())
                     .wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
         }
         source.listUpper_3 = business.get事業所番号();
         source.listLower_1 = business.get事業所名();
-        if (business.getサービス種類名() != null && business.getサービス種類名().length() > INDEX) {
+        if (!RString.isNullOrEmpty(business.getサービス種類名()) && business.getサービス種類名().length() > INDEX) {
             source.listUpper_4 = business.getサービス種類名().substring(0, INDEX);
             source.listLower_2 = business.getサービス種類名().substring(INDEX, business.getサービス種類名().length());
         } else {
             source.listUpper_4 = business.getサービス種類名();
         }
-        if (business.getサービス項目名() != null && business.getサービス項目名().length() > INDEX) {
+        if (!RString.isNullOrEmpty(business.getサービス項目名()) && business.getサービス項目名().length() > INDEX) {
             source.listUpper_4 = business.getサービス項目名().substring(0, INDEX);
             source.listLower_3 = business.getサービス項目名().substring(INDEX, business.getサービス項目名().length());
         } else {
