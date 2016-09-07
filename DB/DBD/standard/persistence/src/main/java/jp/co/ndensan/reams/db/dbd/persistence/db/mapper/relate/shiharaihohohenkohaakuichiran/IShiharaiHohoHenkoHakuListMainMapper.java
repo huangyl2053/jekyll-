@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  * 支払方法変更滞納者把握情報取得クラスです．
  *
- * @reamsid_L DBD-36500-040 x_lilh
+ * @reamsid_L DBD-3650-040 x_lilh
  */
 public interface IShiharaiHohoHenkoHakuListMainMapper {
 
