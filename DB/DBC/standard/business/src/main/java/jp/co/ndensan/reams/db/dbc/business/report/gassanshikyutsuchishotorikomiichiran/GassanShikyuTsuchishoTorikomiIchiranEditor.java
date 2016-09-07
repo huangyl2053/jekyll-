@@ -37,7 +37,7 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
-    private static final RString 支給 = new RString("1");
+    private static final RString 支給 = new RString("0");
     private static final RString 窓口払 = new RString("1");
     private static final RString 口座払 = new RString("2");
     private static final RString 日時作成 = new RString("作成");
@@ -198,16 +198,17 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
         sakuseiYMD.append(RString.HALF_SPACE);
         sakuseiYMD.append(kaishiTime.toFormattedTimeString(DisplayTimeFormat.HH_mm));
         sakuseiYMD.append(接続文字);
-        sakuseiYMD.append(shuryoYMD.wareki().
-                eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).fillType(FillType.BLANK).
-                toDateString());
-        sakuseiYMD.append(左カッコ);
-        sakuseiYMD.append(shuryoYMD.getDayOfWeek().getShortTerm());
-        sakuseiYMD.append(右カッコ);
-        sakuseiYMD.append(RString.HALF_SPACE);
-        sakuseiYMD.append(shuryoTime.toFormattedTimeString(DisplayTimeFormat.HH_mm));
-
+        if (shuryoYMD != null && !shuryoYMD.isEmpty()) {
+            sakuseiYMD.append(shuryoYMD.wareki().
+                    eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.PERIOD).fillType(FillType.BLANK).
+                    toDateString());
+            sakuseiYMD.append(左カッコ);
+            sakuseiYMD.append(shuryoYMD.getDayOfWeek().getShortTerm());
+            sakuseiYMD.append(右カッコ);
+            sakuseiYMD.append(RString.HALF_SPACE);
+            sakuseiYMD.append(shuryoTime.toFormattedTimeString(DisplayTimeFormat.HH_mm));
+        }
         return sakuseiYMD.toRString();
     }
 

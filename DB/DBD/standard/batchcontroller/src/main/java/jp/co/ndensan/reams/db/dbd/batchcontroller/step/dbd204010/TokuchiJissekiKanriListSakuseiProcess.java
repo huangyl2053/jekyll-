@@ -132,26 +132,37 @@ public class TokuchiJissekiKanriListSakuseiProcess extends BatchProcessBase<Toku
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append(対象年月);
-        builder.append(parameter.get対象年月());
+        if (parameter.get対象年月() != null) {
+            builder.append(parameter.get対象年月());
+        }
+
         出力条件.add(builder.toRString());
         builder.append(年月範囲);
         builder.append(new RString(parameter.get年月範囲の開始().toString()));
         builder.append(カラ);
         builder.append(new RString(parameter.get年月範囲の終了().toString()));
         出力条件.add(builder.toRString());
-        builder.append(事業者番号);
-        builder.append(new RString(parameter.get事業者番号().toString()));
+
+        if (!parameter.get事業者番号().isNullOrEmpty()) {
+            builder.append(事業者番号);
+            builder.append(new RString(parameter.get事業者番号().toString()));
+        }
+
         出力条件.add(builder.toRString());
-        if (parameter.get市町村コード().isEmpty()) {
+        if (parameter.get市町村コード() == null || parameter.get市町村コード().isEmpty()) {
             builder.append(地区種類);
             builder.append(parameter.get地区コード種類());
             出力条件.add(builder.toRString());
             builder.append(地区範囲);
-            builder.append(parameter.get開始地区コード());
+            if (parameter.get開始地区コード() != null && !parameter.get開始地区コード().isEmpty()) {
+                builder.append(parameter.get開始地区コード());
+            }
             builder.append(カラ);
-            builder.append(parameter.get終了地区コード());
+            if (parameter.get終了地区コード() != null && !parameter.get終了地区コード().isEmpty()) {
+                builder.append(parameter.get終了地区コード());
+            }
             出力条件.add(builder.toRString());
-        } else if (!parameter.get市町村コード().isEmpty()) {
+        } else if (parameter.get市町村コード() != null && !parameter.get市町村コード().isEmpty()) {
             builder.append(市町村コード);
             builder.append(new RString(parameter.get市町村コード().toString()));
             出力条件.add(builder.toRString());

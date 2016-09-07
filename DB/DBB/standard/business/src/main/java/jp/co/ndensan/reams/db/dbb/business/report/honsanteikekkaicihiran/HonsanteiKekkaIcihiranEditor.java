@@ -422,6 +422,9 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
 
     private void kozaJoho(HonsanteiKekkaIcihiranReportSource source, KeisangojohoAtenaKozaEntity entity) {
         KozaRelateEntity releteEntity = entity.get口座Entity();
+        if (releteEntity == null) {
+            return;
+        }
         IKoza koza = new Koza(releteEntity);
         if (koza.get金融機関コード() != null) {
             if (koza.get金融機関コード().value().length() >= NUM_4 && ゆうちょ銀行
@@ -554,9 +557,15 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
     private void set月別取得段階(KeisangojohoAtenaKozaEntity entity, HonsanteiKekkaIcihiranReportSource source) {
         RString 更正前後区分 = entity.get更正前後区分();
         FlexibleYearMonth 月割開始年月1 = entity.get月割開始年月1();
-        int 開始月1 = 月割開始年月1.getMonthValue();
+        int 開始月1 = 0;
+        if (月割開始年月1 != null) {
+            開始月1 = 月割開始年月1.getMonthValue();
+        }
         FlexibleYearMonth 月割終了年月1 = entity.get月割終了年月1();
-        int 終了月1 = 月割終了年月1.getMonthValue();
+        int 終了月1 = 0;
+        if (月割終了年月1 != null) {
+            終了月1 = 月割終了年月1.getMonthValue();
+        }
         if (entity.get保険料算定段階1().length() >= NUM_2) {
             RString 保険料算定段階1 = entity.get保険料算定段階1().substring(NUM_0, NUM_2).trimStart(CHAR_0);
             set月別取得段階(source, 開始月1, 終了月1, 保険料算定段階1, 更正前後区分);

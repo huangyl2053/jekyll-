@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushateiseirenrakuhyotorokumanager.JukyushaTeiseiRenrakuhyoTorokuManagerResult;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3001JukyushaIdoRenrakuhyoDac;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzWarningMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -107,12 +106,12 @@ public class JukyushaTeiseiRenrakuhyoTorokuManager {
                 && minRirekiNoの受給者異動送付 != null
                 && (TWO.equals(minRirekiNoの受給者異動送付.getIdoKubunCode())
                 || THREE.equals(minRirekiNoの受給者異動送付.getIdoKubunCode()))) {
-            result.set警告メッセージコード(new RString(DbzWarningMessages.確認.getMessage().getCode()));
+            result.set警告メッセージコード_新規(TWO);
         } else if (THREE.equals(受給者訂正連絡票登録画面Div.get訂正区分コード())
                 && THREE.equals(受給者訂正連絡票登録画面Div.get異動区分コード())
                 && minRirekiNoの受給者異動送付 != null
                 && ONE.equals(minRirekiNoの受給者異動送付.getIdoKubunCode())) {
-            result.set警告メッセージコード(new RString(DbzWarningMessages.確認.getMessage().getCode()));
+            result.set警告メッセージコード_終了(TWO);
         }
     }
 }

@@ -51,7 +51,7 @@ public class HanyoListBachParamHandler {
      *
      */
     public void onLoad() {
-        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701021.getReportId());
+        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC7210001.getReportId());
         manager = KaigoDonyuKeitaiManager.createInstance();
         List<KaigoDonyuKeitai> list = manager.get介護導入形態By業務分類(GyomuBunrui.介護事務);
         if (list.get(0).get導入形態コード().is単一()) {

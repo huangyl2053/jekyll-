@@ -14,7 +14,11 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.Breakers;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 高額介護サービス費給付対象者一覧表帳票のプロパティです。
@@ -102,6 +106,26 @@ public class KogakuKyufuTaishoshaIchiranProperty extends ReportPropertyBase<Koga
             帳票物理名 = new RString(KogakuKyufuTaishoshaIchiranSource.ReportSourceFields.listUpper_1.name());
         }
         return 帳票物理名;
+    }
+
+    @Override
+    public Breakers<KogakuKyufuTaishoshaIchiranSource> defineBreakers(
+            Breakers<KogakuKyufuTaishoshaIchiranSource> breakers,
+            BreakerCatalog<KogakuKyufuTaishoshaIchiranSource> catalog) {
+        return breakers.add(catalog.new SimplePageBreaker(
+
+            pageBreakKeys) {
+            @Override
+            public ReportLineRecord<KogakuKyufuTaishoshaIchiranSource> occuredBreak(
+                    ReportLineRecord<KogakuKyufuTaishoshaIchiranSource> currentRecord,
+                    ReportLineRecord<KogakuKyufuTaishoshaIchiranSource> nextRecord,
+                    ReportDynamicChart dynamicChart) {
+                if (nextRecord == ReportLineRecord.LAST_RECORD) {
+                    return currentRecord;
+                }
+                return currentRecord;
+            }
+        }).fixed();
     }
 
     /**
