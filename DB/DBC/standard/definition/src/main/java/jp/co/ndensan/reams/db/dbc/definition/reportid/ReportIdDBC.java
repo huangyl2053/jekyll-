@@ -16,6 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBC {
 
     /**
+     * 利用状況統計表
+     */
+    DBC300005(new ReportId("DBC300005_RiyoJokyoTokeihyo"), new RString("利用状況統計表")),
+    /**
      * 受給者給付実績一覧表
      */
     DBC200002(new ReportId("DBC200002_JukyushaKyufuJissekiIchiran"),
