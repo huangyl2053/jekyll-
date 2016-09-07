@@ -41,8 +41,8 @@ public enum NoufuGakuDataSakuseiSpec implements IPredicate<NoufuGakuDataSakuseiD
 
     private static class SpecHelper {
 
-        private static final int INT99 = 99;
-        private static final int INT_99 = -99;
+        private static final int INT100 = 100;
+        private static final int INT_100 = -100;
 
         /**
          * 入力された値が、-99～+99までに収まっているかをチェックする。
@@ -85,7 +85,7 @@ public enum NoufuGakuDataSakuseiSpec implements IPredicate<NoufuGakuDataSakuseiD
 
         private static boolean check範囲(RString 抽出終了) {
             Integer 抽出終了補正 = Integer.valueOf(抽出終了.toString());
-            return (INT_99 < 抽出終了補正 && 抽出終了補正 < INT99);
+            return (INT_100 < 抽出終了補正 && 抽出終了補正 < INT100);
         }
     }
 }
