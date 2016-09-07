@@ -4,7 +4,7 @@
 <!-- @reamsid_L DBC-2260-030 xuyongchao -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufuhigenmenjyouhouregister.Ikyufuhigenmenjyouhouregister">
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufuhigenmenjyouhouregister.IkyufuhigenmenjyouhouregisterMapper">
     
     <select resultOrdered="true" id="getGenmenJyouhou" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhigenmenjyouhouregister.KyufuhigenmenjyouhouregisterParameter" 

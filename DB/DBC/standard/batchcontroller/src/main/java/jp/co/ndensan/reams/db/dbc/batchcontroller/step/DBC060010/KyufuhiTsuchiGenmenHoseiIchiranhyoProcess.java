@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kaigojuminhyo.KyufuTsuchiGenmenHose
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchigenmenhoseiichiran.KyufuhiTuchiGenmenhoseiIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufutsuchigenmenhosei.KyufuTsuchiGenmenHoseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kyufuhituchigenmenhoseiichiran.KyufuhiTuchiGenmenhoseiIchiranReportSource;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -53,8 +52,8 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
     private FileSpoolManager manager;
     private RString eucFilePath;
     private RString spoolWorkPath;
-    private HokenshaNo 市町村コード = HokenshaNo.EMPTY;
-    private List<HokenshaNo> 市町村コードList;
+    private RString 市町村コード = RString.EMPTY;
+    private List<RString> 市町村コードList;
     @BatchWriter
     private CsvWriter<KyufuTsuchiGenmenHoseiCsvEntity> eucCsvWriter;
     private BatchReportWriter<KyufuhiTuchiGenmenhoseiIchiranReportSource> reportWriter;
@@ -65,16 +64,16 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         spoolWorkPath = manager.getEucOutputDirectry();
         市町村コードList = processParameter.get市町村コードList();
-        Collections.sort(市町村コードList, new Comparator<HokenshaNo>() {
+        Collections.sort(市町村コードList, new Comparator<RString>() {
             @Override
-            public int compare(HokenshaNo entity1, HokenshaNo entity2) {
-                return entity1.value().compareTo(entity2.value());
+            public int compare(RString entity1, RString entity2) {
+                return entity1.compareTo(entity2);
             }
         });
         市町村コード = 市町村コードList.get(0);
         RStringBuilder filePath = new RStringBuilder();
         filePath.append("KyufuhiTuchiGenmenhoseiIchiran_");
-        filePath.append(市町村コードList.get(0).value());
+        filePath.append(市町村コードList.get(0));
         filePath.append(".csv");
         eucFilePath = Path.combinePath(spoolWorkPath, filePath.toRString());
     }
@@ -112,8 +111,8 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
 
     private void get給付費通知減免補正一覧表のCSV出力(KyufuTsuchiGenmenHoseiEntity entity) {
         RStringBuilder filePath = new RStringBuilder();
-        if (!市町村コード.equals(entity.getShokisaiHokenshaNo())) {
-            市町村コード = entity.getShokisaiHokenshaNo();
+        if (!市町村コード.equals(entity.getShokisaiHokenshaNo().value())) {
+            市町村コード = entity.getShokisaiHokenshaNo().value();
             eucCsvWriter.close();
             filePath.append("KyufuhiTuchiGenmenhoseiIchiran_");
             filePath.append(entity.getHiHokenshaNo().value());

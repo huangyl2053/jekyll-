@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhigenmenjyouhouregi
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhigenmenjyouhouregister.KyufuhigenmenjyouhouregisterParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhigenmenjyouhouregister.KyufuJissekiJyouhouEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhigenmenjyouhouregister.KyufuhigenmenjyouhouRegisterEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufuhigenmenjyouhouregister.Ikyufuhigenmenjyouhouregister;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufuhigenmenjyouhouregister.IkyufuhigenmenjyouhouregisterMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -70,7 +70,7 @@ public class KyufuhigenmenjyouhouRegisterManager {
     @Transaction
     public SearchResult<KyufuhigenmenjyouhouRegisterResult> getGenmenJyouhou(KyufuhigenmenjyouhouregisterParameter parameter) {
         requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage(REPLACED_MESSAGE.toString()));
-        Ikyufuhigenmenjyouhouregister mapper = mapperProvider.create(Ikyufuhigenmenjyouhouregister.class);
+        IkyufuhigenmenjyouhouregisterMapper mapper = mapperProvider.create(IkyufuhigenmenjyouhouregisterMapper.class);
         List<KyufuhigenmenjyouhouRegisterEntity> entityList = mapper.getGenmenJyouhou(parameter);
         if (entityList == null || entityList.isEmpty()) {
             return SearchResult.of(Collections.<KyufuhigenmenjyouhouRegisterResult>emptyList(), 0, false);
@@ -90,7 +90,7 @@ public class KyufuhigenmenjyouhouRegisterManager {
     @Transaction
     public void regGenmenJyouhou(GenmenJyouhouParameter parameter) {
         requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage(REPLACED_MESSAGE.toString()));
-        Ikyufuhigenmenjyouhouregister mapper = mapperProvider.create(Ikyufuhigenmenjyouhouregister.class);
+        IkyufuhigenmenjyouhouregisterMapper mapper = mapperProvider.create(IkyufuhigenmenjyouhouregisterMapper.class);
         if (parameter.getState().equals(STATE_INSERT)) {
             mapper.insertGenmenJyouhou(parameter);
         } else if (parameter.getState().equals(STATE_UPDATE)) {
@@ -109,7 +109,7 @@ public class KyufuhigenmenjyouhouRegisterManager {
     @Transaction
     public boolean isKyufuJissekiJyouhou(GenmenJyouhouParameter parameter) {
         requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage(REPLACED_MESSAGE.toString()));
-        Ikyufuhigenmenjyouhouregister mapper = mapperProvider.create(Ikyufuhigenmenjyouhouregister.class);
+        IkyufuhigenmenjyouhouregisterMapper mapper = mapperProvider.create(IkyufuhigenmenjyouhouregisterMapper.class);
         KyufuJissekiJyouhouEntity entity = mapper.checkKyufuJissekiJyouhou(parameter);
         return entity.is存在();
     }

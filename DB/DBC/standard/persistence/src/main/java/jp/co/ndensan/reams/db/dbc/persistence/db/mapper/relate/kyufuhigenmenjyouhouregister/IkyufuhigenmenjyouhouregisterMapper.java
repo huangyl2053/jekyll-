@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhigenmenjyouhouregister.
  *
  * @reamsid_L DBC-2260-030 xuyongchao
  */
-public interface Ikyufuhigenmenjyouhouregister {
+public interface IkyufuhigenmenjyouhouregisterMapper {
 
     /**
      * 検索条件より、適当な条件を連結して、減免補正情報の取得。
