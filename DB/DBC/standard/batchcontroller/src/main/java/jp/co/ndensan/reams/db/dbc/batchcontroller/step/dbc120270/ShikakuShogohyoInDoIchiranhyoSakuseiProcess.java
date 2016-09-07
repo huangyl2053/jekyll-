@@ -366,9 +366,9 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
             csvEntity.set利用者負担額(decimal_to_string(entity.get資格照合表一時().getRiyoshaFutanGaku()));
         }
         if (entity.get資格照合表一時().getTanisuTanka().
-                divide(NUM_100).roundHalfUpTo(NUM_2) != null) {
-            csvEntity.set単位数単価(decimal_to_string(entity.get資格照合表一時().getTanisuTanka().
-                    divide(NUM_100).roundHalfUpTo(NUM_2)));
+                divide(NUM_100).roundHalfUpTo(NUM_2).toString() != null) {
+            csvEntity.set単位数単価(new RString(entity.get資格照合表一時().getTanisuTanka().
+                    divide(NUM_100).roundHalfUpTo(NUM_2).toString()));
         }
         if (entity.get資格照合表一時().getKyojuhiFutanGendoGaku1() != null) {
             csvEntity.set居住費負担限度額_ユニット型個室(decimal_to_string(entity.get資格照合表一時().getKyojuhiFutanGendoGaku1()));
