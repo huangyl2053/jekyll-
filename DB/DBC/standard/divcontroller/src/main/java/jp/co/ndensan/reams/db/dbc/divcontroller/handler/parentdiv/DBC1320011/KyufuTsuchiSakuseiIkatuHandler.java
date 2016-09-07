@@ -170,7 +170,7 @@ public class KyufuTsuchiSakuseiIkatuHandler {
         parameter.set帳票ＩＤ３(給付費通知書_シーラタイプ);
         parameter.set帳票ＩＤ４(給付費通知発行一覧表);
         parameter.set帳票ＩＤ５(給付費通知書３_A4縦_福祉用具貸与品目ページ);
-        // TODO 出力顺の相関方針が確定しないので、実装ができません
+        // TODO 出力順の相関方針が確定しないので、実装ができません
         parameter.set文書番号(div.getKyufuTsuchiSakuseiPrint().getCcdBunsyobango().get文書番号());
         return parameter;
     }
