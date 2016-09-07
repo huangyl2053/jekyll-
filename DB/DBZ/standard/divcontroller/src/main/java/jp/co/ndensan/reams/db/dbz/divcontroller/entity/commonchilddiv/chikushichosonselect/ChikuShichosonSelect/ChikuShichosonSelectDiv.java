@@ -7,9 +7,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chikushic
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -351,4 +354,38 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
         return this.getHdnTxtDonyuKeitaiCode();
     }
 
+    @Override
+    public void set選択対象(RString 選択対象) {
+        this.getDdlChiku().setSelectedKey(選択対象);
+    }
+
+    @Override
+    public void set選択結果(Map<RString, RString> 選択結果) {
+        if (選択結果 == null) {
+            return;
+        }
+        List<ddlCodeList_Row> dataSource = new ArrayList<>();
+        Set<Entry<RString, RString>> set = 選択結果.entrySet();
+        for (Entry<RString, RString> entry : set) {
+            ddlCodeList_Row row = new ddlCodeList_Row();
+            row.setCode(entry.getKey());
+            row.setName(entry.getValue());
+            dataSource.add(row);
+        }
+        this.getDdlCodeList().setDataSource(dataSource);
+    }
+
+    @Override
+    public void set市町村コード(RString 市町村コード) {
+        if (!RString.isNullOrEmpty(市町村コード)) {
+            this.getDdlShichoson().setSelectedKey(市町村コード);
+        }
+    }
+
+    @Override
+    public void set旧市町村コード(RString 旧市町村コード) {
+        if (!RString.isNullOrEmpty(旧市町村コード)) {
+            this.getDdlKyushichosonKoiki().setSelectedKey(旧市町村コード);
+        }
+    }
 }
