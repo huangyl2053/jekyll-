@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShikakuShogohyoInCsvEntity {
+public class ShikakuShogohyoInCsvEntity1 {
 
     @CsvField(order = 10, name = "審査年月")
     private RString 審査年月;
@@ -106,7 +106,5 @@ public class ShikakuShogohyoInCsvEntity {
     private RString 利用者負担額;
     @CsvField(order = 430, name = "食事標準負担額")
     private RString 食事標準負担額;
-    @CsvField(order = 440, name = "証記載保険者番号")
-    private RString 証記載保険者番号;
 
 }
