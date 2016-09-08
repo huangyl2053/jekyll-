@@ -5,8 +5,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7110001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -25,8 +23,6 @@ public class SaisinsaJohoChushutsuDiv extends Panel {
      */
     @JsonProperty("txtSabisuTeikyoNengetu")
     private TextBoxDateRange txtSabisuTeikyoNengetu;
-    @JsonProperty("ccdJigyoshaBango")
-    private ShisetsuJohoCommonChildDivDiv ccdJigyoshaBango;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,15 +46,6 @@ public class SaisinsaJohoChushutsuDiv extends Panel {
     @JsonProperty("txtSabisuTeikyoNengetu")
     public void setTxtSabisuTeikyoNengetu(TextBoxDateRange txtSabisuTeikyoNengetu) {
         this.txtSabisuTeikyoNengetu = txtSabisuTeikyoNengetu;
-    }
-
-    /*
-     * getccdJigyoshaBango
-     * @return ccdJigyoshaBango
-     */
-    @JsonProperty("ccdJigyoshaBango")
-    public IShisetsuJohoCommonChildDiv getCcdJigyoshaBango() {
-        return ccdJigyoshaBango;
     }
 
     // </editor-fold>

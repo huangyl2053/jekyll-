@@ -137,7 +137,7 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
                 導入団体クラス.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBB.DBB200031.getReportName(),
-                new RString(reportSourceWriter.pageCount().value()),
+                reportSourceWriter.pageCount().value() == 0 ? 定数_1 : new RString(reportSourceWriter.pageCount().value()),
                 csvOutFlag,
                 csvファイル名,
                 getOutputJokenhyoParam()

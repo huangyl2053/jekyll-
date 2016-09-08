@@ -85,12 +85,10 @@ public class HanyoListBachParamHandler {
             });
         }
         div.getDdlTaishoNendo().setDataSource(dataSource);
-        List<KeyValueDataSource> sourceLsit = new ArrayList<>();
-        KeyValueDataSource datesource = new KeyValueDataSource();
-        datesource.setKey(項目名付加);
-        datesource.setKey(日付_編集);
-        sourceLsit.add(datesource);
-        div.getChkCsvHenshuHoho().setSelectedItems(sourceLsit);
+        List<RString> ckboxlist = new ArrayList<>();
+        ckboxlist.add(項目名付加);
+        ckboxlist.add(日付_編集);
+        div.getChkCsvHenshuHoho().setSelectedItemsByKey(ckboxlist);
     }
 
     /**

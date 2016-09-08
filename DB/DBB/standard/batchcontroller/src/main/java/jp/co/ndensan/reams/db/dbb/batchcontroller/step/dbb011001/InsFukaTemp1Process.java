@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 賦課の情報一時テーブルに登録processクラスです。
  *
+ * @reamsid_L DBB-0700-010 xuhao
  */
 public class InsFukaTemp1Process extends BatchProcessBase<FukaJohoTempEntity> {
 
