@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.report.dbc100108;
 import jp.co.ndensan.reams.db.dbc.business.core.servicenokanribangourendou.JigyouKetteiTutisyoResult;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc100108.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc100108.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriReport;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicenokanribangourendou.JigyouKetteiTutisyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc100108.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -17,7 +18,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -37,8 +37,6 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  * @reamsid_L DBC-5160-040 donghj
  */
 public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriPrintService {
-
-    private static final ReportId 帳票ID = new ReportId("DBC100108_KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAri");
 
     /**
      * 帳票を出力
@@ -73,8 +71,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriPrintService {
                 = createAssembler(property, reportManager)) {
             ReportSourceWriter<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票ID);
-            NinshoshaSource 認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 帳票ID, 発行日,
+            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100108.getReportId());
+            NinshoshaSource 認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100108.getReportId(), 発行日,
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriReport report
                     = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriReport(決定通知書Entity, 帳票制御共通, 認証者情報);

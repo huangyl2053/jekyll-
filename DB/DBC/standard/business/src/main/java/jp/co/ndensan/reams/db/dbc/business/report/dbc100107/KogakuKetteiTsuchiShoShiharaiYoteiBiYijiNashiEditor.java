@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.chohyomongon.ChohyoMongonYoshi
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicenokanribangourendou.JigyouKetteiTutisyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc100107.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -20,17 +21,20 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiEditor implements IKog
 
     private final JigyouKetteiTutisyoEntity 決定通知書Entity;
     private final ChohyoSeigyoKyotsu 帳票制御共通;
+    private final NinshoshaSource 認証者情報;
 
     /**
      * インスタンスを生成します。
      *
      * @param 決定通知書Entity JigyouKetteiTutisyoEntity
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
+     * @param 認証者情報 NinshoshaSource
      */
     public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiEditor(JigyouKetteiTutisyoEntity 決定通知書Entity,
-            ChohyoSeigyoKyotsu 帳票制御共通) {
+            ChohyoSeigyoKyotsu 帳票制御共通, NinshoshaSource 認証者情報) {
         this.決定通知書Entity = 決定通知書Entity;
         this.帳票制御共通 = 帳票制御共通;
+        this.認証者情報 = 認証者情報;
     }
 
     @Override
@@ -90,15 +94,15 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiEditor implements IKog
     }
 
     private void setCompNinshosha(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource source) {
-        source.denshiKoin = 決定通知書Entity.get電子公印();
-        source.hakkoYMD = 決定通知書Entity.get発行日付();
-        source.koinMojiretsu = 決定通知書Entity.get公印文字列();
-        source.koinShoryaku = 決定通知書Entity.get公印書略();
-        source.ninshoshaShimeiKakenai = 決定通知書Entity.get認証者公印掛けない();
-        source.ninshoshaShimeiKakeru = 決定通知書Entity.get認証者公印掛ける();
-        source.ninshoshaYakushokuMei = 決定通知書Entity.get認証者役職名();
-        source.ninshoshaYakushokuMei1 = 決定通知書Entity.get認証者役職名1();
-        source.ninshoshaYakushokuMei2 = 決定通知書Entity.get認証者役職名2();
+        source.denshiKoin = 認証者情報.denshiKoin;
+        source.hakkoYMD = 認証者情報.hakkoYMD;
+        source.koinMojiretsu = 認証者情報.koinMojiretsu;
+        source.koinShoryaku = 認証者情報.koinShoryaku;
+        source.ninshoshaShimeiKakenai = 認証者情報.ninshoshaShimeiKakenai;
+        source.ninshoshaShimeiKakeru = 認証者情報.ninshoshaShimeiKakeru;
+        source.ninshoshaYakushokuMei = 認証者情報.ninshoshaYakushokuMei;
+        source.ninshoshaYakushokuMei1 = 認証者情報.ninshoshaYakushokuMei1;
+        source.ninshoshaYakushokuMei2 = 認証者情報.ninshoshaYakushokuMei2;
 
     }
 
