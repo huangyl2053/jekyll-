@@ -61,6 +61,19 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
     private static final RString 定数_旧措置者 = new RString("旧措置者");
     private static final RString 定数_みなし = new RString("みなし");
     private static final RString SLASH = new RString("/");
+    private static final RString 追加_認定 = new RString("認定　　　　　");
+    private static final RString 要介護度変更申請認定 = new RString("変更申請認定　");
+    private static final RString 要介護度変更申請却下 = new RString("変更申請却下　");
+    private static final RString サービス種類変更申請認定 = new RString("サ変更申請認定");
+    private static final RString サービス種類変更申請却下 = new RString("サ変更申請却下");
+    private static final RString 削除 = new RString("削除　　　　　");
+    private static final RString 修正 = new RString("修正　　　　　");
+    private static final RString 受給申請却下 = new RString("受給申請却下　");
+    private static final RString 削除回復 = new RString("削除回復　　　");
+    private static final RString 職権記載 = new RString("職権記載　　　");
+    private static final RString 職権修正 = new RString("職権修正　　　");
+    private static final RString 職権取消 = new RString("職権取消　　　");
+    private static final RString 履歴修正 = new RString("履歴修正　　　");
 
     private final HanyoListKyufuKanriHyoEntity entity;
     private final HanyoListKyufuKanriHyoProcessParameter param;
@@ -249,7 +262,7 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
                 csvEntity.set受給みなし更新認定(定数_みなし);
             }
             if (entity.get受給者台帳().getChokkinIdoJiyuCode() != null) {
-                csvEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(entity.get受給者台帳().getChokkinIdoJiyuCode().getColumnValue()).get名称());
+                csvEntity.set受給直近事由(set異動事由文言(entity.get受給者台帳().getChokkinIdoJiyuCode().getColumnValue()));
             }
         }
         csvEntity.set市町村コード(entity.get最新被保台帳().getShichosonCode().getColumnValue());
@@ -445,7 +458,7 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
                 csvEntity.set受給みなし更新認定(定数_みなし);
             }
             if (entity.get受給者台帳().getChokkinIdoJiyuCode() != null) {
-                csvEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(entity.get受給者台帳().getChokkinIdoJiyuCode().getColumnValue()).get名称());
+                csvEntity.set受給直近事由(set異動事由文言(entity.get受給者台帳().getChokkinIdoJiyuCode().getColumnValue()));
             }
         }
         csvEntity.set市町村コード(entity.get最新被保台帳().getShichosonCode().getColumnValue());
@@ -532,5 +545,42 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
             temp = temp.replace(SLASH, RString.EMPTY);
         }
         return temp;
+    }
+
+    private RString set異動事由文言(RString 異動事由コード) {
+        if (RString.isNullOrEmpty(異動事由コード)) {
+            return RString.EMPTY;
+        }
+        RString 直近異動事由 = ChokkinIdoJiyuCode.toValue(異動事由コード).get名称();
+        if (ChokkinIdoJiyuCode.未登録.get名称().equals(直近異動事由)) {
+            return RString.EMPTY;
+        } else if (ChokkinIdoJiyuCode.追加_認定.get名称().equals(直近異動事由)) {
+            return 追加_認定;
+        } else if (ChokkinIdoJiyuCode.要介護度変更申請認定.get名称().equals(直近異動事由)) {
+            return 要介護度変更申請認定;
+        } else if (ChokkinIdoJiyuCode.要介護度変更申請却下.get名称().equals(直近異動事由)) {
+            return 要介護度変更申請却下;
+        } else if (ChokkinIdoJiyuCode.サービス種類変更申請認定.get名称().equals(直近異動事由)) {
+            return サービス種類変更申請認定;
+        } else if (ChokkinIdoJiyuCode.サービス種類変更申請却下.get名称().equals(直近異動事由)) {
+            return サービス種類変更申請却下;
+        } else if (ChokkinIdoJiyuCode.削除.get名称().equals(直近異動事由)) {
+            return 削除;
+        } else if (ChokkinIdoJiyuCode.修正.get名称().equals(直近異動事由)) {
+            return 修正;
+        } else if (ChokkinIdoJiyuCode.受給申請却下.get名称().equals(直近異動事由)) {
+            return 受給申請却下;
+        } else if (ChokkinIdoJiyuCode.削除回復.get名称().equals(直近異動事由)) {
+            return 削除回復;
+        } else if (ChokkinIdoJiyuCode.職権記載.get名称().equals(直近異動事由)) {
+            return 職権記載;
+        } else if (ChokkinIdoJiyuCode.職権修正.get名称().equals(直近異動事由)) {
+            return 職権修正;
+        } else if (ChokkinIdoJiyuCode.職権取消.get名称().equals(直近異動事由)) {
+            return 職権取消;
+        } else if (ChokkinIdoJiyuCode.履歴修正.get名称().equals(直近異動事由)) {
+            return 履歴修正;
+        }
+        return RString.EMPTY;
     }
 }
