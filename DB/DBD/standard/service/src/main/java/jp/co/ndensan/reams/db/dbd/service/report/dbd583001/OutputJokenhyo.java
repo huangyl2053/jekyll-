@@ -39,7 +39,7 @@ public class OutputJokenhyo {
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBD.DBD300005.getReportName(),
-                new RString("2ページ"),
+                new RString("2"),
                 new RString("なし"),
                 new RString("なし"),
                 contribute(parameter));

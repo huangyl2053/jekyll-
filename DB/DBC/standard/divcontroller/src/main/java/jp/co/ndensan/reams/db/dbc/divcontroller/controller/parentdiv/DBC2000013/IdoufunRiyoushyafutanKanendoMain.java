@@ -13,12 +13,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000013.Ido
 import jp.co.ndensan.reams.db.dbc.service.core.idoufunriyoushyafutankanendo.IdoufunRiyoushyafutanKanendoManager;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -54,21 +50,11 @@ public class IdoufunRiyoushyafutanKanendoMain {
      * @return ResponseData
      */
     public ResponseData<IdoufunRiyoushyafutanKanendoDiv> onClick_btnJikkouCheck(IdoufunRiyoushyafutanKanendoDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).実行するボタンを押下の存在チェック(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            ValidationMessageControlPairs validPairs = getValidationHandler(div).実行するボタンを押下の存在チェック(validationMessages);
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
-            }
-
-        }
-
         return ResponseData.of(div).respond();
     }
 

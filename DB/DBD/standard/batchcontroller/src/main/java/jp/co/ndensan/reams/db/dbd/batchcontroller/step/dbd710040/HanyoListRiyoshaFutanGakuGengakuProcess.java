@@ -98,7 +98,6 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBD701004");
     private static final RString 住所地特例 = new RString("住特");
-    private static final RString 区分_0 = new RString("0");
     private static final RString 区分_1 = new RString("1");
     private static final RString 区分_2 = new RString("2");
     private static final RString 区分_3 = new RString("3");
@@ -1248,7 +1247,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
         if (!RString.isNullOrEmpty(processParamter.getSoshitsukubun())
                 && !SoshitsuKubun.資格判定なし.getコード().equals(processParamter.getSoshitsukubun())) {
             builder.append(喪失区分);
-            builder.append(SoshitsuKubun.toValue(processParamter.getKyakasha()).get名称());
+            builder.append(SoshitsuKubun.toValue(processParamter.getSoshitsukubun()).get名称());
             builder.append(COMMA);
         }
         return builder.toRString();
