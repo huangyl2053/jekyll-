@@ -125,9 +125,15 @@ public class KijunShunyugakuTekiyoRenbanariProcess extends BatchProcessBase<Hany
     }
 
     private RString get出力件数(Decimal 出力件数) {
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(DecimalFormatter.toコンマ区切りRString(出力件数, 0));
-        return builder.toRString();
+        RString 件数;
+        if (flag) {
+            RStringBuilder builder = new RStringBuilder();
+            builder.append(DecimalFormatter.toコンマ区切りRString(出力件数, 0));
+            件数 = builder.toRString();
+        } else {
+            件数 = new RString("0");
+        }
+        return 件数;
     }
 
     private void get市町村名() {
