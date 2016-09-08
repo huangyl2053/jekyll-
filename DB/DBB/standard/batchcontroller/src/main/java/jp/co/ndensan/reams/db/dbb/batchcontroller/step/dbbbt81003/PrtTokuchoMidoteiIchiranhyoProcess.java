@@ -197,7 +197,7 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
                 entity.getFuichiRiyuCode()
         );
         TokubetsuChoshuMidoteiIchiranReport report = new TokubetsuChoshuMidoteiIchiranReport(
-                導入団体クラス, null, null, target, parameter.get特別徴収開始月());
+                導入団体クラス, null, null, target, null);
         report.writeBy(reportSourceWriter);
     }
 
