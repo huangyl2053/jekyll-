@@ -133,12 +133,12 @@ public class HanyoListKogakuGassanShinseishoProcess extends BatchProcessBase<Han
             IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
             IOutputOrder 出力順;
             出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
-                    ReportIdDBC.DBC701014.getReportId(), Long.valueOf(parameter.get出力順().toString()));
+                    ReportIdDBC.DBC701014.getReportId(), parameter.get出力順());
             if (出力順 != null) {
-                parameter.set出力順(MyBatisOrderByClauseCreator.create(
-                        HanyoListKogakuGassanShinseishoJohoProperty.DBC701014ShutsuryokujunEnum.class, 出力順));
+                parameter.set出力順(Long.valueOf(MyBatisOrderByClauseCreator.create(
+                        HanyoListKogakuGassanShinseishoJohoProperty.DBC701014ShutsuryokujunEnum.class, 出力順).toString()));
             } else {
-                parameter.set出力順(デフォルト出力順);
+                parameter.set出力順(Long.valueOf(デフォルト出力順.toString()));
             }
         }
         return new BatchDbReader(READ_DATA_ID, parameter.toMybatisParam());

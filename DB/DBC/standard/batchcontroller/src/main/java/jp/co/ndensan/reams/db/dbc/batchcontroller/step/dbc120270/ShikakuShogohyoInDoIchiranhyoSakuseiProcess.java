@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.shikakushogohyoin.Shikak
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shikakushogohyoin.ShikakuShogohyoInCsvEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shikakushogohyoin.ShikakuShogohyoInCsvEntity1;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shikakushogohyoin.ShikakuShogohyoInCsvEntitySingle;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shikakushogohyoin.ShikakuShogohyoInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.shikakushogohyo.ShikakuShogohyoSource;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
@@ -89,7 +89,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
     private final Set<RString> 識別コードset = new HashSet<>();
     private ShikakuShogohyoInDoIchiranhyoSakuseiProcessParameter parameter;
     private ShikakuShogohyoInCsvEntity csvEntity;
-    private ShikakuShogohyoInCsvEntity1 csvEntity1;
+    private ShikakuShogohyoInCsvEntitySingle csvEntity1;
     private List<ShikakuShogohyoInEntity> entityList;
     private List<RString> 改頁リスト;
     private final List<PersonalData> personalDataList = new ArrayList<>();
@@ -149,7 +149,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
                 setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 hasHeader(true).build();
-        eucCsvWriter1 = BatchWriters.csvWriter(ShikakuShogohyoInCsvEntity1.class).
+        eucCsvWriter1 = BatchWriters.csvWriter(ShikakuShogohyoInCsvEntitySingle.class).
                 filePath(eucFilePath).
                 setDelimiter(コンマ).
                 setEnclosure(ダブル引用符).
@@ -168,7 +168,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
         if (null != beforeEntity) {
             if (null == csvEntity) {
                 csvEntity = new ShikakuShogohyoInCsvEntity();
-                csvEntity1 = new ShikakuShogohyoInCsvEntity1();
+                csvEntity1 = new ShikakuShogohyoInCsvEntitySingle();
                 editヘッダー項目(currentRecord);
             }
             if (is改頁(beforeEntity, entity)) {
@@ -193,7 +193,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
         if (!entityList.isEmpty() && currentRecord != null) {
             if (1 == entityList.size()) {
                 csvEntity = new ShikakuShogohyoInCsvEntity();
-                csvEntity1 = new ShikakuShogohyoInCsvEntity1();
+                csvEntity1 = new ShikakuShogohyoInCsvEntitySingle();
                 editヘッダー項目(currentRecord);
             }
             edit明細項目(currentRecord);
@@ -303,7 +303,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
         report.writeBy(reportSourceWriter_一覧表);
     }
 
-    private void writeCsvLine(ShikakuShogohyoInCsvEntity entity, ShikakuShogohyoInCsvEntity1 entity1) {
+    private void writeCsvLine(ShikakuShogohyoInCsvEntity entity, ShikakuShogohyoInCsvEntitySingle entity1) {
         if (市町村セキュリティ情報.get導入形態コード().is広域()) {
             eucCsvWriter.writeLine(entity);
         } else {
@@ -319,11 +319,11 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
         }
         writeCsvLine(csvEntity, csvEntity1);
         csvEntity = new ShikakuShogohyoInCsvEntity();
-        csvEntity1 = new ShikakuShogohyoInCsvEntity1();
+        csvEntity1 = new ShikakuShogohyoInCsvEntitySingle();
     }
 
     private void edit明細項目1(ShikakuShogohyoInEntity entity) {
-        csvEntity.setNo(new RString(連番));
+        csvEntity.set連番(new RString(連番));
         if (entity.get被保険者一時() != null) {
             csvEntity.set被保険者氏名(entity.get被保険者一時().get宛名名称());
             csvEntity.set被保険者番号(entity.get被保険者一時().get登録被保険者番号().getColumnValue());
@@ -397,7 +397,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
     }
 
     private void edit明細項目2(ShikakuShogohyoInEntity entity) {
-        csvEntity.setNo(new RString(連番));
+        csvEntity.set連番(new RString(連番));
         if (entity.get被保険者一時() != null) {
             csvEntity1.set被保険者氏名(entity.get被保険者一時().get宛名名称());
             csvEntity1.set被保険者番号(entity.get被保険者一時().get登録被保険者番号().getColumnValue());
@@ -506,7 +506,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
         }
     }
 
-    private void editor編集1(ShikakuShogohyoInEntity entity, ShikakuShogohyoInCsvEntity1 csvEntity) {
+    private void editor編集1(ShikakuShogohyoInEntity entity, ShikakuShogohyoInCsvEntitySingle csvEntity) {
         if (entity.get資格照合表一時().getKohi1KyufuRitsu() != null) {
             csvEntity.set公費1給付率(decimal_to_string(entity.get資格照合表一時().getKohi1KyufuRitsu().getColumnValue()));
         }
@@ -565,7 +565,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
         if (null == 年月日) {
             return RString.EMPTY;
         }
-        return 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
+        return 年月日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
                 .fillType(FillType.BLANK).toDateString();
     }
 

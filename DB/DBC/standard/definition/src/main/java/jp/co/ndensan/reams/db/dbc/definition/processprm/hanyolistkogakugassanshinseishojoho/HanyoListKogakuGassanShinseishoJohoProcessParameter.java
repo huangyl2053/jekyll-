@@ -39,7 +39,7 @@ public class HanyoListKogakuGassanShinseishoJohoProcessParameter implements IBat
     private boolean 連番付加;
     private boolean 日付スラッシュ付加;
     private RString 保険者コード;
-    private RString 出力順;
+    private Long 出力順;
     private RString 出力項目;
     private IKozaSearchKey searchkey;
     private List<KamokuCode> list;
@@ -87,7 +87,7 @@ public class HanyoListKogakuGassanShinseishoJohoProcessParameter implements IBat
             boolean 連番付加,
             boolean 日付スラッシュ付加,
             RString 保険者コード,
-            RString 出力順,
+            Long 出力順,
             RString 出力項目,
             IKozaSearchKey searchkey,
             List<KamokuCode> list,

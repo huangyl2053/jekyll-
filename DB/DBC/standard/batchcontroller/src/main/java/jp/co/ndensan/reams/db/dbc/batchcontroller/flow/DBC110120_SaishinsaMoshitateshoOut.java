@@ -21,24 +21,42 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110120.SaishinsaMoshit
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110120.SaishinsaMoshitateGetShoKisaiHokenshaNameProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110120.SaishinsaMoshitateGetSoufuDataProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110120.SaishinsaMoshitateReadHokenshaNoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutDoErrorProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutGetBeforeKanyuYMDProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutGetHihokenshaAtenaProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutGetHihokenshaNameProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutGetHihokenshaNoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutGetOldHihokenshaNoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutListSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutSetHihokenshaNoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.saishinsamoshitateshouut.SaishinsaMoshitateshoOutSofuDataGetReturnEntity;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110120.DBC110120_SaishinsaMoshitateshoOutParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorListType;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetHihokenshaNoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hokenshakyufujissekiout.HokenshaKyufujissekiOutListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.saishinsamoshitateshoout.SaishinsaMoshitateDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.saishinsamoshitateshoout.SaishinsaMoshitateGetSoufuDataProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho.GappeiCityJohoBFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -52,20 +70,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBC110120_SaishinsaMoshitateshoOut extends BatchFlowBase<DBC110120_SaishinsaMoshitateshoOutParameter> {
 
     private static final String 送付対象データ取得 = "getSoufuData";
-    private static final String 新旧被保険者番号変換 = "doShinkyuHihokenshaNoHenkan";
-    private static final RString 新旧被保険者番号変換_ID = new RString("HokenshaKyufujissekiOutChangeHihokenshaNoFlow");
     private static final String 保険者番号取込 = "readHokenshaNo";
-    private static final String 宛名情報取得 = "getMeisyoJoho";
-    private static final RString 宛名情報取得_ID = new RString("HokenshaKyufujissekiOutHihokenshaAtenaFlow");
     private static final String 送付除外区分設定 = "doSofuJogaiFlagSettei";
     private static final String 保険者番号取得 = "getHokenshaNo";
     private static final String 送付ファイル作成 = "doSofuFileSakusei";
     private static final String 証記載保険者名取得 = "getShoKisaiHokenshaName";
     private static final String 介護事業者指定サービス名称取得 = "getShiteiServiceJigyoshaName";
     private static final String 介護事業者名称取得 = "getJigyoshaName";
+    private static final String 事業者名称エラー登録 = "doJigyoshaNameErrTouroku";
     private static final String サービス種類名称取得 = "getServiceTeikyoShuruiName";
     private static final String 介護サービス内容名称取得 = "getServiceNaiyouName";
     private static final String 特定診療サービスコード名称取得 = "getServiceCodeName";
+    private static final String サービス名称エラー登録 = "doServiceNameErrTouroku";
     private static final String 一覧表作成 = "doIchiranhyoSakusei";
     private static final String DB更新 = "doDBKoushin";
     private static final String 国保連インタフェース管理更新 = "doInterfaceKanriKousin";
@@ -77,6 +93,18 @@ public class DBC110120_SaishinsaMoshitateshoOut extends BatchFlowBase<DBC110120_
     private List<RString> hokenshaNoList = new ArrayList<>();
     private SaishinsaMoshitateshoOutSofuDataGetReturnEntity returnEntity;
     private SaishinsaMoshitateGetSoufuDataProcessParameter parameter;
+    private static final String 被保険者番号変換対象データの取得 = "getHihokenshaNoDataInformation";
+    private static final String 広域加入日以前のデータを取得 = "getHihokenshaNoBeforeKanyuYMDData";
+    private static final String 保険者番号の設定 = "setHihokenshaNo";
+    private static final String 旧被保険者番号の取得 = "getOldHihokenshaNo";
+    private static final String 保険者名の取得 = "getHihokenshaName";
+    private static final RString MSG_導入形態コード = new RString("導入形態コード");
+    private static final RString MSG_被保険者番号変換基準日の取得 = new RString("被保険者番号変換基準日の取得");
+    private FlowEntity flowEntity;
+    private DonyuKeitaiCode 導入形態コード;
+    private FlexibleDate 変換基準日;
+    private static final String 被保険者_宛名情報取得 = "getHihokenshaAtena";
+    private static final String エラー登録 = "doError";
 
     @Override
     protected void defineFlow() {
@@ -97,9 +125,9 @@ public class DBC110120_SaishinsaMoshitateshoOut extends BatchFlowBase<DBC110120_
             executeStep(国保連インタフェース管理更新);
             executeStep(処理結果リスト作成);
         } else {
-            executeStep(新旧被保険者番号変換);
+            doShinkyuHihokenshaNoHenkan();
             executeStep(保険者番号取込);
-            executeStep(宛名情報取得);
+            getMeisyoJoho();
             executeStep(送付除外区分設定);
             executeStep(保険者番号取得);
             hokenshaNoList = getResult(
@@ -117,9 +145,11 @@ public class DBC110120_SaishinsaMoshitateshoOut extends BatchFlowBase<DBC110120_
             executeStep(証記載保険者名取得);
             executeStep(介護事業者指定サービス名称取得);
             executeStep(介護事業者名称取得);
+            executeStep(事業者名称エラー登録);
             executeStep(サービス種類名称取得);
             executeStep(介護サービス内容名称取得);
             executeStep(特定診療サービスコード名称取得);
+            executeStep(サービス名称エラー登録);
             executeStep(一覧表作成);
             executeStep(DB更新);
             executeStep(国保連インタフェース管理更新);
@@ -138,16 +168,6 @@ public class DBC110120_SaishinsaMoshitateshoOut extends BatchFlowBase<DBC110120_
     }
 
     /**
-     * 新旧被保険者番号変換です。
-     *
-     * @return IBatchFlowCommand
-     */
-    @Step(新旧被保険者番号変換)
-    protected IBatchFlowCommand callDoShinkyuHihokenshaNoHenkanProcess() {
-        return otherBatchFlow(新旧被保険者番号変換_ID, SubGyomuCode.DBC介護給付, null).define();
-    }
-
-    /**
      * 保険者番号取込です。
      *
      * @return SaishinsaMoshitateReadHokenshaNoProcess
@@ -155,16 +175,6 @@ public class DBC110120_SaishinsaMoshitateshoOut extends BatchFlowBase<DBC110120_
     @Step(保険者番号取込)
     protected IBatchFlowCommand callReadHokenshaNoProcess() {
         return loopBatch(SaishinsaMoshitateReadHokenshaNoProcess.class).define();
-    }
-
-    /**
-     * 宛名情報取得です。
-     *
-     * @return IBatchFlowCommand
-     */
-    @Step(宛名情報取得)
-    protected IBatchFlowCommand callGetMeisyoJohoProcess() {
-        return otherBatchFlow(宛名情報取得_ID, SubGyomuCode.DBC介護給付, null).define();
     }
 
     /**
@@ -228,6 +238,16 @@ public class DBC110120_SaishinsaMoshitateshoOut extends BatchFlowBase<DBC110120_
     }
 
     /**
+     * 事業者名称エラー登録です。
+     *
+     * @return SaishinsaMoshitateGetJigyoshaNameProcess
+     */
+    @Step(事業者名称エラー登録)
+    protected IBatchFlowCommand callDoJigyoshaNameErrTourokuProcess() {
+        return loopBatch(SaishinsaMoshitateGetJigyoshaNameProcess.class).define();
+    }
+
+    /**
      * サービス種類名称取得です。
      *
      * @return SaishinsaMoshitateGetServiceTeikyoShuruiNameProcess
@@ -255,6 +275,16 @@ public class DBC110120_SaishinsaMoshitateshoOut extends BatchFlowBase<DBC110120_
     @Step(特定診療サービスコード名称取得)
     protected IBatchFlowCommand callGetServiceCodeNameProcess() {
         return loopBatch(SaishinsaMoshitateGetServiceCodeNameProcess.class).define();
+    }
+
+    /**
+     * サービス名称エラー登録です。
+     *
+     * @return SaishinsaMoshitateGetJigyoshaNameProcess
+     */
+    @Step(サービス名称エラー登録)
+    protected IBatchFlowCommand callDoServiceNameErrTourokuProcess() {
+        return loopBatch(SaishinsaMoshitateGetJigyoshaNameProcess.class).define();
     }
 
     /**
@@ -303,6 +333,161 @@ public class DBC110120_SaishinsaMoshitateshoOut extends BatchFlowBase<DBC110120_
         HokenshaKyufujissekiOutListSakuseiProcessParameter parameter = new HokenshaKyufujissekiOutListSakuseiProcessParameter();
         parameter.setエラーリストタイプ(KokuhorenJoho_SakuseiErrorListType.リストタイプ5);
         return loopBatch(HokenshaKyufujissekiOutListSakuseiProcess.class).arguments(parameter).define();
+    }
+
+    private void doShinkyuHihokenshaNoHenkan() {
+        this.getCityVillagesInformation();
+        this.getHihokenshaNoTimeInformation();
+        if (this.変換基準日.isEmpty()) {
+            executeStep(保険者番号の設定);
+        } else {
+            executeStep(被保険者番号変換対象データの取得);
+            flowEntity = (FlowEntity) getResult(FlowEntity.class, new RString(被保険者番号変換対象データの取得),
+                    HokenshaKyufujissekiOutGetHihokenshaNoProcess.PARAMETER_OUT_FLOWENTITY);
+            if (0 == flowEntity.getCodeNum()) {
+                executeStep(保険者番号の設定);
+            } else {
+                this.splitFlow();
+            }
+        }
+        executeStep(保険者名の取得);
+    }
+
+    private void splitFlow() {
+        if (導入形態コード.is単一()) {
+            executeStep(旧被保険者番号の取得);
+            executeStep(保険者番号の設定);
+
+        } else {
+            executeStep(広域加入日以前のデータを取得);
+            flowEntity = (FlowEntity) getResult(FlowEntity.class, new RString(広域加入日以前のデータを取得),
+                    HokenshaKyufujissekiOutGetBeforeKanyuYMDProcess.PARAMETER_OUT_FLOWENTITY);
+            if (0 == flowEntity.getCodeNum()) {
+                executeStep(保険者番号の設定);
+            } else {
+                executeStep(旧被保険者番号の取得);
+                executeStep(保険者番号の設定);
+            }
+        }
+    }
+
+    /**
+     * 市町村セキュリティ情報取得です。
+     */
+    private void getCityVillagesInformation() {
+        ShichosonSecurityJoho 介護導入形態 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (null != 介護導入形態) {
+            KaigoDonyuKubun 介護導入区分 = 介護導入形態.get介護導入区分();
+            if (KaigoDonyuKubun.未導入.code().equals(介護導入区分.code())) {
+                throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage().replace(
+                        MSG_導入形態コード.toString()).toString());
+            } else if (KaigoDonyuKubun.導入済.code().equals(介護導入区分.code())) {
+                this.導入形態コード = 介護導入形態.get導入形態コード();
+            }
+        }
+
+    }
+
+    /**
+     * 被保険者番号変換基準日の取得です。
+     */
+    private void getHihokenshaNoTimeInformation() {
+        GappeiCityJohoBFinder 変換基準日finder = GappeiCityJohoBFinder.createInstance();
+        this.変換基準日 = 変換基準日finder.getHihokenshaBangoHenkanKijunbi(GyomuBunrui.介護事務,
+                導入形態コード);
+        if (null == 変換基準日) {
+            throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage().replace(
+                    MSG_被保険者番号変換基準日の取得.toString()).toString());
+
+        }
+    }
+
+    /**
+     * 被保険者番号変換対象データの取得です。
+     *
+     * @return HokenshaKyufujissekiOutGetHihokenshaNoProcess
+     */
+    @Step(被保険者番号変換対象データの取得)
+    protected IBatchFlowCommand callGetHihokenshaNoDataInformationProcess() {
+        HokenshaKyufujissekiOutGetHihokenshaNoProcessParameter parameter = new HokenshaKyufujissekiOutGetHihokenshaNoProcessParameter();
+        parameter.set年月(変換基準日);
+        return loopBatch(HokenshaKyufujissekiOutGetHihokenshaNoProcess.class).arguments(parameter).define();
+
+    }
+
+    /**
+     * 広域加入日以前のデータを取得です。
+     *
+     * @return HokenshaKyufujissekiOutGetBeforeKanyuYMDProcess
+     */
+    @Step(広域加入日以前のデータを取得)
+    protected IBatchFlowCommand callGetHihokenshaNoBeforeKanyuYMDDataProcess() {
+        return loopBatch(HokenshaKyufujissekiOutGetBeforeKanyuYMDProcess.class).define();
+
+    }
+
+    /**
+     * 旧被保険者番号の取得です。
+     *
+     * @return HokenshaKyufujissekiOutGetOldHihokenshaNoProcess
+     */
+    @Step(旧被保険者番号の取得)
+    protected IBatchFlowCommand callGetOldHihokenshaNoProcess() {
+        return loopBatch(HokenshaKyufujissekiOutGetOldHihokenshaNoProcess.class).define();
+
+    }
+
+    /**
+     * 保険者番号の設定です。
+     *
+     * @return HokenshaKyufujissekiOutGetHihokenshaNameProcess
+     */
+    @Step(保険者名の取得)
+    protected IBatchFlowCommand callGetHihokenshaNameProcess() {
+        return loopBatch(HokenshaKyufujissekiOutGetHihokenshaNameProcess.class).define();
+
+    }
+
+    /**
+     * 保険者番号の設定です。
+     *
+     * @return HokenshaKyufujissekiOutSetHihokenshaNoProcess
+     */
+    @Step(保険者番号の設定)
+    protected IBatchFlowCommand callSetHihokenshaNoProcess() {
+        return loopBatch(HokenshaKyufujissekiOutSetHihokenshaNoProcess.class).define();
+
+    }
+
+    private void getMeisyoJoho() {
+        executeStep(被保険者_宛名情報取得);
+        flowEntity = (FlowEntity) getResult(FlowEntity.class, new RString(被保険者_宛名情報取得),
+                HokenshaKyufujissekiOutGetHihokenshaAtenaProcess.PARAMETER_OUT_FLOWENTITY);
+        if (0 == flowEntity.getCodeNum()) {
+            executeStep(エラー登録);
+        }
+    }
+
+    /**
+     * 被保険者_宛名情報取得です。
+     *
+     * @return HokenshaKyufujissekiOutGetHihokenshaAtenaProcess
+     */
+    @Step(被保険者_宛名情報取得)
+    protected IBatchFlowCommand callGetHihokenshaAtenaProcess() {
+        return loopBatch(HokenshaKyufujissekiOutGetHihokenshaAtenaProcess.class).define();
+
+    }
+
+    /**
+     * エラー登録です。
+     *
+     * @return HokenshaKyufujissekiOutDoErrorProcess
+     */
+    @Step(エラー登録)
+    protected IBatchFlowCommand callDoErrorrProcess() {
+        return loopBatch(HokenshaKyufujissekiOutDoErrorProcess.class).define();
+
     }
 
     private KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter getParam() {

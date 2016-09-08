@@ -40,7 +40,7 @@ public class HanyoListKogakuGassanShinseishoJohoMybatisParameter extends KozaSea
     private boolean 連番付加;
     private boolean 日付スラッシュ付加;
     private RString 保険者コード;
-    private RString 出力順;
+    private Long 出力順;
     private RString 出力項目;
     private boolean hasValidKamoku;
 
@@ -81,7 +81,7 @@ public class HanyoListKogakuGassanShinseishoJohoMybatisParameter extends KozaSea
             boolean 連番付加,
             boolean 日付スラッシュ付加,
             RString 保険者コード,
-            RString 出力順,
+            Long 出力順,
             RString 出力項目
     ) {
         super(searchkey, list);

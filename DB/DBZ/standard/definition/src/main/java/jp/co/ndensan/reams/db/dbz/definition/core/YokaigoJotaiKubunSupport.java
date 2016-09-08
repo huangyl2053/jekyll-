@@ -38,6 +38,9 @@ public final class YokaigoJotaiKubunSupport {
      * @throws IllegalArgumentException 変換不可の場合
      */
     public static IYokaigoJotaiKubun toValue(KoroshoInterfaceShikibetsuCode koroshoIfCode, RString code) throws IllegalArgumentException {
+        if(code.equals(new RString("06"))){
+            return YokaigoJotaiKubun.toValue(code);
+        }
         switch (koroshoIfCode) {
             case V09B:
                 return YokaigoJotaiKubun09B.toValue(code);
@@ -63,6 +66,9 @@ public final class YokaigoJotaiKubunSupport {
      * @throws IllegalArgumentException 変換不可の場合
      */
     public static IYokaigoJotaiKubun toValue(FlexibleDate 基準日, RString code) throws IllegalArgumentException {
+        if(code.equals(new RString("06"))){
+            return YokaigoJotaiKubun.toValue(code);
+        }
         if (KoroshoInterfaceShikibetsuCode.V09B.isValidOn(基準日)) {
             return YokaigoJotaiKubun09B.toValue(code);
         } else if (KoroshoInterfaceShikibetsuCode.V09A.isValidOn(基準日)) {

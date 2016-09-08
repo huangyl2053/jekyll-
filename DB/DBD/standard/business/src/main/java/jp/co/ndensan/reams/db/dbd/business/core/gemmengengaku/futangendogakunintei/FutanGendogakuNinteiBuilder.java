@@ -422,6 +422,30 @@ public class FutanGendogakuNinteiBuilder {
     }
 
     /**
+     * 遺族年金受給フラグを設定します。
+     *
+     * @param 遺族年金受給フラグ 遺族年金受給フラグ
+     * @return {@link FutanGendogakuNinteiBuilder}
+     */
+    public FutanGendogakuNinteiBuilder set遺族年金受給フラグ(boolean 遺族年金受給フラグ) {
+        requireNonNull(遺族年金受給フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("遺族年金受給フラグ"));
+        entity.setIzokuNenkinJukyuFlag(遺族年金受給フラグ);
+        return this;
+    }
+
+    /**
+     * 障害年金受給フラグを設定します。
+     *
+     * @param 障害年金受給フラグ 障害年金受給フラグ
+     * @return {@link FutanGendogakuNinteiBuilder}
+     */
+    public FutanGendogakuNinteiBuilder set障害年金受給フラグ(boolean 障害年金受給フラグ) {
+        requireNonNull(障害年金受給フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("障害年金受給フラグ"));
+        entity.setShogaiNenkinJukyuFlag(障害年金受給フラグ);
+        return this;
+    }
+
+    /**
      * 減免減額申請情報のキー情報について判定します。<br>
      * 介護保険負担限度額認定に関連できる減免減額申請情報である場合、下記の処理に遷移します。<br>
      * キーが一致する場合は合減免減額申請情報リストに減免減額申請情報{@link GemmenGengakuShinsei}をセットします。<br>

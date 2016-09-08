@@ -6,10 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1210011;
 
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -22,8 +19,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBC-2310-010 chenyadong
  */
 public class DBC1210011PanelValidationHandler {
-
-    private static final RString 支払予定日 = new RString("支払予定日");
 
     /**
      * 受給共通_受給者登録なしチェックです。
@@ -50,18 +45,6 @@ public class DBC1210011PanelValidationHandler {
     }
 
     /**
-     * 未入力チェックです。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 未入力チェック() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                UrWarningMessages.未入力, 支払予定日.toString())));
-        return validPairs;
-    }
-
-    /**
      * 高額合算支給情報存在エラーチェックです。
      *
      * @return ValidationMessageControlPairs
@@ -70,18 +53,6 @@ public class DBC1210011PanelValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                 DbcErrorMessages.高額合算支給情報存在エラー)));
-        return validPairs;
-    }
-
-    /**
-     * 高額合算支給決定通知書発行済チェックです。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 高額合算支給決定通知書発行済チェック() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                DbcWarningMessages.高額合算支給決定通知書発行済)));
         return validPairs;
     }
 
