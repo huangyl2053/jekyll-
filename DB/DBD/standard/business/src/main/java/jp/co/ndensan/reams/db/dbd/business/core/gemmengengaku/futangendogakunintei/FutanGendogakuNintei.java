@@ -430,6 +430,24 @@ public class FutanGendogakuNintei
     }
 
     /**
+     * 遺族年金受給フラグを返します。
+     *
+     * @return 遺族年金受給フラグ
+     */
+    public boolean is遺族年金受給フラグ() {
+        return entity.getIzokuNenkinJukyuFlag();
+    }
+
+    /**
+     * 障害年金受給フラグを返します。
+     *
+     * @return 障害年金受給フラグ
+     */
+    public boolean is障害年金受給フラグ() {
+        return entity.getShogaiNenkinJukyuFlag();
+    }
+
+    /**
      * {@link DbT4018KaigoHokenFutanGendogakuNinteiEntity}のクローンを返します。
      *
      * @return {@link DbT4018KaigoHokenFutanGendogakuNinteiEntity}のクローン
