@@ -17,7 +17,8 @@ public enum DBC1140011StateName implements IStateEnumerations {
     NoChange(""),
     Default("default"),
     自己負担額一覧("自己負担額一覧"),
-    自己負担額管理情報入力("自己負担額管理情報入力");
+    自己負担額管理情報入力("自己負担額管理情報入力"),
+    処理完了("処理完了");
 
     private final RString name;
 
