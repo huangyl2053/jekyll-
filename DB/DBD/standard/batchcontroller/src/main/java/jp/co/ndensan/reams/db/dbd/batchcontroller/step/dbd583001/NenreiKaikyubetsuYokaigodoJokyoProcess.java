@@ -129,10 +129,10 @@ public class NenreiKaikyubetsuYokaigodoJokyoProcess extends BatchProcessBase<Tou
         }
         RString 地区開始コード = RString.EMPTY;
         RString 地区終了コード = RString.EMPTY;
-        if (parameter.get開始地区コード() != null && parameter.get開始地区コード().isEmpty()) {
+        if (parameter.get開始地区コード() != null && !parameter.get開始地区コード().isEmpty()) {
             地区開始コード = parameter.get開始地区コード().getColumnValue();
         }
-        if (parameter.get終了地区コード() != null && parameter.get終了地区コード().isEmpty()) {
+        if (parameter.get終了地区コード() != null && !parameter.get終了地区コード().isEmpty()) {
             地区終了コード = parameter.get終了地区コード().getColumnValue();
         }
         RString 地区 = 地区開始コード.concat("～").concat(地区終了コード);

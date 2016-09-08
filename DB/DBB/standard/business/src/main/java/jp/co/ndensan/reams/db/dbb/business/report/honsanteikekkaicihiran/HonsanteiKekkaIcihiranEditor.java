@@ -485,7 +485,7 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
                     && koza.get預金種別().get預金種別略称().length() >= NUM_2) {
                 預金種別略称 = koza.get預金種別().get預金種別略称().substring(NUM_0, NUM_2);
             } else {
-                預金種別略称 = koza.get預金種別().get預金種別略称();
+                預金種別略称 = koza.get預金種別() == null ? RString.EMPTY : koza.get預金種別().get預金種別略称();
             }
             if (koza.get口座番号().length() >= NUM_7) {
                 口座番号 = koza.get口座番号().substring(NUM_0, NUM_7);

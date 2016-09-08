@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.core.kagoketteihokenshain;
+package jp.co.ndensan.reams.db.dbc.business.report.kagoketteitbun;
 
 import java.util.Collections;
 import java.util.List;
@@ -13,11 +13,12 @@ import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 
 /**
- * 過誤決定通知書情報取込（保険者分）PageBreak
+ * 過誤決定通知書情報取込一覧表（保険者分）帳票PageBreakです。
  *
- * @reamsid_L DBC-0980-300 xupeng
+ * @reamsid_L DBC-0980-470 lijunjun
  */
-public class KagoKetteiHokenshaInPageBreak extends PageBreaker<KagoKetteitsuchishoTorikomiIchiranHokenshaBunSource> {
+public class KagoKetteitsuchishoTorikomiIchiranHokenshaBunPageBreak
+        extends PageBreaker<KagoKetteitsuchishoTorikomiIchiranHokenshaBunSource> {
 
     private final List<RString> breakKeysList;
 
@@ -25,7 +26,7 @@ public class KagoKetteiHokenshaInPageBreak extends PageBreaker<KagoKetteitsuchis
      *
      * @param breakKeys ページングキー
      */
-    public KagoKetteiHokenshaInPageBreak(List<RString> breakKeys) {
+    public KagoKetteitsuchishoTorikomiIchiranHokenshaBunPageBreak(List<RString> breakKeys) {
         this.breakKeysList = Collections.unmodifiableList(breakKeys);
     }
 
@@ -37,14 +38,6 @@ public class KagoKetteiHokenshaInPageBreak extends PageBreaker<KagoKetteitsuchis
     @Override
     public boolean isBreak(ReportLineRecord<KagoKetteitsuchishoTorikomiIchiranHokenshaBunSource> currentSource,
             ReportLineRecord<KagoKetteitsuchishoTorikomiIchiranHokenshaBunSource> nextSource) {
-        boolean flag = false;
-        if (!flag && this.breakKeysList.contains(KagoKetteiHokenshaInOutPutOrder.被保険者番号.get項目ID())) {
-            flag = !currentSource.getSource().listLower1_1.equals(nextSource.getSource().listLower1_1);
-        }
-        if (!flag && this.breakKeysList.contains(KagoKetteiHokenshaInOutPutOrder.事業者番号.get項目ID())) {
-            flag = !currentSource.getSource().listUpper_3.equals(nextSource.getSource().listUpper_3);
-        }
-        return flag;
+        return !currentSource.getSource().shoKisaiHokenshaNo.equals(nextSource.getSource().shoKisaiHokenshaNo);
     }
-
 }

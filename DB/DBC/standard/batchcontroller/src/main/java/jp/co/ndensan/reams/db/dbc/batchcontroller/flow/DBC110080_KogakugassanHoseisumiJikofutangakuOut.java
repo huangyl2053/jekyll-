@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc110080;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,7 +55,6 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
     private static final String 処理結果リスト作成 = "kokuhorenkyoutsuDoShoriKekkaListSakuseiProcess";
 
     private static final RString データがある = new RString("1");
-//    private static final int INT_4 = 4;
     private static final RString 被保険者_宛名情報取得BATCHID = new RString("HokenshaKyufujissekiOutHihokenshaAtenaFlow");
 
     private KogakugassanProcessParameter processParameter;
@@ -63,13 +62,17 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
     private List<SharedFileDescriptor> エントリ情報List = new ArrayList<>();
 
     @Override
-    protected void defineFlow() {
+    protected void initialize() {
         processParameter = getParameter().toKogakugassanProcessParameter(YMDHMS.now());
         RDate date = processParameter.getNow().getDate();
         RString 保険者情報_保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, date, SubGyomuCode.DBU介護統計報告);
         RString 保険者情報_保険者名称 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, date, SubGyomuCode.DBU介護統計報告);
         processParameter.set保険者情報_保険者番号(保険者情報_保険者番号);
         processParameter.set保険者情報_保険者名称(保険者情報_保険者名称);
+    }
+
+    @Override
+    protected void defineFlow() {
         executeStep(送付対象データ取得);
         if (データがある.equals((getResult(RString.class, new RString(送付対象データ取得), KogakugassanReadDataProcess.PARAMETER_OUT_FLOWFLAG)))) {
             executeStep(高額合算自己負担額明細データの存在確認);
@@ -214,7 +217,7 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
             for (SharedFileDescriptor entry : エントリ情報List) {
                 // TODO QA1149 value too long for type character varying(20)
                 list.add(entry.getSharedFileName().toRString());
-//                list.add(entry.getSharedFileName().toRString().substring(INT_4));
+//                list.add(entry.getSharedFileName().toRString().substring(4));
                 param.setFileNameList(list);
             }
         }

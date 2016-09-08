@@ -1159,13 +1159,13 @@ public class HonnSanteiFuka {
         }
         FukaJohoRelateEntity relateEntity = new FukaJohoRelateEntity();
         relateEntity.set介護賦課Entity(賦課情報_更正前.toEntity());
-        KibetsuEntity 介護期別Entity = new KibetsuEntity();
         List<KibetsuEntity> 介護期別EntityList = new ArrayList<>();
-        List<UrT0705ChoteiKyotsuEntity> 調定共通EntityList = new ArrayList<>();
         for (Kibetsu kibetsu : 賦課情報_更正前.getKibetsuList()) {
+            KibetsuEntity 介護期別Entity = new KibetsuEntity();
             介護期別Entity.set介護期別Entity(kibetsu.toEntity());
-            for (UrT0705ChoteiKyotsuEntity 調定共通Entity : 介護期別Entity.get調定共通Entity()) {
-                調定共通EntityList.add(調定共通Entity);
+            List<UrT0705ChoteiKyotsuEntity> 調定共通EntityList = new ArrayList<>();
+            for (ChoteiKyotsu choteiKyotsu : kibetsu.getChoteiKyotsuList()) {
+                調定共通EntityList.add(choteiKyotsu.toEntity());
             }
             介護期別Entity.set調定共通Entity(調定共通EntityList);
             介護期別EntityList.add(介護期別Entity);

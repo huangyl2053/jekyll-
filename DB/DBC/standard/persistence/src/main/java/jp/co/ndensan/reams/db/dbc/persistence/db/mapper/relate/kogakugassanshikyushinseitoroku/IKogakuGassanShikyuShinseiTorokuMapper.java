@@ -41,9 +41,9 @@ public interface IKogakuGassanShikyuShinseiTorokuMapper {
      * 被保険者名を取得する。
      *
      * @param parameter HihokenshaMeishoSearchParameter
-     * @return AtenaMeisho
+     * @return 被保険者情報
      */
-    UaFt200FindShikibetsuTaishoEntity select被保険者名(HihokenshaMeishoSearchParameter parameter);
+    List<UaFt200FindShikibetsuTaishoEntity> select被保険者名(HihokenshaMeishoSearchParameter parameter);
 
     /**
      * 高額合算申請書加入歴データを取得する。

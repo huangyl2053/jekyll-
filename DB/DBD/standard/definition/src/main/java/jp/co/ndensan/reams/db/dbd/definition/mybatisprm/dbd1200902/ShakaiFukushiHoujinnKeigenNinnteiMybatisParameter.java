@@ -68,7 +68,7 @@ public class ShakaiFukushiHoujinnKeigenNinnteiMybatisParameter implements IMyBat
         this.年度開始日 = 年度開始日;
         this.年度終了日 = 年度終了日;
         this.決定区分_承認する = KetteiKubun.承認する.getコード();
-        this.介護受給 = SubGyomuCode.DBD介護受給.getGyomuCode().value();
+        this.介護受給 = SubGyomuCode.DBD介護受給.value();
         this.被保番号 = 被保番号;
         this.出力順 = 出力順;
         this.帳票ID = 帳票ID;

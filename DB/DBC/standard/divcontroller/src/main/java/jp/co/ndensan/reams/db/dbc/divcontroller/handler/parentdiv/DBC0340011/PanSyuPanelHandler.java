@@ -13,7 +13,9 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -82,14 +84,24 @@ public class PanSyuPanelHandler {
         RString 文書番号 = div.getPanJyoken().getCcdBunshoBango().get文書番号();
         Long 出力順ID = div.getCcdChohyoShutsuryokujun().get出力順ID();
         LasdecCode 市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
-        RDate 処理日時 = RDate.getNowDate();
+        RDateTime 処理日時 = RDateTime.now();
         DBC010020_KogakuServicehiJuryoininKeiyakuShoninKakuninshoParameter parameter = new DBC010020_KogakuServicehiJuryoininKeiyakuShoninKakuninshoParameter();
-        parameter.set契約申請開始(契約開始申請日);
-        parameter.set契約申請終了(契約終了申請日);
-        parameter.set契約決定開始(契約開始決定日);
-        parameter.set契約決定終了(契約終了決定日);
+        if (契約開始申請日 != null) {
+            parameter.set契約申請開始(new FlexibleDate(契約開始申請日.toString()));
+        }
+        if (契約終了申請日 != null) {
+            parameter.set契約申請終了(new FlexibleDate(契約終了申請日.toString()));
+        }
+        if (契約開始決定日 != null) {
+            parameter.set契約決定開始(new FlexibleDate(契約開始決定日.toString()));
+        }
+        if (契約終了決定日 != null) {
+            parameter.set契約決定終了(new FlexibleDate(契約終了決定日.toString()));
+        }
         parameter.set発行済(発行済);
-        parameter.set通知日(通知日);
+        if (通知日 != null) {
+            parameter.set通知日(new FlexibleDate(通知日.toString()));
+        }
         parameter.set文書番号(文書番号);
         if (出力順ID != null) {
             parameter.set改頁出力順ID(new RString(出力順ID));

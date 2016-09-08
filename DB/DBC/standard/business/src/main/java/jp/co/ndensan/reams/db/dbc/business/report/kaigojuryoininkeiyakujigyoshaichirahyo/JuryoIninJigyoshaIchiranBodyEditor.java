@@ -64,7 +64,9 @@ public class JuryoIninJigyoshaIchiranBodyEditor implements IJuryoIninJigyoshaIch
                 source.listLower_2 = RString.EMPTY;
             }
         }
-        source.listLower_3 = JuryoIninKeiyakuShurui.toValue(帳票出力対象データ.get契約種別()).get名称();
+        if (!RString.isNullOrEmpty(帳票出力対象データ.get契約種別())) {
+            source.listLower_3 = JuryoIninKeiyakuShurui.toValue(帳票出力対象データ.get契約種別()).get名称();
+        }
         source.listLower_4 = 帳票出力対象データ.get振込先支店名();
         if (帳票出力対象データ.get振込先名義人名() != null) {
             source.listLower_5 = 帳票出力対象データ.get振込先名義人名().getColumnValue();
