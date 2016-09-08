@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc710140;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710140.HanyoListKogakuGassanShinseishoNoRenbanProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710140.HanyoListKogakuGassanShinseishoProcess;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBC-3103-020 fuyanling
  */
-public class DBC710140_HanyoListKogakuGassanShinseishoJohoFlow
+public class DBC710140_HanyoListKogakuGassanShinseishoJoho
         extends BatchFlowBase<DBC710140_HanyoListKogakuGassanShinseishoJohoParameter> {
 
     private static final String CSV_EUC_PROCESS = "csvEucProcess";

@@ -134,6 +134,14 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
     private static final RString 直近異動事由コード名称11 = new RString("職権修正　　　");
     private static final RString 直近異動事由コード名称12 = new RString("職権取消　　　");
     private static final RString 直近異動事由コード名称20 = new RString("履歴修正　　　");
+    private static final RString 受給申請事由_初回申請 = new RString("初回申請　　");
+    private static final RString 受給申請事由_再申請内 = new RString("再申請内　　");
+    private static final RString 受給申請事由_再申請外 = new RString("再申請外　　");
+    private static final RString 受給申請事由_支援から申請 = new RString("支援から申請");
+    private static final RString 受給申請事由_区分変更申請 = new RString("区分変更申請");
+    private static final RString 受給申請事由_サ変更申請 = new RString("サ変更申請　");
+    private static final RString 受給申請事由_施行前申請 = new RString("施行前申請　");
+    private static final RString 受給申請事由_追加 = new RString("追加　　　　");
     private static final int NUMZERO = 0;
     private static final Code CODE = new Code("0003");
     private static final RString 定数_被保険者番号 = new RString("被保険者番号");
@@ -670,23 +678,23 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
 
     private RString getJukyuShinseiJiyu(RString 受給申請事由コード, RString 受給申請事由, RString 要支援者認定申請区分) {
         if (JukyuShinseiJiyu.初回申請.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = new RString("初回申請　　");
+            受給申請事由 = 受給申請事由_初回申請;
         } else if (JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = new RString("再申請内　　");
+            受給申請事由 = 受給申請事由_再申請内;
         } else if (JukyuShinseiJiyu.再申請_有効期限外.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = new RString("再申請外　　");
+            受給申請事由 = 受給申請事由_再申請外;
         } else if (JukyuShinseiJiyu.要介護度変更申請.getコード().equals(受給申請事由コード)) {
             if (NinteiShienShinseiKubun.認定支援申請.getコード().equals(要支援者認定申請区分)) {
-                受給申請事由 = new RString("支援から申請");
+                受給申請事由 = 受給申請事由_支援から申請;
             } else {
-                受給申請事由 = new RString("区分変更申請");
+                受給申請事由 = 受給申請事由_区分変更申請;
             }
         } else if (JukyuShinseiJiyu.指定サービス種類変更申請.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = new RString("サ変更申請　");
+            受給申請事由 = 受給申請事由_サ変更申請;
         } else if (JukyuShinseiJiyu.申請_法施行前.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = new RString("施行前申請　");
+            受給申請事由 = 受給申請事由_施行前申請;
         } else if (JukyuShinseiJiyu.追加_申請なしの追加.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = new RString("追加　　　　");
+            受給申請事由 = 受給申請事由_追加;
         }
         return 受給申請事由;
     }
@@ -716,8 +724,12 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
-        AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
+        if (personalDataList == null || personalDataList.isEmpty()) {
+            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
+        } else {
+            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
+        }
         バッチ出力条件リストの出力();
     }
 
