@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanketteitsuchisho.KogakuGassanShikyuKetteiTsuchishoEntity;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanketteitsuchisho.KogakuGassanShikyuKetteiTsuchishoOutputEntity;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1210011.DBC1210011PanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1210011.DBC1210011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1210011.DBC1210011TransitionEventName;
@@ -24,13 +25,16 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -189,23 +193,42 @@ public class DBC1210011Panel {
         KogakuGassanShikyuFushikyuKettei 高額合算支給不支給決定 = ViewStateHolder.
                 get(ViewStateKeys.高額合算支給不支給決定, KogakuGassanShikyuFushikyuKettei.class);
         RString 支払予定日印字有無 = ViewStateHolder.get(ViewStateKeys.支払予定日印字有無, RString.class);
-        if (getHandler(div).入力チェック(支払予定日印字有無)) {
-            ValidationMessageControlPairs pairs = getValidationHandler().未入力チェック();
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
+        if (!ResponseHolder.isReRequest()) {
+            if (getHandler(div).入力チェック(支払予定日印字有無)) {
+                WarningMessage message = new WarningMessage(
+                        UrWarningMessages.未入力.getMessage().getCode(),
+                        UrWarningMessages.未入力.getMessage().replace("支払予定日").evaluate(),
+                        ButtonSelectPattern.OKCancel);
+                return ResponseData.of(div).addMessage(message).respond();
+            } else if (div.getTxtZenkaiHakkoYMD().getValue() != null) {
+                WarningMessage message = new WarningMessage(
+                        DbcWarningMessages.高額合算支給決定通知書発行済.getMessage().getCode(),
+                        DbcWarningMessages.高額合算支給決定通知書発行済.getMessage().evaluate(),
+                        ButtonSelectPattern.OKCancel);
+                return ResponseData.of(div).addMessage(message).respond();
             }
+        }
+        if (new RString(UrWarningMessages.未入力.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && div.getTxtZenkaiHakkoYMD().getValue() != null) {
+            WarningMessage message = new WarningMessage(
+                    DbcWarningMessages.高額合算支給決定通知書発行済.getMessage().getCode(),
+                    DbcWarningMessages.高額合算支給決定通知書発行済.getMessage().evaluate(),
+                    ButtonSelectPattern.OKCancel);
+            return ResponseData.of(div).addMessage(message).respond();
+
+        }
+        if (new RString(DbcWarningMessages.高額合算支給決定通知書発行済.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
         }
         KogakuGassanShikyuKetteiTsuchishoOutputEntity outputEntity = getHandler(div).editKougakugassanShikyuketteiTsuuchisho(
                 高額合算支給不支給決定, 識別コード, 被保険者番号, 支払予定日印字有無);
         RString データ有無 = outputEntity.getデータ有無();
         if (RSTRING_1.equals(データ有無)) {
             ValidationMessageControlPairs pairs = getValidationHandler().高額合算支給情報存在エラーチェック();
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
-            }
-        }
-        if (div.getTxtZenkaiHakkoYMD().getValue() != null) {
-            ValidationMessageControlPairs pairs = getValidationHandler().高額合算支給決定通知書発行済チェック();
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
