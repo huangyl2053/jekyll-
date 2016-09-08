@@ -275,7 +275,7 @@ public class JikoFutangakuJohoHoseiJohoDg {
             自己負担額保持.set呼び出しフラグ(CODE_ONE);
         }
         ViewStateHolder.put(ViewStateKeys.高額合算自己負担額補正保持Entity, 自己負担額保持);
-        return ResponseData.of(div).forwardWithEventName(DBC1140011TransitionEventName.自己負担額入力へ).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC1140011TransitionEventName.自己負担額入力).respond();
     }
 
     private KogakuGassanJikofutangakuHosei set自己負担額保持回目１(
@@ -316,7 +316,7 @@ public class JikoFutangakuJohoHoseiJohoDg {
         LockingKey key = new LockingKey(前排他キー);
         RealInitialLocker.release(key);
         return ResponseData.of(div).forwardWithEventName(
-                DBC1140011TransitionEventName.自己負担額一覧).respond();
+                DBC1140011TransitionEventName.再検索).respond();
     }
 
     /**
@@ -343,7 +343,7 @@ public class JikoFutangakuJohoHoseiJohoDg {
             LockingKey key = new LockingKey(前排他キー);
             RealInitialLocker.release(key);
             return ResponseData.of(div).forwardWithEventName(
-                    DBC1140011TransitionEventName.自己負担額一覧).respond();
+                    DBC1140011TransitionEventName.検索結果一覧).respond();
         }
         return ResponseData.of(div).respond();
     }
