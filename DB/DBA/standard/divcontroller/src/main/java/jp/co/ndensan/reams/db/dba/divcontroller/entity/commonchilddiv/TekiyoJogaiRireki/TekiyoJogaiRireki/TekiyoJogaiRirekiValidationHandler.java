@@ -76,6 +76,8 @@ public class TekiyoJogaiRirekiValidationHandler {
         if (RString.isNullOrEmpty(div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo())) {
             result.add(new ValidationMessageControlPair(RRVMessages.入所施設コード_必須));
         }
+        result.add(div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().validate施設種類());
+
         if (RString.isNullOrEmpty(div.getPanelTekiyoJokaiTekiInput().getDdlTekiyoJiyuInput().getSelectedKey())) {
             result.add(new ValidationMessageControlPair(RRVMessages.適用事由_必須, div.getPanelTekiyoJokaiTekiInput().getDdlTekiyoJiyuInput()));
         }

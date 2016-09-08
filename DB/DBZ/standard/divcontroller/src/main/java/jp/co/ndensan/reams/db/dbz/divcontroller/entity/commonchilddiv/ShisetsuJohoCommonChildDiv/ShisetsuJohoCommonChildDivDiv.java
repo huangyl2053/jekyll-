@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * ShisetsuJohoCommonChildDiv のクラスファイル
@@ -25,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  * @reamsid_L DBA-0190-010 houtianpeng
  */
 public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJohoCommonChildDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -41,7 +42,7 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     @JsonProperty("radTekiyoJyogaiShisetsu")
     private RadioButton radTekiyoJyogaiShisetsu;
     @JsonProperty("txtNyuryokuShisetsuKodo")
-    private TextBox txtNyuryokuShisetsuKodo;
+    private TextBoxCode txtNyuryokuShisetsuKodo;
     @JsonProperty("btnJigyoshaKensaku")
     private ButtonDialog btnJigyoshaKensaku;
     @JsonProperty("txtNyuryokuShisetsuMeisho")
@@ -132,7 +133,7 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @return txtNyuryokuShisetsuKodo
      */
     @JsonProperty("txtNyuryokuShisetsuKodo")
-    public TextBox getTxtNyuryokuShisetsuKodo() {
+    public TextBoxCode getTxtNyuryokuShisetsuKodo() {
         return txtNyuryokuShisetsuKodo;
     }
 
@@ -141,7 +142,7 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @param txtNyuryokuShisetsuKodo txtNyuryokuShisetsuKodo
      */
     @JsonProperty("txtNyuryokuShisetsuKodo")
-    public void setTxtNyuryokuShisetsuKodo(TextBox txtNyuryokuShisetsuKodo) {
+    public void setTxtNyuryokuShisetsuKodo(TextBoxCode txtNyuryokuShisetsuKodo) {
         this.txtNyuryokuShisetsuKodo = txtNyuryokuShisetsuKodo;
     }
 
@@ -321,6 +322,11 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     @Override
     public RString get施設種類() {
         return getHandler().get施設種類();
+    }
+
+    @Override
+    public ValidationMessageControlPairs validate施設種類() {
+        return getHandler().validate施設種類();
     }
 
     /**
