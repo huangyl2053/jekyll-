@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSe
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
@@ -42,7 +43,6 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -113,9 +113,12 @@ public class KogakuGassanShikyuShinseiToroku {
      */
     public List<ShinseishoJohoResult> getShinseishoJoho(ShinseishoJohoSearchParameter parameter) {
         IKogakuGassanShikyuShinseiTorokuMapper mapper = this.mapperProvider.create(IKogakuGassanShikyuShinseiTorokuMapper.class);
-        List<HihokenshaNo> 被保険者番号List = 被保険者番号取得(parameter, mapper);
-        if (被保険者番号List == null) {
-            return null;
+        List<HihokenshaNo> 被保険者番号List = new ArrayList();
+        if (parameter.is被保険者情報検索有無() && RString.isNullOrEmpty(parameter.get被保険者氏名())) {
+            被保険者番号List = 被保険者番号取得(parameter, mapper);
+            if (被保険者番号List == null || 被保険者番号List.isEmpty()) {
+                return null;
+            }
         }
         parameter.set被保険者番号リスト(被保険者番号List);
         List<DbT3068KogakuGassanShinseishoEntity> entityList = mapper.select申請書情報(parameter);
@@ -127,12 +130,12 @@ public class KogakuGassanShikyuShinseiToroku {
             ShinseishoJohoResult result = new ShinseishoJohoResult();
             entity.initializeMd5();
             result.set高額合算申請書(new KogakuGassanShinseisho(entity));
-            UaFt200FindShikibetsuTaishoEntity 宛名 = 被保険者名の取得(entity, mapper);
+            IShikibetsuTaisho 宛名 = 被保険者名の取得(entity);
             if (宛名 != null) {
-                result.set被保険者名(宛名.getMeisho());
-                result.set識別コード(宛名.getShikibetsuCode());
+                result.set被保険者名(宛名.get名称().getName());
+                result.set識別コード(宛名.get識別コード());
+                resultList.add(result);
             }
-            resultList.add(result);
         }
         return resultList;
     }
@@ -281,25 +284,13 @@ public class KogakuGassanShikyuShinseiToroku {
         return 被保険者番号List.isEmpty() ? null : 被保険者番号List;
     }
 
-    private UaFt200FindShikibetsuTaishoEntity 被保険者名の取得(
-            DbT3068KogakuGassanShinseishoEntity entity, IKogakuGassanShikyuShinseiTorokuMapper mapper) {
-        ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
-                KensakuYusenKubun.住登外優先);
-        builder.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
-        builder.set基準日(FlexibleDate.getNowDate());
-        IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
-        HihokenshaMeishoSearchParameter meishoParameter = HihokenshaMeishoSearchParameter
-                .createSelectByKeyParam(searchKey, entity.getHihokenshaNo());
-        return mapper.select被保険者名(meishoParameter);
-    }
-
     /**
-     * 最新識別コード取得します。
+     * 被保険者名の取得します。
      *
      * @param entity DbT3068KogakuGassanShinseishoEntity
-     * @return ShikibetsuCode
+     * @return IShikibetsuTaisho
      */
-    public ShikibetsuCode getShikibetsuCode(DbT3068KogakuGassanShinseishoEntity entity) {
+    public IShikibetsuTaisho 被保険者名の取得(DbT3068KogakuGassanShinseishoEntity entity) {
         IKogakuGassanShikyuShinseiTorokuMapper mapper = this.mapperProvider.create(IKogakuGassanShikyuShinseiTorokuMapper.class);
         ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
                 KensakuYusenKubun.住登外優先);
@@ -308,7 +299,10 @@ public class KogakuGassanShikyuShinseiToroku {
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
         HihokenshaMeishoSearchParameter meishoParameter = HihokenshaMeishoSearchParameter
                 .createSelectByKeyParam(searchKey, entity.getHihokenshaNo());
-        UaFt200FindShikibetsuTaishoEntity resultEntity = mapper.select被保険者名(meishoParameter);
-        return resultEntity == null ? null : resultEntity.getShikibetsuCode();
+        List<UaFt200FindShikibetsuTaishoEntity> 宛名PSMlist = mapper.select被保険者名(meishoParameter);
+        if (宛名PSMlist == null || 宛名PSMlist.isEmpty()) {
+            return null;
+        }
+        return ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名PSMlist.get(0));
     }
 }
