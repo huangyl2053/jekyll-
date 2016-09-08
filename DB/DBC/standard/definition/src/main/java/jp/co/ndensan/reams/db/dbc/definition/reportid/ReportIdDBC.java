@@ -629,7 +629,11 @@ public enum ReportIdDBC {
     /**
      * 介護給付費公費受給者別一覧表帳票ＩＤです。
      */
-    DBC200008(new ReportId("DBC200008_KohijukyushaBetsuIchiran"), new RString("介護給付費公費受給者別一覧表"));
+    DBC200008(new ReportId("DBC200008_KohijukyushaBetsuIchiran"), new RString("介護給付費公費受給者別一覧表")),
+    /**
+     * 高額サービス等支給（不支給）決定通知書帳票ＩＤです。
+     */
+    DBC100007(new ReportId("DBC100007_KogakuKetteiTsuchiSho"), new RString("高額サービス等支給（不支給）決定通知書"));
     private final ReportId reportId;
 
     private final RString reportName;
