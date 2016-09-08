@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.report.gassanshikyushinseishojohosofuichiran;
 
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
-import jp.co.ndensan.reams.db.dbc.entity.report.gassanshikyugakukeisankekkasofuichiran.GassanShikyugakuKeisankekkaSofuIchiranSource;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.gassanshikyushinseishojohosofuIchiran.GassanShikyuShinseishoJohoSofuIchiranSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  *
  * @author DBC-2630-040 zhengshenlei
  */
-public class GassanShikyuShinseishoJohoSofuIchiranProperty extends ReportPropertyBase<GassanShikyugakuKeisankekkaSofuIchiranSource> {
+public class GassanShikyuShinseishoJohoSofuIchiranProperty extends ReportPropertyBase<GassanShikyuShinseishoJohoSofuIchiranSource> {
 
     /**
      * コンストラクタです。

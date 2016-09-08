@@ -44,7 +44,7 @@ public class GassanShikyuShinseishoJohoSofuIchiranReport extends Report<GassanSh
     }
 
     @Override
-    protected void writeBy(ReportSourceWriter<GassanShikyuShinseishoJohoSofuIchiranSource> writer) {
+    public void writeBy(ReportSourceWriter<GassanShikyuShinseishoJohoSofuIchiranSource> writer) {
         IGassanShikyuShinseishoJohoSofuIchiranEditor editor = new GassanShikyuShinseishoJohoSofuIchiranEditor(entity, システム日時, 処理年月, 連番);
         IGassanShikyuShinseishoJohoSofuIchiranBuilder builder = new GassanShikyuShinseishoJohoSofuIchiranBuilder(editor);
         writer.writeLine(builder);
