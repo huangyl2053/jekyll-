@@ -325,6 +325,7 @@
                 ON  受給JOIN."hihokenshaNo"=  高額自己負担_受給."hihokenshaNo"  AND
                     受給JOIN."yukoMukoKubun"= '1' AND
                     受給JOIN."logicalDeletedFlag"= False  
+                    <!--TODO QA1347-->
 <!--                    AND  SUBSTR(受給JOIN."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<=]]> 高額自己負担_受給.サービス提供年月
                     AND  SUBSTR(受給JOIN."ninteiYukoKikanShuryoYMD",1,6) <![CDATA[>=]]>  高額自己負担_受給.サービス提供年月-->
                     ) AS  受給者台帳Tmp
