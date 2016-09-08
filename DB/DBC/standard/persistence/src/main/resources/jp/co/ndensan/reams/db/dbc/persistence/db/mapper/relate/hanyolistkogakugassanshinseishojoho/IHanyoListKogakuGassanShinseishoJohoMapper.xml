@@ -235,6 +235,7 @@
         ON 受給JOIN."hihokenshaNo" = 合算申請書_受給."hihokenshaNo" AND 
         受給JOIN."yukoMukoKubun" = '1' AND 
         受給JOIN."logicalDeletedFlag" = False
+        <!--TODO QA1350-->
 <!--        AND  SUBSTR(受給JOIN."ninteiYukoKikanKaishiYMD",1, 6)  <![CDATA[<=]]> 合算申請書_受給.サービス提供年月
         AND  SUBSTR(受給JOIN."ninteiYukoKikanShuryoYMD", 1,6)  <![CDATA[>=]]> 合算申請書_受給.サービス提供年月 -->
         ) AS 受給者台帳Tmp 
@@ -323,116 +324,114 @@
        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
         ON 最新被保台帳_識別コード = koza."shikibetsuCode"
         </if> 
-       <if test="出力順!= null">
-             <!--${出力順}-->
-       </if>   
+        ${出力順}
     </sql>
         
     <resultMap id="resultMap_HanyoListKogakuGassanShinseishoJohoEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoEntity">
- <result property="高額合算申請書加入歴_保険者番号" column="高額合算申請書加入歴_保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
-<result property="高額合算申請書_対象年度" column="高額合算申請書_対象年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-<result property="高額合算申請書_整理番号" column="高額合算申請書_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_履歴番号" column="高額合算申請書_履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_被保険者番号" column="高額合算申請書_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_申請状況区分" column="高額合算申請書_申請状況区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_申請年月日" column="高額合算申請書_申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書_支給申請書整理番号" column="高額合算申請書_支給申請書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_国保支給申請書整理番号" column="高額合算申請書_国保支給申請書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_支給申請区分" column="高額合算申請書_支給申請区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_対象計算期間開始年月日" column="高額合算申請書_対象計算期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書_対象計算期間終了年月日" column="高額合算申請書_対象計算期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書_支給申請形態" column="高額合算申請書_支給申請形態" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_自己負担額証明書交付申請の有無" column="高額合算申請書_自己負担額証明書交付申請の有無" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_申請代表者氏名" column="高額合算申請書_申請代表者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_所得区分" column="高額合算申請書_所得区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_70歳以上の者に係る所得区分" column="高額合算申請書_70歳以上の者に係る所得区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_資格喪失年月日" column="高額合算申請書_資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書_資格喪失事由" column="高額合算申請書_資格喪失事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_加入期間開始年月日" column="高額合算申請書_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書_加入期間終了年月日" column="高額合算申請書_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書_国保保険者番号" column="高額合算申請書_国保保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_国保保険者名称" column="高額合算申請書_国保保険者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_国保被保険者証記号" column="高額合算申請書_国保被保険者証記号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_国保被保険者証番号" column="高額合算申請書_国保被保険者証番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_国保世帯番号" column="高額合算申請書_国保世帯番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_国保続柄" column="高額合算申請書_国保続柄" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_国保加入期間開始年月日" column="高額合算申請書_国保加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書_国保加入期間終了年月日" column="高額合算申請書_国保加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書_後期保険者番号" column="高額合算申請書_後期保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_後期広域連合名称" column="高額合算申請書_後期広域連合名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_後期被保険者番号" column="高額合算申請書_後期被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_後期加入期間開始年月日" column="高額合算申請書_後期加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書_後期加入期間終了年月日" column="高額合算申請書_後期加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書_支払方法区分" column="高額合算申請書_支払方法区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_支払場所" column="高額合算申請書_支払場所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_支払期間開始年月日" column="高額合算申請書_支払期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書_支払期間終了年月日" column="高額合算申請書_支払期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書_支払期間開始時間" column="高額合算申請書_支払期間開始時間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_支払期間終了時間" column="高額合算申請書_支払期間終了時間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_口座ID" column="高額合算申請書_口座ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書_支給申請書情報送付年月" column="高額合算申請書_支給申請書情報送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-<result property="高額合算申請書_自己負担額計算年月"  column="高額合算申請書_自己負担額計算年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-<result property="高額合算申請書加入歴01_保険者名" column="高額合算申請書加入歴01_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴01_加入期間開始年月日" column="高額合算申請書加入歴01_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴01_加入期間終了年月日" column="高額合算申請書加入歴01_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴01_自己負担額証明書整理番号" column="高額合算申請書加入歴01_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴02_保険者名" column="高額合算申請書加入歴02_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴02_加入期間開始年月日" column="高額合算申請書加入歴02_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴02_加入期間終了年月日" column="高額合算申請書加入歴02_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴02_自己負担額証明書整理番号" column="高額合算申請書加入歴02_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴03_保険者名" column="高額合算申請書加入歴03_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴03_加入期間開始年月日" column="高額合算申請書加入歴03_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴03_加入期間終了年月日" column="高額合算申請書加入歴03_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴03_自己負担額証明書整理番号" column="高額合算申請書加入歴03_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴04_保険者名" column="高額合算申請書加入歴04_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴04_加入期間開始年月日" column="高額合算申請書加入歴04_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴04_加入期間終了年月日" column="高額合算申請書加入歴04_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴04_自己負担額証明書整理番号" column="高額合算申請書加入歴04_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴05_保険者名" column="高額合算申請書加入歴05_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴05_加入期間開始年月日" column="高額合算申請書加入歴05_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴05_加入期間終了年月日" column="高額合算申請書加入歴05_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴05_自己負担額証明書整理番号" column="高額合算申請書加入歴05_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴06_保険者名" column="高額合算申請書加入歴06_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴06_加入期間開始年月日" column="高額合算申請書加入歴06_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴06_加入期間終了年月日" column="高額合算申請書加入歴06_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴06_自己負担額証明書整理番号" column="高額合算申請書加入歴06_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴07_保険者名" column="高額合算申請書加入歴07_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴07_加入期間開始年月日" column="高額合算申請書加入歴07_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴07_加入期間終了年月日" column="高額合算申請書加入歴07_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴07_自己負担額証明書整理番号" column="高額合算申請書加入歴07_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴08_保険者名" column="高額合算申請書加入歴08_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴08_加入期間開始年月日" column="高額合算申請書加入歴08_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴08_加入期間終了年月日" column="高額合算申請書加入歴08_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴08_自己負担額証明書整理番号" column="高額合算申請書加入歴08_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴09_保険者名" column="高額合算申請書加入歴09_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴09_加入期間開始年月日" column="高額合算申請書加入歴09_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴09_加入期間終了年月日" column="高額合算申請書加入歴09_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴09_自己負担額証明書整理番号" column="高額合算申請書加入歴09_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴10_保険者名" column="高額合算申請書加入歴10_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="高額合算申請書加入歴10_加入期間開始年月日" column="高額合算申請書加入歴10_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴10_加入期間終了年月日" column="高額合算申請書加入歴10_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="高額合算申請書加入歴10_自己負担額証明書整理番号" column="高額合算申請書加入歴10_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="最新被保台帳_市町村コード" column="最新被保台帳_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-<result property="最新被保台帳_被保険者番号" column="最新被保台帳_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-<result property="最新被保台帳_資格取得事由コード" column="最新被保台帳_資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="最新被保台帳_資格取得年月日" column="最新被保台帳_資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="最新被保台帳_資格取得届出年月日" column="最新被保台帳_資格取得届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="最新被保台帳_資格喪失事由コード" column="最新被保台帳_資格喪失事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="最新被保台帳_資格喪失年月日" column="最新被保台帳_資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="最新被保台帳_資格喪失届出年月日" column="最新被保台帳_資格喪失届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="最新被保台帳_被保険者区分コード" column="最新被保台帳_被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="最新被保台帳_住所地特例フラグ" column="最新被保台帳_住所地特例フラグ" />
-<result property="受給者台帳_受給申請事由" column="受給者台帳_受給申請事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="受給者台帳_要支援者認定申請区分" column="受給者台帳_要支援者認定申請区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="受給者台帳_受給申請年月日" column="受給者台帳_受給申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="受給者台帳_要介護認定状態区分コード" column="受給者台帳_要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="受給者台帳_認定有効期間開始年月日" column="受給者台帳_認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="受給者台帳_認定有効期間終了年月日" column="受給者台帳_認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="受給者台帳_認定年月日" column="受給者台帳_認定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="受給者台帳_旧措置者フラグ" column="受給者台帳_旧措置者フラグ"/>
-<result property="受給者台帳_みなし要介護区分コード" column="受給者台帳_みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-<result property="受給者台帳_直近異動事由コード" column="受給者台帳_直近異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴_保険者番号" column="高額合算申請書加入歴_保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+           <result property="高額合算申請書_対象年度" column="高額合算申請書_対象年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+           <result property="高額合算申請書_整理番号" column="高額合算申請書_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_履歴番号" column="高額合算申請書_履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_被保険者番号" column="高額合算申請書_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_申請状況区分" column="高額合算申請書_申請状況区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_申請年月日" column="高額合算申請書_申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_支給申請書整理番号" column="高額合算申請書_支給申請書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_国保支給申請書整理番号" column="高額合算申請書_国保支給申請書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_支給申請区分" column="高額合算申請書_支給申請区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_対象計算期間開始年月日" column="高額合算申請書_対象計算期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_対象計算期間終了年月日" column="高額合算申請書_対象計算期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_支給申請形態" column="高額合算申請書_支給申請形態" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_自己負担額証明書交付申請の有無" column="高額合算申請書_自己負担額証明書交付申請の有無" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_申請代表者氏名" column="高額合算申請書_申請代表者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_所得区分" column="高額合算申請書_所得区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_70歳以上の者に係る所得区分" column="高額合算申請書_70歳以上の者に係る所得区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_資格喪失年月日" column="高額合算申請書_資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_資格喪失事由" column="高額合算申請書_資格喪失事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_加入期間開始年月日" column="高額合算申請書_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_加入期間終了年月日" column="高額合算申請書_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_国保保険者番号" column="高額合算申請書_国保保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_国保保険者名称" column="高額合算申請書_国保保険者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_国保被保険者証記号" column="高額合算申請書_国保被保険者証記号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_国保被保険者証番号" column="高額合算申請書_国保被保険者証番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_国保世帯番号" column="高額合算申請書_国保世帯番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_国保続柄" column="高額合算申請書_国保続柄" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_国保加入期間開始年月日" column="高額合算申請書_国保加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_国保加入期間終了年月日" column="高額合算申請書_国保加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_後期保険者番号" column="高額合算申請書_後期保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_後期広域連合名称" column="高額合算申請書_後期広域連合名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_後期被保険者番号" column="高額合算申請書_後期被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_後期加入期間開始年月日" column="高額合算申請書_後期加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_後期加入期間終了年月日" column="高額合算申請書_後期加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_支払方法区分" column="高額合算申請書_支払方法区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_支払場所" column="高額合算申請書_支払場所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_支払期間開始年月日" column="高額合算申請書_支払期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_支払期間終了年月日" column="高額合算申請書_支払期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書_支払期間開始時間" column="高額合算申請書_支払期間開始時間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_支払期間終了時間" column="高額合算申請書_支払期間終了時間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_口座ID" column="高額合算申請書_口座ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書_支給申請書情報送付年月" column="高額合算申請書_支給申請書情報送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+           <result property="高額合算申請書_自己負担額計算年月"  column="高額合算申請書_自己負担額計算年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+           <result property="高額合算申請書加入歴01_保険者名" column="高額合算申請書加入歴01_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴01_加入期間開始年月日" column="高額合算申請書加入歴01_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴01_加入期間終了年月日" column="高額合算申請書加入歴01_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴01_自己負担額証明書整理番号" column="高額合算申請書加入歴01_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴02_保険者名" column="高額合算申請書加入歴02_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴02_加入期間開始年月日" column="高額合算申請書加入歴02_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴02_加入期間終了年月日" column="高額合算申請書加入歴02_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴02_自己負担額証明書整理番号" column="高額合算申請書加入歴02_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴03_保険者名" column="高額合算申請書加入歴03_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴03_加入期間開始年月日" column="高額合算申請書加入歴03_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴03_加入期間終了年月日" column="高額合算申請書加入歴03_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴03_自己負担額証明書整理番号" column="高額合算申請書加入歴03_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴04_保険者名" column="高額合算申請書加入歴04_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴04_加入期間開始年月日" column="高額合算申請書加入歴04_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴04_加入期間終了年月日" column="高額合算申請書加入歴04_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴04_自己負担額証明書整理番号" column="高額合算申請書加入歴04_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴05_保険者名" column="高額合算申請書加入歴05_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴05_加入期間開始年月日" column="高額合算申請書加入歴05_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴05_加入期間終了年月日" column="高額合算申請書加入歴05_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴05_自己負担額証明書整理番号" column="高額合算申請書加入歴05_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴06_保険者名" column="高額合算申請書加入歴06_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴06_加入期間開始年月日" column="高額合算申請書加入歴06_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴06_加入期間終了年月日" column="高額合算申請書加入歴06_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴06_自己負担額証明書整理番号" column="高額合算申請書加入歴06_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴07_保険者名" column="高額合算申請書加入歴07_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴07_加入期間開始年月日" column="高額合算申請書加入歴07_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴07_加入期間終了年月日" column="高額合算申請書加入歴07_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴07_自己負担額証明書整理番号" column="高額合算申請書加入歴07_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴08_保険者名" column="高額合算申請書加入歴08_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴08_加入期間開始年月日" column="高額合算申請書加入歴08_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴08_加入期間終了年月日" column="高額合算申請書加入歴08_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴08_自己負担額証明書整理番号" column="高額合算申請書加入歴08_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴09_保険者名" column="高額合算申請書加入歴09_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴09_加入期間開始年月日" column="高額合算申請書加入歴09_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴09_加入期間終了年月日" column="高額合算申請書加入歴09_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴09_自己負担額証明書整理番号" column="高額合算申請書加入歴09_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴10_保険者名" column="高額合算申請書加入歴10_保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="高額合算申請書加入歴10_加入期間開始年月日" column="高額合算申請書加入歴10_加入期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴10_加入期間終了年月日" column="高額合算申請書加入歴10_加入期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="高額合算申請書加入歴10_自己負担額証明書整理番号" column="高額合算申請書加入歴10_自己負担額証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="最新被保台帳_市町村コード" column="最新被保台帳_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+           <result property="最新被保台帳_被保険者番号" column="最新被保台帳_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+           <result property="最新被保台帳_資格取得事由コード" column="最新被保台帳_資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="最新被保台帳_資格取得年月日" column="最新被保台帳_資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="最新被保台帳_資格取得届出年月日" column="最新被保台帳_資格取得届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="最新被保台帳_資格喪失事由コード" column="最新被保台帳_資格喪失事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="最新被保台帳_資格喪失年月日" column="最新被保台帳_資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="最新被保台帳_資格喪失届出年月日" column="最新被保台帳_資格喪失届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="最新被保台帳_被保険者区分コード" column="最新被保台帳_被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="最新被保台帳_住所地特例フラグ" column="最新被保台帳_住所地特例フラグ" />
+           <result property="受給者台帳_受給申請事由" column="受給者台帳_受給申請事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="受給者台帳_要支援者認定申請区分" column="受給者台帳_要支援者認定申請区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="受給者台帳_受給申請年月日" column="受給者台帳_受給申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="受給者台帳_要介護認定状態区分コード" column="受給者台帳_要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="受給者台帳_認定有効期間開始年月日" column="受給者台帳_認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="受給者台帳_認定有効期間終了年月日" column="受給者台帳_認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="受給者台帳_認定年月日" column="受給者台帳_認定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+           <result property="受給者台帳_旧措置者フラグ" column="受給者台帳_旧措置者フラグ"/>
+           <result property="受給者台帳_みなし要介護区分コード" column="受給者台帳_みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+           <result property="受給者台帳_直近異動事由コード" column="受給者台帳_直近異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
          <association property="口座情報Entity"
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
         <association property="宛名Entity" 

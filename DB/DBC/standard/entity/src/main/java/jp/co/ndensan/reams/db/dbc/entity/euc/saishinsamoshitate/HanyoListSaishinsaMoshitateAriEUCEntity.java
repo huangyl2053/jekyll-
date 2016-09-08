@@ -139,7 +139,7 @@ public class HanyoListSaishinsaMoshitateAriEUCEntity {
     private RString 資格区分;
     @CsvField(order = 53, name = "住所地特例状態")
     private RString 住所地特例状態;
-    @CsvField(order = 54, name = "資格_証記載保険者番号")
+    @CsvField(order = 54, name = "（資格）証記載保険者番号")
     private RString 資格_証記載保険者番号;
     @CsvField(order = 55, name = "再審査事業者番号")
     private RString 再審査事業者番号;
@@ -153,7 +153,7 @@ public class HanyoListSaishinsaMoshitateAriEUCEntity {
     private RString サービス種類名;
     @CsvField(order = 60, name = "サービス項目")
     private RString サービス項目;
-    @CsvField(order = 61, name = "給付_証記載保険者番号")
+    @CsvField(order = 61, name = "（給付）証記載保険者番号")
     private RString 給付_証記載保険者番号;
     @CsvField(order = 62, name = "申立年月日")
     private RString 申立年月日;

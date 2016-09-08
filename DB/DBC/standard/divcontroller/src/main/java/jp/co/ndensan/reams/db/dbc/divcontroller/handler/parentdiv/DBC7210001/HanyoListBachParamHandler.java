@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7210001;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710210.DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -51,7 +53,7 @@ public class HanyoListBachParamHandler {
      *
      */
     public void onLoad() {
-        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC7210001.getReportId());
+        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701021.getReportId());
         manager = KaigoDonyuKeitaiManager.createInstance();
         List<KaigoDonyuKeitai> list = manager.get介護導入形態By業務分類(GyomuBunrui.介護事務);
         if (list.get(0).get導入形態コード().is単一()) {
@@ -70,17 +72,23 @@ public class HanyoListBachParamHandler {
         }
         for (int i = 0; i < year.minusYear(固定).getYearValue(); i++) {
             KeyValueDataSource source = new KeyValueDataSource();
-            source.setKey(new RString(year.getYearValue() - i));
-            source.setValue(new RDate(year.getYearValue() - i).getYear().wareki().toDateString());
+            source.setKey(new RString(固定 + i));
+            source.setValue(new RDate(固定 + i).getYear().wareki().toDateString());
             dataSource.add(source);
         }
+        if (!dataSource.isEmpty()) {
+            Collections.sort(dataSource, new Comparator<KeyValueDataSource>() {
+                @Override
+                public int compare(KeyValueDataSource entity1, KeyValueDataSource entity2) {
+                    return entity2.getKey().compareTo(entity1.getKey());
+                }
+            });
+        }
         div.getDdlTaishoNendo().setDataSource(dataSource);
-        List<KeyValueDataSource> sourceLsit = new ArrayList<>();
-        KeyValueDataSource datesource = new KeyValueDataSource();
-        datesource.setKey(項目名付加);
-        datesource.setKey(日付_編集);
-        sourceLsit.add(datesource);
-        div.getChkCsvHenshuHoho().setSelectedItems(sourceLsit);
+        List<RString> ckboxlist = new ArrayList<>();
+        ckboxlist.add(項目名付加);
+        ckboxlist.add(日付_編集);
+        div.getChkCsvHenshuHoho().setSelectedItemsByKey(ckboxlist);
     }
 
     /**
@@ -90,10 +98,11 @@ public class HanyoListBachParamHandler {
      */
     public DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter setBatchParameter() {
         DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter parameter = new DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter();
-        // TODO 出力項目ID 改頁出力順ID
-        parameter.set帳票ID(ReportIdDBC.DBC7210001.getReportId().value());
-//        parameter.set出力順ID(1);
-//        parameter.set出力順項目ID(RString.EMPTY);
+        parameter.set帳票ID(ReportIdDBC.DBC701021.getReportId().value());
+        if (div.getCcdShutsuryokujun().get出力順ID() != null) {
+            parameter.set出力順ID(div.getCcdShutsuryokujun().get出力順ID());
+        }
+        parameter.set出力順項目ID(div.getCcdShutsuryokuKoumoku().get出力項目ID());
         boolean 項目付加 = false;
         boolean 連番の付加 = false;
         boolean 日付スラッシュ編集 = false;

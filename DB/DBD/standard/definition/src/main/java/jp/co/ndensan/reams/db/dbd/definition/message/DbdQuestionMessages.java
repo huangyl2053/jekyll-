@@ -30,6 +30,7 @@ public enum DbdQuestionMessages implements IMessageGettable {
     被保険者関連解除確認(8, "非課税年金対象者情報の、表示中の被保険者との関連づけを解除します。よろしいですか？"),
     非課税年金再処理確認(9, "\"再処理前\"に変更される処理月があります。再処理前に設定後、再処理を実行すると、"
             + "取込済みの年月の非課税年金対象者情報は全て初期化されます。再処理前に設定してよろしいですか？"),
+    再発行確認(10, "?は発行済です。この帳票を発行してもよろしいですか？"),
     処理実行の確認(50, "処理を実行してもよろしいですか？", ButtonSelectPattern.OKCancel);
     private final RString message;
     private final int no;

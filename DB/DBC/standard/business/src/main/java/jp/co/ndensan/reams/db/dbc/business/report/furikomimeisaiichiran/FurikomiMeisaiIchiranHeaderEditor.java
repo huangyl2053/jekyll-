@@ -36,7 +36,7 @@ public class FurikomiMeisaiIchiranHeaderEditor implements IFurikomiMeisaiIchiran
         source.hyouzi_ymd2 = new RString(振込明細一覧Entity.get依頼日().toString());
         source.hyouzi_ymd3 = new RString(振込明細一覧Entity.get振込指定日().toString());
 
-        source.PageCnt = new RString(振込明細一覧Entity.get頁());
+        source.pageCnt = new RString(振込明細一覧Entity.get頁());
         source.shori_ymd_hms = new RString(振込明細一覧Entity.get作成年月日と時間().toString());
 
         if (振込明細一覧Entity.get市町村コード() != null) {

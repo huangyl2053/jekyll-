@@ -66,10 +66,10 @@ public class KaigoKyufuhiKagoMositateTouroku {
         RString loginUserId = controlData.getLoginInfo().getUserId();
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務, loginUserId);
         if (is単一()) {
+            div.getHokenshalist().setVisible(false);
+        } else {
             div.getHokenshalist().setVisible(true);
             div.getHokenshalist().loadHokenshaList(GyomuBunrui.介護事務);
-        } else {
-            div.getHokenshalist().setVisible(false);
         }
         getHandler(div).onLoad();
         get給付実績一覧(div, controlData, 市町村セキュリティ情報);
@@ -228,7 +228,7 @@ public class KaigoKyufuhiKagoMositateTouroku {
 
     private void get給付実績一覧(KaigoKyufuhiKagoMositateTourokuDiv div, IUrControlData controlData, ShichosonSecurityJoho 市町村セキュリティ情報) {
         LasdecCode 保険者番号 = null;
-        if (DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().value())) {
+        if (!is単一()) {
             if (RString.isNullOrEmpty(div.getHokenshalist().getSelectedItem().get市町村コード().value())) {
                 保険者番号 = new LasdecCode("000000");
             } else {

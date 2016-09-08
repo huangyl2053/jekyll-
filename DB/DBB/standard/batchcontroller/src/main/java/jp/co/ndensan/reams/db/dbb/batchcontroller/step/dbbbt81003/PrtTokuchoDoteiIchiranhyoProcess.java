@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshudoteiichiran.Toku
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -136,7 +137,7 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
                 導入団体クラス.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBB.DBB200031.getReportName(),
-                new RString(reportSourceWriter.pageCount().value()),
+                reportSourceWriter.pageCount().value() == 0 ? 定数_1 : new RString(reportSourceWriter.pageCount().value()),
                 csvOutFlag,
                 csvファイル名,
                 getOutputJokenhyoParam()
@@ -184,7 +185,7 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
                 entity.getGyoseikuCode().getColumnValue(),
                 new RDate(entity.getBirthDay().toString()),
                 entity.getJuminShubetsuCode(),
-                entity.getSeibetsu().value().get性別名称(),
+                get性別コード(entity.getSeibetsu()),
                 entity.getKanaMeisho().getColumnValue(),
                 entity.getKanaShimei(),
                 entity.getKanjiShimei(),
@@ -192,8 +193,15 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
                 entity.getKanjiJusho()
         );
         TokubetsuChoshuDoteiIchiranReport report = new TokubetsuChoshuDoteiIchiranReport(
-                導入団体クラス, null, null, target, parameter.get特別徴収開始月());
+                導入団体クラス, null, null, target, null);
         report.writeBy(reportSourceWriter);
+    }
+
+    private RString get性別コード(SeibetsuCodeNenkinTokucho seibetsu) {
+        if (seibetsu == null) {
+            return RString.EMPTY;
+        }
+        return seibetsu.value().get性別コード();
     }
 
     private void outputCsv(TokubetsuChoshuDoteiIchiranEntity entity) {

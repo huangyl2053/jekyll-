@@ -13,8 +13,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 総合事業（経過措置）対象者登録 のSpecです。
  *
- * @author Administrator
+ * @reamsid_L DBC-2400-010 yuqingzhang
  */
 public enum NijiyoboJohoTaishoshaTorokuPanelSpec implements IPredicate<NijiyoboJohoTaishoshaTorokuPanelDiv> {
 

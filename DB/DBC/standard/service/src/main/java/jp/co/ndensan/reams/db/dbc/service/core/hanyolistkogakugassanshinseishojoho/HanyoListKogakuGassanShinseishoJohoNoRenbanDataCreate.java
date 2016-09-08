@@ -103,6 +103,14 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
     private static final RString 直近異動事由コード名称11 = new RString("職権修正　　　");
     private static final RString 直近異動事由コード名称12 = new RString("職権取消　　　");
     private static final RString 直近異動事由コード名称20 = new RString("履歴修正　　　");
+    private static final RString 受給申請事由_初回申請 = new RString("初回申請　　");
+    private static final RString 受給申請事由_再申請内 = new RString("再申請内　　");
+    private static final RString 受給申請事由_再申請外 = new RString("再申請外　　");
+    private static final RString 受給申請事由_支援から申請 = new RString("支援から申請");
+    private static final RString 受給申請事由_区分変更申請 = new RString("区分変更申請");
+    private static final RString 受給申請事由_サ変更申請 = new RString("サ変更申請　");
+    private static final RString 受給申請事由_施行前申請 = new RString("施行前申請　");
+    private static final RString 受給申請事由_追加 = new RString("追加　　　　");
     private static final int INT_7 = 7;
     private static final int INT_8 = 8;
     private static final int INT_9 = 9;
@@ -129,7 +137,8 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
      * @param 地方公共団体 Association
      * @return HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity
      */
-    public HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity createCsvData(HanyoListKogakuGassanShinseishoJohoEntity entity,
+    public HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity createCsvData(
+            HanyoListKogakuGassanShinseishoJohoEntity entity,
             HanyoListKogakuGassanShinseishoJohoProcessParameter parameter,
             Map<RString, KoseiShichosonMaster> 市町村名MasterMap, Association 地方公共団体) {
         HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity csvEntity = new HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity();
@@ -445,7 +454,8 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
             }
             csvEntity.set送付先住所(送付先住所 != null
                     ? 送付先住所.get住所() : RString.EMPTY);
-            csvEntity.set送付先番地(送付先住所 != null && 送付先住所.get番地() != null && 送付先住所.get番地().getBanchi() != null
+            csvEntity.set送付先番地(送付先住所 != null && 送付先住所.get番地() != null
+                    && 送付先住所.get番地().getBanchi() != null
                     ? 送付先住所.get番地().getBanchi().getColumnValue() : RString.EMPTY);
             csvEntity.set送付先方書(送付先住所 != null && 送付先住所.get方書() != null
                     ? 送付先住所.get方書().getColumnValue() : RString.EMPTY);
@@ -455,7 +465,8 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
 
     private void set被保険者台帳管理(HanyoListKogakuGassanShinseishoJohoEntity entity,
             HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity csvEntity,
-            HanyoListKogakuGassanShinseishoJohoProcessParameter parameter, Map<RString, KoseiShichosonMaster> 市町村名MasterMap, Association 地方公共団体) {
+            HanyoListKogakuGassanShinseishoJohoProcessParameter parameter,
+            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, Association 地方公共団体) {
 
         csvEntity.set市町村コード(entity.get最新被保台帳_市町村コード() != null
                 ? entity.get最新被保台帳_市町村コード().getColumnValue() : RString.EMPTY);
@@ -495,7 +506,8 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
 
         csvEntity.set受給申請日(dataToRString(entity.get受給者台帳_受給申請年月日(), parameter));
         if (entity.get受給者台帳_要介護認定状態区分コード() != null) {
-            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(システム日付, entity.get受給者台帳_要介護認定状態区分コード()).getName());
+            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(システム日付,
+                    entity.get受給者台帳_要介護認定状態区分コード()).getName());
         }
         csvEntity.set受給認定開始日(dataToRString(entity.get受給者台帳_認定有効期間開始年月日(), parameter));
         csvEntity.set受給認定終了日(dataToRString(entity.get受給者台帳_認定有効期間終了年月日(), parameter));
@@ -524,23 +536,23 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
 
     private RString getJukyuShinseiJiyu(RString 受給申請事由コード, RString 受給申請事由, RString 要支援者認定申請区分) {
         if (JukyuShinseiJiyu.初回申請.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = new RString("初回申請　　");
+            受給申請事由 = 受給申請事由_初回申請;
         } else if (JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = new RString("再申請内　　");
+            受給申請事由 = 受給申請事由_再申請内;
         } else if (JukyuShinseiJiyu.再申請_有効期限外.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = new RString("再申請外　　");
+            受給申請事由 = 受給申請事由_再申請外;
         } else if (JukyuShinseiJiyu.要介護度変更申請.getコード().equals(受給申請事由コード)) {
             if (NinteiShienShinseiKubun.認定支援申請.getコード().equals(要支援者認定申請区分)) {
-                受給申請事由 = new RString("支援から申請");
+                受給申請事由 = 受給申請事由_支援から申請;
             } else {
-                受給申請事由 = new RString("区分変更申請");
+                受給申請事由 = 受給申請事由_区分変更申請;
             }
         } else if (JukyuShinseiJiyu.指定サービス種類変更申請.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = new RString("サ変更申請　");
+            受給申請事由 = 受給申請事由_サ変更申請;
         } else if (JukyuShinseiJiyu.申請_法施行前.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = new RString("施行前申請　");
+            受給申請事由 = 受給申請事由_施行前申請;
         } else if (JukyuShinseiJiyu.追加_申請なしの追加.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = new RString("追加　　　　");
+            受給申請事由 = 受給申請事由_追加;
         }
         return 受給申請事由;
     }

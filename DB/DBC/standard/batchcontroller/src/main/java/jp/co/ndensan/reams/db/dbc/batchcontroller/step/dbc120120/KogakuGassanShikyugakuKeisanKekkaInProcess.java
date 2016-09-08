@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -115,7 +116,7 @@ public class KogakuGassanShikyugakuKeisanKekkaInProcess extends BatchProcessBase
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(parameter.get保存先パース());
+        return new BatchSimpleReader(parameter.get保存先パース(), Encode.SJIS);
     }
 
     @Override

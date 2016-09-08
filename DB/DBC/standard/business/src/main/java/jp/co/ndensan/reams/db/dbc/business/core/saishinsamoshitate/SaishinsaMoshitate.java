@@ -166,29 +166,7 @@ public class SaishinsaMoshitate {
         eucEntity.set申立事由(getCodeByCode(DBCCodeShubetsu.過誤申立事由コード_下２桁_申立理由.getコード(), entity.get申立事由コード()));
         eucEntity.set国保連送付年月(getサービス日付(entity.get国保連送付年月(), processParameter));
         RString 申請事由 = nullToEmpty(entity.get受給申請事由());
-        RString 受給申請事由 = RString.EMPTY;
-        if (!申請事由.isNullOrEmpty()) {
-            受給申請事由 = JukyuShinseiJiyu.toValue(申請事由).getコード();
-        }
-        if (受給申請事由.equals(JukyuShinseiJiyu.初回申請.getコード())) {
-            eucEntity.set受給申請事由(初回申請);
-        } else if (受給申請事由.equals(JukyuShinseiJiyu.再申請_有効期限内.getコード())) {
-            eucEntity.set受給申請事由(再申請内);
-        } else if (受給申請事由.equals(JukyuShinseiJiyu.再申請_有効期限外.getコード())) {
-            eucEntity.set受給申請事由(再申請外);
-        } else if (受給申請事由.equals(JukyuShinseiJiyu.要介護度変更申請.getコード())) {
-            if (entity.is要支援者認定申請区分()) {
-                eucEntity.set受給申請事由(支援から申請);
-            } else {
-                eucEntity.set受給申請事由(区分変更申請);
-            }
-        } else if (受給申請事由.equals(JukyuShinseiJiyu.指定サービス種類変更申請.getコード())) {
-            eucEntity.set受給申請事由(サ変更申請);
-        } else if (受給申請事由.equals(JukyuShinseiJiyu.申請_法施行前.getコード())) {
-            eucEntity.set受給申請事由(施行前申請);
-        } else if (受給申請事由.equals(JukyuShinseiJiyu.追加_申請なしの追加.getコード())) {
-            eucEntity.set受給申請事由(追加);
-        }
+        eucEntity.set受給申請事由(set受給申請事由(申請事由, entity));
         eucEntity.set受給申請日(set日付編集(entity.get受給申請年月日(), processParameter));
         eucEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(new FlexibleDate(processParameter.getDate().toDateString()),
                 entity.get要介護認定状態区分コード().value()).getName());
@@ -199,9 +177,7 @@ public class SaishinsaMoshitate {
             eucEntity.set受給旧措置(旧措置者);
         }
         RString 要介護区分 = nullToEmpty(entity.getみなし要介護区分コード());
-        if (!要介護区分.isNullOrEmpty() && !MinashiCode.通常の認定.getコード().equals(MinashiCode.toValue(要介護区分).getコード())) {
-            eucEntity.set受給みなし更新認定(entity.getみなし要介護区分コード().value());
-        }
+        eucEntity.set受給みなし更新認定(set受給みなし更新認定(要介護区分));
         RString 受給直近事由 = nullToEmpty(entity.get直近異動事由コード());
         if (!受給直近事由.isNullOrEmpty()) {
             eucEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(受給直近事由));
@@ -268,7 +244,6 @@ public class SaishinsaMoshitate {
         eucEntity.set前住所(iKojin.get転入前().get住所());
         eucEntity.set前住所番地(get番地(iKojin.get転入前().get番地()));
         eucEntity.set前住所方書(get方書(iKojin.get転入前().get方書()));
-
         eucEntity.set市町村コード(entity.get市町村コード());
         if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
             eucEntity.set市町村名(get市町村名(市町村名MasterMap.get(entity.get市町村コード().value())));
@@ -302,29 +277,7 @@ public class SaishinsaMoshitate {
         eucEntity.set申立事由(getCodeByCode(DBCCodeShubetsu.過誤申立事由コード_下２桁_申立理由.getコード(), entity.get申立事由コード()));
         eucEntity.set国保連送付年月(getサービス日付(entity.get国保連送付年月(), processParameter));
         RString 申請事由 = nullToEmpty(entity.get受給申請事由());
-        RString 受給申請事由 = RString.EMPTY;
-        if (!申請事由.isNullOrEmpty()) {
-            受給申請事由 = JukyuShinseiJiyu.toValue(申請事由).getコード();
-        }
-        if (受給申請事由.equals(JukyuShinseiJiyu.初回申請.getコード())) {
-            eucEntity.set受給申請事由(初回申請);
-        } else if (受給申請事由.equals(JukyuShinseiJiyu.再申請_有効期限内.getコード())) {
-            eucEntity.set受給申請事由(再申請内);
-        } else if (受給申請事由.equals(JukyuShinseiJiyu.再申請_有効期限外.getコード())) {
-            eucEntity.set受給申請事由(再申請外);
-        } else if (受給申請事由.equals(JukyuShinseiJiyu.要介護度変更申請.getコード())) {
-            if (entity.is要支援者認定申請区分()) {
-                eucEntity.set受給申請事由(支援から申請);
-            } else {
-                eucEntity.set受給申請事由(区分変更申請);
-            }
-        } else if (受給申請事由.equals(JukyuShinseiJiyu.指定サービス種類変更申請.getコード())) {
-            eucEntity.set受給申請事由(サ変更申請);
-        } else if (受給申請事由.equals(JukyuShinseiJiyu.申請_法施行前.getコード())) {
-            eucEntity.set受給申請事由(施行前申請);
-        } else if (受給申請事由.equals(JukyuShinseiJiyu.追加_申請なしの追加.getコード())) {
-            eucEntity.set受給申請事由(追加);
-        }
+        eucEntity.set受給申請事由(set受給申請事由(申請事由, entity));
         eucEntity.set受給申請日(set日付編集(entity.get受給申請年月日(), processParameter));
         eucEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(new FlexibleDate(processParameter.getDate().toDateString()),
                 entity.get要介護認定状態区分コード().value()).getName());
@@ -335,9 +288,7 @@ public class SaishinsaMoshitate {
             eucEntity.set受給旧措置(旧措置者);
         }
         RString 要介護区分 = nullToEmpty(entity.getみなし要介護区分コード());
-        if (!要介護区分.isNullOrEmpty() && !MinashiCode.通常の認定.getコード().equals(MinashiCode.toValue(要介護区分).getコード())) {
-            eucEntity.set受給みなし更新認定(entity.getみなし要介護区分コード().value());
-        }
+        eucEntity.set受給みなし更新認定(set受給みなし更新認定(要介護区分));
         RString 受給直近事由 = nullToEmpty(entity.get直近異動事由コード());
         if (!受給直近事由.isNullOrEmpty()) {
             eucEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(受給直近事由));
@@ -386,6 +337,56 @@ public class SaishinsaMoshitate {
         jokenBuilder.append(processParameter.getJigyoushabangou());
         出力条件List.add(jokenBuilder.toRString());
         return 出力条件List;
+    }
+
+    private RString set受給申請事由(RString 申請事由, SaishinsaMoshitateRelateEntity entity) {
+        RString 受給申請事由;
+        if (申請事由.isNullOrEmpty()) {
+            return RString.EMPTY;
+        }
+        try {
+            JukyuShinseiJiyu.toValue(申請事由);
+        } catch (IllegalArgumentException e) {
+            return RString.EMPTY;
+        }
+        受給申請事由 = JukyuShinseiJiyu.toValue(申請事由).getコード();
+        if (受給申請事由.equals(JukyuShinseiJiyu.初回申請.getコード())) {
+            return 初回申請;
+        } else if (受給申請事由.equals(JukyuShinseiJiyu.再申請_有効期限内.getコード())) {
+            return 再申請内;
+        } else if (受給申請事由.equals(JukyuShinseiJiyu.再申請_有効期限外.getコード())) {
+            return 再申請外;
+        } else if (受給申請事由.equals(JukyuShinseiJiyu.要介護度変更申請.getコード())) {
+            if (entity.is要支援者認定申請区分()) {
+                return 支援から申請;
+            } else {
+                return 区分変更申請;
+            }
+        } else if (受給申請事由.equals(JukyuShinseiJiyu.指定サービス種類変更申請.getコード())) {
+            return サ変更申請;
+        } else if (受給申請事由.equals(JukyuShinseiJiyu.申請_法施行前.getコード())) {
+            return 施行前申請;
+        } else if (受給申請事由.equals(JukyuShinseiJiyu.追加_申請なしの追加.getコード())) {
+            return 追加;
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString set受給みなし更新認定(RString 要介護区分) {
+        if (要介護区分.isNullOrEmpty()) {
+            return RString.EMPTY;
+        }
+        try {
+            MinashiCode.toValue(要介護区分);
+        } catch (IllegalArgumentException e) {
+            return RString.EMPTY;
+        }
+        if (!MinashiCode.通常の認定.getコード().equals(MinashiCode.toValue(要介護区分).getコード())) {
+            return 要介護区分;
+        } else {
+            return RString.EMPTY;
+        }
     }
 
     private RString get市町村名(KoseiShichosonMaster koseiShichosonMaster) {

@@ -40,7 +40,6 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.banchi.Banchi;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -609,9 +608,11 @@ public class JigyoBunKogakuGassanShikyuKettei {
     }
 
     private RString get内容短(RString value) {
-        RString 内容短 = RString.EMPTY;
+        RString 内容短;
         if (!RString.isNullOrEmpty(value) && INT20 < value.length()) {
             内容短 = value.substring(0, INT20);
+        } else {
+            内容短 = value;
         }
         return 内容短;
     }
@@ -734,7 +735,7 @@ public class JigyoBunKogakuGassanShikyuKettei {
      * @return AccessLogUUID
      */
     public AccessLogUUID getアクセスログ() {
-        return AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        return AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
     }
 
     private PersonalData toPersonalData(RString 被保険者番号, ShikibetsuCode 識別コード) {
@@ -815,12 +816,6 @@ public class JigyoBunKogakuGassanShikyuKettei {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
-        List<JuminShubetsu> juminShubetsuList = new ArrayList<>();
-        juminShubetsuList.add(JuminShubetsu.日本人);
-        juminShubetsuList.add(JuminShubetsu.外国人);
-        juminShubetsuList.add(JuminShubetsu.住登外個人_外国人);
-        juminShubetsuList.add(JuminShubetsu.住登外個人_日本人);
-        key.set住民種別(juminShubetsuList);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付));

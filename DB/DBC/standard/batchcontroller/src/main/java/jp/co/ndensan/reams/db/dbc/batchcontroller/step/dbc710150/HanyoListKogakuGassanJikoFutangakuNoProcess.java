@@ -134,6 +134,14 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     private static final RString 直近異動事由コード名称11 = new RString("職権修正　　　");
     private static final RString 直近異動事由コード名称12 = new RString("職権取消　　　");
     private static final RString 直近異動事由コード名称20 = new RString("履歴修正　　　");
+    private static final RString 受給申請事由_初回申請 = new RString("初回申請　　");
+    private static final RString 受給申請事由_再申請内 = new RString("再申請内　　");
+    private static final RString 受給申請事由_再申請外 = new RString("再申請外　　");
+    private static final RString 受給申請事由_支援から申請 = new RString("支援から申請");
+    private static final RString 受給申請事由_区分変更申請 = new RString("区分変更申請");
+    private static final RString 受給申請事由_サ変更申請 = new RString("サ変更申請　");
+    private static final RString 受給申請事由_施行前申請 = new RString("施行前申請　");
+    private static final RString 受給申請事由_追加 = new RString("追加　　　　");
     private static final Code CODE = new Code("0003");
     private static final RString 定数_被保険者番号 = new RString("被保険者番号");
     private static final RString 住特_表示 = new RString("住特");
@@ -158,7 +166,9 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     private static final RString 送付対象外データを含める = new RString("送付対象外データを含める：");
     private static final RString 日本語ファイル名 = new RString("汎用リスト　高額合算自己負担額情報CSV");
     private static final RString 出力ファイル名 = new RString("HanyoListKogakuGassanJikoFutangaku.csv");
-    private static final RString CSV出力有無 = new RString("");
+    private static final RString CSV出力有無_なし = new RString("なし");
+    private static final RString CSV出力有無_あり = new RString("あり");
+    private RString 出力有無;
     private HanyoListKogakuGassanJikoFutangakuProcessParameter parameter;
     private List<KoseiShichosonMaster> 構成市町村マスタlist;
     private Map<LasdecCode, KoseiShichosonMaster> 構成市町村Map;
@@ -176,6 +186,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
 
     @Override
     protected IBatchReader createReader() {
+        出力有無 = CSV出力有無_なし;
         システム日付 = FlexibleDate.getNowDate();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         構成市町村マスタlist = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
@@ -225,7 +236,6 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         構成市町村マスタlist = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
         構成市町村Map = new HashMap<>();
-        personalDataList = new ArrayList<>();
         if (構成市町村マスタlist != null) {
             for (KoseiShichosonMaster data : 構成市町村マスタlist) {
                 if (data.get市町村コード() != null) {
@@ -238,6 +248,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
 
     @Override
     protected void process(HanyoListKogakuGassanJikoFutangakuEntity entity) {
+        出力有無 = CSV出力有無_あり;
         HanyoListKogakuGassanJikoFutangakuNoCsvEntity eucNoCsvEntity = new HanyoListKogakuGassanJikoFutangakuNoCsvEntity();
         edit高額合算自己負担額情報ファイル作成(entity, eucNoCsvEntity);
         eucCsvWriter.writeLine(eucNoCsvEntity);
@@ -678,23 +689,23 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
 
     private RString getJukyuShinseiJiyu(RString 受給申請事由コード, RString 受給申請事由, RString 要支援者認定申請区分) {
         if (JukyuShinseiJiyu.初回申請.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = new RString("初回申請　　");
+            受給申請事由 = 受給申請事由_初回申請;
         } else if (JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = new RString("再申請内　　");
+            受給申請事由 = 受給申請事由_再申請内;
         } else if (JukyuShinseiJiyu.再申請_有効期限外.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = new RString("再申請外　　");
+            受給申請事由 = 受給申請事由_再申請外;
         } else if (JukyuShinseiJiyu.要介護度変更申請.getコード().equals(受給申請事由コード)) {
             if (NinteiShienShinseiKubun.認定支援申請.getコード().equals(要支援者認定申請区分)) {
-                受給申請事由 = new RString("支援から申請");
+                受給申請事由 = 受給申請事由_支援から申請;
             } else {
-                受給申請事由 = new RString("区分変更申請");
+                受給申請事由 = 受給申請事由_区分変更申請;
             }
         } else if (JukyuShinseiJiyu.指定サービス種類変更申請.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = new RString("サ変更申請　");
+            受給申請事由 = 受給申請事由_サ変更申請;
         } else if (JukyuShinseiJiyu.申請_法施行前.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = new RString("施行前申請　");
+            受給申請事由 = 受給申請事由_施行前申請;
         } else if (JukyuShinseiJiyu.追加_申請なしの追加.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = new RString("追加　　　　");
+            受給申請事由 = 受給申請事由_追加;
         }
         return 受給申請事由;
     }
@@ -724,8 +735,12 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
-        AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
+        if (personalDataList == null || personalDataList.isEmpty()) {
+            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
+        } else {
+            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
+        }
         バッチ出力条件リストの出力();
     }
 
@@ -743,7 +758,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
                 RString.EMPTY,
                 日本語ファイル名,
                 出力件数,
-                CSV出力有無,
+                出力有無,
                 出力ファイル名,
                 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);

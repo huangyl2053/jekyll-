@@ -62,6 +62,16 @@ public class ChikuShichosonSelectHandler {
     }
 
     /**
+     * コンストラクタです。
+     *
+     * @param div ChikuShichosonSelectHandler
+     * @return ChikuShichosonSelectHandler
+     */
+    public static ChikuShichosonSelectHandler of(ChikuShichosonSelectDiv div) {
+        return new ChikuShichosonSelectHandler(div);
+    }
+
+    /**
      * 共有子Div画面の初期表示です。
      */
     public void init() {

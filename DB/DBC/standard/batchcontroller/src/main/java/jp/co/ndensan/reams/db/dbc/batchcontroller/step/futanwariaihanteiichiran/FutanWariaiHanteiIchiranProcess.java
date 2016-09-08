@@ -10,10 +10,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.euc.futanwariaihanteiichiran.FutanWariaiHanteiIchiranCsvEntityEditor;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaihanteiichiran.FutanWariaiHanteiIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaihanteiichiran.FutanWariaiHanteiIchiranReport;
+import jp.co.ndensan.reams.db.dbc.definition.core.riyoshafutan.RiyoshaFutanWaritaiHantei_ErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaihanteiichiran.FutanWariaiHanteiIchiranProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.futanwariaihanteiichiran.FutanWariaiHanteiIchiranCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaihanteiichiran.FutanwariaiHanteiIchiranEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.DbWT1801ShoriKekkaKakuninListEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaihanteiichiran.FutanWariaiHanteiIchiranSource;
 import jp.co.ndensan.reams.db.dbx.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbz.business.config.KaigoToiawasesakiConfig;
@@ -23,11 +25,13 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -39,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
@@ -62,10 +67,11 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
     private static final ReportId ID = ReportIdDBC.DBC200089.getReportId();
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaihanteiichiran.IFutanwariaiHanteiIchiranMapper.get負担割合判定一覧データ");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("FutanWariaiHanteiIchiranCsv"));
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC200089"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString CSVMEISHO = new RString("FutanWariaiHanteiIchiran.csv");
+    private static final RString 処理結果確認リストTEMP = new RString("DbWT1801ShoriKekkaKakuninList");
     private static final RString 帳票名 = new RString("負担割合判定一覧");
     private static final RString あり = new RString("あり");
     private static final RString 年度 = new RString("【年度】");
@@ -87,17 +93,20 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
     private final List<PersonalData> personalDataList = new ArrayList<>();
     private final List<RString> rStringList = new ArrayList<>();
     private Association 導入団体クラス;
+    private boolean flag;
     private int 連番 = 0;
     @BatchWriter
     private BatchReportWriter<FutanWariaiHanteiIchiranSource> batchReportWriter;
     private ReportSourceWriter<FutanWariaiHanteiIchiranSource> reportSourceWriter;
     private CsvWriter<FutanWariaiHanteiIchiranCsvEntity> eucCsvWriter;
+    private IBatchTableWriter tempResultListDbWriter;
 
     @Override
     protected void initialize() {
         導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         KaigoToiawasesakiConfig config = new KaigoToiawasesakiConfig();
         共通_文字コード = config.getEUC共通_文字コード();
+        flag = true;
     }
 
     @Override
@@ -106,6 +115,7 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
                 .addBreak(new FutanWariaiHanteiIchiranPageBreak(rStringList)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        this.tempResultListDbWriter = new BatchEntityCreatedTempTableWriter(処理結果確認リストTEMP, DbWT1801ShoriKekkaKakuninListEntity.class);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         Encode 文字コード;
         if (RSTRING_TWO.equals(共通_文字コード)) {
@@ -135,6 +145,14 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
         eucCsvWriter.close();
         AccessLogUUID accessLogUUIDKodomo = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         manager.spool(eucFilePath, accessLogUUIDKodomo);
+        if (flag) {
+            DbWT1801ShoriKekkaKakuninListEntity resultListEntity = new DbWT1801ShoriKekkaKakuninListEntity();
+            resultListEntity.setErrorKubun(RiyoshaFutanWaritaiHantei_ErrorKubun.負担割合判定一覧作成.getコード());
+            if (!RSTRING_THREE.equals(processParameter.get処理区分())) {
+                resultListEntity.setBiko(パターン107(processParameter.get対象年度()));
+            }
+            tempResultListDbWriter.insert(resultListEntity);
+        }
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ID.value(),
                 導入団体クラス.getLasdecCode_().value(),
@@ -160,6 +178,14 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
         tmp = tmp.concat(テスト処理);
         outputJokenhyoList.add(tmp);
         return outputJokenhyoList;
+    }
+
+    private RString パターン107(FlexibleYear year) {
+        RString wareki = RString.EMPTY;
+        if (year != null) {
+            wareki = year.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+        }
+        return wareki;
     }
 
     private RString edit処理日(RDateTime dateTime) {
@@ -188,6 +214,7 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
     @Override
     protected void usualProcess(FutanwariaiHanteiIchiranEntity entity) {
         連番++;
+        flag = false;
         entity.set連番(連番);
         entity.set地方公共団体コード(導入団体クラス.get地方公共団体コード().value());
         entity.set市町村名(導入団体クラス.get市町村名());
