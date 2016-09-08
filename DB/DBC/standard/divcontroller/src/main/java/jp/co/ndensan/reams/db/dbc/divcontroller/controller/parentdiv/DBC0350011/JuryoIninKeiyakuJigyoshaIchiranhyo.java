@@ -66,7 +66,7 @@ public class JuryoIninKeiyakuJigyoshaIchiranhyo {
         if (div.getJuryoininbaraiChushutsuJoken().getTxtKeiyakuYMD().getFromValue() != null) {
             parameter.set契約日FROM(new FlexibleDate(div.getJuryoininbaraiChushutsuJoken().getTxtKeiyakuYMD().getFromValue().toDateString()));
         }
-        if (div.getJuryoininbaraiChushutsuJoken().getTxtKeiyakuYMD().getFromValue() != null) {
+        if (div.getJuryoininbaraiChushutsuJoken().getTxtKeiyakuYMD().getToValue() != null) {
             parameter.set契約日TO(new FlexibleDate(div.getJuryoininbaraiChushutsuJoken().getTxtKeiyakuYMD().getToValue().toDateString()));
         }
         parameter.set契約種別(div.getJuryoininbaraiChushutsuJoken().getRadKeiyakuShubetsu().getSelectedKey());
