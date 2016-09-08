@@ -454,7 +454,7 @@ public class JigyoJokyoHokokuNempoSakuei {
     private List<RString> get処理名() {
         List<RString> 処理名リスト = new ArrayList<>();
         for (Syorimei 処理名 : Syorimei.values()) {
-            処理名リスト.add(処理名.getコード());
+            処理名リスト.add(処理名.get名称());
         }
         return 処理名リスト;
     }
