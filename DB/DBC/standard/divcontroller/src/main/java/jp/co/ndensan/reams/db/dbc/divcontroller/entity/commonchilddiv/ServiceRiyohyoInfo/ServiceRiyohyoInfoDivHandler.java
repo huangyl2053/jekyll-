@@ -374,6 +374,26 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getChkZanteiKubun().setSelectedItemsByKey(new ArrayList<RString>());
         div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList()
                 .setDataSource(new ArrayList<dgServiceRiyohyoBeppyoList_Row>());
+        事業者サービスクリア();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtTani().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtHdnGendogakuTaishogaiFlg().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendoChokaTani().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendonaiTani().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendoChokaTani().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendonaiTani().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtHiyoSogaku().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtHokenKyufugaku().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuHoken().clearValue();
+        div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuZengaku().clearValue();
     }
 
     private void 非活性または活性(boolean flg) {
