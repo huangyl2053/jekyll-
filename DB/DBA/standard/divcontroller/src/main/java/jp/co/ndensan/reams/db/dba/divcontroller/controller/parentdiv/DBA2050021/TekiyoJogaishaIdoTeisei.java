@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.tekiyojogaishaidoteisei.TekiyoJog
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -33,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -46,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class TekiyoJogaishaIdoTeisei {
 
     private static final LockingKey 前排他ロックキー = new LockingKey("TekiyoJogaiIdoTeisei");
+    private static final RString COMMON_BUTTON_UPDATE = new RString("btnUpdate");
 
     /**
      * 該当者検索画面でグリッドから対象者を選択した際に実行されます。
@@ -54,15 +57,32 @@ public class TekiyoJogaishaIdoTeisei {
      * @return レスポンス
      */
     public ResponseData onLoad(TekiyoJogaishaIdoTeiseiDiv div) {
-        new TekiyoJogaishaIdoTeiseiHandler(div).initLoad(
-                ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
+
+        TekiyoJogaishaIdoTeiseiHandler handler = new TekiyoJogaishaIdoTeiseiHandler(div);
+        ShikibetsuCode shikibetsuCode = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+        handler.initLoad(shikibetsuCode);
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             div.setReadOnly(true);
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(new ValidationMessageControlPair(ShisetsuNyutaishoIdoErrorMessage.排他_他のユーザが使用中));
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
+
+        if (!handler.is適用除外者(shikibetsuCode)) {
+            return setNotExecutableAndReturnMessage(div, DbzInformationMessages.適用除外者未登録.getMessage());
+        }
+
         return ResponseData.of(div).respond();
+    }
+
+    private ResponseData<TekiyoJogaishaIdoTeiseiDiv> setNotExecutableAndReturnMessage(TekiyoJogaishaIdoTeiseiDiv div, Message message) {
+        div.setDisabled(true);
+        RealInitialLocker.release(前排他ロックキー);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_UPDATE, true);
+        return ResponseData.of(div).addMessage(message).respond();
     }
 
     /**
