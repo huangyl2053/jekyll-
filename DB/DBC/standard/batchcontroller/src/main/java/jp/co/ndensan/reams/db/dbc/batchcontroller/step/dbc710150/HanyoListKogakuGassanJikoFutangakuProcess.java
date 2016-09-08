@@ -169,7 +169,7 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
     private static final RString 出力ファイル名 = new RString("HanyoListKogakuGassanJikoFutangaku.csv");
     private static final RString CSV出力有無_なし = new RString("なし");
     private static final RString CSV出力有無_あり = new RString("あり");
-    private RString CSV出力有無;
+    private RString 出力有無;
     private HanyoListKogakuGassanJikoFutangakuProcessParameter parameter;
     private List<KoseiShichosonMaster> 構成市町村マスタlist;
     private Map<LasdecCode, KoseiShichosonMaster> 構成市町村Map;
@@ -189,7 +189,7 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
     @Override
     protected IBatchReader createReader() {
         連番 = Decimal.ONE;
-        CSV出力有無 = CSV出力有無_なし;
+        出力有無 = CSV出力有無_なし;
         システム日付 = FlexibleDate.getNowDate();
         if (parameter.get出力順() != null) {
             IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
@@ -239,7 +239,7 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
 
     @Override
     protected void process(HanyoListKogakuGassanJikoFutangakuEntity entity) {
-        CSV出力有無 = CSV出力有無_あり;
+        出力有無 = CSV出力有無_あり;
         HanyoListKogakuGassanJikoFutangakuCsvEntity eucCsvEntity = new HanyoListKogakuGassanJikoFutangakuCsvEntity();
         連番 = 連番.add(Decimal.ONE);
         eucCsvEntity.set連番(DecimalFormatter.toRString(連番, NUMZERO));
@@ -751,7 +751,7 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
                 RString.EMPTY,
                 日本語ファイル名,
                 出力件数,
-                CSV出力有無,
+                出力有無,
                 出力ファイル名,
                 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);

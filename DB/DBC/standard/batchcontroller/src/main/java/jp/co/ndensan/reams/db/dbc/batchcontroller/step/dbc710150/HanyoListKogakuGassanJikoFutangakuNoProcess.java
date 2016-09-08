@@ -168,7 +168,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     private static final RString 出力ファイル名 = new RString("HanyoListKogakuGassanJikoFutangaku.csv");
     private static final RString CSV出力有無_なし = new RString("なし");
     private static final RString CSV出力有無_あり = new RString("あり");
-    private RString CSV出力有無;
+    private RString 出力有無;
     private HanyoListKogakuGassanJikoFutangakuProcessParameter parameter;
     private List<KoseiShichosonMaster> 構成市町村マスタlist;
     private Map<LasdecCode, KoseiShichosonMaster> 構成市町村Map;
@@ -186,7 +186,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
 
     @Override
     protected IBatchReader createReader() {
-        CSV出力有無 = CSV出力有無_なし;
+        出力有無 = CSV出力有無_なし;
         システム日付 = FlexibleDate.getNowDate();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         構成市町村マスタlist = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
@@ -248,7 +248,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
 
     @Override
     protected void process(HanyoListKogakuGassanJikoFutangakuEntity entity) {
-        CSV出力有無 = CSV出力有無_あり;
+        出力有無 = CSV出力有無_あり;
         HanyoListKogakuGassanJikoFutangakuNoCsvEntity eucNoCsvEntity = new HanyoListKogakuGassanJikoFutangakuNoCsvEntity();
         edit高額合算自己負担額情報ファイル作成(entity, eucNoCsvEntity);
         eucCsvWriter.writeLine(eucNoCsvEntity);
@@ -758,7 +758,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
                 RString.EMPTY,
                 日本語ファイル名,
                 出力件数,
-                CSV出力有無,
+                出力有無,
                 出力ファイル名,
                 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);

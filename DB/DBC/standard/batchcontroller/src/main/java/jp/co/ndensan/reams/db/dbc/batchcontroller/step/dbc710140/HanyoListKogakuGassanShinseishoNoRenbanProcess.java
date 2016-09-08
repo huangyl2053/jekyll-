@@ -93,7 +93,7 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
     private static final RString すべて = new RString("すべて");
     private static final RString CSV出力有無_なし = new RString("なし");
     private static final RString CSV出力有無_あり = new RString("あり");
-    private RString CSV出力有無;
+    private RString 出力有無;
     private HanyoListKogakuGassanShinseishoJohoProcessParameter parameter;
     private HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate dataCreate;
     private RString eucFilePath;
@@ -111,7 +111,7 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
 
     @Override
     protected IBatchReader createReader() {
-        CSV出力有無 = CSV出力有無_なし;
+        出力有無 = CSV出力有無_なし;
         システム日付 = FlexibleDate.getNowDate();
         dataCreate = new HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate(システム日付);
 
@@ -173,7 +173,7 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
 
     @Override
     protected void process(HanyoListKogakuGassanShinseishoJohoEntity entity) {
-        CSV出力有無 = CSV出力有無_あり;
+        出力有無 = CSV出力有無_あり;
         eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter, 市町村名MasterMap, 地方公共団体));
         personalDataList.add(toPersonalData(entity));
     }
@@ -208,7 +208,7 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
                 RString.EMPTY,
                 日本語ファイル名,
                 出力件数,
-                CSV出力有無,
+                出力有無,
                 英数字ファイル名,
                 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory
