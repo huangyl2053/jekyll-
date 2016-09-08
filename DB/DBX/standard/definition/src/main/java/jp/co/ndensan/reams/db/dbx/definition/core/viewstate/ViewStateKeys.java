@@ -285,6 +285,10 @@ public enum ViewStateKeys {
      */
     利用者負担額減額情報ListのViewState,
     /**
+     * 特別地域加算減免申請情報ListのViewState
+     */
+    特別地域加算減免申請情報ListのViewState,
+    /**
      * 該当DB申請
      */
     該当DB申請,
@@ -2199,6 +2203,10 @@ public enum ViewStateKeys {
     /**
      * スケジュール履歴情報Entity
      */
-    スケジュール履歴情報Entity;
+    スケジュール履歴情報Entity,
+    /**
+     * 特別地域加算減免申請の情報List
+     */
+    特別地域加算減免申請の情報List;
 
 }

@@ -53,9 +53,7 @@ public class KagoMoshitateTanPanel {
         List<KyufuKanrihyoShokaiDataModel> 対象者一覧list
                 = ViewStateHolder.get(ViewStateKeys.給付管理明細一覧, ArrayList.class);
         boolean tanflg = ViewStateHolder.get(ViewStateKeys.訪問通所サービスフラグ, Boolean.class);
-        if (tanflg && 対象者一覧list != null) {
-            getHandler(div).setShohinSourcre(対象者一覧list);
-        }
+        getHandler(div).setShohinSourcre(対象者一覧list, tanflg);
         アクセスログ(対象者一覧.get被保険者番号());
         getHandler(div).initialize(対象者一覧, 対象者一覧list);
         return ResponseData.of(div).respond();

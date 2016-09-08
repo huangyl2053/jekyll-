@@ -52,6 +52,8 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
     private static final int INDEX_20 = 20;
     private static final int INDEX_21 = 21;
 
+    private static final int 番号LEN = 10;
+
     private final ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減;
     private final IKojin iKojin;
     private final IAtesaki iAtesaki;
@@ -106,17 +108,26 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
 
         EditedKojin 編集後個人 = getEditedKojin(iKojin, 帳票制御共通, 地方公共団体);
         source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
-        source.hihokenshaNo1 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_0, INDEX_1);
-        source.hihokenshaNo2 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_1, INDEX_2);
-        source.hihokenshaNo3 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_2, INDEX_3);
-        source.hihokenshaNo4 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_3, INDEX_4);
-        source.hihokenshaNo5 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_4, INDEX_5);
-        source.hihokenshaNo6 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_5, INDEX_6);
-        source.hihokenshaNo7 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_6, INDEX_7);
-        source.hihokenshaNo8 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_7, INDEX_8);
-        source.hihokenshaNo9 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_8, INDEX_9);
-        source.hihokenshaNo10 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_9, INDEX_10);
-        source.ketteiYMD = 社会福祉法人等利用者負担軽減.get決定年月日().wareki().toDateString();
+        if (社会福祉法人等利用者負担軽減 != null) {
+            if (社会福祉法人等利用者負担軽減.get被保険者番号() != null
+                    && !社会福祉法人等利用者負担軽減.get被保険者番号().isEmpty()
+                    && 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().length() >= 番号LEN) {
+                source.hihokenshaNo1 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_0, INDEX_1);
+                source.hihokenshaNo2 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_1, INDEX_2);
+                source.hihokenshaNo3 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_2, INDEX_3);
+                source.hihokenshaNo4 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_3, INDEX_4);
+                source.hihokenshaNo5 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_4, INDEX_5);
+                source.hihokenshaNo6 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_5, INDEX_6);
+                source.hihokenshaNo7 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_6, INDEX_7);
+                source.hihokenshaNo8 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_7, INDEX_8);
+                source.hihokenshaNo9 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_8, INDEX_9);
+                source.hihokenshaNo10 = 社会福祉法人等利用者負担軽減.get被保険者番号().getColumnValue().substring(INDEX_9, INDEX_10);
+            }
+
+            if (社会福祉法人等利用者負担軽減.get決定年月日() != null && !社会福祉法人等利用者負担軽減.get決定年月日().isEmpty()) {
+                source.ketteiYMD = 社会福祉法人等利用者負担軽減.get決定年月日().wareki().toDateString();
+            }
+        }
 
         source.ninteiKekka4 = RString.EMPTY;
         source.ninteiKekka5 = RString.EMPTY;
@@ -132,16 +143,20 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
             source.yukoYMD = 社会福祉法人等利用者負担軽減.get適用終了年月日().wareki().toDateString();
             source.ninteiKekka3 = new RString("居住費．食費のみ");
             source.kakuninNoTitle = new RString("確　認　番　号");
-            source.kakuninNo1 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_0, INDEX_1);
-            source.kakuninNo2 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_1, INDEX_2);
-            source.kakuninNo3 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_2, INDEX_3);
-            source.kakuninNo4 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_3, INDEX_4);
-            source.kakuninNo5 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_4, INDEX_5);
-            source.kakuninNo6 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_5, INDEX_6);
-            source.kakuninNo7 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_6, INDEX_7);
-            source.kakuninNo8 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_7, INDEX_8);
-            source.kakuninNo9 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_8, INDEX_9);
-            source.kakuninNo10 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_9, INDEX_10);
+
+            if (社会福祉法人等利用者負担軽減.get確認番号() != null && !社会福祉法人等利用者負担軽減.get確認番号().isEmpty()
+                    && 社会福祉法人等利用者負担軽減.get確認番号().length() >= 番号LEN) {
+                source.kakuninNo1 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_0, INDEX_1);
+                source.kakuninNo2 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_1, INDEX_2);
+                source.kakuninNo3 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_2, INDEX_3);
+                source.kakuninNo4 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_3, INDEX_4);
+                source.kakuninNo5 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_4, INDEX_5);
+                source.kakuninNo6 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_5, INDEX_6);
+                source.kakuninNo7 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_6, INDEX_7);
+                source.kakuninNo8 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_7, INDEX_8);
+                source.kakuninNo9 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_8, INDEX_9);
+                source.kakuninNo10 = 社会福祉法人等利用者負担軽減.get確認番号().substring(INDEX_9, INDEX_10);
+            }
 
             source.shoninNg = RString.EMPTY;
             source.riyu1 = RString.EMPTY;

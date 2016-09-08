@@ -210,7 +210,7 @@
         SELECT MAX("rirekiNo")
         FROM
         rgdb."DbT4001JukyushaDaicho" AS "T4001a"
-        LEFT OUTER JOIN
+        INNER JOIN
         (
         SELECT rgdb."DbT4001JukyushaDaicho"."hihokenshaNo" AS "hihokenshaNo"
         FROM

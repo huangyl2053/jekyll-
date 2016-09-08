@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
+ * 総合事業（経過措置）対象者登録 のValidationMessagesです。
  *
- * @author Administrator
+ * @reamsid_L DBC-2400-010 yuqingzhang
  */
 public enum NijiyoboJohoTaishoshaTorokuPanelValidationMassages implements IValidationMessage {
 

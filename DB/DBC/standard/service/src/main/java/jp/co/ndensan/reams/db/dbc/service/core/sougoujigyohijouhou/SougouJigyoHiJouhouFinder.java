@@ -45,7 +45,7 @@ public class SougouJigyoHiJouhouFinder {
      * サービス種類データを取得します。
      *
      * @param parameter SougouJigyoHiJouhouParameter
-     * @return List<ShuruiShikyuGendogakuMainResult>
+     * @return SearchResult<SougouJigyoHiJouhouBusiness>
      */
     public SearchResult<SougouJigyoHiJouhouBusiness> getサービス種類(SougouJigyoHiJouhouParameter parameter) {
         ISougouJigyoHiJouhouMapper mapper = mapperProvider.create(ISougouJigyoHiJouhouMapper.class);

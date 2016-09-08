@@ -37,7 +37,7 @@ public class ShotokuDankaiBetsuHihokenshasuIchiranReport extends Report<ShotokuD
      * @param 資格基準日 RDate
      * @param 調定基準日 RDate
      * @param 年度 FlexibleYear
-     * @param hokenryoDankaiList
+     * @param hokenryoDankaiList HokenryoDankaiList
      */
     public ShotokuDankaiBetsuHihokenshasuIchiranReport(
             HokenshaDankaibetsuHihokenshasuGroup 保険者設定段階別被保険者数合計entity,

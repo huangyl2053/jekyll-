@@ -194,7 +194,7 @@
         <result property="総合事業対象者_適用開始年月日" column="総合事業対象者_適用開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="総合事業対象者_適用終了年月日" column="総合事業対象者_適用終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="総合事業対象者_チェックリスト実施日" column="総合事業対象者_チェックリスト実施日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="総合事業対象者_決定年月日" column="総合事業対象者_決定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="総合事業対象者_決定年月日" column="総合事業対象者_決定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="居宅届出_届出区分" column="居宅届出_届出区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="事業者作成_作成区分コード" column="事業者作成_作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="事業者作成_計画事業者番号" column="事業者作成_計画事業者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -802,10 +802,10 @@
                     AND 利用者負担額減額."ketteiYMD" <![CDATA[<=]]> #{hitsukehanito}
                 </if>
                 <if test="is旧措置者">
-                    AND 利用者負担額減額."kyuSochishaUmu"=TRUE;
+                    AND 利用者負担額減額."kyuSochishaUmu"=TRUE
                 </if>
                  <if test="is旧措置他">
-                     AND 利用者負担額減額."kyuSochishaUmu"=FALSE;
+                     AND 利用者負担額減額."kyuSochishaUmu"=FALSE
                 </if>
                 <if test="is却下者">
                     AND 利用者負担額減額."ketteiKubun" = #{決定区分_承認しない}
