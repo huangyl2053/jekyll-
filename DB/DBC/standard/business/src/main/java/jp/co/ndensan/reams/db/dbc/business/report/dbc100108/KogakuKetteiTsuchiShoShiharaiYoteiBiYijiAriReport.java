@@ -28,7 +28,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriReport extends Report<Ko
      *
      * @param 決定通知書Entity JigyouKetteiTutisyoEntity
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
-     * @param 認証者情報
+     * @param 認証者情報 NinshoshaSource
      */
     public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriReport(JigyouKetteiTutisyoEntity 決定通知書Entity,
             ChohyoSeigyoKyotsu 帳票制御共通,
@@ -40,8 +40,10 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriReport extends Report<Ko
 
     @Override
     public void writeBy(ReportSourceWriter<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriSource> writer) {
-        IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor editor = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor(決定通知書Entity, 帳票制御共通);
-        IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriBuilder builder = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriBuilder(editor);
+        IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor editor
+                = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor(決定通知書Entity, 帳票制御共通, 認証者情報);
+        IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriBuilder builder
+                = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriBuilder(editor);
         writer.writeLine(builder);
     }
 
