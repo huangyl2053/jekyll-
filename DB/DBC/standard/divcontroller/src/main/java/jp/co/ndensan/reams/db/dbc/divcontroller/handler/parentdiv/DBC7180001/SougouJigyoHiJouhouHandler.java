@@ -17,11 +17,8 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSet
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -35,11 +32,10 @@ public class SougouJigyoHiJouhouHandler {
     private static final RString 導入形態_単一 = new RString("1");
     private static final RString 導入形態_広域 = new RString("2");
     private static final RString 導入形態コード_111 = new RString("111");
-    private static final RString 導入形態コード_120 = new RString("120");
-    private static final RString KEY0 = new RString("key0");
-    private static final RString KEY1 = new RString("key1");
-    private static final RString KEY2 = new RString("key2");
-    private static final RString KEY3 = new RString("key3");
+    private static final RString 作成区分_KEY0 = new RString("key0");
+    private static final RString 作成区分_KEY1 = new RString("key1");
+    private static final RString 作成区分_KEY2 = new RString("key2");
+    private static final RString 作成区分_KEY3 = new RString("key3");
     private static final RString 全市町村 = new RString("000000");
     private final SougouJigyoHiJouhouDiv div;
 
@@ -96,14 +92,14 @@ public class SougouJigyoHiJouhouHandler {
         }
         div.getDdlSabisuSyurui().setSelectedKey(new RString("Empty"));
         div.getDdlSabisuSyurui().setReadOnly(false);
-        if (KEY0.equals(key)) {
+        if (作成区分_KEY0.equals(key)) {
             div.getDdlSabisuSyurui().setReadOnly(true);
             div.getCcdShutsuryokuKoumoku().load(ReportIdDBC.DBC701018.getReportId().value(), SubGyomuCode.DBC介護給付);
-        } else if (KEY1.equals(key)) {
+        } else if (作成区分_KEY1.equals(key)) {
             div.getCcdShutsuryokuKoumoku().load(ReportIdDBC.DBC701022.getReportId().value(), SubGyomuCode.DBC介護給付);
-        } else if (KEY2.equals(key)) {
+        } else if (作成区分_KEY2.equals(key)) {
             div.getCcdShutsuryokuKoumoku().load(ReportIdDBC.DBC701023.getReportId().value(), SubGyomuCode.DBC介護給付);
-        } else if (KEY3.equals(key)) {
+        } else if (作成区分_KEY3.equals(key)) {
             div.getCcdShutsuryokuKoumoku().load(ReportIdDBC.DBC701024.getReportId().value(), SubGyomuCode.DBC介護給付);
         }
 
@@ -146,12 +142,12 @@ public class SougouJigyoHiJouhouHandler {
         }
         parameter.set保険者コード(市町村コード);
         parameter.set抽出方法(div.getRadSakuseiKubun().getSelectedValue());
-        parameter.setサービス提供年月開始年月(set年月(div.getTxtSabisuTeikyoNengetsu().getFromValue()));
-        parameter.setサービス提供年月終了年月(set年月(div.getTxtSabisuTeikyoNengetsu().getToValue()));
-        parameter.set審査年月開始年月(set年月(div.getTxtSinsaNengetsu().getFromValue()));
-        parameter.set審査年月終了年月(set年月(div.getTxtSinsaNengetsu().getToValue()));
-        parameter.set取込年月開始年月(set年月(div.getTxtTorikomiNengetsu().getFromValue()));
-        parameter.set取込年月終了年月(set年月(div.getTxtTorikomiNengetsu().getToValue()));
+        parameter.setサービス提供年月開始年月(rDateToRString(div.getTxtSabisuTeikyoNengetsu().getFromValue()));
+        parameter.setサービス提供年月終了年月(rDateToRString(div.getTxtSabisuTeikyoNengetsu().getToValue()));
+        parameter.set審査年月開始年月(rDateToRString(div.getTxtSinsaNengetsu().getFromValue()));
+        parameter.set審査年月終了年月(rDateToRString(div.getTxtSinsaNengetsu().getToValue()));
+        parameter.set取込年月開始年月(rDateToRString(div.getTxtTorikomiNengetsu().getFromValue()));
+        parameter.set取込年月終了年月(rDateToRString(div.getTxtTorikomiNengetsu().getToValue()));
         return parameter;
     }
 
@@ -210,11 +206,10 @@ public class SougouJigyoHiJouhouHandler {
         }
     }
 
-    private RString set年月(RDate date) {
-        if (date == null) {
+    private RString rDateToRString(RDate 日付) {
+        if (日付 == null) {
             return RString.EMPTY;
         }
-        return new RString(date.wareki().firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).
-                toDateString().toString());
+        return 日付.toDateString();
     }
 }

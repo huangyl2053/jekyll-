@@ -26,8 +26,8 @@ public class FurikomiMeisaiIchiranSource implements IReportSource {
     public RString hokensha_cd;
     @ReportItem(name = "hokensha_name", length = 12, order = 7)
     public RString hokensha_name;
-    @ReportItem(name = "PageCnt", length = 6, order = 8)
-    public RString PageCnt;
+    @ReportItem(name = "pageCnt", length = 6, order = 8)
+    public RString pageCnt;
     @ReportItem(name = "sort_nm3", length = 20, order = 9)
     public RString sort_nm3;
     @ReportItem(name = "sort_nm4", length = 20, order = 10)

@@ -34,6 +34,8 @@ public class ChushutsuJokenPanelDiv extends Panel {
     private SaisinsaJohoChushutsuDiv SaisinsaJohoChushutsu;
     @JsonProperty("ccdHokenshaList")
     private HokenshaListDiv ccdHokenshaList;
+    @JsonProperty("ccdJigyoshaBango")
+    private ShisetsuJohoCommonChildDivDiv ccdJigyoshaBango;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -105,6 +107,15 @@ public class ChushutsuJokenPanelDiv extends Panel {
     }
 
     /*
+     * getccdJigyoshaBango
+     * @return ccdJigyoshaBango
+     */
+    @JsonProperty("ccdJigyoshaBango")
+    public IShisetsuJohoCommonChildDiv getCcdJigyoshaBango() {
+        return ccdJigyoshaBango;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -145,11 +156,6 @@ public class ChushutsuJokenPanelDiv extends Panel {
     @JsonIgnore
     public void  setTxtSabisuTeikyoNengetu(TextBoxDateRange txtSabisuTeikyoNengetu) {
         this.getSaisinsaJohoChushutsu().setTxtSabisuTeikyoNengetu(txtSabisuTeikyoNengetu);
-    }
-
-    @JsonIgnore
-    public IShisetsuJohoCommonChildDiv getCcdJigyoshaBango() {
-        return this.getSaisinsaJohoChushutsu().getCcdJigyoshaBango();
     }
 
     // </editor-fold>

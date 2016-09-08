@@ -24,7 +24,11 @@ import jp.co.ndensan.reams.ua.uax.business.report.parts.util.atesaki.ReportAtesa
 import jp.co.ndensan.reams.ua.uax.business.report.parts.util.atesaki.ReportAtesakiEditorBuilder;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -38,7 +42,7 @@ import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
 /**
  * 介護保険受領委任契約承認（不承認）確認書ビジネス
  *
- * @reamsid_L DBC-1910-030 yuanzhenxia
+ * @reamsid_L DBC-1910-060 yuanzhenxia
  */
 public class JuryoininKeiyakuShoninKakuninshoService {
 
@@ -55,7 +59,7 @@ public class JuryoininKeiyakuShoninKakuninshoService {
     /**
      * ビジネスEntityを作成する。
      *
-     * @param entity　JuryoininKeiyakuShoninKakuninshoEntity
+     * @param entity JuryoininKeiyakuShoninKakuninshoEntity
      * @return BusinessEntity
      */
     public BusinessEntity setJuryoininShouninkakuninshoChouhyouSakusei(JuryoininKeiyakuShoninKakuninshoEntity entity) {
@@ -119,20 +123,25 @@ public class JuryoininKeiyakuShoninKakuninshoService {
             利用者向けEntity.set不承認理由(entity.get償還受領委任契約者().getFuShoninRiyu());
         }
         利用者向けEntity.set給付の種類(edit契約サービス種類(entity.get償還受領委任契約者().getKeiyakuServiceShurui()));
-        if (entity.get受領委任契約事業者().getKeiyakuJigyoshaName() != null) {
-            利用者向けEntity.set事業所名(entity.get受領委任契約事業者().getKeiyakuJigyoshaName().value());
+        AtenaMeisho keiyakuJigyoshaName = entity.get受領委任契約事業者().getKeiyakuJigyoshaName();
+        if (keiyakuJigyoshaName != null) {
+            利用者向けEntity.set事業所名(keiyakuJigyoshaName.value());
         }
-        if (entity.get受領委任契約事業者().getKeiyakuDaihyoshaName() != null) {
-            利用者向けEntity.set代表者氏名(entity.get受領委任契約事業者().getKeiyakuDaihyoshaName().value());
+        AtenaMeisho keiyakuDaihyoshaName = entity.get受領委任契約事業者().getKeiyakuDaihyoshaName();
+        if (keiyakuDaihyoshaName != null) {
+            利用者向けEntity.set代表者氏名(keiyakuDaihyoshaName.value());
         }
-        if (entity.get受領委任契約事業者().getSofusakiYubinNo() != null) {
-            利用者向けEntity.set事業所郵便番号(entity.get受領委任契約事業者().getSofusakiYubinNo().value());
+        YubinNo sofusakiYubinNo = entity.get受領委任契約事業者().getSofusakiYubinNo();
+        if (sofusakiYubinNo != null) {
+            利用者向けEntity.set事業所郵便番号(sofusakiYubinNo.value());
         }
-        if (entity.get受領委任契約事業者().getKeiyakuJigyoshaJusho() != null) {
-            利用者向けEntity.set事業所所在地(entity.get受領委任契約事業者().getKeiyakuJigyoshaJusho().value());
+        AtenaJusho keiyakuJigyoshaJusho = entity.get受領委任契約事業者().getKeiyakuJigyoshaJusho();
+        if (keiyakuJigyoshaJusho != null) {
+            利用者向けEntity.set事業所所在地(keiyakuJigyoshaJusho.value());
         }
-        if (entity.get受領委任契約事業者().getKeiyakuJigyoshaTelNo() != null) {
-            利用者向けEntity.set事業所電話番号(entity.get受領委任契約事業者().getKeiyakuJigyoshaTelNo().value());
+        TelNo keiyakuJigyoshaTelNo = entity.get受領委任契約事業者().getKeiyakuJigyoshaTelNo();
+        if (keiyakuJigyoshaTelNo != null) {
+            利用者向けEntity.set事業所電話番号(keiyakuJigyoshaTelNo.value());
         }
         利用者向けEntity.set費用額合計(decimalFormat(entity.get償還受領委任契約者().getHiyoGakuGokei()));
         利用者向けEntity.set保険対象費用額(decimalFormat(entity.get償還受領委任契約者().getHokenTaishoHiyoGaku()));
@@ -145,21 +154,26 @@ public class JuryoininKeiyakuShoninKakuninshoService {
     private JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoEntity edit事業者用Entity(JuryoininKeiyakuShoninKakuninshoEntity entity) {
         JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoEntity 事業者用Entity = new JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoEntity();
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
-
-        if (entity.get受領委任契約事業者().getSofusakiYubinNo() != null) {
-            事業者用Entity.set郵便番号(entity.get受領委任契約事業者().getSofusakiYubinNo().value());
-        } else if (entity.get受領委任契約事業者().getKeiyakuJigyoshaYubinNo() != null) {
-            事業者用Entity.set郵便番号(entity.get受領委任契約事業者().getKeiyakuJigyoshaYubinNo().value());
+        AtenaMeisho keiyakuJigyoshaName = entity.get受領委任契約事業者().getKeiyakuJigyoshaName();
+        YubinNo sofusakiYubinNo = entity.get受領委任契約事業者().getSofusakiYubinNo();
+        YubinNo keiyakuJigyoshaYubinNo = entity.get受領委任契約事業者().getKeiyakuJigyoshaYubinNo();
+        AtenaJusho sofusakiJusho = entity.get受領委任契約事業者().getSofusakiJusho();
+        AtenaJusho keiyakuJigyoshaJusho = entity.get受領委任契約事業者().getKeiyakuJigyoshaJusho();
+        AtenaMeisho sofusakiJigyoshaName = entity.get受領委任契約事業者().getSofusakiJigyoshaName();
+        if (sofusakiYubinNo != null) {
+            事業者用Entity.set郵便番号(sofusakiYubinNo.value());
+        } else if (keiyakuJigyoshaYubinNo != null) {
+            事業者用Entity.set郵便番号(keiyakuJigyoshaYubinNo.value());
         }
-        if (entity.get受領委任契約事業者().getSofusakiJusho() != null) {
-            事業者用Entity.set住所Text(entity.get受領委任契約事業者().getSofusakiJusho().value());
-        } else if (entity.get受領委任契約事業者().getKeiyakuJigyoshaJusho() != null) {
-            事業者用Entity.set住所Text(entity.get受領委任契約事業者().getKeiyakuJigyoshaJusho().value());
+        if (sofusakiJusho != null) {
+            事業者用Entity.set住所Text(sofusakiJusho.value());
+        } else if (keiyakuJigyoshaJusho != null) {
+            事業者用Entity.set住所Text(keiyakuJigyoshaJusho.value());
         }
-        if (entity.get受領委任契約事業者().getSofusakiJigyoshaName() != null) {
-            事業者用Entity.set氏名Text(entity.get受領委任契約事業者().getSofusakiJigyoshaName().value());
-        } else if (entity.get受領委任契約事業者().getKeiyakuJigyoshaName() != null) {
-            事業者用Entity.set氏名Text(entity.get受領委任契約事業者().getKeiyakuJigyoshaName().value());
+        if (sofusakiJigyoshaName != null) {
+            事業者用Entity.set氏名Text(sofusakiJigyoshaName.value());
+        } else if (keiyakuJigyoshaName != null) {
+            事業者用Entity.set氏名Text(keiyakuJigyoshaName.value());
         }
         事業者用Entity.set名称付与1(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_宛先敬称));
         事業者用Entity.setカスタマバーコード(editカスタマバーコード(entity));
@@ -178,20 +192,25 @@ public class JuryoininKeiyakuShoninKakuninshoService {
             事業者用Entity.set不承認理由(entity.get償還受領委任契約者().getFuShoninRiyu());
         }
         事業者用Entity.set給付の種類(edit契約サービス種類(entity.get償還受領委任契約者().getKeiyakuServiceShurui()));
-        if (entity.get受領委任契約事業者().getKeiyakuJigyoshaName() != null) {
-            事業者用Entity.set事業所名(entity.get受領委任契約事業者().getKeiyakuJigyoshaName().value());
+
+        if (keiyakuJigyoshaName != null) {
+            事業者用Entity.set事業所名(keiyakuJigyoshaName.value());
         }
-        if (entity.get受領委任契約事業者().getKeiyakuDaihyoshaName() != null) {
-            事業者用Entity.set代表者氏名(entity.get受領委任契約事業者().getKeiyakuDaihyoshaName().value());
+        AtenaMeisho keiyakuDaihyoshaName = entity.get受領委任契約事業者().getKeiyakuDaihyoshaName();
+        if (keiyakuDaihyoshaName != null) {
+            事業者用Entity.set代表者氏名(keiyakuDaihyoshaName.value());
         }
-        if (entity.get受領委任契約事業者().getSofusakiYubinNo() != null) {
-            事業者用Entity.set事業所郵便番号(entity.get受領委任契約事業者().getSofusakiYubinNo().value());
+
+        if (sofusakiYubinNo != null) {
+            事業者用Entity.set事業所郵便番号(sofusakiYubinNo.value());
         }
-        if (entity.get受領委任契約事業者().getKeiyakuJigyoshaJusho() != null) {
-            事業者用Entity.set事業所所在地(entity.get受領委任契約事業者().getKeiyakuJigyoshaJusho().value());
+
+        if (keiyakuJigyoshaJusho != null) {
+            事業者用Entity.set事業所所在地(keiyakuJigyoshaJusho.value());
         }
-        if (entity.get受領委任契約事業者().getKeiyakuJigyoshaTelNo() != null) {
-            事業者用Entity.set事業所電話番号(entity.get受領委任契約事業者().getKeiyakuJigyoshaTelNo().value());
+        TelNo keiyakuJigyoshaTelNo = entity.get受領委任契約事業者().getKeiyakuJigyoshaTelNo();
+        if (keiyakuJigyoshaTelNo != null) {
+            事業者用Entity.set事業所電話番号(keiyakuJigyoshaTelNo.value());
         }
         事業者用Entity.set費用額合計(decimalFormat(entity.get償還受領委任契約者().getHiyoGakuGokei()));
         事業者用Entity.set保険対象費用額(decimalFormat(entity.get償還受領委任契約者().getHokenTaishoHiyoGaku()));
@@ -210,15 +229,19 @@ public class JuryoininKeiyakuShoninKakuninshoService {
         if (entity.get名称() != null) {
             一覧表Entity.set被保険者氏名1(subString(entity.get名称().value(), ONE, FIFTEEN));
         }
-        if (entity.get受領委任契約事業者().getKeiyakuJigyoshaJusho() != null) {
-            一覧表Entity.set事業者所在地(subString(entity.get受領委任契約事業者().getKeiyakuJigyoshaJusho().value(), ONE, THIRTY_SIX));
+        AtenaJusho keiyakuJigyoshaJusho = entity.get受領委任契約事業者().getKeiyakuJigyoshaJusho();
+        if (keiyakuJigyoshaJusho != null) {
+            一覧表Entity.set事業者所在地(subString(keiyakuJigyoshaJusho.value(), ONE, THIRTY_SIX));
         }
         一覧表Entity.set受付日(editパターン4(entity.get償還受領委任契約者().getUketsukeYMD()));
         一覧表Entity.set承認開始日(editパターン4(entity.get償還受領委任契約者().getJuryoininKaishiYMD()));
         一覧表Entity.set承認終了日(editパターン4(entity.get償還受領委任契約者().getJuryoininShuryoYMD()));
         一覧表Entity.set承認終区分(edit承認区分(entity.get償還受領委任契約者().getShoninKekkaTsuchiSaiHakkoKubun()));
         一覧表Entity.set被保険者氏名2(subString(entity.get名称().value(), SIXTEEN, THIRTY));
-        一覧表Entity.set事業者名称(subString(entity.get受領委任契約事業者().getKeiyakuJigyoshaName().value(), ONE, THIRTY_SIX));
+        AtenaMeisho keiyakuJigyoshaName = entity.get受領委任契約事業者().getKeiyakuJigyoshaName();
+        if (keiyakuJigyoshaName != null) {
+            一覧表Entity.set事業者名称(subString(keiyakuJigyoshaName.value(), ONE, THIRTY_SIX));
+        }
         一覧表Entity.set承認日(editパターン4(entity.get償還受領委任契約者().getKetteiYMD()));
         一覧表Entity.set利用サービス内容(edit契約サービス種類(entity.get償還受領委任契約者().getKeiyakuServiceShurui()));
         return 一覧表Entity;
@@ -317,15 +340,19 @@ public class JuryoininKeiyakuShoninKakuninshoService {
 
     private RString editカスタマバーコード(JuryoininKeiyakuShoninKakuninshoEntity entity) {
         CustomerBarCode barcode = new CustomerBarCode();
-        if (entity.get受領委任契約事業者().getSofusakiJusho() != null && !entity.get受領委任契約事業者().getSofusakiJusho().isEmpty()
-                && entity.get受領委任契約事業者().getSofusakiYubinNo() != null) {
-            return barcode.convertCustomerBarCode(entity.get受領委任契約事業者().getSofusakiYubinNo().value(),
-                    entity.get受領委任契約事業者().getSofusakiJusho().value())
+        AtenaJusho sofusakiJusho = entity.get受領委任契約事業者().getSofusakiJusho();
+        YubinNo yubinNo = entity.get受領委任契約事業者().getSofusakiYubinNo();
+        AtenaJusho keiyakuJigyoshaJusho = entity.get受領委任契約事業者().getKeiyakuJigyoshaJusho();
+        YubinNo keiyakuJigyoshaYubinNo = entity.get受領委任契約事業者().getKeiyakuJigyoshaYubinNo();
+        if (sofusakiJusho != null && !sofusakiJusho.isEmpty()
+                && yubinNo != null) {
+            return barcode.convertCustomerBarCode(yubinNo.value(),
+                    sofusakiJusho.value())
                     .getCustomerBarCode();
-        } else if (entity.get受領委任契約事業者().getKeiyakuJigyoshaJusho() != null && !entity.get受領委任契約事業者().getKeiyakuJigyoshaJusho().isEmpty()
-                && entity.get受領委任契約事業者().getKeiyakuJigyoshaYubinNo() != null) {
-            return barcode.convertCustomerBarCode(entity.get受領委任契約事業者().getKeiyakuJigyoshaYubinNo().value(),
-                    entity.get受領委任契約事業者().getKeiyakuJigyoshaJusho().value()).getCustomerBarCode();
+        } else if (keiyakuJigyoshaJusho != null && !keiyakuJigyoshaJusho.isEmpty()
+                && keiyakuJigyoshaYubinNo != null) {
+            return barcode.convertCustomerBarCode(keiyakuJigyoshaYubinNo.value(),
+                    keiyakuJigyoshaJusho.value()).getCustomerBarCode();
         } else {
             return RString.EMPTY;
         }

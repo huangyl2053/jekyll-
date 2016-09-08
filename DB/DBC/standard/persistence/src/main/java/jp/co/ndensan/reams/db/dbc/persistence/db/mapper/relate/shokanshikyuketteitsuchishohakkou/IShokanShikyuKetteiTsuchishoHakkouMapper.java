@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 /**
  * get償還払支給判定結果。
  *
- * @reamsid_L DBD-5310-010 liuyl
+ * @reamsid_L DBC-5310-010 liuyl
  */
 public interface IShokanShikyuKetteiTsuchishoHakkouMapper {
 

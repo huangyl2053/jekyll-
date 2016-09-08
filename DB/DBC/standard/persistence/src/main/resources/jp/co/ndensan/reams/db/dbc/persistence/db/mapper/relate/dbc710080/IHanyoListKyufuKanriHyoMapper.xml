@@ -376,7 +376,7 @@
          "KyufuKanrihyo"."kyotakuKaigoYoboShikyuGendogaku" as "kyufuKanrihyo_kyotakuKaigoYoboShikyuGendogaku",
          "KyufuKanrihyo"."kyotakuServicePlanSakuseiKubunCode" as "kyufuKanrihyo_kyotakuServicePlanSakuseiKubunCode",
          "KyufuKanrihyo"."serviceJigyoshoNo" as "kyufuKanrihyo_serviceJigyoshoNo",
-         "KyufuKanrihyo"."shiteiKijungaitoChiikimitchakuServiceShikibetsuCode" as "kyufuKanrihyo_shiteiKijungaitoChiikimitchakuServiceShikibetsuCode",
+         "KyufuKanrihyo"."shiteiKijungaitoChiikimitchakuServiceShikibetsuCode" as "kyufuKanrihyo_serviceShikibetsuCode",
          "KyufuKanrihyo"."serviceShuruiCode" as "kyufuKanrihyo_serviceShuruiCode",
          "KyufuKanrihyo"."kyufuKeikakuTanisuNissu" as "kyufuKanrihyo_kyufuKeikakuTanisuNissu",
          "KyufuKanrihyo"."kyufuKeikakuNissu" as "kyufuKanrihyo_kyufuKeikakuNissu",
@@ -410,7 +410,7 @@
         <result property="kyotakuKaigoYoboShikyuGendogaku" column="kyufuKanrihyo_kyotakuKaigoYoboShikyuGendogaku" />
         <result property="kyotakuServicePlanSakuseiKubunCode" column="kyufuKanrihyo_kyotakuServicePlanSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="serviceJigyoshoNo" column="kyufuKanrihyo_serviceJigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
-        <result property="shiteiKijungaitoChiikimitchakuServiceShikibetsuCode" column="kyufuKanrihyo_shiteiKijungaitoChiikimitchakuServiceShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiteiKijungaitoChiikimitchakuServiceShikibetsuCode" column="kyufuKanrihyo_serviceShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="serviceShuruiCode" column="kyufuKanrihyo_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
         <result property="kyufuKeikakuTanisuNissu" column="kyufuKanrihyo_kyufuKeikakuTanisuNissu" />
         <result property="kyufuKeikakuNissu" column="kyufuKanrihyo_kyufuKeikakuNissu" />

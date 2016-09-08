@@ -49,4 +49,5 @@ public class KyufuJikoSakuseiResult implements Serializable {
     private RString 限度額対象外フラグ;
     private Decimal 定額利用者負担単価金額;
     private RString 利用者負担定率定額区分;
+    private int 明細番号;
 }

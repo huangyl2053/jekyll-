@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 /**
  * 特別徴収仮算定結果一覧表のPageBreakクラスです。
  *
- * @reamsid_L @reamsid_L DBB-0700-010 xuhao
+ * @reamsid_L DBB-0700-010 xuhao
  */
 public class TokubetsuChoshuKarisanteiKekkaIchiranPageBreak extends PageBreaker<TokubetsuChoshuKarisanteiKekkaIchiranSource> {
 

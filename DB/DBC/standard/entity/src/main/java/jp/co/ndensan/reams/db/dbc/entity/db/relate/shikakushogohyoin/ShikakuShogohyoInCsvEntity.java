@@ -24,8 +24,8 @@ public class ShikakuShogohyoInCsvEntity {
     private RString 審査年月;
     @CsvField(order = 20, name = "作成日時")
     private RString 作成日時;
-    @CsvField(order = 30, name = "連番")
-    private RString 連番;
+    @CsvField(order = 30, name = "No.")
+    private RString No;
     @CsvField(order = 40, name = "保険者番号")
     private RString 保険者番号;
     @CsvField(order = 50, name = "保険者名")
@@ -109,57 +109,4 @@ public class ShikakuShogohyoInCsvEntity {
     @CsvField(order = 440, name = "証記載保険者番号")
     private RString 証記載保険者番号;
 
-    /**
-     *
-     * 証記載保険者番号列を出力しない
-     *
-     * @return ShikakuShogohyoInCsvEntity
-     */
-    public ShikakuShogohyoInCsvEntity to単一() {
-        ShikakuShogohyoInCsvEntity 単一 = new ShikakuShogohyoInCsvEntity();
-        単一.setサービス単位数(this.サービス単位数);
-        単一.setサービス提供年月(this.サービス提供年月);
-        単一.setサービス日数_回数(this.サービス日数_回数);
-        単一.setサービス種類コード(this.サービス種類コード);
-        単一.setサービス種類名(this.サービス種類名);
-        単一.set事業者名(this.事業者名);
-        単一.set事業者番号(this.事業者番号);
-        単一.set作成日時(this.作成日時);
-        単一.set保険給付率(this.保険給付率);
-        単一.set保険者名(this.保険者名);
-        単一.set保険者番号(this.保険者番号);
-        単一.set公費1給付率(this.公費1給付率);
-        単一.set公費2給付率(this.公費2給付率);
-        単一.set公費3給付率(this.公費3給付率);
-        単一.set利用者負担額(this.利用者負担額);
-        単一.set単位数単価(this.単位数単価);
-        単一.set審査年月(this.審査年月);
-        単一.set居住費負担限度額_ユニット型個室(this.居住費負担限度額_ユニット型個室);
-        単一.set居住費負担限度額_ユニット型準個室(this.居住費負担限度額_ユニット型準個室);
-        単一.set居住費負担限度額_多床室(this.居住費負担限度額_多床室);
-        単一.set居住費負担限度額_従来型個室_特養等(this.居住費負担限度額_従来型個室_特養等);
-        単一.set居住費負担限度額_従来型個室_老健_療養等(this.居住費負担限度額_従来型個室_老健_療養等);
-        単一.set居宅サービス計画作成区分(this.居宅サービス計画作成区分);
-        単一.set居宅サービス計画作成区分コード(this.居宅サービス計画作成区分コード);
-        単一.set支援事業者番号(this.支援事業者番号);
-        単一.set旧措置入所者特例コード(this.旧措置入所者特例コード);
-        単一.set旧措置入所者特例有無(this.旧措置入所者特例有無);
-        単一.set特定入所者介護サービス費等(this.特定入所者介護サービス費等);
-        単一.set被保険者氏名(this.被保険者氏名);
-        単一.set被保険者番号(this.被保険者番号);
-        単一.set要介護区分コード(this.要介護区分コード);
-        単一.set要介護度(this.要介護度);
-        単一.set訪問通所_短期入所支給限度額(this.訪問通所_短期入所支給限度額);
-        単一.set認定有効期間_終了(this.認定有効期間_終了);
-        単一.set認定有効期間_開始(this.認定有効期間_開始);
-        単一.set警告種別(this.警告種別);
-        単一.set連番(this.連番);
-        単一.set限度額適用期間_終了(this.限度額適用期間_終了);
-        単一.set限度額適用期間_開始(this.限度額適用期間_開始);
-        単一.set食事標準負担額(this.食事標準負担額);
-        単一.set食事標準負担額_日額(this.食事標準負担額_日額);
-        単一.set食事標準負担額_月額(this.食事標準負担額_月額);
-        単一.set食費負担限度額(this.食費負担限度額);
-        return 単一;
-    }
 }

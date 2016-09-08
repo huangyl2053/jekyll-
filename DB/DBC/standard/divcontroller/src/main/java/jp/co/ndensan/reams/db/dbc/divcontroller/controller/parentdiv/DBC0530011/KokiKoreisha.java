@@ -49,6 +49,7 @@ public class KokiKoreisha {
         ShikibetsuCode 識別コード = 資格対象者.get識別コード();
         KokiKoreishaInfoManager manager = new KokiKoreishaInfoManager();
         KokiKoreishaInfo 後期高齢者情報 = manager.get後期高齢者情報(識別コード);
+        ViewStateHolder.put(ViewStateKeys.イメージ情報, 後期高齢者情報);
         getHandler(div).onLoad(識別コード, 被保険者番号, 後期高齢者情報);
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         RString 履歴番号;
@@ -95,7 +96,7 @@ public class KokiKoreisha {
         }
         KokiKoreishaInfoManager manager = new KokiKoreishaInfoManager();
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        KokiKoreishaInfo 後期高齢者情報 = manager.get後期高齢者情報(識別コード);
+        KokiKoreishaInfo 後期高齢者情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, KokiKoreishaInfo.class);
         if (後期高齢者情報 == null) {
             KokiKoreishaInfo kokiKoreishaInfo = new KokiKoreishaInfo(識別コード, new RString("0001"));
             if (div.getMeisaiPanel().getTxtHokenshaShuryoYMD().getValue() != null) {

@@ -49,7 +49,9 @@ public class YouKaigoNinteiIkatsuKoshin {
      */ 
     public ResponseData<YouKaigoNinteiIkatsuKoshinDiv> onClickCheck(YouKaigoNinteiIkatsuKoshinDiv div){
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        getValidationHandler(div).validateFor認定日(pairs);
+        if(!div.getTxtNinteibi().isDisabled()){
+            getValidationHandler(div).validateFor認定日(pairs);
+        }
         if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }

@@ -97,7 +97,7 @@ public class FutanGenndoGakuNinnteiShouMybatisParameter implements IMyBatisParam
         this.減免減額種類_負担限度額認定 = GemmenGengakuShurui.負担限度額認定.getコード();
         this.旧措置者区分_旧措置者のみ = KyuSochishaKubun.旧措置者.getコード();
         this.旧措置者区分_旧措置者実質的負担軽減者 = KyuSochishaKubun.旧措置者実質的負担軽減者.getコード();
-        this.業務コード_介護受給 = SubGyomuCode.DBD介護受給.getGyomuCode().value();
+        this.業務コード_介護受給 = SubGyomuCode.DBD介護受給.value();
         this.発行履歴固有情報_減免適用開始日 = 発行履歴固有情報_減免適用開始日;
         this.発行履歴固有情報_被保番号 = 発行履歴固有情報_被保番号;
         this.空白 = RString.EMPTY;
@@ -115,10 +115,10 @@ public class FutanGenndoGakuNinnteiShouMybatisParameter implements IMyBatisParam
             is対象区分_申請日 = true;
             set対象区分(対象日FROM, 対象日TO);
         }
-        if (年度開始日 != null) {
+        if (年度開始日 != null && !年度開始日.isEmpty()) {
             is年度開始日_非空白 = true;
         }
-        if (年度終了日 != null) {
+        if (年度終了日 != null && !年度開始日.isEmpty()) {
             is年度終了日_非空白 = true;
         }
         if (TanpyoHakkoKubun.出力しない.getコード().equals(単票発行区分.getコード())) {

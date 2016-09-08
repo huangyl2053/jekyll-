@@ -54,7 +54,7 @@ public enum KogakugassanHoseisumiJikofutangakuOutputOrder implements IReportItem
     /**
      * 受取年月
      */
-    受取年月(new RString("03"), new RString("受取年月"), new RString("\"DbWT37K1KogakuGassanJikoFutanGaku\".\"shomeisho_UketoriYM\""));
+    受取年月(new RString("0371"), new RString("受取年月"), new RString("\"DbWT37K1KogakuGassanJikoFutanGaku\".\"shomeisho_UketoriYM\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

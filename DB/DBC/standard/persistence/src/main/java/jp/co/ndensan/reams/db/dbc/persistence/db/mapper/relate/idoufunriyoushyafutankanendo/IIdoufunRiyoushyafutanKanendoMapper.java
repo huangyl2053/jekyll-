@@ -18,25 +18,25 @@ public interface IIdoufunRiyoushyafutanKanendoMapper {
     /**
      * 直近の年次負担割合判定処理のデータを取得です.
      *
-     * @param 処理名
+     * @param 処理名 処理名
      * @return 直近の年次負担割合判定処理のデータ DbT7022ShoriDateKanriEntity
      */
-    public DbT7022ShoriDateKanriEntity get直近の年次負担割合判定処理(RString 処理名);
+    DbT7022ShoriDateKanriEntity get直近の年次負担割合判定処理(RString 処理名);
 
     /**
      * 処理年度の異動分利用者負担割合判定_過年度のデータを取得です.
      *
-     * @param 処理名 RString
+     * @param 処理名 処理名
      * @return 処理年度の異動分利用者負担割合判定_過年度のデータ ShoriDateKanri
      */
-    public DbT7022ShoriDateKanriEntity get処理年度の異動分利用者負担割合判定_過年度のデータ(RString 処理名);
+    DbT7022ShoriDateKanriEntity get処理年度の異動分利用者負担割合判定_過年度のデータ(RString 処理名);
 
     /**
      * 異動分利用者負担割合判定のデータを取得です.
      *
-     * @param 処理名 RString
+     * @param 処理名 処理名
      * @param 年次判定年度 RString
      * @return 異動分利用者負担割合判定のデータ ShoriDateKanri
      */
-    public DbT7022ShoriDateKanriEntity get異動分利用者負担割合判定のデータ(RString 処理名, RString 年次判定年度);
+    DbT7022ShoriDateKanriEntity get異動分利用者負担割合判定のデータ(RString 処理名, RString 年次判定年度);
 }

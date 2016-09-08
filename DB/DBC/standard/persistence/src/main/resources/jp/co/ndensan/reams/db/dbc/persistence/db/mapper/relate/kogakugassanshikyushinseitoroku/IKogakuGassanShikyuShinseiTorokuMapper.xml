@@ -77,23 +77,29 @@
     </select>
     
     <select id="select被保険者名" 
-        parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyushinseitoroku.HihokenshaMeishoSearchParameter"
-        resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
-        fetchSize="500" resultOrdered="true">
-        SELECT
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
-        FROM
-            rgdb."DbV1001HihokenshaDaicho" as DbV1001
-        LEFT JOIN
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
-            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-        ON DbV1001."shikibetsuCode" =
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
-        WHERE DbV1001."logicalDeletedFlag" = FALSE
-        AND DbV1001."hihokenshaNo" = #{被保険者番号}
-        ORDER BY DbV1001."idoYMD" DESC,
-                 DbV1001."edaNo" DESC
-        FETCH FIRST 1 ROWS ONLY
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyushinseitoroku.HihokenshaMeishoSearchParameter"
+            resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
+            fetchSize="500" resultOrdered="true">
+            WITH hihokenshaDaicho AS (
+                SELECT
+                    DbV1001."shikibetsuCode"
+                FROM   rgdb."DbV1001HihokenshaDaicho" as DbV1001
+                WHERE DbV1001."hihokenshaNo" = #{被保険者番号}
+            )
+            SELECT
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+            FROM
+                hihokenshaDaicho
+            LEFT OUTER JOIN
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+                (
+                    SELECT
+                        ARRAY_AGG(CAST ("shikibetsuCode" AS TEXT))
+                    FROM
+                        hihokenshaDaicho
+                 )
+              <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" /> AS "ShikibetsuTaisho"
+               ON hihokenshaDaicho."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode";
     </select>
     
     <select id="select高額合算申請書加入歴"

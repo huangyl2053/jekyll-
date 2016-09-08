@@ -6,10 +6,13 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekka;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekka.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekka.ketteiYMD;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekka.rirekiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekka.serviceTeikyoYM;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekka.shinsaHohoKubun;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekka.shoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -17,10 +20,15 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -90,6 +98,86 @@ public class DbT3057KogakuShikyuHanteiKekkaDac implements ISaveable<DbT3057Kogak
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月))).
                 toList(DbT3057KogakuShikyuHanteiKekkaEntity.class);
+    }
+
+    /**
+     *
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<DbT3057KogakuShikyuHanteiKekkaEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3057KogakuShikyuHanteiKekkaEntity> selectサービス提供年月(HihokenshaNo 被保険者番号)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3057KogakuShikyuHanteiKekka.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                not(eq(ketteiYMD, FlexibleDate.EMPTY)),
+                                or(eq(shinsaHohoKubun, ShinsaHohoKubun.審査依頼.getコード()),
+                                        eq(shinsaHohoKubun, ShinsaHohoKubun.審査済み.getコード())
+                                ))).
+                order(by(serviceTeikyoYM, Order.DESC)).
+                toList(DbT3057KogakuShikyuHanteiKekkaEntity.class);
+    }
+
+    /**
+     * 管理番号
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return List<DbT3057KogakuShikyuHanteiKekkaEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3057KogakuShikyuHanteiKekkaEntity> select管理番号(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3057KogakuShikyuHanteiKekka.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                not(eq(ketteiYMD, FlexibleDate.EMPTY)),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                or(eq(shinsaHohoKubun, ShinsaHohoKubun.審査依頼.getコード()),
+                                        eq(shinsaHohoKubun, ShinsaHohoKubun.審査済み.getコード())))).
+                order(by(rirekiNo, Order.DESC)).
+                toList(DbT3057KogakuShikyuHanteiKekkaEntity.class);
+    }
+
+    /**
+     * 前回発行日
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月
+     * @param 履歴番号
+     * @return DbT3057KogakuShikyuHanteiKekkaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT3057KogakuShikyuHanteiKekkaEntity select前回発行日(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            int 履歴番号)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3057KogakuShikyuHanteiKekka.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                not(eq(ketteiYMD, FlexibleDate.EMPTY)),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(rirekiNo, 履歴番号),
+                                or(eq(shinsaHohoKubun, ShinsaHohoKubun.審査依頼.getコード()),
+                                        eq(shinsaHohoKubun, ShinsaHohoKubun.審査済み.getコード())))).
+                toObject(DbT3057KogakuShikyuHanteiKekkaEntity.class);
     }
 
     /**

@@ -280,8 +280,8 @@ public final class JigyoHokokuNenpoIppanGenbutsuMybatisParamter implements IMyBa
             表番号リスト.add(HyoNo.現物_一般状況.getコード());
             表番号リスト.add(HyoNo.現物_一般状況_旧市町村.getコード());
         } else if (償還審査分.equals(給付集計区分)) {
-            //TODO QA1615回答待ち HyoNoにはCode13が存在なし。
             表番号リスト.add(HyoNo.償還_審査年月_一般状況.getコード());
+            表番号リスト.add(HyoNo.償還_審査年月_一般状況_旧市町村.getコード());
         } else if (償還決定分.equals(給付集計区分)) {
             表番号リスト.add(HyoNo.償還_決定年月_一般状況.getコード());
             表番号リスト.add(HyoNo.償還_決定年月_一般状況_旧市町村.getコード());
