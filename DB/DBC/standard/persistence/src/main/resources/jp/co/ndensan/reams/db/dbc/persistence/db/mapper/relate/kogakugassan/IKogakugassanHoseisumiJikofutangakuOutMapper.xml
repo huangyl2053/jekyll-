@@ -17,13 +17,13 @@
             FROM
                 rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "DbT3070"
             WHERE
-                "DbT3070"."dataSakuseiKubun" IN ('1', '3')
+                "DbT3070"."dataSakuseiKubun" IN (#{データ区分_1}, #{データ区分_3})
             AND "DbT3070"."isDeleted" = FALSE) AS "DbT3070KogakuGassanJikoFutanGaku"
         WHERE
             "DbT3070KogakuGassanJikoFutanGaku".rowNum = 1
-        AND "DbT3070KogakuGassanJikoFutanGaku"."sofuTaishoGaiFlag" <![CDATA[<>]]> '1'
+        AND "DbT3070KogakuGassanJikoFutanGaku"."sofuTaishoGaiFlag" <![CDATA[<>]]> #{介護合算_送付対象外}
         AND ("DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" IS NULL OR "DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" = ''
-            OR "DbT3070KogakuGassanJikoFutanGaku"."saisoFlag" = '1'
+            OR "DbT3070KogakuGassanJikoFutanGaku"."saisoFlag" = #{国保連データ再送フラグ_再送要}
             <if test="saishoriKubun == 1">
                 OR "DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" = #{shoriYM}
             </if>)
