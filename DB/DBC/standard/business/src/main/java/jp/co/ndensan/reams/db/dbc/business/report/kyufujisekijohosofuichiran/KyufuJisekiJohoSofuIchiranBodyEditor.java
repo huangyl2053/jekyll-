@@ -75,6 +75,11 @@ public class KyufuJisekiJohoSofuIchiranBodyEditor implements IKyufuJisekiJohoSof
         source.listUpper_4 = get作成区分(給付実績一時, DBCCodeShubetsu.給付実績情報作成区分.getコード());
 
         DbWT1001HihokenshaTempEntity 被保険者一時 = 給付実績更新結果一覧表データ.get被保険者一時Entity();
+
+        if (被保険者一時.getShikibetsuCode() != null) {
+            source.shikibetsuCode = 被保険者一時.getShikibetsuCode().value();
+        }
+
         if (被保険者一時.getExHihokenshaNo() != null) {
             source.listUpper_5 = 被保険者一時.getExHihokenshaNo().value();
         }
