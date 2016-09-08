@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.banchi.Banchi;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -556,7 +555,7 @@ public class TankiNyushoKakudaiGaitosha {
      * @return AccessLogUUID
      */
     public AccessLogUUID getアクセスログ() {
-        return AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        return AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
     }
 
     private PersonalData toPersonalData(RString 被保険者番号, ShikibetsuCode 識別コード) {
@@ -636,12 +635,6 @@ public class TankiNyushoKakudaiGaitosha {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
-        List<JuminShubetsu> juminShubetsuList = new ArrayList<>();
-        juminShubetsuList.add(JuminShubetsu.日本人);
-        juminShubetsuList.add(JuminShubetsu.外国人);
-        juminShubetsuList.add(JuminShubetsu.住登外個人_外国人);
-        juminShubetsuList.add(JuminShubetsu.住登外個人_日本人);
-        key.set住民種別(juminShubetsuList);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         return TankiNyushoKakudaiGaitoshaMybatisParameter.createMybatisParameter(processParameter.get保険者コード(),
                 processParameter.get抽出区分(),
