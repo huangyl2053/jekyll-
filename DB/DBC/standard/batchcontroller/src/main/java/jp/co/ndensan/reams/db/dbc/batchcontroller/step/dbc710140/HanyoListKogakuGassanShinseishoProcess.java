@@ -77,7 +77,6 @@ public class HanyoListKogakuGassanShinseishoProcess extends BatchProcessBase<Han
             + "relate.hanyolistkogakugassanshinseishojoho."
             + "IHanyoListKogakuGassanShinseishoJohoMapper.getCSVData");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC701014");
-    private static final RString CSV出力有無 = new RString("");
     private static final RString ITEM = new RString("～");
     private static final RString 日本語ファイル名 = new RString("汎用リスト　高額合算申請書情報CSV");
     private static final RString 英数字ファイル名 = new RString("HanyoList_KogakuGassanShinseishoJoho.csv");
@@ -93,6 +92,9 @@ public class HanyoListKogakuGassanShinseishoProcess extends BatchProcessBase<Han
     private static final RString 支給申請書整理番号 = new RString("支給申請書整理番号：");
     private static final RString 送付年月 = new RString("送付年月：");
     private static final RString すべて = new RString("すべて");
+    private static final RString CSV出力有無_なし = new RString("なし");
+    private static final RString CSV出力有無_あり = new RString("あり");
+    private RString 出力有無;
     private HanyoListKogakuGassanShinseishoJohoProcessParameter parameter;
     private HanyoListKogakuGassanShinseishoJohoDataCreate dataCreate;
     private RString eucFilePath;
@@ -111,6 +113,7 @@ public class HanyoListKogakuGassanShinseishoProcess extends BatchProcessBase<Han
 
     @Override
     protected IBatchReader createReader() {
+        出力有無 = CSV出力有無_なし;
         連番 = Decimal.ONE;
         システム日付 = FlexibleDate.getNowDate();
         dataCreate = new HanyoListKogakuGassanShinseishoJohoDataCreate(システム日付);
@@ -171,8 +174,8 @@ public class HanyoListKogakuGassanShinseishoProcess extends BatchProcessBase<Han
     }
 
     @Override
-    protected void process(HanyoListKogakuGassanShinseishoJohoEntity entity
-    ) {
+    protected void process(HanyoListKogakuGassanShinseishoJohoEntity entity) {
+        出力有無 = CSV出力有無_あり;
         eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter, 連番,
                 市町村名MasterMap, 地方公共団体));
         連番 = 連番.add(Decimal.ONE);
@@ -209,7 +212,7 @@ public class HanyoListKogakuGassanShinseishoProcess extends BatchProcessBase<Han
                 RString.EMPTY,
                 日本語ファイル名,
                 出力件数,
-                CSV出力有無,
+                出力有無,
                 英数字ファイル名,
                 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);

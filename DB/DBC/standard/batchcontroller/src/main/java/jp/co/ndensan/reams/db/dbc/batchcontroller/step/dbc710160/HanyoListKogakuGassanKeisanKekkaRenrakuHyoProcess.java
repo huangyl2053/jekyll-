@@ -133,7 +133,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
     private static final RString 被保険者番号 = new RString("被保険者番号");
     private static final RString 日本語ファイル名 = new RString("汎用リスト　高額合算計算結果連絡票情報CSV");
     private static final RString 英数字ファイル名 = new RString("HanyoListKogakuGassanKeisanKekkaRenrakuHyo.csv");
-    private RString CSV出力有無;
+    private RString 出力有無;
     private static final RString あり = new RString("あり");
     private static final RString なし = new RString("なし");
     private static final RString 抽出対象者 = new RString("【抽出対象者】");
@@ -151,7 +151,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
     @Override
     protected void initialize() {
         super.initialize();
-        CSV出力有無 = なし;
+        出力有無 = なし;
         連番 = Decimal.ZERO;
         personalDataList = new ArrayList<>();
         システム日付 = FlexibleDate.getNowDate();
@@ -209,7 +209,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
 
     @Override
     protected void process(HanyoListKogakuGassanKeisanEntity entity) {
-        CSV出力有無 = あり;
+        出力有無 = あり;
         連番 = 連番.add(Decimal.ONE);
         HanyoListKogakuGassanKeisanCSVEntity output = get帳票のCSVファイル作成(entity);
         hanyoListKogakuCSVWriter.writeLine(output);
@@ -647,7 +647,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
                 RString.EMPTY,
                 日本語ファイル名,
                 出力件数,
-                CSV出力有無,
+                出力有無,
                 英数字ファイル名,
                 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
