@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410021;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kagoketteihokenshain.KagoKetteiHokenshaInBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120160.DBC120160_KagoKetteiHokenshaInParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410021.TsuchishoJoho171Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
@@ -44,17 +44,17 @@ public class TsuchishoJoho171 {
     /**
      * onImplement 事件
      *
-     * @param div TsuchishoJoho152Div
+     * @param div TsuchishoJoho171Div
      * @return ResponseData
      */
-    public ResponseData<KagoKetteiHokenshaInBatchParameter> onImplement(TsuchishoJoho171Div div) {
-        KagoKetteiHokenshaInBatchParameter parameter = new KagoKetteiHokenshaInBatchParameter();
+    public ResponseData<DBC120160_KagoKetteiHokenshaInParameter> onImplement(TsuchishoJoho171Div div) {
+        DBC120160_KagoKetteiHokenshaInParameter parameter = new DBC120160_KagoKetteiHokenshaInParameter();
         if (div.getCcdKokurenJohoTorikomi().get処理年月() != null) {
-            parameter.setShoriYM(new FlexibleYearMonth(
+            parameter.set処理年月(new FlexibleYearMonth(
                     div.getCcdKokurenJohoTorikomi().get処理年月().getYearMonth().toDateString()));
         }
         if (div.getCcdKokurenJohoTorikomi().get出力順ID() != null) {
-            parameter.setShuturyokuJunn(div.getCcdKokurenJohoTorikomi().get出力順ID());
+            parameter.set出力順ID(new RString(div.getCcdKokurenJohoTorikomi().get出力順ID()));
         }
         return ResponseData.of(parameter).respond();
     }
