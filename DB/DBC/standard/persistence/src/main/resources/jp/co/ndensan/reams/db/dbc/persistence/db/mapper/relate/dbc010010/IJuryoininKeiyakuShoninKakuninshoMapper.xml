@@ -54,7 +54,7 @@
              )
        </if>
        AND  (償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" <![CDATA[<>]]> ''
-            or 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" is not null)
+            AND 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" is not null)
            <if test="改頁出力順 != null">
             ORDER BY
              ${改頁出力順}
