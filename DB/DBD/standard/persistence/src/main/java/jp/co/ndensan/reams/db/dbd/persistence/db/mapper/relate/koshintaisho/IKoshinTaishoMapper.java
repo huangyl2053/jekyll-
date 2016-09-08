@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 画面設計_DBD5010001_完了処理・更新管理のMapperです。
  *
- * @author_L DBD-2030-010 x_youyj
+ * @reamsid_L DBD-2030-010 x_youyj
  */
 public interface IKoshinTaishoMapper {
 
