@@ -209,10 +209,10 @@ public class SogoJigyoTaishoshaTorokuHandler {
 
     private boolean is適用開始日と登録済みの適用期間が重(RDate 画面適用開始日, dgKihonInfo_Row row) {
         if (null == row.getShuuryoubi() || row.getShuuryoubi().isEmpty()) {
-            return new RDate(row.getKaishibi().toString()).isBefore(画面適用開始日);
+            return new RDate(row.getKaishibi().toString()).isBeforeOrEquals(画面適用開始日);
         } else {
-            return 画面適用開始日.isBefore(new RDate(row.getShuuryoubi().toString()))
-                    && new RDate(row.getKaishibi().toString()).isBefore(画面適用開始日);
+            return 画面適用開始日.isBeforeOrEquals(new RDate(row.getShuuryoubi().toString()))
+                    && new RDate(row.getKaishibi().toString()).isBeforeOrEquals(画面適用開始日);
         }
     }
 
@@ -414,11 +414,11 @@ public class SogoJigyoTaishoshaTorokuHandler {
                 if (null == 編集適用終了日) {
                     return false;
                 }
-                if (適用開始日.isBefore(編集適用終了日) && 編集適用開始日.isBefore(適用開始日)) {
+                if (適用開始日.isBeforeOrEquals(編集適用終了日) && 編集適用開始日.isBeforeOrEquals(適用開始日)) {
                     return false;
                 }
             } else {
-                if (null == 編集適用終了日 && 編集適用開始日.isBefore(適用終了日) && 適用開始日.isBefore(編集適用開始日)) {
+                if (null == 編集適用終了日 && 編集適用開始日.isBeforeOrEquals(適用終了日) && 適用開始日.isBeforeOrEquals(編集適用開始日)) {
                     return false;
                 }
                 if (編集適用終了日 != null && !編集適用終了日.isBefore(適用開始日) && !適用終了日.isBefore(編集適用開始日)) {
