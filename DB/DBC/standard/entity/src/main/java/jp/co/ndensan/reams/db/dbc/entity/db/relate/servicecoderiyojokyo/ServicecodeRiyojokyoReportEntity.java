@@ -8,12 +8,17 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.servicecoderiyojokyo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * サービスコード別利用状況作成ReportEntityクラスです。
  *
  * @reamsid_L DBC-3340-030 jiangxiaolong
  */
+@Getter
+@Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ServicecodeRiyojokyoReportEntity {
 
     private RString 条件１;
