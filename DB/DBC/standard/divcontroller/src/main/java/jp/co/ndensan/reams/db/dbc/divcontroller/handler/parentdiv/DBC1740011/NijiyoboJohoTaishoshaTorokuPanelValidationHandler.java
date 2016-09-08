@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
+ * 総合事業（経過措置）対象者登録 のValidationHandlerです。
  *
- * @author Administrator
+ * @reamsid_L DBC-2400-010 yuqingzhang
  */
 public class NijiyoboJohoTaishoshaTorokuPanelValidationHandler {
 
@@ -29,7 +30,7 @@ public class NijiyoboJohoTaishoshaTorokuPanelValidationHandler {
     }
 
     /**
-     * 様式番号一覧チェックです。
+     * 総合事業（経過措置）対象者登録チェックです。
      *
      * @return {@link ValidationMessageControlPairs}
      */
