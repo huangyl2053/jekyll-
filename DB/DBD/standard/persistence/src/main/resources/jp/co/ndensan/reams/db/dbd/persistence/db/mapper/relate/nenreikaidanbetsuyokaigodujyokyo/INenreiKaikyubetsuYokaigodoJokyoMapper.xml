@@ -6,6 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.nenreikaidanbetsuyokaigodujyokyo.INenreiKaikyubetsuYokaigodoJokyoMapper">
     
     <resultMap id="ResultMap_ToukeiNinzuEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd583001.ToukeiNinzuEntity" autoMapping="true">
+        <result property="取得条件" column="取得条件"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="自立人数" column="自立人数"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="経過介護人数" column="経過介護人数"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="要支援1人数" column="要支援1人数"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
