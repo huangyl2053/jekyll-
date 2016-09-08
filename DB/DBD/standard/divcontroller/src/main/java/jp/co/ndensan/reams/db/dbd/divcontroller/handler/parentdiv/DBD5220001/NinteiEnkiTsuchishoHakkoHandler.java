@@ -162,6 +162,10 @@ public class NinteiEnkiTsuchishoHakkoHandler {
             dataSourceList.add(getDataSource(発行対象者情報));
             被保番号List.add(発行対象者情報.get被保番号());
         }
+        if (div.getTxtMaxDisp().getValue() != null) {
+            div.getDgHakkotaishosha().getGridSetting().setLimitRowCount(div.getTxtMaxDisp().getValue().intValue());
+            div.getDgHakkotaishosha().getGridSetting().setSelectedRowCount(発行対象者一覧情報.size());
+        }
         div.getDgHakkotaishosha().setDataSource(dataSourceList);
         div.getTxtnkiKetteiDate().setValue(RDate.getNowDate());
         div.getTxtTsuchishoHakkoDate().setValue(RDate.getNowDate());
