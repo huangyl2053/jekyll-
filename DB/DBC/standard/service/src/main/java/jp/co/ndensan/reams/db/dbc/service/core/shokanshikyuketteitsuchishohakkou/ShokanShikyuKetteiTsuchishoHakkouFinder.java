@@ -67,6 +67,7 @@ public class ShokanShikyuKetteiTsuchishoHakkouFinder {
         List<DbT4001JukyushaDaichoEntity> 受給者台帳EntityList = 受給者台帳Dac.get受給者台帳(被保険者番号);
         if (!受給者台帳EntityList.isEmpty() && 受給者台帳EntityList != null) {
             for (DbT4001JukyushaDaichoEntity entity : 受給者台帳EntityList) {
+                entity.initializeMd5();
                 受給者台帳List.add(new JukyushaDaicho(entity));
             }
         }
@@ -85,6 +86,7 @@ public class ShokanShikyuKetteiTsuchishoHakkouFinder {
         List<DbT3105SogoJigyoTaishoshaEntity> 総合事業対象者EntityList = 総合事業対象者Dac.get総合事業対象者(被保険者番号);
         if (!総合事業対象者EntityList.isEmpty() && 総合事業対象者EntityList != null) {
             for (DbT3105SogoJigyoTaishoshaEntity entity : 総合事業対象者EntityList) {
+                entity.initializeMd5();
                 総合事業対象者List.add(new SogoJigyoTaishosha(entity));
             }
         }
@@ -103,6 +105,7 @@ public class ShokanShikyuKetteiTsuchishoHakkouFinder {
         List<DbT3036ShokanHanteiKekkaEntity> 総合事業対象者EntityList = 償還払支給判定結果Dac.select償還払支給判定結果(被保険者番号);
         if (!総合事業対象者EntityList.isEmpty() && 総合事業対象者EntityList != null) {
             for (DbT3036ShokanHanteiKekkaEntity entity : 総合事業対象者EntityList) {
+                entity.initializeMd5();
                 償還払支給判定結果List.add(new ShokanHanteiKekka(entity));
             }
         }
@@ -120,8 +123,9 @@ public class ShokanShikyuKetteiTsuchishoHakkouFinder {
         IShokanShikyuKetteiTsuchishoHakkouMapper mapper = mapperProvider.create(IShokanShikyuKetteiTsuchishoHakkouMapper.class);
         List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List = new ArrayList<>();
         List<ShokanShikyuKetteiTsuchishoHakkouEntity> 償還払支給判定結果EntityList = mapper.get償還払支給判定結果(被保険者番号);
-        if (!償還払支給判定結果EntityList.isEmpty() && 償還払支給判定結果EntityList != null) {
+        if (償還払支給判定結果EntityList != null && !償還払支給判定結果EntityList.isEmpty()) {
             for (ShokanShikyuKetteiTsuchishoHakkouEntity entity : 償還払支給判定結果EntityList) {
+                entity.initializeMd5ToEntities();
                 償還払支給判定結果List.add(new ShokanShikyuKetteiTsuchishoHakkouBusiness(entity));
             }
         }

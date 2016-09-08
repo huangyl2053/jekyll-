@@ -643,6 +643,10 @@ public enum ReportIdDBC {
      */
     DBC200007(new ReportId("DBC200007_KyufujissekiTorikomiIchiran"), new RString("給付実績情報取込結果一覧表")),
     /**
+     * 高額合算支給申請書情報送付一覧表帳票ＩＤです。
+     */
+    DBC200027(new ReportId("DBC200027_GassanShikyuShinseishoJohoSofuIchiran"), new RString("高額合算支給申請書情報送付一覧表")),
+    /**
      * サービスコード別利用状況ＩＤです。
      */
     DBC300002(new ReportId("DBC300002_ServiceCodeBetsuRiyoJokyo"), new RString("サービスコード別利用状況"));

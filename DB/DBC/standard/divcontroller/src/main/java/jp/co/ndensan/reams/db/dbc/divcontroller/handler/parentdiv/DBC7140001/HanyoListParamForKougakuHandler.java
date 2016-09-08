@@ -127,10 +127,10 @@ public class HanyoListParamForKougakuHandler {
             batchparam.setShikyuShinseishoSeiriNoTo(div.getTxtSikyuSinseishoSeiriBangoShuryo().getValue());
         }
         if (null != div.getTxtSofuNengetsu().getFromValue()) {
-            batchparam.setFlexibleYearMonthFrom(new FlexibleYearMonth(div.getTxtSofuNengetsu().getFromValue().toString()));
+            batchparam.setFlexibleYearMonthFrom(new FlexibleYearMonth(div.getTxtSofuNengetsu().getFromValue().getYearMonth().toString()));
         }
         if (null != div.getTxtSofuNengetsu().getToValue()) {
-            batchparam.setFlexibleYearMonthTo(new FlexibleYearMonth(div.getTxtSofuNengetsu().getToValue().toString()));
+            batchparam.setFlexibleYearMonthTo(new FlexibleYearMonth(div.getTxtSofuNengetsu().getToValue().getYearMonth().toString()));
         }
         List<RString> selectKey = div.getChkCsvHenshuHoho().getSelectedKeys();
         if (selectKey.contains(項目名付加)) {

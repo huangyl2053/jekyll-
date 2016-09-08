@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shikakushogohyoin.ShikakuShogohyoInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohishikakushogohyokeikasochiin.SogojigyohiShikakuShogohyoKeikaSochiInCsvEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohishikakushogohyokeikasochiin.SogojigyohiShikakuShogohyoKeikaSochiInCsvEntitySingle;
 import jp.co.ndensan.reams.db.dbc.entity.report.sogojigyohishikakushogohyokeikasochi.SogojigyohiShikakuShogohyoKeikaSochiSource;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
@@ -84,7 +85,7 @@ public class SogojigyohiShikakuShogohyoKeikaSochiInDoIchiranhyoSakuseiProcess ex
     private final Set<RString> 識別コードset = new HashSet<>();
     private SogojigyohiShikakuShogohyoKeikaSochiInProcessParameter parameter;
     private SogojigyohiShikakuShogohyoKeikaSochiInCsvEntity csvEntity;
-    private List<ShikakuShogohyoInEntity> entityList;
+    private SogojigyohiShikakuShogohyoKeikaSochiInCsvEntitySingle csvEntity1;
     private List<RString> 改頁リスト;
     private final List<PersonalData> personalDataList = new ArrayList<>();
     private ShikakuShogohyoInEntity currentRecord;
@@ -98,6 +99,8 @@ public class SogojigyohiShikakuShogohyoKeikaSochiInDoIchiranhyoSakuseiProcess ex
     private int count = 0;
     @BatchWriter
     private CsvWriter eucCsvWriter;
+    @BatchWriter
+    private CsvWriter eucCsvWriter1;
 
     @BatchWriter
     private BatchReportWriter<SogojigyohiShikakuShogohyoKeikaSochiSource> batchReportWriter_一覧表;
@@ -105,9 +108,11 @@ public class SogojigyohiShikakuShogohyoKeikaSochiInDoIchiranhyoSakuseiProcess ex
 
     @Override
     protected void initialize() {
+
         super.initialize();
+        連番 = NUM_0;
         改頁リスト = new ArrayList<>();
-        entityList = new ArrayList<>();
+
         ShichosonSecurityJohoFinder finder = ShichosonSecurityJohoFinder.createInstance();
         this.市町村セキュリティ情報 = finder.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (null == this.市町村セキュリティ情報) {
@@ -136,20 +141,29 @@ public class SogojigyohiShikakuShogohyoKeikaSochiInDoIchiranhyoSakuseiProcess ex
                 filePath(eucFilePath).
                 setDelimiter(コンマ).
                 setEnclosure(ダブル引用符).
-                setEncode(Encode.SJIS).
+                setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 hasHeader(true).build();
+        eucCsvWriter1 = BatchWriters.csvWriter(SogojigyohiShikakuShogohyoKeikaSochiInCsvEntitySingle.class).
+                filePath(eucFilePath).
+                setDelimiter(コンマ).
+                setEnclosure(ダブル引用符).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).build();
+
     }
 
     @Override
     protected void usualProcess(ShikakuShogohyoInEntity entity) {
         アクセスログ対象追加(entity);
         currentRecord = entity;
-        entityList.add(entity);
+
         ShikakuShogohyoInEntity beforeEntity = getBefore();
         if (null != beforeEntity) {
             if (null == csvEntity) {
                 csvEntity = new SogojigyohiShikakuShogohyoKeikaSochiInCsvEntity();
+                csvEntity1 = new SogojigyohiShikakuShogohyoKeikaSochiInCsvEntitySingle();
                 editヘッダー項目(currentRecord);
             }
             if (is改頁(beforeEntity, entity)) {
@@ -170,9 +184,10 @@ public class SogojigyohiShikakuShogohyoKeikaSochiInDoIchiranhyoSakuseiProcess ex
 
     @Override
     protected void afterExecute() {
-        if (!entityList.isEmpty() && currentRecord != null) {
-            if (1 == entityList.size()) {
+        if (連番 != 0) {
+            if (1 == 連番) {
                 csvEntity = new SogojigyohiShikakuShogohyoKeikaSochiInCsvEntity();
+                csvEntity1 = new SogojigyohiShikakuShogohyoKeikaSochiInCsvEntitySingle();
                 editヘッダー項目(currentRecord);
             }
             edit明細項目(currentRecord);
@@ -203,6 +218,15 @@ public class SogojigyohiShikakuShogohyoKeikaSochiInDoIchiranhyoSakuseiProcess ex
     }
 
     private void editヘッダー項目(ShikakuShogohyoInEntity entity) {
+        if (市町村セキュリティ情報.get導入形態コード().is広域()) {
+            editヘッダー項目1(entity);
+        } else {
+
+            editヘッダー項目2(entity);
+        }
+    }
+
+    private void editヘッダー項目1(ShikakuShogohyoInEntity entity) {
         RString 審査年月 = entity.get資格照合表一時().getShinsaYM().wareki().eraType(EraType.KANJI_RYAKU)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         csvEntity.set審査年月(審査年月);
@@ -214,6 +238,21 @@ public class SogojigyohiShikakuShogohyoKeikaSochiInDoIchiranhyoSakuseiProcess ex
                     .concat(RString.HALF_SPACE).concat(SAKUSEI);
             RString 日時 = 作成日.concat(RString.HALF_SPACE).concat(作成時);
             csvEntity.set作成日時(日時);
+        }
+    }
+
+    private void editヘッダー項目2(ShikakuShogohyoInEntity entity) {
+        RString 審査年月 = entity.get資格照合表一時().getShinsaYM().wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        csvEntity1.set審査年月(審査年月);
+        if (parameter.getシステム日付() != null) {
+            作成日時 = parameter.getシステム日付();
+            RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                    .fillType(FillType.BLANK).toDateString();
+            RString 作成時 = 作成日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)
+                    .concat(RString.HALF_SPACE).concat(SAKUSEI);
+            RString 日時 = 作成日.concat(RString.HALF_SPACE).concat(作成時);
+            csvEntity1.set作成日時(日時);
         }
     }
 
@@ -253,22 +292,32 @@ public class SogojigyohiShikakuShogohyoKeikaSochiInDoIchiranhyoSakuseiProcess ex
         report.writeBy(reportSourceWriter_一覧表);
     }
 
-    private void writeCsvLine(SogojigyohiShikakuShogohyoKeikaSochiInCsvEntity entity) {
+    private void writeCsvLine(SogojigyohiShikakuShogohyoKeikaSochiInCsvEntity entity, SogojigyohiShikakuShogohyoKeikaSochiInCsvEntitySingle entity1) {
         if (市町村セキュリティ情報.get導入形態コード().is広域()) {
             eucCsvWriter.writeLine(entity);
         } else {
-            eucCsvWriter.writeLine(entity.to単一());
+            eucCsvWriter1.writeLine(entity1);
         }
     }
 
     private void edit明細項目(ShikakuShogohyoInEntity entity) {
+        if (市町村セキュリティ情報.get導入形態コード().is広域()) {
+            edit明細項目1(entity);
+        } else {
+            edit明細項目2(entity);
+        }
+
+        writeCsvLine(csvEntity, csvEntity1);
+        csvEntity = new SogojigyohiShikakuShogohyoKeikaSochiInCsvEntity();
+        csvEntity1 = new SogojigyohiShikakuShogohyoKeikaSochiInCsvEntitySingle();
+    }
+
+    private void edit明細項目1(ShikakuShogohyoInEntity entity) {
         csvEntity.set連番(new RString(連番));
         if (entity.get被保険者一時() != null) {
             csvEntity.set被保険者氏名(entity.get被保険者一時().get宛名名称());
             csvEntity.set被保険者番号(entity.get被保険者一時().get登録被保険者番号().getColumnValue());
-            if (市町村セキュリティ情報.get導入形態コード().is広域()) {
-                csvEntity.set証記載保険者番号(entity.get被保険者一時().get証記載保険者番号().getColumnValue());
-            }
+            csvEntity.set証記載保険者番号(entity.get被保険者一時().get証記載保険者番号().getColumnValue());
         }
         if (entity.get資格照合表一時() != null) {
             if (entity.get資格照合表一時().getServiceTanisu() != null) {
@@ -300,8 +349,45 @@ public class SogojigyohiShikakuShogohyoKeikaSochiInDoIchiranhyoSakuseiProcess ex
                 csvEntity.set警告種別(ShikakuShogohyoKeikokuShubetsu.toValue(entity.get資格照合表一時().getShubetsu()).get名称());
             }
         }
-        writeCsvLine(csvEntity);
-        csvEntity = new SogojigyohiShikakuShogohyoKeikaSochiInCsvEntity();
+    }
+
+    private void edit明細項目2(ShikakuShogohyoInEntity entity) {
+        csvEntity1.set連番(new RString(連番));
+        if (entity.get被保険者一時() != null) {
+            csvEntity1.set被保険者氏名(entity.get被保険者一時().get宛名名称());
+            csvEntity1.set被保険者番号(entity.get被保険者一時().get登録被保険者番号().getColumnValue());
+
+        }
+        if (entity.get資格照合表一時() != null) {
+            if (entity.get資格照合表一時().getServiceTanisu() != null) {
+                csvEntity1.setサービス単位数(decimal_to_string(entity.get資格照合表一時().getServiceTanisu()));
+            }
+            if (entity.get資格照合表一時().getServiceTeikyoYM() != null) {
+                csvEntity1.setサービス提供年月(パターン54(entity.get資格照合表一時().getServiceTeikyoYM()));
+            }
+            csvEntity1.setサービス日数_回数(new RString(entity.get資格照合表一時().getServiceNissuKaisu()));
+            csvEntity1.setサービス種類コード(entity.get資格照合表一時().getServiceShuruiCode().getColumnValue());
+            csvEntity1.setサービス種類名(entity.get資格照合表一時().getServiceShuruiMei());
+            csvEntity1.set事業者名(entity.get資格照合表一時().getJigyoshoMei());
+            csvEntity1.set事業者番号(entity.get資格照合表一時().getJigyoshoNo().getColumnValue());
+            csvEntity1.set保険者名(entity.get資格照合表一時().getHokenshaName());
+            csvEntity1.set保険者番号(entity.get資格照合表一時().getHokenshaNo().getColumnValue());
+            if (entity.get資格照合表一時().getRiyoshaFutanGaku() != null) {
+                csvEntity1.set利用者負担額(decimal_to_string(entity.get資格照合表一時().getRiyoshaFutanGaku()));
+            }
+            csvEntity1.set要介護区分コード(entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue());
+            if (entity.get資格照合表一時().getServiceTeikyoYM() != null
+                    && entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue() != null) {
+                要介護状態区分 = YokaigoJotaiKubunSupport.toValue(entity.get資格照合表一時().getServiceTeikyoYM(),
+                        entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue());
+                csvEntity1.set要介護度(要介護状態区分.getName());
+            }
+            csvEntity1.set認定有効期間_終了(パターン4(entity.get資格照合表一時().getNinteiYukoKikanShuryoYMD()));
+            csvEntity1.set認定有効期間_開始(パターン4(entity.get資格照合表一時().getNinteiYukoKikanKaishiYMD()));
+            if (entity.get資格照合表一時().getShubetsu() != null) {
+                csvEntity1.set警告種別(ShikakuShogohyoKeikokuShubetsu.toValue(entity.get資格照合表一時().getShubetsu()).get名称());
+            }
+        }
     }
 
     /**
@@ -327,7 +413,7 @@ public class SogojigyohiShikakuShogohyoKeikaSochiInDoIchiranhyoSakuseiProcess ex
         if (null == 年月日) {
             return RString.EMPTY;
         }
-        return 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+        return 年月日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
                 .fillType(FillType.BLANK).toDateString();
     }
 

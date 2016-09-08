@@ -38,4 +38,22 @@ public class ShotokuDankaiBetsuHihokenshasuIchiranSource implements IReportSourc
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * ShotokuDankaiBetsuHihokenshasuIchiranSourceのENUM
+     */
+    public enum DBB300004_ShotokuDankaiBetsuHihokenshasuIchiran {
+
+        printTimeStamp,
+        nendo,
+        hokenshaNo,
+        hokenshaName,
+        shikakuKijunYmd,
+        choteiKijunYmd,
+        list_1,
+        list_2,
+        list_3,
+        list_4
+    }
+
 }
