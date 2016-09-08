@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.saishinsamoshita
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.saishinsamoshitateshoout.SaishinsaMoshitateMybatisParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.DbWT1741SaishinsaMoshitateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.DbWT1741SaishinsaMoshitateTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateAndHihokenshaKanrenEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateIchiranhyoTaisyoEntity;
@@ -45,7 +46,7 @@ public interface ISaishinsaMoshitateshoOutJohoMapper {
     /**
      * 被保険者一時TBLと再審査申立一時TBLからデータを取ります。
      *
-     * @param parameter SaishinsaMoshitateGetSoufuDataProcessParameter
+     * @param parameter SaishinsaMoshitateMybatisParameter
      * @return List<SaishinsaMoshitateAndHihokenshaKanrenEntity>
      */
     List<SaishinsaMoshitateAndHihokenshaKanrenEntity> select送付対象データ関連リスト(SaishinsaMoshitateMybatisParameter parameter);
@@ -86,6 +87,13 @@ public interface ISaishinsaMoshitateshoOutJohoMapper {
     List<SaishinsaMoshitateMeisyoKanrenEntity> select介護事業者名称取得関連リスト();
 
     /**
+     * 再審査申立一時TBLからデータを取ります。
+     *
+     * @return List<DbWT1741SaishinsaMoshitateEntity>
+     */
+    List<DbWT1741SaishinsaMoshitateEntity> select事業者名称エラーデータ関連リスト();
+
+    /**
      * 介護サービス種類TBLと再審査申立一時TBLからデータを取ります。
      *
      * @return List<SaishinsaMoshitateMeisyoKanrenEntity>
@@ -105,6 +113,13 @@ public interface ISaishinsaMoshitateshoOutJohoMapper {
      * @return List<SaishinsaMoshitateMeisyoKanrenEntity>
      */
     List<SaishinsaMoshitateMeisyoKanrenEntity> select特定診療サービスコード名称関連リスト();
+
+    /**
+     * 再審査申立一時TBLからデータを取ります。
+     *
+     * @return List<DbWT1741SaishinsaMoshitateEntity>
+     */
+    List<DbWT1741SaishinsaMoshitateEntity> selectサービス名称エラーデータ関連リスト();
 
     /**
      * 帳票出力対象データを取得する。

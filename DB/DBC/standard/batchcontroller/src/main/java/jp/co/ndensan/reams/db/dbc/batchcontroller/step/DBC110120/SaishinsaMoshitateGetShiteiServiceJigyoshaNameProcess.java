@@ -46,11 +46,9 @@ public class SaishinsaMoshitateGetShiteiServiceJigyoshaNameProcess extends Batch
     protected void process(SaishinsaMoshitateMeisyoKanrenEntity entity) {
         DbWT1741SaishinsaMoshitateEntity 再審査申立 = entity.get再審査申立();
         DbT7063KaigoJigyoshaShiteiServiceEntity サービス事業者 = entity.getサービス事業者();
-        if (null != サービス事業者) {
-            再審査申立.setJigyoshaName(getColumnValue(サービス事業者.getJigyoshaName()));
-            再審査申立.setState(EntityDataState.Modified);
-            再審査申立一時tableWriter.update(再審査申立);
-        }
+        再審査申立.setJigyoshaName(getColumnValue(サービス事業者.getJigyoshaName()));
+        再審査申立.setState(EntityDataState.Modified);
+        再審査申立一時tableWriter.update(再審査申立);
     }
 
     private RString getColumnValue(IDbColumnMappable entity) {

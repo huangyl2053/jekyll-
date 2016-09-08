@@ -733,6 +733,17 @@
         事業者1."biko" as "dbT7060KaigoJigyosha_biko"
     </sql>
     
+    <select id="select事業者名称エラーデータ関連リスト"
+            resultMap="ResultMap_DbWT1741SaishinsaMoshitateEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="allColumns_DbWT1741SaishinsaMoshitate" />
+        FROM "DbWT1741SaishinsaMoshitate" AS 再審査申立
+        WHERE 再審査申立."jigyoshoNo" IS NOT NULL 
+        AND 再審査申立."jigyoshoNo" != ''
+        AND 再審査申立."jigyoshoNo" != '0000000000'
+        AND (再審査申立."jigyoshaName" IS NULL OR 再審査申立."jigyoshaName" = '')
+    </select>
+    
     <select id="selectサービス種類名称関連リスト"
             resultMap="resultMap_ServiceShuruiMeishoEntity" fetchSize="500" resultOrdered="true">
         SELECT
@@ -902,6 +913,14 @@
         特定診療サービスコード."santeiSeiyakuKikan" as "dbT7120TokuteiShinryoServiceCode_santeiSeiyakuKikan",
         特定診療サービスコード."santeiSeiyakuKaisu" as "dbT7120TokuteiShinryoServiceCode_santeiSeiyakuKaisu"
     </sql>
+    
+    <select id="selectサービス名称エラーデータ関連リスト"
+            resultMap="ResultMap_DbWT1741SaishinsaMoshitateEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="allColumns_DbWT1741SaishinsaMoshitate" />
+        FROM "DbWT1741SaishinsaMoshitate" AS 再審査申立
+        WHERE 再審査申立."serviceMeisho" IS NULL OR 再審査申立."serviceMeisho" = ''
+    </select>
     
     <select id="selectDB更新データ関連リスト"
             resultMap="resultMap_DBKoushinDataEntity" fetchSize="500" resultOrdered="true">
