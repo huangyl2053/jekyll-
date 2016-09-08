@@ -559,6 +559,7 @@ public class ServiceRiyohyoInfoDivHandler {
                 : result.getサービス種類コード().getColumnValue());
         row.setHdnGendogakuTaishogaiFlag(result.get限度額対象外フラグ());
         row.setHdnRiyoshaFutanTeiritsuTeigakuKbn(result.get利用者負担定率定額区分());
+        row.setHdnMeisaiNo(new RString(String.valueOf(result.get明細番号())));
         row.setHdnServiceKomokuCode(result.getサービス項目コード() == null ? null
                 : result.getサービス項目コード().getColumnValue());
         row.setHdnGokeiFlag(result.is合計フラグ() ? 合計有り : 合計なし);
