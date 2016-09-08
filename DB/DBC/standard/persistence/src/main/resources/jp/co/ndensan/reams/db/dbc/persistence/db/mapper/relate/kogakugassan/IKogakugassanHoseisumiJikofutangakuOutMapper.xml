@@ -21,10 +21,10 @@
             AND "DbT3070"."isDeleted" = FALSE) AS "DbT3070KogakuGassanJikoFutanGaku"
         WHERE
             "DbT3070KogakuGassanJikoFutanGaku".rowNum = 1
-        AND "DbT3070KogakuGassanJikoFutanGaku"."sofuTaishoGaiFlag" <![CDATA[!=]]> '1'
+        AND "DbT3070KogakuGassanJikoFutanGaku"."sofuTaishoGaiFlag" <![CDATA[<>]]> '1'
         AND ("DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" IS NULL OR "DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" = ''
             OR "DbT3070KogakuGassanJikoFutanGaku"."saisoFlag" = '1'
-            <if test="saishoriKubun == '1'">
+            <if test="saishoriKubun == 1">
                 OR "DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" = #{shoriYM}
             </if>)
         ORDER BY
@@ -79,9 +79,9 @@
              AND  "DbWT37K1KogakuGassanJikoFutanGaku"."rirekiNo" = "DbT3071KogakuGassanJikoFutanGakuMeisai"."rirekiNo"
         WHERE "DbWT37K1KogakuGassanJikoFutanGaku"."sofuJogaiFlag" = FALSE
           AND (("DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" IS NOT NULL
-           AND  "DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" <![CDATA[!=]]> '')
+           AND  "DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" <![CDATA[<>]]> '')
            OR  ("DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" IS NOT NULL
-           AND  "DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" <![CDATA[!=]]> ''))
+           AND  "DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" <![CDATA[<>]]> ''))
         ORDER BY "DbWT37K1KogakuGassanJikoFutanGaku"."renban" ASC, "DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoM" ASC
     </select>
 
@@ -106,9 +106,9 @@
                ON "DbWT1001Hihokensha"."exRenban" = "DbWT37K1KogakuGassanJikoFutanGaku"."renban"
         WHERE "DbWT37K1KogakuGassanJikoFutanGaku"."sofuJogaiFlag" = FALSE
           AND (("DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" IS NOT NULL
-           AND  "DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" <![CDATA[!=]]> '')
+           AND  "DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" <![CDATA[<>]]> '')
            OR  ("DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" IS NOT NULL
-           AND  "DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" <![CDATA[!=]]> ''))
+           AND  "DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" <![CDATA[<>]]> ''))
         ${出力順},
         "DbWT37K1KogakuGassanJikoFutanGaku"."hihokenshaNo",
         "DbWT37K1KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"
@@ -143,9 +143,9 @@
                AND "DbT3070KogakuGassanJikoFutanGaku"."rirekiNo" = "DbWT37K1KogakuGassanJikoFutanGaku"."rirekiNo"
         WHERE "DbWT37K1KogakuGassanJikoFutanGaku"."sofuJogaiFlag" = FALSE
           AND (("DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" IS NOT NULL
-           AND  "DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" <![CDATA[!=]]> '')
+           AND  "DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" <![CDATA[<>]]> '')
            OR  ("DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" IS NOT NULL
-           AND  "DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" <![CDATA[!=]]> ''))
+           AND  "DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" <![CDATA[<>]]> ''))
     </select>
 
     <select resultOrdered="true" id="get未送付高額合算自己負担額データ" fetchSize="500"
