@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.report.shotokudankaibetsuhihokenshasuichiran.HokenshaDankaibetsuHihokenshasuGroup;
 import jp.co.ndensan.reams.db.dbb.business.report.shotokudankaibetsuhihokenshasuichiran.HyojunDankaibetsuHihokenshasuGroup;
@@ -27,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 
 /**
  * 「帳票の出力」処理クラスです。
@@ -47,18 +50,21 @@ public class ReportProcess extends BatchKeyBreakBase<DankaibeHihokensixyaForRepo
     private BatchReportWriter<ShotokuDankaiBetsuHihokenshasuIchiranSource> batchReportWriter;
     private ReportSourceWriter<ShotokuDankaiBetsuHihokenshasuIchiranSource> reportSourceWriter;
     private static final RString 市町村コード = new RString("1");
+    List<RString> 改頁項目リスト;
 
     @Override
     protected void initialize() {
         super.initialize();
+        改頁項目リスト = new ArrayList<>();
+        改頁項目リスト.add(new RString(ShotokuDankaiBetsuHihokenshasuIchiranSource.DBB300004_ShotokuDankaiBetsuHihokenshasuIchiran.hokenshaNo.name()));
         hokenshaDankaibetsuHihokenshasuGroup = new HokenshaDankaibetsuHihokenshasuGroup();
         hyojunDankaibetsuHihokenshasuGroup = new HyojunDankaibetsuHihokenshasuGroup();
     }
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(
-                ReportIdDBB.DBB300004.getReportId().value()).create();
+        PageBreaker<ShotokuDankaiBetsuHihokenshasuIchiranSource> breaker = new ShotokuDankaiBetsuHihokenshasuIchiranSourcePageBreak(改頁項目リスト);
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB300004.getReportId().value()).addBreak(breaker).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
