@@ -15,12 +15,14 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4210011.Shu
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4210011.ShuruiShikyuGendogakuMainValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -39,6 +41,7 @@ public class ShuruiShikyuGendogakuMain {
     private static final int 追加 = 4;
     private static final int 削除 = 5;
     private static final LockingKey 排他キー = new LockingKey("DBCShikyuGendoGakuTableDbT7111");
+    private static final RString 共通ボタン = new RString("btnUpdate");
 
     /**
      * 画面初期化のメソッドです。
@@ -78,35 +81,42 @@ public class ShuruiShikyuGendogakuMain {
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
+        List<ServiceShuruiShikyuGendoGaku> shikyuGendoGakuList
+                = ViewStateHolder.get(ViewStateKeys.サービス種類支給限度額, ServiceShuruiShikyuGendoGakuHolder.class)
+                .getServiceShuruiShikyuGendoGakuList();
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             ShuruiShikyuGendogakuMainValidationHandler validationHandler = getValidationHandler();
-            List<ServiceShuruiShikyuGendoGaku> shikyuGendoGakuList
-                    = ViewStateHolder.get(ViewStateKeys.サービス種類支給限度額, ServiceShuruiShikyuGendoGakuHolder.class)
-                    .getServiceShuruiShikyuGendoGakuList();
             switch (state) {
                 case 追加:
                     validationHandler.標準適用開始年月チェック(pairs, div);
                     validationHandler.サービス提供期間チェック(pairs, div);
                     validationHandler.種類支給限度額認定対象チェック(pairs, div);
-                    validationHandler.要支援1入力チェック警告(pairs, div);
                     validationHandler.要支援1入力チェックエラー(pairs, div);
-                    validationHandler.要支援2入力チェック警告(pairs, div);
                     validationHandler.要支援2入力チェックエラー(pairs, div);
+                    validationHandler.要支援1入力チェック警告(pairs, div);
+                    validationHandler.要支援2入力チェック警告(pairs, div);
                     if (pairs.iterator().hasNext()) {
                         return ResponseData.of(div).addValidationMessages(pairs).respond();
                     }
                     getHandler(div).追加する(shikyuGendoGakuList);
                     break;
                 case 修正:
-                    validationHandler.要支援1入力チェック警告(pairs, div);
                     validationHandler.要支援1入力チェックエラー(pairs, div);
-                    validationHandler.要支援2入力チェック警告(pairs, div);
                     validationHandler.要支援2入力チェックエラー(pairs, div);
                     if (pairs.iterator().hasNext()) {
                         return ResponseData.of(div).addValidationMessages(pairs).respond();
+                    }
+                    validationHandler.要支援2入力チェック警告(pairs, div);
+                    validationHandler.要支援1入力チェック警告(pairs, div);
+                    if (pairs.iterator().hasNext()) {
+                        return ResponseData.of(div).addValidationMessages(pairs).respond();
+                    }
+                    if (!(new RString(UrWarningMessages.未入力.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))
+                            || ResponseHolder.getButtonType() != MessageDialogSelectedResult.Yes) {
+                        return ResponseData.of(div).respond();
                     }
                     getHandler(div).update修正(shikyuGendoGakuList);
                     break;
@@ -120,9 +130,14 @@ public class ShuruiShikyuGendogakuMain {
             RealInitialLocker.release(排他キー);
             state = 保存;
             return ResponseData.of(div).setState(DBC4210011StateName.保存完了);
-        } else {
-            return ResponseData.of(div).respond();
+        } else if (ResponseHolder.isWarningIgnoredRequest()) {
+            getHandler(div).追加する(shikyuGendoGakuList);
+            getHandler(div).btnSave();
+            RealInitialLocker.release(排他キー);
+            state = 保存;
+            return ResponseData.of(div).setState(DBC4210011StateName.保存完了);
         }
+        return ResponseData.of(div).respond();
 
     }
 
@@ -139,6 +154,20 @@ public class ShuruiShikyuGendogakuMain {
                 new ServiceShuruiShikyuGendoGakuHolder(shikyuGendoGakuList));
         state = 標準;
         return ResponseData.of(div).setState(DBC4210011StateName.標準);
+    }
+
+    /**
+     * 状態遷移の事件です。
+     *
+     * @param div ShokanShikyuGendogakuMainDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShuruiShikyuGendogakuMainDiv> onStateTransition(
+            ShuruiShikyuGendogakuMainDiv div) {
+        if (CommonButtonHolder.isVisible(共通ボタン)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
