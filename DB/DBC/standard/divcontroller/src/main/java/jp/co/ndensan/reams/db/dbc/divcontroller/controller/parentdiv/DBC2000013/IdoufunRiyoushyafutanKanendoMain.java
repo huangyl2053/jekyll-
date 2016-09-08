@@ -83,18 +83,18 @@ public class IdoufunRiyoushyafutanKanendoMain {
     }
 
     private ShoriDateKanri get直近の年次負担割合判定処理() {
-        RString 処理名 = ShoriName.年次利用者負担割合判定.get名称();
-        return IdoufunRiyoushyafutanKanendoManager.createInstance().get直近の年次負担割合判定処理(処理名);
+        return IdoufunRiyoushyafutanKanendoManager.createInstance().get直近の年次負担割合判定処理(
+                ShoriName.年次利用者負担割合判定.get名称());
     }
 
     private ShoriDateKanri get異動分利用者負担割合判定_過年度のデータ() {
-        RString 処理名 = ShoriName.異動分利用者負担割合判定_過年度.get名称();
-        return IdoufunRiyoushyafutanKanendoManager.createInstance().get異動分利用者負担割合判定_過年度のデータ(処理名);
+        return IdoufunRiyoushyafutanKanendoManager.createInstance().get異動分利用者負担割合判定_過年度のデータ(
+                ShoriName.異動分利用者負担割合判定_過年度.get名称());
     }
 
     private ShoriDateKanri get異動分利用者負担割合判定のデータ(RString 年次判定年度) {
-        RString 処理名 = ShoriName.異動分利用者負担割合判定.get名称();
-        return IdoufunRiyoushyafutanKanendoManager.createInstance().get異動分利用者負担割合判定のデータ(処理名, 年次判定年度);
+        return IdoufunRiyoushyafutanKanendoManager.createInstance().get異動分利用者負担割合判定のデータ(
+                ShoriName.異動分利用者負担割合判定.get名称(), 年次判定年度);
     }
 
     private IdoufunRiyoushyafutanKanendoMainHandler getHandler(IdoufunRiyoushyafutanKanendoDiv div) {

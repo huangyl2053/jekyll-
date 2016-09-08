@@ -39,7 +39,7 @@ public class IdoufunRiyoushyafutanKanendoManager {
     /**
      * 直近の年次負担割合判定処理のデータを取得です.
      *
-     * @param 処理名
+     * @param 処理名 処理名
      * @return 直近の年次負担割合判定処理のデータ ShoriDateKanri
      */
     public ShoriDateKanri get直近の年次負担割合判定処理(RString 処理名) {
