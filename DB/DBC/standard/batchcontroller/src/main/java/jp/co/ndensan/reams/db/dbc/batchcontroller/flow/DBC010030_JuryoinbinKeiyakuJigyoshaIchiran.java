@@ -61,7 +61,9 @@ public class DBC010030_JuryoinbinKeiyakuJigyoshaIchiran extends BatchFlowBase<DB
         }
         parameter.set契約種別(getParameter().get契約種別());
         parameter.set契約期間終了事業者(getParameter().get契約期間終了事業者());
-        parameter.set帳票出力順ID(Long.parseLong(getParameter().get改頁出力順ID().toString()));
+        if (!RString.isNullOrEmpty(getParameter().get改頁出力順ID())) {
+            parameter.set帳票出力順ID(Long.parseLong(getParameter().get改頁出力順ID().toString()));
+        }
         parameter.set市町村コード(getParameter().get市町村コード());
         parameter.set処理日時(RDateTime.now());
         return loopBatch(JuryoIninJigyoshaIchiranProcess.class).arguments(parameter).define();

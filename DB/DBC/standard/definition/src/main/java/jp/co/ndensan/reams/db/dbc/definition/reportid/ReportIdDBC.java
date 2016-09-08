@@ -147,10 +147,6 @@ public enum ReportIdDBC {
      */
     DBC100070(new ReportId("DBC100070_KogakuJigyoShikyuShinseisho"), new RString("介護保険高額総合事業サービス費支給申請書")),
     /**
-     * TODO 臨時対応
-     */
-    DBC7210001(new ReportId("DBC7210001"), new RString("DBC7210001")),
-    /**
      * 基準収入額適用決定通知書
      */
     DBC100074(
