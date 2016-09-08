@@ -131,7 +131,9 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
     private static final RString 被保険者番号 = new RString("被保険者番号");
     private static final RString 日本語ファイル名 = new RString("汎用リスト　高額合算計算結果連絡票情報CSV");
     private static final RString 英数字ファイル名 = new RString("HanyoListKogakuGassanKeisanKekkaRenrakuHyo.csv");
-    private static final RString CSV出力有無 = new RString("");
+    private RString CSV出力有無;
+    private static final RString あり = new RString("あり");
+    private static final RString なし = new RString("なし");
     private static final RString 抽出対象者 = new RString("【抽出対象者】");
     private static final RString 保険者 = new RString("保険者：");
     private static final RString 抽出区分 = new RString("抽出区分：");
@@ -147,6 +149,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
     @Override
     protected void initialize() {
         super.initialize();
+        CSV出力有無 = なし;
         personalDataList = new ArrayList<>();
         システム日付 = FlexibleDate.getNowDate();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
@@ -203,6 +206,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
 
     @Override
     protected void process(HanyoListKogakuGassanKeisanEntity entity) {
+        CSV出力有無 = あり;
         HanyoListKogakuGassanKeisanNoCSVEntity output = getNo連番帳票のCSVファイル作成(entity);
         hanyoListKogakuNoCSVWriter.writeLine(output);
         personalDataList.add(toPersonalData(entity));
