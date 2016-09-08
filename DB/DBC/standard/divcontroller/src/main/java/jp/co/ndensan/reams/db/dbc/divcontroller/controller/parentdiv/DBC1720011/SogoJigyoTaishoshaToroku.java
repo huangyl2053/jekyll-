@@ -19,9 +19,11 @@ import jp.co.ndensan.reams.db.dbd.business.core.basic.SogoJigyoTaishoshaIdentifi
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -157,7 +159,9 @@ public class SogoJigyoTaishoshaToroku {
     public ResponseData<SogoJigyoTaishoshaTorokuDiv> onClick_btnConfirm(SogoJigyoTaishoshaTorokuDiv div) {
         if (!状態_削除.equals(div.getSougouZigyouTaishouShousai().getHiddenModel())) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            getValidationHandler().開始日と終了日の前後順チェック(pairs, div);
+            SogoJigyoTaishoshaTorokuValidationHandler validationHanlder = getValidationHandler();
+            validationHanlder.開始日と終了日の前後順チェック(pairs, div);
+            validationHanlder.適用期間重複チェック(pairs, div);
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
@@ -180,17 +184,19 @@ public class SogoJigyoTaishoshaToroku {
      * @return ResponseData<SogoJigyoTaishoshaTorokuDiv>
      */
     public ResponseData<SogoJigyoTaishoshaTorokuDiv> onClick_btnHozonn(SogoJigyoTaishoshaTorokuDiv div) {
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        getValidationHandler().適用期間重複チェック(pairs, div);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
-        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-        ArrayList<SogoJigyoTaishoshaToJotai> 一覧情報と状態
-                = ViewStateHolder.get(DBC1720011ViewStateKey.申請一覧情報と状態, ArrayList.class);
-        getHandler(div).保存処理(一覧情報と状態, 被保険者番号);
-        return onLoad(div);
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+            TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+            ArrayList<SogoJigyoTaishoshaToJotai> 一覧情報と状態
+                    = ViewStateHolder.get(DBC1720011ViewStateKey.申請一覧情報と状態, ArrayList.class);
+            getHandler(div).保存処理(一覧情報と状態, 被保険者番号);
+            return onLoad(div);
+        }
+        return ResponseData.of(div).respond();
     }
 
     private SogoJigyoTaishoshaTorokuHandler getHandler(SogoJigyoTaishoshaTorokuDiv div) {
