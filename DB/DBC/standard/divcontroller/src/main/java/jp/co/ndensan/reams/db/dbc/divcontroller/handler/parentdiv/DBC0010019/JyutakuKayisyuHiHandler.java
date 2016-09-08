@@ -255,7 +255,7 @@ public class JyutakuKayisyuHiHandler {
         if (給付実績住宅改修費List != null && !給付実績住宅改修費List.isEmpty()) {
             div.getBtnZengetsu().setDisabled(!給付実績住宅改修費List.
                     get(給付実績住宅改修費List.size() - 1).getサービス提供年月().isBefore(サービス提供年月KEY));
-            div.getBtnJigetsu().setDisabled(サービス提供年月KEY.isBefore(給付実績住宅改修費List.get(0).getサービス提供年月()));
+            div.getBtnJigetsu().setDisabled(!サービス提供年月KEY.isBefore(給付実績住宅改修費List.get(0).getサービス提供年月()));
         }
     }
 
