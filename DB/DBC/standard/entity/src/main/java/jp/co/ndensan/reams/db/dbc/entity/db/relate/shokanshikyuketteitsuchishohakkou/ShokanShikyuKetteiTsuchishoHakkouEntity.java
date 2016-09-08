@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity
 /**
  * 償還払支給判定結果Entityです。
  *
- * @reamsid_L DBD-5310-010 liuyl
+ * @reamsid_L DBC-5310-010 liuyl
  */
 @lombok.Getter
 @lombok.Setter
