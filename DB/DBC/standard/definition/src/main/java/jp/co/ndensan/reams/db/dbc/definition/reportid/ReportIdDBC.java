@@ -67,6 +67,10 @@ public enum ReportIdDBC {
      */
     DBC200203(new ReportId("DBC200203_GassanJigyobunJikofutangakuKeisanKekkaIchiran"), new RString("総合事業分自己負担額計算結果一覧表")),
     /**
+     * 総合事業分支給額計算結果一覧表
+     */
+    DBC200204(new ReportId("DBC200204_GassanJigyobunShikyugakuKeisanKekkaIchiran"), new RString("総合事業分支給額計算結果一覧表")),
+    /**
      * 総合事業費過再審査定通知書情報
      */
     DBC100057(new ReportId("DBC100057_ServiceRiyohyoBeppyo"), new RString("介護保険サービス利用票（兼居宅サービス計画）・別表 ")),
