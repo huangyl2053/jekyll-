@@ -39,7 +39,7 @@ public class HanyoListKogakuGassanJikoFutangakuMybatisParameter implements IMyBa
     private final boolean 連番付加;
     private final boolean 日付スラッシュ付加;
     private final RString 保険者コード;
-    private final RString 出力順;
+    private final Long 出力順;
     private final RString 出力項目;
 
     /**
@@ -90,7 +90,7 @@ public class HanyoListKogakuGassanJikoFutangakuMybatisParameter implements IMyBa
             boolean 連番付加,
             boolean 日付スラッシュ付加,
             RString 保険者コード,
-            RString 出力順,
+            Long 出力順,
             RString 出力項目
     ) {
         this.抽出区分 = 抽出区分;

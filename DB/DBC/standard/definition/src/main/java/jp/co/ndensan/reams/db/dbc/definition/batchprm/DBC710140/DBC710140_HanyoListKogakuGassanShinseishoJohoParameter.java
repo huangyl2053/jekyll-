@@ -91,7 +91,7 @@ public class DBC710140_HanyoListKogakuGassanShinseishoJohoParameter extends Batc
                 rebanFuka,
                 slashDate,
                 hokenshaNo,
-                new RString(shutsuryokuju),
+                shutsuryokuju,
                 shutsuryokuTomoku,
                 null,
                 null,
