@@ -56,7 +56,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 償還払い支給（不支給）決定通知書作成（単）のDivControllerです。
  *
- * @reamsid_L DBD-5310-010 liuyl
+ * @reamsid_L DBC-5310-010 liuyl
  */
 public class ShokanShikyuKetteiTsuchishoHakkou {
 
