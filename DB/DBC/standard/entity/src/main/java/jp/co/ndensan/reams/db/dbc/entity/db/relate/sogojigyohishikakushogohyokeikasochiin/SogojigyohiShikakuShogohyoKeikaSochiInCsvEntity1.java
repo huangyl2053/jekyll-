@@ -19,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SogojigyohiShikakuShogohyoKeikaSochiInCsvEntity {
+public class SogojigyohiShikakuShogohyoKeikaSochiInCsvEntity1 {
 
     @CsvField(order = 10, name = "審査年月")
     private RString 審査年月;
@@ -61,7 +61,5 @@ public class SogojigyohiShikakuShogohyoKeikaSochiInCsvEntity {
     private RString サービス単位数;
     @CsvField(order = 200, name = "利用者負担額")
     private RString 利用者負担額;
-    @CsvField(order = 210, name = "証記載保険者番号")
-    private RString 証記載保険者番号;
 
 }
