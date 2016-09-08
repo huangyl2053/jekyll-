@@ -37,6 +37,13 @@ public interface IKogakugassanKeisankekkaRenrakuhyoOutMapper {
     List<DbWT3811KogakuGassanShikyuGakuKeisanKekkaTempEntity> get識別コードがないデータ();
 
     /**
+     * 高額合算支給額計算結果一時情報を取得します。
+     *
+     * @return 高額合算支給額計算結果一時情報
+     */
+    List<DbWT3811KogakuGassanShikyuGakuKeisanKekkaTempEntity> get高額合算支給額計算結果明細データがない();
+
+    /**
      * 送付ファイル作成情報を取得します。
      *
      * @return 送付ファイル作成情報

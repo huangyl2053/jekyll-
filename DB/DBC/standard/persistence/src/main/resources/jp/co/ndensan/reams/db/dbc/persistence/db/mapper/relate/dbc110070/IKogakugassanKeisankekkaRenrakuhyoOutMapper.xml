@@ -4,11 +4,10 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc110070.IKogakugassanKeisankekkaRenrakuhyoOutMapper">
 
     <select resultOrdered="true" id="get高額合算計算結果連絡票情報"
-            resultMap="ResultMap_KogakuGassanShikyuGakuKeisanKekkaEntity"
+            resultMap="ResultMap_DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110070.KogakugassanKeisankekkaRenrakuhyoOutMybatisParameter" fetchSize="500">
         SELECT
-            <include refid="allColumns_DbT3072KogakuGassanShikyuGakuKeisanKekka" />,
-            <include refid="allColumns_DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai" />
+            <include refid="allColumns_DbT3072KogakuGassanShikyuGakuKeisanKekka" />
         FROM(
                 SELECT 
                     "DbT3072KogakuGassanShikyuGakuKeisanKekka".*,
@@ -22,25 +21,6 @@
                     "DbT3072KogakuGassanShikyuGakuKeisanKekka"."dataKubun" IN ('2', '3')
                 AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."isDeleted" = FALSE
                 ) AS "計算結果"
-        LEFT JOIN
-            (
-                SELECT DISTINCT
-                    ON ( 
-                      "hihokenshaNo",
-                      "taishoNendo",
-                      "shoKisaiHokenshaNo",
-                      "shikyuShinseishoSeiriNo"
-                    ) * 
-                FROM
-                  rgdb."DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"
-                ORDER BY "hihokenshaNo", "taishoNendo","shoKisaiHokenshaNo", "shikyuShinseishoSeiriNo", "rirekiNo" DESC
-            ) AS "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"
-        ON
-                "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."hihokenshaNo" = "計算結果"."hihokenshaNo"
-            AND "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."taishoNendo" = "計算結果"."taishoNendo"
-            AND "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."shoKisaiHokenshaNo" = "計算結果"."shoKisaiHokenshaNo"
-            AND "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."shikyuShinseishoSeiriNo" = "計算結果"."shikyuShinseishoSeiriNo"
-            AND "DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai"."rirekiNo" = "計算結果"."rirekiNo"
         WHERE
                     "計算結果".rowNum = 1
                 AND "計算結果"."dataKubun" = '2'
@@ -59,6 +39,28 @@
                 "計算結果"."shoKisaiHokenshaNo",
                 "計算結果"."shikyuShinseishoSeiriNo",
                 "計算結果"."rirekiNo"
+    </select>
+    
+    <select resultOrdered="true" id="get高額合算支給額計算結果明細データがない" fetchSize="500"
+            resultMap="ResultMap_DbWT3811KogakuGassanShikyuGakuKeisanKekkaTmpEntity">
+        SELECT
+            <include refid="allColumns_DbWT3811KogakuGassanShikyuGakuKeisanKekka" />
+        FROM
+            "DbWT3811KogakuGassanShikyuGakuKeisanKekka" AS "DbWT3811KogakuGassanShikyuGakuKeisanKekka"
+        WHERE 
+                1 = 1
+            AND NOT EXISTS (
+                SELECT
+                    'X'
+                FROM
+                    rgdb."DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai" AS "slv"
+                WHERE
+                        "DbWT3811KogakuGassanShikyuGakuKeisanKekka"."hihokenshaNo" = "slv"."hihokenshaNo"
+                    AND "DbWT3811KogakuGassanShikyuGakuKeisanKekka"."taishoNendo" = "slv"."taishoNendo"
+                    AND "DbWT3811KogakuGassanShikyuGakuKeisanKekka"."shoKisaiHokenshaNo" = "slv"."shoKisaiHokenshaNo"
+                    AND "DbWT3811KogakuGassanShikyuGakuKeisanKekka"."shikyuShinseishoSeiriNo" = "slv"."shikyuShinseishoSeiriNo"
+                    AND "DbWT3811KogakuGassanShikyuGakuKeisanKekka"."rirekiNo" = "slv"."rirekiNo"
+            )
     </select>
     
     <select resultOrdered="true" id="get識別コードがないデータ" fetchSize="500"
@@ -590,6 +592,4 @@
         <result property="shichosonKanyuYmd" column="dbWT1001Hihokensha_shichosonKanyuYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shichosonDattaiYmd" column="dbWT1001Hihokensha_shichosonDattaiYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
-    
-    
 </mapper>
