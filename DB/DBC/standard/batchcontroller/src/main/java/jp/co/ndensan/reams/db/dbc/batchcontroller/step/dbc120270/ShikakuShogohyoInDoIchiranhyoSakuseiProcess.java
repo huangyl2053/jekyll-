@@ -307,7 +307,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
         if (市町村セキュリティ情報.get導入形態コード().is広域()) {
             eucCsvWriter.writeLine(entity);
         } else {
-            eucCsvWriter1.writeLine(entity);
+            eucCsvWriter1.writeLine(entity1);
         }
     }
 
