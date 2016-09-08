@@ -440,7 +440,8 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
         RString 金融機関コード;
         RString 通帳記号;
         RString 通帳番号;
-        if (koza.getEdited通帳記号() != null && koza.getEdited通帳番号() != null && koza.get口座名義人漢字() != null) {
+        if (koza.get金融機関コード() != null && koza.getEdited通帳記号() != null
+                && koza.getEdited通帳番号() != null && koza.get口座名義人漢字() != null) {
             if (koza.get金融機関コード().value().length() >= NUM_4) {
                 金融機関コード = koza.get金融機関コード().value().substring(NUM_0, NUM_4);
             } else {
@@ -468,7 +469,8 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
         RString 預金種別略称;
         RString 支店コード;
         RString 口座番号;
-        if (koza.get支店コード() != null && koza.get口座番号() != null && koza.get口座名義人漢字() != null) {
+        if (koza.get金融機関コード() != null && koza.get支店コード() != null
+                && koza.get口座番号() != null && koza.get口座名義人漢字() != null) {
             if (koza.get金融機関コード().value().length() >= NUM_4) {
                 金融機関コード = koza.get金融機関コード().value().substring(NUM_0, NUM_4);
             } else {
@@ -479,7 +481,8 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
             } else {
                 支店コード = koza.get支店コード().value();
             }
-            if (koza.get預金種別() != null && koza.get預金種別().get預金種別略称().length() >= NUM_2) {
+            if (koza.get預金種別() != null && koza.get預金種別().get預金種別略称() != null
+                    && koza.get預金種別().get預金種別略称().length() >= NUM_2) {
                 預金種別略称 = koza.get預金種別().get預金種別略称().substring(NUM_0, NUM_2);
             } else {
                 預金種別略称 = koza.get預金種別().get預金種別略称();
