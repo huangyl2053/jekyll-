@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC3510011;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
@@ -7,20 +7,20 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
  * このコードはツールによって生成されました。</br>
  * このファイルへの変更は、再生成時には損失するため</br>
  * 不正な動作の原因になります。</br>
- * DBC3510011の状態名定義クラスです
+ * DBC0010000の状態名定義クラスです
  *
  * @author 自動生成
  */
-public enum DBC3510011StateName implements IStateEnumerations {
+public enum DBC0010000StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    初期表示("初期表示"),
-    媒体作成("媒体作成");
+    給付実績照会検索("給付実績照会検索"),
+    給付実績照会一覧("給付実績照会一覧");
 
     private final RString name;
 
-    private DBC3510011StateName(String name) {
+    private DBC0010000StateName(String name) {
         this.name = new RString(name);
     }
 

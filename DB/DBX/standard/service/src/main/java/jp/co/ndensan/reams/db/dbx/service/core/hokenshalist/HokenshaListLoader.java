@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJoho
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -91,6 +92,17 @@ public class HokenshaListLoader {
         } else {
             return HokenshaList.createFor単一(search市町村リストFor単一(合併情報区分, 市町村情報, 導入形態));
         }
+    }
+
+    /**
+     * 保険者リストを取得します。
+     *
+     * @param loginUserID RString
+     * @return 保険者リスト
+     */
+    public HokenshaList getHokenshaList(RString loginUserID) {
+// 実装依頼用にメソッド仮設
+        return null;
     }
 
     private List<HokenshaSummary> search市町村リストFor広域(
