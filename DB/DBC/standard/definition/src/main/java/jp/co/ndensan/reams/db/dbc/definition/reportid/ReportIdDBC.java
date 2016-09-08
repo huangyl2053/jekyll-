@@ -623,6 +623,10 @@ public enum ReportIdDBC {
      */
     DBC701024(new ReportId("DBC701024_HanyoList_SogoJigyoHi_Care"), new RString("汎用リスト出力(総合事業費情報)")),
     /**
+     * 居宅サービス計画作成依頼届出状況一覧表帳票ＩＤです。
+     */
+    DBC200060(new ReportId("DBC200060_KyotakuServiceKeikakuSakuseiIraitodokedeJyokyoIchiran"), new RString("居宅サービス計画作成依頼届出状況一覧表")),
+    /**
      * 介護給付費公費受給者別一覧表帳票ＩＤです。
      */
     DBC200008(new ReportId("DBC200008_KohijukyushaBetsuIchiran"), new RString("介護給付費公費受給者別一覧表"));

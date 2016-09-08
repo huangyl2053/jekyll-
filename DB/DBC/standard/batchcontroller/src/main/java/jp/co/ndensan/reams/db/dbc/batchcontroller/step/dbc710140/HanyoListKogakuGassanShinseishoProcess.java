@@ -185,7 +185,7 @@ public class HanyoListKogakuGassanShinseishoProcess extends BatchProcessBase<Han
         if (personalDataList == null || personalDataList.isEmpty()) {
             manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
         } else {
-            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
         }
         バッチ出力条件リストの出力();

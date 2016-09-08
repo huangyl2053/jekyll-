@@ -35,10 +35,6 @@ public class KogakugassanMeisaiKakuninProcess extends BatchProcessBase<DbWT37K1K
     BatchEntityCreatedTempTableWriter 処理結果リスト一時tableWriter;
 
     @Override
-    protected void initialize() {
-    }
-
-    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(READ_DATA_ID);
     }
