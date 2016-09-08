@@ -92,6 +92,7 @@
         A.サービス項目コード AS サービス項目コード,
         A.事業者コード AS 事業者コード,
         A.合計フラグ AS 合計フラグ,
+        A.明細番号 AS 明細番号,
         A.定額利用者負担単価金額 AS 定額利用者負担単価金額,
         DbT7131KaigoServiceNaiyou."gendogakuTaishogaiFlag" AS 限度額対象外フラグ,
         DbT7131KaigoServiceNaiyou."riyosyaFutanTeiritsuTeigakuKubun" AS 利用者負担定率定額区分
