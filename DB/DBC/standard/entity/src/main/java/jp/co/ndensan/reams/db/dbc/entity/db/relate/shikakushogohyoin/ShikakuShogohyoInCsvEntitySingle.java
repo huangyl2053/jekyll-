@@ -18,14 +18,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShikakuShogohyoInCsvEntity1 {
+public class ShikakuShogohyoInCsvEntitySingle {
 
     @CsvField(order = 10, name = "審査年月")
     private RString 審査年月;
     @CsvField(order = 20, name = "作成日時")
     private RString 作成日時;
     @CsvField(order = 30, name = "No.")
-    private RString No;
+    private RString 連番;
     @CsvField(order = 40, name = "保険者番号")
     private RString 保険者番号;
     @CsvField(order = 50, name = "保険者名")

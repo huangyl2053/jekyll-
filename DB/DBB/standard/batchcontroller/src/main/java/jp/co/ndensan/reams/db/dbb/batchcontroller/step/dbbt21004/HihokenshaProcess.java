@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt21004.DankaibetuHih
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.hihokenxiataixiou.HihokenshaTaihoTemp;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.setaiinhaakuinputtable.TmpSetaiHaaku;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tukibeturanku.TsukibetsuRankTemp;
-import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honnsanteifuka.IHonnSanteiFukaMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.fukakeisan.FukaKeisan;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoRank;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -135,7 +134,6 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
         世帯員把握入力テーブルWriter.insert(tmpSetaiHaaku);
         List<HihokenshaDaicho> 資格情報 = new ArrayList<>();
         資格情報.add(new HihokenshaDaicho(entity));
-        IHonnSanteiFukaMapper mapper = mapperProvider.create(IHonnSanteiFukaMapper.class);
         if (null != 市町村セキュリティ情報 && null != 市町村セキュリティ情報.get導入形態コード()
                 && DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
             RString 合併情報区分 = DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分,

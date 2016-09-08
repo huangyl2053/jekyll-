@@ -81,8 +81,10 @@ public class UpdateKogakuGassanShikyuGakuKeisanKekkaMiSofuProcess extends BatchK
             getBefore().get高額合算支給額計算結果().setSofuYM(FlexibleYearMonth.EMPTY);
             getBefore().get高額合算支給額計算結果().setSaisoFG(KokuhorenDataSaisoFlag.再送不要.getコード());
             dbT3072TableWriter.update(getBefore().get高額合算支給額計算結果());
-            getBefore().get高額合算支給額計算結果明細().setSofuYM(FlexibleYearMonth.EMPTY);
-            dbT3073TableWriter.update(getBefore().get高額合算支給額計算結果明細());
+            if (getBefore().get高額合算支給額計算結果明細() != null) {
+                getBefore().get高額合算支給額計算結果明細().setSofuYM(FlexibleYearMonth.EMPTY);
+                dbT3073TableWriter.update(getBefore().get高額合算支給額計算結果明細());
+            }
         }
         if (flag == INT_2) {
             高額合算支給額計算結果 = processCore.getFinal高額合算支給額計算結果();
@@ -94,10 +96,13 @@ public class UpdateKogakuGassanShikyuGakuKeisanKekkaMiSofuProcess extends BatchK
         高額合算支給額計算結果.get高額合算支給額計算結果().setSofuYM(FlexibleYearMonth.EMPTY);
         高額合算支給額計算結果.get高額合算支給額計算結果().setSaisoFG(KokuhorenDataSaisoFlag.再送不要.getコード());
         dbT3072TableWriter.update(高額合算支給額計算結果.get高額合算支給額計算結果());
-        for (DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity 明細
-                : 高額合算支給額計算結果.get高額合算支給額計算結果明細リスト()) {
-            明細.setSofuYM(FlexibleYearMonth.EMPTY);
-            dbT3073TableWriter.update(明細);
+        if (高額合算支給額計算結果.get高額合算支給額計算結果明細リスト() != null
+                && !高額合算支給額計算結果.get高額合算支給額計算結果明細リスト().isEmpty()) {
+            for (DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity 明細
+                    : 高額合算支給額計算結果.get高額合算支給額計算結果明細リスト()) {
+                明細.setSofuYM(FlexibleYearMonth.EMPTY);
+                dbT3073TableWriter.update(明細);
+            }
         }
     }
 }
