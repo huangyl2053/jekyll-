@@ -142,12 +142,12 @@ public class SougouJigyoHiJouhouHandler {
         }
         parameter.set保険者コード(市町村コード);
         parameter.set抽出方法(div.getRadSakuseiKubun().getSelectedValue());
-        parameter.setサービス提供年月開始年月(div.getTxtSabisuTeikyoNengetsu().getFromValue().toDateString());
-        parameter.setサービス提供年月終了年月(div.getTxtSabisuTeikyoNengetsu().getToValue().toDateString());
-        parameter.set審査年月開始年月(div.getTxtSinsaNengetsu().getFromValue().toDateString());
-        parameter.set審査年月終了年月(div.getTxtSinsaNengetsu().getToValue().toDateString());
-        parameter.set取込年月開始年月(div.getTxtTorikomiNengetsu().getFromValue().toDateString());
-        parameter.set取込年月終了年月(div.getTxtTorikomiNengetsu().getToValue().toDateString());
+        parameter.setサービス提供年月開始年月(rDateToRString(div.getTxtSabisuTeikyoNengetsu().getFromValue()));
+        parameter.setサービス提供年月終了年月(rDateToRString(div.getTxtSabisuTeikyoNengetsu().getToValue()));
+        parameter.set審査年月開始年月(rDateToRString(div.getTxtSinsaNengetsu().getFromValue()));
+        parameter.set審査年月終了年月(rDateToRString(div.getTxtSinsaNengetsu().getToValue()));
+        parameter.set取込年月開始年月(rDateToRString(div.getTxtTorikomiNengetsu().getFromValue()));
+        parameter.set取込年月終了年月(rDateToRString(div.getTxtTorikomiNengetsu().getToValue()));
         return parameter;
     }
 
@@ -206,4 +206,10 @@ public class SougouJigyoHiJouhouHandler {
         }
     }
 
+    private RString rDateToRString(RDate 日付) {
+        if (日付 == null) {
+            return RString.EMPTY;
+        }
+        return 日付.toDateString();
+    }
 }
