@@ -149,6 +149,7 @@
         LEFT OUTER JOIN
         rgdb."DbT4912ShujiiJoho" AS "DbT4912ShujiiJoho"
         ON "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT4912ShujiiJoho"."shichosonCode"
+        AND "DbT4101NinteiShinseiJoho"."shujiiIryokikanCode" = "DbT4912ShujiiJoho"."shujiiIryokikanCode"
         AND "DbT4101NinteiShinseiJoho"."shujiiCode" = "DbT4912ShujiiJoho"."shujiiCode"
 
         LEFT OUTER JOIN

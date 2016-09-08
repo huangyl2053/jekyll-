@@ -189,22 +189,22 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
 
     private DBC710150_HanyoListKogakuGassanJikoFutangakuParameter setChkCsvHenshuHoho(DBC710150_HanyoListKogakuGassanJikoFutangakuParameter batchparam) {
         if (null != div.getTxtJikoFutangakuKakunin().getFromValue()) {
-            batchparam.setJikoFutangakuKakuninFrom(new FlexibleYearMonth(div.getTxtJikoFutangakuKakunin().getFromValue().toString()));
+            batchparam.setJikoFutangakuKakuninFrom(new FlexibleYearMonth(div.getTxtJikoFutangakuKakunin().getFromValue().getYearMonth().toString()));
         }
         if (null != div.getTxtJikoFutangakuKakunin().getToValue()) {
-            batchparam.setSofuTaishogaiFukumuTo(new FlexibleYearMonth(div.getTxtJikoFutangakuKakunin().getToValue().toString()));
+            batchparam.setSofuTaishogaiFukumuTo(new FlexibleYearMonth(div.getTxtJikoFutangakuKakunin().getToValue().getYearMonth().toString()));
         }
         if (null != div.getTxtHoseizumiJikoFutangaku().getFromValue()) {
-            batchparam.setHoseizumiJikoFutangakuFrom(new FlexibleYearMonth(div.getTxtHoseizumiJikoFutangaku().getFromValue().toString()));
+            batchparam.setHoseizumiJikoFutangakuFrom(new FlexibleYearMonth(div.getTxtHoseizumiJikoFutangaku().getFromValue().getYearMonth().toString()));
         }
         if (null != div.getTxtHoseizumiJikoFutangaku().getToValue()) {
-            batchparam.setHoseizumiJikoFutangakuTo(new FlexibleYearMonth(div.getTxtHoseizumiJikoFutangaku().getToValue().toString()));
+            batchparam.setHoseizumiJikoFutangakuTo(new FlexibleYearMonth(div.getTxtHoseizumiJikoFutangaku().getToValue().getYearMonth().toString()));
         }
         if (null != div.getTxtJikoFutanngakuShoumeisho().getFromValue()) {
-            batchparam.setJikoFutanngakuShoumeishoFrom(new FlexibleYearMonth(div.getTxtJikoFutanngakuShoumeisho().getFromValue().toString()));
+            batchparam.setJikoFutanngakuShoumeishoFrom(new FlexibleYearMonth(div.getTxtJikoFutanngakuShoumeisho().getFromValue().getYearMonth().toString()));
         }
         if (null != div.getTxtJikoFutangakuKakunin().getToValue()) {
-            batchparam.setJikoFutanngakuShoumeishoTo(new FlexibleYearMonth(div.getTxtJikoFutanngakuShoumeisho().getToValue().toString()));
+            batchparam.setJikoFutanngakuShoumeishoTo(new FlexibleYearMonth(div.getTxtJikoFutanngakuShoumeisho().getToValue().getYearMonth().toString()));
         }
         List<RString> selectKey = div.getChkCsvHenshuHoho().getSelectedKeys();
         if (selectKey.contains(項目名付加)) {

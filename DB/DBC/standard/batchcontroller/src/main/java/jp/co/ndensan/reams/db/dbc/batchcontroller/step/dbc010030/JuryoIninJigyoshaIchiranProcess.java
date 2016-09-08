@@ -61,9 +61,9 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
     private static final RString CSV出力有無_なし = new RString("なし");
     private static final RString CSVファイル名_なし = new RString("なし");
     private static final AtenaMeisho 事業者名称 = new AtenaMeisho("＊＊　対象データは存在しません　＊＊");
-    private static final RString 契約事業者番号 = new RString("【契約事業者番号  】:");
-    private static final RString 契約開始日 = new RString("【契約開始日    】：");
-    private static final RString 契約種別 = new RString("【契約種別     】:");
+    private static final RString 契約事業者番号 = new RString("【契約事業者番号   】:");
+    private static final RString 契約開始日 = new RString("【契約開始日     】：");
+    private static final RString 契約種別 = new RString("【契約種別      】:");
     private static final RString 契約期間終了事業者 = new RString("【契約期間終了事業者】：");
     private static final RString FUGOU = new RString("～");
     private static final RString 契約_0 = new RString("0");
@@ -96,6 +96,7 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
     private List<RString> pageBreakKeys;
     private Map<RString, RString> 出力順Map;
     private IOutputOrder 出力順クラス;
+    private int 連番;
 
     @BatchWriter
     private BatchReportWriter<JuryoIninJigyoshaIchiranSource> batchReportWriter_一覧表;
@@ -103,6 +104,7 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
 
     @Override
     protected void initialize() {
+        連番 = 0;
         pageBreakKeys = new ArrayList<>();
         出力順Map = new HashMap<>();
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
@@ -178,6 +180,7 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
     @Override
     protected void usualProcess(KaigoJuryoininKeiyakuJigyoshaIchirahyoEntity entity) {
         データFlag = true;
+        連番 = 連番 + INDEX_1;
         JuryoIninJigyoshaIchiranReport report = new JuryoIninJigyoshaIchiranReport(
                 entity,
                 parameter.get市町村コード(),
@@ -214,7 +217,7 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
                 地方公共団体.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBC.DBC200012.getReportName(),
-                new RString(reportSourceWriter.getPageGroupCount()),
+                new RString(連番),
                 CSV出力有無_なし,
                 CSVファイル名_なし,
                 出力条件);

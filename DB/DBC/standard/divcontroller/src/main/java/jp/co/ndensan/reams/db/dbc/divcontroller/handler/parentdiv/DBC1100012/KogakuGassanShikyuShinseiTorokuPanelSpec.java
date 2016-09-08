@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * KogakuGassanShikyuShinseiTorokuPanelSpec のクラスファイル
  *
- * @author admin
+ * @reamsid_L DBC-2040-010 lihang
  */
 public enum KogakuGassanShikyuShinseiTorokuPanelSpec implements IPredicate<KogakuGassanShikyuShinseiTorokuPanelDiv> {
 

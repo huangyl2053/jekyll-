@@ -37,7 +37,6 @@ public class ShuruiShikyuGendogakuMainHandler {
     private static final LockingKey 前排他ロックキー = new LockingKey("DBCShikyuGendoGakuTableDbT7111");
     private static final RString 種類支給限度額登録完了 = new RString("種類支給限度額の登録が完了しました。");
     private static final RString 更新 = new RString("btnUpdate");
-    private static final RString 保存 = new RString("btnComplete");
     private static final RString 一 = new RString("1");
     private static final int ゼロ = 0;
 
@@ -173,17 +172,13 @@ public class ShuruiShikyuGendogakuMainHandler {
         div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().setDisabled(true);
         Decimal yoshien1ShikyuGendogaku = div.getShuruiShikyuGendogakuIchiran().getDgShikyuGendogaku()
                 .getClickedItem().getYoshien1ShikyuGendogaku().getValue();
-        if (yoshien1ShikyuGendogaku.equals(Decimal.ZERO)) {
-            div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().clearValue();
-        } else {
+        if (yoshien1ShikyuGendogaku != null) {
             div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().setValue(yoshien1ShikyuGendogaku);
         }
         div.getShuruiShikyuGendogakuShosai().getTxtYoshien2ShikyuGendogaku().setDisabled(true);
         Decimal yoshien2ShikyuGendogaku = div.getShuruiShikyuGendogakuIchiran().getDgShikyuGendogaku()
                 .getClickedItem().getYoshien2ShikyuGendogaku().getValue();
-        if (yoshien2ShikyuGendogaku.equals(Decimal.ZERO)) {
-            div.getShuruiShikyuGendogakuShosai().getTxtYoshien2ShikyuGendogaku().clearValue();
-        } else {
+        if (yoshien2ShikyuGendogaku != null) {
             div.getShuruiShikyuGendogakuShosai().getTxtYoshien2ShikyuGendogaku().setValue(yoshien2ShikyuGendogaku);
         }
         div.getShuruiShikyuGendogakuShosai().getTxtYokaigo1ShikyuGendogaku().setDisabled(true);
@@ -467,7 +462,7 @@ public class ShuruiShikyuGendogakuMainHandler {
         div.getShuruiShikyuGendogakuShosai().setDisabled(true);
         div.getShuruiShikyuGendogakuShosai().setVisible(true);
         div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().setDisabled(true);
-        div.getShuruiShikyuGendogakuShosai().setDdlServiceShurui(null);
+        div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().setSelectedKey(new RString(Integer.toString(ゼロ)));
         div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().setFromDisabled(true);
         div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().clearFromValue();
         div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().setToDisabled(true);
@@ -490,7 +485,6 @@ public class ShuruiShikyuGendogakuMainHandler {
         div.getShuruiShikyuGendogakuShosai().getTxtYokaigo5ShikyuGendogaku().clearValue();
         div.getCcdKanryoMessage().setVisible(false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(更新, true);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存, true);
     }
 
     private int insert追加(RString 要介護状態区分, Decimal 支給限度単位数) {

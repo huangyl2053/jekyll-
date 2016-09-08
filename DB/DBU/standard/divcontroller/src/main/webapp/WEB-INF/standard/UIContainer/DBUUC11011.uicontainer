@@ -1,0 +1,60 @@
+﻿{
+ "uiContainerName": "DBUUC11011",
+ "displayWizard": false,
+ "subGyomuCode": "DBU",
+ "steps": [
+  {
+   "id": 1,
+   "name": "事務手続選択",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU1010011",
+     "toLayoutTitle": "情報照会　事務手続選択",
+     "toState": "照会依頼"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU1010011",
+     "layoutTitle": "情報照会　事務手続選択",
+     "eventName": "結果確認へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU1020011",
+     "toLayoutTitle": "情報照会　結果確認",
+     "toState": "初期状態"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU1020011",
+     "layoutTitle": "情報照会　結果確認",
+     "eventName": "照会依頼へ戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU1010011",
+     "toLayoutTitle": "情報照会　事務手続選択",
+     "toState": "照会依頼"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU1010011",
+     "layoutTitle": "情報照会　事務手続選択",
+     "eventName": "完了",
+     "destroy": true,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

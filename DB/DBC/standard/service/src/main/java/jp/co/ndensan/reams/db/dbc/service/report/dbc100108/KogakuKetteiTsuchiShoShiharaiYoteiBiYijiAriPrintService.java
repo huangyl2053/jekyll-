@@ -62,7 +62,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriPrintService {
      *
      * @param reportManager ReportManager
      * @param 決定通知書Entity JigyouKetteiTutisyoEntity
-     * @param 発行日
+     * @param 発行日 FlexibleDate
      */
     public void print(ReportManager reportManager, JigyouKetteiTutisyoEntity 決定通知書Entity, FlexibleDate 発行日) {
         KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriProperty property
