@@ -19,8 +19,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Shotok
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Teishotokusha1SaikeisanJisshiUmu;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc110070.KogakugassanKeisankekkaRenrakuhyoOutProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
-import jp.co.ndensan.reams.db.dbc.entity.csv.dbc110070.GassanShikyugakuKeisankekkaIchiranCsvHeadEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.dbc110070.GassanShikyugakuKeisankekkaIchiranCsvMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.dbc110070.GassanShikyugakuKeisankekkaIchiranCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110070.GassanShikyugakuKeisankekkaRanrakuhyoSofuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.gassanshikyugakukeisankekkasofuichiran.GassanShikyugakuKeisankekkaSofuIchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -39,7 +38,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -86,7 +84,6 @@ public class GassanShikyugakuKeisankekkaRanrakuhyoSofuProcess extends BatchProce
     private static final RString 年度 = new RString("年度");
     private static final RString 被保険者番号 = new RString("被保険者番号");
     private static final RString 帳票出力順の取得 = new RString("帳票出力順の取得");
-    private static final ReportId 帳票ID = new ReportId("DBC200036_GassanShikyugakuKeisankekkaRanrakuhyoSofuIchiran");
     private static final RString 出力ファイル名
             = new RString("DBC200036_GassanShikyugakuKeisankekkaRanrakuhyoSofuIchiran.csv");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200036");
@@ -134,7 +131,7 @@ public class GassanShikyugakuKeisankekkaRanrakuhyoSofuProcess extends BatchProce
                 .setEnclosure(ダブル引用符)
                 .setEncode(Encode.UTF_8withBOM)
                 .setNewLine(NewLine.CRLF)
-                .hasHeader(false)
+                .hasHeader(true)
                 .build();
         PageBreaker<GassanShikyugakuKeisankekkaSofuIchiranSource> breaker
                 = new GassanShikyugakuKeisankekkaSofuIchiranPageBreak(pageBreakKeys);
@@ -166,8 +163,12 @@ public class GassanShikyugakuKeisankekkaRanrakuhyoSofuProcess extends BatchProce
 
     private void 明細項目出力(GassanShikyugakuKeisankekkaRanrakuhyoSofuEntity entity) {
         連番 = 連番 + INT_1;
-        GassanShikyugakuKeisankekkaIchiranCsvMeisaiEntity meisaiEntity
-                = new GassanShikyugakuKeisankekkaIchiranCsvMeisaiEntity();
+        GassanShikyugakuKeisankekkaIchiranCsvEntity meisaiEntity
+                = new GassanShikyugakuKeisankekkaIchiranCsvEntity();
+        meisaiEntity.set送付年月(RString.EMPTY);
+        meisaiEntity.set作成日時(RString.EMPTY);
+        meisaiEntity.set保険者番号(RString.EMPTY);
+        meisaiEntity.set保険者名(RString.EMPTY);
         meisaiEntity.set連番(new RString(連番));
         meisaiEntity.set支給申請書整理番号(entity.get高額合算支給額計算結果一時().getShikyuShinseishoSeiriNo());
         meisaiEntity.set被保険者番号(entity.get高額合算支給額計算結果一時().getHihokenshaNo().getColumnValue());
@@ -214,7 +215,7 @@ public class GassanShikyugakuKeisankekkaRanrakuhyoSofuProcess extends BatchProce
     }
 
     private void ヘッダー項目出力() {
-        GassanShikyugakuKeisankekkaIchiranCsvHeadEntity headEntity = new GassanShikyugakuKeisankekkaIchiranCsvHeadEntity();
+        GassanShikyugakuKeisankekkaIchiranCsvEntity headEntity = new GassanShikyugakuKeisankekkaIchiranCsvEntity();
         headEntity.set送付年月(processParameter.get処理年月().wareki().eraType(EraType.KANJI_RYAKU)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         RStringBuilder builder = new RStringBuilder();
@@ -235,7 +236,7 @@ public class GassanShikyugakuKeisankekkaRanrakuhyoSofuProcess extends BatchProce
         RString 出力順 = RString.EMPTY;
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
         outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課,
-                帳票ID, Long.parseLong(processParameter.get出力順ID().toString()));
+                ReportIdDBC.DBC200036.getReportId(), Long.parseLong(processParameter.get出力順ID().toString()));
         if (outputOrder != null) {
             出力順 = MyBatisOrderByClauseCreator.create(
                     GassanShikyugakuKeisankekkaSofuIchiranOutputOrder.class, outputOrder);

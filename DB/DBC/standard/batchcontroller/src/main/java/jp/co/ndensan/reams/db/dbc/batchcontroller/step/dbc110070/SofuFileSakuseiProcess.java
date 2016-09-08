@@ -41,7 +41,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
@@ -122,8 +124,8 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
         if (RSTONE.equals(国保連送付外字_変換区分)) {
             文字コード = Encode.SJIS;
         } else {
-            // TODO QA90831
-            文字コード = Encode.UTF_8withBOM;
+            // TODO QA1489
+            文字コード = Encode.SJIS;
         }
         保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
@@ -194,6 +196,8 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
         }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力ファイル名));
         sfd = SharedFile.defineSharedFile(sfd, INT_1, SharedFile.GROUP_ALL, null, true, null);
+        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
+        SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath), opts);
         outputCount.setValue(総出力件数);
         entryList.add(sfd);
         outputEntry.setValue(entryList);
