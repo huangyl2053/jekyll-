@@ -143,7 +143,7 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
                 導入団体クラス.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBB.DBB200032.getReportName(),
-                new RString(reportSourceWriter.pageCount().value()),
+                reportSourceWriter.pageCount().value() == 0 ? 定数_1 : new RString(reportSourceWriter.pageCount().value()),
                 csvOutFlag,
                 csvファイル名,
                 getOutputJokenhyoParam()
@@ -197,7 +197,7 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
                 entity.getFuichiRiyuCode()
         );
         TokubetsuChoshuMidoteiIchiranReport report = new TokubetsuChoshuMidoteiIchiranReport(
-                導入団体クラス, null, null, target, parameter.get特別徴収開始月());
+                導入団体クラス, null, null, target, null);
         report.writeBy(reportSourceWriter);
     }
 

@@ -101,7 +101,7 @@ public class FutanGenndoGakuNinnteiTsuuchishoMybatisParameter implements IMyBati
         this.被保番号 = 被保番号;
         this.減免適用開始日 = 減免適用開始日;
         this.帳票ID = 帳票ID;
-        this.業務コード_介護受給 = SubGyomuCode.DBD介護受給.getGyomuCode().value();
+        this.業務コード_介護受給 = SubGyomuCode.DBD介護受給.value();
         this.旧措置者 = KyuSochishaKubun.旧措置者.getコード();
         this.発行履歴固有情報_減免適用開始日 = 発行履歴固有情報_減免適用開始日;
         this.発行履歴固有情報_被保番号 = 発行履歴固有情報_被保番号;

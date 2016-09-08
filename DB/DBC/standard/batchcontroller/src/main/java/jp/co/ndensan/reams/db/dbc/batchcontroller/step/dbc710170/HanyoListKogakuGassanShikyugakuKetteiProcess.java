@@ -140,7 +140,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
     private static final RString 被保険者番号 = new RString("被保険者番号");
     private static final RString 日本語ファイル名 = new RString("汎用リスト　高額合算支給額決定情報CSV");
     private static final RString 英数字ファイル名 = new RString("HanyoList_KogakuGassanShikyugakuKettei.csv");
-    private RString CSV出力有無;
+    private RString 出力有無;
     private static final RString あり = new RString("あり");
     private static final RString なし = new RString("なし");
     private static final RString 抽出対象者 = new RString("【抽出対象者】");
@@ -159,7 +159,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
     @Override
     protected void initialize() {
         super.initialize();
-        CSV出力有無 = なし;
+        出力有無 = なし;
         連番 = Decimal.ZERO;
         システム日付 = FlexibleDate.getNowDate();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
@@ -211,7 +211,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
 
     @Override
     protected void process(HanyoListKogakuGassanShikyugakuKetteiEntity entity) {
-        CSV出力有無 = あり;
+        出力有無 = あり;
         連番 = 連番.add(Decimal.ONE);
         HanyoListKogakuGassanShikyugakuKetteiCSVEntity output;
         output = get帳票のCSVファイル作成(entity);
@@ -699,7 +699,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
                 RString.EMPTY,
                 日本語ファイル名,
                 出力件数,
-                CSV出力有無,
+                出力有無,
                 英数字ファイル名,
                 出力条件
         );

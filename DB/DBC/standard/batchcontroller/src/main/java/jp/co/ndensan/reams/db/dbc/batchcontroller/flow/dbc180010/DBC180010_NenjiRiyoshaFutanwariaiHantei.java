@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.RiyoshaFutanWar
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.RiyoshaFutanWariaiKonkyoDeleteProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.RiyoshaFutanWariaiMeisaiDeleteProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.ShoriDateKanriProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.ShoriKekkaKakuninListProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.SinseicyuDateDeleteProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.SogoJigyoTaishoshaTempProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
@@ -42,6 +43,7 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
     private static final RString 負担割合判定一覧BATCH_ID = new RString("FutanWariaiIchiranFlow");
     private static final RString 利用者負担割合判定BATCH_ID = new RString("RiyoshaFutanwariaiHanteiCommonFlow");
     private static final String 処理日付管理マスタAND受給管理情報の更新 = "updateDate";
+    private static final String 処理結果確認リストCSV出力 = "outPutShoriKekkaKakunin";
     private static final RString 再処理前 = new RString("2");
 
     @Override
@@ -59,6 +61,7 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
         executeStep(利用者負担割合判定);
         executeStep(負担割合判定一覧出力);
         executeStep(処理日付管理マスタAND受給管理情報の更新);
+        executeStep(処理結果確認リストCSV出力);
 
     }
 
@@ -142,6 +145,11 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
     IBatchFlowCommand updateDate() {
         return loopBatch(ShoriDateKanriProcess.class).arguments(getParameter().toNenjiRiyoshaFutanwariaiHanteiProcessParameter())
                 .define();
+    }
+
+    @Step(処理結果確認リストCSV出力)
+    IBatchFlowCommand outPutShoriKekkaKakunin() {
+        return loopBatch(ShoriKekkaKakuninListProcess.class).define();
     }
 
 }
