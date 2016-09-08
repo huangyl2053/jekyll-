@@ -100,10 +100,11 @@ public class HanyoListBachParamHandler {
      */
     public DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter setBatchParameter() {
         DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter parameter = new DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter();
-        // TODO 出力項目ID 改頁出力順ID
         parameter.set帳票ID(ReportIdDBC.DBC701021.getReportId().value());
-//        parameter.set出力順ID(1);
-//        parameter.set出力順項目ID(RString.EMPTY);
+        if (div.getCcdShutsuryokujun().get出力順ID() != null) {
+            parameter.set出力順ID(div.getCcdShutsuryokujun().get出力順ID());
+        }
+        parameter.set出力順項目ID(div.getCcdShutsuryokuKoumoku().get出力項目ID());
         boolean 項目付加 = false;
         boolean 連番の付加 = false;
         boolean 日付スラッシュ編集 = false;
