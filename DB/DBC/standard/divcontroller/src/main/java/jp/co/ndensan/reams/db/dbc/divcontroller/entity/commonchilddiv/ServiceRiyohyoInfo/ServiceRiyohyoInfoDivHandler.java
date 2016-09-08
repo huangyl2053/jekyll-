@@ -92,7 +92,6 @@ public class ServiceRiyohyoInfoDivHandler {
     private static final Decimal 二割 = new Decimal(20);
     private static final RString 負担割合区分_1割 = new RString("10");
     private static final RString 負担割合区分_2割 = new RString("20");
-    private static final RString 選択 = new RString("選択");
     private static final RString 汎用キー_明細番号 = new RString("明細番号");
     private static final RString 居宅予防区分_0 = new RString("0");
     private static final RString 居宅予防区分_1 = new RString("1");
@@ -1244,9 +1243,7 @@ public class ServiceRiyohyoInfoDivHandler {
 
             div.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCalcGokei().setDisabled(false);
         }
-        if (row.getRowState() == null) {
-            row.setRowState(RowState.valueOf(選択.toString()));
-        }
+        row.setRowState(RowState.Modified);
     }
 
     /**
