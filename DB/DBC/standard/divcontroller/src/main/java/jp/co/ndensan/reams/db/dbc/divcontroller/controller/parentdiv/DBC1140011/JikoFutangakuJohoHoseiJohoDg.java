@@ -168,11 +168,15 @@ public class JikoFutangakuJohoHoseiJohoDg {
         dgJohoIchiran_Row row = div.getDgJohoIchiran().getClickedItem();
         boolean flg = handler.isCheckPass(対象者.get被保険者番号(), row);
         if (!(flg && JigyouGassan_ShoumeishoyouDataKubun.証明書用.getCode().equals(row.getTxtDataKBN()))
-                && !ResponseHolder.isReRequest()) {
+                && !ResponseHolder.isReRequest()
+                && !(new RString(DbcWarningMessages.高額合算補正関連３
+                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
             return ResponseData.of(div).addMessage(
                     DbcWarningMessages.高額合算補正関連１.getMessage()).respond();
         } else if (!(flg && !JigyouGassan_ShoumeishoyouDataKubun.証明書用.getCode().equals(row.getTxtDataKBN()))
-                && !ResponseHolder.isReRequest()) {
+                && !ResponseHolder.isReRequest()
+                && !(new RString(DbcWarningMessages.高額合算補正関連３
+                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
             return ResponseData.of(div).addMessage(
                     DbcWarningMessages.高額合算補正関連２.getMessage()).respond();
         }
@@ -278,7 +282,7 @@ public class JikoFutangakuJohoHoseiJohoDg {
         KogakuGassanJikoFutanGaku result = ViewStateHolder.get(
                 ViewStateKeys.高額合算自己負担額, KogakuGassanJikoFutanGaku.class);
         result = handler.編集処理対象から画面(result);
-        RString 平成年度;
+        RString 平成年度
         RDate 対象年度 = div.getJikoFutangakuHoseiDetail().getTxtTaishouNendo().getValue();
         if (対象年度.getYear().getYearValue() == NENDO2008) {
             平成年度 = 平成２０年度;
@@ -438,7 +442,7 @@ public class JikoFutangakuJohoHoseiJohoDg {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE_003),
                 名称_被保険者番号, 対象者.get被保険者番号().getColumnValue());
         PersonalData personalData = PersonalData.of(対象者.get識別コード(), expandedInfo);
-        AccessLogger.log(AccessLogType.照会, personalData);
+        AccessLogger.log(AccessLogType.更新, personalData);
         handler.initializeDisplay(対象者);
         onClick_chkRirekiHyouji(div);
         return ResponseData.of(div).forwardWithEventName(
