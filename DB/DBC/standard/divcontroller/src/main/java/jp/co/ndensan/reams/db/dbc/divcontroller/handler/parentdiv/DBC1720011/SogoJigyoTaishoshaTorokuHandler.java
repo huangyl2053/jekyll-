@@ -60,6 +60,7 @@ public class SogoJigyoTaishoshaTorokuHandler {
         div.getKaiigoShikakCommonChildDiv2().initialize(被保険者番号);
         ArrayList<SogoJigyoTaishoshaToJotai> 情報と状態List = 情報と状態初期化(総合事業対象者一覧);
         div.getSougouZigyouTaishouItiran().getDgKihonInfo().setDataSource(getDataSource(情報と状態List));
+        RealInitialLocker.lock(new LockingKey(new RString("DBCHihokenshaNo").concat(被保険者番号.getColumnValue())));
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
         return 情報と状態List;
     }
@@ -375,7 +376,6 @@ public class SogoJigyoTaishoshaTorokuHandler {
      * @param 被保険者番号 被保険者番号
      */
     public void 保存処理(List<SogoJigyoTaishoshaToJotai> 情報と状態List, HihokenshaNo 被保険者番号) {
-        RealInitialLocker.lock(new LockingKey(new RString("DBCHihokenshaNo").concat(被保険者番号.getColumnValue())));
         SogoJigyoTaishoshaManager manager = new SogoJigyoTaishoshaManager();
         manager.save総合事業対象者(情報と状態List);
         RealInitialLocker.release(new LockingKey(new RString("DBCHihokenshaNo").concat(被保険者番号.getColumnValue())));
@@ -418,7 +418,7 @@ public class SogoJigyoTaishoshaTorokuHandler {
                     return false;
                 }
             } else {
-                if (null == 編集適用終了日 && 編集適用開始日.isBeforeOrEquals(適用終了日) && 適用開始日.isBeforeOrEquals(編集適用開始日)) {
+                if (null == 編集適用終了日 && 編集適用開始日.isBeforeOrEquals(適用終了日)) {
                     return false;
                 }
                 if (編集適用終了日 != null && !編集適用終了日.isBefore(適用開始日) && !適用終了日.isBefore(編集適用開始日)) {
