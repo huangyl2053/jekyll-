@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum Kaigogassan_SofuTaishogaiKubun {
 
     /**
-     * コード:1.0 名称:送付対象外
+     * コード:1 名称:送付対象外
      */
-    送付対象外("1.0", "送付対象外");
+    送付対象外("1", "送付対象外");
 
     private final RString code;
     private final RString fullName;
