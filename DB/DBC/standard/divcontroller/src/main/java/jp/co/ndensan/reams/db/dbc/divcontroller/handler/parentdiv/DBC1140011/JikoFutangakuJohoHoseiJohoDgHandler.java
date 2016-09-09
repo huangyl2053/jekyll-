@@ -51,7 +51,6 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
     private static final RString 所得区分_非課税 = new RString("11");
     private static final RString 課税 = new RString("課税");
     private static final RString 非課税 = new RString("非課税");
-    private static final RString ZERO = new RString("0");
     private static final RString CODE_ONE = new RString("1");
     private static final RString CODE_TWO = new RString("2");
     private static final RString 非該当 = new RString("非該当");
@@ -350,12 +349,12 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
                     result.get自己負担額証明書情報受取年月().toString()));
         }
         List<RString> 再送フラグList = new ArrayList();
-        if (ZERO.equals(result.get再送フラグ())) {
+        if (CODE_ONE.equals(result.get再送フラグ())) {
             再送フラグList.add(KEY_ZERO);
             detailDiv.getChkSaisouKBN().setSelectedItemsByKey(再送フラグList);
         }
         List<RString> 送付対象外フラグList = new ArrayList();
-        if (ZERO.equals(result.get送付対象外フラグ())) {
+        if (CODE_ONE.equals(result.get送付対象外フラグ())) {
             送付対象外フラグList.add(KEY_ZERO);
             detailDiv.getChkSoufuTaishougai().setSelectedItemsByKey(送付対象外フラグList);
         }
@@ -707,7 +706,7 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
             div.getJikoFutangakuHoseiDetail().getChkSoufuTaishougai().setDisabled(false);
             if (result.get補正済自己負担額情報送付年月() != null) {
                 div.getChkSaisouKBN().setDisabled(false);
-            } else if (ZERO.equals(result.get送付対象外フラグ())) {
+            } else if (CODE_ONE.equals(result.get送付対象外フラグ())) {
                 div.getChkSaisouKBN().setDisabled(true);
             } else {
                 div.getChkSaisouKBN().setDisabled(true);

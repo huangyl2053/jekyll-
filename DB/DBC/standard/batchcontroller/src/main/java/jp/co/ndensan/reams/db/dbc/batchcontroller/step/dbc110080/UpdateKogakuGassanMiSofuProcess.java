@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -38,6 +39,7 @@ public class UpdateKogakuGassanMiSofuProcess extends BatchProcessBase<DbT3070Kog
 
     @Override
     protected void process(DbT3070KogakuGassanJikoFutanGakuEntity entity) {
+        entity.setHoseiZumi_SofuYM(FlexibleYearMonth.EMPTY);
         entity.setSaisoFlag(KokuhorenDataSaisoFlag.再送不要.getコード());
         高額合算自己負担額3070tableWriter.update(entity);
     }

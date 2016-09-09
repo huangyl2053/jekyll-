@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc790011;
 
+import java.io.File;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.seikyugakutsuchishofutanshain.SeikyugakuTsuchishoFutanshaInProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120230.SeikyugakuTsuchishoCsvFileToreraRecode3Entity;
@@ -38,7 +39,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RString> {
 
     private static final RString 請求額通知書一時_TABLE_NAME = new RString("DbWT1511SeikyugakuTsuchisho");
-    private static final RString KEY_分離文字 = new RString("\\");
     private static final RString 帳票レコード種別_H1 = new RString("H1");
     private static final RString 帳票レコード種別_D1 = new RString("D1");
     private static final RString 帳票レコード種別_T1 = new RString("T1");
@@ -88,7 +88,7 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
         renban = INDEX_0;
         flowEntity = new FlowEntity();
         outFlowEntity = new OutputParameter<>();
-        csvReaderPath = parameter.getPath().concat(KEY_分離文字).concat(parameter.getFileName());
+        csvReaderPath = parameter.getPath().concat(File.separator).concat(parameter.getFileName());
         suchishoTempentity = new DbWT1511SeikyugakuTsuchishoTempEntity();
     }
 

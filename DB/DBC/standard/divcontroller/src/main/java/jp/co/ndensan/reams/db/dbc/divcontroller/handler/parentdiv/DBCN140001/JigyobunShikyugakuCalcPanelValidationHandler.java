@@ -38,7 +38,7 @@ public class JigyobunShikyugakuCalcPanelValidationHandler {
      */
     public ValidationMessageControlPairs get入力値の妥当性チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getCcdShutsuryokujun().isSelected()) {
+        if (!div.getCcdShutsuryokujun().isSelected()) {
             validPairs.add(new ValidationMessageControlPair(
                     new JigyobunShikyugakuCalcPanelValidationHandler.IdocheckMessages(
                             UrErrorMessages.出力順序を指定)));

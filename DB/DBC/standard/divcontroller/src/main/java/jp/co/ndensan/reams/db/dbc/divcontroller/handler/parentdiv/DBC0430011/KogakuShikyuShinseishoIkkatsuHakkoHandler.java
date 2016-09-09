@@ -209,7 +209,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
             処理年月 = new FlexibleYearMonth(処理年月日.toString().substring(BEGININDEX, ENDINDEX));
             parameter.setChushutsuJoken(ShutsuryokuJoken.審査年月);
         } else if (!div.getShinseishoHakkoParameters().getRadHihokenshaNo().getSelectedKey().isEmpty()) {
-            RString 年月 = div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedValue();
+            RString 年月 = div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedKey();
             処理年月 = new FlexibleYearMonth(年月.toString().substring(BEGININDEX, ENDINDEX));
             parameter.setChushutsuJoken(ShutsuryokuJoken.被保険者番号);
         } else if (!div.getShinseishoHakkoParameters().getRadHakushiInsatsu().getSelectedKey().isEmpty()) {

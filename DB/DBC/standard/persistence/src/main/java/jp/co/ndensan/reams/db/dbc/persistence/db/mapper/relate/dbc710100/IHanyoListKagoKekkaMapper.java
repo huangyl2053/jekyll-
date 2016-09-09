@@ -20,7 +20,7 @@ public interface IHanyoListKagoKekkaMapper {
      * 過誤結果情報データを取得する。
      *
      * @param param param
-     * @return {@link List<HanyoListKagoKekkaCsvEntity>}
+     * @return {@link List<HanyoListKagoKekkaEntity>}
      */
     List<HanyoListKagoKekkaEntity> select過誤結果情報(HanyoListKagoKekkaMybatisParameter param);
 }

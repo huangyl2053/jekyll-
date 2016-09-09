@@ -35,8 +35,8 @@ public class TokubetsuChoshuJohoAppurodoDiv extends Panel {
     private ShoriTaishoShichosonPanelDiv ShoriTaishoShichosonPanel;
     @JsonProperty("ShoriTaishoGetuPanel")
     private ShoriTaishoGetuPanelDiv ShoriTaishoGetuPanel;
-    @JsonProperty("panUpload")
-    private panUploadDiv panUpload;
+    @JsonProperty("PanUpload")
+    private PanUploadDiv PanUpload;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -99,21 +99,21 @@ public class TokubetsuChoshuJohoAppurodoDiv extends Panel {
     }
 
     /*
-     * getpanUpload
-     * @return panUpload
+     * getPanUpload
+     * @return PanUpload
      */
-    @JsonProperty("panUpload")
-    public panUploadDiv getPanUpload() {
-        return panUpload;
+    @JsonProperty("PanUpload")
+    public PanUploadDiv getPanUpload() {
+        return PanUpload;
     }
 
     /*
-     * setpanUpload
-     * @param panUpload panUpload
+     * setPanUpload
+     * @param PanUpload PanUpload
      */
-    @JsonProperty("panUpload")
-    public void setPanUpload(panUploadDiv panUpload) {
-        this.panUpload = panUpload;
+    @JsonProperty("PanUpload")
+    public void setPanUpload(PanUploadDiv PanUpload) {
+        this.PanUpload = PanUpload;
     }
 
     /*

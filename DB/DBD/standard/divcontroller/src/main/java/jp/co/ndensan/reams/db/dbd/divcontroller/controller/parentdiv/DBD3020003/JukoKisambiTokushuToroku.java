@@ -47,7 +47,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class JukoKisambiTokushuToroku {
 
-    private final RString 共通エリア_保存する = new RString("btnUpdate");
+    private final RString 共通エリア_保存する = new RString("btnSave");
 
     /**
      * 時効起算日特殊登録の初期化。(オンロード)
@@ -62,7 +62,7 @@ public class JukoKisambiTokushuToroku {
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
 
         boolean データなし = true;
-        if (被保険者番号 == null) {
+        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
             div.getShunoJokyo().setDisabled(true);
             div.getJikoKisambi().setDisabled(true);
             div.getJikoKisambi().setIsOpen(false);
