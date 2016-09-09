@@ -87,7 +87,7 @@ public class KogakugassanGassanSofuReprotProcess extends BatchKeyBreakBase<Syutu
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final RString 作成R = new RString("作成");
-    private static final RString 再送要 = new RString("「※」");
+    private static final RString 再送要 = new RString("※");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200032");
     private static final Code コード = new Code("0003");
     private static final RString 漢字_被保険者番号 = new RString("被保険者番号");
