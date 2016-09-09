@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.saishinsaketteihokenshain;
 
-import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.saishinsaketteihokenshain.SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBunSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,10 +22,10 @@ public class SaishinsaKetteiHokenshaInPageBreak extends PageBreaker<SaishinsaKet
 
     /**
      *
-     * @param breakKeys ページングキー
+     * @param breakKeys List<RString>
      */
     public SaishinsaKetteiHokenshaInPageBreak(List<RString> breakKeys) {
-        this.breakKeysList = Collections.unmodifiableList(breakKeys);
+        this.breakKeysList = breakKeys;
     }
 
     @Override
@@ -37,10 +36,27 @@ public class SaishinsaKetteiHokenshaInPageBreak extends PageBreaker<SaishinsaKet
     @Override
     public boolean isBreak(ReportLineRecord<SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBunSource> currentSource,
             ReportLineRecord<SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBunSource> nextSource) {
-        boolean flag = false;
-        if (!flag && this.breakKeysList.contains(SaishinsaKetteiHokenshaInOutPutOrder.被保険者番号.get項目ID())) {
-            flag = !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2);
+        boolean flg = false;
+        if (this.breakKeysList.contains(SaishinsaKetteiHokenshaInOutPutOrder.証記載保険者番号.get項目ID())
+                && !currentSource.getSource().shoKisaiHokenshaNo.equals(nextSource.getSource().shoKisaiHokenshaNo)) {
+            flg = true;
         }
-        return flag;
+        if (this.breakKeysList.contains(SaishinsaKetteiHokenshaInOutPutOrder.被保険者番号.get項目ID())
+                && !currentSource.getSource().listLower_1.equals(nextSource.getSource().listLower_1)) {
+            flg = true;
+        }
+        if (this.breakKeysList.contains(SaishinsaKetteiHokenshaInOutPutOrder.サービス提供年月.get項目ID())
+                && !currentSource.getSource().listUpper_5.equals(nextSource.getSource().listUpper_5)) {
+            flg = true;
+        }
+        if (this.breakKeysList.contains(SaishinsaKetteiHokenshaInOutPutOrder.事業所番号.get項目ID())
+                && !currentSource.getSource().listUpper_4.equals(nextSource.getSource().listUpper_4)) {
+            flg = true;
+        }
+        if (this.breakKeysList.contains(SaishinsaKetteiHokenshaInOutPutOrder.取り扱い年月.get項目ID())
+                && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
+            flg = true;
+        }
+        return flg;
     }
 }

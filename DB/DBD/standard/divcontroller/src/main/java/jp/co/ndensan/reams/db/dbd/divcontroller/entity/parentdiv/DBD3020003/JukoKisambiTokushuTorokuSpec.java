@@ -39,8 +39,7 @@ public enum JukoKisambiTokushuTorokuSpec implements IPredicate<JukoKisambiTokush
          */
         @Override
         public boolean apply(JukoKisambiTokushuTorokuDiv div) {
-            return !div.getDdlFukushaJikoKisambiJiyu().getIsBlankLine()
-                    && !RString.isNullOrEmpty(div.getDdlFukushaJikoKisambiJiyu().getSelectedKey());
+            return !RString.isNullOrEmpty(div.getDdlFukushaJikoKisambiJiyu().getSelectedValue());
         }
     },
     特殊時効起算日入力チェック {
@@ -55,16 +54,14 @@ public enum JukoKisambiTokushuTorokuSpec implements IPredicate<JukoKisambiTokush
 
             List<dgJikoKisambi_Row> 時効起算日登録List = div.getDgJikoKisambi().getDataSource();
             for (dgJikoKisambi_Row row : 時効起算日登録List) {
-                return !(row.getTokushuJikoKisaibi().getValue() != null
+                return (row.getTokushuJikoKisaibi().getValue() != null
                         && !row.getTokushuJikoKisaibi().getValue().isEmpty()
                         && row.getTokushuJikoKisaibi().isValid()
-                        && !row.getTokushuJikoKisaibiJiyu().getIsBlankLine()
-                        && !RString.isNullOrEmpty(row.getTokushuJikoKisaibiJiyu().getSelectedKey())
-                        || row.getTokushuJikoKisaibi().getValue() == null
+                        && !RString.isNullOrEmpty(row.getTokushuJikoKisaibiJiyu().getSelectedValue()))
+                        || (row.getTokushuJikoKisaibi().getValue() == null
                         && row.getTokushuJikoKisaibi().getValue().isEmpty()
                         && !row.getTokushuJikoKisaibi().isValid()
-                        && row.getTokushuJikoKisaibiJiyu().getIsBlankLine()
-                        && RString.isNullOrEmpty(row.getTokushuJikoKisaibiJiyu().getSelectedKey()));
+                        && RString.isNullOrEmpty(row.getTokushuJikoKisaibiJiyu().getSelectedValue()));
 
             }
             return true;

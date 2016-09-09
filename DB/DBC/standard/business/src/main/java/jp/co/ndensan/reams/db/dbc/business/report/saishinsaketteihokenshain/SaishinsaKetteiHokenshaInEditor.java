@@ -5,7 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.saishinsaketteihokenshain;
 
+import java.util.List;
+import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshain.SaishinsaKetteiResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.saishinsaketteihokenshain.SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBunSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  *
@@ -15,96 +29,182 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.saishinsaketteihokenshain
  */
 public class SaishinsaKetteiHokenshaInEditor implements ISaishinsaKetteiHokenshaInEditor {
 
-    private final SaishinsaKetteiHokenshaInItem item;
+    private final SaishinsaKetteiResultEntity 帳票出力対象データ;
+    private final FlexibleYearMonth 処理年月;
+    private final Map<RString, RString> 出力順Map;
+    private final List<RString> 改頁リスト;
+    private final RDateTime 作成日時;
+    private final boolean 集計Flag;
+    private final int 連番;
+
+    private static final RString KEY_並び順の２件目 = new RString("KEY_並び順の２件目");
+    private static final RString KEY_並び順の３件目 = new RString("KEY_並び順の３件目");
+    private static final RString KEY_並び順の４件目 = new RString("KEY_並び順の４件目");
+    private static final RString KEY_並び順の５件目 = new RString("KEY_並び順の５件目");
+    private static final RString KEY_並び順の６件目 = new RString("KEY_並び順の６件目");
+    private static final RString 申立タイトル = new RString("＜再審査申立＞");
+    private static final RString 申立件数タイトル = new RString("件数");
+    private static final RString 申立単位数タイトル = new RString("単位数");
+    private static final RString 申立負担額タイトル = new RString("保険者負担額");
+    private static final RString 決定タイトル = new RString("＜再審査決定＞");
+    private static final RString 決定件数タイトル = new RString("件数");
+    private static final RString 決定単位数タイトル = new RString("単位数");
+    private static final RString 決定負担額タイトル = new RString("保険者負担額");
+    private static final RString 調整タイトル = new RString("＜調整＞");
+    private static final RString 調整件数タイトル = new RString("件数");
+    private static final RString 調整単位数タイトル = new RString("単位数");
+    private static final RString 調整負担額タイトル = new RString("保険者負担額");
+    private static final RString 介護給付費タイトル = new RString("介護給付費");
+    private static final RString 高額介護サービス費タイトル = new RString("高額介護サービス費");
+
+    private static final RString SAKUSEI = new RString("作成");
+    private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
+    private static final int INT_3 = 3;
+    private static final int INT_4 = 4;
+    private static final int INT_5 = 5;
 
     /**
-     * インスタンスを生成します。
+     * コンストラクタです
      *
-     * @param item {@link ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem}
+     * @param 帳票出力対象データ SaishinsaKetteiResultEntity
+     * @param 処理年月 FlexibleYearMonth
+     * @param 出力順Map Map<RString, RString>
+     * @param 作成日時 RDateTime
+     * @param 改頁リスト List<RString>
+     * @param 集計Flag boolean
+     * @param 連番 int
      */
-    protected SaishinsaKetteiHokenshaInEditor(SaishinsaKetteiHokenshaInItem item) {
-        this.item = item;
+    public SaishinsaKetteiHokenshaInEditor(
+            SaishinsaKetteiResultEntity 帳票出力対象データ,
+            FlexibleYearMonth 処理年月,
+            Map<RString, RString> 出力順Map, RDateTime 作成日時,
+            List<RString> 改頁リスト, boolean 集計Flag, int 連番) {
+        this.帳票出力対象データ = 帳票出力対象データ;
+        this.処理年月 = 処理年月;
+        this.出力順Map = 出力順Map;
+        this.改頁リスト = 改頁リスト;
+        this.作成日時 = 作成日時;
+        this.集計Flag = 集計Flag;
+        this.連番 = 連番;
     }
 
     @Override
     public SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBunSource edit(SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBunSource source) {
-
         return editSource(source);
     }
 
     private SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBunSource editSource(SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBunSource source) {
-        source.futangaku1 = item.get介護給付費請求負担額();
-        source.futangaku2 = item.get介護給付費決定負担額();
-        source.futangaku3 = item.get介護給付費調整負担額();
-        source.futangaku4 = item.get高額介護サービス費請求負担額();
-        source.futangaku5 = item.get高額介護サービス費決定負担額();
-        source.futangaku6 = item.get高額介護サービス費調整負担額();
-        source.hokenshaName = item.get証記載保険者名();
-        source.hokenshaNo = item.get証記載保険者番号();
-        source.kaipage1 = item.get改頁1();
-        source.kaipage2 = item.get改頁2();
-        source.kaipage3 = item.get改頁3();
-        source.kaipage4 = item.get改頁4();
-        source.kaipage5 = item.get改頁5();
-        source.kensu1 = item.get介護給付費請求件数();
-        source.kensu2 = item.get介護給付費決定件数();
-        source.kensu3 = item.get介護給付費調整件数();
-        source.kensu4 = item.get高額介護サービス費請求件数();
-        source.kensu5 = item.get高額介護サービス費決定件数();
-        source.kensu6 = item.get高額介護サービス費調整件数();
-        source.kokuhorenName = item.get国保連合会名();
-        source.listCenter_1 = item.getNo();
-        source.listCenter_2 = item.get取扱年月();
-        source.listCenter_3 = item.getサービス提供年月();
-        source.listLower_1 = item.get被保険者番号();
-        source.listLower_2 = item.get被保険者名();
-        source.listLower_3 = item.get申立事由コード();
-        source.listLower_4 = item.get申立事由();
-        source.listLower_5 = item.get再審査結果();
-        source.listLower_6 = item.get原番単位数();
-        source.listLower_7 = item.get決定単位数();
-        source.listLower_8 = item.get保険者負担額();
-        source.listUpper_1 = item.get事業所番号();
-        source.listUpper_2 = item.get事業所名();
-        source.listUpper_3 = item.getサービス種類コード();
-        source.listUpper_4 = item.getサービス種類名();
-        source.listUpper_5 = item.get再審査結果コード();
-        source.listUpper_6 = item.get当初請求単位数();
-        source.listUpper_7 = item.get申立単位数();
-        source.listUpper_8 = item.get調整単位数();
-        source.midashi1 = item.get再審査申立タイトル();
-        source.midashi10 = item.get調査件数タイトル();
-        source.midashi11 = item.get調査単位数タイトル();
-        source.midashi12 = item.get調査保険者負担額タイトル();
-        source.midashi13 = item.get介護給付費タイトル();
-        source.midashi14 = item.get高額介護サービス費タイトル();
-        source.midashi2 = item.get再審査決定タイトル();
-        source.midashi3 = item.get調整タイトル();
-        source.midashi4 = item.get請求件数タイトル();
-        source.midashi5 = item.get請求単位数タイトル();
-        source.midashi6 = item.get請求保険者負担額タイトル();
-        source.midashi7 = item.get決定件数タイトル();
-        source.midashi8 = item.get決定単位数タイトル();
-        source.midashi9 = item.get決定保険者負担額タイトル();
-        source.printTimeStamp = item.get作成日時();
-        source.shinsakaiName = item.get審査委員会名();
-        source.shoHokenshaName = item.get証記載保険者名();
-        source.shoHokenshaNameTitle = item.get証記載保険者名タイトル();
-        source.shoHokenshaNo = item.get証記載保険者番号();
-        source.shoHokenshaNoTitle = item.get証記載保険者番号タイトル();
-        source.shutsuryokujun1 = item.get並び順1();
-        source.shutsuryokujun2 = item.get並び順2();
-        source.shutsuryokujun3 = item.get並び順3();
-        source.shutsuryokujun4 = item.get並び順4();
-        source.shutsuryokujun5 = item.get並び順5();
-        source.tanisu1 = item.get介護給付費請求単位数();
-        source.tanisu2 = item.get介護給付費決定単位数();
-        source.tanisu3 = item.get介護給付費調整単位数();
-        source.tanisu4 = item.get高額介護サービス費請求単位数();
-        source.tanisu5 = item.get高額介護サービス費決定単位数();
-        source.tanisu6 = item.get高額介護サービス費調整単位数();
-        source.torikomiYM = item.get取込年月();
+        RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        RString 作成時 = 作成日時.getTime()
+                .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
+
+        source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
+        source.torikomiYM = 処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        source.kokuhorenName = 帳票出力対象データ.get国保連合会名();
+        source.shinsakaiName = 帳票出力対象データ.get審査委員会名();
+        source.hokenshaNo = getColumnValue(帳票出力対象データ.get保険者番号());
+        source.hokenshaName = 帳票出力対象データ.get保険者名();
+        source.shoKisaiHokenshaNo = getColumnValue(帳票出力対象データ.get証記載保険者番号());
+        source.shoKisaiHokenshaName = 帳票出力対象データ.get証記載保険者名();
+        source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);
+        source.shutsuryokujun2 = get並び順(KEY_並び順の３件目);
+        source.shutsuryokujun3 = get並び順(KEY_並び順の４件目);
+        source.shutsuryokujun4 = get並び順(KEY_並び順の５件目);
+        source.shutsuryokujun5 = get並び順(KEY_並び順の６件目);
+        if (改頁リスト != null) {
+            source.kaipage1 = get改頁(INT_1);
+            source.kaipage2 = get改頁(INT_2);
+            source.kaipage3 = get改頁(INT_3);
+            source.kaipage4 = get改頁(INT_4);
+            source.kaipage5 = get改頁(INT_5);
+        }
+        source.listUpper_1 = new RString(連番);
+        source.listUpper_2 = doパターン54(帳票出力対象データ.get取扱年月());
+        source.listUpper_3 = getColumnValue(帳票出力対象データ.get事業者番号());
+        source.listUpper_4 = 帳票出力対象データ.get事業者名();
+        source.listUpper_5 = doパターン54(帳票出力対象データ.getサービス提供年月());
+        source.listUpper_6 = getColumnValue(帳票出力対象データ.getサービス種類コード());
+        source.listUpper_7 = 帳票出力対象データ.getサービス種類名();
+        source.listUpper_8 = getColumnValue(帳票出力対象データ.get再審査結果コード());
+        source.listUpper_9 = doカンマ編集(帳票出力対象データ.get当初請求単位数());
+        source.listUpper_10 = doカンマ編集(帳票出力対象データ.get申立単位数());
+        source.listUpper_11 = doカンマ編集(帳票出力対象データ.get調整単位数());
+        source.listLower_1 = getColumnValue(帳票出力対象データ.get被保険者番号());
+        source.listLower_2 = 帳票出力対象データ.get被保険者氏名();
+        source.listLower_3 = getColumnValue(帳票出力対象データ.get申立事由コード());
+        source.listLower_4 = 帳票出力対象データ.get申立事由();
+        source.listLower_5 = getColumnValue(帳票出力対象データ.get再審査結果コード());
+        source.listLower_6 = doカンマ編集(帳票出力対象データ.get原審単位数());
+        source.listLower_7 = doカンマ編集(帳票出力対象データ.get決定単位数());
+        source.listLower_8 = doカンマ編集(帳票出力対象データ.get保険者負担額());
+        source.seikyuTitle = 申立タイトル;
+        source.seikyuKensuTitle = 申立件数タイトル;
+        source.seikyuTanisuTitle = 申立単位数タイトル;
+        source.seikyuFutangakuTitle = 申立負担額タイトル;
+        source.ketteiTitle = 決定タイトル;
+        source.ketteiKensuTitle = 決定件数タイトル;
+        source.ketteiTanisuTitle = 決定単位数タイトル;
+        source.ketteiFutangakuTitle = 決定負担額タイトル;
+        source.choseiTitle = 調整タイトル;
+        source.choseiKensuTitle = 調整件数タイトル;
+        source.choseiTanisuTitle = 調整単位数タイトル;
+        source.choseiFutangakuTitle = 調整負担額タイトル;
+        source.kaigoKyufuhiTitle = 介護給付費タイトル;
+        source.kogakuServicehiTitle = 高額介護サービス費タイトル;
+        if (集計Flag) {
+            source.kaigoKyufuhiSeikyuKensu = doカンマ編集(帳票出力対象データ.get介護給付費_申立_件数());
+            source.kaigoKyufuhiSeikyuTanisu = doカンマ編集(帳票出力対象データ.get介護給付費_申立_単位数());
+            source.kaigoKyufuhiSeikyuFutangaku = doカンマ編集(帳票出力対象データ.get介護給付費_申立_負担額());
+            source.kaigoKyufuhiKetteiKensu = doカンマ編集(帳票出力対象データ.get介護給付費_決定_件数());
+            source.kaigoKyufuhiKetteiTanisu = doカンマ編集(帳票出力対象データ.get介護給付費_決定_単位数());
+            source.kaigoKyufuhiKetteiFutangaku = doカンマ編集(帳票出力対象データ.get介護給付費_決定_負担額());
+            source.kaigoKyufuhiChoseiKensu = doカンマ編集(帳票出力対象データ.get介護給付費_調整_件数());
+            source.kaigoKyufuhiChoseiTanisu = doカンマ編集(帳票出力対象データ.get介護給付費_調整_単位数());
+            source.kaigoKyufuhiChoseiFutangaku = doカンマ編集(帳票出力対象データ.get介護給付費_調整_負担額());
+            source.kogakuServicehiSeikyuKensu = doカンマ編集(帳票出力対象データ.get高額介護サービス費_申立_件数());
+            source.kogakuServicehiSeikyuTanisu = doカンマ編集(帳票出力対象データ.get高額介護サービス費_申立_単位数());
+            source.kogakuServicehiSeikyuFutangaku = doカンマ編集(帳票出力対象データ.get高額介護サービス費_申立_負担額());
+            source.kogakuServicehiKetteiKensu = doカンマ編集(帳票出力対象データ.get高額介護サービス費_決定_件数());
+            source.kogakuServicehiKetteiTanisu = doカンマ編集(帳票出力対象データ.get高額介護サービス費_決定_単位数());
+            source.kogakuServicehiKetteiFutangaku = doカンマ編集(帳票出力対象データ.get高額介護サービス費_決定_負担額());
+            source.kogakuServicehiChoseiKensu = doカンマ編集(帳票出力対象データ.get高額介護サービス費_調整_件数());
+            source.kogakuServicehiChoseiTanisu = doカンマ編集(帳票出力対象データ.get高額介護サービス費_調整_単位数());
+            source.kogakuServicehiChoseiFutangaku = doカンマ編集(帳票出力対象データ.get高額介護サービス費_調整_負担額());
+        }
 
         return source;
     }
+
+    private RString get並び順(RString 並び順Key) {
+        return 出力順Map.containsKey(並び順Key) ? 出力順Map.get(並び順Key) : RString.EMPTY;
+    }
+
+    private RString get改頁(int index) {
+        return index < 改頁リスト.size() ? 改頁リスト.get(index) : RString.EMPTY;
+    }
+
+    private RString doパターン54(FlexibleYearMonth 年月) {
+        if (null == 年月) {
+            return RString.EMPTY;
+        }
+        return 年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString doカンマ編集(Decimal number) {
+        if (null == number) {
+            return RString.EMPTY;
+        }
+        return DecimalFormatter.toコンマ区切りRString(number, 0);
+    }
+
+    private RString getColumnValue(IDbColumnMappable entity) {
+        if (null != entity) {
+            return entity.getColumnValue();
+        }
+        return RString.EMPTY;
+    }
+
 }

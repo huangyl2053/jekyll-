@@ -99,6 +99,7 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
     private BatchReportWriter<FutanWariaiHanteiIchiranSource> batchReportWriter;
     private ReportSourceWriter<FutanWariaiHanteiIchiranSource> reportSourceWriter;
     private CsvWriter<FutanWariaiHanteiIchiranCsvEntity> eucCsvWriter;
+    @BatchWriter
     private IBatchTableWriter tempResultListDbWriter;
 
     @Override

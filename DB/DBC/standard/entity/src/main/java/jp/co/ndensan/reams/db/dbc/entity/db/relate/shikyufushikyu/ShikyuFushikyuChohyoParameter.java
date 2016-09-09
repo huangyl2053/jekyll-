@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.shikyufushikyu;
 
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -22,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShikyuFushikyuChohyoParameter {
 
     private ShikyuFushikyuChohyoEntity 帳票出力対象;
-    private final Map<RString, RString> 出力順Map;
+    private final List<RString> 並び順リスト;
     private final List<RString> 改頁リスト;
     private final FlexibleYearMonth 処理年月;
     private final RDateTime 作成日時;
@@ -34,7 +33,7 @@ public class ShikyuFushikyuChohyoParameter {
      * コンストラクタです
      *
      * @param 帳票出力対象 ShikyuFushikyuChohyoEntity
-     * @param 出力順Map Map<RString, RString>
+     * @param 並び順リスト Map<RString, RString>
      * @param 改頁リスト List<RString>
      * @param 処理年月 FlexibleYearMonth
      * @param 作成日時 RDateTime
@@ -42,11 +41,11 @@ public class ShikyuFushikyuChohyoParameter {
      * @param 保険者名 RString
      * @param 連番 int
      */
-    public ShikyuFushikyuChohyoParameter(ShikyuFushikyuChohyoEntity 帳票出力対象, Map<RString, RString> 出力順Map,
+    public ShikyuFushikyuChohyoParameter(ShikyuFushikyuChohyoEntity 帳票出力対象, List<RString> 並び順リスト,
             List<RString> 改頁リスト, FlexibleYearMonth 処理年月, RDateTime 作成日時, RString 保険者番号,
             RString 保険者名, int 連番) {
         this.帳票出力対象 = 帳票出力対象;
-        this.出力順Map = 出力順Map;
+        this.並び順リスト = 並び順リスト;
         this.改頁リスト = 改頁リスト;
         this.処理年月 = 処理年月;
         this.作成日時 = 作成日時;

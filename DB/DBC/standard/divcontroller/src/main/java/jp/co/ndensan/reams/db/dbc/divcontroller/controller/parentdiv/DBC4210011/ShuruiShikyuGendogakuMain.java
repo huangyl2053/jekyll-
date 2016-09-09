@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4210011.Shu
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4210011.ShuruiShikyuGendogakuMainValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -96,6 +95,9 @@ public class ShuruiShikyuGendogakuMain {
                     validationHandler.種類支給限度額認定対象チェック(pairs, div);
                     validationHandler.要支援1入力チェックエラー(pairs, div);
                     validationHandler.要支援2入力チェックエラー(pairs, div);
+                    if (pairs.iterator().hasNext()) {
+                        return ResponseData.of(div).addValidationMessages(pairs).respond();
+                    }
                     validationHandler.要支援1入力チェック警告(pairs, div);
                     validationHandler.要支援2入力チェック警告(pairs, div);
                     if (pairs.iterator().hasNext()) {
@@ -114,10 +116,6 @@ public class ShuruiShikyuGendogakuMain {
                     if (pairs.iterator().hasNext()) {
                         return ResponseData.of(div).addValidationMessages(pairs).respond();
                     }
-                    if (!(new RString(UrWarningMessages.未入力.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))
-                            || ResponseHolder.getButtonType() != MessageDialogSelectedResult.Yes) {
-                        return ResponseData.of(div).respond();
-                    }
                     getHandler(div).update修正(shikyuGendoGakuList);
                     break;
                 case 削除:
@@ -130,8 +128,14 @@ public class ShuruiShikyuGendogakuMain {
             RealInitialLocker.release(排他キー);
             state = 保存;
             return ResponseData.of(div).setState(DBC4210011StateName.保存完了);
-        } else if (ResponseHolder.isWarningIgnoredRequest()) {
+        } else if (ResponseHolder.isWarningIgnoredRequest() && state == 追加) {
             getHandler(div).追加する(shikyuGendoGakuList);
+            getHandler(div).btnSave();
+            RealInitialLocker.release(排他キー);
+            state = 保存;
+            return ResponseData.of(div).setState(DBC4210011StateName.保存完了);
+        } else if (ResponseHolder.isWarningIgnoredRequest() && state == 修正) {
+            getHandler(div).update修正(shikyuGendoGakuList);
             getHandler(div).btnSave();
             RealInitialLocker.release(排他キー);
             state = 保存;

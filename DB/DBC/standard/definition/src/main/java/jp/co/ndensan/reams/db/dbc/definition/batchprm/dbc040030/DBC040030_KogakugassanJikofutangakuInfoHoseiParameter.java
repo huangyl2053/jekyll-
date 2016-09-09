@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc040030;
 
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -31,7 +30,7 @@ public class DBC040030_KogakugassanJikofutangakuInfoHoseiParameter {
     private static final String KEY_SHURYOHHMM = "shuryoHHMM";
     private static final String KEY_SHUTSURYOKUJUNID = "shutsuryokujunId";
     private static final String KEY_TREATMENTTYPE = "treatmentType";
-    private static final String KEY_DANTAICD = "dantaiCd";
+    //private static final String KEY_DANTAICD = "dantaiCd";
     private static final String KEY_HANDLETIMESTAMP = "handleTimestamp";
 
     @BatchParameter(key = KEY_KAKUNIN_UKETORIYM, name = "確認情報受取年月")
@@ -52,8 +51,8 @@ public class DBC040030_KogakugassanJikofutangakuInfoHoseiParameter {
     private RString shutsuryokujunId;
     @BatchParameter(key = KEY_TREATMENTTYPE, name = "国保連共同処理受託区分(償還)")
     private RString treatmentType;
-    @BatchParameter(key = KEY_DANTAICD, name = "市町村コード")
-    private LasdecCode dantaiCd;
+    //@BatchParameter(key = KEY_DANTAICD, name = "市町村コード")
+    // private LasdecCode dantaiCd;
     @BatchParameter(key = KEY_HANDLETIMESTAMP, name = "処理日時")
     private RDateTime handleTimestamp;
 

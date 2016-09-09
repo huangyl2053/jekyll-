@@ -134,22 +134,27 @@ public class KeikakuJigyoshaJohoProcess extends BatchProcessBase<KeikakuJigyosha
             return RString.EMPTY;
         }
         for (ISetSortItem setSortItem : outputOrder.get設定項目リスト()) {
+            if (!reportItems.getMyBatis項目名(setSortItem.get項目ID()).isNullOrEmpty()) {
+                if (commaCount != 0) {
+                    orderByClause = orderByClause.append(space).append(comma).append(space)
+                            .append(reportItems.getMyBatis項目名(setSortItem.get項目ID())).append(space).append(setSortItem.get昇降順().getOrder());
 
-            if (commaCount != 0) {
-                orderByClause = orderByClause.append(space).append(comma).append(space)
-                        .append(reportItems.getMyBatis項目名(setSortItem.get項目ID())).append(space).append(setSortItem.get昇降順().getOrder());
-
-            } else {
-                setSortItem.get項目名();
-                setSortItem.getDB項目名();
-                setSortItem.get帳票フィールド名();
-                orderByClause = orderByClause.append(space)
-                        .append(reportItems.getMyBatis項目名(setSortItem.get項目ID())).append(space).append(setSortItem.get昇降順().getOrder());
+                } else {
+                    setSortItem.get項目名();
+                    setSortItem.getDB項目名();
+                    setSortItem.get帳票フィールド名();
+                    orderByClause = orderByClause.append(space)
+                            .append(reportItems.getMyBatis項目名(setSortItem.get項目ID())).append(space).append(setSortItem.get昇降順().getOrder());
+                }
+                commaCount++;
             }
-            commaCount++;
-        }
 
-        return orderByClause.toRString();
+        }
+        if (commaCount != 0) {
+            return orderByClause.toRString();
+        } else {
+            return RString.EMPTY;
+        }
     }
 
     private static class ReportItemsMap {

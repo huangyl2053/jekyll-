@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB2110001;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchosofu.TokuChoSoufuJohoSakuseiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB211001.DBB211001_TokuchoSofuJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2110001.TokuchoSofuJohoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB2110001.TokuchoSofuJohoSakuseiHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB2110001.TokuchoSofuJohoSakuseiValidationHandler;
@@ -54,8 +54,8 @@ public class TokuchoSofuJohoSakusei {
      * @param div {@link TokuchoDoteiShoriDiv 特徴対象者同定Div}
      * @return 特徴対象者同定Divを持つResponseData
      */
-    public ResponseData<TokuChoSoufuJohoSakuseiBatchParameter> doExecuteBatch(TokuchoSofuJohoSakuseiDiv div) {
-        TokuChoSoufuJohoSakuseiBatchParameter batchParameter = getHandler(div).getバッチパラメータ();
+    public ResponseData<DBB211001_TokuchoSofuJohoSakuseiParameter> doExecuteBatch(TokuchoSofuJohoSakuseiDiv div) {
+        DBB211001_TokuchoSofuJohoSakuseiParameter batchParameter = getHandler(div).getバッチパラメータ();
         return ResponseData.of(batchParameter).respond();
     }
 
