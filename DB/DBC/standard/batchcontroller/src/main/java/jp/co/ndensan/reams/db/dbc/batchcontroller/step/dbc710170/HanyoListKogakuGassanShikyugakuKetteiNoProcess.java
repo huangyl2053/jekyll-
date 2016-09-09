@@ -724,19 +724,19 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append(抽出対象者);
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = get保険者名();
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = get支給区分();
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = get支払方法区分();
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = get金融機関コード();
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = get対象年度();
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = get決定情報受取年月();
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         return 出力条件;
     }
 
@@ -744,7 +744,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
         RStringBuilder builder = new RStringBuilder();
         if (parameter.get保険者コード() == null || parameter.get保険者コード().isEmpty()
                 || すべて.equals(getColumnValue(parameter.get保険者コード()))) {
-            return builder;
+            return null;
         }
         builder.append(保険者);
         Association 地方公共団体コード = AssociationFinderFactory.createInstance().getAssociation(parameter.get保険者コード());
@@ -755,7 +755,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
     private RStringBuilder get支給区分() {
         RStringBuilder builder = new RStringBuilder();
         if (RString.isNullOrEmpty(parameter.get支給区分())) {
-            return builder;
+            return null;
         }
         builder.append(支給区分);
         ShikyuFushikyuKubun 支給区分名称 = ShikyuFushikyuKubun.toValue(parameter.get支給区分());
@@ -766,7 +766,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
     private RStringBuilder get支払方法区分() {
         RStringBuilder builder = new RStringBuilder();
         if (RString.isNullOrEmpty(parameter.get支払方法区分())) {
-            return builder;
+            return null;
         }
         builder.append(支払方法区分);
         ShiharaiHohoKubun 支払方法区分名称 = ShiharaiHohoKubun.toValue(parameter.get支払方法区分());
@@ -777,7 +777,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
     private RStringBuilder get金融機関コード() {
         RStringBuilder builder = new RStringBuilder();
         if (parameter.get金融機関コード() == null || parameter.get金融機関コード().isEmpty()) {
-            return builder;
+            return null;
         }
         builder.append(金融機関コード);
         builder.append(左記号).append(getColumnValue(parameter.get金融機関コード())).append(右記号);
@@ -787,7 +787,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
     private RStringBuilder get対象年度() {
         RStringBuilder builder = new RStringBuilder();
         if (RString.isNullOrEmpty(parameter.get対象年度())) {
-            return builder;
+            return null;
         }
         builder.append(対象年度);
         builder.append(new FlexibleYear(parameter.get対象年度()).wareki().toDateString());
@@ -807,7 +807,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
             決定情報受取年月ToFlag = true;
         }
         if (決定情報受取年月FromFlag && 決定情報受取年月ToFlag) {
-            return builder;
+            return null;
         }
         builder.append(決定情報受取年月);
         if (決定情報受取年月ToFlag) {
@@ -822,5 +822,12 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
                     .append(parameter.get決定情報受取年月To().wareki().toDateString());
         }
         return builder;
+    }
+
+    private void get出力条件(List<RString> 出力条件, RStringBuilder builder) {
+        if (builder == null) {
+            return;
+        }
+        出力条件.add(builder.toRString());
     }
 }
