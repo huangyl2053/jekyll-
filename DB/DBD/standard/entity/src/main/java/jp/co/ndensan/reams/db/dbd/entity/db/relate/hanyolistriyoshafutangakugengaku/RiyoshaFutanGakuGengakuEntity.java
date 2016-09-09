@@ -197,6 +197,9 @@ public class RiyoshaFutanGakuGengakuEntity {
     private FlexibleDate 指定事業者_有効終了日;
     private FlexibleDate 除外他特適用施設_有効終了年月日;
     private RString 指定事業者_サービス実施地域;
+    private RString 利用者負担額減額_証記載保険者番号;
+    private RString 利用者負担額減額_被保険者番号;
+    private int 利用者負担額減額_履歴番号;
     private FlexibleDate 利用者負担額減額_申請年月日;
     private FlexibleDate 利用者負担額減額_決定年月日;
     private RString 利用者負担額減額_決定区分;

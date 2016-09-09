@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0040011.Jigy
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -30,7 +29,7 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
     private final JigyoJokyoHokokuNempoSakueiDiv div;
     private static final RString 旧市町村分KEY = new RString("kyuShichoson");
     private static final RString 構成市町村分KEY = new RString("koseiShichoson");
-    private static final RString 集計開始日期 = new RString("平21.4");
+    private static final RString 集計開始日期 = new RString("200904");
     private static final RString 年報報告様式12KEY = new RString("yoshiki12");
     private static final RString 年報報告一般状況111KEY = new RString("ippan1_11");
     private static final RString 年報報告一般状況1214現物分KEY = new RString("ippan12_14Genbutsu");
@@ -55,10 +54,10 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
      *
      * @param is合併市町村 is合併市町村
      * @param is広域市町村 is広域市町村
-     * @param validPairs validPairs
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateForUpdate(boolean is合併市町村, boolean is広域市町村, ValidationMessageControlPairs validPairs) {
+    public ValidationMessageControlPairs validateForUpdate(boolean is合併市町村, boolean is広域市町村) {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (!RString.isNullOrEmpty(div.getRadJikkoTaniShukeiOnly().getSelectedKey())
                 || !RString.isNullOrEmpty(div.getRadJikkoTani2().getSelectedKey())) {
             doチェック(validPairs);
@@ -81,15 +80,15 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
     /**
      * 月報未処理のチックを実行する。
      *
-     * @param validPairs validPairs
      * @param 処理日付管理情報 処理日付管理情報
      * @param 処理名 処理名
      * @param 報告開始年月 報告開始年月
      * @param 報告終了年月 報告終了年月
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs check月報未処理(ValidationMessageControlPairs validPairs,
+    public ValidationMessageControlPairs check月報未処理(
             List<ShoriDateKanri> 処理日付管理情報, RString 処理名, RString 報告開始年月, RString 報告終了年月) {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         RStringBuilder builder = new RStringBuilder();
         builder.append(メッセージ内容).append(処理名).append(new RString("<br>"))
                 .append(報告開始年月).append(new RString(":")).append(報告終了年月);
@@ -107,6 +106,9 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs check月報未処理(ValidationMessageControlPairs validPairs) {
+        if (validPairs == null) {
+            validPairs = new ValidationMessageControlPairs();
+        }
         RStringBuilder builder = new RStringBuilder();
         builder.append(メッセージ内容).append(new RString("出力対象名（全ての年月）")).append(new RString("<br>"));
         validPairs.add(new ValidationMessageControlPair(
@@ -125,9 +127,9 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.報告終了年月の必須入力チェック, div.getDdlShukeiToYM()));
         }
         if (!RString.isNullOrEmpty(div.getDdlShukeiFromYM().getSelectedKey()) && !RString.isNullOrEmpty(div.getDdlShukeiToYM().getSelectedKey())) {
-            RDate 終了日 = new RDate(div.getDdlShukeiToYM().getSelectedKey().toString());
-            RDate 開始日 = new RDate(div.getDdlShukeiFromYM().getSelectedKey().toString());
-            if (終了日.isBefore(開始日)) {
+            int 終了日 = Integer.parseInt(div.getDdlShukeiToYM().getSelectedKey().toString());
+            int 開始日 = Integer.parseInt(div.getDdlShukeiFromYM().getSelectedKey().toString());
+            if (終了日 < 開始日) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.報告開始年月と報告終了年月の範囲チェック, div.getDdlShukeiFromYM(), div.getDdlShukeiToYM()));
             }
         }
@@ -156,7 +158,7 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
 
     private void do作成日付チェック(ValidationMessageControlPairs validPairs) {
         if (div.getCblShutsuryokuTaishoYoshiki1().getSelectedKeys().contains(年報報告様式12KEY)) {
-            if (div.getTxtSakuseiYMD1().getValue() == null) {
+            if (div.getTxtSakuseiYMD1().getValue() == null || div.getTxtSakuseiYMD1().getValue().isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.作成日付の必須入力チェック, div.getTxtSakuseiYMD1()));
             }
             if (div.getTxtSakuseiTime1().getValue() == null) {
@@ -164,7 +166,7 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
             }
         }
         if (div.getCblShutsuryokuTaishoIppan1to11().getSelectedKeys().contains(年報報告一般状況111KEY)) {
-            if (div.getTxtSakuseiYMD2().getValue() == null) {
+            if (div.getTxtSakuseiYMD2().getValue() == null || div.getTxtSakuseiYMD2().getValue().isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.作成日付の必須入力チェック, div.getTxtSakuseiYMD2()));
             }
             if (div.getTxtSakuseiTime2().getValue() == null) {
@@ -172,7 +174,7 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
             }
         }
         if (div.getCblShutsuryokuTaishoIppanGembutsu().getSelectedKeys().contains(年報報告一般状況1214現物分KEY)) {
-            if (div.getTxtSakuseiYMD3().getValue() == null) {
+            if (div.getTxtSakuseiYMD3().getValue() == null || div.getTxtSakuseiYMD3().getValue().isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.作成日付の必須入力チェック, div.getTxtSakuseiYMD3()));
             }
             if (div.getTxtSakuseiTime3().getValue() == null) {
@@ -180,7 +182,7 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
             }
         }
         if (div.getCblShutsuryokuTaishoHokenGembutsu().getSelectedKeys().contains(年報報告保険給付決定現物分KEY)) {
-            if (div.getTxtSakuseiYMD4().getValue() == null) {
+            if (div.getTxtSakuseiYMD4().getValue() == null || div.getTxtSakuseiYMD4().getValue().isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.作成日付の必須入力チェック, div.getTxtSakuseiYMD4()));
             }
             if (div.getTxtSakuseiTime4().getValue() == null) {
@@ -192,7 +194,7 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
 
     private void check作成日付(ValidationMessageControlPairs validPairs) {
         if (div.getCblShutsuryokuTaishoIppanShokan().getSelectedKeys().contains(年報報告一般状況1214償還分KEY)) {
-            if (div.getTxtSakuseiYMD5().getValue() == null) {
+            if (div.getTxtSakuseiYMD5().getValue() == null || div.getTxtSakuseiYMD5().getValue().isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.作成日付の必須入力チェック, div.getTxtSakuseiYMD5()));
             }
             if (div.getTxtSakuseiTime5().getValue() == null) {
@@ -200,7 +202,7 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
             }
         }
         if (div.getCblShutsuryokuTaishoHokenShokan().getSelectedKeys().contains(年報報告一般状況償還分KEY)) {
-            if (div.getTxtSakuseiYMD6().getValue() == null) {
+            if (div.getTxtSakuseiYMD6().getValue() == null || div.getTxtSakuseiYMD6().getValue().isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.作成日付の必須入力チェック, div.getTxtSakuseiYMD6()));
             }
             if (div.getTxtSakuseiTime6().getValue() == null) {
@@ -208,7 +210,7 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
             }
         }
         if (div.getCblShutsuryokuTaishoHokenKogaku().getSelectedKeys().contains(年報報告一般状況高額分KEY)) {
-            if (div.getTxtSakuseiYMD7().getValue() == null) {
+            if (div.getTxtSakuseiYMD7().getValue() == null || div.getTxtSakuseiYMD7().getValue().isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.作成日付の必須入力チェック, div.getTxtSakuseiYMD7()));
             }
             if (div.getTxtSakuseiTime7().getValue() == null) {
@@ -216,10 +218,10 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
             }
         }
         if (div.getCblShutsuryokuTaishoHokenKogakuGassan().getSelectedKeys().contains(年報報告一般状況高額合算分KEY)) {
-            if (div.getTxtSakuseiYMD8().getValue() == null) {
+            if (div.getTxtSakuseiYMD8().getValue() == null || div.getTxtSakuseiYMD8().getValue().isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.作成日付の必須入力チェック, div.getTxtSakuseiYMD8()));
             }
-            if (div.getTxtSakuseiYMD8().getValue() == null) {
+            if (div.getTxtSakuseiTime8().getValue() == null) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.作成時刻の必須入力チェック, div.getTxtSakuseiTime8()));
             }
         }
