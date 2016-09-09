@@ -88,6 +88,7 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
     private static final int INT_1 = 1;
     private static final RString 作成R = new RString("作成");
     private static final RString 再送要 = new RString("※");
+    private static final RString 年度R = new RString("年度");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200033");
     private static final Code コード = new Code("0003");
     private static final RString 漢字_被保険者番号 = new RString("被保険者番号");
@@ -205,7 +206,7 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
         csvEntity.setNo(new RString(flag));
         FlexibleYear 対象年度 = 一時Entity.getTaishoNendo();
         RString 対象年度R = 対象年度 == null || 対象年度.isEmpty() ? RString.EMPTY
-                : 対象年度.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+                : 対象年度.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(年度R);
         csvEntity.set対象年度(対象年度R);
         HihokenshaNo 被保険者番号 = 一時Entity.getHihokenshaNo();
         RString 被保険者番号R = 被保険者番号 == null || 被保険者番号.isEmpty() ? RString.EMPTY : 被保険者番号.getColumnValue();

@@ -14,15 +14,9 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 
 /**
  *
- * 帳票設計_DBC200070_介護予防・日常生活支援総合事業費審査決定請求明細表のPageBreakクラスです
+ * 帳票設計_DBC200045_給付過誤申立書情報送付一覧表のPageBreakクラスです
  *
- * @reamsid_L DBC-2500-031 jiangwenkai
- */
-/**
- *
- * 帳票設計_DBC200045_給付過誤申立書情報送付一覧表Sourceクラスです
- *
- * @reamsid_L DBC-2530-040 jiangwenkai
+ * @reamsid_L DBC-2530-030 jiangwenkai
  */
 public class KaigokyufuhiKagoMoshitateshoOutPageBreak extends PageBreaker<KyufuKagoMoshitateshojohoSofuIchiranSource> {
 
