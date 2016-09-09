@@ -649,7 +649,11 @@ public enum ReportIdDBC {
     /**
      * サービスコード別利用状況ＩＤです。
      */
-    DBC300002(new ReportId("DBC300002_ServiceCodeBetsuRiyoJokyo"), new RString("サービスコード別利用状況"));
+    DBC300002(new ReportId("DBC300002_ServiceCodeBetsuRiyoJokyo"), new RString("サービスコード別利用状況")),
+    /**
+     * 自己負担額証明書帳票ＩＤです。
+     */
+    DBC100050(new ReportId("DBC100050_JikoFutangakushomeishoTo2008"), new RString("自己負担額証明書（介護）(平成２０年度まで用）"));
     private final ReportId reportId;
 
     private final RString reportName;
