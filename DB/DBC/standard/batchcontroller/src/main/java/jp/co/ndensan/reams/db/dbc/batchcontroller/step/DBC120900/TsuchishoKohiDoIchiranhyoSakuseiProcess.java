@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -121,6 +122,7 @@ public class TsuchishoKohiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<D
     @Override
     protected void afterExecute() {
         csvEntityWriter.close();
+        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
     }
 
     private TsuchishofutanshaIchiranCSVEntity do帳票のCSVファイル作成(DbWT1511SeikyugakuTsuchishoTempEntity csvDataEntity,
