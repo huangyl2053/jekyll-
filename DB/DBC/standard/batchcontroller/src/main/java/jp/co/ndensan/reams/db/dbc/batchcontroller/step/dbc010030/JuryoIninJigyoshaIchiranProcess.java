@@ -96,7 +96,6 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
     private List<RString> pageBreakKeys;
     private Map<RString, RString> 出力順Map;
     private IOutputOrder 出力順クラス;
-    private int 連番;
 
     @BatchWriter
     private BatchReportWriter<JuryoIninJigyoshaIchiranSource> batchReportWriter_一覧表;
@@ -104,7 +103,6 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
 
     @Override
     protected void initialize() {
-        連番 = 0;
         pageBreakKeys = new ArrayList<>();
         出力順Map = new HashMap<>();
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
@@ -180,7 +178,6 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
     @Override
     protected void usualProcess(KaigoJuryoininKeiyakuJigyoshaIchirahyoEntity entity) {
         データFlag = true;
-        連番 = 連番 + INDEX_1;
         JuryoIninJigyoshaIchiranReport report = new JuryoIninJigyoshaIchiranReport(
                 entity,
                 parameter.get市町村コード(),
@@ -217,7 +214,7 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
                 地方公共団体.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBC.DBC200012.getReportName(),
-                new RString(連番),
+                new RString(String.valueOf(reportSourceWriter.pageCount().value())),
                 CSV出力有無_なし,
                 CSVファイル名_なし,
                 出力条件);
