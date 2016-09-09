@@ -39,11 +39,11 @@ public enum TyohyoShutuyukuOrderKey implements IReportItems {
     /**
      * 項目ID:0103 フォームフィールド名:証記載保険者番号 MyBatis項目名:定義なし
      */
-    証記載保険者番号("0103", "証記載保険者番号", "A.\"shoKisaiHokenshaNo\""),
+    証記載保険者番号("0103", "証記載保険者番号", "\"shoKisaiHokenshaNo\""),
     /**
      * 項目ID:0104 フォームフィールド名:被保険者番号 MyBatis項目名:定義なし
      */
-    被保険者番号("0104", "被保険者番号", "A.\"hihokenshaNo\""),
+    被保険者番号("0104", "被保険者番号", "\"hihokenshaNo\""),
     /**
      * 項目ID:0403 フォームフィールド名:要介護度 MyBatis項目名:定義なし
      */
