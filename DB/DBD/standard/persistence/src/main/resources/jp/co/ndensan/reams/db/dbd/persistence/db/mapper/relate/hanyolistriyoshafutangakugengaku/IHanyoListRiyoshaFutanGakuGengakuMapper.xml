@@ -5,6 +5,21 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hanyolistriyoshafutangakugengaku.IHanyoListRiyoshaFutanGakuGengakuMapper">
     <resultMap id="resultMap_RiyoshaFutanGakuGengakuEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyolistriyoshafutangakugengaku.RiyoshaFutanGakuGengakuEntity" autoMapping="true">
+        <id property="被保険者台帳管理_被保険者番号" column="被保険者台帳管理_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="利用者負担額減額_証記載保険者番号" column="利用者負担額減額_証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="利用者負担額減額_被保険者番号" column="利用者負担額減額_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="利用者負担額減額_履歴番号" column="利用者負担額減額_履歴番号" />
+        <id property="shikibetsuCode" column="psmEntity.shikibetsuCode"/>
+         <id property="rirekiNo" column="psmEntity.rirekiNo" />
+        <id property="shikibetsuCode" column="atesakiEntity.shikibetsuCode"/>
+        <id property="atesakiShubetsu" column="atesakiEntity.atesakiShubetsu"/>
+        <id property="gyomubetsuPrimaryKey" column="atesakiEntity.gyomubetsuPrimaryKey"/>
+        <id property="gyomuKoyuKey" column="atesakiEntity.gyomuKoyuKey"/>
+        <id property="gyomuCode" column="atesakiEntity.gyomuCode"/>
+        <id property="subGyomuCode" column="atesakiEntity.subGyomuCode" />
+        <id property="gyomuGroupCode" column="atesakiEntity.gyomuGroupCode"/>
+        <id property="subGyomuGroupCode" column="atesakiEntity.subGyomuGroupCode" />
+        <id property="kamokuCode" column="atesakiEntity.kamokuCode" />
         <result property="被保険者台帳管理_市町村コード" column="被保険者台帳管理_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="被保険者台帳管理_広域内住所地特例フラグ" column="被保険者台帳管理_広域内住所地特例フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="被保険者台帳管理_広住特措置元市町村コード" column="被保険者台帳管理_広住特措置元市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -437,6 +452,9 @@
             指定事業者."yukoShuryoYMD" AS 指定事業者_有効終了日,
             除外他特適用施設."yukoShuryoYMD" AS 除外他特適用施設_有効終了年月日,
             指定事業者."serviceJisshiChiiki" AS 指定事業者_サービス実施地域,
+            利用者負担額減額."shoKisaiHokenshaNo" AS 利用者負担額減額_証記載保険者番号,
+            利用者負担額減額."hihokenshaNo" AS 利用者負担額減額_被保険者番号,
+            利用者負担額減額."rirekiNo" AS 利用者負担額減額_履歴番号,
             利用者負担額減額."shinseiYMD" AS 利用者負担額減額_申請年月日,
             利用者負担額減額."ketteiYMD" AS 利用者負担額減額_決定年月日,
             利用者負担額減額."ketteiKubun" AS 利用者負担額減額_決定区分,

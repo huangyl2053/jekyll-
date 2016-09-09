@@ -113,7 +113,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
             div.getRadDataShurui().setSelectedKey(KEY1);
             div.getTxtJikoFutangakuKakunin().setDisabled(true);
             div.getTxtHoseizumiJikoFutangaku().setDisabled(false);
-            div.getTxtJikoFutanngakuShoumeisho().setDisabled(false);
+            div.getTxtJikoFutanngakuShoumeisho().setDisabled(true);
         }
         if (証明書計算処理時作成_全受給者.equals(div.getDdlDetaSakuseiKubun().getSelectedValue())) {
             List<KeyValueDataSource> disabledItems = new ArrayList<>();

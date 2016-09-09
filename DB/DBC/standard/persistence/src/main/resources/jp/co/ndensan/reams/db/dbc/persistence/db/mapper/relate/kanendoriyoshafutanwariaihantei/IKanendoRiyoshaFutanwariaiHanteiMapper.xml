@@ -8,7 +8,7 @@
              parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kanendoriyoshafutanwariaihantei.KanendoRiyoshaFutanwariaiHanteiMybatisParameter" 
              fetchSize="500">
        SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
         FROM
         rgdb."DbT7022ShoriDateKanri"
         WHERE

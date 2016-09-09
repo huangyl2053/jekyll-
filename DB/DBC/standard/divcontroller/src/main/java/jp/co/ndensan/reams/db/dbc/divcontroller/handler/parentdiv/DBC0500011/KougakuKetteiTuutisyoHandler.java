@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuShikyuHanteiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.servicenokanribangourendou.JigyouKetteiTutisyoResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0500011.KougakuKetteiTuutisyoDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.kougakuketteituutisyo.KougakuKetteiTuutisyoManager;
-import jp.co.ndensan.reams.db.dbc.service.core.servicenokanribangourendou.ServiceNoKanribangouRendou2;
+import jp.co.ndensan.reams.db.dbc.service.core.kogakuservicehiketteitsuchishotan.KogakuServicehiKetteiTsuchishoTan;
 import jp.co.ndensan.reams.db.dbc.service.report.dbc100107.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiPrintService;
 import jp.co.ndensan.reams.db.dbc.service.report.dbc100108.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -128,8 +128,8 @@ public class KougakuKetteiTuutisyoHandler {
             支払予定日 = new FlexibleDate(div.getTxtSiharaiYoteibi().getValue().toDateString());
         }
         HokenshaNo 証記載保険者番号 = new HokenshaNo(div.getKyoTuuKaigoNinnteiSikaku().getHookenshaCode());
-        ServiceNoKanribangouRendou2 帳票情報Mgr = ServiceNoKanribangouRendou2.createInstance();
-        JigyouKetteiTutisyoResult 帳票情報Result = 帳票情報Mgr.selectKougakuJigyouKetteiTutisyo(
+        KogakuServicehiKetteiTsuchishoTan 帳票情報Mgr = KogakuServicehiKetteiTsuchishoTan.createInstance();
+        JigyouKetteiTutisyoResult 帳票情報Result = 帳票情報Mgr.editTsuchisho(
                 div.getKougakuKetteiTuutisyoBunsho().get文書番号(),
                 new FlexibleDate(div.getTxtHakkoubi().getValue().toDateString()),
                 被保険者番号,

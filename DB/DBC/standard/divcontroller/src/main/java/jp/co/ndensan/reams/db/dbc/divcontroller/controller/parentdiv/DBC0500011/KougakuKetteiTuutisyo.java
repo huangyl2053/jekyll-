@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0500011.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0500011.KougakuKetteiTuutisyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0500011.KougakuKetteiTuutisyoHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.kougakuketteituutisyo.KougakuKetteiTuutisyoManager;
-import jp.co.ndensan.reams.db.dbc.service.core.servicenokanribangourendou.ServiceNoKanribangouRendou2;
+import jp.co.ndensan.reams.db.dbc.service.core.kogakuservicehiketteitsuchishotan.KogakuServicehiKetteiTsuchishoTan;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -76,7 +76,7 @@ public class KougakuKetteiTuutisyo {
             div.getDdlServiceYearMonth().setDataSource(getHandler().onLoad_ddlServiceYearMonth(サービス提供年月リスト));
         }
         div.getTxtHakkoubi().setValue(RDate.getNowDate());
-        ServiceNoKanribangouRendou2 manager2 = ServiceNoKanribangouRendou2.createInstance();
+        KogakuServicehiKetteiTsuchishoTan manager2 = KogakuServicehiKetteiTsuchishoTan.createInstance();
         ReportId 帳票分類ID = new ReportId("DBC100007_KogakuKetteiTsuchiSho");
         ChohyoSeigyoHanyo 支払予定日印字有無 = manager2.load帳票制御汎用(帳票分類ID, new RString("支払予定日印字有無"));
         if (支払予定日印字有無.get設定値().equals(new RString("0"))) {

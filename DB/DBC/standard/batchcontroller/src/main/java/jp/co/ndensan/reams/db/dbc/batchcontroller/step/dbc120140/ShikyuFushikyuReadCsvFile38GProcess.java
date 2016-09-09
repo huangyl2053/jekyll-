@@ -124,7 +124,7 @@ public class ShikyuFushikyuReadCsvFile38GProcess extends BatchProcessBase<RStrin
                 meisaiEntity = ListToObjectMappingHelper.
                         toObject(ShikyuFushikyuKetteishaIchiranCsvMeisaiEntity.class, data);
                 連番 = 連番 + 1;
-                データを一時TBLに登録する(meisaiEntity, 連番);
+                データを一時TBLに登録する(meisaiEntity);
             }
         }
     }
@@ -138,7 +138,7 @@ public class ShikyuFushikyuReadCsvFile38GProcess extends BatchProcessBase<RStrin
         flowEntity.setValue(returnEntity);
     }
 
-    private void データを一時TBLに登録する(ShikyuFushikyuKetteishaIchiranCsvMeisaiEntity csvEntity, int 連番) {
+    private void データを一時TBLに登録する(ShikyuFushikyuKetteishaIchiranCsvMeisaiEntity csvEntity) {
         DbWT38G1KetteishaIchiranTempEntity 決定者 = new DbWT38G1KetteishaIchiranTempEntity();
         決定者.set申請対象年度(申請対象年度);
         決定者.setNo(csvEntity.getNo());
