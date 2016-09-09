@@ -331,4 +331,23 @@ public class DbT7130KaigoServiceShuruiDac {
                         ))
                 .toList(DbT7130KaigoServiceShuruiEntity.class);
     }
+
+    /**
+     * キーで介護サービス内容を取得します。
+     *
+     * @param list List<ServiceShuruiCode>
+     * @return DbT7131KaigoServiceNaiyouEntity
+     */
+    @Transaction
+    public DbT7130KaigoServiceShuruiEntity select介護サービス(List<ServiceShuruiCode> list) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(serviceShuruiMeisho).
+                table(DbT7130KaigoServiceShurui.class).
+                where(
+                        in(serviceShuruiCd, list)).
+                order(by(serviceShuruiCd, Order.ASC)).limit(1).
+                toObject(DbT7130KaigoServiceShuruiEntity.class);
+    }
 }
