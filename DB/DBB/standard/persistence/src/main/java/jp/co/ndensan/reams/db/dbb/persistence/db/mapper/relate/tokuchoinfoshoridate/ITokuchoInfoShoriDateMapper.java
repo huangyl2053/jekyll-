@@ -24,4 +24,20 @@ public interface ITokuchoInfoShoriDateMapper {
      */
     List<DbT7022ShoriDateKanriEntity> get広域職員の処理日付取得(TokuchoInfoShoriDateParameter parameter);
 
+    /**
+     * 広域月処理日付取得を取得する。
+     *
+     * @param parameter parameter
+     * @return DealKyufujissekiEntity
+     */
+    List<DbT7022ShoriDateKanriEntity> get広域月処理日付(TokuchoInfoShoriDateParameter parameter);
+
+    /**
+     * 広域5月と9月処理日付取得を取得する。
+     *
+     * @param parameter parameter
+     * @return DealKyufujissekiEntity
+     */
+    List<DbT7022ShoriDateKanriEntity> get広域5月と9月処理日付(TokuchoInfoShoriDateParameter parameter);
+
 }
