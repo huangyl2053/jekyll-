@@ -162,7 +162,7 @@ public class IryoHiKojoKakuninSinsei {
         }
 
         IKojin 宛名情報 = getAtena_Iryohikojyo(識別コード);
-        if (JushoHenshuChoikiHenshuHoho.表示なし_住所は印字しない.getコード().equals(管内住所編集_編集方法)) {
+        if (宛名情報 == null || JushoHenshuChoikiHenshuHoho.表示なし_住所は印字しない.getコード().equals(管内住所編集_編集方法)) {
             return null;
         }
         JushoEditorBuilder jushoEditorBuilder = new JushoEditorBuilder(宛名情報.get住所());
@@ -258,13 +258,13 @@ public class IryoHiKojoKakuninSinsei {
         juminJotaiList.add(JuminJotai.転出者);
         juminJotaiList.add(JuminJotai.死亡者);
         key.set住民状態(juminJotaiList);
+        key.set識別コード(識別コード);
         IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
         ShikibetsuTaishoParameter param = new ShikibetsuTaishoParameter(shikibetsuTaishoPSMSearchKey);
-        param.set識別コード(識別コード);
 
         UaFt200FindShikibetsuTaishoEntity 宛名情報 = mapper.select宛名情報(param);
 
-        return ShikibetsuTaishoFactory.createKojin(宛名情報);
+        return 宛名情報 != null ? ShikibetsuTaishoFactory.createKojin(宛名情報) : null;
     }
 
     /**
@@ -278,10 +278,10 @@ public class IryoHiKojoKakuninSinsei {
 
         AtesakiPSMSearchKeyBuilder key = new AtesakiPSMSearchKeyBuilder(
                 AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給));
+        key.set識別コード(識別コード);
         AtesakiParameter param = new AtesakiParameter(key.build());
-        param.set識別コード(識別コード);
 
         UaFt250FindAtesakiEntity 宛先情報 = mapper.select宛先情報(param);
-        return AtesakiFactory.createInstance(宛先情報);
+        return 宛先情報 != null ? AtesakiFactory.createInstance(宛先情報) : null;
     }
 }
