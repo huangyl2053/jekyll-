@@ -52,8 +52,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
     private static final RString 修正済 = new RString("修正済");
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
-    private static final RString T_O_Z = new RString("210");
-    private static final RString T_S_Z = new RString("360");
+    private static final RString T_O_Z = new RString("E00210");
+    private static final RString T_S_Z = new RString("E00360");
     private static final RString 既存の異動日 = new RString("既存の異動日");
     private static final RString 履歴番号 = new RString("履歴番号");
     private static final RString 起動 = new RString("1");
@@ -225,8 +225,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
     private void getErrorMessages(
             JukyushaTeiseiRenrakuhyoTorokuManagerResult result) {
         if (result.getエラーメッセージコード().equals(T_S_Z)) {
-            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().replace(
-                    既存の異動日.toString()));
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
         } else if (result.getエラーメッセージコード().equals(T_O_Z)) {
             throw new ApplicationException(UrErrorMessages.既に存在.getMessage().replace(
                     履歴番号.toString()));
