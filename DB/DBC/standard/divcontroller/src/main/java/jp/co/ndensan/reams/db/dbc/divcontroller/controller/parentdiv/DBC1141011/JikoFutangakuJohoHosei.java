@@ -100,7 +100,7 @@ public class JikoFutangakuJohoHosei {
     /**
      * 「実行ボタン押下した時の早期処理」ボタンのメソッドです。
      *
-     * @param div DBC1120011PanelDiv
+     * @param div JikoFutangakuJohoHoseiDiv
      * @return ResponseData
      */
     public ResponseData<JikoFutangakuJohoHoseiDiv> onBeforeOpenCheck(JikoFutangakuJohoHoseiDiv div) {
@@ -114,7 +114,7 @@ public class JikoFutangakuJohoHosei {
     /**
      * 「実行ボタン押下した時の処理」ボタンのメソッドです。
      *
-     * @param div DBC1120011PanelDiv
+     * @param div JikoFutangakuJohoHoseiDiv
      * @return ResponseData
      */
     public ResponseData<DBC040030_KogakugassanJikofutangakuInfoHoseiParameter> onClick_btn(
