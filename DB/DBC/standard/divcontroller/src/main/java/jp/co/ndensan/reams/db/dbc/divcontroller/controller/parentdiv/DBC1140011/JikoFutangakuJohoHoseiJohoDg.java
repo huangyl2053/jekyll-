@@ -167,13 +167,13 @@ public class JikoFutangakuJohoHoseiJohoDg {
         JikoFutangakuJohoHoseiJohoDgHandler handler = getHandler(div);
         dgJohoIchiran_Row row = div.getDgJohoIchiran().getClickedItem();
         boolean flg = handler.isCheckPass(対象者.get被保険者番号(), row);
-        if (!(flg && JigyouGassan_ShoumeishoyouDataKubun.証明書用.getCode().equals(row.getTxtDataKBN()))
+        if (!flg && !JigyouGassan_ShoumeishoyouDataKubun.証明書用.getCode().equals(row.getTxtDataKBN())
                 && !ResponseHolder.isReRequest()
                 && !(new RString(DbcWarningMessages.高額合算補正関連３
                         .getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
             return ResponseData.of(div).addMessage(
                     DbcWarningMessages.高額合算補正関連１.getMessage()).respond();
-        } else if (!(flg && !JigyouGassan_ShoumeishoyouDataKubun.証明書用.getCode().equals(row.getTxtDataKBN()))
+        } else if (!flg && JigyouGassan_ShoumeishoyouDataKubun.証明書用.getCode().equals(row.getTxtDataKBN())
                 && !ResponseHolder.isReRequest()
                 && !(new RString(DbcWarningMessages.高額合算補正関連３
                         .getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
@@ -466,6 +466,18 @@ public class JikoFutangakuJohoHoseiJohoDg {
         if (CODE_ONE.equals(自己負担額保持.get変更フラグ())) {
             div.getBtnJikofutangakuJohoNyuryoku().setIconNameEnum(IconName.Check);
         }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「履歴Dgdの選択」ボタン表示制御を設定です。
+     *
+     * @param div JikoFutangakuJohoHoseiJohoDgDiv
+     * @return ResponseData
+     */
+    public ResponseData<JikoFutangakuJohoHoseiJohoDgDiv> onStateTransition(
+            JikoFutangakuJohoHoseiJohoDgDiv div) {
+        getHandler(div).set履歴Dgdの選択ボタンする();
         return ResponseData.of(div).respond();
     }
 
