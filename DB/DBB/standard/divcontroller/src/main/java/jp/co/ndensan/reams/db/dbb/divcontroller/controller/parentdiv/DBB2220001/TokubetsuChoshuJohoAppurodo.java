@@ -113,8 +113,10 @@ public class TokubetsuChoshuJohoAppurodo {
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<TokubetsuChoshuJohoAppurodoDiv> onClick_btnUpload(TokubetsuChoshuJohoAppurodoDiv div, FileData[] files) {
         TokubetsuChoshuJohoAppurodoHandler hand = getHandler(div);
-        hand.ファイルチェック(files);
-        hand.upLoad(files);
+        boolean チェックFlag = hand.ファイルチェック(files);
+        if (チェックFlag) {
+            hand.upLoad(files);
+        }
         return ResponseData.of(div).respond();
     }
 
