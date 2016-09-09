@@ -64,6 +64,7 @@ public class KijunShunyugakuTekiyoRenbanariProcess extends BatchProcessBase<Hany
     private RString 市町村名;
     private Map<RString, KoseiShichosonMaster> 市町村名MasterMap;
     private KijunShunyugakuTekiyo kijunShunyugakuTekiyo;
+    private Association association;
     private boolean flag;
     @BatchWriter
     private CsvWriter<HanyoListParamRenbanariEUCEntity> eucCsvWriter;
@@ -71,6 +72,7 @@ public class KijunShunyugakuTekiyoRenbanariProcess extends BatchProcessBase<Hany
     @Override
     protected void initialize() {
         flag = false;
+        association = AssociationFinderFactory.createInstance().getAssociation();
         kijunShunyugakuTekiyo = new KijunShunyugakuTekiyo(processParameter);
         get市町村名();
     }
@@ -97,21 +99,23 @@ public class KijunShunyugakuTekiyoRenbanariProcess extends BatchProcessBase<Hany
     @Override
     protected void process(HanyoListParamRelateEntity entity) {
         flag = true;
-        eucCsvWriter.writeLine(kijunShunyugakuTekiyo.setRenbanariEUCEntity(entity, 市町村名MasterMap, 市町村名, 連番++));
+        eucCsvWriter.writeLine(kijunShunyugakuTekiyo.setRenbanariEUCEntity(entity, 市町村名MasterMap, association, 連番++));
     }
 
     @Override
     protected void afterExecute() {
         if (!flag) {
             eucCsvWriter.writeLine(kijunShunyugakuTekiyo.setRenbanariEUCEntity());
+            eucCsvWriter.close();
+            manager.spool(eucFilePath);
+        } else {
+            eucCsvWriter.close();
+            manager.spool(eucFilePath, kijunShunyugakuTekiyo.getアクセスログ());
         }
-        eucCsvWriter.close();
-        manager.spool(eucFilePath, kijunShunyugakuTekiyo.getアクセスログ());
         outputJokenhyoFactory();
     }
 
     private void outputJokenhyoFactory() {
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
                 association.getLasdecCode_().value(),
@@ -142,8 +146,8 @@ public class KijunShunyugakuTekiyoRenbanariProcess extends BatchProcessBase<Hany
             市町村名 = new RString("全市町村");
         } else if (!RString.isNullOrEmpty(保険者コード)) {
             IAssociationFinder finder = AssociationFinderFactory.createInstance();
-            Association association = finder.getAssociation(new LasdecCode(保険者コード));
-            市町村名 = association.get市町村名();
+            Association 市町村 = finder.getAssociation(new LasdecCode(保険者コード));
+            市町村名 = 市町村.get市町村名();
         } else {
             市町村名 = RString.EMPTY;
         }

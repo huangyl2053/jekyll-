@@ -8,8 +8,6 @@ package jp.co.ndensan.reams.db.dbc.business.core.tankinyushokakudaigaitosha;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.tankinyushokakudaigaitosha.ChushutsuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.tankinyushokakudaigaitosha.GendogakuKanriKikansu;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.tankinyushokakudaigaitosha.TankiNyushoKakudaiGaitoshaMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.tankinyushokakudaigaitosha.TankiNyushoKakudaiGaitoshaProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.tankinyushokakudaigaitosha.TankiNyushoKakudaiGaitoshaRelateEntity;
@@ -32,6 +30,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.banchi.Banchi;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -84,12 +83,12 @@ public class TankiNyushoKakudaiGaitosha {
      *
      * @param entity entity
      * @param 市町村名MasterMap 市町村名MasterMap
-     * @param 市町村名 市町村名
+     * @param association association
      * @param 連番 連番
      * @return JigyoBunKogakuGassanShikyuKetteibanAriEUCEntity
      */
     public TankiNyushoKakudaiGaitoshaReibanAriEUCEntity set連番ありEUCEntity(TankiNyushoKakudaiGaitoshaRelateEntity entity,
-            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, RString 市町村名, int 連番) {
+            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, Association association, int 連番) {
         TankiNyushoKakudaiGaitoshaReibanAriEUCEntity eucEntity = new TankiNyushoKakudaiGaitoshaReibanAriEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -142,8 +141,8 @@ public class TankiNyushoKakudaiGaitosha {
         if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
             eucEntity.set市町村名(市町村名MasterMap.get(entity.get市町村コード()).get市町村名称());
         }
-        eucEntity.set保険者コード(processParameter.get保険者コード());
-        eucEntity.set保険者名(市町村名);
+        eucEntity.set保険者コード(association.get地方公共団体コード().value());
+        eucEntity.set保険者名(association.get市町村名());
         eucEntity.set空白(new RString(" "));
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), entity.get資格取得事由コード()));
@@ -270,11 +269,11 @@ public class TankiNyushoKakudaiGaitosha {
      *
      * @param entity entity
      * @param 市町村名MasterMap 市町村名MasterMap
-     * @param 市町村名 市町村名
+     * @param association association
      * @return TankiNyushoKakudaiGaitoshaReibanNashiEUCEntity
      */
     public TankiNyushoKakudaiGaitoshaReibanNashiEUCEntity set連番なしEUCEntity(TankiNyushoKakudaiGaitoshaRelateEntity entity,
-            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, RString 市町村名) {
+            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, Association association) {
         TankiNyushoKakudaiGaitoshaReibanNashiEUCEntity eucEntity = new TankiNyushoKakudaiGaitoshaReibanNashiEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -326,8 +325,8 @@ public class TankiNyushoKakudaiGaitosha {
         if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
             eucEntity.set市町村名(市町村名MasterMap.get(entity.get市町村コード()).get市町村名称());
         }
-        eucEntity.set保険者コード(processParameter.get保険者コード());
-        eucEntity.set保険者名(市町村名);
+        eucEntity.set保険者コード(association.get地方公共団体コード().value());
+        eucEntity.set保険者名(association.get市町村名());
         eucEntity.set空白(new RString(" "));
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), entity.get資格取得事由コード()));
@@ -609,7 +608,7 @@ public class TankiNyushoKakudaiGaitosha {
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("抽出区分："));
-        jokenBuilder.append(ChushutsuKubun.toValue(processParameter.get抽出区分()).get名称());
+        jokenBuilder.append(processParameter.get抽出区分());
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("適用開始年月："));
@@ -619,7 +618,7 @@ public class TankiNyushoKakudaiGaitosha {
         出力条件List.add(get期間(jokenBuilder, processParameter.get適用終了年月From(), processParameter.get適用終了年月To()));
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("限度額管理期間数："));
-        jokenBuilder.append(GendogakuKanriKikansu.toValue(processParameter.get限度額管理期間数()).get名称());
+        jokenBuilder.append(processParameter.get限度額管理期間数());
         出力条件List.add(jokenBuilder.toRString());
         return 出力条件List;
     }

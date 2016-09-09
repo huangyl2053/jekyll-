@@ -68,6 +68,7 @@ public class JigyoBunKogakuGassanShikyuKetteiProcess extends BatchProcessBase<Ji
     private RString 市町村名;
     private Map<RString, KoseiShichosonMaster> 市町村名MasterMap;
     private JigyoBunKogakuGassanShikyuKettei business;
+    private Association association;
     private boolean flag;
     @BatchWriter
     private CsvWriter<IJigyoBunKogakuGassanShikyuKetteiEUCEntity> eucCsvWriter;
@@ -75,6 +76,7 @@ public class JigyoBunKogakuGassanShikyuKetteiProcess extends BatchProcessBase<Ji
     @Override
     protected void initialize() {
         flag = false;
+        AssociationFinderFactory.createInstance().getAssociation();
         business = new JigyoBunKogakuGassanShikyuKettei(processParameter);
         get市町村名();
     }
@@ -108,9 +110,9 @@ public class JigyoBunKogakuGassanShikyuKetteiProcess extends BatchProcessBase<Ji
             iKoza = maskedKozaCreator.createマスク編集済口座(new Koza(口座Entity));
         }
         if (processParameter.is連番付加()) {
-            eucCsvWriter.writeLine(business.set連番ありEUCEntity(entity, iKoza, 市町村名MasterMap, 市町村名, 連番++));
+            eucCsvWriter.writeLine(business.set連番ありEUCEntity(entity, iKoza, 市町村名MasterMap, association, 連番++));
         } else {
-            eucCsvWriter.writeLine(business.set連番なしEUCEntity(entity, iKoza, 市町村名MasterMap, 市町村名));
+            eucCsvWriter.writeLine(business.set連番なしEUCEntity(entity, iKoza, 市町村名MasterMap, association));
         }
     }
 
@@ -122,14 +124,17 @@ public class JigyoBunKogakuGassanShikyuKetteiProcess extends BatchProcessBase<Ji
             } else {
                 eucCsvWriter.writeLine(business.set連番なしEUCEntity());
             }
+            eucCsvWriter.close();
+            manager.spool(eucFilePath);
+        } else {
+            eucCsvWriter.close();
+            manager.spool(eucFilePath, business.getアクセスログ());
         }
-        eucCsvWriter.close();
-        manager.spool(eucFilePath, business.getアクセスログ());
+
         outputJokenhyoFactory();
     }
 
     private void outputJokenhyoFactory() {
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
                 association.getLasdecCode_().value(),
@@ -160,8 +165,8 @@ public class JigyoBunKogakuGassanShikyuKetteiProcess extends BatchProcessBase<Ji
             市町村名 = new RString("全市町村");
         } else if (!RString.isNullOrEmpty(保険者コード)) {
             IAssociationFinder finder = AssociationFinderFactory.createInstance();
-            Association association = finder.getAssociation(new LasdecCode(保険者コード));
-            市町村名 = association.get市町村名();
+            Association 市町村 = finder.getAssociation(new LasdecCode(保険者コード));
+            市町村名 = 市町村.get市町村名();
         } else {
             市町村名 = RString.EMPTY;
         }
