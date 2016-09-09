@@ -82,12 +82,12 @@ public class ShinseishoTorokuHandler {
 
         FlexibleDate 世帯員把握基準日基準日 = new FlexibleDate(YMDHMS.now().getYear()
                 .toDateString().concat(new RString(YMDHMS.now().getMonthValue()).padZeroToLeft(2).concat(日)));
-        div.getTxtSetaiinHaakuKijunYMD().setValue(new FlexibleDate(世帯員把握基準日基準日.wareki().toDateString()));
+        div.getTxtSetaiinHaakuKijunYMD().setValue(世帯員把握基準日基準日);
 
         RString 提出期限 = 本年.concat(new RString(YMDHMS.now().getMonthValue() + 1).concat(月中));
         div.getTxtTeishutsuKigen().setValue(提出期限);
         FlexibleDate 作成日 = new FlexibleDate(YMDHMS.now().getDate().toDateString());
-        div.getTxtSakuseiYMD().setValue(new FlexibleDate(作成日.wareki().toDateString()));
+        div.getTxtSakuseiYMD().setValue(作成日);
         set文書番号();
 
         div.getChkTsuchisho().setSelectedItems(div.getChkTsuchisho().getDataSource());
@@ -111,11 +111,9 @@ public class ShinseishoTorokuHandler {
      */
     public void set処理年度の初期値() {
         if (INDEX_101 < Integer.valueOf((RDate.getNowDate().toString().substring(INDEX_5, INDEX_8))) && Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_5, INDEX_8)) < INDEX_731) {
-            div.getTxtShoriNendo().setValue(new FlexibleDate(FlexibleDate.getNowDate()
-                    .minusYear(1).wareki().firstYear(FirstYear.ICHI_NEN).toDateString()));
+            div.getTxtShoriNendo().setValue(new FlexibleDate(FlexibleDate.getNowDate().minusYear(1).wareki().firstYear(FirstYear.ICHI_NEN).toDateString()));
         } else if (INDEX_801 < Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_5, INDEX_8)) && Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_4, INDEX_8)) < INDEX_1231) {
-            div.getTxtShoriNendo().setValue(new FlexibleDate(FlexibleDate.getNowDate()
-                    .wareki().firstYear(FirstYear.ICHI_NEN).toDateString()));
+            div.getTxtShoriNendo().setValue(new FlexibleDate(FlexibleDate.getNowDate().wareki().firstYear(FirstYear.ICHI_NEN).toDateString()));
         }
     }
 
