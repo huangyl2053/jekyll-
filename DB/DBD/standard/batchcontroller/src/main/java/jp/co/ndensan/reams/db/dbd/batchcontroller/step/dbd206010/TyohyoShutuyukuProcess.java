@@ -147,7 +147,7 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation(
                 new LasdecCode(t.get証記載保険者番号().value()));
         JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport report
-                = new JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport(t, 地方公共団体, association, outputOrder, 番号++);
+                = new JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport(t, association, 地方公共団体, outputOrder, 番号++);
         report.writeBy(reportSourceWriter);
     }
 
@@ -155,7 +155,7 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
     protected void afterExecute() {
         if (番号 == 1) {
             JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport report
-                    = new JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport(null, null, association, outputOrder, 番号++);
+                    = new JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport(null, association, null, outputOrder, 番号++);
             report.writeBy(reportSourceWriter);
         }
         outputJokenhyoFactory();
@@ -292,7 +292,6 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
                 orderByClause = orderByClause.append(space).append(comma).append(space)
                         .append(reportItems.getMyBatis項目名(setSortItem.get項目ID())).append(space).append(setSortItem.get昇降順().getOrder());
             }
-
         }
         return orderByClause.toRString();
     }

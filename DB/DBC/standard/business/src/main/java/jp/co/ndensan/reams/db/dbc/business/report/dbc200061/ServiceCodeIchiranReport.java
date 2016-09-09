@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 帳票設計_DBCMNJ2006_サービスコード一覧表IBuilder
+ * 帳票設計_DBCMNJ2006_サービスコード一覧表Report
  *
  * @reamsid_L DBC-3310-040 jiangxiaolong
  */
