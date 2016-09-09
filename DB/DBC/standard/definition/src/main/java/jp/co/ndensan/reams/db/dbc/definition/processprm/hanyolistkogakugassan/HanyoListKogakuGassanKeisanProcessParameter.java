@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassan;
 
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistkogakugassan.HanyoListKogakuGassanKeisanMybatisParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -39,6 +40,7 @@ public class HanyoListKogakuGassanKeisanProcessParameter implements IBatchProces
     private Long 出力順;
     private RString 出力項目;
     private RString 介護合算_仮算定データ;
+    private IShikibetsuTaishoPSMSearchKey searchKey;
 
     /**
      * コンストラクタです
@@ -104,6 +106,7 @@ public class HanyoListKogakuGassanKeisanProcessParameter implements IBatchProces
      */
     public HanyoListKogakuGassanKeisanMybatisParameter toMybatisParam() {
         return new HanyoListKogakuGassanKeisanMybatisParameter(
+                searchKey,
                 抽出区分,
                 データ区分,
                 データ種類,
