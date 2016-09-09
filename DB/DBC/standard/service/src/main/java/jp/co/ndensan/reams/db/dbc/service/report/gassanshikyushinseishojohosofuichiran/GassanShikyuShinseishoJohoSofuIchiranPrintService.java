@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 /**
  * 帳票設計_DBC200027_高額合算支給申請書情報送付一覧表 のPrintServiceクラスです。
  *
- * @author DBC_2630_040 zhengshenlei
+ * @reamsId_L DBC-2630-040 zhengshenlei
  */
 public class GassanShikyuShinseishoJohoSofuIchiranPrintService {
 
@@ -54,7 +54,7 @@ public class GassanShikyuShinseishoJohoSofuIchiranPrintService {
     }
 
     /**
-     * 帳票設計_DBC200037_高額合算支給額計算結果連絡票情報取込一覧表(複数帳票出力用)。
+     * 帳票設計_DBC200027_高額合算支給額計算結果連絡票情報取込一覧表(複数帳票出力用)。
      *
      * @param 送付一覧表データ 送付一覧表データ
      * @param システム日時 YMDHMS

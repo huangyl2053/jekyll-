@@ -88,12 +88,18 @@ public class GassanShikyuShinseishoJohoSofuIchiranEditor implements IGassanShiky
         if (!高額合算申請書一時Entity.getShikyuShinseishoSeiriNo().equals(new RString(高額合算申請書一時Entity.getRirekiNo().toString()))) {
             source.list_2 = 高額合算申請書一時Entity.getTaishoNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            source.list_3 = KaigoGassan_ShinseiKbn.valueOf(高額合算申請書一時Entity.getShikyuShinseiKubun().toString()).get名称();
+            if (高額合算申請書一時Entity.getShikyuShinseiKubun() != null) {
+                source.list_3 = KaigoGassan_ShinseiKbn.toValue(高額合算申請書一時Entity.getShikyuShinseiKubun()).get名称();
+            }
             source.list_4 = new RString(高額合算申請書一時Entity.getShinseiYMD().toString());
             source.list_5 = 高額合算申請書一時Entity.getShikyuShinseishoSeiriNo();
             source.list_6 = new RString(高額合算申請書一時Entity.getShinseiDaihyoshaShimei().toString());
-            source.list_7 = KaigoGassan_JikoFutanKofuUmu.valueOf(高額合算申請書一時Entity.getJikoFutanKofuUmu().toString()).get名称();
-            source.list_8 = KaigoGassan_ShinseiKeitai.valueOf(高額合算申請書一時Entity.getShikyuShinseiKeitai().toString()).get名称();
+            if (高額合算申請書一時Entity.getJikoFutanKofuUmu() != null) {
+                source.list_7 = KaigoGassan_JikoFutanKofuUmu.toValue(高額合算申請書一時Entity.getJikoFutanKofuUmu()).get名称();
+            }
+            if (高額合算申請書一時Entity.getShikyuShinseiKeitai() != null) {
+                source.list_8 = KaigoGassan_ShinseiKeitai.toValue(高額合算申請書一時Entity.getShikyuShinseiKeitai()).get名称();
+            }
         }
         source.list_9 = new RString(高額合算申請書一時Entity.getHihokenshaNo().toString());
         source.list_10 = 被保険者一時Entity.getMeisho();
@@ -104,9 +110,17 @@ public class GassanShikyuShinseishoJohoSofuIchiranEditor implements IGassanShiky
                     .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             source.list_11 = 加入期間開始年月日.concat(図形).concat(加入期間終了年月日);
         }
-        source.list_12 = KaigoGassan_ShotokuKbn.valueOf(高額合算申請書一時Entity.getShotokuKubun().toString()).get名称();
-        source.list_13 = KaigoGassan_Over70_ShotokuKbn.valueOf(高額合算申請書一時Entity.getOver70_ShotokuKubun().toString()).get名称();
-        source.list_14 = ShiharaiHohoKubun.valueOf(高額合算申請書一時Entity.getShiharaiHohoKubun().toString()).get名称();
+
+        if (高額合算申請書一時Entity.getShotokuKubun() != null) {
+            source.list_12 = KaigoGassan_ShotokuKbn.toValue(高額合算申請書一時Entity.getShotokuKubun()).get名称();
+        }
+        if (高額合算申請書一時Entity.getOver70_ShotokuKubun() != null) {
+            source.list_13 = KaigoGassan_Over70_ShotokuKbn.toValue(高額合算申請書一時Entity.getOver70_ShotokuKubun()).get名称();
+        }
+        if (高額合算申請書一時Entity.getShiharaiHohoKubun() != null) {
+            source.list_14 = ShiharaiHohoKubun.toValue(高額合算申請書一時Entity.getShiharaiHohoKubun()).get名称();
+        }
+
         if (再送.equals(高額合算申請書一時Entity.getSaiSofuFlag())) {
             source.list_15 = KokuhorenDataSaisoFlag.再送要.get名称();
         } else {
