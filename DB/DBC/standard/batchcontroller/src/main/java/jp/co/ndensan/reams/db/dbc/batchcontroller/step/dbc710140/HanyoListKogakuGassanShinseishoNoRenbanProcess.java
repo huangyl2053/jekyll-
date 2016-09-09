@@ -9,10 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.business.report.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoProperty;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ChushutsuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoProcessParameter;
-import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate;
@@ -25,12 +23,8 @@ import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubun
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -102,9 +96,9 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
     private Association 地方公共団体;
     private FlexibleDate システム日付;
     private Map<RString, KoseiShichosonMaster> 市町村名MasterMap;
-
-    private static final RString デフォルト出力順 = new RString("order by 高額合算申請書_被保険者番号,"
-            + "高額合算申請書_対象年度,高額合算申請書_保険者番号,高額合算申請書_整理番号");
+//    TODO QA1490
+//    private static final RString デフォルト出力順 = new RString("order by 高額合算申請書_被保険者番号,"
+//            + "高額合算申請書_対象年度,高額合算申請書_保険者番号,高額合算申請書_整理番号");
 
     @BatchWriter
     private CsvWriter<HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity> eucCsvWriter;
@@ -125,19 +119,19 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(parameter.getReamsLoginId());
         parameter.setList(list);
-
-        if (RString.isNullOrEmpty(parameter.get抽出区分())) {
-            IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
-            IOutputOrder 出力順;
-            出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
-                    ReportIdDBC.DBC701014.getReportId(), parameter.get出力順());
-            if (出力順 != null) {
-                parameter.set出力順(Long.valueOf(MyBatisOrderByClauseCreator.create(
-                        HanyoListKogakuGassanShinseishoJohoProperty.DBC701014ShutsuryokujunEnum.class, 出力順).toString()));
-            } else {
-                parameter.set出力順(Long.valueOf(デフォルト出力順.toString()));
-            }
-        }
+//        TODO QA1490
+//        if (RString.isNullOrEmpty(parameter.get抽出区分())) {
+//            IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
+//            IOutputOrder 出力順;
+//            出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
+//                    ReportIdDBC.DBC701014.getReportId(), parameter.get出力順());
+//            if (出力順 != null) {
+//                parameter.set出力順(Long.valueOf(MyBatisOrderByClauseCreator.create(
+//                        HanyoListKogakuGassanShinseishoJohoProperty.DBC701014ShutsuryokujunEnum.class, 出力順).toString()));
+//            } else {
+//                parameter.set出力順(Long.valueOf(デフォルト出力順.toString()));
+//            }
+//        }
         return new BatchDbReader(READ_DATA_ID, parameter.toMybatisParam());
     }
 

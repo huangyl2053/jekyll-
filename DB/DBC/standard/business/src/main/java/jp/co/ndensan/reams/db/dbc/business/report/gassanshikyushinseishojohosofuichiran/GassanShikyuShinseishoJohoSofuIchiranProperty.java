@@ -21,6 +21,6 @@ public class GassanShikyuShinseishoJohoSofuIchiranProperty extends ReportPropert
      * コンストラクタです。
      */
     public GassanShikyuShinseishoJohoSofuIchiranProperty() {
-        super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200028.getReportId());
+        super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200027.getReportId());
     }
 }

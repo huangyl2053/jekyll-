@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3020003;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Sep 06 14:33:53 CST 2016 
+ * Fri Sep 09 11:39:51 CST 2016 
  */
 
 
@@ -32,6 +32,7 @@ public class dgShunoJokyo_Row extends DataRow {
     private RString nokigen;
     private RString jikoKisanYMD;
     private RString jikoKisanYMDKubun;
+    private RString seirekiChoteiNendo;
 
     public dgShunoJokyo_Row() {
         super();
@@ -44,6 +45,7 @@ public class dgShunoJokyo_Row extends DataRow {
         this.nokigen = RString.EMPTY;
         this.jikoKisanYMD = RString.EMPTY;
         this.jikoKisanYMDKubun = RString.EMPTY;
+        this.seirekiChoteiNendo = RString.EMPTY;
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("choteiNendo", choteiNendo);
         this.setOriginalData("choteiGaku", choteiGaku);
@@ -53,9 +55,10 @@ public class dgShunoJokyo_Row extends DataRow {
         this.setOriginalData("nokigen", nokigen);
         this.setOriginalData("jikoKisanYMD", jikoKisanYMD);
         this.setOriginalData("jikoKisanYMDKubun", jikoKisanYMDKubun);
+        this.setOriginalData("seirekiChoteiNendo", seirekiChoteiNendo);
     }
 
-    public dgShunoJokyo_Row(RString jotai, TextBoxFlexibleDate choteiNendo, TextBoxNum choteiGaku, TextBoxNum shunyuGaku, TextBoxNum jikoToraiMinogaku, RString ki, RString nokigen, RString jikoKisanYMD, RString jikoKisanYMDKubun) {
+    public dgShunoJokyo_Row(RString jotai, TextBoxFlexibleDate choteiNendo, TextBoxNum choteiGaku, TextBoxNum shunyuGaku, TextBoxNum jikoToraiMinogaku, RString ki, RString nokigen, RString jikoKisanYMD, RString jikoKisanYMDKubun, RString seirekiChoteiNendo) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("choteiNendo", choteiNendo);
@@ -66,6 +69,7 @@ public class dgShunoJokyo_Row extends DataRow {
         this.setOriginalData("nokigen", nokigen);
         this.setOriginalData("jikoKisanYMD", jikoKisanYMD);
         this.setOriginalData("jikoKisanYMDKubun", jikoKisanYMDKubun);
+        this.setOriginalData("seirekiChoteiNendo", seirekiChoteiNendo);
         this.jotai = jotai;
         this.choteiNendo = choteiNendo;
         this.choteiGaku = choteiGaku;
@@ -75,6 +79,7 @@ public class dgShunoJokyo_Row extends DataRow {
         this.nokigen = nokigen;
         this.jikoKisanYMD = jikoKisanYMD;
         this.jikoKisanYMDKubun = jikoKisanYMDKubun;
+        this.seirekiChoteiNendo = seirekiChoteiNendo;
     }
 
     public RString getJotai() {
@@ -111,6 +116,10 @@ public class dgShunoJokyo_Row extends DataRow {
 
     public RString getJikoKisanYMDKubun() {
         return jikoKisanYMDKubun;
+    }
+
+    public RString getSeirekiChoteiNendo() {
+        return seirekiChoteiNendo;
     }
 
     public void setJotai(RString jotai) {
@@ -156,6 +165,11 @@ public class dgShunoJokyo_Row extends DataRow {
     public void setJikoKisanYMDKubun(RString jikoKisanYMDKubun) {
         this.setOriginalData("jikoKisanYMDKubun", jikoKisanYMDKubun);
         this.jikoKisanYMDKubun = jikoKisanYMDKubun;
+    }
+
+    public void setSeirekiChoteiNendo(RString seirekiChoteiNendo) {
+        this.setOriginalData("seirekiChoteiNendo", seirekiChoteiNendo);
+        this.seirekiChoteiNendo = seirekiChoteiNendo;
     }
 
     // </editor-fold>

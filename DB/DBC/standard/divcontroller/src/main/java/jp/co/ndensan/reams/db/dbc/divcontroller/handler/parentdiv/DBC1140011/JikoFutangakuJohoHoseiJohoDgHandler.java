@@ -695,4 +695,25 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
         }
         return businessList;
     }
+
+    /**
+     * 再送区分送付対象外制御の処理です。
+     *
+     * @param flg boolean
+     * @param result KogakuGassanJikoFutanGaku
+     */
+    public void 再送区分送付対象外制御(boolean flg, KogakuGassanJikoFutanGaku result) {
+        if (flg) {
+            div.getJikoFutangakuHoseiDetail().getChkSoufuTaishougai().setDisabled(false);
+            if (result.get補正済自己負担額情報送付年月() != null) {
+                div.getChkSaisouKBN().setDisabled(false);
+            } else if (ZERO.equals(result.get送付対象外フラグ())) {
+                div.getChkSaisouKBN().setDisabled(true);
+            } else {
+                div.getChkSaisouKBN().setDisabled(true);
+            }
+        } else {
+            div.getJikoFutangakuHoseiDetail().getChkSoufuTaishougai().setDisabled(true);
+        }
+    }
 }

@@ -75,12 +75,12 @@ public class FutanGendogakuOshiraseTsuchiHakko extends BatchProcessBase<FutanGen
             + "IFutanGendogakuOshiraseTsuchiHakkoMapper.get出力対象者情報");
     private ShinseishoHakkoProcessParameter processParamter;
     private static final ReportId ID = new ReportId("DBD100008_FutanGendogakuNinteiKoshinTsuchisho");
-    private static final RString 種別コード = new RString("DBD100008");
     private static final RString GENERICKEY = new RString("負担限度額認定更新のお知らせ通知書");
     private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString HAKKONICHI = new RString("【発行日】");
     private static final RString SHUTSURYOKUJUN = new RString("【出力順】");
     private static final RString なし = new RString("なし");
+    private static final RString 種別コード = new RString("0001");
     private static final int 項目番号_1 = 1;
     private static final int 項目番号_11 = 11;
     private static final int 項目番号_21 = 21;
@@ -102,7 +102,8 @@ public class FutanGendogakuOshiraseTsuchiHakko extends BatchProcessBase<FutanGen
     @Override
     protected void initialize() {
         association = AssociationFinderFactory.createInstance().getAssociation();
-        ninshosha = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, 種別コード);
+        ninshosha = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険,
+                種別コード);
         導入団体コード = association.getLasdecCode_().value();
         市町村名 = association.get市町村名();
         帳票制御共通 = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance().load帳票制御共通(ID);
@@ -204,7 +205,7 @@ public class FutanGendogakuOshiraseTsuchiHakko extends BatchProcessBase<FutanGen
 
     private List<RString> init通知書定型文(FutanGendogakuOshiraseTsuchiHakkoEntity entity) {
         List<RString> 通知書定型文 = new ArrayList();
-        ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(SubGyomuCode.DBD介護受給, processParamter.get帳票ID());
+        ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(SubGyomuCode.DBD介護受給, ID);
         TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo;
         if (!entity.is更新認定フラグ()) {
@@ -224,18 +225,28 @@ public class FutanGendogakuOshiraseTsuchiHakko extends BatchProcessBase<FutanGen
 
     private void set文書番号(FutanGendogakuOshiraseTsuchiHakkoEntity entity) {
         IBunshoNoFinder finder = BunshoNoFinderFactory.createInstance();
-        BunshoNo bunshoNo = finder.get文書番号管理(processParamter.get帳票ID(), processParamter.get基準日());
-        文書番号 = bunshoNo.edit文書番号();
+        BunshoNo bunshoNo27 = finder.get文書番号管理(ReportIdDBD.DBD100027.getReportId(), processParamter.get発行日());
+        BunshoNo bunshoNo = finder.get文書番号管理(ID, processParamter.get発行日());
         CountedItem countedItem;
-        if (BunshoNoHatsubanHoho.自動採番.getCode().equals(bunshoNo.get文書番号発番方法())) {
-            if (entity.is旧措置者フラグ()) {
+        if (entity.is旧措置者フラグ() && bunshoNo27 != null) {
+            if (BunshoNoHatsubanHoho.自動採番.getCode().equals(bunshoNo27.get文書番号発番方法())) {
                 countedItem = Saiban.get(SubGyomuCode.DBD介護受給, GENERICKEY, FlexibleDate.getNowDate().getNendo(), 旧措置者人数);
-            } else {
-                countedItem = Saiban.get(SubGyomuCode.DBD介護受給, GENERICKEY, FlexibleDate.getNowDate().getNendo(), 非旧措置者人数);
+                文書番号 = new RString(String.valueOf(countedItem.next()));
+            } else if (BunshoNoHatsubanHoho.手入力.getCode().equals(bunshoNo27.get文書番号発番方法())) {
+                throw new SystemException("文書番号の採番方法は手入力、採番できないので処理中止。");
             }
-            文書番号 = new RString(String.valueOf(countedItem.next()));
-        } else if (BunshoNoHatsubanHoho.手入力.getCode().equals(bunshoNo.get文書番号発番方法())) {
-            throw new SystemException("文書番号の採番方法は手入力、採番できないので処理中止。");
+        } else {
+            文書番号 = RString.EMPTY;
+        }
+        if ((!entity.is旧措置者フラグ() && bunshoNo != null)) {
+            if (BunshoNoHatsubanHoho.自動採番.getCode().equals(bunshoNo.get文書番号発番方法())) {
+                countedItem = Saiban.get(SubGyomuCode.DBD介護受給, GENERICKEY, FlexibleDate.getNowDate().getNendo(), 非旧措置者人数);
+                文書番号 = new RString(String.valueOf(countedItem.next()));
+            } else if (BunshoNoHatsubanHoho.手入力.getCode().equals(bunshoNo27.get文書番号発番方法())) {
+                throw new SystemException("文書番号の採番方法は手入力、採番できないので処理中止。");
+            }
+        } else {
+            文書番号 = RString.EMPTY;
         }
     }
 }

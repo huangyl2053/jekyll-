@@ -33,12 +33,12 @@ public class JukoKisambiTokushuTorokuDiv extends Panel {
     private ShunoJokyoDiv ShunoJokyo;
     @JsonProperty("JikoKisambi")
     private JikoKisambiDiv JikoKisambi;
-    @JsonProperty("ccdAtenaInfo")
-    private KaigoAtenaInfoDiv ccdAtenaInfo;
-    @JsonProperty("ccdShikakuKihon")
-    private KaigoShikakuKihonDiv ccdShikakuKihon;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
+    @JsonProperty("ccdShikakuKihon")
+    private KaigoShikakuKihonDiv ccdShikakuKihon;
+    @JsonProperty("ccdAtenaInfo")
+    private KaigoAtenaInfoDiv ccdAtenaInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -83,12 +83,12 @@ public class JukoKisambiTokushuTorokuDiv extends Panel {
     }
 
     /*
-     * getccdAtenaInfo
-     * @return ccdAtenaInfo
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
      */
-    @JsonProperty("ccdAtenaInfo")
-    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
-        return ccdAtenaInfo;
+    @JsonProperty("ccdKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
     }
 
     /*
@@ -101,12 +101,12 @@ public class JukoKisambiTokushuTorokuDiv extends Panel {
     }
 
     /*
-     * getccdKanryoMessage
-     * @return ccdKanryoMessage
+     * getccdAtenaInfo
+     * @return ccdAtenaInfo
      */
-    @JsonProperty("ccdKanryoMessage")
-    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
-        return ccdKanryoMessage;
+    @JsonProperty("ccdAtenaInfo")
+    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
+        return ccdAtenaInfo;
     }
 
     /*
