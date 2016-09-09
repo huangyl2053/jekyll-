@@ -150,11 +150,8 @@ public class FubanHohoMainHandler {
             div.getFubanHoho().getJidoFubanKaishiNo().getTxtJidoFubanKaishiNo().setDisabled(true);
         } else if (カスタマイズ付番.equals(被保険者番号付番方法) && 自動連番付番.equals(付番元情報)) {
             setDisabledFlaseToFubanHoho();
-            div.getFubanHoho().getFubanMotoJoho().getTxtYukoKetasu().setDisabled(false);
+            div.getFubanHoho().getFubanMotoJoho().getTxtYukoKetasu().setDisabled(true);
         } else if (自動連番_MCD10付番.equals(被保険者番号付番方法)) {
-            setDisabledTrueToFubanHoho();
-            div.getFubanHoho().getJidoFubanKaishiNo().getTxtJidoFubanKaishiNo().setDisabled(false);
-        } else if (任意手入力付番.equals(被保険者番号付番方法)) {
             setDisabledTrueToFubanHoho();
             div.getFubanHoho().getJidoFubanKaishiNo().getTxtJidoFubanKaishiNo().setDisabled(false);
         } else {
