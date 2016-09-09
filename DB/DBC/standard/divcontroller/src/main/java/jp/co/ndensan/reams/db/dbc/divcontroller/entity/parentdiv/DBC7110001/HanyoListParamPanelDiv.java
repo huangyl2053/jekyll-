@@ -254,13 +254,13 @@ public class HanyoListParamPanelDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public IShisetsuJohoCommonChildDiv getCcdJigyoshaBango() {
-        return this.getChushutsuJokenPanel().getSaisinsaJohoChushutsu().getCcdJigyoshaBango();
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getChushutsuJokenPanel().getCcdHokenshaList();
     }
 
     @JsonIgnore
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return this.getChushutsuJokenPanel().getCcdHokenshaList();
+    public IShisetsuJohoCommonChildDiv getCcdJigyoshaBango() {
+        return this.getChushutsuJokenPanel().getCcdJigyoshaBango();
     }
 
     @JsonIgnore

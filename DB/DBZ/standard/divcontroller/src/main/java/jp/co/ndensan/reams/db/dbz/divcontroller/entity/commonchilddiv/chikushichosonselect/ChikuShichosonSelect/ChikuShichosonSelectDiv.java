@@ -276,17 +276,14 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
     @JsonIgnore
-    public ChikuShichosonSelectHandler getHandler() {
-        return new ChikuShichosonSelectHandler(this);
-    }
-
-    @Override
     public void initialize() {
-        getHandler().init();
+        ChikuShichosonSelectHandler.of(this).init();
     }
 
     @Override
+    @JsonIgnore
     public RString get選択対象() {
         if (this.getTanitsuShichoson().isDisplayNone()) {
             return RString.EMPTY;
@@ -296,6 +293,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @Override
+    @JsonIgnore
     public Map<RString, RString> get選択結果() {
         if (this.getTanitsuShichoson().isDisplayNone()) {
             return null;
@@ -312,6 +310,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @Override
+    @JsonIgnore
     public RString get市町村コード() {
         if (this.getKoikiShichoson().isDisplayNone()) {
             return RString.EMPTY;
@@ -321,6 +320,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @Override
+    @JsonIgnore
     public RString get市町村名称() {
         if (this.getKoikiShichoson().isDisplayNone()) {
             return RString.EMPTY;
@@ -331,6 +331,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @Override
+    @JsonIgnore
     public RString get旧市町村コード() {
         if (this.getKoikiShichoson().isDisplayNone() || this.getDdlKyushichosonKoiki().isDisplayNone()) {
             return RString.EMPTY;
@@ -340,6 +341,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @Override
+    @JsonIgnore
     public RString get旧市町村名称() {
         if (this.getKoikiShichoson().isDisplayNone() || this.getDdlKyushichosonKoiki().isDisplayNone()) {
             return RString.EMPTY;
@@ -350,16 +352,19 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @Override
+    @JsonIgnore
     public RString get導入形態コード() {
         return this.getHdnTxtDonyuKeitaiCode();
     }
 
     @Override
+    @JsonIgnore
     public void set選択対象(RString 選択対象) {
         this.getDdlChiku().setSelectedKey(選択対象);
     }
 
     @Override
+    @JsonIgnore
     public void set選択結果(Map<RString, RString> 選択結果) {
         if (選択結果 == null) {
             return;
@@ -376,6 +381,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @Override
+    @JsonIgnore
     public void set市町村コード(RString 市町村コード) {
         if (!RString.isNullOrEmpty(市町村コード)) {
             this.getDdlShichoson().setSelectedKey(市町村コード);
@@ -383,9 +389,11 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     }
 
     @Override
+    @JsonIgnore
     public void set旧市町村コード(RString 旧市町村コード) {
         if (!RString.isNullOrEmpty(旧市町村コード)) {
             this.getDdlKyushichosonKoiki().setSelectedKey(旧市町村コード);
         }
     }
+
 }

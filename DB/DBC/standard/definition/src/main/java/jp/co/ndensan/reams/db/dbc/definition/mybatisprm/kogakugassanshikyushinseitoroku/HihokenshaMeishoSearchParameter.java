@@ -16,31 +16,32 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HihokenshaMeishoSearchParameter extends UaFt200FindShikibetsuTaishoParam {
+public final class HihokenshaMeishoSearchParameter {
 
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
     private final HihokenshaNo 被保険者番号;
 
     /**
      * コンストラクタです。
      *
-     * @param searchKey 宛名検索条件
-     * @param 被保険者番号 被保険者番号
+     * @param searchKey IShikibetsuTaishoPSMSearchKey
+     * @param 被保険者番号 HihokenshaNo
      */
-    public HihokenshaMeishoSearchParameter(IShikibetsuTaishoPSMSearchKey searchKey,
+    private HihokenshaMeishoSearchParameter(IShikibetsuTaishoPSMSearchKey searchKey,
             HihokenshaNo 被保険者番号) {
-        super(searchKey);
+        this.shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(searchKey);
         this.被保険者番号 = 被保険者番号;
     }
 
     /**
      * コンストラクタです。
      *
-     * @param searchKey 宛名検索条件
-     * @param 被保険者番号 被保険者番号
+     * @param searchKey IShikibetsuTaishoPSMSearchKey
+     * @param 被保険者番号 HihokenshaNo
      * @return HihokenshaMeishoSearchParameter
      */
-    public static HihokenshaMeishoSearchParameter createSelectByKeyParam(IShikibetsuTaishoPSMSearchKey searchKey,
-            HihokenshaNo 被保険者番号) {
+    public static HihokenshaMeishoSearchParameter
+            createSelectByKeyParam(IShikibetsuTaishoPSMSearchKey searchKey, HihokenshaNo 被保険者番号) {
         return new HihokenshaMeishoSearchParameter(searchKey, 被保険者番号);
     }
 

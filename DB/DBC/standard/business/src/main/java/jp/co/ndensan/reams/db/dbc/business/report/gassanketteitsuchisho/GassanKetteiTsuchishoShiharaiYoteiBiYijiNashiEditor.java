@@ -66,8 +66,8 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor implements
     private static final RString 不支給の理由 = new RString("不支給の理由");
     private static final RString HOSHI_14 = new RString("**************");
     private static final RString 持ち物内容文言１ = new RString("持ち物内容文言１");
-    private static final RString 持ち物内容文言2 = new RString("持ち物内容文言2");
-    private static final RString 持ち物内容文言3 = new RString("持ち物内容文言3");
+    private static final RString 持ち物内容文言2 = new RString("持ち物内容文言２");
+    private static final RString 持ち物内容文言3 = new RString("持ち物内容文言３");
     private static final RString ゆうちょ銀行店名表示 = new RString("ゆうちょ銀行店名表示");
     private static final RString 店番 = new RString("店番");
     private static final RString 口座種別 = new RString("口座種別");
@@ -290,6 +290,15 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiEditor implements
         } else if (kyufuShurui.length() > INT_38 && kyufuShurui.length() <= INT_76) {
             source.kyuhuShu = kyufuShurui.substring(0, INT_38);
             source.kyuhuShu2 = kyufuShurui.substring(INT_38, kyufuShurui.length());
+        } else if (kyufuShurui.length() > INT_76 && kyufuShurui.length() <= INT_114) {
+            source.kyuhuShu = kyufuShurui.substring(0, INT_38);
+            source.kyuhuShu2 = kyufuShurui.substring(INT_38, INT_76);
+            source.kyuhuShu3 = kyufuShurui.substring(INT_76, kyufuShurui.length());
+
+        } else {
+            source.kyuhuShu = kyufuShurui.substring(0, INT_38);
+            source.kyuhuShu2 = kyufuShurui.substring(INT_38, INT_76);
+            source.kyuhuShu3 = kyufuShurui.substring(INT_76, INT_114);
         }
     }
 

@@ -299,6 +299,7 @@ public class SokujiFukaKouseiMainValidationHandler {
 
     private boolean is期別端数不整合(RString 期別端数, TextBoxNum textBoxNum) {
         if (textBoxNum.isReadOnly()
+                || textBoxNum.getValue() == null
                 || textBoxNum.getValue().compareTo(Decimal.ZERO) == 0
                 || RString.isNullOrEmpty(期別端数)) {
             return Boolean.FALSE;

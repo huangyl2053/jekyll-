@@ -148,9 +148,13 @@ public class HanyoListKyufuKanriHyoOutputProcess extends BatchProcessBase<HanyoL
 
     @Override
     protected void afterExecute() {
-        AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         csvWriter.close();
-        spoolManager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLogUUID);
+        if (!personalDataList.isEmpty()) {
+            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+            spoolManager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLogUUID);
+        } else {
+            spoolManager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
+        }
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
                 地方公共団体情報.getLasdecCode_().value(),

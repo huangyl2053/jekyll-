@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHan
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.service.core.koza.IKozaManager;
+import jp.co.ndensan.reams.ua.uax.service.core.koza.KozaManager;
 import jp.co.ndensan.reams.ua.uax.service.core.koza.KozaService;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.IShikibetsuTaishoFinder;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
@@ -215,16 +216,14 @@ public class KougakuGassanShikyuKetteiTsuchi {
     }
 
     private void setKoza(KogakuGassanShikyuKetteiTsuchishoEntity entity, long 口座ID, ShikibetsuCode 識別コード) {
-        if (String.valueOf(口座ID) == null) {
-            return;
-        }
         IKoza 口座;
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
         IKozaSearchKey searchKey = new KozaSearchKeyBuilder().setサブ業務コード(SubGyomuCode.DBC介護給付)
                 .set業務コード(GyomuCode.DB介護保険).set識別コード(識別コード).set口座ID(口座ID).build();
         IKozaManager iKozaManager = KozaService.createKozaManager();
         if (chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票分類ID).is口座マスク有無()) {
-            口座 = iKozaManager.getマスク済口座(searchKey).isEmpty() ? null : iKozaManager.getマスク済口座(searchKey).get(0);
+            口座 = KozaManager.createInstance().getマスク済口座(searchKey).isEmpty() ? null
+                    : KozaManager.createInstance().getマスク済口座(searchKey).get(0);
         } else {
             口座 = iKozaManager.get口座(searchKey).isEmpty() ? null : iKozaManager.get口座(searchKey).get(0);
         }

@@ -13,12 +13,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000013.Ido
 import jp.co.ndensan.reams.db.dbc.service.core.idoufunriyoushyafutankanendo.IdoufunRiyoushyafutanKanendoManager;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -54,21 +50,11 @@ public class IdoufunRiyoushyafutanKanendoMain {
      * @return ResponseData
      */
     public ResponseData<IdoufunRiyoushyafutanKanendoDiv> onClick_btnJikkouCheck(IdoufunRiyoushyafutanKanendoDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).実行するボタンを押下の存在チェック(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            ValidationMessageControlPairs validPairs = getValidationHandler(div).実行するボタンを押下の存在チェック(validationMessages);
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
-            }
-
-        }
-
         return ResponseData.of(div).respond();
     }
 
@@ -83,18 +69,18 @@ public class IdoufunRiyoushyafutanKanendoMain {
     }
 
     private ShoriDateKanri get直近の年次負担割合判定処理() {
-        RString 処理名 = ShoriName.年次利用者負担割合判定.get名称();
-        return IdoufunRiyoushyafutanKanendoManager.createInstance().get直近の年次負担割合判定処理(処理名);
+        return IdoufunRiyoushyafutanKanendoManager.createInstance().get直近の年次負担割合判定処理(
+                ShoriName.年次利用者負担割合判定.get名称());
     }
 
     private ShoriDateKanri get異動分利用者負担割合判定_過年度のデータ() {
-        RString 処理名 = ShoriName.異動分利用者負担割合判定_過年度.get名称();
-        return IdoufunRiyoushyafutanKanendoManager.createInstance().get異動分利用者負担割合判定_過年度のデータ(処理名);
+        return IdoufunRiyoushyafutanKanendoManager.createInstance().get異動分利用者負担割合判定_過年度のデータ(
+                ShoriName.異動分利用者負担割合判定_過年度.get名称());
     }
 
     private ShoriDateKanri get異動分利用者負担割合判定のデータ(RString 年次判定年度) {
-        RString 処理名 = ShoriName.異動分利用者負担割合判定.get名称();
-        return IdoufunRiyoushyafutanKanendoManager.createInstance().get異動分利用者負担割合判定のデータ(処理名, 年次判定年度);
+        return IdoufunRiyoushyafutanKanendoManager.createInstance().get異動分利用者負担割合判定のデータ(
+                ShoriName.異動分利用者負担割合判定.get名称(), 年次判定年度);
     }
 
     private IdoufunRiyoushyafutanKanendoMainHandler getHandler(IdoufunRiyoushyafutanKanendoDiv div) {

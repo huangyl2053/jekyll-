@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.tokuchijissekilist.
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.tokuchijissekilist.TargetYearMonth;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1040021.TokubetsuPanelDiv;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -27,7 +26,7 @@ public class TokubetsuChiikiKasanKeigenJisekiKanriIchiran {
 
     private final DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriListParameter bparameter
             = new DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriListParameter();
-    private static final RString REPORTID = new RString("DBD200012_TokubetsuChiikiKasanKeigenJisekiKanriIchiran");
+    private static final ReportId REPORTID = ReportIdDBD.DBD200012.getReportId();
     private static final RString KEY0 = new RString("0");
     private static final RString KEY1 = new RString("1");
     private static final RString KEY2 = new RString("2");
@@ -65,8 +64,6 @@ public class TokubetsuChiikiKasanKeigenJisekiKanriIchiran {
             bparameter.set事業者番号(div.getTxtJigyoshaNo().getValue());
         }
         set地区バッチパラメター(div);
-
-        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務);
         if (div.getShichosonPanel().isVisible() && div.getCcdHokenshaList().getSelectedItem() != null) {
             bparameter.set市町村コード(div.getCcdHokenshaList().getSelectedItem().get市町村コード());
         }
@@ -74,7 +71,7 @@ public class TokubetsuChiikiKasanKeigenJisekiKanriIchiran {
         ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200012.getReportId());
         bparameter.set改頁出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
 
-        bparameter.set帳票ID(new ReportId(REPORTID));
+        bparameter.set帳票ID(REPORTID);
         return bparameter;
     }
 

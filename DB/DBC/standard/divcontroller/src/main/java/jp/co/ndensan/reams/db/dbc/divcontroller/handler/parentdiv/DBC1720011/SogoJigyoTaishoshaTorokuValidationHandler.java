@@ -56,7 +56,7 @@ public class SogoJigyoTaishoshaTorokuValidationHandler {
                 .ifNot(SogoJigyoTaishoshaTorokuSpec.適用期間重複チェック)
                 .thenAdd(NoInputMessages.適用期間重複チェック).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.適用期間重複チェック, div.getSougouZigyouTaishouItiran().getDgKihonInfo())
+                NoInputMessages.適用期間重複チェック, div.getSougouZigyouTaishouShousai().getTxtymfromto())
                 .build().check(messages));
         return pairs;
     }

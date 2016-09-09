@@ -148,11 +148,12 @@ public class GassanShikyugakuKakuninIchiranEditor implements
     private RString getlistUpper_5(FlexibleDate kaishiYMD, FlexibleDate shuryoYMD) {
 
         RStringBuilder sakuseiYMD = new RStringBuilder();
-
-        sakuseiYMD.append(kaishiYMD.wareki().
-                eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).fillType(FillType.BLANK).
-                toDateString());
+        if (kaishiYMD != null) {
+            sakuseiYMD.append(kaishiYMD.wareki().
+                    eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.PERIOD).fillType(FillType.BLANK).
+                    toDateString());
+        }
         sakuseiYMD.append(接続文字);
         if (shuryoYMD != null && !shuryoYMD.isEmpty()) {
             sakuseiYMD.append(shuryoYMD.wareki().

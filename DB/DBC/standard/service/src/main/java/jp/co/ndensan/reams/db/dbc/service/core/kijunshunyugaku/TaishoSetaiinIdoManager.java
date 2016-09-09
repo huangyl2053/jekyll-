@@ -62,7 +62,7 @@ public class TaishoSetaiinIdoManager {
     private static final RString カンマ = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString 処理結果確認リスト = new RString("処理結果確認リスト.csv");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC110065");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBU900002");
     private static final RString DATA_世帯コード = new RString("世帯コード");
     private static final RString DATA_被保険者番号 = new RString("被保険者番号");
     private static final RString DATA_対象者判定 = new RString("対象者判定");
@@ -99,6 +99,7 @@ public class TaishoSetaiinIdoManager {
             = new RString("世帯把握基準日が遡っているため、申請書を出力しません");
     private final DbT3116KijunShunyugakuTekiyoKanriDac dac;
     private final MapperProvider mapperProvider;
+    private boolean flag;
 
     /**
      * コンストラクタです。
@@ -209,15 +210,29 @@ public class TaishoSetaiinIdoManager {
                 temp_対象世帯員クラス.set出力有無(出力しない);
             }
         }
-        if (出力する.equals(対象世帯員クラス.get出力有無())) {
+        if (出力する.equals(temp_対象世帯員クラス.get出力有無())) {
 
             TaishoSetaiinIdoMybatisParameter parameter = TaishoSetaiinIdoMybatisParameter
                     .createMybatisParam(対象世帯員クラス.get世帯コード(), 対象世帯員クラス.get処理年度());
             ITaishoSetaiinIdoMapper mapper = mapperProvider.create(ITaishoSetaiinIdoMapper.class);
             List<TaishoSetaiinIdoEntity> entityList = mapper.select基準収入額適用管理(parameter);
-            for (Shotai shotailist_1 : 対象世帯員クラス.get世帯員情報()) {
-                set対象世帯員(entityList, shotailist_1, 対象世帯員クラス, temp_対象世帯員クラス);
+            if (entityList.isEmpty()) {
+                temp_対象世帯員クラス.set更新時履歴番号(対象世帯員クラス.get更新時履歴番号() + 1);
             }
+            for (Shotai shotailist_1 : 対象世帯員クラス.get世帯員情報()) {
+                for (TaishoSetaiinIdoEntity taishosetaiinidoentity : entityList) {
+                    flag = false;
+                    if (taishosetaiinidoentity.getHihokenshaNo().equals(shotailist_1.get被保険者番号())) {
+                        flag = true;
+                    }
+                    if (!flag) {
+                        break;
+                    }
+                }
+            }
+
+            set対象世帯員(entityList, 対象世帯員クラス, temp_対象世帯員クラス, flag);
+
         }
     }
 
@@ -267,22 +282,22 @@ public class TaishoSetaiinIdoManager {
      * @param temp_対象世帯員クラス TaishoSetaiin
      *
      */
-    private void set対象世帯員(List<TaishoSetaiinIdoEntity> entityList, Shotai shotailist, TaishoSetaiin 対象世帯員クラス, TaishoSetaiin temp_対象世帯員クラス) {
+    private void set対象世帯員(List<TaishoSetaiinIdoEntity> entityList, TaishoSetaiin 対象世帯員クラス, TaishoSetaiin temp_対象世帯員クラス, boolean flag) {
         if (entityList.isEmpty()) {
             temp_対象世帯員クラス.set更新時履歴番号(対象世帯員クラス.get更新時履歴番号() + 1);
         }
+
         for (TaishoSetaiinIdoEntity taishosetaiinidoentity : entityList) {
-            if (対象世帯員クラス.get世帯員把握基準日().isBeforeOrEquals(taishosetaiinidoentity.getShinseishoSakuseiSetaiKijunYMD())) {
-                temp_対象世帯員クラス.setメッセージ(DATA_世帯把握基準日が遡);
-                temp_対象世帯員クラス.set出力有無(出力しない);
-            } else {
-                if (taishosetaiinidoentity.getHihokenshaNo().equals(shotailist.get被保険者番号())) {
+            if (taishosetaiinidoentity.getShinseishoSakuseiSetaiKijunYMD().isBeforeOrEquals(対象世帯員クラス.get世帯員把握基準日())) {
+                if (flag) {
                     temp_対象世帯員クラス.setメッセージ(DATA_既に発行済み);
                     temp_対象世帯員クラス.set出力有無(出力しない);
                 } else {
                     temp_対象世帯員クラス.set更新時履歴番号(taishosetaiinidoentity.getRirekiNo() + 1);
-                    break;
                 }
+            } else {
+                temp_対象世帯員クラス.setメッセージ(DATA_世帯把握基準日が遡);
+                temp_対象世帯員クラス.set出力有無(出力しない);
             }
         }
     }

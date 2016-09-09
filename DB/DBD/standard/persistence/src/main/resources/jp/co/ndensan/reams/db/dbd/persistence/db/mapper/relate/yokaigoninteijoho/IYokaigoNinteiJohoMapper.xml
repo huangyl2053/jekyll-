@@ -149,6 +149,7 @@
         LEFT OUTER JOIN
         rgdb."DbT4912ShujiiJoho" AS "DbT4912ShujiiJoho"
         ON "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT4912ShujiiJoho"."shichosonCode"
+        AND "DbT4101NinteiShinseiJoho"."shujiiIryokikanCode" = "DbT4912ShujiiJoho"."shujiiIryokikanCode"
         AND "DbT4101NinteiShinseiJoho"."shujiiCode" = "DbT4912ShujiiJoho"."shujiiCode"
 
         LEFT OUTER JOIN
@@ -210,7 +211,7 @@
         SELECT MAX("rirekiNo")
         FROM
         rgdb."DbT4001JukyushaDaicho" AS "T4001a"
-        LEFT OUTER JOIN
+        INNER JOIN
         (
         SELECT rgdb."DbT4001JukyushaDaicho"."hihokenshaNo" AS "hihokenshaNo"
         FROM

@@ -22,12 +22,10 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
@@ -63,10 +61,9 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
     private static final RString CSV出力有無_なし = new RString("なし");
     private static final RString CSVファイル名_なし = new RString("なし");
     private static final AtenaMeisho 事業者名称 = new AtenaMeisho("＊＊　対象データは存在しません　＊＊");
-    private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
-    private static final RString 契約事業者番号 = new RString("【契約事業者番号  】:");
-    private static final RString 契約開始日 = new RString("【契約開始日    】：");
-    private static final RString 契約種別 = new RString("【契約種別     】:");
+    private static final RString 契約事業者番号 = new RString("【契約事業者番号   】:");
+    private static final RString 契約開始日 = new RString("【契約開始日     】：");
+    private static final RString 契約種別 = new RString("【契約種別      】:");
     private static final RString 契約期間終了事業者 = new RString("【契約期間終了事業者】：");
     private static final RString FUGOU = new RString("～");
     private static final RString 契約_0 = new RString("0");
@@ -98,6 +95,7 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
     private Association 地方公共団体;
     private List<RString> pageBreakKeys;
     private Map<RString, RString> 出力順Map;
+    private IOutputOrder 出力順クラス;
 
     @BatchWriter
     private BatchReportWriter<JuryoIninJigyoshaIchiranSource> batchReportWriter_一覧表;
@@ -108,12 +106,10 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
         pageBreakKeys = new ArrayList<>();
         出力順Map = new HashMap<>();
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder 出力順クラス = finder.get出力順(SubGyomuCode.DBC介護給付, 帳票ID, parameter.get帳票出力順ID());
-        if (null == 出力順クラス) {
-            throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
-                    .replace(実行不可MESSAGE.toString()).toString());
+        if (parameter.get帳票出力順ID() != null && parameter.get帳票出力順ID() != 0) {
+            出力順クラス = finder.get出力順(SubGyomuCode.DBC介護給付, 帳票ID, parameter.get帳票出力順ID());
+            並び順 = MyBatisOrderByClauseCreator.create(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.class, 出力順クラス);
         }
-        並び順 = MyBatisOrderByClauseCreator.create(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.class, 出力順クラス);
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         一覧表の取得Parameter = new KaigoJuryoininKeiyakuMybatisParameter();
         if (RString.isNullOrEmpty(parameter.get契約事業者番号FROM())) {
@@ -143,23 +139,25 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
 
         int i = 0;
         改頁項目 = new ArrayList();
-        for (ISetSortItem item : 出力順クラス.get設定項目リスト()) {
-            if (item.is改頁項目()) {
-                改頁項目.add(item.get項目名());
-                pageBreakKeys.add(item.get項目ID());
+        if (出力順クラス != null) {
+            for (ISetSortItem item : 出力順クラス.get設定項目リスト()) {
+                if (item.is改頁項目()) {
+                    改頁項目.add(item.get項目名());
+                    pageBreakKeys.add(item.get項目ID());
+                }
+                if (i == INDEX_0) {
+                    出力順Map.put(KEY_並び順の1件目, item.get項目名());
+                } else if (i == INDEX_1) {
+                    出力順Map.put(KEY_並び順の２件目, item.get項目名());
+                } else if (i == INDEX_2) {
+                    出力順Map.put(KEY_並び順の３件目, item.get項目名());
+                } else if (i == INDEX_3) {
+                    出力順Map.put(KEY_並び順の４件目, item.get項目名());
+                } else if (i == INDEX_4) {
+                    出力順Map.put(KEY_並び順の５件目, item.get項目名());
+                }
+                i = i + 1;
             }
-            if (i == INDEX_0) {
-                出力順Map.put(KEY_並び順の1件目, item.get項目名());
-            } else if (i == INDEX_1) {
-                出力順Map.put(KEY_並び順の２件目, item.get項目名());
-            } else if (i == INDEX_2) {
-                出力順Map.put(KEY_並び順の３件目, item.get項目名());
-            } else if (i == INDEX_3) {
-                出力順Map.put(KEY_並び順の４件目, item.get項目名());
-            } else if (i == INDEX_4) {
-                出力順Map.put(KEY_並び順の５件目, item.get項目名());
-            }
-            i = i + 1;
         }
     }
 
@@ -216,7 +214,7 @@ public class JuryoIninJigyoshaIchiranProcess extends BatchKeyBreakBase<KaigoJury
                 地方公共団体.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBC.DBC200012.getReportName(),
-                new RString(reportSourceWriter.getPageGroupCount()),
+                new RString(String.valueOf(reportSourceWriter.pageCount().value())),
                 CSV出力有無_なし,
                 CSVファイル名_なし,
                 出力条件);

@@ -87,7 +87,7 @@ public class SaishinsaMoshitateNashiProcess extends BatchProcessBase<SaishinsaMo
         List<KoseiShichosonMaster> 構成市町村マスタ = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
         市町村名MasterMap = new HashMap<>();
         for (KoseiShichosonMaster koseiShichosonMaster : 構成市町村マスタ) {
-            市町村名MasterMap.put(構成市町村マスタ.get(0).get市町村コード().value(), koseiShichosonMaster);
+            市町村名MasterMap.put(koseiShichosonMaster.get市町村コード().value(), koseiShichosonMaster);
         }
         personalDataList = new ArrayList<>();
     }
@@ -125,7 +125,7 @@ public class SaishinsaMoshitateNashiProcess extends BatchProcessBase<SaishinsaMo
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
-        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         manager.spool(eucFilePath, log);
         outputJokenhyoFactory();
     }

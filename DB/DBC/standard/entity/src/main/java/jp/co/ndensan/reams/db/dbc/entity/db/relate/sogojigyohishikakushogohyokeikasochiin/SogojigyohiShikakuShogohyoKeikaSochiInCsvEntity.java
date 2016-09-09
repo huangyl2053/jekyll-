@@ -25,7 +25,7 @@ public class SogojigyohiShikakuShogohyoKeikaSochiInCsvEntity {
     private RString 審査年月;
     @CsvField(order = 20, name = "作成日時")
     private RString 作成日時;
-    @CsvField(order = 30, name = "連番")
+    @CsvField(order = 30, name = "No.")
     private RString 連番;
     @CsvField(order = 40, name = "保険者番号")
     private RString 保険者番号;
@@ -64,34 +64,4 @@ public class SogojigyohiShikakuShogohyoKeikaSochiInCsvEntity {
     @CsvField(order = 210, name = "証記載保険者番号")
     private RString 証記載保険者番号;
 
-    /**
-     *
-     * 証記載保険者番号列を出力しない
-     *
-     * @return SogojigyohiShikakuShogohyoKeikaSochiInCsvEntity
-     */
-    public SogojigyohiShikakuShogohyoKeikaSochiInCsvEntity to単一() {
-        SogojigyohiShikakuShogohyoKeikaSochiInCsvEntity 単一 = new SogojigyohiShikakuShogohyoKeikaSochiInCsvEntity();
-        単一.setサービス単位数(サービス単位数);
-        単一.setサービス提供年月(サービス提供年月);
-        単一.setサービス日数_回数(サービス日数_回数);
-        単一.setサービス種類コード(サービス種類コード);
-        単一.setサービス種類名(サービス種類名);
-        単一.set事業者名(事業者名);
-        単一.set事業者番号(事業者番号);
-        単一.set作成日時(作成日時);
-        単一.set保険者名(保険者名);
-        単一.set保険者番号(保険者番号);
-        単一.set利用者負担額(利用者負担額);
-        単一.set審査年月(審査年月);
-        単一.set被保険者氏名(被保険者氏名);
-        単一.set被保険者番号(被保険者番号);
-        単一.set要介護区分コード(要介護区分コード);
-        単一.set要介護度(要介護度);
-        単一.set認定有効期間_終了(認定有効期間_終了);
-        単一.set認定有効期間_開始(認定有効期間_開始);
-        単一.set警告種別(警告種別);
-        単一.set連番(連番);
-        return 単一;
-    }
 }

@@ -63,6 +63,8 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
     private LasdecCode 市町村コード;
     private static final RString NUM_0 = new RString("0");
     private static final RString NUM_1 = new RString("1");
+    private static final RString NUM_2 = new RString("2");
+    private static final RString NUM_3 = new RString("3");
     private static final RString 項目名 = new RString("支払予定日印字有無");
 
     /**
@@ -305,32 +307,53 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         RDate 決定日 = div.getTxtKetteiymd().getValue();
         RString 文書番号 = div.getCcdBunshoBangoInput().get文書番号();
         YMDHMS 処理日時 = YMDHMS.now();
-        RString 日付選択区分 = div.getDdlInsho().getSelectedKey();
-        parameter.set日付選択区分(日付選択区分);
-        parameter.set受取年月(受取年月);
+        if (div.getRadUketoriYM().getSelectedKey().equals(KEY_0)) {
+            parameter.set日付選択区分(NUM_1);
+        }
+        if (div.getRadShinseiYMD().getSelectedKey().equals(KEY_0)) {
+            parameter.set日付選択区分(NUM_2);
+        }
+        if (div.getRadKetteiYMD().getSelectedKey().equals(KEY_0)) {
+            parameter.set日付選択区分(NUM_3);
+        }
+        if (受取年月 != null) {
+            parameter.set受取年月(new FlexibleDate(受取年月.toString()).getYearMonth());
+        }
         if (申請開始年月日 == null) {
-            申請開始年月日 = RDate.MIN;
+            parameter.set申請開始年月日(FlexibleDate.MIN);
+        } else {
+            parameter.set申請開始年月日(new FlexibleDate(申請開始年月日.toString()));
         }
-        parameter.set申請開始年月日(申請開始年月日);
-        parameter.set申請終了年月日(申請終了年月日);
+        if (申請終了年月日 != null) {
+            parameter.set申請終了年月日(new FlexibleDate(申請終了年月日.toString()));
+        }
         if (決定開始年月日 == null) {
-            決定開始年月日 = RDate.MIN;
+            parameter.set決定開始年月日(FlexibleDate.MIN);
+        } else {
+            parameter.set決定開始年月日(new FlexibleDate(決定開始年月日.toString()));
         }
-        parameter.set決定開始年月日(決定開始年月日);
-        parameter.set決定終了年月日(決定終了年月日);
+        if (決定終了年月日 != null) {
+            parameter.set決定終了年月日(new FlexibleDate(決定終了年月日.toString()));
+        }
         parameter.set印書区分(印書);
         if (出力順 != null) {
             parameter.set改頁出力順ID(new RString(出力順.toString()));
         }
-        parameter.set発行日(発行日);
+        if (発行日 != null) {
+            parameter.set発行日(new FlexibleDate(発行日.toString()));
+        }
         parameter.set支払予定日印字有無(get支払予定日印字有無());
-        parameter.set支払予定日(支払予定日);
+        if (支払予定日 != null) {
+            parameter.set支払予定日(new FlexibleDate(支払予定日.toString()));
+        }
         if (div.getRadKetteibiIkkatsuKoshinKBN().getSelectedKey().equals(KEY_0)) {
             parameter.set決定日一括更新区分(NUM_0);
         } else if (div.getRadKetteibiIkkatsuKoshinKBN().getSelectedKey().equals(KEY_1)) {
             parameter.set決定日一括更新区分(NUM_1);
         }
-        parameter.set決定日(決定日);
+        if (決定日 != null) {
+            parameter.set決定日(new FlexibleDate(決定日.toString()));
+        }
         parameter.set文書番号(文書番号);
         parameter.set処理日時(処理日時);
         return parameter;

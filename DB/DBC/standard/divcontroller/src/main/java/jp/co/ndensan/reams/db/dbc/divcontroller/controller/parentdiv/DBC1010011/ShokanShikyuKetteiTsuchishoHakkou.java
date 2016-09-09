@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1010011;
 
+import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanshikyuketteitsuchishohakkou.ShokanShikyuKetteiTsuchishoHakkouBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
@@ -20,7 +22,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekkaBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.sashitome.ShiharaiHohoHenkoSashitome;
-import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.service.core.basic.ShokanHanteiKekkaManager;
 import jp.co.ndensan.reams.db.dbd.service.core.basic.ShokanShinseiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -33,7 +34,6 @@ import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -47,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -56,7 +57,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 償還払い支給（不支給）決定通知書作成（単）のDivControllerです。
  *
- * @reamsid_L DBD-5310-010 liuyl
+ * @reamsid_L DBC-5310-010 liuyl
  */
 public class ShokanShikyuKetteiTsuchishoHakkou {
 
@@ -69,23 +70,22 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
     public ResponseData<ShokanShikyuKetteiTsuchishoHakkouDiv> onLoad(ShokanShikyuKetteiTsuchishoHakkouDiv div) {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         if (資格対象者 == null || 資格対象者.get被保険者番号() == null || 資格対象者.get被保険者番号().isEmpty()) {
-            throw new ApplicationException(DbcInformationMessages.被保険者でないデータ.getMessage().evaluate());
+            InformationMessage message = new InformationMessage(DbcInformationMessages.被保険者でないデータ.getMessage().getCode(),
+                    DbcInformationMessages.被保険者でないデータ.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ShikibetsuCode shikibetsuCode = 資格対象者.get識別コード();
         ViewStateHolder.put(ViewStateKeys.識別コード, shikibetsuCode);
         ShokanShikyuKetteiTsuchishoHakkouFinder finder = new ShokanShikyuKetteiTsuchishoHakkouFinder();
+        List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List = finder.get償還払支給判定結果(被保険者番号);
+        ViewStateHolder.put(ViewStateKeys.償還払支給判定結果, (Serializable) 償還払支給判定結果List);
         List<JukyushaDaicho> 受給者台帳List = finder.get受給者台帳(被保険者番号);
         List<SogoJigyoTaishosha> 総合事業対象者List = finder.get総合事業対象者(被保険者番号);
-        div.getShokanShikyuKetteiTsuchishoHakkouPrint().getCcdBunshoNO().initialize(new ReportId("DBC100002_ShokanKetteiTsuchiSho"));
-        if (受給者台帳List.isEmpty() || 総合事業対象者List.isEmpty()) {
-            throw new ApplicationException(DbdErrorMessages.受給共通_受給者_事業対象者登録なし.getMessage());
-        }
-        if (finder.select償還払支給判定結果(被保険者番号).isEmpty()) {
-            throw new ApplicationException(DbcErrorMessages.償還決定データなし.getMessage());
-        }
-        getHandler(div).onLoad(shikibetsuCode, 被保険者番号);
+        List<ShokanHanteiKekka> 償還払支給判定結果 = finder.select償還払支給判定結果(被保険者番号);
+        div.getShokanShikyuKetteiTsuchishoHakkouPrint().getCcdBunshoNO().initialize(ReportIdDBC.DBC100002_2.getReportId());
+        getHandler(div).onLoad(shikibetsuCode, 被保険者番号, 償還払支給判定結果List, 受給者台帳List, 総合事業対象者List, 償還払支給判定結果);
         return ResponseData.of(div).setState(DBC1010011StateName.支給決定通知書発行);
     }
 
@@ -97,7 +97,8 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
      */
     public ResponseData<ShokanShikyuKetteiTsuchishoHakkouDiv> onChange_ServiceTeikyo(ShokanShikyuKetteiTsuchishoHakkouDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        getHandler(div).onChange_ServiceTeikyo(被保険者番号);
+        List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List = ViewStateHolder.get(ViewStateKeys.償還払支給判定結果, List.class);
+        getHandler(div).onChange_ServiceTeikyo(被保険者番号, 償還払支給判定結果List);
         return ResponseData.of(div).respond();
     }
 
@@ -109,7 +110,8 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
      */
     public ResponseData<ShokanShikyuKetteiTsuchishoHakkouDiv> onChange_SeiriNO(ShokanShikyuKetteiTsuchishoHakkouDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        getHandler(div).onChange_SeiriNO(被保険者番号);
+        List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List = ViewStateHolder.get(ViewStateKeys.償還払支給判定結果, List.class);
+        getHandler(div).onChange_SeiriNO(被保険者番号, 償還払支給判定結果List);
         return ResponseData.of(div).respond();
     }
 
@@ -124,7 +126,8 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ShokanHanteiKekkaManager shokanHanteiKekkaManager = new ShokanHanteiKekkaManager();
         ChohyoSeigyoHanyoManager manager = ChohyoSeigyoHanyoManager.createInstance();
-        ShokanHanteiKekka shokanHanteiKekka = shokanHanteiKekkaManager.get償還払支給判定結果(被保険者番号, new FlexibleYearMonth(div.
+        List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List = ViewStateHolder.get(ViewStateKeys.償還払支給判定結果, List.class);
+        ShokanHanteiKekka shokanHanteiKekka = getHandler(div).get償還払支給判定結果(償還払支給判定結果List, new FlexibleYearMonth(div.
                 getDdlServiceTeikyoYM().getSelectedKey()), div.getDdlSeiriNO().getSelectedValue());
         ShokanHanteiKekkaBuilder buidler = shokanHanteiKekka.createBuilderForEdit();
         ChohyoSeigyoHanyo 帳票制御汎用 = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.
@@ -170,10 +173,10 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
         ShiharaiHohoHenkoSashitome 支払方法変更差止 = shoukanFinder.getSashitome(被保険者番号, new FlexibleYearMonth(div.
                 getDdlServiceTeikyoYM().getSelectedKey()), div.getDdlSeiriNO().getSelectedValue());
         RString 差額支給対象者区分 = RString.EMPTY;
-        if (支払方法変更差止 != null) {
-            if (支払方法変更差止.get差止控除番号().isNullOrEmpty()) {
+        if (支払方法変更差止 != null && 支払方法変更差止.get差止控除番号() != null) {
+            if (!支払方法変更差止.get差止控除番号().isEmpty()) {
                 throw new ApplicationException(DbcErrorMessages.支払方法差止エラー.getMessage());
-            } else if (shokanHanteiKekka.get差額金額合計().equals(new Decimal(0))) {
+            } else if (shokanHanteiKekka.get差額金額合計() == null || shokanHanteiKekka.get差額金額合計().equals(new Decimal(0))) {
                 throw new ApplicationException(DbcErrorMessages.差額支給エラー.getMessage());
             } else {
                 差額支給対象者区分 = new RString("1");

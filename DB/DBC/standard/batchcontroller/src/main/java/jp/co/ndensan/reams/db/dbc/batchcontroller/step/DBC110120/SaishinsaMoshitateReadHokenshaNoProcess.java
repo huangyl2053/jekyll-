@@ -45,11 +45,9 @@ public class SaishinsaMoshitateReadHokenshaNoProcess extends BatchProcessBase<Sa
     protected void process(SaishinsaMoshitateAndHihokenshaKanrenEntity entity) {
         DbWT1741SaishinsaMoshitateEntity 再審査申立 = entity.get再審査申立();
         DbWT1001HihokenshaEntity 被保険者 = entity.get被保険者();
-        if (null != 被保険者) {
-            再審査申立.setHokenshaNo(被保険者.getExHokenshaNo());
-            再審査申立.setHokenshaName(被保険者.getExHokenshaName());
-            再審査申立.setState(EntityDataState.Modified);
-            再審査申立一時tableWriter.update(再審査申立);
-        }
+        再審査申立.setHokenshaNo(被保険者.getExHokenshaNo());
+        再審査申立.setHokenshaName(被保険者.getExHokenshaName());
+        再審査申立.setState(EntityDataState.Modified);
+        再審査申立一時tableWriter.update(再審査申立);
     }
 }

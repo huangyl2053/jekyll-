@@ -185,6 +185,11 @@ public class ShinseiSonotaJohoInputHandler {
             case JukyuShikakushashoMode:
             case ShokaiMode:
             case TokushuSakujyoMode:
+            case RirekiSakujoShuseiMode:
+            case RirekiTsuikaMode:
+            case TorikeshiRirekiTsuikaMode:
+            case RirekiTsuikaKyakkaMode:
+            case ShinseiTorikeshiTsuikaMode:
                 div.getDdlIdoJiyu().setDataSource(get移動事由ddl());
                 break;
             case NinteiMode:

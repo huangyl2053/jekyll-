@@ -339,6 +339,30 @@ public class KokuhorenInterfaceKanri extends
     }
 
     /**
+     * 保持する国保連インターフェース管理を更新対象とします。<br/>
+     * {@link DbT3104KokuhorenInterfaceKanriEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば更新状態にします。
+     *
+     * @return 更新対象処理実施後の{@link KokuhorenInterfaceKanri}
+     */
+    public KokuhorenInterfaceKanri modified() {
+        DbT3104KokuhorenInterfaceKanriEntity deletedEntity = this.toEntity();
+        deletedEntity.setState(EntityDataState.Modified);
+        return new KokuhorenInterfaceKanri(deletedEntity, id);
+    }
+
+    /**
+     * 保持する国保連インターフェース管理を追加対象とします。<br/>
+     * {@link DbT3104KokuhorenInterfaceKanriEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば追加状態にします。
+     *
+     * @return 追加対象処理実施後の{@link KokuhorenInterfaceKanri}
+     */
+    public KokuhorenInterfaceKanri added() {
+        DbT3104KokuhorenInterfaceKanriEntity deletedEntity = this.toEntity();
+        deletedEntity.setState(EntityDataState.Added);
+        return new KokuhorenInterfaceKanri(deletedEntity, id);
+    }
+
+    /**
      * {@link KokuhorenInterfaceKanri}のシリアライズ形式を提供します。
      *
      * @return {@link KokuhorenInterfaceKanri}のシリアライズ形式

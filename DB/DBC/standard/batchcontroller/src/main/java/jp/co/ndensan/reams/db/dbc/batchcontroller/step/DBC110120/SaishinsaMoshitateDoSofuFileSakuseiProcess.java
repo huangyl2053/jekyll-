@@ -105,10 +105,10 @@ public class SaishinsaMoshitateDoSofuFileSakuseiProcess extends BatchProcessBase
         レコード番号 = INT_0;
         RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         if (国保連送付外字_変換区分_1.equals(国保連送付外字_変換区分)) {
-            文字コード = Encode.SJIS;
-        } else {
             // TODO QA90831 文字コードがありません。
             文字コード = Encode.UTF_8withBOM;
+        } else {
+            文字コード = Encode.SJIS;
         }
     }
 
@@ -149,7 +149,6 @@ public class SaishinsaMoshitateDoSofuFileSakuseiProcess extends BatchProcessBase
     protected void afterExecute() {
         SaishinsaMoshitateSofuFairuEndEntity endEntity = getEndEntity();
         eucCsvWriter.writeLine(endEntity);
-        // TODO
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力ファイル名));
         sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));

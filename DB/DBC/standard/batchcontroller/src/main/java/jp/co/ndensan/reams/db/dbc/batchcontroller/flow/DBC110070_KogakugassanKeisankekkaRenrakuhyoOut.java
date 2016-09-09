@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110070.GassanShikyugak
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110070.SofuFileSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110070.SofuJogaiKubunSeteiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110070.SofuTaishoDataShutokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110070.SofuTaishoDataShutokuUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110070.UpdateKogakuGassanShikyuGakuKeisanKekkaMiSofuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110070.UpdateKogakuGassanShikyuGakuKeisanKekkaSofuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutListSakuseiProcess;
@@ -42,6 +43,7 @@ public class DBC110070_KogakugassanKeisankekkaRenrakuhyoOut extends BatchFlowBas
     private static final String 処理結果リスト作成 = "hokenshaKyufujissekiOutListSakuseiProcess";
 
     private static final String 送付対象データ取得 = "SofuTaishoDataShutoku";
+    private static final String 明細データ存在確認 = "SofuTaishoDataShutokuUpdate";
     private static final String 宛名情報取得 = "getAtenaJoho";
     private static final String 送付除外区分設定 = "sofuJogaiKubunSetei";
     private static final String 送付ファイル作成 = "sofuFileKakutei";
@@ -56,6 +58,7 @@ public class DBC110070_KogakugassanKeisankekkaRenrakuhyoOut extends BatchFlowBas
     protected void defineFlow() {
         executeStep(送付対象データ取得);
         if (データがある.equals((getResult(RString.class, new RString(送付対象データ取得), SofuTaishoDataShutokuProcess.PARAMETER_OUT_FLOWFLAG)))) {
+            executeStep(明細データ存在確認);
             executeStep(宛名情報取得);
             executeStep(送付除外区分設定);
             executeStep(送付ファイル作成);
@@ -81,6 +84,16 @@ public class DBC110070_KogakugassanKeisankekkaRenrakuhyoOut extends BatchFlowBas
     protected IBatchFlowCommand callSofuTaishoDataShutokuProcess() {
         return loopBatch(SofuTaishoDataShutokuProcess.class).
                 arguments(getParameter().toProcessParameter()).define();
+    }
+
+    /**
+     * 明細データ存在確認を行う。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(明細データ存在確認)
+    protected IBatchFlowCommand callSofuTaishoDataShutokuUpdate() {
+        return loopBatch(SofuTaishoDataShutokuUpdateProcess.class).define();
     }
 
     /**

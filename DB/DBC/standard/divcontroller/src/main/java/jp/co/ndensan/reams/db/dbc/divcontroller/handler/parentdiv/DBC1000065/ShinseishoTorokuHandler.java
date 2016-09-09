@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -81,12 +82,12 @@ public class ShinseishoTorokuHandler {
 
         FlexibleDate 世帯員把握基準日基準日 = new FlexibleDate(YMDHMS.now().getYear()
                 .toDateString().concat(new RString(YMDHMS.now().getMonthValue()).padZeroToLeft(2).concat(日)));
-        div.getTxtSetaiinHaakuKijunYMD().setValue(世帯員把握基準日基準日);
+        div.getTxtSetaiinHaakuKijunYMD().setValue(new FlexibleDate(世帯員把握基準日基準日.wareki().toDateString()));
 
         RString 提出期限 = 本年.concat(new RString(YMDHMS.now().getMonthValue() + 1).concat(月中));
         div.getTxtTeishutsuKigen().setValue(提出期限);
         FlexibleDate 作成日 = new FlexibleDate(YMDHMS.now().getDate().toDateString());
-        div.getTxtSakuseiYMD().setValue(作成日);
+        div.getTxtSakuseiYMD().setValue(new FlexibleDate(作成日.wareki().toDateString()));
         set文書番号();
 
         div.getChkTsuchisho().setSelectedItems(div.getChkTsuchisho().getDataSource());
@@ -110,9 +111,11 @@ public class ShinseishoTorokuHandler {
      */
     public void set処理年度の初期値() {
         if (INDEX_101 < Integer.valueOf((RDate.getNowDate().toString().substring(INDEX_5, INDEX_8))) && Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_5, INDEX_8)) < INDEX_731) {
-            div.getTxtShoriNendo().setValue(FlexibleDate.getNowDate().minusYear(1));
+            div.getTxtShoriNendo().setValue(new FlexibleDate(FlexibleDate.getNowDate()
+                    .minusYear(1).wareki().firstYear(FirstYear.ICHI_NEN).toDateString()));
         } else if (INDEX_801 < Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_5, INDEX_8)) && Integer.valueOf(RDate.getNowDate().toString().substring(INDEX_4, INDEX_8)) < INDEX_1231) {
-            div.getTxtShoriNendo().setValue(FlexibleDate.getNowDate());
+            div.getTxtShoriNendo().setValue(new FlexibleDate(FlexibleDate.getNowDate()
+                    .wareki().firstYear(FirstYear.ICHI_NEN).toDateString()));
         }
     }
 
@@ -165,9 +168,9 @@ public class ShinseishoTorokuHandler {
         DBC190030_KijunsyunygetsujiParameter parameter = new DBC190030_KijunsyunygetsujiParameter();
         FlexibleDate 世帯員把握基準日2 = new FlexibleDate(div.getTxtSetaiinHaakuKijunYMD()
                 .getValue().getYear().minusYear(1).toString().concat(十二月三十一.toString()));
-        parameter.set抽出条件(div.getRadChushutsuTaisho().getSelectedKey());
+        parameter.set抽出条件(div.getRadChushutsuJoken().getSelectedKey());
         if (div.getRadChushutsuTaisho().getSelectedKey() != null) {
-            parameter.set抽出対象(div.getRadChushutsuJoken().getSelectedKey());
+            parameter.set抽出対象(div.getRadChushutsuTaisho().getSelectedKey());
         }
         parameter.set処理年度(new FlexibleYear(div.getTxtShoriNendo().getValue().toString().substring(0, INDEX_4)));
         if (div.getTxtHihokenshaNo().getValue() != null) {

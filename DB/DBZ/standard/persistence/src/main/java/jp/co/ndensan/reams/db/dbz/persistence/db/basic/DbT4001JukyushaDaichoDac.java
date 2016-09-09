@@ -374,6 +374,32 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
     }
 
     /**
+     * 指定要介護状態区分の取得
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 開始対象計算期間 FlexibleDate
+     * @param 終了対象計算期間 FlexibleDate
+     * @return DbT4001JukyushaDaichoEntity
+     */
+    @Transaction
+    public DbT4001JukyushaDaichoEntity get要介護状態区分(
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 開始対象計算期間,
+            FlexibleDate 終了対象計算期間) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                leq(ninteiYukoKikanKaishiYMD, 開始対象計算期間),
+                                leq(終了対象計算期間, ninteiYukoKikanShuryoYMD),
+                                eq(yukoMukoKubun, YUKOMUKOKUBUN_有効),
+                                eq(logicalDeletedFlag, false)))
+                .order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC), by(ninteiYukoKikanShuryoYMD, Order.DESC))
+                .limit(1).toObject(DbT4001JukyushaDaichoEntity.class);
+    }
+
+    /**
      * 被保険者番号、市町村コードで受給者台帳を取得します。
      *
      * @param 被保険者番号 被保険者番号

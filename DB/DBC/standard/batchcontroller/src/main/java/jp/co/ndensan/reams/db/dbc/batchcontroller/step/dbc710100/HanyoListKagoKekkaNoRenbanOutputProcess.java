@@ -120,7 +120,7 @@ public class HanyoListKagoKekkaNoRenbanOutputProcess extends BatchProcessBase<Ha
                     setEnclosure(EUC_WRITER_ENCLOSURE).
                     setEncode(Encode.UTF_8withBOM).
                     setNewLine(NewLine.CRLF).
-                    hasHeader(true).
+                    hasHeader(parameter.is項目名付加()).
                     build();
         } else {
             noRebancsvWriter = BatchWriters.csvWriter(HanyoListKagoKekkaNoRebanCsvEntity.class).

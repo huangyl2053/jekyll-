@@ -35,10 +35,6 @@ public class KogakugassanMeisaiKakuninProcess extends BatchProcessBase<DbWT37K1K
     BatchEntityCreatedTempTableWriter 処理結果リスト一時tableWriter;
 
     @Override
-    protected void initialize() {
-    }
-
-    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(READ_DATA_ID);
     }
@@ -62,7 +58,7 @@ public class KogakugassanMeisaiKakuninProcess extends BatchProcessBase<DbWT37K1K
     private DbWT1002KokuhorenSakuseiErrorTempEntity get処理結果リスト一時Entity(DbWT37K1KogakuGassanJikoFutanGakuTempEntity entity) {
         DbWT1002KokuhorenSakuseiErrorTempEntity 一時Enttiy = new DbWT1002KokuhorenSakuseiErrorTempEntity();
         一時Enttiy.setErrorKubun(KokuhorenJoho_SakuseiErrorKubun.明細情報取得エラー.getコード());
-        一時Enttiy.setShoHokanehshaNo(new ShoKisaiHokenshaNo(entity.getHihokenshaNo().getColumnValue()));
+        一時Enttiy.setShoHokanehshaNo(new ShoKisaiHokenshaNo(entity.getHokenshaNo().getColumnValue()));
         一時Enttiy.setHihokenshaNo(entity.getHihokenshaNo());
         一時Enttiy.setKey1(entity.getShikyuShinseishoSeiriNo());
         一時Enttiy.setKey2(RString.EMPTY);

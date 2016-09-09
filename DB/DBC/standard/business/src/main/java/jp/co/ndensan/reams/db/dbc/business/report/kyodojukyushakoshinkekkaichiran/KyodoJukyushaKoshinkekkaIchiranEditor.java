@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -32,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -163,7 +166,11 @@ public class KyodoJukyushaKoshinkekkaIchiranEditor implements IKyodoJukyushaKosh
         } else {
             source = set共同処理用受給者異動基本送付(source);
         }
-
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        if (!RString.isNullOrEmpty(帳票用データ.get被保険者一時TBL().get被保険者番号())) {
+            source.shinseishoKanriNo = new ExpandedInformation(new Code("0003"),
+                    new RString("被保険者番号"), 帳票用データ.get被保険者一時TBL().get被保険者番号());
+        }
         return source;
     }
 

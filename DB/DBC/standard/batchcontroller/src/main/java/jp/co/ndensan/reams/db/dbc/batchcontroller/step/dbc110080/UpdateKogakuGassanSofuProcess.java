@@ -29,10 +29,6 @@ public class UpdateKogakuGassanSofuProcess extends BatchProcessBase<DbT3070Kogak
     BatchPermanentTableWriter 高額合算自己負担額3070tableWriter;
 
     @Override
-    protected void initialize() {
-    }
-
-    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(READ_DATA_ID);
     }
@@ -49,7 +45,4 @@ public class UpdateKogakuGassanSofuProcess extends BatchProcessBase<DbT3070Kogak
         高額合算自己負担額3070tableWriter.update(entity);
     }
 
-    @Override
-    protected void afterExecute() {
-    }
 }

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.iryohikojokakuni
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.AtesakiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.ShikibetsuTaishoParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.SogoJigyouTaisyouSyaJyohoJoho;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,6 +25,15 @@ public interface IIryoHiKojoKakuninSinseiMapper {
      * @return Integer
      */
     Integer 受給者台帳抽出(RString 被保険者番号);
+
+    /**
+     * 受給者判定
+     *
+     * @param 被保険者番号 RString
+     * @param 対象年
+     * @return DbT4001JukyushaDaicho
+     */
+    SogoJigyouTaisyouSyaJyohoJoho select受給者台帳情報(RString 被保険者番号, RString 対象年);
 
     /**
      * おむつ使用証明書、主治医意見書確認書の編集に用いる宛名情報を取得する。

@@ -134,7 +134,7 @@ public class JuryoininKeiyakuShoninKakuninshoProcessCore {
         利用者向けEntity.set出力順4(出力順4);
         利用者向けEntity.set出力順5(出力順5);
         利用者向けEntity.set市町村コード(proParameter.get市町村コード().value());
-        利用者向けEntity.set市町村名称(proParameter.get市町村コード().code市町村RString());
+        利用者向けEntity.set市町村名称(proParameter.get市町村名称());
         利用者向けEntity.set作成日時(proParameter.get処理日時());
         return 利用者向けEntity;
     }
@@ -176,7 +176,7 @@ public class JuryoininKeiyakuShoninKakuninshoProcessCore {
         事業者用Entity.set出力順4(出力順4);
         事業者用Entity.set出力順5(出力順5);
         事業者用Entity.set市町村コード(proParameter.get市町村コード().value());
-        事業者用Entity.set市町村名称(proParameter.get市町村コード().code市町村RString());
+        事業者用Entity.set市町村名称(proParameter.get市町村名称());
         事業者用Entity.set作成日時(proParameter.get処理日時());
         return 事業者用Entity;
     }
@@ -203,7 +203,7 @@ public class JuryoininKeiyakuShoninKakuninshoProcessCore {
         一覧表Parameter.set出力順4(出力順4);
         一覧表Parameter.set出力順5(出力順5);
         一覧表Parameter.set市町村コード(proParameter.get市町村コード().value());
-        一覧表Parameter.set市町村名称(proParameter.get市町村コード().code市町村RString());
+        一覧表Parameter.set市町村名称(proParameter.get市町村名称());
         一覧表Parameter.set作成日時(proParameter.get処理日時());
         return 一覧表Parameter;
     }

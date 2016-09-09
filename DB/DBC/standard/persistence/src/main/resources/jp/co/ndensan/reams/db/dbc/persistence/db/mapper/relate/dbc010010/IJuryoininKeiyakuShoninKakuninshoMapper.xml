@@ -20,7 +20,7 @@
            宛名PSM."gyoseikuCode",
            宛名PSM."juminShubetsuCode",
            宛名PSM."jusho",
-           宛先取得PSM.*
+           <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
        FROM
             (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3078ShokanJuryoininKeiyakushaMapper.noDeleted_DbT3078ShokanJuryoininKeiyakusha" />) AS 償還受領委任契約者
        LEFT JOIN
@@ -35,8 +35,8 @@
            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名PSM  
        ON  宛名PSM."shikibetsuCode" = 被保険者台帳管理NEWEST."shikibetsuCode"
        LEFT JOIN 
-           rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS 宛先取得PSM
-       ON  宛先取得PSM."shikibetsuCode" = 被保険者台帳管理NEWEST."shikibetsuCode"
+           rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
+       ON  "Atesaki"."shikibetsuCode" = 被保険者台帳管理NEWEST."shikibetsuCode"
        WHERE 
            #{契約申請日開始} <![CDATA[<=]]> 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shinseiYMD"
        AND 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shinseiYMD" <![CDATA[<=]]> #{契約申請日終了}
@@ -44,17 +44,20 @@
        AND 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" <![CDATA[<=]]> #{契約決定日終了}
        <if test="発行済 = '2'">
             AND (
-                償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSakuseiYMD" = ''
+                (償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSakuseiYMD" = ''
+                 or 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSakuseiYMD" is null)
                 OR (
-                償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSakuseiYMD"  <![CDATA[<>]]> ''
+                (償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSakuseiYMD"  <![CDATA[<>]]> ''
+                or 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSakuseiYMD" is not null)
                 AND 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSaiHakkoKubun" = '1'
                 )
              )
        </if>
-       AND  償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" <![CDATA[<>]]> ''
+       AND  (償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" <![CDATA[<>]]> ''
+            AND 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" is not null)
            <if test="改頁出力順 != null">
             ORDER BY
-             ${出力順項目}
+             ${改頁出力順}
            </if>
    </select>
    <resultMap id="受領委任データResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc010010.JuryoininKeiyakuShoninKakuninshoEntity" autoMapping="true">

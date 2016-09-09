@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7160001;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710160.DBC710160_HanyoListKogakuGassanKeisanKekkaRenrakuHyoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ChushutsuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_DataKubun;
@@ -48,8 +49,7 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
     private static final RString 連番付加キー = new RString("連番付加");
     private static final RString 日付編集キー = new RString("日付編集");
     private static final int 調定年度を含めて8年分 = 8;
-    private static final int BEGININDEX = 0;
-    private static final int ENDINDEX = 4;
+    private static int VALUE = 1988;
 
     /**
      * コンストラクタです。
@@ -175,7 +175,8 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
         }
 
         RString 年度 = div.getChushutsuJokenPanel().getDdlTaishoNendo().getSelectedValue();
-        parameter.set対象年度(new FlexibleYear(年度.substring(BEGININDEX, ENDINDEX)));
+        RString 対象年度 = new RString(Integer.parseInt(Pattern.compile(new RString("[^0-9]").toString()).matcher(年度).replaceAll("").trim()) + VALUE);
+        parameter.set対象年度(new FlexibleYear(対象年度));
         TextBoxDateRange 受取年月 = div.getChushutsuJokenPanel().getTxtUketoriNengetsu();
         if (受取年月.isDisabled()) {
             parameter.set受取年月From(FlexibleYearMonth.EMPTY);

@@ -34,8 +34,6 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibun;
-import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
@@ -45,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -100,8 +99,6 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
     private NinshoshaSource 事業者用認証者情報;
     private RString 利用者向け帳票タイトル;
     private RString 事業者帳票タイトル;
-    private List<TsuchishoTeikeibun> 利用者向けList;
-    private List<TsuchishoTeikeibun> 事業者List;
     @BatchWriter
     private BatchPermanentTableWriter 償還受領委任契約者;
 
@@ -122,24 +119,19 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
         }
         償還受領委任契約者 = new BatchPermanentTableWriter(DbT3078ShokanJuryoininKeiyakusha.class);
         breakProcessCore = new JuryoininKeiyakuShoninKakuninshoProcessCore(出力順);
-        利用者向け認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 利用者向け帳票ID,
-                new FlexibleDate(proParameter.get処理日時().getDate().toString()), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                KenmeiFuyoKubunType.付与なし, 利用者向けSourceWriter);
-        事業者用認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 事業者用帳票ID,
-                new FlexibleDate(proParameter.get処理日時().getDate().toString()), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                KenmeiFuyoKubunType.付与なし, 事業者用SourceWriter);
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
         利用者向け帳票タイトル = get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_帳票タイトル, 利用者向け帳票ID);
         事業者帳票タイトル = get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_帳票タイトル, 事業者用帳票ID);
-        TsuchishoTeikeibunFinder manger = new TsuchishoTeikeibunFinder();
-        利用者向けList = manger.get通知書定型文パターン(SubGyomuCode.DBC介護給付, 利用者向け帳票ID);
-        事業者List = manger.get通知書定型文パターン(SubGyomuCode.DBC介護給付, 事業者用帳票ID);
         proParameter.set利用者向けタイトル(利用者向け帳票タイトル);
         proParameter.set事業者用タイトル(事業者帳票タイトル);
-        proParameter.set利用者向け通知文1(get通知文1(利用者向けList));
-        proParameter.set利用者向け通知文2(get通知文2(利用者向けList));
-        proParameter.set事業者用通知文1(get通知文1(事業者List));
-        proParameter.set事業者用通知文2(get通知文2(事業者List));
+        proParameter.set利用者向け通知文1(ReportUtil.get通知文(SubGyomuCode.DBC介護給付, 利用者向け帳票ID,
+                KamokuCode.EMPTY, INT_1, INT_1, FlexibleDate.getNowDate()));
+        proParameter.set利用者向け通知文2(ReportUtil.get通知文(SubGyomuCode.DBC介護給付, 利用者向け帳票ID,
+                KamokuCode.EMPTY, INT_1, INT_2, FlexibleDate.getNowDate()));
+        proParameter.set事業者用通知文1(ReportUtil.get通知文(SubGyomuCode.DBC介護給付, 事業者用帳票ID,
+                KamokuCode.EMPTY, INT_1, INT_1, FlexibleDate.getNowDate()));
+        proParameter.set事業者用通知文2(ReportUtil.get通知文(SubGyomuCode.DBC介護給付, 事業者用帳票ID,
+                KamokuCode.EMPTY, INT_1, INT_2, FlexibleDate.getNowDate()));
 
     }
 
@@ -156,18 +148,23 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
         JyuryoItakuKeiyakuKakuninShoReport 利用者向けReport = new JyuryoItakuKeiyakuKakuninShoReport(
                 breakProcessCore.edit利用者向けEntity(businessEntity, 利用者向け認証者情報, proParameter));
         利用者向けReport.writeBy(利用者向けSourceWriter);
+
         JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoReport 事業者Report = new JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoReport(
                 breakProcessCore.edit事業者用Entity(businessEntity, 事業者用認証者情報, proParameter));
         事業者Report.writeBy(事業者用SourceWriter);
+
         JuryoIninShoninKakuninshoIchiranReport 一覧表Report = new JuryoIninShoninKakuninshoIchiranReport(
                 breakProcessCore.edit一覧表Entity(businessEntity.get一覧表Entity(), proParameter));
         一覧表Report.writeBy(一覧表SourceWriter);
+
         償還受領委任契約者Entity.setShoninKekkaTsuchiSakuseiYMD(proParameter.get通知日());
         if (ONE.equals(償還受領委任契約者Entity.getShoninKekkaTsuchiSaiHakkoKubun())) {
             償還受領委任契約者Entity.setShoninKekkaTsuchiSaiHakkoKubun(RString.EMPTY);
         }
         償還受領委任契約者.update(償還受領委任契約者Entity);
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE), 被保険者番号, entity.get識別コード().value());
+
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE), 被保険者番号,
+                entity.get償還受領委任契約者().getHihokenshaNo().value());
         AccessLogger.log(AccessLogType.照会, PersonalData.of(entity.get識別コード(), expandedInfo));
     }
 
@@ -186,7 +183,7 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 利用者向け帳票ID.value(),
                 proParameter.get市町村コード().value(),
-                proParameter.get市町村コード().code市町村RString(),
+                proParameter.get市町村名称(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 帳票名,
                 new RString(String.valueOf(利用者向けSourceWriter.pageCount().value())),
@@ -218,7 +215,6 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
                     new JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoPageBreak(breakProcessCore.改頁項())).create();
         }
         事業者用SourceWriter = new ReportSourceWriter<>(事業者用ReportWriter);
-
         if (!breakProcessCore.is改頁()) {
             一覧表ReportWriter = BatchReportFactory.createBatchReportWriter(一覧表帳票ID.value()).create();
         } else {
@@ -226,6 +222,12 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
                     new JuryoIninShoninKakuninshoIchiranPageBreak(breakProcessCore.改頁項())).create();
         }
         一覧表SourceWriter = new ReportSourceWriter<>(一覧表ReportWriter);
+        利用者向け認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 利用者向け帳票ID,
+                new FlexibleDate(proParameter.get処理日時().getDate().toString()), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                KenmeiFuyoKubunType.付与なし, 利用者向けSourceWriter);
+        事業者用認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 事業者用帳票ID,
+                new FlexibleDate(proParameter.get処理日時().getDate().toString()), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                KenmeiFuyoKubunType.付与なし, 事業者用SourceWriter);
     }
 
     /**
@@ -279,27 +281,4 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
         }
         return 設定値;
     }
-
-    private RString get通知文1(List<TsuchishoTeikeibun> list) {
-        for (TsuchishoTeikeibun teikeibun : list) {
-            if (teikeibun.getパターン番号() == INT_1 && teikeibun.get項目番号() == INT_1 && teikeibun.get文章() != null) {
-                return teikeibun.get文章();
-            } else {
-                return RString.EMPTY;
-            }
-        }
-        return RString.EMPTY;
-    }
-
-    private RString get通知文2(List<TsuchishoTeikeibun> list) {
-        for (TsuchishoTeikeibun teikeibun : list) {
-            if (teikeibun.getパターン番号() == INT_1 && teikeibun.get項目番号() == INT_2 && teikeibun.get文章() != null) {
-                return teikeibun.get文章();
-            } else {
-                return RString.EMPTY;
-            }
-        }
-        return RString.EMPTY;
-    }
-
 }

@@ -12,13 +12,13 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1230001.Pane
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1230001.PanelKougakuKetteiTuutisyoHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -62,9 +62,11 @@ public class PanelKougakuKetteiTuutisyo {
         if (サービス提供年月リスト.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
-        // QAのNo.1437
-        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-        LasdecCode 市町村コード = 地方公共団体.getLasdecCode_();
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        LasdecCode 市町村コード = null;
+        if (shichosonSecurityJoho != null && shichosonSecurityJoho.get市町村情報() != null) {
+            市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
+        }
         getHandler(div).画面初期化(キー.get識別コード(), 市町村コード, キー.get被保険者番号(), サービス提供年月リスト);
         return ResponseData.of(div).respond();
     }

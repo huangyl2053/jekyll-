@@ -5,7 +5,7 @@
  "steps": [
   {
    "id": 1,
-   "name": "受給者給付実績台帳DBC5000011",
+   "name": "受給者給付実績台帳",
    "transitionList": [
     {
      "id": "1",
@@ -14,7 +14,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC5000011",
      "toLayoutTitle": "受給者給付実績台帳",
-     "toState": "default"
+     "toState": "台帳"
     },
     {
      "id": "2",

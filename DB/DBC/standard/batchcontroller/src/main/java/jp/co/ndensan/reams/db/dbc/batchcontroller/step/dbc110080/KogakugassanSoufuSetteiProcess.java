@@ -28,10 +28,6 @@ public class KogakugassanSoufuSetteiProcess extends BatchProcessBase<DbWT37K1Kog
     BatchEntityCreatedTempTableWriter 高額合算自己負担額一時tableWriter;
 
     @Override
-    protected void initialize() {
-    }
-
-    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(READ_DATA_ID);
     }
@@ -46,9 +42,5 @@ public class KogakugassanSoufuSetteiProcess extends BatchProcessBase<DbWT37K1Kog
     protected void process(DbWT37K1KogakuGassanJikoFutanGakuTempEntity entity) {
         entity.setSofuJogaiFlag(true);
         高額合算自己負担額一時tableWriter.update(entity);
-    }
-
-    @Override
-    protected void afterExecute() {
     }
 }
