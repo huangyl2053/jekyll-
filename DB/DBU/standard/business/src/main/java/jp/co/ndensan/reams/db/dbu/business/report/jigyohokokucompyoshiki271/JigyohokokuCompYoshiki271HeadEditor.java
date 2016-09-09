@@ -7,8 +7,12 @@ package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki271;
 
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki271.JigyohokokuCompYoshiki271Data;
 import jp.co.ndensan.reams.db.dbu.entity.report.ｊigyohokokucompyoshiki271.JigyohokokuCompYoshiki271ReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 介護事業状況報告月報・保険給付決定状況（様式2-7-1）のHeadEditorクラスです。
@@ -45,7 +49,8 @@ public class JigyohokokuCompYoshiki271HeadEditor implements IJigyohokokuCompYosh
     private RString set範囲(RString 集計年月) {
         RStringBuilder 範囲_SB = new RStringBuilder();
         範囲_SB.append("（");
-        範囲_SB.append(集計年月);
+        範囲_SB.append(new FlexibleDate(集計年月).getYearMonth().wareki()
+                .firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         範囲_SB.append("分）");
         return 範囲_SB.toRString();
     }

@@ -191,7 +191,7 @@ public class DBU010090_JigyoHokokuGeppo_HokenkyufuKogaku extends BatchFlowBase<D
     /**
      * 保険給付決定状況_高額介護サービス費分帳票の出力処理です。
      *
-     * @return JigyoHokokuDataTorokuProcess
+     * @return JigyoHokokuDataReportDBU300019Process
      */
     @Step(帳票出力_保険給付決定状況_高額介護サービス費分)
     protected IBatchFlowCommand create保険給付決定状況_高額介護サービス費分帳票出力プロセス() {
