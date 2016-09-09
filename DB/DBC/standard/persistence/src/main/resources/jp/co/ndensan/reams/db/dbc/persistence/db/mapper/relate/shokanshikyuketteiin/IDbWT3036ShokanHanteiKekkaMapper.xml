@@ -8,7 +8,7 @@
      SELECT
          <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanshikyuketteiin.IDbWT3036ShokanHanteiKekkaMapper.allColumns_DbWT3036ShokanHanteiKekka" />
      FROM
-         rgdb."DbWT3036ShokanHanteiKekkaTemp"
+         "DbWT3036ShokanHanteiKekka"
     </sql>
 
     <sql id="allColumns_DbWT3036ShokanHanteiKekka">

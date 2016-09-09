@@ -107,8 +107,8 @@
         DbWT0001."shikakuSoshitsuYmd" as dbWT0001_資格喪失日,
         DbWT0001."shikakuSoshitsuJiyuCode" as dbWT0001_資格喪失事由コード,
         DbWT0001."setaiShuyakuNo" as dbWT0001_世帯集約番号
-        FROM rgdb."DbWT3036ShokanHanteiKekkaTemp" AS DbWT3036
-        INNER JOIN rgdb."DbWT0001HihokenshaTemp" AS DbWT0001
+        FROM "DbWT3036ShokanHanteiKekka" AS DbWT3036
+        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001
         ON DbWT3036."renban" = DbWT0001."meisaiRenban"
         WHERE NOT EXISTS (SELECT DbT3034.* FROM rgdb."DbT3034ShokanShinsei" AS DbT3034
         WHERE DbWT0001. "hihokenshaNo" = DbT3034. "hiHokenshaNo"
@@ -125,8 +125,8 @@
         DbWT3036."serviceTeikyoYm" as dbWT3036_サービス提供年月,
         SUM(DbWT3036."shiharaiKingaku") as dbWT3036_支払金額,
         DbWT0001."hihokenshaNo" as dbWT0001_登録被保険者番号
-        FROM rgdb."DbWT3036ShokanHanteiKekkaTemp" AS DbWT3036
-        INNER JOIN rgdb."DbWT0001HihokenshaTemp" AS DbWT0001
+        FROM "DbWT3036ShokanHanteiKekka" AS DbWT3036
+        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001
         ON DbWT3036."renban" = DbWT0001."meisaiRenban"
         WHERE DbWT3036."koshinDBumu" = '0'
         GROUP BY DbWT0001."hihokenshaNo",
@@ -140,7 +140,7 @@
     
     <update id="update償還払支給判定結果一時_更新DB有無" 
             parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.ShokanShikyuKetteiInResultEntity">
-        UPDATE rgdb."DbWT3036ShokanHanteiKekkaTemp"
+        UPDATE "DbWT3036ShokanHanteiKekka"
         SET    "koshinDBumu" = '1'
         where "renban" = #{dbWT3036_連番}
         AND "serviceTeikyoYm" = #{dbWT3036_サービス提供年月}
@@ -233,8 +233,8 @@
         DbWT0001."shikakuSoshitsuYmd" as dbWT0001_資格喪失日,
         DbWT0001."shikakuSoshitsuJiyuCode" as dbWT0001_資格喪失事由コード,
         DbWT0001."setaiShuyakuNo" as dbWT0001_世帯集約番号
-        FROM rgdb."DbWT3036ShokanHanteiKekkaTemp" AS DbWT3036
-        INNER JOIN rgdb."DbWT0001HihokenshaTemp" AS DbWT0001
+        FROM "DbWT3036ShokanHanteiKekka" AS DbWT3036
+        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001
         ON DbWT3036."renban" = DbWT0001."meisaiRenban"
         AND DbWT3036."biko1" LIKE '警告エラー%'
         ORDER BY DbWT0001."hihokenshaNo" ASC,
@@ -248,7 +248,7 @@
     
     <update id="update重複データ" 
             parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.ShokanShikyuKetteiInResultEntity">
-        UPDATE rgdb."DbWT3036ShokanHanteiKekkaTemp"
+        UPDATE "DbWT3036ShokanHanteiKekka"
         SET    "koshinDBumu" = '1'
         where "renban" = #{dbWT3036_連番}
         AND "serviceTeikyoYm" = #{dbWT3036_サービス提供年月}
@@ -357,8 +357,8 @@
         DbWT0001."shikakuSoshitsuYmd" as dbWT0001_資格喪失日,
         DbWT0001."shikakuSoshitsuJiyuCode" as dbWT0001_資格喪失事由コード,
         DbWT0001."setaiShuyakuNo" as dbWT0001_世帯集約番号
-        FROM rgdb."DbWT3036ShokanHanteiKekkaTemp" AS DbWT3036
-        INNER JOIN rgdb."DbWT0001HihokenshaTemp" AS DbWT0001
+        FROM "DbWT3036ShokanHanteiKekka" AS DbWT3036
+        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001
         ON DbWT3036."renban" = DbWT0001."meisaiRenban"
         WHERE DbWT3036."serviceShuruiCode" IN ('41','44') 
         AND DbWT3036."jigyoshoNo" is null or DbWT3036."jigyoshoNo" = '') AS 一時TBL
@@ -372,7 +372,7 @@
     
    <update id="update償還払支給判定結果一時_福祉用具事業者番号" 
             parameterType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihiEntity">
-        UPDATE rgdb."DbWT3036ShokanHanteiKekkaTemp"
+        UPDATE "DbWT3036ShokanHanteiKekka"
         SET    "wrkJigyoshoNo" = #{jigyoshaNo}
         where "tanisuKingaku" = #{kounyuKingaku}
         AND "serviceShuruiCode" IN ('41','44')
@@ -383,7 +383,7 @@
     
     <update id="update償還払支給判定結果一時_住宅改修事業者番号" 
             parameterType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity">
-        UPDATE rgdb."DbWT3036ShokanHanteiKekkaTemp"
+        UPDATE "DbWT3036ShokanHanteiKekka"
         SET    "wrkJigyoshoNo" = #{jigyoshaNo}
         where "tanisuKingaku" = #{kaishuKingaku}
          AND "serviceShuruiCode" IN ('42','45')
@@ -490,8 +490,8 @@
         DbWT0001."shikakuSoshitsuYmd" as dbWT0001_資格喪失日,
         DbWT0001."shikakuSoshitsuJiyuCode" as dbWT0001_資格喪失事由コード,
         DbWT0001."setaiShuyakuNo" as dbWT0001_世帯集約番号
-        FROM rgdb."DbWT3036ShokanHanteiKekkaTemp" AS DbWT3036
-        INNER JOIN rgdb."DbWT0001HihokenshaTemp" AS DbWT0001
+        FROM "DbWT3036ShokanHanteiKekka" AS DbWT3036
+        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001
         ON DbWT3036."renban" = DbWT0001."meisaiRenban"
         WHERE DbWT3036."serviceShuruiCode" IN ('42','45') 
         AND DbWT3036."jigyoshoNo" is null or DbWT3036."jigyoshoNo" = '') AS 一時TBL
@@ -713,7 +713,7 @@
     
     <update id="update償還払支給判定結果一時_更新DBあり" 
             parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT3036ShokanHanteiKekkaEntity">
-        UPDATE rgdb."DbWT3036ShokanHanteiKekkaTemp"
+        UPDATE "DbWT3036ShokanHanteiKekka"
         SET    "koshinDBumu" = '0'
         where "renban" = #{renban}
         AND "serviceTeikyoYm" = #{serviceTeikyoYm}
@@ -723,7 +723,7 @@
     </update>
     
     <update id="update償還払支給判定結果一時">
-        UPDATE rgdb."DbWT3036ShokanHanteiKekkaTemp"
+        UPDATE "DbWT3036ShokanHanteiKekka"
         SET    "koshinDBumu" = '1'
         where "koshinDBumu" = '' or "koshinDBumu" is null
     </update>
@@ -737,8 +737,8 @@
         FROM rgdb."DbT3036ShokanHanteiKekka" as DbT3036
         WHERE NOT EXISTS (
         SELECT DbWT3036.*,DbWT0001.*
-        FROM rgdb."DbWT3036ShokanHanteiKekkaTemp" AS DbWT3036
-        INNER JOIN rgdb."DbWT0001HihokenshaTemp" AS DbWT0001
+        FROM "DbWT3036ShokanHanteiKekka" AS DbWT3036
+        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001
         ON DbWT3036."renban" = DbWT0001."meisaiRenban"
         WHERE DbT3036."hiHokenshaNo" = DbWT0001."hihokenshaNo"
         AND DbT3036."serviceTeikyoYM" = DbWT3036."serviceTeikyoYm"
