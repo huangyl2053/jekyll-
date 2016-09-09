@@ -90,7 +90,7 @@ public class TokuchoInfoShoriDateKanri {
     }
 
     /**
-     * 特徴月処理日付のデータの取得のメソッドです。
+     * 月処理日付のデータの取得のメソッドです。
      *
      * @param 調定年度 FlexibleYear
      * @param 処理名 RString
@@ -124,11 +124,89 @@ public class TokuchoInfoShoriDateKanri {
         TokuchoInfoShoriDateParameter param = new TokuchoInfoShoriDateParameter();
         param.set処理名(処理名);
         param.set市町村識別IDList(市町村識別IDList);
+        param.set調定年度(調定年度);
+        param.set年度内連番(年度連番);
         List<DbT7022ShoriDateKanriEntity> 広域職員処理日付List = mapper.get広域職員の処理日付取得(param);
         if (広域職員処理日付List == null || 広域職員処理日付List.isEmpty()) {
             return null;
         }
         return new ShoriDateKanri(広域職員処理日付List.get(0));
+    }
+
+    /**
+     * 広域月処理日付のデータの取得のメソッドです。
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 処理名 RString
+     * @param 年度連番 RString
+     * @param 市町村識別IDList List<RString>
+     *
+     * @return ShoriDateKanri
+     *
+     */
+    public List<ShoriDateKanri> get広域月処理日付(FlexibleYear 調定年度, RString 処理名, RString 年度連番, List<RString> 市町村識別IDList) {
+        ITokuchoInfoShoriDateMapper mapper = mapperProvider.create(ITokuchoInfoShoriDateMapper.class);
+        TokuchoInfoShoriDateParameter param = new TokuchoInfoShoriDateParameter();
+        param.set処理名(処理名);
+        param.set調定年度(調定年度);
+        param.set年度内連番(年度連番);
+        param.set市町村識別IDList(市町村識別IDList);
+        List<DbT7022ShoriDateKanriEntity> 広域職員処理日付List = mapper.get広域月処理日付(param);
+        if (広域職員処理日付List == null || 広域職員処理日付List.isEmpty()) {
+            return new ArrayList<>();
+        }
+        List<ShoriDateKanri> 処理日付List = new ArrayList<>();
+        for (DbT7022ShoriDateKanriEntity entity : 広域職員処理日付List) {
+            処理日付List.add(new ShoriDateKanri(entity));
+        }
+        return 処理日付List;
+    }
+
+    /**
+     * 広域5月と9月処理日付のデータの取得のメソッドです。
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 処理名 RString
+     * @param 年度連番 RString
+     * @param 市町村識別IDList List<RString>
+     *
+     * @return List<ShoriDateKanri>
+     *
+     */
+    public List<ShoriDateKanri> get広域5月と9月処理日付(FlexibleYear 調定年度, RString 処理名, RString 年度連番, List<RString> 市町村識別IDList) {
+        ITokuchoInfoShoriDateMapper mapper = mapperProvider.create(ITokuchoInfoShoriDateMapper.class);
+        TokuchoInfoShoriDateParameter param = new TokuchoInfoShoriDateParameter();
+        param.set処理名(処理名);
+        param.set市町村識別IDList(市町村識別IDList);
+        param.set調定年度(調定年度);
+        param.set年度内連番(年度連番);
+        List<DbT7022ShoriDateKanriEntity> 広域職員処理日付List = mapper.get広域5月と9月処理日付(param);
+        if (広域職員処理日付List == null || 広域職員処理日付List.isEmpty()) {
+            return new ArrayList<>();
+        }
+        List<ShoriDateKanri> 処理日付List = new ArrayList<>();
+        for (DbT7022ShoriDateKanriEntity entity : 広域職員処理日付List) {
+            処理日付List.add(new ShoriDateKanri(entity));
+        }
+        return 処理日付List;
+    }
+
+    /**
+     * 月構成市町村処理日付のデータの取得のメソッドです。
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 処理枝番 RString
+     * @param 年度内連番 RString
+     * @param 処理名List List<RString>
+     * @return ShoriDateKanri
+     *
+     */
+    public ShoriDateKanri get月構成市町村処理日付(FlexibleYear 調定年度, RString 処理枝番, RString 年度内連番, List<RString> 処理名List) {
+        DbT7022ShoriDateKanriEntity entity = dbt7022Dac.get月構成市町村処理日付(調定年度, 処理枝番, 年度内連番, 処理名List);
+        if (entity != null) {
+            return new ShoriDateKanri(entity);
+        }
+        return null;
     }
 
     /**
