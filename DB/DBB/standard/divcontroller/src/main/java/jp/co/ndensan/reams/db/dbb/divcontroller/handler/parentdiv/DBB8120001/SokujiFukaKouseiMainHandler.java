@@ -202,9 +202,9 @@ public class SokujiFukaKouseiMainHandler {
         Decimal 納付額_２期 = tablePanel.getTxtTokuchoKoseiGo06().getValue();
         Decimal 納付額_３期 = tablePanel.getTxtTokuchoKoseiGo08().getValue();
         return (!ZERO.equals(div.getTokuchoNofugakuValue06())
-                && 納付額_２期.compareTo(Decimal.ZERO) == 0)
+                && Decimal.ZERO.compareTo(納付額_２期) == 0)
                 || (!ZERO.equals(div.getTokuchoNofugakuValue08())
-                && 納付額_３期.compareTo(Decimal.ZERO) == 0);
+                && Decimal.ZERO.compareTo(納付額_３期) == 0);
     }
 
     /**
@@ -1641,22 +1641,26 @@ public class SokujiFukaKouseiMainHandler {
 
     private RString get特別徴収の更正後合計() {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
-        Decimal 特別徴収の更正後合計 = tablePanel.getTxtTokuchoKoseiGo04().getValue().add(tablePanel.getTxtTokuchoKoseiGo06().getValue()).
-                add(tablePanel.getTxtTokuchoKoseiGo08().getValue()).add(tablePanel.getTxtTokuchoKoseiGo10().getValue()).
-                add(tablePanel.getTxtTokuchoKoseiGo12().getValue()).add(tablePanel.getTxtTokuchoKoseiGo02().getValue());
+        Decimal 特別徴収の更正後合計 = getDecimalNull(tablePanel.getTxtTokuchoKoseiGo04().getValue()).add(getDecimalNull(tablePanel.getTxtTokuchoKoseiGo06().getValue())).
+                add(getDecimalNull(tablePanel.getTxtTokuchoKoseiGo08().getValue())).add(getDecimalNull(tablePanel.getTxtTokuchoKoseiGo10().getValue())).
+                add(getDecimalNull(tablePanel.getTxtTokuchoKoseiGo12().getValue())).add(getDecimalNull(tablePanel.getTxtTokuchoKoseiGo02().getValue()));
         return get金額のカンマ編集(特別徴収の更正後合計);
     }
 
     private RString get普通徴収の更正後合計() {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
-        Decimal 普通徴収の更正後合計 = tablePanel.getTxtFuchoKoseiGo04().getValue().add(tablePanel.getTxtFuchoKoseiGo05().getValue()).
-                add(tablePanel.getTxtFuchoKoseiGo06().getValue()).add(tablePanel.getTxtFuchoKoseiGo07().getValue()).
-                add(tablePanel.getTxtFuchoKoseiGo08().getValue()).add(tablePanel.getTxtFuchoKoseiGo09().getValue()).
-                add(tablePanel.getTxtFuchoKoseiGo10().getValue()).add(tablePanel.getTxtFuchoKoseiGo11().getValue()).
-                add(tablePanel.getTxtFuchoKoseiGo12().getValue()).add(tablePanel.getTxtFuchoKoseiGo01().getValue()).
-                add(tablePanel.getTxtFuchoKoseiGo02().getValue()).add(tablePanel.getTxtFuchoKoseiGo03().getValue()).
-                add(tablePanel.getTxtFuchoKoseiGoYoku04().getValue()).add(tablePanel.getTxtFuchoKoseiGoYoku05().getValue());
+        Decimal 普通徴収の更正後合計 = getDecimalNull(tablePanel.getTxtFuchoKoseiGo04().getValue()).add(getDecimalNull(tablePanel.getTxtFuchoKoseiGo05().getValue())).
+                add(getDecimalNull(tablePanel.getTxtFuchoKoseiGo06().getValue())).add(getDecimalNull(tablePanel.getTxtFuchoKoseiGo07().getValue())).
+                add(getDecimalNull(tablePanel.getTxtFuchoKoseiGo08().getValue())).add(getDecimalNull(tablePanel.getTxtFuchoKoseiGo09().getValue())).
+                add(getDecimalNull(tablePanel.getTxtFuchoKoseiGo10().getValue())).add(getDecimalNull(tablePanel.getTxtFuchoKoseiGo11().getValue())).
+                add(getDecimalNull(tablePanel.getTxtFuchoKoseiGo12().getValue())).add(getDecimalNull(tablePanel.getTxtFuchoKoseiGo01().getValue())).
+                add(getDecimalNull(tablePanel.getTxtFuchoKoseiGo02().getValue())).add(getDecimalNull(tablePanel.getTxtFuchoKoseiGo03().getValue())).
+                add(getDecimalNull(tablePanel.getTxtFuchoKoseiGoYoku04().getValue())).add(getDecimalNull(tablePanel.getTxtFuchoKoseiGoYoku05().getValue()));
         return get金額のカンマ編集(普通徴収の更正後合計);
+    }
+
+    private Decimal getDecimalNull(Decimal num) {
+        return num == null ? Decimal.ZERO : num;
     }
 
     private RString get特別徴収の増減合計() {

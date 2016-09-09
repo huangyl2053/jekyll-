@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc110060;
 
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110060.KogakugassanShikyushinseishoOutMybatisParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110060.KozaKyomuBetsuMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110060.SofuFileSakuseiMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3068KogakuGassanShinseishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.DbWT3711KogakuGassanShinseishoTempEntity;
@@ -15,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.KogakuGassanShinsei
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.KogakuGassanShinseishoSetHokenshameEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.KogakuGassanShinseishoSofuFileEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.KogakugassanShikyushinseishoOutFileEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 高額合算支給申請書情報作成のDB操作です。
@@ -95,4 +97,12 @@ public interface IKogakugassanShikyushinseishoOutMapper {
      * @return DbT3068KogakuGassanShinseishoEntity
      */
     DbT3068KogakuGassanShinseishoEntity getDB更新の未送付データ();
+
+    /**
+     * 業務別主キーが業務別主キーTBLから取得する。
+     *
+     * @param parameter KozaKyomuBetsuMybatisParameter
+     * @return RString
+     */
+    RString get業務別主キー(KozaKyomuBetsuMybatisParameter parameter);
 }

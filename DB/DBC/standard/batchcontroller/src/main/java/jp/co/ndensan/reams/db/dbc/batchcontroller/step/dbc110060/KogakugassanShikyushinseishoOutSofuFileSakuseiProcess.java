@@ -5,11 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110060;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.DataRecordShubetsu;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenSofuKokanJohoShikibetsuBango;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.RecordShubetsu;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhoreninterface.ConfigKeysKokuhorenSofu;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110060.KozaKyomuBetsuMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110060.SofuFileSakuseiMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc110060.KogakugassanShikyushinseishoOutProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc110060.KogakuGassanShinseishoSofuFileHeadEntity;
@@ -20,6 +22,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3069KogakuGassanShinseishoK
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.DbWT3711KogakuGassanShinseishoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.KogakuGassanShinseishoSofuFileEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassankyufujissekiout.SofuTaishoEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc110060.IKogakugassanShikyushinseishoOutMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
@@ -30,10 +33,8 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.KozaYotoKubunTy
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
+import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
-import jp.co.ndensan.reams.ur.urc.service.core.kamoku.shunokamoku.ShunoKamokuFinder;
-import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
-import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -58,7 +59,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 高額合算支給申請書情報作成の送付ファイル作成Process
@@ -128,24 +128,27 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
         } else {
             文字コード = Encode.UTF_8withBOM;
         }
+        IKogakugassanShikyushinseishoOutMapper mapper = getMapper(IKogakugassanShikyushinseishoOutMapper.class);
+        jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.kamoku.ShunoKamokuFinder 収納科目Finder = jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.kamoku.ShunoKamokuFinder.createInstance();
+        IShunoKamoku 介護給付_高額合算 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護給付_高額合算);
+        KozaKyomuBetsuMybatisParameter mybatis = new KozaKyomuBetsuMybatisParameter();
+        mybatis.set科目コード(介護給付_高額合算.getコード());
+        RString 主キー = mapper.get業務別主キー(mybatis);
+        IKozaSearchKey searchKey = new KozaSearchKeyBuilder()
+                .set業務コード(GyomuCode.DB介護保険)
+                .setサブ業務コード(SubGyomuCode.DBC介護給付)
+                .set科目コード(介護給付_高額合算.getコード())
+                .set業務別主キー(主キー)
+                .set用途区分(new KozaYotoKubunCodeValue(KozaYotoKubunType.振込口座.getCode()))
+                .set基準日(new FlexibleDate(RDate.getNowDate().toDateString())).build();
+        List<KamokuCode> kamokuList = new ArrayList<>();
+        kamokuList.add(介護給付_高額合算.getコード());
+        mybatisParameter = new SofuFileSakuseiMybatisParameter(parameter.get保険者番号(), searchKey, kamokuList);
 
     }
 
     @Override
     protected IBatchReader createReader() {
-        ShunoKamokuFinder shunoKamokuManager = ShunoKamokuFinder.createInstance();
-        KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
-        IKozaSearchKey key = builder.build();
-        builder.set業務コード(GyomuCode.DB介護保険);
-        builder.setサブ業務コード(SubGyomuCode.DBC介護給付);
-        // TODO 業務別主キーを取得ない
-        builder.set業務別主キー(new RString("03"));
-        builder.set科目コード(shunoKamokuManager.get科目(ShunoKamokuShubetsu.介護給付_高額合算).getコード());
-        builder.set用途区分(new KozaYotoKubunCodeValue(KozaYotoKubunType.振込口座.getCode()));
-        builder.set基準日(new FlexibleDate(RDate.getNowDate().toDateString()));
-        ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
-        List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
-        mybatisParameter = new SofuFileSakuseiMybatisParameter(parameter.get保険者番号(), key, list);
         reader = new BatchDbReader(MAPPERPATH, mybatisParameter);
         return reader;
     }
