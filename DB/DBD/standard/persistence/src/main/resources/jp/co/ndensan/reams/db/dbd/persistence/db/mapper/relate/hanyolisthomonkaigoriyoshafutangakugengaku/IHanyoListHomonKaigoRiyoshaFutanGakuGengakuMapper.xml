@@ -159,10 +159,10 @@
         <result property="訪問介護利用者負担額減額_決定区分" column="訪問介護利用者負担額減額_決定区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="訪問介護利用者負担額減額_適用開始年月日" column="訪問介護利用者負担額減額_適用開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="訪問介護利用者負担額減額_適用終了年月日" column="訪問介護利用者負担額減額_適用終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="訪問介護利用者負担額減額_減額率" column="訪問介護利用者負担額減額_給付率" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訪問介護利用者負担額減額_給付率" column="訪問介護利用者負担額減額_給付率" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="訪問介護利用者負担額減額_法別区分" column="訪問介護利用者負担額減額_法別区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="訪問介護利用者負担額減額_公費受給者番号" column="訪問介護利用者負担額減額_公費受給者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="訪問介護利用者負担額減額_障害者手帳有無" column="訪問介護利用者負担額減額_障害者手帳有無" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="訪問介護利用者負担額減額_障害者手帳有無" column="訪問介護利用者負担額減額_障害者手帳有無" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="訪問介護利用者負担額減額_障害者手帳等級" column="訪問介護利用者負担額減額_障害者手帳等級" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="訪問介護利用者負担額減額_障害者手帳番号" column="訪問介護利用者負担額減額_障害者手帳番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="総合事業対象者_被保険者番号" column="総合事業対象者_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -170,7 +170,7 @@
         <result property="総合事業対象者_適用開始年月日" column="総合事業対象者_適用開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="総合事業対象者_適用終了年月日" column="総合事業対象者_適用終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="総合事業対象者_チェックリスト実施日" column="総合事業対象者_チェックリスト実施日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="総合事業対象者_決定年月日" column="総合事業対象者_決定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="総合事業対象者_決定年月日" column="総合事業対象者_決定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="居宅届出_届出区分" column="居宅届出_届出区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="事業者作成_作成区分コード" column="事業者作成_作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="事業者作成_計画事業者番号" column="事業者作成_計画事業者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
