@@ -270,6 +270,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
             boolean isUpload = !SharedFile.searchSharedFile(sharedファイル).isEmpty();
             if (isUpload) {
                 row.setData4(済);
+                row.setSelectable(false);
             }
             処理対象Rows.add(row);
             if (月_5.equals(処理月)) {
@@ -277,8 +278,12 @@ public class TokubetsuChoshuJohoAppurodoHandler {
                 row.setData1(月_5);
                 row.setData2(対象者情報);
                 row.setData3(処理日時パターン);
+                sharedファイル = 共有ファイル名.replace(連携種別, get行連携種別(対象者情報)).
+                        replace(市町村ID, 選択市町村ID).replace(対象月, 処理月と年度内Map.get(処理月).substring(INT_2, INT_4));
+                isUpload = !SharedFile.searchSharedFile(sharedファイル).isEmpty();
                 if (isUpload) {
                     row.setData4(済);
+                    row.setSelectable(false);
                 }
                 処理対象Rows.add(row);
             } else if (月_9.equals(処理月)) {
@@ -286,8 +291,12 @@ public class TokubetsuChoshuJohoAppurodoHandler {
                 row.setData1(月_9);
                 row.setData2(依頼処理結果情報);
                 row.setData3(処理日時パターン);
+                sharedファイル = 共有ファイル名.replace(連携種別, get行連携種別(依頼処理結果情報)).
+                        replace(市町村ID, 選択市町村ID).replace(対象月, 処理月と年度内Map.get(処理月).substring(INT_2, INT_4));
+                isUpload = !SharedFile.searchSharedFile(sharedファイル).isEmpty();
                 if (isUpload) {
                     row.setData4(済);
+                    row.setSelectable(false);
                 }
                 処理対象Rows.add(row);
             }
@@ -401,6 +410,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
             boolean isUpload = !SharedFile.searchSharedFile(sharedファイル).isEmpty();
             if (isUpload) {
                 row.setData4(済);
+                row.setSelectable(false);
             }
             row.setData5(市町村.get市町村コード().getColumnValue());
             row.setData6(市町村.get市町村識別ID());
@@ -434,6 +444,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
                 boolean isUpload = !SharedFile.searchSharedFile(sharedファイル).isEmpty();
                 if (isUpload) {
                     row.setData4(済);
+                    row.setSelectable(false);
                 }
                 row.setData5(構成市町村.get市町村コード().getColumnValue());
                 row.setData6(構成市町村.get市町村識別ID());
@@ -468,6 +479,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
             boolean isUpload = !SharedFile.searchSharedFile(sharedファイル).isEmpty();
             if (isUpload) {
                 row.setData4(済);
+                row.setSelectable(false);
             }
             row.setData5(構成市町村.get市町村コード().getColumnValue());
             row.setData6(構成市町村.get市町村識別ID());
@@ -476,12 +488,18 @@ public class TokubetsuChoshuJohoAppurodoHandler {
             row.setData1(構成市町村.get市町村名称());
             if (月_5.equals(選択月)) {
                 row.setData2(対象者情報);
+                sharedファイル = 共有ファイル名.replace(連携種別, get行連携種別(対象者情報)).
+                        replace(市町村ID, 構成市町村.get市町村識別ID()).replace(対象月, 月と年度内連番Map.get(選択月).substring(INT_2, INT_4));
             } else {
                 row.setData2(依頼処理結果情報);
+                sharedファイル = 共有ファイル名.replace(連携種別, get行連携種別(依頼処理結果情報)).
+                        replace(市町村ID, 構成市町村.get市町村識別ID()).replace(対象月, 月と年度内連番Map.get(選択月).substring(INT_2, INT_4));
             }
+            isUpload = !SharedFile.searchSharedFile(sharedファイル).isEmpty();
             row.setData3(処理日時パターン);
             if (isUpload) {
                 row.setData4(済);
+                row.setSelectable(false);
             }
             row.setData5(構成市町村.get市町村コード().getColumnValue());
             row.setData6(構成市町村.get市町村識別ID());
@@ -514,6 +532,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         boolean isUpload = !SharedFile.searchSharedFile(sharedファイル).isEmpty();
         if (isUpload) {
             row.setData4(済);
+            row.setSelectable(false);
         }
         row.setData5(市町村.get市町村コード().getColumnValue());
         row.setData6(市町村.get市町村識別ID());
@@ -522,12 +541,18 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         row.setData1(市町村.get市町村名称());
         if (月_5.equals(選択月)) {
             row.setData2(対象者情報);
+            sharedファイル = 共有ファイル名.replace(連携種別, get行連携種別(対象者情報)).
+                    replace(市町村ID, 市町村.get市町村識別ID()).replace(対象月, 月と年度内連番Map.get(選択月).substring(INT_2, INT_4));
         } else {
             row.setData2(依頼処理結果情報);
+            sharedファイル = 共有ファイル名.replace(連携種別, get行連携種別(依頼処理結果情報)).
+                    replace(市町村ID, 市町村.get市町村識別ID()).replace(対象月, 月と年度内連番Map.get(選択月).substring(INT_2, INT_4));
         }
+        isUpload = !SharedFile.searchSharedFile(sharedファイル).isEmpty();
         row.setData3(処理日時パターン);
         if (isUpload) {
             row.setData4(済);
+            row.setSelectable(false);
         }
         row.setData5(市町村.get市町村コード().getColumnValue());
         row.setData6(市町村.get市町村識別ID());
