@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.business.report.hanyolistkogakugassanjikofutangaku.HanyoListKogakuGassanJikoFutangakuProperty;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_DataSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Idokubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
@@ -21,7 +20,6 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_HoseizumiJikofutangakuSofuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_SofuTaishogaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassanjikofutangaku.HanyoListKogakuGassanJikoFutangakuProcessParameter;
-import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListKogakuGassanJikoFutangakuNoCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkogakugassanjikofutangaku.HanyoListKogakuGassanJikoFutangakuEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
@@ -40,13 +38,9 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.banchi.Banchi;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.idojiyu.IIdoJiyu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -176,10 +170,11 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     private Association 地方公共団体;
     private FlexibleDate システム日付;
     private List<PersonalData> personalDataList;
-    private IOutputOrder 出力順;
     private RString eucFilePath;
-    private static final RString デフォルト出力順 = new RString("order by 高額合算自己負担額_被保険者番号,"
-            + "高額合算自己負担額_対象年度,高額合算自己負担額_保険者番号,高額合算自己負担額_支給申請書整理番号");
+//    TODO QA1483
+//    private IOutputOrder 出力順;
+//    private static final RString デフォルト出力順 = new RString("order by 高額合算自己負担額_被保険者番号,"
+//            + "高額合算自己負担額_対象年度,高額合算自己負担額_保険者番号,高額合算自己負担額_支給申請書整理番号");
 
     @BatchWriter
     private CsvWriter<HanyoListKogakuGassanJikoFutangakuNoCsvEntity> eucCsvWriter;
@@ -199,18 +194,19 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
                 }
             }
         }
-        if (parameter.get出力順() != null) {
-            IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
-            出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
-                    ReportIdDBC.DBC701015.getReportId(), parameter.get出力順());
-            if (出力順 != null) {
-                parameter.set出力順(Long.valueOf(MyBatisOrderByClauseCreator.create(
-                        HanyoListKogakuGassanJikoFutangakuProperty.DBC701015HanyoList_KogakuGassanJikoFutangaku.class,
-                        出力順).toString()));
-            } else {
-                parameter.set出力順(Long.valueOf(デフォルト出力順.toString()));
-            }
-        }
+//        TODO QA1483
+//        if (parameter.get出力順() != null) {
+//            IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
+//            出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
+//                    ReportIdDBC.DBC701015.getReportId(), parameter.get出力順());
+//            if (出力順 != null) {
+//                parameter.set出力順(Long.valueOf(MyBatisOrderByClauseCreator.create(
+//                        HanyoListKogakuGassanJikoFutangakuProperty.DBC701015HanyoList_KogakuGassanJikoFutangaku.class,
+//                        出力順).toString()));
+//            } else {
+//                parameter.set出力順(Long.valueOf(デフォルト出力順.toString()));
+//            }
+//        }
 
         return new BatchDbReader(READ_DATA_ID, parameter.toMybatisParamter());
     }

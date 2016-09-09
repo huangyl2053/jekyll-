@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Value;
@@ -16,7 +17,7 @@ import lombok.Value;
  */
 @Value
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KokiKoreishaInfoIdentifier {
+public class KokiKoreishaInfoIdentifier implements Serializable {
 
     private final ShikibetsuCode 識別コード;
     private final RString 履歴番号;

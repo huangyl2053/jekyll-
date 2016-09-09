@@ -164,9 +164,8 @@ public class SokujiFukaKouseiManager {
 
     private Chotei get調定クラス(long 調定ID, long 収納ID, ChoteiKyotsu choteiKyotsu) {
         ChoteiKyotsuBuilder builder = new Chotei(調定ID, 調定ID).createBuilderForEdit();
-        // TODO 処理年度、処理番号 NOT NULL QA確認中
         ChoteiJokyo choteiJokyo = new ChoteiJokyo(調定ID).createBuilderForEdit().
-                set処理年度(choteiKyotsu.get会計年度())
+                set処理年度(choteiKyotsu.get処理年度())
                 .set処理番号(0).build();
         builder.set収納ID(収納ID);
         builder.set会計年度(choteiKyotsu.get会計年度());

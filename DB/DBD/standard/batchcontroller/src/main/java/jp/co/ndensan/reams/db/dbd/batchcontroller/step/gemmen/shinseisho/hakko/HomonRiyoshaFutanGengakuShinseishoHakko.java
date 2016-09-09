@@ -66,6 +66,7 @@ public class HomonRiyoshaFutanGengakuShinseishoHakko extends BatchProcessBase<Ri
     private static final RString HAKKONICHI = new RString("【発行日】");
     private static final RString SHUTSURYOKUJUN = new RString("【出力順】");
     private static final RString なし = new RString("なし");
+    private static final RString 種別コード = new RString("0001");
     private ShinseishoHakkoProcessParameter processParamter;
     private Association association;
     private Ninshosha ninshosha;
@@ -82,7 +83,7 @@ public class HomonRiyoshaFutanGengakuShinseishoHakko extends BatchProcessBase<Ri
     @Override
     protected void initialize() {
         association = AssociationFinderFactory.createInstance().getAssociation();
-        ninshosha = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, RString.EMPTY);
+        ninshosha = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, 種別コード);
         hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
         導入団体コード = association.getLasdecCode_().value();
         市町村名 = association.get市町村名();

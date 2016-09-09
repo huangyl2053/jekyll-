@@ -199,7 +199,7 @@ public class ShikakuShogohyoEditor implements IShikakuShogohyoEditor {
 
     private ShikakuShogohyoSource editor編集2(ShikakuShogohyoSource source) {
         if (target.get資格照合表一時().getGetsuGakuShokujiFutanGaku() != null) {
-            source.listLower_9 = decimal_to_string(target.get資格照合表一時().getGetsuGakuShokujiFutanGaku());
+            source.listLower_9 = decimal_to_string(target.get資格照合表一時().getNichiGakuShokujiFutanGaku());
         }
         if (target.get資格照合表一時().getKyojuhiFutanGendoGaku1() != null) {
             source.listLower_10 = decimal_to_string(target.get資格照合表一時().getKyojuhiFutanGendoGaku1());

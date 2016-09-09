@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.saishinsaketteihokenshain;
 
+import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 再審査決定通知書情報取込（保険者分）のバッチパラメータです。
@@ -16,16 +18,15 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
  */
 @lombok.Getter
 @lombok.Setter
-@SuppressWarnings("PMD.UnusedPrivateField")
+@SuppressWarnings ("PMD.UnusedPrivateField")
 public class SaishinsaKetteiHokenshaInBatchParameter extends BatchParameterBase {
 
-    private static final String KEY_SHORIYM = "shoriYM";
-    private static final String NAME_SHORIYM = "処理年月";
-    private static final String KEY_SHUTSURYOKUJUNID = "shutsuryokujunId";
-    private static final String NAME_SHUTSURYOKUJUNID = "出力順ID";
+    @BatchParameter (key = "処理年月", name = "処理年月")
+    private FlexibleYearMonth 処理年月;
 
-    @BatchParameter(key = KEY_SHORIYM, name = NAME_SHORIYM)
-    private FlexibleYearMonth shoriYM;
-    @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = NAME_SHUTSURYOKUJUNID)
-    private Long shutsuryokujunId;
+    @BatchParameter (key = "再処理区分", name = "再処理区分")
+    private SaiShoriKubun 再処理区分;
+
+    @BatchParameter (key = "出力順ID", name = "出力順ID")
+    private RString 出力順ID;
 }

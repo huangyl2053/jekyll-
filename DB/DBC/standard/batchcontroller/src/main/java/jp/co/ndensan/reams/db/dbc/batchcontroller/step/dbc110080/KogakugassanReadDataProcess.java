@@ -124,7 +124,7 @@ public class KogakugassanReadDataProcess extends BatchProcessBase<DbT3070KogakuG
         一時Enttiy.setExRenban(renban);
         一時Enttiy.setExHokenshaNo(HokenshaNo.EMPTY);
         一時Enttiy.setExHokenshaName(RString.EMPTY);
-        一時Enttiy.setExShoHokenshaNo(new ShoKisaiHokenshaNo(entity.getHihokenshaNo().getColumnValue()));
+        一時Enttiy.setExShoHokenshaNo(new ShoKisaiHokenshaNo(entity.getHokenshaNo().getColumnValue()));
         一時Enttiy.setExHihokenshaNo(entity.getHihokenshaNo());
         一時Enttiy.setExServiceTeikyoYm(new FlexibleYearMonth(processParameter.getNow().toDateString()));
         一時Enttiy.setHenkanFlag(false);
