@@ -18,7 +18,7 @@
     </select>
 
     <select resultOrdered="true" id="select受給者台帳情報"
-            resultType="Integer"
+            resultMap="resultmap_getSogoJigyouTaisyouSyaJyohoJoho"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT Jukyu."ninteiYukoKikanKaishiYMD", Jukyu."ninteiYukoKikanShuryoYMD", Jukyu."ikenshoJuryoYMD",
         Jukyu."hihokenshaNo",Jukyu."rirekiNo",Jukyu."edaban"
@@ -74,8 +74,7 @@
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
-        WHERE
-        "shikibetsuCode" = #{識別コード}
+        AS  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
     </select>
 
     <select resultOrdered="true" id="select宛先情報"
@@ -86,8 +85,7 @@
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
         FROM
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" />
-        WHERE
-        "shikibetsuCode" = #{識別コード}
+        AS  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.as_Atesaki" />
     </select>
 
     <resultMap id="resultmap_getSogoJigyouTaisyouSyaJyohoJoho" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.SogoJigyouTaisyouSyaJyohoJoho" autoMapping="true">
