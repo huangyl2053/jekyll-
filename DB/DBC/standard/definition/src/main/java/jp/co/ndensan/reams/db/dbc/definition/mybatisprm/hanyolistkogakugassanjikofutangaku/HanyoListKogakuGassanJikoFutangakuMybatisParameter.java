@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistkogakugassanjikofutangaku;
 
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -17,7 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HanyoListKogakuGassanJikoFutangakuMybatisParameter implements IMyBatisParameter {
+public class HanyoListKogakuGassanJikoFutangakuMybatisParameter extends UaFt200FindShikibetsuTaishoParam
+        implements IMyBatisParameter {
 
     private final RString 抽出区分;
     private final RString データ作成区分;
@@ -45,6 +48,7 @@ public class HanyoListKogakuGassanJikoFutangakuMybatisParameter implements IMyBa
     /**
      * コンストラクタです。
      *
+     * @param searchKey IShikibetsuTaishoPSMSearchKey
      * @param 抽出区分 RString
      * @param データ作成区分 RString
      * @param データ種類 RString
@@ -70,6 +74,7 @@ public class HanyoListKogakuGassanJikoFutangakuMybatisParameter implements IMyBa
      *
      */
     public HanyoListKogakuGassanJikoFutangakuMybatisParameter(
+            IShikibetsuTaishoPSMSearchKey searchKey,
             RString 抽出区分,
             RString データ作成区分,
             RString データ種類,
@@ -93,6 +98,7 @@ public class HanyoListKogakuGassanJikoFutangakuMybatisParameter implements IMyBa
             Long 出力順,
             RString 出力項目
     ) {
+        super(searchKey);
         this.抽出区分 = 抽出区分;
         this.データ作成区分 = データ作成区分;
         this.データ種類 = データ種類;
