@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC02105",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "宛名シール作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0210051",
+     "toLayoutTitle": "宛名シール作成（介護賦課）",
+     "toState": ""
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0210051",
+     "layoutTitle": "宛名シール作成（介護賦課）",
+     "eventName": "finish",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
