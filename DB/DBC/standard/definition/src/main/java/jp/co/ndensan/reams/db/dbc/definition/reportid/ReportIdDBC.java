@@ -18,6 +18,10 @@ public enum ReportIdDBC {
     /**
      * 利用状況統計表
      */
+    DBC200064(new ReportId("DBC200064_JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiran"), new RString("住宅改修理由書作成手数料請求書兼申請書作成")),
+    /**
+     * 利用状況統計表
+     */
     DBC300005(new ReportId("DBC300005_RiyoJokyoTokeihyo"), new RString("利用状況統計表")),
     /**
      * 受給者給付実績一覧表
