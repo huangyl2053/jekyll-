@@ -7,15 +7,21 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2220001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.UploadPanel;
 
 /**
- * TokubetsuChoshuJohoAppurodo のクラスファイル 
- * 
- * @author 自動生成
+ * TokubetsuChoshuJohoAppurodo のクラスファイル
+ *
+ * @reamsid_L DBB-5670-010 chenhui
  */
 public class TokubetsuChoshuJohoAppurodoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -119,7 +125,7 @@ public class TokubetsuChoshuJohoAppurodoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlShoriNendo(DropDownList ddlShoriNendo) {
+    public void setDdlShoriNendo(DropDownList ddlShoriNendo) {
         this.getShoriJokyoPanel().setDdlShoriNendo(ddlShoriNendo);
     }
 
@@ -129,7 +135,7 @@ public class TokubetsuChoshuJohoAppurodoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setGrpHyojikeishiki(RadioButton grpHyojikeishiki) {
+    public void setGrpHyojikeishiki(RadioButton grpHyojikeishiki) {
         this.getShoriJokyoPanel().setGrpHyojikeishiki(grpHyojikeishiki);
     }
 
@@ -139,7 +145,7 @@ public class TokubetsuChoshuJohoAppurodoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setShichosonPanel(ShichosonPanelDiv ShichosonPanel) {
+    public void setShichosonPanel(ShichosonPanelDiv ShichosonPanel) {
         this.getShoriJokyoPanel().setShichosonPanel(ShichosonPanel);
     }
 
@@ -149,7 +155,7 @@ public class TokubetsuChoshuJohoAppurodoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlShichoson(DropDownList ddlShichoson) {
+    public void setDdlShichoson(DropDownList ddlShichoson) {
         this.getShoriJokyoPanel().getShichosonPanel().setDdlShichoson(ddlShichoson);
     }
 
@@ -159,7 +165,7 @@ public class TokubetsuChoshuJohoAppurodoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setGetuPanel(GetuPanelDiv GetuPanel) {
+    public void setGetuPanel(GetuPanelDiv GetuPanel) {
         this.getShoriJokyoPanel().setGetuPanel(GetuPanel);
     }
 
@@ -169,7 +175,7 @@ public class TokubetsuChoshuJohoAppurodoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlGetu(DropDownList ddlGetu) {
+    public void setDdlGetu(DropDownList ddlGetu) {
         this.getShoriJokyoPanel().getGetuPanel().setDdlGetu(ddlGetu);
     }
 
@@ -179,7 +185,7 @@ public class TokubetsuChoshuJohoAppurodoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTaisyoFile(TextBox txtTaisyoFile) {
+    public void setTxtTaisyoFile(TextBox txtTaisyoFile) {
         this.getShoriJokyoPanel().setTxtTaisyoFile(txtTaisyoFile);
     }
 
@@ -189,7 +195,7 @@ public class TokubetsuChoshuJohoAppurodoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgGetuShoriSelect(DataGrid<dgGetuShoriSelect_Row> dgGetuShoriSelect) {
+    public void setDgGetuShoriSelect(DataGrid<dgGetuShoriSelect_Row> dgGetuShoriSelect) {
         this.getShoriTaishoShichosonPanel().setDgGetuShoriSelect(dgGetuShoriSelect);
     }
 
@@ -199,7 +205,7 @@ public class TokubetsuChoshuJohoAppurodoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgShichosonShoriSelect(DataGrid<dgShichosonShoriSelect_Row> dgShichosonShoriSelect) {
+    public void setDgShichosonShoriSelect(DataGrid<dgShichosonShoriSelect_Row> dgShichosonShoriSelect) {
         this.getShoriTaishoGetuPanel().setDgShichosonShoriSelect(dgShichosonShoriSelect);
     }
 
@@ -209,7 +215,7 @@ public class TokubetsuChoshuJohoAppurodoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setUpload(UploadPanel upload) {
+    public void setUpload(UploadPanel upload) {
         this.getPanUpload().setUpload(upload);
     }
 
@@ -219,7 +225,7 @@ public class TokubetsuChoshuJohoAppurodoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnUpload(Button btnUpload) {
+    public void setBtnUpload(Button btnUpload) {
         this.getPanUpload().setBtnUpload(btnUpload);
     }
 
