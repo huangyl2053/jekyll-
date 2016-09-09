@@ -35,56 +35,27 @@
         LIMIT #{maxCount}      
     </select>
     
-    <insert id="insertGenmenJyouhou" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhigenmenjyouhouregister.GenmenJyouhouParameter">
-        INSERT INTO rgdb."DbT3067KyufuhiTuchiHosei"
-        ("hiHokenshaNo",
-        "shokisaiHokenshaNo",
-        "serviceTeikyoYM",
-        "jigyoshoNo",
-        "serviceShuruiCode",
-        "riyoshaFutangaku",
-        "serviceHiyoTotal",
-        "rirekiNo")
-        VALUES
-        (#{hiHokenshaNo},
-        #{shokisaiHokenshaNo},
-        #{serviceTeikyoYM},
-        #{jigyoshoNo},
-        #{serviceShuruiCode},
-        #{riyoshaFutangaku},
-        #{serviceHiyoTotal},
-        #{rirekiNo}) 
-    </insert>
-    
-    <update id="updateGenmenJyouhou" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhigenmenjyouhouregister.GenmenJyouhouParameter">
-        UPDATE rgdb."DbT3067KyufuhiTuchiHosei"
-        SET
-          "shokisaiHokenshaNo" = #{shokisaiHokenshaNo},
-          "serviceTeikyoYM" = #{serviceTeikyoYM},
-          "jigyoshoNo" = #{jigyoshoNo},
-          "serviceShuruiCode" = #{serviceShuruiCode},
-          "riyoshaFutangaku" = #{riyoshaFutangaku},
-          "serviceHiyoTotal" = #{serviceHiyoTotal}
+    <select resultOrdered="true" id="getUpdateJyouhou" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhigenmenjyouhouregister.KyufuhigenmenjyouhouregisterParameter" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3067KyufuhiTuchiHoseiEntity" fetchSize="500">
+       SELECT
+            T3067.*
+        FROM
+                rgdb."DbT3067KyufuhiTuchiHosei" AS T3067
+        INNER JOIN rgdb."DbT7060KaigoJigyosha" AS T7060 
+        ON	T3067."jigyoshoNo" = T7060."jigyoshaNo"
+        INNER JOIN rgdb."DbT7130KaigoServiceShurui" AS T7130
+        ON 	T3067."serviceShuruiCode" = T7130."serviceShuruiCd"
         WHERE
-            "hiHokenshaNo" = #{hiHokenshaNo}
-        AND "shokisaiHokenshaNo" = #{shokisaiHokenshaNo}
-        AND "serviceTeikyoYM" = #{serviceTeikyoYM}
-        AND "jigyoshoNo" = #{jigyoshoNo}
-        AND "serviceShuruiCode" = #{serviceShuruiCode}   
-    </update>
-    
-    <delete id="deleteGenmenJyouhou" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhigenmenjyouhouregister.GenmenJyouhouParameter">
-        DELETE FROM rgdb."DbT3067KyufuhiTuchiHosei" AS DbT3067
-        WHERE
-             DbT3067."hiHokenshaNo" = #{hiHokenshaNo}
-        AND  DbT3067."shokisaiHokenshaNo" = #{shokisaiHokenshaNo}
-        AND  DbT3067."serviceTeikyoYM" = #{serviceTeikyoYM}
-        AND  DbT3067."jigyoshoNo" = #{jigyoshoNo}
-        AND  DbT3067."serviceShuruiCode" = #{serviceShuruiCode}    
-    </delete>
+                T3067."hiHokenshaNo"=#{hiHokenshaNo}
+                <if test="kaisiFlag">
+                  AND #{serviceTeikyoKaisiYM} <![CDATA[<=]]> T3067."serviceTeikyoYM"
+                </if>
+                <if test="syuroFlag">
+                  AND T3067."serviceTeikyoYM" <![CDATA[<=]]> #{serviceTeikyoSyuryoYM}
+                </if>
+        LIMIT #{maxCount}      
+    </select>
     
     <select resultOrdered="true" id="checkKyufuJissekiJyouhou"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhigenmenjyouhouregister.GenmenJyouhouParameter"

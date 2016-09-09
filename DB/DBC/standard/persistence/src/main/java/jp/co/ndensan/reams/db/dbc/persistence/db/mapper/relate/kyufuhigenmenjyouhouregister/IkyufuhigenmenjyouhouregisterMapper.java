@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufuhigenmenjyo
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhigenmenjyouhouregister.GenmenJyouhouParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhigenmenjyouhouregister.KyufuhigenmenjyouhouregisterParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3067KyufuhiTuchiHoseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhigenmenjyouhouregister.KyufuJissekiJyouhouEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhigenmenjyouhouregister.KyufuhigenmenjyouhouRegisterEntity;
 
@@ -27,25 +28,12 @@ public interface IkyufuhigenmenjyouhouregisterMapper {
     List<KyufuhigenmenjyouhouRegisterEntity> getGenmenJyouhou(KyufuhigenmenjyouhouregisterParameter 検索条件);
 
     /**
-     * 減免補正情報をinsertする。
+     * 検索条件より、適当な条件を連結して、減免補正情報の取得。
      *
      * @param 検索条件 検索条件
+     * @return DbT3067KyufuhiTuchiHoseiEntity 検索結果の{@link DbT3067KyufuhiTuchiHoseiEntity}
      */
-    void insertGenmenJyouhou(GenmenJyouhouParameter 検索条件);
-
-    /**
-     * 減免補正情報をupdateする
-     *
-     * @param 検索条件 検索条件
-     */
-    void updateGenmenJyouhou(GenmenJyouhouParameter 検索条件);
-
-    /**
-     * 減免補正情報をdeleteする
-     *
-     * @param 検索条件 検索条件
-     */
-    void deleteGenmenJyouhou(GenmenJyouhouParameter 検索条件);
+    List<DbT3067KyufuhiTuchiHoseiEntity> getUpdateJyouhou(KyufuhigenmenjyouhouregisterParameter 検索条件);
 
     /**
      * 検索条件より、適当な条件を連結して、給付実績情報の存在。

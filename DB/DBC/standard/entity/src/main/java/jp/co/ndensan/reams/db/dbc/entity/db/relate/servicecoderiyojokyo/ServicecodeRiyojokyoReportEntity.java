@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.servicecoderiyojokyo;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120120.TempDbWT0001HihokenshaEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,13 +21,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ServicecodeRiyojokyoReportEntity {
+public class ServicecodeRiyojokyoReportEntity extends DbTableEntityBase<TempDbWT0001HihokenshaEntity>
+        implements IDbAccessable {
 
-    private RString 条件１;
-    private RString 条件２;
-    private RString 条件３;
-    private HihokenshaNo 保険者番号;
-    private RString 保険者名;
     private RString 種類コード;
     private RString 項目コード;
     private RString サービス略称_上;

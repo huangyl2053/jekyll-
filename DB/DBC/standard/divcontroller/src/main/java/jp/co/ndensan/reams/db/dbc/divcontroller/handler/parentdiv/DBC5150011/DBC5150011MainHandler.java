@@ -13,7 +13,10 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.servicecodeichiran.Chushut
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5150011.DBC5150011MainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5150011.dgServiceShuruiList_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.ShutsuryokuHoho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -131,14 +134,16 @@ public class DBC5150011MainHandler {
      */
     public DBC160020_ServicecodeIchiranParameter setParameter() {
         DBC160020_ServicecodeIchiranParameter parameter = new DBC160020_ServicecodeIchiranParameter();
-        parameter.set基準年月(div.getTxtKijyouDate().getValue().getYearMonth());
+        if (div.getTxtKijyouDate().getValue() != null) {
+            parameter.set基準年月(new FlexibleYearMonth(div.getTxtKijyouDate().getValue().getYearMonth().toDateString()));
+        }
         parameter.set抽出条件区分(div.getRadMeisaiGokeiOut().getSelectedValue());
         if (div.getRadMeisaiGokeiOut().getSelectedValue().equals(ChushutsuJokenKubun.サービスコードを指定.get名称())) {
-            parameter.setサービス種類コード(div.getTxtSyuruiCode().getValue());
+            parameter.setサービス種類コード(new ServiceShuruiCode(div.getTxtSyuruiCode().getValue()));
             parameter.setサービス項目コード(div.getTxtServiceCode().getValue());
         }
         if (div.getRadMeisaiGokeiOut().getSelectedValue().equals(ChushutsuJokenKubun.サービス分類を指定.get名称())) {
-            List<RString> サービス分類List = new ArrayList<>();
+            List<Code> サービス分類List = new ArrayList<>();
             List<dgServiceShuruiList_Row> rowList = div.getDgServiceShuruiList().getSelectedItems();
             for (dgServiceShuruiList_Row row : rowList) {
                 setサービス分類List(サービス分類List, row);
@@ -176,10 +181,10 @@ public class DBC5150011MainHandler {
         return parameter;
     }
 
-    private void setサービス分類List(List<RString> サービス分類List, dgServiceShuruiList_Row row) {
+    private void setサービス分類List(List<Code> サービス分類List, dgServiceShuruiList_Row row) {
         for (ServiceBunrui サービス分類 : ServiceBunrui.values()) {
             if (row.getHdnServiceBunrui().equals(new RString(サービス分類.toString()))) {
-                サービス分類List.add(サービス分類.getコード());
+                サービス分類List.add(new Code(サービス分類.getコード()));
             }
         }
     }

@@ -86,7 +86,9 @@ public final class PanelKougakuKetteiTuutisyoHandler {
     public void 画面初期化(ShikibetsuCode 識別コード, LasdecCode 市町村コード, HihokenshaNo 被保険者番号,
             List<FlexibleYearMonth> サービス提供年月リスト) {
         div.getKyoTuuKaigoAtena().initialize(識別コード);
-        div.getKyoTuuKaigoNinnteiSikaku().initialize(市町村コード.value(), 被保険者番号.value());
+        if (市町村コード != null) {
+            div.getKyoTuuKaigoNinnteiSikaku().initialize(市町村コード.value(), 被保険者番号.value());
+        }
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
         div.getKougakuKetteiTuutisyoBunsho().initialize(帳票ID, システム日付);
         div.getRadSyoukaiSinnsei().setSelectedKey(定数_初回申請用);
