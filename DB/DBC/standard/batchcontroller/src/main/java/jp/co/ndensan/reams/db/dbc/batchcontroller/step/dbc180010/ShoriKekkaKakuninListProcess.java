@@ -41,9 +41,9 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1801Shori
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString CSVMEISHO = new RString("DBU900002_ShoriKekkaKakuninList.csv");
-    private static final RString 被保険者台帳データがありません = new RString("被保険者台帳データがありません");
-    private static final RString 宛名データがありません = new RString("宛名データがありません");
-    private static final RString 対象データがありません = new RString("対象データがありません");
+    private static final RString 被保険者台帳データがありません = new RString("被保険者台帳データがありません。");
+    private static final RString 宛名データがありません = new RString("宛名データがありません。");
+    private static final RString 対象データがありません = new RString("対象データがありません。");
     private static final RString 年 = new RString("年");
     private static final RString 時 = new RString("時");
     private static final RString 分 = new RString("分");
@@ -76,7 +76,6 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1801Shori
 
     @Override
     protected void process(DbWT1801ShoriKekkaKakuninListEntity entity) {
-        count++;
         if (count == 1) {
             eucCsvWriter.writeLine(new ShoriKekkaKakuninListEntity(
                     edit処理日(RDateTime.now()),
@@ -94,6 +93,7 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1801Shori
                     entity.getBiko()
             ));
         }
+        count++;
 
     }
 
