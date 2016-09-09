@@ -11,9 +11,8 @@ import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.BanchiInpu
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.BanchiInput.IBanchiInputDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.ChoikiInputDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.IChoikiInputDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ShichosonInput.IShichosonInputDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ShichosonInput.ShichosonInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -22,19 +21,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TennyuHoryuTokuteiJushoNyuryokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdShichousonInputGuide")
-    private ShichosonInputDiv ccdShichousonInputGuide;
-    @JsonProperty("ccdJushoInputGuide")
-    private ChoikiInputDiv ccdJushoInputGuide;
+    @JsonProperty("ddlShichosonCode")
+    private DropDownList ddlShichosonCode;
     @JsonProperty("ccdBunchiInput")
     private BanchiInputDiv ccdBunchiInput;
+    @JsonProperty("ccdJushoInputGuide")
+    private ChoikiInputDiv ccdJushoInputGuide;
     @JsonProperty("ccdSisetuInputGuide")
     private ShisetsuJohoCommonChildDivDiv ccdSisetuInputGuide;
     @JsonProperty("txtJotai")
@@ -47,21 +46,21 @@ public class TennyuHoryuTokuteiJushoNyuryokuDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdShichousonInputGuide
-     * @return ccdShichousonInputGuide
+     * getddlShichosonCode
+     * @return ddlShichosonCode
      */
-    @JsonProperty("ccdShichousonInputGuide")
-    public IShichosonInputDiv getCcdShichousonInputGuide() {
-        return ccdShichousonInputGuide;
+    @JsonProperty("ddlShichosonCode")
+    public DropDownList getDdlShichosonCode() {
+        return ddlShichosonCode;
     }
 
     /*
-     * getccdJushoInputGuide
-     * @return ccdJushoInputGuide
+     * setddlShichosonCode
+     * @param ddlShichosonCode ddlShichosonCode
      */
-    @JsonProperty("ccdJushoInputGuide")
-    public IChoikiInputDiv getCcdJushoInputGuide() {
-        return ccdJushoInputGuide;
+    @JsonProperty("ddlShichosonCode")
+    public void setDdlShichosonCode(DropDownList ddlShichosonCode) {
+        this.ddlShichosonCode = ddlShichosonCode;
     }
 
     /*
@@ -71,6 +70,15 @@ public class TennyuHoryuTokuteiJushoNyuryokuDiv extends Panel {
     @JsonProperty("ccdBunchiInput")
     public IBanchiInputDiv getCcdBunchiInput() {
         return ccdBunchiInput;
+    }
+
+    /*
+     * getccdJushoInputGuide
+     * @return ccdJushoInputGuide
+     */
+    @JsonProperty("ccdJushoInputGuide")
+    public IChoikiInputDiv getCcdJushoInputGuide() {
+        return ccdJushoInputGuide;
     }
 
     /*

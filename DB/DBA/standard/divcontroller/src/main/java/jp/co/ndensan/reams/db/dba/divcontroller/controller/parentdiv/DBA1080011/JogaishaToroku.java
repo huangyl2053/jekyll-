@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaishaBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaishaIdentifier;
 import static jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysJukyuShikakuShomeishoHakko.資格取得除外者登録キー;
 import static jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysJukyuShikakuShomeishoHakko.除外者データキー;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -50,7 +51,7 @@ public class JogaishaToroku {
      * @return ResponseData<JogaishaTorokuDiv>
      */
     public ResponseData<JogaishaTorokuDiv> onLoad(JogaishaTorokuDiv requestDiv) {
-
+        //ViewStateKeys.資格対象者
         if (ViewStateHolder.get(資格取得除外者登録キー, RString.class) == null || ViewStateHolder.get(資格取得除外者登録キー, RString.class).isEmpty()) {
             SearchResult<ShikakuShutokuJogaishaKanri> 資格取得除外者情報
                     = ShikakuShutokuJogaishaKanriManager.createInstance().getTennyuHoryuTokuteiJushoIchiran();
@@ -223,6 +224,8 @@ public class JogaishaToroku {
         ShikakuShutokuJogaishaKanriManager.createInstance().insertShikakuShutokuJogaisha(insertKuJogaishaList);
         ShikakuShutokuJogaishaKanriManager.createInstance().updateShikakuShutokuJogaisha(updateKuJogaishaList);
         前排他処理();
+
+        requestDiv.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
         return ResponseData.of(requestDiv).setState(DBA1080011StateName.完了状態);
     }
 
