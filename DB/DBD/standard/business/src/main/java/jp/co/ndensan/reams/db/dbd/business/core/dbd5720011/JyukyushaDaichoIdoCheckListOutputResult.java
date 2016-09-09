@@ -69,25 +69,21 @@ public class JyukyushaDaichoIdoCheckListOutputResult {
     }
 
     private LowerEntity 要介護認定状態区分コード(JyukyushaDaichoIdoCheckListEntity entity, LowerEntity lower) {
-        RString 要介護状態区分コード = new RString("要介護状態区分コード");
         if (entity.get要介護認定状態区分コード() == null || entity.get要介護認定状態区分コード().isEmpty()) {
             lower.set要介護度(RString.EMPTY);
         } else {
             if (entity.get厚労省IF識別コード().value().equals(new RString("99A"))) {
-                lower.set要介護度(要介護状態区分コード.concat(YokaigoJotaiKubun99.toValue(
-                        entity.get要介護認定状態区分コード().getColumnValue()).get名称()));
+                lower.set要介護度(YokaigoJotaiKubun99.toValue(entity.get要介護認定状態区分コード().value()).get名称());
             }
             if (entity.get厚労省IF識別コード().value().equals(new RString("02A"))) {
-                lower.set要介護度(要介護状態区分コード.concat(YokaigoJotaiKubun02.toValue(
-                        entity.get要介護認定状態区分コード().getColumnValue()).get名称()));
+                lower.set要介護度(YokaigoJotaiKubun02.toValue(entity.get要介護認定状態区分コード().value()).get名称());
             }
             if (entity.get厚労省IF識別コード().value().equals(new RString("06A"))) {
-                lower.set要介護度(要介護状態区分コード.concat(YokaigoJotaiKubun06.toValue(
-                        entity.get要介護認定状態区分コード().getColumnValue()).get名称()));
+                lower.set要介護度(YokaigoJotaiKubun06.toValue(entity.get要介護認定状態区分コード().value()).get名称());
             }
-            if (entity.get厚労省IF識別コード().value().equals(new RString("09A")) || entity.get厚労省IF識別コード().value().equals(new RString("09B"))) {
-                lower.set要介護度(要介護状態区分コード.concat(YokaigoJotaiKubun09.toValue(
-                        entity.get要介護認定状態区分コード().getColumnValue()).get名称()));
+            if (entity.get厚労省IF識別コード().value().equals(new RString("09A"))
+                    || entity.get厚労省IF識別コード().value().equals(new RString("09B"))) {
+                lower.set要介護度(YokaigoJotaiKubun09.toValue(entity.get要介護認定状態区分コード().value()).get名称());
             }
         }
         return lower;
