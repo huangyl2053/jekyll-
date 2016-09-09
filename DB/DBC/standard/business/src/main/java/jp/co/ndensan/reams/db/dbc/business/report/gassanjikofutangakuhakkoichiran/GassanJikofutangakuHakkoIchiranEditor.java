@@ -79,7 +79,6 @@ public class GassanJikofutangakuHakkoIchiranEditor implements
         source.list_7 = entity.get対象年度().wareki().
                 eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 fillType(FillType.BLANK).toDateString();
-        source.list_5 = entity.get性別().toRString();
 
         source.list_8 = getprintTime(entity.get被保険者期間開始年月日(), entity.get被保険者期間終了年月日());
         source.list_9 = entity.get自己負担額証明書整理番号();
