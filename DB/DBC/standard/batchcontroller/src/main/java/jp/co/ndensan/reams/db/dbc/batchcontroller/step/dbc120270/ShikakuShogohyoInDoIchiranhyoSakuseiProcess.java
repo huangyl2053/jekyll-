@@ -397,7 +397,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
     }
 
     private void edit明細項目2(ShikakuShogohyoInEntity entity) {
-        csvEntity.set連番(new RString(連番));
+        csvEntity1.set連番(new RString(連番));
         if (entity.get被保険者一時() != null) {
             csvEntity1.set被保険者氏名(entity.get被保険者一時().get宛名名称());
             csvEntity1.set被保険者番号(entity.get被保険者一時().get登録被保険者番号().getColumnValue());
