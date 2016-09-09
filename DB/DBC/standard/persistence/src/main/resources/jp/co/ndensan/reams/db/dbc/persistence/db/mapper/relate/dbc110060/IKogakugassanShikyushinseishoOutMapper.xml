@@ -52,6 +52,15 @@
             OR DbWT1001."shikibetsuCode" = ''
     </select>
     
+    <select id="get業務別主キー" resultType="jp.co.ndensan.reams.uz.uza.lang.RString" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110060.KozaKyomuBetsuMybatisParameter" fetchSize="1" resultOrdered="true">
+        SELECT "gyomubetsuPrimaryKey" 
+        FROM rgua."UaT0100GyomubetsuPrimaryKey"
+        WHERE "gyomuCode" = 'DB'
+        AND "subGyomuCode" = 'DBC'
+        AND "kamokuCode" = #{科目コード}
+    </select>
+    
     <select id="get口座情報がないデータ" resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110060.SofuFileSakuseiMybatisParameter"
             resultMap="resultMap_KogakuGassanShinseishoInsertKozaEntity" fetchSize="500">

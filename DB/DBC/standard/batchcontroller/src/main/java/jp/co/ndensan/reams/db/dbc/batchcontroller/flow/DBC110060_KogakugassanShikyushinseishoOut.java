@@ -11,7 +11,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110060.KogakugassanShikyushinseishoOutGetSofuTaishoDataProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110060.KogakugassanShikyushinseishoOutHokenshaShutokuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110060.KogakugassanShikyushinseishoOutInsertKozaProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110060.KogakugassanShikyushinseishoOutSetHokenshameiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110060.KogakugassanShikyushinseishoOutSetHokenshameiKoikiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110060.KogakugassanShikyushinseishoOutSetHokenshameiTanitsuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110060.KogakugassanShikyushinseishoOutShinseishoReportProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110060.KogakugassanShikyushinseishoOutSofuFileSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110060.KogakugassanShikyushinseishoOutSoufuSetteiProcess;
@@ -29,6 +30,12 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassankyufujissekiout.S
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -49,7 +56,8 @@ public class DBC110060_KogakugassanShikyushinseishoOut extends BatchFlowBase<DBC
     private static final String 宛名情報取得 = "getAtena";
     private static final String 送付除外区分設定 = "soufuSettei";
     private static final String 口座情報登録確認 = "insertKozaJyoho";
-    private static final String 証記載保険者名取得 = "setHokenshamei";
+    private static final String 証記載保険者名取得_単一 = "setHokenshameiTanitsu";
+    private static final String 証記載保険者名取得_広域 = "setHokenshameiKoiki";
     private static final String 保険者番号の取得 = "hokenshaShutoku";
     private static final String 送付ファイル作成 = "sofuFileSakusei";
     private static final String 帳票出力 = "shinseishoReport";
@@ -59,6 +67,7 @@ public class DBC110060_KogakugassanShikyushinseishoOut extends BatchFlowBase<DBC
     private static final String 処理結果リスト作成 = "kokuhorenkyoutsuDoShoriKekkaListSakuseiProcess";
 
     private static final RString 被保険者_宛名情報取得BATCHID = new RString("HokenshaKyufujissekiOutHihokenshaAtenaFlow");
+    private static final RString MSG_導入形態コード = new RString("導入形態コード");
 
     private static final int INDEX_0 = 0;
 
@@ -86,7 +95,17 @@ public class DBC110060_KogakugassanShikyushinseishoOut extends BatchFlowBase<DBC
             executeStep(宛名情報取得);
             executeStep(送付除外区分設定);
             executeStep(口座情報登録確認);
-            executeStep(証記載保険者名取得);
+            ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+            if (KaigoDonyuKubun.未導入.code().equals(市町村セキュリティ情報.get介護導入区分())) {
+                throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage().replace(
+                        MSG_導入形態コード.toString()).toString());
+            }
+            DonyuKeitaiCode 導入形態コード = DonyuKeitaiCode.toValue(市町村セキュリティ情報.get導入形態コード().value());
+            if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード.getCode())) {
+                executeStep(証記載保険者名取得_単一);
+            } else if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getCode())) {
+                executeStep(証記載保険者名取得_広域);
+            }
             executeStep(保険者番号の取得);
             returnEntity = getResult(HokenshaShutokuEntity.class, new RString(保険者番号の取得),
                     KogakugassanShikyushinseishoOutHokenshaShutokuProcess.PARAMETER_OUT_RETURNENTITY);
@@ -147,17 +166,27 @@ public class DBC110060_KogakugassanShikyushinseishoOut extends BatchFlowBase<DBC
      */
     @Step(口座情報登録確認)
     protected IBatchFlowCommand insertKozaJyoho() {
-        return loopBatch(KogakugassanShikyushinseishoOutInsertKozaProcess.class).arguments(processParameter).define();
+        return loopBatch(KogakugassanShikyushinseishoOutInsertKozaProcess.class).define();
     }
 
     /**
-     * 証記載保険者名取得です。
+     * 証記載保険者名取得_広域です。
      *
-     * @return KogakugassanShikyushinseishoOutSetHokenshameiProcess
+     * @return KogakugassanShikyushinseishoOutSetHokenshameiTanitsuProcess
      */
-    @Step(証記載保険者名取得)
-    protected IBatchFlowCommand setHokenshamei() {
-        return loopBatch(KogakugassanShikyushinseishoOutSetHokenshameiProcess.class).define();
+    @Step(証記載保険者名取得_単一)
+    protected IBatchFlowCommand setHokenshameiTanitsu() {
+        return loopBatch(KogakugassanShikyushinseishoOutSetHokenshameiTanitsuProcess.class).define();
+    }
+
+    /**
+     * 証記載保険者名取得_広域です。
+     *
+     * @return KogakugassanShikyushinseishoOutSetHokenshameiKoikiProcess
+     */
+    @Step(証記載保険者名取得_広域)
+    protected IBatchFlowCommand setHokenshameiKoiki() {
+        return loopBatch(KogakugassanShikyushinseishoOutSetHokenshameiKoikiProcess.class).define();
     }
 
     /**

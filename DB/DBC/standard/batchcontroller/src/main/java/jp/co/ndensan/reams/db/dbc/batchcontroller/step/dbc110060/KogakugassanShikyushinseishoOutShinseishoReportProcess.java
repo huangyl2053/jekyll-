@@ -129,7 +129,6 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
 
     @Override
     protected void usualProcess(KogakugassanShikyushinseishoOutFileEntity entity) {
-        // TODO 帳票設計_DBC200032_高額合算補正済自己負担額情報送付一覧表 実装しない。
         GassanShikyuShinseishoJohoSofuIchiranReport report
                 = new GassanShikyuShinseishoJohoSofuIchiranReport(entity, YMDHMS.now(), processParameter.get処理年月(), index);
         report.writeBy(reportSourceWriter);
