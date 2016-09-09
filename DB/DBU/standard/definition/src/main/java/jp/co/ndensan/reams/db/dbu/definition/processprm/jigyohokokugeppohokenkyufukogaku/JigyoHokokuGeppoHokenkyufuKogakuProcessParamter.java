@@ -43,6 +43,8 @@ public class JigyoHokokuGeppoHokenkyufuKogakuProcessParamter implements IBatchPr
     private List<RString> 過去集計分市町村コードリスト;
     private final FileSpoolManager manager;
     private static final RString 区分 = new RString("1");
+    private static final RString 区分_2 = new RString("2");
+    private static final RString 区分_3 = new RString("3");
     private static final int INDEX = 8;
     private static final int 連番_4 = 4;
 
@@ -94,9 +96,14 @@ public class JigyoHokokuGeppoHokenkyufuKogakuProcessParamter implements IBatchPr
      * @return JigyoHokokuGeppoHokenkyufuKogakuMybatisParamter
      */
     public JigyoHokokuGeppoHokenkyufuKogakuMybatisParamter toJigyohokokuCompYoshikiMybitisParamter() {
-        if (過去集計分市町村コードリスト == null || 過去集計分市町村コードリスト.isEmpty()) {
+        if (区分_2.equals(プリントコントロール区分)) {
             過去集計分市町村コードリスト = new ArrayList<>();
             過去集計分市町村コードリスト.add(市町村コード);
+        } else {
+            if (過去集計分市町村コードリスト == null || 過去集計分市町村コードリスト.isEmpty()) {
+                過去集計分市町村コードリスト = new ArrayList<>();
+                過去集計分市町村コードリスト.add(市町村コード);
+            }
         }
         List 集計番号List = new ArrayList<>();
         集計番号List.add(ShukeiNo.利用者負担第五段階_0700.getコード());
@@ -212,12 +219,16 @@ public class JigyoHokokuGeppoHokenkyufuKogakuProcessParamter implements IBatchPr
      */
     public JigyoHokokuGeppoHokenkyufuKogakuMybatisParamter toSelectDataMybitisParamter() {
         List<RString> 市町村コードList = new ArrayList<>();
-        市町村コードList.add(市町村コード);
+        市町村コードList.add(市町村コード.concat(区分));
         if (区分.equals(構成市町村区分)) {
-            市町村コードList.addAll(構成市町村コードリスト);
+            for (RString list : 構成市町村コードリスト) {
+                市町村コードList.add(list.concat(区分_2));
+            }
         }
         if (区分.equals(旧市町村区分)) {
-            市町村コードList.addAll(旧市町村コードリスト);
+            for (RString list : 旧市町村コードリスト) {
+                市町村コードList.add(list.concat(区分_3));
+            }
         }
         List 集計番号List = new ArrayList<>();
         集計番号List.add(ShukeiNo.利用者負担第五段階_0700.getコード());
