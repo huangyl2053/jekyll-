@@ -55,9 +55,7 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
     public void onLoad(TaishoshaKey 資格対象者, List<NijiYoboJigyoTaishosha> 二次予防情報対象一覧List) {
         div.set被保険者番号(資格対象者.get被保険者番号().getColumnValue());
         initialize(資格対象者);
-        if (null != 二次予防情報対象一覧List && (!二次予防情報対象一覧List.isEmpty())) {
-            二次予防情報対象一覧グリッドを表示する(二次予防情報対象一覧List);
-        }
+        二次予防情報対象一覧グリッドを表示する(二次予防情報対象一覧List);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_保存する, true);
     }
 
@@ -68,25 +66,27 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
 
     private void 二次予防情報対象一覧グリッドを表示する(List<NijiYoboJigyoTaishosha> 二次予防情報対象一覧List) {
         List<dgKihonInfo_Row> rowList = new ArrayList<>();
-        for (NijiYoboJigyoTaishosha 二次予防情報 : 二次予防情報対象一覧List) {
-            dgKihonInfo_Row row = new dgKihonInfo_Row();
-            row.setJoutai(空白);
-            if (null != 二次予防情報.get適用開始年月日() && (!FlexibleDate.EMPTY.equals(二次予防情報.get適用開始年月日()))) {
-                row.getTekiyouKaishiBi().setValue(new RDate(二次予防情報.get適用開始年月日().toString()));
+        if (null != 二次予防情報対象一覧List && (!二次予防情報対象一覧List.isEmpty())) {
+            for (NijiYoboJigyoTaishosha 二次予防情報 : 二次予防情報対象一覧List) {
+                dgKihonInfo_Row row = new dgKihonInfo_Row();
+                row.setJoutai(空白);
+                if (null != 二次予防情報.get適用開始年月日() && (!FlexibleDate.EMPTY.equals(二次予防情報.get適用開始年月日()))) {
+                    row.getTekiyouKaishiBi().setValue(new RDate(二次予防情報.get適用開始年月日().toString()));
+                }
+                if (null != 二次予防情報.get適用終了年月日() && (!FlexibleDate.EMPTY.equals(二次予防情報.get適用終了年月日()))) {
+                    row.getTekiyouShuuryouBi().setValue(new RDate(二次予防情報.get適用終了年月日().toString()));
+                }
+                if (null != 二次予防情報.get調査実施日() && (!FlexibleDate.EMPTY.equals(二次予防情報.get調査実施日()))) {
+                    row.getChousaZisshiBi().setValue(new RDate(二次予防情報.get調査実施日().toString()));
+                }
+                if (null != 二次予防情報.get決定年月日() && (!FlexibleDate.EMPTY.equals(二次予防情報.get決定年月日()))) {
+                    row.getKetteiBi().setValue(new RDate(二次予防情報.get決定年月日().toString()));
+                }
+                row.setRirekiNo(new RString(二次予防情報.get履歴番号()));
+                rowList.add(row);
             }
-            if (null != 二次予防情報.get適用終了年月日() && (!FlexibleDate.EMPTY.equals(二次予防情報.get適用終了年月日()))) {
-                row.getTekiyouShuuryouBi().setValue(new RDate(二次予防情報.get適用終了年月日().toString()));
-            }
-            if (null != 二次予防情報.get調査実施日() && (!FlexibleDate.EMPTY.equals(二次予防情報.get調査実施日()))) {
-                row.getChousaZisshiBi().setValue(new RDate(二次予防情報.get調査実施日().toString()));
-            }
-            if (null != 二次予防情報.get決定年月日() && (!FlexibleDate.EMPTY.equals(二次予防情報.get決定年月日()))) {
-                row.getKetteiBi().setValue(new RDate(二次予防情報.get決定年月日().toString()));
-            }
-            row.setRirekiNo(new RString(二次予防情報.get履歴番号()));
-            rowList.add(row);
+            sortDg二次予防情報対象一覧(rowList);
         }
-        sortDg二次予防情報対象一覧(rowList);
         div.getKihonnInfo().getDgKihonInfo().setDataSource(rowList);
     }
 

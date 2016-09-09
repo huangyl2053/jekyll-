@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
  * @reamsid_L DBC-3500-010 jinjue
  */
 public class DBC5100011Main {
-    //TODO 「2.1　選択した出力順を前回出力順テーブルに登録する」の処理(技術点に提出しました※QA#73393)
 
     /**
      * 画面初期化処理です。
@@ -28,16 +27,6 @@ public class DBC5100011Main {
     public ResponseData<DBC5100011MainDiv> onLoad(DBC5100011MainDiv div) {
         this.getHandler(div).onLoad();
         return ResponseData.of(div).setState(標準);
-    }
-
-    /**
-     * バッチを行きます。
-     *
-     * @param div DBC5100011MainDiv
-     * @return ResponseData<DBC5100011MainDiv>
-     */
-    public ResponseData<DBC5100011MainDiv> onClick_btnBatchRegister(DBC5100011MainDiv div) {
-        return ResponseData.of(div).respond();
     }
 
     /**

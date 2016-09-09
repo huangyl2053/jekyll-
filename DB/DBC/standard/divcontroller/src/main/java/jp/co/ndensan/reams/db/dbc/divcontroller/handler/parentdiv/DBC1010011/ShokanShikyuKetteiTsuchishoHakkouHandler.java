@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1010011;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanshikyuketteitsuchishohakkou.ShokanShikyuKetteiTsuchishoHakkouBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.shoukanbaraishikyuketteitsuchisho.ShoukanbaraiShikyuketteiTsuuchishoOutputEntity;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijiari.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem;
@@ -14,14 +15,15 @@ import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiy
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1010011.ShokanShikyuKetteiTsuchishoHakkouDiv;
-import jp.co.ndensan.reams.db.dbc.service.core.shokanshikyuketteitsuchishohakkou.ShokanShikyuKetteiTsuchishoHakkouFinder;
 import jp.co.ndensan.reams.db.dbc.service.core.shoukanbaraishikyuketteitsuchisho.ShoukanbaraiShikyuKetteiTsuchisho;
 import jp.co.ndensan.reams.db.dbc.service.report.shokanketteitsuchishoshiharaiyoteibiyijinashi.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriService;
 import jp.co.ndensan.reams.db.dbc.service.report.shokanketteitsuchishoshiharaiyoteibiyijinashi.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiService;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
+import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.service.core.basic.ShokanHanteiKekkaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -44,12 +46,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 /**
  * 償還払い支給（不支給）決定通知書作成（単）のHandlerです。
  *
- * @reamsid_L DBD-5310-010 liuyl
+ * @reamsid_L DBC-5310-010 liuyl
  */
 public class ShokanShikyuKetteiTsuchishoHakkouHandler {
 
     private final ShokanShikyuKetteiTsuchishoHakkouDiv div;
-    private final ShokanShikyuKetteiTsuchishoHakkouFinder finder;
     private static final RString DBCSHIKIBETSUCODE = new RString("DBCshikibetsuCode");
 
     /**
@@ -59,7 +60,6 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
      */
     public ShokanShikyuKetteiTsuchishoHakkouHandler(ShokanShikyuKetteiTsuchishoHakkouDiv div) {
         this.div = div;
-        this.finder = ShokanShikyuKetteiTsuchishoHakkouFinder.createInstance();
     }
 
     /**
@@ -67,8 +67,16 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
      *
      * @param shikibetsuCode ShikibetsuCode
      * @param 被保険者番号 HihokenshaNo
+     * @param 償還払支給判定結果List List<ShokanShikyuKetteiTsuchishoHakkouBusiness>
+     * @param 受給者台帳List List<JukyushaDaicho>
+     * @param 総合事業対象者List List<SogoJigyoTaishosha>
+     * @param 償還払支給判定結果 List<ShokanHanteiKekka>
      */
-    public void onLoad(ShikibetsuCode shikibetsuCode, HihokenshaNo 被保険者番号) {
+    public void onLoad(ShikibetsuCode shikibetsuCode, HihokenshaNo 被保険者番号,
+            List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List,
+            List<JukyushaDaicho> 受給者台帳List,
+            List<SogoJigyoTaishosha> 総合事業対象者List,
+            List<ShokanHanteiKekka> 償還払支給判定結果) {
         LockingKey key = new LockingKey(DBCSHIKIBETSUCODE.concat(被保険者番号.getColumnValue()));
         RealInitialLocker.lock(key);
         div.getShokanShikyuKetteiTsuchishoHakkouKihon().initialize(shikibetsuCode);
@@ -76,16 +84,22 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         div.getShokanShikyuKetteiTsuchishoHakkouPrint().getTxtHakkouYMD().setValue(RDate.getNowDate());
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("'被保険者番号"),
                 被保険者番号.value());
-        AccessLogger.log(AccessLogType.更新, PersonalData.withHojinNo(shikibetsuCode, expandedInfo));
-        List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List = finder.get償還払支給判定結果(被保険者番号);
+        AccessLogger.log(AccessLogType.照会, PersonalData.of(shikibetsuCode, expandedInfo));
+        if (受給者台帳List.isEmpty() || 総合事業対象者List.isEmpty()) {
+            throw new ApplicationException(DbdErrorMessages.受給共通_受給者_事業対象者登録なし.getMessage());
+        }
+        if (償還払支給判定結果.isEmpty()) {
+            throw new ApplicationException(DbcErrorMessages.償還決定データなし.getMessage());
+        }
         List<FlexibleYearMonth> サービス提供年月List = getサービス提供年月(償還払支給判定結果List);
         div.getDdlServiceTeikyoYM().setDataSource(getサービス提供年月DataSource(サービス提供年月List));
         if (!サービス提供年月List.isEmpty()) {
             div.getDdlServiceTeikyoYM().setSelectedValue(サービス提供年月List.get(0).wareki().toDateString());
         }
-        div.getDdlSeiriNO().setDataSource(get整理番号DataSource(get整理番号(サービス提供年月List.get(0), 償還払支給判定結果List)));
-        if (!get整理番号(サービス提供年月List.get(0), 償還払支給判定結果List).isEmpty()) {
-            div.getDdlSeiriNO().setSelectedValue(get整理番号(サービス提供年月List.get(0), 償還払支給判定結果List).get(0));
+        List<RString> 整理番号List = get整理番号(サービス提供年月List.get(0), 償還払支給判定結果List);
+        div.getDdlSeiriNO().setDataSource(get整理番号DataSource(整理番号List));
+        if (!整理番号List.isEmpty()) {
+            div.getDdlSeiriNO().setSelectedValue(整理番号List.get(0));
         }
         if (償還払支給判定結果List.get(0).get償還払支給判定結果().get決定通知書作成年月日() != null && !償還払支給判定結果List.get(0).
                 get償還払支給判定結果().get決定通知書作成年月日().isEmpty()) {
@@ -104,12 +118,11 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
      * サービス提供年月を変更。
      *
      * @param 被保険者番号 HihokenshaNo
+     * @param 償還払支給判定結果List List<ShokanShikyuKetteiTsuchishoHakkouBusiness>
      */
-    public void onChange_ServiceTeikyo(HihokenshaNo 被保険者番号) {
+    public void onChange_ServiceTeikyo(HihokenshaNo 被保険者番号, List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List) {
         RString サービス提供年月 = div.getDdlServiceTeikyoYM().getSelectedKey();
-        List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List = finder.get償還払支給判定結果(被保険者番号);
         List<RString> 整理番号List = get整理番号(new FlexibleYearMonth(サービス提供年月), 償還払支給判定結果List);
-        div.getDdlSeiriNO().setDataSource(get整理番号DataSource(整理番号List));
         div.getDdlSeiriNO().setSelectedValue(整理番号List.get(0));
         RString 整理番号 = div.getDdlSeiriNO().getSelectedValue();
         FlexibleDate 決定通知書作成年月日 = null;
@@ -176,11 +189,11 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
      * 整理番号を変更。
      *
      * @param 被保険者番号 HihokenshaNo
+     * @param 償還払支給判定結果List List<ShokanShikyuKetteiTsuchishoHakkouBusiness>
      */
-    public void onChange_SeiriNO(HihokenshaNo 被保険者番号) {
+    public void onChange_SeiriNO(HihokenshaNo 被保険者番号, List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List) {
         RString サービス提供年月 = div.getDdlServiceTeikyoYM().getSelectedKey();
         RString 整理番号 = div.getDdlSeiriNO().getSelectedValue();
-        List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List = finder.get償還払支給判定結果(被保険者番号);
         FlexibleDate 決定通知書作成年月日 = null;
         for (ShokanShikyuKetteiTsuchishoHakkouBusiness shakan : 償還払支給判定結果List) {
             if (shakan.get償還払支給判定結果().getサービス提供年月().toDateString().equals(サービス提供年月) && shakan.
@@ -194,6 +207,29 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         } else {
             div.getShokanShikyuKetteiTsuchishoHakkouPrint().getTxtZenkaiHakkoYMD().clearValue();
         }
+    }
+
+    /**
+     * 償還払支給判定結果を返します。
+     *
+     * @param 償還払支給判定結果List
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @return ShokanHanteiKekka
+     */
+    public ShokanHanteiKekka get償還払支給判定結果(
+            List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号) {
+        ShokanHanteiKekka shokanHanteiKekka = null;
+        for (ShokanShikyuKetteiTsuchishoHakkouBusiness 償還払支給判定結果 : 償還払支給判定結果List) {
+            if (償還払支給判定結果.get償還払支給判定結果().getサービス提供年月().equals(サービス提供年月) && 償還払支給判定結果.
+                    get償還払支給判定結果().get整理番号().equals(整理番号)) {
+                shokanHanteiKekka = 償還払支給判定結果.get償還払支給判定結果();
+                break;
+            }
+        }
+        return shokanHanteiKekka;
     }
 
     private List<FlexibleYearMonth> getサービス提供年月(List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List) {

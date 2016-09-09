@@ -44,7 +44,7 @@ public class YouKaigoNinteiIkatsuKoshinHandler {
      */
     public void changeTxtNinTeiBi(){
         RString key = div.getRadSetteiHoushiki().getSelectedKey();
-        if("1".endsWith(key.toString())){
+        if("0".equals(key.toString())){
             div.getTxtNinteibi().setDisabled(false);
             div.getTxtNinteibi().setValue(RDate.getNowDate());
         }else{

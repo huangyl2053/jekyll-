@@ -65,7 +65,7 @@ public class KohijukyushaBetsuIchiranEditor implements IKohijukyushaBetsuIchiran
         source.listUpper_1 = business.get公費受給者番号();
         if (!RString.isNullOrEmpty(business.getサービス提供年月())) {
             source.listUpper_2 = new FlexibleDate(business.getサービス提供年月())
-                    .wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+                    .wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).getYearMonth();
         }
         source.listUpper_3 = business.get事業所番号();
         source.listLower_1 = business.get事業所名();

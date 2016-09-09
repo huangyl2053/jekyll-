@@ -176,7 +176,7 @@ public class ShikakuShogohyoEditor implements IShikakuShogohyoEditor {
             source.listUpper_17 = decimal_to_string(target.get資格照合表一時().getKyojuhiFutanGendoGaku4());
         }
         if (target.get資格照合表一時().getTanisuTanka() != null) {
-            source.listUpper_18 = decimal_to_string(target.get資格照合表一時().getTanisuTanka().divide(NUM_100).roundHalfUpTo(NUM_2));
+            source.listUpper_18 = new RString(target.get資格照合表一時().getTanisuTanka().divide(NUM_100).roundHalfUpTo(NUM_2).toString());
         }
         if (target.get資格照合表一時().getHokenKyufuRitsu().getColumnValue() != null) {
             source.listUpper_19 = decimal_to_string(target.get資格照合表一時().getHokenKyufuRitsu().getColumnValue());
@@ -199,7 +199,7 @@ public class ShikakuShogohyoEditor implements IShikakuShogohyoEditor {
 
     private ShikakuShogohyoSource editor編集2(ShikakuShogohyoSource source) {
         if (target.get資格照合表一時().getGetsuGakuShokujiFutanGaku() != null) {
-            source.listLower_9 = decimal_to_string(target.get資格照合表一時().getGetsuGakuShokujiFutanGaku());
+            source.listLower_9 = decimal_to_string(target.get資格照合表一時().getNichiGakuShokujiFutanGaku());
         }
         if (target.get資格照合表一時().getKyojuhiFutanGendoGaku1() != null) {
             source.listLower_10 = decimal_to_string(target.get資格照合表一時().getKyojuhiFutanGendoGaku1());

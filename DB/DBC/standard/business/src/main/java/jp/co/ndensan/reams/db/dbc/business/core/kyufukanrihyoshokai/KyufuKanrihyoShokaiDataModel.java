@@ -67,6 +67,7 @@ public final class KyufuKanrihyoShokaiDataModel implements Serializable {
     private FlexibleYearMonth 取込年月;
     private RString 氏名;
     private RString サービス事業者名;
+    private RString 識別コード;
 
     /**
      * コンストラクタです。
@@ -114,7 +115,8 @@ public final class KyufuKanrihyoShokaiDataModel implements Serializable {
             FlexibleDate 当初登録年月日,
             FlexibleYearMonth 取込年月,
             RString 氏名,
-            RString サービス事業者名) {
+            RString サービス事業者名,
+            RString 識別コード) {
         this.insertDantaiCd = insertDantaiCd;
         this.insertTimestamp = insertTimestamp;
         this.insertReamsLoginId = insertReamsLoginId;
@@ -155,6 +157,7 @@ public final class KyufuKanrihyoShokaiDataModel implements Serializable {
         this.取込年月 = 取込年月;
         this.氏名 = 氏名;
         this.サービス事業者名 = サービス事業者名;
+        this.識別コード = 識別コード;
     }
 
     /**
@@ -204,6 +207,7 @@ public final class KyufuKanrihyoShokaiDataModel implements Serializable {
                 business.get当初登録年月日(),
                 business.get取込年月(),
                 business.get氏名(),
-                business.getサービス事業者名());
+                business.getサービス事業者名(),
+                business.get識別コード());
     }
 }

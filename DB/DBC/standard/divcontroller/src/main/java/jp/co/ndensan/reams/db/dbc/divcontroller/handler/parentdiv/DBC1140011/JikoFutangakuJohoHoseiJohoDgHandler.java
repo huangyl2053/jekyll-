@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanJikofutangaku
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Idokubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1140011.DBC1140011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1140011.JikoFutangakuHoseiDetailDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1140011.JikoFutangakuJohoHoseiJohoDgDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1140011.dgJohoIchiran_Row;
@@ -37,6 +38,8 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 高額合算自己負担額情報補正(単)_情報一覧のHandlerクラスです。
@@ -51,7 +54,6 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
     private static final RString 所得区分_非課税 = new RString("11");
     private static final RString 課税 = new RString("課税");
     private static final RString 非課税 = new RString("非課税");
-    private static final RString ZERO = new RString("0");
     private static final RString CODE_ONE = new RString("1");
     private static final RString CODE_TWO = new RString("2");
     private static final RString 非該当 = new RString("非該当");
@@ -70,6 +72,7 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
     private static final RString CODE_003 = new RString("003");
     private static final RString 名称_被保険者番号 = new RString("被保険者番号");
     private static final RString KEY_ZERO = new RString("key0");
+    private static final RString 入力前の状態に戻る = new RString("btnReturn");
 
     /**
      * コンストラクタです。
@@ -111,7 +114,42 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
      */
     public void onClick_chkRirekiHyouji(List<KogakuGassanJikoFutanGaku> resultList, HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         List<dgJohoIchiran_Row> rowList = new ArrayList();
-        List<PersonalData> personalDataList = new ArrayList<>();
+        for (KogakuGassanJikoFutanGaku result : resultList) {
+            dgJohoIchiran_Row row = new dgJohoIchiran_Row();
+            row.setTxtTaishoNendo(result.get対象年度().toDateString());
+            row.setTxtSanteiKubun(set算定区分(result.get異動区分()));
+            row.setTxtHokenshaNo(result.get保険者番号().getColumnValue());
+            row.setTxtShikyuShinseishoSeiriNo(result.get支給申請書整理番号());
+            row.setTxtIdoKubun(result.get異動区分() == null ? RString.EMPTY
+                    : KaigoGassan_Idokubun.toValue(result.get異動区分()).get名称());
+            row.setTxtRirekiNo(new RString(result.get履歴番号()));
+            row.setTxtUketoriNengetsu(result.get自己負担額証明書情報受取年月() == null ? RString.EMPTY
+                    : result.get自己負担額証明書情報受取年月().toDateString());
+            row.setTxtHoseiYMDTan(result.getバッチ補正実施年月日() == null ? RString.EMPTY
+                    : DateConverter.toWarekiHalf_Zero(
+                            new RDate(result.getバッチ補正実施年月日().toString())));
+            row.setTxtHoseiYMDTan(result.getリアル補正実施年月日() == null ? RString.EMPTY
+                    : DateConverter.toWarekiHalf_Zero(
+                            new RDate(result.getリアル補正実施年月日().toString())));
+            row.setTxtSofuNengetsu(result.get補正済自己負担額情報送付年月() == null ? RString.EMPTY
+                    : new RString(result.get補正済自己負担額情報送付年月().toString()));
+            row.setTxtDataKBN(result.getデータ作成区分() == null ? RString.EMPTY
+                    : result.getデータ作成区分());
+            rowList.add(row);
+        }
+        div.getJikoFutangakuHoseiList().getDgJohoIchiran().setDataSource(rowList);
+    }
+
+    /**
+     * onLoad時アクセスログ出力します。
+     *
+     * @param resultList List<KogakuGassanJikoFutanGaku>
+     * @param 識別コード 識別コード
+     * @param 被保険者番号 被保険者番号
+     */
+    public void 履歴を表示printLog(List<KogakuGassanJikoFutanGaku> resultList, ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+        List<dgJohoIchiran_Row> rowList = new ArrayList();
+        List<PersonalData> personalDataList = new ArrayList();
         for (KogakuGassanJikoFutanGaku result : resultList) {
             dgJohoIchiran_Row row = new dgJohoIchiran_Row();
             row.setTxtTaishoNendo(result.get対象年度().toDateString());
@@ -252,8 +290,13 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
     private RString set時間(RString 時, RString 分) {
         RString jikan = 時 == null ? RString.EMPTY : 時;
         RString fun = 分 == null ? RString.EMPTY : 分;
-        RString 時間 = jikan.concat(fun);
-        return RString.isNullOrEmpty(時間) ? null : 時間;
+        if (jikan.isEmpty() || fun.isEmpty()) {
+            RString 時間 = jikan.concat(fun);
+            return RString.isNullOrEmpty(時間) ? null : 時間;
+        } else {
+            RString 時間 = jikan.padZeroToLeft(2).concat(fun.padZeroToLeft(2));
+            return RString.isNullOrEmpty(時間) ? null : 時間;
+        }
     }
 
     /**
@@ -314,14 +357,13 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
             detailDiv.getTxtUketoriYM().setValue(new RDate(
                     result.get自己負担額証明書情報受取年月().toString()));
         }
-        //TODO 不确定checkbox 能否实现
         List<RString> 再送フラグList = new ArrayList();
-        if (ZERO.equals(result.get再送フラグ())) {
+        if (CODE_ONE.equals(result.get再送フラグ())) {
             再送フラグList.add(KEY_ZERO);
             detailDiv.getChkSaisouKBN().setSelectedItemsByKey(再送フラグList);
         }
         List<RString> 送付対象外フラグList = new ArrayList();
-        if (ZERO.equals(result.get送付対象外フラグ())) {
+        if (CODE_ONE.equals(result.get送付対象外フラグ())) {
             送付対象外フラグList.add(KEY_ZERO);
             detailDiv.getChkSoufuTaishougai().setSelectedItemsByKey(送付対象外フラグList);
         }
@@ -585,36 +627,36 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
                             .build();
                     businessList.add(item);
                     break;
-//                case "101":
-//                    item = item.createBuilderForEdit()
-//                            .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_1月分())
-//                            .set補正済_70_74自己負担額_内数(
-//                                    自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_1月分())
-//                            .set補正済_70未満高額支給額(
-//                                    自己負担額保持.get変更後_補正後_高額介護_予防_サービス費_1月分())
-//                            .build();
-//                    businessList.add(item);
-//                    break;
-//                case "102":
-//                    item = item.createBuilderForEdit()
-//                            .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_2月分())
-//                            .set補正済_70_74自己負担額_内数(
-//                                    自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_2月分())
-//                            .set補正済_70未満高額支給額(
-//                                    自己負担額保持.get変更後_補正後_高額介護_予防_サービス費_2月分())
-//                            .build();
-//                    businessList.add(item);
-//                    break;
-//                case "103":
-//                    item = item.createBuilderForEdit()
-//                            .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_3月分())
-//                            .set補正済_70_74自己負担額_内数(
-//                                    自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_3月分())
-//                            .set補正済_70未満高額支給額(
-//                                    自己負担額保持.get変更後_補正後_高額介護_予防_サービス費_3月分())
-//                            .build();
-//                    businessList.add(item);
-//                    break;
+                case "101":
+                    item = item.createBuilderForEdit()
+                            .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_翌年1月分())
+                            .set補正済_70_74自己負担額_内数(
+                                    自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_翌年1月分())
+                            .set補正済_70未満高額支給額(
+                                    自己負担額保持.get変更後_補正後_高額介護_予防_サービス費_翌年1月分())
+                            .build();
+                    businessList.add(item);
+                    break;
+                case "102":
+                    item = item.createBuilderForEdit()
+                            .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_翌年2月分())
+                            .set補正済_70_74自己負担額_内数(
+                                    自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_翌年2月分())
+                            .set補正済_70未満高額支給額(
+                                    自己負担額保持.get変更後_補正後_高額介護_予防_サービス費_翌年2月分())
+                            .build();
+                    businessList.add(item);
+                    break;
+                case "103":
+                    item = item.createBuilderForEdit()
+                            .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_翌年3月分())
+                            .set補正済_70_74自己負担額_内数(
+                                    自己負担額保持.get変更後_補正後_うち70_74歳に係る負担額_翌年3月分())
+                            .set補正済_70未満高額支給額(
+                                    自己負担額保持.get変更後_補正後_高額介護_予防_サービス費_翌年3月分())
+                            .build();
+                    businessList.add(item);
+                    break;
                 case "104":
                     item = item.createBuilderForEdit()
                             .set補正済_自己負担額(自己負担額保持.get変更後_補正後_自己負担額_4月分())
@@ -660,5 +702,36 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
             }
         }
         return businessList;
+    }
+
+    /**
+     * 再送区分送付対象外制御の処理です。
+     *
+     * @param flg boolean
+     * @param result KogakuGassanJikoFutanGaku
+     */
+    public void 再送区分送付対象外制御(boolean flg, KogakuGassanJikoFutanGaku result) {
+        if (flg) {
+            div.getJikoFutangakuHoseiDetail().getChkSoufuTaishougai().setDisabled(false);
+            if (result.get補正済自己負担額情報送付年月() != null) {
+                div.getChkSaisouKBN().setDisabled(false);
+            } else if (CODE_ONE.equals(result.get送付対象外フラグ())) {
+                div.getChkSaisouKBN().setDisabled(true);
+            } else {
+                div.getChkSaisouKBN().setDisabled(true);
+            }
+        } else {
+            div.getJikoFutangakuHoseiDetail().getChkSoufuTaishougai().setDisabled(true);
+            div.getChkSaisouKBN().setDisabled(true);
+        }
+    }
+
+    /**
+     * 保存する設定です。
+     */
+    public void set履歴Dgdの選択ボタンする() {
+        if (DBC1140011StateName.自己負担額管理情報入力.getName().equals(ResponseHolder.getState())) {
+            CommonButtonHolder.setVisibleByCommonButtonFieldName(入力前の状態に戻る, false);
+        }
     }
 }

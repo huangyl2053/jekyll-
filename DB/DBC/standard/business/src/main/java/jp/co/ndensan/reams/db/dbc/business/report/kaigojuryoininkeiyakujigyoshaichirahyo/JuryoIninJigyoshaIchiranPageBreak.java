@@ -39,16 +39,16 @@ public class JuryoIninJigyoshaIchiranPageBreak extends PageBreaker<JuryoIninJigy
     public boolean isBreak(ReportLineRecord<JuryoIninJigyoshaIchiranSource> currentSource,
             ReportLineRecord<JuryoIninJigyoshaIchiranSource> nextSource) {
         boolean flag = false;
-        if (this.breakKeysList.contains(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.契約事業者番号.getフォームフィールド名())
+        if (this.breakKeysList.contains(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.契約事業者番号.get項目ID())
                 && !currentSource.getSource().listUpper_1.equals(nextSource.getSource().listUpper_1)) {
             flag = true;
-        } else if (this.breakKeysList.contains(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.契約事業者郵便番号.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.契約事業者郵便番号.get項目ID())
                 && !currentSource.getSource().listUpper_3.equals(nextSource.getSource().listUpper_3)) {
             flag = true;
-        } else if (this.breakKeysList.contains(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.契約開始年月日.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.契約開始年月日.get項目ID())
                 && !currentSource.getSource().listUpper_5.equals(nextSource.getSource().listUpper_5)) {
             flag = true;
-        } else if (this.breakKeysList.contains(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.契約種別.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.契約種別.get項目ID())
                 && !currentSource.getSource().listLower_3.equals(nextSource.getSource().listLower_3)) {
             flag = true;
         }
@@ -65,16 +65,16 @@ public class JuryoIninJigyoshaIchiranPageBreak extends PageBreaker<JuryoIninJigy
     public boolean is改頁(JuryoIninJigyoshaIchiranEntity currentSource,
             JuryoIninJigyoshaIchiranEntity nextSource) {
         boolean flag = false;
-        if (this.breakKeysList.contains(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.契約事業者番号.getフォームフィールド名())
+        if (this.breakKeysList.contains(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.契約事業者番号.get項目ID())
                 && !currentSource.get事業者番号().equals(nextSource.get事業者番号())) {
             flag = true;
-        } else if (this.breakKeysList.contains(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.契約事業者郵便番号.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.契約事業者郵便番号.get項目ID())
                 && !currentSource.get所在地郵番号().equals(nextSource.get所在地郵番号())) {
             flag = true;
-        } else if (this.breakKeysList.contains(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.契約開始年月日.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.契約開始年月日.get項目ID())
                 && !currentSource.get契約開始日().equals(nextSource.get契約開始日())) {
             flag = true;
-        } else if (this.breakKeysList.contains(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.契約種別.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(KaigoJuryoininKeiyakuJigyoshaIchirahyoOrder.契約種別.get項目ID())
                 && !currentSource.get契約種別().equals(nextSource.get契約種別())) {
             flag = true;
         }

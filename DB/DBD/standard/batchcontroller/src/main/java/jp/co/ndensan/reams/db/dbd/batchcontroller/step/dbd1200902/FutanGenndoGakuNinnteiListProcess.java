@@ -129,8 +129,12 @@ public class FutanGenndoGakuNinnteiListProcess extends BatchProcessBase<FutanGen
         data.set決定日(futan.getKetteiYMD());
         data.set適用日(futan.getTekiyoYMD());
         data.set有効期限(futan.getTekiyoYMD());
-        data.set決定(KetteiKubun.toValue(futan.getKetteiKubun()));
-        data.set負担段階(RiyoshaFutanDankai.toValue(futan.getKetteiKubun()).get名称());
+        if (futan.getKetteiKubun() != null) {
+            data.set決定(KetteiKubun.toValue(futan.getKetteiKubun()));
+        }
+        if (futan.getRiyoshaFutanDankai() != null) {
+            data.set負担段階(RiyoshaFutanDankai.toValue(futan.getRiyoshaFutanDankai()).get名称());
+        }
         data.set認定証発行フラグ(futan.isNinteishoHakkoZumi());
         data.set通知書発行済み(futan.isTsuchiHakkoZumi());
         data.set認定証発行フラグ(parameter.is認定証発行フラグ());

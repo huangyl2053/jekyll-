@@ -86,7 +86,9 @@ public final class PanelKougakuKetteiTuutisyoHandler {
     public void 画面初期化(ShikibetsuCode 識別コード, LasdecCode 市町村コード, HihokenshaNo 被保険者番号,
             List<FlexibleYearMonth> サービス提供年月リスト) {
         div.getKyoTuuKaigoAtena().initialize(識別コード);
-        div.getKyoTuuKaigoNinnteiSikaku().initialize(市町村コード.value(), 被保険者番号.value());
+        if (市町村コード != null) {
+            div.getKyoTuuKaigoNinnteiSikaku().initialize(市町村コード.value(), 被保険者番号.value());
+        }
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
         div.getKougakuKetteiTuutisyoBunsho().initialize(帳票ID, システム日付);
         div.getRadSyoukaiSinnsei().setSelectedKey(定数_初回申請用);
@@ -196,7 +198,7 @@ public final class PanelKougakuKetteiTuutisyoHandler {
         }
         FlexibleDate 発行日 = new FlexibleDate(div.getTxtHakkoubi().getValue().toDateString());
         ServiceNoKanribangouRendou 帳票情報Mgr = ServiceNoKanribangouRendou.createInstance();
-        final HokenshaNo 証記載保険者番号 = new HokenshaNo(div.getKyoTuuKaigoNinnteiSikaku().getHokensha());
+        final HokenshaNo 証記載保険者番号 = new HokenshaNo(div.getKyoTuuKaigoNinnteiSikaku().getHookenshaCode());
         final FlexibleYearMonth サービス提供年月 = new FlexibleDate(div.getDdlServiceYearMonth().getSelectedValue()).getYearMonth();
         JigyouKetteiTutisyoResult 帳票情報Entity = 帳票情報Mgr.selectKougakuJigyouKetteiTutisyo(
                 div.getKougakuKetteiTuutisyoBunsho().get文書番号(), 発行日, 被保険者番号, サービス提供年月, 様式,

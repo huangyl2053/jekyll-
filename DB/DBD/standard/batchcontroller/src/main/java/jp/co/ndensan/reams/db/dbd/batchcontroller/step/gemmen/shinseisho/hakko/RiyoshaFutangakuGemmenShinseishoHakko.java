@@ -59,6 +59,7 @@ public class RiyoshaFutangakuGemmenShinseishoHakko extends BatchProcessBase<Riyo
     private static final RString SHUTSURYOKUJUN = new RString("【出力順】");
     private static final RString なし = new RString("なし");
     private static final RString COMMA = new RString(",");
+    private static final RString 種別コード = new RString("0001");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmen.shinseisho.hakko."
             + "IRiyoshaFutangakuGemmenShinseishoHakkoMapper.get出力対象者情報");
@@ -78,7 +79,7 @@ public class RiyoshaFutangakuGemmenShinseishoHakko extends BatchProcessBase<Riyo
     @Override
     protected void initialize() {
         association = AssociationFinderFactory.createInstance().getAssociation();
-        ninshosha = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, RString.EMPTY);
+        ninshosha = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, 種別コード);
         hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
         導入団体コード = association.getLasdecCode_().value();
         市町村名 = association.get市町村名();

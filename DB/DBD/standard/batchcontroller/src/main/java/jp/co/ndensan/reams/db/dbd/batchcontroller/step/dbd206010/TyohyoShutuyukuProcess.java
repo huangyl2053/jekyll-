@@ -147,7 +147,7 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation(
                 new LasdecCode(t.get証記載保険者番号().value()));
         JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport report
-                = new JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport(t, 地方公共団体, association, outputOrder, 番号++);
+                = new JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport(t, association, 地方公共団体, outputOrder, 番号++);
         report.writeBy(reportSourceWriter);
     }
 
@@ -155,7 +155,7 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
     protected void afterExecute() {
         if (番号 == 1) {
             JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport report
-                    = new JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport(null, null, association, outputOrder, 番号++);
+                    = new JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport(null, association, null, outputOrder, 番号++);
             report.writeBy(reportSourceWriter);
         }
         outputJokenhyoFactory();
@@ -281,29 +281,18 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
 
     private static <T extends Enum<T> & IReportItems> RString createOrderSqlStr(Class<T> clazz, IOutputOrder outputOrder) {
         ReportItemsMap reportItems = new ReportItemsMap(Arrays.<IReportItems>asList(clazz.getEnumConstants()));
-        orderByClause = new RStringBuilder("order by");
+        orderByClause = new RStringBuilder("");
         space = new RString(" ");
         comma = new RString(",");
-        commaCount = 0;
         if (outputOrder.get設定項目リスト().isEmpty()) {
             return RString.EMPTY;
         }
         for (ISetSortItem setSortItem : outputOrder.get設定項目リスト()) {
-
-            if (commaCount != 0) {
+            if (!reportItems.getMyBatis項目名(setSortItem.get項目ID()).isNullOrEmpty()) {
                 orderByClause = orderByClause.append(space).append(comma).append(space)
                         .append(reportItems.getMyBatis項目名(setSortItem.get項目ID())).append(space).append(setSortItem.get昇降順().getOrder());
-
-            } else {
-                setSortItem.get項目名();
-                setSortItem.getDB項目名();
-                setSortItem.get帳票フィールド名();
-                orderByClause = orderByClause.append(space)
-                        .append(reportItems.getMyBatis項目名(setSortItem.get項目ID())).append(space).append(setSortItem.get昇降順().getOrder());
             }
-            commaCount++;
         }
-
         return orderByClause.toRString();
     }
 

@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC040050;
 
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -38,31 +40,31 @@ public class DBC040050_KogakugassanShikyuKetteitsuchishoParameter extends BatchP
     @BatchParameter(key = KEY_日付選択区分, name = "日付選択区分")
     private RString 日付選択区分;
     @BatchParameter(key = KEY_受取年月, name = "受取年月")
-    private RDate 受取年月;
+    private FlexibleYearMonth 受取年月;
     @BatchParameter(key = KEY_申請開始年月日, name = "申請開始年月日")
-    private RDate 申請開始年月日;
+    private FlexibleDate 申請開始年月日;
     @BatchParameter(key = KEY_申請終了年月日, name = "申請終了年月日")
-    private RDate 申請終了年月日;
+    private FlexibleDate 申請終了年月日;
     @BatchParameter(key = KEY_決定開始年月日, name = "決定開始年月日")
-    private RDate 決定開始年月日;
+    private FlexibleDate 決定開始年月日;
     @BatchParameter(key = KEY_決定終了年月日, name = "決定終了年月日")
-    private RDate 決定終了年月日;
+    private FlexibleDate 決定終了年月日;
     @BatchParameter(key = KEY_印書区分, name = "印書区分")
     private RString 印書区分;
     @BatchParameter(key = KEY_改頁出力順ID, name = "改頁出力順ID")
     private RString 改頁出力順ID;
     @BatchParameter(key = KEY_発行日, name = "発行日")
-    private RDate 発行日;
+    private FlexibleDate 発行日;
     @BatchParameter(key = KEY_支払予定日印字有無, name = "支払予定日印字有無")
     private RString 支払予定日印字有無;
     @BatchParameter(key = KEY_支払予定日, name = "支払予定日")
-    private RDate 支払予定日;
+    private FlexibleDate 支払予定日;
     @BatchParameter(key = KEY_決定日一括更新区分, name = "決定日一括更新区分")
     private RString 決定日一括更新区分;
     @BatchParameter(key = KEY_決定日, name = "決定日")
-    private RDate 決定日;
+    private FlexibleDate 決定日;
     @BatchParameter(key = KEY_文書番号, name = "文書番号")
     private RString 文書番号;
     @BatchParameter(key = KEY_処理日時, name = "処理日時")
-    private RDate 処理日時;
+    private YMDHMS 処理日時;
 }

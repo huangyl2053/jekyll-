@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC3200011;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorendatatorikomi.KokuhorenDataTorikomiBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120830.DBC120830_KokuhorenKyodoJukyushaInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC3200011.KyodoShoriyoJukyushaJohoDiv;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -58,8 +58,8 @@ public class KyodoShoriyoJukyushaJoho {
      * @param div KyodoShoriyoJukyushaJohoDiv
      * @return ResponseData
      */
-    public ResponseData<KokuhorenDataTorikomiBatchParameter> onClick_btnBatchRegister(KyodoShoriyoJukyushaJohoDiv div) {
-        KokuhorenDataTorikomiBatchParameter parameter = new KokuhorenDataTorikomiBatchParameter();
+    public ResponseData<DBC120830_KokuhorenKyodoJukyushaInParameter> onClick_btnBatchRegister(KyodoShoriyoJukyushaJohoDiv div) {
+        DBC120830_KokuhorenKyodoJukyushaInParameter parameter = new DBC120830_KokuhorenKyodoJukyushaInParameter();
         if (div.getCcdShutsuryokujun().get出力順ID() != null) {
             Long 出力順ID = div.getCcdShutsuryokujun().get出力順ID();
             IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();

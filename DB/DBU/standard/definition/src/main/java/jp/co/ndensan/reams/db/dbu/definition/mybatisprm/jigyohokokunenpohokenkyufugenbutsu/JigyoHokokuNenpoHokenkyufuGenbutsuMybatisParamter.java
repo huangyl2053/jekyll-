@@ -266,7 +266,6 @@ public final class JigyoHokokuNenpoHokenkyufuGenbutsuMybatisParamter implements 
 
     private static List<RString> get集計番号List() {
         List<RString> 集計番号リスト = new ArrayList<>();
-        //TODO QA1615回答待ち ShukeiNoyoshiki2にはCode「“0105”,”0106”,”0205”,”0206”,”0601”,”0602”,”0603”」が存在なし。
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付1総数_件数.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付1総数_単位数.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付1総数_費用額.getコード());
@@ -277,12 +276,12 @@ public final class JigyoHokokuNenpoHokenkyufuGenbutsuMybatisParamter implements 
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付2二割負担被保険者分_再掲_単位数.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付2二割負担被保険者分_再掲_費用額.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付2二割負担被保険者分_再掲_給付費.getコード());
-        集計番号リスト.add(ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費2第２号被保険者分_件数.getコード());
-        集計番号リスト.add(ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費2第２号被保険者分_給付費.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付2第２号被保険者分_再掲_件数.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付2第２号被保険者分_再掲_単位数.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付2第２号被保険者分_再掲_費用額.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付2第２号被保険者分_再掲_給付費.getコード());
+        集計番号リスト.add(ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費2第２号被保険者分_件数.getコード());
+        集計番号リスト.add(ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費2第２号被保険者分_給付費.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付3総数_特例分_件数.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付3総数_特例分_単位数.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付3総数_特例分_費用額.getコード());
@@ -291,6 +290,9 @@ public final class JigyoHokokuNenpoHokenkyufuGenbutsuMybatisParamter implements 
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付4第２号被保険者分_再掲_特例分_単位数.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付4第２号被保険者分_再掲_特例分_費用額.getコード());
         集計番号リスト.add(ShukeiNoyoshiki2._1_介護給付_予防給付4第２号被保険者分_再掲_特例分_給付費.getコード());
+        集計番号リスト.add(ShukeiNoyoshiki2.市町村特別給付_件数.getコード());
+        集計番号リスト.add(ShukeiNoyoshiki2.市町村特別給付_費用額.getコード());
+        集計番号リスト.add(ShukeiNoyoshiki2.市町村特別給付_給付額.getコード());
         return 集計番号リスト;
     }
 
@@ -298,9 +300,10 @@ public final class JigyoHokokuNenpoHokenkyufuGenbutsuMybatisParamter implements 
         List<RString> 表番号リスト = new ArrayList<>();
         if (現物分.equals(給付集計区分)) {
             表番号リスト.add(HyoNo.現物_保険給付決定状況.getコード());
+            表番号リスト.add(HyoNo.現物_保険給付決定状況_旧市町村.getコード());
         } else if (償還審査分.equals(給付集計区分)) {
-            //TODO QA1615回答待ち HyoNoにはCode12、14が存在なし。
             表番号リスト.add(HyoNo.償還_審査年月_保険給付決定状況.getコード());
+            表番号リスト.add(HyoNo.償還_審査年月_保険給付決定状況_旧市町村.getコード());
         } else if (償還決定分.equals(給付集計区分)) {
             表番号リスト.add(HyoNo.償還_決定年月_保険給付決定状況.getコード());
             表番号リスト.add(HyoNo.高額サービス費_保険給付決定状況_旧市町村.getコード());

@@ -13,6 +13,10 @@ package jp.co.ndensan.reams.db.dbx.definition.core.viewstate;
 public enum ViewStateKeys {
 
     /**
+     * 場合
+     */
+    場合,
+    /**
      * 最新の処理年月
      */
     最新の処理年月,
@@ -280,6 +284,10 @@ public enum ViewStateKeys {
      * 利用者負担額減額情報ListのViewState
      */
     利用者負担額減額情報ListのViewState,
+    /**
+     * 特別地域加算減免申請情報ListのViewState
+     */
+    特別地域加算減免申請情報ListのViewState,
     /**
      * 該当DB申請
      */
@@ -2195,6 +2203,14 @@ public enum ViewStateKeys {
     /**
      * スケジュール履歴情報Entity
      */
-    スケジュール履歴情報Entity;
+    スケジュール履歴情報Entity,
+    /**
+     * 給付費通知補正
+     */
+    給付費通知補正,
+    /**
+     * 特別地域加算減免申請の情報List
+     */
+    特別地域加算減免申請の情報List;
 
 }

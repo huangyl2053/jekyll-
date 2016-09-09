@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -151,7 +150,7 @@ public class ScheduleSettingHandler {
                         .set処理状態区分(処理状態区分.getコード())
                         .set再処理可能区分(再処理前.equals(画面_処理状況))
                         .build();
-                国保連インターフェース管理.toEntity().setState(EntityDataState.Modified);
+                国保連インターフェース管理 = 国保連インターフェース管理.modified();
                 manger.save(国保連インターフェース管理);
             } else {
                 再処理設定不可区分 = DbBusinessConfig.get(
@@ -167,7 +166,7 @@ public class ScheduleSettingHandler {
                         .set再処理可能区分(再処理前.equals(画面_処理状況))
                         .set再処理設定不可区分(再処理不可.equals(再処理設定不可区分))
                         .build();
-                国保連インターフェース管理.toEntity().setState(EntityDataState.Added);
+                国保連インターフェース管理 = 国保連インターフェース管理.added();
                 manger.save(国保連インターフェース管理);
             }
         }
@@ -184,7 +183,7 @@ public class ScheduleSettingHandler {
                         .set処理状態区分(処理状態区分.getコード())
                         .set再処理可能区分(再処理前.equals(画面_処理状況))
                         .build();
-                国保連インターフェース管理.toEntity().setState(EntityDataState.Modified);
+                国保連インターフェース管理 = 国保連インターフェース管理.modified();
                 manger.save(国保連インターフェース管理);
             } else {
                 再処理設定不可区分 = DbBusinessConfig.get(
@@ -200,7 +199,7 @@ public class ScheduleSettingHandler {
                         .set再処理可能区分(再処理前.equals(画面_処理状況))
                         .set再処理設定不可区分(再処理不可.equals(再処理設定不可区分))
                         .build();
-                国保連インターフェース管理.toEntity().setState(EntityDataState.Added);
+                国保連インターフェース管理 = 国保連インターフェース管理.added();
                 manger.save(国保連インターフェース管理);
             }
         }

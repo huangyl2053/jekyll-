@@ -36,6 +36,9 @@ import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -47,6 +50,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -133,7 +137,9 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
     private static final RString 被保険者番号 = new RString("被保険者番号");
     private static final RString 日本語ファイル名 = new RString("汎用リスト　高額合算計算結果連絡票情報CSV");
     private static final RString 英数字ファイル名 = new RString("HanyoListKogakuGassanKeisanKekkaRenrakuHyo.csv");
-    private static final RString CSV出力有無 = new RString("");
+    private RString 出力有無;
+    private static final RString あり = new RString("あり");
+    private static final RString なし = new RString("なし");
     private static final RString 抽出対象者 = new RString("【抽出対象者】");
     private static final RString 保険者 = new RString("保険者：");
     private static final RString 抽出区分 = new RString("抽出区分：");
@@ -149,6 +155,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
     @Override
     protected void initialize() {
         super.initialize();
+        出力有無 = なし;
         連番 = Decimal.ZERO;
         personalDataList = new ArrayList<>();
         システム日付 = FlexibleDate.getNowDate();
@@ -177,6 +184,8 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
 //                parameter.set出力順(デフォルト出力順);
 //            }
 //        }
+        parameter.setSearchKey(new ShikibetsuTaishoPSMSearchKeyBuilder(
+                GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先).setデータ取得区分(DataShutokuKubun.直近レコード).build());
     }
 
     @Override
@@ -206,6 +215,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
 
     @Override
     protected void process(HanyoListKogakuGassanKeisanEntity entity) {
+        出力有無 = あり;
         連番 = 連番.add(Decimal.ONE);
         HanyoListKogakuGassanKeisanCSVEntity output = get帳票のCSVファイル作成(entity);
         hanyoListKogakuCSVWriter.writeLine(output);
@@ -271,7 +281,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
         output.set世帯主名(getColumnValue(kojin.get世帯主名()));
         if (kojin.get住所() != null) {
             output.set住所コード(getColumnValue(kojin.get住所().get全国住所コード()));
-            output.set郵便番号(getColumnValue(kojin.get住所().get郵便番号()));
+            output.set郵便番号(kojin.get住所().get郵便番号().getEditedYubinNo());
             if (kojin.get住所().get住所() != null
                     && kojin.get住所().get番地() != null
                     && kojin.get住所().get方書() != null) {
@@ -643,7 +653,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
                 RString.EMPTY,
                 日本語ファイル名,
                 出力件数,
-                CSV出力有無,
+                出力有無,
                 英数字ファイル名,
                 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
@@ -654,21 +664,21 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append(抽出対象者);
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = get保険者名();
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = get抽出区分();
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = getデータ区分();
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = getデータ種類();
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = get対象年度();
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = get年月期間(parameter.get受取年月From(), parameter.get受取年月To(), 受取年月);
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = get年月期間(parameter.get送付年月From(), parameter.get送付年月To(), 送付年月);
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         return 出力条件;
     }
 
@@ -676,7 +686,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
         RStringBuilder builder = new RStringBuilder();
         if (parameter.get保険者コード() == null || parameter.get保険者コード().isEmpty()
                 || すべて.equals(getColumnValue(parameter.get保険者コード()))) {
-            return builder;
+            return null;
         }
         builder.append(保険者);
         Association 地方公共団体コード = AssociationFinderFactory.createInstance().getAssociation(parameter.get保険者コード());
@@ -687,7 +697,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
     private RStringBuilder get抽出区分() {
         RStringBuilder builder = new RStringBuilder();
         if (RString.isNullOrEmpty(parameter.get抽出区分())) {
-            return builder;
+            return null;
         }
         builder.append(抽出区分);
         Kaigogassan_ChushutsuKubun 抽出区分名称 = Kaigogassan_ChushutsuKubun.toValue(parameter.get抽出区分());
@@ -698,7 +708,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
     private RStringBuilder getデータ区分() {
         RStringBuilder builder = new RStringBuilder();
         if (RString.isNullOrEmpty(parameter.getデータ区分())) {
-            return builder;
+            return null;
         }
         builder.append(データ区分);
         Kaigogassan_DataKubun データ区分名称 = Kaigogassan_DataKubun.toValue(parameter.getデータ区分());
@@ -709,7 +719,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
     private RStringBuilder getデータ種類() {
         RStringBuilder builder = new RStringBuilder();
         if (RString.isNullOrEmpty(parameter.getデータ種類())) {
-            return builder;
+            return null;
         }
         builder.append(データ種類);
         Kaigogassan_DataShubetsu データ種類名称 = Kaigogassan_DataShubetsu.toValue(parameter.getデータ種類());
@@ -720,7 +730,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
     private RStringBuilder get対象年度() {
         RStringBuilder builder = new RStringBuilder();
         if (parameter.get対象年度() == null || parameter.get対象年度().isEmpty()) {
-            return builder;
+            return null;
         }
         builder.append(対象年度);
         builder.append(parameter.get対象年度().wareki().toDateString());
@@ -740,7 +750,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
             年月ToFlag = true;
         }
         if (年月FromFlag && 年月ToFlag) {
-            return builder;
+            return null;
         }
         builder.append(抽出条件);
         if (年月ToFlag) {
@@ -757,4 +767,10 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
         return builder;
     }
 
+    private void get出力条件(List<RString> 出力条件, RStringBuilder builder) {
+        if (builder == null) {
+            return;
+        }
+        出力条件.add(builder.toRString());
+    }
 }

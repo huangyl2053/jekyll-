@@ -88,7 +88,7 @@ public class JukoKisambiTokushuTorokuValidationHandler {
 
         一括用特殊時効起算日必須チェック(UrErrorMessages.必須項目_追加メッセージあり, "一括用特殊時効起算日"),
         一括用特殊時効起算日事由DDL必須チェック(UrErrorMessages.必須項目_追加メッセージあり, "一括用特殊時効起算日事由"),
-        特殊時効起算日入力チェック(DbdErrorMessages.特殊時効起算日, "一括用特殊時効起算日事由");
+        特殊時効起算日入力チェック(DbdErrorMessages.特殊時効起算日);
 
         private final Message message;
 

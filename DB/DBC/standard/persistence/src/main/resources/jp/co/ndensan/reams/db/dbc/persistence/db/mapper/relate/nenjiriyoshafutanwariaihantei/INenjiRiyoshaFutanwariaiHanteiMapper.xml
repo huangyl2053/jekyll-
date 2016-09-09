@@ -243,6 +243,28 @@
        ORDER BY shoriDateKanri."nendoNaiRenban" DESC
        limit 1
    </select>
+   <select id="get処理結果確認リスト" resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.DbWT1801ShoriKekkaKakuninListEntity" resultOrdered="true" fetchSize="500">
+       SELECT
+          resultListTemp."errorKubun",
+          resultListTemp."shoKisaiHokenshaNo",
+          resultListTemp."hihokenshaNo",
+          resultListTemp."key1",
+          resultListTemp."key2",
+          resultListTemp."key3",
+          resultListTemp."key4",
+          resultListTemp."key5",
+          resultListTemp."hihokenshaShimei",
+          resultListTemp."biko"
+       FROM   "DbWT1801ShoriKekkaKakuninList" resultListTemp
+       ORDER BY 
+       resultListTemp."errorKubun" DESC,
+       resultListTemp."shoKisaiHokenshaNo" DESC,
+       resultListTemp."key1" DESC,
+       resultListTemp."key2" DESC,
+       resultListTemp."key3" DESC,
+       resultListTemp."key4" DESC,
+       resultListTemp."key5" DESC
+   </select>
     <sql id="allColumns_JukyuShaTaichoTempTable">
         "JukyuShaTaichoTempTable"."dbT4001JukyushaDaicho_hihokenshaNo" AS Jukyu_hihokenshaNo,
         "JukyuShaTaichoTempTable"."dbT4001JukyushaDaicho_shikibetsuCode" AS Jukyu_shikibetsuCode,

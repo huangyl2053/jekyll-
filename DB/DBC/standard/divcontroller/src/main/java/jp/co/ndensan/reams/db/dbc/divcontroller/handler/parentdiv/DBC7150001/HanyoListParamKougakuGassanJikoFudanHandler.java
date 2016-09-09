@@ -33,8 +33,8 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
 
     private final HanyoListParamKougakuGassanJikoFudanDiv div;
     private static final RString 国保連取込情報 = new RString("国保連取込情報");
-    private static final RString 証明書計算処理時作成_申請書有 = new RString("証明書計算処理時作成(申請書有)");
-    private static final RString 証明書計算処理時作成_全受給者 = new RString("証明書計算処理時作成(全受給者)");
+    private static final RString 証明書計算処理時作成_申請書有 = new RString("証明書計算処理時作成（申請書有）");
+    private static final RString 証明書計算処理時作成_全受給者 = new RString("証明書計算処理時作成（全受給者）");
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
     private static final RString KEY2 = new RString("key2");
@@ -113,7 +113,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
             div.getRadDataShurui().setSelectedKey(KEY1);
             div.getTxtJikoFutangakuKakunin().setDisabled(true);
             div.getTxtHoseizumiJikoFutangaku().setDisabled(false);
-            div.getTxtJikoFutanngakuShoumeisho().setDisabled(false);
+            div.getTxtJikoFutanngakuShoumeisho().setDisabled(true);
         }
         if (証明書計算処理時作成_全受給者.equals(div.getDdlDetaSakuseiKubun().getSelectedValue())) {
             List<KeyValueDataSource> disabledItems = new ArrayList<>();
@@ -189,22 +189,22 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
 
     private DBC710150_HanyoListKogakuGassanJikoFutangakuParameter setChkCsvHenshuHoho(DBC710150_HanyoListKogakuGassanJikoFutangakuParameter batchparam) {
         if (null != div.getTxtJikoFutangakuKakunin().getFromValue()) {
-            batchparam.setJikoFutangakuKakuninFrom(new FlexibleYearMonth(div.getTxtJikoFutangakuKakunin().getFromValue().toString()));
+            batchparam.setJikoFutangakuKakuninFrom(new FlexibleYearMonth(div.getTxtJikoFutangakuKakunin().getFromValue().getYearMonth().toString()));
         }
         if (null != div.getTxtJikoFutangakuKakunin().getToValue()) {
-            batchparam.setSofuTaishogaiFukumuTo(new FlexibleYearMonth(div.getTxtJikoFutangakuKakunin().getToValue().toString()));
+            batchparam.setSofuTaishogaiFukumuTo(new FlexibleYearMonth(div.getTxtJikoFutangakuKakunin().getToValue().getYearMonth().toString()));
         }
         if (null != div.getTxtHoseizumiJikoFutangaku().getFromValue()) {
-            batchparam.setHoseizumiJikoFutangakuFrom(new FlexibleYearMonth(div.getTxtHoseizumiJikoFutangaku().getFromValue().toString()));
+            batchparam.setHoseizumiJikoFutangakuFrom(new FlexibleYearMonth(div.getTxtHoseizumiJikoFutangaku().getFromValue().getYearMonth().toString()));
         }
         if (null != div.getTxtHoseizumiJikoFutangaku().getToValue()) {
-            batchparam.setHoseizumiJikoFutangakuTo(new FlexibleYearMonth(div.getTxtHoseizumiJikoFutangaku().getToValue().toString()));
+            batchparam.setHoseizumiJikoFutangakuTo(new FlexibleYearMonth(div.getTxtHoseizumiJikoFutangaku().getToValue().getYearMonth().toString()));
         }
         if (null != div.getTxtJikoFutanngakuShoumeisho().getFromValue()) {
-            batchparam.setJikoFutanngakuShoumeishoFrom(new FlexibleYearMonth(div.getTxtJikoFutanngakuShoumeisho().getFromValue().toString()));
+            batchparam.setJikoFutanngakuShoumeishoFrom(new FlexibleYearMonth(div.getTxtJikoFutanngakuShoumeisho().getFromValue().getYearMonth().toString()));
         }
         if (null != div.getTxtJikoFutangakuKakunin().getToValue()) {
-            batchparam.setJikoFutanngakuShoumeishoTo(new FlexibleYearMonth(div.getTxtJikoFutanngakuShoumeisho().getToValue().toString()));
+            batchparam.setJikoFutanngakuShoumeishoTo(new FlexibleYearMonth(div.getTxtJikoFutanngakuShoumeisho().getToValue().getYearMonth().toString()));
         }
         List<RString> selectKey = div.getChkCsvHenshuHoho().getSelectedKeys();
         if (selectKey.contains(項目名付加)) {

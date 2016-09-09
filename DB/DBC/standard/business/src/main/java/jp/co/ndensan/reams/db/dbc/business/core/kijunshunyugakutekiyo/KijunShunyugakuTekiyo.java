@@ -37,7 +37,6 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.banchi.Banchi;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -142,72 +141,72 @@ public class KijunShunyugakuTekiyo {
             eucEntity.set前住所(iKojin.get転入前().get住所());
             eucEntity.set前住所番地(get番地(iKojin.get転入前().get番地()));
             eucEntity.set前住所方書(get方書(iKojin.get転入前().get方書()));
-            eucEntity.set市町村コード(entity.get市町村コード());
-            if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
-                eucEntity.set市町村名(市町村名MasterMap.get(entity.get市町村コード()).get市町村名称());
-            }
-            eucEntity.set保険者コード(processParameter.get保険者コード());
-            eucEntity.set保険者名(市町村名);
-            eucEntity.set空白(new RString(" "));
-            eucEntity.set被保険者番号(entity.get被保険者番号());
-            eucEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), entity.get資格取得事由コード()));
-            eucEntity.set資格取得日(set日付編集(entity.get資格取得年月日()));
-            eucEntity.set資格取得届出日(set日付編集(entity.get資格取得届出年月日()));
-            eucEntity.set喪失事由(getCodeNameByCode(DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu(), entity.get資格喪失事由コード()));
-            eucEntity.set資格喪失日(set日付編集(entity.get資格喪失年月日()));
-            eucEntity.set資格喪失届日(set日付編集(entity.get資格喪失届出年月日()));
-            eucEntity.set資格区分(HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).get名称());
-            if (文字1.equals(entity.get住所地特例フラグ())) {
-                eucEntity.set住所地特例状態(new RString("住特"));
-            }
-            eucEntity.set資格_証記載保険者番号(get証記載保険者番号(entity, 市町村名MasterMap));
-            eucEntity.set受給申請事由(get受給申請事由(entity));
-            eucEntity.set受給申請日(set日付編集(entity.get受給申請年月日()));
-            if (!isNullCheck(entity.get要介護認定状態区分コード())) {
-                eucEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(), entity.get要介護認定状態区分コード()).getName());
-            }
-            eucEntity.set受給認定開始日(set日付編集(entity.get認定有効期間開始年月日()));
-            eucEntity.set受給認定終了日(set日付編集(entity.get認定有効期間終了年月日()));
-            eucEntity.set受給認定日(set日付編集(entity.get認定年月日()));
-            if (entity.is旧措置者フラグ()) {
-                eucEntity.set受給旧措置(new RString("旧措置者"));
-            } else {
-                eucEntity.set受給旧措置(RString.EMPTY);
-            }
-            eucEntity.set受給みなし更新認定(get受給みなし更新認定(entity.getみなし要介護区分コード()));
-            if (!isNullCheck(entity.get直近異動事由コード())) {
-                eucEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(entity.get直近異動事由コード()).get名称());
-            }
-            eucEntity.set基準収入額世帯コード(entity.get世帯コード());
-            eucEntity.set年度(entity.get年度());
-            eucEntity.set履歴番号(entity.get履歴番号());
-            eucEntity.set公的年金の収入(entity.get公的年金収入額());
-            eucEntity.set給与(entity.get給与収入額());
-            eucEntity.setその他の収入(entity.getその他の収入額());
-            eucEntity.set算定基準額(entity.get算定基準額());
-            eucEntity.set適用開始年月(set日付編集(entity.get適用開始年月()));
-            eucEntity.set申請日(set日付編集(entity.get申請日()));
-            eucEntity.set決定日(set日付編集(entity.get決定日()));
-            eucEntity.set申請書作成日(set日付編集(entity.get申請書作成日()));
-            eucEntity.set世帯基準日(set日付編集(entity.get申請書作成の世帯基準日()));
-            if (entity.is宛先印字対象者フラグ()) {
-                eucEntity.set宛先印字対象者(new RString("対象者"));
-            } else {
-                eucEntity.set宛先印字対象者(RString.EMPTY);
-            }
-            eucEntity.set年少扶養控除16歳未満(new RString(entity.get年少扶養控除_16歳未満()));
-            eucEntity.set年少扶養控除16_18歳(new RString(entity.get年少扶養控除_16_18歳()));
-            eucEntity.set世帯員の総収入額(entity.get世帯員の総収入額());
-            if (entity.is世帯主フラグ()) {
-                eucEntity.set世帯主区分(new RString("世帯主"));
-            } else {
-                eucEntity.set世帯主区分(RString.EMPTY);
-            }
-            eucEntity.set課税所得(entity.get課税所得額());
-            eucEntity.set課税所得控除後(entity.get課税所得額_除後());
-            eucEntity.set決定通知書発行日(set日付編集(entity.get決定通知書発行日()));
-            eucEntity.set削除データ(RString.EMPTY);
         }
+        eucEntity.set市町村コード(entity.get市町村コード());
+        if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
+            eucEntity.set市町村名(市町村名MasterMap.get(entity.get市町村コード()).get市町村名称());
+        }
+        eucEntity.set保険者コード(processParameter.get保険者コード());
+        eucEntity.set保険者名(市町村名);
+        eucEntity.set空白(new RString(" "));
+        eucEntity.set被保険者番号(entity.get被保険者番号());
+        eucEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), entity.get資格取得事由コード()));
+        eucEntity.set資格取得日(set日付編集(entity.get資格取得年月日()));
+        eucEntity.set資格取得届出日(set日付編集(entity.get資格取得届出年月日()));
+        eucEntity.set喪失事由(getCodeNameByCode(DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu(), entity.get資格喪失事由コード()));
+        eucEntity.set資格喪失日(set日付編集(entity.get資格喪失年月日()));
+        eucEntity.set資格喪失届日(set日付編集(entity.get資格喪失届出年月日()));
+        eucEntity.set資格区分(HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).get名称());
+        if (文字1.equals(entity.get住所地特例フラグ())) {
+            eucEntity.set住所地特例状態(new RString("住特"));
+        }
+        eucEntity.set資格_証記載保険者番号(get証記載保険者番号(entity, 市町村名MasterMap));
+        eucEntity.set受給申請事由(get受給申請事由(entity));
+        eucEntity.set受給申請日(set日付編集(entity.get受給申請年月日()));
+        if (!isNullCheck(entity.get要介護認定状態区分コード())) {
+            eucEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(), entity.get要介護認定状態区分コード()).getName());
+        }
+        eucEntity.set受給認定開始日(set日付編集(entity.get認定有効期間開始年月日()));
+        eucEntity.set受給認定終了日(set日付編集(entity.get認定有効期間終了年月日()));
+        eucEntity.set受給認定日(set日付編集(entity.get認定年月日()));
+        if (entity.is旧措置者フラグ()) {
+            eucEntity.set受給旧措置(new RString("旧措置者"));
+        } else {
+            eucEntity.set受給旧措置(RString.EMPTY);
+        }
+        eucEntity.set受給みなし更新認定(get受給みなし更新認定(entity.getみなし要介護区分コード()));
+        if (!isNullCheck(entity.get直近異動事由コード())) {
+            eucEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(entity.get直近異動事由コード()).get名称());
+        }
+        eucEntity.set基準収入額世帯コード(entity.get世帯コード());
+        eucEntity.set年度(entity.get年度());
+        eucEntity.set履歴番号(entity.get履歴番号());
+        eucEntity.set公的年金の収入(entity.get公的年金収入額());
+        eucEntity.set給与(entity.get給与収入額());
+        eucEntity.setその他の収入(entity.getその他の収入額());
+        eucEntity.set算定基準額(entity.get算定基準額());
+        eucEntity.set適用開始年月(set日付編集(entity.get適用開始年月()));
+        eucEntity.set申請日(set日付編集(entity.get申請日()));
+        eucEntity.set決定日(set日付編集(entity.get決定日()));
+        eucEntity.set申請書作成日(set日付編集(entity.get申請書作成日()));
+        eucEntity.set世帯基準日(set日付編集(entity.get申請書作成の世帯基準日()));
+        if (entity.is宛先印字対象者フラグ()) {
+            eucEntity.set宛先印字対象者(new RString("対象者"));
+        } else {
+            eucEntity.set宛先印字対象者(RString.EMPTY);
+        }
+        eucEntity.set年少扶養控除16歳未満(new RString(entity.get年少扶養控除_16歳未満()));
+        eucEntity.set年少扶養控除16_18歳(new RString(entity.get年少扶養控除_16_18歳()));
+        eucEntity.set世帯員の総収入額(entity.get世帯員の総収入額());
+        if (entity.is世帯主フラグ()) {
+            eucEntity.set世帯主区分(new RString("世帯主"));
+        } else {
+            eucEntity.set世帯主区分(RString.EMPTY);
+        }
+        eucEntity.set課税所得(entity.get課税所得額());
+        eucEntity.set課税所得控除後(entity.get課税所得額_除後());
+        eucEntity.set決定通知書発行日(set日付編集(entity.get決定通知書発行日()));
+        eucEntity.set削除データ(RString.EMPTY);
         return eucEntity;
     }
 
@@ -454,72 +453,72 @@ public class KijunShunyugakuTekiyo {
             eucEntity.set前住所(iKojin.get転入前().get住所());
             eucEntity.set前住所番地(get番地(iKojin.get転入前().get番地()));
             eucEntity.set前住所方書(get方書(iKojin.get転入前().get方書()));
-            eucEntity.set市町村コード(entity.get市町村コード());
-            if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
-                eucEntity.set市町村名(市町村名MasterMap.get(entity.get市町村コード()).get市町村名称());
-            }
-            eucEntity.set保険者コード(processParameter.get保険者コード());
-            eucEntity.set保険者名(市町村名);
-            eucEntity.set空白(new RString(" "));
-            eucEntity.set被保険者番号(entity.get被保険者番号());
-            eucEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), entity.get資格取得事由コード()));
-            eucEntity.set資格取得日(set日付編集(entity.get資格取得年月日()));
-            eucEntity.set資格取得届出日(set日付編集(entity.get資格取得届出年月日()));
-            eucEntity.set喪失事由(getCodeNameByCode(DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu(), entity.get資格喪失事由コード()));
-            eucEntity.set資格喪失日(set日付編集(entity.get資格喪失年月日()));
-            eucEntity.set資格喪失届日(set日付編集(entity.get資格喪失届出年月日()));
-            eucEntity.set資格区分(HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).get名称());
-            if (文字1.equals(entity.get住所地特例フラグ())) {
-                eucEntity.set住所地特例状態(new RString("住特"));
-            }
-            eucEntity.set資格_証記載保険者番号(get証記載保険者番号(entity, 市町村名MasterMap));
-            eucEntity.set受給申請事由(get受給申請事由(entity));
-            eucEntity.set受給申請日(set日付編集(entity.get受給申請年月日()));
-            if (!isNullCheck(entity.get要介護認定状態区分コード())) {
-                eucEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(), entity.get要介護認定状態区分コード()).getName());
-            }
-            eucEntity.set受給認定開始日(set日付編集(entity.get認定有効期間開始年月日()));
-            eucEntity.set受給認定終了日(set日付編集(entity.get認定有効期間終了年月日()));
-            eucEntity.set受給認定日(set日付編集(entity.get認定年月日()));
-            if (entity.is旧措置者フラグ()) {
-                eucEntity.set受給旧措置(new RString("旧措置者"));
-            } else {
-                eucEntity.set受給旧措置(RString.EMPTY);
-            }
-            eucEntity.set受給みなし更新認定(get受給みなし更新認定(entity.getみなし要介護区分コード()));
-            if (!isNullCheck(entity.get直近異動事由コード())) {
-                eucEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(entity.get直近異動事由コード()).get名称());
-            }
-            eucEntity.set基準収入額世帯コード(entity.get世帯コード());
-            eucEntity.set年度(entity.get年度());
-            eucEntity.set履歴番号(entity.get履歴番号());
-            eucEntity.set公的年金の収入(entity.get公的年金収入額());
-            eucEntity.set給与(entity.get給与収入額());
-            eucEntity.setその他の収入(entity.getその他の収入額());
-            eucEntity.set算定基準額(entity.get算定基準額());
-            eucEntity.set適用開始年月(set日付編集(entity.get適用開始年月()));
-            eucEntity.set申請日(set日付編集(entity.get申請日()));
-            eucEntity.set決定日(set日付編集(entity.get決定日()));
-            eucEntity.set申請書作成日(set日付編集(entity.get申請書作成日()));
-            eucEntity.set世帯基準日(set日付編集(entity.get申請書作成の世帯基準日()));
-            if (entity.is宛先印字対象者フラグ()) {
-                eucEntity.set宛先印字対象者(new RString("対象者"));
-            } else {
-                eucEntity.set宛先印字対象者(RString.EMPTY);
-            }
-            eucEntity.set年少扶養控除16歳未満(new RString(entity.get年少扶養控除_16歳未満()));
-            eucEntity.set年少扶養控除16_18歳(new RString(entity.get年少扶養控除_16_18歳()));
-            eucEntity.set世帯員の総収入額(entity.get世帯員の総収入額());
-            if (entity.is世帯主フラグ()) {
-                eucEntity.set世帯主区分(new RString("世帯主"));
-            } else {
-                eucEntity.set世帯主区分(RString.EMPTY);
-            }
-            eucEntity.set課税所得(entity.get課税所得額());
-            eucEntity.set課税所得控除後(entity.get課税所得額_除後());
-            eucEntity.set決定通知書発行日(set日付編集(entity.get決定通知書発行日()));
-            eucEntity.set削除データ(RString.EMPTY);
         }
+        eucEntity.set市町村コード(entity.get市町村コード());
+        if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
+            eucEntity.set市町村名(市町村名MasterMap.get(entity.get市町村コード()).get市町村名称());
+        }
+        eucEntity.set保険者コード(processParameter.get保険者コード());
+        eucEntity.set保険者名(市町村名);
+        eucEntity.set空白(new RString(" "));
+        eucEntity.set被保険者番号(entity.get被保険者番号());
+        eucEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), entity.get資格取得事由コード()));
+        eucEntity.set資格取得日(set日付編集(entity.get資格取得年月日()));
+        eucEntity.set資格取得届出日(set日付編集(entity.get資格取得届出年月日()));
+        eucEntity.set喪失事由(getCodeNameByCode(DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu(), entity.get資格喪失事由コード()));
+        eucEntity.set資格喪失日(set日付編集(entity.get資格喪失年月日()));
+        eucEntity.set資格喪失届日(set日付編集(entity.get資格喪失届出年月日()));
+        eucEntity.set資格区分(HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).get名称());
+        if (文字1.equals(entity.get住所地特例フラグ())) {
+            eucEntity.set住所地特例状態(new RString("住特"));
+        }
+        eucEntity.set資格_証記載保険者番号(get証記載保険者番号(entity, 市町村名MasterMap));
+        eucEntity.set受給申請事由(get受給申請事由(entity));
+        eucEntity.set受給申請日(set日付編集(entity.get受給申請年月日()));
+        if (!isNullCheck(entity.get要介護認定状態区分コード())) {
+            eucEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(), entity.get要介護認定状態区分コード()).getName());
+        }
+        eucEntity.set受給認定開始日(set日付編集(entity.get認定有効期間開始年月日()));
+        eucEntity.set受給認定終了日(set日付編集(entity.get認定有効期間終了年月日()));
+        eucEntity.set受給認定日(set日付編集(entity.get認定年月日()));
+        if (entity.is旧措置者フラグ()) {
+            eucEntity.set受給旧措置(new RString("旧措置者"));
+        } else {
+            eucEntity.set受給旧措置(RString.EMPTY);
+        }
+        eucEntity.set受給みなし更新認定(get受給みなし更新認定(entity.getみなし要介護区分コード()));
+        if (!isNullCheck(entity.get直近異動事由コード())) {
+            eucEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(entity.get直近異動事由コード()).get名称());
+        }
+        eucEntity.set基準収入額世帯コード(entity.get世帯コード());
+        eucEntity.set年度(entity.get年度());
+        eucEntity.set履歴番号(entity.get履歴番号());
+        eucEntity.set公的年金の収入(entity.get公的年金収入額());
+        eucEntity.set給与(entity.get給与収入額());
+        eucEntity.setその他の収入(entity.getその他の収入額());
+        eucEntity.set算定基準額(entity.get算定基準額());
+        eucEntity.set適用開始年月(set日付編集(entity.get適用開始年月()));
+        eucEntity.set申請日(set日付編集(entity.get申請日()));
+        eucEntity.set決定日(set日付編集(entity.get決定日()));
+        eucEntity.set申請書作成日(set日付編集(entity.get申請書作成日()));
+        eucEntity.set世帯基準日(set日付編集(entity.get申請書作成の世帯基準日()));
+        if (entity.is宛先印字対象者フラグ()) {
+            eucEntity.set宛先印字対象者(new RString("対象者"));
+        } else {
+            eucEntity.set宛先印字対象者(RString.EMPTY);
+        }
+        eucEntity.set年少扶養控除16歳未満(new RString(entity.get年少扶養控除_16歳未満()));
+        eucEntity.set年少扶養控除16_18歳(new RString(entity.get年少扶養控除_16_18歳()));
+        eucEntity.set世帯員の総収入額(entity.get世帯員の総収入額());
+        if (entity.is世帯主フラグ()) {
+            eucEntity.set世帯主区分(new RString("世帯主"));
+        } else {
+            eucEntity.set世帯主区分(RString.EMPTY);
+        }
+        eucEntity.set課税所得(entity.get課税所得額());
+        eucEntity.set課税所得控除後(entity.get課税所得額_除後());
+        eucEntity.set決定通知書発行日(set日付編集(entity.get決定通知書発行日()));
+        eucEntity.set削除データ(RString.EMPTY);
         return eucEntity;
     }
 
@@ -647,7 +646,7 @@ public class KijunShunyugakuTekiyo {
      * @return AccessLogUUID
      */
     public AccessLogUUID getアクセスログ() {
-        return AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        return AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
     }
 
     private PersonalData toPersonalData(RString 被保険者番号, ShikibetsuCode 識別コード) {
@@ -728,12 +727,12 @@ public class KijunShunyugakuTekiyo {
     private RString get期間(RStringBuilder jokenBuilder, RString fromYMD, RString toYMD) {
         if (!RString.isNullOrEmpty(fromYMD)) {
             jokenBuilder.append(new FlexibleDate(fromYMD).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
         jokenBuilder.append(new RString("　～　"));
         if (!RString.isNullOrEmpty(toYMD)) {
             jokenBuilder.append(new FlexibleDate(toYMD).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
         return jokenBuilder.toRString();
     }
@@ -752,12 +751,6 @@ public class KijunShunyugakuTekiyo {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
-        List<JuminShubetsu> juminShubetsuList = new ArrayList<>();
-        juminShubetsuList.add(JuminShubetsu.日本人);
-        juminShubetsuList.add(JuminShubetsu.外国人);
-        juminShubetsuList.add(JuminShubetsu.住登外個人_外国人);
-        juminShubetsuList.add(JuminShubetsu.住登外個人_日本人);
-        key.set住民種別(juminShubetsuList);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付));
@@ -804,8 +797,10 @@ public class KijunShunyugakuTekiyo {
         市町村コード(new RString("0016"), new RString(""), new RString("shichosonCode")),
         /**
          * 証記載保険者番号
+         *
+         * TODO QA1684 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
-        証記載保険者番号(new RString("0103"), new RString(""), new RString("koseigo_hihokenshaNo")),
+        証記載保険者番号(new RString("0103"), new RString(""), new RString("shoKisaiHokenshaNo")),
         /**
          * 被保険者番号
          */
@@ -816,8 +811,10 @@ public class KijunShunyugakuTekiyo {
         要介護度(new RString("0403"), new RString(""), new RString("yokaigoJotaiKubunCode")),
         /**
          * 認定開始日
+         *
+         * TODO QA1684 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
-        認定開始日(new RString("0411"), new RString(""), new RString("caT0714SeikyuHoho_nokumiCode"));
+        認定開始日(new RString("0411"), new RString(""), new RString("ninteiKaishiYMD"));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--@reamsid_L DBD-5310-010 liuyl-->
+<!--@reamsid_L DBC-5310-010 liuyl-->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanshikyuketteitsuchishohakkou.IShokanShikyuKetteiTsuchishoHakkouMapper">
     <resultMap id="resultMap_ShokanShikyuKetteiTsuchishoHakkouEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteitsuchishohakkou.ShokanShikyuKetteiTsuchishoHakkouEntity">

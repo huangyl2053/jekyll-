@@ -114,7 +114,6 @@ public class IdoufunRiyoushyafutanKanendoMainHandler {
         RDateTime 抽出終了日時 = RDateTime.convertFrom(div.getTxtKonkaiShuryoDate().getValue(), div.getTxtKonkaiShuryoTime().getValue());
         RString 月日 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年度終了月日, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         RString 年月日 = 処理年度.plusYear(NUM_ONE).toDateString().concat(月日);
-
         DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter parameter = new DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter();
         parameter.set処理日時(dateTime);
         parameter.set基準日(div.getTxtKonkaiShuryoDate().getValue());
@@ -126,7 +125,6 @@ public class IdoufunRiyoushyafutanKanendoMainHandler {
     }
 
     private void set年次処理実施日時(ShoriDateKanri business) {
-        business.get基準日時().toDateString();
         div.getTxtNenjiShoriDate().setValue(new RDate(getパターン1(business.get基準年月日()).toString()));
         div.getTxtNenjiShoriTime().setValue(new RTime(getパターン141(business.get基準日時())));
     }
@@ -146,7 +144,10 @@ public class IdoufunRiyoushyafutanKanendoMainHandler {
     }
 
     private RString getパターン141(YMDHMS 日時) {
-        return strToTime(日時.toDateString()).toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);
+        if (日時 != null && !日時.isEmpty()) {
+            return strToTime(日時.toDateString()).toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);
+        }
+        return RString.EMPTY;
     }
 
     private RTime strToTime(RString 日時) {

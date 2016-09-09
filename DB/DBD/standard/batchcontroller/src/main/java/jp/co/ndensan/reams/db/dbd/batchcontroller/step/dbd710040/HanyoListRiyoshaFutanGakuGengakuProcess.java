@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.Kyakasha;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.KyuShochiSha;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd710040.HanyoListRiyoshaFutanGakuGengakuProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyolistriyoshafutangakugengaku.RiyoshaFutanGakuGengakuEntity;
@@ -98,7 +99,6 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBD701004");
     private static final RString 住所地特例 = new RString("住特");
-    private static final RString 区分_0 = new RString("0");
     private static final RString 区分_1 = new RString("1");
     private static final RString 区分_2 = new RString("2");
     private static final RString 区分_3 = new RString("3");
@@ -152,8 +152,6 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
     private static final RString SHINKI = new RString("新規");
     private static final RString HENKO = new RString("変更");
     private static final RString ZATEI = new RString("暫定");
-    private static final RString 却下 = new RString("却下");
-    private static final RString 承認 = new RString("承認");
     private static final RString 却下者 = new RString("却下者：");
     private static final RString 喪失区分 = new RString("喪失区分：");
     private static final RString SAI = new RString("歳");
@@ -1240,6 +1238,12 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
     }
 
     private RString get特定対象データ(RStringBuilder builder) {
+        if (!RString.isNullOrEmpty(processParamter.getKyusochisha())) {
+            builder.append(旧措置者);
+            builder.append(COLON);
+            builder.append(KyuShochiSha.toValue(processParamter.getKyusochisha()).get名称());
+            builder.append(COMMA);
+        }
         if (!RString.isNullOrEmpty(processParamter.getKyakasha())) {
             builder.append(却下者);
             builder.append(Kyakasha.toValue(processParamter.getKyakasha()).get名称());
@@ -1248,7 +1252,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
         if (!RString.isNullOrEmpty(processParamter.getSoshitsukubun())
                 && !SoshitsuKubun.資格判定なし.getコード().equals(processParamter.getSoshitsukubun())) {
             builder.append(喪失区分);
-            builder.append(SoshitsuKubun.toValue(processParamter.getKyakasha()).get名称());
+            builder.append(SoshitsuKubun.toValue(processParamter.getSoshitsukubun()).get名称());
             builder.append(COMMA);
         }
         return builder.toRString();

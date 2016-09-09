@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 汎用リスト 共同処理用受給者情報（基本）バッチ用パラメータクラスです。
+ * 汎用リスト 国保連受給者情報のバッチ用パラメータクラスです。
  *
  * @reamsid_L DBC-3104-010 yaodongsheng
  */

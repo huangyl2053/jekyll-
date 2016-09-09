@@ -391,7 +391,7 @@
             fetchSize="500">
         SELECT
         "syukeiYM"
-        , "shichosonCode"
+        , "ShichosonCode"
         , "toukeiTaishoKubun"
         , "hyoNo"
         , "syukeiNo"

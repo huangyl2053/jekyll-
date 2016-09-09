@@ -119,7 +119,7 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
                     setEnclosure(EUC_WRITER_ENCLOSURE).
                     setEncode(Encode.UTF_8withBOM).
                     setNewLine(NewLine.CRLF).
-                    hasHeader(true).
+                    hasHeader(parameter.is項目名付加()).
                     build();
         } else {
             csvWriter = BatchWriters.csvWriter(HanyoListKagoKekkaCsvEntity.class).

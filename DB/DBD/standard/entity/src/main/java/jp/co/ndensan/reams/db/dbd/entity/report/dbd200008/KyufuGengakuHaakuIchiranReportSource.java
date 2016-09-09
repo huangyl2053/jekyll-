@@ -2,10 +2,13 @@ package jp.co.ndensan.reams.db.dbd.entity.report.dbd200008;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
-import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
-import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
+/**
+ * 給付額減額把握リストReportSourceです。
+ *
+ * @reamsid_L DBD-3610-060 b_liuyang2
+ */
 public class KyufuGengakuHaakuIchiranReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
@@ -165,36 +168,36 @@ public class KyufuGengakuHaakuIchiranReportSource implements IReportSource {
     public RString shunonashiUpper2;
     @ReportItem(name = "shunonashiUpper4", length = 20, order = 78)
     public RString shunonashiUpper4;
-    @ReportItem(name = "data3", length = 7, order = 79)
-    public RString data3;
-    @ReportItem(name = "data2", length = 7, order = 80)
-    public RString data2;
-    @ReportItem(name = "data1", length = 10, order = 81)
-    public RString data1;
-    @ReportItem(name = "data4", length = 7, order = 82)
-    public RString data4;
-    @ReportItem(name = "data5", length = 7, order = 83)
-    public RString data5;
-    @ReportItem(name = "data6", length = 10, order = 84)
-    public RString data6;
-    @ReportItem(name = "data7", length = 7, order = 85)
-    public RString data7;
-    @ReportItem(name = "data8", length = 7, order = 86)
-    public RString data8;
-    @ReportItem(name = "data9", length = 10, order = 87)
-    public RString data9;
-    @ReportItem(name = "data10", length = 7, order = 88)
-    public RString data10;
-    @ReportItem(name = "data11", length = 7, order = 89)
-    public RString data11;
-    @ReportItem(name = "data12", length = 10, order = 90)
-    public RString data12;
-    @ReportItem(name = "data13", length = 7, order = 91)
-    public RString data13;
-    @ReportItem(name = "data14", length = 7, order = 92)
-    public RString data14;
-    @ReportItem(name = "data15", length = 10, order = 93)
-    public RString data15;
+    @ReportItem(name = "hokenryogakuGokei1", length = 7, order = 79)
+    public RString hokenryogakuGokei1;
+    @ReportItem(name = "tainogakuGokei1", length = 7, order = 80)
+    public RString tainogakuGokei1;
+    @ReportItem(name = "SoGokei1", length = 10, order = 81)
+    public RString SoGokei1;
+    @ReportItem(name = "hokenryogakuGokei2", length = 7, order = 82)
+    public RString hokenryogakuGokei2;
+    @ReportItem(name = "tainogakuGokei2", length = 7, order = 83)
+    public RString tainogakuGokei2;
+    @ReportItem(name = "SoGokei2", length = 10, order = 84)
+    public RString SoGokei2;
+    @ReportItem(name = "hokenryogakuGokei3", length = 7, order = 85)
+    public RString hokenryogakuGokei3;
+    @ReportItem(name = "tainogakuGokei3", length = 7, order = 86)
+    public RString tainogakuGokei3;
+    @ReportItem(name = "SoGokei3", length = 10, order = 87)
+    public RString SoGokei3;
+    @ReportItem(name = "hokenryogakuGokei4", length = 7, order = 88)
+    public RString hokenryogakuGokei4;
+    @ReportItem(name = "tainogakuGokei4", length = 7, order = 89)
+    public RString tainogakuGokei4;
+    @ReportItem(name = "SoGokei4", length = 10, order = 90)
+    public RString SoGokei4;
+    @ReportItem(name = "hokenryogakuGokei5", length = 7, order = 91)
+    public RString hokenryogakuGokei5;
+    @ReportItem(name = "tainogakuGokei5", length = 7, order = 92)
+    public RString tainogakuGokei5;
+    @ReportItem(name = "SoGokei5", length = 10, order = 93)
+    public RString SoGokei5;
     @ReportItem(name = "nendoLower1", length = 19, order = 94)
     public RString nendoLower1;
     @ReportItem(name = "nendoLower2", length = 19, order = 95)
@@ -275,36 +278,36 @@ public class KyufuGengakuHaakuIchiranReportSource implements IReportSource {
     public RString shunonashiLower4;
     @ReportItem(name = "shunonashiLower5", length = 20, order = 133)
     public RString shunonashiLower5;
-    @ReportItem(name = "data16", length = 7, order = 134)
-    public RString data16;
-    @ReportItem(name = "data17", length = 7, order = 135)
-    public RString data17;
-    @ReportItem(name = "data18", length = 10, order = 136)
-    public RString data18;
-    @ReportItem(name = "data19", length = 7, order = 137)
-    public RString data19;
-    @ReportItem(name = "data20", length = 7, order = 138)
-    public RString data20;
-    @ReportItem(name = "data21", length = 10, order = 139)
-    public RString data21;
-    @ReportItem(name = "data22", length = 7, order = 140)
-    public RString data22;
-    @ReportItem(name = "data23", length = 7, order = 141)
-    public RString data23;
-    @ReportItem(name = "data24", length = 10, order = 142)
-    public RString data24;
-    @ReportItem(name = "data25", length = 7, order = 143)
-    public RString data25;
-    @ReportItem(name = "data26", length = 7, order = 144)
-    public RString data26;
-    @ReportItem(name = "data27", length = 10, order = 145)
-    public RString data27;
-    @ReportItem(name = "data28", length = 7, order = 146)
-    public RString data28;
-    @ReportItem(name = "data29", length = 7, order = 147)
-    public RString data29;
-    @ReportItem(name = "data30", length = 10, order = 148)
-    public RString data30;
+    @ReportItem(name = "hokenryogakuGokei6", length = 7, order = 134)
+    public RString hokenryogakuGokei6;
+    @ReportItem(name = "tainogakuGokei6", length = 7, order = 135)
+    public RString tainogakuGokei6;
+    @ReportItem(name = "SoGokei6", length = 10, order = 136)
+    public RString SoGokei6;
+    @ReportItem(name = "hokenryogakuGokei7", length = 7, order = 137)
+    public RString hokenryogakuGokei7;
+    @ReportItem(name = "tainogakuGokei7", length = 7, order = 138)
+    public RString tainogakuGokei7;
+    @ReportItem(name = "SoGokei7", length = 10, order = 139)
+    public RString SoGokei7;
+    @ReportItem(name = "hokenryogakuGokei8", length = 7, order = 140)
+    public RString hokenryogakuGokei8;
+    @ReportItem(name = "tainogakuGokei8", length = 7, order = 141)
+    public RString tainogakuGokei8;
+    @ReportItem(name = "SoGokei8", length = 10, order = 142)
+    public RString SoGokei8;
+    @ReportItem(name = "hokenryogakuGokei9", length = 7, order = 143)
+    public RString hokenryogakuGokei9;
+    @ReportItem(name = "tainogakuGokei9", length = 7, order = 144)
+    public RString tainogakuGokei9;
+    @ReportItem(name = "SoGokei9", length = 10, order = 145)
+    public RString SoGokei9;
+    @ReportItem(name = "hokenryogakuGokei10", length = 7, order = 146)
+    public RString hokenryogakuGokei10;
+    @ReportItem(name = "tainogakuGokei10", length = 7, order = 147)
+    public RString tainogakuGokei10;
+    @ReportItem(name = "SoGokei10", length = 10, order = 148)
+    public RString SoGokei10;
     @ReportItem(name = "listGengakuJohoUpper_1", length = 2, order = 149)
     public RString listGengakuJohoUpper_1;
     @ReportItem(name = "listGengakuJohoUpper_2", length = 6, order = 150)
@@ -352,9 +355,5 @@ public class KyufuGengakuHaakuIchiranReportSource implements IReportSource {
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
-    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
-    public RString hihokenshaNo;
-    @ReportPerson(id = "A")
-    public RString shikibetsuCode;
 // </editor-fold>
 }

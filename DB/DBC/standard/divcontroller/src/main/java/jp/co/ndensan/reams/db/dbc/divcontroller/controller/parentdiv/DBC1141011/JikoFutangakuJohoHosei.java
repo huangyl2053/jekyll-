@@ -16,8 +16,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhorenInterfaceKanriMana
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -102,7 +100,7 @@ public class JikoFutangakuJohoHosei {
     /**
      * 「実行ボタン押下した時の早期処理」ボタンのメソッドです。
      *
-     * @param div DBC1120011PanelDiv
+     * @param div JikoFutangakuJohoHoseiDiv
      * @return ResponseData
      */
     public ResponseData<JikoFutangakuJohoHoseiDiv> onBeforeOpenCheck(JikoFutangakuJohoHoseiDiv div) {
@@ -116,7 +114,7 @@ public class JikoFutangakuJohoHosei {
     /**
      * 「実行ボタン押下した時の処理」ボタンのメソッドです。
      *
-     * @param div DBC1120011PanelDiv
+     * @param div JikoFutangakuJohoHoseiDiv
      * @return ResponseData
      */
     public ResponseData<DBC040030_KogakugassanJikofutangakuInfoHoseiParameter> onClick_btn(
@@ -148,8 +146,6 @@ public class JikoFutangakuJohoHosei {
         RString 国保連共同処理受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(),
                 SubGyomuCode.DBC介護給付);
         parameter.setTreatmentType(国保連共同処理受託区分);
-        Association 市町村コード_Temp = AssociationFinderFactory.createInstance().getAssociation();
-        parameter.setDantaiCd(市町村コード_Temp.get地方公共団体コード());
         parameter.setHandleTimestamp(RDate.getNowDateTime());
         return parameter;
     }

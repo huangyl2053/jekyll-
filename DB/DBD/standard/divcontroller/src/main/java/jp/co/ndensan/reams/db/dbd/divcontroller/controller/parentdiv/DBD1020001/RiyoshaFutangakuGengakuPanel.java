@@ -54,13 +54,16 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  */
 public class RiyoshaFutangakuGengakuPanel {
 
+    private static final RString 申請メニュー = new RString("DBDMN21002");
     private static final RString 承認メニュー = new RString("DBDMN22002");
     private static final RString 承認する_KEY = new RString("key0");
     private static final RString 追加 = new RString("追加");
     private static final RString BTNUPDATE_FIELDNAME = new RString("btnUpdate");
-    private final RString 文字列_申請一覧を表示する = new RString("申請一覧を表示する");
-    private final RString 文字列_申請入力を表示する = new RString("申請入力を表示する");
-    private final RString 文字列_承認入力を表示する = new RString("承認入力を表示する");
+    private static final RString 文字列_申請一覧を表示する = new RString("申請一覧を表示する");
+    private static final RString 文字列_申請入力を表示する = new RString("申請入力を表示する");
+    private static final RString 文字列_承認入力を表示する = new RString("承認入力を表示する");
+    private static final RString 申請メニュー_タイトル = new RString("利用者負担額減額申請");
+    private static final RString 承認メニュー_タイトル = new RString("利用者負担額減額申請承認");
 
     /**
      * 利用者負担額減額申請の初期化。(オンロード)
@@ -99,7 +102,15 @@ public class RiyoshaFutangakuGengakuPanel {
         getHandler(div).初期処理(taishoshaKey);
         ViewStateHolder.put(ViewStateKeys.新規申請の履歴番号, 0);
 
-        return ResponseData.of(div).setState(DBD1020001StateName.一覧);
+        RString rootTitle;
+        if (ResponseHolder.getMenuID().equals(申請メニュー)) {
+            rootTitle = 申請メニュー_タイトル;
+        } else {
+            rootTitle = 承認メニュー_タイトル;
+        }
+        ResponseData<RiyoshaFutangakuGengakuPanelDiv> responseData = ResponseData.of(div).setState(DBD1020001StateName.一覧);
+        responseData.setRootTitle(rootTitle);
+        return responseData;
     }
 
     /**

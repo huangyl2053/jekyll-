@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -95,14 +96,12 @@ public class ScheduleSetting {
 
         }
         if (!new RString(UrInformationMessages.保存終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-            QuestionMessage 保存終了MESSAGE = new QuestionMessage(
+            InformationMessage 保存終了MESSAGE = new InformationMessage(
                     UrInformationMessages.保存終了.getMessage().getCode(),
-                    UrInformationMessages.保存終了.getMessage().evaluate(),
-                    ButtonSelectPattern.OKCancel);
+                    UrInformationMessages.保存終了.getMessage().evaluate());
             return ResponseData.of(div).addMessage(保存終了MESSAGE).respond();
         }
-        if (new RString(UrInformationMessages.保存終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (new RString(UrInformationMessages.保存終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).forwardWithEventName(DBC6000011TransitionEventName.メニューへ戻る).respond();
         }
         return ResponseData.of(div).respond();

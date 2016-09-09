@@ -33,6 +33,7 @@ public class JuryoininKeiyakuShoninKakuninshoProcessParameter implements IBatchP
     private RString 文書番号;
     private RString 改頁出力順;
     private LasdecCode 市町村コード;
+    private RString 市町村名称;
     private RDateTime 処理日時;
 
     private RString 利用者向けタイトル;
@@ -54,11 +55,12 @@ public class JuryoininKeiyakuShoninKakuninshoProcessParameter implements IBatchP
      * @param 文書番号 文書番号
      * @param 改頁出力順 改頁出力順
      * @param 市町村コード 市町村コード
+     * @param 市町村名称 市町村名称
      * @param 処理日時 処理日時
      */
     public JuryoininKeiyakuShoninKakuninshoProcessParameter(FlexibleDate 契約申請日開始, FlexibleDate 契約申請日終了, FlexibleDate 契約決定日開始,
             FlexibleDate 契約決定日終了, RString 発行済, FlexibleDate 通知日, RString 文書番号, RString 改頁出力順, LasdecCode 市町村コード,
-            RDateTime 処理日時) {
+            RString 市町村名称, RDateTime 処理日時) {
         this.契約申請日開始 = 契約申請日開始;
         this.契約申請日終了 = 契約申請日終了;
         this.契約決定日開始 = 契約決定日開始;

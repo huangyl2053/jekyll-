@@ -18,20 +18,20 @@ public enum TyohyoShutuyukuOrderKey implements IReportItems {
     /**
      * 項目ID:0001 フォームフィールド名:郵便番号 MyBatis項目名:定義なし
      */
-    郵便番号("0001", "郵便番号", "\"ShikibetsuTaisho\".\"yubinNo\""),
+    郵便番号("0001", "郵便番号", "\"yubinNo\""),
     //    郵便番号("0001", "郵便番号", "shikibetsuCode.\"yubinNo\""),
     /**
      * 項目ID:0002 フォームフィールド名:町域コード MyBatis項目名:定義なし
      */
-    町域コード("0002", "町域コード", "\"ShikibetsuTaisho\".\"choikiCode\""),
+    町域コード("0002", "町域コード", "\"choikiCode\""),
     /**
      * 項目ID:0004 フォームフィールド名:行政区コード MyBatis項目名:定義なし
      */
-    行政区コード("0004", "行政区コード", "\"ShikibetsuTaisho\".\"gyoseikuCode\""),
+    行政区コード("0004", "行政区コード", "\"gyoseikuCode\""),
     /**
      * 項目ID:0010 フォームフィールド名:氏名５０音カナMyBatis項目名:定義なし
      */
-    氏名５０音カナ("0010", "氏名５０音カナ", "\"ShikibetsuTaisho\".\"gaikokujinKanaShimei\""),
+    氏名５０音カナ("0010", "氏名５０音カナ", "\"gaikokujinKanaShimei\""),
     /**
      * 項目ID:0016 フォームフィールド名:市町村コード MyBatis項目名:定義なし
      */
@@ -39,11 +39,11 @@ public enum TyohyoShutuyukuOrderKey implements IReportItems {
     /**
      * 項目ID:0103 フォームフィールド名:証記載保険者番号 MyBatis項目名:定義なし
      */
-    証記載保険者番号("0103", "証記載保険者番号", "A.\"shoKisaiHokenshaNo\""),
+    証記載保険者番号("0103", "証記載保険者番号", "\"shoKisaiHokenshaNo\""),
     /**
      * 項目ID:0104 フォームフィールド名:被保険者番号 MyBatis項目名:定義なし
      */
-    被保険者番号("0104", "被保険者番号", "A.\"hihokenshaNo\""),
+    被保険者番号("0104", "被保険者番号", "\"hihokenshaNo\""),
     /**
      * 項目ID:0403 フォームフィールド名:要介護度 MyBatis項目名:定義なし
      */

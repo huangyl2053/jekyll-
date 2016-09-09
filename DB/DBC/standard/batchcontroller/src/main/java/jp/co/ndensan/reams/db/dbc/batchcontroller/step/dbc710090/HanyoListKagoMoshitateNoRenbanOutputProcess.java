@@ -113,24 +113,16 @@ public class HanyoListKagoMoshitateNoRenbanOutputProcess extends BatchProcessBas
                 UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(),
                 csvFileName);
+        noRenbanCsvWriter = BatchWriters.csvWriter(HanyoListKagoMoshitateNoRenbanCsvEntity.class).
+                filePath(eucFilePath).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(false).
+                build();
         if (parameter.is項目名付加()) {
-            noRenbanCsvWriter = BatchWriters.csvWriter(HanyoListKagoMoshitateNoRenbanCsvEntity.class).
-                    filePath(eucFilePath).
-                    setDelimiter(EUC_WRITER_DELIMITER).
-                    setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.UTF_8withBOM).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(true).
-                    build();
-        } else {
-            noRenbanCsvWriter = BatchWriters.csvWriter(HanyoListKagoMoshitateNoRenbanCsvEntity.class).
-                    filePath(eucFilePath).
-                    setDelimiter(EUC_WRITER_DELIMITER).
-                    setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.UTF_8withBOM).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(false).
-                    build();
+            noRenbanCsvWriter.writeLine(HanyoListKagoMoshitateCsvEntityEditor.getHeaderNoRenban());
         }
     }
 
@@ -148,9 +140,13 @@ public class HanyoListKagoMoshitateNoRenbanOutputProcess extends BatchProcessBas
 
     @Override
     protected void afterExecute() {
-        AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         noRenbanCsvWriter.close();
-        spoolManager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLogUUID);
+        if (!personalDataList.isEmpty()) {
+            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+            spoolManager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLogUUID);
+        } else {
+            spoolManager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
+        }
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
                 地方公共団体情報.getLasdecCode_().value(),

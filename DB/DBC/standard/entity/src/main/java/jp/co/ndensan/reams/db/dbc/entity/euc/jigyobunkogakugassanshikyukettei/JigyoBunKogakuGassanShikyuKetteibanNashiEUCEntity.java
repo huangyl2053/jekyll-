@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.TsuzukigaraCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -115,13 +116,13 @@ public class JigyoBunKogakuGassanShikyuKetteibanNashiEUCEntity implements IJigyo
     @CsvField(order = 43, name = "空白")
     private RString 空白;
     @CsvField(order = 44, name = "送付先氏名")
-    private RString 送付先氏名;
+    private AtenaMeisho 送付先氏名;
     @CsvField(order = 45, name = "送付先氏名カナ")
-    private RString 送付先氏名カナ;
+    private AtenaKanaMeisho 送付先氏名カナ;
     @CsvField(order = 46, name = "送付先住所コード")
-    private RString 送付先住所コード;
+    private ZenkokuJushoCode 送付先住所コード;
     @CsvField(order = 47, name = "送付先郵便番号")
-    private RString 送付先郵便番号;
+    private YubinNo 送付先郵便番号;
     @CsvField(order = 48, name = "送付先住所+番地+方書")
     private RString 送付先住所_番地_方書;
     @CsvField(order = 49, name = "送付先住所")
@@ -131,7 +132,7 @@ public class JigyoBunKogakuGassanShikyuKetteibanNashiEUCEntity implements IJigyo
     @CsvField(order = 51, name = "送付先方書")
     private RString 送付先方書;
     @CsvField(order = 52, name = "送付先行政区コード")
-    private RString 送付先行政区コード;
+    private GyoseikuCode 送付先行政区コード;
     @CsvField(order = 53, name = "送付先行政区名")
     private RString 送付先行政区名;
     @CsvField(order = 54, name = "被保険者番号")

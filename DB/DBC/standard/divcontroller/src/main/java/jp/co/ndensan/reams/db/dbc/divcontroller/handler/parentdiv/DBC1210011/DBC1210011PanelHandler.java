@@ -218,7 +218,8 @@ public class DBC1210011PanelHandler {
      * @param map Map
      */
     public void set履歴番号(Map<RString, Set<RString>> map) {
-        RString select連絡票整理番号 = div.getDdlRearakuhyoSeiriNO().getSelectedKey();
+        RString select連絡票整理番号 = div.getDdlTaishoNendo().getSelectedKey()
+                .concat(div.getDdlRearakuhyoSeiriNO().getSelectedKey());
         List<RString> 履歴番号List = new ArrayList<>(map.get(select連絡票整理番号));
         if (!履歴番号List.isEmpty()) {
             Comparator<RString> comparator = new Comparator<RString>() {
@@ -325,12 +326,15 @@ public class DBC1210011PanelHandler {
     public Map<RString, Set<RString>> put連絡票整理番号_履歴番号(List<KogakuGassanShikyuFushikyuKettei> 高額合算支給不支給決定List) {
         Map<RString, Set<RString>> 連絡票整理番号_履歴番号 = new HashMap<>();
         for (KogakuGassanShikyuFushikyuKettei shikyuKettei : 高額合算支給不支給決定List) {
-            if (連絡票整理番号_履歴番号.containsKey(shikyuKettei.get支給申請書整理番号())) {
-                連絡票整理番号_履歴番号.get(shikyuKettei.get支給申請書整理番号()).add(new RString(shikyuKettei.get履歴番号()));
+            if (連絡票整理番号_履歴番号.containsKey(shikyuKettei.get対象年度().toDateString().
+                    concat(shikyuKettei.get支給申請書整理番号()))) {
+                連絡票整理番号_履歴番号.get(shikyuKettei.get対象年度().toDateString().
+                        concat(shikyuKettei.get支給申請書整理番号())).add(new RString(shikyuKettei.get履歴番号()));
             } else {
                 Set<RString> 履歴番号 = new HashSet<>();
                 履歴番号.add(new RString(shikyuKettei.get履歴番号()));
-                連絡票整理番号_履歴番号.put(shikyuKettei.get支給申請書整理番号(), 履歴番号);
+                連絡票整理番号_履歴番号.put(shikyuKettei.get対象年度().toDateString()
+                        .concat(shikyuKettei.get支給申請書整理番号()), 履歴番号);
             }
 
         }

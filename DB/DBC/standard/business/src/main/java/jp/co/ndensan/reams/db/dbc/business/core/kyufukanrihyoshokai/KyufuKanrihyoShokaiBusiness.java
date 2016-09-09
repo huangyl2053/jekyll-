@@ -393,4 +393,13 @@ public class KyufuKanrihyoShokaiBusiness {
     public RString getサービス事業者名() {
         return entity.getサービス事業者名();
     }
+
+    /**
+     * 識別コードを返します。
+     *
+     * @return 識別コード
+     */
+    public RString get識別コード() {
+        return entity.get識別コード();
+    }
 }

@@ -64,6 +64,10 @@ public class HanyoListParamHandler {
             div.getCcdShutsuryokuKoumoku().load(ReportIdDBC.DBC701012.getReportId().value(), SubGyomuCode.DBC介護給付);
             set保険者区分();
         }
+        List<RString> listCSV = new ArrayList<>();
+        listCSV.add(CSVSettings.項目名付加.getコード());
+        listCSV.add(CSVSettings.日付スラッシュ編集.getコード());
+        div.getChkCsvHenshuHoho().setSelectedItemsByKey(listCSV);
     }
 
     private void set保険者区分() {
@@ -115,7 +119,7 @@ public class HanyoListParamHandler {
         param.setKokuhorensouhunengetsuto(nullToEmpty(div.getTxtKokuhorenSofuNengetu().getToValue()));
         param.setSeverteikyounengetsufrom(nullToEmpty(div.getTxtSabisuTeikyoNengetu().getFromValue()));
         param.setSeverteikyounengetsuto(nullToEmpty(div.getTxtSabisuTeikyoNengetu().getToValue()));
-        param.setJigyoushabangou(div.getCcdJigyoshaBango().get施設種類());
+        param.setJigyoushabangou(div.getCcdJigyoshaBango().getNyuryokuShisetsuKodo());
         return param;
     }
 
@@ -147,7 +151,7 @@ public class HanyoListParamHandler {
         if (広域.equals(導入形態)) {
             div.getCcdHokenshaList().setSelectedShichosonIfExist(restoreBatchParameterMap.getParameterValue(LasdecCode.class, new RString("hokenshacode")));
         }
-
+        div.getCcdJigyoshaBango().setNyuryokuShisetsuKodo(restoreBatchParameterMap.getParameterValue(RString.class, new RString("jigyoushabangou")));
     }
 
     /**
@@ -185,7 +189,7 @@ public class HanyoListParamHandler {
         param.setKokuhorentoriatsukainenetsuto(nullToEmpty(div.getTxtKokuhorenToriatukaiNengetu().getToValue()));
         param.setSeverteikyounengetsufrom(nullToEmpty(div.getTxtSabisuTeikyoNengetu().getFromValue()));
         param.setSeverteikyounengetsuto(nullToEmpty(div.getTxtSabisuTeikyoNengetu().getToValue()));
-        param.setJigyoushabangou(div.getCcdJigyoshaBango().get施設種類());
+        param.setJigyoushabangou(div.getCcdJigyoshaBango().getNyuryokuShisetsuKodo());
         List<RString> listKey = div.getChkHokenshaKubun().getSelectedKeys();
         param.setHokenshakubun(listKey);
         return param;
@@ -198,7 +202,7 @@ public class HanyoListParamHandler {
      */
     public void hanyoListSaishinsaKekka(RString 導入形態) {
         BatchParameterMap restoreBatchParameterMap = div.getBtnHanyoListSaishinsaKekkaParamRestore().getRestoreBatchParameterMap();
-        div.getTxtKokuhorenToriatukaiNengetu().setFromValue(nullToEmpty(restoreBatchParameterMap.getParameterValue(RString.class, new RString("kokuhorentoriatsukainenetsufrom")).toString()));
+        div.getTxtKokuhorenToriatukaiNengetu().setFromValue(nullToEmpty(restoreBatchParameterMap.getParameterValue(RString.class, new RString("kokuhorentoriatsukaifrom")).toString()));
         div.getTxtKokuhorenToriatukaiNengetu().setToValue(nullToEmpty(restoreBatchParameterMap.getParameterValue(RString.class, new RString("kokuhorentoriatsukainenetsuto")).toString()));
         div.getTxtSabisuTeikyoNengetu().setFromValue(nullToEmpty(restoreBatchParameterMap.getParameterValue(RString.class, new RString("severteikyounengetsufrom")).toString()));
         div.getTxtSabisuTeikyoNengetu().setToValue(nullToEmpty(restoreBatchParameterMap.getParameterValue(RString.class, new RString("severteikyounengetsuto")).toString()));
@@ -224,6 +228,7 @@ public class HanyoListParamHandler {
         if (広域.equals(導入形態)) {
             div.getCcdHokenshaList().setSelectedShichosonIfExist(restoreBatchParameterMap.getParameterValue(LasdecCode.class, new RString("hokenshacode")));
         }
+        div.getCcdJigyoshaBango().setNyuryokuShisetsuKodo(restoreBatchParameterMap.getParameterValue(RString.class, new RString("jigyoushabangou")));
     }
 
     /**

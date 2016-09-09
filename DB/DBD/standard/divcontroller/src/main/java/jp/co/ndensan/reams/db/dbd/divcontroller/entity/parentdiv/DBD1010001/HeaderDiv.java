@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HeaderDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,10 +36,10 @@ public class HeaderDiv extends Panel {
     private DialogsDiv Dialogs;
     @JsonProperty("ccdAtenaInfo")
     private KaigoAtenaInfoDiv ccdAtenaInfo;
-    @JsonProperty("ccdShisetsuNyushoInfo")
-    private ShisetSunyushoInfoDiv ccdShisetsuNyushoInfo;
     @JsonProperty("ccdKaigoShikakuKihon")
     private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
+    @JsonProperty("ccdShisetsuNyushoInfo")
+    private ShisetSunyushoInfoDiv ccdShisetsuNyushoInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -111,21 +111,21 @@ public class HeaderDiv extends Panel {
     }
 
     /*
-     * getccdShisetsuNyushoInfo
-     * @return ccdShisetsuNyushoInfo
-     */
-    @JsonProperty("ccdShisetsuNyushoInfo")
-    public IShisetSunyushoInfoDiv getCcdShisetsuNyushoInfo() {
-        return ccdShisetsuNyushoInfo;
-    }
-
-    /*
      * getccdKaigoShikakuKihon
      * @return ccdKaigoShikakuKihon
      */
     @JsonProperty("ccdKaigoShikakuKihon")
     public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
         return ccdKaigoShikakuKihon;
+    }
+
+    /*
+     * getccdShisetsuNyushoInfo
+     * @return ccdShisetsuNyushoInfo
+     */
+    @JsonProperty("ccdShisetsuNyushoInfo")
+    public IShisetSunyushoInfoDiv getCcdShisetsuNyushoInfo() {
+        return ccdShisetsuNyushoInfo;
     }
 
     /*
@@ -179,6 +179,16 @@ public class HeaderDiv extends Panel {
     @JsonIgnore
     public void  setBtnDispGemmenJoho(ButtonDialog btnDispGemmenJoho) {
         this.getDialogs().setBtnDispGemmenJoho(btnDispGemmenJoho);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnHikazeiNenkinSho() {
+        return this.getDialogs().getBtnHikazeiNenkinSho();
+    }
+
+    @JsonIgnore
+    public void  setBtnHikazeiNenkinSho(ButtonDialog btnHikazeiNenkinSho) {
+        this.getDialogs().setBtnHikazeiNenkinSho(btnHikazeiNenkinSho);
     }
 
     // </editor-fold>

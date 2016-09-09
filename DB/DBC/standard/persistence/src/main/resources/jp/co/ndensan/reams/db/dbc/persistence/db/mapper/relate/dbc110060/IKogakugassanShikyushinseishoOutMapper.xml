@@ -3,11 +3,11 @@
 <!-- @reamsid_L DBC-2630-030 wangxue -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc110060.IKogakugassanShikyushinseishoOutMapper">
     
-    <!--<select resultOrdered="true" id="get高額合算申請書データ" 
+    <select resultOrdered="true" id="get高額合算申請書データ" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110060.KogakugassanShikyushinseishoOutMybatisParameter"
             resultMap="resultMap_KogakuGassanShinseishoDataEntity" fetchSize="500">
         SELECT
-        row_number over(partition by "DbT3068KogakuGassanShinseisho"."shikyuShinseishoSeiriNo" order by "DbT3068KogakuGassanShinseisho"."rirekiNo" ASC) as rowNum,
+        row_number() over(partition by "DbT3068KogakuGassanShinseisho"."shikyuShinseishoSeiriNo" order by "DbT3068KogakuGassanShinseisho"."rirekiNo" ASC) as rowNum,
         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3068KogakuGassanShinseishoMapper.allColumns_DbT3068KogakuGassanShinseisho" />
         FROM
             rgdb."DbT3068KogakuGassanShinseisho"
@@ -53,6 +53,7 @@
     </select>
     
     <select id="get口座情報がないデータ" resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110060.SofuFileSakuseiMybatisParameter"
             resultMap="resultMap_KogakuGassanShinseishoInsertKozaEntity" fetchSize="500">
         SELECT
             <include refid="allColumns_DbWT3711KogakuGassanShinseishoTemp" />,
@@ -99,8 +100,8 @@
                 "DbWT3711KogakuGassanShinseisho"."shiharaiHohoKubun" != '1'
             ) AS DbWT3711
        LEFT JOIN
-            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
-       ON koza."kozaid" = DbWT3711."kozaID"
+            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS "koza"
+       ON "koza"."uaT0310Koza_kozaId" = DbWT3711."kozaID"
     </select>
     
     <resultMap id="resultMap_KogakuGassanShinseishoInsertKozaEntity" autoMapping="true"
@@ -124,12 +125,16 @@
                 OR "DbWT3711KogakuGassanShinseisho"."shoKisaiHokenshaName" IS NULL
                 AND "DbWT3711KogakuGassanShinseisho"."sofuJogaiFlag" = false
         ) AS DbWT3711
-        INNER JOIN 
-        ( SELECT 
-            row_number() over (partition by "DbT7056GappeiShichoson"."kyuHokenshaNo" order by "DbT7056GappeiShichoson"."gappeiYMD" DESC) AS rowNum
-            "DbT7056GappeiShichoson".*
-          FROM rgdb."DbT7056GappeiShichoson"
-          WHERE rowNum = 1
+        INNER JOIN
+        (SELECT
+            temp_旧市町村.*
+         FROM
+            ( SELECT 
+                row_number() over (partition by "DbT7056GappeiShichoson"."kyuHokenshaNo" order by "DbT7056GappeiShichoson"."gappeiYMD" DESC) AS rowNum,
+                "DbT7056GappeiShichoson".*
+              FROM rgdb."DbT7056GappeiShichoson"
+            ) AS temp_旧市町村
+         WHERE temp_旧市町村.rowNum = 1
         ) AS 旧市町村
         ON DbWT3711."shoKisaiHokenshaNo" = 旧市町村."kyuHokenshaNo"
     </select>
@@ -148,13 +153,16 @@
                 OR "DbWT3711KogakuGassanShinseisho"."shoKisaiHokenshaName" IS NULL
                 AND "DbWT3711KogakuGassanShinseisho"."sofuJogaiFlag" = false
         ) AS DbWT3711
-        INNER JOIN 
-        ( SELECT 
-            row_number() over (partition by "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" order by "DbT7051KoseiShichosonMaster"."kanyuYMD" DESC) AS rowNum
-            "DbT7051KoseiShichosonMaster".*
-          FROM rgdb."DbT7051KoseiShichosonMaster"
-          WHERE rowNum = 1
-        ) AS 構成市町村
+        INNER JOIN
+         (SELECT
+            temp.*
+          FROM( SELECT 
+                row_number() over (partition by "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" order by "DbT7051KoseiShichosonMaster"."kanyuYMD" DESC) AS rowNum,
+                "DbT7051KoseiShichosonMaster".*
+              FROM rgdb."DbT7051KoseiShichosonMaster"
+            ) AS temp
+          WHERE temp.rowNum = 1
+         ) AS 構成市町村
         ON DbWT3711."shoKisaiHokenshaNo" = 構成市町村."shoKisaiHokenshaNo"
     </select>
     
@@ -163,6 +171,125 @@
         <id column="DbWT3711_renban" />
         <result property="市町村名称" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="高額合算申請書一時Entity" resultMap="resultMap_DbWT3711KogakuGassanShinseishoTempEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get保険者番号の取得データ"
+            resultMap="resultMap_KogakuGassanShinseishoHokenshaShutokuEntity" fetchSize="500" >
+        SELECT
+            dbwt3711."hokenshaNo" AS dbwt3711_hokenshaNo,
+            COUNT(DISTINCT(dbwt3711."shikyuShinseishoSeiriNo" || dbwt3711."rirekiNo")) AS dbwt3711_count
+        FROM
+            "DbWT3711KogakuGassanShinseisho" AS dbwt3711
+        WHERE
+            dbwt3711."sofuJogaiFlag" = false
+        GROUP BY
+            dbwt3711."hokenshaNo"
+    </select>
+    
+    <resultMap autoMapping="true" id="resultMap_KogakuGassanShinseishoHokenshaShutokuEntity" 
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.KogakuGassanShinseishoHokenshaShutokuEntity">
+        <id property="保険者番号" column="dbwt3711_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler" />
+        <result property="件数" column="dbwt3711_count" />
+    </resultMap>
+    
+    <select resultOrdered="true" id="get送付ファイル作成データ"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110060.SofuFileSakuseiMybatisParameter"
+            resultMap="resultMap_KogakuGassanShinseishoSofuFileEntity" fetchSize="500" >
+        SELECT
+            <include refid="allColumns_DbWT3711KogakuGassanShinseishoTemp" />,
+            <include refid="allColumns_DbWT1001Hihokensha" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3069KogakuGassanShinseishoKanyurekiMapper.allColumns_DbT3069KogakuGassanShinseishoKanyureki" />,
+            "koza".*
+       FROM "DbWT3711KogakuGassanShinseisho" AS DbWT3711
+       INNER JOIN "DbWT1001Hihokensha"
+       ON DbWT3711."renban" = "DbWT1001Hihokensha"."exRenban"
+       INNER JOIN rgdb."DbT3069KogakuGassanShinseishoKanyureki"
+       ON DbWT3711."hihokenshaNo" = "DbT3069KogakuGassanShinseishoKanyureki"."hihokenshaNo" AND
+          DbWT3711."taishoNendo" = "DbT3069KogakuGassanShinseishoKanyureki"."taishoNendo" AND
+          DbWT3711."hokenshaNo" = "DbT3069KogakuGassanShinseishoKanyureki"."hokenshaNo" AND
+          DbWT3711."seiriNo" = "DbT3069KogakuGassanShinseishoKanyureki"."seiriNo" AND
+          DbWT3711."rirekiNo" = "DbT3069KogakuGassanShinseishoKanyureki"."rirekiNo"
+       LEFT JOIN
+            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS "koza"
+       ON "koza"."uaT0310Koza_kozaId" = DbWT3711."kozaID"
+       WHERE
+            DbWT3711."hokenshaNo" = #{保険者番号} AND
+            DbWT3711."sofuJogaiFlag" = false
+       ORDER BY
+            DbWT3711."shikyuShinseishoSeiriNo" ASC,
+            DbWT3711."rirekiNo" ASC,
+            DbWT3711."hihokenshaNo" ASC
+    </select>
+    
+    <resultMap autoMapping="true" id="resultMap_KogakuGassanShinseishoSofuFileEntity" 
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.KogakuGassanShinseishoSofuFileEntity">
+        <id column="DbWT3711_hihokenshaNo" />
+        <id column="DbWT3711_taishoNendo" />
+        <id column="DbWT3711_hokenshaNo" />
+        <id column="DbWT3711_seiriNo" />
+        <id column="DbWT3711_rirekiNo" />
+        <id column="dbT3069KogakuGassanShinseishoKanyureki_kanyurekiNo" />
+        <id column="DbWT3711_kozaID" />
+        <id column="dbWT1001Hihokensha_exRenban" />
+        <association property="高額合算申請書一時" resultMap="resultMap_DbWT3711KogakuGassanShinseishoTempEntity"/>
+        <association property="被保険者一時" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
+        <association property="高額合算申請書加入歴" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3069KogakuGassanShinseishoKanyurekiMapper.ResultMap_DbT3069KogakuGassanShinseishoKanyurekiEntity"/>
+        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="getDB更新の送付済データ"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3068KogakuGassanShinseishoMapper.ResultMap_DbT3068KogakuGassanShinseishoEntity">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3068KogakuGassanShinseishoMapper.allColumns_DbT3068KogakuGassanShinseisho" />
+        FROM
+          rgdb."DbT3068KogakuGassanShinseisho"
+        INNER JOIN "DbWT3711KogakuGassanShinseisho" AS dbwt3711
+        ON "DbT3068KogakuGassanShinseisho"."hihokenshaNo" = dbwt3711."hihokenshaNo" AND
+        ON "DbT3068KogakuGassanShinseisho"."taishoNendo" = dbwt3711."taishoNendo" AND
+        ON "DbT3068KogakuGassanShinseisho"."hokenshaNo" = dbwt3711."hokenshaNo" AND
+        ON "DbT3068KogakuGassanShinseisho"."seiriNo" = dbwt3711."seiriNo" AND
+        ON "DbT3068KogakuGassanShinseisho"."rirekiNo" = dbwt3711."rirekiNo"
+        WHERE
+            dbwt3711."sofuJogaiFlag" = false
+    </select>
+    
+    <select resultOrdered="true" id="getDB更新の未送付データ"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3068KogakuGassanShinseishoMapper.ResultMap_DbT3068KogakuGassanShinseishoEntity">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3068KogakuGassanShinseishoMapper.allColumns_DbT3068KogakuGassanShinseisho" />
+        FROM
+          rgdb."DbT3068KogakuGassanShinseisho"
+        INNER JOIN "DbWT3711KogakuGassanShinseisho" AS dbwt3711
+        ON "DbT3068KogakuGassanShinseisho"."hihokenshaNo" = dbwt3711."hihokenshaNo" AND
+        ON "DbT3068KogakuGassanShinseisho"."taishoNendo" = dbwt3711."taishoNendo" AND
+        ON "DbT3068KogakuGassanShinseisho"."hokenshaNo" = dbwt3711."hokenshaNo" AND
+        ON "DbT3068KogakuGassanShinseisho"."seiriNo" = dbwt3711."seiriNo" AND
+        ON "DbT3068KogakuGassanShinseisho"."rirekiNo" = dbwt3711."rirekiNo"
+        WHERE
+            dbwt3711."sofuJogaiFlag" = true
+    </select>
+    
+    <select resultOrdered="true" id="get送付一覧表出力対象データ" fetchSize="500"
+            resultMap="ResultMap_DBWT37K1ToDbWT1001ToMeisai">
+        SELECT 
+            <include refid="allColumns_DbWT3711KogakuGassanShinseishoTemp" />,
+            <include refid="allColumns_DbWT1001Hihokensha" />
+        FROM "DbWT3711KogakuGassanShinseisho" AS DbWT3711
+        INNER JOIN "DbWT1001Hihokensha"
+               ON "DbWT1001Hihokensha"."exRenban" = DbWT3711."renban"
+        WHERE DbWT3711."sofuJogaiFlag" = FALSE
+        ORDER BY
+               DbWT3711."jufukuKubun" DESC,
+               DbWT3711."shikyuShinseishoSeiriNo" ASC,
+               DbWT3711."rirekiNo" ASC,
+               DbWT3711."hihokenshaNo" ASC
+    </select>
+    
+    <resultMap autoMapping="true" id="ResultMap_DBWT37K1ToDbWT1001ToMeisai" 
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.KogakugassanShikyushinseishoOutFileEntity">
+        <id column="dbWT1001Hihokensha_exRenban" />
+        <association property="高額合算申請書一時Entity" resultMap="resultMap_DbWT3711KogakuGassanShinseishoTempEntity"/>
+        <association property="被保険者一時Entity" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
     </resultMap>
     
     <sql id="allColumns_DbWT3711KogakuGassanShinseishoTemp">
@@ -304,7 +431,7 @@
         <result property="heichoNaiyo" column="DbWT3711_heichoNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shiharaiKaishiTime" column="DbWT3711_shiharaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shiharaiShuryoTime" column="DbWT3711_shiharaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kozaID" column="DbWT3711_kozaID" />
+        <result property="kozaID" column="DbWT3711_kozaID"/>
         <result property="biko" column="DbWT3711_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shikyuShinseisho_SofuYM" column="DbWT3711_shikyuShinseisho_SofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="saiSofuFlag" column="DbWT3711_saiSofuFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -312,7 +439,7 @@
         <result property="saiKeisanKubun" column="DbWT3711_saiKeisanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="sofuJogaiFlag" column="DbWT3711_sofuJogaiFlag" />
         <result property="jufukuKubun" column="DbWT3711_jufukuKubun" />
-        <result property="shoKisaiHokenshaNo" column="DbWT3711_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler""/>
+        <result property="shoKisaiHokenshaNo" column="DbWT3711_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
         <result property="shoKisaiHokenshaName" column="DbWT3711_shoKisaiHokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
@@ -348,5 +475,5 @@
         <result property="seibetsuCode" column="dbWT1001Hihokensha_seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shichosonKanyuYmd" column="dbWT1001Hihokensha_shichosonKanyuYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shichosonDattaiYmd" column="dbWT1001Hihokensha_shichosonDattaiYmd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-    </resultMap>-->
+    </resultMap>
 </mapper>

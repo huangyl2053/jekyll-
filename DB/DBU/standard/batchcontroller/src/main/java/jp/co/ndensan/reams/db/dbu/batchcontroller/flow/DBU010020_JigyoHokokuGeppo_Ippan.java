@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_JigyoHokokuGeppo_IppanParameter> {
 
     private static final FlexibleYearMonth 制度改正月 = new FlexibleYearMonth("200510");
+    private static final String CREATE事業報告世帯情報TEMPテーブル = "CreateTempTable";
     private static final String 世帯情報処理 = "SyotaiJohoSyori";
     private static final String 被保台帳生年月日情報処理 = "HihokenshaDaichoBirthYMDSyori";
     private static final String 利用者負担減額管理情報処理 = "RiyoshaFutangakuGemmenJohoSyori";
@@ -69,7 +70,8 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
                 new EucEntityId("DBU010020"), UzUDE0831EucAccesslogFileType.Csv);
         parameter = getParameter();
         parameter.setCsvFilePath(manager.getEucOutputDirectry());
-        createTempTable(JigyoHokokuHihokenshaTokeiMotoTempEntity.TABLE_NAME, JigyoHokokuHihokenshaTokeiMotoTempEntity.class);
+        executeStep(CREATE事業報告世帯情報TEMPテーブル);
+//        createTempTable(JigyoHokokuHihokenshaTokeiMotoTempEntity.TABLE_NAME, JigyoHokokuHihokenshaTokeiMotoTempEntity.class);
         if (PrintControlKubun.過去分の印刷.getコード().equals(parameter.getPrintControlKbn())) {
             executeStep(介護事業状況報告月報一般状況_別紙);
             executeStep(介護事業状況報告月報一般状況_様式1);
@@ -116,6 +118,17 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
             executeStep(特定入所者管理情報または標準負担額減免情報の確認リスト);
             executeStep(受給者台帳情報の確認リスト);
         }
+    }
+
+    /**
+     * 事業報告世帯情報TEMPテーブルを作成します。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(CREATE事業報告世帯情報TEMPテーブル)
+    protected IBatchFlowCommand createTempJigyoHokokuHihokenshaTokeiMotoData() {
+        return createTempTable(JigyoHokokuHihokenshaTokeiMotoTempEntity.TABLE_NAME,
+                JigyoHokokuHihokenshaTokeiMotoTempEntity.class).define();
     }
 
     /**

@@ -81,7 +81,6 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
         div.getShinseishoHakkoParameters().getDdlServiceYM().setDisabled(false);
         div.getShinseishoHakkoParameters().getRadShinsaYM().clearSelectedItem();
         div.getShinseishoHakkoParameters().getRadHakushiInsatsu().clearSelectedItem();
-        // TODO QA1349
         div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setDisabled(false);
         getHandler(div).setサービス年月DDL(menuID);
         return ResponseData.of(div).respond();
@@ -110,12 +109,6 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> onCancelClose(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-        if (div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedValue().isEmpty()) {
-            ValidationMessageControlPairs validPairs = getCheckHandler().確定チェック();
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
-            }
-        }
         return ResponseData.of(div).respond();
     }
 
@@ -126,6 +119,15 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> onBeforeOpenDialog(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
+
+        if (!div.getShinseishoHakkoParameters().getTxtHihokenshaNo().getValue().isEmpty()
+                && div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedValue().isEmpty()) {
+            ValidationMessageControlPairs validPairs = getCheckHandler().確定チェック();
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+        }
+
         if (div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().getValue().isEmpty() && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(DbcWarningMessages.申請書提出期限未入力.getMessage()).respond();
         }

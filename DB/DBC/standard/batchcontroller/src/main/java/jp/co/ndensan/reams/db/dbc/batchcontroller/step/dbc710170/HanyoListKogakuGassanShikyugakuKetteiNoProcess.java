@@ -141,7 +141,9 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
     private static final RString 被保険者番号 = new RString("被保険者番号");
     private static final RString 日本語ファイル名 = new RString("汎用リスト　高額合算支給額決定情報CSV");
     private static final RString 英数字ファイル名 = new RString("HanyoList_KogakuGassanShikyugakuKettei.csv");
-    private static final RString CSV出力有無 = new RString("");
+    private RString 出力有無;
+    private static final RString あり = new RString("あり");
+    private static final RString なし = new RString("なし");
     private static final RString 抽出対象者 = new RString("【抽出対象者】");
     private static final RString 保険者 = new RString("保険者：");
     private static final RString 支給区分 = new RString("支給区分：");
@@ -163,6 +165,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
     @Override
     protected void initialize() {
         super.initialize();
+        出力有無 = なし;
         システム日付 = FlexibleDate.getNowDate();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         構成市町村マスタ = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
@@ -216,6 +219,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
 
     @Override
     protected void process(HanyoListKogakuGassanShikyugakuKetteiEntity entity) {
+        出力有無 = あり;
         HanyoListKogakuGassanShikyugakuKetteiNoCSVEntity output;
         output = get帳票のCSVファイル作成(entity);
         hanyoListKogakuNoCSVWriter.writeLine(output);
@@ -709,7 +713,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
                 RString.EMPTY,
                 日本語ファイル名,
                 出力件数,
-                CSV出力有無,
+                出力有無,
                 英数字ファイル名,
                 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
@@ -720,19 +724,19 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append(抽出対象者);
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = get保険者名();
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = get支給区分();
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = get支払方法区分();
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = get金融機関コード();
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = get対象年度();
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         builder = get決定情報受取年月();
-        出力条件.add(builder.toRString());
+        get出力条件(出力条件, builder);
         return 出力条件;
     }
 
@@ -740,7 +744,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
         RStringBuilder builder = new RStringBuilder();
         if (parameter.get保険者コード() == null || parameter.get保険者コード().isEmpty()
                 || すべて.equals(getColumnValue(parameter.get保険者コード()))) {
-            return builder;
+            return null;
         }
         builder.append(保険者);
         Association 地方公共団体コード = AssociationFinderFactory.createInstance().getAssociation(parameter.get保険者コード());
@@ -751,7 +755,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
     private RStringBuilder get支給区分() {
         RStringBuilder builder = new RStringBuilder();
         if (RString.isNullOrEmpty(parameter.get支給区分())) {
-            return builder;
+            return null;
         }
         builder.append(支給区分);
         ShikyuFushikyuKubun 支給区分名称 = ShikyuFushikyuKubun.toValue(parameter.get支給区分());
@@ -762,7 +766,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
     private RStringBuilder get支払方法区分() {
         RStringBuilder builder = new RStringBuilder();
         if (RString.isNullOrEmpty(parameter.get支払方法区分())) {
-            return builder;
+            return null;
         }
         builder.append(支払方法区分);
         ShiharaiHohoKubun 支払方法区分名称 = ShiharaiHohoKubun.toValue(parameter.get支払方法区分());
@@ -773,7 +777,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
     private RStringBuilder get金融機関コード() {
         RStringBuilder builder = new RStringBuilder();
         if (parameter.get金融機関コード() == null || parameter.get金融機関コード().isEmpty()) {
-            return builder;
+            return null;
         }
         builder.append(金融機関コード);
         builder.append(左記号).append(getColumnValue(parameter.get金融機関コード())).append(右記号);
@@ -783,7 +787,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
     private RStringBuilder get対象年度() {
         RStringBuilder builder = new RStringBuilder();
         if (RString.isNullOrEmpty(parameter.get対象年度())) {
-            return builder;
+            return null;
         }
         builder.append(対象年度);
         builder.append(new FlexibleYear(parameter.get対象年度()).wareki().toDateString());
@@ -803,7 +807,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
             決定情報受取年月ToFlag = true;
         }
         if (決定情報受取年月FromFlag && 決定情報受取年月ToFlag) {
-            return builder;
+            return null;
         }
         builder.append(決定情報受取年月);
         if (決定情報受取年月ToFlag) {
@@ -818,5 +822,12 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
                     .append(parameter.get決定情報受取年月To().wareki().toDateString());
         }
         return builder;
+    }
+
+    private void get出力条件(List<RString> 出力条件, RStringBuilder builder) {
+        if (builder == null) {
+            return;
+        }
+        出力条件.add(builder.toRString());
     }
 }

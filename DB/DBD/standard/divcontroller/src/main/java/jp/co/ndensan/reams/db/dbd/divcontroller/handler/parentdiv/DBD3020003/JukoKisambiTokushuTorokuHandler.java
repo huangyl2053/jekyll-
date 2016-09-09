@@ -128,6 +128,7 @@ public class JukoKisambiTokushuTorokuHandler {
             row.setNokigen(tainoKiSummary.get納期限().toDateString());
             row.setJikoKisanYMD(new RString(tainoKiSummary.get時効起算日().toString()));
             row.setJikoKisanYMDKubun(tainoKiSummary.get時効起算日区分().getコード());
+            row.setSeirekiChoteiNendo(tainoKiSummary.get調定年度().toDateString());
 
             rowList.add(row);
         }
@@ -177,7 +178,7 @@ public class JukoKisambiTokushuTorokuHandler {
             JukoKisambiTokushuTorokuManager manager = JukoKisambiTokushuTorokuManager.createInstance();
 
             List<JikoKisambiKanri> 時効起算日管理リスト = manager.get時効起算日管理(
-                    被保険者番号, new RYear(div.getDgShunoJokyo().getActiveRow().getChoteiNendo().getValue().getYear().getYearValue()));
+                    被保険者番号, new RYear(div.getDgShunoJokyo().getActiveRow().getSeirekiChoteiNendo()));
 
             for (JikoKisambiKanri 時効起算日管理 : 時効起算日管理リスト) {
 
@@ -216,11 +217,11 @@ public class JukoKisambiTokushuTorokuHandler {
         for (dgJikoKisambi_Row row : rowList) {
             if (!row.getJikoKisaibi().getValue().equals(row.getTokushuJikoKisaibi().getValue())
                     || !row.getJikoKisaibiJiyu().equals(row.getTokushuJikoKisaibiJiyu().getSelectedValue())) {
-                return true;
+                return false;
             }
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -326,7 +327,9 @@ public class JukoKisambiTokushuTorokuHandler {
 
             JikoKisambiKanri new時効起算日管理 = builder.build();
 
-            if (!時効起算日管理List.contains(new時効起算日管理)) {
+            if (時効起算日管理List == null
+                    || 時効起算日管理List.isEmpty()
+                    || !時効起算日管理List.contains(new時効起算日管理)) {
                 new時効起算日管理 = new時効起算日管理.added();
                 new時効起算日管理List.add(new時効起算日管理);
             } else if (RString.isNullOrEmpty(new RString(row.getTokushuJikoKisaibi().getValue().toString()))

@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010;
 
+import jp.co.ndensan.reams.db.dbc.definition.core.riyoshafutan.RiyoshaFutanWaritaiHantei_ErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.nenjiriyoshafutanwariaihantei.NenjiRiyoshaFutanwariaiHanteiProcessParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.DbWT1801ShoriKekkaKakuninListEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.SogoJigyoTaishoshaTempEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -26,10 +28,13 @@ public class SogoJigyoTaishoshaTempProcess extends BatchProcessBase<SogoJigyoTai
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.nenjiriyoshafutanwariaihantei"
                     + ".INenjiRiyoshaFutanwariaiHanteiMapper.getSogoJigyoTaishoshaTemp");
     private static final RString 総合事業対象者TEMP = new RString("SogoJigyoTaishoshaTempTable");
+    private static final RString 処理結果確認リストTEMP = new RString("DbWT1801ShoriKekkaKakuninList");
     private NenjiRiyoshaFutanwariaiHanteiProcessParameter processParameter;
 
     @BatchWriter
     private IBatchTableWriter tempDbWriter;
+    @BatchWriter
+    private IBatchTableWriter tempResultListDbWriter;
 
     @Override
     protected IBatchReader createReader() {
@@ -39,10 +44,22 @@ public class SogoJigyoTaishoshaTempProcess extends BatchProcessBase<SogoJigyoTai
     @Override
     protected void createWriter() {
         this.tempDbWriter = new BatchEntityCreatedTempTableWriter(総合事業対象者TEMP, SogoJigyoTaishoshaTempEntity.class);
+        this.tempResultListDbWriter = new BatchEntityCreatedTempTableWriter(処理結果確認リストTEMP, DbWT1801ShoriKekkaKakuninListEntity.class);
     }
 
     @Override
     protected void process(SogoJigyoTaishoshaTempEntity entity) {
+        DbWT1801ShoriKekkaKakuninListEntity resultListEntity = new DbWT1801ShoriKekkaKakuninListEntity();
+        if (entity.getDbT1001HihokenshaDaicho_hihokenshaNo() == null) {
+            resultListEntity.setErrorKubun(RiyoshaFutanWaritaiHantei_ErrorKubun.総合事業対象者_被保険者台帳取得.getコード());
+            resultListEntity.setHihokenshaNo(entity.getDbT3105SogoJigyoTaishosha_hihokenshaNo().value());
+            tempResultListDbWriter.insert(resultListEntity);
+        }
+        if (entity.getUaFt200FindShikibetsuTaisho_shikibetsuCode() == null) {
+            resultListEntity.setErrorKubun(RiyoshaFutanWaritaiHantei_ErrorKubun.総合事業対象者_宛名取得.getコード());
+            resultListEntity.setHihokenshaNo(entity.getDbT3105SogoJigyoTaishosha_hihokenshaNo().value());
+            tempResultListDbWriter.insert(resultListEntity);
+        }
         tempDbWriter.insert(entity);
     }
 

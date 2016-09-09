@@ -59,17 +59,28 @@ public class JuryoIninKeiyakuShoninKakuninsho {
      */
     public ResponseData<DBC010010_JuryoininKeiyakuShoninKakuninshoParameter> onClick_BtnPrint(JuryoIninKeiyakuShoninKakuninshoDiv div) {
         DBC010010_JuryoininKeiyakuShoninKakuninshoParameter parameter = new DBC010010_JuryoininKeiyakuShoninKakuninshoParameter();
-        parameter.set契約申請日開始(new FlexibleDate(div.getJuryoininChushutsuJoken().getTxtKeiyakuShinseiYMD().getFromValue().toDateString()));
-        parameter.set契約申請日終了(new FlexibleDate(div.getJuryoininChushutsuJoken().getTxtKeiyakuShinseiYMD().getToValue().toDateString()));
-        parameter.set契約決定日開始(new FlexibleDate(div.getJuryoininChushutsuJoken().getTxtKeiyakuKetteiYMD().getFromValue().toDateString()));
-        parameter.set契約決定日終了(new FlexibleDate(div.getJuryoininChushutsuJoken().getTxtKeiyakuKetteiYMD().getToValue().toDateString()));
+        if (null != div.getJuryoininChushutsuJoken().getTxtKeiyakuShinseiYMD().getFromValue()) {
+            parameter.set契約申請日開始(new FlexibleDate(div.getJuryoininChushutsuJoken().getTxtKeiyakuShinseiYMD().getFromValue().toDateString()));
+        }
+        if (null != div.getJuryoininChushutsuJoken().getTxtKeiyakuShinseiYMD().getToValue()) {
+            parameter.set契約申請日終了(new FlexibleDate(div.getJuryoininChushutsuJoken().getTxtKeiyakuShinseiYMD().getToValue().toDateString()));
+        }
+        if (null != div.getJuryoininChushutsuJoken().getTxtKeiyakuKetteiYMD().getFromValue()) {
+            parameter.set契約決定日開始(new FlexibleDate(div.getJuryoininChushutsuJoken().getTxtKeiyakuKetteiYMD().getFromValue().toDateString()));
+        }
+        if (null != div.getJuryoininChushutsuJoken().getTxtKeiyakuKetteiYMD().getToValue()) {
+            parameter.set契約決定日終了(new FlexibleDate(div.getJuryoininChushutsuJoken().getTxtKeiyakuKetteiYMD().getToValue().toDateString()));
+        }
         parameter.set発行済(div.getJuryoininChushutsuJoken().getRadHakkoSumi().getSelectedKey());
-        parameter.set通知日(new FlexibleDate(div.getJuryoininChushutsuJoken().getTxtTsuchiYMD().getValue().toDateString()));
+        if (null != div.getJuryoininChushutsuJoken().getTxtTsuchiYMD().getValue()) {
+            parameter.set通知日(new FlexibleDate(div.getJuryoininChushutsuJoken().getTxtTsuchiYMD().getValue().toDateString()));
+        }
         parameter.set文書番号(div.getJuryoininChushutsuJoken().getCcdBunshoBangoInput().get文書番号());
-        if (div.getCcdChohyoShutsuryokujun().getSelected出力順() != null) {
+        if (null != div.getCcdChohyoShutsuryokujun().getSelected出力順()) {
             parameter.set改頁出力順ID(new RString(div.getCcdChohyoShutsuryokujun().getSelected出力順().get出力順ID()));
         }
         parameter.set市町村コード(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード());
+        parameter.set市町村名称(AssociationFinderFactory.createInstance().getAssociation().get市町村名());
         parameter.set処理日時(RDateTime.now());
         return ResponseData.of(parameter).respond();
     }

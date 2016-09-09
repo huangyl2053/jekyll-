@@ -691,6 +691,30 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     }
 
     /**
+     * 主キーで処理日付管理マスタを取得します。
+     *
+     * @param 処理名 ShoriName
+     * @param 処理枝番 ShoriEdaban
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select(RString 処理名,
+            RString 処理枝番) throws NullPointerException {
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(shoriName, 処理名),
+                                eq(shoriEdaban, 処理枝番))).
+                order(by(DbT7022ShoriDateKanri.kijunTimestamp, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
      * 前回対象日を取得する。
      *
      * @param 市町村コード 市町村コード
@@ -1493,7 +1517,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
                                 eq(subGyomuCode, SubGyomuCode.DBC介護給付),
-                                eq(shoriName, ShoriName.年次負担割合判定.get名称()),
+                                eq(shoriName, ShoriName.年次利用者負担割合判定.get名称()),
                                 not(isNULL(kijunTimestamp)))
                 ).order(by(DbT7022ShoriDateKanri.nendo, Order.DESC)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
@@ -1887,7 +1911,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
                                 eq(subGyomuCode, SubGyomuCode.DBC介護給付),
-                                eq(shoriName, ShoriName.異動分負担割合判定.get名称()),
+                                eq(shoriName, ShoriName.年次利用者負担割合判定.get名称()),
                                 eq(nendo, 年度))).
                 order(by(nendoNaiRenban, Order.DESC)).
                 limit(1).
@@ -2043,11 +2067,11 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
      * 月次処理状況の取得です。
      *
      * @param 口座振替年月 FlexibleYearMonth
-     * @return DbT7022ShoriDateKanriEntity
+     * @return List<DbT7022ShoriDateKanriEntity>
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT7022ShoriDateKanriEntity get月次処理状況(FlexibleYearMonth 口座振替年月) throws NullPointerException {
+    public List<DbT7022ShoriDateKanriEntity> get月次処理状況(FlexibleYearMonth 口座振替年月) throws NullPointerException {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.selectSpecific(kijunTimestamp).
@@ -2059,7 +2083,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                         ShoriName.本算定賦課確定.get名称(),
                                         ShoriName.異動賦課確定.get名称(),
                                         ShoriName.過年度賦課確定.get名称()))).
-                toObject(DbT7022ShoriDateKanriEntity.class);
+                toList(DbT7022ShoriDateKanriEntity.class);
     }
 
 }

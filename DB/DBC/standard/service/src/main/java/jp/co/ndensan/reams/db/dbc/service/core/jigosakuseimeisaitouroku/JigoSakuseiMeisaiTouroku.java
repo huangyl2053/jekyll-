@@ -305,6 +305,7 @@ public class JigoSakuseiMeisaiTouroku {
             result.set限度額対象外フラグ(entity.get限度額対象外フラグ());
             result.set定額利用者負担単価金額(entity.get定額利用者負担単価金額());
             result.set利用者負担定率定額区分(entity.get利用者負担定率定額区分());
+            result.set明細番号(entity.get明細番号());
             if (entity.is合計フラグ()) {
                 Decimal 利用者負担額;
                 if (ServiceCategoryShurui.総用貸与.getコード()
@@ -481,7 +482,7 @@ public class JigoSakuseiMeisaiTouroku {
         if (予防管理情報 != null) {
             DbT3120YoboKeikakuJikoSakuseiKanriEntity entity = 予防管理情報.toEntity();
             entity.setState(EntityDataState.Deleted);
-            予防給付計画自己作成管理Dac.save(entity);
+            予防給付計画自己作成管理Dac.delete(entity);
         }
     }
 
@@ -546,7 +547,7 @@ public class JigoSakuseiMeisaiTouroku {
         if (居宅管理情報 != null) {
             DbT3119KyotakuKeikakuJikosakuseiKanriEntity entity = 居宅管理情報.toEntity();
             entity.setState(EntityDataState.Deleted);
-            居宅給付計画自己作成管理Dac.save(entity);
+            居宅給付計画自己作成管理Dac.delete(entity);
         }
     }
 

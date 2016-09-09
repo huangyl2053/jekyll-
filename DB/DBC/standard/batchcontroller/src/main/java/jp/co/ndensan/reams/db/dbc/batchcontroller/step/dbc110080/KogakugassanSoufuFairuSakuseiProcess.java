@@ -34,7 +34,9 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
@@ -102,10 +104,10 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         レコード番号 = INT_0;
         RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         if (国保連送付外字_変換区分_1.equals(国保連送付外字_変換区分)) {
-            文字コード = Encode.SJIS;
-        } else {
             // TODO QA90831 文字コードがありません。
             文字コード = Encode.UTF_8withBOM;
+        } else {
+            文字コード = Encode.SJIS;
         }
     }
 
@@ -133,13 +135,14 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
     @Override
     protected void process(SyuturyokuEntity entity) {
         if (レコード番号 == INT_0) {
+            レコード番号 = レコード番号 + 1;
             KogakugassanSoufuFairuSakuseiControlEntity controlEntity = getControlEntity();
             eucCsvWriter.writeLine(controlEntity);
         }
+        レコード番号 = レコード番号 + 1;
         KogakugassanSoufuFairuSakuseiMeisaiEntity meisaiEntity = getMeisaiEntity(entity);
         eucCsvWriter.writeLine(meisaiEntity);
         総出力件数 = 総出力件数 + 1;
-        レコード番号 = レコード番号 + 1;
     }
 
     @Override
@@ -147,9 +150,10 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         レコード番号 = レコード番号 + 1;
         KogakugassanSoufuFairuSakuseiEndEntity endEntity = getEndEntity();
         eucCsvWriter.writeLine(endEntity);
-        // TODO
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力ファイル名));
         sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
+        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
+        SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath), opts);
         outputCount.setValue(総出力件数);
         entryList.add(sfd);
         outputEntry.setValue(entryList);
@@ -256,11 +260,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_4月分
                 = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度4月.getコード(), entity);
         if (明細_4月分 != null) {
-            meisaiEntity.set月分4_自己負担額(trimDecimal(明細_4月分.getJikoFutanGaku()));
-            meisaiEntity.set月分4_うち70_74歳の者に係る負担額(trimDecimal(明細_4月分.getUchisu_70_74JikoFutanGaku()));
-            meisaiEntity.set月分4_70歳未満高額療養費支給額(trimDecimal(明細_4月分.getUnder_70KogakuShikyuGaku()));
-            meisaiEntity.set月分4_70_74歳高額療養費支給額(trimDecimal(明細_4月分.getOver_70_74KogakuShikyuGaku()));
-            meisaiEntity.set月分4_摘要(囲み文字(trimRString(明細_4月分.getTekiyo())));
+            meisaiEntity.set月分4_自己負担額(trimDecimal(明細_4月分.getSumi_JikoFutanGaku()));
+            meisaiEntity.set月分4_うち70_74歳の者に係る負担額(trimDecimal(明細_4月分.getSumi_70_74JikoFutanGaku()));
+            meisaiEntity.set月分4_70歳未満高額療養費支給額(trimDecimal(明細_4月分.getSumi_under_70KogakuShikyuGaku()));
+            meisaiEntity.set月分4_70_74歳高額療養費支給額(trimDecimal(明細_4月分.getSumi_70_74KogakuShikyuGaku()));
+            meisaiEntity.set月分4_摘要(囲み文字(trimRString(明細_4月分.getSumi_Tekiyo())));
         } else {
             meisaiEntity.set月分4_自己負担額(RString.EMPTY);
             meisaiEntity.set月分4_うち70_74歳の者に係る負担額(RString.EMPTY);
@@ -272,11 +276,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_5月分
                 = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度5月.getコード(), entity);
         if (明細_5月分 != null) {
-            meisaiEntity.set月分5_自己負担額(trimDecimal(明細_5月分.getJikoFutanGaku()));
-            meisaiEntity.set月分5_うち70_74歳の者に係る負担額(trimDecimal(明細_5月分.getUchisu_70_74JikoFutanGaku()));
-            meisaiEntity.set月分5_70歳未満高額療養費支給額(trimDecimal(明細_5月分.getUnder_70KogakuShikyuGaku()));
-            meisaiEntity.set月分5_70_74歳高額療養費支給額(trimDecimal(明細_5月分.getOver_70_74KogakuShikyuGaku()));
-            meisaiEntity.set月分5_摘要(囲み文字(trimRString(明細_5月分.getTekiyo())));
+            meisaiEntity.set月分5_自己負担額(trimDecimal(明細_5月分.getSumi_JikoFutanGaku()));
+            meisaiEntity.set月分5_うち70_74歳の者に係る負担額(trimDecimal(明細_5月分.getSumi_70_74JikoFutanGaku()));
+            meisaiEntity.set月分5_70歳未満高額療養費支給額(trimDecimal(明細_5月分.getSumi_under_70KogakuShikyuGaku()));
+            meisaiEntity.set月分5_70_74歳高額療養費支給額(trimDecimal(明細_5月分.getSumi_70_74KogakuShikyuGaku()));
+            meisaiEntity.set月分5_摘要(囲み文字(trimRString(明細_5月分.getSumi_Tekiyo())));
         } else {
             meisaiEntity.set月分5_自己負担額(RString.EMPTY);
             meisaiEntity.set月分5_うち70_74歳の者に係る負担額(RString.EMPTY);
@@ -288,11 +292,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_6月分
                 = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度6月.getコード(), entity);
         if (明細_6月分 != null) {
-            meisaiEntity.set月分6_自己負担額(trimDecimal(明細_6月分.getJikoFutanGaku()));
-            meisaiEntity.set月分6_うち70_74歳の者に係る負担額(trimDecimal(明細_6月分.getUchisu_70_74JikoFutanGaku()));
-            meisaiEntity.set月分6_70歳未満高額療養費支給額(trimDecimal(明細_6月分.getUnder_70KogakuShikyuGaku()));
-            meisaiEntity.set月分6_70_74歳高額療養費支給額(trimDecimal(明細_6月分.getOver_70_74KogakuShikyuGaku()));
-            meisaiEntity.set月分6_摘要(囲み文字(trimRString(明細_6月分.getTekiyo())));
+            meisaiEntity.set月分6_自己負担額(trimDecimal(明細_6月分.getSumi_JikoFutanGaku()));
+            meisaiEntity.set月分6_うち70_74歳の者に係る負担額(trimDecimal(明細_6月分.getSumi_70_74JikoFutanGaku()));
+            meisaiEntity.set月分6_70歳未満高額療養費支給額(trimDecimal(明細_6月分.getSumi_under_70KogakuShikyuGaku()));
+            meisaiEntity.set月分6_70_74歳高額療養費支給額(trimDecimal(明細_6月分.getSumi_70_74KogakuShikyuGaku()));
+            meisaiEntity.set月分6_摘要(囲み文字(trimRString(明細_6月分.getSumi_Tekiyo())));
         } else {
             meisaiEntity.set月分6_自己負担額(RString.EMPTY);
             meisaiEntity.set月分6_うち70_74歳の者に係る負担額(RString.EMPTY);
@@ -304,11 +308,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_7月分
                 = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度7月.getコード(), entity);
         if (明細_7月分 != null) {
-            meisaiEntity.set月分7_自己負担額(trimDecimal(明細_7月分.getJikoFutanGaku()));
-            meisaiEntity.set月分7_うち70_74歳の者に係る負担額(trimDecimal(明細_7月分.getUchisu_70_74JikoFutanGaku()));
-            meisaiEntity.set月分7_70歳未満高額療養費支給額(trimDecimal(明細_7月分.getUnder_70KogakuShikyuGaku()));
-            meisaiEntity.set月分7_70_74歳高額療養費支給額(trimDecimal(明細_7月分.getOver_70_74KogakuShikyuGaku()));
-            meisaiEntity.set月分7_摘要(囲み文字(trimRString(明細_7月分.getTekiyo())));
+            meisaiEntity.set月分7_自己負担額(trimDecimal(明細_7月分.getSumi_JikoFutanGaku()));
+            meisaiEntity.set月分7_うち70_74歳の者に係る負担額(trimDecimal(明細_7月分.getSumi_70_74JikoFutanGaku()));
+            meisaiEntity.set月分7_70歳未満高額療養費支給額(trimDecimal(明細_7月分.getSumi_under_70KogakuShikyuGaku()));
+            meisaiEntity.set月分7_70_74歳高額療養費支給額(trimDecimal(明細_7月分.getSumi_70_74KogakuShikyuGaku()));
+            meisaiEntity.set月分7_摘要(囲み文字(trimRString(明細_7月分.getSumi_Tekiyo())));
         } else {
             meisaiEntity.set月分7_自己負担額(RString.EMPTY);
             meisaiEntity.set月分7_うち70_74歳の者に係る負担額(RString.EMPTY);
@@ -320,11 +324,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_8月分
                 = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度8月.getコード(), entity);
         if (明細_8月分 != null) {
-            meisaiEntity.set月分8_自己負担額(trimDecimal(明細_8月分.getJikoFutanGaku()));
-            meisaiEntity.set月分8_うち70_74歳の者に係る負担額(trimDecimal(明細_8月分.getUchisu_70_74JikoFutanGaku()));
-            meisaiEntity.set月分8_70歳未満高額療養費支給額(trimDecimal(明細_8月分.getUnder_70KogakuShikyuGaku()));
-            meisaiEntity.set月分8_70_74歳高額療養費支給額(trimDecimal(明細_8月分.getOver_70_74KogakuShikyuGaku()));
-            meisaiEntity.set月分8_摘要(囲み文字(trimRString(明細_8月分.getTekiyo())));
+            meisaiEntity.set月分8_自己負担額(trimDecimal(明細_8月分.getSumi_JikoFutanGaku()));
+            meisaiEntity.set月分8_うち70_74歳の者に係る負担額(trimDecimal(明細_8月分.getSumi_70_74JikoFutanGaku()));
+            meisaiEntity.set月分8_70歳未満高額療養費支給額(trimDecimal(明細_8月分.getSumi_under_70KogakuShikyuGaku()));
+            meisaiEntity.set月分8_70_74歳高額療養費支給額(trimDecimal(明細_8月分.getSumi_70_74KogakuShikyuGaku()));
+            meisaiEntity.set月分8_摘要(囲み文字(trimRString(明細_8月分.getSumi_Tekiyo())));
         } else {
             meisaiEntity.set月分8_自己負担額(RString.EMPTY);
             meisaiEntity.set月分8_うち70_74歳の者に係る負担額(RString.EMPTY);
@@ -336,11 +340,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_9月分
                 = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度9月.getコード(), entity);
         if (明細_9月分 != null) {
-            meisaiEntity.set月分9_自己負担額(trimDecimal(明細_9月分.getJikoFutanGaku()));
-            meisaiEntity.set月分9_うち70_74歳の者に係る負担額(trimDecimal(明細_9月分.getUchisu_70_74JikoFutanGaku()));
-            meisaiEntity.set月分9_70歳未満高額療養費支給額(trimDecimal(明細_9月分.getUnder_70KogakuShikyuGaku()));
-            meisaiEntity.set月分9_70_74歳高額療養費支給額(trimDecimal(明細_9月分.getOver_70_74KogakuShikyuGaku()));
-            meisaiEntity.set月分9_摘要(囲み文字(trimRString(明細_9月分.getTekiyo())));
+            meisaiEntity.set月分9_自己負担額(trimDecimal(明細_9月分.getSumi_JikoFutanGaku()));
+            meisaiEntity.set月分9_うち70_74歳の者に係る負担額(trimDecimal(明細_9月分.getSumi_70_74JikoFutanGaku()));
+            meisaiEntity.set月分9_70歳未満高額療養費支給額(trimDecimal(明細_9月分.getSumi_under_70KogakuShikyuGaku()));
+            meisaiEntity.set月分9_70_74歳高額療養費支給額(trimDecimal(明細_9月分.getSumi_70_74KogakuShikyuGaku()));
+            meisaiEntity.set月分9_摘要(囲み文字(trimRString(明細_9月分.getSumi_Tekiyo())));
         } else {
             meisaiEntity.set月分9_自己負担額(RString.EMPTY);
             meisaiEntity.set月分9_うち70_74歳の者に係る負担額(RString.EMPTY);
@@ -352,11 +356,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_10月分
                 = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度10月.getコード(), entity);
         if (明細_10月分 != null) {
-            meisaiEntity.set月分10_自己負担額(trimDecimal(明細_10月分.getJikoFutanGaku()));
-            meisaiEntity.set月分10_うち70_74歳の者に係る負担額(trimDecimal(明細_10月分.getUchisu_70_74JikoFutanGaku()));
-            meisaiEntity.set月分10_70歳未満高額療養費支給額(trimDecimal(明細_10月分.getUnder_70KogakuShikyuGaku()));
-            meisaiEntity.set月分10_70_74歳高額療養費支給額(trimDecimal(明細_10月分.getOver_70_74KogakuShikyuGaku()));
-            meisaiEntity.set月分10_摘要(囲み文字(trimRString(明細_10月分.getTekiyo())));
+            meisaiEntity.set月分10_自己負担額(trimDecimal(明細_10月分.getSumi_JikoFutanGaku()));
+            meisaiEntity.set月分10_うち70_74歳の者に係る負担額(trimDecimal(明細_10月分.getSumi_70_74JikoFutanGaku()));
+            meisaiEntity.set月分10_70歳未満高額療養費支給額(trimDecimal(明細_10月分.getSumi_under_70KogakuShikyuGaku()));
+            meisaiEntity.set月分10_70_74歳高額療養費支給額(trimDecimal(明細_10月分.getSumi_70_74KogakuShikyuGaku()));
+            meisaiEntity.set月分10_摘要(囲み文字(trimRString(明細_10月分.getSumi_Tekiyo())));
         } else {
             meisaiEntity.set月分10_自己負担額(RString.EMPTY);
             meisaiEntity.set月分10_うち70_74歳の者に係る負担額(RString.EMPTY);
@@ -368,11 +372,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_11月分
                 = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度11月.getコード(), entity);
         if (明細_11月分 != null) {
-            meisaiEntity.set月分11_自己負担額(trimDecimal(明細_11月分.getJikoFutanGaku()));
-            meisaiEntity.set月分11_うち70_74歳の者に係る負担額(trimDecimal(明細_11月分.getUchisu_70_74JikoFutanGaku()));
-            meisaiEntity.set月分11_70歳未満高額療養費支給額(trimDecimal(明細_11月分.getUnder_70KogakuShikyuGaku()));
-            meisaiEntity.set月分11_70_74歳高額療養費支給額(trimDecimal(明細_11月分.getOver_70_74KogakuShikyuGaku()));
-            meisaiEntity.set月分11_摘要(囲み文字(trimRString(明細_11月分.getTekiyo())));
+            meisaiEntity.set月分11_自己負担額(trimDecimal(明細_11月分.getSumi_JikoFutanGaku()));
+            meisaiEntity.set月分11_うち70_74歳の者に係る負担額(trimDecimal(明細_11月分.getSumi_70_74JikoFutanGaku()));
+            meisaiEntity.set月分11_70歳未満高額療養費支給額(trimDecimal(明細_11月分.getSumi_under_70KogakuShikyuGaku()));
+            meisaiEntity.set月分11_70_74歳高額療養費支給額(trimDecimal(明細_11月分.getSumi_70_74KogakuShikyuGaku()));
+            meisaiEntity.set月分11_摘要(囲み文字(trimRString(明細_11月分.getSumi_Tekiyo())));
         } else {
             meisaiEntity.set月分11_自己負担額(RString.EMPTY);
             meisaiEntity.set月分11_うち70_74歳の者に係る負担額(RString.EMPTY);
@@ -384,11 +388,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_12月分
                 = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度12月.getコード(), entity);
         if (明細_12月分 != null) {
-            meisaiEntity.set月分12_自己負担額(trimDecimal(明細_12月分.getJikoFutanGaku()));
-            meisaiEntity.set月分12_うち70_74歳の者に係る負担額(trimDecimal(明細_12月分.getUchisu_70_74JikoFutanGaku()));
-            meisaiEntity.set月分12_70歳未満高額療養費支給額(trimDecimal(明細_12月分.getUnder_70KogakuShikyuGaku()));
-            meisaiEntity.set月分12_70_74歳高額療養費支給額(trimDecimal(明細_12月分.getOver_70_74KogakuShikyuGaku()));
-            meisaiEntity.set月分12_摘要(囲み文字(trimRString(明細_12月分.getTekiyo())));
+            meisaiEntity.set月分12_自己負担額(trimDecimal(明細_12月分.getSumi_JikoFutanGaku()));
+            meisaiEntity.set月分12_うち70_74歳の者に係る負担額(trimDecimal(明細_12月分.getSumi_70_74JikoFutanGaku()));
+            meisaiEntity.set月分12_70歳未満高額療養費支給額(trimDecimal(明細_12月分.getSumi_under_70KogakuShikyuGaku()));
+            meisaiEntity.set月分12_70_74歳高額療養費支給額(trimDecimal(明細_12月分.getSumi_70_74KogakuShikyuGaku()));
+            meisaiEntity.set月分12_摘要(囲み文字(trimRString(明細_12月分.getSumi_Tekiyo())));
         } else {
             meisaiEntity.set月分12_自己負担額(RString.EMPTY);
             meisaiEntity.set月分12_うち70_74歳の者に係る負担額(RString.EMPTY);
@@ -404,11 +408,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_翌年1月分
                 = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年1月.getコード(), entity);
         if (明細_翌年1月分 != null) {
-            meisaiEntity.set月分翌年1_自己負担額(trimDecimal(明細_翌年1月分.getJikoFutanGaku()));
-            meisaiEntity.set月分翌年1_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年1月分.getUchisu_70_74JikoFutanGaku()));
-            meisaiEntity.set月分翌年1_70歳未満高額療養費支給額(trimDecimal(明細_翌年1月分.getUnder_70KogakuShikyuGaku()));
-            meisaiEntity.set月分翌年1_70_74歳高額療養費支給額(trimDecimal(明細_翌年1月分.getOver_70_74KogakuShikyuGaku()));
-            meisaiEntity.set月分翌年1_摘要(囲み文字(trimRString(明細_翌年1月分.getTekiyo())));
+            meisaiEntity.set月分翌年1_自己負担額(trimDecimal(明細_翌年1月分.getSumi_JikoFutanGaku()));
+            meisaiEntity.set月分翌年1_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年1月分.getSumi_70_74JikoFutanGaku()));
+            meisaiEntity.set月分翌年1_70歳未満高額療養費支給額(trimDecimal(明細_翌年1月分.getSumi_under_70KogakuShikyuGaku()));
+            meisaiEntity.set月分翌年1_70_74歳高額療養費支給額(trimDecimal(明細_翌年1月分.getSumi_70_74KogakuShikyuGaku()));
+            meisaiEntity.set月分翌年1_摘要(囲み文字(trimRString(明細_翌年1月分.getSumi_Tekiyo())));
         } else {
             meisaiEntity.set月分翌年1_自己負担額(RString.EMPTY);
             meisaiEntity.set月分翌年1_うち70_74歳の者に係る負担額(RString.EMPTY);
@@ -420,11 +424,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_翌年2月分
                 = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年2月.getコード(), entity);
         if (明細_翌年2月分 != null) {
-            meisaiEntity.set月分翌年2_自己負担額(trimDecimal(明細_翌年2月分.getJikoFutanGaku()));
-            meisaiEntity.set月分翌年2_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年2月分.getUchisu_70_74JikoFutanGaku()));
-            meisaiEntity.set月分翌年2_70歳未満高額療養費支給額(trimDecimal(明細_翌年2月分.getUnder_70KogakuShikyuGaku()));
-            meisaiEntity.set月分翌年2_70_74歳高額療養費支給額(trimDecimal(明細_翌年2月分.getOver_70_74KogakuShikyuGaku()));
-            meisaiEntity.set月分翌年2_摘要(囲み文字(trimRString(明細_翌年2月分.getTekiyo())));
+            meisaiEntity.set月分翌年2_自己負担額(trimDecimal(明細_翌年2月分.getSumi_JikoFutanGaku()));
+            meisaiEntity.set月分翌年2_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年2月分.getSumi_70_74JikoFutanGaku()));
+            meisaiEntity.set月分翌年2_70歳未満高額療養費支給額(trimDecimal(明細_翌年2月分.getSumi_under_70KogakuShikyuGaku()));
+            meisaiEntity.set月分翌年2_70_74歳高額療養費支給額(trimDecimal(明細_翌年2月分.getSumi_70_74KogakuShikyuGaku()));
+            meisaiEntity.set月分翌年2_摘要(囲み文字(trimRString(明細_翌年2月分.getSumi_Tekiyo())));
         } else {
             meisaiEntity.set月分翌年2_自己負担額(RString.EMPTY);
             meisaiEntity.set月分翌年2_うち70_74歳の者に係る負担額(RString.EMPTY);
@@ -436,11 +440,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_翌年3月分
                 = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年3月.getコード(), entity);
         if (明細_翌年3月分 != null) {
-            meisaiEntity.set月分翌年3_自己負担額(trimDecimal(明細_翌年3月分.getJikoFutanGaku()));
-            meisaiEntity.set月分翌年3_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年3月分.getUchisu_70_74JikoFutanGaku()));
-            meisaiEntity.set月分翌年3_70歳未満高額療養費支給額(trimDecimal(明細_翌年3月分.getUnder_70KogakuShikyuGaku()));
-            meisaiEntity.set月分翌年3_70_74歳高額療養費支給額(trimDecimal(明細_翌年3月分.getOver_70_74KogakuShikyuGaku()));
-            meisaiEntity.set月分翌年3_摘要(囲み文字(trimRString(明細_翌年3月分.getTekiyo())));
+            meisaiEntity.set月分翌年3_自己負担額(trimDecimal(明細_翌年3月分.getSumi_JikoFutanGaku()));
+            meisaiEntity.set月分翌年3_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年3月分.getSumi_70_74JikoFutanGaku()));
+            meisaiEntity.set月分翌年3_70歳未満高額療養費支給額(trimDecimal(明細_翌年3月分.getSumi_under_70KogakuShikyuGaku()));
+            meisaiEntity.set月分翌年3_70_74歳高額療養費支給額(trimDecimal(明細_翌年3月分.getSumi_70_74KogakuShikyuGaku()));
+            meisaiEntity.set月分翌年3_摘要(囲み文字(trimRString(明細_翌年3月分.getSumi_Tekiyo())));
         } else {
             meisaiEntity.set月分翌年3_自己負担額(RString.EMPTY);
             meisaiEntity.set月分翌年3_うち70_74歳の者に係る負担額(RString.EMPTY);
@@ -452,11 +456,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_翌年4月分
                 = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年4月.getコード(), entity);
         if (明細_翌年4月分 != null) {
-            meisaiEntity.set月分翌年4_自己負担額(trimDecimal(明細_翌年4月分.getJikoFutanGaku()));
-            meisaiEntity.set月分翌年4_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年4月分.getUchisu_70_74JikoFutanGaku()));
-            meisaiEntity.set月分翌年4_70歳未満高額療養費支給額(trimDecimal(明細_翌年4月分.getUnder_70KogakuShikyuGaku()));
-            meisaiEntity.set月分翌年4_70_74歳高額療養費支給額(trimDecimal(明細_翌年4月分.getOver_70_74KogakuShikyuGaku()));
-            meisaiEntity.set月分翌年4_摘要(囲み文字(trimRString(明細_翌年4月分.getTekiyo())));
+            meisaiEntity.set月分翌年4_自己負担額(trimDecimal(明細_翌年4月分.getSumi_JikoFutanGaku()));
+            meisaiEntity.set月分翌年4_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年4月分.getSumi_70_74JikoFutanGaku()));
+            meisaiEntity.set月分翌年4_70歳未満高額療養費支給額(trimDecimal(明細_翌年4月分.getSumi_under_70KogakuShikyuGaku()));
+            meisaiEntity.set月分翌年4_70_74歳高額療養費支給額(trimDecimal(明細_翌年4月分.getSumi_70_74KogakuShikyuGaku()));
+            meisaiEntity.set月分翌年4_摘要(囲み文字(trimRString(明細_翌年4月分.getSumi_Tekiyo())));
         } else {
             meisaiEntity.set月分翌年4_自己負担額(RString.EMPTY);
             meisaiEntity.set月分翌年4_うち70_74歳の者に係る負担額(RString.EMPTY);
@@ -468,11 +472,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_翌年5月分
                 = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年5月.getコード(), entity);
         if (明細_翌年5月分 != null) {
-            meisaiEntity.set月分翌年5_自己負担額(trimDecimal(明細_翌年5月分.getJikoFutanGaku()));
-            meisaiEntity.set月分翌年5_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年5月分.getUchisu_70_74JikoFutanGaku()));
-            meisaiEntity.set月分翌年5_70歳未満高額療養費支給額(trimDecimal(明細_翌年5月分.getUnder_70KogakuShikyuGaku()));
-            meisaiEntity.set月分翌年5_70_74歳高額療養費支給額(trimDecimal(明細_翌年5月分.getOver_70_74KogakuShikyuGaku()));
-            meisaiEntity.set月分翌年5_摘要(囲み文字(trimRString(明細_翌年5月分.getTekiyo())));
+            meisaiEntity.set月分翌年5_自己負担額(trimDecimal(明細_翌年5月分.getSumi_JikoFutanGaku()));
+            meisaiEntity.set月分翌年5_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年5月分.getSumi_70_74JikoFutanGaku()));
+            meisaiEntity.set月分翌年5_70歳未満高額療養費支給額(trimDecimal(明細_翌年5月分.getSumi_under_70KogakuShikyuGaku()));
+            meisaiEntity.set月分翌年5_70_74歳高額療養費支給額(trimDecimal(明細_翌年5月分.getSumi_70_74KogakuShikyuGaku()));
+            meisaiEntity.set月分翌年5_摘要(囲み文字(trimRString(明細_翌年5月分.getSumi_Tekiyo())));
         } else {
             meisaiEntity.set月分翌年5_自己負担額(RString.EMPTY);
             meisaiEntity.set月分翌年5_うち70_74歳の者に係る負担額(RString.EMPTY);
@@ -484,11 +488,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_翌年6月分
                 = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年6月.getコード(), entity);
         if (明細_翌年6月分 != null) {
-            meisaiEntity.set月分翌年6_自己負担額(trimDecimal(明細_翌年6月分.getJikoFutanGaku()));
-            meisaiEntity.set月分翌年6_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年6月分.getUchisu_70_74JikoFutanGaku()));
-            meisaiEntity.set月分翌年6_70歳未満高額療養費支給額(trimDecimal(明細_翌年6月分.getUnder_70KogakuShikyuGaku()));
-            meisaiEntity.set月分翌年6_70_74歳高額療養費支給額(trimDecimal(明細_翌年6月分.getOver_70_74KogakuShikyuGaku()));
-            meisaiEntity.set月分翌年6_摘要(囲み文字(trimRString(明細_翌年6月分.getTekiyo())));
+            meisaiEntity.set月分翌年6_自己負担額(trimDecimal(明細_翌年6月分.getSumi_JikoFutanGaku()));
+            meisaiEntity.set月分翌年6_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年6月分.getSumi_70_74JikoFutanGaku()));
+            meisaiEntity.set月分翌年6_70歳未満高額療養費支給額(trimDecimal(明細_翌年6月分.getSumi_under_70KogakuShikyuGaku()));
+            meisaiEntity.set月分翌年6_70_74歳高額療養費支給額(trimDecimal(明細_翌年6月分.getSumi_70_74KogakuShikyuGaku()));
+            meisaiEntity.set月分翌年6_摘要(囲み文字(trimRString(明細_翌年6月分.getSumi_Tekiyo())));
         } else {
             meisaiEntity.set月分翌年6_自己負担額(RString.EMPTY);
             meisaiEntity.set月分翌年6_うち70_74歳の者に係る負担額(RString.EMPTY);
@@ -500,11 +504,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_翌年7月分
                 = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年7月.getコード(), entity);
         if (明細_翌年7月分 != null) {
-            meisaiEntity.set月分翌年7_自己負担額(trimDecimal(明細_翌年7月分.getJikoFutanGaku()));
-            meisaiEntity.set月分翌年7_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年7月分.getUchisu_70_74JikoFutanGaku()));
-            meisaiEntity.set月分翌年7_70歳未満高額療養費支給額(trimDecimal(明細_翌年7月分.getUnder_70KogakuShikyuGaku()));
-            meisaiEntity.set月分翌年7_70_74歳高額療養費支給額(trimDecimal(明細_翌年7月分.getOver_70_74KogakuShikyuGaku()));
-            meisaiEntity.set月分翌年7_摘要(囲み文字(trimRString(明細_翌年7月分.getTekiyo())));
+            meisaiEntity.set月分翌年7_自己負担額(trimDecimal(明細_翌年7月分.getSumi_JikoFutanGaku()));
+            meisaiEntity.set月分翌年7_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年7月分.getSumi_70_74JikoFutanGaku()));
+            meisaiEntity.set月分翌年7_70歳未満高額療養費支給額(trimDecimal(明細_翌年7月分.getSumi_under_70KogakuShikyuGaku()));
+            meisaiEntity.set月分翌年7_70_74歳高額療養費支給額(trimDecimal(明細_翌年7月分.getSumi_70_74KogakuShikyuGaku()));
+            meisaiEntity.set月分翌年7_摘要(囲み文字(trimRString(明細_翌年7月分.getSumi_Tekiyo())));
         } else {
             meisaiEntity.set月分翌年7_自己負担額(RString.EMPTY);
             meisaiEntity.set月分翌年7_うち70_74歳の者に係る負担額(RString.EMPTY);

@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 
 /**
- * 世帯情報処理のバッチ処理クラスです。
+ * 特定入所者管理情報処理のバッチ処理クラスです。
  *
  * @reamsid_L DBU-5530-030 wangxiaodong
  */

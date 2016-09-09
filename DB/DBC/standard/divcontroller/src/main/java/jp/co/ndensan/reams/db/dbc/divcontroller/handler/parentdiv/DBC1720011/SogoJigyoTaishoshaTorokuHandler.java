@@ -60,6 +60,7 @@ public class SogoJigyoTaishoshaTorokuHandler {
         div.getKaiigoShikakCommonChildDiv2().initialize(被保険者番号);
         ArrayList<SogoJigyoTaishoshaToJotai> 情報と状態List = 情報と状態初期化(総合事業対象者一覧);
         div.getSougouZigyouTaishouItiran().getDgKihonInfo().setDataSource(getDataSource(情報と状態List));
+        RealInitialLocker.lock(new LockingKey(new RString("DBCHihokenshaNo").concat(被保険者番号.getColumnValue())));
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
         return 情報と状態List;
     }
@@ -209,10 +210,10 @@ public class SogoJigyoTaishoshaTorokuHandler {
 
     private boolean is適用開始日と登録済みの適用期間が重(RDate 画面適用開始日, dgKihonInfo_Row row) {
         if (null == row.getShuuryoubi() || row.getShuuryoubi().isEmpty()) {
-            return new RDate(row.getKaishibi().toString()).isBefore(画面適用開始日);
+            return new RDate(row.getKaishibi().toString()).isBeforeOrEquals(画面適用開始日);
         } else {
-            return 画面適用開始日.isBefore(new RDate(row.getShuuryoubi().toString()))
-                    && new RDate(row.getKaishibi().toString()).isBefore(画面適用開始日);
+            return 画面適用開始日.isBeforeOrEquals(new RDate(row.getShuuryoubi().toString()))
+                    && new RDate(row.getKaishibi().toString()).isBeforeOrEquals(画面適用開始日);
         }
     }
 
@@ -317,7 +318,10 @@ public class SogoJigyoTaishoshaTorokuHandler {
         if (null == rDate) {
             return null == flexibleDate || flexibleDate.isEmpty();
         }
-        return !isNullOrEmpty(flexibleDate);
+        if (isNullOrEmpty(flexibleDate)) {
+            return false;
+        }
+        return flexibleDate.equals(new FlexibleDate(rDate.toDateString()));
     }
 
     private void 削除_確定(ArrayList<SogoJigyoTaishoshaToJotai> 情報と状態List, SogoJigyoTaishoshaToJotai 編集情報と状態) {
@@ -372,7 +376,6 @@ public class SogoJigyoTaishoshaTorokuHandler {
      * @param 被保険者番号 被保険者番号
      */
     public void 保存処理(List<SogoJigyoTaishoshaToJotai> 情報と状態List, HihokenshaNo 被保険者番号) {
-        RealInitialLocker.lock(new LockingKey(new RString("DBCHihokenshaNo").concat(被保険者番号.getColumnValue())));
         SogoJigyoTaishoshaManager manager = new SogoJigyoTaishoshaManager();
         manager.save総合事業対象者(情報と状態List);
         RealInitialLocker.release(new LockingKey(new RString("DBCHihokenshaNo").concat(被保険者番号.getColumnValue())));
@@ -384,46 +387,46 @@ public class SogoJigyoTaishoshaTorokuHandler {
      * @return 適用期間重複チェック結果
      */
     public boolean 適用期間重複チェック() {
+        RDate 編集適用開始日 = div.getSougouZigyouTaishouShousai().getTxtymfromto().getFromValue();
+        if (null == 編集適用開始日) {
+            return true;
+        }
+        RDate 編集適用終了日 = div.getSougouZigyouTaishouShousai().getTxtymfromto().getToValue();
         List<dgKihonInfo_Row> rowList = div.getSougouZigyouTaishouItiran().getDgKihonInfo().getDataSource();
+        dgKihonInfo_Row actionRow = div.getSougouZigyouTaishouItiran().getDgKihonInfo().getActiveRow();
         List<dgKihonInfo_Row> checkRowList = new ArrayList<>();
         for (dgKihonInfo_Row row : rowList) {
             if (!状態_削除.equals(row.getJyoutai())) {
+                if (状態_修正.equals(div.getSougouZigyouTaishouShousai().getHiddenModel())
+                        && actionRow.equals(row)) {
+                    continue;
+                }
                 checkRowList.add(row);
             }
         }
-        int length = checkRowList.size();
-        if (length < 2) {
+        if (checkRowList.isEmpty()) {
             return true;
         }
-        for (int index = 0; index <= length - 2; index++) {
-            int index2 = index + 1;
-            while (index2 <= length - 1) {
-                dgKihonInfo_Row row1 = checkRowList.get(index);
-                dgKihonInfo_Row row2 = checkRowList.get(index2);
-                if (!is重複チェック(row1, row2)) {
+        for (dgKihonInfo_Row row : checkRowList) {
+            RDate 適用開始日 = get年月日(row.getKaishibi());
+            RDate 適用終了日 = get年月日(row.getShuuryoubi());
+            if (null == 適用終了日) {
+                if (null == 編集適用終了日) {
                     return false;
                 }
-                index2++;
+                if (適用開始日.isBeforeOrEquals(編集適用終了日) && 編集適用開始日.isBeforeOrEquals(適用開始日)) {
+                    return false;
+                }
+            } else {
+                if (null == 編集適用終了日 && 編集適用開始日.isBeforeOrEquals(適用終了日)) {
+                    return false;
+                }
+                if (編集適用終了日 != null && !編集適用終了日.isBefore(適用開始日) && !適用終了日.isBefore(編集適用開始日)) {
+                    return false;
+                }
             }
         }
         return true;
-    }
-
-    private boolean is重複チェック(dgKihonInfo_Row row1, dgKihonInfo_Row row2) {
-        RDate 適用開始日1 = get年月日(row1.getKaishibi());
-        RDate 適用終了日1 = get年月日(row1.getShuuryoubi());
-        RDate 適用開始日2 = get年月日(row2.getKaishibi());
-        RDate 適用終了日2 = get年月日(row2.getShuuryoubi());
-        if (null == 適用終了日1) {
-            if (null == 適用終了日2) {
-                return false;
-            }
-            return 適用終了日2.isBeforeOrEquals(適用開始日1);
-        } else if (null == 適用終了日2) {
-            return 適用終了日1.isBeforeOrEquals(適用開始日2);
-        }
-        return 適用終了日1.isBeforeOrEquals(適用開始日2)
-                || 適用終了日2.isBeforeOrEquals(適用開始日1);
     }
 
     private RDate get年月日(RString 年月日) {
