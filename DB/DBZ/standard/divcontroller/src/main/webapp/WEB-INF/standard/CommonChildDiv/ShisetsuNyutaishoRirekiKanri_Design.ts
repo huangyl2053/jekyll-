@@ -1,7 +1,7 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
-/// <reference path="./ShisetsuJohoCommonChildDiv.ts" />
+// <reference path="./ShisetsuJohoCommonChildDiv.ts" />
 
 module DBZ {
 
@@ -23,14 +23,6 @@ module DBZ {
 
             public static onSelectByDeleteButton_dgShisetsuNyutaishoRireki(): string {
                 return "onSelectByDeleteButton_dgShisetsuNyutaishoRireki";
-            }
-
-            public static onBlur_nyuryokuHokensyaCode(): string {
-                return "onBlur_nyuryokuHokensyaCode";
-            }
-
-            public static onClick_BtnHokenshaInputGuide(): string {
-                return "onClick_BtnHokenshaInputGuide";
             }
 
             public static onClick_btnShisetsuNyutaishoKakutei(): string {
@@ -86,25 +78,9 @@ module DBZ {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTaishoDate"));
             }
 
-            public ccdShisetsuJoho(): DBZ.ShisetsuJohoCommonChildDiv.ModeController {
-                return new DBZ.ShisetsuJohoCommonChildDiv.ModeController(this.convFiledName("ccdShisetsuJoho"));
-            }
-
-            public TenshutsusakiJohoPanel(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TenshutsusakiJohoPanel"));
-            }
-
-            public txtHokensha(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtHokensha"));
-            }
-
-            public btnHokenshaKensaku(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnHokenshaKensaku"));
-            }
-
-            public txtHokensyaMeisho(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtHokensyaMeisho"));
-            }
+            //public ccdShisetsuJoho(): DBZ.ShisetsuJohoCommonChildDiv.ModeController {
+            //    return new DBZ.ShisetsuJohoCommonChildDiv.ModeController(this.convFiledName("ccdShisetsuJoho"));
+            //}
 
             public btnShisetsuNyutaishoKakutei(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnShisetsuNyutaishoKakutei"));

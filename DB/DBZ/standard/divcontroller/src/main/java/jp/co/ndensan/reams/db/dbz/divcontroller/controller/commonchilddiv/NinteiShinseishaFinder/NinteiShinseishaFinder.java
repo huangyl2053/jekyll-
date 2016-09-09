@@ -171,7 +171,7 @@ public class NinteiShinseishaFinder {
      */
     public ResponseData<NinteiShinseishaFinderDiv> onChange_ddlNowPhase(NinteiShinseishaFinderDiv div) {
         RString nowPhase = div.getDdlNowPhase().getSelectedKey();
-        getHandler(div).clearChk();
+//        getHandler(div).clearChk();
         if (RString.isNullOrEmpty(nowPhase)) {
             div.getChkShoriJotai().setDisabled(true);
             div.getChkKoshinTaishoChushutsu().setDisabled(true);

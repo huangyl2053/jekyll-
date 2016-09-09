@@ -90,7 +90,6 @@ public class SikakuIdouTeisei {
      * @return ResponseData<SikakuIdouTeiseiDiv>
      */
     public ResponseData<SikakuIdouTeiseiDiv> onClick_Add(SikakuIdouTeiseiDiv div) {
-//        RealInitialLocker.release(前排他ロックキー);
         setParam(getKey(), 状態_追加);
         ViewStateHolder.put(ViewStateKeys.資格得喪情報, getHandler(div).setパラメータ(状態_追加));
         return ResponseData.of(div).forwardWithEventName(DBA1050011TransitionEventName.追加).respond();
@@ -103,7 +102,6 @@ public class SikakuIdouTeisei {
      * @return ResponseData<SikakuIdouTeiseiDiv>
      */
     public ResponseData<SikakuIdouTeiseiDiv> onClick_Update(SikakuIdouTeiseiDiv div) {
-//        RealInitialLocker.release(前排他ロックキー);
         setParam(getKey(), 状態_修正);
         ViewStateHolder.put(ViewStateKeys.資格得喪情報, getHandler(div).setパラメータ(状態_修正));
         return ResponseData.of(div).forwardWithEventName(DBA1050011TransitionEventName.修正).respond();
@@ -116,7 +114,6 @@ public class SikakuIdouTeisei {
      * @return ResponseData<SikakuIdouTeiseiDiv>
      */
     public ResponseData<SikakuIdouTeiseiDiv> onClick_Delete_bak(SikakuIdouTeiseiDiv div) {
-//        RealInitialLocker.release(前排他ロックキー);
         setParam(getKey(), 状態_削除);
         ViewStateHolder.put(ViewStateKeys.資格得喪情報, getHandler(div).setパラメータ(状態_削除));
         return ResponseData.of(div).forwardWithEventName(DBA1050011TransitionEventName.削除).respond();
@@ -129,7 +126,6 @@ public class SikakuIdouTeisei {
      * @return ResponseData<SikakuIdouTeiseiDiv>
      */
     public ResponseData<SikakuIdouTeiseiDiv> onClick_Syoukai(SikakuIdouTeiseiDiv div) {
-//        RealInitialLocker.release(前排他ロックキー);
         setParam(getKey(), 状態_照会);
         ViewStateHolder.put(ViewStateKeys.資格得喪情報, getHandler(div).setパラメータ(状態_照会));
         return ResponseData.of(div).forwardWithEventName(DBA1050011TransitionEventName.詳細).respond();

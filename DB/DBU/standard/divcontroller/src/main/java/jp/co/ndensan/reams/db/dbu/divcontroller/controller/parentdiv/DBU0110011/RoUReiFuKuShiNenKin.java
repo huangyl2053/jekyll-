@@ -48,7 +48,6 @@ public class RoUReiFuKuShiNenKin {
      * @return ResponseData<RoUReiFuKuShiNenKinDiv>
      */
     public ResponseData<RoUReiFuKuShiNenKinDiv> onLoad(RoUReiFuKuShiNenKinDiv div) {
-//      <<<<<<< HEAD
         TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         if (ResponseHolder.isReRequest()) {
             return ResponseData.of(div).forwardWithEventName(DBU0110011TransitionEventName.一覧戻る).respond();
@@ -61,10 +60,7 @@ public class RoUReiFuKuShiNenKin {
         }
 
         ShikibetsuCode 識別コード = key.get識別コード();
-//      =======
-//      ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
-//      HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
-//      >>>>>>> origin/sync
+
         div.getKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
         div.getKihonJoho().getCcdKaigoShikakuKihon().initialize(識別コード);
 
@@ -104,22 +100,9 @@ public class RoUReiFuKuShiNenKin {
                         }
                     }).respond();
         }
-//<<<<<<< HEAD
         if (Objects.equals(ResponseHolder.getMessageCode(),
                 new RString(UrQuestionMessages.保存の確認.getMessage().getCode()))) {
             return onClick_Save_保存の確認(div);
-//=======
-//            throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
-//        }
-//        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
-//                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//            div.getRoreiFukushiNenkinJohoList().getCcdRoreiFukushiNenkinRireki().click_Save();
-//            RealInitialLocker.release(LOCKINGKEY);
-//            アクセスログ(AccessLogType.更新, ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
-//            div.getKihonJoho().getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(
-//                    new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
-//            return ResponseData.of(div).setState(DBU0110011StateName.完了状態);
-//>>>>>>> origin/sync
         }
         return ResponseData.of(div).respond();
     }

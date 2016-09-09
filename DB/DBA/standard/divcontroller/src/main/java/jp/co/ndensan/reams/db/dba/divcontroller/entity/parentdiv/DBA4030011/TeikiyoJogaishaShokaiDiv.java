@@ -4,23 +4,26 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4030011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJogaiRireki.TekiyoJogaiRireki.ITekiyoJogaiRirekiDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJogaiRireki.TekiyoJogaiRireki.TekiyoJogaiRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.IShisetsuNyutaishoRirekiKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * TeikiyoJogaishaShokai のクラスファイル
- *
+ * TeikiyoJogaishaShokai のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class TeikiyoJogaishaShokaiDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -118,13 +121,13 @@ public class TeikiyoJogaishaShokaiDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IKaigoShikakuKihonDiv getCcdShikakuJoho() {
-        return this.getShikakuKihonJoho().getCcdShikakuJoho();
+    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
+        return this.getShikakuKihonJoho().getCcdKaigoAtenaInfo();
     }
 
     @JsonIgnore
-    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
-        return this.getShikakuKihonJoho().getCcdKaigoAtenaInfo();
+    public IKaigoShikakuKihonDiv getCcdShikakuJoho() {
+        return this.getShikakuKihonJoho().getCcdShikakuJoho();
     }
 
     @JsonIgnore

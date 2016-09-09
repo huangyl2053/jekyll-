@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011;
 
-import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -16,7 +16,7 @@ public enum DBA2040011TransitionEventName implements IContainerEvents {
 
     再検索("再検索"),
     完了("完了"),
-    検索結果一覧に戻る("検索結果一覧に戻る");
+    検索に戻る("検索に戻る");
 
     private final RString name;
 

@@ -69,7 +69,7 @@ public class ShokkenTorikeshiIchibuSoshitu {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         //TODO sync-24 マージ 暫定
-        return ResponseData.of(div).setState(DBD5020001StateName.NoChange/*要介護認定*/);
+        return ResponseData.of(div).setState(DBD5020001StateName.要介護認定);
     }
 
     /**
@@ -251,16 +251,15 @@ public class ShokkenTorikeshiIchibuSoshitu {
         } else {
             return ResponseData.of(div).respond();
         }
-//TODO sync-24マージ 暫定
-//        if (div.getTitle().contains("却下")) {
-//            div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString("却下処理が正常に終了しました。"));
-//            div.setTitle(new RString("要介護認定却下完了"));
-        return ResponseData.of(div).setState(DBD5020001StateName.NoChange/*却下完了*/);
-//        } else {
-//            div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString("更新処理が正常に終了しました。"));
-//            div.setTitle(new RString("要介護認定完了"));
-//            return ResponseData.of(div).setState(DBD5020001StateName.認定完了);
-//        }
+        if (div.getTitle().contains("却下")) {
+            div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString("却下処理が正常に終了しました。"));
+            div.setTitle(new RString("要介護認定却下完了"));
+            return ResponseData.of(div).setState(DBD5020001StateName.却下完了);
+        } else {
+            div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString("更新処理が正常に終了しました。"));
+            div.setTitle(new RString("要介護認定完了"));
+            return ResponseData.of(div).setState(DBD5020001StateName.認定完了);
+        }
 
     }
 

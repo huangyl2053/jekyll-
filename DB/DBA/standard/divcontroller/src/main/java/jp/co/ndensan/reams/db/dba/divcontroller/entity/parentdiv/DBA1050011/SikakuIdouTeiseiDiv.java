@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class SikakuIdouTeiseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -110,13 +110,13 @@ public class SikakuIdouTeiseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
-        return this.getKihonJoho().getCcdKaigoAtenaInfo();
+    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
+        return this.getKihonJoho().getCcdKaigoShikakuKihon();
     }
 
     @JsonIgnore
-    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
-        return this.getKihonJoho().getCcdKaigoShikakuKihon();
+    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
+        return this.getKihonJoho().getCcdKaigoAtenaInfo();
     }
 
     @JsonIgnore

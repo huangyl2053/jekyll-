@@ -376,7 +376,7 @@ var DBZ;
             };
 
             Controls.prototype.txtCheckDay = function () {
-                return new UZA.TextBox(this.convFiledName("txtCheckDay"));
+                return new UZA.TextBoxDate(this.convFiledName("txtCheckDay"));
             };
 
             Controls.prototype.txtNinteiYukoKaishiDateFrom = function () {

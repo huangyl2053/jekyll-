@@ -387,8 +387,8 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtNinteiYukoKikan"));
             }
 
-            public txtCheckDay(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtCheckDay"));
+            public txtCheckDay(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtCheckDay"));
             }
 
             public txtNinteiYukoKaishiDateFrom(): UZA.TextBoxFlexibleDate {

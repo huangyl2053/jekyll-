@@ -248,10 +248,6 @@ public class NinteiShinseishaFinderHandler {
     public void openSonotaJoho() {
         div.getShosaiJoken().setIsOpen(true);
         div.getSonotaJoho().setIsOpen(true);
-//<<<<<<< HEAD
-//=======
-//        div.getCdlGeninShikkanCode().applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援, DBECodeShubetsu.原因疾患コード.getコード());
-//>>>>>>> origin/sync
         div.getTxtShinseiKeikaNissu().clearFromValue();
         div.getTxtShinseiKeikaNissu().clearToValue();
         div.getCcdGeninShikkan().load(SubGyomuCode.DBE認定支援, DBECodeShubetsu.原因疾患コード.getコード());
@@ -424,16 +420,6 @@ public class NinteiShinseishaFinderHandler {
         }
         div.getDdlNowPhase().setDataSource(ddlNowPhase);
         div.getDdlNowPhase().setSelectedIndex(0);
-        div.getChkShoriJotai().setDisabled(true);
-        div.getChkKoshinTaishoChushutsu().setDisabled(true);
-        div.getChkTsuchiShori().setDisabled(true);
-        clearChk();
-    }
-
-    /**
-     * 完了情報初期化処理です。
-     */
-    public void clearChk() {
         List<RString> keys = new ArrayList<>();
         div.getChkShoriJotai().setDisabled(true);
         div.getChkShoriJotai().setSelectedItemsByKey(keys);
