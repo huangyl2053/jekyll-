@@ -61,7 +61,7 @@ public class UpdateShoriDateKanriTblProcess extends BatchProcessBase<DbT7022Shor
         isあり = true;
         entity.setSubGyomuCode(SubGyomuCode.DBC介護給付);
         entity.setShichosonCode(association.getLasdecCode_());
-        entity.setShoriName(ShoriName.異動分負担割合判定.get名称());
+        entity.setShoriName(ShoriName.異動分利用者負担割合判定.get名称());
         entity.setNendo(parameter.getTaishoNendo());
         entity.setKijunTimestamp(parameter.getChushutsuShuryoTime());
         entity.setTaishoKaishiTimestamp(parameter.getChushutsuKaishiTime());
@@ -76,7 +76,7 @@ public class UpdateShoriDateKanriTblProcess extends BatchProcessBase<DbT7022Shor
             DbT7022ShoriDateKanriEntity tmpEntity = new DbT7022ShoriDateKanriEntity();
             tmpEntity.setSubGyomuCode(SubGyomuCode.DBC介護給付);
             tmpEntity.setShichosonCode(association.getLasdecCode_());
-            tmpEntity.setShoriName(ShoriName.異動分負担割合判定.get名称());
+            tmpEntity.setShoriName(ShoriName.異動分利用者負担割合判定.get名称());
             tmpEntity.setShoriEdaban(連番);
             tmpEntity.setNendo(parameter.getTaishoNendo());
             tmpEntity.setNendoNaiRenban(年度内連番);
