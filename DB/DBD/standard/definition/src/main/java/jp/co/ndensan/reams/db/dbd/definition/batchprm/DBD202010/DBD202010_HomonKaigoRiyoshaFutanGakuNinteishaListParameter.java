@@ -13,12 +13,15 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiH
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TaishoKikan;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.homon.HobetsuKubun;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00003.NinteishaListSakuseiProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00003.TaishoshaIchijiTokuteiProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -80,5 +83,47 @@ public class DBD202010_HomonKaigoRiyoshaFutanGakuNinteishaListParameter extends 
     @BatchParameter(key = CHANGEPAGEID, name = "改頁出力順ID")
     private Long 改頁出力順ID;
     @BatchParameter(key = REPORTID, name = "帳票ID")
-    private RString 帳票ID;
+    private ReportId 帳票ID;
+
+    /**
+     * 対象者一次特定一時テーブル登録_process処理のパラメターを取得します。
+     *
+     * @return TaishoshaIchijiTokuteiProcessParameter
+     */
+    public TaishoshaIchijiTokuteiProcessParameter toTaishoshaIchijiTokuteiProcessParameter() {
+        return new TaishoshaIchijiTokuteiProcessParameter(対象リスト,
+                対象期間指定,
+                対象年度の開始年月日,
+                対象年度の終了年月日,
+                基準日,
+                課税判定等基準日,
+                受給者区分,
+                旧措置区分);
+    }
+
+    /**
+     * 訪問介護利用者負担額減額認定者リス発行_process処理のパラメターを取得します。
+     *
+     * @param 帳票作成日時 帳票作成日時
+     * @return NinteishaListSakuseiProcessParameter
+     */
+    public NinteishaListSakuseiProcessParameter toNinteishaListSakuseiProcessParameter(RDateTime 帳票作成日時) {
+        return new NinteishaListSakuseiProcessParameter(対象リスト,
+                対象期間指定,
+                対象年度,
+                対象年度の開始年月日,
+                対象年度の終了年月日,
+                基準日,
+                所得年度,
+                課税判定等基準日,
+                旧措置区分,
+                法別区分,
+                世帯表示,
+                受給者区分,
+                世帯非課税等,
+                csv出力設定,
+                改頁出力順ID,
+                帳票ID,
+                帳票作成日時);
+    }
 }

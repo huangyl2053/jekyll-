@@ -24,8 +24,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class TaishoshaIchijiTokuteiProcess extends BatchProcessBase<TaishoshaIchijiTokuteiEntity> {
 
-    private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.riyoshafutangakugengakunintei"
-            + ".IRiyoshafutangakuGengakuNintei.get減免減額");
+    private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate"
+            + ".riyoshafutangakugengakunintei.IRiyoshafutangakuGengakuNinteiMapper.get減免減額");
+
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
 

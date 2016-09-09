@@ -12,10 +12,11 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.NinteishaListSakus
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.TaishoshaIchijiTokuteiEntity;
 
 /**
+ * 訪問介護利用者負担額減額認定者リストのMapperクラスです。
  *
  * @reamsid_L DBD-3970-050 x_xuliang
  */
-public interface IRiyoshafutangakuGengakuNintei {
+public interface IRiyoshafutangakuGengakuNinteiMapper {
 
     /**
      * 対象者作成データ
