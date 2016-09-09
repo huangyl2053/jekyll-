@@ -282,13 +282,6 @@ public class ShikyuFushikyuDoIchiranhyoSakuseiProcess extends BatchProcessBase<S
         return DecimalFormatter.toコンマ区切りRString(number, INT_0);
     }
 
-    private RString get非空項目(RString 項目) {
-        if (RString.isNullOrEmpty(項目)) {
-            return RString.EMPTY;
-        }
-        return 項目;
-    }
-
     private RString getColumnValue(IDbColumnMappable entity) {
         if (null != entity) {
             return entity.getColumnValue();
