@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShikyuFushikyu
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShikyuGakuKeisanKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.HihokenshaDaichoResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHoseiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KoshinShoriResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.ShoriModeHanteiResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufusakuseikubun.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaParameter;
@@ -23,6 +24,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushi
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJissekiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3074KogakuGassanShikyuFushikyuKetteiDac;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanshikyuketteihosei.IKogakuGassanShikyuKetteiHoseiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
@@ -43,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -56,6 +59,7 @@ public class KogakuGassanShikyuKetteiHosei {
     private final DbV1001HihokenshaDaichoAliveDac 被保険者台帳管理dac;
     private final DbT4001JukyushaDaichoDac 受給者台帳dac;
     private final DbT3074KogakuGassanShikyuFushikyuKetteiDac 高額合算支給不支給決定dac;
+    private final DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac 事業高額合算支給不支給決定dac;
     private static final Decimal ZERO = new Decimal(0);
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
@@ -94,6 +98,7 @@ public class KogakuGassanShikyuKetteiHosei {
         this.被保険者台帳管理dac = InstanceProvider.create(DbV1001HihokenshaDaichoAliveDac.class);
         this.受給者台帳dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
         this.高額合算支給不支給決定dac = InstanceProvider.create(DbT3074KogakuGassanShikyuFushikyuKetteiDac.class);
+        this.事業高額合算支給不支給決定dac = InstanceProvider.create(DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac.class);
     }
 
     /**
@@ -259,6 +264,54 @@ public class KogakuGassanShikyuKetteiHosei {
             }
         }
         return result;
+    }
+
+    /**
+     * 画面のデータをＤＢに追加する。 （高額合算支給不支給決定TBL）
+     *
+     * @param 画面DIV KoshinShoriResult
+     * @param 処理モード RString
+     * @return boolean
+     */
+    public boolean isKoshinShori(
+            KoshinShoriResult 画面DIV,
+            RString 処理モード) {
+        if (画面DIV != null) {
+            get更新高額合算支給不支給決定(画面DIV.get高額合算支給不支給決定Entity(), 処理モード);
+        }
+        return true;
+    }
+
+    private void get更新高額合算支給不支給決定(
+            KogakuGassanShikyuFushikyuKettei 高額合算Entity,
+            RString 処理モード) {
+        if (高額合算Entity != null && (ONE.equals(処理モード) || TWO.equals(処理モード))
+                && !EntityDataState.Unchanged.equals(高額合算Entity.toEntity().getState())) {
+            高額合算支給不支給決定dac.save(高額合算Entity.toEntity());
+        } else if (高額合算Entity != null && THREE.equals(処理モード)
+                && EntityDataState.Deleted.equals(高額合算Entity.toEntity().getState())) {
+            高額合算支給不支給決定dac.delete(高額合算Entity.toEntity());
+        }
+    }
+
+    /**
+     * 画面のデータをＤＢに追加する。　（事業高額合算支給不支給決定TBL）
+     *
+     * @param 画面DIV KoshinShoriResult
+     * @param 処理モード RString
+     * @return boolean
+     */
+    public boolean isKoshinShoriJigyo(
+            JigyoKogakuGassanShikyuFushikyuKettei 画面DIV,
+            RString 処理モード) {
+        if (画面DIV != null && (ONE.equals(処理モード) || TWO.equals(処理モード))
+                && !EntityDataState.Unchanged.equals(画面DIV.toEntity().getState())) {
+            事業高額合算支給不支給決定dac.save(画面DIV.toEntity());
+        } else if (画面DIV != null && THREE.equals(処理モード)
+                && EntityDataState.Deleted.equals(画面DIV.toEntity().getState())) {
+            事業高額合算支給不支給決定dac.delete(画面DIV.toEntity());
+        }
+        return true;
     }
 
     private void get給付実績基本情報のデータが存在しない場合(
