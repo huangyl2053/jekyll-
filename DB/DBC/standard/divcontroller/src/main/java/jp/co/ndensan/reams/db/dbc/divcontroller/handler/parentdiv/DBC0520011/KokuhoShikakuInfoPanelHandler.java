@@ -20,6 +20,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.ur.urz.business.core.hokenja.Hokenja;
+import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsuType;
+import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaManagerFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaSearchItem;
+import jp.co.ndensan.reams.ur.urz.service.core.hokenja.IHokenjaManager;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -27,6 +32,10 @@ import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.INewSearchCondition;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.SearchConditionFactory;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
 
 /**
  * 国保資格情報登録
@@ -55,6 +64,11 @@ public class KokuhoShikakuInfoPanelHandler {
      * @param 被保険者番号 HihokenshaNo
      */
     public void initialize(ShikibetsuCode shikibetsuCode, HihokenshaNo 被保険者番号) {
+        IHokenjaManager iHokenjaManager = HokenjaManagerFactory.createInstance();
+        INewSearchCondition 検索条件 = SearchConditionFactory.condition(
+                HokenjaSearchItem.保険者種別, StringOperator.完全一致, HokenjaShubetsuType.国民健康保険.code());
+        List<Hokenja> hokenja = iHokenjaManager.get保険者一覧(検索条件);
+        set国保保険者番号(hokenja);
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         RString 介護導入形態 = shichosonSecurityJoho.get導入形態コード().value();
         if (DonyuKeitaiCode.事務広域.getCode().equals(介護導入形態)) {
@@ -116,9 +130,9 @@ public class KokuhoShikakuInfoPanelHandler {
             if (div.getTxtKokuhoHokenshoNo().getValue() != null) {
                 builder.set国保保険証番号(new RString(div.getTxtKokuhoHokenshoNo().getValue().toString()));
             }
-//        if (!div.getDdlKokuhoHokenshaNo().getSelectedValue().isNullOrEmpty()) {
-//            builder.set国保保険者番号(div.getDdlKokuhoHokenshaNo().getSelectedValue()).build();
-//        }
+            if (!div.getDdlKokuhoHokenshaNo().getSelectedValue().isNullOrEmpty()) {
+                builder.set国保保険者番号(div.getDdlKokuhoHokenshaNo().getSelectedKey());
+            }
             if (!div.getTxtKokuhoKojinNo().getValue().isNullOrEmpty()) {
                 builder.set国保個人番号(div.getTxtKokuhoKojinNo().getValue());
             }
@@ -164,9 +178,9 @@ public class KokuhoShikakuInfoPanelHandler {
             if (div.getTxtKokuhoHokenshoNo().getValue() != null) {
                 builder.set国保保険証番号(new RString(div.getTxtKokuhoHokenshoNo().getValue().toString()));
             }
-//        if (!div.getDdlKokuhoHokenshaNo().getSelectedValue().isNullOrEmpty()) {
-//            builder.set国保保険者番号(div.getDdlKokuhoHokenshaNo().getSelectedValue()).build();
-//        }
+            if (!div.getDdlKokuhoHokenshaNo().getSelectedValue().isNullOrEmpty()) {
+                builder.set国保保険者番号(div.getDdlKokuhoHokenshaNo().getSelectedKey());
+            }
             if (!div.getTxtKokuhoKojinNo().getValue().isNullOrEmpty()) {
                 builder.set国保個人番号(div.getTxtKokuhoKojinNo().getValue());
             }
@@ -234,43 +248,6 @@ public class KokuhoShikakuInfoPanelHandler {
         }
     }
 
-    private KokuhoShikakuInfo setkokuhoShikakuInfo(KokuhoShikakuInfo kokuhoShikakuInfo) {
-        KokuhoShikakuInfoBuilder builder = kokuhoShikakuInfo.createBuilderForEdit();
-        if (div.getTxtKokuhoHokenshoNo().getValue() != null) {
-            builder.set国保保険証番号(new RString(div.getTxtKokuhoHokenshoNo().getValue().toString()));
-        }
-//        if (!div.getDdlKokuhoHokenshaNo().getSelectedValue().isNullOrEmpty()) {
-//            builder.set国保保険者番号(div.getDdlKokuhoHokenshaNo().getSelectedValue()).build();
-//        }
-        if (!div.getTxtKokuhoKojinNo().getValue().isNullOrEmpty()) {
-            builder.set国保個人番号(div.getTxtKokuhoKojinNo().getValue());
-        }
-        if (!div.getTxtKokuhoNo().getValue().isNullOrEmpty()) {
-            builder.set国保番号(div.getTxtKokuhoNo().getValue());
-        }
-        if (div.getTxtShikakuShutokuYMD().getValue() != null) {
-            builder.set資格取得日(div.getTxtShikakuShutokuYMD().getValue().toDateString());
-        }
-        if (div.getTxtShikakuSoshitsuYMD().getValue() != null) {
-            builder.set資格喪失日(div.getTxtShikakuShutokuYMD().getValue().toDateString());
-        }
-        if (div.getTxtTaishokuGaitoYMD().getValue() != null) {
-            builder.set退職該当日(div.getTxtTaishokuGaitoYMD().getValue().toDateString());
-        }
-        if (div.getTxtTaishokuHigaitoYMD().getValue() != null) {
-            builder.set退職非該当日(div.getTxtTaishokuHigaitoYMD().getValue().toDateString());
-        }
-        if (!div.getDdlKojinKubunCode().getSelectedValue().isNullOrEmpty()) {
-            builder.set個人区分コード(div.getDdlKojinKubunCode().getSelectedValue());
-        }
-        if (div.getChkTorokuKubun().getSelectedKeys().size() > 0) {
-            builder.set登録区分(new RString("1"));
-        } else {
-            builder.set登録区分(new RString("0"));
-        }
-        return builder.build();
-    }
-
     private void 前排他の設定(ShikibetsuCode shikibetsuCode, RString rirekiNo) {
 //        LockingKey 排他キー = new LockingKey(shikibetsuCode.value().concat(rirekiNo));
 //        RealInitialLocker.lock(new LockingKey(排他キー));
@@ -285,4 +262,17 @@ public class KokuhoShikakuInfoPanelHandler {
                 concat(new RString("DBCrirekiNo")).concat(rirekiNo));
         RealInitialLocker.release(new LockingKey(排他キー));
     }
+
+    private void set国保保険者番号(List<Hokenja> hokenjas) {
+        List<KeyValueDataSource> dataSources = new ArrayList<>();
+        for (Hokenja hokenja : hokenjas) {
+            dataSources.add(get国保保険者番号(hokenja));
+        }
+        div.getMeisaiPanel().getDdlKokuhoHokenshaNo().setDataSource(dataSources);
+    }
+
+    private KeyValueDataSource get国保保険者番号(Hokenja hokenja) {
+        return new KeyValueDataSource(hokenja.get保険者名(), hokenja.get保険者番号().getColumnValue());
+    }
+
 }
