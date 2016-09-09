@@ -1181,7 +1181,7 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess extends BatchProc
 
     private RString get特定対象データ(RStringBuilder builder) {
         if (!RString.isNullOrEmpty(processParamter.getHobetsukubun())
-                && processParamter.getHobetsukubun().equals(HobetsuKubun.すべて.getコード())) {
+                && !processParamter.getHobetsukubun().equals(HobetsuKubun.すべて.getコード())) {
             builder.append(法別区分);
             builder.append(HobetsuKubun.toValue(processParamter.getHobetsukubun()).get名称());
             builder.append(COMMA);
