@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.dbc200061;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.servicecodeichiran.ServicecodeIchiranProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicecodeichiran.ServicecodeIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicecodeichiran.TaniSuShikibetsuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200061.ServiceCodeIchiranSource;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 帳票設計_DBCMNJ2006_サービスコード一覧表IBuilder
+ * 帳票設計_DBCMNJ2006_サービスコード一覧表HeaderEditor
  *
  * @reamsid_L DBC-3310-040 jiangxiaolong
  */
@@ -30,10 +30,6 @@ public class ServiceCodeIchiranHeaderEditor
         implements IServiceCodeIchiranEditor {
 
     private final ServiceCodeIchiranParameter parameter;
-    private final Association 導入団体;
-    private TaniSuShikibetsuEntity 単位数識別;
-    private ServicecodeIchiranEntity サービスコード一覧表;
-    private ServicecodeIchiranProcessParameter バッチパラメータ;
     private static final RString SAKUSEI = new RString("作成");
     private static final RString 単位数単位 = new RString("単位数単位");
     private static final RString コロン = new RString("：");
@@ -46,7 +42,6 @@ public class ServiceCodeIchiranHeaderEditor
      */
     public ServiceCodeIchiranHeaderEditor(ServiceCodeIchiranParameter parameter) {
         this.parameter = parameter;
-        this.導入団体 = parameter.get導入団体();
     }
 
     @Override
@@ -58,7 +53,7 @@ public class ServiceCodeIchiranHeaderEditor
         Association 導入団体 = parameter.get導入団体();
         ServicecodeIchiranProcessParameter バッチパラメータ = parameter.getバッチパラメータ();
         DbT7131KaigoServiceNaiyouEntity kaigoServiceNaiyouEntity;
-        TaniSuShikibetsuEntity 単位数識別 = parameter.get単位数識別();
+        List<TaniSuShikibetsuEntity> 単位数識別List = parameter.get単位数識別();
         RDateTime 作成日時 = parameter.get作成日時();
         RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -69,10 +64,14 @@ public class ServiceCodeIchiranHeaderEditor
             source.hokenshaNo = getColumnValue(導入団体.getLasdecCode_());
             source.hokenshaName = 導入団体.getShichosonName_();
         }
-        //DBCEnum.source.taniSetsumei = parameter.get改頁1();
         source.kijunYM = doパターン62(バッチパラメータ.get基準年月());
-        if (null != 単位数識別) {
-            source.taniSetsumei = 単位数単位.concat(スペース).concat(getColumnValue(単位数識別.getコード())).concat(コロン);
+        if (null != 単位数識別List) {
+            for (TaniSuShikibetsuEntity 単位数識別 : 単位数識別List) {
+                if (null == source.taniSetsumei) {
+                    source.taniSetsumei = 単位数単位;
+                }
+                source.taniSetsumei = source.taniSetsumei.concat(スペース).concat(getColumnValue(単位数識別.getコード())).concat(コロン).concat(単位数識別.get名称());
+            }
         }
         //TODO
         //source.chushutsuJoken = ;

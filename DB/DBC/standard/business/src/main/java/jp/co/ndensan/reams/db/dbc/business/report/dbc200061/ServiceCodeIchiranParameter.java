@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.dbc200061;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.servicecodeichiran.ServicecodeIchiranProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicecodeichiran.ServicecodeIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicecodeichiran.TaniSuShikibetsuEntity;
@@ -22,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 public class ServiceCodeIchiranParameter {
 
     private Association 導入団体;
-    private TaniSuShikibetsuEntity 単位数識別;
+    private List<TaniSuShikibetsuEntity> 単位数識別;
     private ServicecodeIchiranEntity サービスコード一覧表;
     private ServicecodeIchiranProcessParameter バッチパラメータ;
     private RDateTime 作成日時;

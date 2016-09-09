@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.dbc200061.ServiceCodeIchiranSour
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 帳票設計_DBCMNJ2006_サービスコード一覧表IBuilder
+ * 帳票設計_DBCMNJ2006_サービスコード一覧表Builder
  *
  * @reamsid_L DBC-3310-040 jiangxiaolong
  */
