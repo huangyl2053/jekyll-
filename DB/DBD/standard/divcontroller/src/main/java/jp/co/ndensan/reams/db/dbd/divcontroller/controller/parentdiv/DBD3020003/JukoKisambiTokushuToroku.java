@@ -98,6 +98,10 @@ public class JukoKisambiTokushuToroku {
             throw new PessimisticLockingException();
         }
 
+        div.getDgShunoJokyo().setDisabled(false);
+        div.getJikoKisambi().setIsOpen(false);
+        div.getJikoKisambi().setDisabled(true);
+
         return ResponseData.of(div).respond();
     }
 
@@ -132,6 +136,10 @@ public class JukoKisambiTokushuToroku {
         }
 
         ViewStateHolder.put(ViewStateKeys.滞納判定結果, new ArrayList<>(滞納判定結果List));
+
+        div.getDgShunoJokyo().setDisabled(false);
+        div.getJikoKisambi().setIsOpen(false);
+        div.getJikoKisambi().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -288,6 +296,10 @@ public class JukoKisambiTokushuToroku {
         List<JikoKisambiKanri> new時効起算日管理List = getHandler(div).onClick_btnKakutei(時効起算日管理List);
         ViewStateHolder.put(ViewStateKeys.時効起算日管理, new ArrayList<>(new時効起算日管理List));
 
+        div.getDgShunoJokyo().setDisabled(false);
+        div.getJikoKisambi().setIsOpen(false);
+        div.getJikoKisambi().setDisabled(true);
+
         return ResponseData.of(div).respond();
     }
 
@@ -329,7 +341,7 @@ public class JukoKisambiTokushuToroku {
         前排他キーの解除();
         div.getCcdKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
 
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBD3020003TransitionEventName.処理完了).respond();
     }
 
     private JukoKisambiTokushuTorokuHandler getHandler(JukoKisambiTokushuTorokuDiv div) {

@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbc.business.report.dbc200040;
 
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteiTsuchiIchiran;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200040.GassanShikyuFushikyuKetteishaIchiranSource;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
@@ -25,7 +25,7 @@ public class GassanShikyuFushikyuKetteishaIchiranHeaderEditor
         implements IGassanShikyuFushikyuKetteishaIchiranEditor {
 
     private final KogakugassanShikyuKetteiTsuchiIchiran entity;
-    private final RDateTime 作成日時;
+    private final YMDHMS 作成日時;
     private final GassanShikyuFushikyuKetteishaIchiranParameter paramter;
 
     private static final RString 日付選択区分_1 = new RString("1");
@@ -42,11 +42,11 @@ public class GassanShikyuFushikyuKetteishaIchiranHeaderEditor
      * コンストラクタです
      *
      * @param entity KogakugassanShikyuKetteiTsuchiIchiran
-     * @param 作成日時 RDateTime
+     * @param 作成日時 YMDHMS
      * @param paramter GassanShikyuFushikyuKetteishaIchiranParameter
      */
     public GassanShikyuFushikyuKetteishaIchiranHeaderEditor(
-            KogakugassanShikyuKetteiTsuchiIchiran entity, RDateTime 作成日時, GassanShikyuFushikyuKetteishaIchiranParameter paramter) {
+            KogakugassanShikyuKetteiTsuchiIchiran entity, YMDHMS 作成日時, GassanShikyuFushikyuKetteishaIchiranParameter paramter) {
         this.entity = entity;
         this.作成日時 = 作成日時;
         this.paramter = paramter;
@@ -58,12 +58,14 @@ public class GassanShikyuFushikyuKetteishaIchiranHeaderEditor
         if (null == entity) {
             return source;
         }
-        RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
+        RString 作成日 = 作成日時.getRDateTime().getDate().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        RString 作成時 = 作成日時.getTime()
+        RString 作成時 = 作成日時.getRDateTime().getTime()
                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
-        source.hokenshaNo = paramter.get市町村コード();
+        if (paramter.get市町村コード() != null) {
+            source.hokenshaNo = paramter.get市町村コード().value();
+        }
         source.hokenshaName = paramter.get市町村名称();
         source.shutsuryokujun1 = entity.get出力順1();
         source.shutsuryokujun2 = entity.get出力順2();

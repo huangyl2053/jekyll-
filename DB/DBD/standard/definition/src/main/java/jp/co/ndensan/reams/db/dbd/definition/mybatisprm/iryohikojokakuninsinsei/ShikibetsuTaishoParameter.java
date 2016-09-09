@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
  * 宛名情報PSM_DB検索用のパラメータです。
@@ -19,8 +18,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShikibetsuTaishoParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
-
-    private ShikibetsuCode 識別コード;
 
     /**
      * 宛名識別対象PSMの取得のパラメータ作成を行います。

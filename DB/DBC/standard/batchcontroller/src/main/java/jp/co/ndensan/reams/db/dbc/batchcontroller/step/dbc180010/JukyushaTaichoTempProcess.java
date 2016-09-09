@@ -34,6 +34,7 @@ public class JukyushaTaichoTempProcess extends BatchProcessBase<JukyushaDaichoTe
 
     @BatchWriter
     private IBatchTableWriter tempDbWriter;
+    @BatchWriter
     private IBatchTableWriter tempResultListDbWriter;
 
     @Override

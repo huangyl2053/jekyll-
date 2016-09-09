@@ -5,9 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt00003;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaKubun;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaJukyushaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.HihokenshaKeizaiJokyo;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TaishoKikan;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
@@ -35,9 +36,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
 
     private static final RString 法別区分_全て_コード = new RString("0");
-    private static final RString 法別区分_施行時ホームヘルプ_いち = new RString("1");
-    private static final RString 法別区分_障害時ホームヘルプ_に = new RString("2");
-    private static final RString 法別区分_障害時ホームヘルプ_さん = new RString("3");
+    private static final RString 法別区分_施行時_いち = new RString("1");
+    private static final RString 法別区分_障害時_に = new RString("2");
+    private static final RString 法別区分_障害時_さん = new RString("3");
     private static final RString 対象期間指定_対象年度_いち = new RString("1");
     private static final RString 対象期間指定_基準日_に = new RString("2");
     private static final RString 対象リスト_認定者リスト_いち = new RString("1");
@@ -53,8 +54,8 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
     private boolean is対象リスト_該当者リスト;
     private boolean is対象リスト_認定者リスト;
     private boolean is法別区分_全て;
-    private boolean is法別区分_施行時ホームヘルプ;
-    private boolean is法別区分_障害時ホームヘルプ;
+    private boolean is法別区分_施行時;
+    private boolean is法別区分_障害時;
     private boolean is法別区分_障害ヘルプ全額免除;
     private boolean is世帯非課税等_市町村民税非課税世帯;
     private boolean is世帯非課税等_所得税非課税世帯;
@@ -65,9 +66,9 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
     private RString 減免減額種類_訪問介護利用者負担額減額;
     private RString 有効無効区分_有効;
     private RString 決定区分_承認する;
-    private final RString 法別区分_施行時ホームヘルプ;
-    private final RString 法別区分_障害時ホームヘルプ;
-    private final RString 法別区分_障害ヘルプ全額免除;
+    private RString 法別区分_施行時;
+    private RString 法別区分_障害時;
+    private RString 法別区分_障害全額免除;
     private RString 世帯課税区分_非課税;
     private TaishoKikan 対象期間指定;
     private FlexibleYear 対象年度;
@@ -76,11 +77,11 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
     private FlexibleDate 基準日;
     private FlexibleYear 所得年度;
     private FlexibleDate 課税判定等基準日;
-    private KyusochishaKubun 旧措置者区分;
-    private JukyushaKubun 受給者区分;
+    private KyusochishaJukyushaKubun 旧措置者区分;
+    private JukyushaKubun2 受給者区分;
     private SetaiHyoji 世帯表示;
-    private HihokenshaKeizaiJokyo 世帯非課税等;
-    private CSVSettings 出力設定;
+    private List<HihokenshaKeizaiJokyo> 世帯非課税等;
+    private List<CSVSettings> 出力設定;
     private Long 改頁出力順ID;
     private ReportId 帳票ID;
     private RDateTime 帳票作成日時;
@@ -119,12 +120,12 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
             FlexibleDate 基準日,
             FlexibleYear 所得年度,
             FlexibleDate 課税判定等基準日,
-            KyusochishaKubun 旧措置者区分,
+            KyusochishaJukyushaKubun 旧措置者区分,
             HobetsuKubun 法別区分,
             SetaiHyoji 世帯表示,
-            JukyushaKubun 受給者区分,
-            HihokenshaKeizaiJokyo 世帯非課税等,
-            CSVSettings 出力設定,
+            JukyushaKubun2 受給者区分,
+            List<HihokenshaKeizaiJokyo> 世帯非課税等,
+            List<CSVSettings> 出力設定,
             Long 改頁出力順ID,
             ReportId 帳票ID,
             RDateTime 帳票作成日時,
@@ -153,9 +154,6 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
         this.減免減額種類_訪問介護利用者負担額減額 = GemmenGengakuShurui.訪問介護利用者負担額減額.getコード();
         this.有効無効区分_有効 = YukoMukoKubun.有効.getコード();
         this.世帯表示_表示しない = SetaiHyoji.表示しない.getコード();
-        this.法別区分_施行時ホームヘルプ = HobetsuKubun.施行時ホームヘルプ.getコード();
-        this.法別区分_障害時ホームヘルプ = HobetsuKubun.障害時ホームヘルプ.getコード();
-        this.法別区分_障害ヘルプ全額免除 = HobetsuKubun.障害ヘルプ全額免除.getコード();
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.出力順 = 出力順;
 
@@ -183,34 +181,39 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
         if (法別区分_全て_コード.equals(法別区分.getコード())) {
             is法別区分_全て = true;
         }
-        if (法別区分_施行時ホームヘルプ_いち.equals(法別区分.getコード())) {
-            is法別区分_施行時ホームヘルプ = true;
+        if (法別区分_施行時_いち.equals(法別区分.getコード())) {
+            法別区分_施行時 = 法別区分_施行時_いち;
+            is法別区分_施行時 = true;
         }
-        if (法別区分_障害時ホームヘルプ_に.equals(法別区分.getコード())) {
-            is法別区分_障害時ホームヘルプ = true;
+        if (法別区分_障害時_に.equals(法別区分.getコード())) {
+            法別区分_障害時 = 法別区分_障害時_に;
+            is法別区分_障害時 = true;
         }
-        if (法別区分_障害時ホームヘルプ_さん.equals(法別区分.getコード())) {
+        if (法別区分_障害時_さん.equals(法別区分.getコード())) {
+            法別区分_障害全額免除 = 法別区分_障害時_さん;
             is法別区分_障害ヘルプ全額免除 = true;
         }
 
     }
 
-    private void edit世帯非課税等(HihokenshaKeizaiJokyo 世帯非課税等) {
-        if (世帯非課税等_市町村民税非課税世帯_いち.equals(世帯非課税等.getコード())) {
-            is世帯非課税等_市町村民税非課税世帯 = true;
-        }
-        if (世帯非課税等_所得税非課税世帯_に.equals(世帯非課税等.getコード())) {
-            is世帯非課税等_所得税非課税世帯 = true;
-        }
-        if (世帯非課税等_市町村民税本人非課税者_さん.equals(世帯非課税等.getコード())) {
-            is世帯非課税等_市町村民税本人非課税者 = true;
-        }
-        if (世帯非課税等_老齢福祉年金受給者_よん.equals(世帯非課税等.getコード())) {
-            is世帯非課税等_老齢福祉年金受給者 = true;
-        }
-        if (世帯非課税等_生活保護受給者_ご.equals(世帯非課税等.getコード())) {
-            is世帯非課税等_生活保護受給者 = true;
+    private void edit世帯非課税等(List<HihokenshaKeizaiJokyo> 世帯非課税等) {
+
+        for (HihokenshaKeizaiJokyo 世帯非課税情報 : 世帯非課税等) {
+            if (世帯非課税等_市町村民税非課税世帯_いち.equals(世帯非課税情報.getコード())) {
+                is世帯非課税等_市町村民税非課税世帯 = true;
+            }
+            if (世帯非課税等_所得税非課税世帯_に.equals(世帯非課税情報.getコード())) {
+                is世帯非課税等_所得税非課税世帯 = true;
+            }
+            if (世帯非課税等_市町村民税本人非課税者_さん.equals(世帯非課税情報.getコード())) {
+                is世帯非課税等_市町村民税本人非課税者 = true;
+            }
+            if (世帯非課税等_老齢福祉年金受給者_よん.equals(世帯非課税情報.getコード())) {
+                is世帯非課税等_老齢福祉年金受給者 = true;
+            }
+            if (世帯非課税等_生活保護受給者_ご.equals(世帯非課税情報.getコード())) {
+                is世帯非課税等_生活保護受給者 = true;
+            }
         }
     }
-
 }

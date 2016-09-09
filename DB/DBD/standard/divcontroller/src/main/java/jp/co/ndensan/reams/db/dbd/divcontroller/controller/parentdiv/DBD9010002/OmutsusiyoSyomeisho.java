@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD9010002
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD9010002.DBD9010002StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD9010002.OmutsusiyoSyomeishoDiv;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.OmutsusiyoSyomeishoEntity;
 import jp.co.ndensan.reams.db.dbd.service.core.iryohikojokakuninsinsei.IryoHiKojoKakuninSinsei;
+import jp.co.ndensan.reams.db.dbd.service.report.dbd100029.OmutsuShoumeishoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -37,7 +39,7 @@ public class OmutsusiyoSyomeisho {
 
     private static final RString 医療費控除証明書 = new RString("IryohiKojyoSyomeisho");
     private static final RString DB = new RString("DB");
-    private static final RString 帳票分類ID = new RString("帳票分類ID");
+    private static final RString 帳票分類ID = new RString("DBD100029_OmutsuShoumeisho");
 
     /**
      * 画面初期化
@@ -121,8 +123,9 @@ public class OmutsusiyoSyomeisho {
     public ResponseData<OmutsusiyoSyomeishoDiv> onClick_btnReportPublish(OmutsusiyoSyomeishoDiv div) {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
-        IryoHiKojoKakuninSinsei.createIntance().editomutsusiyoSyomeisho(識別コード, 帳票分類ID);
-        // TODO 4.2　帳票を発行する
+        OmutsusiyoSyomeishoEntity おむつ使用証明書Entity = IryoHiKojoKakuninSinsei.createIntance().editomutsusiyoSyomeisho(識別コード, 帳票分類ID);
+        OmutsuShoumeishoPrintService printService = new OmutsuShoumeishoPrintService();
+        printService.printSingle(おむつ使用証明書Entity);
         AccessLogger.log(AccessLogType.照会, PersonalData.of(識別コード,
                 ExpandedInformation.newBuilder().code(new Code("003")).name(new RString("被保険者番号"))
                 .value(被保険者番号).build()));

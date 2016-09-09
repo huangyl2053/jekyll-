@@ -638,17 +638,37 @@ public class TokubetsuChoshuJohoAppurodoHandler {
      * upLoadファイルチェックのメソッドます。
      *
      * @param files FileData[]
+     *
+     * @return boolean
      */
     @SuppressWarnings("checkstyle:illegaltoken")
-    public void ファイルチェック(FileData[] files) {
+    public boolean ファイルチェック(FileData[] files) {
         if (div.getShoriTaishoShichosonPanel().getDgGetuShoriSelect().getSelectedItems().isEmpty()
                 && div.getShoriTaishoGetuPanel().getDgShichosonShoriSelect().getSelectedItems().isEmpty()) {
-            return;
+            return false;
+        }
+        RString 選択Key = div.getShoriJokyoPanel().getGrpHyojikeishiki().getSelectedKey();
+        if (STR_0.equals(選択Key)) {
+            List<dgGetuShoriSelect_Row> 処理対象Rows = div.getShoriTaishoShichosonPanel().getDgGetuShoriSelect().getDataSource();
+            int max = INT_0;
+            Map<RString, RString> 処理月と年度内連番 = get処理月と年度内連番Map();
+            for (dgGetuShoriSelect_Row row : 処理対象Rows) {
+                if (済.equals(row.getData4())) {
+                    int 年度内連番 = Integer.parseInt(処理月と年度内連番.get(row.getData1()).toString());
+                    max = max < 年度内連番 ? 年度内連番 : max;
+                }
+            }
+            dgGetuShoriSelect_Row 選択row = div.getShoriTaishoShichosonPanel().getDgGetuShoriSelect().getSelectedItems().get(INT_0);
+            int 選択月 = Integer.parseInt(処理月と年度内連番.get(選択row.getData1()).toString());
+            if (選択月 != (max + INT_1)) {
+                return false;
+            }
+
         }
         FileData 選択ファイル = files[INT_0];
         RString ファイル名 = 選択ファイル.getFileName();
         if (!ファイル名.endsWith(拡張子)) {
-            return;
+            return false;
         }
         try (FileReader reader = new FileReader(選択ファイル.getFilePath(), Encode.UTF_8)) {
             RString ファイルのデータレコード = reader.readLine();
@@ -665,6 +685,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
             奇数月_偶数月のチェック(ファイルのデータレコード);
             制度コードのチェック(ファイルのデータレコード, ファイル名);
         }
+        return true;
     }
 
     private void 市町村コードチェック(RString ファイルのデータレコード) {
@@ -860,6 +881,15 @@ public class TokubetsuChoshuJohoAppurodoHandler {
             CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
             FilesystemPath 絶対パス = new FilesystemPath(filePath);
             SharedFile.copyToSharedFile(sharedfiledescriptor, 絶対パス, opts);
+            if (STR_1.equals(選択Key)) {
+                div.getShoriTaishoGetuPanel().getDgShichosonShoriSelect().
+                        getSelectedItems().get(INT_0).setData4(済);
+                div.getShoriTaishoGetuPanel().getDgShichosonShoriSelect().
+                        getSelectedItems().get(INT_0).setSelectable(false);
+            } else {
+                div.getShoriTaishoShichosonPanel().getDgGetuShoriSelect().getSelectedItems().get(INT_0).setData4(済);
+                div.getShoriTaishoShichosonPanel().getDgGetuShoriSelect().getSelectedItems().get(INT_0).setSelectable(false);
+            }
         }
     }
 

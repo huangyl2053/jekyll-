@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchosofu;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB211001;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYear;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuChoSoufuJohoSakuseiBatchParameter {
+public class DBB211001_TokuchoSofuJohoSakuseiParameter {
 
     private RYear 賦課年度;
     private RString 処理対象月;

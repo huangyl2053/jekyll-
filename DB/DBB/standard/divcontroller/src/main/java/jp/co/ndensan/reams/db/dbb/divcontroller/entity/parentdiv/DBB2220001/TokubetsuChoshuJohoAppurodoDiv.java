@@ -35,8 +35,8 @@ public class TokubetsuChoshuJohoAppurodoDiv extends Panel {
     private ShoriTaishoShichosonPanelDiv ShoriTaishoShichosonPanel;
     @JsonProperty("ShoriTaishoGetuPanel")
     private ShoriTaishoGetuPanelDiv ShoriTaishoGetuPanel;
-    @JsonProperty("PanUpload")
-    private PanUploadDiv PanUpload;
+    @JsonProperty("PanelUpload")
+    private PanelUploadDiv PanelUpload;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -99,21 +99,21 @@ public class TokubetsuChoshuJohoAppurodoDiv extends Panel {
     }
 
     /*
-     * getPanUpload
-     * @return PanUpload
+     * getPanelUpload
+     * @return PanelUpload
      */
-    @JsonProperty("PanUpload")
-    public PanUploadDiv getPanUpload() {
-        return PanUpload;
+    @JsonProperty("PanelUpload")
+    public PanelUploadDiv getPanelUpload() {
+        return PanelUpload;
     }
 
     /*
-     * setPanUpload
-     * @param PanUpload PanUpload
+     * setPanelUpload
+     * @param PanelUpload PanelUpload
      */
-    @JsonProperty("PanUpload")
-    public void setPanUpload(PanUploadDiv PanUpload) {
-        this.PanUpload = PanUpload;
+    @JsonProperty("PanelUpload")
+    public void setPanelUpload(PanelUploadDiv PanelUpload) {
+        this.PanelUpload = PanelUpload;
     }
 
     /*
@@ -211,22 +211,22 @@ public class TokubetsuChoshuJohoAppurodoDiv extends Panel {
 
     @JsonIgnore
     public UploadPanel getUpload() {
-        return this.getPanUpload().getUpload();
+        return this.getPanelUpload().getUpload();
     }
 
     @JsonIgnore
     public void setUpload(UploadPanel upload) {
-        this.getPanUpload().setUpload(upload);
+        this.getPanelUpload().setUpload(upload);
     }
 
     @JsonIgnore
     public Button getBtnUpload() {
-        return this.getPanUpload().getBtnUpload();
+        return this.getPanelUpload().getBtnUpload();
     }
 
     @JsonIgnore
     public void setBtnUpload(Button btnUpload) {
-        this.getPanUpload().setBtnUpload(btnUpload);
+        this.getPanelUpload().setBtnUpload(btnUpload);
     }
 
     // </editor-fold>

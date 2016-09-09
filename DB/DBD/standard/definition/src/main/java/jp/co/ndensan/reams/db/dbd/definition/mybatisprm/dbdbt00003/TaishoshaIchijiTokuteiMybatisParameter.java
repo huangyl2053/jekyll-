@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt00003;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaKubun;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaJukyushaKubun;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TaishoKikan;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
@@ -48,7 +48,6 @@ public class TaishoshaIchijiTokuteiMybatisParameter implements IMyBatisParameter
     private FlexibleDate 対象年度の終了年月日;
     private FlexibleDate 基準日;
     private FlexibleDate 課税判定等基準日;
-    
 
     /**
      * 対象者一次特定一時テーブル
@@ -68,8 +67,8 @@ public class TaishoshaIchijiTokuteiMybatisParameter implements IMyBatisParameter
             FlexibleDate 対象年度の終了年月日,
             FlexibleDate 基準日,
             FlexibleDate 課税判定等基準日,
-            JukyushaKubun 受給者区分,
-            KyusochishaKubun 旧措置者区分) {
+            JukyushaKubun2 受給者区分,
+            KyusochishaJukyushaKubun 旧措置者区分) {
         this.対象年度の開始年月日 = 対象年度の開始年月日;
         this.対象年度の終了年月日 = 対象年度の終了年月日;
         this.基準日 = 基準日;
@@ -90,7 +89,8 @@ public class TaishoshaIchijiTokuteiMybatisParameter implements IMyBatisParameter
             is対象リスト_該当者リスト = true;
         }
     }
-    private void edit受給者区分(JukyushaKubun 受給者区分) {
+
+    private void edit受給者区分(JukyushaKubun2 受給者区分) {
         if (受給者区分_受給者_いち.equals(受給者区分.getコード())) {
             is受給者区分_受給者 = true;
         }
@@ -99,7 +99,7 @@ public class TaishoshaIchijiTokuteiMybatisParameter implements IMyBatisParameter
         }
     }
 
-    private void edit旧措置者区分(KyusochishaKubun 旧措置者区分) {
+    private void edit旧措置者区分(KyusochishaJukyushaKubun 旧措置者区分) {
         if (旧措置者区分_旧措置者以外_いち.equals(旧措置者区分.getコード())) {
             is旧措置者区分_旧措置者以外 = true;
         }
