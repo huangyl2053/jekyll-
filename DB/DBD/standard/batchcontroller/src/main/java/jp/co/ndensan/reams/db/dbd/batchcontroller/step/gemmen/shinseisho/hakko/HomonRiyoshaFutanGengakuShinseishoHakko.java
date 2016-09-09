@@ -62,7 +62,6 @@ public class HomonRiyoshaFutanGengakuShinseishoHakko extends BatchProcessBase<Ri
             + "IRiyoshaFutangakuGemmenShinseishoHakkoMapper.get出力対象者情報");
     private static final int STARTINDEX = 9;
     private static final RString COMMA = new RString(",");
-    private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString HAKKONICHI = new RString("【発行日】");
     private static final RString SHUTSURYOKUJUN = new RString("【出力順】");
     private static final RString なし = new RString("なし");
@@ -150,14 +149,18 @@ public class HomonRiyoshaFutanGengakuShinseishoHakko extends BatchProcessBase<Ri
     }
 
     private RString get認証者() {
+        RDate 発行日 = RDate.getNowDate();
+        if (!processParamter.get発行日().isEmpty()) {
+            発行日 = new RDate(
+                    processParamter.get発行日().getYearValue(),
+                    processParamter.get発行日().getMonthValue(),
+                    processParamter.get発行日().getDayValue());
+        }
         return NinshoshaSourceBuilderFactory.createInstance(
                 ninshosha,
                 association,
                 reportSourceWriter.getImageFolderPath(),
-                new RDate(
-                        processParamter.get発行日().getYearValue(),
-                        processParamter.get発行日().getMonthValue(),
-                        processParamter.get発行日().getDayValue()))
+                発行日)
                 .buildSource().ninshoshaYakushokuMei;
     }
 
@@ -179,7 +182,6 @@ public class HomonRiyoshaFutanGengakuShinseishoHakko extends BatchProcessBase<Ri
 
     private void バッチ出力条件リストの出力() {
         RStringBuilder builder = new RStringBuilder();
-        builder.append(JOBNO_NAME);
         builder.append(RString.HALF_SPACE);
         builder.append(JobContextHolder.getJobId());
         RString ジョブ番号 = builder.toRString();

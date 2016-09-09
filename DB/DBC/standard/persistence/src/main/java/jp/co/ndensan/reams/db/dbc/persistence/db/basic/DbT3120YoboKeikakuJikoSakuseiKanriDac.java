@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3119KyotakuKeikakuJikosakuseiKanri;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3119KyotakuKeikakuJikosakuseiKanri.hihokenshaNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3119KyotakuKeikakuJikosakuseiKanri.kyotakuServiceKubun;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3119KyotakuKeikakuJikosakuseiKanri.meisaiNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3119KyotakuKeikakuJikosakuseiKanri.rirekiNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3119KyotakuKeikakuJikosakuseiKanri.riyoYM;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3119KyotakuKeikakuJikosakuseiKanri.taishoYM;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3120YoboKeikakuJikoSakuseiKanri;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3120YoboKeikakuJikoSakuseiKanri.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3120YoboKeikakuJikoSakuseiKanri.kyotakuServiceKubun;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3120YoboKeikakuJikoSakuseiKanri.meisaiNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3120YoboKeikakuJikoSakuseiKanri.rirekiNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3120YoboKeikakuJikoSakuseiKanri.riyoYM;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3120YoboKeikakuJikoSakuseiKanri.taishoYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3120YoboKeikakuJikoSakuseiKanriEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
@@ -68,7 +68,7 @@ public class DbT3120YoboKeikakuJikoSakuseiKanriDac implements ISaveable<DbT3120Y
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
-                table(DbT3119KyotakuKeikakuJikosakuseiKanri.class).
+                table(DbT3120YoboKeikakuJikoSakuseiKanri.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(taishoYM, 対象年月),
@@ -89,7 +89,7 @@ public class DbT3120YoboKeikakuJikoSakuseiKanriDac implements ISaveable<DbT3120Y
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
-                table(DbT3119KyotakuKeikakuJikosakuseiKanri.class).
+                table(DbT3120YoboKeikakuJikoSakuseiKanri.class).
                 toList(DbT3120YoboKeikakuJikoSakuseiKanriEntity.class);
     }
 

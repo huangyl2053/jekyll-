@@ -411,9 +411,7 @@
         FROM 高額合算自己負担額1 AS 高額合算自己負担額
        
         INNER JOIN
-        rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',
-        '','','0','0','','','','','','','','','','0','','1','1','1','1','0','0', '0','0','0','0', '0','','',
-        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }')AS "ShikibetsuTaisho"
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
         ON "ShikibetsuTaisho"."shikibetsuCode"= 最新被保台帳_識別コード
 
         INNER JOIN 
