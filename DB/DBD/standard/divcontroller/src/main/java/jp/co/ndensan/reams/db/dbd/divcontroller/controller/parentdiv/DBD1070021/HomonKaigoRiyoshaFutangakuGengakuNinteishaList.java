@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiH
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TaishoKikan;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.homon.HobetsuKubun;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1070021.HomonKaigoRiyoshaFutanGengakuNinteishaListDiv;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -72,11 +73,11 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaList {
         if (div.getRadTaishoList().getSelectedKey().equals(認定者リスト)) {
             bparamt.set対象リスト(TargetList.認定者リスト);
             set法別区分の設定(div);
-            bparamt.set帳票ID(new RString("DBD200014_HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiran"));
+            bparamt.set帳票ID(ReportIdDBD.DBD200014.getReportId());
         } else {
             bparamt.set対象リスト(TargetList.該当者リスト);
             set受給者区分の設定(div);
-            bparamt.set帳票ID(new RString("DBD200003_HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran"));
+            bparamt.set帳票ID(ReportIdDBD.DBD200003.getReportId());
         }
 
         FlexibleDate taishokaishi = div.getTxtTaishoKikanKaishi().getValue();

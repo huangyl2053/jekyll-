@@ -3,27 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbdbt00003;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt00003.NinteishaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt00003.TaishoshaIchijiTokuteiProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdbt00003.RiyoshafutangakuGengakuNinteiShaParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD202010.DBD202010_HomonKaigoRiyoshaFutanGakuNinteishaListParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmenGengakuTaishoShaHanteiYoukonSakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 訪問介護利用者負担額減額認定者リスト作成
  *
  * @reamsid_L DBD-3970-030 x_xuliang
  */
-public class RiyoshafutangakuGengakuNinteiShaFlow extends BatchFlowBase<RiyoshafutangakuGengakuNinteiShaParameter> {
+public class DBD202010_HomonKaigoRiyoshaFutanGakuNinteishaList extends BatchFlowBase<DBD202010_HomonKaigoRiyoshaFutanGakuNinteishaListParameter> {
 
     private static final String 対象者一次特定一時テーブル登録 = "TaishoshaIchijiTokutei";
+    private static final String 減免減額対象者判定用根拠作成バッチ = "GemmenGengakuTaishoshaHanteiYoKonkyoSakusei";
     private static final String 訪問介護利用者負担額減額認定者リスト発行 = "NinteishaListSakusei";
+
+    private static final RString 減免減額対象者判定用根拠作成バッチID = new RString("DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakusei");
     private YMDHMS systemTime;
     private RDateTime システム日時;
 
@@ -36,6 +41,7 @@ public class RiyoshafutangakuGengakuNinteiShaFlow extends BatchFlowBase<Riyoshaf
     @Override
     protected void defineFlow() {
         executeStep(対象者一次特定一時テーブル登録);
+        executeStep(減免減額対象者判定用根拠作成バッチ);
         executeStep(訪問介護利用者負担額減額認定者リスト発行);
     }
 
@@ -51,6 +57,12 @@ public class RiyoshafutangakuGengakuNinteiShaFlow extends BatchFlowBase<Riyoshaf
                 .define();
     }
 
+    @Step(減免減額対象者判定用根拠作成バッチ)
+    protected IBatchFlowCommand jissiJyokyohyoHakkou() {
+        return otherBatchFlow(減免減額対象者判定用根拠作成バッチID, SubGyomuCode.DBD介護受給,
+                createGemmenGengakuTaishoShaHanteiYoukonSakuseiParameter()).define();
+    }
+
     /**
      * 訪問介護利用者負担額減額認定者リスト発行を行います。
      *
@@ -61,5 +73,9 @@ public class RiyoshafutangakuGengakuNinteiShaFlow extends BatchFlowBase<Riyoshaf
         return loopBatch(NinteishaListSakuseiProcess.class)
                 .arguments(getParameter().toNinteishaListSakuseiProcessParameter(システム日時))
                 .define();
+    }
+
+    private GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter createGemmenGengakuTaishoShaHanteiYoukonSakuseiParameter() {
+        return new GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter(getParameter().get所得年度());
     }
 }

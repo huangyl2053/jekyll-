@@ -5,9 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00003;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaKubun;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaJukyushaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.HihokenshaKeizaiJokyo;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TaishoKikan;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
@@ -40,11 +41,11 @@ public class NinteishaListSakuseiProcessParameter implements IBatchProcessParame
     private FlexibleYear 所得年度;
     private FlexibleDate 課税判定等基準日;
     private HobetsuKubun 法別区分;
-    private KyusochishaKubun 旧措置者区分;
-    private JukyushaKubun 受給者区分;
+    private KyusochishaJukyushaKubun 旧措置者区分;
+    private JukyushaKubun2 受給者区分;
     private SetaiHyoji 世帯表示;
-    private HihokenshaKeizaiJokyo 世帯非課税等;
-    private CSVSettings 出力設定;
+    private List<HihokenshaKeizaiJokyo> 世帯非課税等;
+    private List<CSVSettings> 出力設定;
     private Long 改頁出力順ID;
     private ReportId 帳票ID;
     private RDateTime 帳票作成日時;
@@ -78,12 +79,12 @@ public class NinteishaListSakuseiProcessParameter implements IBatchProcessParame
             FlexibleDate 基準日,
             FlexibleYear 所得年度,
             FlexibleDate 課税判定等基準日,
-            KyusochishaKubun 旧措置者区分,
+            KyusochishaJukyushaKubun 旧措置者区分,
             HobetsuKubun 法別区分,
             SetaiHyoji 世帯表示,
-            JukyushaKubun 受給者区分,
-            HihokenshaKeizaiJokyo 世帯非課税等,
-            CSVSettings 出力設定,
+            JukyushaKubun2 受給者区分,
+            List<HihokenshaKeizaiJokyo> 世帯非課税等,
+            List<CSVSettings> 出力設定,
             Long 改頁出力順ID,
             ReportId 帳票ID,
             RDateTime 帳票作成日時) {

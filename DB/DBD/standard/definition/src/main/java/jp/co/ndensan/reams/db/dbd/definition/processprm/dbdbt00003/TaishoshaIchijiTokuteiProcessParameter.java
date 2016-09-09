@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00003;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaKubun;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaJukyushaKubun;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TaishoKikan;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt00003.TaishoshaIchijiTokuteiMybatisParameter;
@@ -29,8 +29,8 @@ public class TaishoshaIchijiTokuteiProcessParameter implements IBatchProcessPara
     private FlexibleDate 対象年度の終了年月日;
     private FlexibleDate 基準日;
     private FlexibleDate 課税判定等基準日;
-    private JukyushaKubun 受給者区分;
-    private KyusochishaKubun 旧措置者区分;
+    private JukyushaKubun2 受給者区分;
+    private KyusochishaJukyushaKubun 旧措置者区分;
 
     /**
      * コンストラクタです。
@@ -50,8 +50,8 @@ public class TaishoshaIchijiTokuteiProcessParameter implements IBatchProcessPara
             FlexibleDate 対象年度の終了年月日,
             FlexibleDate 基準日,
             FlexibleDate 課税判定等基準日,
-            JukyushaKubun 受給者区分,
-            KyusochishaKubun 旧措置者区分) {
+            JukyushaKubun2 受給者区分,
+            KyusochishaJukyushaKubun 旧措置者区分) {
         this.対象リスト = 対象リスト;
         this.対象期間指定 = 対象期間指定;
         this.対象年度の開始年月日 = 対象年度の開始年月日;
