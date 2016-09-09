@@ -10,6 +10,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ViewStateHolderName {
 
     /**
+     * コード:無し 名称:国保連送付情報 略称:定義なし
+     */
+    国保連送付情報("国保連送付情報"),
+    /**
      * コード:無し 名称:国保連取込情報 略称:定義なし
      */
     国保連取込情報("国保連取込情報"),
