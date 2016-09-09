@@ -102,13 +102,14 @@ public enum ShuruiShikyuGendogakuMainSpec implements IPredicate<ShuruiShikyuGend
                             div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().getFromValue().getYearMonth().toDateString());
                     List<ShuruiShikyuGendogakuMainResult> result = ShuruiShikyuGendogakuMainFinder.createInstance().select介護サービス種類データ(
                             new ServiceShuruiCode(div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().getSelectedKey()), 適用期間From);
-                    if ((new RString("0")).equals(result.get(0).getDbT7130entity().getShien1InKahiKubun())) {
-                        return (!result.isEmpty() && result.get(0).getDbT7130entity() != null
+                    if (!result.isEmpty() && new RString("0").equals(result.get(0).getDbT7130entity().getShien1InKahiKubun())) {
+                        return (result.get(0).getDbT7130entity() != null
                         && (div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue() == null
                         || (div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue().compareTo(Decimal.ZERO) == 0)));
-                    } else {
-                        return true;
+                    } else if (result.isEmpty()) {
+                        return false;
                     }
+                    return true;
                 }
             },
     /**
@@ -124,13 +125,14 @@ public enum ShuruiShikyuGendogakuMainSpec implements IPredicate<ShuruiShikyuGend
                             div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().getFromValue().getYearMonth().toDateString());
                     List<ShuruiShikyuGendogakuMainResult> result = ShuruiShikyuGendogakuMainFinder.createInstance().select介護サービス種類データ(
                             new ServiceShuruiCode(div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().getSelectedKey()), 適用期間From);
-                    if ((new RString("1")).equals(result.get(0).getDbT7130entity().getShien2InKahiKubun())) {
-                        return (!result.isEmpty() && result.get(0).getDbT7130entity() != null
+                    if (!result.isEmpty() && (new RString("1")).equals(result.get(0).getDbT7130entity().getShien2InKahiKubun())) {
+                        return (result.get(0).getDbT7130entity() != null
                         && !(div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue() == null
                         || (div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue().compareTo(Decimal.ZERO) == 0)));
-                    } else {
-                        return true;
+                    } else if (result.isEmpty()) {
+                        return false;
                     }
+                    return true;
                 }
             },
     /**
@@ -141,18 +143,20 @@ public enum ShuruiShikyuGendogakuMainSpec implements IPredicate<ShuruiShikyuGend
      */
     要支援2入力チェックエラー {
                 @Override
-                public boolean apply(ShuruiShikyuGendogakuMainDiv div) {
+                public boolean apply(ShuruiShikyuGendogakuMainDiv div
+                ) {
                     FlexibleYearMonth 適用期間From = new FlexibleYearMonth(
                             div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().getFromValue().getYearMonth().toDateString());
                     List<ShuruiShikyuGendogakuMainResult> result = ShuruiShikyuGendogakuMainFinder.createInstance().select介護サービス種類データ(
                             new ServiceShuruiCode(div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().getSelectedKey()), 適用期間From);
-                    if ((new RString("0")).equals(result.get(0).getDbT7130entity().getShien2InKahiKubun())) {
-                        return (!result.isEmpty() && result.get(0).getDbT7130entity() != null
+                    if (!result.isEmpty() && (new RString("0")).equals(result.get(0).getDbT7130entity().getShien2InKahiKubun())) {
+                        return (result.get(0).getDbT7130entity() != null
                         && (div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue() == null
                         || (div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue().compareTo(Decimal.ZERO) == 0)));
-                    } else {
-                        return true;
+                    } else if (result.isEmpty()) {
+                        return false;
                     }
+                    return true;
                 }
             };
 
@@ -163,13 +167,14 @@ public enum ShuruiShikyuGendogakuMainSpec implements IPredicate<ShuruiShikyuGend
                     div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().getFromValue().getYearMonth().toDateString());
             List<ShuruiShikyuGendogakuMainResult> result = ShuruiShikyuGendogakuMainFinder.createInstance().select介護サービス種類データ(
                     new ServiceShuruiCode(div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().getSelectedKey()), 適用期間From);
-            if ((new RString("1")).equals(result.get(0).getDbT7130entity().getShien1InKahiKubun())) {
-                return (!result.isEmpty() && result.get(0).getDbT7130entity() != null
+            if (!result.isEmpty() && (new RString("1")).equals(result.get(0).getDbT7130entity().getShien1InKahiKubun())) {
+                return (result.get(0).getDbT7130entity() != null
                         && !(div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue() == null
                         || (div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue().compareTo(Decimal.ZERO) == 0)));
-            } else {
-                return true;
+            } else if (result.isEmpty()) {
+                return false;
             }
+            return true;
         }
     }
 }

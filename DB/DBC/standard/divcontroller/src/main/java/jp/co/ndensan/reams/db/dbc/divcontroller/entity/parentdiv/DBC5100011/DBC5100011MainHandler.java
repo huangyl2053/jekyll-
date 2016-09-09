@@ -32,7 +32,6 @@ public class DBC5100011MainHandler {
     private static final RString 対象選択_2 = new RString("2");
     private static final RString 対象選択_1 = new RString("1");
     private static final RString 対象選択_0 = new RString("0");
-    private static final int BEGININDEX = 0;
     private static final int ENDINDEX = 10;
     private static final RString 被保険者 = new RString("被保険者");
 
@@ -73,43 +72,48 @@ public class DBC5100011MainHandler {
         if (!div.getCcdJigyoshaNo().getNyuryokuShisetsuKodo().isNullOrEmpty()) {
             tempData.set事業者番号(div.getCcdJigyoshaNo().getNyuryokuShisetsuKodo());
         }
-        tempData.set出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID().toString()));
         tempData.set利用実績区分(div.getRadRiyoJisseki().getSelectedKey());
         tempData.set地区指定(div.getCcdChikuShichosonSelect().get選択対象());
         tempData.set市町村コード(div.getCcdChikuShichosonSelect().get市町村コード());
         tempData.set市町村名称(div.getCcdChikuShichosonSelect().get市町村名称());
         tempData.set旧市町村コード(div.getCcdChikuShichosonSelect().get旧市町村コード());
         tempData.set旧市町村名称(div.getCcdChikuShichosonSelect().get旧市町村名称());
-        tempData.set選択地区リスト(div.getCcdChikuShichosonSelect().get選択結果().get(Chiku.地区.getコード()));
+        if (div.getCcdChikuShichosonSelect().get選択結果() != null) {
+            tempData.set選択地区リスト(div.getCcdChikuShichosonSelect().get選択結果().get(Chiku.地区.getコード()));
+        }
         tempData.set導入形態コード(DonyuKeitaiCode.toValue(div.getCcdChikuShichosonSelect().get導入形態コード()).getCode());
         tempData.set対象年月(div.getRadTaishoYM().getSelectedKey());
-        tempData.set居宅利用率指定(div.getRadKyotakuRiyoritsu().getSelectedValue());
-        if (div.getChkShutsuryokuTaisho().getSelectedKeys().get(3).isNullOrEmpty()) {
+        tempData.set居宅利用率指定(div.getRadKyotakuRiyoritsu().getSelectedKey());
+        if (div.getChkMeisaiCsvEdit().getSelectedKeys().get(2).isNullOrEmpty()) {
             tempData.set日付スラッシュ編集(Tokeihyo_CSVEditKubun.しない.getコード());
         } else {
             tempData.set日付スラッシュ編集(Tokeihyo_CSVEditKubun.する.getコード());
         }
-
-        if (div.getChkShutsuryokuTaisho().getSelectedKeys().get(3).isNullOrEmpty()) {
+        if (div.getChkShutsuryokuTaisho().getSelectedKeys().get(2).isNullOrEmpty()) {
             tempData.set明細CSV出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力しない.getコード());
         } else {
             tempData.set明細CSV出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力する.getコード());
         }
-        if (div.getChkMeisaiCsvEdit().getSelectedKeys().get(2).isNullOrEmpty()) {
+        if (div.getChkMeisaiCsvEdit().getSelectedKeys().get(1).isNullOrEmpty()) {
             tempData.set連番付加(Tokeihyo_CSVEditKubun.しない.getコード());
         } else {
             tempData.set連番付加(Tokeihyo_CSVEditKubun.する.getコード());
         }
-        if (div.getChkShutsuryokuTaisho().getSelectedKeys().get(2).isNullOrEmpty()) {
+        if (div.getChkShutsuryokuTaisho().getSelectedKeys().get(1).isNullOrEmpty()) {
             tempData.set明細リスト出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力しない.getコード());
         } else {
             tempData.set明細リスト出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力する.getコード());
         }
-
-        tempData.set終了居宅利用率(new RString(div.getTxtKyotakuRiyoritsuRange().getToValue().toString()));
-        tempData.set終了年月(div.getTxtTaishoYmRange().getToValue().wareki().toDateString());
-        tempData.set終了訪問居宅利用率(new RString(div.getTxtHomonRiyoritsuRange().getToValue().toString()));
-        if (div.getChkShutsuryokuTaisho().getSelectedKeys().get(1).isNullOrEmpty()) {
+        if (div.getTxtKyotakuRiyoritsuRange().getToValue() != null) {
+            tempData.set終了居宅利用率(new RString(div.getTxtKyotakuRiyoritsuRange().getToValue().toString()));
+        }
+        if (div.getTxtTaishoYmRange().getToValue() != null) {
+            tempData.set終了年月(div.getTxtTaishoYmRange().getToValue().wareki().toDateString());
+        }
+        if (div.getTxtHomonRiyoritsuRange().getToValue() != null) {
+            tempData.set終了訪問居宅利用率(new RString(div.getTxtHomonRiyoritsuRange().getToValue().toString()));
+        }
+        if (div.getChkShutsuryokuTaisho().getSelectedKeys().get(0).isNullOrEmpty()) {
             tempData.set統計表出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力しない.getコード());
         } else {
             tempData.set統計表出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力する.getコード());
@@ -117,11 +121,17 @@ public class DBC5100011MainHandler {
         if (!RString.EMPTY.equals(div.getTxtHihokenshaNo().getValue())) {
             tempData.set被保険者番号(div.getTxtHihokenshaNo().getValue());
         }
-        tempData.set訪問利用率指定(div.getRadHomonRiyoritsu().getSelectedValue());
-        tempData.set開始居宅利用率(new RString(div.getTxtKyotakuRiyoritsuRange().getFromValue().toString()));
-        tempData.set開始年月(div.getTxtTaishoYmRange().getFromValue().wareki().toDateString());
-        tempData.set開始訪問居宅利用率(new RString(div.getTxtHomonRiyoritsuRange().getFromValue().toString()));
-        if (div.getChkMeisaiCsvEdit().getSelectedKeys().get(1).isNullOrEmpty()) {
+        tempData.set訪問利用率指定(div.getRadHomonRiyoritsu().getSelectedKey());
+        if (div.getTxtKyotakuRiyoritsuRange().getFromValue() != null) {
+            tempData.set開始居宅利用率(new RString(div.getTxtKyotakuRiyoritsuRange().getFromValue().toString()));
+        }
+        if (div.getTxtTaishoYmRange().getFromValue() != null) {
+            tempData.set開始年月(div.getTxtTaishoYmRange().getFromValue().wareki().toDateString());
+        }
+        if (div.getTxtHomonRiyoritsuRange().getFromValue() != null) {
+            tempData.set開始訪問居宅利用率(new RString(div.getTxtHomonRiyoritsuRange().getFromValue().toString()));
+        }
+        if (div.getChkMeisaiCsvEdit().getSelectedKeys().get(0).isNullOrEmpty()) {
             tempData.set項目名付加(Tokeihyo_CSVEditKubun.しない.getコード());
         } else {
             tempData.set項目名付加(Tokeihyo_CSVEditKubun.する.getコード());
@@ -179,7 +189,8 @@ public class DBC5100011MainHandler {
      */
     public void onBlur_txtHihokenshaNo() {
         if (!RString.EMPTY.equals(div.getTxtHihokenshaNo().getValue())) {
-            div.getTxtHihokenshaNo().setValue(div.getTxtHihokenshaNo().getValue().substring(BEGININDEX, ENDINDEX));
+            RString 被保険者番号 = div.getTxtHihokenshaNo().getValue();
+            div.getTxtHihokenshaNo().setValue(被保険者番号.padZeroToLeft(ENDINDEX));
         }
     }
 
@@ -203,13 +214,21 @@ public class DBC5100011MainHandler {
         RString 居宅利用率指定 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("居宅利用率指定"));
         div.getRadKyotakuRiyoritsu().setSelectedKey(居宅利用率指定);
         RString 開始居宅利用率 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("開始居宅利用率"));
-        div.getTxtKyotakuRiyoritsuRange().setFromValue(new Decimal(開始居宅利用率.toString()));
+        if (!RString.EMPTY.equals(開始居宅利用率)) {
+            div.getTxtKyotakuRiyoritsuRange().setFromValue(new Decimal(開始居宅利用率.toString()));
+        }
         RString 終了居宅利用率 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("終了居宅利用率"));
-        div.getTxtKyotakuRiyoritsuRange().setToValue(new Decimal(終了居宅利用率.toString()));
+        if (!RString.EMPTY.equals(終了居宅利用率)) {
+            div.getTxtKyotakuRiyoritsuRange().setToValue(new Decimal(終了居宅利用率.toString()));
+        }
         RString 訪問利用率指定 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("訪問利用率指定"));
-        div.getRadHomonRiyoritsu().setSelectedKey(訪問利用率指定);
+        if (!RString.EMPTY.equals(訪問利用率指定)) {
+            div.getRadHomonRiyoritsu().setSelectedKey(訪問利用率指定);
+        }
         RString 開始訪問居宅利用率 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("開始訪問居宅利用率"));
-        div.getTxtHomonRiyoritsuRange().setFromValue(new Decimal(開始訪問居宅利用率.toString()));
+        if (!RString.EMPTY.equals(開始訪問居宅利用率)) {
+            div.getTxtHomonRiyoritsuRange().setFromValue(new Decimal(開始訪問居宅利用率.toString()));
+        }
         RString 終了訪問居宅利用率 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("終了訪問居宅利用率"));
         div.getTxtHomonRiyoritsuRange().setToValue(new Decimal(終了訪問居宅利用率.toString()));
         div.getCcdChikuShichosonSelect().initialize();

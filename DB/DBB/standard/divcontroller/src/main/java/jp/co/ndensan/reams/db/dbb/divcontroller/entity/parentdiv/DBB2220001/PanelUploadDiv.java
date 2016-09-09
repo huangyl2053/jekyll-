@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.UploadPanel;
 
 /**
- * PanUpload のクラスファイル
+ * PanelUpload のクラスファイル
  *
  * @reamsid_L DBB-5670-010 chenhui
  */
-public class PanUploadDiv extends Panel {
+public class PanelUploadDiv extends Panel {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*

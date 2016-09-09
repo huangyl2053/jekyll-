@@ -21,7 +21,7 @@
             AND "DbT3070"."isDeleted" = FALSE) AS "DbT3070KogakuGassanJikoFutanGaku"
         WHERE
             "DbT3070KogakuGassanJikoFutanGaku".rowNum = 1
-        AND "DbT3070KogakuGassanJikoFutanGaku"."sofuTaishoGaiFlag" <![CDATA[<>]]> #{介護合算_送付対象外}
+        AND ("DbT3070KogakuGassanJikoFutanGaku"."sofuTaishoGaiFlag" IS NULL OR "DbT3070KogakuGassanJikoFutanGaku"."sofuTaishoGaiFlag" <![CDATA[<>]]> #{介護合算_送付対象外})
         AND ("DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" IS NULL OR "DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" = ''
             OR "DbT3070KogakuGassanJikoFutanGaku"."saisoFlag" = #{国保連データ再送フラグ_再送要}
             <if test="saishoriKubun == 1">

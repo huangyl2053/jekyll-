@@ -144,10 +144,15 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
                 source.list_12 = new RString(String.valueOf(給付実績明細Entity.getサービス単位数()));
             }
             source.list_9 = new RString("計");
-            source.list_13 = DecimalFormatter.toコンマ区切りRString(Decimal.valueOf(
-                    Long.parseLong(給付実績被保険者Entity.get給付実績集計Entity().get保険請求額().toString())), 0);
-            source.list_14 = DecimalFormatter.toコンマ区切りRString(Decimal.valueOf(
-                    Long.parseLong(String.valueOf(給付実績被保険者Entity.get給付実績集計Entity().get利用者負担額()))), 0);
+            if (給付実績被保険者Entity != null && 給付実績被保険者Entity.get給付実績集計Entity() != null
+                    && 給付実績被保険者Entity.get給付実績集計Entity().get保険請求額() != null) {
+                source.list_13 = DecimalFormatter.toコンマ区切りRString(Decimal.valueOf(
+                        Long.parseLong(給付実績被保険者Entity.get給付実績集計Entity().get保険請求額().toString())), 0);
+            }
+            if (給付実績被保険者Entity != null && 給付実績被保険者Entity.get給付実績集計Entity() != null) {
+                source.list_14 = DecimalFormatter.toコンマ区切りRString(Decimal.valueOf(
+                        Long.parseLong(String.valueOf(給付実績被保険者Entity.get給付実績集計Entity().get利用者負担額()))), 0);
+            }
             if (給付実績被保険者Entity.isExists社福軽減給付実績()) {
                 source.list_15 = new RString("*");
             } else {

@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.service.core.servicenokanribangourendou;
+package jp.co.ndensan.reams.db.dbc.service.core.kogakuservicehiketteitsuchishotan;
 
 import java.util.List;
 import java.util.Map;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.servicenokanribangourendou.JigyouKetteiTutisyoResult;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.jigyobunkogakugassanshikyukettei.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
@@ -65,13 +64,14 @@ import jp.co.ndensan.reams.uz.uza.lang.Width;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
+import static java.util.Objects.requireNonNull;
 
 /**
  * 高額サービス費支給決定通知書（単）のビジネスクラスです。
  *
  * @reamsid_L DBC-5160-030 chenxin
  */
-public class ServiceNoKanribangouRendou2 {
+public class KogakuServicehiKetteiTsuchishoTan {
 
     private final MapperProvider mapperProvider;
     private final DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac;
@@ -132,7 +132,7 @@ public class ServiceNoKanribangouRendou2 {
     /**
      * コンストラクタです
      */
-    public ServiceNoKanribangouRendou2() {
+    public KogakuServicehiKetteiTsuchishoTan() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.帳票制御共通Dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
         this.帳票制御汎用Dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
@@ -145,7 +145,7 @@ public class ServiceNoKanribangouRendou2 {
      * @param 帳票制御共通Dac DbT7065ChohyoSeigyoKyotsuDac
      * @param 帳票制御汎用Dac DbT7067ChohyoSeigyoHanyoDac
      */
-    ServiceNoKanribangouRendou2(MapperProvider mapperProvider,
+    KogakuServicehiKetteiTsuchishoTan(MapperProvider mapperProvider,
             DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac,
             DbT7067ChohyoSeigyoHanyoDac 帳票制御汎用Dac) {
         this.mapperProvider = mapperProvider;
@@ -158,8 +158,8 @@ public class ServiceNoKanribangouRendou2 {
      *
      * @return ServiceNoKanribangouRendou
      */
-    public static ServiceNoKanribangouRendou2 createInstance() {
-        return InstanceProvider.create(ServiceNoKanribangouRendou2.class);
+    public static KogakuServicehiKetteiTsuchishoTan createInstance() {
+        return InstanceProvider.create(KogakuServicehiKetteiTsuchishoTan.class);
     }
 
     /**
@@ -177,7 +177,7 @@ public class ServiceNoKanribangouRendou2 {
      * @param 氏名 RString
      * @return JigyouKetteiTutisyoResult
      */
-    public JigyouKetteiTutisyoResult selectKougakuJigyouKetteiTutisyo(RString 文書番号,
+    public JigyouKetteiTutisyoResult editTsuchisho(RString 文書番号,
             FlexibleDate 発行日,
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
