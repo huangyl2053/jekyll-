@@ -84,12 +84,13 @@ public class JigyobunShikyugakuCalcPanelHandler {
         div.getDdlNendo().setDataSource(createDropDownList(処理年度, 定値_2014));
         div.getDdlNendo().setSelectedKey(RDate.getNowDate().getYear().minusYear(1).toDateString());
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
+        RDate システムタイム = RDate.getNowDate();
         RString 給付の種類 = DbBusinessConfig.get(ConfigNameDBC.事業分高額合算支給額計算_給付の種類,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+                システムタイム, SubGyomuCode.DBC介護給付);
         RString 不支給理由 = DbBusinessConfig.get(ConfigNameDBC.事業分高額合算支給額計算_不支給理由,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+                システムタイム, SubGyomuCode.DBC介護給付);
         RString 支払場所 = DbBusinessConfig.get(ConfigNameDBC.事業分高額合算支給額計算_支払方法,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+                システムタイム, SubGyomuCode.DBC介護給付);
         div.getKoshinNaiyo().getTxtKyufunoShurui().setValue(給付の種類);
         div.getKoshinNaiyo().getTxtFushikyuRiyu().setValue(不支給理由);
         div.getKoshinNaiyo().getTxtShiharaiBasho().setValue(支払場所);
@@ -124,7 +125,6 @@ public class JigyobunShikyugakuCalcPanelHandler {
         div.getChushutsuJoken().getTxtZenkaiUketoriYM().setDisabled(true);
         div.getChushutsuJoken().getTxtZenkaiUketoriDate().setDisabled(true);
         div.getChushutsuJoken().getTxtZenkaiUketoriTime().setDisabled(true);
-        div.getChushutsuJoken().getTxtUketoriYM().setDisabled(true);
         div.getChushutsuJoken().getTxtHihokenshaNo().setDisabled(false);
         div.getChushutsuJoken().getDdlNendo().setDisabled(false);
         div.getChushutsuJoken().getBtnHihokenshaSearch().setDisabled(false);
