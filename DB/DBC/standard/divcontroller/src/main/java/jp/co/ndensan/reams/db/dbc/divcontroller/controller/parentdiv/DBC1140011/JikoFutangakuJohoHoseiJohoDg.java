@@ -282,7 +282,7 @@ public class JikoFutangakuJohoHoseiJohoDg {
         KogakuGassanJikoFutanGaku result = ViewStateHolder.get(
                 ViewStateKeys.高額合算自己負担額, KogakuGassanJikoFutanGaku.class);
         result = handler.編集処理対象から画面(result);
-        RString 平成年度
+        RString 平成年度;
         RDate 対象年度 = div.getJikoFutangakuHoseiDetail().getTxtTaishouNendo().getValue();
         if (対象年度.getYear().getYearValue() == NENDO2008) {
             平成年度 = 平成２０年度;
