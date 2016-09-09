@@ -672,14 +672,17 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             div.getRadGappeiShichoson().setDisplayNone(true);
             div.getRadKoikiRengo().setDisplayNone(true);
             div.getBtnShichosonSelect().setDisplayNone(true);
+            if (is合併あり) {
+                div.getRadGappeiShichoson().setDisplayNone(false);
+                div.getBtnShichosonSelect().setDisplayNone(false);
+                div.getRadKoikiRengo().setDisplayNone(true);
+                div.getBtnShichosonSelect().setDisabled(true);
+                div.getRadGappeiShichoson().setDisabled(true);
+            }
         } else if (is広域) {
             div.getRadGappeiShichoson().setDisplayNone(true);
             div.getBtnShichosonSelect().setDisabled(true);
             div.getRadKoikiRengo().setDisabled(true);
-        } else if (is合併あり) {
-            div.getRadKoikiRengo().setDisplayNone(true);
-            div.getBtnShichosonSelect().setDisabled(true);
-            div.getRadGappeiShichoson().setDisabled(true);
         }
     }
 
