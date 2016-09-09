@@ -48,36 +48,36 @@ public class ShiharaiHohoHenkoKanriMybatisParameter implements IMyBatisParameter
     private boolean is登録者選択_5;
     private boolean is登録者選択_6;
 
-    private boolean is２号差止予告登録者の選択_0;
-    private boolean is２号差止予告登録者の選択_1;
-    private boolean is２号差止予告登録者の選択_2;
-    private boolean is２号差止予告登録者の選択_3;
-    private boolean is２号差止予告登録者の選択_4;
+    private boolean is2号差止予告登録者の選択_0;
+    private boolean is2号差止予告登録者の選択_1;
+    private boolean is2号差止予告登録者の選択_2;
+    private boolean is2号差止予告登録者の選択_3;
+    private boolean is2号差止予告登録者の選択_4;
 
-    private boolean is２号差止登録者の選択_0;
-    private boolean is２号差止登録者の選択_1;
-    private boolean is２号差止登録者の選択_2;
-    private boolean is２号差止登録者の選択_3;
+    private boolean is2号差止登録者の選択_0;
+    private boolean is2号差止登録者の選択_1;
+    private boolean is2号差止登録者の選択_2;
+    private boolean is2号差止登録者の選択_3;
 
-    private boolean is１号償還予告登録者の選択_0;
-    private boolean is１号償還予告登録者の選択_1;
-    private boolean is１号償還予告登録者の選択_2;
-    private boolean is１号償還予告登録者の選択_3;
-    private boolean is１号償還予告登録者の選択_4;
+    private boolean is1号償還予告登録者の選択_0;
+    private boolean is1号償還予告登録者の選択_1;
+    private boolean is1号償還予告登録者の選択_2;
+    private boolean is1号償還予告登録者の選択_3;
+    private boolean is1号償還予告登録者の選択_4;
 
-    private boolean is１号償還決定登録者の選択_0;
-    private boolean is１号償還決定登録者の選択_1;
-    private boolean is１号償還決定登録者の選択_2;
-    private boolean is１号償還決定登録者の選択_3;
-    private boolean is１号償還決定登録者の選択_4;
+    private boolean is1号償還決定登録者の選択_0;
+    private boolean is1号償還決定登録者の選択_1;
+    private boolean is1号償還決定登録者の選択_2;
+    private boolean is1号償還決定登録者の選択_3;
+    private boolean is1号償還決定登録者の選択_4;
 
-    private boolean is１号償還決定登録者_差止中あり者のみの選択_0;
-    private boolean is１号償還決定登録者_差止中あり者のみの選択_1;
-    private boolean is１号償還決定登録者_差止中あり者のみの選択_2;
+    private boolean is1号償還決定登録者_差止中あり者のみの選択_0;
+    private boolean is1号償還決定登録者_差止中あり者のみの選択_1;
+    private boolean is1号償還決定登録者_差止中あり者のみの選択_2;
 
-    private boolean is１号償還決定登録者_保険料控除あり者のみの選択_0;
-    private boolean is１号償還決定登録者_保険料控除あり者のみの選択_1;
-    private boolean is１号償還決定登録者_保険料控除あり者のみの選択_2;
+    private boolean is1号償還決定登録者_保険料控除あり者のみの選択_0;
+    private boolean is1号償還決定登録者_保険料控除あり者のみの選択_1;
+    private boolean is1号償還決定登録者_保険料控除あり者のみの選択_2;
 
     /**
      * コンストラクタです。
@@ -141,75 +141,75 @@ public class ShiharaiHohoHenkoKanriMybatisParameter implements IMyBatisParameter
 
     private void set差止予告登録者２号の選択について(RString 差止予告登録者２号の選択) {
         if (選択_0.equals(差止予告登録者２号の選択)) {
-            is２号差止予告登録者の選択_0 = true;
+            is2号差止予告登録者の選択_0 = true;
         } else if (選択_1.equals(差止予告登録者２号の選択)) {
-            is２号差止予告登録者の選択_1 = true;
+            is2号差止予告登録者の選択_1 = true;
         } else if (選択_2.equals(差止予告登録者２号の選択)) {
-            is２号差止予告登録者の選択_2 = true;
+            is2号差止予告登録者の選択_2 = true;
         } else if (選択_3.equals(差止予告登録者２号の選択)) {
-            is２号差止予告登録者の選択_3 = true;
+            is2号差止予告登録者の選択_3 = true;
         } else if (選択_4.equals(差止予告登録者２号の選択)) {
-            is２号差止予告登録者の選択_4 = true;
+            is2号差止予告登録者の選択_4 = true;
         }
     }
 
     private void set差止登録者２号の選択について(RString 差止登録者２号の選択) {
         if (選択_0.equals(差止登録者２号の選択)) {
-            is２号差止登録者の選択_0 = true;
+            is2号差止登録者の選択_0 = true;
         } else if (選択_1.equals(差止登録者２号の選択)) {
-            is２号差止登録者の選択_1 = true;
+            is2号差止登録者の選択_1 = true;
         } else if (選択_2.equals(差止登録者２号の選択)) {
-            is２号差止登録者の選択_2 = true;
+            is2号差止登録者の選択_2 = true;
         } else if (選択_3.equals(差止登録者２号の選択)) {
-            is２号差止登録者の選択_3 = true;
+            is2号差止登録者の選択_3 = true;
         }
     }
 
     private void set償還予告登録者１号の選択について(RString 償還予告登録者１号の選択) {
         if (選択_0.equals(償還予告登録者１号の選択)) {
-            is１号償還予告登録者の選択_0 = true;
+            is1号償還予告登録者の選択_0 = true;
         } else if (選択_1.equals(償還予告登録者１号の選択)) {
-            is１号償還予告登録者の選択_1 = true;
+            is1号償還予告登録者の選択_1 = true;
         } else if (選択_2.equals(償還予告登録者１号の選択)) {
-            is１号償還予告登録者の選択_2 = true;
+            is1号償還予告登録者の選択_2 = true;
         } else if (選択_3.equals(償還予告登録者１号の選択)) {
-            is１号償還予告登録者の選択_3 = true;
+            is1号償還予告登録者の選択_3 = true;
         } else if (選択_4.equals(償還予告登録者１号の選択)) {
-            is１号償還予告登録者の選択_4 = true;
+            is1号償還予告登録者の選択_4 = true;
         }
     }
 
     private void set償還決定登録者１号の選択について(RString 償還決定登録者１号の選択) {
         if (選択_0.equals(償還決定登録者１号の選択)) {
-            is１号償還決定登録者の選択_0 = true;
+            is1号償還決定登録者の選択_0 = true;
         } else if (選択_1.equals(償還決定登録者１号の選択)) {
-            is１号償還決定登録者の選択_1 = true;
+            is1号償還決定登録者の選択_1 = true;
         } else if (選択_2.equals(償還決定登録者１号の選択)) {
-            is１号償還決定登録者の選択_2 = true;
+            is1号償還決定登録者の選択_2 = true;
         } else if (選択_3.equals(償還決定登録者１号の選択)) {
-            is１号償還決定登録者の選択_3 = true;
+            is1号償還決定登録者の選択_3 = true;
         } else if (選択_4.equals(償還決定登録者１号の選択)) {
-            is１号償還決定登録者の選択_4 = true;
+            is1号償還決定登録者の選択_4 = true;
         }
     }
 
     private void set償還決定登録者１号_差止中あり者のみの選択について(RString 償還決定登録者１号_差止中あり者のみの選択) {
         if (選択_0.equals(償還決定登録者１号_差止中あり者のみの選択)) {
-            is１号償還決定登録者_差止中あり者のみの選択_0 = true;
+            is1号償還決定登録者_差止中あり者のみの選択_0 = true;
         } else if (選択_1.equals(償還決定登録者１号_差止中あり者のみの選択)) {
-            is１号償還決定登録者_差止中あり者のみの選択_1 = true;
+            is1号償還決定登録者_差止中あり者のみの選択_1 = true;
         } else if (選択_2.equals(償還決定登録者１号_差止中あり者のみの選択)) {
-            is１号償還決定登録者_差止中あり者のみの選択_2 = true;
+            is1号償還決定登録者_差止中あり者のみの選択_2 = true;
         }
     }
 
     private void set償還決定登録者１号_保険料控除あり者のみの選択について(RString 償還決定登録者１号_保険料控除あり者のみの選択) {
         if (選択_0.equals(償還決定登録者１号_保険料控除あり者のみの選択)) {
-            is１号償還決定登録者_保険料控除あり者のみの選択_0 = true;
+            is1号償還決定登録者_保険料控除あり者のみの選択_0 = true;
         } else if (選択_1.equals(償還決定登録者１号_保険料控除あり者のみの選択)) {
-            is１号償還決定登録者_保険料控除あり者のみの選択_1 = true;
+            is1号償還決定登録者_保険料控除あり者のみの選択_1 = true;
         } else if (選択_2.equals(償還決定登録者１号_保険料控除あり者のみの選択)) {
-            is１号償還決定登録者_保険料控除あり者のみの選択_2 = true;
+            is1号償還決定登録者_保険料控除あり者のみの選択_2 = true;
         }
     }
 

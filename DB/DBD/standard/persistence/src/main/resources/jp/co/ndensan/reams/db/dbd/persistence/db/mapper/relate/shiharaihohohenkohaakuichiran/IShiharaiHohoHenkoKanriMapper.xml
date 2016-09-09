@@ -89,50 +89,50 @@
         </if>
 
         <if test="is登録者選択_1">
-            <if test="is２号差止予告登録者の選択_0">
+            <if test="is2号差止予告登録者の選択_0">
                 AND 支払方法変更."kanriKubun"  = '1'
                 AND 支払方法変更."torokuKubun" = '01'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
             </if>
-            <if test="is２号差止予告登録者の選択_1">
+            <if test="is2号差止予告登録者の選択_1">
                 AND 支払方法変."kanriKubun"  = '1'
                 AND 支払方法変更."torokuKubun" = '01'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
                 AND (支払方法変更."yokoku_TsuchiHakkoYMD" IS NULL OR 支払方法変更."yokoku_TsuchiHakkoYMD" = '')
                 AND 支払方法変更."yokoku_TsuchiSaiHakkoFlag"  =  true
             </if>
-            <if test="is２号差止予告登録者の選択_2">
+            <if test="is2号差止予告登録者の選択_2">
                 AND 支払方法変."kanriKubun"  = '1'
                 AND 支払方法変更."torokuKubun" = '01'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
                 AND (支払方法変更."shuryoKubun" IS NULL OR 支払方法変更."shuryoKubun" = '')
             </if>
-            <if test="is２号差止予告登録者の選択_3">
+            <if test="is2号差止予告登録者の選択_3">
                 AND 支払方法変更."torokuKubun" = '01'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
                 AND (支払方法変更."shuryoKubun" IS NOT NULL AND 支払方法変更."shuryoKubun" != '')
             </if>
         </if>
         <if test="is登録者選択_2">
-            <if test="is２号差止登録者の選択_0">
+            <if test="is2号差止登録者の選択_0">
                 AND 支払方法変."kanriKubun"  = '1'
                 AND 支払方法変更."torokuKubun" = '02'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
             </if>
-            <if test="is２号差止登録者の選択_1">
+            <if test="is2号差止登録者の選択_1">
                 AND 支払方法変."kanriKubun"  = '1'
                 AND 支払方法変更."torokuKubun" = '02'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
                 AND (支払方法変更."yokoku_TsuchiHakkoYMD" IS NULL OR 支払方法変更."yokoku_TsuchiHakkoYMD" = '')
                 AND 支払方法変更."yokoku_TsuchiSaiHakkoFlag"  = true
             </if>
-            <if test="is２号差止登録者の選択_2">
+            <if test="is2号差止登録者の選択_2">
                 AND 支払方法変."kanriKubun"  = '1'
                 AND 支払方法変更."torokuKubun" = '02'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
                 AND (支払方法変更."shuryoKubun" IS NULL OR 支払方法変更."shuryoKubun" = '')
             </if>
-            <if test="is２号差止登録者の選択_3">
+            <if test="is2号差止登録者の選択_3">
                 AND 支払方法変."kanriKubun"  = '1'
                 AND 支払方法変更."torokuKubun" = '02'
                 AND 支払方法変更."logicalDeletedFlag"  = false
@@ -140,24 +140,24 @@
             </if>
         </if>
         <if test="is登録者選択_3">
-            <if test="is１号償還予告登録者の選択_0">
+            <if test="is1号償還予告登録者の選択_0">
                 AND 支払方法変."kanriKubun"  = '2'
                 AND 支払方法変更."torokuKubun" = '11'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
             </if>
-            <if test="is１号償還予告登録者の選択_1">
+            <if test="is1号償還予告登録者の選択_1">
                 AND 支払方法変."kanriKubun"  = '2'
                 AND 支払方法変更."torokuKubun" = '11'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
                 AND (支払方法変更."yokoku_TsuchiHakkoYMD" IS NULL OR 支払方法変更."yokoku_TsuchiHakkoYMD" = '')
             </if>
-            <if test="is１号償還予告登録者の選択_2">
+            <if test="is1号償還予告登録者の選択_2">
                 AND 支払方法変."kanriKubun"  = '2'
                 AND 支払方法変更."torokuKubun" = '11'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
                 AND (支払方法変更."shuryoKubun" IS NULL OR 支払方法変更."shuryoKubun" = '')
             </if>
-            <if test="is１号償還予告登録者の選択_3">
+            <if test="is1号償還予告登録者の選択_3">
                 AND 支払方法変."kanriKubun"  = '2'
                 AND 支払方法変更."torokuKubun" = '11'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
@@ -166,7 +166,7 @@
                 AND 収納情報."nokigenYMD" <![CDATA[<=]]> #{基準日}
                 AND 収納情報."choteigaku" <![CDATA[>]]> 収入."shunyugaku"
             </if>
-            <if test="is１号償還予告登録者の選択_4">
+            <if test="is1号償還予告登録者の選択_4">
                 AND 支払方法変."kanriKubun"  = '2'
                 AND 支払方法変更."torokuKubun" = '11'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
@@ -174,24 +174,24 @@
             </if>
         </if>
         <if test="is登録者選択_4">
-            <if test="is１号償還決定登録者の選択_0">
+            <if test="is1号償還決定登録者の選択_0">
                 AND 支払方法変."kanriKubun"  = '2'
                 AND 支払方法変更."torokuKubun" = '12'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
             </if>
-            <if test="is１号償還決定登録者の選択_1">
+            <if test="is1号償還決定登録者の選択_1">
                 AND 支払方法変."kanriKubun"  = '2'
                 AND 支払方法変更."torokuKubun" = '12'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
                 AND (支払方法変更."yokoku_TsuchiHakkoYMD" IS NULL OR 支払方法変更."yokoku_TsuchiHakkoYMD" = '')
             </if>
-            <if test="is１号償還決定登録者の選択_2">
+            <if test="is1号償還決定登録者の選択_2">
                 AND 支払方法変."kanriKubun"  = '2'
                 AND 支払方法変更."torokuKubun" = '12'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
                 AND (支払方法変更."shuryoKubun" IS NULL OR 支払方法変更."shuryoKubun" = '')
             </if>
-            <if test="is１号償還決定登録者の選択_3">
+            <if test="is1号償還決定登録者の選択_3">
                 AND 支払方法変."kanriKubun"  = '2'
                 AND 支払方法変更."torokuKubun" = '12'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
@@ -200,7 +200,7 @@
                 AND 収納情報."nokigenYMD" <![CDATA[<=]]> #{基準日}
                 AND 収納情報."choteigaku" <![CDATA[>=]]> 収入.収入額
             </if>
-            <if test="is１号償還決定登録者の選択_4">
+            <if test="is1号償還決定登録者の選択_4">
                 AND 支払方法変."kanriKubun"  = '2'
                 AND 支払方法変更."torokuKubun" = '12'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
@@ -208,7 +208,7 @@
             </if>
         </if>
         <if test="is登録者選択_5">
-            <if test="is１号償還決定登録者_差止中あり者のみの選択_0">
+            <if test="is1号償還決定登録者_差止中あり者のみの選択_0">
                 AND 支払方法変."kanriKubun"  = '2'
                 AND 支払方法変更."torokuKubun" = '12'
                 AND 支払方法変更."logicalDeletedFlag"  = false
@@ -217,7 +217,7 @@
                 AND 支払方法変更差止."sashitomeKojoJotaiKubun" = '01'
                 AND (支払方法変更差止."sashitomeKojoNo" IS NOT NULL AND 支払方法変更差止."sashitomeKojoNo" != '')
             </if>
-            <if test="is１号償還決定登録者_差止中あり者のみの選択_1">
+            <if test="is1号償還決定登録者_差止中あり者のみの選択_1">
                 AND 支払方法変."kanriKubun"  = '2'
                 AND 支払方法変更."torokuKubun" = '12'
                 AND 支払方法変更."logicalDeletedFlag"  = false
@@ -227,7 +227,7 @@
                 AND (支払方法変更差止."sashitomeKojoNo" IS NULL OR 支払方法変更差止."sashitomeKojoNo" = '')
                 AND (支払方法変更差止."kojo_TsuchiHakkoYMD" = '' OR 支払方法変更差止."kojo_TsuchiHakkoYMD" IS NULL)
             </if>
-            <if test="is１号償還決定登録者_差止中あり者のみの選択_2">
+            <if test="is1号償還決定登録者_差止中あり者のみの選択_2">
                 支払方法変."kanriKubun"  = '2' AND
                 支払方法変更."torokuKubun" = '12' AND
                 支払方法変更."logicalDeletedFlag"  = false AND
@@ -241,7 +241,7 @@
             </if>
         </if>
         <if test="is登録者選択_6">
-            <if test="is１号償還決定登録者_保険料控除あり者のみの選択_0">
+            <if test="is1号償還決定登録者_保険料控除あり者のみの選択_0">
                 AND 支払方法変."kanriKubun"  = '2'
                 AND 支払方法変更."torokuKubun" = '12'
                 AND 支払方法変更."logicalDeletedFlag"  = false
@@ -250,7 +250,7 @@
                 AND 支払方法変更差止."sashitomeKojoJotaiKubun" = '01'
                 AND (支払方法変更差止."sashitomeKojoNo" IS null or 支払方法変更差止."sashitomeKojoNo" = '')
             </if>
-            <if test="is１号償還決定登録者_保険料控除あり者のみの選択_1">
+            <if test="is1号償還決定登録者_保険料控除あり者のみの選択_1">
                 AND 支払方法変."kanriKubun"  = '2'
                 AND 支払方法変更."torokuKubun" = '12'
                 AND 支払方法変更."logicalDeletedFlag"  = false
@@ -260,7 +260,7 @@
                 AND (支払方法変更差止."sashitomeKojoNo" IS NULL or 支払方法変更差止."sashitomeKojoNo" = '')
                 AND (支払方法変更差止."kojo_TsuchiHakkoYMD" =' ' or 支払方法変更差止."kojo_TsuchiHakkoYMD" is null)
             </if>
-            <if test="is１号償還決定登録者_保険料控除あり者のみの選択_2">
+            <if test="is1号償還決定登録者_保険料控除あり者のみの選択_2">
                 AND 支払方法変."kanriKubun"  = '2'
                 AND 支払方法変更."torokuKubun" = '12'
                 AND 支払方法変更."logicalDeletedFlag"  = false
