@@ -22,7 +22,7 @@ public class ShotokuDankaibetsuHihokenshaSuIchiran {
     /**
      * 画面初期化のメソッドです。
      *
-     * @param div ShinNendoKanriJohoSakuseiDiv
+     * @param div ShotokuDankaibetsuHihokenshaSuIchiranDiv
      * @return ResponseData
      */
     public ResponseData<ShotokuDankaibetsuHihokenshaSuIchiranDiv> onLoad(ShotokuDankaibetsuHihokenshaSuIchiranDiv div) {
@@ -52,34 +52,6 @@ public class ShotokuDankaibetsuHihokenshaSuIchiran {
         return ResponseData.of(div).respond();
     }
 
-    //TODO QA.1203
-    /**
-     * btnShichosonSelectのonOkClose事件です。
-     *
-     * @param div ShotokuDankaibetsuHihokenshaSuIchiranDiv
-     * @return ResponseData
-     */
-    /* public ResponseData<ShotokuDankaibetsuHihokenshaSuIchiranDiv> onOkClose_btnShichosonSelect(ShotokuDankaibetsuHihokenshaSuIchiranDiv div) {
-     getHandler(div).onOkCloseShichosonSelect();
-     return ResponseData.of(div).respond();
-     }*/
-    //TODO QA.1203
-    /**
-     * btnShichosonSelectのonBeforeOpenDialog事件です。
-     *
-     * @param div ShotokuDankaibetsuHihokenshaSuIchiranDiv
-     * @return ResponseData
-     */
-    /*public ResponseData<ShotokuDankaibetsuHihokenshaSuIchiranDiv> onBeforeOpenDialog_btnSelect(ShotokuDankaibetsuHihokenshaSuIchiranDiv div) {
-     getHandler(div).onBeforeOpenDialog();
-     return ResponseData.of(div).respond();
-     }*/
-    /**
-     * chkChosaJokenのonChange事件です。
-     *
-     * @param div ShotokuDankaibetsuHihokenshaSuIchiranDiv
-     * @return ResponseData
-     */
     public ResponseData<ShotokuDankaibetsuHihokenshaSuIchiranDiv> onChange_chkChosaJoken(ShotokuDankaibetsuHihokenshaSuIchiranDiv div) {
         getHandler(div).onChangeChosaJoken();
         return ResponseData.of(div).respond();

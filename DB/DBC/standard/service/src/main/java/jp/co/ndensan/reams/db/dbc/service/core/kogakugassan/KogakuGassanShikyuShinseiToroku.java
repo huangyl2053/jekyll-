@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseisho;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseishoKanyureki;
+import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShinseishoDataResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShinseishoHoji;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShinseishoKanyurekiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShinseishoResult;
@@ -23,12 +24,14 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3068KogakuGassanShinse
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3069KogakuGassanShinseishoKanyurekiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanshikyushinseitoroku.IKogakuGassanShikyuShinseiTorokuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishoshatoroku.SetaiShotokuKazeiHantei;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -43,10 +46,13 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.Saiban;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -200,19 +206,64 @@ public class KogakuGassanShikyuShinseiToroku {
      * 高額合算支給申請書登録更新処理です。
      *
      * @param 高額合算申請書保持 KogakuGassanShinseishoHoji
+     * @param 画面項目 KogakuGassanShinseishoDataResult
      * @return boolean
      */
     @Transaction
-    public boolean getKogakuGassanShikyuShinseishoTorokuKoshin(KogakuGassanShinseishoHoji 高額合算申請書保持) {
+    public boolean getKogakuGassanShikyuShinseishoTorokuKoshin(
+            KogakuGassanShinseishoHoji 高額合算申請書保持, KogakuGassanShinseishoDataResult 画面項目) {
+        RString 整理番号New = RString.EMPTY;
+        boolean 整理番号Empty = false;
+        if (RString.isNullOrEmpty(高額合算申請書保持.get整理番号())) {
+            整理番号Empty = true;
+            整理番号New = Saiban.get(SubGyomuCode.DBC介護給付,
+                    SaibanHanyokeyName.支給申請書整理番号.getコード()).nextString();
+        }
         for (KogakuGassanShinseishoResult item : 高額合算申請書保持.get高額合算申請書()) {
-            if (追加.equals(item.get状態()) || 修正.equals(item.get状態())
-                    || 削除.equals(item.get状態())) {
+            if (追加.equals(item.get状態())) {
+                DbT3068KogakuGassanShinseishoEntity entity = item.get高額合算申請書().toEntity();
+                if (整理番号Empty) {
+                    entity.setSeiriNo(整理番号New);
+                }
+                entity.setState(EntityDataState.Added);
+                高額合算申請書Dac.save(entity);
+            } else if (修正.equals(item.get状態())) {
+                DbT3068KogakuGassanShinseishoEntity entity = item.get高額合算申請書().toEntity();
+                高額合算申請書Dac.save(item.get高額合算申請書().deleted().toEntity());
+                if (整理番号Empty) {
+                    entity.setSeiriNo(整理番号New);
+                }
+                entity.setHihokenshaNo(画面項目.get被保険者番号());
+                entity.setTaishoNendo(画面項目.get対象年度());
+                entity.setHokenshaNo(画面項目.get保険者番号());
+                entity.setRirekiNo(画面項目.get履歴番号().add(Decimal.ONE));
+                entity.setState(EntityDataState.Added);
+                高額合算申請書Dac.save(entity);
+            } else if (削除.equals(item.get状態())) {
                 高額合算申請書Dac.save(item.get高額合算申請書().toEntity());
             }
         }
         for (KogakuGassanShinseishoKanyurekiResult item : 高額合算申請書保持.get加入歴()) {
-            if (追加.equals(item.get状態()) || 修正.equals(item.get状態())
-                    || 削除.equals(item.get状態())) {
+            if (追加.equals(item.get状態())) {
+                DbT3069KogakuGassanShinseishoKanyurekiEntity entity = item.get高額合算申請書加入歴().toEntity();
+                entity.setSeiriNo(整理番号New);
+                entity.setState(EntityDataState.Added);
+                高額合算申請書加入歴Dac.save(entity);
+            } else if (修正.equals(item.get状態())) {
+                DbT3069KogakuGassanShinseishoKanyurekiEntity entity = item.get高額合算申請書加入歴().toEntity();
+                RString 加入履歴番号 = getMaxKanyuRirekiNo(entity);
+                高額合算申請書加入歴Dac.save(item.get高額合算申請書加入歴().deleted().toEntity());
+                if (整理番号Empty) {
+                    entity.setSeiriNo(整理番号New);
+                }
+                entity.setHihokenshaNo(高額合算申請書保持.get被保険者番号());
+                entity.setTaishoNendo(高額合算申請書保持.get対象年度());
+                entity.setHokenshaNo(高額合算申請書保持.get保険者番号());
+                entity.setRirekiNo(高額合算申請書保持.get履歴番号().intValue());
+                entity.setKanyurekiNo(加入履歴番号);
+                entity.setState(EntityDataState.Added);
+                高額合算申請書加入歴Dac.save(entity);
+            } else if (削除.equals(item.get状態())) {
                 高額合算申請書加入歴Dac.save(item.get高額合算申請書加入歴().toEntity());
             }
         }
@@ -304,5 +355,14 @@ public class KogakuGassanShikyuShinseiToroku {
             return null;
         }
         return ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名PSMlist.get(0));
+    }
+
+    private RString getMaxKanyuRirekiNo(DbT3069KogakuGassanShinseishoKanyurekiEntity entity) {
+        return 高額合算申請書加入歴Dac.selectMaxKanyuRirekiNo(
+                entity.getHihokenshaNo(),
+                entity.getTaishoNendo(),
+                entity.getHokenshaNo(),
+                entity.getSeiriNo(),
+                entity.getRirekiNo()).getKanyurekiNo();
     }
 }
