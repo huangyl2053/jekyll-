@@ -69,6 +69,7 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriBodyEditor
     private RString ワーク不支給区分 = 区分_0;
     private static final RString 店番 = new RString("店番");
     private static final RString 口座種別 = new RString("口座種別");
+    private static final RString 口座番号 = new RString("口座番号");
     private static final RString ゆうちょ銀行店名表示 = new RString("ゆうちょ銀行店名表示");
     private static final RString 持ち物内容文言１ = new RString("持ち物内容文言１");
     private static final RString 持ち物内容文言2 = new RString("持ち物内容文言2");
@@ -196,7 +197,7 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriBodyEditor
                 source.hihoNo10 = 被保険者番号.substring(INT_9, INT_10);
             }
         }
-        source.bangoTitle = entity.get口座番号();
+        source.bangoTitle = 口座番号;
         source.sihaYoYmd = getパターン12(entity.get支払予定日());
         source.tsuchibun2 = entity.get文書2();
         source.tsuchibun3 = entity.get文書3();
