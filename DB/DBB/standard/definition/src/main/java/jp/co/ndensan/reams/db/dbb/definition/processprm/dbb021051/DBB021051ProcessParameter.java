@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.processprm.dbb021051;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb021051.DBB021051MyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +23,8 @@ import lombok.Setter;
 @Setter
 public class DBB021051ProcessParameter implements IBatchProcessParameter {
 
+    private static final RString FULLYEAR = new RString("0000");
+    private static final RString FULLMONTH = new RString("00");
     private RString 抽出対象者;
     private RYearMonth 基準年月;
     private RString 資格区分;
@@ -32,27 +34,42 @@ public class DBB021051ProcessParameter implements IBatchProcessParameter {
     private RString 被保番号表示;
     private RString 宛先住所設定;
     private RString 出力順ID;
-    private List<RString> 出力順設定リスト;
     private RString 業務コード;
+    private RString 市町村指定に市町村コード;
+    private RString 市町村名称;
+    private RString 都道府県名称;
+    private RString 郡名称;
 
     /**
      * DBB021051MyBatisParameterのメソッドです。
      *
+     * @param 出力順 RString
      * @return DBB021051MyBatisParameter
      */
-    public DBB021051MyBatisParameter toDBB021051MyBatisParameter() {
+    public DBB021051MyBatisParameter toDBB021051MyBatisParameter(RString 出力順) {
         DBB021051MyBatisParameter param = new DBB021051MyBatisParameter();
         param.set抽出対象者(抽出対象者);
-        param.set基準年月(基準年月);
         param.set資格区分(資格区分);
         param.set市町村指定(市町村指定);
+        param.set基準年月の年(formatYearFull(基準年月.getYearValue()));
+        param.set基準年月の月(formatMonthFull(基準年月.getMonthValue()));
         param.set最優先住所(最優先住所);
-        param.set敬称(敬称);
-        param.set被保番号表示(被保番号表示);
-        param.set宛先住所設定(宛先住所設定);
-        param.set出力順ID(出力順ID);
-        param.set出力順設定リスト(出力順設定リスト);
-        param.set業務コード(業務コード);
+        param.set出力順(出力順);
         return param;
     }
+
+    private RString formatYearFull(Integer year) {
+        if (year == null) {
+            return RString.EMPTY;
+        }
+        return new RString(new Decimal(year).toString(FULLYEAR.toString()));
+    }
+
+    private RString formatMonthFull(Integer month) {
+        if (month == null) {
+            return RString.EMPTY;
+        }
+        return new RString(new Decimal(month).toString(FULLMONTH.toString()));
+    }
+
 }

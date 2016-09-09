@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021051;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb021051.DBB021051ProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -43,8 +42,6 @@ public class DBB021051_AtenaSealSakuseiParameter extends BatchParameterBase {
     private RString 宛先住所設定;
     @BatchParameter(key = "出力順ID", name = "出力順ID")
     private RString 出力順ID;
-    @BatchParameter(key = "出力順設定リスト", name = "出力順設定リスト")
-    private List<RString> 出力順設定リスト;
     @BatchParameter(key = "業務コード", name = "業務コード")
     private SubGyomuCode 業務コード;
 
@@ -64,7 +61,6 @@ public class DBB021051_AtenaSealSakuseiParameter extends BatchParameterBase {
         param.set被保番号表示(被保番号表示);
         param.set宛先住所設定(宛先住所設定);
         param.set出力順ID(出力順ID);
-        param.set出力順設定リスト(出力順設定リスト);
         param.set業務コード(業務コード.getColumnValue());
         return param;
     }
