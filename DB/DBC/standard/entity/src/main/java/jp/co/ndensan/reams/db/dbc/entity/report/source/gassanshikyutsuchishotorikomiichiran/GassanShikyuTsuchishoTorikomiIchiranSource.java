@@ -75,6 +75,13 @@ public class GassanShikyuTsuchishoTorikomiIchiranSource implements IReportSource
     public RString listLower_5;
     @ReportItem(name = "listLower_6", length = 38, order = 29)
     public RString listLower_6;
+    public RString yubinNo;
+    public RString choikiCode;
+    public RString gyoseikuCode;
+    public RString shimei50onKana;
+    public RString shichosonCode;
+    public RString taishoNendo;
+    public RString shikyuKubunCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
