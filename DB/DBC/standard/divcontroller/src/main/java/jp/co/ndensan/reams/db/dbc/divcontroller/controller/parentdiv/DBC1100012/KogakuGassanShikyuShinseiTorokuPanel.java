@@ -37,8 +37,9 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
     private static final RString 一 = new RString("1");
     private static final RString 二 = new RString("2");
     private static final int 十一 = 11;
-    private static final int 十六 = 16;
+    private static final int 十七 = 17;
     private static final RString 高額合算支給申請書訂正2 = new RString("DBCMN61004");
+    private static final RString 照会 = new RString("照会");
 
     /**
      * get申請状態のメソッドです。
@@ -200,17 +201,18 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
      * @return ResponseData
      */
     public ResponseData<KogakuGassanShikyuShinseiTorokuPanelDiv> onSelect(KogakuGassanShikyuShinseiTorokuPanelDiv div) {
-        int i = 0;
         if (UrControlDataFactory.createInstance().getMenuID().equals(高額合算支給申請書訂正2)
                 && !div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult()
                 .getClickedItem().getTxtSoshin().getValue().isEmpty()
-                && !ResponseHolder.isReRequest()) {
+                && !new RString(DbcQuestionMessages.高額合算支給申請検索_訂正.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && !new RString(DbcQuestionMessages.高額合算支給申請検索_処理不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.高額合算支給申請検索_訂正.getMessage()).respond();
         }
         if (new RString(DbcQuestionMessages.高額合算支給申請検索_訂正.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            i++;
             return ResponseData.of(div).forwardWithEventName(DBC1100012TransitionEventName.支給申請登録へ).respond();
         }
         if ((div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult()
@@ -219,10 +221,10 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
                 .getClickedItem().getTxtShinseiKubun().equals(二))
                 && !div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult()
                 .getClickedItem().getTxtSoshin().getValue().isEmpty()) {
-            i++;
             return ResponseData.of(div).forwardWithEventName(DBC1100012TransitionEventName.支給申請登録へ).respond();
         }
-        if (i == 0 && !ResponseHolder.isReRequest()) {
+        if (!new RString(DbcQuestionMessages.高額合算支給申請検索_訂正.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.高額合算支給申請検索_処理不可.getMessage()).respond();
         }
         if (new RString(DbcQuestionMessages.高額合算支給申請検索_処理不可.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
@@ -232,12 +234,12 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
             dataResult.set被保険者番号(new HihokenshaNo(row.getTxtHihokenshaNo()));
             dataResult.set対象年度(new FlexibleYear(row.getTxtTaishoNendo()));
             dataResult.set保険者番号(new HokenshaNo(row.getTxtHokenshaNo()));
-            if (row.getTxtSeiriNo() != null) {
-                dataResult.set整理番号(row.getTxtSeiriNo().substring(十一, 十六));
+            if (row.getTxtShikyuShinseishoNo() != null) {
+                dataResult.set整理番号(row.getTxtShikyuShinseishoNo().substring(十一, 十七));
             }
             dataResult.set履歴番号(new Decimal(row.getTxtRirekiNo().toString()));
             ViewStateHolder.put(ViewStateKeys.高額介護申請書用データ, dataResult);
-            ViewStateHolder.put(ViewStateKeys.照会モード, null);
+            ViewStateHolder.put(ViewStateKeys.照会モード, 照会);
             return ResponseData.of(div).forwardWithEventName(DBC1100012TransitionEventName.支給申請登録へ).respond();
         }
         return ResponseData.of(div).respond();
