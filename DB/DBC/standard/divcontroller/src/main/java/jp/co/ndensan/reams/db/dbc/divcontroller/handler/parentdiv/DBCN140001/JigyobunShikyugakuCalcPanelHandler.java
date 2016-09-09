@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020070.DBC020070_JigyobunShikyugakuKeisanParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.config.ConfigKeysKokuhorenTorikomi;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN140001.JigyobunShikyugakuCalcPanelDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhorenInterfaceKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
@@ -20,7 +21,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -42,7 +42,6 @@ public class JigyobunShikyugakuCalcPanelHandler {
     private static final RString THREE = new RString("3");
     private static final RString TAISHOSHASEARCH = new RString("taishoshaSearch");
     private static final RString HIHOKENSHANOSHTEI = new RString("hihokenshaNoShitei");
-    private static final ReportId 帳票ID = new ReportId("DBC200204_GassanJigyobunShikyugakuKeisanKekkaIchiran");
     private static final int INT_SEVEN = 7;
     private static final FlexibleYear 定値_2014 = new FlexibleYear("2014");
 
@@ -83,7 +82,7 @@ public class JigyobunShikyugakuCalcPanelHandler {
         }
         div.getDdlNendo().setDataSource(createDropDownList(処理年度, 定値_2014));
         div.getDdlNendo().setSelectedKey(RDate.getNowDate().getYear().minusYear(1).toDateString());
-        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
+        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200204.getReportId());
         RDate システムタイム = RDate.getNowDate();
         RString 給付の種類 = DbBusinessConfig.get(ConfigNameDBC.事業分高額合算支給額計算_給付の種類,
                 システムタイム, SubGyomuCode.DBC介護給付);
