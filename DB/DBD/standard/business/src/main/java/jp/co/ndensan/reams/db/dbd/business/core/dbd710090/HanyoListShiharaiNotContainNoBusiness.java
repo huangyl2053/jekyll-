@@ -708,7 +708,7 @@ public class HanyoListShiharaiNotContainNoBusiness {
     }
 
     private RString edit要介護度(RString koroshoIfCode, RString code) {
-        if ((koroshoIfCode != null && !koroshoIfCode.isEmpty()) || (code != null && !code.isEmpty())) {
+        if ((koroshoIfCode != null && !koroshoIfCode.isEmpty()) && (code != null && !code.isEmpty())) {
             return YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(koroshoIfCode), code).getName();
         }
         return RString.EMPTY;
