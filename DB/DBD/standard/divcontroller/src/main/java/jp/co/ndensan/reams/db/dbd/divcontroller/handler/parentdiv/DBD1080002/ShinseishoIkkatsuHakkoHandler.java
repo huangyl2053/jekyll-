@@ -102,12 +102,8 @@ public class ShinseishoIkkatsuHakkoHandler {
         List<YMDHMS> バッチ処理日時リスト = new ArrayList<>();
         List<KeyValueDataSource> result = new ArrayList<>();
         List<ShinseishoHakkoTaishoshaHaakuBatch> 基準日時リスト = manager.select基準日時(減免減額種類);
-        YMDHMS バッチ処理日時 = new YMDHMS("00000000000000");
         for (ShinseishoHakkoTaishoshaHaakuBatch shi : 基準日時リスト) {
-            if (!バッチ処理日時.equals(shi.getバッチ処理日時())) {
-                バッチ処理日時リスト.add(shi.getバッチ処理日時());
-            }
-            バッチ処理日時 = shi.getバッチ処理日時();
+            バッチ処理日時リスト.add(shi.getバッチ処理日時());
         }
         for (int i = 0; i < バッチ処理日時リスト.size(); i++) {
             KeyValueDataSource keyValues = new KeyValueDataSource(new RString("key" + i), new RString(バッチ処理日時リスト.get(i).toString()));
