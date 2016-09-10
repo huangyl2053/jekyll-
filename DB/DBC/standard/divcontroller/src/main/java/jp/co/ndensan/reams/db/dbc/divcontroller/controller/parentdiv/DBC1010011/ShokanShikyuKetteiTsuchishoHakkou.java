@@ -69,7 +69,8 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
      */
     public ResponseData<ShokanShikyuKetteiTsuchishoHakkouDiv> onLoad(ShokanShikyuKetteiTsuchishoHakkouDiv div) {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        if (資格対象者 == null || 資格対象者.get被保険者番号() == null || 資格対象者.get被保険者番号().isEmpty()) {
+        if (資格対象者 == null || 資格対象者.get被保険者番号() == null
+                || 資格対象者.get被保険者番号().isEmpty() && !ResponseHolder.isReRequest()) {
             InformationMessage message = new InformationMessage(DbcInformationMessages.被保険者でないデータ.getMessage().getCode(),
                     DbcInformationMessages.被保険者でないデータ.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
@@ -78,7 +79,7 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ShikibetsuCode shikibetsuCode = 資格対象者.get識別コード();
         ViewStateHolder.put(ViewStateKeys.識別コード, shikibetsuCode);
-        ShokanShikyuKetteiTsuchishoHakkouFinder finder = new ShokanShikyuKetteiTsuchishoHakkouFinder();
+        ShokanShikyuKetteiTsuchishoHakkouFinder finder = ShokanShikyuKetteiTsuchishoHakkouFinder.createInstance();
         List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List = finder.get償還払支給判定結果(被保険者番号);
         ViewStateHolder.put(ViewStateKeys.償還払支給判定結果, (Serializable) 償還払支給判定結果List);
         List<JukyushaDaicho> 受給者台帳List = finder.get受給者台帳(被保険者番号);

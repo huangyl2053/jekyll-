@@ -39,7 +39,7 @@ public class ShokanShikyuKetteiTsuchishoHakkouFinder {
     /**
      * コンストラクタです。
      */
-    public ShokanShikyuKetteiTsuchishoHakkouFinder() {
+    ShokanShikyuKetteiTsuchishoHakkouFinder() {
         this.受給者台帳Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
         this.総合事業対象者Dac = InstanceProvider.create(DbT3105SogoJigyoTaishoshaDac.class);
         this.償還払支給判定結果Dac = InstanceProvider.create(DbT3036ShokanHanteiKekkaDac.class);
@@ -84,7 +84,7 @@ public class ShokanShikyuKetteiTsuchishoHakkouFinder {
     public List<SogoJigyoTaishosha> get総合事業対象者(HihokenshaNo 被保険者番号) {
         List<SogoJigyoTaishosha> 総合事業対象者List = new ArrayList<>();
         List<DbT3105SogoJigyoTaishoshaEntity> 総合事業対象者EntityList = 総合事業対象者Dac.get総合事業対象者(被保険者番号);
-        if (!総合事業対象者EntityList.isEmpty() && 総合事業対象者EntityList != null) {
+        if (総合事業対象者EntityList != null && !総合事業対象者EntityList.isEmpty()) {
             for (DbT3105SogoJigyoTaishoshaEntity entity : 総合事業対象者EntityList) {
                 entity.initializeMd5();
                 総合事業対象者List.add(new SogoJigyoTaishosha(entity));
@@ -103,7 +103,7 @@ public class ShokanShikyuKetteiTsuchishoHakkouFinder {
     public List<ShokanHanteiKekka> select償還払支給判定結果(HihokenshaNo 被保険者番号) {
         List<ShokanHanteiKekka> 償還払支給判定結果List = new ArrayList<>();
         List<DbT3036ShokanHanteiKekkaEntity> 総合事業対象者EntityList = 償還払支給判定結果Dac.select償還払支給判定結果(被保険者番号);
-        if (!総合事業対象者EntityList.isEmpty() && 総合事業対象者EntityList != null) {
+        if (総合事業対象者EntityList != null && !総合事業対象者EntityList.isEmpty()) {
             for (DbT3036ShokanHanteiKekkaEntity entity : 総合事業対象者EntityList) {
                 entity.initializeMd5();
                 償還払支給判定結果List.add(new ShokanHanteiKekka(entity));
