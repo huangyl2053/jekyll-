@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunkogakugassanshikyuket
 import jp.co.ndensan.reams.db.dbc.entity.euc.jigyobunkogakugassanshikyukettei.IJigyoBunKogakuGassanShikyuKetteiEUCEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
-import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
@@ -184,7 +184,7 @@ public class JigyoBunKogakuGassanShikyuKetteiProcess extends BatchProcessBase<Ji
         IOutputOrder outputOrder = finder.get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701021.getReportId(), processParameter.get出力順ID());
         RString 出力順 = RString.EMPTY;
         if (outputOrder != null) {
-            出力順 = ReportUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(
+            出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(
                     JigyoBunKogakuGassanShikyuKettei.ShutsuryokujunEnum.class, outputOrder), NUM5);
         }
         return 出力順;
