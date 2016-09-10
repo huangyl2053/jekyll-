@@ -90,7 +90,7 @@ public class HanyoListParamDBC7130001Handler {
             市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
         }
         parameter.set保険者コード(市町村コード);
-        parameter.set抽出区分(div.getChushutsuJokenPanel().getRadChushutsuKubun().getSelectedValue());
+        parameter.set抽出区分(div.getChushutsuJokenPanel().getRadChushutsuKubun().getSelectedKey());
         if (div.getChushutsuJokenPanel().getTxtTekiyoKaishiNengetsu().getFromValue() != null) {
             parameter.set適用開始年月From(div.getChushutsuJokenPanel().getTxtTekiyoKaishiNengetsu().getFromValue().toDateString());
         }
@@ -103,7 +103,7 @@ public class HanyoListParamDBC7130001Handler {
         if (div.getChushutsuJokenPanel().getTxtTekiyoShuryoNengetsu().getToValue() != null) {
             parameter.set適用終了年月To(div.getChushutsuJokenPanel().getTxtTekiyoShuryoNengetsu().getToValue().toDateString());
         }
-        parameter.set限度額管理期間数(div.getChushutsuJokenPanel().getRadGendogakuKanriKikansu().getSelectedValue());
+        parameter.set限度額管理期間数(div.getChushutsuJokenPanel().getRadGendogakuKanriKikansu().getSelectedKey());
         return parameter;
     }
 
@@ -130,7 +130,7 @@ public class HanyoListParamDBC7130001Handler {
             div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(
                     new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("保険者コード"))));
         }
-        div.getChushutsuJokenPanel().getRadChushutsuKubun().setSelectedValue(
+        div.getChushutsuJokenPanel().getRadChushutsuKubun().setSelectedKey(
                 restoreBatchParameterMap.getParameterValue(RString.class, new RString("抽出区分")));
         RString 適用開始年月From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("適用開始年月From"));
         RString 適用開始年月To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("適用開始年月To"));
@@ -152,7 +152,7 @@ public class HanyoListParamDBC7130001Handler {
             div.getChushutsuJokenPanel().getTxtTekiyoShuryoNengetsu().setToValue(
                     new RDate(適用終了年月To.toString()));
         }
-        div.getChushutsuJokenPanel().getRadGendogakuKanriKikansu().setSelectedValue(
+        div.getChushutsuJokenPanel().getRadGendogakuKanriKikansu().setSelectedKey(
                 restoreBatchParameterMap.getParameterValue(RString.class, new RString("限度額管理期間数")));
     }
 }
