@@ -709,9 +709,9 @@ public class HanyoListShiharaiNotContainNoBusiness {
 
     private RString edit要介護度(RString koroshoIfCode, RString code) {
         if ((koroshoIfCode != null && !koroshoIfCode.isEmpty()) || (code != null && !code.isEmpty())) {
-            return RString.EMPTY;
+            return YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(koroshoIfCode), code).getName();
         }
-        return YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(koroshoIfCode), code).getName();
+        return RString.EMPTY;
     }
 
     private RString edit抽出項目区分(RString 抽出項目区分) {
