@@ -169,10 +169,10 @@ public class HanyoListShiharaiNotContainNoBusiness {
             eucCsvEntity.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
             eucCsvEntity.set郵便番号(kojin.get住所().get郵便番号().getEditedYubinNo());
             eucCsvEntity.set住所_番地_方書(get住所_番地_方書(kojin.get住所().get住所(),
-                    new RString(kojin.get住所().get番地().toString()),
+                    kojin.get住所().get番地().getBanchi().value(),
                     kojin.get住所().get方書().getColumnValue()));
             eucCsvEntity.set住所(kojin.get住所().get住所());
-            eucCsvEntity.set番地(new RString(kojin.get住所().get番地().toString()));
+            eucCsvEntity.set番地(kojin.get住所().get番地().getBanchi().value());
             eucCsvEntity.set方書(kojin.get住所().get方書().getColumnValue());
             eucCsvEntity.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().getColumnValue());
             eucCsvEntity.set行政区名(kojin.get行政区画().getGyoseiku().get名称());
@@ -193,10 +193,10 @@ public class HanyoListShiharaiNotContainNoBusiness {
             eucCsvEntity.set転出入理由(RString.EMPTY);
             eucCsvEntity.set前住所郵便番号(kojin.get転入前().get郵便番号().getEditedYubinNo());
             eucCsvEntity.set前住所_番地_方書(get住所_番地_方書(kojin.get転入前().get住所(),
-                    new RString(kojin.get転入前().get番地().toString()),
+                    kojin.get転入前().get番地().getBanchi().value(),
                     kojin.get転入前().get方書().getColumnValue()));
             eucCsvEntity.set前住所(kojin.get転入前().get住所());
-            eucCsvEntity.set前住所番地(new RString(kojin.get転入前().get番地().toString()));
+            eucCsvEntity.set前住所番地(kojin.get転入前().get番地().getBanchi().value());
             eucCsvEntity.set前住所方書(kojin.get転入前().get方書().getColumnValue());
 
             eucCsvEntity.set保険者コード(地方公共団体情報.get地方公共団体コード().getColumnValue());
@@ -215,10 +215,10 @@ public class HanyoListShiharaiNotContainNoBusiness {
             eucCsvEntity.set送付先住所コード(atesaki.get宛先住所().get全国住所コード().getColumnValue());
             eucCsvEntity.set送付先郵便番号(atesaki.get宛先住所().get郵便番号().getEditedYubinNo());
             eucCsvEntity.set送付先住所_番地_方書(get住所_番地_方書(atesaki.get宛先住所().get住所(),
-                    new RString(atesaki.get宛先住所().get番地().toString()),
+                    atesaki.get宛先住所().get番地().getBanchi().value(),
                     atesaki.get宛先住所().get方書().getColumnValue()));
             eucCsvEntity.set送付先住所(atesaki.get宛先住所().get住所());
-            eucCsvEntity.set送付先番地(new RString(atesaki.get宛先住所().get番地().toString()));
+            eucCsvEntity.set送付先番地(atesaki.get宛先住所().get番地().getBanchi().value());
             eucCsvEntity.set送付先方書(atesaki.get宛先住所().get方書().getColumnValue());
             eucCsvEntity.set送付先行政区コード(atesaki.get宛先行政区().getコード().getColumnValue());
             eucCsvEntity.set送付先行政区名(atesaki.get宛先行政区().get名称());
