@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.HomonChosaIraishoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ChosahyoSaiCheckhyoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
@@ -54,7 +53,7 @@ public class SaiChekkuhyo_292002Process extends BatchProcessBase<HomonChosaIrais
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper."
             + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get認定調査結果");
-    private static final ReportId 帳票ID = ReportIdDBE.DBE292002.getReportId();
+    private static final ReportId 帳票ID = ReportIdDBZ.DBE292002.getReportId();
     private static final RString 文字列1 = new RString("1");
     private static final RString IRAIFROMYMD = new RString("【依頼開始日】");
     private static final RString IRAITOYMD = new RString("【依頼終了日】");

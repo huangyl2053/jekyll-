@@ -16,6 +16,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBZ {
 
     /**
+     * 要介護認定調査票差異チェック票(両面左)の帳票ＩＤです。
+     */
+    DBE292003(new ReportId("DBE292003_SaiChekkuhyoHidari"), new RString("要介護認定調査票差異チェック票(両面左)")),
+    /**
+     * 要介護認定調査票差異チェック票(両面右)の帳票ＩＤです。
+     */
+    DBE292002(new ReportId("DBE292002_SaiChekkuhyoMigi"), new RString("要介護認定調査票差異チェック票(両面右)")),
+    /**
      * 主治医意見書作成料請求書です。
      */
     DBE234001(new ReportId("DBE234001_ShujiiIkenshoSakuseiRyoSeikyusho"), new RString("主治医意見書作成料請求書")),
