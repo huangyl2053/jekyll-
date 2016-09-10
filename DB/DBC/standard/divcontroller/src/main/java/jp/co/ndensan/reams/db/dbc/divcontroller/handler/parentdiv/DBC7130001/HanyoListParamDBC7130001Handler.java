@@ -139,18 +139,26 @@ public class HanyoListParamDBC7130001Handler {
         if (!RString.isNullOrEmpty(適用開始年月From)) {
             div.getChushutsuJokenPanel().getTxtTekiyoKaishiNengetsu().setFromValue(
                     new RDate(適用開始年月From.toString()));
+        } else {
+            div.getChushutsuJokenPanel().getTxtTekiyoKaishiNengetsu().clearFromValue();
         }
         if (!RString.isNullOrEmpty(適用開始年月To)) {
             div.getChushutsuJokenPanel().getTxtTekiyoKaishiNengetsu().setToValue(
                     new RDate(適用開始年月To.toString()));
+        } else {
+            div.getChushutsuJokenPanel().getTxtTekiyoKaishiNengetsu().clearToValue();
         }
         if (!RString.isNullOrEmpty(適用終了年月From)) {
             div.getChushutsuJokenPanel().getTxtTekiyoShuryoNengetsu().setFromValue(
                     new RDate(適用終了年月From.toString()));
+        } else {
+            div.getChushutsuJokenPanel().getTxtTekiyoShuryoNengetsu().clearFromValue();
         }
         if (!RString.isNullOrEmpty(適用終了年月To)) {
             div.getChushutsuJokenPanel().getTxtTekiyoShuryoNengetsu().setToValue(
                     new RDate(適用終了年月To.toString()));
+        } else {
+            div.getChushutsuJokenPanel().getTxtTekiyoShuryoNengetsu().clearToValue();
         }
         div.getChushutsuJokenPanel().getRadGendogakuKanriKikansu().setSelectedKey(
                 restoreBatchParameterMap.getParameterValue(RString.class, new RString("限度額管理期間数")));
