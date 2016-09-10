@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.core.chosa;
+package jp.co.ndensan.reams.db.dbz.definition.core.chosa;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
