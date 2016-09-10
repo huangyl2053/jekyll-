@@ -204,11 +204,11 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
      */
     public ShiharaiHohoHenkoSashitome getSashitome(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
             RString 整理番号) {
-        DbT4024ShiharaiHohoHenkoSashitomeEntity entity = dbT4024dac.get支払方法変更差止(被保険者番号, サービス提供年月, 整理番号);
-        if (entity == null) {
+        List<DbT4024ShiharaiHohoHenkoSashitomeEntity> entity = dbT4024dac.select支払方法変更差止(被保険者番号, サービス提供年月, 整理番号);
+        if (entity.isEmpty()) {
             return null;
         }
-        return new ShiharaiHohoHenkoSashitome(entity);
+        return new ShiharaiHohoHenkoSashitome(entity.get(NUM_0));
     }
 
     /**
@@ -627,24 +627,24 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
     }
 
     private void edit出力給付の種類(KyufuSHurui kyufuSHurui) {
-        if (kyufuSHurui.get給付の種類1().isEmpty() || kyufuSHurui.get給付の種類1() == null) {
+        if (kyufuSHurui.get給付の種類1() == null || kyufuSHurui.get給付の種類1().isEmpty()) {
             kyufuSHurui.set給付の種類1(ワークの文言);
         }
-        if (kyufuSHurui.get給付の種類2().isEmpty() || kyufuSHurui.get給付の種類2() == null) {
+        if (kyufuSHurui.get給付の種類2() == null || kyufuSHurui.get給付の種類2().isEmpty()) {
             if (kyufuSHurui.get給付の種類1().trim().length() <= NUM_21) {
                 kyufuSHurui.set給付の種類1(kyufuSHurui.get給付の種類1().trim().concat(ワークの文言));
             } else {
                 kyufuSHurui.set給付の種類2(ワークの文言);
             }
         }
-        if (kyufuSHurui.get給付の種類3().isEmpty() || kyufuSHurui.get給付の種類3() == null) {
+        if (kyufuSHurui.get給付の種類3() == null || kyufuSHurui.get給付の種類3().isEmpty()) {
             if (kyufuSHurui.get給付の種類2().trim().length() <= NUM_21) {
                 kyufuSHurui.set給付の種類2(kyufuSHurui.get給付の種類2().trim().concat(ワークの文言));
             } else {
                 kyufuSHurui.set給付の種類3(ワークの文言);
             }
         }
-        if (!kyufuSHurui.get給付の種類3().isEmpty() && kyufuSHurui.get給付の種類3() != null) {
+        if (kyufuSHurui.get給付の種類3() != null && !kyufuSHurui.get給付の種類3().isEmpty()) {
             edit出力給付種類(kyufuSHurui);
         }
     }

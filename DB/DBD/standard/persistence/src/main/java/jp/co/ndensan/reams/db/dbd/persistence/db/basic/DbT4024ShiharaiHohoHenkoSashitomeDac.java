@@ -147,7 +147,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeDac implements ISaveable<DbT4024Sh
      * @return 支払方法変更差止
      */
     @Transaction
-    public DbT4024ShiharaiHohoHenkoSashitomeEntity select支払方法変更差止(HihokenshaNo 被保険者番号,
+    public List<DbT4024ShiharaiHohoHenkoSashitomeEntity> select支払方法変更差止(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
@@ -163,7 +163,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeDac implements ISaveable<DbT4024Sh
                                 eq(sashitomeKojoJotaiKubun, new RString("01")),
                                 eq(sashitome_ShokanSeiriNo, 整理番号),
                                 eq(sashitome_ServiceTeikyoYM, サービス提供年月))).
-                toObject(DbT4024ShiharaiHohoHenkoSashitomeEntity.class);
+                toList(DbT4024ShiharaiHohoHenkoSashitomeEntity.class);
     }
 
     /**
