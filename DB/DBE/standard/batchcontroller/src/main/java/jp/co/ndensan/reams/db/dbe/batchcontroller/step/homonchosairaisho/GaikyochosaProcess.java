@@ -7,18 +7,18 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyogaikyotokki.GaikyotokkiA4Business;
-import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyotokki.GaikyotokkiA4Report;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.HomonChosaIraishoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.ninteichosahyogaikyotokki.GaikyotokkiA4ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IHomonChosaIraishoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteichosahyogaikyotokki.GaikyotokkiA4Business;
+import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyotokki.GaikyotokkiA4Report;
+import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyogaikyotokki.GaikyotokkiA4ReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -54,7 +54,7 @@ public class GaikyochosaProcess extends BatchProcessBase<HomonChosaIraishoRelate
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper."
             + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get訪問調査依頼書");
-    private static final ReportId 帳票ID = ReportIdDBE.DBE221051.getReportId();
+    private static final ReportId 帳票ID = ReportIdDBZ.DBE221051.getReportId();
     private static final RString CONFIGVALUE = new RString("1");
     private static final int INT3 = 3;
     private static final int INT4 = 4;
@@ -330,7 +330,7 @@ public class GaikyochosaProcess extends BatchProcessBase<HomonChosaIraishoRelate
                 導入団体コード,
                 市町村名,
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                ReportIdDBE.DBE220001.getReportName(),
+                ReportIdDBZ.DBE220001.getReportName(),
                 出力ページ数,
                 csv出力有無,
                 csvファイル名,

@@ -9,19 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintBusiness;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
-import jp.co.ndensan.reams.db.dbe.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenItem;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoBodyItem;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadItem;
-import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
-import jp.co.ndensan.reams.db.dbe.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoHeaderItem;
-import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaItem;
-import jp.co.ndensan.reams.db.dbe.business.report.saichekkuhyo.SaiChekkuhyoItem;
-import jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoItem;
-import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
@@ -35,6 +24,17 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
+import jp.co.ndensan.reams.db.dbz.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenItem;
+import jp.co.ndensan.reams.db.dbz.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoBodyItem;
+import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoHeadItem;
+import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
+import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoHeaderItem;
+import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaItem;
+import jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo.SaiChekkuhyoItem;
+import jp.co.ndensan.reams.db.dbz.business.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoItem;
+import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
 import jp.co.ndensan.reams.db.dbz.definition.core.ikenshosakuseiryo.IkenshoSakuseiRyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
@@ -49,6 +49,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoS
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.RensakusakiTsuzukigara;
+import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -410,13 +411,13 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             if (!list.isEmpty()) {
                 ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = list.get(0);
                 List<RString> 被保険者番号リスト = get被保険者番号(business.get被保険者番号());
-                RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220001.getReportId(), FlexibleDate.getNowDate());
+                RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220001.getReportId(), FlexibleDate.getNowDate());
                 RString customerBarCode = RString.EMPTY;
                 if (!RString.isNullOrEmpty(business.get調査委託先郵便番号()) && !RString.isNullOrEmpty(business.get調査委託先住所())) {
                     customerBarCode = ReportUtil.getCustomerBarCode(business.get調査委託先郵便番号(), business.get調査委託先住所());
                 }
                 Map<Integer, RString> 通知文
-                        = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220001.getReportId(), KamokuCode.EMPTY, 1);
+                        = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220001.getReportId(), KamokuCode.EMPTY, 1);
 
                 RString 誕生日明治 = HOUSI;
                 RString 誕生日大正 = HOUSI;
@@ -519,7 +520,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         List<ChosaIraiIchiranhyoBodyItem> chosaIraishoHeadItemList = new ArrayList<>();
         int 連番 = 1;
         Map<Integer, RString> 通知文
-                = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220002.getReportId(), KamokuCode.EMPTY, 1);
+                = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220002.getReportId(), KamokuCode.EMPTY, 1);
         for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : list) {
             RString 認定申請区分 = business.get認定申請区分_申請時_コード();
             if (!RString.isNullOrEmpty(認定申請区分)) {
@@ -970,9 +971,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 builder.append("#");
                 item.setAtenaRenban(builder.toRString());
                 item.setRemban(new RString(String.valueOf(連番++)));
-                item.setTitle(ReportIdDBE.DBE230001.getReportName());
+                item.setTitle(ReportIdDBZ.DBE230001.getReportName());
                 Map<Integer, RString> 通知文Map
-                        = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230001.getReportId(), KamokuCode.EMPTY, 1);
+                        = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230001.getReportId(), KamokuCode.EMPTY, 1);
                 item.setTsuchibun1(通知文Map.get(1));
                 item.setShinseiKubun(NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分_申請時_コード()).get名称());
 
@@ -1045,7 +1046,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : businessList) {
 
             Map<Integer, RString> 通知文Map
-                    = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230002.getReportId(), KamokuCode.EMPTY, 1);
+                    = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230002.getReportId(), KamokuCode.EMPTY, 1);
             RString 生年月日 = new FlexibleDate(business.get生年月日()).wareki()
                     .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
@@ -1347,7 +1348,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     .get介護保険診断命令書(parameter).records();
             if (!businessList.isEmpty()) {
                 ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
-                RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE235001.getReportId(), FlexibleDate.getNowDate());
+                RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE235001.getReportId(), FlexibleDate.getNowDate());
                 RString customerBarCode = RString.EMPTY;
                 if (!RString.isNullOrEmpty(business.get調査委託先郵便番号()) && !RString.isNullOrEmpty(business.get調査委託先住所())) {
                     customerBarCode = ReportUtil.getCustomerBarCode(business.get医療機関郵便番号(), business.get医療機関住所());
@@ -1357,7 +1358,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 builder.append((new RString(String.valueOf(宛名連番++))).padZeroToLeft(INDEX_6));
                 builder.append("#");
                 Map<Integer, RString> 通知文
-                        = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE235001.getReportId(), KamokuCode.EMPTY, 1);
+                        = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE235001.getReportId(), KamokuCode.EMPTY, 1);
                 KaigohokenShindanMeireishoHeaderItem item = new KaigohokenShindanMeireishoHeaderItem(
                         RString.EMPTY,
                         RString.EMPTY,

@@ -99,6 +99,6 @@ public class ShujiiIkenshoTeishutsuIraishoProcess extends BatchProcessBase<Shuji
                 バッチ出力条件リストの出力(市町村名,
                         出力ページ数,
                         導入団体コード,
-                        ReportIdDBE.DBE236001)).print();
+                        ReportIdDBE.DBE236001.getReportId().value(), ReportIdDBE.DBE236001.getReportName())).print();
     }
 }

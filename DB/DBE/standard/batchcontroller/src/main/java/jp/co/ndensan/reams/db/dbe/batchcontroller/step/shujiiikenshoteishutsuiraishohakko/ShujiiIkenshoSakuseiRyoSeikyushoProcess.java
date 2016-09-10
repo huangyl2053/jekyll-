@@ -8,12 +8,12 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shujiiikenshoteishutsuir
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.IraishoIkkatsuHakkoBusiness;
-import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
-import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReport;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReportSource;
+import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
+import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReport;
+import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
+import jp.co.ndensan.reams.db.dbz.entity.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
@@ -37,7 +37,7 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoProcess extends BatchProcessBase<Sh
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoTeishutsuIraishoHakkoMapper."
             + "get主治医意見書提出依頼書発行");
-    private static final ReportId 帳票ID = ReportIdDBE.DBE234001.getReportId();
+    private static final ReportId 帳票ID = ReportIdDBZ.DBE234001.getReportId();
     private List<ShujiiIkenshoSakuseiRyoSeikyushoItem> itemList;
     private ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter processParamter;
 
@@ -84,6 +84,6 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoProcess extends BatchProcessBase<Sh
                 バッチ出力条件リストの出力(市町村名,
                         出力ページ数,
                         導入団体コード,
-                        ReportIdDBE.DBE234001)).print();
+                        ReportIdDBZ.DBE234001.getReportId().value(), ReportIdDBZ.DBE234001.getReportName())).print();
     }
 }

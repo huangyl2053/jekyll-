@@ -74,6 +74,6 @@ public class ShujiiIkenshoSeikyuIchiranProcess extends BatchProcessBase<ShujiiIk
                 バッチ出力条件リストの出力(市町村名,
                         出力ページ数,
                         導入団体コード,
-                        ReportIdDBE.DBE013006)).print();
+                        ReportIdDBE.DBE013006.getReportId().value(), ReportIdDBE.DBE013006.getReportName())).print();
     }
 }
