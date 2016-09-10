@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyolisthomonkaigoriyoshafutangakugengaku;
 
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.homon.HobetsuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuHohoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.Kyakasha;
@@ -140,11 +141,11 @@ public class HomonKaigoRiyoshaFutanGakuGengakuMybatisParameter implements IMyBat
         set年齢層抽出方法();
         set地区区分();
         set市町村コード();
-        if (hobetsukubun.equals(new RString("施行時ホームヘルプ"))) {
+        if (hobetsukubun.equals(HobetsuKubun.施行時ホームヘルプ.getコード())) {
             is施行時ホームヘルプ = true;
-        } else if (hobetsukubun.equals(new RString("障害ホームヘルプ"))) {
+        } else if (hobetsukubun.equals(HobetsuKubun.障害時ホームヘルプ.getコード())) {
             is障害ホームヘルプ = true;
-        } else if (hobetsukubun.equals(new RString("障害ヘルプ全額免除"))) {
+        } else if (hobetsukubun.equals(HobetsuKubun.障害ヘルプ全額免除.getコード())) {
             is障害ヘルプ全額免除 = true;
         }
         if (Kyakasha.却下他.getコード().equals(kyakasha)) {
