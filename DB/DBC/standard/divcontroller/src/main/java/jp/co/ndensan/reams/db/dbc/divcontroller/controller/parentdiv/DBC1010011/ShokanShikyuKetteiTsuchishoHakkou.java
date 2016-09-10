@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1010011;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanshikyuketteitsuchishohakkou.ShokanShikyuKetteiTsuchishoHakkouBusiness;
@@ -81,7 +81,8 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
         ViewStateHolder.put(ViewStateKeys.識別コード, shikibetsuCode);
         ShokanShikyuKetteiTsuchishoHakkouFinder finder = ShokanShikyuKetteiTsuchishoHakkouFinder.createInstance();
         List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List = finder.get償還払支給判定結果(被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.償還払支給判定結果, (Serializable) 償還払支給判定結果List);
+        ArrayList<ShokanShikyuKetteiTsuchishoHakkouBusiness> 判定結果List = new ArrayList<>(償還払支給判定結果List);
+        ViewStateHolder.put(ViewStateKeys.償還払支給判定結果, 判定結果List);
         List<JukyushaDaicho> 受給者台帳List = finder.get受給者台帳(被保険者番号);
         List<SogoJigyoTaishosha> 総合事業対象者List = finder.get総合事業対象者(被保険者番号);
         List<ShokanHanteiKekka> 償還払支給判定結果 = finder.select償還払支給判定結果(被保険者番号);
