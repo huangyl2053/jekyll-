@@ -5,11 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.ShisetsuJohoCommonChildDiv;
 
+import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -45,6 +47,12 @@ public class ShisetsuJohoCommonChildDiv {
         if (requestDiv.getRadKaigoHokenShisetsu().getSelectedKey() != null
                 && !requestDiv.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty()) {
 
+            mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
+            if (mode == null) {
+                mode = new JigyoshaMode();
+                mode.setサービス種類(new ArrayList<RString>());
+                mode.setサービス種類抽出区分(RString.EMPTY);
+            }
             mode.setJigyoshaShubetsu(requestDiv.getRadKaigoHokenShisetsu().getSelectedKey());
             requestDiv.getRadKaigoHokenShisetsu().getDisabledItem().clear();
             requestDiv.getRadOtherTokureiShisetsu().getDisabledItem().clear();
