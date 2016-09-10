@@ -629,6 +629,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
     private void edit出力給付の種類(KyufuSHurui kyufuSHurui) {
         if (kyufuSHurui.get給付の種類1() == null || kyufuSHurui.get給付の種類1().isEmpty()) {
             kyufuSHurui.set給付の種類1(ワークの文言);
+            return;
         }
         if (kyufuSHurui.get給付の種類2() == null || kyufuSHurui.get給付の種類2().isEmpty()) {
             if (kyufuSHurui.get給付の種類1().trim().length() <= NUM_21) {
@@ -636,6 +637,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
             } else {
                 kyufuSHurui.set給付の種類2(ワークの文言);
             }
+            return;
         }
         if (kyufuSHurui.get給付の種類3() == null || kyufuSHurui.get給付の種類3().isEmpty()) {
             if (kyufuSHurui.get給付の種類2().trim().length() <= NUM_21) {
@@ -643,6 +645,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
             } else {
                 kyufuSHurui.set給付の種類3(ワークの文言);
             }
+            return;
         }
         if (kyufuSHurui.get給付の種類3() != null && !kyufuSHurui.get給付の種類3().isEmpty()) {
             edit出力給付種類(kyufuSHurui);
