@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1040021.Toku
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChikuNyuryokuGuide.ChikuNyuryokuGuideDiv;
+import jp.co.ndensan.reams.ur.urz.definition.core.chiku.ChikuShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -89,6 +91,8 @@ public class TokubetsuPanelHandler {
             div.getTxtChikuCodeFrom().setDisabled(false);
             div.getTxtChikuCodeTo().setDisabled(false);
             clearvalue();
+            div.setHdnChikuShubetsuName(ChikuShubetsu.行政区.getShubetsu());
+            div.setHdnIsMultiSelected(new RString(ChikuNyuryokuGuideDiv.SelectableType.Single.toString()));
         } else if (div.getChushutsuJoken().getDdlChiku().getSelectedKey().equals(地区)) {
             div.getTxtChikuCodeFrom().setDisabled(false);
             div.getTxtChikuCodeTo().setDisabled(false);

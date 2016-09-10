@@ -47,6 +47,30 @@ public class TokubetsuPanel {
     }
 
     /**
+     * onOkClose_btnGyoseikuFrom。
+     *
+     * @param div TokubetsuPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<TokubetsuPanelDiv> onOkClose_btnGyoseikuFrom(TokubetsuPanelDiv div) {
+        div.getTxtChikuCodeFrom().setValue(div.getHdnChugakkokuCode());
+        div.getTxtChikuNameFrom().setValue(div.getHdnName());
+        return createResponse(div);
+    }
+
+    /**
+     * onOkClose_btnGyoseikuTo。
+     *
+     * @param div TokubetsuPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<TokubetsuPanelDiv> onOkClose_btnGyoseikuTo(TokubetsuPanelDiv div) {
+        div.getTxtChikuCodeTo().setValue(div.getHdnChugakkokuCode());
+        div.getTxtChikuNameTo().setValue(div.getHdnName());
+        return createResponse(div);
+    }
+
+    /**
      * 実行するボタンを押下のチェック処理します。
      *
      * @param div TokubetsuPanelDiv のクラスファイル
