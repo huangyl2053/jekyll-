@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbdbt13011;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt13011.GeneralPurposeListOutputExecProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdbt13011.HanyoListShisetsuNyutaishoBatchParameter;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd710090.GeneralPurposeListOutputExecProcess;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710150.DBD710150_HanyoListShisetsuNyutaishoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt13011.GeneralPurposeListOutputProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-1570-030 x_lilh
  */
-public class HanyoListShisetsuNyutaishoFlow extends BatchFlowBase<HanyoListShisetsuNyutaishoBatchParameter> {
+public class DBD710090_HanyoListShiharaiHohoHenko extends BatchFlowBase<DBD710150_HanyoListShisetsuNyutaishoParameter> {
 
     private static final String BATCH_PROCESS = "batchProcess";
 
@@ -38,7 +38,7 @@ public class HanyoListShisetsuNyutaishoFlow extends BatchFlowBase<HanyoListShise
     }
 
     private GeneralPurposeListOutputProcessParameter createParameter() {
-        HanyoListShisetsuNyutaishoBatchParameter parameter = getParameter();
+        DBD710150_HanyoListShisetsuNyutaishoParameter parameter = getParameter();
         return parameter.toGeneralPurposeListOutputProcessParameter();
     }
 }

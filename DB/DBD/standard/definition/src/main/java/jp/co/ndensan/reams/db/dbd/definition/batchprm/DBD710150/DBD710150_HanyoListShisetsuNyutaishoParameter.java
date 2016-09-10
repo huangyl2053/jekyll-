@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdbt13011;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710150;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuHohoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
@@ -24,7 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HanyoListShisetsuNyutaishoBatchParameter extends BatchParameterBase {
+public class DBD710150_HanyoListShisetsuNyutaishoParameter extends BatchParameterBase {
 
     private static final String CHUSHUTSUHOHOKUBUN = "chushutsuHohoKubun";
     private static final String CHUSHUTSUITEMKUBUN = "chushutsuItemKubun";
