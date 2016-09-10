@@ -225,7 +225,7 @@ public final class ReportUtil {
      * @return MyBatis内で指定するOrderBy句
      */
     public static RString get出力順OrderBy(RString orderByClause, int count) {
-        if (orderByClause == null || orderByClause.isEmpty() || orderByClause.indexOf(comma) == -1) {
+        if (orderByClause == null || orderByClause.isEmpty() || new RString("order by").equals(orderByClause.toLowerCase())) {
             return RString.EMPTY;
         }
         if (count == 0) {
