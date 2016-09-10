@@ -37,8 +37,8 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
-import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki._Atesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
@@ -257,7 +257,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         RString 改頁４ = RString.EMPTY;
         RString 改頁５ = RString.EMPTY;
 
-        Map<Integer, ISetSortItem> 改頁Map = ReportUtil.get改頁項目Map(outputOrder);
+        Map<Integer, ISetSortItem> 改頁Map = ChohyoUtil.get改頁項目Map(outputOrder);
         if (改頁Map.get(INDEX_1) != null) {
             改頁１ = to帳票物理名(改頁Map.get(INDEX_1));
         }
