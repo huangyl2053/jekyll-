@@ -91,7 +91,7 @@ public class KaigoKyufuhiKagoMositateTouroku {
      */
     public ResponseData<KaigoKyufuhiKagoMositateTourokuDiv> onClick_BtnSearch(KaigoKyufuhiKagoMositateTourokuDiv div) {
         if (RString.isNullOrEmpty(div.getTxtJigyoshaNo().getValue())
-                || RString.isNullOrEmpty(div.getTxtHihoNo().getValue())) {
+                && RString.isNullOrEmpty(div.getTxtHihoNo().getValue())) {
             return ResponseData.of(div).addValidationMessages(getValidation(div).check必須項目を入力(new RString("被保番号、支援事業者番号"))).respond();
         }
         if (div.getTxtTeikyoYMRange().getFromValue() == null
