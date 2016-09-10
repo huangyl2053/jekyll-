@@ -73,7 +73,7 @@ public class TankiNyushoKakudaiGaitoshaProcess extends BatchProcessBase<TankiNyu
     @Override
     protected void initialize() {
         flag = false;
-        AssociationFinderFactory.createInstance().getAssociation();
+        association = AssociationFinderFactory.createInstance().getAssociation();
         business = new TankiNyushoKakudaiGaitosha(processParameter);
         get市町村名();
     }

@@ -76,7 +76,7 @@ public class JigyoBunKogakuGassanShikyuKetteiProcess extends BatchProcessBase<Ji
     @Override
     protected void initialize() {
         flag = false;
-        AssociationFinderFactory.createInstance().getAssociation();
+        association = AssociationFinderFactory.createInstance().getAssociation();
         business = new JigyoBunKogakuGassanShikyuKettei(processParameter);
         get市町村名();
     }
