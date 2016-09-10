@@ -9,16 +9,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.kijunshunyugakutekiyo.KijunShunyugakuTekiyo;
-import jp.co.ndensan.reams.db.dbc.business.core.kijunshunyugakutekiyo.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunshunyugakutekiyo.KijunShunyugakuTekiyoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistparam.HanyoListParamRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistparam.HanyoListParamRenbanariEUCEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
@@ -59,6 +60,7 @@ public class KijunShunyugakuTekiyoRenbanariProcess extends BatchProcessBase<Hany
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private int 連番 = 1;
+    private static final int NUM5 = 5;
     private FileSpoolManager manager;
     private RString eucFilePath;
     private RString 市町村名;
@@ -163,8 +165,8 @@ public class KijunShunyugakuTekiyoRenbanariProcess extends BatchProcessBase<Hany
         IOutputOrder outputOrder = finder.get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701020.getReportId(), processParameter.get出力順ID());
         RString 出力順 = RString.EMPTY;
         if (outputOrder != null) {
-            出力順 = MyBatisOrderByClauseCreator.
-                    create(KijunShunyugakuTekiyo.ShutsuryokujunEnum.class, outputOrder);
+            出力順 = ReportUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(
+                    KijunShunyugakuTekiyo.ShutsuryokujunEnum.class, outputOrder), NUM5);
         }
         return 出力順;
     }
