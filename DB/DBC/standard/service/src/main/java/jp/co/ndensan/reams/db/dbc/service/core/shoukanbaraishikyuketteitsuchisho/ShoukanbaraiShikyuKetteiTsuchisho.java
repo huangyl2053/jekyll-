@@ -204,7 +204,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
      */
     public ShiharaiHohoHenkoSashitome getSashitome(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
             RString 整理番号) {
-        DbT4024ShiharaiHohoHenkoSashitomeEntity entity = dbT4024dac.select支払方法変更差止(被保険者番号, サービス提供年月, 整理番号);
+        DbT4024ShiharaiHohoHenkoSashitomeEntity entity = dbT4024dac.get支払方法変更差止(被保険者番号, サービス提供年月, 整理番号);
         if (entity == null) {
             return null;
         }
