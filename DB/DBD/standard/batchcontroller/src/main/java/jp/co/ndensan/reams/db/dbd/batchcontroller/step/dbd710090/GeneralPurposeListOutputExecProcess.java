@@ -218,16 +218,30 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     }
 
     private void eucFileOutputJohoFactory() {
-        EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                日本語ファイル名,
-                地方公共団体情報.getLasdecCode_().getColumnValue(),
-                地方公共団体情報.get市町村名(),
-                new RString(JobContextHolder.getJobId()),
-                英数字ファイル名,
-                EUC_ENTITY_ID.toRString(),
-                new RString(String.valueOf(eucCsvWriter.getCount())),
-                get出力条件表());
-        EucFileOutputJokenhyoFactory.createInstance(item).print();
+        if (processParamter.is連番付加()) {
+
+            EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
+                    日本語ファイル名,
+                    地方公共団体情報.getLasdecCode_().getColumnValue(),
+                    地方公共団体情報.get市町村名(),
+                    new RString(JobContextHolder.getJobId()),
+                    英数字ファイル名,
+                    EUC_ENTITY_ID.toRString(),
+                    new RString(String.valueOf(eucCsvWriter.getCount())),
+                    get出力条件表());
+            EucFileOutputJokenhyoFactory.createInstance(item).print();
+        } else {
+            EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
+                    日本語ファイル名,
+                    地方公共団体情報.getLasdecCode_().getColumnValue(),
+                    地方公共団体情報.get市町村名(),
+                    new RString(JobContextHolder.getJobId()),
+                    英数字ファイル名,
+                    EUC_ENTITY_ID.toRString(),
+                    new RString(String.valueOf(eucNotContainNoCsvWriter.getCount())),
+                    get出力条件表());
+            EucFileOutputJokenhyoFactory.createInstance(item).print();
+        }
     }
 
     private RString edit抽出項目区分(RString 抽出項目区分) {
