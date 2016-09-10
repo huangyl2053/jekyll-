@@ -417,8 +417,7 @@ public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShoku
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNo, 整理番号),
-                                eq(DbT3043ShokanShokujiHiyo.isDeleted, false)
+                                eq(seiriNo, 整理番号)
                         )).
                 toList(DbT3043ShokanShokujiHiyoEntity.class);
     }

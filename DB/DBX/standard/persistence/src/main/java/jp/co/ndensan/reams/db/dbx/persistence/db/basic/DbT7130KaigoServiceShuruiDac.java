@@ -326,8 +326,7 @@ public class DbT7130KaigoServiceShuruiDac {
                 table(DbT7130KaigoServiceShurui.class).
                 where(and(
                                 leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, サービス提供年月),
-                                leq(サービス提供年月, DbT7130KaigoServiceShurui.teikyoshuryoYM),
-                                eq(DbT7130KaigoServiceShurui.isDeleted, false)
+                                leq(サービス提供年月, DbT7130KaigoServiceShurui.teikyoshuryoYM)
                         ))
                 .toList(DbT7130KaigoServiceShuruiEntity.class);
     }

@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashit
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitome.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitome.johoBunruiKubun;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitome.kanriKubun;
-import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitome.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitome.renNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitome.rirekiNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitome.sashitomeKojoJotaiKubun;
@@ -163,8 +162,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeDac implements ISaveable<DbT4024Sh
                                 eq(johoBunruiKubun, new RString("1")),
                                 eq(sashitomeKojoJotaiKubun, new RString("01")),
                                 eq(sashitome_ShokanSeiriNo, 整理番号),
-                                eq(sashitome_ServiceTeikyoYM, サービス提供年月),
-                                eq(logicalDeletedFlag, false))).
+                                eq(sashitome_ServiceTeikyoYM, サービス提供年月))).
                 toObject(DbT4024ShiharaiHohoHenkoSashitomeEntity.class);
     }
 
