@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 public class HanyoListSaishinsaMoshitateAriEUCEntity {
 
     @CsvField(order = 1, name = "連番")
-    private int 連番;
+    private RString 連番;
     @CsvField(order = 2, name = "識別コード")
     private ShikibetsuCode 識別コード;
     @CsvField(order = 3, name = "住民種別")
