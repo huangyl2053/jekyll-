@@ -91,7 +91,13 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
                 SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200017.getReportId(), 帳票改頁出力順ID);
 
         if (null != outputOrder) {
-            orderBy = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(TyohyoShutuyukuOrderKey.class, outputOrder).substring(NUM8), NUM5);
+            if (processParameter.get改頁出力順ID() != null) {
+                orderBy = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(TyohyoShutuyukuOrderKey.class,
+                        outputOrder).substring(NUM8).concat(new RString(",")), NUM5);
+            } else {
+                orderBy = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(TyohyoShutuyukuOrderKey.class,
+                        outputOrder).substring(NUM8), NUM5);
+            }
         }
         番号 = 1;
     }
