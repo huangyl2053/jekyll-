@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1030021;
 
 import java.util.ArrayList;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBDBT00004.DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD203010.DBD203010_ShakaiFukushiHojinKeigenNinteishaListParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaJukyushaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.HihokenshaKeizaiJokyo;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
@@ -176,8 +176,8 @@ public class ShakaiFukushiHojinKeigenNinteishaListHandler {
      *
      * @return DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter
      */
-    public DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter createParameter() {
-        DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter batchParameter = new DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter();
+    public DBD203010_ShakaiFukushiHojinKeigenNinteishaListParameter createParameter() {
+        DBD203010_ShakaiFukushiHojinKeigenNinteishaListParameter batchParameter = new DBD203010_ShakaiFukushiHojinKeigenNinteishaListParameter();
         RString 対象リスト;
         RString 対象期間指定;
         FlexibleDate 対象年度の開始年月日 = new FlexibleDate("");
