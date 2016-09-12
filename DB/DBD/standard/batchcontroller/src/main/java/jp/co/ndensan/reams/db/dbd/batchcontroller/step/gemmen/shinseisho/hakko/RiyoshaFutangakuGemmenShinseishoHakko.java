@@ -120,10 +120,10 @@ public class RiyoshaFutangakuGemmenShinseishoHakko extends BatchProcessBase<Riyo
         RiyoshaFutangakuGengakuMenjyoShinseishoBodyItem bodyItem = new RiyoshaFutangakuGengakuMenjyoShinseishoBodyItem(
                 get認証者(),
                 entity.is旧措置者フラグ() ? TITLE : RString.EMPTY,
-                entity.get被保険者番号().value(),
                 kojin.get名称().getKana().value(),
-                保険者番号.value(),
                 kojin.get名称().getName().value(),
+                保険者番号.value(),
+                entity.get被保険者番号().value(),
                 get被保険者生年月日(kojin),
                 kojin.get性別().getName().getShortJapanese(),
                 kojin.get住所().get郵便番号().getEditedYubinNo(),
