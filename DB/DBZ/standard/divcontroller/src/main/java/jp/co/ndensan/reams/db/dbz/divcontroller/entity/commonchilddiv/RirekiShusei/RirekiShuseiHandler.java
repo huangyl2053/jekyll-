@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiKoshinNintei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
@@ -117,8 +118,7 @@ public class RirekiShuseiHandler {
                 div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.ShokaiMode);
                 div.getCcdChosaItakusakiAndChosainInput().setMode_ShoriType(ChosaItakusakiAndChosainInputDiv.ShoriType.ShokaiMode);
                 div.getCcdNinteiJohoInput().set状態(SHOKAI_MODE);
-                // TODO
-                div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.TokushuRirekiShuseiMode);
+                div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.RirekiSakujoShuseiMode);
                 div.setHdnDisplayModeKey(new RString("2"));
                 div.getBtnKakutei().setDisabled(false);
             } else {
@@ -128,7 +128,6 @@ public class RirekiShuseiHandler {
                     div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.SimpleShokaiMode);
                     div.getCcdChosaItakusakiAndChosainInput().setMode_ShoriType(ChosaItakusakiAndChosainInputDiv.ShoriType.SimpleShokaiMode);
                     div.getCcdNinteiJohoInput().set状態(new RString("TokushuShuseiMode"));
-                    // TODO
                     div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.TokushuRirekiShuseiMode);
                     div.setHdnDisplayModeKey(new RString("2"));
                     div.getBtnKakutei().setDisabled(false);
@@ -188,8 +187,7 @@ public class RirekiShuseiHandler {
             div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.ShokaiMode);
             div.getCcdChosaItakusakiAndChosainInput().setMode_ShoriType(ChosaItakusakiAndChosainInputDiv.ShoriType.ShokaiMode);
             div.getCcdNinteiJohoInput().set状態(SHOKAI_MODE);
-            // TODO
-            div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.TokushuTsuikaMode);
+            div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.RirekiTsuikaMode);
             div.setHdnDisplayModeKey(new RString("1"));
             div.getBtnKakutei().setDisabled(true);
         } else if (データ区分.startsWith(new RString("1"))) {
@@ -198,8 +196,7 @@ public class RirekiShuseiHandler {
             div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.SimpleShokaiMode);
             div.getCcdChosaItakusakiAndChosainInput().setMode_ShoriType(ChosaItakusakiAndChosainInputDiv.ShoriType.SimpleShokaiMode);
             div.getCcdNinteiJohoInput().set状態(new RString("TokushuShuseiMode"));
-            // TODO
-            div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.TokushuTsuikaMode);
+            div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.TorikeshiRirekiTsuikaMode);
             div.setHdnDisplayModeKey(new RString("2"));
             div.getBtnKakutei().setDisabled(false);
         } else if (データ区分.startsWith(new RString("2"))) {
@@ -208,8 +205,7 @@ public class RirekiShuseiHandler {
             div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.SimpleShokaiMode);
             div.getCcdChosaItakusakiAndChosainInput().setMode_ShoriType(ChosaItakusakiAndChosainInputDiv.ShoriType.SimpleShokaiMode);
             div.getCcdNinteiJohoInput().set状態(new RString("TokushuShuseiMode"));
-            // TODO
-            div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.TokushuTsuikaMode);
+            div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.RirekiTsuikaKyakkaMode);
             div.setHdnDisplayModeKey(new RString("2"));
             div.getBtnKakutei().setDisabled(false);
         } else if (データ区分.startsWith(new RString("3"))) {
@@ -218,8 +214,7 @@ public class RirekiShuseiHandler {
             div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.SimpleShokaiMode);
             div.getCcdChosaItakusakiAndChosainInput().setMode_ShoriType(ChosaItakusakiAndChosainInputDiv.ShoriType.SimpleShokaiMode);
             div.getCcdNinteiJohoInput().set状態(new RString("KyakkaRirekiTsuikaMode"));
-            // TODO
-            div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.TokushuTsuikaMode);
+            div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.RirekiTsuikaKyakkaMode);
             div.setHdnDisplayModeKey(new RString("2"));
         } else if (データ区分.startsWith(new RString("4"))) {
             div.getCcdKaigoNinteiShinseiKihonJohoInput().setInputMode(TOKUSHU_TSUIKA_MODE);
@@ -227,8 +222,7 @@ public class RirekiShuseiHandler {
             div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.SimpleShokaiMode);
             div.getCcdChosaItakusakiAndChosainInput().setMode_ShoriType(ChosaItakusakiAndChosainInputDiv.ShoriType.SimpleShokaiMode);
             div.getCcdNinteiJohoInput().set状態(new RString("ShinseiTorikeshiRirekiMode"));
-            // TODO
-            div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.TokushuTsuikaMode);
+            div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.ShinseiTorikeshiTsuikaMode);
             div.setHdnDisplayModeKey(new RString("2"));
             div.getBtnKakutei().setDisabled(false);
         }
@@ -277,6 +271,9 @@ public class RirekiShuseiHandler {
         rsb.append(inputNaiyo.get有効開始年月日());
         rsb.append(inputNaiyo.get有効終了年月日());
         rsb.append(inputNaiyo.get審査会意見());
+        if (inputNaiyo.getみなし更新認定() != null && !inputNaiyo.getみなし更新認定().isEmpty()) {
+            rsb.append(inputNaiyo.getみなし更新認定().get(0));
+        }
         List<dgServiceIchiran_Row> serviceCodeList = div.getCcdNinteiJohoInput().getServiceRow();
         for (dgServiceIchiran_Row row : serviceCodeList) {
             rsb.append(row.getCode());
@@ -353,6 +350,11 @@ public class RirekiShuseiHandler {
         konkai.set認定有効終了年月日(inputNaiyo.get有効終了年月日());
         konkai.set介護認定審査会意見(inputNaiyo.get審査会意見());
 
+        if (inputNaiyo.getみなし更新認定() != null && !inputNaiyo.getみなし更新認定().isEmpty()) {
+            konkai.setみなし要介護区分コード(new Code(MinashiKoshinNintei.みなし更新認定.getコード()));
+        } else {
+            konkai.setみなし要介護区分コード(new Code(MinashiKoshinNintei.通常認定.getコード()));
+        }
         List<dgServiceIchiran_Row> serviceCodeList = div.getCcdNinteiJohoInput().getServiceRow();
         int count = 1;
         for (dgServiceIchiran_Row row : serviceCodeList) {
@@ -534,8 +536,11 @@ public class RirekiShuseiHandler {
         }
         ninteiInput.set要介護度コード(konkai.get要介護状態区分コード().value());
         ninteiInput.set要介護度名称(get要介護状態区分名称(konkai.get厚労省IF識別コード().value(), konkai.get要介護状態区分コード()));
-//            if (konkai.getみなし要介護区分コード()) {
-//            }
+        if (MinashiKoshinNintei.みなし更新認定.getコード().equals(konkai.getみなし要介護区分コード().value())) {
+            List<RString> selKey = new ArrayList<>();
+            selKey.add(KEY_0);
+            ninteiInput.setみなし更新認定(selKey);
+        }
         ninteiInput.set認定年月日(konkai.get認定年月日());
         ninteiInput.set有効開始年月日(konkai.get認定有効開始年月日());
         ninteiInput.set有効終了年月日(konkai.get認定有効終了年月日());
