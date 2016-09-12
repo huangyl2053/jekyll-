@@ -47,8 +47,8 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
     private static final RString 送付対象外を含める = new RString("key0");
     private static final int 調定年度を含めて8年分 = 8;
     private static final int INDEX_ゼロ = 0;
-    private static final int ONE = new RString("1");
-    private static final int TWO = new RString("2");
+    private static final RString ONE = new RString("1");
+    private static final RString TWO = new RString("2");
 
     /**
      * コンストラクタです。
@@ -162,7 +162,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         } else if (KEY2.equals(div.getRadHoseuJokyo().getSelectedKey())) {
             batchparam.setHoseuJokyo(TWO);
         }
-        if (!INDEX_ゼロ.equals(div.getDdlTaishoNendo().getSelectedKey())) {
+        if (!BLANK.equals(div.getDdlTaishoNendo().getSelectedKey())) {
             batchparam.setFlexibleYear(div.getDdlTaishoNendo().getSelectedKey());
         } else {
             batchparam.setFlexibleYear(null);
