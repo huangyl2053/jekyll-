@@ -160,7 +160,6 @@ public class ShikakuShutokuJogaishaKanriManager {
      */
     @Transaction
     public int updateShikakuShutokuJogaisha(List<ShikakuShutokuJogaisha> updateKuJogaishaList) {
-        delShikakuShutokuJogaisha(updateKuJogaishaList);
         return insertShikakuShutokuJogaisha(updateKuJogaishaList);
     }
 
@@ -206,6 +205,8 @@ public class ShikakuShutokuJogaishaKanriManager {
      */
     @Transaction
     public int select履歴番号(ShikibetsuCode 識別コード) {
-        return dac.select履歴番号(識別コード) == null ? 1 : dac.select履歴番号(識別コード).getRirekiNo();
+        IShikakuShutokuJogaishaKanriMapper mapper = mapperProvider.create(IShikakuShutokuJogaishaKanriMapper.class);
+        ShikakuShutokuJogaishaKanriEntity entity = mapper.select最新履歴番号(識別コード);
+        return entity == null ? 1 : entity.getRirekiNo() + 1;
     }
 }

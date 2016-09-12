@@ -33,7 +33,7 @@
      "layoutName": "DBA1080011",
      "layoutTitle": "資格取得除外者登録",
      "eventName": "対象検索",
-     "destroy": true,
+     "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
