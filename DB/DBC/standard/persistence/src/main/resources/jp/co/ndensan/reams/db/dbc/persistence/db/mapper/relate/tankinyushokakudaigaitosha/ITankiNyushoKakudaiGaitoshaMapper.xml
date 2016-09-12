@@ -219,7 +219,7 @@
         DbT4001."kyuSochishaFlag",
         DbT4001."minashiCode",
         DbT4001."chokkinIdoJiyuCode",
-        ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号
+        ROW_NUMBER() OVER (PARTITION BY DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号
         FROM
         抽出対象 AS 抽出対象
         INNER JOIN rgdb."DbT4001JukyushaDaicho" AS DbT4001
