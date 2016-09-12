@@ -47,7 +47,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
-import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -68,12 +67,15 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
      * @return ResponseData<ShokanShikyuKetteiTsuchishoHakkouDiv>
      */
     public ResponseData<ShokanShikyuKetteiTsuchishoHakkouDiv> onLoad(ShokanShikyuKetteiTsuchishoHakkouDiv div) {
+        if (ResponseHolder.isReRequest()
+                && new RString(DbcInformationMessages.被保険者でないデータ
+                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            return ResponseData.of(div).respond();
+        }
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         if (資格対象者 == null || 資格対象者.get被保険者番号() == null
                 || 資格対象者.get被保険者番号().isEmpty() && !ResponseHolder.isReRequest()) {
-            InformationMessage message = new InformationMessage(DbcInformationMessages.被保険者でないデータ.getMessage().getCode(),
-                    DbcInformationMessages.被保険者でないデータ.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            return ResponseData.of(div).addMessage(DbcInformationMessages.被保険者でないデータ.getMessage()).respond();
         }
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
