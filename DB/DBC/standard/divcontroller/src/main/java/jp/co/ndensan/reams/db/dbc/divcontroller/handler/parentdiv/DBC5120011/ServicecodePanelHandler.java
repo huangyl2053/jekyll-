@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC5120011;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5120011.ServicecodePanelDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
@@ -90,6 +92,27 @@ public class ServicecodePanelHandler {
                 KaigoServiceShuruiManager.createInstance().getサービス種類DDL(get種類コードリスト()));
         div.getChusyutsuPanel().getDdlshurui().setSelectedKey(ZERO);
 
+    }
+
+    /**
+     * sort昇順ByKey
+     *
+     * @param list List<RString>
+     * @return List<RString>
+     */
+    public List<RString> sort昇順ByKey(List<RString> list) {
+        if (list.isEmpty()) {
+            return list;
+        }
+        Collections.sort(list,
+                new Comparator<RString>() {
+                    @Override
+                    public int compare(RString arg0, RString arg1) {
+                        return arg0.compareTo(arg1);
+                    }
+                }
+        );
+        return list;
     }
 
     private List<ServiceShuruiCode> get種類コードリスト() {
