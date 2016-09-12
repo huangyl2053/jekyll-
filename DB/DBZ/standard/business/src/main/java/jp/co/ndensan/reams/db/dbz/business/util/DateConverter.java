@@ -505,4 +505,18 @@ public final class DateConverter {
         }
         return new RDate(fd.getYearValue(), fd.getMonthValue(), fd.getDayValue());
     }
+
+    /**
+     * 共通ポリシー　パターン4を取得します。
+     *
+     * @param date RDate
+     * @return RString
+     */
+    public static RString getDate4(RDate date) {
+        if (date == null || RString.EMPTY.equals(date.toDateString())) {
+            return RString.EMPTY;
+        }
+        return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+    }
 }
