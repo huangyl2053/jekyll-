@@ -47,6 +47,8 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
     private static final RString 送付対象外を含める = new RString("key0");
     private static final int 調定年度を含めて8年分 = 8;
     private static final int INDEX_ゼロ = 0;
+    private static final int ONE = new RString("1");
+    private static final int TWO = new RString("2");
 
     /**
      * コンストラクタです。
@@ -138,8 +140,8 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         DBC710150_HanyoListKogakuGassanJikoFutangakuParameter batchparam = new DBC710150_HanyoListKogakuGassanJikoFutangakuParameter();
         if (すべて.equals(div.getRadChushutsuKubun().getSelectedValue())) {
             batchparam.setChushutsuKubun(RString.EMPTY);
-        } else {
-            batchparam.setChushutsuKubun(div.getRadChushutsuKubun().getSelectedValue());
+        } else if (KEY1.equals(div.getRadChushutsuKubun().getSelectedKey())) {
+            batchparam.setChushutsuKubun(ONE);
         }
         if (すべて.equals(div.getDdlDetaSakuseiKubun().getSelectedValue())) {
             batchparam.setDetaSakuseiKubun(RString.EMPTY);
@@ -148,15 +150,23 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         }
         if (すべて.equals(div.getRadDataShurui().getSelectedValue())) {
             batchparam.setDataShurui(RString.EMPTY);
-        } else {
-            batchparam.setDataShurui(div.getRadDataShurui().getSelectedValue());
+        } else if (KEY1.equals(div.getRadDataShurui().getSelectedKey())) {
+            batchparam.setDataShurui(ONE);
+        } else if (KEY2.equals(div.getRadDataShurui().getSelectedKey())) {
+            batchparam.setDataShurui(TWO);
         }
         if (すべて.equals(div.getRadHoseuJokyo().getSelectedValue())) {
             batchparam.setHoseuJokyo(RString.EMPTY);
-        } else {
-            batchparam.setHoseuJokyo(div.getRadHoseuJokyo().getSelectedValue());
+        } else if (KEY1.equals(div.getRadHoseuJokyo().getSelectedKey())) {
+            batchparam.setHoseuJokyo(ONE);
+        } else if (KEY2.equals(div.getRadHoseuJokyo().getSelectedKey())) {
+            batchparam.setHoseuJokyo(TWO);
         }
-        batchparam.setFlexibleYear(div.getDdlTaishoNendo().getSelectedKey());
+        if (!INDEX_ゼロ.equals(div.getDdlTaishoNendo().getSelectedKey())) {
+            batchparam.setFlexibleYear(div.getDdlTaishoNendo().getSelectedKey());
+        } else {
+            batchparam.setFlexibleYear(null);
+        }
         if (null != div.getTxtSinseibi().getFromValue()) {
             batchparam.setFlexibleDateFrom(new FlexibleDate(div.getTxtSinseibi().getFromValue().toString()));
         }

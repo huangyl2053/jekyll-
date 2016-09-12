@@ -58,25 +58,25 @@ public class AtenaSealEditor
         source.shichosonCode = entity.get市町村コード();
         source.shichosonName = entity.get市町村名称();
         source.title = 宛名シール;
-        source.yubinNo = entity.get郵便番号();
-        source.gyoseiku = entity.get行政区();
-        source.jushoText = entity.get住所TXT();
-        source.katagakiSmall2 = entity.get方書2();
-        source.katagakiSmall1 = entity.get方書1();
-        source.dainoKubunMei = entity.get代納区分名称();
-        source.shimeiSmall2 = entity.get氏名2();
-        source.shimeiSmall1 = entity.get氏名1();
-        source.samabunShimeiSmall2 = entity.get様分氏名2();
-        source.samabunShimeiSmall1 = entity.get様分氏名1();
-        source.kakkoLeft2 = entity.get左括号2();
-        source.kakkoLeft1 = entity.get左括号1();
-        source.meishoFuyo2 = entity.get名称付与2();
-        source.meishoFuyo1 = entity.get名称付与1();
-        source.samaBun2 = entity.get様分2();
-        source.samaBun1 = entity.get様分1();
-        source.kakkoRight2 = entity.get右括号2();
-        source.kakkoRight1 = entity.get右括号1();
-        source.customerBarCode = entity.getバーコード住所();
+//        source.yubinNo = entity.get郵便番号();
+//        source.gyoseiku = entity.get行政区();
+//        source.jushoText = entity.get住所TXT();
+//        source.katagakiSmall2 = entity.get方書2();
+//        source.katagakiSmall1 = entity.get方書1();
+//        source.dainoKubunMei = entity.get代納区分名称();
+//        source.shimeiSmall2 = entity.get氏名2();
+//        source.shimeiSmall1 = entity.get氏名1();
+//        source.samabunShimeiSmall2 = entity.get様分氏名2();
+//        source.samabunShimeiSmall1 = entity.get様分氏名1();
+//        source.kakkoLeft2 = entity.get左括号2();
+//        source.kakkoLeft1 = entity.get左括号1();
+//        source.meishoFuyo2 = entity.get名称付与2();
+//        source.meishoFuyo1 = entity.get名称付与1();
+//        source.samaBun2 = entity.get様分2();
+//        source.samaBun1 = entity.get様分1();
+//        source.kakkoRight2 = entity.get右括号2();
+//        source.kakkoRight1 = entity.get右括号1();
+//        source.customerBarCode = entity.getバーコード住所();
 
     }
 
