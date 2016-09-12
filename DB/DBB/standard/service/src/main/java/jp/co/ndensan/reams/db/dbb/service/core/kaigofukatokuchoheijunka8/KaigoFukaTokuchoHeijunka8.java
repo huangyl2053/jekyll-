@@ -10,9 +10,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.kaigofukatokuchoheijunka8.HeijunkaKeisanPageJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kaigofukatokuchoheijunka8.ShoriDateKanriEntityResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.kaigofukatokuchoheijunka8.KaigoFukaTokuchoHeijunka8FlowParameter;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -23,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class KaigoFukaTokuchoHeijunka8 {
 
     private final DbT7022ShoriDateKanriDac dbT7022ShoriDateKanriDac;
+    private static final RString 年度内連番 = new RString("0001");
+    private static final RString 処理枝番 = new RString("0001");
 
     /**
      * コンストラクタです。
@@ -88,7 +93,8 @@ public class KaigoFukaTokuchoHeijunka8 {
      * @return 特徴平準化8月分処理フラグ(※TRUE: 処理済み　FALSE：　未処理)
      */
     public boolean getHeijunka8MJyokyo(FlexibleYear 調定年度) {
-        List<DbT7022ShoriDateKanriEntity> 特徴平準化8月分 = dbT7022ShoriDateKanriDac.select特徴平準化8月分処理(調定年度);
+        List<DbT7022ShoriDateKanriEntity> 特徴平準化8月分 = dbT7022ShoriDateKanriDac.selectBySomeKeys(
+                SubGyomuCode.DBB介護賦課, ShoriName.特徴平準化_8月分_確定.get名称(), 処理枝番, 調定年度, 年度内連番);
         if (特徴平準化8月分 == null || 特徴平準化8月分.isEmpty()) {
             return false;
         }
