@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000062;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -297,51 +299,46 @@ public class KijunShunyuShinseiTourokuHandler {
             基準収入額データ.set課税所得_控除前(管理情報明細.get課税所得額());
             基準収入額データ.set課税所得_控除後(管理情報明細.get課税所得額_控除後());
 
-//            if (世帯基準日 != null) {
-            HihokenshaDaicho 被保険者台帳情報 = HihokenshaDaichoManager.createInstance().find被保険者台帳(
-                    被保険者番号, 世帯基準日);
-            ShikibetsuCode 識別コード = 被保険者台帳情報.get識別コード();
-            基準収入額データ.set識別コード(識別コード);
-            IShikibetsuTaishoFinder 識別対象Finder = ShikibetsuTaishoService.getShikibetsuTaishoFinder();
-            IShikibetsuTaisho 宛名情報 = 識別対象Finder.get識別対象(GyomuCode.DB介護保険,
-                    識別コード, KensakuYusenKubun.住登外優先);
-            if (宛名情報 != null) {
-                基準収入額データ.set氏名(宛名情報.get名称().getName().value());
-                基準収入額データ.set氏名カナ(宛名情報.get名称().getKana().value());
-                基準収入額データ.set生年月日(宛名情報.to個人().get生年月日().toFlexibleDate());
-                基準収入額データ.set性別(宛名情報.to個人().get性別().getCommonName());
-                基準収入額データ.set年齢(宛名情報.to個人().get年齢算出().get年齢());
-                基準収入額データ.set続柄(宛名情報.to個人().get続柄());
-            }
+            if (世帯基準日 != null) {
+                HihokenshaDaicho 被保険者台帳情報 = HihokenshaDaichoManager.createInstance().find被保険者台帳(
+                        被保険者番号, 世帯基準日);
+                ShikibetsuCode 識別コード = 被保険者台帳情報.get識別コード();
+                基準収入額データ.set識別コード(識別コード);
+                IShikibetsuTaishoFinder 識別対象Finder = ShikibetsuTaishoService.getShikibetsuTaishoFinder();
+                IShikibetsuTaisho 宛名情報 = 識別対象Finder.get識別対象(GyomuCode.DB介護保険,
+                        識別コード, KensakuYusenKubun.住登外優先);
+                if (宛名情報 != null) {
+                    基準収入額データ.set氏名(宛名情報.get名称().getName().value());
+                    基準収入額データ.set氏名カナ(宛名情報.get名称().getKana().value());
+                    基準収入額データ.set生年月日(宛名情報.to個人().get生年月日().toFlexibleDate());
+                    基準収入額データ.set性別(宛名情報.to個人().get性別().getCommonName());
+                    基準収入額データ.set年齢(宛名情報.to個人().get年齢算出().get年齢());
+                    基準収入額データ.set続柄(宛名情報.to個人().get続柄());
+                }
 
-            KaigoShotokuAlive 所得情報 = ShotokuManager.createInstance().get介護所得Alive(識別コード,
-                    管理情報.get年度(), new YMDHMS(世帯基準日.toString().concat(KEY_HMS.toString())));
-            if (所得情報 != null) {
-                基準収入額データ.set住民税(所得情報.get課税区分_住民税減免後());
-                基準収入額データ.set合計所得金額(所得情報.get合計所得金額());
-                基準収入額データ.set年金等収入(所得情報.get年金収入額());
-                基準収入額データ.set年金等所得(所得情報.get年金所得額());
-            }
+                KaigoShotokuAlive 所得情報 = ShotokuManager.createInstance().get介護所得Alive(識別コード,
+                        管理情報.get年度(), new YMDHMS(世帯基準日.toString().concat(KEY_HMS.toString())));
+                if (所得情報 != null) {
+                    基準収入額データ.set住民税(所得情報.get課税区分_住民税減免後());
+                    基準収入額データ.set合計所得金額(所得情報.get合計所得金額());
+                    基準収入額データ.set年金等収入(所得情報.get年金収入額());
+                    基準収入額データ.set年金等所得(所得情報.get年金所得額());
+                }
 
-            Map<String, Object> parameter = new HashMap<>();
-            parameter.put(KEY_被保険者番号.toString(), 被保険者番号);
-            parameter.put(KEY_世帯基準日.toString(), 世帯基準日);
-            // TODO QA1368 要介護認定結果情報（DbT5002）
-//            int 受給者台帳カウント = KijunShunyuShinseiTourokuManager.createInstance().get受給(parameter);
-            int 受給者台帳カウント = NUM_1;
-            if (NUM_1 < 受給者台帳カウント) {
-                基準収入額データ.set受給(KEY_受給);
-            } else {
-                基準収入額データ.set受給(RString.EMPTY);
-            }
+                int 受給者台帳カウント = KijunShunyuShinseiTourokuManager.createInstance().get受給(被保険者番号, 世帯基準日, false);
+                if (NUM_1 < 受給者台帳カウント) {
+                    基準収入額データ.set受給(KEY_受給);
+                } else {
+                    基準収入額データ.set受給(RString.EMPTY);
+                }
 
-            int 事業対象者カウント = KijunShunyuShinseiTourokuManager.createInstance().get事業対象(被保険者番号, 世帯基準日);
-            if (NUM_1 < 事業対象者カウント) {
-                基準収入額データ.set事業対象(KEY_事業対象);
-            } else {
-                基準収入額データ.set事業対象(RString.EMPTY);
+                int 事業対象者カウント = KijunShunyuShinseiTourokuManager.createInstance().get事業対象(被保険者番号, 世帯基準日);
+                if (NUM_1 < 事業対象者カウント) {
+                    基準収入額データ.set事業対象(KEY_事業対象);
+                } else {
+                    基準収入額データ.set事業対象(RString.EMPTY);
+                }
             }
-//            }
             基準収入額データList.add(基準収入額データ);
         }
         return 基準収入額データList;
@@ -400,10 +397,9 @@ public class KijunShunyuShinseiTourokuHandler {
             div.getMeisai().getTxtUnder16().setValue(new Decimal(人数.get(KEY_未満人数)));
             div.getMeisai().getTxtOver16().setValue(new Decimal(人数.get(KEY_以上人数)));
             div.getMeisai().getTxtTotalShunyu().setValue(null);
-            // TODO QA1444 追加の場合、隠し項目．履歴番号の設定。
-            div.setHdnRirekiNo(所得年度);
+            div.setHdnRirekiNo(new RString(getMax履歴番号()));
             基準収入額データList = get明細Gird(識別コード);
-            // TODO 基準収入額データのリストを下記の順番でソートする。
+            sort基準収入額データ(基準収入額データList);
             追加状態定義();
         } else {
             dgIchiran_Row 修正Row = div.getIchiran().getDgIchiran().getClickedItem();
@@ -439,6 +435,38 @@ public class KijunShunyuShinseiTourokuHandler {
         set明細Girdの項目(基準収入額データList, 状態);
         set押下可能ボタン();
         set隠し項目(識別コード);
+    }
+
+    private List<KijunShunyuShinseiDate> sort基準収入額データ(List<KijunShunyuShinseiDate> 基準収入額データList) {
+        Collections.sort(基準収入額データList, new Comparator<KijunShunyuShinseiDate>() {
+            @Override
+            public int compare(KijunShunyuShinseiDate o1, KijunShunyuShinseiDate o2) {
+                int flag = o1.get被保険者番号().compareTo(o2.get被保険者番号());
+                if (0 == flag) {
+                    flag = o2.get受給().compareTo(o1.get受給());
+                    if (0 == flag) {
+                        flag = o2.get事業対象().compareTo(o1.get事業対象());
+                    }
+                }
+                return flag;
+            }
+        });
+        return 基準収入額データList;
+    }
+
+    private int getMax履歴番号() {
+        List<dgIchiran_Row> 修正Row = div.getIchiran().getDgIchiran().getDataSource();
+        int 履歴番号 = NUM_0;
+        if (修正Row == null || !修正Row.isEmpty()) {
+            return 履歴番号;
+        }
+        for (dgIchiran_Row row : 修正Row) {
+            int 番号 = Integer.valueOf(row.getRirekiNo().toString());
+            if (履歴番号 < 番号) {
+                履歴番号 = 番号;
+            }
+        }
+        return 履歴番号;
     }
 
     private void 追加状態定義() {
@@ -595,7 +623,6 @@ public class KijunShunyuShinseiTourokuHandler {
             int count,
             FlexibleDate 世帯員把握基準日) {
         KijunShunyuShinseiDate 基準収入額データ;
-        Map<String, Object> parameter;
         for (SetaiinShotoku 世帯員所得 : 世帯員所得List) {
             HihokenshaNo 被保険者番号 = 世帯員所得.get被保険者番号();
             基準収入額データ = new KijunShunyuShinseiDate();
@@ -614,12 +641,8 @@ public class KijunShunyuShinseiTourokuHandler {
             基準収入額データ.set公的年金(null);
             基準収入額データ.set給与(null);
             基準収入額データ.set年金_給与以外の収入(null);
-            parameter = new HashMap<>();
-            parameter.put(KEY_被保険者番号.toString(), 被保険者番号);
-            parameter.put(KEY_世帯基準日.toString(), 世帯員把握基準日);
-            // TODO QA1368 要介護認定結果情報（DbT5002）
-//           int 受給者台帳カウント = KijunShunyuShinseiTourokuManager.createInstance().get受給(parameter);
-            int 受給者台帳カウント = NUM_1;
+            int 受給者台帳カウント = KijunShunyuShinseiTourokuManager.createInstance().get受給(被保険者番号,
+                    世帯員把握基準日, true);
             if (NUM_1 < 受給者台帳カウント) {
                 基準収入額データ.set受給(KEY_受給);
                 count = count + NUM_1;
@@ -1137,7 +1160,7 @@ public class KijunShunyuShinseiTourokuHandler {
                 修正基準収入額データList.add(修正基準収入額データ);
             } else {
                 修正基準収入額データ = new KijunShunyugakuTekiyoKanri(new SetaiCode(世帯コード),
-                        new FlexibleYear(年度), Integer.valueOf(履歴番号.toString()), 被保険者番号);
+                        new FlexibleYear(年度), Integer.valueOf(履歴番号.toString()) + NUM_1, 被保険者番号);
                 データBuilder = getデータBuilder(修正基準収入額データ, 基準収入額データ, row);
                 修正基準収入額データ = データBuilder.build();
                 追加基準収入額データList.add(修正基準収入額データ);
@@ -1200,7 +1223,7 @@ public class KijunShunyuShinseiTourokuHandler {
             RString 履歴番号 = row.getRirekiNo();
             HihokenshaNo 被保険者番号 = 基準収入額データ.get被保険者番号();
             追加基準収入額データ = new KijunShunyugakuTekiyoKanri(new SetaiCode(世帯コード),
-                    new FlexibleYear(年度), Integer.valueOf(履歴番号.toString()), 被保険者番号);
+                    new FlexibleYear(年度), Integer.valueOf(履歴番号.toString()) + NUM_1, 被保険者番号);
             データBuilder = 追加基準収入額データ.createBuilderForEdit();
             データBuilder.set公的年金収入額(基準収入額データ.get公的年金())
                     .set給与収入額(基準収入額データ.get給与())
