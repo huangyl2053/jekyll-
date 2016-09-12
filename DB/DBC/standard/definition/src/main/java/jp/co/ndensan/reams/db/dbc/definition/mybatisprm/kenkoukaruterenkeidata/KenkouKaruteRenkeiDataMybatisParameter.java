@@ -13,28 +13,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-5020-040 zhaoyao
  */
+@lombok.Setter
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KenkouKaruteRenkeiDataMybatisParameter implements IMyBatisParameter {
 
-    private final RString psmShikibetsuTaisho;
+    private RString psmShikibetsuTaisho;
+    private RString shichosonCode;
 
-    /**
-     * コンストラクタです
-     *
-     * @param psmShikibetsuTaisho psmShikibetsuTaisho
-     */
-    protected KenkouKaruteRenkeiDataMybatisParameter(RString psmShikibetsuTaisho) {
-        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
-    }
-
-    /**
-     * 健康かるて連携データ作成のMybatisParamete作成。
-     *
-     * @param psmShikibetsuTaisho psmShikibetsuTaisho
-     * @return KenkouKaruteRenkeiDataMybatisParameter
-     */
-    public static KenkouKaruteRenkeiDataMybatisParameter creatMybatisParameter(RString psmShikibetsuTaisho) {
-        return new KenkouKaruteRenkeiDataMybatisParameter(psmShikibetsuTaisho);
-    }
 }
