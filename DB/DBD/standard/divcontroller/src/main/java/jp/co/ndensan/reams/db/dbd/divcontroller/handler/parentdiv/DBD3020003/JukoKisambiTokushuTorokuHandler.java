@@ -22,6 +22,10 @@ import jp.co.ndensan.reams.db.dbd.service.core.basic.JikoKisambiKanriManager;
 import jp.co.ndensan.reams.db.dbd.service.core.dbd3020003.JukoKisambiTokushuTorokuManager;
 import jp.co.ndensan.reams.db.dbd.service.core.taino.TainoJokyoResearcher;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.taino.JikoKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.taino.MinoKannoKubun;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -30,8 +34,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 「時効起算日特殊登録」画面のHandlerクラスです。
@@ -47,7 +51,9 @@ public class JukoKisambiTokushuTorokuHandler {
     private final RString 修正 = new RString("修正");
     private final RString 全行表示_ON = new RString("isZengyoHyoji");
 
+    private static final char CHAR_0 = 0;
     private static final int INT_2 = 2;
+    private static final int INT_10 = 10;
 
     /**
      * コンストラクタです。
@@ -143,67 +149,77 @@ public class JukoKisambiTokushuTorokuHandler {
     /**
      * gridのselect操作処理です。
      *
+     * @param 滞納判定結果List List<TainoKiSummary>
      * @param 時効起算日管理List List<JikoKisambiKanri>
      * @param 被保険者番号 HihokenshaNo
+     * @return List<JikoKisambiKanri>
      */
-    public void onClick_selectBySelectButton(
+    public List<JikoKisambiKanri> onClick_selectBySelectButton(
+            List<TainoKiSummary> 滞納判定結果List,
             List<JikoKisambiKanri> 時効起算日管理List,
             HihokenshaNo 被保険者番号) {
 
+        RString 調定年度 = div.getDgShunoJokyo().getActiveRow().getSeirekiChoteiNendo();
         List<dgJikoKisambi_Row> 時効起算日登録List = new ArrayList<>();
         boolean 存在フラグ = false;
-        for (JikoKisambiKanri 時効起算日管理 : 時効起算日管理List) {
-            if (時効起算日管理.get調定年度().
-                    equals(new RYear(div.getDgShunoJokyo().getActiveRow().getChoteiNendo().getValue().getYearValue()))) {
-                dgJikoKisambi_Row row = new dgJikoKisambi_Row();
-                row.setFukaNendo(時効起算日管理.get賦課年度().wareki().firstYear(FirstYear.ICHI_NEN).toDateString());
-                row.setFuchoTokucho(TokuchoFuchoKubun.toValue(時効起算日管理.get特徴_普徴区分()).get名称());
-                row.setTsuchishoNo(時効起算日管理.get通知書番号().getColumnValue());
-                row.setKi(時効起算日管理.get収納期_月().padZeroToLeft(INT_2).concat(期));
-                row.setChoteigaku(div.getDgShunoJokyo().getActiveRow().getChoteiGaku().getText());
-                row.getNokigen().setValue(new FlexibleDate(div.getDgShunoJokyo().getActiveRow().getNokigen()));
-                row.setShunyugaku(div.getDgShunoJokyo().getActiveRow().getShunyuGaku().getText());
-                row.setMinogaku(div.getDgShunoJokyo().getActiveRow().getJikoToraiMinogaku().getText());
-                row.getJikoKisaibi().setValue(new FlexibleDate(div.getDgShunoJokyo().getActiveRow().getJikoKisanYMD()));
-                row.setJikoKisaibiJiyu(JikoKisanbiKubun.toValue(div.getDgShunoJokyo().getActiveRow().getJikoKisanYMDKubun()).get名称());
-                row.getTokushuJikoKisaibi().setValue(new FlexibleDate(div.getDgShunoJokyo().getActiveRow().getJikoKisanYMD()));
-                row.getTokushuJikoKisaibiJiyu().setDataSource(get時効起算日区分List());
-                row.getTokushuJikoKisaibiJiyu().setSelectedKey(時効起算日管理.get時効起算日区分());
 
+        for (TainoKiSummary tainoKiSummary : 滞納判定結果List) {
+            if (tainoKiSummary.get調定年度().toDateString().equals(調定年度)) {
+                dgJikoKisambi_Row row = new dgJikoKisambi_Row();
+                row.setFukaNendo(tainoKiSummary.get賦課年度().wareki().firstYear(FirstYear.ICHI_NEN).toDateString());
+                row.setHdnFukaNendo(tainoKiSummary.get賦課年度().toDateString());
+                row.setFuchoTokucho(TokuchoFuchoKubun.toValue(tainoKiSummary.get徴収方法().getコード()).get名称());
+                row.setHdnFuchoTokucho(tainoKiSummary.get徴収方法().getコード());
+                row.setTsuchishoNo(tainoKiSummary.get通知書番号().getColumnValue());
+                row.setHdnTsuchishoNo(tainoKiSummary.get通知書番号().getColumnValue());
+                row.setKi(tainoKiSummary.get期().padZeroToLeft(INT_2).concat(期));
+                row.setChoteigaku(new RString(tainoKiSummary.get調定額().toString()));
+                row.getNokigen().setValue(new FlexibleDate(tainoKiSummary.get納期限().toDateString()));
+                row.setShunyugaku(new RString(tainoKiSummary.get収入額().toString()));
+                row.setMinogaku(new RString(tainoKiSummary.get滞納額().toString()));
+                row.getJikoKisaibi().setValue(tainoKiSummary.get時効起算日());
+                row.setJikoKisaibiJiyu(JikoKisanbiKubun.toValue(tainoKiSummary.get時効起算日区分().getコード()).get名称());
+                row.getTokushuJikoKisaibiJiyu().setDataSource(get時効起算日区分List());
+
+                for (JikoKisambiKanri jikoKisambiKanri : 時効起算日管理List) {
+                    if (new RString(jikoKisambiKanri.get調定年度().getYearValue()).equals(調定年度)
+                            && new RString(jikoKisambiKanri.get賦課年度().getYearValue()).equals(row.getHdnFukaNendo())
+                            && jikoKisambiKanri.get特徴_普徴区分().equals(row.getHdnFuchoTokucho())
+                            && jikoKisambiKanri.get通知書番号().value().equals(row.getTsuchishoNo())
+                            && jikoKisambiKanri.get収納期_月().equals(row.getKi().substring(0, INT_2).trimStart(CHAR_0))) {
+                        row.getTokushuJikoKisaibi().setValue(jikoKisambiKanri.get時効起算年月日());
+                        row.getTokushuJikoKisaibiJiyu().setSelectedKey(jikoKisambiKanri.get時効起算日区分());
+                        存在フラグ = true;
+                    }
+
+                }
+                if (!存在フラグ) {
+                    時効起算日管理List.addAll(this.setFor時効起算日管理が存在しない(被保険者番号, new RYear(調定年度), row));
+                }
+
+                if (MinoKannoKubun.過納.equals(tainoKiSummary.get未納完納区分())) {
+                    row.setRowBgColor(DataGridCellBgColor.bgColorGreen);
+                } else if (MinoKannoKubun.未納あり.equals(tainoKiSummary.get未納完納区分())
+                        && JikoKubun.時効未到来.equals(tainoKiSummary.get時効区分())) {
+                    row.setRowBgColor(DataGridCellBgColor.bgColorYellow);
+                } else if (MinoKannoKubun.未納あり.equals(tainoKiSummary.get未納完納区分())
+                        && JikoKubun.時効到来.equals(tainoKiSummary.get時効区分())
+                        && new FlexibleDate(tainoKiSummary.get納期限().toDateString()).
+                        compareTo(div.getTxtTainoHanteiKijunDate().getValue().plusYear(INT_10)) > 0) {
+                    row.setRowBgColor(DataGridCellBgColor.bgColorRed);
+                } else if (MinoKannoKubun.未納あり.equals(tainoKiSummary.get未納完納区分())
+                        && JikoKubun.時効到来.equals(tainoKiSummary.get時効区分())
+                        && new FlexibleDate(tainoKiSummary.get納期限().toDateString()).
+                        compareTo(div.getTxtTainoHanteiKijunDate().getValue().plusYear(INT_10)) <= 0) {
+                    row.setRowBgColor(DataGridCellBgColor.bgColorGray);
+                }
                 時効起算日登録List.add(row);
-                存在フラグ = true;
             }
         }
-        if (!存在フラグ) {
-            JukoKisambiTokushuTorokuManager manager = JukoKisambiTokushuTorokuManager.createInstance();
-
-            List<JikoKisambiKanri> 時効起算日管理リスト = manager.get時効起算日管理(
-                    被保険者番号, new RYear(div.getDgShunoJokyo().getActiveRow().getSeirekiChoteiNendo()));
-
-            for (JikoKisambiKanri 時効起算日管理 : 時効起算日管理リスト) {
-
-                dgJikoKisambi_Row row = new dgJikoKisambi_Row();
-                row.setFukaNendo(時効起算日管理.get賦課年度().wareki().firstYear(FirstYear.ICHI_NEN).toDateString());
-                row.setFuchoTokucho(TokuchoFuchoKubun.toValue(時効起算日管理.get特徴_普徴区分()).get名称());
-                row.setTsuchishoNo(時効起算日管理.get通知書番号().getColumnValue());
-                row.setKi(時効起算日管理.get収納期_月().padZeroToLeft(INT_2).concat(期));
-                row.setChoteigaku(div.getDgShunoJokyo().getActiveRow().getChoteiGaku().getText());
-                row.getNokigen().setValue(new FlexibleDate(div.getDgShunoJokyo().getActiveRow().getNokigen()));
-                row.setShunyugaku(div.getDgShunoJokyo().getActiveRow().getShunyuGaku().getText());
-                row.setMinogaku(div.getDgShunoJokyo().getActiveRow().getJikoToraiMinogaku().getText());
-                row.getJikoKisaibi().setValue(new FlexibleDate(div.getDgShunoJokyo().getActiveRow().getJikoKisanYMD()));
-                row.setJikoKisaibiJiyu(JikoKisanbiKubun.toValue(div.getDgShunoJokyo().getActiveRow().getJikoKisanYMDKubun()).get名称());
-                row.getTokushuJikoKisaibi().setValue(new FlexibleDate(div.getDgShunoJokyo().getActiveRow().getJikoKisanYMD()));
-                row.getTokushuJikoKisaibiJiyu().setDataSource(get時効起算日区分List());
-                row.getTokushuJikoKisaibiJiyu().setSelectedKey(時効起算日管理.get時効起算日区分());
-                row.setJikoKisambiKanri(DataPassingConverter.serialize(時効起算日管理));
-
-                時効起算日登録List.add(row);
-            }
-        }
-
         div.getDgJikoKisambi().setDataSource(時効起算日登録List);
         div.getDdlFukushaJikoKisambiJiyu().setDataSource(get時効起算日区分List());
+
+        return 時効起算日管理List;
     }
 
     /**
@@ -244,49 +260,45 @@ public class JukoKisambiTokushuTorokuHandler {
     /**
      * 全行表示チェックボックスです。
      *
-     * @param 時効起算日管理List List<JikoKisambiKanri>
      */
-    public void onChange_chkZengyoHyoji(List<JikoKisambiKanri> 時効起算日管理List) {
+    public void onChange_chkZengyoHyoji() {
 
-        List<dgJikoKisambi_Row> 時効起算日登録List = new ArrayList<>();
+        List<dgJikoKisambi_Row> 時効起算日登録List = div.getDgJikoKisambi().getDataSource();
+        List<dgJikoKisambi_Row> new時効起算日登録List = new ArrayList<>();
         Map<RString, RString> fukaNendoMap = new HashMap<>();
         Map<RString, RString> fuchoTokuchoMap = new HashMap<>();
         Map<RString, RString> tsuchishoNoMap = new HashMap<>();
-        for (int i = 0; i < 時効起算日管理List.size(); i++) {
+        for (dgJikoKisambi_Row row : 時効起算日登録List) {
             if (div.getChkZengyoHyoji().isAllSelected()) {
 
-                JikoKisambiKanri 時効起算日管理 = 時効起算日管理List.get(i);
-                dgJikoKisambi_Row row = div.getDgJikoKisambi().getDataSource().get(i);
-                row.setFukaNendo(時効起算日管理.get賦課年度().wareki().firstYear(FirstYear.ICHI_NEN).toDateString());
-                row.setFuchoTokucho(TokuchoFuchoKubun.toValue(時効起算日管理.get特徴_普徴区分()).get名称());
-                row.setTsuchishoNo(時効起算日管理.get通知書番号().getColumnValue());
+                row.setFukaNendo(new FlexibleYear(row.getHdnFukaNendo()).wareki().firstYear(FirstYear.ICHI_NEN).toDateString());
+                row.setFuchoTokucho(TokuchoFuchoKubun.toValue(row.getHdnFuchoTokucho()).get名称());
+                row.setTsuchishoNo(row.getHdnTsuchishoNo());
 
-                時効起算日登録List.add(row);
+                new時効起算日登録List.add(row);
             } else {
 
-                dgJikoKisambi_Row row = div.getDgJikoKisambi().getDataSource().get(i);
-
-                if (fukaNendoMap.containsKey(row.getFukaNendo())) {
+                if (fukaNendoMap.containsKey(row.getHdnFukaNendo())) {
                     row.setFukaNendo(RString.EMPTY);
                 } else {
-                    fukaNendoMap.put(row.getFukaNendo(), row.getFukaNendo());
+                    fukaNendoMap.put(row.getHdnFukaNendo(), row.getHdnFukaNendo());
                 }
-                if (fuchoTokuchoMap.containsKey(row.getFuchoTokucho())) {
+                if (fuchoTokuchoMap.containsKey(row.getHdnFuchoTokucho())) {
                     row.setFuchoTokucho(RString.EMPTY);
                 } else {
-                    fuchoTokuchoMap.put(row.getFuchoTokucho(), row.getFuchoTokucho());
+                    fuchoTokuchoMap.put(row.getHdnFuchoTokucho(), row.getHdnFuchoTokucho());
                 }
-                if (tsuchishoNoMap.containsKey(row.getTsuchishoNo())) {
+                if (tsuchishoNoMap.containsKey(row.getHdnTsuchishoNo())) {
                     row.setTsuchishoNo(RString.EMPTY);
                 } else {
-                    tsuchishoNoMap.put(row.getTsuchishoNo(), row.getTsuchishoNo());
+                    tsuchishoNoMap.put(row.getHdnTsuchishoNo(), row.getHdnTsuchishoNo());
                 }
 
-                時効起算日登録List.add(row);
+                new時効起算日登録List.add(row);
             }
         }
 
-        div.getDgJikoKisambi().setDataSource(時効起算日登録List);
+        div.getDgJikoKisambi().setDataSource(new時効起算日登録List);
     }
 
     /**
@@ -305,44 +317,55 @@ public class JukoKisambiTokushuTorokuHandler {
 
         }
         div.getDgJikoKisambi().setDataSource(new時効起算日登録List);
+        div.getTxtTokushuJikoKisambi().clearValue();
+        div.getDdlFukushaJikoKisambiJiyu().setSelectedKey(RString.EMPTY);
     }
 
     /**
      * 確定ボタンです。
      *
      * @param 時効起算日管理List List<JikoKisambiKanri>
+     * @param 被保険者番号 HihokenshaNo
      * @return List<JikoKisambiKanri>
      */
-    public List<JikoKisambiKanri> onClick_btnKakutei(List<JikoKisambiKanri> 時効起算日管理List) {
+    public List<JikoKisambiKanri> onClick_btnKakutei(List<JikoKisambiKanri> 時効起算日管理List, HihokenshaNo 被保険者番号) {
 
+        RString 調定年度 = div.getDgShunoJokyo().getActiveRow().getSeirekiChoteiNendo();
         List<dgJikoKisambi_Row> 時効起算日登録List = div.getDgJikoKisambi().getDataSource();
-        List<JikoKisambiKanri> new時効起算日管理List = new ArrayList<>();
         for (dgJikoKisambi_Row row : 時効起算日登録List) {
+            for (int i = 0; i < 時効起算日管理List.size(); i++) {
+                JikoKisambiKanri 時効起算日管理 = 時効起算日管理List.get(i);
+                if (new RYear(調定年度).equals(時効起算日管理.get調定年度())
+                        && 時効起算日管理.get賦課年度().equals(new RYear(row.getHdnFukaNendo()))
+                        && 時効起算日管理.get特徴_普徴区分().equals(row.getHdnFuchoTokucho())
+                        && 時効起算日管理.get通知書番号().getColumnValue().equals(row.getHdnTsuchishoNo())
+                        && 時効起算日管理.get収納期_月().equals(row.getKi().substring(0, INT_2).trimStart(CHAR_0))) {
 
-            JikoKisambiKanri 時効起算日管理 = DataPassingConverter.deserialize(row.getJikoKisambiKanri(), JikoKisambiKanri.class);
+                    時効起算日管理List.remove(i);
+                    JikoKisambiKanriBuilder builder = 時効起算日管理.createBuilderForEdit();
+                    builder.set時効起算年月日(row.getTokushuJikoKisaibi().getValue());
+                    builder.set時効起算日区分(row.getTokushuJikoKisaibiJiyu().getSelectedKey());
+                    builder.set論理削除フラグ(false);
+                    時効起算日管理 = builder.build();
+                    if (時効起算日管理.isAdded()
+                            && row.getTokushuJikoKisaibi().getValue().isEmpty()) {
+                        時効起算日管理 = 時効起算日管理.unChanged();
 
-            JikoKisambiKanriBuilder builder = 時効起算日管理.createBuilderForEdit();
-            builder.set時効起算年月日(row.getTokushuJikoKisaibi().getValue());
-            builder.set時効起算日区分(row.getTokushuJikoKisaibiJiyu().getSelectedKey());
-
-            JikoKisambiKanri new時効起算日管理 = builder.build();
-
-            if (時効起算日管理List == null
-                    || 時効起算日管理List.isEmpty()
-                    || !時効起算日管理List.contains(new時効起算日管理)) {
-                new時効起算日管理 = new時効起算日管理.added();
-                new時効起算日管理List.add(new時効起算日管理);
-            } else if (RString.isNullOrEmpty(new RString(row.getTokushuJikoKisaibi().getValue().toString()))
-                    && RString.isNullOrEmpty(row.getTokushuJikoKisaibiJiyu().getSelectedValue())) {
-                new時効起算日管理 = new時効起算日管理.deleted();
-                new時効起算日管理List.add(new時効起算日管理);
-            } else {
-                new時効起算日管理 = new時効起算日管理.modifiedModel();
-                new時効起算日管理List.add(new時効起算日管理);
+                    }
+                    if (!時効起算日管理.isUnchanged()
+                            && row.getTokushuJikoKisaibi().getValue().isEmpty()) {
+                        時効起算日管理 = 時効起算日管理.deleted();
+                    }
+                    if (i == 時効起算日登録List.size() - 1) {
+                        時効起算日管理List.add(時効起算日管理);
+                    } else {
+                        時効起算日管理List.add(i, 時効起算日管理);
+                    }
+                }
             }
         }
 
-        return new時効起算日管理List;
+        return 時効起算日管理List;
     }
 
     /**
@@ -361,6 +384,7 @@ public class JukoKisambiTokushuTorokuHandler {
     private List<KeyValueDataSource> get時効起算日区分List() {
 
         List<KeyValueDataSource> 時効起算日区分List = new ArrayList<>();
+        時効起算日区分List.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (JikoKisanbiKubun 時効起算日区分 : JikoKisanbiKubun.values()) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(時効起算日区分.getコード());
@@ -368,5 +392,49 @@ public class JukoKisambiTokushuTorokuHandler {
             時効起算日区分List.add(keyValue);
         }
         return 時効起算日区分List;
+    }
+
+    private List<JikoKisambiKanri> setFor時効起算日管理が存在しない(
+            HihokenshaNo 被保険者番号,
+            RYear 調定年度,
+            dgJikoKisambi_Row row) {
+
+        JukoKisambiTokushuTorokuManager manager = JukoKisambiTokushuTorokuManager.createInstance();
+
+        List<JikoKisambiKanri> 時効起算日管理リスト = manager.get時効起算日管理(被保険者番号, 調定年度);
+        List<JikoKisambiKanri> 保存用時効起算日管理リスト = new ArrayList<>();
+
+        for (JikoKisambiKanri 時効起算日管理 : 時効起算日管理リスト) {
+            if (new RString(時効起算日管理.get賦課年度().getYearValue()).equals(row.getHdnFukaNendo())
+                    && 時効起算日管理.get特徴_普徴区分().equals(row.getHdnFuchoTokucho())
+                    && 時効起算日管理.get通知書番号().value().equals(row.getHdnTsuchishoNo())
+                    && 時効起算日管理.get収納期_月().equals(row.getKi().substring(0, INT_2).trimStart(CHAR_0))) {
+                row.getTokushuJikoKisaibi().setValue(時効起算日管理.get時効起算年月日());
+                row.getTokushuJikoKisaibiJiyu().setSelectedKey(時効起算日管理.get時効起算日区分());
+
+                時効起算日管理 = 時効起算日管理.modifiedModel();
+
+                保存用時効起算日管理リスト.add(時効起算日管理);
+            } else {
+                JikoKisambiKanri newJikoKisambiKanri = new JikoKisambiKanri(
+                        new ShoKisaiHokenshaNo(div.getHdnShoKisaiHokenshaNo()),
+                        被保険者番号,
+                        調定年度,
+                        new RYear(row.getHdnFukaNendo()),
+                        row.getHdnFuchoTokucho(),
+                        new TsuchishoNo(row.getHdnTsuchishoNo()),
+                        row.getKi().substring(0, INT_2).trimStart(CHAR_0),
+                        0);
+
+                JikoKisambiKanriBuilder builder = newJikoKisambiKanri.createBuilderForEdit();
+                builder.set時効起算年月日(FlexibleDate.EMPTY);
+                builder.set時効起算日区分(RString.EMPTY);
+                builder.set論理削除フラグ(false);
+                newJikoKisambiKanri = builder.build().added();
+
+                保存用時効起算日管理リスト.add(newJikoKisambiKanri);
+            }
+        }
+        return 保存用時効起算日管理リスト;
     }
 }
