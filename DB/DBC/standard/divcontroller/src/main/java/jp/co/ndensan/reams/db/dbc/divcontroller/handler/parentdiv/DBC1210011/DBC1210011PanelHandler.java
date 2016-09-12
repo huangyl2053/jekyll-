@@ -51,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 画面設計_DBCMN63003_高額合算支給決定通知書（単）のハンドラクラスです。
@@ -288,11 +287,9 @@ public class DBC1210011PanelHandler {
             HihokenshaNo 被保険者番号) {
         if (div.getTxtHakkouYMD().getValue() != null) {
             FlexibleDate 発行日 = new FlexibleDate(div.getTxtHakkouYMD().getValue().toDateString());
-            高額合算支給不支給決定 = 高額合算支給不支給決定.createBuilderForEdit().set決定通知書作成年月日(発行日).build();
-            高額合算支給不支給決定 = 高額合算支給不支給決定.createBuilderForEdit().set決定通知リアル発行フラグ(RSTRING_1).build();
-            高額合算支給不支給決定.toEntity().setState(EntityDataState.Modified);
-            KogakuGassanShikyuFushikyuKetteiManager manage = new KogakuGassanShikyuFushikyuKetteiManager();
-            manage.save高額合算支給不支給決定(高額合算支給不支給決定);
+            KogakuGassanShikyuFushikyuKetteiManager manager = new KogakuGassanShikyuFushikyuKetteiManager();
+            manager.update決定通知書作成年月日(被保険者番号, 高額合算支給不支給決定.get対象年度(), 高額合算支給不支給決定.get保険者番号(),
+                    高額合算支給不支給決定.get支給申請書整理番号(), 高額合算支給不支給決定.get履歴番号(), 発行日);
             AccessLogger.log(AccessLogType.更新, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
         }
     }
