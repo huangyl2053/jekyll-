@@ -260,6 +260,18 @@ public class JikoKisambiKanri extends ModelBase<JikoKisambiKanriIdentifier, DbT4
                 addedEntity, id);
     }
 
+    /**
+     * 時効起算日管理のみを変更対象とします。 {@link DbT4023JikoKisambiKanriEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link JikoKisambiKanri}
+     */
+    public JikoKisambiKanri unChanged() {
+        DbT4023JikoKisambiKanriEntity unChangedEntity = entity.clone();
+        unChangedEntity.setState(EntityDataState.Added);
+        return new JikoKisambiKanri(
+                unChangedEntity, id);
+    }
+
     @Override
     public boolean hasChanged() {
         return hasChangedEntity();
