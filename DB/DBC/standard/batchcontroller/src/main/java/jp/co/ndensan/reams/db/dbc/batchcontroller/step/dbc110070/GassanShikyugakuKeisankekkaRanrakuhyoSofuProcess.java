@@ -146,19 +146,20 @@ public class GassanShikyugakuKeisankekkaRanrakuhyoSofuProcess extends BatchProce
                 entity, outputOrder, processParameter.get処理年月(), システム日付, 連番 + 1);
         report.writeBy(reportSourceWriter);
         if (連番 == 0) {
-            ヘッダー項目出力();
+            ヘッダー項目出力(entity);
+        } else {
+            明細項目出力(entity);
         }
-        明細項目出力(entity);
         アクセスログ対象追加(entity);
     }
 
     @Override
     protected void afterExecute() {
+        eucCsvWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
             manager.spool(eucFilePath, accessLogUUID);
         }
-        eucCsvWriter.close();
     }
 
     private void 明細項目出力(GassanShikyugakuKeisankekkaRanrakuhyoSofuEntity entity) {
@@ -214,7 +215,7 @@ public class GassanShikyugakuKeisankekkaRanrakuhyoSofuProcess extends BatchProce
         eucCsvWriter.writeLine(meisaiEntity);
     }
 
-    private void ヘッダー項目出力() {
+    private void ヘッダー項目出力(GassanShikyugakuKeisankekkaRanrakuhyoSofuEntity entity) {
         GassanShikyugakuKeisankekkaIchiranCsvEntity headEntity = new GassanShikyugakuKeisankekkaIchiranCsvEntity();
         headEntity.set送付年月(processParameter.get処理年月().wareki().eraType(EraType.KANJI_RYAKU)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
@@ -229,6 +230,47 @@ public class GassanShikyugakuKeisankekkaRanrakuhyoSofuProcess extends BatchProce
                 DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         headEntity.set保険者名(
                 DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        headEntity.set支給申請書整理番号(entity.get高額合算支給額計算結果一時().getShikyuShinseishoSeiriNo());
+        headEntity.set被保険者番号(entity.get高額合算支給額計算結果一時().getHihokenshaNo().getColumnValue());
+        headEntity.set被保険者氏名(entity.get被保険者一時().getMeisho());
+        if (entity.get高額合算支給額計算結果一時().getTaishoNendo() != null) {
+            headEntity.set対象年度(
+                    entity.get高額合算支給額計算結果一時().getTaishoNendo()
+                    .wareki().fillType(FillType.BLANK).toDateString().concat(年度));
+        }
+        if (entity.get高額合算支給額計算結果一時().getTaishoKeisanKaishiYMD() != null) {
+            headEntity.set計算対象期間開始年月日(entity.get高額合算支給額計算結果一時().getTaishoKeisanKaishiYMD()
+                    .wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+        }
+        if (entity.get高額合算支給額計算結果一時().getTaishoKeisanShuryoYMD() != null) {
+            headEntity.set計算対象期間終了年月日(entity.get高額合算支給額計算結果一時().getTaishoKeisanShuryoYMD()
+                    .wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+        }
+        headEntity.set世帯負担総額(decimalFormat(entity.get高額合算支給額計算結果一時().getSetaiFutanSogaku()));
+        headEntity.set世帯合算額(decimalFormat(entity.get高額合算支給額計算結果一時().getSetaiGassanGaku()));
+        headEntity.set世帯合算額_70歳以上(
+                decimalFormat(entity.get高額合算支給額計算結果一時().getOver70_SetaiGassanGaku()));
+        headEntity.set所得区分(entity.get高額合算支給額計算結果一時().getShotokuKubun());
+        headEntity.set所得区分名(
+                KaigoGassan_ShotokuKbn.toValue(entity.get高額合算支給額計算結果一時().getShotokuKubun()).get名称());
+        headEntity.set所得区分_70歳以上(entity.get高額合算支給額計算結果一時().getOver70_ShotokuKubun());
+        headEntity.set所得区分名_70歳以上(
+                KaigoGassan_Over70_ShotokuKbn.toValue(entity.get高額合算支給額計算結果一時().getOver70_ShotokuKubun())
+                .get名称());
+        headEntity.set算定基準額(decimalFormat(entity.get高額合算支給額計算結果一時().getSanteiKijunGaku()));
+        headEntity.set算定基準額_70歳以上(
+                decimalFormat(entity.get高額合算支給額計算結果一時().getOver70_SanteiKijyunGaku()));
+        headEntity.set世帯総支給額(decimalFormat(entity.get高額合算支給額計算結果一時().getSetaiShikyuSogaku()));
+        headEntity.set世帯総支給額_70歳以上(
+                decimalFormat(entity.get高額合算支給額計算結果一時().getOver70_SetaiShikyuSogaku()));
+        headEntity.set按分後の支給額(decimalFormat(entity.get高額合算支給額計算結果一時().getHonninShikyugaku()));
+        headEntity.set按分後の支給額_70歳以上(
+                decimalFormat(entity.get高額合算支給額計算結果一時().getOver70_honninShikyugaku()));
+        headEntity.set再計算の有無(
+                KaigoGassan_Teishotokusha1SaikeisanJisshiUmu.toValue(
+                        entity.get高額合算支給額計算結果一時().getTeiShotoku_1_SaiKeisanUmu()).get名称());
         eucCsvWriter.writeLine(headEntity);
     }
 
