@@ -87,6 +87,7 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
     private static final RString RSTRING_TWO = new RString("2");
     private static final RString RSTRING_THREE = new RString("3");
     private static final RString 年度STRING = new RString("年度");
+    private static final RString 以前 = new RString("以前");
     private RString eucFilePath;
     private FileSpoolManager manager;
     private RString 共通_文字コード;
@@ -152,6 +153,8 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
             resultListEntity.setErrorKubun(RiyoshaFutanWaritaiHantei_ErrorKubun.負担割合判定一覧作成.getコード());
             if (!RSTRING_THREE.equals(processParameter.get処理区分())) {
                 resultListEntity.setBiko(パターン107(processParameter.get対象年度()));
+            } else {
+                resultListEntity.setBiko(パターン107(processParameter.get対象年度()).concat(以前));
             }
             tempResultListDbWriter.insert(resultListEntity);
         }
