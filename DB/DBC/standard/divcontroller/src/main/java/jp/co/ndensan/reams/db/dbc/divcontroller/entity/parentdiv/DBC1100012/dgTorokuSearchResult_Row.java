@@ -3,18 +3,22 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100012;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Sep 02 17:18:30 CST 2016
+ * Mon Sep 12 17:51:47 CST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
+
 /**
- * dgTorokuSearchResult_Row のクラスファイル
- *
- * @reamsid_L DBC-2040-010 lihang
+ * dgTorokuSearchResult_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgTorokuSearchResult_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
 
@@ -31,6 +35,10 @@ public class dgTorokuSearchResult_Row extends DataRow {
     private RString txtHokenshaNo;
     private RString txtSeiriNo;
     private RString txtRirekiNo;
+    private RString txtShiseishimei;
+    private RString txtBango;
+    private RString txtSyusyou;
+    private RString txtTelbanngo;
 
     public dgTorokuSearchResult_Row() {
         super();
@@ -47,6 +55,10 @@ public class dgTorokuSearchResult_Row extends DataRow {
         this.txtHokenshaNo = RString.EMPTY;
         this.txtSeiriNo = RString.EMPTY;
         this.txtRirekiNo = RString.EMPTY;
+        this.txtShiseishimei = RString.EMPTY;
+        this.txtBango = RString.EMPTY;
+        this.txtSyusyou = RString.EMPTY;
+        this.txtTelbanngo = RString.EMPTY;
         this.setOriginalData("txtShikyuShinseishoNo", txtShikyuShinseishoNo);
         this.setOriginalData("txtShinseiKubun", txtShinseiKubun);
         this.setOriginalData("txtSoshin", txtSoshin);
@@ -60,9 +72,13 @@ public class dgTorokuSearchResult_Row extends DataRow {
         this.setOriginalData("txtHokenshaNo", txtHokenshaNo);
         this.setOriginalData("txtSeiriNo", txtSeiriNo);
         this.setOriginalData("txtRirekiNo", txtRirekiNo);
+        this.setOriginalData("txtShiseishimei", txtShiseishimei);
+        this.setOriginalData("txtBango", txtBango);
+        this.setOriginalData("txtSyusyou", txtSyusyou);
+        this.setOriginalData("txtTelbanngo", txtTelbanngo);
     }
 
-    public dgTorokuSearchResult_Row(RString txtShikyuShinseishoNo, RString txtShinseiKubun, TextBoxFlexibleDate txtSoshin, TextBoxFlexibleDate txtKeisan, RString txtShinseiDaihyoshaName, TextBoxFlexibleDate txtShinseiYMD, RString txtHihokenshaNo, RString txtHihokenshaName, RString txtTaishoNendo, RString txtShikibetuCode, RString txtHokenshaNo, RString txtSeiriNo, RString txtRirekiNo) {
+    public dgTorokuSearchResult_Row(RString txtShikyuShinseishoNo, RString txtShinseiKubun, TextBoxFlexibleDate txtSoshin, TextBoxFlexibleDate txtKeisan, RString txtShinseiDaihyoshaName, TextBoxFlexibleDate txtShinseiYMD, RString txtHihokenshaNo, RString txtHihokenshaName, RString txtTaishoNendo, RString txtShikibetuCode, RString txtHokenshaNo, RString txtSeiriNo, RString txtRirekiNo, RString txtShiseishimei, RString txtBango, RString txtSyusyou, RString txtTelbanngo) {
         super();
         this.setOriginalData("txtShikyuShinseishoNo", txtShikyuShinseishoNo);
         this.setOriginalData("txtShinseiKubun", txtShinseiKubun);
@@ -77,6 +93,10 @@ public class dgTorokuSearchResult_Row extends DataRow {
         this.setOriginalData("txtHokenshaNo", txtHokenshaNo);
         this.setOriginalData("txtSeiriNo", txtSeiriNo);
         this.setOriginalData("txtRirekiNo", txtRirekiNo);
+        this.setOriginalData("txtShiseishimei", txtShiseishimei);
+        this.setOriginalData("txtBango", txtBango);
+        this.setOriginalData("txtSyusyou", txtSyusyou);
+        this.setOriginalData("txtTelbanngo", txtTelbanngo);
         this.txtShikyuShinseishoNo = txtShikyuShinseishoNo;
         this.txtShinseiKubun = txtShinseiKubun;
         this.txtSoshin = txtSoshin;
@@ -90,6 +110,10 @@ public class dgTorokuSearchResult_Row extends DataRow {
         this.txtHokenshaNo = txtHokenshaNo;
         this.txtSeiriNo = txtSeiriNo;
         this.txtRirekiNo = txtRirekiNo;
+        this.txtShiseishimei = txtShiseishimei;
+        this.txtBango = txtBango;
+        this.txtSyusyou = txtSyusyou;
+        this.txtTelbanngo = txtTelbanngo;
     }
 
     public RString getTxtShikyuShinseishoNo() {
@@ -142,6 +166,22 @@ public class dgTorokuSearchResult_Row extends DataRow {
 
     public RString getTxtRirekiNo() {
         return txtRirekiNo;
+    }
+
+    public RString getTxtShiseishimei() {
+        return txtShiseishimei;
+    }
+
+    public RString getTxtBango() {
+        return txtBango;
+    }
+
+    public RString getTxtSyusyou() {
+        return txtSyusyou;
+    }
+
+    public RString getTxtTelbanngo() {
+        return txtTelbanngo;
     }
 
     public void setTxtShikyuShinseishoNo(RString txtShikyuShinseishoNo) {
@@ -207,6 +247,26 @@ public class dgTorokuSearchResult_Row extends DataRow {
     public void setTxtRirekiNo(RString txtRirekiNo) {
         this.setOriginalData("txtRirekiNo", txtRirekiNo);
         this.txtRirekiNo = txtRirekiNo;
+    }
+
+    public void setTxtShiseishimei(RString txtShiseishimei) {
+        this.setOriginalData("txtShiseishimei", txtShiseishimei);
+        this.txtShiseishimei = txtShiseishimei;
+    }
+
+    public void setTxtBango(RString txtBango) {
+        this.setOriginalData("txtBango", txtBango);
+        this.txtBango = txtBango;
+    }
+
+    public void setTxtSyusyou(RString txtSyusyou) {
+        this.setOriginalData("txtSyusyou", txtSyusyou);
+        this.txtSyusyou = txtSyusyou;
+    }
+
+    public void setTxtTelbanngo(RString txtTelbanngo) {
+        this.setOriginalData("txtTelbanngo", txtTelbanngo);
+        this.txtTelbanngo = txtTelbanngo;
     }
 
     // </editor-fold>
