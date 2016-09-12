@@ -60,7 +60,9 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -155,6 +157,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
     private static final RString 左記号 = new RString("(");
     private static final RString 右記号 = new RString(")");
     private static final RString 斜線 = new RString("/");
+    private static final RString 年度作成 = new RString("年度");
 
     @Override
     protected void initialize() {
@@ -448,8 +451,6 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
         output.set支払場所(高額合算支給不支給決定.getShiharaiBasho());
         output.set支払期間開始年月日(get日付項目(高額合算支給不支給決定.getShiharaiKaishiYMD()));
         output.set支払期間終了年月日(get日付項目(高額合算支給不支給決定.getShiharaiShuryoYMD()));
-        // TODO 支払期間開始年月日(曜日)
-        // TODO 支払期間終了年月日(曜日)
         output.set支払期間開始年月日_時間(高額合算支給不支給決定.getShiharaiKaishiTime());
         output.set支払期間終了年月日_時間(高額合算支給不支給決定.getShiharaiShuryoTime());
         output.set決定通知書作成年月日(get日付項目(高額合算支給不支給決定.getKetteiTsuchiSakuseiYMD()));
@@ -735,7 +736,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
         }
         builder.append(保険者);
         Association 地方公共団体コード = AssociationFinderFactory.createInstance().getAssociation(parameter.get保険者コード());
-        builder.append(getColumnValue(地方公共団体コード.get地方公共団体コード()));
+        builder.append(地方公共団体コード.get市町村名());
         return builder;
     }
 
@@ -777,7 +778,8 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
             return null;
         }
         builder.append(対象年度);
-        builder.append(new FlexibleYear(parameter.get対象年度()).wareki().toDateString());
+        builder.append(new FlexibleYear(parameter.get対象年度()).wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.ICHI_NEN).toDateString().concat(年度作成));
         return builder;
     }
 
@@ -798,15 +800,15 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
         }
         builder.append(決定情報受取年月);
         if (決定情報受取年月ToFlag) {
-            builder.append(parameter.get決定情報受取年月From().wareki().toDateString())
+            builder.append(dateFormat(parameter.get決定情報受取年月From()))
                     .append(RString.FULL_SPACE).append(波線);
         } else if (決定情報受取年月FromFlag) {
             builder.append(波線).append(RString.FULL_SPACE)
                     .append(parameter.get決定情報受取年月To().wareki().toDateString());
         } else {
-            builder.append(parameter.get決定情報受取年月From().wareki().toDateString())
+            builder.append(dateFormat(parameter.get決定情報受取年月From()))
                     .append(RString.FULL_SPACE).append(波線).append(RString.FULL_SPACE)
-                    .append(parameter.get決定情報受取年月To().wareki().toDateString());
+                    .append(dateFormat(parameter.get決定情報受取年月To()));
         }
         return builder;
     }
@@ -816,5 +818,13 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
             return;
         }
         出力条件.add(builder.toRString());
+    }
+
+    private RString dateFormat(FlexibleYearMonth date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
+                fillType(FillType.ZERO).toDateString();
     }
 }
