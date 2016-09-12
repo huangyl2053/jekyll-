@@ -6,6 +6,10 @@
 package jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteitsuchisho;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.YokinShubetsuPattern;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -65,7 +69,7 @@ public class KogakugassanShikyuKetteitsuchisho {
     private RString 括弧Right2;
     private RString カスタマバーコード;
     private RString 文書番号;
-    private RString 発行日;
+    private FlexibleDate 発行日;
     private RString タイトル;
     private RString タイトル21;
     private RString タイトル221;
@@ -96,11 +100,11 @@ public class KogakugassanShikyuKetteitsuchisho {
     private RString 支払期間終了時間;
     private RString 金融機関名称;
     private RString 支店名称;
-    private RString 金融機関コード;
-    private RString 支店コード;
-    private RString 預金種別;
+    private KinyuKikanCode 金融機関コード;
+    private KinyuKikanShitenCode 支店コード;
+    private YokinShubetsuPattern 預金種別;
     private RString 口座番号;
-    private RString 口座名義人;
+    private AtenaKanaMeisho 口座名義人;
     private FlexibleDate 支払予定日;
     private RString 文書2;
     private RString 文書3;
