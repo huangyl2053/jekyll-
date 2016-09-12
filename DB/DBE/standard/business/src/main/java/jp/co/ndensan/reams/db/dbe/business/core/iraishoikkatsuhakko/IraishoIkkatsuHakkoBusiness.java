@@ -8,10 +8,6 @@ package jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
-import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
-import jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoItem;
-import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoItem;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
@@ -22,6 +18,10 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshoseikyuichiran.Sh
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
+import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
+import jp.co.ndensan.reams.db.dbz.business.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoItem;
+import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
 import jp.co.ndensan.reams.db.dbz.definition.core.ikenshosakuseiryo.IkenshoSakuseiRyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
@@ -727,13 +727,13 @@ public class IraishoIkkatsuHakkoBusiness {
      * @param 市町村名 市町村名
      * @param 出力ページ数 出力ページ数
      * @param 導入団体コード 導入団体コード
-     * @param reportID reportID
+     * @param reportID RString
      * @return ReportOutputJokenhyoItem
      */
     public ReportOutputJokenhyoItem バッチ出力条件リストの出力(RString 市町村名,
             RString 出力ページ数,
             RString 導入団体コード,
-            ReportIdDBE reportID) {
+            RString reportID,RString reportName) {
         RString csv出力有無 = new RString("無し");
         RString csvファイル名 = new RString("－");
         RString ジョブ番号 = new RString("56");
@@ -813,11 +813,11 @@ public class IraishoIkkatsuHakkoBusiness {
         builder.append(processParamter.isIkenshoTeishutu());
         出力条件.add(builder.toRString());
         return new ReportOutputJokenhyoItem(
-                reportID.getReportId().value(),
+                reportID,
                 導入団体コード,
                 市町村名,
                 ジョブ番号,
-                reportID.getReportName(),
+                reportName,
                 出力ページ数,
                 csv出力有無,
                 csvファイル名,

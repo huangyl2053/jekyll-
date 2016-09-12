@@ -49,6 +49,7 @@ public class SFKTishoshaIchiranPanelBatchParameterHandler {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString メニューID = controlData.getMenuID();
         RealInitialLocker.lock(new LockingKey(メニューID));
+        div.getChutsutsuJoken().getRadShikakuSoshitsuChushutsu().setSelectedKey(KEY1);
         div.getChutsutsuJoken().getTxtKijunYMD().setValue(RDate.getNowDate());
         div.getChushutsuSetsumei().getCcdChohyoShutsuryokuJun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200017.getReportId());
     }
@@ -77,8 +78,9 @@ public class SFKTishoshaIchiranPanelBatchParameterHandler {
         parameter.set事業者番号(div.getChutsutsuJoken().getCcdShisetsuJohoCommonChildDiv().getNyuryokuShisetsuKodo());
         parameter.set事業者名(div.getChutsutsuJoken().getCcdShisetsuJohoCommonChildDiv().getNyuryokuShisetsuMeisho());
         if (div.getChushutsuSetsumei().getCcdChohyoShutsuryokuJun().getSelected出力順() != null) {
-            parameter.set改頁出力順ID(div.getChushutsuSetsumei().getCcdChohyoShutsuryokuJun().getSelected出力順().get出力順ID());
+            parameter.set出力順ID(div.getChushutsuSetsumei().getCcdChohyoShutsuryokuJun().getSelected出力順().get出力順ID());
+            parameter.set改頁出力順ID(Long.valueOf(div.getChushutsuSetsumei().getCcdChohyoShutsuryokuJun().getSelected出力順().get改頁項目ID().toString()));
         }
-        parameter.set処理日時(new YMDHMS(RDate.getNowDateTime()));
+        parameter.set処理日時(YMDHMS.now());
     }
 }

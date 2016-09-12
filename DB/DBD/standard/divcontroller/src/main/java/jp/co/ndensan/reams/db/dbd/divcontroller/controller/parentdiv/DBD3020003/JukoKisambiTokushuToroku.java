@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3020003.Juko
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD3020003.JukoKisambiTokushuTorokuHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD3020003.JukoKisambiTokushuTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -60,6 +61,9 @@ public class JukoKisambiTokushuToroku {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+        ShoKisaiHokenshaNo 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class);
+        証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("880888"));
+        div.setHdnShoKisaiHokenshaNo(証記載保険者番号 == null ? RString.EMPTY : 証記載保険者番号.getColumnValue());
 
         boolean データなし = true;
         if (被保険者番号 == null || 被保険者番号.isEmpty()) {
@@ -78,7 +82,7 @@ public class JukoKisambiTokushuToroku {
                 .equals(ResponseHolder.getMessageCode())
                 && MessageDialogSelectedResult.Yes == ResponseHolder.getButtonType()) {
 
-            ResponseData.of(div).forwardWithEventName(DBD3020003TransitionEventName.検索に戻る);
+            return ResponseData.of(div).forwardWithEventName(DBD3020003TransitionEventName.検索に戻る).respond();
         }
 
         List<TainoKiSummary> 滞納判定結果List = getHandler(div).initialize(被保険者番号, 識別コード);
@@ -159,10 +163,13 @@ public class JukoKisambiTokushuToroku {
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
 
         List<JikoKisambiKanri> 時効起算日管理List = ViewStateHolder.get(ViewStateKeys.時効起算日管理, new ArrayList<>().getClass());
+        List<TainoKiSummary> 滞納判定結果List = ViewStateHolder.get(ViewStateKeys.滞納判定結果, new ArrayList<>().getClass());
         if (時効起算日管理List == null) {
             時効起算日管理List = new ArrayList<>();
         }
-        getHandler(div).onClick_selectBySelectButton(時効起算日管理List, 被保険者番号);
+        List<JikoKisambiKanri> new時効起算日管理List
+                = getHandler(div).onClick_selectBySelectButton(滞納判定結果List, 時効起算日管理List, 被保険者番号);
+        ViewStateHolder.put(ViewStateKeys.時効起算日管理, new ArrayList<>(new時効起算日管理List));
         return ResponseData.of(div).respond();
     }
 
@@ -251,9 +258,7 @@ public class JukoKisambiTokushuToroku {
      */
     public ResponseData<JukoKisambiTokushuTorokuDiv> onChange_chkZengyoHyoji(JukoKisambiTokushuTorokuDiv div) {
 
-        List<JikoKisambiKanri> 時効起算日管理List = ViewStateHolder.get(ViewStateKeys.時効起算日管理, new ArrayList<>().getClass());
-
-        getHandler(div).onChange_chkZengyoHyoji(時効起算日管理List);
+        getHandler(div).onChange_chkZengyoHyoji();
         return ResponseData.of(div).respond();
     }
 
@@ -285,6 +290,8 @@ public class JukoKisambiTokushuToroku {
      */
     public ResponseData<JukoKisambiTokushuTorokuDiv> onClick_btnKakutei(JukoKisambiTokushuTorokuDiv div) {
 
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler(div).validateFor特殊時効起算日入力(pairs);
 
@@ -293,7 +300,7 @@ public class JukoKisambiTokushuToroku {
         }
 
         List<JikoKisambiKanri> 時効起算日管理List = ViewStateHolder.get(ViewStateKeys.時効起算日管理, new ArrayList<>().getClass());
-        List<JikoKisambiKanri> new時効起算日管理List = getHandler(div).onClick_btnKakutei(時効起算日管理List);
+        List<JikoKisambiKanri> new時効起算日管理List = getHandler(div).onClick_btnKakutei(時効起算日管理List, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.時効起算日管理, new ArrayList<>(new時効起算日管理List));
 
         div.getDgShunoJokyo().setDisabled(false);

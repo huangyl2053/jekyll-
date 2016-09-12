@@ -60,7 +60,7 @@
         SELECT T.*,宛名."meisho" AS 宛名名称 FROM T
         LEFT JOIN
         rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',TRUE,
-        '','','','','','','',FALSE,'','','','','','','','','','','',TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,
+        '','','','','','','',TRUE,'','','','','','','','','','','',TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,
         TRUE,'','','','','','','','',TRUE,'','',TRUE,TRUE,TRUE,'','','','','','','','','','','','','','','','','','','{}')
         AS 宛名
         ON 宛名."shikibetsuCode" =T."shikibetsuCode"

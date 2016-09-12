@@ -6,7 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeisho;
 
 import jp.co.ndensan.reams.db.dbc.entity.report.jikofutangakushomeisho.JikoFutangakushomeishoReportSource;
-import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.toiawasesaki.ToiawasesakiSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 自己負担証明書のEditorです。
@@ -15,21 +16,24 @@ import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKa
  */
 public class CompKaigoToiawasesakiEditor implements IJikoFutangakushomeishoEditor {
 
-    private final CompKaigoToiawasesakiSource toiawasesakiSource;
+    private final ToiawasesakiSource toiawasesakiSource;
+    private final RString 問合せ先タイトル = new RString("（問い合せ先）");
+    private final RString 内線タイトル = new RString("内線");
 
     /**
      * インスタンスを生成します。
      *
-     * @param toiawasesakiSource CompKaigoToiawasesakiSource
+     * @param toiawasesakiSource ToiawasesakiSource
      */
-    protected CompKaigoToiawasesakiEditor(CompKaigoToiawasesakiSource toiawasesakiSource) {
+    protected CompKaigoToiawasesakiEditor(ToiawasesakiSource toiawasesakiSource) {
         this.toiawasesakiSource = toiawasesakiSource;
     }
 
     @Override
     public JikoFutangakushomeishoReportSource edit(JikoFutangakushomeishoReportSource source) {
+        source.toiawasesakiTitle = 問合せ先タイトル;
         source.choshaBushoName = toiawasesakiSource.choshaBushoName;
-        source.naisenLabel = toiawasesakiSource.naisenLabel;
+        source.naisenLabel = 内線タイトル;
         source.naisenNo = toiawasesakiSource.naisenNo;
         source.shozaichi = toiawasesakiSource.shozaichi;
         source.tantoName = toiawasesakiSource.tantoName;

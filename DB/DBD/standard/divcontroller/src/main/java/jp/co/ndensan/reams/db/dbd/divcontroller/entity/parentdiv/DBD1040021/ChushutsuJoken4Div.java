@@ -155,16 +155,6 @@ public class ChushutsuJoken4Div extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnChikuGyoseikuCodeTo() {
-        return this.getChushutsuJoken().getBtnChikuGyoseikuCodeTo();
-    }
-
-    @JsonIgnore
-    public void  setBtnChikuGyoseikuCodeTo(ButtonDialog btnChikuGyoseikuCodeTo) {
-        this.getChushutsuJoken().setBtnChikuGyoseikuCodeTo(btnChikuGyoseikuCodeTo);
-    }
-
-    @JsonIgnore
     public TextBox getTxtChikuNameTo() {
         return this.getChushutsuJoken().getTxtChikuNameTo();
     }
@@ -182,6 +172,16 @@ public class ChushutsuJoken4Div extends Panel {
     @JsonIgnore
     public void  setShichosonSpace1(Space ShichosonSpace1) {
         this.getChushutsuJoken().setShichosonSpace1(ShichosonSpace1);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnChikuGyoseikuCodeTo() {
+        return this.getChushutsuJoken().getBtnChikuGyoseikuCodeTo();
+    }
+
+    @JsonIgnore
+    public void  setBtnChikuGyoseikuCodeTo(ButtonDialog btnChikuGyoseikuCodeTo) {
+        this.getChushutsuJoken().setBtnChikuGyoseikuCodeTo(btnChikuGyoseikuCodeTo);
     }
 
     @JsonIgnore

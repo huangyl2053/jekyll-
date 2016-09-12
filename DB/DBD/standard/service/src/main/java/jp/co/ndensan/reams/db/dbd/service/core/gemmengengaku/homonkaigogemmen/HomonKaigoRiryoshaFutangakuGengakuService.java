@@ -195,7 +195,7 @@ public class HomonKaigoRiryoshaFutangakuGengakuService {
     public boolean canBe利用者(HihokenshaNo 被保険者番号, FlexibleDate 適用日) {
         DbT4001JukyushaDaichoDac dbT4001Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
         List<DbT4001JukyushaDaichoEntity> dbT4001EntityList
-                = dbT4001Dac.select受給者台帳By受給者の判定(被保険者番号, 適用日, YukoMukoKubun.無効.getコード());
+                = dbT4001Dac.selectfor受給者の判定(被保険者番号, 適用日, YukoMukoKubun.無効.getコード());
         if (!dbT4001EntityList.isEmpty()) {
             return true;
         }

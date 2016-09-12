@@ -182,22 +182,32 @@ public class HanyoListBatchParamHandler {
         if (!RString.isNullOrEmpty(基準年月)) {
             div.getChushutsuJokenPanel().getChushutsuKubun().getKijyunbi().getTxtKijyunnNengetsu().setValue(
                     new RDate(基準年月.toString()));
+        } else {
+            div.getChushutsuJokenPanel().getChushutsuKubun().getKijyunbi().getTxtKijyunnNengetsu().clearValue();
         }
         if (!RString.isNullOrEmpty(申請日From)) {
             div.getChushutsuJokenPanel().getTxtSinseibi().setFromValue(
                     new RDate(申請日From.toString()));
+        } else {
+            div.getChushutsuJokenPanel().getTxtSinseibi().clearFromValue();
         }
         if (!RString.isNullOrEmpty(申請日To)) {
             div.getChushutsuJokenPanel().getTxtSinseibi().setToValue(
                     new RDate(申請日To.toString()));
+        } else {
+            div.getChushutsuJokenPanel().getTxtSinseibi().clearToValue();
         }
         if (!RString.isNullOrEmpty(決定日From)) {
             div.getChushutsuJokenPanel().getTxtKetteibi().setFromValue(
                     new RDate(決定日From.toString()));
+        } else {
+            div.getChushutsuJokenPanel().getTxtKetteibi().clearFromValue();
         }
         if (!RString.isNullOrEmpty(決定日To)) {
             div.getChushutsuJokenPanel().getTxtKetteibi().setToValue(
                     new RDate(決定日To.toString()));
+        } else {
+            div.getChushutsuJokenPanel().getTxtKetteibi().clearToValue();
         }
         set抽出区分の表示制御();
         set基準年月の表示制御();

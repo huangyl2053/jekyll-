@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource;
-import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -47,7 +47,7 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranProperty extends ReportPro
         RString 改頁４ = RString.EMPTY;
         RString 改頁５ = RString.EMPTY;
 
-        Map<Integer, ISetSortItem> 改頁Map = ReportUtil.get改頁項目Map(outputOrder);
+        Map<Integer, ISetSortItem> 改頁Map = ChohyoUtil.get改頁項目Map(outputOrder);
         if (改頁Map.get(INDEX_1) != null) {
             改頁１ = to帳票物理名(改頁Map.get(INDEX_1));
         }

@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchish
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2017TsuchishoHakkogoIdoshaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko;
-import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
@@ -43,7 +43,7 @@ public class TsuchishoIdoshaTorokuProcess extends BatchProcessBase<DbT2002FukaTe
     protected IBatchReader createReader() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         IOutputOrder outputOrder = finder.get出力順(SubGyomuCode.DBB介護賦課, REPORT_ID_DBB100012, Long.parseLong(parameter.get出力順ID().toString()));
-        RString 出力順 = ReportUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(DBB100012ShutsuryokujunEnum.class, outputOrder), NUM5);
+        RString 出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(DBB100012ShutsuryokujunEnum.class, outputOrder), NUM5);
 
         return new BatchDbReader(MYBATIS_SELECT_ID, new ShutsuRyokuTaishoShutokuMyBatisParameter(出力順, parameter.get出力対象区分()));
     }

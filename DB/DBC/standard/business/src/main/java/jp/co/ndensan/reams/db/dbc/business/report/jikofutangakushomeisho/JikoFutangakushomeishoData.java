@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeisho;
 
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassan.KogakuGassanData;
-import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.toiawasesaki.ToiawasesakiSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -26,7 +26,11 @@ public class JikoFutangakushomeishoData {
     private KogakuGassanData 高額合算データ;
     private RString タイトル;
     private RString 文書番号;
+    private RString 通知文1;
+    private RString 保険者情報;
+    private RString 通知文2;
+    private RString 備考;
     private NinshoshaSource 認証者情報;
     private SofubutsuAtesakiSource 宛先情報;
-    private CompKaigoToiawasesakiSource 問合せ先情報;
+    private ToiawasesakiSource 問合せ先情報;
 }

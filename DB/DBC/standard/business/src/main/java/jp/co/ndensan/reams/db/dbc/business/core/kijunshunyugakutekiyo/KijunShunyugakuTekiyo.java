@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.banchi.Banchi;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -88,12 +89,12 @@ public class KijunShunyugakuTekiyo {
      *
      * @param entity entity
      * @param 市町村名MasterMap 市町村名MasterMap
-     * @param 市町村名 市町村名
+     * @param association association
      * @param 連番 連番
      * @return HanyoListParamRenbanariEUCEntity
      */
     public HanyoListParamRenbanariEUCEntity setRenbanariEUCEntity(HanyoListParamRelateEntity entity,
-            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, RString 市町村名, int 連番) {
+            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, Association association, int 連番) {
         HanyoListParamRenbanariEUCEntity eucEntity = new HanyoListParamRenbanariEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -146,8 +147,8 @@ public class KijunShunyugakuTekiyo {
         if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
             eucEntity.set市町村名(市町村名MasterMap.get(entity.get市町村コード()).get市町村名称());
         }
-        eucEntity.set保険者コード(processParameter.get保険者コード());
-        eucEntity.set保険者名(市町村名);
+        eucEntity.set保険者コード(association.get地方公共団体コード().value());
+        eucEntity.set保険者名(association.get市町村名());
         eucEntity.set空白(new RString(" "));
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), entity.get資格取得事由コード()));
@@ -402,11 +403,11 @@ public class KijunShunyugakuTekiyo {
      *
      * @param entity entity
      * @param 市町村名MasterMap 市町村名MasterMap
-     * @param 市町村名 市町村名
+     * @param association association
      * @return HanyoListParamRenbannashiEUCEntity
      */
     public HanyoListParamRenbannashiEUCEntity setRenbannashiEUCEntity(HanyoListParamRelateEntity entity,
-            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, RString 市町村名) {
+            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, Association association) {
         HanyoListParamRenbannashiEUCEntity eucEntity = new HanyoListParamRenbannashiEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -458,8 +459,8 @@ public class KijunShunyugakuTekiyo {
         if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
             eucEntity.set市町村名(市町村名MasterMap.get(entity.get市町村コード()).get市町村名称());
         }
-        eucEntity.set保険者コード(processParameter.get保険者コード());
-        eucEntity.set保険者名(市町村名);
+        eucEntity.set保険者コード(association.get地方公共団体コード().value());
+        eucEntity.set保険者名(association.get市町村名());
         eucEntity.set空白(new RString(" "));
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), entity.get資格取得事由コード()));

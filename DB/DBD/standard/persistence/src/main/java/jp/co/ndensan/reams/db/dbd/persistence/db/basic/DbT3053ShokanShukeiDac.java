@@ -417,8 +417,7 @@ public class DbT3053ShokanShukeiDac implements ISaveable<DbT3053ShokanShukeiEnti
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNo, 整理番号),
-                                eq(DbT3053ShokanShukei.isDeleted, false)
+                                eq(seiriNo, 整理番号)
                         )).order(by(serviceShuruiCode)).
                 toList(DbT3053ShokanShukeiEntity.class);
     }
