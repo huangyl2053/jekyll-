@@ -111,7 +111,7 @@ public class PostMainPanelValidationHandler {
                                     i = i + 1;
                                 }
                             }
-                            if (i != 0) {
+                            if (0 < i) {
                                 return false;
                             } else {
                                 return true;

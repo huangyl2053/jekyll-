@@ -12,7 +12,6 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.postmainpanel.PostMainPanelMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0510011.PostMainPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0510011.dgShichoson_Row;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.postmainpanel.PostMainPanelEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.postmainpanel.PostMainPanelFinder;
 import jp.co.ndensan.reams.db.dbx.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
@@ -48,7 +47,9 @@ public class PostMainPanelHandler {
     private static final RString NUM_1 = new RString("1");
     private static final int NUM_8 = 8;
     private static final int NUM_13 = 13;
-    private static final int NUM_0 = 0;
+    private static final int NUM_3 = 3;
+    private static final int NUM_2 = 2;
+    private static final int NUM_4 = 4;
     private static final int NUM_7 = 7;
     private static final RString NUM_112 = new RString("112");
     private static final RString 処理枝番 = new RString("0000");
@@ -67,6 +68,8 @@ public class PostMainPanelHandler {
     private static final RString 差分 = new RString("差分");
     private static final RString 単一の場合 = new RString("単一の場合");
     private static final RString 広域の場合 = new RString("広域の場合");
+    private final Code 導入形態コード = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).
+            get導入形態コード();
 
     /**
      * コンストラクタです。
@@ -85,7 +88,6 @@ public class PostMainPanelHandler {
     public RString initialize() {
         RString 場合 = null;
         div.setHdnModl(DataPassingConverter.serialize(単一モード));
-        Code 導入形態コード = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get導入形態コード();
         if (導入形態コード.toString().equals(NUM_120.toString())) {
             div.getMeisaiPanel().setVisible(false);
             div.getSp1().setWrap(false);
@@ -95,19 +97,12 @@ public class PostMainPanelHandler {
             ShoriDateKanriManager manager = new ShoriDateKanriManager();
             if (ResponseHolder.getState().equals(国保)) {
                 処理日付管理マスタ = manager.get処理日付管理マスタ(国保情報取り込み, 処理枝番);
-                if (処理日付管理マスタ == null) {
-                    throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
-                            .replace(処理日付管理マスタに国保の情報.toString()).evaluate());
-                }
+                処理日付管理マスタnull処理(処理日付管理マスタ, 処理日付管理マスタに国保の情報);
             } else {
                 if (ResponseHolder.getState().equals(後期)) {
                     処理日付管理マスタ = manager.get処理日付管理マスタ(後期高齢者情報取り込み, 処理枝番);
-                    if (処理日付管理マスタ == null) {
-                        throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
-                                .replace(処理日付管理マスタに後期高齢の情報.toString()).evaluate());
-                    }
+                    処理日付管理マスタnull処理(処理日付管理マスタ, 処理日付管理マスタに後期高齢の情報);
                 }
-
             }
             if (処理日付管理マスタ.get基準日時() != null && !処理日付管理マスタ.get基準日時().isEmpty()) {
                 RDate 前回処理年月日 = 処理日付管理マスタ.get基準日時().getDate();
@@ -121,11 +116,14 @@ public class PostMainPanelHandler {
                 case 1:
                     div.getTxtRenkekeishiki().setValue(媒体);
                     break;
-                case 2:
+                case NUM_2:
                     div.getTxtRenkekeishiki().setValue(サーバー);
                     break;
-                case 3:
+                case NUM_3:
                     div.getTxtRenkekeishiki().setValue(個別事項テーブル);
+                    break;
+                default:
+                    break;
             }
             if (連携形式.equals(NUM_1)) {
                 div.getBtnTorikomi().setDisabled(false);
@@ -148,63 +146,13 @@ public class PostMainPanelHandler {
                 RString 市町村識別ID = ShichosonSecurityJoho.
                         getShichosonShikibetsuId(ControlDataHolder.getUserId()).get(0).getItemId();
                 if (市町村識別ID.equals(NUM_00)) {
-                    List<PostMainPanelEntity> resultList = null;
-                    PostMainPanelFinder finder = PostMainPanelFinder.createInstance();
-                    if (ResponseHolder.getState().equals(国保)) {
-                        Map<String, Object> parameter = createParameter(true, false);
-                        resultList = finder.getPostMainPanel(parameter);
-                        if (resultList == null) {
-                            throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
-                                    .replace(処理日付管理マスタに国保の情報.toString()).evaluate());
-                        }
-                    } else {
-                        if (ResponseHolder.getState().equals(後期)) {
-                            Map<String, Object> parameter = createParameter(false, true);
-                            resultList = finder.getPostMainPanel(parameter);
-                            if (resultList == null) {
-                                throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
-                                        .replace(処理日付管理マスタに後期高齢の情報.toString()).evaluate());
-                            }
-                        }
-                    }
+                    List<List> resultList = 市町村識別ID00処理();
                     一覧エリア(resultList);
-                    div.getTxtZenkaiYMD().setValue(resultList.get(0).get基準日時().getDate());
-                    div.getTxtZenkaiTime().setValue(resultList.get(0).get基準日時().getRDateTime().getTime());
+                    div.getTxtZenkaiYMD().setValue(new RDate(resultList.get(0).get(NUM_2).toString()));
+                    div.getTxtZenkaiTime().setValue(new RTime(new RString(resultList.get(0).get(NUM_2).
+                            toString().substring(NUM_8, NUM_13))));
                 } else {
-                    List<PostMainPanelEntity> resultList = null;
-                    PostMainPanelFinder finder = PostMainPanelFinder.createInstance();
-                    if (ResponseHolder.getState().equals(国保)) {
-                        PostMainPanelMybatisParameter Parameter = PostMainPanelMybatisParameter.
-                                creatParameter(国保情報取り込み, new RString(市町村識別ID.toString()));
-                        resultList = finder.getPostMainPanel(Parameter);
-                        if (resultList == null) {
-                            throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
-                                    .replace(処理日付管理マスタに国保の情報.toString()).evaluate());
-                        }
-                    } else {
-                        if (ResponseHolder.getState().equals(後期)) {
-                            PostMainPanelMybatisParameter Parameter = PostMainPanelMybatisParameter.
-                                    creatParameter(後期高齢者情報取り込み, new RString(市町村識別ID.toString()));
-                            resultList = finder.getPostMainPanel(Parameter);
-                            if (resultList == null) {
-                                throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
-                                        .replace(処理日付管理マスタに後期高齢の情報.toString()).evaluate());
-                            }
-                        }
-                    }
-                    List<dgShichoson_Row> listDataSource = 一覧エリア(resultList);
-                    RString 最大値の格納処理日時 = resultList.get(0).get基準日時().toDateString();
-                    int i = 0;
-                    for (PostMainPanelEntity row : resultList) {
-                        if (0 < row.get基準日時().toDateString().compareTo(最大値の格納処理日時)) {
-                            listDataSource.get(i).setSelectButtonState(DataGridButtonState.Disabled);
-                            i = i + 1;
-                            最大値の格納処理日時 = row.get基準日時().toDateString();
-                        }
-                    }
-                    //TODO div.getDgShichoson().setSelectedItems(listDataSource);
-                    div.getTxtZenkaiYMD().setValue(new RDate(最大値の格納処理日時.toString()));
-                    div.getTxtZenkaiTime().setValue(new RTime(最大値の格納処理日時.substring(NUM_8, NUM_13)));
+                    get最大値の格納処理日時(市町村識別ID);
                 }
                 場合 = 広域の場合;
             }
@@ -215,8 +163,11 @@ public class PostMainPanelHandler {
             case 1:
                 div.getTxtTorikomiKeishiki().setValue(全件);
                 break;
-            case 2:
+            case NUM_2:
                 div.getTxtTorikomiKeishiki().setValue(差分);
+                break;
+            default:
+                break;
         }
         return 場合;
 
@@ -225,39 +176,126 @@ public class PostMainPanelHandler {
     /**
      * 一覧エリアのメソッドます。
      */
-    private List<dgShichoson_Row> 一覧エリア(List<PostMainPanelEntity> resultList) {
+    private List<dgShichoson_Row> 一覧エリア(List<List> resultList) {
         List<dgShichoson_Row> listDataSource = new ArrayList();
         int bango = 1;
-        for (PostMainPanelEntity item : resultList) {
-
+        for (List item : resultList) {
             dgShichoson_Row items = new dgShichoson_Row();
             items.setBango(new RString(String.valueOf(bango)));
-            if (item.get市町村コード() != null || !item.get市町村コード().toString().isEmpty()) {
-                items.setShichosonMei(new RString(item.get市町村コード().toString())
-                        .concat(RString.HALF_SPACE).concat(item.get市町村名称()));
+            if (item.get(0) != null || !item.get(0).toString().isEmpty()) {
+                items.setShichosonMei(new RString(item.get(0).toString())
+                        .concat(RString.HALF_SPACE).concat(item.get(1).toString()));
             } else {
                 items.setShichosonMei(RString.EMPTY);
             }
-            if (item.get基準日時() != null && !item.get基準日時().isEmpty()) {
-                items.setFileKakunoShoriNitiji(new RString(DateConverter.toWarekiHalf_Zero(item.get基準日時().getDate()).
-                        toString().concat(RString.HALF_SPACE.toString()).concat(DateConverter.getTime141(
-                                        item.get基準日時().getRDateTime().getTime()).toString())));
+            if (item.get(NUM_2) != null && !item.get(NUM_2).toString().isEmpty()) {
+                items.setFileKakunoShoriNitiji(new RString(DateConverter.toWarekiHalf_Zero(new RDate(item.get(NUM_2).
+                        toString().substring(0, NUM_7))).toString().concat(RString.HALF_SPACE.toString()).
+                        concat(DateConverter.getTime141(new RTime(new RString(item.get(NUM_2).toString().
+                                                        substring(NUM_8, NUM_13)))).toString())));
             } else {
                 items.setFileKakunoShoriNitiji(RString.EMPTY);
             }
-            if (item.get対象開始日時() != null && !item.get対象開始日時().isEmpty()) {
-                items.setKoikiTorikomiNitiji(new RString(DateConverter.toWarekiHalf_Zero(item.get対象開始日時().
-                        getDate()).toString().concat(RString.HALF_SPACE.toString()).concat(DateConverter.
-                                getTime141(item.get対象開始日時().getRDateTime().getTime()).toString())));
+            if (item.get(NUM_3) != null && !item.get(NUM_3).toString().isEmpty()) {
+                items.setKoikiTorikomiNitiji(new RString(DateConverter.toWarekiHalf_Zero(new RDate(item.get(NUM_3).
+                        toString().substring(0, NUM_7))).toString().concat(RString.HALF_SPACE.toString()).
+                        concat(DateConverter.getTime141(new RTime(new RString(item.get(NUM_3).toString().
+                                                        substring(NUM_8, NUM_13)))).toString())));
             } else {
                 items.setKoikiTorikomiNitiji(RString.EMPTY);
             }
-            items.setShichosonShikibetuID(item.get市町村識別ID());
+            items.setShichosonShikibetuID(new RString(item.get(NUM_4).toString()));
             bango = bango + 1;
             listDataSource.add(items);
         }
         div.getDgShichoson().setDataSource(listDataSource);
         return listDataSource;
+    }
+
+    /**
+     * onOkClosebth。
+     */
+    public void onOkClosebth() {
+        if (導入形態コード.toString().equals(NUM_120.toString())) {
+            div.getTxtFileYMD().setValue(RDate.getNowDate());
+            div.getTxtFileTime().setValue(RDate.getNowDateTime().getTime());
+        }
+        if (導入形態コード.toString().equals(NUM_111.toString())
+                || 導入形態コード.toString().equals(NUM_112.toString())) {
+            div.getDgShichoson().getClickedItem().setFileNitiji(new RString(RDate.getNowDateTime().toString()));
+        }
+    }
+
+    private void 処理日付管理マスタnull処理(ShoriDateKanri 処理日付管理マスタ, RString error情報) {
+        if (処理日付管理マスタ == null) {
+            throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
+                    .replace(error情報.toString()).evaluate());
+        }
+    }
+
+    private List<List> 市町村識別ID00処理() {
+        List<List> resultList = null;
+        PostMainPanelFinder finder = PostMainPanelFinder.createInstance();
+        if (ResponseHolder.getState().equals(国保)) {
+            Map<String, Object> parameter = createParameter(true, false);
+            resultList = finder.getPostMainPanel(parameter);
+            if (resultList == null) {
+                throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
+                        .replace(処理日付管理マスタに国保の情報.toString()).evaluate());
+            }
+        } else {
+            if (ResponseHolder.getState().equals(後期)) {
+                Map<String, Object> parameter = createParameter(false, true);
+                resultList = finder.getPostMainPanel(parameter);
+                if (resultList == null) {
+                    throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
+                            .replace(処理日付管理マスタに後期高齢の情報.toString()).evaluate());
+                }
+            }
+        }
+        return resultList;
+    }
+
+    private List<List> 市町村識別ID処理(RString 市町村識別ID) {
+        List<List> resultList = null;
+        PostMainPanelFinder finder = PostMainPanelFinder.createInstance();
+        if (ResponseHolder.getState().equals(国保)) {
+            PostMainPanelMybatisParameter parameter = PostMainPanelMybatisParameter.
+                    creatParameter(国保情報取り込み, new RString(市町村識別ID.toString()));
+            resultList = finder.getPostMainPanel(parameter);
+            if (resultList == null) {
+                throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
+                        .replace(処理日付管理マスタに国保の情報.toString()).evaluate());
+            }
+        } else {
+            if (ResponseHolder.getState().equals(後期)) {
+                PostMainPanelMybatisParameter parameter = PostMainPanelMybatisParameter.
+                        creatParameter(後期高齢者情報取り込み, new RString(市町村識別ID.toString()));
+                resultList = finder.getPostMainPanel(parameter);
+                if (resultList == null) {
+                    throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
+                            .replace(処理日付管理マスタに後期高齢の情報.toString()).evaluate());
+                }
+            }
+        }
+        return resultList;
+    }
+
+    private void get最大値の格納処理日時(RString 市町村識別ID) {
+        List<List> resultList = 市町村識別ID処理(市町村識別ID);
+        List<dgShichoson_Row> listDataSource = 一覧エリア(resultList);
+        RString 最大値の格納処理日時 = new RString(resultList.get(0).get(NUM_2).toString());
+        int i = 0;
+        for (List row : resultList) {
+            if (0 < new RString(row.get(NUM_2).toString()).compareTo(最大値の格納処理日時)) {
+                listDataSource.get(i).setSelectButtonState(DataGridButtonState.Disabled);
+                i = i + 1;
+                最大値の格納処理日時 = new RString(row.get(NUM_2).toString());
+            }
+        }
+        //TODO div.getDgShichoson().setSelectedItems(listDataSource);
+        div.getTxtZenkaiYMD().setValue(new RDate(最大値の格納処理日時.toString()));
+        div.getTxtZenkaiTime().setValue(new RTime(最大値の格納処理日時.substring(NUM_8, NUM_13)));
     }
 
     private Map<String, Object> createParameter(boolean 国保情報取り込み, boolean 後期高齢者情報取り込み) {
