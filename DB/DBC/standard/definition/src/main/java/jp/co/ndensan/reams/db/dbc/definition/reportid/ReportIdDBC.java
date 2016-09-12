@@ -667,6 +667,10 @@ public enum ReportIdDBC {
      */
     DBC100050(new ReportId("DBC100050_JikoFutangakushomeishoTo2008"), new RString("自己負担額証明書（介護）(平成２０年度まで用）")),
     /**
+     * 振込明細一覧表（合計）帳票ＩＤです。
+     */
+    DBC200101(new ReportId("DBC200101_FurikomiMeisaiIchiranGokei"), new RString("振込明細一覧表（合計）")),
+    /**
      * 自己負担証明書_2009年以降 帳票ＩＤです。
      */
     DBC100051(new ReportId("DBC100051_JikoFutangakushomeishoFrom2009"), new RString("自己負担額証明書（介護）(平成２１年度以降用）"));
