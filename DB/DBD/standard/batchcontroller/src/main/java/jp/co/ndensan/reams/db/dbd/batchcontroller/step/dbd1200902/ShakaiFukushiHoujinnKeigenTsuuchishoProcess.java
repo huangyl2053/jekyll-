@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1200902;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100012.ShakFuksHjRiysFutKgTsKtTsuchishoOrderKey;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100012.ShakFuksHjRiysFutKgTsKtTsuchishoReport;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100018.ShakfukusRiysFutKeigTaisKakuninshoOrderKey;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.ShakaiFukushiHoujinnKeigenParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1200902.ShakaiFukushiHoujinnKeigenTsuuchishoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
@@ -193,10 +193,10 @@ public class ShakaiFukushiHoujinnKeigenTsuuchishoProcess extends BatchProcessBas
 
     private RString get出力順() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        order = finder.get出力順(SubGyomuCode.DBD介護受給, 帳票ID, reamsLoginID, processParamter.get改頁出力順ID());
+        order = finder.get出力順(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100018.getReportId(), reamsLoginID, processParamter.get改頁出力順ID());
         RString 出力順 = RString.EMPTY;
         if (order != null) {
-            出力順 = MyBatisOrderByClauseCreator.create(ShakFuksHjRiysFutKgTsKtTsuchishoOrderKey.class, order);
+            出力順 = MyBatisOrderByClauseCreator.create(ShakfukusRiysFutKeigTaisKakuninshoOrderKey.class, order);
         }
         return 出力順;
     }

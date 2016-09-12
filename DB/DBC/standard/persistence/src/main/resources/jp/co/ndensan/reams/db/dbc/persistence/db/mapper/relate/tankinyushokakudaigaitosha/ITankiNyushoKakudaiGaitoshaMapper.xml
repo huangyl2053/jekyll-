@@ -186,11 +186,11 @@
         rgdb."DbT1001HihokenshaDaicho" AS DbT1001
         ON DbT1001."hihokenshaNo" = 抽出対象."hihokenshaNo"
         AND DbT1001."logicalDeletedFlag" = false
-        AND 抽出対象."yukoKaishiYM"||'31' <![CDATA[<=]]> DbT1001."shikakuShutokuYMD"
+        AND (抽出対象."yukoKaishiYM"||'31') <![CDATA[<=]]> DbT1001."shikakuShutokuYMD"
         AND(
         DbT1001."shikakuSoshitsuYMD" = ''
         OR DbT1001."shikakuSoshitsuYMD" IS NULL
-        OR DbT1001."shikakuSoshitsuYMD" >= (抽出対象."yukoKaishiYM" || '01'))
+        OR DbT1001."shikakuSoshitsuYMD" <![CDATA[>=]]> (抽出対象."yukoKaishiYM" || '01'))
         ) AS 有効履歴
         WHERE
         有効履歴.番号 = 1)被保険者台帳管理
@@ -219,15 +219,15 @@
         DbT4001."kyuSochishaFlag",
         DbT4001."minashiCode",
         DbT4001."chokkinIdoJiyuCode",
-        ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号
+        ROW_NUMBER() OVER (PARTITION BY DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号
         FROM
         抽出対象 AS 抽出対象
         INNER JOIN rgdb."DbT4001JukyushaDaicho" AS DbT4001
         ON DbT4001."hihokenshaNo" = 抽出対象."hihokenshaNo"
         AND DbT4001."logicalDeletedFlag" = false
         AND DbT4001."yukoMukoKubun" = '1'
-        AND 抽出対象."yukoKaishiYM"||'31' <![CDATA[<=]]> DbT4001."ninteiYukoKikanKaishiYMD"
-        AND DbT4001."ninteiYukoKikanShuryoYMD" >= (抽出対象."yukoKaishiYM" || '01')
+        AND (抽出対象."yukoKaishiYM"||'31') <![CDATA[>=]]> DbT4001."ninteiYukoKikanKaishiYMD"
+        AND DbT4001."ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> (抽出対象."yukoKaishiYM" || '01')
         ) AS 有効履歴
         WHERE
         有効履歴.番号 = 1)受給者台帳

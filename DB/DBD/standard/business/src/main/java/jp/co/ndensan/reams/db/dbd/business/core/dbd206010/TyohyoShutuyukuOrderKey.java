@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd206010;
+package jp.co.ndensan.reams.db.dbd.business.core.dbd206010;
 
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,7 +19,6 @@ public enum TyohyoShutuyukuOrderKey implements IReportItems {
      * 項目ID:0001 フォームフィールド名:郵便番号 MyBatis項目名:定義なし
      */
     郵便番号("0001", "郵便番号", "\"yubinNo\""),
-    //    郵便番号("0001", "郵便番号", "shikibetsuCode.\"yubinNo\""),
     /**
      * 項目ID:0002 フォームフィールド名:町域コード MyBatis項目名:定義なし
      */
@@ -35,7 +34,7 @@ public enum TyohyoShutuyukuOrderKey implements IReportItems {
     /**
      * 項目ID:0016 フォームフィールド名:市町村コード MyBatis項目名:定義なし
      */
-    市町村コード("0016", "市町村コード", ""),
+    市町村コード("0016", "市町村コード", "\"shichosonCode\""),
     /**
      * 項目ID:0103 フォームフィールド名:証記載保険者番号 MyBatis項目名:定義なし
      */

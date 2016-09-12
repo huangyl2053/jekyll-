@@ -5,10 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunshunyugaku;
 
-import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 
 /**
  * 基準収入額適用申請登録mapperクラスです。
@@ -24,12 +22,4 @@ public interface IKijunShunyuShinseiTourokuMapper {
      * @return 被保険者台帳管理
      */
     DbT1001HihokenshaDaichoEntity get被保険者台帳(Map<String, Object> parameter);
-
-    /**
-     * 受給の取得のメソッドです。
-     *
-     * @param parameter Map
-     * @return 受給者台帳
-     */
-    List<DbT4001JukyushaDaichoEntity> get受給(Map<String, Object> parameter);
 }

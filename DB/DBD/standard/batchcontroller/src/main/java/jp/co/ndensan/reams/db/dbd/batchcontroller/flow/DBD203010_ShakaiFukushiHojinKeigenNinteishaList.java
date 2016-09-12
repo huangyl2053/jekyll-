@@ -4,11 +4,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbdbt00004;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt00004.NinteishaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt00004.TaishoshaIchijiTokuteiProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBDBT00004.DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD203010.DBD203010_ShakaiFukushiHojinKeigenNinteishaListParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmenGengakuTaishoShaHanteiYoukonSakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-3830-010 tianyh
  */
-public class DBD200004_ShakaiFukushiHojinKeigenNinteishaListFlow extends BatchFlowBase<DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter> {
+public class DBD203010_ShakaiFukushiHojinKeigenNinteishaList extends BatchFlowBase<DBD203010_ShakaiFukushiHojinKeigenNinteishaListParameter> {
 
     private static final String 対象者一次特定 = "TaishoshaIchijiTokuteiProcess";
     private static final String 減免減額対象者判定用根拠作成 = "減免減額対象者判定用根拠作成";

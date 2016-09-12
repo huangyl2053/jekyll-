@@ -223,7 +223,9 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
         FutanWariaiHanteiIchiranReport report = new FutanWariaiHanteiIchiranReport(processParameter, entity);
         report.writeBy(reportSourceWriter);
         eucCsvWriter.writeLine(new FutanWariaiHanteiIchiranCsvEntityEditor(entity, processParameter).edit());
-        PersonalData personalData = getPersonalData(entity);
-        personalDataList.add(personalData);
+        if (entity.get判定対象者識別コード() != null) {
+            PersonalData personalData = getPersonalData(entity);
+            personalDataList.add(personalData);
+        }
     }
 }

@@ -71,6 +71,15 @@ public class GassanJikofutangakuHakkoIchiranSource implements IReportSource {
     @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode", length = 15)
     public RString shikibetsuCode;
+
+    public RString 郵便番号;
+    public RString 町域コード;
+    public RString 行政区コード;
+    public RString 市町村コード;
+    public RString 証記載保険者番号;
+    public RString 支給区分コード;
+    public RString 新規継続区分;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

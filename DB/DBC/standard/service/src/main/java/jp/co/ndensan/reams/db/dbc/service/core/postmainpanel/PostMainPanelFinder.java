@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.postmainpanel.PostMainPanelEn
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.postmainpanel.IPostMainPanelMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -48,19 +49,42 @@ public class PostMainPanelFinder {
      * @param paramter HashMap<String, Object>
      * @return 再発行対象リスト
      */
-    public List<PostMainPanelEntity> getPostMainPanel(Map<String, Object> paramter) {
+    public List<List> getPostMainPanel(Map<String, Object> paramter) {
         requireNonNull(paramter, UrSystemErrorMessages.値がnull.getReplacedMessage("paramter"));
-        List<PostMainPanelEntity> businessList = new ArrayList<>();
+        List<List> listDataSource = new ArrayList();
         IPostMainPanelMapper mapper = mapperProvider.create(IPostMainPanelMapper.class);
         List<PostMainPanelEntity> 再発行対象リスト = mapper.get広域保険者for00(paramter);
         if (再発行対象リスト != null && !再発行対象リスト.isEmpty()) {
-            for (PostMainPanelEntity entity : 再発行対象リスト) {
-                businessList.add(entity);
+            for (PostMainPanelEntity item : 再発行対象リスト) {
+                List items = new ArrayList();
+
+                if (item.get市町村コード() != null || !item.get市町村コード().toString().isEmpty()) {
+                    items.add(new RString(item.get市町村コード().toString()));
+                } else {
+                    items.add(RString.EMPTY);
+                }
+                if (item.get市町村名称() != null && !item.get市町村名称().toString().isEmpty()) {
+                    items.add(new RString(item.get市町村名称().toString()));
+                } else {
+                    items.add(RString.EMPTY);
+                }
+                if (item.get基準日時() != null && !item.get基準日時().toString().isEmpty()) {
+                    items.add(new RString(item.get基準日時().toString()));
+                } else {
+                    items.add(RString.EMPTY);
+                }
+                if (item.get対象開始日時() != null && !item.get対象開始日時().toString().isEmpty()) {
+                    items.add(new RString(item.get対象開始日時().toString()));
+                } else {
+                    items.add(RString.EMPTY);
+                }
+                items.add(item.get市町村識別ID());
+                listDataSource.add(items);
             }
         } else {
             return null;
         }
-        return businessList;
+        return listDataSource;
     }
 
     /**
@@ -69,14 +93,37 @@ public class PostMainPanelFinder {
      * @param paramter PostMainPanelMybatisParameter
      * @return 再発行対象リスト
      */
-    public List<PostMainPanelEntity> getPostMainPanel(PostMainPanelMybatisParameter paramter) {
+    public List<List> getPostMainPanel(PostMainPanelMybatisParameter paramter) {
         requireNonNull(paramter, UrSystemErrorMessages.値がnull.getReplacedMessage("paramter"));
-        List<PostMainPanelEntity> businessList = new ArrayList<>();
+        List<List> businessList = new ArrayList<>();
         IPostMainPanelMapper mapper = mapperProvider.create(IPostMainPanelMapper.class);
         List<PostMainPanelEntity> 再発行対象リスト = mapper.get広域保険者(paramter);
         if (再発行対象リスト != null && !再発行対象リスト.isEmpty()) {
-            for (PostMainPanelEntity entity : 再発行対象リスト) {
-                businessList.add(entity);
+            for (PostMainPanelEntity item : 再発行対象リスト) {
+                List items = new ArrayList();
+                if (item.get市町村コード() != null || !item.get市町村コード().toString().isEmpty()) {
+                    items.add(new RString(item.get市町村コード().toString()));
+                } else {
+                    items.add(RString.EMPTY);
+                }
+                if (item.get市町村名称() != null && !item.get市町村名称().toString().isEmpty()) {
+                    items.add(new RString(item.get市町村名称().toString()));
+                } else {
+                    items.add(RString.EMPTY);
+                }
+                if (item.get基準日時() != null && !item.get基準日時().toString().isEmpty()) {
+                    items.add(new RString(item.get基準日時().toString()));
+                } else {
+                    items.add(RString.EMPTY);
+                }
+                if (item.get対象開始日時() != null && !item.get対象開始日時().toString().isEmpty()) {
+                    items.add(new RString(item.get対象開始日時().toString()));
+                } else {
+                    items.add(RString.EMPTY);
+                }
+                items.add(item.get市町村識別ID());
+
+                businessList.add(items);
             }
         } else {
             return null;

@@ -38,6 +38,7 @@ public class NinteishaListSakuseiProcessParameter implements IBatchProcessParame
     private RString 抽出対象;
     private List<RString> 出力設定;
     private long 改頁出力順ID;
+    private long 出力順ID;
     private RString 帳票ID;
     private YMDHMS 帳票作成日時;
 
@@ -58,6 +59,7 @@ public class NinteishaListSakuseiProcessParameter implements IBatchProcessParame
      * @param 抽出対象 抽出対象
      * @param 出力設定 出力設定
      * @param 改頁出力順ID 改頁出力順ID
+     * @param 出力順ID 出力順ID
      * @param 帳票ID 帳票ID
      * @param 帳票作成日時 帳票作成日時
      */
@@ -76,6 +78,7 @@ public class NinteishaListSakuseiProcessParameter implements IBatchProcessParame
             RString 抽出対象,
             List<RString> 出力設定,
             long 改頁出力順ID,
+            long 出力順ID,
             RString 帳票ID,
             YMDHMS 帳票作成日時) {
         this.対象リスト = 対象リスト;
@@ -92,6 +95,7 @@ public class NinteishaListSakuseiProcessParameter implements IBatchProcessParame
         this.抽出対象 = 抽出対象;
         this.出力設定 = 出力設定;
         this.改頁出力順ID = 改頁出力順ID;
+        this.出力順ID = 出力順ID;
         this.帳票ID = 帳票ID;
         this.帳票作成日時 = 帳票作成日時;
     }

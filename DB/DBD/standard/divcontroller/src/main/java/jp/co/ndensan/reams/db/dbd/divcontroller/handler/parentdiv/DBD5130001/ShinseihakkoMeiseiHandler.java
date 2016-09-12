@@ -241,6 +241,8 @@ public class ShinseihakkoMeiseiHandler {
     }
 
     private ShinseiShoEntity set状態区分(ShinseiShoEntity shinseiShoEntity) {
+        boolean 要介護 = false;
+        boolean 要支援 = false;
         shinseiShoEntity.set有効期間開始年月日(getパターン9(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue()));
         shinseiShoEntity.set有効開始年YYYY(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue().getYear().toDateString());
         shinseiShoEntity.set有効開始月MM(new RString(String.valueOf(
@@ -253,28 +255,41 @@ public class ShinseihakkoMeiseiHandler {
                 div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue().getMonthValue())).padZeroToLeft(NO_2));
         shinseiShoEntity.set有効終了日DD(new RString(String.valueOf(
                 div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue().getDayValue())).padZeroToLeft(NO_2));
-        shinseiShoEntity.set要介護状態区分(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue());
         if ("要介護1".equals(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
             shinseiShoEntity.set要介護状態区分1(正);
+            要介護 = true;
         }
         if ("要介護2".equals(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
             shinseiShoEntity.set要介護状態区分2(正);
+            要介護 = true;
         }
         if ("要介護3".equals(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
             shinseiShoEntity.set要介護状態区分3(正);
+            要介護 = true;
         }
         if ("要介護4".equals(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
             shinseiShoEntity.set要介護状態区分4(正);
+            要介護 = true;
         }
         if ("要介護5".equals(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
             shinseiShoEntity.set要介護状態区分5(正);
+            要介護 = true;
         }
-        shinseiShoEntity.set要支援状態区分(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue());
         if ("要支援1".equals(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
             shinseiShoEntity.set要支援状態区分1(正);
+            要支援 = true;
         }
         if ("要支援2".equals(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue().toString())) {
             shinseiShoEntity.set要支援状態区分2(正);
+            要支援 = true;
+        }
+        if (要介護) {
+            shinseiShoEntity.set要介護状態区分(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue());
+            shinseiShoEntity.set要支援状態区分(RString.EMPTY);
+        }
+        if (要支援) {
+            shinseiShoEntity.set要支援状態区分(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue());
+            shinseiShoEntity.set要介護状態区分(RString.EMPTY);
         }
         return shinseiShoEntity;
     }

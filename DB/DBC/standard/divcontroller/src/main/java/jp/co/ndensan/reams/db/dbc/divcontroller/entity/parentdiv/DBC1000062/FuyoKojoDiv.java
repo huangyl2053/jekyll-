@@ -4,17 +4,21 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * FuyoKojo のクラスファイル 
- * 
- * @author 自動生成
+ * FuyoKojo のクラスファイル
+ *
+ * @reamsid_L DBC-4620-010 wangkanglei
  */
 public class FuyoKojoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -98,7 +102,7 @@ public class FuyoKojoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnSetaiSaiSanshutsu(Button btnSetaiSaiSanshutsu) {
+    public void setBtnSetaiSaiSanshutsu(Button btnSetaiSaiSanshutsu) {
         this.getButtonPanel().setBtnSetaiSaiSanshutsu(btnSetaiSaiSanshutsu);
     }
 
@@ -108,7 +112,7 @@ public class FuyoKojoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKojoSaiSanshutsu(Button btnKojoSaiSanshutsu) {
+    public void setBtnKojoSaiSanshutsu(Button btnKojoSaiSanshutsu) {
         this.getButtonPanel().setBtnKojoSaiSanshutsu(btnKojoSaiSanshutsu);
     }
 
@@ -118,7 +122,7 @@ public class FuyoKojoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtUnder16(TextBoxNum txtUnder16) {
+    public void setTxtUnder16(TextBoxNum txtUnder16) {
         this.getZennenKojoTaisho().setTxtUnder16(txtUnder16);
     }
 
@@ -128,7 +132,7 @@ public class FuyoKojoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtOver16(TextBoxNum txtOver16) {
+    public void setTxtOver16(TextBoxNum txtOver16) {
         this.getZennenKojoTaisho().setTxtOver16(txtOver16);
     }
 

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1200902;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd200018.ShakaiFukushiHojinKeigenHakkoIchiranOrderKey;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100018.ShakfukusRiysFutKeigTaisKakuninshoOrderKey;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200018.ShakaiFukushiHojinKeigenHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shakaifukushihojinkeigen.GemmenKubun;
@@ -114,10 +114,10 @@ public class ShakaiFukushiHoujinnKeigenListProcess extends BatchProcessBase<Shak
     private RString get出力順() {
         RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        order = finder.get出力順(SubGyomuCode.DBD介護受給, ID, reamsLoginID, parameter.get改頁出力順ID());
+        order = finder.get出力順(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100018.getReportId(), reamsLoginID, parameter.get改頁出力順ID());
         RString 出力順 = RString.EMPTY;
         if (order != null) {
-            出力順 = MyBatisOrderByClauseCreator.create(ShakaiFukushiHojinKeigenHakkoIchiranOrderKey.class, order);
+            出力順 = MyBatisOrderByClauseCreator.create(ShakfukusRiysFutKeigTaisKakuninshoOrderKey.class, order);
         }
         return 出力順;
     }

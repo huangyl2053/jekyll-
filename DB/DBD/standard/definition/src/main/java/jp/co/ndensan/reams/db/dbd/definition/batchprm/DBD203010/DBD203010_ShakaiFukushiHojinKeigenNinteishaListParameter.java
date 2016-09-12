@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBDBT00004;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD203010;
 
 import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00004.NinteishaListSakuseiProcessParameter;
@@ -25,7 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter extends BatchParameterBase {
+public class DBD203010_ShakaiFukushiHojinKeigenNinteishaListParameter extends BatchParameterBase {
 
     @BatchParameter(key = "対象リスト", name = "対象リスト")
     private RString 対象リスト;
@@ -55,6 +55,8 @@ public class DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter extends B
     private ArrayList<RString> 出力設定;
     @BatchParameter(key = "改頁出力順ID", name = "改頁出力順ID")
     private long 改頁出力順ID;
+    @BatchParameter(key = "出力順ID", name = "出力順ID")
+    private long 出力順ID;
     @BatchParameter(key = "帳票ID", name = "帳票ID")
     private RString 帳票ID;
 
@@ -99,6 +101,7 @@ public class DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter extends B
                 抽出対象,
                 出力設定,
                 改頁出力順ID,
+                出力順ID,
                 帳票ID,
                 systemTime
         );

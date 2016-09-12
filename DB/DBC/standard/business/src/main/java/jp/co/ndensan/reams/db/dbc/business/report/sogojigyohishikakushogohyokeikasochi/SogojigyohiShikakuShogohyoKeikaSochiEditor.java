@@ -113,14 +113,13 @@ public class SogojigyohiShikakuShogohyoKeikaSochiEditor
         if (target.get資格照合表一時().getNinteiYukoKikanKaishiYMD() != null) {
             source.listUpper_11 = パターン4(target.get資格照合表一時().getNinteiYukoKikanKaishiYMD());
         }
-        if (target.get資格照合表一時().getGendoGakuTekiyoKikanKaishiYMD() != null
-                && target.get資格照合表一時().getGendoGakuTekiyoKikanShuryoYMD() != null
-                && target.get資格照合表一時().getGendoGakuTekiyoKikanKaishiYMD().isEmpty()
-                && target.get資格照合表一時().getGendoGakuTekiyoKikanShuryoYMD().isEmpty()) {
+        if (target.get資格照合表一時().getGendoGakuTekiyoKikanKaishiYMD() == null
+                && target.get資格照合表一時().getGendoGakuTekiyoKikanShuryoYMD() == null) {
             source.listUpper_12 = null;
         } else {
             source.listUpper_12 = 期間;
         }
+
         if (target.get資格照合表一時().getNinteiYukoKikanShuryoYMD() != null) {
             source.listUpper_13 = パターン4(target.get資格照合表一時().getNinteiYukoKikanShuryoYMD());
         }
