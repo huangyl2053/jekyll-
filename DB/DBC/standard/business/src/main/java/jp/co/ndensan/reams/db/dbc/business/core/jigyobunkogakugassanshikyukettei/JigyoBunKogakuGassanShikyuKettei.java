@@ -877,59 +877,59 @@ public class JigyoBunKogakuGassanShikyuKettei {
         /**
          * 行政区コード
          */
-        行政区コード(new RString("0004"), new RString(""), new RString("ShikibetsuTaisho_gyoseikuCode")),
+        行政区コード(new RString("0004"), new RString(""), new RString("\"ShikibetsuTaisho_gyoseikuCode\"")),
         /**
          * 世帯コード
          */
-        世帯コード(new RString("0008"), new RString(""), new RString("ShikibetsuTaisho_setaiCode")),
+        世帯コード(new RString("0008"), new RString(""), new RString("\"ShikibetsuTaisho_setaiCode\"")),
         /**
          * 識別コード
          */
-        識別コード(new RString("0009"), new RString(""), new RString("ShikibetsuTaisho_shikibetsuCode")),
+        識別コード(new RString("0009"), new RString(""), new RString("\"ShikibetsuTaisho_shikibetsuCode\"")),
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString(""), new RString("ShikibetsuTaisho_kanaShimei")),
+        氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"ShikibetsuTaisho_kanaShimei\"")),
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString(""), new RString("shichosonCode")),
+        市町村コード(new RString("0016"), new RString(""), new RString("\"shichosonCode\"")),
         /**
          * 証記載保険者番号
          *
          * TODO QA1685 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
-        証記載保険者番号(new RString("0103"), new RString(""), new RString("shoKisaiHokenshaNo")),
+        証記載保険者番号(new RString("0103"), new RString(""), new RString("\"shoKisaiHokenshaNo\"")),
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString(""), new RString("hihokenshaNo")),
+        被保険者番号(new RString("0104"), new RString(""), new RString("\"hihokenshaNo\"")),
         /**
          * 要介護度
          */
-        要介護度(new RString("0403"), new RString(""), new RString("yokaigoJotaiKubunCode")),
+        要介護度(new RString("0403"), new RString(""), new RString("\"yokaigoJotaiKubunCode\"")),
         /**
          * 認定開始日
          *
          * TODO QA1685 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
-        認定開始日(new RString("0411"), new RString(""), new RString("ninteiKaishiYMD")),
+        認定開始日(new RString("0411"), new RString(""), new RString("\"ninteiKaishiYMD\"")),
         /**
          * 整理番号
          *
          * TODO QA1685 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
-        整理番号(new RString("0305"), new RString(""), new RString("shikyuSeiriNo")),
+        整理番号(new RString("0305"), new RString(""), new RString("shikyuSeiriNo\"")),
         /**
          * 支払方法
          */
-        支払方法(new RString("0312"), new RString(""), new RString("shiharaiHohoKubun")),
+        支払方法(new RString("0312"), new RString(""), new RString("shiharaiHohoKubun\"")),
         /**
          * 通知書作成日
          *
          * TODO QA1685 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
-        通知書作成日(new RString("0410"), new RString(""), new RString("tsuchishoSakuseiYMD"));
+        通知書作成日(new RString("0410"), new RString(""), new RString("tsuchishoSakuseiYMD\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;
