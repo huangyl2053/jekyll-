@@ -528,7 +528,7 @@
             <dependency>
                 <groupId>jp.co.ndensan.reams.ca.cax</groupId>
                 <artifactId>CaxBatchController</artifactId>
-                <version>${jp.co.ndensan.reams.caxVersion}</version> 
+                <version>${jp.co.ndensan.reams.caxVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ca.cax</groupId>
@@ -610,7 +610,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <checkmode>skip</checkmode>
+                    <checkmode>full</checkmode>
                 </configuration>
             </plugin>
         </plugins>
