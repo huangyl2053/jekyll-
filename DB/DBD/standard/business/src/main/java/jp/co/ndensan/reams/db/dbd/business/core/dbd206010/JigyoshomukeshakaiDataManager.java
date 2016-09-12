@@ -13,8 +13,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShi
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 
 /**
+ * 事業所向け社会福祉法人軽減対象者一覧発行のDataManagerクラスです。
  *
- * @author LDNS liuwei2
+ * @reamsid_L DBD-3810-030 liuwei2
  */
 public class JigyoshomukeshakaiDataManager {
 
