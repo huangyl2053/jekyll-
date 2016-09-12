@@ -16,7 +16,7 @@
         "orgHihokenshaNo" as dbWT0001_被保険者番号,
         "serviceTeikyoYmd" as dbWT0001_サービス提供年月末日,
         "orgHihokenshaKanaShimei" as dbWT0001_被保険者カナ氏名,
-        "orgHihokenshaKanaShimei" as dbWT0001_被保険者氏名,
+        "orgHihokenshaShimei" as dbWT0001_被保険者氏名,
         "oldShichosonCode" as dbWT0001_旧市町村コード,
         "henkanHihokenshaNo" as dbWT0001_変換被保険者番号,  
         "hihokenshaNo" as dbWT0001_登録被保険者番号,
