@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -414,13 +415,13 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiBodyEditor
             }
             source.shumokuTitle = 口座種別;
             if (entity.get預金種別() != null) {
-                source.kouzaShu = entity.get預金種別();
+                source.kouzaShu = entity.get預金種別().get預金種別名称();
             }
         } else {
 
             source.shumokuTitle = 店番;
             if (entity.get支店コード() != null) {
-                source.kouzaShu = entity.get支店コード();
+                source.kouzaShu = getColumnValue(entity.get支店コード());
             }
             for (ChohyoSeigyoHanyo キー : 帳票制御汎用キー) {
                 if (null == キー) {
@@ -435,7 +436,7 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiBodyEditor
         }
         source.kouzaNo1 = entity.get口座番号();
         if (entity.get口座名義人() != null) {
-            source.kouzaMeigi = entity.get口座名義人();
+            source.kouzaMeigi = getColumnValue(entity.get口座名義人());
         }
     }
 
@@ -467,5 +468,12 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiBodyEditor
             return RString.EMPTY;
         }
         return DecimalFormatter.toコンマ区切りRString(金額, 0);
+    }
+
+    private RString getColumnValue(IDbColumnMappable entity) {
+        if (null != entity) {
+            return entity.getColumnValue();
+        }
+        return RString.EMPTY;
     }
 }
