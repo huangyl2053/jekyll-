@@ -63,7 +63,6 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private RString eucFilePath;
     private FileSpoolManager manager;
-    private final RString rseId = new RString("DBB200018_TokubetsuChoshuDoteiMiDoteiIchiran");
     private final RString csvファイル名 = new RString("TokubetsuChoshuMidoteiIchiran.csv");
     private final RString csvOutFlag = new RString("有り");
 

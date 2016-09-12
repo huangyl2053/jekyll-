@@ -723,16 +723,30 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
 
     private boolean is修正(HomonKaigoRiyoshaFutangakuGengakuToJotai 最初情報) {
         HomonKaigoRiyoshaFutangakuGengaku 申請 = 最初情報.get訪問介護利用者負担額減額情報();
-        if (!申請.get申請年月日().equals(div.getTxtShinseiYMD().getValue())) {
-            return true;
-        }
-        if (!isEquals(申請.get申請事由(), div.getTxtShinseiRiyu().getValue())) {
+        if (!申請.get申請年月日().equals(div.getTxtShinseiYMD().getValue())
+                || !isEquals(申請.get申請事由(), div.getTxtShinseiRiyu().getValue())
+                || is障害者手帳修正(申請)) {
             return true;
         }
         if (!申請メニュー.equals(ResponseHolder.getMenuID()) && is承認情報修正(申請)) {
             return true;
         }
         return is減免減額申請修正(申請);
+    }
+
+    private boolean is障害者手帳修正(HomonKaigoRiyoshaFutangakuGengaku 訪問介護利用者負担額減額情報) {
+        if (障害者手帳_有_Key.equals(div.getRadShogaishaTechoUmu().getSelectedKey())) {
+            if (!訪問介護利用者負担額減額情報.is障害者手帳有無()) {
+                return true;
+            }
+            return !isEquals(div.getShogaishaTecho().getTxtShogaishaTechoTokyu().getValue(),
+                    訪問介護利用者負担額減額情報.get障害者手帳等級())
+                    || !isEquals(div.getShogaishaTecho().getTxtShogaishaTechoNo().getValue(),
+                            訪問介護利用者負担額減額情報.get障害者手帳番号())
+                    || !isEquals(div.getShogaishaTecho().getTxtShogaishaTechoKofuYMD().getValue(),
+                            訪問介護利用者負担額減額情報.get障害者手帳交付年月日());
+        }
+        return 訪問介護利用者負担額減額情報.is障害者手帳有無();
     }
 
     private boolean is承認情報修正(HomonKaigoRiyoshaFutangakuGengaku 申請) {

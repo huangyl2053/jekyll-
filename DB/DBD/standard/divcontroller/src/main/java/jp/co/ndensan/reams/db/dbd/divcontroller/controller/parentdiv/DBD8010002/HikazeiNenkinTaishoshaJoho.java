@@ -231,6 +231,12 @@ public class HikazeiNenkinTaishoshaJoho {
      * @return ResponseData
      */
     public ResponseData<HikazeiNenkinTaishoshaJohoDiv> onSelectBySelectButton(HikazeiNenkinTaishoshaJohoDiv div) {
+
+        div.getTxtShoriNendo().clearValue();
+        div.getTxtTuki().clearValue();
+        div.getTxtShori().clearValue();
+        div.getTxtFuairuMei().clearValue();
+
         setDisplayOrOpen(div, true);
         return ResponseData.of(div).respond();
     }
