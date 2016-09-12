@@ -48,10 +48,9 @@ public class CareManagementMain {
             getHandler(div).clear制御性(識別番号管理データリスト.get(0), サービス提供年月);
         }
         List<KyufuJissekiCareManagementHiBusiness> ケアマネジメント費 = 給付実績情報照会情報.getCsData_M();
-        getHandler(div).set給付実績ケアマネジメント費データ(ケアマネジメント費, サービス提供年月);
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
-        getHandler(div).setJigyoshaBtn(事業者番号リスト);
+        getHandler(div).set給付実績ケアマネジメント費データ(ケアマネジメント費, サービス提供年月, 事業者番号リスト);
         return createResponse(div);
     }
 
@@ -64,7 +63,9 @@ public class CareManagementMain {
     public ResponseData<CareManagementMainDiv> onClick_btnZengetsu(CareManagementMainDiv div) {
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         List<KyufuJissekiCareManagementHiBusiness> ケアマネジメント費 = 給付実績情報照会情報.getCsData_M();
-        getHandler(div).change年月(new RString("前月"), ケアマネジメント費);
+        List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
+                KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
+        getHandler(div).change年月(new RString("前月"), ケアマネジメント費, 事業者番号リスト);
         return createResponse(div);
     }
 
@@ -77,7 +78,9 @@ public class CareManagementMain {
     public ResponseData<CareManagementMainDiv> onClick_btnJigetsu(CareManagementMainDiv div) {
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         List<KyufuJissekiCareManagementHiBusiness> ケアマネジメント費 = 給付実績情報照会情報.getCsData_M();
-        getHandler(div).change年月(new RString("次月"), ケアマネジメント費);
+        List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
+                KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
+        getHandler(div).change年月(new RString("次月"), ケアマネジメント費, 事業者番号リスト);
         return createResponse(div);
     }
 
