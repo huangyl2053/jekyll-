@@ -127,7 +127,8 @@ public class DBC110120_SaishinsaMoshitateshoOut extends BatchFlowBase<DBC110120_
         } else {
             doShinkyuHihokenshaNoHenkan();
             executeStep(保険者番号取込);
-            getMeisyoJoho();
+            executeStep(被保険者_宛名情報取得);
+            executeStep(エラー登録);
             executeStep(送付除外区分設定);
             executeStep(保険者番号取得);
             hokenshaNoList = getResult(
@@ -457,15 +458,6 @@ public class DBC110120_SaishinsaMoshitateshoOut extends BatchFlowBase<DBC110120_
     protected IBatchFlowCommand callSetHihokenshaNoProcess() {
         return loopBatch(HokenshaKyufujissekiOutSetHihokenshaNoProcess.class).define();
 
-    }
-
-    private void getMeisyoJoho() {
-        executeStep(被保険者_宛名情報取得);
-        flowEntity = (FlowEntity) getResult(FlowEntity.class, new RString(被保険者_宛名情報取得),
-                HokenshaKyufujissekiOutGetHihokenshaAtenaProcess.PARAMETER_OUT_FLOWENTITY);
-        if (0 == flowEntity.getCodeNum()) {
-            executeStep(エラー登録);
-        }
     }
 
     /**
