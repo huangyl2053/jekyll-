@@ -118,6 +118,7 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty extends Repor
             BreakerCatalog<TokuChoHeijunkaKeisanJuneKekkaIchiranSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
 
+
             pageBreakKeys) {
             @Override
             public ReportLineRecord<TokuChoHeijunkaKeisanJuneKekkaIchiranSource> occuredBreak(

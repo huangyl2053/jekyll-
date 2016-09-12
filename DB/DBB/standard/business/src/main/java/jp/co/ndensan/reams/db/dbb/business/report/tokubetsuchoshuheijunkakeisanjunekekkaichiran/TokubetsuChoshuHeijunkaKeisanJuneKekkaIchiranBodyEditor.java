@@ -79,7 +79,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
     private void 対象者項目編集(TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者,
             TokuChoHeijunkaKeisanJuneKekkaIchiranSource source, ChohyoSeigyoKyotsu 帳票制御共通, Association association) {
         TokuchoHeijyunkaTaishoshaEntity item = 特徴平準化結果対象者.get特徴平準化結果対象者();
-        RString 編集備考 = 備考名を転換(item.get備考コード());
+        RString 編集備考 = item.get備考コード();
         TsuchishoNo 通知書番号 = item.get通知書番号();
         if (通知書番号 != null) {
             source.listUpper_1 = 通知書番号.value();
@@ -181,7 +181,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
     private void 対象外項目編集(TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外,
             TokuChoHeijunkaKeisanJuneKekkaIchiranSource source, ChohyoSeigyoKyotsu 帳票制御共通, Association association) {
         TokuchoHeijyunkaTaishogaiEntity item = 特徴平準化結果対象外.get特徴平準化結果対象外();
-        RString 編集備考 = 備考名を転換(item.get備考コード());
+        RString 編集備考 = item.get備考コード();
         TsuchishoNo 通知書番号 = item.get通知書番号();
         if (通知書番号 != null) {
             source.listUpper_1 = 通知書番号.value();
