@@ -111,7 +111,7 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
             source.listLower_6 = entity.get預金種別().get預金種別名称().concat(スペース).concat(entity.get口座番号()).concat(getColumnValue(entity.get口座名義人カナ()));
             source.listUpper_5 = entity.get金融機関名称().concat(スペース).concat(entity.get支店名称());
         }
-        if (区分_1.equals(内部帳票文字切れ制御)) {
+        if (区分_1.equals(内部帳票文字切れ制御) && null != entity.get被保険者氏名()) {
             source.listUpper_1 = entity.get被保険者氏名().substringReturnAsPossible(0, INT_15);
         } else {
             source.listUpper_1 = アステリスク_15;
