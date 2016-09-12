@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd206010;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD206010;
 
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -29,8 +29,9 @@ public class DBD206010_JigyoshoMukeShakaFukushiHojinKeigenTaishoshaIchiranHakkoP
     private static final String JIGYOSHANO = "jigyoshaNo";
     private static final String JIGYOSHANAME = "jigyoshaName";
     private static final String OUTPUTJUNNID = "outputJunnId";
-    private static final String SHORIDATETIME = "shoriDateTime";
     private static final String CHANGEID = "changeid";
+    private static final String SHORIDATETIME = "shoriDateTime";
+
     @BatchParameter(key = KIJUNRI, name = "基準日")
     private FlexibleDate 基準日;
     @BatchParameter(key = SHIKAKUSSIUSSENTAKU, name = "資格喪失者選択")
