@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 
 /**
  * 「時効起算日特殊登録」画面のHandlerクラスです。
@@ -47,6 +48,7 @@ public class JukoKisambiTokushuTorokuHandler {
     private final JukoKisambiTokushuTorokuDiv div;
 
     private final RString 年度 = new RString("年度");
+    private final RString 保険料 = new RString("保険料");
     private final RString 期 = new RString("期");
     private final RString 修正 = new RString("修正");
     private final RString 全行表示_ON = new RString("isZengyoHyoji");
@@ -159,6 +161,7 @@ public class JukoKisambiTokushuTorokuHandler {
             List<JikoKisambiKanri> 時効起算日管理List,
             HihokenshaNo 被保険者番号) {
 
+        div.getJikoKisambi().setTitle(div.getDgShunoJokyo().getActiveRow().getSeirekiChoteiNendo().concat(保険料));
         RString 調定年度 = div.getDgShunoJokyo().getActiveRow().getSeirekiChoteiNendo();
         List<dgJikoKisambi_Row> 時効起算日登録List = new ArrayList<>();
         boolean 存在フラグ = false;
@@ -225,19 +228,28 @@ public class JukoKisambiTokushuTorokuHandler {
     /**
      * 時効起算日登録Gridの内容変更判定です。
      *
+     * @param 時効起算日管理List List<JikoKisambiKanri>
      * @return boolean
      */
-    public boolean is変更判定for時効起算日登録() {
+    public boolean is変更判定for時効起算日登録(List<JikoKisambiKanri> 時効起算日管理List) {
 
         List<dgJikoKisambi_Row> rowList = div.getDgJikoKisambi().getDataSource();
+        RString 調定年度 = div.getDgShunoJokyo().getActiveRow().getSeirekiChoteiNendo();
         for (dgJikoKisambi_Row row : rowList) {
-            if (!row.getJikoKisaibi().getValue().equals(row.getTokushuJikoKisaibi().getValue())
-                    || !row.getJikoKisaibiJiyu().equals(row.getTokushuJikoKisaibiJiyu().getSelectedValue())) {
-                return false;
+            for (JikoKisambiKanri 時効起算日管理 : 時効起算日管理List) {
+                if (new RString(時効起算日管理.get調定年度().getYearValue()).equals(調定年度)
+                        && new RString(時効起算日管理.get賦課年度().getYearValue()).equals(row.getHdnFukaNendo())
+                        && 時効起算日管理.get特徴_普徴区分().equals(row.getHdnFuchoTokucho())
+                        && 時効起算日管理.get通知書番号().value().equals(row.getTsuchishoNo())
+                        && 時効起算日管理.get収納期_月().equals(row.getKi().substring(0, INT_2).trimStart(CHAR_0))
+                        && (時効起算日管理.get時効起算年月日().getYearValue() == row.getTokushuJikoKisaibi().getValue().getYearValue()
+                        || 時効起算日管理.get時効起算日区分().equals(row.getTokushuJikoKisaibiJiyu().getSelectedKey()))) {
+                    return true;
+                }
             }
         }
 
-        return true;
+        return false;
     }
 
     /**
@@ -360,6 +372,9 @@ public class JukoKisambiTokushuTorokuHandler {
                         時効起算日管理List.add(時効起算日管理);
                     } else {
                         時効起算日管理List.add(i, 時効起算日管理);
+                    }
+                    if (!時効起算日管理.isUnchanged()) {
+                        div.getDgShunoJokyo().getActiveRow().setRowState(RowState.Modified);
                     }
                 }
             }

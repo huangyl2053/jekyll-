@@ -158,6 +158,7 @@ public class JukoKisambiTokushuToroku {
         div.getDgShunoJokyo().setDisabled(true);
         div.getJikoKisambi().setIsOpen(true);
         div.getJikoKisambi().setDisabled(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(共通エリア_保存する, true);
 
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
@@ -181,8 +182,9 @@ public class JukoKisambiTokushuToroku {
      */
     public ResponseData<JukoKisambiTokushuTorokuDiv> onClick_btnResearch(JukoKisambiTokushuTorokuDiv div) {
 
+        List<JikoKisambiKanri> 時効起算日管理List = ViewStateHolder.get(ViewStateKeys.時効起算日管理, new ArrayList<>().getClass());
         if (!ResponseHolder.isReRequest()
-                && getHandler(div).is変更判定for時効起算日登録()) {
+                && getHandler(div).is変更判定for時効起算日登録(時効起算日管理List)) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
 
@@ -206,8 +208,9 @@ public class JukoKisambiTokushuToroku {
      */
     public ResponseData<JukoKisambiTokushuTorokuDiv> onClick_btnClear(JukoKisambiTokushuTorokuDiv div) {
 
+        List<JikoKisambiKanri> 時効起算日管理List = ViewStateHolder.get(ViewStateKeys.時効起算日管理, new ArrayList<>().getClass());
         if (!ResponseHolder.isReRequest()
-                && getHandler(div).is変更判定for時効起算日登録()) {
+                && getHandler(div).is変更判定for時効起算日登録(時効起算日管理List)) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
 
@@ -230,8 +233,9 @@ public class JukoKisambiTokushuToroku {
      */
     public ResponseData<JukoKisambiTokushuTorokuDiv> onClick_btnTorikeshi(JukoKisambiTokushuTorokuDiv div) {
 
+        List<JikoKisambiKanri> 時効起算日管理List = ViewStateHolder.get(ViewStateKeys.時効起算日管理, new ArrayList<>().getClass());
         if (!ResponseHolder.isReRequest()
-                && getHandler(div).is変更判定for時効起算日登録()) {
+                && getHandler(div).is変更判定for時効起算日登録(時効起算日管理List)) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
 
@@ -318,7 +322,8 @@ public class JukoKisambiTokushuToroku {
      */
     public ResponseData<JukoKisambiTokushuTorokuDiv> onClick_btnSave(JukoKisambiTokushuTorokuDiv div) {
 
-        if (getHandler(div).is変更判定for時効起算日登録()) {
+        List<JikoKisambiKanri> 時効起算日管理List = ViewStateHolder.get(ViewStateKeys.時効起算日管理, new ArrayList<>().getClass());
+        if (!getHandler(div).is変更判定for時効起算日登録(時効起算日管理List)) {
 
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         }
@@ -335,7 +340,6 @@ public class JukoKisambiTokushuToroku {
             return ResponseData.of(div).respond();
         }
 
-        List<JikoKisambiKanri> 時効起算日管理List = ViewStateHolder.get(ViewStateKeys.時効起算日管理, new ArrayList<>().getClass());
         getHandler(div).onClick_btnSave(時効起算日管理List);
 
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
