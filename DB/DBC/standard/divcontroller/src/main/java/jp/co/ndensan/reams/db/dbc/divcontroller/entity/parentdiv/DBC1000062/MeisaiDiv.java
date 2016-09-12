@@ -8,15 +8,25 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * Meisai のクラスファイル 
- * 
- * @author 自動生成
+ * Meisai のクラスファイル
+ *
+ * @reamsid_L DBC-4620-010 wangkanglei
  */
 public class MeisaiDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -500,7 +510,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSetaiCode(TextBoxCode txtSetaiCode) {
+    public void setTxtSetaiCode(TextBoxCode txtSetaiCode) {
         this.getSetaiJoho().setTxtSetaiCode(txtSetaiCode);
     }
 
@@ -510,7 +520,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShoriNendo(TextBoxFlexibleDate txtShoriNendo) {
+    public void setTxtShoriNendo(TextBoxFlexibleDate txtShoriNendo) {
         this.getSetaiJoho().setTxtShoriNendo(txtShoriNendo);
     }
 
@@ -520,7 +530,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSetaiinHaakuKijunYMD(TextBoxFlexibleDate txtSetaiinHaakuKijunYMD) {
+    public void setTxtSetaiinHaakuKijunYMD(TextBoxFlexibleDate txtSetaiinHaakuKijunYMD) {
         this.getSetaiJoho().setTxtSetaiinHaakuKijunYMD(txtSetaiinHaakuKijunYMD);
     }
 
@@ -530,7 +540,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinseiYMD(TextBoxFlexibleDate txtShinseiYMD) {
+    public void setTxtShinseiYMD(TextBoxFlexibleDate txtShinseiYMD) {
         this.getSetaiJoho().setTxtShinseiYMD(txtShinseiYMD);
     }
 
@@ -540,7 +550,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinseishoSakuseiYMD(TextBoxFlexibleDate txtShinseishoSakuseiYMD) {
+    public void setTxtShinseishoSakuseiYMD(TextBoxFlexibleDate txtShinseishoSakuseiYMD) {
         this.getSetaiJoho().setTxtShinseishoSakuseiYMD(txtShinseishoSakuseiYMD);
     }
 
@@ -550,7 +560,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setSetaiJoho2(SetaiJoho2Div SetaiJoho2) {
+    public void setSetaiJoho2(SetaiJoho2Div SetaiJoho2) {
         this.getSetaiJoho().setSetaiJoho2(SetaiJoho2);
     }
 
@@ -560,7 +570,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSetaiKazei(TextBox txtSetaiKazei) {
+    public void setTxtSetaiKazei(TextBox txtSetaiKazei) {
         this.getSetaiJoho().getSetaiJoho2().setTxtSetaiKazei(txtSetaiKazei);
     }
 
@@ -570,7 +580,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoStartYM(TextBoxFlexibleDate txtTekiyoStartYM) {
+    public void setTxtTekiyoStartYM(TextBoxFlexibleDate txtTekiyoStartYM) {
         this.getSetaiJoho().getSetaiJoho2().setTxtTekiyoStartYM(txtTekiyoStartYM);
     }
 
@@ -580,7 +590,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoEndYM(TextBoxFlexibleDate txtTekiyoEndYM) {
+    public void setTxtTekiyoEndYM(TextBoxFlexibleDate txtTekiyoEndYM) {
         this.getSetaiJoho().getSetaiJoho2().setTxtTekiyoEndYM(txtTekiyoEndYM);
     }
 
@@ -590,7 +600,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlSanteiKijunGaku(DropDownList ddlSanteiKijunGaku) {
+    public void setDdlSanteiKijunGaku(DropDownList ddlSanteiKijunGaku) {
         this.getSetaiJoho().getSetaiJoho2().setDdlSanteiKijunGaku(ddlSanteiKijunGaku);
     }
 
@@ -600,7 +610,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKetteiYMD(TextBoxFlexibleDate txtKetteiYMD) {
+    public void setTxtKetteiYMD(TextBoxFlexibleDate txtKetteiYMD) {
         this.getSetaiJoho().getSetaiJoho2().setTxtKetteiYMD(txtKetteiYMD);
     }
 
@@ -610,7 +620,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKetteiTsuchishoHakkoYMD(TextBoxFlexibleDate txtKetteiTsuchishoHakkoYMD) {
+    public void setTxtKetteiTsuchishoHakkoYMD(TextBoxFlexibleDate txtKetteiTsuchishoHakkoYMD) {
         this.getSetaiJoho().getSetaiJoho2().setTxtKetteiTsuchishoHakkoYMD(txtKetteiTsuchishoHakkoYMD);
     }
 
@@ -620,7 +630,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setFuyoKojo(FuyoKojoDiv FuyoKojo) {
+    public void setFuyoKojo(FuyoKojoDiv FuyoKojo) {
         this.getSetaiJoho().setFuyoKojo(FuyoKojo);
     }
 
@@ -630,7 +640,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setButtonPanel(ButtonPanelDiv ButtonPanel) {
+    public void setButtonPanel(ButtonPanelDiv ButtonPanel) {
         this.getSetaiJoho().getFuyoKojo().setButtonPanel(ButtonPanel);
     }
 
@@ -640,7 +650,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnSetaiSaiSanshutsu(Button btnSetaiSaiSanshutsu) {
+    public void setBtnSetaiSaiSanshutsu(Button btnSetaiSaiSanshutsu) {
         this.getSetaiJoho().getFuyoKojo().getButtonPanel().setBtnSetaiSaiSanshutsu(btnSetaiSaiSanshutsu);
     }
 
@@ -650,7 +660,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKojoSaiSanshutsu(Button btnKojoSaiSanshutsu) {
+    public void setBtnKojoSaiSanshutsu(Button btnKojoSaiSanshutsu) {
         this.getSetaiJoho().getFuyoKojo().getButtonPanel().setBtnKojoSaiSanshutsu(btnKojoSaiSanshutsu);
     }
 
@@ -660,7 +670,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKojoTaisho(Label lblKojoTaisho) {
+    public void setLblKojoTaisho(Label lblKojoTaisho) {
         this.getSetaiJoho().getFuyoKojo().setLblKojoTaisho(lblKojoTaisho);
     }
 
@@ -670,7 +680,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setZennenKojoTaisho(ZennenKojoTaishoDiv ZennenKojoTaisho) {
+    public void setZennenKojoTaisho(ZennenKojoTaishoDiv ZennenKojoTaisho) {
         this.getSetaiJoho().getFuyoKojo().setZennenKojoTaisho(ZennenKojoTaisho);
     }
 
@@ -680,7 +690,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtUnder16(TextBoxNum txtUnder16) {
+    public void setTxtUnder16(TextBoxNum txtUnder16) {
         this.getSetaiJoho().getFuyoKojo().getZennenKojoTaisho().setTxtUnder16(txtUnder16);
     }
 
@@ -690,7 +700,7 @@ public class MeisaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtOver16(TextBoxNum txtOver16) {
+    public void setTxtOver16(TextBoxNum txtOver16) {
         this.getSetaiJoho().getFuyoKojo().getZennenKojoTaisho().setTxtOver16(txtOver16);
     }
 

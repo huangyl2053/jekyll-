@@ -3,21 +3,17 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Sep 06 09:13:54 CST 2016 
+ * Tue Sep 06 09:13:54 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 /**
- * dgIchiran_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgIchiran_Row のクラスファイル
+ *
+ * @reamsid_L DBC-4620-010 wangkanglei
  */
-
 public class dgIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 

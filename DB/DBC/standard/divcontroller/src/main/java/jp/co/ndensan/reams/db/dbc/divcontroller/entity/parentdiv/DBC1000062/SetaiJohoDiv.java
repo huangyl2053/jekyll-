@@ -7,15 +7,22 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * SetaiJoho のクラスファイル 
- * 
- * @author 自動生成
+ * SetaiJoho のクラスファイル
+ *
+ * @reamsid_L DBC-4620-010 wangkanglei
  */
 public class SetaiJohoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -179,7 +186,7 @@ public class SetaiJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSetaiKazei(TextBox txtSetaiKazei) {
+    public void setTxtSetaiKazei(TextBox txtSetaiKazei) {
         this.getSetaiJoho2().setTxtSetaiKazei(txtSetaiKazei);
     }
 
@@ -189,7 +196,7 @@ public class SetaiJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoStartYM(TextBoxFlexibleDate txtTekiyoStartYM) {
+    public void setTxtTekiyoStartYM(TextBoxFlexibleDate txtTekiyoStartYM) {
         this.getSetaiJoho2().setTxtTekiyoStartYM(txtTekiyoStartYM);
     }
 
@@ -199,7 +206,7 @@ public class SetaiJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoEndYM(TextBoxFlexibleDate txtTekiyoEndYM) {
+    public void setTxtTekiyoEndYM(TextBoxFlexibleDate txtTekiyoEndYM) {
         this.getSetaiJoho2().setTxtTekiyoEndYM(txtTekiyoEndYM);
     }
 
@@ -209,7 +216,7 @@ public class SetaiJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlSanteiKijunGaku(DropDownList ddlSanteiKijunGaku) {
+    public void setDdlSanteiKijunGaku(DropDownList ddlSanteiKijunGaku) {
         this.getSetaiJoho2().setDdlSanteiKijunGaku(ddlSanteiKijunGaku);
     }
 
@@ -219,7 +226,7 @@ public class SetaiJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKetteiYMD(TextBoxFlexibleDate txtKetteiYMD) {
+    public void setTxtKetteiYMD(TextBoxFlexibleDate txtKetteiYMD) {
         this.getSetaiJoho2().setTxtKetteiYMD(txtKetteiYMD);
     }
 
@@ -229,7 +236,7 @@ public class SetaiJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKetteiTsuchishoHakkoYMD(TextBoxFlexibleDate txtKetteiTsuchishoHakkoYMD) {
+    public void setTxtKetteiTsuchishoHakkoYMD(TextBoxFlexibleDate txtKetteiTsuchishoHakkoYMD) {
         this.getSetaiJoho2().setTxtKetteiTsuchishoHakkoYMD(txtKetteiTsuchishoHakkoYMD);
     }
 
@@ -239,7 +246,7 @@ public class SetaiJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setButtonPanel(ButtonPanelDiv ButtonPanel) {
+    public void setButtonPanel(ButtonPanelDiv ButtonPanel) {
         this.getFuyoKojo().setButtonPanel(ButtonPanel);
     }
 
@@ -249,7 +256,7 @@ public class SetaiJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnSetaiSaiSanshutsu(Button btnSetaiSaiSanshutsu) {
+    public void setBtnSetaiSaiSanshutsu(Button btnSetaiSaiSanshutsu) {
         this.getFuyoKojo().getButtonPanel().setBtnSetaiSaiSanshutsu(btnSetaiSaiSanshutsu);
     }
 
@@ -259,7 +266,7 @@ public class SetaiJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKojoSaiSanshutsu(Button btnKojoSaiSanshutsu) {
+    public void setBtnKojoSaiSanshutsu(Button btnKojoSaiSanshutsu) {
         this.getFuyoKojo().getButtonPanel().setBtnKojoSaiSanshutsu(btnKojoSaiSanshutsu);
     }
 
@@ -269,7 +276,7 @@ public class SetaiJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKojoTaisho(Label lblKojoTaisho) {
+    public void setLblKojoTaisho(Label lblKojoTaisho) {
         this.getFuyoKojo().setLblKojoTaisho(lblKojoTaisho);
     }
 
@@ -279,7 +286,7 @@ public class SetaiJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setZennenKojoTaisho(ZennenKojoTaishoDiv ZennenKojoTaisho) {
+    public void setZennenKojoTaisho(ZennenKojoTaishoDiv ZennenKojoTaisho) {
         this.getFuyoKojo().setZennenKojoTaisho(ZennenKojoTaisho);
     }
 
@@ -289,7 +296,7 @@ public class SetaiJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtUnder16(TextBoxNum txtUnder16) {
+    public void setTxtUnder16(TextBoxNum txtUnder16) {
         this.getFuyoKojo().getZennenKojoTaisho().setTxtUnder16(txtUnder16);
     }
 
@@ -299,7 +306,7 @@ public class SetaiJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtOver16(TextBoxNum txtOver16) {
+    public void setTxtOver16(TextBoxNum txtOver16) {
         this.getFuyoKojo().getZennenKojoTaisho().setTxtOver16(txtOver16);
     }
 
