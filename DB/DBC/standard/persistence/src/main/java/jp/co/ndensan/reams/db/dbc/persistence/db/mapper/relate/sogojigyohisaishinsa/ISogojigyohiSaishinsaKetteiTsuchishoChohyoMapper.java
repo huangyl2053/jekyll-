@@ -20,7 +20,7 @@ public interface ISogojigyohiSaishinsaKetteiTsuchishoChohyoMapper {
      * 帳票出力対象データを取得する。
      *
      * @param parameter Map<String, Object>
-     * @return List<KagoKetteiKohifutanshaInItem>
+     * @return List<SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiEntity>
      */
     List<SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiEntity> get帳票出力対象データ(KokuhorenIchiranhyoMybatisParameter parameter);
 }

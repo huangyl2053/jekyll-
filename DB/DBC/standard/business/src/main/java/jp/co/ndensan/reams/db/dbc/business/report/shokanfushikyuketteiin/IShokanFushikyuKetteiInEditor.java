@@ -1,4 +1,4 @@
-/*
+﻿/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -9,10 +9,11 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanfushikyuketteiin.Sh
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 帳票設計_DBC200022_償還払不支給決定者一覧表 IShokanFushikyuKetteiInEditor
+ * 帳票設計_DBC200022_償還払不支給決定者一覧表  IShokanFushikyuKetteiInEditor
  *
- * @reamsid_L DBC-2590-040 xuhao
+ * @reamsid_L DBC-2590-040 liuxiaoyu
  */
-public interface IShokanFushikyuKetteiInEditor extends IReportEditor<ShokanbaraiFushikyuKetteishaIchiranSource> {
+public interface IShokanFushikyuKetteiInEditor
+        extends IReportEditor<ShokanbaraiFushikyuKetteishaIchiranSource> {
 
 }
