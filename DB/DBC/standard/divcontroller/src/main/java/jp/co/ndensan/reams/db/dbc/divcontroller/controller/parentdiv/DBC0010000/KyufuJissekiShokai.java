@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010000
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho1;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.DBC0010000StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.KyufuJissekiShokaiDiv;
@@ -120,12 +119,12 @@ public class KyufuJissekiShokai {
         }
         List<KyufuJissekiHedajyoho1> 給付実績ヘッダ情報1 = KyufuJissekiShokaiFinder.createInstance().
                 getKyufuJissekiHeaderJoho1(被保険者番号).records();
-        KyufuJissekiPrmBusiness 給付実績情報照会情報 = KyufuJissekiShokaiFinder.createInstance().
-                get検索データ取得(被保険者番号, サービス提供年月_開始, サービス提供年月_終了);
+//        KyufuJissekiPrmBusiness 給付実績情報照会情報 = KyufuJissekiShokaiFinder.createInstance().
+//                get検索データ取得(被保険者番号, サービス提供年月_開始, サービス提供年月_終了);
 //        List<KyufujissekiKihon> 給付基本情報 = 給付実績情報照会情報.getJukyushaData();
         getHandler(div).onClick_btnKyufuJissekiSearch(給付実績ヘッダ情報1.get(INT_ZERO),
                 サービス提供年月_開始, サービス提供年月_終了);
-        ViewStateHolder.put(ViewStateKeys.給付実績情報照会情報, 給付実績情報照会情報);
+//        ViewStateHolder.put(ViewStateKeys.給付実績情報照会情報, 給付実績情報照会情報);
         return ResponseData.of(div).setState(DBC0010000StateName.給付実績照会一覧);
     }
 
