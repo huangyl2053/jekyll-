@@ -16,8 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  *
@@ -82,7 +84,7 @@ public class KaigokyufuhiKagoMoshitateshoOutBodyEditor implements IKaigokyufuhiK
         source.listUpper_14 = 帳票出力対象データ.getDbWT1001Entity().getShimei50onKana();
         source.listUpper_15 = getColumnValue(帳票出力対象データ.getDbWT1001Entity().getShichosonCode());
         if (合計出力flag) {
-            source.gokeiKensuTitle = 合計件数;
+            source.gokeiKensuTitle = doカンマ編集(new Decimal(合計件数.toString()));
             source.gokeiKensu = new RString(件数).concat(漢字_件);
         }
         連番++;
@@ -99,6 +101,13 @@ public class KaigokyufuhiKagoMoshitateshoOutBodyEditor implements IKaigokyufuhiK
     private RString getColumnValue(IDbColumnMappable entity) {
         if (null != entity) {
             return entity.getColumnValue();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString doカンマ編集(Decimal decimal) {
+        if (null != decimal) {
+            return DecimalFormatter.toコンマ区切りRString(decimal, 0);
         }
         return RString.EMPTY;
     }
