@@ -14,13 +14,16 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 帳票共通クラスです。
+ * 帳票共通のビジネスクラスです。
  *
  * @reamsid_L DBZ-9999-020 xuyue
  */
-public class ChohyoUtil {
+public final class ChohyoUtil {
 
-    private static final RString comma = new RString(",");
+    private ChohyoUtil() {
+    }
+
+    private static final RString COMMA = new RString(",");
 
     /**
      * 指定個数の出力順より、OrderBy句を取得します。
@@ -38,10 +41,10 @@ public class ChohyoUtil {
         }
 
         RString shutsuryokujun = RString.EMPTY;
-        List<RString> shutsuryokujunArr = orderByClause.split(comma.toString());
+        List<RString> shutsuryokujunArr = orderByClause.split(COMMA.toString());
         for (RString str : shutsuryokujunArr) {
             if (count > 0) {
-                shutsuryokujun = shutsuryokujun.concat(str).concat(comma);
+                shutsuryokujun = shutsuryokujun.concat(str).concat(COMMA);
                 count--;
             }
         }
