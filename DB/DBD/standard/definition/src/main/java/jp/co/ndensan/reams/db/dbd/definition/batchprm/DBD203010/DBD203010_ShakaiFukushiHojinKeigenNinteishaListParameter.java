@@ -25,7 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBD203010_ShakaiFukushiHojinKeigenNinteishaBatchParameter extends BatchParameterBase {
+public class DBD203010_ShakaiFukushiHojinKeigenNinteishaListParameter extends BatchParameterBase {
 
     @BatchParameter(key = "対象リスト", name = "対象リスト")
     private RString 対象リスト;
