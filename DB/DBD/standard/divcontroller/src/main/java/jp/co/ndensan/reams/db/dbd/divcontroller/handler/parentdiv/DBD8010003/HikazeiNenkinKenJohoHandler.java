@@ -147,19 +147,19 @@ public class HikazeiNenkinKenJohoHandler {
         if (!調定年度.isWareki()) {
             return false;
         }
-        if (調定年度.isBefore(調定年度_2015)) {
+        RString selectKey = new RString(調定年度.getYearValue());
+        if (調定年度.isBeforeOrEquals(調定年度_2015)) {
             return true;
         }
-        FlexibleYear 平成年度 = 平成28年度;
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        while (調定年度.isBeforeOrEquals(平成年度)) {
-            dataSource.add(new KeyValueDataSource(new RString(平成年度.getYearValue()),
-                    平成年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+        while (平成28年度.isBeforeOrEquals(調定年度)) {
+            dataSource.add(new KeyValueDataSource(new RString(調定年度.getYearValue()),
+                    調定年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .fillType(FillType.BLANK).toDateString().concat("年度")));
-            平成年度 = 平成年度.minusYear(1);
+            調定年度 = 調定年度.minusYear(1);
         }
         div.getDdlYear().setDataSource(dataSource);
-        div.getDdlYear().setSelectedKey(調定年度.toDateString());
+        div.getDdlYear().setSelectedKey(selectKey);
         return false;
     }
 
@@ -570,7 +570,10 @@ public class HikazeiNenkinKenJohoHandler {
     }
 
     private KakushuKubun get各種区分() {
-        return KakushuKubun.toValue(new RString(select訂正区分また各種区分(false)));
+        if (select訂正区分また各種区分(false) == 0) {
+            return KakushuKubun.新規者;
+        }
+        return KakushuKubun.前年度継続者;
     }
 
     private int select訂正区分また各種区分(boolean is訂正区分) {
